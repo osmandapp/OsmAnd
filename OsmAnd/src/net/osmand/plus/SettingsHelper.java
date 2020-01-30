@@ -12,6 +12,7 @@ import android.support.v7.app.AlertDialog;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.ApplicationMode.ApplicationModeBean;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -400,6 +401,7 @@ public class SettingsHelper {
 
 		private ApplicationMode appMode;
 		private ApplicationModeBuilder builder;
+		private ApplicationModeBean modeBean;
 
 		public ProfileSettingsItem(@NonNull OsmandSettings settings, @NonNull ApplicationMode appMode) {
 			super(SettingsItemType.PROFILE, settings);
@@ -421,7 +423,7 @@ public class SettingsHelper {
 		@Override
 		public String getPublicName(@NonNull Context ctx) {
 			if (appMode.isCustomProfile()) {
-				return appMode.getCustomProfileName();
+				return modeBean.userProfileName;
 			} else if (appMode.getNameKeyResource() != -1) {
 				return ctx.getString(appMode.getNameKeyResource());
 			} else {
@@ -437,7 +439,8 @@ public class SettingsHelper {
 
 		void readFromJson(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			String appModeJson = json.getString("appMode");
-			builder = ApplicationMode.fromJson(appModeJson);
+			modeBean = ApplicationMode.fromJson(appModeJson);
+			builder = ApplicationMode.fromModeBean(modeBean);
 			ApplicationMode appMode = builder.getApplicationMode();
 			if (!appMode.isCustomProfile()) {
 				appMode = ApplicationMode.valueOfStringKey(appMode.getStringKey(), appMode);

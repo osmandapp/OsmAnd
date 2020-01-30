@@ -111,7 +111,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		if (baseModeForNewProfile != null) {
 			profile.stringKey = baseModeForNewProfile.getStringKey() + "_" + System.currentTimeMillis();
 			profile.parent = baseModeForNewProfile;
-			profile.name = baseModeForNewProfile.toHumanString(app);
+			profile.name = baseModeForNewProfile.toHumanString();
 			profile.color = baseModeForNewProfile.getIconColorInfo();
 			profile.iconRes = baseModeForNewProfile.getIconRes();
 			profile.routingProfile = baseModeForNewProfile.getRoutingProfile();
@@ -122,7 +122,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		} else {
 			profile.stringKey = getSelectedAppMode().getStringKey();
 			profile.parent = getSelectedAppMode().getParent();
-			profile.name = getSelectedAppMode().toHumanString(getContext());
+			profile.name = getSelectedAppMode().toHumanString();
 			profile.color = getSelectedAppMode().getIconColorInfo();
 			profile.iconRes = getSelectedAppMode().getIconRes();
 			profile.routingProfile = getSelectedAppMode().getRoutingProfile();
@@ -137,7 +137,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			changedProfile.stringKey = profile.stringKey;
 			changedProfile.parent = profile.parent;
 			if (baseModeForNewProfile != null) {
-				changedProfile.name = createNonDuplicateName(baseModeForNewProfile.toHumanString(app));
+				changedProfile.name = createNonDuplicateName(baseModeForNewProfile.toHumanString());
 			} else {
 				changedProfile.name = profile.name;
 			}
@@ -176,7 +176,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 
 	private boolean hasProfileWithName(String newName) {
 		for (ApplicationMode m : ApplicationMode.allPossibleValues()) {
-			if (m.toHumanString(app).equals(newName)) {
+			if (m.toHumanString().equals(newName)) {
 				return true;
 			}
 		}
@@ -346,8 +346,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			baseProfileName = (EditText) holder.findViewById(R.id.master_profile_et);
 			baseProfileName.setFocusable(false);
 			baseProfileName.setText(changedProfile.parent != null
-					? changedProfile.parent.toHumanString(getContext())
-					: getSelectedAppMode().toHumanString(getContext()));
+					? changedProfile.parent.toHumanString()
+					: getSelectedAppMode().toHumanString());
 			OsmandTextFieldBoxes baseProfileNameHint = (OsmandTextFieldBoxes) holder.findViewById(R.id.master_profile_otfb);
 			baseProfileNameHint.setLabelText(getString(R.string.master_profile));
 			FrameLayout selectNavTypeBtn = (FrameLayout) holder.findViewById(R.id.select_nav_type_btn);
@@ -640,7 +640,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	private void setupBaseProfileView(String stringKey) {
 		for (ApplicationMode am : ApplicationMode.getDefaultValues()) {
 			if (am.getStringKey().equals(stringKey)) {
-				baseProfileName.setText(Algorithms.capitalizeFirstLetter(am.toHumanString(app)));
+				baseProfileName.setText(Algorithms.capitalizeFirstLetter(am.toHumanString()));
 			}
 		}
 	}
@@ -687,7 +687,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 
 	private boolean hasNameDuplicate() {
 		for (ApplicationMode m : ApplicationMode.allPossibleValues()) {
-			if (m.toHumanString(app).equals(changedProfile.name) &&
+			if (m.toHumanString().equals(changedProfile.name) &&
 					!m.getStringKey().equals(profile.stringKey)) {
 				return true;
 			}

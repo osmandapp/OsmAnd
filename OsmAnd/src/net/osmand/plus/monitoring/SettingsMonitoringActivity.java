@@ -248,7 +248,7 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 	protected void showConfirmDialog(final String prefId, final Object newValue) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-		String appModeName = selectedAppMode.toHumanString(this);
+		String appModeName = selectedAppMode.toHumanString();
 		String currentModeText = getString(R.string.apply_to_current_profile, appModeName);
 		int start = currentModeText.indexOf(appModeName);
 

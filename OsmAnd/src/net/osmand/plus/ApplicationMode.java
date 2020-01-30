@@ -1,6 +1,5 @@
 package net.osmand.plus;
 
-import android.content.Context;
 import android.support.annotation.DrawableRes;
 
 import com.google.gson.Gson;
@@ -258,7 +257,7 @@ public class ApplicationMode {
 		return false;
 	}
 
-	public boolean isWidgetVisible(OsmandApplication app, String key) {
+	public boolean isWidgetVisible(String key) {
 		if (app.getAppCustomization().areWidgetsCustomized()) {
 			return app.getAppCustomization().isWidgetVisible(key, this);
 		}
@@ -286,7 +285,7 @@ public class ApplicationMode {
 		return set;
 	}
 
-	public boolean isWidgetAvailable(OsmandApplication app, String key) {
+	public boolean isWidgetAvailable(String key) {
 		if (app.getAppCustomization().areWidgetsCustomized()) {
 			return app.getAppCustomization().isWidgetAvailable(key, this);
 		}
@@ -313,12 +312,19 @@ public class ApplicationMode {
 		return parentAppMode;
 	}
 
+	public void setParentAppMode(ApplicationMode parentAppMode) {
+		if (isCustomProfile()) {
+			this.parentAppMode = parentAppMode;
+			app.getSettings().PARENT_APP_MODE.setModeValue(this, parentAppMode.getStringKey());
+		}
+	}
+
 	public int getNameKeyResource() {
 		return keyName;
 	}
 
-	public String toHumanString(Context ctx) {
-		String userProfileName = getCustomProfileName();
+	public String toHumanString() {
+		String userProfileName = getUserProfileName();
 		if (Algorithms.isEmpty(userProfileName) && keyName != -1) {
 			return app.getString(keyName);
 		} else {
@@ -326,7 +332,7 @@ public class ApplicationMode {
 		}
 	}
 
-	public String getDescription(Context ctx) {
+	public String getDescription() {
 		if (descriptionId != 0) {
 			return app.getString(descriptionId);
 		}
@@ -393,7 +399,23 @@ public class ApplicationMode {
 		app.getSettings().DEFAULT_SPEED.resetModeToDefault(this);
 	}
 
-	public String getCustomProfileName() {
+	public float getMinSpeed() {
+		return app.getSettings().MIN_SPEED.getModeValue(this);
+	}
+
+	public void setMinSpeed(float defaultSpeed) {
+		app.getSettings().MIN_SPEED.setModeValue(this, defaultSpeed);
+	}
+
+	public float getMaxSpeed() {
+		return app.getSettings().MAX_SPEED.getModeValue(this);
+	}
+
+	public void setMaxSpeed(float defaultSpeed) {
+		app.getSettings().MAX_SPEED.setModeValue(this, defaultSpeed);
+	}
+
+	public String getUserProfileName() {
 		return app.getSettings().USER_PROFILE_NAME.getModeValue(this);
 	}
 
@@ -401,11 +423,8 @@ public class ApplicationMode {
 		app.getSettings().USER_PROFILE_NAME.setModeValue(this, userProfileName);
 	}
 
-	public void setParentAppMode(ApplicationMode parentAppMode) {
-		if (isCustomProfile()) {
-			this.parentAppMode = parentAppMode;
-			app.getSettings().PARENT_APP_MODE.setModeValue(this, parentAppMode.getStringKey());
-		}
+	public String getRoutingProfile() {
+		return app.getSettings().ROUTING_PROFILE.getModeValue(this);
 	}
 
 	public void setRoutingProfile(String routingProfile) {
@@ -436,16 +455,12 @@ public class ApplicationMode {
 		app.getSettings().LOCATION_ICON.setModeValue(this, locationIcon);
 	}
 
-	public String getRoutingProfile() {
-		return app.getSettings().ROUTING_PROFILE.getModeValue(this);
+	public ProfileIconColors getIconColorInfo() {
+		return app.getSettings().ICON_COLOR.getModeValue(this);
 	}
 
 	public void setIconColor(ProfileIconColors iconColor) {
 		app.getSettings().ICON_COLOR.setModeValue(this, iconColor);
-	}
-
-	public ProfileIconColors getIconColorInfo() {
-		return app.getSettings().ICON_COLOR.getModeValue(this);
 	}
 
 	public int getOrder() {
@@ -510,7 +525,7 @@ public class ApplicationMode {
 		}
 	}
 
-	public static void saveCustomAppModesToSettings(OsmandApplication app) {
+	private static void saveCustomAppModesToSettings(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		StringBuilder stringBuilder = new StringBuilder();
 		Iterator<ApplicationMode> it = ApplicationMode.getCustomValues().iterator();
@@ -545,19 +560,21 @@ public class ApplicationMode {
 		return mode;
 	}
 
-	public static ApplicationModeBuilder fromJson(String json) {
+	public static ApplicationModeBean fromJson(String json) {
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		ApplicationModeBean mb = gson.fromJson(json, ApplicationModeBean.class);
+		return gson.fromJson(json, ApplicationModeBean.class);
+	}
 
-		ApplicationModeBuilder builder = createCustomMode(valueOfStringKey(mb.parent, null), mb.stringKey);
-		builder.setUserProfileName(mb.userProfileName);
-		builder.setIconResName(mb.iconName);
-		builder.setIconColor(mb.iconColor);
-		builder.setRoutingProfile(mb.routingProfile);
-		builder.setRouteService(mb.routeService);
-		builder.setLocationIcon(mb.locIcon);
-		builder.setNavigationIcon(mb.navIcon);
-		builder.setOrder(mb.order);
+	public static ApplicationModeBuilder fromModeBean(ApplicationModeBean modeBean) {
+		ApplicationModeBuilder builder = createCustomMode(valueOfStringKey(modeBean.parent, null), modeBean.stringKey);
+		builder.setUserProfileName(modeBean.userProfileName);
+		builder.setIconResName(modeBean.iconName);
+		builder.setIconColor(modeBean.iconColor);
+		builder.setRoutingProfile(modeBean.routingProfile);
+		builder.setRouteService(modeBean.routeService);
+		builder.setLocationIcon(modeBean.locIcon);
+		builder.setNavigationIcon(modeBean.navIcon);
+		builder.setOrder(modeBean.order);
 
 		return builder;
 	}
@@ -565,7 +582,7 @@ public class ApplicationMode {
 	public String toJson() {
 		ApplicationModeBean mb = new ApplicationModeBean();
 		mb.stringKey = stringKey;
-		mb.userProfileName = getCustomProfileName();
+		mb.userProfileName = getUserProfileName();
 		mb.iconColor = getIconColorInfo();
 		mb.iconName = getIconName();
 		mb.parent = parentAppMode != null ? parentAppMode.getStringKey() : null;

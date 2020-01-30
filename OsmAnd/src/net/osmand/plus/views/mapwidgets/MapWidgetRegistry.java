@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
-import android.support.v4.content.ContextCompat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -220,7 +219,7 @@ public class MapWidgetRegistry {
 	private void processVisibleModes(String key, MapWidgetRegInfo ii) {
 		for (ApplicationMode ms : ApplicationMode.values(app)) {
 			boolean collapse = ms.isWidgetCollapsible(key);
-			boolean def = ms.isWidgetVisible(app, key);
+			boolean def = ms.isWidgetVisible(key);
 			Set<String> set = visibleElementsFromSettings.get(ms);
 			if (set != null) {
 				if (set.contains(key)) {
@@ -313,7 +312,7 @@ public class MapWidgetRegistry {
 		for (MapWidgetRegInfo ri : set) {
 			ri.visibleCollapsible.remove(mode);
 			ri.visibleModes.remove(mode);
-			if (mode.isWidgetVisible(app, ri.key)) {
+			if (mode.isWidgetVisible(ri.key)) {
 				if (mode.isWidgetCollapsible(ri.key)) {
 					ri.visibleCollapsible.add(mode);
 				} else {
@@ -485,7 +484,7 @@ public class MapWidgetRegistry {
 	private void addControls(final MapActivity mapActivity, final ContextMenuAdapter contextMenuAdapter,
 							 Set<MapWidgetRegInfo> groupTitle, final ApplicationMode mode) {
 		for (final MapWidgetRegInfo r : groupTitle) {
-			if (!mode.isWidgetAvailable(app, r.key)) {
+			if (!mode.isWidgetAvailable(r.key)) {
 				continue;
 			}
 

@@ -193,7 +193,7 @@ public class NavigationFragment extends BaseSettingsFragment {
 		List<ProfileDataObject> profiles = new ArrayList<>();
 		for (ApplicationMode mode : ApplicationMode.getDefaultValues()) {
 			if (mode != ApplicationMode.DEFAULT) {
-				profiles.add(new ProfileDataObject(mode.toHumanString(ctx), mode.getDescription(ctx),
+				profiles.add(new ProfileDataObject(mode.toHumanString(), mode.getDescription(),
 						mode.getStringKey(), mode.getIconRes(), false, mode.getIconColorInfo()));
 			}
 		}

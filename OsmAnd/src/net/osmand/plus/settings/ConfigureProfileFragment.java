@@ -90,7 +90,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 
 		TextView toolbarTitle = view.findViewById(R.id.toolbar_title);
 		toolbarTitle.setTypeface(FontCache.getRobotoMedium(view.getContext()));
-		toolbarTitle.setText(getSelectedAppMode().toHumanString(getContext()));
+		toolbarTitle.setText(getSelectedAppMode().toHumanString());
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 			float letterSpacing = AndroidUtils.getFloatValueFromRes(view.getContext(), R.dimen.title_letter_spacing);
 			toolbarTitle.setLetterSpacing(letterSpacing);
@@ -147,7 +147,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		if (view != null) {
 			updateToolbarSwitch();
 			TextView toolbarTitle = view.findViewById(R.id.toolbar_title);
-			toolbarTitle.setText(getSelectedAppMode().toHumanString(getContext()));
+			toolbarTitle.setText(getSelectedAppMode().toHumanString());
 		}
 	}
 
@@ -317,7 +317,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			Context ctx = requireContext();
 			final Intent sendIntent = new Intent();
 			sendIntent.setAction(Intent.ACTION_SEND);
-			sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.exported_osmand_profile, profile.toHumanString(ctx)));
+			sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.exported_osmand_profile, profile.toHumanString()));
 			sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMyApplication(), file));
 			sendIntent.setType("*/*");
 			sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -392,7 +392,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			if (!tempDir.exists()) {
 				tempDir.mkdirs();
 			}
-			String fileName = profile.toHumanString(ctx);
+			String fileName = profile.toHumanString();
 			app.getSettingsHelper().exportSettings(tempDir, fileName, new SettingsHelper.SettingsExportListener() {
 				@Override
 				public void onSettingsExportFinished(@NonNull File file, boolean succeed) {
@@ -418,7 +418,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 				bld.setTitle(R.string.profile_alert_delete_title);
 				bld.setMessage(String
 						.format(getString(R.string.profile_alert_delete_msg),
-								profile.getCustomProfileName()));
+								profile.getUserProfileName()));
 				bld.setPositiveButton(R.string.shared_string_delete,
 						new DialogInterface.OnClickListener() {
 							@Override

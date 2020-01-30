@@ -169,7 +169,6 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 						mode.setOrder(order);
 					}
 					ApplicationMode.reorderAppModes();
-					ApplicationMode.saveCustomAppModesToSettings(app);
 					mapActivity.onBackPressed();
 				}
 			}
@@ -234,7 +233,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 				if (order == null) {
 					order = mode.getOrder();
 				}
-				profiles.add(new EditProfileDataObject(modeKey, mode.toHumanString(getContext()), BaseSettingsFragment.getAppModeDescription(getContext(), mode),
+				profiles.add(new EditProfileDataObject(modeKey, mode.toHumanString(), BaseSettingsFragment.getAppModeDescription(getContext(), mode),
 						mode.getIconRes(), false, mode.isCustomProfile(), deleted, mode.getIconColorInfo(), order));
 			}
 		}

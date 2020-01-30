@@ -755,8 +755,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 				break;
 		}
 
-		float settingsMinSpeed = settings.MIN_SPEED.getModeValue(mode);
-		float settingsMaxSpeed = settings.MAX_SPEED.getModeValue(mode);
+		float settingsMinSpeed = mode.getMinSpeed();
+		float settingsMaxSpeed = mode.getMaxSpeed();
 
 		final int[] defaultValue = {Math.round(mode.getDefaultSpeed() * ratio[0])};
 		final int[] minValue = new int[1];
@@ -785,8 +785,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			public void onClick(DialogInterface dialog, int which) {
 				mode.setDefaultSpeed(defaultValue[0] / ratio[0]);
 				if (!defaultSpeedOnly) {
-					settings.MIN_SPEED.setModeValue(mode, minValue[0] / ratio[0]);
-					settings.MAX_SPEED.setModeValue(mode, maxValue[0] / ratio[0]);
+					mode.setMinSpeed(minValue[0] / ratio[0]);
+					mode.setMaxSpeed(maxValue[0] / ratio[0]);
 				}
 				RoutingHelper routingHelper = app.getRoutingHelper();
 				if (mode.equals(routingHelper.getAppMode()) && (routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated())) {
@@ -800,8 +800,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			public void onClick(DialogInterface dialog, int which) {
 				mode.resetDefaultSpeed();
 				if (!defaultSpeedOnly) {
-					settings.MIN_SPEED.setModeValue(mode,0f);
-					settings.MAX_SPEED.setModeValue(mode,0f);
+					mode.setMinSpeed(0f);
+					mode.setMaxSpeed(0f);
 				}
 				RoutingHelper routingHelper = app.getRoutingHelper();
 				if (mode.equals(routingHelper.getAppMode()) && (routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated())) {

@@ -447,7 +447,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 		TextView profileTitle = (TextView) view.findViewById(R.id.profile_title);
 		if (profileTitle != null) {
-			String appName = selectedAppMode.toHumanString(app);
+			String appName = selectedAppMode.toHumanString();
 			profileTitle.setText(appName);
 		}
 		View toolbarDivider = view.findViewById(R.id.toolbar_divider);
@@ -745,7 +745,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		String description;
 		if (mode.isCustomProfile()) {
 			description = String.format(ctx.getString(R.string.profile_type_descr_string),
-					Algorithms.capitalizeFirstLetterAndLowercase(mode.getParent().toHumanString(ctx)));
+					Algorithms.capitalizeFirstLetterAndLowercase(mode.getParent().toHumanString()));
 		} else {
 			description = ctx.getString(R.string.profile_type_base_string);
 		}
