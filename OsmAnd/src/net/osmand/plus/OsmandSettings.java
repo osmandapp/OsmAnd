@@ -430,7 +430,7 @@ public class OsmandSettings {
 
 	public void copyProfilePreferences(ApplicationMode modeFrom, ApplicationMode modeTo, List<OsmandPreference> profilePreferences) {
 		for (OsmandPreference pref : profilePreferences) {
-			if (prefCanBeCopiedOrReset(pref)) {
+			if (prefCanBeCopiedOrReset(pref) && !USER_PROFILE_NAME.getId().equals(pref.getId())) {
 				CommonPreference profilePref = (CommonPreference) pref;
 				if (PARENT_APP_MODE.getId().equals(pref.getId())) {
 					if (modeTo.isCustomProfile()) {
@@ -459,7 +459,7 @@ public class OsmandSettings {
 
 	private boolean prefCanBeCopiedOrReset(OsmandPreference pref) {
 		return pref instanceof CommonPreference && !((CommonPreference) pref).global
-				&& !USER_PROFILE_NAME.getId().equals(pref.getId()) && !APP_MODE_ORDER.getId().equals(pref.getId());
+				&& !APP_MODE_ORDER.getId().equals(pref.getId());
 	}
 
 	public ApplicationMode LAST_ROUTING_APPLICATION_MODE = null;

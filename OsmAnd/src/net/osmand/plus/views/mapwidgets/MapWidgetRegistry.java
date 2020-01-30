@@ -14,11 +14,11 @@ import android.widget.LinearLayout;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.mapmarkers.DirectionIndicationDialogFragment;
@@ -74,17 +74,7 @@ public class MapWidgetRegistry {
 	public MapWidgetRegistry(OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
-
-		for (ApplicationMode ms : ApplicationMode.values(app)) {
-			String mpf = settings.MAP_INFO_CONTROLS.getModeValue(ms);
-			if (mpf.equals(SHOW_PREFIX)) {
-				visibleElementsFromSettings.put(ms, null);
-			} else {
-				LinkedHashSet<String> set = new LinkedHashSet<>();
-				visibleElementsFromSettings.put(ms, set);
-				Collections.addAll(set, mpf.split(SETTINGS_SEPARATOR));
-			}
-		}
+		loadVisibleElementsFromSettings();
 	}
 
 	public void populateStackControl(LinearLayout stack,
@@ -237,6 +227,9 @@ public class MapWidgetRegistry {
 				ii.visibleModes.add(ms);
 			} else if (collapse) {
 				ii.visibleCollapsible.add(ms);
+			} else {
+				ii.visibleModes.remove(ms);
+				ii.visibleCollapsible.remove(ms);
 			}
 		}
 	}
@@ -296,6 +289,30 @@ public class MapWidgetRegistry {
 			restoreModes(set, leftWidgetSet, mode);
 			restoreModes(set, rightWidgetSet, mode);
 			this.visibleElementsFromSettings.put(mode, set);
+		}
+	}
+
+	public void updateVisibleWidgets() {
+		loadVisibleElementsFromSettings();
+		for (MapWidgetRegInfo ri : leftWidgetSet) {
+			processVisibleModes(ri.key, ri);
+		}
+		for (MapWidgetRegInfo ri : rightWidgetSet) {
+			processVisibleModes(ri.key, ri);
+		}
+	}
+
+	private void loadVisibleElementsFromSettings() {
+		visibleElementsFromSettings.clear();
+		for (ApplicationMode ms : ApplicationMode.values(app)) {
+			String mpf = settings.MAP_INFO_CONTROLS.getModeValue(ms);
+			if (mpf.equals(SHOW_PREFIX)) {
+				visibleElementsFromSettings.put(ms, null);
+			} else {
+				LinkedHashSet<String> set = new LinkedHashSet<>();
+				visibleElementsFromSettings.put(ms, set);
+				Collections.addAll(set, mpf.split(SETTINGS_SEPARATOR));
+			}
 		}
 	}
 
