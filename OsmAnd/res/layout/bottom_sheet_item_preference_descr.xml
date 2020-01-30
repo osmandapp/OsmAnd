@@ -11,7 +11,6 @@
 	android:paddingTop="@dimen/bottom_sheet_image_text_margin_start"
 	android:paddingRight="@dimen/content_padding"
 	android:paddingBottom="@dimen/gpx_small_text_margin"
-	android:textColor="?android:textColorPrimary"
-	android:textSize="@dimen/default_desc_text_size"
+	android:textAppearance="@style/TextAppearance.ListItemTitle"
 	app:typeface="@string/font_roboto_regular"
 	tools:text="@string/auto_zoom_map_descr" />

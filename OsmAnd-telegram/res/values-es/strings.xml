@@ -12,7 +12,7 @@
     <string name="last_available_location">Última ubicación disponible</string>
     <string name="sharing_status">Estado de compartición</string>
     <string name="location_sharing_status">Compartir: %1$s</string>
-    <string name="shared_string_enabled">Habilitado</string>
+    <string name="shared_string_enabled">Activado</string>
     <string name="shared_string_status">Estado</string>
     <string name="no_gps_connection">Sin conexión GPS</string>
     <string name="no_internet_connection">Sin conexión a Internet</string>
@@ -194,7 +194,7 @@
     <string name="shared_string_sent">Enviado</string>
     <string name="please_update_osmand">Actualice OsmAnd para ver datos en el mapa</string>
     <string name="shared_string_update">Actualizar</string>
-    <string name="shared_string_ok">Aplicar</string>
+    <string name="shared_string_ok">Aceptar</string>
     <string name="timeline_available_for_free_now">La línea de tiempo es una función disponible ahora de forma gratuita.</string>
     <string name="disable_monitoring">Desactivar la monitorización</string>
     <string name="location_recording_enabled">Grabación de ubicación activada</string>
@@ -203,7 +203,7 @@
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram (la aplicación de mensajería) se utiliza para conectar y comunicar a las personas.</string>
     <string name="privacy_policy_telegram_client">El rastreador de OsmAnd (en inglés como «OsmAnd Tracker»), es uno de los clientes que utiliza la plataforma abierta de Telegram. Sus contactos pueden utilizar cualquier otro cliente de Telegram.</string>
-    <string name="privacy_policy_agree">Al pulsar en continuar, acepta las Políticas de Privacidad de Telegram y de OsmAnd.</string>
+    <string name="privacy_policy_agree">Al hacer clic en \"Continuar\", aceptas las condiciones de la política de privacidad de Telegram- y OsmAnd.</string>
     <string name="shared_string_accept">Aceptar</string>
     <string name="telegram_privacy_policy">Política de privacidad de Telegram</string>
     <string name="osmand_privacy_policy">Política de privacidad de OsmAnd</string>
@@ -249,4 +249,22 @@
     <string name="shared_string_start">Inicio</string>
     <string name="set_time_timeline_descr">Elige la hora de visualización</string>
     <string name="start_end_date">Fecha de Inicio — Fin</string>
+    <string name="saved_messages">Mensajes guardados</string>
+    <string name="time_zone_descr">Seleccione la zona horaria que desea mostrar en los mensajes de ubicación.</string>
+    <string name="time_zone">Zona horaria</string>
+    <string name="units_and_formats">Unidades y formatos</string>
+    <string name="unit_of_length_descr">Cambia las unidades de longitud.</string>
+    <string name="unit_of_length">Unidades de longitud</string>
+    <string name="unit_of_speed_system_descr">Definir la unidad de velocidad.</string>
+    <string name="unit_of_speed_system">Unidad de velocidad</string>
+    <string name="buffer_time_descr">Tiempo después del cual se eliminarán los mensajes de ubicación almacenados en búfer</string>
+    <string name="buffer_time">Tiempo de expiración del búfer</string>
+    <string name="shared_string_suggested">Sugerido</string>
+    <string name="status_widget_title">Estado de OsmAnd Tracker</string>
+    <string name="back_to_osmand">Volver a OsmAnd</string>
+    <string name="last_update_from_telegram_date">Última actualización desde Telegram: %1$s</string>
+    <string name="last_response_date">Última respuesta: %1$s</string>
+    <string name="last_update_from_telegram_duration">Última actualización desde Telegram: hace %1$s</string>
+    <string name="last_response_duration">Última respuesta: hace %1$s</string>
+    <string name="duration_ago">hace %1$s</string>
 </resources>

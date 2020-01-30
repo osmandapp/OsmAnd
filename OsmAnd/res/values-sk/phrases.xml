@@ -194,7 +194,7 @@
     <string name="poi_weir">Vzdúvacia hrádza</string>
     <string name="poi_dam">Priehrada/Hrádza</string>
     <string name="poi_watermill">Vodný mlyn</string>
-    <string name="poi_power_substation">Elektrická stanica</string>
+    <string name="poi_power_substation">Servisná stanica pre energiu</string>
     <string name="poi_power_transformer">Transformátor</string>
     <string name="poi_power_plant">Elektráreň</string>
     <string name="poi_power_generator">Generátor energie</string>
@@ -982,8 +982,8 @@
     <string name="poi_denomination_catholic">Katolícke</string>
     <string name="poi_denomination_baptist">Baptistické</string>
     <string name="poi_denomination_roman_catholic">Rímskokatolícke</string>
-    <string name="poi_denomination_orthodox">Ortodoxné</string>
-    <string name="poi_denomination_lutheran">Luteránske</string>
+    <string name="poi_denomination_orthodox">Ortodoxné/Pravoslávne</string>
+    <string name="poi_denomination_lutheran">Luteránske/Evanjelické</string>
     <string name="poi_denomination_sunni">Sunitské</string>
     <string name="poi_denomination_protestant">Protestantské</string>
     <string name="poi_denomination_methodist">Metodistické</string>
@@ -999,7 +999,7 @@
     <string name="poi_denomination_new_apostolic">Novoapoštolská cirkev</string>
     <string name="poi_denomination_church_of_england">Anglikánska cirkev</string>
     <string name="poi_denomination_episcopal">Episkopálne</string>
-    <string name="poi_denomination_greek_catholic">Grékokatolícke</string>
+    <string name="poi_denomination_greek_catholic">Gréckokatolícke</string>
     <string name="poi_denomination_tibetan">Tibetské</string>
     <string name="poi_denomination_church_of_scotland">Škótska cirkev</string>
     <string name="poi_denomination_nondenominational">Bez vyznania</string>
@@ -3497,4 +3497,17 @@
     <string name="poi_craft_bakery">Pekáreň</string>
     <string name="poi_craft_cabinet_maker">Nábytkár</string>
     <string name="poi_pet_grooming">Salón pre zvieratá</string>
+    <string name="poi_pipeline_substation">Servisná stanica pre potrubie</string>
+    <string name="poi_substation_transmission">Prenosová</string>
+    <string name="poi_substation_distribution">Rozvodňa</string>
+    <string name="poi_substation_minor_distribution">Malá rozvodňa</string>
+    <string name="poi_substation_industrial">Priemyselná</string>
+    <string name="poi_substation_transition">Prechodová</string>
+    <string name="poi_substation_traction">Trakčná</string>
+    <string name="poi_substation_converter">Konvertorová</string>
+    <string name="poi_substation_compensation">Kompenzačná</string>
+    <string name="poi_substation_compression">Kompresná</string>
+    <string name="poi_substation_measurement">Meracia</string>
+    <string name="poi_substation_inspection_gauge">Kontrolné meradlo</string>
+    <string name="poi_substation_field_gathering">Zberná</string>
 </resources>

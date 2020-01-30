@@ -133,6 +133,7 @@ import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.settings.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.settings.DataStorageFragment;
+import net.osmand.plus.settings.ProfileAppearanceFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapControlsLayer;
@@ -372,12 +373,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		mIsDestroyed = false;
 	}
 
-	public void exitFromFullScreen() {
-		AndroidUtils.exitFromFullScreen(this);
+	public void exitFromFullScreen(View view) {
+		AndroidUtils.exitFromFullScreen(this, view);
 	}
 
 	public void enterToFullScreen() {
-		AndroidUtils.enterToFullScreen(this);
+		AndroidUtils.enterToFullScreen(this, getLayout());
 	}
 
 	@Override
@@ -473,7 +474,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			OsmAndMapLayersView ml = (OsmAndMapLayersView) findViewById(R.id.MapLayersView);
 			ml.setVisibility(View.VISIBLE);
 			atlasMapRendererView.setAzimuth(0);
-			atlasMapRendererView.setElevationAngle(90);
+			atlasMapRendererView.setElevationAngle(app.getSettings().getLastKnownMapElevation());
 			NativeCoreContext.getMapRendererContext().setMapRendererView(atlasMapRendererView);
 			ml.setMapView(mapView);
 			mapViewTrackingUtilities.setMapView(mapView);
@@ -487,6 +488,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
+	public void setMapElevation(float angle) {
+		if (atlasMapRendererView != null) {
+			atlasMapRendererView.setElevationAngle(angle);
+		}
+	}
+
 	private void createProgressBarForRouting() {
 		final ProgressBar pb = (ProgressBar) findViewById(R.id.map_horizontal_progress);
 
@@ -496,6 +503,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			public void start() {
 				setupRouteCalculationProgressBar(pb);
 				mapRouteInfoMenu.routeCalculationStarted();
+				RoutingHelper routingHelper = getRoutingHelper();
+				if (routingHelper.isPublicTransportMode() || !routingHelper.isOsmandRouting()) {
+					dashboardOnMap.updateRouteCalculationProgress(0);
+				}
 			}
 
 			@Override
@@ -588,8 +599,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				? mapLayers.getRouteLayer().getRouteLineColor(nightMode)
 				: ContextCompat.getColor(this, R.color.wikivoyage_active_light);
 
+		RoutingHelper routingHelper = getRoutingHelper();
 		pb.setProgressDrawable(AndroidUtils.createProgressDrawable(bgColor, progressColor));
-		pb.setIndeterminate(getRoutingHelper().isPublicTransportMode());
+		pb.setIndeterminate(routingHelper.isPublicTransportMode() || !routingHelper.isOsmandRouting());
 		pb.getIndeterminateDrawable().setColorFilter(progressColor, android.graphics.PorterDuff.Mode.SRC_IN);
 	}
 
@@ -667,6 +679,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (editProfileFragment != null) {
 			if (!editProfileFragment.onBackPressedAllowed()) {
 				editProfileFragment.confirmCancelDialog(this);
+				return;
+			}
+		}
+		ProfileAppearanceFragment profileAppearanceFragment = getProfileAppearanceFragment();
+		if (profileAppearanceFragment != null) {
+			if (profileAppearanceFragment.isProfileAppearanceChanged(this)) {
 				return;
 			}
 		}
@@ -798,6 +816,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		readLocationToShow();
 
+		OsmandPlugin.checkInstalledMarketPlugins(app, this);
 		OsmandPlugin.onMapActivityResume(this);
 
 		boolean showOsmAndWelcomeScreen = true;
@@ -810,11 +829,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					if ("file".equals(scheme)) {
 						final String path = data.getPath();
 						if (path != null) {
-							importHelper.handleFileImport(data, new File(path).getName(), true);
+							importHelper.handleFileImport(data, new File(path).getName(), intent.getExtras(), true);
 						}
 						clearIntent(intent);
 					} else if ("content".equals(scheme)) {
-						importHelper.handleContentImport(data, true);
+						importHelper.handleContentImport(data, intent.getExtras(), true);
 						clearIntent(intent);
 					} else if ("google.navigation".equals(scheme) || "osmand.navigation".equals(scheme)) {
 						parseNavigationIntent(data);
@@ -842,8 +861,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 			if (intent.hasExtra(EditProfileFragment.OPEN_SETTINGS)) {
 				String settingsType = intent.getStringExtra(EditProfileFragment.OPEN_SETTINGS);
+				String appMode = intent.getStringExtra(EditProfileFragment.SELECTED_ITEM);
 				if (EditProfileFragment.OPEN_CONFIG_PROFILE.equals(settingsType)) {
-					BaseSettingsFragment.showInstance(this, SettingsScreenType.CONFIGURE_PROFILE);
+					BaseSettingsFragment.showInstance(this, SettingsScreenType.CONFIGURE_PROFILE, ApplicationMode.valueOfStringKey(appMode, null));
 				}
 				setIntent(null);
 			}
@@ -1045,7 +1065,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private BaseSettingsFragment getVisibleBaseSettingsFragment(int... ids) {
 		for (int id : ids) {
 			Fragment fragment = getSupportFragmentManager().findFragmentById(id);
-			if (fragment != null && !fragment.isRemoving() && fragment.isVisible() && fragment instanceof BaseSettingsFragment
+			if (fragment != null && !fragment.isRemoving() && fragment instanceof BaseSettingsFragment
 					&& ((BaseSettingsFragment) fragment).getStatusBarColorId() != -1) {
 				return (BaseSettingsFragment) fragment;
 			}
@@ -1476,6 +1496,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 
 		settings.setLastKnownMapZoom(mapView.getZoom());
+		settings.setLastKnownMapElevation(mapView.getElevationAngle());
 		settings.MAP_ACTIVITY_ENABLED.set(false);
 		app.getResourceManager().interruptRendering();
 		OsmandPlugin.onMapActivityPause(this);
@@ -1509,7 +1530,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		});
 		getMapView().refreshMap(true);
 		applyScreenOrientation();
-		getMyApplication().getNotificationHelper().refreshNotifications();
 	}
 
 	public void updateMapSettings() {
@@ -1700,6 +1720,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					data.getPath() != null && data.getPath().startsWith("/go")) {
 				String lat = data.getQueryParameter("lat");
 				String lon = data.getQueryParameter("lon");
+				String url = data.getQueryParameter("url");
 				if (lat != null && lon != null) {
 					try {
 						double lt = Double.parseDouble(lat);
@@ -1712,6 +1733,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						settings.setMapLocationToShow(lt, ln, z, new PointDescription(lt, ln));
 					} catch (NumberFormatException e) {
 						LOG.error("error", e);
+					}
+				} else if (url != null) {
+					url = DiscountHelper.parseUrl(app, url);
+					if (DiscountHelper.validateUrl(app, url)) {
+						DiscountHelper.openUrl(this, url);
 					}
 				}
 				setIntent(null);
@@ -1729,7 +1755,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					data.getPath() != null && data.getPath().startsWith("/add-tile-source")) {
 				Map<String, String> attrs = new HashMap<>();
 				for (String name : data.getQueryParameterNames()) {
-					attrs.put(name, data.getQueryParameter(name));
+					String value = data.getQueryParameter(name);
+					if (value != null) {
+						attrs.put(name, value);
+					}
 				}
 				if (!attrs.isEmpty()) {
 					try {
@@ -1757,7 +1786,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return mapLayers;
 	}
 
-	public static void launchMapActivityMoveToTop(Context activity, Bundle intentParams) {
+	public static void launchMapActivityMoveToTop(Context activity, Bundle prevIntentParams, Uri intentData, Bundle intentParams) {
 		if (activity instanceof MapActivity) {
 			if (((MapActivity) activity).getDashboard().isVisible()) {
 				((MapActivity) activity).getDashboard().hideDashboard();
@@ -1769,9 +1798,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				Intent intent = ((Activity) activity).getIntent();
 				if (intent != null) {
 					prevActivityIntent = new Intent(intent);
-					if (intentParams != null) {
-						prevActivityIntent.putExtra(INTENT_PARAMS, intentParams);
-						prevActivityIntent.putExtras(intentParams);
+					if (prevIntentParams != null) {
+						prevActivityIntent.putExtra(INTENT_PARAMS, prevIntentParams);
+						prevActivityIntent.putExtras(prevIntentParams);
 					}
 					prevActivityIntent.putExtra(INTENT_KEY_PARENT_MAP_ACTIVITY, true);
 				} else {
@@ -1785,12 +1814,24 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			Intent newIntent = new Intent(activity, ((OsmandApplication) activity.getApplicationContext())
 					.getAppCustomization().getMapActivity());
 			newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | additionalFlags);
+			if (intentData != null) {
+				newIntent.setAction(Intent.ACTION_VIEW);
+				newIntent.setData(intentData);
+			}
+			if (intentParams != null) {
+				newIntent.putExtra(INTENT_PARAMS, intentParams);
+				newIntent.putExtras(intentParams);
+			}
 			activity.startActivity(newIntent);
 		}
 	}
 
 	public static void launchMapActivityMoveToTop(Context activity) {
 		launchMapActivityMoveToTop(activity, null);
+	}
+
+	public static void launchMapActivityMoveToTop(Context activity, Bundle intentParams) {
+		launchMapActivityMoveToTop(activity, intentParams, null, null);
 	}
 
 	public static void clearPrevActivityIntent() {
@@ -2370,6 +2411,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public EditProfileFragment getEditProfileFragment() {
 		return getFragment(EditProfileFragment.TAG);
+	}
+
+	public ProfileAppearanceFragment getProfileAppearanceFragment() {
+		return getFragment(ProfileAppearanceFragment.TAG);
 	}
 
 	public QuickActionListFragment getQuickActionListFragment() {

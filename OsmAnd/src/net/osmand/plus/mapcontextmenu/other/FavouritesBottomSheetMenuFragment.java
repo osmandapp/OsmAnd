@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu.other;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -49,6 +50,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
 	private PointType pointType;
+	private Location location;
 	private float lastHeading;
 
 	private FavoritesListener favoritesListener;
@@ -72,6 +74,10 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 				public void onFavoritesLoaded() {
 					loadFavorites();
 					adapter.notifyDataSetChanged();
+				}
+
+				@Override
+				public void onFavoriteDataUpdated(@NonNull FavouritePoint favouritePoint) {
 				}
 			});
 		}
@@ -141,23 +147,25 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	}
 
 	private void selectFavorite(FavouritePoint point) {
-		TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
+		OsmandApplication app = getMyApplication();
+		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+		FavouritesDbHelper favorites = app.getFavorites();
 		LatLon ll = new LatLon(point.getLatitude(), point.getLongitude());
 		switch (pointType) {
 			case START:
-				targetPointsHelper.setStartPoint(ll, true, point.getPointDescription());
+				targetPointsHelper.setStartPoint(ll, true, point.getPointDescription(app));
 				break;
 			case TARGET:
-				targetPointsHelper.navigateToPoint(ll, true, -1, point.getPointDescription());
+				targetPointsHelper.navigateToPoint(ll, true, -1, point.getPointDescription(app));
 				break;
 			case INTERMEDIATE:
-				targetPointsHelper.navigateToPoint(ll, true, targetPointsHelper.getIntermediatePoints().size(), point.getPointDescription());
+				targetPointsHelper.navigateToPoint(ll, true, targetPointsHelper.getIntermediatePoints().size(), point.getPointDescription(app));
 				break;
 			case HOME:
-				targetPointsHelper.setHomePoint(ll, point.getPointDescription());
+				favorites.setSpecialPoint(ll, FavouritePoint.SpecialPointType.HOME, null);
 				break;
 			case WORK:
-				targetPointsHelper.setWorkPoint(ll, point.getPointDescription());
+				favorites.setSpecialPoint(ll, FavouritePoint.SpecialPointType.WORK, null);
 				break;
 		}
 		MapRouteInfoMenu routeMenu = getMapRouteInfoMenu();
@@ -213,7 +221,10 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 
 	@Override
 	public void updateLocation(Location location) {
-		updateLocationUi();
+		if (!MapUtils.areLatLonEqual(this.location, location)) {
+			this.location = location;
+			updateLocationUi();
+		}
 	}
 
 	@Override

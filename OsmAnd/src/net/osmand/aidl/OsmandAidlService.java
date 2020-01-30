@@ -22,6 +22,7 @@ import net.osmand.aidl.copyfile.CopyFileParams;
 import net.osmand.aidl.customization.CustomizationInfoParams;
 import net.osmand.aidl.customization.OsmandSettingsInfoParams;
 import net.osmand.aidl.customization.OsmandSettingsParams;
+import net.osmand.aidl.customization.ProfileSettingsParams;
 import net.osmand.aidl.customization.SetWidgetsParams;
 import net.osmand.aidl.favorite.AFavorite;
 import net.osmand.aidl.favorite.AddFavoriteParams;
@@ -121,8 +122,8 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 	private OsmandAidlApi getApi(String reason) {
 		LOG.info("Request AIDL API for " + reason);
 		OsmandAidlApi api = getApp().getAidlApi();
-		String pack = getApp().getPackageManager().getNameForUid(Binder.getCallingUid());
-		if (pack != null && !pack.equals(getApp().getPackageName()) && !api.isAppEnabled(pack)) {
+		String packName = getCallingAppPackName();
+		if (packName != null && !packName.equals(getApp().getPackageName()) && !api.isAppEnabled(packName)) {
 			return null;
 		}
 		return api;
@@ -156,6 +157,10 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 			api.aidlCallbackListener = null;
 		}
 		mHandlerThread.quit();
+	}
+
+	private String getCallingAppPackName() {
+		return getApp().getPackageManager().getNameForUid(Binder.getCallingUid());
 	}
 
 	private long getCallbackId() {
@@ -373,7 +378,8 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		public boolean addMapWidget(AddMapWidgetParams params) {
 			try {
 				OsmandAidlApi api = getApi("addMapWidget");
-				return params != null && api != null && api.addMapWidget(new AidlMapWidgetWrapper(params.getWidget()));
+				String packName = getCallingAppPackName();
+				return params != null && api != null && api.addMapWidget(packName, new AidlMapWidgetWrapper(params.getWidget()));
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -384,7 +390,8 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		public boolean removeMapWidget(RemoveMapWidgetParams params) {
 			try {
 				OsmandAidlApi api = getApi("removeMapWidget");
-				return params != null && api != null && api.removeMapWidget(params.getId());
+				String packName = getCallingAppPackName();
+				return params != null && api != null && api.removeMapWidget(packName, params.getId());
 			} catch (Exception e) {
 				return false;
 			}
@@ -394,7 +401,8 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		public boolean updateMapWidget(UpdateMapWidgetParams params) {
 			try {
 				OsmandAidlApi api = getApi("updateMapWidget");
-				return params != null && api != null && api.updateMapWidget(new AidlMapWidgetWrapper(params.getWidget()));
+				String packName = getCallingAppPackName();
+				return params != null && api != null && api.updateMapWidget(packName, new AidlMapWidgetWrapper(params.getWidget()));
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -405,7 +413,8 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		public boolean showMapPoint(ShowMapPointParams params) {
 			try {
 				OsmandAidlApi api = getApi("showMapPoint");
-				return params != null && api != null && api.showMapPoint(params.getLayerId(), new AidlMapPointWrapper(params.getPoint()));
+				String packName = getCallingAppPackName();
+				return params != null && api != null && api.showMapPoint(packName, params.getLayerId(), new AidlMapPointWrapper(params.getPoint()));
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -416,7 +425,8 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		public boolean addMapPoint(AddMapPointParams params) {
 			try {
 				OsmandAidlApi api = getApi("addMapPoint");
-				return params != null && api != null && api.putMapPoint(params.getLayerId(), new AidlMapPointWrapper(params.getPoint()));
+				String packName = getCallingAppPackName();
+				return params != null && api != null && api.putMapPoint(packName, params.getLayerId(), new AidlMapPointWrapper(params.getPoint()));
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -427,7 +437,8 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		public boolean removeMapPoint(RemoveMapPointParams params) {
 			try {
 				OsmandAidlApi api = getApi("removeMapPoint");
-				return params != null && api != null && api.removeMapPoint(params.getLayerId(), params.getPointId());
+				String packName = getCallingAppPackName();
+				return params != null && api != null && api.removeMapPoint(packName, params.getLayerId(), params.getPointId());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -438,7 +449,8 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		public boolean updateMapPoint(UpdateMapPointParams params) {
 			try {
 				OsmandAidlApi api = getApi("updateMapPoint");
-				return params != null && api != null && api.updateMapPoint(params.getLayerId(), new AidlMapPointWrapper(params.getPoint()), params.isUpdateOpenedMenuAndMap());
+				String packName = getCallingAppPackName();
+				return params != null && api != null && api.updateMapPoint(packName, params.getLayerId(), new AidlMapPointWrapper(params.getPoint()), params.isUpdateOpenedMenuAndMap());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -449,7 +461,8 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		public boolean addMapLayer(AddMapLayerParams params) {
 			try {
 				OsmandAidlApi api = getApi("addMapLayer");
-				return params != null && api != null && api.addMapLayer(new AidlMapLayerWrapper(params.getLayer()));
+				String packName = getCallingAppPackName();
+				return params != null && api != null && api.addMapLayer(packName, new AidlMapLayerWrapper(params.getLayer()));
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -460,7 +473,8 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		public boolean removeMapLayer(RemoveMapLayerParams params) {
 			try {
 				OsmandAidlApi api = getApi("removeMapLayer");
-				return params != null && api != null && api.removeMapLayer(params.getId());
+				String packName = getCallingAppPackName();
+				return params != null && api != null && api.removeMapLayer(packName, params.getId());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -471,7 +485,8 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		public boolean updateMapLayer(UpdateMapLayerParams params) {
 			try {
 				OsmandAidlApi api = getApi("updateMapLayer");
-				return params != null && api != null && api.updateMapLayer(new AidlMapLayerWrapper(params.getLayer()));
+				String packName = getCallingAppPackName();
+				return params != null && api != null && api.updateMapLayer(packName, new AidlMapLayerWrapper(params.getLayer()));
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -1267,8 +1282,20 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 				if (api != null && params != null) {
 					String colorName = api.getGpxColor(params.getFileName());
 					params.setGpxColor(colorName);
+					return true;
 				}
 				return false;
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean importProfile(ProfileSettingsParams params) {
+			try {
+				OsmandAidlApi api = getApi("importProfile");
+				return api != null && api.importProfile(params.getProfileSettingsUri(), params.getLatestChanges(), params.getVersion());
 			} catch (Exception e) {
 				handleException(e);
 				return false;

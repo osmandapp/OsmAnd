@@ -8,8 +8,8 @@ import java.util.TimeZone;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.DayNightMode;
 import net.osmand.util.SunriseSunset;
 
@@ -40,15 +40,13 @@ import android.location.LocationManager;
  * @author pavol.zibrita
  */
 public class DayNightHelper implements SensorEventListener {
+
 	private static final Log log = PlatformUtil.getLog(DayNightHelper.class);
 	
 	private final OsmandApplication osmandApplication;
 
-	private CommonPreference<DayNightMode> pref;
-
 	public DayNightHelper(OsmandApplication osmandApplication) {
 		this.osmandApplication = osmandApplication;
-		pref = osmandApplication.getSettings().DAYNIGHT_MODE;
 	}
 
 	private DayNightHelper listener;
@@ -58,8 +56,12 @@ public class DayNightHelper implements SensorEventListener {
 	private StateChangedListener<Boolean> sensorStateListener;
 
 	public boolean isNightModeForMapControls() {
-		if (osmandApplication.getSettings().isLightContent()) {
-			return isNightMode();
+		return isNightModeForMapControlsForProfile(osmandApplication.getSettings().APPLICATION_MODE.get());
+	}
+
+	public boolean isNightModeForMapControlsForProfile(ApplicationMode mode) {
+		if (osmandApplication.getSettings().isLightContentForMode(mode)) {
+			return isNightModeForProfile(mode);
 		} else {
 			return true;
 		}
@@ -70,7 +72,11 @@ public class DayNightHelper implements SensorEventListener {
 	 * @return true if day is supposed to be 
 	 */
 	public boolean isNightMode() {
-		DayNightMode dayNightMode = pref.get();
+		return isNightModeForProfile(osmandApplication.getSettings().APPLICATION_MODE.get());
+	}
+
+	public boolean isNightModeForProfile(ApplicationMode mode) {
+		DayNightMode dayNightMode = osmandApplication.getSettings().DAYNIGHT_MODE.getModeValue(mode);
 		if (dayNightMode.isDay()) {
 			return false;
 		} else if (dayNightMode.isNight()) {
@@ -129,7 +135,7 @@ public class DayNightHelper implements SensorEventListener {
 
 	public void startSensorIfNeeded(StateChangedListener<Boolean> sensorStateListener) {
 		this.sensorStateListener = sensorStateListener;
-		DayNightMode dayNightMode = pref.get();
+		DayNightMode dayNightMode = osmandApplication.getSettings().DAYNIGHT_MODE.get();
 		if (listener == null && dayNightMode.isSensor()) {
 			SensorManager mSensorManager = (SensorManager) osmandApplication.getSystemService(Context.SENSOR_SERVICE);
 			Sensor mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);

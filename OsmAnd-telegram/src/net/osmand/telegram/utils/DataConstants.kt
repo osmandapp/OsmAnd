@@ -2,6 +2,8 @@ package net.osmand.telegram.utils
 
 object DataConstants {
 
+	const val UTC_FORMAT = "UTC"
+
 	val countryPhoneCodes = mapOf("AB" to "+7840,+7940,+99544", "AF" to "+93", "AX" to "+35818",
 		"AL" to "+355","DZ" to "+213", "AS" to "+1684", "AD" to "+376", "AO" to "+244","AI" to "+1264",
 		"AG" to "+1268", "AR" to "+54", "AM" to "+374","AW" to "+297", "SH" to "+247", "AU" to "+61",
@@ -44,4 +46,46 @@ object DataConstants {
 		"TM" to "+993", "TC" to "+1649", "TV" to "+688", "UG" to "+256","UA" to "+380", "AE" to "+971",
 		"UK" to "+44", "US" to "+1","UY" to "+598", "VI" to "+1340", "UZ" to "+998", "VU" to "+678", "VE" to "+58",
 		"VA" to "+3906698,+379", "VN" to "+84", "WF" to "+681","YE" to "+967", "ZM" to "+260", "ZW" to "+263")
+
+	val utcOffsets = mapOf(
+		"$UTC_FORMAT-12" to -12f,
+		"$UTC_FORMAT-11" to -11f,
+		"$UTC_FORMAT-10" to -10f,
+		"$UTC_FORMAT-09:30" to -9.5f,
+		"$UTC_FORMAT-9" to -9f,
+		"$UTC_FORMAT-8" to -8f,
+		"$UTC_FORMAT-7" to -7f,
+		"$UTC_FORMAT-6" to -6f,
+		"$UTC_FORMAT-5" to -5f,
+		"$UTC_FORMAT-4" to -4f,
+		"$UTC_FORMAT-03:30" to -3.5f,
+		"$UTC_FORMAT-3" to -3f,
+		"$UTC_FORMAT-2" to -2f,
+		"$UTC_FORMAT-1" to -1f,
+		UTC_FORMAT to 0f,
+		"$UTC_FORMAT+1" to 1f,
+		"$UTC_FORMAT+2" to 2f,
+		"$UTC_FORMAT+3" to 3f,
+		"$UTC_FORMAT+03:30" to 3.5f,
+		"$UTC_FORMAT+4" to 4f,
+		"$UTC_FORMAT+04:30" to 4.5f,
+		"$UTC_FORMAT+5" to 5f,
+		"$UTC_FORMAT+05:30" to 5.5f,
+		"$UTC_FORMAT+05:45" to 5.75f,
+		"$UTC_FORMAT+6" to 6f,
+		"$UTC_FORMAT+06:30" to 6.5f,
+		"$UTC_FORMAT+7" to 7f,
+		"$UTC_FORMAT+8" to 8f,
+		"$UTC_FORMAT+08:45" to 8.75f,
+		"$UTC_FORMAT+9" to 9f,
+		"$UTC_FORMAT+09:30" to 9.5f,
+		"$UTC_FORMAT+10" to 10f,
+		"$UTC_FORMAT+10:30" to 10.5f,
+		"$UTC_FORMAT+11" to 11f,
+		"$UTC_FORMAT+12" to 12f,
+		"$UTC_FORMAT+12:45" to 12.75f,
+		"$UTC_FORMAT+13" to 13f,
+		"$UTC_FORMAT+13:45" to 13.75f,
+		"$UTC_FORMAT+14" to 14f
+	)
 }

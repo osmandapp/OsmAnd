@@ -3,6 +3,7 @@ package net.osmand.plus.profiles;
 
 
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.DIALOG_TYPE;
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.PROFILE_KEY_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_BASE_APP_PROFILE;
 
 import android.content.Context;
@@ -44,8 +45,6 @@ public class SettingsProfileFragment extends BaseOsmAndFragment
 		implements ConfigureProfileMenuAdapter.ProfileSelectedListener, AbstractProfileMenuAdapter.ProfilePressedListener{
 
 	private static final Log LOG = PlatformUtil.getLog(SettingsProfileFragment.class);
-
-	public static final String TAG = "SettingsProfileFragment";
 
 	public static final String PROFILE_STRING_KEY = "string_key";
 	public static final String IS_NEW_PROFILE = "new_profile";
@@ -149,19 +148,19 @@ public class SettingsProfileFragment extends BaseOsmAndFragment
 		if (typeListener == null) {
 			typeListener = new SelectProfileListener() {
 				@Override
-				public void onSelectedType(int pos, String stringRes) {
+				public void onSelectedType(Bundle args) {
 					FragmentActivity activity = getActivity();
+					String profileKey = args.getString(PROFILE_KEY_ARG);
 					if (activity != null) {
 						if (activity instanceof SettingsProfileActivity) {
 							Intent intent = new Intent(getActivity(), EditProfileActivity.class);
 							intent.putExtra(IS_NEW_PROFILE, true);
 							intent.putExtra(IS_USER_PROFILE, true);
-							intent.putExtra(PROFILE_STRING_KEY, baseProfiles.get(pos).getStringKey());
+							intent.putExtra(PROFILE_STRING_KEY, profileKey);
 							activity.startActivity(intent);
 						} else {
 							FragmentManager fragmentManager = activity.getSupportFragmentManager();
 							if (fragmentManager != null) {
-								String profileKey = baseProfiles.get(pos).getStringKey();
 								EditProfileFragment.showInstance(fragmentManager, true, true, profileKey);
 							}
 						}
@@ -172,7 +171,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment
 		return typeListener;
 	}
 
-	static List<ProfileDataObject> getBaseProfiles(Context ctx) {
+	public static List<ProfileDataObject> getBaseProfiles(Context ctx) {
 		List<ProfileDataObject> profiles = new ArrayList<>();
 		for (ApplicationMode mode : ApplicationMode.getDefaultValues()) {
 			if (mode != ApplicationMode.DEFAULT) {
@@ -190,9 +189,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment
 			if (activity instanceof SettingsProfileActivity) {
 				Intent intent = new Intent(getActivity(), EditProfileActivity.class);
 				intent.putExtra(PROFILE_STRING_KEY, item.getStringKey());
-				if (item.isCustomProfile()) {
-					intent.putExtra(IS_USER_PROFILE, true);
-				}
+				intent.putExtra(IS_USER_PROFILE, item.isCustomProfile());
 				activity.startActivity(intent);
 			} else {
 				FragmentManager fragmentManager = activity.getSupportFragmentManager();

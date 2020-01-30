@@ -197,7 +197,7 @@
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram (s\'aplicatzione pro sos messàgios) benit impreadu pro cunnètere e fàghere comunicare sa gente.</string>
     <string name="privacy_policy_telegram_client">OsmAnd Tracker est una de sas aplicatziones clientes chi impreant sa prataforma aberta de Telegram. Sos cuntatos tuos podent impreare cale si siat àtera aplicatzione cliente de Telegram.</string>
-    <string name="privacy_policy_agree">Incarchende \"sighi\" atzetas sas cunditziones de sa Polìtica de Riservadesa de Telegram e de cussa de OsmAnd.</string>
+    <string name="privacy_policy_agree">Incarchende \"Sighi\" atzetas sas cunditziones de sa Polìtica de Riservadesa de Telegram e de OsmAnd.</string>
     <string name="shared_string_accept">Atzeta</string>
     <string name="telegram_privacy_policy">Polìtica de riservadesa de Telegram</string>
     <string name="osmand_privacy_policy">Polìtica de riservadesa de OsmAnd</string>
@@ -233,7 +233,7 @@
     <string name="proxy_settings">Impostatziones de su servidore intermediàriu</string>
     <string name="proxy">Servidore intermediàriu (proxy)</string>
     <string name="privacy">Privadesa</string>
-    <string name="bearing">Andamentu</string>
+    <string name="bearing">Orientamentu</string>
     <string name="shared_string_select">Seletziona</string>
     <string name="min_logging_distance">Distàntzia mìnima de registratzione</string>
     <string name="min_logging_distance_descr">FIltru: distàntzia mìnima pro registrare unu puntu nou</string>
@@ -245,8 +245,26 @@
     <string name="timeline_no_data_descr">Non tenimus datos collidos pro sa die ischertada</string>
     <string name="timeline_no_data">Perunu datu</string>
     <string name="shared_string_end">Acaba</string>
-    <string name="shared_string_start">Incumintza</string>
+    <string name="shared_string_start">Allughe</string>
     <string name="shared_string_apply">Àplica</string>
     <string name="set_time_timeline_descr">Ischerta su tempus de ammustrare</string>
     <string name="start_end_date">Data de incumintzu — de acabu</string>
+    <string name="saved_messages">Messàgios sarvados</string>
+    <string name="time_zone_descr">Issèbera su fusu oràriu de ammustrare in sos messàgios de positzione tuos.</string>
+    <string name="time_zone">Fusu oràriu</string>
+    <string name="units_and_formats">Unidades e formados</string>
+    <string name="unit_of_length_descr">Muda s\'unidade de mèdida pro sa distàntzia.</string>
+    <string name="unit_of_length">Unidades de longària</string>
+    <string name="unit_of_speed_system_descr">Issèbera s\'unidade de letresa.</string>
+    <string name="unit_of_speed_system">Unidade de lestresa</string>
+    <string name="buffer_time_descr">Tempus màssimu de archiviatzione de sos puntos in sa memòria tampone (buffer)</string>
+    <string name="buffer_time">Tempus de iscadidura de sa memòria tampone</string>
+    <string name="shared_string_suggested">Cunsigiadu</string>
+    <string name="status_widget_title">Istadu de s\'arrastadore de OsmAnd</string>
+    <string name="back_to_osmand">Torra a OsmAnd</string>
+    <string name="last_update_from_telegram_date">Ùrtimu agiornamentu dae Telegram: %1$s</string>
+    <string name="last_response_date">Ùrtima risposta: %1$s</string>
+    <string name="last_update_from_telegram_duration">Ùrtimu agiornamentu dae Telegram: %1$s a como</string>
+    <string name="last_response_duration">Ùrtima risposta: %1$s a como</string>
+    <string name="duration_ago">%1$s a como</string>
 </resources>

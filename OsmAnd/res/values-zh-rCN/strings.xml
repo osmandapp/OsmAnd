@@ -482,7 +482,6 @@
     <string name="map_widget_transparent">透明皮肤</string>
     <string name="bg_service_sleep_mode_off">打开\n 睡眠模式</string>
     <string name="bg_service_sleep_mode_on">停止\n 睡眠模式</string>
-    <string name="gps_wakeup_interval">GPS 唤醒间隔：%s</string>
     <string name="map_widget_next_turn_small">下一个转弯(小)</string>
     <string name="map_widget_next_next_turn">再下一个转弯</string>
     <string name="map_widget_mini_route">路线小地图</string>
@@ -1316,7 +1315,7 @@
     <string name="online_photos">在线照片</string>
     <string name="mapillary_descr">供所有人使用的在线街景照片。协作发现景点，捕捉世界之美。</string>
     <string name="distance_moving">距离已修正</string>
-    <string name="no_photos_descr">我们没有该地点的照片。</string>
+    <string name="no_photos_descr">这里没有照片。</string>
     <string name="routing_attr_short_way_name">节油道路</string>
     <string name="routing_attr_short_way_description">使用节油道路（通常更短）。</string>
     <string name="configure_screen_quick_action">快捷操作</string>
@@ -1437,7 +1436,6 @@
     <string name="osm_live_subscription_desc">启用认购可每小时、每天、每周的更新以及世界各地所有的地图无限制的下载。</string>
     <string name="get_it">获得</string>
     <string name="get_for">获取 %1$s</string>
-    <string name="get_for_month">每个月获得 %1$s</string>
     <string name="osm_live_banner_desc">获得无限制的地图下载和每个月超过一次以上的地图更新︰每周、每天或每小时。</string>
     <string name="osmand_plus_banner_desc">OsmAnd 完整版拥有无限制的地图下载和每个月的地图更新。</string>
     <string name="skip_map_downloading">跳过下载地图</string>
@@ -2094,7 +2092,6 @@
     <string name="voice_stream_voice_call">电话音频（会中断汽车蓝牙音响）</string>
     <string name="select_tile_source_to_install">选择要安装或更新的（平铺）地图</string>
     <string name="create_poi_link_to_osm_doc">带照片的<u>在线 OSM</u> 地图分类</string>
-    <string name="search_offline_geo_error">不能分析地理含义“%s”</string>
     <string name="send_location_email_pattern">查看追踪位置，以网页浏览器链接 %1$s 或用 Android intent 链接 %2$s</string>
     <string name="add_waypoint_dialog_added">GPX 航点“{0}”已成功添加</string>
     <string name="poi_filter_namefinder">在线名称查找器</string>
@@ -2313,7 +2310,7 @@
     <string name="quick_action_sh_poi_descr">您可以添加一个或多个要显示在地图上的 POI 类别。</string>
     <string name="quick_action_page_list_descr">轻触动作按钮会直达下面的清单。</string>
     <string name="quick_action_map_style_action">添加地图样式</string>
-    <string name="quick_action_empty_param_error">参数不应为空</string>
+    <string name="quick_action_empty_param_error">请填写所有参数</string>
     <string name="quick_action_map_styles">地图样式</string>
     <string name="quick_action_map_overlay">更改地图覆盖</string>
     <string name="quick_action_map_overlay_title">地图覆盖</string>
@@ -2324,7 +2321,7 @@
     <string name="quick_action_map_underlay_title">地图衬底层</string>
     <string name="quick_action_map_underlay_action">添加衬底层</string>
     <string name="quick_action_map_source_title">地图来源</string>
-    <string name="quick_action_map_source_switch">地图来源已更改为\"%s\"。</string>
+    <string name="quick_action_map_source_switch">地图来源已更改为“%s”。</string>
     <string name="quick_action_btn_tutorial_title">更改按钮的位置</string>
     <string name="quick_action_btn_tutorial_descr">长按并拖动按钮来改变其在屏幕上的位置。</string>
     <string name="map_widget_ruler_control">半径量尺</string>
@@ -2447,7 +2444,7 @@
     <string name="shared_string_paste">粘贴</string>
     <string name="tap_on_map_to_hide_interface">全屏模式</string>
     <string name="import_file">导入文件</string>
-    <string name="mappilary_no_internet_desc">您需要互联网连接以查看来自 Mapillary 的图片。</string>
+    <string name="mappilary_no_internet_desc">来自 Mapillary 的图片必须在线查看。</string>
     <string name="retry">重试</string>
     <string name="save_gpx_waypoint">保存 GPX 航点</string>
     <string name="import_track">导入 GPX 文件</string>
@@ -2480,7 +2477,6 @@
     <string name="in_app_purchase_desc">一次性付款</string>
     <string name="in_app_purchase_desc_ex">购买后将对您永久可用。</string>
     <string name="purchase_unlim_title">购买 - %1$s</string>
-    <string name="purchase_subscription_title">订阅 - %1$s</string>
     <string name="wikivoyage_offline">Wikivoyage 离线</string>
     <string name="unlimited_downloads">无限下载</string>
     <string name="wikipedia_offline">离线维基百科</string>
@@ -2561,7 +2557,7 @@
     <string name="mapillary_menu_title_pano">仅显示 360° 图像</string>
     <string name="wiki_article_search_text">搜索对应的维基条目</string>
     <string name="run_full_osmand_header">启动 OsmAnd？</string>
-    <string name="routing_attr_avoid_subway_name">避免地铁</string>
+    <string name="routing_attr_avoid_subway_name">不乘坐地铁</string>
     <string name="quick_action_day_night_mode">%s模式</string>
     <string name="avoid_pt_types">避免特定交通类型……</string>
     <string name="rendering_attr_undefined_name">未定义</string>
@@ -2571,12 +2567,12 @@
     <string name="total_donations">捐赠总计</string>
     <string name="winter_and_ski_renderer">冬季与滑雪</string>
     <string name="toast_empty_name_error">未命名位置</string>
-    <string name="routing_attr_avoid_share_taxi_name">避免共享出租车</string>
+    <string name="routing_attr_avoid_share_taxi_name">不乘坐共享出租车</string>
     <string name="routing_attr_avoid_share_taxi_description">避免共享出租车</string>
-    <string name="routing_attr_avoid_train_name">避免火车</string>
+    <string name="routing_attr_avoid_train_name">不乘坐火车</string>
     <string name="routing_attr_avoid_train_description">避免火车</string>
     <string name="routing_attr_avoid_subway_description">避免地铁和轻轨交通</string>
-    <string name="routing_attr_avoid_ferry_name">避免轮渡</string>
+    <string name="routing_attr_avoid_ferry_name">不乘坐轮渡</string>
     <string name="routing_attr_avoid_ferry_description">避免轮渡</string>
     <string name="shared_string_degrees">度</string>
     <string name="shared_string_milliradians">毫弧度</string>
@@ -2584,7 +2580,7 @@
     <string name="shared_string_walk">步行</string>
     <string name="save_poi_value_exceed_length">标签“%s”的最大长度是255个字符。
 \n请先进行缩短再继续。</string>
-    <string name="save_poi_value_exceed_length_title">“%”值的长度</string>
+    <string name="save_poi_value_exceed_length_title">“%s”值的长度</string>
     <string name="public_transport_warning_descr_blog">在我们的博客上了解更多与 OsmAnd 路线计算相关的信息。</string>
     <string name="public_transport_warning_title">公共交通导航目前处于测试阶段，可能出现错误和信息不准确。</string>
     <string name="add_intermediate">添加中继点</string>
@@ -2604,9 +2600,9 @@
     <string name="transfers_size">%1$d 次中转</string>
     <string name="rendering_attr_surface_mud_name">泥路</string>
     <string name="rendering_attr_surface_asphalt_name">柏油路</string>
-    <string name="routing_attr_avoid_tram_name">避免电车</string>
+    <string name="routing_attr_avoid_tram_name">不乘坐电车</string>
     <string name="routing_attr_avoid_tram_description">避免电车</string>
-    <string name="routing_attr_avoid_bus_name">避免公交</string>
+    <string name="routing_attr_avoid_bus_name">不乘坐公交</string>
     <string name="routing_attr_avoid_bus_description">避免公交和无轨电车</string>
     <string name="send_log">发送日志</string>
     <string name="files_moved">已移动 %1$d 个文件 (%2$s)。</string>
@@ -2614,7 +2610,7 @@
     <string name="files_present">%1$d 个文件 (%2$s) 仍在原路径 \'%3$s\'。</string>
     <string name="move_maps">移动地图</string>
     <string name="dont_move_maps">不要移动</string>
-    <string name="public_transport_ped_route_title">徒步完成此路径需要约 %1$s，可能比公交更快</string>
+    <string name="public_transport_ped_route_title">徒步完成此路径需要约 %1$s，可能比公共交通更快</string>
     <string name="public_transport_no_route_title">非常抱歉，OsmAnd 无法找到符合您的设置的路线。</string>
     <string name="public_transport_try_ped">尝试步行导航。</string>
     <string name="public_transport_try_change_settings">尝试更改设置。</string>
@@ -2682,7 +2678,7 @@
     <string name="rendering_attr_surface_ice_name">冰面</string>
     <string name="rendering_attr_surface_salt_name">盐地</string>
     <string name="rendering_attr_surface_snow_name">雪地</string>
-    <string name="rendering_attr_surface_paved_name">已规划路径</string>
+    <string name="rendering_attr_surface_paved_name">已铺装路面</string>
     <string name="rendering_attr_surface_concrete_name">混凝土地</string>
     <string name="rendering_attr_surface_cobblestone_name">鹅卵石地</string>
     <string name="rendering_attr_surface_paving_stones_name">铺路石</string>
@@ -2714,7 +2710,7 @@
 \n • 在测距中显示方位角
 \n
 \n</string>
-    <string name="files_failed">未能复制 %1$d 个文件 (%2$s).</string>
+    <string name="files_failed">无法复制 %1$d 个文件 (%2$s)。</string>
     <string name="poi_cannot_be_found">无法找到节点或道路。</string>
     <string name="shared_string_total">一共</string>
     <string name="wikivoyage_download_pics">下载图片</string>
@@ -2745,7 +2741,7 @@
     <string name="shared_string_default">默认</string>
     <string name="transport_nearby_routes">之间</string>
     <string name="shared_string_privacy_policy">隐私政策</string>
-    <string name="help_us_make_osmand_better">帮助我们让 OsmAnd 变得更好！</string>
+    <string name="help_us_make_osmand_better">帮助我们让 OsmAnd 变得更好</string>
     <string name="shared_string_no_thank_you">不，谢谢</string>
     <string name="shared_string_allow">允许</string>
     <string name="nav_type_hint">导航类型</string>
@@ -2758,7 +2754,7 @@
     <string name="cancel_subscription">取消订阅</string>
     <string name="units_and_formats">单位和格式</string>
     <string name="appearance">外观</string>
-    <string name="list_of_installed_plugins">已安装插件列表</string>
+    <string name="list_of_installed_plugins">已安装插件</string>
     <string name="configure_navigation">配置导航</string>
     <string name="general_settings_profile_descr">应用主题、单位、区域</string>
     <string name="language_and_output">语言和输出</string>
@@ -2766,7 +2762,7 @@
     <string name="osmand_settings">OsmAnd 设置</string>
     <string name="shared_string_other">其它</string>
     <string name="plugins_settings">插件设置</string>
-    <string name="shared_string_select_folder">选择文件夹</string>
+    <string name="shared_string_select_folder">文件夹…</string>
     <string name="shared_string_calculate">计算</string>
     <string name="shared_string_osmand_usage">OsmAnd 用法</string>
     <string name="shared_string_memory_used_tb_desc">已使用 %1$s TB</string>
@@ -2784,7 +2780,7 @@
     <string name="exported_osmand_profile">OsmAnd配置文件： %1$s</string>
     <string name="overwrite_profile_q">配置文件\"%1$s\"已存在。覆盖？</string>
     <string name="export_profile_failed">无法导出配置文件。</string>
-    <string name="profile_import">配置文件导入：</string>
+    <string name="profile_import">配置文件导入</string>
     <string name="profile_import_descr">要导入配置文件，请在设备上选择其文件，然后使用OsmAnd打开它。</string>
     <string name="file_import_error">%1$s 导入错误：%2$s</string>
     <string name="file_imported_successfully">%1$s 已成功导入。</string>
@@ -2793,4 +2789,23 @@
     <string name="route_start_point">起点</string>
     <string name="track_saved">追踪已保存</string>
     <string name="empty_filename">文件名为空</string>
+    <string name="copy_location_name">复制地点/兴趣点名称</string>
+    <string name="routeInfo_roadClass_name">道路类型</string>
+    <string name="routeInfo_surface_name">表面</string>
+    <string name="clear_confirmation_msg">清空 %1$s？</string>
+    <string name="dialogs_and_notifications_title">对话框和通知</string>
+    <string name="shared_string_downloading_formatted">正在下载 %s</string>
+    <string name="download_map_dialog">下载地图对话框</string>
+    <string name="suggested_maps">建议的地图</string>
+    <string name="shared_string_turn_off">关闭</string>
+    <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
+    <string name="select_navigation_icon">选择导航图标</string>
+    <string name="select_map_icon">选择地图图标</string>
+    <string name="delete_profiles_descr">在您点击“应用”后，已删除的配置将永久丢失。</string>
+    <string name="select_color">选择颜色</string>
+    <string name="edit_profiles_descr">您不能删除默认的 OsmAnd 配置，但您可以在前一个屏幕中将其禁用，或是将它们移到底部。</string>
+    <string name="choose_icon_color_name">选择图标、颜色和名称</string>
+    <string name="reset_confirmation_descr">如果点击 %1$s，您将丢失所有更改。</string>
+    <string name="reset_all_profile_settings_descr">所有配置设置将会重置为安装后的状态。</string>
+    <string name="reset_all_profile_settings">要将所有配置设置重置为默认值吗？</string>
 </resources>

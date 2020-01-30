@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/list_item_height"
+    android:background="?attr/selectableItemBackground"
     android:paddingLeft="20dp"
     android:orientation="horizontal">
 

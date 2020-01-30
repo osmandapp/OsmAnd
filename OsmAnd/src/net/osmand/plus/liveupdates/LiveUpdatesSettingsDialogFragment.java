@@ -19,6 +19,7 @@ import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -104,7 +105,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 
 		downloadOverWiFiCheckBox.setChecked(!liveUpdatePreference.get() || downloadViaWiFiPreference.get());
 
-		sizeTextView.setText(getUpdatesSize(fileNameWithoutExtension, changesManager));
+		sizeTextView.setText(getUpdatesSize(getMyActivity(), fileNameWithoutExtension, changesManager));
 
 		TimeOfDay[] timeOfDays = TimeOfDay.values();
 		String[] timeOfDaysStrings = new String[timeOfDays.length];
@@ -194,7 +195,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 					} else {
 						runLiveUpdate(getActivity(), fileName, true);
 						final IncrementalChangesManager changesManager = getMyApplication().getResourceManager().getChangesManager();
-						sizeTextView.setText(getUpdatesSize(fileNameWithoutExtension, changesManager));
+						sizeTextView.setText(getUpdatesSize(getMyActivity(), fileNameWithoutExtension, changesManager));
 						dialog.dismiss();
 					}
 				}
@@ -214,17 +215,10 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		}
 	}
 
-	private static String getUpdatesSize(String fileNameWithoutExtension,
+	private static String getUpdatesSize(Context ctx, String fileNameWithoutExtension,
 										 IncrementalChangesManager changesManager) {
-		String size;
 		long updatesSize = changesManager.getUpdatesSize(fileNameWithoutExtension);
-		updatesSize /= (1 << 10);
-		if (updatesSize > 100) {
-			size = DownloadActivity.formatMb.format(new Object[]{(float) updatesSize / (1 << 10)});
-		} else {
-			size = updatesSize + " KB";
-		}
-		return size;
+		return AndroidUtils.formatSize(ctx, updatesSize);
 	}
 
 	private LiveUpdatesFragment getLiveUpdatesFragment() {
@@ -263,8 +257,10 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 			final String fileNameWithoutExtension =
 					Algorithms.getFileNameWithoutExtension(new File(localIndexInfo));
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			builder.setMessage(getString(R.string.clear_updates_proposition_message)
-					+ " " + getUpdatesSize(fileNameWithoutExtension, changesManager))
+			builder.setMessage(
+					getString(R.string.ltr_or_rtl_combine_via_space,
+							getString(R.string.clear_updates_proposition_message),
+							getUpdatesSize(getContext(), fileNameWithoutExtension, changesManager)))
 					.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {

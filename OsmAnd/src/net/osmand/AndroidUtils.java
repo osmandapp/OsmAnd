@@ -48,15 +48,19 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewParent;
+import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -73,6 +77,9 @@ import static android.util.TypedValue.COMPLEX_UNIT_SP;
 public class AndroidUtils {
 
 	public static final String STRING_PLACEHOLDER = "%s";
+	public static final MessageFormat formatKb = new MessageFormat("{0, number,##.#}", Locale.US);
+	public static final MessageFormat formatGb = new MessageFormat("{0, number,#.##}", Locale.US);
+	public static final MessageFormat formatMb = new MessageFormat("{0, number,##.#}", Locale.US);
 	
 	/**
 	 * @param context
@@ -208,16 +215,26 @@ public class AndroidUtils {
 		return DateFormat.getTimeFormat(ctx).format(new Date(time));
 	}
 
-	public static String formatSize(long sizeBytes) {
+
+	public static String formatSize(Context ctx, long sizeBytes) {
 		int sizeKb = (int) ((sizeBytes + 512) >> 10);
 		if (sizeKb > 0) {
+
+			String size = "";
+			String numSuffix = "MB";
 			if (sizeKb > 1 << 20) {
-				return DownloadActivity.formatGb.format(new Object[]{(float) sizeKb / (1 << 20)});
+				size = formatGb.format(new Object[]{(float) sizeKb / (1 << 20)});
+				numSuffix = "GB";
 			} else if (sizeBytes > (100 * (1 << 10))) {
-				return DownloadActivity.formatMb.format(new Object[]{(float) sizeBytes / (1 << 20)});
+				size = formatMb.format(new Object[]{(float) sizeBytes / (1 << 20)});
 			} else {
-				return DownloadActivity.formatKb.format(new Object[]{(float) sizeBytes / (1 << 10)});
+				size = formatKb.format(new Object[]{(float) sizeBytes / (1 << 10)});
+				numSuffix = "kB";
 			}
+			if(ctx == null) {
+				return size + " " + numSuffix;
+			}
+			return ctx.getString(R.string.ltr_or_rtl_combine_via_space, size, numSuffix);
 		}
 		return "";
 	}
@@ -437,6 +454,13 @@ public class AndroidUtils {
 		return outValue.getFloat();
 	}
 
+	public static int getDrawableId(OsmandApplication app, String id) {
+		if (!Algorithms.isEmpty(id)) {
+			return app.getResources().getIdentifier(id, "drawable", app.getPackageName());
+		}
+		return 0;
+	}
+
 	public static int getStatusBarHeight(Context ctx) {
 		int result = 0;
 		int resourceId = ctx.getResources().getIdentifier("status_bar_height", "dimen", "android");
@@ -542,16 +566,37 @@ public class AndroidUtils {
 		return coordinates;
 	}
 
-	public static void enterToFullScreen(Activity activity) {
+	public static void enterToFullScreen(Activity activity, View view) {
 		if (Build.VERSION.SDK_INT >= 21) {
+			requestLayout(view);
 			activity.getWindow().getDecorView()
 					.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 		}
 	}
 
-	public static void exitFromFullScreen(Activity activity) {
+	public static void exitFromFullScreen(Activity activity, View view) {
 		if (Build.VERSION.SDK_INT >= 21) {
+			requestLayout(view);
 			activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+		}
+	}
+
+	private static void requestLayout(final View view) {
+		if (view != null) {
+			ViewTreeObserver vto = view.getViewTreeObserver();
+			vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+				@Override
+				public void onGlobalLayout() {
+					ViewTreeObserver obs = view.getViewTreeObserver();
+					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+						obs.removeOnGlobalLayoutListener(this);
+					} else {
+						obs.removeGlobalOnLayoutListener(this);
+					}
+					view.requestLayout();
+				}
+			});
 		}
 	}
 
@@ -643,5 +688,37 @@ public class AndroidUtils {
 
 	public static boolean isRTL() {
 		return TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == ViewCompat.LAYOUT_DIRECTION_RTL;
+	}
+	
+	public static String createNewFileName(String oldName) {
+		int firstDotIndex = oldName.indexOf('.');
+		String nameWithoutExt = oldName.substring(0, firstDotIndex);
+		String ext = oldName.substring(firstDotIndex);
+
+		StringBuilder numberSection = new StringBuilder();
+		int i = nameWithoutExt.length() - 1;
+		boolean hasNameNumberSection = false;
+		do {
+			char c = nameWithoutExt.charAt(i);
+			if (Character.isDigit(c)) {
+				numberSection.insert(0, c);
+			} else if(Character.isSpaceChar(c) && numberSection.length() > 0) {
+				hasNameNumberSection = true;
+				break;
+			} else {
+				break;
+			}
+			i--;
+		} while (i >= 0);
+		int newNumberValue = Integer.parseInt(hasNameNumberSection ? numberSection.toString() : "0") + 1;
+		
+		String newName;
+		if (newNumberValue == 1) {
+			newName = nameWithoutExt + " " + newNumberValue + ext;
+		} else {
+			newName = nameWithoutExt.substring(0, i) + " " + newNumberValue + ext;
+		}
+
+		return newName;
 	}
 }

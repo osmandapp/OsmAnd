@@ -1,11 +1,5 @@
 package net.osmand.plus.resources;
 
-
-import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -15,44 +9,50 @@ import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.Amenity;
 import net.osmand.osm.PoiCategory;
+import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResource;
+import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResourceType;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
+import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
 public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 
 	private final static Log log = PlatformUtil.getLog(AmenityIndexRepositoryBinary.class);
-	private final BinaryMapIndexReader index;
+	private BinaryMapReaderResource resource;
 
-	public AmenityIndexRepositoryBinary(BinaryMapIndexReader index) {
-		this.index = index;
+	public AmenityIndexRepositoryBinary(BinaryMapReaderResource resource) {
+		this.resource = resource;
+	}
+
+	private BinaryMapIndexReader getOpenFile() {
+		return resource.getReader(BinaryMapReaderResourceType.POI);
 	}
 
 	@Override
 	public void close() {
-		try {
-			index.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 	@Override
 	public boolean checkContains(double latitude, double longitude) {
 		int x31 = MapUtils.get31TileNumberX(longitude);
 		int y31 = MapUtils.get31TileNumberY(latitude);
-		return index.containsPoiData(x31, y31, x31, y31);
+		return getOpenFile().containsPoiData(x31, y31, x31, y31);
 	}
 
 	@Override
 	public boolean checkContainsInt(int top31, int left31, int bottom31, int right31) {
-		return index.containsPoiData(left31, top31, right31, bottom31);
+		return getOpenFile().containsPoiData(left31, top31, right31, bottom31);
 	}
 	
 	
 	public synchronized Map<PoiCategory, List<String>> searchAmenityCategoriesByName(String query, Map<PoiCategory, List<String>> map) {
 		try {
-			return index.searchPoiCategoriesByName(query, map);
+			return getOpenFile().searchPoiCategoriesByName(query, map);
 		} catch (IOException e) {
 			log.error("Error searching amenities", e); //$NON-NLS-1$
 		}
@@ -65,6 +65,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 		List<Amenity> amenities = Collections.emptyList();
 		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(x, y, query, l, r, t, b,resulMatcher);
 		try {
+			BinaryMapIndexReader index = getOpenFile();
 			amenities = index.searchPoiByName(req);
 			if (log.isDebugEnabled()) {
 				String nm = "";
@@ -90,7 +91,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 				filter, matcher);
 		List<Amenity> result = null;
 		try {
-			result = index.searchPoi(req);
+			result = getOpenFile().searchPoi(req);
 		} catch (IOException e) {
 			log.error("Error searching amenities", e); //$NON-NLS-1$
 		}
@@ -108,7 +109,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(locations, radius,
 				filter, matcher );
 		try {
-			result = index.searchPoi(req);
+			result = getOpenFile().searchPoi(req);
 		} catch (IOException e) {
 			log.error("Error searching amenities", e); //$NON-NLS-1$
 			return result;

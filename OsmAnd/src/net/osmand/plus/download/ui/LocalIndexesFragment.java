@@ -80,7 +80,8 @@ import android.widget.Toast;
 
 
 public class LocalIndexesFragment extends OsmandExpandableListFragment implements DownloadEvents {
-	public static final Pattern ILLEGAL_FILE_NAME_CHARACTERS = Pattern.compile("[?:\"*|/\\<>]");
+	public static final Pattern ILLEGAL_FILE_NAME_CHARACTERS = Pattern.compile("[?:\"*|/<>]");
+	public static final Pattern ILLEGAL_PATH_NAME_CHARACTERS = Pattern.compile("[?:\"*|<>]");
 
 	private LoadLocalIndexTask asyncLoader;
 	private Map<String, IndexItem> filesToUpdate = new HashMap<>();
@@ -318,7 +319,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 								@Override
 								public void onClick(View v) {
 									OsmandApplication app = (OsmandApplication) a.getApplication();
-									if (renameGpxFile(app, f, editText.getText().toString() + ext, callback) != null) {
+									if (renameGpxFile(app, f, editText.getText().toString() + ext, false, callback) != null) {
 										alertDialog.dismiss();
 									}
 								}
@@ -329,12 +330,13 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		}
 	}
 
-	public static File renameGpxFile(OsmandApplication ctx, File source, String newName, RenameCallback callback) {
+	public static File renameGpxFile(OsmandApplication ctx, File source, String newName, boolean dirAllowed, RenameCallback callback) {
 		if (Algorithms.isEmpty(newName)) {
 			Toast.makeText(ctx, R.string.empty_filename, Toast.LENGTH_LONG).show();
 			return null;
 		}
-		if (ILLEGAL_FILE_NAME_CHARACTERS.matcher(newName).find()) {
+		Pattern illegalCharactersPattern = dirAllowed ? ILLEGAL_PATH_NAME_CHARACTERS : ILLEGAL_FILE_NAME_CHARACTERS;
+		if (illegalCharactersPattern.matcher(newName).find()) {
 			Toast.makeText(ctx, R.string.file_name_containes_illegal_char, Toast.LENGTH_LONG).show();
 			return null;
 		}
@@ -1051,11 +1053,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			}
 			String sz = "";
 			if (size > 0) {
-				if (size > 1 << 20) {
-					sz = DownloadActivity.formatGb.format(new Object[]{(float) size / (1 << 20)});
-				} else {
-					sz = DownloadActivity.formatMb.format(new Object[]{(float) size / (1 << 10)});
-				}
+				sz = AndroidUtils.formatSize(v.getContext(), size * 1024l);
 			}
 			sizeView.setText(sz);
 			sizeView.setVisibility(View.VISIBLE);
@@ -1172,11 +1170,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					if (builder.length() > 0) {
 						builder.append(" • ");
 					}
-					if (child.getSize() > 100) {
-						builder.append(DownloadActivity.formatMb.format(new Object[]{(float) child.getSize() / (1 << 10)}));
-					} else {
-						builder.append(child.getSize()).append(" KB");
-					}
+					builder.append(AndroidUtils.formatSize(ctx, child.getSize() * 1024l));
 				}
 
 				if (!Algorithms.isEmpty(child.getDescription())) {

@@ -62,7 +62,6 @@ import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -72,8 +71,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
-import gnu.trove.iterator.TLongObjectIterator;
-import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 
 import static net.osmand.plus.download.DownloadOsmandIndexesHelper.assetMapping;
@@ -736,13 +733,7 @@ public class ResourceManager {
 						resource.setUseForPublicTransport(true);
 					}
 					if (mapReader.containsPoiData()) {
-						try {
-							RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$
-							amenityRepositories.put(f.getName(), new AmenityIndexRepositoryBinary(new BinaryMapIndexReader(raf, mapReader)));
-						} catch (IOException e) {
-							log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
-							warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
-						}
+						amenityRepositories.put(f.getName(), new AmenityIndexRepositoryBinary(resource));
 					}
 				}
 			} catch (SQLiteException e) {

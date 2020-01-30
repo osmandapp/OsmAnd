@@ -4,7 +4,9 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import net.osmand.AndroidUtils;
 import net.osmand.osm.io.NetworkUtils;
+import net.osmand.plus.BuildConfig;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 
@@ -109,11 +112,18 @@ public class ContributionVersionActivity extends OsmandListActivity {
 			}
 		} else if(operationId == INSTALL_BUILD){
 			if(currentSelectedBuild != null){
-				Intent intent = new Intent(Intent.ACTION_VIEW);
-				intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); 
-	            intent.setDataAndType(Uri.fromFile(pathToDownload), "application/vnd.android.package-archive");
+				Intent intent;
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+					Uri apkUri = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", pathToDownload);
+					intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
+					intent.setData(apkUri);
+				} else {
+					intent = new Intent(Intent.ACTION_VIEW);
+					intent.setDataAndType(Uri.fromFile(pathToDownload), "application/vnd.android.package-archive");
+				}
+				intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 				startActivityForResult(intent, ACTIVITY_TO_INSTALL);
-	            updateInstalledApp(false, currentSelectedBuild.date);
+				updateInstalledApp(false, currentSelectedBuild.date);
 			}
 		}
 	}
@@ -247,20 +257,23 @@ public class ContributionVersionActivity extends OsmandListActivity {
 			OsmAndBuild build = getItem(position);
 			TextView tagView = (TextView) row.findViewById(R.id.download_tag);
 			tagView.setText(build.tag);
-			
-			TextView description = (TextView) row.findViewById(R.id.download_descr);
-			StringBuilder format = new StringBuilder();
-			format.append(AndroidUtils.formatDateTime(getMyApplication(), build.date.getTime()))/*.append(" : ").append(build.size).append(" MB")*/;
-			description.setText(format.toString());
 
-			int color = getResources().getColor(R.color.color_unknown);
-			if(currentInstalledDate != null){
-				if(currentInstalledDate.before(build.date)){
-					color = getResources().getColor(R.color.color_update);
+
+			if (build.date != null) {
+				TextView description = (TextView) row.findViewById(R.id.download_descr);
+				StringBuilder format = new StringBuilder();
+				format.append(AndroidUtils.formatDateTime(getMyApplication(), build.date.getTime()))/*.append(" : ").append(build.size).append(" MB")*/;
+				description.setText(format.toString());
+				int color = getResources().getColor(R.color.color_unknown);
+				if (currentInstalledDate != null) {
+					if (currentInstalledDate.before(build.date)) {
+						color = getResources().getColor(R.color.color_update);
+					}
 				}
+				description.setTextColor(color);
+				tagView.setTextColor(color);
 			}
-			description.setTextColor(color);
-			tagView.setTextColor(color);
+
 			return row;
 		}
 		

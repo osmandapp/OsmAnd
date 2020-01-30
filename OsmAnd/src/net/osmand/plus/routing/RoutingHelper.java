@@ -8,6 +8,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.NavigationService;
+import net.osmand.plus.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -38,6 +39,7 @@ public class RoutingHelper {
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(RoutingHelper.class);
 
 	private static final float POSITION_TOLERANCE = 60;
+	private static final int CACHE_RADIUS = 100000;
 
 	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
 	private List<WeakReference<IRoutingDataUpdateListener>> updateListeners = new LinkedList<>();
@@ -95,11 +97,19 @@ public class RoutingHelper {
 	public RoutingHelper(OsmandApplication context){
 		this.app = context;
 		settings = context.getSettings();
-		voiceRouter = new VoiceRouter(this, settings);
+		voiceRouter = new VoiceRouter(this);
 		provider = new RouteProvider();
 		transportRoutingHelper = context.getTransportRoutingHelper();
 		transportRoutingHelper.setRoutingHelper(this);
 		setAppMode(settings.APPLICATION_MODE.get());
+
+		OsmAndAppCustomizationListener customizationListener = new OsmAndAppCustomizationListener() {
+			@Override
+			public void onOsmAndSettingsCustomized() {
+				settings = app.getSettings();
+			}
+		};
+		app.getAppCustomization().addListener(customizationListener);
 	}
 
 	public TransportRoutingHelper getTransportRoutingHelper() {
@@ -164,6 +174,7 @@ public class RoutingHelper {
 	}
 
 	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, List<LatLon> intermediatePoints, Location currentLocation){
+		checkAndUpdateStartLocation(currentLocation);
 		RouteCalculationResult previousRoute = route;
 		clearCurrentRoute(finalLocation, intermediatePoints);
 		// to update route
@@ -249,6 +260,21 @@ public class RoutingHelper {
 
 	public LatLon getFinalLocation() {
 		return finalLocation;
+	}
+	public void checkAndUpdateStartLocation(Location nextStartLocation) {
+		if (nextStartLocation != null) {
+			checkAndUpdateStartLocation(new LatLon(nextStartLocation.getLatitude(), nextStartLocation.getLongitude()));
+		}
+	}
+
+	public void checkAndUpdateStartLocation(LatLon newStartLocation) {
+		if (newStartLocation != null) {
+			LatLon lastStartLocation = app.getSettings().getLastStartPoint();
+			if (lastStartLocation == null || MapUtils.getDistance(newStartLocation, lastStartLocation) > CACHE_RADIUS) {
+				app.getMapViewTrackingUtilities().detectDrivingRegion(newStartLocation);
+				app.getSettings().setLastStartPoint(newStartLocation);
+			}
+		}
 	}
 
 	public List<LatLon> getIntermediatePoints() {
@@ -825,22 +851,22 @@ public class RoutingHelper {
 //		return false;
 //	}
 
-	public synchronized String getCurrentName(TurnType[] next){
-		NextDirectionInfo n = getNextRouteDirectionInfo(new NextDirectionInfo(), true);
+	public synchronized String getCurrentName(TurnType[] next, NextDirectionInfo n){
 		Location l = lastFixedLocation;
 		float speed = 0;
 		if(l != null && l.hasSpeed()) {
 			speed = l.getSpeed();
+		}
+		if(next != null) {
+			next[0] = n.directionInfo.getTurnType();
 		}
 		if(n.distanceTo > 0  && n.directionInfo != null && !n.directionInfo.getTurnType().isSkipToSpeak() &&
 				voiceRouter.isDistanceLess(speed, n.distanceTo, voiceRouter.PREPARE_DISTANCE * 0.75f, 0f)) {
 			String nm = n.directionInfo.getStreetName();
 			String rf = n.directionInfo.getRef();
 			String dn = n.directionInfo.getDestinationName();
-			if(next != null) {
-				next[0] = n.directionInfo.getTurnType();
-			}
-			return formatStreetName(nm, rf, dn, "»");
+
+			return formatStreetName(nm, null, dn, "»");
 		}
 		RouteSegmentResult rs = getCurrentSegmentResult();
 		if(rs != null) {
@@ -864,10 +890,10 @@ public class RoutingHelper {
 
 	private String getRouteSegmentStreetName(RouteSegmentResult rs) {
 		String nm = rs.getObject().getName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get());
-		String rf = rs.getObject().getRef(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rs.isForwardDirection());
+//		String rf = rs.getObject().getRef(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rs.isForwardDirection());
 		String dn = rs.getObject().getDestinationName(settings.MAP_PREFERRED_LOCALE.get(),
 				settings.MAP_TRANSLITERATE_NAMES.get(), rs.isForwardDirection());
-		return formatStreetName(nm, rf, dn, "»");
+		return formatStreetName(nm, null, dn, "»");
 	}
 
 	public RouteSegmentResult getCurrentSegmentResult() {
@@ -1073,8 +1099,8 @@ public class RoutingHelper {
 			RouteRecalculationThread newThread = new RouteRecalculationThread(
 					"Calculating route", params, paramsChanged); //$NON-NLS-1$
 			currentRunningJob = newThread;
+			startProgress(params);
 			if (updateProgress) {
-				startProgress(params);
 				updateProgress(params);
 			}
 			if (prevRunningJob != null) {
@@ -1163,6 +1189,10 @@ public class RoutingHelper {
 
 	public boolean isPublicTransportMode() {
 		return mode.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT);
+	}
+
+	public boolean isOsmandRouting() {
+		return mode.getRouteService() == RouteService.OSMAND;
 	}
 
 	public boolean isRouteBeingCalculated() {

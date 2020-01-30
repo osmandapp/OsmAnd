@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
@@ -311,11 +312,7 @@ public class MapDataMenuController extends MenuController {
 			}
 			StringBuilder sizeStr = new StringBuilder();
 			if (localIndexInfo.getSize() >= 0) {
-				if (localIndexInfo.getSize() > 100) {
-					sizeStr.append(DownloadActivity.formatMb.format(new Object[]{(float) localIndexInfo.getSize() / (1 << 10)}));
-				} else {
-					sizeStr.append(localIndexInfo.getSize()).append(" KB");
-				}
+				sizeStr.append(AndroidUtils.formatSize(mapActivity, localIndexInfo.getSize() * 1024l));
 			}
 			if (backuped) {
 				if (sizeStr.length() > 0) {

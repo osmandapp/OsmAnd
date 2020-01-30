@@ -11289,10 +11289,10 @@ public final class OsmandOdb {
    *
    * <pre>
    * coordinates can take much space 4*4*count of data blocks=
-   *   required sint32 left = 1; // delta encoded
-   *   required sint32 right = 2; // delta encoded
-   *   required sint32 top = 3; // delta encoded
-   *   required sint32 bottom = 4; // delta encoded
+   *	required sint32 left = 1; // delta encoded
+   *	required sint32 right = 2; // delta encoded
+   *	required sint32 top = 3; // delta encoded
+   *	required sint32 bottom = 4; // delta encoded
    * </pre>
    */
   public static final class MapDataBlock extends
@@ -11642,10 +11642,10 @@ public final class OsmandOdb {
      *
      * <pre>
      * coordinates can take much space 4*4*count of data blocks=
-     *   required sint32 left = 1; // delta encoded
-     *   required sint32 right = 2; // delta encoded
-     *   required sint32 top = 3; // delta encoded
-     *   required sint32 bottom = 4; // delta encoded
+     *	required sint32 left = 1; // delta encoded
+     *	required sint32 right = 2; // delta encoded
+     *	required sint32 top = 3; // delta encoded
+     *	required sint32 bottom = 4; // delta encoded
      * </pre>
      */
     public static final class Builder extends
@@ -12387,6 +12387,24 @@ public final class OsmandOdb {
      */
     com.google.protobuf.ByteString getTypes();
 
+    // optional bytes labelcoordinates = 8;
+    /**
+     * <code>optional bytes labelcoordinates = 8;</code>
+     *
+     * <pre>
+     * pair x,y (sint32) of delta encoded to center of &lt;coordinates&gt; 31th zoom
+     * </pre>
+     */
+    boolean hasLabelcoordinates();
+    /**
+     * <code>optional bytes labelcoordinates = 8;</code>
+     *
+     * <pre>
+     * pair x,y (sint32) of delta encoded to center of &lt;coordinates&gt; 31th zoom
+     * </pre>
+     */
+    com.google.protobuf.ByteString getLabelcoordinates();
+
     // optional bytes stringNames = 10;
     /**
      * <code>optional bytes stringNames = 10;</code>
@@ -12512,18 +12530,23 @@ public final class OsmandOdb {
               types_ = input.readBytes();
               break;
             }
-            case 82: {
+            case 66: {
               bitField0_ |= 0x00000010;
+              labelcoordinates_ = input.readBytes();
+              break;
+            }
+            case 82: {
+              bitField0_ |= 0x00000020;
               stringNames_ = input.readBytes();
               break;
             }
             case 96: {
-              bitField0_ |= 0x00000020;
+              bitField0_ |= 0x00000040;
               id_ = input.readSInt64();
               break;
             }
             case 122: {
-              bitField0_ |= 0x00000040;
+              bitField0_ |= 0x00000080;
               rasterBytes_ = input.readBytes();
               break;
             }
@@ -12685,6 +12708,30 @@ public final class OsmandOdb {
       return types_;
     }
 
+    // optional bytes labelcoordinates = 8;
+    public static final int LABELCOORDINATES_FIELD_NUMBER = 8;
+    private com.google.protobuf.ByteString labelcoordinates_;
+    /**
+     * <code>optional bytes labelcoordinates = 8;</code>
+     *
+     * <pre>
+     * pair x,y (sint32) of delta encoded to center of &lt;coordinates&gt; 31th zoom
+     * </pre>
+     */
+    public boolean hasLabelcoordinates() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional bytes labelcoordinates = 8;</code>
+     *
+     * <pre>
+     * pair x,y (sint32) of delta encoded to center of &lt;coordinates&gt; 31th zoom
+     * </pre>
+     */
+    public com.google.protobuf.ByteString getLabelcoordinates() {
+      return labelcoordinates_;
+    }
+
     // optional bytes stringNames = 10;
     public static final int STRINGNAMES_FIELD_NUMBER = 10;
     private com.google.protobuf.ByteString stringNames_;
@@ -12696,7 +12743,7 @@ public final class OsmandOdb {
      * </pre>
      */
     public boolean hasStringNames() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
      * <code>optional bytes stringNames = 10;</code>
@@ -12720,7 +12767,7 @@ public final class OsmandOdb {
      * </pre>
      */
     public boolean hasId() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
      * <code>required sint64 id = 12;</code>
@@ -12740,7 +12787,7 @@ public final class OsmandOdb {
      * <code>optional bytes rasterBytes = 15;</code>
      */
     public boolean hasRasterBytes() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
      * <code>optional bytes rasterBytes = 15;</code>
@@ -12755,6 +12802,7 @@ public final class OsmandOdb {
       polygonInnerCoordinates_ = java.util.Collections.emptyList();
       additionalTypes_ = com.google.protobuf.ByteString.EMPTY;
       types_ = com.google.protobuf.ByteString.EMPTY;
+      labelcoordinates_ = com.google.protobuf.ByteString.EMPTY;
       stringNames_ = com.google.protobuf.ByteString.EMPTY;
       id_ = 0L;
       rasterBytes_ = com.google.protobuf.ByteString.EMPTY;
@@ -12795,12 +12843,15 @@ public final class OsmandOdb {
         output.writeBytes(7, types_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeBytes(10, stringNames_);
+        output.writeBytes(8, labelcoordinates_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeSInt64(12, id_);
+        output.writeBytes(10, stringNames_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeSInt64(12, id_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeBytes(15, rasterBytes_);
       }
       getUnknownFields().writeTo(output);
@@ -12839,13 +12890,17 @@ public final class OsmandOdb {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(10, stringNames_);
+          .computeBytesSize(8, labelcoordinates_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeSInt64Size(12, id_);
+          .computeBytesSize(10, stringNames_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt64Size(12, id_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(15, rasterBytes_);
       }
@@ -12975,12 +13030,14 @@ public final class OsmandOdb {
         bitField0_ = (bitField0_ & ~0x00000008);
         types_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000010);
-        stringNames_ = com.google.protobuf.ByteString.EMPTY;
+        labelcoordinates_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000020);
-        id_ = 0L;
+        stringNames_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000040);
-        rasterBytes_ = com.google.protobuf.ByteString.EMPTY;
+        id_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000080);
+        rasterBytes_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
 
@@ -13033,13 +13090,17 @@ public final class OsmandOdb {
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.stringNames_ = stringNames_;
+        result.labelcoordinates_ = labelcoordinates_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.id_ = id_;
+        result.stringNames_ = stringNames_;
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000040;
+        }
+        result.id_ = id_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000080;
         }
         result.rasterBytes_ = rasterBytes_;
         result.bitField0_ = to_bitField0_;
@@ -13079,6 +13140,9 @@ public final class OsmandOdb {
         }
         if (other.hasTypes()) {
           setTypes(other.getTypes());
+        }
+        if (other.hasLabelcoordinates()) {
+          setLabelcoordinates(other.getLabelcoordinates());
         }
         if (other.hasStringNames()) {
           setStringNames(other.getStringNames());
@@ -13396,6 +13460,58 @@ public final class OsmandOdb {
         return this;
       }
 
+      // optional bytes labelcoordinates = 8;
+      private com.google.protobuf.ByteString labelcoordinates_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes labelcoordinates = 8;</code>
+       *
+       * <pre>
+       * pair x,y (sint32) of delta encoded to center of &lt;coordinates&gt; 31th zoom
+       * </pre>
+       */
+      public boolean hasLabelcoordinates() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional bytes labelcoordinates = 8;</code>
+       *
+       * <pre>
+       * pair x,y (sint32) of delta encoded to center of &lt;coordinates&gt; 31th zoom
+       * </pre>
+       */
+      public com.google.protobuf.ByteString getLabelcoordinates() {
+        return labelcoordinates_;
+      }
+      /**
+       * <code>optional bytes labelcoordinates = 8;</code>
+       *
+       * <pre>
+       * pair x,y (sint32) of delta encoded to center of &lt;coordinates&gt; 31th zoom
+       * </pre>
+       */
+      public Builder setLabelcoordinates(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        labelcoordinates_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bytes labelcoordinates = 8;</code>
+       *
+       * <pre>
+       * pair x,y (sint32) of delta encoded to center of &lt;coordinates&gt; 31th zoom
+       * </pre>
+       */
+      public Builder clearLabelcoordinates() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        labelcoordinates_ = getDefaultInstance().getLabelcoordinates();
+        onChanged();
+        return this;
+      }
+
       // optional bytes stringNames = 10;
       private com.google.protobuf.ByteString stringNames_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -13406,7 +13522,7 @@ public final class OsmandOdb {
        * </pre>
        */
       public boolean hasStringNames() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
        * <code>optional bytes stringNames = 10;</code>
@@ -13429,7 +13545,7 @@ public final class OsmandOdb {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000020;
+  bitField0_ |= 0x00000040;
         stringNames_ = value;
         onChanged();
         return this;
@@ -13442,7 +13558,7 @@ public final class OsmandOdb {
        * </pre>
        */
       public Builder clearStringNames() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         stringNames_ = getDefaultInstance().getStringNames();
         onChanged();
         return this;
@@ -13458,7 +13574,7 @@ public final class OsmandOdb {
        * </pre>
        */
       public boolean hasId() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
        * <code>required sint64 id = 12;</code>
@@ -13478,7 +13594,7 @@ public final class OsmandOdb {
        * </pre>
        */
       public Builder setId(long value) {
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000080;
         id_ = value;
         onChanged();
         return this;
@@ -13491,7 +13607,7 @@ public final class OsmandOdb {
        * </pre>
        */
       public Builder clearId() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000080);
         id_ = 0L;
         onChanged();
         return this;
@@ -13503,7 +13619,7 @@ public final class OsmandOdb {
        * <code>optional bytes rasterBytes = 15;</code>
        */
       public boolean hasRasterBytes() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
        * <code>optional bytes rasterBytes = 15;</code>
@@ -13518,7 +13634,7 @@ public final class OsmandOdb {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000080;
+  bitField0_ |= 0x00000100;
         rasterBytes_ = value;
         onChanged();
         return this;
@@ -13527,7 +13643,7 @@ public final class OsmandOdb {
        * <code>optional bytes rasterBytes = 15;</code>
        */
       public Builder clearRasterBytes() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000100);
         rasterBytes_ = getDefaultInstance().getRasterBytes();
         onChanged();
         return this;
@@ -35734,7 +35850,10 @@ public final class OsmandOdb {
      * <code>repeated uint64 routesIds = 22;</code>
      *
      * <pre>
-     * ids of routes that contain this stop
+     * ids of [routes] that contain this stop
+     * - length and values correspond to [routes] array
+     * - old version (&lt; 08/2019) files don't have them
+     * - default algorithm makes them sorted 
      * </pre>
      */
     java.util.List<java.lang.Long> getRoutesIdsList();
@@ -35742,7 +35861,10 @@ public final class OsmandOdb {
      * <code>repeated uint64 routesIds = 22;</code>
      *
      * <pre>
-     * ids of routes that contain this stop
+     * ids of [routes] that contain this stop
+     * - length and values correspond to [routes] array
+     * - old version (&lt; 08/2019) files don't have them
+     * - default algorithm makes them sorted 
      * </pre>
      */
     int getRoutesIdsCount();
@@ -35750,7 +35872,10 @@ public final class OsmandOdb {
      * <code>repeated uint64 routesIds = 22;</code>
      *
      * <pre>
-     * ids of routes that contain this stop
+     * ids of [routes] that contain this stop
+     * - length and values correspond to [routes] array
+     * - old version (&lt; 08/2019) files don't have them
+     * - default algorithm makes them sorted 
      * </pre>
      */
     long getRoutesIds(int index);
@@ -36222,7 +36347,10 @@ public final class OsmandOdb {
      * <code>repeated uint64 routesIds = 22;</code>
      *
      * <pre>
-     * ids of routes that contain this stop
+     * ids of [routes] that contain this stop
+     * - length and values correspond to [routes] array
+     * - old version (&lt; 08/2019) files don't have them
+     * - default algorithm makes them sorted 
      * </pre>
      */
     public java.util.List<java.lang.Long>
@@ -36233,7 +36361,10 @@ public final class OsmandOdb {
      * <code>repeated uint64 routesIds = 22;</code>
      *
      * <pre>
-     * ids of routes that contain this stop
+     * ids of [routes] that contain this stop
+     * - length and values correspond to [routes] array
+     * - old version (&lt; 08/2019) files don't have them
+     * - default algorithm makes them sorted 
      * </pre>
      */
     public int getRoutesIdsCount() {
@@ -36243,7 +36374,10 @@ public final class OsmandOdb {
      * <code>repeated uint64 routesIds = 22;</code>
      *
      * <pre>
-     * ids of routes that contain this stop
+     * ids of [routes] that contain this stop
+     * - length and values correspond to [routes] array
+     * - old version (&lt; 08/2019) files don't have them
+     * - default algorithm makes them sorted 
      * </pre>
      */
     public long getRoutesIds(int index) {
@@ -37497,7 +37631,10 @@ public final class OsmandOdb {
        * <code>repeated uint64 routesIds = 22;</code>
        *
        * <pre>
-       * ids of routes that contain this stop
+       * ids of [routes] that contain this stop
+       * - length and values correspond to [routes] array
+       * - old version (&lt; 08/2019) files don't have them
+       * - default algorithm makes them sorted 
        * </pre>
        */
       public java.util.List<java.lang.Long>
@@ -37508,7 +37645,10 @@ public final class OsmandOdb {
        * <code>repeated uint64 routesIds = 22;</code>
        *
        * <pre>
-       * ids of routes that contain this stop
+       * ids of [routes] that contain this stop
+       * - length and values correspond to [routes] array
+       * - old version (&lt; 08/2019) files don't have them
+       * - default algorithm makes them sorted 
        * </pre>
        */
       public int getRoutesIdsCount() {
@@ -37518,7 +37658,10 @@ public final class OsmandOdb {
        * <code>repeated uint64 routesIds = 22;</code>
        *
        * <pre>
-       * ids of routes that contain this stop
+       * ids of [routes] that contain this stop
+       * - length and values correspond to [routes] array
+       * - old version (&lt; 08/2019) files don't have them
+       * - default algorithm makes them sorted 
        * </pre>
        */
       public long getRoutesIds(int index) {
@@ -37528,7 +37671,10 @@ public final class OsmandOdb {
        * <code>repeated uint64 routesIds = 22;</code>
        *
        * <pre>
-       * ids of routes that contain this stop
+       * ids of [routes] that contain this stop
+       * - length and values correspond to [routes] array
+       * - old version (&lt; 08/2019) files don't have them
+       * - default algorithm makes them sorted 
        * </pre>
        */
       public Builder setRoutesIds(
@@ -37542,7 +37688,10 @@ public final class OsmandOdb {
        * <code>repeated uint64 routesIds = 22;</code>
        *
        * <pre>
-       * ids of routes that contain this stop
+       * ids of [routes] that contain this stop
+       * - length and values correspond to [routes] array
+       * - old version (&lt; 08/2019) files don't have them
+       * - default algorithm makes them sorted 
        * </pre>
        */
       public Builder addRoutesIds(long value) {
@@ -37555,7 +37704,10 @@ public final class OsmandOdb {
        * <code>repeated uint64 routesIds = 22;</code>
        *
        * <pre>
-       * ids of routes that contain this stop
+       * ids of [routes] that contain this stop
+       * - length and values correspond to [routes] array
+       * - old version (&lt; 08/2019) files don't have them
+       * - default algorithm makes them sorted 
        * </pre>
        */
       public Builder addAllRoutesIds(
@@ -37569,7 +37721,10 @@ public final class OsmandOdb {
        * <code>repeated uint64 routesIds = 22;</code>
        *
        * <pre>
-       * ids of routes that contain this stop
+       * ids of [routes] that contain this stop
+       * - length and values correspond to [routes] array
+       * - old version (&lt; 08/2019) files don't have them
+       * - default algorithm makes them sorted 
        * </pre>
        */
       public Builder clearRoutesIds() {
@@ -46879,7 +47034,7 @@ public final class OsmandOdb {
      * <pre>
      * id calculated
      * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-     * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+     * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
      * </pre>
      */
     java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiSubtype> 
@@ -46890,7 +47045,7 @@ public final class OsmandOdb {
      * <pre>
      * id calculated
      * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-     * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+     * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
      * </pre>
      */
     net.osmand.binary.OsmandOdb.OsmAndPoiSubtype getSubtypes(int index);
@@ -46900,7 +47055,7 @@ public final class OsmandOdb {
      * <pre>
      * id calculated
      * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-     * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+     * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
      * </pre>
      */
     int getSubtypesCount();
@@ -46910,7 +47065,7 @@ public final class OsmandOdb {
      * <pre>
      * id calculated
      * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-     * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+     * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
      * </pre>
      */
     java.util.List<? extends net.osmand.binary.OsmandOdb.OsmAndPoiSubtypeOrBuilder> 
@@ -46921,7 +47076,7 @@ public final class OsmandOdb {
      * <pre>
      * id calculated
      * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-     * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+     * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
      * </pre>
      */
     net.osmand.binary.OsmandOdb.OsmAndPoiSubtypeOrBuilder getSubtypesOrBuilder(
@@ -47037,7 +47192,7 @@ public final class OsmandOdb {
      * <pre>
      * id calculated
      * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-     * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+     * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
      * </pre>
      */
     public java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiSubtype> getSubtypesList() {
@@ -47049,7 +47204,7 @@ public final class OsmandOdb {
      * <pre>
      * id calculated
      * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-     * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+     * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
      * </pre>
      */
     public java.util.List<? extends net.osmand.binary.OsmandOdb.OsmAndPoiSubtypeOrBuilder> 
@@ -47062,7 +47217,7 @@ public final class OsmandOdb {
      * <pre>
      * id calculated
      * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-     * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+     * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
      * </pre>
      */
     public int getSubtypesCount() {
@@ -47074,7 +47229,7 @@ public final class OsmandOdb {
      * <pre>
      * id calculated
      * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-     * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+     * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
      * </pre>
      */
     public net.osmand.binary.OsmandOdb.OsmAndPoiSubtype getSubtypes(int index) {
@@ -47086,7 +47241,7 @@ public final class OsmandOdb {
      * <pre>
      * id calculated
      * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-     * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+     * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
      * </pre>
      */
     public net.osmand.binary.OsmandOdb.OsmAndPoiSubtypeOrBuilder getSubtypesOrBuilder(
@@ -47383,7 +47538,7 @@ public final class OsmandOdb {
        * <pre>
        * id calculated
        * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
        * </pre>
        */
       public java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiSubtype> getSubtypesList() {
@@ -47399,7 +47554,7 @@ public final class OsmandOdb {
        * <pre>
        * id calculated
        * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
        * </pre>
        */
       public int getSubtypesCount() {
@@ -47415,7 +47570,7 @@ public final class OsmandOdb {
        * <pre>
        * id calculated
        * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
        * </pre>
        */
       public net.osmand.binary.OsmandOdb.OsmAndPoiSubtype getSubtypes(int index) {
@@ -47431,7 +47586,7 @@ public final class OsmandOdb {
        * <pre>
        * id calculated
        * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
        * </pre>
        */
       public Builder setSubtypes(
@@ -47454,7 +47609,7 @@ public final class OsmandOdb {
        * <pre>
        * id calculated
        * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
        * </pre>
        */
       public Builder setSubtypes(
@@ -47474,7 +47629,7 @@ public final class OsmandOdb {
        * <pre>
        * id calculated
        * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
        * </pre>
        */
       public Builder addSubtypes(net.osmand.binary.OsmandOdb.OsmAndPoiSubtype value) {
@@ -47496,7 +47651,7 @@ public final class OsmandOdb {
        * <pre>
        * id calculated
        * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
        * </pre>
        */
       public Builder addSubtypes(
@@ -47519,7 +47674,7 @@ public final class OsmandOdb {
        * <pre>
        * id calculated
        * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
        * </pre>
        */
       public Builder addSubtypes(
@@ -47539,7 +47694,7 @@ public final class OsmandOdb {
        * <pre>
        * id calculated
        * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
        * </pre>
        */
       public Builder addSubtypes(
@@ -47559,7 +47714,7 @@ public final class OsmandOdb {
        * <pre>
        * id calculated
        * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
        * </pre>
        */
       public Builder addAllSubtypes(
@@ -47579,7 +47734,7 @@ public final class OsmandOdb {
        * <pre>
        * id calculated
        * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
        * </pre>
        */
       public Builder clearSubtypes() {
@@ -47598,7 +47753,7 @@ public final class OsmandOdb {
        * <pre>
        * id calculated
        * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
        * </pre>
        */
       public Builder removeSubtypes(int index) {
@@ -47617,7 +47772,7 @@ public final class OsmandOdb {
        * <pre>
        * id calculated
        * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
        * </pre>
        */
       public net.osmand.binary.OsmandOdb.OsmAndPoiSubtype.Builder getSubtypesBuilder(
@@ -47630,7 +47785,7 @@ public final class OsmandOdb {
        * <pre>
        * id calculated
        * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
        * </pre>
        */
       public net.osmand.binary.OsmandOdb.OsmAndPoiSubtypeOrBuilder getSubtypesOrBuilder(
@@ -47646,7 +47801,7 @@ public final class OsmandOdb {
        * <pre>
        * id calculated
        * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
        * </pre>
        */
       public java.util.List<? extends net.osmand.binary.OsmandOdb.OsmAndPoiSubtypeOrBuilder> 
@@ -47663,7 +47818,7 @@ public final class OsmandOdb {
        * <pre>
        * id calculated
        * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
        * </pre>
        */
       public net.osmand.binary.OsmandOdb.OsmAndPoiSubtype.Builder addSubtypesBuilder() {
@@ -47676,7 +47831,7 @@ public final class OsmandOdb {
        * <pre>
        * id calculated
        * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
        * </pre>
        */
       public net.osmand.binary.OsmandOdb.OsmAndPoiSubtype.Builder addSubtypesBuilder(
@@ -47690,7 +47845,7 @@ public final class OsmandOdb {
        * <pre>
        * id calculated
        * 1. if subtypes_order &lt;= 31 : ( (subtypeValue &lt;&lt; 5) | subtypes_order) &lt;&lt; 1
-       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1    
+       * 2. if subtypes_order &gt; 31  : ( (subtypeValue &lt;&lt; 16) | subtypes_order) &lt;&lt; 1 + 1	 
        * </pre>
        */
       public java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiSubtype.Builder> 
@@ -59017,10 +59172,10 @@ public final class OsmandOdb {
        *
        * <pre>
        * coordinates can take much space 4*4*count of data blocks=
-       *   required sint32 left = 1; // delta encoded
-       *   required sint32 right = 2; // delta encoded
-       *   required sint32 top = 3; // delta encoded
-       *   required sint32 bottom = 4; // delta encoded
+       *	required sint32 left = 1; // delta encoded
+       *	required sint32 right = 2; // delta encoded
+       *	required sint32 top = 3; // delta encoded
+       *	required sint32 bottom = 4; // delta encoded
        * </pre>
        */
       boolean hasIdTable();
@@ -59029,10 +59184,10 @@ public final class OsmandOdb {
        *
        * <pre>
        * coordinates can take much space 4*4*count of data blocks=
-       *   required sint32 left = 1; // delta encoded
-       *   required sint32 right = 2; // delta encoded
-       *   required sint32 top = 3; // delta encoded
-       *   required sint32 bottom = 4; // delta encoded
+       *	required sint32 left = 1; // delta encoded
+       *	required sint32 right = 2; // delta encoded
+       *	required sint32 top = 3; // delta encoded
+       *	required sint32 bottom = 4; // delta encoded
        * </pre>
        */
       net.osmand.binary.OsmandOdb.IdTable getIdTable();
@@ -59041,10 +59196,10 @@ public final class OsmandOdb {
        *
        * <pre>
        * coordinates can take much space 4*4*count of data blocks=
-       *   required sint32 left = 1; // delta encoded
-       *   required sint32 right = 2; // delta encoded
-       *   required sint32 top = 3; // delta encoded
-       *   required sint32 bottom = 4; // delta encoded
+       *	required sint32 left = 1; // delta encoded
+       *	required sint32 right = 2; // delta encoded
+       *	required sint32 top = 3; // delta encoded
+       *	required sint32 bottom = 4; // delta encoded
        * </pre>
        */
       net.osmand.binary.OsmandOdb.IdTableOrBuilder getIdTableOrBuilder();
@@ -59260,10 +59415,10 @@ public final class OsmandOdb {
        *
        * <pre>
        * coordinates can take much space 4*4*count of data blocks=
-       *   required sint32 left = 1; // delta encoded
-       *   required sint32 right = 2; // delta encoded
-       *   required sint32 top = 3; // delta encoded
-       *   required sint32 bottom = 4; // delta encoded
+       *	required sint32 left = 1; // delta encoded
+       *	required sint32 right = 2; // delta encoded
+       *	required sint32 top = 3; // delta encoded
+       *	required sint32 bottom = 4; // delta encoded
        * </pre>
        */
       public boolean hasIdTable() {
@@ -59274,10 +59429,10 @@ public final class OsmandOdb {
        *
        * <pre>
        * coordinates can take much space 4*4*count of data blocks=
-       *   required sint32 left = 1; // delta encoded
-       *   required sint32 right = 2; // delta encoded
-       *   required sint32 top = 3; // delta encoded
-       *   required sint32 bottom = 4; // delta encoded
+       *	required sint32 left = 1; // delta encoded
+       *	required sint32 right = 2; // delta encoded
+       *	required sint32 top = 3; // delta encoded
+       *	required sint32 bottom = 4; // delta encoded
        * </pre>
        */
       public net.osmand.binary.OsmandOdb.IdTable getIdTable() {
@@ -59288,10 +59443,10 @@ public final class OsmandOdb {
        *
        * <pre>
        * coordinates can take much space 4*4*count of data blocks=
-       *   required sint32 left = 1; // delta encoded
-       *   required sint32 right = 2; // delta encoded
-       *   required sint32 top = 3; // delta encoded
-       *   required sint32 bottom = 4; // delta encoded
+       *	required sint32 left = 1; // delta encoded
+       *	required sint32 right = 2; // delta encoded
+       *	required sint32 top = 3; // delta encoded
+       *	required sint32 bottom = 4; // delta encoded
        * </pre>
        */
       public net.osmand.binary.OsmandOdb.IdTableOrBuilder getIdTableOrBuilder() {
@@ -59787,10 +59942,10 @@ public final class OsmandOdb {
          *
          * <pre>
          * coordinates can take much space 4*4*count of data blocks=
-         *   required sint32 left = 1; // delta encoded
-         *   required sint32 right = 2; // delta encoded
-         *   required sint32 top = 3; // delta encoded
-         *   required sint32 bottom = 4; // delta encoded
+         *	required sint32 left = 1; // delta encoded
+         *	required sint32 right = 2; // delta encoded
+         *	required sint32 top = 3; // delta encoded
+         *	required sint32 bottom = 4; // delta encoded
          * </pre>
          */
         public boolean hasIdTable() {
@@ -59801,10 +59956,10 @@ public final class OsmandOdb {
          *
          * <pre>
          * coordinates can take much space 4*4*count of data blocks=
-         *   required sint32 left = 1; // delta encoded
-         *   required sint32 right = 2; // delta encoded
-         *   required sint32 top = 3; // delta encoded
-         *   required sint32 bottom = 4; // delta encoded
+         *	required sint32 left = 1; // delta encoded
+         *	required sint32 right = 2; // delta encoded
+         *	required sint32 top = 3; // delta encoded
+         *	required sint32 bottom = 4; // delta encoded
          * </pre>
          */
         public net.osmand.binary.OsmandOdb.IdTable getIdTable() {
@@ -59819,10 +59974,10 @@ public final class OsmandOdb {
          *
          * <pre>
          * coordinates can take much space 4*4*count of data blocks=
-         *   required sint32 left = 1; // delta encoded
-         *   required sint32 right = 2; // delta encoded
-         *   required sint32 top = 3; // delta encoded
-         *   required sint32 bottom = 4; // delta encoded
+         *	required sint32 left = 1; // delta encoded
+         *	required sint32 right = 2; // delta encoded
+         *	required sint32 top = 3; // delta encoded
+         *	required sint32 bottom = 4; // delta encoded
          * </pre>
          */
         public Builder setIdTable(net.osmand.binary.OsmandOdb.IdTable value) {
@@ -59843,10 +59998,10 @@ public final class OsmandOdb {
          *
          * <pre>
          * coordinates can take much space 4*4*count of data blocks=
-         *   required sint32 left = 1; // delta encoded
-         *   required sint32 right = 2; // delta encoded
-         *   required sint32 top = 3; // delta encoded
-         *   required sint32 bottom = 4; // delta encoded
+         *	required sint32 left = 1; // delta encoded
+         *	required sint32 right = 2; // delta encoded
+         *	required sint32 top = 3; // delta encoded
+         *	required sint32 bottom = 4; // delta encoded
          * </pre>
          */
         public Builder setIdTable(
@@ -59865,10 +60020,10 @@ public final class OsmandOdb {
          *
          * <pre>
          * coordinates can take much space 4*4*count of data blocks=
-         *   required sint32 left = 1; // delta encoded
-         *   required sint32 right = 2; // delta encoded
-         *   required sint32 top = 3; // delta encoded
-         *   required sint32 bottom = 4; // delta encoded
+         *	required sint32 left = 1; // delta encoded
+         *	required sint32 right = 2; // delta encoded
+         *	required sint32 top = 3; // delta encoded
+         *	required sint32 bottom = 4; // delta encoded
          * </pre>
          */
         public Builder mergeIdTable(net.osmand.binary.OsmandOdb.IdTable value) {
@@ -59892,10 +60047,10 @@ public final class OsmandOdb {
          *
          * <pre>
          * coordinates can take much space 4*4*count of data blocks=
-         *   required sint32 left = 1; // delta encoded
-         *   required sint32 right = 2; // delta encoded
-         *   required sint32 top = 3; // delta encoded
-         *   required sint32 bottom = 4; // delta encoded
+         *	required sint32 left = 1; // delta encoded
+         *	required sint32 right = 2; // delta encoded
+         *	required sint32 top = 3; // delta encoded
+         *	required sint32 bottom = 4; // delta encoded
          * </pre>
          */
         public Builder clearIdTable() {
@@ -59913,10 +60068,10 @@ public final class OsmandOdb {
          *
          * <pre>
          * coordinates can take much space 4*4*count of data blocks=
-         *   required sint32 left = 1; // delta encoded
-         *   required sint32 right = 2; // delta encoded
-         *   required sint32 top = 3; // delta encoded
-         *   required sint32 bottom = 4; // delta encoded
+         *	required sint32 left = 1; // delta encoded
+         *	required sint32 right = 2; // delta encoded
+         *	required sint32 top = 3; // delta encoded
+         *	required sint32 bottom = 4; // delta encoded
          * </pre>
          */
         public net.osmand.binary.OsmandOdb.IdTable.Builder getIdTableBuilder() {
@@ -59929,10 +60084,10 @@ public final class OsmandOdb {
          *
          * <pre>
          * coordinates can take much space 4*4*count of data blocks=
-         *   required sint32 left = 1; // delta encoded
-         *   required sint32 right = 2; // delta encoded
-         *   required sint32 top = 3; // delta encoded
-         *   required sint32 bottom = 4; // delta encoded
+         *	required sint32 left = 1; // delta encoded
+         *	required sint32 right = 2; // delta encoded
+         *	required sint32 top = 3; // delta encoded
+         *	required sint32 bottom = 4; // delta encoded
          * </pre>
          */
         public net.osmand.binary.OsmandOdb.IdTableOrBuilder getIdTableOrBuilder() {
@@ -59947,10 +60102,10 @@ public final class OsmandOdb {
          *
          * <pre>
          * coordinates can take much space 4*4*count of data blocks=
-         *   required sint32 left = 1; // delta encoded
-         *   required sint32 right = 2; // delta encoded
-         *   required sint32 top = 3; // delta encoded
-         *   required sint32 bottom = 4; // delta encoded
+         *	required sint32 left = 1; // delta encoded
+         *	required sint32 right = 2; // delta encoded
+         *	required sint32 top = 3; // delta encoded
+         *	required sint32 bottom = 4; // delta encoded
          * </pre>
          */
         private com.google.protobuf.SingleFieldBuilder<
@@ -62753,157 +62908,157 @@ public final class OsmandOdb {
       "OBF.OsmAndMapIndex.MapDataBox\"v\n\014MapData",
       "Block\022\016\n\006baseId\030\n \001(\004\022(\n\013dataObjects\030\014 \003" +
       "(\0132\023.OsmAnd.OBF.MapData\022,\n\013stringTable\030\017" +
-      " \001(\0132\027.OsmAnd.OBF.StringTable\"\266\001\n\007MapDat" +
+      " \001(\0132\027.OsmAnd.OBF.StringTable\"\320\001\n\007MapDat" +
       "a\022\023\n\013coordinates\030\001 \001(\014\022\027\n\017areaCoordinate" +
       "s\030\002 \001(\014\022\037\n\027polygonInnerCoordinates\030\004 \003(\014" +
       "\022\027\n\017additionalTypes\030\006 \001(\014\022\r\n\005types\030\007 \002(\014" +
-      "\022\023\n\013stringNames\030\n \001(\014\022\n\n\002id\030\014 \002(\022\022\023\n\013ras" +
-      "terBytes\030\017 \001(\014\"\364\003\n\022OsmAndAddressIndex\022\014\n" +
-      "\004name\030\001 \002(\t\022\017\n\007name_en\030\002 \001(\t\022-\n\nboundari" +
-      "es\030\003 \001(\0132\031.OsmAnd.OBF.OsmAndTileBox\0223\n\022a",
-      "ttributeTagsTable\030\004 \001(\0132\027.OsmAnd.OBF.Str" +
-      "ingTable\022:\n\006cities\030\006 \003(\0132*.OsmAnd.OBF.Os" +
-      "mAndAddressIndex.CitiesIndex\0229\n\tnameInde" +
-      "x\030\007 \001(\0132&.OsmAnd.OBF.OsmAndAddressNameIn" +
-      "dexData\032\343\001\n\013CitiesIndex\022C\n\004type\030\002 \002(\01625." +
-      "OsmAnd.OBF.OsmAndAddressIndex.CitiesInde" +
-      "x.CitiesType\022%\n\006cities\030\005 \003(\0132\025.OsmAnd.OB" +
-      "F.CityIndex\022*\n\006blocks\030\007 \003(\0132\032.OsmAnd.OBF" +
-      ".CityBlockIndex\"<\n\nCitiesType\022\021\n\rCitiesO" +
-      "rTowns\020\001\022\r\n\tPostcodes\020\002\022\014\n\010Villages\020\003\"\342\001",
-      "\n\032OsmAndAddressNameIndexData\022-\n\005table\030\004 " +
-      "\002(\0132\036.OsmAnd.OBF.IndexedStringTable\022I\n\004a" +
-      "tom\030\007 \003(\0132;.OsmAnd.OBF.OsmAndAddressName" +
-      "IndexData.AddressNameIndexData\032J\n\024Addres" +
-      "sNameIndexData\0222\n\004atom\030\004 \003(\0132$.OsmAnd.OB" +
-      "F.AddressNameIndexDataAtom\"\204\001\n\030AddressNa" +
-      "meIndexDataAtom\022\014\n\004name\030\001 \001(\t\022\016\n\006nameEn\030" +
-      "\002 \001(\t\022\014\n\004type\030\003 \002(\r\022\024\n\014shiftToIndex\030\005 \003(" +
-      "\005\022\030\n\020shiftToCityIndex\030\006 \003(\005\022\014\n\004xy16\030\007 \003(" +
-      "\r\"\260\001\n\tCityIndex\022\021\n\tcity_type\030\001 \001(\r\022\014\n\004na",
-      "me\030\002 \002(\t\022\017\n\007name_en\030\003 \001(\t\022\n\n\002id\030\004 \001(\004\022\t\n" +
-      "\001x\030\005 \002(\r\022\t\n\001y\030\006 \002(\r\022\027\n\017attributeTagIds\030\007" +
-      " \003(\r\022\027\n\017attributeValues\030\010 \003(\t\022\035\n\025shiftTo" +
-      "CityBlockIndex\030\n \001(\007\"\202\001\n\016CityBlockIndex\022" +
-      "\030\n\020shiftToCityIndex\030\004 \001(\007\022,\n\tbuildings\030\n" +
-      " \003(\0132\031.OsmAnd.OBF.BuildingIndex\022(\n\007stree" +
-      "ts\030\014 \003(\0132\027.OsmAnd.OBF.StreetIndex\"\345\001\n\013St" +
-      "reetIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007name_en\030\002 \001(\t" +
-      "\022\t\n\001x\030\003 \002(\021\022\t\n\001y\030\004 \002(\021\0225\n\rintersections\030" +
-      "\005 \003(\0132\036.OsmAnd.OBF.StreetIntersection\022\n\n",
-      "\002id\030\006 \001(\004\022\027\n\017attributeTagIds\030\007 \003(\r\022\027\n\017at" +
-      "tributeValues\030\010 \003(\t\022,\n\tbuildings\030\014 \003(\0132\031" +
-      ".OsmAnd.OBF.BuildingIndex\"\221\001\n\022StreetInte" +
-      "rsection\022\014\n\004name\030\002 \002(\t\022\017\n\007name_en\030\003 \001(\t\022" +
-      "\024\n\014intersectedX\030\004 \002(\021\022\024\n\014intersectedY\030\005 " +
-      "\002(\021\022\027\n\017attributeTagIds\030\007 \003(\r\022\027\n\017attribut" +
-      "eValues\030\010 \003(\t\"\230\002\n\rBuildingIndex\022\014\n\004name\030" +
-      "\001 \002(\t\022\017\n\007name_en\030\002 \001(\t\022\r\n\005name2\030\003 \001(\t\022\020\n" +
-      "\010name_en2\030\004 \001(\t\022\025\n\rinterpolation\030\005 \001(\021\022\t" +
-      "\n\001x\030\007 \002(\021\022\t\n\001y\030\010 \002(\021\022\n\n\002x2\030\t \001(\021\022\n\n\002y2\030\n",
-      " \001(\021\022\n\n\002id\030\r \001(\004\022\020\n\010postcode\030\016 \001(\t\022\027\n\017at" +
-      "tributeTagIds\030\017 \003(\r\022\027\n\017attributeValues\030\020" +
-      " \003(\t\022\030\n\020attributeTagIds2\030\021 \003(\r\022\030\n\020attrib" +
-      "uteValues2\030\022 \003(\t\"=\n\017TransportRoutes\022*\n\006r" +
-      "outes\030\006 \003(\0132\032.OsmAnd.OBF.TransportRoute\"" +
-      "\300\002\n\016TransportRoute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030\003" +
-      " \001(\r\022\020\n\010operator\030\004 \001(\r\022\013\n\003ref\030\005 \001(\t\022\014\n\004n" +
-      "ame\030\006 \001(\r\022\017\n\007name_en\030\007 \001(\r\022\020\n\010distance\030\010" +
-      " \001(\r\022\r\n\005color\030\t \001(\r\0223\n\013directStops\030\017 \003(\013" +
-      "2\036.OsmAnd.OBF.TransportRouteStop\0224\n\014reve",
-      "rseStops\030\020 \003(\0132\036.OsmAnd.OBF.TransportRou" +
-      "teStop\022\020\n\010geometry\030\021 \001(\014\0228\n\014scheduleTrip" +
-      "\030\022 \003(\0132\".OsmAnd.OBF.TransportRouteSchedu" +
-      "le\"\244\001\n\026TransportRouteSchedule\022\030\n\020avgStop" +
-      "Intervals\030\001 \001(\014\022\030\n\020avgWaitIntervals\030\002 \001(" +
-      "\014\022\025\n\rtripIntervals\030\003 \001(\014\022?\n\nexceptions\030\010" +
-      " \003(\0132+.OsmAnd.OBF.TransportRouteSchedule" +
-      "Exception\"\313\001\n\037TransportRouteScheduleExce" +
-      "ption\022\023\n\013tripIndexes\030\001 \003(\r\022\023\n\013stopIndexe" +
-      "s\030\002 \003(\r\022\021\n\tavailable\030\003 \001(\010\022\024\n\014delayArriv",
-      "al\030\005 \003(\r\022\031\n\021deltaWaitInterval\030\006 \003(\005\022\034\n\024d" +
-      "ayOfWeekRestriction\030\007 \003(\r\022\034\n\024dayOfYearRe" +
-      "striction\030\010 \003(\r\"W\n\022TransportRouteStop\022\n\n" +
-      "\002id\030\001 \002(\022\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\014\n\004nam" +
-      "e\030\006 \002(\r\022\017\n\007name_en\030\007 \001(\r\"\332\001\n\rTransportSt" +
-      "op\022\n\n\002dx\030\001 \002(\021\022\n\n\002dy\030\002 \002(\021\022\n\n\002id\030\005 \002(\022\022\014" +
-      "\n\004name\030\006 \002(\r\022\017\n\007name_en\030\007 \001(\r\022\033\n\023additio" +
-      "nalNamePairs\030\010 \001(\014\022,\n\005exits\030\t \003(\0132\035.OsmA" +
-      "nd.OBF.TransportStopExit\022\016\n\006routes\030\020 \003(\r" +
-      "\022\030\n\020deletedRoutesIds\030\024 \003(\004\022\021\n\troutesIds\030",
-      "\026 \003(\004\"8\n\021TransportStopExit\022\n\n\002dx\030\001 \002(\021\022\n" +
-      "\n\002dy\030\002 \002(\021\022\013\n\003ref\030\003 \002(\r\"\272\001\n\022TransportSto" +
-      "psTree\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003t" +
-      "op\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\0220\n\010subtrees\030\007 \003" +
-      "(\0132\036.OsmAnd.OBF.TransportStopsTree\022(\n\005le" +
-      "afs\030\010 \003(\0132\031.OsmAnd.OBF.TransportStop\022\016\n\006" +
-      "baseId\030\020 \001(\004\"\256\001\n\024OsmAndTransportIndex\022\014\n" +
-      "\004name\030\001 \001(\t\022+\n\006routes\030\003 \001(\0132\033.OsmAnd.OBF" +
-      ".TransportRoutes\022-\n\005stops\030\006 \001(\0132\036.OsmAnd" +
-      ".OBF.TransportStopsTree\022,\n\013stringTable\030\t",
-      " \002(\0132\027.OsmAnd.OBF.StringTable\"\312\002\n\016OsmAnd" +
-      "PoiIndex\022\014\n\004name\030\001 \002(\t\022-\n\nboundaries\030\002 \002" +
-      "(\0132\031.OsmAnd.OBF.OsmAndTileBox\0228\n\017categor" +
-      "iesTable\030\003 \003(\0132\037.OsmAnd.OBF.OsmAndCatego" +
-      "ryTable\0221\n\tnameIndex\030\004 \001(\0132\036.OsmAnd.OBF." +
-      "OsmAndPoiNameIndex\0226\n\rsubtypesTable\030\005 \001(" +
-      "\0132\037.OsmAnd.OBF.OsmAndSubtypesTable\022\'\n\005bo" +
-      "xes\030\006 \003(\0132\030.OsmAnd.OBF.OsmAndPoiBox\022-\n\007p" +
-      "oiData\030\t \003(\0132\034.OsmAnd.OBF.OsmAndPoiBoxDa" +
-      "ta\"\331\001\n\022OsmAndPoiNameIndex\022-\n\005table\030\003 \002(\013",
-      "2\036.OsmAnd.OBF.IndexedStringTable\022C\n\004data" +
-      "\030\005 \003(\01325.OsmAnd.OBF.OsmAndPoiNameIndex.O" +
-      "smAndPoiNameIndexData\032O\n\026OsmAndPoiNameIn" +
-      "dexData\0225\n\005atoms\030\003 \003(\0132&.OsmAnd.OBF.OsmA" +
-      "ndPoiNameIndexDataAtom\"Q\n\032OsmAndPoiNameI" +
-      "ndexDataAtom\022\014\n\004zoom\030\002 \001(\r\022\t\n\001x\030\003 \001(\r\022\t\n" +
-      "\001y\030\004 \001(\r\022\017\n\007shiftTo\030\016 \001(\007\">\n\023OsmAndCateg" +
-      "oryTable\022\020\n\010category\030\001 \002(\t\022\025\n\rsubcategor" +
-      "ies\030\003 \003(\t\"E\n\023OsmAndSubtypesTable\022.\n\010subt" +
-      "ypes\030\004 \003(\0132\034.OsmAnd.OBF.OsmAndPoiSubtype",
-      "\"\205\001\n\020OsmAndPoiSubtype\022\014\n\004name\030\001 \002(\t\022\017\n\007t" +
-      "agname\030\002 \001(\t\022\016\n\006isText\030\003 \002(\010\022\021\n\tfrequenc" +
-      "y\030\005 \001(\r\022\031\n\021subtypeValuesSize\030\006 \001(\r\022\024\n\014su" +
-      "btypeValue\030\010 \003(\t\"\255\001\n\014OsmAndPoiBox\022\014\n\004zoo" +
-      "m\030\001 \002(\r\022\014\n\004left\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\0223\n\nca" +
-      "tegories\030\004 \001(\0132\037.OsmAnd.OBF.OsmAndPoiCat" +
-      "egories\022*\n\010subBoxes\030\n \003(\0132\030.OsmAnd.OBF.O" +
-      "smAndPoiBox\022\023\n\013shiftToData\030\016 \001(\007\"@\n\023OsmA" +
-      "ndPoiCategories\022\022\n\ncategories\030\003 \003(\r\022\025\n\rs" +
-      "ubcategories\030\005 \003(\r\"i\n\020OsmAndPoiBoxData\022\014",
-      "\n\004zoom\030\001 \001(\r\022\t\n\001x\030\002 \001(\r\022\t\n\001y\030\003 \001(\r\0221\n\007po" +
-      "iData\030\005 \003(\0132 .OsmAnd.OBF.OsmAndPoiBoxDat" +
-      "aAtom\"\360\001\n\024OsmAndPoiBoxDataAtom\022\n\n\002dx\030\002 \002" +
-      "(\021\022\n\n\002dy\030\003 \002(\021\022\022\n\ncategories\030\004 \003(\r\022\025\n\rsu" +
-      "bcategories\030\005 \003(\r\022\014\n\004name\030\006 \001(\t\022\016\n\006nameE" +
-      "n\030\007 \001(\t\022\n\n\002id\030\010 \001(\004\022\024\n\014openingHours\030\n \001(" +
-      "\t\022\014\n\004site\030\013 \001(\t\022\r\n\005phone\030\014 \001(\t\022\014\n\004note\030\r" +
-      " \001(\t\022\026\n\016textCategories\030\016 \003(\r\022\022\n\ntextValu" +
-      "es\030\017 \003(\t\"\032\n\007IdTable\022\017\n\007routeId\030\001 \003(\022\"F\n\017" +
-      "RestrictionData\022\014\n\004type\030\001 \002(\005\022\014\n\004from\030\002 ",
-      "\002(\005\022\n\n\002to\030\003 \002(\005\022\013\n\003via\030\004 \001(\005\"x\n\tRouteDat" +
-      "a\022\016\n\006points\030\001 \002(\014\022\022\n\npointTypes\030\004 \001(\014\022\022\n" +
-      "\npointNames\030\005 \001(\014\022\r\n\005types\030\007 \002(\014\022\017\n\007rout" +
-      "eId\030\014 \002(\005\022\023\n\013stringNames\030\016 \001(\014\"\304\005\n\022OsmAn" +
-      "dRoutingIndex\022\014\n\004name\030\001 \002(\t\022?\n\005rules\030\002 \003" +
-      "(\01320.OsmAnd.OBF.OsmAndRoutingIndex.Route" +
-      "EncodingRule\022>\n\trootBoxes\030\003 \003(\0132+.OsmAnd" +
-      ".OBF.OsmAndRoutingIndex.RouteDataBox\022A\n\014" +
-      "basemapBoxes\030\004 \003(\0132+.OsmAnd.OBF.OsmAndRo" +
-      "utingIndex.RouteDataBox\022=\n\006blocks\030\005 \003(\0132",
-      "-.OsmAnd.OBF.OsmAndRoutingIndex.RouteDat" +
-      "aBlock\032;\n\021RouteEncodingRule\022\013\n\003tag\030\003 \002(\t" +
-      "\022\r\n\005value\030\005 \002(\t\022\n\n\002id\030\007 \001(\r\032\231\001\n\014RouteDat" +
-      "aBox\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top" +
-      "\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022\023\n\013shiftToData\030\005 " +
-      "\001(\007\022:\n\005boxes\030\007 \003(\0132+.OsmAnd.OBF.OsmAndRo" +
-      "utingIndex.RouteDataBox\032\303\001\n\016RouteDataBlo" +
-      "ck\022$\n\007idTable\030\005 \001(\0132\023.OsmAnd.OBF.IdTable" +
-      "\022*\n\013dataObjects\030\006 \003(\0132\025.OsmAnd.OBF.Route" +
-      "Data\0221\n\014restrictions\030\007 \003(\0132\033.OsmAnd.OBF.",
-      "RestrictionData\022,\n\013stringTable\030\010 \001(\0132\027.O" +
-      "smAnd.OBF.StringTableB\036\n\021net.osmand.bina" +
-      "ryB\tOsmandOdb"
+      "\022\030\n\020labelcoordinates\030\010 \001(\014\022\023\n\013stringName" +
+      "s\030\n \001(\014\022\n\n\002id\030\014 \002(\022\022\023\n\013rasterBytes\030\017 \001(\014" +
+      "\"\364\003\n\022OsmAndAddressIndex\022\014\n\004name\030\001 \002(\t\022\017\n" +
+      "\007name_en\030\002 \001(\t\022-\n\nboundaries\030\003 \001(\0132\031.Osm",
+      "And.OBF.OsmAndTileBox\0223\n\022attributeTagsTa" +
+      "ble\030\004 \001(\0132\027.OsmAnd.OBF.StringTable\022:\n\006ci" +
+      "ties\030\006 \003(\0132*.OsmAnd.OBF.OsmAndAddressInd" +
+      "ex.CitiesIndex\0229\n\tnameIndex\030\007 \001(\0132&.OsmA" +
+      "nd.OBF.OsmAndAddressNameIndexData\032\343\001\n\013Ci" +
+      "tiesIndex\022C\n\004type\030\002 \002(\01625.OsmAnd.OBF.Osm" +
+      "AndAddressIndex.CitiesIndex.CitiesType\022%" +
+      "\n\006cities\030\005 \003(\0132\025.OsmAnd.OBF.CityIndex\022*\n" +
+      "\006blocks\030\007 \003(\0132\032.OsmAnd.OBF.CityBlockInde" +
+      "x\"<\n\nCitiesType\022\021\n\rCitiesOrTowns\020\001\022\r\n\tPo",
+      "stcodes\020\002\022\014\n\010Villages\020\003\"\342\001\n\032OsmAndAddres" +
+      "sNameIndexData\022-\n\005table\030\004 \002(\0132\036.OsmAnd.O" +
+      "BF.IndexedStringTable\022I\n\004atom\030\007 \003(\0132;.Os" +
+      "mAnd.OBF.OsmAndAddressNameIndexData.Addr" +
+      "essNameIndexData\032J\n\024AddressNameIndexData" +
+      "\0222\n\004atom\030\004 \003(\0132$.OsmAnd.OBF.AddressNameI" +
+      "ndexDataAtom\"\204\001\n\030AddressNameIndexDataAto" +
+      "m\022\014\n\004name\030\001 \001(\t\022\016\n\006nameEn\030\002 \001(\t\022\014\n\004type\030" +
+      "\003 \002(\r\022\024\n\014shiftToIndex\030\005 \003(\005\022\030\n\020shiftToCi" +
+      "tyIndex\030\006 \003(\005\022\014\n\004xy16\030\007 \003(\r\"\260\001\n\tCityInde",
+      "x\022\021\n\tcity_type\030\001 \001(\r\022\014\n\004name\030\002 \002(\t\022\017\n\007na" +
+      "me_en\030\003 \001(\t\022\n\n\002id\030\004 \001(\004\022\t\n\001x\030\005 \002(\r\022\t\n\001y\030" +
+      "\006 \002(\r\022\027\n\017attributeTagIds\030\007 \003(\r\022\027\n\017attrib" +
+      "uteValues\030\010 \003(\t\022\035\n\025shiftToCityBlockIndex" +
+      "\030\n \001(\007\"\202\001\n\016CityBlockIndex\022\030\n\020shiftToCity" +
+      "Index\030\004 \001(\007\022,\n\tbuildings\030\n \003(\0132\031.OsmAnd." +
+      "OBF.BuildingIndex\022(\n\007streets\030\014 \003(\0132\027.Osm" +
+      "And.OBF.StreetIndex\"\345\001\n\013StreetIndex\022\014\n\004n" +
+      "ame\030\001 \002(\t\022\017\n\007name_en\030\002 \001(\t\022\t\n\001x\030\003 \002(\021\022\t\n" +
+      "\001y\030\004 \002(\021\0225\n\rintersections\030\005 \003(\0132\036.OsmAnd",
+      ".OBF.StreetIntersection\022\n\n\002id\030\006 \001(\004\022\027\n\017a" +
+      "ttributeTagIds\030\007 \003(\r\022\027\n\017attributeValues\030" +
+      "\010 \003(\t\022,\n\tbuildings\030\014 \003(\0132\031.OsmAnd.OBF.Bu" +
+      "ildingIndex\"\221\001\n\022StreetIntersection\022\014\n\004na" +
+      "me\030\002 \002(\t\022\017\n\007name_en\030\003 \001(\t\022\024\n\014intersected" +
+      "X\030\004 \002(\021\022\024\n\014intersectedY\030\005 \002(\021\022\027\n\017attribu" +
+      "teTagIds\030\007 \003(\r\022\027\n\017attributeValues\030\010 \003(\t\"" +
+      "\230\002\n\rBuildingIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007name_" +
+      "en\030\002 \001(\t\022\r\n\005name2\030\003 \001(\t\022\020\n\010name_en2\030\004 \001(" +
+      "\t\022\025\n\rinterpolation\030\005 \001(\021\022\t\n\001x\030\007 \002(\021\022\t\n\001y",
+      "\030\010 \002(\021\022\n\n\002x2\030\t \001(\021\022\n\n\002y2\030\n \001(\021\022\n\n\002id\030\r \001" +
+      "(\004\022\020\n\010postcode\030\016 \001(\t\022\027\n\017attributeTagIds\030" +
+      "\017 \003(\r\022\027\n\017attributeValues\030\020 \003(\t\022\030\n\020attrib" +
+      "uteTagIds2\030\021 \003(\r\022\030\n\020attributeValues2\030\022 \003" +
+      "(\t\"=\n\017TransportRoutes\022*\n\006routes\030\006 \003(\0132\032." +
+      "OsmAnd.OBF.TransportRoute\"\300\002\n\016TransportR" +
+      "oute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030\003 \001(\r\022\020\n\010operat" +
+      "or\030\004 \001(\r\022\013\n\003ref\030\005 \001(\t\022\014\n\004name\030\006 \001(\r\022\017\n\007n" +
+      "ame_en\030\007 \001(\r\022\020\n\010distance\030\010 \001(\r\022\r\n\005color\030" +
+      "\t \001(\r\0223\n\013directStops\030\017 \003(\0132\036.OsmAnd.OBF.",
+      "TransportRouteStop\0224\n\014reverseStops\030\020 \003(\013" +
+      "2\036.OsmAnd.OBF.TransportRouteStop\022\020\n\010geom" +
+      "etry\030\021 \001(\014\0228\n\014scheduleTrip\030\022 \003(\0132\".OsmAn" +
+      "d.OBF.TransportRouteSchedule\"\244\001\n\026Transpo" +
+      "rtRouteSchedule\022\030\n\020avgStopIntervals\030\001 \001(" +
+      "\014\022\030\n\020avgWaitIntervals\030\002 \001(\014\022\025\n\rtripInter" +
+      "vals\030\003 \001(\014\022?\n\nexceptions\030\010 \003(\0132+.OsmAnd." +
+      "OBF.TransportRouteScheduleException\"\313\001\n\037" +
+      "TransportRouteScheduleException\022\023\n\013tripI" +
+      "ndexes\030\001 \003(\r\022\023\n\013stopIndexes\030\002 \003(\r\022\021\n\tava",
+      "ilable\030\003 \001(\010\022\024\n\014delayArrival\030\005 \003(\r\022\031\n\021de" +
+      "ltaWaitInterval\030\006 \003(\005\022\034\n\024dayOfWeekRestri" +
+      "ction\030\007 \003(\r\022\034\n\024dayOfYearRestriction\030\010 \003(" +
+      "\r\"W\n\022TransportRouteStop\022\n\n\002id\030\001 \002(\022\022\n\n\002d" +
+      "x\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\014\n\004name\030\006 \002(\r\022\017\n\007nam" +
+      "e_en\030\007 \001(\r\"\332\001\n\rTransportStop\022\n\n\002dx\030\001 \002(\021" +
+      "\022\n\n\002dy\030\002 \002(\021\022\n\n\002id\030\005 \002(\022\022\014\n\004name\030\006 \002(\r\022\017" +
+      "\n\007name_en\030\007 \001(\r\022\033\n\023additionalNamePairs\030\010" +
+      " \001(\014\022,\n\005exits\030\t \003(\0132\035.OsmAnd.OBF.Transpo" +
+      "rtStopExit\022\016\n\006routes\030\020 \003(\r\022\030\n\020deletedRou",
+      "tesIds\030\024 \003(\004\022\021\n\troutesIds\030\026 \003(\004\"8\n\021Trans" +
+      "portStopExit\022\n\n\002dx\030\001 \002(\021\022\n\n\002dy\030\002 \002(\021\022\013\n\003" +
+      "ref\030\003 \002(\r\"\272\001\n\022TransportStopsTree\022\014\n\004left" +
+      "\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bo" +
+      "ttom\030\004 \002(\021\0220\n\010subtrees\030\007 \003(\0132\036.OsmAnd.OB" +
+      "F.TransportStopsTree\022(\n\005leafs\030\010 \003(\0132\031.Os" +
+      "mAnd.OBF.TransportStop\022\016\n\006baseId\030\020 \001(\004\"\256" +
+      "\001\n\024OsmAndTransportIndex\022\014\n\004name\030\001 \001(\t\022+\n" +
+      "\006routes\030\003 \001(\0132\033.OsmAnd.OBF.TransportRout" +
+      "es\022-\n\005stops\030\006 \001(\0132\036.OsmAnd.OBF.Transport",
+      "StopsTree\022,\n\013stringTable\030\t \002(\0132\027.OsmAnd." +
+      "OBF.StringTable\"\312\002\n\016OsmAndPoiIndex\022\014\n\004na" +
+      "me\030\001 \002(\t\022-\n\nboundaries\030\002 \002(\0132\031.OsmAnd.OB" +
+      "F.OsmAndTileBox\0228\n\017categoriesTable\030\003 \003(\013" +
+      "2\037.OsmAnd.OBF.OsmAndCategoryTable\0221\n\tnam" +
+      "eIndex\030\004 \001(\0132\036.OsmAnd.OBF.OsmAndPoiNameI" +
+      "ndex\0226\n\rsubtypesTable\030\005 \001(\0132\037.OsmAnd.OBF" +
+      ".OsmAndSubtypesTable\022\'\n\005boxes\030\006 \003(\0132\030.Os" +
+      "mAnd.OBF.OsmAndPoiBox\022-\n\007poiData\030\t \003(\0132\034" +
+      ".OsmAnd.OBF.OsmAndPoiBoxData\"\331\001\n\022OsmAndP",
+      "oiNameIndex\022-\n\005table\030\003 \002(\0132\036.OsmAnd.OBF." +
+      "IndexedStringTable\022C\n\004data\030\005 \003(\01325.OsmAn" +
+      "d.OBF.OsmAndPoiNameIndex.OsmAndPoiNameIn" +
+      "dexData\032O\n\026OsmAndPoiNameIndexData\0225\n\005ato" +
+      "ms\030\003 \003(\0132&.OsmAnd.OBF.OsmAndPoiNameIndex" +
+      "DataAtom\"Q\n\032OsmAndPoiNameIndexDataAtom\022\014" +
+      "\n\004zoom\030\002 \001(\r\022\t\n\001x\030\003 \001(\r\022\t\n\001y\030\004 \001(\r\022\017\n\007sh" +
+      "iftTo\030\016 \001(\007\">\n\023OsmAndCategoryTable\022\020\n\010ca" +
+      "tegory\030\001 \002(\t\022\025\n\rsubcategories\030\003 \003(\t\"E\n\023O" +
+      "smAndSubtypesTable\022.\n\010subtypes\030\004 \003(\0132\034.O",
+      "smAnd.OBF.OsmAndPoiSubtype\"\205\001\n\020OsmAndPoi" +
+      "Subtype\022\014\n\004name\030\001 \002(\t\022\017\n\007tagname\030\002 \001(\t\022\016" +
+      "\n\006isText\030\003 \002(\010\022\021\n\tfrequency\030\005 \001(\r\022\031\n\021sub" +
+      "typeValuesSize\030\006 \001(\r\022\024\n\014subtypeValue\030\010 \003" +
+      "(\t\"\255\001\n\014OsmAndPoiBox\022\014\n\004zoom\030\001 \002(\r\022\014\n\004lef" +
+      "t\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\0223\n\ncategories\030\004 \001(\013" +
+      "2\037.OsmAnd.OBF.OsmAndPoiCategories\022*\n\010sub" +
+      "Boxes\030\n \003(\0132\030.OsmAnd.OBF.OsmAndPoiBox\022\023\n" +
+      "\013shiftToData\030\016 \001(\007\"@\n\023OsmAndPoiCategorie" +
+      "s\022\022\n\ncategories\030\003 \003(\r\022\025\n\rsubcategories\030\005",
+      " \003(\r\"i\n\020OsmAndPoiBoxData\022\014\n\004zoom\030\001 \001(\r\022\t" +
+      "\n\001x\030\002 \001(\r\022\t\n\001y\030\003 \001(\r\0221\n\007poiData\030\005 \003(\0132 ." +
+      "OsmAnd.OBF.OsmAndPoiBoxDataAtom\"\360\001\n\024OsmA" +
+      "ndPoiBoxDataAtom\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021" +
+      "\022\022\n\ncategories\030\004 \003(\r\022\025\n\rsubcategories\030\005 " +
+      "\003(\r\022\014\n\004name\030\006 \001(\t\022\016\n\006nameEn\030\007 \001(\t\022\n\n\002id\030" +
+      "\010 \001(\004\022\024\n\014openingHours\030\n \001(\t\022\014\n\004site\030\013 \001(" +
+      "\t\022\r\n\005phone\030\014 \001(\t\022\014\n\004note\030\r \001(\t\022\026\n\016textCa" +
+      "tegories\030\016 \003(\r\022\022\n\ntextValues\030\017 \003(\t\"\032\n\007Id" +
+      "Table\022\017\n\007routeId\030\001 \003(\022\"F\n\017RestrictionDat",
+      "a\022\014\n\004type\030\001 \002(\005\022\014\n\004from\030\002 \002(\005\022\n\n\002to\030\003 \002(" +
+      "\005\022\013\n\003via\030\004 \001(\005\"x\n\tRouteData\022\016\n\006points\030\001 " +
+      "\002(\014\022\022\n\npointTypes\030\004 \001(\014\022\022\n\npointNames\030\005 " +
+      "\001(\014\022\r\n\005types\030\007 \002(\014\022\017\n\007routeId\030\014 \002(\005\022\023\n\013s" +
+      "tringNames\030\016 \001(\014\"\304\005\n\022OsmAndRoutingIndex\022" +
+      "\014\n\004name\030\001 \002(\t\022?\n\005rules\030\002 \003(\01320.OsmAnd.OB" +
+      "F.OsmAndRoutingIndex.RouteEncodingRule\022>" +
+      "\n\trootBoxes\030\003 \003(\0132+.OsmAnd.OBF.OsmAndRou" +
+      "tingIndex.RouteDataBox\022A\n\014basemapBoxes\030\004" +
+      " \003(\0132+.OsmAnd.OBF.OsmAndRoutingIndex.Rou",
+      "teDataBox\022=\n\006blocks\030\005 \003(\0132-.OsmAnd.OBF.O" +
+      "smAndRoutingIndex.RouteDataBlock\032;\n\021Rout" +
+      "eEncodingRule\022\013\n\003tag\030\003 \002(\t\022\r\n\005value\030\005 \002(" +
+      "\t\022\n\n\002id\030\007 \001(\r\032\231\001\n\014RouteDataBox\022\014\n\004left\030\001" +
+      " \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bott" +
+      "om\030\004 \002(\021\022\023\n\013shiftToData\030\005 \001(\007\022:\n\005boxes\030\007" +
+      " \003(\0132+.OsmAnd.OBF.OsmAndRoutingIndex.Rou" +
+      "teDataBox\032\303\001\n\016RouteDataBlock\022$\n\007idTable\030" +
+      "\005 \001(\0132\023.OsmAnd.OBF.IdTable\022*\n\013dataObject" +
+      "s\030\006 \003(\0132\025.OsmAnd.OBF.RouteData\0221\n\014restri",
+      "ctions\030\007 \003(\0132\033.OsmAnd.OBF.RestrictionDat" +
+      "a\022,\n\013stringTable\030\010 \001(\0132\027.OsmAnd.OBF.Stri" +
+      "ngTableB\036\n\021net.osmand.binaryB\tOsmandOdb"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -62969,7 +63124,7 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_MapData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_MapData_descriptor,
-              new java.lang.String[] { "Coordinates", "AreaCoordinates", "PolygonInnerCoordinates", "AdditionalTypes", "Types", "StringNames", "Id", "RasterBytes", });
+              new java.lang.String[] { "Coordinates", "AreaCoordinates", "PolygonInnerCoordinates", "AdditionalTypes", "Types", "Labelcoordinates", "StringNames", "Id", "RasterBytes", });
           internal_static_OsmAnd_OBF_OsmAndAddressIndex_descriptor =
             getDescriptor().getMessageTypes().get(7);
           internal_static_OsmAnd_OBF_OsmAndAddressIndex_fieldAccessorTable = new

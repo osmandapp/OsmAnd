@@ -6,9 +6,10 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
@@ -33,6 +34,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SavingTrackHelper.SaveGpxResult;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -43,6 +45,8 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
+
+import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 public class OsmandMonitoringPlugin extends OsmandPlugin {
 	public static final String ID = "osmand.monitoring";
@@ -59,6 +63,19 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		final List<ApplicationMode> am = ApplicationMode.allPossibleValues();
 		ApplicationMode.regWidgetVisibility("monitoring", am.toArray(new ApplicationMode[am.size()]));
 		settings = app.getSettings();
+		pluginPreferences.add(settings.SAVE_TRACK_TO_GPX);
+		pluginPreferences.add(settings.SAVE_TRACK_INTERVAL);
+		pluginPreferences.add(settings.SAVE_TRACK_MIN_DISTANCE);
+		pluginPreferences.add(settings.SAVE_TRACK_PRECISION);
+		pluginPreferences.add(settings.AUTO_SPLIT_RECORDING);
+		pluginPreferences.add(settings.DISABLE_RECORDING_ONCE_APP_KILLED);
+		pluginPreferences.add(settings.SAVE_HEADING_TO_GPX);
+		pluginPreferences.add(settings.SHOW_TRIP_REC_NOTIFICATION);
+		pluginPreferences.add(settings.TRACK_STORAGE_DIRECTORY);
+		pluginPreferences.add(settings.LIVE_MONITORING);
+		pluginPreferences.add(settings.LIVE_MONITORING_URL);
+		pluginPreferences.add(settings.LIVE_MONITORING_INTERVAL);
+		pluginPreferences.add(settings.LIVE_MONITORING_MAX_INTERVAL_TO_SEND);
 	}
 
 	@Override
@@ -143,7 +160,15 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		return SettingsMonitoringActivity.class;
 	}
 
-	
+	@Override
+	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
+		return MonitoringSettingsFragment.class;
+	}
+
+	@Override
+	public String getPrefsDescription() {
+		return app.getString(R.string.monitoring_prefs_descr);
+	}
 
 	/**
 	 * creates (if it wasn't created previously) the control to be added on a MapInfoLayer that shows a monitoring state (recorded/stopped)
@@ -452,24 +477,28 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		Context themedContext = UiUtilities.getThemedContext(uiCtx, nightMode);
 		AlertDialog.Builder dlg = new AlertDialog.Builder(themedContext);
 		dlg.setTitle(title);
-		LinearLayout ll = createIntervalChooseLayout(themedContext, patternMsg, seconds, minutes, choice, v, showTrackSelection, nightMode);
+		LinearLayout ll = createIntervalChooseLayout(app, themedContext, patternMsg, seconds, minutes, choice, v, showTrackSelection, nightMode);
 		dlg.setView(ll);
 		dlg.setPositiveButton(R.string.shared_string_ok, onclick);
 		dlg.setNegativeButton(R.string.shared_string_cancel, null);
 		dlg.show();
 	}
 
-	public static LinearLayout createIntervalChooseLayout(final Context uiCtx,
+	public static LinearLayout createIntervalChooseLayout(final OsmandApplication app,
+	                                                      final Context uiCtx,
 														  final String patternMsg, final int[] seconds,
 														  final int[] minutes, final ValueHolder<Boolean> choice,
 														  final ValueHolder<Integer> v,
 														  final boolean showTrackSelection, boolean nightMode) {
+		int textColorPrimary = ContextCompat.getColor(app, nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
+		int textColorSecondary = ContextCompat.getColor(app, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light);
 		LinearLayout ll = new LinearLayout(uiCtx);
 		final int dp24 = AndroidUtils.dpToPx(uiCtx, 24f);
 		final int dp8 = AndroidUtils.dpToPx(uiCtx, 8f);
 		final TextView tv = new TextView(uiCtx);
 		tv.setPadding(dp24, dp8 * 2, dp24, dp8);
 		tv.setText(String.format(patternMsg, uiCtx.getString(R.string.int_continuosly)));
+		tv.setTextColor(textColorSecondary);
 
 		SeekBar sp = new SeekBar(uiCtx);
 		sp.setPadding(dp24 + dp8, dp8, dp24 + dp8, dp8);
@@ -503,6 +532,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				
 			}
 		});
+		UiUtilities.setupSeekBar(app, sp, nightMode, true);
 		
 		for (int i = 0; i < secondsLength + minutesLength - 1; i++) {
 			if (i < secondsLength) {
@@ -522,12 +552,14 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		ll.addView(tv);
 		ll.addView(sp);
 		if (choice != null) {
-			final CheckBox cb = new CheckBox(uiCtx);
+			final AppCompatCheckBox cb = new AppCompatCheckBox(uiCtx);
 			cb.setText(R.string.shared_string_remember_my_choice);
+			cb.setTextColor(textColorPrimary);
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,
 					LayoutParams.WRAP_CONTENT);
 			lp.setMargins(dp24, dp8, dp24, 0);
 			cb.setLayoutParams(lp);
+			cb.setPadding(dp8, 0, 0, 0);
 			cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 				@Override
@@ -536,11 +568,11 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 				}
 			});
+			UiUtilities.setupCompoundButton(cb, nightMode, PROFILE_DEPENDENT);
 			ll.addView(cb);
 		}
 
 		if (showTrackSelection) {
-			final OsmandApplication app = (OsmandApplication) uiCtx.getApplicationContext();
 			View divider = new View(uiCtx);
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, AndroidUtils.dpToPx(uiCtx, 1f));
 			lp.setMargins(0, dp8 * 2, 0, 0);
@@ -548,12 +580,14 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			divider.setBackgroundColor(uiCtx.getResources().getColor(nightMode ? R.color.divider_color_dark : R.color.divider_color_light));
 			ll.addView(divider);
 
-			final CheckBox cb = new CheckBox(uiCtx);
+			final AppCompatCheckBox cb = new AppCompatCheckBox(uiCtx);
 			cb.setText(R.string.shared_string_show_on_map);
+			cb.setTextColor(textColorPrimary);
 			lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,
 					LayoutParams.WRAP_CONTENT);
 			lp.setMargins(dp24, dp8 * 2, dp24, 0);
 			cb.setLayoutParams(lp);
+			cb.setPadding(dp8, 0, 0, 0);
 			cb.setChecked(app.getSelectedGpxHelper().getSelectedCurrentRecordingTrack() != null);
 			cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
@@ -562,6 +596,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 					app.getSelectedGpxHelper().selectGpxFile(app.getSavingTrackHelper().getCurrentGpx(), isChecked, false);
 				}
 			});
+			UiUtilities.setupCompoundButton(cb, nightMode, PROFILE_DEPENDENT);
 			ll.addView(cb);
 		}
 

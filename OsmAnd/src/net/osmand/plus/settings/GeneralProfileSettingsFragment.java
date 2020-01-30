@@ -5,16 +5,15 @@ import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.support.v7.preference.SwitchPreferenceCompat;
-import android.support.v7.preference.TwoStatePreference;
 import android.support.v7.widget.AppCompatCheckedTextView;
 import android.support.v7.widget.SwitchCompat;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,6 @@ import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
@@ -31,11 +29,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
-import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -72,34 +68,12 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 
 		String prefId = preference.getKey();
 		if (settings.EXTERNAL_INPUT_DEVICE.getId().equals(prefId)) {
-			boolean checked = settings.EXTERNAL_INPUT_DEVICE.get() != OsmandSettings.NO_EXTERNAL_DEVICE;
+			boolean checked = settings.EXTERNAL_INPUT_DEVICE.getModeValue(getSelectedAppMode()) != OsmandSettings.NO_EXTERNAL_DEVICE;
 
 			SwitchCompat switchView = (SwitchCompat) holder.findViewById(R.id.switchWidget);
 			switchView.setOnCheckedChangeListener(null);
 			switchView.setChecked(checked);
 			switchView.setOnCheckedChangeListener(externalInputDeviceListener);
-		}
-
-		OsmandSettings.OsmandPreference osmandPreference = settings.getPreference(prefId);
-		TextView summaryView = (TextView) holder.findViewById(android.R.id.summary);
-		if (osmandPreference instanceof CommonPreference && summaryView != null) {
-			CharSequence summary = null;
-
-			if (preference instanceof TwoStatePreference) {
-				TwoStatePreference statePreference = (TwoStatePreference) preference;
-				summary = statePreference.isChecked() ? statePreference.getSummaryOn() : statePreference.getSummaryOff();
-			}
-			if (TextUtils.isEmpty(summary)) {
-				summary = preference.getSummary();
-			}
-			ApplicationMode selectedMode = getSelectedAppMode();
-			CommonPreference commonPref = (CommonPreference) osmandPreference;
-			if (!commonPref.hasDefaultValueForMode(selectedMode)
-					&& (!commonPref.isSetForMode(selectedMode) || getSelectedAppMode().equals(ApplicationMode.DEFAULT))) {
-				String baseString = getString(R.string.shared_preference) + ": %s";
-				summary = AndroidUtils.getStyledString(baseString, summary, new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), null);
-			}
-			summaryView.setText(summary);
 		}
 	}
 
@@ -139,7 +113,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	}
 
 	private Drawable getRotateMapIcon() {
-		switch (settings.ROTATE_MAP.get()) {
+		switch (settings.ROTATE_MAP.getModeValue(getSelectedAppMode())) {
 			case OsmandSettings.ROTATE_MAP_NONE:
 				return getContentIcon(R.drawable.ic_action_direction_north);
 			case OsmandSettings.ROTATE_MAP_BEARING:
@@ -156,7 +130,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 
 
 	private Drawable getCenterPositionOnMapIcon() {
-		return getContentIcon(settings.CENTER_POSITION_ON_MAP.get() ? R.drawable.ic_action_display_position_center : R.drawable.ic_action_display_position_bottom);
+		return getContentIcon(settings.CENTER_POSITION_ON_MAP.getModeValue(getSelectedAppMode()) ? R.drawable.ic_action_display_position_center : R.drawable.ic_action_display_position_bottom);
 	}
 
 	private void setupMapScreenOrientationPref() {
@@ -167,7 +141,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	}
 
 	private Drawable getMapScreenOrientationIcon() {
-		switch (settings.MAP_SCREEN_ORIENTATION.get()) {
+		switch (settings.MAP_SCREEN_ORIENTATION.getModeValue(getSelectedAppMode())) {
 			case ActivityInfo.SCREEN_ORIENTATION_PORTRAIT:
 				return getContentIcon(R.drawable.ic_action_phone_portrait_orientation);
 			case ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE:
@@ -178,9 +152,10 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	}
 
 	private void setupDrivingRegionPref() {
+		ApplicationMode selectedMode = getSelectedAppMode();
 		Preference defaultDrivingRegion = findPreference(settings.DRIVING_REGION.getId());
 		defaultDrivingRegion.setIcon(getContentIcon(R.drawable.ic_action_car_dark));
-		defaultDrivingRegion.setSummary(getString(settings.DRIVING_REGION_AUTOMATIC.get() ? R.string.driving_region_automatic : settings.DRIVING_REGION.get().name));
+		defaultDrivingRegion.setSummary(getString(settings.DRIVING_REGION_AUTOMATIC.getModeValue(selectedMode) ? R.string.driving_region_automatic : settings.DRIVING_REGION.getModeValue(selectedMode).name));
 	}
 
 	private void setupUnitsOfLengthPref() {
@@ -202,7 +177,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	private void setupCoordinatesFormatPref() {
 		Preference coordinatesFormat = findPreference(settings.COORDINATES_FORMAT.getId());
 		coordinatesFormat.setIcon(getContentIcon(R.drawable.ic_action_coordinates_widget));
-		coordinatesFormat.setSummary(PointDescription.formatToHumanString(app, settings.COORDINATES_FORMAT.get()));
+		coordinatesFormat.setSummary(PointDescription.formatToHumanString(app, settings.COORDINATES_FORMAT.getModeValue(getSelectedAppMode())));
 	}
 
 	private void setupAngularUnitsPref() {
@@ -304,8 +279,9 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		drs.add(null);
 		drs.addAll(Arrays.asList(OsmandSettings.DrivingRegion.values()));
 		int sel = -1;
-		OsmandSettings.DrivingRegion selectedDrivingRegion = settings.DRIVING_REGION.get();
-		if (settings.DRIVING_REGION_AUTOMATIC.get()) {
+		ApplicationMode selectedMode = getSelectedAppMode();
+		OsmandSettings.DrivingRegion selectedDrivingRegion = settings.DRIVING_REGION.getModeValue(selectedMode);
+		if (settings.DRIVING_REGION_AUTOMATIC.getModeValue(selectedMode)) {
 			sel = 0;
 		}
 		for (int i = 1; i < drs.size(); i++) {
@@ -337,6 +313,9 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 							desc.setVisibility(View.GONE);
 						}
 						title.setChecked(position == selected);
+						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+							UiUtilities.setupCompoundButtonDrawable(app, isNightMode(), getActiveProfileColor(), title.getCheckMarkDrawable());
+						}
 						return v;
 					}
 				};
@@ -344,15 +323,16 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		b.setAdapter(singleChoiceAdapter, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				ApplicationMode selectedMode = getSelectedAppMode();
 				if (drs.get(which) == null) {
-					settings.DRIVING_REGION_AUTOMATIC.set(true);
+					settings.DRIVING_REGION_AUTOMATIC.setModeValue(selectedMode, true);
 					MapViewTrackingUtilities mapViewTrackingUtilities = getMyApplication().getMapViewTrackingUtilities();
 					if (mapViewTrackingUtilities != null) {
 						mapViewTrackingUtilities.resetDrivingRegionUpdate();
 					}
 				} else {
-					settings.DRIVING_REGION_AUTOMATIC.set(false);
-					settings.DRIVING_REGION.set(drs.get(which));
+					settings.DRIVING_REGION_AUTOMATIC.setModeValue(selectedMode, false);
+					settings.DRIVING_REGION.setModeValue(selectedMode, drs.get(which));
 				}
 				updateAllSettings();
 			}

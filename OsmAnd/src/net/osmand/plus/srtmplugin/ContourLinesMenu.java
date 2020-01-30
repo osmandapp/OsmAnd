@@ -37,8 +37,11 @@ public class ContourLinesMenu {
 		if (plugin != null && !plugin.isActive() && !plugin.needsInstallation()) {
 			OsmandPlugin.enablePlugin(mapActivity, mapActivity.getMyApplication(), plugin, true);
 		}
+		boolean nightMode = isNightMode(mapActivity.getMyApplication());
 		ContextMenuAdapter adapter = new ContextMenuAdapter();
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
+		adapter.setProfileDependent(true);
+		adapter.setNightMode(nightMode);
 		createLayersItems(adapter, mapActivity);
 		return adapter;
 	}
@@ -83,7 +86,7 @@ public class ContourLinesMenu {
 		final OsmandSettings.CommonPreference<String> colorPref = settings.getCustomRenderProperty(colorSchemeProp.getAttrName());
 
 		final boolean selected = !pref.get().equals(CONTOUR_LINES_DISABLED_VALUE);
-		final int toggleActionStringId = selected ? R.string.shared_string_enabled : R.string.shared_string_disabled;
+		final int toggleActionStringId = selected ? R.string.shared_string_on : R.string.shared_string_off;
 		final int showZoomLevelStringId = R.string.show_from_zoom_level;
 		final int colorSchemeStringId = R.string.srtm_color_scheme;
 
@@ -175,7 +178,7 @@ public class ContourLinesMenu {
 					R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		} else {
 			toggleIconId = R.drawable.ic_action_hide;
-			toggleIconColorId = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
+			toggleIconColorId = ContextMenuItem.INVALID_ID;
 		}
 		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(toggleActionStringId, mapActivity)
@@ -325,6 +328,13 @@ public class ContourLinesMenu {
 				}
 			}
 		}
+	}
+	
+	public static boolean isNightMode(OsmandApplication app) {
+		if (app == null) {
+			return false;
+		}
+		return app.getDaynightHelper().isNightModeForMapControls();
 	}
 
 	public static void closeDashboard(MapActivity mapActivity) {

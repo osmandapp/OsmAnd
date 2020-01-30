@@ -9,7 +9,6 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 
 import java.io.File;
@@ -89,6 +88,12 @@ public class GpxDbHelper {
 		return res;
 	}
 
+	public boolean updateJoinSegments(@NonNull GpxDataItem item,  boolean joinSegments) {
+		boolean res = db.updateJoinSegments(item, joinSegments);
+		putToCache(item);
+		return res;
+	}
+
 	public boolean remove(File file) {
 		boolean res = db.remove(file);
 		itemsCache.remove(file);
@@ -129,7 +134,7 @@ public class GpxDbHelper {
 
 	public GpxDataItem getItem(File file, @Nullable GpxDataItemCallback callback) {
 		GpxDataItem item = itemsCache.get(file);
-		if ((item == null || item.getAnalysis() == null) && !isGpxReading(file)) {
+		if (isAnalyseNeeded(file, item) && !isGpxReading(file)) {
 			readGpxItem(file, item, callback);
 		}
 		return item;
@@ -173,6 +178,13 @@ public class GpxDbHelper {
 		}
 	}
 
+	private boolean isAnalyseNeeded(@NonNull File gpxFile, @Nullable GpxDataItem item) {
+		return item == null
+				|| item.getFileLastModifiedTime() != gpxFile.lastModified()
+				|| item.getAnalysis() == null
+				|| item.getAnalysis().wptCategoryNames == null;
+	}
+
 	@SuppressLint("StaticFieldLeak")
 	private class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 
@@ -184,13 +196,6 @@ public class GpxDbHelper {
 
 		public boolean isReading() {
 			return readingItems.size() > 0 || gpxFile != null;
-		}
-
-		private boolean isAnalyseNeeded(@NonNull File gpxFile, @Nullable GpxDataItem item) {
-			return item == null
-					|| item.getFileLastModifiedTime() != gpxFile.lastModified()
-					|| item.getAnalysis() == null
-					|| item.getAnalysis().wptCategoryNames == null;
 		}
 
 		@Override

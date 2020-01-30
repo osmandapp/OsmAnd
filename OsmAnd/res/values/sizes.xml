@@ -137,6 +137,7 @@
 	<dimen name="map_widget_text_bottom_margin">1sp</dimen>
 	<dimen name="map_widget_text_small_bottom_margin">3sp</dimen>
 	<dimen name="map_widget_icon_margin">2dp</dimen>
+	<dimen name="bottom_sheet_title_big">20sp</dimen>
 
 	<dimen name="dash_margin">2dp</dimen>
 	<dimen name="dash_margin_h">6dp</dimen>
@@ -349,5 +350,7 @@
 
 	<dimen name="setting_profile_item_height">64dp</dimen>
 	<dimen name="setting_profile_item_switch_margin">18dp</dimen>
+	<dimen name="settings_divider_margin_start">72dp</dimen>
+	<dimen name="setting_list_item_large_height">72dp</dimen>
 
 </resources>

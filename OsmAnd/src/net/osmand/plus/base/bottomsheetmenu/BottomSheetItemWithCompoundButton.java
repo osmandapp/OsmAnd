@@ -1,9 +1,11 @@
 package net.osmand.plus.base.bottomsheetmenu;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.LayoutRes;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.CompoundButtonCompat;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +14,14 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 
 public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescription {
 
 	private boolean checked;
 	private ColorStateList buttonTintList;
 	private OnCheckedChangeListener onCheckedChangeListener;
+	@ColorRes private int compoundButtonColorId;
 
 	private CompoundButton compoundButton;
 
@@ -32,6 +36,7 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 											 View.OnClickListener onClickListener,
 											 int position,
 											 Drawable icon,
+											 Drawable background,
 											 String title,
 											 @ColorRes int titleColorId,
 											 CharSequence description,
@@ -40,7 +45,8 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 											 boolean descriptionLinksClickable,
 											 boolean checked,
 											 ColorStateList buttonTintList,
-											 OnCheckedChangeListener onCheckedChangeListener) {
+											 OnCheckedChangeListener onCheckedChangeListener,
+											 @ColorRes int compoundButtonColorId) {
 		super(customView,
 				layoutId,
 				tag,
@@ -48,6 +54,7 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 				onClickListener,
 				position,
 				icon,
+				background,
 				title,
 				titleColorId,
 				description,
@@ -57,6 +64,7 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 		this.checked = checked;
 		this.buttonTintList = buttonTintList;
 		this.onCheckedChangeListener = onCheckedChangeListener;
+		this.compoundButtonColorId = compoundButtonColorId;
 	}
 
 	public void setChecked(boolean checked) {
@@ -65,15 +73,23 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 			compoundButton.setChecked(checked);
 		}
 	}
+	
+	public void setCompoundButtonColorId(@ColorRes int compoundButtonColorId) {
+		this.compoundButtonColorId = compoundButtonColorId;
+	}
 
 	@Override
-	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
-		super.inflate(app, container, nightMode);
+	public void inflate(Context context, ViewGroup container, boolean nightMode) {
+		super.inflate(context, container, nightMode);
 		compoundButton = (CompoundButton) view.findViewById(R.id.compound_button);
 		if (compoundButton != null) {
 			compoundButton.setChecked(checked);
-			CompoundButtonCompat.setButtonTintList(compoundButton, buttonTintList);
 			compoundButton.setOnCheckedChangeListener(onCheckedChangeListener);
+			if (compoundButtonColorId != INVALID_ID) {
+				UiUtilities.setupCompoundButton(nightMode, ContextCompat.getColor(context, compoundButtonColorId), compoundButton);
+			} else {
+				CompoundButtonCompat.setButtonTintList(compoundButton, buttonTintList);
+			}
 		}
 	}
 
@@ -82,6 +98,7 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 		protected boolean checked;
 		protected ColorStateList buttonTintList;
 		protected OnCheckedChangeListener onCheckedChangeListener;
+		@ColorRes protected int compoundButtonColorId = INVALID_ID;
 
 		public Builder setChecked(boolean checked) {
 			this.checked = checked;
@@ -98,6 +115,11 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 			return this;
 		}
 
+		public Builder setCompoundButtonColorId(@ColorRes int compoundButtonColorId) {
+			this.compoundButtonColorId = compoundButtonColorId;
+			return this;
+		}
+		
 		public BottomSheetItemWithCompoundButton create() {
 			return new BottomSheetItemWithCompoundButton(customView,
 					layoutId,
@@ -106,6 +128,7 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 					onClickListener,
 					position,
 					icon,
+					background,
 					title,
 					titleColorId,
 					description,
@@ -114,7 +137,8 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 					descriptionLinksClickable,
 					checked,
 					buttonTintList,
-					onCheckedChangeListener);
+					onCheckedChangeListener,
+					compoundButtonColorId);
 		}
 	}
 }

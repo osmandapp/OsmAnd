@@ -11,7 +11,6 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
-import net.osmand.data.WptLocationPoint;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -236,16 +235,16 @@ public class QuickSearchHelper implements ResourceListener {
 			String baseGroupName = app.getString(R.string.shared_string_favorites);
 			List<FavoriteGroup> groups = app.getFavorites().getFavoriteGroups();
 			for (FavoriteGroup group : groups) {
-				if (group.visible) {
+				if (group.isVisible()) {
 					SearchResult sr = new SearchResult(phrase);
-					sr.localeName = Algorithms.isEmpty(group.name) ? baseGroupName : group.name;
+					sr.localeName = Algorithms.isEmpty(group.getName()) ? baseGroupName : group.getName();
 					sr.object = group;
 					sr.priority = SEARCH_FAVORITE_CATEGORY_PRIORITY;
 					sr.objectType = ObjectType.FAVORITE_GROUP;
 					sr.preferredZoom = 17;
 					if (phrase.getNameStringMatcher().matches(sr.localeName)) {
-						if (group.points.size() < 5) {
-							for (FavouritePoint point : group.points) {
+						if (group.getPoints().size() < 5) {
+							for (FavouritePoint point : group.getPoints()) {
 								SearchResult srp = new SearchResult(phrase);
 								srp.localeName = point.getName();
 								srp.object = point;
@@ -295,7 +294,7 @@ public class QuickSearchHelper implements ResourceListener {
 					continue;
 				}
 				SearchResult sr = new SearchResult(phrase);
-				sr.localeName = point.getName();
+				sr.localeName = point.getDisplayName(app);
 				sr.object = point;
 				sr.priority = SEARCH_FAVORITE_OBJECT_PRIORITY;
 				sr.objectType = ObjectType.FAVORITE;
@@ -303,7 +302,7 @@ public class QuickSearchHelper implements ResourceListener {
 				sr.preferredZoom = 17;
 				if (phrase.isLastWord(ObjectType.FAVORITE_GROUP)) {
 					FavoriteGroup group = (FavoriteGroup) phrase.getLastSelectedWord().getResult().object;
-					if (group != null && !point.getCategory().equals(group.name)) {
+					if (group != null && !point.getCategory().equals(group.getName())) {
 						continue;
 					}
 				}

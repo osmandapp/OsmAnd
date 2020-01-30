@@ -117,7 +117,8 @@ public class FavouritePointMenuController extends MenuController {
 	public Drawable getRightIcon() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			return FavoriteImageDrawable.getOrCreate(mapActivity.getMyApplication(), fav.getColor(), false);
+			return FavoriteImageDrawable.getOrCreate(mapActivity.getMyApplication(), fav.getColor(),
+					false, fav);
 		} else {
 			return null;
 		}
@@ -126,6 +127,17 @@ public class FavouritePointMenuController extends MenuController {
 	@Override
 	public boolean isWaypointButtonEnabled() {
 		return mapMarker == null;
+	}
+
+	@NonNull
+	@Override
+	public String getNameStr() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			return fav.getDisplayName(mapActivity);
+		} else {
+			return super.getNameStr();
+		}
 	}
 
 	@Override
@@ -143,13 +155,18 @@ public class FavouritePointMenuController extends MenuController {
 		return R.string.shared_string_edit;
 	}
 
+	@Override
+	public boolean isFavButtonEnabled() {
+		return !fav.isSpecialPoint();
+	}
+
 	@NonNull
 	@Override
 	public String getTypeStr() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			return fav.getCategory().length() == 0 ?
-					mapActivity.getString(R.string.shared_string_favorites) : fav.getCategory();
+					mapActivity.getString(R.string.shared_string_favorites) : fav.getCategoryDisplayName(mapActivity);
 		} else {
 			return "";
 		}

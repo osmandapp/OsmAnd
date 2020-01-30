@@ -17,7 +17,6 @@ import android.widget.LinearLayout;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -26,6 +25,8 @@ import net.osmand.plus.activities.MapActivity;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
 
 public class SelectCategoryDialogFragment extends DialogFragment {
 
@@ -86,7 +87,7 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 		} else {
 			List<FavouritesDbHelper.FavoriteGroup> gs = helper.getFavoriteGroups();
 			for (final FavouritesDbHelper.FavoriteGroup category : gs) {
-				addCategory(activity, ll, category.name, category.color);
+				addCategory(activity, ll, category.getDisplayName(getContext()), category.getColor());
 			}
 		}
 		View itemView = activity.getLayoutInflater().inflate(R.layout.favorite_category_dialog_item, null);
@@ -131,7 +132,7 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 			@Override
 			public void onClick(View v) {
 				FragmentActivity a = getActivity();
-				if (a != null && a instanceof MapActivity) {
+				if (a instanceof MapActivity) {
 					PointEditor pointEditor = ((MapActivity) a).getContextMenu().getPointEditor(editorTag);
 					if (pointEditor != null) {
 						pointEditor.setCategory(categoryName, categoryColor);

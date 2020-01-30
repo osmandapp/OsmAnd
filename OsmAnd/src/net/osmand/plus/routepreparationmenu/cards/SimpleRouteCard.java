@@ -120,11 +120,11 @@ public class SimpleRouteCard extends BaseCard {
 				List<ILineDataSet> dataSets = new ArrayList<>();
 				OrderedLineDataSet slopeDataSet = null;
 				OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, mChart, analysis,
-						GpxUiHelper.GPXDataSetAxisType.DISTANCE, false, true);
+						GpxUiHelper.GPXDataSetAxisType.DISTANCE, false, true, false);
 				if (elevationDataSet != null) {
 					dataSets.add(elevationDataSet);
 					slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, mChart, analysis,
-							GpxUiHelper.GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true);
+							GpxUiHelper.GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true, false);
 				}
 				if (slopeDataSet != null) {
 					dataSets.add(slopeDataSet);

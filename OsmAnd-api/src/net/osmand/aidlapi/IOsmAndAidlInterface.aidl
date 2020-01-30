@@ -73,6 +73,7 @@ import net.osmand.aidlapi.customization.SetWidgetsParams;
 import net.osmand.aidlapi.customization.OsmandSettingsParams;
 import net.osmand.aidlapi.customization.OsmandSettingsInfoParams;
 import net.osmand.aidlapi.customization.CustomizationInfoParams;
+import net.osmand.aidlapi.customization.ProfileSettingsParams;
 
 import net.osmand.aidlapi.gpx.AGpxFile;
 import net.osmand.aidlapi.gpx.AGpxFileDetails;
@@ -831,4 +832,6 @@ interface IOsmAndAidlInterface {
      * Empty class of params
      */
     boolean removeAllActiveMapMarkers(in RemoveMapMarkersParams params);
+
+    boolean importProfile(in ProfileSettingsParams params);
 }

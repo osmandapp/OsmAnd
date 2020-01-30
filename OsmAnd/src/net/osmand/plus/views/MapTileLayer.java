@@ -7,6 +7,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.os.Build;
 import android.widget.Toast;
 
 import net.osmand.data.QuadRect;
@@ -40,6 +41,7 @@ public class MapTileLayer extends BaseMapLayer {
 	protected ResourceManager resourceManager;
 	protected OsmandSettings settings;
 	private boolean visible = true;
+	private boolean useSampling;
 
 	
 	public MapTileLayer(boolean mainMap) {
@@ -56,6 +58,8 @@ public class MapTileLayer extends BaseMapLayer {
 		this.view = view;
 		settings = view.getSettings();
 		resourceManager = view.getApplication().getResourceManager();
+
+		useSampling = Build.VERSION.SDK_INT < 28;
 
 		paintBitmap = new Paint();
 		paintBitmap.setFilterBitmap(true);
@@ -150,8 +154,8 @@ public class MapTileLayer extends BaseMapLayer {
 		int width = (int) Math.ceil(tilesRect.right - left);
 		int height = (int) Math.ceil(tilesRect.bottom + ellipticTileCorrection - top);
 
-		boolean useInternet = (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null || OsmandPlugin.getEnabledPlugin(MapillaryPlugin.class) != null) &&
-				settings.USE_INTERNET_TO_DOWNLOAD_TILES.get() && settings.isInternetConnectionAvailable() && map.couldBeDownloadedFromInternet();
+		boolean useInternet = (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null || OsmandPlugin.getEnabledPlugin(MapillaryPlugin.class) != null)
+				&& settings.isInternetConnectionAvailable() && map.couldBeDownloadedFromInternet();
 		int maxLevel = map.getMaximumZoomSupported();
 		int tileSize = map.getTileSize();
 		boolean oneTileShown = false;
@@ -204,10 +208,13 @@ public class MapTileLayer extends BaseMapLayer {
 
 					}
 					if (bmp != null) {
+						if (bmp.getWidth() != tileSize && bmp.getWidth() > 0) {
+							tileSize = bmp.getWidth();
+						}
 						int xZoom = (tileX % div) * tileSize / div;
 						int yZoom = (tileY % div) * tileSize / div;
 						// nice scale
-						boolean useSampling = kzoom > 3;
+						boolean useSampling = this.useSampling && kzoom > 3;
 						bitmapToZoom.set(Math.max(xZoom, 0), Math.max(yZoom, 0), 
 								Math.min(xZoom + tileSize / div, tileSize), 
 								Math.min(yZoom + tileSize / div, tileSize));
@@ -266,11 +273,7 @@ public class MapTileLayer extends BaseMapLayer {
 		}
 	}
 	
-	public int getSourceTileSize() {
-		return map == null ? 256 : map.getTileSize();
-	}
-	
-	
+
 	@Override
 	public int getMaximumShownMapZoom() {
 		return map == null ? 20 : map.getMaximumZoomSupported() + OVERZOOM_IN;

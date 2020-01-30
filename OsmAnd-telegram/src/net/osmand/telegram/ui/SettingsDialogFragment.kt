@@ -17,7 +17,7 @@ import android.view.ViewGroup
 import android.widget.*
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramSettings
-import net.osmand.telegram.TelegramSettings.NumericPref
+import net.osmand.telegram.TelegramSettings.ListPreference
 import net.osmand.telegram.helpers.TelegramHelper.Companion.OSMAND_BOT_USERNAME
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.utils.AndroidUtils
@@ -50,7 +50,7 @@ class SettingsDialogFragment : BaseDialogFragment() {
 		}
 		var container = mainView.findViewById<ViewGroup>(R.id.gps_and_loc_container)
 		settings.gpsAndLocPrefs.forEach {
-			createNumericPref(inflater, container, it)
+			createListPref(inflater, container, it)
 		}
 
 		if (Build.VERSION.SDK_INT >= 26) {
@@ -64,6 +64,11 @@ class SettingsDialogFragment : BaseDialogFragment() {
 				}
 				container.addView(this)
 			}
+		}
+
+		container = mainView.findViewById<ViewGroup>(R.id.units_and_formats_container)
+		settings.unitsAndFormatsPrefs.forEach {
+			createListPref(inflater, container, it)
 		}
 
 		container = mainView.findViewById<ViewGroup>(R.id.gps_points_container)
@@ -139,7 +144,7 @@ class SettingsDialogFragment : BaseDialogFragment() {
 
 		container = mainView.findViewById<ViewGroup>(R.id.gpx_settings_container)
 		settings.gpxLoggingPrefs.forEach {
-			createNumericPref(inflater, container, it)
+			createListPref(inflater, container, it)
 		}
 
 		container = mainView.findViewById(R.id.osmand_connect_container)
@@ -243,7 +248,7 @@ class SettingsDialogFragment : BaseDialogFragment() {
 		}
 	}
 
-	private fun createNumericPref(inflater: LayoutInflater, container: ViewGroup, pref: NumericPref) {
+	private fun createListPref(inflater: LayoutInflater, container: ViewGroup, pref: ListPreference) {
 		inflater.inflate(R.layout.item_with_desc_and_right_value, container, false).apply {
 			findViewById<ImageView>(R.id.icon).apply {
 				if (pref.iconId != 0) {
@@ -284,14 +289,14 @@ class SettingsDialogFragment : BaseDialogFragment() {
 		}
 	}
 	
-	private fun showPopupMenu(pref: NumericPref, valueView: TextView) {
+	private fun showPopupMenu(pref: ListPreference, valueView: TextView) {
 		val menuList = pref.getMenuItems()
 		val ctx = valueView.context
 		ListPopupWindow(ctx).apply {
 			isModal = true
 			anchorView = valueView
 			setContentWidth(AndroidUtils.getPopupMenuWidth(ctx, menuList))
-			height = if (menuList.size < 6) {
+			height = if (menuList.size <= 6) {
 				ListPopupWindow.WRAP_CONTENT
 			} else {
 				AndroidUtils.getPopupMenuHeight(ctx)

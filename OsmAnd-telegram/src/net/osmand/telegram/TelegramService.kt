@@ -13,18 +13,23 @@ import android.os.*
 import android.util.Log
 import android.widget.Toast
 import net.osmand.PlatformUtil
-import net.osmand.telegram.helpers.TelegramHelper.TelegramIncomingMessagesListener
-import net.osmand.telegram.helpers.TelegramHelper.TelegramOutgoingMessagesListener
+import net.osmand.telegram.TelegramSettings.ShareChatInfo
+import net.osmand.telegram.helpers.TelegramHelper
+import net.osmand.telegram.helpers.TelegramHelper.*
 import net.osmand.telegram.notifications.TelegramNotification.NotificationType
 import net.osmand.telegram.utils.AndroidUtils
+import net.osmand.telegram.utils.OsmandLocationUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import java.util.*
 
+private const val UPDATE_WIDGET_INTERVAL_MS = 1000L // 1 sec
 private const val UPDATE_LIVE_MESSAGES_INTERVAL_MS = 10000L // 10 sec
 private const val UPDATE_LIVE_TRACKS_INTERVAL_MS = 30000L // 30 sec
 
 class TelegramService : Service(), LocationListener, TelegramIncomingMessagesListener,
 	TelegramOutgoingMessagesListener {
+
+	private val log = PlatformUtil.getLog(TelegramService::class.java)
 
 	private fun app() = application as TelegramApplication
 	private val binder = LocationServiceBinder()
@@ -35,6 +40,9 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 
 	private var updateTracksHandler: Handler? = null
 	private var tracksHandlerThread = HandlerThread("TracksUpdateServiceThread")
+
+	private var updateWidgetHandler: Handler? = null
+	private var updateWidgetThread = HandlerThread("WidgetUpdateServiceThread")
 
 	var handler: Handler? = null
 		private set
@@ -58,8 +66,10 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		super.onCreate()
 		mHandlerThread.start()
 		tracksHandlerThread.start()
+		updateWidgetThread.start()
 		updateShareInfoHandler = Handler(mHandlerThread.looper)
 		updateTracksHandler = Handler(tracksHandlerThread.looper)
+		updateWidgetHandler = Handler(updateWidgetThread.looper)
 	}
 
 	override fun onBind(intent: Intent): IBinder? {
@@ -99,18 +109,21 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		sendLocationInterval = intent.getLongExtra(SEND_LOCATION_INTERVAL, 0)
 		setupServiceErrorInterval()
 
-		app.telegramService = this
 		app.telegramHelper.addIncomingMessagesListener(this)
 		app.telegramHelper.addOutgoingMessagesListener(this)
+
+		app.telegramService = this
 
 		if (isUsedByMyLocation(usedBy)) {
 			initLocationUpdates()
 			startShareInfoUpdates()
+			startWidgetUpdates()
 		}
 		if (isUsedByUsersLocations(usedBy)) {
 			app.telegramHelper.startLiveMessagesUpdates(app.settings.sendMyLocInterval)
 			startTracksUpdates()
 		}
+		app.shareLocationHelper.checkAndSendBufferMessages()
 
 		val locationNotification = app.notificationHelper.locationNotification
 		val notification = app.notificationHelper.buildNotification(locationNotification)
@@ -139,6 +152,8 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		app.telegramService = null
 		tracksHandlerThread.quit()
 		mHandlerThread.quit()
+		updateWidgetThread.quit()
+		app().showLocationHelper.addOrUpdateStatusWidget(-1, false)
 
 		usedBy = 0
 
@@ -208,6 +223,37 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 				startTracksUpdates()
 			}
 		}, UPDATE_LIVE_TRACKS_INTERVAL_MS)
+	}
+
+	private fun startWidgetUpdates() {
+		updateWidgetHandler?.postDelayed({
+			if (isUsedByMyLocation(usedBy)) {
+				val sharingStatus = app().settings.sharingStatusChanges.last()
+				var isSending = sharingStatus.statusType == TelegramSettings.SharingStatusType.SENDING
+				val sharingChats = app().settings.getShareLocationChats()
+				var oldestTime = 0L
+				if (sharingChats.isNotEmpty() && app().shareLocationHelper.sharingLocation) {
+					sharingChats.forEach { id ->
+						val bufferMessages = app().locationMessages.getBufferedMessagesForChat(id)
+						if (bufferMessages.isNotEmpty()) {
+							val newTime = bufferMessages[0].time
+							if (oldestTime == 0L || newTime < oldestTime) {
+								oldestTime = newTime
+							}
+						} else {
+							oldestTime = 0L
+						}
+					}
+				} else {
+					isSending = false
+					oldestTime = -1
+				}
+				app().showLocationHelper.addOrUpdateStatusWidget(oldestTime, isSending)
+			} else {
+				app().showLocationHelper.addOrUpdateStatusWidget(-1, false)
+			}
+			startWidgetUpdates()
+		}, UPDATE_WIDGET_INTERVAL_MS)
 	}
 	
 	@SuppressLint("MissingPermission")
@@ -327,8 +373,12 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		app().settings.onDeleteLiveMessages(chatId, messages)
 	}
 
-	override fun onSendLiveLocationError(code: Int, message: String) {
+	override fun onSendLiveLocationError(code: Int, message: String, shareInfo: ShareChatInfo, messageType: Int) {
 		Log.d(PlatformUtil.TAG, "Send live location error: $code - $message")
+		when (messageType) {
+			TelegramHelper.MESSAGE_TYPE_TEXT -> shareInfo.pendingTdLibText--
+			TelegramHelper.MESSAGE_TYPE_MAP -> shareInfo.pendingTdLibMap--
+		}
 	}
 
 	companion object {

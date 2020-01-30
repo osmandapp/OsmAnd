@@ -77,7 +77,6 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	private View view;
 	private DownloadIndexesThread downloadThread;
 	private DownloadValidationManager validationManager;
-	private MessageFormat formatGb = new MessageFormat("{0, number,#.##} GB", Locale.US);
 
 	private static WizardType wizardType;
 	private static final WizardType DEFAULT_WIZARD_TYPE = WizardType.SEARCH_LOCATION;
@@ -739,7 +738,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	private String getFreeSpace(File dir) {
 		if (dir.canRead()) {
 			StatFs fs = new StatFs(dir.getAbsolutePath());
-			return formatGb.format(new Object[]{(float) (fs.getAvailableBlocks()) * fs.getBlockSize() / (1 << 30)});
+			return AndroidUtils.formatSize(getActivity(), (long) fs.getAvailableBlocks() * fs.getBlockSize() );
 		}
 		return "";
 	}

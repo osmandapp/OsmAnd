@@ -202,15 +202,6 @@
 	<!-- update good state, osm_modify, index_update -->
 	<color name="color_update">#0080FF</color>
 
-	<!-- Map colors, layers, special purpose consistency colors -->
-	<color name="pos_heading">#320000FF</color>
-	<!-- color name="pos_heading_night">#880000FF</color -->
-	<color name="pos_heading_night">#88536dfe</color>
-	<color name="pos_area">#280000FF</color>
-	<!-- color name="pos_area_night">#660000FF</color -->
-	<color name="pos_area_night">#66536dfe</color>
-	<color name="pos_around">#707CDC</color>  <!-- family blue similar to above -->
-
 	<color name="gpx_track">#B4B319FF</color>
 	<color name="gpx_track_fluorescent">#B400FFFF</color>
 
@@ -454,13 +445,13 @@
 	<color name="profile_icon_color_yellow_light">#F0B400</color>
 	<color name="profile_icon_color_magenta_light">#CC0063</color>
 
-	<color name="profile_icon_color_blue_dark_default">#B3237BFF</color>
-	<color name="profile_icon_color_purple_dark">#B3732EEB</color>
-	<color name="profile_icon_color_green_dark">#B30EBE92</color>
-	<color name="profile_icon_color_blue_dark">#B3007EB3</color>
-	<color name="profile_icon_color_red_dark">#B3FF2200</color>
-	<color name="profile_icon_color_yellow_dark">#B3F0B400</color>
-	<color name="profile_icon_color_magenta_dark">#B3CC0063</color>
+	<color name="profile_icon_color_blue_dark_default">#237BFF</color>
+	<color name="profile_icon_color_purple_dark">#732EEB</color>
+	<color name="profile_icon_color_green_dark">#0EBE92</color>
+	<color name="profile_icon_color_blue_dark">#007EB3</color>
+	<color name="profile_icon_color_red_dark">#FF2200</color>
+	<color name="profile_icon_color_yellow_dark">#F0B400</color>
+	<color name="profile_icon_color_magenta_dark">#CC0063</color>
 
 	<color name="profile_icon_color_inactive">#727272</color>
 

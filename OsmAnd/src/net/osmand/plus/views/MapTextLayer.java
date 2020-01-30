@@ -120,7 +120,7 @@ public class MapTextLayer extends OsmandMapLayer {
 				lastSpace = -1;
 				limit += TEXT_WRAP;
 				while (pos < limit && pos < end) {
-					if (!Character.isLetterOrDigit(text.charAt(pos))) {
+					if (Character.isWhitespace(text.charAt(pos))) {
 						lastSpace = pos;
 					}
 					pos++;

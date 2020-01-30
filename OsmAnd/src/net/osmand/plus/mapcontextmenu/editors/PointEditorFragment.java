@@ -33,6 +33,9 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 import net.osmand.util.Algorithms;
 
+import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
+import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.isPersonalCategoryDisplayName;
+
 public abstract class PointEditorFragment extends BaseOsmAndFragment {
 
 	private View view;
@@ -354,7 +357,13 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 	public String getCategoryTextValue() {
 		AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) view.findViewById(R.id.category_edit);
 		String name = categoryEdit.getText().toString().trim();
-		return name.equals(getDefaultCategoryName()) ? "" : name;
+		if (isPersonalCategoryDisplayName(requireContext(), name)) {
+			return PERSONAL_CATEGORY;
+		}
+		if(name.equals(getDefaultCategoryName())) {
+			return "";
+		}
+		return name;
 	}
 
 	public String getDescriptionTextValue() {

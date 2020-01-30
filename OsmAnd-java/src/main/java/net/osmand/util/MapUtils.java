@@ -80,8 +80,6 @@ public class MapUtils {
 		// not very accurate computation on sphere but for distances < 1000m it is ok
 		double mDist = (fromLat - toLat) * (fromLat - toLat) + (fromLon - toLon) * (fromLon - toLon);
 		double projection = scalarMultiplication(fromLat, fromLon, toLat, toLon, lat, lon);
-		double prlat;
-		double prlon;
 		if (projection < 0) {
 			return 0;
 		} else if (projection >= mDist) {
@@ -413,6 +411,16 @@ public class MapUtils {
 		}
 		return rotate;
 	}
+	
+	public static float normalizeDegrees360(float degrees) {
+		while (degrees < 0.0f) {
+			degrees += 360.0f;
+		}
+		while (degrees >= 360.0f) {
+			degrees -= 360.0f;
+		}
+		return degrees;
+	}
 
 	/**
 	 * @param diff align difference between 2 angles ]-PI, PI]
@@ -618,6 +626,12 @@ public class MapUtils {
 			r.top = Math.max(r.top, latitude);
 			r.bottom = Math.min(r.bottom, latitude);
 		}
+	}
+
+	public static boolean areLatLonEqual(Location l1, Location l2) {
+		return l1 == null && l2 == null
+				|| (l1 != null && l2 != null && Math.abs(l1.getLatitude() - l2.getLatitude()) < 0.00001
+				&& Math.abs(l1.getLongitude() - l2.getLongitude()) < 0.00001);
 	}
 }
 

@@ -149,20 +149,26 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 			View mainView = getMainView();
 			if (mainView != null) {
 				View progressBar = mainView.findViewById(R.id.progress_bar);
+				RoutingHelper routingHelper = app.getRoutingHelper();
 				boolean progressVisible = progressBar != null && progressBar.getVisibility() == View.VISIBLE;
-				boolean routeCalculating = app.getRoutingHelper().isRouteBeingCalculated() || app.getTransportRoutingHelper().isRouteBeingCalculated();
+				boolean routeCalculating = routingHelper.isRouteBeingCalculated() || app.getTransportRoutingHelper().isRouteBeingCalculated();
 				if (progressVisible && !routeCalculating) {
 					hideRouteCalculationProgressBar();
 					openMenuHalfScreen();
+				} else if (!progressVisible && routeCalculating && !routingHelper.isOsmandRouting()) {
+					updateRouteCalculationProgress(0);
 				}
 			}
-			menu.addTargetPointListener();
+			menu.onResume(this);
 		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
+		if (menu != null) {
+			menu.onPause(this);
+		}
 	}
 
 	@Override
@@ -359,6 +365,11 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		OsmandApplication app = getMyApplication();
 		return app != null && app.getRoutingHelper().isPublicTransportMode();
 	}
+
+	private boolean isOsmandRouting() {
+		OsmandApplication app = getMyApplication();
+		return app != null && app.getRoutingHelper().isOsmandRouting();
+	}
 	
 	public void updateRouteCalculationProgress(int progress) {
 		MapActivity mapActivity = getMapActivity();
@@ -367,11 +378,11 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		if (mapActivity == null || mainView == null || view == null) {
 			return;
 		}
-		boolean publicTransportMode = isPublicTransportMode();
+		boolean indeterminate = isPublicTransportMode() || !isOsmandRouting();
 		ProgressBar progressBar = (ProgressBar) mainView.findViewById(R.id.progress_bar);
 		if (progressBar != null) {
 			if (progress == 0) {
-				progressBar.setIndeterminate(publicTransportMode);
+				progressBar.setIndeterminate(indeterminate);
 			}
 			if (progressBar.getVisibility() != View.VISIBLE) {
 				progressBar.setVisibility(View.VISIBLE);
@@ -383,10 +394,10 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 			if (progressBarButton.getVisibility() != View.VISIBLE) {
 				progressBarButton.setVisibility(View.VISIBLE);
 			}
-			progressBarButton.setProgress(publicTransportMode ? 0 : progress);
+			progressBarButton.setProgress(indeterminate ? 0 : progress);
 		}
 		TextViewExProgress textViewExProgress = (TextViewExProgress) view.findViewById(R.id.start_button_descr);
-		textViewExProgress.percent = publicTransportMode ? 0 : progress / 100f;
+		textViewExProgress.percent = indeterminate ? 0 : progress / 100f;
 		textViewExProgress.invalidate();
 	}
 

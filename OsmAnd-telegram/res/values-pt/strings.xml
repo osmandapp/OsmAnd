@@ -16,7 +16,7 @@
     <string name="altitude">Altitude</string>
     <string name="shared_string_search">Pesquisar</string>
     <string name="shared_string_ok">Ok</string>
-    <string name="app_name_short">OsmAnd Tracker</string>
+    <string name="app_name_short">Rastreador OsmAnd</string>
     <string name="shared_string_telegram">Telegram</string>
     <string name="shared_string_appearance">Aparência</string>
     <string name="shared_string_update">Atualizar</string>
@@ -60,7 +60,7 @@
     <string name="timeline_description">Ative o monitoramento para salvar todos os locais no histórico.</string>
     <string name="privacy_policy_use_telegram">Telegrama (o aplicativo de mensagens) é usado para conectar e se comunicar com as pessoas.</string>
     <string name="privacy_policy_telegram_client">OsmAnd tracker é um dos clientes que usam a Plataforma aberta do Telegram . Seus contatos podem usar qualquer outro cliente Telegram.</string>
-    <string name="privacy_policy_agree">Ao clicar em continuar, você concorda com as condições da política de privacidade do Telegram e da política de privacidade da OsmAnd.</string>
+    <string name="privacy_policy_agree">Ao clicar em \"Continuar\" você concorda com as condições da política de privacidade do Telegram e OsmAnd.</string>
     <string name="shared_string_accept">Aceitar</string>
     <string name="telegram_privacy_policy">Política de privacidade do Telegram</string>
     <string name="osmand_privacy_policy">Política de privacidade do OsmAnd</string>
@@ -249,4 +249,17 @@
     <string name="my_location">Minha localização</string>
     <string name="live_now">Ao vivo agora</string>
     <string name="timeline">Cronologia</string>
+    <string name="saved_messages">Mensagens gravadas</string>
+    <string name="time_zone_descr">Selecione o fuso horário para mostrar nas suas mensagens de localização.</string>
+    <string name="time_zone">Fuso horário</string>
+    <string name="units_and_formats">Unidades e formatos</string>
+    <string name="unit_of_length_descr">Alterar unidade de medida de distância.</string>
+    <string name="unit_of_length">Unidades de comprimento</string>
+    <string name="unit_of_speed_system_descr">Definir unidade de velocidade.</string>
+    <string name="unit_of_speed_system">Unidade de velocidade</string>
+    <string name="buffer_time_descr">Tempo máximo para armazenar pontos no buffer</string>
+    <string name="buffer_time">Tempo de expiração do buffer</string>
+    <string name="shared_string_suggested">Sugerido</string>
+    <string name="status_widget_title">Estado do Rastreador de OsmAnd</string>
+    <string name="back_to_osmand">Voltar para OsmAnd</string>
 </resources>

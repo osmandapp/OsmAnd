@@ -22,6 +22,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 	public static final String TAG = GlobalSettingsFragment.class.getSimpleName();
 
 	private static final String SEND_ANONYMOUS_DATA_PREF_ID = "send_anonymous_data";
+	private static final String DIALOGS_AND_NOTIFICATIONS_PREF_ID = "dialogs_and_notifications";
 
 	@Override
 	protected void setupPreferences() {
@@ -30,7 +31,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 		setupExternalStorageDirPref();
 
 		setupSendAnonymousDataPref();
-		setupShowStartupMessagesPref();
+		setupDialogsAndNotificationsPref();
 		setupEnableProxyPref();
 	}
 
@@ -67,11 +68,6 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 				}
 			}
 			return false;
-		} else if (prefId.equals(settings.DO_NOT_SHOW_STARTUP_MESSAGES.getId())) {
-			if (newValue instanceof Boolean) {
-				boolean enabled = !(Boolean) newValue;
-				return settings.DO_NOT_SHOW_STARTUP_MESSAGES.set(enabled);
-			}
 		}
 
 		return super.onPreferenceChange(preference, newValue);
@@ -102,8 +98,6 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 		if (app == null) {
 			return;
 		}
-		ApplicationMode selectedMode = getSelectedAppMode();
-
 		ApplicationMode[] appModes = ApplicationMode.values(app).toArray(new ApplicationMode[0]);
 		String[] entries = new String[appModes.length];
 		String[] entryValues = new String[appModes.length];
@@ -113,7 +107,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 		}
 
 		ListPreferenceEx defaultApplicationMode = (ListPreferenceEx) findPreference(settings.DEFAULT_APPLICATION_MODE.getId());
-		defaultApplicationMode.setIcon(getContentIcon(selectedMode.getIconRes()));
+		defaultApplicationMode.setIcon(getContentIcon(settings.DEFAULT_APPLICATION_MODE.get().getIconRes()));
 		defaultApplicationMode.setEntries(entries);
 		defaultApplicationMode.setEntryValues(entryValues);
 	}
@@ -171,11 +165,9 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 		sendAnonymousData.setChecked(enabled);
 	}
 
-	private void setupShowStartupMessagesPref() {
-		boolean enabled = !settings.DO_NOT_SHOW_STARTUP_MESSAGES.get(); // pref ui was inverted
-
-		SwitchPreferenceCompat sendAnonymousData = (SwitchPreferenceCompat) findPreference(settings.DO_NOT_SHOW_STARTUP_MESSAGES.getId());
-		sendAnonymousData.setChecked(enabled);
+	private void setupDialogsAndNotificationsPref() {
+		Preference dialogsAndNotifications = (Preference) findPreference(DIALOGS_AND_NOTIFICATIONS_PREF_ID);
+		dialogsAndNotifications.setIcon(getContentIcon(R.drawable.ic_action_notification));
 	}
 
 	private void setupEnableProxyPref() {

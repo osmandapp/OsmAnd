@@ -102,7 +102,7 @@
     <string name="minutes_format">%1$d m</string>
     <string name="hours_format">%1$d h</string>
     <string name="shared_string_install">Instalar</string>
-    <string name="shared_string_share">Compartilhar</string>
+    <string name="shared_string_share">Enviar</string>
     <string name="shared_string_back">Voltar</string>
     <string name="visible_time_for_all">Hora visível para todos</string>
     <string name="set_time_description">Defina a hora em que seus contatos e grupos selecionados verão sua localização em tempo real.</string>
@@ -198,7 +198,7 @@
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegrama (o aplicativo de mensagens) é usado para conectar e se comunicar com as pessoas.</string>
     <string name="privacy_policy_telegram_client">OsmAnd tracker é um dos clientes que usam a Plataforma aberta do Telegram . Seus contatos podem usar qualquer outro cliente Telegram.</string>
-    <string name="privacy_policy_agree">Ao clicar em continuar, você concorda com as condições da política de privacidade do Telegram e da política de privacidade da OsmAnd.</string>
+    <string name="privacy_policy_agree">Ao clicar em \"Continuar\", você concorda com as condições da política de privacidade do Telegram- e OsmAnd.</string>
     <string name="shared_string_accept">Aceitar</string>
     <string name="telegram_privacy_policy">Política de privacidade do Telegram</string>
     <string name="osmand_privacy_policy">"Política de privacidade do OsmAnd "</string>
@@ -250,4 +250,22 @@
     <string name="shared_string_apply">Aplicar</string>
     <string name="set_time_timeline_descr">Selecionar a hora para exibir</string>
     <string name="start_end_date">Data de início - fim</string>
+    <string name="saved_messages">Mensagens salvas</string>
+    <string name="units_and_formats">Unidades e formatos</string>
+    <string name="unit_of_length_descr">Altere as unidades de medida.</string>
+    <string name="unit_of_length">Unidades de medida</string>
+    <string name="time_zone_descr">Selecione o fuso horário para mostrar nas mensagens de localização.</string>
+    <string name="time_zone">Fuso horário</string>
+    <string name="unit_of_speed_system_descr">Defina a unidade de velocidade.</string>
+    <string name="unit_of_speed_system">Unidade de velocidade</string>
+    <string name="buffer_time_descr">Tempo máximo para armazenar pontos no buffer</string>
+    <string name="buffer_time">Tempo de expiração do buffer</string>
+    <string name="shared_string_suggested">Sugerido</string>
+    <string name="status_widget_title">Status do OsmAnd Tracker</string>
+    <string name="back_to_osmand">Voltar para OsmAnd</string>
+    <string name="last_update_from_telegram_date">Última atualização do Telegram: %1$s</string>
+    <string name="last_response_date">Última resposta: %1$s</string>
+    <string name="last_update_from_telegram_duration">Última atualização do Telegram: %1$s atrás</string>
+    <string name="last_response_duration">Última resposta: %1$s atrás</string>
+    <string name="duration_ago">%1$s atrás</string>
 </resources>

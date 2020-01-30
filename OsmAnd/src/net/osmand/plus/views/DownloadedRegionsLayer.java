@@ -45,8 +45,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -71,6 +73,10 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	private MapLayerData<List<BinaryMapDataObject>> data;
 	private List<BinaryMapDataObject> selectedObjects = new LinkedList<>();
+
+	private int lastCheckMapCx;
+	private int lastCheckMapCy;
+	private int lastCheckMapZoom;
 
 	private static int ZOOM_TO_SHOW_MAP_NAMES = 6;
 	private static int ZOOM_AFTER_BASEMAP = 12;
@@ -193,7 +199,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			return;
 		}
 		//make sure no maps are loaded for the location
-		checkMapToDownload(zoom, data.results);
+		checkMapToDownload(tileBox, data.results);
 		// draw objects
 		if (osmandRegions.isInitialized() && zoom >= ZOOM_TO_SHOW_SELECTION_ST && zoom < ZOOM_TO_SHOW_SELECTION) {
 			final List<BinaryMapDataObject> currentObjects = new LinkedList<>();
@@ -231,35 +237,43 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		}
 	}
 
-	private void checkMapToDownload(int zoom, List<BinaryMapDataObject> currentObjects) {
-		if (zoom >= ZOOM_MIN_TO_SHOW_DOWNLOAD_DIALOG && zoom <= ZOOM_MAX_TO_SHOW_DOWNLOAD_DIALOG
+	private void checkMapToDownload(RotatedTileBox tileBox, List<BinaryMapDataObject> currentObjects) {
+		int zoom = tileBox.getZoom();
+		int cx = tileBox.getCenter31X();
+		int cy = tileBox.getCenter31Y();
+		if (lastCheckMapCx == cx && lastCheckMapCy == cy && lastCheckMapZoom == zoom) {
+			return;
+		}
+		lastCheckMapCx = cx;
+		lastCheckMapCy = cy;
+		lastCheckMapZoom = zoom;
+
+		if (app.getSettings().SHOW_DOWNLOAD_MAP_DIALOG.get()
+				&& zoom >= ZOOM_MIN_TO_SHOW_DOWNLOAD_DIALOG && zoom <= ZOOM_MAX_TO_SHOW_DOWNLOAD_DIALOG
 				&& currentObjects != null) {
 			WorldRegion regionData;
-			int cx = view.getCurrentRotatedTileBox().getCenter31X();
-			int cy = view.getCurrentRotatedTileBox().getCenter31Y();
+			Map<WorldRegion, BinaryMapDataObject> selectedObjects = new LinkedHashMap<>();
 			for (int i = 0; i < currentObjects.size(); i++) {
 				final BinaryMapDataObject o = currentObjects.get(i);
-				if (!osmandRegions.contain(o, cx, cy)) {
-					continue;
-				}
 				String fullName = osmandRegions.getFullName(o);
 				regionData = osmandRegions.getRegionData(fullName);
 				if (regionData != null && regionData.isRegionMapDownload()) {
 					String regionDownloadName = regionData.getRegionDownloadName();
-					if (regionDownloadName != null && checkIfObjectDownloaded(regionDownloadName)) {
-						hideDownloadMapToolbar();
-						return;
+					if (regionDownloadName != null) {
+						if (checkIfObjectDownloaded(regionDownloadName)) {
+							hideDownloadMapToolbar();
+							return;
+						} else {
+							selectedObjects.put(regionData, o);
+						}
 					}
 				}
 			}
 
 			IndexItem indexItem = null;
 			String name = null;
-			BinaryMapDataObject smallestRegion = app.getRegions().getSmallestBinaryMapDataObjectAt(currentObjects);
-			if (smallestRegion != null) {
-				String fullName = osmandRegions.getFullName(smallestRegion);
-				regionData = osmandRegions.getRegionData(fullName);
-
+			regionData  = app.getRegions().getSmallestBinaryMapDataObjectAt(selectedObjects).getKey();
+			if (regionData != null) {
 				DownloadIndexesThread downloadThread = app.getDownloadThread();
 				List<IndexItem> indexItems = downloadThread.getIndexes().getIndexItems(regionData);
 				if (indexItems.size() == 0) {

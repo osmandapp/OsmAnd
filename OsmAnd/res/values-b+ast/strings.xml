@@ -609,8 +609,6 @@
     <string name="shared_string_right">Drecha</string>
     <string name="shared_string_left">Esquierda</string>
     <string name="shared_string_paste">Apegar</string>
-    <string name="coordinate_input_accuracy_description">Cambia automáticamente al campu siguiente tres introducir %1$d díxitos decimales.</string>
-    <string name="coordinate_input_accuracy">%1$d díxitos</string>
     <string name="go_to_next_field">Campu siguiente</string>
     <string name="tap_on_map_to_hide_interface">Mou a pantalla completa</string>
     <string name="waypoints_added_to_map_markers">Amestáronse los puntos a los marcadores del mapa</string>
@@ -698,8 +696,8 @@
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s/mes</string>
     <string name="osm_live_payment_current_subscription">La soscripción actual</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
-    <string name="osm_live_payment_header">Esbilla\'l periodu de pagu más afayadizu pa ti:</string>
-    <string name="osm_live_payment_contribute_descr">Parte de los ingresos van pa los collaboradores d\'OpenStreetMap.</string>
+    <string name="osm_live_payment_header">Intervalu de pagu:</string>
+    <string name="osm_live_payment_contribute_descr">Les donaciones ayuden a financiar la cartografía d\'OpenStreetMap</string>
     <string name="markers_remove_dialog_msg">¿Desaniciar el marcador «%s» del mapa\?</string>
     <string name="third_party_application">Aplicación de terceros</string>
     <string name="error_notification_desc">Unvia una captura d\'esti avisu a support@osmand.net, por favor</string>
@@ -1396,4 +1394,6 @@
     <string name="configure_profile_info">Tolos axustes qu\'apaecen darréu afeuten únicamente al perfil escoyíu.</string>
     <string name="shared_string_example">Exemplu</string>
     <string name="wake_time">Hora d\'activamientu</string>
+    <string name="descendingly">Z-A</string>
+    <string name="ascendingly">A-Z</string>
 </resources>

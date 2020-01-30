@@ -13,6 +13,7 @@ import android.os.PowerManager.WakeLock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import net.osmand.plus.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
@@ -65,6 +66,16 @@ public class LockHelper implements SensorEventListener {
 				unlockEvent();
 			}
 		};
+		OsmAndAppCustomizationListener customizationListener = new OsmAndAppCustomizationListener() {
+			@Override
+			public void onOsmAndSettingsCustomized() {
+				OsmandSettings settings = app.getSettings();
+				turnScreenOnEnabled = settings.TURN_SCREEN_ON_ENABLED;
+				turnScreenOnTime = settings.TURN_SCREEN_ON_TIME_INT;
+				turnScreenOnSensor = settings.TURN_SCREEN_ON_SENSOR;
+			}
+		};
+		app.getAppCustomization().addListener(customizationListener);
 		app.getRoutingHelper().getVoiceRouter().addVoiceMessageListener(voiceMessageListener);
 	}
 

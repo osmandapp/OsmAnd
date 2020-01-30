@@ -2,12 +2,10 @@ package net.osmand.plus.dialogs;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.CompoundButtonCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -18,12 +16,12 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmand.AndroidUtils;
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -41,6 +39,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+
 public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = SelectMapStyleBottomSheetDialogFragment.class.getSimpleName();
@@ -53,7 +53,6 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 	private LinearLayout stylesContainer;
 	private BottomSheetItemTitleWithDescrAndButton descrItem;
 	private View.OnClickListener onStyleClickListener;
-	private ColorStateList rbColorList;
 
 	private TreeMap<String, String> stylesMap;
 	private String selectedStyle;
@@ -77,8 +76,6 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 		if(selectedStyle == null) {
 			selectedStyle = RendererRegistry.DEFAULT_RENDER;
 		}
-
-		rbColorList = AndroidUtils.createCheckedColorStateList(context, R.color.icon_color_default_light, getActiveColorId());
 
 		items.add(new TitleItem(getString(R.string.map_widget_renderer)));
 
@@ -215,7 +212,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 
 			RadioButton rb = (RadioButton) view.findViewById(R.id.compound_button);
 			rb.setChecked(selected);
-			CompoundButtonCompat.setButtonTintList(rb, rbColorList);
+			UiUtilities.setupCompoundButton(rb, nightMode, PROFILE_DEPENDENT);
 
 			counter++;
 		}

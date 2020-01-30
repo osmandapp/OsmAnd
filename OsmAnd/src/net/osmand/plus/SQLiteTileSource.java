@@ -3,13 +3,11 @@ package net.osmand.plus;
 import android.database.sqlite.SQLiteDiskIOException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.widget.Toast;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.map.ITileSource;
-import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
@@ -21,11 +19,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.List;
-
-import bsh.Interpreter;
 
 
 public class SQLiteTileSource implements ITileSource {
@@ -45,6 +40,9 @@ public class SQLiteTileSource implements ITileSource {
 	private boolean timeSupported = false;
 	private long expirationTimeMillis = -1; // never
 	private boolean isEllipsoid = false;
+	private boolean invertedY = false;
+	private String randoms;
+	private String[] randomsArray;
 	private String rule = null;
 	private String referer = null;
 	
@@ -52,9 +50,8 @@ public class SQLiteTileSource implements ITileSource {
 	boolean tileSizeSpecified = false;
 	private OsmandApplication ctx;
 	private boolean onlyReadonlyAvailable = false;
-	
-	
-	
+
+
 	public SQLiteTileSource(OsmandApplication ctx, File f, List<TileSourceTemplate> toFindUrl){
 		this.ctx = ctx;
 		this.file = f;
@@ -106,33 +103,18 @@ public class SQLiteTileSource implements ITileSource {
 		return base != null ? base.getTileSize() : tileSize;
 	}
 
-	Interpreter bshInterpreter = null;
 	@Override
 	public String getUrlToLoad(int x, int y, int zoom) {
 		if (zoom > maxZoom)
 			return null;
 		SQLiteConnection db = getDatabase();
-		if(db == null || db.isReadOnly() || urlTemplate == null){
+		if (db == null || db.isReadOnly() || urlTemplate == null) {
 			return null;
 		}
-
-		if(TileSourceManager.RULE_BEANSHELL.equalsIgnoreCase(rule)){
-			try {
-				if(bshInterpreter == null){
-					bshInterpreter = new Interpreter();
-					bshInterpreter.eval(urlTemplate);
-				}
-				return (String) bshInterpreter.eval("getTileUrl("+zoom+","+x+","+y+");");
-			} catch (bsh.EvalError e) {
-				LOG.debug("getUrlToLoad Error" + e.getMessage());
-				Toast.makeText(ctx, e.getMessage(), Toast.LENGTH_LONG).show();
-				LOG.error(e.getMessage(), e);
-				return null;
-			}
+		if (invertedY) {
+			y = (1 << zoom) - 1 - y;
 		}
-		else {
-			return MessageFormat.format(urlTemplate, zoom+"", x+"", y+"");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
-		}
+		return TileSourceTemplate.buildUrlToLoad(urlTemplate, randomsArray, x, y, zoom);
 	}
 
 	@Override
@@ -185,7 +167,6 @@ public class SQLiteTileSource implements ITileSource {
 					if(url != -1) {
 						String template = cursor.getString(url);
 						if(!Algorithms.isEmpty(template)){
-							//urlTemplate = template;
 							urlTemplate = TileSourceTemplate.normalizeUrl(template);
 						}
 					}
@@ -232,6 +213,19 @@ public class SQLiteTileSource implements ITileSource {
 						if(set == 1){
 							this.isEllipsoid = true;
 						}
+					}
+					int invertedY = list.indexOf("inverted_y");
+					if(invertedY != -1) {
+						int set = (int) cursor.getInt(invertedY);
+						if(set == 1){
+							this.invertedY = true;
+						}
+					}
+					int randomsId = list.indexOf("randoms");
+					if(randomsId != -1) {
+						this.randoms = cursor.getString(randomsId);
+						this.randomsArray = TileSourceTemplate.buildRandomsArray(this.randoms);
+
 					}
 					//boolean inversiveInfoZoom = tnumbering != -1 && "BigPlanet".equals(cursor.getString(tnumbering));
 					boolean inversiveInfoZoom = inversiveZoom;
@@ -472,7 +466,6 @@ public class SQLiteTileSource implements ITileSource {
 	
 	public void closeDB(){
 		LOG.debug("closeDB");
-		bshInterpreter = null;
 		if(timeSupported) {
 			clearOld();
 		}

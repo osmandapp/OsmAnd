@@ -14,7 +14,7 @@ import net.osmand.telegram.notifications.NotificationHelper
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.UiUtils
 
-class TelegramApplication : Application(), OsmandHelperListener {
+class TelegramApplication : Application() {
 
 	val telegramHelper = TelegramHelper.instance
 	lateinit var settings: TelegramSettings private set
@@ -42,7 +42,7 @@ class TelegramApplication : Application(), OsmandHelperListener {
 		telegramHelper.messageActiveTimeSec = settings.locHistoryTime
 		uiUtils = UiUtils(this)
 		osmandAidlHelper = OsmandAidlHelper(this)
-		osmandAidlHelper.listener = object : OsmandHelperListener {
+		osmandAidlHelper.addConnectionListener(object : OsmandHelperListener {
 			override fun onOsmandConnectionStateChanged(connected: Boolean) {
 				if (connected) {
 					osmandAidlHelper.clearNavDrawerItems("net.osmand.telegram")
@@ -54,11 +54,13 @@ class TelegramApplication : Application(), OsmandHelperListener {
 						listOf("ic_action_location_sharing_app"),
 						listOf(-1)
 					)
+					showLocationHelper.setupMapLayer()
 					showLocationHelper.addDirectionContextMenuButton()
 					showLocationHelper.startShowingLocation()
+					showLocationHelper.addOrUpdateStatusWidget(-1, false)
 				}
 			}
-		}
+		})
 		osmandAidlHelper.setUpdatesListener(object : UpdatesListener {
 			override fun update() {
 				if (settings.hasAnyChatToShowOnMap()) {
@@ -138,13 +140,6 @@ class TelegramApplication : Application(), OsmandHelperListener {
 			internetConnectionAvailable = isInternetConnected
 		}
 		return internetConnectionAvailable
-	}
-
-	override fun onOsmandConnectionStateChanged(connected: Boolean) {
-		if (connected) {
-			showLocationHelper.setupMapLayer()
-			showLocationHelper.addDirectionContextMenuButton()
-		}
 	}
 
 	private fun startTelegramService(intent: Int, serviceOffInterval: Long = 0) {

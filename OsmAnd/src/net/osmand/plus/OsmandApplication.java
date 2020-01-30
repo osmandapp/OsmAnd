@@ -11,7 +11,9 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.AssetManager;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
@@ -48,7 +50,7 @@ import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
-import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
+import net.osmand.plus.dialogs.RateUsBottomSheetDialogFragment;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadService;
 import net.osmand.plus.download.IndexItem;
@@ -137,6 +139,8 @@ public class OsmandApplication extends MultiDexApplication {
 	LockHelper lockHelper;
 	SettingsHelper settingsHelper;
 	GpxDbHelper gpxDbHelper;
+
+	private Resources localizedResources;
 
 	private RoutingConfiguration.Builder routingConfig;
 	private Locale preferredLocale = null;
@@ -240,8 +244,8 @@ public class OsmandApplication extends MultiDexApplication {
 		if (routingHelper != null) {
 			routingHelper.getVoiceRouter().onApplicationTerminate();
 		}
-        if(RateUsBottomSheetDialog.shouldShow(this)) {
-            osmandSettings.RATE_US_STATE.set(RateUsBottomSheetDialog.RateUsState.IGNORED);
+        if(RateUsBottomSheetDialogFragment.shouldShow(this)) {
+            osmandSettings.RATE_US_STATE.set(RateUsBottomSheetDialogFragment.RateUsState.IGNORED);
         }
         getNotificationHelper().removeNotifications(false);
 	}
@@ -287,7 +291,6 @@ public class OsmandApplication extends MultiDexApplication {
 	public void setOsmandSettings(OsmandSettings osmandSettings) {
 		//android.os.Process.killProcess(android.os.Process.myPid());
 		this.osmandSettings = osmandSettings;
-		resourceManager.getRenderer().updateSettings();
 		OsmandPlugin.initPlugins(this);
 	}
 
@@ -376,25 +379,34 @@ public class OsmandApplication extends MultiDexApplication {
 		String lang = split[0];
 		String country = (split.length > 1) ? split[1] : "";
 
-		if(defaultLocale == null) {
+		if (defaultLocale == null) {
 			defaultLocale = Locale.getDefault();
 		}
-		if (!"".equals(lang) && !config.locale.equals(pl)) {
+		if (!"".equals(lang)) {
 			if (!"".equals(country)) {
 				preferredLocale = new Locale(lang, country);
 			} else {
 				preferredLocale = new Locale(lang);
 			}
-			Locale.setDefault(preferredLocale);
-			config.locale = preferredLocale;
-			getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-		} else if("".equals(lang) && defaultLocale != null && Locale.getDefault() != defaultLocale) {
-			Locale.setDefault(defaultLocale);
-			config.locale = defaultLocale;
-			preferredLocale = null;
-			getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
 		}
-		
+		Locale selectedLocale = null;
+
+		if (!"".equals(lang) && !config.locale.equals(preferredLocale)) {
+			selectedLocale = preferredLocale;
+		} else if ("".equals(lang) && defaultLocale != null && Locale.getDefault() != defaultLocale) {
+			selectedLocale = defaultLocale;
+			preferredLocale = null;
+		}
+		if (selectedLocale != null) {
+			Locale.setDefault(selectedLocale);
+			config.locale = selectedLocale;
+			getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+			if (android.os.Build.VERSION.SDK_INT >= 17) {
+				Configuration conf = new Configuration(config);
+				conf.locale = selectedLocale;
+				localizedResources = createConfigurationContext(conf).getResources();
+			}
+		}
 	}
 
 	public static final int PROGRESS_DIALOG = 5;
@@ -450,7 +462,7 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void initVoiceCommandPlayer(final Activity uiContext, final ApplicationMode applicationMode,
-	                                   boolean warningNoneProvider, Runnable run, boolean showDialog, boolean force) {
+	                                   boolean warningNoneProvider, Runnable run, boolean showDialog, boolean force, final boolean applyAllModes) {
 		String voiceProvider = osmandSettings.VOICE_PROVIDER.getModeValue(applicationMode);
 		if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
 			if (warningNoneProvider && voiceProvider == null) {
@@ -489,14 +501,20 @@ public class OsmandApplication extends MultiDexApplication {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						if (!Algorithms.isEmpty(firstSelectedVoiceProvider)) {
-							routingOptionsHelper.applyVoiceProvider((MapActivity) uiContext, firstSelectedVoiceProvider);
+							routingOptionsHelper.applyVoiceProvider((MapActivity) uiContext, firstSelectedVoiceProvider, applyAllModes);
 						}
 					}
 				});
 				builder.setNeutralButton(R.string.shared_string_do_not_use, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialogInterface, int i) {
-						osmandSettings.VOICE_PROVIDER.setModeValue(applicationMode, OsmandSettings.VOICE_PROVIDER_NOT_USE);
+						if (applyAllModes) {
+							for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+								osmandSettings.VOICE_PROVIDER.setModeValue(mode, OsmandSettings.VOICE_PROVIDER_NOT_USE);
+							}
+						} else {
+							osmandSettings.VOICE_PROVIDER.setModeValue(applicationMode, OsmandSettings.VOICE_PROVIDER_NOT_USE);
+						}
 					}
 				});
 
@@ -825,7 +843,17 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 		return lang;
 	}
-	
+
+	@Override
+	public AssetManager getAssets() {
+		return localizedResources != null ? localizedResources.getAssets() : super.getAssets();
+	}
+
+	@Override
+	public Resources getResources() {
+		return localizedResources != null ? localizedResources : super.getResources();
+	}
+
 	public synchronized RoutingConfiguration.Builder getRoutingConfig() {
 		RoutingConfiguration.Builder rc;
 		if(routingConfig == null) {
@@ -843,10 +871,14 @@ public class OsmandApplication extends MultiDexApplication {
 	public OsmandRegions getRegions() {
 		return regions;
 	}
-	
+
 	public boolean accessibilityEnabled() {
-		final AccessibilityMode mode = getSettings().ACCESSIBILITY_MODE.get();
-		if(OsmandPlugin.getEnabledPlugin(AccessibilityPlugin.class) == null) {
+		return accessibilityEnabledForMode(getSettings().APPLICATION_MODE.get());
+	}
+
+	public boolean accessibilityEnabledForMode(ApplicationMode appMode) {
+		final AccessibilityMode mode = getSettings().ACCESSIBILITY_MODE.getModeValue(appMode);
+		if (OsmandPlugin.getEnabledPlugin(AccessibilityPlugin.class) == null) {
 			return false;
 		}
 		if (mode == AccessibilityMode.ON) {

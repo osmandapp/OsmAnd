@@ -54,7 +54,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						app.getSettings().setSharedGeneralPreference(prefId, newValue);
+						app.getSettings().setPreferenceForAllModes(prefId, newValue);
 						updateTargetSettings(false);
 						dismiss();
 					}

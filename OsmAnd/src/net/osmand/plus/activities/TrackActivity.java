@@ -189,8 +189,8 @@ public class TrackActivity extends TabActivity {
 			}
 			if (file != null) {
 				SelectedGpxFile sf = selectedGpxHelper.getSelectedFileByPath(gpxFile.path);
-				if (sf != null && file != null && sf.getDisplayGroups() != null) {
-					displayGroups = sf.getDisplayGroups();
+				if (sf != null && file != null && sf.getDisplayGroups(app) != null) {
+					displayGroups = sf.getDisplayGroups(app);
 				}
 			}
 		}
@@ -410,6 +410,23 @@ public class TrackActivity extends TabActivity {
 		}
 	}
 
+	public boolean setJoinSegments(boolean joinSegments) {
+		if (gpxDataItem != null) {
+			boolean updated = app.getGpxDbHelper().updateJoinSegments(gpxDataItem, joinSegments);
+
+			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
+			if (updated && selectedGpxFile != null) {
+				selectedGpxFile.setJoinSegments(joinSegments);
+			}
+			return updated;
+		}
+		return false;
+	}
+
+	public boolean isJoinSegments() {
+		return gpxDataItem != null && gpxDataItem.isJoinSegments();
+	}
+
 	private static class GPXFileLoaderTask extends AsyncTask<Void, Void, GPXFile> {
 
 		private OsmandApplication app;
@@ -479,7 +496,7 @@ public class TrackActivity extends TabActivity {
 					} else {
 						final SelectedGpxFile selectedGpx = helper.getSelectedFileByPath(result.path);
 						if (selectedGpx != null && result.error == null) {
-							selectedGpx.setGpxFile(result);
+							selectedGpx.setGpxFile(result, app);
 						}
 					}
 				}

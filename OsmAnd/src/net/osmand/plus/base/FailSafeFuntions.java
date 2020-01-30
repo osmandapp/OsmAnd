@@ -173,7 +173,7 @@ public class FailSafeFuntions {
 		app.getSettings().FOLLOW_THE_ROUTE.set(true);
 		routingHelper.setFollowingMode(true);
 		app.getTargetPointsHelper().updateRouteAndRefresh(true);
-		app.initVoiceCommandPlayer(ma, routingHelper.getAppMode(), true, null, false, false);
+		app.initVoiceCommandPlayer(ma, routingHelper.getAppMode(), true, null, false, false, false);
 		if(ma.getDashboard().isVisible()) {
 			ma.getDashboard().hideDashboard();
 		}

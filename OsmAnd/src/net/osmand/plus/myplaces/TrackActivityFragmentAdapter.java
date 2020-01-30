@@ -250,7 +250,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 	private void refreshTrackBitmap() {
 		TrackBitmapDrawer trackDrawer = getTrackBitmapDrawer();
 		if (trackDrawer != null) {
-			getTrackBitmapDrawer().refreshTrackBitmap();
+			trackDrawer.refreshTrackBitmap();
 		}
 	}
 
@@ -720,11 +720,29 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 
 	private void updateSplitIntervalView(View view) {
 		final TextView text = (TextView) view.findViewById(R.id.split_interval_text);
+		selectedSplitInterval = getSelectedSplitInterval();
 		if (selectedSplitInterval == 0) {
 			text.setText(app.getString(R.string.shared_string_none));
 		} else {
 			text.setText(options.get(selectedSplitInterval));
 		}
+	}
+	
+	private int getSelectedSplitInterval() {
+		if (getGpxDataItem() == null) {
+			return 0;
+		}
+		int splitType = getGpxDataItem().getSplitType();
+		double splitInterval = getGpxDataItem().getSplitInterval();
+		int position = 0;
+		
+		if (splitType == GPXDatabase.GPX_SPLIT_TYPE_DISTANCE) {
+			position = distanceSplit.indexOf(splitInterval);
+		} else if (splitType == GPXDatabase.GPX_SPLIT_TYPE_TIME) {
+			position = timeSplit.indexOf((int) splitInterval);
+		}
+		
+		return position > 0 ? position : 0;
 	}
 
 	private void updateColorView(View colorView) {
@@ -974,6 +992,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		private List<Double> distanceSplit;
 		private TIntArrayList timeSplit;
 		private int selectedSplitInterval;
+		private boolean joinSegments;
 
 		SplitTrackAsyncTask(@NonNull TrackActivity activity,
 							@NonNull TrackActivityFragmentAdapter fragmentAdapter,
@@ -988,6 +1007,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 			selectedSplitInterval = fragmentAdapter.selectedSplitInterval;
 			distanceSplit = fragmentAdapter.distanceSplit;
 			timeSplit = fragmentAdapter.timeSplit;
+			joinSegments = activity.isJoinSegments();
 		}
 
 		@Override
@@ -1008,7 +1028,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 				}
 				if (selectedGpx != null) {
 					List<GpxDisplayGroup> groups = fragment.getDisplayGroups();
-					selectedGpx.setDisplayGroups(groups);
+					selectedGpx.setDisplayGroups(groups, app);
 				}
 				/*
 				if (fragment.isVisible()) {
@@ -1024,9 +1044,9 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 				if (selectedSplitInterval == 0) {
 					model.noSplit(app);
 				} else if (distanceSplit.get(selectedSplitInterval) > 0) {
-					model.splitByDistance(app, distanceSplit.get(selectedSplitInterval));
+					model.splitByDistance(app, distanceSplit.get(selectedSplitInterval), joinSegments);
 				} else if (timeSplit.get(selectedSplitInterval) > 0) {
-					model.splitByTime(app, timeSplit.get(selectedSplitInterval));
+					model.splitByTime(app, timeSplit.get(selectedSplitInterval), joinSegments);
 				}
 			}
 			return null;

@@ -19,7 +19,9 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
@@ -27,6 +29,7 @@ import net.osmand.plus.settings.preferences.ListPreferenceEx;
 
 import java.util.Set;
 
+import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
 import static net.osmand.plus.activities.SettingsNavigationActivity.MORE_VALUE;
 
 public class VoiceAnnouncesFragment extends BaseSettingsFragment {
@@ -40,10 +43,12 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				boolean checked = !settings.SPEAK_ROUTING_ALARMS.get();
-				settings.SPEAK_ROUTING_ALARMS.set(checked);
+				ApplicationMode selectedMode = getSelectedAppMode();
+				boolean checked = !settings.VOICE_MUTE.getModeValue(selectedMode);
+				settings.VOICE_MUTE.setModeValue(selectedMode, checked);
 				updateToolbarSwitch();
-				enableDisablePreferences(checked);
+				enableDisablePreferences(!checked);
+				updateMenu();
 			}
 		});
 	}
@@ -59,7 +64,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		if (view == null) {
 			return;
 		}
-		boolean checked = settings.SPEAK_ROUTING_ALARMS.get();
+		boolean checked = !settings.VOICE_MUTE.getModeValue(getSelectedAppMode());
 
 		int color = checked ? getActiveProfileColor() : ContextCompat.getColor(app, R.color.preference_top_switch_off);
 		View switchContainer = view.findViewById(R.id.toolbar_switch_container);
@@ -67,6 +72,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 
 		SwitchCompat switchView = (SwitchCompat) switchContainer.findViewById(R.id.switchWidget);
 		switchView.setChecked(checked);
+		UiUtilities.setupCompoundButton(switchView, isNightMode(), TOOLBAR);
 
 		TextView title = switchContainer.findViewById(R.id.switchButtonText);
 		title.setText(checked ? R.string.shared_string_on : R.string.shared_string_off);
@@ -87,14 +93,14 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 			setupAudioStreamGuidancePref();
 			setupInterruptMusicPref();
 		}
-		enableDisablePreferences(settings.SPEAK_ROUTING_ALARMS.get());
+		enableDisablePreferences(!settings.VOICE_MUTE.getModeValue(getSelectedAppMode()));
 	}
 
 	private void setupSpeedLimitExceedPref() {
 		Float[] speedLimitValues;
 		String[] speedLimitNames;
 
-		if (settings.METRIC_SYSTEM.get() == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
+		if (settings.METRIC_SYSTEM.getModeValue(getSelectedAppMode()) == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
 			speedLimitValues = new Float[] {-10f, -7f, -5f, 0f, 5f, 7f, 10f, 15f, 20f};
 			speedLimitNames = new String[speedLimitValues.length];
 
@@ -185,13 +191,11 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		//AudioManager.USE_DEFAULT_STREAM_TYPE};
 
 		ListPreferenceEx audioStreamGuidance = createListPreferenceEx(settings.AUDIO_STREAM_GUIDANCE.getId(), streamTypes, streamIntTypes, R.string.choose_audio_stream, R.layout.preference_with_descr);
-		audioStreamGuidance.setIconSpaceReserved(true);
 		getPreferenceScreen().addPreference(audioStreamGuidance);
 	}
 
 	private void setupInterruptMusicPref() {
 		Preference interruptMusicPref = createSwitchPreference(settings.INTERRUPT_MUSIC, R.string.interrupt_music, R.string.interrupt_music_descr, R.layout.preference_switch_with_descr);
-		interruptMusicPref.setIconSpaceReserved(true);
 		getPreferenceScreen().addPreference(interruptMusicPref);
 	}
 
@@ -206,7 +210,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				settings.SPEAK_SPEED_CAMERA.set(true);
+				settings.SPEAK_SPEED_CAMERA.setModeValue(getSelectedAppMode(), true);
 				SwitchPreferenceCompat speakSpeedCamera = (SwitchPreferenceCompat) findPreference(settings.SPEAK_SPEED_CAMERA.getId());
 				if (speakSpeedCamera != null) {
 					speakSpeedCamera.setChecked(true);
@@ -217,9 +221,17 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		bld.show();
 	}
 
+	private void updateMenu() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapRouteInfoMenu().updateMenu();
+		}
+	}
+
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String prefId = preference.getKey();
+		ApplicationMode selectedMode = getSelectedAppMode();
 
 		if (prefId.equals(settings.VOICE_PROVIDER.getId())) {
 			if (MORE_VALUE.equals(newValue)) {
@@ -229,13 +241,13 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 				intent.putExtra(DownloadActivity.FILTER_CAT, DownloadActivityType.VOICE_FILE.getTag());
 				startActivity(intent);
 			} else if (newValue instanceof String) {
-				settings.VOICE_PROVIDER.set((String) newValue);
-				app.initVoiceCommandPlayer(getActivity(), getSelectedAppMode(), false, null, true, false);
+				settings.VOICE_PROVIDER.setModeValue(selectedMode, (String) newValue);
+				app.initVoiceCommandPlayer(getActivity(), selectedMode, false, null, true, false, false);
 			}
 			return true;
 		}
 		if (prefId.equals(settings.SPEAK_SPEED_CAMERA.getId())) {
-			if (!settings.SPEAK_SPEED_CAMERA.get()) {
+			if (!settings.SPEAK_SPEED_CAMERA.getModeValue(selectedMode)) {
 				confirmSpeedCamerasDlg();
 				return false;
 			} else {

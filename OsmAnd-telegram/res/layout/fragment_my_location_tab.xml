@@ -50,7 +50,7 @@
 			android:id="@+id/text_container"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginBottom="@dimen/content_padding_standard"
+			android:layout_marginBottom="@dimen/content_padding_half"
 			android:animateLayoutChanges="true"
 			android:orientation="vertical"
 			android:paddingLeft="@dimen/my_location_text_sides_margin"
@@ -58,7 +58,7 @@
 
 			<LinearLayout
 				android:layout_width="match_parent"
-				android:layout_height="@dimen/action_bar_height">
+				android:layout_height="wrap_content">
 
 				<net.osmand.telegram.ui.views.TextViewEx
 					android:id="@+id/title"
@@ -66,6 +66,8 @@
 					android:layout_height="wrap_content"
 					android:layout_gravity="center_vertical"
 					android:layout_weight="1"
+					android:paddingTop="@dimen/app_bar_title_padding_small"
+					android:paddingBottom="@dimen/app_bar_title_padding_small"
 					android:ellipsize="end"
 					android:gravity="center"
 					android:maxLines="1"
@@ -292,6 +294,30 @@
 					tools:tint="@color/icon_light"/>
 
 			</LinearLayout>
+
+		</FrameLayout>
+
+		<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@color/bg_list_item_dark">
+
+			<net.osmand.telegram.ui.views.TextViewEx
+				android:id="@+id/back_to_osmand"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="?attr/selectableItemBackground"
+				android:drawableStart="@drawable/ic_action_undo"
+				android:drawableLeft="@drawable/ic_action_undo"
+				android:drawablePadding="@dimen/my_location_text_sides_margin"
+				android:gravity="center_vertical"
+				android:minHeight="@dimen/list_item_height_min"
+				android:paddingStart="@dimen/content_padding_standard"
+				android:paddingLeft="@dimen/content_padding_standard"
+				android:text="@string/back_to_osmand"
+				android:textColor="?attr/colorPrimaryDark"
+				android:textSize="@dimen/list_item_title_text_size"
+				app:typeface="@string/font_roboto_regular" />
 
 		</FrameLayout>
 

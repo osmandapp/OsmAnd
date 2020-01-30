@@ -28,6 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.ValueHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -56,7 +57,6 @@ public class DashChooseAppDirFragment {
 		public static final int VERSION_DEFAULTLOCATION_CHANGED = 19;
 		private TextView locationPath;
 		private TextView locationDesc;
-		MessageFormat formatGb = new MessageFormat("{0, number,#.##} GB", Locale.US);
 		private View copyMapsBtn;
 		private ImageView editBtn;
 		private View dontCopyMapsBtn;
@@ -92,8 +92,7 @@ public class DashChooseAppDirFragment {
 		private String getFreeSpace(File dir) {
 			if (dir.canRead()) {
 				StatFs fs = new StatFs(dir.getAbsolutePath());
-				return formatGb
-						.format(new Object[] { (float) (fs.getAvailableBlocks()) * fs.getBlockSize() / (1 << 30) });
+				return AndroidUtils.formatSize(activity, (long) fs.getAvailableBlocks() * fs.getBlockSize() );
 			}
 			return "";
 		}
@@ -313,19 +312,10 @@ public class DashChooseAppDirFragment {
 					@SuppressLint("StaticFieldLeak")
 					MoveFilesToDifferentDirectory task = new MoveFilesToDifferentDirectory(activity, currentAppFile, selectedFile) {
 
-						private MessageFormat formatMb = new MessageFormat("{0, number,##.#} MB", Locale.US);
 
 						@NonNull
 						private String getFormattedSize(long sizeBytes) {
-							int size = (int) ((sizeBytes + 512) >> 10);
-							if (size >= 0) {
-								if (size > 100) {
-									return formatMb.format(new Object[]{(float) size / (1 << 10)});
-								} else {
-									return size + " kB";
-								}
-							}
-							return "";
+							return AndroidUtils.formatSize(activity, sizeBytes);
 						}
 
 						private void showResultsDialog() {

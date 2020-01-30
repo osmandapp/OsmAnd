@@ -6,19 +6,20 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.LayerDrawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -51,7 +52,7 @@ public class TrackBitmapDrawer {
 	private int trackColor;
 	private int currentTrackColor;
 	private Paint paint;
-	private Bitmap selectedPoint;
+	private LayerDrawable selectedPoint;
 	private int defPointColor;
 	private Paint paintIcon;
 	private Bitmap pointSmall;
@@ -60,9 +61,11 @@ public class TrackBitmapDrawer {
 
 	public interface TrackBitmapDrawerListener {
 		void onTrackBitmapDrawing();
+
 		void onTrackBitmapDrawn();
 
 		boolean isTrackBitmapSelectionSupported();
+
 		void drawTrackBitmap(Bitmap bitmap);
 	}
 
@@ -83,7 +86,7 @@ public class TrackBitmapDrawer {
 		defPointColor = ContextCompat.getColor(app, R.color.gpx_color_point);
 		paintIcon = new Paint();
 		pointSmall = BitmapFactory.decodeResource(app.getResources(), R.drawable.map_white_shield_small);
-		selectedPoint = BitmapFactory.decodeResource(app.getResources(), R.drawable.map_default_location);
+		selectedPoint = (LayerDrawable) app.getResources().getDrawable(R.drawable.map_location_default);
 	}
 
 	public void addListener(TrackBitmapDrawerListener l) {
@@ -205,8 +208,15 @@ public class TrackBitmapDrawer {
 				if (gpxFile.showCurrentTrack) {
 					sf = app.getSavingTrackHelper().getCurrentTrack();
 				} else {
-					sf = new GpxSelectionHelper.SelectedGpxFile();
-					sf.setGpxFile(gpxFile);
+					sf = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
+					if (sf == null) {
+						sf = new GpxSelectionHelper.SelectedGpxFile();
+						GpxDataItem gpxDataItem = getGpxDataItem();
+						if (gpxDataItem != null) {
+							sf.setJoinSegments(gpxDataItem.isJoinSegments());
+						}
+					}
+					sf.setGpxFile(gpxFile, app);
 				}
 				Bitmap bmp = mapBitmap.copy(mapBitmap.getConfig(), true);
 				Canvas canvas = new Canvas(bmp);
@@ -274,7 +284,11 @@ public class TrackBitmapDrawer {
 			paintIcon.setColorFilter(null);
 			Bitmap bmp = mapTrackBitmap.copy(mapTrackBitmap.getConfig(), true);
 			Canvas canvas = new Canvas(bmp);
-			canvas.drawBitmap(selectedPoint, x - selectedPoint.getWidth() / 2, y - selectedPoint.getHeight() / 2, paintIcon);
+			selectedPoint.setBounds((int) x - selectedPoint.getIntrinsicWidth() / 2,
+					(int) y - selectedPoint.getIntrinsicHeight() / 2,
+					(int) x + selectedPoint.getIntrinsicWidth() / 2,
+					(int) y + selectedPoint.getIntrinsicHeight() / 2);
+			selectedPoint.draw(canvas);
 			return bmp;
 		} else {
 			return null;

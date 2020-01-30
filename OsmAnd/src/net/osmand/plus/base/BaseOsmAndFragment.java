@@ -1,6 +1,5 @@
 package net.osmand.plus.base;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -14,13 +13,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
@@ -47,25 +45,7 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 					}
 				}
 				if (!isFullScreenAllowed() && activity instanceof MapActivity) {
-					View view = getView();
-					if (view != null) {
-						ViewTreeObserver vto = view.getViewTreeObserver();
-						vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-
-							@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-							@Override
-							public void onGlobalLayout() {
-
-								View view = getView();
-								if (view != null) {
-									ViewTreeObserver obs = view.getViewTreeObserver();
-									obs.removeOnGlobalLayoutListener(this);
-									view.requestLayout();
-								}
-							}
-						});
-					}
-					((MapActivity) activity).exitFromFullScreen();
+					((MapActivity) activity).exitFromFullScreen(getView());
 				}
 			}
 		}

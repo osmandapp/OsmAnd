@@ -45,10 +45,10 @@ android {
 	defaultConfig {
 		minSdkVersion System.getenv("MIN_SDK_VERSION") ? System.getenv("MIN_SDK_VERSION").toInteger() : 15
 		targetSdkVersion 28
-		versionCode 350
+		versionCode 356
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
 		multiDexEnabled true
-		versionName "3.5.0"
+		versionName "3.5.6"
 		versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
 		versionName System.getenv("APK_VERSION_SUFFIX")? versionName + System.getenv("APK_VERSION_SUFFIX").toString(): versionName
 		
@@ -115,6 +115,9 @@ android {
 		}
 		huawei {
 			manifest.srcFile "AndroidManifest-huawei.xml"
+		}
+		freehuawei {
+			manifest.srcFile "AndroidManifest-freehuawei.xml"
 		}
 
 		legacy {
@@ -189,6 +192,10 @@ android {
 			dimension "version"
 			applicationId "net.osmand.plus.huawei"
 		}
+		freehuawei {
+			dimension "version"
+			applicationId "net.osmand.huawei"
+		}
 
 		// CoreVersion
 		legacy {
@@ -250,7 +257,8 @@ task validateTranslate {
 				if (line.contains("\$ s") || line.contains("\$ d") || line.contains("\$ f") ||
 						line.contains(" \$s") || line.contains(" \$d") || line.contains(" \$f") ||
 						line.contains("1\$ ") || line.contains("2\$ ") || line.contains("3\$ ") ||
-						(line.contains("% \$") || line.contains("% 1") || line.contains("% 2") || 
+						line.contains("%1s") || line.contains(" 1\$s") ||
+						(line.contains("% \$") || line.contains("% 1") || line.contains("% 2") ||
                                 line.contains("% 3") || line.contains("% s"))) {
 					throw new GradleException("Incorrect translation " + it.getAbsolutePath() + " " + line);
 				}
@@ -459,7 +467,6 @@ dependencies {
 	implementation group: 'commons-logging', name: 'commons-logging', version: '1.2'
 	implementation 'commons-codec:commons-codec:1.11'
 	implementation 'it.unibo.alice.tuprolog:tuprolog:3.2.1'
-	implementation 'org.beanshell:bsh-core:2.0b4'
 	implementation 'org.apache.commons:commons-compress:1.17'
 	implementation 'com.moparisthebest:junidecode:0.1.1'
 	implementation 'org.immutables:gson:2.5.0'
@@ -493,4 +500,5 @@ dependencies {
 	}
 
 	huaweiImplementation files('libs/huawei-android-drm_v2.5.2.300.jar')
+	freehuaweiImplementation files('libs/huawei-android-drm_v2.5.2.300.jar')
 }

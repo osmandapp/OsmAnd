@@ -189,7 +189,7 @@
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram（即時通訊應用程式）用以與人們連線與溝通。</string>
     <string name="privacy_policy_telegram_client">OsmAnd 追蹤器是其中一個使用 Telegram 開放平臺的客戶。您的聯絡人可以使用其他任何 Telegram 客戶端。</string>
-    <string name="privacy_policy_agree">點選繼續就代表您同意 Telegram 隱私權政策與 OsmAnd 隱私權政策。</string>
+    <string name="privacy_policy_agree">點選「繼續」就代表您同意 Telegram 與 OsmAnd 的隱私權政策。</string>
     <string name="shared_string_accept">接受</string>
     <string name="telegram_privacy_policy">Telegram 隱私權政策</string>
     <string name="osmand_privacy_policy">OsmAnd 隱私權政策</string>
@@ -249,4 +249,24 @@
     <string name="shared_string_apply">套用</string>
     <string name="set_time_timeline_descr">選取要顯示的時間</string>
     <string name="start_end_date">開始到結束日期</string>
+    <string name="location_sharing_status">正在分享：%1$s</string>
+    <string name="shared_string_enabled">已啟用</string>
+    <string name="saved_messages">已儲存的訊息</string>
+    <string name="time_zone_descr">選取要在您位置訊息中顯示的時區。</string>
+    <string name="time_zone">時區</string>
+    <string name="units_and_formats">單位與格式</string>
+    <string name="unit_of_length_descr">變更距離的測量方式。</string>
+    <string name="unit_of_length">長度單位</string>
+    <string name="unit_of_speed_system_descr">定義速度單位。</string>
+    <string name="unit_of_speed_system">速度單位</string>
+    <string name="buffer_time_descr">在緩衝中儲存點的最長時間</string>
+    <string name="buffer_time">緩衝過期時間</string>
+    <string name="shared_string_suggested">建議</string>
+    <string name="status_widget_title">OsmAnd Tracker 狀態</string>
+    <string name="back_to_osmand">回到 OsmAnd</string>
+    <string name="last_update_from_telegram_date">從 Telegram 而來的最後更新：%1$s</string>
+    <string name="last_response_date">最後回應：%1$s</string>
+    <string name="last_update_from_telegram_duration">從 Telegram 而來的最後更新：%1$s 前</string>
+    <string name="last_response_duration">最後回應：%1$s 前</string>
+    <string name="duration_ago">%1$s 前</string>
 </resources>

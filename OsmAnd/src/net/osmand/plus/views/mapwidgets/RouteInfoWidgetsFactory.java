@@ -875,9 +875,11 @@ public class RouteInfoWidgetsFactory {
 	}
 	
 	
-	private static class LanesDrawable extends Drawable {
-		int[] lanes = null;
+	public static class LanesDrawable extends Drawable {
+		public int[] lanes = null;
 		boolean imminent = false;
+		public boolean isTurnByTurn = false;
+		public boolean isNightMode = false;
 		private Context ctx;
 		private Paint paintBlack;
 		private Paint paintRouteDirection;
@@ -892,7 +894,7 @@ public class RouteInfoWidgetsFactory {
 		private int imgMinDelta;
 		private int imgMargin;
 
-		LanesDrawable(MapActivity ctx, float scaleCoefficent) {
+		public LanesDrawable(MapActivity ctx, float scaleCoefficent) {
 			this.ctx = ctx;
 			OsmandSettings settings = ctx.getMyApplication().getSettings();
 			leftSide = settings.DRIVING_REGION.get().leftHandDriving;
@@ -916,7 +918,7 @@ public class RouteInfoWidgetsFactory {
 			paintSecondTurn.setColor(ctx.getResources().getColor(R.color.nav_arrow_distant));
 		}
 
-		void updateBounds() {
+		public void updateBounds() {
 			float w = 0;
 			float h = 0;
 			float delta = imgMinDelta;
@@ -1031,8 +1033,13 @@ public class RouteInfoWidgetsFactory {
 				// canvas.translate((int) (16 * scaleCoefficient), 0);
 				for (int i = 0; i < lanes.length; i++) {
 					if ((lanes[i] & 1) == 1) {
-						paintRouteDirection.setColor(imminent ? ctx.getResources().getColor(R.color.nav_arrow_imminent) :
-								ctx.getResources().getColor(R.color.nav_arrow));
+						if (isTurnByTurn){
+							paintRouteDirection.setColor(isNightMode ? ctx.getResources().getColor(R.color.active_color_primary_dark) :
+									ctx.getResources().getColor(R.color.active_color_primary_light));
+						} else {
+							paintRouteDirection.setColor(imminent ? ctx.getResources().getColor(R.color.nav_arrow_imminent) :
+									ctx.getResources().getColor(R.color.nav_arrow));
+						}
 					} else {
 						paintRouteDirection.setColor(ctx.getResources().getColor(R.color.nav_arrow_distant));
 					}

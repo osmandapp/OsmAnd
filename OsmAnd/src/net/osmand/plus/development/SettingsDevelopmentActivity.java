@@ -143,6 +143,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 
 		pref = new Preference(this);
 		pref.setTitle(R.string.logcat_buffer);
+	    	pref.setSummary(R.string.logcat_buffer_descr);
 		pref.setKey("logcat_buffer");
 		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override

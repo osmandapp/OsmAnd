@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Pair;
 
+import net.osmand.AndroidUtils;
 import net.osmand.aidl.AidlContextMenuButtonWrapper;
 import net.osmand.aidl.AidlContextMenuButtonsWrapper;
 import net.osmand.aidl.AidlMapPointWrapper;
@@ -196,10 +197,11 @@ public class AMapPointMenuController extends MenuController {
 				}
 			}
 		};
+		OsmandApplication app = mapActivity.getMyApplication();
 		titleButtonController.caption = contextMenuButton.getLeftTextCaption();
 		titleButtonController.rightTextCaption = contextMenuButton.getRightTextCaption();
-		titleButtonController.leftIconId = getIconIdByName(contextMenuButton.getLeftIconName());
-		titleButtonController.rightIconId = getIconIdByName(contextMenuButton.getRightIconName());
+		titleButtonController.leftIconId = AndroidUtils.getDrawableId(app, contextMenuButton.getLeftIconName());
+		titleButtonController.rightIconId = AndroidUtils.getDrawableId(app, contextMenuButton.getRightIconName());
 		titleButtonController.enabled = contextMenuButton.isEnabled();
 		titleButtonController.tintIcon = contextMenuButton.isTintIcon();
 
@@ -211,22 +213,13 @@ public class AMapPointMenuController extends MenuController {
 		if (activity != null) {
 			String iconName = point.getParams().get(AMapPoint.POINT_TYPE_ICON_NAME_PARAM);
 			if (!TextUtils.isEmpty(iconName)) {
-				return getIconIdByName(iconName);
+				return AndroidUtils.getDrawableId(activity.getMyApplication(), iconName);
 			}
 		}
 		if (!TextUtils.isEmpty(point.getShortName())) {
 			return R.drawable.ic_small_group;
 		}
 		return NO_ICON;
-	}
-
-	private int getIconIdByName(String iconName) {
-		MapActivity activity = getMapActivity();
-		if (activity != null && !TextUtils.isEmpty(iconName)) {
-			OsmandApplication app = activity.getMyApplication();
-			return app.getResources().getIdentifier(iconName, "drawable", app.getPackageName());
-		}
-		return 0;
 	}
 
 	private float getPointSpeed() {

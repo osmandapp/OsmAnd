@@ -236,7 +236,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 									? app.getFavorites().getVisibleFavByLatLon(marker.point)
 									: marker.favouritePoint;
 							if (fav != null) {
-								showMap(marker.point, fav.getPointDescription(), fav);
+								showMap(marker.point, fav.getPointDescription(mapActivity), fav);
 								return;
 							}
 
@@ -441,11 +441,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 
 	@Override
 	public void updateLocation(Location location) {
-		boolean newLocation = this.location == null && location != null;
-		boolean locationChanged = this.location != null && location != null
-				&& this.location.getLatitude() != location.getLatitude()
-				&& this.location.getLongitude() != location.getLongitude();
-		if (newLocation || locationChanged) {
+		if (!MapUtils.areLatLonEqual(this.location, location)) {
 			this.location = location;
 			updateLocationUi();
 		}

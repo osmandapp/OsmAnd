@@ -194,9 +194,10 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 						List<FavouritePoint> favs = app.getFavorites().getFavouritePoints();
 						for (FavouritePoint f : favs) {
 							if (entryLatLon.equals(new LatLon(f.getLatitude(), f.getLongitude()))
-									&& pointDescription.getName().equals(f.getName())) {
+									&& (pointDescription.getName().equals(f.getName()) ||
+									pointDescription.getName().equals(f.getDisplayName(app)))) {
 								object = f;
-								pointDescription = f.getPointDescription();
+								pointDescription = f.getPointDescription(app);
 								break;
 							}
 						}
@@ -204,7 +205,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					break;
 				case FAVORITE:
 					FavouritePoint fav = (FavouritePoint) object;
-					pointDescription = fav.getPointDescription();
+					pointDescription = fav.getPointDescription(app);
 					break;
 				case VILLAGE:
 				case CITY:
@@ -270,9 +271,16 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 			OsmandApplication app = mapActivity.getMyApplication();
 			QuickSearchType searchType = dialogFragment.getSearchType();
 			if (searchType.isTargetPoint()) {
-				mapActivity.getMapLayers().getMapControlsLayer().selectAddress(
-						pointDescription != null ? pointDescription.getName() : null,
-						latitude, longitude, searchType);
+				String name = null;
+				if (pointDescription != null) {
+					String typeName = pointDescription.getTypeName();
+					if (!Algorithms.isEmpty(typeName)) {
+						name = mapActivity.getString(R.string.street_city, pointDescription.getName(), typeName);
+					} else {
+						name = pointDescription.getName();
+					}
+				}
+				mapActivity.getMapLayers().getMapControlsLayer().selectAddress(name, latitude, longitude, searchType);
 
 				dialogFragment.dismiss();
 				mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoMenu();

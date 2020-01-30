@@ -1,5 +1,7 @@
 package net.osmand.plus;
 
+import android.location.GnssNavigationMessage;
+import android.location.GnssStatus;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import java.util.ArrayList;
@@ -17,7 +19,6 @@ import net.osmand.binary.GeocodingUtilities.GeocodingResult;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
-import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.router.RouteSegmentResult;
@@ -76,6 +77,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private static final long LOCATION_TIMEOUT_TO_BE_STALE = 1000 * 60 * 2; // 2 minutes
 	private static final long STALE_LOCATION_TIMEOUT_TO_BE_GONE = 1000 * 60 * 20; // 20 minutes
 
+	private static final long AGPS_TO_REDOWNLOAD = 16 * 60 * 60 * 1000; // 16 hours
+
 	private static final int REQUESTS_BEFORE_CHECK_LOCATION = 100;
 	private AtomicInteger locationRequestsCounter = new AtomicInteger();
 	private AtomicInteger staleLocationRequestsCounter = new AtomicInteger();
@@ -114,7 +117,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private int currentScreenOrientation;
 
 	private OsmandApplication app;
-	private OsmandSettings settings;
 
 	private NavigationInfo navigationInfo;
 	private CurrentPositionHelper currentPositionHelper;
@@ -126,11 +128,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	private List<OsmAndLocationListener> locationListeners = new ArrayList<OsmAndLocationProvider.OsmAndLocationListener>();
 	private List<OsmAndCompassListener> compassListeners = new ArrayList<OsmAndLocationProvider.OsmAndCompassListener>();
-	private Listener gpsStatusListener;
+	private Object gpsStatusListener;
 	private float[] mRotationM = new float[9];
-	private OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS;
-	private OsmandPreference<Boolean> USE_FILTER_FOR_COMPASS;
-	private static final long AGPS_TO_REDOWNLOAD = 16 * 60 * 60 * 1000; // 16 hours
 
 
 	public class SimulationProvider {
@@ -234,9 +233,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	public OsmAndLocationProvider(OsmandApplication app) {
 		this.app = app;
 		navigationInfo = new NavigationInfo(app);
-		settings = app.getSettings();
-		USE_MAGNETIC_FIELD_SENSOR_COMPASS = settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS;
-		USE_FILTER_FOR_COMPASS = settings.USE_KALMAN_FILTER_FOR_COMPASS;
 		currentPositionHelper = new CurrentPositionHelper(app);
 		locationSimulation = new OsmAndLocationSimulation(app, this);
 		addLocationListener(navigationInfo);
@@ -254,7 +250,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			}
 		}
 		if (isLocationPermissionAvailable(app)) {
-			service.addGpsStatusListener(getGpsStatusListener(service));
+			registerGpsStatusListener(service);
 			try {
 				service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, gpsListener);
 			} catch (IllegalArgumentException e) {
@@ -296,17 +292,55 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		}		
 	}
 
-	private Listener getGpsStatusListener(final LocationManager service) {
-		gpsStatusListener = new Listener() {
-			private GpsStatus gpsStatus;
-			@Override
-			public void onGpsStatusChanged(int event) {
-				gpsStatus = service.getGpsStatus(gpsStatus);
-				updateGPSInfo(gpsStatus);
-				updateLocation(location);
-			}
-		};
-		return gpsStatusListener;
+	private void registerGpsStatusListener(final LocationManager service) {
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+			gpsStatusListener = new GnssStatus.Callback() {
+
+				@Override
+				public void onStarted() {
+				}
+
+				@Override
+				public void onStopped() {
+				}
+
+				@Override
+				public void onFirstFix(int ttffMillis) {
+				}
+
+				@Override
+				public void onSatelliteStatusChanged(GnssStatus status) {
+					int satCount = 0;
+					boolean fixed = false;
+					int u = 0;
+					if(status != null) {
+						satCount = status.getSatelliteCount();
+						for (int i = 0; i < satCount; i++) {
+							if (status.usedInFix(i)) {
+								u++;
+								fixed = true;
+							}
+						}
+					}
+					gpsInfo.fixed = fixed;
+					gpsInfo.foundSatellites = satCount;
+					gpsInfo.usedSatellites = u;
+					updateLocation(location);
+				}
+			};
+			service.registerGnssStatusCallback((GnssStatus.Callback) gpsStatusListener);
+		} else {
+			gpsStatusListener = new Listener() {
+				private GpsStatus gpsStatus;
+				@Override
+				public void onGpsStatusChanged(int event) {
+					gpsStatus = service.getGpsStatus(gpsStatus);
+					updateGPSInfo(gpsStatus);
+					updateLocation(location);
+				}
+			};
+			service.addGpsStatusListener((Listener) gpsStatusListener);
+		}
 	}
 	
 	private void updateGPSInfo(GpsStatus s) {
@@ -393,7 +427,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		} else if (!sensorRegistered && register) {
 			Log.d(PlatformUtil.TAG, "Enable sensor"); //$NON-NLS-1$
 			SensorManager sensorMgr = (SensorManager) app.getSystemService(Context.SENSOR_SERVICE);
-			if (USE_MAGNETIC_FIELD_SENSOR_COMPASS.get()) {
+			if (app.getSettings().USE_MAGNETIC_FIELD_SENSOR_COMPASS.get()) {
 				Sensor s = sensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 				if (s == null || !sensorMgr.registerListener(this, s, SensorManager.SENSOR_DELAY_UI)) {
 					Log.e(PlatformUtil.TAG, "Sensor accelerometer could not be enabled");
@@ -476,7 +510,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				default:
 					return;
 				}
-				if (USE_MAGNETIC_FIELD_SENSOR_COMPASS.get()) {
+				OsmandSettings settings = app.getSettings();
+				if (settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS.get()) {
 					if (mGravs != null && mGeoMags != null) {
 						boolean success = SensorManager.getRotationMatrix(mRotationM, null, mGravs, mGeoMags);
 						if (!success) {
@@ -495,7 +530,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				lastValSin = (float) Math.sin(valRad);
 				lastValCos = (float) Math.cos(valRad);
 				// lastHeadingCalcTime = System.currentTimeMillis();
-				boolean filter = USE_FILTER_FOR_COMPASS.get(); //USE_MAGNETIC_FIELD_SENSOR_COMPASS.get();
+				boolean filter = settings.USE_KALMAN_FILTER_FOR_COMPASS.get(); //USE_MAGNETIC_FIELD_SENSOR_COMPASS.get();
 				if (filter) {
 					filterCompassValue();
 				} else {
@@ -646,7 +681,13 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	private void stopLocationRequests() {
 		LocationManager service = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
-		service.removeGpsStatusListener(gpsStatusListener);
+		if(gpsStatusListener != null) {
+			if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+				service.unregisterGnssStatusCallback((GnssStatus.Callback) gpsStatusListener);
+			} else {
+				service.removeGpsStatusListener((Listener) gpsStatusListener);
+			}
+		}
 		service.removeUpdates(gpsListener);
 		while(!networkListeners.isEmpty()) {
 			service.removeUpdates(networkListeners.poll());
@@ -771,7 +812,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (continuous) {
 			scheduleCheckIfGpsLost(location);
 		}
-		app.getSavingTrackHelper().updateLocation(location);
+		app.getSavingTrackHelper().updateLocation(location, heading);
 		OsmandPlugin.updateLocationPlugins(location);
 		app.getRoutingHelper().updateLocation(location);
 		app.getWaypointHelper().locationChanged(location);
@@ -797,7 +838,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		final RoutingHelper routingHelper = app.getRoutingHelper();
 		// 1. Logging services
 		if (location != null) {
-			app.getSavingTrackHelper().updateLocation(location);
+			app.getSavingTrackHelper().updateLocation(location, heading);
 			OsmandPlugin.updateLocationPlugins(location);
 		}
 
@@ -806,9 +847,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (routingHelper.isFollowingMode()) {
 			if (location == null || isPointAccurateForRouting(location)) {
 				// Update routing position and get location for sticking mode
-				updatedLocation = routingHelper.setCurrentLocation(location, settings.SNAP_TO_ROAD.get());
+				updatedLocation = routingHelper.setCurrentLocation(location, app.getSettings().SNAP_TO_ROAD.get());
 			}
-		} else if(routingHelper.isRoutePlanningMode() && settings.getPointToStart() == null) {
+		} else if(routingHelper.isRoutePlanningMode() && app.getSettings().getPointToStart() == null) {
 			routingHelper.setCurrentLocation(location, false);
 		} else if(getLocationSimulation().isRouteAnimating()) {
 			routingHelper.setCurrentLocation(location, false);

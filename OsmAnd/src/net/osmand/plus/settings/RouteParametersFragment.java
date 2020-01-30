@@ -77,9 +77,9 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	protected void setupPreferences() {
 		setupRouteParametersImage();
 
-		Preference vehicleParametersInfo = findPreference(ROUTE_PARAMETERS_INFO);
-		vehicleParametersInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
-		vehicleParametersInfo.setTitle(getString(R.string.route_parameters_info, getSelectedAppMode().toHumanString(getContext())));
+		Preference routeParametersInfo = findPreference(ROUTE_PARAMETERS_INFO);
+		routeParametersInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
+		routeParametersInfo.setTitle(getString(R.string.route_parameters_info, getSelectedAppMode().toHumanString(getContext())));
 
 		setupRoutingPrefs();
 		setupTimeConditionalRoutingPref();
@@ -118,8 +118,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		SwitchPreferenceEx timeConditionalRouting = createSwitchPreferenceEx(settings.ENABLE_TIME_CONDITIONAL_ROUTING.getId(),
 				R.string.temporary_conditional_routing, R.layout.preference_with_descr_dialog_and_switch);
 		timeConditionalRouting.setIcon(getRoutingPrefIcon(settings.ENABLE_TIME_CONDITIONAL_ROUTING.getId()));
-		timeConditionalRouting.setSummaryOn(R.string.shared_string_enable);
-		timeConditionalRouting.setSummaryOff(R.string.shared_string_disable);
+		timeConditionalRouting.setSummaryOn(R.string.shared_string_on);
+		timeConditionalRouting.setSummaryOff(R.string.shared_string_off);
 		getPreferenceScreen().addPreference(timeConditionalRouting);
 	}
 
@@ -133,8 +133,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		SwitchPreferenceEx fastRoute = createSwitchPreferenceEx(app.getSettings().FAST_ROUTE_MODE.getId(), R.string.fast_route_mode, R.layout.preference_with_descr_dialog_and_switch);
 		fastRoute.setIcon(getRoutingPrefIcon(app.getSettings().FAST_ROUTE_MODE.getId()));
 		fastRoute.setDescription(getString(R.string.fast_route_mode_descr));
-		fastRoute.setSummaryOn(R.string.shared_string_enable);
-		fastRoute.setSummaryOff(R.string.shared_string_disable);
+		fastRoute.setSummaryOn(R.string.shared_string_on);
+		fastRoute.setSummaryOff(R.string.shared_string_off);
 
 		ApplicationMode am = getSelectedAppMode();
 		if (am.getRouteService() != RouteProvider.RouteService.OSMAND) {
@@ -170,9 +170,16 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 					screen.addPreference(drivingStyleRouting);
 				}
 				if (avoidParameters.size() > 0) {
-					String title = getString(R.string.avoid_in_routing_title);
-					String descr = getString(R.string.avoid_in_routing_descr_);
-					MultiSelectBooleanPreference avoidRouting = createRoutingBooleanMultiSelectPref(AVOID_ROUTING_PARAMETER_PREFIX, title, descr, avoidParameters);
+					String title;
+					String description;
+					if (am.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT)) {
+						title = getString(R.string.avoid_pt_types);
+						description = getString(R.string.avoid_pt_types_descr);
+					} else {
+						title = getString(R.string.impassable_road);
+						description = getString(R.string.avoid_in_routing_descr_);
+					}
+					MultiSelectBooleanPreference avoidRouting = createRoutingBooleanMultiSelectPref(AVOID_ROUTING_PARAMETER_PREFIX, title, description, avoidParameters);
 					screen.addPreference(avoidRouting);
 				}
 				if (preferParameters.size() > 0) {
@@ -197,9 +204,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 						SwitchPreferenceEx switchPreferenceEx = (SwitchPreferenceEx) createSwitchPreferenceEx(pref.getId(), title, description, R.layout.preference_with_descr_dialog_and_switch);
 						switchPreferenceEx.setDescription(description);
 						switchPreferenceEx.setIcon(getRoutingPrefIcon(p.getId()));
-						switchPreferenceEx.setSummaryOn(R.string.shared_string_enable);
-						switchPreferenceEx.setSummaryOff(R.string.shared_string_disable);
-						switchPreferenceEx.setIconSpaceReserved(true);
+						switchPreferenceEx.setSummaryOn(R.string.shared_string_on);
+						switchPreferenceEx.setSummaryOff(R.string.shared_string_off);
 
 						screen.addPreference(switchPreferenceEx);
 					} else {
@@ -214,7 +220,6 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 						ListPreferenceEx listPreferenceEx = (ListPreferenceEx) createListPreferenceEx(pref.getId(), p.getPossibleValueDescriptions(), svlss, title, R.layout.preference_with_descr);
 						listPreferenceEx.setDescription(description);
 						listPreferenceEx.setIcon(getRoutingPrefIcon(p.getId()));
-						listPreferenceEx.setIconSpaceReserved(true);
 
 						screen.addPreference(listPreferenceEx);
 					}
@@ -339,6 +344,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		String[] prefsIds = new String[routingParameters.size()];
 		Set<String> enabledPrefsIds = new HashSet<>();
 
+		ApplicationMode selectedMode = getSelectedAppMode();
 		for (int i = 0; i < routingParameters.size(); i++) {
 			RoutingParameter p = routingParameters.get(i);
 			BooleanPreference booleanRoutingPref = (BooleanPreference) settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
@@ -346,7 +352,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			entries[i] = SettingsBaseActivity.getRoutingStringPropertyName(app, p.getId(), p.getName());
 			prefsIds[i] = booleanRoutingPref.getId();
 
-			if (booleanRoutingPref.get()) {
+			if (booleanRoutingPref.getModeValue(selectedMode)) {
 				enabledPrefsIds.add(booleanRoutingPref.getId());
 			}
 		}

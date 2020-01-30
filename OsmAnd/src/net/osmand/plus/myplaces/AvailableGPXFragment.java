@@ -118,7 +118,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	private ActionMode actionMode;
 	private LoadGpxTask asyncLoader;
 	private GpxIndexesAdapter allGpxAdapter;
-	private static MessageFormat formatMb = new MessageFormat("{0, number,##.#} MB", Locale.US);
 	private ContextMenuAdapter optionsMenuAdapter;
 	private AsyncTask<GpxInfo, ?, ?> operationTask;
 	private GpxSelectionHelper selectedGpxHelper;
@@ -1474,7 +1473,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				final Uri fileUri = AndroidUtils.getUriForFile(getMyApplication(), gpxInfo.file);
 				final Intent sendIntent = new Intent(Intent.ACTION_SEND);
 				sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
-				sendIntent.setType("application/gpx+xml");
+				sendIntent.setType("text/plain");
 				sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 				startActivity(sendIntent);
 				return true;
@@ -1802,12 +1801,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			v.findViewById(R.id.unknown_section).setVisibility(View.VISIBLE);
 			String date = "";
 			String size = "";
+
 			if (child.getSize() >= 0) {
-				if (child.getSize() > 100) {
-					size = formatMb.format(new Object[]{(float) child.getSize() / (1 << 10)});
-				} else {
-					size = child.getSize() + " kB";
-				}
+				size = AndroidUtils.formatSize(v.getContext(), child.getSize() * 1024l);
 			}
 			DateFormat df = app.getResourceManager().getDateFormat();
 			long fd = child.getFileDate();
@@ -1867,9 +1863,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		SelectedGpxFile sgpx = getSelectedGpxFile(gpxInfo, app);
 		GPXTrackAnalysis analysis = null;
 		if (sgpx != null) {
-			analysis = sgpx.getTrackAnalysis();
+			analysis = sgpx.getTrackAnalysis(app);
 		} else if (gpxInfo.currentlyRecordingTrack) {
-			analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis();
+			analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis(app);
 		} else if (gpxInfo.file != null) {
 			GpxDataItemCallback analyserCallback = null;
 			if (callback != null) {

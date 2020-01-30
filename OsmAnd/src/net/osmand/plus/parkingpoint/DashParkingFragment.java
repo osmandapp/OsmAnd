@@ -101,7 +101,7 @@ public class DashParkingFragment extends DashLocationFragment {
 
 		TextView timeLeft = (TextView) mainView.findViewById(R.id.time_left);
 		if (limited) {
-			descr = getString(R.string.parking_place_limited) + " " + plugin.getFormattedTime( plugin.getParkingTime(), getActivity());
+			descr = getString(R.string.parking_place_limited) + " " + plugin.getFormattedTime( plugin.getParkingTime());
 			long endtime = plugin.getParkingTime();
 			long currTime = Calendar.getInstance().getTimeInMillis();
 			long timeDiff = endtime - currTime;

@@ -409,10 +409,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 									hide();
 								} else if (word.getType() == ObjectType.FAVORITE_GROUP) {
 									FavouritesDbHelper.FavoriteGroup group = (FavouritesDbHelper.FavoriteGroup) word.getResult().object;
-									if (group.points.size() > 1) {
+									if (group.getPoints().size() > 1) {
 										double left = 0, right = 0;
 										double top = 0, bottom = 0;
-										for (FavouritePoint p : group.points) {
+										for (FavouritePoint p : group.getPoints()) {
 											if (left == 0) {
 												left = p.getLongitude();
 												right = p.getLongitude();
@@ -429,8 +429,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 										hideToolbar();
 										MapActivity.launchMapActivityMoveToTop(getActivity());
 										hide();
-									} else if (group.points.size() == 1) {
-										FavouritePoint p = group.points.get(0);
+									} else if (group.getPoints().size() == 1) {
+										FavouritePoint p = group.getPoints().get(0);
 										app.getSettings().setMapLocationToShow(p.getLatitude(), p.getLongitude(), word.getResult().preferredZoom);
 										hideToolbar();
 										MapActivity.launchMapActivityMoveToTop(getActivity());
@@ -481,8 +481,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						List<HistoryEntry> historyEntries = new ArrayList<HistoryEntry>();
 						List<QuickSearchListItem> selectedItems = historySearchFragment.getListAdapter().getSelectedItems();
 						for (QuickSearchListItem searchListItem : selectedItems) {
-							HistoryEntry historyEntry = (HistoryEntry) searchListItem.getSearchResult().object;
-							historyEntries.add(historyEntry);
+							Object object = searchListItem.getSearchResult().object;
+							if (object instanceof HistoryEntry) {
+								historyEntries.add((HistoryEntry) object);
+							}
 						}
 						if (historyEntries.size() > 0) {
 							shareHistory(historyEntries);

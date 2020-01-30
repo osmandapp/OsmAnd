@@ -127,8 +127,8 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 		int dzoom = nzoom - TILE_ZOOM;
 		int div = (int) Math.pow(2.0, dzoom);
 
-		boolean useInternet = (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null || OsmandPlugin.getEnabledPlugin(MapillaryPlugin.class) != null) &&
-				settings.USE_INTERNET_TO_DOWNLOAD_TILES.get() && settings.isInternetConnectionAvailable() && map.couldBeDownloadedFromInternet();
+		boolean useInternet = (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null || OsmandPlugin.getEnabledPlugin(MapillaryPlugin.class) != null)
+				&& settings.isInternetConnectionAvailable() && map.couldBeDownloadedFromInternet();
 
 		Map<String, GeometryTile> tiles = new HashMap<>();
 		Map<QuadPointDouble, Map> visiblePoints = new HashMap<>();
@@ -286,7 +286,9 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 					x = tileBox.getPixXFromTile(tileX + px, tileY + py, TILE_ZOOM);
 					y = tileBox.getPixYFromTile(tileX + px, tileY + py, TILE_ZOOM);
 
-					canvas.drawLine(lastx, lasty, x, y, paintLine);
+					if (lastx != x || lasty != y) {
+						canvas.drawLine(lastx, lasty, x, y, paintLine);
+					}
 
 					lastx = x;
 					lasty = y;

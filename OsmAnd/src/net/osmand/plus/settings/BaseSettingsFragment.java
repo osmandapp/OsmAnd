@@ -34,11 +34,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.access.AccessibilitySettingsFragment;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -47,6 +49,10 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
+import net.osmand.plus.audionotes.MultimediaNotesFragment;
+import net.osmand.plus.development.DevelopmentSettingsFragment;
+import net.osmand.plus.monitoring.MonitoringSettingsFragment;
+import net.osmand.plus.osmedit.OsmEditingFragment;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment.AppModeChangedListener;
 import net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet;
@@ -83,12 +89,12 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	public enum SettingsScreenType {
 
-		MAIN_SETTINGS(MainSettingsFragment.class.getName(), false, R.xml.settings_main_screen, R.layout.global_preference_toolbar),
+		MAIN_SETTINGS(MainSettingsFragment.TAG, false, R.xml.settings_main_screen, R.layout.global_preference_toolbar),
 		GLOBAL_SETTINGS(GlobalSettingsFragment.class.getName(), false, R.xml.global_settings, R.layout.global_preference_toolbar),
-		CONFIGURE_PROFILE(ConfigureProfileFragment.class.getName(), true, R.xml.configure_profile, R.layout.profile_preference_toolbar_big),
+		CONFIGURE_PROFILE(ConfigureProfileFragment.class.getName(), true, R.xml.configure_profile, R.layout.profile_preference_toolbar_with_switch),
 		PROXY_SETTINGS(ProxySettingsFragment.class.getName(), false, R.xml.proxy_preferences, R.layout.global_preferences_toolbar_with_switch),
 		GENERAL_PROFILE(GeneralProfileSettingsFragment.class.getName(), true, R.xml.general_profile_settings, R.layout.profile_preference_toolbar_big),
-		NAVIGATION(NavigationFragment.class.getName(), true, R.xml.navigation_settings_new, R.layout.profile_preference_toolbar_big),
+		NAVIGATION(NavigationFragment.class.getName(), true, R.xml.navigation_settings_new, R.layout.profile_preference_toolbar),
 		COORDINATES_FORMAT(CoordinatesFormatFragment.class.getName(), true, R.xml.coordinates_format, R.layout.profile_preference_toolbar),
 		ROUTE_PARAMETERS(RouteParametersFragment.class.getName(), true, R.xml.route_parameters, R.layout.profile_preference_toolbar),
 		SCREEN_ALERTS(ScreenAlertsFragment.class.getName(), true, R.xml.screen_alerts, R.layout.profile_preference_toolbar_with_switch),
@@ -96,7 +102,15 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		VEHICLE_PARAMETERS(VehicleParametersFragment.class.getName(), true, R.xml.vehicle_parameters, R.layout.profile_preference_toolbar),
 		MAP_DURING_NAVIGATION(MapDuringNavigationFragment.class.getName(), true, R.xml.map_during_navigation, R.layout.profile_preference_toolbar),
 		TURN_SCREEN_ON(TurnScreenOnFragment.class.getName(), true, R.xml.turn_screen_on, R.layout.profile_preference_toolbar_with_switch),
-		DATA_STORAGE(DataStorageFragment.class.getName(), false, R.xml.data_storage, R.layout.global_preference_toolbar);
+		DATA_STORAGE(DataStorageFragment.class.getName(), false, R.xml.data_storage, R.layout.global_preference_toolbar),
+		DIALOGS_AND_NOTIFICATIONS_SETTINGS(DialogsAndNotificationsSettingsFragment.class.getName(), false, R.xml.dialogs_and_notifications_preferences, R.layout.global_preferences_toolbar_with_switch),
+		PROFILE_APPEARANCE(ProfileAppearanceFragment.TAG, true, R.xml.profile_appearance, R.layout.profile_preference_toolbar),
+		OPEN_STREET_MAP_EDITING(OsmEditingFragment.class.getName(), false, R.xml.osm_editing, R.layout.global_preference_toolbar),
+		MULTIMEDIA_NOTES(MultimediaNotesFragment.class.getName(), true, R.xml.multimedia_notes, R.layout.profile_preference_toolbar_big),
+		MONITORING_SETTINGS(MonitoringSettingsFragment.class.getName(), true, R.xml.monitoring_settings, R.layout.profile_preference_toolbar_big),
+		LIVE_MONITORING(LiveMonitoringFragment.class.getName(), false, R.xml.live_monitoring, R.layout.global_preferences_toolbar_with_switch),
+		ACCESSIBILITY_SETTINGS(AccessibilitySettingsFragment.class.getName(), true, R.xml.accessibility_settings, R.layout.profile_preference_toolbar_big),
+		DEVELOPMENT_SETTINGS(DevelopmentSettingsFragment.class.getName(), false, R.xml.development_settings, R.layout.global_preference_toolbar);
 
 		public final String fragmentName;
 		public final boolean profileDependent;
@@ -140,7 +154,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		updateTheme();
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
-			AndroidUtils.addStatusBarPadding21v(getContext(), view);
 			if (getPreferenceScreen() != null) {
 				PreferenceManager prefManager = getPreferenceManager();
 				PreferenceScreen preferenceScreen = prefManager.inflateFromResource(prefManager.getContext(), currentScreenType.preferencesResId, null);
@@ -159,7 +172,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	private boolean updateTheme() {
-		boolean nightMode = !settings.isLightContent();
+		boolean nightMode = !settings.isLightContentForMode(getSelectedAppMode());
 		boolean changed = this.nightMode != nightMode;
 		this.nightMode = nightMode;
 		this.themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
@@ -226,6 +239,9 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 						activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
 					}
 				}
+				if (activity instanceof MapActivity) {
+					((MapActivity) activity).exitFromFullScreen(getView());
+				}
 			}
 		}
 	}
@@ -234,16 +250,18 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public void onPause() {
 		super.onPause();
 
-		MapActivity mapActivity = getMapActivity();
-		if (!wasDrawerDisabled && mapActivity != null) {
-			mapActivity.enableDrawer();
-		}
+		Activity activity = getActivity();
+		if (activity != null) {
+			if (!wasDrawerDisabled && activity instanceof MapActivity) {
+				((MapActivity) activity).enableDrawer();
+			}
 
-		if (Build.VERSION.SDK_INT >= 21) {
-			Activity activity = getActivity();
-			if (activity != null) {
+			if (Build.VERSION.SDK_INT >= 21) {
 				if (!(activity instanceof MapActivity) && statusBarColor != -1) {
 					activity.getWindow().setStatusBarColor(statusBarColor);
+				}
+				if (activity instanceof MapActivity) {
+					((MapActivity) activity).enterToFullScreen();
 				}
 			}
 		}
@@ -293,13 +311,13 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 		ApplicationMode appMode = getSelectedAppMode();
 		if (preference instanceof ListPreferenceEx) {
-			SingleSelectPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode);
+			SingleSelectPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode, currentScreenType.profileDependent, false);
 		} else if (preference instanceof SwitchPreferenceEx) {
-			BooleanPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode);
+			BooleanPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode, currentScreenType.profileDependent);
 		} else if (preference instanceof EditTextPreference) {
 			EditTextPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode);
 		} else if (preference instanceof MultiSelectBooleanPreference) {
-			MultiSelectPreferencesBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode);
+			MultiSelectPreferencesBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode, currentScreenType.profileDependent);
 		} else {
 			super.onDisplayPreferenceDialog(preference);
 		}
@@ -311,14 +329,19 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		if (updateTheme()) {
 			recreate();
 		} else {
+			getPreferenceManager().setPreferenceDataStore(settings.getDataStore(appMode));
 			updateToolbar();
 			updateAllSettings();
 		}
 	}
 
 	public Bundle buildArguments() {
+		return buildArguments(appMode.getStringKey());
+	}
+
+	public Bundle buildArguments(String key) {
 		Bundle args = new Bundle();
-		args.putString(APP_MODE_KEY, appMode.getStringKey());
+		args.putString(APP_MODE_KEY, key);
 		return args;
 	}
 
@@ -344,6 +367,19 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			if (selectableView != null) {
 				Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, getActiveProfileColor(), 0.3f);
 				AndroidUtils.setBackground(selectableView, drawable);
+			}
+		}
+		TextView tvPreferenceTitle = (TextView) holder.itemView.findViewById(android.R.id.title);
+		if (tvPreferenceTitle != null) {
+			tvPreferenceTitle.setSingleLine(false);
+		}
+		if (currentScreenType.profileDependent) {
+			View cb = holder.itemView.findViewById(R.id.switchWidget);
+			if (cb == null) {
+				cb = holder.findViewById(android.R.id.checkbox);
+			}
+			if (cb instanceof CompoundButton) {
+				UiUtilities.setupCompoundButton(isNightMode(), getActiveProfileColor(), (CompoundButton) cb);
 			}
 		}
 	}
@@ -415,7 +451,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		updateProfileButton();
 	}
 
-	private void updateProfileButton() {
+	protected void updateProfileButton() {
 		View view = getView();
 		if (view == null) {
 			return;
@@ -661,6 +697,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		p.setKey(b.getId());
 		p.setSummary(summary);
 		p.setLayoutResource(layoutId);
+		p.setIconSpaceReserved(true);
 		return p;
 	}
 
@@ -674,6 +711,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		p.setTitle(title);
 		p.setSummary(summary);
 		p.setLayoutResource(layoutId);
+		p.setIconSpaceReserved(true);
 		return p;
 	}
 
@@ -688,6 +726,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		listPreference.setDialogTitle(title);
 		listPreference.setEntries(names);
 		listPreference.setEntryValues(values);
+		listPreference.setIconSpaceReserved(true);
 
 		if (layoutId != 0) {
 			listPreference.setLayoutResource(layoutId);
@@ -730,5 +769,12 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			LOG.error(e);
 		}
 		return false;
+	}
+
+	void updateRouteInfoMenu() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapRouteInfoMenu().updateMenu();
+		}
 	}
 }

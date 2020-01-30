@@ -102,7 +102,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 	public boolean onPreferenceClick(Preference preference) {
 		if (preference.getKey().equals(GeneralRouter.DEFAULT_SPEED)) {
 			RouteService routeService = getSelectedAppMode().getRouteService();
-			showSeekbarSettingsDialog(getActivity(), routeService == RouteService.STRAIGHT);
+			showSeekbarSettingsDialog(getActivity(), routeService == RouteService.STRAIGHT, getSelectedAppMode());
 			return true;
 		}
 		return super.onPreferenceClick(preference);

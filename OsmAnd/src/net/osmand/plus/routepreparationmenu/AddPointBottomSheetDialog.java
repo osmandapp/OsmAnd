@@ -248,12 +248,12 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 											targetPointsHelper.navigateToPoint(ll, true, targetPointsHelper.getIntermediatePoints().size());
 											break;
 										case HOME:
-											app.showShortToastMessage(R.string.add_intermediate_point);
-											targetPointsHelper.setHomePoint(ll, null);
+											app.showShortToastMessage(R.string.add_home);
+											app.getFavorites().setSpecialPoint(ll, FavouritePoint.SpecialPointType.HOME, null);
 											break;
 										case WORK:
-											app.showShortToastMessage(R.string.add_intermediate_point);
-											targetPointsHelper.setWorkPoint(ll, null);
+											app.showShortToastMessage(R.string.add_work);
+											app.getFavorites().setSpecialPoint(ll, FavouritePoint.SpecialPointType.WORK, null);
 											break;
 									}
 								} else if (pointType == PointType.START) {
@@ -319,8 +319,8 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		final View switchStartAndEndView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.bottom_sheet_item_simple_56dp, null);
 		TextView title = (TextView) switchStartAndEndView.findViewById(R.id.title);
 
-		String start = getString(R.string.route_start_point).toLowerCase();
-		String destination = getString(R.string.route_descr_destination).toLowerCase();
+		String start = getString(R.string.route_start_point);
+		String destination = getString(R.string.route_descr_destination);
 		String titleS = getString(R.string.swap_two_places, start, destination);
 		SpannableString titleSpan = new SpannableString(titleS);
 		int startIndex = titleS.indexOf(start);
@@ -360,15 +360,10 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		items.clear();
 		addMainScrollItems(items);
 		items.addAll(helper.getVisibleFavouritePoints());
-		if (items.isEmpty()) {
-			items.addAll(helper.getFavouritePoints());
-		}
 	}
 
 	private void addMainScrollItems(List<Object> items) {
 		items.add(FAVORITES);
-		items.add(PointType.HOME);
-		items.add(PointType.WORK);
 	}
 
 	private void createFavoritesScrollItem() {
@@ -383,13 +378,23 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			} else {
 				addMainScrollItems(items);
 				helper.addListener(new FavouritesDbHelper.FavoritesListener() {
-					@Override
-					public void onFavoritesLoaded() {
+
+					private void reloadFavoritesItems() {
 						MapActivity mapActivity = (MapActivity) getActivity();
 						if (mapActivity != null) {
 							loadFavoritesItems(adapter.getItems(), helper);
 							adapter.notifyDataSetChanged();
 						}
+					}
+
+					@Override
+					public void onFavoritesLoaded() {
+						reloadFavoritesItems();
+					}
+
+					@Override
+					public void onFavoriteDataUpdated(@NonNull FavouritePoint favouritePoint) {
+						reloadFavoritesItems();
 					}
 				});
 			}
@@ -424,7 +429,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 					dismiss();
 				} else {
 					TargetPointsHelper helper = mapActivity.getMyApplication().getTargetPointsHelper();
-					Pair<LatLon, PointDescription> pair = getLocationAndDescrFromItem(item, helper);
+					Pair<LatLon, PointDescription> pair = getLocationAndDescrFromItem(item);
 					LatLon ll = pair.first;
 					PointDescription name = pair.second;
 					if (ll == null) {
@@ -434,6 +439,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 							dismiss();
 						}
 					} else {
+						FavouritesDbHelper favorites = requiredMyApplication().getFavorites();
 						switch (pointType) {
 							case START:
 								helper.setStartPoint(ll, true, name);
@@ -444,6 +450,15 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 							case INTERMEDIATE:
 								helper.navigateToPoint(ll, true, helper.getIntermediatePoints().size(), name);
 								break;
+							case HOME:
+								favorites.setSpecialPoint(ll, FavouritePoint.SpecialPointType.HOME, null);
+								break;
+							case WORK:
+								favorites.setSpecialPoint(ll, FavouritePoint.SpecialPointType.WORK, null);
+								break;
+							case PARKING:
+								favorites.setSpecialPoint(ll, FavouritePoint.SpecialPointType.PARKING, null);
+								break;
 						}
 						dismiss();
 					}
@@ -452,23 +467,29 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		};
 	}
 
-	private Pair<LatLon, PointDescription> getLocationAndDescrFromItem(Object item, TargetPointsHelper helper) {
+	private Pair<LatLon, PointDescription> getLocationAndDescrFromItem(Object item) {
 		PointDescription name = null;
 		LatLon ll = null;
 		if (item instanceof FavouritePoint) {
 			FavouritePoint point = (FavouritePoint) item;
 			ll = new LatLon(point.getLatitude(), point.getLongitude());
-			name = point.getPointDescription();
+			name = point.getPointDescription(requireActivity());
 		} else if (item instanceof PointType) {
-			TargetPoint point = null;
-			if (item == PointType.HOME) {
-				point = helper.getHomePoint();
-			} else if (item == PointType.WORK) {
-				point = helper.getWorkPoint();
-			}
-			if (point != null) {
-				ll = new LatLon(point.getLatitude(), point.getLongitude());
-				name = point.getOriginalPointDescription();
+			MapActivity mapActivity = (MapActivity) getActivity();
+			if (mapActivity != null) {
+				FavouritesDbHelper favorites = mapActivity.getMyApplication().getFavorites();
+				FavouritePoint point = null;
+				if (item == PointType.HOME) {
+					point = favorites.getSpecialPoint(FavouritePoint.SpecialPointType.HOME);
+				} else if (item == PointType.WORK) {
+					point = favorites.getSpecialPoint(FavouritePoint.SpecialPointType.WORK);
+				} else if (item == PointType.PARKING) {
+					point = favorites.getSpecialPoint(FavouritePoint.SpecialPointType.PARKING);
+				}
+				if (point != null) {
+					ll = new LatLon(point.getLatitude(), point.getLongitude());
+					name = point.getPointDescription(mapActivity);
+				}
 			}
 		}
 		return new Pair<>(ll, name);
@@ -576,7 +597,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			return items.get(position);
 		}
 
-		public void setItemClickListener(OnClickListener listener) {
+		void setItemClickListener(OnClickListener listener) {
 			this.listener = listener;
 		}
 	}
@@ -618,32 +639,27 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 					favoriteViewHolder.icon.setImageDrawable(getContentIcon(R.drawable.ic_action_fav_dark));
 					favoriteViewHolder.description.setVisibility(View.GONE);
 				} else {
-					if (item instanceof PointType) {
-						final TargetPointsHelper helper = app.getTargetPointsHelper();
-						TargetPoint point = null;
-						if (item == PointType.HOME) {
-							point = helper.getHomePoint();
-							favoriteViewHolder.title.setText(getString(R.string.home_button));
-							favoriteViewHolder.icon.setImageDrawable(getContentIcon(R.drawable.ic_action_home_dark));
-						} else if (item == PointType.WORK) {
-							point = helper.getWorkPoint();
-							favoriteViewHolder.title.setText(getString(R.string.work_button));
-							favoriteViewHolder.icon.setImageDrawable(getContentIcon(R.drawable.ic_action_work));
-						}
-						favoriteViewHolder.description.setText(point != null ? point.getPointDescription(app).getSimpleName(app, false) : getString(R.string.shared_string_add));
-					} else if (item instanceof FavouritePoint) {
-						FavouritePoint point = (FavouritePoint) getItem(position);
-						favoriteViewHolder.title.setText(point.getName());
-						if (point.getCategory().equals("")) {
-							favoriteViewHolder.description.setText(R.string.shared_string_favorites);
+					if (item instanceof FavouritePoint) {
+						FavouritePoint point = (FavouritePoint) item;
+						favoriteViewHolder.title.setText(point.getDisplayName(app));
+						if (((FavouritePoint) item).getSpecialPointType() != null) {
+							int iconColor = app.getSettings().isLightContent()
+									? R.color.icon_color_default_light : R.color.icon_color_default_dark;
+							favoriteViewHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(
+									((FavouritePoint) item).getSpecialPointType().getIconId(), iconColor));
+							favoriteViewHolder.description.setText(point.getDescription());
 						} else {
-							favoriteViewHolder.description.setText(point.getCategory());
+							if (point.getCategory().equals("")) {
+								favoriteViewHolder.description.setText(R.string.shared_string_favorites);
+							} else {
+								favoriteViewHolder.description.setText(point.getCategory());
+							}
+							int pointColor = point.getColor();
+							int color = pointColor == 0 || pointColor == Color.BLACK ? ContextCompat.getColor(app, R.color.color_favorite) : pointColor;
+							favoriteViewHolder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_fav_dark, color));
 						}
-						int pointColor = point.getColor();
-						int color = pointColor == 0 || pointColor == Color.BLACK ? ContextCompat.getColor(app, R.color.color_favorite) : pointColor;
-						favoriteViewHolder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_fav_dark, color));
+						favoriteViewHolder.description.setVisibility(View.VISIBLE);
 					}
-					favoriteViewHolder.description.setVisibility(View.VISIBLE);
 				}
 			}
 		}

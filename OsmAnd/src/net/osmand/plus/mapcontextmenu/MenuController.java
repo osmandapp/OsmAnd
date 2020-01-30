@@ -184,7 +184,12 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			if (object instanceof Amenity) {
 				menuController = new AmenityMenuController(mapActivity, pointDescription, (Amenity) object);
 			} else if (object instanceof FavouritePoint) {
-				menuController = new FavouritePointMenuController(mapActivity, pointDescription, (FavouritePoint) object);
+				if (pointDescription.isParking()
+						|| (FavouritePoint.SpecialPointType.PARKING.equals(((FavouritePoint) object).getSpecialPointType()))) {
+					menuController = new ParkingPositionMenuController(mapActivity, pointDescription);
+				} else {
+					menuController = new FavouritePointMenuController(mapActivity, pointDescription, (FavouritePoint) object);
+				}
 			} else if (object instanceof SearchHistoryHelper.HistoryEntry) {
 				menuController = new HistoryMenuController(mapActivity, pointDescription, (SearchHistoryHelper.HistoryEntry) object);
 			} else if (object instanceof TargetPoint) {
@@ -502,6 +507,10 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	public int getFavActionStringId() {
 		return R.string.shared_string_add;
+	}
+
+	public boolean isFavButtonEnabled() {
+		return true;
 	}
 
 	public int getWaypointActionIconId() {

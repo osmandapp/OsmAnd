@@ -34,7 +34,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 
 		BaseBottomSheetItem snapToRoadItem = new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(snapToRoadEnabled)
-				.setDescription(getString(snapToRoadEnabled ? R.string.shared_string_enabled : R.string.shared_string_disabled))
+				.setDescription(getString(snapToRoadEnabled ? R.string.shared_string_on : R.string.shared_string_off))
 				.setIcon(snapToRoadEnabled
 						? getActiveIcon(R.drawable.ic_action_snap_to_road)
 						: getContentIcon(R.drawable.ic_action_snap_to_road))

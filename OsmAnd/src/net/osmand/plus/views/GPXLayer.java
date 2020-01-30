@@ -14,6 +14,7 @@ import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
@@ -77,7 +78,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private Bitmap pointSmall;
 	private int currentTrackColor;
 
-	private Bitmap selectedPoint;
+	private LayerDrawable selectedPoint;
 	private TrackChartPoints trackChartPoints;
 
 	private static final int startZoom = 7;
@@ -176,7 +177,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 		paintIcon = new Paint();
 		pointSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_shield_small);
-		selectedPoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_default_location);
+		selectedPoint = (LayerDrawable) view.getResources().getDrawable(R.drawable.map_location_default);
 
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 
@@ -289,7 +290,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		if (tileBox.getZoom() >= startZoom) {
 			// request to load
 			for (SelectedGpxFile g : selectedGPXFiles) {
-				List<GpxDisplayGroup> groups = g.getDisplayGroups();
+				List<GpxDisplayGroup> groups = g.getDisplayGroups(view.getApplication());
 				if (groups != null && !groups.isEmpty()) {
 					int color = g.getGpxFile().getColor(0);
 					if (color == 0) {
@@ -358,7 +359,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private void drawSelectedFilesPoints(Canvas canvas, RotatedTileBox tileBox, List<SelectedGpxFile> selectedGPXFiles) {
 		if (tileBox.getZoom() >= startZoom) {
 			float iconSize = FavoriteImageDrawable.getOrCreate(view.getContext(), 0,
-					true).getIntrinsicWidth() * 3 / 2.5f;
+					true, (WptPt) null).getIntrinsicWidth() * 3 / 2.5f;
 			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 
 			List<LatLon> fullObjectsLatLon = new ArrayList<>();
@@ -422,7 +423,11 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 						float x = tileBox.getPixXFromLatLon(highlightedPoint.getLatitude(), highlightedPoint.getLongitude());
 						float y = tileBox.getPixYFromLatLon(highlightedPoint.getLatitude(), highlightedPoint.getLongitude());
 						paintIcon.setColorFilter(null);
-						canvas.drawBitmap(selectedPoint, x - selectedPoint.getWidth() / 2, y - selectedPoint.getHeight() / 2, paintIcon);
+						selectedPoint.setBounds((int) x - selectedPoint.getIntrinsicWidth() / 2,
+								(int) y - selectedPoint.getIntrinsicHeight() / 2,
+								(int) x + selectedPoint.getIntrinsicWidth() / 2,
+								(int) y + selectedPoint.getIntrinsicHeight() / 2);
+						selectedPoint.draw(canvas);
 					}
 				}
 			}
@@ -484,10 +489,10 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		FavoriteImageDrawable fid;
 		boolean history = false;
 		if (marker != null) {
-			fid = FavoriteImageDrawable.getOrCreateSyncedIcon(view.getContext(), pointColor);
+			fid = FavoriteImageDrawable.getOrCreateSyncedIcon(view.getContext(), pointColor, o);
 			history = marker.history;
 		} else {
-			fid = FavoriteImageDrawable.getOrCreate(view.getContext(), pointColor, true);
+			fid = FavoriteImageDrawable.getOrCreate(view.getContext(), pointColor, true, o);
 		}
 		fid.drawBitmapInCenter(canvas, x, y, history);
 	}
