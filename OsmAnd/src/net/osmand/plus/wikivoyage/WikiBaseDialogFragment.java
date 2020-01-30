@@ -45,7 +45,6 @@ public class WikiBaseDialogFragment extends BaseOsmAndDialogFragment {
 			}
 			if (Build.VERSION.SDK_INT >= 21) {
 				window.setStatusBarColor(getResolvedColor(getStatusBarColor()));
-				window.setNavigationBarColor(getResolvedColor(getStatusBarColor()));
 			}
 		}
 		return dialog;

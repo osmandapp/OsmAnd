@@ -42,7 +42,6 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 					} else {
 						statusBarColor = activity.getWindow().getStatusBarColor();
 						activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
-						activity.getWindow().setNavigationBarColor(ContextCompat.getColor(activity, colorId));
 					}
 				}
 				if (!isFullScreenAllowed() && activity instanceof MapActivity) {
@@ -60,7 +59,6 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 			if (activity != null) {
 				if (!(activity instanceof MapActivity) && statusBarColor != -1) {
 					activity.getWindow().setStatusBarColor(statusBarColor);
-					activity.getWindow().setNavigationBarColor(statusBarColor);
 				}
 				if (!isFullScreenAllowed() && activity instanceof MapActivity) {
 					((MapActivity) activity).enterToFullScreen();
