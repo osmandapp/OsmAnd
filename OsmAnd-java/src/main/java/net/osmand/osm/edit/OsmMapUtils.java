@@ -1,6 +1,5 @@
 package net.osmand.osm.edit;
 
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -50,7 +49,7 @@ public class OsmMapUtils {
 	}
 	
 	public static LatLon getComplexPolyCenter(Collection<Node> nodes) {
-		double precision = 1e-4; //where to set precision constant?
+		double precision = 1e-5; //where to set precision constant?
 		
 		final List<List<LatLon>> rings = new ArrayList<>();
 		List<LatLon> outerRing = new ArrayList<>();
@@ -100,7 +99,6 @@ public class OsmMapUtils {
 			return null;
 		}
 		boolean area = w.getFirstNodeId() == w.getLastNodeId();
-//		LatLon ll = area ? getMathWeightCenterForNodes(nodes) : getWeightCenterForNodes(nodes);
 		LatLon ll = area ? getComplexPolyCenter(nodes) : getWeightCenterForNodes(nodes);
 		if(ll == null) {
 			return null;
