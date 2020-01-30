@@ -3163,9 +3163,6 @@ public class OsmandSettings {
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> RENDERER = new StringPreference("renderer", RendererRegistry.DEFAULT_RENDER) {
-		{
-			makeProfile();
-		}
 
 		@Override
 		protected boolean setValue(Object prefs, String val) {
@@ -3174,13 +3171,12 @@ public class OsmandSettings {
 			}
 			RenderingRulesStorage loaded = ctx.getRendererRegistry().getRenderer(val);
 			if (loaded != null) {
-				super.setValue(prefs, val);
-				return true;
+				return super.setValue(prefs, val);
 			}
 			return false;
 		}
 
-	};
+	}.makeProfile();
 
 	{
 		RENDERER.setModeDefaultValue(ApplicationMode.BOAT, RendererRegistry.NAUTICAL_RENDER);

@@ -156,8 +156,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		if (appMode != null) {
 			ApplicationMode selectedAppMode = getSelectedAppMode();
 			app.getSettings().copyPreferencesFromProfile(appMode, selectedAppMode);
-			updateToolbar();
-			updateAllSettings();
+			updateCopiedOrResetPrefs();
 		}
 	}
 
@@ -166,6 +165,14 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		if (appMode != null) {
 			app.getSettings().resetPreferencesForProfile(appMode);
 			app.showToastMessage(R.string.profile_prefs_reset_successful);
+			updateCopiedOrResetPrefs();
+		}
+	}
+
+	private void updateCopiedOrResetPrefs() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.updateApplicationModeSettings();
 			updateToolbar();
 			updateAllSettings();
 		}
