@@ -168,16 +168,6 @@ public class ApplicationMode {
 		return customModes;
 	}
 
-	public static List<ApplicationMode> getModesDerivedFrom(ApplicationMode am) {
-		List<ApplicationMode> list = new ArrayList<ApplicationMode>();
-		for (ApplicationMode a : values) {
-			if (a == am || a.getParent() == am) {
-				list.add(a);
-			}
-		}
-		return list;
-	}
-
 	public static ApplicationMode valueOfStringKey(String key, ApplicationMode def) {
 		for (ApplicationMode p : values) {
 			if (p.getStringKey().equals(key)) {
@@ -187,39 +177,14 @@ public class ApplicationMode {
 		return def;
 	}
 
-	// returns modifiable ! Set<ApplicationMode> to exclude non-wanted derived
-	public static Set<ApplicationMode> regWidgetVisibility(String widgetId, ApplicationMode... am) {
-		HashSet<ApplicationMode> set = new HashSet<>();
-		if (am == null) {
-			set.addAll(values);
-		} else {
-			Collections.addAll(set, am);
-		}
-		for (ApplicationMode m : values) {
-			// add derived modes
-			if (set.contains(m.getParent())) {
-				set.add(m);
+	public static List<ApplicationMode> getModesDerivedFrom(ApplicationMode am) {
+		List<ApplicationMode> list = new ArrayList<ApplicationMode>();
+		for (ApplicationMode a : values) {
+			if (a == am || a.getParent() == am) {
+				list.add(a);
 			}
 		}
-		widgetsVisibilityMap.put(widgetId, set);
-		return set;
-	}
-
-	public static Set<ApplicationMode> regWidgetAvailability(String widgetId, ApplicationMode... am) {
-		HashSet<ApplicationMode> set = new HashSet<>();
-		if (am == null) {
-			set.addAll(values);
-		} else {
-			Collections.addAll(set, am);
-		}
-		for (ApplicationMode m : values) {
-			// add derived modes
-			if (set.contains(m.getParent())) {
-				set.add(m);
-			}
-		}
-		widgetsAvailabilityMap.put(widgetId, set);
-		return set;
+		return list;
 	}
 
 	private static void initRegVisibility() {
@@ -271,6 +236,24 @@ public class ApplicationMode {
 //		regWidgetAvailability(WIDGET_STREET_NAME, all);
 	}
 
+	// returns modifiable ! Set<ApplicationMode> to exclude non-wanted derived
+	public static Set<ApplicationMode> regWidgetVisibility(String widgetId, ApplicationMode... am) {
+		HashSet<ApplicationMode> set = new HashSet<>();
+		if (am == null) {
+			set.addAll(values);
+		} else {
+			Collections.addAll(set, am);
+		}
+		for (ApplicationMode m : values) {
+			// add derived modes
+			if (set.contains(m.getParent())) {
+				set.add(m);
+			}
+		}
+		widgetsVisibilityMap.put(widgetId, set);
+		return set;
+	}
+
 	public boolean isWidgetCollapsible(String key) {
 		return false;
 	}
@@ -284,6 +267,23 @@ public class ApplicationMode {
 			return false;
 		}
 		return set.contains(this);
+	}
+
+	public static Set<ApplicationMode> regWidgetAvailability(String widgetId, ApplicationMode... am) {
+		HashSet<ApplicationMode> set = new HashSet<>();
+		if (am == null) {
+			set.addAll(values);
+		} else {
+			Collections.addAll(set, am);
+		}
+		for (ApplicationMode m : values) {
+			// add derived modes
+			if (set.contains(m.getParent())) {
+				set.add(m);
+			}
+		}
+		widgetsAvailabilityMap.put(widgetId, set);
+		return set;
 	}
 
 	public boolean isWidgetAvailable(OsmandApplication app, String key) {
@@ -510,7 +510,7 @@ public class ApplicationMode {
 		}
 	}
 
-	public static void saveAppModesToSettings(OsmandApplication app) {
+	public static void saveCustomAppModesToSettings(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		StringBuilder stringBuilder = new StringBuilder();
 		Iterator<ApplicationMode> it = ApplicationMode.getCustomValues().iterator();
@@ -541,7 +541,7 @@ public class ApplicationMode {
 			mode = builder.customReg(app);
 			initRegVisibility();
 		}
-		saveAppModesToSettings(app);
+		saveCustomAppModesToSettings(app);
 		return mode;
 	}
 
@@ -591,7 +591,7 @@ public class ApplicationMode {
 			settings.APPLICATION_MODE.resetToDefault();
 		}
 		cachedFilteredValues.removeAll(modes);
-		saveAppModesToSettings(app);
+		saveCustomAppModesToSettings(app);
 	}
 
 	public static boolean changeProfileAvailability(ApplicationMode mode, boolean isSelected, OsmandApplication app) {
