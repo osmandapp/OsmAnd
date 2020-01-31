@@ -280,6 +280,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			Activity activity = getActivity();
 			if (activity instanceof MapActivity) {
 				((MapActivity) activity).updateStatusBarColor();
+				((MapActivity) activity).updateNavigationBarColor();
 			}
 		}
 	}
