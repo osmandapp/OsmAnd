@@ -64,15 +64,10 @@ public class HomeWorkCard extends BaseCard {
 			if (point == null) {
 				AddPointBottomSheetDialog.showInstance(mapActivity, pointType);
 			} else {
-				if (OsmAndLocationProvider.isLocationPermissionAvailable(app)) {
-					mapActivity.getMyApplication().getTargetPointsHelper()
-							.navigateToPoint(new LatLon(point.getLatitude(), point.getLongitude()),
-									true, -1, point.getPointDescription(mapActivity));
-				} else {
-					ActivityCompat.requestPermissions(mapActivity,
-							new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-							OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
-				}
+				mapActivity.getMyApplication().getTargetPointsHelper().navigateToPoint(
+						new LatLon(point.getLatitude(), point.getLongitude()),
+						true, -1, point.getPointDescription(app));
+				OsmAndLocationProvider.requestFineLocationPermissionIfNeeded(mapActivity);
 			}
 		}
 	}

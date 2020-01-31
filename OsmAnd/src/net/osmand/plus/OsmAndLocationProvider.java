@@ -1,5 +1,6 @@
 package net.osmand.plus;
 
+import android.app.Activity;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import java.util.ArrayList;
@@ -17,7 +18,6 @@ import net.osmand.binary.GeocodingUtilities.GeocodingResult;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
-import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.router.RouteSegmentResult;
@@ -974,5 +974,13 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			return false;
 		}
 		return true;
+	}
+
+	public static void requestFineLocationPermissionIfNeeded(Activity activity) {
+		if (!OsmAndLocationProvider.isLocationPermissionAvailable(activity)) {
+			ActivityCompat.requestPermissions(activity,
+					new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+					OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
+		}
 	}
 }

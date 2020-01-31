@@ -284,13 +284,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				targetPointsHelper.setStartPoint(latLon, true, pd);
 				break;
 			case TARGET:
-				if (OsmAndLocationProvider.isLocationPermissionAvailable(app)) {
-					targetPointsHelper.navigateToPoint(latLon, true, -1, pd);
-				} else {
-					ActivityCompat.requestPermissions(mapActivity,
-							new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-							OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
-				}
+				targetPointsHelper.navigateToPoint(latLon, true, -1, pd);
+				OsmAndLocationProvider.requestFineLocationPermissionIfNeeded(mapActivity);
 				break;
 			case INTERMEDIATE:
 				targetPointsHelper.navigateToPoint(latLon, true, targetPointsHelper.getIntermediatePoints().size(), pd);

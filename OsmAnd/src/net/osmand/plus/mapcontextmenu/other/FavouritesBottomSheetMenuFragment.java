@@ -158,14 +158,9 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 				targetPointsHelper.setStartPoint(ll, true, point.getPointDescription(app));
 				break;
 			case TARGET:
-				if (OsmAndLocationProvider.isLocationPermissionAvailable(getContext())) {
+				if (getActivity() != null) {
 					targetPointsHelper.navigateToPoint(ll, true, -1, point.getPointDescription(app));
-				} else {
-					if (getActivity() != null) {
-						ActivityCompat.requestPermissions(getActivity(),
-								new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-								OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
-					}
+					OsmAndLocationProvider.requestFineLocationPermissionIfNeeded(getActivity());
 				}
 				break;
 			case INTERMEDIATE:
