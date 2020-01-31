@@ -518,7 +518,10 @@ public class ApplicationMode {
 		for (String appModeKey : settings.getCustomAppModesKeys()) {
 			Object profilePreferences = settings.getProfilePreferences(appModeKey);
 			String parent = settings.PARENT_APP_MODE.getValue(profilePreferences, null);
+			int order = settings.APP_MODE_ORDER.getValue(profilePreferences, values.size());
+
 			ApplicationModeBuilder builder = createCustomMode(valueOfStringKey(parent, CAR), appModeKey);
+			builder.setOrder(order);
 			builder.customReg(app);
 		}
 	}
