@@ -45,8 +45,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -250,7 +252,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 				&& zoom >= ZOOM_MIN_TO_SHOW_DOWNLOAD_DIALOG && zoom <= ZOOM_MAX_TO_SHOW_DOWNLOAD_DIALOG
 				&& currentObjects != null) {
 			WorldRegion regionData;
-			List<BinaryMapDataObject> selectedObjects = new ArrayList<>();
+			Map<WorldRegion, BinaryMapDataObject> selectedObjects = new LinkedHashMap<>();
 			for (int i = 0; i < currentObjects.size(); i++) {
 				final BinaryMapDataObject o = currentObjects.get(i);
 				String fullName = osmandRegions.getFullName(o);
@@ -262,7 +264,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 							hideDownloadMapToolbar();
 							return;
 						} else {
-							selectedObjects.add(o);
+							selectedObjects.put(regionData, o);
 						}
 					}
 				}
@@ -270,11 +272,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 			IndexItem indexItem = null;
 			String name = null;
-			BinaryMapDataObject smallestRegion = app.getRegions().getSmallestBinaryMapDataObjectAt(selectedObjects);
-			if (smallestRegion != null) {
-				String fullName = osmandRegions.getFullName(smallestRegion);
-				regionData = osmandRegions.getRegionData(fullName);
-
+			regionData  = app.getRegions().getSmallestBinaryMapDataObjectAt(selectedObjects).getKey();
+			if (regionData != null) {
 				DownloadIndexesThread downloadThread = app.getDownloadThread();
 				List<IndexItem> indexItems = downloadThread.getIndexes().getIndexItems(regionData);
 				if (indexItems.size() == 0) {

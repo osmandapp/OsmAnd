@@ -262,4 +262,9 @@
     <string name="shared_string_suggested">Cunsigiadu</string>
     <string name="status_widget_title">Istadu de s\'arrastadore de OsmAnd</string>
     <string name="back_to_osmand">Torra a OsmAnd</string>
+    <string name="last_update_from_telegram_date">Ùrtimu agiornamentu dae Telegram: %1$s</string>
+    <string name="last_response_date">Ùrtima risposta: %1$s</string>
+    <string name="last_update_from_telegram_duration">Ùrtimu agiornamentu dae Telegram: %1$s a como</string>
+    <string name="last_response_duration">Ùrtima risposta: %1$s a como</string>
+    <string name="duration_ago">%1$s a como</string>
 </resources>

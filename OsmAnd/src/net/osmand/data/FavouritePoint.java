@@ -3,7 +3,6 @@ package net.osmand.data;
 import java.io.Serializable;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
@@ -19,7 +18,6 @@ public class FavouritePoint implements Serializable, LocationPoint {
 
 	private static final String HIDDEN = "hidden";
 	private static final String ADDRESS_EXTENSION = "address";
-	private static final String DEFAULT_ICON_NAME = "special_star";
 
 	protected String name = "";
 	protected String description;
@@ -139,6 +137,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	public int getOverlayIconId() {
 		if (isSpecialPoint()) {
 			return specialPointType.getIconId();
+		} else if (iconId == 0) {
+			return R.drawable.mx_special_star;
 		}
 		return iconId;
 	}
@@ -202,7 +202,6 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		return "Favourite " + getName(); //$NON-NLS-1$
 	}
 
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -253,7 +252,6 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		return result;
 	}
 
-
 	public enum SpecialPointType {
 		HOME("home", R.string.home_button, R.drawable.mx_special_house),
 		WORK("work", R.string.work_button, R.drawable.mx_special_building),
@@ -285,7 +283,6 @@ public class FavouritePoint implements Serializable, LocationPoint {
 			return ctx.getString(resId);
 		}
 	}
-
 
 	public static FavouritePoint fromWpt(@NonNull WptPt pt, @NonNull Context ctx) {
 		String name = pt.name;

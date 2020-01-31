@@ -1380,7 +1380,7 @@
     <string name="shared_string_dismiss">Відхилити</string>
     <string name="shared_string_audio">Аудіо</string>
     <string name="share_note">Поділитись нотаткою</string>
-    <string name="notes">OSM примітки</string>
+    <string name="notes">A/V примітки</string>
     <string name="online_map">Мережева мапа</string>
     <string name="roads_only">Тільки дороги</string>
     <string name="free">Вільно %1$s</string>
@@ -3394,7 +3394,7 @@
     <string name="add_new_profile_q">Додати новий профіль \'%1$s\'\?</string>
     <string name="save_heading">Зберегти заголовок</string>
     <string name="save_heading_descr">Зберегти заголовок для кожної точки треку під час запису.</string>
-    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Особистий</string>
     <string name="shared_string_downloading_formatted">Завантажується %s</string>

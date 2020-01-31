@@ -1032,7 +1032,7 @@
     <string name="add_new_profile_q">Lisada uus profiil \'%1$s\'\?</string>
     <string name="save_heading">Kaasa pealkiri</string>
     <string name="save_heading_descr">Salvestamise ajal salvesta kurss igasse teekonnapunkti.</string>
-    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Isiklik</string>
     <string name="shared_string_downloading_formatted">Allalaadimine %s</string>

@@ -7,7 +7,6 @@ import android.view.WindowManager;
 
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
-import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
@@ -27,6 +26,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.MapUtils;
+
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -155,7 +155,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		return movingToMyLocation;
 	}
 
-	private void detectDrivingRegion(final LatLon latLon) {
+	public void detectDrivingRegion(final LatLon latLon) {
 		new DetectDrivingRegionTask(app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, latLon);
 	}
 
@@ -167,7 +167,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			locationProvider = location.getProvider();
 			if (settings.DRIVING_REGION_AUTOMATIC.get() && !drivingRegionUpdated && !app.isApplicationInitializing()) {
 				drivingRegionUpdated = true;
-				detectDrivingRegion(new LatLon(location.getLatitude(), location.getLongitude()));
+				app.getRoutingHelper().checkAndUpdateStartLocation(location);
 			}
 		}
 		if (mapView != null) {
@@ -444,7 +444,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		isUserZoomed = true;
 	}
 
-	private static class DetectDrivingRegionTask extends AsyncTask<LatLon, Void, BinaryMapDataObject> {
+	private static class DetectDrivingRegionTask extends AsyncTask<LatLon, Void, WorldRegion> {
 
 		private OsmandApplication app;
 
@@ -453,10 +453,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		}
 
 		@Override
-		protected BinaryMapDataObject doInBackground(LatLon... latLons) {
+		protected WorldRegion doInBackground(LatLon... latLons) {
 			try {
 				if (latLons != null && latLons.length > 0) {
-					return app.getRegions().getSmallestBinaryMapDataObjectAt(latLons[0]);
+					return app.getRegions().getSmallestBinaryMapDataObjectAt(latLons[0]).getKey();
 				}
 			} catch (IOException e) {
 				// ignore
@@ -465,13 +465,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		}
 
 		@Override
-		protected void onPostExecute(BinaryMapDataObject o) {
-			if (o != null) {
-				String fullName = app.getRegions().getFullName(o);
-				WorldRegion worldRegion = app.getRegions().getRegionData(fullName);
-				if (worldRegion != null) {
-					app.setupDrivingRegion(worldRegion);
-				}
+		protected void onPostExecute(WorldRegion worldRegion) {
+			if (worldRegion != null) {
+				app.setupDrivingRegion(worldRegion);
 			}
 		}
 	}

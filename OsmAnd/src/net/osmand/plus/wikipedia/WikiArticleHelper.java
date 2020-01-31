@@ -107,7 +107,7 @@ public class WikiArticleHelper {
 				List<WorldRegion> regions = null;
 				if (articleLatLon != null) {
 					try {
-						regions = application.getRegions().getWoldRegionsAt(articleLatLon);
+						regions = application.getRegions().getWorldRegionsAt(articleLatLon);
 					} catch (IOException e) {
 						Log.e(TAG, e.getMessage(), e);
 					}

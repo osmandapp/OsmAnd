@@ -39,6 +39,7 @@ public class RoutingHelper {
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(RoutingHelper.class);
 
 	private static final float POSITION_TOLERANCE = 60;
+	private static final int CACHE_RADIUS = 100000;
 
 	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
 	private List<WeakReference<IRoutingDataUpdateListener>> updateListeners = new LinkedList<>();
@@ -173,6 +174,7 @@ public class RoutingHelper {
 	}
 
 	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, List<LatLon> intermediatePoints, Location currentLocation){
+		checkAndUpdateStartLocation(currentLocation);
 		RouteCalculationResult previousRoute = route;
 		clearCurrentRoute(finalLocation, intermediatePoints);
 		// to update route
@@ -258,6 +260,21 @@ public class RoutingHelper {
 
 	public LatLon getFinalLocation() {
 		return finalLocation;
+	}
+	public void checkAndUpdateStartLocation(Location nextStartLocation) {
+		if (nextStartLocation != null) {
+			checkAndUpdateStartLocation(new LatLon(nextStartLocation.getLatitude(), nextStartLocation.getLongitude()));
+		}
+	}
+
+	public void checkAndUpdateStartLocation(LatLon newStartLocation) {
+		if (newStartLocation != null) {
+			LatLon lastStartLocation = app.getSettings().getLastStartPoint();
+			if (lastStartLocation == null || MapUtils.getDistance(newStartLocation, lastStartLocation) > CACHE_RADIUS) {
+				app.getMapViewTrackingUtilities().detectDrivingRegion(newStartLocation);
+				app.getSettings().setLastStartPoint(newStartLocation);
+			}
+		}
 	}
 
 	public List<LatLon> getIntermediatePoints() {
