@@ -3687,7 +3687,10 @@ public class OsmandSettings {
 			PARENT_APP_MODE.getId(),
 			ROUTING_PROFILE.getId(),
 			ROUTE_SERVICE.getId(),
-			USER_PROFILE_NAME.getId()
+			USER_PROFILE_NAME.getId(),
+			LOCATION_ICON.getId(),
+			NAVIGATION_ICON.getId(),
+			APP_MODE_ORDER.getId()
 	};
 
 	public class PreferencesDataStore extends PreferenceDataStore {
