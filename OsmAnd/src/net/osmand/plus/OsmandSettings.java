@@ -35,6 +35,7 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.ApplicationMode.ApplicationModeBean;
+import net.osmand.plus.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.access.RelativeDirectionStyle;
 import net.osmand.plus.api.SettingsAPI;
@@ -292,7 +293,8 @@ public class OsmandSettings {
 			List<ApplicationModeBean> customProfiles = gson.fromJson(json, t);
 			if (!Algorithms.isEmpty(customProfiles)) {
 				for (ApplicationModeBean modeBean : customProfiles) {
-					ApplicationMode.saveProfile(ApplicationMode.fromModeBean(modeBean), ctx);
+					ApplicationModeBuilder builder = ApplicationMode.fromModeBean(ctx, modeBean);
+					ApplicationMode.saveProfile(builder, ctx);
 				}
 			}
 		}

@@ -520,9 +520,9 @@ public class ApplicationMode {
 			String parent = settings.PARENT_APP_MODE.getValue(profilePreferences, null);
 			int order = settings.APP_MODE_ORDER.getValue(profilePreferences, values.size());
 
-			ApplicationModeBuilder builder = createCustomMode(valueOfStringKey(parent, CAR), appModeKey);
+			ApplicationModeBuilder builder = createCustomMode(valueOfStringKey(parent, CAR), appModeKey, app);
 			builder.setOrder(order);
-			builder.customReg(app);
+			builder.customReg();
 		}
 	}
 
@@ -573,7 +573,7 @@ public class ApplicationMode {
 			mode.setNavigationIcon(builder.navigationIcon);
 			mode.setOrder(builder.order);
 		} else {
-			mode = builder.customReg(app);
+			mode = builder.customReg();
 			initRegVisibility();
 		}
 		reorderAppModes();
@@ -586,8 +586,8 @@ public class ApplicationMode {
 		return gson.fromJson(json, ApplicationModeBean.class);
 	}
 
-	public static ApplicationModeBuilder fromModeBean(ApplicationModeBean modeBean) {
-		ApplicationModeBuilder builder = createCustomMode(valueOfStringKey(modeBean.parent, null), modeBean.stringKey);
+	public static ApplicationModeBuilder fromModeBean(OsmandApplication app, ApplicationModeBean modeBean) {
+		ApplicationModeBuilder builder = createCustomMode(valueOfStringKey(modeBean.parent, null), modeBean.stringKey, app);
 		builder.setUserProfileName(modeBean.userProfileName);
 		builder.setIconResName(modeBean.iconName);
 		builder.setIconColor(modeBean.iconColor);
@@ -667,8 +667,10 @@ public class ApplicationMode {
 		return builder;
 	}
 
-	public static ApplicationModeBuilder createCustomMode(ApplicationMode parent, String stringKey) {
-		return create(parent, -1, stringKey);
+	public static ApplicationModeBuilder createCustomMode(ApplicationMode parent, String stringKey, OsmandApplication app) {
+		ApplicationModeBuilder builder = create(parent, -1, stringKey);
+		builder.getApplicationMode().app = app;
+		return builder;
 	}
 
 	public static class ApplicationModeBuilder {
@@ -694,10 +696,8 @@ public class ApplicationMode {
 			return applicationMode;
 		}
 
-		private ApplicationMode customReg(OsmandApplication app) {
+		private ApplicationMode customReg() {
 			values.add(applicationMode);
-
-			applicationMode.app = app;
 
 			ApplicationMode parent = applicationMode.parentAppMode;
 			applicationMode.minDistanceForTurn = parent.minDistanceForTurn;
