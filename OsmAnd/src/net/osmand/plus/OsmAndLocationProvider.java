@@ -977,7 +977,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public static void requestFineLocationPermissionIfNeeded(Activity activity) {
-		if (!OsmAndLocationProvider.isLocationPermissionAvailable(activity)) {
+		if (!isLocationPermissionAvailable(activity)) {
 			ActivityCompat.requestPermissions(activity,
 					new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
 					OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);

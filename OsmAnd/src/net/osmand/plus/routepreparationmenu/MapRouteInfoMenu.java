@@ -1,7 +1,6 @@
 package net.osmand.plus.routepreparationmenu;
 
 
-import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface.OnDismissListener;
 import android.graphics.PointF;
@@ -19,7 +18,6 @@ import android.support.transition.Scene;
 import android.support.transition.Transition;
 import android.support.transition.TransitionListenerAdapter;
 import android.support.transition.TransitionManager;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
@@ -263,7 +261,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			if (selectFromMapTouch) {
 				selectFromMapTouch = false;
 				LatLon latLon = tileBox.getLatLonFromPixel(point.x, point.y);
-				choicePointTypeAction(mapActivity, latLon, selectFromMapPointType, null, null);
+				choosePointTypeAction(mapActivity, latLon, selectFromMapPointType, null, null);
 				if (selectFromMapWaypoints) {
 					WaypointsFragment.showInstance(mapActivity.getSupportFragmentManager(), true);
 				} else {
@@ -275,7 +273,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		return false;
 	}
 
-	private void choicePointTypeAction(MapActivity mapActivity, LatLon latLon, PointType pointType, PointDescription pd, String address) {
+	private void choosePointTypeAction(MapActivity mapActivity, LatLon latLon, PointType pointType, PointDescription pd, String address) {
 		OsmandApplication app = getApp();
 		FavouritesDbHelper favorites = app.getFavorites();
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
@@ -1796,7 +1794,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, name);
-			choicePointTypeAction(mapActivity, latLon, pointType, pd, name);
+			choosePointTypeAction(mapActivity, latLon, pointType, pd, name);
 			updateMenu();
 		}
 	}
@@ -1839,7 +1837,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			if (marker != null) {
 				LatLon latLon = new LatLon(marker.getLatitude(), marker.getLongitude());
 				PointDescription pd = marker.getPointDescription(mapActivity);
-				choicePointTypeAction(mapActivity, latLon, pointType, pd, null);
+				choosePointTypeAction(mapActivity, latLon, pointType, pd, null);
 				updateMenu();
 			} else {
 				MapMarkerSelectionFragment selectionFragment = MapMarkerSelectionFragment.newInstance(pointType);
