@@ -3116,7 +3116,7 @@
     <string name="route_parameters_descr">تكوين معلمات الطريق</string>
     <string name="route_parameters">معلمات الطريق</string>
     <string name="application_profile_changed">تم تغيير ملف تعريف التطبيق إلى \"%s\"</string>
-    <string name="logcat_buffer">عازل ضبابي</string>
+    <string name="logcat_buffer">سجل الاستخدام</string>
     <string name="plugins_settings">إعدادات البرنامج المساعد</string>
     <string name="shared_string_by_default">بشكل افتراضي</string>
     <string name="download_detailed_map">قم بتنزيل خريطة مفصلة%s لعرض هذه المنطقة.</string>
