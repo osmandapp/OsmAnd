@@ -350,7 +350,9 @@ public class ApplicationMode {
 	}
 
 	public void setIconResName(String iconResName) {
-		app.getSettings().ICON_RES_NAME.setModeValue(this, iconResName);
+		if (!Algorithms.isEmpty(iconResName)) {
+			app.getSettings().ICON_RES_NAME.setModeValue(this, iconResName);
+		}
 	}
 
 	private void updateAppModeIcon() {
@@ -420,7 +422,9 @@ public class ApplicationMode {
 	}
 
 	public void setUserProfileName(String userProfileName) {
-		app.getSettings().USER_PROFILE_NAME.setModeValue(this, userProfileName);
+		if (!Algorithms.isEmpty(userProfileName)) {
+			app.getSettings().USER_PROFILE_NAME.setModeValue(this, userProfileName);
+		}
 	}
 
 	public String getRoutingProfile() {
@@ -428,7 +432,9 @@ public class ApplicationMode {
 	}
 
 	public void setRoutingProfile(String routingProfile) {
-		app.getSettings().ROUTING_PROFILE.setModeValue(this, routingProfile);
+		if (!Algorithms.isEmpty(routingProfile)) {
+			app.getSettings().ROUTING_PROFILE.setModeValue(this, routingProfile);
+		}
 	}
 
 	public RouteService getRouteService() {
@@ -436,7 +442,9 @@ public class ApplicationMode {
 	}
 
 	public void setRouteService(RouteService routeService) {
-		app.getSettings().ROUTE_SERVICE.setModeValue(this, routeService);
+		if (routeService != null) {
+			app.getSettings().ROUTE_SERVICE.setModeValue(this, routeService);
+		}
 	}
 
 	public NavigationIcon getNavigationIcon() {
@@ -444,7 +452,9 @@ public class ApplicationMode {
 	}
 
 	public void setNavigationIcon(NavigationIcon navigationIcon) {
-		app.getSettings().NAVIGATION_ICON.setModeValue(this, navigationIcon);
+		if (navigationIcon != null) {
+			app.getSettings().NAVIGATION_ICON.setModeValue(this, navigationIcon);
+		}
 	}
 
 	public LocationIcon getLocationIcon() {
@@ -452,7 +462,9 @@ public class ApplicationMode {
 	}
 
 	public void setLocationIcon(LocationIcon locationIcon) {
-		app.getSettings().LOCATION_ICON.setModeValue(this, locationIcon);
+		if (locationIcon != null) {
+			app.getSettings().LOCATION_ICON.setModeValue(this, locationIcon);
+		}
 	}
 
 	public ProfileIconColors getIconColorInfo() {
@@ -460,7 +472,9 @@ public class ApplicationMode {
 	}
 
 	public void setIconColor(ProfileIconColors iconColor) {
-		app.getSettings().ICON_COLOR.setModeValue(this, iconColor);
+		if (iconColor != null) {
+			app.getSettings().ICON_COLOR.setModeValue(this, iconColor);
+		}
 	}
 
 	public int getOrder() {
@@ -556,6 +570,7 @@ public class ApplicationMode {
 			mode = builder.customReg(app);
 			initRegVisibility();
 		}
+		reorderAppModes();
 		saveCustomAppModesToSettings(app);
 		return mode;
 	}
@@ -566,7 +581,7 @@ public class ApplicationMode {
 	}
 
 	public static ApplicationModeBuilder fromModeBean(ApplicationModeBean modeBean) {
-		ApplicationModeBuilder builder = createCustomMode(valueOfStringKey(modeBean.parent, null), modeBean.stringKey);
+		ApplicationModeBuilder builder = createCustomMode(valueOfStringKey(modeBean.parent, CAR), modeBean.stringKey);
 		builder.setUserProfileName(modeBean.userProfileName);
 		builder.setIconResName(modeBean.iconName);
 		builder.setIconColor(modeBean.iconColor);
@@ -659,9 +674,9 @@ public class ApplicationMode {
 		private String routingProfile;
 		private String iconResName;
 		private ProfileIconColors iconColor;
-		private Integer order;
 		private LocationIcon locationIcon;
 		private NavigationIcon navigationIcon;
+		private int order = -1;
 
 		public ApplicationMode getApplicationMode() {
 			return applicationMode;
@@ -677,34 +692,21 @@ public class ApplicationMode {
 			values.add(applicationMode);
 
 			applicationMode.app = app;
-			applicationMode.minDistanceForTurn = applicationMode.parentAppMode.minDistanceForTurn;
-			applicationMode.arrivalDistance = applicationMode.parentAppMode.arrivalDistance;
-			applicationMode.offRouteDistance = applicationMode.parentAppMode.offRouteDistance;
 
-			if (userProfileName != null) {
-				applicationMode.setUserProfileName(userProfileName);
-			}
-			if (routeService != null) {
-				applicationMode.setRouteService(routeService);
-			}
-			if (routingProfile != null) {
-				applicationMode.setRoutingProfile(routingProfile);
-			}
-			if (iconResName != null) {
-				applicationMode.setIconResName(iconResName);
-			}
-			if (iconColor != null) {
-				applicationMode.setIconColor(iconColor);
-			}
-			if (order != null) {
-				applicationMode.setOrder(order);
-			}
-			if (locationIcon != null) {
-				applicationMode.setLocationIcon(locationIcon);
-			}
-			if (navigationIcon != null) {
-				applicationMode.setNavigationIcon(navigationIcon);
-			}
+			ApplicationMode parent = applicationMode.parentAppMode;
+			applicationMode.minDistanceForTurn = parent.minDistanceForTurn;
+			applicationMode.arrivalDistance = parent.arrivalDistance;
+			applicationMode.offRouteDistance = parent.offRouteDistance;
+
+			applicationMode.setParentAppMode(parent);
+			applicationMode.setUserProfileName(userProfileName);
+			applicationMode.setRouteService(routeService);
+			applicationMode.setRoutingProfile(routingProfile);
+			applicationMode.setIconResName(iconResName);
+			applicationMode.setIconColor(iconColor);
+			applicationMode.setLocationIcon(locationIcon);
+			applicationMode.setNavigationIcon(navigationIcon);
+			applicationMode.setOrder(order != -1 ? order : values.size());
 
 			return applicationMode;
 		}
@@ -801,6 +803,6 @@ public class ApplicationMode {
 		@Expose
 		NavigationIcon navIcon = null;
 		@Expose
-		int order;
+		int order = -1;
 	}
 }

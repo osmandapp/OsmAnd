@@ -19,6 +19,10 @@ import android.support.annotation.StringRes;
 import android.support.v4.util.Pair;
 import android.support.v7.preference.PreferenceDataStore;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
 import net.osmand.IndexConstants;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
@@ -30,6 +34,7 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.osm.io.NetworkUtils;
+import net.osmand.plus.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.access.RelativeDirectionStyle;
 import net.osmand.plus.api.SettingsAPI;
@@ -54,6 +59,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -274,6 +280,19 @@ public class OsmandSettings {
 					if (!commonPref.isSetForMode(mode) && !commonPref.hasDefaultValueForMode(mode)) {
 						setPreference(commonPref.getId(), defaultVal, mode);
 					}
+				}
+			}
+		}
+
+		String json = settingsAPI.getString(globalPreferences, "custom_app_profiles", "");
+		if (!Algorithms.isEmpty(json)) {
+			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+			Type t = new TypeToken<ArrayList<ApplicationModeBean>>() {
+			}.getType();
+			List<ApplicationModeBean> customProfiles = gson.fromJson(json, t);
+			if (!Algorithms.isEmpty(customProfiles)) {
+				for (ApplicationModeBean modeBean : customProfiles) {
+					ApplicationMode.saveProfile(ApplicationMode.fromModeBean(modeBean), ctx);
 				}
 			}
 		}
