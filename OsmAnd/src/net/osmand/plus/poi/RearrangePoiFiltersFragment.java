@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -50,12 +51,14 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 	private static final Log LOG = PlatformUtil.getLog(RearrangePoiFiltersFragment.class);
 
 	private boolean usedOnMap;
+	private CallbackWithObject<Boolean> resultCallback;
 
 	private List<ListItem> items = new ArrayList<>();
 	private EditPoiFiltersAdapter adapter;
 	private boolean orderModified;
 	private boolean activationModified;
 	private boolean wasReset = false;
+	private boolean isChanged = false;
 
 	private HashMap<String, Integer> poiFiltersOrders = new HashMap<>();
 	private List<String> availableFiltersKeys = new ArrayList<>();
@@ -123,6 +126,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 			public void onButtonClicked(int pos) {
 				ListItem item = items.get(pos);
 				if (item.value instanceof PoiUIFilterDataObject) {
+					isChanged = true;
 					activationModified = true;
 					PoiUIFilterDataObject poiInfo = (PoiUIFilterDataObject) item.value;
 					poiInfo.toggleActive();
@@ -154,34 +158,39 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 		applyButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (activationModified) {
-					app.getPoiFilters().saveInactiveFilters(availableFiltersKeys);
-				} else if (wasReset) {
-					app.getPoiFilters().saveInactiveFilters(null);
+				if (isChanged) {
+					if (activationModified) {
+						app.getPoiFilters().saveInactiveFilters(availableFiltersKeys);
+					} else if (wasReset) {
+						app.getPoiFilters().saveInactiveFilters(null);
+					}
+					if (orderModified) {
+						List<PoiUIFilter> dataToSave = new ArrayList<>();
+						for (PoiUIFilter filter : getSortedPoiUiFilters(app)) {
+							String filterId = filter.getFilterId();
+							Integer order = poiFiltersOrders.get(filterId);
+							if (order == null) {
+								order = filter.getOrder();
+							}
+							boolean isActive = !availableFiltersKeys.contains(filterId);
+							filter.setActive(isActive);
+							filter.setOrder(order);
+							if (isActive) {
+								dataToSave.add(filter);
+							}
+						}
+						Collections.sort(dataToSave);
+						List<String> filterIds = new ArrayList<>();
+						for (PoiUIFilter filter : dataToSave) {
+							filterIds.add(filter.getFilterId());
+						}
+						app.getPoiFilters().saveFiltersOrder(filterIds);
+					} else if (wasReset) {
+						app.getPoiFilters().saveFiltersOrder(null);
+					}
 				}
-				if (orderModified) {
-					List<PoiUIFilter> dataToSave = new ArrayList<>();
-					for (PoiUIFilter filter : getSortedPoiUiFilters(app)) {
-						String filterId = filter.getFilterId();
-						Integer order = poiFiltersOrders.get(filterId);
-						if (order == null) {
-							order = filter.getOrder();
-						}
-						boolean isActive = !availableFiltersKeys.contains(filterId);
-						filter.setActive(isActive);
-						filter.setOrder(order);
-						if (isActive) {
-							dataToSave.add(filter);
-						}
-					}
-					Collections.sort(dataToSave);
-					List<String> filterIds = new ArrayList<>();
-					for (PoiUIFilter filter : dataToSave) {
-						filterIds.add(filter.getFilterId());
-					}
-					app.getPoiFilters().saveFiltersOrder(filterIds);
-				} else if (wasReset) {
-					app.getPoiFilters().saveFiltersOrder(null);
+				if (resultCallback != null) {
+					resultCallback.processResult(isChanged);
 				}
 				dismiss();
 			}
@@ -248,6 +257,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 				R.drawable.ic_action_reset_to_default_dark, new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				isChanged = true;
 				wasReset = true;
 				activationModified = false;
 				orderModified = false;
@@ -261,10 +271,11 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 		adapter.setItems(items);
 	}
 
-	public static void showInstance(@NonNull DialogFragment parentFragment, boolean usedOnMap) {
+	public static void showInstance(@NonNull DialogFragment parentFragment, boolean usedOnMap, CallbackWithObject<Boolean> callback) {
 		try {
 			RearrangePoiFiltersFragment fragment = new RearrangePoiFiltersFragment();
 			fragment.setUsedOnMap(usedOnMap);
+			fragment.setResultCallback(callback);
 			fragment.show(parentFragment.getChildFragmentManager(), RearrangePoiFiltersFragment.TAG);
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);
@@ -325,6 +336,10 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 
 	public void setUsedOnMap(boolean usedOnMap) {
 		this.usedOnMap = usedOnMap;
+	}
+
+	public void setResultCallback(CallbackWithObject<Boolean> resultCallback) {
+		this.resultCallback = resultCallback;
 	}
 
 	@NonNull
@@ -512,6 +527,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 			Object itemFrom = items.get(from).value;
 			Object itemTo = items.get(to).value;
 			if (itemFrom instanceof PoiUIFilterDataObject && itemTo instanceof PoiUIFilterDataObject) {
+				isChanged = true;
 				orderModified = true;
 				PoiUIFilterDataObject poiFrom = (PoiUIFilterDataObject) itemFrom;
 				PoiUIFilterDataObject poiTo = (PoiUIFilterDataObject) itemTo;
