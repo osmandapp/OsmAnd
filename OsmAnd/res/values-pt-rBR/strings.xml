@@ -344,7 +344,7 @@
     <string name="copying_osmand_files">Copiando arquivos de dados…</string>
     <string name="calculate_osmand_route_gpx">"Calcular rota off-line "</string>
     <string name="app_mode_truck">Caminhão</string>
-    <string name="auto_zoom_far">Visão intermediária</string>
+    <string name="auto_zoom_far">Para nível intermediário</string>
     <string name="local_index_tile_data_minzoom">Zoom mínimo: %1$s</string>
     <string name="edit_tilesource_successfully">A fonte da quadrícula %1$s foi salva</string>
     <string name="speak_traffic_warnings">Moderadores de tráfego</string>
@@ -537,8 +537,8 @@
     <string name="animate_routing_route">"Simular usando a rota calculada "</string>
     <string name="animate_routing_gpx">Simular usando trilha GPX</string>
     <string name="auto_zoom_none">Sem zoom automático</string>
-    <string name="auto_zoom_close">Aproximar</string>
-    <string name="auto_zoom_farthest">Afastar</string>
+    <string name="auto_zoom_close">Para nível aproximado</string>
+    <string name="auto_zoom_farthest">Para nível afastado</string>
     <string name="map_magnifier">Lupa</string>
     <string name="base_world_map">Mapa base mundial</string>
     <string name="about_version">Versão:</string>
@@ -3391,7 +3391,7 @@ Pôr do Sol: %2$s</string>
     <string name="add_new_profile_q">Adicionar novo perfil \'%1$s\'\?</string>
     <string name="save_heading">Incluir direção</string>
     <string name="save_heading_descr">Salve o cabeçalho em cada ponto da trilha durante a gravação.</string>
-    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Pessoal</string>
     <string name="shared_string_downloading_formatted">Baixando %s</string>

@@ -366,7 +366,7 @@ public class MapRenderRepositories {
 							coordinantes[2 * k + 1] = r.getPoint31YTile(k);
 						}
 						BinaryMapDataObject mo = new BinaryMapDataObject( r.getId(), coordinantes, new int[0][],
-								RenderingRulesStorage.LINE_RULES, true, roTypes, null);
+								RenderingRulesStorage.LINE_RULES, true, roTypes, null, 0,0);
 						TIntObjectHashMap<String> names = r.getNames();
 						if(names != null) {
 							TIntObjectIterator<String> it = names.iterator();
@@ -472,7 +472,7 @@ public class MapRenderRepositories {
 					topY};
 			BinaryMapDataObject o = new BinaryMapDataObject(-1, coordinates, new int[0][],  
 					RenderingRulesStorage.POLYGON_RULES, true,
-					new int[]{ocean[0] && !land[0] ? mi.coastlineEncodingType : (mi.landEncodingType)}, null);
+					new int[]{ocean[0] && !land[0] ? mi.coastlineEncodingType : (mi.landEncodingType)}, null, 0, 0);
 			o.setMapIndex(mi);
 			tempResult.add(o);
 		}
@@ -982,7 +982,7 @@ public class MapRenderRepositories {
 				coordinates[j * 2 + 1] = (int) (ring.get(j) & mask);
 			}
 			BinaryMapDataObject o = new BinaryMapDataObject(dbId, coordinates,  
-					new int[0][], RenderingRulesStorage.POLYGON_RULES, true, new int[] { mapIndex.coastlineBrokenEncodingType }, null);
+					new int[0][], RenderingRulesStorage.POLYGON_RULES, true, new int[] { mapIndex.coastlineBrokenEncodingType }, null, 0,0);
 			o.setMapIndex(mapIndex);
 			result.add(o);
 		}
@@ -1002,7 +1002,7 @@ public class MapRenderRepositories {
 			clockwiseFound = clockwiseFound || clockwise;
 			BinaryMapDataObject o = new BinaryMapDataObject(dbId, coordinates, 
 					new int[0][], RenderingRulesStorage.POLYGON_RULES, true,  new int[] { clockwise ? mapIndex.coastlineEncodingType
-					: mapIndex.landEncodingType }, null);
+					: mapIndex.landEncodingType }, null, 0,0);
 			o.setMapIndex(mapIndex);
 			o.setArea(true);
 			result.add(o);
@@ -1012,7 +1012,7 @@ public class MapRenderRepositories {
 			// add complete water tile
 			BinaryMapDataObject o = new BinaryMapDataObject(dbId,
 					new int[] { leftX, topY, rightX, topY, rightX, bottomY, leftX, bottomY, leftX, topY }, 
-					new int[0][], RenderingRulesStorage.POLYGON_RULES, true, new int[] { mapIndex.coastlineEncodingType }, null);
+					new int[0][], RenderingRulesStorage.POLYGON_RULES, true, new int[] { mapIndex.coastlineEncodingType }, null, 0,0);
 			o.setMapIndex(mapIndex);
 			log.info("!!! Isolated islands !!!"); //$NON-NLS-1$
 			result.add(o);

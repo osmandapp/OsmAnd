@@ -7,6 +7,11 @@ import android.content.Intent
 class InitAppBroadcastReceiver : BroadcastReceiver() {
 
 	override fun onReceive(context: Context, intent: Intent) {
-		// do nothing, TelegramApplication already initialized
+		// check if aidl connection was lost
+		val app = context.applicationContext as TelegramApplication
+		val aidlHelper = app.osmandAidlHelper
+		if (aidlHelper.isOsmandBound() && !aidlHelper.isOsmandConnected()) {
+			aidlHelper.connectOsmand()
+		}
 	}
 }

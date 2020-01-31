@@ -58,6 +58,8 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		const val OSMAND_NIGHTLY_PACKAGE_NAME = "net.osmand.dev"
 
 		const val UPDATE_TIME_MS = 5000L
+
+		private const val CALLBACK_INVALID_ID = -1L
 	}
 
 	private var mIOsmAndAidlInterface: IOsmAndAidlInterface? = null
@@ -68,7 +70,7 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 	private var osmandUpdatesCallbackId: Long = -1
 	private var osmandContextMenuCallbackId: Long = -1
 
-	var listener: OsmandHelperListener? = null
+	private val connectionListeners = HashSet<OsmandHelperListener>()
 
 	interface OsmandHelperListener {
 		fun onOsmandConnectionStateChanged(connected: Boolean)
@@ -133,6 +135,14 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		}
 	}
 
+	fun addConnectionListener(listener: OsmandHelperListener) {
+		connectionListeners.add(listener)
+	}
+
+	fun removeConnectionListener(listener: OsmandHelperListener) {
+		connectionListeners.remove(listener)
+	}
+
 	fun setSearchCompleteListener(mSearchCompleteListener: SearchCompleteListener) {
 		this.mSearchCompleteListener = mSearchCompleteListener
 	}
@@ -155,7 +165,7 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		this.mUpdatesListener = mUpdatesListener
 	}
 
-	fun updatesCallbackRegistered() = osmandUpdatesCallbackId > 0
+	fun updatesCallbackRegistered() = osmandUpdatesCallbackId > CALLBACK_INVALID_ID
 	/**
 	 * Class for interacting with the main interface of the service.
 	 */
@@ -169,16 +179,18 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 			// representation of that from the raw service object.
 			mIOsmAndAidlInterface = IOsmAndAidlInterface.Stub.asInterface(service)
 			initialized = true
-			//Toast.makeText(app, "OsmAnd connected", Toast.LENGTH_SHORT).show()
-			listener?.onOsmandConnectionStateChanged(true)
+			connectionListeners.forEach {
+				it.onOsmandConnectionStateChanged(true)
+			}
 		}
 
 		override fun onServiceDisconnected(className: ComponentName) {
 			// This is called when the connection with the service has been
 			// unexpectedly disconnected -- that is, its process crashed.
 			mIOsmAndAidlInterface = null
-			//Toast.makeText(app, "OsmAnd disconnected", Toast.LENGTH_SHORT).show()
-			listener?.onOsmandConnectionStateChanged(false)
+			connectionListeners.forEach {
+				it.onOsmandConnectionStateChanged(false)
+			}
 		}
 	}
 
@@ -193,7 +205,7 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 	fun isOsmandConnected(): Boolean {
 		return mIOsmAndAidlInterface != null
 	}
-	
+
 	/**
 	 * Get list of active GPX files.
 	 *
@@ -1162,20 +1174,20 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		if (mIOsmAndAidlInterface != null) {
 			try {
 				osmandUpdatesCallbackId = mIOsmAndAidlInterface!!.registerForUpdates(UPDATE_TIME_MS, mIOsmAndAidlCallback)
-				return osmandUpdatesCallbackId > 0
+				return osmandUpdatesCallbackId > CALLBACK_INVALID_ID
 			} catch (e: RemoteException) {
 				e.printStackTrace()
 			}
 		}
 		return false
 	}
-	
+
 	fun unregisterFromUpdates(): Boolean {
 		if (mIOsmAndAidlInterface != null) {
 			try {
 				val unregistered = mIOsmAndAidlInterface!!.unregisterFromUpdates(osmandUpdatesCallbackId)
 				if (unregistered) {
-					osmandUpdatesCallbackId = 0
+					osmandUpdatesCallbackId = CALLBACK_INVALID_ID
 				}
 				return unregistered
 			} catch (e: RemoteException) {
@@ -1222,7 +1234,7 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 				val params = RemoveContextMenuButtonsParams(paramsId, osmandContextMenuCallbackId)
 				val removed = mIOsmAndAidlInterface!!.removeContextMenuButtons(params)
 				if (removed) {
-					osmandContextMenuCallbackId = -1
+					osmandContextMenuCallbackId = CALLBACK_INVALID_ID
 				}
 				return removed
 			} catch (e: RemoteException) {

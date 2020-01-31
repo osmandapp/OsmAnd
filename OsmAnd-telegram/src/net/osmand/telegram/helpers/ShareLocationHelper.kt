@@ -1,5 +1,7 @@
 package net.osmand.telegram.helpers
 
+import android.os.Handler
+import android.os.Message
 import net.osmand.Location
 import net.osmand.PlatformUtil
 import net.osmand.telegram.*
@@ -16,7 +18,9 @@ import org.json.JSONObject
 private const val USER_SET_LIVE_PERIOD_DELAY_MS = 5000 // 5 sec
 
 private const val MIN_MESSAGE_SENDING_INTERVAL_MS = 1000 // 1 sec
-private const val MIN_MESSAGES_BUFFER_CHECK_INTERVAL_MS = 800 // 0.8 sec
+private const val MIN_MESSAGES_BUFFER_CHECK_INTERVAL_MS = 300 // 0.3 sec
+
+private const val SEND_MESSAGES_BUFFER_MS_MSG_ID = 5000
 
 class ShareLocationHelper(private val app: TelegramApplication) {
 
@@ -51,6 +55,9 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		}
 
 	private var lastTimeInMillis: Long = 0L
+
+	private var sendBufferMessagesHandler = Handler()
+	private var sendBufferMessagesRunnable = Runnable { app.shareLocationHelper.checkAndSendBufferMessages(false) }
 
 	fun updateLocation(location: Location?) {
 		val lastPoint = lastLocation
@@ -120,7 +127,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		}
 	}
 
-	fun checkAndSendBufferMessages() {
+	fun checkAndSendBufferMessages(checkNetworkTypeAllowed: Boolean = true) {
 		log.debug("checkAndSendBufferMessages")
 		var pendingMessagesLimitReached = false
 		app.settings.getChatsShareInfo().forEach { (chatId, shareInfo) ->
@@ -129,8 +136,16 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 				pendingMessagesLimitReached = true
 			}
 		}
-		if (pendingMessagesLimitReached) {
+		if (pendingMessagesLimitReached && checkNetworkTypeAllowed) {
 			checkNetworkType()
+		}
+	}
+
+	fun checkAndSendBufferMessagesDelayed() {
+		if (!sendBufferMessagesHandler.hasMessages(SEND_MESSAGES_BUFFER_MS_MSG_ID)) {
+			val msg = Message.obtain(sendBufferMessagesHandler, sendBufferMessagesRunnable)
+			msg.what = SEND_MESSAGES_BUFFER_MS_MSG_ID
+			sendBufferMessagesHandler.sendMessageDelayed(msg, MIN_MESSAGES_BUFFER_CHECK_INTERVAL_MS.toLong() + 1L)
 		}
 	}
 
@@ -138,9 +153,13 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		val shareChatsInfo = app.settings.getChatsShareInfo()
 		val shareInfo = shareChatsInfo[chatId]
 		if (shareInfo != null) {
+			val bufferedMessagesCount = app.locationMessages.getBufferedMessagesCountForChat(chatId)
+			if (bufferedMessagesCount > 0) {
+				checkAndSendBufferMessagesDelayed()
+			}
 			val currentTime = System.currentTimeMillis()
 			if (currentTime - shareInfo.lastBufferCheckTime < MIN_MESSAGES_BUFFER_CHECK_INTERVAL_MS && !forced) {
-				return app.locationMessages.getBufferedMessagesCountForChat(chatId)
+				return bufferedMessagesCount
 			}
 			shareInfo.lastBufferCheckTime = currentTime
 
@@ -182,7 +201,9 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 
 			refreshNotification()
 
-			checkAndSendBufferMessages()
+			if (app.telegramService != null) {
+				checkAndSendBufferMessages()
+			}
 		} else {
 			app.forceUpdateMyLocation()
 		}

@@ -3776,7 +3776,7 @@
     <string name="poi_volcano_type_maar">低平火山口</string>
     <string name="poi_volcano_type_caldera">破火山口</string>
     <string name="poi_volcano_type_lava_dome">火山穹丘</string>
-    <string name="poi_volcano_type_dirt">火山灰</string>
+    <string name="poi_volcano_type_mud">火山灰</string>
     <string name="poi_volcano_last_eruption">最後一次噴發</string>
     <string name="poi_volcano_status_extinct">死火山</string>
     <string name="poi_volcano_status_dormant">休眠火山</string>

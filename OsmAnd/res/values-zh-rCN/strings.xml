@@ -2798,7 +2798,7 @@
     <string name="download_map_dialog">下载地图对话框</string>
     <string name="suggested_maps">建议的地图</string>
     <string name="shared_string_turn_off">关闭</string>
-    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="select_navigation_icon">选择导航图标</string>
     <string name="select_map_icon">选择地图图标</string>
     <string name="delete_profiles_descr">在您点击“应用”后，已删除的配置将永久丢失。</string>
