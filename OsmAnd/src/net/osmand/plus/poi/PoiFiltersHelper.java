@@ -300,7 +300,7 @@ public class PoiFiltersHelper {
 			for (int i = 0; i < existedFilters.size(); i++) {
 				existedFilters.get(i).setOrder(i);
 			}
-			//set up most order values for new poi filters
+			//set up maximum orders for new poi filters
 			Collections.sort(newFilters);
 			for (PoiUIFilter filter : newFilters) {
 				filter.setOrder(existedFilters.size());
