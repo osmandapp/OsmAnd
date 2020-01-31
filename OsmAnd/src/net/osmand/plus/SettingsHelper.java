@@ -10,9 +10,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
-import net.osmand.plus.ApplicationMode.ApplicationModeBean;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -35,10 +35,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
@@ -402,15 +404,19 @@ public class SettingsHelper {
 		private ApplicationMode appMode;
 		private ApplicationModeBuilder builder;
 		private ApplicationModeBean modeBean;
+		private Set<String> appModeBeanPrefsIds;
+
 
 		public ProfileSettingsItem(@NonNull OsmandSettings settings, @NonNull ApplicationMode appMode) {
 			super(SettingsItemType.PROFILE, settings);
 			this.appMode = appMode;
+			appModeBeanPrefsIds = new HashSet<>(Arrays.asList(settings.appModeBeanPrefsIds));
 		}
 
 		public ProfileSettingsItem(@NonNull OsmandSettings settings, @NonNull JSONObject json) throws JSONException {
 			super(SettingsItemType.PROFILE, settings, json);
 			readFromJson(settings.getContext(), json);
+			appModeBeanPrefsIds = new HashSet<>(Arrays.asList(settings.appModeBeanPrefsIds));
 		}
 
 		@NonNull
@@ -473,7 +479,9 @@ public class SettingsHelper {
 			return new OsmandSettingsItemReader(this, getSettings()) {
 				@Override
 				protected void readPreferenceFromJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
-					preference.readFromJson(json, appMode);
+					if (!appModeBeanPrefsIds.contains(preference.getId())) {
+						preference.readFromJson(json, appMode);
+					}
 				}
 			};
 		}
@@ -484,7 +492,9 @@ public class SettingsHelper {
 			return new OsmandSettingsItemWriter(this, getSettings()) {
 				@Override
 				protected void writePreferenceToJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
-					preference.writeToJson(json, appMode);
+					if (!appModeBeanPrefsIds.contains(preference.getId())) {
+						preference.writeToJson(json, appMode);
+					}
 				}
 			};
 		}

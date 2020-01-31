@@ -3681,6 +3681,15 @@ public class OsmandSettings {
 			DRIVING_REGION_AUTOMATIC
 	};
 
+	String[] appModeBeanPrefsIds = new String[] {
+			ICON_COLOR.getId(),
+			ICON_RES_NAME.getId(),
+			PARENT_APP_MODE.getId(),
+			ROUTING_PROFILE.getId(),
+			ROUTE_SERVICE.getId(),
+			USER_PROFILE_NAME.getId()
+	};
+
 	public class PreferencesDataStore extends PreferenceDataStore {
 
 		private ApplicationMode appMode;
