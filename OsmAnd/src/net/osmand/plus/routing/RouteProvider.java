@@ -704,11 +704,11 @@ public class RouteProvider {
 		if (defaultSpeed > 0) {
 			paramsR.put(GeneralRouter.DEFAULT_SPEED, String.valueOf(defaultSpeed));
 		}
-		Float minSpeed = settings.MIN_SPEED.getModeValue(params.mode);
+		Float minSpeed = params.mode.getMinSpeed();
 		if (minSpeed > 0) {
 			paramsR.put(GeneralRouter.MIN_SPEED, String.valueOf(minSpeed));
 		}
-		Float maxSpeed = settings.MAX_SPEED.getModeValue(params.mode);
+		Float maxSpeed = params.mode.getMaxSpeed();
 		if (maxSpeed > 0) {
 			paramsR.put(GeneralRouter.MAX_SPEED, String.valueOf(maxSpeed));
 		}
@@ -790,7 +790,7 @@ public class RouteProvider {
 	}
 
 	private RouteCalculationResult applicationModeNotSupported(RouteCalculationParams params) {
-		return new RouteCalculationResult("Application mode '"+ params.mode.toHumanString(params.ctx)+ "' is not supported.");
+		return new RouteCalculationResult("Application mode '"+ params.mode.toHumanString()+ "' is not supported.");
 	}
 
 	private RouteCalculationResult interrupted() {

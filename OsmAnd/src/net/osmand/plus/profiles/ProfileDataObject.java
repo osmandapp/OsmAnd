@@ -1,7 +1,6 @@
 package net.osmand.plus.profiles;
 
 import android.support.annotation.ColorRes;
-import net.osmand.plus.ApplicationMode.ProfileIconColors;
 
 public class ProfileDataObject {
 

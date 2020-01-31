@@ -116,7 +116,6 @@ import net.osmand.plus.mapmarkers.PlanRouteFragment;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.NewGpxData;
-import net.osmand.plus.profiles.EditProfileFragment;
 import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
@@ -675,13 +674,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			chooseRouteFragment.dismiss(true);
 			return;
 		}
-		EditProfileFragment editProfileFragment = getEditProfileFragment();
-		if (editProfileFragment != null) {
-			if (!editProfileFragment.onBackPressedAllowed()) {
-				editProfileFragment.confirmCancelDialog(this);
-				return;
-			}
-		}
 		ProfileAppearanceFragment profileAppearanceFragment = getProfileAppearanceFragment();
 		if (profileAppearanceFragment != null) {
 			if (profileAppearanceFragment.isProfileAppearanceChanged(this)) {
@@ -859,21 +851,21 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				}
 				setIntent(null);
 			}
-			if (intent.hasExtra(EditProfileFragment.OPEN_SETTINGS)) {
-				String settingsType = intent.getStringExtra(EditProfileFragment.OPEN_SETTINGS);
-				String appMode = intent.getStringExtra(EditProfileFragment.SELECTED_ITEM);
-				if (EditProfileFragment.OPEN_CONFIG_PROFILE.equals(settingsType)) {
+			if (intent.hasExtra(BaseSettingsFragment.OPEN_SETTINGS)) {
+				String settingsType = intent.getStringExtra(BaseSettingsFragment.OPEN_SETTINGS);
+				String appMode = intent.getStringExtra(BaseSettingsFragment.APP_MODE_KEY);
+				if (BaseSettingsFragment.OPEN_CONFIG_PROFILE.equals(settingsType)) {
 					BaseSettingsFragment.showInstance(this, SettingsScreenType.CONFIGURE_PROFILE, ApplicationMode.valueOfStringKey(appMode, null));
 				}
 				setIntent(null);
 			}
-			if (intent.hasExtra(EditProfileFragment.OPEN_CONFIG_ON_MAP)) {
-				switch (intent.getStringExtra(EditProfileFragment.OPEN_CONFIG_ON_MAP)) {
-					case EditProfileFragment.MAP_CONFIG:
+			if (intent.hasExtra(BaseSettingsFragment.OPEN_CONFIG_ON_MAP)) {
+				switch (intent.getStringExtra(BaseSettingsFragment.OPEN_CONFIG_ON_MAP)) {
+					case BaseSettingsFragment.MAP_CONFIG:
 						this.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP, null);
 						break;
 
-					case EditProfileFragment.SCREEN_CONFIG:
+					case BaseSettingsFragment.SCREEN_CONFIG:
 						this.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN, null);
 						break;
 				}
@@ -1655,7 +1647,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		return super.onKeyUp(keyCode, event);
 	}
-	
+
 	private void scrollMap(int dx, int dy) {
 		final RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
 		final QuadPoint cp = tb.getCenterPixelPoint();
@@ -2407,10 +2399,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public ChooseRouteFragment getChooseRouteFragment() {
 		return getFragment(ChooseRouteFragment.TAG);
-	}
-
-	public EditProfileFragment getEditProfileFragment() {
-		return getFragment(EditProfileFragment.TAG);
 	}
 
 	public ProfileAppearanceFragment getProfileAppearanceFragment() {

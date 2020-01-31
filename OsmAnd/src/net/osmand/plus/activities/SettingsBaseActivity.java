@@ -386,7 +386,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 
 		    if (am != ApplicationMode.DEFAULT || !(this instanceof SettingsNavigationActivity)) {
 			    activeModes.add(new ProfileDataObject(
-					    am.toHumanString(getMyApplication()),
+					    am.toHumanString(),
 					    getAppModeDescription(am),
 					    am.getStringKey(),
 					    am.getIconRes(),
@@ -429,7 +429,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
     void updateModeButton(ApplicationMode mode) {
 		OsmandApplication app = getMyApplication();
 		boolean nightMode = !app.getSettings().isLightContent();
-	    String title = mode.toHumanString(SettingsBaseActivity.this);
+	    String title = mode.toHumanString();
 
 	    getModeTitleTV().setText(title);
 	    getModeSubTitleTV().setText(getAppModeDescription(mode));
@@ -448,7 +448,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		    descr = getString(R.string.profile_type_base_string);
 	    } else {
 		    descr = String.format(getString(R.string.profile_type_descr_string),
-			    mode.getParent().toHumanString(getMyApplication()));
+			    mode.getParent().toHumanString());
 		    if (mode.getRoutingProfile() != null && mode.getRoutingProfile().contains("/")) {
 			    descr = descr.concat(", " + mode.getRoutingProfile()
 				    .substring(0, mode.getRoutingProfile().indexOf("/")));

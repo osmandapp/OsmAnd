@@ -391,7 +391,6 @@
 		<activity android:name="net.osmand.plus.activities.SettingsGeneralActivity" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="net.osmand.plus.activities.SettingsNavigationActivity" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="net.osmand.plus.monitoring.SettingsMonitoringActivity" android:configChanges="keyboardHidden|orientation" />
-		<activity android:name="net.osmand.plus.rastermaps.SettingsRasterMapsActivity" android:configChanges="keyboardHidden|orientation" />
 
 		<activity android:name="net.osmand.plus.osmedit.SettingsOsmEditingActivity" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="net.osmand.plus.development.SettingsDevelopmentActivity" android:configChanges="keyboardHidden|orientation" />
@@ -985,15 +984,6 @@
 		</activity>
 
         <receiver android:name="net.osmand.plus.liveupdates.LiveUpdatesAlarmReceiver"/>
-
-		<activity
-			android:configChanges="keyboardHidden|orientation"
-			android:label="Application profiles"
-			android:name=".profiles.SettingsProfileActivity"/>
-
-		<activity
-			android:name=".profiles.EditProfileActivity"
-			android:label="Application profiles"/>
 
 		<activity android:name=".activities.PrivacyAndSecurityActivity"
 			android:configChanges="keyboardHidden|orientation" />

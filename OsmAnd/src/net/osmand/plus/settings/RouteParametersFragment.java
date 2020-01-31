@@ -79,7 +79,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 
 		Preference routeParametersInfo = findPreference(ROUTE_PARAMETERS_INFO);
 		routeParametersInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
-		routeParametersInfo.setTitle(getString(R.string.route_parameters_info, getSelectedAppMode().toHumanString(getContext())));
+		routeParametersInfo.setTitle(getString(R.string.route_parameters_info, getSelectedAppMode().toHumanString()));
 
 		setupRoutingPrefs();
 		setupTimeConditionalRoutingPref();
