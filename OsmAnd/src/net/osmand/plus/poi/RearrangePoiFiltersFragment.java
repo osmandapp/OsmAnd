@@ -28,7 +28,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.search.QuickSearchCustomPoiFragment;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 
 import org.apache.commons.logging.Log;
@@ -40,7 +39,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import static net.osmand.plus.poi.PoiUIFilter.CUSTOM_FILTER_ID;
-import static net.osmand.plus.poi.PoiFiltersHelper.PoiFilterBean;
 import static net.osmand.plus.poi.RearrangePoiFiltersFragment.ItemType.DESCRIPTION;
 import static net.osmand.plus.poi.RearrangePoiFiltersFragment.ItemType.POI;
 import static net.osmand.plus.poi.RearrangePoiFiltersFragment.ItemType.SPACE;
@@ -55,9 +53,9 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 
 	private List<ListItem> items = new ArrayList<>();
 	private EditPoiFiltersAdapter adapter;
-	private boolean isChanged = false;
-	private boolean orderModified = false;
-	private boolean isResetToDefault = false;
+	private boolean orderModified;
+	private boolean activationModified;
+	private boolean wasReset = false;
 
 	private HashMap<String, Integer> poiFiltersOrders = new HashMap<>();
 	private List<String> availableFiltersKeys = new ArrayList<>();
@@ -99,7 +97,8 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 		final ItemTouchHelper touchHelper = new ItemTouchHelper(new ReorderItemTouchHelperCallback(adapter));
 		touchHelper.attachToRecyclerView(recyclerView);
 		
-		orderModified = !app.getSettings().ARRANGE_POI_FILTERS_BY_DEFAULT.get();
+		orderModified = app.getSettings().POI_FILTERS_ORDER.get() != null;
+		activationModified = app.getSettings().INACTIVE_POI_FILTERS.get() != null;
 
 		adapter.setListener(new PoiAdapterListener() {
 
@@ -124,8 +123,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 			public void onButtonClicked(int pos) {
 				ListItem item = items.get(pos);
 				if (item.value instanceof PoiUIFilterDataObject) {
-					isChanged = true;
-					isResetToDefault = false;
+					activationModified = true;
 					PoiUIFilterDataObject poiInfo = (PoiUIFilterDataObject) item.value;
 					poiInfo.toggleActive();
 					if (!poiInfo.isActive) {
@@ -156,9 +154,14 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 		applyButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (isChanged) {
-					List<PoiFilterBean> savingData = new ArrayList<>();
-					for (PoiUIFilter filter : getProfileDependentPoiUiFilters(app)) {
+				if (activationModified) {
+					app.getPoiFilters().saveInactiveFilters(availableFiltersKeys);
+				} else if (wasReset) {
+					app.getPoiFilters().saveInactiveFilters(null);
+				}
+				if (orderModified) {
+					List<PoiUIFilter> dataToSave = new ArrayList<>();
+					for (PoiUIFilter filter : getSortedPoiUiFilters(app)) {
 						String filterId = filter.getFilterId();
 						Integer order = poiFiltersOrders.get(filterId);
 						if (order == null) {
@@ -167,13 +170,18 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 						boolean isActive = !availableFiltersKeys.contains(filterId);
 						filter.setActive(isActive);
 						filter.setOrder(order);
-						savingData.add(new PoiFilterBean(filterId, order, isActive));
+						if (isActive) {
+							dataToSave.add(filter);
+						}
 					}
-					app.getPoiFilters().savePoiFiltersBeans(savingData);
-					app.getSettings().ARRANGE_POI_FILTERS_BY_DEFAULT.set(!orderModified);
-				} else if (isResetToDefault) {
-					app.getPoiFilters().savePoiFiltersBeans(null);
-					app.getSettings().ARRANGE_POI_FILTERS_BY_DEFAULT.set(true);
+					Collections.sort(dataToSave);
+					List<String> filterIds = new ArrayList<>();
+					for (PoiUIFilter filter : dataToSave) {
+						filterIds.add(filter.getFilterId());
+					}
+					app.getPoiFilters().saveFiltersOrder(filterIds);
+				} else if (wasReset) {
+					app.getPoiFilters().saveFiltersOrder(null);
 				}
 				dismiss();
 			}
@@ -185,16 +193,28 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 	private void initFiltersOrders(OsmandApplication app, boolean arrangementByDefault) {
 		poiFiltersOrders.clear();
 		availableFiltersKeys.clear();
-		List<PoiUIFilter> filters = getProfileDependentPoiUiFilters(app);
+		List<PoiUIFilter> filters = getSortedPoiUiFilters(app);
 		if (arrangementByDefault) {
-			Collections.sort(filters);
+			Collections.sort(filters, new Comparator<PoiUIFilter>() {
+				@Override
+				public int compare(PoiUIFilter o1, PoiUIFilter o2) {
+					if (o1.filterId.equals(o2.filterId)) {
+						String filterByName1 = o1.filterByName == null ? "" : o1.filterByName;
+						String filterByName2 = o2.filterByName == null ? "" : o2.filterByName;
+						return filterByName1.compareToIgnoreCase(filterByName2);
+					} else {
+						return o1.name.compareTo(o2.name);
+					}
+				}
+			});
 			for (int i = 0; i < filters.size(); i++) {
 				PoiUIFilter filter = filters.get(i);
 				poiFiltersOrders.put(filter.getFilterId(), i);
 			}
 		} else {
-			for (PoiUIFilter filter : filters) {
-				poiFiltersOrders.put(filter.getFilterId(), filter.getOrder());
+			for (int i = 0; i < filters.size(); i++) {
+				PoiUIFilter filter = filters.get(i);
+				poiFiltersOrders.put(filter.getFilterId(), i);
 				if (!filter.isActive) {
 					availableFiltersKeys.add(filter.getFilterId());
 				}
@@ -217,25 +237,26 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 			items.addAll(available);
 			items.add(new ListItem(ItemType.DIVIDER, 1));
 		}
-		items.add(new ListItem(ItemType.BUTTON, new ControlButton(app.getString(R.string.add_custom_category),
+		/*items.add(new ListItem(ItemType.BUTTON, new ControlButton(app.getString(R.string.add_custom_category),
 				R.drawable.ic_action_plus, new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				QuickSearchCustomPoiFragment.showDialog(RearrangePoiFiltersFragment.this, app.getPoiFilters().getCustomPOIFilter().getFilterId());
 			}
-		})));
+		})));*/
 		items.add(new ListItem(ItemType.BUTTON, new ControlButton(app.getString(R.string.reset_to_default),
 				R.drawable.ic_action_reset_to_default_dark, new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				isChanged = false;
+				wasReset = true;
+				activationModified = false;
 				orderModified = false;
-				isResetToDefault = true;
 				initFiltersOrders(app, true);
 			}
 		})));
-		items.add(new ListItem(DESCRIPTION, app.getString(R.string.add_new_custom_category_button_promo) +
-				'\n' + app.getString(R.string.reset_to_default_category_button_promo)));
+		items.add(new ListItem(DESCRIPTION, 
+//				app.getString(R.string.add_new_custom_category_button_promo) + '\n' + 
+				app.getString(R.string.reset_to_default_category_button_promo)));
 
 		adapter.setItems(items);
 	}
@@ -253,7 +274,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 	public List<ListItem> getPoiFilters(boolean isActive) {
 		OsmandApplication app = requireMyApplication();
 		List<ListItem> result = new ArrayList<>();
-		for (PoiUIFilter f : getProfileDependentPoiUiFilters(app)) {
+		for (PoiUIFilter f : getSortedPoiUiFilters(app)) {
 			addFilterToList(result, f, isActive);
 		}
 		Collections.sort(result, new Comparator<ListItem>() {
@@ -289,8 +310,8 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 		}
 	}
 
-	private static List<PoiUIFilter> getProfileDependentPoiUiFilters(@NonNull OsmandApplication app) {
-		List<PoiUIFilter> filters = app.getPoiFilters().getProfileDependentPoiUIFilters(false);
+	private static List<PoiUIFilter> getSortedPoiUiFilters(@NonNull OsmandApplication app) {
+		List<PoiUIFilter> filters = app.getPoiFilters().getSortedPoiFilters(false);
 		//remove custom filter
 		for (int i = filters.size() - 1; i >= 0; i--) {
 			PoiUIFilter filter = filters.get(i);
@@ -360,10 +381,6 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 			this.type = type;
 			this.value = value;
 		}
-
-		public ListItem(ItemType type) {
-			this.type = type;
-		}
 	}
 
 	private class EditPoiFiltersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
@@ -392,7 +409,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 			View itemView;
 			switch (type) {
 				case POI:
-					itemView = inflater.inflate(R.layout.arrange_poi_list_item, parent, false);
+					itemView = inflater.inflate(R.layout.order_poi_list_item, parent, false);
 					return new PoiViewHolder(itemView);
 				case SPACE:
 					itemView = new View(ctx);
@@ -495,9 +512,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 			Object itemFrom = items.get(from).value;
 			Object itemTo = items.get(to).value;
 			if (itemFrom instanceof PoiUIFilterDataObject && itemTo instanceof PoiUIFilterDataObject) {
-				isChanged = true;
 				orderModified = true;
-				isResetToDefault = false;
 				PoiUIFilterDataObject poiFrom = (PoiUIFilterDataObject) itemFrom;
 				PoiUIFilterDataObject poiTo = (PoiUIFilterDataObject) itemTo;
 
