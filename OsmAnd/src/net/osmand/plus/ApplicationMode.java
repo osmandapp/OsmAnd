@@ -315,6 +315,9 @@ public class ApplicationMode {
 	public void setParentAppMode(ApplicationMode parentAppMode) {
 		if (isCustomProfile()) {
 			this.parentAppMode = parentAppMode;
+			minDistanceForTurn = parentAppMode.minDistanceForTurn;
+			arrivalDistance = parentAppMode.arrivalDistance;
+			offRouteDistance = parentAppMode.offRouteDistance;
 			app.getSettings().PARENT_APP_MODE.setModeValue(this, parentAppMode.getStringKey());
 		}
 	}
@@ -581,15 +584,12 @@ public class ApplicationMode {
 	}
 
 	public static ApplicationModeBuilder fromModeBean(ApplicationModeBean modeBean) {
-		ApplicationModeBuilder builder = createCustomMode(valueOfStringKey(modeBean.parent, CAR), modeBean.stringKey);
+		ApplicationModeBuilder builder = createCustomMode(valueOfStringKey(modeBean.parent, null), modeBean.stringKey);
 		builder.setUserProfileName(modeBean.userProfileName);
 		builder.setIconResName(modeBean.iconName);
 		builder.setIconColor(modeBean.iconColor);
 		builder.setRoutingProfile(modeBean.routingProfile);
 		builder.setRouteService(modeBean.routeService);
-		builder.setLocationIcon(modeBean.locIcon);
-		builder.setNavigationIcon(modeBean.navIcon);
-		builder.setOrder(modeBean.order);
 
 		return builder;
 	}
@@ -603,9 +603,6 @@ public class ApplicationMode {
 		mb.parent = parentAppMode != null ? parentAppMode.getStringKey() : null;
 		mb.routeService = getRouteService();
 		mb.routingProfile = getRoutingProfile();
-		mb.locIcon = getLocationIcon();
-		mb.navIcon = getNavigationIcon();
-		mb.order = getOrder();
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 		return gson.toJson(mb);
 	}
@@ -798,11 +795,5 @@ public class ApplicationMode {
 		String routingProfile = null;
 		@Expose
 		RouteService routeService = RouteService.OSMAND;
-		@Expose
-		LocationIcon locIcon = null;
-		@Expose
-		NavigationIcon navIcon = null;
-		@Expose
-		int order = -1;
 	}
 }

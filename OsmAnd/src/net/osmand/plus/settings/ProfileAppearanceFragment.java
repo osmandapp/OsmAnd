@@ -662,8 +662,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 					.setRouteService(changedProfile.routeService)
 					.setIconColor(changedProfile.color)
 					.setLocationIcon(changedProfile.locationIcon)
-					.setNavigationIcon(changedProfile.navigationIcon)
-					.setOrder(ApplicationMode.allPossibleValues().size());
+					.setNavigationIcon(changedProfile.navigationIcon);
 
 			app.getSettings().copyPreferencesFromProfile(changedProfile.parent, builder.getApplicationMode());
 			ApplicationMode mode = ApplicationMode.saveProfile(builder, app);
