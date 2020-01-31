@@ -655,7 +655,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		}
 		if (isNew) {
 			ApplicationMode.ApplicationModeBuilder builder = ApplicationMode
-					.createCustomMode(changedProfile.parent, changedProfile.stringKey)
+					.createCustomMode(changedProfile.parent, changedProfile.stringKey, app)
 					.setIconResName(ProfileIcons.getResStringByResId(changedProfile.iconRes))
 					.setUserProfileName(changedProfile.name.trim())
 					.setRoutingProfile(changedProfile.routingProfile)
