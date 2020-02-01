@@ -209,16 +209,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				markerCustomized = true;
 			}
 			if (x != null && y != null && x.size() > 2) {
-				double lat = MapUtils.get31LatitudeY(y.get(0));
-				double lon = MapUtils.get31LongitudeX(x.get(0));
-				int px, py, prevX, prevY;
-				prevX = (int) box.getPixXFromLatLon(lat, lon);
-				prevY = (int) box.getPixYFromLatLon(lat, lon);
+				float px, py, prevX, prevY;
+				prevX = box.getPixXFrom31(x.get(0), y.get(0));
+				prevY = box.getPixYFrom31(x.get(0), y.get(0));
 				for (int i = 1; i < x.size(); i++) {
-					lat = MapUtils.get31LatitudeY(y.get(i));
-					lon = MapUtils.get31LongitudeX(x.get(i));
-					px = (int) box.getPixXFromLatLon(lat, lon);
-					py = (int) box.getPixYFromLatLon(lat, lon);
+					px = box.getPixXFrom31(x.get(i), y.get(i));
+					py = box.getPixYFrom31(x.get(i), y.get(i));
 					canvas.drawLine(prevX, prevY, px, py, outlinePaint);
 					prevX = px;
 					prevY = py;
