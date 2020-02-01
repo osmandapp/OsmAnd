@@ -172,11 +172,11 @@ public class MapUtils {
 	}
 
 	public static double get31LongitudeX(int tileX) {
-		return MapUtils.getLongitudeFromTile(21, tileX / 1024f);
+		return MapUtils.getLongitudeFromTile(21, tileX / 1024.0);
 	}
 
 	public static double get31LatitudeY(int tileY) {
-		return MapUtils.getLatitudeFromTile(21, tileY / 1024f);
+		return MapUtils.getLatitudeFromTile(21, tileY / 1024.0);
 	}
 
 

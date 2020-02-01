@@ -677,10 +677,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			RenderingContext rc = maps.getVisibleRenderingContext();
 			RenderedObject[] renderedObjects = null;
 			if (rc != null && rc.zoom == tileBox.getZoom()) {
-				double lat = MapUtils.get31LatitudeY((int) (rc.topY * rc.tileDivisor));
-				double lon = MapUtils.get31LongitudeX((int) (rc.leftX * rc.tileDivisor));
-				float x = tileBox.getPixXFromLatLon(lat, lon);
-				float y = tileBox.getPixYFromLatLon(lat, lon);
+				float x = tileBox.getPixXFrom31((int) (rc.leftX * rc.tileDivisor), (int) (rc.topY * rc.tileDivisor));
+				float y = tileBox.getPixYFrom31((int) (rc.leftX * rc.tileDivisor), (int) (rc.topY * rc.tileDivisor));
 				renderedObjects = nativeLib.searchRenderedObjectsFromContext(rc, (int) (point.x - x), (int) (point.y - y));
 			}
 			if (renderedObjects != null) {
