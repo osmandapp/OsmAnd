@@ -213,14 +213,14 @@ public class RotatedTileBox {
 	}
 
 	public float getPixXFrom31(int x31, int y31) {
-		double zm = getPowZoom(31 - zoom);
+		double zm = MapUtils.getPowZoom(31 - zoom);
 		double xTile = ((double) x31) / zm;
 		double yTile = ((double) y31) / zm;
 		return getPixXFromTile(xTile, yTile);
 	}
 
 	public float getPixYFrom31(int x31, int y31) {
-		double zm = getPowZoom(31 - zoom);
+		double zm = MapUtils.getPowZoom(31 - zoom);
 		double xTile = ((double) x31) / zm;
 		double yTile = ((double) y31) / zm;
 		return getPixYFromTile(xTile, yTile);
