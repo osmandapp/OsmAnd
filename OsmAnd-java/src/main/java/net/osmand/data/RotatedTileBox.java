@@ -1,7 +1,6 @@
 package net.osmand.data;
-import net.osmand.util.MapUtils;
 
-import static net.osmand.util.MapUtils.getPowZoom;
+import net.osmand.util.MapUtils;
 
 public class RotatedTileBox {
 
@@ -195,8 +194,8 @@ public class RotatedTileBox {
 		if(tile < 0) {
 			return 0;
 		}
-		if(tile >= getPowZoom(zoom)) {
-			return getPowZoom(zoom) - .000001;
+		if(tile >= MapUtils.getPowZoom(zoom)) {
+			return MapUtils.getPowZoom(zoom) - .000001;
 		}
 		return tile;
 	}
@@ -235,7 +234,7 @@ public class RotatedTileBox {
 	}
 	
 	public float getPixXFromTile(double tileX, double tileY, float zoom) {
-		double pw = getPowZoom(zoom - this.zoom);
+		double pw = MapUtils.getPowZoom(zoom - this.zoom);
 		double xTile = tileX / pw;
 		double yTile = tileY / pw;
 		return getPixXFromTile(xTile, yTile);
@@ -262,7 +261,7 @@ public class RotatedTileBox {
 	}
 	
 	public float getPixYFromTile(double tileX, double tileY, float zoom) {
-		double pw = getPowZoom(zoom - this.zoom);
+		double pw = MapUtils.getPowZoom(zoom - this.zoom);
 		double  xTile = (tileX / pw);
 		double  yTile = (tileY / pw);
 		return getPixYFromTile(xTile, yTile);
@@ -395,15 +394,15 @@ public class RotatedTileBox {
 	
 	public QuadPointDouble getLeftTopTile(double zoom) {
 		checkTileRectangleCalculated();
-		return new QuadPointDouble((tileLT.x *  getPowZoom(zoom - this.zoom)),
-				(tileLT.y *  getPowZoom(zoom - this.zoom)));
+		return new QuadPointDouble((tileLT.x * MapUtils.getPowZoom(zoom - this.zoom)),
+				(tileLT.y *  MapUtils.getPowZoom(zoom - this.zoom)));
 	}
 
 	
 	public QuadPointDouble getRightBottomTile(float zoom) {
 		checkTileRectangleCalculated();
-		return new QuadPointDouble((tileRB.x *  getPowZoom(zoom - this.zoom)),
-				(tileRB.y *  getPowZoom(zoom - this.zoom)));
+		return new QuadPointDouble((tileRB.x * MapUtils.getPowZoom(zoom - this.zoom)),
+				(tileRB.y * MapUtils.getPowZoom(zoom - this.zoom)));
 	}
 	
 
