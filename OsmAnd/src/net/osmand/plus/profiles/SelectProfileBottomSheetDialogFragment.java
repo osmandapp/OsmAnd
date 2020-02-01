@@ -71,7 +71,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 			if (type.equals(TYPE_NAV_PROFILE)) {
 				profiles.addAll(NavigationFragment.getRoutingProfiles(app).values());
 			} else if (type.equals(TYPE_BASE_APP_PROFILE)) {
-				profiles.addAll(SettingsProfileFragment.getBaseProfiles(app));
+				profiles.addAll(NavigationFragment.getBaseProfiles(app));
 			} else {
 				LOG.error("Check intent data!");
 				dismiss();
@@ -267,14 +267,11 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
-			SettingsProfileFragment settingsProfileFragment = (SettingsProfileFragment) fragmentManager.findFragmentByTag(SettingsProfileFragment.class.getName());
 			NavigationFragment navigationFragment = (NavigationFragment) fragmentManager.findFragmentByTag(NavigationFragment.class.getName());
 			ProfileAppearanceFragment profileAppearanceFragment = (ProfileAppearanceFragment) fragmentManager.findFragmentByTag(ProfileAppearanceFragment.TAG);
 			MainSettingsFragment mainSettingsFragment = (MainSettingsFragment) fragmentManager.findFragmentByTag(MainSettingsFragment.TAG);
 
-			if (settingsProfileFragment != null) {
-				listener = settingsProfileFragment.getBaseProfileListener();
-			} else if (navigationFragment != null) {
+			if (navigationFragment != null) {
 				listener = navigationFragment.getNavProfileListener();
 			} else if (profileAppearanceFragment != null) {
 				listener = profileAppearanceFragment.getParentProfileListener();

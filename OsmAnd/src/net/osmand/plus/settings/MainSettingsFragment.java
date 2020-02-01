@@ -147,7 +147,7 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 
 	private void setupConfigureProfilePref() {
 		ApplicationMode selectedMode = app.getSettings().APPLICATION_MODE.get();
-		String title = selectedMode.toHumanString(getContext());
+		String title = selectedMode.toHumanString();
 		String profileType = getAppModeDescription(getContext(), selectedMode);
 		int iconRes = selectedMode.getIconRes();
 		Preference configureProfile = findPreference(CONFIGURE_PROFILE);
@@ -181,7 +181,7 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 			pref.setPersistent(false);
 			pref.setKey(applicationMode.getStringKey());
 			pref.setIcon(getAppProfilesIcon(applicationMode, isAppProfileEnabled));
-			pref.setTitle(applicationMode.toHumanString(getContext()));
+			pref.setTitle(applicationMode.toHumanString());
 			pref.setSummary(getAppModeDescription(getContext(), applicationMode));
 			pref.setChecked(isAppProfileEnabled);
 			pref.setLayoutResource(R.layout.preference_with_descr_dialog_and_switch);

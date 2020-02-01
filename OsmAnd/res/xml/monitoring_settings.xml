@@ -34,6 +34,13 @@
 		android:title="@string/save_track_logging_accuracy" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="save_global_track_interval"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/save_global_track_interval"
+		tools:icon="@drawable/ic_action_time_span"
+		tools:summary="3 seconds" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="save_track_min_distance"
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/monitoring_min_distance"

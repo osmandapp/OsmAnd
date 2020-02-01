@@ -673,7 +673,7 @@ public class MapActivityActions implements DialogProvider {
 		for (final ApplicationMode appMode : activeModes) {
 			if (appMode.isCustomProfile()) {
 				modeDescription = String.format(app.getString(R.string.profile_type_descr_string),
-						Algorithms.capitalizeFirstLetterAndLowercase(appMode.getParent().toHumanString(app)));
+						Algorithms.capitalizeFirstLetterAndLowercase(appMode.getParent().toHumanString()));
 			} else {
 				modeDescription = getString(R.string.profile_type_base_string);
 			}
@@ -684,7 +684,7 @@ public class MapActivityActions implements DialogProvider {
 					.setIcon(appMode.getIconRes())
 					.setColor(appMode.getIconColorInfo().getColor(nightMode))
 					.setTag(tag)
-					.setTitle(appMode.toHumanString(app))
+					.setTitle(appMode.toHumanString())
 					.setDescription(modeDescription)
 					.setListener(new ItemClickListener() {
 						@Override
@@ -994,7 +994,7 @@ public class MapActivityActions implements DialogProvider {
 		String modeDescription;
 		if (currentMode.isCustomProfile()) {
 			modeDescription = String.format(app.getString(R.string.profile_type_descr_string),
-					Algorithms.capitalizeFirstLetterAndLowercase(currentMode.getParent().toHumanString(app)));
+					Algorithms.capitalizeFirstLetterAndLowercase(currentMode.getParent().toHumanString()));
 		} else {
 			modeDescription = getString(R.string.profile_type_base_string);
 		}
@@ -1004,7 +1004,7 @@ public class MapActivityActions implements DialogProvider {
 				.setIcon(currentMode.getIconRes())
 				.setSecondaryIcon(icArrowResId)
 				.setColor(currentMode.getIconColorInfo().getColor(nightMode))
-				.setTitle(currentMode.toHumanString(app))
+				.setTitle(currentMode.toHumanString())
 				.setDescription(modeDescription)
 				.setListener(new ItemClickListener() {
 					@Override

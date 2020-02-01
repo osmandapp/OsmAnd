@@ -102,7 +102,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 		String[] entries = new String[appModes.length];
 		String[] entryValues = new String[appModes.length];
 		for (int i = 0; i < entries.length; i++) {
-			entries[i] = appModes[i].toHumanString(app);
+			entries[i] = appModes[i].toHumanString();
 			entryValues[i] = appModes[i].getStringKey();
 		}
 

@@ -50,7 +50,7 @@ public class SelectCopyProfilesMenuAdapter extends AbstractProfileMenuAdapter<Se
 		ApplicationMode appMode = items.get(position);
 		boolean selected = appMode == selectedAppMode;
 
-		holder.title.setText(appMode.toHumanString(app));
+		holder.title.setText(appMode.toHumanString());
 		holder.compoundButton.setChecked(selected);
 
 		updateViewHolder(holder, appMode, selected);

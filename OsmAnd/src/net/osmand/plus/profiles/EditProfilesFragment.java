@@ -23,7 +23,6 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -150,7 +149,6 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 				MapActivity mapActivity = (MapActivity) getActivity();
 				if (mapActivity != null) {
 					OsmandApplication app = mapActivity.getMyApplication();
-					OsmandSettings settings = app.getSettings();
 
 					if (!deletedModesKeys.isEmpty()) {
 						List<ApplicationMode> deletedModes = new ArrayList<>();
@@ -161,9 +159,6 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 							}
 						}
 						ApplicationMode.deleteCustomModes(deletedModes, app);
-						if (deletedModes.contains(settings.APPLICATION_MODE.get())) {
-							settings.APPLICATION_MODE.resetToDefault();
-						}
 					}
 					for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
 						String modeKey = mode.getStringKey();
@@ -174,7 +169,6 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 						mode.setOrder(order);
 					}
 					ApplicationMode.reorderAppModes();
-					ApplicationMode.saveAppModesToSettings(app);
 					mapActivity.onBackPressed();
 				}
 			}
@@ -239,7 +233,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 				if (order == null) {
 					order = mode.getOrder();
 				}
-				profiles.add(new EditProfileDataObject(modeKey, mode.toHumanString(getContext()), BaseSettingsFragment.getAppModeDescription(getContext(), mode),
+				profiles.add(new EditProfileDataObject(modeKey, mode.toHumanString(), BaseSettingsFragment.getAppModeDescription(getContext(), mode),
 						mode.getIconRes(), false, mode.isCustomProfile(), deleted, mode.getIconColorInfo(), order));
 			}
 		}
@@ -273,7 +267,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 		private boolean deleted;
 		private boolean customProfile;
 
-		EditProfileDataObject(String stringKey, String name, String descr, int iconRes, boolean isSelected, boolean customProfile, boolean deleted, ApplicationMode.ProfileIconColors iconColor, int order) {
+		EditProfileDataObject(String stringKey, String name, String descr, int iconRes, boolean isSelected, boolean customProfile, boolean deleted, ProfileIconColors iconColor, int order) {
 			super(name, descr, stringKey, iconRes, isSelected, iconColor);
 			this.customProfile = customProfile;
 			this.deleted = deleted;

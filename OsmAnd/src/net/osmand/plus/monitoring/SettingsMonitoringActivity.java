@@ -40,10 +40,11 @@ import java.util.Map;
 import static net.osmand.plus.OsmandSettings.DAILY_DIRECTORY;
 import static net.osmand.plus.OsmandSettings.MONTHLY_DIRECTORY;
 import static net.osmand.plus.OsmandSettings.REC_DIRECTORY;
-import static net.osmand.plus.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
-
 
 public class SettingsMonitoringActivity extends SettingsBaseActivity {
+
+	public static final String PROFILE_STRING_KEY = "string_key";
+
 	private CheckBoxPreference routeServiceEnabled;
 	private BroadcastReceiver broadcastReceiver;
 
@@ -247,7 +248,7 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 	protected void showConfirmDialog(final String prefId, final Object newValue) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-		String appModeName = selectedAppMode.toHumanString(this);
+		String appModeName = selectedAppMode.toHumanString();
 		String currentModeText = getString(R.string.apply_to_current_profile, appModeName);
 		int start = currentModeText.indexOf(appModeName);
 

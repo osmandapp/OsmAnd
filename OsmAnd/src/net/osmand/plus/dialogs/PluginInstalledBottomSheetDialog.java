@@ -198,7 +198,7 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 			appModeItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 					.setChecked(ApplicationMode.values(app).contains(mode))
 					.setDescription(BaseSettingsFragment.getAppModeDescription(app, mode))
-					.setTitle(mode.toHumanString(app))
+					.setTitle(mode.toHumanString())
 					.setIcon(getActiveIcon(mode.getIconRes()))
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_switch_56dp)
 					.setOnClickListener(new View.OnClickListener() {

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 	<Preference android:key="general_settings" android:title="@string/general_settings_2" android:summary="@string/general_settings_descr"/>
-	<Preference android:key="application_profiles" android:title="@string/application_profiles" android:summary="@string/application_profiles_descr"/>
 	<Preference android:key="routing_settings" android:title="@string/routing_settings_2" android:summary="@string/routing_settings_descr"/>
 	<Preference android:key="subscription_settings" android:title="@string/osm_live_subscription" android:summary="@string/osm_live_subscription_desc"/>
 	<Preference android:key="privacy_and_security" android:title="@string/settings_privacy_and_security" android:summary="@string/settings_privacy_and_security_desc"/>
