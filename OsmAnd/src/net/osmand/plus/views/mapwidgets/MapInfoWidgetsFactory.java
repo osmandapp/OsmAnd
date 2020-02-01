@@ -1272,7 +1272,6 @@ public class MapInfoWidgetsFactory {
 		private final TextView curStreetNameText;
 		private final TextView curStreetNameTextShadow;
 		private OsmandSettings settings;
-		private WaypointHelper waypointHelper;
 		private int shadowRad;
 
 		private static final Log LOG = PlatformUtil.getLog(TopTextView.class);
@@ -1280,7 +1279,6 @@ public class MapInfoWidgetsFactory {
 		public BottomTextView(OsmandApplication app, MapActivity map) {
 			this.routingHelper = app.getRoutingHelper();
 			settings = app.getSettings();
-			waypointHelper = app.getWaypointHelper();
 			this.map = map;
 			bottomBar = map.findViewById(R.id.map_bottom_bar);
 			curStreetNameText = (TextView) map.findViewById(R.id.map_cur_street_address_text);
@@ -1302,37 +1300,28 @@ public class MapInfoWidgetsFactory {
 		}
 
 
-		public boolean updateWaypoint() {
-			final LocationPointWrapper pnt = waypointHelper.getMostImportantLocationPoint(null);
-			return (pnt != null);
-		}
-
 		public boolean updateInfo(DrawSettings d) {
-			boolean showNextTurn = false;
-
+			boolean showCurStreetNameView = false;
 			if (routingHelper != null && routingHelper.isRouteCalculated() && !routingHelper.isDeviatedFromRoute()) {
 				if (routingHelper.isFollowingMode()) {
 					if (settings.SHOW_STREET_NAME.get()) {
-						String curStreetName = routingHelper.getCurrentStreetName();
-						if (!curStreetName.equals(curStreetNameText.getText().toString())) {
-							curStreetNameTextShadow.setText(curStreetName);
-							curStreetNameText.setText(curStreetName);
-							return true;
-						}
+						showCurStreetNameView = true;
 
 					}
 				}
 			}
 			if (map.isTopToolbarActive() || !map.getContextMenu().shouldShowTopControls() || MapRouteInfoMenu.chooseRoutesVisible || MapRouteInfoMenu.waypointsVisible) {
-				updateVisibility(false);
-			} else if (!showNextTurn && updateWaypoint()) {
-				updateVisibility(true);
-				AndroidUiHelper.updateVisibility(curStreetNameText, false);
-				AndroidUiHelper.updateVisibility(curStreetNameTextShadow, false);
-			} else {
-				updateVisibility(true);
-				AndroidUiHelper.updateVisibility(curStreetNameText, true);
-				AndroidUiHelper.updateVisibility(curStreetNameTextShadow, shadowRad > 0);
+				showCurStreetNameView = false;
+			}
+			updateVisibility(showCurStreetNameView);
+			AndroidUiHelper.updateVisibility(curStreetNameText, showCurStreetNameView);
+			AndroidUiHelper.updateVisibility(curStreetNameTextShadow, showCurStreetNameView && shadowRad > 0);
+
+			String curStreetName = routingHelper.getCurrentStreetName();
+			if (!curStreetName.equals(curStreetNameText.getText().toString())) {
+				curStreetNameTextShadow.setText(curStreetName);
+				curStreetNameText.setText(curStreetName);
+				return true;
 			}
 			return false;
 		}
