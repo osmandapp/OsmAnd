@@ -1924,7 +1924,7 @@ Lon %2$s</string>
     <string name="osm_live_header">Dieses Abonnement schaltet stündliche Updates für die gesamten weltweiten Karten frei. Ein Teil dieser Einnahmen geht zurück an die OSM-Gemeinschaft, eine Auszahlung erfolgt je nach Anzahl der Beiträge zu den OSM-Daten. Wenn Sie OsmAnd und OSM lieben und unterstützen wollen und selbst unterstützt werden wollen, so ist dies die perfekte Möglichkeit.</string>
     <string name="shared_string_topbar">Obere Leiste</string>
     <string name="finish_navigation">Navigation beenden</string>
-    <string name="avoid_road">Straßen vermeiden</string>
+    <string name="avoid_road">Straße vermeiden</string>
     <string name="storage_directory_readonly_desc">Es wurde vorübergehend zum internen Speicher gewechselt, da der momentan gewählte Speicherort schreibgeschützt ist. Bitte einen gültigen Speicherort wählen.</string>
     <string name="storage_directory_shared">Gemeinsamer Speicher</string>
     <string name="full_report">Vollständiger Bericht</string>
@@ -2169,7 +2169,7 @@ Lon %2$s</string>
     <string name="quick_action_add_parking_descr">Taste, um eine Parkposition am Bildschirmmittelpunkt einzufügen.</string>
     <string name="quick_action_interim_dialog">Dialog zum Bearbeiten anzeigen</string>
     <string name="favorite_autofill_toast_text">" gespeichert unter "</string>
-    <string name="quick_action_duplicates">Schnellaktionsname in %1$s umbenannt, um Duplikate zu vermeiden.</string>
+    <string name="quick_action_duplicates">Schnellaktion in %1$s umbenannt, um Duplikate zu vermeiden.</string>
     <string name="quick_action_duplicate">Namensduplikat für Schnellaktion</string>
     <string name="quick_action_showhide_favorites_descr">Umschalter, um Favoriten auf der Karte ein- oder auszublenden.</string>
     <string name="quick_action_showhide_poi_descr">Umschalter, um POIs auf der Karte ein- oder auszublenden.</string>
@@ -2943,7 +2943,7 @@ Lon %2$s</string>
     <string name="rendering_attr_surface_asphalt_name">Asphalt</string>
     <string name="rendering_attr_surface_paved_name">Befestigt</string>
     <string name="rendering_attr_surface_concrete_name">Beton</string>
-    <string name="rendering_attr_surface_sett_name">Pflastersteine</string>
+    <string name="rendering_attr_surface_sett_name">Steinpflaster</string>
     <string name="rendering_attr_surface_cobblestone_name">Kopfsteinpflaster</string>
     <string name="rendering_attr_surface_paving_stones_name">Pflastersteine</string>
     <string name="rendering_attr_surface_pebblestone_name">Kieselsteine</string>
@@ -2965,12 +2965,12 @@ Lon %2$s</string>
     <string name="rendering_attr_highway_class_state_road_name">Staatsstraße</string>
     <string name="rendering_attr_highway_class_road_name">Landstraße</string>
     <string name="rendering_attr_highway_class_street_name">Straße</string>
-    <string name="rendering_attr_highway_class_service_name">Dienstleistung</string>
+    <string name="rendering_attr_highway_class_service_name">Erschließungsweg</string>
     <string name="rendering_attr_highway_class_footway_name">Gehweg</string>
     <string name="rendering_attr_highway_class_track_name">Wirtschaftsweg</string>
     <string name="rendering_attr_highway_class_bridleway_name">Reitweg</string>
     <string name="rendering_attr_highway_class_steps_name">Stufen</string>
-    <string name="rendering_attr_highway_class_path_name">Pfad</string>
+    <string name="rendering_attr_highway_class_path_name">Weg</string>
     <string name="rendering_attr_highway_class_cycleway_name">Radweg</string>
     <string name="rendering_attr_undefined_name">Undefiniert</string>
     <string name="release_3_3">• Neuer Bildschirm \'Navigation\': Zeigt Tasten mit den Zielen \'Zuhause\' und \'Arbeit\', eine \'Vorherige Route\'-Verknüpfung, eine Liste aktiver GPX-Tracks und Markierungen, den Suchverlauf. 
@@ -3359,7 +3359,7 @@ Lon %2$s</string>
     <string name="apply_preference_to_all_profiles">Sie können diese Änderung auf alle Profile oder nur auf das ausgewählte anwenden.</string>
     <string name="shared_preference">Geteilt</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Unbefestigte Straßen bevorzugen</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_description">Unbefestigte Straßen bevorzugen.</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Bei der Navigation unbefestigte Straßen gegenüber befestigten bevorzugen.</string>
     <string name="layer_osm_edits">OSM-Bearbeitungen</string>
     <string name="quick_action_contour_lines_descr">Ein Umschalter zum Ein- und Ausblenden von Höhenlinien auf der Karte.</string>
     <string name="quick_action_contour_lines_show">Höhenlinien anzeigen</string>
@@ -3382,7 +3382,7 @@ Lon %2$s</string>
     <string name="rendering_value_white_name">Weiß</string>
     <string name="swap_two_places">%1$s und %2$s tauschen</string>
     <string name="route_start_point">Startpunkt</string>
-    <string name="default_speed_dialog_msg">Wird verwendet, um die Ankunftszeit für unbekannte Straßen zu schätzen und die Geschwindigkeit für alle Straßen zu begrenzen (könnte die Route ändern)</string>
+    <string name="default_speed_dialog_msg">Schätzt die Ankunftszeit für unbekannte Straßentypen und begrenzt die Geschwindigkeit für alle Straßen (kann die Navigation beeinflussen)</string>
     <string name="track_saved">Track gespeichert</string>
     <string name="empty_filename">Dateiname ist leer</string>
     <string name="shared_string_revert">Zurücksetzen</string>
@@ -3445,8 +3445,9 @@ Lon %2$s</string>
     <string name="select_nav_icon_descr">Sie sehen das Symbol nur während der Navigation oder während der Bewegung.</string>
     <string name="multimedia_notes_view_descr">Sie finden all Ihre Notizen im Menü unter Meine Orte — Notizen.</string>
     <string name="button_rate">Bewerten</string>
-    <string name="logcat_buffer_descr">Hier können Sie Protokolle der Anwendung sehen und freigeben</string>
+    <string name="logcat_buffer_descr">Protokolle der Anwendung sehen und freigeben</string>
     <string name="permission_is_required">Für die Verwendung dieser Option ist eine Berechtigung erforderlich.</string>
     <string name="file_does_not_contain_routing_rules">Die Datei \'%1$s\' enthält keine Routing-Regeln. Bitte eine andere Datei wählen.</string>
     <string name="monitoring_min_speed_descr">Dies ist ein Filter, welcher Punkte unter einer gewissen Geschwindigkeit nicht aufzeichnet. Dadurch können aufgezeichnete Tracks auf der Karte gleichmäßiger aussehen.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Nebeneffekt: Auf Ihrer Strecke fehlen alle Abschnitte, in denen das Mindestgeschwindigkeitskriterium nicht erfüllt wurde (z.B. wenn Sie Ihr Fahrrad einen steilen Hügel hinaufschieben). Außerdem wird es keine Informationen über Ruhezeiten wie Pausen geben. Dies hat Auswirkungen auf jede Analyse oder Nachbearbeitung, z. B. wenn Sie versuchen, die Gesamtlänge Ihrer Reise, die Zeit in Bewegung oder Ihre Durchschnittsgeschwindigkeit zu bestimmen.</string>
 </resources>
