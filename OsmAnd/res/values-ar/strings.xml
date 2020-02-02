@@ -1373,7 +1373,7 @@
     <string name="max_level_download_tile_descr">اختر مستوى التقريب الأقصى لتحميل تجانبيات/مربعات الخريطة من الإنترنت.</string>
     <string name="map_tile_source_descr">اختر مصدر تجانبيات/مربعات الخريطة على الإنترنت أو المخزنة مؤقتاً</string>
     <string name="user_hates_app_get_feedback_long">فضلًا أخبرنا ما الذي تريد تعديله في هذا التّطبيق.</string>
-    <string name="storage_directory_readonly_desc">مجلّد تخزين البيانات المحدّد حالياً للقراءة فقط. نُقل مجلّد التّخزين مؤقّتًا إلى الذّاكرة الدّاخليّة. فضلًا اختر دليل تخزين صحيح.</string>
+    <string name="storage_directory_readonly_desc">تم التبديل إلى الذاكرة الداخلية لأن مجلد تخزين البيانات المحدد محمي ضد الكتابة. الرجاء تحديد مكان تخزين قابل للكتابة.</string>
     <string name="storage_directory_shared">ذاكرة الهاتف</string>
     <string name="donations">التبرعات</string>
     <string name="osm_live_user_public_name">الاسم العمومي</string>
@@ -1591,7 +1591,7 @@
     <string name="night">ليلاً</string>
     <string name="shared_string_move_up">حرك للاعلى</string>
     <string name="shared_string_move_down">حرك للاسفل</string>
-    <string name="open_street_map_login_and_pass">تسجيل الدخول</string>
+    <string name="open_street_map_login_and_pass">اسم مستخدم و كلمة سر OSM</string>
     <string name="osm_live_email_desc">نحن بحاجة اليه لكي نوفر لك معلومات حول المساهمات.</string>
     <string name="select_map_marker">اختر علامة موضعية</string>
     <string name="show_transparency_seekbar">عرض شريط الشفافية</string>
