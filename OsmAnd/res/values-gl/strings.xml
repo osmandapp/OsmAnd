@@ -1909,7 +1909,7 @@ Lon %2$s</string>
     <string name="search_map_hint">Cidade ou rexión</string>
     <string name="route_roundabout_short">Colla a %1$d saída e siga</string>
     <string name="upload_poi">Enviar PDI</string>
-    <string name="route_calculation">Cálculo da rota</string>
+    <string name="route_calculation">Cálculo da ruta</string>
     <string name="gpx_no_tracks_title">Aínda non tes ningún ficheiro GPX</string>
     <string name="gpx_no_tracks_title_folder">Tamén podes engadir ficheiros GPX ó cartafol</string>
     <string name="gpx_add_track">Engadir máis…</string>
@@ -2022,7 +2022,7 @@ Lon %2$s</string>
     <string name="route_stops_before">%1$s paraxes antes</string>
     <string name="access_direction_haptic_feedback_descr">Inseri-lo enderezo do destino mediante vibración.</string>
     <string name="use_osm_live_routing_description">Activa-la navegación por mudanzas do OsmAnd ao Vivo.</string>
-    <string name="access_disable_offroute_recalc">Non recalcular a rota ó saírme da mesma</string>
+    <string name="access_disable_offroute_recalc">Non recalcular a ruta ó saírme da mesma</string>
     <string name="access_disable_offroute_recalc_descr">Non recalcula a rota, ó afastarss da mesma.</string>
     <string name="access_disable_wrong_direction_recalc">Non recalculares a rota cando se estea na dirección contraria</string>
     <string name="access_disable_wrong_direction_recalc_descr">Evitar calcular de xeito automático a rota de novo cando se estea a mover na dirección errada.</string>
@@ -2195,7 +2195,7 @@ Lon %2$s</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Inclinado</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Pouco inclinado</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Chairo</string>
-    <string name="routing_attr_driving_style_speed_name">Rotas máis curtas</string>
+    <string name="routing_attr_driving_style_speed_name">Rutas máis curtas</string>
     <string name="routing_attr_driving_style_balance_name">Equilibrado</string>
     <string name="routing_attr_driving_style_safety_name">Prefirir camiños secundarios</string>
     <string name="relief_smoothness_factor_descr">Terreo prefirido: chairo ou inclinado.</string>
@@ -2203,8 +2203,8 @@ Lon %2$s</string>
     <string name="add_new_folder">Engadir un cartafol novo</string>
     <string name="points_delete_multiple_succesful">Punto(s) eliminado(s).</string>
     <string name="points_delete_multiple">Tes a certeza de que desexas eliminar %1$d punto(s)\?</string>
-    <string name="track_points_category_name">Puntos da rota, puntos de interese, funcións nomeadas</string>
-    <string name="route_points_category_name">Viraxes a pasar nesta rota</string>
+    <string name="track_points_category_name">Puntos de ruta, puntos de interese, funcións nomeadas</string>
+    <string name="route_points_category_name">Xiros para pasar nesta ruta</string>
     <string name="max_speed">Velocidade máxima</string>
     <string name="average_speed">Velocidade media</string>
     <string name="shared_string_time_moving">Tempo en movemento</string>
@@ -2218,7 +2218,7 @@ Lon %2$s</string>
     <string name="shared_string_move">Mover</string>
     <string name="shared_string_gpx_tracks">Pistas</string>
     <string name="routing_attr_driving_style_name">Estilo da condución</string>
-    <string name="route_altitude">Altitude da rota</string>
+    <string name="route_altitude">Altitude da ruta</string>
     <string name="altitude_descent">Descenso</string>
     <string name="altitude_ascent">Ascenso</string>
     <string name="altitude_range">Intre de altitude</string>
@@ -2279,7 +2279,7 @@ Lon %2$s</string>
     <string name="search_favorites">Procurar nos Favoritos</string>
     <string name="shared_string_road">Estrada</string>
     <string name="show_map">Amosar mapa</string>
-    <string name="route_is_calculated">Rota calculada</string>
+    <string name="route_is_calculated">Ruta calculada</string>
     <string name="round_trip">Viaxe de ida e volta</string>
     <string name="plan_route_no_markers_toast">Hai que engadir polo menos unha marcaxe para empregar esta función.</string>
     <string name="osn_modify_dialog_error">Non foi posíbel modifica-la nota.</string>
@@ -2298,7 +2298,7 @@ Lon %2$s</string>
     <string name="add_location_as_first_point_descr">Engade a túa posición coma punto de partida para planificar a ruta perfecta.</string>
     <string name="my_location">A miña posición</string>
     <string name="shared_string_finish">Rematar</string>
-    <string name="plan_route">Planificar rota</string>
+    <string name="plan_route">Planificar ruta</string>
     <string name="shared_string_sort">Ordenar</string>
     <string name="coordinate_input">Inserir coordenadas</string>
     <string name="marker_save_as_track_descr">Exporte as súas marcaxes cara un ficheiro que pode fornecer eiquí:</string>
@@ -2331,15 +2331,15 @@ Lon %2$s</string>
     <string name="do_not_use_animations_descr">Desactiva as animacións do mapa.</string>
     <string name="exit_without_saving">Saír sen gardar?</string>
     <string name="line">Liña</string>
-    <string name="save_as_route_point">Gardar coma puntos da rota</string>
+    <string name="save_as_route_point">Gardar coma puntos de ruta</string>
     <string name="save_as_line">Gardar coma liña</string>
-    <string name="route_point">Punto da rota</string>
+    <string name="route_point">Punto de ruta</string>
     <string name="edit_line">Editar liña</string>
     <string name="add_point_before">Engadir punto antes</string>
     <string name="add_point_after">Engadir punto despois</string>
     <string name="shared_string_options">Opcións</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd vai conecta-los puntos ós recursos do perfil elixido.</string>
-    <string name="measurement_tool_save_as_new_track_descr">Garda-los puntos, xa sexa coma puntos da rota coma unha liña.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Gardar os puntos, xa sexa coma puntos de ruta ou coma unha liña.</string>
     <string name="choose_navigation_type">Elixi-lo perfil da navegación</string>
     <string name="none_point_error">Engade polo menos un punto.</string>
     <string name="enter_gpx_name">Nome do ficheiro GPX:</string>
@@ -2503,7 +2503,7 @@ Lon %2$s</string>
     <string name="import_track">Importar ficheiro GPX</string>
     <string name="import_track_desc">O ficheiro %1$s non contén puntos de pasaxe, queres importalo coma unha pista\?</string>
     <string name="copy_location_name">Copiar nome da localización/PDI</string>
-    <string name="keep_passed_markers_descr">As marcaxes engadidas coma un grupo de Favoritos ou puntos de rota GPX desbotados ficarán no mapa. Se o grupo non está dispoñíbel, as marcaxes agocharanse do mapa.</string>
+    <string name="keep_passed_markers_descr">As marcaxes engadidas coma un grupo de Favoritos ou puntos de ruta GPX desbotados ficarán no mapa. Se o grupo non está dispoñíbel, as marcaxes agocharanse do mapa.</string>
     <string name="release_3_2_pre">• Corrixido o erro no inicio que se producía nalgúns dispositivos 
 \n 
 \n • Nova función das marcaxes: amosa as marcaxes que xa foran atravesadas. 
@@ -2545,7 +2545,7 @@ Lon %2$s</string>
     <string name="shared_string_bookmark">Marcador</string>
     <string name="hide_full_description">Agochar descrición enteira</string>
     <string name="show_full_description">Amosar descrición enteira</string>
-    <string name="off_road_render_descr">Axeitado para empregalo durante a condución todoterreo baseado no estilo \"Topo\" e coma un mapa subxacente con imaxes satelitais verdes. Redución do grosor en estradas principais, aumento do grosor das vías, sendeiros, bicicletas e outras rotas.</string>
+    <string name="off_road_render_descr">Axeitado para empregalo durante a condución todoterreo baseado no estilo \"Topo\" e coma un mapa subxacente con imaxes satelitais verdes. Redución do grosor en estradas principais, aumento do grosor das vías, sendeiros, bicicletas e outras rutas.</string>
     <string name="nautical_render_descr">Para a navegación náutica. Conta con boias, faros, canles fluviais, carrís e balizas marítimas, portos, servizos marítimos e curvas do afundimento.</string>
     <string name="ski_map_render_descr">Para esquiar. Conta con pistas de esquí, remontes, pistas de esquí de fondo, etc. Atenúa os obxectos de mapas secundarios.</string>
     <string name="light_rs_render_descr">Estilo de condución sinxelo. Modo noite suave, curvas de nivel, camiños contrastantes con aparencia laranxa, atenúa os obxectos de mapas secundarios.</string>
@@ -2920,10 +2920,10 @@ Lon %2$s</string>
     <string name="on_foot">a pé</string>
     <string name="route_way">Vía</string>
     <string name="points_of_interests">Puntos de interese (PDI)</string>
-    <string name="waiting_for_route_calculation">Estase a calcula-la rota…</string>
+    <string name="waiting_for_route_calculation">Estase a calcular a ruta…</string>
     <string name="app_mode_public_transport">Transporte público</string>
     <string name="avoid_roads_descr">Escolle unha estrada a evitar durante a navegación, dende o mapa ou da seguinte listaxe:</string>
-    <string name="show_along_the_route">Amosar ó longo da rota</string>
+    <string name="show_along_the_route">Amosar ó longo da ruta</string>
     <string name="simulate_navigation">Simular navegación</string>
     <string name="choose_track_file_to_follow">Escolle o ficheiro da pista a seguir</string>
     <string name="voice_announcements">Indicacións por voz</string>
@@ -2935,7 +2935,7 @@ Lon %2$s</string>
     <string name="quick_action_switch_night_mode">Modo noite</string>
     <string name="quick_action_day_night_switch_mode">Trocar modos día e noite</string>
     <string name="add_destination_query">Primeiro define o destino</string>
-    <string name="previous_route">Rota anterior</string>
+    <string name="previous_route">Ruta anterior</string>
     <string name="add_home">Engadir a miña casa</string>
     <string name="add_work">Engadir o meu lugar de traballo</string>
     <string name="work_button">Traballo</string>
@@ -3157,10 +3157,10 @@ Lon %2$s</string>
     <string name="routing_profile_geocoding">Xeocodificación</string>
     <string name="routing_profile_straightline">Liña recta</string>
     <string name="routing_profile_broutrer">BRouter (sen conexión)</string>
-    <string name="osmand_default_routing">Enrotamento do OsmAnd</string>
-    <string name="custom_routing">Perfil de enrotamento personalizado</string>
-    <string name="special_routing_type">Enrotamento especial</string>
-    <string name="third_party_routing_type">Enrotamento de terceiros</string>
+    <string name="osmand_default_routing">Enrutamento do OsmAnd</string>
+    <string name="custom_routing">Perfil de enrutamento personalizado</string>
+    <string name="special_routing_type">Enrutamento especial</string>
+    <string name="third_party_routing_type">Enrutamento de terceiros</string>
     <string name="application_profiles_descr">Escolle os perfís que serán visíbeis na aplicación.</string>
     <string name="application_profiles">Perfís de aplicación</string>
     <string name="zoom_by_wunderlinq_descr">Muda o achegamento do mapa desprazando a roda cara arriba e abaixo. A tecla «Esc» volta á aplicación WunderLINQ.</string>
@@ -3240,8 +3240,8 @@ Lon %2$s</string>
     <string name="rendering_attr_winter_road_name">Estrada de inverno</string>
     <string name="rendering_attr_ice_road_name">Estrada de xeo</string>
     <string name="routeInfo_winter_ice_road_name">Estradas de inverno e xeo</string>
-    <string name="rendering_attr_tracktype_grade1_name">Sólido (pavementado)</string>
-    <string name="rendering_attr_tracktype_grade2_name">Sólido (sen pavementar)</string>
+    <string name="rendering_attr_tracktype_grade1_name">Sólido (pavimentado)</string>
+    <string name="rendering_attr_tracktype_grade2_name">Sólido (sen pavimentar)</string>
     <string name="rendering_attr_tracktype_grade3_name">Maiormente sólido</string>
     <string name="rendering_attr_tracktype_grade4_name">Maiormente suave</string>
     <string name="rendering_attr_tracktype_grade5_name">Suave</string>
@@ -3324,8 +3324,8 @@ Lon %2$s</string>
     <string name="voice_announces_descr">Instrucións de navegación e anuncios</string>
     <string name="voice_announces">Indicacións por voz</string>
     <string name="screen_alerts">Alertas de pantalla</string>
-    <string name="route_parameters_descr">Configurar os parámetros de rota</string>
-    <string name="route_parameters">Parámetros de rota</string>
+    <string name="route_parameters_descr">Configurar os parámetros de ruta</string>
+    <string name="route_parameters">Parámetros de ruta</string>
     <string name="application_profile_changed">Perfil da aplicación mudado a \"%s\"</string>
     <string name="logcat_buffer">Búfer de Logcat</string>
     <string name="shared_string_by_default">Predefinido</string>
@@ -3385,8 +3385,8 @@ Lon %2$s</string>
     <string name="shared_string_memory_used_mb_desc">Usado %1$s GB</string>
     <string name="shared_string_memory_used_kb_desc">Usado %1$s kB</string>
     <string name="contour_lines_and_hillshade">Curvas do nivel e sombras do relevo</string>
-    <string name="routing_attr_prefer_unpaved_name">Preferir estradas sen pavementar</string>
-    <string name="routing_attr_prefer_unpaved_description">Preferir estradas sen pavementar.</string>
+    <string name="routing_attr_prefer_unpaved_name">Preferir estradas sen pavimentar</string>
+    <string name="routing_attr_prefer_unpaved_description">Preferir estradas sen pavimentar.</string>
     <string name="update_all_maps">Actualizar todos os mapas</string>
     <string name="update_all_maps_q">Actualizar todos os mapas (%1$d)\?</string>
     <string name="release_3_5">• Axustes da aplicación e do perfil actualizados. Cómoda distribución dos axustes por tipo e posibilidade de personalizar cada perfil 
@@ -3408,8 +3408,8 @@ Lon %2$s</string>
 \n</string>
     <string name="apply_preference_to_all_profiles">Podes aplicar esta mudanza a todos ou só ós perfís seleccionados.</string>
     <string name="shared_preference">Compartillado</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_name">Preferir estradas sen pavementar</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_description">Preferir as estradas sen pavementar ós pavementados para o trazado de rutas.</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Preferir estradas sen pavimentar</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Preferir as estradas sen pavimentar aos pavimentados para o trazado de rutas.</string>
     <string name="swap_start_and_destination">Trocar comezo e destino</string>
     <string name="layer_osm_edits">Edicións do OSM</string>
     <string name="quick_action_contour_lines_descr">Un botón que amosa ou agocha as curvas de nivel no mapa.</string>
