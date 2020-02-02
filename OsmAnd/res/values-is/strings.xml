@@ -3480,4 +3480,5 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="multimedia_use_system_camera">Nota kerfisforrit</string>
     <string name="multimedia_photo_play_sound">Hljóð við myndatöku</string>
     <string name="osm_authorization_success">Heimild fékkst</string>
+    <string name="not_support_file_type_with_ext">Veljið studda %1$s kerfisviðaukaskrá í staðinn.</string>
 </resources>
