@@ -3455,4 +3455,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Zalecenie: Trudno jest przewidzieć, co zostanie nagrane, a co nie, najlepiej wyłączyć ten filtr.</string>
     <string name="monitoring_min_distance_descr">Ten filtr zapobiega zapisywaniu zduplikowanych punktów, w których mógł wystąpić zbyt mały rzeczywisty ruch, zapewnia ładniejszy przestrzenny wygląd ścieżek, które nie są później przetwarzane.</string>
     <string name="search_offline_geo_error">Nie można przeanalizować intencji geograficznej \'%s\'.</string>
+    <string name="multimedia_notes_view_descr">Twoje uwagi OSM są w %1$s.</string>
+    <string name="tracks_view_path">Menu — Miejsca — Ślady</string>
+    <string name="multimedia_notes_view_path">Menu — Miejsca — Uwagi</string>
+    <string name="osm_edits_view_path">Menu — Miejsca — Edycje OSM</string>
+    <string name="osm_authorization_success">Autoryzacja zakończyła się pomyślnie</string>
 </resources>
