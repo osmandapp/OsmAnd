@@ -102,7 +102,6 @@ public class QuickSearchHelper implements ResourceListener {
 		core.registerAPI(new SearchOnlineApi(app));
 
 		refreshCustomPoiFilters();
-		refreshFilterOrders();
 	}
 
 	public void refreshCustomPoiFilters() {
@@ -116,6 +115,7 @@ public class QuickSearchHelper implements ResourceListener {
 			core.addCustomSearchPoiFilter(localWikiPoiFilter, 1);
 		}
 		core.addCustomSearchPoiFilter(poiFilters.getShowAllPOIFilter(), 1);
+		refreshFilterOrders();
 	}
 
 	public void refreshFilterOrders() {
