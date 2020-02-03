@@ -2,6 +2,7 @@ package net.osmand.plus.osmedit;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.Preference;
 import android.text.SpannableString;
@@ -53,6 +54,11 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	private void setupOfflineEditingPref() {
 		SwitchPreferenceEx offlineEditingPref = (SwitchPreferenceEx) findPreference(settings.OFFLINE_EDITION.getId());
 		offlineEditingPref.setDescription(getString(R.string.offline_edition_descr));
+		offlineEditingPref.setIcon(getOfflineEditingIcon(settings.OFFLINE_EDITION.get()));
+	}
+
+	private Drawable getOfflineEditingIcon(boolean enabled) {
+		return enabled ? getActiveIcon(R.drawable.ic_world_globe_dark) : getContentIcon(R.drawable.ic_action_offline);
 	}
 
 	private void setupOsmEditsDescrPref() {
@@ -90,6 +96,14 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 			}
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public boolean onPreferenceChange(Preference preference, Object newValue) {
+		if (settings.OFFLINE_EDITION.getId().equals(preference.getKey()) && newValue instanceof Boolean) {
+			preference.setIcon(getOfflineEditingIcon((Boolean) newValue));
+		}
+		return super.onPreferenceChange(preference, newValue);
 	}
 
 	@Override
