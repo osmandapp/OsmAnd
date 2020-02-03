@@ -528,7 +528,7 @@ public class MapActivityLayers {
 										return false;
 									}
 
-								});
+								}, null);
 								break;
 							case layerInstallMore:
 								OsmandRasterMapsPlugin.installMapLayers(activity, new ResultMatcher<TileSourceTemplate>() {

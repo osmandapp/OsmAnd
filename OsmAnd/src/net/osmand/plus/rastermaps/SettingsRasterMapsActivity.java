@@ -194,7 +194,7 @@ public class SettingsRasterMapsActivity extends SettingsBaseActivity {
 								updateTileSourceSummary();
 								return true;
 							}
-						});
+						}, null);
 					} else if(preference == tileSourcePreference){
 						settings.MAP_TILE_SOURCES.set((String) newValue);
 						updateTileSourceSummary();

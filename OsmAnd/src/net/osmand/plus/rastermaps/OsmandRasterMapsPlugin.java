@@ -42,7 +42,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.RasterMapMenu;
-import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
@@ -478,7 +477,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		t.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public static void defineNewEditLayer(final Activity activity, final ResultMatcher<TileSourceTemplate> resultMatcher) {
+	public static void defineNewEditLayer(final Activity activity, final ResultMatcher<TileSourceTemplate> resultMatcher, String editedLayerName) {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final OsmandSettings settings = app.getSettings();
 		final Map<String, String> entriesMap = settings.getTileSourceEntries(false);
@@ -511,7 +510,12 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		existing.setAdapter(adapter);
-		existing.setSelection(0);
+		int position = 0;
+		if (editedLayerName != null) {
+			position = adapter.getPosition(editedLayerName);
+			existing.setEnabled(false);
+		}
+		existing.setSelection(position);
 		existing.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
