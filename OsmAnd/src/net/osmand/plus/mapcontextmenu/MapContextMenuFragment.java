@@ -1280,8 +1280,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			final ImageView iconView = (ImageView) view.findViewById(R.id.context_menu_icon_view);
 			Drawable icon = menu.getRightIcon();
 			int iconId = menu.getRightIconId();
-
 			int sizeId = menu.isBigRightIcon() ? R.dimen.context_menu_big_icon_size : R.dimen.map_widget_icon;
+			if (menu.getPointDescription().isFavorite() || menu.getPointDescription().isWpt()) {
+				sizeId = R.dimen.dialog_button_height;
+			}
 			int iconViewSize = getResources().getDimensionPixelSize(sizeId);
 			ViewGroup.LayoutParams params = iconView.getLayoutParams();
 			params.width = iconViewSize;

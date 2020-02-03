@@ -3650,7 +3650,7 @@
 	<string name="poi_volcano_type_maar">Маар</string>
 	<string name="poi_volcano_type_caldera">Калдера</string>
 	<string name="poi_volcano_type_lava_dome">Лавовый купол</string>
-	<string name="poi_volcano_type_dirt">Грязевой</string>
+	<string name="poi_volcano_type_mud">Грязевой</string>
 	<string name="poi_volcano_last_eruption">Последнее извержение</string>
 	<string name="poi_volcano_status_extinct">Потухший</string>
 	<string name="poi_volcano_status_dormant">Спящий</string>

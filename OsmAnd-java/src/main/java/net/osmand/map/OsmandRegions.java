@@ -691,31 +691,21 @@ public class OsmandRegions {
 		}
 	}
 
-	public List<WorldRegion> getWoldRegionsAt(LatLon latLon) throws IOException {
-		List<WorldRegion> result = new ArrayList<>();
-		List<BinaryMapDataObject> mapDataObjects = getBinaryMapDataObjectsAt(latLon);
-		for (BinaryMapDataObject obj : mapDataObjects) {
-			String fullName = getFullName(obj);
-			if (fullName != null) {
-				WorldRegion reg = getRegionData(fullName);
-				if (reg != null) {
-					result.add(reg);
-				}
-			}
-		}
-		return result;
+	public List<WorldRegion> getWorldRegionsAt(LatLon latLon) throws IOException {
+		Map<WorldRegion, BinaryMapDataObject> mapDataObjects = getBinaryMapDataObjectsWithRegionsAt(latLon);
+		return new ArrayList<>(mapDataObjects.keySet());
 	}
 
-	public BinaryMapDataObject getSmallestBinaryMapDataObjectAt(LatLon latLon) throws IOException {
-		List<BinaryMapDataObject> mapDataObjects = getBinaryMapDataObjectsAt(latLon);
-		return getSmallestBinaryMapDataObjectAt(mapDataObjects);
+	public Map.Entry<WorldRegion, BinaryMapDataObject> getSmallestBinaryMapDataObjectAt(LatLon latLon) throws IOException {
+		Map<WorldRegion, BinaryMapDataObject> mapDataObjectsWithRegions = getBinaryMapDataObjectsWithRegionsAt(latLon);
+		return getSmallestBinaryMapDataObjectAt(mapDataObjectsWithRegions);
 	}
 
-	public BinaryMapDataObject getSmallestBinaryMapDataObjectAt(List<BinaryMapDataObject> mapDataObjects) {
-		BinaryMapDataObject res = null;
+	public Map.Entry<WorldRegion, BinaryMapDataObject> getSmallestBinaryMapDataObjectAt(Map<WorldRegion, BinaryMapDataObject> mapDataObjectsWithRegions) {
+		Map.Entry<WorldRegion, BinaryMapDataObject> res = null;
 		double smallestArea = -1;
-		for (BinaryMapDataObject o : mapDataObjects) {
-			double area = OsmandRegions.getArea(o);
+		for (Map.Entry<WorldRegion, BinaryMapDataObject> o : mapDataObjectsWithRegions.entrySet()) {
+			double area = OsmandRegions.getArea(o.getValue());
 			if (smallestArea == -1) {
 				smallestArea = area;
 				res = o;
@@ -727,10 +717,10 @@ public class OsmandRegions {
 		return res;
 	}
 
-	private List<BinaryMapDataObject> getBinaryMapDataObjectsAt(LatLon latLon) throws IOException {
+	private Map<WorldRegion, BinaryMapDataObject> getBinaryMapDataObjectsWithRegionsAt(LatLon latLon) throws IOException {
 		int point31x = MapUtils.get31TileNumberX(latLon.getLongitude());
 		int point31y = MapUtils.get31TileNumberY(latLon.getLatitude());
-
+		Map<WorldRegion, BinaryMapDataObject> foundObjects = new LinkedHashMap<>();
 		List<BinaryMapDataObject> mapDataObjects;
 		try {
 			mapDataObjects = queryBboxNoInit(point31x, point31x, point31y, point31y, true);
@@ -743,25 +733,18 @@ public class OsmandRegions {
 			while (it.hasNext()) {
 				BinaryMapDataObject o = it.next();
 				if (o.getTypes() != null) {
-					boolean isRegion = true;
-					for (int i = 0; i < o.getTypes().length; i++) {
-						TagValuePair tp = o.getMapIndex().decodeType(o.getTypes()[i]);
-						if ("boundary".equals(tp.value)) {
-							isRegion = false;
-							break;
-						}
-					}
 					WorldRegion downloadRegion = getRegionData(getFullName(o));
-					if (!isRegion
-							|| downloadRegion == null
+					if ( downloadRegion == null
 							|| !downloadRegion.isRegionMapDownload()
 							|| !contain(o, point31x, point31y)) {
 						it.remove();
+					} else {
+						foundObjects.put(downloadRegion, o);
 					}
 				}
 			}
 		}
-		return mapDataObjects;
+		return foundObjects;
 	}
 
 

@@ -553,19 +553,18 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		ll.addView(sp);
 		if (choice != null) {
 			final AppCompatCheckBox cb = new AppCompatCheckBox(uiCtx);
-			cb.setText(R.string.shared_string_remember_my_choice);
+			cb.setText(R.string.confirm_every_run);
 			cb.setTextColor(textColorPrimary);
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,
 					LayoutParams.WRAP_CONTENT);
 			lp.setMargins(dp24, dp8, dp24, 0);
 			cb.setLayoutParams(lp);
 			cb.setPadding(dp8, 0, 0, 0);
+			cb.setChecked(!choice.value);
 			cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					choice.value = isChecked;
-
+					choice.value = !isChecked;
 				}
 			});
 			UiUtilities.setupCompoundButton(cb, nightMode, PROFILE_DEPENDENT);

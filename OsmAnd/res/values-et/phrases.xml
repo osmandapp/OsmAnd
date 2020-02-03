@@ -3759,7 +3759,7 @@
     <string name="poi_volcano_type_maar">Maar</string>
     <string name="poi_volcano_type_caldera">Kaldeera</string>
     <string name="poi_volcano_type_lava_dome">Laava kuppel</string>
-    <string name="poi_volcano_type_dirt">Muld</string>
+    <string name="poi_volcano_type_mud">Muld</string>
     <string name="poi_volcano_last_eruption">Viimane purse</string>
     <string name="poi_volcano_status_extinct">Kustunud</string>
     <string name="poi_volcano_status_dormant">Tegevusetu</string>

@@ -76,12 +76,12 @@ import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TIntHashSet;
-import gnu.trove.set.hash.TLongHashSet;
 
 public class BinaryMapIndexReader {
 
 	public final static int TRANSPORT_STOP_ZOOM = 24;
 	public static final int SHIFT_COORDINATES = 5;
+	public static final int LABEL_ZOOM_ENCODE = 26;
 	private final static Log log = PlatformUtil.getLog(BinaryMapIndexReader.class);
 	public static boolean READ_STATS = false;
 	public static final SearchPoiTypeFilter ACCEPT_ALL_POI_TYPE_FILTER = new SearchPoiTypeFilter() {
@@ -1136,6 +1136,7 @@ public class BinaryMapIndexReader {
 		TIntObjectHashMap<String> stringNames = null;
 		TIntArrayList stringOrder = null;
 		long id = 0;
+		int labelX = 0, labelY = 0;
 
 		boolean loop = true;
 		while (loop) {
@@ -1232,6 +1233,26 @@ public class BinaryMapIndexReader {
 					req.stat.lastStringNamesSize += sizeL;
 				}
 				break;
+			case OsmandOdb.MapData.LABELCOORDINATES_FIELD_NUMBER:
+				sizeL = codedIS.readRawVarint32();
+				old = codedIS.pushLimit(sizeL);
+				int i = 0;
+				while (codedIS.getBytesUntilLimit() > 0) {
+					if (i == 0) {
+						labelX = codedIS.readSInt32();
+					} else if (i == 1) {
+						labelY = codedIS.readSInt32();
+					} else {
+						codedIS.readRawVarint32();
+					}
+					i++;
+				}
+				codedIS.popLimit(old);
+				if (READ_STATS) {
+					req.stat.addTagHeader(OsmandOdb.MapData.LABELCOORDINATES_FIELD_NUMBER, sizeL);
+					req.stat.lastObjectLabelCoordinates += sizeL;
+				}
+				break;
 			default:
 				skipUnknownField(t);
 				break;
@@ -1259,6 +1280,9 @@ public class BinaryMapIndexReader {
 		dataObject.id = id;
 		dataObject.area = area;
 		dataObject.mapIndex = root;
+		dataObject.labelX = labelX;
+		dataObject.labelY = labelY;
+		
 		return dataObject;
 	}
 
@@ -1562,6 +1586,7 @@ public class BinaryMapIndexReader {
 		public int lastObjectAdditionalTypes;
 		public int lastObjectTypes;
 		public int lastObjectCoordinates;
+		public int lastObjectLabelCoordinates;
 
 		public int lastObjectSize;
 		public int lastBlockStringTableSize;
@@ -1586,6 +1611,7 @@ public class BinaryMapIndexReader {
 			lastObjectAdditionalTypes = 0;
 			lastObjectTypes = 0;
 			lastObjectCoordinates = 0;
+			lastObjectLabelCoordinates = 0;
 		}
 	}
 
@@ -1917,7 +1943,8 @@ public class BinaryMapIndexReader {
 				
 			BinaryMapDataObject bm = 
 					new BinaryMapDataObject(o.id, o.coordinates, o.polygonInnerCoordinates, o.objectType, o.area, 
-							types.toArray(), additionalTypes.isEmpty() ? null : additionalTypes.toArray());
+							types.toArray(), additionalTypes.isEmpty() ? null : additionalTypes.toArray(), 
+									o.labelX, o.labelY);
 			if (o.namesOrder != null) {
 				bm.objectNames = new TIntObjectHashMap<>();
 				bm.namesOrder = new TIntArrayList();
@@ -2093,7 +2120,7 @@ public class BinaryMapIndexReader {
 
 	public static void main(String[] args) throws IOException {
 		File fl = new File(System.getProperty("maps") + "/Synthetic_test_rendering.obf");
-		fl = new File(System.getProperty("maps") + "/Belarus_europe_2.obf");
+		fl = new File("/home/madwasp79/OsmAnd-maps/Poly_center2.obf");
 		
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 
@@ -2201,7 +2228,6 @@ public class BinaryMapIndexReader {
 	private static List<Location> readGPX(File f) {
 		List<Location> res = new ArrayList<Location>();
 		try {
-			StringBuilder content = new StringBuilder();
 			BufferedReader reader = new BufferedReader(getUTF8Reader(new FileInputStream(f)));
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dom = factory.newDocumentBuilder();
@@ -2218,7 +2244,6 @@ public class BinaryMapIndexReader {
 //				Document doc = dom.parse(new InputSource(new StringReader(content.toString())));
 			Document doc = dom.parse(new InputSource(reader));
 			NodeList list = doc.getElementsByTagName("trkpt");
-			Way w = new Way(-1);
 			for (int i = 0; i < list.getLength(); i++) {
 				Element item = (Element) list.item(i);
 				try {

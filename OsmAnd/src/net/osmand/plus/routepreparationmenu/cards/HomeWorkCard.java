@@ -1,13 +1,15 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
+import android.Manifest;
+import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.TextView;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.AddPointBottomSheetDialog;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
@@ -25,54 +27,48 @@ public class HomeWorkCard extends BaseCard {
 
 	@Override
 	protected void updateContent() {
-		final TargetPointsHelper targetPointsHelper = mapActivity.getMyApplication().getTargetPointsHelper();
 		final FavouritesDbHelper favorites = getMyApplication().getFavorites();
 		final FavouritePoint homePoint = favorites.getSpecialPoint(FavouritePoint.SpecialPointType.HOME);
 		final FavouritePoint workPoint = favorites.getSpecialPoint(FavouritePoint.SpecialPointType.WORK);
-
-		TextView homeDescr = view.findViewById(R.id.home_button_descr);
+		final TextView homeDescr = view.findViewById(R.id.home_button_descr);
 		final TextView workDescr = view.findViewById(R.id.work_button_descr);
 		homeDescr.setText(homePoint != null ? homePoint.getAddress() : mapActivity.getString(R.string.shared_string_add));
 		workDescr.setText(workPoint != null ? workPoint.getAddress() : mapActivity.getString(R.string.shared_string_add));
+		setSpecialButtonOnClickListeners(homePoint, R.id.home_button, PointType.HOME);
+		setSpecialButtonOnClickListeners(workPoint, R.id.work_button, PointType.WORK);
+	}
 
-		View homeButton = view.findViewById(R.id.home_button);
-		homeButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (homePoint == null) {
-					AddPointBottomSheetDialog.showInstance(mapActivity, PointType.HOME);
-				} else {
-					targetPointsHelper.navigateToPoint(new LatLon(homePoint.getLatitude(), homePoint.getLongitude()),
-							true, -1, homePoint.getPointDescription(mapActivity));
-				}
-			}
-		});
+	private void setSpecialButtonOnClickListeners(FavouritePoint point, int buttonId, final PointType pointType) {
+		View homeButton = view.findViewById(buttonId);
+		homeButton.setOnClickListener(new SpecialButtonOnClickListener(point, pointType));
 		homeButton.setOnLongClickListener(new View.OnLongClickListener() {
 			@Override
 			public boolean onLongClick(View v) {
-				AddPointBottomSheetDialog.showInstance(mapActivity, PointType.HOME);
+				AddPointBottomSheetDialog.showInstance(mapActivity, pointType);
 				return true;
 			}
 		});
+	}
 
-		View workButton = view.findViewById(R.id.work_button);
-		workButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (workPoint == null) {
-					AddPointBottomSheetDialog.showInstance(mapActivity, PointType.WORK);
-				} else {
-					targetPointsHelper.navigateToPoint(new LatLon(workPoint.getLatitude(), workPoint.getLongitude()),
-							true, -1, workPoint.getPointDescription(mapActivity));
-				}
+	class SpecialButtonOnClickListener implements View.OnClickListener {
+		FavouritePoint point;
+		PointType pointType;
+
+		SpecialButtonOnClickListener(FavouritePoint point, PointType pointType) {
+			this.point = point;
+			this.pointType = pointType;
+		}
+
+		@Override
+		public void onClick(View v) {
+			if (point == null) {
+				AddPointBottomSheetDialog.showInstance(mapActivity, pointType);
+			} else {
+				mapActivity.getMyApplication().getTargetPointsHelper().navigateToPoint(
+						new LatLon(point.getLatitude(), point.getLongitude()),
+						true, -1, point.getPointDescription(app));
+				OsmAndLocationProvider.requestFineLocationPermissionIfNeeded(mapActivity);
 			}
-		});
-		workButton.setOnLongClickListener(new View.OnLongClickListener() {
-			@Override
-			public boolean onLongClick(View v) {
-				AddPointBottomSheetDialog.showInstance(mapActivity, PointType.WORK);
-				return true;
-			}
-		});
+		}
 	}
 }

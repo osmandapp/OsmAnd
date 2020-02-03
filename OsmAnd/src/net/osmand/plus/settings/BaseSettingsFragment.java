@@ -72,7 +72,13 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		OnPreferenceClickListener, AppModeChangedListener {
 
 	private static final Log LOG = PlatformUtil.getLog(BaseSettingsFragment.class);
-	private static final String APP_MODE_KEY = "app_mode_key";
+
+	public static final String APP_MODE_KEY = "app_mode_key";
+	public static final String OPEN_CONFIG_PROFILE = "openConfigProfile";
+	public static final String OPEN_SETTINGS = "openSettings";
+	public static final String OPEN_CONFIG_ON_MAP = "openConfigOnMap";
+	public static final String MAP_CONFIG = "openMapConfigMenu";
+	public static final String SCREEN_CONFIG = "screenConfig";
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
@@ -274,6 +280,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			Activity activity = getActivity();
 			if (activity instanceof MapActivity) {
 				((MapActivity) activity).updateStatusBarColor();
+				((MapActivity) activity).updateNavigationBarColor();
 			}
 		}
 	}
@@ -441,7 +448,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 		TextView profileTitle = (TextView) view.findViewById(R.id.profile_title);
 		if (profileTitle != null) {
-			String appName = selectedAppMode.toHumanString(app);
+			String appName = selectedAppMode.toHumanString();
 			profileTitle.setText(appName);
 		}
 		View toolbarDivider = view.findViewById(R.id.toolbar_divider);
@@ -739,7 +746,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		String description;
 		if (mode.isCustomProfile()) {
 			description = String.format(ctx.getString(R.string.profile_type_descr_string),
-					Algorithms.capitalizeFirstLetterAndLowercase(mode.getParent().toHumanString(ctx)));
+					Algorithms.capitalizeFirstLetterAndLowercase(mode.getParent().toHumanString()));
 		} else {
 			description = ctx.getString(R.string.profile_type_base_string);
 		}

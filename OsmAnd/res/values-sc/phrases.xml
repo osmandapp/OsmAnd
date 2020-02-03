@@ -3775,7 +3775,7 @@
     <string name="poi_volcano_type_maar">Maar</string>
     <string name="poi_volcano_type_caldera">Caldera</string>
     <string name="poi_volcano_type_lava_dome">Cùpola de lava</string>
-    <string name="poi_volcano_type_dirt">Terra</string>
+    <string name="poi_volcano_type_mud">Terra</string>
     <string name="poi_volcano_last_eruption">Ùrtima erutzione</string>
     <string name="poi_volcano_status_extinct">Istudadu</string>
     <string name="poi_volcano_status_dormant">Durmende</string>

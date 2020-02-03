@@ -1,7 +1,6 @@
 package net.osmand.plus.activities;
 
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -91,7 +90,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		ApplicationMode[] appModes = ApplicationMode.values(app).toArray(new ApplicationMode[0]);
 		entries = new String[appModes.length];
 		for (int i = 0; i < entries.length; i++) {
-			entries[i] = appModes[i].toHumanString(app);
+			entries[i] = appModes[i].toHumanString();
 		}
 		registerListPreference(settings.DEFAULT_APPLICATION_MODE, screen, entries, appModes);
 
@@ -545,7 +544,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		super.updateAllSettings();
 		updateApplicationDirTextAndSummary();
 		applicationModePreference.setTitle(getString(R.string.settings_preset) + "  ["
-				+ settings.APPLICATION_MODE.get().toHumanString(getMyApplication()) + "]");
+				+ settings.APPLICATION_MODE.get().toHumanString() + "]");
 		drivingRegionPreference.setTitle(getString(R.string.driving_region) + "  ["
 				+ getString(settings.DRIVING_REGION_AUTOMATIC.get() ? R.string.driving_region_automatic : settings.DRIVING_REGION.get().name) + "]");
 	}
