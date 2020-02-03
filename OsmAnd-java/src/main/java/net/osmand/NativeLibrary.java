@@ -364,6 +364,8 @@ public class NativeLibrary {
 		private int order;
 		private boolean visible;
 		private LatLon labelLatLon;
+		private int labelX = 0;
+		private int labelY = 0;
 		
 		public Map<String, String> getTags() {
 			return tags;
@@ -433,7 +435,22 @@ public class NativeLibrary {
 		public void putTag(String t, String v) {
 			tags.put(t, v);
 		}
-			
+
+		public int getLabelX() {
+			return labelX;
+		}
+
+		public int getLabelY() {
+			return labelY;
+		}
+
+		public void setLabelX(int labelX) {
+			this.labelX = labelX;
+		}
+
+		public void setLabelY(int labelY) {
+			this.labelY = labelY;
+		}
 	}
 
 }
