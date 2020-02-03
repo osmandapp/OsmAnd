@@ -39,6 +39,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -341,6 +342,14 @@ public class SearchUICore {
 		for (SearchCoreAPI capi : apis) {
 			if (capi instanceof SearchAmenityTypesAPI) {
 				((SearchAmenityTypesAPI) capi).addCustomFilter(poiFilter, priority);
+			}
+		}
+	}
+	
+	public void setFilterOrders(Map<String, Integer> filterOrders) {
+		for (SearchCoreAPI capi : apis) {
+			if (capi instanceof SearchAmenityTypesAPI) {
+				((SearchAmenityTypesAPI) capi).setFilterOrders(filterOrders);
 			}
 		}
 	}

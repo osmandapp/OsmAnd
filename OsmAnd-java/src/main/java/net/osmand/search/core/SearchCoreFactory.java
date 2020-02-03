@@ -639,6 +639,7 @@ public class SearchCoreFactory {
 		private List<CustomSearchPoiFilter> customPoiFilters = new ArrayList<>();
 		private TIntArrayList customPoiFiltersPriorites = new TIntArrayList();
 		private MapPoiTypes types;
+		private Map<String, Integer> filterOrders = new HashMap<>();
 
 		public SearchAmenityTypesAPI(MapPoiTypes types) {
 			super(ObjectType.POI_TYPE);
@@ -653,6 +654,10 @@ public class SearchCoreFactory {
 		public void addCustomFilter(CustomSearchPoiFilter poiFilter, int priority) {
 			this.customPoiFilters.add(poiFilter);
 			this.customPoiFiltersPriorites.add(priority);
+		}
+
+		public void setFilterOrders(Map<String, Integer> filterOrders) {
+			this.filterOrders = filterOrders;
 		}
 
 		@Override
@@ -720,28 +725,44 @@ public class SearchCoreFactory {
 			phrase.setUnknownSearchWordPoiTypes(searchWordTypes);
 
 			if (resultMatcher != null) {
+				boolean defaultMode = !phrase.isUnknownSearchWordPresent();
 				String word = phrase.getUnknownSearchWord();
 				NameStringMatcher startMatch = new NameStringMatcher(word, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
 				for (AbstractPoiType pt : results) {
 					SearchResult res = new SearchResult(phrase);
 					res.localeName = pt.getTranslation();
 					res.object = pt;
-					res.priority = SEARCH_AMENITY_TYPE_PRIORITY;
 					res.priorityDistance = 0;
 					res.objectType = ObjectType.POI_TYPE;
 					res.firstUnknownWordMatches = startMatch.matches(res.localeName);
-					resultMatcher.publish(res);
+					if (defaultMode) {
+						String stdFilterId = "std_" + pt.getKeyName();
+						if (filterOrders.containsKey(stdFilterId)) {
+							res.priority = filterOrders.get(stdFilterId);
+							resultMatcher.publish(res);
+						}
+					} else {
+						res.priority = SEARCH_AMENITY_TYPE_PRIORITY;
+						resultMatcher.publish(res);
+					}
 				}
 				for (int i = 0; i < customPoiFilters.size(); i++) {
 					CustomSearchPoiFilter csf = customPoiFilters.get(i);
-					int p = customPoiFiltersPriorites.get(i);
 					if (!phrase.isUnknownSearchWordPresent() || nm.matches(csf.getName())) {
 						SearchResult res = new SearchResult(phrase);
 						res.localeName = csf.getName();
 						res.object = csf;
-						res.priority = SEARCH_AMENITY_TYPE_PRIORITY + p;
 						res.objectType = ObjectType.POI_TYPE;
-						resultMatcher.publish(res);
+						if (defaultMode) {
+							if (filterOrders.containsKey(csf.getFilterId())) {
+								res.priority = filterOrders.get(csf.getFilterId());
+								resultMatcher.publish(res);
+							}
+						} else {
+							int p = customPoiFiltersPriorites.get(i);
+							res.priority = SEARCH_AMENITY_TYPE_PRIORITY + p;
+							resultMatcher.publish(res);
+						}
 					}
 				}
 			}

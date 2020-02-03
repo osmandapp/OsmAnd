@@ -247,6 +247,15 @@ public class PoiFiltersHelper {
 		return result;
 	}
 
+	public Map<String, Integer> getPoiFilterOrders(boolean onlyActive) {
+		Map<String, Integer> filterOrders = new HashMap<>();
+		List<PoiUIFilter> sortedFilters = getSortedPoiFilters(onlyActive);
+		for (PoiUIFilter filter : sortedFilters) {
+			filterOrders.put(filter.getFilterId(), filter.getOrder());
+		}
+		return filterOrders;
+	}
+
 	public List<PoiUIFilter> getSortedPoiFilters(boolean onlyActive) {
 		initPoiUIFiltersState();
 		List<PoiUIFilter> allFilters = new ArrayList<>();

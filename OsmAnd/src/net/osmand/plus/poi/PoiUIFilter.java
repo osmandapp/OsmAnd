@@ -721,6 +721,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		updatePoiAdditionals();
 	}
 
+	@Override
 	public String getFilterId() {
 		return filterId;
 	}

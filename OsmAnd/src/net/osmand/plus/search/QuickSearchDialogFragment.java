@@ -103,11 +103,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_LOCATION_KEY;
 import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_QUERY_KEY;
@@ -1202,29 +1198,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			SearchResultCollection res = searchUICore.shallowSearch(SearchAmenityTypesAPI.class, "", null);
 			if (res != null) {
 				List<QuickSearchListItem> rows = new ArrayList<>();
-				List<PoiUIFilter> activePoiFilters = app.getPoiFilters().getSortedPoiFilters(true);
-				final Map<String, Integer> searchResultOrders = new HashMap<>();
-				final List<SearchResult> matchedSearchResults = new ArrayList<>();
 				for (SearchResult sr : res.getCurrentSearchResults()) {
-					for (PoiUIFilter filter : activePoiFilters) {
-						String localeName = sr.localeName;
-						if (localeName != null && localeName.equals(filter.getName())) {
-							activePoiFilters.remove(filter);
-							searchResultOrders.put(localeName, filter.getOrder());
-							matchedSearchResults.add(sr);
-							break;
-						}
-					}
-				}
-				Collections.sort(matchedSearchResults, new Comparator<SearchResult>() {
-					@Override
-					public int compare(SearchResult o1, SearchResult o2) {
-						int order1 = searchResultOrders.get(o1.localeName);
-						int order2 = searchResultOrders.get(o2.localeName);
-						return ((order1 < order2) ? -1 : (order1 == order2) ? 0 : 1);
-					}
-				});
-				for (SearchResult sr : matchedSearchResults) {
 					rows.add(new QuickSearchListItem(app, sr));
 				}
 				rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_world_globe_dark,
@@ -1261,6 +1235,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							@Override
 							public boolean processResult(Boolean changed) {
 								if (changed) {
+									searchUICore.setFilterOrders(app.getPoiFilters().getPoiFilterOrders(true));
 									reloadCategoriesInternal();
 								}
 								return false;

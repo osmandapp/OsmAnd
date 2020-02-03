@@ -115,6 +115,7 @@ public class QuickSearchHelper implements ResourceListener {
 			core.addCustomSearchPoiFilter(localWikiPoiFilter, 1);
 		}
 		core.addCustomSearchPoiFilter(poiFilters.getShowAllPOIFilter(), 1);
+		core.setFilterOrders(poiFilters.getPoiFilterOrders(true));
 	}
 
 	public void setRepositoriesForSearchUICore(final OsmandApplication app) {
