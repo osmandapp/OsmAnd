@@ -4,14 +4,14 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:layout_marginLeft="@dimen/content_padding_half"
-	android:layout_marginRight="@dimen/content_padding_half"
 	android:background="?attr/list_background_color">
 
 	<LinearLayout
 		android:id="@+id/selectable_list_item"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:layout_marginLeft="@dimen/content_padding_half"
+		android:layout_marginRight="@dimen/content_padding_half"
 		android:minHeight="@dimen/bottom_sheet_list_item_height"
 		android:orientation="horizontal">
 

@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="accessibility_mode_disabled">Accessibility mode disabled in your system.</string>
     <string name="rendering_attr_streetLightingNight_name">Show only at night</string>
     <string name="plugin_prefs_reset_successful">All plugin settings restored to default state.</string>
     <string name="profile_prefs_reset_successful">All profile settings restored to default state.</string>
