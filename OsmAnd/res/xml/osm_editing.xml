@@ -6,7 +6,7 @@
 
 	<Preference
 		android:key="osm_editing_info"
-		android:layout="@layout/preference_with_descr"
+		android:layout="@layout/preference_info"
 		android:persistent="false"
 		android:selectable="false"
 		android:title="@string/plugin_global_prefs_info"

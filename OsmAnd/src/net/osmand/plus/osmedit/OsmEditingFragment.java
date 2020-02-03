@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,12 +23,13 @@ import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 public class OsmEditingFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
+	private static final String OSM_EDITING_INFO = "osm_editing_info";
 	private static final String OPEN_OSM_EDITS = "open_osm_edits";
 	private static final String OSM_LOGIN_DATA = "osm_login_data";
 
 	@Override
 	protected void setupPreferences() {
-		Preference osmEditingInfo = findPreference("osm_editing_info");
+		Preference osmEditingInfo = findPreference(OSM_EDITING_INFO);
 		osmEditingInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 
 		setupNameAndPasswordPref();
@@ -43,6 +45,15 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 		TextView toolbarSubtitle = view.findViewById(R.id.toolbar_subtitle);
 		toolbarSubtitle.setText(getPreferenceScreen().getSummary());
 		AndroidUiHelper.updateVisibility(toolbarSubtitle, true);
+	}
+
+	@Override
+	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+		super.onBindPreferenceViewHolder(preference, holder);
+		if (OSM_EDITING_INFO.equals(preference.getKey())) {
+			TextView titleView = (TextView) holder.findViewById(android.R.id.title);
+			titleView.setTextSize(16);
+		}
 	}
 
 	private void setupNameAndPasswordPref() {
