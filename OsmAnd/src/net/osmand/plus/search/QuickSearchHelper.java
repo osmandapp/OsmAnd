@@ -102,6 +102,7 @@ public class QuickSearchHelper implements ResourceListener {
 		core.registerAPI(new SearchOnlineApi(app));
 
 		refreshCustomPoiFilters();
+		refreshFilterOrders();
 	}
 
 	public void refreshCustomPoiFilters() {
@@ -115,7 +116,11 @@ public class QuickSearchHelper implements ResourceListener {
 			core.addCustomSearchPoiFilter(localWikiPoiFilter, 1);
 		}
 		core.addCustomSearchPoiFilter(poiFilters.getShowAllPOIFilter(), 1);
-		core.setFilterOrders(poiFilters.getPoiFilterOrders(true));
+	}
+
+	public void refreshFilterOrders() {
+		PoiFiltersHelper filtersHelper = app.getPoiFilters();
+		core.setFilterOrders(filtersHelper.getPoiFilterOrders(true));
 	}
 
 	public void setRepositoriesForSearchUICore(final OsmandApplication app) {

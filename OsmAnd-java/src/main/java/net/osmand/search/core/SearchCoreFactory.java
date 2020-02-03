@@ -633,6 +633,8 @@ public class SearchCoreFactory {
 
 	public static class SearchAmenityTypesAPI extends SearchBaseAPI {
 
+		public final static String STD_POI_FILTER_PREFIX = "std_";
+
 		private Map<String, PoiType> translatedNames = new LinkedHashMap<>();
 		private List<AbstractPoiType> topVisibleFilters;
 		private List<PoiCategory> categories;
@@ -671,6 +673,7 @@ public class SearchCoreFactory {
 			List<AbstractPoiType> searchWordTypes = new ArrayList<AbstractPoiType>();
 			NameStringMatcher nm;
 			String unknownSearchPhrase = phrase.getUnknownSearchPhrase();
+			boolean showTopFiltersOnly = !phrase.isUnknownSearchWordPresent();
 			if (phrase.getUnknownSearchWord().length() < unknownSearchPhrase.length()) {
 				nm = new NameStringMatcher(unknownSearchPhrase, StringMatcherMode.CHECK_ONLY_STARTS_WITH_TRIM);
 			} else {
@@ -725,7 +728,6 @@ public class SearchCoreFactory {
 			phrase.setUnknownSearchWordPoiTypes(searchWordTypes);
 
 			if (resultMatcher != null) {
-				boolean defaultMode = !phrase.isUnknownSearchWordPresent();
 				String word = phrase.getUnknownSearchWord();
 				NameStringMatcher startMatch = new NameStringMatcher(word, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
 				for (AbstractPoiType pt : results) {
@@ -735,10 +737,11 @@ public class SearchCoreFactory {
 					res.priorityDistance = 0;
 					res.objectType = ObjectType.POI_TYPE;
 					res.firstUnknownWordMatches = startMatch.matches(res.localeName);
-					if (defaultMode) {
-						String stdFilterId = "std_" + pt.getKeyName();
+					if (showTopFiltersOnly) {
+						String stdFilterId = getStandardFilterId(pt);
 						if (filterOrders.containsKey(stdFilterId)) {
-							res.priority = filterOrders.get(stdFilterId);
+							int p = filterOrders.get(stdFilterId);
+							res.priority = SEARCH_AMENITY_TYPE_PRIORITY + p;
 							resultMatcher.publish(res);
 						}
 					} else {
@@ -753,9 +756,10 @@ public class SearchCoreFactory {
 						res.localeName = csf.getName();
 						res.object = csf;
 						res.objectType = ObjectType.POI_TYPE;
-						if (defaultMode) {
+						if (showTopFiltersOnly) {
 							if (filterOrders.containsKey(csf.getFilterId())) {
-								res.priority = filterOrders.get(csf.getFilterId());
+								int p = filterOrders.get(csf.getFilterId());
+								res.priority = SEARCH_AMENITY_TYPE_PRIORITY + p;
 								resultMatcher.publish(res);
 							}
 						} else {
@@ -767,6 +771,10 @@ public class SearchCoreFactory {
 				}
 			}
 			return true;
+		}
+
+		public String getStandardFilterId(AbstractPoiType poi) {
+			return STD_POI_FILTER_PREFIX + poi.getKeyName();
 		}
 
 		@Override
