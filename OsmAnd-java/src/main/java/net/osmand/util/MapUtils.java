@@ -11,6 +11,9 @@ import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
 
+import static com.jwetherell.openmap.common.MoreMath.QUAD_PI;
+import static com.jwetherell.openmap.common.MoreMath.QUAD_PI_D;
+
 
 /**
  * This utility class includes :
@@ -169,11 +172,11 @@ public class MapUtils {
 	}
 
 	public static double get31LongitudeX(int tileX) {
-		return MapUtils.getLongitudeFromTile(21, tileX / 1024f);
+		return MapUtils.getLongitudeFromTile(21, tileX / 1024.0);
 	}
 
 	public static double get31LatitudeY(int tileY) {
-		return MapUtils.getLatitudeFromTile(21, tileY / 1024f);
+		return MapUtils.getLatitudeFromTile(21, tileY / 1024.0);
 	}
 
 
@@ -632,6 +635,31 @@ public class MapUtils {
 		return l1 == null && l2 == null
 				|| (l1 != null && l2 != null && Math.abs(l1.getLatitude() - l2.getLatitude()) < 0.00001
 				&& Math.abs(l1.getLongitude() - l2.getLongitude()) < 0.00001);
+	}
+
+	public static LatLon rhumbDestinationPoint(LatLon latLon, double distance, double bearing)
+	{
+		double radius = 6371e3;
+
+		double d = distance / radius; // angular distance in radians
+		double phi1 = Math.toRadians(latLon.getLatitude());
+		double lambda1 = Math.toRadians(latLon.getLongitude());
+		double theta = Math.toRadians(bearing);
+
+		double deltaPhi = d * Math.cos(theta);
+		double phi2 = phi1 + deltaPhi;
+
+		// check for some daft bugger going past the pole, normalise latitude if so
+		//if (ABS(phi2) > M_PI_2)
+		//    phi2 = phi2>0 ? M_PI-phi2 : -M_PI-phi2;
+
+		double deltaPsi = Math.log(Math.tan(phi2 / 2 + QUAD_PI_D) / Math.tan(phi1 / 2 + QUAD_PI_D));
+		double q = Math.abs(deltaPsi) > 10e-12 ? deltaPhi / deltaPsi : Math.cos(phi1); // E-W course becomes incorrect with 0/0
+
+		double deltalambda = d * Math.sin(theta) / q;
+		double lambda2 = lambda1 + deltalambda;
+
+		return new LatLon(Math.toDegrees(phi2), Math.toDegrees(lambda2));
 	}
 }
 

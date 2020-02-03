@@ -116,7 +116,6 @@ import net.osmand.plus.mapmarkers.PlanRouteFragment;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.NewGpxData;
-import net.osmand.plus.profiles.EditProfileFragment;
 import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
@@ -675,13 +674,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			chooseRouteFragment.dismiss(true);
 			return;
 		}
-		EditProfileFragment editProfileFragment = getEditProfileFragment();
-		if (editProfileFragment != null) {
-			if (!editProfileFragment.onBackPressedAllowed()) {
-				editProfileFragment.confirmCancelDialog(this);
-				return;
-			}
-		}
 		ProfileAppearanceFragment profileAppearanceFragment = getProfileAppearanceFragment();
 		if (profileAppearanceFragment != null) {
 			if (profileAppearanceFragment.isProfileAppearanceChanged(this)) {
@@ -859,21 +851,21 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				}
 				setIntent(null);
 			}
-			if (intent.hasExtra(EditProfileFragment.OPEN_SETTINGS)) {
-				String settingsType = intent.getStringExtra(EditProfileFragment.OPEN_SETTINGS);
-				String appMode = intent.getStringExtra(EditProfileFragment.SELECTED_ITEM);
-				if (EditProfileFragment.OPEN_CONFIG_PROFILE.equals(settingsType)) {
+			if (intent.hasExtra(BaseSettingsFragment.OPEN_SETTINGS)) {
+				String settingsType = intent.getStringExtra(BaseSettingsFragment.OPEN_SETTINGS);
+				String appMode = intent.getStringExtra(BaseSettingsFragment.APP_MODE_KEY);
+				if (BaseSettingsFragment.OPEN_CONFIG_PROFILE.equals(settingsType)) {
 					BaseSettingsFragment.showInstance(this, SettingsScreenType.CONFIGURE_PROFILE, ApplicationMode.valueOfStringKey(appMode, null));
 				}
 				setIntent(null);
 			}
-			if (intent.hasExtra(EditProfileFragment.OPEN_CONFIG_ON_MAP)) {
-				switch (intent.getStringExtra(EditProfileFragment.OPEN_CONFIG_ON_MAP)) {
-					case EditProfileFragment.MAP_CONFIG:
+			if (intent.hasExtra(BaseSettingsFragment.OPEN_CONFIG_ON_MAP)) {
+				switch (intent.getStringExtra(BaseSettingsFragment.OPEN_CONFIG_ON_MAP)) {
+					case BaseSettingsFragment.MAP_CONFIG:
 						this.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP, null);
 						break;
 
-					case EditProfileFragment.SCREEN_CONFIG:
+					case BaseSettingsFragment.SCREEN_CONFIG:
 						this.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN, null);
 						break;
 				}
@@ -1520,6 +1512,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		mapLayers.updateLayers(mapView);
 		mapActions.updateDrawerMenu();
+		updateNavigationBarColor();
 		mapView.setComplexZoom(mapView.getZoom(), mapView.getSettingsMapDensity());
 		app.getDaynightHelper().startSensorIfNeeded(new StateChangedListener<Boolean>() {
 
@@ -1530,6 +1523,16 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		});
 		getMapView().refreshMap(true);
 		applyScreenOrientation();
+	}
+
+	public void updateNavigationBarColor() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			if (getMyApplication().getDaynightHelper().isNightModeForMapControls() || getMyApplication().getDaynightHelper().isNightMode()) {
+				getWindow().setNavigationBarColor(ContextCompat.getColor(app, R.color.navigation_bar_bg_dark));
+			} else {
+				getWindow().setNavigationBarColor(ContextCompat.getColor(app, R.color.navigation_bar_bg_light));
+			}
+		}
 	}
 
 	public void updateMapSettings() {
@@ -1655,7 +1658,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		return super.onKeyUp(keyCode, event);
 	}
-	
+
 	private void scrollMap(int dx, int dy) {
 		final RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
 		final QuadPoint cp = tb.getCenterPixelPoint();
@@ -2009,7 +2012,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 
 			if (requestCode == DataStorageFragment.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
-					&& grantResults.length > 0 && permissions.length > 0
+					&& permissions.length > 0
 					&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
 				if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
 					Toast.makeText(this,
@@ -2017,12 +2020,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 							Toast.LENGTH_LONG).show();
 				}
 			} else if (requestCode == DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
-					&& grantResults.length > 0 && permissions.length > 0
+					&& permissions.length > 0
 					&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
 				permissionAsked = true;
 				permissionGranted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
 			} else if (requestCode == FirstUsageWizardFragment.FIRST_USAGE_REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION
-					&& grantResults.length > 0 && permissions.length > 0
+					&& permissions.length > 0
 					&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
 
 				new Timer().schedule(new TimerTask() {
@@ -2045,7 +2048,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					}
 				}, 1);
 			} else if (requestCode == MapActivityActions.REQUEST_LOCATION_FOR_DIRECTIONS_NAVIGATION_PERMISSION
-					&& grantResults.length > 0 && permissions.length > 0
+					&& permissions.length > 0
 					&& Manifest.permission.ACCESS_FINE_LOCATION.equals(permissions[0])) {
 				if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 					LatLon latLon = getContextMenu().getLatLon();
@@ -2407,10 +2410,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public ChooseRouteFragment getChooseRouteFragment() {
 		return getFragment(ChooseRouteFragment.TAG);
-	}
-
-	public EditProfileFragment getEditProfileFragment() {
-		return getFragment(EditProfileFragment.TAG);
 	}
 
 	public ProfileAppearanceFragment getProfileAppearanceFragment() {

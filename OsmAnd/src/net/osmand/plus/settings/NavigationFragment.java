@@ -1,5 +1,6 @@
 package net.osmand.plus.settings;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.SwitchPreferenceCompat;
@@ -10,6 +11,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.profiles.ProfileDataObject;
 import net.osmand.plus.profiles.RoutingProfileDataObject;
 import net.osmand.plus.profiles.RoutingProfileDataObject.RoutingProfilesResources;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment;
@@ -18,7 +20,9 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.DIALOG_TYPE;
@@ -134,19 +138,18 @@ public class NavigationFragment extends BaseSettingsFragment {
 		}
 		navigationType.setSummary(selectedRoutingProfileDataObject.getName());
 		navigationType.setIcon(getContentIcon(selectedRoutingProfileDataObject.getIconRes()));
-		ApplicationMode.ApplicationModeBuilder builder = ApplicationMode.changeBaseMode(getSelectedAppMode());
-		if (profileKey.equals(RoutingProfilesResources.STRAIGHT_LINE_MODE.name())) {
-			builder.setRouteService(RouteProvider.RouteService.STRAIGHT);
-		} else if (profileKey.equals(RoutingProfilesResources.BROUTER_MODE.name())) {
-			builder.setRouteService(RouteProvider.RouteService.BROUTER);
-		} else {
-			builder.setRoutingProfile(profileKey);
-		}
 
-		ApplicationMode mode = ApplicationMode.saveProfile(builder, app);
-		if (!ApplicationMode.values(app).contains(mode)) {
-			ApplicationMode.changeProfileAvailability(mode, true, app);
+		ApplicationMode appMode = getSelectedAppMode();
+		RouteProvider.RouteService routeService;
+		if (profileKey.equals(RoutingProfilesResources.STRAIGHT_LINE_MODE.name())) {
+			routeService = RouteProvider.RouteService.STRAIGHT;
+		} else if (profileKey.equals(RoutingProfilesResources.BROUTER_MODE.name())) {
+			routeService = RouteProvider.RouteService.BROUTER;
+		} else {
+			routeService = RouteProvider.RouteService.OSMAND;
 		}
+		appMode.setRouteService(routeService);
+		appMode.setRoutingProfile(profileKey);
 	}
 
 	public static Map<String, RoutingProfileDataObject> getRoutingProfiles(OsmandApplication context) {
@@ -184,6 +187,17 @@ public class NavigationFragment extends BaseSettingsFragment {
 			}
 		}
 		return profilesObjects;
+	}
+
+	public static List<ProfileDataObject> getBaseProfiles(Context ctx) {
+		List<ProfileDataObject> profiles = new ArrayList<>();
+		for (ApplicationMode mode : ApplicationMode.getDefaultValues()) {
+			if (mode != ApplicationMode.DEFAULT) {
+				profiles.add(new ProfileDataObject(mode.toHumanString(), mode.getDescription(),
+						mode.getStringKey(), mode.getIconRes(), false, mode.getIconColorInfo()));
+			}
+		}
+		return profiles;
 	}
 
 	private void setupVehicleParametersPref() {

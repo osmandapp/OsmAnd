@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
-import android.support.v4.content.ContextCompat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,11 +14,11 @@ import android.widget.LinearLayout;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.mapmarkers.DirectionIndicationDialogFragment;
@@ -75,17 +74,7 @@ public class MapWidgetRegistry {
 	public MapWidgetRegistry(OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
-
-		for (ApplicationMode ms : ApplicationMode.values(app)) {
-			String mpf = settings.MAP_INFO_CONTROLS.getModeValue(ms);
-			if (mpf.equals(SHOW_PREFIX)) {
-				visibleElementsFromSettings.put(ms, null);
-			} else {
-				LinkedHashSet<String> set = new LinkedHashSet<>();
-				visibleElementsFromSettings.put(ms, set);
-				Collections.addAll(set, mpf.split(SETTINGS_SEPARATOR));
-			}
-		}
+		loadVisibleElementsFromSettings();
 	}
 
 	public void populateStackControl(LinearLayout stack,
@@ -220,7 +209,7 @@ public class MapWidgetRegistry {
 	private void processVisibleModes(String key, MapWidgetRegInfo ii) {
 		for (ApplicationMode ms : ApplicationMode.values(app)) {
 			boolean collapse = ms.isWidgetCollapsible(key);
-			boolean def = ms.isWidgetVisible(app, key);
+			boolean def = ms.isWidgetVisible(key);
 			Set<String> set = visibleElementsFromSettings.get(ms);
 			if (set != null) {
 				if (set.contains(key)) {
@@ -238,6 +227,9 @@ public class MapWidgetRegistry {
 				ii.visibleModes.add(ms);
 			} else if (collapse) {
 				ii.visibleCollapsible.add(ms);
+			} else {
+				ii.visibleModes.remove(ms);
+				ii.visibleCollapsible.remove(ms);
 			}
 		}
 	}
@@ -300,6 +292,30 @@ public class MapWidgetRegistry {
 		}
 	}
 
+	public void updateVisibleWidgets() {
+		loadVisibleElementsFromSettings();
+		for (MapWidgetRegInfo ri : leftWidgetSet) {
+			processVisibleModes(ri.key, ri);
+		}
+		for (MapWidgetRegInfo ri : rightWidgetSet) {
+			processVisibleModes(ri.key, ri);
+		}
+	}
+
+	private void loadVisibleElementsFromSettings() {
+		visibleElementsFromSettings.clear();
+		for (ApplicationMode ms : ApplicationMode.values(app)) {
+			String mpf = settings.MAP_INFO_CONTROLS.getModeValue(ms);
+			if (mpf.equals(SHOW_PREFIX)) {
+				visibleElementsFromSettings.put(ms, null);
+			} else {
+				LinkedHashSet<String> set = new LinkedHashSet<>();
+				visibleElementsFromSettings.put(ms, set);
+				Collections.addAll(set, mpf.split(SETTINGS_SEPARATOR));
+			}
+		}
+	}
+
 	private void saveVisibleElementsToSettings(ApplicationMode mode) {
 		StringBuilder bs = new StringBuilder();
 		for (String ks : this.visibleElementsFromSettings.get(mode)) {
@@ -313,7 +329,7 @@ public class MapWidgetRegistry {
 		for (MapWidgetRegInfo ri : set) {
 			ri.visibleCollapsible.remove(mode);
 			ri.visibleModes.remove(mode);
-			if (mode.isWidgetVisible(app, ri.key)) {
+			if (mode.isWidgetVisible(ri.key)) {
 				if (mode.isWidgetCollapsible(ri.key)) {
 					ri.visibleCollapsible.add(mode);
 				} else {
@@ -485,7 +501,7 @@ public class MapWidgetRegistry {
 	private void addControls(final MapActivity mapActivity, final ContextMenuAdapter contextMenuAdapter,
 							 Set<MapWidgetRegInfo> groupTitle, final ApplicationMode mode) {
 		for (final MapWidgetRegInfo r : groupTitle) {
-			if (!mode.isWidgetAvailable(app, r.key)) {
+			if (!mode.isWidgetAvailable(r.key)) {
 				continue;
 			}
 

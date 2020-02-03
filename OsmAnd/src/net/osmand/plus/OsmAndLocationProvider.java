@@ -1,5 +1,6 @@
 package net.osmand.plus;
 
+import android.app.Activity;
 import android.location.GnssNavigationMessage;
 import android.location.GnssStatus;
 import android.os.Build.VERSION;
@@ -1019,5 +1020,13 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			return false;
 		}
 		return true;
+	}
+
+	public static void requestFineLocationPermissionIfNeeded(Activity activity) {
+		if (!isLocationPermissionAvailable(activity)) {
+			ActivityCompat.requestPermissions(activity,
+					new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+					OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
+		}
 	}
 }

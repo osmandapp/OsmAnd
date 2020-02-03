@@ -65,7 +65,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 		ApplicationMode selectedAppMode = getAppMode();
 
 		BaseBottomSheetItem applyToCurrentProfile = new SimpleBottomSheetItem.Builder()
-				.setTitle(getString(R.string.apply_to_current_profile, selectedAppMode.toHumanString(app)))
+				.setTitle(getString(R.string.apply_to_current_profile, selectedAppMode.toHumanString()))
 				.setIcon(getActiveIcon(selectedAppMode.getIconRes()))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
 				.setOnClickListener(new View.OnClickListener() {

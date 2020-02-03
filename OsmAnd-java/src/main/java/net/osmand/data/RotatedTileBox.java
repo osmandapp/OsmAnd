@@ -1,4 +1,5 @@
 package net.osmand.data;
+
 import net.osmand.util.MapUtils;
 
 public class RotatedTileBox {
@@ -212,6 +213,19 @@ public class RotatedTileBox {
 		return pixHeight;
 	}
 
+	public float getPixXFrom31(int x31, int y31) {
+		double zm = MapUtils.getPowZoom(31 - zoom);
+		double xTile = ((double) x31) / zm;
+		double yTile = ((double) y31) / zm;
+		return getPixXFromTile(xTile, yTile);
+	}
+
+	public float getPixYFrom31(int x31, int y31) {
+		double zm = MapUtils.getPowZoom(31 - zoom);
+		double xTile = ((double) x31) / zm;
+		double yTile = ((double) y31) / zm;
+		return getPixYFromTile(xTile, yTile);
+	}
 
 	public float getPixXFromLatLon(double latitude, double longitude) {
 		double xTile = MapUtils.getTileNumberX(zoom, longitude);
@@ -380,15 +394,15 @@ public class RotatedTileBox {
 	
 	public QuadPointDouble getLeftTopTile(double zoom) {
 		checkTileRectangleCalculated();
-		return new QuadPointDouble((tileLT.x *  MapUtils.getPowZoom(zoom - this.zoom)),
+		return new QuadPointDouble((tileLT.x * MapUtils.getPowZoom(zoom - this.zoom)),
 				(tileLT.y *  MapUtils.getPowZoom(zoom - this.zoom)));
 	}
 
 	
 	public QuadPointDouble getRightBottomTile(float zoom) {
 		checkTileRectangleCalculated();
-		return new QuadPointDouble((tileRB.x *  MapUtils.getPowZoom(zoom - this.zoom)),
-				(tileRB.y *  MapUtils.getPowZoom(zoom - this.zoom)));
+		return new QuadPointDouble((tileRB.x * MapUtils.getPowZoom(zoom - this.zoom)),
+				(tileRB.y * MapUtils.getPowZoom(zoom - this.zoom)));
 	}
 	
 

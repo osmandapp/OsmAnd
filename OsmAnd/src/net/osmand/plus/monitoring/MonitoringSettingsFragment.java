@@ -26,6 +26,8 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import static net.osmand.plus.OsmandSettings.DAILY_DIRECTORY;
 import static net.osmand.plus.OsmandSettings.MONTHLY_DIRECTORY;
@@ -38,12 +40,14 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	private static final String COPY_PLUGIN_SETTINGS = "copy_plugin_settings";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
 	private static final String OPEN_TRACKS = "open_tracks";
+	private static final String SAVE_GLOBAL_TRACK_INTERVAL = "save_global_track_interval";
 
 	@Override
 	protected void setupPreferences() {
 		setupSaveTrackToGpxPref();
 		setupSaveTrackIntervalPref();
 
+		setupSaveGlobalTrackIntervalPref();
 		setupSaveTrackMinDistancePref();
 		setupSaveTrackPrecisionPref();
 		setupSaveTrackMinSpeedPref();
@@ -69,25 +73,35 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	}
 
 	private void setupSaveTrackIntervalPref() {
-		Integer[] entryValues = new Integer[SECONDS.length + MINUTES.length];
-		String[] entries = new String[entryValues.length];
-		int k = 0;
-		for (int second : SECONDS) {
-			entryValues[k] = second * 1000;
-			entries[k] = second + " " + getString(R.string.int_seconds);
-			k++;
-		}
-		for (int minute : MINUTES) {
-			entryValues[k] = (minute * 60) * 1000;
-			entries[k] = minute + " " + getString(R.string.int_min);
-			k++;
-		}
-
+		HashMap<Object, String> entry = getTimeValues(false);
 		ListPreferenceEx saveTrackInterval = (ListPreferenceEx) findPreference(settings.SAVE_TRACK_INTERVAL.getId());
-		saveTrackInterval.setEntries(entries);
-		saveTrackInterval.setEntryValues(entryValues);
+		saveTrackInterval.setEntries(entry.values().toArray(new String[0]));
+		saveTrackInterval.setEntryValues(entry.keySet().toArray());
 		saveTrackInterval.setIcon(getActiveIcon(R.drawable.ic_action_time_span));
 		saveTrackInterval.setDescription(R.string.save_track_interval_descr);
+	}
+
+	private void setupSaveGlobalTrackIntervalPref() {
+		HashMap<Object, String> entry = getTimeValues(true);
+		ListPreferenceEx saveTrackInterval = (ListPreferenceEx) findPreference(settings.SAVE_GLOBAL_TRACK_INTERVAL.getId());
+		saveTrackInterval.setEntries(entry.values().toArray(new String[0]));
+		saveTrackInterval.setEntryValues(entry.keySet().toArray());
+		saveTrackInterval.setIcon(getActiveIcon(R.drawable.ic_action_time_span));
+		saveTrackInterval.setDescription(R.string.save_global_track_interval_descr);
+	}
+
+	private HashMap<Object, String> getTimeValues(boolean alwaysAskEntry) {
+		HashMap<Object, String> entry = new LinkedHashMap<>();
+		if (alwaysAskEntry) {
+			entry.put(settings.SAVE_GLOBAL_TRACK_REMEMBER.getModeValue(getSelectedAppMode()), getString(R.string.confirm_every_run));
+		}
+		for (int second : SECONDS) {
+			entry.put(second * 1000, second + " " + getString(R.string.int_seconds));
+		}
+		for (int minute : MINUTES) {
+			entry.put((minute * 60) * 1000, minute + " " + getString(R.string.int_min));
+		}
+		return entry;
 	}
 
 	private void setupSaveTrackMinDistancePref() {
@@ -257,15 +271,20 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		String prefId = preference.getKey();
 
 		OsmandSettings.OsmandPreference pref = settings.getPreference(prefId);
-		if (pref instanceof OsmandSettings.CommonPreference && !((OsmandSettings.CommonPreference) pref).hasDefaultValueForMode(getSelectedAppMode())) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null && newValue instanceof Serializable) {
-				ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager, prefId,
-						(Serializable) newValue, this, false, getSelectedAppMode());
+		if (SAVE_GLOBAL_TRACK_INTERVAL.equals(prefId)) {
+			if (newValue instanceof Boolean) {
+				prefId = settings.SAVE_GLOBAL_TRACK_REMEMBER.getId();
+				newValue = Boolean.FALSE;
 			}
-			return false;
+			if (pref instanceof OsmandSettings.CommonPreference && !((OsmandSettings.CommonPreference) pref).hasDefaultValueForMode(getSelectedAppMode())) {
+				FragmentManager fragmentManager = getFragmentManager();
+				if (fragmentManager != null && newValue instanceof Serializable) {
+					ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager, prefId,
+							(Serializable) newValue, this, false, getSelectedAppMode());
+				}
+				return false;
+			}
 		}
-
 		return true;
 	}
 
@@ -290,6 +309,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
 		if (plugin != null) {
 			app.getSettings().copyProfilePreferences(appMode, getSelectedAppMode(), plugin.getPreferences());
+			updateAllSettings();
 		}
 	}
 
@@ -298,6 +318,8 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
 		if (plugin != null) {
 			app.getSettings().resetProfilePreferences(appMode, plugin.getPreferences());
+			app.showToastMessage(R.string.plugin_prefs_reset_successful);
+			updateAllSettings();
 		}
 	}
 }

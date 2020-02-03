@@ -3418,7 +3418,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="live_monitoring_descr">Umožňuje zdieľanie polohy a zaznamenávanie výletu.</string>
     <string name="live_monitoring">Sledovanie online</string>
     <string name="save_track_logging_accuracy">Presnosť záznamu</string>
-    <string name="tracks_view_descr">Všetky vaše zaznamenané stopy sú v \'Menu\' → \'Moje miesta\' → \'Stopy\', alebo v priečinku OsmAnd.</string>
+    <string name="tracks_view_descr">Všetky vaše zaznamenané stopy sú v %1$s, alebo v priečinku OsmAnd.</string>
     <string name="multimedia_notes_view_descr">Všetky vaše OSM poznámky sú v \'Menu\' → \'Moje miesta\' → \'Zmeny v OSM\'.</string>
     <string name="video_notes">Video-poznámky</string>
     <string name="photo_notes">Foto-poznámky</string>
