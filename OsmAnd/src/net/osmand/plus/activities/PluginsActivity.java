@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.aidl.ConnectedApp;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -79,6 +80,9 @@ public class PluginsActivity extends OsmandListActivity implements DownloadIndex
 				listModified = true;
 			}
 			getListAdapter().notifyDataSetChanged();
+			if (plugin.isActive() && plugin.isMarketPlugin()) {
+				plugin.showInstallDialog(this);
+			}
 		}
 	}
 
@@ -169,7 +173,10 @@ public class PluginsActivity extends OsmandListActivity implements DownloadIndex
 				}
 				name = plugin.getName();
 				pluginDescription.setText(plugin.getDescription());
-				pluginLogo.setImageResource(plugin.getLogoResourceId());
+
+				OsmandApplication app = getMyApplication();
+				int color = AndroidUtils.getColorFromAttr(app, R.attr.list_background_color);
+				pluginLogo.setImageDrawable(app.getUIUtilities().getPaintedIcon(plugin.getLogoResourceId(), color));
 				pluginLogo.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
