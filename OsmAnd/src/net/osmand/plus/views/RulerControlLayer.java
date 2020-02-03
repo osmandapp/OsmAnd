@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
+import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -45,6 +46,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 	private static final int TEXT_SIZE = 14;
 	private static final int DISTANCE_TEXT_SIZE = 16;
 	private static final float COMPASS_CIRCLE_FITTING_RADIUS_COEF = 1.25f;
+	private static final float CIRCLE_ANGLE_STEP = 5;
 
 	private final MapActivity mapActivity;
 	private OsmandApplication app;
@@ -282,11 +284,11 @@ public class RulerControlLayer extends OsmandMapLayer {
 				RenderingLineAttributes attrs = mode == RulerMode.FIRST ? circleAttrs : circleAttrsAlt;
 				int compassCircleId = getCompassCircleId(tb, center);
 				for (int i = 1; i <= cacheDistances.size(); i++) {
-					if (showCompass && i == compassCircleId) {
-						drawCompassCircle(canvas, tb, compassCircleId, center, attrs);
-					} else {
+					//if (showCompass && i == compassCircleId) {
+						//drawCompassCircle(canvas, tb, compassCircleId, center, attrs);
+					//} else {
 						drawCircle(canvas, tb, i, center, attrs);
-					}
+					//}
 				}
 			}
 		}
@@ -504,9 +506,41 @@ public class RulerControlLayer extends OsmandMapLayer {
 			String text = cacheDistances.get(circleNumber - 1);
 			float[] textCoords = calculateTextCoords(text, text, circleRadius, center, attrs);
 
+			List<List<PointF>> arrays = new ArrayList<>();
+			List<PointF> points = new ArrayList<>();
+			LatLon centerLatLon = tb.getCenterLatLon();
+			for (int a = -180; a <= 180; a += CIRCLE_ANGLE_STEP) {
+				LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, circleRadius / tb.getPixDensity(), a);
+				if (Math.abs(latLon.getLatitude()) > 90 || Math.abs(latLon.getLongitude()) > 180) {
+					if (points.size() > 0) {
+						arrays.add(points);
+						points = new ArrayList<>();
+					}
+					continue;
+				}
+
+				float x = tb.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+				float y = tb.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+				points.add(new PointF(x, y));
+			}
+			if (points.size() > 0) {
+				arrays.add(points);
+			}
+
 			canvas.rotate(-tb.getRotate(), center.x, center.y);
-			canvas.drawCircle(center.x, center.y, radius * circleNumber, attrs.shadowPaint);
-			canvas.drawCircle(center.x, center.y, radius * circleNumber, attrs.paint);
+			for (List<PointF> pts : arrays) {
+				float[] arr = new float[pts.size() * 2];
+				int i = 0;
+				for (PointF pt : pts) {
+					arr[i++] = pt.x;
+					arr[i++] = pt.y;
+				}
+				canvas.drawLines(arr, attrs.shadowPaint);
+				canvas.drawLines(arr, attrs.paint);
+			}
+
+			//canvas.drawCircle(center.x, center.y, radius * circleNumber, attrs.shadowPaint);
+			//canvas.drawCircle(center.x, center.y, radius * circleNumber, attrs.paint);
 			drawTextCoords(canvas, text, textCoords, attrs);
 			canvas.rotate(tb.getRotate(), center.x, center.y);
 		}

@@ -258,29 +258,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
 			if (selectFromMapTouch) {
-				LatLon latlon = tileBox.getLatLonFromPixel(point.x, point.y);
 				selectFromMapTouch = false;
-				TargetPointsHelper targets = app.getTargetPointsHelper();
-				FavouritesDbHelper favorites = app.getFavorites();
-				switch (selectFromMapPointType) {
-					case START:
-						targets.setStartPoint(latlon, true, null);
-						break;
-					case TARGET:
-						targets.navigateToPoint(latlon, true, -1);
-						break;
-					case INTERMEDIATE:
-						targets.navigateToPoint(latlon, true, targets.getIntermediatePoints().size());
-						break;
-					case HOME:
-						favorites.setSpecialPoint(latlon, FavouritePoint.SpecialPointType.HOME, null);
-						break;
-					case WORK:
-						favorites.setSpecialPoint(latlon, FavouritePoint.SpecialPointType.WORK, null);
-						break;
-				}
+				LatLon latLon = tileBox.getLatLonFromPixel(point.x, point.y);
+				choosePointTypeAction(mapActivity, latLon, selectFromMapPointType, null, null);
 				if (selectFromMapWaypoints) {
 					WaypointsFragment.showInstance(mapActivity.getSupportFragmentManager(), true);
 				} else {
@@ -290,6 +271,30 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			}
 		}
 		return false;
+	}
+
+	private void choosePointTypeAction(MapActivity mapActivity, LatLon latLon, PointType pointType, PointDescription pd, String address) {
+		OsmandApplication app = getApp();
+		FavouritesDbHelper favorites = app.getFavorites();
+		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+		switch (pointType) {
+			case START:
+				targetPointsHelper.setStartPoint(latLon, true, pd);
+				break;
+			case TARGET:
+				targetPointsHelper.navigateToPoint(latLon, true, -1, pd);
+				OsmAndLocationProvider.requestFineLocationPermissionIfNeeded(mapActivity);
+				break;
+			case INTERMEDIATE:
+				targetPointsHelper.navigateToPoint(latLon, true, targetPointsHelper.getIntermediatePoints().size(), pd);
+				break;
+			case HOME:
+				favorites.setSpecialPoint(latLon, FavouritePoint.SpecialPointType.HOME, address);
+				break;
+			case WORK:
+				favorites.setSpecialPoint(latLon, FavouritePoint.SpecialPointType.WORK, address);
+				break;
+		}
 	}
 
 	public OnMarkerSelectListener getOnMarkerSelectListener() {
@@ -1785,29 +1790,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		hide();
 	}
 
-	public void selectAddress(@Nullable String name, @NonNull LatLon l, PointType pointType) {
+	public void selectAddress(@Nullable String name, @NonNull LatLon latLon, PointType pointType) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, name);
-			FavouritesDbHelper favorites = mapActivity.getMyApplication().getFavorites();
-			TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
-			switch (pointType) {
-				case START:
-					targets.setStartPoint(l, true, pd);
-					break;
-				case TARGET:
-					targets.navigateToPoint(l, true, -1, pd);
-					break;
-				case INTERMEDIATE:
-					targets.navigateToPoint(l, true, targets.getIntermediatePoints().size(), pd);
-					break;
-				case HOME:
-					favorites.setSpecialPoint(l, FavouritePoint.SpecialPointType.HOME, name);
-					break;
-				case WORK:
-					favorites.setSpecialPoint(l, FavouritePoint.SpecialPointType.WORK, name);
-					break;
-			}
+			choosePointTypeAction(mapActivity, latLon, pointType, pd, name);
 			updateMenu();
 		}
 	}
@@ -1844,30 +1831,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
-	public void selectMapMarker(@Nullable final MapMarker m, @NonNull final PointType pointType) {
+	public void selectMapMarker(@Nullable final MapMarker marker, @NonNull final PointType pointType) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			if (m != null) {
-				LatLon point = new LatLon(m.getLatitude(), m.getLongitude());
-				FavouritesDbHelper favorites = mapActivity.getMyApplication().getFavorites();
-				TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
-				switch (pointType) {
-					case START:
-						targets.setStartPoint(point, true, m.getPointDescription(mapActivity));
-						break;
-					case TARGET:
-						targets.navigateToPoint(point, true, -1, m.getPointDescription(mapActivity));
-						break;
-					case INTERMEDIATE:
-						targets.navigateToPoint(point, true, targets.getIntermediatePoints().size(), m.getPointDescription(mapActivity));
-						break;
-					case HOME:
-						favorites.setSpecialPoint(point, FavouritePoint.SpecialPointType.HOME, null);
-						break;
-					case WORK:
-						favorites.setSpecialPoint(point, FavouritePoint.SpecialPointType.WORK, null);
-						break;
-				}
+			if (marker != null) {
+				LatLon latLon = new LatLon(marker.getLatitude(), marker.getLongitude());
+				PointDescription pd = marker.getPointDescription(mapActivity);
+				choosePointTypeAction(mapActivity, latLon, pointType, pd, null);
 				updateMenu();
 			} else {
 				MapMarkerSelectionFragment selectionFragment = MapMarkerSelectionFragment.newInstance(pointType);

@@ -31,7 +31,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 
 		Preference vehicleParametersInfo = findPreference("vehicle_parameters_info");
 		vehicleParametersInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
-		vehicleParametersInfo.setTitle(getString(R.string.route_parameters_info, getSelectedAppMode().toHumanString(getContext())));
+		vehicleParametersInfo.setTitle(getString(R.string.route_parameters_info, getSelectedAppMode().toHumanString()));
 
 		RouteService routeService = getSelectedAppMode().getRouteService();
 		if (routeService == RouteService.OSMAND) {

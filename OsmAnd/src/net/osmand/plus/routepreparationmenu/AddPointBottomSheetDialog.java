@@ -428,7 +428,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 					menu.selectMapMarker((MapMarker) item, pointType);
 					dismiss();
 				} else {
-					TargetPointsHelper helper = mapActivity.getMyApplication().getTargetPointsHelper();
+					TargetPointsHelper targetPointsHelper = mapActivity.getMyApplication().getTargetPointsHelper();
 					Pair<LatLon, PointDescription> pair = getLocationAndDescrFromItem(item);
 					LatLon ll = pair.first;
 					PointDescription name = pair.second;
@@ -442,13 +442,14 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 						FavouritesDbHelper favorites = requiredMyApplication().getFavorites();
 						switch (pointType) {
 							case START:
-								helper.setStartPoint(ll, true, name);
+								targetPointsHelper.setStartPoint(ll, true, name);
 								break;
 							case TARGET:
-								helper.navigateToPoint(ll, true, -1, name);
+								targetPointsHelper.navigateToPoint(ll, true, -1, name);
+								OsmAndLocationProvider.requestFineLocationPermissionIfNeeded(mapActivity);
 								break;
 							case INTERMEDIATE:
-								helper.navigateToPoint(ll, true, helper.getIntermediatePoints().size(), name);
+								targetPointsHelper.navigateToPoint(ll, true, targetPointsHelper.getIntermediatePoints().size(), name);
 								break;
 							case HOME:
 								favorites.setSpecialPoint(ll, FavouritePoint.SpecialPointType.HOME, null);

@@ -46,7 +46,7 @@ public class ResetProfilePrefsBottomSheet extends BasePreferenceBottomSheet {
 				.setButtonTintList(ColorStateList.valueOf(getResolvedColor(profileColor)))
 				.setDescription(BaseSettingsFragment.getAppModeDescription(ctx, mode))
 				.setIcon(getIcon(mode.getIconRes(), profileColor))
-				.setTitle(mode.toHumanString(ctx))
+				.setTitle(mode.toHumanString())
 				.setBackground(new LayerDrawable(layers))
 				.setLayoutId(R.layout.preference_profile_item_with_radio_btn)
 				.create();

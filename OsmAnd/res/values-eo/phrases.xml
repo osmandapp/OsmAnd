@@ -3770,7 +3770,7 @@
     <string name="poi_volcano_type_maar">malprofund‑kratera (maaro)</string>
     <string name="poi_volcano_type_caldera">kaldero</string>
     <string name="poi_volcano_type_lava_dome">lafkupolo</string>
-    <string name="poi_volcano_type_dirt">ŝlimvulkano</string>
+    <string name="poi_volcano_type_mud">ŝlimvulkano</string>
     <string name="poi_volcano_last_eruption">Antaŭa erupcio</string>
     <string name="poi_volcano_status_extinct">neaktiva</string>
     <string name="poi_volcano_status_dormant">dormanta</string>

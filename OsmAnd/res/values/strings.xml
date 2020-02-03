@@ -17,6 +17,12 @@
     <string name="reset_to_default_category_button_promo">Reset to default will delete or custom categories and reset sort order to the default state after installation.</string>
     <string name="shared_string_available">Available</string>
     <string name="add_custom_category">Add custom category</string>
+    <string name="rendering_attr_streetLightingNight_name">Show only at night</string>
+    <string name="plugin_prefs_reset_successful">All plugin settings restored to default state.</string>
+    <string name="profile_prefs_reset_successful">All profile settings restored to default state.</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="sunset_at">Sunset at %1$s</string>
+    <string name="sunrise_at">Sunrise at %1$s</string>
     <string name="permission_is_required">Permission is required to use this option.</string>
     <string name="logcat_buffer_descr">Check and share detailed logs of the application</string>
     <string name="file_does_not_contain_routing_rules">No routing rules in \'%1$s\'. Please choose another file.</string>
@@ -87,7 +93,7 @@
     <string name="edit_profiles_descr">OsmAnd default profiles cannot be deleted, but disabled (on the previous screen), or be sorted to the bottom.</string>
     <string name="edit_profiles">Edit profiles</string>
     <string name="select_nav_profile_dialog_message">The \'Navigation type\' governs how routes are calculated.</string>
-    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Personal</string>
     <string name="add_new_profile_q">Add the new profile \'%1$s\'?</string>

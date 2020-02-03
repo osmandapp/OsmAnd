@@ -37,6 +37,16 @@ public abstract class MoreMath {
     public static final transient double HALF_PI_D = Math.PI / 2.0d;
 
     /**
+     * Math.PI/4
+     */
+    public static final transient float QUAD_PI = (float) Math.PI / 4.0f;
+
+    /**
+     * Math.PI/4
+     */
+    public static final transient double QUAD_PI_D = Math.PI / 4.0d;
+
+    /**
      * Checks if a ~= b. Use this to test equality of floating point numbers.
      * <p>
      * 

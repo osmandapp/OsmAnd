@@ -583,9 +583,29 @@ public class ConfigureMapMenu {
 					}
 				}).createItem());
 
+		String description = "";
+		SunriseSunset sunriseSunset = activity.getMyApplication().getDaynightHelper().getSunriseSunset();
+		if (sunriseSunset != null) {
+			DateFormat dateFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
+			String sunriseTime = dateFormat.format(sunriseSunset.getSunrise());
+			String sunsetTime = dateFormat.format(sunriseSunset.getSunset());
+			OsmandSettings.DayNightMode dayNightMode = activity.getMyApplication().getSettings().DAYNIGHT_MODE.get();
+			if (dayNightMode.isDay() || dayNightMode.isNight()) {
+				if (sunriseSunset.isDaytime()) {
+					description = String.format(app.getString(R.string.sunset_at), sunsetTime);
+				} else {
+					description = String.format(app.getString(R.string.sunrise_at), sunriseTime);
+				}
+			} else if (dayNightMode.isAuto() || dayNightMode.isSensor()) {
+				description = String.format(app.getString(R.string.ltr_or_rtl_combine_via_slash), sunriseTime, sunsetTime);
+			}
+			description = String.format(app.getString(R.string.ltr_or_rtl_combine_via_bold_point), getDayNightDescr(activity), description);
+		} else {
+			description = getDayNightDescr(activity);
+		}
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_mode, activity)
 				.setId(MAP_MODE_ID)
-				.setDescription(getDayNightDescr(activity)).setLayout(R.layout.list_item_single_line_descrition_narrow)
+				.setDescription(description)
 				.setIcon(getDayNightIcon(activity)).setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
@@ -595,18 +615,7 @@ public class ConfigureMapMenu {
 						bld.setTitle(R.string.daynight);
 						final String[] items = new String[OsmandSettings.DayNightMode.values().length];
 						for (int i = 0; i < items.length; i++) {
-							items[i] = OsmandSettings.DayNightMode.values()[i].toHumanString(activity
-									.getMyApplication());
-						}
-
-						SunriseSunset sunriseSunset = activity.getMyApplication().getDaynightHelper().getSunriseSunset();
-						if (sunriseSunset != null) {
-							DateFormat dateFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
-							String sunriseSunsetTime = "\n" + dateFormat.format(activity.getMyApplication()
-									.getDaynightHelper().getSunriseSunset().getSunrise()) + "/" +
-									dateFormat.format(activity.getMyApplication()
-											.getDaynightHelper().getSunriseSunset().getSunset());
-							items[0] += sunriseSunsetTime;
+							items[i] = OsmandSettings.DayNightMode.values()[i].toHumanString(app);
 						}
 						int i = view.getSettings().DAYNIGHT_MODE.get().ordinal();
 						bld.setNegativeButton(R.string.shared_string_dismiss, null);

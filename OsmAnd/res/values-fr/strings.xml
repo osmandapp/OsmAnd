@@ -1803,7 +1803,7 @@
     <string name="av_audio_bitrate_descr">Sélectionnez le bitrate audio</string>
     <string name="no_address_found">Impossible de déterminer l\'adresse</string>
     <string name="looking_up_address">Recherche de l\'adresse</string>
-    <string name="update">Fréquence de mise à jour</string>
+    <string name="update">Mise à jour</string>
     <string name="only_download_over_wifi">Télécharger uniquement en WiFi</string>
     <string name="live_update">Mise à jour en temps réel</string>
     <string name="rendering_attr_horseRoutes_name">Randonnée à cheval</string>
@@ -3375,7 +3375,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Afficher les pistes cyclables</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Réseaux</string>
     <string name="personal_category_name">Personnel</string>
-    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="shared_string_downloading_formatted">Téléchargement %s</string>
     <string name="rendering_value_thick_name">Épais</string>
