@@ -404,17 +404,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 						this,
 						getSelectedAppMode());
 			}
-			String fileName = profile.toHumanString();
-			app.getSettingsHelper().exportSettings(tempDir, fileName, new SettingsHelper.SettingsExportListener() {
-				@Override
-				public void onSettingsExportFinished(@NonNull File file, boolean succeed) {
-					if (succeed) {
-						shareProfile(file, profile);
-					} else {
-						app.showToastMessage(R.string.export_profile_failed);
-					}
-				}
-			}, new ProfileSettingsItem(app.getSettings(), profile));
 		} else if (DELETE_PROFILE.equals(prefId)) {
 			onDeleteProfileClick();
 		}

@@ -776,11 +776,13 @@ public class ImportHelper {
 				File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
 				final File file = new File(tempDir, name);
 				if (error == null && file.exists()) {
-					app.getSettingsHelper().prepareSettings(file, new SettingsHelper.SettingsImportPrepareListener() {
+					app.getSettingsHelper().preImportSettings(file, latestChanges, version, new SettingsHelper.SettingsPreImportListener() {
 						@Override
-						public void onSettingsPrepared(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
-							progress.dismiss();
-							if (succeed && !empty) {
+						public void onSettingsPreImported(boolean isSuccessful, List<SettingsHelper.SettingsItem> items) {
+							if (isActivityNotDestroyed(activity)) {
+								progress.dismiss();
+							}
+							if (isSuccessful) {
 								FragmentManager fragmentManager = activity.getSupportFragmentManager();
 								if (fragmentManager != null) {
 									ExportImportProfileBottomSheet.showInstance(
@@ -790,27 +792,10 @@ public class ImportHelper {
 											items);
 								}
 							} else {
-								app.showShortToastMessage(app.getString(R.string.file_import_error, name, ""));
+								app.showShortToastMessage(app.getString(R.string.file_import_error, name, app.getString(R.string.shared_string_unexpected_error)));
 							}
 						}
 					});
-
-//					app.getSettingsHelper().importSettings(file, latestChanges, version, new SettingsImportListener() {
-//						@Override
-//						public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
-//							if (isActivityNotDestroyed(activity)) {
-//								progress.dismiss();
-//							}
-//							if (succeed) {
-//								app.showShortToastMessage(app.getString(R.string.file_imported_successfully, name));
-//								if (callback != null) {
-//									callback.processResult(items);
-//								}
-//							} else if (!empty) {
-//								app.showShortToastMessage(app.getString(R.string.file_import_error, name, app.getString(R.string.shared_string_unexpected_error)));
-//							}
-//						}
-//					});
 				} else {
 					if (isActivityNotDestroyed(activity)) {
 						progress.dismiss();

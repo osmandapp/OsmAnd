@@ -9,7 +9,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import net.osmand.PlatformUtil;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
@@ -37,11 +41,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -53,10 +60,8 @@ import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
 
 /*
 	Usage:
-
 	SettingsHelper helper = app.getSettingsHelper();
 	File file = new File(app.getAppPath(null), "settings.zip");
-
 	List<SettingsItem> items = new ArrayList<>();
 	items.add(new GlobalSettingsItem(app.getSettings()));
 	items.add(new ProfileSettingsItem(app.getSettings(), ApplicationMode.DEFAULT));
@@ -68,9 +73,7 @@ import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
 	items.add(new FileSettingsItem(app, new File(app.getAppPath(RENDERERS_DIR), "default.render.xml")));
 	items.add(new DataSettingsItem(new byte[] {'t', 'e', 's', 't', '1'}, "data1"));
 	items.add(new DataSettingsItem(new byte[] {'t', 'e', 's', 't', '2'}, "data2"));
-
 	helper.exportSettings(file, items);
-
 	helper.importSettings(file);
  */
 
@@ -97,8 +100,8 @@ public class SettingsHelper {
 		void onSettingsExportFinished(@NonNull File file, boolean succeed);
 	}
 
-	public interface SettingsImportPrepareListener {
-		void onSettingsPrepared(boolean succeed, boolean empty, @NonNull List<SettingsItem> items);
+	public interface SettingsPreImportListener {
+		void onSettingsPreImported(boolean isSuccessful, List<SettingsItem> items);
 	}
 
 	public SettingsHelper(OsmandApplication app) {
@@ -268,6 +271,8 @@ public class SettingsHelper {
 
 		private OsmandSettings settings;
 
+		JSONObject json;
+
 		public OsmandSettingsItemReader(@NonNull OsmandSettingsItem item, @NonNull OsmandSettings settings) {
 			super(item);
 			this.settings = settings;
@@ -292,32 +297,32 @@ public class SettingsHelper {
 			if (Algorithms.isEmpty(jsonStr)) {
 				throw new IllegalArgumentException("Cannot find json body");
 			}
-			final JSONObject json;
+//			final JSONObject json;
 			try {
 				json = new JSONObject(jsonStr);
 			} catch (JSONException e) {
 				throw new IllegalArgumentException("Json parse error", e);
 			}
-			settings.getContext().runInUIThread(new Runnable() {
-				@Override
-				public void run() {
-					Map<String, OsmandPreference<?>> prefs = settings.getRegisteredPreferences();
-					Iterator<String> iter = json.keys();
-					while (iter.hasNext()) {
-						String key = iter.next();
-						OsmandPreference<?> p = prefs.get(key);
-						if (p != null) {
-							try {
-								readPreferenceFromJson(p, json);
-							} catch (Exception e) {
-								LOG.error("Failed to read preference: " + key, e);
-							}
-						} else {
-							LOG.warn("No preference while importing settings: " + key);
-						}
-					}
-				}
-			});
+//			settings.getContext().runInUIThread(new Runnable() {
+//				@Override
+//				public void run() {
+//					Map<String, OsmandPreference<?>> prefs = settings.getRegisteredPreferences();
+//					Iterator<String> iter = json.keys();
+//					while (iter.hasNext()) {
+//						String key = iter.next();
+//						OsmandPreference<?> p = prefs.get(key);
+//						if (p != null) {
+//							try {
+//								readPreferenceFromJson(p, json);
+//							} catch (Exception e) {
+//								LOG.error("Failed to read preference: " + key, e);
+//							}
+//						} else {
+//							LOG.warn("No preference while importing settings: " + key);
+//						}
+//					}
+//				}
+//			});
 
 		}
 	}
@@ -430,6 +435,10 @@ public class SettingsHelper {
 			appModeBeanPrefsIds = new HashSet<>(Arrays.asList(settings.appModeBeanPrefsIds));
 		}
 
+		public ApplicationMode getAppMode() {
+			return appMode;
+		}
+
 		@NonNull
 		@Override
 		public String getName() {
@@ -475,10 +484,27 @@ public class SettingsHelper {
 			if (appMode.isCustomProfile()) {
 				appMode = ApplicationMode.saveProfile(builder, getSettings().getContext());
 			}
-		}
 
-		public ApplicationMode getAppMode() {
-			return appMode;
+			getSettings().getContext().runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					Map<String, OsmandPreference<?>> prefs = getSettings().getRegisteredPreferences();
+					Iterator<String> iter = reader.json.keys();
+					while (iter.hasNext()) {
+						String key = iter.next();
+						OsmandPreference<?> p = prefs.get(key);
+						if (p != null) {
+							try {
+								reader.readPreferenceFromJson(p, reader.json);
+							} catch (Exception e) {
+								LOG.error("Failed to read preference: " + key, e);
+							}
+						} else {
+							LOG.warn("No preference while importing settings: " + key);
+						}
+					}
+				}
+			});
 		}
 
 		@Override
@@ -488,17 +514,19 @@ public class SettingsHelper {
 		}
 
 
+		OsmandSettingsItemReader reader = new OsmandSettingsItemReader(this, getSettings()) {
+			@Override
+			protected void readPreferenceFromJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
+				if (!appModeBeanPrefsIds.contains(preference.getId())) {
+					preference.readFromJson(json, appMode);
+				}
+			}
+		};
+
 		@NonNull
 		@Override
 		SettingsItemReader getReader() {
-			return new OsmandSettingsItemReader(this, getSettings()) {
-				@Override
-				protected void readPreferenceFromJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
-					if (!appModeBeanPrefsIds.contains(preference.getId())) {
-						preference.readFromJson(json, appMode);
-					}
-				}
-			};
+			return reader;
 		}
 
 		@NonNull
@@ -735,47 +763,12 @@ public class SettingsHelper {
 		}
 
 		public QuickActionSettingsItem(@NonNull OsmandSettings settings,
-									   @NonNull JSONObject jsonObject, File file) throws JSONException {
+									   @NonNull JSONObject jsonObject) throws JSONException {
 			super(SettingsItemType.QUICK_ACTION_LIST, settings, jsonObject);
-			try {
-				readFromJson(jsonObject, file);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		}
 
 		public List<QuickAction> getQuickActions() {
 			return quickActions;
-		}
-
-		void readFromJson(JSONObject jsonObject, File file) throws IllegalArgumentException, IOException, JSONException {
-			ZipInputStream zis = new ZipInputStream(new FileInputStream(file));
-			InputStream ois = new BufferedInputStream(zis);
-			ZipEntry entry;
-			while ((entry = zis.getNextEntry()) != null){
-				if (entry.getName().equals(getFileName())) {
-					String itemsJson = null;
-					try {
-						itemsJson = Algorithms.readFromInputStream(ois).toString();
-					} catch (IOException e) {
-						LOG.error("Error reading items.json: " + itemsJson, e);
-						throw new IllegalArgumentException("No items");
-					} finally {
-						zis.closeEntry();
-					}
-					quickActions = new ArrayList<>();
-					JSONObject json = new JSONObject(itemsJson);
-					JSONArray items = json.getJSONArray("items");
-					for (int i = 0; i < items.length(); i++) {
-						JSONObject object = items.getJSONObject(i);
-						String name = object.getString("name");
-						int type = object.getInt("type");
-						QuickAction quickAction = new QuickAction(type);
-						quickAction.setName(name);
-						quickActions.add(quickAction);
-					}
-				}
-			}
 		}
 
 		@Override
@@ -797,23 +790,13 @@ public class SettingsHelper {
 		@NonNull
 		@Override
 		public String getPublicName(@NonNull Context ctx) {
-			return null;
+			return "quick_actions";
 		}
 
 		@NonNull
 		@Override
 		public String getFileName() {
 			return getName() + ".json";
-		}
-
-		@Override
-		void writeToJson(@NonNull JSONObject json) throws JSONException {
-			super.writeToJson(json);
-//			JSONArray jsonArray = new JSONArray();
-//			for (QuickAction quickAction : quickActions) {
-//				jsonArray.put(quickAction.getName(app));
-//			}
-//			json.put("name_list", jsonArray);
 		}
 
 		@NonNull
@@ -855,10 +838,6 @@ public class SettingsHelper {
 							quickAction.setName(name);
 							quickActions.add(quickAction);
 						}
-//						QuickActionFactory factory = new QuickActionFactory();
-//						List<QuickAction> quickActionsList = factory.parseActiveActionsList(getSettings().QUICK_ACTION_LIST.get());
-//						quickActionsList.addAll(quickActions);
-//						getSettings().QUICK_ACTION_LIST.set(factory.quickActionListToString(quickActionsList));
 					} catch (JSONException e) {
 						throw new IllegalArgumentException("Json parse error", e);
 					}
@@ -892,13 +871,17 @@ public class SettingsHelper {
 
 		private List<PoiUIFilter> poiUIFilters;
 
-		public PoiUiFilterSettingsItem(OsmandSettings settings, List<PoiUIFilter> poiUIFilters) {
-			super(SettingsItemType.POI_UI_FILTERS_LIST, settings);
+		private OsmandApplication app;
+
+		public PoiUiFilterSettingsItem(OsmandApplication app, List<PoiUIFilter> poiUIFilters) {
+			super(SettingsItemType.POI_UI_FILTERS_LIST, app.getSettings());
+			this.app = app;
 			this.poiUIFilters = poiUIFilters;
 		}
 
-		public PoiUiFilterSettingsItem(OsmandSettings settings, JSONObject jsonObject) throws JSONException {
-			super(SettingsItemType.POI_UI_FILTERS_LIST, settings, jsonObject);
+		public PoiUiFilterSettingsItem(OsmandApplication app, JSONObject jsonObject) throws JSONException {
+			super(SettingsItemType.POI_UI_FILTERS_LIST, app.getSettings(), jsonObject);
+			this.app = app;
 			readFromJson(jsonObject);
 		}
 
@@ -928,6 +911,44 @@ public class SettingsHelper {
 				protected void readPreferenceFromJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
 
 				}
+
+				@Override
+				public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
+					StringBuilder buf = new StringBuilder();
+					try {
+						BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+						String str;
+						while ((str = in.readLine()) != null) {
+							buf.append(str);
+						}
+					} catch (IOException e) {
+						throw new IOException("Cannot read json body", e);
+					}
+					String jsonStr = buf.toString();
+					if (Algorithms.isEmpty(jsonStr)) {
+						throw new IllegalArgumentException("Cannot find json body");
+					}
+					final JSONObject json;
+					try {
+						poiUIFilters = new ArrayList<>();
+						json = new JSONObject(jsonStr);
+						JSONArray items = json.getJSONArray("items");
+						Gson gson = new Gson();
+						Type type = new TypeToken<HashMap<PoiCategory, LinkedHashSet<String>>>() {
+						}.getType();
+						for (int i = 0; i < items.length(); i++) {
+							JSONObject object = items.getJSONObject(i);
+							String name = object.getString("name");
+							String filterId = object.getString("filterId");
+							String acceptedTypesString = object.getString("acceptedTypes");
+//							Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = gson.fromJson(acceptedTypesString, type);
+//							PoiUIFilter filter = new PoiUIFilter(name, filterId, acceptedTypes, app);
+//							poiUIFilters.add(filter);
+						}
+					} catch (JSONException e) {
+						throw new IllegalArgumentException("Json parse error", e);
+					}
+				}
 			};
 		}
 
@@ -938,12 +959,15 @@ public class SettingsHelper {
 				@Override
 				protected void writePreferenceToJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
 					JSONArray items = new JSONArray();
+					Gson gson = new Gson();
+					Type type = new TypeToken<HashMap<PoiCategory, LinkedHashSet<String>>>() {
+					}.getType();
 					if (!poiUIFilters.isEmpty()) {
 						for (PoiUIFilter filter : poiUIFilters) {
 							JSONObject jsonObject = new JSONObject();
 							jsonObject.put("name", filter.getName());
 							jsonObject.put("filterId", filter.getFilterId());
-							jsonObject.put("acceptedTypes", filter.getAcceptedTypes());
+							jsonObject.put("acceptedTypes", gson.toJson(filter.getAcceptedTypes(), type));
 							items.put(jsonObject);
 						}
 						json.put("items", items);
@@ -1020,11 +1044,9 @@ public class SettingsHelper {
 
 		private OsmandApplication app;
 		private List<SettingsItem> items = new ArrayList<>();
-		private File file;
 
-		SettingsItemsFactory(OsmandApplication app, String jsonStr, File file) throws IllegalArgumentException, JSONException {
+		SettingsItemsFactory(OsmandApplication app, String jsonStr) throws IllegalArgumentException, JSONException {
 			this.app = app;
-			this.file = file;
 			JSONObject json = new JSONObject(jsonStr);
 			JSONArray itemsJson = json.getJSONArray("items");
 			for (int i = 0; i < itemsJson.length(); i++) {
@@ -1075,10 +1097,10 @@ public class SettingsHelper {
 					item = new FileSettingsItem(app, json);
 					break;
 				case QUICK_ACTION_LIST:
-					item = new QuickActionSettingsItem(settings, json, file);
+					item = new QuickActionSettingsItem(settings, json);
 					break;
 				case POI_UI_FILTERS_LIST:
-					item = new PoiUiFilterSettingsItem(settings, json);
+					item = new PoiUiFilterSettingsItem(app, json);
 					break;
 				case MAP_SOURCES_LIST:
 					item = new MapSourcesSettingsItem(settings, json);
@@ -1159,14 +1181,15 @@ public class SettingsHelper {
 		}
 
 		private List<SettingsItem> processItems(@NonNull File file, @Nullable List<SettingsItem> items) throws IllegalArgumentException, IOException {
-			boolean collecting = items == null;
-			if (collecting) {
-				items = new ArrayList<>();
-			} else {
-				if (items.size() == 0) {
-					throw new IllegalArgumentException("No items");
-				}
-			}
+//			boolean collecting = items == null;
+//			if (collecting) {
+//				items = new ArrayList<>();
+//			} else {
+//				if (items.size() == 0) {
+//					throw new IllegalArgumentException("No items");
+//				}
+//			}
+			items = new ArrayList<>();
 			ZipInputStream zis = new ZipInputStream(new FileInputStream(file));
 			InputStream ois = new BufferedInputStream(zis);
 			try {
@@ -1183,10 +1206,10 @@ public class SettingsHelper {
 					}
 					SettingsItemsFactory itemsFactory;
 					try {
-						itemsFactory = new SettingsItemsFactory(app, itemsJson, file);
-						if (collecting) {
+						itemsFactory = new SettingsItemsFactory(app, itemsJson);
+//						if (collecting) {
 							items.addAll(itemsFactory.getItems());
-						}
+//						}
 					} catch (IllegalArgumentException e) {
 						LOG.error("Error parsing items: " + itemsJson, e);
 						throw new IllegalArgumentException("No items");
@@ -1194,7 +1217,7 @@ public class SettingsHelper {
 						LOG.error("Error parsing items: " + itemsJson, e);
 						throw new IllegalArgumentException("No items");
 					}
-					while (!collecting && (entry = zis.getNextEntry()) != null) {
+					while ((entry = zis.getNextEntry()) != null) {
 						String fileName = entry.getName();
 						SettingsItem item = itemsFactory.getItemByFileName(fileName);
 						if (item != null) {
@@ -1220,164 +1243,6 @@ public class SettingsHelper {
 			}
 			return items;
 		}
-	}
-
-	@SuppressLint("StaticFieldLeak")
-	public class PrepareImportFileAsyncTask extends AsyncTask<Void, Void, List<SettingsItem>> {
-
-		private File file;
-		private SettingsImportPrepareListener listener;
-		private SettingsImporter importer;
-
-		PrepareImportFileAsyncTask(@NonNull File settingsFile, @Nullable SettingsImportPrepareListener listener) {
-			this.file = settingsFile;
-			this.listener = listener;
-			importer = new SettingsImporter(app);
-		}
-
-		@Override
-		protected List<SettingsItem> doInBackground(Void... voids) {
-			try {
-				return importer.collectItems(file);
-			} catch (IllegalArgumentException e) {
-				LOG.error("Failed to collect items from: " + file.getName(), e);
-			} catch (IOException e) {
-				LOG.error("Failed to collect items from: " + file.getName(), e);
-			}
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(List<SettingsItem> settingsItems) {
-			super.onPostExecute(settingsItems);
-			if (settingsItems != null && settingsItems.size() > 0) {
-				listener.onSettingsPrepared(true, false, settingsItems);
-			}
-		}
-	}
-
-	@SuppressLint("StaticFieldLeak")
-	private class ImportSettingsTask extends AsyncTask<Void, Void, Void> {
-
-		private File file;
-		private String latestChanges;
-		private int version;
-
-		private SettingsImportListener listener;
-		private SettingsImporter importer;
-		private List<SettingsItem> items;
-		private List<SettingsItem> processedItems = new ArrayList<>();
-		private SettingsItem currentItem;
-		private AlertDialog dialog;
-
-		ImportSettingsTask(List<SettingsItem> items, File file, SettingsImportListener listener) {
-			this.items = items;
-			this.file = file;
-			importer = new SettingsImporter(app);
-			this.listener = listener;
-		}
-
-		@Override
-		protected Void doInBackground(Void... voids) {
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void aVoid) {
-			processNextItem();
-		}
-
-		private void processNextItem() {
-			if (activity == null) {
-				return;
-			}
-			if (items.size() == 0 && !importSuspended) {
-				if (processedItems.size() > 0) {
-					new ImportItemsAsyncTask(file, listener, processedItems).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-				} else {
-					finishImport(listener, false, true, items);
-				}
-				return;
-			}
-			final SettingsItem item;
-			if (importSuspended && currentItem != null) {
-				item = currentItem;
-			} else if (items.size() > 0) {
-				item = items.remove(0);
-				currentItem = item;
-			} else {
-				item = null;
-			}
-			importSuspended = false;
-			if (item != null) {
-				if (item.exists()) {
-					switch (item.getType()) {
-						case PROFILE: {
-							String title = activity.getString(R.string.overwrite_profile_q, item.getPublicName(app));
-							dialog = showConfirmDialog(item, title, latestChanges);
-							break;
-						}
-						case FILE:
-							// overwrite now
-							acceptItem(item);
-							break;
-						default:
-							acceptItem(item);
-							break;
-					}
-				} else {
-					if (item.getType() == SettingsItemType.PROFILE) {
-						String title = activity.getString(R.string.add_new_profile_q, item.getPublicName(app));
-						dialog = showConfirmDialog(item, title, latestChanges);
-					} else {
-						acceptItem(item);
-					}
-				}
-			} else {
-				processNextItem();
-			}
-		}
-
-		private AlertDialog showConfirmDialog(final SettingsItem item, String title, String message) {
-			AlertDialog.Builder b = new AlertDialog.Builder(activity);
-			b.setTitle(title);
-			b.setMessage(message);
-			b.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					acceptItem(item);
-				}
-			});
-			b.setNegativeButton(R.string.shared_string_no, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					processNextItem();
-				}
-			});
-			b.setOnDismissListener(new DialogInterface.OnDismissListener() {
-				@Override
-				public void onDismiss(DialogInterface dialog) {
-					ImportSettingsTask.this.dialog = null;
-				}
-			});
-			b.setCancelable(false);
-			return b.show();
-		}
-
-		private void suspendImport() {
-			if (dialog != null) {
-				dialog.dismiss();
-				dialog = null;
-			}
-		}
-
-		private void acceptItem(SettingsItem item) {
-//			item.apply();
-			processedItems.add(item);
-			processNextItem();
-		}
-
-
 	}
 
 	@SuppressLint("StaticFieldLeak")
@@ -1569,6 +1434,46 @@ public class SettingsHelper {
 	}
 
 	@SuppressLint("StaticFieldLeak")
+	public class PreImportAsyncTask extends AsyncTask<Void, Void, List<SettingsItem>> {
+
+		private String latestChanges;
+		private int version;
+		private File file;
+		private SettingsPreImportListener listener;
+		private SettingsImporter importer;
+
+		PreImportAsyncTask(@NonNull File file, String latestChanges, int version, SettingsPreImportListener listener) {
+			this.file = file;
+			this.listener = listener;
+			this.latestChanges = latestChanges;
+			this.version = version;
+			importer = new SettingsImporter(app);
+		}
+
+		@Override
+		protected List<SettingsItem> doInBackground(Void... voids) {
+			try {
+				return importer.collectItems(file);
+			} catch (IllegalArgumentException e) {
+				LOG.error("Failed to collect items from: " + file.getName(), e);
+			} catch (IOException e) {
+				LOG.error("Failed to collect items from: " + file.getName(), e);
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(List<SettingsItem> settingsItems) {
+			super.onPostExecute(settingsItems);
+			if (settingsItems != null && settingsItems.size() > 0) {
+				listener.onSettingsPreImported(true, settingsItems);
+			} else {
+				listener.onSettingsPreImported(false, settingsItems);
+			}
+		}
+	}
+
+	@SuppressLint("StaticFieldLeak")
 	private class ExportAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
 		private SettingsExporter exporter;
@@ -1623,15 +1528,58 @@ public class SettingsHelper {
 		exportSettings(fileDir, fileName, listener, new ArrayList<>(Arrays.asList(items)));
 	}
 
-	public void prepareSettings(@NonNull File settingsFile, @Nullable SettingsImportPrepareListener listener) {
-		new PrepareImportFileAsyncTask(settingsFile, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	public void preImportSettings(File file, String latestChanges, int version, SettingsPreImportListener listener) {
+		new PreImportAsyncTask(file, latestChanges, version, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public void importSettings(List<SettingsItem> items, File file, SettingsImportListener listener) {
-		new ImportSettingsTask(items, file, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	public void importSettingsItems(List<SettingsItem> list) {
+		for (SettingsItem item : list) {
+			if (item.exists()) {
+				switch (item.getType()) {
+					case PROFILE: {
+						String title = activity.getString(R.string.overwrite_profile_q, item.getPublicName(app));
+						showConfirmDialog(item, title, "");
+						break;
+					}
+					default:
+						item.apply();
+						break;
+				}
+			} else {
+				if (item.getType() == SettingsItemType.PROFILE) {
+					String title = activity.getString(R.string.add_new_profile_q, item.getPublicName(app));
+					showConfirmDialog(item, title, "");
+				} else {
+					item.apply();
+//					acceptItem(item);
+				}
+			}
+		}
 	}
 
-//	public void preImportSettings(List<SettingsItem> items, File file, SettingsImportListener listener) {
-//		new ImportSettingsTask(items, file, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-//	}
+	private AlertDialog showConfirmDialog(final SettingsItem item, String title, String message) {
+		AlertDialog.Builder b = new AlertDialog.Builder(activity);
+		b.setTitle(title);
+		b.setMessage(message);
+		b.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				item.apply();
+			}
+		});
+		b.setNegativeButton(R.string.shared_string_no, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+
+			}
+		});
+		b.setOnDismissListener(new DialogInterface.OnDismissListener() {
+			@Override
+			public void onDismiss(DialogInterface dialog) {
+
+			}
+		});
+		b.setCancelable(false);
+		return b.show();
+	}
 }

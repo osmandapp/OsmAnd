@@ -145,7 +145,7 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
                 .setButtonTintList(ColorStateList.valueOf(getResolvedColor(profileColor)))
                 .setDescription(BaseSettingsFragment.getAppModeDescription(context, profile))
                 .setIcon(getIcon(profile.getIconRes(), profileColor))
-                .setTitle(profile.toHumanString(context))
+                .setTitle(profile.toHumanString())
                 .setBackground(new LayerDrawable(layers))
                 .setLayoutId(R.layout.preference_profile_item_with_radio_btn)
                 .create();
@@ -287,23 +287,12 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
     }
 
     private void importSettings() {
+        List<SettingsHelper.SettingsItem> list = new ArrayList<>();
+        list.add(profileSettingsItem);
         if (includeAdditionalData) {
-
-        } else {
-         List<SettingsHelper.SettingsItem> list = new ArrayList<>();
-         list.add(profileSettingsItem);
-            app.getSettingsHelper().importSettings(list, file, new SettingsHelper.SettingsImportListener() {
-
-                @Override
-                public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
-                    if (succeed) {
-                        app.showShortToastMessage(app.getString(R.string.file_imported_successfully, ""));
-                    } else if (!empty) {
-                        app.showShortToastMessage(app.getString(R.string.file_import_error, "", app.getString(R.string.shared_string_unexpected_error)));
-                    }
-                }
-            });
+            list.addAll(prepareAdditionalSettingsItems());
         }
+        app.getSettingsHelper().importSettingsItems(list);
         dismiss();
     }
 
@@ -322,30 +311,40 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
         settingsItems.add(new SettingsHelper.ProfileSettingsItem(app.getSettings(), profile));
 
         if (includeAdditionalData) {
-            List<QuickAction> quickActions = new ArrayList<>();
-            List<PoiUIFilter> poiUIFilters = new ArrayList<>();
-            List<MapSourceWrapper> mapSourceWrappers = new ArrayList<>();
-            for (Object object : dataToOperate) {
-                if (object instanceof QuickAction) {
-                    quickActions.add((QuickAction) object);
-                } else if (object instanceof PoiUIFilter) {
-                    poiUIFilters.add((PoiUIFilter) object);
-                } else if (object instanceof MapSourceWrapper) {
-                    mapSourceWrappers.add((MapSourceWrapper) object);
-                }
-            }
-            if (!quickActions.isEmpty()) {
-                settingsItems.add(new SettingsHelper.QuickActionSettingsItem(app, quickActions));
-            }
-            if (!poiUIFilters.isEmpty()) {
-                settingsItems.add(new SettingsHelper.PoiUiFilterSettingsItem(app.getSettings(), poiUIFilters));
-            }
-            if (!mapSourceWrappers.isEmpty()) {
-                settingsItems.add(new SettingsHelper.MapSourcesSettingsItem(app.getSettings(), mapSourceWrappers));
-            }
+            settingsItems.addAll(prepareAdditionalSettingsItems());
         }
         return settingsItems;
     }
+
+    private List<SettingsHelper.SettingsItem> prepareAdditionalSettingsItems() {
+        List<SettingsHelper.SettingsItem> settingsItems = new ArrayList<>();
+
+        List<QuickAction> quickActions = new ArrayList<>();
+        List<PoiUIFilter> poiUIFilters = new ArrayList<>();
+        List<MapSourceWrapper> mapSourceWrappers = new ArrayList<>();
+        for (Object object : dataToOperate) {
+            if (object instanceof QuickAction) {
+                quickActions.add((QuickAction) object);
+            } else if (object instanceof PoiUIFilter) {
+                poiUIFilters.add((PoiUIFilter) object);
+            } else if (object instanceof MapSourceWrapper) {
+                mapSourceWrappers.add((MapSourceWrapper) object);
+            }
+        }
+        if (!quickActions.isEmpty()) {
+            settingsItems.add(new SettingsHelper.QuickActionSettingsItem(app, quickActions));
+        }
+        if (!poiUIFilters.isEmpty()) {
+            settingsItems.add(new SettingsHelper.PoiUiFilterSettingsItem(app, poiUIFilters));
+        }
+        if (!mapSourceWrappers.isEmpty()) {
+            settingsItems.add(new SettingsHelper.MapSourcesSettingsItem(app.getSettings(), mapSourceWrappers));
+        }
+        return settingsItems;
+    }
+
+
+
 
     private void prepareFile() {
         if (app != null) {
@@ -353,7 +352,7 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
             if (!tempDir.exists()) {
                 tempDir.mkdirs();
             }
-            String fileName = profile.toHumanString(context);
+            String fileName = profile.toHumanString();
             app.getSettingsHelper().exportSettings(tempDir, fileName, new SettingsHelper.SettingsExportListener() {
                 @Override
                 public void onSettingsExportFinished(@NonNull File file, boolean succeed) {
@@ -372,7 +371,7 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
             Context ctx = requireContext();
             final Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
-            sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.exported_osmand_profile, profile.toHumanString(ctx)));
+            sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.exported_osmand_profile, profile.toHumanString()));
             sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMyApplication(), file));
             sendIntent.setType("*/*");
             sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
