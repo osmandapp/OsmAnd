@@ -1235,7 +1235,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							@Override
 							public boolean processResult(Boolean changed) {
 								if (changed) {
-									searchUICore.setFilterOrders(app.getPoiFilters().getPoiFilterOrders(true));
+									searchHelper.refreshFilterOrders();
 									reloadCategoriesInternal();
 								}
 								return false;

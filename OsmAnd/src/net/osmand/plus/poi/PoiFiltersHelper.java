@@ -7,7 +7,6 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
@@ -336,15 +335,15 @@ public class PoiFiltersHelper {
 	}
 
 	public void saveFiltersOrder(List<String> filterIds) {
-		saveFiltersListToPreference(filterIds, application.getSettings().POI_FILTERS_ORDER);
+		application.getSettings().POI_FILTERS_ORDER.setStringsList(filterIds);
 	}
 
 	public void saveInactiveFilters(List<String> filterIds) {
-		saveFiltersListToPreference(filterIds, application.getSettings().INACTIVE_POI_FILTERS);
+		application.getSettings().INACTIVE_POI_FILTERS.setStringsList(filterIds);
 	}
 
 	public Map<String, Integer> getPoiFiltersOrder() {
-		List<String> ids = getPoiFilterIdListFromPreference(application.getSettings().POI_FILTERS_ORDER);
+		List<String> ids = application.getSettings().POI_FILTERS_ORDER.getStringsList();
 		if (ids == null) {
 			return null;
 		}
@@ -356,36 +355,7 @@ public class PoiFiltersHelper {
 	}
 	
 	public List<String> getInactivePoiFiltersIds() {
-		return getPoiFilterIdListFromPreference(application.getSettings().INACTIVE_POI_FILTERS);
-	}
-	
-	private List<String> getPoiFilterIdListFromPreference(OsmandSettings.OsmandPreference<String> preference) {
-		final String filterIdListAsString = preference.get();
-		if (filterIdListAsString != null) {
-			if (filterIdListAsString.contains("|")) {
-				return Arrays.asList(filterIdListAsString.split("\\|"));
-			} else {
-				return new ArrayList<String>() {
-					{add(filterIdListAsString);}
-				};
-			}
-		}
-		return null;
-	}
-
-	private void saveFiltersListToPreference(List<String> filterIds, OsmandSettings.OsmandPreference<String> preference) {
-		if (filterIds == null || filterIds.size() == 0) {
-			preference.set(null);
-			return;
-		}
-		String filterId = filterIds.get(0);
-		StringBuilder filtersAsString = new StringBuilder(filterId);
-		for (int i = 1; i < filterIds.size(); i++) {
-			filterId = filterIds.get(i);
-			filtersAsString.append('|');
-			filtersAsString.append(filterId);
-		}
-		preference.set(filtersAsString.toString());
+		return application.getSettings().INACTIVE_POI_FILTERS.getStringsList();
 	}
 
 	private PoiFilterDbHelper openDbHelperNoPois() {
