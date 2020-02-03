@@ -188,6 +188,8 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			drawLocations(tileBox, canvas, topLatitude + lat, leftLongitude - lon, bottomLatitude - lat, rightLongitude + lon);
 
 			if (trackChartPoints != null) {
+				canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+
 				drawXAxisPoints(canvas, tileBox);
 				LatLon highlightedPoint = trackChartPoints.getHighlightedPoint();
 				if (highlightedPoint != null
@@ -203,6 +205,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 							(int) y + selectedPoint.getIntrinsicHeight() / 2);
 					selectedPoint.draw(canvas);
 				}
+				canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 			}
 		}
 	
