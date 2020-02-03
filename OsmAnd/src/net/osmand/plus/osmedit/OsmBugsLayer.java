@@ -450,6 +450,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		if (!Algorithms.isEmpty(text)) {
 			((EditText) view.findViewById(R.id.message_field)).setText(text);
 		}
+		view.findViewById(R.id.message_field).requestFocus();
 		AndroidUtils.softKeyboardDelayed(view.findViewById(R.id.message_field));
 
 		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
