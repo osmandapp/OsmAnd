@@ -44,6 +44,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
+import net.osmand.CallbackWithObject;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -76,6 +77,7 @@ import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.poi.RearrangePoiFiltersFragment;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
@@ -1222,6 +1224,23 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						filter.clearFilter();
 						QuickSearchCustomPoiFragment.showDialog(
 								QuickSearchDialogFragment.this, filter.getFilterId());
+					}
+				}));
+				rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_item_move,
+						app.getString(R.string.rearrange_categories), new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						RearrangePoiFiltersFragment.showInstance(QuickSearchDialogFragment.this, false, new CallbackWithObject<Boolean>() {
+
+							@Override
+							public boolean processResult(Boolean changed) {
+								if (changed) {
+									searchHelper.refreshFilterOrders();
+									reloadCategoriesInternal();
+								}
+								return false;
+							}
+						});
 					}
 				}));
 				if (categoriesSearchFragment != null) {
