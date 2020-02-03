@@ -539,8 +539,8 @@
     <string name="filter_current_poiButton">Filtr</string>
     <string name="edit_filter_save_as_menu_item">Zapisz jako</string>
     <string name="edit_filter_delete_dialog_title">Usunąć ten filtr\?</string>
-    <string name="edit_filter_delete_message">Usunięto filtr {0}</string>
-    <string name="edit_filter_create_message">Utworzono filtr {0}</string>
+    <string name="edit_filter_delete_message">Usunięto filtr %1$s</string>
+    <string name="edit_filter_create_message">Utworzono filtr %1$s</string>
     <string name="offline_navigation_not_available">Nawigacja offline w OsmAnd jest tymczasowo niedostępna.</string>
     <string name="left_side_navigation">Ruch lewostronny</string>
     <string name="left_side_navigation_descr">Dla krajów, w których jeździ się po lewej stronie ulicy.</string>

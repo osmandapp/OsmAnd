@@ -3273,8 +3273,8 @@
     <string name="filter_current_poiButton">Filter</string>
     <string name="edit_filter_save_as_menu_item">Save As</string>
     <string name="edit_filter_delete_dialog_title">Delete this filter?</string>
-    <string name="edit_filter_delete_message">\'{0}\' filter deleted</string>
-    <string name="edit_filter_create_message">\'{0}\' filter created</string>
+    <string name="edit_filter_delete_message">\'%1$s\' filter deleted</string>
+    <string name="edit_filter_create_message">\'%1$s\' filter created</string>
     <string name="email">e-mail</string>
     <string name="av_camera_focus">Camera focus type</string>
     <string name="av_camera_focus_descr">Camera focus mode:</string>

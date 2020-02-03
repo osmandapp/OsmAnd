@@ -479,8 +479,8 @@ POIの更新は利用できません</string>
     <string name="filter_current_poiButton">フィルタ</string>
     <string name="edit_filter_save_as_menu_item">名前をつけて保存</string>
     <string name="edit_filter_delete_dialog_title">選択したフィルタを削除しますか?</string>
-    <string name="edit_filter_delete_message">フィルタ \'{0}\' は削除されました</string>
-    <string name="edit_filter_create_message">フィルタ \'{0}\' が作成されました</string>
+    <string name="edit_filter_delete_message">フィルタ \'%1$s\' は削除されました</string>
+    <string name="edit_filter_create_message">フィルタ \'%1$s\' が作成されました</string>
     <string name="av_photo_play_sound_descr">写真撮影時でのシャッター音の有無を設定します。</string>
     <string name="base_world_map">世界地図(ワールドベースマップ)</string>
     <string name="map_magnifier">マップ表示倍率</string>

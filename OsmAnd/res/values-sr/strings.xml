@@ -2159,8 +2159,8 @@
     <string name="poi_dialog_other_tags_message">Све друге ознаке су очуване</string>
     <string name="default_buttons_commit">Предај</string>
     <string name="edit_filter_delete_dialog_title">Обриши овај филтер\?</string>
-    <string name="edit_filter_delete_message">Филтер \'{0}\' избрисан</string>
-    <string name="edit_filter_create_message">Филтер \'{0}\' направљен</string>
+    <string name="edit_filter_delete_message">Филтер \'%1$s\' избрисан</string>
+    <string name="edit_filter_create_message">Филтер \'%1$s\' направљен</string>
     <string name="av_camera_focus">Тип фокуса фотоапарата</string>
     <string name="av_camera_focus_hiperfocal">Хиперфокални фокус</string>
     <string name="av_camera_focus_edof">Продужена дубина поља (EDOF)</string>

@@ -626,8 +626,8 @@
     <string name="filter_current_poiButton">Filter</string>
     <string name="edit_filter_save_as_menu_item">Bewaar als</string>
     <string name="edit_filter_delete_dialog_title">Verwijder dit filter\?</string>
-    <string name="edit_filter_delete_message">Filter {0} verwijderd</string>
-    <string name="edit_filter_create_message">Filter {0} aangemaakt</string>
+    <string name="edit_filter_delete_message">Filter %1$s verwijderd</string>
+    <string name="edit_filter_create_message">Filter %1$s aangemaakt</string>
     <string name="offline_navigation_not_available">OsmAnd offline navigatie is tijdelijk niet beschikbaar.</string>
     <string name="left_side_navigation">Linksrijdend verkeer</string>
     <string name="left_side_navigation_descr">Activeer in een land waar men links rijdt.</string>

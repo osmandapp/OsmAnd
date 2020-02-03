@@ -1049,8 +1049,8 @@
     <string name="filter_current_poiButton">Iragazi</string>
     <string name="edit_filter_save_as_menu_item">Gorde Honela</string>
     <string name="edit_filter_delete_dialog_title">Ezabatu iragazki hau\?</string>
-    <string name="edit_filter_delete_message">\'{0}\' iragazkia ezabatu da</string>
-    <string name="edit_filter_create_message">\'{0}\' iragazkia sortu da</string>
+    <string name="edit_filter_delete_message">\'%1$s\' iragazkia ezabatu da</string>
+    <string name="edit_filter_create_message">\'%1$s\' iragazkia sortu da</string>
     <string name="email">e-mail</string>
     <string name="av_camera_focus">Kameraren fokatze modua</string>
     <string name="av_camera_focus_descr">Kameraren fokatze modua:</string>

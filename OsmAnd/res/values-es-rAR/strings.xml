@@ -1531,8 +1531,8 @@ Lon %2$s</string>
     <string name="filter_current_poiButton">Filtro</string>
     <string name="edit_filter_save_as_menu_item">Guardar como</string>
     <string name="edit_filter_delete_dialog_title">¿Borrar este filtro\?</string>
-    <string name="edit_filter_delete_message">Filtro «{0}» borrado</string>
-    <string name="edit_filter_create_message">Filtro «{0}» creado</string>
+    <string name="edit_filter_delete_message">Filtro «%1$s» borrado</string>
+    <string name="edit_filter_create_message">Filtro «%1$s» creado</string>
     <string name="email">correo electrónico</string>
     <string name="av_camera_focus">Método de enfoque</string>
     <string name="av_camera_focus_descr">Modo de enfoque de la cámara:</string>

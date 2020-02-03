@@ -841,8 +841,8 @@
   
   <string name="edit_filter_save_as_menu_item">Berg As</string>
   <string name="edit_filter_delete_dialog_title">Verwyder gekose filter?</string>
-  <string name="edit_filter_delete_message">Filter {0} is verwyder</string>
-  <string name="edit_filter_create_message">Filter {0} is geskep</string>
+  <string name="edit_filter_delete_message">Filter %1$s is verwyder</string>
+  <string name="edit_filter_create_message">Filter %1$s is geskep</string>
   
   <string name="continue_follow_previous_route_auto">Die vorige navigasie was onvoltooid. Wil jy dit nog volg? (%1$s sekondes)</string>
   

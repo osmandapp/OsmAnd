@@ -65,8 +65,8 @@
     <string name="wait_current_task_finished">Խնդրում ենք սպասել մինջև տվյալ պրոցեսը կվերջանա</string>
     <string name="distance_measurement_finish_subtrack">Սկսել նոր ենթաճանապարհ</string>
     <string name="osmand_distance_planning_plugin_name">Հեռավորության հաշվիչ և Պլանավորման Գործիք</string>
-    <string name="edit_filter_create_message">{0} Ֆիլտրը ստեղծված է</string>
-    <string name="edit_filter_delete_message">{0} Ֆիլտրը ջնջված է</string>
+    <string name="edit_filter_create_message">%1$s Ֆիլտրը ստեղծված է</string>
+    <string name="edit_filter_delete_message">%1$s Ֆիլտրը ջնջված է</string>
     <string name="edit_filter_delete_dialog_title">Ջնջե՞լ տվյալ ֆիլտրը?</string>
     <string name="edit_filter_save_as_menu_item">Հիշել որպես</string>
     <string name="poi_action_change">փոփոխություն</string>

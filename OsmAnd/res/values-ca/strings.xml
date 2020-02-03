@@ -147,7 +147,7 @@
     <string name="show_warnings_descr">Configureu els advertiments de trànsit (límits de velocitat, cues, bandes rugoses, túnels), avisos de radars i informació dels carrils.</string>
     <string name="osmand_parking_add_event">Afegeix un avís a Calendari</string>
     <string name="rendering_attr_noPolygons_description">Fes transparents totes les característiques d\'àrees de sòl al mapa.</string>
-    <string name="edit_filter_create_message">S\'ha creat el filtre \'{0}\'</string>
+    <string name="edit_filter_create_message">S\'ha creat el filtre \'%1$s\'</string>
     <string name="email">e-mail</string>
     <string name="index_settings_descr">Baixeu i gestioneu mapes fora de línia emmagatzemats al vostre dispositiu.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">És probable que es mostrin els mapes de vectors més de pressa. Això pot no funcionar en alguns dispositius.</string>
@@ -794,7 +794,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="save_track_to_gpx_descrp">Durant la navegació es desa automàticament una traça GPX a la carpeta de traces.</string>
     <string name="reload_tile">Torna a carregar la tessel·la</string>
     <string name="mark_point">Objectiu</string>
-    <string name="edit_filter_delete_message">El filtre \'{0}\' s\'ha eliminat</string>
+    <string name="edit_filter_delete_message">El filtre \'%1$s\' s\'ha eliminat</string>
     <string name="update_poi_success">Les dades dels PDI s\'han actualitzat (se n\'han carregat {0})</string>
     <string name="update_poi_error_loading">No s\'han pogut carregar les dades del servidor</string>
     <string name="update_poi_is_not_available_for_zoom">Acostar el zoom us permet actualitzar els PDIs</string>

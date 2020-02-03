@@ -1093,8 +1093,8 @@
 
     <string name="edit_filter_save_as_menu_item">Запиши като</string>
     <string name="edit_filter_delete_dialog_title">Изтриване на избрания филтър?</string>
-    <string name="edit_filter_delete_message">Филтърът {0} беше изтрит</string>
-    <string name="edit_filter_create_message">Филтърът {0} беше създаден</string>
+    <string name="edit_filter_delete_message">Филтърът %1$s беше изтрит</string>
+    <string name="edit_filter_create_message">Филтърът %1$s беше създаден</string>
 
     <string name="email">ел.поща</string>
     <string name="av_camera_focus">Фокус на вградената камера</string>

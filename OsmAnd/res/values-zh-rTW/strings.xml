@@ -834,8 +834,8 @@
     <string name="filter_current_poiButton">篩選</string>
     <string name="edit_filter_save_as_menu_item">另存</string>
     <string name="edit_filter_delete_dialog_title">刪除此過濾規則？</string>
-    <string name="edit_filter_delete_message">過濾規則「{0}」已被刪除</string>
-    <string name="edit_filter_create_message">過濾規則「{0}」已建立</string>
+    <string name="edit_filter_delete_message">過濾規則「%1$s」已被刪除</string>
+    <string name="edit_filter_create_message">過濾規則「%1$s」已建立</string>
     <string name="email">電子郵件</string>
     <string name="recording_context_menu_vrecord">拍攝視訊附註</string>
     <string name="intermediate_items_sort_by_distance">排序送貨到門</string>

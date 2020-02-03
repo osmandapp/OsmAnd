@@ -330,8 +330,9 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 			public void onClick(DialogInterface dialog, int which) {
 
 				if (app.getPoiFilters().removePoiFilter(filter)) {
-					Toast.makeText(getContext(), MessageFormat.format(getContext().getText(R.string.edit_filter_delete_message).toString(),
-							filter.getName()), Toast.LENGTH_SHORT).show();
+					Toast.makeText(getContext(),
+							getContext().getString(R.string.edit_filter_delete_message, filter.getName()),
+							Toast.LENGTH_SHORT).show();
 					app.getSearchUICore().refreshCustomPoiFilters();
 					QuickSearchDialogFragment quickSearchDialogFragment = (QuickSearchDialogFragment) getParentFragment();
 					quickSearchDialogFragment.reloadCategories();

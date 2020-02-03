@@ -698,8 +698,8 @@
     <string name="filter_current_poiButton">Filter</string>
     <string name="edit_filter_save_as_menu_item">Uložiť ako</string>
     <string name="edit_filter_delete_dialog_title">Vymazať vybraný filter?</string>
-    <string name="edit_filter_delete_message">Filter {0} bol zmazaný</string>
-    <string name="edit_filter_create_message">Filter {0} bol vytvorený</string>
+    <string name="edit_filter_delete_message">Filter %1$s bol zmazaný</string>
+    <string name="edit_filter_create_message">Filter %1$s bol vytvorený</string>
     <string name="unknown_from_location">Štartovací bod nebol zatiaľ zistený</string>
     <string name="confirm_interrupt_download">Zrušiť sťahovanie súboru?</string>
     <string name="basemap_was_selected_to_download">Základná bola vybratá na stiahnutie, aby mohla aplikácia fungovať.</string>

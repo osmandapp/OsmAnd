@@ -742,8 +742,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					nFilter.setSavedFilterByName(filter.getFilterByName());
 				}
 				if (app.getPoiFilters().createPoiFilter(nFilter, false)) {
-					Toast.makeText(getContext(), MessageFormat.format(getContext().getText(R.string.edit_filter_create_message).toString(),
-							editText.getText().toString()), Toast.LENGTH_SHORT).show();
+					Toast.makeText(getContext(),
+							getContext().getString(R.string.edit_filter_create_message, editText.getText().toString()),
+							Toast.LENGTH_SHORT).show();
 					app.getSearchUICore().refreshCustomPoiFilters();
 					replaceQueryWithUiFilter(nFilter, "");
 					reloadCategories();

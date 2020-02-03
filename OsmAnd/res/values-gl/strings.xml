@@ -1324,8 +1324,8 @@
     <string name="filter_current_poiButton">Filtro</string>
     <string name="edit_filter_save_as_menu_item">Gardar coma</string>
     <string name="edit_filter_delete_dialog_title">Eliminar este filtro\?</string>
-    <string name="edit_filter_delete_message">Filtro \'{0}\' eliminado</string>
-    <string name="edit_filter_create_message">Filtro \'{0}\' creado</string>
+    <string name="edit_filter_delete_message">Filtro \'%1$s\' eliminado</string>
+    <string name="edit_filter_create_message">Filtro \'%1$s\' creado</string>
     <string name="email">correo electrónico</string>
     <string name="av_camera_focus">Tipo de enfoque da cámara</string>
     <string name="av_camera_focus_descr">Modo de enfoque da cámara:</string>

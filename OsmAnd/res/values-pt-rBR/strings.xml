@@ -1526,8 +1526,8 @@ Pôr do Sol: %2$s</string>
     <string name="filter_current_poiButton">Filtro</string>
     <string name="edit_filter_save_as_menu_item">Salvar como</string>
     <string name="edit_filter_delete_dialog_title">Apagar este filtro\?</string>
-    <string name="edit_filter_delete_message">Filtro {0} foi excluído</string>
-    <string name="edit_filter_create_message">Filtro {0} foi criado</string>
+    <string name="edit_filter_delete_message">Filtro %1$s foi excluído</string>
+    <string name="edit_filter_create_message">Filtro %1$s foi criado</string>
     <string name="email">e-mail</string>
     <string name="av_camera_focus">Tipo de foco da câmera</string>
     <string name="av_camera_focus_descr">Modo de foco da câmera:</string>

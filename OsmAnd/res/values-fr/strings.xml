@@ -583,8 +583,8 @@
     <string name="filter_current_poiButton">Filtre</string>
     <string name="edit_filter_save_as_menu_item">Enregistrer sous</string>
     <string name="edit_filter_delete_dialog_title">Supprimer ce filtre \?</string>
-    <string name="edit_filter_delete_message">Le filtre \'{0}\' a été supprimé</string>
-    <string name="edit_filter_create_message">Le filtre \'{0}\' a été créé</string>
+    <string name="edit_filter_delete_message">Le filtre \'%1$s\' a été supprimé</string>
+    <string name="edit_filter_create_message">Le filtre \'%1$s\' a été créé</string>
     <string name="offline_navigation_not_available">Navigation hors-ligne temporairement indisponible.</string>
     <string name="left_side_navigation">Conduite à gauche</string>
     <string name="left_side_navigation_descr">Pour les pays où la circulation s\'effectue sur la partie gauche de la route.</string>

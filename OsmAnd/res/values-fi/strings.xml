@@ -479,8 +479,8 @@
     <string name="poi_filter_closest_poi">Lähimmät KP:t</string>
     <string name="filter_current_poiButton">Suodatin</string>
     <string name="edit_filter_delete_dialog_title">Poista valittu suodatin?</string>
-    <string name="edit_filter_delete_message">Poistettu suodatin {0}</string>
-    <string name="edit_filter_create_message">Luotu suodatin {0}</string>
+    <string name="edit_filter_delete_message">Poistettu suodatin %1$s</string>
+    <string name="edit_filter_create_message">Luotu suodatin %1$s</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorikartat näkyvät mahdollisesti nopeammin. Ei välttämättä toimi kaikilla laitteilla.</string>
     <string name="debugging_and_development">OsmAnd kehitys</string>
     <string name="native_rendering">Natiivi renderöinti</string>

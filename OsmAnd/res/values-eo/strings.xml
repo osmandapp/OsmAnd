@@ -1836,8 +1836,8 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="filter_current_poiButton">Filtrilo</string>
     <string name="edit_filter_save_as_menu_item">Konservi kiel</string>
     <string name="edit_filter_delete_dialog_title">Ĉu forigi tiun ĉi filtrilon\?</string>
-    <string name="edit_filter_delete_message">Forigis filtrilon “{0}”</string>
-    <string name="edit_filter_create_message">Kreis filtrilon “{0}”</string>
+    <string name="edit_filter_delete_message">Forigis filtrilon “%1$s”</string>
+    <string name="edit_filter_create_message">Kreis filtrilon “%1$s”</string>
     <string name="email">retpoŝto</string>
     <string name="av_camera_focus">Speco de fotila fokuso</string>
     <string name="av_camera_focus_descr">Fokuso de fotilo:</string>

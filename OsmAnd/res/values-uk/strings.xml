@@ -696,8 +696,8 @@
     <string name="filter_current_poiButton">Фільтр</string>
     <string name="edit_filter_save_as_menu_item">Зберегти як</string>
     <string name="edit_filter_delete_dialog_title">Видалити вибраний фільтр?</string>
-    <string name="edit_filter_delete_message">Фільтр {0} видалено</string>
-    <string name="edit_filter_create_message">Фільтр {0} створений</string>
+    <string name="edit_filter_delete_message">Фільтр %1$s видалено</string>
+    <string name="edit_filter_create_message">Фільтр %1$s створений</string>
     <string name="gpxup_public">Публічний</string>
     <string name="gpxup_identifiable">Ідентифікований</string>
     <string name="gpxup_trackable">Відстежуваний</string>

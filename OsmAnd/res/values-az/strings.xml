@@ -686,8 +686,8 @@
     <string name="poi_dialog_reopen">Yenidən aç</string>
     <string name="filter_current_poiButton">Filtr</string>
     <string name="edit_filter_delete_dialog_title">Seçilən filtr silinsin?</string>
-    <string name="edit_filter_delete_message">{0} filtri silindi</string>
-    <string name="edit_filter_create_message">{0} filtri yaradıldı</string>
+    <string name="edit_filter_delete_message">%1$s filtri silindi</string>
+    <string name="edit_filter_create_message">%1$s filtri yaradıldı</string>
     <string name="email">e-poçt</string>
     <string name="get_plugin">Əldə et</string>
     <string name="do_you_like_osmand">OsmAnd-ı bəyəndiniz?</string>
