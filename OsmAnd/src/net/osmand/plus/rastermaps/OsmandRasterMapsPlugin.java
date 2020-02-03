@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
@@ -491,6 +492,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		View view = UiUtilities.getInflater(activity, isNightMode(activity, app)).inflate(R.layout.editing_tile_source, null);
 		final EditText name = (EditText) view.findViewById(R.id.Name);
 		final Spinner existing = (Spinner) view.findViewById(R.id.TileSourceSpinner);
+		final TextView existingHint = (TextView) view.findViewById(R.id.TileSourceHint);
 		final EditText urlToLoad = (EditText) view.findViewById(R.id.URLToLoad);
 		final EditText minZoom = (EditText) view.findViewById(R.id.MinZoom);
 		final EditText maxZoom = (EditText) view.findViewById(R.id.MaxZoom);
@@ -510,12 +512,18 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		existing.setAdapter(adapter);
-		int position = 0;
 		if (editedLayerName != null) {
-			position = adapter.getPosition(editedLayerName);
-			existing.setEnabled(false);
+			File f = ((OsmandApplication) activity.getApplication()).getAppPath(
+					IndexConstants.TILES_INDEX_DIR + templates.get(adapter.getPosition(editedLayerName)));
+			TileSourceTemplate template = TileSourceManager.createTileSourceTemplate(f);
+			if (template != null) {
+				result[0] = template.copy();
+				updateTileSourceEditView(result[0], name, urlToLoad, minZoom, maxZoom, expire, elliptic);
+			}
+			existingHint.setVisibility(View.GONE);
+			existing.setVisibility(View.GONE);
 		}
-		existing.setSelection(position);
+		existing.setSelection(0);
 		existing.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
