@@ -926,8 +926,8 @@
     <string name="shared_string_clear">Temizle</string>
     <string name="filter_current_poiButton">Filtrele</string>
     <string name="edit_filter_delete_dialog_title">Bu filtreyi sil\?</string>
-    <string name="edit_filter_delete_message">\'{0}\' filtresi silindi</string>
-    <string name="edit_filter_create_message">\'{0}\' filtresi oluşturuldu</string>
+    <string name="edit_filter_delete_message">\'%1$s\' filtresi silindi</string>
+    <string name="edit_filter_create_message">\'%1$s\' filtresi oluşturuldu</string>
     <string name="av_camera_focus">Kamera odaklama tipi</string>
     <string name="av_camera_focus_descr">Kamera odak modu:</string>
     <string name="av_camera_focus_auto">Otomatik odaklama</string>

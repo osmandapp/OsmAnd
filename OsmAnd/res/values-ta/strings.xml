@@ -1203,8 +1203,8 @@
     <string name="filter_current_poiButton">வடிகட்டி</string>
     <string name="edit_filter_save_as_menu_item">சேமி</string>
     <string name="edit_filter_delete_dialog_title">தேர்ந்தெடுக்கப்பட்ட வடிப்பான் நீக்கவா\?</string>
-    <string name="edit_filter_delete_message">வடிகட்டி {0} நீக்கப்பட்டது</string>
-    <string name="edit_filter_create_message">வடிகட்டி {0} உருவாக்கப்பட்டது</string>
+    <string name="edit_filter_delete_message">வடிகட்டி %1$s நீக்கப்பட்டது</string>
+    <string name="edit_filter_create_message">வடிகட்டி %1$s உருவாக்கப்பட்டது</string>
     <string name="email">மின்னஞ்சல்</string>
     <string name="av_camera_focus">கேமரா கவனம் வகை</string>
     <string name="av_camera_focus_descr">உள் கேமரா மையப் பயன்முறையைத் தேர்ந்தெடுக்கவும்.</string>

@@ -834,8 +834,8 @@
     <string name="filter_current_poiButton">篩選</string>
     <string name="edit_filter_save_as_menu_item">另存</string>
     <string name="edit_filter_delete_dialog_title">刪除此過濾規則？</string>
-    <string name="edit_filter_delete_message">過濾規則「{0}」已被刪除</string>
-    <string name="edit_filter_create_message">過濾規則「{0}」已建立</string>
+    <string name="edit_filter_delete_message">過濾規則「%1$s」已被刪除</string>
+    <string name="edit_filter_create_message">過濾規則「%1$s」已建立</string>
     <string name="email">電子郵件</string>
     <string name="recording_context_menu_vrecord">拍攝視訊附註</string>
     <string name="intermediate_items_sort_by_distance">排序送貨到門</string>
@@ -1391,7 +1391,7 @@
     <string name="rendering_attr_pisteRoutes_name">滑雪斜坡</string>
     <string name="roads_only">僅道路</string>
     <string name="watch">觀看</string>
-    <string name="notes">OSM 註記</string>
+    <string name="notes">音訊與視訊註記</string>
     <string name="online_map">線上地圖</string>
     <string name="share_note">分享註解</string>
     <string name="plugin_touringview_name">旅遊地圖檢視</string>

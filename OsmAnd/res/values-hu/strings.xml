@@ -650,8 +650,8 @@
     <string name="filter_current_poiButton">Szűrő</string>
     <string name="edit_filter_save_as_menu_item">Mentés más néven</string>
     <string name="edit_filter_delete_dialog_title">Törli ezt a szűrőt\?</string>
-    <string name="edit_filter_delete_message">{0} szűrő törölve</string>
-    <string name="edit_filter_create_message">{0} szűrő létrehozva</string>
+    <string name="edit_filter_delete_message">%1$s szűrő törölve</string>
+    <string name="edit_filter_create_message">%1$s szűrő létrehozva</string>
     <string name="offline_navigation_not_available">Az OsmAnd offline navigációja átmenetileg nem elérhető.</string>
     <string name="left_side_navigation">Bal oldali közlekedés</string>
     <string name="left_side_navigation_descr">Azon országok számára, ahol a járművek az út bal oldalán haladnak.</string>

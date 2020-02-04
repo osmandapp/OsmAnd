@@ -1051,6 +1051,31 @@ public class OsmandSettings {
 			}
 			return false;
 		}
+
+		public List<String> getStringsList() {
+			final String listAsString = get();
+			if (listAsString != null) {
+				if (listAsString.contains(delimiter)) {
+					return Arrays.asList(listAsString.split(delimiter));
+				} else {
+					return new ArrayList<String>() {
+						{add(listAsString);}
+					};
+				}
+			}
+			return null;
+		}
+
+		public void setStringsList(List<String> values) {
+			if (values == null || values.size() == 0) {
+				set(null);
+				return;
+			}
+			clearAll();
+			for (String value : values) {
+				addValue(value);
+			}
+		}
 	}
 
 	public class EnumIntPreference<E extends Enum<E>> extends CommonPreference<E> {
@@ -3160,6 +3185,12 @@ public class OsmandSettings {
 	public void setSelectedPoiFilters(final Set<String> poiFilters) {
 		SELECTED_POI_FILTER_FOR_MAP.set(android.text.TextUtils.join(",", poiFilters));
 	}
+	
+	public final ListStringPreference POI_FILTERS_ORDER = (ListStringPreference)
+			new ListStringPreference("poi_filters_order", null, ",,").makeProfile().cache();
+	
+	public final ListStringPreference INACTIVE_POI_FILTERS = (ListStringPreference)
+			new ListStringPreference("inactive_poi_filters", null, ",,").makeProfile().cache();
 
 	public static final String VOICE_PROVIDER_NOT_USE = "VOICE_PROVIDER_NOT_USE";
 

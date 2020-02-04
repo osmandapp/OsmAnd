@@ -1055,8 +1055,8 @@
     <string name="filter_current_poiButton">Фільтраваць</string>
     <string name="edit_filter_save_as_menu_item">Захаваць як</string>
     <string name="edit_filter_delete_dialog_title">Выдаліць абраны фільтр?</string>
-    <string name="edit_filter_delete_message">Фільтр {0} быў выдалены</string>
-    <string name="edit_filter_create_message">Фільтр {0} быў створаны</string>
+    <string name="edit_filter_delete_message">Фільтр %1$s быў выдалены</string>
+    <string name="edit_filter_create_message">Фільтр %1$s быў створаны</string>
     <string name="email">e-mail</string>
     <string name="av_camera_focus">Тып факусавання камеры</string>
     <string name="av_camera_focus_descr">Абярыце тып фокусу ўбудаванай камеры.</string>

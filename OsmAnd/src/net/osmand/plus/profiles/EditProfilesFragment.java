@@ -64,7 +64,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 		}
 		nightMode = !app.getSettings().isLightContent();
 
-		View mainView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.edit_profiles_list_fragment, container, false);
+		View mainView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.edit_arrangement_list_fragment, container, false);
 		ImageButton closeButton = mainView.findViewById(R.id.close_button);
 		closeButton.setImageResource(R.drawable.ic_action_remove_dark);
 		closeButton.setOnClickListener(new View.OnClickListener() {

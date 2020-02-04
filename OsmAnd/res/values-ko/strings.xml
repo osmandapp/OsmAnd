@@ -579,8 +579,8 @@
     <string name="filter_current_poiButton">필터</string>
     <string name="edit_filter_save_as_menu_item">다른이름으로 저장</string>
     <string name="edit_filter_delete_dialog_title">선택된 필터를 삭제할까요?</string>
-    <string name="edit_filter_delete_message">필터 {0} 가 삭제되었습니다</string>
-    <string name="edit_filter_create_message">필터 {0} 가 생성되었습니다</string>
+    <string name="edit_filter_delete_message">필터 %1$s 가 삭제되었습니다</string>
+    <string name="edit_filter_create_message">필터 %1$s 가 생성되었습니다</string>
     <string name="index_item_nation_addresses">전국 주소</string>
     <string name="index_item_world_altitude_correction">세계 고도 보정</string>
     <string name="index_item_world_seamarks">세계 seamarks</string>

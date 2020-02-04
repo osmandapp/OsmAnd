@@ -512,8 +512,8 @@
     <string name="filter_current_poiButton">Filter</string>
     <string name="edit_filter_save_as_menu_item">Lagre som</string>
     <string name="edit_filter_delete_dialog_title">Slett dette filteret\?</string>
-    <string name="edit_filter_delete_message">\"{0}\"-filter slettet</string>
-    <string name="edit_filter_create_message">{0}-filter opprettet</string>
+    <string name="edit_filter_delete_message">\"%1$s\"-filter slettet</string>
+    <string name="edit_filter_create_message">%1$s-filter opprettet</string>
     <string name="email">e-post</string>
     <string name="map_widget_gps_info">GPS-info</string>
     <string name="access_arrival_time">Ankomsttid</string>

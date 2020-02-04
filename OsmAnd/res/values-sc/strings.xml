@@ -1285,8 +1285,8 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="default_buttons_commit">Imbia</string>
     <string name="shared_string_clear">Iscantzella</string>
     <string name="edit_filter_delete_dialog_title">Iscantzellare custu filtru\?</string>
-    <string name="edit_filter_delete_message">Su filtru {0} est istadu iscantzelladu</string>
-    <string name="edit_filter_create_message">Su filtru {0} est istadu creadu</string>
+    <string name="edit_filter_delete_message">Su filtru %1$s est istadu iscantzelladu</string>
+    <string name="edit_filter_create_message">Su filtru %1$s est istadu creadu</string>
     <string name="email">post.el.</string>
     <string name="av_camera_focus">Tipu de messa a fogu</string>
     <string name="av_camera_focus_descr">Modalidade de ponidura a fogu de sa fotocàmera integrada:</string>
@@ -3185,7 +3185,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="rendering_attr_winter_road_name">Caminu ierrile</string>
     <string name="rendering_attr_ice_road_name">Caminu de astra</string>
     <string name="routeInfo_winter_ice_road_name">Caminos ierriles e de astra</string>
-    <string name="rendering_attr_tracktype_grade1_name">Sòlidu (pamentadu)</string>
+    <string name="rendering_attr_tracktype_grade1_name">Sòlidu (apamentadu)</string>
     <string name="rendering_attr_tracktype_grade2_name">Sòlidu (chene pamentu)</string>
     <string name="rendering_attr_tracktype_grade3_name">Printzipalmente sòlidu</string>
     <string name="rendering_attr_tracktype_grade4_name">Printzipalmente modde</string>

@@ -276,10 +276,7 @@ public class MapActivityLayers {
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter();
 		final List<PoiUIFilter> list = new ArrayList<>();
-		for (PoiUIFilter f : poiFilters.getTopDefinedPoiFilters()) {
-			addFilterToList(adapter, list, f, true);
-		}
-		for (PoiUIFilter f : poiFilters.getSearchPoiFilters()) {
+		for (PoiUIFilter f : poiFilters.getSortedPoiFilters(true)) {
 			addFilterToList(adapter, list, f, true);
 		}
 		list.add(poiFilters.getCustomPOIFilter());
@@ -357,10 +354,7 @@ public class MapActivityLayers {
 				.setIcon(R.drawable.ic_action_search_dark).createItem());
 		final List<PoiUIFilter> list = new ArrayList<>();
 		list.add(poiFilters.getCustomPOIFilter());
-		for (PoiUIFilter f : poiFilters.getTopDefinedPoiFilters()) {
-			addFilterToList(adapter, list, f, false);
-		}
-		for (PoiUIFilter f : poiFilters.getSearchPoiFilters()) {
+		for (PoiUIFilter f : poiFilters.getSortedPoiFilters(true)) {
 			addFilterToList(adapter, list, f, false);
 		}
 
@@ -528,7 +522,7 @@ public class MapActivityLayers {
 										return false;
 									}
 
-								});
+								}, null);
 								break;
 							case layerInstallMore:
 								OsmandRasterMapsPlugin.installMapLayers(activity, new ResultMatcher<TileSourceTemplate>() {

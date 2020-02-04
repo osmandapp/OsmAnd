@@ -800,8 +800,8 @@
     <string name="poi_error_info_not_loaded">节点的信息未能加载</string>
     <string name="poi_dialog_other_tags_message">所有其他标记都已保留</string>
     <string name="edit_filter_delete_dialog_title">是否删除选中的过滤器？</string>
-    <string name="edit_filter_delete_message">过滤器 {0} 已被删除</string>
-    <string name="edit_filter_create_message">过滤器 {0} 已创建</string>
+    <string name="edit_filter_delete_message">过滤器 %1$s 已被删除</string>
+    <string name="edit_filter_create_message">过滤器 %1$s 已创建</string>
     <string name="av_camera_focus_auto">自动聚焦</string>
     <string name="clear_intermediate_points">清除中途点</string>
     <string name="keep_intermediate_points">保持中途点</string>
