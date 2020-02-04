@@ -2,7 +2,6 @@ package net.osmand.plus.activities;
 
 
 import android.content.Context;
-import android.os.Build;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 
@@ -75,9 +74,8 @@ public class LocalIndexHelper {
 				return;
 			}
 			String descr = "";
-			descr += app.getString(R.string.local_index_tile_data_name, template.getName());
 			if (template.getExpirationTimeMinutes() >= 0) {
-				descr += "\n" + app.getString(R.string.local_index_tile_data_expire, template.getExpirationTimeMinutes());
+				descr += app.getString(R.string.local_index_tile_data_expire, String.valueOf(template.getExpirationTimeMinutes()));
 			}
 			info.setAttachedObject(template);
 			info.setDescription(descr);
