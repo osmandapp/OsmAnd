@@ -6,7 +6,7 @@
 
 	<Preference
 		android:key="osm_editing_info"
-		android:layout="@layout/preference_with_descr"
+		android:layout="@layout/preference_info"
 		android:persistent="false"
 		android:selectable="false"
 		android:title="@string/plugin_global_prefs_info"
@@ -21,12 +21,12 @@
 		tools:summary="@string/open_street_map_login_descr" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:icon="@drawable/ic_action_offline"
 		android:key="offline_osm_editing"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/offline_edition" />
+		android:title="@string/offline_edition"
+		tools:icon="@drawable/ic_action_offline" />
 
 	<Preference
 		android:layout="@layout/simple_divider_item"

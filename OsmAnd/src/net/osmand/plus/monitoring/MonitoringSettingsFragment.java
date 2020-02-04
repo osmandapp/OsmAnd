@@ -29,7 +29,6 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-import static net.osmand.plus.OsmandSettings.DAILY_DIRECTORY;
 import static net.osmand.plus.OsmandSettings.MONTHLY_DIRECTORY;
 import static net.osmand.plus.OsmandSettings.REC_DIRECTORY;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.MINUTES;
@@ -195,11 +194,11 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	}
 
 	private void setupTrackStorageDirectoryPref() {
-		Integer[] entryValues = new Integer[] {REC_DIRECTORY, MONTHLY_DIRECTORY, DAILY_DIRECTORY};
+		Integer[] entryValues = new Integer[] {REC_DIRECTORY, MONTHLY_DIRECTORY};
 		String[] entries = new String[entryValues.length];
 		entries[0] = getString(R.string.store_tracks_in_rec_directory);
 		entries[1] = getString(R.string.store_tracks_in_monthly_directories);
-		entries[2] = getString(R.string.store_tracks_in_daily_directories);
+//		entries[2] = getString(R.string.store_tracks_in_daily_directories);
 
 		ListPreferenceEx trackStorageDirectory = (ListPreferenceEx) findPreference(settings.TRACK_STORAGE_DIRECTORY.getId());
 		trackStorageDirectory.setEntries(entries);

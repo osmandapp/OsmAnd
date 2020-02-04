@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="accessibility_mode_disabled">Accessibility mode disabled in your system.</string>
     <string name="rearrange_categories">Rearrange categories</string>
     <string name="create_custom_categories_list_promo">You can add custom categories hide categories that you don’t find necessary and change the sort order of the list. The list can be imported and exported with profiles.</string>
     <string name="add_new_custom_category_button_promo">You can add a new custom category by selecting one or a few needed categories.</string>

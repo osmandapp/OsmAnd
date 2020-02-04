@@ -2,8 +2,10 @@ package net.osmand.plus.osmedit;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,12 +23,13 @@ import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 public class OsmEditingFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
+	private static final String OSM_EDITING_INFO = "osm_editing_info";
 	private static final String OPEN_OSM_EDITS = "open_osm_edits";
 	private static final String OSM_LOGIN_DATA = "osm_login_data";
 
 	@Override
 	protected void setupPreferences() {
-		Preference osmEditingInfo = findPreference("osm_editing_info");
+		Preference osmEditingInfo = findPreference(OSM_EDITING_INFO);
 		osmEditingInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 
 		setupNameAndPasswordPref();
@@ -44,6 +47,15 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 		AndroidUiHelper.updateVisibility(toolbarSubtitle, true);
 	}
 
+	@Override
+	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+		super.onBindPreferenceViewHolder(preference, holder);
+		if (OSM_EDITING_INFO.equals(preference.getKey())) {
+			TextView titleView = (TextView) holder.findViewById(android.R.id.title);
+			titleView.setTextSize(16);
+		}
+	}
+
 	private void setupNameAndPasswordPref() {
 		Preference nameAndPasswordPref = findPreference(OSM_LOGIN_DATA);
 		nameAndPasswordPref.setSummary(settings.USER_NAME.get());
@@ -53,6 +65,11 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	private void setupOfflineEditingPref() {
 		SwitchPreferenceEx offlineEditingPref = (SwitchPreferenceEx) findPreference(settings.OFFLINE_EDITION.getId());
 		offlineEditingPref.setDescription(getString(R.string.offline_edition_descr));
+		offlineEditingPref.setIcon(getOfflineEditingIcon(settings.OFFLINE_EDITION.get()));
+	}
+
+	private Drawable getOfflineEditingIcon(boolean enabled) {
+		return enabled ? getActiveIcon(R.drawable.ic_world_globe_dark) : getContentIcon(R.drawable.ic_action_offline);
 	}
 
 	private void setupOsmEditsDescrPref() {
@@ -90,6 +107,14 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 			}
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public boolean onPreferenceChange(Preference preference, Object newValue) {
+		if (settings.OFFLINE_EDITION.getId().equals(preference.getKey()) && newValue instanceof Boolean) {
+			preference.setIcon(getOfflineEditingIcon((Boolean) newValue));
+		}
+		return super.onPreferenceChange(preference, newValue);
 	}
 
 	@Override

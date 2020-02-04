@@ -17,6 +17,7 @@ public abstract class BasePreferenceBottomSheet extends MenuBottomSheetDialogFra
 
 	public static final String PREFERENCE_ID = "preference_id";
 	private static final String APP_MODE_KEY = "app_mode_key";
+	private static final String PROFILE_DEPENDENT = "profile_dependent";
 
 	private String prefId;
 	private Preference preference;
@@ -36,12 +37,14 @@ public abstract class BasePreferenceBottomSheet extends MenuBottomSheetDialogFra
 		super.onCreate(savedInstanceState);
 		if (savedInstanceState != null) {
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
+			profileDependent = savedInstanceState.getBoolean(PROFILE_DEPENDENT, false);
 		}
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
+		outState.putBoolean(PROFILE_DEPENDENT, profileDependent);
 		if (appMode != null) {
 			outState.putString(APP_MODE_KEY, appMode.getStringKey());
 		}

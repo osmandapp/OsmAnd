@@ -8,7 +8,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -47,6 +49,13 @@ public class EditTextPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		View view = UiUtilities.getInflater(ctx, nightMode).inflate(R.layout.preference_edit_text_box, null);
 		editText = view.findViewById(R.id.edit_text);
 		editText.setText(text);
+
+		RelativeLayout editTextLayout = view.findViewById(R.id.text_field_boxes_editTextLayout);
+		if (editTextLayout != null && editTextLayout.getLayoutParams() instanceof RelativeLayout.LayoutParams) {
+			RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) editTextLayout.getLayoutParams();
+			params.setMargins(params.leftMargin, AndroidUtils.dpToPx(ctx, 19), params.rightMargin, params.bottomMargin);
+		}
+
 		items.add(new SimpleBottomSheetItem.Builder().setCustomView(view).create());
 
 		String description = editTextPreference.getDescription();
