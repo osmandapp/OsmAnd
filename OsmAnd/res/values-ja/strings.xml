@@ -1054,7 +1054,7 @@ POIの更新は利用できません</string>
     <string name="map_widget_map_rendering">マップ描画に関する設定</string>
     <string name="app_mode_hiking">ハイキング</string>
     <string name="app_mode_motorcycle">オートバイ</string>
-    <string name="app_mode_boat">ボート</string>
+    <string name="app_mode_boat">船舶・舟艇</string>
     <string name="app_mode_aircraft">航空機</string>
     <string name="local_osm_changes_delete_all_confirm">OSMに関する%1$d個の変更を削除してもよろしいですか？</string>
     <string name="shared_string_delete_all">すべて削除</string>
@@ -3200,7 +3200,7 @@ POIの更新は利用できません</string>
     <string name="routing_attr_difficulty_preference_name">難易度指定</string>
     <string name="routing_attr_difficulty_preference_description">ここで選択した難易度をベースにルート検索をしますが、短い距離ならば難しいゲレンデや簡単なゲレンデへのルーティングも可能です。</string>
     <string name="routing_attr_freeride_policy_name">ゲレンデ外</string>
-    <string name="routing_attr_freeride_policy_description">フリーライドやゲレンデ外は非公式のルートです。通常は手入れされていないうえ、職員によってメンテナンスされておらずクローズ時間にもチェックされません。禁止されている場所には決して入らず自己責任で利用してください。</string>
+    <string name="routing_attr_freeride_policy_description">\'フリーライド\'や\'ゲレンデ外\'は非公式のルートです。通常は手入れされていないうえ、職員によってメンテナンスされておらずクローズ時間にもチェックされません。マップデータは自己責任で利用し、禁止されている場所には決して入らないでください。</string>
     <string name="routeInfo_roadClass_name">道路種別</string>
     <string name="configure_profile_info">設定プロファイル:</string>
     <string name="utm_format_descr">OsmAndは座標形式の一つとしてUTM標準形式を使用します。これはUTM NATO形式と似ていますが異なるものなのでご注意ください。</string>
@@ -3416,4 +3416,27 @@ POIの更新は利用できません</string>
     <string name="choose_icon_color_name">アイコン、色、名前を選択してください</string>
     <string name="reorder_profiles">プロファイルリストの編集</string>
     <string name="selected_profile">選択されたプロファイル</string>
+    <string name="file_does_not_contain_routing_rules">\'%1$s\'にはルーティングルールがありません。別のファイルを選択してください。</string>
+    <string name="not_support_file_type_with_ext">対応している拡張ファイル%1$sを選択してください。</string>
+    <string name="logcat_buffer_descr">アプリケーションの詳細なログを共有し確認しあえるようにします</string>
+    <string name="permission_is_required">このオプションを使用するには許可が必要です。</string>
+    <string name="monitoring_min_speed_descr">これは一定速度以下のポイントを記録しないように使う低速カットオフフィルターです。これを使うことで記録経路が地図上で滑らかに見える場合があります。</string>
+    <string name="monitoring_min_speed_descr_side_effect">副作用：最低速度の基準を満たさない(自転車で急な坂を登るなどの)想定はどの移動手段でもなされません。また休憩による一時停止などに関する情報も記録されません。その結果、旅程の合計時間や移動時間、または平均速度を決定しようとするときなど分析や後処理に影響を及ぼします。</string>
+    <string name="monitoring_min_speed_descr_recommendation">推奨方法：最初はモーション検出をロギング最小変位フィルター(B)で使用してみてください。最良ではなくても良い結果になる可能性が高くデータの損失も少なくなります。低速でも経路のノイズが多い場合は0以外の値を試してください。測定方法(一部のネットワークベースの方法など)によっては速度値がまったく報告されない場合があります。その場合何も記録されません。</string>
+    <string name="monitoring_min_speed_descr_remark">※注：速度&gt;0 に関して：大抵のGPS機能はアルゴリズムにて移動中と判断した場合にのみ速度値を返し、移動していない場合はとくに何も返しません。したがってこの&gt;0フィルターを使用すると、移動速度は0以上と判定されGPSによる移動検出がなされます。ただ記録時にフィルタリングしなくても、GPX解析時には距離補正がなされます。よって結果的にフィールドに表示される値は、移動中に記録された距離となります。</string>
+    <string name="monitoring_min_accuracy_descr">これにより最小精度(単位:メートル/フィート、Android端末の場合使用しているチップセットに依存)で測定された点のみが記録されます。この場合の精度は繰り返し測定された場合のばらつき度合いを示し、測定値が実際の位置にどれだけ近いかを定義する精度とは意味が異なります。</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">副作用：精度によるフィルタリングの結果、橋の下、木々の下、高層ビルの間、または特定の気象条件にて位置情報が欠落する場合があります。</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">推奨方法：何が記録され何が記録されないかを予測するのは難しいため、通常はフィルターをオフにするのが最善です。</string>
+    <string name="monitoring_min_accuracy_descr_remark">注：記録の直前にGPSがオフになっていた場合、測定された初期地点の精度が低下する可能性があるため、地点を記録する前に2秒ほど待つ(あるいは3つの連続した地点の最良値を記録するなど)のコードを組む予定ですが、現段階ではまだ実装されていません。</string>
+    <string name="monitoring_min_distance_descr">このフィルターは実際の動きが少なすぎる可能性がある場所での地点の重複記録を防ぎ、後処理(手動補正)予定のない経路の見た目を改善します。</string>
+    <string name="monitoring_min_distance_descr_side_effect">副作用：休憩の間あるいは一ヶ所にとどまっている間は記録されません。(現実世界での)小さな動き(たとえば旅程中の寄り道)は除外される可能性があります。ファイルには後処理で補正するための情報が少なく、記録時に明らかに冗長なポイントを除外すると、受信不良状態やGPSチップセットの影響に起因する悪要素も取り込んでしまうため、統計値などが悪化します。</string>
+    <string name="monitoring_min_distance_descr_recommendation">推奨方法：5メートル程度の設定ならば現実的にそれより細かいデータを取得する必要がなく、休憩中などデータを意図的に取得したくない場合にも適しています。</string>
+    <string name="live_monitoring_time_buffer">タイムバッファ</string>
+    <string name="live_monitoring_tracking_interval">追跡間隔</string>
+    <string name="live_monitoring_adress">ウェブアドレス</string>
+    <string name="live_monitoring_adress_descr">指定したWebアドレスに経路データを送信します／使えるパラメータ:緯度={0}、経度={1}、タイムスタンプ={2}、HDOP={3}、標高={4}、速度={5}、ベアリング={6}</string>
+    <string name="monitoring_notification">通知</string>
+    <string name="monitoring_min_speed">最低速度</string>
+    <string name="monitoring_min_accuracy">最小精度</string>
+    <string name="monitoring_min_distance">最小移動量</string>
 </resources>
