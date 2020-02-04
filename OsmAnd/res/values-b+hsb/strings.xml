@@ -1132,8 +1132,8 @@
     <string name="poi_dialog_reopen">znowa wočinić</string>
     <string name="filter_current_poiButton">filter</string>
     <string name="edit_filter_delete_dialog_title">Wubrany filter wotstronić?</string>
-    <string name="edit_filter_delete_message">Filter {0} je so wotstronił</string>
-    <string name="edit_filter_create_message">Filter {0} je so wutworił</string>
+    <string name="edit_filter_delete_message">Filter %1$s je so wotstronił</string>
+    <string name="edit_filter_create_message">Filter %1$s je so wutworił</string>
     <string name="av_camera_pic_size">Wulkosć wobraza</string>
     <string name="user_hates_app_get_feedback_long">Prošu zdźěl nam, što by w tutej aplikaciji změnił(a).</string>
     <string name="successfully_uploaded_pattern">Nahrate {0}/{1}</string>

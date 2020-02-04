@@ -643,8 +643,8 @@
     <string name="filter_current_poiButton">Filtr</string>
     <string name="edit_filter_save_as_menu_item">Uložit jako</string>
     <string name="edit_filter_delete_dialog_title">Smazat vybraný filtr?</string>
-    <string name="edit_filter_delete_message">Filtr {0} byl smazán</string>
-    <string name="edit_filter_create_message">Filtr {0} byl vytvořen</string>
+    <string name="edit_filter_delete_message">Filtr %1$s byl smazán</string>
+    <string name="edit_filter_create_message">Filtr %1$s byl vytvořen</string>
     <string name="offline_navigation_not_available">Off-line navigace OsmAnd je dočasně nedostupná.</string>
     <string name="left_side_navigation">Levostranný provoz</string>
     <string name="left_side_navigation_descr">Pro země, kde se jezdí po levé straně cesty.</string>

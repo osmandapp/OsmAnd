@@ -825,8 +825,8 @@
     <string name="filter_current_poiButton">מסנן</string>
     <string name="edit_filter_save_as_menu_item">שמירה בשם</string>
     <string name="edit_filter_delete_dialog_title">למחוק מסנן זה\?</string>
-    <string name="edit_filter_delete_message">המסנן ‚{0}’ נמחק</string>
-    <string name="edit_filter_create_message">המסנן ‚{0}’ נוצר</string>
+    <string name="edit_filter_delete_message">המסנן ‚%1$s’ נמחק</string>
+    <string name="edit_filter_create_message">המסנן ‚%1$s’ נוצר</string>
     <string name="email">דוא״ל</string>
     <string name="search_history_street">רחוב:\n {0}, {1}</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+‎ ‏(OSM הכוונת ניווט אוטומטית) 

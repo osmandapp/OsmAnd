@@ -1007,8 +1007,8 @@ Ferill %2$s</string>
     <string name="favourites_remove_dialog_success">Eftirlætispunktinum {0} var eytt.</string>
     <string name="poi_remove_confirm_template">Eyða {0} (athugasemd)?</string>
     <string name="poi_dialog_other_tags_message">Öll önnur merki voru varðveitt</string>
-    <string name="edit_filter_delete_message">Síunni {0} hefur verið eytt</string>
-    <string name="edit_filter_create_message">Sían {0} var búin til</string>
+    <string name="edit_filter_delete_message">Síunni %1$s hefur verið eytt</string>
+    <string name="edit_filter_create_message">Sían %1$s var búin til</string>
     <string name="av_camera_focus_auto">Sjálfvirkur fókus</string>
     <string name="navigation_intent_invalid">Ógilt snið: %s</string>
     <string name="do_you_like_osmand">Kanntu vel við OsmAnd?</string>

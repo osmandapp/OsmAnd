@@ -1070,8 +1070,8 @@
     <string name="poi_error_io_error_template">Fallu d\'E/S mentanto se facía l\'aición {0}.</string>
     <string name="poi_dialog_other_tags_message">Caltiénense toles demás etiquetes</string>
     <string name="edit_filter_delete_dialog_title">¿Desaniciar la peñera esbillada\?</string>
-    <string name="edit_filter_delete_message">Desanicióse la pañera {0}</string>
-    <string name="edit_filter_create_message">Creóse la pañera {0}</string>
+    <string name="edit_filter_delete_message">Desanicióse la pañera %1$s</string>
+    <string name="edit_filter_create_message">Creóse la pañera %1$s</string>
     <string name="av_camera_focus_descr">Esbilla\'l mou internu d\'enfoque de la cámara.</string>
     <string name="av_camera_focus_auto">Enfoque automáticu</string>
     <string name="av_camera_focus_hiperfocal">Enfoque hiperfocal</string>

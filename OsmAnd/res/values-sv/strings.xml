@@ -674,7 +674,7 @@ Nyttjat utrymme är {1} MB.
     <string name="downloading_list_indexes">Hämtar lista över tillgängliga regioner …</string>
     <string name="list_index_files_was_not_loaded">Listan över regioner hämtades inte från osmand.net.</string>
     <string name="fav_points_edited">Favoritpunkten redigerades</string>
-    <string name="edit_filter_delete_message">Filtret {0} har tagits bort</string>
+    <string name="edit_filter_delete_message">Filtret %1$s har tagits bort</string>
     <string name="foot">ft</string>
     <string name="mile_per_hour">mph</string>
     <string name="mile">mi</string>
@@ -714,7 +714,7 @@ Nyttjat utrymme är {1} MB.
     <string name="safe_mode">Felsäkert läge</string>
     <string name="native_library_not_running">Appen körs i felsäkert läge (inaktivera det i \'Inställningar\').</string>
     <string name="background_service_is_enabled_question">Bakgrundstjänsten körs fortfarande. Vill du stoppa den också?</string>
-    <string name="edit_filter_create_message">Filter {0} har skapats</string>
+    <string name="edit_filter_create_message">Filter %1$s har skapats</string>
     <string name="poi_error_info_not_loaded">Info om noden lästes inte in</string>
     <string name="poi_action_change">ändra</string>
     <string name="poi_action_succeded_template">Åtgärden {0} slutfördes.</string>

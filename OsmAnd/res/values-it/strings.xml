@@ -543,8 +543,8 @@
     <string name="filter_current_poiButton">Filtro</string>
     <string name="edit_filter_save_as_menu_item">Salva come</string>
     <string name="edit_filter_delete_dialog_title">Eliminare il filtro\?</string>
-    <string name="edit_filter_delete_message">Filtro \'{0}\' cancellato</string>
-    <string name="edit_filter_create_message">Filtro \'{0}\' creato</string>
+    <string name="edit_filter_delete_message">Filtro \'%1$s\' cancellato</string>
+    <string name="edit_filter_create_message">Filtro \'%1$s\' creato</string>
     <string name="offline_navigation_not_available">La navigazione offline di OsmAnd è temporaneamente non disponibile.</string>
     <string name="left_side_navigation">Circolazione a sinistra</string>
     <string name="left_side_navigation_descr">Per i paesi in cui si guida nella parte sinistra della strada.</string>

@@ -816,8 +816,8 @@
     <string name="filter_current_poiButton">Φιλτράρισμα</string>
     <string name="edit_filter_save_as_menu_item">Αποθήκευση Ως</string>
     <string name="edit_filter_delete_dialog_title">Διαγραφή αυτού του φίλτρου;</string>
-    <string name="edit_filter_delete_message">Το φίλτρο \'{0}\' διαγράφηκε</string>
-    <string name="edit_filter_create_message">Το φίλτρο \'{0}\' δημιουργήθηκε</string>
+    <string name="edit_filter_delete_message">Το φίλτρο \'%1$s\' διαγράφηκε</string>
+    <string name="edit_filter_create_message">Το φίλτρο \'%1$s\' δημιουργήθηκε</string>
     <string name="email">ηλ. διεύθυνση</string>
     <string name="intermediate_point_too_far">Ο ενδιάμεσος προορισμός %1$s είναι πολύ μακριά από τον πλησιέστερο δρόμο.</string>
     <string name="arrived_at_intermediate_point">Φτάσατε στον ενδιάμεσο προορισμό σας</string>

@@ -654,8 +654,8 @@
     <string name="filter_current_poiButton">Filtrēt</string>
     <string name="edit_filter_save_as_menu_item">Saglabāt kā</string>
     <string name="edit_filter_delete_dialog_title">Dzēst izvēlēto filtru?</string>
-    <string name="edit_filter_delete_message">Filtrs {0} tika izdzēsts</string>
-    <string name="edit_filter_create_message">Filtrs {0} tika izveidots</string>
+    <string name="edit_filter_delete_message">Filtrs %1$s tika izdzēsts</string>
+    <string name="edit_filter_create_message">Filtrs %1$s tika izveidots</string>
     <string name="offline_navigation_not_available">OsmAnd bezsaistes navigācija pagaidām nav pieejama.</string>
     <string name="left_side_navigation">Kreisās joslas kustība</string>
     <string name="left_side_navigation_descr">Ieslēdziet, ja jūs atrodieties valstīs ar kreisās joslas kustību</string>

@@ -3002,8 +3002,8 @@
     <string name="filter_current_poiButton">Filter</string>
     <string name="edit_filter_save_as_menu_item">Salvesta nimega</string>
     <string name="edit_filter_delete_dialog_title">Kustutada see filter\?</string>
-    <string name="edit_filter_delete_message">\'{0}\' filter kustutatud</string>
-    <string name="edit_filter_create_message">\'{0}\' filter loodud</string>
+    <string name="edit_filter_delete_message">\'%1$s\' filter kustutatud</string>
+    <string name="edit_filter_create_message">\'%1$s\' filter loodud</string>
     <string name="email">e-post</string>
     <string name="av_camera_focus">Kaamera fookuse liik</string>
     <string name="av_camera_focus_descr">Kaamera fookuse režiim:</string>

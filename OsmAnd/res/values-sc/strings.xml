@@ -1285,8 +1285,8 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="default_buttons_commit">Imbia</string>
     <string name="shared_string_clear">Iscantzella</string>
     <string name="edit_filter_delete_dialog_title">Iscantzellare custu filtru\?</string>
-    <string name="edit_filter_delete_message">Su filtru {0} est istadu iscantzelladu</string>
-    <string name="edit_filter_create_message">Su filtru {0} est istadu creadu</string>
+    <string name="edit_filter_delete_message">Su filtru %1$s est istadu iscantzelladu</string>
+    <string name="edit_filter_create_message">Su filtru %1$s est istadu creadu</string>
     <string name="email">post.el.</string>
     <string name="av_camera_focus">Tipu de messa a fogu</string>
     <string name="av_camera_focus_descr">Modalidade de ponidura a fogu de sa fotocàmera integrada:</string>

@@ -714,8 +714,8 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="menu_mute_off">Lyd er slået til</string>
     <string name="menu_mute_on">Lyd er slået fra</string>
     <string name="email">e-mail</string>
-    <string name="edit_filter_delete_message">Filter {0}\' er slettet</string>
-    <string name="edit_filter_create_message">Filter \'{0}\' er oprettet</string>
+    <string name="edit_filter_delete_message">Filter %1$s\' er slettet</string>
+    <string name="edit_filter_create_message">Filter \'%1$s\' er oprettet</string>
     <string name="edit_filter_delete_dialog_title">Slet filter\?</string>
     <string name="edit_filter_save_as_menu_item">Gem som</string>
     <string name="filter_current_poiButton">Filter</string>

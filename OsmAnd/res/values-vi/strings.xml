@@ -648,8 +648,8 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 
 <string name="edit_filter_save_as_menu_item">Lưu thành</string>
 <string name="edit_filter_delete_dialog_title">Xóa bộ lọc vừa chọn?</string>
-<string name="edit_filter_delete_message">Bộ lọc {0} đã bị xóa</string>
-<string name="edit_filter_create_message">Bộ lọc {0} đã được tạo</string>
+<string name="edit_filter_delete_message">Bộ lọc %1$s đã bị xóa</string>
+<string name="edit_filter_create_message">Bộ lọc %1$s đã được tạo</string>
 
 <string name="wake_on_voice">Bật màn hình</string>
     <string name="wake_on_voice_descr">Bật màn hình điện thoại khi tiếp cận một lượt</string>

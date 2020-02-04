@@ -633,12 +633,15 @@ public class SearchCoreFactory {
 
 	public static class SearchAmenityTypesAPI extends SearchBaseAPI {
 
+		public final static String STD_POI_FILTER_PREFIX = "std_";
+
 		private Map<String, PoiType> translatedNames = new LinkedHashMap<>();
 		private List<AbstractPoiType> topVisibleFilters;
 		private List<PoiCategory> categories;
 		private List<CustomSearchPoiFilter> customPoiFilters = new ArrayList<>();
 		private TIntArrayList customPoiFiltersPriorites = new TIntArrayList();
 		private MapPoiTypes types;
+		private Map<String, Integer> filterOrders = new HashMap<>();
 
 		public SearchAmenityTypesAPI(MapPoiTypes types) {
 			super(ObjectType.POI_TYPE);
@@ -655,6 +658,10 @@ public class SearchCoreFactory {
 			this.customPoiFiltersPriorites.add(priority);
 		}
 
+		public void setFilterOrders(Map<String, Integer> filterOrders) {
+			this.filterOrders = filterOrders;
+		}
+
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
 			if (translatedNames.isEmpty()) {
@@ -666,13 +673,14 @@ public class SearchCoreFactory {
 			List<AbstractPoiType> searchWordTypes = new ArrayList<AbstractPoiType>();
 			NameStringMatcher nm;
 			String unknownSearchPhrase = phrase.getUnknownSearchPhrase();
+			boolean showTopFiltersOnly = !phrase.isUnknownSearchWordPresent();
 			if (phrase.getUnknownSearchWord().length() < unknownSearchPhrase.length()) {
 				nm = new NameStringMatcher(unknownSearchPhrase, StringMatcherMode.CHECK_ONLY_STARTS_WITH_TRIM);
 			} else {
 				nm = new NameStringMatcher(unknownSearchPhrase, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 			}
 			for (AbstractPoiType pf : topVisibleFilters) {
-				if (!phrase.isUnknownSearchWordPresent()
+				if (showTopFiltersOnly
 						|| nm.matches(pf.getTranslation())
 						|| nm.matches(pf.getEnTranslation())
 						|| nm.matches(pf.getSynonyms())) {
@@ -680,7 +688,7 @@ public class SearchCoreFactory {
 					searchWordTypes.add(pf);
 				}
 			}
-			if (phrase.isUnknownSearchWordPresent()) {
+			if (!showTopFiltersOnly) {
 				for (PoiCategory c : categories) {
 					if (!results.contains(c)
 							&& (nm.matches(c.getTranslation())
@@ -726,26 +734,44 @@ public class SearchCoreFactory {
 					SearchResult res = new SearchResult(phrase);
 					res.localeName = pt.getTranslation();
 					res.object = pt;
-					res.priority = SEARCH_AMENITY_TYPE_PRIORITY;
 					res.priorityDistance = 0;
 					res.objectType = ObjectType.POI_TYPE;
 					res.firstUnknownWordMatches = startMatch.matches(res.localeName);
-					resultMatcher.publish(res);
+					if (showTopFiltersOnly) {
+						String stdFilterId = getStandardFilterId(pt);
+						if (filterOrders.containsKey(stdFilterId)) {
+							res.priority = SEARCH_AMENITY_TYPE_PRIORITY + filterOrders.get(stdFilterId);
+							resultMatcher.publish(res);
+						}
+					} else {
+						res.priority = SEARCH_AMENITY_TYPE_PRIORITY;
+						resultMatcher.publish(res);
+					}
 				}
 				for (int i = 0; i < customPoiFilters.size(); i++) {
 					CustomSearchPoiFilter csf = customPoiFilters.get(i);
-					int p = customPoiFiltersPriorites.get(i);
 					if (!phrase.isUnknownSearchWordPresent() || nm.matches(csf.getName())) {
 						SearchResult res = new SearchResult(phrase);
 						res.localeName = csf.getName();
 						res.object = csf;
-						res.priority = SEARCH_AMENITY_TYPE_PRIORITY + p;
 						res.objectType = ObjectType.POI_TYPE;
-						resultMatcher.publish(res);
+						if (showTopFiltersOnly) {
+							if (filterOrders.containsKey(csf.getFilterId())) {
+								res.priority = SEARCH_AMENITY_TYPE_PRIORITY + filterOrders.get(csf.getFilterId());
+								resultMatcher.publish(res);
+							}
+						} else {
+							res.priority = SEARCH_AMENITY_TYPE_PRIORITY + customPoiFiltersPriorites.get(i);
+							resultMatcher.publish(res);
+						}
 					}
 				}
 			}
 			return true;
+		}
+
+		public String getStandardFilterId(AbstractPoiType poi) {
+			return STD_POI_FILTER_PREFIX + poi.getKeyName();
 		}
 
 		@Override

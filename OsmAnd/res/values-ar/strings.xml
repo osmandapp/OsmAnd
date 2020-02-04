@@ -537,8 +537,8 @@
     <string name="live_monitoring_interval">فترة التتبع المباشر</string>
     <string name="live_monitoring_url">التتبع مباشرة عبر عنوان ويب</string>
     <string name="av_camera_focus_edof">وضع التركيز الكلي (عن قرب)</string>
-    <string name="edit_filter_create_message">عامل تصفية {0} تم إنشاؤه</string>
-    <string name="edit_filter_delete_message">عامل تصفية {0} تم حذفه</string>
+    <string name="edit_filter_create_message">عامل تصفية %1$s تم إنشاؤه</string>
+    <string name="edit_filter_delete_message">عامل تصفية %1$s تم حذفه</string>
     <string name="edit_filter_delete_dialog_title">حذف عامل التصفية المحدد؟</string>
     <string name="oclock">o\'على مدار الساعة</string>
     <string name="auto_announce_off">إيقاف التنبيه التلقائي</string>

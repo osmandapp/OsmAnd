@@ -9,7 +9,6 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
-import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -17,6 +16,7 @@ import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.view.MotionEvent;
 import android.view.View;
@@ -47,6 +47,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 	private static final int DISTANCE_TEXT_SIZE = 16;
 	private static final float COMPASS_CIRCLE_FITTING_RADIUS_COEF = 1.25f;
 	private static final float CIRCLE_ANGLE_STEP = 5;
+	private static final int SHOW_COMPASS_MIN_ZOOM = 8;
 
 	private final MapActivity mapActivity;
 	private OsmandApplication app;
@@ -68,8 +69,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 	private OsmandSettings.OsmandPreference<Float> mapDensity;
 	private OsmandSettings.MetricsConstants cacheMetricSystem;
 	private int cacheIntZoom;
-	private double cacheTileX;
-	private double cacheTileY;
+	private LatLon cacheCenterLatLon;
 	private long cacheMultiTouchEndTime;
 	private ArrayList<String> cacheDistances;
 	private LatLon touchPointLatLon;
@@ -240,7 +240,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 			circleAttrsAlt.paint2.setStyle(Style.FILL);
 			final QuadPoint center = tb.getCenterPixelPoint();
 			final RulerMode mode = app.getSettings().RULER_MODE.get();
-			boolean showCompass = app.getSettings().SHOW_COMPASS_CONTROL_RULER.get();
+			boolean showCompass = app.getSettings().SHOW_COMPASS_CONTROL_RULER.get() && tb.getZoom() >= SHOW_COMPASS_MIN_ZOOM;
 			final long currentTime = System.currentTimeMillis();
 
 			if (cacheMultiTouchEndTime != view.getMultiTouchEndTime()) {
@@ -284,11 +284,11 @@ public class RulerControlLayer extends OsmandMapLayer {
 				RenderingLineAttributes attrs = mode == RulerMode.FIRST ? circleAttrs : circleAttrsAlt;
 				int compassCircleId = getCompassCircleId(tb, center);
 				for (int i = 1; i <= cacheDistances.size(); i++) {
-					//if (showCompass && i == compassCircleId) {
-						//drawCompassCircle(canvas, tb, compassCircleId, center, attrs);
-					//} else {
+					if (showCompass && i == compassCircleId) {
+						drawCompassCircle(canvas, tb, compassCircleId, center, attrs);
+					} else {
 						drawCircle(canvas, tb, i, center, attrs);
-					//}
+					}
 				}
 			}
 		}
@@ -448,15 +448,15 @@ public class RulerControlLayer extends OsmandMapLayer {
 			}
 
 			OsmandSettings.MetricsConstants currentMetricSystem = app.getSettings().METRIC_SYSTEM.get();
-			boolean updateCache = tb.getZoom() != cacheIntZoom || Math.abs(tb.getCenterTileX() - cacheTileX) > 1
-					|| Math.abs(tb.getCenterTileY() - cacheTileY) > 1 || mapDensity.get() != cacheMapDensity
+			boolean updateCache = tb.getZoom() != cacheIntZoom
+					|| !tb.getCenterLatLon().equals(cacheCenterLatLon) || mapDensity.get() != cacheMapDensity
 					|| cacheMetricSystem != currentMetricSystem;
 
 			if (!tb.isZoomAnimated() && updateCache) {
 				cacheMetricSystem = currentMetricSystem;
 				cacheIntZoom = tb.getZoom();
-				cacheTileX = tb.getCenterTileX();
-				cacheTileY = tb.getCenterTileY();
+				LatLon centerLatLon = tb.getCenterLatLon();
+				cacheCenterLatLon = new LatLon(centerLatLon.getLatitude(), centerLatLon.getLongitude());
 				cacheMapDensity = mapDensity.get();
 				updateDistance(tb);
 			}
@@ -504,10 +504,11 @@ public class RulerControlLayer extends OsmandMapLayer {
 		if (!tb.isZoomAnimated()) {
 			float circleRadius = radius * circleNumber;
 			String text = cacheDistances.get(circleNumber - 1);
-			float[] textCoords = calculateTextCoords(text, text, circleRadius, center, attrs);
 
-			List<List<PointF>> arrays = new ArrayList<>();
-			List<PointF> points = new ArrayList<>();
+			QuadPoint topOrLeftPoint = null;
+			QuadPoint rightOrBottomPoint = null;
+			List<List<QuadPoint>> arrays = new ArrayList<>();
+			List<QuadPoint> points = new ArrayList<>();
 			LatLon centerLatLon = tb.getCenterLatLon();
 			for (int a = -180; a <= 180; a += CIRCLE_ANGLE_STEP) {
 				LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, circleRadius / tb.getPixDensity(), a);
@@ -521,36 +522,76 @@ public class RulerControlLayer extends OsmandMapLayer {
 
 				float x = tb.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 				float y = tb.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-				points.add(new PointF(x, y));
+				points.add(new QuadPoint(x, y));
+
+				if (textSide == TextSide.VERTICAL) {
+					if (a == 0) {
+						topOrLeftPoint = new QuadPoint(x, y);
+					} else if (a == 180) {
+						rightOrBottomPoint = new QuadPoint(x, y);
+					}
+				} else if (textSide == TextSide.HORIZONTAL) {
+					if (a == -90) {
+						topOrLeftPoint = new QuadPoint(x, y);
+					} else if (a == 90) {
+						rightOrBottomPoint = new QuadPoint(x, y);
+					}
+				}
 			}
 			if (points.size() > 0) {
 				arrays.add(points);
 			}
 
 			canvas.rotate(-tb.getRotate(), center.x, center.y);
-			for (List<PointF> pts : arrays) {
-				float[] arr = new float[pts.size() * 2];
-				int i = 0;
-				for (PointF pt : pts) {
-					arr[i++] = pt.x;
-					arr[i++] = pt.y;
+			for (List<QuadPoint> pts : arrays) {
+				Path path = new Path();
+				for (QuadPoint pt : pts) {
+					if (path.isEmpty()) {
+						path.moveTo(pt.x, pt.y);
+					} else {
+						path.lineTo(pt.x, pt.y);
+					}
 				}
-				canvas.drawLines(arr, attrs.shadowPaint);
-				canvas.drawLines(arr, attrs.paint);
+				canvas.drawPath(path, attrs.shadowPaint);
+				canvas.drawPath(path, attrs.paint);
 			}
 
-			//canvas.drawCircle(center.x, center.y, radius * circleNumber, attrs.shadowPaint);
-			//canvas.drawCircle(center.x, center.y, radius * circleNumber, attrs.paint);
+			float[] textCoords = calculateTextCoords(text, text, topOrLeftPoint, rightOrBottomPoint, attrs);
 			drawTextCoords(canvas, text, textCoords, attrs);
 			canvas.rotate(tb.getRotate(), center.x, center.y);
 		}
 	}
 
 	private void drawTextCoords(Canvas canvas, String text, float[] textCoords, RenderingLineAttributes attrs) {
-		canvas.drawText(text, textCoords[0], textCoords[1], attrs.paint3);
-		canvas.drawText(text, textCoords[0], textCoords[1], attrs.paint2);
-		canvas.drawText(text, textCoords[2], textCoords[3], attrs.paint3);
-		canvas.drawText(text, textCoords[2], textCoords[3], attrs.paint2);
+		if (!Float.isNaN(textCoords[0]) && !Float.isNaN(textCoords[1])) {
+			canvas.drawText(text, textCoords[0], textCoords[1], attrs.paint3);
+			canvas.drawText(text, textCoords[0], textCoords[1], attrs.paint2);
+		}
+		if (!Float.isNaN(textCoords[2]) && !Float.isNaN(textCoords[3])) {
+			canvas.drawText(text, textCoords[2], textCoords[3], attrs.paint3);
+			canvas.drawText(text, textCoords[2], textCoords[3], attrs.paint2);
+		}
+	}
+
+	private float[] calculateTextCoords(String topOrLeftText, String rightOrBottomText,
+										@Nullable QuadPoint topOrLeftPoint, @Nullable QuadPoint rightOrBottomPoint,
+										RenderingLineAttributes attrs) {
+		Rect boundsDistance = new Rect();
+		Rect boundsHeading;
+
+		if (topOrLeftText.equals(rightOrBottomText)) {
+			boundsHeading = boundsDistance;
+		} else {
+			boundsHeading = new Rect();
+			attrs.paint2.getTextBounds(rightOrBottomText, 0, rightOrBottomText.length(), boundsHeading);
+		}
+		attrs.paint2.getTextBounds(topOrLeftText, 0, topOrLeftText.length(), boundsDistance);
+
+		float x1 = topOrLeftPoint == null ? Float.NaN : topOrLeftPoint.x - boundsHeading.width() / 2f;
+		float y1 = topOrLeftPoint == null ? Float.NaN : topOrLeftPoint.y + boundsHeading.height() / 2f;
+		float x2 = rightOrBottomPoint == null ? Float.NaN : rightOrBottomPoint.x - boundsDistance.width() / 2f;
+		float y2 = rightOrBottomPoint == null ? Float.NaN : rightOrBottomPoint.y + boundsDistance.height() / 2f;
+		return new float[]{x1, y1, x2, y2};
 	}
 
 	private float[] calculateTextCoords(String topOrLeftText, String rightOrBottomText, float drawingTextRadius, QuadPoint center, RenderingLineAttributes attrs) {

@@ -817,8 +817,8 @@
     <string name="filter_current_poiButton">Filtrează</string>
     <string name="edit_filter_save_as_menu_item">Salvează ca</string>
     <string name="edit_filter_delete_dialog_title">Ștergeți filtrul selectat?</string>
-    <string name="edit_filter_delete_message">Filtrul {0} a fost șters</string>
-    <string name="edit_filter_create_message">Filtrul {0} a fost creat</string>
+    <string name="edit_filter_delete_message">Filtrul %1$s a fost șters</string>
+    <string name="edit_filter_create_message">Filtrul %1$s a fost creat</string>
     <string name="email">email</string>
     <string name="safe_mode_description">Safe mode (cod Android în loc de cod nativ).</string>
     <string name="safe_mode">Mod siguranță</string>

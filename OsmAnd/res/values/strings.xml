@@ -12,6 +12,12 @@
 
 -->
     <string name="accessibility_mode_disabled">Accessibility mode disabled in your system.</string>
+    <string name="rearrange_categories">Rearrange categories</string>
+    <string name="create_custom_categories_list_promo">You can add custom categories hide categories that you don’t find necessary and change the sort order of the list. The list can be imported and exported with profiles.</string>
+    <string name="add_new_custom_category_button_promo">You can add a new custom category by selecting one or a few needed categories.</string>
+    <string name="reset_to_default_category_button_promo">Reset to default will delete or custom categories and reset sort order to the default state after installation.</string>
+    <string name="shared_string_available">Available</string>
+    <string name="add_custom_category">Add custom category</string>
     <string name="rendering_attr_streetLightingNight_name">Show only at night</string>
     <string name="plugin_prefs_reset_successful">All plugin settings restored to default state.</string>
     <string name="profile_prefs_reset_successful">All profile settings restored to default state.</string>
@@ -3268,8 +3274,8 @@
     <string name="filter_current_poiButton">Filter</string>
     <string name="edit_filter_save_as_menu_item">Save As</string>
     <string name="edit_filter_delete_dialog_title">Delete this filter?</string>
-    <string name="edit_filter_delete_message">\'{0}\' filter deleted</string>
-    <string name="edit_filter_create_message">\'{0}\' filter created</string>
+    <string name="edit_filter_delete_message">\'%1$s\' filter deleted</string>
+    <string name="edit_filter_create_message">\'%1$s\' filter created</string>
     <string name="email">e-mail</string>
     <string name="av_camera_focus">Camera focus type</string>
     <string name="av_camera_focus_descr">Camera focus mode:</string>
