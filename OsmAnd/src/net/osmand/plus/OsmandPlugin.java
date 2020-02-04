@@ -154,6 +154,10 @@ public abstract class OsmandPlugin {
 	 * Plugin was installed
 	 */
 	public void onInstall(@NonNull OsmandApplication app, @Nullable Activity activity) {
+		showInstallDialog(activity);
+	}
+
+	public void showInstallDialog(@Nullable Activity activity) {
 		if (activity instanceof FragmentActivity) {
 			FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
 			if (fragmentManager != null) {
@@ -272,10 +276,11 @@ public abstract class OsmandPlugin {
 	public static void checkInstalledMarketPlugins(@NonNull OsmandApplication app, @Nullable Activity activity) {
 		Set<String> enabledPlugins = app.getSettings().getEnabledPlugins();
 		for (OsmandPlugin plugin : OsmandPlugin.getMarketPlugins()) {
-			if (plugin.getInstallURL() != null && checkPluginPackage(app, plugin) && updateMarketPlugin(app, enabledPlugins, plugin)) {
+			if (plugin.getInstallURL() != null && checkPluginPackage(app, plugin)) {
 				plugin.onInstall(app, activity);
 				initPlugin(app, plugin);
 			}
+			updateMarketPlugin(app, enabledPlugins, plugin);
 		}
 	}
 
