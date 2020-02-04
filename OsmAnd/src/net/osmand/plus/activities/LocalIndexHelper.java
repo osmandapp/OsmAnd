@@ -74,10 +74,9 @@ public class LocalIndexHelper {
 			} else {
 				return;
 			}
-			String descr = "";
-			descr += app.getString(R.string.local_index_tile_data_name, template.getName());
+			String descr = " ";
 			if (template.getExpirationTimeMinutes() >= 0) {
-				descr += "\n" + app.getString(R.string.local_index_tile_data_expire, template.getExpirationTimeMinutes());
+				descr += app.getString(R.string.local_index_tile_data_expire, String.valueOf(template.getExpirationTimeMinutes()));
 			}
 			info.setAttachedObject(template);
 			info.setDescription(descr);
