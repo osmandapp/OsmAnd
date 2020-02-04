@@ -333,7 +333,7 @@
     <string name="osmand_background_plugin_description">يظهر الإعدادات لتمكين التتبع والملاحة في وضعية السكون ( الشاشة مغلقة ) عبر إيقاظ دوري لجهاز GPS.</string>
     <string name="precise_routing_mode_descr">تمكين لحساب المسارات بدقة دون أخطاء. لا يزال محدود المسافة وبطيء.</string>
     <string name="recording_photo_description">صورة %1$s %2$s</string>
-    <string name="dropbox_plugin_description">ملحق Dropbox يسمح بمزامنة المسارات و الملاحظات الصوتية والمرئية مع حسابك في Dropbox.</string>
+    <string name="dropbox_plugin_description">مزامنة المسارات والملاحظات الصوتية / الفيديو مع حساب Dropbox الخاص بك.</string>
     <string name="av_video_format_descr">تنسيق الفيديو الناتج:</string>
     <string name="av_video_format">تنسيق الفيديو الناتج</string>
     <string name="av_use_external_recorder_descr">استخدم مسجل النظام للفيديو.</string>
@@ -603,11 +603,11 @@
 \n 
 \nبعض الميزات الأساسية: 
 \n - تشغيل كامل دون إنترنت( خزن الخرائط التوجيه أو الخرائط الجزئية المنزلة في ذاكرة الجهاز) 
-\n - خرائط التوجيه المدمجة للعالم ككل متاحة لتعمل دون إنترنت
+\n - خرائط التوجيه المدمجة للعالم ككل متاحة لتعمل دون إنترنت 
 \n - تحميل غير محدود لخرائط البلدان أو المناطق مباشرة من التطبيق 
 \n - ميزة ويكيبيديا المحلية ( قم بتحميل POI لويكيبيديا)، الأمثل لمشاهدة المعالم الأثرية 
 \n - يمكن تراكب عدة طبقات للخرائط، ك GPX أو مسارات الملاحة، مواقع ذات الاهتمام (POI)، الأماكن المفضلة، الحدود المحيطية، أماكن توقف النقل العمومي، خرائط إضافية بشفافية قابلة للتعديل 
-\n - البحث عن العناوين والأماكن (POI) دون إنترنت
+\n - البحث عن العناوين والأماكن (POI) دون إنترنت 
 \n - تحديد الطريق لمسافات متوسطة المدى 
 \n - وضع السيارة، الدراجة والمشاة متوفر مع: 
 \n - تبديل اختياري آلي لوضع الرؤية في الليل/النهار 
@@ -750,7 +750,7 @@
     <string name="amenity_type_seamark">سيمارك</string>
     <string name="poi_dialog_comment_default">متغير POI</string>
     <string name="tile_source_already_installed">الخريطة مثبتة بالفعل.</string>
-    <string name="select_tile_source_to_install">حدد أحد الخرائط للتثبيت أو التحديث.</string>
+    <string name="select_tile_source_to_install">اختر خرائط (التجانب) للتثبيت أو التحديث.</string>
     <string name="internet_not_available">لا يوجد اتصال بالإنترنت.</string>
     <string name="install_more">المزيد…</string>
     <string name="level_to_switch_vector_raster_descr">مستوى التقريب الأدنى لاستخدام خرائط التوجيه.</string>
@@ -1369,9 +1369,9 @@
     <string name="choose_available_region">اختر المنطقة من القائمة</string>
     <string name="osb_comment_dialog_success">تم إضافة الملاحظة بنجاح</string>
     <string name="tiles_to_download_estimated_size">عند التقريب {0} قم بتحميل {1} التجانبيات/المربعات ({2} MB)</string>
-    <string name="use_high_res_maps_descr">عدم تمدد (وطمس) تجانبيات/مربعات الخريطة على شاشات العرض عالية الكثافة.</string>
+    <string name="use_high_res_maps_descr">لا تقم بتمديد (وطمس) تجانبات الخريطة على شاشات العرض عالية الكثافة.</string>
     <string name="max_level_download_tile_descr">اختر مستوى التقريب الأقصى لتحميل تجانبيات/مربعات الخريطة من الإنترنت.</string>
-    <string name="map_tile_source_descr">اختر مصدر تجانبيات/مربعات الخريطة على الإنترنت أو المخزنة مؤقتاً</string>
+    <string name="map_tile_source_descr">اختر مصدر تجانبيات/مربعات الخريطة على الإنترنت أو المخزنة مؤقتا.</string>
     <string name="user_hates_app_get_feedback_long">فضلًا أخبرنا ما الذي تريد تعديله في هذا التّطبيق.</string>
     <string name="storage_directory_readonly_desc">تم التبديل إلى الذاكرة الداخلية لأن مجلد تخزين البيانات المحدد محمي ضد الكتابة. الرجاء تحديد مكان تخزين قابل للكتابة.</string>
     <string name="storage_directory_shared">ذاكرة الهاتف</string>
@@ -1830,7 +1830,7 @@
     <string name="osm_edit_commented_note">ملاحظة OSM معلق عليها</string>
     <string name="osm_edit_removed_note">ملاحظة OSM محذوفة</string>
     <string name="rendering_attr_pisteGrooming_name">مسار زلق</string>
-    <string name="world_ski_missing">لإظهار خرائط التزلج، يجب تحميل خريطة خاصة محلية</string>
+    <string name="world_ski_missing">لإظهار خرائط التزلج، يجب تحميل خريطة خاصة محلية.</string>
     <string name="rendering_attr_publicTransportMode_name">حافلة، ترامواي وغيرها</string>
     <string name="osm_edit_created_note">إنشاء ملاحظة OSM</string>
     <string name="osn_add_dialog_error">حدث استثناء: لم يتم إنشاء الملاحظة.</string>
@@ -1871,7 +1871,7 @@
     <string name="rendering_value_walkingRoutesOSMC_name">تلوين وفق رمز تنزه OSMC</string>
     <string name="shared_string_logoff">خروج</string>
     <string name="local_recordings_delete_all_confirm">هل أنت متأكد من أنك تريد حذف الملاحظات %1$d؟</string>
-    <string name="nautical_maps_missing">لعرض الخرائط البحرية، يجب تحميل خريطة خاصة محلياً</string>
+    <string name="nautical_maps_missing">لعرض الخرائط البحرية، يجب تحميل خريطة خاصة محلياً.</string>
     <string name="save_track_to_gpx_globally_descr">تسجيل الموقع العام إلى ملف GPX يمكن تشغيله أو إيقافه باستخدام نافذة تسجيل GPX على الشاشة خريطة.</string>
     <string name="proxy_host_descr">ضبط اسم مضيف البروكسي (مثال 127.0.0.1).</string>
     <string name="map_preferred_locale_descr">اللغة المفضلة للمسميات على الخريطة (إذا لم تكن متوفرة ستتحول إلى اللغة الإنجليزية أو الأسماء المحلية).</string>

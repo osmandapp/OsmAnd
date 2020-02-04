@@ -3185,7 +3185,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="rendering_attr_winter_road_name">Caminu ierrile</string>
     <string name="rendering_attr_ice_road_name">Caminu de astra</string>
     <string name="routeInfo_winter_ice_road_name">Caminos ierriles e de astra</string>
-    <string name="rendering_attr_tracktype_grade1_name">Sòlidu (pamentadu)</string>
+    <string name="rendering_attr_tracktype_grade1_name">Sòlidu (apamentadu)</string>
     <string name="rendering_attr_tracktype_grade2_name">Sòlidu (chene pamentu)</string>
     <string name="rendering_attr_tracktype_grade3_name">Printzipalmente sòlidu</string>
     <string name="rendering_attr_tracktype_grade4_name">Printzipalmente modde</string>

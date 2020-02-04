@@ -485,11 +485,11 @@ Lon: %2$s</string>
     <string name="gps_status">Stato de GPS</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapoj kaj Navigado</string>
     <string name="map_widget_show_ruler">Mezurilo</string>
-    <string name="osmand_rastermaps_plugin_description">Per tiu ĉi kromprogramo vi povas atingi multajn enretajn (ankaŭ nomitaj kiel kahelajn aŭ rastrumajn) mapojn, ekzemple: antaŭgeneritaj OpenStreetMap kaheloj (kiel Mapnik), satelitaj fotoj kaj mapoj por specialaj uzoj: veteraj, klimataj, tersciencaj, tavoloj de nivel-ombrumo, ktp. 
+    <string name="osmand_rastermaps_plugin_description">Aliro al pluraj enretaj (kahelaj aŭ rastrumaj) mapoj: antaŭgeneritaj OSM‑kaheloj (kiel Mapnik), satelitaj fotoj kaj mapoj por specialaj uzoj: veteraj, klimataj, tersciencaj, tavoloj de nivelombrumo, ktp. 
 \n 
-\nĈiujn de tiuj mapoj oni povas kiel ĉefan (bazan) mapon por OsmAnd, aŭ kiel supran aŭ malsupran tavolon por alia bazmapo (ekz. por norma OsmAnd-a eksterreta mapo). Por fari malsupran tavolon de mapo pli klara, kelkajn elementojn de vektoraj OSM-aj mapoj oni eblas facile kaŝi per la menuo “agordi mapon”. 
+\nĈiujn de tiuj mapoj oni povas uzi kiel ĉefan (bazan) mapon aŭ kiel supran aŭ malsupran tavolon por alia bazmapo (ekz. por norma eksterreta mapo de OsmAnd). Eblas kaŝi kelkajn elementojn de vektoraj OSM‑mapoj per la menuo “agordi mapon”, por igi la subtavolan mapon pli videbla.
 \n 
-\nKahelajn mapojn oni povas elŝuti senpere el Interreto, aŭ prepari por eksterreta uzado (kaj permane kopii al OSM-a datum-dosierujo) kiel SQLite-an datumbazon kiu povas esti farita per diversaj eksteraj iloj por prepari mapojn.</string>
+\nKahelaj mapoj estas uzeblaj per interreta konekto aŭ eblas prepari (kaj kopii al datum‑dosierujo de OsmAnd) ilin kiel SQLite‑datumbazon por eksterreta uzo per diversaj eksteraj iloj.</string>
     <string name="shared_string_accessibility">Alirebleco</string>
     <string name="device_memory">Aparata memoro</string>
     <string name="edit_group">Redakti grupon</string>
@@ -532,9 +532,9 @@ Lon: %2$s</string>
     <string name="download_tab_local">Lokaj</string>
     <string name="no_internet_connection">Ne povas elŝuti, bonvolu kontroli vian retkonekton.</string>
     <string name="record_plugin_name">Spur-registrilo</string>
-    <string name="record_plugin_description">Tiu ĉi kromprogramo ebligas al vi registri kaj konservi viajn spurojn per permane elekti GPX-registradan fenestraĵon sur la map‑ekrano, aŭ ankaŭ aŭtomate registri ĉiujn viajn navigadajn kursojn al GPX-dosiero. 
+    <string name="record_plugin_description">Tiu ĉi kromprogramo ebligas al vi registri kaj konservi viajn spurojn per permane elekti GPX‑registradan fenestraĵon sur la map‑ekrano kaj ankaŭ aŭtomate registri ĉiujn viajn navigadajn kursojn al GPX‑dosiero. 
 \n 
-\nRegistritaj spuroj povas esti kunhavigataj kun viaj amikoj aŭ esti uzitaj por kontribui al OSM. Atletoj povas uzi registritajn spurojn por kontroli siajn ekzercojn. Kelkaj bazaj ecoj oni povas analizi senpere per OsmAnd, kiel: tempoj de ĉirkaŭoj, mezumaj rapidoj, ktp; kaj kursojn oni povas poste analizi per specialaj eksteraj programoj.</string>
+\nRegistritaj spuroj povas esti kunhavigataj kun viaj amikoj aŭ uzataj por kontribui al OSM. Atletoj povas uzi registritajn spurojn por kontroli siajn ekzercojn. Kelkajn bazajn ecojn oni povas analizi senpere per OsmAnd: tempojn de ĉirkaŭoj, mezumajn rapidojn, ktp; kaj kursojn oni povas poste analizi per specialaj eksteraj programoj.</string>
     <string name="use_opengl_render">Uzi OpenGL-bildigadon</string>
     <string name="use_opengl_render_descr">Uzi aparatan plirapidigan OpenGL-bildigadon (povas eluzi pli da baterio aŭ ne funkcii ĉe tre malnovaj aparatoj).</string>
     <string name="error_avoid_specific_road">Ne trovis ĉirkaŭvojon</string>
@@ -654,7 +654,7 @@ Lon: %2$s</string>
     <string name="srtm_plugin_name">Nivelkurboj</string>
     <string name="osmand_srtm_long_description_1000_chars">Tiu ĉi kromprogramo ebligas vidigi kaj tavolon de nivelkurboj kaj tavolon de nivelombrumo (reliefon) supre normaj OsmAnd‑mapoj. Tiu ĉi eblo estas dezirata de atletoj, migrantoj, turistoj kaj de ĉiuj scivolaj pri reliefa strukturo de tero. 
 \n 
-\nLa mondaj datumoj (inter 70° N kaj 70° S) estas bazitaj sur mezuroj de SRTM (Shuttle Radar Topography Mission) kaj de ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) – bildiga aparato en la Terra (ĉefa satelito de Sistemo de Tera Observado de NASA). ASTER estas kunlaboraĵo de NASA, de Japana Ministerio pri Ekonomio, Komerco kaj Industrio (METI) kaj de Japanaj Spacaj Sistemoj (J‑spacesystems).</string>
+\nLa mondaj datumoj (inter 70° N kaj 70° S) estas bazitaj sur mezuroj de SRTM (Shuttle Radar Topography Mission) kaj de ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) – bildiga aparato en la Terra (ĉefa satelito de Sistemo de Tera Observado de NASA). ASTER estas kunlaboraĵo de NASA, de Japana Ministerio pri Ekonomio, Komerco kaj Industrio (METI) kaj de Japanaj Spacaj Sistemoj (J‑spacesystems).</string>
     <string name="srtm_plugin_description">Tiu ĉi kromprogramo ebligas vidigi kaj tavolon de nivelkurboj kaj tavolon de nivelombrumo (reliefo) supre normaj OsmAnd-mapoj. Tiu ĉi eblo estas dezirata de atletoj, migrantoj, turistoj, kaj ĉiuj scivolaj en reliefa strukturo de tero. (Bonvolu rimarki, ke datumoj de nivelkurboj kaj nivelombrumo estas elŝuteblaj aparte post instalado de kromprogramo.) 
 \n 
 \nLa mondaj datumoj (inter 70° N kaj 70° S) estas bazitaj sur mezuroj de la SRTM (Shuttle Radar Topography Mission) kaj de la ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), bildiga aparato en la Terra - ĉefa satelito de Sistemo de Tera Observado de NASA. ASTER estas kunlaboraĵo de NASA, de Japana Ministerio pri Ekonomio, Komerco kaj Industrio (METI) kaj de Japanaj Spacaj Sistemoj (J-spacesystems).</string>
@@ -994,7 +994,7 @@ Lon: %2$s</string>
     <string name="recording_default_name">Registraĵo</string>
     <string name="map_widget_av_notes">Sonaj/videaj notoj</string>
     <string name="audionotes_plugin_name">Sonaj/videaj notoj</string>
-    <string name="audionotes_plugin_description">Tiu ĉi kromprogramo ebligas krei bildajn/sonajn/videajn notojn dum ekskurso, aŭ per butono sur la map‑ekrano, aŭ per kunteksta menuo por ajna pozicio sur la mapo.</string>
+    <string name="audionotes_plugin_description">Krei bildajn/sonajn/videajn notojn dum ekskurso, aŭ per butono sur la map‑ekrano, aŭ per kunteksta menuo de loko.</string>
     <string name="map_widget_distancemeasurement">Mezuro de distanco</string>
     <string name="map_widget_audionotes">Sonaj notoj</string>
     <string name="index_srtm_parts">partoj</string>
@@ -3454,4 +3454,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="multimedia_use_system_camera">Uzi sisteman aplikaĵon</string>
     <string name="multimedia_photo_play_sound">Sono de fotilo</string>
     <string name="osm_authorization_success">Rajtigo sukcesis</string>
+    <string name="monitoring_min_speed_descr_recommendation">Konsilo: provu unue uzi la movsentilon per agordi la filtrilon “minimuma delokiĝo” (B) – por ebla pli bona rezulto kaj malplia perdo de datumoj. Se viaj spuroj plue estos bruaj je malalta rapido, provu enigi tien ĉi malnulajn valorojn. Bonvolu rimarki, ke iuj mezuroj povas tute ne enhavi rapidojn (uzante ret‑bazitajn pozici‑trovajn servojn), do via spuro estos malplena.</string>
 </resources>

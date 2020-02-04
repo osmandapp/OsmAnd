@@ -413,7 +413,7 @@
     <string name="select_address_activity">Tilgreindu heimilisfang</string>
     <string name="access_arrival_time">Komutími</string>
     <string name="item_checked">merkt</string>
-    <string name="item_unchecked">ekki hakað</string>
+    <string name="item_unchecked">ekki merkt</string>
     <string name="prefer_motorways">Velja hraðbrautir</string>
     <string name="prefer_in_routing_title">Gefa forgang…</string>
     <string name="prefer_in_routing_descr">Velja hraðbrautir.</string>
@@ -3481,4 +3481,15 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="multimedia_photo_play_sound">Hljóð við myndatöku</string>
     <string name="osm_authorization_success">Heimild fékkst</string>
     <string name="not_support_file_type_with_ext">Veljið studda %1$s kerfisviðaukaskrá í staðinn.</string>
+    <string name="osm_edits_view_descr">Skoðaðu breytingarnar þínar eða villur í OSM sem ekki hafa enn verið sendar inn í %1$s. Innsendir punktar verða ekki lengur birtir.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Aukaverkanir: Ferilinn þinn mun vanta alla þá hluta þar sem kröfur um lágmarkshraða voru ekki uppfylltar (t.d. þar sem þú ert að ýta hjólinu þínu upp bratta brekku). Að auki verða engar upplýsingar um kyrrstöður, eins og t.d. hvíldarstaði. Þetta hefur áhrif á alla greiningu eða eftirvinnslu, eins og þegar verið er að skilgreina heildarlengd ferðar, tíma á ferðinni eða meðalhraða þinn.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Ábending: Reyndu fyrst að nota hreyfiskynjun í gegnum síuna sem mælis skráða lágmarkshliðrun (B), hún gæti gefið betri niðurstöður og þú tapar minna af gögnum. Ef ferlarnir þínir eru áfram loðnir við lágan hraða, skaltu prófa hér gildi sem ekki eru núll. Athugaðu að sumar mælingar gætu gefið gildi án hraða (sumar mæliaðferðir sem byggjast á netkerfum), í þeim tilfellum myndi ekkert vera skráð.</string>
+    <string name="monitoring_min_speed_descr_remark">Athugaðu: ef hraði &gt; 0 skoðaðu: Flest GPS kubbasett gefa aðeins upp hraðagildi ef reikniritið ákvarðar að tækið sé á hreyfingu, en gefa ekki neitt gildi ef svo er ekki. Þar af leiðir að sé notuð stillingin &gt; 0 í þessari síu má segja að sé verið að nota hreyfiskynjunina í GPS kubbasettinu. En jafnvel þó þetta sé ekki síað á meðan skráningu stendur, þá notum við samt þennan eiginleika í greiningu okkar á GPX-ferlinum til að ákvarða leiðrétta vegalengd, þ.e.a.s. gildið sem birtist í þeim reit er einmitt skráð vegalengd á meðan verið er á ferðinni.</string>
+    <string name="monitoring_min_accuracy_descr">Þetta mun aðeins skrá punkta mælda með lágmarksáreiðanleika (í metrum/fetum, eins og tilgreint er af Android fyrir kubbasettið þitt). Áreiðanleiki í þessu tilfelli á við dreifingu á endurteknum mælingum, og tengist ekki beint þeirri nákvæmni sem felst í því hversu nálægt mælingarnar eru raunverulegri/sannri staðsetningu þinni.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Aukaverkanir: Vegna síunar eftir áreiðanleika, gæti vantað alveg suma punkta, t.d. undir brúm, undir trjám, milli hárra bygginga eða við tiltekin veðurskilyrði.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Ábending: Það er erfitt að spá fyrir um hvað verði skráð og hvað ekki, það getur verið betra að slökkva á þessari síu.</string>
+    <string name="monitoring_min_accuracy_descr_remark">Athugaðu: Ef slökkt hefur verið á GPS-tækinu rétt áður en skráning hefst og tækið því nýkomið í gang, gæti áreiðanleiki fyrsta punktsins verið minni en annars, þannig að í kóðanum okkar myndum við vilja bíða í nokkrar sekúndur áður en skráning punkta hefst (eða skrá besta af 3 samfelldum punktum, o.s.frv.), en þetta hefur ekki ennþá komið til framkvæmda.</string>
+    <string name="monitoring_min_distance_descr">Þessi sía kemur í veg fyrir að tvíteknir punktar séu skráðir ef of lítil raunveruleg hreyfing hefur átt sér stað, þetta gerir ferla áferðarfallegri ef ekki á að eftirvinna þá.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Aukaverkanir: Tímabil í hvíld eru alls ekki skráð eða þá með aðeins einum punkti. Litlar (raunverulegar) hreyfingar (t.d. til hliðar, til að merkja mögulega hliðarleiðir leiðar) gætu síast í burtu. Skráin þín inniheldur minni upplýsingar til eftirvinnslu, og er með verri tölfræði þar sem umframpunktar eru síaðir út á meðan skráningu stendur, á meðan mögulega er verið að geyma skemmdar upplýsingar vegna lélegrar móttöku eða truflana í GPS kubbasetti.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Ábending: Stilling upp á 5 metra gæti virkað vel ef þú hefur ekki þörf fyrir meiri nákvæmni og ef þú vilt koma í veg fyrir að verið sé að skrá gögn á meðan staldrað er við.</string>
 </resources>
