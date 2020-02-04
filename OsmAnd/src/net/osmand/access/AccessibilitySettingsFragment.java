@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.Preference;
@@ -12,6 +13,7 @@ import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
+import android.view.accessibility.AccessibilityManager.AccessibilityStateChangeListener;
 import android.widget.LinearLayout;
 
 import net.osmand.AndroidUtils;
@@ -37,6 +39,21 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 	private static final String COPY_PLUGIN_SETTINGS = "copy_plugin_settings";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
 
+	private AccessibilityStateChangeListener accessibilityListener;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		accessibilityListener = new AccessibilityStateChangeListener() {
+			@Override
+			public void onAccessibilityStateChanged(boolean b) {
+				if (isResumed() && useSystemAccessibility()) {
+					updateAllSettings();
+				}
+			}
+		};
+	}
+
 	@Override
 	protected void setupPreferences() {
 		setupAccessibilityPermissionPref();
@@ -59,20 +76,41 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 		updateAccessibilityOptions();
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		Preference accessibilityPrefs = findPreference(ACCESSIBILITY_OPTIONS);
+		if (useSystemAccessibility() && accessibilityPrefs.isVisible() == app.systemAccessibilityEnabled()) {
+			updateAllSettings();
+		}
+		AccessibilityManager accessibilityManager = (AccessibilityManager) app.getSystemService(Context.ACCESSIBILITY_SERVICE);
+		accessibilityManager.addAccessibilityStateChangeListener(accessibilityListener);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		AccessibilityManager accessibilityManager = (AccessibilityManager) app.getSystemService(Context.ACCESSIBILITY_SERVICE);
+		accessibilityManager.removeAccessibilityStateChangeListener(accessibilityListener);
+	}
+
 	private void setupAccessibilityPermissionPref() {
 		Preference accessibilityPrefs = findPreference(ACCESSIBILITY_OPTIONS);
-		AccessibilityMode currentAccessibilityMode = settings.ACCESSIBILITY_MODE.getModeValue(getSelectedAppMode());
-		boolean systemAccessibilityEnabled = ((AccessibilityManager) app.getSystemService(Context.ACCESSIBILITY_SERVICE)).isEnabled();
-		if (!currentAccessibilityMode.equals(AccessibilityMode.DEFAULT) || systemAccessibilityEnabled) {
+		if (!useSystemAccessibility() || app.systemAccessibilityEnabled()) {
 			accessibilityPrefs.setVisible(false);
 		} else {
 			Intent accessibilitySettings = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
-			boolean resolved = accessibilitySettings.resolveActivity(app.getPackageManager()) != null;
-			accessibilityPrefs.setVisible(resolved);
-			if (resolved) {
+			accessibilityPrefs.setVisible(true);
+			if (accessibilitySettings.resolveActivity(app.getPackageManager()) != null) {
 				accessibilityPrefs.setIntent(accessibilitySettings);
+			} else {
+				accessibilityPrefs.setSummary(null);
 			}
 		}
+	}
+
+	private boolean useSystemAccessibility() {
+		return AccessibilityMode.DEFAULT == settings.ACCESSIBILITY_MODE.getModeValue(getSelectedAppMode());
 	}
 
 	private void setupAccessibilityModePref() {
@@ -208,7 +246,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 	@Override
 	public void onPreferenceChanged(String prefId) {
 		if (settings.ACCESSIBILITY_MODE.getId().equals(prefId)) {
-			updateAccessibilityOptions();
+			updateAllSettings();
 		}
 	}
 
