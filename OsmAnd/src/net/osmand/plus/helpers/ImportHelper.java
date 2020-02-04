@@ -788,7 +788,6 @@ public class ImportHelper {
 									ExportImportProfileBottomSheet.showInstance(
 											fragmentManager,
 											ExportImportProfileBottomSheet.State.IMPORT,
-											file,
 											items);
 								}
 							} else {

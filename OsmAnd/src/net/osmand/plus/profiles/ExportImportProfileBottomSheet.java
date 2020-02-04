@@ -85,8 +85,6 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
 
     private List<SettingsHelper.SettingsItem> settingsItems;
 
-    private File file;
-
     private SettingsHelper.ProfileSettingsItem profileSettingsItem;
 
     @Override
@@ -191,11 +189,14 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
         List<AdditionalDataWrapper> dataList = new ArrayList<>();
         List<QuickAction> quickActions = new ArrayList<>();
         List<PoiUIFilter> poiUIFilters = new ArrayList<>();
+        List<MapSourceWrapper> mapSourceWrappers = new ArrayList<>();
         for (SettingsHelper.SettingsItem item : settingsItems) {
             if (item.getType().equals(SettingsHelper.SettingsItemType.QUICK_ACTION_LIST)) {
                         quickActions.addAll(((SettingsHelper.QuickActionSettingsItem) item).getQuickActions());
             } else if (item.getType().equals(SettingsHelper.SettingsItemType.POI_UI_FILTERS_LIST)) {
-//                poiUIFilters.addAll()
+//                poiUIFilters.addAll(((SettingsHelper.PoiUiFilterSettingsItem) item).)
+            } else if (item.getType().equals(SettingsHelper.SettingsItemType.MAP_SOURCES_LIST)) {
+//                mapSourceWrappers.addAll(((SettingsHelper.MapSourcesSettingsItem) item).)
             }
         }
         if (!quickActions.isEmpty()) {
@@ -207,6 +208,12 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
             dataList.add(new AdditionalDataWrapper(
                     AdditionalDataWrapper.Type.POI_TYPES,
                     poiUIFilters));
+        }
+        if (!mapSourceWrappers.isEmpty()) {
+            dataList.add(new AdditionalDataWrapper(
+                    AdditionalDataWrapper.Type.MAP_SOURCES,
+                    mapSourceWrappers
+            ));
         }
         for (AdditionalDataWrapper dataWrapper : dataList) {
             dataToOperate.addAll(dataWrapper.getItems());
@@ -252,7 +259,7 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
             ));
         }
 
-        final LinkedHashMap<String, String> entriesMap = new LinkedHashMap<>(settings.getTileSourceEntries());
+        final LinkedHashMap<String, String> entriesMap = new LinkedHashMap<>(settings.getTileSourceEntries(false));
         List<MapSourceWrapper> mapSourceWrapperList = new ArrayList<>();
         for (Map.Entry<String, String> entry : entriesMap.entrySet()) {
             mapSourceWrapperList.add(new MapSourceWrapper(entry.getKey(), entry.getValue()));
@@ -403,7 +410,6 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
 
     public static boolean showInstance(@NonNull FragmentManager fragmentManager,
                                        State state,
-                                       File file,
                                        List<SettingsHelper.SettingsItem> items) {
         try {
             Bundle bundle = new Bundle();
@@ -411,20 +417,11 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
             ExportImportProfileBottomSheet fragment = new ExportImportProfileBottomSheet();
             fragment.setArguments(bundle);
             fragment.setSettingsItems(items);
-            fragment.setFile(file);
             fragment.show(fragmentManager, TAG);
             return true;
         } catch (RuntimeException e) {
             return false;
         }
-    }
-
-    public File getFile() {
-        return file;
-    }
-
-    public void setFile(File file) {
-        this.file = file;
     }
 
     public enum State {
