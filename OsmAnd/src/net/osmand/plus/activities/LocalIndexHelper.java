@@ -2,7 +2,6 @@ package net.osmand.plus.activities;
 
 
 import android.content.Context;
-import android.os.Build;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 
@@ -74,7 +73,7 @@ public class LocalIndexHelper {
 			} else {
 				return;
 			}
-			String descr = " ";
+			String descr = "";
 			if (template.getExpirationTimeMinutes() >= 0) {
 				descr += app.getString(R.string.local_index_tile_data_expire, String.valueOf(template.getExpirationTimeMinutes()));
 			}
