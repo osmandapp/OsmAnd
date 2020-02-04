@@ -87,6 +87,8 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
 
     private SettingsHelper.ProfileSettingsItem profileSettingsItem;
 
+    private File file;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -191,11 +193,11 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
         List<PoiUIFilter> poiUIFilters = new ArrayList<>();
         List<MapSourceWrapper> mapSourceWrappers = new ArrayList<>();
         for (SettingsHelper.SettingsItem item : settingsItems) {
-            if (item.getType().equals(SettingsHelper.SettingsItemType.QUICK_ACTION_LIST)) {
+            if (item.getType().equals(SettingsHelper.SettingsItemType.QUICK_ACTION)) {
                         quickActions.addAll(((SettingsHelper.QuickActionSettingsItem) item).getQuickActions());
-            } else if (item.getType().equals(SettingsHelper.SettingsItemType.POI_UI_FILTERS_LIST)) {
+            } else if (item.getType().equals(SettingsHelper.SettingsItemType.POI_UI_FILTERS)) {
 //                poiUIFilters.addAll(((SettingsHelper.PoiUiFilterSettingsItem) item).)
-            } else if (item.getType().equals(SettingsHelper.SettingsItemType.MAP_SOURCES_LIST)) {
+            } else if (item.getType().equals(SettingsHelper.SettingsItemType.MAP_SOURCES)) {
 //                mapSourceWrappers.addAll(((SettingsHelper.MapSourcesSettingsItem) item).)
             }
         }
@@ -219,21 +221,14 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
             dataToOperate.addAll(dataWrapper.getItems());
         }
         adapter.updateList(dataList);
-
-//        app.getSettingsHelper().importSettings(settingsItems, file, new SettingsHelper.SettingsImportListener() {
-//            @Override
-//            public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
-//
-//            }
-//        });
     }
 
     private Boolean checkAdditionalDataContains() {
         boolean containsData = false;
         for (SettingsHelper.SettingsItem item : settingsItems) {
-            containsData = item.getType().equals(SettingsHelper.SettingsItemType.QUICK_ACTION_LIST)
-                    || item.getType().equals(SettingsHelper.SettingsItemType.POI_UI_FILTERS_LIST)
-                    || item.getType().equals(SettingsHelper.SettingsItemType.MAP_SOURCES_LIST);
+            containsData = item.getType().equals(SettingsHelper.SettingsItemType.QUICK_ACTION)
+                    || item.getType().equals(SettingsHelper.SettingsItemType.POI_UI_FILTERS)
+                    || item.getType().equals(SettingsHelper.SettingsItemType.MAP_SOURCES);
             if (containsData) {
                 break;
             }
@@ -299,7 +294,12 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
         if (includeAdditionalData) {
             list.addAll(prepareAdditionalSettingsItems());
         }
-        app.getSettingsHelper().importSettingsItems(list);
+        app.getSettingsHelper().importSettings(file, list, "", 1, new SettingsHelper.SettingsImportListener() {
+            @Override
+            public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
+
+            }
+        });
         dismiss();
     }
 
@@ -410,6 +410,7 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
 
     public static boolean showInstance(@NonNull FragmentManager fragmentManager,
                                        State state,
+                                       File file,
                                        List<SettingsHelper.SettingsItem> items) {
         try {
             Bundle bundle = new Bundle();
@@ -417,11 +418,20 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
             ExportImportProfileBottomSheet fragment = new ExportImportProfileBottomSheet();
             fragment.setArguments(bundle);
             fragment.setSettingsItems(items);
+            fragment.setFile(file);
             fragment.show(fragmentManager, TAG);
             return true;
         } catch (RuntimeException e) {
             return false;
         }
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
     }
 
     public enum State {

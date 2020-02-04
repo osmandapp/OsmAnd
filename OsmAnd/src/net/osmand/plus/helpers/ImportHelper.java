@@ -776,18 +776,19 @@ public class ImportHelper {
 				File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
 				final File file = new File(tempDir, name);
 				if (error == null && file.exists()) {
-					app.getSettingsHelper().preImportSettings(file, latestChanges, version, new SettingsHelper.SettingsPreImportListener() {
+					app.getSettingsHelper().importSettings(file, latestChanges, version, new SettingsImportListener() {
 						@Override
-						public void onSettingsPreImported(boolean isSuccessful, List<SettingsHelper.SettingsItem> items) {
+						public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
 							if (isActivityNotDestroyed(activity)) {
 								progress.dismiss();
 							}
-							if (isSuccessful) {
+							if (succeed) {
 								FragmentManager fragmentManager = activity.getSupportFragmentManager();
 								if (fragmentManager != null) {
 									ExportImportProfileBottomSheet.showInstance(
 											fragmentManager,
 											ExportImportProfileBottomSheet.State.IMPORT,
+											file,
 											items);
 								}
 							} else {
