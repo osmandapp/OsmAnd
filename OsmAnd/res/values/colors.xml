@@ -422,7 +422,7 @@
 	<color name="app_bar_main_light">#ff8800</color>
 	<color name="status_bar_main_dark">#101112</color>
 	<color name="status_bar_main_light">#E68200</color>
-	<color name="navigation_bar_bg_light">#FFFFFF</color>
+	<color name="navigation_bar_bg_light">#000000</color>
 	<color name="navigation_bar_bg_dark">#000000</color>
 
 	<color name="activity_background_dark">#17181a</color>
