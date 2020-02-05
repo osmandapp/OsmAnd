@@ -21,7 +21,6 @@
 		android:id="@android:id/title"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_gravity="center_vertical"
 		android:letterSpacing="@dimen/description_letter_spacing"
 		android:paddingLeft="@dimen/content_padding"
 		android:paddingTop="@dimen/content_padding_small"
