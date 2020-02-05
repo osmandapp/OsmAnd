@@ -57,23 +57,13 @@ public class NavigationFragment extends BaseSettingsFragment {
 	@Override
 	protected void setupPreferences() {
 		navigationType = findPreference(NAVIGATION_TYPE);
+		setupNavigationTypePref();
+
 		Preference routeParameters = findPreference("route_parameters");
 		SwitchPreferenceCompat showRoutingAlarms = (SwitchPreferenceCompat) findPreference(settings.SHOW_ROUTING_ALARMS.getId());
 		SwitchPreferenceCompat turnScreenOn = (SwitchPreferenceCompat) findPreference(settings.TURN_SCREEN_ON_ENABLED.getId());
 		SwitchPreferenceEx animateMyLocation = (SwitchPreferenceEx) findPreference(settings.ANIMATE_MY_LOCATION.getId());
-		if (getSelectedAppMode().getRoutingProfile() != null) {
-			GeneralRouter routingProfile = app.getRoutingConfig().getRouter(getSelectedAppMode().getRoutingProfile());
-			if (routingProfile != null) {
-				String profileNameUC = routingProfile.getProfileName().toUpperCase();
-				if (RoutingProfilesResources.isRpValue(profileNameUC)) {
-					RoutingProfilesResources routingProfilesResources = RoutingProfilesResources.valueOf(profileNameUC);
-					navigationType.setSummary(routingProfilesResources.getStringRes());
-					navigationType.setIcon(getActiveIcon(routingProfilesResources.getIconRes()));
-				} else {
-					navigationType.setIcon(getActiveIcon(R.drawable.ic_action_gdirections_dark));
-				}
-			}
-		}
+
 		routeParameters.setIcon(getContentIcon(R.drawable.ic_action_route_distance));
 		showRoutingAlarms.setIcon(getPersistentPrefIcon(R.drawable.ic_action_alert));
 		turnScreenOn.setIcon(getPersistentPrefIcon(R.drawable.ic_action_turn_screen_on));
@@ -82,6 +72,17 @@ public class NavigationFragment extends BaseSettingsFragment {
 		setupVehicleParametersPref();
 
 		animateMyLocation.setDescription(getString(R.string.animate_my_location_desc));
+	}
+
+	private void setupNavigationTypePref() {
+		String routingProfileKey = getSelectedAppMode().getRoutingProfile();
+		if (!Algorithms.isEmpty(routingProfileKey)) {
+			RoutingProfileDataObject routingProfileDataObject = routingProfileDataObjects.get(routingProfileKey);
+			if (routingProfileDataObject != null) {
+				navigationType.setSummary(routingProfileDataObject.getName());
+				navigationType.setIcon(getActiveIcon(routingProfileDataObject.getIconRes()));
+			}
+		}
 	}
 
 	private void setupSpeakRoutingAlarmsPref() {
