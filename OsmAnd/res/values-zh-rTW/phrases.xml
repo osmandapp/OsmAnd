@@ -3785,4 +3785,9 @@
     <string name="poi_volcano_number_of_eruptions">噴發次數</string>
     <string name="poi_memorial_ghost_bike">幽靈單車</string>
     <string name="poi_paintball">漆彈</string>
+    <string name="poi_mountain_rescue">山區救援</string>
+    <string name="poi_shop_security">安全商店</string>
+    <string name="poi_bowling_alley">保齡球館</string>
+    <string name="poi_piste_ref">滑雪道參考編號</string>
+    <string name="poi_resort_hunting">狩獵基地</string>
 </resources>
