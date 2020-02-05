@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -63,13 +64,13 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	}
 
 	private void setupOfflineEditingPref() {
+		Drawable disabled = getContentIcon(R.drawable.ic_action_offline);
+		Drawable enabled = getActiveIcon(R.drawable.ic_world_globe_dark);
+		Drawable icon = AndroidUtils.createEnabledStateListDrawable(disabled, enabled);
+
 		SwitchPreferenceEx offlineEditingPref = (SwitchPreferenceEx) findPreference(settings.OFFLINE_EDITION.getId());
 		offlineEditingPref.setDescription(getString(R.string.offline_edition_descr));
-		offlineEditingPref.setIcon(getOfflineEditingIcon(settings.OFFLINE_EDITION.get()));
-	}
-
-	private Drawable getOfflineEditingIcon(boolean enabled) {
-		return enabled ? getActiveIcon(R.drawable.ic_world_globe_dark) : getContentIcon(R.drawable.ic_action_offline);
+		offlineEditingPref.setIcon(icon);
 	}
 
 	private void setupOsmEditsDescrPref() {
@@ -107,14 +108,6 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 			}
 		}
 		return super.onPreferenceClick(preference);
-	}
-
-	@Override
-	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		if (settings.OFFLINE_EDITION.getId().equals(preference.getKey()) && newValue instanceof Boolean) {
-			preference.setIcon(getOfflineEditingIcon((Boolean) newValue));
-		}
-		return super.onPreferenceChange(preference, newValue);
 	}
 
 	@Override

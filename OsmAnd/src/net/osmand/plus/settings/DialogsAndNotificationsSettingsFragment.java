@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import net.osmand.plus.R;
-import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 public class DialogsAndNotificationsSettingsFragment extends BaseSettingsFragment {
 
@@ -31,11 +30,12 @@ public class DialogsAndNotificationsSettingsFragment extends BaseSettingsFragmen
 		boolean enabled = !settings.DO_NOT_SHOW_STARTUP_MESSAGES.get(); // pref ui was inverted
 		SwitchPreferenceCompat sendAnonymousData = (SwitchPreferenceCompat) findPreference(settings.DO_NOT_SHOW_STARTUP_MESSAGES.getId());
 		sendAnonymousData.setChecked(enabled);
+		sendAnonymousData.setIcon(getPersistentPrefIcon(R.drawable.ic_action_notification));
 	}
 
 	private void setupShowDownloadMapDialogPref() {
 		SwitchPreferenceCompat showDownloadMapDialog = (SwitchPreferenceCompat) findPreference(settings.SHOW_DOWNLOAD_MAP_DIALOG.getId());
-		showDownloadMapDialog.setIcon(getContentIcon(R.drawable.ic_action_import));
+		showDownloadMapDialog.setIcon(getPersistentPrefIcon(R.drawable.ic_action_import));
 	}
 
 	@Override

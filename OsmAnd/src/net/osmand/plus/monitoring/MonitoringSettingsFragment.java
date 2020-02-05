@@ -2,11 +2,13 @@ package net.osmand.plus.monitoring;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.Preference;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandPlugin;
@@ -68,7 +70,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	private void setupSaveTrackToGpxPref() {
 		SwitchPreferenceEx saveTrackToGpx = (SwitchPreferenceEx) findPreference(settings.SAVE_TRACK_TO_GPX.getId());
 		saveTrackToGpx.setDescription(getString(R.string.save_track_to_gpx_descrp));
-		saveTrackToGpx.setIcon(getContentIcon(R.drawable.ic_action_gdirections_dark));
+		saveTrackToGpx.setIcon(getPersistentPrefIcon(R.drawable.ic_action_gdirections_dark));
 	}
 
 	private void setupSaveTrackIntervalPref() {
@@ -190,7 +192,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	private void setupShowTripRecNotificationPref() {
 		SwitchPreferenceEx showTripRecNotification = (SwitchPreferenceEx) findPreference(settings.SHOW_TRIP_REC_NOTIFICATION.getId());
 		showTripRecNotification.setDescription(getString(R.string.trip_rec_notification_settings));
-		showTripRecNotification.setIcon(getContentIcon(R.drawable.ic_action_notification));
+		showTripRecNotification.setIcon(getPersistentPrefIcon(R.drawable.ic_action_notification));
 	}
 
 	private void setupTrackStorageDirectoryPref() {
@@ -208,9 +210,13 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	}
 
 	private void setupLiveMonitoringPref() {
+		Drawable disabled = getContentIcon(R.drawable.ic_action_offline);
+		Drawable enabled = getActiveIcon(R.drawable.ic_world_globe_dark);
+		Drawable icon = AndroidUtils.createEnabledStateListDrawable(disabled, enabled);
+
 		SwitchPreferenceEx liveMonitoring = (SwitchPreferenceEx) findPreference(settings.LIVE_MONITORING.getId());
 		liveMonitoring.setDescription(getString(R.string.live_monitoring_m_descr));
-		liveMonitoring.setIcon(getContentIcon(R.drawable.ic_world_globe_dark));
+		liveMonitoring.setIcon(icon);
 	}
 
 	private void setupOpenNotesDescrPref() {

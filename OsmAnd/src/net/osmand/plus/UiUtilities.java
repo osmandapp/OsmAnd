@@ -144,6 +144,10 @@ public class UiUtilities {
 		return drawable;
 	}
 
+	public static Drawable createTintedDrawable(Context context, @DrawableRes int resId, int color) {
+		return tintDrawable(ContextCompat.getDrawable(context, resId), color);
+	}
+
 	public static Drawable tintDrawable(Drawable drawable, int color) {
 		Drawable coloredDrawable = null;
 		if (drawable != null) {

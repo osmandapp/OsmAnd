@@ -113,14 +113,14 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	private void setupExternalPhotoCamPref(Camera cam, AudioVideoNotesPlugin plugin) {
 		SwitchPreferenceEx externalPhotoCam = (SwitchPreferenceEx) findPreference(plugin.AV_EXTERNAL_PHOTO_CAM.getId());
 		externalPhotoCam.setDescription(getString(R.string.av_use_external_camera_descr));
-		externalPhotoCam.setIcon(getActiveIcon(R.drawable.ic_action_photo_dark));
+		externalPhotoCam.setIcon(getPersistentPrefIcon(R.drawable.ic_action_photo_dark));
 		externalPhotoCam.setEnabled(cam != null);
 	}
 
 	private void setupCameraPictureSizePref(Camera cam, AudioVideoNotesPlugin plugin) {
 		ListPreferenceEx cameraPictureSize = (ListPreferenceEx) findPreference(plugin.AV_CAMERA_PICTURE_SIZE.getId());
 		cameraPictureSize.setDescription(R.string.av_camera_pic_size_descr);
-		cameraPictureSize.setIcon(getActiveIcon(R.drawable.ic_action_picture_size));
+		cameraPictureSize.setIcon(getPersistentPrefIcon(R.drawable.ic_action_picture_size));
 
 		if (cam == null) {
 			cameraPictureSize.setEnabled(false);
@@ -192,7 +192,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	private void setupCameraFocusTypePref(Camera cam, AudioVideoNotesPlugin plugin) {
 		ListPreferenceEx cameraFocusType = (ListPreferenceEx) findPreference(plugin.AV_CAMERA_FOCUS_TYPE.getId());
 		cameraFocusType.setDescription(R.string.av_camera_focus_descr);
-		cameraFocusType.setIcon(getActiveIcon(R.drawable.ic_action_camera_focus));
+		cameraFocusType.setIcon(getPersistentPrefIcon(R.drawable.ic_action_camera_focus));
 
 		if (cam == null) {
 			cameraFocusType.setEnabled(false);
@@ -243,7 +243,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	private void setupPhotoPlaySoundPref(Camera cam, AudioVideoNotesPlugin plugin) {
 		SwitchPreferenceEx photoPlaySound = (SwitchPreferenceEx) findPreference(plugin.AV_PHOTO_PLAY_SOUND.getId());
 		photoPlaySound.setDescription(getString(R.string.av_photo_play_sound_descr));
-		photoPlaySound.setIcon(getContentIcon(R.drawable.ic_action_music_off));
+		photoPlaySound.setIcon(getPersistentPrefIcon(R.drawable.ic_action_music_off));
 		photoPlaySound.setEnabled(cam != null);
 	}
 
@@ -270,7 +270,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	private void setupExternalRecorderPref(AudioVideoNotesPlugin plugin) {
 		SwitchPreferenceEx externalRecorder = (SwitchPreferenceEx) findPreference(plugin.AV_EXTERNAL_RECORDER.getId());
 		externalRecorder.setDescription(getString(R.string.av_use_external_recorder_descr));
-		externalRecorder.setIcon(getContentIcon(R.drawable.ic_action_video_dark));
+		externalRecorder.setIcon(getPersistentPrefIcon(R.drawable.ic_action_video_dark));
 	}
 
 	private void setupVideoQualityPref(AudioVideoNotesPlugin plugin) {
@@ -308,7 +308,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		videoQuality.setEntries(entries);
 		videoQuality.setEntryValues(entryValues);
 		videoQuality.setDescription(R.string.av_video_quality_descr);
-		videoQuality.setIcon(getContentIcon(R.drawable.ic_action_picture_size));
+		videoQuality.setIcon(getActiveIcon(R.drawable.ic_action_picture_size));
 	}
 
 	private void setupRecorderSplitPref(AudioVideoNotesPlugin plugin) {
@@ -366,7 +366,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 			storageSize.setEntries(entries);
 			storageSize.setEntryValues(entryValues);
 			storageSize.setDescription(R.string.rec_split_storage_size_desc);
-			storageSize.setIcon(getContentIcon(R.drawable.ic_sdcard));
+			storageSize.setIcon(getActiveIcon(R.drawable.ic_sdcard));
 		} else {
 			storageSize.setVisible(false);
 		}

@@ -3,6 +3,8 @@ package net.osmand.plus.settings;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
+import android.widget.ImageView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -21,6 +23,9 @@ import static net.osmand.plus.activities.SettingsNavigationActivity.showSeekbarS
 public class VehicleParametersFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
 	public static final String TAG = VehicleParametersFragment.class.getSimpleName();
+
+	private static final String ROUTING_PARAMETER_NUMERIC_DEFAULT = "0.0";
+	private static final String ROUTING_PARAMETER_SYMBOLIC_DEFAULT = "-";
 
 	@Override
 	protected void setupPreferences() {
@@ -69,7 +74,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		String title = SettingsBaseActivity.getRoutingStringPropertyName(app, parameterId, parameter.getName());
 		String description = SettingsBaseActivity.getRoutingStringPropertyDescription(app, parameterId, parameter.getDescription());
 
-		String defValue = parameter.getType() == GeneralRouter.RoutingParameterType.NUMERIC ? "0.0" : "-";
+		String defValue = parameter.getType() == GeneralRouter.RoutingParameterType.NUMERIC ? ROUTING_PARAMETER_NUMERIC_DEFAULT : ROUTING_PARAMETER_SYMBOLIC_DEFAULT;
 		OsmandSettings.StringPreference pref = (OsmandSettings.StringPreference) app.getSettings().getCustomRoutingProperty(parameterId, defValue);
 
 		Object[] values = parameter.getPossibleValues();
@@ -99,6 +104,20 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 	}
 
 	@Override
+	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+		super.onBindPreferenceViewHolder(preference, holder);
+		if (!GeneralRouter.DEFAULT_SPEED.equals(preference.getKey()) && preference instanceof ListPreferenceEx) {
+			ImageView imageView = (ImageView) holder.findViewById(android.R.id.icon);
+			if (imageView != null) {
+				Object currentValue = ((ListPreferenceEx) preference).getValue();
+				boolean enabled = preference.isEnabled() && !ROUTING_PARAMETER_NUMERIC_DEFAULT.equals(currentValue)
+						&& !ROUTING_PARAMETER_SYMBOLIC_DEFAULT.equals(currentValue);
+				imageView.setEnabled(enabled);
+			}
+		}
+	}
+
+	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		if (preference.getKey().equals(GeneralRouter.DEFAULT_SPEED)) {
 			RouteService routeService = getSelectedAppMode().getRouteService();
@@ -124,13 +143,13 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 	private Drawable getPreferenceIcon(String prefId) {
 		switch (prefId) {
 			case GeneralRouter.DEFAULT_SPEED:
-				return getContentIcon(R.drawable.ic_action_speed);
+				return getPersistentPrefIcon(R.drawable.ic_action_speed);
 			case GeneralRouter.VEHICLE_HEIGHT:
-				return getContentIcon(R.drawable.ic_action_height_limit);
+				return getPersistentPrefIcon(R.drawable.ic_action_height_limit);
 			case GeneralRouter.VEHICLE_WEIGHT:
-				return getContentIcon(R.drawable.ic_action_weight_limit);
+				return getPersistentPrefIcon(R.drawable.ic_action_weight_limit);
 			case GeneralRouter.VEHICLE_WIDTH:
-				return getContentIcon(R.drawable.ic_action_width_limit);
+				return getPersistentPrefIcon(R.drawable.ic_action_width_limit);
 			default:
 				return null;
 		}

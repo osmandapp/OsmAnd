@@ -48,6 +48,7 @@ public class MultiSelectBooleanPreference extends MultiSelectListPreference {
 			getValues().addAll(values);
 
 			persistBooleanPrefs();
+			notifyChanged();
 		}
 	}
 
