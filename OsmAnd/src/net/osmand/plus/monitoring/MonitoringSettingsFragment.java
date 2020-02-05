@@ -3,6 +3,7 @@ package net.osmand.plus.monitoring;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.Preference;
 import android.text.SpannableString;
@@ -14,6 +15,7 @@ import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
@@ -35,6 +37,7 @@ import static net.osmand.plus.OsmandSettings.MONTHLY_DIRECTORY;
 import static net.osmand.plus.OsmandSettings.REC_DIRECTORY;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.MINUTES;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.SECONDS;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
 public class MonitoringSettingsFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
 
@@ -251,10 +254,13 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
 		if (OPEN_TRACKS.equals(prefId)) {
+			Bundle bundle = new Bundle();
+			bundle.putInt(TAB_ID, FavoritesActivity.GPX_TAB);
+
 			OsmAndAppCustomization appCustomization = app.getAppCustomization();
 			Intent favorites = new Intent(preference.getContext(), appCustomization.getFavoritesActivity());
 			favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-			app.getSettings().FAVORITES_TAB.set(FavoritesActivity.GPX_TAB);
+			favorites.putExtra(MapActivity.INTENT_PARAMS, bundle);
 			startActivity(favorites);
 			return true;
 		} else if (COPY_PLUGIN_SETTINGS.equals(prefId)) {

@@ -131,6 +131,7 @@ import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.settings.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.settings.ConfigureProfileFragment;
 import net.osmand.plus.settings.DataStorageFragment;
 import net.osmand.plus.settings.ProfileAppearanceFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
@@ -1222,6 +1223,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		boolean editToShow = settings.getAndClearEditObjectToShow();
 		int status = settings.isRouteToPointNavigateAndClear();
 		String searchRequestToShow = settings.getAndClearSearchRequestToShow();
+		if (status != 0 || searchRequestToShow != null || latLonToShow != null) {
+			dismissSettingsScreens();
+		}
 		if (status != 0) {
 			// always enable and follow and let calculate it (i.e.GPS is not accessible in a garage)
 			Location loc = new Location("map");
@@ -2149,6 +2153,17 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			getSupportFragmentManager().popBackStack(DRAWER_SETTINGS_ID + ".new", FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	public void checkAndShowConfigureProfileFragment() {
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		int backStackEntryCount = fragmentManager.getBackStackEntryCount();
+		if (backStackEntryCount > 0) {
+			FragmentManager.BackStackEntry entry = fragmentManager.getBackStackEntryAt(backStackEntryCount - 1);
+			if (ConfigureProfileFragment.TAG.equals(entry.getName())) {
+				fragmentManager.popBackStack();
+			}
 		}
 	}
 
