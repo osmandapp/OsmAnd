@@ -3783,4 +3783,10 @@
     <string name="poi_volcano_status_inactive">Inativu</string>
     <string name="poi_volcano_number_of_eruptions">Nùmeru de erutziones</string>
     <string name="poi_memorial_ghost_bike">Bitzicleta pantasma</string>
+    <string name="poi_paintball">Paintball</string>
+    <string name="poi_mountain_rescue">Agiudu montanu (sucursu alpinu)</string>
+    <string name="poi_shop_security">Butega de artìculos pro sa seguresa</string>
+    <string name="poi_bowling_alley">Tzentru pro su bowling</string>
+    <string name="poi_piste_ref">Nùmeru de referèntzia de sa pista</string>
+    <string name="poi_resort_hunting">Base pro sa cassa</string>
 </resources>
