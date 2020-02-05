@@ -113,7 +113,7 @@ public class RoutingOptionsHelper {
 		mapActivity.getMyApplication().getAvoidSpecificRoads().showDialog(mapActivity);
 	}
 
-	public void selectVoiceGuidance(final MapActivity mapActivity, final CallbackWithObject<String> callback) {
+	public void selectVoiceGuidance(final MapActivity mapActivity, final CallbackWithObject<String> callback, ApplicationMode applicationMode) {
 		final ContextMenuAdapter adapter = new ContextMenuAdapter();
 
 		String[] entries;
@@ -123,7 +123,7 @@ public class RoutingOptionsHelper {
 		entrieValues = new String[voiceFiles.size() + 2];
 		int k = 0;
 		int selected = -1;
-		String selectedValue = mapActivity.getMyApplication().getSettings().VOICE_PROVIDER.get();
+		String selectedValue = mapActivity.getMyApplication().getSettings().VOICE_PROVIDER.getModeValue(applicationMode);
 		entrieValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
 		entries[k] = mapActivity.getResources().getString(R.string.shared_string_do_not_use);
 		ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder();

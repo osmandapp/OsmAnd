@@ -73,7 +73,7 @@ public class RoutePreferencesMenu {
 				updateParameters();
 				return true;
 			}
-		});
+		}, routingHelper.getAppMode());
 	}
 
 	public OnItemClickListener getItemClickListener(final ArrayAdapter<?> listAdapter) {

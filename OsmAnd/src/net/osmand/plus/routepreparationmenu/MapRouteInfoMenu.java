@@ -821,7 +821,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				appMode.set(next);
 			}
 			routingHelper.setAppMode(next);
-			app.initVoiceCommandPlayer(mapActivity, next, true, null, false, false, true);
+			String voiceProvider = app.getSettings().VOICE_PROVIDER.getModeValue(appMode.get());
+			if (voiceProvider == null) {
+				app.initVoiceCommandPlayer(mapActivity, next, true, null, false, false, true);
+			}
 			routingHelper.recalculateRouteDueToSettingsChange();
 		}
 	}
@@ -1061,7 +1064,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
-	private void createMuteSoundRoutingParameterButton(MapActivity mapActivity, final MuteSoundRoutingParameter parameter, final RouteMenuAppModes mode, LinearLayout optionsContainer) {
+	private void createMuteSoundRoutingParameterButton(final MapActivity mapActivity, final MuteSoundRoutingParameter parameter, final RouteMenuAppModes mode, LinearLayout optionsContainer) {
 		final ApplicationMode appMode = mapActivity.getRoutingHelper().getAppMode();
 		final int colorActive = ContextCompat.getColor(mapActivity, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 		final int colorDisabled = ContextCompat.getColor(mapActivity, R.color.description_font_and_bottom_sheet_icons);
@@ -1075,7 +1078,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			public void onClick(View v) {
 				OsmandApplication app = getApp();
 				if (app != null) {
-					app.getRoutingOptionsHelper().switchSound();
+					String voiceProvider = app.getSettings().VOICE_PROVIDER.getModeValue(appMode);
+					if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
+						app.initVoiceCommandPlayer(mapActivity, appMode, true, null, true, false, false);
+					} else {
+						app.getRoutingOptionsHelper().switchSound();
+					}
 					boolean active = !app.getRoutingHelper().getVoiceRouter().isMuteForMode(appMode);
 					String text = app.getString(active ? R.string.shared_string_on : R.string.shared_string_off);
 
@@ -1472,6 +1480,17 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			RouteOptionsBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
+		}
+	}
+
+	public void updateOptions() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			RouteOptionsBottomSheet routeOptions = (RouteOptionsBottomSheet) mapActivity.getSupportFragmentManager()
+					.findFragmentByTag(RouteOptionsBottomSheet.TAG);
+			if (routeOptions != null) {
+				routeOptions.updateParameters();
+			}
 		}
 	}
 

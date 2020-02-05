@@ -465,7 +465,7 @@ public class OsmandApplication extends MultiDexApplication {
 	                                   boolean warningNoneProvider, Runnable run, boolean showDialog, boolean force, final boolean applyAllModes) {
 		String voiceProvider = osmandSettings.VOICE_PROVIDER.getModeValue(applicationMode);
 		if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
-			if (warningNoneProvider && voiceProvider == null) {
+			if (warningNoneProvider) {
 				boolean nightMode = daynightHelper.isNightModeForMapControls();
 				final AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(uiContext, nightMode));
 
@@ -488,7 +488,7 @@ public class OsmandApplication extends MultiDexApplication {
 								}
 								return acceptableValue;
 							}
-						});
+						}, applicationMode);
 					}
 				});
 
@@ -502,19 +502,21 @@ public class OsmandApplication extends MultiDexApplication {
 					public void onClick(DialogInterface dialog, int which) {
 						if (!Algorithms.isEmpty(firstSelectedVoiceProvider)) {
 							routingOptionsHelper.applyVoiceProvider((MapActivity) uiContext, firstSelectedVoiceProvider, applyAllModes);
+							osmandSettings.VOICE_MUTE.setModeValue(applicationMode, false);
 						}
+						updateMuteButtons(uiContext);
 					}
 				});
 				builder.setNeutralButton(R.string.shared_string_do_not_use, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialogInterface, int i) {
 						if (applyAllModes) {
-							for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-								osmandSettings.VOICE_PROVIDER.setModeValue(mode, OsmandSettings.VOICE_PROVIDER_NOT_USE);
-							}
+							muteVoiceForAllProfiles(uiContext);
 						} else {
 							osmandSettings.VOICE_PROVIDER.setModeValue(applicationMode, OsmandSettings.VOICE_PROVIDER_NOT_USE);
+							osmandSettings.VOICE_MUTE.setModeValue(applicationMode, true);
 						}
+						updateMuteButtons(uiContext);
 					}
 				});
 
@@ -528,6 +530,23 @@ public class OsmandApplication extends MultiDexApplication {
 			}
 		}
 
+	}
+
+	public void updateMuteButtons(Activity uiContext) {
+		if (uiContext instanceof MapActivity) {
+			((MapActivity) uiContext).getMapRouteInfoMenu().updateMenu();
+			((MapActivity) uiContext).getMapRouteInfoMenu().updateOptions();
+		}
+	}
+
+	public void muteVoiceForAllProfiles(Activity uiContext) {
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			osmandSettings.VOICE_PROVIDER.setModeValue(mode, OsmandSettings.VOICE_PROVIDER_NOT_USE);
+			osmandSettings.VOICE_MUTE.setModeValue(mode, true);
+			if (uiContext instanceof MapActivity) {
+				((MapActivity) uiContext).getMapRouteInfoMenu().updateMenu();
+			}
+		}
 	}
 
 	public NavigationService getNavigationService() {

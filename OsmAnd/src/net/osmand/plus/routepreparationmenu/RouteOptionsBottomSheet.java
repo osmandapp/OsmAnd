@@ -154,8 +154,13 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 						routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
 						boolean active = !routingHelper.getVoiceRouter().isMuteForMode(applicationMode);
 						routingHelper.getVoiceRouter().setMuteForMode(applicationMode, active);
-						muteSoundItem[0].setChecked(!active);
-						muteSoundItem[0].setIcon(getContentIcon(!active ? optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));
+						String voiceProvider = app.getSettings().VOICE_PROVIDER.getModeValue(applicationMode);
+						if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
+							app.initVoiceCommandPlayer(mapActivity, applicationMode, true, null, true, false, true);
+						} else {
+							muteSoundItem[0].setChecked(!active);
+							muteSoundItem[0].setIcon(getContentIcon(!active ? optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));
+						}
 						updateMenu();
 					}
 				})
@@ -475,7 +480,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		optionsMenu.show();
 	}
 
-	private void updateParameters() {
+	public void updateParameters() {
 		Activity activity = getActivity();
 		View mainView = getView();
 		if (activity != null && mainView != null) {
