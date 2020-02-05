@@ -13,12 +13,13 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import net.osmand.PlatformUtil;
+import net.osmand.map.TileSourceManager;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.profiles.ExportImportProfileBottomSheet;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionFactory;
 import net.osmand.util.Algorithms;
@@ -752,9 +753,17 @@ public class SettingsHelper {
 		public void apply() {
 			if (!quickActions.isEmpty()) {
 				QuickActionFactory factory = new QuickActionFactory();
-				List<QuickAction> quickActionsList = factory.parseActiveActionsList(getSettings().QUICK_ACTION_LIST.get());
-				quickActionsList.addAll(quickActions);
-				getSettings().QUICK_ACTION_LIST.set(factory.quickActionListToString(quickActionsList));
+				List<QuickAction> savedActions = factory.parseActiveActionsList(getSettings().QUICK_ACTION_LIST.get());
+				List<QuickAction> newActions = new ArrayList<>(savedActions);
+				for (QuickAction action : quickActions) {
+					for (QuickAction savedAction : savedActions) {
+						if (action.getName(app).equals(savedAction.getName(app))) {
+							newActions.remove(savedAction);
+						}
+					}
+				}
+				newActions.addAll(quickActions);
+				getSettings().QUICK_ACTION_LIST.set(factory.quickActionListToString(newActions));
 			}
 		}
 
@@ -810,14 +819,20 @@ public class SettingsHelper {
 					final JSONObject json;
 					try {
 						quickActions = new ArrayList<>();
+						Gson gson = new Gson();
+						Type type = new TypeToken<HashMap<String, String>>() {
+						}.getType();
 						json = new JSONObject(jsonStr);
 						JSONArray items = json.getJSONArray("items");
 						for (int i = 0; i < items.length(); i++) {
 							JSONObject object = items.getJSONObject(i);
 							String name = object.getString("name");
-							int type = object.getInt("type");
-							QuickAction quickAction = new QuickAction(type);
+							int actionType = object.getInt("type");
+							String paramsString = object.getString("params");
+							HashMap<String, String> params = gson.fromJson(paramsString, type);
+							QuickAction quickAction = new QuickAction(actionType);
 							quickAction.setName(name);
+							quickAction.setParams(params);
 							quickActions.add(quickAction);
 						}
 					} catch (JSONException e) {
@@ -834,12 +849,15 @@ public class SettingsHelper {
 				@Override
 				protected void writePreferenceToJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
 					JSONArray items = new JSONArray();
+					Gson gson = new Gson();
+					Type type = new TypeToken<HashMap<String, String>>() {
+					}.getType();
 					if (!quickActions.isEmpty()) {
 						for (QuickAction action : quickActions) {
 							JSONObject jsonObject = new JSONObject();
 							jsonObject.put("name", action.getName(app));
-							jsonObject.put("params", action.getParams());
 							jsonObject.put("type", action.getType());
+							jsonObject.put("params", gson.toJson(action.getParams(), type));
 							items.put(jsonObject);
 						}
 						json.put("items", items);
@@ -865,6 +883,20 @@ public class SettingsHelper {
 			super(SettingsItemType.POI_UI_FILTERS, app.getSettings(), jsonObject);
 			this.app = app;
 			readFromJson(jsonObject);
+		}
+
+		public List<PoiUIFilter> getPoiUIFilters() {
+			return this.poiUIFilters != null ? this.poiUIFilters : new ArrayList<PoiUIFilter>();
+		}
+
+		@Override
+		public void apply() {
+			if (!poiUIFilters.isEmpty()) {
+				for (PoiUIFilter filter : poiUIFilters) {
+					app.getPoiFilters().createPoiFilter(filter, false);
+				}
+				app.getSearchUICore().refreshCustomPoiFilters();
+			}
 		}
 
 		@NonNull
@@ -921,16 +953,22 @@ public class SettingsHelper {
 						json = new JSONObject(jsonStr);
 						JSONArray items = json.getJSONArray("items");
 						Gson gson = new Gson();
-						Type type = new TypeToken<HashMap<PoiCategory, LinkedHashSet<String>>>() {
+						Type type = new TypeToken<HashMap<String, LinkedHashSet<String>>>() {
 						}.getType();
+						MapPoiTypes poiTypes = app.getPoiTypes();
 						for (int i = 0; i < items.length(); i++) {
 							JSONObject object = items.getJSONObject(i);
 							String name = object.getString("name");
 							String filterId = object.getString("filterId");
 							String acceptedTypesString = object.getString("acceptedTypes");
-//							Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = gson.fromJson(acceptedTypesString, type);
-//							PoiUIFilter filter = new PoiUIFilter(name, filterId, acceptedTypes, app);
-//							poiUIFilters.add(filter);
+							HashMap<String, LinkedHashSet<String>> acceptedTypes = gson.fromJson(acceptedTypesString, type);
+							Map<PoiCategory, LinkedHashSet<String>> acceptedTypesDone = new HashMap<>();
+							for (Map.Entry<String, LinkedHashSet<String>> mapItem : acceptedTypes.entrySet()) {
+								final PoiCategory a = poiTypes.getPoiCategoryByName(mapItem.getKey());
+								acceptedTypesDone.put(a, mapItem.getValue());
+							}
+							PoiUIFilter filter = new PoiUIFilter(name, filterId, acceptedTypesDone, app);
+							poiUIFilters.add(filter);
 						}
 					} catch (JSONException e) {
 						throw new IllegalArgumentException("Json parse error", e);
@@ -966,15 +1004,29 @@ public class SettingsHelper {
 
 	public static class MapSourcesSettingsItem extends OsmandSettingsItem {
 
-		private List<ExportImportProfileBottomSheet.MapSourceWrapper> mapSources;
+		private List<TileSourceManager.TileSourceTemplate> mapSources;
 
-		public MapSourcesSettingsItem(OsmandSettings settings, List<ExportImportProfileBottomSheet.MapSourceWrapper> mapSources) {
+		public MapSourcesSettingsItem(OsmandSettings settings, List<TileSourceManager.TileSourceTemplate> mapSources) {
 			super(SettingsItemType.MAP_SOURCES, settings);
 			this.mapSources = mapSources;
 		}
 
 		public MapSourcesSettingsItem(OsmandSettings settings, JSONObject jsonObject) throws JSONException {
 			super(SettingsItemType.MAP_SOURCES, settings, jsonObject);
+		}
+
+		public List<TileSourceManager.TileSourceTemplate> getMapSources() {
+			return this.mapSources;
+		}
+
+		@Override
+		public void apply() {
+			if (!mapSources.isEmpty()) {
+				for (TileSourceManager.TileSourceTemplate template : mapSources) {
+					boolean writed = getSettings().installTileSource(template);
+					LOG.info("Temaplate _" + writed);
+				}
+			}
 		}
 
 		@NonNull
@@ -1008,6 +1060,35 @@ public class SettingsHelper {
 				protected void readPreferenceFromJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
 
 				}
+
+				@Override
+				public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
+					StringBuilder buf = new StringBuilder();
+					try {
+						BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+						String str;
+						while ((str = in.readLine()) != null) {
+							buf.append(str);
+						}
+					} catch (IOException e) {
+						throw new IOException("Cannot read json body", e);
+					}
+					String jsonStr = buf.toString();
+					if (Algorithms.isEmpty(jsonStr)) {
+						throw new IllegalArgumentException("Cannot find json body");
+					}
+					final JSONObject json;
+					try {
+						mapSources = new ArrayList<>();
+						json = new JSONObject(jsonStr);
+						String items = json.getString("items");
+						TileSourceManager manager = new TileSourceManager();
+						List<TileSourceManager.TileSourceTemplate> templates = manager.parseTemplatesList(items);
+						mapSources.addAll(templates);
+					} catch (JSONException e) {
+						throw new IllegalArgumentException("Json parse error", e);
+					}
+				}
 			};
 		}
 
@@ -1017,15 +1098,9 @@ public class SettingsHelper {
 			return new OsmandSettingsItemWriter(this, getSettings()) {
 				@Override
 				protected void writePreferenceToJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
-					JSONArray items = new JSONArray();
+					TileSourceManager manager = new TileSourceManager();
 					if (!mapSources.isEmpty()) {
-						for (ExportImportProfileBottomSheet.MapSourceWrapper mapSourceWrapper : mapSources) {
-							JSONObject jsonObject = new JSONObject();
-							jsonObject.put("name", mapSourceWrapper.getName());
-							jsonObject.put("url", mapSourceWrapper.getUrl());
-							items.put(jsonObject);
-						}
-						json.put("items", items);
+						json.put("items", manager.templatesListToString(mapSources));
 					}
 				}
 			};

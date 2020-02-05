@@ -12,6 +12,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.CompoundButtonCompat;
+import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.SwitchCompat;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,7 @@ import android.widget.Toast;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.map.TileSourceManager;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -107,17 +110,6 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
                 dataToOperate.addAll(dataWrapper.getItems());
             }
         }
-//        dataList = state == State.IMPORT ? getDataFromSettingsItems() : getAdditionalData();
-    }
-
-    private ApplicationMode getAppModeFromItems() {
-        for (SettingsHelper.SettingsItem item : settingsItems) {
-            if (item.getType().equals(SettingsHelper.SettingsItemType.PROFILE)) {
-                profileSettingsItem = ((SettingsHelper.ProfileSettingsItem) item);
-                return ((SettingsHelper.ProfileSettingsItem) item).getAppMode();
-            }
-        }
-        return getAppMode();
     }
 
     @Override
@@ -160,10 +152,11 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
                     .create();
             items.add(descriptionItem);
 
+
             final View additionalDataView = View.inflate(new ContextThemeWrapper(context, themeRes),
                     R.layout.bottom_sheet_item_additional_data, null);
             listView = additionalDataView.findViewById(R.id.list);
-            Switch switchItem = additionalDataView.findViewById(R.id.switchItem);
+            SwitchCompat switchItem = additionalDataView.findViewById(R.id.switchItem);
             switchItem.setTextColor(getResources().getColor(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
 
             switchItem.setOnClickListener(new View.OnClickListener() {
@@ -175,9 +168,17 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
                     if (includeAdditionalData && state == State.IMPORT) {
                         updateDataFromSettingsItems();
                     }
+                    setupHeightAndBackground(getView());
                 }
             });
+
             adapter = new ProfileAdditionalDataAdapter(requiredMyApplication(), dataList, profileColor);
+            listView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+                @Override
+                public void onGroupExpand(int i) {
+                    setupHeightAndBackground(getView());
+                }
+            });
             listView.setAdapter(adapter);
             final SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
                     .setCustomView(additionalDataView)
@@ -186,19 +187,139 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
         }
     }
 
-    private void updateDataFromSettingsItems() {
+    @Override
+    protected int getRightBottomButtonTextId() {
+        return state == State.EXPORT ? R.string.shared_string_export : R.string.shared_string_import;
+    }
 
+    @Override
+    protected void onRightBottomButtonClick() {
+        super.onRightBottomButtonClick();
+        if (state == State.EXPORT) {
+            prepareFile();
+        } else {
+            importSettings();
+        }
+    }
+
+    @Override
+    protected int getDismissButtonTextId() {
+        return R.string.shared_string_cancel;
+    }
+
+    @Override
+    protected boolean useScrollableItemsContainer() {
+        return false;
+    }
+
+    private ApplicationMode getAppModeFromItems() {
+        for (SettingsHelper.SettingsItem item : settingsItems) {
+            if (item.getType().equals(SettingsHelper.SettingsItemType.PROFILE)) {
+                profileSettingsItem = ((SettingsHelper.ProfileSettingsItem) item);
+                return ((SettingsHelper.ProfileSettingsItem) item).getAppMode();
+            }
+        }
+        return getAppMode();
+    }
+
+    private List<AdditionalDataWrapper> getAdditionalData() {
+        List<AdditionalDataWrapper> dataList = new ArrayList<>();
+
+        QuickActionFactory factory = new QuickActionFactory();
+        List<QuickAction> quickActions = factory.parseActiveActionsList(settings.QUICK_ACTION_LIST.get());
+        if (!quickActions.isEmpty()) {
+            dataList.add(new AdditionalDataWrapper(
+                    AdditionalDataWrapper.Type.QUICK_ACTIONS, quickActions));
+        }
+
+        List<PoiUIFilter> poiList = app.getPoiFilters().getUserDefinedPoiFilters(false);
+        if (!poiList.isEmpty()) {
+            dataList.add(new AdditionalDataWrapper(
+                    AdditionalDataWrapper.Type.POI_TYPES,
+                    poiList
+            ));
+        }
+
+        List<TileSourceManager.TileSourceTemplate> mapSourceWrapperList = new ArrayList<>();
+        final LinkedHashMap<String, String> entriesMap = new LinkedHashMap<>(settings.getTileSourceEntries(false));
+        for (Map.Entry<String, String> entry : entriesMap.entrySet()) {
+            File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + entry.getKey());
+            TileSourceManager.TileSourceTemplate template = TileSourceManager.createTileSourceTemplate(f);
+            if (template != null) {
+                mapSourceWrapperList.add(template);
+            }
+        }
+        if (!mapSourceWrapperList.isEmpty()) {
+            dataList.add(new AdditionalDataWrapper(
+                    AdditionalDataWrapper.Type.MAP_SOURCES,
+                    mapSourceWrapperList
+            ));
+        }
+
+        return dataList;
+    }
+
+    private List<SettingsHelper.SettingsItem> prepareSettingsItems() {
+        List<SettingsHelper.SettingsItem> settingsItems = new ArrayList<>();
+        settingsItems.add(new SettingsHelper.ProfileSettingsItem(app.getSettings(), profile));
+
+        if (includeAdditionalData) {
+            settingsItems.addAll(prepareAdditionalSettingsItems());
+        }
+        return settingsItems;
+    }
+
+    private List<SettingsHelper.SettingsItem> prepareAdditionalSettingsItems() {
+        List<SettingsHelper.SettingsItem> settingsItems = new ArrayList<>();
+        List<QuickAction> quickActions = new ArrayList<>();
+        List<PoiUIFilter> poiUIFilters = new ArrayList<>();
+        List<TileSourceManager.TileSourceTemplate> mapSourceWrappers = new ArrayList<>();
+        for (Object object : dataToOperate) {
+            if (object instanceof QuickAction) {
+                quickActions.add((QuickAction) object);
+            } else if (object instanceof PoiUIFilter) {
+                poiUIFilters.add((PoiUIFilter) object);
+            } else if (object instanceof TileSourceManager.TileSourceTemplate) {
+                mapSourceWrappers.add((TileSourceManager.TileSourceTemplate) object);
+            }
+        }
+        if (!quickActions.isEmpty()) {
+            settingsItems.add(new SettingsHelper.QuickActionSettingsItem(app, quickActions));
+        }
+        if (!poiUIFilters.isEmpty()) {
+            settingsItems.add(new SettingsHelper.PoiUiFilterSettingsItem(app, poiUIFilters));
+        }
+        if (!mapSourceWrappers.isEmpty()) {
+            settingsItems.add(new SettingsHelper.MapSourcesSettingsItem(app.getSettings(), mapSourceWrappers));
+        }
+        return settingsItems;
+    }
+
+    private Boolean checkAdditionalDataContains() {
+        boolean containsData = false;
+        for (SettingsHelper.SettingsItem item : settingsItems) {
+            containsData = item.getType().equals(SettingsHelper.SettingsItemType.QUICK_ACTION)
+                    || item.getType().equals(SettingsHelper.SettingsItemType.POI_UI_FILTERS)
+                    || item.getType().equals(SettingsHelper.SettingsItemType.MAP_SOURCES);
+            if (containsData) {
+                break;
+            }
+        }
+        return containsData;
+    }
+
+    private void updateDataFromSettingsItems() {
         List<AdditionalDataWrapper> dataList = new ArrayList<>();
         List<QuickAction> quickActions = new ArrayList<>();
         List<PoiUIFilter> poiUIFilters = new ArrayList<>();
-        List<MapSourceWrapper> mapSourceWrappers = new ArrayList<>();
+        List<TileSourceManager.TileSourceTemplate> mapSourceWrappers = new ArrayList<>();
         for (SettingsHelper.SettingsItem item : settingsItems) {
             if (item.getType().equals(SettingsHelper.SettingsItemType.QUICK_ACTION)) {
-                        quickActions.addAll(((SettingsHelper.QuickActionSettingsItem) item).getQuickActions());
+                quickActions.addAll(((SettingsHelper.QuickActionSettingsItem) item).getQuickActions());
             } else if (item.getType().equals(SettingsHelper.SettingsItemType.POI_UI_FILTERS)) {
-//                poiUIFilters.addAll(((SettingsHelper.PoiUiFilterSettingsItem) item).)
+                poiUIFilters.addAll(((SettingsHelper.PoiUiFilterSettingsItem) item).getPoiUIFilters());
             } else if (item.getType().equals(SettingsHelper.SettingsItemType.MAP_SOURCES)) {
-//                mapSourceWrappers.addAll(((SettingsHelper.MapSourcesSettingsItem) item).)
+                mapSourceWrappers.addAll(((SettingsHelper.MapSourcesSettingsItem) item).getMapSources());
             }
         }
         if (!quickActions.isEmpty()) {
@@ -223,71 +344,6 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
         adapter.updateList(dataList);
     }
 
-    private Boolean checkAdditionalDataContains() {
-        boolean containsData = false;
-        for (SettingsHelper.SettingsItem item : settingsItems) {
-            containsData = item.getType().equals(SettingsHelper.SettingsItemType.QUICK_ACTION)
-                    || item.getType().equals(SettingsHelper.SettingsItemType.POI_UI_FILTERS)
-                    || item.getType().equals(SettingsHelper.SettingsItemType.MAP_SOURCES);
-            if (containsData) {
-                break;
-            }
-        }
-        return containsData;
-    }
-
-    private List<AdditionalDataWrapper> getAdditionalData() {
-        List<AdditionalDataWrapper> dataList = new ArrayList<>();
-
-        QuickActionFactory factory = new QuickActionFactory();
-        List<QuickAction> quickActions = factory.parseActiveActionsList(settings.QUICK_ACTION_LIST.get());
-        if (!quickActions.isEmpty()) {
-            dataList.add(new AdditionalDataWrapper(
-                    AdditionalDataWrapper.Type.QUICK_ACTIONS, quickActions));
-        }
-
-        List<PoiUIFilter> poiList = app.getPoiFilters().getUserDefinedPoiFilters(false);
-        if (!poiList.isEmpty()) {
-            dataList.add(new AdditionalDataWrapper(
-                    AdditionalDataWrapper.Type.POI_TYPES,
-                    poiList
-            ));
-        }
-
-        final LinkedHashMap<String, String> entriesMap = new LinkedHashMap<>(settings.getTileSourceEntries(false));
-        List<MapSourceWrapper> mapSourceWrapperList = new ArrayList<>();
-        for (Map.Entry<String, String> entry : entriesMap.entrySet()) {
-            mapSourceWrapperList.add(new MapSourceWrapper(entry.getKey(), entry.getValue()));
-        }
-        if (!mapSourceWrapperList.isEmpty()) {
-            dataList.add(new AdditionalDataWrapper(
-                    AdditionalDataWrapper.Type.MAP_SOURCES,
-                    mapSourceWrapperList
-            ));
-        }
-
-        return dataList;
-    }
-
-    public void setSettingsItems(List<SettingsHelper.SettingsItem> settingsItems) {
-        this.settingsItems = settingsItems;
-    }
-
-    @Override
-    protected int getRightBottomButtonTextId() {
-        return state == State.EXPORT ? R.string.shared_string_export : R.string.shared_string_import;
-    }
-
-    @Override
-    protected void onRightBottomButtonClick() {
-        super.onRightBottomButtonClick();
-        if (state == State.EXPORT) {
-            prepareFile();
-        } else {
-            importSettings();
-        }
-    }
-
     private void importSettings() {
         List<SettingsHelper.SettingsItem> list = new ArrayList<>();
         list.add(profileSettingsItem);
@@ -302,56 +358,6 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
         });
         dismiss();
     }
-
-    @Override
-    protected int getDismissButtonTextId() {
-        return R.string.shared_string_cancel;
-    }
-
-    @Override
-    protected boolean useScrollableItemsContainer() {
-        return false;
-    }
-
-    private List<SettingsHelper.SettingsItem> prepareSettingsItems() {
-        List<SettingsHelper.SettingsItem> settingsItems = new ArrayList<>();
-        settingsItems.add(new SettingsHelper.ProfileSettingsItem(app.getSettings(), profile));
-
-        if (includeAdditionalData) {
-            settingsItems.addAll(prepareAdditionalSettingsItems());
-        }
-        return settingsItems;
-    }
-
-    private List<SettingsHelper.SettingsItem> prepareAdditionalSettingsItems() {
-        List<SettingsHelper.SettingsItem> settingsItems = new ArrayList<>();
-
-        List<QuickAction> quickActions = new ArrayList<>();
-        List<PoiUIFilter> poiUIFilters = new ArrayList<>();
-        List<MapSourceWrapper> mapSourceWrappers = new ArrayList<>();
-        for (Object object : dataToOperate) {
-            if (object instanceof QuickAction) {
-                quickActions.add((QuickAction) object);
-            } else if (object instanceof PoiUIFilter) {
-                poiUIFilters.add((PoiUIFilter) object);
-            } else if (object instanceof MapSourceWrapper) {
-                mapSourceWrappers.add((MapSourceWrapper) object);
-            }
-        }
-        if (!quickActions.isEmpty()) {
-            settingsItems.add(new SettingsHelper.QuickActionSettingsItem(app, quickActions));
-        }
-        if (!poiUIFilters.isEmpty()) {
-            settingsItems.add(new SettingsHelper.PoiUiFilterSettingsItem(app, poiUIFilters));
-        }
-        if (!mapSourceWrappers.isEmpty()) {
-            settingsItems.add(new SettingsHelper.MapSourcesSettingsItem(app.getSettings(), mapSourceWrappers));
-        }
-        return settingsItems;
-    }
-
-
-
 
     private void prepareFile() {
         if (app != null) {
@@ -426,17 +432,16 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
         }
     }
 
+    public void setSettingsItems(List<SettingsHelper.SettingsItem> settingsItems) {
+        this.settingsItems = settingsItems;
+    }
+
     public File getFile() {
         return file;
     }
 
     public void setFile(File file) {
         this.file = file;
-    }
-
-    public enum State {
-        EXPORT,
-        IMPORT
     }
 
     boolean isContainsInDataToOperate(AdditionalDataWrapper.Type type, Object object) {
@@ -450,6 +455,11 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
 //        return false;
     }
 
+    public enum State {
+        EXPORT,
+        IMPORT
+    }
+
     class ProfileAdditionalDataAdapter extends OsmandBaseExpandableListAdapter {
 
         private OsmandApplication app;
@@ -457,7 +467,6 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
         private List<AdditionalDataWrapper> list;
 
         private int profileColor;
-
 
         ProfileAdditionalDataAdapter(OsmandApplication app, List<AdditionalDataWrapper> list, int profileColor) {
             this.app = app;
@@ -512,7 +521,6 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
                 LayoutInflater inflater = (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 group = inflater.inflate(R.layout.profile_data_list_item_group, parent, false);
             }
-
 
             boolean isLastGroup = groupPosition == getGroupCount() - 1;
             final AdditionalDataWrapper.Type type = list.get(groupPosition).getType();
@@ -599,7 +607,7 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
                     icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes != 0 ? iconRes : R.drawable.ic_person, profileColor));
                     break;
                 case MAP_SOURCES:
-                    title.setText(((MapSourceWrapper) currentItem).getName());
+                    title.setText(((TileSourceManager.TileSourceTemplate) currentItem).getName());
                     icon.setVisibility(View.INVISIBLE);
                     icon.setImageResource(R.drawable.ic_action_info_dark);
                     break;
@@ -629,28 +637,6 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
                 default:
                     return R.string.access_empty_list;
             }
-        }
-    }
-
-    public class MapSourceWrapper {
-        private String name;
-        private String url;
-
-        MapSourceWrapper(String name, String url) {
-            this.name = name;
-            this.url = url;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getUrl() {
-            return url;
         }
     }
 }
