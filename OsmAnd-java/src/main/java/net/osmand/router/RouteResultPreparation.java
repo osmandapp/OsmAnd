@@ -1256,7 +1256,7 @@ public class RouteResultPreparation {
 			if (turn == TurnType.TU || sturn == TurnType.TU || tturn == TurnType.TU) {
 				possiblyLeftTurn = true;
 			}
-			if (turn == TurnType.TRU || sturn == TurnType.TRU || sturn == TurnType.TRU) {
+			if (turn == TurnType.TRU || sturn == TurnType.TRU || tturn == TurnType.TRU) {
 				possiblyRightTurn = true;
 			}
 		}
@@ -1740,10 +1740,8 @@ public class RouteResultPreparation {
 				}
 			};	
 		} else {
-			// Here we assume that all segments should be attached by native 
-			it = null;
-//			RouteSegment rt = ctx.loadRouteSegment(road.getPoint31XTile(pointInd), road.getPoint31YTile(pointInd), ctx.config.memoryLimitation);
-//			it = rt == null ? null : rt.getIterator();
+			RouteSegment rt = ctx.loadRouteSegment(road.getPoint31XTile(pointInd), road.getPoint31YTile(pointInd), ctx.config.memoryLimitation);
+			it = rt == null ? null : rt.getIterator();
 		}
 		// try to attach all segments except with current id
 		while (it != null && it.hasNext()) {

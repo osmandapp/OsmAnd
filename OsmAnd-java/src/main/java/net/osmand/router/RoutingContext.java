@@ -326,7 +326,7 @@ public class RoutingContext {
 			
 		} else {
 			long now = System.nanoTime();
-			NativeRouteSearchResult ns = nativeLib.loadRouteRegion(ts.subregion, loadObjectsInMemory);
+			NativeRouteSearchResult ns = nativeLib.loadRouteRegion(ts.subregion, true);
 //			System.out.println(ts.subregion.shiftToData + " " + Arrays.toString(ns.objects));
 			ts.setLoadedNative(ns, this);
 			timeToLoad += (System.nanoTime() - now);
@@ -654,8 +654,14 @@ public class RoutingContext {
 		private RouteSegment loadRouteSegment(int x31, int y31, RoutingContext ctx,
 				TLongObjectHashMap<RouteDataObject> excludeDuplications, RouteSegment original, List<RoutingSubregionTile> subregions, int subregionIndex) {
 			access++;
-			if (routes != null) {
+			if (routes != null || (searchResult != null && searchResult.objects != null)) {
 				long l = (((long) x31) << 31) + (long) y31;
+				if (routes == null) {
+					RouteDataObject[] rdos = searchResult.objects;
+					for (int n = 0; n < rdos.length; n++) {
+						add(rdos[n]);
+					}
+				}
 				RouteSegment segment = routes.get(l);
 				while (segment != null) {
 					RouteDataObject ro = segment.road;
