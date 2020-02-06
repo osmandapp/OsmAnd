@@ -11,20 +11,18 @@
 	<LinearLayout
 		android:id="@+id/selectable_list_item"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:paddingTop="@dimen/content_padding_half"
-		android:paddingBottom="@dimen/content_padding_half"
+		android:layout_height="match_parent"
 		android:orientation="horizontal"
 		tools:background="?android:attr/selectableItemBackground">
 
-		<ImageButton
+		<ImageView
 			android:id="@+id/action_icon"
-			style="@style/Widget.AppCompat.ActionButton"
-			android:layout_width="@dimen/standard_icon_size"
-			android:layout_height="@dimen/standard_icon_size"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
 			android:layout_gravity="center"
-			android:layout_marginLeft="@dimen/content_padding"
-			android:layout_marginRight="@dimen/content_padding"
+			android:paddingLeft="@dimen/content_padding"
+			android:paddingRight="@dimen/content_padding"
+			android:minHeight="@dimen/bottom_sheet_list_item_height"
 			tools:src="@drawable/ic_action_remove"
 			tools:tint="@color/icon_color_default_light" />
 
@@ -47,6 +45,8 @@
 			android:ellipsize="marquee"
 			android:paddingLeft="@dimen/content_padding"
 			android:paddingRight="@dimen/content_padding"
+			android:paddingTop="@dimen/content_padding_half"
+			android:paddingBottom="@dimen/content_padding_half"
 			android:singleLine="true"
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
@@ -56,7 +56,7 @@
 		<ImageView
 			android:id="@+id/move_icon"
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
+			android:layout_height="match_parent"
 			android:layout_gravity="center"
 			android:paddingLeft="@dimen/content_padding"
 			android:paddingRight="@dimen/content_padding"

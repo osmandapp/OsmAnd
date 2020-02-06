@@ -3448,7 +3448,6 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="rearrange_categories">Sistema categorie</string>
     <string name="create_custom_categories_list_promo">Puoi aggiungere categorie personalizzate, nascondere quelle che non trovi necessarie e cambiarne l\'ordine nell\'elenco. La lista può essere importata ed esportata con i profili.</string>
     <string name="add_new_custom_category_button_promo">Puoi aggiugere una nuova categoria personalizzata selezionandone una o alcune altre.</string>
-    <string name="reset_to_default_category_button_promo">Resettando ai valori predefiniti cancellerà le categorie personalizzate e reimposterà l\'ordine allo stato predefinito dopo l\'installazione.</string>
     <string name="shared_string_available">Disponibile</string>
     <string name="add_custom_category">Aggiungi categoria personalizzata</string>
     <string name="rendering_attr_streetLightingNight_name">Mostra solo di notte</string>
