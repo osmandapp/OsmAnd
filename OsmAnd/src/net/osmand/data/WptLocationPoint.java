@@ -12,7 +12,6 @@ public class WptLocationPoint implements LocationPoint {
 		this.pt = p;
 	}
 
-
 	@Override
 	public double getLatitude() {
 		return pt.lat;
@@ -35,5 +34,9 @@ public class WptLocationPoint implements LocationPoint {
 
 	public PointDescription getPointDescription(Context ctx) {
 		return new PointDescription(PointDescription.POINT_TYPE_WPT, pt.name);
+	}
+
+	public GPXUtilities.WptPt getPt() {
+		return pt;
 	}
 }

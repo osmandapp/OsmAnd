@@ -13,6 +13,7 @@ import net.osmand.data.Amenity.AmenityRoutePoint;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
+import net.osmand.data.WptLocationPoint;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
@@ -774,7 +775,13 @@ public class WaypointHelper {
 			} else if (type == FAVORITES ) {
 				return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor(), false, (FavouritePoint) point);
 			} else if (type == WAYPOINTS) {
-				return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor(), false, (GPXUtilities.WptPt) point);
+				if (point instanceof WptLocationPoint) {
+					return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor(), false, ((WptLocationPoint) point).getPt());
+				} else if (point instanceof GPXUtilities.WptPt) {
+					return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor(), false, (GPXUtilities.WptPt) point);
+				} else {
+					return null;
+				}
 			} else if (type == ALARMS) {
 				//assign alarm list icons manually for now
 				String typeString = ((AlarmInfo) point).getType().toString();
