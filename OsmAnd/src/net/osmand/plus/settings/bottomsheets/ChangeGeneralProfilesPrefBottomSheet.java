@@ -55,11 +55,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 					@Override
 					public void onClick(View v) {
 						app.getSettings().setPreferenceForAllModes(prefId, newValue);
-						Fragment target = getTargetFragment();
-						if (target instanceof OnApplyChanges) {
-							((OnApplyChanges) target).onApplyAllChanges(prefId);
-						}
-						updateTargetSettings(false);
+						updateTargetSettings(false, true);
 						dismiss();
 					}
 				})
@@ -76,11 +72,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 					@Override
 					public void onClick(View v) {
 						app.getSettings().setPreference(prefId, newValue, getAppMode());
-						Fragment target = getTargetFragment();
-						if (target instanceof OnApplyChanges) {
-							((OnApplyChanges) target).onApplySingleChange(prefId);
-						}
-						updateTargetSettings(false);
+						updateTargetSettings(false, false);
 						dismiss();
 					}
 				})
@@ -94,7 +86,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						updateTargetSettings(true);
+						updateTargetSettings(true, false);
 						dismiss();
 					}
 				})
@@ -113,9 +105,12 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 		outState.putSerializable(NEW_VALUE_KEY, newValue);
 	}
 
-	private void updateTargetSettings(boolean discard) {
+	private void updateTargetSettings(boolean discard, boolean applyToAllProfiles) {
 		BaseSettingsFragment target = (BaseSettingsFragment) getTargetFragment();
 		if (target != null) {
+			if (!discard) {
+				target.applySetting(getPrefId(), applyToAllProfiles);
+			}
 			target.updateSetting(getPrefId());
 			if (!discard) {
 				if (target.shouldDismissOnChange()) {
@@ -151,13 +146,5 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);
 		}
-	}
-
-	public interface OnApplyChanges {
-
-		void onApplySingleChange(String prefId);
-
-		void onApplyAllChanges(String prefId);
-
 	}
 }

@@ -37,11 +37,10 @@ import static net.osmand.plus.OsmandSettings.MONTHLY_DIRECTORY;
 import static net.osmand.plus.OsmandSettings.REC_DIRECTORY;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.MINUTES;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.SECONDS;
-import static net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet.*;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
 public class MonitoringSettingsFragment extends BaseSettingsFragment
-		implements CopyAppModePrefsListener, ResetAppModePrefsListener, OnApplyChanges {
+		implements CopyAppModePrefsListener, ResetAppModePrefsListener {
 
 	private static final String COPY_PLUGIN_SETTINGS = "copy_plugin_settings";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
@@ -343,16 +342,14 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	}
 
 	@Override
-	public void onApplySingleChange(String prefId) {
+	public void applySetting(String prefId, boolean applyToAllProfiles) {
 		if (settings.SAVE_GLOBAL_TRACK_INTERVAL.getId().equals(prefId)) {
-			app.getSettings().setPreference(settings.SAVE_GLOBAL_TRACK_REMEMBER.getId(), true, getSelectedAppMode());
-		}
-	}
+			if (applyToAllProfiles) {
+				app.getSettings().setPreferenceForAllModes(settings.SAVE_GLOBAL_TRACK_REMEMBER.getId(), true);
+			} else {
+				app.getSettings().setPreference(settings.SAVE_GLOBAL_TRACK_REMEMBER.getId(), true, getSelectedAppMode());
+			}
 
-	@Override
-	public void onApplyAllChanges(String prefId) {
-		if (settings.SAVE_GLOBAL_TRACK_INTERVAL.getId().equals(prefId)) {
-			app.getSettings().setPreferenceForAllModes(settings.SAVE_GLOBAL_TRACK_REMEMBER.getId(), true);
 		}
 	}
 }

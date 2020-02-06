@@ -545,6 +545,9 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		updateAllSettings();
 	}
 
+	public void applySetting(String prefId, boolean applyToAllProfiles){
+	}
+
 	public void updateAllSettings() {
 		PreferenceScreen screen = getPreferenceScreen();
 		if (screen != null) {
