@@ -13,7 +13,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.CompoundButtonCompat;
 import android.support.v7.widget.SwitchCompat;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,10 +25,12 @@ import android.widget.Toast;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
@@ -231,21 +232,26 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
             ));
         }
 
-        List<TileSourceManager.TileSourceTemplate> tileSourceTemplates = new ArrayList<>();
-        final LinkedHashMap<String, String> tileSourceEntries = new LinkedHashMap<>(app.getSettings().getTileSourceEntries(false));
+        List<ITileSource> iTileSources = new ArrayList<>();
+        final LinkedHashMap<String, String> tileSourceEntries = new LinkedHashMap<>(app.getSettings().getTileSourceEntries(true));
         for (Map.Entry<String, String> entry : tileSourceEntries.entrySet()) {
             File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + entry.getKey());
             if (f != null) {
-                TileSourceManager.TileSourceTemplate template = TileSourceManager.createTileSourceTemplate(f);
-                if (template != null) {
-                    tileSourceTemplates.add(template);
+                ITileSource template;
+                if (f.getName().endsWith(SQLiteTileSource.EXT)) {
+                    template = new SQLiteTileSource(app, f, TileSourceManager.getKnownSourceTemplates());
+                } else {
+                    template = TileSourceManager.createTileSourceTemplate(f);
+                }
+                if (template != null && template.getUrlTemplate() != null) {
+                    iTileSources.add(template);
                 }
             }
         }
-        if (!tileSourceTemplates.isEmpty()) {
+        if (!iTileSources.isEmpty()) {
             dataList.add(new AdditionalDataWrapper(
                     AdditionalDataWrapper.Type.MAP_SOURCES,
-                    tileSourceTemplates
+                    iTileSources
             ));
         }
 
@@ -284,7 +290,7 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
         List<SettingsHelper.SettingsItem> settingsItems = new ArrayList<>();
         List<QuickAction> quickActions = new ArrayList<>();
         List<PoiUIFilter> poiUIFilters = new ArrayList<>();
-        List<TileSourceManager.TileSourceTemplate> tileSourceTemplates = new ArrayList<>();
+        List<ITileSource> tileSourceTemplates = new ArrayList<>();
         for (Object object : dataToOperate) {
             if (object instanceof QuickAction) {
                 quickActions.add((QuickAction) object);
@@ -303,7 +309,7 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
             settingsItems.add(new SettingsHelper.PoiUiFilterSettingsItem(app, poiUIFilters));
         }
         if (!tileSourceTemplates.isEmpty()) {
-            settingsItems.add(new SettingsHelper.MapSourcesSettingsItem(app.getSettings(), tileSourceTemplates));
+            settingsItems.add(new SettingsHelper.MapSourcesSettingsItem(app, tileSourceTemplates));
         }
         return settingsItems;
     }
@@ -326,7 +332,7 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
         List<AdditionalDataWrapper> dataList = new ArrayList<>();
         List<QuickAction> quickActions = new ArrayList<>();
         List<PoiUIFilter> poiUIFilters = new ArrayList<>();
-        List<TileSourceManager.TileSourceTemplate> tileSourceTemplates = new ArrayList<>();
+        List<ITileSource> tileSourceTemplates = new ArrayList<>();
         List<File> routingFilesList = new ArrayList<>();
         List<File> renderFilesList = new ArrayList<>();
 
@@ -634,7 +640,7 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
                     icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes != 0 ? iconRes : R.drawable.ic_person, profileColor));
                     break;
                 case MAP_SOURCES:
-                    title.setText(((TileSourceManager.TileSourceTemplate) currentItem).getName());
+                    title.setText(((ITileSource) currentItem).getName());
                     icon.setVisibility(View.INVISIBLE);
                     icon.setImageResource(R.drawable.ic_action_info_dark);
                     break;

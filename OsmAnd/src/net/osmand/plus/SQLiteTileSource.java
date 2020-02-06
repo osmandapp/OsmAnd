@@ -118,6 +118,11 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	@Override
+	public String getUrlTemplate() {
+		return this.urlTemplate;
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

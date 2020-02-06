@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import net.osmand.PlatformUtil;
+import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -101,10 +102,6 @@ public class SettingsHelper {
 		void onSettingsExportFinished(@NonNull File file, boolean succeed);
 	}
 
-	public interface SettingsPreImportListener {
-		void onSettingsPreImported(boolean isSuccessful, List<SettingsItem> items);
-	}
-
 	public SettingsHelper(OsmandApplication app) {
 		this.app = app;
 	}
@@ -172,7 +169,7 @@ public class SettingsHelper {
 		@NonNull
 		public abstract String getFileName();
 
-		public Boolean shouldReadInCollecting() {
+		public Boolean shouldReadOnCollecting() {
 			return false;
 		}
 
@@ -740,9 +737,10 @@ public class SettingsHelper {
 			this.quickActions = quickActions;
 		}
 
-		public QuickActionSettingsItem(@NonNull OsmandSettings settings,
+		public QuickActionSettingsItem(@NonNull OsmandApplication app,
 									   @NonNull JSONObject jsonObject) throws JSONException {
-			super(SettingsItemType.QUICK_ACTION, settings, jsonObject);
+			super(SettingsItemType.QUICK_ACTION, app.getSettings(), jsonObject);
+			this.app = app;
 		}
 
 		public List<QuickAction> getQuickActions() {
@@ -768,7 +766,7 @@ public class SettingsHelper {
 		}
 
 		@Override
-		public Boolean shouldReadInCollecting() {
+		public Boolean shouldReadOnCollecting() {
 			return true;
 		}
 
@@ -882,7 +880,6 @@ public class SettingsHelper {
 		public PoiUiFilterSettingsItem(OsmandApplication app, JSONObject jsonObject) throws JSONException {
 			super(SettingsItemType.POI_UI_FILTERS, app.getSettings(), jsonObject);
 			this.app = app;
-			readFromJson(jsonObject);
 		}
 
 		public List<PoiUIFilter> getPoiUIFilters() {
@@ -912,7 +909,7 @@ public class SettingsHelper {
 		}
 
 		@Override
-		public Boolean shouldReadInCollecting() {
+		public Boolean shouldReadOnCollecting() {
 			return true;
 		}
 
@@ -1004,28 +1001,32 @@ public class SettingsHelper {
 
 	public static class MapSourcesSettingsItem extends OsmandSettingsItem {
 
-		private List<TileSourceManager.TileSourceTemplate> mapSources;
+		private OsmandApplication app;
 
-		public MapSourcesSettingsItem(OsmandSettings settings, List<TileSourceManager.TileSourceTemplate> mapSources) {
-			super(SettingsItemType.MAP_SOURCES, settings);
+		private List<ITileSource> mapSources;
+
+		public MapSourcesSettingsItem(OsmandApplication app, List<ITileSource> mapSources) {
+			super(SettingsItemType.MAP_SOURCES, app.getSettings());
+			this.app = app;
 			this.mapSources = mapSources;
 		}
 
-		public MapSourcesSettingsItem(OsmandSettings settings, JSONObject jsonObject) throws JSONException {
-			super(SettingsItemType.MAP_SOURCES, settings, jsonObject);
+		public MapSourcesSettingsItem(OsmandApplication app, JSONObject jsonObject) throws JSONException {
+			super(SettingsItemType.MAP_SOURCES, app.getSettings(), jsonObject);
+			this.app = app;
 		}
 
-		public List<TileSourceManager.TileSourceTemplate> getMapSources() {
+		public List<ITileSource> getMapSources() {
 			return this.mapSources;
 		}
 
 		@Override
 		public void apply() {
 			if (!mapSources.isEmpty()) {
-				for (TileSourceManager.TileSourceTemplate template : mapSources) {
-					boolean writed = getSettings().installTileSource(template);
-					LOG.info("Temaplate _" + writed);
+				for (ITileSource template : mapSources) {
+//					getSettings().installTileSource(template);
 				}
+
 			}
 		}
 
@@ -1042,7 +1043,7 @@ public class SettingsHelper {
 		}
 
 		@Override
-		public Boolean shouldReadInCollecting() {
+		public Boolean shouldReadOnCollecting() {
 			return true;
 		}
 
@@ -1081,10 +1082,16 @@ public class SettingsHelper {
 					try {
 						mapSources = new ArrayList<>();
 						json = new JSONObject(jsonStr);
-						String items = json.getString("items");
-						TileSourceManager manager = new TileSourceManager();
-						List<TileSourceManager.TileSourceTemplate> templates = manager.parseTemplatesList(items);
-						mapSources.addAll(templates);
+						JSONArray items = json.getJSONArray("items");
+						for (int i = 0; i < items.length(); i++) {
+							JSONObject object = items.getJSONObject(i);
+							String name = object.getString("name");
+//							String url = object.getString("url");
+
+
+//							ITileSource template
+//							mapSources.add();
+						}
 					} catch (JSONException e) {
 						throw new IllegalArgumentException("Json parse error", e);
 					}
@@ -1098,9 +1105,19 @@ public class SettingsHelper {
 			return new OsmandSettingsItemWriter(this, getSettings()) {
 				@Override
 				protected void writePreferenceToJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
-					TileSourceManager manager = new TileSourceManager();
+					JSONArray items = new JSONArray();
 					if (!mapSources.isEmpty()) {
-						json.put("items", manager.templatesListToString(mapSources));
+						for (ITileSource template : mapSources) {
+							JSONObject jsonObject = new JSONObject();
+							jsonObject.put("name", template.getName());
+							jsonObject.put("url", template.getUrlTemplate());
+							jsonObject.put("ext", template.getUrlTemplate());
+							jsonObject.put("minZoom", template.getMinimumZoomSupported());
+							jsonObject.put("maxZoom", template.getMaximumZoomSupported());
+							jsonObject.put("expire", template.getExpirationTimeMillis());
+							items.put(jsonObject);
+						}
+						json.put("items", items);
 					}
 				}
 			};
@@ -1164,13 +1181,13 @@ public class SettingsHelper {
 					item = new FileSettingsItem(app, json);
 					break;
 				case QUICK_ACTION:
-					item = new QuickActionSettingsItem(settings, json);
+					item = new QuickActionSettingsItem(app, json);
 					break;
 				case POI_UI_FILTERS:
 					item = new PoiUiFilterSettingsItem(app, json);
 					break;
 				case MAP_SOURCES:
-					item = new MapSourcesSettingsItem(settings, json);
+					item = new MapSourcesSettingsItem(app, json);
 					break;
 			}
 			return item;
@@ -1286,8 +1303,8 @@ public class SettingsHelper {
 					while ((entry = zis.getNextEntry()) != null) {
 						String fileName = entry.getName();
 						SettingsItem item = itemsFactory.getItemByFileName(fileName);
-						if (item != null && collecting && item.shouldReadInCollecting()
-								|| item != null && !collecting && !item.shouldReadInCollecting()) {
+						if (item != null && collecting && item.shouldReadOnCollecting()
+								|| item != null && !collecting && !item.shouldReadOnCollecting()) {
 							try {
 								item.getReader().readFromStream(ois);
 							} catch (IllegalArgumentException e) {
@@ -1318,7 +1335,7 @@ public class SettingsHelper {
 		private File file;
 		private String latestChanges;
 		private int version;
-		private Boolean isCollecting;
+		private boolean collectOnly;
 
 		private SettingsImportListener listener;
 		private SettingsImporter importer;
@@ -1333,7 +1350,7 @@ public class SettingsHelper {
 			this.latestChanges = latestChanges;
 			this.version = version;
 			importer = new SettingsImporter(app);
-			isCollecting = true;
+			collectOnly = true;
 		}
 
 		ImportAsyncTask(@NonNull File settingsFile, @NonNull List<SettingsItem> items, String latestChanges, int version, @Nullable SettingsImportListener listener) {
@@ -1343,7 +1360,7 @@ public class SettingsHelper {
 			this.latestChanges = latestChanges;
 			this.version = version;
 			importer = new SettingsImporter(app);
-			isCollecting = false;
+			collectOnly = false;
 		}
 
 		@Override
@@ -1358,7 +1375,7 @@ public class SettingsHelper {
 
 		@Override
 		protected List<SettingsItem> doInBackground(Void... voids) {
-			if (isCollecting) {
+			if (collectOnly) {
 				try {
 					return importer.collectItems(file);
 				} catch (IllegalArgumentException e) {
@@ -1374,7 +1391,7 @@ public class SettingsHelper {
 
 		@Override
 		protected void onPostExecute(List<SettingsItem> items) {
-			if (isCollecting) {
+			if (collectOnly) {
 				listener.onSettingsImportFinished(true, false, items);
 			} else {
 				this.items = items;
