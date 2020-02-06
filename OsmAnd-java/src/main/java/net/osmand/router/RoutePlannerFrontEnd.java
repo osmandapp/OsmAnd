@@ -463,7 +463,7 @@ public class RoutePlannerFrontEnd {
 		ctx.routingTime = ctx.calculationProgress.routingCalculatedTime;
 		ctx.visitedSegments = ctx.calculationProgress.visitedSegments;
 		ctx.loadedTiles = ctx.calculationProgress.loadedTiles;
-		return new RouteResultPreparation().prepareResult(ctx, result);
+		return new RouteResultPreparation().prepareResult(ctx, result, recalculationEnd != null);
 	}
 
 

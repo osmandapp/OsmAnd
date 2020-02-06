@@ -271,9 +271,12 @@ public class RoutingContext {
 	}
 	
 	
-
 	public RouteSegment loadRouteSegment(int x31, int y31, int memoryLimit) {
-		long tileId = getRoutingTile(x31, y31, memoryLimit, OPTION_IN_MEMORY_LOAD);
+		return loadRouteSegment(x31, y31, memoryLimit, false);
+	}
+	
+	public RouteSegment loadRouteSegment(int x31, int y31, int memoryLimit, boolean recalculation) {
+		long tileId = getRoutingTile(x31, y31, memoryLimit, recalculation ? OPTION_IN_MEMORY_LOAD : OPTION_SMART_LOAD);
 		TLongObjectHashMap<RouteDataObject> excludeDuplications = new TLongObjectHashMap<RouteDataObject>();
 		RouteSegment original = null;
 		List<RoutingSubregionTile> subregions = indexedSubregions.get(tileId);
@@ -654,7 +657,10 @@ public class RoutingContext {
 		private RouteSegment loadRouteSegment(int x31, int y31, RoutingContext ctx,
 				TLongObjectHashMap<RouteDataObject> excludeDuplications, RouteSegment original, List<RoutingSubregionTile> subregions, int subregionIndex) {
 			access++;
-			if (routes != null) {
+			if (routes != null || (searchResult != null && searchResult.objects != null && searchResult.objects.length > 0)) {
+				if (routes == null) {
+					setLoadedNative(searchResult, ctx);
+				}
 				long l = (((long) x31) << 31) + (long) y31;
 				RouteSegment segment = routes.get(l);
 				while (segment != null) {
