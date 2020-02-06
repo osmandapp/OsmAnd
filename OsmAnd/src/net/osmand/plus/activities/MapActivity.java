@@ -1230,6 +1230,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		boolean editToShow = settings.getAndClearEditObjectToShow();
 		int status = settings.isRouteToPointNavigateAndClear();
 		String searchRequestToShow = settings.getAndClearSearchRequestToShow();
+		if (status != 0 || searchRequestToShow != null || latLonToShow != null) {
+			dismissSettingsScreens();
+		}
 		if (status != 0) {
 			// always enable and follow and let calculate it (i.e.GPS is not accessible in a garage)
 			Location loc = new Location("map");

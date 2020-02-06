@@ -3,9 +3,11 @@ package net.osmand.plus.settings;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
@@ -48,6 +50,19 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 	}
 
 	@Override
+	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+		super.onBindPreferenceViewHolder(preference, holder);
+		if (settings.TURN_SCREEN_ON_TIME_INT.getId().equals(preference.getKey()) && preference instanceof ListPreferenceEx) {
+			Object currentValue = ((ListPreferenceEx) preference).getValue();
+			ImageView imageView = (ImageView) holder.findViewById(android.R.id.icon);
+			if (imageView != null && currentValue instanceof Integer) {
+				boolean enabled = preference.isEnabled() && (Integer) currentValue > 0;
+				imageView.setEnabled(enabled);
+			}
+		}
+	}
+
+	@Override
 	protected void updateToolbar() {
 		super.updateToolbar();
 		updateToolbarSwitch();
@@ -84,7 +99,7 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 		ListPreferenceEx turnScreenOnTime = (ListPreferenceEx) findPreference(settings.TURN_SCREEN_ON_TIME_INT.getId());
 		turnScreenOnTime.setEntries(entries);
 		turnScreenOnTime.setEntryValues(entryValues);
-		turnScreenOnTime.setIcon(getContentIcon(R.drawable.ic_action_time_span));
+		turnScreenOnTime.setIcon(getPersistentPrefIcon(R.drawable.ic_action_time_span));
 	}
 
 	private void setupTurnScreenOnSensorPref() {
@@ -92,7 +107,7 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 		String description = getString(R.string.turn_screen_on_sensor_descr);
 
 		SwitchPreferenceEx turnScreenOnSensor = (SwitchPreferenceEx) findPreference(settings.TURN_SCREEN_ON_SENSOR.getId());
-		turnScreenOnSensor.setIcon(getContentIcon(R.drawable.ic_action_sensor_interaction));
+		turnScreenOnSensor.setIcon(getPersistentPrefIcon(R.drawable.ic_action_sensor_interaction));
 		turnScreenOnSensor.setTitle(title);
 		turnScreenOnSensor.setDescription(description);
 	}
