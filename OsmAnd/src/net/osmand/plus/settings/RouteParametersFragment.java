@@ -9,6 +9,7 @@ import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.widget.ImageView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -339,6 +340,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		multiSelectPref.setDescription(descr);
 		multiSelectPref.setLayoutResource(R.layout.preference_with_descr);
 		multiSelectPref.setIcon(getRoutingPrefIcon(groupKey));
+		multiSelectPref.setIconSpaceReserved(true);
 
 		String[] entries = new String[routingParameters.size()];
 		String[] prefsIds = new String[routingParameters.size()];
@@ -383,17 +385,24 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	private Drawable getRoutingPrefIcon(String prefId) {
 		switch (prefId) {
 			case GeneralRouter.ALLOW_PRIVATE:
-				return getContentIcon(R.drawable.ic_action_private_access);
+				return getPersistentPrefIcon(R.drawable.ic_action_private_access);
 			case GeneralRouter.USE_SHORTEST_WAY:
-				return getContentIcon(R.drawable.ic_action_fuel);
+				return getPersistentPrefIcon(R.drawable.ic_action_fuel);
+			case GeneralRouter.ALLOW_MOTORWAYS:
+				Drawable disabled = getContentIcon(R.drawable.ic_action_avoid_motorways);
+				Drawable enabled = getActiveIcon(R.drawable.ic_action_motorways);
+				return AndroidUtils.createEnabledStateListDrawable(disabled, enabled);
+			case GeneralRouter.USE_HEIGHT_OBSTACLES:
+			case RELIEF_SMOOTHNESS_FACTOR:
+				return getPersistentPrefIcon(R.drawable.ic_action_elevation);
 			case AVOID_ROUTING_PARAMETER_PREFIX:
-				return getContentIcon(R.drawable.ic_action_alert);
+				return getPersistentPrefIcon(R.drawable.ic_action_alert);
 			case DRIVING_STYLE:
-				return getContentIcon(R.drawable.ic_action_bicycle_dark);
+				return getPersistentPrefIcon(R.drawable.ic_action_bicycle_dark);
 			case "fast_route_mode":
-				return getContentIcon(R.drawable.ic_action_fastest_route);
+				return getPersistentPrefIcon(R.drawable.ic_action_fastest_route);
 			case "enable_time_conditional_routing":
-				return getContentIcon(R.drawable.ic_action_road_works_dark);
+				return getPersistentPrefIcon(R.drawable.ic_action_road_works_dark);
 			default:
 				return null;
 		}

@@ -1,12 +1,14 @@
 package net.osmand.plus.settings;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.SwitchPreferenceCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -55,32 +57,42 @@ public class NavigationFragment extends BaseSettingsFragment {
 	@Override
 	protected void setupPreferences() {
 		navigationType = findPreference(NAVIGATION_TYPE);
+		setupNavigationTypePref();
+
 		Preference routeParameters = findPreference("route_parameters");
 		SwitchPreferenceCompat showRoutingAlarms = (SwitchPreferenceCompat) findPreference(settings.SHOW_ROUTING_ALARMS.getId());
-		SwitchPreferenceCompat speakRoutingAlarms = (SwitchPreferenceCompat) findPreference(settings.VOICE_MUTE.getId());
 		SwitchPreferenceCompat turnScreenOn = (SwitchPreferenceCompat) findPreference(settings.TURN_SCREEN_ON_ENABLED.getId());
 		SwitchPreferenceEx animateMyLocation = (SwitchPreferenceEx) findPreference(settings.ANIMATE_MY_LOCATION.getId());
-		if (getSelectedAppMode().getRoutingProfile() != null) {
-			GeneralRouter routingProfile = app.getRoutingConfig().getRouter(getSelectedAppMode().getRoutingProfile());
-			if (routingProfile != null) {
-				String profileNameUC = routingProfile.getProfileName().toUpperCase();
-				if (RoutingProfilesResources.isRpValue(profileNameUC)) {
-					RoutingProfilesResources routingProfilesResources = RoutingProfilesResources.valueOf(profileNameUC);
-					navigationType.setSummary(routingProfilesResources.getStringRes());
-					navigationType.setIcon(getContentIcon(routingProfilesResources.getIconRes()));
-				} else {
-					navigationType.setIcon(getContentIcon(R.drawable.ic_action_gdirections_dark));
-				}
+
+		routeParameters.setIcon(getContentIcon(R.drawable.ic_action_route_distance));
+		showRoutingAlarms.setIcon(getPersistentPrefIcon(R.drawable.ic_action_alert));
+		turnScreenOn.setIcon(getPersistentPrefIcon(R.drawable.ic_action_turn_screen_on));
+
+		setupSpeakRoutingAlarmsPref();
+		setupVehicleParametersPref();
+
+		animateMyLocation.setDescription(getString(R.string.animate_my_location_desc));
+	}
+
+	private void setupNavigationTypePref() {
+		String routingProfileKey = getSelectedAppMode().getRoutingProfile();
+		if (!Algorithms.isEmpty(routingProfileKey)) {
+			RoutingProfileDataObject routingProfileDataObject = routingProfileDataObjects.get(routingProfileKey);
+			if (routingProfileDataObject != null) {
+				navigationType.setSummary(routingProfileDataObject.getName());
+				navigationType.setIcon(getActiveIcon(routingProfileDataObject.getIconRes()));
 			}
 		}
-		routeParameters.setIcon(getContentIcon(R.drawable.ic_action_route_distance));
-		showRoutingAlarms.setIcon(getContentIcon(R.drawable.ic_action_alert));
-		speakRoutingAlarms.setIcon(getContentIcon(R.drawable.ic_action_volume_up));
-		turnScreenOn.setIcon(getContentIcon(R.drawable.ic_action_turn_screen_on));
+	}
 
-		setupVehicleParametersPref();
+	private void setupSpeakRoutingAlarmsPref() {
+		Drawable disabled = getContentIcon(R.drawable.ic_action_volume_mute);
+		Drawable enabled = getActiveIcon(R.drawable.ic_action_volume_up);
+		Drawable icon = AndroidUtils.createEnabledStateListDrawable(disabled, enabled);
+
+		SwitchPreferenceCompat speakRoutingAlarms = (SwitchPreferenceCompat) findPreference(settings.VOICE_MUTE.getId());
+		speakRoutingAlarms.setIcon(icon);
 		speakRoutingAlarms.setChecked(!settings.VOICE_MUTE.getModeValue(getSelectedAppMode()));
-		animateMyLocation.setDescription(getString(R.string.animate_my_location_desc));
 	}
 
 	@Override
@@ -137,7 +149,7 @@ public class NavigationFragment extends BaseSettingsFragment {
 			rp.getValue().setSelected(selected);
 		}
 		navigationType.setSummary(selectedRoutingProfileDataObject.getName());
-		navigationType.setIcon(getContentIcon(selectedRoutingProfileDataObject.getIconRes()));
+		navigationType.setIcon(getActiveIcon(selectedRoutingProfileDataObject.getIconRes()));
 
 		ApplicationMode appMode = getSelectedAppMode();
 		RouteProvider.RouteService routeService;
@@ -177,7 +189,7 @@ public class NavigationFragment extends BaseSettingsFragment {
 				String description = context.getString(R.string.osmand_default_routing);
 				if (!Algorithms.isEmpty(e.getValue().getFilename())) {
 					description = e.getValue().getFilename();
-				} else if (RoutingProfilesResources.isRpValue(name.toUpperCase())){
+				} else if (RoutingProfilesResources.isRpValue(name.toUpperCase())) {
 					iconRes = RoutingProfilesResources.valueOf(name.toUpperCase()).getIconRes();
 					name = context
 							.getString(RoutingProfilesResources.valueOf(name.toUpperCase()).getStringRes());
