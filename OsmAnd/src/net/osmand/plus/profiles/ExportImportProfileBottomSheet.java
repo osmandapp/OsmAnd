@@ -12,7 +12,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.CompoundButtonCompat;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.SwitchCompat;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -21,7 +20,6 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +29,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.UiUtilities;
@@ -52,6 +49,7 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,29 +62,25 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
 
     private static final String STATE_KEY = "EXPORT_IMPORT_DIALOG_STATE_KEY";
 
-    private OsmandApplication app;
-
-    private Context context;
-
-    private OsmandSettings settings;
-
-    private ApplicationMode profile;
-
     private boolean includeAdditionalData = false;
 
     private boolean containsAdditionalData = false;
+
+    private OsmandApplication app;
+
+    private ApplicationMode profile;
 
     private State state;
 
     private List<AdditionalDataWrapper> dataList = new ArrayList<>();
 
-    private ExpandableListView listView;
-
-    private ProfileAdditionalDataAdapter adapter;
-
     private List<? super Object> dataToOperate = new ArrayList<>();
 
     private List<SettingsHelper.SettingsItem> settingsItems;
+
+    private ExpandableListView listView;
+
+    private ProfileAdditionalDataAdapter adapter;
 
     private SettingsHelper.ProfileSettingsItem profileSettingsItem;
 
@@ -96,8 +90,6 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         app = requiredMyApplication();
-        context = requireContext();
-        settings = app.getSettings();
         Bundle bundle = getArguments();
         if (bundle != null) {
             this.state = (State) getArguments().getSerializable(STATE_KEY);
@@ -118,8 +110,9 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
         if (context == null) {
             return;
         }
+        LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 
-        profile = state == State.IMPORT ? getAppModeFromItems() : getAppMode();
+        profile = state == State.IMPORT ? getAppModeFromSettingsItems() : getAppMode();
 
         int profileColor = profile.getIconColorInfo().getColor(nightMode);
         int colorNoAlpha = ContextCompat.getColor(context, profileColor);
@@ -152,9 +145,7 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
                     .create();
             items.add(descriptionItem);
 
-
-            final View additionalDataView = View.inflate(new ContextThemeWrapper(context, themeRes),
-                    R.layout.bottom_sheet_item_additional_data, null);
+            final View additionalDataView = inflater.inflate(R.layout.bottom_sheet_item_additional_data, null);
             listView = additionalDataView.findViewById(R.id.list);
             SwitchCompat switchItem = additionalDataView.findViewById(R.id.switchItem);
             switchItem.setTextColor(getResources().getColor(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
@@ -166,7 +157,7 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
                     listView.setVisibility(includeAdditionalData ?
                             View.VISIBLE : View.GONE);
                     if (includeAdditionalData && state == State.IMPORT) {
-                        updateDataFromSettingsItems();
+                        updateDataToOperateFromSettingsItems();
                     }
                     setupHeightAndBackground(getView());
                 }
@@ -212,7 +203,7 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
         return false;
     }
 
-    private ApplicationMode getAppModeFromItems() {
+    private ApplicationMode getAppModeFromSettingsItems() {
         for (SettingsHelper.SettingsItem item : settingsItems) {
             if (item.getType().equals(SettingsHelper.SettingsItemType.PROFILE)) {
                 profileSettingsItem = ((SettingsHelper.ProfileSettingsItem) item);
@@ -226,10 +217,10 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
         List<AdditionalDataWrapper> dataList = new ArrayList<>();
 
         QuickActionFactory factory = new QuickActionFactory();
-        List<QuickAction> quickActions = factory.parseActiveActionsList(settings.QUICK_ACTION_LIST.get());
-        if (!quickActions.isEmpty()) {
+        List<QuickAction> actionsList = factory.parseActiveActionsList(app.getSettings().QUICK_ACTION_LIST.get());
+        if (!actionsList.isEmpty()) {
             dataList.add(new AdditionalDataWrapper(
-                    AdditionalDataWrapper.Type.QUICK_ACTIONS, quickActions));
+                    AdditionalDataWrapper.Type.QUICK_ACTIONS, actionsList));
         }
 
         List<PoiUIFilter> poiList = app.getPoiFilters().getUserDefinedPoiFilters(false);
@@ -240,29 +231,49 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
             ));
         }
 
-        List<TileSourceManager.TileSourceTemplate> mapSourceWrapperList = new ArrayList<>();
-        final LinkedHashMap<String, String> entriesMap = new LinkedHashMap<>(settings.getTileSourceEntries(false));
-        for (Map.Entry<String, String> entry : entriesMap.entrySet()) {
+        List<TileSourceManager.TileSourceTemplate> tileSourceTemplates = new ArrayList<>();
+        final LinkedHashMap<String, String> tileSourceEntries = new LinkedHashMap<>(app.getSettings().getTileSourceEntries(false));
+        for (Map.Entry<String, String> entry : tileSourceEntries.entrySet()) {
             File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + entry.getKey());
-            TileSourceManager.TileSourceTemplate template = TileSourceManager.createTileSourceTemplate(f);
-            if (template != null) {
-                mapSourceWrapperList.add(template);
+            if (f != null) {
+                TileSourceManager.TileSourceTemplate template = TileSourceManager.createTileSourceTemplate(f);
+                if (template != null) {
+                    tileSourceTemplates.add(template);
+                }
             }
         }
-        if (!mapSourceWrapperList.isEmpty()) {
+        if (!tileSourceTemplates.isEmpty()) {
             dataList.add(new AdditionalDataWrapper(
                     AdditionalDataWrapper.Type.MAP_SOURCES,
-                    mapSourceWrapperList
+                    tileSourceTemplates
             ));
+        }
+
+        Map<String, File> externalRenderers = app.getRendererRegistry().getExternalRenderers();
+        if (!externalRenderers.isEmpty()) {
+            dataList.add(new AdditionalDataWrapper(
+                    AdditionalDataWrapper.Type.CUSTOM_RENDER_STYLE,
+                    new ArrayList<>(externalRenderers.values())
+            ));
+        }
+
+        File routingProfilesFolder = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
+        if (routingProfilesFolder.exists() && routingProfilesFolder.isDirectory()) {
+            File[] fl = routingProfilesFolder.listFiles();
+            if (fl != null && fl.length > 0) {
+                dataList.add(new AdditionalDataWrapper(
+                        AdditionalDataWrapper.Type.CUSTOM_ROUTING,
+                        Arrays.asList(fl)
+                ));
+            }
         }
 
         return dataList;
     }
 
-    private List<SettingsHelper.SettingsItem> prepareSettingsItems() {
+    private List<SettingsHelper.SettingsItem> prepareSettingsItemsForExport() {
         List<SettingsHelper.SettingsItem> settingsItems = new ArrayList<>();
         settingsItems.add(new SettingsHelper.ProfileSettingsItem(app.getSettings(), profile));
-
         if (includeAdditionalData) {
             settingsItems.addAll(prepareAdditionalSettingsItems());
         }
@@ -273,14 +284,16 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
         List<SettingsHelper.SettingsItem> settingsItems = new ArrayList<>();
         List<QuickAction> quickActions = new ArrayList<>();
         List<PoiUIFilter> poiUIFilters = new ArrayList<>();
-        List<TileSourceManager.TileSourceTemplate> mapSourceWrappers = new ArrayList<>();
+        List<TileSourceManager.TileSourceTemplate> tileSourceTemplates = new ArrayList<>();
         for (Object object : dataToOperate) {
             if (object instanceof QuickAction) {
                 quickActions.add((QuickAction) object);
             } else if (object instanceof PoiUIFilter) {
                 poiUIFilters.add((PoiUIFilter) object);
             } else if (object instanceof TileSourceManager.TileSourceTemplate) {
-                mapSourceWrappers.add((TileSourceManager.TileSourceTemplate) object);
+                tileSourceTemplates.add((TileSourceManager.TileSourceTemplate) object);
+            } else if (object instanceof File) {
+                settingsItems.add(new SettingsHelper.FileSettingsItem(app, (File) object));
             }
         }
         if (!quickActions.isEmpty()) {
@@ -289,8 +302,8 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
         if (!poiUIFilters.isEmpty()) {
             settingsItems.add(new SettingsHelper.PoiUiFilterSettingsItem(app, poiUIFilters));
         }
-        if (!mapSourceWrappers.isEmpty()) {
-            settingsItems.add(new SettingsHelper.MapSourcesSettingsItem(app.getSettings(), mapSourceWrappers));
+        if (!tileSourceTemplates.isEmpty()) {
+            settingsItems.add(new SettingsHelper.MapSourcesSettingsItem(app.getSettings(), tileSourceTemplates));
         }
         return settingsItems;
     }
@@ -300,7 +313,8 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
         for (SettingsHelper.SettingsItem item : settingsItems) {
             containsData = item.getType().equals(SettingsHelper.SettingsItemType.QUICK_ACTION)
                     || item.getType().equals(SettingsHelper.SettingsItemType.POI_UI_FILTERS)
-                    || item.getType().equals(SettingsHelper.SettingsItemType.MAP_SOURCES);
+                    || item.getType().equals(SettingsHelper.SettingsItemType.MAP_SOURCES)
+                    || item.getType().equals(SettingsHelper.SettingsItemType.FILE);
             if (containsData) {
                 break;
             }
@@ -308,38 +322,62 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
         return containsData;
     }
 
-    private void updateDataFromSettingsItems() {
+    private void updateDataToOperateFromSettingsItems() {
         List<AdditionalDataWrapper> dataList = new ArrayList<>();
         List<QuickAction> quickActions = new ArrayList<>();
         List<PoiUIFilter> poiUIFilters = new ArrayList<>();
-        List<TileSourceManager.TileSourceTemplate> mapSourceWrappers = new ArrayList<>();
+        List<TileSourceManager.TileSourceTemplate> tileSourceTemplates = new ArrayList<>();
+        List<File> routingFilesList = new ArrayList<>();
+        List<File> renderFilesList = new ArrayList<>();
+
         for (SettingsHelper.SettingsItem item : settingsItems) {
             if (item.getType().equals(SettingsHelper.SettingsItemType.QUICK_ACTION)) {
                 quickActions.addAll(((SettingsHelper.QuickActionSettingsItem) item).getQuickActions());
             } else if (item.getType().equals(SettingsHelper.SettingsItemType.POI_UI_FILTERS)) {
                 poiUIFilters.addAll(((SettingsHelper.PoiUiFilterSettingsItem) item).getPoiUIFilters());
             } else if (item.getType().equals(SettingsHelper.SettingsItemType.MAP_SOURCES)) {
-                mapSourceWrappers.addAll(((SettingsHelper.MapSourcesSettingsItem) item).getMapSources());
+                tileSourceTemplates.addAll(((SettingsHelper.MapSourcesSettingsItem) item).getMapSources());
+            } else if (item.getType().equals(SettingsHelper.SettingsItemType.FILE)) {
+                if (item.getName().startsWith("/rendering/")) {
+                    renderFilesList.add(((SettingsHelper.FileSettingsItem) item).getFile());
+                } else if (item.getName().startsWith("/routing/")) {
+                    routingFilesList.add(((SettingsHelper.FileSettingsItem) item).getFile());
+                }
             }
         }
+
         if (!quickActions.isEmpty()) {
             dataList.add(new AdditionalDataWrapper(
                     AdditionalDataWrapper.Type.QUICK_ACTIONS,
                     quickActions));
+            dataToOperate.addAll(quickActions);
         }
         if (!poiUIFilters.isEmpty()) {
             dataList.add(new AdditionalDataWrapper(
                     AdditionalDataWrapper.Type.POI_TYPES,
                     poiUIFilters));
+            dataToOperate.addAll(poiUIFilters);
         }
-        if (!mapSourceWrappers.isEmpty()) {
+        if (!tileSourceTemplates.isEmpty()) {
             dataList.add(new AdditionalDataWrapper(
                     AdditionalDataWrapper.Type.MAP_SOURCES,
-                    mapSourceWrappers
+                    tileSourceTemplates
             ));
+            dataToOperate.addAll(tileSourceTemplates);
         }
-        for (AdditionalDataWrapper dataWrapper : dataList) {
-            dataToOperate.addAll(dataWrapper.getItems());
+        if (!renderFilesList.isEmpty()) {
+            dataList.add(new AdditionalDataWrapper(
+                    AdditionalDataWrapper.Type.CUSTOM_RENDER_STYLE,
+                    renderFilesList
+            ));
+            dataToOperate.addAll(renderFilesList);
+        }
+        if (!routingFilesList.isEmpty()) {
+            dataList.add(new AdditionalDataWrapper(
+                    AdditionalDataWrapper.Type.CUSTOM_ROUTING,
+                    routingFilesList
+            ));
+            dataToOperate.addAll(routingFilesList);
         }
         adapter.updateList(dataList);
     }
@@ -375,13 +413,12 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
                         app.showToastMessage(R.string.export_profile_failed);
                     }
                 }
-            }, prepareSettingsItems());
+            }, prepareSettingsItemsForExport());
         }
     }
 
     private void shareProfile(@NonNull File file, @NonNull ApplicationMode profile) {
         try {
-            Context ctx = requireContext();
             final Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
             sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.exported_osmand_profile, profile.toHumanString()));
@@ -391,7 +428,7 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
             startActivity(sendIntent);
             dismiss();
         } catch (Exception e) {
-            Toast.makeText(context, R.string.export_profile_failed, Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), R.string.export_profile_failed, Toast.LENGTH_SHORT).show();
             LOG.error("Share profile error", e);
         }
     }
@@ -442,17 +479,6 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
 
     public void setFile(File file) {
         this.file = file;
-    }
-
-    boolean isContainsInDataToOperate(AdditionalDataWrapper.Type type, Object object) {
-        return dataToOperate.contains(object);
-
-//        for (AdditionalDataWrapper data : dataList) {
-//            if (data.getType() == type) {
-//                return data.getItems().contains(object);
-//            }
-//        }
-//        return false;
     }
 
     public enum State {
@@ -518,7 +544,7 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
         public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
             View group = convertView;
             if (group == null) {
-                LayoutInflater inflater = (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
                 group = inflater.inflate(R.layout.profile_data_list_item_group, parent, false);
             }
 
@@ -545,7 +571,7 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
 
                     if (checkBox.isChecked()) {
                         for (Object object : listItems) {
-                            if (!isContainsInDataToOperate(type, object)) {
+                            if (!dataToOperate.contains(object)) {
                                 dataToOperate.add(object);
                             }
                         }
@@ -565,7 +591,7 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
         public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
             View child = convertView;
             if (child == null) {
-                LayoutInflater inflater = (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
                 child = inflater.inflate(R.layout.profile_data_list_item_child, parent, false);
             }
             final Object currentItem = list.get(groupPosition).getItems().get(childPosition);
@@ -582,7 +608,7 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
             divider.setVisibility(isLastChild && !isLastGroup ? View.VISIBLE : View.GONE);
             CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, profileColor)));
 
-            checkBox.setChecked(isContainsInDataToOperate(type, currentItem));
+            checkBox.setChecked(dataToOperate.contains(currentItem));
             checkBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -591,6 +617,7 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
                     } else {
                         dataToOperate.remove(currentItem);
                     }
+                    notifyDataSetInvalidated();
                 }
             });
 
@@ -608,6 +635,20 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
                     break;
                 case MAP_SOURCES:
                     title.setText(((TileSourceManager.TileSourceTemplate) currentItem).getName());
+                    icon.setVisibility(View.INVISIBLE);
+                    icon.setImageResource(R.drawable.ic_action_info_dark);
+                    break;
+                case CUSTOM_RENDER_STYLE:
+                    String renderName = ((File) currentItem).getName();
+                    renderName = renderName.replace('_', ' ').replaceAll(".render.xml", "");
+                    title.setText(renderName);
+                    icon.setVisibility(View.INVISIBLE);
+                    icon.setImageResource(R.drawable.ic_action_info_dark);
+                    break;
+                case CUSTOM_ROUTING:
+                    String routingName = ((File) currentItem).getName();
+                    routingName = routingName.replace('_', ' ').replaceAll(".xml", "");
+                    title.setText(routingName);
                     icon.setVisibility(View.INVISIBLE);
                     icon.setImageResource(R.drawable.ic_action_info_dark);
                     break;
@@ -632,7 +673,7 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
                     return R.string.quick_action_map_source_title;
                 case CUSTOM_RENDER_STYLE:
                     return R.string.shared_string_custom_rendering_style;
-                case ROUTING:
+                case CUSTOM_ROUTING:
                     return R.string.shared_string_routing;
                 default:
                     return R.string.access_empty_list;
