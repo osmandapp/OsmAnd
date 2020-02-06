@@ -170,7 +170,7 @@ public class Renderable {
                     culled.clear();              // use full-resolution until re-cull complete
                 }
                 zoom = newZoom;
-                if (newZoom > MIN_CULLER_ZOOM) {
+                if (newZoom >= MIN_CULLER_ZOOM) {
                     return;
                 }
 
