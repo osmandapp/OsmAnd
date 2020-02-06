@@ -1041,22 +1041,22 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	public boolean onBackPressed() {
 		if (isVisible()) {
-			backPressed();
-			return true;
+			return backPressed();
 		}
 		return false;
 	}
 
-	private void backPressed() {
+	private boolean backPressed() {
 		if (previousVisibleType != visibleType && previousVisibleType != null) {
 			if (visibleType == DashboardType.MAPILLARY) {
 				hideKeyboard();
 			}
 			visibleType = null;
 			setDashboardVisibility(true, previousVisibleType);
+			return true;
 		} else {
 			hideDashboard();
-			mapActivity.checkAndShowConfigureProfileFragment();
+			return false;
 		}
 	}
 
