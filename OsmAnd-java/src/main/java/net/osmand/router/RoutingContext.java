@@ -655,43 +655,35 @@ public class RoutingContext {
 				TLongObjectHashMap<RouteDataObject> excludeDuplications, RouteSegment original, List<RoutingSubregionTile> subregions, int subregionIndex) {
 			access++;
 			if (routes != null) {
-				long l = (((long) x31) << 31) + (long) y31;
-
-				RouteSegment segment = routes.get(l);
-				while (segment != null) {
-					RouteDataObject ro = segment.road;
-					RouteDataObject toCmp = excludeDuplications.get(calcRouteId(ro, segment.getSegmentStart()));
-					if (!isExcluded(ro.id, subregions, subregionIndex)
-							&& (toCmp == null || toCmp.getPointsLength() < ro.getPointsLength())) {
-						excludeDuplications.put(calcRouteId(ro, segment.getSegmentStart()), ro);
-						RouteSegment s = new RouteSegment(ro, segment.getSegmentStart());
-						s.next = original;
-						original = s;
-					}
-					segment = segment.next;
-				}
+				original = findOriginal(x31, y31, excludeDuplications, original, subregions, subregionIndex);
 			} else if (searchResult != null && searchResult.objects != null && searchResult.objects.length > 0){
 				RouteDataObject[] rdos = searchResult.objects;
 				for (int n = 0; n < rdos.length; n++) {
 					add(rdos[n]);
 				}
-				long l = (((long) x31) << 31) + (long) y31;
-
-				RouteSegment segment = routes.get(l);
-				while (segment != null) {
-					RouteDataObject ro = segment.road;
-					RouteDataObject toCmp = excludeDuplications.get(calcRouteId(ro, segment.getSegmentStart()));
-					if (!isExcluded(ro.id, subregions, subregionIndex)
-							&& (toCmp == null || toCmp.getPointsLength() < ro.getPointsLength())) {
-						excludeDuplications.put(calcRouteId(ro, segment.getSegmentStart()), ro);
-						RouteSegment s = new RouteSegment(ro, segment.getSegmentStart());
-						s.next = original;
-						original = s;
-					}
-					segment = segment.next;
-				}
+				original = findOriginal(x31, y31, excludeDuplications, original, subregions, subregionIndex);
 			} else {
 				throw new UnsupportedOperationException("Not clear how it could be used with native");
+			}		
+			return original;
+		}
+
+		private RouteSegment findOriginal(int x31, int y31, TLongObjectHashMap<RouteDataObject> excludeDuplications,
+				RouteSegment original, List<RoutingSubregionTile> subregions, int subregionIndex) {
+			long l = (((long) x31) << 31) + (long) y31;
+
+			RouteSegment segment = routes.get(l);
+			while (segment != null) {
+				RouteDataObject ro = segment.road;
+				RouteDataObject toCmp = excludeDuplications.get(calcRouteId(ro, segment.getSegmentStart()));
+				if (!isExcluded(ro.id, subregions, subregionIndex)
+						&& (toCmp == null || toCmp.getPointsLength() < ro.getPointsLength())) {
+					excludeDuplications.put(calcRouteId(ro, segment.getSegmentStart()), ro);
+					RouteSegment s = new RouteSegment(ro, segment.getSegmentStart());
+					s.next = original;
+					original = s;
+				}
+				segment = segment.next;
 			}
 			return original;
 		}
