@@ -657,10 +657,7 @@ public class RoutingContext {
 		private RouteSegment loadRouteSegment(int x31, int y31, RoutingContext ctx,
 				TLongObjectHashMap<RouteDataObject> excludeDuplications, RouteSegment original, List<RoutingSubregionTile> subregions, int subregionIndex) {
 			access++;
-			if (routes != null || (searchResult != null && searchResult.objects != null && searchResult.objects.length > 0)) {
-				if (routes == null) {
-					setLoadedNative(searchResult, ctx);
-				}
+			if (routes != null) {
 				long l = (((long) x31) << 31) + (long) y31;
 				RouteSegment segment = routes.get(l);
 				while (segment != null) {
