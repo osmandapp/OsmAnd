@@ -1618,7 +1618,7 @@
     <string name="poi_payment_pikepass_designated">PIKEPASS (przeznaczony)</string>
     <string name="poi_payment_visa_debit_yes">Visa Debit</string>
     <string name="poi_payment_visa_debit_no">Karty Visa Debit nieakceptowane</string>
-    <string name="poi_payment_cryptocurrencies_no">Kryptowaluty akceptowane</string>
+    <string name="poi_payment_cryptocurrencies_no">Kryptowaluty nieakceptowane</string>
     <string name="poi_payment_others_yes">Inne</string>
     <string name="poi_payment_others_no">Inne metody płatności nieakceptowane</string>
     <string name="poi_payment_routex_yes">Routex</string>
@@ -3610,7 +3610,7 @@
     <string name="poi_access_trailer">Dostęp dla przyczep</string>
     <string name="poi_access_motorcycle">Dostęp dla motocyklów</string>
     <string name="poi_access_moped">Dostęp dla motorowerów</string>
-    <string name="poi_access_mofa">Dostęp dla mofa</string>
+    <string name="poi_access_mofa">Dostęp dla motorynek</string>
     <string name="poi_access_hgv">Dostęp dla samochodów ciężarowych</string>
     <string name="poi_access_goods">Dostęp dla lekkich pojazdów ciężarowych</string>
     <string name="poi_access_disabled">Dostęp dla niepełnosprawnych</string>
@@ -3650,7 +3650,7 @@
     <string name="poi_motorcycle_private">Dostęp dla motocykli: prywatny</string>
     <string name="poi_motorcycle_no">Dostęp dla motocykli: nie</string>
     <string name="poi_moped_no">Dostęp dla motorowerów: nie</string>
-    <string name="poi_mofa_no">Dostęp dla mofa: nie</string>
+    <string name="poi_mofa_no">Dostęp dla motorynek: nie</string>
     <string name="poi_bicycle_private">Dostęp dla rowerów: prywatny</string>
     <string name="poi_bicycle_dismount">Dostęp dla rowerów: po zsiądnięciu</string>
     <string name="poi_bicycle_destination">Dostęp dla rowerów: do celu podróży</string>
@@ -3782,4 +3782,6 @@
     <string name="poi_volcano_status_inactive">Nieaktywny</string>
     <string name="poi_volcano_number_of_eruptions">Liczba erupcji</string>
     <string name="poi_memorial_ghost_bike">Duch roweru</string>
+    <string name="poi_volcano_type_dirt">Wulkan błotny</string>
+    <string name="poi_paintball">Paintball</string>
 </resources>

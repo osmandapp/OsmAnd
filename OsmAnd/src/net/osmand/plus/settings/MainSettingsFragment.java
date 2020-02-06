@@ -19,6 +19,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.SettingsHelper.*;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SelectProfileListener;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -88,9 +89,8 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 				AndroidUtils.setBackground(selectedProfile, backgroundDrawable);
 			}
 		}
-		if (ApplicationMode.DEFAULT.getStringKey().equals(preference.getKey())) {
-			holder.findViewById(R.id.switchWidget).setVisibility(View.GONE);
-		}
+		boolean visible = !ApplicationMode.DEFAULT.getStringKey().equals(key);
+		AndroidUiHelper.updateVisibility(holder.findViewById(R.id.switchWidget), visible);
 	}
 
 	@Override

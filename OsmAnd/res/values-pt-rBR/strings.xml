@@ -189,7 +189,7 @@
     <string name="back_to_map">Voltar ao mapa</string>
     <string name="share_note">Compartilhar nota</string>
     <string name="location_on_map">Posição:\n Lat %1$s\n Lon %2$s</string>
-    <string name="notes">Notas do OSM</string>
+    <string name="notes">Notas A/V</string>
     <string name="online_map">Mapa on-line</string>
     <string name="roads_only">Apenas estradas</string>
     <string name="rendering_attr_pisteRoutes_name">Pistas de esqui</string>
@@ -335,7 +335,7 @@
     <string name="routing_attr_prefer_motorway_description">Preferir autoestradas na rota</string>
     <string name="routing_attr_avoid_toll_name">Sem pedágios</string>
     <string name="routing_attr_avoid_toll_description">Evita estradas com pedágio</string>
-    <string name="routing_attr_avoid_unpaved_name">Não há estradas não pavimentadas</string>
+    <string name="routing_attr_avoid_unpaved_name">Sem estradas não pavimentadas</string>
     <string name="routing_attr_avoid_unpaved_description">Evita estradas não pavimentadas</string>
     <string name="routing_attr_avoid_ferries_description">Evita balsas</string>
     <string name="routing_attr_weight_name">Peso máximo</string>
@@ -610,7 +610,7 @@
 \n OsmAnd está sendo desenvolvido ativamente e o nosso projeto e seu progresso contínuo depende de contribuições financeiras para o desenvolvimento e teste de novas funcionalidades. Por favor, considere adquirir OsmAnd+, ou financiar novas funcionalidades específicas ou fazer uma doação geral em https://osmand.net.</string>
     <string name="day_night_info_description">Nascer do Sol: %1$s
 Pôr do Sol: %2$s</string>
-    <string name="avoid_unpaved">Não há estradas não pavimentadas</string>
+    <string name="avoid_unpaved">Sem estradas não pavimentadas</string>
     <string name="bg_service_sleep_mode_off">Ativar\n modo segundo plano</string>
     <string name="show_cameras">Radares</string>
     <string name="show_traffic_warnings">Alertas de trânsito</string>
@@ -772,7 +772,7 @@ Pôr do Sol: %2$s</string>
     <string name="bg_service_screen_unlock">Desbloquear</string>
     <string name="bg_service_screen_lock_toast">A tela está bloqueada</string>
     <string name="bg_service_interval">Definir intervalo para ativar:</string>
-    <string name="avoid_toll_roads">Não há estradas com pedágio</string>
+    <string name="avoid_toll_roads">Sem estradas com pedágio</string>
     <string name="continue_follow_previous_route_auto">Continuar seguindo a navegação anterior inacabada\? (%1$s segundos)</string>
     <string name="route_updated_loc_found">Aguardando posição para calcular rota</string>
     <string name="osmand_parking_hours">Horas</string>
@@ -1458,7 +1458,7 @@ Pôr do Sol: %2$s</string>
     <string name="show_view_angle">Mostrar ângulo de visão</string>
     <string name="map_view_3d_descr">Ativar a visualização em 3D do mapa.</string>
     <string name="map_view_3d">Visão em 3D</string>
-    <string name="map_tile_source_descr">Escolha fonte de quadrículas de mapa on-line ou em cache</string>
+    <string name="map_tile_source_descr">Escolha fonte de quadrículas de mapa on-line ou em cache.</string>
     <string name="map_tile_source">Fonte do mapa de quadrículas</string>
     <string name="map_source">Fonte do mapa</string>
     <string name="use_internet">Usar a Internet</string>
@@ -2147,7 +2147,7 @@ Pôr do Sol: %2$s</string>
     <string name="appearance_on_the_map">Aparência no mapa</string>
     <string name="add_track_to_markers_descr">Selecione uma trilha para adicionar seus pontos de passagem aos marcadores.</string>
     <string name="add_favourites_group_to_markers_descr">Selecione uma categoria dos Favoritos para adicionar aos marcadores.</string>
-    <string name="shared_string_gpx_waypoints">Pontos de passagem de trilhas</string>
+    <string name="shared_string_gpx_waypoints">Pontos de trilhas</string>
     <string name="favourites_group">Categoria favoritos</string>
     <string name="add_group">Adicionar um grupo</string>
     <string name="add_group_descr">Importe grupos dos Favoritos ou pontos de passagem GPX.</string>
@@ -3428,7 +3428,7 @@ Pôr do Sol: %2$s</string>
     <string name="live_monitoring">Rastreamento online</string>
     <string name="save_track_logging_accuracy">Precisão de registro</string>
     <string name="tracks_view_descr">Você pode encontrar todas as suas faixas gravadas em %1$ss ou na pasta OsmAd usando o gerenciador de arquivos.</string>
-    <string name="multimedia_notes_view_descr">Você pode encontrar todas as suas anotações em %1$s</string>
+    <string name="multimedia_notes_view_descr">Você pode encontrar todas as suas anotações em %1$s.</string>
     <string name="video_notes">Notas de vídeo</string>
     <string name="photo_notes">Notas fotográficas</string>
     <string name="route_recalculation">Recálculo da rota</string>
@@ -3470,4 +3470,16 @@ Pôr do Sol: %2$s</string>
     <string name="multimedia_use_system_camera">Usar aplicativo do sistema</string>
     <string name="multimedia_photo_play_sound">Som do obturador da câmera</string>
     <string name="osm_authorization_success">Autorização bem sucedida</string>
+    <string name="rearrange_categories">Reorganizar categorias</string>
+    <string name="create_custom_categories_list_promo">Você pode adicionar categorias personalizadas, ocultar categorias que não considera necessárias e alterar a ordem de classificação da lista. A lista pode ser importada e exportada com perfis.</string>
+    <string name="add_new_custom_category_button_promo">Você pode adicionar uma nova categoria personalizada selecionando uma ou algumas categorias necessárias.</string>
+    <string name="reset_to_default_category_button_promo">Redefinir para padrão excluirá ou categorias personalizadas e redefinirá a ordem de classificação para o estado padrão após a instalação.</string>
+    <string name="shared_string_available">Disponível</string>
+    <string name="add_custom_category">Adicionar categoria personalizada</string>
+    <string name="rendering_attr_streetLightingNight_name">Mostrar apenas à noite</string>
+    <string name="plugin_prefs_reset_successful">Todas as configurações de plug-in restauradas para o estado padrão.</string>
+    <string name="profile_prefs_reset_successful">Todas as configurações de perfil restauradas para o estado padrão.</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="sunset_at">Pôr do sol em %1$s</string>
+    <string name="sunrise_at">Nascer do sol em %1$s</string>
 </resources>

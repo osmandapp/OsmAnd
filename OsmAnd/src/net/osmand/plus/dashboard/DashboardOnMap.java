@@ -82,7 +82,6 @@ import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.DownloadedRegionsLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.controls.DynamicListView;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 
 import java.lang.ref.WeakReference;
@@ -224,6 +223,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			@Override
 			public void onClick(View v) {
 				hideDashboard();
+				mapActivity.dismissSettingsScreens();
 			}
 		};
 		toolbar = ((Toolbar) dashboardView.findViewById(R.id.toolbar));
@@ -1041,21 +1041,22 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	public boolean onBackPressed() {
 		if (isVisible()) {
-			backPressed();
-			return true;
+			return backPressed();
 		}
 		return false;
 	}
 
-	private void backPressed() {
+	private boolean backPressed() {
 		if (previousVisibleType != visibleType && previousVisibleType != null) {
 			if (visibleType == DashboardType.MAPILLARY) {
 				hideKeyboard();
 			}
 			visibleType = null;
 			setDashboardVisibility(true, previousVisibleType);
+			return true;
 		} else {
 			hideDashboard();
+			return false;
 		}
 	}
 

@@ -333,7 +333,7 @@
     <string name="osmand_background_plugin_description">يظهر الإعدادات لتمكين التتبع والملاحة في وضعية السكون ( الشاشة مغلقة ) عبر إيقاظ دوري لجهاز GPS.</string>
     <string name="precise_routing_mode_descr">تمكين لحساب المسارات بدقة دون أخطاء. لا يزال محدود المسافة وبطيء.</string>
     <string name="recording_photo_description">صورة %1$s %2$s</string>
-    <string name="dropbox_plugin_description">ملحق Dropbox يسمح بمزامنة المسارات و الملاحظات الصوتية والمرئية مع حسابك في Dropbox.</string>
+    <string name="dropbox_plugin_description">مزامنة المسارات والملاحظات الصوتية / الفيديو مع حساب Dropbox الخاص بك.</string>
     <string name="av_video_format_descr">تنسيق الفيديو الناتج:</string>
     <string name="av_video_format">تنسيق الفيديو الناتج</string>
     <string name="av_use_external_recorder_descr">استخدم مسجل النظام للفيديو.</string>
@@ -603,11 +603,11 @@
 \n 
 \nبعض الميزات الأساسية: 
 \n - تشغيل كامل دون إنترنت( خزن الخرائط التوجيه أو الخرائط الجزئية المنزلة في ذاكرة الجهاز) 
-\n - خرائط التوجيه المدمجة للعالم ككل متاحة لتعمل دون إنترنت
+\n - خرائط التوجيه المدمجة للعالم ككل متاحة لتعمل دون إنترنت 
 \n - تحميل غير محدود لخرائط البلدان أو المناطق مباشرة من التطبيق 
 \n - ميزة ويكيبيديا المحلية ( قم بتحميل POI لويكيبيديا)، الأمثل لمشاهدة المعالم الأثرية 
 \n - يمكن تراكب عدة طبقات للخرائط، ك GPX أو مسارات الملاحة، مواقع ذات الاهتمام (POI)، الأماكن المفضلة، الحدود المحيطية، أماكن توقف النقل العمومي، خرائط إضافية بشفافية قابلة للتعديل 
-\n - البحث عن العناوين والأماكن (POI) دون إنترنت
+\n - البحث عن العناوين والأماكن (POI) دون إنترنت 
 \n - تحديد الطريق لمسافات متوسطة المدى 
 \n - وضع السيارة، الدراجة والمشاة متوفر مع: 
 \n - تبديل اختياري آلي لوضع الرؤية في الليل/النهار 
@@ -750,7 +750,7 @@
     <string name="amenity_type_seamark">سيمارك</string>
     <string name="poi_dialog_comment_default">متغير POI</string>
     <string name="tile_source_already_installed">الخريطة مثبتة بالفعل.</string>
-    <string name="select_tile_source_to_install">حدد أحد الخرائط للتثبيت أو التحديث.</string>
+    <string name="select_tile_source_to_install">اختر خرائط (التجانب) للتثبيت أو التحديث.</string>
     <string name="internet_not_available">لا يوجد اتصال بالإنترنت.</string>
     <string name="install_more">المزيد…</string>
     <string name="level_to_switch_vector_raster_descr">مستوى التقريب الأدنى لاستخدام خرائط التوجيه.</string>
@@ -1369,11 +1369,11 @@
     <string name="choose_available_region">اختر المنطقة من القائمة</string>
     <string name="osb_comment_dialog_success">تم إضافة الملاحظة بنجاح</string>
     <string name="tiles_to_download_estimated_size">عند التقريب {0} قم بتحميل {1} التجانبيات/المربعات ({2} MB)</string>
-    <string name="use_high_res_maps_descr">عدم تمدد (وطمس) تجانبيات/مربعات الخريطة على شاشات العرض عالية الكثافة.</string>
+    <string name="use_high_res_maps_descr">لا تقم بتمديد (وطمس) تجانبات الخريطة على شاشات العرض عالية الكثافة.</string>
     <string name="max_level_download_tile_descr">اختر مستوى التقريب الأقصى لتحميل تجانبيات/مربعات الخريطة من الإنترنت.</string>
-    <string name="map_tile_source_descr">اختر مصدر تجانبيات/مربعات الخريطة على الإنترنت أو المخزنة مؤقتاً</string>
+    <string name="map_tile_source_descr">اختر مصدر تجانبيات/مربعات الخريطة على الإنترنت أو المخزنة مؤقتا.</string>
     <string name="user_hates_app_get_feedback_long">فضلًا أخبرنا ما الذي تريد تعديله في هذا التّطبيق.</string>
-    <string name="storage_directory_readonly_desc">مجلّد تخزين البيانات المحدّد حالياً للقراءة فقط. نُقل مجلّد التّخزين مؤقّتًا إلى الذّاكرة الدّاخليّة. فضلًا اختر دليل تخزين صحيح.</string>
+    <string name="storage_directory_readonly_desc">تم التبديل إلى الذاكرة الداخلية لأن مجلد تخزين البيانات المحدد محمي ضد الكتابة. الرجاء تحديد مكان تخزين قابل للكتابة.</string>
     <string name="storage_directory_shared">ذاكرة الهاتف</string>
     <string name="donations">التبرعات</string>
     <string name="osm_live_user_public_name">الاسم العمومي</string>
@@ -1591,7 +1591,7 @@
     <string name="night">ليلاً</string>
     <string name="shared_string_move_up">حرك للاعلى</string>
     <string name="shared_string_move_down">حرك للاسفل</string>
-    <string name="open_street_map_login_and_pass">تسجيل الدخول</string>
+    <string name="open_street_map_login_and_pass">اسم مستخدم و كلمة سر OSM</string>
     <string name="osm_live_email_desc">نحن بحاجة اليه لكي نوفر لك معلومات حول المساهمات.</string>
     <string name="select_map_marker">اختر علامة موضعية</string>
     <string name="show_transparency_seekbar">عرض شريط الشفافية</string>
@@ -1830,7 +1830,7 @@
     <string name="osm_edit_commented_note">ملاحظة OSM معلق عليها</string>
     <string name="osm_edit_removed_note">ملاحظة OSM محذوفة</string>
     <string name="rendering_attr_pisteGrooming_name">مسار زلق</string>
-    <string name="world_ski_missing">لإظهار خرائط التزلج، يجب تحميل خريطة خاصة محلية</string>
+    <string name="world_ski_missing">لإظهار خرائط التزلج، يجب تحميل خريطة خاصة محلية.</string>
     <string name="rendering_attr_publicTransportMode_name">حافلة، ترامواي وغيرها</string>
     <string name="osm_edit_created_note">إنشاء ملاحظة OSM</string>
     <string name="osn_add_dialog_error">حدث استثناء: لم يتم إنشاء الملاحظة.</string>
@@ -1871,7 +1871,7 @@
     <string name="rendering_value_walkingRoutesOSMC_name">تلوين وفق رمز تنزه OSMC</string>
     <string name="shared_string_logoff">خروج</string>
     <string name="local_recordings_delete_all_confirm">هل أنت متأكد من أنك تريد حذف الملاحظات %1$d؟</string>
-    <string name="nautical_maps_missing">لعرض الخرائط البحرية، يجب تحميل خريطة خاصة محلياً</string>
+    <string name="nautical_maps_missing">لعرض الخرائط البحرية، يجب تحميل خريطة خاصة محلياً.</string>
     <string name="save_track_to_gpx_globally_descr">تسجيل الموقع العام إلى ملف GPX يمكن تشغيله أو إيقافه باستخدام نافذة تسجيل GPX على الشاشة خريطة.</string>
     <string name="proxy_host_descr">ضبط اسم مضيف البروكسي (مثال 127.0.0.1).</string>
     <string name="map_preferred_locale_descr">اللغة المفضلة للمسميات على الخريطة (إذا لم تكن متوفرة ستتحول إلى اللغة الإنجليزية أو الأسماء المحلية).</string>
@@ -2279,11 +2279,11 @@
     <string name="animate_my_location_desc">تمكين استقراء موقعي أثناء الفقد المؤقت للموقع وذلك لإصلاحه.</string>
     <string name="quick_action_auto_zoom_desc">زر تشغيل أو إيقاف التكبير التلقائي وفقًا لسرعتك.</string>
     <string name="quick_action_add_destination_desc">زر توسيط في وجهة الطريق ، مما يجعل الوجهة المحددة مسبقًا تصبح الوجهة الوسيطة الأخيرة.</string>
-    <string name="quick_action_replace_destination_desc">زر يركز على وجهة مسار جديدة ، مع استبدال الوجهة المحددة مسبقًا (إن وجدت).</string>
+    <string name="quick_action_replace_destination_desc">زر لجعل الشاشة مركز الوجهة الجديدة ، مع استبدال الوجهة المحددة مسبقًا (إن وجدت).</string>
     <string name="improve_coverage_install_mapillary_desc">يمكنك التقاط صور خاصة بك أو سلسلة من الصور وإرفاقها إلى هذا الموقع من الخريطة. للقيام بذلك تحتاج إلى تثبيت تطبيق مابيلاري من Google play.</string>
     <string name="hillshade_menu_download_descr">تحتاج إلى تحميل خريطة تراكب التلال لهذه المنطقة.</string>
     <string name="hillshade_purchase_header">لمشاهدة التضاريس على الخريطة، تحتاج إلى شراء وتثبيت برنامج الخطوط الكنتورية المساعد.</string>
-    <string name="quick_action_add_first_intermediate_desc">زر توسيط في الوجهة الوسيطة الأولى.</string>
+    <string name="quick_action_add_first_intermediate_desc">زر لجعل مركز الشاشة أول وجهة وسيطة.</string>
     <string name="no_overlay">بدون طبقة</string>
     <string name="no_underlay">بدون طبقة</string>
     <string name="subscribe_email_desc">اشترك في قائمة البريد الإلكتروني لدينا فيما يخص الخصومات والحصول على 3 تنزيلات خرائط إضافية!</string>
@@ -3116,7 +3116,7 @@
     <string name="route_parameters_descr">تكوين معلمات الطريق</string>
     <string name="route_parameters">معلمات الطريق</string>
     <string name="application_profile_changed">تم تغيير ملف تعريف التطبيق إلى \"%s\"</string>
-    <string name="logcat_buffer">عازل ضبابي</string>
+    <string name="logcat_buffer">سجل الاستخدام</string>
     <string name="plugins_settings">إعدادات البرنامج المساعد</string>
     <string name="shared_string_by_default">بشكل افتراضي</string>
     <string name="download_detailed_map">قم بتنزيل خريطة مفصلة%s لعرض هذه المنطقة.</string>
@@ -3307,7 +3307,7 @@
     <string name="routing_attr_width_name">حد العرض</string>
     <string name="routing_attr_width_description">حدد الحد المسموح به لعرض السيارة على الطرق.</string>
     <string name="simulate_your_location_gpx_descr">محاكاة موقعك باستخدام مسار GPX مسجل.</string>
-    <string name="quick_action_directions_from_desc">زر لجعل الشاشة مركز نقطة الانطلاق وحساب الطريق إلى الوجهة أو فتح مربع حوار لتحديد الوجهة إذا لم تكن علامة الوجهة علي الخريطة.</string>
+    <string name="quick_action_directions_from_desc">زر لجعل مركز الشاشة نقطة الانطلاق. سيطلب بعد ذلك تعيين الوجهة أو تشغيل حساب المسار.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">شخصي</string>
@@ -3387,4 +3387,16 @@
     <string name="multimedia_use_system_camera">استخدام تطبيق النظام</string>
     <string name="multimedia_photo_play_sound">صوت الكاميرا</string>
     <string name="osm_authorization_success">التفويض ناجح</string>
+    <string name="rearrange_categories">إعادة ترتيب الفئات</string>
+    <string name="create_custom_categories_list_promo">يمكنك إضافة فئات مخصصة للإخفاء التي لا تجدها ضرورية وتغيير ترتيب الفرز في القائمة. يمكن استيراد القائمة وتصديرها مع الملفات الشخصية.</string>
+    <string name="add_new_custom_category_button_promo">يمكنك إضافة فئة مخصصة جديدة عن طريق تحديد فئة أو بضع فئات مطلوبة.</string>
+    <string name="reset_to_default_category_button_promo">ستؤدي إعادة التعيين إلى الافتراضي إلى حذف أو تخصيص الفئات وإعادة تعيين ترتيب الفرز إلى الحالة الافتراضية بعد التثبيت.</string>
+    <string name="shared_string_available">متاح</string>
+    <string name="add_custom_category">إضافة فئة مخصصة</string>
+    <string name="rendering_attr_streetLightingNight_name">اظهر في الليل فقط</string>
+    <string name="plugin_prefs_reset_successful">استعادة جميع إعدادات البرنامج المساعد plugin إلى الحالة الافتراضية.</string>
+    <string name="profile_prefs_reset_successful">تمت استعادة جميع إعدادات الملف الشخصي إلى الحالة الافتراضية.</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="sunset_at">غروب الشمس على %1$s</string>
+    <string name="sunrise_at">شروق الشمس على %1$s</string>
 </resources>

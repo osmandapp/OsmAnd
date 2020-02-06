@@ -38,6 +38,7 @@ import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.SettingsHelper.ProfileSettingsItem;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
@@ -100,20 +101,16 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		toolbarSubtitle.setText(R.string.configure_profile);
 		toolbarSubtitle.setVisibility(View.VISIBLE);
 
-		if (!getSelectedAppMode().equals(ApplicationMode.DEFAULT)) {
-			view.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					ApplicationMode selectedMode = getSelectedAppMode();
-					List<ApplicationMode> availableAppModes = ApplicationMode.values(getMyApplication());
-					boolean isChecked = availableAppModes.contains(selectedMode);
-					ApplicationMode.changeProfileAvailability(selectedMode, !isChecked, getMyApplication());
-					updateToolbarSwitch();
-				}
-			});
-		} else {
-			view.findViewById(R.id.switchWidget).setVisibility(View.GONE);
-		}
+		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				ApplicationMode selectedMode = getSelectedAppMode();
+				List<ApplicationMode> availableAppModes = ApplicationMode.values(getMyApplication());
+				boolean isChecked = availableAppModes.contains(selectedMode);
+				ApplicationMode.changeProfileAvailability(selectedMode, !isChecked, getMyApplication());
+				updateToolbarSwitch();
+			}
+		});
 	}
 
 	@Override
@@ -148,6 +145,9 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			updateToolbarSwitch();
 			TextView toolbarTitle = view.findViewById(R.id.toolbar_title);
 			toolbarTitle.setText(getSelectedAppMode().toHumanString());
+
+			boolean visible = !getSelectedAppMode().equals(ApplicationMode.DEFAULT);
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.switchWidget), visible);
 		}
 	}
 

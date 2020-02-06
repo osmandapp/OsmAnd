@@ -886,6 +886,10 @@ public class OsmandApplication extends MultiDexApplication {
 		} else if (mode == AccessibilityMode.OFF) {
 			return false;
 		}
+		return systemAccessibilityEnabled();
+	}
+
+	public boolean systemAccessibilityEnabled() {
 		return ((AccessibilityManager) getSystemService(Context.ACCESSIBILITY_SERVICE)).isEnabled();
 	}
 

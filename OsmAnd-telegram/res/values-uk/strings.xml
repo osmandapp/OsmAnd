@@ -79,7 +79,7 @@
     <string name="get_telegram_title">Реєстрація в Telegram</string>
     <string name="get_telegram_account_first">Необхідно мати обліковий запис Telegram для трансляції позиціювання.</string>
     <string name="get_telegram_description_continue">Будь ласка, встановіть Telegram та налаштуйте обліковий запис.</string>
-    <string name="get_telegram_after_creating_account">Тоді Ви зможете використовувати цей додаток.</string>
+    <string name="get_telegram_after_creating_account">Тоді Ви зможете використовувати цей застосунок.</string>
     <string name="shared_string_all">Всі</string>
     <string name="shared_string_off">Вимк.</string>
     <string name="already_registered_in_telegram">Вам необхідно мати зареєстрований обліковий запис Telegram та номер телефону</string>
@@ -116,7 +116,7 @@
     <string name="shared_string_continue">Продовжити</string>
     <string name="shared_string_cancel">Скасувати</string>
     <string name="shared_string_settings">Налаштування</string>
-    <string name="no_location_permission">Додаток не має дозволу до отримання даних позиціювання.</string>
+    <string name="no_location_permission">Застосунок не має дозволу до отримання даних позиціювання.</string>
     <string name="gps_not_available">Будь ласка, увімкніть «Позиціювання» у системних налаштуваннях</string>
     <string name="osmand_service">Фоновий режим</string>
     <string name="osmand_service_descr">OsmAnd Tracker працює у фоновому режимі з вимкненим екраном.</string>
@@ -156,9 +156,7 @@
     <string name="shared_string_hour_short">г</string>
     <string name="shared_string_minute_short">хв</string>
     <string name="shared_string_second_short">сек</string>
-    <string name="welcome_descr">
-        <b>OsmAnd Tracker</b> дозволяє Вам транслювати свою позицію та бачити позицію інших в OsmAnd.<br/>
-        <br/>Додаток використовує Telegram API та потребує облікового запису Telegram.</string>
+    <string name="welcome_descr"> <b>OsmAnd Tracker</b> дозволяє Вам транслювати свою позицію та бачити позицію інших в OsmAnd.<br/> <br/>Застосунок використовує Telegram API та потребує облікового запису Telegram.</string>
     <string name="my_location">Моя позиція</string>
     <string name="send_my_location_desc">Встановіть мінімальний інтервал між надсиланням позиції.</string>
     <string name="expire_at">Діє до</string>
