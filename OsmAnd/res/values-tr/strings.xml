@@ -3441,7 +3441,6 @@
     <string name="rearrange_categories">Kategorileri yeniden düzenle</string>
     <string name="create_custom_categories_list_promo">Özel kategoriler ekleyebilir, gerekli bulmadığınız kategorileri gizleyebilir ve listenin sıralama düzenini değiştirebilirsiniz. Liste, profillerle içe ve dışa aktarılabilir.</string>
     <string name="add_new_custom_category_button_promo">Bir veya birkaç gerekli kategori seçerek yeni bir özel kategori ekleyebilirsiniz.</string>
-    <string name="reset_to_default_category_button_promo">Varsayılana sıfırla, özel kategorileri silecek ve sıralama düzenini kurulumdan sonraki varsayılan duruma sıfırlayacaktır.</string>
     <string name="shared_string_available">Mevcut</string>
     <string name="add_custom_category">Özel kategori ekle</string>
     <string name="rendering_attr_streetLightingNight_name">Sadece geceleri göster</string>

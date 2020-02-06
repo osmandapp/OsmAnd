@@ -3476,7 +3476,6 @@
     <string name="rearrange_categories">Перевпорядкувати категорії</string>
     <string name="create_custom_categories_list_promo">Ви можете додати особливі приховані категорії, які вам не здаються потрібними, і змінити упорядкування списку. Список можна імпортувати та експортувати за допомогою профілів.</string>
     <string name="add_new_custom_category_button_promo">Ви можете додати нову власну категорію, вибравши одну або кілька необхідних категорій.</string>
-    <string name="reset_to_default_category_button_promo">Скидання до усталеного видалить користувацькі категорії, а після встановлення встановить упорядкування до усталеного стану.</string>
     <string name="shared_string_available">Доступні</string>
     <string name="add_custom_category">Додати власну категорію</string>
     <string name="rendering_attr_streetLightingNight_name">Показувати лише вночі</string>

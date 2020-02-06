@@ -3459,7 +3459,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="monitoring_min_accuracy_descr">Registritaj estos nur punktoj mezuritaj kun la minimuma precizo (en metroj kiel raportitaj fare de Androido per la GPS‑cirkvitaro). Precizo rilatas al disiĝo de valoro dum ripetaj mezuroj kaj ne ĉiam rilatas al ekzakteco, kiu determinas proksimecon de mezuroj al via vera pozicio.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Kromefiko: pro filtri laŭ precizo, iuj punktoj – mezuritaj ekz. sub pontoj aŭ arboj, inter altaj konstruaĵoj, aŭ dum malbonaj veteraj kondiĉoj – povos manki.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Konsilo: estas malfacile antaŭscii pri kio estos registra kaj kio estos filtrita, do estus bone ne aktivigi tiun ĉi filtrilon.</string>
-    <string name="reset_to_default_category_button_promo">Per restarigi implicitajn agordojn, propraj kategorioj foriĝos kaj ordigo revenos al la postinstalada stato.</string>
     <string name="shared_string_available">Disponebla</string>
     <string name="add_custom_category">Aldoni propran kategorion</string>
     <string name="rendering_attr_streetLightingNight_name">Montri nur dum nokto</string>

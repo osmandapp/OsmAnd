@@ -3479,7 +3479,6 @@ POIの更新は利用できません</string>
     <string name="rearrange_categories">カテゴリーの並べ替え</string>
     <string name="create_custom_categories_list_promo">カスタムカテゴリーを含め、不要なカテゴリーを非表示にしたりリストの順序を変更できます。リストはプロファイルと同様インポート＆エクスポートができます。</string>
     <string name="add_new_custom_category_button_promo">一つあるいは複数のカテゴリーを選択して、新しいカスタムカテゴリーを追加できます。</string>
-    <string name="reset_to_default_category_button_promo">デフォルトにリセットするとカテゴリーが削除またはカスタムされ、並び順がインストール直後の初期状態に戻ります。</string>
     <string name="shared_string_available">利用可</string>
     <string name="add_custom_category">カスタムカテゴリーを追加</string>
     <string name="rendering_attr_streetLightingNight_name">夜にのみ表示</string>
