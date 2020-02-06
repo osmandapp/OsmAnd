@@ -545,7 +545,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		updateAllSettings();
 	}
 
-	public void applySetting(String prefId, boolean applyToAllProfiles){
+	public void onSettingApplied(String prefId, boolean appliedToAllProfiles) {
 	}
 
 	public void updateAllSettings() {

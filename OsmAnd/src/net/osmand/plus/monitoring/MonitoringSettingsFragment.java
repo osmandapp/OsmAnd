@@ -342,9 +342,9 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	}
 
 	@Override
-	public void applySetting(String prefId, boolean applyToAllProfiles) {
+	public void onSettingApplied(String prefId, boolean appliedToAllProfiles) {
 		if (settings.SAVE_GLOBAL_TRACK_INTERVAL.getId().equals(prefId)) {
-			if (applyToAllProfiles) {
+			if (appliedToAllProfiles) {
 				app.getSettings().setPreferenceForAllModes(settings.SAVE_GLOBAL_TRACK_REMEMBER.getId(), true);
 			} else {
 				app.getSettings().setPreference(settings.SAVE_GLOBAL_TRACK_REMEMBER.getId(), true, getSelectedAppMode());

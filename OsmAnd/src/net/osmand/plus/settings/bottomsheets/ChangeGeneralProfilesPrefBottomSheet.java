@@ -105,11 +105,11 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 		outState.putSerializable(NEW_VALUE_KEY, newValue);
 	}
 
-	private void updateTargetSettings(boolean discard, boolean applyToAllProfiles) {
+	private void updateTargetSettings(boolean discard, boolean appliedToAllProfiles) {
 		BaseSettingsFragment target = (BaseSettingsFragment) getTargetFragment();
 		if (target != null) {
 			if (!discard) {
-				target.applySetting(getPrefId(), applyToAllProfiles);
+				target.onSettingApplied(getPrefId(), appliedToAllProfiles);
 			}
 			target.updateSetting(getPrefId());
 			if (!discard) {
