@@ -3352,7 +3352,7 @@
     <string name="osm_editing">تعديل OpenStreetMap</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">سترى الأيقونة فقط أثناء الملاحة أو أثناء التحرك.</string>
-    <string name="button_rate">معدل</string>
+    <string name="button_rate">قيم</string>
     <string name="select_map_icon_descr">تظهر أيقونة الخريطة فقط على الخريطة ، وتتغير أثناء التنقل إلى أيقونة التنقل.</string>
     <string name="logcat_buffer_descr">تحقق وتبادل سجلات مفصلة من التطبيق</string>
     <string name="search_offline_geo_error">تعذر تحليل الهدف الجغرافي \'%s\'.</string>
@@ -3399,4 +3399,5 @@
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">غروب الشمس على %1$s</string>
     <string name="sunrise_at">شروق الشمس على %1$s</string>
+    <string name="accessibility_mode_disabled">تم تعطيل وضع إمكانية الوصول في النظام الخاص بك.</string>
 </resources>
