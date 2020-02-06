@@ -39,7 +39,8 @@ import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.MINUTES;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.SECONDS;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
-public class MonitoringSettingsFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
+public class MonitoringSettingsFragment extends BaseSettingsFragment
+		implements CopyAppModePrefsListener, ResetAppModePrefsListener {
 
 	private static final String COPY_PLUGIN_SETTINGS = "copy_plugin_settings";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
@@ -90,6 +91,12 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		ListPreferenceEx saveTrackInterval = (ListPreferenceEx) findPreference(settings.SAVE_GLOBAL_TRACK_INTERVAL.getId());
 		saveTrackInterval.setEntries(entry.values().toArray(new String[0]));
 		saveTrackInterval.setEntryValues(entry.keySet().toArray());
+		ApplicationMode selectedAppMode = getSelectedAppMode();
+		if (!settings.SAVE_GLOBAL_TRACK_REMEMBER.getModeValue(selectedAppMode)) {
+			saveTrackInterval.setValue(settings.SAVE_GLOBAL_TRACK_REMEMBER.getModeValue(selectedAppMode));
+		} else {
+			saveTrackInterval.setValue(settings.SAVE_GLOBAL_TRACK_INTERVAL.getModeValue(selectedAppMode));
+		}
 		saveTrackInterval.setIcon(getActiveIcon(R.drawable.ic_action_time_span));
 		saveTrackInterval.setDescription(R.string.save_global_track_interval_descr);
 	}
@@ -331,6 +338,18 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 			app.getSettings().resetProfilePreferences(appMode, plugin.getPreferences());
 			app.showToastMessage(R.string.plugin_prefs_reset_successful);
 			updateAllSettings();
+		}
+	}
+
+	@Override
+	public void applySetting(String prefId, boolean applyToAllProfiles) {
+		if (settings.SAVE_GLOBAL_TRACK_INTERVAL.getId().equals(prefId)) {
+			if (applyToAllProfiles) {
+				app.getSettings().setPreferenceForAllModes(settings.SAVE_GLOBAL_TRACK_REMEMBER.getId(), true);
+			} else {
+				app.getSettings().setPreference(settings.SAVE_GLOBAL_TRACK_REMEMBER.getId(), true, getSelectedAppMode());
+			}
+
 		}
 	}
 }
