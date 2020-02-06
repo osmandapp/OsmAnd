@@ -172,7 +172,7 @@
     <string name="closing">Schliesst</string>
     <string name="gps_network_not_enabled">\"Standort\" einschalten\?</string>
     <string name="live_now">Jetzt live</string>
-    <string name="last_update_from_telegram">Letztes Update von Telegram</string>
+    <string name="last_update_from_telegram">Letzte Aktualisierung von Telegram</string>
     <string name="send_location_as">Senden Standort als</string>
     <string name="send_location_as_descr">Wählen Sie, wie Nachrichten mit Ihrem Standort aussehen sollen.</string>
     <string name="shared_string_map">Karte</string>
@@ -263,4 +263,9 @@
     <string name="shared_string_suggested">Empfohlen</string>
     <string name="status_widget_title">OsmAnd Tracker-Status</string>
     <string name="back_to_osmand">Zurück zu OsmAnd</string>
+    <string name="last_update_from_telegram_date">Letzte Aktualisierung von Telegram: %1$s</string>
+    <string name="last_response_date">Letzte Antwort: %1$s</string>
+    <string name="last_update_from_telegram_duration">Letzte Aktualisierung von Telegram: vor %1$s</string>
+    <string name="last_response_duration">Letzte Antwort: vor %1$s</string>
+    <string name="duration_ago">vor %1$s</string>
 </resources>
