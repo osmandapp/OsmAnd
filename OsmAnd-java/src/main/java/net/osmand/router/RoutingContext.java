@@ -271,12 +271,10 @@ public class RoutingContext {
 	}
 	
 	
-	public RouteSegment loadRouteSegment(int x31, int y31, int memoryLimit) {
-		return loadRouteSegment(x31, y31, memoryLimit, false);
-	}
+
 	
-	public RouteSegment loadRouteSegment(int x31, int y31, int memoryLimit, boolean recalculation) {
-		long tileId = getRoutingTile(x31, y31, memoryLimit, recalculation ? OPTION_IN_MEMORY_LOAD : OPTION_SMART_LOAD);
+	public RouteSegment loadRouteSegment(int x31, int y31, int memoryLimit) {
+		long tileId = getRoutingTile(x31, y31, memoryLimit, OPTION_IN_MEMORY_LOAD);
 		TLongObjectHashMap<RouteDataObject> excludeDuplications = new TLongObjectHashMap<RouteDataObject>();
 		RouteSegment original = null;
 		List<RoutingSubregionTile> subregions = indexedSubregions.get(tileId);
