@@ -273,7 +273,7 @@ public class RoutingContext {
 	
 
 	public RouteSegment loadRouteSegment(int x31, int y31, int memoryLimit) {
-		long tileId = getRoutingTile(x31, y31, memoryLimit, OPTION_SMART_LOAD);
+		long tileId = getRoutingTile(x31, y31, memoryLimit, OPTION_IN_MEMORY_LOAD);
 		TLongObjectHashMap<RouteDataObject> excludeDuplications = new TLongObjectHashMap<RouteDataObject>();
 		RouteSegment original = null;
 		List<RoutingSubregionTile> subregions = indexedSubregions.get(tileId);
@@ -326,7 +326,7 @@ public class RoutingContext {
 			
 		} else {
 			long now = System.nanoTime();
-			NativeRouteSearchResult ns = nativeLib.loadRouteRegion(ts.subregion, true);
+			NativeRouteSearchResult ns = nativeLib.loadRouteRegion(ts.subregion, loadObjectsInMemory);
 //			System.out.println(ts.subregion.shiftToData + " " + Arrays.toString(ns.objects));
 			ts.setLoadedNative(ns, this);
 			timeToLoad += (System.nanoTime() - now);
@@ -654,14 +654,29 @@ public class RoutingContext {
 		private RouteSegment loadRouteSegment(int x31, int y31, RoutingContext ctx,
 				TLongObjectHashMap<RouteDataObject> excludeDuplications, RouteSegment original, List<RoutingSubregionTile> subregions, int subregionIndex) {
 			access++;
-			if (routes != null || (searchResult != null && searchResult.objects != null)) {
+			if (routes != null) {
 				long l = (((long) x31) << 31) + (long) y31;
-				if (routes == null) {
-					RouteDataObject[] rdos = searchResult.objects;
-					for (int n = 0; n < rdos.length; n++) {
-						add(rdos[n]);
+
+				RouteSegment segment = routes.get(l);
+				while (segment != null) {
+					RouteDataObject ro = segment.road;
+					RouteDataObject toCmp = excludeDuplications.get(calcRouteId(ro, segment.getSegmentStart()));
+					if (!isExcluded(ro.id, subregions, subregionIndex)
+							&& (toCmp == null || toCmp.getPointsLength() < ro.getPointsLength())) {
+						excludeDuplications.put(calcRouteId(ro, segment.getSegmentStart()), ro);
+						RouteSegment s = new RouteSegment(ro, segment.getSegmentStart());
+						s.next = original;
+						original = s;
 					}
+					segment = segment.next;
 				}
+			} else if (searchResult != null && searchResult.objects != null && searchResult.objects.length > 0){
+				RouteDataObject[] rdos = searchResult.objects;
+				for (int n = 0; n < rdos.length; n++) {
+					add(rdos[n]);
+				}
+				long l = (((long) x31) << 31) + (long) y31;
+
 				RouteSegment segment = routes.get(l);
 				while (segment != null) {
 					RouteDataObject ro = segment.road;
