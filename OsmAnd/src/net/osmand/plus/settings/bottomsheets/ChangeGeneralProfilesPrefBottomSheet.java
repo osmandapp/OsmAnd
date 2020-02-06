@@ -55,6 +55,10 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 					@Override
 					public void onClick(View v) {
 						app.getSettings().setPreferenceForAllModes(prefId, newValue);
+						Fragment target = getTargetFragment();
+						if (target instanceof OnApplyChanges) {
+							((OnApplyChanges) target).onApplyAllChanges(prefId);
+						}
 						updateTargetSettings(false);
 						dismiss();
 					}
@@ -72,6 +76,10 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 					@Override
 					public void onClick(View v) {
 						app.getSettings().setPreference(prefId, newValue, getAppMode());
+						Fragment target = getTargetFragment();
+						if (target instanceof OnApplyChanges) {
+							((OnApplyChanges) target).onApplySingleChange(prefId);
+						}
 						updateTargetSettings(false);
 						dismiss();
 					}
@@ -143,5 +151,13 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);
 		}
+	}
+
+	public interface OnApplyChanges {
+
+		void onApplySingleChange(String prefId);
+
+		void onApplyAllChanges(String prefId);
+
 	}
 }
