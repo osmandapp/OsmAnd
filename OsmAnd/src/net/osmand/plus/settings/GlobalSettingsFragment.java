@@ -33,6 +33,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 		setupSendAnonymousDataPref();
 		setupDialogsAndNotificationsPref();
 		setupEnableProxyPref();
+		setupUseSystemScreenTimeout();
 	}
 
 	@Override
@@ -173,5 +174,11 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 	private void setupEnableProxyPref() {
 		SwitchPreferenceEx enableProxy = (SwitchPreferenceEx) findPreference(settings.ENABLE_PROXY.getId());
 		enableProxy.setIcon(getContentIcon(R.drawable.ic_action_proxy));
+	}
+
+	private void setupUseSystemScreenTimeout() {
+		SwitchPreferenceEx useSystemScreenTimeout = (SwitchPreferenceEx) findPreference(settings.USE_SYSTEM_SCREEN_TIMEOUT.getId());
+		useSystemScreenTimeout.setTitle(app.getString(R.string.use_system_screen_timeout));
+		useSystemScreenTimeout.setDescription(app.getString(R.string.use_system_screen_timeout_promo));
 	}
 }
