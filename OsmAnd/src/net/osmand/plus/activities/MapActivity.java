@@ -1156,7 +1156,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			settings.VOICE_PROVIDER.setModeValue(mode, OsmandSettings.VOICE_PROVIDER_NOT_USE);
 			settings.VOICE_MUTE.setModeValue(mode, true);
 		}
-		getMapRouteInfoMenu().updateMenu();
 	}
 
 	private void dismissSecondSplashScreen() {

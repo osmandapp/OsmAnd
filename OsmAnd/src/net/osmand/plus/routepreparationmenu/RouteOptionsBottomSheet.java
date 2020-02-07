@@ -64,6 +64,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	private ApplicationMode applicationMode;
 	@ColorRes
 	private int selectedModeColorId;
+	private boolean currentMuteState;
 	private MapActivity mapActivity;
 	StateChangedListener<Boolean> voiceMuteChangeListener;
 
@@ -80,9 +81,19 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		voiceMuteChangeListener = new StateChangedListener<Boolean>() {
 			@Override
 			public void stateChanged(Boolean change) {
-				updateParameters();
+				updateWhenMuteChanged();
 			}
 		};
+	}
+
+	public void updateWhenMuteChanged() {
+		if (app != null) {
+			boolean changedState = app.getSettings().VOICE_MUTE.getModeValue(applicationMode);
+			if (changedState != currentMuteState) {
+				currentMuteState = changedState;
+				updateParameters();
+			}
+		}
 	}
 
 	@Override

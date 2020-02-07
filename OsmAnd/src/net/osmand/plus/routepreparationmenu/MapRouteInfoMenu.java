@@ -151,6 +151,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private boolean nightMode;
 	private boolean switched;
 	private boolean routeSelected;
+	private boolean currentMuteState;
 
 	private AddressLookupRequest startPointRequest;
 	private AddressLookupRequest targetPointRequest;
@@ -206,7 +207,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		voiceMuteChangeListener = new StateChangedListener<Boolean>() {
 			@Override
 			public void stateChanged(Boolean change) {
-				updateMenu();
+				updateWhenMuteChanged();
 			}
 		};
 	}
@@ -460,6 +461,17 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
 		if (fragmentRef != null && fragmentRef.get().isVisible()) {
 			fragmentRef.get().openMenuHeaderOnly();
+		}
+	}
+
+	private void updateWhenMuteChanged() {
+		if (app != null) {
+			ApplicationMode mode = app.getRoutingHelper().getAppMode();
+			boolean changedState = app.getSettings().VOICE_MUTE.getModeValue(mode);
+			if (changedState != currentMuteState) {
+				currentMuteState = changedState;
+				updateMenu();
+			}
 		}
 	}
 
@@ -1486,17 +1498,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			RouteOptionsBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
-		}
-	}
-
-	public void updateOptions() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			RouteOptionsBottomSheet routeOptions = (RouteOptionsBottomSheet) mapActivity.getSupportFragmentManager()
-					.findFragmentByTag(RouteOptionsBottomSheet.TAG);
-			if (routeOptions != null) {
-				routeOptions.updateParameters();
-			}
 		}
 	}
 
