@@ -23,6 +23,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.QuadPoint;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -31,11 +32,14 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RoutingHelper.RouteSegmentSearchResult;
 import net.osmand.plus.views.ContextMenuLayer;
+import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AvoidSpecificRoads {
@@ -215,6 +219,22 @@ public class AvoidSpecificRoads {
 		ll.setLongitude(loc.getLongitude());
 		ApplicationMode appMode = app.getRoutingHelper().getAppMode();
 
+		List<RouteSegmentResult> roads = app.getRoutingHelper().getRoute().getOriginalRoute();
+		if (roads != null) {
+			RouteSegmentSearchResult searchResult =
+					RoutingHelper.searchRouteSegment(loc.getLatitude(), loc.getLongitude(), roads);
+			if (searchResult != null) {
+				QuadPoint point = searchResult.getPoint();
+				LatLon newLoc = new LatLon(MapUtils.get31LatitudeY((int) point.y), MapUtils.get31LongitudeX((int) point.x));
+				ll.setLatitude(newLoc.getLatitude());
+				ll.setLongitude(newLoc.getLongitude());
+				addImpassableRoadInternal(roads.get(searchResult.getRoadIndex()).getObject(), ll, showDialog, activity, newLoc);
+				if (!skipWritingSettings) {
+					app.getSettings().addImpassableRoad(newLoc.getLatitude(), newLoc.getLongitude());
+				}
+				return;
+			}
+		}
 		app.getLocationProvider().getRouteSegment(ll, appMode, false, new ResultMatcher<RouteDataObject>() {
 
 			@Override
