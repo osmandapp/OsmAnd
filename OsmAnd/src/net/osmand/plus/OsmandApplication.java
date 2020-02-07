@@ -148,8 +148,6 @@ public class OsmandApplication extends MultiDexApplication {
 	private File externalStorageDirectory;
 	private boolean externalStorageDirectoryReadOnly;
 
-	private String firstSelectedVoiceProvider;
-	
 	// Typeface
 	
 	@Override
@@ -465,86 +463,14 @@ public class OsmandApplication extends MultiDexApplication {
 	                                   boolean warningNoneProvider, Runnable run, boolean showDialog, boolean force, final boolean applyAllModes) {
 		String voiceProvider = osmandSettings.VOICE_PROVIDER.getModeValue(applicationMode);
 		if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
-			if (warningNoneProvider) {
-				boolean nightMode = daynightHelper.isNightModeForMapControls();
-				final AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(uiContext, nightMode));
-
-				View view = UiUtilities.getInflater(uiContext, nightMode).inflate(R.layout.select_voice_first, null);
-
-				((ImageView) view.findViewById(R.id.icon))
-						.setImageDrawable(getUIUtilities().getIcon(R.drawable.ic_action_volume_up, getSettings().isLightContent()));
-
-				view.findViewById(R.id.spinner).setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(final View v) {
-						routingOptionsHelper.selectVoiceGuidance((MapActivity) uiContext, new CallbackWithObject<String>() {
-							@Override
-							public boolean processResult(String result) {
-								boolean acceptableValue = !RoutePreferencesMenu.MORE_VALUE.equals(firstSelectedVoiceProvider);
-								if (acceptableValue) {
-									((TextView) v.findViewById(R.id.selectText))
-											.setText(routingOptionsHelper.getVoiceProviderName(uiContext, result));
-									firstSelectedVoiceProvider = result;
-								}
-								return acceptableValue;
-							}
-						}, applicationMode);
-					}
-				});
-
-				((ImageView) view.findViewById(R.id.dropDownIcon))
-						.setImageDrawable(getUIUtilities().getIcon(R.drawable.ic_action_arrow_drop_down, getSettings().isLightContent()));
-
-				builder.setCancelable(true);
-				builder.setNegativeButton(R.string.shared_string_cancel, null);
-				builder.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						if (!Algorithms.isEmpty(firstSelectedVoiceProvider)) {
-							routingOptionsHelper.applyVoiceProvider((MapActivity) uiContext, firstSelectedVoiceProvider, applyAllModes);
-							osmandSettings.VOICE_MUTE.setModeValue(applicationMode, false);
-						}
-						updateMuteButtons(uiContext);
-					}
-				});
-				builder.setNeutralButton(R.string.shared_string_do_not_use, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialogInterface, int i) {
-						if (applyAllModes) {
-							muteVoiceForAllProfiles(uiContext);
-						} else {
-							osmandSettings.VOICE_PROVIDER.setModeValue(applicationMode, OsmandSettings.VOICE_PROVIDER_NOT_USE);
-							osmandSettings.VOICE_MUTE.setModeValue(applicationMode, true);
-						}
-						updateMuteButtons(uiContext);
-					}
-				});
-
-				builder.setView(view);
-				builder.show();
+			if (warningNoneProvider && voiceProvider == null) {
+				if (uiContext instanceof MapActivity) {
+					((MapActivity) uiContext).showVoiceProviderDialog(applicationMode, applyAllModes);
+				}
 			}
-
 		} else {
 			if (player == null || !Algorithms.objectEquals(voiceProvider, player.getCurrentVoice()) || force) {
 				appInitializer.initVoiceDataInDifferentThread(uiContext, applicationMode, voiceProvider, run, showDialog);
-			}
-		}
-
-	}
-
-	public void updateMuteButtons(Activity uiContext) {
-		if (uiContext instanceof MapActivity) {
-			((MapActivity) uiContext).getMapRouteInfoMenu().updateMenu();
-			((MapActivity) uiContext).getMapRouteInfoMenu().updateOptions();
-		}
-	}
-
-	public void muteVoiceForAllProfiles(Activity uiContext) {
-		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-			osmandSettings.VOICE_PROVIDER.setModeValue(mode, OsmandSettings.VOICE_PROVIDER_NOT_USE);
-			osmandSettings.VOICE_MUTE.setModeValue(mode, true);
-			if (uiContext instanceof MapActivity) {
-				((MapActivity) uiContext).getMapRouteInfoMenu().updateMenu();
 			}
 		}
 	}

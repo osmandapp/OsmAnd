@@ -160,6 +160,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	private OnMarkerSelectListener onMarkerSelectListener;
 	private StateChangedListener<Void> onStateChangedListener;
+	private StateChangedListener<Boolean> voiceMuteChangeListener;
 	@Nullable
 	private View mainView;
 
@@ -199,6 +200,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		onStateChangedListener = new StateChangedListener<Void>() {
 			@Override
 			public void stateChanged(Void change) {
+				updateMenu();
+			}
+		};
+		voiceMuteChangeListener = new StateChangedListener<Boolean>() {
+			@Override
+			public void stateChanged(Boolean change) {
 				updateMenu();
 			}
 		};
@@ -305,6 +312,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		OsmandApplication app = getApp();
 		if (app != null) {
 			app.getTargetPointsHelper().addListener(onStateChangedListener);
+			app.getSettings().VOICE_MUTE.addListener(voiceMuteChangeListener);
 		}
 	}
 
@@ -312,6 +320,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		OsmandApplication app = getApp();
 		if (app != null) {
 			app.getTargetPointsHelper().removeListener(onStateChangedListener);
+			app.getSettings().VOICE_MUTE.removeListener(voiceMuteChangeListener);
 		}
 	}
 
@@ -821,10 +830,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				appMode.set(next);
 			}
 			routingHelper.setAppMode(next);
-			String voiceProvider = app.getSettings().VOICE_PROVIDER.getModeValue(appMode.get());
-			if (voiceProvider == null) {
-				app.initVoiceCommandPlayer(mapActivity, next, true, null, false, false, true);
-			}
+			app.initVoiceCommandPlayer(mapActivity, next, true, null, false, false, true);
 			routingHelper.recalculateRouteDueToSettingsChange();
 		}
 	}
@@ -1080,7 +1086,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				if (app != null) {
 					String voiceProvider = app.getSettings().VOICE_PROVIDER.getModeValue(appMode);
 					if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
-						app.initVoiceCommandPlayer(mapActivity, appMode, true, null, true, false, false);
+						mapActivity.showVoiceProviderDialog(appMode, false);
 					} else {
 						app.getRoutingOptionsHelper().switchSound();
 					}

@@ -494,13 +494,7 @@ public class MapActivityActions implements DialogProvider {
 		ApplicationMode mode = getRouteMode(from);
 		//app.getSettings().APPLICATION_MODE.set(mode);
 		app.getRoutingHelper().setAppMode(mode);
-		String voiceProvider = app.getSettings().VOICE_PROVIDER.getModeValue(mode);
-		if (voiceProvider == null) {
-			app.initVoiceCommandPlayer(mapActivity, mode, true, null, false, false, showMenu);
-		}
-		if (OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
-			app.muteVoiceForAllProfiles(mapActivity);
-		}
+		app.initVoiceCommandPlayer(mapActivity, mode, true, null, false, false, showMenu);
 		// save application mode controls
 		settings.FOLLOW_THE_ROUTE.set(false);
 		app.getRoutingHelper().setFollowingMode(false);

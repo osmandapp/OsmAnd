@@ -32,6 +32,7 @@ import net.osmand.plus.settings.preferences.ListPreferenceEx;
 
 import java.util.Set;
 
+import static net.osmand.plus.OsmandSettings.VOICE_PROVIDER_NOT_USE;
 import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
 import static net.osmand.plus.activities.SettingsNavigationActivity.MORE_VALUE;
 
@@ -262,6 +263,11 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 				startActivity(intent);
 				return false;
 			} else if (newValue instanceof String) {
+				if (VOICE_PROVIDER_NOT_USE.equals(newValue)) {
+					settings.VOICE_MUTE.setModeValue(selectedMode, true);
+					updateToolbar();
+					setupPreferences();
+				}
 				settings.VOICE_PROVIDER.setModeValue(selectedMode, (String) newValue);
 				app.initVoiceCommandPlayer(getActivity(), selectedMode, false, null, true, false, false);
 			}
