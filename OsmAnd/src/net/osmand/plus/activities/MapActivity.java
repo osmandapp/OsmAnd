@@ -39,11 +39,13 @@ import android.view.View;
 import android.view.ViewStub;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
+import net.osmand.CallbackWithObject;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.SecondSplashScreenFragment;
@@ -81,6 +83,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -110,6 +113,7 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
 import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
+import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.PlanRouteFragment;
@@ -122,6 +126,7 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenuFragment;
+import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
@@ -1081,6 +1086,76 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		SecondSplashScreenFragment.SHOW = false;
 		dismissSecondSplashScreen();
 		new XMasDialogFragment().show(getSupportFragmentManager(), XMasDialogFragment.TAG);
+	}
+
+	public void showVoiceProviderDialog(final ApplicationMode applicationMode, final boolean applyAllModes) {
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		final RoutingOptionsHelper routingOptionsHelper = app.getRoutingOptionsHelper();
+		final AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(this, nightMode));
+		final String[] firstSelectedVoiceProvider = new String[1];
+
+		View view = UiUtilities.getInflater(this, nightMode).inflate(R.layout.select_voice_first, null);
+
+		((ImageView) view.findViewById(R.id.icon))
+				.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_volume_up, settings.isLightContent()));
+
+		view.findViewById(R.id.spinner).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(final View v) {
+				routingOptionsHelper.selectVoiceGuidance(MapActivity.this, new CallbackWithObject<String>() {
+					@Override
+					public boolean processResult(String result) {
+						boolean acceptableValue = !RoutePreferencesMenu.MORE_VALUE.equals(firstSelectedVoiceProvider[0]);
+						if (acceptableValue) {
+							((TextView) v.findViewById(R.id.selectText))
+									.setText(routingOptionsHelper.getVoiceProviderName(v.getContext(), result));
+							firstSelectedVoiceProvider[0] = result;
+						}
+						return acceptableValue;
+					}
+				}, applicationMode);
+			}
+		});
+
+		((ImageView) view.findViewById(R.id.dropDownIcon))
+				.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_arrow_drop_down, settings.isLightContent()));
+
+		builder.setCancelable(true);
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		builder.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				if (!Algorithms.isEmpty(firstSelectedVoiceProvider[0])) {
+					routingOptionsHelper.applyVoiceProvider(MapActivity.this, firstSelectedVoiceProvider[0], applyAllModes);
+					if (OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(firstSelectedVoiceProvider[0])) {
+						settings.VOICE_MUTE.setModeValue(applicationMode, true);
+					} else {
+						settings.VOICE_MUTE.setModeValue(applicationMode, false);
+					}
+				}
+			}
+		});
+		builder.setNeutralButton(R.string.shared_string_do_not_use, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialogInterface, int i) {
+				if (applyAllModes) {
+					muteVoiceForAllProfiles();
+				} else {
+					settings.VOICE_PROVIDER.setModeValue(applicationMode, OsmandSettings.VOICE_PROVIDER_NOT_USE);
+					settings.VOICE_MUTE.setModeValue(applicationMode, true);
+				}
+			}
+		});
+
+		builder.setView(view);
+		builder.show();
+	}
+
+	private void muteVoiceForAllProfiles() {
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			settings.VOICE_PROVIDER.setModeValue(mode, OsmandSettings.VOICE_PROVIDER_NOT_USE);
+			settings.VOICE_MUTE.setModeValue(mode, true);
+		}
 	}
 
 	private void dismissSecondSplashScreen() {
