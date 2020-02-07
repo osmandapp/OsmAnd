@@ -3387,4 +3387,15 @@
     <string name="multimedia_use_system_camera">استخدام تطبيق النظام</string>
     <string name="multimedia_photo_play_sound">صوت الكاميرا</string>
     <string name="osm_authorization_success">التفويض ناجح</string>
+    <string name="rearrange_categories">إعادة ترتيب الفئات</string>
+    <string name="create_custom_categories_list_promo">يمكنك إضافة فئات مخصصة للإخفاء التي لا تجدها ضرورية وتغيير ترتيب الفرز في القائمة. يمكن استيراد القائمة وتصديرها مع الملفات الشخصية.</string>
+    <string name="add_new_custom_category_button_promo">يمكنك إضافة فئة مخصصة جديدة عن طريق تحديد فئة أو بضع فئات مطلوبة.</string>
+    <string name="shared_string_available">متاح</string>
+    <string name="add_custom_category">إضافة فئة مخصصة</string>
+    <string name="rendering_attr_streetLightingNight_name">اظهر في الليل فقط</string>
+    <string name="plugin_prefs_reset_successful">استعادة جميع إعدادات البرنامج المساعد plugin إلى الحالة الافتراضية.</string>
+    <string name="profile_prefs_reset_successful">تمت استعادة جميع إعدادات الملف الشخصي إلى الحالة الافتراضية.</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="sunset_at">غروب الشمس على %1$s</string>
+    <string name="sunrise_at">شروق الشمس على %1$s</string>
 </resources>

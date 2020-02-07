@@ -6,13 +6,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
@@ -21,7 +18,6 @@ import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.iterator.TLongIterator;
 import gnu.trove.map.TLongObjectMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
-import gnu.trove.set.TLongSet;
 import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.NativeLibrary;
 import net.osmand.NativeLibrary.NativeRouteSearchResult;
@@ -36,7 +32,6 @@ import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
-import net.osmand.util.Algorithms;
 
 
 public class RoutingContext {
@@ -45,9 +40,6 @@ public class RoutingContext {
 	 
 	
 	private final static Log log = PlatformUtil.getLog(RoutingContext.class);
-	public static final int OPTION_NO_LOAD = 0;
-	public static final int OPTION_SMART_LOAD = 1;
-	public static final int OPTION_IN_MEMORY_LOAD = 2;
 
 
 	
@@ -272,8 +264,9 @@ public class RoutingContext {
 	
 	
 
+	
 	public RouteSegment loadRouteSegment(int x31, int y31, int memoryLimit) {
-		long tileId = getRoutingTile(x31, y31, memoryLimit, OPTION_SMART_LOAD);
+		long tileId = getRoutingTile(x31, y31, memoryLimit);
 		TLongObjectHashMap<RouteDataObject> excludeDuplications = new TLongObjectHashMap<RouteDataObject>();
 		RouteSegment original = null;
 		List<RoutingSubregionTile> subregions = indexedSubregions.get(tileId);
@@ -438,7 +431,7 @@ public class RoutingContext {
 		long now = System.nanoTime();
 		for(int i = -t; i <= t; i++) {
 			for(int j = -t; j <= t; j++) {
-				ts.add(getRoutingTile(x31 +i*coordinatesShift, y31 + j*coordinatesShift, 0, OPTION_IN_MEMORY_LOAD));		
+				ts.add(getRoutingTile(x31 +i*coordinatesShift, y31 + j*coordinatesShift, 0));		
 			}
 		}
 		TLongIterator it = ts.iterator();
@@ -450,63 +443,61 @@ public class RoutingContext {
 	}
 	
 	@SuppressWarnings("unused")
-	private long getRoutingTile(int x31, int y31, int memoryLimit, int loadOptions){
-//		long now = System.nanoTime();
+	private long getRoutingTile(int x31, int y31, int memoryLimit) {
+		// long now = System.nanoTime();
 		long xloc = x31 >> (31 - config.ZOOM_TO_LOAD_TILES);
 		long yloc = y31 >> (31 - config.ZOOM_TO_LOAD_TILES);
 		long tileId = (xloc << config.ZOOM_TO_LOAD_TILES) + yloc;
-		if (loadOptions != OPTION_NO_LOAD) {
-			if( memoryLimit == 0){
-				memoryLimit = config.memoryLimitation;
+		if (memoryLimit == 0) {
+			memoryLimit = config.memoryLimitation;
+		}
+		if (getCurrentEstimatedSize() > 0.9 * memoryLimit) {
+			int sz1 = getCurrentEstimatedSize();
+			long h1 = 0;
+			if (SHOW_GC_SIZE && sz1 > 0.7 * memoryLimit) {
+				runGCUsedMemory();
+				h1 = runGCUsedMemory();
 			}
-			if (getCurrentEstimatedSize() > 0.9 * memoryLimit) {
-				int sz1 = getCurrentEstimatedSize();
-				long h1 = 0;
-				if (SHOW_GC_SIZE && sz1 > 0.7 * memoryLimit) {
-					runGCUsedMemory();
-					h1 = runGCUsedMemory();
+			int clt = getCurrentlyLoadedTiles();
+			long us1 = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
+			unloadUnusedTiles(memoryLimit);
+			if (h1 != 0 && getCurrentlyLoadedTiles() != clt) {
+				int sz2 = getCurrentEstimatedSize();
+				runGCUsedMemory();
+				long h2 = runGCUsedMemory();
+				float mb = (1 << 20);
+				log.warn("Unload tiles :  estimated " + (sz1 - sz2) / mb + " ?= " + (h1 - h2) / mb + " actual");
+				log.warn("Used after " + h2 / mb + " of " + Runtime.getRuntime().totalMemory() / mb + " max "
+						+ maxMemory() / mb);
+			} else {
+				float mb = (1 << 20);
+				int sz2 = getCurrentEstimatedSize();
+				log.warn("Unload tiles :  occupied before " + sz1 / mb + " Mb - now  " + sz2 / mb + "MB "
+						+ memoryLimit / mb + " limit MB " + config.memoryLimitation / mb);
+				long us2 = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
+				log.warn("Used memory before " + us1 / mb + "after " + us1 / mb + " of max " + maxMemory() / mb);
+			}
+		}
+		if (!indexedSubregions.containsKey(tileId)) {
+			List<RoutingSubregionTile> collection = loadTileHeaders(x31, y31);
+			indexedSubregions.put(tileId, collection);
+		}
+		List<RoutingSubregionTile> subregions = indexedSubregions.get(tileId);
+		if (subregions != null) {
+			boolean load = false;
+			for (RoutingSubregionTile ts : subregions) {
+				if (!ts.isLoaded()) {
+					load = true;
 				}
-				int clt = getCurrentlyLoadedTiles();
-				long us1 = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
-				unloadUnusedTiles(memoryLimit);
-				if (h1 != 0 && getCurrentlyLoadedTiles() != clt) {
-					int sz2 = getCurrentEstimatedSize();
-					runGCUsedMemory();
-					long h2 = runGCUsedMemory();
-					float mb = (1 << 20);
-					log.warn("Unload tiles :  estimated " + (sz1 - sz2) / mb + " ?= " + (h1 - h2) / mb + " actual");
-					log.warn("Used after " + h2 / mb + " of " + Runtime.getRuntime().totalMemory() / mb + " max "
-							+ maxMemory() / mb);
-				} else {
-					 float mb = (1 << 20);
-					 int sz2 = getCurrentEstimatedSize();
-					 log.warn("Unload tiles :  occupied before " + sz1 / mb + " Mb - now  " + sz2 / mb + "MB " + 
-					 memoryLimit/mb + " limit MB " + config.memoryLimitation/mb);
-					 long us2 = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
-					 log.warn("Used memory before " + us1 / mb + "after " + us1 / mb + " of max " + maxMemory() / mb);
-				}
 			}
-			if (!indexedSubregions.containsKey(tileId)) {
-				List<RoutingSubregionTile> collection = loadTileHeaders(x31, y31);
-				indexedSubregions.put(tileId, collection);
-			}
-			List<RoutingSubregionTile> subregions = indexedSubregions.get(tileId);
-			if (subregions != null) {
-				boolean load = false;
+			if (load) {
+				TLongHashSet excludeIds = new TLongHashSet();
 				for (RoutingSubregionTile ts : subregions) {
 					if (!ts.isLoaded()) {
-						load = true;
-					}
-				}
-				if (load) {
-					TLongHashSet excludeIds = new TLongHashSet();
-					for (RoutingSubregionTile ts : subregions) {
-						if (!ts.isLoaded()) {
-							loadSubregionTile(ts, loadOptions == OPTION_IN_MEMORY_LOAD, null, excludeIds);
-						} else {
-							if(ts.excludedIds != null) {
-								excludeIds.addAll(ts.excludedIds);
-							}
+						loadSubregionTile(ts, true, null, excludeIds);
+					} else {
+						if (ts.excludedIds != null) {
+							excludeIds.addAll(ts.excludedIds);
 						}
 					}
 				}
@@ -671,7 +662,7 @@ public class RoutingContext {
 				}
 			} else {
 				throw new UnsupportedOperationException("Not clear how it could be used with native");
-			}
+			}		
 			return original;
 		}
 

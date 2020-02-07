@@ -671,7 +671,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		if (dir.canRead()) {
 			StatFs fs = new StatFs(dir.getAbsolutePath());
 			size = AndroidUtils.formatSize(activity, ((long)fs.getAvailableBlocks()) * fs.getBlockSize());
-			percent = 100 - fs.getAvailableBlocks() * 100 / fs.getBlockCount();
+			percent = 100 - (int)((long)fs.getAvailableBlocks() * 100 / fs.getBlockCount());
 		}
 		sizeProgress.setIndeterminate(false);
 		sizeProgress.setProgress(percent);

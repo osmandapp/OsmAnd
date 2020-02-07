@@ -298,6 +298,10 @@ public class AndroidUtils {
 		return createStateListDrawable(normal, pressed, android.R.attr.state_pressed);
 	}
 
+	public static StateListDrawable createEnabledStateListDrawable(Drawable disabled, Drawable enabled) {
+		return createStateListDrawable(disabled, enabled, android.R.attr.state_enabled);
+	}
+
 	private static StateListDrawable createStateListDrawable(Drawable normal, Drawable stateDrawable, int state) {
 		StateListDrawable res = new StateListDrawable();
 		res.addState(new int[]{state}, stateDrawable);

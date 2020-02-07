@@ -3482,4 +3482,15 @@ Lon %2$s</string>
     <string name="multimedia_use_system_camera">Usar la aplicación del sistema</string>
     <string name="multimedia_photo_play_sound">Reproducir sonido al fotografiar</string>
     <string name="osm_authorization_success">Autorización exitosa</string>
+    <string name="rearrange_categories">Reordenar categorías</string>
+    <string name="create_custom_categories_list_promo">Puedes añadir categorías personalizadas, ocultar las categorías que no parezcan necesarias y cambiar el orden de clasificación de la lista. La lista puede ser importada y exportada con perfiles.</string>
+    <string name="add_new_custom_category_button_promo">Puedes añadir una nueva categoría personalizada marcando una o varias categorías necesarias.</string>
+    <string name="shared_string_available">Disponible</string>
+    <string name="add_custom_category">Añadir categoría personalizada</string>
+    <string name="rendering_attr_streetLightingNight_name">Mostrar solo de noche</string>
+    <string name="plugin_prefs_reset_successful">Todos los ajustes del complemento se restauraron al estado predefinido.</string>
+    <string name="profile_prefs_reset_successful">Todos los ajustes del perfil se restauraron al estado predefinido.</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="sunset_at">Atardecer a las %1$s</string>
+    <string name="sunrise_at">Amanecer a las %1$s</string>
 </resources>

@@ -362,24 +362,27 @@ public class RouteStatisticsHelper {
 												   RenderingRulesStorage rrs, RenderingRuleSearchRequest req, RouteSegmentWithIncline segment,
 												   int slopeClass) {
 			//String additional = attrName + "=" + attribute;
+			boolean mainTagAdded = false;
+			StringBuilder additional = new StringBuilder(slopeClass >= 0 ? (BOUNDARIES_CLASS[slopeClass] + ";") : "");
 			RouteDataObject obj = segment.obj;
-			int[] tps = obj.getTypes();
-			String additional = slopeClass >= 0 ? (BOUNDARIES_CLASS[slopeClass] + ";") : "";
-			for (int k = 0; k < tps.length; k++) {
-				BinaryMapRouteReaderAdapter.RouteTypeRule tp = obj.region.quickGetEncodingRule(tps[k]);
-				if (tp.getTag().equals("highway") || tp.getTag().equals("route") || 
+			for (int type : obj.getTypes()) {
+				BinaryMapRouteReaderAdapter.RouteTypeRule tp = obj.region.quickGetEncodingRule(type);
+				if (tp.getTag().equals("highway") || tp.getTag().equals("route") ||
 						tp.getTag().equals("railway") || tp.getTag().equals("aeroway") || tp.getTag().equals("aerialway")) {
-					req.setStringFilter(rrs.PROPS.R_TAG, tp.getTag());
-					req.setStringFilter(rrs.PROPS.R_VALUE, tp.getValue());
+					if (!mainTagAdded) {
+						req.setStringFilter(rrs.PROPS.R_TAG, tp.getTag());
+						req.setStringFilter(rrs.PROPS.R_VALUE, tp.getValue());
+						mainTagAdded = true;
+					}
 				} else {
-					additional += tp.getTag() + "=" + tp.getValue() + ";";
+					additional.append(tp.getTag()).append("=").append(tp.getValue()).append(";");
 				}
 			}
-			req.setStringFilter(rrs.PROPS.R_ADDITIONAL, additional);
+			req.setStringFilter(rrs.PROPS.R_ADDITIONAL, additional.toString());
 			return req.searchRenderingAttribute(attribute);
-
 		}
 	}
+
 	public static class RouteSegmentAttribute {
 
 		private final int color;
@@ -400,11 +403,11 @@ public class RouteStatisticsHelper {
 			this.slopeIndex = segmentAttribute.slopeIndex;
 			this.userPropertyName = segmentAttribute.userPropertyName;
 		}
-		
+
 		public String getUserPropertyName() {
 			return userPropertyName == null ? propertyName : userPropertyName;
 		}
-		
+
 		public void setUserPropertyName(String userPropertyName) {
 			this.userPropertyName = userPropertyName;
 		}

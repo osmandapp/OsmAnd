@@ -129,7 +129,7 @@ OsmAnd バージョンがインストールされています。全てのオフ�
     <string name="trace_rendering">レンダリング速度を表示</string>
     <string name="daynight_mode_day">昼固定</string>
     <string name="daynight_mode_night">夜固定</string>
-    <string name="daynight_mode_auto">日の出/日の入</string>
+    <string name="daynight_mode_auto">日出/日没</string>
     <string name="daynight_mode_sensor">ライトセンサー</string>
     <string name="daynight_descr">昼/夜モード切替ルールを選択します</string>
     <string name="daynight">昼/夜モード切替</string>
@@ -701,7 +701,8 @@ POIの更新は利用できません</string>
     <string name="osmand_plus_short_description_80_chars">OSMオフライン、オンライン両対応、グローバルモバイルマップ＆ナビゲーション</string>
     <string name="filterpoi_activity">POIフィルタを作成</string>
     <string name="select_navigation_mode">トランスポートモードの選択:</string>
-    <string name="day_night_info_description">日の出: %1$s \n日の入: %2$s</string>
+    <string name="day_night_info_description">日出時刻: %1$s 
+\n日没時刻: %2$s</string>
     <string name="day_night_info">昼/夜判別情報</string>
     <string name="map_widget_vector_attributes">描画方法の属性</string>
     <string name="map_widget_renderer">マップスタイル</string>
@@ -3475,4 +3476,14 @@ POIの更新は利用できません</string>
     <string name="multimedia_use_system_camera">システムアプリを使用</string>
     <string name="multimedia_photo_play_sound">カメラシャッター音</string>
     <string name="osm_authorization_success">認証に成功しました</string>
+    <string name="rearrange_categories">カテゴリーの並べ替え</string>
+    <string name="create_custom_categories_list_promo">カスタムカテゴリーを含め、不要なカテゴリーを非表示にしたりリストの順序を変更できます。リストはプロファイルと同様インポート＆エクスポートができます。</string>
+    <string name="add_new_custom_category_button_promo">一つあるいは複数のカテゴリーを選択して、新しいカスタムカテゴリーを追加できます。</string>
+    <string name="shared_string_available">利用可</string>
+    <string name="add_custom_category">カスタムカテゴリーを追加</string>
+    <string name="rendering_attr_streetLightingNight_name">夜にのみ表示</string>
+    <string name="plugin_prefs_reset_successful">すべてのプラグイン設定が初期状態に戻りました。</string>
+    <string name="profile_prefs_reset_successful">すべてのプロファイル設定が初期状態に戻りました。</string>
+    <string name="sunset_at">日出時刻</string>
+    <string name="sunrise_at">日没時刻</string>
 </resources>

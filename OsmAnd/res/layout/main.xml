@@ -16,7 +16,6 @@
             android:id="@+id/MapViewWithLayers"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:keepScreenOn="true"
             android:orientation="vertical">
 
             <ViewStub

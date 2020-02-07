@@ -3421,8 +3421,8 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="ltr_or_rtl_combine">%1$s: %2$s</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
-    <string name="file_does_not_contain_routing_rules">Il file \'%1$s\' non contiene regole di routing, si prega di scegliere un altro file.</string>
-    <string name="not_support_file_type_with_ext">Tipo di file non supportato. È necessario selezionare un file con estensione %1$s.</string>
+    <string name="file_does_not_contain_routing_rules">Il file \'%1$s\' non contiene regole di routing. Si prega di scegliere un altro file.</string>
+    <string name="not_support_file_type_with_ext">Seleziona un file con estensione %1$s supportata.</string>
     <string name="import_from_file">Importa da file</string>
     <string name="import_routing_file">Importa file di routing</string>
     <string name="import_profile">Importa profilo</string>
@@ -3443,5 +3443,17 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="osm_edits_view_descr">È possibile visualizzare tutte le modifiche non caricate o le note OSM in Menu - I miei luoghi - Modifiche OSM. I punti caricati non vengono visualizzati in OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">L\'icona viene visualizzata solo durante la navigazione o in movimento.</string>
-    <string name="logcat_buffer_descr">Qui puoi vedere e condividere i log dell\'applicazione</string>
+    <string name="logcat_buffer_descr">Controlla e condividi i log dettagliati dell\'applicazione</string>
+    <string name="permission_is_required">Un permesso è richiesto per usare questa opzione.</string>
+    <string name="rearrange_categories">Sistema categorie</string>
+    <string name="create_custom_categories_list_promo">Puoi aggiungere categorie personalizzate, nascondere quelle che non trovi necessarie e cambiarne l\'ordine nell\'elenco. La lista può essere importata ed esportata con i profili.</string>
+    <string name="add_new_custom_category_button_promo">Puoi aggiugere una nuova categoria personalizzata selezionandone una o alcune altre.</string>
+    <string name="shared_string_available">Disponibile</string>
+    <string name="add_custom_category">Aggiungi categoria personalizzata</string>
+    <string name="rendering_attr_streetLightingNight_name">Mostra solo di notte</string>
+    <string name="plugin_prefs_reset_successful">Tutte le impostazioni dei plugin sono state riportate allo stato predefinito.</string>
+    <string name="profile_prefs_reset_successful">Tutte le impostazioni dei profili sono state riportate allo stato iniziale.</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="sunset_at">Tramonto alle %1$s</string>
+    <string name="sunrise_at">Alba alle %1$s</string>
 </resources>

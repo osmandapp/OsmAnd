@@ -21,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
@@ -102,7 +103,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	}
 
 	private Drawable getOsmandThemeIcon() {
-		return getContentIcon(settings.isLightContent() ? R.drawable.ic_action_sun : R.drawable.ic_action_moon);
+		return getActiveIcon(settings.isLightContent() ? R.drawable.ic_action_sun : R.drawable.ic_action_moon);
 	}
 
 	private void setupRotateMapPref() {
@@ -115,22 +116,21 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	private Drawable getRotateMapIcon() {
 		switch (settings.ROTATE_MAP.getModeValue(getSelectedAppMode())) {
 			case OsmandSettings.ROTATE_MAP_NONE:
-				return getContentIcon(R.drawable.ic_action_direction_north);
+				return getActiveIcon(R.drawable.ic_action_direction_north);
 			case OsmandSettings.ROTATE_MAP_BEARING:
-				return getContentIcon(R.drawable.ic_action_direction_movement);
+				return getActiveIcon(R.drawable.ic_action_direction_movement);
 			default:
-				return getContentIcon(R.drawable.ic_action_direction_compass);
+				return getActiveIcon(R.drawable.ic_action_direction_compass);
 		}
 	}
 
 	private void setupCenterPositionOnMapPref() {
+		Drawable disabled = getContentIcon(R.drawable.ic_action_display_position_bottom);
+		Drawable enabled = getActiveIcon(R.drawable.ic_action_display_position_center);
+		Drawable icon = AndroidUtils.createEnabledStateListDrawable(disabled, enabled);
+
 		SwitchPreferenceCompat centerPositionOnMap = (SwitchPreferenceCompat) findPreference(settings.CENTER_POSITION_ON_MAP.getId());
-		centerPositionOnMap.setIcon(getCenterPositionOnMapIcon());
-	}
-
-
-	private Drawable getCenterPositionOnMapIcon() {
-		return getContentIcon(settings.CENTER_POSITION_ON_MAP.getModeValue(getSelectedAppMode()) ? R.drawable.ic_action_display_position_center : R.drawable.ic_action_display_position_bottom);
+		centerPositionOnMap.setIcon(icon);
 	}
 
 	private void setupMapScreenOrientationPref() {
@@ -143,18 +143,18 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	private Drawable getMapScreenOrientationIcon() {
 		switch (settings.MAP_SCREEN_ORIENTATION.getModeValue(getSelectedAppMode())) {
 			case ActivityInfo.SCREEN_ORIENTATION_PORTRAIT:
-				return getContentIcon(R.drawable.ic_action_phone_portrait_orientation);
+				return getActiveIcon(R.drawable.ic_action_phone_portrait_orientation);
 			case ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE:
-				return getContentIcon(R.drawable.ic_action_phone_landscape_orientation);
+				return getActiveIcon(R.drawable.ic_action_phone_landscape_orientation);
 			default:
-				return getContentIcon(R.drawable.ic_action_phone_device_orientation);
+				return getActiveIcon(R.drawable.ic_action_phone_device_orientation);
 		}
 	}
 
 	private void setupDrivingRegionPref() {
 		ApplicationMode selectedMode = getSelectedAppMode();
 		Preference defaultDrivingRegion = findPreference(settings.DRIVING_REGION.getId());
-		defaultDrivingRegion.setIcon(getContentIcon(R.drawable.ic_action_car_dark));
+		defaultDrivingRegion.setIcon(getActiveIcon(R.drawable.ic_action_car_dark));
 		defaultDrivingRegion.setSummary(getString(settings.DRIVING_REGION_AUTOMATIC.getModeValue(selectedMode) ? R.string.driving_region_automatic : settings.DRIVING_REGION.getModeValue(selectedMode).name));
 	}
 
@@ -171,12 +171,12 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		ListPreferenceEx unitsOfLength = (ListPreferenceEx) findPreference(settings.METRIC_SYSTEM.getId());
 		unitsOfLength.setEntries(entries);
 		unitsOfLength.setEntryValues(entryValues);
-		unitsOfLength.setIcon(getContentIcon(R.drawable.ic_action_ruler_unit));
+		unitsOfLength.setIcon(getActiveIcon(R.drawable.ic_action_ruler_unit));
 	}
 
 	private void setupCoordinatesFormatPref() {
 		Preference coordinatesFormat = findPreference(settings.COORDINATES_FORMAT.getId());
-		coordinatesFormat.setIcon(getContentIcon(R.drawable.ic_action_coordinates_widget));
+		coordinatesFormat.setIcon(getActiveIcon(R.drawable.ic_action_coordinates_widget));
 		coordinatesFormat.setSummary(PointDescription.formatToHumanString(app, settings.COORDINATES_FORMAT.getModeValue(getSelectedAppMode())));
 	}
 
@@ -201,7 +201,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		ListPreferenceEx angularUnits = (ListPreferenceEx) findPreference(settings.ANGULAR_UNITS.getId());
 		angularUnits.setEntries(entries);
 		angularUnits.setEntryValues(entryValues);
-		angularUnits.setIcon(getContentIcon(R.drawable.ic_action_angular_unit));
+		angularUnits.setIcon(getActiveIcon(R.drawable.ic_action_angular_unit));
 	}
 
 	private void setupSpeedSystemPref() {
@@ -218,7 +218,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		speedSystem.setEntries(entries);
 		speedSystem.setEntryValues(entryValues);
 		speedSystem.setDescription(R.string.default_speed_system_descr);
-		speedSystem.setIcon(getContentIcon(R.drawable.ic_action_speed));
+		speedSystem.setIcon(getActiveIcon(R.drawable.ic_action_speed));
 	}
 
 	private void setupKalmanFilterPref() {
@@ -378,8 +378,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 				preference.setIcon(getRotateMapIcon());
 			} else if (settings.MAP_SCREEN_ORIENTATION.getId().equals(prefId)) {
 				preference.setIcon(getMapScreenOrientationIcon());
-			} else if (settings.CENTER_POSITION_ON_MAP.getId().equals(prefId)) {
-				preference.setIcon(getCenterPositionOnMapIcon());
 			}
 		}
 	}

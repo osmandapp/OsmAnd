@@ -200,19 +200,20 @@ public class LocationConvert {
 
 	private static String formatDegrees(double coordinate, int outputType, StringBuilder sb) {
 		if (outputType == FORMAT_DEGREES) {
-			sb.append(new DecimalFormat("##0.0000", new DecimalFormatSymbols(Locale.US)).format(coordinate));
+			sb.append(new DecimalFormat("##0.00000", new DecimalFormatSymbols(Locale.US)).format(coordinate));
 			sb.append(DELIMITER_DEGREES);
 		} else if (outputType == FORMAT_MINUTES) {
 			coordinate = formatCoordinate(coordinate, sb, DELIMITER_DEGREES);
 			sb.append(DELIMITER_SPACE);
-			sb.append(new DecimalFormat("##0.00", new DecimalFormatSymbols(Locale.US)).format(coordinate));
+			sb.append(new DecimalFormat("00.000", new DecimalFormatSymbols(Locale.US)).format(coordinate));
 			sb.append(DELIMITER_MINUTES);
 		} else if (outputType == FORMAT_SECONDS) {
 			coordinate = formatCoordinate(coordinate, sb, DELIMITER_DEGREES);
 			sb.append(DELIMITER_SPACE);
 			coordinate = formatCoordinate(coordinate, sb, DELIMITER_MINUTES);
 			sb.append(DELIMITER_SPACE);
-			formatCoordinate(coordinate, sb, DELIMITER_SECONDS);
+			sb.append(new DecimalFormat("00.0", new DecimalFormatSymbols(Locale.US)).format(coordinate));
+			sb.append(DELIMITER_SECONDS);
 		}
 		return sb.toString();
 	}

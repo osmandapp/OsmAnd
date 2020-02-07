@@ -514,7 +514,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		existing.setAdapter(adapter);
 		if (editedLayerName != null) {
 			File f = ((OsmandApplication) activity.getApplication()).getAppPath(
-					IndexConstants.TILES_INDEX_DIR + templates.get(adapter.getPosition(editedLayerName)));
+					IndexConstants.TILES_INDEX_DIR + editedLayerName);
 			TileSourceTemplate template = TileSourceManager.createTileSourceTemplate(f);
 			if (template != null) {
 				result[0] = template.copy();

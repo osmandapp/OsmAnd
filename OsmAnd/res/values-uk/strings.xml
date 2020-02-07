@@ -159,7 +159,7 @@
     <string name="amenity_type_user_defined">Користувацькі</string>
     <string name="fav_export_confirmation">Файл з раніше імпортованими Закладками вже існує. Замінити його?</string>
     <string name="profile_settings">Налаштування профілю</string>
-    <string name="settings_preset">Типовий профіль</string>
+    <string name="settings_preset">Усталений профіль</string>
     <string name="settings_preset_descr">Вид мапи й налаштування навігації зберігаються для кожного окремого профілю. Встановіть Ваш типовий профіль.</string>
     <string name="routing_settings">Навігація</string>
     <string name="routing_settings_descr">Визначити налаштування навігації.</string>
@@ -617,7 +617,7 @@
     <string name="map_view_3d">3D вид</string>
     <string name="show_poi_over_map_description">Відображати останні вибрані POI на мапі.</string>
     <string name="show_poi_over_map">Відображати POI</string>
-    <string name="map_tile_source_descr">Виберіть джерело мережевих або кешованих плиток мап</string>
+    <string name="map_tile_source_descr">Оберіть джерело мережевих або кешованих плиток мап</string>
     <string name="map_tile_source">Джерело растрових мап</string>
     <string name="map_source">Джерело мапи</string>
     <string name="use_internet">Використовувати Інтернет</string>
@@ -1280,8 +1280,7 @@
     <string name="keep_informing_never">Тільки вручну (натискати на стрілку)</string>
     <string name="keep_informing_descr">Повторювати навігаційні інструкції через регулярні проміжки часу.</string>
     <string name="keep_informing">Повторювати навігаційні інструкції</string>
-    <string name="create_poi_link_to_osm_doc">
-        <u>Online OSM</u> класифікація мап із зображеннями.</string>
+    <string name="create_poi_link_to_osm_doc"> string name=\"lat_lon_pattern\"&gt;Шир: %1$.5f Дов: %2$.5f&lt;/string </string>
     <string name="import_file_favourites">Зберегти дані як GPX-файл чи імпортувати маршрутні точки в \'Закладки\'?</string>
     <string name="shared_string_share">Поділитися</string>
     <string name="share_fav_subject">Закладки, якими поділились через OsmAnd</string>
@@ -1406,7 +1405,7 @@
     <string name="avoid_roads_msg">Прокласти альтернативний маршрут, вибравши дороги, яких варто уникати</string>
     <string name="speak_pedestrian">Пішохідні переходи</string>
     <string name="rendering_attr_roadStyle_name">Стиль доріг</string>
-    <string name="rendering_value_default_name">Типово</string>
+    <string name="rendering_value_default_name">Усталено</string>
     <string name="rendering_value_orange_name">Помаранчевий</string>
     <string name="rendering_value_germanRoadAtlas_name">Атлас доріг Німеччини</string>
     <string name="traffic_warning_railways">Залізничний переїзд</string>
@@ -1615,7 +1614,7 @@
     <string name="local_recordings_delete_all_confirm">Ви збираєтеся видалити %1$d приміток. Ви впевнені\?</string>
     <string name="download_wikipedia_maps">Вікіпедія</string>
     <string name="rendering_value_default13_name">Усталено (13)</string>
-    <string name="rendering_value_defaultTranslucentCyan_name">Типово (напівпрозорий блакитний)</string>
+    <string name="rendering_value_defaultTranslucentCyan_name">Усталено (напівпрозорий блакитний)</string>
     <string name="rendering_value_translucent_orange_name">Напівпрозорий помаранчевий</string>
     <string name="shared_string_update">Оновити</string>
     <string name="rendering_attr_horseRoutes_name">Кінні маршрути</string>
@@ -1917,7 +1916,7 @@
     <string name="access_smart_autoannounce_descr">Сповіщати лише, коли змінюється напрямок до цільової точки.</string>
     <string name="access_autoannounce_period">Період сповіщеннь</string>
     <string name="access_autoannounce_period_descr">Мінімальний час між оголошеннями.</string>
-    <string name="access_default_color">Типовий колір</string>
+    <string name="access_default_color">Усталений колір</string>
     <string name="access_category_choice">Оберіть категорію</string>
     <string name="access_hint_enter_name">Додайте назву</string>
     <string name="access_hint_enter_category">Додайте категорію</string>
@@ -2265,7 +2264,7 @@
     <string name="select_city">Виберіть місто</string>
     <string name="select_postcode">Виберіть поштовий індекс</string>
     <string name="quick_action_auto_zoom">Автомасштаб мапи вкл/викл</string>
-    <string name="quick_action_auto_zoom_desc">Кнопка для увімкнення або вимкнення самочинного наближення при збільшеній швидкості</string>
+    <string name="quick_action_auto_zoom_desc">Кнопка для перемикання самочинного наближення при збільшеній швидкості</string>
     <string name="quick_action_auto_zoom_on">Увімкнути самомасштабування мапи</string>
     <string name="quick_action_auto_zoom_off">Вимкнути самомасштабування мапи</string>
     <string name="quick_action_add_destination">Установити місце призначення</string>
@@ -3199,7 +3198,7 @@
     <string name="rendering_attr_showLez_description">Показати на мапі зони низьких викидів. Не впливає на маршрутизацію.</string>
     <string name="rendering_attr_showLez_name">Показати зони низьких викидів</string>
     <string name="temporary_conditional_routing">Враховувати тимчасові обмеження</string>
-    <string name="shared_string_default">Типовий</string>
+    <string name="shared_string_default">Усталений</string>
     <string name="new_route_calculated_dist_dbg">Маршрут: відстань %s, час навігації %s 
 \nРозрахунок: %.1f с, %d доріг, %d тайлів)</string>
     <string name="lang_oc">Окситанська</string>
@@ -3432,7 +3431,7 @@
     <string name="live_monitoring">Мережеве відстеження</string>
     <string name="save_track_logging_accuracy">Точність часопису</string>
     <string name="tracks_view_descr">Ви можете знайти всі записи в %1$s або в теці OsmAnd за допомогою файлового провідника.</string>
-    <string name="multimedia_notes_view_descr">Ви можете знайти всі свої примітки в %1$s</string>
+    <string name="multimedia_notes_view_descr">Ваші примітки OSM знаходяться в %1$s.</string>
     <string name="video_notes">Відеопримітки</string>
     <string name="photo_notes">Світлинопримітки</string>
     <string name="route_recalculation">Перерахунок маршруту</string>
@@ -3474,4 +3473,15 @@
     <string name="multimedia_use_system_camera">Використовувати системний застосунок</string>
     <string name="multimedia_photo_play_sound">Звук затвору камери</string>
     <string name="osm_authorization_success">Авторизація пройшла успішно</string>
+    <string name="rearrange_categories">Перевпорядкувати категорії</string>
+    <string name="create_custom_categories_list_promo">Ви можете додати особливі приховані категорії, які вам не здаються потрібними, і змінити упорядкування списку. Список можна імпортувати та експортувати за допомогою профілів.</string>
+    <string name="add_new_custom_category_button_promo">Ви можете додати нову власну категорію, вибравши одну або кілька необхідних категорій.</string>
+    <string name="shared_string_available">Доступні</string>
+    <string name="add_custom_category">Додати власну категорію</string>
+    <string name="rendering_attr_streetLightingNight_name">Показувати лише вночі</string>
+    <string name="plugin_prefs_reset_successful">Усі налаштування втулка відновлено до усталеного стану.</string>
+    <string name="profile_prefs_reset_successful">Усі налаштування профілю відновлено до усталеного стану.</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="sunset_at">Захід сонця о %1$s</string>
+    <string name="sunrise_at">Схід сонця о %1$s</string>
 </resources>

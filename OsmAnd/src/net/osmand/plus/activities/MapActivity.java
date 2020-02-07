@@ -248,6 +248,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	};
 
+	private StateChangedListener<Boolean> useSystemScreenTimeoutListener = new StateChangedListener<Boolean>() {
+		@Override
+		public void stateChanged(Boolean change) {
+			changeKeyguardFlags();
+		}
+	};
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		setRequestedOrientation(AndroidUiHelper.getScreenOrientation(this));
@@ -973,6 +980,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 
 		settings.MAP_SCREEN_ORIENTATION.addListener(mapScreenOrientationSettingListener);
+		settings.USE_SYSTEM_SCREEN_TIMEOUT.addListener(useSystemScreenTimeoutListener);
 	}
 
 	public void applyScreenOrientation() {
@@ -1222,6 +1230,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		boolean editToShow = settings.getAndClearEditObjectToShow();
 		int status = settings.isRouteToPointNavigateAndClear();
 		String searchRequestToShow = settings.getAndClearSearchRequestToShow();
+		if (status != 0 || searchRequestToShow != null || latLonToShow != null) {
+			dismissSettingsScreens();
+		}
 		if (status != 0) {
 			// always enable and follow and let calculate it (i.e.GPS is not accessible in a garage)
 			Location loc = new Location("map");
@@ -1460,6 +1471,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private void onPauseActivity() {
 		settings.MAP_SCREEN_ORIENTATION.removeListener(mapScreenOrientationSettingListener);
+		settings.USE_SYSTEM_SCREEN_TIMEOUT.removeListener(useSystemScreenTimeoutListener);
 		if (!app.getRoutingHelper().isRouteWasFinished()) {
 			DestinationReachedMenu.resetShownState();
 		}
@@ -2099,7 +2111,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void changeKeyguardFlags() {
-		changeKeyguardFlags(settings.TURN_SCREEN_ON_TIME_INT.get() > 0, true);
+		boolean enabled = settings.TURN_SCREEN_ON_ENABLED.get() && settings.TURN_SCREEN_ON_TIME_INT.get() > 0;
+		boolean keepScreenOn = !settings.USE_SYSTEM_SCREEN_TIMEOUT.get();
+		changeKeyguardFlags(enabled, keepScreenOn);
 	}
 
 	private void changeKeyguardFlags(boolean enable, boolean forceKeepScreenOn) {

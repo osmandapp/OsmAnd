@@ -800,7 +800,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 			String anotherFilterByName = another.filterByName == null ? "" : another.filterByName;
 			return thisFilterByName.compareToIgnoreCase(anotherFilterByName);
 		} else {
-			return this.name.compareTo(another.name);
+			return this.name.compareToIgnoreCase(another.name);
 		}
 	}
 

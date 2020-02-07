@@ -189,7 +189,7 @@
     <string name="back_to_map">Voltar ao mapa</string>
     <string name="share_note">Compartilhar nota</string>
     <string name="location_on_map">Posição:\n Lat %1$s\n Lon %2$s</string>
-    <string name="notes">Notas do OSM</string>
+    <string name="notes">Notas A/V</string>
     <string name="online_map">Mapa on-line</string>
     <string name="roads_only">Apenas estradas</string>
     <string name="rendering_attr_pisteRoutes_name">Pistas de esqui</string>
@@ -3470,4 +3470,15 @@ Pôr do Sol: %2$s</string>
     <string name="multimedia_use_system_camera">Usar aplicativo do sistema</string>
     <string name="multimedia_photo_play_sound">Som do obturador da câmera</string>
     <string name="osm_authorization_success">Autorização bem sucedida</string>
+    <string name="rearrange_categories">Reorganizar categorias</string>
+    <string name="create_custom_categories_list_promo">Você pode adicionar categorias personalizadas, ocultar categorias que não considera necessárias e alterar a ordem de classificação da lista. A lista pode ser importada e exportada com perfis.</string>
+    <string name="add_new_custom_category_button_promo">Você pode adicionar uma nova categoria personalizada selecionando uma ou algumas categorias necessárias.</string>
+    <string name="shared_string_available">Disponível</string>
+    <string name="add_custom_category">Adicionar categoria personalizada</string>
+    <string name="rendering_attr_streetLightingNight_name">Mostrar apenas à noite</string>
+    <string name="plugin_prefs_reset_successful">Todas as configurações de plug-in restauradas para o estado padrão.</string>
+    <string name="profile_prefs_reset_successful">Todas as configurações de perfil restauradas para o estado padrão.</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="sunset_at">Pôr do sol em %1$s</string>
+    <string name="sunrise_at">Nascer do sol em %1$s</string>
 </resources>

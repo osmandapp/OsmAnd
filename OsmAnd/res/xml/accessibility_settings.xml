@@ -3,6 +3,14 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:title="@string/shared_string_accessibility">
 
+	<Preference
+		android:icon="@drawable/ic_action_android"
+		android:key="accessibility_options"
+		android:layout="@layout/preference_permission"
+		android:persistent="false"
+		android:summary="@string/shared_string_enable"
+		android:title="@string/accessibility_mode_disabled" />
+
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:icon="@drawable/ic_action_android"
 		android:key="accessibility_mode"

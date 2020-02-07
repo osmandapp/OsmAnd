@@ -53,8 +53,12 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		items.add(new TitleItem(title));
 
 		final OsmandSettings.BooleanPreference pref = (BooleanPreference) preference;
-		final String on = getString(R.string.shared_string_on);
-		final String off = getString(R.string.shared_string_off);
+		CharSequence summaryOn = switchPreference.getSummaryOn();
+		CharSequence summaryOff = switchPreference.getSummaryOff();
+		final String on = summaryOn == null || summaryOn.toString().equals("")
+				? getString(R.string.shared_string_enabled) : summaryOn.toString();
+		final String off = summaryOff == null || summaryOff.toString().equals("")
+				? getString(R.string.shared_string_disabled) : summaryOff.toString();
 		final int activeColor = AndroidUtils.resolveAttribute(app, R.attr.active_color_basic);
 		final int disabledColor = AndroidUtils.resolveAttribute(app, android.R.attr.textColorSecondary);
 		boolean checked = pref.getModeValue(getAppMode());

@@ -3473,4 +3473,15 @@
     <string name="multimedia_use_system_camera">使用系統應用程式</string>
     <string name="multimedia_photo_play_sound">相機快門聲</string>
     <string name="osm_authorization_success">驗證成功</string>
+    <string name="rearrange_categories">重新排列分類</string>
+    <string name="create_custom_categories_list_promo">您可以新增自訂的分類，隱藏您不需要的分類並變更清單順序。清單可與設定檔一起匯入與匯出。</string>
+    <string name="add_new_custom_category_button_promo">您可以透過選取一個或多個需要的分類來新增自訂的分類。</string>
+    <string name="shared_string_available">可用</string>
+    <string name="add_custom_category">新增自訂分類</string>
+    <string name="rendering_attr_streetLightingNight_name">僅在夜間顯示</string>
+    <string name="plugin_prefs_reset_successful">所有外掛程式設定都已恢復為預設狀態。</string>
+    <string name="profile_prefs_reset_successful">所有設定檔的設定都已恢復為預設狀態。</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="sunset_at">日落於 %1$s</string>
+    <string name="sunrise_at">日出於 %1$s</string>
 </resources>
