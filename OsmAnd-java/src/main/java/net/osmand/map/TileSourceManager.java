@@ -178,6 +178,16 @@ public class TileSourceManager {
 			return invertedYTile;
 		}
 
+		@Override
+		public boolean isTimeSupported() {
+			return expirationTimeMillis != -1;
+		}
+
+		@Override
+		public boolean getInversiveZoom() {
+			return false;
+		}
+
 		public void setInvertedYTile(boolean invertedYTile) {
 			this.invertedYTile = invertedYTile;
 		}
@@ -413,6 +423,11 @@ public class TileSourceManager {
 					}
 				}
 			}
+		}
+
+		@Override
+		public int getAvgSize() {
+			return this.avgSize;
 		}
 	}
 	

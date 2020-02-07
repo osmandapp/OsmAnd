@@ -59,6 +59,7 @@ import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
+import static net.osmand.IndexConstants.TILES_INDEX_DIR;
 
 /*
 	Usage:
@@ -1024,9 +1025,12 @@ public class SettingsHelper {
 		public void apply() {
 			if (!mapSources.isEmpty()) {
 				for (ITileSource template : mapSources) {
-//					getSettings().installTileSource(template);
+					if (template instanceof TileSourceManager.TileSourceTemplate) {
+						getSettings().installTileSource((TileSourceManager.TileSourceTemplate) template);
+					} else {
+						((SQLiteTileSource) template).createDataBase();
+					}
 				}
-
 			}
 		}
 
@@ -1085,12 +1089,32 @@ public class SettingsHelper {
 						JSONArray items = json.getJSONArray("items");
 						for (int i = 0; i < items.length(); i++) {
 							JSONObject object = items.getJSONObject(i);
-							String name = object.getString("name");
-//							String url = object.getString("url");
+							boolean sql = object.optBoolean("sql");
+							String name = object.optString("name");
+							int minZoom = object.optInt("minZoom", 1);
+							int maxZoom = object.optInt("maxZoom", 17);
+							String url = object.optString("url");
+							String randoms = object.optString("randoms");
+							boolean ellipsoid = object.optBoolean("ellipsoid", false);
+							boolean invertedY = object.optBoolean("inverted_y", false);
+							String referer = object.optString("referer");
+							boolean timesupported = object.optBoolean("timesupported", false);
+							long expire = object.optLong("expire");
+							boolean inversiveZoom = object.optBoolean("inversiveZoom", false);
 
+							String ext = object.optString("ext");
+							int tileSize = object.optInt("tileSize");
+							int bitDensity = object.optInt("bitDensity");
+							int avgSize = object.optInt("avgSize");
+							String rule = object.optString("rule");
 
-//							ITileSource template
-//							mapSources.add();
+							ITileSource template;
+							if (!sql) {
+								template = new TileSourceManager.TileSourceTemplate(name, url, ext, maxZoom, minZoom, tileSize, bitDensity, avgSize);
+							} else {
+								template = new SQLiteTileSource(app, name, minZoom, maxZoom, url, randoms, ellipsoid, invertedY, referer, timesupported, expire, inversiveZoom);
+							}
+							mapSources.add(template);
 						}
 					} catch (JSONException e) {
 						throw new IllegalArgumentException("Json parse error", e);
@@ -1109,12 +1133,26 @@ public class SettingsHelper {
 					if (!mapSources.isEmpty()) {
 						for (ITileSource template : mapSources) {
 							JSONObject jsonObject = new JSONObject();
+							boolean sql = template instanceof SQLiteTileSource;
+							jsonObject.put("sql", sql);
 							jsonObject.put("name", template.getName());
-							jsonObject.put("url", template.getUrlTemplate());
-							jsonObject.put("ext", template.getUrlTemplate());
 							jsonObject.put("minZoom", template.getMinimumZoomSupported());
 							jsonObject.put("maxZoom", template.getMaximumZoomSupported());
+							jsonObject.put("url", template.getUrlTemplate());
+							jsonObject.put("randoms", template.getRandoms());
+							jsonObject.put("ellipsoid", template.isEllipticYTile());
+							jsonObject.put("inverted_y", template.isInvertedYTile());
+							jsonObject.put("referer", template.getReferer());
+							jsonObject.put("timesupported", template.isTimeSupported());
 							jsonObject.put("expire", template.getExpirationTimeMillis());
+							jsonObject.put("inversiveZoom", template.getInversiveZoom());
+
+							jsonObject.put("ext", template.getTileFormat());
+							jsonObject.put("tileSize", template.getTileSize());
+							jsonObject.put("bitDensity", template.getBitDensity());
+							jsonObject.put("avgSize", template.getAvgSize());
+							jsonObject.put("rule", template.getRule());
+
 							items.put(jsonObject);
 						}
 						json.put("items", items);

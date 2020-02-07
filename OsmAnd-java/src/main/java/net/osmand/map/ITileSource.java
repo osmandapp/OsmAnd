@@ -34,4 +34,15 @@ public interface ITileSource {
 
 	public void deleteTiles(String path);
 
+	public int getAvgSize();
+
+	public String getRule();
+
+	public String getRandoms();
+
+	public boolean isInvertedYTile();
+
+	public boolean isTimeSupported();
+
+	public boolean getInversiveZoom();
 }

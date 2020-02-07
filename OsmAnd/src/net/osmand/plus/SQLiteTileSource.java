@@ -1,5 +1,6 @@
 package net.osmand.plus;
 
+import android.content.ContentValues;
 import android.database.sqlite.SQLiteDiskIOException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,6 +23,10 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.List;
 
+import static net.osmand.IndexConstants.APP_DIR;
+import static net.osmand.IndexConstants.SQLITE_EXT;
+import static net.osmand.IndexConstants.TILES_INDEX_DIR;
+
 
 public class SQLiteTileSource implements ITileSource {
 
@@ -33,7 +38,7 @@ public class SQLiteTileSource implements ITileSource {
 	private String urlTemplate = null;
 	private String name;
 	private SQLiteConnection db = null;
-	private final File file;
+	private File file = null;
 	private int minZoom = 1;
 	private int maxZoom = 17; 
 	private boolean inversiveZoom = true; // BigPlanet
@@ -51,6 +56,14 @@ public class SQLiteTileSource implements ITileSource {
 	private OsmandApplication ctx;
 	private boolean onlyReadonlyAvailable = false;
 
+	private static final String TILES_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS tiles (" +
+			"x, " +
+			"y, " +
+			"z, " +
+			"s, " +
+			"image, " +
+			"time" +
+			")";
 
 	public SQLiteTileSource(OsmandApplication ctx, File f, List<TileSourceTemplate> toFindUrl){
 		this.ctx = ctx;
@@ -71,6 +84,49 @@ public class SQLiteTileSource implements ITileSource {
 			}
 		}
 		
+	}
+
+	public SQLiteTileSource(OsmandApplication ctx, String name, int minZoom, int maxZoom, String urlTemplate,
+							String randoms, boolean isEllipsoid, boolean invertedY, String referer,
+							boolean timeSupported, long expirationTimeMillis, boolean inversiveZoom) {
+		this.ctx = ctx;
+		this.name = name;
+		this.urlTemplate = urlTemplate;
+		this.maxZoom = maxZoom;
+		this.minZoom = minZoom;
+		this.isEllipsoid = isEllipsoid;
+		this.expirationTimeMillis = expirationTimeMillis;
+		this.randoms = randoms;
+		this.referer = referer;
+		this.invertedY = invertedY;
+		this.timeSupported = timeSupported;
+		this.inversiveZoom = inversiveZoom;
+	}
+
+	public void createDataBase() {
+		db = ctx.getSQLiteAPI().getOrCreateDatabase(
+				ctx.getAppPath(TILES_INDEX_DIR).getAbsolutePath() + "/" + name + SQLITE_EXT, true);
+		db.execSQL("CREATE TABLE IF NOT EXISTS info (" +
+				"url " +
+				");");
+		db.execSQL("INSERT INTO info (url) VALUES ('" + urlTemplate + "');");
+
+//		db.execSQL("INSERT INTO info VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+//				new Object[]{minZoom, maxZoom, urlTemplate, randoms, isEllipsoid ? 1 : 0,
+//						invertedY ? 1 : 0, referer, timeSupported ? "yes" : "no", timeSupported ? "yes" : "no",
+//						getExpirationTimeMinutes(), inversiveZoom ? "BigPlanet" : ""});
+
+		addInfoColumn("minzoom", String.valueOf(minZoom));
+		addInfoColumn("maxzoom", String.valueOf(maxZoom));
+		addInfoColumn("randoms", randoms);
+		addInfoColumn("ellipsoid", isEllipsoid ? "1" : "0");
+		addInfoColumn("inverted_y", invertedY ? "1" : "0");
+		addInfoColumn("referer", referer);
+		addInfoColumn("timesupported", timeSupported ? "yes" : "no");
+		addInfoColumn("expireminutes", String.valueOf(getExpirationTimeMinutes()));
+
+		db.execSQL(TILES_TABLE_CREATE);
+		db.close();
 	}
 	
 	@Override
@@ -119,7 +175,16 @@ public class SQLiteTileSource implements ITileSource {
 
 	@Override
 	public String getUrlTemplate() {
-		return this.urlTemplate;
+		if (this.urlTemplate != null) {
+			return this.urlTemplate;
+		} else {
+			SQLiteConnection db = getDatabase();
+			if (db == null || db.isReadOnly() || urlTemplate == null) {
+				return null;
+			} else {
+				return this.urlTemplate;
+			}
+		}
 	}
 
 	@Override
@@ -434,7 +499,37 @@ public class SQLiteTileSource implements ITileSource {
 		}
 		db.execSQL("DELETE FROM tiles");
 	}
-	
+
+	@Override
+	public int getAvgSize() {
+		return base != null ? base.getAvgSize() : -1;
+	}
+
+	@Override
+	public String getRule() {
+		return this.rule;
+	}
+
+	@Override
+	public String getRandoms() {
+		return this.randoms;
+	}
+
+	@Override
+	public boolean isInvertedYTile() {
+		return this.invertedY;
+	}
+
+	@Override
+	public boolean isTimeSupported() {
+		return this.timeSupported;
+	}
+
+	@Override
+	public boolean getInversiveZoom() {
+		return this.inversiveZoom;
+	}
+
 	/**
 	 * Makes method synchronized to give a little more time for get methods and 
 	 * let all writing attempts to wait outside of this method   

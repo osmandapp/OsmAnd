@@ -296,8 +296,9 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
                 quickActions.add((QuickAction) object);
             } else if (object instanceof PoiUIFilter) {
                 poiUIFilters.add((PoiUIFilter) object);
-            } else if (object instanceof TileSourceManager.TileSourceTemplate) {
-                tileSourceTemplates.add((TileSourceManager.TileSourceTemplate) object);
+            } else if (object instanceof TileSourceManager.TileSourceTemplate
+                    || object instanceof SQLiteTileSource) {
+                tileSourceTemplates.add((ITileSource) object);
             } else if (object instanceof File) {
                 settingsItems.add(new SettingsHelper.FileSettingsItem(app, (File) object));
             }
