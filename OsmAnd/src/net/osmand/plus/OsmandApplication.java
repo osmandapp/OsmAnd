@@ -775,6 +775,16 @@ public class OsmandApplication extends MultiDexApplication {
 			}
 		}
 	}
+
+	public String getCountry() {
+		String country;
+		if (preferredLocale != null) {
+			country = preferredLocale.getCountry();
+		} else {
+			country = Locale.getDefault().getCountry();
+		}
+		return country;
+	}
 	
 	public String getLanguage() {
 		String lang;

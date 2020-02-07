@@ -374,7 +374,15 @@ public class OsmandRegions {
 	}
 
 	public void setLocale(String locale) {
+		setLocale(locale, null);
+	}
+
+	public void setLocale(String locale, String country) {
 		this.locale = locale;
+		// Check locale and give 2 locale names 
+//		if("zh".equals(locale) && "rTW".equals(country)) {
+//			this.locale = "zh-Hant";
+//		}
 	}
 
 
