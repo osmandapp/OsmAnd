@@ -3452,7 +3452,6 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="rearrange_categories">Kategóriák átrendezése</string>
     <string name="create_custom_categories_list_promo">Hozzáadhat egyedi kategóriát, elrejtheti a fölöslegesnek ítélt kategóriákat, és módosíthatja a lista sorrendjét. A lista a profilokkal importálható és exportálható.</string>
     <string name="add_new_custom_category_button_promo">Egy vagy több szükséges kategória kijelölésével hozzáadhat egy egyedi kategóriát.</string>
-    <string name="reset_to_default_category_button_promo">Az alapértelmezés visszaállítása törli az egyedi kategóriákat és visszaállítja a sorrendet a telepítés utáni alapértelmezett állapotba.</string>
     <string name="shared_string_available">Rendelkezésre áll</string>
     <string name="add_custom_category">Egyedi kategória hozzáadása</string>
     <string name="rendering_attr_streetLightingNight_name">Csak éjszaka jelenjék meg</string>

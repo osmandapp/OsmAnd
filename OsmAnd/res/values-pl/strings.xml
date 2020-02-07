@@ -3464,7 +3464,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="rearrange_categories">Zmień układ kategorii</string>
     <string name="create_custom_categories_list_promo">Możesz dodać niestandardowe kategorie, ukryć kategorie, które uważasz za niepotrzebne i zmienić kolejność sortowania listy. Listę można importować i eksportować wraz z profilami.</string>
     <string name="add_new_custom_category_button_promo">Możesz dodać nową niestandardową kategorię wybierając jedną lub kilka potrzebnych kategorii.</string>
-    <string name="reset_to_default_category_button_promo">Przywrócenie ustawień domyślnych usunie niestandardowe kategorie i zresetuje kolejność sortowania do domyślnego stanu po instalacji.</string>
     <string name="shared_string_available">Dostępne</string>
     <string name="add_custom_category">Dodaj niestandardową kategorię</string>
     <string name="rendering_attr_streetLightingNight_name">Wyświetlaj tylko w nocy</string>

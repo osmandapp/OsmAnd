@@ -12,4 +12,5 @@
     android:textColor="?android:textColorSecondary"
     android:textSize="@dimen/default_desc_text_size"
 	android:linksClickable="true"
+	android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
     tools:text="Some long description"/>

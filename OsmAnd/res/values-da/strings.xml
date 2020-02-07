@@ -3473,7 +3473,6 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="rearrange_categories">Omarrangere kategorier</string>
     <string name="create_custom_categories_list_promo">Tilføj brugerdefinerede kategorier, skjul kategorier, som ikke er nødvendige, og ændre sorteringsrækkefølgen på listen. Listen kan importeres og eksporteres med profiler.</string>
     <string name="add_new_custom_category_button_promo">Tilføj en ny brugerdefineret kategori ved at vælge en eller nogle få nødvendige kategorier.</string>
-    <string name="reset_to_default_category_button_promo">Nulstilling til standard sletter brugerdefinerede kategorier og nulstiller sorteringsrækkefølge til standardtilstand efter installation.</string>
     <string name="shared_string_available">Tilgængelig</string>
     <string name="add_custom_category">Tilføje brugerdefineret kategori</string>
     <string name="rendering_attr_streetLightingNight_name">Vis kun om natten</string>

@@ -3476,7 +3476,6 @@
     <string name="rearrange_categories">重新排列分類</string>
     <string name="create_custom_categories_list_promo">您可以新增自訂的分類，隱藏您不需要的分類並變更清單順序。清單可與設定檔一起匯入與匯出。</string>
     <string name="add_new_custom_category_button_promo">您可以透過選取一個或多個需要的分類來新增自訂的分類。</string>
-    <string name="reset_to_default_category_button_promo">重設為預設值將會刪除自訂分類並重設排序回安裝後的預設狀態。</string>
     <string name="shared_string_available">可用</string>
     <string name="add_custom_category">新增自訂分類</string>
     <string name="rendering_attr_streetLightingNight_name">僅在夜間顯示</string>
