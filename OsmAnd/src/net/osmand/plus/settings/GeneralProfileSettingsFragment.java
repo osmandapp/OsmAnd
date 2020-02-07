@@ -21,7 +21,6 @@ import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
@@ -127,7 +126,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	private void setupCenterPositionOnMapPref() {
 		Drawable disabled = getContentIcon(R.drawable.ic_action_display_position_bottom);
 		Drawable enabled = getActiveIcon(R.drawable.ic_action_display_position_center);
-		Drawable icon = AndroidUtils.createEnabledStateListDrawable(disabled, enabled);
+		Drawable icon = getPersistentPrefIcon(enabled, disabled);
 
 		SwitchPreferenceCompat centerPositionOnMap = (SwitchPreferenceCompat) findPreference(settings.CENTER_POSITION_ON_MAP.getId());
 		centerPositionOnMap.setIcon(icon);
