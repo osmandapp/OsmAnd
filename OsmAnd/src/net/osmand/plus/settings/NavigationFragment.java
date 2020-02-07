@@ -8,7 +8,6 @@ import android.support.v7.preference.SwitchPreferenceCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -88,7 +87,7 @@ public class NavigationFragment extends BaseSettingsFragment {
 	private void setupSpeakRoutingAlarmsPref() {
 		Drawable disabled = getContentIcon(R.drawable.ic_action_volume_mute);
 		Drawable enabled = getActiveIcon(R.drawable.ic_action_volume_up);
-		Drawable icon = AndroidUtils.createEnabledStateListDrawable(disabled, enabled);
+		Drawable icon = getPersistentPrefIcon(enabled, disabled);
 
 		SwitchPreferenceCompat speakRoutingAlarms = (SwitchPreferenceCompat) findPreference(settings.VOICE_MUTE.getId());
 		speakRoutingAlarms.setIcon(icon);
