@@ -386,9 +386,9 @@ public class OsmandRegions {
 		// Check locale and give 2 locale names 
 		if("zh".equals(locale)) {
 			if("TW".equalsIgnoreCase(country)) {
-				this.locale2 = "zh-Hant";
+				this.locale2 = "zh-hant";
 			} else {
-				this.locale2 = "zh-Hans";
+				this.locale2 = "zh-hans";
 			}
 		}
 	}
