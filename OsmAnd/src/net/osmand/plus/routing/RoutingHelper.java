@@ -1251,13 +1251,13 @@ public class RoutingHelper {
 		}
 	}
 
-	public static RouteSegmentSearchResult searchRouteSegment(double latitude, double longitude, List<RouteSegmentResult> roads) {
+	public static RouteSegmentSearchResult searchRouteSegment(double latitude, double longitude, double maxDist, List<RouteSegmentResult> roads) {
 		int roadIndex = -1;
 		int segmentIndex = -1;
 		QuadPoint point = null;
 		int px = MapUtils.get31TileNumberX(longitude);
 		int py = MapUtils.get31TileNumberY(latitude);
-		double dist = 1000;
+		double dist = maxDist < 0 ? 1000 : maxDist;
 		for (int i = 0; i < roads.size(); i++) {
 			RouteSegmentResult road = roads.get(i);
 			int startPointIndex = road.getStartPointIndex() < road.getEndPointIndex() ? road.getStartPointIndex() : road.getEndPointIndex();

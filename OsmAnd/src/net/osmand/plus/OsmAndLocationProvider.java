@@ -151,7 +151,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				startLocation.setTime(ms);
 			}
 			RouteSegmentSearchResult searchResult =
-					RoutingHelper.searchRouteSegment(currentLocation.getLatitude(), currentLocation.getLongitude(), roads);
+					RoutingHelper.searchRouteSegment(currentLocation.getLatitude(), currentLocation.getLongitude(), -1, roads);
 			if (searchResult != null) {
 				currentRoad = searchResult.getRoadIndex();
 				currentSegment = searchResult.getSegmentIndex();

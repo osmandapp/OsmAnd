@@ -24,6 +24,7 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -43,6 +44,8 @@ import java.util.List;
 import java.util.Map;
 
 public class AvoidSpecificRoads {
+
+	private static final float MAX_AVOID_ROUTE_SEARCH_RADIUS_DP = 32f;
 
 	private OsmandApplication app;
 
@@ -210,7 +213,7 @@ public class AvoidSpecificRoads {
 		});
 	}
 
-	public void addImpassableRoad(@Nullable final MapActivity activity,
+	public void addImpassableRoad(@Nullable final MapActivity mapActivity,
 								  @NonNull final LatLon loc,
 								  final boolean showDialog,
 								  final boolean skipWritingSettings) {
@@ -220,15 +223,17 @@ public class AvoidSpecificRoads {
 		ApplicationMode appMode = app.getRoutingHelper().getAppMode();
 
 		List<RouteSegmentResult> roads = app.getRoutingHelper().getRoute().getOriginalRoute();
-		if (roads != null) {
+		if (mapActivity != null && roads != null) {
+			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
+			float maxDistPx = MAX_AVOID_ROUTE_SEARCH_RADIUS_DP * tb.getDensity();
 			RouteSegmentSearchResult searchResult =
-					RoutingHelper.searchRouteSegment(loc.getLatitude(), loc.getLongitude(), roads);
+					RoutingHelper.searchRouteSegment(loc.getLatitude(), loc.getLongitude(), maxDistPx / tb.getPixDensity(), roads);
 			if (searchResult != null) {
 				QuadPoint point = searchResult.getPoint();
 				LatLon newLoc = new LatLon(MapUtils.get31LatitudeY((int) point.y), MapUtils.get31LongitudeX((int) point.x));
 				ll.setLatitude(newLoc.getLatitude());
 				ll.setLongitude(newLoc.getLongitude());
-				addImpassableRoadInternal(roads.get(searchResult.getRoadIndex()).getObject(), ll, showDialog, activity, newLoc);
+				addImpassableRoadInternal(roads.get(searchResult.getRoadIndex()).getObject(), ll, showDialog, mapActivity, newLoc);
 				if (!skipWritingSettings) {
 					app.getSettings().addImpassableRoad(newLoc.getLatitude(), newLoc.getLongitude());
 				}
@@ -240,11 +245,11 @@ public class AvoidSpecificRoads {
 			@Override
 			public boolean publish(RouteDataObject object) {
 				if (object == null) {
-					if (activity != null) {
-						Toast.makeText(activity, R.string.error_avoid_specific_road, Toast.LENGTH_LONG).show();
+					if (mapActivity != null) {
+						Toast.makeText(mapActivity, R.string.error_avoid_specific_road, Toast.LENGTH_LONG).show();
 					}
 				} else {
-					addImpassableRoadInternal(object, ll, showDialog, activity, loc);
+					addImpassableRoadInternal(object, ll, showDialog, mapActivity, loc);
 				}
 				return true;
 			}
@@ -319,7 +324,7 @@ public class AvoidSpecificRoads {
 				showDialog(activity);
 			}
 			MapContextMenu menu = activity.getContextMenu();
-			if (menu.isActive() && menu.getLatLon().equals(loc)) {
+			if (menu.isActive()) {
 				menu.close();
 			}
 			activity.refreshMap();
