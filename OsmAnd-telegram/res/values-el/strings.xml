@@ -43,4 +43,14 @@
     <string name="shared_string_settings">Επιλογές</string>
     <string name="shared_string_enabled">Ενεργοποιημένο</string>
     <string name="units_and_formats">Μονάδες μέτρησης &amp; φορμά</string>
+    <string name="shared_string_exit">Έξοδος</string>
+    <string name="yard">γδ</string>
+    <string name="foot">πδ</string>
+    <string name="mile">μλ</string>
+    <string name="mile_per_hour">μαω</string>
+    <string name="si_mi_feet">Μίλια/πόδια</string>
+    <string name="si_mi_yard">Μίλια/γιάρδες</string>
+    <string name="si_km_m">Χιλιόμετρα/μέτρα</string>
+    <string name="unit_of_length_descr">Αλλαγή απόστασης που μετριέται.</string>
+    <string name="unit_of_length">Μονάδες μήκους</string>
 </resources>

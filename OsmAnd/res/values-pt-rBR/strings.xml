@@ -2086,7 +2086,7 @@ Pôr do Sol: %2$s</string>
     <string name="srtm_color_scheme">Esquema de cores</string>
     <string name="make_round_trip">Fazer viagem de ida e volta</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Sem estradas de gelo ou vaus</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">Evita estradas de gelo e vaus.</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Evitar estradas de gelo e vaus.</string>
     <string name="map_orientation_change_in_accordance_with_speed">Limite para orientação do mapa</string>
     <string name="quick_action_show_navigation_finish_dialog">Exibir \'Navegação finalizada\'</string>
     <string name="mapillary_menu_title_tile_cache">Cache de quadrícula</string>
@@ -2983,7 +2983,7 @@ Pôr do Sol: %2$s</string>
     <string name="avoid_pt_types">Evite os tipos de transporte…</string>
     <string name="quick_action_day_night_mode">Modo %s</string>
     <string name="routing_attr_avoid_sett_name">Sem pedras irregulares ou paralelepípedo</string>
-    <string name="routing_attr_avoid_sett_description">Evita pavimento de pedras irregulares e paralelepípedo</string>
+    <string name="routing_attr_avoid_sett_description">Evitar pavimento de pedras irregulares e paralelepípedo</string>
     <string name="shared_string_degrees">Graus</string>
     <string name="shared_string_milliradians">Milirradianos</string>
     <string name="angular_measeurement">Unidade angular</string>
@@ -3090,7 +3090,7 @@ Pôr do Sol: %2$s</string>
     <string name="application_profiles">Perfis de aplicação</string>
     <string name="zoom_by_wunderlinq_descr">Altere o zoom do mapa rolando a roda para cima e para baixo. Escape retorna para o aplicativo WunderLINQ.</string>
     <string name="zoom_by_wunderlinq">Use o WunderLINQ para controle</string>
-    <string name="quick_action_need_to_add_item_to_list">Adicione ao menos um item à lista nas configurações de \'Ação rápida\'</string>
+    <string name="quick_action_need_to_add_item_to_list">Adicionar ao menos um item à lista nas configurações de \'Ação rápida\'</string>
     <string name="routing_attr_piste_type_downhill_name">Esqui alpino/de declínio</string>
     <string name="routing_attr_piste_type_downhill_description">Pistas de esqui alpino ou de declínio e acesso a teleféricos.</string>
     <string name="routing_attr_piste_type_nordic_name">Cross country/esqui nórdico</string>
@@ -3481,4 +3481,5 @@ Pôr do Sol: %2$s</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Pôr do sol em %1$s</string>
     <string name="sunrise_at">Nascer do sol em %1$s</string>
+    <string name="accessibility_mode_disabled">Modo de acessibilidade desativado em seu sistema.</string>
 </resources>
