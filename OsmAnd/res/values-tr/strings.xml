@@ -3450,4 +3450,9 @@
     <string name="sunset_at">%1$s\'de gün batımı</string>
     <string name="sunrise_at">%1$s\'de gün doğumu</string>
     <string name="accessibility_mode_disabled">Sisteminizde erişilebilirlik modu devre dışı.</string>
+    <string name="reset_to_default_category_button_promo">Varsayılana sıfırla, sıralama düzenini kurulumdan sonraki varsayılan duruma sıfırlayacaktır.</string>
+    <string name="use_system_screen_timeout">Sistem ekran zaman aşımını kullan</string>
+    <string name="use_system_screen_timeout_promo">Varsayılan olarak devre dışıdır, OsmAnd ön planda çalışıyorsa ekran zaman aşımına uğramaz.
+\n
+\nEtkinleştirilirse OsmAnd sistem zaman aşımı ayarlarını kullanacaktır.</string>
 </resources>
