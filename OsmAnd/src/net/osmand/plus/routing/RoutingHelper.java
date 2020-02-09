@@ -802,10 +802,6 @@ public class RoutingHelper {
 		return route.getCurrentMaxSpeed();
 	}
 
-	public synchronized String getCurrentStreetName() {
-		return route.getCurrentStreetName();
-	}
-
 	public static String formatStreetName(String name, String ref, String destination, String towards) {
 	//Hardy, 2016-08-05:
 	//Now returns: (ref) + ((" ")+name) + ((" ")+"toward "+dest) or ""
@@ -836,6 +832,17 @@ public class RoutingHelper {
 //		}
 //		return false;
 //	}
+
+	public synchronized String getCurrentStreetName() {
+		RouteSegmentResult rs = getCurrentSegmentResult();
+		if(rs != null) {
+			String name = getRouteSegmentStreetName(rs);
+			if (!Algorithms.isEmpty(name)) {
+				return name;
+			}
+		}
+		return "";
+	}
 
 	public synchronized String getCurrentName(TurnType[] next, NextDirectionInfo n){
 		Location l = lastFixedLocation;

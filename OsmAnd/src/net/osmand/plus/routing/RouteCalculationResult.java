@@ -932,15 +932,7 @@ public class RouteCalculationResult {
 		return null;
 	}
 
-	public String getCurrentStreetName() {
-		String streetName = "";
-		if (currentDirectionInfo < directions.size() && directions.get(currentDirectionInfo) != null) {
-			streetName = directions.get(currentDirectionInfo).getStreetName();
-		}
-		return streetName != null ? streetName : "";
-	}
-	
-	
+
 	/*public */NextDirectionInfo getNextRouteDirectionInfo(NextDirectionInfo info, Location fromLoc, boolean toSpeak) {
 		int dirInfo = currentDirectionInfo;
 		if (dirInfo < directions.size()) {
