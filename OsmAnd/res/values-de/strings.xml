@@ -1823,7 +1823,6 @@ Lon %2$s</string>
     <string name="av_audio_bitrate">Audio-Bitrate</string>
     <string name="av_audio_bitrate_descr">Audio-Bitrate wählen.</string>
     <string name="rendering_attr_horseRoutes_name">Reitwege</string>
-    <string name="update">Aktualisieren</string>
     <string name="only_download_over_wifi">Nur über WLAN herunterladen</string>
     <string name="live_update">Live-Aktualisierung</string>
     <string name="update_now">Jetzt aktualisieren</string>
