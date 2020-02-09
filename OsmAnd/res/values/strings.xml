@@ -3380,7 +3380,6 @@
     <string name="use_drawer_btn">Use menu</string>
     <string name="dashboard_or_drawer_title">Dashboard or menu control</string>
     <string name="dashboard_or_drawer_description">A choice is offered to primarily control the app via the flexible dashboard or a static menu. Your choice can always be changed in the dashboard settings.</string>
-    <string name="update">Update</string>
     <string name="only_download_over_wifi">Only download on Wi-Fi</string>
     <string name="live_update">Live update</string>
     <string name="update_now">Update now</string>
