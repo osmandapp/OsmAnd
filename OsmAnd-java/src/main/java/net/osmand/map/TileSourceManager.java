@@ -1,7 +1,5 @@
 package net.osmand.map;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
@@ -20,7 +18,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.lang.reflect.Type;
 import java.net.URLConnection;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -706,16 +703,5 @@ public class TileSourceManager {
 		templ.setInvertedYTile(invertedY);
 		templ.setRandoms(randoms);
 		return templ;
-	}
-
-	public String templatesListToString(List<TileSourceTemplate> templates) {
-		return new Gson().toJson(templates);
-	}
-
-	public List<TileSourceTemplate> parseTemplatesList(String json) {
-		Type type = new TypeToken<List<TileSourceTemplate>>() {
-		}.getType();
-		ArrayList<TileSourceTemplate> templates = new Gson().fromJson(json, type);
-		return templates != null ? templates : new ArrayList<TileSourceTemplate>();
 	}
 }

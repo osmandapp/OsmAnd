@@ -64,8 +64,10 @@ import static net.osmand.IndexConstants.TILES_INDEX_DIR;
 
 /*
 	Usage:
+
 	SettingsHelper helper = app.getSettingsHelper();
 	File file = new File(app.getAppPath(null), "settings.zip");
+
 	List<SettingsItem> items = new ArrayList<>();
 	items.add(new GlobalSettingsItem(app.getSettings()));
 	items.add(new ProfileSettingsItem(app.getSettings(), ApplicationMode.DEFAULT));
@@ -77,7 +79,9 @@ import static net.osmand.IndexConstants.TILES_INDEX_DIR;
 	items.add(new FileSettingsItem(app, new File(app.getAppPath(RENDERERS_DIR), "default.render.xml")));
 	items.add(new DataSettingsItem(new byte[] {'t', 'e', 's', 't', '1'}, "data1"));
 	items.add(new DataSettingsItem(new byte[] {'t', 'e', 's', 't', '2'}, "data2"));
+
 	helper.exportSettings(file, items);
+
 	helper.importSettings(file);
  */
 

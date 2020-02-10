@@ -167,7 +167,7 @@ public class SQLiteTileSource implements ITileSource {
 			return this.urlTemplate;
 		} else {
 			SQLiteConnection db = getDatabase();
-			if (db == null || db.isReadOnly() || urlTemplate == null) {
+			if (db == null || urlTemplate == null) {
 				return null;
 			} else {
 				return this.urlTemplate;
