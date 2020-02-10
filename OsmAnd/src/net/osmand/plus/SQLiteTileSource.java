@@ -56,14 +56,7 @@ public class SQLiteTileSource implements ITileSource {
 	private OsmandApplication ctx;
 	private boolean onlyReadonlyAvailable = false;
 
-	private static final String TILES_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS tiles (" +
-			"x, " +
-			"y, " +
-			"z, " +
-			"s, " +
-			"image, " +
-			"time" +
-			")";
+	private static final String TILES_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS \"tiles\" (\"x\" INTEGER NOT NULL, \"y\" INTEGER NOT NULL, \"z\" INTEGER NOT NULL, \"s\" INTEGER, \"image\" BLOB, \"time\" INTEGER, PRIMARY KEY (\"x\", \"y\", \"z\"))";
 
 	public SQLiteTileSource(OsmandApplication ctx, File f, List<TileSourceTemplate> toFindUrl){
 		this.ctx = ctx;
@@ -106,18 +99,14 @@ public class SQLiteTileSource implements ITileSource {
 	public void createDataBase() {
 		db = ctx.getSQLiteAPI().getOrCreateDatabase(
 				ctx.getAppPath(TILES_INDEX_DIR).getAbsolutePath() + "/" + name + SQLITE_EXT, true);
+
 		db.execSQL("CREATE TABLE IF NOT EXISTS info (" +
-				"url " +
+				"minzoom, " +
+				"maxzoom " +
 				");");
-		db.execSQL("INSERT INTO info (url) VALUES ('" + urlTemplate + "');");
+		db.execSQL("INSERT INTO info (minzoom,maxzoom) VALUES ('" + minZoom + "','" + maxZoom + "');");
 
-//		db.execSQL("INSERT INTO info VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-//				new Object[]{minZoom, maxZoom, urlTemplate, randoms, isEllipsoid ? 1 : 0,
-//						invertedY ? 1 : 0, referer, timeSupported ? "yes" : "no", timeSupported ? "yes" : "no",
-//						getExpirationTimeMinutes(), inversiveZoom ? "BigPlanet" : ""});
-
-		addInfoColumn("minzoom", String.valueOf(minZoom));
-		addInfoColumn("maxzoom", String.valueOf(maxZoom));
+		addInfoColumn("url", urlTemplate);
 		addInfoColumn("randoms", randoms);
 		addInfoColumn("ellipsoid", isEllipsoid ? "1" : "0");
 		addInfoColumn("inverted_y", invertedY ? "1" : "0");

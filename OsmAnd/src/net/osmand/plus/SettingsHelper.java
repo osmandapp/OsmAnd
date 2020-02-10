@@ -1091,8 +1091,8 @@ public class SettingsHelper {
 							JSONObject object = items.getJSONObject(i);
 							boolean sql = object.optBoolean("sql");
 							String name = object.optString("name");
-							int minZoom = object.optInt("minZoom", 1);
-							int maxZoom = object.optInt("maxZoom", 17);
+							int minZoom = object.optInt("minZoom");
+							int maxZoom = object.optInt("maxZoom");
 							String url = object.optString("url");
 							String randoms = object.optString("randoms");
 							boolean ellipsoid = object.optBoolean("ellipsoid", false);
