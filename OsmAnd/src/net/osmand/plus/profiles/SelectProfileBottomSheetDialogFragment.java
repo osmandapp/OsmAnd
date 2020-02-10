@@ -139,16 +139,16 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 			items.add(new LongDescriptionItem(getString(R.string.select_nav_profile_dialog_message)));
 			for (int i = 0; i < profiles.size(); i++) {
 				final RoutingProfileDataObject profile = (RoutingProfileDataObject) profiles.get(i);
-                boolean showBottomDivider = false;
-                if (i < profiles.size() - 1) {
-                    RoutingProfileDataObject nextProfile = (RoutingProfileDataObject) profiles.get(i + 1);
-                    if (profile.getFileName() == null) {
-                        showBottomDivider = nextProfile.getFileName() != null;
-                    } else {
-                        showBottomDivider = !profile.getFileName().equals(nextProfile.getFileName());
-                    }
-                }
-                addProfileItem(profile, showBottomDivider);
+ 				boolean showBottomDivider = false;
+				if (i < profiles.size() - 1) {
+					RoutingProfileDataObject nextProfile = (RoutingProfileDataObject) profiles.get(i + 1);
+					if (profile.getFileName() == null) { 
+						showBottomDivider = nextProfile.getFileName() != null; 
+					} else { 
+						showBottomDivider = !profile.getFileName().equals(nextProfile.getFileName()); 
+					} 
+				}
+				addProfileItem(profile, showBottomDivider);
 			}
 			items.add(new DividerItem(app));
 			items.add(new LongDescriptionItem(app.getString(R.string.osmand_routing_promo)));

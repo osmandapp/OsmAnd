@@ -733,8 +733,7 @@ public class ImportHelper {
 		}
 	}
 	
-	private void handleOsmAndSettingsImport(Uri intentUri, String fileName, Bundle extras, boolean askBeforeImport,
-	                                        CallbackWithObject<List<SettingsHelper.SettingsItem>> callback) {
+	private void handleOsmAndSettingsImport(Uri intentUri, String fileName, Bundle extras, boolean askBeforeImport, CallbackWithObject<List<SettingsHelper.SettingsItem>> callback) {
 		if (extras != null && extras.containsKey(SettingsHelper.SETTINGS_VERSION_KEY) && extras.containsKey(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY)) {
 			int version = extras.getInt(SettingsHelper.SETTINGS_VERSION_KEY, -1);
 			String latestChanges = extras.getString(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY);
