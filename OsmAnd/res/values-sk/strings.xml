@@ -3456,7 +3456,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="rearrange_categories">Usporiadať kategórie</string>
     <string name="create_custom_categories_list_promo">Môžete pridať vlastné kategórie a skryť kategórie, ktoré nepotrebujete a zmeniť poradie triedenia v zozname. Zozname môže byť importovaný a exportovaný s profilmi.</string>
     <string name="add_new_custom_category_button_promo">Môžete pridať novú kategóriu zvolením jednej alebo viacerých existujúcich.</string>
-    <string name="reset_to_default_category_button_promo">Obnovenie do východzieho nastavenia vymaže vaše vlastné kategórie a poradie triedenia ako po novej inštalácii.</string>
+    <string name="reset_to_default_category_button_promo">Obnovenie do východzieho nastavenia vymaže poradie triedenia ako po novej inštalácii.</string>
     <string name="shared_string_available">Dostupné</string>
     <string name="add_custom_category">Pridať vlastnú kategóriu</string>
     <string name="rendering_attr_streetLightingNight_name">Zobraziť iba v noci</string>
@@ -3466,4 +3466,8 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="sunset_at">Západ slnka o %1$s</string>
     <string name="sunrise_at">Východ slnka o %1$s</string>
     <string name="accessibility_mode_disabled">Režim uľahčenia prístupu je na tomto systéme vypnutý.</string>
+    <string name="use_system_screen_timeout">Použiť systémový časový limit obrazovky</string>
+    <string name="use_system_screen_timeout_promo">Predvolene vypnuté, ak OsmAnd beží v popredí, obrazovka nezhasne.
+\n
+\nAk je zapnuté, OsmAnd zhasne obrazovku podľa limitu nastaveného v systéme.</string>
 </resources>
