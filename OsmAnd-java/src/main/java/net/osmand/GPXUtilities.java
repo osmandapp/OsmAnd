@@ -1785,28 +1785,25 @@ public class GPXUtilities {
 		try {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(getUTF8Reader(f));
+			Track routeTrack = new Track();
+			TrkSegment routeTrackSegment = new TrkSegment();
+			routeTrack.segments.add(routeTrackSegment);
 			Stack<GPXExtensions> parserState = new Stack<>();
 			boolean extensionReadMode = false;
-			boolean parseExtension = false;
-			boolean endOfTrkSegment = false;
+			boolean routePointExtension = false;
 			parserState.push(res);
 			int tok;
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if (tok == XmlPullParser.START_TAG) {
 					GPXExtensions parse = parserState.peek();
 					String tag = parser.getName();
-					if (extensionReadMode && parse != null && !parseExtension) {
+					if (extensionReadMode && parse != null && !routePointExtension) {
 						switch (tag.toLowerCase()) {
 							case "routepointextension":
-								parseExtension = true;
-								Track track = new Track();
-								res.tracks.add(track);
-								GPXExtensions parent = parserState.size() > 1 ? parserState.get(parserState.size() - 2) : null;
-								if (parse instanceof WptPt && parent instanceof Route) {
-									track.getExtensionsToWrite().putAll(parent.getExtensionsToRead());
-									track.getExtensionsToWrite().putAll(parse.getExtensionsToRead());
+								routePointExtension = true;
+								if (parse instanceof WptPt) {
+									parse.getExtensionsToWrite().put("offset", routeTrackSegment.points.size() + "");
 								}
-								parserState.push(track);
 								break;
 
 							default:
@@ -1829,6 +1826,12 @@ public class GPXUtilities {
 						}
 					} else if (parse != null && tag.equals("extensions")) {
 						extensionReadMode = true;
+					} else if (routePointExtension) {
+						if (tag.equals("rpt")) {
+							WptPt wptPt = parseWptAttributes(parser);
+							routeTrackSegment.points.add(wptPt);
+							parserState.push(wptPt);
+						}
 					} else {
 						if (parse instanceof GPXFile) {
 							if (tag.equals("gpx")) {
@@ -1934,16 +1937,6 @@ public class GPXUtilities {
 								((Track) parse).segments.add(trkSeg);
 								parserState.push(trkSeg);
 							}
-							if (tag.equals("rpt")) {
-								endOfTrkSegment = false;
-								TrkSegment trkSeg = new TrkSegment();
-								((Track) parse).segments.add(trkSeg);
-								parserState.push(trkSeg);
-								WptPt wptPt = parseWptAttributes(parser);
-								parse = parserState.peek();
-								((TrkSegment) parse).points.add(wptPt);
-								parserState.push(wptPt);
-							}
 						} else if (parse instanceof TrkSegment) {
 							if (tag.equals("trkpt") || tag.equals("rpt")) {
 								WptPt wptPt = parseWptAttributes(parser);
@@ -2012,8 +2005,6 @@ public class GPXUtilities {
 							} else if (tag.equals("time")) {
 								String text = readText(parser, "time");
 								((WptPt) parse).time = parseTime(text, format, formatMillis);
-							} else if (tag.toLowerCase().equals("subclass")) {
-								endOfTrkSegment = true;
 							}
 						}
 					}
@@ -2023,9 +2014,7 @@ public class GPXUtilities {
 					String tag = parser.getName();
 
 					if (tag.toLowerCase().equals("routepointextension")) {
-						parseExtension = false;
-						Object pop = parserState.pop();
-						assert pop instanceof Track;
+						routePointExtension = false;
 					}
 					if (parse != null && tag.equals("extensions")) {
 						extensionReadMode = false;
@@ -2067,25 +2056,16 @@ public class GPXUtilities {
 					} else if (tag.equals("rpt")) {
 						Object pop = parserState.pop();
 						assert pop instanceof WptPt;
-						if (endOfTrkSegment) {
-							Object popSegment = parserState.pop();
-							if (popSegment instanceof TrkSegment) {
-								List<TrkSegment> segments = res.tracks.get(res.tracks.size() - 1).segments;
-								int last = segments.size() - 1;
-								if (!Algorithms.isEmpty(segments) && segments.get(last).points.size() < 2) {
-									segments.remove(last);
-								}
-							}
-							endOfTrkSegment = false;
-						}
 					}
 				}
+			}
+			if (!routeTrackSegment.points.isEmpty()) {
+				res.tracks.add(routeTrack);
 			}
 		} catch (Exception e) {
 			res.error = e;
 			log.error("Error reading gpx", e); //$NON-NLS-1$
 		}
-
 		return res;
 	}
 

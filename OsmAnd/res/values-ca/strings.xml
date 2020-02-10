@@ -3460,4 +3460,11 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="select_nav_icon_descr">Només veureu la icona mentre navegueu o us mogueu.</string>
     <string name="select_map_icon_descr">La icona de mapa només es mostra al mapa i es canvia a la icona de navegació quan durant aquesta.</string>
     <string name="logcat_buffer_descr">Valida i comparteix enregistraments detallats de l\'aplicació</string>
+    <string name="rearrange_categories">Reorganitza les categories</string>
+    <string name="create_custom_categories_list_promo">Podeu afegir categories personalitzades, amagar categories que considereu innecessàries i canviar l\'ordenació de la llista. La llista es pot importar i exportar amb perfils.</string>
+    <string name="add_new_custom_category_button_promo">Podeu afegir una nova categoria personalitzada seleccionant-ne una o, si cal, alguna categoria més.</string>
+    <string name="shared_string_available">Disponible</string>
+    <string name="add_custom_category">Afegeix una categoria personalitzada</string>
+    <string name="rendering_attr_streetLightingNight_name">Mostra només de nit</string>
+    <string name="plugin_prefs_reset_successful">Tots els ajustaments dels connectors s\'han restaurat a l\'estat predeterminat.</string>
 </resources>

@@ -37,6 +37,7 @@
 		android:key="save_global_track_interval"
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/save_global_track_interval"
+		android:persistent="false"
 		tools:icon="@drawable/ic_action_time_span"
 		tools:summary="3 seconds" />
 

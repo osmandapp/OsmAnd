@@ -121,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:text="@string/update"
+                    android:text="@string/shared_string_update"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textSize="16sp"/>
 

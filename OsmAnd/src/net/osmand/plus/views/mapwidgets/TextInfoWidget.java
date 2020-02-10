@@ -38,6 +38,8 @@ public class TextInfoWidget  {
 	private boolean isNight;
 	private ViewGroup bottomLayout;
 
+	private Integer cachedMetricSystem = null;
+	private Integer cachedAngularUnits = null;
 
 	public TextInfoWidget(Activity activity) {
 		app = (OsmandApplication) activity.getApplication();
@@ -188,6 +190,29 @@ public class TextInfoWidget  {
 	}
 
 	public boolean updateInfo(DrawSettings drawSettings) {
+		return false;
+	}
+
+	public boolean isUpdateNeeded() {
+		boolean res = false;
+		if (isMetricSystemDepended()) {
+			int metricSystem = app.getSettings().METRIC_SYSTEM.get().ordinal();
+			res |= cachedMetricSystem == null || cachedMetricSystem != metricSystem;
+			cachedMetricSystem = metricSystem;
+		}
+		if (isAngularUnitsDepended()) {
+			int angularUnits = app.getSettings().ANGULAR_UNITS.get().ordinal();
+			res |= cachedAngularUnits == null || cachedAngularUnits != angularUnits;
+			cachedAngularUnits = angularUnits;
+		}
+		return res;
+	}
+
+	public boolean isMetricSystemDepended() {
+		return false;
+	}
+
+	public boolean isAngularUnitsDepended() {
 		return false;
 	}
 

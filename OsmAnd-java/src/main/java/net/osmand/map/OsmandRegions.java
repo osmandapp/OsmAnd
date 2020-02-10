@@ -29,6 +29,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -54,6 +55,8 @@ public class OsmandRegions {
 
 	private BinaryMapIndexReader reader;
 	private String locale = "en";
+	// locale including region
+	private String locale2 = null;
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandRegions.class);
 
 	WorldRegion worldRegion = new WorldRegion(WorldRegion.WORLD);
@@ -73,6 +76,7 @@ public class OsmandRegions {
 		Integer nameEnType = null;
 		Integer nameType = null;
 		Integer nameLocaleType = null;
+		Integer nameLocale2Type = null;
 		Integer langType = null;
 		Integer metricType = null;
 		Integer leftHandDrivingType = null;
@@ -374,7 +378,19 @@ public class OsmandRegions {
 	}
 
 	public void setLocale(String locale) {
+		setLocale(locale, null);
+	}
+
+	public void setLocale(String locale, String country) {
 		this.locale = locale;
+		// Check locale and give 2 locale names 
+		if("zh".equals(locale)) {
+			if("TW".equalsIgnoreCase(country)) {
+				this.locale2 = "zh-hant";
+			} else {
+				this.locale2 = "zh-hans";
+			}
+		}
 	}
 
 
@@ -427,7 +443,12 @@ public class OsmandRegions {
 			parentRelations.put(rd.regionFullName, rd.regionParentFullName);
 		}
 		rd.regionName = mapIndexFields.get(mapIndexFields.nameType, object);
-		rd.regionNameLocale = mapIndexFields.get(mapIndexFields.nameLocaleType, object);
+		if(mapIndexFields.nameLocale2Type != null) {
+			rd.regionNameLocale = mapIndexFields.get(mapIndexFields.nameLocale2Type, object);
+		}
+		if (rd.regionNameLocale == null) {
+			rd.regionNameLocale = mapIndexFields.get(mapIndexFields.nameLocaleType, object);
+		}
 		rd.regionNameEn = mapIndexFields.get(mapIndexFields.nameEnType, object);
 		rd.params.regionLang = mapIndexFields.get(mapIndexFields.langType, object);
 		rd.params.regionLeftHandDriving = mapIndexFields.get(mapIndexFields.leftHandDrivingType, object);
@@ -543,6 +564,9 @@ public class OsmandRegions {
 			mapIndexFields.nameType = object.getMapIndex().getRule(FIELD_NAME, null);
 			mapIndexFields.nameEnType = object.getMapIndex().getRule(FIELD_NAME_EN, null);
 			mapIndexFields.nameLocaleType = object.getMapIndex().getRule(FIELD_NAME + ":" + locale, null);
+			if(locale2 != null) {
+				mapIndexFields.nameLocale2Type = object.getMapIndex().getRule(FIELD_NAME + ":" + locale2, null);
+			}
 			mapIndexFields.parentFullName = object.getMapIndex().getRule(FIELD_REGION_PARENT_NAME, null);
 			mapIndexFields.fullNameType = object.getMapIndex().getRule(FIELD_REGION_FULL_NAME, null);
 			mapIndexFields.langType = object.getMapIndex().getRule(FIELD_LANG, null);
@@ -565,9 +589,15 @@ public class OsmandRegions {
 			String nm = b.getNameByType(or.mapIndexFields.nameEnType);
 			if (nm == null) {
 				nm = b.getName();
+				System.out.println(or.getLocaleName(or.getDownloadName(b), false));
 			}
 			if (or.isDownloadOfType(b, MAP_TYPE)) {
 				found.add(nm.toLowerCase());
+				String localName = b.getNameByType(or.mapIndexFields.nameLocaleType);
+				if(or.mapIndexFields.nameLocale2Type != null) {
+					localName = b.getNameByType(or.mapIndexFields.nameLocale2Type);
+				}
+				System.out.println(String.format("Region %s %s", b.getName(), localName));
 			}
 		}
 
@@ -580,6 +610,8 @@ public class OsmandRegions {
 
 	public static void main(String[] args) throws IOException {
 		OsmandRegions or = new OsmandRegions();
+		Locale tw = Locale.CHINA;
+		or.setLocale(tw.getLanguage(), tw.getCountry());
 		or.prepareFile("/Users/victorshcherb/osmand/repos/resources/countries-info/regions.ocbf");
 		LinkedList<WorldRegion> lst = new LinkedList<WorldRegion>();
 		lst.add(or.getWorldRegion());
@@ -592,20 +624,20 @@ public class OsmandRegions {
 //				lst.addAll(wd.getSubregions());
 		}
 
-
+		
 		or.cacheAllCountries();
 //		long t = System.currentTimeMillis();
 //		or.cacheAllCountries();
 //		System.out.println("Init " + (System.currentTimeMillis() - t));
 
-		//testCountry(or, 15.8, 23.09, "chad");
-		testCountry(or, 52.10, 4.92, "the netherlands", "utrecht");
-		testCountry(or, 52.15, 7.50, "north rhine-westphalia");
-		testCountry(or, 28.8056, 29.9858, "egypt");
+		testCountry(or, 53.8820, 27.5726, "belarus", "minsk");
+//		testCountry(or, 52.10, 4.92, "the netherlands", "utrecht");
+//		testCountry(or, 52.15, 7.50, "north rhine-westphalia");
+//		testCountry(or, 28.8056, 29.9858, "egypt");
 //		testCountry(or, 40.0760, 9.2807, "italy", "sardinia");
-		testCountry(or, 35.7521, 139.7887, "japan");
-		testCountry(or, 46.5145, 102.2580, "mongolia");
-		testCountry(or, 62.54, 43.36, "arkhangelsk oblast", "northwestern federal district");
+//		testCountry(or, 35.7521, 139.7887, "japan");
+//		testCountry(or, 46.5145, 102.2580, "mongolia");
+//		testCountry(or, 62.54, 43.36, "arkhangelsk oblast", "northwestern federal district");
 	}
 
 

@@ -212,7 +212,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 						String filterByName2 = o2.filterByName == null ? "" : o2.filterByName;
 						return filterByName1.compareToIgnoreCase(filterByName2);
 					} else {
-						return o1.name.compareTo(o2.name);
+						return o1.name.compareToIgnoreCase(o2.name);
 					}
 				}
 			});
@@ -641,7 +641,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 			private TextView title;
 			private TextView description;
 			private ImageView icon;
-			private ImageButton actionIcon;
+			private ImageView actionIcon;
 			private ImageView moveIcon;
 			private View itemsContainer;
 

@@ -3,6 +3,7 @@ package net.osmand.plus.settings;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
@@ -13,16 +14,19 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
+import android.support.v14.preference.MultiSelectListPreference;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
+import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceGroupAdapter;
@@ -30,6 +34,7 @@ import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.support.v7.preference.SwitchPreferenceCompat;
+import android.support.v7.preference.TwoStatePreference;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -376,17 +381,34 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 				AndroidUtils.setBackground(selectableView, drawable);
 			}
 		}
-		TextView tvPreferenceTitle = (TextView) holder.itemView.findViewById(android.R.id.title);
-		if (tvPreferenceTitle != null) {
-			tvPreferenceTitle.setSingleLine(false);
+		TextView titleView = (TextView) holder.findViewById(android.R.id.title);
+		if (titleView != null) {
+			titleView.setSingleLine(false);
 		}
+		boolean enabled = preference.isEnabled();
 		if (currentScreenType.profileDependent) {
 			View cb = holder.itemView.findViewById(R.id.switchWidget);
 			if (cb == null) {
 				cb = holder.findViewById(android.R.id.checkbox);
 			}
 			if (cb instanceof CompoundButton) {
-				UiUtilities.setupCompoundButton(isNightMode(), getActiveProfileColor(), (CompoundButton) cb);
+				int color = enabled ? getActiveProfileColor() : getDisabledTextColor();
+				UiUtilities.setupCompoundButton(isNightMode(), color, (CompoundButton) cb);
+			}
+		}
+		if ((preference.isPersistent() || preference instanceof TwoStatePreference) && !(preference instanceof PreferenceCategory)) {
+			if (titleView != null) {
+				titleView.setTextColor(enabled ? getActiveTextColor() : getDisabledTextColor());
+			}
+			if (preference instanceof TwoStatePreference) {
+				enabled = enabled & ((TwoStatePreference) preference).isChecked();
+			}
+			if (preference instanceof MultiSelectListPreference) {
+				enabled = enabled & !((MultiSelectListPreference) preference).getValues().isEmpty();
+			}
+			ImageView imageView = (ImageView) holder.findViewById(android.R.id.icon);
+			if (imageView != null) {
+				imageView.setEnabled(enabled);
 			}
 		}
 	}
@@ -525,6 +547,9 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		updateAllSettings();
 	}
 
+	public void onSettingApplied(String prefId, boolean appliedToAllProfiles) {
+	}
+
 	public void updateAllSettings() {
 		PreferenceScreen screen = getPreferenceScreen();
 		if (screen != null) {
@@ -576,6 +601,16 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	@ColorRes
 	protected int getBackgroundColorRes() {
 		return isNightMode() ? R.color.list_background_color_dark : R.color.list_background_color_light;
+	}
+
+	@ColorInt
+	protected int getActiveTextColor() {
+		return ContextCompat.getColor(app, isNightMode() ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
+	}
+
+	@ColorInt
+	protected int getDisabledTextColor() {
+		return ContextCompat.getColor(app, isNightMode() ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light);
 	}
 
 	protected void registerPreference(Preference preference) {
@@ -692,6 +727,24 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	protected Drawable getPaintedIcon(@DrawableRes int id, @ColorInt int color) {
 		UiUtilities cache = getIconsCache();
 		return cache != null ? cache.getPaintedIcon(id, color) : null;
+	}
+
+	protected Drawable getPersistentPrefIcon(@DrawableRes int iconId) {
+		Drawable disabled = UiUtilities.createTintedDrawable(app, iconId, ContextCompat.getColor(app, R.color.icon_color_default_light));
+		Drawable enabled = UiUtilities.createTintedDrawable(app, iconId, getActiveProfileColor());
+		return getPersistentPrefIcon(enabled, disabled);
+	}
+
+	protected Drawable getPersistentPrefIcon(Drawable enabled, Drawable disabled) {
+		Drawable icon = AndroidUtils.createEnabledStateListDrawable(disabled, enabled);
+
+		if (Build.VERSION.SDK_INT < 21) {
+			ColorStateList colorStateList = AndroidUtils.createEnabledColorStateList(app, R.color.icon_color_default_light, getActiveProfileColorRes());
+			icon = DrawableCompat.wrap(icon);
+			DrawableCompat.setTintList(icon, colorStateList);
+			return icon;
+		}
+		return icon;
 	}
 
 	public SwitchPreferenceCompat createSwitchPreference(OsmandSettings.OsmandPreference<Boolean> b, int title, int summary, int layoutId) {

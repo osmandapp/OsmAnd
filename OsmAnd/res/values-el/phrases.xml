@@ -226,7 +226,7 @@
     <string name="poi_musical_instrument">Μουσικά όργανα</string>
     <string name="poi_newsagent">Εφημερίδες</string>
     <string name="poi_optician">Οπτικός</string>
-    <string name="poi_organic">Βιολογικά τρόφιμα</string>
+    <string name="poi_organic">Βιολογικά προϊόντα</string>
     <string name="poi_outdoor">Υπαίθριο κατάστημα</string>
     <string name="poi_paint">Χρωματοπωλείο</string>
     <string name="poi_pet">Κατάστημα κατοικιδίων</string>
@@ -2001,7 +2001,7 @@
     <string name="poi_service_bicycle_cleaning_no">Καθαρισμός ποδηλάτου: όχι</string>
     <string name="poi_service_bicycle_second_hand_yes">Λιανική πώληση μεταχειρισμένων ποδηλάτων</string>
     <string name="poi_service_bicycle_second_hand_no">Λιανική πώληση μεταχειρισμένων ποδηλάτων: όχι</string>
-    <string name="poi_bicycle_repair_station">Σταθμός ιδιοεπισκευής ποδηλάτου</string>
+    <string name="poi_bicycle_repair_station">Σταθμός επισκευής ποδαλάτων·Σταθμός ιδιοεπισκευής ποδηλάτων</string>
     <string name="poi_wildlife_hide">Θέση παρακολούθησης άγριας ζωής</string>
     <string name="poi_training_language">Εκπαίδευση: γλώσσα</string>
     <string name="poi_training_music">Εκπαίδευση: μουσική</string>
@@ -3556,4 +3556,13 @@
     <string name="poi_denotation_landmark">Διακριτό σημείο</string>
     <string name="poi_park_ride_yes">Ναι</string>
     <string name="poi_park_ride_train">Τρένο</string>
+    <string name="poi_park_ride_bus">Λεωφορείο</string>
+    <string name="poi_park_ride_metro">Μετρό</string>
+    <string name="poi_park_ride_tram">Τραμ</string>
+    <string name="poi_park_ride_ferry">Πλοίο</string>
+    <string name="poi_atm_yes">ATM: Ναι</string>
+    <string name="poi_cash_withdrawal_bank_card">Ανάληψη μετρητών</string>
+    <string name="poi_bath_type">Πληκτρολογήστε</string>
+    <string name="poi_volcano_type">Πληκτρολογήστε</string>
+    <string name="poi_volcano_status">Κατάσταση</string>
 </resources>

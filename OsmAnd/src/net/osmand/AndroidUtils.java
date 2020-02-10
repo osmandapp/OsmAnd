@@ -56,7 +56,6 @@ import android.widget.TextView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.download.DownloadActivity;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -264,6 +263,17 @@ public class AndroidUtils {
 				lightNormal, lightChecked, darkNormal, darkChecked);
 	}
 
+	public static ColorStateList createEnabledColorStateList(Context ctx, @ColorRes int normal, @ColorRes int pressed) {
+		return createEnabledColorStateList(ctx, false, normal, pressed, 0, 0);
+	}
+
+	public static ColorStateList createEnabledColorStateList(Context ctx, boolean night,
+	                                                         @ColorRes int lightNormal, @ColorRes int lightPressed,
+	                                                         @ColorRes int darkNormal, @ColorRes int darkPressed) {
+		return createColorStateList(ctx, night, android.R.attr.state_enabled,
+				lightNormal, lightPressed, darkNormal, darkPressed);
+	}
+
 	public static ColorStateList createPressedColorStateList(Context ctx, @ColorRes int normal, @ColorRes int pressed) {
 		return createPressedColorStateList(ctx, false, normal, pressed, 0, 0);
 	}
@@ -296,6 +306,10 @@ public class AndroidUtils {
 
 	public static StateListDrawable createPressedStateListDrawable(Drawable normal, Drawable pressed) {
 		return createStateListDrawable(normal, pressed, android.R.attr.state_pressed);
+	}
+
+	public static StateListDrawable createEnabledStateListDrawable(Drawable disabled, Drawable enabled) {
+		return createStateListDrawable(disabled, enabled, android.R.attr.state_enabled);
 	}
 
 	private static StateListDrawable createStateListDrawable(Drawable normal, Drawable stateDrawable, int state) {

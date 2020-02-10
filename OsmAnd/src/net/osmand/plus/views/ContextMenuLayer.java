@@ -947,9 +947,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		if (selectOnMap != null) {
 			LatLon latlon = tileBox.getLatLonFromPixel(point.x, point.y);
+			menu.init(latlon, null, null);
 			CallbackWithObject<LatLon> cb = selectOnMap;
 			cb.processResult(latlon);
-			menu.init(latlon, null, null);
 			selectOnMap = null;
 			return true;
 		}

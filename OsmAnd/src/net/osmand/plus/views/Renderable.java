@@ -48,6 +48,8 @@ public class Renderable {
 
     public static abstract class RenderableSegment {
 
+        protected static final int MIN_CULLER_ZOOM = 16;
+
         public List<WptPt> points = null;                           // Original list of points
         protected List<WptPt> culled = new ArrayList<>();           // Reduced/resampled list of points
         protected int pointSize;
@@ -168,6 +170,9 @@ public class Renderable {
                     culled.clear();              // use full-resolution until re-cull complete
                 }
                 zoom = newZoom;
+                if (newZoom >= MIN_CULLER_ZOOM) {
+                    return;
+                }
 
                 double cullDistance = Math.pow(2.0, segmentSize - zoom);    // segmentSize == epsilon
                 culler = new AsynchronousResampler.RamerDouglasPeucer(this, cullDistance);

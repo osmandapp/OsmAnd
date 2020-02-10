@@ -3469,4 +3469,15 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="monitoring_min_speed_descr_recommendation">Impòsitu: Proa a impreare, in antis, su rilevamentu de movimentu pro mèdiu de sul filtru de movimentu mìnimu (B). Diat pòdere produire risultados mègius, e tue dias pòdere pèrdere datos de mancu. Si sas rastas tuas abarrant burdellosas a lestresas bassas, proa a impreare inoghe valores diferentes dae zero. Pro praghere ammenta·ti chi carchi mèdida diat pòdere non rilevare perunu valore de lestresa (unas àteras maneras basadas in subra de sa retza), e chi in custu casu non dias registrare nudda.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Impòsitu: est prus difìtzile a intzertare ite at a èssere registradu e ite nono. Diat èssere mègius a istudare custu filtru.</string>
     <string name="live_monitoring_time_buffer">Intervallu tampone (buffer)</string>
+    <string name="rearrange_categories">Torra a ordinare sas categorias</string>
+    <string name="create_custom_categories_list_promo">Podes importare categorias personalizadas, cuare categorias chi non pensas chi ti serbant e mudare s\'òrdine de sa lista. Sa lista podet èssere importada e esportada cun sos profilos.</string>
+    <string name="add_new_custom_category_button_promo">Podes annànghere una categoria personalizada noa ischertende·nde una o unas cantas pagas chi ti serbint.</string>
+    <string name="shared_string_available">Disponìbile</string>
+    <string name="add_custom_category">Annanghe una categoria personalizada</string>
+    <string name="rendering_attr_streetLightingNight_name">Ammustra a de note ebbia</string>
+    <string name="plugin_prefs_reset_successful">As torradu totu sas impostatziones de sas estensiones a s\'istadu predefinidu.</string>
+    <string name="profile_prefs_reset_successful">Totu sas impostatziones de sos profilos sunt torradas a s\'istadu predefinidu.</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="sunset_at">Intrinada a sas %1$s</string>
+    <string name="sunrise_at">Arbèschida a sas %1$s</string>
 </resources>

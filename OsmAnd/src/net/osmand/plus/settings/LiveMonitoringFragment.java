@@ -100,7 +100,7 @@ public class LiveMonitoringFragment extends BaseSettingsFragment {
 		EditTextPreferenceEx liveMonitoringUrl = (EditTextPreferenceEx) findPreference(settings.LIVE_MONITORING_URL.getId());
 		liveMonitoringUrl.setSummary(summary);
 		liveMonitoringUrl.setDescription(R.string.live_monitoring_adress_descr);
-		liveMonitoringUrl.setIcon(getContentIcon(R.drawable.ic_world_globe_dark));
+		liveMonitoringUrl.setIcon(getPersistentPrefIcon(R.drawable.ic_world_globe_dark));
 	}
 
 	private void setupLiveMonitoringIntervalPref() {
@@ -121,7 +121,7 @@ public class LiveMonitoringFragment extends BaseSettingsFragment {
 		ListPreferenceEx liveMonitoringInterval = (ListPreferenceEx) findPreference(settings.LIVE_MONITORING_INTERVAL.getId());
 		liveMonitoringInterval.setEntries(entries);
 		liveMonitoringInterval.setEntryValues(entryValues);
-		liveMonitoringInterval.setIcon(getContentIcon(R.drawable.ic_action_time_span));
+		liveMonitoringInterval.setIcon(getPersistentPrefIcon(R.drawable.ic_action_time_span));
 		liveMonitoringInterval.setDescription(R.string.live_monitoring_interval_descr);
 	}
 
@@ -138,7 +138,7 @@ public class LiveMonitoringFragment extends BaseSettingsFragment {
 		ListPreferenceEx liveMonitoringBuffer = (ListPreferenceEx) findPreference(settings.LIVE_MONITORING_MAX_INTERVAL_TO_SEND.getId());
 		liveMonitoringBuffer.setEntries(entries);
 		liveMonitoringBuffer.setEntryValues(entryValues);
-		liveMonitoringBuffer.setIcon(getContentIcon(R.drawable.ic_action_time_span));
+		liveMonitoringBuffer.setIcon(getPersistentPrefIcon(R.drawable.ic_action_time_span));
 		liveMonitoringBuffer.setDescription(R.string.live_monitoring_max_interval_to_send_desrc);
 	}
 

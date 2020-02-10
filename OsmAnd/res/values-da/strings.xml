@@ -3458,4 +3458,27 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="select_map_icon_descr">Kortikon vises kun på kortet og skifter under navigation til navigationsikon.</string>
     <string name="logcat_buffer_descr">Kontroller og del detaljerede logfiler for programmet</string>
     <string name="permission_is_required">Tilladelse kræves for at bruge denne mulighed.</string>
+    <string name="monitoring_min_speed_descr">Et lavhastighedsafskæringsfilter der ikke registrerer punkter under en bestemt hastighed. Kan få optagne spor til at se jævnere ud, når de ses på kortet.</string>
+    <string name="live_monitoring_time_buffer">Tidsbuffer</string>
+    <string name="live_monitoring_tracking_interval">Sporingsinterval</string>
+    <string name="live_monitoring_adress">Webadresse</string>
+    <string name="monitoring_notification">Meddelelse</string>
+    <string name="monitoring_min_speed">Min. hastighed</string>
+    <string name="monitoring_min_accuracy">Min. nøjagtighed</string>
+    <string name="monitoring_min_distance">Min. forskydning</string>
+    <string name="reset_plugin_to_default">Nulstil indstillingerne for udvidelser til standard</string>
+    <string name="multimedia_rec_split_title">Optagelse automatisk opdelt</string>
+    <string name="multimedia_use_system_camera">Brug systemprogram</string>
+    <string name="osm_authorization_success">Autorisationen lykkes</string>
+    <string name="rearrange_categories">Omarrangere kategorier</string>
+    <string name="create_custom_categories_list_promo">Tilføj brugerdefinerede kategorier, skjul kategorier, som ikke er nødvendige, og ændre sorteringsrækkefølgen på listen. Listen kan importeres og eksporteres med profiler.</string>
+    <string name="add_new_custom_category_button_promo">Tilføj en ny brugerdefineret kategori ved at vælge en eller nogle få nødvendige kategorier.</string>
+    <string name="shared_string_available">Tilgængelig</string>
+    <string name="add_custom_category">Tilføje brugerdefineret kategori</string>
+    <string name="rendering_attr_streetLightingNight_name">Vis kun om natten</string>
+    <string name="plugin_prefs_reset_successful">Alle indstillinger for udvidelser gendannes til standardtilstand.</string>
+    <string name="profile_prefs_reset_successful">Alle profilindstillinger gendannes til standardtilstand.</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="sunset_at">Solnedgang kl. %1$s</string>
+    <string name="sunrise_at">Solopgang kl. %1$s</string>
 </resources>

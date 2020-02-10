@@ -200,7 +200,7 @@
     <string name="poi_antiques">Hendraour</string>
     <string name="poi_volcano_type">Seurt</string>
     <string name="poi_volcano_status">Statud</string>
-    <string name="poi_art">Palier arz</string>
+    <string name="poi_art">Stal dafaroù arz</string>
     <string name="poi_baby_goods">Stal evit ar poupiged</string>
     <string name="poi_bag">Marokinerezh</string>
     <string name="poi_bathroom_furnishing">Stal evit ar salioù-dour</string>
@@ -253,4 +253,20 @@
     <string name="poi_newsagent">Stal-gazetennoù</string>
     <string name="poi_optician">Stal-lunedoù</string>
     <string name="poi_organic">Boued biologel</string>
+    <string name="poi_outdoor">Stal obererezhioù dindan an amzer</string>
+    <string name="poi_paint">Stal livadurioù</string>
+    <string name="poi_pet">Stal loened</string>
+    <string name="poi_photo">Stal luc\'hskeudenniñ</string>
+    <string name="poi_radiotechnics">Stal dafaroù elektronek</string>
+    <string name="poi_second_hand">Stal prenañ eil-dorn</string>
+    <string name="poi_scuba_diving_shop">Stal dafaroù splujañ er mor</string>
+    <string name="poi_ship_chandler">Stal sternajoù</string>
+    <string name="poi_sports">Stal rikoù sport</string>
+    <string name="poi_stationery">Stal-baper</string>
+    <string name="poi_tableware">Stal listri</string>
+    <string name="poi_ticket">Bilhederezh</string>
+    <string name="poi_tobacco">Stal-vutun</string>
+    <string name="poi_toys">Stal c\'hoarielloù</string>
+    <string name="poi_trade">Braswerzher</string>
+    <string name="poi_tyres">Stal-vandennoù rod</string>
 </resources>

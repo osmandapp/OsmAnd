@@ -17,6 +17,7 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
+import net.osmand.StateChangedListener;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
@@ -63,7 +64,9 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	private ApplicationMode applicationMode;
 	@ColorRes
 	private int selectedModeColorId;
+	private boolean currentMuteState;
 	private MapActivity mapActivity;
+	StateChangedListener<Boolean> voiceMuteChangeListener;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -75,6 +78,22 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		mapActivity = getMapActivity();
 		applicationMode = routingHelper.getAppMode();
 		selectedModeColorId = applicationMode.getIconColorInfo().getColor(nightMode);
+		voiceMuteChangeListener = new StateChangedListener<Boolean>() {
+			@Override
+			public void stateChanged(Boolean change) {
+				updateWhenMuteChanged();
+			}
+		};
+	}
+
+	public void updateWhenMuteChanged() {
+		if (app != null) {
+			boolean changedState = app.getSettings().VOICE_MUTE.getModeValue(applicationMode);
+			if (changedState != currentMuteState) {
+				currentMuteState = changedState;
+				updateParameters();
+			}
+		}
 	}
 
 	@Override
@@ -117,6 +136,13 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				itemWithCompoundButton.setChecked(itemWithCompoundButton.isChecked());
 			}
 		}
+		app.getSettings().VOICE_MUTE.addListener(voiceMuteChangeListener);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		app.getSettings().VOICE_MUTE.removeListener(voiceMuteChangeListener);
 	}
 
 	@Override
@@ -154,8 +180,13 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 						routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
 						boolean active = !routingHelper.getVoiceRouter().isMuteForMode(applicationMode);
 						routingHelper.getVoiceRouter().setMuteForMode(applicationMode, active);
-						muteSoundItem[0].setChecked(!active);
-						muteSoundItem[0].setIcon(getContentIcon(!active ? optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));
+						String voiceProvider = app.getSettings().VOICE_PROVIDER.getModeValue(applicationMode);
+						if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
+							mapActivity.showVoiceProviderDialog(applicationMode, false);
+						} else {
+							muteSoundItem[0].setChecked(!active);
+							muteSoundItem[0].setIcon(getContentIcon(!active ? optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));
+						}
 						updateMenu();
 					}
 				})
@@ -475,7 +506,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		optionsMenu.show();
 	}
 
-	private void updateParameters() {
+	public void updateParameters() {
 		Activity activity = getActivity();
 		View mainView = getView();
 		if (activity != null && mainView != null) {

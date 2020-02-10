@@ -567,7 +567,7 @@ public class AppInitializer implements IProgress {
 				return null;
 			}
 		});
-		app.regions.setLocale(app.getLanguage());
+		app.regions.setLocale(app.getLanguage(), app.getCountry());
 	}
 
 
