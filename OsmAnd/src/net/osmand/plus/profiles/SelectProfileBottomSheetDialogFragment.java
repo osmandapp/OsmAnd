@@ -139,7 +139,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 			items.add(new LongDescriptionItem(getString(R.string.select_nav_profile_dialog_message)));
 			for (int i = 0; i < profiles.size(); i++) {
 				final RoutingProfileDataObject profile = (RoutingProfileDataObject) profiles.get(i);
- 				boolean showBottomDivider = false;
+				boolean showBottomDivider = false;
 				if (i < profiles.size() - 1) {
 					RoutingProfileDataObject nextProfile = (RoutingProfileDataObject) profiles.get(i + 1);
 					if (profile.getFileName() == null) { 
