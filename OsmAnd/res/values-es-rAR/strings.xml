@@ -2994,7 +2994,7 @@ Lon %2$s</string>
     <string name="avoid_pt_types_descr">Marca los tipos de transporte público a evitar para la navegación:</string>
     <string name="avoid_pt_types">Evitar tipos de transporte…</string>
     <string name="quick_action_day_night_mode">modo %s</string>
-    <string name="routing_attr_avoid_sett_name">Sin empedrado y adoquinado</string>
+    <string name="routing_attr_avoid_sett_name">Sin empedrado ni adoquinado</string>
     <string name="routing_attr_avoid_sett_description">Evitar las calles empedradas y adoquinadas</string>
     <string name="shared_string_degrees">Grados</string>
     <string name="shared_string_milliradians">Mil angular</string>
@@ -3493,4 +3493,10 @@ Lon %2$s</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Atardecer a las %1$s</string>
     <string name="sunrise_at">Amanecer a las %1$s</string>
+    <string name="reset_to_default_category_button_promo">Restablecer al valor predefinido, restablecerá el orden de clasificación al estado predefinido después de la instalación.</string>
+    <string name="accessibility_mode_disabled">Modo de accesibilidad desactivado en su sistema.</string>
+    <string name="use_system_screen_timeout">Usar el tiempo de espera de la pantalla del sistema</string>
+    <string name="use_system_screen_timeout_promo">Desactivado de forma predefinida, si OsmAnd se ejecuta en primer plano, la pantalla se mantendrá encendida.
+\n
+\nSi se activa, OsmAnd utilizará los ajustes de tiempo de espera del sistema.</string>
 </resources>
