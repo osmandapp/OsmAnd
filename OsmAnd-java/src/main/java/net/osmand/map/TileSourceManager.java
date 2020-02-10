@@ -1,6 +1,5 @@
 package net.osmand.map;
 
-
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.util.Algorithms;

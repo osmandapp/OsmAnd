@@ -29,10 +29,25 @@ import static net.osmand.IndexConstants.TILES_INDEX_DIR;
 
 public class SQLiteTileSource implements ITileSource {
 
-	
 	public static final String EXT = IndexConstants.SQLITE_EXT;
 	private static final Log LOG = PlatformUtil.getLog(SQLiteTileSource.class);
-	
+
+	private static final String MIN_ZOOM = "minzoom";
+	private static final String MAX_ZOOM = "maxzoom";
+	private static final String URL = "url";
+	private static final String RANDOMS = "randoms";
+	private static final String ELLIPSOID = "ellipsoid";
+	private static final String INVERTED_Y = "inverted_y";
+	private static final String REFERER = "referer";
+	private static final String TIME_SUPPORTED = "timesupported";
+	private static final String EXPIRE_MINUTES = "expireminutes";
+
+	private static final String TILES_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS tiles (x INTEGER NOT NULL, y INTEGER NOT NULL, z INTEGER NOT NULL, s INTEGER, image BLOB, time INTEGER, PRIMARY KEY (x, y, z))";
+	private static final String CREATE_INDEX_X = "CREATE INDEX index_tiles_on_x ON tiles (x)";
+	private static final String CREATE_INDEX_Y = "CREATE INDEX index_tiles_on_y ON tiles (y)";
+	private static final String CREATE_INDEX_Z = "CREATE INDEX index_tiles_on_z ON tiles (z)";
+	private static final String CREATE_INDEX_S = "CREATE INDEX index_tiles_on_s ON tiles (s)";
+
 	private ITileSource base;
 	private String urlTemplate = null;
 	private String name;
@@ -55,7 +70,6 @@ public class SQLiteTileSource implements ITileSource {
 	private OsmandApplication ctx;
 	private boolean onlyReadonlyAvailable = false;
 
-	private static final String TILES_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS \"tiles\" (\"x\" INTEGER NOT NULL, \"y\" INTEGER NOT NULL, \"z\" INTEGER NOT NULL, \"s\" INTEGER, \"image\" BLOB, \"time\" INTEGER, PRIMARY KEY (\"x\", \"y\", \"z\"))";
 
 	public SQLiteTileSource(OsmandApplication ctx, File f, List<TileSourceTemplate> toFindUrl){
 		this.ctx = ctx;
@@ -100,20 +114,24 @@ public class SQLiteTileSource implements ITileSource {
 				ctx.getAppPath(TILES_INDEX_DIR).getAbsolutePath() + "/" + name + SQLITE_EXT, true);
 
 		db.execSQL("CREATE TABLE IF NOT EXISTS info (" +
-				"minzoom, " +
-				"maxzoom " +
+				MIN_ZOOM + ", " +
+				MAX_ZOOM +
 				");");
-		db.execSQL("INSERT INTO info (minzoom,maxzoom) VALUES ('" + minZoom + "','" + maxZoom + "');");
+		db.execSQL("INSERT INTO info (" + MIN_ZOOM + "," + MAX_ZOOM + ") VALUES ('" + minZoom + "','" + maxZoom + "');");
 
-		addInfoColumn("url", urlTemplate);
-		addInfoColumn("randoms", randoms);
-		addInfoColumn("ellipsoid", isEllipsoid ? "1" : "0");
-		addInfoColumn("inverted_y", invertedY ? "1" : "0");
-		addInfoColumn("referer", referer);
-		addInfoColumn("timesupported", timeSupported ? "yes" : "no");
-		addInfoColumn("expireminutes", String.valueOf(getExpirationTimeMinutes()));
+		addInfoColumn(URL, urlTemplate);
+		addInfoColumn(RANDOMS, randoms);
+		addInfoColumn(ELLIPSOID, isEllipsoid ? "1" : "0");
+		addInfoColumn(INVERTED_Y, invertedY ? "1" : "0");
+		addInfoColumn(REFERER, referer);
+		addInfoColumn(TIME_SUPPORTED, timeSupported ? "yes" : "no");
+		addInfoColumn(EXPIRE_MINUTES, String.valueOf(getExpirationTimeMinutes()));
 
 		db.execSQL(TILES_TABLE_CREATE);
+		db.execSQL(CREATE_INDEX_X);
+		db.execSQL(CREATE_INDEX_Y);
+		db.execSQL(CREATE_INDEX_Z);
+		db.execSQL(CREATE_INDEX_S);
 		db.close();
 	}
 	
@@ -311,11 +329,11 @@ public class SQLiteTileSource implements ITileSource {
 
 	private void addInfoColumn(String columnName, String value) {
 		if(!onlyReadonlyAvailable) {
-            try {
-                db.execSQL("alter table info add column " + columnName + " TEXT");
-            } catch (SQLException e) {
-                LOG.info("Error adding column " + e);
-            }
+			try {
+				db.execSQL("alter table info add column " + columnName + " TEXT");
+			} catch (SQLException e) {
+				LOG.info("Error adding column " + e);
+			}
 			db.execSQL("update info set "+columnName+" = '"+value+"'");
 		}
 	}
@@ -499,27 +517,27 @@ public class SQLiteTileSource implements ITileSource {
 
 	@Override
 	public String getRule() {
-		return this.rule;
+		return rule;
 	}
 
 	@Override
 	public String getRandoms() {
-		return this.randoms;
+		return randoms;
 	}
 
 	@Override
 	public boolean isInvertedYTile() {
-		return this.invertedY;
+		return invertedY;
 	}
 
 	@Override
 	public boolean isTimeSupported() {
-		return this.timeSupported;
+		return timeSupported;
 	}
 
 	@Override
 	public boolean getInversiveZoom() {
-		return this.inversiveZoom;
+		return inversiveZoom;
 	}
 
 	/**
@@ -608,8 +626,4 @@ public class SQLiteTileSource implements ITileSource {
 	public String getReferer() {
 		return referer;
 	}
-
-
 }
-
-
