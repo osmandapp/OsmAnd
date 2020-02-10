@@ -387,7 +387,7 @@ public class OsmandRegions {
 		if("zh".equals(locale)) {
 			if("TW".equalsIgnoreCase(country)) {
 				this.locale2 = "zh-hant";
-			} else {
+			} else if("CN".equalsIgnoreCase(country)) {
 				this.locale2 = "zh-hans";
 			}
 		}
@@ -611,7 +611,8 @@ public class OsmandRegions {
 	public static void main(String[] args) throws IOException {
 		OsmandRegions or = new OsmandRegions();
 		Locale tw = Locale.CHINA;
-		or.setLocale(tw.getLanguage(), tw.getCountry());
+		or.setLocale(tw.getLanguage(), null);
+//		or.setLocale(tw.getLanguage(), tw.getCountry());
 		or.prepareFile("/Users/victorshcherb/osmand/repos/resources/countries-info/regions.ocbf");
 		LinkedList<WorldRegion> lst = new LinkedList<WorldRegion>();
 		lst.add(or.getWorldRegion());
