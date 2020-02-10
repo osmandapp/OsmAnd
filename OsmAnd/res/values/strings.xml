@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="copy_coordinates">Copy coordinates</string>
     <string name="reset_to_default_category_button_promo">Reset to default will reset sort order to the default state after installation.</string>
     <string name="use_system_screen_timeout">Use system screen timeout</string>
     <string name="use_system_screen_timeout_promo">Disabled by default, if OsmAnd running on foreground, the screen doesn’t time out.\n\nIf enabled OsmAnd will use system timeout settings.</string>
