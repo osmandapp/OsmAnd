@@ -63,6 +63,8 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
 
     private static final String STATE_KEY = "EXPORT_IMPORT_DIALOG_STATE_KEY";
 
+    private static final String INCLUDE_ADDITIONAL_DATA_KEY = "INCLUDE_ADDITIONAL_DATA_KEY";
+
     private boolean includeAdditionalData = false;
 
     private boolean containsAdditionalData = false;
@@ -89,6 +91,9 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            includeAdditionalData = savedInstanceState.getBoolean(INCLUDE_ADDITIONAL_DATA_KEY);
+        }
         super.onCreate(savedInstanceState);
         app = requiredMyApplication();
         Bundle bundle = getArguments();
@@ -96,6 +101,12 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
             this.state = (State) getArguments().getSerializable(STATE_KEY);
         }
         if (state == State.IMPORT) {
+            if (settingsItems == null) {
+                settingsItems = app.getSettingsHelper().getSettingsItems();
+            }
+            if (file == null) {
+                file = app.getSettingsHelper().getSettingsFile();
+            }
             containsAdditionalData = checkAdditionalDataContains();
         } else {
             dataList = getAdditionalData();
@@ -103,6 +114,12 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
                 dataToOperate.addAll(dataWrapper.getItems());
             }
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(INCLUDE_ADDITIONAL_DATA_KEY, includeAdditionalData);
     }
 
     @Override
@@ -150,7 +167,7 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
             listView = additionalDataView.findViewById(R.id.list);
             SwitchCompat switchItem = additionalDataView.findViewById(R.id.switchItem);
             switchItem.setTextColor(getResources().getColor(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
-
+            switchItem.setChecked(includeAdditionalData);
             switchItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -163,8 +180,8 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
                     setupHeightAndBackground(getView());
                 }
             });
-
-            adapter = new ProfileAdditionalDataAdapter(requiredMyApplication(), dataList, profileColor);
+            listView.setVisibility(includeAdditionalData ? View.VISIBLE : View.GONE);
+            adapter = new ProfileAdditionalDataAdapter(app, dataList, profileColor);
             listView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
                 @Override
                 public void onGroupExpand(int i) {
@@ -398,7 +415,11 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
         app.getSettingsHelper().importSettings(file, list, "", 1, new SettingsHelper.SettingsImportListener() {
             @Override
             public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
-
+                if (succeed) {
+                    app.showShortToastMessage(app.getString(R.string.file_imported_successfully, file.getName()));
+                } else if (empty){
+                    app.showShortToastMessage(app.getString(R.string.file_import_error, file.getName(), app.getString(R.string.shared_string_unexpected_error)));
+                }
             }
         });
         dismiss();

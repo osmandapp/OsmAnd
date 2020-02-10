@@ -1,6 +1,6 @@
 package net.osmand.plus;
 
-import android.content.ContentValues;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDiskIOException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -23,7 +23,6 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.List;
 
-import static net.osmand.IndexConstants.APP_DIR;
 import static net.osmand.IndexConstants.SQLITE_EXT;
 import static net.osmand.IndexConstants.TILES_INDEX_DIR;
 
@@ -312,7 +311,11 @@ public class SQLiteTileSource implements ITileSource {
 
 	private void addInfoColumn(String columnName, String value) {
 		if(!onlyReadonlyAvailable) {
-			db.execSQL("alter table info add column "+columnName+" TEXT");
+            try {
+                db.execSQL("alter table info add column " + columnName + " TEXT");
+            } catch (SQLException e) {
+                LOG.info("Error adding column " + e);
+            }
 			db.execSQL("update info set "+columnName+" = '"+value+"'");
 		}
 	}

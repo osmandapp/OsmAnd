@@ -20,6 +20,7 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.plus.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionFactory;
@@ -93,6 +94,7 @@ public class SettingsHelper {
 
 	private boolean importing;
 	private boolean importSuspended;
+	private boolean collectOnly;
 	private ImportAsyncTask importTask;
 
 	public interface SettingsImportListener {
@@ -113,7 +115,7 @@ public class SettingsHelper {
 
 	public void setActivity(Activity activity) {
 		this.activity = activity;
-		if (importing) {
+		if (importing && !collectOnly) {
 			importTask.processNextItem();
 		}
 	}
@@ -762,7 +764,7 @@ public class SettingsHelper {
 					}
 				}
 				newActions.addAll(quickActions);
-				getSettings().QUICK_ACTION_LIST.set(factory.quickActionListToString(newActions));
+				((MapActivity) app.getSettingsHelper().getActivity()).getMapLayers().getQuickActionRegistry().updateQuickActions(newActions);
 			}
 		}
 
@@ -1373,7 +1375,6 @@ public class SettingsHelper {
 		private File file;
 		private String latestChanges;
 		private int version;
-		private boolean collectOnly;
 
 		private SettingsImportListener listener;
 		private SettingsImporter importer;
@@ -1429,10 +1430,10 @@ public class SettingsHelper {
 
 		@Override
 		protected void onPostExecute(List<SettingsItem> items) {
+			this.items = items;
 			if (collectOnly) {
 				listener.onSettingsImportFinished(true, false, items);
 			} else {
-				this.items = items;
 				if (items != null && items.size() > 0) {
 					processNextItem();
 				}
@@ -1528,6 +1529,24 @@ public class SettingsHelper {
 			processedItems.add(item);
 			processNextItem();
 		}
+
+		public List<SettingsItem> getItems() {
+			return this.items;
+		}
+
+		public File getFile() {
+			return this.file;
+		}
+	}
+
+	@Nullable
+	public List<SettingsItem> getSettingsItems() {
+		return this.importTask.getItems();
+	}
+
+	@Nullable
+	public File getSettingsFile() {
+		return this.importTask.getFile();
 	}
 
 	@SuppressLint("StaticFieldLeak")
