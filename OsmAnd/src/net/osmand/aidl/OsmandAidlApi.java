@@ -1119,7 +1119,7 @@ public class OsmandAidlApi {
 
 	@SuppressLint("StaticFieldLeak")
 	private void finishGpxImport(boolean destinationExists, File destination, String color, boolean show) {
-		int col = ConfigureMapMenu.GpxAppearanceAdapter.parseTrackColor(
+		final int col = ConfigureMapMenu.GpxAppearanceAdapter.parseTrackColor(
 				app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 		if (!destinationExists) {
 			GpxDataItem gpxDataItem = new GpxDataItem(destination, col);
@@ -1145,6 +1145,9 @@ public class OsmandAidlApi {
 					@Override
 					protected void onPostExecute(GPXFile gpx) {
 						if (gpx.error == null) {
+							if (col != -1) {
+								gpx.setColor(col);
+							}
 							selectedGpx.setGpxFile(gpx, app);
 							refreshMap();
 						}
