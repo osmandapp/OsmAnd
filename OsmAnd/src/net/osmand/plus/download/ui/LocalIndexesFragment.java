@@ -23,6 +23,7 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -252,7 +253,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					getDownloadActivity().reloadLocalIndexes();
 					return true;
 				}
-					}, info.getName());
+					}, info.getFileName());
 		} else if (resId == R.string.local_index_mi_restore) {
 			new LocalIndexOperationTask(getDownloadActivity(), listAdapter, LocalIndexOperationTask.RESTORE_OPERATION).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, info);
 		} else if (resId == R.string.shared_string_delete) {
@@ -1237,7 +1238,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			}
 		});
 		if (info.getType() == LocalIndexType.TILES_DATA
-				&& (info.getAttachedObject() instanceof TileSourceManager.TileSourceTemplate)) {
+				&& ((info.getAttachedObject() instanceof TileSourceManager.TileSourceTemplate)
+				|| ((info.getAttachedObject() instanceof SQLiteTileSource)
+				&& ((SQLiteTileSource) info.getAttachedObject()).couldBeDownloadedFromInternet()))) {
 			item = optionsMenu.getMenu().add(R.string.shared_string_edit)
 					.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark));
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {

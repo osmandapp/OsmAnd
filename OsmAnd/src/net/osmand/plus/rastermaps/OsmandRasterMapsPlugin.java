@@ -36,6 +36,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.LayerTransparencySeekbarMode;
 import net.osmand.plus.R;
+import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.DownloadTilesDialog;
@@ -478,10 +479,11 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		t.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public static void defineNewEditLayer(final Activity activity, final ResultMatcher<TileSourceTemplate> resultMatcher, String editedLayerName) {
+	public static void defineNewEditLayer(final Activity activity, final ResultMatcher<TileSourceTemplate> resultMatcher, final String editedLayerName) {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final OsmandSettings settings = app.getSettings();
-		final Map<String, String> entriesMap = settings.getTileSourceEntries(false);
+		final Map<String, String> entriesMap = settings.getTileSourceEntries(true);
+		final SQLiteTileSource[] sqLiteTileSource = new SQLiteTileSource[1];
 		boolean nightMode = isNightMode(activity, app);
 		final int dp8 = AndroidUtils.dpToPx(app, 8f);
 		int textColorPrimary = ContextCompat.getColor(app, nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
@@ -512,10 +514,25 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		existing.setAdapter(adapter);
+		TileSourceTemplate template;
 		if (editedLayerName != null) {
-			File f = ((OsmandApplication) activity.getApplication()).getAppPath(
-					IndexConstants.TILES_INDEX_DIR + editedLayerName);
-			TileSourceTemplate template = TileSourceManager.createTileSourceTemplate(f);
+			if (!editedLayerName.endsWith(IndexConstants.SQLITE_EXT)) {
+				File f = ((OsmandApplication) activity.getApplication()).getAppPath(
+						IndexConstants.TILES_INDEX_DIR + editedLayerName);
+				template = TileSourceManager.createTileSourceTemplate(f);
+			} else {
+				List<TileSourceTemplate> knownTemplates = TileSourceManager.getKnownSourceTemplates();
+				File tPath = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
+				File dir = new File(tPath, editedLayerName);
+				sqLiteTileSource[0] = new SQLiteTileSource(app, dir, knownTemplates);
+				sqLiteTileSource[0].couldBeDownloadedFromInternet();
+				template = new TileSourceManager.TileSourceTemplate(sqLiteTileSource[0].getName(),
+						sqLiteTileSource[0].getUrlTemplate(), "png", sqLiteTileSource[0].getMaximumZoomSupported(),
+						sqLiteTileSource[0].getMinimumZoomSupported(), sqLiteTileSource[0].getTileSize(),
+						sqLiteTileSource[0].getBitDensity(), 32000);
+				template.setExpirationTimeMinutes(sqLiteTileSource[0].getExpirationTimeMinutes());
+				template.setEllipticYTile(sqLiteTileSource[0].isEllipticYTile());
+			}
 			if (template != null) {
 				result[0] = template.copy();
 				updateTileSourceEditView(result[0], name, urlToLoad, minZoom, maxZoom, expire, elliptic);
@@ -558,11 +575,15 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 					r.setEllipticYTile(elliptic.isChecked());
 					r.setUrlToLoad(urlToLoad.getText().toString().equals("") ? null : urlToLoad.getText().toString().replace("{$x}", "{1}")
 							.replace("{$y}", "{2}").replace("{$z}", "{0}"));
-					if (r.getName().length() > 0) {
-						if (settings.installTileSource(r)) {
-							Toast.makeText(activity, activity.getString(R.string.edit_tilesource_successfully, r.getName()),
-									Toast.LENGTH_SHORT).show();
-							resultMatcher.publish(r);
+					if (sqLiteTileSource[0] != null) {
+						sqLiteTileSource[0].updateFromTileSourceTemplate(r);
+					} else {
+						if (r.getName().length() > 0) {
+							if (settings.installTileSource(r)) {
+								Toast.makeText(activity, activity.getString(R.string.edit_tilesource_successfully, r.getName()),
+										Toast.LENGTH_SHORT).show();
+								resultMatcher.publish(r);
+							}
 						}
 					}
 				} catch (RuntimeException e) {
