@@ -92,7 +92,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 	private GeometryWayContext wayContext;
 
 	private LayerDrawable projectionIcon;
-
+	private final static Log log = PlatformUtil.getLog(RouteLayer.class);
 	public RouteLayer(RoutingHelper helper) {
 		this.helper = helper;
 		this.transportHelper = helper.getTransportRoutingHelper();
@@ -841,7 +841,6 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			return simplifyPoints;
 		}
 	}
-	private final static Log log = PlatformUtil.getLog(RouteLayer.class);
 
 	private class RouteSimplificationGeometry {
 		RouteCalculationResult route;
@@ -1105,7 +1104,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			RouteCalculationResult route = helper.getRoute();
 			routeGeometry.clearTransportRoute();
 			routeGeometry.updateRoute(tb, route);
-			if (helper.getRoute().isShowOriginalRoute()) {
+			if (helper.getRoute().isShowOriginalRoute() && helper.getOriginalStartingLocation() != null) {
 				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
 						helper.getOriginalStartingLocation(),  route == null ? 0 : route.getCurrentRoute(), true);
 			} else {
@@ -1121,11 +1120,9 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			}
 			if (helper.getRoute().isShowOriginalRoute()) {
 				//add projection point on original route
-
 				double[] projectionOnRoute = calculateProjectionOnRoutePoint(helper.getLastProjection(),
 						helper.getOriginalRouteAllLoc(), helper.getRoute().getCurrentRoute(), tb);
 				if (projectionOnRoute != null) {
-				log.debug("Draw projection");
 					drawProjectionPoint(tb, canvas, projectionOnRoute);
 				}
 			}
@@ -1133,26 +1130,36 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 	}
 	
 	private double[] calculateProjectionOnRoutePoint(Location lastProjection, List<Location> routeNodes, int cd, RotatedTileBox box) {
-
-		double[] projectionXY = new double[2];
-		boolean visible = false;
-		if (cd < routeNodes.size() - 1) {
-			Location previousInRoute = routeNodes.get(cd);
-			Location nextInRoute = routeNodes.get(cd + 1);
-			int centerX = box.getPixXFromLonNoRot(nextInRoute.getLongitude());
-			int centerY = box.getPixYFromLatNoRot(nextInRoute.getLatitude());
-			int aX = box.getPixXFromLonNoRot(lastProjection.getLongitude());
-			int aY = box.getPixYFromLatNoRot(lastProjection.getLatitude());
-			int bX = box.getPixXFromLonNoRot(previousInRoute.getLongitude());
-			int bY = box.getPixYFromLatNoRot(previousInRoute.getLatitude());
-
-			double radius = MapUtils.getVectorMagnitude(centerX, centerY, aX, aY);
-			double angle2 = MapUtils.getAngleForRadiusVector(centerX, centerY, bX, bY);
-			projectionXY = MapUtils.getCoordinatesFromRadiusAndAngle(centerX, centerY, radius, angle2);
-			log.debug("Projection: " + projectionXY[0] + ", " + projectionXY[1]);
-			visible = box.containsPoint((float)projectionXY[0], (float)projectionXY[1], 20.0f)
-					&& Math.abs(Math.toDegrees(MapUtils.getAngleBetweenVectors(centerX, centerY, aX, aY, centerX, centerY, bX, bY))) < 90;
+		log.debug("cd: " + cd);
+		double[] projectionXY;
+		boolean visible;
+		Location previousInRoute;
+		Location nextInRoute;
+		//need to change this code by fixing helper.route.getCurrentRoute() miscalculation
+		if (cd == 0) {
+			previousInRoute = routeNodes.get(cd);
+			nextInRoute = routeNodes.get(cd + 1);
+		} else if (cd == routeNodes.size() - 1) {
+			previousInRoute = routeNodes.get(cd - 1);
+			nextInRoute = routeNodes.get(cd);
+		} else {
+			previousInRoute = routeNodes.get(cd);
+			nextInRoute = routeNodes.get(cd + 1);
 		}
+		int centerX = box.getPixXFromLonNoRot(nextInRoute.getLongitude());
+		int centerY = box.getPixYFromLatNoRot(nextInRoute.getLatitude());
+		int aX = box.getPixXFromLonNoRot(lastProjection.getLongitude());
+		int aY = box.getPixYFromLatNoRot(lastProjection.getLatitude());
+		int bX = box.getPixXFromLonNoRot(previousInRoute.getLongitude());
+		int bY = box.getPixYFromLatNoRot(previousInRoute.getLatitude());
+
+		double radius = MapUtils.getVectorMagnitude(centerX, centerY, aX, aY);
+		double angle2 = MapUtils.getAngleForRadiusVector(centerX, centerY, bX, bY);
+		projectionXY = MapUtils.getCoordinatesFromRadiusAndAngle(centerX, centerY, radius, angle2);
+//		log.debug("Projection: " + projectionXY[0] + ", " + projectionXY[1]);
+		visible = box.containsPoint((float)projectionXY[0], (float)projectionXY[1], 20.0f)
+				&& Math.abs(Math.toDegrees(MapUtils.getAngleBetweenVectors(centerX, centerY, aX, aY, centerX, centerY, bX, bY))) < 90;
+
 		if (visible) {
 			return projectionXY;
 		} else {
