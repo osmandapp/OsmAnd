@@ -1135,7 +1135,6 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		Location previousInRoute = null;
 		Location nextInRoute = null;
 		//need to change this code by fixing helper.route.getCurrentRoute() miscalculation
-		log.debug("intermediates: " + helper.getIntermediatePoints());
 		if (helper.getRoute().getIntermediatePointsToPass() > 0) {
 			for (int i = 1; i < routeNodes.size(); i++) {
 				LatLon routePoint = new LatLon(routeNodes.get(i).getLatitude(), routeNodes.get(i).getLongitude());
@@ -1159,7 +1158,6 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		double radius = MapUtils.getVectorMagnitude(centerX, centerY, aX, aY);
 		double angle2 = MapUtils.getAngleForRadiusVector(centerX, centerY, bX, bY);
 		projectionXY = MapUtils.getCoordinatesFromRadiusAndAngle(centerX, centerY, radius, angle2);
-		log.debug("Projection: " + projectionXY[0] + ", " + projectionXY[1]);
 		visible = box.containsPoint((float)projectionXY[0], (float)projectionXY[1], 20.0f)
 				&& Math.abs(Math.toDegrees(MapUtils.getAngleBetweenVectors(centerX, centerY, aX, aY, centerX, centerY, bX, bY))) < 90;
 
