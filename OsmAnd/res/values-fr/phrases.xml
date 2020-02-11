@@ -240,7 +240,7 @@
     <string name="poi_ngo">ONG</string>
     <string name="poi_nightclub">Boite de nuit; Boîte de nuit</string>
     <string name="poi_optician">Opticien</string>
-    <string name="poi_organic">Nourriture biologique</string>
+    <string name="poi_organic">Produits biologiques</string>
     <string name="poi_orienteering">Course d\'orientation</string>
     <string name="poi_outdoor">Magasin d\'activités de plein air</string>
     <string name="poi_paddle_tennis">Paddel-tennis</string>
@@ -3771,4 +3771,19 @@
     <string name="poi_volcano_status_active">Actif</string>
     <string name="poi_volcano_status_inactive">Inactif</string>
     <string name="poi_volcano_number_of_eruptions">Nombre d’éruptions</string>
+    <string name="poi_charge">Chargeur</string>
+    <string name="poi_cash_withdrawal_postbank">Banque postale</string>
+    <string name="poi_bath_type_foot_bath">Bain de pieds</string>
+    <string name="poi_monastery_type_hermitage">Type de monastère : ermitage</string>
+    <string name="poi_tourist_camp">Camp touristique</string>
+    <string name="poi_community_gender_female">Genre communautaire : femme</string>
+    <string name="poi_community_gender_male">Genre communautaire : homme</string>
+    <string name="poi_community_gender_mixed">Genre communautaire : mixte</string>
+    <string name="poi_volcano_type_scoria">Scories</string>
+    <string name="poi_paintball">Paintball</string>
+    <string name="poi_volcano_type_mud">Boue</string>
+    <string name="poi_mountain_rescue">Sauvetage en montagne</string>
+    <string name="poi_bowling_alley">Bowling</string>
+    <string name="poi_piste_ref">Numéro de piste</string>
+    <string name="poi_resort_hunting">Base de chasse</string>
 </resources>

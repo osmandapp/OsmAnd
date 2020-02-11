@@ -3492,4 +3492,7 @@ Lon %2$s</string>
     <string name="use_system_screen_timeout_promo">Standardmäßig deaktiviert, wenn OsmAnd im Vordergrund läuft, wird der Bildschirm nicht ausgeblendet.
 \n
 \nWenn aktiviert, verwendet OsmAnd das Zeitlimit für den Systembildschirm.</string>
+    <string name="live_monitoring">Online-Aufzeichnung</string>
+    <string name="clear_recorded_data">Aufgezeichnete Daten löschen</string>
+    <string name="copy_coordinates">Koordinaten kopieren</string>
 </resources>
