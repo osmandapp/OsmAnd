@@ -1239,7 +1239,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		});
 		if (info.getType() == LocalIndexType.TILES_DATA
 				&& ((info.getAttachedObject() instanceof TileSourceManager.TileSourceTemplate)
-				|| (info.getAttachedObject() instanceof SQLiteTileSource))) {
+				|| ((info.getAttachedObject() instanceof SQLiteTileSource)
+				&& ((SQLiteTileSource) info.getAttachedObject()).couldBeDownloadedFromInternet()))) {
 			item = optionsMenu.getMenu().add(R.string.shared_string_edit)
 					.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark));
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
