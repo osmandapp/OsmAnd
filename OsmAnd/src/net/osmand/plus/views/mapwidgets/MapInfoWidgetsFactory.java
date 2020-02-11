@@ -102,7 +102,7 @@ public class MapInfoWidgetsFactory {
 				Location loc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
 				if (loc != null && loc.hasAltitude()) {
 					double compAlt = loc.getAltitude();
-					if (cachedAlt != (int) compAlt) {
+					if (isUpdateNeeded() || cachedAlt != (int) compAlt) {
 						cachedAlt = (int) compAlt;
 						String ds = OsmAndFormatter.getFormattedAlt(cachedAlt, map.getMyApplication());
 						int ls = ds.lastIndexOf(' ');
@@ -120,6 +120,11 @@ public class MapInfoWidgetsFactory {
 				}
 				return false;
 			}
+
+			@Override
+			public boolean isMetricSystemDepended() {
+				return true;
+			}
 		};
 		altitudeControl.setText(null, null);
 		altitudeControl.setIcons(R.drawable.widget_altitude_day, R.drawable.widget_altitude_night);
@@ -136,7 +141,7 @@ public class MapInfoWidgetsFactory {
 			@Override
 			public boolean updateInfo(DrawSettings d) {
 				GPSInfo gpsInfo = loc.getGPSInfo();
-				if (gpsInfo.usedSatellites != u || gpsInfo.foundSatellites != f) {
+				if (isUpdateNeeded() || gpsInfo.usedSatellites != u || gpsInfo.foundSatellites != f) {
 					u = gpsInfo.usedSatellites;
 					f = gpsInfo.foundSatellites;
 					setText(gpsInfo.usedSatellites + "/" + gpsInfo.foundSatellites, "");

@@ -3,6 +3,7 @@ package net.osmand.plus.settings;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
@@ -18,6 +19,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.ListPreference;
@@ -730,7 +732,19 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	protected Drawable getPersistentPrefIcon(@DrawableRes int iconId) {
 		Drawable disabled = UiUtilities.createTintedDrawable(app, iconId, ContextCompat.getColor(app, R.color.icon_color_default_light));
 		Drawable enabled = UiUtilities.createTintedDrawable(app, iconId, getActiveProfileColor());
-		return AndroidUtils.createEnabledStateListDrawable(disabled, enabled);
+		return getPersistentPrefIcon(enabled, disabled);
+	}
+
+	protected Drawable getPersistentPrefIcon(Drawable enabled, Drawable disabled) {
+		Drawable icon = AndroidUtils.createEnabledStateListDrawable(disabled, enabled);
+
+		if (Build.VERSION.SDK_INT < 21) {
+			ColorStateList colorStateList = AndroidUtils.createEnabledColorStateList(app, R.color.icon_color_default_light, getActiveProfileColorRes());
+			icon = DrawableCompat.wrap(icon);
+			DrawableCompat.setTintList(icon, colorStateList);
+			return icon;
+		}
+		return icon;
 	}
 
 	public SwitchPreferenceCompat createSwitchPreference(OsmandSettings.OsmandPreference<Boolean> b, int title, int summary, int layoutId) {

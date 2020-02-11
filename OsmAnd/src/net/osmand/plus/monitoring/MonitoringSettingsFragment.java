@@ -9,7 +9,6 @@ import android.support.v7.preference.Preference;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandPlugin;
@@ -222,7 +221,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	private void setupLiveMonitoringPref() {
 		Drawable disabled = getContentIcon(R.drawable.ic_action_offline);
 		Drawable enabled = getActiveIcon(R.drawable.ic_world_globe_dark);
-		Drawable icon = AndroidUtils.createEnabledStateListDrawable(disabled, enabled);
+		Drawable icon = getPersistentPrefIcon(enabled, disabled);
 
 		SwitchPreferenceEx liveMonitoring = (SwitchPreferenceEx) findPreference(settings.LIVE_MONITORING.getId());
 		liveMonitoring.setDescription(getString(R.string.live_monitoring_m_descr));

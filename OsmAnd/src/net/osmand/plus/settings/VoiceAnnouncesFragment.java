@@ -32,6 +32,7 @@ import net.osmand.plus.settings.preferences.ListPreferenceEx;
 
 import java.util.Set;
 
+import static net.osmand.plus.OsmandSettings.VOICE_PROVIDER_NOT_USE;
 import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
 import static net.osmand.plus.activities.SettingsNavigationActivity.MORE_VALUE;
 
@@ -174,7 +175,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 
 		Drawable disabled = getContentIcon(R.drawable.ic_action_volume_mute);
 		Drawable enabled = getActiveIcon(R.drawable.ic_action_volume_up);
-		Drawable icon = AndroidUtils.createEnabledStateListDrawable(disabled, enabled);
+		Drawable icon = getPersistentPrefIcon(enabled, disabled);
 
 		ListPreferenceEx voiceProvider = (ListPreferenceEx) findPreference(settings.VOICE_PROVIDER.getId());
 		voiceProvider.setEntries(entries);
@@ -239,11 +240,14 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
 		if (settings.VOICE_PROVIDER.getId().equals(preference.getKey()) && preference instanceof ListPreferenceEx) {
+			TextView titleView = (TextView) holder.findViewById(android.R.id.title);
+			if (titleView != null) {
+				titleView.setTextColor(preference.isEnabled() ? getActiveTextColor() : getDisabledTextColor());
+			}
 			ImageView imageView = (ImageView) holder.findViewById(android.R.id.icon);
 			if (imageView != null) {
 				Object currentValue = ((ListPreferenceEx) preference).getValue();
-				boolean enabled = preference.isEnabled() && !OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(currentValue);
-				imageView.setEnabled(enabled);
+				imageView.setEnabled(preference.isEnabled() && !OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(currentValue));
 			}
 		}
 	}
@@ -262,6 +266,11 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 				startActivity(intent);
 				return false;
 			} else if (newValue instanceof String) {
+				if (VOICE_PROVIDER_NOT_USE.equals(newValue)) {
+					settings.VOICE_MUTE.setModeValue(selectedMode, true);
+					updateToolbar();
+					setupPreferences();
+				}
 				settings.VOICE_PROVIDER.setModeValue(selectedMode, (String) newValue);
 				app.initVoiceCommandPlayer(getActivity(), selectedMode, false, null, true, false, false);
 			}

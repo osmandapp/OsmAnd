@@ -9,7 +9,6 @@ import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.widget.ImageView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -391,7 +390,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			case GeneralRouter.ALLOW_MOTORWAYS:
 				Drawable disabled = getContentIcon(R.drawable.ic_action_avoid_motorways);
 				Drawable enabled = getActiveIcon(R.drawable.ic_action_motorways);
-				return AndroidUtils.createEnabledStateListDrawable(disabled, enabled);
+				return getPersistentPrefIcon(enabled, disabled);
 			case GeneralRouter.USE_HEIGHT_OBSTACLES:
 			case RELIEF_SMOOTHNESS_FACTOR:
 				return getPersistentPrefIcon(R.drawable.ic_action_elevation);

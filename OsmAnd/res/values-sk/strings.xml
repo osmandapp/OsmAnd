@@ -2349,9 +2349,9 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="analyze_on_map">Analyzovať na mape</string>
     <string name="shared_string_visible">Viditeľné</string>
     <string name="quick_action_auto_zoom">Automatické priblíženie mapy zap/vyp</string>
-    <string name="quick_action_auto_zoom_desc">Prepínač pre zapnutie/vypnutie automatického priblíženia mapy podľa vašej rýchlosti.</string>
-    <string name="quick_action_auto_zoom_on">Zapnúť automatické priblíženie mapy</string>
-    <string name="quick_action_auto_zoom_off">Vypnúť automatické priblíženie mapy</string>
+    <string name="quick_action_auto_zoom_desc">Tlačidlo pre zapnutie alebo vypnutie automatického priblíženia mapy podľa vašej rýchlosti.</string>
+    <string name="quick_action_auto_zoom_on">Zapnúť automatické približovanie</string>
+    <string name="quick_action_auto_zoom_off">Vypnúť automatické približovanie</string>
     <string name="quick_action_add_destination">Zadať cieľ</string>
     <string name="quick_action_replace_destination">Nahradiť cieľ</string>
     <string name="quick_action_add_first_intermediate">Pridať prvý prechodný bod</string>
@@ -2392,10 +2392,10 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="srtm_menu_download_descr">Stiahnite mapu \"Vrstevnice\" pre tento región.</string>
     <string name="sorted_by_distance">Zoradené podľa vzdialenosti</string>
     <string name="search_favorites">Hľadať v Obľúbených bodoch</string>
-    <string name="quick_action_showhide_osmbugs_title">Prepnúť OSM poznámky</string>
+    <string name="quick_action_showhide_osmbugs_title">Zobraziť alebo skryť OSM poznámky</string>
     <string name="quick_action_osmbugs_show">Zobraziť OSM poznámky</string>
     <string name="quick_action_osmbugs_hide">Skryť OSM poznámky</string>
-    <string name="quick_action_showhide_osmbugs_descr">Prepínač zobrazenia alebo skrytia OSM Poznámok na mape.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Tlačidlo pre zobrazenie alebo skrytie OSM poznámok na mape.</string>
     <string name="private_access_routing_req">Váš cieľ je v oblasti so súkromným prístupom. Povoliť vstup na súkromné cesty pre tento výlet\?</string>
     <string name="restart_search">Znovu začať hľadanie</string>
     <string name="increase_search_radius">Zväčšiť okruh hľadania</string>
@@ -2440,10 +2440,10 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="moving_time">Trvanie presunu</string>
     <string name="max_min">Max/Min</string>
     <string name="quick_action_resume_pause_navigation">Pozastaviť/pokračovať navigáciu</string>
-    <string name="quick_action_resume_pause_navigation_descr">Použite toto tlačidlo pre pozastavenie alebo obnovenie navigácie.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Tlačidlo pre pozastavenie alebo pokračovanie navigácie.</string>
     <string name="quick_action_show_navigation_finish_dialog">Zobraziť správu \"Navigácia ukončená\"</string>
     <string name="quick_action_start_stop_navigation">Spustiť/Ukončiť navigáciu</string>
-    <string name="quick_action_start_stop_navigation_descr">Použite toto tlačidlo pre spustenie alebo ukončenie navigácie.</string>
+    <string name="quick_action_start_stop_navigation_descr">Tlačidlo pre spustenie alebo ukončenie navigácie.</string>
     <string name="rendering_value_translucent_pink_name">Priehľadná ružová</string>
     <string name="min_max">Min/Max</string>
     <string name="live_monitoring_max_interval_to_send">Časový zásobník pre online sledovanie</string>
@@ -2482,7 +2482,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="move_point">Presunúť bod</string>
     <string name="add_segment_to_the_track">Pridať do súboru GPX</string>
     <string name="do_not_use_animations">Žiadne animácie</string>
-    <string name="do_not_use_animations_descr">Vypnúť animácie v aplikácii.</string>
+    <string name="do_not_use_animations_descr">Vypne animácie mapy.</string>
     <string name="keep_showing_on_map">Zobrazovať ďalej na mape</string>
     <string name="exit_without_saving">Ukončiť bez uloženia?</string>
     <string name="move_all_to_history">Presunúť všetko do histórie</string>
@@ -2589,7 +2589,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="one_tap_active_descr">Potlačte značku na mape na jej presunutie na prvé miesto v aktívnych značkách bez otvárania kontextového menu.</string>
     <string name="empty_state_av_notes">Urobte poznámky!</string>
     <string name="empty_state_av_notes_desc">Pridajte zvukové, video alebo fotografické poznámky ku každému bodu na mape, pomocou nástroja alebo kontextového menu.</string>
-    <string name="notes_by_date">Poznámky podľa dátumu</string>
+    <string name="notes_by_date">OSM poznámky podľa dátumu</string>
     <string name="by_date">Podľa dátumu</string>
     <string name="by_type">Podľa typu</string>
     <string name="one_tap_active">\"Jedno stlačenie\" aktívne</string>
@@ -2637,11 +2637,11 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="show_closed_notes">Zobraziť uzavreté poznámky</string>
     <string name="switch_osm_notes_visibility_desc">Zobraziť/skryť OSM poznámky na mape.</string>
     <string name="gpx_file_desc">GPX - vhodné na export do JOSM a iných editorov OSM.</string>
-    <string name="osc_file_desc">OSC - vhodné na export do OpenStreetMap.</string>
+    <string name="osc_file_desc">OSC - vhodné na export do OSM.</string>
     <string name="shared_string_gpx_file">Súbor GPX</string>
     <string name="osc_file">Súbor OSC</string>
     <string name="choose_file_type">Zvoľte typ súboru</string>
-    <string name="osm_edits_export_desc">Vyberte typ exportu: OSM poznámky, body záujmu alebo obe.</string>
+    <string name="osm_edits_export_desc">Exportovať ako OSM poznámky, body záujmu alebo obe.</string>
     <string name="all_data">Všetky údaje</string>
     <string name="osm_notes">OSM poznámky</string>
     <string name="tunnel_warning">Blíži sa tunel</string>
@@ -2841,7 +2841,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="osm_live_payment_renews_annually">Obnovuje sa ročne</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Interval platieb:</string>
-    <string name="osm_live_payment_contribute_descr">Príspevky pomáhajú financovať tvorbu máp OpenStreetMap.</string>
+    <string name="osm_live_payment_contribute_descr">Príspevky pomáhajú financovať tvorbu máp OSM.</string>
     <string name="osm_live_subscriptions">Predplatné</string>
     <string name="mapillary_menu_title_pano">Zobraziť iba 360° obrázky</string>
     <string name="powered_by_osmand">Od OsmAnd</string>
@@ -2913,7 +2913,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="exit_at">Vystúpte na</string>
     <string name="sit_on_the_stop">Nastúpte na zastávke</string>
     <string name="quick_action_show_hide_gpx_tracks">Zobraziť/skryť GPX stopy</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Prepínač na zobrazenie alebo skrytie zvolených stôp GPX na mape.</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Tlačidlo pre zobrazenie alebo skrytie zvolených stôp GPX na mape.</string>
     <string name="quick_action_gpx_tracks_hide">Skryť GPX stopy</string>
     <string name="quick_action_gpx_tracks_show">Zobraziť GPX stopy</string>
     <string name="transfers_size">%1$d prestup(y)</string>
@@ -3234,7 +3234,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="configure_navigation">Nastaviť navigáciu</string>
     <string name="general_settings_profile_descr">Vzhľad aplikácie, jednotky, oblasť</string>
     <string name="configure_profile">Nastaviť profil</string>
-    <string name="screen_alerts_descr">Varovania sú zobrazené počas navigácie v ľavom dolnom rohu obrazovky.</string>
+    <string name="screen_alerts_descr">Varovania zobrazené počas navigácie v ľavom dolnom rohu obrazovky.</string>
     <string name="switch_profile">Prepnúť profil</string>
     <string name="language_and_output">Jazyk a výstup</string>
     <string name="reset_to_default">Obnoviť do základného nastavenia</string>
@@ -3267,7 +3267,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="paste_Osmand_data_folder_path">Vložte cestu k priečinku s dátami OsmAnd</string>
     <string name="change_osmand_data_folder_question">Zmeniť dátový priečinok OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Presunúť do nového umiestnenia</string>
-    <string name="internal_app_storage_description">Interné úložisko, skryté pred používateľom a inými aplikáciami, prístupné len OsmAndu</string>
+    <string name="internal_app_storage_description">Interné úložisko pre OsmAnd (skryté pred používateľom a inými aplikáciami).</string>
     <string name="change_data_storage_folder">Zmeniť priečinok na ukladanie dát</string>
     <string name="rendering_attr_piste_type_snow_park_name">Snežný terénny areál</string>
     <string name="rendering_attr_piste_type_sleigh_name">Sane v záprahu</string>
@@ -3317,11 +3317,11 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="routing_attr_prefer_unpaved_description">Preferovať cesty s nespevneným povrchom.</string>
     <string name="update_all_maps">Aktualizovať všetky mapy</string>
     <string name="update_all_maps_q">Naozaj chcete aktualizovať všetky (%1$d) mapy\?</string>
-    <string name="release_3_5">• Vylepšené nastavenia aplikácie a profilov. Nastavenia sú usporiadané podľa typu. Každý profil môže byť upravený samostatne.
+    <string name="release_3_5">• Vylepšené nastavenia aplikácie a profilov. Nastavenia sú usporiadané podľa typu. Každý profil môže byť upravený samostatne. 
 \n 
 \n • Nový dialóg sťahovania máp, ktorý navrhuje mapy na stiahnutie počas prehliadania 
 \n 
-\n • Opravy nočného vzhľadu 
+\n • Opravy tmavého vzhľadu 
 \n 
 \n • Opravené niektoré chyby navigácie 
 \n 
@@ -3334,13 +3334,13 @@ Zodpovedá oblasti: %1$s x %2$s</string>
 \n • Opravy iných chýb
 \n
 \n</string>
-    <string name="apply_preference_to_all_profiles">Túto zmenu môžete aplikovať na na všetky profily alebo na práve zvolený.</string>
+    <string name="apply_preference_to_all_profiles">Túto zmenu môžete aplikovať na všetky alebo len práve zvolený profil.</string>
     <string name="shared_preference">Zdieľané</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Preferovať nespevnené cesty</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_description">Preferovať cesty s nespevneným povrchom.</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Preferovať pri navigácii cesty s nespevneným povrchom nad spevnenými.</string>
     <string name="export_profile">Exportovať profil</string>
     <string name="exported_osmand_profile">OsmAnd profil: %1$s</string>
-    <string name="overwrite_profile_q">Profil \'%1$s\' už existuje. Prepísať\?</string>
+    <string name="overwrite_profile_q">\'%1$s\' už existuje. Prepísať\?</string>
     <string name="export_profile_failed">Nepodarilo sa exportovať profil.</string>
     <string name="rendering_value_white_name">Biela</string>
     <string name="swap_two_places">Zameniť %1$s a %2$s</string>
@@ -3352,30 +3352,30 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="clear_confirmation_msg">Vymazať %1$s\?</string>
     <string name="swap_start_and_destination">Zameniť štart a cieľ</string>
     <string name="layer_osm_edits">Úpravy OSM</string>
-    <string name="quick_action_contour_lines_descr">Prepínač zobrazovania vrstevníc na mape.</string>
+    <string name="quick_action_contour_lines_descr">Tlačidlo pre zobrazenie alebo skrytie vrstevníc na mape.</string>
     <string name="quick_action_contour_lines_show">Zobraziť vrstevnice</string>
     <string name="quick_action_contour_lines_hide">Skryť vrstevnice</string>
     <string name="quick_action_show_hide_contour_lines">Zobraziť/skryť vrstevnice</string>
-    <string name="quick_action_hillshade_descr">Prepínač zobrazovania tieňovaných svahov.</string>
+    <string name="quick_action_hillshade_descr">Tlačidlo pre zobrazenie alebo skrytie tieňovaných svahov na mape.</string>
     <string name="quick_action_hillshade_show">Zobraziť tieňované svahy</string>
     <string name="quick_action_hillshade_hide">Skryť tieňované svahy</string>
     <string name="quick_action_show_hide_hillshade">Zobraziť/skryť tieňované svahy</string>
-    <string name="tts_initialization_error">Nepodarilo sa spustiť modul prevodu textu na reč</string>
+    <string name="tts_initialization_error">Nepodarilo sa spustiť modul prevodu textu na reč.</string>
     <string name="simulate_your_location_gpx_descr">Simulovať polohu pomocou zaznamenanej stopy GPX.</string>
-    <string name="profile_import">Import profilu</string>
-    <string name="profile_import_descr">Pre importovanie profilu zvoľte jeho súbor v zariadení a otvorte ho v OsmAnd.</string>
+    <string name="profile_import">Importovať profil</string>
+    <string name="profile_import_descr">Pridajte profil otvorením jeho súboru v OsmAnd.</string>
     <string name="file_import_error">Chyba pri importovaní %1$s: %2$s</string>
-    <string name="file_imported_successfully">%1$s úspešne importované.</string>
+    <string name="file_imported_successfully">%1$s importovaný.</string>
     <string name="quick_action_directions_from_desc">Tlačidlo pre nastavenie východzieho bodu do stredu obrazovky a výpočet trasy do cieľa alebo otvorenie dialógu na výber cieľa, ak značka pre cieľ nie je ešte na mape.</string>
     <string name="download_map_dialog">Okno sťahovania máp</string>
     <string name="dialogs_and_notifications_title">Okná a upozornenia</string>
-    <string name="dialogs_and_notifications_descr">Ovládať okná a upozornenia, ktoré OsmAnd zobrazuje počas behu.</string>
-    <string name="default_speed_dialog_msg">Používa sa pre odhad času na cestách neznámeho typu a obmedzenie rýchlosti na všetkých cestách (môže ovplyvniť trasu)</string>
+    <string name="dialogs_and_notifications_descr">Ovládať okná a upozornenia.</string>
+    <string name="default_speed_dialog_msg">Odhaduje čas na cestách neznámeho typu a obmedzuje rýchlosť na všetkých cestách (môže ovplyvniť trasu)</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Siete bodov</string>
     <string name="suggested_maps">Navrhované mapy</string>
-    <string name="suggested_maps_descr">Tieto mapy sa musia používať so zásuvným modulom</string>
+    <string name="suggested_maps_descr">Tieto mapy sú potrebné pre zásuvný modul.</string>
     <string name="added_profiles">Pridané profily</string>
-    <string name="added_profiles_descr">Modul pridá do OsmAnd nový profil</string>
+    <string name="added_profiles_descr">Profily pridané modulom</string>
     <string name="shared_string_turn_off">Vypnúť</string>
     <string name="new_plugin_added">Nový modul pridaný</string>
     <string name="join_segments">Spojiť úseky</string>
@@ -3387,22 +3387,22 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="personal_category_name">Osobné</string>
     <string name="shared_string_downloading_formatted">Sťahujem %s</string>
     <string name="rendering_value_thick_name">Hrubé</string>
-    <string name="desert_render_descr">Pre púšte a iné riedko osídlené oblasti. Zobrazuje viac detailov pri väčšej mierke.</string>
-    <string name="select_navigation_icon">Zvoľte ikonu navigácie</string>
-    <string name="select_map_icon">Zvoľte ikonu mapy</string>
-    <string name="delete_profiles_descr">Keď zvolíte Použiť, vymazané profily budú natrvalo odstránené.</string>
+    <string name="desert_render_descr">Pre púšte a iné riedko osídlené oblasti. Viac detailov.</string>
+    <string name="select_navigation_icon">Ikona polohy pri pohybe</string>
+    <string name="select_map_icon">Ikona polohy v pokoji</string>
+    <string name="delete_profiles_descr">Stlačením \'Použiť\' odstránite vymazané profily natrvalo.</string>
     <string name="master_profile">Hlavný profil</string>
     <string name="select_color">Zvoľte farbu</string>
-    <string name="edit_profiles_descr">Nemôžete vymazať predvolené profily OsmAndu, ale môžete ich vypnúť na prechádzajúcej obrazovke, alebo ich presunúť na koniec zoznamu.</string>
+    <string name="edit_profiles_descr">Predvolené profily OsmAndu sa nedajú vymazať, ale dajú sa vypnúť (na prechádzajúcej obrazovke) alebo presunúť na koniec zoznamu.</string>
     <string name="edit_profiles">Upraviť profily</string>
-    <string name="select_nav_profile_dialog_message">Typ navigácie ovplyvňuje pravidlá pre výpočet trasy.</string>
+    <string name="select_nav_profile_dialog_message">\'Typ navigácie\' ovplyvňuje pravidlá pre výpočet trasy.</string>
     <string name="profile_appearance">Vzhľad profilu</string>
-    <string name="choose_icon_color_name">Zvoľte ikonu, farbu a názov</string>
+    <string name="choose_icon_color_name">Ikona, farba a názov</string>
     <string name="reorder_profiles">Upraviť zoznam profilov</string>
     <string name="selected_profile">Zvolený profil</string>
-    <string name="reset_confirmation_descr">Stlačením %1$s stratíte všetky zmeny.</string>
-    <string name="reset_all_profile_settings_descr">Všetky nastavenia profilu budú vrátené do východzieho stavu.</string>
-    <string name="reset_all_profile_settings">Resetovať nastavenia profilu na predvolené hodnoty\?</string>
+    <string name="reset_confirmation_descr">Stlačením %1$s zahodíte všetky vaše zmeny.</string>
+    <string name="reset_all_profile_settings_descr">Resetovať všetky nastavenia profilu do východzieho stavu.</string>
+    <string name="reset_all_profile_settings">Resetovať všetky nastavenia profilu\?</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
     <string name="button_rate">Ohodnotiť</string>
@@ -3419,7 +3419,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="live_monitoring">Sledovanie online</string>
     <string name="save_track_logging_accuracy">Presnosť záznamu</string>
     <string name="tracks_view_descr">Všetky vaše zaznamenané stopy sú v %1$s, alebo v priečinku OsmAnd.</string>
-    <string name="multimedia_notes_view_descr">Všetky vaše OSM poznámky sú v \'Menu\' → \'Moje miesta\' → \'Zmeny v OSM\'.</string>
+    <string name="multimedia_notes_view_descr">Vaše OSM poznámky sú v %1$s.</string>
     <string name="video_notes">Video-poznámky</string>
     <string name="photo_notes">Foto-poznámky</string>
     <string name="route_recalculation">Prepočítanie trasy</string>
@@ -3427,13 +3427,43 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="login_and_pass">Prihlasovacie meno a heslo</string>
     <string name="plugin_global_prefs_info">Tieto nastavenia platia pre všetky profily.</string>
     <string name="osm_editing">OSM upravovanie</string>
-    <string name="osm_edits_view_descr">Zobrazte všetky vaše neodoslané zmeny alebo chyby v OSM cez \'Menu\' → \'Moje miesta\' — \'Zmeny v OSM\'. Odoslané body sa už v OsmAnd nezobrazujú.</string>
+    <string name="osm_edits_view_descr">Zobrazte vaše neodoslané zmeny alebo chyby v OSM cez %1$s. Odoslané body sa už nezobrazujú.</string>
     <string name="app_mode_osm">OSM</string>
-    <string name="select_nav_icon_descr">Ikony sa zobrazujú len pri navigácii alebo pohybe.</string>
-    <string name="select_map_icon_descr">Mapová ikona zobrazená len na mape.</string>
+    <string name="select_nav_icon_descr">Ikona zobrazená pri navigácii alebo pohybe.</string>
+    <string name="select_map_icon_descr">Ikona zobrazená v pokoji.</string>
     <string name="logcat_buffer_descr">Skontrolovať a zdieľať podrobné záznamy aplikácie</string>
     <string name="search_offline_geo_error">Nepodarilo sa prečítať geo správu \'%s\'.</string>
     <string name="permission_is_required">Pre použitie tejto možnosti je potrebné oprávnenie.</string>
     <string name="monitoring_min_speed_descr">Tento filter spôsobí nezaznamenávanie bodov pri pohybe pomalšie ako daná rýchlosť. Toto môže zabezpečiť plynulejšie zaznamenané stopy pri zobrazení na mape.</string>
     <string name="monitoring_min_speed_descr_side_effect">Vedľajší efekt: Vaša stopa nebude obsahovať úseky kde nebola dosiahnutá minimálna rýchlosť (napr. kde ste tlačili bicykel do kopca). Taktiež nebudú obsahovať informáciu o obdobiach bez pohybu, napr. prestávkach. Toto má vplyv na následnú analýzu alebo spracovanie, napr. pri zisťovaní celkovej dĺžky výletu, času v pohybe alebo priemernej rýchlosti.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Odporúčanie: Skúste najprv použiť detekciu pohybu filtrom minimálneho posunu (B), čo môže vytvoriť lepší výsledok a stratíte menej dát. Ak vaše stopy budú roztrasené aj pri nízkej rýchlosti, skúste tu nenulovú hodnotu. Nezabudnite, že niektoré merania nemusia hlásiť žiadnu rýchlosť (niektoré metódy založené na sieti) a vtedy by sa nič nezaznamenalo.</string>
+    <string name="live_monitoring_time_buffer">Časový zásobník</string>
+    <string name="live_monitoring_tracking_interval">Interval stopovania</string>
+    <string name="live_monitoring_adress">Webová adresa</string>
+    <string name="live_monitoring_adress_descr">Zadajte webovú adresu so syntaxom parametrov: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
+    <string name="monitoring_notification">Oznámenie</string>
+    <string name="monitoring_min_speed">Minimálna rýchlosť</string>
+    <string name="monitoring_min_accuracy">Minimálna presnosť</string>
+    <string name="monitoring_min_distance">Minimálny posun</string>
+    <string name="tracks_view_path">Menu — Moje miesta — Stopy</string>
+    <string name="multimedia_notes_view_path">Menu — Moje miesta — Poznámky</string>
+    <string name="osm_edits_view_path">Menu — Moje miesta — Zmeny v OSM</string>
+    <string name="reset_plugin_to_default">Resetovať modul do východzieho stavu</string>
+    <string name="multimedia_rec_split_title">Rozdelenie nahrávania</string>
+    <string name="multimedia_use_system_camera">Použiť systémovú aplikáciu</string>
+    <string name="multimedia_photo_play_sound">Zvuk spúšte fotoaparátu</string>
+    <string name="osm_authorization_success">Prihlásenie je úspešné</string>
+    <string name="rearrange_categories">Usporiadať kategórie</string>
+    <string name="create_custom_categories_list_promo">Môžete pridať vlastné kategórie a skryť kategórie, ktoré nepotrebujete a zmeniť poradie triedenia v zozname. Zozname môže byť importovaný a exportovaný s profilmi.</string>
+    <string name="add_new_custom_category_button_promo">Môžete pridať novú kategóriu zvolením jednej alebo viacerých existujúcich.</string>
+    <string name="reset_to_default_category_button_promo">Obnovenie do východzieho nastavenia vymaže vaše vlastné kategórie a poradie triedenia ako po novej inštalácii.</string>
+    <string name="shared_string_available">Dostupné</string>
+    <string name="add_custom_category">Pridať vlastnú kategóriu</string>
+    <string name="rendering_attr_streetLightingNight_name">Zobraziť iba v noci</string>
+    <string name="plugin_prefs_reset_successful">Všetky nastavenia modulov obnovené do východzieho stavu.</string>
+    <string name="profile_prefs_reset_successful">Všetky nastavenia profilov obnovené do východzieho stavu.</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="sunset_at">Západ slnka o %1$s</string>
+    <string name="sunrise_at">Východ slnka o %1$s</string>
+    <string name="accessibility_mode_disabled">Režim uľahčenia prístupu je na tomto systéme vypnutý.</string>
 </resources>

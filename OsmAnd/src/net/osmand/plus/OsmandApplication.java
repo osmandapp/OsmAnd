@@ -148,8 +148,6 @@ public class OsmandApplication extends MultiDexApplication {
 	private File externalStorageDirectory;
 	private boolean externalStorageDirectoryReadOnly;
 
-	private String firstSelectedVoiceProvider;
-	
 	// Typeface
 	
 	@Override
@@ -466,68 +464,15 @@ public class OsmandApplication extends MultiDexApplication {
 		String voiceProvider = osmandSettings.VOICE_PROVIDER.getModeValue(applicationMode);
 		if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
 			if (warningNoneProvider && voiceProvider == null) {
-				boolean nightMode = daynightHelper.isNightModeForMapControls();
-				final AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(uiContext, nightMode));
-
-				View view = UiUtilities.getInflater(uiContext, nightMode).inflate(R.layout.select_voice_first, null);
-
-				((ImageView) view.findViewById(R.id.icon))
-						.setImageDrawable(getUIUtilities().getIcon(R.drawable.ic_action_volume_up, getSettings().isLightContent()));
-
-				view.findViewById(R.id.spinner).setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(final View v) {
-						routingOptionsHelper.selectVoiceGuidance((MapActivity) uiContext, new CallbackWithObject<String>() {
-							@Override
-							public boolean processResult(String result) {
-								boolean acceptableValue = !RoutePreferencesMenu.MORE_VALUE.equals(firstSelectedVoiceProvider);
-								if (acceptableValue) {
-									((TextView) v.findViewById(R.id.selectText))
-											.setText(routingOptionsHelper.getVoiceProviderName(uiContext, result));
-									firstSelectedVoiceProvider = result;
-								}
-								return acceptableValue;
-							}
-						});
-					}
-				});
-
-				((ImageView) view.findViewById(R.id.dropDownIcon))
-						.setImageDrawable(getUIUtilities().getIcon(R.drawable.ic_action_arrow_drop_down, getSettings().isLightContent()));
-
-				builder.setCancelable(true);
-				builder.setNegativeButton(R.string.shared_string_cancel, null);
-				builder.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						if (!Algorithms.isEmpty(firstSelectedVoiceProvider)) {
-							routingOptionsHelper.applyVoiceProvider((MapActivity) uiContext, firstSelectedVoiceProvider, applyAllModes);
-						}
-					}
-				});
-				builder.setNeutralButton(R.string.shared_string_do_not_use, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialogInterface, int i) {
-						if (applyAllModes) {
-							for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-								osmandSettings.VOICE_PROVIDER.setModeValue(mode, OsmandSettings.VOICE_PROVIDER_NOT_USE);
-							}
-						} else {
-							osmandSettings.VOICE_PROVIDER.setModeValue(applicationMode, OsmandSettings.VOICE_PROVIDER_NOT_USE);
-						}
-					}
-				});
-
-				builder.setView(view);
-				builder.show();
+				if (uiContext instanceof MapActivity) {
+					((MapActivity) uiContext).showVoiceProviderDialog(applicationMode, applyAllModes);
+				}
 			}
-
 		} else {
 			if (player == null || !Algorithms.objectEquals(voiceProvider, player.getCurrentVoice()) || force) {
 				appInitializer.initVoiceDataInDifferentThread(uiContext, applicationMode, voiceProvider, run, showDialog);
 			}
 		}
-
 	}
 
 	public NavigationService getNavigationService() {
@@ -829,6 +774,16 @@ public class OsmandApplication extends MultiDexApplication {
 				getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
 			}
 		}
+	}
+
+	public String getCountry() {
+		String country;
+		if (preferredLocale != null) {
+			country = preferredLocale.getCountry();
+		} else {
+			country = Locale.getDefault().getCountry();
+		}
+		return country;
 	}
 	
 	public String getLanguage() {

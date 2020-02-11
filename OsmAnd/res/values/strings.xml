@@ -11,6 +11,21 @@
 	Thx - Hardy
 
 -->
+     <string name="release_3_6">
+    • Profiles: now you can change order, set icon for map, change all setting for base profiles and restore them back to defaults\n\n
+    • Added exit number in the navigation\n\n
+    • Reworked plugin settings\n\n
+    • Reworked Settings screen for quick access to all profiles\n\n
+    • Added option to copy settings from another profile\n\n
+    • Added ability to change an order or hide POI categories in Search\n\n
+    • Correctly aligned POI icons on the map\n\n
+    • Added Sunset / Sunrise data to Configure Map\n\n
+    • Added Home/Work icons on the map\n\n
+    • Added support for multiline description in Settings\n\n
+    • Added correct transliteration into the map of Japan\n\n
+    • Added Antarctica map\n\n
+    </string>
+    <string name="copy_coordinates">Copy coordinates</string>
     <string name="reset_to_default_category_button_promo">Reset to default will reset sort order to the default state after installation.</string>
     <string name="use_system_screen_timeout">Use system screen timeout</string>
     <string name="use_system_screen_timeout_promo">Disabled by default, if OsmAnd running on foreground, the screen doesn’t time out.\n\nIf enabled OsmAnd will use system timeout settings.</string>
@@ -3380,7 +3395,6 @@
     <string name="use_drawer_btn">Use menu</string>
     <string name="dashboard_or_drawer_title">Dashboard or menu control</string>
     <string name="dashboard_or_drawer_description">A choice is offered to primarily control the app via the flexible dashboard or a static menu. Your choice can always be changed in the dashboard settings.</string>
-    <string name="update">Update</string>
     <string name="only_download_over_wifi">Only download on Wi-Fi</string>
     <string name="live_update">Live update</string>
     <string name="update_now">Update now</string>
