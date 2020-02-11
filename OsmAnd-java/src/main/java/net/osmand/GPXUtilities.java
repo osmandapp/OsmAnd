@@ -1557,6 +1557,8 @@ public class GPXUtilities {
 				serializer.endTag(null, "wpt"); //$NON-NLS-1$
 			}
 
+			writeExtensions(serializer, file);
+
 			serializer.endTag(null, "gpx"); //$NON-NLS-1$
 			serializer.endDocument();
 			serializer.flush();

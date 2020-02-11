@@ -43,8 +43,6 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 
 		const val LIVE_TRACKS_DIR = "livetracks"
 
-		const val GPX_COLORS_COUNT = 10
-
 		private const val STATUS_WIDGET_ID = "status_widget"
 		private const val STATUS_WIDGET_MENU_ICON = "widget_location_sharing_night"
 		private const val STATUS_WIDGET_MENU_ICON_OLD = "ic_action_relative_bearing"
@@ -57,9 +55,9 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		private const val STATUS_WIDGET_OFF_ICON_NIGHT = "widget_location_sharing_off_night"
 
 		val GPX_COLORS = arrayOf(
-			"red", "orange", "lightblue", "blue", "purple",
+			"red", "orange", "lightblue", "blue", "purple", "pink",
 			"translucent_red", "translucent_orange", "translucent_lightblue",
-			"translucent_blue", "translucent_purple"
+			"translucent_blue", "translucent_purple", "translucent_pink"
 		)
 	}
 
