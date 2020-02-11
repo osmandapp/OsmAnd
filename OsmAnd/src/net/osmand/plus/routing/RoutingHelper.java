@@ -58,6 +58,9 @@ public class RoutingHelper {
 	private List<LatLon> intermediatePoints;
 	private Location lastProjection;
 	private Location lastFixedLocation;
+	private Location originalStartingLocation;
+
+	private RouteCalculationResult originalRoute = null;
 
 	private static final int RECALCULATE_THRESHOLD_COUNT_CAUSING_FULL_RECALCULATE = 3;
 	private static final int RECALCULATE_THRESHOLD_CAUSING_FULL_RECALCULATE_INTERVAL = 2*60*1000;
@@ -174,6 +177,7 @@ public class RoutingHelper {
 	}
 
 	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, List<LatLon> intermediatePoints, Location currentLocation){
+		setOriginalStartLocation(currentLocation);
 		checkAndUpdateStartLocation(currentLocation);
 		RouteCalculationResult previousRoute = route;
 		clearCurrentRoute(finalLocation, intermediatePoints);
@@ -181,10 +185,30 @@ public class RoutingHelper {
 		setCurrentLocation(currentLocation, false, previousRoute, true);
 	}
 
+	public RouteCalculationResult getOriginalRoute() {
+		return originalRoute;
+	}
+	public List<Location> getOriginalRouteAllLoc() {
+		return originalRoute.getImmutableAllLocations();
+	}
+
+	public void setOriginalRoute(RouteCalculationResult originalRoute) {
+		this.originalRoute = originalRoute;
+	}
+
+	private void setOriginalStartLocation(Location currentLocation) {
+		originalStartingLocation = currentLocation;
+	}
+
+	public Location getOriginalStartingLocation() {
+		return originalStartingLocation;
+	}
+
 	public synchronized void clearCurrentRoute(LatLon newFinalLocation, List<LatLon> newIntermediatePoints) {
 		route = new RouteCalculationResult("");
 		isDeviatedFromRoute = false;
 		evalWaitInterval = 0;
+		originalRoute = null;
 		app.getWaypointHelper().setNewRoute(route);
 		app.runInUIThread(new Runnable() {
 			@Override
@@ -399,6 +423,7 @@ public class RoutingHelper {
 			// 0. Route empty or needs to be extended? Then re-calculate route.
 			if(route.isEmpty()) {
 				calculateRoute = true;
+				//originalRoute = null;
 			} else {
 				// 1. Update current route position status according to latest received location
 				boolean finished = updateCurrentRouteStatus(currentLocation, posTolerance);
@@ -987,6 +1012,7 @@ public class RoutingHelper {
 				if (res.isCalculated()) {
 					if (!params.inSnapToRoadMode && !params.inPublicTransportMode) {
 						route = res;
+						updateOriginalRoute();
 					}
 					if (params.resultListener != null) {
 						params.resultListener.onRouteCalculated(res);
@@ -1089,6 +1115,12 @@ public class RoutingHelper {
 				};
 			}
 			startRouteCalculationThread(params, paramsChanged, updateProgress);
+		}
+	}
+
+	private void updateOriginalRoute() {
+		if (originalRoute == null) {
+			originalRoute = route;
 		}
 	}
 

@@ -661,6 +661,41 @@ public class MapUtils {
 
 		return new LatLon(Math.toDegrees(phi2), Math.toDegrees(lambda2));
 	}
+
+	public static double getVectorMagnitude(int startX, int startY, int endX, int endY) {
+		return Math.sqrt(Math.pow((double) (endX - startX), 2.0) + Math.pow((double) (endY - startY), 2.0));
+	}
+
+	//angle of vector
+	public static double getAngleForRadiusVector(int startX, int startY, int endX, int endY) {
+		return 2 * Math.atan((endY - startY) / (endX - startX
+				+ Math.sqrt(Math.pow((double) (endX - startX), 2.0) + Math.pow((double) (endY - startY), 2.0))));
+	}
+
+	//returns coordinates of point on circle
+	public static double[] getCoordinatesFromRadiusAndAngle(double centerX, double centerY, double radius, double angle) {
+		double x = centerX + radius * Math.cos(angle);
+		double y = centerY + radius * Math.sin(angle);
+		return new double[]{x,y};
+	}
+
+	//returns signed angle between vectors in radians
+	public static double getAngleBetweenVectors(int vectorAStartX, int vectorAStartY, int vectorAEndX, int vectorAEndY,
+	                                            int vectorBStartX, int vectorBStartY, int vectorBEndX, int vectorBEndY) {
+		int[] vectorA = new int[] {getVectorAxisValue(vectorAStartX, vectorAEndX), getVectorAxisValue(vectorAStartY, vectorAEndY)};
+		int[] vectorB = new int[] {getVectorAxisValue(vectorBStartX, vectorBEndX), getVectorAxisValue(vectorBStartY, vectorBEndY)};
+		return Math.atan2(vectorA[0] * vectorB[1] - vectorA[1] * vectorB [0], vectorA[0] * vectorB[0] + vectorA[1] * vectorB[1]);
+	}
+
+	//calculates vector value for axis
+	public static int getVectorAxisValue(int axisStart, int axisEnd) {
+		if (axisEnd < axisStart) {
+			return Math.abs(axisEnd) - Math.abs(axisStart);
+		} else {
+			return Math.abs(axisStart) - Math.abs(axisEnd);
+		}
+	}
+
 }
 
 

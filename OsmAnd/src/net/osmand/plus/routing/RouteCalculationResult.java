@@ -63,6 +63,8 @@ public class RouteCalculationResult {
 	protected int lastWaypointGPX = 0;
 	protected ApplicationMode appMode;
 
+	protected boolean showOriginalRoute = false;
+
 	public RouteCalculationResult(String errorMessage) {
 		this.errorMessage = errorMessage;
 		this.routingTime = 0;
@@ -76,7 +78,7 @@ public class RouteCalculationResult {
 		this.directions = new ArrayList<RouteDirectionInfo>();
 		this.alarmInfo = new ArrayList<AlarmInfo>();
 	}
-	
+
 	public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions, RouteCalculationParams params, List<LocationPoint> waypoints, boolean addMissingTurns) {
 		this.routingTime = 0;
 		this.loadedTiles = 0;
@@ -108,6 +110,8 @@ public class RouteCalculationResult {
 		calculateIntermediateIndexes(params.ctx, this.locations, params.intermediates, localDirections, this.intermediatePoints);
 		this.directions = Collections.unmodifiableList(localDirections);
 		updateDirectionsTime(this.directions, this.listDistance);
+
+		this.showOriginalRoute = params.showOriginalRoute;
 	}
 
 	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end, List<LatLon> intermediates,
@@ -1154,5 +1158,8 @@ public class RouteCalculationResult {
 		public int imminent;
 		private int directionInfoInd;
 	}
-	
+
+	public boolean isShowOriginalRoute() {
+		return showOriginalRoute;
+	}
 }
