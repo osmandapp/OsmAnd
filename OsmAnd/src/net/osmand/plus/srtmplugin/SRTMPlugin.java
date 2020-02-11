@@ -85,7 +85,7 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean needsInstallation() {
-		return super.needsInstallation() && !InAppPurchaseHelper.isSubscribedToLiveUpdates(app);
+		return super.needsInstallation() && !app.getSettings().LIVE_UPDATES_PURCHASED.get();
 	}
 
 	@Override

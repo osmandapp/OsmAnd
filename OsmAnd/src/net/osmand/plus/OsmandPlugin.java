@@ -286,7 +286,7 @@ public abstract class OsmandPlugin {
 
 	private static boolean checkPluginPackage(OsmandApplication app, OsmandPlugin plugin) {
 		return isPackageInstalled(plugin.getComponentId1(), app) || isPackageInstalled(plugin.getComponentId2(), app)
-				|| InAppPurchaseHelper.isSubscribedToLiveUpdates(app);
+				|| app.getSettings().LIVE_UPDATES_PURCHASED.get();
 	}
 
 	public static boolean enablePlugin(@Nullable Activity activity, OsmandApplication app, OsmandPlugin plugin, boolean enable) {
