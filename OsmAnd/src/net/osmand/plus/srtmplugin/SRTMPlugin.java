@@ -89,6 +89,11 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	protected boolean checkPluginPackage(OsmandApplication app) {
+		return super.checkPluginPackage(app) || InAppPurchaseHelper.isSubscribedToLiveUpdates(app);
+	}
+
+	@Override
 	public boolean isMarketPlugin() {
 		return true;
 	}
