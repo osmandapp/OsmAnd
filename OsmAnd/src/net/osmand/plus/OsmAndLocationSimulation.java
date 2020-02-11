@@ -112,23 +112,24 @@ public class OsmAndLocationSimulation {
 		startStopRouteAnimation(ma, true, null);
 	}
 
-	private void startAnimationThread(final OsmandApplication app, final List<Location> directions, final boolean useLocationTime, final float coeff) {
+	private void startAnimationThread(final OsmandApplication app, final List<Location> directions, final boolean locTime, final float coeff) {
 		final float time = 1.5f;
 		routeAnimation = new Thread() {
 			@Override
 			public void run() {
 				Location current = directions.isEmpty() ? null : new Location(directions.remove(0));
-				
+				boolean useLocationTime = locTime && current.getTime() != 0;
 				Location prev = current;
 				long prevTime = current == null ? 0 : current.getTime();
 				float meters = metersToGoInFiveSteps(directions, current);
 				if(current != null) {
 					current.setProvider(OsmAndLocationProvider.SIMULATED_PROVIDER);
 				}
+
 				while (!directions.isEmpty() && routeAnimation != null) {
 					int timeout = (int) (time  * 1000);
 					float intervalTime = time;
-					if(useLocationTime) {
+					if (useLocationTime) {
 						current = directions.remove(0);
 						meters = current.distanceTo(prev);
 						if (!directions.isEmpty()) {

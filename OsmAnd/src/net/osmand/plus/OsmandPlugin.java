@@ -251,7 +251,7 @@ public abstract class OsmandPlugin {
 		boolean paid = plugin.isPaid();
 		if ((Version.isDeveloperVersion(app) || !Version.isProductionVersion(app)) && !paid) {
 			// for test reasons
-			marketEnabled = false;
+			// marketEnabled = false;
 		}
 		if (pckg || (!marketEnabled && !paid)) {
 			if (pckg && !app.getSettings().getPlugins().contains("-" + plugin.getId())) {
