@@ -2415,7 +2415,7 @@
     <string name="poi_nuclear_explosion_date_utc">Explosionsdatum (UTC)</string>
     <string name="poi_nuclear_explosion_shot_name_en">Bezeichnung der Explosion</string>
     <string name="poi_nuclear_explosion_series">Explosionsserie</string>
-    <string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Explosionzweck: Atomwaffen verbunden</string>
+    <string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Explosionszweck: Atomwaffen betreffend</string>
     <string name="poi_nuclear_explosion_purpose_weapons_effects">Explosionszweck: Waffeneffekte</string>
     <string name="poi_nuclear_explosion_purpose_safety_experiment">Explosionszweck: Sicherheitsexperiment</string>
     <string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">Explosionszweck: Forschung für friedliche Anwendungen</string>
@@ -2475,7 +2475,7 @@
     <string name="poi_free_flying_guest_guidelines_no">Gästerichtlinien: nein</string>
     <string name="poi_protection_title">Schutzgebietstyp</string>
     <string name="poi_sanitary_dump_station">Sanitäre Entsorgungsstation</string>
-    <string name="poi_medical_system_western_yes">Westliche</string>
+    <string name="poi_medical_system_western_yes">Westlich</string>
     <string name="poi_medical_system_chinese_yes">Chinesisch (traditionell)</string>
     <string name="poi_medical_system_unknown_yes">Medizinisches System: Unbekannt traditionelle</string>
     <string name="poi_medical_system_ayurveeda_yes">Ayurveda</string>
@@ -2802,7 +2802,7 @@
     <string name="poi_healthcare_alternative_types">Spezialisierung</string>
     <string name="poi_free_flying_characteristics">Charakteristisch</string>
     <string name="poi_religion_type">Religion</string>
-    <string name="poi_information_contents">Inhalt</string>
+    <string name="poi_information_contents">Informationsinhalt</string>
     <string name="poi_clock_option">Zusätzlich</string>
     <string name="poi_scout_camp">Pfadfinderlager</string>
     <string name="poi_backcountry">Wildnis-Campingplatz</string>
@@ -3125,7 +3125,7 @@
     <string name="poi_animal_shelter_mammal">Säugetiere</string>
     <string name="poi_animal_shelter_fish">Fische</string>
     <string name="poi_animal_shelter_type">Tiere erlaubt</string>
-    <string name="poi_animal_shelter_purpose">Zweck</string>
+    <string name="poi_animal_shelter_purpose">Tierheimzweck</string>
     <string name="poi_owner">Eigentümer</string>
     <string name="poi_spaceport">Raumfahrtzentrum</string>
     <string name="poi_lock_basin">Schiffsschleuse</string>
@@ -3773,7 +3773,7 @@
     <string name="poi_parking_space">Parkplatz</string>
     <string name="poi_url">URL</string>
     <string name="poi_volcano_type">Vulkanart</string>
-    <string name="poi_volcano_status">Status</string>
+    <string name="poi_volcano_status">Vulkanstatus</string>
     <string name="poi_volcano_type_scoria">Schlacke</string>
     <string name="poi_volcano_type_stratovolcano">Schichtvulkan</string>
     <string name="poi_volcano_type_shield">Schild</string>
