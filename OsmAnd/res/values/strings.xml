@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="routing_profile_direct_to">Direct-to-point</string>
     <string name="clear_recorded_data">Clear recorded data</string>
     <string name="release_3_6">
     • Profiles: now you can change order, set icon for map, change all setting for base profiles and restore them back to defaults\n\n
