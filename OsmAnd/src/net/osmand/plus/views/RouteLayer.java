@@ -1106,7 +1106,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			routeGeometry.updateRoute(tb, route);
 			if (helper.getRoute().isShowOriginalRoute() && helper.getOriginalStartingLocation() != null) {
 				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-						helper.getOriginalStartingLocation(),  route == null ? 0 : route.getCurrentRoute(), true);
+						helper.getOriginalStartingLocation(),  0, true);
 			} else {
 				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
 						helper.getLastProjection(), route == null ? 0 : route.getCurrentRoute(), false);
@@ -1135,12 +1135,15 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		Location previousInRoute = null;
 		Location nextInRoute = null;
 		//need to change this code by fixing helper.route.getCurrentRoute() miscalculation
-		if (cd == 0) {
-			previousInRoute = routeNodes.get(cd);
-			nextInRoute = routeNodes.get(cd + 1);
-		} else if (cd == routeNodes.size() - 1) {
-			previousInRoute = routeNodes.get(cd - 1);
-			nextInRoute = routeNodes.get(cd);
+		log.debug("intermediates: " + helper.getIntermediatePoints());
+		if (helper.getRoute().getIntermediatePointsToPass() > 0) {
+			for (int i = 1; i < routeNodes.size(); i++) {
+				LatLon routePoint = new LatLon(routeNodes.get(i).getLatitude(), routeNodes.get(i).getLongitude());
+				if (routePoint.equals(helper.getIntermediatePoints().get(0))) {
+					previousInRoute = routeNodes.get(i - 1);
+					nextInRoute = routeNodes.get(i);
+				}
+			}
 		} else {
 			previousInRoute = routeNodes.get(routeNodes.size() - 2);
 			nextInRoute = routeNodes.get(routeNodes.size() - 1);
@@ -1156,7 +1159,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		double radius = MapUtils.getVectorMagnitude(centerX, centerY, aX, aY);
 		double angle2 = MapUtils.getAngleForRadiusVector(centerX, centerY, bX, bY);
 		projectionXY = MapUtils.getCoordinatesFromRadiusAndAngle(centerX, centerY, radius, angle2);
-//		log.debug("Projection: " + projectionXY[0] + ", " + projectionXY[1]);
+		log.debug("Projection: " + projectionXY[0] + ", " + projectionXY[1]);
 		visible = box.containsPoint((float)projectionXY[0], (float)projectionXY[1], 20.0f)
 				&& Math.abs(Math.toDegrees(MapUtils.getAngleBetweenVectors(centerX, centerY, aX, aY, centerX, centerY, bX, bY))) < 90;
 
