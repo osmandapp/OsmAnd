@@ -157,8 +157,8 @@ public class NavigationFragment extends BaseSettingsFragment {
 		RouteProvider.RouteService routeService;
 		if (profileKey.equals(RoutingProfilesResources.STRAIGHT_LINE_MODE.name())) {
 			routeService = RouteProvider.RouteService.STRAIGHT;
-		} else if (profileKey.equals(RoutingProfilesResources.STRAIGHT_TO_LINE_MODE.name())){
-			routeService = RouteProvider.RouteService.STRAIGHT_TO;
+		} else if (profileKey.equals(RoutingProfilesResources.DIRECT_TO_MODE.name())){
+			routeService = RouteProvider.RouteService.DIRECT_TO;
 		} else if (profileKey.equals(RoutingProfilesResources.BROUTER_MODE.name())) {
 			routeService = RouteProvider.RouteService.BROUTER;
 		} else {
@@ -211,11 +211,11 @@ public class NavigationFragment extends BaseSettingsFragment {
 				context.getString(R.string.special_routing_type),
 				RoutingProfilesResources.STRAIGHT_LINE_MODE.getIconRes(),
 				false, null));
-		profilesObjects.put(RoutingProfilesResources.STRAIGHT_TO_LINE_MODE.name(), new RoutingProfileDataObject(
-				RoutingProfilesResources.STRAIGHT_TO_LINE_MODE.name(),
-				context.getString(RoutingProfilesResources.STRAIGHT_TO_LINE_MODE.getStringRes()),
+		profilesObjects.put(RoutingProfilesResources.DIRECT_TO_MODE.name(), new RoutingProfileDataObject(
+				RoutingProfilesResources.DIRECT_TO_MODE.name(),
+				context.getString(RoutingProfilesResources.DIRECT_TO_MODE.getStringRes()),
 				context.getString(R.string.special_routing_type),
-				RoutingProfilesResources.STRAIGHT_TO_LINE_MODE.getIconRes(),
+				RoutingProfilesResources.DIRECT_TO_MODE.getIconRes(),
 				false, null));
 		if (context.getBRouterService() != null) {
 			profilesObjects.put(RoutingProfilesResources.BROUTER_MODE.name(), new RoutingProfileDataObject(

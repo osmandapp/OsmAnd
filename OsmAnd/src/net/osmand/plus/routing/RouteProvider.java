@@ -80,7 +80,7 @@ public class RouteProvider {
 		OSMAND("OsmAnd (offline)"),
 		BROUTER("BRouter (offline)"),
 		STRAIGHT("Straight line"),
-		STRAIGHT_TO("Straight To");
+		DIRECT_TO("Direct To");
 
 		private final String name;
 
@@ -318,8 +318,8 @@ public class RouteProvider {
 //					res = findOSRMRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.STRAIGHT) {
 					res = findStraightRoute(params);
-				} else if (params.mode.getRouteService() == RouteService.STRAIGHT_TO) {
-					res = findStraightTo(params);
+				} else if (params.mode.getRouteService() == RouteService.DIRECT_TO) {
+					res = findDirectTo(params);
 				} else {
 					res = new RouteCalculationResult("Selected route service is not available");
 				}
@@ -1260,7 +1260,7 @@ public class RouteProvider {
 		return new RouteCalculationResult(dots, null, params, null, true);
 	}
 
-	private RouteCalculationResult findStraightTo(RouteCalculationParams params) {
+	private RouteCalculationResult findDirectTo(RouteCalculationParams params) {
 		params.showOriginalRoute = true;
 		double[] lats = new double[] { params.start.getLatitude(), params.end.getLatitude() };
 		double[] lons = new double[] { params.start.getLongitude(), params.end.getLongitude() };
