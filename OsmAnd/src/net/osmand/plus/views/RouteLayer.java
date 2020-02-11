@@ -1121,7 +1121,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			if (helper.getRoute().isShowOriginalRoute()) {
 				//add projection point on original route
 				double[] projectionOnRoute = calculateProjectionOnRoutePoint(helper.getLastProjection(),
-						helper.getOriginalRouteAllLoc(), helper.getRoute().getCurrentRoute(), tb);
+						helper.getOriginalRouteAllLoc(), helper, tb);
 				if (projectionOnRoute != null) {
 					drawProjectionPoint(tb, canvas, projectionOnRoute);
 				}
@@ -1129,12 +1129,11 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		}
 	}
 	
-	private double[] calculateProjectionOnRoutePoint(Location lastProjection, List<Location> routeNodes, int cd, RotatedTileBox box) {
-		log.debug("cd: " + cd);
+	private double[] calculateProjectionOnRoutePoint(Location lastProjection, List<Location> routeNodes, RoutingHelper helper, RotatedTileBox box) {
 		double[] projectionXY;
 		boolean visible;
-		Location previousInRoute;
-		Location nextInRoute;
+		Location previousInRoute = null;
+		Location nextInRoute = null;
 		//need to change this code by fixing helper.route.getCurrentRoute() miscalculation
 		if (cd == 0) {
 			previousInRoute = routeNodes.get(cd);
@@ -1143,9 +1142,10 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			previousInRoute = routeNodes.get(cd - 1);
 			nextInRoute = routeNodes.get(cd);
 		} else {
-			previousInRoute = routeNodes.get(cd);
-			nextInRoute = routeNodes.get(cd + 1);
+			previousInRoute = routeNodes.get(routeNodes.size() - 2);
+			nextInRoute = routeNodes.get(routeNodes.size() - 1);
 		}
+
 		int centerX = box.getPixXFromLonNoRot(nextInRoute.getLongitude());
 		int centerY = box.getPixYFromLatNoRot(nextInRoute.getLatitude());
 		int aX = box.getPixXFromLonNoRot(lastProjection.getLongitude());
