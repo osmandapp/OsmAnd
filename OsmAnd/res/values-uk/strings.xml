@@ -3485,4 +3485,9 @@
     <string name="sunset_at">Захід сонця о %1$s</string>
     <string name="sunrise_at">Схід сонця о %1$s</string>
     <string name="accessibility_mode_disabled">У вашій системі вимкнено режим доступності.</string>
+    <string name="reset_to_default_category_button_promo">Скидання до усталених після установки усталить упорядкування.</string>
+    <string name="use_system_screen_timeout">Використовувати системний час очікування екрана</string>
+    <string name="use_system_screen_timeout_promo">Усталено вимкнено, якщо OsmAnd працює на передньому плані, екран не закінчується.
+\n
+\nЯкщо увімкнено, OsmAnd використовуватиме налаштування часу очікування системи.</string>
 </resources>

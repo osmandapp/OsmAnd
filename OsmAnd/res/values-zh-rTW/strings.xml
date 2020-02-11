@@ -3485,4 +3485,9 @@
     <string name="sunset_at">日落於 %1$s</string>
     <string name="sunrise_at">日出於 %1$s</string>
     <string name="accessibility_mode_disabled">您的系統停用了無障礙模式。</string>
+    <string name="reset_to_default_category_button_promo">重設為預設值將會把排序重設回安裝後的預設值。</string>
+    <string name="use_system_screen_timeout">使用系統畫面逾時</string>
+    <string name="use_system_screen_timeout_promo">預設停用，如果 OsmAnd 在前景執行，畫面就不會有逾時的問題。
+\n
+\n若啟用，OsmAnd 將會使用系統逾時設定。</string>
 </resources>

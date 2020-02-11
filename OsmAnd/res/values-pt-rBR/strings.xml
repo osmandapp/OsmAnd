@@ -3482,4 +3482,9 @@ Pôr do Sol: %2$s</string>
     <string name="sunset_at">Pôr do sol em %1$s</string>
     <string name="sunrise_at">Nascer do sol em %1$s</string>
     <string name="accessibility_mode_disabled">Modo de acessibilidade desativado em seu sistema.</string>
+    <string name="reset_to_default_category_button_promo">Redefinir como padrão redefinirá a ordem de classificação para o estado padrão após a instalação.</string>
+    <string name="use_system_screen_timeout">Usar tempo limite da tela do sistema</string>
+    <string name="use_system_screen_timeout_promo">Desabilitada por padrão, se OsmAnd estiver sendo executado em primeiro plano, a tela não atingirá o tempo limite.
+\n
+\nSe ativado, o OsmAnd usará as configurações de tempo limite do sistema.</string>
 </resources>

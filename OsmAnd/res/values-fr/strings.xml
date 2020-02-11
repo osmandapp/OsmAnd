@@ -3463,6 +3463,11 @@ représentant la zone : %1$s x %2$s</string>
     <string name="sunrise_at">Lever de soleil à %1$s</string>
     <string name="rearrange_categories">Réorganiser les catégories</string>
     <string name="create_custom_categories_list_promo">Vous pouvez ajouter des catégories personnelles, masquer les catégories que vous ne souhaitez pas utiliser et les trier. La liste des catégories peut être importée et exportée grâce aux profils.</string>
-    <string name="reset_to_default_category_button_promo">Réinitialiser supprimera toutes les catégories personnelles et réinitialisera le tri.</string>
+    <string name="reset_to_default_category_button_promo">Restaurer les valeurs par défaut réinitialisera l\'ordre de tri.</string>
     <string name="accessibility_mode_disabled">Le mode d\'accessibilité est désactivé dans votre système.</string>
+    <string name="add_new_custom_category_button_promo">Vous pouvez ajouter une catégorie personnelle en sélectionnant la ou les catégories souhaitées.</string>
+    <string name="use_system_screen_timeout">Utiliser le délai système de veille écran</string>
+    <string name="use_system_screen_timeout_promo">Désactivé par défaut (quand OsmAnd fonctionne en premier-plan, l\'écran reste allumé).
+\n
+\nSi activé OsmAnd utilisera le délai système de veille écran.</string>
 </resources>
