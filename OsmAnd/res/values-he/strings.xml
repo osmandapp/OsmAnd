@@ -3383,7 +3383,7 @@
     <string name="shared_string_turn_off">כיבוי</string>
     <string name="new_plugin_added">נוסף תוסף חדש</string>
     <string name="join_segments">חיבור מקטעים</string>
-    <string name="add_new_profile_q">להוסיף פרופיל חדש ‚%1&amp;s’\?</string>
+    <string name="add_new_profile_q">להוסיף פרופיל חדש ‚%1$s’\?</string>
     <string name="save_heading">כולל הכותרת</string>
     <string name="save_heading_descr">לשמור את הכותרת של כל נקודת דרך בזמן ההקלטה.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>

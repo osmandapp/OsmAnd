@@ -1,7 +1,6 @@
 package net.osmand.plus.profiles;
 
 import android.app.Activity;
-import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,18 +10,20 @@ import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.SettingsHelper.*;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
-import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
@@ -36,7 +37,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.plus.helpers.ImportHelper.ImportType.ROUTING;
-import static net.osmand.plus.helpers.ImportHelper.ImportType.SETTINGS;
 
 public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -68,14 +68,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 		if (args != null && args.get(DIALOG_TYPE) != null) {
 			type = args.getString(DIALOG_TYPE);
 			selectedItemKey = args.getString(SELECTED_KEY, null);
-			if (type.equals(TYPE_NAV_PROFILE)) {
-				profiles.addAll(NavigationFragment.getRoutingProfiles(app).values());
-			} else if (type.equals(TYPE_BASE_APP_PROFILE)) {
-				profiles.addAll(NavigationFragment.getBaseProfiles(app));
-			} else {
-				LOG.error("Check intent data!");
-				dismiss();
-			}
+			refreshProfiles(app);
 		}
 	}
 
@@ -89,22 +82,11 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 				dismiss();
 			}
 		});
-
-		if (type.equals(TYPE_NAV_PROFILE) || type.equals(TYPE_BASE_APP_PROFILE)) {
-			for (BaseBottomSheetItem item : items) {
-				View bottomDivider = item.getView().findViewById(R.id.divider_bottom);
-				if (bottomDivider != null) {
-					bottomDivider.setVisibility(View.INVISIBLE);
-				}
-			}
-		}
 	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		int activeColorRes = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
-		int iconDefaultColorResId = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
-		OsmandApplication app = getMyApplication();
+		OsmandApplication app = requiredMyApplication();
 		
 		View bottomSpaceView = new View(app);
 		int space = (int) getResources().getDimension(R.dimen.empty_state_text_button_padding_top);
@@ -114,152 +96,171 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 			items.add(new TitleItem(getString(R.string.select_base_profile_dialog_title)));
 			items.add(new LongDescriptionItem(getString(R.string.select_base_profile_dialog_message)));
 			for (int i = 0; i < profiles.size(); i++) {
-				final int pos = i;
-				final ProfileDataObject profile = profiles.get(i);
-				final boolean isSelected = profile.getStringKey().equals(selectedItemKey);
-				final Drawable drawableIcon;
-				if (isSelected) {
-					drawableIcon = getMyApplication().getUIUtilities()
-						.getIcon(profile.getIconRes(), activeColorRes);
-				} else {
-					drawableIcon = getMyApplication().getUIUtilities()
-						.getIcon(profile.getIconRes(), R.color.icon_color_default_light);
-				}
-
-				items.add(new BottomSheetItemWithCompoundButton.Builder()
-					.setCompoundButtonColorId(activeColorRes)
-					.setChecked(isSelected)
-					.setButtonTintList(isSelected
-						? ColorStateList.valueOf(getResolvedColor(getActiveColorId()))
-						: null)
-					.setDescription(profile.getDescription())
-					.setTitle(profile.getName())
-					.setIcon(drawableIcon)
-					.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_radio_btn)
-					.setOnClickListener(new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							if (listener == null) {
-								getListener();
-							}
-							Bundle args = new Bundle();
-							args.putString(PROFILE_KEY_ARG, profile.getStringKey());
-							listener.onSelectedType(args);
-							dismiss();
-						}
-					})
-					.create());
+				ProfileDataObject profile = profiles.get(i);
+				addProfileItem(profile, false);
 			}
-			items.add(new DividerItem(app));
-			items.add(new SimpleBottomSheetItem.Builder()
-					.setTitle(app.getString(R.string.import_from_file))
-					.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_folder, iconDefaultColorResId))
-					.setLayoutId(R.layout.bottom_sheet_item_simple)
-					.setOnClickListener(new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							MapActivity mapActivity = getMapActivity();
-							if (mapActivity == null) {
-								return;
-							}
-							mapActivity.getImportHelper().chooseFileToImport(SETTINGS, new CallbackWithObject<List<SettingsItem>>() {
-								@Override
-								public boolean processResult(List<SettingsItem> result) {
-									for (SettingsItem item : result) {
-										if (SettingsItemType.PROFILE.equals(item.getType())) {
-											if (listener == null) {
-												getListener();
-											}
-											Bundle args = new Bundle();
-											args.putString(PROFILE_KEY_ARG, item.getName());
-											args.putBoolean(IS_PROFILE_IMPORTED_ARG, true);
-											listener.onSelectedType(args);
-											dismiss();
-											break;
-										}
-									}
-									return false;
-								}
-							});
+			/*items.add(new DividerItem(app));
+			addButtonItem(R.string.import_from_file, R.drawable.ic_action_folder, new OnClickListener() {
+				
+					@Override
+					public void onClick(View v) {
+						MapActivity mapActivity = getMapActivity();
+						if (mapActivity == null) {
+							return;
 						}
-					})
-					.create());
+						mapActivity.getImportHelper().chooseFileToImport(SETTINGS, false,
+								new CallbackWithObject<List<SettingsItem>>() {
+									@Override
+									public boolean processResult(List<SettingsItem> result) {
+										for (SettingsItem item : result) {
+											if (SettingsItemType.PROFILE.equals(item.getType())) {
+												if (listener == null) {
+													getListener();
+												}
+												Bundle args = new Bundle();
+												args.putString(PROFILE_KEY_ARG, item.getName());
+												args.putBoolean(IS_PROFILE_IMPORTED_ARG, true);
+												listener.onSelectedType(args);
+												dismiss();
+												break;
+											}
+										}
+										return false;
+									}
+								});
+					}
+			});
 			items.add(new BaseBottomSheetItem.Builder()
 					.setCustomView(bottomSpaceView)
-					.create());
+					.create());*/
 
-		} else if (type.equals(TYPE_NAV_PROFILE)){
+		} else if (type.equals(TYPE_NAV_PROFILE)) {
 			items.add(new TitleItem(getString(R.string.select_nav_profile_dialog_title)));
 			items.add(new LongDescriptionItem(getString(R.string.select_nav_profile_dialog_message)));
 			for (int i = 0; i < profiles.size(); i++) {
-				final ProfileDataObject profile = profiles.get(i);
-				final boolean isSelected = profile.getStringKey().equals(selectedItemKey);
-				final Drawable drawableIcon;
-				if (isSelected) {
-					drawableIcon = getMyApplication().getUIUtilities()
-						.getIcon(profile.getIconRes(), activeColorRes);
-				} else {
-					drawableIcon = getMyApplication().getUIUtilities()
-						.getIcon(profile.getIconRes(), R.color.icon_color_default_light);
+				final RoutingProfileDataObject profile = (RoutingProfileDataObject) profiles.get(i);
+				boolean showBottomDivider = false;
+				if (i < profiles.size() - 1) {
+					RoutingProfileDataObject nextProfile = (RoutingProfileDataObject) profiles.get(i + 1);
+					if (profile.getFileName() == null) { 
+						showBottomDivider = nextProfile.getFileName() != null; 
+					} else { 
+						showBottomDivider = !profile.getFileName().equals(nextProfile.getFileName()); 
+					} 
 				}
-
-				items.add(new BottomSheetItemWithCompoundButton.Builder()
-					.setCompoundButtonColorId(activeColorRes)
-					.setChecked(isSelected)
-					.setButtonTintList(isSelected
-						? ColorStateList.valueOf(getResolvedColor(getActiveColorId()))
-						: null)
-					.setDescription(profile.getDescription())
-					.setTitle(profile.getName())
-					.setIcon(drawableIcon)
-					.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_radio_btn)
-					.setOnClickListener(new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							if (listener == null) {
-								getListener();
-							}
-							Bundle args = new Bundle();
-							args.putString(PROFILE_KEY_ARG, profile.getStringKey());
-							listener.onSelectedType(args);
-							dismiss();
-						}
-					})
-					.create());
+				addProfileItem(profile, showBottomDivider);
 			}
 			items.add(new DividerItem(app));
 			items.add(new LongDescriptionItem(app.getString(R.string.osmand_routing_promo)));
-			items.add(new SimpleBottomSheetItem.Builder()
-					.setTitle(app.getString(R.string.import_routing_file))
-					.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_folder, iconDefaultColorResId))
-					.setLayoutId(R.layout.bottom_sheet_item_simple)
-					.setOnClickListener(new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							MapActivity mapActivity = getMapActivity();
-							if (mapActivity == null) {
-								return;
-							}
-							mapActivity.getImportHelper().chooseFileToImport(ROUTING, new CallbackWithObject<String>() {
+			addButtonItem(R.string.import_routing_file, R.drawable.ic_action_folder, new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					MapActivity mapActivity = getMapActivity();
+					if (mapActivity == null) {
+						return;
+					}
+					mapActivity.getImportHelper().chooseFileToImport(ROUTING, false,
+							new CallbackWithObject<String>() {
 								@Override
 								public boolean processResult(String profileKey) {
-									if (listener == null) {
-										getListener();
-									}
-									Bundle args = new Bundle();
-									args.putString(PROFILE_KEY_ARG, profileKey);
-									args.putBoolean(IS_PROFILE_IMPORTED_ARG, true);
-									listener.onSelectedType(args);
-									dismiss();
+									refreshView();
 									return false;
 								}
 							});
-						}
-					})
-					.create());
+				}
+			});
 			items.add(new BaseBottomSheetItem.Builder()
 					.setCustomView(bottomSpaceView)
 					.create());
+		}
+	}
+	
+	private void addProfileItem(final ProfileDataObject profile, boolean showBottomDivider) {
+		OsmandApplication app = requiredMyApplication();
+		
+		int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		int iconDefaultColorResId = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
+		
+		View itemView = View.inflate(getContext(), R.layout.bottom_sheet_item_with_descr_and_radio_btn, null);
+		TextView tvTitle = itemView.findViewById(R.id.title);
+		TextView tvDescription = itemView.findViewById(R.id.description);
+		ImageView ivIcon = itemView.findViewById(R.id.icon);
+		CompoundButton compoundButton = itemView.findViewById(R.id.compound_button);
+		View bottomDivider = itemView.findViewById(R.id.divider_bottom);
+
+		tvTitle.setText(profile.getName());
+		tvDescription.setText(profile.getDescription());
+		
+		final boolean isSelected = profile.getStringKey().equals(selectedItemKey);
+		final Drawable drawableIcon = app.getUIUtilities().getIcon(profile.getIconRes(), 
+				isSelected ? activeColorResId : iconDefaultColorResId);
+		ivIcon.setImageDrawable(drawableIcon);
+		compoundButton.setChecked(isSelected);
+		UiUtilities.setupCompoundButton(compoundButton, nightMode, UiUtilities.CompoundButtonType.GLOBAL);
+		bottomDivider.setVisibility(showBottomDivider ? View.VISIBLE : View.INVISIBLE);
+
+		items.add(new BaseBottomSheetItem.Builder()
+				.setCustomView(itemView)
+				.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						if (listener == null) {
+							getListener();
+						}
+						Bundle args = new Bundle();
+						args.putString(PROFILE_KEY_ARG, profile.getStringKey());
+						listener.onSelectedType(args);
+						dismiss();
+					}
+				})
+				.create());
+	}
+	
+	private void addButtonItem(int titleId, int iconId, OnClickListener listener) {
+		OsmandApplication app = requiredMyApplication();
+		
+		int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		
+		View buttonView = View.inflate(app, R.layout.bottom_sheet_item_preference_btn, null);
+		TextView tvTitle = buttonView.findViewById(R.id.title);
+		tvTitle.setText(app.getString(titleId));
+		
+		ImageView ivIcon = buttonView.findViewById(R.id.icon);
+		ivIcon.setImageDrawable(app.getUIUtilities().getIcon(iconId, activeColorResId));
+
+		items.add(new BaseBottomSheetItem.Builder()
+				.setCustomView(buttonView)
+				.setOnClickListener(listener)
+				.create());
+	}
+
+	private void refreshProfiles(OsmandApplication app) {
+		if (type.equals(TYPE_NAV_PROFILE)) {
+			profiles.addAll(NavigationFragment.getSortedRoutingProfiles(app));
+		} else if (type.equals(TYPE_BASE_APP_PROFILE)) {
+			profiles.addAll(NavigationFragment.getBaseProfiles(app));
+		} else {
+			LOG.error("Check data type!");
+			dismiss();
+		}
+	}
+
+	private void refreshView() {
+		Activity activity = getActivity();
+		View mainView = getView();
+		refreshProfiles(getMyApplication());
+		if (activity != null && mainView != null) {
+			LinearLayout itemsContainer = (LinearLayout) mainView.findViewById(useScrollableItemsContainer()
+					? R.id.scrollable_items_container : R.id.non_scrollable_items_container);
+			if (itemsContainer != null) {
+				itemsContainer.removeAllViews();
+			}
+			items.clear();
+			createMenuItems(null);
+			for (BaseBottomSheetItem item : items) {
+				item.inflate(activity, itemsContainer, nightMode);
+			}
+			setupHeightAndBackground(mainView);
 		}
 	}
 
