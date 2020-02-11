@@ -207,7 +207,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	fun updateLiveTrack(userId: Int, chatId: Long, deviceName: String, enable: Boolean) {
 		val tracksInfo = liveTracksInfo.toMutableList()
 		if (enable) {
-			val colorIndex = if (tracksInfo.size > 0) (tracksInfo.last().colorIndex + 1) % ShowLocationHelper.GPX_COLORS_COUNT else 0
+			val colorIndex = if (tracksInfo.size > 0) (tracksInfo.last().colorIndex + 1) % ShowLocationHelper.GPX_COLORS.size else 0
 			tracksInfo.add(LiveTrackInfo(userId, chatId, deviceName, colorIndex))
 		} else {
 			tracksInfo.removeAll { it.userId == userId && it.chatId == chatId && it.deviceName == deviceName }
