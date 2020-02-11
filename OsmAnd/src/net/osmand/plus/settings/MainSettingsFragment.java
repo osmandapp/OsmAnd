@@ -125,7 +125,7 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 		} else if (IMPORT_PROFILE.equals(prefId)) {
 			final MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
-				mapActivity.getImportHelper().chooseFileToImport(SETTINGS, new CallbackWithObject<List<SettingsItem>>() {
+				mapActivity.getImportHelper().chooseFileToImport(SETTINGS, false, new CallbackWithObject<List<SettingsItem>>() {
 					
 					@Override
 					public boolean processResult(List<SettingsItem> result) {

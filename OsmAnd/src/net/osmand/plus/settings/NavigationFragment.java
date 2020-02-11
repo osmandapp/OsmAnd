@@ -8,7 +8,6 @@ import android.support.v7.preference.SwitchPreferenceCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -23,6 +22,8 @@ import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +38,7 @@ public class NavigationFragment extends BaseSettingsFragment {
 
 	public static final String TAG = NavigationFragment.class.getSimpleName();
 	public static final String NAVIGATION_TYPE = "navigation_type";
+	public static final String OSMAND_NAVIGATION = "osmand_navigation";
 
 	private SelectProfileBottomSheetDialogFragment.SelectProfileListener navTypeListener;
 	private Map<String, RoutingProfileDataObject> routingProfileDataObjects;
@@ -88,7 +90,7 @@ public class NavigationFragment extends BaseSettingsFragment {
 	private void setupSpeakRoutingAlarmsPref() {
 		Drawable disabled = getContentIcon(R.drawable.ic_action_volume_mute);
 		Drawable enabled = getActiveIcon(R.drawable.ic_action_volume_up);
-		Drawable icon = AndroidUtils.createEnabledStateListDrawable(disabled, enabled);
+		Drawable icon = getPersistentPrefIcon(enabled, disabled);
 
 		SwitchPreferenceCompat speakRoutingAlarms = (SwitchPreferenceCompat) findPreference(settings.VOICE_MUTE.getId());
 		speakRoutingAlarms.setIcon(icon);
@@ -155,6 +157,8 @@ public class NavigationFragment extends BaseSettingsFragment {
 		RouteProvider.RouteService routeService;
 		if (profileKey.equals(RoutingProfilesResources.STRAIGHT_LINE_MODE.name())) {
 			routeService = RouteProvider.RouteService.STRAIGHT;
+		} else if (profileKey.equals(RoutingProfilesResources.STRAIGHT_TO_LINE_MODE.name())){
+			routeService = RouteProvider.RouteService.STRAIGHT_TO;
 		} else if (profileKey.equals(RoutingProfilesResources.BROUTER_MODE.name())) {
 			routeService = RouteProvider.RouteService.BROUTER;
 		} else {
@@ -164,6 +168,41 @@ public class NavigationFragment extends BaseSettingsFragment {
 		appMode.setRoutingProfile(profileKey);
 	}
 
+	public static List<RoutingProfileDataObject> getSortedRoutingProfiles(OsmandApplication app) {
+		List<RoutingProfileDataObject> result = new ArrayList<>();
+		Map<String, List<RoutingProfileDataObject>> routingProfilesByFileNames = getRoutingProfilesByFileNames(app);
+		List<String> fileNames = new ArrayList<>(routingProfilesByFileNames.keySet());
+		Collections.sort(fileNames, new Comparator<String>() {
+			@Override
+			public int compare(String s, String t1) {
+				return s.equals(OSMAND_NAVIGATION) ? -1 : t1.equals(OSMAND_NAVIGATION) ? 1 : s.compareToIgnoreCase(t1);
+			}
+		});
+		for (String fileName : fileNames) {
+			List<RoutingProfileDataObject> routingProfilesFromFile = routingProfilesByFileNames.get(fileName);
+			if (routingProfilesFromFile != null) {
+				Collections.sort(routingProfilesFromFile);
+				result.addAll(routingProfilesFromFile);
+			}
+		}
+		return result;
+	}
+
+	public static Map<String, List<RoutingProfileDataObject>> getRoutingProfilesByFileNames(OsmandApplication app) {
+		Map<String, List<RoutingProfileDataObject>> result = new HashMap<>();
+		for (final RoutingProfileDataObject profile : getRoutingProfiles(app).values()) {
+			String fileName = profile.getFileName() != null ? profile.getFileName() : OSMAND_NAVIGATION;
+			if (result.containsKey(fileName)) {
+				result.get(fileName).add(profile);
+			} else {
+				result.put(fileName, new ArrayList<RoutingProfileDataObject>() {
+					{ add(profile); }
+				});
+			}
+		}
+		return result;
+	}
+
 	public static Map<String, RoutingProfileDataObject> getRoutingProfiles(OsmandApplication context) {
 		Map<String, RoutingProfileDataObject> profilesObjects = new HashMap<>();
 		profilesObjects.put(RoutingProfilesResources.STRAIGHT_LINE_MODE.name(), new RoutingProfileDataObject(
@@ -171,6 +210,12 @@ public class NavigationFragment extends BaseSettingsFragment {
 				context.getString(RoutingProfilesResources.STRAIGHT_LINE_MODE.getStringRes()),
 				context.getString(R.string.special_routing_type),
 				RoutingProfilesResources.STRAIGHT_LINE_MODE.getIconRes(),
+				false, null));
+		profilesObjects.put(RoutingProfilesResources.STRAIGHT_TO_LINE_MODE.name(), new RoutingProfileDataObject(
+				RoutingProfilesResources.STRAIGHT_TO_LINE_MODE.name(),
+				context.getString(RoutingProfilesResources.STRAIGHT_TO_LINE_MODE.getStringRes()),
+				context.getString(R.string.special_routing_type),
+				RoutingProfilesResources.STRAIGHT_TO_LINE_MODE.getIconRes(),
 				false, null));
 		if (context.getBRouterService() != null) {
 			profilesObjects.put(RoutingProfilesResources.BROUTER_MODE.name(), new RoutingProfileDataObject(

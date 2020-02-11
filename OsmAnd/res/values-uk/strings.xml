@@ -796,8 +796,8 @@
     <string name="precise_routing_mode">Точний маршрут (alpha)</string>
     <string name="av_video_format_descr">Формат відео:</string>
     <string name="av_video_format">Формат відео</string>
-    <string name="av_use_external_recorder_descr">Використовувати системну програму для запису відео.</string>
-    <string name="av_use_external_recorder">Використовувати системну програму</string>
+    <string name="av_use_external_recorder_descr">Використовувати системний записувач відео.</string>
+    <string name="av_use_external_recorder">Використовувати системний записувач</string>
     <string name="av_use_external_camera_descr">Використовувати системний застосунок для світлин.</string>
     <string name="recording_unavailable">недоступно</string>
     <string name="shared_string_control_stop">Стоп</string>
@@ -2544,7 +2544,7 @@
     <string name="hide_passed">Приховати проходження</string>
     <string name="shared_string_markers">Маркери</string>
     <string name="coordinates_format">Формат координат</string>
-    <string name="use_system_keyboard">Використовувати системну клавіатуру</string>
+    <string name="use_system_keyboard">Використовувати системну набірницю</string>
     <string name="fast_coordinates_input_descr">Виберіть формат введення координат. Ви завжди можете змінити його, натиснувши „Параметри“.</string>
     <string name="fast_coordinates_input">Швидке введення координат</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Уникати льодових доріг і бродів</string>
@@ -3484,4 +3484,5 @@
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Захід сонця о %1$s</string>
     <string name="sunrise_at">Схід сонця о %1$s</string>
+    <string name="accessibility_mode_disabled">У вашій системі вимкнено режим доступності.</string>
 </resources>

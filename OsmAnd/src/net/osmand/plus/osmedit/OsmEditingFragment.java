@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -71,7 +70,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	private void setupOfflineEditingPref() {
 		Drawable disabled = getContentIcon(R.drawable.ic_action_offline);
 		Drawable enabled = getActiveIcon(R.drawable.ic_world_globe_dark);
-		Drawable icon = AndroidUtils.createEnabledStateListDrawable(disabled, enabled);
+		Drawable icon = getPersistentPrefIcon(enabled, disabled);
 
 		SwitchPreferenceEx offlineEditingPref = (SwitchPreferenceEx) findPreference(settings.OFFLINE_EDITION.getId());
 		offlineEditingPref.setDescription(getString(R.string.offline_edition_descr));

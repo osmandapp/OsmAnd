@@ -2785,7 +2785,7 @@
     <string name="touring_view_render_descr">أسلوب الملاحة مع التباين العالي والحد الأعلى من التفاصيل. يتضمن كل خيارات النمط الافتراضي OsmAnd ، مع عرض أكبر قدر ممكن من التفاصيل ، ولا سيما الطرق والمسارات وطرق السفر الأخرى. التمييز الواضح بين \"جولة الأطلس\" بين أنواع الطرق. مناسبة للاستخدام النهاري والليلي وفي الهواء الطلق.</string>
     <string name="default_render_descr">أسلوب الغرض العام. تقديم نظافة مبسطة في المدن المكتظة بالسكان. الملامح الرئيسية: خطوط الكنتور ، والطرق ، وجودة السطح ، والقيود المفروضة على الوصول ، ودروع الطريق ، والمسارات التي تظهر وفقًا لمقياس SAC ، وميزات رياضة الماء الأبيض.</string>
     <string name="travel_card_download_descr">قم بتنزيل أدلة السفر هذه من ويكي الرحلات لعرض مقالات حول الأماكن في العالم بدون إنترنت.</string>
-    <string name="welcome_to_open_beta_description">دليل السفر حاليا على أساس wikivoyage.اختبار كافة الميزات أثناء اختبار بيتا المفتوحة مجانا.بعد ذلك، وأدلة السفر ستكون متاحة للمشتركين في osmand محدود و اصحاب osmand +.</string>
+    <string name="welcome_to_open_beta_description">دليل السفر حاليا على أساس Wikivoyage. اختبار كافة الميزات أثناء اختبار بيتا المفتوحة مجانا.بعد ذلك، وأدلة السفر ستكون متاحة للمشتركين في osmand غير المحدود و اصحاب +osmand.</string>
     <string name="av_locations_selected_desc">ملف GPX مع الإحداثيات والبيانات من الملاحظات المحددة.</string>
     <string name="av_locations_all_desc">ملف GPX مع الإحداثيات والبيانات من كافة الملاحظات.</string>
     <!--string name="release_3_0">• جديد: دعم للسفر دون اتصال عالمية وأدلة. وترتبط المواقع المشار إليها على الخريطة. الحصول على البيانات الأولية من ويكيفوياجي.
@@ -3352,7 +3352,7 @@
     <string name="osm_editing">تعديل OpenStreetMap</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">سترى الأيقونة فقط أثناء الملاحة أو أثناء التحرك.</string>
-    <string name="button_rate">معدل</string>
+    <string name="button_rate">قيم</string>
     <string name="select_map_icon_descr">تظهر أيقونة الخريطة فقط على الخريطة ، وتتغير أثناء التنقل إلى أيقونة التنقل.</string>
     <string name="logcat_buffer_descr">تحقق وتبادل سجلات مفصلة من التطبيق</string>
     <string name="search_offline_geo_error">تعذر تحليل الهدف الجغرافي \'%s\'.</string>
@@ -3398,4 +3398,5 @@
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">غروب الشمس على %1$s</string>
     <string name="sunrise_at">شروق الشمس على %1$s</string>
+    <string name="accessibility_mode_disabled">تم تعطيل وضع إمكانية الوصول في النظام الخاص بك.</string>
 </resources>

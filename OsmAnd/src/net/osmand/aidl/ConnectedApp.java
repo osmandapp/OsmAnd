@@ -184,6 +184,13 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 
 	TextInfoWidget createWidgetControl(final MapActivity mapActivity, final String widgetId) {
 		TextInfoWidget control = new TextInfoWidget(mapActivity) {
+
+			private boolean init = true;
+			private String cachedTxt;
+			private String cachedSubtext;
+			private Boolean cachedNight;
+			private Integer cachedIcon;
+
 			@Override
 			public boolean updateInfo(OsmandMapLayer.DrawSettings drawSettings) {
 				AidlMapWidgetWrapper widget = widgets.get(widgetId);
@@ -192,15 +199,28 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 					String subtext = widget.getDescription();
 					boolean night = drawSettings != null && drawSettings.isNightMode();
 					int icon = AndroidUtils.getDrawableId(mapActivity.getMyApplication(), night ? widget.getDarkIconName() : widget.getLightIconName());
-					setText(txt, subtext);
-					if (icon != 0) {
-						setImageDrawable(icon);
-					} else {
-						setImageDrawable(null);
+					if (init || !Algorithms.objectEquals(txt, cachedTxt) || !Algorithms.objectEquals(subtext, cachedSubtext)
+							 || !Algorithms.objectEquals(night, cachedNight) || !Algorithms.objectEquals(icon, cachedIcon)) {
+						init = false;
+						cachedTxt = txt;
+						cachedSubtext = subtext;
+						cachedNight = night;
+						cachedIcon = icon;
+
+						setText(txt, subtext);
+						if (icon != 0) {
+							setImageDrawable(icon);
+						} else {
+							setImageDrawable(null);
+						}
+						return true;
 					}
+					return false;
+				} else {
+					setText(null, null);
+					setImageDrawable(null);
 					return true;
 				}
-				return false;
 			}
 		};
 		control.updateInfo(null);

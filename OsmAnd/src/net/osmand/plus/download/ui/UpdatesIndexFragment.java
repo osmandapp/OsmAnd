@@ -161,7 +161,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 						dialog.setTitle(R.string.update_all_maps);
 						dialog.setMessage(getString(R.string.update_all_maps_q, indexItems.size()));
 						dialog.setNegativeButton(R.string.shared_string_cancel, null);
-						dialog.setPositiveButton(R.string.update, new DialogInterface.OnClickListener() {
+						dialog.setPositiveButton(R.string.shared_string_update, new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 								getMyActivity().startDownload(indexItems.toArray(new IndexItem[indexItems.size()]));

@@ -3454,11 +3454,15 @@ représentant la zone : %1$s x %2$s</string>
     <string name="monitoring_min_speed_descr_remark">Remarque : vérification de vitesse &gt; 0. La plupart des puces GPS fournissent une vitesse uniquement lorsque vous êtes en mouvement. Par conséquent, l\'indication du paramètre &gt; 0 pour ce filtre utilise la détection de mouvement par la puce GPS. Mais même s\'il n\'est pas filtré ici au moment de l\'enregistrement, nous utilisons toujours cette fonctionnalité dans notre analyse des traces GPX pour déterminer la distance corrigée, c\'est-à-dire que la valeur affichée dans ce champ est la distance enregistrée en déplacement.</string>
     <string name="monitoring_min_distance_descr_side_effect">Effet secondaire : les périodes de repos ne seront pas enregistrées ou seulement par un point. De petits mouvements, comme des pas sur le côté, pourront être ignorés. Votre fichier contiendra moins d\'informations exploitables en post-traitement et aura des statistiques moins exactes (éliminant les points redondants mais conservant les erreurs de position dues à une mauvaise réception ou aux artefacts de la puce GPS).</string>
     <string name="shared_string_available">Disponible</string>
-    <string name="add_custom_category">Ajouter une catégorie personnalisée</string>
+    <string name="add_custom_category">Ajouter une catégorie personnelle</string>
     <string name="rendering_attr_streetLightingNight_name">Afficher seulement de nuit</string>
     <string name="plugin_prefs_reset_successful">Tous les paramètres du greffon ont été restaurés à leurs valeurs par défaut.</string>
     <string name="profile_prefs_reset_successful">Tous les paramètres du profile ont été restaurés à leurs valeurs par défaut.</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Coucher de soleil à %1$s</string>
     <string name="sunrise_at">Lever de soleil à %1$s</string>
+    <string name="rearrange_categories">Réorganiser les catégories</string>
+    <string name="create_custom_categories_list_promo">Vous pouvez ajouter des catégories personnelles, masquer les catégories que vous ne souhaitez pas utiliser et les trier. La liste des catégories peut être importée et exportée grâce aux profils.</string>
+    <string name="reset_to_default_category_button_promo">Réinitialiser supprimera toutes les catégories personnelles et réinitialisera le tri.</string>
+    <string name="accessibility_mode_disabled">Le mode d\'accessibilité est désactivé dans votre système.</string>
 </resources>

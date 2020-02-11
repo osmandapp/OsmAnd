@@ -443,7 +443,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 							net.osmand.Location.distanceBetween(view.getLatitude(), view.getLongitude(), parkingPoint.getLatitude(), parkingPoint.getLongitude(), calculations);
 							d = (int) calculations[0];
 						}
-						if (distChanged(cachedMeters, d)) {
+						if (isUpdateNeeded() || distChanged(cachedMeters, d)) {
 							cachedMeters = d;
 							if (cachedMeters <= 20) {
 								cachedMeters = 0;
@@ -465,8 +465,13 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 						return true;
 					}
 				return false;
-			}		
-			
+			}
+
+			@Override
+			public boolean isMetricSystemDepended() {
+				return true;
+			}
+
 			/**
 			 * Utility method.
 			 * @param oldDist

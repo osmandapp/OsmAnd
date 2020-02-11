@@ -3449,4 +3449,5 @@
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">%1$s\'de gün batımı</string>
     <string name="sunrise_at">%1$s\'de gün doğumu</string>
+    <string name="accessibility_mode_disabled">Sisteminizde erişilebilirlik modu devre dışı.</string>
 </resources>

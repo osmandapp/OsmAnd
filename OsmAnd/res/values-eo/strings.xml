@@ -477,7 +477,7 @@ Lon: %2$s</string>
     <string name="share_note">Kunhavigi noton</string>
     <string name="location_on_map">Loko:\nLat %1$s\nLon %2$s</string>
     <string name="watch">Montri</string>
-    <string name="notes">Notoj</string>
+    <string name="notes">Sonaj/videaj notoj</string>
     <string name="online_map">Enreta mapo</string>
     <string name="roads_only">Nur vojoj</string>
     <string name="rendering_attr_pisteRoutes_name">Descendejoj</string>
@@ -495,8 +495,8 @@ Lon: %2$s</string>
     <string name="edit_group">Redakti grupon</string>
     <string name="parking_place">Parkumejo</string>
     <string name="rendering_attr_pisteGrooming_name">Skivoja prepar-speco</string>
-    <string name="world_ski_missing">Por montri skiadajn mapojn, speciala eksterreta mapo devas esti elŝutita</string>
-    <string name="nautical_maps_missing">Por montri ŝipveturadajn mapojn, speciala eksterreta mapo devas esti elŝutita</string>
+    <string name="world_ski_missing">Elŝutu la specialan eksterretan mapon por vidigi skiadajn objektojn.</string>
+    <string name="nautical_maps_missing">Elŝutu la specialan eksterretan mapon por vidigi ŝipveturadajn objektojn.</string>
     <string name="remove_the_tag">FORIGI LA ETIKEDON</string>
     <string name="version_settings">Kompilaĵoj</string>
     <string name="version_settings_descr">Elŝuti antaŭ-alfajn versiojn.</string>
@@ -817,9 +817,9 @@ Lon: %2$s</string>
     <string name="routing_attr_weight_description">Agordi maksimuman permesatan pezon de veturilo.</string>
     <string name="routing_attr_height_name">Altlimo</string>
     <string name="routing_attr_height_description">Agordi maksimuman permesan alton de veturilo.</string>
-    <string name="android_19_location_disabled">Ekde la versio 4.4 (KitKat) de Android, la antaŭa dosierujo (%s) estas evitinda. Ĉu kopii ĉiujn dosierojn de OsmAnd al la nova dosierujo\?
+    <string name="android_19_location_disabled">Ekde la versio 4.4 (KitKat) de Android, la antaŭa dosierujo (%s) estas evitinda. Ĉu kopii ĉiujn dosierojn de OsmAnd al la nova dosierujo\? 
 \n Rimarko 1: viaj malnovaj dosieroj ne estos ŝanĝitaj (tamen vi povos forigi ilin permane). 
-\n Rimarko 2: dosieroj en la nova loko ne povos esti uzitaj ambaŭ per OsmAnd kaj OsmAnd+.</string>
+\n Rimarko 2: dosieroj en la nova loko ne povos esti uzataj ambaŭ fare de OsmAnd kaj OsmAnd+.</string>
     <string name="copying_osmand_one_file_descr">Kopiado de dosiero (%s) al la nova loko…</string>
     <string name="copying_osmand_files_descr">Kopiado de datum-dosieroj de OsmAnd al la nova dosierujo (%s)…</string>
     <string name="copying_osmand_files">Kopiado de datum-dosieroj de OsmAnd…</string>
@@ -869,7 +869,7 @@ Lon: %2$s</string>
     <string name="driving_region">Trafika regiono</string>
     <string name="driving_region_descr">Elekti trafikan regionon: Usono, Eŭropo, Britujo, Azio kaj aliaj.</string>
     <string name="speak_title">Anoncado…</string>
-    <string name="speak_descr">Agordi anoncojn pri strataj nomoj, trafikaj avertoj (devigaj haltejoj, strat-ĝiboj), rapid-kontroliloj, rapidlimoj.</string>
+    <string name="speak_descr">Agordi anoncojn pri strataj nomoj, trafikaj avertoj (devigaj haltejoj, strat‑ĝiboj), rapid‑kontroliloj kaj rapidlimoj.</string>
     <string name="speak_street_names">Nomoj de stratoj (parolsintezitaj)</string>
     <string name="speak_speed_limit">Rapidlimoj</string>
     <string name="speak_cameras">Rapid-kontroliloj</string>
@@ -935,7 +935,7 @@ Lon: %2$s</string>
     <string name="osmand_background_plugin_description">Montras agordojn pri aktivigi spuradon kaj navigadon fone per periode aktivigi GPS (ĉe malŝaltita ekrano).</string>
     <string name="contribution_activity">Instaleblaj versioj</string>
     <string name="accessibility_options">Alireblecaj agordoj</string>
-    <string name="osmand_accessibility_description">Tiu ĉi kromprogramo ebligas uzi alireblecajn ilojn senpere en OsmAnd. Ĝi plifaciligas ekz. agordi rapidon de parolsintezitaj dialogaj helpoj, uzi montril-butonojn por navigado sur ekrano, uzi stirglobon por skalado, aŭ uzi tekst-al-voĉajn sciigojn ekz. por aŭtomate anonci vian pozicion.</string>
+    <string name="osmand_accessibility_description">Ebligas uzi alireblecajn eblaĵojn senpere en OsmAnd. Ĝi plifaciligas ekz. agordi rapidon de parolsintezitaj dialogaj helpoj, uzi montril‑butonojn por navigado sur ekrano, uzi stirglobon por skalado, aŭ uzi voĉajn sciigojn ekz. por aŭtomate anonci vian pozicion.</string>
     <string name="select_address_activity">Enigu adreson</string>
     <string name="favourites_list_activity">Elekti ŝatatan</string>
     <string name="local_openstreetmap_act_title">Modifoj de OSM</string>
@@ -960,7 +960,7 @@ Lon: %2$s</string>
     <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="av_def_action_picture">Fari foton</string>
     <string name="recording_context_menu_precord">Fari foton</string>
-    <string name="dropbox_plugin_description">La kromprogramo Dropbox ebligas al vi samtempigi kursojn kaj sonajn/videajn notojn kun via konto ĉe Dropbox.</string>
+    <string name="dropbox_plugin_description">Samtempigi kursojn kaj sonajn/videajn notojn kun via konto ĉe Dropbox.</string>
     <string name="dropbox_plugin_name">Dropbox kromprogramo</string>
     <string name="intermediate_points_change_order">Ŝanĝi ordon</string>
     <string name="srtm_paid_version_msg">Bonvolu konsideri aĉeti la kromprogramon “nivelkurboj” en la vendejo por subteni ĝian pluan evoluigon.</string>
@@ -1517,13 +1517,14 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
 \n 
 \nAktivigo de tiu ĉi map-vido ŝanĝas map-aspekton al ‘vintro kaj skiado’, montranta ĉiun terenon kovritan de neĝo. La vidon oni povas malaktivigi, per malaktivigi la kromprogramon tie ĉi, aŭ per ŝanĝi de ‘map-aspekto’ en la menuo ‘agordi mapon.</string>
     <string name="osmand_parking_plugin_name">Parkumeja pozicio</string>
-    <string name="osmand_parking_plugin_description">Tiu ĉi kromprogramo plifaciligas al vi registri kie via aŭto estas parkumata kaj kiom da parkumeja tempo restas (se ĝi estas limigita). Ambaŭ loko kaj tempo estas montrataj en la stirpanelo de OsmAnd kaj sur la fenestraĵo sur la map‑ekrano. Memorigo povas esti aldonita al la Androida kalendaro.</string>
+    <string name="osmand_parking_plugin_description">Ebligas al vi registri kie via aŭto estas parkumata kaj kiom da parkumeja tempo restas.
+\n Ambaŭ loko kaj tempo estas montrataj en la stirpanelo de kaj sur la fenestraĵo sur la map‑ekrano. Memorigo povas esti aldonita al la Androida kalendaro.</string>
     <string name="osmand_distance_planning_plugin_name">Kalkulilo de distanco kaj planilo</string>
-    <string name="osmand_distance_planning_plugin_description">Tiu ĉi kromprogramo liveras fenestraĵon por krei kursojn – per tuŝi sur la mapo aŭ per uzi aŭ modifi ekzistajn GPX-dosierojn – kaj por por plani vojaĝon kaj mezuri distancon inter punktoj. Rezultoj povas esti konservitaj kiel GPX-dosierojn, kiujn oni povas estonte uzi por gvidado.</string>
+    <string name="osmand_distance_planning_plugin_description">Ebligas difini kursojn per frapeti la mapon kaj modifi ekzistajn GPX‑dosierojn – por plani vojaĝon kaj mezuri distancon inter punktoj. Rezultoj povas esti konservitaj kiel GPX‑dosierojn, kiujn oni povas estonte uzi por gvidado.</string>
     <string name="osm_settings">OpenStreetMap-redaktilo</string>
-    <string name="osm_editing_plugin_description">Per tiu ĉi kromprogramo OsmAnd povas esti uzata por kontribui al OSM per krei aŭ redakti OSM-interesejojn, per raporti aŭ komenti OSM-rimarkojn, per aldoni registritajn GPX-dosierojn. OSM estas komunuma, tutmonda, publika map-projekto. Por detaloj, legu: https://openstreetmap.org. Aktiva kontribuado estas laŭdinda, kaj vi povas kontribui senpere per OsmAnd, se vi entajpos viajn OSM-ajn ensalutilojn en la aplikaĵo.</string>
+    <string name="osm_editing_plugin_description">Kontribuu al OSM per krei aŭ modifi punktojn (ekz. vendejojn, vidindaĵojn, hidrantojn), malfermi aŭ komenti rimarkojn kaj alŝuti registritajn GPX‑spurojn per OsmAnd. OpenStreetMap (OSM) estas komunuma, tutmonda kaj publika map‑projekto. Necesas krei konton ĉe OpenStreetMap.org por kontribui.</string>
     <string name="debugging_and_development">OsmAnd-programistilo</string>
-    <string name="osmand_development_plugin_description">Montras agordojn por programado kaj senerarigado kiel testado aŭ simulado de kurso, efikeco de ekran‑bildigado, aŭ voĉaj anoncoj. Tiuj ĉi agordoj taŭgas por programistoj kaj ne estas bezonataj por norma uzanto.</string>
+    <string name="osmand_development_plugin_description">Agordoj pri evoluigo kaj senerarigado de OsmAnd: simuladi kurson, efikeco de ekran‑bildigado, voĉaj anoncoj. Destinitaj por programistoj, ne bezonataj por kutimaj uzantoj.</string>
     <string name="lang_en_gb">Angla (Brita)</string>
     <string name="level_to_switch_vector_raster_descr">Uzi kahelajn mapojn de tiu ĉi pligrandigo.</string>
     <string name="level_to_switch_vector_raster">Minimuma vektora skal-nivelo</string>
@@ -3467,4 +3468,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Sunsubiro je %1$s</string>
     <string name="sunrise_at">Sunleviĝo je %1$s</string>
+    <string name="monitoring_min_distance_descr_recommendation">Konsilo: provu agordi ĝin al 5 metroj se vi ne bezonas registri pli detalajn movojn kaj ne volas registri datumojn dum restado.</string>
+    <string name="live_monitoring_time_buffer">Temp‑bufro</string>
+    <string name="live_monitoring_tracking_interval">Registrada intertempo</string>
 </resources>

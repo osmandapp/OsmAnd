@@ -1,16 +1,32 @@
 package net.osmand.plus;
 
+import android.Manifest;
 import android.app.Activity;
-import android.location.GnssNavigationMessage;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.hardware.GeomagneticField;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.location.GnssStatus;
+import android.location.GpsSatellite;
+import android.location.GpsStatus;
+import android.location.GpsStatus.Listener;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
+import android.os.Bundle;
+import android.provider.Settings;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.PlatformUtil;
@@ -22,31 +38,16 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RoutingHelper.RouteSegmentSearchResult;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.MapUtils;
-import android.Manifest;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.hardware.GeomagneticField;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
-import android.location.GpsSatellite;
-import android.location.GpsStatus;
-import android.location.GpsStatus.Listener;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Build;
-import android.os.Bundle;
-import android.provider.Settings;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
-import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class OsmAndLocationProvider implements SensorEventListener {
 
@@ -146,30 +147,17 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			this.roads = roads;
 			startLocation = new net.osmand.Location(currentLocation);
 			long ms = System.currentTimeMillis();
-			if (ms - startLocation.getTime() > 5000 ||
-					ms < startLocation.getTime()) {
+			if (ms - startLocation.getTime() > 5000 || ms < startLocation.getTime()) {
 				startLocation.setTime(ms);
 			}
-			currentRoad = -1;
-			int px = MapUtils.get31TileNumberX(currentLocation.getLongitude());
-			int py = MapUtils.get31TileNumberY(currentLocation.getLatitude());
-			double dist = 1000;
-			for (int i = 0; i < roads.size(); i++) {
-				RouteSegmentResult road = roads.get(i);
-				boolean plus = road.getStartPointIndex() < road.getEndPointIndex();
-				for (int j = road.getStartPointIndex() + 1; j <= road.getEndPointIndex(); ) {
-					RouteDataObject obj = road.getObject();
-					QuadPoint proj = MapUtils.getProjectionPoint31(px, py, obj.getPoint31XTile(j - 1), obj.getPoint31YTile(j - 1),
-							obj.getPoint31XTile(j), obj.getPoint31YTile(j));
-					double dd = MapUtils.squareRootDist31((int) proj.x, (int) proj.y, px, py);
-					if (dd < dist) {
-						dist = dd;
-						currentRoad = i;
-						currentSegment = j;
-						currentPoint = proj;
-					}
-					j += plus ? 1 : -1;
-				}
+			RouteSegmentSearchResult searchResult =
+					RoutingHelper.searchRouteSegment(currentLocation.getLatitude(), currentLocation.getLongitude(), -1, roads);
+			if (searchResult != null) {
+				currentRoad = searchResult.getRoadIndex();
+				currentSegment = searchResult.getSegmentIndex();
+				currentPoint = searchResult.getPoint();
+			} else {
+				currentRoad = -1;
 			}
 		}
 

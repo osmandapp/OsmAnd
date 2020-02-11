@@ -247,7 +247,7 @@
     <string name="poi_music">Tónlistarverslun</string>
     <string name="poi_musical_instrument">Hljóðfæri</string>
     <string name="poi_newsagent">Blaðasali</string>
-    <string name="poi_organic">Lífrænt fæði</string>
+    <string name="poi_organic">Lífrænar vörur</string>
     <string name="poi_outdoor">Útivistarverslun</string>
     <string name="poi_photo">Ljósmyndavöruverslun</string>
     <string name="poi_ticket">Miðasala</string>
@@ -3770,4 +3770,5 @@
     <string name="poi_bowling_alley">Keiluhöll</string>
     <string name="poi_piste_ref">Viðmiðunarnúmer leiðar</string>
     <string name="poi_resort_hunting">Grunnbúðir veiðimanna</string>
+    <string name="poi_shop_security">Öryggisvöruverslun</string>
 </resources>
