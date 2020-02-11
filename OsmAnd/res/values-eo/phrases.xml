@@ -196,7 +196,7 @@
     <string name="poi_music">Muzikvendejo</string>
     <string name="poi_musical_instrument">Muzikinstrument-vendejo</string>
     <string name="poi_optician">Optikbutiko</string>
-    <string name="poi_organic">Ekologia manĝaĵo</string>
+    <string name="poi_organic">Ekologiaj produktaĵoj</string>
     <string name="poi_outdoor">Vojaĝil-vendejo</string>
     <string name="poi_paint">Farbovendejo</string>
     <string name="poi_pet">Dombest-vendejo</string>
@@ -3778,4 +3778,6 @@
     <string name="poi_volcano_status_inactive">neaktiva</string>
     <string name="poi_volcano_number_of_eruptions">Nombro da erupcioj</string>
     <string name="poi_memorial_ghost_bike">Fantombiciklo</string>
+    <string name="poi_paintball">Farbopafado</string>
+    <string name="poi_mountain_rescue">Stacio de montara savservo</string>
 </resources>
