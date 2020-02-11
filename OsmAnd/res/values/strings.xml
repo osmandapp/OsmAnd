@@ -25,6 +25,9 @@
     • Added correct transliteration into the map of Japan\n\n
     • Added Antarctica map\n\n
     </string>
+    <string name="import_duplicates_description">OsmAnd already has elements with the same names as those imported.\n\nSelect an action.</string>
+    <string name="import_duplicates_title">Some items already exist</string>
+    <string name="select_data_to_import">Select the data to be imported.</string>
     <string name="copy_coordinates">Copy coordinates</string>
     <string name="reset_to_default_category_button_promo">Reset to default will reset sort order to the default state after installation.</string>
     <string name="use_system_screen_timeout">Use system screen timeout</string>
