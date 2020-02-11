@@ -135,12 +135,9 @@ public class GeneralRouter implements VehicleRouter {
 		for (int i = 0; i < objectAttributes.length; i++) {
 			objectAttributes[i] = new RouteAttributeContext(parent.objectAttributes[i], params);
 		}
-		allowPrivate = params.containsKey(ALLOW_PRIVATE) && parseSilentBoolean(params.get(ALLOW_PRIVATE), false) ;
+		allowPrivate = params.containsKey(ALLOW_PRIVATE) && parseSilentBoolean(params.get(ALLOW_PRIVATE), false);
 		shortestRoute = params.containsKey(USE_SHORTEST_WAY) && parseSilentBoolean(params.get(USE_SHORTEST_WAY), false);
-		heightObstacles = params.containsKey(USE_HEIGHT_OBSTACLES) && parseSilentBoolean(params.get(USE_HEIGHT_OBSTACLES), false); 
-		if(shortestRoute) {
-			maxSpeed = Math.min(CAR_SHORTEST_DEFAULT_SPEED, maxSpeed);
-		}
+		heightObstacles = params.containsKey(USE_HEIGHT_OBSTACLES) && parseSilentBoolean(params.get(USE_HEIGHT_OBSTACLES), false);
 		if (params.containsKey(DEFAULT_SPEED)) {
 			defaultSpeed = parseSilentFloat(params.get(DEFAULT_SPEED), defaultSpeed);
 		}
@@ -150,8 +147,10 @@ public class GeneralRouter implements VehicleRouter {
 		if (params.containsKey(MAX_SPEED)) {
 			maxSpeed = parseSilentFloat(params.get(MAX_SPEED), maxSpeed);
 		}
+		if (shortestRoute) {
+			maxSpeed = Math.min(CAR_SHORTEST_DEFAULT_SPEED, maxSpeed);
+		}
 		initCaches();
-
 	}
 	
 	public GeneralRouter(GeneralRouterProfile profile, Map<String, String> attributes) {
