@@ -2138,9 +2138,9 @@ Lon %2$s</string>
     <string name="quick_action_add_marker_descr">Eine Schaltfläche zum Hinzufügen einer Kartenmarkierung in der Bildschirmmitte.</string>
     <string name="favorite_empty_place_name">Ort</string>
     <string name="quick_action_showhide_favorites_title">Favoriten ein-/ausblenden</string>
-    <string name="quick_action_take_audio_note_descr">Taste, um eine Audio-Notiz am Bildschirmmittelpunkt einzufügen.</string>
-    <string name="quick_action_take_video_note_descr">Taste, um eine Video-Notiz am Bildschirmmittelpunkt einzufügen.</string>
-    <string name="quick_action_take_photo_note_descr">Taste, um eine Fotonotiz am Bildschirmmittelpunkt einzufügen.</string>
+    <string name="quick_action_take_audio_note_descr">Taste, um eine Audio-Notiz im Bildschirmmittelpunkt einzufügen.</string>
+    <string name="quick_action_take_video_note_descr">Taste, um eine Video-Notiz im Bildschirmmittelpunkt einzufügen.</string>
+    <string name="quick_action_take_photo_note_descr">Taste, um eine Foto-Notiz im Bildschirmmittelpunkt einzufügen.</string>
     <string name="quick_action_showhide_poi_title">POI ein-/ausblenden</string>
     <string name="quick_action_poi_show">%1$s anzeigen</string>
     <string name="quick_action_poi_hide">%1$s ausblenden</string>
@@ -2170,11 +2170,11 @@ Lon %2$s</string>
     <string name="quick_action_category_descr">Kategorie, in der der Favorit gespeichert werden soll:</string>
     <string name="quick_action_gpx_category_descr">Wählen Sie eine beliebige Kategorie.</string>
     <string name="configure_screen_quick_action">Schnellaktion</string>
-    <string name="quick_action_add_gpx_descr">Taste, um einen GPX-Wegpunkt am Bildschirmmittelpunkt einzufügen.</string>
-    <string name="quick_action_add_osm_bug_descr">Taste, um eine OSM-Notiz am Bildschirmmittelpunkt einzufügen.</string>
-    <string name="quick_action_add_poi_descr">Taste, um einen POI am Bildschirmmittelpunkt einzufügen.</string>
+    <string name="quick_action_add_gpx_descr">Taste, um einen GPX-Wegpunkt im Bildschirmmittelpunkt einzufügen.</string>
+    <string name="quick_action_add_osm_bug_descr">Taste, um eine OSM-Notiz im Bildschirmmittelpunkt einzufügen.</string>
+    <string name="quick_action_add_poi_descr">Taste, um einen POI im Bildschirmmittelpunkt einzufügen.</string>
     <string name="quick_action_navigation_voice_descr">Umschalter, um die Sprachansagen während der Navigation ein- oder auszuschalten.</string>
-    <string name="quick_action_add_parking_descr">Taste, um eine Parkposition am Bildschirmmittelpunkt einzufügen.</string>
+    <string name="quick_action_add_parking_descr">Taste, um eine Parkposition im Bildschirmmittelpunkt einzufügen.</string>
     <string name="quick_action_interim_dialog">Dialog zum Bearbeiten anzeigen</string>
     <string name="favorite_autofill_toast_text">" gespeichert unter "</string>
     <string name="quick_action_duplicates">Schnellaktion in %1$s umbenannt, um Duplikate zu vermeiden.</string>
@@ -3483,4 +3483,14 @@ Lon %2$s</string>
     <string name="rendering_attr_streetLightingNight_name">Nur nachts anzeigen</string>
     <string name="plugin_prefs_reset_successful">Alle Plugin-Einstellungen werden auf den Standardzustand zurückgesetzt.</string>
     <string name="profile_prefs_reset_successful">Alle Profil-Einstellungen werden auf den Standardzustand zurückgesetzt.</string>
+    <string name="accessibility_announce">Ankündigung</string>
+    <string name="select_map_icon_descr">Symbol, das im Ruhezustand angezeigt wird.</string>
+    <string name="multimedia_use_system_camera">System-App verwenden</string>
+    <string name="multimedia_photo_play_sound">Auslöseton der Kamera</string>
+    <string name="reset_to_default_category_button_promo">Durch das Zurücksetzen auf die Standardeinstellung wird die Sortierung auf den Standardzustand nach der Installation zurückgesetzt.</string>
+    <string name="accessibility_mode_disabled">Eingabehilfenmodus ist in ihrem System deaktiviert.</string>
+    <string name="use_system_screen_timeout">Zeitlimit für den Systembildschirm verwenden</string>
+    <string name="use_system_screen_timeout_promo">Standardmäßig deaktiviert, wenn OsmAnd im Vordergrund läuft, wird der Bildschirm nicht ausgeblendet.
+\n
+\nWenn aktiviert, verwendet OsmAnd das Zeitlimit für den Systembildschirm.</string>
 </resources>
