@@ -3450,4 +3450,36 @@
     <string name="sunset_at">%1$s\'de gün batımı</string>
     <string name="sunrise_at">%1$s\'de gün doğumu</string>
     <string name="accessibility_mode_disabled">Sisteminizde erişilebilirlik modu devre dışı.</string>
+    <string name="reset_to_default_category_button_promo">Varsayılana sıfırla, sıralama düzenini kurulumdan sonraki varsayılan duruma sıfırlayacaktır.</string>
+    <string name="use_system_screen_timeout">Sistem ekran zaman aşımını kullan</string>
+    <string name="use_system_screen_timeout_promo">Varsayılan olarak devre dışıdır, OsmAnd ön planda çalışıyorsa ekran zaman aşımına uğramaz.
+\n
+\nEtkinleştirilirse OsmAnd sistem zaman aşımı ayarlarını kullanacaktır.</string>
+    <string name="clear_recorded_data">Kaydedilen verileri temizle</string>
+    <string name="release_3_6">• Profiller: artık sırayı değiştirebilir, harita simgesini ayarlayabilir, temel profiller için tüm ayarları değiştirebilir ve bunları varsayılanlara geri yükleyebilirsiniz
+\n
+\n • Navigasyona çıkış numarası eklendi
+\n
+\n • Eklenti ayarları yenilendi
+\n
+\n • Tüm profillere hızlı erişim için Ayarlar ekranı yenilendi
+\n
+\n • Ayarları başka bir profilden kopyalama seçeneği eklendi
+\n
+\n • Arama\'da sıralamayı değiştirme veya POI kategorilerini gizleme özelliği eklendi
+\n
+\n • POI simgeleri haritada doğru şekilde hizalandı
+\n
+\n • Harita Yapılandırmaya Gün Batımı / Gün Doğumu verileri eklendi
+\n
+\n • Haritaya Ev / İş simgeleri eklendi
+\n
+\n • Ayarlarda çok satırlı açıklama desteği eklendi
+\n
+\n • Japonya haritasına doğru harf çevirisi eklendi
+\n
+\n • Antarktika haritası eklendi
+\n
+\n</string>
+    <string name="copy_coordinates">Koordinatları kopyala</string>
 </resources>

@@ -107,7 +107,7 @@
     <string name="osmand_short_description_80_chars">Globale Landkarten- und Navigationsanwendung für Offline- und Online-OSM-Karten</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) 
 \n 
-\nOsmAnd ist eine Open-Source Software Navigationsapp mit Zugriff auf eine große Vielfalt öffentlich zugänglicher OpenStreetMap-(OSM)-Karten weltweit. Alle Karten (Vektor- oder Kachelformate) können lokal auf der Speicherkarte abgelegt und offline verwendet werden. OsmAnd bietet ferner eine Offline- und Online-Routing-Funktion inklusive Sprachnavigation. 
+\nOsmAnd ist eine Open-Source-Software-Navigationsapp mit Zugriff auf eine Vielzahl globaler OSM-Daten. Alle Karten (Vektor- oder Kachelformate) können lokal auf der Speicherkarte abgelegt und offline verwendet werden. OsmAnd bietet ferner eine Offline- und Online-Routing-Funktion inklusive Sprachnavigation. 
 \n 
 \nEinige der Kernfunktionen: 
 \n- Komplette Offline-Funktionalität (Kartenmaterial kann auf dem Gerät abgelegt werden) 
@@ -115,7 +115,7 @@
 \n- Direktes Herunterladen von Länder- oder Regionenkarten aus der App heraus 
 \n- Darstellung mehrerer überlagerter Kartenschichten wie GPX oder Navigations-Tracks, POIs (Orte von Interesse), Favoriten, Höhenlinien, ÖPNV-Haltestellen, zusätzliche Karten mit wählbarer Transparenz 
 \n- Offline Adress- und POI-Suche 
-\n- Offlinenavigation für mittelstrecken Distanzen 
+\n- Offlinenavigation für mittlere Entfernungen
 \n- Auto-, Fahrrad- und Fußgänger-Modus wahlweise mit: 
 \n - automatischer Tag-Nacht-Umschaltung der Anzeige 
 \n - geschwindigkeitsabhängigem Kartenmaßstab 
@@ -170,18 +170,18 @@
     <string name="map_online_data_descr">Online-Karten verwenden (Kacheln auf die Speicherkarte herunterladen und zwischenspeichern).</string>
     <string name="shared_string_online_maps">Online-Karten</string>
     <string name="online_map_settings_descr">Online- oder zwischengespeicherte Kachelkartenquellen auswählen.</string>
-    <string name="osmand_rastermaps_plugin_description">Mit dieser Erweiterung erhalten Sie Zugang zu zahlreichen Online-Karten (sogenannte Kachel- oder Rasterkarten), von vordefinierten OpenStreetMap-Kacheln (wie Mapnik) bis hin zu Satellitenbildern und speziellen, zweckgebundenen Kartenfolien zu Wetter, Klima, Geologie, Geländerelief usw. 
+    <string name="osmand_rastermaps_plugin_description">Zugang zu zahlreichen Online-Karten (sogenannte Kachel- oder Rasterkarten), von vordefinierten OSM-Kacheln (wie Mapnik) bis hin zu Satellitenbildern und speziellen, zweckgebundenen Kartenfolien zu Wetter, Klima, Geologie, Geländerelief usw.
 \n 
-\nAlle Karten können entweder als Hauptkarte oder als Auf- oder Unterlage einer anderen Basiskarte (wie OsmAnds Standard-Offline-Karten) dargestellt werden. Um Kartenunterlagen sichtbarer zu machen, können bestimmte Elemente der OsmAnd-Vektorkarten im Menü \'Karte konfigurieren\' ausgeblendet werden. 
+\nAlle Karten können entweder als Hauptkarte oder als Auf- oder Unterlage einer anderen Basiskarte (wie OsmAnds Standard-Offline-Karten) dargestellt werden. Bestimmte Elemente der OsmAnd-Vektorkarten im Menü \'Karte konfigurieren\' ausgeblendet werden, um jede Unterlagenkarte besser sichtbar zu machen.
 \n 
 \nRasterkarten können direkt online bezogen oder zur Offline-Verwendung mit einer Vielzahl von Bearbeitungstools als SQLite-Datei aufbereitet und manuell in den OsmAnd-Unterordner \'tiles\' kopiert werden.</string>
     <string name="osmand_background_plugin_description">Zeigt die Einstellungen zum Einschalten der Hintergrundverfolgung und -Navigation durch regelmäßiges Aufwecken des GPS-Empfängers (bei ausgeschaltetem Bildschirm).</string>
-    <string name="osmand_accessibility_description">Diese Erweiterung verschafft den direkten Zugriff auf die System-Eingabehilfen in OsmAnd. Dadurch kann z. B. die Abspielgeschwindigkeit der Sprachsynthese-Stimme, die Bildschirmnavigation mittels Steuerkreuz, die Benutzung eines Trackballs zur Zoomsteuerung oder die Sprachausgabe, z. B. die automatische Ansage Ihrer Position, konfiguriert werden.</string>
-    <string name="osmand_development_plugin_description">Diese Erweiterung aktiviert Entwicklereinstellungen und Funktionen zur Fehlersuche, wie Testung oder Simulation der Routenberechnung, der Render-Leistung oder der Sprachsteuerung. Diese Einstellungen sind für Entwickler gedacht und werden für die Verwendung von OsmAnd sonst nicht benötigt.</string>
+    <string name="osmand_accessibility_description">Stellt die Eingabehilfen des Geräts direkt in OsmAnd zur Verfügung. Dadurch kann z. B. die Abspielgeschwindigkeit der Sprachsynthese-Stimme, die Konfiguration der Steuerkreuz-Navigation, die Benutzung eines Trackballs zur Zoomsteuerung oder die Sprachausgabe, z. B. die automatische Ansage Ihrer Position, konfiguriert werden.</string>
+    <string name="osmand_development_plugin_description">Einstellungen für Entwicklungs- und Debugging-Funktionen wie Navigationssimulation, Render-Leistung oder Sprachsteuerung. Für Entwickler gedacht, für den normalen Gebrauch der App nicht erforderlich.</string>
     <string name="plugins_screen">Erweiterungen</string>
     <string name="prefs_plugins_descr">Erweiterungen aktivieren weitere Einstellungen und zusätzliche Funktionen.</string>
     <string name="prefs_plugins">Erweiterungen</string>
-    <string name="osm_editing_plugin_description">Diese Erweiterung ermöglicht das Erstellen und Bearbeiten von OSM-POI-Objekten, das Eintragen oder Kommentieren von OSM-Notizen sowie das Hochladen von GPX-Dateien als Beiträge zu OSM (benötigt ein OSM-Benutzerkonto). OSM ist ein gemeinschaftliches, frei zugängliches, globales Kartografierungsprojekt. Details siehe https://openstreetmap.org. Jeder ist eingeladen, aktiv daran mitzuarbeiten. Die Mitarbeit kann auch direkt via OsmAnd erfolgen, wenn in den Einstellungen der OsmAnd-Erweiterung ein OSM-Benutzerkonto hinterlegt wird.</string>
+    <string name="osm_editing_plugin_description">Machen Sie OSM-Beiträge wie das Erstellen oder Ändern von OSM-POI-Objekten, das Eröffnen oder Kommentieren von OSM-Notizen und das Einreichen aufgezeichneter GPX-Dateien in OsmAnd, indem Sie Ihren Benutzernamen und Ihr Passwort angeben. OpenStreetMap.org ist ein gemeinschaftliches, frei zugängliches, globales Kartografierungsprojekt.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorkarten werden wahrscheinlich schneller angezeigt. Funktioniert nur auf manchen Geräten.</string>
     <string name="play_commands_of_currently_selected_voice">Eine Stimme auswählen und mittels Abspielen von Ansagen testen:</string>
     <string name="debugging_and_development">OsmAnd-Entwicklung</string>
@@ -259,7 +259,7 @@
     <string name="local_openstreetmap_delete">Änderung löschen</string>
     <string name="local_openstreetmap_descr_title">Asynchrone OSM-Bearbeitung:</string>
     <string name="local_openstreetmap_settings">OSM-POIs/-Notizen auf dem Gerät gespeichert</string>
-    <string name="local_openstreetmap_settings_descr">In der Gerätedatenbank vermerkte OSM-POIs/-Notizen anzeigen und verwalten.</string>
+    <string name="local_openstreetmap_settings_descr">Anzeigen und Verwalten von OSM-POIs/-Notizen in Ihrer Gerätedatenbank.</string>
     <string name="live_monitoring_m">Online-Aufzeichnung (benötigt GPX)</string>
     <string name="live_monitoring_m_descr">Track-Daten zu einem festgelegten Internetdienst senden, wenn die GPX-Aufzeichnung aktiviert ist.</string>
     <string name="live_monitoring_url">Webadresse zur Aufzeichnung</string>
@@ -321,7 +321,8 @@
     <string name="osmand_service">Hintergrundmodus</string>
     <string name="osmand_service_descr">OsmAnd läuft bei ausgeschaltetem Bildschirm im Hintergrund.</string>
     <string name="download_files_not_enough_space">Speicherplatz (frei: %2$s MB) reicht nicht aus, um %1$s MB herunterzuladen.</string>
-    <string name="download_files_question_space">{0} Datei(en) herunterladen\? Es werden {1} MB (von {2} MB) benötigt.</string>
+    <string name="download_files_question_space">{0} Datei(en) herunterladen\?
+\n Es werden {1} MB (von {2} MB) benötigt.</string>
     <string name="use_transparent_map_theme">Transparentes Layout</string>
     <string name="native_library_not_supported">Native Bibliothek wird auf diesem Gerät nicht unterstützt.</string>
     <string name="init_native_library">Native Bibliothek wird initialisiert…</string>
@@ -559,7 +560,7 @@
     <string name="phone">Telefon</string>
     <string name="download_type_to_filter">Nach Typ filtern</string>
     <string name="use_high_res_maps">Hochauflösende Anzeige</string>
-    <string name="use_high_res_maps_descr">Unterdrückt Streckung (Unschärfe) von Kartenkacheln auf manchen Anzeigen.</string>
+    <string name="use_high_res_maps_descr">Unterdrückt Streckung (Unschärfe) von Kartenkacheln auf Bildschirmen mit hoher Dichte.</string>
     <string name="unknown_location">Position noch nicht bekannt.</string>
     <string name="context_menu_item_search_transport">Suche ÖPNV</string>
     <string name="transport_searching_transport">ÖPNV-Ergebnisse (kein Ziel):</string>
@@ -690,11 +691,11 @@
     <string name="search_offline_address">Offline-Suche</string>
     <string name="search_online_address">Online-Suche</string>
     <string name="max_level_download_tile">Maximale Onlinevergrößerung</string>
-    <string name="max_level_download_tile_descr">Durchsuchen Sie Online-Kartenkacheln nicht nach höheren Zoomstufen.</string>
+    <string name="max_level_download_tile_descr">Durchsuchen Sie Online-Karten nicht nach darüber hinausgehenden Zoomstufen.</string>
     <string name="route_general_information">Gesamtentfernung %1$s, Reisezeit %2$d h %3$d min.</string>
     <string name="router_service_descr">Online- oder Offline-Dienst zur Routenberechnung.</string>
     <string name="router_service">Navigationsdienst</string>
-    <string name="sd_dir_not_accessible">Auf den Daten-Ordner auf der Speicherkarte kann nicht zugegriffen werden!</string>
+    <string name="sd_dir_not_accessible">Auf den Ordner auf der Speicherkarte kann nicht zugegriffen werden!</string>
     <string name="download_question">Herunterladen {0} - {1}?</string>
     <string name="download_question_exist">Offline Daten für {0} existieren schon ({1}). Aktualisieren ({2})?</string>
     <string name="address">Adresse</string>
@@ -739,7 +740,7 @@
     <string name="finished_task">Abgeschlossen</string>
     <string name="use_online_routing_descr">Internet zur Routenberechnung verwenden.</string>
     <string name="use_online_routing">Online-Navigation nutzen</string>
-    <string name="osm_settings_descr">Einstellungen für OpenStreetMap.org (OSM), die für OSM-Übermittlungen erforderlich sind.</string>
+    <string name="osm_settings_descr">Geben Sie die Einstellungen für OpenStreetMap.org (OSM) an, die für OSM-Übermittlungen erforderlich sind.</string>
     <string name="data_settings_descr">Sprache angeben, Daten herunter- oder neu laden.</string>
     <string name="data_settings">Daten</string>
     <string name="osm_settings">OpenStreetMap-Bearbeitung</string>
@@ -762,7 +763,7 @@
     <string name="map_view_3d">3D-Kartenansicht</string>
     <string name="show_poi_over_map_description">Zuletzt verwendetes POI-Overlay anzeigen.</string>
     <string name="show_poi_over_map">POI-Overlay anzeigen</string>
-    <string name="map_tile_source_descr">Quelle für Online- oder zwischengespeicherte Kartenkacheln wählen</string>
+    <string name="map_tile_source_descr">Quelle für Online- oder zwischengespeicherte Kartenkacheln wählen.</string>
     <string name="map_tile_source">Kachelkartenquelle</string>
     <string name="map_source">Kartenquelle</string>
     <string name="use_internet">Internet verwenden</string>
@@ -875,7 +876,8 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Parkposition</string>
-    <string name="osmand_parking_plugin_description">Diese Erweiterung ermöglicht es, den Standort eines geparkten Fahrzeugs zu speichern sowie die restliche Parkzeit anzuzeigen (falls das Parken zeitlich begrenzt ist). Parkplatz und Restzeit werden sowohl auf der OsmAnd-Übersichtsseite als auch auf dem Kartenbildschirm dargestellt. Es kann ein Eintrag im Android-Kalender als Erinnerung hinzugefügt werden.</string>
+    <string name="osmand_parking_plugin_description">Hier können Sie aufzeichnen, wo Ihr Auto geparkt ist, einschließlich der verbleibenden Parkdauer.
+\n Sowohl Ort und Zeit sind auf der Übersichtsseite als auch in einem Karten-Widget sichtbar. Dem Android-Kalender kann eine Alarmerinnerung hinzugefügt werden.</string>
     <string name="osmand_parking_plugin_name">Parkposition</string>
     <string name="context_menu_item_add_parking_point">Parkposition festlegen</string>
     <string name="context_menu_item_delete_parking_point">Parkplatz-Standort löschen</string>
@@ -885,7 +887,8 @@
     <string name="gpxup_private">Privat</string>
     <string name="global_app_allocated_memory_descr">Belegter Speicher %1$s MB (Android-Limit %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Belegter Speicher</string>
-    <string name="native_app_allocated_memory_descr">Insgesamt durch die Anwendung belegter nativer Speicher %1$s MB (Dalvik %2$s MB, anderer %3$s MB). Proportionaler Speicher %4$s MB (Android-Limit %5$s MB, Dalvik %6$s MB).</string>
+    <string name="native_app_allocated_memory_descr">Insgesamt durch die Anwendung belegter nativer Speicher %1$s MB (Dalvik %2$s MB, anderer %3$s MB).
+\n Proportionaler Speicher %4$s MB (Android-Limit %5$s MB, Dalvik %6$s MB).</string>
     <string name="native_app_allocated_memory">Gesamter nativer Speicher</string>
     <string name="select_animate_speedup">Geschwindigkeit für Routen-Simulation:</string>
     <string name="osmand_parking_hours">Stunde(n)</string>
@@ -970,7 +973,7 @@
 \n 
 \nDie globalen Daten (zwischen 70° Nord und 70° Süd) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System an Bord des Satelliten Terra, dem Flaggschiff des NASA-Programms zur Erdbeobachtung. ASTER beruht auf der erfolgreichen Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie und dem japanischen Raumfahrtprogramm (J-spacesystems).</string>
     <string name="srtm_paid_version_title">Höhenlinien-Plugin</string>
-    <string name="srtm_paid_version_msg">Bitte erwägen Sie den Kauf der Erweiterung \'Höhenlinien\' im Play-Store, um die Weiterentwicklung zu fördern.</string>
+    <string name="srtm_paid_version_msg">Bitte erwägen Sie den Kauf der Erweiterung \'Höhenlinien\', um die Weiterentwicklung zu fördern.</string>
     <string name="download_select_map_types">Andere Karten</string>
     <string name="download_srtm_maps">Höhenlinien</string>
     <string name="av_camera_pic_size">Bildgröße der Kamera</string>
@@ -991,7 +994,7 @@
     <string name="av_use_external_camera_descr">System-App für Fotos verwenden.</string>
     <string name="av_use_external_camera">System-Kamera-App nutzen</string>
     <string name="av_def_action_choose">Auf Anfrage\?</string>
-    <string name="dropbox_plugin_description">Die Dropbox-Erweiterung macht die Synchronisierung von Tracks und Audio-/Video-Notizen mit Ihrem Dropbox-Konto möglich.</string>
+    <string name="dropbox_plugin_description">Synchronisieren Sie Tracks und Audio-/Video-Notizen mit Ihrem Dropbox-Konto.</string>
     <string name="dropbox_plugin_name">Dropbox-Modul</string>
     <string name="intermediate_points_change_order">Reihenfolge ändern</string>
     <string name="recording_camera_not_available">Kamera nicht verfügbar</string>
@@ -1019,10 +1022,10 @@
     <string name="monitoring_settings_descr">Konfiguration der Streckenaufzeichnung.</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="map_widget_audionotes">Audio-Notizen</string>
-    <string name="audionotes_plugin_description">Diese Erweiterung bietet die Möglichkeit, unterwegs ortsbezogene Audio- und Video-Notizen sowie Fotos aufzunehmen, entweder über eine Taste auf der Karte für die aktuelle Position oder direkt über das Kontextmenü für eine beliebige Position auf der Karte.</string>
+    <string name="audionotes_plugin_description">Machen Sie während einer Reise Audio-, Foto- und Video-Notizen, indem Sie entweder eine Karten-Schaltfläche oder ein Standort-Kontextmenü verwenden.</string>
     <string name="audionotes_plugin_name">Audio-/Video-Notizen</string>
     <string name="audionotes_location_not_defined">Benutzen Sie \'Standort verwenden…\', um dem Ort eine Notiz zuzuweisen.</string>
-    <string name="osmand_srtm_long_description_1000_chars">Diese Erweiterung beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Standard-Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler, Wanderer, Radfahrer, Trekker und jeden interessant, der sich für das Geländerelief einer Landschaft interessiert. 
+    <string name="osmand_srtm_long_description_1000_chars">Diese Erweiterung beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Standard-Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler, Wanderer, Radfahrer, Trekker und jeden interessant, der sich für das Geländerelief einer Landschaft interessiert.
 \n 
 \nDie globalen Daten (zwischen 70° Nord und 70° Süd) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System an Bord des Satelliten Terra, dem Flaggschiff des NASA-Programms zur Erdbeobachtung. ASTER beruht auf der erfolgreichen Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie und dem japanischen Raumfahrtprogramm (J-spacesystems).</string>
     <string name="stop_routing_confirm">Sind Sie sicher, dass Sie die Navigation stoppen möchten?</string>
@@ -1074,7 +1077,7 @@
     <string name="distance_measurement_clear_route">Alle Punkte löschen</string>
     <string name="intermediate_items_sort_return">Die Reihenfolge der Zwischenziele auf der Route zum Ziel wurde optimiert.</string>
     <string name="plugin_distance_point">Punkt</string>
-    <string name="osmand_distance_planning_plugin_description">Diese Erweiterung beinhaltet ein Kartenbildschirm-Steuerelement, über das Wege erstellt werden können. Entweder durch Auswahl von Punkten auf der Karte oder durch Verwendung/Veränderung bereits vorhandener GPX-Dateien kann so die Streckenplanung und Entfernungsmessung zwischen Punkten erfolgen. Die Ergebnisse können als GPX-Datei gespeichert und für eine Navigation verwendet werden.</string>
+    <string name="osmand_distance_planning_plugin_description">Erstellen Sie Pfade, indem Sie auf die Karte tippen oder vorhandene GPX-Dateien verwenden oder ändern, um eine Reise zu planen und die Entfernung zwischen Punkten zu messen. Das Ergebnis kann als GPX-Datei gespeichert werden, um es später zur Orientierung zu verwenden.</string>
     <string name="osmand_distance_planning_plugin_name">Entfernungsmesser und Streckenplaner</string>
     <string name="shared_string_do_not_show_again">Nicht erneut anzeigen</string>
     <string name="distance_measurement_load_gpx">Vorhandene GPX-Datei öffnen</string>
@@ -1114,7 +1117,7 @@
     <string name="av_camera_focus_edof">Erweiterte Schärfentiefe (EDOF)</string>
     <string name="av_camera_focus_macro">Makrofokus-Modus (Nahaufnahme)</string>
     <string name="speak_title">Ansagen…</string>
-    <string name="speak_descr">Ansagen zu Straßennamen, Verkehrswarnungen (Stoppzeichen, Rüttelschwellen), stationäre Radarkontrollen, Tempolimits konfigurieren.</string>
+    <string name="speak_descr">Ansagen zu Straßennamen, Verkehrswarnungen (Stoppzeichen, Rüttelschwellen), stationäre Radarkontrollen und Tempolimits konfigurieren.</string>
     <string name="speak_street_names">Straßennamen (TTS)</string>
     <string name="map_widget_fps_info">FPS-Debug-Info</string>
     <string name="driving_region_descr">Fahrregion wählen: USA, Europa, GB, Asien usw.</string>
@@ -1169,8 +1172,8 @@
     <string name="routing_attr_avoid_motorway_description">Vermeidet Autobahnen</string>
     <string name="routing_attr_weight_name">Gewichtsbeschränkung</string>
     <string name="routing_attr_weight_description">Gewicht des Fahrzeugs für Routenberechnung angeben.</string>
-    <string name="android_19_location_disabled">Seit Android 4.4 (KitKat) ist der alte Speicherort (%s) veraltet. Alle OsmAnd-Dateien an den neuen Speicherort kopieren\? 
-\n Hinweis 1: Die ursprünglichen Dateien bleiben hiervon unberührt, können aber nachfolgend manuell gelöscht werden. 
+    <string name="android_19_location_disabled">Seit Android 4.4 (KitKat) ist der alte Speicherort (%s) veraltet. Alle OsmAnd-Dateien an den neuen Speicherort kopieren\?
+\n Hinweis 1: Die ursprünglichen Dateien bleiben hiervon unberührt, können aber nachfolgend manuell gelöscht werden.
 \n Hinweis 2: Die Dateien können dann nicht mehr von OsmAnd und OsmAnd+ gemeinsam genutzt werden.</string>
     <string name="copying_osmand_one_file_descr">Datei (%s) wird an den neuen Speicherort kopiert…</string>
     <string name="copying_osmand_files_descr">OsmAnd-Dateien werden zum neuen Speicherort (%s) kopiert…</string>
@@ -1353,7 +1356,7 @@
     <string name="shared_string_all">Alle</string>
     <string name="shared_string_waypoints">Wegpunkte</string>
     <string name="way_alarms">Verkehrswarnungen</string>
-    <string name="record_plugin_description">Diese Erweiterung ermöglicht es, Tracks durch Drücken der GPX-Schaltfläche auf dem Kartenbildschirm aufzunehmen bzw. alle navigierten Routen automatisch zu protokollieren und sie als GPX-Datei lokal (oder über Webdienste auch online) abzuspeichern. 
+    <string name="record_plugin_description">Diese Erweiterung ermöglicht es, Tracks durch Drücken der GPX-Schaltfläche auf dem Kartenbildschirm aufzunehmen bzw. alle navigierten Routen automatisch zu protokollieren und sie als GPX-Datei lokal (oder über Webdienste auch online) abzuspeichern.
 \n 
 \nAufgenommene Tracks können z. B. mit Bekannten geteilt oder als Beiträge zu OSM verwendet werden. Sportler können gespeicherte Tracks zur Überwachung ihres Trainings verwenden. Einige Basisauswertungen sind direkt in OsmAnd enthalten, wie Rundenzeiten, Durchschnittsgeschwindigkeit usw. Die Aufzeichnungen können natürlich auch mit speziellen Analysetools von Drittanbietern nachbearbeitet werden.</string>
     <string name="route_descr_destination">Ziel</string>
@@ -1463,8 +1466,8 @@
     <string name="rendering_attr_pisteGrooming_name">Pistenpflege</string>
     <string name="plugin_ski_name">Skikarte</string>
     <string name="plugin_nautical_name">Seekarte</string>
-    <string name="world_ski_missing">Um Skikarten anzeigen zu können, muss die entsprechende Offline-Karte heruntergeladen werden</string>
-    <string name="nautical_maps_missing">Um Seekarten anzeigen zu können, muss die entsprechende Offline-Karte heruntergeladen werden</string>
+    <string name="world_ski_missing">Laden Sie die spezielle Offline-Karte zur Anzeige der Skianlagen herunter.</string>
+    <string name="nautical_maps_missing">Laden Sie die spezielle Offline-Karte zur Anzeige nautischer Details herunter.</string>
     <string name="get_plugin">Erwerben</string>
     <string name="rename_failed">Umbenennen fehlgeschlagen.</string>
     <string name="shared_string_currently_recording_track">Momentane Track-Aufzeichnung</string>
@@ -1492,7 +1495,7 @@
     <string name="location_on_map">Standort:
  Lat %1$s
  Lon %2$s</string>
-    <string name="notes">Notizen</string>
+    <string name="notes">Audio-/Video-Notizen</string>
     <string name="online_map">Online-Karte</string>
     <string name="roads_only">Nur Straßen</string>
     <string name="rendering_attr_pisteRoutes_name">Skipisten</string>
@@ -1754,7 +1757,7 @@ Lon %2$s</string>
     <string name="feedback">Bewertung</string>
     <string name="contact_us">Kontakt</string>
     <string name="map_legend">Kartenlegende</string>
-    <string name="access_from_map_description">Menütaste startet die Übersichtsseite, nicht das Menü</string>
+    <string name="access_from_map_description">Menütaste startet die Übersichtsseite und nicht das Menü</string>
     <string name="show_on_start_description">\'Aus\' startet die Karte direkt.</string>
     <string name="copied_to_clipboard">In die Zwischenablage kopiert</string>
     <string name="osm_save_offline">Offline speichern</string>
@@ -1892,8 +1895,11 @@ Lon %2$s</string>
     <string name="map_marker">Kartenmarkierung</string>
     <string name="consider_turning_polygons_off">Es wird empfohlen, das Rendern von Flächen zu deaktivieren.</string>
     <string name="shared_string_widgets">Steuerelemente</string>
-    <string name="download_files_error_not_enough_space">Nicht genug Speicher! Es werden vorübergehend {3} MB und dauerhaft {1} MB benötigt. (Nur {2} MB verfügbar.)</string>
-    <string name="download_files_question_space_with_temp">{0} Datei(en) herunterladen\? Es werden vorübergehend {3} MB und dauerhaft {1} MB benötigt. (Von {2} MB.)</string>
+    <string name="download_files_error_not_enough_space">Nicht genug Speicher!
+\n Es werden vorübergehend {3} MB und dauerhaft {1} MB benötigt.
+\n (Nur {2} MB verfügbar.)</string>
+    <string name="download_files_question_space_with_temp">{0} Datei(en) herunterladen\?
+\n Es werden vorübergehend {3} MB und dauerhaft {1} MB benötigt. (Von {2} MB.)</string>
     <string name="select_map_marker">Kartenmarkierung auswählen</string>
     <string name="map_markers_other">Andere Markierungen</string>
     <string name="upload_osm_note_description">Laden Sie Ihre OSM-Notiz anonym oder über Ihr OpenStreetMap.org-Profil hoch.</string>
@@ -1920,14 +1926,16 @@ Lon %2$s</string>
     <string name="osm_live_subscription_settings">Abonnementeinstellungen</string>
     <string name="osm_live_ask_for_purchase">Bitte kaufen Sie zuerst ein OsmAnd-Live-Abonnement</string>
     <string name="osm_live_region_desc">Teile Ihrer Spende werden an OSM-Mitwirkende weitergegeben, die diese Region bearbeiten.</string>
-    <string name="osm_live_header">Dieses Abonnement schaltet stündliche Updates für die gesamten weltweiten Karten frei. Ein Teil dieser Einnahmen geht zurück an die OSM-Gemeinschaft, eine Auszahlung erfolgt je nach Anzahl der Beiträge zu den OSM-Daten. Wenn Sie OsmAnd und OSM lieben und unterstützen wollen und selbst unterstützt werden wollen, so ist dies die perfekte Möglichkeit.</string>
+    <string name="osm_live_header">Dieses Abonnement ermöglicht stündliche Updates für alle Karten weltweit.
+\n Ein Teil dieser Einnahmen geht zurück an die OSM-Gemeinschaft und wird für jeden OSM-Beitrag ausgezahlt.
+\n Wenn Sie OsmAnd und OSM lieben und unterstützen wollen und selbst unterstützt werden wollen, so ist dies die perfekte Möglichkeit.</string>
     <string name="shared_string_topbar">Obere Leiste</string>
     <string name="finish_navigation">Navigation beenden</string>
     <string name="avoid_road">Straße vermeiden</string>
-    <string name="storage_directory_readonly_desc">Es wurde vorübergehend zum internen Speicher gewechselt, da der momentan gewählte Speicherort schreibgeschützt ist. Bitte einen gültigen Speicherort wählen.</string>
+    <string name="storage_directory_readonly_desc">Es wurde zum internen Speicher gewechselt, da der ausgewählte Speicherort schreibgeschützt ist. Bitte einen beschreibbaren Speicherort wählen.</string>
     <string name="storage_directory_shared">Gemeinsamer Speicher</string>
     <string name="full_report">Vollständiger Bericht</string>
-    <string name="open_street_map_login_and_pass">OpenStreetMap-Benutzername und -Passwort</string>
+    <string name="open_street_map_login_and_pass">OSM-Benutzername und -Passwort</string>
     <string name="osm_live_email_desc">Benötigt, um Sie über Ihre Beiträge zu informieren.</string>
     <string name="osm_live_support_region">Unterstützte Region</string>
     <string name="report">Bericht</string>
@@ -2037,8 +2045,8 @@ Lon %2$s</string>
     <string name="get_for">Für %1$s abonnieren</string>
     <string name="get_it">Abonnieren</string>
     <string name="osm_live_payment_desc">Monatliche Abonnementabrechnung. Jederzeit auf Google Play kündbar.</string>
-    <string name="donation_to_osm">Spende an die OpenStreetMap-Gemeinschaft</string>
-    <string name="donation_to_osm_desc">Einen Teil Ihrer Spende erhalten OSM-Anwender, die Änderungen an OpenStreetMap übermitteln. Die Kosten für das Abonnement bleiben unverändert.</string>
+    <string name="donation_to_osm">Spende an die OSM-Gemeinschaft</string>
+    <string name="donation_to_osm_desc">Ein Teil Ihrer Spende erhalten OSM-Mitwirkende. Die Abonnementskosten bleiben gleich.</string>
     <string name="osm_live_subscription_desc">Das Abonnement macht stündliche, tägliche und wöchentliche Updates sowie unbegrenzte Downloads aller Karten weltweit möglich.</string>
     <string name="lang_kab">Kabylisch</string>
     <string name="shared_string_filters">Filter</string>
@@ -2126,12 +2134,12 @@ Lon %2$s</string>
     <string name="quick_favorites_show_favorites_dialog">Dialog zu Favoriten anzeigen</string>
     <string name="quick_favorites_name_preset">Name voreinstellen</string>
     <string name="shared_string_action_name">Aktionsname</string>
-    <string name="quick_action_add_marker_descr">Taste, um eine Kartenmarkierung am Bildschirmmittelpunkt einzufügen.</string>
+    <string name="quick_action_add_marker_descr">Eine Schaltfläche zum Hinzufügen einer Kartenmarkierung in der Bildschirmmitte.</string>
     <string name="favorite_empty_place_name">Ort</string>
     <string name="quick_action_showhide_favorites_title">Favoriten ein-/ausblenden</string>
-    <string name="quick_action_take_audio_note_descr">Taste, um eine Audio-Notiz am Bildschirmmittelpunkt einzufügen.</string>
-    <string name="quick_action_take_video_note_descr">Taste, um eine Video-Notiz am Bildschirmmittelpunkt einzufügen.</string>
-    <string name="quick_action_take_photo_note_descr">Taste, um eine Fotonotiz am Bildschirmmittelpunkt einzufügen.</string>
+    <string name="quick_action_take_audio_note_descr">Taste, um eine Audio-Notiz im Bildschirmmittelpunkt einzufügen.</string>
+    <string name="quick_action_take_video_note_descr">Taste, um eine Video-Notiz im Bildschirmmittelpunkt einzufügen.</string>
+    <string name="quick_action_take_photo_note_descr">Taste, um eine Foto-Notiz im Bildschirmmittelpunkt einzufügen.</string>
     <string name="quick_action_showhide_poi_title">POI ein-/ausblenden</string>
     <string name="quick_action_poi_show">%1$s anzeigen</string>
     <string name="quick_action_poi_hide">%1$s ausblenden</string>
@@ -2161,11 +2169,11 @@ Lon %2$s</string>
     <string name="quick_action_category_descr">Kategorie, in der der Favorit gespeichert werden soll:</string>
     <string name="quick_action_gpx_category_descr">Wählen Sie eine beliebige Kategorie.</string>
     <string name="configure_screen_quick_action">Schnellaktion</string>
-    <string name="quick_action_add_gpx_descr">Taste, um einen GPX-Wegpunkt am Bildschirmmittelpunkt einzufügen.</string>
-    <string name="quick_action_add_osm_bug_descr">Taste, um eine OSM-Notiz am Bildschirmmittelpunkt einzufügen.</string>
-    <string name="quick_action_add_poi_descr">Taste, um einen POI am Bildschirmmittelpunkt einzufügen.</string>
+    <string name="quick_action_add_gpx_descr">Taste, um einen GPX-Wegpunkt im Bildschirmmittelpunkt einzufügen.</string>
+    <string name="quick_action_add_osm_bug_descr">Taste, um eine OSM-Notiz im Bildschirmmittelpunkt einzufügen.</string>
+    <string name="quick_action_add_poi_descr">Taste, um einen POI im Bildschirmmittelpunkt einzufügen.</string>
     <string name="quick_action_navigation_voice_descr">Umschalter, um die Sprachansagen während der Navigation ein- oder auszuschalten.</string>
-    <string name="quick_action_add_parking_descr">Taste, um eine Parkposition am Bildschirmmittelpunkt einzufügen.</string>
+    <string name="quick_action_add_parking_descr">Taste, um eine Parkposition im Bildschirmmittelpunkt einzufügen.</string>
     <string name="quick_action_interim_dialog">Dialog zum Bearbeiten anzeigen</string>
     <string name="favorite_autofill_toast_text">" gespeichert unter "</string>
     <string name="quick_action_duplicates">Schnellaktion in %1$s umbenannt, um Duplikate zu vermeiden.</string>
@@ -2234,7 +2242,7 @@ Lon %2$s</string>
     <string name="routing_attr_driving_style_safety_name">Nebenstraßen bevorzugen</string>
     <string name="routing_attr_relief_smoothness_factor_name">Höhenschwankung auswählen</string>
     <string name="driving_region_automatic">Automatisch</string>
-    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) ist eine Karten- und Navigationsapp mit Zugriff auf die kostenlosen, weltweiten und qualitativ hochwertigen Daten von OpenStreetMap (OSM). 
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) ist eine Karten- und Navigationsapp mit Zugriff auf die kostenlosen, weltweiten und qualitativ hochwertigen OSM-Daten. 
 \n 
 \nGenießen Sie die akustische und visuelle Navigation, die Anzeige von POIs (Orte von Interesse), die Erstellung und Verwaltung von GPX-Tracks, die Darstellung von Höhenlinien und -daten (durch eine Erweiterung), die Wahl zwischen Auto-, Fahrrad- oder Fußgängerbetrieb, die Möglichkeit, an OSM mitzuarbeiten und vieles mehr.</string>
     <string name="osmand_extended_description_part2">GPS-Navigation 
@@ -2294,7 +2302,7 @@ Lon %2$s</string>
 \n Holen Sie sich eine verlässliche Navigation für Ihr Land - sei es in Frankreich, Deutschland, Mexiko, Großbritannien, Spanien, den Niederlanden, den USA, Russland, Brasilien oder wo auch immer.</string>
     <string name="restore_purchases">Käufe wiederherstellen</string>
     <string name="fonts_header">Kartenschriftarten</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) ist eine Karten- und Navigationsapp mit Zugriff auf die kostenlosen, weltweit verfügbaren und qualitativ hochwertigen Daten von OpenStreetMap (OSM). 
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) ist eine Karten- und Navigationsapp mit Zugriff auf die kostenlosen, weltweit verfügbaren und qualitativ hochwertigen OSM-Daten.
 \n Genießen Sie die akustische und visuelle Navigation, die Betrachtung von POIs (Orte von Interesse), die Erstellung und Bearbeitung von GPX-Tracks, die Darstellung von Höhenlinien und -daten, die Auswahlmöglichkeiten zwischen Auto-, Fahrrad- und Fußgänger-Modus, die Möglichkeit der Mitarbeit an OSM und vieles mehr. 
 \n 
 \n OsmAnd+ ist die Kaufversion. Durch ihren Erwerb unterstützen Sie das Projekt, fördern die Entwicklung neuer Funktionen und erhalten die neuesten Aktualisierungen. 
@@ -2359,9 +2367,9 @@ Lon %2$s</string>
 \n • Anzeige von Ortsnamen wahlweise in Englisch, Landessprache oder phonetischer Schreibweise
 \n</string>
     <string name="quick_action_auto_zoom">Automatische Vergrößerung an/aus</string>
-    <string name="quick_action_auto_zoom_desc">Ein Schalter zum Ein-/Ausschalten der geschwindigkeitsabhängigen Kartenvergrößerung.</string>
-    <string name="quick_action_auto_zoom_on">Automatische Vergrößerung an</string>
-    <string name="quick_action_auto_zoom_off">Automatische Vergrößerung aus</string>
+    <string name="quick_action_auto_zoom_desc">Schaltfläche zum Ein- oder Ausschalten des geschwindigkeitsgesteuerten automatischen Zooms.</string>
+    <string name="quick_action_auto_zoom_on">Automatische Vergrößerung einschalten</string>
+    <string name="quick_action_auto_zoom_off">Automatische Vergrößerung ausschalten</string>
     <string name="quick_action_add_destination">Ziel festlegen</string>
     <string name="quick_action_replace_destination">Ziel ersetzen</string>
     <string name="quick_action_add_first_intermediate">Ersten Zwischenstopp hinzufügen</string>
@@ -2403,10 +2411,10 @@ Lon %2$s</string>
     <string name="routing_attr_allow_private_name">Privatzugang erlauben</string>
     <string name="routing_attr_allow_private_description">Zugang zu Privatgrund erlauben.</string>
     <string name="srtm_color_scheme">Farbschema</string>
-    <string name="quick_action_showhide_osmbugs_title">OSM-Notizen ein-/ausblenden</string>
+    <string name="quick_action_showhide_osmbugs_title">OSM-Notizen ein- oder ausblenden</string>
     <string name="quick_action_osmbugs_show">OSM-Notizen einblenden</string>
     <string name="quick_action_osmbugs_hide">OSM-Notizen ausblenden</string>
-    <string name="quick_action_showhide_osmbugs_descr">Ein Umschalter zum Ein- oder Ausblenden von OSM-Notizen auf der Karte.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Schaltfläche zum Ein- oder Ausblenden von OSM-Notizen auf der Karte.</string>
     <string name="sorted_by_distance">Nach Entfernung sortiert</string>
     <string name="search_favorites">In Favoriten suchen</string>
     <string name="hillshade_menu_download_descr">Laden Sie die Schummerungs-Karte herunter, um vertikale Schattierungen anzuzeigen.</string>
@@ -2464,9 +2472,9 @@ Lon %2$s</string>
     <string name="moving_time">Zeit in Bewegung</string>
     <string name="mapillary_menu_filter_description">Bilder nach Benutzer, Datum oder Typ filtern. Nur im Nahbereich aktiv.</string>
     <string name="min_max">min/max</string>
-    <string name="quick_action_resume_pause_navigation_descr">Drücken Sie diese Taste, um die Navigation zu pausieren oder fortzusetzen.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Schaltfläche zum Anhalten oder Fortsetzen der Navigation.</string>
     <string name="quick_action_show_navigation_finish_dialog">Dialog bei Navigationsende anzeigen</string>
-    <string name="quick_action_start_stop_navigation_descr">Drücken Sie diese Taste, um die Navigation zu starten oder zu beenden.</string>
+    <string name="quick_action_start_stop_navigation_descr">Schaltfläche zum Anhalten oder Fortsetzen der Navigation.</string>
     <string name="quick_action_start_stop_navigation">Navigation starten/beenden</string>
     <string name="quick_action_resume_pause_navigation">Navigation pausieren/fortsetzen</string>
     <string name="rendering_value_translucent_pink_name">Transparentes Rosa</string>
@@ -2506,7 +2514,7 @@ Lon %2$s</string>
     <string name="move_point">Punkt verschieben</string>
     <string name="add_segment_to_the_track">Zu einer GPX-Datei hinzufügen</string>
     <string name="do_not_use_animations">Keine Animationen</string>
-    <string name="do_not_use_animations_descr">Deaktiviert Animationen in der App.</string>
+    <string name="do_not_use_animations_descr">Schaltet Kartenanimationen aus.</string>
     <string name="keep_showing_on_map">Weiterhin auf der Karte anzeigen</string>
     <string name="exit_without_saving">Beenden, ohne zu speichern\?</string>
     <string name="move_all_to_history">Alles in den Verlauf verschieben</string>
@@ -2545,7 +2553,7 @@ Lon %2$s</string>
     <string name="group_will_be_removed_after_restart">Die Gruppe wird beim nächsten Start der App entfernt.</string>
     <string name="show_passed">Passierte anzeigen</string>
     <string name="hide_passed">Passierte ausblenden</string>
-    <string name="marker_show_distance_descr">Auswahl der Anzeige für Entfernungen und Richtungen zu Kartenmarkierungen in der Kartenansicht:</string>
+    <string name="marker_show_distance_descr">Auswahl der Entfernungs- und Richtungsangabe für Kartenmarkierungen in der Karte:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Kartenausrichtungsgrenzwert</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Auswählen, bei welcher Geschwindigkeit die Kartenausrichtung von \'Nach Bewegungsrichtung\' auf \'Nach Kompass\' umschaltet.</string>
     <string name="marker_moved_to_history">Kartenmarkierung in den Verlauf verschoben</string>
@@ -2606,7 +2614,7 @@ Lon %2$s</string>
     <string name="by_type">Nach Typ</string>
     <string name="import_gpx_file_description">kann als Favoriten oder GPX-Datei importiert werden.</string>
     <string name="empty_state_av_notes_desc">Audio-, Video- oder Fotonotizen zu jedem Punkt auf der Karte über Bedienelement oder Kontextmenü hinzufügen.</string>
-    <string name="notes_by_date">Notizen nach Datum</string>
+    <string name="notes_by_date">OSM-Notizen nach Datum</string>
     <string name="tap_on_map_to_hide_interface_descr">Ein Tippen auf die Karte schaltet die Steuertasten und Bedienelemente um.</string>
     <string name="release_3_0">• Neu: Unterstützung weltweiter Offline-Reiseführer. Verknüpfung beschriebener Sehenswürdigkeiten zur Landkarte. Die Inhalte basieren derzeit auf Wikivoyage.
 \n
@@ -2660,11 +2668,11 @@ Lon %2$s</string>
     <string name="show_closed_notes">Geschlossene Notizen anzeigen</string>
     <string name="switch_osm_notes_visibility_desc">OSM-Notizen auf der Karte ein-/ausblenden.</string>
     <string name="gpx_file_desc">GPX - geeignet für den Export in JOSM oder andere OSM-Editoren.</string>
-    <string name="osc_file_desc">OSC - geeignet für den Export nach OpenStreetMap.</string>
+    <string name="osc_file_desc">OSC - geeignet für den Export nach OSM.</string>
     <string name="shared_string_gpx_file">GPX-Datei</string>
     <string name="osc_file">OSC-Datei</string>
     <string name="choose_file_type">Dateityp auswählen</string>
-    <string name="osm_edits_export_desc">Wählen Sie den Exporttyp aus: OSM-Notizen, POIs oder beides.</string>
+    <string name="osm_edits_export_desc">Als OSM-Notizen, POIs oder beides exportieren.</string>
     <string name="all_data">Alle Daten</string>
     <string name="osm_notes">OSM-Notizen</string>
     <string name="tunnel_warning">Tunnel voraus</string>
@@ -2864,7 +2872,7 @@ Lon %2$s</string>
     <string name="osm_live_payment_renews_annually">Verlängert sich jährlich</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Zahlungsintervall:</string>
-    <string name="osm_live_payment_contribute_descr">Spenden helfen bei der Finanzierung der OpenStreetMap-Kartographie.</string>
+    <string name="osm_live_payment_contribute_descr">Spenden helfen bei der Finanzierung der OSM-Kartographie.</string>
     <string name="powered_by_osmand">Von OsmAnd</string>
     <string name="osm_live_subscriptions">Abonnements</string>
     <string name="mapillary_menu_title_pano">Nur 360°-Bilder anzeigen</string>
@@ -2915,7 +2923,7 @@ Lon %2$s</string>
     <string name="step_by_step">Schritt für Schritt</string>
     <string name="routeInfo_road_types_name">Straßentypen</string>
     <string name="quick_action_show_hide_gpx_tracks">GPX-Tracks ein-/ausblenden</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Ein Umschalter zum Ein- oder Ausblenden ausgewählter GPX-Tracks auf der Karte.</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Eine Schaltfläche zum Ein- oder Ausblenden ausgewählter GPX-Tracks auf der Karte.</string>
     <string name="quick_action_gpx_tracks_hide">GPX-Tracks ausblenden</string>
     <string name="quick_action_gpx_tracks_show">GPX-Tracks einblenden</string>
     <string name="exit_at">Aussteigen bei</string>
@@ -3080,7 +3088,7 @@ Lon %2$s</string>
     <string name="base_profile_descr_car">Auto, Lkw, Motorrad</string>
     <string name="base_profile_descr_bicycle">Mountainbike, Moped, Pferd</string>
     <string name="base_profile_descr_pedestrian">Gehen, Wandern, Laufen</string>
-    <string name="base_profile_descr_public_transport">Alle ÖPNV-Arten</string>
+    <string name="base_profile_descr_public_transport">ÖPNV-Arten</string>
     <string name="base_profile_descr_boat">Schiff, Rudern, Segeln</string>
     <string name="base_profile_descr_aircraft">Flugzeug, Segelflugzeug</string>
     <string name="colleted_data">Gesammelte Daten</string>
@@ -3126,7 +3134,7 @@ Lon %2$s</string>
     <string name="routing_attr_piste_type_nordic_description">Loipen für Skilangläufer und Nordische Skiläufer.</string>
     <string name="routing_attr_difficulty_preference_description">Routen dieser Schwierigkeit bevorzugen, obwohl bei kürzerer Routenführung schwierigere oder einfachere Pisten immer noch möglich sind.</string>
     <string name="routing_attr_freeride_policy_name">Abseits der Piste</string>
-    <string name="routing_attr_freeride_policy_description">Freerides und Strecken abseits der Piste sind inoffizielle Routen und Passagen. Typischerweise unpräpariert, nicht offiziell betreut und abends nicht kontrolliert. Betreten auf eigene Gefahr.</string>
+    <string name="routing_attr_freeride_policy_description">Freerides und Strecken abseits der Piste sind inoffizielle Routen und Passagen. Typischerweise unpräpariert, nicht gewartet und abends nicht kontrolliert. Betreten auf eigene Gefahr.</string>
     <string name="press_again_to_change_the_map_orientation">Erneut antippen, um die Kartenausrichtung zu ändern</string>
     <string name="quick_action_need_to_add_item_to_list">Sie müssen mindestens einen Eintrag in die Liste der Schnellaktionseinstellungen hinzufügen</string>
     <string name="shared_string_min_speed">Mindesttempo</string>
@@ -3246,7 +3254,7 @@ Lon %2$s</string>
     <string name="apply_to_current_profile">Nur auf „%1$s“ anwenden</string>
     <string name="apply_to_all_profiles">Auf alle Profile anwenden</string>
     <string name="analytics_pref_title">Analyseinstrumente</string>
-    <string name="turn_screen_on_info">Karte während der Navigation auf Sperrbildschirm anzeigen.</string>
+    <string name="turn_screen_on_info">Karte während der Navigation auf dem Sperrbildschirm anzeigen.</string>
     <string name="route_parameters_info">Einstellungen für die Routenplanung des gewählten Profils „%1$s“.</string>
     <string name="wake_time">Aufwachzeit</string>
     <string name="units_and_formats">Einheiten und Formate</string>
@@ -3275,7 +3283,7 @@ Lon %2$s</string>
     <string name="screen_alerts_descr">Warnungen werden während der Navigation unten links angezeigt.</string>
     <string name="map_during_navigation">Karte während Navigation</string>
     <string name="shared_string_other">Weitere</string>
-    <string name="voice_announces_info">Sprachansagen finden nur während der Navigation statt.</string>
+    <string name="voice_announces_info">Sprachansagen erfolgen nur während der Navigation.</string>
     <string name="voice_announces_descr">Navigationsanweisungen und -ansagen</string>
     <string name="voice_announces">Sprachansagen</string>
     <string name="screen_alerts">Bildschirmwarnungen</string>
@@ -3293,8 +3301,8 @@ Lon %2$s</string>
     <string name="paste_Osmand_data_folder_path">Einfügen des Pfades zum Ordner mit OsmAnd-Daten</string>
     <string name="change_osmand_data_folder_question">OsmAnd-Datenordner ändern\?</string>
     <string name="move_maps_to_new_destination">Zum neuen Ziel verschieben</string>
-    <string name="internal_app_storage_description">Interner Speicher, versteckt vor Benutzern und anderen Anwendungen, exklusiv für OsmAnd zugänglich</string>
-    <string name="change_data_storage_folder">Ändern des Datenspeicherordners</string>
+    <string name="internal_app_storage_description">Interner Speicher für OsmAnd, versteckt vor Benutzern und anderen Anwendungen.</string>
+    <string name="change_data_storage_folder">Speicherordner ändern</string>
     <string name="rendering_attr_piste_type_snow_park_name">Winter-Funpark</string>
     <string name="rendering_attr_piste_type_sleigh_name">Schlitten</string>
     <string name="rendering_attr_piste_type_sled_name">Schlitten</string>
@@ -3355,7 +3363,7 @@ Lon %2$s</string>
 \n • Weitere Fehlerlösungen
 \n
 \n</string>
-    <string name="apply_preference_to_all_profiles">Sie können diese Änderung auf alle Profile oder nur auf das ausgewählte anwenden.</string>
+    <string name="apply_preference_to_all_profiles">Sie können diese Änderung auf alle oder nur auf das ausgewählte Profil anwenden.</string>
     <string name="shared_preference">Geteilt</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Unbefestigte Straßen bevorzugen</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Bei der Navigation unbefestigte Straßen gegenüber befestigten bevorzugen.</string>
@@ -3468,4 +3476,23 @@ Lon %2$s</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Sonnenuntergang um %1$s</string>
     <string name="sunrise_at">Sonnenaufgang um %1$s</string>
+    <string name="rearrange_categories">Kategorien neu ordnen</string>
+    <string name="create_custom_categories_list_promo">Sie können benutzerdefinierte Kategorien hinzufügen, nicht benötigte Kategorien ausblenden und die Sortierung der Liste ändern. Die Liste kann mit Profilen importiert und exportiert werden.</string>
+    <string name="add_new_custom_category_button_promo">Sie können eine neue benutzerdefinierte Kategorie hinzufügen, indem Sie eine oder mehrere benötigte Kategorien auswählen.</string>
+    <string name="rendering_attr_streetLightingNight_name">Nur nachts anzeigen</string>
+    <string name="plugin_prefs_reset_successful">Alle Plugin-Einstellungen werden auf den Standardzustand zurückgesetzt.</string>
+    <string name="profile_prefs_reset_successful">Alle Profil-Einstellungen werden auf den Standardzustand zurückgesetzt.</string>
+    <string name="accessibility_announce">Ankündigung</string>
+    <string name="select_map_icon_descr">Symbol, das im Ruhezustand angezeigt wird.</string>
+    <string name="multimedia_use_system_camera">System-App verwenden</string>
+    <string name="multimedia_photo_play_sound">Auslöseton der Kamera</string>
+    <string name="reset_to_default_category_button_promo">Durch das Zurücksetzen auf die Standardeinstellung wird die Sortierung auf den Standardzustand nach der Installation zurückgesetzt.</string>
+    <string name="accessibility_mode_disabled">Eingabehilfenmodus ist in ihrem System deaktiviert.</string>
+    <string name="use_system_screen_timeout">Zeitlimit für den Systembildschirm verwenden</string>
+    <string name="use_system_screen_timeout_promo">Standardmäßig deaktiviert, wenn OsmAnd im Vordergrund läuft, wird der Bildschirm nicht ausgeblendet.
+\n
+\nWenn aktiviert, verwendet OsmAnd das Zeitlimit für den Systembildschirm.</string>
+    <string name="live_monitoring">Online-Aufzeichnung</string>
+    <string name="clear_recorded_data">Aufgezeichnete Daten löschen</string>
+    <string name="copy_coordinates">Koordinaten kopieren</string>
 </resources>
