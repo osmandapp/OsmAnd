@@ -24,6 +24,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -182,7 +183,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 						routingHelper.getVoiceRouter().setMuteForMode(applicationMode, active);
 						String voiceProvider = app.getSettings().VOICE_PROVIDER.getModeValue(applicationMode);
 						if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
-							mapActivity.showVoiceProviderDialog(applicationMode, false);
+							OsmAndDialogs.showVoiceProviderDialog(mapActivity, applicationMode, false);
 						} else {
 							muteSoundItem[0].setChecked(!active);
 							muteSoundItem[0].setIcon(getContentIcon(!active ? optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));
