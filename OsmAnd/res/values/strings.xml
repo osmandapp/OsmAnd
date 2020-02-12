@@ -2794,6 +2794,7 @@
     <string name="index_name_africa">Africa</string>
     <string name="index_name_asia">Asia</string>
     <string name="index_name_oceania">Australia and Oceania</string>
+    <string name="index_name_antarctica">Antarctica</string>
     <string name="index_name_other">Worldwide and topic maps</string>
     <string name="index_name_wiki">Worldwide Wikipedia POIs</string>
     <string name="index_name_voice">Voice prompts (recorded, limited features)</string>
