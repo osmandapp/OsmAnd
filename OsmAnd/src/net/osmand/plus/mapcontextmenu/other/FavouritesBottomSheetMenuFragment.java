@@ -43,11 +43,17 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	public static final String TAG = "FavouritesBottomSheetMenuFragment";
 	private static final String IS_SORTED = "sorted";
 	private static final String SORTED_BY_TYPE = "sortedByType";
+	private static final int SORT_TYPE_DIST = 1;
+	private static final int SORT_TYPE_NAME = 2;
+	private static final int SORT_TYPE_CATEGORY = 3;
+	private static int getNextType(int type) {
+		return type % SORT_TYPE_CATEGORY + 1;
+	}
 
 	private List<FavouritePoint> favouritePoints = new ArrayList<>();
 	private FavouritesAdapter adapter;
 	private RecyclerView recyclerView;
-	private boolean sortByDist = true;
+	private int sortByDist = SORT_TYPE_DIST;
 	private boolean isSorted = false;
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
@@ -64,7 +70,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 			pointType = PointType.valueOf(args.getString(POINT_TYPE_KEY));
 		}
 		if (savedInstanceState != null && savedInstanceState.getBoolean(IS_SORTED)) {
-			sortByDist = savedInstanceState.getBoolean(SORTED_BY_TYPE);
+			sortByDist = savedInstanceState.getInt(SORTED_BY_TYPE);
 		}
 		adapter = new FavouritesAdapter(getMyApplication(), favouritePoints);
 		FavouritesDbHelper helper = getMyApplication().getFavorites();
@@ -91,18 +97,20 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		sortFavourites();
 		final BottomSheetItemTitleWithDescrAndButton[] title = new BottomSheetItemTitleWithDescrAndButton[1];
 		title[0] = (BottomSheetItemTitleWithDescrAndButton) new BottomSheetItemTitleWithDescrAndButton.Builder()
-				.setButtonIcons(null, getIconForButton())
-				.setButtonTitle(getTextForButton(sortByDist))
+				.setButtonIcons(null, getIconForButton(getNextType(sortByDist)))
+				.setButtonTitle(getTextForButton(getNextType(sortByDist)))
 				.setOnButtonClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
+						sortByDist = getNextType(sortByDist);
 						sortFavourites();
-						title[0].setButtonIcons(null, getIconForButton());
-						title[0].setButtonText(getTextForButton(sortByDist));
-						title[0].setDescription(getTextForButton(!sortByDist));
+						int next = getNextType(sortByDist);
+						title[0].setButtonIcons(null, getIconForButton(next));
+						title[0].setButtonText(getTextForButton(next));
+						title[0].setDescription(getTextForButton(sortByDist));
 					}
 				})
-				.setDescription(getTextForButton(!sortByDist))
+				.setDescription(getTextForButton(sortByDist))
 				.setTitle(getString(R.string.favourites))
 				.setLayoutId(R.layout.bottom_sheet_item_title_with_descr_and_button)
 				.create();
@@ -139,13 +147,19 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		}
 	}
 
-	private Drawable getIconForButton() {
-		return getIcon(sortByDist ? R.drawable.ic_action_list_sort : R.drawable.ic_action_sort_by_name,
+	private Drawable getIconForButton(int type) {
+		return getIcon(type == SORT_TYPE_DIST ? R.drawable.ic_action_list_sort : R.drawable.ic_action_sort_by_name,
 				nightMode ? R.color.multi_selection_menu_close_btn_dark : R.color.multi_selection_menu_close_btn_light);
 	}
 
-	private String getTextForButton(boolean sortByDist) {
-		return getString(sortByDist ? R.string.sort_by_distance : R.string.sort_by_name);
+	private String getTextForButton(int sortByDist) {
+		int r = R.string.sort_by_distance;
+		if(sortByDist == SORT_TYPE_CATEGORY) {
+			r = R.string.sort_by_category;
+		} else if(sortByDist == SORT_TYPE_NAME) {
+			r = R.string.sort_by_name;
+		}
+		return getString(r);
 	}
 
 	private void selectFavorite(FavouritePoint point) {
@@ -280,7 +294,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putBoolean(IS_SORTED, isSorted);
-		outState.putBoolean(SORTED_BY_TYPE, !sortByDist);
+		outState.putInt(SORTED_BY_TYPE, sortByDist);
 	}
 
 	@Override
@@ -292,21 +306,30 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		final Collator inst = Collator.getInstance();
 		Location stale = getMyApplication().getLocationProvider().getLastStaleKnownLocation();
 		final LatLon latLon = stale != null ? new LatLon(stale.getLatitude(), stale.getLongitude()) : 
-			getMyApplication().getMapViewTrackingUtilities().getMapLocation();			
+			getMyApplication().getMapViewTrackingUtilities().getMapLocation();
+
 		Collections.sort(favouritePoints, new Comparator<FavouritePoint>() {
 			@Override
 			public int compare(FavouritePoint lhs, FavouritePoint rhs) {
-				if (sortByDist && latLon != null) {
+				if (sortByDist == SORT_TYPE_DIST && latLon != null) {
 					double ld = MapUtils.getDistance(latLon, lhs.getLatitude(),
 							lhs.getLongitude());
 					double rd = MapUtils.getDistance(latLon, rhs.getLatitude(),
 							rhs.getLongitude());
 					return Double.compare(ld, rd);
 				}
-				return inst.compare(lhs.getName(), rhs.getName());
+
+				if(sortByDist == SORT_TYPE_CATEGORY) {
+					int cat = inst.compare(lhs.getCategoryDisplayName(getMyApplication()), rhs.getCategoryDisplayName(getMyApplication()));
+					if(cat != 0) {
+						return cat;
+					}
+				}
+				int name = inst.compare(lhs.getDisplayName(getMyApplication()), rhs.getDisplayName(getMyApplication()));
+				return name;
 			}
 		});
-		sortByDist = !sortByDist;
+
 		isSorted = true;
 		adapter.notifyDataSetChanged();
 		recyclerView.getLayoutManager().scrollToPosition(0);

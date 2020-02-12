@@ -285,8 +285,12 @@ public abstract class OsmandPlugin {
 	}
 
 	private static boolean checkPluginPackage(OsmandApplication app, OsmandPlugin plugin) {
-		return isPackageInstalled(plugin.getComponentId1(), app) || isPackageInstalled(plugin.getComponentId2(), app)
-				|| InAppPurchaseHelper.isSubscribedToLiveUpdates(app);
+		return plugin.checkPluginPackage(app);
+
+	}
+
+	protected boolean checkPluginPackage(OsmandApplication app) {
+		return isPackageInstalled(getComponentId1(), app) || isPackageInstalled(getComponentId2(), app);
 	}
 
 	public static boolean enablePlugin(@Nullable Activity activity, OsmandApplication app, OsmandPlugin plugin, boolean enable) {

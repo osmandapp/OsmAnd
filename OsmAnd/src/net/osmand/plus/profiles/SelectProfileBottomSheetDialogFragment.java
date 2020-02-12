@@ -235,6 +235,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 	}
 
 	private void refreshProfiles(OsmandApplication app) {
+		profiles.clear();
 		if (type.equals(TYPE_NAV_PROFILE)) {
 			profiles.addAll(NavigationFragment.getSortedRoutingProfiles(app));
 		} else if (type.equals(TYPE_BASE_APP_PROFILE)) {

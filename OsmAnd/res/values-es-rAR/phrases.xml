@@ -107,7 +107,7 @@
     <string name="poi_musical_instrument">Instrumentos musicales</string>
     <string name="poi_newsagent">Puesto de diarios;Agencia de noticias</string>
     <string name="poi_optician">Óptica</string>
-    <string name="poi_organic">Comida orgánica</string>
+    <string name="poi_organic">Productos orgánicos</string>
     <string name="poi_outdoor">Tienda de actividades al aire libre</string>
     <string name="poi_paint">Pinturería</string>
     <string name="poi_pet">Mascotas</string>
@@ -3793,4 +3793,9 @@
     <string name="poi_volcano_number_of_eruptions">Número de erupciones</string>
     <string name="poi_memorial_ghost_bike">Bicicleta fantasma</string>
     <string name="poi_paintball">Paintball</string>
+    <string name="poi_mountain_rescue">Rescate de montaña</string>
+    <string name="poi_shop_security">Tienda de seguridad</string>
+    <string name="poi_bowling_alley">Galería de bolos;Bolera</string>
+    <string name="poi_piste_ref">Número de referencia de la pista</string>
+    <string name="poi_resort_hunting">Base de caza</string>
 </resources>

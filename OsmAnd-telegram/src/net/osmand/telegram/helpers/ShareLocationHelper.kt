@@ -83,6 +83,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 				lastLocationUpdateTime = System.currentTimeMillis()
 				lastLocation = location
 				if (app.settings.getChatsShareInfo().isNotEmpty()) {
+					app.showLocationHelper.shouldBlinkWidget = true
 					shareLocationMessages(location, app.telegramHelper.getCurrentUserId())
 				}
 			}

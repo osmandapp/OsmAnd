@@ -445,7 +445,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				fragment.updateInfo();
 				if (!routeCalculationInProgress) {
 					fragment.hideRouteCalculationProgressBar();
-					fragment.openMenuHalfScreen();
+					if(!app.getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.
+							getModeValue(app.getRoutingHelper().getAppMode())) {
+						fragment.openMenuHalfScreen();
+					} else {
+						fragment.openMenuHeaderOnly();
+					}
 				}
 			}
 		}
