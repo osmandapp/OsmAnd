@@ -2169,7 +2169,7 @@ Lon %2$s</string>
     <string name="quick_action_category_descr">Kategorie, in der der Favorit gespeichert werden soll:</string>
     <string name="quick_action_gpx_category_descr">Wählen Sie eine beliebige Kategorie.</string>
     <string name="configure_screen_quick_action">Schnellaktion</string>
-    <string name="quick_action_add_gpx_descr">Taste, um einen GPX-Wegpunkt in der Bildschirmmitte einzufügen.</string>
+    <string name="quick_action_add_gpx_descr">Eine Schaltfläche, um einen GPX-Wegpunkt in der Bildschirmmitte einzufügen.</string>
     <string name="quick_action_add_osm_bug_descr">Taste, um eine OSM-Notiz in der Bildschirmmitte einzufügen.</string>
     <string name="quick_action_add_poi_descr">Taste, um einen POI in der Bildschirmmitte einzufügen.</string>
     <string name="quick_action_navigation_voice_descr">Umschalter, um die Sprachansagen während der Navigation ein- oder auszuschalten.</string>
