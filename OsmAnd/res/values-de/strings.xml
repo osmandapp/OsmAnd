@@ -3495,4 +3495,35 @@ Lon %2$s</string>
     <string name="live_monitoring">Online-Aufzeichnung</string>
     <string name="clear_recorded_data">Aufgezeichnete Daten löschen</string>
     <string name="copy_coordinates">Koordinaten kopieren</string>
+    <string name="monitoring_min_speed_descr_remark">Bemerkung: Geschwindigkeit &gt; 0 Kontrolle: Die meisten GPS-Chipsätze geben nur dann einen Geschwindigkeitswert an, wenn der Algorithmus feststellt, dass Sie in Bewegung sind, und keinen, wenn Sie nicht in Bewegung sind. Die Verwendung der Einstellung &gt; 0 in diesem Filter nutzt also gewissermaßen die Bewegungserkennung des GPS-Chipsatzes. Aber selbst wenn nicht zur Aufnahmezeit gefiltert wurde, verwenden wir diese Funktion in unserer GPX-Analyse, um die Distanz korrigiert zu bestimmen, d.h. der in diesem Feld angezeigte Wert ist die während der Bewegung aufgezeichnete Distanz.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Nebeneffekt: Als Ergebnis der Filterung nach Genauigkeit können Punkte z.B. unter Brücken, unter Bäumen, zwischen hohen Gebäuden oder bei bestimmten Wetterbedingungen ganz fehlen.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Empfehlung: Es ist schwer vorherzusagen, was aufgezeichnet wird und was nicht, es ist vielleicht am besten, diesen Filter auszuschalten.</string>
+    <string name="monitoring_min_distance_descr">Dieser Filter verhindert, dass doppelte Punkte aufgenommen werden, bei denen möglicherweise zu wenig tatsächliche Bewegung stattgefunden hat, und sorgt für ein schöneres räumliches Erscheinungsbild von Spuren, die später nicht nachbearbeitet werden.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Nebenwirkungen: Die Ruhephasen werden nicht oder nur an jeweils einem Punkt erfasst. Kleine (reale) Bewegungen (z.B. seitwärts, um eine mögliche Abzweigung auf Ihrer Reise zu markieren) können herausgefiltert werden. Ihre Datei enthält weniger Informationen für die Nachbearbeitung und hat schlechtere Statistiken, da offensichtlich überflüssige Punkte zur Aufzeichnungszeit herausgefiltert werden, während Artefakte, die durch schlechten Empfang oder GPS-Chipsatzeffekte verursacht wurden, möglicherweise erhalten bleiben.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Empfehlung: Eine Einstellung von 5 Metern kann für Sie gut funktionieren, wenn Sie keine feineren Details erfassen müssen und keine explizite Datenerfassung im Ruhezustand wünschen.</string>
+    <string name="release_3_6">• Profile: jetzt können Sie die Reihenfolge ändern, das Symbol für die Karte festlegen, alle Einstellungen für die Basisprofile ändern und sie wieder auf die Standardeinstellungen zurücksetzen
+\n
+\n • Nummer der Ausfahrt in der Navigation hinzugefügt.
+\n
+\n • Plugin-Einstellungen überarbeitet
+\n
+\n • Überarbeiteter Einstellungsbildschirm für schnellen Zugriff auf alle Profile
+\n
+\n • Option zum Kopieren von Einstellungen aus einem anderen Profil hinzugefügt
+\n
+\n • Es wurde die Möglichkeit hinzugefügt, die Reihenfolge zu ändern oder POI-Kategorien in der Suche auszublenden
+\n
+\n • POI-Symbole sind auf der Karte jetzt korrekt ausgerichtet
+\n
+\n • Sonnenuntergangs-/Sonnenaufgangsdaten zur Konfiguration der Karte hinzugefügt
+\n
+\n • Zuhause/Arbeitssymbole auf der Karte hinzugefügt
+\n
+\n • Unterstützung für mehrzeilige Beschreibung in Einstellungen hinzugefügt
+\n
+\n • Korrekte Transliteration in die Karte von Japan eingefügt
+\n
+\n • Karte der Antarktis hinzugefügt
+\n
+\n</string>
 </resources>
