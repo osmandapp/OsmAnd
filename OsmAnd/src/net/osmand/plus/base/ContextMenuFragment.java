@@ -742,12 +742,17 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		int newMenuState = getCurrentMenuState();
 		boolean needMapAdjust = currentMenuState != newMenuState && newMenuState != MenuState.FULL_SCREEN;
 
+		updateMenuState(currentMenuState, newMenuState);
+
 		applyPosY(currentY, needCloseMenu, needMapAdjust, currentMenuState, newMenuState, 0, animated);
 
 		ContextMenuFragmentListener listener = this.listener;
 		if (listener != null) {
 			listener.onContextMenuStateChanged(this, newMenuState);
 		}
+	}
+
+	protected void updateMenuState(int currentMenuState, int newMenuState) {
 	}
 
 
