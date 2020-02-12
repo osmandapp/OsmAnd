@@ -2,9 +2,11 @@ package net.osmand.plus.search;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.SwitchCompat;
@@ -84,6 +86,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	private ArrayList<String> collapsedCategories = new ArrayList<>();
 	private ArrayList<String> showAllCategories = new ArrayList<>();
 	private Map<PoiType, String> poiAdditionalsTranslations = new HashMap<>();
+	private boolean isLightTheme;
 
 	public QuickSearchPoiFilterFragment() {
 	}
@@ -95,7 +98,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		boolean isLightTheme = getMyApplication().getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
+		isLightTheme = getMyApplication().getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
 		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 	}
@@ -146,7 +149,9 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		description.setText(filter.getName());
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark));
+		Drawable icClose = app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark,
+				isLightTheme ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark);
+		toolbar.setNavigationIcon(icClose);
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -154,6 +159,8 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 				dismiss();
 			}
 		});
+		toolbar.setBackgroundColor(ContextCompat.getColor(app, isLightTheme ? R.color.app_bar_color_light : R.color.app_bar_color_dark));
+		toolbar.setTitleTextColor(ContextCompat.getColor(app, isLightTheme ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark));
 
 		ImageButton moreButton = (ImageButton) view.findViewById(R.id.moreButton);
 		moreButton.setOnClickListener(new View.OnClickListener() {
@@ -209,8 +216,8 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 
 		listView = (ListView) view.findViewById(android.R.id.list);
 		listView.setBackgroundColor(getResources().getColor(
-				app.getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
-						: R.color.ctx_menu_info_view_bg_dark));
+				app.getSettings().isLightContent() ? R.color.activity_background_color_light
+						: R.color.activity_background_color_dark));
 
 		View editTextView = inflater.inflate(R.layout.poi_filter_list_item, listView, false);
 		editText = (EditText) editTextView.findViewById(R.id.editText);
@@ -323,8 +330,9 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 			public void onClick(DialogInterface dialog, int which) {
 
 				if (app.getPoiFilters().removePoiFilter(filter)) {
-					Toast.makeText(getContext(), MessageFormat.format(getContext().getText(R.string.edit_filter_delete_message).toString(),
-							filter.getName()), Toast.LENGTH_SHORT).show();
+					Toast.makeText(getContext(),
+							getContext().getString(R.string.edit_filter_delete_message, filter.getName()),
+							Toast.LENGTH_SHORT).show();
 					app.getSearchUICore().refreshCustomPoiFilters();
 					QuickSearchDialogFragment quickSearchDialogFragment = (QuickSearchDialogFragment) getParentFragment();
 					quickSearchDialogFragment.reloadCategories();
@@ -811,7 +819,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 
 				if (item.iconId != 0) {
 					icon.setImageDrawable(app.getUIUtilities().getIcon(item.iconId,
-							app.getSettings().isLightContent() ? R.color.icon_color : R.color.color_white));
+							app.getSettings().isLightContent() ? R.color.icon_color_default_light : R.color.color_white));
 					icon.setVisibility(View.VISIBLE);
 				} else {
 					icon.setVisibility(View.GONE);

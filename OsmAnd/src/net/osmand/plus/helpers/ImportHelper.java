@@ -17,12 +17,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
+import net.osmand.CallbackWithObject;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -32,11 +34,13 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.SettingsHelper;
+import net.osmand.plus.SettingsHelper.SettingsImportListener;
+import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -45,10 +49,13 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -65,7 +72,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.zip.ZipInputStream;
-import org.apache.commons.logging.Log;
+
+import static android.app.Activity.RESULT_OK;
+import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
+import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
+import static net.osmand.plus.AppInitializer.loadRoutingFiles;
+import static net.osmand.plus.myplaces.FavoritesActivity.FAV_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
 /**
  * @author Koen Rabaey
@@ -79,6 +93,23 @@ public class ImportHelper {
 	private final OsmandApplication app;
 	private final OsmandMapTileView mapView;
 	private OnGpxImportCompleteListener gpxImportCompleteListener;
+
+	public final static int IMPORT_FILE_REQUEST = 1006;
+	
+	public enum ImportType {
+		SETTINGS(IndexConstants.OSMAND_SETTINGS_FILE_EXT),
+		ROUTING(ROUTING_FILE_EXT);
+
+		ImportType(String extension) {
+			this.extension = extension;
+		}
+
+		private String extension;
+
+		public String getExtension() {
+			return extension;
+		}
+	}
 
 	public interface OnGpxImportCompleteListener {
 		void onComplete(boolean success);
@@ -94,13 +125,13 @@ public class ImportHelper {
 		this.gpxImportCompleteListener = gpxImportCompleteListener;
 	}
 
-	public void handleContentImport(final Uri contentUri, final boolean useImportDir) {
-		final String name = getNameFromContentUri(contentUri);
-		handleFileImport(contentUri, name, useImportDir);
+	public void handleContentImport(final Uri contentUri, Bundle extras, final boolean useImportDir) {
+		final String name = getNameFromContentUri(app, contentUri);
+		handleFileImport(contentUri, name, extras, useImportDir);
 	}
 
 	public boolean handleGpxImport(final Uri contentUri, final boolean useImportDir) {
-		String name = getNameFromContentUri(contentUri);
+		String name = getNameFromContentUri(app, contentUri);
 		boolean isOsmandSubdir = isSubDirectory(app.getAppPath(IndexConstants.GPX_INDEX_DIR), new File(contentUri.getPath()));
 		if (!isOsmandSubdir && name != null) {
 			String nameLC = name.toLowerCase();
@@ -131,12 +162,12 @@ public class ImportHelper {
 		if (isFileIntent) {
 			fileName = new File(uri.getPath()).getName();
 		} else if (isContentIntent) {
-			fileName = getNameFromContentUri(uri);
+			fileName = getNameFromContentUri(app, uri);
 		}
 		handleFavouritesImport(uri, fileName, saveFile, false, true);
 	}
 
-	public void handleFileImport(final Uri intentUri, final String fileName, final boolean useImportDir) {
+	public void handleFileImport(Uri intentUri, String fileName, Bundle extras, boolean useImportDir) {
 		final boolean isFileIntent = "file".equals(intentUri.getScheme());
 		final boolean isOsmandSubdir = isSubDirectory(app.getAppPath(IndexConstants.GPX_INDEX_DIR), new File(intentUri.getPath()));
 
@@ -150,14 +181,18 @@ public class ImportHelper {
 			handleObfImport(intentUri, fileName);
 		} else if (fileName != null && fileName.endsWith(IndexConstants.SQLITE_EXT)) {
 			handleSqliteTileImport(intentUri, fileName);
+		} else if (fileName != null && fileName.endsWith(OSMAND_SETTINGS_FILE_EXT)) {
+			handleOsmAndSettingsImport(intentUri, fileName, extras, true, null);
+		} else if (fileName != null && fileName.endsWith(ROUTING_FILE_EXT)) {
+			handleRoutingFileImport(intentUri, fileName, null);
 		} else {
 			handleFavouritesImport(intentUri, fileName, saveFile, useImportDir, false);
 		}
 	}
 
-	private String getNameFromContentUri(Uri contentUri) {
+	public static String getNameFromContentUri(OsmandApplication app, Uri contentUri) {
 		final String name;
-		final Cursor returnCursor = app.getContentResolver().query(contentUri, null, null, null, null);
+		final Cursor returnCursor = app.getContentResolver().query(contentUri, new String[] {OpenableColumns.DISPLAY_NAME}, null, null, null);
 		if (returnCursor != null && returnCursor.moveToFirst()) {
 			int columnIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
 			if (columnIndex != -1) {
@@ -216,7 +251,7 @@ public class ImportHelper {
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	private void handleFavouritesImport(final Uri gpxFile, final String fileName, final boolean save, final boolean useImportDir, final boolean forceImportFavourites) {
+	private void handleFavouritesImport(final Uri fileUri, final String fileName, final boolean save, final boolean useImportDir, final boolean forceImportFavourites) {
 		new AsyncTask<Void, Void, GPXFile>() {
 			ProgressDialog progress = null;
 
@@ -228,18 +263,49 @@ public class ImportHelper {
 			@Override
 			protected GPXFile doInBackground(Void... nothing) {
 				InputStream is = null;
+				ZipInputStream zis = null;
 				try {
-					final ParcelFileDescriptor pFD = app.getContentResolver().openFileDescriptor(gpxFile, "r");
-
+					final ParcelFileDescriptor pFD = app.getContentResolver().openFileDescriptor(fileUri, "r");
 					if (pFD != null) {
 						is = new FileInputStream(pFD.getFileDescriptor());
-						return GPXUtilities.loadGPXFile(is);
+
+						if (fileName != null && fileName.endsWith(KML_SUFFIX)) {
+							final String result = Kml2Gpx.toGpx(is);
+							if (result != null) {
+								try {
+									return GPXUtilities.loadGPXFile(new ByteArrayInputStream(result.getBytes("UTF-8")));
+								} catch (UnsupportedEncodingException e) {
+									return null;
+								}
+							}
+						} else if (fileName != null && fileName.endsWith(KMZ_SUFFIX)) {
+							try {
+								zis = new ZipInputStream(is);
+								zis.getNextEntry();
+								final String result = Kml2Gpx.toGpx(zis);
+								if (result != null) {
+									try {
+										return GPXUtilities.loadGPXFile(new ByteArrayInputStream(result.getBytes("UTF-8")));
+									} catch (UnsupportedEncodingException e) {
+										return null;
+									}
+								}
+							} catch (Exception e) {
+								return null;
+							}
+						} else {
+							return GPXUtilities.loadGPXFile(is);
+						}
 					}
 				} catch (FileNotFoundException e) {
 					//
 				} finally {
 					if (is != null) try {
 						is.close();
+					} catch (IOException ignore) {
+					}
+					if (zis != null) try {
+						zis.close();
 					} catch (IOException ignore) {
 					}
 				}
@@ -251,6 +317,7 @@ public class ImportHelper {
 				if (isActivityNotDestroyed(activity)) {
 					progress.dismiss();
 				}
+
 				importFavourites(result, fileName, save, useImportDir, forceImportFavourites);
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -293,7 +360,7 @@ public class ImportHelper {
 					final Intent newIntent = new Intent(activity,
 						app.getAppCustomization().getFavoritesActivity());
 					newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					newIntent.putExtra(FavoritesActivity.OPEN_FAVOURITES_TAB, true);
+					newIntent.putExtra(TAB_ID, FAV_TAB);
 					activity.startActivity(newIntent);
 				}
 			}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -427,7 +494,7 @@ public class ImportHelper {
 
 			@Override
 			protected String doInBackground(Void... voids) {
-				String error = copyFile(getObfDestFile(name), obfFile);
+				String error = copyFile(app, getObfDestFile(name), obfFile, false);
 				if (error == null) {
 					app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<String>());
 					app.getDownloadThread().updateLoadedFiles();
@@ -457,8 +524,8 @@ public class ImportHelper {
 	}
 
 	@Nullable
-	private String copyFile(@NonNull File dest, @NonNull Uri uri) {
-		if (dest.exists()) {
+	public static String copyFile(OsmandApplication app, @NonNull File dest, @NonNull Uri uri, boolean overwrite) {
+		if (dest.exists() && !overwrite) {
 			return app.getString(R.string.file_with_name_already_exists);
 		}
 		String error = null;
@@ -514,7 +581,7 @@ public class ImportHelper {
 
 			@Override
 			protected String doInBackground(Void... voids) {
-				return copyFile(app.getAppPath(IndexConstants.TILES_INDEX_DIR + name), uri);
+				return copyFile(app, app.getAppPath(IndexConstants.TILES_INDEX_DIR + name), uri, false);
 			}
 
 			@Override
@@ -537,6 +604,210 @@ public class ImportHelper {
 				}
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	public void chooseFileToImport(final ImportType importType, final boolean askBeforeImport, final CallbackWithObject callback) {
+		final MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			return;
+		}
+		final OsmandApplication app = mapActivity.getMyApplication();
+		Intent intent = new Intent();
+		String action;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			action = Intent.ACTION_OPEN_DOCUMENT;
+		} else {
+			action = Intent.ACTION_GET_CONTENT;
+		}
+		intent.setAction(action);
+		intent.setType("*/*");
+
+		ActivityResultListener listener = new ActivityResultListener(IMPORT_FILE_REQUEST, new ActivityResultListener.OnActivityResultListener() {
+			@Override
+			public void onResult(int resultCode, Intent resultData) {
+				MapActivity mapActivity = getMapActivity();
+				if (resultCode == RESULT_OK) {
+					Uri data = resultData.getData();
+					if (mapActivity == null || data == null) {
+						return;
+					}
+					String scheme = data.getScheme();
+					String fileName = "";
+					if ("file".equals(scheme)) {
+						final String path = data.getPath();
+						if (path != null) {
+							fileName = new File(path).getName();
+						}
+					} else if ("content".equals(scheme)) {
+						fileName = getNameFromContentUri(app, data);
+					}
+					
+					if (fileName.endsWith(importType.getExtension())) {
+						if (importType.equals(ImportType.SETTINGS)) {
+							handleOsmAndSettingsImport(data, fileName, resultData.getExtras(), askBeforeImport, callback);
+						} else if (importType.equals(ImportType.ROUTING)){
+							handleRoutingFileImport(data, fileName, callback);
+						}
+					} else {
+						app.showToastMessage(app.getString(R.string.not_support_file_type_with_ext, 
+								importType.getExtension().replaceAll("\\.", "").toUpperCase()));
+					}
+				}
+			}
+		});
+		
+		mapActivity.registerActivityResultListener(listener);
+		mapActivity.startActivityForResult(intent, IMPORT_FILE_REQUEST);
+	}
+
+	@SuppressLint("StaticFieldLeak")
+	private void handleRoutingFileImport(final Uri uri, final String fileName, final CallbackWithObject<String> callback) {
+		final AsyncTask<Void, Void, String> routingImportTask = new AsyncTask<Void, Void, String>() {
+			
+			String mFileName;
+			ProgressDialog progress;
+
+			@Override
+			protected void onPreExecute() {
+				progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""), app.getString(R.string.loading_data));
+				mFileName = fileName;
+			}
+
+			@Override
+			protected String doInBackground(Void... voids) {
+				File routingDir = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
+				if (!routingDir.exists()) {
+					routingDir.mkdirs();
+				}
+				File dest = new File(routingDir, mFileName);
+				while (dest.exists()) {
+					mFileName = AndroidUtils.createNewFileName(mFileName);
+					dest = new File(routingDir, mFileName);
+				}
+				return copyFile(app, dest, uri, true);
+			}
+
+			@Override
+			protected void onPostExecute(String error) {
+				File routingDir = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
+				final File file = new File(routingDir, mFileName);
+				if (error == null && file.exists()) {
+					loadRoutingFiles(app, new AppInitializer.LoadRoutingFilesCallback() {
+						@Override
+						public void onRoutingFilesLoaded() {
+							if (isActivityNotDestroyed(activity)) {
+								progress.dismiss();
+							}
+							String profileKey = app.getRoutingConfig().getRoutingProfileKeyByFileName(mFileName);
+							if (profileKey != null) {
+								app.showShortToastMessage(app.getString(R.string.file_imported_successfully, mFileName));
+								if (callback != null) {
+									callback.processResult(profileKey);
+								}
+							} else {
+								app.showToastMessage(app.getString(R.string.file_does_not_contain_routing_rules, mFileName));
+							}
+						}
+					});
+				} else {
+					if (isActivityNotDestroyed(activity)) {
+						progress.dismiss();
+					}
+					app.showShortToastMessage(app.getString(R.string.file_import_error, mFileName, error));
+				}
+			}
+		};
+		if (app.isApplicationInitializing()) {
+			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+				@Override
+				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				}
+
+				@Override
+				public void onFinish(AppInitializer init) {
+					routingImportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				}
+			});
+		} else {
+			routingImportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}
+	}
+	
+	private void handleOsmAndSettingsImport(Uri intentUri, String fileName, Bundle extras, boolean askBeforeImport, CallbackWithObject<List<SettingsHelper.SettingsItem>> callback) {
+		if (extras != null && extras.containsKey(SettingsHelper.SETTINGS_VERSION_KEY) && extras.containsKey(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY)) {
+			int version = extras.getInt(SettingsHelper.SETTINGS_VERSION_KEY, -1);
+			String latestChanges = extras.getString(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY);
+			handleOsmAndSettingsImport(intentUri, fileName, latestChanges, version, askBeforeImport, callback);
+		} else {
+			handleOsmAndSettingsImport(intentUri, fileName, null, -1, askBeforeImport, callback);
+		}
+	}
+
+	@SuppressLint("StaticFieldLeak")
+	private void handleOsmAndSettingsImport(final Uri uri, final String name, final String latestChanges, final int version,
+	                                        final boolean askBeforeImport, final CallbackWithObject<List<SettingsHelper.SettingsItem>> callback) {
+		final AsyncTask<Void, Void, String> settingsImportTask = new AsyncTask<Void, Void, String>() {
+
+			ProgressDialog progress;
+
+			@Override
+			protected void onPreExecute() {
+				progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""), app.getString(R.string.loading_data));
+			}
+
+			@Override
+			protected String doInBackground(Void... voids) {
+				File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
+				if (!tempDir.exists()) {
+					tempDir.mkdirs();
+				}
+				File dest = new File(tempDir, name);
+				return copyFile(app, dest, uri, true);
+			}
+
+			@Override
+			protected void onPostExecute(String error) {
+				File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
+				File file = new File(tempDir, name);
+				if (error == null && file.exists()) {
+					app.getSettingsHelper().importSettings(file, latestChanges, version, askBeforeImport, new SettingsImportListener() {
+						@Override
+						public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
+							if (isActivityNotDestroyed(activity)) {
+								progress.dismiss();
+							}
+							if (succeed) {
+								app.showShortToastMessage(app.getString(R.string.file_imported_successfully, name));
+								if (callback != null) {
+									callback.processResult(items);
+								}
+							} else if (!empty) {
+								app.showShortToastMessage(app.getString(R.string.file_import_error, name, app.getString(R.string.shared_string_unexpected_error)));
+							}
+						}
+					});
+				} else {
+					if (isActivityNotDestroyed(activity)) {
+						progress.dismiss();
+					}
+					app.showShortToastMessage(app.getString(R.string.file_import_error, name, error));
+				}
+			}
+		};
+		if (app.isApplicationInitializing()) {
+			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+				@Override
+				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				}
+
+				@Override
+				public void onFinish(AppInitializer init) {
+					settingsImportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				}
+			});
+		} else {
+			settingsImportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}
 	}
 
 	private boolean isActivityNotDestroyed(Activity activity) {
@@ -594,7 +865,7 @@ public class ImportHelper {
 		if (forceImportFavourites) {
 			final Intent newIntent = new Intent(activity, app.getAppCustomization().getFavoritesActivity());
 			newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			newIntent.putExtra(FavoritesActivity.OPEN_MY_PLACES_TAB, true);
+			newIntent.putExtra(TAB_ID, GPX_TAB);
 			activity.startActivity(newIntent);
 		}
 	}
@@ -616,10 +887,21 @@ public class ImportHelper {
 			if (importDir.exists() && importDir.isDirectory() && importDir.canWrite()) {
 				final WptPt pt = gpxFile.findPointToShow();
 				final File toWrite = getFileToSave(fileName, importDir, pt);
+				boolean destinationExists = toWrite.exists();
 				Exception e = GPXUtilities.writeGpxFile(toWrite, gpxFile);
-				if(e == null) {
+				if (e == null) {
 					gpxFile.path = toWrite.getAbsolutePath();
-					app.getGpxDatabase().remove(new File(gpxFile.path));
+					File file = new File(gpxFile.path);
+					if (!destinationExists) {
+						GPXDatabase.GpxDataItem item = new GPXDatabase.GpxDataItem(file, gpxFile.getColor(0));
+						app.getGpxDbHelper().add(item);
+					} else {
+						GPXDatabase.GpxDataItem item = app.getGpxDbHelper().getItem(file);
+						if (item != null) {
+							app.getGpxDbHelper().clearAnalysis(item);
+						}
+					}
+
 					warning = null;
 				} else {
 					warning = app.getString(R.string.error_reading_gpx);
@@ -770,6 +1052,7 @@ public class ImportHelper {
 					fp.setDescription(p.desc);
 				}
 				fp.setColor(p.getColor(0));
+				fp.setIconIdFromName(app, p.getIconName());
 				favourites.add(fp);
 			}
 		}
@@ -837,14 +1120,16 @@ public class ImportHelper {
 		public void createMenuItems(Bundle savedInstanceState) {
 			items.add(new TitleItem(getString(R.string.import_file)));
 
-			int nameColor = getResolvedColor(nightMode ? R.color.osmand_orange : R.color.dashboard_blue);
-			int descrColor = getResolvedColor(nightMode ? R.color.dashboard_subheader_text_dark : R.color.dashboard_subheader_text_light);
+			int nameColor = getResolvedColor(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+			int descrColor = getResolvedColor(nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light);
 			String descr = getString(R.string.import_gpx_file_description);
-			SpannableStringBuilder text = new SpannableStringBuilder(fileName).append(" ").append(descr);
-			text.setSpan(new ForegroundColorSpan(nameColor), 0, fileName.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-			text.setSpan(new ForegroundColorSpan(descrColor), fileName.length() + 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			if(!descr.contains("%s")) {
+				descr = "%s " +descr;
+			}
 
-			items.add(new ShortDescriptionItem(text));
+			CharSequence txt = AndroidUtils.getStyledString(descr, fileName, new ForegroundColorSpan(descrColor),
+					new ForegroundColorSpan(nameColor));
+			items.add(new ShortDescriptionItem(txt));
 
 			BaseBottomSheetItem asFavoritesItem = new SimpleBottomSheetItem.Builder()
 					.setIcon(getContentIcon(R.drawable.ic_action_fav_dark))

@@ -14,6 +14,7 @@
         android:textSize="@dimen/default_sub_text_size_small"
         tools:text="3"
         android:gravity="center"
+        android:maxLines="1"
         android:id="@+id/transport_stop_route_text"
         android:background="@drawable/transport_stop_route_bg"
         android:layout_width="match_parent"

@@ -34,6 +34,7 @@
 			android:ellipsize="end"
 			android:maxLines="1"
 			android:textAppearance="@style/TextAppearance.ListItemTitle"
+			android:textColor="?attr/active_color_basic"
 			osmand:typeface="@string/font_roboto_medium"
 			tools:text="Some Title" />
 
@@ -54,6 +55,7 @@
 	<View
 		android:id="@+id/bottom_divider"
 		android:layout_width="match_parent"
-		android:layout_height="1dp" />
+		android:layout_height="1dp"
+		android:background="?attr/divider_color_basic" />
 
 </LinearLayout>

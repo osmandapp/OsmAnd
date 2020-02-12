@@ -49,6 +49,8 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Shader.TileMode;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.DisplayMetrics;
@@ -389,6 +391,11 @@ public class OsmandRenderer {
 		}
 	}
 
+	public Drawable getShieldDrawable(String shieldId){
+		Bitmap shield = RenderingIcons.getIcon(context, shieldId, true);
+		return new BitmapDrawable(context.getResources(),shield);
+	}
+
 	protected void drawBitmap(Canvas cv, Bitmap ico, RectF rf) {
 		if(ico == null) {
 			return;
@@ -481,7 +488,10 @@ public class OsmandRenderer {
 							mapObj.typeInd = j;
 							mapObj.obj = o;
 							if(objectType == 3) {
-								MapDataObjectPrimitive pointObj = mapObj;
+								MapDataObjectPrimitive pointObj = new MapDataObjectPrimitive();
+								pointObj.order = order;
+								pointObj.typeInd = j;
+								pointObj.obj = o;
 								pointObj.objectType = 1;
 								double area = polygonArea(mapObj, mult);
 								mapObj.area = area;

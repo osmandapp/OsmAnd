@@ -25,6 +25,10 @@ public class Version {
 		return ctx.getString(R.string.versionFeatures).contains("+blackberry");
 	}
 	
+	public static boolean isHuawei(OsmandApplication ctx) {
+		return ctx.getPackageName().endsWith(".huawei");
+	}
+	
 	public static boolean isMarketEnabled(OsmandApplication ctx) {
 		return isGooglePlayEnabled(ctx) || isAmazonEnabled(ctx);
 	}

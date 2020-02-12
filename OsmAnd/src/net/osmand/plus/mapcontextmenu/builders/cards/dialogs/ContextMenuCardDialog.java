@@ -5,10 +5,13 @@ import android.support.annotation.NonNull;
 import android.view.Menu;
 import android.view.View;
 
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapillary.MapillaryImageDialog;
+import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
 
 public abstract class ContextMenuCardDialog {
@@ -79,7 +82,7 @@ public abstract class ContextMenuCardDialog {
 		this.description = bundle.getString(KEY_CARD_DIALOG_TITLE);
 	}
 
-	public static ContextMenuCardDialog restoreMenu(@NonNull Bundle bundle, @NonNull MapActivity mapActivity) {
+	static ContextMenuCardDialog restoreMenu(@NonNull Bundle bundle, @NonNull MapActivity mapActivity) {
 
 		try {
 			CardDialogType type = CardDialogType.valueOf(bundle.getString(KEY_CARD_DIALOG_TYPE));
@@ -87,6 +90,8 @@ public abstract class ContextMenuCardDialog {
 			switch (type) {
 				case MAPILLARY:
 					dialog = new MapillaryImageDialog(mapActivity, bundle);
+					break;
+				case REGULAR:
 					break;
 			}
 			return dialog;
@@ -97,10 +102,12 @@ public abstract class ContextMenuCardDialog {
 
 	public void onResume() {
 		shiftMapPosition();
+		updateLayers(true);
 	}
 
 	public void onPause() {
 		restoreMapPosition();
+		updateLayers(false);
 	}
 
 	private void shiftMapPosition() {
@@ -124,4 +131,23 @@ public abstract class ContextMenuCardDialog {
 	}
 
 	public abstract View getContentView();
+
+	private void updateLayers(boolean activate) {
+		MapActivity mapActivity = getMapActivity();
+		OsmandApplication app = mapActivity.getMyApplication();
+		switch (type) {
+			case MAPILLARY: {
+				boolean showMapillary = app.getSettings().SHOW_MAPILLARY.get();
+				if (!showMapillary) {
+					MapillaryPlugin mapillaryPlugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
+					if (mapillaryPlugin != null) {
+						mapillaryPlugin.updateLayers(mapActivity.getMapView(), mapActivity, activate);
+					}
+				}
+				break;
+			}
+			case REGULAR:
+				break;
+		}
+	}
 }

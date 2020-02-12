@@ -1,5 +1,5 @@
 apply plugin: 'java'
-    
+apply plugin: 'maven-publish'
     
 configurations {
 	android
@@ -61,7 +61,11 @@ task collectExternalResources {
 }
 
 task androidJar(type: Jar) {
-	dependsOn collectExternalResources, build
+	if (!project.hasProperty('osmandCoreSimple')) {
+		dependsOn collectExternalResources, build
+	} else {
+		dependsOn build
+	}
 	appendix = "android"
 	from (sourceSets.main.java.outputDir) {
 		exclude("**/PlatformUtil.*")
@@ -70,13 +74,23 @@ task androidJar(type: Jar) {
 }
 
 compileJava {
-    dependsOn collectExternalResources
+	if (!project.hasProperty('osmandCoreSimple')) {
+		dependsOn collectExternalResources
+	}
 }
 
 artifacts {
 	android androidJar
 }
 
+publishing {
+    publications {
+        maven(MavenPublication) {
+			artifactId "osmand-base"
+            from components.java
+        }
+    }
+}
 
 dependencies {
 	testImplementation 'junit:junit:4.12'
@@ -85,10 +99,10 @@ dependencies {
 	implementation group: 'commons-logging', name: 'commons-logging', version: '1.2'
 	implementation group: 'org.json', name: 'json', version: '20171018'
 	implementation 'it.unibo.alice.tuprolog:tuprolog:3.2.1'
-	implementation 'org.beanshell:bsh-core:2.0b4'
 	implementation 'org.apache.commons:commons-compress:1.17'
 	implementation 'com.moparisthebest:junidecode:0.1.1'
 	implementation 'com.vividsolutions:jts-core:1.14.0'
+	implementation 'com.google.openlocationcode:openlocationcode:1.0.4'
 	// turn off for now
 	//implementation 'com.atilika.kuromoji:kuromoji-ipadic:0.9.0'
 	implementation 'net.sf.kxml:kxml2:2.1.8'

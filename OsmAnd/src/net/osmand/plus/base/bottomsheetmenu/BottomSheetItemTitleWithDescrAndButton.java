@@ -1,5 +1,6 @@
 package net.osmand.plus.base.bottomsheetmenu;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.LayoutRes;
@@ -30,11 +31,13 @@ public class BottomSheetItemTitleWithDescrAndButton extends BottomSheetItemWithD
 												  View.OnClickListener onClickListener,
 												  int position,
 												  Drawable icon,
+												  Drawable background,
 												  String title,
 												  @ColorRes int titleColorId,
 												  CharSequence description,
 												  @ColorRes int descriptionColorId,
 												  int descriptionMaxLines,
+												  boolean descriptionLinksClickable,
 												  String buttonTitle,
 												  View.OnClickListener onButtonClickListener,
 												  Drawable leftCompoundDrawable,
@@ -47,11 +50,13 @@ public class BottomSheetItemTitleWithDescrAndButton extends BottomSheetItemWithD
 				onClickListener,
 				position,
 				icon,
+				background,
 				title,
 				titleColorId,
 				description,
 				descriptionColorId,
-				descriptionMaxLines);
+				descriptionMaxLines,
+				descriptionLinksClickable);
 		this.buttonTitle = buttonTitle;
 		this.onButtonClickListener = onButtonClickListener;
 		this.leftCompoundDrawable = leftCompoundDrawable;
@@ -71,14 +76,14 @@ public class BottomSheetItemTitleWithDescrAndButton extends BottomSheetItemWithD
 	}
 
 	@Override
-	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
-		super.inflate(app, container, nightMode);
+	public void inflate(Context context, ViewGroup container, boolean nightMode) {
+		super.inflate(context, container, nightMode);
 		textButtonTV = (TextView) view.findViewById(R.id.text_button);
 		textButtonTV.setOnClickListener(onButtonClickListener);
 		textButtonTV.setCompoundDrawablesWithIntrinsicBounds(leftCompoundDrawable, null, rightCompoundDrawable, null);
 		textButtonTV.setText(buttonTitle);
 		if (buttonTextColor != INVALID_ID) {
-			textButtonTV.setTextColor(ContextCompat.getColor(app, buttonTextColor));
+			textButtonTV.setTextColor(ContextCompat.getColor(context, buttonTextColor));
 		}
 	}
 
@@ -120,11 +125,13 @@ public class BottomSheetItemTitleWithDescrAndButton extends BottomSheetItemWithD
 					onClickListener,
 					position,
 					icon,
+					background,
 					title,
 					titleColorId,
 					description,
 					descriptionColorId,
 					descriptionMaxLines,
+					descriptionLinksClickable,
 					buttonTitle,
 					onButtonClickListener,
 					leftCompoundDrawable,

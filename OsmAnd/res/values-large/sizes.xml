@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<dimen name="card_content_padding_large">42dp</dimen>
     <dimen name="map_trans_seek_size">120dp</dimen>
 	<dimen name="map_widget_text_size">35sp</dimen>
+	<dimen name="map_top_widget_text_size">33sp</dimen>
 	<dimen name="map_widget_text_size_small">23sp</dimen>
 	<dimen name="map_button_text_size">23sp</dimen>
 	<dimen name="map_route_buttons_width">90dp</dimen>
@@ -132,6 +134,7 @@
 	<dimen name="bottom_sheet_content_margin_small">12dp</dimen>
 	<dimen name="content_padding">24dp</dimen>
 	<dimen name="content_padding_small">18dp</dimen>
+	<dimen name="content_padding_half">12dp</dimen>
 	<dimen name="bottom_sheet_content_padding_small">12dp</dimen>
 	<dimen name="measurement_tool_divider_margin">12dp</dimen>
 	<dimen name="measurement_tool_content_padding_medium">18dp</dimen>
@@ -233,5 +236,8 @@
 	<dimen name="wikivoyage_show_images_dialog_buttons_height">66dp</dimen>
 
 	<dimen name="wikilink_bottom_sheet_padding">21dp</dimen>
+
+	<dimen name="settings_divider_margin_start">108dp</dimen>
+	<dimen name="setting_list_item_large_height">108dp</dimen>
 
 </resources>

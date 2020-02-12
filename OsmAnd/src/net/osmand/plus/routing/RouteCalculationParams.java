@@ -18,11 +18,9 @@ public class RouteCalculationParams {
 	public LatLon end;
 	public List<LatLon> intermediates;
 
-
 	public OsmandApplication ctx;
 	public RoutingContext cachedRoutingContext;
 	public ApplicationMode mode;
-	public RouteService type;
 	public GPXRouteParams gpxRoute;
 	public RouteCalculationResult previousToRecalculate;
 	public boolean onlyStartPointChanged;
@@ -35,6 +33,8 @@ public class RouteCalculationParams {
 	public RouteCalculationProgress calculationProgress;
 	public RouteCalculationProgressCallback calculationProgressCallback;
 	public RouteCalculationResultListener resultListener;
+
+	public boolean showOriginalRoute;
 
 	public interface RouteCalculationResultListener {
 		void onRouteCalculated(RouteCalculationResult route);

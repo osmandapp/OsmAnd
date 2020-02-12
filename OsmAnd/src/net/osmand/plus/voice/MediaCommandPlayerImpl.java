@@ -1,7 +1,9 @@
 package net.osmand.plus.voice;
 
 
+import android.media.AudioAttributes;
 import android.media.MediaPlayer;
+import android.os.Build;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
@@ -67,7 +69,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 
 	//  Called from the calculating route thread.
 	@Override
-	public synchronized void playCommands(CommandBuilder builder) {
+	public synchronized List<String> playCommands(CommandBuilder builder) {
 		if(vrt.isMute()) {
 			StringBuilder bld = new StringBuilder();
 			for (String s : builder.execute()) {
@@ -76,9 +78,11 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 			if (ctx != null) {
 				// sendAlertToAndroidWear(ctx, bld.toString());
 			}
-			return;
+			return Collections.emptyList();
 		}
-		filesToPlay.addAll(builder.execute());
+		List<String> lst = builder.execute();
+
+		filesToPlay.addAll(lst);
 		
 		// If we have not already started to play audio, start.
 		if (mediaPlayer == null) {
@@ -93,6 +97,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 			}
 		}
 		playQueue();
+		return lst;
 	}
 	
 	synchronized void playQueue() {
@@ -167,7 +172,16 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 		try {
 			log.debug("Playing file : " + file); //$NON-NLS-1$
 			mediaPlayer.reset();
-			mediaPlayer.setAudioStreamType(streamType);
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+				mediaPlayer.setAudioAttributes(new AudioAttributes.Builder()
+						.setUsage(ctx.getSettings().AUDIO_USAGE.get())
+						.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+						.build());
+
+			} else {
+				// Deprecated in API Level 26, use above AudioAtrributes instead
+				mediaPlayer.setAudioStreamType(streamType);
+			}
 			mediaPlayer.setDataSource(file.getAbsolutePath());
 			mediaPlayer.prepare();
 			mediaPlayer.setOnCompletionListener(this);

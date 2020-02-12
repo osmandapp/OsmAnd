@@ -34,6 +34,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -60,7 +61,6 @@ import net.osmand.plus.download.ui.SearchDialogFragment;
 import net.osmand.plus.download.ui.UpdatesIndexFragment;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
@@ -104,9 +104,8 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	public static final String DOWNLOAD_TAB = "download";
 	public static final String UPDATES_TAB = "updates";
 	public static final String REGION_TO_SEARCH = "search_region";
-	public static final MessageFormat formatGb = new MessageFormat("{0, number,#.##} GB", Locale.US);
-	public static final MessageFormat formatMb = new MessageFormat("{0, number,##.#} MB", Locale.US);
-	public static final MessageFormat formatKb = new MessageFormat("{0, number,##.#} kB", Locale.US);
+
+
 	private static boolean SUGGESTED_TO_DOWNLOAD_BASEMAP = false;
 
 	private BannerAndDownloadFreeVersion visibleBanner;
@@ -131,7 +130,6 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	protected void onCreate(Bundle savedInstanceState) {
 		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);
-		getMyApplication().fetchRemoteParams();
 		downloadThread = getMyApplication().getDownloadThread();
 		DownloadResources indexes = getDownloadThread().getIndexes();
 		if (!indexes.isDownloadedFromInternet) {
@@ -404,7 +402,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 						&& isDownlodingPermitted(ctx.getMyApplication().getSettings())) {
 					collapseBanner();
 				} else {
-					ctx.getMyApplication().logEvent(ctx, "click_free_dialog");
+					ctx.getMyApplication().logEvent("click_free_dialog");
 					ChoosePlanDialogFragment.showFreeVersionInstance(ctx.getSupportFragmentManager());
 				}
 			}
@@ -668,12 +666,12 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		ProgressBar sizeProgress = (ProgressBar) view.findViewById(R.id.progressBar);
 
 		File dir = activity.getMyApplication().getAppPath("").getParentFile();
-		String size = formatGb.format(new Object[]{0});
+		String size = "";
 		int percent = 0;
 		if (dir.canRead()) {
 			StatFs fs = new StatFs(dir.getAbsolutePath());
-			size = formatGb.format(new Object[]{(float) (fs.getAvailableBlocks()) * fs.getBlockSize() / (1 << 30)});
-			percent = 100 - fs.getAvailableBlocks() * 100 / fs.getBlockCount();
+			size = AndroidUtils.formatSize(activity, ((long)fs.getAvailableBlocks()) * fs.getBlockSize());
+			percent = 100 - (int)((long)fs.getAvailableBlocks() * 100 / fs.getBlockCount());
 		}
 		sizeProgress.setIndeterminate(false);
 		sizeProgress.setProgress(percent);

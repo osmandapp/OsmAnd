@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/buttons_bar"
+	android:layout_width="match_parent"
+	android:layout_height="@dimen/buttons_bottom_bar_height"
+	android:background="?attr/card_bg_color"
+	android:gravity="center_vertical"
+	android:paddingLeft="@dimen/content_padding_half"
+	android:paddingRight="@dimen/content_padding_half"
+	android:visibility="gone"
+	tools:visibility="visible">
+
+	<include
+		layout="@layout/secondary_btn"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_weight="1" />
+
+	<View
+		android:layout_width="@dimen/content_padding_half"
+		android:layout_height="match_parent" />
+
+	<include
+		layout="@layout/primary_btn"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_weight="1" />
+
+</LinearLayout>

@@ -15,8 +15,8 @@ import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
+import net.osmand.aidl.AidlSearchResultWrapper;
 import net.osmand.aidl.search.SearchParams;
-import net.osmand.aidl.search.SearchResult;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -403,11 +403,9 @@ public class ExternalApiHelper {
 					resultCode = Activity.RESULT_OK;
 				}
 			} else if (API_CMD_MUTE_NAVIGATION.equals(cmd)) {
-				mapActivity.getMyApplication().getSettings().VOICE_MUTE.set(true);
 				mapActivity.getRoutingHelper().getVoiceRouter().setMute(true);
 				resultCode = Activity.RESULT_OK;
 			} else if (API_CMD_UNMUTE_NAVIGATION.equals(cmd)) {
-				mapActivity.getMyApplication().getSettings().VOICE_MUTE.set(false);
 				mapActivity.getRoutingHelper().getVoiceRouter().setMute(false);
 				resultCode = Activity.RESULT_OK;
 			} else if (API_CMD_RECORD_AUDIO.equals(cmd)
@@ -663,7 +661,7 @@ public class ExternalApiHelper {
 					searchLocation.getLatitude(), searchLocation.getLongitude(),
 					1, 1, new OsmandAidlApi.SearchCompleteCallback() {
 						@Override
-						public void onSearchComplete(final List<SearchResult> resultSet) {
+						public void onSearchComplete(final List<AidlSearchResultWrapper> resultSet) {
 							final MapActivity mapActivity = mapActivityRef.get();
 							if (mapActivity != null) {
 								mapActivity.getMyApplication().runInUIThread(new Runnable() {
@@ -674,7 +672,7 @@ public class ExternalApiHelper {
 											dlg.dismiss();
 										}
 										if (resultSet.size() > 0) {
-											final SearchResult res = resultSet.get(0);
+											final AidlSearchResultWrapper res = resultSet.get(0);
 											LatLon to = new LatLon(res.getLatitude(), res.getLongitude());
 											PointDescription toDesc = new PointDescription(
 													PointDescription.POINT_TYPE_TARGET, res.getLocalName() + ", " + res.getLocalTypeName());
@@ -707,13 +705,13 @@ public class ExternalApiHelper {
 		core.setOnResultsComplete(new Runnable() {
 			@Override
 			public void run() {
-				List<SearchResult> resultSet = new ArrayList<>();
+				List<AidlSearchResultWrapper> resultSet = new ArrayList<>();
 				SearchUICore.SearchResultCollection resultCollection = core.getCurrentSearchResult();
 				int count = 0;
 				for (net.osmand.search.core.SearchResult r : resultCollection.getCurrentSearchResults()) {
 					String name = QuickSearchListItem.getName(app, r);
 					String typeName = QuickSearchListItem.getTypeName(app, r);
-					SearchResult result = new SearchResult(r.location.getLatitude(), r.location.getLongitude(),
+					AidlSearchResultWrapper result = new AidlSearchResultWrapper(r.location.getLatitude(), r.location.getLongitude(),
 							name, typeName, r.alternateName, new ArrayList<>(r.otherNames));
 					resultSet.add(result);
 					count++;

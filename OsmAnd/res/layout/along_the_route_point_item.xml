@@ -69,7 +69,7 @@
 					android:layout_marginStart="6dp"
 					android:drawablePadding="2dp"
 					android:maxLines="1"
-					android:textColor="@color/secondary_text_dark"
+					android:textColor="@color/text_color_secondary_dark"
 					android:textSize="@dimen/default_sub_text_size"
 					tools:text="Intermediate point " />
 
@@ -81,7 +81,7 @@
 					android:layout_weight="1"
 					android:ellipsize="end"
 					android:maxLines="1"
-					android:textColor="@color/secondary_text_dark"
+					android:textColor="@color/text_color_secondary_dark"
 					android:textSize="@dimen/default_sub_text_size"
 					tools:text="some description" />
 
@@ -108,6 +108,7 @@
 		android:id="@+id/bottom_divider"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:layout_marginTop="8dp" />
+		android:layout_marginTop="8dp"
+		android:background="?attr/divider_color_basic" />
 
 </LinearLayout>

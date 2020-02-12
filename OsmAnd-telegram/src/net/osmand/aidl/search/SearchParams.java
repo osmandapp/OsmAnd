@@ -11,15 +11,15 @@ public class SearchParams implements Parcelable {
 
 	private String searchQuery;
 	private int searchType;
-	private double latutude;
+	private double latitude;
 	private double longitude;
 	private int radiusLevel = 1;
 	private int totalLimit = -1;
 
-	public SearchParams(String searchQuery, int searchType, double latutude, double longitude, int radiusLevel, int totalLimit) {
+	public SearchParams(String searchQuery, int searchType, double latitude, double longitude, int radiusLevel, int totalLimit) {
 		this.searchQuery = searchQuery;
 		this.searchType = searchType;
-		this.latutude = latutude;
+		this.latitude = latitude;
 		this.longitude = longitude;
 		this.radiusLevel = radiusLevel;
 		this.totalLimit = totalLimit;
@@ -49,8 +49,8 @@ public class SearchParams implements Parcelable {
 		return searchType;
 	}
 
-	public double getLatutude() {
-		return latutude;
+	public double getLatitude() {
+		return latitude;
 	}
 
 	public double getLongitude() {
@@ -69,7 +69,7 @@ public class SearchParams implements Parcelable {
 	public void writeToParcel(Parcel out, int flags) {
 		out.writeString(searchQuery);
 		out.writeInt(searchType);
-		out.writeDouble(latutude);
+		out.writeDouble(latitude);
 		out.writeDouble(longitude);
 		out.writeInt(radiusLevel);
 		out.writeInt(totalLimit);
@@ -78,7 +78,7 @@ public class SearchParams implements Parcelable {
 	private void readFromParcel(Parcel in) {
 		searchQuery = in.readString();
 		searchType = in.readInt();
-		latutude = in.readDouble();
+		latitude = in.readDouble();
 		longitude = in.readDouble();
 		radiusLevel = in.readInt();
 		totalLimit = in.readInt();

@@ -7,10 +7,13 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Pair;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.data.Amenity;
@@ -20,8 +23,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
@@ -87,6 +88,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private LatLon mapCenter;
 	private int mapPosition = 0;
 	private boolean centerMarker;
+	private boolean zoomOutOnly;
 	private int mapZoom;
 
 	private boolean inLocationUpdate = false;
@@ -285,6 +287,14 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		this.centerMarker = centerMarker;
 	}
 
+	public boolean isZoomOutOnly() {
+		return zoomOutOnly;
+	}
+
+	public void setZoomOutOnly(boolean zoomOutOnly) {
+		this.zoomOutOnly = zoomOutOnly;
+	}
+
 	public int getMapZoom() {
 		return mapZoom;
 	}
@@ -419,10 +429,14 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				active = false;
 			}
 		} else {
-			WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
-			if (fragmentRef != null) {
-				fragmentRef.get().centerMarkerLocation();
-			}
+			centerMarkerLocation();
+		}
+	}
+
+	public void centerMarkerLocation() {
+		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null) {
+			fragmentRef.get().centerMarkerLocation();
 		}
 	}
 
@@ -431,7 +445,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 					 @Nullable Object object) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && init(latLon, pointDescription, object)) {
-			mapActivity.getMyApplication().logEvent(mapActivity, "open_context_menu");
+			mapActivity.getMyApplication().logEvent("open_context_menu");
 			showInternal();
 		}
 	}
@@ -855,6 +869,14 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			return menuController.getFavActionStringId();
 		}
 		return R.string.shared_string_add;
+	}
+
+	boolean isFavButtonEnabled() {
+		MenuController menuController = getMenuController();
+		if (menuController != null) {
+			return menuController.isFavButtonEnabled();
+		}
+		return true;
 	}
 
 	public int getWaypointActionIconId() {
@@ -1381,6 +1403,15 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		MenuController menuController = getMenuController();
 		if (menuController != null) {
 			return menuController.getRightDownloadButtonController();
+		} else {
+			return null;
+		}
+	}
+
+	public List<Pair<TitleButtonController, TitleButtonController>> getAdditionalButtonsControllers() {
+		MenuController menuController = getMenuController();
+		if (menuController != null) {
+			return menuController.getAdditionalButtonsControllers();
 		} else {
 			return null;
 		}

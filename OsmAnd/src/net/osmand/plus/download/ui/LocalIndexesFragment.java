@@ -17,10 +17,13 @@ import net.osmand.AndroidUtils;
 import net.osmand.Collator;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
+import net.osmand.ResultMatcher;
 import net.osmand.map.ITileSource;
+import net.osmand.map.TileSourceManager;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -36,6 +39,7 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
@@ -76,7 +80,8 @@ import android.widget.Toast;
 
 
 public class LocalIndexesFragment extends OsmandExpandableListFragment implements DownloadEvents {
-	public static final Pattern ILLEGAL_FILE_NAME_CHARACTERS = Pattern.compile("[?:\"*|/\\<>]");
+	public static final Pattern ILLEGAL_FILE_NAME_CHARACTERS = Pattern.compile("[?:\"*|/<>]");
+	public static final Pattern ILLEGAL_PATH_NAME_CHARACTERS = Pattern.compile("[?:\"*|<>]");
 
 	private LoadLocalIndexTask asyncLoader;
 	private Map<String, IndexItem> filesToUpdate = new HashMap<>();
@@ -233,8 +238,22 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			String fn = FileNameTranslationHelper.getFileName(getActivity(),
 					getMyApplication().getResourceManager().getOsmandRegions(),
 					info.getFileName());
-			confirm.setMessage(getString(R.string.delete_confirmation_msg, fn));
+			confirm.setMessage(getString(R.string.clear_confirmation_msg, fn));
 			confirm.show();
+		} else if (resId == R.string.shared_string_edit) {
+			OsmandRasterMapsPlugin.defineNewEditLayer(getDownloadActivity(),
+					new ResultMatcher<TileSourceManager.TileSourceTemplate>() {
+				@Override
+				public boolean isCancelled() {
+					return false;
+				}
+
+				@Override
+				public boolean publish(TileSourceManager.TileSourceTemplate object) {
+					getDownloadActivity().reloadLocalIndexes();
+					return true;
+				}
+					}, info.getFileName());
 		} else if (resId == R.string.local_index_mi_restore) {
 			new LocalIndexOperationTask(getDownloadActivity(), listAdapter, LocalIndexOperationTask.RESTORE_OPERATION).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, info);
 		} else if (resId == R.string.shared_string_delete) {
@@ -299,37 +318,46 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 							new View.OnClickListener() {
 								@Override
 								public void onClick(View v) {
-									String newName = editText.getText().toString() + ext;
-									if (ILLEGAL_FILE_NAME_CHARACTERS.matcher(newName).find()) {
-										Toast.makeText(a, R.string.file_name_containes_illegal_char,
-												Toast.LENGTH_LONG).show();
-										return;
+									OsmandApplication app = (OsmandApplication) a.getApplication();
+									if (renameGpxFile(app, f, editText.getText().toString() + ext, false, callback) != null) {
+										alertDialog.dismiss();
 									}
-									File dest = new File(f.getParentFile(), newName);
-									if (dest.exists()) {
-										Toast.makeText(a, R.string.file_with_name_already_exists,
-												Toast.LENGTH_LONG).show();
-										return;
-									} else {
-										if (!dest.getParentFile().exists()) {
-											dest.getParentFile().mkdirs();
-										}
-										if (f.renameTo(dest)) {
-											if (callback != null) {
-												callback.renamedTo(dest);
-											}
-										} else {
-											Toast.makeText(a, R.string.file_can_not_be_renamed,
-													Toast.LENGTH_LONG).show();
-										}
-									}
-									alertDialog.dismiss();
 								}
 							});
 				}
 			});
 			alertDialog.show();
 		}
+	}
+
+	public static File renameGpxFile(OsmandApplication ctx, File source, String newName, boolean dirAllowed, RenameCallback callback) {
+		if (Algorithms.isEmpty(newName)) {
+			Toast.makeText(ctx, R.string.empty_filename, Toast.LENGTH_LONG).show();
+			return null;
+		}
+		Pattern illegalCharactersPattern = dirAllowed ? ILLEGAL_PATH_NAME_CHARACTERS : ILLEGAL_FILE_NAME_CHARACTERS;
+		if (illegalCharactersPattern.matcher(newName).find()) {
+			Toast.makeText(ctx, R.string.file_name_containes_illegal_char, Toast.LENGTH_LONG).show();
+			return null;
+		}
+		File dest = new File(source.getParentFile(), newName);
+		if (dest.exists()) {
+			Toast.makeText(ctx, R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
+		} else {
+			if (!dest.getParentFile().exists()) {
+				dest.getParentFile().mkdirs();
+			}
+			if (source.renameTo(dest)) {
+				ctx.getGpxDbHelper().rename(source, dest);
+				if (callback != null) {
+					callback.renamedTo(dest);
+				}
+				return dest;
+			} else {
+				Toast.makeText(ctx, R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
+			}
+		}
+		return null;
 	}
 
 
@@ -621,6 +649,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		ActionBar actionBar = getDownloadActivity().getSupportActionBar();
 		//hide action bar from downloadindexfragment
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+		int iconColorResId = getMyApplication().getSettings().isLightContent() ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
 		optionsMenuAdapter = new ContextMenuAdapter();
 		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
@@ -634,11 +663,13 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				.setTitleId(R.string.shared_string_refresh, getContext())
 				.setIcon(R.drawable.ic_action_refresh_dark)
 				.setListener(listener)
+				.setColor(iconColorResId)
 				.createItem());
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.shared_string_delete, getContext())
 				.setIcon(R.drawable.ic_action_delete_dark)
 				.setListener(listener)
+				.setColor(iconColorResId)
 				.createItem());
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.local_index_mi_backup, getContext())
@@ -669,7 +700,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			}
 			if (contextMenuItem.getIcon() != -1) {
-				item.setIcon(contextMenuItem.getIcon());
+				Drawable icMenuItem = getMyApplication().getUIUtilities().getIcon(contextMenuItem.getIcon(), contextMenuItem.getColorRes());
+				item.setIcon(icMenuItem);
 			}
 
 		}
@@ -721,6 +753,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 	private void openSelectionMode(final int actionResId, final int actionIconId,
 								   final DialogInterface.OnClickListener listener) {
+		final int colorResId = getMyApplication().getSettings().isLightContent() ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
 		String value = getString(actionResId);
 		if (value.endsWith("...")) {
 			value = value.substring(0, value.length() - 3);
@@ -744,7 +777,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				selectionMode = true;
 				MenuItem it = menu.add(actionResId);
 				if (actionIconId != 0) {
-					it.setIcon(actionIconId);
+					Drawable icon = getMyApplication().getUIUtilities().getIcon(actionIconId, colorResId);
+					it.setIcon(icon);
 				}
 				MenuItemCompat.setShowAsAction(it, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM |
 						MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
@@ -765,7 +799,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				}
 
 				AlertDialog.Builder builder = new AlertDialog.Builder(getDownloadActivity());
-				builder.setMessage(getString(R.string.local_index_action_do, actionButton.toLowerCase(), selectedItems.size()));
+				builder.setMessage(getString(R.string.local_index_action_do, actionButton.toLowerCase(), String.valueOf(selectedItems.size())));
 				builder.setPositiveButton(actionButton, listener);
 				builder.setNegativeButton(R.string.shared_string_cancel, null);
 				builder.show();
@@ -841,7 +875,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			this.ctx = ctx;
 			warningColor = ContextCompat.getColor(ctx, R.color.color_warning);
 			boolean light = ctx.getMyApplication().getSettings().isLightContent();
-			okColor = ContextCompat.getColor(ctx, light ? R.color.primary_text_light : R.color.primary_text_dark);
+			okColor = ContextCompat.getColor(ctx, light ? R.color.text_color_primary_light : R.color.text_color_primary_dark);
 			corruptedColor = ContextCompat.getColor(ctx, R.color.color_invalid);
 		}
 
@@ -1019,11 +1053,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			}
 			String sz = "";
 			if (size > 0) {
-				if (size > 1 << 20) {
-					sz = DownloadActivity.formatGb.format(new Object[]{(float) size / (1 << 20)});
-				} else {
-					sz = DownloadActivity.formatMb.format(new Object[]{(float) size / (1 << 10)});
-				}
+				sz = AndroidUtils.formatSize(v.getContext(), size * 1024l);
 			}
 			sizeView.setText(sz);
 			sizeView.setVisibility(View.VISIBLE);
@@ -1033,7 +1063,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 			TypedValue typedValue = new TypedValue();
 			Resources.Theme theme = ctx.getTheme();
-			theme.resolveAttribute(R.attr.ctx_menu_info_view_bg, typedValue, true);
+			theme.resolveAttribute(R.attr.activity_background_color, typedValue, true);
 			v.setBackgroundColor(typedValue.data);
 			return v;
 		}
@@ -1140,11 +1170,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					if (builder.length() > 0) {
 						builder.append(" • ");
 					}
-					if (child.getSize() > 100) {
-						builder.append(DownloadActivity.formatMb.format(new Object[]{(float) child.getSize() / (1 << 10)}));
-					} else {
-						builder.append(child.getSize()).append(" KB");
-					}
+					builder.append(AndroidUtils.formatSize(ctx, child.getSize() * 1024l));
 				}
 
 				if (!Algorithms.isEmpty(child.getDescription())) {
@@ -1211,8 +1237,22 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				return true;
 			}
 		});
-		if (info.getType() == LocalIndexType.TILES_DATA && (info.getAttachedObject() instanceof ITileSource) &&
-				((ITileSource)info.getAttachedObject()).couldBeDownloadedFromInternet()) {
+		if (info.getType() == LocalIndexType.TILES_DATA
+				&& ((info.getAttachedObject() instanceof TileSourceManager.TileSourceTemplate)
+				|| ((info.getAttachedObject() instanceof SQLiteTileSource)
+				&& ((SQLiteTileSource) info.getAttachedObject()).couldBeDownloadedFromInternet()))) {
+			item = optionsMenu.getMenu().add(R.string.shared_string_edit)
+					.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark));
+			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					performBasicOperation(R.string.shared_string_edit, info);
+					return true;
+				}
+			});
+		}
+		if (info.getType() == LocalIndexType.TILES_DATA && (info.getAttachedObject() instanceof ITileSource)
+				&& ((ITileSource) info.getAttachedObject()).couldBeDownloadedFromInternet()) {
 			item = optionsMenu.getMenu().add(R.string.clear_tile_data)
 					.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_remove_dark));
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -1221,7 +1261,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					performBasicOperation(R.string.clear_tile_data, info);
 					return true;
 				}
-			});	
+			});
 		}
 		final IndexItem update = filesToUpdate.get(info.getFileName());
 		if (update != null) {

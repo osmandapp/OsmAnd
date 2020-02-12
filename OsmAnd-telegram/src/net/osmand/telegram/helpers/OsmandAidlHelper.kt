@@ -9,6 +9,9 @@ import android.os.IBinder
 import android.os.RemoteException
 import net.osmand.aidl.IOsmAndAidlCallback
 import net.osmand.aidl.IOsmAndAidlInterface
+import net.osmand.aidl.contextmenu.AContextMenuButton
+import net.osmand.aidl.contextmenu.ContextMenuButtonsParams
+import net.osmand.aidl.contextmenu.RemoveContextMenuButtonsParams
 import net.osmand.aidl.favorite.AFavorite
 import net.osmand.aidl.favorite.AddFavoriteParams
 import net.osmand.aidl.favorite.RemoveFavoriteParams
@@ -43,6 +46,7 @@ import net.osmand.aidl.note.TakePhotoNoteParams
 import net.osmand.aidl.search.SearchParams
 import net.osmand.aidl.search.SearchResult
 import net.osmand.telegram.TelegramApplication
+import net.osmand.telegram.helpers.ShowLocationHelper.Companion.MAP_LAYER_ID
 import java.io.File
 import java.util.*
 
@@ -54,6 +58,8 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		const val OSMAND_NIGHTLY_PACKAGE_NAME = "net.osmand.dev"
 
 		const val UPDATE_TIME_MS = 5000L
+
+		private const val CALLBACK_INVALID_ID = -1L
 	}
 
 	private var mIOsmAndAidlInterface: IOsmAndAidlInterface? = null
@@ -61,9 +67,10 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 	private var initialized: Boolean = false
 	private var bound: Boolean = false
 
-	private var osmandCallbackId: Long = 0
+	private var osmandUpdatesCallbackId: Long = -1
+	private var osmandContextMenuCallbackId: Long = -1
 
-	var listener: OsmandHelperListener? = null
+	private val connectionListeners = HashSet<OsmandHelperListener>()
 
 	interface OsmandHelperListener {
 		fun onOsmandConnectionStateChanged(connected: Boolean)
@@ -79,6 +86,12 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 
 	interface GpxBitmapCreatedListener {
 		fun onGpxBitmapCreated(bitmap: AGpxBitmap)
+	}
+
+	private var contextMenuButtonsListener: ContextMenuButtonsListener? = null
+
+	interface ContextMenuButtonsListener {
+		fun onContextMenuButtonClicked(buttonId:Int, pointId: String, layerId: String)
 	}
 
 	private val mIOsmAndAidlCallback = object : IOsmAndAidlCallback.Stub() {
@@ -106,6 +119,28 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 				gpxBitmapCreatedListener!!.onGpxBitmapCreated(bitmap)
 			}
 		}
+
+		override fun updateNavigationInfo(directionInfo: ADirectionInfo?) {
+
+		}
+
+		override fun onContextMenuButtonClicked(buttonId:Int, pointId: String, layerId: String) {
+			if (contextMenuButtonsListener != null) {
+				contextMenuButtonsListener!!.onContextMenuButtonClicked(buttonId, pointId, layerId)
+			}
+		}
+
+		override fun onVoiceRouterNotify(params: OnVoiceNavigationParams?) {
+
+		}
+	}
+
+	fun addConnectionListener(listener: OsmandHelperListener) {
+		connectionListeners.add(listener)
+	}
+
+	fun removeConnectionListener(listener: OsmandHelperListener) {
+		connectionListeners.remove(listener)
 	}
 
 	fun setSearchCompleteListener(mSearchCompleteListener: SearchCompleteListener) {
@@ -114,6 +149,10 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 
 	fun setGpxBitmapCreatedListener(gpxBitmapCreatedListener: GpxBitmapCreatedListener) {
 		this.gpxBitmapCreatedListener = gpxBitmapCreatedListener
+	}
+
+	fun setContextMenuButtonsListener(contextMenuButtonsListener: ContextMenuButtonsListener) {
+		this.contextMenuButtonsListener = contextMenuButtonsListener
 	}
 
 	private var mUpdatesListener: UpdatesListener? = null
@@ -126,7 +165,7 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		this.mUpdatesListener = mUpdatesListener
 	}
 
-	fun updatesCallbackRegistered() = osmandCallbackId > 0
+	fun updatesCallbackRegistered() = osmandUpdatesCallbackId > CALLBACK_INVALID_ID
 	/**
 	 * Class for interacting with the main interface of the service.
 	 */
@@ -140,16 +179,18 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 			// representation of that from the raw service object.
 			mIOsmAndAidlInterface = IOsmAndAidlInterface.Stub.asInterface(service)
 			initialized = true
-			//Toast.makeText(app, "OsmAnd connected", Toast.LENGTH_SHORT).show()
-			listener?.onOsmandConnectionStateChanged(true)
+			connectionListeners.forEach {
+				it.onOsmandConnectionStateChanged(true)
+			}
 		}
 
 		override fun onServiceDisconnected(className: ComponentName) {
 			// This is called when the connection with the service has been
 			// unexpectedly disconnected -- that is, its process crashed.
 			mIOsmAndAidlInterface = null
-			//Toast.makeText(app, "OsmAnd disconnected", Toast.LENGTH_SHORT).show()
-			listener?.onOsmandConnectionStateChanged(false)
+			connectionListeners.forEach {
+				it.onOsmandConnectionStateChanged(false)
+			}
 		}
 	}
 
@@ -164,7 +205,7 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 	fun isOsmandConnected(): Boolean {
 		return mIOsmAndAidlInterface != null
 	}
-	
+
 	/**
 	 * Get list of active GPX files.
 	 *
@@ -182,6 +223,25 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 					e.printStackTrace()
 				}
 
+			}
+			return null
+		}
+
+	/**
+	 * Get list of all imported GPX files.
+	 *
+	 * @return list of imported gpx files.
+	 */
+	val importedGpxFiles: List<AGpxFile>?
+		get() {
+			if (mIOsmAndAidlInterface != null) {
+				try {
+					val files = mutableListOf<AGpxFile>()
+					mIOsmAndAidlInterface!!.getImportedGpx(files)
+					return files
+				} catch (e: RemoteException) {
+					e.printStackTrace()
+				}
 			}
 			return null
 		}
@@ -407,6 +467,22 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 			} catch (e: RemoteException) {
 				e.printStackTrace()
 			}
+		}
+		return false
+	}
+
+	/**
+	 * Add map marker at given location.
+	 *
+	 * @param marker  - AMapMarker.
+	 */
+	fun addMapMarker(marker: AMapMarker): Boolean {
+		if (mIOsmAndAidlInterface != null) {
+			try {
+				return mIOsmAndAidlInterface!!.addMapMarker(AddMapMarkerParams(marker))
+			} catch (e: RemoteException) {
+				e.printStackTrace()
+			}
 
 		}
 		return false
@@ -428,6 +504,23 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 			try {
 				val markerPrev = AMapMarker(ALatLon(latPrev, lonPrev), namePrev)
 				val markerNew = AMapMarker(ALatLon(latNew, lonNew), nameNew)
+				return mIOsmAndAidlInterface!!.updateMapMarker(UpdateMapMarkerParams(markerPrev, markerNew))
+			} catch (e: RemoteException) {
+				e.printStackTrace()
+			}
+		}
+		return false
+	}
+
+	/**
+	 * Update map marker at given location with name.
+	 *
+	 * @param markerPrev  - AMapMarker (current marker).
+	 * @param markerNew  - AMapMarker (new marker).
+	 */
+	fun updateMapMarker(markerPrev: AMapMarker, markerNew: AMapMarker): Boolean {
+		if (mIOsmAndAidlInterface != null) {
+			try {
 				return mIOsmAndAidlInterface!!.updateMapMarker(UpdateMapMarkerParams(markerPrev, markerNew))
 			} catch (e: RemoteException) {
 				e.printStackTrace()
@@ -611,7 +704,7 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 							typeName: String, color: Int, location: ALatLon, details: List<String>?, params: Map<String, String>?): Boolean {
 		if (mIOsmAndAidlInterface != null) {
 			try {
-				val point = AMapPoint(pointId, shortName, fullName, typeName, color, location, details, params)
+				val point = AMapPoint(pointId, shortName, fullName, typeName, layerId, color, location, details, params)
 				return mIOsmAndAidlInterface!!.showMapPoint(ShowMapPointParams(layerId, point))
 			} catch (e: RemoteException) {
 				e.printStackTrace()
@@ -636,7 +729,7 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 					typeName: String, color: Int, location: ALatLon, details: List<String>?, params: Map<String, String>?): Boolean {
 		if (mIOsmAndAidlInterface != null) {
 			try {
-				val point = AMapPoint(pointId, shortName, fullName, typeName, color, location, details, params)
+				val point = AMapPoint(pointId, shortName, fullName, typeName, layerId, color, location, details, params)
 				return mIOsmAndAidlInterface!!.addMapPoint(AddMapPointParams(layerId, point))
 			} catch (e: RemoteException) {
 				e.printStackTrace()
@@ -662,8 +755,8 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 					   typeName: String, color: Int, location: ALatLon, details: List<String>?, params: Map<String, String>?): Boolean {
 		if (mIOsmAndAidlInterface != null) {
 			try {
-				val point = AMapPoint(pointId, shortName, fullName, typeName, color, location, details, params)
-				return mIOsmAndAidlInterface!!.updateMapPoint(UpdateMapPointParams(layerId, point))
+				val point = AMapPoint(pointId, shortName, fullName, typeName, layerId, color, location, details, params)
+				return mIOsmAndAidlInterface!!.updateMapPoint(UpdateMapPointParams(layerId, point, true))
 			} catch (e: RemoteException) {
 				e.printStackTrace()
 			}
@@ -939,10 +1032,10 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		return false
 	}
 
-	fun navigateSearch(startName: String, startLat: Double, startLon: Double, searchQuery: String, profile: String, force: Boolean): Boolean {
+	fun navigateSearch(startName: String, startLat: Double, startLon: Double, searchQuery: String, searchLat: Double, searchLon: Double, profile: String, force: Boolean): Boolean {
 		if (mIOsmAndAidlInterface != null) {
 			try {
-				return mIOsmAndAidlInterface!!.navigateSearch(NavigateSearchParams(startName, startLat, startLon, searchQuery, profile, force))
+				return mIOsmAndAidlInterface!!.navigateSearch(NavigateSearchParams(startName, startLat, startLon, searchQuery, searchLat, searchLon, profile, force))
 			} catch (e: RemoteException) {
 				e.printStackTrace()
 			}
@@ -966,6 +1059,16 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		return false
 	}
 
+	fun clearNavDrawerItems(appPackage: String): Boolean {
+		if (mIOsmAndAidlInterface != null) {
+			try {
+				return mIOsmAndAidlInterface!!.setNavDrawerItems(SetNavDrawerItemsParams(appPackage, emptyList()))
+			} catch (e: RemoteException) {
+				e.printStackTrace()
+			}
+		}
+		return false
+	}
 
 	/**
 	 * Put navigation on pause.
@@ -1070,21 +1173,21 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 	fun registerForUpdates(): Boolean {
 		if (mIOsmAndAidlInterface != null) {
 			try {
-				osmandCallbackId = mIOsmAndAidlInterface!!.registerForUpdates(UPDATE_TIME_MS, mIOsmAndAidlCallback)
-				return osmandCallbackId > 0
+				osmandUpdatesCallbackId = mIOsmAndAidlInterface!!.registerForUpdates(UPDATE_TIME_MS, mIOsmAndAidlCallback)
+				return osmandUpdatesCallbackId > CALLBACK_INVALID_ID
 			} catch (e: RemoteException) {
 				e.printStackTrace()
 			}
 		}
 		return false
 	}
-	
+
 	fun unregisterFromUpdates(): Boolean {
 		if (mIOsmAndAidlInterface != null) {
 			try {
-				val unregistered = mIOsmAndAidlInterface!!.unregisterFromUpdates(osmandCallbackId)
+				val unregistered = mIOsmAndAidlInterface!!.unregisterFromUpdates(osmandUpdatesCallbackId)
 				if (unregistered) {
-					osmandCallbackId = 0
+					osmandUpdatesCallbackId = CALLBACK_INVALID_ID
 				}
 				return unregistered
 			} catch (e: RemoteException) {
@@ -1104,5 +1207,54 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 			}
 		}
 		return false
+	}
+
+	fun addContextMenuButtons(
+		appPackage: String,paramsId:String,
+		leftTextCaption: String, rightTextCaption: String,
+		leftIconName: String, rightIconName: String,
+		needColorizeIcon: Boolean, enabled: Boolean, buttonId: Int
+	): Boolean {
+		if (mIOsmAndAidlInterface != null) {
+			try {
+				val leftButton = AContextMenuButton(buttonId, leftTextCaption, rightTextCaption, leftIconName, rightIconName, needColorizeIcon, enabled)
+				val params = ContextMenuButtonsParams(leftButton, null, paramsId, appPackage, MAP_LAYER_ID, osmandContextMenuCallbackId, mutableListOf())
+				osmandContextMenuCallbackId = mIOsmAndAidlInterface!!.addContextMenuButtons(params, mIOsmAndAidlCallback)
+				return osmandContextMenuCallbackId >= 0
+			} catch (e: RemoteException) {
+				e.printStackTrace()
+			}
+		}
+		return false
+	}
+
+	fun removeContextMenuButtons(paramsId: String): Boolean {
+		if (mIOsmAndAidlInterface != null) {
+			try {
+				val params = RemoveContextMenuButtonsParams(paramsId, osmandContextMenuCallbackId)
+				val removed = mIOsmAndAidlInterface!!.removeContextMenuButtons(params)
+				if (removed) {
+					osmandContextMenuCallbackId = CALLBACK_INVALID_ID
+				}
+				return removed
+			} catch (e: RemoteException) {
+				e.printStackTrace()
+			}
+		}
+		return false
+	}
+
+	fun getGpxColor(filename: String): String? {
+		if (mIOsmAndAidlInterface != null) {
+			try {
+				val gpxColorParams = GpxColorParams(filename)
+				if (mIOsmAndAidlInterface!!.getGpxColor(gpxColorParams)) {
+					return gpxColorParams.gpxColor
+				}
+			} catch (e: RemoteException) {
+				e.printStackTrace()
+			}
+		}
+		return null
 	}
 }

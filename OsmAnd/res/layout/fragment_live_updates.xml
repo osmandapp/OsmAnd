@@ -4,17 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ExpandableListView
-        android:id="@android:id/list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@null"
-        android:drawSelectorOnTop="true"
-        android:footerDividersEnabled="false"
-        android:groupIndicator="@null"
-        android:headerDividersEnabled="false"
-        android:orientation="vertical"
-        tools:context=".liveupdates.LiveUpdatesFragment"/>
+	<android.support.v4.widget.SwipeRefreshLayout
+		android:id="@+id/swipe_refresh"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<ExpandableListView
+			android:id="@android:id/list"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:divider="@null"
+			android:drawSelectorOnTop="true"
+			android:footerDividersEnabled="false"
+			android:groupIndicator="@null"
+			android:headerDividersEnabled="false"
+			android:orientation="vertical"
+			tools:context=".liveupdates.LiveUpdatesFragment" />
+		
+	</android.support.v4.widget.SwipeRefreshLayout>
 
     <ProgressBar
         android:id="@+id/progress"

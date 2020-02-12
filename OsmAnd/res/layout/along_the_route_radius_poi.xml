@@ -17,7 +17,8 @@
 		<View
 			android:id="@+id/top_divider"
 			android:layout_width="match_parent"
-			android:layout_height="1dp" />
+			android:layout_height="1dp"
+			android:background="?attr/divider_color_basic" />
 
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -44,6 +45,7 @@
 						android:layout_height="wrap_content"
 						android:layout_gravity="center_vertical"
 						android:text="@string/search_radius_proximity"
+						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size" />
 
 					<net.osmand.plus.widgets.TextViewEx
@@ -82,6 +84,7 @@
 						android:layout_height="wrap_content"
 						android:layout_gravity="center_vertical"
 						android:text="@string/shared_string_type"
+						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size" />
 
 					<net.osmand.plus.widgets.TextViewEx
@@ -104,7 +107,8 @@
 		<View
 			android:id="@+id/divider"
 			android:layout_width="match_parent"
-			android:layout_height="1dp" />
+			android:layout_height="1dp"
+			android:background="?attr/divider_color_basic" />
 
 	</LinearLayout>
 
@@ -112,6 +116,7 @@
 		android:id="@+id/bottom_divider"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:layout_marginTop="8dp" />
+		android:layout_marginTop="8dp"
+		android:background="?attr/divider_color_basic" />
 
 </LinearLayout>

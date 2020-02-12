@@ -32,8 +32,11 @@ public class HillshadeMenu {
 		if (plugin != null && !plugin.isActive() && !plugin.needsInstallation()) {
 			OsmandPlugin.enablePlugin(mapActivity, mapActivity.getMyApplication(), plugin, true);
 		}
+		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		ContextMenuAdapter adapter = new ContextMenuAdapter();
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
+		adapter.setProfileDependent(true);
+		adapter.setNightMode(nightMode);
 		createLayersItems(adapter, mapActivity);
 		return adapter;
 	}
@@ -49,7 +52,7 @@ public class HillshadeMenu {
 		}
 
 		final boolean selected = plugin.isHillShadeLayerEnabled();
-		final int toggleActionStringId = selected ? R.string.shared_string_enabled : R.string.shared_string_disabled;
+		final int toggleActionStringId = selected ? R.string.shared_string_on : R.string.shared_string_off;
 
 		ContextMenuAdapter.OnRowItemClick l = new ContextMenuAdapter.OnRowItemClick() {
 			@Override
@@ -94,10 +97,10 @@ public class HillshadeMenu {
 		if (selected) {
 			toggleIconId = R.drawable.ic_action_view;
 			toggleIconColorId = nightMode ?
-					R.color.color_dialog_buttons_dark : R.color.color_dialog_buttons_light;
+					R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		} else {
 			toggleIconId = R.drawable.ic_action_hide;
-			toggleIconColorId = nightMode ? 0 : R.color.icon_color;
+			toggleIconColorId = ContextMenuItem.INVALID_ID;
 		}
 		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(toggleActionStringId, mapActivity)

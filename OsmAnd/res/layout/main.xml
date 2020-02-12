@@ -16,7 +16,6 @@
             android:id="@+id/MapViewWithLayers"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:keepScreenOn="true"
             android:orientation="vertical">
 
             <ViewStub
@@ -107,7 +106,7 @@
             android:layout_height="match_parent"
             android:background="?attr/bg_color"
             android:clipToPadding="false"
-            android:drawSelectorOnTop="true"
+            android:drawSelectorOnTop="false"
             android:layout_gravity="start"/>
 
         <RelativeLayout

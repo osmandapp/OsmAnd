@@ -2,8 +2,6 @@ package net.osmand.util;
 
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
-import net.osmand.router.GeneralRouter;
-import net.osmand.router.RoutingConfiguration;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -31,7 +29,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.Stack;
 import java.util.zip.GZIPInputStream;
 
 
@@ -370,6 +367,14 @@ public class Algorithms {
 		return "";
 	}
 
+	public static void createParentDirsForFile(File file) {
+		if (file != null && !file.exists()) {
+			File parent = file.getParentFile();
+			if (parent != null && !parent.exists()) {
+				parent.mkdirs();
+			}
+		}
+	}
 
 	@SuppressWarnings("TryFinallyCanBeTryWithResources")
 	public static void fileCopy(File src, File dst) throws IOException {
@@ -461,14 +466,7 @@ public class Algorithms {
 
 	public static String gzipToString(byte[] gzip) throws IOException {
 		GZIPInputStream gzipIs = new GZIPInputStream(new ByteArrayInputStream(gzip));
-		BufferedReader br = new BufferedReader(new InputStreamReader(gzipIs, "UTF-8"));
-		StringBuilder sb = new StringBuilder();
-		String s;
-		while ((s = br.readLine()) != null) {
-			sb.append(s);
-		}
-		br.close();
-		return sb.toString();
+		return readFromInputStream(gzipIs).toString();
 	}
 
 	public static boolean removeAllFiles(File f) {
@@ -780,5 +778,43 @@ public class Algorithms {
 		}
 		is.close();
 		return map;
+	}
+
+	public static boolean containsInArrayL(long[] array, long value) {
+		return Arrays.binarySearch(array, value) >= 0;
+	}
+
+	public static long[] addToArrayL(long[] array, long value, boolean skipIfExists) {
+		long[] result;
+		if (array == null) {
+			result = new long[]{ value };
+		} else if (skipIfExists && Arrays.binarySearch(array, value) >= 0) {
+			result = array;
+		} else {
+			result = new long[array.length + 1];
+			System.arraycopy(array, 0, result, 0, array.length);
+			result[result.length - 1] = value;
+			Arrays.sort(result);
+		}
+		return result;
+	}
+
+	public static long[] removeFromArrayL(long[] array, long value) {
+		long[] result;
+		if (array != null) {
+			int index = Arrays.binarySearch(array, value);
+			if (index >= 0) {
+				result = new long[array.length - 1];
+				System.arraycopy(array, 0, result, 0, index);
+				if (index < result.length) {
+					System.arraycopy(array, index + 1, result, index, array.length - (index + 1));
+				}
+				return result;
+			} else {
+				return array;
+			}
+		} else {
+			return array;
+		}
 	}
 }

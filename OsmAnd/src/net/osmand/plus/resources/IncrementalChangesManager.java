@@ -1,5 +1,7 @@
 package net.osmand.plus.resources;
 
+import android.view.LayoutInflater;
+
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -7,11 +9,13 @@ import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -24,7 +28,7 @@ import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class IncrementalChangesManager {
-
+	private static final Log LOG = PlatformUtil.getLog(IncrementalChangesManager.class);
 	private static final String URL = "https://osmand.net/check_live";
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(IncrementalChangesManager.class);
 	private ResourceManager resourceManager;
@@ -291,20 +295,24 @@ public class IncrementalChangesManager {
 
 		@Override
 		public String toString() {
-			return "Update " + fileName + " " + sizeText + " MB " + date;
+			return "Update " + fileName + " " + sizeText + " MB " + date + ", timestamp: " + timestamp;
 		}
 	}
 	
 	private List<IncrementalUpdate> getIncrementalUpdates(String file, long timestamp) throws IOException,
 			XmlPullParserException {
 		String url = URL + "?aosmc=true&timestamp=" + timestamp + "&file=" + URLEncoder.encode(file);
+
 		HttpURLConnection conn = NetworkUtils.getHttpURLConnection(url);
 		conn.setUseCaches(false);
 		XmlPullParser parser = PlatformUtil.newXMLPullParser();
-		parser.setInput(conn.getInputStream(), "UTF-8");
+		InputStream is = conn.getInputStream();
+		parser.setInput(is, "UTF-8");
 		List<IncrementalUpdate> lst = new ArrayList<IncrementalUpdate>();
+		int elements = 0;
 		while (parser.next() != XmlPullParser.END_DOCUMENT) {
 			if (parser.getEventType() == XmlPullParser.START_TAG) {
+				elements ++;
 				if (parser.getName().equals("update")) {
 					IncrementalUpdate dt = new IncrementalUpdate();
 					dt.date = parser.getAttributeValue("", "updateDate");
@@ -317,6 +325,9 @@ public class IncrementalChangesManager {
 				}
 			}
 		}
+		LOG.debug(String.format("Incremental updates: %s, updates %d (total %d)", url, lst.size(), elements));
+		is.close();
+		conn.disconnect();
 		return lst;
 	}
 	

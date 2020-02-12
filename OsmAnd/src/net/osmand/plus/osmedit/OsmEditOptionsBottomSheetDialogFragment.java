@@ -9,6 +9,7 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.util.Algorithms;
 
 public class OsmEditOptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -27,8 +28,11 @@ public class OsmEditOptionsBottomSheetDialogFragment extends MenuBottomSheetDial
 		Bundle args = getArguments();
 		if (args != null) {
 			final OsmPoint osmPoint = (OsmPoint) args.getSerializable(OSM_POINT);
-
-			items.add(new TitleItem(OsmEditingPlugin.getName(osmPoint) + ":"));
+			String name = OsmEditingPlugin.getName(osmPoint);
+			if (Algorithms.isEmpty(name)) {
+				name = OsmEditingPlugin.getCategory(osmPoint, getContext());
+			}
+			items.add(new TitleItem(name + ":"));
 
 			BaseBottomSheetItem uploadItem = new SimpleBottomSheetItem.Builder()
 					.setIcon(getContentIcon(R.drawable.ic_action_export))

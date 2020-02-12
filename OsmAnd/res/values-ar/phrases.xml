@@ -268,7 +268,7 @@
     <string name="poi_government">حكومة</string>
     <string name="poi_building">مبنى</string>
     <string name="poi_hairdresser">حلاق</string>
-    <string name="poi_toilets">مرحاض</string>
+    <string name="poi_toilets">مرحاض; حمام</string>
     <string name="poi_traffic_calming_bump">مطب</string>
     <string name="poi_highway_crossing">ممر الراجلين</string>
     <string name="poi_post_office">مكتب بريد</string>
@@ -1622,4 +1622,5 @@
     <string name="poi_park_ride_tram">ترام</string>
     <string name="poi_park_ride_ferry">عبّارة</string>
     <string name="poi_generator_source_biomass">مصدر الطاقة: الكتلة الحيوية</string>
+    <string name="reddit">موقع Reddit</string>
 </resources>

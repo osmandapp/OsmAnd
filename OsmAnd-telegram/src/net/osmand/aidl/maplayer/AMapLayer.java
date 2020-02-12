@@ -66,6 +66,10 @@ public class AMapLayer implements Parcelable {
 		return new ArrayList<>(points.values());
 	}
 
+	public AMapPoint getPoint(String pointId) {
+		return points.get(pointId);
+	}
+
 	public boolean hasPoint(String pointId) {
 		return points.containsKey(pointId);
 	}

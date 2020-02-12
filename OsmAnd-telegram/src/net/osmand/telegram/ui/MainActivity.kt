@@ -12,6 +12,8 @@ import android.support.v4.app.DialogFragment
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.view.PagerAdapter
+import android.support.v4.view.ViewPager
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.ListPopupWindow
@@ -22,7 +24,6 @@ import net.osmand.PlatformUtil
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.OsmandAidlHelper
-import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.*
 import net.osmand.telegram.ui.LoginDialogFragment.LoginDialogType
 import net.osmand.telegram.ui.MyLocationTabFragment.ActionButtonsListener
@@ -34,6 +35,9 @@ import net.osmand.telegram.utils.OsmandApiUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import java.io.File
 import java.lang.ref.WeakReference
+import java.time.MonthDay
+import java.util.*
+import kotlin.collections.ArrayList
 
 const val OPEN_MY_LOCATION_TAB_KEY = "open_my_location_tab"
 
@@ -45,7 +49,7 @@ private const val TIMELINE_TAB_POS = 2
 
 class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListener, TelegramIncomingMessagesListener {
 
-	private val log = PlatformUtil.getLog(TelegramHelper::class.java)
+	private val log = PlatformUtil.getLog(MainActivity::class.java)
 
 	private var telegramAuthorizationRequestHandler: TelegramAuthorizationRequestHandler? = null
 	private var paused: Boolean = false
@@ -66,8 +70,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	private lateinit var buttonsBar: LinearLayout
 	private lateinit var bottomNav: BottomNavigationView
 	private lateinit var coordinatorLayout: CoordinatorLayout
-
-	private var snackbarShown = false
+	private lateinit var viewPager: ViewPager
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -81,7 +84,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		
 		paused = false
 
-		val viewPager = findViewById<LockableViewPager>(R.id.view_pager).apply {
+		viewPager = findViewById<LockableViewPager>(R.id.view_pager).apply {
 			swipeLocked = true
 			offscreenPageLimit = 3
 			adapter = ViewPagerAdapter(supportFragmentManager)
@@ -108,7 +111,9 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 						TIMELINE_TAB_POS -> {
 							liveNowTabFragment?.tabClosed()
 							timelineTabFragment?.tabOpened()
-							showSnackBar()
+							if (shouldShowFreeTimelineInfo()) {
+								showFreeTimelineInfo()
+							}
 						}
 					}
 					viewPager.currentItem = pos
@@ -327,7 +332,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		settings.removeNonexistingChats(presentChatTitles)
 	}
 
-	fun stopShowingChatsOnMap(forceStop: Boolean) {
+	private fun stopShowingChatsOnMap(forceStop: Boolean) {
 		settings.getShowOnMapChats().forEach { app.showLocationHelper.hideChatMessages(it) }
 		app.showLocationHelper.stopShowingLocation(forceStop)
 	}
@@ -356,7 +361,9 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	}
 	
 	fun logoutTelegram(silent: Boolean = false) {
-		if (telegramHelper.getTelegramAuthorizationState() == TelegramHelper.TelegramAuthorizationState.READY) {
+		if (telegramHelper.getTelegramAuthorizationState() == TelegramAuthorizationState.READY) {
+			app.stopMonitoring()
+			app.stopSharingLocation()
 			if (app.isInternetConnectionAvailable) {
 				app.locationMessages.clearBufferedMessages()
 				settings.clear()
@@ -378,13 +385,22 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		imageView.setOnClickListener { showOptionsPopupMenu(imageView) }
 	}
 
-	fun showSnackBar() {
-		if (!snackbarShown) {
-			val snackbar = Snackbar.make(coordinatorLayout, R.string.timeline_available_for_free_now, Snackbar.LENGTH_LONG).setAction(R.string.shared_string_ok) {}
-			AndroidUtils.setSnackbarTextColor(snackbar, R.color.ctrl_active_dark)
-			snackbar.show()
-			snackbarShown = true
+	private fun shouldShowFreeTimelineInfo(): Boolean {
+		val freeTimelineInfoShownTime = settings.freeTimelineInfoShownTime
+		if (freeTimelineInfoShownTime != 0L) {
+			val cal = Calendar.getInstance()
+			val day = cal.get(Calendar.DAY_OF_MONTH)
+			cal.timeInMillis = freeTimelineInfoShownTime
+			return day != cal.get(Calendar.DAY_OF_MONTH)
 		}
+		return true
+	}
+
+	private fun showFreeTimelineInfo() {
+		val snackbar = Snackbar.make(coordinatorLayout, R.string.timeline_available_for_free_now, Snackbar.LENGTH_LONG).setAction(R.string.shared_string_ok) {}
+		AndroidUtils.setSnackbarTextColor(snackbar, R.color.ctrl_active_dark)
+		snackbar.show()
+		settings.freeTimelineInfoShownTime = System.currentTimeMillis()
 	}
 
 	private fun showOptionsPopupMenu(anchor: View) {
@@ -482,6 +498,10 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 	}
 
+	fun refreshPages() {
+		viewPager.adapter?.notifyDataSetChanged()
+	}
+
 	private fun showOsmandMissingDialog() {
 		OsmandMissingDialogFragment().show(supportFragmentManager, null)
 	}
@@ -508,5 +528,9 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		override fun getItem(position: Int) = fragments[position]
 
 		override fun getCount() = fragments.size
+
+		override fun getItemPosition(`object`: Any): Int {
+			return PagerAdapter.POSITION_NONE
+		}
 	}
 }

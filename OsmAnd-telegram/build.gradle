@@ -5,7 +5,7 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
 	compileSdkVersion 28
-	buildToolsVersion "27.0.3"
+	buildToolsVersion "28.0.3"
 
 	sourceSets {
 		main {
@@ -23,7 +23,7 @@ android {
 	defaultConfig {
 		applicationId "net.osmand.telegram"
 		minSdkVersion 15
-		targetSdkVersion 27
+		targetSdkVersion 28
 		versionCode 1
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
 		versionName "1.0"
@@ -88,6 +88,10 @@ android {
 		disable 'InvalidPackage'
 		disable 'MissingTranslation'
 	}
+
+	packagingOptions {
+		exclude 'META-INF/proguard/androidx-annotations.pro'
+	}
 }
 
 task downloadTdLibzip {
@@ -149,4 +153,5 @@ dependencies {
 		exclude group: 'com.android.support'
 	}
 	implementation 'org.jetbrains:annotations-java5:15.0'
+	implementation 'androidx.annotation:annotation:1.1.0'
 }

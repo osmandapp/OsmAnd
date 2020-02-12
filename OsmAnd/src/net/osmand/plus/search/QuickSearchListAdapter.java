@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	private OsmandApplication app;
 	private Activity activity;
 	private AccessibilityAssistant accessibilityAssistant;
+	private LayoutInflater inflater;
 
 	private boolean useMapCenter;
 
@@ -70,6 +72,11 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		super(app, R.layout.search_list_item);
 		this.app = app;
 		this.activity = activity;
+
+		int themeRes = !app.getSettings().isLightContent() ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		Context themedContext = new ContextThemeWrapper(activity, themeRes);
+		this.inflater = activity.getLayoutInflater().cloneInContext(themedContext);
+
 		dp56 = AndroidUtils.dpToPx(app, 56f);
 		dp1 = AndroidUtils.dpToPx(app, 1f);
 		updateLocationViewCache = app.getUIUtilities().getUpdateLocationViewCache();
@@ -192,7 +199,6 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		LinearLayout view;
 		if (type == QuickSearchListItemType.SEARCH_MORE) {
 			if (convertView == null) {
-				LayoutInflater inflater = (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				view = (LinearLayout) inflater.inflate(R.layout.search_more_list_item, null);
 			} else {
 				view = (LinearLayout) convertView;
@@ -218,8 +224,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			String textTitle;
 			int minimalSearchRadius = searchUICore.getMinimalSearchRadius(searchPhrase);
 			if (searchUICore.isSearchMoreAvailable(searchPhrase) && minimalSearchRadius != Integer.MAX_VALUE) {
+				double rd = OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
 				textTitle = app.getString(R.string.nothing_found_in_radius) + " "
-						+ OsmAndFormatter.getFormattedDistance(minimalSearchRadius, app);
+						+ OsmAndFormatter.getFormattedDistance((float) rd, app, false);
 			} else {
 				textTitle = app.getString(R.string.search_nothing_found);
 			}
@@ -228,8 +235,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 			SearchWord word = searchPhrase.getLastSelectedWord();
 			if (word != null && word.getType() != null && word.getType().equals(POI_TYPE)) {
+				float rd = (float) OsmAndFormatter.calculateRoundedDist(searchUICore.getNextSearchRadius(searchPhrase), app);
 				String textIncreaseRadiusTo = app.getString(R.string.increase_search_radius_to,
-						OsmAndFormatter.getFormattedDistance(searchUICore.getNextSearchRadius(searchPhrase), app));
+						OsmAndFormatter.getFormattedDistance(rd, app, false));
 				((TextView) view.findViewById(R.id.title)).setText(textIncreaseRadiusTo);
 			} else {
 				((TextView) view.findViewById(R.id.title)).setText(app.getString(R.string.increase_search_radius));
@@ -255,10 +263,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			}
 		} else if (type == QuickSearchListItemType.BUTTON) {
 			if (convertView == null) {
-				LayoutInflater inflater = (LayoutInflater) app
-						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				view = (LinearLayout) inflater.inflate(
-						R.layout.search_custom_list_item, null);
+				view = (LinearLayout) inflater.inflate(R.layout.search_custom_list_item, null);
 			} else {
 				view = (LinearLayout) convertView;
 			}
@@ -270,10 +275,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			}
 		} else if (type == QuickSearchListItemType.SELECT_ALL) {
 			if (convertView == null) {
-				LayoutInflater inflater = (LayoutInflater) app
-						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				view = (LinearLayout) inflater.inflate(
-						R.layout.select_all_list_item, null);
+				view = (LinearLayout) inflater.inflate(R.layout.select_all_list_item, null);
 			} else {
 				view = (LinearLayout) convertView;
 			}
@@ -289,10 +291,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			});
 		} else if (type == QuickSearchListItemType.HEADER) {
 			if (convertView == null) {
-				LayoutInflater inflater = (LayoutInflater) app
-						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				view = (LinearLayout) inflater.inflate(
-						R.layout.search_header_list_item, null);
+				view = (LinearLayout) inflater.inflate(R.layout.search_header_list_item, null);
 			} else {
 				view = (LinearLayout) convertView;
 			}
@@ -305,30 +304,21 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			}
 		} else if (type == QuickSearchListItemType.TOP_SHADOW) {
 			if (convertView == null) {
-				LayoutInflater inflater = (LayoutInflater) app
-						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				view = (LinearLayout) inflater.inflate(
-						R.layout.list_shadow_header, null);
+				view = (LinearLayout) inflater.inflate(R.layout.list_shadow_header, null);
 			} else {
 				view = (LinearLayout) convertView;
 			}
 			return view;
 		} else if (type == QuickSearchListItemType.BOTTOM_SHADOW) {
 			if (convertView == null) {
-				LayoutInflater inflater = (LayoutInflater) app
-						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				view = (LinearLayout) inflater.inflate(
-						R.layout.list_shadow_footer, null);
+				view = (LinearLayout) inflater.inflate(R.layout.list_shadow_footer, null);
 			} else {
 				view = (LinearLayout) convertView;
 			}
 			return view;
 		} else {
 			if (convertView == null) {
-				LayoutInflater inflater = (LayoutInflater) app
-						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				view = (LinearLayout) inflater.inflate(
-						R.layout.search_list_item, null);
+				view = (LinearLayout) inflater.inflate(R.layout.search_list_item, null);
 			} else {
 				view = (LinearLayout) convertView;
 			}
@@ -413,7 +403,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				if (rs != null) {
 					Calendar inst = Calendar.getInstance();
 					inst.setTimeInMillis(System.currentTimeMillis());
-					boolean worksNow = rs.isOpenedForTime(inst);
+					boolean worksNow = !amenity.isClosed() && rs.isOpenedForTime(inst);
 					inst.setTimeInMillis(System.currentTimeMillis() + 30 * 60 * 1000); // 30 minutes later
 					boolean worksLater = rs.isOpenedForTime(inst);
 					int colorId = worksNow ? worksLater ? R.color.color_ok : R.color.color_intermediate : R.color.color_warning;
@@ -421,7 +411,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 					timeLayout.setVisibility(View.VISIBLE);
 					timeIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_small_time, colorId));
 					timeText.setTextColor(app.getResources().getColor(colorId));
-					String rt = rs.getCurrentRuleTime(inst);
+					String rt = amenity.isClosed() ? app.getResources().getString(R.string.poi_operational_status_closed) : rs.getCurrentRuleTime(inst);
 					timeText.setText(rt == null ? "" : rt);
 				} else {
 					timeLayout.setVisibility(View.GONE);
@@ -433,7 +423,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			updateCompassVisibility(view, listItem);
 		}
 		view.setBackgroundColor(app.getResources().getColor(
-						app.getSettings().isLightContent() ? R.color.bg_color_light : R.color.bg_color_dark));
+						app.getSettings().isLightContent() ? R.color.list_background_color_light : R.color.list_background_color_dark));
 		View divider = view.findViewById(R.id.divider);
 		if (divider != null) {
 			if (position == getCount() - 1 || getItem(position + 1).getType() == QuickSearchListItemType.HEADER

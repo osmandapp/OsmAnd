@@ -15,7 +15,6 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.DirectionDrawable;
@@ -153,25 +152,12 @@ public class MapMarkersWidgetsFactory {
 	}
 
 	public boolean updateVisibility(boolean visible) {
-		boolean res = updateVisibility(topBar, visible);
+		boolean res = AndroidUiHelper.updateVisibility(topBar, visible);
 		if (visible != cachedTopBarVisibility) {
 			cachedTopBarVisibility = visible;
 			map.updateStatusBarColor();
 		}
 		return res;
-	}
-
-	public boolean updateVisibility(View v, boolean visible) {
-		if (visible != (v.getVisibility() == View.VISIBLE)) {
-			if (visible) {
-				v.setVisibility(View.VISIBLE);
-			} else {
-				v.setVisibility(View.GONE);
-			}
-			v.invalidate();
-			return true;
-		}
-		return false;
 	}
 
 	public int getTopBarHeight() {
@@ -227,9 +213,9 @@ public class MapMarkersWidgetsFactory {
 				}
 			}
 			updateUI(loc, heading, marker, arrowImg2nd, distText2nd, okButton2nd, addressText2nd, false, customLocation != null);
-			updateVisibility(topBar2nd, true);
+			AndroidUiHelper.updateVisibility(topBar2nd, true);
 		} else {
-			updateVisibility(topBar2nd, false);
+			AndroidUiHelper.updateVisibility(topBar2nd, false);
 		}
 
 		updateVisibility(true);
@@ -274,7 +260,7 @@ public class MapMarkersWidgetsFactory {
 		if (txt != null) {
 			distText.setText(txt);
 		}
-		updateVisibility(okButton, !customLocation && loc != null && dist < MIN_DIST_OK_VISIBLE);
+		AndroidUiHelper.updateVisibility(okButton, !customLocation && loc != null && dist < MIN_DIST_OK_VISIBLE);
 
 		String descr;
 		PointDescription pd = marker.getPointDescription(map);
@@ -351,7 +337,7 @@ public class MapMarkersWidgetsFactory {
 			}
 			boolean res = false;
 			int d = getDistance();
-			if (cachedMeters != d) {
+			if (isUpdateNeeded() || cachedMeters != d) {
 				cachedMeters = d;
 				String ds = OsmAndFormatter.getFormattedDistance(cachedMeters, view.getApplication());
 				int ls = ds.lastIndexOf(' ');
@@ -367,8 +353,8 @@ public class MapMarkersWidgetsFactory {
 				if (marker.colorIndex != cachedMarkerColorIndex
 						|| cachedNightMode == null || cachedNightMode != isNight()) {
 					setImageDrawable(map.getMyApplication().getUIUtilities()
-							.getIcon(isNight() ? R.drawable.widget_marker_night : R.drawable.widget_marker_day,
-									R.drawable.widget_marker_triangle,
+							.getLayeredIcon(isNight() ? R.drawable.widget_marker_night : R.drawable.widget_marker_day,
+									R.drawable.widget_marker_triangle, 0,
 									MapMarker.getColorId(marker.colorIndex)));
 					cachedMarkerColorIndex = marker.colorIndex;
 					cachedNightMode = isNight();
@@ -376,6 +362,11 @@ public class MapMarkersWidgetsFactory {
 				}
 			}
 			return res;
+		}
+
+		@Override
+		public boolean isMetricSystemDepended() {
+			return true;
 		}
 
 		public LatLon getPointToNavigate() {

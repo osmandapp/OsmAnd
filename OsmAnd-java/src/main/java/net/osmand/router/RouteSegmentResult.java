@@ -228,15 +228,4 @@ public class RouteSegmentResult {
 		return object.toString() + ": " + startPointIndex + "-" + endPointIndex;
 	}
 
-	public String getSurface() {
-		return object.getValue("surface");
-	}
-
-	public String getSmoothness() {
-		return object.getValue("smoothness");
-	}
-
-	public String getHighway() {
-		return object.getHighway();
-	}
 }

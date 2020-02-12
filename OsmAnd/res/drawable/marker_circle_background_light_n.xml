@@ -4,5 +4,5 @@
     android:shape="oval">
 
     <solid
-        android:color="@color/dashboard_divider_light"/>
+        android:color="@color/divider_color_light"/>
 </shape>

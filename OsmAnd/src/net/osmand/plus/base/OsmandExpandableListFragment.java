@@ -40,8 +40,8 @@ public abstract class OsmandExpandableListFragment extends BaseOsmAndFragment
 		super.onActivityCreated(savedInstanceState);
 		getExpandableListView().setBackgroundColor(
 				getResources().getColor(
-						getMyApplication().getSettings().isLightContent() ? R.color.bg_color_light
-								: R.color.bg_color_dark));
+						getMyApplication().getSettings().isLightContent() ? R.color.list_background_color_light
+								: R.color.list_background_color_dark));
 	}
 
 	public View createView(android.view.LayoutInflater inflater, android.view.ViewGroup container) {
@@ -81,11 +81,12 @@ public abstract class OsmandExpandableListFragment extends BaseOsmAndFragment
 		listView.setOnChildClickListener(this);
 	}
 
-	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconLight, int iconDark, int menuItemType) {
-		int r = isLightActionBar() ? iconLight : iconDark;
+	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconId, int menuItemType) {
+		Drawable d = iconId == 0 ? null : requireMyApplication().getUIUtilities().getIcon(iconId,
+				isLightActionBar() ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark);
 		MenuItem menuItem = m.add(0, id, 0, titleRes);
-		if (r != 0) {
-			menuItem.setIcon(r);
+		if (d != null) {
+			menuItem.setIcon(d);
 		}
 		menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override

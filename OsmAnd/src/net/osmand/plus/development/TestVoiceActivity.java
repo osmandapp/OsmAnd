@@ -113,7 +113,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 							addButtons(ll, p);
 						}
 					}
-				}, true, true);
+				}, true, true, false);
 				dialog.dismiss();
 			}
 		});
@@ -137,13 +137,8 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		v += "\n \u25CF OsmAnd voice: " + osmandVoice;
 		v += "\n \u25CF OsmAnd voice language: " + osmandVoiceLang;
 
-		if (AbstractPrologCommandPlayer.getCurrentVersion() > 99) {
-			v += "\n \u25CF Voice language availability: " + TTSCommandPlayerImpl.getTtsVoiceStatus();
-			v += "\n \u25CF Voice actually used: " + TTSCommandPlayerImpl.getTtsVoiceUsed();
-		} else {
-			v += "\n \u25CF Voice language availability: Recorded voice";
-			v += "\n \u25CF Voice actually used: Recorded voice";
-		}
+		v += "\n \u25CF TTS voice language availability: " + TTSCommandPlayerImpl.getTtsVoiceStatus();
+		v += "\n \u25CF TTS voice actually used: " + TTSCommandPlayerImpl.getTtsVoiceUsed();
 
 		if (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
 			v += "\n \u25CF BT SCO: " + AbstractPrologCommandPlayer.btScoInit;
@@ -161,18 +156,25 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "\u25BA (1.2)  New route calculated, 1350m, 3680sec (01:01:20)", builder(p).newRouteCalculated(1350, 3680));
 		addButton(ll, "\u25BA (1.3)  New route calculated 3700m, 7320sec (02:02)", builder(p).newRouteCalculated(3700, 7320));
 		addButton(ll, "\u25BA (1.4)  New route calculated 9100m, 10980sec (03:03)", builder(p).newRouteCalculated(9100, 10980));
+		addButton(ll, "\u25BA (1.5)  New route calculated, 1500m, 4280sec (01:20:20)", builder(p).newRouteCalculated(1500, 4280));
 		addButton(ll, "\u25BA (2.1)  Route recalculated 11500m, 18600sec (05:10)", builder(p).routeRecalculated(11500, 18600));
 		addButton(ll, "\u25BA (2.2)  Route recalculated 19633m, 26700sec (07:25)", builder(p).routeRecalculated(19633, 26700) );
 		addButton(ll, "\u25BA (2.3)  Route recalculated 89750m, 55800sec (15:30)", builder(p).routeRecalculated(89750, 55800) );
 		addButton(ll, "\u25BA (2.4)  Route recalculated 125900m, 92700sec (25:45)", builder(p).routeRecalculated(125900, 92700) );
 
-		addButton(ll, "All turn types: prepareTurn, makeTurnIn, turn:", builder(p));
+		addButton(ll, "All turn types: prepareTurn, makeTurnIn, turn, takeExit, takeExitIn:", builder(p));
 		addButton(ll, "\u25BA (3.1)  After 1520m turn slightly left", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_SL, 1520, street(p, "")));
 		addButton(ll, "\u25BA (3.2)  In 450m turn sharply left onto 'Hauptstra"+"\u00df"+"e', then bear right", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_SH, 450, street(p, "Hauptstraße")).then().bearRight(street(p, "")));
 		addButton(ll, "\u25BA (3.3)  Turn left, then in 100m turn slightly right", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT, street(p, "")).then().turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 100, street(p, "")));
 		addButton(ll, "\u25BA (3.4)  After 3100m turn right onto 'SR 80' toward 'Rome'", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_RIGHT, 3100, street(p,  "SR 80", "", "Rome")));
 		addButton(ll, "\u25BA (3.5)  In 370m turn slightly right onto 'Route 23' 'Main Street', then bear left", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 370, street(p, "Route 23", "Main Street", "")).then().bearLeft(street(p, "")));
 		addButton(ll, "\u25BA (3.6)  Turn sharply right onto 'Dr.-Quinn-Stra"+"\u00df"+"e'", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH, street(p, "", "Dr.-Quinn-Straße", "")));
+		addButton(ll, "\u25BA (3.7)  Turn slightly right onto exit 6 onto 'Amsterdam-Osdorp'", builder(p).takeExit(AbstractPrologCommandPlayer.A_RIGHT_SL, "6", 6, street(p, "", "Amsterdam-Osdorp", "")));
+		addButton(ll, "\u25BA (3.8)  In 350m turn slightly right onto exit 6, 'Amsterdam-Osdorp'", builder(p).takeExit(AbstractPrologCommandPlayer.A_RIGHT_SL, 350, "6", 6, street(p, "", "Amsterdam-Osdorp", "")));
+		addButton(ll, "\u25BA (3.9)  In 350m turn slightly right onto exit 6, 'Amsterdam-Osdorp' towards Osdorp", builder(p).takeExit(AbstractPrologCommandPlayer.A_RIGHT_SL, 350, "6", 6, street(p, "", "Amsterdam-Osdorp", "Osdorp")));
+		addButton(ll, "\u25BA (3.10)  In 350m turn slightly right to exit 6 towards 'Osdorp'", builder(p).takeExit(AbstractPrologCommandPlayer.A_RIGHT_SL, 350, "6", 6, street(p, "", "", "Osdorp")));
+		addButton(ll, "\u25BA (3.11)  Turn slightly right to exit 260B ", builder(p).takeExit(AbstractPrologCommandPlayer.A_RIGHT_SL, "260 B", 260, street(p, "", "", "")));
+		addButton(ll, "\u25BA (3.12)  Turn slightly left to exit 15B ", builder(p).takeExit(AbstractPrologCommandPlayer.A_LEFT_SL, "15 B", 15, street(p, "", "", "")));
 
 		addButton(ll, "Keep left/right: prepareTurn, makeTurnIn, turn:", builder(p));
 		addButton(ll, "\u25BA (4.1)  After 1810m keep left ' '", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 1810, street(p, "")));

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/spinnerListBackground"
+    android:background="?attr/activity_background_color"
     android:clickable="true"
     android:orientation="vertical"
     tools:context="net.osmand.plus.osmedit.EditPoiDialogFragment">

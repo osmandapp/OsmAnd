@@ -105,7 +105,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 			}
 		});
 
-		int searchColorId = nightMode ? R.color.icon_color : R.color.ctx_menu_title_color_dark;
+		int searchColorId = nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
 		((TextView) findViewById(R.id.search_hint)).setTextColor(getResolvedColor(searchColorId));
 		((ImageView) findViewById(R.id.search_icon))
 				.setImageDrawable(getIcon(R.drawable.ic_action_search_dark, searchColorId));
@@ -135,13 +135,11 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 			@Override
 			public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 				int position = -1;
-				switch (item.getItemId()) {
-					case R.id.action_explore:
-						position = EXPLORE_POSITION;
-						break;
-					case R.id.action_saved_articles:
-						position = SAVED_ARTICLES_POSITION;
-						break;
+				int i = item.getItemId();
+				if (i == R.id.action_explore) {
+					position = EXPLORE_POSITION;
+				} else if (i == R.id.action_saved_articles) {
+					position = SAVED_ARTICLES_POSITION;
 				}
 				if (position != -1 && position != viewPager.getCurrentItem()) {
 					viewPager.setCurrentItem(position);
@@ -286,7 +284,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	}
 
 	protected Drawable getContentIcon(int id) {
-		return getIcon(id, R.color.icon_color);
+		return getIcon(id, R.color.icon_color_default_light);
 	}
 
 	protected Drawable getActiveIcon(@DrawableRes int iconId) {

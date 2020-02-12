@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:title="@string/voice_announces">
+
+	<Preference
+		android:key="voice_announces_info"
+		android:layout="@layout/preference_info"
+		android:persistent="false"
+		android:selectable="false"
+		android:title="@string/voice_announces_info"
+		tools:icon="@drawable/ic_action_info_dark" />
+
+	<SwitchPreferenceCompat
+		android:key="speak_street_names"
+		android:layout="@layout/preference_switch"
+		android:title="@string/speak_street_names" />
+
+	<SwitchPreferenceCompat
+		android:key="speak_traffic_warnings"
+		android:layout="@layout/preference_switch"
+		android:title="@string/speak_traffic_warnings" />
+
+	<SwitchPreferenceCompat
+		android:key="speak_pedestrian"
+		android:layout="@layout/preference_switch"
+		android:title="@string/speak_pedestrian" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<SwitchPreferenceCompat
+		android:key="speak_speed_limit"
+		android:layout="@layout/preference_switch"
+		android:title="@string/speak_speed_limit" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="speed_limit_exceed"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/speed_limit_exceed" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<SwitchPreferenceCompat
+		android:key="speak_cameras"
+		android:layout="@layout/preference_switch"
+		android:title="@string/speak_cameras" />
+
+	<SwitchPreferenceCompat
+		android:key="speak_tunnels"
+		android:layout="@layout/preference_switch"
+		android:title="@string/show_tunnels" />
+
+	<SwitchPreferenceCompat
+		android:key="announce_wpt"
+		android:layout="@layout/preference_switch"
+		android:title="@string/shared_string_gpx_waypoints" />
+
+	<SwitchPreferenceCompat
+		android:key="announce_nearby_favorites"
+		android:layout="@layout/preference_switch"
+		android:title="@string/speak_favorites" />
+
+	<SwitchPreferenceCompat
+		android:key="announce_nearby_poi"
+		android:layout="@layout/preference_switch"
+		android:title="@string/speak_poi" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="keep_informing"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/keep_informing" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="arrival_distance_factor"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/arrival_distance" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<PreferenceCategory
+		android:key="language_and_output"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/language_and_output" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="voice_provider"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/voice_provider"
+		tools:icon="@drawable/ic_action_volume_up" />
+
+</PreferenceScreen>

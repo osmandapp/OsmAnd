@@ -2,8 +2,8 @@ package net.osmand.aidl;
 
 import android.app.Service;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Binder;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -15,11 +15,20 @@ import net.osmand.aidl.OsmandAidlApi.GpxBitmapCreatedCallback;
 import net.osmand.aidl.OsmandAidlApi.OsmandAppInitCallback;
 import net.osmand.aidl.OsmandAidlApi.SearchCompleteCallback;
 import net.osmand.aidl.calculateroute.CalculateRouteParams;
+import net.osmand.aidl.contextmenu.ContextMenuButtonsParams;
+import net.osmand.aidl.contextmenu.RemoveContextMenuButtonsParams;
+import net.osmand.aidl.contextmenu.UpdateContextMenuButtonsParams;
+import net.osmand.aidl.copyfile.CopyFileParams;
+import net.osmand.aidl.customization.CustomizationInfoParams;
+import net.osmand.aidl.customization.OsmandSettingsInfoParams;
 import net.osmand.aidl.customization.OsmandSettingsParams;
+import net.osmand.aidl.customization.ProfileSettingsParams;
 import net.osmand.aidl.customization.SetWidgetsParams;
+import net.osmand.aidl.favorite.AFavorite;
 import net.osmand.aidl.favorite.AddFavoriteParams;
 import net.osmand.aidl.favorite.RemoveFavoriteParams;
 import net.osmand.aidl.favorite.UpdateFavoriteParams;
+import net.osmand.aidl.favorite.group.AFavoriteGroup;
 import net.osmand.aidl.favorite.group.AddFavoriteGroupParams;
 import net.osmand.aidl.favorite.group.RemoveFavoriteGroupParams;
 import net.osmand.aidl.favorite.group.UpdateFavoriteGroupParams;
@@ -27,12 +36,14 @@ import net.osmand.aidl.gpx.AGpxBitmap;
 import net.osmand.aidl.gpx.AGpxFile;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
 import net.osmand.aidl.gpx.CreateGpxBitmapParams;
+import net.osmand.aidl.gpx.GpxColorParams;
 import net.osmand.aidl.gpx.HideGpxParams;
 import net.osmand.aidl.gpx.ImportGpxParams;
 import net.osmand.aidl.gpx.RemoveGpxParams;
 import net.osmand.aidl.gpx.ShowGpxParams;
 import net.osmand.aidl.gpx.StartGpxRecordingParams;
 import net.osmand.aidl.gpx.StopGpxRecordingParams;
+import net.osmand.aidl.map.ALatLon;
 import net.osmand.aidl.map.SetMapLocationParams;
 import net.osmand.aidl.maplayer.AddMapLayerParams;
 import net.osmand.aidl.maplayer.RemoveMapLayerParams;
@@ -41,15 +52,20 @@ import net.osmand.aidl.maplayer.point.AddMapPointParams;
 import net.osmand.aidl.maplayer.point.RemoveMapPointParams;
 import net.osmand.aidl.maplayer.point.ShowMapPointParams;
 import net.osmand.aidl.maplayer.point.UpdateMapPointParams;
+import net.osmand.aidl.mapmarker.AMapMarker;
 import net.osmand.aidl.mapmarker.AddMapMarkerParams;
 import net.osmand.aidl.mapmarker.RemoveMapMarkerParams;
+import net.osmand.aidl.mapmarker.RemoveMapMarkersParams;
 import net.osmand.aidl.mapmarker.UpdateMapMarkerParams;
 import net.osmand.aidl.mapwidget.AddMapWidgetParams;
 import net.osmand.aidl.mapwidget.RemoveMapWidgetParams;
 import net.osmand.aidl.mapwidget.UpdateMapWidgetParams;
 import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
 import net.osmand.aidl.navdrawer.NavDrawerHeaderParams;
+import net.osmand.aidl.navdrawer.NavDrawerItem;
 import net.osmand.aidl.navdrawer.SetNavDrawerItemsParams;
+import net.osmand.aidl.navigation.ANavigationUpdateParams;
+import net.osmand.aidl.navigation.ANavigationVoiceRouterMessageParams;
 import net.osmand.aidl.navigation.MuteNavigationParams;
 import net.osmand.aidl.navigation.NavigateGpxParams;
 import net.osmand.aidl.navigation.NavigateParams;
@@ -66,7 +82,8 @@ import net.osmand.aidl.plugins.PluginParams;
 import net.osmand.aidl.search.SearchParams;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.tiles.ASqliteDbFile;
-import net.osmand.aidl.copyfile.CopyFileParams;
+import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
 
@@ -76,23 +93,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
 
-import static net.osmand.aidl.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
-import static net.osmand.aidl.OsmandAidlConstants.MIN_UPDATE_TIME_MS;
-import static net.osmand.aidl.OsmandAidlConstants.MIN_UPDATE_TIME_MS_ERROR;
-import static net.osmand.aidl.OsmandAidlConstants.UNKNOWN_API_ERROR;
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_CONTEXT_MENU_BUTTONS_CLICK;
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_NAV_DATA_UPDATE;
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_UPDATE;
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_VOICE_MESSAGE;
+import static net.osmand.aidlapi.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.MIN_UPDATE_TIME_MS;
+import static net.osmand.aidlapi.OsmandAidlConstants.MIN_UPDATE_TIME_MS_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.UNKNOWN_API_ERROR;
 
-public class OsmandAidlService extends Service {
+public class OsmandAidlService extends Service implements AidlCallbackListener {
 
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlService.class);
 
-	private static final String DATA_KEY_RESULT_SET = "resultSet";
-
-	private Map<Long, IOsmAndAidlCallback> callbacks;
+	private Map<Long, AidlCallbackParams> callbacks = new ConcurrentHashMap<>();
 	private Handler mHandler = null;
 	HandlerThread mHandlerThread = new HandlerThread("OsmAndAidlServiceThread");
 
-	private long updateCallbackId = 0;
+	private final AtomicLong aidlCallbackId = new AtomicLong(0);
 
 	private OsmandApplication getApp() {
 		return (OsmandApplication) getApplication();
@@ -102,8 +122,8 @@ public class OsmandAidlService extends Service {
 	private OsmandAidlApi getApi(String reason) {
 		LOG.info("Request AIDL API for " + reason);
 		OsmandAidlApi api = getApp().getAidlApi();
-		String pack = getApp().getPackageManager().getNameForUid(Binder.getCallingUid());
-		if (pack != null && !pack.equals(getApp().getPackageName()) && !api.isAppEnabled(pack)) {
+		String packName = getCallingAppPackName();
+		if (packName != null && !packName.equals(getApp().getPackageName()) && !api.isAppEnabled(packName)) {
 			return null;
 		}
 		return api;
@@ -121,14 +141,57 @@ public class OsmandAidlService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		callbacks = new ConcurrentHashMap<>();
+		OsmandAidlApi api = getApi("setting_listener");
+		if (api != null) {
+			api.aidlCallbackListener = this;
+		}
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		mHandlerThread.quit();
+
 		callbacks.clear();
+		OsmandAidlApi api = getApi("clear_listener");
+		if (api != null) {
+			api.aidlCallbackListener = null;
+		}
+		mHandlerThread.quit();
+	}
+
+	private String getCallingAppPackName() {
+		return getApp().getPackageManager().getNameForUid(Binder.getCallingUid());
+	}
+
+	private long getCallbackId() {
+		return aidlCallbackId.get();
+	}
+
+	private long getAndIncrementCallbackId() {
+		return aidlCallbackId.getAndIncrement();
+	}
+
+	@Override
+	public long addAidlCallback(IOsmAndAidlCallback callback, int key) {
+		long id = getAndIncrementCallbackId();
+		callbacks.put(id, new AidlCallbackParams(callback, key));
+		return id;
+	}
+
+	@Override
+	public boolean removeAidlCallback(long id) {
+		for (Long key : callbacks.keySet()) {
+			if (key == id) {
+				callbacks.remove(id);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public Map<Long, AidlCallbackParams> getAidlCallbacks() {
+		return callbacks;
 	}
 
 	private final IOsmAndAidlInterface.Stub mBinder = new IOsmAndAidlInterface.Stub() {
@@ -153,7 +216,13 @@ public class OsmandAidlService extends Service {
 		public boolean addFavoriteGroup(AddFavoriteGroupParams params) {
 			try {
 				OsmandAidlApi api = getApi("addFavoriteGroup");
-				return params != null && api != null && api.addFavoriteGroup(params.getFavoriteGroup());
+				if (params != null && api != null) {
+					AFavoriteGroup favoriteGroup = params.getFavoriteGroup();
+					if (favoriteGroup != null) {
+						return api.addFavoriteGroup(favoriteGroup.getName(), favoriteGroup.getColor(), favoriteGroup.isVisible());
+					}
+				}
+				return false;
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -164,7 +233,13 @@ public class OsmandAidlService extends Service {
 		public boolean removeFavoriteGroup(RemoveFavoriteGroupParams params) {
 			try {
 				OsmandAidlApi api = getApi("removeFavoriteGroup");
-				return params != null && api != null && api.removeFavoriteGroup(params.getFavoriteGroup());
+				if (params != null && api != null) {
+					AFavoriteGroup favoriteGroup = params.getFavoriteGroup();
+					if (favoriteGroup != null) {
+						return api.removeFavoriteGroup(favoriteGroup.getName());
+					}
+				}
+				return false;
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -175,7 +250,14 @@ public class OsmandAidlService extends Service {
 		public boolean updateFavoriteGroup(UpdateFavoriteGroupParams params) {
 			try {
 				OsmandAidlApi api = getApi("updateFavoriteGroup");
-				return params != null && api != null && api.updateFavoriteGroup(params.getFavoriteGroupPrev(), params.getFavoriteGroupNew());
+				if (params != null && api != null) {
+					AFavoriteGroup prevGroup = params.getFavoriteGroupPrev();
+					AFavoriteGroup newGroup = params.getFavoriteGroupNew();
+					if (prevGroup != null && newGroup != null) {
+						return api.updateFavoriteGroup(prevGroup.getName(), newGroup.getName(), newGroup.getColor(), newGroup.isVisible());
+					}
+				}
+				return false;
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -186,7 +268,13 @@ public class OsmandAidlService extends Service {
 		public boolean addFavorite(AddFavoriteParams params) {
 			try {
 				OsmandAidlApi api = getApi("addFavorite");
-				return params != null && api != null && api.addFavorite(params.getFavorite());
+				if (params != null && api != null) {
+					AFavorite fav = params.getFavorite();
+					if (fav != null) {
+						return api.addFavorite(fav.getLat(), fav.getLon(), fav.getName(), fav.getCategory(), fav.getDescription(), fav.getColor(), fav.isVisible());
+					}
+				}
+				return false;
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -197,7 +285,13 @@ public class OsmandAidlService extends Service {
 		public boolean removeFavorite(RemoveFavoriteParams params) {
 			try {
 				OsmandAidlApi api = getApi("removeFavorite");
-				return params != null && api != null && api.removeFavorite(params.getFavorite());
+				if (params != null && api != null) {
+					AFavorite fav = params.getFavorite();
+					if (fav != null) {
+						return api.removeFavorite(fav.getName(), fav.getCategory(), fav.getLat(), fav.getLon());
+					}
+				}
+				return false;
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -208,7 +302,15 @@ public class OsmandAidlService extends Service {
 		public boolean updateFavorite(UpdateFavoriteParams params) {
 			try {
 				OsmandAidlApi api = getApi("updateFavorite");
-				return params != null && api != null && api.updateFavorite(params.getFavoritePrev(), params.getFavoriteNew());
+				if (params != null && api != null) {
+					AFavorite prevFav = params.getFavoritePrev();
+					AFavorite newFav = params.getFavoriteNew();
+					if (prevFav != null && newFav != null) {
+						return api.updateFavorite(prevFav.getName(), prevFav.getCategory(), prevFav.getLat(), prevFav.getLon(),
+								newFav.getName(), newFav.getCategory(), newFav.getDescription(), newFav.getLat(), newFav.getLon());
+					}
+				}
+				return false;
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -219,7 +321,13 @@ public class OsmandAidlService extends Service {
 		public boolean addMapMarker(AddMapMarkerParams params) {
 			try {
 				OsmandAidlApi api = getApi("addMapMarker");
-				return params != null && api != null && api.addMapMarker(params.getMarker());
+				if (params != null && api != null) {
+					AMapMarker mapMarker = params.getMarker();
+					if (mapMarker != null) {
+						return api.addMapMarker(mapMarker.getName(), mapMarker.getLatLon().getLatitude(), mapMarker.getLatLon().getLongitude());
+					}
+				}
+				return false;
 			} catch (Exception e) {
 				return false;
 			}
@@ -229,7 +337,14 @@ public class OsmandAidlService extends Service {
 		public boolean removeMapMarker(RemoveMapMarkerParams params) {
 			try {
 				OsmandAidlApi api = getApi("removeMapMarker");
-				return params != null && api != null && api.removeMapMarker(params.getMarker());
+				if (params != null && api != null) {
+					AMapMarker mapMarker = params.getMarker();
+					if (mapMarker != null) {
+						ALatLon aLatLon = mapMarker.getLatLon();
+						return api.removeMapMarker(mapMarker.getName(), aLatLon.getLatitude(), aLatLon.getLongitude(), params.getIgnoreCoordinates());
+					}
+				}
+				return false;
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -240,7 +355,19 @@ public class OsmandAidlService extends Service {
 		public boolean updateMapMarker(UpdateMapMarkerParams params) {
 			try {
 				OsmandAidlApi api = getApi("updateMapMarker");
-				return params != null && api != null && api.updateMapMarker(params.getMarkerPrev(), params.getMarkerNew());
+				if (params != null && api != null) {
+					AMapMarker markerPrev = params.getMarkerPrev();
+					AMapMarker markerNew = params.getMarkerNew();
+					if (markerPrev != null && markerNew != null) {
+						ALatLon aLatLonPrev = markerPrev.getLatLon();
+						ALatLon aLatLonNew = markerNew.getLatLon();
+						LatLon prevLatLon = new LatLon(aLatLonPrev.getLatitude(), aLatLonPrev.getLongitude());
+						LatLon newLatLon = new LatLon(aLatLonNew.getLatitude(), aLatLonNew.getLongitude());
+
+						return api.updateMapMarker(markerPrev.getName(), prevLatLon, markerNew.getName(), newLatLon, params.getIgnoreCoordinates());
+					}
+				}
+				return false;
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -251,7 +378,8 @@ public class OsmandAidlService extends Service {
 		public boolean addMapWidget(AddMapWidgetParams params) {
 			try {
 				OsmandAidlApi api = getApi("addMapWidget");
-				return params != null && api != null && api.addMapWidget(params.getWidget());
+				String packName = getCallingAppPackName();
+				return params != null && api != null && api.addMapWidget(packName, new AidlMapWidgetWrapper(params.getWidget()));
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -262,7 +390,8 @@ public class OsmandAidlService extends Service {
 		public boolean removeMapWidget(RemoveMapWidgetParams params) {
 			try {
 				OsmandAidlApi api = getApi("removeMapWidget");
-				return params != null && api != null && api.removeMapWidget(params.getId());
+				String packName = getCallingAppPackName();
+				return params != null && api != null && api.removeMapWidget(packName, params.getId());
 			} catch (Exception e) {
 				return false;
 			}
@@ -272,7 +401,8 @@ public class OsmandAidlService extends Service {
 		public boolean updateMapWidget(UpdateMapWidgetParams params) {
 			try {
 				OsmandAidlApi api = getApi("updateMapWidget");
-				return params != null && api != null && api.updateMapWidget(params.getWidget());
+				String packName = getCallingAppPackName();
+				return params != null && api != null && api.updateMapWidget(packName, new AidlMapWidgetWrapper(params.getWidget()));
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -283,7 +413,8 @@ public class OsmandAidlService extends Service {
 		public boolean showMapPoint(ShowMapPointParams params) {
 			try {
 				OsmandAidlApi api = getApi("showMapPoint");
-				return params != null && api != null && api.showMapPoint(params.getLayerId(), params.getPoint());
+				String packName = getCallingAppPackName();
+				return params != null && api != null && api.showMapPoint(packName, params.getLayerId(), new AidlMapPointWrapper(params.getPoint()));
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -294,7 +425,8 @@ public class OsmandAidlService extends Service {
 		public boolean addMapPoint(AddMapPointParams params) {
 			try {
 				OsmandAidlApi api = getApi("addMapPoint");
-				return params != null && api != null && api.putMapPoint(params.getLayerId(), params.getPoint());
+				String packName = getCallingAppPackName();
+				return params != null && api != null && api.putMapPoint(packName, params.getLayerId(), new AidlMapPointWrapper(params.getPoint()));
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -305,7 +437,8 @@ public class OsmandAidlService extends Service {
 		public boolean removeMapPoint(RemoveMapPointParams params) {
 			try {
 				OsmandAidlApi api = getApi("removeMapPoint");
-				return params != null && api != null && api.removeMapPoint(params.getLayerId(), params.getPointId());
+				String packName = getCallingAppPackName();
+				return params != null && api != null && api.removeMapPoint(packName, params.getLayerId(), params.getPointId());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -316,7 +449,8 @@ public class OsmandAidlService extends Service {
 		public boolean updateMapPoint(UpdateMapPointParams params) {
 			try {
 				OsmandAidlApi api = getApi("updateMapPoint");
-				return params != null && api != null && api.putMapPoint(params.getLayerId(), params.getPoint());
+				String packName = getCallingAppPackName();
+				return params != null && api != null && api.updateMapPoint(packName, params.getLayerId(), new AidlMapPointWrapper(params.getPoint()), params.isUpdateOpenedMenuAndMap());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -327,7 +461,8 @@ public class OsmandAidlService extends Service {
 		public boolean addMapLayer(AddMapLayerParams params) {
 			try {
 				OsmandAidlApi api = getApi("addMapLayer");
-				return params != null && api != null && api.addMapLayer(params.getLayer());
+				String packName = getCallingAppPackName();
+				return params != null && api != null && api.addMapLayer(packName, new AidlMapLayerWrapper(params.getLayer()));
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -338,7 +473,8 @@ public class OsmandAidlService extends Service {
 		public boolean removeMapLayer(RemoveMapLayerParams params) {
 			try {
 				OsmandAidlApi api = getApi("removeMapLayer");
-				return params != null && api != null && api.removeMapLayer(params.getId());
+				String packName = getCallingAppPackName();
+				return params != null && api != null && api.removeMapLayer(packName, params.getId());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -349,7 +485,8 @@ public class OsmandAidlService extends Service {
 		public boolean updateMapLayer(UpdateMapLayerParams params) {
 			try {
 				OsmandAidlApi api = getApi("updateMapLayer");
-				return params != null && api != null && api.updateMapLayer(params.getLayer());
+				String packName = getCallingAppPackName();
+				return params != null && api != null && api.updateMapLayer(packName, new AidlMapLayerWrapper(params.getLayer()));
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -413,7 +550,10 @@ public class OsmandAidlService extends Service {
 		public boolean getActiveGpx(List<ASelectedGpxFile> files) {
 			try {
 				OsmandAidlApi api = getApi("getActiveGpx");
-				return api != null && api.getActiveGpx(files);
+				if (api != null && files != null) {
+					return api.getActiveGpx(files);
+				}
+				return false;
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -424,7 +564,10 @@ public class OsmandAidlService extends Service {
 		public boolean getImportedGpx(List<AGpxFile> files) {
 			try {
 				OsmandAidlApi api = getApi("getImportedGpx");
-				return api != null && api.getImportedGpx(files);
+				if (api != null && files != null) {
+					return api.getImportedGpx(files);
+				}
+				return false;
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -520,7 +663,7 @@ public class OsmandAidlService extends Service {
 		public boolean startGpxRecording(StartGpxRecordingParams params) {
 			try {
 				OsmandAidlApi api = getApi("startGpxRecording");
-				return api != null && api.startGpxRecording(params);
+				return api != null && api.startGpxRecording();
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -531,7 +674,7 @@ public class OsmandAidlService extends Service {
 		public boolean stopGpxRecording(StopGpxRecordingParams params) {
 			try {
 				OsmandAidlApi api = getApi("stopGpxRecording");
-				return api != null && api.stopGpxRecording(params);
+				return api != null && api.stopGpxRecording();
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -666,7 +809,10 @@ public class OsmandAidlService extends Service {
 		public boolean setNavDrawerItems(SetNavDrawerItemsParams params) {
 			try {
 				OsmandAidlApi api = getApi("setNavDrawerItems");
-				return params != null && api != null && api.setNavDrawerItems(params.getAppPackage(), params.getItems());
+				if (api != null && params != null) {
+					return api.setNavDrawerItems(params.getAppPackage(), convertNavDrawerItems(params.getItems()));
+				}
+				return false;
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -680,13 +826,15 @@ public class OsmandAidlService extends Service {
 				return params != null && api != null && api.search(params.getSearchQuery(), params.getSearchType(),
 						params.getLatitude(), params.getLongitude(), params.getRadiusLevel(), params.getTotalLimit(), new SearchCompleteCallback() {
 							@Override
-							public void onSearchComplete(List<SearchResult> resultSet) {
-								Bundle data = new Bundle();
-								if (resultSet.size() > 0) {
-									data.putParcelableArrayList(DATA_KEY_RESULT_SET, new ArrayList<>(resultSet));
-								}
+							public void onSearchComplete(List<AidlSearchResultWrapper> resultSet) {
 								try {
-									callback.onSearchComplete(resultSet);
+									List<SearchResult> searchResults = new ArrayList<>();
+									for (AidlSearchResultWrapper item : resultSet) {
+										SearchResult result = new SearchResult(item.getLatitude(), item.getLongitude(), item.getLocalName(),
+												item.getLocalTypeName(), item.getAlternateName(), item.getOtherNames());
+										searchResults.add(result);
+									}
+									callback.onSearchComplete(searchResults);
 								} catch (RemoteException e) {
 									handleException(e);
 								}
@@ -716,10 +864,9 @@ public class OsmandAidlService extends Service {
 		public long registerForUpdates(long updateTimeMS, IOsmAndAidlCallback callback) {
 			try {
 				if (updateTimeMS >= MIN_UPDATE_TIME_MS) {
-					updateCallbackId++;
-					callbacks.put(updateCallbackId, callback);
-					startRemoteUpdates(updateTimeMS, updateCallbackId, callback);
-					return updateCallbackId;
+					long id = addAidlCallback(callback, KEY_ON_UPDATE);
+					startRemoteUpdates(updateTimeMS, id, callback);
+					return id;
 				} else {
 					return MIN_UPDATE_TIME_MS_ERROR;
 				}
@@ -732,7 +879,7 @@ public class OsmandAidlService extends Service {
 		@Override
 		public boolean unregisterFromUpdates(long callbackId) {
 			try {
-				return callbacks.remove(callbackId) != null;
+				return removeAidlCallback(callbackId);
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -910,7 +1057,8 @@ public class OsmandAidlService extends Service {
 		public boolean setNavDrawerFooterWithParams(NavDrawerFooterParams params) {
 			try {
 				OsmandAidlApi api = getApi("setNavDrawerFooterParams");
-				return api != null && api.setNavDrawerFooterWithParams(params);
+				return api != null && api.setNavDrawerFooterWithParams(
+						params.getAppName(), params.getPackageName(), params.getIntent());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -932,7 +1080,7 @@ public class OsmandAidlService extends Service {
 		public boolean changePluginState(PluginParams params) {
 			try {
 				OsmandAidlApi api = getApi("changePluginState");
-				return api != null && api.changePluginState(params);
+				return api != null && api.changePluginState(params.getPluginId(), params.getNewState());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -965,9 +1113,9 @@ public class OsmandAidlService extends Service {
 				OsmandAidlApi api = getApi("getBitmapForGpx");
 				return params != null && api != null && api.getBitmapForGpx(params.getGpxUri(), params.getDensity(), params.getWidthPixels(), params.getHeightPixels(), params.getColor(), new GpxBitmapCreatedCallback() {
 					@Override
-					public void onGpxBitmapCreatedComplete(AGpxBitmap aGpxBitmap) {
+					public void onGpxBitmapCreatedComplete(Bitmap gpxBitmap) {
 						try {
-							callback.onGpxBitmapCreated(aGpxBitmap);
+							callback.onGpxBitmapCreated(new AGpxBitmap(gpxBitmap));
 						} catch (RemoteException e) {
 							handleException(e);
 						}
@@ -980,17 +1128,279 @@ public class OsmandAidlService extends Service {
 		}
 
 		@Override
-		public int copyFile(CopyFileParams copyFileParams) {
+		public int copyFile(CopyFileParams params) {
 			try {
 				OsmandAidlApi api = getApi("copyFile");
 				if (api == null) {
 					return CANNOT_ACCESS_API_ERROR;
 				}
-				return api.copyFile(copyFileParams);
+				return api.copyFile(params.getFileName(), params.getFilePartData(), params.getStartTime(), params.isDone());
 			} catch (Exception e) {
 				handleException(e);
 				return UNKNOWN_API_ERROR;
 			}
 		}
+
+		@Override
+		public long registerForNavigationUpdates(ANavigationUpdateParams params, final IOsmAndAidlCallback callback) {
+			try {
+				OsmandAidlApi api = getApi("registerForNavUpdates");
+				if (api != null) {
+					if (!params.isSubscribeToUpdates() && params.getCallbackId() != -1) {
+						api.unregisterFromUpdates(params.getCallbackId());
+						removeAidlCallback(params.getCallbackId());
+						return -1;
+					} else {
+						long id = addAidlCallback(callback, KEY_ON_NAV_DATA_UPDATE);
+						api.registerForNavigationUpdates(id);
+						return id;
+					}
+				} else {
+					return -1;
+				}
+			} catch (Exception e) {
+				handleException(e);
+				return UNKNOWN_API_ERROR;
+			}
+		}
+
+		@Override
+		public long addContextMenuButtons(ContextMenuButtonsParams params, final IOsmAndAidlCallback callback) {
+			try {
+				OsmandAidlApi api = getApi("addContextMenuButtons");
+				if (api != null && params != null) {
+					long callbackId = params.getCallbackId();
+					if (callbackId == -1 || !callbacks.containsKey(callbackId)) {
+						callbackId = addAidlCallback(callback, KEY_ON_CONTEXT_MENU_BUTTONS_CLICK);
+						params.setCallbackId(callbackId);
+					}
+					boolean buttonsAdded = api.addContextMenuButtons(new AidlContextMenuButtonsWrapper(params), callbackId);
+					return buttonsAdded ? callbackId : -1;
+				} else {
+					return -1;
+				}
+			} catch (Exception e) {
+				handleException(e);
+				return UNKNOWN_API_ERROR;
+			}
+		}
+
+		@Override
+		public boolean removeContextMenuButtons(RemoveContextMenuButtonsParams params) {
+			try {
+				OsmandAidlApi api = getApi("removeContextMenuButtons");
+				if (params != null && api != null) {
+					long callbackId = params.getCallbackId();
+					removeAidlCallback(callbackId);
+					return api.removeContextMenuButtons(params.getParamsId(), callbackId);
+				}
+				return false;
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
+		public boolean updateContextMenuButtons(UpdateContextMenuButtonsParams params) {
+			try {
+				OsmandAidlApi api = getApi("updateContextMenuButtons");
+				if (params != null && api != null) {
+					ContextMenuButtonsParams buttonsParams = params.getContextMenuButtonsParams();
+					return api.updateContextMenuButtons(new AidlContextMenuButtonsWrapper(buttonsParams), buttonsParams.getCallbackId());
+				}
+				return false;
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean areOsmandSettingsCustomized(OsmandSettingsInfoParams params) {
+			try {
+				OsmandAidlApi api = getApi("areOsmandSettingsCustomized");
+				return api != null && api.areOsmandSettingsCustomized(params.getSharedPreferencesName());
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean setCustomization(CustomizationInfoParams params) {
+			try {
+				OsmandAidlApi api = getApi("setCustomization");
+				if (api != null && params != null) {
+					OsmandAidlService.this.setCustomization(api, params);
+					return true;
+				}
+				return false;
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public long registerForVoiceRouterMessages(ANavigationVoiceRouterMessageParams params, final IOsmAndAidlCallback callback) {
+			try {
+				OsmandAidlApi api = getApi("registerForVoiceRouterMessages");
+				if (api != null) {
+					if (!params.isSubscribeToUpdates() && params.getCallbackId() != -1) {
+						api.unregisterFromVoiceRouterMessages(params.getCallbackId());
+						removeAidlCallback(params.getCallbackId());
+						return -1;
+					} else {
+						long id = addAidlCallback(callback, KEY_ON_VOICE_MESSAGE);
+						api.registerForVoiceRouterMessages(id);
+						return id;
+					}
+				} else {
+					return -1;
+				}
+			} catch (Exception e) {
+				handleException(e);
+				return UNKNOWN_API_ERROR;
+			}
+		}
+
+		@Override
+		public boolean removeAllActiveMapMarkers(RemoveMapMarkersParams params) {
+			try {
+				OsmandAidlApi api = getApi("removeAllActiveMapMarkers");
+				return api != null && api.removeAllActiveMapMarkers();
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean getGpxColor(GpxColorParams params) {
+			try {
+				OsmandAidlApi api = getApi("getGpxColor");
+				if (api != null && params != null) {
+					String colorName = api.getGpxColor(params.getFileName());
+					params.setGpxColor(colorName);
+					return true;
+				}
+				return false;
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean importProfile(ProfileSettingsParams params) {
+			try {
+				OsmandAidlApi api = getApi("importProfile");
+				return api != null && api.importProfile(params.getProfileSettingsUri(), params.getLatestChanges(), params.getVersion());
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
 	};
+
+	private void setCustomization(OsmandAidlApi api, CustomizationInfoParams params) {
+		NavDrawerHeaderParams navDrawerHeaderParams = params.getNavDrawerHeaderParams();
+		NavDrawerFooterParams navDrawerFooterParams = params.getNavDrawerFooterParams();
+		SetNavDrawerItemsParams navDrawerItemsParams = params.getNavDrawerItemsParams();
+
+		setNavDrawerParams(api, navDrawerHeaderParams, navDrawerFooterParams, navDrawerItemsParams);
+
+		OsmandSettingsParams settingsParams = params.getSettingsParams();
+		if (settingsParams != null) {
+			api.customizeOsmandSettings(settingsParams.getSharedPreferencesName(), settingsParams.getBundle());
+		}
+
+		ArrayList<SetWidgetsParams> visibilityWidgetsParams = params.getVisibilityWidgetsParams();
+		ArrayList<SetWidgetsParams> availabilityWidgetsParams = params.getAvailabilityWidgetsParams();
+
+		regWidgetsVisibility(api, visibilityWidgetsParams);
+		regWidgetsAvailability(api, availabilityWidgetsParams);
+
+		ArrayList<PluginParams> pluginsParams = params.getPluginsParams();
+		if (pluginsParams != null) {
+			changePluginsStatus(api, pluginsParams);
+		}
+
+		List<String> enabledIds = params.getFeaturesEnabledIds();
+		List<String> disabledIds = params.getFeaturesDisabledIds();
+
+		api.setEnabledIds(enabledIds);
+		api.setDisabledIds(disabledIds);
+
+		List<String> enabledPatterns = params.getFeaturesEnabledPatterns();
+		List<String> disabledPatterns = params.getFeaturesDisabledPatterns();
+
+		api.setEnabledPatterns(enabledPatterns);
+		api.setDisabledPatterns(disabledPatterns);
+	}
+
+	private void setNavDrawerParams(OsmandAidlApi api, NavDrawerHeaderParams navDrawerHeaderParams, NavDrawerFooterParams navDrawerFooterParams, SetNavDrawerItemsParams navDrawerItemsParams) {
+		if (navDrawerHeaderParams != null) {
+			api.setNavDrawerLogoWithParams(navDrawerHeaderParams.getImageUri(), navDrawerHeaderParams.getPackageName(), navDrawerHeaderParams.getIntent());
+		}
+		if (navDrawerFooterParams != null) {
+			api.setNavDrawerFooterWithParams(navDrawerFooterParams.getAppName(), navDrawerFooterParams.getPackageName(), navDrawerFooterParams.getIntent());
+		}
+		if (navDrawerItemsParams != null) {
+			api.setNavDrawerItems(navDrawerItemsParams.getAppPackage(), convertNavDrawerItems(navDrawerItemsParams.getItems()));
+		}
+	}
+
+	private void regWidgetsVisibility(OsmandAidlApi api, ArrayList<SetWidgetsParams> visibilityWidgetsParams) {
+		for (SetWidgetsParams setWidgetsParams : visibilityWidgetsParams) {
+			api.regWidgetVisibility(setWidgetsParams.getWidgetKey(), setWidgetsParams.getAppModesKeys());
+		}
+	}
+
+	private void regWidgetsAvailability(OsmandAidlApi api, ArrayList<SetWidgetsParams> availabilityWidgetsParams) {
+		for (SetWidgetsParams setWidgetsParams : availabilityWidgetsParams) {
+			api.regWidgetAvailability(setWidgetsParams.getWidgetKey(), setWidgetsParams.getAppModesKeys());
+		}
+	}
+
+	public void changePluginsStatus(OsmandAidlApi api, List<PluginParams> pluginsParams) {
+		for (PluginParams pluginParams : pluginsParams) {
+			api.changePluginState(pluginParams.getPluginId(), pluginParams.getNewState());
+		}
+	}
+
+	private List<OsmAndAppCustomization.NavDrawerItem> convertNavDrawerItems(List<NavDrawerItem> drawerItems) {
+		List<OsmAndAppCustomization.NavDrawerItem> customizationItems = new ArrayList<>();
+		for (NavDrawerItem item : drawerItems) {
+			customizationItems.add(new OsmAndAppCustomization.NavDrawerItem(item.getName(), item.getUri(), item.getIconName(), item.getFlags()));
+		}
+		return customizationItems;
+	}
+
+	public static class AidlCallbackParams {
+		private IOsmAndAidlCallback callback;
+		private long key;
+
+		AidlCallbackParams(IOsmAndAidlCallback callback, long key) {
+			this.callback = callback;
+
+			this.key = key;
+		}
+
+		public IOsmAndAidlCallback getCallback() {
+			return callback;
+		}
+
+		public void setCallback(IOsmAndAidlCallback callback) {
+			this.callback = callback;
+		}
+
+		public long getKey() {
+			return key;
+		}
+
+		public void setKey(long key) {
+			this.key = key;
+		}
+	}
 }

@@ -55,7 +55,7 @@
             android:gravity="left"
             android:text="@string/quick_action_add_category"
             android:textAllCaps="true"
-            android:textColor="@color/dashboard_blue"
+            android:textColor="@color/active_color_primary_light"
             android:textSize="@dimen/default_list_text_size" />
 
     </LinearLayout>

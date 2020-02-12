@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:title="@string/monitoring_settings">
+
+	<PreferenceCategory
+		android:key="navigation"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/shared_string_navigation" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="save_track_to_gpx"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/save_track_to_gpx"
+		tools:icon="@drawable/ic_action_gdirections_dark" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="save_track_interval"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/save_track_interval"
+		tools:icon="@drawable/ic_action_time_span"
+		tools:summary="3 seconds" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<PreferenceCategory
+		android:key="logging_accuracy"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/save_track_logging_accuracy" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="save_global_track_interval"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/save_global_track_interval"
+		android:persistent="false"
+		tools:icon="@drawable/ic_action_time_span"
+		tools:summary="3 seconds" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="save_track_min_distance"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/monitoring_min_distance"
+		tools:summary="Not selected" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="save_track_precision"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/monitoring_min_accuracy"
+		tools:summary="50 m" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="save_track_min_speed"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/monitoring_min_speed"
+		tools:summary="Not selected" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="auto_split_recording"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/auto_split_recording_title" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="disable_recording_once_app_killed"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/disable_recording_once_app_killed" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="save_heading_to_gpx"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/save_heading" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="track_storage_directory"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/track_storage_directory"
+		tools:icon="@drawable/ic_action_folder"
+		tools:summary="Not selected" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="show_trip_recording_notification"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/monitoring_notification"
+		tools:icon="@drawable/ic_action_notification" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="live_monitoring"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/live_monitoring"
+		app:fragment="net.osmand.plus.settings.LiveMonitoringFragment"
+		tools:icon="@drawable/ic_world_globe_dark" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<Preference
+		android:key="open_tracks_description"
+		android:layout="@layout/preference_description"
+		android:persistent="false"
+		android:selectable="false"
+		android:title="@string/tracks_view_descr" />
+
+	<Preference
+		android:key="open_tracks"
+		android:layout="@layout/preference_button"
+		android:persistent="false"
+		android:title="@string/shared_string_tracks"
+		tools:icon="@drawable/ic_action_folder" />
+
+	<Preference
+		android:layout="@layout/divider_half_item"
+		android:selectable="false" />
+
+	<Preference
+		android:key="reset_to_default"
+		android:layout="@layout/preference_button"
+		android:persistent="false"
+		android:title="@string/reset_plugin_to_default"
+		tools:icon="@drawable/ic_action_reset_to_default_dark" />
+
+	<Preference
+		android:key="copy_plugin_settings"
+		android:layout="@layout/preference_button"
+		android:persistent="false"
+		android:title="@string/copy_from_other_profile"
+		tools:icon="@drawable/ic_action_copy" />
+
+</PreferenceScreen>

@@ -328,14 +328,14 @@ public class FavoritesSearchFragment extends DialogFragment {
 			Set<?> flt = filter;
 			for (FavoriteGroup key : gs) {
 				if (flt == null || flt.contains(key)) {
-					for (FavouritePoint p : key.points) {
+					for (FavouritePoint p : key.getPoints()) {
 						if (p.isVisible()) {
 							points.add(p);
 						}
 					}
 				} else {
 					ArrayList<FavouritePoint> list = new ArrayList<>();
-					for (FavouritePoint p : key.points) {
+					for (FavouritePoint p : key.getPoints()) {
 						if (p.isVisible() && flt.contains(p)) {
 							list.add(p);
 						}
@@ -456,8 +456,8 @@ public class FavoritesSearchFragment extends DialogFragment {
 					TextView title = (TextView) view.findViewById(R.id.title);
 					TextView subtitle = (TextView) view.findViewById(R.id.subtitle);
 
-					imageView.setImageDrawable(FavoriteImageDrawable.getOrCreate(activity, point.getColor(), false));
-					title.setText(point.getName());
+					imageView.setImageDrawable(FavoriteImageDrawable.getOrCreate(activity, point.getColor(), false, point));
+					title.setText(point.getDisplayName(app));
 
 					int dist = (int) (MapUtils.getDistance(point.getLatitude(), point.getLongitude(),
 							location.getLatitude(), location.getLongitude()));
@@ -468,7 +468,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 					distanceText.setText(distance);
 					distanceText.setTextColor(app.getResources().getColor(R.color.color_distance));
 
-					subtitle.setText(point.getCategory().length() == 0 ? app.getString(R.string.shared_string_favorites) : point.getCategory());
+					subtitle.setText(point.getCategory().length() == 0 ? app.getString(R.string.shared_string_favorites) : point.getCategoryDisplayName(app));
 				}
 			}
 			View divider = view.findViewById(R.id.divider);
@@ -517,15 +517,15 @@ public class FavoritesSearchFragment extends DialogFragment {
 				String cs = constraint.toString().toLowerCase();
 				for (FavoriteGroup g : helper.getFavoriteGroups()) {
 					String gName;
-					if (Algorithms.isEmpty(g.name)) {
+					if (Algorithms.isEmpty(g.getName())) {
 						gName = favorites;
 					} else {
-						gName = g.name.toLowerCase();
+						gName = g.getName().toLowerCase();
 					}
-					if (g.visible && gName.contains(cs)) {
+					if (g.isVisible() && gName.contains(cs)) {
 						filter.add(g);
 					} else {
-						for (FavouritePoint fp : g.points) {
+						for (FavouritePoint fp : g.getPoints()) {
 							if (fp.isVisible() && fp.getName().toLowerCase().contains(cs)) {
 								filter.add(fp);
 							}

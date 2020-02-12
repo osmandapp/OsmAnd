@@ -1,7 +1,9 @@
 package net.osmand.plus.mapmarkers;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 
+import net.osmand.data.FavouritePoint;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.FavouritesDbHelper.FavoritesListener;
@@ -38,6 +40,10 @@ public class AddFavouritesGroupBottomSheetDialogFragment extends AddGroupBottomS
 						adapter.notifyDataSetChanged();
 					}
 				}
+
+				@Override
+				public void onFavoriteDataUpdated(@NonNull FavouritePoint favouritePoint) {
+				}
 			});
 		}
 		return new FavouritesGroupsAdapter(getContext(), favouritesDbHelper.getFavoriteGroups());
@@ -46,8 +52,8 @@ public class AddFavouritesGroupBottomSheetDialogFragment extends AddGroupBottomS
 	@Override
 	protected void onItemClick(int position) {
 		FavoriteGroup group = favouritesDbHelper.getFavoriteGroups().get(position - 1);
-		if (!group.visible) {
-			favouritesDbHelper.editFavouriteGroup(group, group.name, group.color, true);
+		if (!group.isVisible()) {
+			favouritesDbHelper.editFavouriteGroup(group, group.getName(), group.getColor(), true);
 		}
 		getMyApplication().getMapMarkersHelper().addOrEnableGroup(group);
 		dismiss();

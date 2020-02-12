@@ -14,8 +14,8 @@ public abstract class OsmAndListFragment extends ListFragment {
 		super.onActivityCreated(savedInstanceState);
 		getListView().setBackgroundColor(
 				getResources().getColor(
-						getMyApplication().getSettings().isLightContent() ? R.color.bg_color_light
-								: R.color.bg_color_dark));
+						getMyApplication().getSettings().isLightContent() ? R.color.list_background_color_light
+								: R.color.list_background_color_dark));
 	}
 	
 	public abstract ArrayAdapter<?> getAdapter();

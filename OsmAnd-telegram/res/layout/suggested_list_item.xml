@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/divider_top"
+        android:layout_width="match_parent"
+        android:layout_height="26dp" />
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/shared_chat_card_bg"
+        android:orientation="vertical">
+
+        <net.osmand.telegram.ui.views.TextViewEx
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:gravity="start|center_vertical"
+            android:paddingStart="@dimen/content_padding_standard"
+            android:paddingLeft="@dimen/content_padding_half"
+            android:paddingRight="@dimen/content_padding_half"
+            android:text="@string/shared_string_suggested"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="@dimen/hint_text_size"
+            app:typeface="@string/font_roboto_mono_bold"
+            tools:text="Suggested" />
+
+        <LinearLayout
+            android:id="@+id/last_items_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/card_divider_color"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+</LinearLayout>

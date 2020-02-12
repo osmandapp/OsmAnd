@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.view.ContextThemeWrapper;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 
 import java.util.List;
@@ -28,17 +29,17 @@ import java.util.List;
 public class AddQuickActionDialog extends DialogFragment {
 
     public static final String TAG = AddQuickActionDialog.class.getSimpleName();
+    
+    private boolean isLightContent;
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         OsmandApplication application = (OsmandApplication) getActivity().getApplication();
-        boolean light = application.getSettings().isLightContent() && !application.getDaynightHelper().isNightMode();
+        isLightContent = application.getSettings().isLightContent() && !application.getDaynightHelper().isNightMode();
 
-        return new Dialog(new ContextThemeWrapper(getActivity(), light
-                ? R.style.Dialog90Light
-                : R.style.Dialog90Dark), getTheme());
+        return new Dialog(UiUtilities.getThemedContext(getActivity(), !isLightContent, R.style.Dialog90Light, R.style.Dialog90Dark), getTheme());
     }
 
     @Nullable
@@ -52,12 +53,16 @@ public class AddQuickActionDialog extends DialogFragment {
                 .getQuickActionRegistry()
                 .getQuickActions();
 
-        View root = inflater.inflate(R.layout.quick_action_add_dialog, container, false);
+        View root = UiUtilities.getInflater(getActivity(), !isLightContent).inflate(R.layout.quick_action_add_dialog, container, false);
         Adapter adapter = new Adapter(QuickActionFactory.produceTypeActionsListWithHeaders(active));
 
+        TextView tvTitle = root.findViewById(R.id.tvTitle);
         RecyclerView recyclerView = (RecyclerView) root.findViewById(R.id.recycler_view);
         Button btnDismiss = (Button) root.findViewById(R.id.btnDismiss);
 
+        tvTitle.setTextColor(ContextCompat.getColor(getContext(),
+                isLightContent ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
+        
         btnDismiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -147,6 +152,8 @@ public class AddQuickActionDialog extends DialogFragment {
                 ItemViewHolder itemHolder = (ItemViewHolder) holder;
 
                 itemHolder.title.setText(action.getNameRes());
+                itemHolder.title.setTextColor(ContextCompat.getColor(getContext(), 
+                        isLightContent ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
                 itemHolder.icon.setImageResource(action.getIconRes());
 
                 itemHolder.itemView.setOnClickListener(new View.OnClickListener() {

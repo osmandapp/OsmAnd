@@ -82,7 +82,6 @@ import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.DownloadedRegionsLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.controls.DynamicListView;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 
 import java.lang.ref.WeakReference;
@@ -103,8 +102,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 
 	private final DashFragmentData[] fragmentsData = new DashFragmentData[]{
-			new DashFragmentData(DashRateUsFragment.TAG, DashRateUsFragment.class,
-					DashRateUsFragment.SHOULD_SHOW_FUNCTION, 0, null),
 			new DashFragmentData(DashDashboardOrDrawerFragment.TAG, DashDashboardOrDrawerFragment.class,
 					DashDashboardOrDrawerFragment.SHOULD_SHOW_FUNCTION, 5, null),
 			new DashFragmentData(DashErrorFragment.TAG, DashErrorFragment.class,
@@ -226,6 +223,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			@Override
 			public void onClick(View v) {
 				hideDashboard();
+				mapActivity.dismissSettingsScreens();
 			}
 		};
 		toolbar = ((Toolbar) dashboardView.findViewById(R.id.toolbar));
@@ -655,10 +653,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private void applyDayNightMode() {
 		final int backgroundColor;
 		backgroundColor = ContextCompat.getColor(mapActivity,
-				nightMode ? R.color.ctx_menu_info_view_bg_dark
-						: R.color.ctx_menu_info_view_bg_light);
+				nightMode ? R.color.activity_background_color_dark
+						: R.color.activity_background_color_light);
 		Drawable dividerDrawable = new ColorDrawable(ContextCompat.getColor(mapActivity,
-				nightMode ? R.color.dashboard_divider_dark : R.color.dashboard_divider_light));
+				nightMode ? R.color.divider_color_dark : R.color.divider_color_light));
 
 		if (listBackgroundView != null) {
 			listBackgroundView.setBackgroundColor(backgroundColor);
@@ -913,7 +911,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			Animator circleAnimator = ViewAnimationUtils.createCircularReveal(content, centerX, centerY, initialRadius, finalRadius);
 			animators.add(circleAnimator);
 		}
-		float initialValueScale = show ? 0f : 1f;
+		final float initialValueScale = show ? 0f : 1f;
 		float finalValueScale = show ? 1f : 0f;
 		animators.add(ObjectAnimator.ofFloat(content, View.SCALE_X, initialValueScale, finalValueScale));
 		animators.add(ObjectAnimator.ofFloat(content, View.SCALE_Y, initialValueScale, finalValueScale));
@@ -946,6 +944,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					content.setTranslationX(0);
 					content.setTranslationY(0);
 					toolbar.setTranslationY(0);
+					content.setScaleX(initialValueScale);
+					content.setScaleY(initialValueScale);
 				}
 			}
 		});
@@ -1056,6 +1056,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			setDashboardVisibility(true, previousVisibleType);
 		} else {
 			hideDashboard();
+			mapActivity.backToConfigureProfileFragment();
 		}
 	}
 

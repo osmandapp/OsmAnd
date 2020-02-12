@@ -19,6 +19,7 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -99,6 +100,8 @@ public class ShowHidePoiAction extends QuickAction {
 	@Override
 	public void execute(MapActivity activity) {
 
+		activity.closeQuickSearch();
+
 		PoiFiltersHelper pf = activity.getMyApplication().getPoiFilters();
 		List<PoiUIFilter> poiFilters = loadPoiFilters(activity.getMyApplication().getPoiFilters());
 
@@ -108,7 +111,7 @@ public class ShowHidePoiAction extends QuickAction {
 
 			for (PoiUIFilter filter : poiFilters) {
 				if (filter.isStandardFilter()) {
-					filter.setFilterByName(null);
+					filter.removeUnsavedFilterByName();
 				}
 				pf.addSelectedPoiFilter(filter);
 			}
@@ -135,9 +138,8 @@ public class ShowHidePoiAction extends QuickAction {
 
 	@Override
 	public void drawUI(ViewGroup parent, final MapActivity activity) {
-
-		View view = LayoutInflater.from(parent.getContext())
-				.inflate(R.layout.quick_action_show_hide_poi, parent, false);
+		boolean nightMode = activity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		View view = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.quick_action_show_hide_poi, parent, false);
 
 		RecyclerView list = (RecyclerView) view.findViewById(R.id.list);
 		Button addFilter = (Button) view.findViewById(R.id.btnAddCategory);
@@ -281,16 +283,13 @@ public class ShowHidePoiAction extends QuickAction {
 
 		final List<PoiUIFilter> list = new ArrayList<>();
 
-		for (PoiUIFilter f : poiFilters.getTopDefinedPoiFilters()) {
-			addFilterToList(adapter, list, f);
-		}
-		for (PoiUIFilter f : poiFilters.getSearchPoiFilters()) {
+		for (PoiUIFilter f : poiFilters.getSortedPoiFilters(true)) {
 			addFilterToList(adapter, list, f);
 		}
 
-		final ArrayAdapter<ContextMenuItem> listAdapter =
-				adapter.createListAdapter(activity, app.getSettings().isLightContent());
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		boolean nightMode = activity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(activity, !nightMode);
+		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

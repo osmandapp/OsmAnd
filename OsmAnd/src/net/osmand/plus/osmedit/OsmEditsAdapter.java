@@ -176,7 +176,7 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 		}
 	}
 
-	private void bindOsmEditViewHolder(final OsmEditViewHolder holder, final OsmPoint osmEdit, int position) {
+	private void bindOsmEditViewHolder(final OsmEditViewHolder holder, final OsmPoint osmEdit, final int position) {
 		setupBackground(holder.mainView);
 		holder.titleTextView.setText(getTitle(osmEdit));
 		holder.descriptionTextView.setText(getDescription(osmEdit));
@@ -219,7 +219,7 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 					holder.selectCheckBox.performClick();
 				} else {
 					if (listener != null) {
-						listener.onItemShowMap(osmEdit);
+						listener.onItemShowMap(osmEdit, position);
 					}
 				}
 
@@ -350,7 +350,7 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 
 		void onItemSelect(OsmPoint point, boolean checked);
 
-		void onItemShowMap(OsmPoint point);
+		void onItemShowMap(OsmPoint point, int position);
 
 		void onOptionsClick(OsmPoint note);
 	}

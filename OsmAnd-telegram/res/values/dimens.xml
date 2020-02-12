@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<dimen name="app_bar_title_padding_small">8dp</dimen>
+	<dimen name="app_bar_title_padding_big">14dp</dimen>
+	<dimen name="content_padding_tiny">2dp</dimen>
 	<dimen name="content_padding_small">4dp</dimen>
 	<dimen name="content_padding_half">8dp</dimen>
 	<dimen name="content_padding_standard">16dp</dimen>
@@ -44,22 +47,24 @@
 	<dimen name="list_item_baseline_to_top_height_big">28dp</dimen>
 
 	<dimen name="list_view_bottom_padding">52dp</dimen>
+	<dimen name="list_view_bottom_padding_big">140dp</dimen>
 
 	<dimen name="card_divider_bottom_margin">6dp</dimen>
 
 	<dimen name="image_button_padding">12dp</dimen>
 
-	<dimen name="my_location_image_height">168dp</dimen>
+	<dimen name="my_location_image_height">148dp</dimen>
 	<dimen name="my_location_text_sides_margin">32dp</dimen>
 	<dimen name="my_location_user_icon_size">60dp</dimen>
 
-	<dimen name="timeline_user_icon_size">56dp</dimen>
+	<dimen name="timeline_user_icon_size">84dp</dimen>
 	<dimen name="timeline_time_buttons_height">50dp</dimen>
 
 	<dimen name="disable_sharing_image_height">132dp</dimen>
 	<dimen name="disable_sharing_icon_top_margin">30dp</dimen>
 
 	<dimen name="search_box_height">48dp</dimen>
+	<dimen name="empty_state_descr_margin">68dp</dimen>
 
 	<dimen name="buttons_bottom_bar_height">56dp</dimen>
 
@@ -72,6 +77,10 @@
 	
 	<dimen name="list_popup_window_height">300dp</dimen>
 
+	<dimen name="proxy_save_button_height">60dp</dimen>
+
+	<dimen name="map_bottom_padding">18dp</dimen>
+	<dimen name="map_height">112dp</dimen>
 	<!-- Text sizes -->
 
 	<dimen name="dialog_title_text_size">22sp</dimen>
@@ -84,6 +93,7 @@
 
 	<dimen name="list_item_title_text_size">16sp</dimen>
 	<dimen name="list_item_description_text_size">13sp</dimen>
+	<dimen name="list_item_description_text_size_small">12sp</dimen>
 
 	<dimen name="text_button_text_size">15sp</dimen>
 

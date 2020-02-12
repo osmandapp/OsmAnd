@@ -12,9 +12,11 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.SwitchableAction;
@@ -148,16 +150,18 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 		return new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				OsmandApplication app = activity.getMyApplication();
 
-				final OsmandSettings settings = activity.getMyApplication().getSettings();
 				final LinkedHashMap<String, String> entriesMap = new LinkedHashMap<>();
 
 				entriesMap.put(LAYER_OSM_VECTOR, activity.getString(R.string.vector_data));
-				entriesMap.putAll(settings.getTileSourceEntries());
+				entriesMap.putAll(app.getSettings().getTileSourceEntries());
 
 				final List<Map.Entry<String, String>> entriesMapList = new ArrayList<>(entriesMap.entrySet());
 
-				AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+				boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+				Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
+				AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 
 				final String[] items = new String[entriesMapList.size()];
 				int i = 0;
@@ -166,7 +170,7 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 					items[i++] = entry.getValue();
 				}
 
-				final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(activity, R.layout.dialog_text_item);
+				final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(themedContext, R.layout.dialog_text_item);
 
 				arrayAdapter.addAll(items);
 				builder.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {

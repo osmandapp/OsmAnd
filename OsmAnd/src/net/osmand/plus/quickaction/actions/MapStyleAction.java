@@ -12,6 +12,7 @@ import android.widget.Toast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
@@ -20,6 +21,7 @@ import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,21 +44,26 @@ public class MapStyleAction extends SwitchableAction<String> {
 
 	@Override
 	public void execute(MapActivity activity) {
-
 		List<String> mapStyles = getFilteredStyles();
-		boolean showBottomSheetStyles = Boolean.valueOf(getParams().get(KEY_DIALOG));
-		if (showBottomSheetStyles) {
-			showChooseDialog(activity.getSupportFragmentManager());
-			return;
-		}
-		String curStyle = activity.getMyApplication().getSettings().RENDERER.get();
-		int index = mapStyles.indexOf(curStyle);
-		String nextStyle = mapStyles.get(0);
+		if (!Algorithms.isEmpty(mapStyles)) {
+			boolean showBottomSheetStyles = Boolean.valueOf(getParams().get(KEY_DIALOG));
+			if (showBottomSheetStyles) {
+				showChooseDialog(activity.getSupportFragmentManager());
+				return;
+			}
+			String curStyle = activity.getMyApplication().getSettings().RENDERER.get();
+			int index = mapStyles.indexOf(curStyle);
+			String nextStyle = mapStyles.get(0);
 
-		if (index >= 0 && index + 1 < mapStyles.size()) {
-			nextStyle = mapStyles.get(index + 1);
+			if (index >= 0 && index + 1 < mapStyles.size()) {
+				nextStyle = mapStyles.get(index + 1);
+			}
+			executeWithParams(activity, nextStyle);
+		} else {
+			Toast.makeText(activity, R.string.quick_action_need_to_add_item_to_list,
+				Toast.LENGTH_LONG).show();
 		}
-		executeWithParams(activity, nextStyle);
+
 	}
 
 	@Override
@@ -128,11 +135,13 @@ public class MapStyleAction extends SwitchableAction<String> {
 		return new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				final OsmandApplication app = activity.getMyApplication();
+				boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+				Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 
-				AlertDialog.Builder bld = new AlertDialog.Builder(activity);
+				AlertDialog.Builder bld = new AlertDialog.Builder(themedContext);
 				bld.setTitle(R.string.renderers);
 
-				final OsmandApplication app = activity.getMyApplication();
 				final List<String> visibleNamesList = new ArrayList<>();
 				final ArrayList<String> items = new ArrayList<>(app.getRendererRegistry().getRendererNames());
 				final boolean nauticalPluginDisabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null;
@@ -149,7 +158,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 					}
 				}
 
-				final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(activity, R.layout.dialog_text_item);
+				final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(themedContext, R.layout.dialog_text_item);
 
 				arrayAdapter.addAll(visibleNamesList);
 				bld.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
@@ -181,9 +190,8 @@ public class MapStyleAction extends SwitchableAction<String> {
 
 	@Override
 	public boolean fillParams(View root, MapActivity activity) {
-		super.fillParams(root, activity);
 		getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
-		return true;
+		return super.fillParams(root, activity);
 	}
 
 	@Override

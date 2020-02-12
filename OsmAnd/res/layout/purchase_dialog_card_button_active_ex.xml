@@ -6,52 +6,51 @@
 	android:layout_height="wrap_content"
 	android:layout_marginLeft="1dp"
 	android:layout_marginRight="1dp"
-	android:background="?attr/subscription_active_bg_color"
 	android:orientation="vertical">
-
-	<View
-		android:id="@+id/div_top"
-		android:layout_width="match_parent"
-		android:layout_height="1dp"
-		android:background="?attr/subscription_active_div_color"
-		android:visibility="gone" />
 
 	<LinearLayout
 		android:id="@+id/button_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="?attr/selectableItemBackground"
 		android:baselineAligned="false"
-		android:minHeight="@dimen/dialog_button_ex_height"
-		android:orientation="horizontal"
+		android:orientation="vertical"
 		android:paddingLeft="@dimen/card_padding"
 		android:paddingRight="@dimen/card_padding">
 
 		<LinearLayout
-			android:layout_width="0dp"
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center"
 			android:layout_marginTop="@dimen/list_header_padding"
-			android:layout_marginEnd="@dimen/list_content_padding"
-			android:layout_marginRight="@dimen/list_content_padding"
 			android:layout_marginBottom="@dimen/list_header_padding"
-			android:layout_weight="1"
-			android:orientation="vertical">
-
-			<net.osmand.plus.widgets.TextViewEx
-				android:id="@+id/title"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:gravity="center"
-				android:textColor="?attr/dialog_title_color"
-				android:textSize="@dimen/default_list_text_size"
-				osmand:typeface="@string/font_roboto_regular"
-				tools:text="Pay monthly" />
+			android:orientation="horizontal">
 
 			<LinearLayout
-				android:layout_width="wrap_content"
+				android:layout_width="0dp"
 				android:layout_height="wrap_content"
-				android:orientation="horizontal">
+				android:layout_weight="1"
+				android:orientation="vertical">
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/title"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:gravity="center"
+					android:textColor="?attr/dialog_title_color"
+					android:textSize="@dimen/default_list_text_size"
+					osmand:typeface="@string/font_roboto_regular"
+					tools:text="Pay monthly" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/description_contribute"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:text="@string/osm_live_payment_contribute_descr"
+					android:textColor="?attr/card_description_text_color"
+					android:textSize="@dimen/default_desc_text_size"
+					android:visibility="gone"
+					osmand:typeface="@string/font_roboto_regular"
+					tools:visibility="visible" />
 
 				<net.osmand.plus.widgets.TextViewEx
 					android:id="@+id/description"
@@ -64,11 +63,20 @@
 
 			</LinearLayout>
 
+			<android.support.v7.widget.AppCompatImageView
+				android:id="@+id/right_image"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:layout_marginStart="@dimen/list_header_padding"
+				android:layout_marginLeft="@dimen/list_header_padding"
+				android:src="@drawable/img_feature_purchased" />
+
 		</LinearLayout>
 
 		<LinearLayout
 			android:id="@+id/button_view"
-			android:layout_width="wrap_content"
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center"
 			android:background="?attr/wikivoyage_secondary_btn_bg">
@@ -76,7 +84,7 @@
 			<LinearLayout
 				android:id="@+id/button"
 				android:layout_width="match_parent"
-				android:layout_height="@dimen/dialog_button_height"
+				android:layout_height="wrap_content"
 				android:gravity="center"
 				android:orientation="horizontal"
 				android:padding="@dimen/list_header_padding">
@@ -100,7 +108,7 @@
 
 		<LinearLayout
 			android:id="@+id/button_cancel_view"
-			android:layout_width="wrap_content"
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center"
 			android:background="?attr/wikivoyage_primary_btn_bg">
@@ -108,7 +116,8 @@
 			<LinearLayout
 				android:id="@+id/button_cancel"
 				android:layout_width="match_parent"
-				android:layout_height="@dimen/dialog_button_height"
+				android:layout_height="wrap_content"
+				android:background="?attr/selectableItemBackground"
 				android:gravity="center"
 				android:orientation="horizontal"
 				android:padding="@dimen/list_header_padding">
@@ -121,7 +130,7 @@
 					android:letterSpacing="@dimen/text_button_letter_spacing"
 					android:maxWidth="@dimen/dialog_button_ex_max_width"
 					android:minWidth="@dimen/dialog_button_ex_min_width"
-					android:text="@string/shared_string_cancel"
+					android:text="@string/cancel_subscription"
 					android:textColor="@color/color_white"
 					android:textSize="@dimen/text_button_text_size"
 					osmand:typeface="@string/font_roboto_medium" />
@@ -136,16 +145,8 @@
 		android:id="@+id/div"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:layout_marginLeft="@dimen/card_padding"
-		android:layout_marginRight="@dimen/card_padding"
-		android:background="?attr/subscription_active_div_color"
-		android:visibility="gone" />
-
-	<View
-		android:id="@+id/div_bottom"
-		android:layout_width="match_parent"
-		android:layout_height="1dp"
-		android:background="?attr/subscription_active_div_color"
+		android:layout_marginTop="@dimen/content_padding_small"
+		android:background="?attr/wikivoyage_card_divider_color"
 		android:visibility="gone" />
 
 </LinearLayout>

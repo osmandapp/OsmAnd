@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/ctx_menu_info_view_bg"
+    android:background="?attr/activity_background_color"
     android:clickable="true"
     android:orientation="vertical"
     android:theme="@style/OsmandLightTheme">
@@ -58,7 +58,7 @@
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     android:text="@string/shared_string_skip"
-                    android:textColor="@color/color_dialog_buttons_light"/>
+                    android:textColor="@color/active_color_primary_light"/>
 
             </LinearLayout>
 
@@ -102,7 +102,7 @@
                             android:layout_height="60dp"
                             android:scaleType="center"
                             android:src="@drawable/ic_action_location_off"
-                            android:tint="@color/icon_color"/>
+                            android:tint="@color/icon_color_default_light"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -136,7 +136,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="@color/dashboard_divider_light"/>
+                        android:background="@color/divider_color_light"/>
 
                     <android.support.v7.widget.AppCompatButton
                         android:id="@+id/no_location_action_button"
@@ -146,7 +146,7 @@
                         android:gravity="center"
                         android:minHeight="47dp"
                         android:text="@string/search_my_location"
-                        android:textColor="@color/color_dialog_buttons_light"/>
+                        android:textColor="@color/active_color_primary_light"/>
 
                 </LinearLayout>
 
@@ -180,7 +180,7 @@
                             android:layout_height="60dp"
                             android:scaleType="center"
                             android:src="@drawable/ic_action_wifi_off"
-                            android:tint="@color/icon_color"/>
+                            android:tint="@color/icon_color_default_light"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -223,7 +223,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="@color/dashboard_divider_light"/>
+                        android:background="@color/divider_color_light"/>
 
                     <android.support.v7.widget.AppCompatButton
                         android:id="@+id/no_inet_action_button"
@@ -233,7 +233,7 @@
                         android:gravity="center"
                         android:minHeight="47dp"
                         android:text="@string/try_again"
-                        android:textColor="@color/color_dialog_buttons_light"/>
+                        android:textColor="@color/active_color_primary_light"/>
 
                 </LinearLayout>
 
@@ -427,7 +427,7 @@
                             android:layout_height="60dp"
                             android:scaleType="center"
                             android:src="@drawable/ic_map"
-                            android:tint="@color/icon_color"/>
+                            android:tint="@color/icon_color_default_light"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -491,7 +491,7 @@
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:text="@string/search_another_country"
-                android:textColor="@color/color_dialog_buttons_light"
+                android:textColor="@color/active_color_primary_light"
                 android:visibility="gone"/>
 
             <android.support.v7.widget.CardView
@@ -525,7 +525,7 @@
                             android:layout_height="60dp"
                             android:scaleType="center"
                             android:src="@drawable/ic_map"
-                            android:tint="@color/icon_color"/>
+                            android:tint="@color/icon_color_default_light"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -614,7 +614,7 @@
                                     android:layout_height="44dp"
                                     android:contentDescription="@string/shared_string_cancel"
                                     android:src="@drawable/map_action_cancel"
-                                    android:tint="@color/icon_color"/>
+                                    android:tint="@color/icon_color_default_light"/>
 
                             </LinearLayout>
 
@@ -626,7 +626,7 @@
                         android:id="@+id/map2_downloading_divider"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="@color/dashboard_divider_light"/>
+                        android:background="@color/divider_color_light"/>
 
                     <android.support.v7.widget.AppCompatButton
                         android:id="@+id/map_downloading_action_button"
@@ -653,7 +653,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/first_usage_title_margin_bottom"
-                android:background="@drawable/btn_round_blue"
+                android:background="@drawable/btn_round_light"
                 android:padding="14dp"
                 android:text="@string/give_permission"
                 android:textColor="@color/color_white"
@@ -731,7 +731,7 @@
                         android:paddingLeft="16dp"
                         android:paddingRight="16dp"
                         android:text="@string/shared_string_change"
-                        android:textColor="@color/color_dialog_buttons_light"/>
+                        android:textColor="@color/active_color_primary_light"/>
 
                 </LinearLayout>
 

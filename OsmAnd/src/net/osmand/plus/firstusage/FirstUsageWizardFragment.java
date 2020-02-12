@@ -77,7 +77,6 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	private View view;
 	private DownloadIndexesThread downloadThread;
 	private DownloadValidationManager validationManager;
-	private MessageFormat formatGb = new MessageFormat("{0, number,#.##} GB", Locale.US);
 
 	private static WizardType wizardType;
 	private static final WizardType DEFAULT_WIZARD_TYPE = WizardType.SEARCH_LOCATION;
@@ -474,6 +473,9 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	}
 
 	private void updateDownloadedItem() {
+		if (mapIndexItem == null) {
+			return;
+		}
 		final View firstRowLayout = view.findViewById(R.id.map_downloading_layout);
 		final View progressLayout = view.findViewById(R.id.map_download_progress_layout);
 		final ImageButton redownloadButton = (ImageButton) view.findViewById(R.id.map_redownload_button);
@@ -556,7 +558,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 
 			List<BinaryMapDataObject> mapDataObjects = null;
 			try {
-				mapDataObjects = osmandRegions.queryBbox(point31x, point31x, point31y, point31y);
+				mapDataObjects = osmandRegions.query(point31x, point31x, point31y, point31y);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -698,7 +700,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 			AppCompatButton changeStorageButton = (AppCompatButton) storageView.findViewById(R.id.storage_change_button);
 			if (wizardType == WizardType.MAP_DOWNLOAD) {
 				changeStorageButton.setEnabled(false);
-				changeStorageButton.setTextColor(getMyApplication().getResources().getColor(R.color.disabled_btn_text_color));
+				changeStorageButton.setTextColor(getMyApplication().getResources().getColor(R.color.text_color_secondary_light));
 			} else {
 				changeStorageButton.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -736,7 +738,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	private String getFreeSpace(File dir) {
 		if (dir.canRead()) {
 			StatFs fs = new StatFs(dir.getAbsolutePath());
-			return formatGb.format(new Object[]{(float) (fs.getAvailableBlocks()) * fs.getBlockSize() / (1 << 30)});
+			return AndroidUtils.formatSize(getActivity(), (long) fs.getAvailableBlocks() * fs.getBlockSize() );
 		}
 		return "";
 	}

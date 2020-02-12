@@ -11,10 +11,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.SwitchCompat;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -38,27 +40,28 @@ import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import net.osmand.AndroidUtils;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.OsmAndListFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
@@ -332,13 +335,15 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 				boolean light = app.getSettings().isLightContent();
 				tabLayout = (PagerSlidingTabStrip) row.findViewById(R.id.sliding_tabs);
 				tabLayout.setTabBackground(R.color.color_transparent);
-				tabLayout.setIndicatorColorResource(light ? R.color.color_dialog_buttons_light : R.color.color_dialog_buttons_dark);
-				tabLayout.setIndicatorBgColorResource(light ? R.color.dashboard_divider_light : R.color.dashboard_divider_dark);
+				tabLayout.setIndicatorColorResource(light ? R.color.active_color_primary_light : R.color.active_color_primary_dark);
+				tabLayout.setIndicatorBgColorResource(light ? R.color.divider_color_light : R.color.divider_color_dark);
 				tabLayout.setIndicatorHeight(AndroidUtils.dpToPx(app, 1f));
-				tabLayout.setTextColor(tabLayout.getIndicatorColor());
+				if (light) {
+					tabLayout.setTextColor(tabLayout.getIndicatorColor());
+					tabLayout.setTabInactiveTextColor(ContextCompat.getColor(row.getContext(), R.color.text_color_secondary_light));
+				}
 				tabLayout.setTextSize(AndroidUtils.spToPx(app, 12f));
 				tabLayout.setShouldExpand(true);
-				tabLayout.setTabSelectionType(PagerSlidingTabStrip.TabSelectionType.SOLID_COLOR);
 				pager = (WrapContentHeightViewPager) row.findViewById(R.id.pager);
 				pager.setSwipeable(false);
 				pager.setOffscreenPageLimit(2);
@@ -376,6 +381,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 		private Map<GPXTabItemType, List<ILineDataSet>> dataSetsMap = new HashMap<>();
 		private TrkSegment segment;
 		private float listViewYPos;
+		private WptPt selectedWpt;
 
 		GPXItemPagerAdapter(PagerSlidingTabStrip tabs, GpxDisplayItem gpxItem) {
 			super();
@@ -420,17 +426,19 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 			if (dataSets == null && chart != null) {
 				dataSets = new ArrayList<>();
 				GPXTrackAnalysis analysis = gpxItem.analysis;
+				GpxDataItem gpxDataItem = getGpxDataItem();
+				boolean calcWithoutGaps = gpxItem.isGeneralTrack() && gpxDataItem != null && !gpxDataItem.isJoinSegments();
 				switch (tabType) {
 					case GPX_TAB_ITEM_GENERAL: {
 						OrderedLineDataSet speedDataSet = null;
 						OrderedLineDataSet elevationDataSet = null;
 						if (analysis.hasSpeedData) {
 							speedDataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart,
-									analysis, GPXDataSetAxisType.DISTANCE, true, true);
+									analysis, GPXDataSetAxisType.DISTANCE, true, true, calcWithoutGaps);
 						}
 						if (analysis.hasElevationData) {
 							elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, chart,
-									analysis, GPXDataSetAxisType.DISTANCE, false, true);
+									analysis, GPXDataSetAxisType.DISTANCE, false, true, calcWithoutGaps);
 						}
 						if (speedDataSet != null) {
 							dataSets.add(speedDataSet);
@@ -446,14 +454,14 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 					}
 					case GPX_TAB_ITEM_ALTITUDE: {
 						OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, chart,
-								analysis, GPXDataSetAxisType.DISTANCE, false, true);
+								analysis, GPXDataSetAxisType.DISTANCE, false, true, calcWithoutGaps);
 						if (elevationDataSet != null) {
 							dataSets.add(elevationDataSet);
 						}
 						if (analysis.hasElevationData) {
-							List<Entry> eleValues = elevationDataSet != null ? elevationDataSet.getValues() : null;
+							List<Entry> eleValues = elevationDataSet != null && !gpxItem.isGeneralTrack() ? elevationDataSet.getValues() : null;
 							OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart,
-									analysis, GPXDataSetAxisType.DISTANCE, eleValues, true, true);
+									analysis, GPXDataSetAxisType.DISTANCE, eleValues, true, true, calcWithoutGaps);
 							if (slopeDataSet != null) {
 								dataSets.add(slopeDataSet);
 							}
@@ -463,7 +471,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 					}
 					case GPX_TAB_ITEM_SPEED: {
 						OrderedLineDataSet speedDataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart,
-								analysis, GPXDataSetAxisType.DISTANCE, false, true);
+								analysis, GPXDataSetAxisType.DISTANCE, false, true, calcWithoutGaps);
 						if (speedDataSet != null) {
 							dataSets.add(speedDataSet);
 						}
@@ -477,7 +485,8 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 
 		private TrkSegment getTrackSegment(LineChart chart) {
 			if (segment == null) {
-				List<ILineDataSet> ds = chart.getLineData().getDataSets();
+				LineData lineData = chart.getLineData();
+				List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
 				if (ds != null && ds.size() > 0) {
 					for (GPXUtilities.Track t : gpxItem.group.getGpx().tracks) {
 						for (TrkSegment s : t.segments) {
@@ -497,7 +506,8 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 
 		private WptPt getPoint(LineChart chart, float pos) {
 			WptPt wpt = null;
-			List<ILineDataSet> ds = chart.getLineData().getDataSets();
+			LineData lineData = chart.getLineData();
+			List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
 			if (ds != null && ds.size() > 0) {
 				TrkSegment segment = getTrackSegment(chart);
 				OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
@@ -548,7 +558,6 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 		@Override
 		public Object instantiateItem(@NonNull ViewGroup container, int position) {
 
-			chartClicked = false;
 			GPXTabItemType tabType = tabTypes[position];
 			final View view;
 			LayoutInflater inflater = LayoutInflater.from(container.getContext());
@@ -570,109 +579,118 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 			if (gpxFile != null && gpxItem != null) {
 				GPXTrackAnalysis analysis = gpxItem.analysis;
 				final LineChart chart = (LineChart) view.findViewById(R.id.chart);
-				chart.setHighlightPerDragEnabled(false);
+				chart.setHighlightPerDragEnabled(chartClicked);
 				chart.setOnClickListener(new View.OnClickListener() {
 					@SuppressLint("ClickableViewAccessibility")
 					@Override
 					public void onClick(View view) {
 						if (!chartClicked) {
 							chartClicked = true;
-							chart.setHighlightPerDragEnabled(true);
-							chart.setOnTouchListener(new View.OnTouchListener() {
-								@Override
-								public boolean onTouch(View v, MotionEvent event) {
-									getListView().requestDisallowInterceptTouchEvent(true);
-									switch (event.getAction()) {
-										case android.view.MotionEvent.ACTION_DOWN:
-											listViewYPos = event.getRawY();
-											break;
-										case android.view.MotionEvent.ACTION_MOVE:
-											scrollBy(Math.round(listViewYPos - event.getRawY()));
-											listViewYPos = event.getRawY();
-											break;
-									}
-									return false;
-								}
-							});
-							chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-								@Override
-								public void onValueSelected(Entry e, Highlight h) {
-									WptPt wpt = getPoint(chart, h.getX());
-									if (wpt != null && fragmentAdapter != null) {
-										fragmentAdapter.updateSelectedPoint(wpt.lat, wpt.lon);
-									}
-								}
+							if (selectedWpt != null && fragmentAdapter != null) {
+								fragmentAdapter.updateSelectedPoint(selectedWpt.lat, selectedWpt.lon);
+							}
+						}
+					}
+				});
+				chart.setOnTouchListener(new View.OnTouchListener() {
+					@Override
+					public boolean onTouch(View v, MotionEvent event) {
+						if (chartClicked) {
+							getListView().requestDisallowInterceptTouchEvent(true);
+							if (!chart.isHighlightPerDragEnabled()) {
+								chart.setHighlightPerDragEnabled(true);
+							}
+							switch (event.getAction()) {
+								case android.view.MotionEvent.ACTION_DOWN:
+									listViewYPos = event.getRawY();
+									break;
+								case android.view.MotionEvent.ACTION_MOVE:
+									scrollBy(Math.round(listViewYPos - event.getRawY()));
+									listViewYPos = event.getRawY();
+									break;
+							}
+						}
+						return false;
+					}
+				});
+				chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+					@Override
+					public void onValueSelected(Entry e, Highlight h) {
+						WptPt wpt = getPoint(chart, h.getX());
+						selectedWpt = wpt;
+						if (chartClicked && wpt != null && fragmentAdapter != null) {
+							fragmentAdapter.updateSelectedPoint(wpt.lat, wpt.lon);
+						}
+					}
 
-								@Override
-								public void onNothingSelected() {
+					@Override
+					public void onNothingSelected() {
 
+					}
+				});
+				chart.setOnChartGestureListener(new OnChartGestureListener() {
+
+					float highlightDrawX = -1;
+
+					@Override
+					public void onChartGestureStart(MotionEvent me, ChartGesture lastPerformedGesture) {
+						if (chart.getHighlighted() != null && chart.getHighlighted().length > 0) {
+							highlightDrawX = chart.getHighlighted()[0].getDrawX();
+						} else {
+							highlightDrawX = -1;
+						}
+					}
+
+					@Override
+					public void onChartGestureEnd(MotionEvent me, ChartGesture lastPerformedGesture) {
+						gpxItem.chartMatrix = new Matrix(chart.getViewPortHandler().getMatrixTouch());
+						Highlight[] highlights = chart.getHighlighted();
+						if (highlights != null && highlights.length > 0) {
+							gpxItem.chartHighlightPos = highlights[0].getX();
+						} else {
+							gpxItem.chartHighlightPos = -1;
+						}
+						if (chartClicked) {
+							for (int i = 0; i < getCount(); i++) {
+								View v = getViewAtPosition(i);
+								if (v != view) {
+									updateChart(i);
 								}
-							});
-							final View finalView = view;
-							chart.setOnChartGestureListener(new OnChartGestureListener() {
+							}
+						}
+					}
 
-								float highlightDrawX = -1;
+					@Override
+					public void onChartLongPressed(MotionEvent me) {
+					}
 
-								@Override
-								public void onChartGestureStart(MotionEvent me, ChartGesture lastPerformedGesture) {
-									if (chart.getHighlighted() != null && chart.getHighlighted().length > 0) {
-										highlightDrawX = chart.getHighlighted()[0].getDrawX();
-									} else {
-										highlightDrawX = -1;
-									}
+					@Override
+					public void onChartDoubleTapped(MotionEvent me) {
+					}
+
+					@Override
+					public void onChartSingleTapped(MotionEvent me) {
+					}
+
+					@Override
+					public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
+					}
+
+					@Override
+					public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
+					}
+
+					@Override
+					public void onChartTranslate(MotionEvent me, float dX, float dY) {
+						if (chartClicked && highlightDrawX != -1) {
+							Highlight h = chart.getHighlightByTouchPoint(highlightDrawX, 0f);
+							if (h != null) {
+								chart.highlightValue(h);
+								WptPt wpt = getPoint(chart, h.getX());
+								if (wpt != null && fragmentAdapter != null) {
+									fragmentAdapter.updateSelectedPoint(wpt.lat, wpt.lon);
 								}
-
-								@Override
-								public void onChartGestureEnd(MotionEvent me, ChartGesture lastPerformedGesture) {
-									gpxItem.chartMatrix = new Matrix(chart.getViewPortHandler().getMatrixTouch());
-									Highlight[] highlights = chart.getHighlighted();
-									if (highlights != null && highlights.length > 0) {
-										gpxItem.chartHighlightPos = highlights[0].getX();
-									} else {
-										gpxItem.chartHighlightPos = -1;
-									}
-									for (int i = 0; i < getCount(); i++) {
-										View v = getViewAtPosition(i);
-										if (v != finalView) {
-											updateChart(i);
-										}
-									}
-								}
-
-								@Override
-								public void onChartLongPressed(MotionEvent me) {
-								}
-
-								@Override
-								public void onChartDoubleTapped(MotionEvent me) {
-								}
-
-								@Override
-								public void onChartSingleTapped(MotionEvent me) {
-								}
-
-								@Override
-								public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
-								}
-
-								@Override
-								public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
-								}
-
-								@Override
-								public void onChartTranslate(MotionEvent me, float dX, float dY) {
-									if (highlightDrawX != -1) {
-										Highlight h = chart.getHighlightByTouchPoint(highlightDrawX, 0f);
-										if (h != null) {
-											chart.highlightValue(h);
-											WptPt wpt = getPoint(chart, h.getX());
-											if (wpt != null && fragmentAdapter != null) {
-												fragmentAdapter.updateSelectedPoint(wpt.lat, wpt.lon);
-											}
-										}
-									}
-								}
-							});
+							}
 						}
 					}
 				});
@@ -699,11 +717,19 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							((ImageView) view.findViewById(R.id.end_time_icon))
 									.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_time_end));
 
-							((TextView) view.findViewById(R.id.distance_text))
-									.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
-							((TextView) view.findViewById(R.id.duration_text))
-									.setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()));
-
+							view.findViewById(R.id.gpx_join_gaps_container).setOnClickListener(new View.OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									TrackActivity activity = getTrackActivity();
+									if (activity != null && activity.setJoinSegments(!activity.isJoinSegments())) {
+										updateContent();
+										for (int i = 0; i < getCount(); i++) {
+											View view = getViewAtPosition(i);
+											updateJoinGapsInfo(view, i);
+										}
+									}
+								}
+							});
 							if (analysis.timeSpan > 0) {
 								DateFormat tf = SimpleDateFormat.getTimeInstance(DateFormat.SHORT);
 								DateFormat df = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
@@ -724,6 +750,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							view.findViewById(R.id.list_divider).setVisibility(View.GONE);
 							view.findViewById(R.id.start_end_time).setVisibility(View.GONE);
 						}
+						updateJoinGapsInfo(view, position);
 						view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
@@ -756,37 +783,37 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 										generalPopupMenu.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
 											@Override
 											public boolean onMenuItemClick(MenuItem item) {
-												switch (item.getItemId()) {
-													case R.id.action_edit:
-														TrkSegment segment = getTrkSegment();
-														if (segment != null && fragmentAdapter != null) {
-															fragmentAdapter.addNewGpxData(NewGpxData.ActionType.EDIT_SEGMENT, segment);
-														}
-														return true;
-													case R.id.action_delete:
-														TrackActivity activity = getTrackActivity();
-														if (activity != null) {
-															AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-															builder.setMessage(R.string.recording_delete_confirm);
-															builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-																@Override
-																public void onClick(DialogInterface dialog, int which) {
-																	TrackActivity trackActivity = getTrackActivity();
-																	if (trackActivity != null && deleteSegment()) {
-																		GPXFile gpx = getGpx();
-																		if (gpx != null && fragmentAdapter != null) {
-																			boolean showOnMap = fragmentAdapter.isShowOnMap();
-																			SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, showOnMap, false);
-																			new SaveGpxAsyncTask(trackActivity, TrackSegmentFragment.this, gpx, showOnMap ? sf : null)
-																					.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-																		}
+												int i = item.getItemId();
+												if (i == R.id.action_edit) {
+													TrkSegment segment = getTrkSegment();
+													if (segment != null && fragmentAdapter != null) {
+														fragmentAdapter.addNewGpxData(NewGpxData.ActionType.EDIT_SEGMENT, segment);
+													}
+													return true;
+												} else if (i == R.id.action_delete) {
+													TrackActivity activity = getTrackActivity();
+													if (activity != null) {
+														AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+														builder.setMessage(R.string.recording_delete_confirm);
+														builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+															@Override
+															public void onClick(DialogInterface dialog, int which) {
+																TrackActivity trackActivity = getTrackActivity();
+																if (trackActivity != null && deleteSegment()) {
+																	GPXFile gpx = getGpx();
+																	if (gpx != null && fragmentAdapter != null) {
+																		boolean showOnMap = fragmentAdapter.isShowOnMap();
+																		SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, showOnMap, false);
+																		new SaveGpxAsyncTask(trackActivity, TrackSegmentFragment.this, gpx, showOnMap ? sf : null)
+																				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 																	}
 																}
-															});
-															builder.setNegativeButton(R.string.shared_string_cancel, null);
-															builder.show();
-														}
-														return true;
+															}
+														});
+														builder.setNegativeButton(R.string.shared_string_cancel, null);
+														builder.show();
+													}
+													return true;
 												}
 												return false;
 											}
@@ -830,12 +857,26 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							((TextView) view.findViewById(R.id.ascent_text)).setText(asc);
 							((TextView) view.findViewById(R.id.descent_text)).setText(desc);
 
+							view.findViewById(R.id.gpx_join_gaps_container).setOnClickListener(new View.OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									TrackActivity activity = getTrackActivity();
+									if (activity != null && activity.setJoinSegments(!activity.isJoinSegments())) {
+										updateSplitView();
+										for (int i = 0; i < getCount(); i++) {
+											View view = getViewAtPosition(i);
+											updateJoinGapsInfo(view, i);
+										}
+									}
+								}
+							});
 						} else {
 							chart.setVisibility(View.GONE);
 							view.findViewById(R.id.average_range).setVisibility(View.GONE);
 							view.findViewById(R.id.list_divider).setVisibility(View.GONE);
 							view.findViewById(R.id.ascent_descent).setVisibility(View.GONE);
 						}
+						updateJoinGapsInfo(view, position);
 						view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
@@ -868,25 +909,25 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 										altitudePopupMenu.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
 											@Override
 											public boolean onMenuItemClick(MenuItem item) {
-												switch (item.getItemId()) {
-													case R.id.action_edit:
-														TrkSegment segment = getTrkSegment();
-														if (segment != null && fragmentAdapter != null) {
-															fragmentAdapter.addNewGpxData(NewGpxData.ActionType.EDIT_SEGMENT, segment);
+												int i = item.getItemId();
+												if (i == R.id.action_edit) {
+													TrkSegment segment = getTrkSegment();
+													if (segment != null && fragmentAdapter != null) {
+														fragmentAdapter.addNewGpxData(NewGpxData.ActionType.EDIT_SEGMENT, segment);
+													}
+													return true;
+												} else if (i == R.id.action_delete) {
+													TrackActivity trackActivity = getTrackActivity();
+													if (trackActivity != null && deleteSegment()) {
+														GPXFile gpx = getGpx();
+														if (gpx != null && fragmentAdapter != null) {
+															boolean showOnMap = fragmentAdapter.isShowOnMap();
+															SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, showOnMap, false);
+															new SaveGpxAsyncTask(trackActivity, TrackSegmentFragment.this, gpx, showOnMap ? sf : null)
+																	.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 														}
-														return true;
-													case R.id.action_delete:
-														TrackActivity trackActivity = getTrackActivity();
-														if (trackActivity != null && deleteSegment()) {
-															GPXFile gpx = getGpx();
-															if (gpx != null && fragmentAdapter != null) {
-																boolean showOnMap = fragmentAdapter.isShowOnMap();
-																SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, showOnMap, false);
-																new SaveGpxAsyncTask(trackActivity, TrackSegmentFragment.this, gpx, showOnMap ? sf : null)
-																		.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-															}
-														}
-														return true;
+													}
+													return true;
 												}
 												return false;
 											}
@@ -924,17 +965,27 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 
 							((TextView) view.findViewById(R.id.average_text)).setText(avg);
 							((TextView) view.findViewById(R.id.max_text)).setText(max);
-							((TextView) view.findViewById(R.id.time_moving_text))
-									.setText(Algorithms.formatDuration((int) (analysis.timeMoving / 1000), app.accessibilityEnabled()));
-							((TextView) view.findViewById(R.id.distance_text))
-									.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistanceMoving, app));
 
+							view.findViewById(R.id.gpx_join_gaps_container).setOnClickListener(new View.OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									TrackActivity activity = getTrackActivity();
+									if (activity != null && activity.setJoinSegments(!activity.isJoinSegments())) {
+										updateSplitView();
+										for (int i = 0; i < getCount(); i++) {
+											View view = getViewAtPosition(i);
+											updateJoinGapsInfo(view, i);
+										}
+									}
+								}
+							});
 						} else {
 							chart.setVisibility(View.GONE);
 							view.findViewById(R.id.average_max).setVisibility(View.GONE);
 							view.findViewById(R.id.list_divider).setVisibility(View.GONE);
 							view.findViewById(R.id.time_distance).setVisibility(View.GONE);
 						}
+						updateJoinGapsInfo(view, position);
 						view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
@@ -967,25 +1018,25 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 										popupMenu.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
 											@Override
 											public boolean onMenuItemClick(MenuItem item) {
-												switch (item.getItemId()) {
-													case R.id.action_edit:
-														TrkSegment segment = getTrkSegment();
-														if (segment != null && fragmentAdapter != null) {
-															fragmentAdapter.addNewGpxData(NewGpxData.ActionType.EDIT_SEGMENT, segment);
+												int i = item.getItemId();
+												if (i == R.id.action_edit) {
+													TrkSegment segment = getTrkSegment();
+													if (segment != null && fragmentAdapter != null) {
+														fragmentAdapter.addNewGpxData(NewGpxData.ActionType.EDIT_SEGMENT, segment);
+													}
+													return true;
+												} else if (i == R.id.action_delete) {
+													TrackActivity trackActivity = getTrackActivity();
+													if (trackActivity != null && deleteSegment()) {
+														GPXFile gpx = getGpx();
+														if (gpx != null && fragmentAdapter != null) {
+															boolean showOnMap = fragmentAdapter.isShowOnMap();
+															SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, showOnMap, false);
+															new SaveGpxAsyncTask(trackActivity, TrackSegmentFragment.this, gpx, showOnMap ? sf : null)
+																	.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 														}
-														return true;
-													case R.id.action_delete:
-														TrackActivity trackActivity = getTrackActivity();
-														if (trackActivity != null && deleteSegment()) {
-															GPXFile gpx = getGpx();
-															if (gpx != null && fragmentAdapter != null) {
-																boolean showOnMap = fragmentAdapter.isShowOnMap();
-																SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, showOnMap, false);
-																new SaveGpxAsyncTask(trackActivity, TrackSegmentFragment.this, gpx, showOnMap ? sf : null)
-																		.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-															}
-														}
-														return true;
+													}
+													return true;
 												}
 												return false;
 											}
@@ -1096,6 +1147,33 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 			}
 		}
 
+		void updateJoinGapsInfo(View view, int position) {
+			TrackActivity activity = getTrackActivity();
+			if (view != null && activity != null) {
+				GPXTrackAnalysis analysis = gpxItem.analysis;
+				GPXTabItemType tabType = tabTypes[position];
+				boolean visible = gpxItem.isGeneralTrack() && analysis != null && tabType.equals(GPXTabItemType.GPX_TAB_ITEM_GENERAL);
+				AndroidUiHelper.updateVisibility(view.findViewById(R.id.gpx_join_gaps_container), visible);
+				boolean joinSegments = activity.isJoinSegments();
+				((SwitchCompat) view.findViewById(R.id.gpx_join_gaps_switch)).setChecked(joinSegments);
+				if (analysis != null) {
+					if (tabType.equals(GPXTabItemType.GPX_TAB_ITEM_GENERAL)) {
+						float totalDistance = !joinSegments && gpxItem.isGeneralTrack() ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
+						float timeSpan = !joinSegments && gpxItem.isGeneralTrack() ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
+
+						((TextView) view.findViewById(R.id.distance_text)).setText(OsmAndFormatter.getFormattedDistance(totalDistance, app));
+						((TextView) view.findViewById(R.id.duration_text)).setText(Algorithms.formatDuration((int) (timeSpan / 1000), app.accessibilityEnabled()));
+					} else if (tabType.equals(GPXTabItemType.GPX_TAB_ITEM_SPEED)) {
+						long timeMoving = !joinSegments && gpxItem.isGeneralTrack() ? analysis.timeMovingWithoutGaps : analysis.timeMoving;
+						float totalDistanceMoving = !joinSegments && gpxItem.isGeneralTrack() ? analysis.totalDistanceMovingWithoutGaps : analysis.totalDistanceMoving;
+
+						((TextView) view.findViewById(R.id.time_moving_text)).setText(Algorithms.formatDuration((int) (timeMoving / 1000), app.accessibilityEnabled()));
+						((TextView) view.findViewById(R.id.distance_text)).setText(OsmAndFormatter.getFormattedDistance(totalDistanceMoving, app));
+					}
+				}
+			}
+		}
+
 		void updateChart(LineChart chart) {
 			if (chart != null && !chart.isEmpty()) {
 				if (gpxItem.chartMatrix != null) {
@@ -1111,9 +1189,11 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 
 		private TrkSegment getTrkSegment() {
 			for (Track t : gpxItem.group.getGpx().tracks) {
-				for (TrkSegment s : t.segments) {
-					if (s.points.size() > 0 && s.points.get(0).equals(gpxItem.analysis.locationStart)) {
-						return s;
+				if (!t.generalTrack && !gpxItem.isGeneralTrack() || t.generalTrack && gpxItem.isGeneralTrack()) {
+					for (TrkSegment s : t.segments) {
+						if (s.points.size() > 0 && s.points.get(0).equals(gpxItem.analysis.locationStart)) {
+							return s;
+						}
 					}
 				}
 			}
@@ -1168,12 +1248,6 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 				gpxItem.locationOnMap = gpxItem.locationStart;
 			}
 
-			GPXFile gpx = getGpx();
-			GPXFile groupGpx = gpxItem.group.getGpx();
-			if (gpx != null && groupGpx != null) {
-				gpxItem.wasHidden = app.getSelectedGpxHelper().getSelectedFileByPath(gpx.path) == null;
-				app.getSelectedGpxHelper().setGpxFileToDisplay(groupGpx);
-			}
 			final OsmandSettings settings = app.getSettings();
 			settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
 					settings.getLastKnownMapZoom(),
@@ -1183,12 +1257,12 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 
 			MapActivity.launchMapActivityMoveToTop(getActivity());
 		}
-	}
 
-	void openSplitIntervalScreen() {
-		TrackActivity activity = getTrackActivity();
-		if (activity != null) {
-			SplitSegmentDialogFragment.showInstance(activity);
+		private	void openSplitIntervalScreen() {
+			TrackActivity activity = getTrackActivity();
+			if (activity != null) {
+				SplitSegmentDialogFragment.showInstance(activity, gpxItem, getTrkSegment());
+			}
 		}
 	}
 
@@ -1232,8 +1306,8 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 				if (selectedGpx != null) {
 					List<GpxDisplayGroup> groups = fragment.getDisplayGroups();
 					if (groups != null) {
-						selectedGpx.setDisplayGroups(groups);
-						selectedGpx.processPoints();
+						selectedGpx.setDisplayGroups(groups, app);
+						selectedGpx.processPoints(app);
 					}
 				}
 				fragment.updateContent();

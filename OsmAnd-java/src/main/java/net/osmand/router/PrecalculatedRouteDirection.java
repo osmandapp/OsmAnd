@@ -260,8 +260,8 @@ public class PrecalculatedRouteDirection {
 	public PrecalculatedRouteDirection adopt(RoutingContext ctx) {
 		int ind1 = getIndex(ctx.startX, ctx.startY);
 		int ind2 = getIndex(ctx.targetX, ctx.targetY);
-		minSpeed = ctx.getRouter().getMinDefaultSpeed();
-		maxSpeed = ctx.getRouter().getMaxDefaultSpeed();
+		minSpeed = ctx.getRouter().getDefaultSpeed();
+		maxSpeed = ctx.getRouter().getMaxSpeed();
 		if(ind1 == -1) {
 			return null;
 		}

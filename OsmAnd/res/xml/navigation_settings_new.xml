@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:title="@string/routing_settings_2">
+
+	<Preference
+		android:key="navigation_type"
+		android:layout="@layout/preference_with_descr"
+		android:summary="@string/rendering_value_car_name"
+		android:title="@string/nav_type_hint"
+		tools:icon="@drawable/ic_action_car_dark" />
+
+	<Preference
+		android:key="route_parameters"
+		android:layout="@layout/preference_with_descr"
+		android:summary="@string/route_parameters_descr"
+		android:title="@string/route_parameters"
+		app:fragment="net.osmand.plus.settings.RouteParametersFragment"
+		tools:icon="@drawable/ic_action_route_distance" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="show_routing_alarms"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_off"
+		android:summaryOn="@string/shared_string_on"
+		android:title="@string/screen_alerts"
+		app:fragment="net.osmand.plus.settings.ScreenAlertsFragment"
+		tools:icon="@drawable/ic_action_alert" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="voice_mute"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:persistent="false"
+		android:summary="@string/voice_announces_descr"
+		android:title="@string/voice_announces"
+		app:fragment="net.osmand.plus.settings.VoiceAnnouncesFragment"
+		tools:icon="@drawable/ic_action_volume_up" />
+
+	<Preference
+		android:key="vehicle_parameters"
+		android:layout="@layout/preference_with_descr"
+		android:summary="@string/vehicle_parameters_descr"
+		android:title="@string/vehicle_parameters"
+		app:fragment="net.osmand.plus.settings.VehicleParametersFragment"
+		tools:icon="@drawable/ic_action_car_dark" />
+
+	<PreferenceCategory
+		android:key="other"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/shared_string_other" />
+
+	<Preference
+		android:key="map_during_navigation"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/map_during_navigation"
+		app:fragment="net.osmand.plus.settings.MapDuringNavigationFragment" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="turn_screen_on_enabled"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_off"
+		android:summaryOn="@string/shared_string_on"
+		android:title="@string/turn_screen_on"
+		app:fragment="net.osmand.plus.settings.TurnScreenOnFragment"
+		tools:icon="@drawable/ic_action_turn_screen_on" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="animate_my_location"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_off"
+		android:summaryOn="@string/shared_string_on"
+		android:title="@string/animate_my_location" />
+
+</PreferenceScreen>

@@ -92,11 +92,13 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 
 		setupToolbar((Toolbar) mainView.findViewById(R.id.toolbar));
 
+		int appBarTextColor = nightMode ? R.color.wikivoyage_app_bar_text_dark : R.color.wikivoyage_app_bar_text_light;
 		articleToolbarText = (TextView) mainView.findViewById(R.id.article_toolbar_text);
+		articleToolbarText.setTextColor(ContextCompat.getColor(getContext(), appBarTextColor));
 		ColorStateList selectedLangColorStateList = AndroidUtils.createPressedColorStateList(
 				getContext(), nightMode,
-				R.color.icon_color, R.color.wikivoyage_active_light,
-				R.color.icon_color, R.color.wikivoyage_active_dark
+				R.color.icon_color_default_light, R.color.wikivoyage_active_light,
+				R.color.icon_color_default_dark, R.color.wikivoyage_active_dark
 		);
 
 		selectedLangTv = (TextView) mainView.findViewById(R.id.select_language_text_view);
@@ -425,7 +427,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		for (int i = backStackEntryCount - 1; i >= 0; i--) {
 			BackStackEntry entry = fragmentManager.getBackStackEntryAt(i);
 			if (!TAG.equals(entry.getName())) {
-				pop = i;
+				pop = entry.getId();
 				break;
 			}
 		}
@@ -439,7 +441,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 	@Override
 	protected void setupToolbar(Toolbar toolbar) {
 		super.setupToolbar(toolbar);
-		toolbar.setOverflowIcon(getIcon(R.drawable.ic_overflow_menu_white, R.color.icon_color));
+		toolbar.setOverflowIcon(getIcon(R.drawable.ic_overflow_menu_white, R.color.icon_color_default_light));
 
 		Menu menu = toolbar.getMenu();
 		MenuItem.OnMenuItemClickListener itemClickListener = new MenuItem.OnMenuItemClickListener() {

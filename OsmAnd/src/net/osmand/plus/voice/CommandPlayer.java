@@ -10,7 +10,7 @@ public interface CommandPlayer {
 
 	public CommandBuilder newCommandBuilder();
 
-	public void playCommands(CommandBuilder builder);
+	public List<String> playCommands(CommandBuilder builder);
 
 	public void clear();
 

@@ -277,21 +277,26 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 		});
 
+		TextView optionsButton = mainView.findViewById(R.id.options_button);
+
 		if (orientationPortrait) {
-			backBtn.setImageDrawable(getActiveIcon(R.drawable.ic_arrow_back));
+			backBtn.setImageDrawable(getColoredIcon(R.drawable.ic_arrow_back, lightTheme ? R.color.color_black : R.color.active_buttons_and_links_text_dark));
+			optionsButton.setTextColor(getResolvedColor(lightTheme ? R.color.active_color_primary_light : R.color.active_color_primary_dark));
 			TextView toolbar = (TextView) mainView.findViewById(R.id.toolbar_text);
-			toolbar.setTextColor(getResolvedColor(lightTheme ? R.color.color_black : R.color.color_white));
+			toolbar.setTextColor(getResolvedColor(lightTheme ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
 			toolbar.setText(R.string.coord_input_add_point);
 			setBackgroundColor(R.id.app_bar, lightTheme ? R.color.route_info_bg_light : R.color.route_info_bg_dark);
-			setBackgroundColor(mainView, lightTheme ? R.color.ctx_menu_info_view_bg_light : R.color.coordinate_input_markers_list_bg_dark);
+			setBackgroundColor(mainView, lightTheme ? R.color.activity_background_color_light : R.color.activity_background_color_dark);
 		} else {
+			backBtn.setImageDrawable(getColoredIcon(R.drawable.ic_arrow_back, lightTheme ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark));
+			optionsButton.setTextColor(getResolvedColor(lightTheme ? R.color.color_white : R.color.active_color_primary_dark));
 			TextView toolbar = (TextView) mainView.findViewById(R.id.toolbar_text);
-			toolbar.setTextColor(getResolvedColor(lightTheme ? R.color.color_white : R.color.ctx_menu_title_color_dark));
+			toolbar.setTextColor(getResolvedColor(lightTheme ? R.color.color_white : R.color.text_color_primary_dark));
 			toolbar.setText(R.string.coord_input_add_point);
-			setBackgroundColor(R.id.app_bar, lightTheme ? R.color.actionbar_light_color : R.color.route_info_bottom_view_bg_dark);
+			setBackgroundColor(R.id.app_bar, lightTheme ? R.color.app_bar_color_light : R.color.route_info_bottom_view_bg_dark);
 		}
 
-		mainView.findViewById(R.id.options_button).setOnClickListener(new View.OnClickListener() {
+		optionsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				CoordinateInputBottomSheetDialogFragment fragment = new CoordinateInputBottomSheetDialogFragment();
@@ -339,7 +344,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			View dataAreaView = View.inflate(ctx, R.layout.coordinate_input_land_data_area, null);
 			View keyboardAndListView = View.inflate(ctx, R.layout.coordinate_input_land_keyboard_and_list, null);
 			setBackgroundColor(dataAreaView, lightTheme ? R.color.route_info_bg_light : R.color.route_info_bg_dark);
-			setBackgroundColor(keyboardAndListView, lightTheme ? R.color.ctx_menu_info_view_bg_light : R.color.coordinate_input_markers_list_bg_dark);
+			setBackgroundColor(keyboardAndListView, lightTheme ? R.color.activity_background_color_light : R.color.activity_background_color_dark);
 			((FrameLayout) handContainer.findViewById(R.id.left_container)).addView(rightHand ? dataAreaView : keyboardAndListView, 0);
 			((FrameLayout) handContainer.findViewById(R.id.right_container)).addView(rightHand ? keyboardAndListView : dataAreaView, 0);
 
@@ -362,7 +367,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		setBackgroundColor(R.id.point_name_et_container, lightTheme ? R.color.keyboard_item_control_light_bg : R.color.route_info_bottom_view_bg_dark);
 
 		ImageView pointNameKeyboardBtn = (ImageView) mainView.findViewById(R.id.point_name_keyboard_btn);
-		pointNameKeyboardBtn.setImageDrawable(getColoredIcon(R.drawable.ic_action_keyboard, R.color.icon_color));
+		pointNameKeyboardBtn.setImageDrawable(getColoredIcon(R.drawable.ic_action_keyboard, R.color.icon_color_default_light));
 		pointNameKeyboardBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -465,29 +470,24 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					if (focusedView != null && focusedView instanceof EditText) {
 						EditText focusedEditText = (EditText) focusedView;
 						int id = v.getId();
-						switch (id) {
-							case R.id.keyboard_item_clear:
-								focusedEditText.setText("");
-								break;
-							case R.id.keyboard_item_backspace:
-								String str = focusedEditText.getText().toString();
-								if (str.length() > 0) {
-									str = str.substring(0, str.length() - 1);
-									focusedEditText.setText(str);
-									focusedEditText.setSelection(str.length());
-								} else {
-									switchEditText(focusedEditText.getId(), false);
-								}
-								break;
-							case R.id.keyboard_item_next_field:
-								switchEditText(focusedEditText.getId(), true);
-								break;
-							case R.id.keyboard_item_hide:
-								changeOsmandKeyboardVisibility(false);
-								break;
-							default:
-								focusedEditText.setText(focusedEditText.getText().toString() + getItemObjectById(id));
-								focusedEditText.setSelection(focusedEditText.getText().length());
+						if (id == R.id.keyboard_item_clear) {
+							focusedEditText.setText("");
+						} else if (id == R.id.keyboard_item_backspace) {
+							String str = focusedEditText.getText().toString();
+							if (str.length() > 0) {
+								str = str.substring(0, str.length() - 1);
+								focusedEditText.setText(str);
+								focusedEditText.setSelection(str.length());
+							} else {
+								switchEditText(focusedEditText.getId(), false);
+							}
+						} else if (id == R.id.keyboard_item_next_field) {
+							switchEditText(focusedEditText.getId(), true);
+						} else if (id == R.id.keyboard_item_hide) {
+							changeOsmandKeyboardVisibility(false);
+						} else {
+							focusedEditText.setText(focusedEditText.getText().toString() + getItemObjectById(id));
+							focusedEditText.setSelection(focusedEditText.getText().length());
 						}
 					}
 				}
@@ -653,35 +653,34 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private Object getItemObjectById(@IdRes int id) {
-		switch (id) {
-			case R.id.keyboard_item_0:
-				return "0";
-			case R.id.keyboard_item_1:
-				return "1";
-			case R.id.keyboard_item_2:
-				return "2";
-			case R.id.keyboard_item_3:
-				return "3";
-			case R.id.keyboard_item_4:
-				return "4";
-			case R.id.keyboard_item_5:
-				return "5";
-			case R.id.keyboard_item_6:
-				return "6";
-			case R.id.keyboard_item_7:
-				return "7";
-			case R.id.keyboard_item_8:
-				return "8";
-			case R.id.keyboard_item_9:
-				return "9";
-			case R.id.keyboard_item_clear:
-				return getString(R.string.shared_string_clear);
-			case R.id.keyboard_item_next_field:
-				return R.drawable.ic_keyboard_next_field;
-			case R.id.keyboard_item_backspace:
-				return R.drawable.ic_keyboard_backspace;
-			case R.id.keyboard_item_hide:
-				return R.drawable.ic_action_keyboard_hide;
+		if (id == R.id.keyboard_item_0) {
+			return "0";
+		} else if (id == R.id.keyboard_item_1) {
+			return "1";
+		} else if (id == R.id.keyboard_item_2) {
+			return "2";
+		} else if (id == R.id.keyboard_item_3) {
+			return "3";
+		} else if (id == R.id.keyboard_item_4) {
+			return "4";
+		} else if (id == R.id.keyboard_item_5) {
+			return "5";
+		} else if (id == R.id.keyboard_item_6) {
+			return "6";
+		} else if (id == R.id.keyboard_item_7) {
+			return "7";
+		} else if (id == R.id.keyboard_item_8) {
+			return "8";
+		} else if (id == R.id.keyboard_item_9) {
+			return "9";
+		} else if (id == R.id.keyboard_item_clear) {
+			return getString(R.string.shared_string_clear);
+		} else if (id == R.id.keyboard_item_next_field) {
+			return R.drawable.ic_keyboard_next_field;
+		} else if (id == R.id.keyboard_item_backspace) {
+			return R.drawable.ic_keyboard_backspace;
+		} else if (id == R.id.keyboard_item_hide) {
+			return R.drawable.ic_action_keyboard_hide;
 		}
 		return -1;
 	}
@@ -732,7 +731,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				}
 			});
 
-			@ColorRes int colorId = lightTheme ? R.color.dashboard_blue : R.color.ctx_menu_direction_color_dark;
+			@ColorRes int colorId = lightTheme ? R.color.active_color_primary_light : R.color.active_color_primary_dark;
 			boolean lat = id == R.id.lat_side_of_the_world_btn;
 			Drawable icon = getColoredIcon(
 					lat ? R.drawable.ic_action_coordinates_longitude : R.drawable.ic_action_coordinates_latitude, colorId
@@ -887,23 +886,22 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 						popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 							@Override
 							public boolean onMenuItemClick(MenuItem item) {
-								switch (item.getItemId()) {
-									case R.id.action_copy:
-										ClipData clip = ClipData.newPlainText("", inputEditText.getText().toString());
-										clipboardManager.setPrimaryClip(clip);
-										return true;
-									case R.id.action_paste:
-										ClipData.Item pasteItem = clipboardManager.getPrimaryClip().getItemAt(0);
-										CharSequence pasteData = pasteItem.getText();
-										if (pasteData != null) {
-											String str = inputEditText.getText().toString();
-											inputEditText.setText(str + pasteData.toString());
-											inputEditText.setSelection(inputEditText.getText().length());
-										}
-										return true;
-									default:
-										return false;
+								int i = item.getItemId();
+								if (i == R.id.action_copy) {
+									ClipData clip = ClipData.newPlainText("", inputEditText.getText().toString());
+									clipboardManager.setPrimaryClip(clip);
+									return true;
+								} else if (i == R.id.action_paste) {
+									ClipData.Item pasteItem = clipboardManager.getPrimaryClip().getItemAt(0);
+									CharSequence pasteData = pasteItem.getText();
+									if (pasteData != null) {
+										String str = inputEditText.getText().toString();
+										inputEditText.setText(str + pasteData.toString());
+										inputEditText.setSelection(inputEditText.getText().length());
+									}
+									return true;
 								}
+								return false;
 							}
 						});
 						popupMenu.show();
@@ -1083,7 +1081,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				if (listener != null) {
 					listener.onPointsSaved();
 				}
-				snackbar = Snackbar.make(mainView, fileName + " " + getString(R.string.is_saved) + ".", Snackbar.LENGTH_LONG)
+				snackbar = Snackbar.make(mainView, String.format(getString(R.string.shared_string_file_is_saved), fileName) + ".", Snackbar.LENGTH_LONG)
 						.setAction(R.string.shared_string_show, new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
@@ -1094,7 +1092,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 								startActivity(intent);
 							}
 						});
-				AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);
+				AndroidUtils.setSnackbarTextColor(snackbar, R.color.active_color_primary_dark);
 				snackbar.show();
 			}
 		};
@@ -1121,7 +1119,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 								adapter.notifyDataSetChanged();
 							}
 						});
-				AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);
+				AndroidUtils.setSnackbarTextColor(snackbar, R.color.active_color_primary_dark);
 				snackbar.show();
 			}
 
@@ -1402,7 +1400,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private Drawable getActiveIcon(@DrawableRes int resId) {
-		return getColoredIcon(resId, lightTheme ? R.color.icon_color : R.color.coordinate_input_active_icon_dark);
+		return getColoredIcon(resId, lightTheme ? R.color.icon_color_default_light : R.color.coordinate_input_active_icon_dark);
 	}
 
 	private Drawable getColoredIcon(@DrawableRes int resId, @ColorRes int colorResId) {
@@ -1415,11 +1413,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 	@Override
 	public void updateLocation(Location location) {
-		boolean newLocation = this.location == null && location != null;
-		boolean locationChanged = this.location != null && location != null
-				&& this.location.getLatitude() != location.getLatitude()
-				&& this.location.getLongitude() != location.getLongitude();
-		if (newLocation || locationChanged) {
+		if (!MapUtils.areLatLonEqual(this.location, location)) {
 			this.location = location;
 			updateLocationUi();
 		}

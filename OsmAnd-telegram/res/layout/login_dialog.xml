@@ -14,65 +14,68 @@
 		android:visibility="visible"
 		tools:visibility="gone">
 
-		<FrameLayout
+		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:background="@drawable/bg_pattern_light_xml"
-			android:orientation="vertical">
-
-			<ImageView
-				android:id="@+id/welcome_image"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="end"
-				tools:src="@drawable/bg_introduction_image_top" />
+			android:orientation="vertical"
+			android:visibility="visible">
 
 			<LinearLayout
 				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_marginLeft="@dimen/dialog_welcome_padding_horizontal"
-				android:layout_marginRight="@dimen/dialog_welcome_padding_horizontal"
-				android:orientation="vertical"
-				android:visibility="visible">
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
 
 				<net.osmand.telegram.ui.views.TextViewEx
 					android:id="@+id/welcome_title"
-					android:layout_width="wrap_content"
+					android:layout_width="0dp"
 					android:layout_height="wrap_content"
-					android:layout_marginBottom="@dimen/dialog_welcome_title_bottom_padding"
+					android:layout_marginStart="@dimen/dialog_welcome_padding_horizontal"
+					android:layout_marginLeft="@dimen/dialog_welcome_padding_horizontal"
 					android:layout_marginTop="@dimen/dialog_welcome_title_top_margin"
+					android:layout_marginBottom="@dimen/dialog_welcome_title_bottom_padding"
+					android:layout_weight="1"
 					android:letterSpacing="@dimen/title_letter_spacing"
 					android:text="@string/shared_string_welcome"
 					android:textColor="?attr/ctrl_active_color"
 					android:textSize="@dimen/title_welcome_text_size"
 					app:typeface="@string/font_roboto_mono_bold" />
 
-				<TextView
-					android:id="@+id/welcome_descr"
-					android:layout_width="wrap_content"
-					android:layout_height="0dp"
-					android:layout_weight="1"
-					android:letterSpacing="@dimen/text_description_letter_spacing"
-					android:lineSpacingMultiplier="@dimen/text_description_line_spacing_multiplier"
-					android:textColor="@color/app_bar_title_light"
-					android:textSize="@dimen/descr_text_size"
-					tools:text="@string/welcome_descr" />
-
-				<Button
-					android:id="@+id/welcome_continue_button"
-					style="@style/DialogActionButtonActive.Welcome"
+				<ImageView
+					android:id="@+id/welcome_image"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_gravity="center"
-					android:layout_marginBottom="@dimen/dialog_button_bottom_padding"
-					android:layout_marginLeft="@dimen/content_padding_standard"
-					android:layout_marginRight="@dimen/content_padding_standard"
-					android:layout_marginTop="@dimen/content_padding_standard"
-					android:text="@string/shared_string_continue" />
+					android:layout_gravity="end"
+					tools:src="@drawable/bg_introduction_image_top" />
 
 			</LinearLayout>
 
-		</FrameLayout>
+			<TextView
+				android:id="@+id/welcome_descr"
+				android:layout_width="wrap_content"
+				android:layout_height="0dp"
+				android:layout_marginLeft="@dimen/dialog_welcome_padding_horizontal"
+				android:layout_marginRight="@dimen/dialog_welcome_padding_horizontal"
+				android:layout_weight="1"
+				android:letterSpacing="@dimen/text_description_letter_spacing"
+				android:lineSpacingMultiplier="@dimen/text_description_line_spacing_multiplier"
+				android:textColor="@color/app_bar_title_light"
+				android:textSize="@dimen/descr_text_size"
+				tools:text="@string/welcome_descr" />
+
+			<Button
+				android:id="@+id/welcome_continue_button"
+				style="@style/DialogActionButtonActive.Welcome"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:layout_marginLeft="@dimen/content_padding_standard"
+				android:layout_marginTop="@dimen/content_padding_standard"
+				android:layout_marginRight="@dimen/content_padding_standard"
+				android:layout_marginBottom="@dimen/dialog_button_bottom_padding"
+				android:text="@string/shared_string_continue" />
+
+		</LinearLayout>
 
 	</ScrollView>
 

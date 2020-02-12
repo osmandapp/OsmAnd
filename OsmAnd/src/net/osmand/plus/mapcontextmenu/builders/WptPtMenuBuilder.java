@@ -8,10 +8,10 @@ import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndAppCustomization;
@@ -51,6 +51,13 @@ public class WptPtMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
+	protected void buildDescription(View view) {
+		if (!Algorithms.isEmpty(wpt.desc)) {
+			buildDescriptionRow(view, app.getString(R.string.shared_string_description), wpt.desc, 0, 10, true);
+		}
+	}
+
+	@Override
 	public void buildInternal(View view) {
 		if (wpt.time > 0) {
 			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(view.getContext());
@@ -72,16 +79,11 @@ public class WptPtMenuBuilder extends MenuBuilder {
 					null, Algorithms.capitalizeFirstLetterAndLowercase(app.getString(R.string.plugin_distance_point_hdop)) + ": " + (int)wpt.hdop, 0,
 					false, null, false, 0, false, null, false);
 		}
+		
 		if (!Algorithms.isEmpty(wpt.desc)) {
-			final View row = buildRow(view, R.drawable.ic_action_note_dark, null, wpt.desc, 0, false, null, true, 10, false, null, false);
-			row.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					POIMapLayer.showDescriptionDialog(row.getContext(), app, wpt.desc,
-							row.getResources().getString(R.string.shared_string_description));
-				}
-			});
+			prepareDescription(wpt, view);
 		}
+		
 		if (!Algorithms.isEmpty(wpt.comment)) {
 			final View rowc = buildRow(view, R.drawable.ic_action_note_dark, null, wpt.comment, 0,
 					false, null, true, 10, false, null, false);
@@ -95,6 +97,10 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		}
 
 		buildPlainMenuItems(view);
+	}
+	
+	protected void prepareDescription(final WptPt wpt, View view) {
+
 	}
 
 	private void buildWaypointsView(View view) {
@@ -138,24 +144,32 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, true);
 
 		List<WptPt> points = gpxFile.getPoints();
-		for (int i = 0; i < points.size() && i < 10; i++) {
-			final WptPt point = points.get(i);
-			boolean selected = selectedPoint != null && selectedPoint.equals(point);
-			TextViewEx button = buildButtonInCollapsableView(context, selected, false);
-			button.setText(point.name);
+		String selectedCategory = selectedPoint != null && selectedPoint.category != null ? selectedPoint.category : "";
+		int showCount = 0;
+		for (final WptPt point : points) {
+			String currentCategory = point != null ? point.category : null;
+			if (selectedCategory.equals(currentCategory)) {
+				showCount++;
+				boolean selected = selectedPoint != null && selectedPoint.equals(point);
+				TextViewEx button = buildButtonInCollapsableView(context, selected, false);
+				button.setText(point.name);
 
-			if (!selected) {
-				button.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
-						PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, point.name);
-						mapActivity.getContextMenu().setCenterMarker(true);
-						mapActivity.getContextMenu().show(latLon, pointDescription, point);
-					}
-				});
+				if (!selected) {
+					button.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
+							PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, point.name);
+							mapActivity.getContextMenu().setCenterMarker(true);
+							mapActivity.getContextMenu().show(latLon, pointDescription, point);
+						}
+					});
+				}
+				view.addView(button);
 			}
-			view.addView(button);
+			if (showCount >= 10) {
+				break;
+			}
 		}
 
 		if (points.size() > 10) {

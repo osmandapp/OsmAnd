@@ -13,6 +13,20 @@ libs/it.unibo.alice.tuprolog-tuprolog-3.2.1.jar
 libs/commons-codec-commons-codec-1.11.jar
 libs/OsmAndCore_android-0.1-SNAPSHOT.jar
 
+libs/huawei-*.jar
+huaweidrmlib/
+HwDRM_SDK_*
+drm_strings.xml
+
+# copy_widget_icons.sh
+res/drawable-large/map_*
+res/drawable-large-hdpi/map_*
+res/drawable-large-xhdpi/map_* 
+# copy_widget_icons.sh
+res/drawable-large/widget_*
+res/drawable-large-hdpi/widget_*
+res/drawable-large-xhdpi/widget_* 
+
 valgrind/
 bin/
 dist/

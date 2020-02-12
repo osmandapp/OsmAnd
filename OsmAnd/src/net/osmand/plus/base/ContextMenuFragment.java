@@ -57,7 +57,8 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	}
 
 	public static final int ANIMATION_DURATION = 200;
-	public static final float MIDDLE_STATE_KOEF = .75f;
+	public static final float MIDDLE_STATE_KOEF = .7f;
+	public static final int MIDDLE_STATE_MIN_HEIGHT_DP = 520;
 	public static final String MENU_STATE_KEY = "menu_state_key";
 
 	private InterceptorLinearLayout mainView;
@@ -75,6 +76,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	private boolean initLayout = true;
 	private boolean wasDrawerDisabled;
 	private boolean paused;
+	private boolean dismissing;
 
 	private int minHalfY;
 	private int topScreenPosY;
@@ -164,6 +166,13 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		return nightMode;
 	}
 
+	public void updateNightMode() {
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		}
+	}
+
 	public String getPreferredMapLang() {
 		return preferredMapLang;
 	}
@@ -174,6 +183,14 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 
 	public boolean isPaused() {
 		return paused;
+	}
+
+	public int getMenuFullHeightMax() {
+		return menuFullHeightMax;
+	}
+
+	public int getMenuFullHeight() {
+		return menuFullHeight;
 	}
 
 	@Nullable
@@ -229,13 +246,14 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		MapActivity mapActivity = requireMapActivity();
 		OsmandApplication app = mapActivity.getMyApplication();
 
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		updateNightMode();
 		preferredMapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		transliterateNames = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
 
 		ContextThemeWrapper context =
 				new ContextThemeWrapper(mapActivity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
 		view = LayoutInflater.from(context).inflate(getMainLayoutId(), container, false);
+		initLayout = true;
 		currentMenuState = getInitialMenuState();
 		Bundle args = getArguments();
 		if (args != null) {
@@ -277,7 +295,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		}
 
 		processScreenHeight(container);
-		minHalfY = viewHeight - (int) (viewHeight * MIDDLE_STATE_KOEF);
+		minHalfY = getMinHalfY(mapActivity);
 
 		final GestureDetector swipeDetector = new GestureDetector(app, new HorizontalSwipeConfirm(true));
 
@@ -531,6 +549,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	public void onResume() {
 		super.onResume();
 		paused = false;
+		dismissing = false;
 		ViewParent parent = view.getParent();
 		if (parent != null && containerLayoutListener != null) {
 			((View) parent).addOnLayoutChangeListener(containerLayoutListener);
@@ -579,8 +598,13 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		if (mapActivity != null) {
 			screenHeight = container.getHeight() + statusBarHeight;
 			viewHeight = screenHeight - statusBarHeight;
-			minHalfY = viewHeight - (int) (viewHeight * MIDDLE_STATE_KOEF);
+			minHalfY = getMinHalfY(mapActivity);
 		}
+	}
+
+	private int getMinHalfY(MapActivity mapActivity) {
+		return viewHeight - (int) Math.min(viewHeight * MIDDLE_STATE_KOEF,
+				MIDDLE_STATE_MIN_HEIGHT_DP * mapActivity.getMapView().getDensity() );
 	}
 
 	public boolean isMoving() {
@@ -724,12 +748,17 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		int newMenuState = getCurrentMenuState();
 		boolean needMapAdjust = currentMenuState != newMenuState && newMenuState != MenuState.FULL_SCREEN;
 
+		updateMenuState(currentMenuState, newMenuState);
+
 		applyPosY(currentY, needCloseMenu, needMapAdjust, currentMenuState, newMenuState, 0, animated);
 
 		ContextMenuFragmentListener listener = this.listener;
 		if (listener != null) {
 			listener.onContextMenuStateChanged(this, newMenuState);
 		}
+	}
+
+	protected void updateMenuState(int currentMenuState, int newMenuState) {
 	}
 
 
@@ -868,7 +897,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 						if (getActivity() == null) {
 							return;
 						}
-						calculateLayout(view);
+						calculateLayout(view, initLayout);
 
 						if (!moving) {
 							doLayoutMenu();
@@ -885,7 +914,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	protected void calculateLayout(View view) {
+	protected void calculateLayout(View view, boolean initLayout) {
 		menuFullHeight = mainView.getHeight();
 		menuBottomViewHeight = menuFullHeight;
 		menuFullHeightMax = view.findViewById(R.id.route_menu_cards_container).getHeight() +
@@ -898,7 +927,12 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		updateMainViewLayout(posY);
 	}
 
+	public boolean isDismissing() {
+		return dismissing;
+	}
+
 	public void dismiss() {
+		dismissing = true;
 		if (isSingleFragment()) {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {

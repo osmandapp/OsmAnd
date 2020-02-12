@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="poi_fuel_type">Tipo de combustible</string>
+    <string name="poi_fuel_avia_type">Tipo de combustible (avions)</string>
+    <string name="poi_payment_type">Tipo de pago</string>
+</resources>

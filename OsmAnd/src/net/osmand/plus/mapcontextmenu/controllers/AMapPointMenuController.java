@@ -8,8 +8,13 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Pair;
 
-import net.osmand.aidl.maplayer.point.AMapPoint;
+import net.osmand.AndroidUtils;
+import net.osmand.aidl.AidlContextMenuButtonWrapper;
+import net.osmand.aidl.AidlContextMenuButtonsWrapper;
+import net.osmand.aidl.AidlMapPointWrapper;
+import net.osmand.aidlapi.maplayer.point.AMapPoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndFormatter;
@@ -21,28 +26,44 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
 import net.osmand.util.Algorithms;
 
-import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class AMapPointMenuController extends MenuController {
 
-	private static final float NO_SPEED = -1;
+	private static final float NO_VALUE = -1;
 	private static final int NO_ICON = 0;
 
-	private AMapPoint point;
+	private AidlMapPointWrapper point;
 
 	private Drawable pointDrawable;
 
-	public AMapPointMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull AMapPoint point) {
+	public AMapPointMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull final AidlMapPointWrapper point) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.point = point;
 		pointDrawable = getPointDrawable();
+		final OsmandApplication app = mapActivity.getMyApplication();
+		Map<String, AidlContextMenuButtonsWrapper> buttonsParamsMap = app.getAidlApi().getContextMenuButtonsParams();
+		if (!buttonsParamsMap.isEmpty()) {
+			additionalButtonsControllers = new ArrayList<>();
+			for (AidlContextMenuButtonsWrapper buttonsParams : buttonsParamsMap.values()) {
+				List<String> pointsIds = buttonsParams.getPointsIds();
+				if (((pointsIds == null || pointsIds.isEmpty()) || pointsIds.contains(point.getId())) || buttonsParams.getLayerId().equals(point.getLayerId())) {
+					long callbackId = buttonsParams.getCallbackId();
+					TitleButtonController leftButtonController = createAdditionButtonController(buttonsParams.getLeftButton(), callbackId);
+					TitleButtonController rightButtonController = createAdditionButtonController(buttonsParams.getRightButton(), callbackId);
+					additionalButtonsControllers.add(Pair.create(leftButtonController, rightButtonController));
+				}
+			}
+		}
 	}
 
 	@Override
 	protected void setObject(Object object) {
-		if (object instanceof AMapPoint) {
-			this.point = (AMapPoint) object;
+		if (object instanceof AidlMapPointWrapper) {
+			this.point = (AidlMapPointWrapper) object;
 		}
 	}
 
@@ -109,7 +130,7 @@ public class AMapPointMenuController extends MenuController {
 
 	@Override
 	public int getAdditionalInfoColorId() {
-		return R.color.icon_color;
+		return R.color.icon_color_default_light;
 	}
 
 	@Override
@@ -117,17 +138,38 @@ public class AMapPointMenuController extends MenuController {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			float speed = getPointSpeed();
-			if (speed != NO_SPEED) {
-				String formatted = OsmAndFormatter.getFormattedSpeed(speed, activity.getMyApplication());
-				return activity.getString(R.string.map_widget_speed) + ": " + formatted;
+			if (speed != NO_VALUE) {
+				return OsmAndFormatter.getFormattedSpeed(speed, activity.getMyApplication());
 			}
 		}
 		return super.getAdditionalInfoStr();
 	}
 
+	@NonNull
+	@Override
+	public String getSubtypeStr() {
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			float bearing = getPointBearing();
+			if (bearing != NO_VALUE) {
+				return OsmAndFormatter.getFormattedAzimuth(bearing, activity.getMyApplication());
+			}
+		}
+		return super.getSubtypeStr();
+	}
+
+	@Nullable
+	@Override
+	public Drawable getSubtypeIcon() {
+		if (getPointBearing() != NO_VALUE) {
+			return getIcon(R.drawable.ic_action_bearing_16);
+		}
+		return super.getSubtypeIcon();
+	}
+
 	@Override
 	public int getAdditionalInfoIconRes() {
-		if (getPointSpeed() != NO_SPEED) {
+		if (getPointSpeed() != NO_VALUE) {
 			return R.drawable.ic_action_speed_16;
 		}
 		return super.getAdditionalInfoIconRes();
@@ -138,13 +180,40 @@ public class AMapPointMenuController extends MenuController {
 		return false;
 	}
 
+	private TitleButtonController createAdditionButtonController(final AidlContextMenuButtonWrapper contextMenuButton, final long callbackId) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null || contextMenuButton == null) {
+			return null;
+		}
+		TitleButtonController titleButtonController = new TitleButtonController() {
+			@Override
+			public void buttonPressed() {
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					int buttonId = contextMenuButton.getButtonId();
+					String pointId = point.getId();
+					String layerId = point.getLayerId();
+					mapActivity.getMyApplication().getAidlApi().contextMenuCallbackButtonClicked(callbackId, buttonId, pointId, layerId);
+				}
+			}
+		};
+		OsmandApplication app = mapActivity.getMyApplication();
+		titleButtonController.caption = contextMenuButton.getLeftTextCaption();
+		titleButtonController.rightTextCaption = contextMenuButton.getRightTextCaption();
+		titleButtonController.leftIconId = AndroidUtils.getDrawableId(app, contextMenuButton.getLeftIconName());
+		titleButtonController.rightIconId = AndroidUtils.getDrawableId(app, contextMenuButton.getRightIconName());
+		titleButtonController.enabled = contextMenuButton.isEnabled();
+		titleButtonController.tintIcon = contextMenuButton.isTintIcon();
+
+		return titleButtonController;
+	}
+
 	private int getPointTypeIconId() {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			String iconName = point.getParams().get(AMapPoint.POINT_TYPE_ICON_NAME_PARAM);
 			if (!TextUtils.isEmpty(iconName)) {
-				OsmandApplication app = activity.getMyApplication();
-				return app.getResources().getIdentifier(iconName, "drawable", app.getPackageName());
+				return AndroidUtils.getDrawableId(activity.getMyApplication(), iconName);
 			}
 		}
 		if (!TextUtils.isEmpty(point.getShortName())) {
@@ -159,10 +228,22 @@ public class AMapPointMenuController extends MenuController {
 			try {
 				return Float.parseFloat(speed);
 			} catch (NumberFormatException e) {
-				return NO_SPEED;
+				return NO_VALUE;
 			}
 		}
-		return NO_SPEED;
+		return NO_VALUE;
+	}
+
+	private float getPointBearing() {
+		String bearing = point.getParams().get(AMapPoint.POINT_BEARING_PARAM);
+		if (!TextUtils.isEmpty(bearing)) {
+			try {
+				return Float.parseFloat(bearing);
+			} catch (NumberFormatException e) {
+				return NO_VALUE;
+			}
+		}
+		return NO_VALUE;
 	}
 
 	@Nullable
@@ -188,7 +269,7 @@ public class AMapPointMenuController extends MenuController {
 				}
 				ims.close();
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// ignore
 		}
 

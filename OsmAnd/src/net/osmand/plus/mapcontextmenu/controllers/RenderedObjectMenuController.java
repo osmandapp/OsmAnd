@@ -126,7 +126,6 @@ public class RenderedObjectMenuController extends MenuController {
 				}
 				addPlainMenuItem(R.drawable.ic_action_info_dark, null, link + (renderedObject.getId() >> MapObject.NON_AMENITY_ID_RIGHT_SHIFT), true, true, null);
 			}
-			addMyLocationToPlainItems(latLon);
 		}
 	}
 

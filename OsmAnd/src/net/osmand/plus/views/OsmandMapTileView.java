@@ -186,6 +186,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private long multiTouchStartTime;
 	private long multiTouchEndTime;
 	private boolean wasZoomInMultiTouch;
+	private float elevationAngle;
 
 	public OsmandMapTileView(MapActivity activity, int w, int h) {
 		this.activity = activity;
@@ -257,6 +258,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				}
 			}
 		};
+		elevationAngle = settings.getLastKnownMapElevation();
 	}
 
 	public void setView(View view) {
@@ -399,10 +401,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return getZoom() > LOWEST_ZOOM_TO_ROTATE;
 	}
 
-	public void setRotate(float rotate) {
+	public void setRotate(float rotate, boolean force) {
 		if (isMapRotateEnabled()) {
 			float diff = MapUtils.unifyRotationDiff(rotate, getRotate());
-			if (Math.abs(diff) > 5) { // check smallest rotation
+			if (Math.abs(diff) > 5 || force) { // check smallest rotation
 				animatedDraggingThread.startRotate(rotate);
 			}
 		}
@@ -437,6 +439,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public int getZoom() {
 		return currentViewport.getZoom();
+	}
+
+	public float getElevationAngle() {
+		return elevationAngle;
 	}
 
 	public double getZoomFractionalPart() {
@@ -931,18 +937,28 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void fitRectToMap(double left, double right, double top, double bottom,
 							 int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx) {
+		fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, marginTopPx, 0);
+	}
+
+	public void fitRectToMap(double left, double right, double top, double bottom,
+							 int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx) {
 		RotatedTileBox tb = currentViewport.copy();
 		double border = 0.8;
+		int dx = 0;
 		int dy = 0;
 
 		int tbw = (int) (tb.getPixWidth() * border);
 		int tbh = (int) (tb.getPixHeight() * border);
 		if (tileBoxWidthPx > 0) {
 			tbw = (int) (tileBoxWidthPx * border);
+			if (marginLeftPx > 0) {
+				dx = (tb.getPixWidth() - tileBoxWidthPx) / 2 - marginLeftPx;
+			}
 		} else if (tileBoxHeightPx > 0) {
 			tbh = (int) (tileBoxHeightPx * border);
 			dy = (tb.getPixHeight() - tileBoxHeightPx) / 2 - marginTopPx;
 		}
+		dy += tb.getCenterPixelY() - tb.getPixHeight() / 2;
 		tb.setPixelDimensions(tbw, tbh);
 
 		double clat = bottom / 2 + top / 2;
@@ -954,9 +970,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		while (tb.getZoom() >= 7 && (!tb.containsLatLon(top, left) || !tb.containsLatLon(bottom, right))) {
 			tb.setZoom(tb.getZoom() - 1);
 		}
-		if (dy != 0) {
+		if (dy != 0 || dx != 0) {
 			clat = tb.getLatFromPixel(tb.getPixWidth() / 2, tb.getPixHeight() / 2 + dy);
-			clon = tb.getLonFromPixel(tb.getPixWidth() / 2, tb.getPixHeight() / 2);
+			clon = tb.getLonFromPixel(tb.getPixWidth() / 2 + dx, tb.getPixHeight() / 2);
 		}
 		animatedDraggingThread.startMoving(clat, clon, tb.getZoom(), true);
 	}
@@ -974,6 +990,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			tbh = (int) (tileBoxHeightPx * border);
 			dy = (tb.getPixHeight() - tileBoxHeightPx) / 2 - marginTopPx;
 		}
+		dy += tb.getCenterPixelY() - tb.getPixHeight() / 2;
 		tb.setPixelDimensions(tbw, tbh);
 
 		if (dy != 0) {
@@ -997,6 +1014,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			tbh = tileBoxHeightPx;
 			dy = (tb.getPixHeight() - tileBoxHeightPx) / 2 - marginTopPx;
 		}
+		dy += tb.getCenterPixelY() - tb.getPixHeight() / 2;
 		tb.setPixelDimensions(tbw, tbh);
 		tb.setLatLonCenter(clat, clon);
 		tb.setZoom(zoom);
@@ -1115,6 +1133,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		private LatLon initialCenterLatLon;
 		private boolean startRotating = false;
 		private static final float ANGLE_THRESHOLD = 30;
+		private float initialElevation;
 
 		@Override
 		public void onZoomOrRotationEnded(double relativeToStart, float angleRelative) {
@@ -1185,6 +1204,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		@Override
 		public void onActionCancel() {
 			multiTouch = false;
+		}
+
+		@Override
+		public void onChangingViewAngle(float angle) {
+			setElevationAngle(initialElevation - angle);
+		}
+
+		@Override
+		public void onChangeViewAngleStarted() {
+			initialElevation = elevationAngle;
 		}
 
 		@Override
@@ -1275,6 +1304,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	}
 
+	private void setElevationAngle(float angle) {
+		if (angle < 35f) {
+			angle = 35f;
+		} else if (angle > 90f) {
+			angle = 90f;
+		}
+		this.elevationAngle = angle;
+		((MapActivity) activity).setMapElevation(angle);
+	}
+
 	private boolean isZoomingAllowed(int baseZoom, float dz) {
 		if (baseZoom > getMaxZoom()) {
 			return false;
@@ -1334,7 +1373,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-			dragToAnimate(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY(), true);
+			if (!multiTouchSupport.isInTiltMode()) {
+				dragToAnimate(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY(), true);
+			}
 			return true;
 		}
 

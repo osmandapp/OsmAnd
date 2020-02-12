@@ -422,10 +422,18 @@ public class SearchPhrase {
 	}
 
 	public boolean isSearchTypeAllowed(ObjectType searchType) {
-		if (getSearchTypes() == null) {
-			return true;
+		return isSearchTypeAllowed(searchType, false);
+	}
+
+	public boolean isSearchTypeAllowed(ObjectType searchType, boolean exclusive) {
+		ObjectType[] searchTypes = getSearchTypes();
+		if (searchTypes == null) {
+			return !exclusive;
 		} else {
-			for (ObjectType type : getSearchTypes()) {
+			if (exclusive && searchTypes.length > 1) {
+				return false;
+			}
+			for (ObjectType type : searchTypes) {
 				if (type == searchType) {
 					return true;
 				}
@@ -739,12 +747,20 @@ public class SearchPhrase {
 		}
 		
 	}
+	public int getRadiusSearch(int meters, int radiusLevel) {
+		int res = meters;
+		for(int k = 0; k < radiusLevel; k++) {
+			res = res * (k % 2 == 0 ? 2 : 3);
+		}
+		return res;
+	}
+	
 	public int getRadiusSearch(int meters) {
-		return (1 << (getRadiusLevel() - 1)) * meters;
+		return getRadiusSearch(meters, getRadiusLevel() - 1);
 	}
 	
 	public int getNextRadiusSearch(int meters) {
-		return (1 << (getRadiusLevel())) * meters;
+		return getRadiusSearch(meters, getRadiusLevel());
 	}
 
 	public static int icompare(int x, int y) {

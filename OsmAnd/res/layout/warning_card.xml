@@ -38,7 +38,7 @@
 			tools:text="@string/public_transport_warning_title" />
 
 		<net.osmand.plus.widgets.TextViewEx
-			android:id="@+id/warning_descr"
+			android:id="@+id/warning_link"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:letterSpacing="@dimen/text_button_letter_spacing"

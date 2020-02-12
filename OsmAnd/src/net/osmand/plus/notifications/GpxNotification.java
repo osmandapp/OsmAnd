@@ -14,6 +14,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.util.Algorithms;
 
@@ -98,6 +99,11 @@ public class GpxNotification extends OsmandNotification {
 	}
 
 	@Override
+	public Intent getContentIntent() {
+		return new Intent(app, MapActivity.class);
+	}
+
+	@Override
 	public void onNotificationDismissed() {
 		if (!wasNoDataDismissed) {
 			wasNoDataDismissed = lastBuiltNoData;
@@ -136,6 +142,7 @@ public class GpxNotification extends OsmandNotification {
 				lastBuiltNoData = true;
 			}
 		}
+		notificationText = notificationText + "  (" + Integer.toString(app.getSavingTrackHelper().getTrkPoints()) + ")";
 
 		if ((wasNoDataDismissed || !app.getSettings().SHOW_TRIP_REC_NOTIFICATION.get()) && !ongoing) {
 			return null;

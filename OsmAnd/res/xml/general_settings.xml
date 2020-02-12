@@ -15,6 +15,7 @@
 
 	<PreferenceCategory android:title="@string/misc_pref_title" android:key="misc">
 		<ListPreference android:key="osmand_theme" android:title="@string/choose_osmand_theme" android:summary="@string/choose_osmand_theme_descr"></ListPreference>
+		<ListPreference android:key="external_input_device" android:title="@string/external_input_device" android:summary="@string/external_input_device_descr"></ListPreference>
 	</PreferenceCategory>
 	<PreferenceCategory android:title="@string/settings_privacy">
 	    <PreferenceScreen android:title="@string/proxy_pref_title" android:description="@string/proxy_pref_descr" android:key="proxy">

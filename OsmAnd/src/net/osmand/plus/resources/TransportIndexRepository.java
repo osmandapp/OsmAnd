@@ -17,7 +17,9 @@ public interface TransportIndexRepository {
 	public void searchTransportStops(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude,
 			int limit, List<TransportStop> stops, ResultMatcher<TransportStop> matcher);
 	
-	public List<TransportRoute> getRouteForStop(TransportStop stop);
+	public List<TransportRoute> getRoutesForStop(TransportStop stop);
+
+	public List<TransportRoute> getRoutesForReferences(int[] referencesToRoutes);
 
 	public boolean isUseForPublicTransport();
 }

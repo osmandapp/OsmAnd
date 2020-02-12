@@ -13,12 +13,13 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.ContributionVersionActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 
-import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	private static final String ID = "osmand.development";
@@ -28,7 +29,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		this.app = app;
 		//ApplicationMode.regWidgetVisibility("fps", new ApplicationMode[0]);
 	}
-
 
 	@Override
 	public String getId() {
@@ -123,6 +123,11 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	@Override
 	public Class<? extends Activity> getSettingsActivity() {
 		return SettingsDevelopmentActivity.class;
+	}
+
+	@Override
+	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
+		return DevelopmentSettingsFragment.class;
 	}
 
 	@Override

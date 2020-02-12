@@ -1,7 +1,6 @@
 package net.osmand.search.core;
 
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.Street;
@@ -30,10 +29,18 @@ public class SearchResult {
 	public boolean firstUnknownWordMatches = true;
 	public boolean unknownPhraseMatches = false;
 
-	public boolean isUnknownPhraseMatches() {
-		boolean res = unknownPhraseMatches;
-		if (!res && parentSearchResult != null) {
-			res = parentSearchResult.unknownPhraseMatches;
+	public double getUnknownPhraseMatchWeight() {
+		double res = 0;
+		boolean isHouse = objectType == ObjectType.HOUSE;
+		if (unknownPhraseMatches) {
+			res = ObjectType.getTypeWeight(objectType);
+		}
+		if (res == 0 && parentSearchResult != null && parentSearchResult.unknownPhraseMatches) {
+			if (isHouse && parentSearchResult.objectType == ObjectType.STREET) {
+				res = ObjectType.getTypeWeight(ObjectType.HOUSE);
+			} else {
+				res = ObjectType.getTypeWeight(parentSearchResult.objectType);
+			}
 		}
 		return res;
 	}

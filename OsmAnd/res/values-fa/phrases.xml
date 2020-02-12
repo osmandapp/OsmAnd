@@ -39,7 +39,7 @@
     <string name="poi_bedding">پنبه زنی</string>
     <string name="poi_dive">تجهیزات غواصی</string>
     <string name="poi_doityourself">فروشگاه بهسازی خانه</string>
-    <string name="poi_erotic"></string>
+    <string name="poi_erotic"/>
     <string name="poi_fishing">لوازم ماهیگیری</string>
     <string name="poi_florist">گلفروشی</string>
     <string name="poi_frame">قاب سازی</string>
@@ -77,7 +77,7 @@
     <string name="poi_ticket">فروشگاه بلیط</string>
     <string name="poi_tobacco">دخانیات</string>
     <string name="poi_toys">اسباب بازی فروشی</string>
-    <string name="poi_trade">باربری</string>
+    <string name="poi_trade"/>
     <string name="poi_vacuum_cleaner">فروشگاه جاروبرقی</string>
     <string name="poi_variety_store">فروشگاه متنوع و ارزان</string>
     <string name="poi_video">کلوب فیلم</string>
@@ -121,7 +121,7 @@
     <string name="poi_service_tyres">پنچرگیری</string>
     <string name="poi_vehicle_inspection">معاینه فنی خودرو</string>
     <string name="poi_car_wash">کارواش</string>
-    <string name="poi_fuel">پمپ بنزین؛ جایگاه سوخت؛ جایگاه سوخت‌گیری؛ جایگاه</string>
+    <string name="poi_fuel">پمپ بنزین; جایگاه سوخت; جایگاه سوخت‌گیری</string>
     <string name="poi_electricity_combined_charging">ایستگاه شارژ</string>
     <string name="poi_vehicle_ramp">سطح شیب دار خودرو</string>
     <string name="poi_compressed_air">هوای فشرده</string>
@@ -169,7 +169,7 @@
     <string name="poi_bridge">پل</string>
     <string name="poi_speed_camera">دوربین سرعت</string>
     <string name="poi_turning_circle">محوطه دور زدن</string>
-    <string name="poi_motorway_junction">محل اتصال بزرگراه</string>
+    <string name="poi_motorway_junction">تقاطع آزادراه</string>
     <string name="poi_water_well">آب آشامیدنی</string>
     <string name="poi_standpipe">پایه لوله</string>
     <string name="poi_water_works">سیستم آبرسانی</string>
@@ -232,7 +232,7 @@
     <string name="poi_town">شهر</string>
     <string name="poi_village">روستا</string>
     <string name="poi_hamlet">دهکده</string>
-    <string name="poi_isolated_dwelling">منطقه مسکونی</string>
+    <string name="poi_isolated_dwelling">سکونتگاه دورافتاده</string>
     <string name="poi_suburb">حومه شهر</string>
     <string name="poi_neighbourhood">محله</string>
     <string name="poi_locality">محل</string>
@@ -394,7 +394,7 @@
     <string name="poi_information">اطلاعات</string>
     <string name="poi_clock">ساعت</string>
     <string name="poi_travel_agent">آژانس مسافرتی</string>
-    <string name="poi_viewpoint">نقشه</string>
+    <string name="poi_viewpoint">نقطهٔ دید</string>
     <string name="poi_camp_site">محل چادر زدن</string>
     <string name="poi_caravan_site">کاروانسرا</string>
     <string name="poi_picnic_site">محل پیک نیک</string>
@@ -665,7 +665,7 @@
     <string name="poi_aerialway_bicycle">حمل‌ونقل دوچرخه</string>
     <string name="poi_aerialway_heating">گرمایش</string>
     <string name="poi_pump">پنجرگیری دوچرخه</string>
-    <string name="poi_observatory_designation">رصدخانه</string>
+    <string name="poi_observatory_designation"/>
     <string name="poi_pharmacy_dispensing">داروخانه</string>
     <string name="poi_star_rating">رتبه‌بندی ستاره‌ای</string>
     <string name="poi_clock_option">تنظیمات ساعت</string>
@@ -692,7 +692,7 @@
     <string name="poi_sport">ورزش</string>
     <string name="poi_board_type_public_transport">حمل و نقل عمومی</string>
     <string name="poi_vending_public_transport_tickets">بلیت‌های حمل و نقل عمومی</string>
-    <string name="poi_vending_parking_tickets_public_transport_tickets">بلیت‌های پارکینگ؛ بلیت‌های حمل‌ونقل عمومی</string>
+    <string name="poi_vending_parking_tickets_public_transport_tickets">بلیت‌های پارکینگ; بلیت‌های حمل‌ونقل عمومی</string>
     <string name="poi_shelter_type_public_transport">حمل و نقل عمومی</string>
     <string name="poi_clothes_sports">ورزشی</string>
     <string name="poi_shoes_sport">ورزشی</string>
@@ -754,7 +754,7 @@
     <string name="poi_emergency">اورژانس</string>
     <string name="poi_transportation">حمل و نقل</string>
     <string name="poi_road_obstacle">مانع جاده</string>
-    <string name="poi_filling_station">پمپ بنزین</string>
+    <string name="poi_filling_station">جایگاه سوخت</string>
     <string name="poi_animal_shelter_type">حیوانات مجاز</string>
     <string name="poi_personal_transport">حمل و نقل شخصی</string>
     <string name="poi_public_transport">حمل و نقل عمومی</string>
@@ -1195,7 +1195,7 @@
     <string name="poi_internet_access_yes">دسترسی اینترنت: دارد</string>
     <string name="poi_internet_access_fee_yes">دسترسی اینترنت - پولی</string>
     <string name="poi_smoking_separated">در اتاق جداگانه</string>
-    <string name="poi_smoking_isolated">در اتاق ایزوله</string>
+    <string name="poi_smoking_isolated">در یک اتاق جدا</string>
     <string name="poi_piste_grooming_scooter">اسکوتر</string>
     <string name="poi_piste_grooming_skating">اسکیت</string>
     <string name="poi_rooms">اتاق‌ها</string>
@@ -1347,4 +1347,5 @@
     <string name="poi_park_ride_hov">خودروی پرسرنشین</string>
     <string name="poi_park_ride_tram">تراموا</string>
     <string name="poi_park_ride_ferry">فرابر</string>
+    <string name="poi_logistics">دفتر باربری</string>
 </resources>

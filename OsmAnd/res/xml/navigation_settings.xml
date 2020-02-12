@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <ListPreference
-        android:key="router_service"
-        android:summary="@string/router_service_descr"
-        android:title="@string/router_service"/>
 
     <PreferenceCategory
         android:key="routing_preferences"
@@ -14,7 +10,7 @@
             android:title="@string/fast_route_mode"/>
         <Preference
             android:key="avoid_in_routing"
-            android:summary="@string/avoid_in_routing_descr"
+            android:summary="@string/avoid_in_routing_descr_"
             android:title="@string/avoid_in_routing_title"/>
         <Preference
             android:key="prefer_in_routing"
@@ -37,6 +33,9 @@
             android:key="snap_to_road"
             android:summary="@string/snap_to_road_descr"
             android:title="@string/snap_to_road"/>
+        <CheckBoxPreference
+            android:key="enable_time_conditional_routing"
+            android:title="@string/temporary_conditional_routing"/>
         <Preference
             android:key="show_routing_alarms"
             android:summary="@string/show_warnings_descr"
@@ -74,6 +73,25 @@
             android:title="@string/delay_to_start_navigation"
             android:summary="@string/delay_to_start_navigation_descr" />
         -->
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="turn_screen_on"
+        android:title="@string/wake_on_voice">
+
+        <Preference
+            android:selectable="false"
+            android:summary="@string/wake_on_voice_descr" />
+
+        <ListPreference
+            android:key="turn_screen_on_time_int"
+            android:summary="@string/turn_screen_on_time_descr"
+            android:title="@string/shared_string_time"/>
+        
+        <CheckBoxPreference
+            android:key="turn_screen_on_sensor"
+            android:summary="@string/turn_screen_on_sensor_descr"
+            android:title="@string/turn_screen_on_sensor"/>
     </PreferenceCategory>
 
     <PreferenceCategory

@@ -61,7 +61,7 @@ public class DashSimulateFragment extends DashBaseFragment {
 
 			@Override
 			public void onClick(View v) {
-				loc.getLocationSimulation().startStopRouteAnimation(getActivity());
+				loc.getLocationSimulation().startStopGpxAnimation(getActivity());
 				dashboard.hideDashboard();
 			}
 		};

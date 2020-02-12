@@ -1,25 +1,5 @@
 package net.osmand.plus.mapmarkers;
 
-import net.osmand.AndroidUtils;
-import net.osmand.Location;
-import net.osmand.data.Amenity;
-import net.osmand.data.FavouritePoint;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.GPXUtilities.WptPt;
-import net.osmand.data.WptLocationPoint;
-import net.osmand.plus.MapMarkersHelper.MapMarker;
-import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
-import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapmarkers.SelectionMarkersGroupBottomSheetDialogFragment.AddMarkersGroupFragmentListener;
-import net.osmand.plus.mapmarkers.adapters.MapMarkerItemViewHolder;
-import net.osmand.plus.mapmarkers.adapters.MapMarkersGroupsAdapter;
-import net.osmand.plus.widgets.EmptyStateRecyclerView;
-import net.osmand.util.MapUtils;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -42,6 +22,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities.WptPt;
+import net.osmand.Location;
+import net.osmand.data.Amenity;
+import net.osmand.data.FavouritePoint;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.data.WptLocationPoint;
+import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapmarkers.SelectionMarkersGroupBottomSheetDialogFragment.AddMarkersGroupFragmentListener;
+import net.osmand.plus.mapmarkers.adapters.MapMarkerItemViewHolder;
+import net.osmand.plus.mapmarkers.adapters.MapMarkersGroupsAdapter;
+import net.osmand.plus.widgets.EmptyStateRecyclerView;
+import net.osmand.util.MapUtils;
+
 public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassListener, OsmAndLocationListener {
 
 	public static final String TAG = "MapMarkersGroupsFragment";
@@ -63,7 +64,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final MapActivity mapActivity = (MapActivity) getActivity();
 		final boolean night = !mapActivity.getMyApplication().getSettings().isLightContent();
-		mainView = inflater.inflate(R.layout.fragment_map_markers_groups, container, false);
+		mainView = UiUtilities.getInflater(mapActivity, night).inflate(R.layout.fragment_map_markers_groups, container, false);
 
 		Fragment selectionMarkersGroupFragment = getChildFragmentManager().findFragmentByTag(SelectionMarkersGroupBottomSheetDialogFragment.TAG);
 		if (selectionMarkersGroupFragment != null) {
@@ -84,7 +85,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 			}
 		});
 
-		backgroundPaint.setColor(ContextCompat.getColor(getActivity(), night ? R.color.dashboard_divider_dark : R.color.dashboard_divider_light));
+		backgroundPaint.setColor(ContextCompat.getColor(getActivity(), night ? R.color.divider_color_dark : R.color.divider_color_light));
 		backgroundPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 		backgroundPaint.setAntiAlias(true);
 		iconPaint.setAntiAlias(true);
@@ -144,8 +145,8 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 						colorIcon = R.color.map_widget_blue;
 						colorText = R.color.map_widget_blue;
 					} else {
-						colorIcon = night ? 0 : R.color.icon_color;
-						colorText = R.color.dashboard_subheader_text_light;
+						colorIcon = night ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
+						colorText = night ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
 					}
 					if (colorIcon != 0) {
 						iconPaint.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(getActivity(), colorIcon), PorterDuff.Mode.SRC_IN));
@@ -206,7 +207,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 									updateAdapter();
 								}
 							});
-					AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);
+					AndroidUtils.setSnackbarTextColor(snackbar, R.color.active_color_primary_dark);
 					snackbar.show();
 				}
 			}
@@ -235,7 +236,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 									? app.getFavorites().getVisibleFavByLatLon(marker.point)
 									: marker.favouritePoint;
 							if (fav != null) {
-								showMap(marker.point, fav.getPointDescription(), fav);
+								showMap(marker.point, fav.getPointDescription(mapActivity), fav);
 								return;
 							}
 
@@ -440,11 +441,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 
 	@Override
 	public void updateLocation(Location location) {
-		boolean newLocation = this.location == null && location != null;
-		boolean locationChanged = this.location != null && location != null
-				&& this.location.getLatitude() != location.getLatitude()
-				&& this.location.getLongitude() != location.getLongitude();
-		if (newLocation || locationChanged) {
+		if (!MapUtils.areLatLonEqual(this.location, location)) {
 			this.location = location;
 			updateLocationUi();
 		}

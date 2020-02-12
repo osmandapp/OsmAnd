@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -49,7 +50,7 @@ public class GpxItemMenuBuilder extends MenuBuilder {
 		int gpxSmallTextMargin = (int) ll.getResources().getDimension(R.dimen.gpx_small_text_margin);
 		float gpxTextSize = ll.getResources().getDimension(R.dimen.default_desc_text_size);
 
-		int textColor = app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark);
+		int textColor = ContextCompat.getColor(ll.getContext(), light ? R.color.text_color_primary_light : R.color.text_color_primary_dark);
 
 		buildIcon(ll, gpxSmallIconMargin, R.drawable.ic_small_point);
 		buildTextView(ll, gpxSmallTextMargin, gpxTextSize, textColor, "" + item.analysis.wptPoints);

@@ -330,7 +330,7 @@ public class ItemViewHolder {
 				public void onClick(View v) {
 					switch (clickAction) {
 						case ASK_FOR_FULL_VERSION_PURCHASE:
-							context.getMyApplication().logEvent(context, "in_app_purchase_show_from_wiki_context_menu");
+							context.getMyApplication().logEvent("in_app_purchase_show_from_wiki_context_menu");
 							ChoosePlanDialogFragment.showWikipediaInstance(context.getSupportFragmentManager());
 							break;
 						case ASK_FOR_DEPTH_CONTOURS_PURCHASE:

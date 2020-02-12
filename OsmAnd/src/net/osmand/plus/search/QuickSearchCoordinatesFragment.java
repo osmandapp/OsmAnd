@@ -3,10 +3,12 @@ package net.osmand.plus.search;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -97,6 +99,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 	private boolean paused;
 	private LatLon currentLatLon;
 	private UpdateLocationViewCache updateLocationViewCache;
+	private boolean isLightTheme;
 
 	private ProcessIndexItemsTask parseOlcCodeTask = null;
 
@@ -114,7 +117,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		boolean isLightTheme = getMyApplication().getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
+		isLightTheme = getMyApplication().getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
 		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 	}
@@ -127,7 +130,9 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		view = inflater.inflate(R.layout.search_advanced_coords, container, false);
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(app.getUIUtilities().getIcon(R.drawable.ic_arrow_back));
+		Drawable icBack = app.getUIUtilities().getIcon(R.drawable.ic_arrow_back, 
+				isLightTheme ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark);
+		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -135,6 +140,9 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 				dismiss();
 			}
 		});
+		toolbar.setBackgroundColor(ContextCompat.getColor(app, isLightTheme ? R.color.app_bar_color_light : R.color.app_bar_color_dark));
+		toolbar.setTitleTextColor(ContextCompat.getColor(app, isLightTheme ? R.color.color_white : R.color.text_color_primary_dark));
+		
 		updateLocationViewCache = app.getUIUtilities().getUpdateLocationViewCache();
 		myLocation = app.getLocationProvider().getLastKnownLocation();
 		currentFormat = app.getSettings().COORDINATES_FORMAT.get();

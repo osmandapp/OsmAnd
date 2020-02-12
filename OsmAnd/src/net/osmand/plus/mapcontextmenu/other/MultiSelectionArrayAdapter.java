@@ -40,7 +40,7 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 		if (item != null) {
 			if (!menu.isLandscapeLayout()) {
 				AndroidUtils.setBackground(convertView.getContext(), convertView, !menu.isLight(),
-						R.color.ctx_menu_bg_light, R.color.ctx_menu_bg_dark);
+						R.color.list_background_color_light, R.color.list_background_color_dark);
 			}
 			convertView.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -53,6 +53,12 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 			UiUtilities iconsCache = menu.getMapActivity().getMyApplication().getUIUtilities();
 			final View iconLayout = convertView.findViewById(R.id.context_menu_icon_layout);
 			final ImageView iconView = (ImageView) convertView.findViewById(R.id.context_menu_icon_view);
+			if (item.getPointDescription().isFavorite() || item.getPointDescription().isWpt()) {
+				int iconSize = getContext().getResources().getDimensionPixelSize(R.dimen.dialog_button_height);
+				iconView.getLayoutParams().height = iconSize;
+				iconView.getLayoutParams().width = iconSize;
+				iconView.requestLayout();
+			}
 			Drawable icon = item.getRightIcon();
 			int iconId = item.getRightIconId();
 			if (icon != null) {
@@ -69,7 +75,7 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 			// Text line 1
 			TextView line1 = (TextView) convertView.findViewById(R.id.context_menu_line1);
 			line1.setTextColor(ContextCompat.getColor(getContext(),
-					!menu.isLight() ? R.color.ctx_menu_title_color_dark : R.color.ctx_menu_title_color_light));
+					!menu.isLight() ? R.color.text_color_primary_dark : R.color.text_color_primary_light));
 			line1.setText(item.getTitleStr());
 
 			// Text line 2

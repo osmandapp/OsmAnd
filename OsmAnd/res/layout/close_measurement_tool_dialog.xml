@@ -10,6 +10,9 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
+        android:textColor="?android:textColorPrimary"
+        android:layout_marginLeft="@dimen/content_padding_small"
+        android:layout_marginStart="@dimen/content_padding_small"
         android:text="@string/keep_showing_on_map"/>
 
     <android.support.v7.widget.SwitchCompat

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:title="@string/osmand_settings">
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:icon="@drawable/ic_world_globe_dark"
+		android:key="default_application_mode_string"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/settings_preset" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:icon="@drawable/ic_action_map_language"
+		android:key="preferred_locale"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/preferred_locale" />
+
+	<Preference
+		android:key="external_storage_dir"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/application_dir"
+		app:fragment="net.osmand.plus.settings.DataStorageFragment"
+		tools:icon="@drawable/ic_action_folder" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<PreferenceCategory
+		android:key="privacy_and_security"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/settings_privacy_and_security" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:icon="@drawable/ic_action_privacy_and_security"
+		android:key="send_anonymous_data"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:persistent="false"
+		android:summaryOff="@string/shared_string_off"
+		android:summaryOn="@string/shared_string_on"
+		android:title="@string/analytics_pref_title" />
+
+	<Preference
+		android:key="dialogs_and_notifications"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/dialogs_and_notifications_title"
+		android:summary="@string/shared_string_all"
+		app:fragment="net.osmand.plus.settings.DialogsAndNotificationsSettingsFragment"
+		tools:icon="@drawable/ic_action_notification" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="enable_proxy"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_off"
+		android:summaryOn="@string/shared_string_on"
+		android:title="@string/proxy_pref_title"
+		app:fragment="net.osmand.plus.settings.ProxySettingsFragment"
+		tools:icon="@drawable/ic_action_proxy" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="use_system_screen_timeout"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/use_system_screen_timeout" />
+
+</PreferenceScreen>

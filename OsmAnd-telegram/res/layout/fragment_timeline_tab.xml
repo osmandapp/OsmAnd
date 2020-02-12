@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical">
@@ -20,11 +21,11 @@
 			android:letterSpacing="@dimen/title_letter_spacing"
 			android:maxLines="1"
 			android:paddingLeft="@dimen/content_padding_standard"
+			android:paddingTop="@dimen/content_padding_standard"
 			android:paddingRight="@dimen/content_padding_standard"
+			android:paddingBottom="12dp"
 			android:text="@string/timeline"
 			android:textColor="@color/app_bar_title_light"
-			android:paddingTop="@dimen/content_padding_standard"
-			android:paddingBottom="12dp"
 			android:textSize="@dimen/title_text_size"
 			app:typeface="@string/font_roboto_mono_bold" />
 
@@ -84,6 +85,19 @@
 			android:paddingLeft="@dimen/content_padding_standard"
 			android:paddingRight="@dimen/content_padding_standard">
 
+			<ImageView
+				android:id="@+id/date_btn_previous"
+				android:layout_width="wrap_content"
+				android:layout_height="@dimen/dialog_button_height"
+				android:layout_gravity="start|center_vertical"
+				android:background="@drawable/btn_round_border"
+				android:paddingStart="@dimen/content_padding_half"
+				android:paddingLeft="@dimen/content_padding_half"
+				android:paddingEnd="@dimen/content_padding_big"
+				android:paddingRight="@dimen/content_padding_big"
+				android:src="@drawable/ic_arrow_back"
+				tools:tint="?attr/ctrl_active_color" />
+
 			<net.osmand.telegram.ui.views.TextViewEx
 				android:id="@+id/date_btn"
 				android:layout_width="wrap_content"
@@ -103,6 +117,20 @@
 				android:textSize="@dimen/text_button_text_size"
 				app:typeface="@string/font_roboto_medium" />
 
+
+			<ImageView
+				android:id="@+id/date_btn_next"
+				android:layout_width="wrap_content"
+				android:layout_height="@dimen/dialog_button_height"
+				android:layout_gravity="end|center_vertical"
+				android:background="@drawable/btn_round_border"
+				android:paddingStart="@dimen/content_padding_big"
+				android:paddingLeft="@dimen/content_padding_big"
+				android:paddingEnd="@dimen/content_padding_half"
+				android:paddingRight="@dimen/content_padding_half"
+				android:src="@drawable/ic_arrow_forward"
+				tools:tint="?attr/ctrl_active_color" />
+
 		</FrameLayout>
 
 	</android.support.design.widget.AppBarLayout>
@@ -112,13 +140,23 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
 
-		<android.support.v7.widget.RecyclerView
-			android:id="@+id/recycler_view"
+		<FrameLayout
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:clipToPadding="false"
-			android:paddingBottom="@dimen/list_item_content_margin"
-			android:scrollbars="vertical" />
+			android:layout_height="match_parent">
+
+			<net.osmand.telegram.ui.views.EmptyStateRecyclerView
+				android:id="@+id/recycler_view"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:clipToPadding="false"
+				android:paddingBottom="@dimen/list_item_content_margin"
+				android:scrollbars="vertical" />
+
+			<include
+				android:id="@+id/empty_view"
+				layout="@layout/empty_state_timeline" />
+
+		</FrameLayout>
 
 	</android.support.v4.widget.SwipeRefreshLayout>
 

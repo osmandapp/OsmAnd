@@ -15,7 +15,7 @@
         android:minHeight="60dp"
         android:orientation="horizontal">
 
-        <ImageView
+        <android.support.v7.widget.AppCompatImageView
             android:id="@+id/handle_view"
             android:layout_width="56dp"
             android:layout_height="match_parent"
@@ -26,14 +26,14 @@
             android:tint="?attr/secondary_icon_color"
             android:src="@drawable/ic_action_reorder"/>
 
-        <ImageView
+        <android.support.v7.widget.AppCompatImageView
             android:id="@+id/imageView"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="8dp"
             android:scaleType="centerInside"
-            android:tint="?attr/primary_icon_color"
+            android:tint="?attr/default_icon_color"
             android:src="@drawable/ic_action_flag_dark"/>
 
         <LinearLayout
@@ -65,7 +65,7 @@
 
         </LinearLayout>
 
-        <ImageView
+        <android.support.v7.widget.AppCompatImageView
             android:id="@+id/closeImageButton"
             android:layout_width="56dp"
             android:layout_height="match_parent"

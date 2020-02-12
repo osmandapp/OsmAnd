@@ -4,8 +4,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -36,7 +34,7 @@ import net.osmand.util.MapUtils;
 import java.util.List;
 
 public class MapRouteInfoMenuFragment extends ContextMenuFragment {
-	public static final String TAG = "MapRouteInfoMenuFragment";
+	public static final String TAG = MapRouteInfoMenuFragment.class.getName();
 
 	@Nullable
 	private MapRouteInfoMenu menu;
@@ -71,11 +69,6 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 	@Override
 	public int getToolbarHeight() {
 		return 0;
-	}
-
-	@Override
-	public boolean isSingleFragment() {
-		return true;
 	}
 
 	@Override
@@ -152,32 +145,37 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 				dismiss();
 				return;
 			}
-			updateControlButtons();
 			updateInfo();
 			View mainView = getMainView();
 			if (mainView != null) {
 				View progressBar = mainView.findViewById(R.id.progress_bar);
+				RoutingHelper routingHelper = app.getRoutingHelper();
 				boolean progressVisible = progressBar != null && progressBar.getVisibility() == View.VISIBLE;
-				boolean routeCalculating = app.getRoutingHelper().isRouteBeingCalculated() || app.getTransportRoutingHelper().isRouteBeingCalculated();
+				boolean routeCalculating = routingHelper.isRouteBeingCalculated() || app.getTransportRoutingHelper().isRouteBeingCalculated();
 				if (progressVisible && !routeCalculating) {
 					hideRouteCalculationProgressBar();
 					openMenuHalfScreen();
+				} else if (!progressVisible && routeCalculating && !routingHelper.isOsmandRouting()) {
+					updateRouteCalculationProgress(0);
 				}
 			}
-			menu.addTargetPointListener();
+			menu.onResume(this);
 		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
+		if (menu != null) {
+			menu.onPause(this);
+		}
 	}
 
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
 		if (menu != null) {
-			menu.onDismiss();
+			menu.onDismiss(this, getCurrentMenuState(), null, false);
 		}
 	}
 
@@ -187,6 +185,18 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 			menu.build(cardsContainer);
 		}
 	}
+
+	@Override
+	protected void updateMenuState(int currentMenuState, int newMenuState) {
+		if(getMyApplication().getRoutingHelper().isRouteCalculated() ) {
+			ApplicationMode mV = getMyApplication().getRoutingHelper().getAppMode();
+			if (newMenuState == MenuState.HEADER_ONLY && currentMenuState == MenuState.HALF_SCREEN) {
+				getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.setModeValue(mV,true);
+			} else if (currentMenuState == MenuState.HEADER_ONLY && newMenuState == MenuState.HALF_SCREEN) {
+				getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.resetModeToDefault(mV);
+			}
+		}
+ 	}
 
 	@Override
 	protected void setViewY(int y, boolean animated, boolean adjustMapPos) {
@@ -218,7 +228,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
 					view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 				}
-				return nightMode ? R.color.dialog_divider_dark : R.color.dialog_divider_light;
+				return nightMode ? R.color.divider_color_dark : R.color.divider_color_light;
 			} else {
 				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
 					view.setSystemUiVisibility(view.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -254,11 +264,19 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 	}
 
 	@Override
-	protected void calculateLayout(View view) {
+	protected void calculateLayout(View view, boolean initLayout) {
 		menuTitleHeight = view.findViewById(R.id.route_menu_top_shadow_all).getHeight()
 				+ view.findViewById(R.id.control_buttons).getHeight()
 				- view.findViewById(R.id.buttons_shadow).getHeight();
-		super.calculateLayout(view);
+		LinearLayout cardsContainer = getCardsContainer();
+		if (menu != null && cardsContainer != null && cardsContainer.getChildCount() > 0 && menu.isRouteSelected()) {
+			View topRouteCard = cardsContainer.getChildAt(0);
+			View badgesView = topRouteCard.findViewById(R.id.routes_badges);
+			View badgesPaddingView = topRouteCard.findViewById(R.id.badges_padding);
+			int paddingHeight = badgesPaddingView != null ? badgesPaddingView.getHeight() : 0;
+			menuTitleHeight += badgesView != null ? badgesView.getBottom() + paddingHeight : 0;
+		}
+		super.calculateLayout(view, initLayout);
 	}
 
 	private void adjustMapPosition(int y) {
@@ -355,6 +373,16 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		}
 	}
 
+	private boolean isPublicTransportMode() {
+		OsmandApplication app = getMyApplication();
+		return app != null && app.getRoutingHelper().isPublicTransportMode();
+	}
+
+	private boolean isOsmandRouting() {
+		OsmandApplication app = getMyApplication();
+		return app != null && app.getRoutingHelper().isOsmandRouting();
+	}
+	
 	public void updateRouteCalculationProgress(int progress) {
 		MapActivity mapActivity = getMapActivity();
 		View mainView = getMainView();
@@ -362,9 +390,12 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		if (mapActivity == null || mainView == null || view == null) {
 			return;
 		}
-
+		boolean indeterminate = isPublicTransportMode() || !isOsmandRouting();
 		ProgressBar progressBar = (ProgressBar) mainView.findViewById(R.id.progress_bar);
 		if (progressBar != null) {
+			if (progress == 0) {
+				progressBar.setIndeterminate(indeterminate);
+			}
 			if (progressBar.getVisibility() != View.VISIBLE) {
 				progressBar.setVisibility(View.VISIBLE);
 			}
@@ -375,10 +406,10 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 			if (progressBarButton.getVisibility() != View.VISIBLE) {
 				progressBarButton.setVisibility(View.VISIBLE);
 			}
-			progressBarButton.setProgress(progress);
+			progressBarButton.setProgress(indeterminate ? 0 : progress);
 		}
 		TextViewExProgress textViewExProgress = (TextViewExProgress) view.findViewById(R.id.start_button_descr);
-		textViewExProgress.percent = progress / 100f;
+		textViewExProgress.percent = indeterminate ? 0 : progress / 100f;
 		textViewExProgress.invalidate();
 	}
 
@@ -394,35 +425,12 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		if (progressBar != null) {
 			progressBar.setVisibility(View.GONE);
 		}
-		View progressBarButton = view.findViewById(R.id.progress_bar_button);
+		ProgressBar progressBarButton = (ProgressBar) view.findViewById(R.id.progress_bar_button);
 		if (progressBarButton != null) {
-			progressBarButton.setVisibility(View.GONE);
+			progressBarButton.setProgress(0);
 		}
-		int color = isNightMode() ? R.color.main_font_dark : R.color.card_and_list_background_light;
-		((TextView) view.findViewById(R.id.start_button_descr)).setTextColor(ContextCompat.getColor(mapActivity, color));
-	}
-
-	public void updateControlButtons() {
-		OsmandApplication app = getMyApplication();
-		MapActivity mapActivity = getMapActivity();
-		View view = getView();
-		if (app != null && mapActivity != null && view != null) {
-			TextViewExProgress textViewExProgress = (TextViewExProgress) view.findViewById(R.id.start_button_descr);
-			textViewExProgress.color1 = ContextCompat.getColor(mapActivity, isNightMode() ? R.color.main_font_dark : R.color.card_and_list_background_light);
-			textViewExProgress.color2 = ContextCompat.getColor(mapActivity, R.color.description_font_and_bottom_sheet_icons);
-
-			boolean publicTransportMode = app.getRoutingHelper().getAppMode() == ApplicationMode.PUBLIC_TRANSPORT;
-			if (menu != null && menu.isRouteCalculated()) {
-				if (publicTransportMode) {
-					AndroidUtils.setBackground(app, view.findViewById(R.id.start_button), isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
-					textViewExProgress.color1 = ContextCompat.getColor(mapActivity, isNightMode() ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
-				} else {
-					AndroidUtils.setBackground(app, view.findViewById(R.id.start_button), isNightMode(), R.color.active_buttons_and_links_light, R.color.active_buttons_and_links_dark);
-					textViewExProgress.color1 = ContextCompat.getColor(mapActivity, isNightMode() ? R.color.main_font_dark : R.color.card_and_list_background_light);
-				}
-				textViewExProgress.percent = 1;
-			}
-		}
+		TextViewExProgress textViewExProgress = (TextViewExProgress) view.findViewById(R.id.start_button_descr);
+		textViewExProgress.percent = 0;
 	}
 
 	public void show(MapActivity mapActivity) {
@@ -440,18 +448,6 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 				.commitAllowingStateLoss();
 	}
 
-	public void dismiss() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			try {
-				activity.getSupportFragmentManager().popBackStack(TAG,
-						FragmentManager.POP_BACK_STACK_INCLUSIVE);
-			} catch (Exception e) {
-				//
-			}
-		}
-	}
-
 	public void applyDayNightMode() {
 		MapActivity ctx = getMapActivity();
 		View mainView = getMainView();
@@ -459,29 +455,40 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		if (ctx == null || mainView == null || view == null) {
 			return;
 		}
+		updateNightMode();
 
-		boolean nightMode = isNightMode();
-		AndroidUtils.setBackground(ctx, view.findViewById(R.id.modes_layout_toolbar_container), nightMode,
+		AndroidUtils.setBackground(ctx, view.findViewById(R.id.modes_layout_toolbar_container), isNightMode(),
 				R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerFromDropDown), nightMode,
-				R.color.divider_light, R.color.divider_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.viaLayoutDivider), nightMode,
-				R.color.divider_light, R.color.divider_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerButtons), nightMode,
-				R.color.divider_light, R.color.divider_dark);
-		AndroidUtils.setBackground(ctx, view.findViewById(R.id.app_modes_options_container), nightMode,
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerFromDropDown), isNightMode(),
+				R.color.divider_color_light, R.color.divider_color_dark);
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.viaLayoutDivider), isNightMode(),
+				R.color.divider_color_light, R.color.divider_color_dark);
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerButtons), isNightMode(),
+				R.color.divider_color_light, R.color.divider_color_dark);
+		AndroidUtils.setBackground(ctx, view.findViewById(R.id.controls_divider), isNightMode(),
+				R.color.divider_color_light, R.color.divider_color_dark);
+		AndroidUtils.setBackground(ctx, view.findViewById(R.id.app_modes_options_container), isNightMode(),
 				R.drawable.route_info_trans_gradient_light, R.drawable.route_info_trans_gradient_dark);
-		AndroidUtils.setBackground(ctx, view.findViewById(R.id.app_modes_fold_container), nightMode,
+		AndroidUtils.setBackground(ctx, view.findViewById(R.id.app_modes_fold_container), isNightMode(),
 				R.drawable.route_info_trans_gradient_left_light, R.drawable.route_info_trans_gradient_left_dark);
+		AndroidUtils.setBackground(ctx, getBottomScrollView(), isNightMode(),
+				R.color.activity_background_light, R.color.activity_background_dark);
+		AndroidUtils.setBackground(ctx, getCardsContainer(), isNightMode(),
+				R.color.activity_background_light, R.color.activity_background_dark);
 
-		int activeColor = ContextCompat.getColor(ctx, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+		if (getTopViewId() != 0) {
+			View topView = view.findViewById(getTopViewId());
+			AndroidUtils.setBackground(ctx, topView, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
+		}
+
+		int activeColor = ContextCompat.getColor(ctx, isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 		((TextView) view.findViewById(R.id.cancel_button_descr)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.from_button_description)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.via_button_description)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.to_button_description)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.map_options_route_button_title)).setTextColor(activeColor);
 
-		int mainFontColor = ContextCompat.getColor(ctx, nightMode ? R.color.main_font_dark : R.color.main_font_light);
+		int mainFontColor = ContextCompat.getColor(ctx, isNightMode() ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
 		((TextView) mainView.findViewById(R.id.fromText)).setTextColor(mainFontColor);
 		((TextView) mainView.findViewById(R.id.ViaView)).setTextColor(mainFontColor);
 		((TextView) mainView.findViewById(R.id.toText)).setTextColor(mainFontColor);
@@ -492,9 +499,6 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		((TextView) mainView.findViewById(R.id.toTitle)).setTextColor(descriptionColor);
 
 		ctx.setupRouteCalculationProgressBar((ProgressBar) mainView.findViewById(R.id.progress_bar));
-		setupRouteCalculationButtonProgressBar((ProgressBar) view.findViewById(R.id.progress_bar_button));
-
-		updateControlButtons();
 	}
 
 	public static boolean showInstance(final MapActivity mapActivity, int initialMenuState) {
@@ -529,15 +533,6 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 
 		} catch (RuntimeException e) {
 			return false;
-		}
-	}
-
-	public void setupRouteCalculationButtonProgressBar(@NonNull ProgressBar pb) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			int bgColor = ContextCompat.getColor(mapActivity, isNightMode() ? R.color.activity_background_dark : R.color.activity_background_light);
-			int progressColor = ContextCompat.getColor(mapActivity, isNightMode() ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
-			pb.setProgressDrawable(AndroidUtils.createProgressDrawable(bgColor, progressColor));
 		}
 	}
 }

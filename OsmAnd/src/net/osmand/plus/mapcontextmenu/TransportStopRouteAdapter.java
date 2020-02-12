@@ -45,7 +45,7 @@ public class TransportStopRouteAdapter extends ArrayAdapter<Object> {
 			int bgColor = 0;
 			if (object instanceof TransportStopRoute) {
 				TransportStopRoute transportStopRoute = (TransportStopRoute) object;
-				routeRef = transportStopRoute.route.getAdjustedRouteRef();
+				routeRef = transportStopRoute.route.getAdjustedRouteRef(false);
 				bgColor = transportStopRoute.getColor(app, nightMode);
 			} else if (object instanceof String) {
 				routeRef = (String) object;

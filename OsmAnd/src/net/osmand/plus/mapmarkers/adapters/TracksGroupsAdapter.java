@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.R;
 
@@ -32,7 +33,8 @@ public class TracksGroupsAdapter extends GroupsAdapter {
 			MapMarkersGroupViewHolder markersGroupViewHolder = (MapMarkersGroupViewHolder) holder;
 			markersGroupViewHolder.icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_polygom_dark));
 			markersGroupViewHolder.name.setText(gpx.getFile().getName().replace(".gpx", "").replace("/", " ").replace("_", " "));
-			markersGroupViewHolder.numberCount.setText(String.valueOf(gpx.getAnalysis().wptPoints));
+			GPXTrackAnalysis analysis = gpx.getAnalysis();
+			markersGroupViewHolder.numberCount.setText(analysis != null ? String.valueOf(analysis.wptPoints) : "");
 			String description = getDescription(gpx);
 			markersGroupViewHolder.description.setVisibility(description == null ? View.GONE : View.VISIBLE);
 			markersGroupViewHolder.description.setText(description);
@@ -46,7 +48,8 @@ public class TracksGroupsAdapter extends GroupsAdapter {
 
 	@Nullable
 	private String getDescription(GpxDataItem item) {
-		Set<String> categories = item.getAnalysis().wptCategoryNames;
+		GPXTrackAnalysis analysis = item.getAnalysis();
+		Set<String> categories = analysis != null ? analysis.wptCategoryNames : null;
 		if (categories != null && !categories.isEmpty() && !(categories.size() == 1 && categories.contains(""))) {
 			StringBuilder sb = new StringBuilder();
 			Iterator<String> it = categories.iterator();

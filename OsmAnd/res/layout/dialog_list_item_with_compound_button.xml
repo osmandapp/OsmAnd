@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="wrap_content"
+	android:layout_width="match_parent"
+	android:orientation="vertical">
+
+	<View
+		android:background="?attr/dashboard_divider"
+		android:id="@+id/topDivider"
+		android:layout_height="1dp"
+		android:layout_width="wrap_content"
+		android:visibility="gone"/>
+	
+	<LinearLayout
+		android:id="@+id/button"
+		android:layout_width="match_parent"
+		android:layout_height="?android:attr/listPreferredItemHeightSmall"
+		android:background="?attr/selectableItemBackground"
+		android:orientation="horizontal">
+		
+		<FrameLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginLeft="@dimen/context_menu_padding_margin_large"
+			android:layout_marginRight="@dimen/context_menu_padding_margin_large">
+			
+			<android.support.v7.widget.AppCompatRadioButton
+				android:id="@+id/radio"
+				android:checkMark="?android:attr/listChoiceIndicatorSingle"
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:clickable="false"
+				android:focusable="false"
+				android:visibility="gone"
+				android:layout_gravity="center"/>
+
+			<android.support.v7.widget.AppCompatCheckBox
+				android:id="@+id/checkbox"
+				android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:clickable="false"
+				android:focusable="false"
+				android:visibility="gone"
+				android:layout_gravity="center"/>
+			
+		</FrameLayout>
+		
+		<TextView
+			android:id="@+id/text"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:layout_gravity="center_vertical|start"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size_large"
+			android:text="Item title"/>
+		
+	</LinearLayout>
+
+	<View
+		android:background="?attr/dashboard_divider"
+		android:id="@+id/bottomDivider"
+		android:layout_height="1dp"
+		android:layout_marginTop="@dimen/list_header_padding"
+		android:layout_width="wrap_content"
+		android:visibility="gone"/>
+
+</LinearLayout>
+

@@ -29,6 +29,7 @@
 		<item name="windowNoTitle">true</item>
 		<item name="bottom_nav_shadow">@drawable/bg_bottom_bar_shadow_with_line_day</item>
 		<item name="shared_chat_card_bg">@drawable/chat_card_bg_light</item>
+		<item name="bg_list_item_dark">@color/bg_list_item_dark</item>
 	</style>
 
 	<style name="AppTheme.NoActionbar">

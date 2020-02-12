@@ -11,23 +11,17 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
-import android.support.v7.app.AlertDialog;
-import android.view.View;
 
-import net.osmand.StateChangedListener;
-import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.SettingsBaseActivity;
-import net.osmand.plus.activities.actions.AppModeDialog;
+import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.util.SunriseSunset;
 
 import java.text.SimpleDateFormat;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
 
 //import net.osmand.plus.development.OsmandDevelopmentPlugin;
 
@@ -36,31 +30,25 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 	@SuppressLint("SimpleDateFormat")
 	@Override
     public void onCreate(Bundle savedInstanceState) {
-		((OsmandApplication) getApplication()).applyTheme(this);
+		OsmandApplication app = getMyApplication();
+		app.applyTheme(this);
 		super.onCreate(savedInstanceState);
 		getToolbar().setTitle(R.string.debugging_and_development);
 		PreferenceScreen cat = getPreferenceScreen();
 		Preference pref;
 
-		// 2 should be in main settings
 		cat.addPreference(createCheckBoxPreference(settings.USE_OPENGL_RENDER,
-				R.string.use_opengl_render,R.string.use_opengl_render_descr));
+				R.string.use_opengl_render, R.string.use_opengl_render_descr));
 
-		cat.addPreference(createCheckBoxPreference(settings.ANIMATE_MY_LOCATION,
-				R.string.animate_my_location, R.string.animate_my_location_desc));
-
-		pref = new Preference(this);
-		pref.setTitle(R.string.app_modes_choose);
-		pref.setSummary(R.string.app_modes_choose_descr);
-		pref.setKey("available_application_modes");
-		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				availableProfileDialog();
-				return true;
+		if (!Version.isBlackberry(app)) {
+			CheckBoxPreference nativeCheckbox = createCheckBoxPreference(settings.SAFE_MODE, R.string.safe_mode, R.string.safe_mode_description);
+			// disable the checkbox if the library cannot be used
+			if ((NativeOsmandLibrary.isLoaded() && !NativeOsmandLibrary.isSupported()) || settings.NATIVE_RENDERING_FAILED.get()) {
+				nativeCheckbox.setEnabled(false);
+				nativeCheckbox.setChecked(true);
 			}
-		});
-		cat.addPreference(pref);
+			cat.addPreference(nativeCheckbox);
+		}
 
 		PreferenceCategory navigation = new PreferenceCategory(this);
 		navigation.setTitle(R.string.routing_settings);
@@ -87,7 +75,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			@Override
 			public void run() {
 				simulate.setSummary(sim.isRouteAnimating() ?
-						R.string.simulate_your_location_stop_descr : R.string.simulate_your_location_descr);
+						R.string.simulate_your_location_stop_descr : R.string.simulate_your_location_gpx_descr);
 			}
 		};
 		pref.setTitle(R.string.simulate_your_location);
@@ -97,7 +85,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
 				updateTitle.run();
-				sim.startStopRouteAnimation(SettingsDevelopmentActivity.this, updateTitle);
+				sim.startStopRouteAnimation(SettingsDevelopmentActivity.this, true, updateTitle);
 				return true;
 			}
 		});
@@ -124,7 +112,6 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 				settings.FIRST_MAP_IS_DOWNLOADED.set(false);
 				settings.MAPILLARY_FIRST_DIALOG_SHOWN.set(false);
 				settings.WEBGL_SUPPORTED.set(true);
-				settings.METRIC_SYSTEM_CHANGED_MANUALLY.set(false);
 				settings.WIKI_ARTICLE_SHOW_IMAGES_ASKED.set(false);
 
 				getMyApplication().showToastMessage(R.string.shared_string_ok);
@@ -149,6 +136,19 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
 				startActivity(new Intent(SettingsDevelopmentActivity.this, TestVoiceActivity.class));
+				return true;
+			}
+		});
+		cat.addPreference(pref);
+
+		pref = new Preference(this);
+		pref.setTitle(R.string.logcat_buffer);
+	    	pref.setSummary(R.string.logcat_buffer_descr);
+		pref.setKey("logcat_buffer");
+		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				startActivity(new Intent(SettingsDevelopmentActivity.this, LogcatActivity.class));
 				return true;
 			}
 		});
@@ -224,31 +224,5 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		//setEnabled(false) creates bad readability on some devices
 		//pref.setEnabled(false);
 		info.addPreference(pref);
-	}
-
-	protected void availableProfileDialog() {
-		AlertDialog.Builder b = new AlertDialog.Builder(this);
-		final List<ApplicationMode> modes = ApplicationMode.allPossibleValues();
-		modes.remove(ApplicationMode.DEFAULT);
-		final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>(ApplicationMode.values(getMyApplication()));
-		selected.remove(ApplicationMode.DEFAULT);
-		View v = AppModeDialog.prepareAppModeView(this, modes, selected, null, false, true, false,
-				new View.OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						StringBuilder vls = new StringBuilder(ApplicationMode.DEFAULT.getStringKey()+",");
-						for(ApplicationMode mode :  modes) {
-							if(selected.contains(mode)) {
-								vls.append(mode.getStringKey()).append(",");
-							}
-						}
-						settings.AVAILABLE_APP_MODES.set(vls.toString());
-					}
-				});
-		b.setTitle(R.string.profile_settings);
-		b.setPositiveButton(R.string.shared_string_ok, null);
-		b.setView(v);
-		b.show();
 	}
 }

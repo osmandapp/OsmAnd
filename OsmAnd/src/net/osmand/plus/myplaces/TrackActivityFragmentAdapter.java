@@ -32,15 +32,15 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PicassoUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
@@ -64,6 +64,7 @@ import net.osmand.render.RenderingRulesStorage;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import gnu.trove.list.array.TIntArrayList;
 
@@ -132,7 +133,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 			}
 		});
 		listView.setBackgroundColor(ContextCompat.getColor(app, app.getSettings().isLightContent()
-				? R.color.ctx_menu_info_view_bg_light : R.color.ctx_menu_info_view_bg_dark));
+				? R.color.activity_background_color_light : R.color.activity_background_color_dark));
 	}
 
 	public void onCreateView(@NonNull View view) {
@@ -249,7 +250,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 	private void refreshTrackBitmap() {
 		TrackBitmapDrawer trackDrawer = getTrackBitmapDrawer();
 		if (trackDrawer != null) {
-			getTrackBitmapDrawer().refreshTrackBitmap();
+			trackDrawer.refreshTrackBitmap();
 		}
 	}
 
@@ -320,9 +321,10 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		}
 
 		vis.setChecked(gpxFileSelected);
-		vis.setOnClickListener(new View.OnClickListener() {
+		headerView.findViewById(R.id.showOnMapContainer).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				vis.toggle();
 				if (!vis.isChecked()) {
 					selectedSplitInterval = 0;
 				}
@@ -379,12 +381,12 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 												if (clr != 0 && sf.getModifiableGpxFile() != null) {
 													sf.getModifiableGpxFile().setColor(clr);
 													if (getGpxDataItem() != null) {
-														app.getGpxDatabase().updateColor(getGpxDataItem(), clr);
+														app.getGpxDbHelper().updateColor(getGpxDataItem(), clr);
 													}
 												}
 											}
 										} else if (getGpxDataItem() != null) {
-											app.getGpxDatabase().updateColor(getGpxDataItem(), clr);
+											app.getGpxDbHelper().updateColor(getGpxDataItem(), clr);
 										}
 										if (gpx != null && gpx.showCurrentTrack) {
 											app.getSettings().CURRENT_TRACK_COLOR.set(clr);
@@ -459,10 +461,57 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 			return createTravelArticleCard(context, article);
 		}
 
-		if (!TextUtils.isEmpty(gpx.metadata.desc)) {
-			return createDescriptionCard(context, gpx.metadata.desc);
+		final String description = getMetadataDescription(gpx.metadata);
+
+		if (!TextUtils.isEmpty(description)) {
+			String link = getMetadataImageLink(gpx.metadata);
+			if (!TextUtils.isEmpty(link)) {
+				View.OnClickListener onClickListener = new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						openGpxDescriptionDialog(description);
+					}
+				};
+				return createArticleCard(context, null, description, null, link, onClickListener);
+			} else {
+				return createDescriptionCard(context, description);
+			}
 		}
 
+		return null;
+	}
+
+	@Nullable
+	private String getMetadataDescription(@NonNull GPXUtilities.Metadata metadata) {
+		String descHtml = metadata.desc;
+		if (TextUtils.isEmpty(descHtml)) {
+			Map<String, String> extensions = metadata.getExtensionsToRead();
+			if (!extensions.isEmpty() && extensions.containsKey("desc")) {
+				descHtml = extensions.get("desc");
+			}
+		}
+		if (descHtml != null) {
+			String content = WikiArticleHelper.getPartialContent(descHtml);
+			if (!TextUtils.isEmpty(content)) {
+				return content;
+			}
+		}
+		return descHtml;
+	}
+
+	@Nullable
+	private String getMetadataImageLink(@NonNull GPXUtilities.Metadata metadata) {
+		String link = metadata.link;
+		if (!TextUtils.isEmpty(link)) {
+			String lowerCaseLink = link.toLowerCase();
+			if (lowerCaseLink.contains(".jpg")
+					|| lowerCaseLink.contains(".jpeg")
+					|| lowerCaseLink.contains(".png")
+					|| lowerCaseLink.contains(".bmp")
+					|| lowerCaseLink.contains(".webp")) {
+				return link;
+			}
+		}
 		return null;
 	}
 
@@ -482,34 +531,11 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 	}
 
 	private View createTravelArticleCard(final Context context, @NonNull final TravelArticle article) {
-		View card = LayoutInflater.from(context).inflate(R.layout.wikivoyage_article_card, null);
-		card.findViewById(R.id.background_view).setBackgroundColor(ContextCompat.getColor(context,
-				app.getSettings().isLightContent() ? R.color.list_item_light : R.color.list_item_dark));
-		((TextView) card.findViewById(R.id.title)).setText(article.getTitle());
-		((TextView) card.findViewById(R.id.content)).setText(WikiArticleHelper.getPartialContent(article.getContent()));
-		((TextView) card.findViewById(R.id.part_of)).setText(article.getGeoDescription());
-		final ImageView icon = (ImageView) card.findViewById(R.id.icon);
-		final String url = TravelArticle.getImageUrl(article.getImageTitle(), false);
-		final PicassoUtils picassoUtils = PicassoUtils.getPicasso(app);
-		RequestCreator rc = Picasso.get().load(url);
-		WikivoyageUtils.setupNetworkPolicy(app.getSettings(), rc);
-		rc.transform(new CropCircleTransformation())
-				.into(icon, new Callback() {
-					@Override
-					public void onSuccess() {
-						icon.setVisibility(View.VISIBLE);
-						picassoUtils.setResultLoaded(url, true);
-					}
-
-					@Override
-					public void onError(Exception e) {
-						picassoUtils.setResultLoaded(url, false);
-					}
-				});
-		TextView readBtn = (TextView) card.findViewById(R.id.left_button);
-		readBtn.setText(app.getString(R.string.shared_string_read));
-		readBtn.setCompoundDrawablesWithIntrinsicBounds(getReadIcon(), null, null, null);
-		readBtn.setOnClickListener(new View.OnClickListener() {
+		String title = article.getTitle();
+		String content = WikiArticleHelper.getPartialContent(article.getContent());
+		String geoDescription = article.getGeoDescription();
+		String imageUrl = TravelArticle.getImageUrl(article.getImageTitle(), false);
+		View.OnClickListener onClickListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				TrackActivity activity = getTrackActivity();
@@ -518,7 +544,44 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 							activity.getSupportFragmentManager(), article.getTripId(), article.getLang());
 				}
 			}
-		});
+		};
+		return createArticleCard(context, title, content, geoDescription, imageUrl, onClickListener);
+	}
+
+	private View createArticleCard(final Context context, String title, String content, String geoDescription, final String imageUrl, View.OnClickListener readBtnClickListener) {
+		View card = LayoutInflater.from(context).inflate(R.layout.wikivoyage_article_card, null);
+		card.findViewById(R.id.background_view).setBackgroundColor(ContextCompat.getColor(context,
+				app.getSettings().isLightContent() ? R.color.list_background_color_light : R.color.list_background_color_dark));
+
+		if (!TextUtils.isEmpty(title)) {
+			((TextView) card.findViewById(R.id.title)).setText(title);
+		} else {
+			card.findViewById(R.id.title).setVisibility(View.GONE);
+		}
+		((TextView) card.findViewById(R.id.content)).setText(content);
+		((TextView) card.findViewById(R.id.part_of)).setText(geoDescription);
+
+		final ImageView icon = (ImageView) card.findViewById(R.id.icon);
+		final PicassoUtils picassoUtils = PicassoUtils.getPicasso(app);
+		RequestCreator rc = Picasso.get().load(imageUrl);
+		WikivoyageUtils.setupNetworkPolicy(app.getSettings(), rc);
+		rc.transform(new CropCircleTransformation())
+				.into(icon, new Callback() {
+					@Override
+					public void onSuccess() {
+						icon.setVisibility(View.VISIBLE);
+						picassoUtils.setResultLoaded(imageUrl, true);
+					}
+
+					@Override
+					public void onError(Exception e) {
+						picassoUtils.setResultLoaded(imageUrl, false);
+					}
+				});
+		TextView readBtn = (TextView) card.findViewById(R.id.left_button);
+		readBtn.setText(app.getString(R.string.shared_string_read));
+		readBtn.setCompoundDrawablesWithIntrinsicBounds(getReadIcon(), null, null, null);
+		readBtn.setOnClickListener(readBtnClickListener);
 		card.findViewById(R.id.right_button).setVisibility(View.GONE);
 		card.findViewById(R.id.divider).setVisibility(View.GONE);
 		card.findViewById(R.id.list_item_divider).setVisibility(View.VISIBLE);
@@ -530,26 +593,30 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		if (!TextUtils.isEmpty(desc)) {
 			View card = LayoutInflater.from(context).inflate(R.layout.gpx_description_card, null);
 			card.findViewById(R.id.background_view).setBackgroundColor(ContextCompat.getColor(context,
-					app.getSettings().isLightContent() ? R.color.list_item_light : R.color.list_item_dark));
+					app.getSettings().isLightContent() ? R.color.list_background_color_light : R.color.list_background_color_dark));
 			((TextView) card.findViewById(R.id.description)).setText(desc);
 			TextView readBtn = (TextView) card.findViewById(R.id.read_button);
 			readBtn.setCompoundDrawablesWithIntrinsicBounds(getReadIcon(), null, null, null);
 			readBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					TrackActivity activity = getTrackActivity();
-					if (activity != null) {
-						Bundle args = new Bundle();
-						args.putString(GpxDescriptionDialogFragment.CONTENT_KEY, descHtml);
-						GpxDescriptionDialogFragment fragment = new GpxDescriptionDialogFragment();
-						fragment.setArguments(args);
-						fragment.show(activity.getSupportFragmentManager(), GpxDescriptionDialogFragment.TAG);
-					}
+					openGpxDescriptionDialog(descHtml);
 				}
 			});
 			return card;
 		}
 		return null;
+	}
+
+	private void openGpxDescriptionDialog(@NonNull final String descHtml) {
+		TrackActivity activity = getTrackActivity();
+		if (activity != null) {
+			Bundle args = new Bundle();
+			args.putString(GpxDescriptionDialogFragment.CONTENT_KEY, descHtml);
+			GpxDescriptionDialogFragment fragment = new GpxDescriptionDialogFragment();
+			fragment.setArguments(args);
+			fragment.show(activity.getSupportFragmentManager(), GpxDescriptionDialogFragment.TAG);
+		}
 	}
 
 	public boolean isGpxFileSelected(GPXFile gpxFile) {
@@ -640,10 +707,10 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		final List<GpxDisplayGroup> groups = getDisplayGroups();
 		if (groups.size() > 0) {
 			colorId = app.getSettings().isLightContent() ?
-					R.color.primary_text_light : R.color.primary_text_dark;
+					R.color.text_color_primary_light : R.color.text_color_primary_dark;
 		} else {
 			colorId = app.getSettings().isLightContent() ?
-					R.color.secondary_text_light : R.color.secondary_text_dark;
+					R.color.text_color_secondary_light : R.color.text_color_secondary_dark;
 		}
 		int color = app.getResources().getColor(colorId);
 		title.setTextColor(color);
@@ -653,11 +720,29 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 
 	private void updateSplitIntervalView(View view) {
 		final TextView text = (TextView) view.findViewById(R.id.split_interval_text);
+		selectedSplitInterval = getSelectedSplitInterval();
 		if (selectedSplitInterval == 0) {
 			text.setText(app.getString(R.string.shared_string_none));
 		} else {
 			text.setText(options.get(selectedSplitInterval));
 		}
+	}
+	
+	private int getSelectedSplitInterval() {
+		if (getGpxDataItem() == null) {
+			return 0;
+		}
+		int splitType = getGpxDataItem().getSplitType();
+		double splitInterval = getGpxDataItem().getSplitInterval();
+		int position = 0;
+		
+		if (splitType == GPXDatabase.GPX_SPLIT_TYPE_DISTANCE) {
+			position = distanceSplit.indexOf(splitInterval);
+		} else if (splitType == GPXDatabase.GPX_SPLIT_TYPE_TIME) {
+			position = timeSplit.indexOf((int) splitInterval);
+		}
+		
+		return position > 0 ? position : 0;
 	}
 
 	private void updateColorView(View colorView) {
@@ -779,7 +864,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		}
 		GpxDataItem item = getGpxDataItem();
 		if (item != null) {
-			app.getGpxDatabase().updateSplit(item, splitType, splitInterval);
+			app.getGpxDbHelper().updateSplit(item, splitType, splitInterval);
 		}
 	}
 
@@ -853,34 +938,26 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 	private View.OnClickListener onFabClickListener = new View.OnClickListener() {
 		@Override
 		public void onClick(View view) {
-			switch (view.getId()) {
-				case R.id.overlay_view:
+			int i = view.getId();
+			if (i == R.id.overlay_view) {
+				hideTransparentOverlay();
+				closeFabMenu(view.getContext());
+			} else if (i == R.id.menu_fab) {
+				if (fabMenuOpened) {
 					hideTransparentOverlay();
 					closeFabMenu(view.getContext());
-					break;
-				case R.id.menu_fab:
-					if (fabMenuOpened) {
-						hideTransparentOverlay();
-						closeFabMenu(view.getContext());
-					} else {
-						showTransparentOverlay();
-						openFabMenu(view.getContext());
-					}
-					break;
-				case R.id.waypoint_text_layout:
-				case R.id.waypoint_fab:
-					PointDescription pointWptDescription =
-							new PointDescription(PointDescription.POINT_TYPE_WPT, app.getString(R.string.add_waypoint));
-					addPoint(pointWptDescription);
-					break;
-				case R.id.route_text_layout:
-				case R.id.route_fab:
-					addNewGpxData(NewGpxData.ActionType.ADD_ROUTE_POINTS);
-					break;
-				case R.id.line_text_layout:
-				case R.id.line_fab:
-					addNewGpxData(NewGpxData.ActionType.ADD_SEGMENT);
-					break;
+				} else {
+					showTransparentOverlay();
+					openFabMenu(view.getContext());
+				}
+			} else if (i == R.id.waypoint_text_layout || i == R.id.waypoint_fab) {
+				PointDescription pointWptDescription =
+						new PointDescription(PointDescription.POINT_TYPE_WPT, app.getString(R.string.add_waypoint));
+				addPoint(pointWptDescription);
+			} else if (i == R.id.route_text_layout || i == R.id.route_fab) {
+				addNewGpxData(NewGpxData.ActionType.ADD_ROUTE_POINTS);
+			} else if (i == R.id.line_text_layout || i == R.id.line_fab) {
+				addNewGpxData(NewGpxData.ActionType.ADD_SEGMENT);
 			}
 		}
 	};
@@ -915,6 +992,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		private List<Double> distanceSplit;
 		private TIntArrayList timeSplit;
 		private int selectedSplitInterval;
+		private boolean joinSegments;
 
 		SplitTrackAsyncTask(@NonNull TrackActivity activity,
 							@NonNull TrackActivityFragmentAdapter fragmentAdapter,
@@ -929,6 +1007,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 			selectedSplitInterval = fragmentAdapter.selectedSplitInterval;
 			distanceSplit = fragmentAdapter.distanceSplit;
 			timeSplit = fragmentAdapter.timeSplit;
+			joinSegments = activity.isJoinSegments();
 		}
 
 		@Override
@@ -949,7 +1028,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 				}
 				if (selectedGpx != null) {
 					List<GpxDisplayGroup> groups = fragment.getDisplayGroups();
-					selectedGpx.setDisplayGroups(groups);
+					selectedGpx.setDisplayGroups(groups, app);
 				}
 				/*
 				if (fragment.isVisible()) {
@@ -965,9 +1044,9 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 				if (selectedSplitInterval == 0) {
 					model.noSplit(app);
 				} else if (distanceSplit.get(selectedSplitInterval) > 0) {
-					model.splitByDistance(app, distanceSplit.get(selectedSplitInterval));
+					model.splitByDistance(app, distanceSplit.get(selectedSplitInterval), joinSegments);
 				} else if (timeSplit.get(selectedSplitInterval) > 0) {
-					model.splitByTime(app, timeSplit.get(selectedSplitInterval));
+					model.splitByTime(app, timeSplit.get(selectedSplitInterval), joinSegments);
 				}
 			}
 			return null;

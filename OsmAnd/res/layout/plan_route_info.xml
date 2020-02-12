@@ -30,7 +30,6 @@
 					android:id="@+id/modes_layout"
 					android:layout_width="match_parent"
 					android:layout_height="match_parent"
-					android:background="?attr/card_and_list_background_basic"
 					tools:ignore="UselessParent">
 
 					<LinearLayout
@@ -111,7 +110,7 @@
 						android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 						android:layout_marginRight="@dimen/favorites_icon_right_margin"
 						android:layout_marginBottom="@dimen/list_header_text_left_margin"
-						android:src="@drawable/map_default_location" />
+						android:src="@drawable/ic_action_location_color" />
 
 					<LinearLayout
 						android:layout_width="0dp"
@@ -139,7 +138,7 @@
 							android:layout_marginRight="@dimen/list_content_padding"
 							android:gravity="left"
 							android:singleLine="true"
-							android:textColor="?attr/main_font_color_basic"
+							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"
 							tools:text="My position" />
 
@@ -226,7 +225,7 @@
 						android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 						android:layout_marginRight="@dimen/favorites_icon_right_margin"
 						android:layout_marginBottom="@dimen/list_header_text_left_margin"
-						android:src="@drawable/map_default_location" />
+						android:src="@drawable/ic_action_location_color" />
 
 					<LinearLayout
 						android:layout_width="0dp"
@@ -256,7 +255,7 @@
 							android:layout_marginRight="@dimen/list_content_padding"
 							android:gravity="left"
 							android:singleLine="true"
-							android:textColor="?attr/main_font_color_basic"
+							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"
 							tools:text="Intermediate point" />
 
@@ -342,7 +341,7 @@
 						android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 						android:layout_marginRight="@dimen/favorites_icon_right_margin"
 						android:layout_marginBottom="@dimen/list_header_text_left_margin"
-						android:src="@drawable/map_default_location" />
+						android:src="@drawable/ic_action_location_color" />
 
 					<LinearLayout
 						android:layout_width="0dp"
@@ -369,7 +368,7 @@
 							android:layout_marginRight="@dimen/list_content_padding"
 							android:gravity="left"
 							android:singleLine="true"
-							android:textColor="?attr/main_font_color_basic"
+							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"
 							tools:text="Destination" />
 
@@ -501,16 +500,17 @@
 
 				</LinearLayout>
 
-				<ProgressBar
+				<me.zhanghai.android.materialprogressbar.MaterialProgressBar
 					android:id="@+id/progress_bar"
-					style="?android:attr/progressBarStyleHorizontal"
 					android:layout_width="match_parent"
 					android:layout_height="2dp"
 					android:layout_gravity="bottom"
 					android:max="100"
 					android:visibility="gone"
-					tools:progress="60"
-					tools:visibility="visible" />
+					osmand:mpb_progressStyle="horizontal"
+					osmand:mpb_useIntrinsicPadding="false"
+					osmand:mpb_setBothDrawables="true"
+					style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal" />
 
 			</FrameLayout>
 

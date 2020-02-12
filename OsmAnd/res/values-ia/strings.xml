@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_new_profile_q">Adder nove profilo \'%1$s\'\?</string>
+    <string name="shared_string_downloading_formatted">Discargante %s</string>
+</resources>

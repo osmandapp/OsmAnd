@@ -23,16 +23,12 @@ public class NavVoiceAction extends QuickAction {
 
 	@Override
 	public void execute(MapActivity activity) {
-
-		boolean voice = activity.getMyApplication().getSettings().VOICE_MUTE.get();
-
-		activity.getMyApplication().getSettings().VOICE_MUTE.set(!voice);
-		activity.getRoutingHelper().getVoiceRouter().setMute(!voice);
+		boolean mute = activity.getMyApplication().getSettings().VOICE_MUTE.get();
+		activity.getMyApplication().getSettings().VOICE_MUTE.set(!mute);
 	}
 
 	@Override
 	public void drawUI(ViewGroup parent, MapActivity activity) {
-
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_with_text, parent, false);
 
@@ -44,7 +40,6 @@ public class NavVoiceAction extends QuickAction {
 
 	@Override
 	public String getActionText(OsmandApplication application) {
-
 		return application.getSettings().VOICE_MUTE.get()
 				? application.getString(R.string.quick_action_navigation_voice_off)
 				: application.getString(R.string.quick_action_navigation_voice_on);
@@ -52,7 +47,6 @@ public class NavVoiceAction extends QuickAction {
 
 	@Override
 	public boolean isActionWithSlash(OsmandApplication application) {
-
 		return !application.getSettings().VOICE_MUTE.get();
 	}
 }

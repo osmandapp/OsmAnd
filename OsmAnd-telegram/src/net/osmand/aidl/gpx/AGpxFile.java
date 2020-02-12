@@ -74,7 +74,7 @@ public class AGpxFile implements Parcelable {
 		fileSize = in.readLong();
 		active = in.readByte() != 0;
 
-		boolean hasDetails= in.readByte() != 0;
+		boolean hasDetails = in.readByte() != 0;
 		if (hasDetails) {
 			details = in.readParcelable(AGpxFileDetails.class.getClassLoader());
 		} else {
@@ -86,4 +86,3 @@ public class AGpxFile implements Parcelable {
 		return 0;
 	}
 }
-

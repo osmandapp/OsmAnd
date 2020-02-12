@@ -22,8 +22,11 @@ public class RasterMapMenu {
 	private static final String TAG = "RasterMapMenu";
 	public static ContextMenuAdapter createListAdapter(final MapActivity mapActivity,
 													   final RasterMapType type) {
+		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		ContextMenuAdapter adapter = new ContextMenuAdapter();
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
+		adapter.setProfileDependent(true);
+		adapter.setNightMode(nightMode);
 		createLayersItems(adapter, mapActivity, type);
 		return adapter;
 	}
@@ -67,8 +70,8 @@ public class RasterMapMenu {
 		}
 
 		final boolean selected = mapTypeDescr != null;
-		final int toggleActionStringId = selected ? R.string.shared_string_enabled
-				: R.string.shared_string_disabled;
+		final int toggleActionStringId = selected ? R.string.shared_string_on
+				: R.string.shared_string_off;
 
 		final OnMapSelectedCallback onMapSelectedCallback =
 				new OnMapSelectedCallback() {

@@ -17,14 +17,14 @@ import android.view.View;
 import android.view.WindowManager;
 
 import net.osmand.AndroidUtils;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.data.QuadRect;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -189,8 +189,8 @@ public class TrackActivity extends TabActivity {
 			}
 			if (file != null) {
 				SelectedGpxFile sf = selectedGpxHelper.getSelectedFileByPath(gpxFile.path);
-				if (sf != null && file != null && sf.getDisplayGroups() != null) {
-					displayGroups = sf.getDisplayGroups();
+				if (sf != null && file != null && sf.getDisplayGroups(app) != null) {
+					displayGroups = sf.getDisplayGroups(app);
 				}
 			}
 		}
@@ -337,7 +337,7 @@ public class TrackActivity extends TabActivity {
 
 	private void onGPXFileReady(@Nullable GPXFile gpxFile) {
 		setGpx(gpxFile);
-		setGpxDataItem(file != null ? app.getGpxDatabase().getItem(file) : null);
+		setGpxDataItem(file != null ? app.getGpxDbHelper().getItem(file) : null);
 
 		WindowManager mgr = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
 		if (gpxFile != null && mgr != null) {
@@ -393,13 +393,11 @@ public class TrackActivity extends TabActivity {
 					@Override
 					public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 						int position = -1;
-						switch (item.getItemId()) {
-							case R.id.action_track:
-								position = 0;
-								break;
-							case R.id.action_points:
-								position = 1;
-								break;
+						int i = item.getItemId();
+						if (i == R.id.action_track) {
+							position = 0;
+						} else if (i == R.id.action_points) {
+							position = 1;
 						}
 						if (position != -1 && position != viewPager.getCurrentItem()) {
 							viewPager.setCurrentItem(position);
@@ -410,6 +408,23 @@ public class TrackActivity extends TabActivity {
 				});
 			}
 		}
+	}
+
+	public boolean setJoinSegments(boolean joinSegments) {
+		if (gpxDataItem != null) {
+			boolean updated = app.getGpxDbHelper().updateJoinSegments(gpxDataItem, joinSegments);
+
+			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
+			if (updated && selectedGpxFile != null) {
+				selectedGpxFile.setJoinSegments(joinSegments);
+			}
+			return updated;
+		}
+		return false;
+	}
+
+	public boolean isJoinSegments() {
+		return gpxDataItem != null && gpxDataItem.isJoinSegments();
 	}
 
 	private static class GPXFileLoaderTask extends AsyncTask<Void, Void, GPXFile> {
@@ -449,7 +464,7 @@ public class TrackActivity extends TabActivity {
 				result = app.getSavingTrackHelper().getCurrentGpx();
 			} else {
 				SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath());
-				if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
+				if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null && selectedGpxFile.getGpxFile().modifiedTime == file.lastModified()) {
 					result = selectedGpxFile.getGpxFile();
 				} else {
 					result = GPXUtilities.loadGPXFile(file);
@@ -474,8 +489,16 @@ public class TrackActivity extends TabActivity {
 			TrackActivity activity = getTrackActivity();
 			if (activity != null) {
 				activity.setSupportProgressBarIndeterminateVisibility(false);
-				if (showTemporarily && result != null) {
-					app.getSelectedGpxHelper().selectGpxFile(result, false, false);
+				if (result != null) {
+					final GpxSelectionHelper helper = app.getSelectedGpxHelper();
+					if (showTemporarily) {
+						helper.selectGpxFile(result, false, false);
+					} else {
+						final SelectedGpxFile selectedGpx = helper.getSelectedFileByPath(result.path);
+						if (selectedGpx != null && result.error == null) {
+							selectedGpx.setGpxFile(result, app);
+						}
+					}
 				}
 				if (!activity.stopped) {
 					activity.onGPXFileReady(result);

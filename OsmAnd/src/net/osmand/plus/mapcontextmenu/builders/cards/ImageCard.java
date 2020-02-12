@@ -134,10 +134,10 @@ public abstract class ImageCard extends AbstractCard {
 					this.externalLink = imageObject.getBoolean("externalLink");
 				}
 				if (imageObject.has("topIcon") && !imageObject.isNull("topIcon")) {
-					this.topIconId = getDrawableId(imageObject.getString("topIcon"));
+					this.topIconId = AndroidUtils.getDrawableId(getMyApplication(), imageObject.getString("topIcon"));
 				}
 				if (imageObject.has("buttonIcon") && !imageObject.isNull("buttonIcon")) {
-					this.buttonIconId = getDrawableId(imageObject.getString("buttonIcon"));
+					this.buttonIconId = AndroidUtils.getDrawableId(getMyApplication(), imageObject.getString("buttonIcon"));
 				}
 				if (imageObject.has("buttonText") && !imageObject.isNull("buttonText")) {
 					this.buttonText = imageObject.getString("buttonText");
@@ -166,14 +166,6 @@ public abstract class ImageCard extends AbstractCard {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
-	}
-
-	private int getDrawableId(String id) {
-		if (Algorithms.isEmpty(id)) {
-			return 0;
-		} else {
-			return getMyApplication().getResources().getIdentifier(id, "drawable", getMyApplication().getPackageName());
 		}
 	}
 

@@ -32,8 +32,8 @@
 \n</string>
     <string name="commiting_way">உறுதி செய்வதற்கான வழி…</string>
     <string name="increase_search_radius_to">தேடுதல் வட்டத்தை %1$s ஆக கூட்டவும்</string>
-    <string name="send_search_query_description">நாங்கள் உங்களின் தேடல்: <b>1\"%1$s\"</b>2, மற்றும் இருப்பிடத்தை அனுப்புவோம்.<br/>3<br/>"4 நாங்கள் உங்களது தனிப்பட்ட விவரத்தை  சேகரிக்க மாட்டோம், எங்களுடைய தேடுதல் 
-\n வழிமுறையை மேம்படுத்த உங்களின் தேடுதல் தகவல் தேவை படுகிறது ."<br/>5</string>
+    <string name="send_search_query_description">நாங்கள் உங்களின் தேடல்: 1\"%1$s\"2, மற்றும் இருப்பிடத்தை அனுப்புவோம்.\n3\n"4 நாங்கள் உங்களது தனிப்பட்ட விவரத்தை  சேகரிக்க மாட்டோம், எங்களுடைய தேடுதல்
+\n வழிமுறையை மேம்படுத்த உங்களின் தேடுதல் தகவல் தேவை படுகிறது ."\n5</string>
     <string name="shared_string_world">உலகம்</string>
     <string name="point_deleted">புள்ளி %1$s நீக்கப்பட்டது</string>
     <string name="coord_input_add_point">புள்ளியே சேர்க்க</string>
@@ -69,9 +69,9 @@
     <string name="welcome_to_open_beta">திறந்த பீட்டாவை வரவேற்கிறோம்</string>
     <string name="wikivoyage_travel_guide">பயண வழிகாட்டிகள்</string>
     <string name="wikivoyage_travel_guide_descr">இணையத்தில் ஒரு இணைப்பு இல்லாமல், கிரகதில் உள்ள மிகவும் சுவாரஸ்யமான இடங்களுக்கு OsmAnd உள்ளே வழிகாட்டபட்டுளது.</string>
-    <string name="monthly_map_updates">வரைபட புதுப்பிப்புகள்: <b>1 எல்லா மாதமும்</b>2</string>
-    <string name="daily_map_updates">வரைபட புதுப்பிப்புகள்:<b>1 எல்லா
-\nமணிநேரமும் </b>2</string>
+    <string name="monthly_map_updates">வரைபட புதுப்பிப்புகள்: 1 எல்லா மாதமும்2</string>
+    <string name="daily_map_updates">வரைபட புதுப்பிப்புகள்:1 எல்லா
+\nமணிநேரமும் 2</string>
     <string name="shared_string_result">முடிவு</string>
     <string name="use_two_digits_longitude">இரட்டை இலக்கு தீர்க்கரேகையை பயன்படுத்துக</string>
     <string name="shared_string_travel_guides">பயண வழிகாட்டிகள்</string>
@@ -94,7 +94,6 @@
     <string name="plan_route">பாதையை திட்டமிடு</string>
     <string name="shared_string_sort">வகைபடுத்து.</string>
     <string name="coordinate_input">ஒருங்கிணைப்பு உள்ளீடு</string>
-    <string name="is_saved">சேமிக்கபட்டது</string>
     <string name="marker_save_as_track_descr">பின்வரும் ஜிபிஎக்ஸ் கோப்புக்கு குறிப்பாங்களை ஏற்றுமதி செய்:</string>
     <string name="marker_save_as_track">ஜிபிஎக்ஸ் கோப்பாக சேமி</string>
     <string name="move_to_history">வறலாற்றுக்கு நகர்த்து</string>
@@ -280,7 +279,6 @@
     <string name="in_app_purchase_desc">ஒரு முறை பணம் செலுத்துதல்</string>
     <string name="in_app_purchase_desc_ex">ஒருமுறை வாங்கிய பிறகு, அது உங்களுக்கு நிரந்தரமாக கிடைக்கும்.</string>
     <string name="purchase_unlim_title">வாங்க -%1$s</string>
-    <string name="purchase_subscription_title">சந்தாவிற்கு - %$s</string>
     <string name="wikivoyage_offline">விக்கிவோயாஜ் இணையாநிலை</string>
     <string name="unlimited_downloads">வரம்பற்ற பதிவிறக்கங்கள்</string>
     <string name="wikipedia_offline">விக்கிப்பீடியா இணையாநிலை</string>
@@ -397,7 +395,6 @@
     <string name="osm_live_subscription_desc">சந்தா உலகளாவிய அனைத்து வரைபடங்களுக்கான மணிநேர, தினசரி, வாராந்திர மேம்படுத்தல்கள் மற்றும் வரம்பற்ற பதிவிறக்கங்களை இயக்குகிறது.</string>
     <string name="get_it">அதைப் பெறுங்கள்</string>
     <string name="get_for">%1$s ஐப் பெறுக</string>
-    <string name="get_for_month">%1$s மாதத்திற்குப் பெறுக</string>
     <string name="osm_live_banner_desc">வரம்பற்ற வரைபட பதிவிறக்கங்களைப் பெறுக, மேலும் ஒரு மாதத்திற்கு ஒருமுறை விட மேம்படுத்துங்கள்: வாராந்திர, தினசரி அல்லது மணிநேரம்.</string>
     <string name="osmand_plus_banner_desc">வரம்பற்ற வரைபட பதிவிறக்கங்கள், புதுப்பிப்புகள் மற்றும் விக்கிபீடியா சொருகி.</string>
     <string name="si_mi_meters">மைல்கள் / மீட்டர்</string>
@@ -423,8 +420,7 @@
     <string name="clear_tile_data">அனைத்து ஓலைகளையும் அழி</string>
     <string name="routing_attr_short_way_name">எரிபொருள்-திறனுள்ள வழி</string>
     <string name="routing_attr_short_way_description">எரிபொருள்-திறனுள்ள வழி (வழக்கமாக குறுகியது) பயன்படுத்தவும்.</string>
-    <string name="replace_favorite_confirmation">%1$s விருப்பத்தை நிச்சயமாக மாற்ற விரும்புகிறீர்களா \?
-\n</string>
+    <string name="replace_favorite_confirmation">%1$s விருப்பத்தை நிச்சயமாக மாற்ற விரும்புகிறீர்களா \?</string>
     <string name="rendering_attr_hideOverground_name">நிலப்பரப்பு பொருட்கள்</string>
     <string name="shared_string_change">மாற்றம்</string>
     <string name="get_started">தொடங்குக</string>
@@ -670,8 +666,7 @@
     <string name="index_tours">சுற்றுப்பயணம்</string>
     <string name="shared_string_all">அனைத்து</string>
     <string name="shared_string_waypoints">பாதை புள்ளிகளின்</string>
-    <string name="download_additional_maps">காணாமல் போன வரைபடங்கள் %1$s (%2$d எம்பி) பதிவிறக்க வேண்டுமா\?
-\n</string>
+    <string name="download_additional_maps">காணாமல் போன வரைபடங்கள் %1$s (%2$d எம்பி) பதிவிறக்க வேண்டுமா\?</string>
     <string name="rendering_value_browse_map_name">வரைபடத்தை உலாவுக</string>
     <string name="rendering_value_car_name">கார்</string>
     <string name="rendering_value_bicycle_name">மிதிவண்டி</string>
@@ -1116,7 +1111,6 @@
     <string name="create_poi_link_to_osm_doc">
         <u>ஆன்லைன் OSM</u>படங்களுடன் வரைபட வகைப்பாடு.</string>
     <string name="error_doing_search">ஆஃப்லைன் தேடலைச் செயல்படுத்த முடியவில்லை.</string>
-    <string name="search_offline_geo_error">புவி நோக்கத்தை \'%s\' ஐப் பாகுபடுத்த முடியவில்லை.</string>
     <string name="search_osm_offline">புவி இருப்பிடத்தைத் தேடு</string>
     <string name="system_locale">முறை</string>
     <string name="preferred_locale_descr">காட்சி மொழியை தேர்ந்தெடு (OsmAnd மறுதொடக்கம் செய்யப்படும் போது நடைமுறைக்கு வரும்).
@@ -1209,8 +1203,8 @@
     <string name="filter_current_poiButton">வடிகட்டி</string>
     <string name="edit_filter_save_as_menu_item">சேமி</string>
     <string name="edit_filter_delete_dialog_title">தேர்ந்தெடுக்கப்பட்ட வடிப்பான் நீக்கவா\?</string>
-    <string name="edit_filter_delete_message">வடிகட்டி {0} நீக்கப்பட்டது</string>
-    <string name="edit_filter_create_message">வடிகட்டி {0} உருவாக்கப்பட்டது</string>
+    <string name="edit_filter_delete_message">வடிகட்டி %1$s நீக்கப்பட்டது</string>
+    <string name="edit_filter_create_message">வடிகட்டி %1$s உருவாக்கப்பட்டது</string>
     <string name="email">மின்னஞ்சல்</string>
     <string name="av_camera_focus">கேமரா கவனம் வகை</string>
     <string name="av_camera_focus_descr">உள் கேமரா மையப் பயன்முறையைத் தேர்ந்தெடுக்கவும்.</string>
@@ -1400,4 +1394,5 @@
     <string name="avoid_pt_types_descr">வழிசெலுத்தலைத் தவிர்ப்பதற்கு பொதுப் போக்குவரத்து வகைகளைத் தேர்ந்தெடுக்கவும்:</string>
     <string name="quick_action_day_night_mode">%s விதம்</string>
     <string name="avoid_pt_types">போக்குவரத்து வகையை தவிர்க்க…</string>
+    <string name="turn_screen_on_router">திருப்பத்தில் எழுந்திரு</string>
 </resources>

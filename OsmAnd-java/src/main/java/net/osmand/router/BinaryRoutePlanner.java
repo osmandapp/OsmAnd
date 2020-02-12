@@ -69,10 +69,8 @@ public class BinaryRoutePlanner {
 			RouteSegment recalculationEnd ) throws InterruptedException, IOException {
 		// measure time
 		ctx.timeToLoad = 0;
-		ctx.visitedSegments = 0;
 		ctx.memoryOverhead = 1000;
-		ctx.timeToCalculate = System.nanoTime();
-
+		ctx.visitedSegments = 0;
 
 		// Initializing priority queue to visit way segments 
 		Comparator<RouteSegment> nonHeuristicSegmentsComparator = new NonHeuristicSegmentsComparator();
@@ -123,7 +121,7 @@ public class BinaryRoutePlanner {
 			if (ctx.memoryOverhead > ctx.config.memoryLimitation * 0.95) {
 				throw new IllegalStateException("There is no enough memory " + ctx.config.memoryLimitation / (1 << 20) + " Mb");
 			}
-			ctx.visitedSegments++;
+			ctx.visitedSegments ++;
 			if (forwardSearch) {
 				boolean doNotAddIntersections = onlyBackward;
 				processRouteSegment(ctx, false, graphDirectSegments, visitedDirectSegments,
@@ -167,6 +165,7 @@ public class BinaryRoutePlanner {
 				throw new InterruptedException("Route calculation interrupted");
 			}
 		}
+		ctx.visitedSegments = visitedDirectSegments.size() + visitedOppositeSegments.size();
 		printDebugMemoryInformation(ctx, graphDirectSegments, graphReverseSegments, visitedDirectSegments, visitedOppositeSegments);
 		return finalSegment;
 	}
@@ -343,12 +342,12 @@ public class BinaryRoutePlanner {
 	private float estimatedDistance(final RoutingContext ctx, int targetEndX, int targetEndY,
 			int startX, int startY) {
 		double distance = squareRootDist(startX, startY, targetEndX, targetEndY);
-		return (float) (distance / ctx.getRouter().getMaxDefaultSpeed());
+		return (float) (distance / ctx.getRouter().getMaxSpeed());
 	}
 
 	protected static float h(RoutingContext ctx, int begX, int begY, int endX, int endY) {
 		double distToFinalPoint = squareRootDist(begX, begY, endX, endY);
-		double result = distToFinalPoint / ctx.getRouter().getMaxDefaultSpeed();
+		double result = distToFinalPoint / ctx.getRouter().getMaxSpeed();
 		if (ctx.precalculatedRouteDirection != null) {
 			float te = ctx.precalculatedRouteDirection.timeEstimate(begX, begY, endX, endY);
 			if (te > 0) {
@@ -370,15 +369,16 @@ public class BinaryRoutePlanner {
 	
 	public void printDebugMemoryInformation(RoutingContext ctx, PriorityQueue<RouteSegment> graphDirectSegments, PriorityQueue<RouteSegment> graphReverseSegments, 
 			TLongObjectHashMap<RouteSegment> visitedDirectSegments,TLongObjectHashMap<RouteSegment> visitedOppositeSegments) {
-		printInfo("Time to calculate : " + (System.nanoTime() - ctx.timeToCalculate) / 1e6 + 
-				", time to load : " + ctx.timeToLoad / 1e6 + ", time to load headers : " + ctx.timeToLoadHeaders / 1e6 + 
-				", time to calc dev : " + ctx.timeNanoToCalcDeviation/ 1e6);
+		printInfo(String.format("Time. Total: %.2f, to load: %.2f, to load headers: %.2f, to calc dev: %.2f, to calc rules: %.2f ", 
+				(System.nanoTime() - ctx.timeToCalculate) / 1e6, ctx.timeToLoad / 1e6, 
+				ctx.timeToLoadHeaders / 1e6, ctx.timeNanoToCalcDeviation / 1e6, GeneralRouter.TIMER / 1e6));
+		GeneralRouter.TIMER = 0;
 		int maxLoadedTiles = Math.max(ctx.maxLoadedTiles, ctx.getCurrentlyLoadedTiles());
 		printInfo("Current loaded tiles : " + ctx.getCurrentlyLoadedTiles() + ", maximum loaded tiles " + maxLoadedTiles);
 		printInfo("Loaded tiles " + ctx.loadedTiles + " (distinct " + ctx.distinctLoadedTiles + "), unloaded tiles " + ctx.unloadedTiles +
 				", loaded more than once same tiles "
 				+ ctx.loadedPrevUnloadedTiles);
-		printInfo("Visited roads " + ctx.visitedSegments + ", relaxed roads " + ctx.relaxedSegments);
+		printInfo("Visited segments " + ctx.visitedSegments + ", relaxed roads " + ctx.relaxedSegments);
 		if (graphDirectSegments != null && graphReverseSegments != null) {
 			printInfo("Priority queues sizes : " + graphDirectSegments.size() + "/" + graphReverseSegments.size());
 		}
@@ -480,7 +480,7 @@ public class BinaryRoutePlanner {
 				// reset to f
 //				distStartObstacles = 0;
 				// more precise but slower
-				distStartObstacles = ctx.precalculatedRouteDirection.getDeviationDistance(x, y) / ctx.getRouter().getMaxDefaultSpeed();
+				distStartObstacles = ctx.precalculatedRouteDirection.getDeviationDistance(x, y) / ctx.getRouter().getMaxSpeed();
 			}
 
 			// We don't check if there are outgoing connections
@@ -584,11 +584,11 @@ public class BinaryRoutePlanner {
 		float priority = ctx.getRouter().defineSpeedPriority(road);
 		float speed = (ctx.getRouter().defineRoutingSpeed(road) * priority);
 		if (speed == 0) {
-			speed = (ctx.getRouter().getMinDefaultSpeed() * priority);
+			speed = (ctx.getRouter().getDefaultSpeed() * priority);
 		}
 		// speed can not exceed max default speed according to A*
-		if (speed > ctx.getRouter().getMaxDefaultSpeed()) {
-			speed = ctx.getRouter().getMaxDefaultSpeed();
+		if (speed > ctx.getRouter().getMaxSpeed()) {
+			speed = ctx.getRouter().getMaxSpeed();
 		}
 		return obstaclesTime + distOnRoadToPass / speed;
 	}

@@ -21,6 +21,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
@@ -75,6 +76,7 @@ public class NavigationNotification extends OsmandNotification {
 				RoutingHelper routingHelper = app.getRoutingHelper();
 				routingHelper.setRoutePlanningMode(false);
 				routingHelper.setFollowingMode(true);
+				routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
 			}
 		}, new IntentFilter(OSMAND_RESUME_NAVIGATION_SERVICE_ACTION));
 
@@ -113,6 +115,11 @@ public class NavigationNotification extends OsmandNotification {
 	}
 
 	@Override
+	public Intent getContentIntent() {
+		return new Intent(app, MapActivity.class);
+	}
+
+	@Override
 	public Builder buildNotification(boolean wearable) {
 		if (!isEnabled()) {
 			return null;
@@ -125,7 +132,6 @@ public class NavigationNotification extends OsmandNotification {
 		turnBitmap = null;
 		ongoing = true;
 		RoutingHelper routingHelper = app.getRoutingHelper();
-		boolean followingMode = routingHelper.isFollowingMode() || app.getLocationProvider().getLocationSimulation().isRouteAnimating();
 		if (service != null && (service.getUsedBy() & USED_BY_NAVIGATION) != 0) {
 			color = app.getResources().getColor(R.color.osmand_orange);
 
@@ -140,7 +146,7 @@ public class NavigationNotification extends OsmandNotification {
 			int nextTurnDistance = 0;
 			int nextNextTurnDistance = 0;
 			RouteDirectionInfo ri = null;
-			if (routingHelper.isRouteCalculated() && followingMode) {
+			if (routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()) {
 				deviatedFromRoute = routingHelper.isDeviatedFromRoute();
 
 				if (deviatedFromRoute) {
@@ -224,7 +230,7 @@ public class NavigationNotification extends OsmandNotification {
 		notificationBuilder.addAction(R.drawable.ic_action_remove_dark,
 				app.getString(R.string.shared_string_control_stop), stopPendingIntent);
 
-		if (routingHelper.isRouteCalculated() && followingMode) {
+		if (routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()) {
 			Intent pauseIntent = new Intent(OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION);
 			PendingIntent pausePendingIntent = PendingIntent.getBroadcast(app, 0, pauseIntent,
 					PendingIntent.FLAG_UPDATE_CURRENT);

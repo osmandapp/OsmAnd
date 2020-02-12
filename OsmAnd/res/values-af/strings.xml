@@ -391,7 +391,6 @@
   
   <string name="create_poi_link_to_osm_doc">"<u> Aanlyn OSM </u> kaart klassifikasie met prentjies"</string>
   <string name="error_doing_search">Fout tydens aflyn soek</string>
-  <string name="search_offline_geo_error">Kon nie die geo opset \'%s\' ontleed nie</string>
   <string name="search_osm_offline">Soek adres met behulp van aflyn kaarte</string>
   <string name="system_locale">Stelsel</string>
   <string name="preferred_locale_descr">Kies die taal vir die program</string>
@@ -842,8 +841,8 @@
   
   <string name="edit_filter_save_as_menu_item">Berg As</string>
   <string name="edit_filter_delete_dialog_title">Verwyder gekose filter?</string>
-  <string name="edit_filter_delete_message">Filter {0} is verwyder</string>
-  <string name="edit_filter_create_message">Filter {0} is geskep</string>
+  <string name="edit_filter_delete_message">Filter %1$s is verwyder</string>
+  <string name="edit_filter_create_message">Filter %1$s is geskep</string>
   
   <string name="continue_follow_previous_route_auto">Die vorige navigasie was onvoltooid. Wil jy dit nog volg? (%1$s sekondes)</string>
   
@@ -896,14 +895,12 @@
 	<string name="avoid_unpaved">Vermy ongeteerde paaie</string>
 	<string name="avoid_ferries">Vermy veerbote</string>
 	<string name="avoid_in_routing_title">Vermy…</string>
-	<string name="avoid_in_routing_descr">Vermy tolpaaie, grondpaaie, veerbote</string>
 	<string name="map_widget_fluorescent">Helder roetes</string>
 	<string name="map_widget_show_ruler">Liniaal</string>
 	
 	<string name="map_widget_view_direction">Kykrigting</string>
 	<string name="map_widget_transparent">Deursigtige vel</string>
 	
-	<string name="gps_wakeup_interval">GPS opwek tussenpose: %s</string>
 	<string name="int_continuosly">Aaneenlopende</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner toepassing is nie geïnstaleer nie. Wil jy dit in die mark soek?</string>
 	<string name="enable_plugin_monitoring_services">Aktiveer spoorsny inlasmodule om ligging aanteken diens te gebruik (aantekening, lewende spoor-natrek)</string>

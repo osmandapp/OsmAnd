@@ -10,7 +10,7 @@
             <solid android:color="@color/map_widget_light" />
             <corners
                 android:topRightRadius="@dimen/map_button_rect_rad"
-                android:bottomRightRadius="@dimen/map_button_rect_rad" 
+                android:bottomRightRadius="@dimen/map_button_rect_rad"
                 />
             <stroke android:color="@color/map_widget_stroke" android:width="@dimen/map_button_stroke"/>
         </shape></item>

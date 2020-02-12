@@ -14,7 +14,7 @@ import net.osmand.telegram.notifications.NotificationHelper
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.UiUtils
 
-class TelegramApplication : Application(), OsmandHelperListener {
+class TelegramApplication : Application() {
 
 	val telegramHelper = TelegramHelper.instance
 	lateinit var settings: TelegramSettings private set
@@ -42,25 +42,30 @@ class TelegramApplication : Application(), OsmandHelperListener {
 		telegramHelper.messageActiveTimeSec = settings.locHistoryTime
 		uiUtils = UiUtils(this)
 		osmandAidlHelper = OsmandAidlHelper(this)
-		osmandAidlHelper.listener = object : OsmandAidlHelper.OsmandHelperListener {
+		osmandAidlHelper.addConnectionListener(object : OsmandHelperListener {
 			override fun onOsmandConnectionStateChanged(connected: Boolean) {
 				if (connected) {
+					osmandAidlHelper.clearNavDrawerItems("net.osmand.telegram")
+					osmandAidlHelper.clearNavDrawerItems("net.osmand.telegram.debug")
 					osmandAidlHelper.setNavDrawerItems(
 						applicationContext.packageName,
-						listOf(getString(R.string.app_name_short_online)),
+						listOf(getString(R.string.app_name_short)),
 						listOf("osmand_telegram://main_activity"),
 						listOf("ic_action_location_sharing_app"),
 						listOf(-1)
 					)
-					if (settings.hasAnyChatToShowOnMap()) {
-						showLocationHelper.startShowingLocation()
-					}
+					showLocationHelper.setupMapLayer()
+					showLocationHelper.addDirectionContextMenuButton()
+					showLocationHelper.startShowingLocation()
+					showLocationHelper.addOrUpdateStatusWidget(-1, false)
 				}
 			}
-		}
+		})
 		osmandAidlHelper.setUpdatesListener(object : UpdatesListener {
 			override fun update() {
-				showLocationHelper.startUpdateMessagesTask()
+				if (settings.hasAnyChatToShowOnMap()) {
+					showLocationHelper.startUpdateMessagesTask()
+				}
 			}
 		})
 		shareLocationHelper = ShareLocationHelper(this)
@@ -135,10 +140,6 @@ class TelegramApplication : Application(), OsmandHelperListener {
 			internetConnectionAvailable = isInternetConnected
 		}
 		return internetConnectionAvailable
-	}
-
-	override fun onOsmandConnectionStateChanged(connected: Boolean) {
-		showLocationHelper.setupMapLayer()
 	}
 
 	private fun startTelegramService(intent: Int, serviceOffInterval: Long = 0) {

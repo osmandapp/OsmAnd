@@ -1,5 +1,6 @@
 package net.osmand.plus.base.bottomsheetmenu;
 
+import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -35,8 +36,8 @@ public class HorizontalRecyclerBottomSheetItem extends BaseBottomSheetItem {
 	}
 
 	@Override
-	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
-		super.inflate(app, container, nightMode);
+	public void inflate(Context context, ViewGroup container, boolean nightMode) {
+		super.inflate(context, container, nightMode);
 		recyclerView = ((RecyclerView) view.findViewById(R.id.recycler_view));
 		if (recyclerView != null && adapter != null) {
 			recyclerView.setAdapter(adapter);

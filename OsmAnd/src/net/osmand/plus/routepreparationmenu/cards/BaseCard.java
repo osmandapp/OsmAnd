@@ -6,6 +6,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -29,6 +30,7 @@ public abstract class BaseCard {
 	protected boolean nightMode;
 
 	private CardListener listener;
+	private CardChartListener chartListener;
 
 	public interface CardListener {
 		void onCardLayoutNeeded(@NonNull BaseCard card);
@@ -44,8 +46,17 @@ public abstract class BaseCard {
 
 	public abstract int getCardLayoutId();
 
+	@Nullable
+	public View getView() {
+		return view;
+	}
+
 	public int getViewHeight() {
 		return view != null ? view.getHeight() : 0;
+	}
+
+	public int getTopViewHeight() {
+		return getViewHeight();
 	}
 
 	public void update() {
@@ -54,12 +65,24 @@ public abstract class BaseCard {
 		}
 	}
 
+	public void applyState(@NonNull BaseCard card) {
+		// non implemented
+	}
+
 	public CardListener getListener() {
 		return listener;
 	}
 
 	public void setListener(CardListener listener) {
 		this.listener = listener;
+	}
+
+	public CardChartListener getChartListener() {
+		return chartListener;
+	}
+
+	public void setChartListener(CardChartListener chartListener) {
+		this.chartListener = chartListener;
 	}
 
 	public void setLayoutNeeded() {
@@ -94,12 +117,12 @@ public abstract class BaseCard {
 
 	@ColorInt
 	protected int getActiveColor() {
-		return getResolvedColor(nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+		return getResolvedColor(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 	}
 
 	@ColorInt
 	protected int getMainFontColor() {
-		return getResolvedColor(nightMode ? R.color.main_font_dark : R.color.main_font_light);
+		return getResolvedColor(nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
 	}
 
 	@ColorInt
@@ -112,7 +135,7 @@ public abstract class BaseCard {
 	}
 
 	protected Drawable getActiveIcon(@DrawableRes int icon) {
-		return getColoredIcon(icon, R.color.active_buttons_and_links_light, R.color.active_buttons_and_links_dark);
+		return getColoredIcon(icon, R.color.active_color_primary_light, R.color.active_color_primary_dark);
 	}
 
 	protected Drawable getColoredIcon(@DrawableRes int icon, @ColorRes int colorLight, @ColorRes int colorDark) {

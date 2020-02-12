@@ -25,7 +25,7 @@
 			android:layout_height="32dp"
 			android:layout_margin="11dp"
 			android:layout_gravity="center_vertical"
-			android:background="@drawable/bg_plugin_logo_enabled"
+			android:background="@drawable/bg_plugin_logo_enabled_light"
 			android:scaleType="center"
 			tools:src="@drawable/ic_extension_dark"/>
 
@@ -67,8 +67,8 @@
 				android:paddingRight="9.5dp"
 				android:paddingTop="8dp"
 				android:textColor="?attr/switch_ex_text_color"
-				android:textOff="@string/shared_string_disabled"
-				android:textOn="@string/shared_string_enabled"
+				android:textOff="@string/shared_string_off"
+				android:textOn="@string/shared_string_on"
 				android:textSize="@dimen/default_sub_text_size"
 				android:lines="1"
 				android:maxLines="1"

@@ -29,6 +29,7 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.helpers.WaypointHelper.AmenityLocationPoint;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.routepreparationmenu.AddPointBottomSheetDialog;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
@@ -116,7 +117,7 @@ public class WaypointDialogHelper {
 				String devStr = "+" + OsmAndFormatter.getFormattedDistance(ps.deviationDistance, app);
 				textDeviation.setText(devStr);
 				if (!topBar) {
-					int colorId = nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light;
+					int colorId = nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
 					AndroidUtils.setTextSecondaryColor(activity, textDeviation, nightMode);
 					if (ps.deviationDirectionRight) {
 						textDeviation.setCompoundDrawablesWithIntrinsicBounds(
@@ -326,8 +327,12 @@ public class WaypointDialogHelper {
 		if (!(a instanceof MapActivity)) {
 			return;
 		}
+		Object object = locationPoint;
+		if (locationPoint instanceof AmenityLocationPoint) {
+			object = ((AmenityLocationPoint) locationPoint).a;
+		}
 		app.getSettings().setMapLocationToShow(locationPoint.getLatitude(), locationPoint.getLongitude(),
-				15, locationPoint.getPointDescription(a), false, locationPoint);
+				15, locationPoint.getPointDescription(a), false, object);
 		MapActivity.launchMapActivityMoveToTop(a);
 	}
 
@@ -373,7 +378,11 @@ public class WaypointDialogHelper {
 				for (TargetPoint p : lt) {
 					al.add(p.point);
 				}
-				return new TspAnt().readGraph(al, start.point, end.point).solve();
+				try {
+					return new TspAnt().readGraph(al, start.point, end.point).solve();
+				} catch (Exception e) {
+					return null;
+				}
 			}
 
 			protected void onPostExecute(int[] result) {
@@ -390,7 +399,9 @@ public class WaypointDialogHelper {
 						dlg.dismiss();
 					}
 				}
-
+				if (result == null) {
+					return;
+				}
 				List<TargetPoint> alocs = new ArrayList<>();
 				for (int i : result) {
 					if (i > 0) {

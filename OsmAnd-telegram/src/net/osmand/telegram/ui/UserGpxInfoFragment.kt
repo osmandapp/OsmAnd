@@ -1,16 +1,18 @@
 package net.osmand.telegram.ui
 
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.os.Build
-import android.os.Bundle
+import android.graphics.drawable.LayerDrawable
+import android.os.*
 import android.support.design.widget.Snackbar
 import android.support.v4.app.FragmentManager
+import android.support.v4.content.ContextCompat
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
@@ -20,14 +22,17 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import net.osmand.GPXUtilities
 import net.osmand.PlatformUtil
 import net.osmand.aidl.gpx.AGpxBitmap
 import net.osmand.telegram.R
+import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.TelegramSettings
-import net.osmand.telegram.helpers.LocationMessages
 import net.osmand.telegram.helpers.OsmandAidlHelper
 import net.osmand.telegram.helpers.TelegramUiHelper
-import net.osmand.telegram.utils.*
+import net.osmand.telegram.utils.AndroidUtils
+import net.osmand.telegram.utils.OsmandFormatter
+import net.osmand.telegram.utils.OsmandLocationUtils
 import net.osmand.util.Algorithms
 import java.io.File
 import java.text.SimpleDateFormat
@@ -39,13 +44,16 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 
 	private val uiUtils get() = app.uiUtils
 
-	private var gpxFile = GPXUtilities.GPXFile()
+	private var gpxDataItem: GpxDataItem? = null
+
+	private var loadGpxAsyncTask: LoadGpxAsyncTask? = null
+	private lateinit var loadGpxListener: LoadGpxListener
 
 	private lateinit var mainView: View
-	private lateinit var dateStartBtn: TextView
-	private lateinit var timeStartBtn: TextView
-	private lateinit var dateEndBtn: TextView
-	private lateinit var timeEndBtn: TextView
+	private lateinit var dateTimeBtn: TextView
+	private lateinit var liveBtn: TextView
+
+	private lateinit var iconMap: ImageView
 
 	private lateinit var avgElevationTv: TextView
 	private lateinit var avgSpeedTv: TextView
@@ -55,11 +63,14 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 	private var startCalendar = Calendar.getInstance()
 	private var endCalendar = Calendar.getInstance()
 
-	private var locationMessages = emptyList<LocationMessages.LocationMessage>()
-
 	private var userId = -1
 	private var chatId = -1L
 	private var deviceName = ""
+
+	private var handler: Handler = Handler()
+
+	private var endTimeChanged = false
+	private var snackbarShown = false
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -81,25 +92,42 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 			TelegramUiHelper.setupPhoto(app, mainView.findViewById<ImageView>(R.id.user_icon),
 				telegramHelper.getUserPhotoPath(user), R.drawable.img_user_placeholder, false)
 		}
-		val openGpxListener = View.OnClickListener {
-			val gpx = gpxFile
-			if (gpx.path.isNotEmpty()) {
-				openGpx(gpx.path)
-			} else {
-				saveCurrentGpxToFile(object :
-					OsmandLocationUtils.SaveGpxListener {
 
-					override fun onSavingGpxFinish(path: String) {
-						openGpx(path)
-					}
+		loadGpxListener = object : LoadGpxListener {
+			override fun onLoadGpxFinish(dataItem: GpxDataItem) {
+				gpxDataItem = dataItem
+				updateGPXStatisticRow()
+				updateDateAndTimeButton()
+				updateGPXMap()
+			}
 
-					override fun onSavingGpxError(warnings: List<String>?) {
-						Toast.makeText(app, warnings?.firstOrNull(), Toast.LENGTH_LONG).show()
-					}
-				})
+			override fun onLoadGpxError(error: String) {
+				log.error(error)
 			}
 		}
-		val iconMap = mainView.findViewById<ImageView>(R.id.gpx_map)
+
+		val openGpxListener = View.OnClickListener {
+			val gpx = gpxDataItem?.gpxFile
+			if (gpx != null) {
+				if (gpx.path.isNotEmpty()) {
+					openGpx(gpx.path)
+				} else {
+					saveCurrentGpxToFile(object :
+						OsmandLocationUtils.SaveGpxListener {
+
+						override fun onSavingGpxFinish(path: String) {
+							openGpx(path)
+						}
+
+						override fun onSavingGpxError(error: Exception) {
+							Toast.makeText(app, error.message, Toast.LENGTH_LONG).show()
+						}
+					})
+				}
+			}
+		}
+
+		iconMap = mainView.findViewById<ImageView>(R.id.gpx_map)
 		app.osmandAidlHelper.setGpxBitmapCreatedListener(
 			object : OsmandAidlHelper.GpxBitmapCreatedListener {
 				override fun onGpxBitmapCreated(bitmap: AGpxBitmap) {
@@ -117,40 +145,32 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 			}
 		}
 
-		dateStartBtn = mainView.findViewById<TextView>(R.id.date_start_btn)
-		timeStartBtn = mainView.findViewById<TextView>(R.id.time_start_btn)
-		dateEndBtn = mainView.findViewById<TextView>(R.id.date_end_btn)
-		timeEndBtn = mainView.findViewById<TextView>(R.id.time_end_btn)
+		dateTimeBtn = mainView.findViewById<TextView>(R.id.date_time_btn).apply {
+			setOnClickListener {
+				fragmentManager?.also { fm ->
+					SetTimeBottomSheet.showInstance(fm, this@UserGpxInfoFragment, startCalendar.timeInMillis, endCalendar.timeInMillis)
+				}
+			}
+			setTextColor(AndroidUtils.createPressedColorStateList(app, true, R.color.ctrl_active_light, R.color.ctrl_light))
+		}
+		updateDateAndTimeButton()
 
-		dateStartBtn.setOnClickListener { selectStartDate() }
-		timeStartBtn.setOnClickListener { selectStartTime() }
-		dateEndBtn.setOnClickListener { selectEndDate() }
-		timeEndBtn.setOnClickListener { selectEndTime() }
-
-		setupBtnTextColor(dateStartBtn)
-		setupBtnTextColor(timeStartBtn)
-		setupBtnTextColor(dateEndBtn)
-		setupBtnTextColor(timeEndBtn)
-
-		updateDateAndTimeButtons()
+		liveBtn = mainView.findViewById<TextView>(R.id.live_btn).apply {
+			setOnClickListener {
+				val enabled = !liveTrackEnabled()
+				settings.updateLiveTrack(userId, chatId, deviceName, enabled)
+				updateLiveTrackBtn()
+				if (enabled) {
+					startHandler()
+				}
+			}
+		}
+		updateLiveTrackBtn()
 
 		avgElevationTv = mainView.findViewById<TextView>(R.id.average_altitude_text)
 		avgSpeedTv = mainView.findViewById<TextView>(R.id.average_speed_text)
 		totalDistanceTv = mainView.findViewById<TextView>(R.id.distance_text)
 		timeSpanTv = mainView.findViewById<TextView>(R.id.duration_text)
-
-		mainView.findViewById<ImageView>(R.id.average_altitude_icon).apply {
-			setImageDrawable(uiUtils.getThemedIcon(R.drawable.ic_action_altitude_range))
-		}
-		mainView.findViewById<ImageView>(R.id.average_speed_icon).apply {
-			setImageDrawable(uiUtils.getThemedIcon(R.drawable.ic_action_speed_average))
-		}
-		mainView.findViewById<ImageView>(R.id.distance_icon).apply {
-			setImageDrawable(uiUtils.getThemedIcon(R.drawable.ic_action_sort_by_distance))
-		}
-		mainView.findViewById<ImageView>(R.id.duration_icon).apply {
-			setImageDrawable(uiUtils.getThemedIcon(R.drawable.ic_action_time_span))
-		}
 
 		updateGPXStatisticRow()
 
@@ -162,26 +182,28 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		mainView.findViewById<ImageView>(R.id.open_in_osmand_icon).setImageResource(imageRes)
 		mainView.findViewById<LinearLayout>(R.id.open_in_osmand_btn).setOnClickListener(openGpxListener)
 
-		mainView.findViewById<TextView>(R.id.open_in_osmand_title).setTextColor(AndroidUtils.createPressedColorStateList(app, true, R.color.primary_text_light, R.color.ctrl_light))
-		mainView.findViewById<TextView>(R.id.share_gpx_title).setTextColor(AndroidUtils.createPressedColorStateList(app, true, R.color.primary_text_light, R.color.ctrl_light))
+		mainView.findViewById<TextView>(R.id.open_in_osmand_title).setTextColor(AndroidUtils.createPressedColorStateList(app, true, R.color.ctrl_active_light, R.color.ctrl_light))
+		mainView.findViewById<TextView>(R.id.share_gpx_title).setTextColor(AndroidUtils.createPressedColorStateList(app, true, R.color.ctrl_active_light, R.color.ctrl_light))
 
 		mainView.findViewById<ImageView>(R.id.share_gpx_icon).setImageDrawable(getShareIcon())
 		mainView.findViewById<LinearLayout>(R.id.share_gpx_btn).apply {
 			setOnClickListener {
-				val gpx = gpxFile
-				if (gpx.path.isNotEmpty()) {
-					(activity as MainActivity).shareGpx(gpx.path)
-				} else {
-					saveCurrentGpxToFile(object :
-						OsmandLocationUtils.SaveGpxListener {
-						override fun onSavingGpxFinish(path: String) {
-							(activity as MainActivity).shareGpx(path)
-						}
+				val gpx = gpxDataItem?.gpxFile
+				if (gpx != null) {
+					if (gpx.path.isNotEmpty()) {
+						(activity as MainActivity).shareGpx(gpx.path)
+					} else {
+						saveCurrentGpxToFile(object :
+							OsmandLocationUtils.SaveGpxListener {
+							override fun onSavingGpxFinish(path: String) {
+								(activity as MainActivity).shareGpx(path)
+							}
 
-						override fun onSavingGpxError(warnings: List<String>?) {
-							Toast.makeText(app, warnings?.firstOrNull(), Toast.LENGTH_LONG).show()
-						}
-					})
+							override fun onSavingGpxError(error: Exception) {
+								Toast.makeText(app, error.message, Toast.LENGTH_LONG).show()
+							}
+						})
+					}
 				}
 			}
 		}
@@ -193,6 +215,9 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 
 	override fun onSaveInstanceState(outState: Bundle) {
 		super.onSaveInstanceState(outState)
+		outState.putInt(USER_ID_KEY, userId)
+		outState.putLong(CHAT_ID_KEY, chatId)
+		outState.putString(DEVICE_NAME_KEY, deviceName)
 		outState.putLong(START_KEY, startCalendar.timeInMillis)
 		outState.putLong(END_KEY, endCalendar.timeInMillis)
 	}
@@ -201,6 +226,38 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		super.onActivityResult(requestCode, resultCode, data)
 		when (requestCode) {
 			ChooseOsmAndBottomSheet.OSMAND_CHOSEN_REQUEST_CODE -> updateGPXMap()
+			SetTimeBottomSheet.SET_TIME_REQUEST_CODE -> {
+				if (data != null) {
+					val startTime = data.getLongExtra(SetTimeBottomSheet.START_TIME, -1)
+					val endTime = data.getLongExtra(SetTimeBottomSheet.END_TIME, -1)
+					if (startTime != -1L && endTime != -1L) {
+						endTimeChanged = endCalendar.timeInMillis != endTime
+						startCalendar.timeInMillis = startTime
+						endCalendar.timeInMillis = endTime
+						updateGpxInfo()
+					}
+				}
+			}
+		}
+	}
+
+	override fun onResume() {
+		super.onResume()
+		if (liveTrackEnabled()) {
+			startHandler()
+		}
+	}
+
+	private fun startHandler() {
+		if (!handler.hasMessages(TRACK_UPDATE_MSG_ID)) {
+			val msg = Message.obtain(handler) {
+				if (isResumed && liveTrackEnabled()) {
+					updateGpxInfo()
+					startHandler()
+				}
+			}
+			msg.what = TRACK_UPDATE_MSG_ID
+			handler.sendMessageDelayed(msg, UPDATE_TRACK_INTERVAL_MS)
 		}
 	}
 
@@ -221,9 +278,9 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 	}
 
 	private fun saveCurrentGpxToFile(listener: OsmandLocationUtils.SaveGpxListener) {
-		if (!gpxFile.isEmpty) {
-			val file = File(app.getExternalFilesDir(null), TRACKS_DIR)
-			OsmandLocationUtils.saveGpx(app, listener, file, gpxFile)
+		val gpx = gpxDataItem?.gpxFile
+		if (gpx != null) {
+			OsmandLocationUtils.saveGpx(app, gpx, listener)
 		}
 	}
 
@@ -237,8 +294,15 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		}
 	}
 
-	private fun setupBtnTextColor(textView: TextView) {
-		textView.setTextColor(AndroidUtils.createPressedColorStateList(app, true, R.color.ctrl_active_light, R.color.ctrl_light))
+	private fun liveTrackEnabled() = settings.isLiveTrackEnabled(userId, chatId, deviceName)
+
+	private fun updateLiveTrackBtn() {
+		val enabled = liveTrackEnabled()
+		val icon = getLiveTrackBtnIcon(enabled)
+		val normalTextColor = if (enabled) R.color.ctrl_active_light else R.color.secondary_text_light
+
+		liveBtn.setTextColor(AndroidUtils.createPressedColorStateList(app, true, normalTextColor, R.color.ctrl_light))
+		liveBtn.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null)
 	}
 
 	private fun getShareIcon(): Drawable? {
@@ -252,17 +316,46 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		return normal
 	}
 
+	private fun getLiveTrackBtnIcon(enabled: Boolean): Drawable? {
+		val iconColor = if (enabled) R.color.live_track_active_icon else R.color.icon_light
+
+		val layers = arrayOfNulls<Drawable>(2)
+		layers[0] = app.uiUtils.getIcon(R.drawable.ic_action_round_shape)
+		layers[1] = app.uiUtils.getIcon(R.drawable.ic_action_record, iconColor)
+
+		if (Build.VERSION.SDK_INT >= 21 && !enabled) {
+			val normal = layers[1]
+			val active = app.uiUtils.getIcon(R.drawable.ic_action_record, R.color.live_track_active_icon)
+			if (normal != null && active != null) {
+				layers[1] = AndroidUtils.createPressedStateListDrawable(normal, active)
+			}
+		}
+
+		return LayerDrawable(layers)
+	}
+
 	private fun updateGpxInfo() {
 		checkTime()
-		locationMessages = app.locationMessages.getMessagesForUserInChat(userId, chatId,deviceName, startCalendar.timeInMillis, endCalendar.timeInMillis)
+		stopLoadGpxAsyncTask()
+		loadGpxAsyncTask = LoadGpxAsyncTask(app, userId, chatId, deviceName, startCalendar.timeInMillis, endCalendar.timeInMillis, loadGpxListener)
+		loadGpxAsyncTask!!.execute()
+	}
 
-		gpxFile = OsmandLocationUtils.convertLocationMessagesToGpxFiles(locationMessages).firstOrNull()?:GPXUtilities.GPXFile()
-		updateGPXStatisticRow()
-		updateDateAndTimeButtons()
-		updateGPXMap()
+	private fun stopLoadGpxAsyncTask() {
+		val asyncTask = loadGpxAsyncTask
+		if (asyncTask != null && asyncTask.status == AsyncTask.Status.RUNNING) {
+			asyncTask.cancel(false)
+		}
 	}
 
 	private fun checkTime() {
+		val enabled = liveTrackEnabled()
+		if (enabled && !endTimeChanged) {
+			val locationMessage = app.locationMessages.getLastLocationInfoForUserInChat(userId, chatId, deviceName)
+			if (locationMessage != null && locationMessage.time > endCalendar.timeInMillis) {
+				endCalendar.timeInMillis = locationMessage.time
+			}
+		}
 		if (startCalendar.timeInMillis > endCalendar.timeInMillis) {
 			val time = startCalendar.timeInMillis
 			startCalendar.timeInMillis = endCalendar.timeInMillis
@@ -270,21 +363,25 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		}
 	}
 
-	private fun updateDateAndTimeButtons() {
-		dateStartBtn.text = SimpleDateFormat("dd MMM", Locale.getDefault()).format(startCalendar.timeInMillis)
-		dateEndBtn.text = SimpleDateFormat("dd MMM", Locale.getDefault()).format(endCalendar.timeInMillis)
-
-		timeStartBtn.text = SimpleDateFormat("HH:mm", Locale.getDefault()).format(startCalendar.timeInMillis)
-		timeEndBtn.text = SimpleDateFormat("HH:mm", Locale.getDefault()).format(endCalendar.timeInMillis)
+	private fun updateDateAndTimeButton() {
+		val dateFormat = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
+		val start = dateFormat.format(startCalendar.timeInMillis)
+		val end = dateFormat.format(endCalendar.timeInMillis)
+		val text = "$start — $end"
+		dateTimeBtn.text = SpannableString(text).apply {
+			val index = text.indexOf("—")
+			if (index != -1) {
+				setSpan(ForegroundColorSpan(ContextCompat.getColor(app, R.color.secondary_text_light)), index, index + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+			}
+		}
 	}
 
 	private fun updateGPXStatisticRow() {
-		val analysis: GPXUtilities.GPXTrackAnalysis = gpxFile.getAnalysis(0)
-
-		avgElevationTv.text = if (analysis.avgElevation != 0.0) OsmandFormatter.getFormattedAlt(analysis.avgElevation, app) else "-"
-		avgSpeedTv.text = if (analysis.isSpeedSpecified) OsmandFormatter.getFormattedSpeed(analysis.avgSpeed, app) else "-"
-		totalDistanceTv.text = if (analysis.totalDistance != 0.0f) OsmandFormatter.getFormattedDistance(analysis.totalDistance, app)  else  "-"
-		timeSpanTv.text = if (analysis.timeSpan != 0L)  Algorithms.formatDuration((analysis.timeSpan / 1000).toInt(), true) else  "-"
+		val analysis = gpxDataItem?.analysis
+		avgElevationTv.text = if (analysis != null && analysis.avgElevation != 0.0) OsmandFormatter.getFormattedAlt(analysis.avgElevation, app) else "-"
+		avgSpeedTv.text = if (analysis != null && analysis.isSpeedSpecified) OsmandFormatter.getFormattedSpeed(analysis.avgSpeed, app) else "-"
+		totalDistanceTv.text = if (analysis != null && analysis.totalDistance != 0.0f) OsmandFormatter.getFormattedDistance(analysis.totalDistance, app) else "-"
+		timeSpanTv.text = if (analysis != null && analysis.timeSpan != 0L) Algorithms.formatDuration((analysis.timeSpan / 1000).toInt(), true) else "-"
 	}
 
 	private fun updateGPXMap() {
@@ -295,13 +392,17 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		} else if (!app.isOsmAndChosen() || (app.isOsmAndChosen() && !app.isOsmAndInstalled())) {
 			fragmentManager?.also { ChooseOsmAndBottomSheet.showInstance(it, this) }
 		} else if (!canOsmandCreateBitmap()) {
-			 val snackbar = Snackbar.make(mainView, R.string.please_update_osmand, Snackbar.LENGTH_LONG).setAction(R.string.shared_string_update) {
-					val packageName = if (app.settings.appToConnectPackage == OsmandAidlHelper.OSMAND_NIGHTLY_PACKAGE_NAME)
-							OsmandAidlHelper.OSMAND_FREE_PACKAGE_NAME else app.settings.appToConnectPackage
-					startActivity(AndroidUtils.getPlayMarketIntent(app, packageName))
-				}
-			AndroidUtils.setSnackbarTextColor(snackbar, R.color.ctrl_active_dark)
-			snackbar.show()
+			if (!snackbarShown) {
+				val snackbar = Snackbar.make(mainView, R.string.please_update_osmand, Snackbar.LENGTH_LONG)
+						.setAction(R.string.shared_string_update) {
+							val packageName = if (app.settings.appToConnectPackage == OsmandAidlHelper.OSMAND_NIGHTLY_PACKAGE_NAME)
+									OsmandAidlHelper.OSMAND_FREE_PACKAGE_NAME else app.settings.appToConnectPackage
+							startActivity(AndroidUtils.getPlayMarketIntent(app, packageName))
+						}
+				AndroidUtils.setSnackbarTextColor(snackbar, R.color.ctrl_active_dark)
+				snackbar.show()
+				snackbarShown = true
+			}
 		} else {
 			saveCurrentGpxToFile(object :
 				OsmandLocationUtils.SaveGpxListener {
@@ -310,8 +411,8 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 					if (mgr != null) {
 						val dm = DisplayMetrics()
 						(mgr as WindowManager).defaultDisplay.getMetrics(dm)
-						val widthPixels = dm.widthPixels - (2 * app.resources.getDimensionPixelSize(R.dimen.content_padding_standard))
-						val heightPixels = AndroidUtils.dpToPx(app, 152f)
+						val widthPixels = iconMap.width
+						val heightPixels = iconMap.height
 						val gpxUri = AndroidUtils.getUriForFile(app, File(path))
 						app.osmandAidlHelper.execOsmandApi {
 							app.osmandAidlHelper.getBitmapForGpx(gpxUri, dm.density, widthPixels, heightPixels, GPX_TRACK_COLOR)
@@ -319,58 +420,60 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 					}
 				}
 
-				override fun onSavingGpxError(warnings: List<String>?) {
-					log.debug("onSavingGpxError ${warnings?.firstOrNull()}")
+				override fun onSavingGpxError(error: Exception) {
+					log.error(error)
 				}
 			})
 		}
 	}
 
-	private fun selectStartDate() {
-		val dateFromDialog =
-			DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-				startCalendar.set(Calendar.YEAR, year)
-				startCalendar.set(Calendar.MONTH, monthOfYear)
-				startCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-				updateGpxInfo()
+	private class LoadGpxAsyncTask internal constructor(
+		private val app: TelegramApplication,
+		private val userId: Int,
+		private val chatId: Long,
+		private val deviceName: String,
+		private val start: Long,
+		private val end: Long,
+		private val listener: LoadGpxListener
+	) :
+		AsyncTask<Void, Void, GpxDataItem>() {
+
+		override fun doInBackground(vararg params: Void): GpxDataItem? {
+			val locationMessages = app.locationMessages.getMessagesForUserInChat(userId, chatId, deviceName, start, end)
+			if (locationMessages.isNotEmpty() && !isCancelled) {
+				val items = OsmandLocationUtils.convertLocationMessagesToGpxFiles(app, locationMessages)
+				if (items.isNotEmpty() && !isCancelled) {
+					val gpx = items.firstOrNull()
+					if (gpx != null) {
+						val analysis = gpx.getAnalysis(0)
+						return if (!isCancelled) GpxDataItem(gpx, analysis) else null
+					}
+				}
 			}
-		DatePickerDialog(context, dateFromDialog,
-			startCalendar.get(Calendar.YEAR),
-			startCalendar.get(Calendar.MONTH),
-			startCalendar.get(Calendar.DAY_OF_MONTH)).show()
-	}
+			return null
+		}
 
-	private fun selectStartTime() {
-		TimePickerDialog(context,
-			TimePickerDialog.OnTimeSetListener { _, hours, minutes ->
-				startCalendar.set(Calendar.HOUR_OF_DAY, hours)
-				startCalendar.set(Calendar.MINUTE, minutes)
-				updateGpxInfo()
-			}, 0, 0, true).show()
-	}
-
-	private fun selectEndDate() {
-		val dateFromDialog =
-			DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-				endCalendar.set(Calendar.YEAR, year)
-				endCalendar.set(Calendar.MONTH, monthOfYear)
-				endCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-				updateGpxInfo()
+		override fun onPostExecute(gpxDataItem: GpxDataItem?) {
+			if (gpxDataItem != null) {
+				listener.onLoadGpxFinish(gpxDataItem)
+			} else {
+				listener.onLoadGpxError("Cant create gpx for $userId $chatId $deviceName $start $end")
 			}
-		DatePickerDialog(context, dateFromDialog,
-			endCalendar.get(Calendar.YEAR),
-			endCalendar.get(Calendar.MONTH),
-			endCalendar.get(Calendar.DAY_OF_MONTH)).show()
+		}
 	}
 
-	private fun selectEndTime() {
-		TimePickerDialog(context,
-			TimePickerDialog.OnTimeSetListener { _, hours, minutes ->
-				endCalendar.set(Calendar.HOUR_OF_DAY, hours)
-				endCalendar.set(Calendar.MINUTE, minutes)
-				updateGpxInfo()
-			}, 0, 0, true).show()
+	interface LoadGpxListener {
+
+		fun onLoadGpxFinish(dataItem: GpxDataItem)
+
+		fun onLoadGpxError(error: String)
+
 	}
+
+	data class GpxDataItem(
+		val gpxFile: GPXUtilities.GPXFile,
+		val analysis: GPXUtilities.GPXTrackAnalysis
+	)
 
 	companion object {
 
@@ -380,11 +483,14 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		private const val USER_ID_KEY = "user_id_key"
 		private const val CHAT_ID_KEY = "chat_id_key"
 		private const val DEVICE_NAME_KEY = "device_name_key"
+		private const val DATE_FORMAT = "dd MMM HH:mm"
 
 		private const val GPX_TRACK_COLOR = -65536
 		private	const val MIN_OSMAND_BITMAP_VERSION_CODE = 330
+		private const val UPDATE_TRACK_INTERVAL_MS = 30 * 1000L // 30 sec
+		private const val TRACK_UPDATE_MSG_ID = 1001
 
-		fun showInstance(fm: FragmentManager,userId:Int,chatId:Long,deviceName:String, start: Long, end: Long): Boolean {
+		fun showInstance(fm: FragmentManager, userId: Int, chatId: Long, deviceName: String, start: Long, end: Long): Boolean {
 			return try {
 				val fragment = UserGpxInfoFragment().apply {
 					arguments = Bundle().apply {

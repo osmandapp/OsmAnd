@@ -2,6 +2,7 @@ package net.osmand.plus.dashboard;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,6 +75,10 @@ public class DashFavoritesFragment extends DashLocationFragment {
 				public void onFavoritesLoaded() {
 					setupFavorites();
 				}
+
+				@Override
+				public void onFavoriteDataUpdated(@NonNull FavouritePoint favouritePoint) {
+				}
 			});
 		}
 	}
@@ -126,19 +131,19 @@ public class DashFavoritesFragment extends DashLocationFragment {
 			view.findViewById(R.id.divider).setVisibility(View.VISIBLE);
 			ImageView groupImage = (ImageView)view.findViewById(R.id.group_image);
 			if (point.getCategory().length() > 0) {
-				((TextView) view.findViewById(R.id.group_name)).setText(point.getCategory());
+				((TextView) view.findViewById(R.id.group_name)).setText(point.getCategoryDisplayName(getMyApplication()));
 				groupImage.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_small_group));
 			} else {
 				groupImage.setVisibility(View.GONE);
 			}
 
 			((ImageView) view.findViewById(R.id.favourite_icon)).setImageDrawable(FavoriteImageDrawable.getOrCreate(
-					getActivity(), point.getColor(), false));
+					getActivity(), point.getColor(), false, point));
 			DashLocationView dv = new DashLocationView(direction, label, new LatLon(point.getLatitude(),
 					point.getLongitude()));
 			distances.add(dv);
 
-			name.setText(point.getName());
+			name.setText(point.getDisplayName(getMyApplication()));
 			name.setTypeface(Typeface.DEFAULT, point.isVisible() ? Typeface.NORMAL : Typeface.ITALIC);
 			view.findViewById(R.id.navigate_to).setVisibility(View.VISIBLE);
 
@@ -148,7 +153,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 				public void onClick(View view) {
 					DirectionsDialogs.directionsToDialogAndLaunchMap(getActivity(), point.getLatitude(),
 							point.getLongitude(),
-							new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getName()));
+							new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getDisplayName(getMyApplication())));
 				}
 			});
 			
@@ -156,7 +161,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 				@Override
 				public void onClick(View view) {
 					getMyApplication().getSettings().setMapLocationToShow(point.getLatitude(), point.getLongitude(),
-							15, new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getName()), true,
+							15, new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getDisplayName(getMyApplication())), true,
 							point); //$NON-NLS-1$
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 				}

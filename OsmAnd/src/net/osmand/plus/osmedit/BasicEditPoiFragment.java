@@ -1,7 +1,6 @@
 package net.osmand.plus.osmedit;
 
-import static net.osmand.plus.osmedit.EditPoiDialogFragment.AMENITY_TEXT_LENGTH;
-
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -10,11 +9,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.InputFilter;
-import android.text.InputFilter.LengthFilter;
-import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +39,8 @@ import java.util.Map;
 
 import gnu.trove.list.array.TIntArrayList;
 
+import static net.osmand.plus.osmedit.EditPoiDialogFragment.AMENITY_TEXT_LENGTH;
+
 public class BasicEditPoiFragment extends BaseOsmAndFragment
 		implements EditPoiDialogFragment.OnFragmentActivatedListener {
 	private static final Log LOG = PlatformUtil.getLog(BasicEditPoiFragment.class);
@@ -57,10 +57,12 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_edit_poi_normal, container, false);
+		int themeRes = requireMyApplication().getSettings().isLightActionBar() ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
+		Context themedContext = new ContextThemeWrapper(getContext(), themeRes);
+		View view = inflater.cloneInContext(themedContext).inflate(R.layout.fragment_edit_poi_normal, container, false);
 
 		TypedValue typedValue = new TypedValue();
-		Resources.Theme theme = getActivity().getTheme();
+		Resources.Theme theme = themedContext.getTheme();
 		theme.resolveAttribute(android.R.attr.textColorSecondary, typedValue, true);
 		int iconColor = typedValue.data;
 
@@ -165,6 +167,19 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment
 			item.setEndTime(24 * 60);
 		}
 		mOpeningHoursAdapter.setOpeningHoursRule(item, position);
+	}
+
+	public void removeUnsavedOpeningHours() {
+		EditPoiData data = getData();
+		if (data != null) {
+			OpeningHoursParser.OpeningHours openingHours = OpeningHoursParser.parseOpenedHoursHandleErrors(data.getTagValues()
+					.get(OSMSettings.OSMTagKey.OPENING_HOURS.getValue()));
+			if (openingHours == null) {
+				openingHours = new OpeningHoursParser.OpeningHours();
+			}
+			mOpeningHoursAdapter.replaceOpeningHours(openingHours);
+			mOpeningHoursAdapter.updateViews();
+		}
 	}
 
 	private EditPoiData getData() {

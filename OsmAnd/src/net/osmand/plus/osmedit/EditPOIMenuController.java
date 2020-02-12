@@ -45,7 +45,7 @@ public class EditPOIMenuController extends MenuController {
 			}
 		};
 		leftTitleButtonController.caption = mapActivity.getString(R.string.shared_string_upload);
-		leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_export, true);
+		leftTitleButtonController.leftIconId = R.drawable.ic_action_export;
 
 		rightTitleButtonController = new TitleButtonController() {
 			@Override
@@ -79,7 +79,7 @@ public class EditPOIMenuController extends MenuController {
 			}
 		};
 		rightTitleButtonController.caption = mapActivity.getString(R.string.shared_string_delete);
-		rightTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_delete_dark, true);
+		rightTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
 
 		categoryDescr = getCategoryDescr();
 

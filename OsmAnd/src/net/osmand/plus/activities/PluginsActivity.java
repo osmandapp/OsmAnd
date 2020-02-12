@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,14 +16,16 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.osmand.aidl.OsmandAidlApi.ConnectedApp;
+import net.osmand.AndroidUtils;
+import net.osmand.aidl.ConnectedApp;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.download.DownloadIndexesThread;
 
 import java.util.ArrayList;
 
-public class PluginsActivity extends OsmandListActivity {
+public class PluginsActivity extends OsmandListActivity implements DownloadIndexesThread.DownloadEvents {
 
 	public static final int ACTIVE_PLUGINS_LIST_MODIFIED = 1;
 
@@ -57,7 +60,16 @@ public class PluginsActivity extends OsmandListActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		OsmandApplication app = getMyApplication();
+		OsmandPlugin.checkInstalledMarketPlugins(app, this);
+		app.getDownloadThread().setUiActivity(this);
 		getListAdapter().notifyDataSetChanged();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		getMyApplication().getDownloadThread().resetUiActivity(this);
 	}
 
 	private void enableDisablePlugin(OsmandPlugin plugin, boolean enable) {
@@ -68,12 +80,43 @@ public class PluginsActivity extends OsmandListActivity {
 				listModified = true;
 			}
 			getListAdapter().notifyDataSetChanged();
+			if (plugin.isActive() && plugin.isMarketPlugin()) {
+				plugin.showInstallDialog(this);
+			}
 		}
 	}
 
 	private void switchEnabled(@NonNull ConnectedApp app) {
 		getMyApplication().getAidlApi().switchEnabled(app);
 		getListAdapter().notifyDataSetChanged();
+	}
+
+	// DownloadEvents
+	@Override
+	public void newDownloadIndexes() {
+		for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+			if (fragment instanceof DownloadIndexesThread.DownloadEvents && fragment.isAdded()) {
+				((DownloadIndexesThread.DownloadEvents) fragment).newDownloadIndexes();
+			}
+		}
+	}
+
+	@Override
+	public void downloadInProgress() {
+		for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+			if (fragment instanceof DownloadIndexesThread.DownloadEvents && fragment.isAdded()) {
+				((DownloadIndexesThread.DownloadEvents) fragment).downloadInProgress();
+			}
+		}
+	}
+
+	@Override
+	public void downloadHasFinished() {
+		for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+			if (fragment instanceof DownloadIndexesThread.DownloadEvents && fragment.isAdded()) {
+				((DownloadIndexesThread.DownloadEvents) fragment).downloadHasFinished();
+			}
+		}
 	}
 
 	protected class PluginsListAdapter extends ArrayAdapter<Object> {
@@ -97,6 +140,7 @@ public class PluginsActivity extends OsmandListActivity {
 			boolean active = false;
 			int logoContDescId = R.string.shared_string_disable;
 			String name = "";
+			boolean isLightTheme = getMyApplication().getSettings().isLightContent();
 
 			ImageButton pluginLogo = (ImageButton) view.findViewById(R.id.plugin_logo);
 			ImageView pluginOptions = (ImageView) view.findViewById(R.id.plugin_options);
@@ -129,7 +173,10 @@ public class PluginsActivity extends OsmandListActivity {
 				}
 				name = plugin.getName();
 				pluginDescription.setText(plugin.getDescription());
-				pluginLogo.setImageResource(plugin.getLogoResourceId());
+
+				OsmandApplication app = getMyApplication();
+				int color = AndroidUtils.getColorFromAttr(app, R.attr.list_background_color);
+				pluginLogo.setImageDrawable(app.getUIUtilities().getPaintedIcon(plugin.getLogoResourceId(), color));
 				pluginLogo.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -151,7 +198,7 @@ public class PluginsActivity extends OsmandListActivity {
 
 			pluginLogo.setContentDescription(getString(logoContDescId));
 			if (active) {
-				pluginLogo.setBackgroundResource(R.drawable.bg_plugin_logo_enabled);
+				pluginLogo.setBackgroundResource(isLightTheme ? R.drawable.bg_plugin_logo_enabled_light : R.drawable.bg_plugin_logo_enabled_dark);
 			} else {
 				TypedArray attributes = getTheme().obtainStyledAttributes(new int[]{R.attr.bg_plugin_logo_disabled});
 				pluginLogo.setBackgroundDrawable(attributes.getDrawable(0));

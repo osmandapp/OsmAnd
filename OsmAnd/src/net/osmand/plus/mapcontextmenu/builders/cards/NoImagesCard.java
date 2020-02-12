@@ -28,16 +28,16 @@ public class NoImagesCard extends AbstractCard {
 			UiUtilities ic = getMyApplication().getUIUtilities();
 			boolean night = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 			MapActivity ctx = getMapActivity();
-			AndroidUtils.setBackgroundColor(ctx, view, night, R.color.bg_color_light, R.color.bg_color_dark);
+			AndroidUtils.setBackgroundColor(ctx, view, night, R.color.list_background_color_light, R.color.list_background_color_dark);
 			((ImageView) view.findViewById(R.id.icon_sadface)).setImageDrawable(ic.getIcon(R.drawable.ic_action_sadface,
-					night ? R.color.color_white : R.color.icon_color));
+					night ? R.color.color_white : R.color.icon_color_default_light));
 			AndroidUtils.setTextPrimaryColor(ctx, (TextView) view.findViewById(R.id.title), night);
 			AndroidUtils.setBackgroundColor(ctx, view.findViewById(R.id.button_background), night,
-					R.color.ctx_menu_card_btn_light, R.color.ctx_menu_card_btn_dark);
+					R.color.inactive_buttons_and_links_bg_light, R.color.inactive_buttons_and_links_bg_dark);
 			((ImageView) view.findViewById(R.id.icon_add_photos)).setImageDrawable(ic.getIcon(R.drawable.ic_action_add_photos,
-					night ? R.color.color_dialog_buttons_dark : R.color.color_dialog_buttons_light));
+					night ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
 			((TextView) view.findViewById(R.id.app_photos_text_view)).setTextColor(ContextCompat.getColor(ctx,
-					night ? R.color.color_dialog_buttons_dark : R.color.color_dialog_buttons_light));
+					night ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
 			AndroidUtils.setBackground(ctx, view.findViewById(R.id.card_background), night,
 					R.drawable.context_menu_card_light, R.drawable.context_menu_card_dark);
 			view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {

@@ -39,6 +39,7 @@ import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader;
+import net.osmand.plus.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -66,7 +67,6 @@ import android.os.Looper;
 import android.widget.Toast;
 
 public class MapRenderRepositories {
-
 	// It is needed to not draw object twice if user have map index that intersects by boundaries
 	public static boolean checkForDuplicateObjectIds = true;
 	
@@ -122,6 +122,15 @@ public class MapRenderRepositories {
 		this.renderer = new OsmandRenderer(context);
 		handler = new Handler(Looper.getMainLooper());
 		prefs = context.getSettings();
+
+		OsmAndAppCustomizationListener customizationListener = new OsmAndAppCustomizationListener() {
+			@Override
+			public void onOsmAndSettingsCustomized() {
+				prefs = MapRenderRepositories.this.context.getSettings();
+				clearCache();
+			}
+		};
+		context.getAppCustomization().addListener(customizationListener);
 	}
 
 	public Context getContext() {
@@ -357,7 +366,7 @@ public class MapRenderRepositories {
 							coordinantes[2 * k + 1] = r.getPoint31YTile(k);
 						}
 						BinaryMapDataObject mo = new BinaryMapDataObject( r.getId(), coordinantes, new int[0][],
-								RenderingRulesStorage.LINE_RULES, true, roTypes, null);
+								RenderingRulesStorage.LINE_RULES, true, roTypes, null, 0,0);
 						TIntObjectHashMap<String> names = r.getNames();
 						if(names != null) {
 							TIntObjectIterator<String> it = names.iterator();
@@ -463,7 +472,7 @@ public class MapRenderRepositories {
 					topY};
 			BinaryMapDataObject o = new BinaryMapDataObject(-1, coordinates, new int[0][],  
 					RenderingRulesStorage.POLYGON_RULES, true,
-					new int[]{ocean[0] && !land[0] ? mi.coastlineEncodingType : (mi.landEncodingType)}, null);
+					new int[]{ocean[0] && !land[0] ? mi.coastlineEncodingType : (mi.landEncodingType)}, null, 0, 0);
 			o.setMapIndex(mi);
 			tempResult.add(o);
 		}
@@ -639,9 +648,17 @@ public class MapRenderRepositories {
 			// find selected rendering type
 			OsmandApplication app = ((OsmandApplication) context.getApplicationContext());
 			boolean nightMode = app.getDaynightHelper().isNightMode();
+
 			// boolean moreDetail = prefs.SHOW_MORE_MAP_DETAIL.get();
 			RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
+			prefs.getCustomRenderProperty("appMode").setModeValue(prefs.APPLICATION_MODE.get(),
+					app.getSettings().APPLICATION_MODE.get().getStringKey());
+			prefs.getCustomRenderProperty("baseAppMode").setModeValue(prefs.APPLICATION_MODE.get(),
+					app.getSettings().APPLICATION_MODE.get().getParent() != null
+							? prefs.APPLICATION_MODE.get().getParent().getStringKey()
+							: prefs.APPLICATION_MODE.get().getStringKey());
 			RenderingRuleSearchRequest renderingReq = getSearchRequestWithAppliedCustomRules(storage, nightMode);
+
 			renderingReq.saveState();
 			NativeOsmandLibrary nativeLib = !prefs.SAFE_MODE.get() ? NativeOsmandLibrary.getLibrary(storage, context) : null;
 
@@ -965,7 +982,7 @@ public class MapRenderRepositories {
 				coordinates[j * 2 + 1] = (int) (ring.get(j) & mask);
 			}
 			BinaryMapDataObject o = new BinaryMapDataObject(dbId, coordinates,  
-					new int[0][], RenderingRulesStorage.POLYGON_RULES, true, new int[] { mapIndex.coastlineBrokenEncodingType }, null);
+					new int[0][], RenderingRulesStorage.POLYGON_RULES, true, new int[] { mapIndex.coastlineBrokenEncodingType }, null, 0,0);
 			o.setMapIndex(mapIndex);
 			result.add(o);
 		}
@@ -985,7 +1002,7 @@ public class MapRenderRepositories {
 			clockwiseFound = clockwiseFound || clockwise;
 			BinaryMapDataObject o = new BinaryMapDataObject(dbId, coordinates, 
 					new int[0][], RenderingRulesStorage.POLYGON_RULES, true,  new int[] { clockwise ? mapIndex.coastlineEncodingType
-					: mapIndex.landEncodingType }, null);
+					: mapIndex.landEncodingType }, null, 0,0);
 			o.setMapIndex(mapIndex);
 			o.setArea(true);
 			result.add(o);
@@ -995,7 +1012,7 @@ public class MapRenderRepositories {
 			// add complete water tile
 			BinaryMapDataObject o = new BinaryMapDataObject(dbId,
 					new int[] { leftX, topY, rightX, topY, rightX, bottomY, leftX, bottomY, leftX, topY }, 
-					new int[0][], RenderingRulesStorage.POLYGON_RULES, true, new int[] { mapIndex.coastlineEncodingType }, null);
+					new int[0][], RenderingRulesStorage.POLYGON_RULES, true, new int[] { mapIndex.coastlineEncodingType }, null, 0,0);
 			o.setMapIndex(mapIndex);
 			log.info("!!! Isolated islands !!!"); //$NON-NLS-1$
 			result.add(o);

@@ -2,7 +2,7 @@
 <shape android:shape="rectangle"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <solid android:color="@color/dashboard_divider_light" />
+    <solid android:color="@color/divider_color_light" />
     <corners android:bottomLeftRadius="2dp" android:bottomRightRadius="2dp"/>
 
 </shape>

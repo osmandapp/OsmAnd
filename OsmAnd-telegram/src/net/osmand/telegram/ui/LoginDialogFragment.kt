@@ -217,17 +217,23 @@ class LoginDialogFragment : BaseDialogFragment() {
 				welcomeImage?.visibility = View.GONE
 			}
 
-			val continueButton = view?.findViewById<Button>(R.id.welcome_continue_button)
-			continueButton?.setOnClickListener {
-				showWelcomeDialog = false
-				if (!privacyPolicyAgreed) {
-					loginDialogActiveType = LoginDialogType.PRIVACY_POLICY
-					showProgress = false
-				} else if (loginDialogActiveType == null) {
-					loginDialogActiveType = LoginDialogType.ENTER_PHONE_NUMBER
-					showProgress = true
+			view?.findViewById<Button>(R.id.welcome_continue_button)?.apply {
+				val params = layoutParams as ViewGroup.MarginLayoutParams
+				val bottomMargin = AndroidUtils.getNavBarHeight(context) + resources.getDimensionPixelSize(R.dimen.dialog_button_bottom_padding)
+				params.apply {
+					setMargins(leftMargin, topMargin, rightMargin, bottomMargin)
 				}
-				buildDialog(view)
+				setOnClickListener {
+					showWelcomeDialog = false
+					if (!privacyPolicyAgreed) {
+						loginDialogActiveType = LoginDialogType.PRIVACY_POLICY
+						showProgress = false
+					} else if (loginDialogActiveType == null) {
+						loginDialogActiveType = LoginDialogType.ENTER_PHONE_NUMBER
+						showProgress = true
+					}
+					buildDialog(view)
+				}
 			}
 			view?.findViewById<View>(R.id.login_layout)?.visibility = View.GONE
 			view?.findViewById<View>(R.id.welcome_layout)?.visibility = View.VISIBLE

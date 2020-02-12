@@ -60,24 +60,24 @@ public class TransportRouteController extends MenuController {
 			public void buttonPressed() {
 				final int previousStop = getPreviousStop();
 				if (previousStop != -1) {
-					showTransportStop(getTransportRoute().route.getForwardStops().get(previousStop));
+					showTransportStop(getTransportRoute().route.getForwardStops().get(previousStop), true);
 				}
 			}
 		};
 		leftTitleButtonController.caption = mapActivity.getString(R.string.shared_string_previous);
-		updateLeftTitleButtonIcon();
+		leftTitleButtonController.leftIconId = R.drawable.ic_arrow_back;
 
 		rightTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
 				final int nextStop = getNextStop();
 				if (nextStop != -1) {
-					showTransportStop(getTransportRoute().route.getForwardStops().get(nextStop));
+					showTransportStop(getTransportRoute().route.getForwardStops().get(nextStop), true);
 				}
 			}
 		};
 		rightTitleButtonController.caption = mapActivity.getString(R.string.shared_string_next);
-		updateRightTitleButtonIcon();
+		rightTitleButtonController.rightIconId = R.drawable.ic_arrow_forward;
 	}
 
 	@NonNull
@@ -162,14 +162,6 @@ public class TransportRouteController extends MenuController {
 		resetRoute();
 	}
 
-	private void updateLeftTitleButtonIcon() {
-		leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_arrow_back, true);
-	}
-
-	private void updateRightTitleButtonIcon() {
-		rightTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_arrow_forward, false);
-	}
-
 	public void onAcquireNewController(PointDescription pointDescription, Object object) {
 		if (object instanceof TransportRouteStop) {
 			resetRoute();
@@ -180,17 +172,15 @@ public class TransportRouteController extends MenuController {
 		boolean previousStopEnabled = getPreviousStop() != -1;
 		if (leftTitleButtonController.enabled != previousStopEnabled) {
 			leftTitleButtonController.enabled = previousStopEnabled;
-			updateLeftTitleButtonIcon();
 		}
 
 		boolean nextStopEnabled = getNextStop() != -1;
 		if (rightTitleButtonController.enabled != nextStopEnabled) {
 			rightTitleButtonController.enabled = nextStopEnabled;
-			updateRightTitleButtonIcon();
 		}
 	}
 
-	private void showTransportStop(TransportStop stop) {
+	private void showTransportStop(TransportStop stop, boolean movingBetweenStops) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && mapContextMenu != null) {
 			transportRoute.stop = stop;
@@ -208,6 +198,7 @@ public class TransportRouteController extends MenuController {
 				mapContextMenu.setMapPosition(getMapActivity().getMapView().getMapPosition());
 			}
 			mapContextMenu.setCenterMarker(true);
+			mapContextMenu.setZoomOutOnly(movingBetweenStops);
 			mapContextMenu.setMapZoom(15);
 			mapContextMenu.showOrUpdate(stopLocation, pd, transportRoute);
 		}
@@ -296,16 +287,7 @@ public class TransportRouteController extends MenuController {
 
 						@Override
 						public void onClick(View arg0) {
-							showTransportStop(stop);
-							/*
-							PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_STOP,
-									getMapActivity().getString(R.string.transport_Stop), name);
-							LatLon stopLocation = stop.getLocation();
-							getMapActivity().getMyApplication().getSettings()
-									.setMapLocationToShow(stopLocation.getLatitude(), stopLocation.getLongitude(),
-									15, pd, false, transportRoute);
-							MapActivity.launchMapActivityMoveToTop(getMapActivity());
-							*/
+							showTransportStop(stop, false);
 						}
 					});
 		}

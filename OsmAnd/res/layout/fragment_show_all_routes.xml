@@ -40,7 +40,7 @@
 			android:background="@drawable/btn_circle_transparent_full"
 			android:contentDescription="@string/shared_string_back"
 			android:src="@drawable/ic_arrow_back"
-			android:tint="?attr/primary_icon_color" />
+			android:tint="?attr/text_color_tab_active_white" />
 
 		<LinearLayout
 			android:id="@+id/toolbar_options_flow_bg"
@@ -71,7 +71,7 @@
 				android:contentDescription="@string/print_route"
 				android:scaleType="center"
 				android:src="@drawable/ic_action_gprint_dark"
-				android:tint="?attr/primary_icon_color" />
+				android:tint="?attr/text_color_tab_active_white" />
 
 			<android.support.v7.widget.AppCompatImageButton
 				android:id="@+id/save_as_gpx_flow"
@@ -81,7 +81,7 @@
 				android:contentDescription="@string/shared_string_save_as_gpx"
 				android:scaleType="center"
 				android:src="@drawable/ic_action_gsave_dark"
-				android:tint="?attr/primary_icon_color" />
+				android:tint="?attr/text_color_tab_active_white" />
 
 			<android.support.v7.widget.AppCompatImageButton
 				android:id="@+id/share_as_gpx_flow"
@@ -91,7 +91,7 @@
 				android:contentDescription="@string/share_route_as_gpx"
 				android:scaleType="center"
 				android:src="@drawable/ic_action_gshare_dark"
-				android:tint="?attr/primary_icon_color" />
+				android:tint="?attr/text_color_tab_active_white" />
 
 		</LinearLayout>
 
@@ -129,7 +129,7 @@
 					android:contentDescription="@string/shared_string_close"
 					android:scaleType="center"
 					android:src="@drawable/ic_arrow_back"
-					android:tint="?attr/primary_icon_color" />
+					android:tint="?attr/text_color_tab_active_white" />
 
 			</LinearLayout>
 
@@ -175,7 +175,7 @@
 					android:contentDescription="@string/print_route"
 					android:scaleType="center"
 					android:src="@drawable/ic_action_gprint_dark"
-					android:tint="?attr/primary_icon_color" />
+					android:tint="?attr/text_color_tab_active_white" />
 
 				<android.support.v7.widget.AppCompatImageView
 					android:id="@+id/save_as_gpx"
@@ -185,7 +185,7 @@
 					android:contentDescription="@string/shared_string_save_as_gpx"
 					android:scaleType="center"
 					android:src="@drawable/ic_action_gsave_dark"
-					android:tint="?attr/primary_icon_color" />
+					android:tint="?attr/text_color_tab_active_white" />
 
 				<android.support.v7.widget.AppCompatImageView
 					android:id="@+id/share_as_gpx"
@@ -195,7 +195,7 @@
 					android:contentDescription="@string/share_route_as_gpx"
 					android:scaleType="center"
 					android:src="@drawable/ic_action_gshare_dark"
-					android:tint="?attr/primary_icon_color" />
+					android:tint="?attr/text_color_tab_active_white" />
 
 			</LinearLayout>
 

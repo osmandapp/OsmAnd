@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="avoid_in_routing_title">Osgoi…</string>
-<string name="avoid_in_routing_descr">Osgoi tollffyrdd, ffyrdd garw, fferïau</string>
 <string name="show_warnings_title">Dangos larymau…</string>
 <string name="show_warnings_descr">Dangos cyfyngiad cyflymder, camerâu cyflymder a thwmpathau traffig</string>
 <string name="map_widget_fluorescent">Lliwiau fflwroleuol</string>
@@ -11,7 +10,6 @@
 
 <string name="bg_service_sleep_mode_off">Rhedeg yn y cefndir</string>
 <string name="bg_service_sleep_mode_on">Atal y cefndir</string>
-<string name="gps_wakeup_interval">Cyfnod deffro GPS: %S</string>
 <string name="int_continuosly">Parhaus</string>
 <string name="screen_is_locked">I ddatgloi\'r sgrin pwyswch yr eicon cloi</string>
 <string name="map_widget_top_text">Enw stryd</string>

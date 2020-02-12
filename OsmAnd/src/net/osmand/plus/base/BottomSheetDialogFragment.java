@@ -75,6 +75,11 @@ public abstract class BottomSheetDialogFragment extends DialogFragment {
 		}
 	}
 
+	@NonNull
+	protected OsmandApplication requiredMyApplication() {
+		return (OsmandApplication) requireActivity().getApplication();
+	}
+
 	@Nullable
 	protected Drawable getIcon(@DrawableRes int drawableRes, @ColorRes int color) {
 		OsmandApplication app = getMyApplication();

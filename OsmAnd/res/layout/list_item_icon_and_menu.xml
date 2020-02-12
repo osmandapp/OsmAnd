@@ -52,6 +52,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:lines="1"
+            android:textColor="?android:textColorSecondary"
             android:textSize="@dimen/default_desc_text_size"
             tools:text="Some very long subtitle text, that won't fit into one line"/>
 

@@ -9,8 +9,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import android.widget.TextView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -35,6 +38,7 @@ public abstract class ActionBarPreferenceActivity extends AppCompatPreferenceAct
 		}
 		setTheme(t);
 		super.onCreate(savedInstanceState);
+		boolean lightTheme = settings.isLightContent();
 		setContentView(R.layout.preference_activity);
 		tb = (Toolbar) findViewById(R.id.toolbar);
 		if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
@@ -44,7 +48,8 @@ public abstract class ActionBarPreferenceActivity extends AppCompatPreferenceAct
 			shadowView = null;
 		}
 		tb.setClickable(true);
-		tb.setNavigationIcon(((OsmandApplication) getApplication()).getUIUtilities().getIcon(R.drawable.ic_arrow_back));
+		int activeButtonsAndLinksTextColorResId = lightTheme ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
+		tb.setNavigationIcon(((OsmandApplication) getApplication()).getUIUtilities().getIcon(R.drawable.ic_arrow_back, activeButtonsAndLinksTextColorResId));
 		tb.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		tb.setBackgroundColor(getResources().getColor(getResIdFromAttribute(this, R.attr.pstsTabBackground)));
 		tb.setTitleTextColor(getResources().getColor(getResIdFromAttribute(this, R.attr.pstsTextColor)));
@@ -56,6 +61,7 @@ public abstract class ActionBarPreferenceActivity extends AppCompatPreferenceAct
 		});
 
 		getSpinner().setVisibility(View.GONE);
+		getTypeButton().setVisibility(View.GONE);
 		setProgressVisibility(false);
 	}
 
@@ -79,6 +85,25 @@ public abstract class ActionBarPreferenceActivity extends AppCompatPreferenceAct
 
 	protected Spinner getSpinner() {
 		return (Spinner) findViewById(R.id.spinner_nav);
+	}
+
+	protected LinearLayout getTypeButton() {
+		return (LinearLayout) findViewById(R.id.type_selection_button);
+	}
+
+	protected TextView getModeTitleTV() {
+		return (TextView) findViewById(R.id.mode_title);
+	}
+
+	protected TextView getModeSubTitleTV() {
+		return (TextView) findViewById(R.id.mode_subtitle);
+	}
+
+	protected ImageView getModeIconIV() {
+		return (ImageView) findViewById(R.id.mode_icon);
+	}
+	protected ImageView getDropDownArrow() {
+		return (ImageView) findViewById(R.id.type_down_arrow);
 	}
 
 	protected void setProgressVisibility(boolean visibility) {

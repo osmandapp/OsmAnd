@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:title="@string/coordinates_format">
+	
+	<CheckBoxPreference
+		android:key="format_degrees"
+		android:layout="@layout/preference_radio_button"
+		android:persistent="false"
+		android:title="@string/navigate_point_format_D" />
+
+	<CheckBoxPreference
+		android:key="format_minutes"
+		android:layout="@layout/preference_radio_button"
+		android:persistent="false"
+		android:title="@string/navigate_point_format_DM" />
+
+	<CheckBoxPreference
+		android:key="format_seconds"
+		android:layout="@layout/preference_radio_button"
+		android:persistent="false"
+		android:title="@string/navigate_point_format_DMS" />
+
+	<CheckBoxPreference
+		android:key="utm_format"
+		android:layout="@layout/preference_radio_button"
+		android:persistent="false"
+		android:title="@string/navigate_point_format_utm" />
+
+	<CheckBoxPreference
+		android:key="olc_format"
+		android:layout="@layout/preference_radio_button"
+		android:persistent="false"
+		android:title="@string/navigate_point_format_olc" />
+
+</PreferenceScreen>

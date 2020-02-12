@@ -154,6 +154,6 @@ public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragm
 
 	@ColorRes
 	protected int getBgColorId() {
-		return nightMode ? R.color.bg_color_dark : R.color.bg_color_light;
+		return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
 	}
 }

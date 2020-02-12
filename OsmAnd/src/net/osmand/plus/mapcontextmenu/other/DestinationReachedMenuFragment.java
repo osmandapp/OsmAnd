@@ -2,23 +2,24 @@ package net.osmand.plus.mapcontextmenu.other;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -36,94 +37,90 @@ public class DestinationReachedMenuFragment extends Fragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if (menu == null) {
-			menu = new DestinationReachedMenu(getMapActivity());
+		MapActivity mapActivity = getMapActivity();
+		if (menu == null && mapActivity != null) {
+			menu = new DestinationReachedMenu(mapActivity);
 		}
 	}
 
 	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.dest_reached_menu_fragment, container, false);
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null || menu == null) {
+			return null;
+		}
+		ContextThemeWrapper ctx = new ContextThemeWrapper(mapActivity, menu.isLight() ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
+		LayoutInflater inf = LayoutInflater.from(ctx);
+		View view = inf.inflate(R.layout.dest_reached_menu_fragment, container, false);
+		AndroidUtils.addStatusBarPadding21v(ctx, view);
 		view.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismissMenu();
+				finishNavigation();
 			}
 		});
 
-		UiUtilities iconsCache = getMapActivity().getMyApplication().getUIUtilities();
+		UiUtilities iconsCache = mapActivity.getMyApplication().getUIUtilities();
 
 		ImageButton closeImageButton = (ImageButton) view.findViewById(R.id.closeImageButton);
 		closeImageButton.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_remove_dark, menu.isLight()));
 		closeImageButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismissMenu();
+				finishNavigation();
 			}
 		});
 
 		Button removeDestButton = (Button) view.findViewById(R.id.removeDestButton);
 		removeDestButton.setCompoundDrawablesWithIntrinsicBounds(
 				iconsCache.getIcon(R.drawable.ic_action_done, menu.isLight()), null, null, null);
-		AndroidUtils.setTextPrimaryColor(view.getContext(), removeDestButton, !menu.isLight());
 		removeDestButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getMapActivity().getMyApplication().getTargetPointsHelper().removeWayPoint(true, -1);
-				Object contextMenuObj = getMapActivity().getContextMenu().getObject();
-				if (getMapActivity().getContextMenu().isActive()
-						&& contextMenuObj != null && contextMenuObj instanceof TargetPoint) {
-					TargetPoint targetPoint = (TargetPoint) contextMenuObj;
-					if (!targetPoint.start && !targetPoint.intermediate) {
-						getMapActivity().getContextMenu().close();
-					}
-				}
-				OsmandSettings settings = getMapActivity().getMyApplication().getSettings();
-				settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
-				getMapActivity().getMapActions().stopNavigationWithoutConfirm();
-				dismissMenu();
+				finishNavigation();
 			}
 		});
 
 		Button recalcDestButton = (Button) view.findViewById(R.id.recalcDestButton);
 		recalcDestButton.setCompoundDrawablesWithIntrinsicBounds(
 				iconsCache.getIcon(R.drawable.ic_action_gdirections_dark, menu.isLight()), null, null, null);
-		AndroidUtils.setTextPrimaryColor(view.getContext(), recalcDestButton, !menu.isLight());
 		recalcDestButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				TargetPointsHelper helper = getMapActivity().getMyApplication().getTargetPointsHelper();
-				TargetPoint target = helper.getPointToNavigate();
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					TargetPointsHelper helper = mapActivity.getMyApplication().getTargetPointsHelper();
+					TargetPoint target = helper.getPointToNavigate();
 
-				dismissMenu();
+					dismissMenu();
 
-				if (target != null) {
-					helper.navigateToPoint(new LatLon(target.getLatitude(), target.getLongitude()),
-							true, -1, target.getOriginalPointDescription());
-					getMapActivity().getMapActions().recalculateRoute(false);
-					getMapActivity().getMapLayers().getMapControlsLayer().startNavigation();
+					if (target != null) {
+						helper.navigateToPoint(new LatLon(target.getLatitude(), target.getLongitude()),
+								true, -1, target.getOriginalPointDescription());
+						mapActivity.getMapActions().recalculateRoute(false);
+						mapActivity.getMapLayers().getMapControlsLayer().startNavigation();
+					}
 				}
 			}
 		});
 
 		Button findParkingButton = (Button) view.findViewById(R.id.findParkingButton);
 
-		ApplicationMode appMode = getMapActivity().getMyApplication().getRoutingHelper().getAppMode();
+		ApplicationMode appMode = mapActivity.getMyApplication().getRoutingHelper().getAppMode();
 
-		if (!appMode.isDerivedRoutingFrom(appMode.CAR)) {
+		if (!appMode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 			findParkingButton.setVisibility(View.GONE);
 		}
 
 		findParkingButton.setCompoundDrawablesWithIntrinsicBounds(
 				iconsCache.getIcon(R.drawable.ic_action_parking_dark, menu.isLight()), null, null, null);
-		AndroidUtils.setTextPrimaryColor(view.getContext(), findParkingButton, !menu.isLight());
 		findParkingButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
-					PoiFiltersHelper helper = getMapActivity().getMyApplication().getPoiFilters();
+					PoiFiltersHelper helper = mapActivity.getMyApplication().getPoiFilters();
 					PoiUIFilter parkingFilter = helper.getFilterById(PoiUIFilter.STD_PREFIX + "parking");
 					mapActivity.showQuickSearch(parkingFilter);
 				}
@@ -139,28 +136,50 @@ public class DestinationReachedMenuFragment extends Fragment {
 			AndroidUtils.setBackground(view.getContext(), mainView, !menu.isLight(),
 					R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		}
-		TextView title = (TextView) view.findViewById(R.id.titleTextView);
-		AndroidUtils.setTextPrimaryColor(view.getContext(), title, !menu.isLight());
-
 		return view;
 	}
 
 	@Override
 	public void onStart() {
 		super.onStart();
-		getMapActivity().getContextMenu().setBaseFragmentVisibility(false);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getContextMenu().setBaseFragmentVisibility(false);
+		}
 	}
 
 	@Override
 	public void onStop() {
 		super.onStop();
-		getMapActivity().getContextMenu().setBaseFragmentVisibility(true);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getContextMenu().setBaseFragmentVisibility(true);
+		}
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
 		exists = false;
+	}
+
+	private void finishNavigation() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMyApplication().getTargetPointsHelper().removeWayPoint(true, -1);
+			Object contextMenuObj = mapActivity.getContextMenu().getObject();
+			if (mapActivity.getContextMenu().isActive()
+					&& contextMenuObj instanceof TargetPoint) {
+				TargetPoint targetPoint = (TargetPoint) contextMenuObj;
+				if (!targetPoint.start && !targetPoint.intermediate) {
+					mapActivity.getContextMenu().close();
+				}
+			}
+			OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+			settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
+			mapActivity.getMapActions().stopNavigationWithoutConfirm();
+			dismissMenu();
+		}
 	}
 
 	public static boolean isExists() {
@@ -173,19 +192,26 @@ public class DestinationReachedMenuFragment extends Fragment {
 
 		DestinationReachedMenuFragment fragment = new DestinationReachedMenuFragment();
 		fragment.menu = menu;
-		menu.getMapActivity().getSupportFragmentManager().beginTransaction()
-				.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
-				.add(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(TAG).commitAllowingStateLoss();
+		MapActivity mapActivity = menu.getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getSupportFragmentManager().beginTransaction()
+					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
+					.add(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(TAG).commitAllowingStateLoss();
+		}
 	}
 
 	public void dismissMenu() {
-		getMapActivity().getSupportFragmentManager().popBackStack();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && !mapActivity.isActivityDestroyed()) {
+			mapActivity.getSupportFragmentManager().popBackStack();
+		}
 	}
 
+	@Nullable
 	public MapActivity getMapActivity() {
 		Activity activity = getActivity();
-		if (activity != null && activity instanceof MapActivity) {
+		if (activity instanceof MapActivity) {
 			return (MapActivity) activity;
 		} else {
 			return null;

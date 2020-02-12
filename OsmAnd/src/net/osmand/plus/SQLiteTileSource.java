@@ -3,13 +3,11 @@ package net.osmand.plus;
 import android.database.sqlite.SQLiteDiskIOException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.widget.Toast;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.map.ITileSource;
-import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
@@ -21,19 +19,20 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.List;
-
-import bsh.Interpreter;
 
 
 public class SQLiteTileSource implements ITileSource {
 
-	
 	public static final String EXT = IndexConstants.SQLITE_EXT;
 	private static final Log LOG = PlatformUtil.getLog(SQLiteTileSource.class);
-	
+	private static final String MAXZOOM_FIELD = "maxzoom";
+	private static final String MINZOOM_FIELD = "minzoom";
+	private static final String ELLIPSOID_FIELD = "ellipsoid";
+	private static final String URL_FIELD = "url";
+	private static final String EXPIREMINUTES_FIELD = "expireminutes";
+
 	private ITileSource base;
 	private String urlTemplate = null;
 	private String name;
@@ -45,15 +44,18 @@ public class SQLiteTileSource implements ITileSource {
 	private boolean timeSupported = false;
 	private long expirationTimeMillis = -1; // never
 	private boolean isEllipsoid = false;
+	private boolean invertedY = false;
+	private String randoms;
+	private String[] randomsArray;
 	private String rule = null;
 	private String referer = null;
 	
-	static final int tileSize = 256;
+	int tileSize = 256;
+	boolean tileSizeSpecified = false;
 	private OsmandApplication ctx;
 	private boolean onlyReadonlyAvailable = false;
-	
-	
-	
+
+
 	public SQLiteTileSource(OsmandApplication ctx, File f, List<TileSourceTemplate> toFindUrl){
 		this.ctx = ctx;
 		this.file = f;
@@ -105,33 +107,18 @@ public class SQLiteTileSource implements ITileSource {
 		return base != null ? base.getTileSize() : tileSize;
 	}
 
-	Interpreter bshInterpreter = null;
 	@Override
 	public String getUrlToLoad(int x, int y, int zoom) {
 		if (zoom > maxZoom)
 			return null;
 		SQLiteConnection db = getDatabase();
-		if(db == null || db.isReadOnly() || urlTemplate == null){
+		if (db == null || db.isReadOnly() || urlTemplate == null) {
 			return null;
 		}
-
-		if(TileSourceManager.RULE_BEANSHELL.equalsIgnoreCase(rule)){
-			try {
-				if(bshInterpreter == null){
-					bshInterpreter = new Interpreter();
-					bshInterpreter.eval(urlTemplate);
-				}
-				return (String) bshInterpreter.eval("getTileUrl("+zoom+","+x+","+y+");");
-			} catch (bsh.EvalError e) {
-				LOG.debug("getUrlToLoad Error" + e.getMessage());
-				Toast.makeText(ctx, e.getMessage(), Toast.LENGTH_LONG).show();
-				LOG.error(e.getMessage(), e);
-				return null;
-			}
+		if (invertedY) {
+			y = (1 << zoom) - 1 - y;
 		}
-		else {
-			return MessageFormat.format(urlTemplate, zoom+"", x+"", y+"");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
-		}
+		return TileSourceTemplate.buildUrlToLoad(urlTemplate, randomsArray, x, y, zoom);
 	}
 
 	@Override
@@ -180,11 +167,10 @@ public class SQLiteTileSource implements ITileSource {
 				if(cursor.moveToFirst()) {
 					String[] columnNames = cursor.getColumnNames();
 					List<String> list = Arrays.asList(columnNames);
-					int url = list.indexOf("url");
+					int url = list.indexOf(URL_FIELD);
 					if(url != -1) {
 						String template = cursor.getString(url);
 						if(!Algorithms.isEmpty(template)){
-							//urlTemplate = template;
 							urlTemplate = TileSourceTemplate.normalizeUrl(template);
 						}
 					}
@@ -210,7 +196,7 @@ public class SQLiteTileSource implements ITileSource {
 						timeSupported = hasTimeColumn();
 						addInfoColumn("timecolumn", timeSupported? "yes" : "no");
 					}
-					int expireminutes = list.indexOf("expireminutes");
+					int expireminutes = list.indexOf(EXPIREMINUTES_FIELD);
 					this.expirationTimeMillis = -1;
 					if(expireminutes != -1) {
 						int minutes = (int) cursor.getInt(expireminutes);
@@ -218,22 +204,39 @@ public class SQLiteTileSource implements ITileSource {
 							this.expirationTimeMillis = minutes * 60 * 1000l;
 						}
 					} else {
-						addInfoColumn("expireminutes", "0");
+						addInfoColumn(EXPIREMINUTES_FIELD, "0");
 					}
-					int ellipsoid = list.indexOf("ellipsoid");
+					int tsColumn = list.indexOf("tilesize");
+					this.tileSizeSpecified = tsColumn != -1;
+					if(tileSizeSpecified) {
+						this.tileSize = (int) cursor.getInt(tsColumn);
+					}
+					int ellipsoid = list.indexOf(ELLIPSOID_FIELD);
 					if(ellipsoid != -1) {
 						int set = (int) cursor.getInt(ellipsoid);
 						if(set == 1){
 							this.isEllipsoid = true;
 						}
 					}
+					int invertedY = list.indexOf("inverted_y");
+					if(invertedY != -1) {
+						int set = (int) cursor.getInt(invertedY);
+						if(set == 1){
+							this.invertedY = true;
+						}
+					}
+					int randomsId = list.indexOf("randoms");
+					if(randomsId != -1) {
+						this.randoms = cursor.getString(randomsId);
+						this.randomsArray = TileSourceTemplate.buildRandomsArray(this.randoms);
+					}
 					//boolean inversiveInfoZoom = tnumbering != -1 && "BigPlanet".equals(cursor.getString(tnumbering));
 					boolean inversiveInfoZoom = inversiveZoom;
-					int mnz = list.indexOf("minzoom");
+					int mnz = list.indexOf(MINZOOM_FIELD);
 					if(mnz != -1) {
 						minZoom = (int) cursor.getInt(mnz);
 					}
-					int mxz = list.indexOf("maxzoom");
+					int mxz = list.indexOf(MAXZOOM_FIELD);
 					if(mxz != -1) {
 						maxZoom = (int) cursor.getInt(mxz);
 					}
@@ -251,10 +254,37 @@ public class SQLiteTileSource implements ITileSource {
 		return db;
 	}
 
+	public void updateFromTileSourceTemplate(TileSourceTemplate r) {
+		if (!onlyReadonlyAvailable) {
+			int maxZoom = r.getMaximumZoomSupported();
+			int minZoom = r.getMinimumZoomSupported();
+			if (inversiveZoom) {
+				int mnz = minZoom;
+				minZoom = 17 - maxZoom;
+				maxZoom = 17 - mnz;
+			}
+			if (getUrlTemplate() != null && !getUrlTemplate().equals(r.getUrlTemplate())) {
+				db.execSQL("update info set " + URL_FIELD + " = '" + r.getUrlTemplate() + "'");
+			}
+			if (r.getMinimumZoomSupported() != minZoom) {
+				db.execSQL("update info set " + MINZOOM_FIELD + " = '" + minZoom + "'");
+			}
+			if (r.getMaximumZoomSupported() != maxZoom) {
+				db.execSQL("update info set " + MAXZOOM_FIELD + " = '" + maxZoom + "'");
+			}
+			if (r.isEllipticYTile() != isEllipticYTile()) {
+				db.execSQL("update info set " + ELLIPSOID_FIELD + " = '" + (r.isEllipticYTile() ? 1 : 0) + "'");
+			}
+			if (r.getExpirationTimeMinutes() != getExpirationTimeMinutes()) {
+				db.execSQL("update info set " + EXPIREMINUTES_FIELD + " = '" + r.getExpirationTimeMinutes() + "'");
+			}
+		}
+	}
+
 	private void addInfoColumn(String columnName, String value) {
-		if(!onlyReadonlyAvailable) {
-			db.execSQL("alter table info add column "+columnName+" TEXT");
-			db.execSQL("update info set "+columnName+" = '"+value+"'");
+		if (!onlyReadonlyAvailable) {
+			db.execSQL("alter table info add column " + columnName + " TEXT");
+			db.execSQL("update info set " + columnName + " = '" + value + "'");
 		}
 	}
 
@@ -355,6 +385,11 @@ public class SQLiteTileSource implements ITileSource {
 			if(bmp == null) {
 				// broken image delete it
 				db.execSQL("DELETE FROM tiles WHERE x = ? AND y = ? AND z = ?", params); 
+			} else if(!tileSizeSpecified &&
+					tileSize != bmp.getWidth() && bmp.getWidth() > 0) {
+				tileSize = bmp.getWidth();
+				addInfoColumn("tilesize", tileSize+"");
+				tileSizeSpecified = true;
 			}
 			return bmp;
 		}
@@ -461,7 +496,6 @@ public class SQLiteTileSource implements ITileSource {
 	
 	public void closeDB(){
 		LOG.debug("closeDB");
-		bshInterpreter = null;
 		if(timeSupported) {
 			clearOld();
 		}
@@ -513,7 +547,9 @@ public class SQLiteTileSource implements ITileSource {
 		return referer;
 	}
 
-
+	public String getUrlTemplate() {
+		return urlTemplate;
+	}
 }
 
 

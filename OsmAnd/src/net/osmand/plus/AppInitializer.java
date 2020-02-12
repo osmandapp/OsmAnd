@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 
@@ -31,6 +32,7 @@ import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
+import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper;
@@ -90,6 +92,10 @@ public class AppInitializer implements IProgress {
 	public static final int VERSION_2_3 = 23;
 	// 32 - 3.2
 	public static final int VERSION_3_2 = 32;
+	// 35 - 3.5
+	public static final int VERSION_3_5 = 35;
+	// 36 - 3.6
+	public static final int VERSION_3_6 = 36;
 
 
 	public static final boolean TIPS_AND_TRICKS = false;
@@ -101,7 +107,7 @@ public class AppInitializer implements IProgress {
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED"; //$NON-NLS-1$
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
 
-	public static final String LATEST_CHANGES_URL = "https://osmand.net/blog/osmand-3-3-released";
+	public static final String LATEST_CHANGES_URL = "https://osmand.net/blog/osmand-3-6-released";
 //	public static final String LATEST_CHANGES_URL = null; // not enough to read
 	public static final int APP_EXIT_CODE = 4;
 	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
@@ -125,7 +131,7 @@ public class AppInitializer implements IProgress {
 		FAVORITES_INITIALIZED, NATIVE_INITIALIZED,
 		NATIVE_OPEN_GLINITIALIZED,
 		TASK_CHANGED, MAPS_INITIALIZED, POI_TYPES_INITIALIZED, ASSETS_COPIED, INIT_RENDERERS,
-		RESTORE_BACKUPS, INDEX_REGION_BOUNDARIES, SAVE_GPX_TRACKS, LOAD_GPX_TRACKS
+		RESTORE_BACKUPS, INDEX_REGION_BOUNDARIES, SAVE_GPX_TRACKS, LOAD_GPX_TRACKS, ROUTING_CONFIG_INITIALIZED
 	}
 
 	public interface AppInitializeListener {
@@ -133,6 +139,10 @@ public class AppInitializer implements IProgress {
 		void onProgress(AppInitializer init, InitEvents event);
 
 		void onFinish(AppInitializer init);
+	}
+	
+	public interface LoadRoutingFilesCallback {
+		void onRoutingFilesLoaded();
 	}
 
 
@@ -155,6 +165,7 @@ public class AppInitializer implements IProgress {
 		if(initSettings) {
 			return;
 		}
+		ApplicationMode.onApplicationStart(app);
 		startPrefs = app.getSharedPreferences(
 				getLocalClassName(app.getAppCustomization().getMapActivity().getName()),
 				Context.MODE_PRIVATE);
@@ -170,7 +181,7 @@ public class AppInitializer implements IProgress {
 			firstTime = true;
 			startPrefs.edit().putBoolean(FIRST_TIME_APP_RUN, true).commit();
 			startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
-			startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_2).commit();
+			startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_5).commit();
 		} else if (!Version.getFullVersion(app).equals(startPrefs.getString(VERSION_INSTALLED, ""))) {
 			prevAppVersion = startPrefs.getInt(VERSION_INSTALLED_NUMBER, 0);
 			if(prevAppVersion < VERSION_2_2) {
@@ -181,9 +192,23 @@ public class AppInitializer implements IProgress {
 			}
 			if(prevAppVersion < VERSION_2_3) {
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_2_3).commit();
-			} else if (prevAppVersion < VERSION_3_2) {
+			}
+			if (prevAppVersion < VERSION_3_2) {
 				app.getSettings().BILLING_PURCHASE_TOKENS_SENT.set("");
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_2).commit();
+			}
+			if (prevAppVersion < VERSION_3_5 || Version.getAppVersion(app).equals("3.5.3")
+					|| Version.getAppVersion(app).equals("3.5.4")) {
+				app.getSettings().migratePreferences();
+				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_5).commit();
+			}
+			if (prevAppVersion < VERSION_3_5 || Version.getAppVersion(app).equals("3.5.3")) {
+				app.getSettings().migrateHomeWorkParkingToFavorites();
+				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_5).commit();
+			}
+			if (prevAppVersion < VERSION_3_6) {
+				app.getSettings().migratePreferences();
+				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_6).commit();
 			}
 			startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
 			appVersionChanged = true;
@@ -447,7 +472,12 @@ public class AppInitializer implements IProgress {
 	public void onCreateApplication() {
 		// always update application mode to default
 		OsmandSettings osmandSettings = app.getSettings();
-		if (!osmandSettings.FOLLOW_THE_ROUTE.get()) {
+		if (osmandSettings.FOLLOW_THE_ROUTE.get()) {
+			ApplicationMode savedMode = osmandSettings.readApplicationMode();
+			if (!osmandSettings.APPLICATION_MODE.get().getStringKey().equals(savedMode.getStringKey())) {
+				osmandSettings.APPLICATION_MODE.set(savedMode);
+			}
+		} else {
 			osmandSettings.APPLICATION_MODE.set(osmandSettings.DEFAULT_APPLICATION_MODE.get());
 		}
 		startTime = System.currentTimeMillis();
@@ -456,6 +486,7 @@ public class AppInitializer implements IProgress {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		getLazyRoutingConfig();
 		app.applyTheme(app);
 		app.inAppPurchaseHelper = startupInit(new InAppPurchaseHelper(app), InAppPurchaseHelper.class);
 		app.poiTypes = startupInit(MapPoiTypes.getDefaultNoInit(), MapPoiTypes.class);
@@ -467,10 +498,11 @@ public class AppInitializer implements IProgress {
 		app.locationProvider = startupInit(new OsmAndLocationProvider(app), OsmAndLocationProvider.class);
 		app.avoidSpecificRoads = startupInit(new AvoidSpecificRoads(app), AvoidSpecificRoads.class);
 		app.savingTrackHelper = startupInit(new SavingTrackHelper(app), SavingTrackHelper.class);
+		app.analyticsHelper = startupInit(new AnalyticsHelper(app), AnalyticsHelper.class);
 		app.notificationHelper = startupInit(new NotificationHelper(app), NotificationHelper.class);
 		app.liveMonitoringHelper = startupInit(new LiveMonitoringHelper(app), LiveMonitoringHelper.class);
 		app.selectedGpxHelper = startupInit(new GpxSelectionHelper(app, app.savingTrackHelper), GpxSelectionHelper.class);
-		app.gpxDatabase = startupInit(new GPXDatabase(app), GPXDatabase.class);
+		app.gpxDbHelper = startupInit(new GpxDbHelper(app), GpxDbHelper.class);
 		app.favorites = startupInit(new FavouritesDbHelper(app), FavouritesDbHelper.class);
 		app.waypointHelper = startupInit(new WaypointHelper(app), WaypointHelper.class);
 		app.aidlApi = startupInit(new OsmandAidlApi(app), OsmandAidlApi.class);
@@ -491,7 +523,9 @@ public class AppInitializer implements IProgress {
 			app.travelDbHelper.initTravelBooks();
 		}
 		app.travelDbHelper = startupInit(app.travelDbHelper, TravelDbHelper.class);
-		
+		app.lockHelper = startupInit(new LockHelper(app), LockHelper.class);
+		app.settingsHelper = startupInit(new SettingsHelper(app), SettingsHelper.class);
+
 
 		initOpeningHoursParser();
 	}
@@ -533,7 +567,7 @@ public class AppInitializer implements IProgress {
 				return null;
 			}
 		});
-		app.regions.setLocale(app.getLanguage());
+		app.regions.setLocale(app.getLanguage(), app.getCountry());
 	}
 
 
@@ -546,29 +580,48 @@ public class AppInitializer implements IProgress {
 		return object;
 	}
 
-
-	public net.osmand.router.RoutingConfiguration.Builder getLazyDefaultRoutingConfig() {
-		long tm = System.currentTimeMillis();
-		try {
-			File routingXml = app.getAppPath(IndexConstants.ROUTING_XML_FILE);
-			if (routingXml.exists() && routingXml.canRead()) {
-				try {
-					return RoutingConfiguration.parseFromInputStream(new FileInputStream(routingXml));
-				} catch (XmlPullParserException | IOException e) {
-					throw new IllegalStateException(e);
-				}
-			} else {
-				return RoutingConfiguration.getDefault();
+	@SuppressLint("StaticFieldLeak")
+	private void getLazyRoutingConfig() {
+		loadRoutingFiles(app, new LoadRoutingFilesCallback() {
+			@Override
+			public void onRoutingFilesLoaded() {
+				notifyEvent(InitEvents.ROUTING_CONFIG_INITIALIZED);
 			}
-		} finally {
-			long te = System.currentTimeMillis();
-			if(te - tm > 30) {
-				System.err.println("Defalt routing config init took " + (te - tm) + " ms");
-			}
-		}
+		});
 	}
 
+	public static void loadRoutingFiles(final OsmandApplication app, final LoadRoutingFilesCallback callback) {
+		new AsyncTask<Void, Void, RoutingConfiguration.Builder>() {
+			
+			@Override
+			protected RoutingConfiguration.Builder doInBackground(Void... voids) {
+				File routingFolder = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
+				RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
+				if (routingFolder.isDirectory()) {
+					File[] fl = routingFolder.listFiles();
+					if (fl != null && fl.length > 0) {
+						for (File f : fl) {
+							if (f.isFile() && f.getName().endsWith(".xml") && f.canRead()) {
+								try {
+									RoutingConfiguration.parseFromInputStream(new FileInputStream(f), f.getName(), builder);
+								} catch (XmlPullParserException | IOException e) {
+									throw new IllegalStateException(e);
+								}
+							}
+						}
+					}
+				}
+				return builder;
+			}
 
+			@Override
+			protected void onPostExecute(RoutingConfiguration.Builder builder) {
+				super.onPostExecute(builder);
+				app.updateRoutingConfig(builder);
+				callback.onRoutingFilesLoaded();
+			}
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
 
 
 	public synchronized void initVoiceDataInDifferentThread(final Activity uiContext,
@@ -646,6 +699,7 @@ public class AppInitializer implements IProgress {
 			notifyEvent(InitEvents.NATIVE_INITIALIZED);
 
 			app.favorites.loadFavorites();
+			app.gpxDbHelper.loadGpxItems();
 			notifyEvent(InitEvents.FAVORITES_INITIALIZED);
 			app.poiFilters.reloadAllPoiFilters();
 			app.poiFilters.loadSelectedPoiFilters();
@@ -729,7 +783,7 @@ public class AppInitializer implements IProgress {
 			if (System.currentTimeMillis() - timeUpdated >= 1000 * 60 * 30) {
 				startTask(app.getString(R.string.saving_gpx_tracks), -1);
 				try {
-					warnings.addAll(app.savingTrackHelper.saveDataToGpx(app.getAppCustomization().getTracksDir()));
+					warnings.addAll(app.savingTrackHelper.saveDataToGpx(app.getAppCustomization().getTracksDir()).getWarnings());
 				} catch (RuntimeException e) {
 					warnings.add(e.getMessage());
 				}
@@ -738,8 +792,8 @@ public class AppInitializer implements IProgress {
 			}
 		}
 		if(app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get() && OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null){
-			int interval = app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get() ;
-			app.startNavigationService(NavigationService.USED_BY_GPX, interval < 30000 ? 0 : interval);
+			int interval = app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get();
+			app.startNavigationService(NavigationService.USED_BY_GPX, app.navigationServiceGpsInterval(interval));
 		}
 	}
 

@@ -71,6 +71,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.list.array.TLongArrayList;
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
@@ -80,6 +81,7 @@ public class BinaryMapIndexReader {
 
 	public final static int TRANSPORT_STOP_ZOOM = 24;
 	public static final int SHIFT_COORDINATES = 5;
+	public static final int LABEL_ZOOM_ENCODE = 26;
 	private final static Log log = PlatformUtil.getLog(BinaryMapIndexReader.class);
 	public static boolean READ_STATS = false;
 	public static final SearchPoiTypeFilter ACCEPT_ALL_POI_TYPE_FILTER = new SearchPoiTypeFilter() {
@@ -502,9 +504,9 @@ public class BinaryMapIndexReader {
 				result.put(filePointer, transportRoute);
 				finishInit.add(transportRoute);	
 			}
-			transportAdapter.initializeStringTable(ind, stringTable);
+			TIntObjectHashMap<String> indexedStringTable = transportAdapter.initializeStringTable(ind, stringTable);
 			for(TransportRoute transportRoute : finishInit ) {
-				transportAdapter.initializeNames(false, transportRoute, stringTable);
+				transportAdapter.initializeNames(false, transportRoute, indexedStringTable);
 			}
 			
 		}
@@ -554,27 +556,29 @@ public class BinaryMapIndexReader {
 		}
 		return false;
 	}
+	
+	public List<TransportStop> searchTransportIndex(TransportIndex index, SearchRequest<TransportStop> req) throws IOException {
+		if (index.stopsFileLength == 0 || index.right < req.left || index.left > req.right || index.top > req.bottom
+				|| index.bottom < req.top) {
+			return req.getSearchResults();
+		}
+		codedIS.seek(index.stopsFileOffset);
+		int oldLimit = codedIS.pushLimit(index.stopsFileLength);
+		int offset = req.searchResults.size();
+		TIntObjectHashMap<String> stringTable = new TIntObjectHashMap<String>();
+		transportAdapter.searchTransportTreeBounds(0, 0, 0, 0, req, stringTable);
+		codedIS.popLimit(oldLimit);
+		TIntObjectHashMap<String> indexedStringTable = transportAdapter.initializeStringTable(index, stringTable);
+		for (int i = offset; i < req.searchResults.size(); i++) {
+			TransportStop st = req.searchResults.get(i);
+			transportAdapter.initializeNames(indexedStringTable, st);
+		}
+		return req.getSearchResults();
+	}
+	
 	public List<TransportStop> searchTransportIndex(SearchRequest<TransportStop> req) throws IOException {
 		for (TransportIndex index : transportIndexes) {
-			if (index.stopsFileLength == 0 || index.right < req.left || index.left > req.right || index.top > req.bottom
-					|| index.bottom < req.top) {
-				continue;
-			}
-			if (req.stringTable != null) {
-				req.stringTable.clear();
-			}
-			codedIS.seek(index.stopsFileOffset);
-			int oldLimit = codedIS.pushLimit(index.stopsFileLength);
-			int offset = req.searchResults.size();
-			transportAdapter.searchTransportTreeBounds(0, 0, 0, 0, req);
-			codedIS.popLimit(oldLimit);
-			if (req.stringTable != null) {
-				transportAdapter.initializeStringTable(index, req.stringTable);
-				for (int i = offset; i < req.searchResults.size(); i++) {
-					TransportStop st = req.searchResults.get(i);
-					transportAdapter.initializeNames(req.stringTable, st);
-				}
-			}
+			searchTransportIndex(index, req);
 		}
 		if (req.numberOfVisitedObjects > 0) {
 			log.debug("Search is done. Visit " + req.numberOfVisitedObjects + " objects. Read " + req.numberOfAcceptedObjects + " objects."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -1132,6 +1136,7 @@ public class BinaryMapIndexReader {
 		TIntObjectHashMap<String> stringNames = null;
 		TIntArrayList stringOrder = null;
 		long id = 0;
+		int labelX = 0, labelY = 0;
 
 		boolean loop = true;
 		while (loop) {
@@ -1228,6 +1233,26 @@ public class BinaryMapIndexReader {
 					req.stat.lastStringNamesSize += sizeL;
 				}
 				break;
+			case OsmandOdb.MapData.LABELCOORDINATES_FIELD_NUMBER:
+				sizeL = codedIS.readRawVarint32();
+				old = codedIS.pushLimit(sizeL);
+				int i = 0;
+				while (codedIS.getBytesUntilLimit() > 0) {
+					if (i == 0) {
+						labelX = codedIS.readSInt32();
+					} else if (i == 1) {
+						labelY = codedIS.readSInt32();
+					} else {
+						codedIS.readRawVarint32();
+					}
+					i++;
+				}
+				codedIS.popLimit(old);
+				if (READ_STATS) {
+					req.stat.addTagHeader(OsmandOdb.MapData.LABELCOORDINATES_FIELD_NUMBER, sizeL);
+					req.stat.lastObjectLabelCoordinates += sizeL;
+				}
+				break;
 			default:
 				skipUnknownField(t);
 				break;
@@ -1255,6 +1280,9 @@ public class BinaryMapIndexReader {
 		dataObject.id = id;
 		dataObject.area = area;
 		dataObject.mapIndex = root;
+		dataObject.labelX = labelX;
+		dataObject.labelY = labelY;
+		
 		return dataObject;
 	}
 
@@ -1520,7 +1548,6 @@ public class BinaryMapIndexReader {
 		if (stops != null) {
 			request.searchResults = stops;
 		}
-		request.stringTable = new TIntObjectHashMap<String>();
 		request.left = sleft >> (31 - TRANSPORT_STOP_ZOOM);
 		request.right = sright >> (31 - TRANSPORT_STOP_ZOOM);
 		request.top = stop >> (31 - TRANSPORT_STOP_ZOOM);
@@ -1559,6 +1586,7 @@ public class BinaryMapIndexReader {
 		public int lastObjectAdditionalTypes;
 		public int lastObjectTypes;
 		public int lastObjectCoordinates;
+		public int lastObjectLabelCoordinates;
 
 		public int lastObjectSize;
 		public int lastBlockStringTableSize;
@@ -1583,6 +1611,7 @@ public class BinaryMapIndexReader {
 			lastObjectAdditionalTypes = 0;
 			lastObjectTypes = 0;
 			lastObjectCoordinates = 0;
+			lastObjectLabelCoordinates = 0;
 		}
 	}
 
@@ -1618,12 +1647,11 @@ public class BinaryMapIndexReader {
 
 		SearchPoiTypeFilter poiTypeFilter = null;
 
-		// internal read information
-		TIntObjectHashMap<String> stringTable = null;
-
 		// cache information
 		TIntArrayList cacheCoordinates = new TIntArrayList();
 		TIntArrayList cacheTypes = new TIntArrayList();
+		TLongArrayList cacheIdsA = new TLongArrayList();
+		TLongArrayList cacheIdsB = new TLongArrayList();
 
 		MapObjectStat stat = new MapObjectStat();
 
@@ -1742,9 +1770,6 @@ public class BinaryMapIndexReader {
 			searchResults = new ArrayList<T>();
 			cacheCoordinates.clear();
 			cacheTypes.clear();
-			if(stringTable != null) {
-				stringTable.clear();
-			}
 			land = false;
 			ocean = false;
 			numberOfVisitedObjects = 0;
@@ -1918,7 +1943,8 @@ public class BinaryMapIndexReader {
 				
 			BinaryMapDataObject bm = 
 					new BinaryMapDataObject(o.id, o.coordinates, o.polygonInnerCoordinates, o.objectType, o.area, 
-							types.toArray(), additionalTypes.isEmpty() ? null : additionalTypes.toArray());
+							types.toArray(), additionalTypes.isEmpty() ? null : additionalTypes.toArray(), 
+									o.labelX, o.labelY);
 			if (o.namesOrder != null) {
 				bm.objectNames = new TIntObjectHashMap<>();
 				bm.namesOrder = new TIntArrayList();
@@ -2094,7 +2120,7 @@ public class BinaryMapIndexReader {
 
 	public static void main(String[] args) throws IOException {
 		File fl = new File(System.getProperty("maps") + "/Synthetic_test_rendering.obf");
-		fl = new File(System.getProperty("maps") + "/Belarus_europe_2.obf");
+		fl = new File("/home/madwasp79/OsmAnd-maps/Poly_center2.obf");
 		
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 
@@ -2202,7 +2228,6 @@ public class BinaryMapIndexReader {
 	private static List<Location> readGPX(File f) {
 		List<Location> res = new ArrayList<Location>();
 		try {
-			StringBuilder content = new StringBuilder();
 			BufferedReader reader = new BufferedReader(getUTF8Reader(new FileInputStream(f)));
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dom = factory.newDocumentBuilder();
@@ -2219,7 +2244,6 @@ public class BinaryMapIndexReader {
 //				Document doc = dom.parse(new InputSource(new StringReader(content.toString())));
 			Document doc = dom.parse(new InputSource(reader));
 			NodeList list = doc.getElementsByTagName("trkpt");
-			Way w = new Way(-1);
 			for (int i = 0; i < list.getLength(); i++) {
 				Element item = (Element) list.item(i);
 				try {

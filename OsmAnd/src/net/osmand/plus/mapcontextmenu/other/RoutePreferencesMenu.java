@@ -69,11 +69,11 @@ public class RoutePreferencesMenu {
 		routingOptionsHelper.selectVoiceGuidance(mapActivity, new CallbackWithObject<String>() {
 			@Override
 			public boolean processResult(String result) {
-				routingOptionsHelper.applyVoiceProvider(mapActivity, result);
+				routingOptionsHelper.applyVoiceProvider(mapActivity, result, false);
 				updateParameters();
 				return true;
 			}
-		});
+		}, routingHelper.getAppMode());
 	}
 
 	public OnItemClickListener getItemClickListener(final ArrayAdapter<?> listAdapter) {
@@ -376,7 +376,7 @@ public class RoutePreferencesMenu {
 				mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
 				return true;
 			}
-		});
+		}, app.getDaynightHelper().isNightModeForMapControls());
 	}
 
 	private void updateSpinnerItems(final TextView gpxSpinner) {

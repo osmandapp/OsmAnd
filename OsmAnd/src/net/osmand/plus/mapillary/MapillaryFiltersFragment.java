@@ -30,6 +30,7 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.resources.ResourceManager;
@@ -57,8 +58,10 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         final boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
         final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
         final int backgroundColor = ContextCompat.getColor(getActivity(),
-                nightMode ? R.color.ctx_menu_info_view_bg_dark : R.color.ctx_menu_info_view_bg_light);
+                nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
         final DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
+        final int currentModeColorRes = getMyApplication().getSettings().getApplicationMode().getIconColorInfo().getColor(nightMode);
+        final int currentModeColor = ContextCompat.getColor(getActivity(), currentModeColorRes);
 
         final View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_mapillary_filters, null);
         view.findViewById(R.id.mapillary_filters_linear_layout).setBackgroundColor(backgroundColor);
@@ -66,15 +69,15 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
 
         final View toggleRow = view.findViewById(R.id.toggle_row);
         final boolean selected = settings.SHOW_MAPILLARY.get();
-        final int toggleActionStringId = selected ? R.string.shared_string_enabled : R.string.shared_string_disabled;
+        final int toggleActionStringId = selected ? R.string.shared_string_on : R.string.shared_string_off;
         int toggleIconColorId;
         int toggleIconId;
         if (selected) {
             toggleIconId = R.drawable.ic_action_view;
-            toggleIconColorId = nightMode ? R.color.color_dialog_buttons_dark : R.color.color_dialog_buttons_light;
+            toggleIconColorId = currentModeColorRes;
         } else {
             toggleIconId = R.drawable.ic_action_hide;
-            toggleIconColorId = nightMode ? 0 : R.color.icon_color;
+            toggleIconColorId = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
         }
         ((AppCompatTextView) toggleRow.findViewById(R.id.toggle_row_title)).setText(toggleActionStringId);
         final Drawable drawable = getIcon(toggleIconId, toggleIconColorId);
@@ -96,6 +99,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
                 toggle.setChecked(!toggle.isChecked());
             }
         });
+        UiUtilities.setupCompoundButton(nightMode, currentModeColor, toggle);
 
 
         final Button reloadTile = (Button) view.findViewById(R.id.button_reload_tile);
@@ -110,10 +114,10 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         });
 
 
-        final int colorRes = nightMode ? R.color.color_white : R.color.icon_color;
+        final int colorRes = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
         ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_user_icon)).setImageDrawable(getIcon(R.drawable.ic_action_user, colorRes));
         ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_date_icon)).setImageDrawable(getIcon(R.drawable.ic_action_data, colorRes));
-        ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_tile_cache_icon)).setImageDrawable(getIcon(R.drawable.ic_layer_top_dark, colorRes));
+        ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_tile_cache_icon)).setImageDrawable(getIcon(R.drawable.ic_layer_top, colorRes));
 
         final DelayAutoCompleteTextView textView = (DelayAutoCompleteTextView) view.findViewById(R.id.auto_complete_text_view);
         textView.setAdapter(new MapillaryAutoCompleteAdapter(getContext(), R.layout.auto_complete_suggestion, getMyApplication()));
@@ -244,6 +248,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
                 pano.setChecked(!pano.isChecked());
             }
         });
+        UiUtilities.setupCompoundButton(nightMode, currentModeColor, pano);
 
 
         final Button apply = (Button) view.findViewById(R.id.button_apply);

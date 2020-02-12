@@ -23,6 +23,7 @@ import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.CachedOsmandIndexes;
 import net.osmand.data.Amenity;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.map.ITileSource;
 import net.osmand.map.MapTileDownloader;
@@ -44,6 +45,7 @@ import net.osmand.plus.resources.AsyncLoadingThread.OnMapLoadedListener;
 import net.osmand.plus.resources.AsyncLoadingThread.TileLoadDownloadRequest;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.router.TransportRoutePlanner.TransportRoutingContext;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -66,9 +68,10 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
-import gnu.trove.list.array.TLongArrayList;
+import gnu.trove.map.hash.TLongObjectHashMap;
 
 import static net.osmand.plus.download.DownloadOsmandIndexesHelper.assetMapping;
 
@@ -245,6 +248,11 @@ public class ResourceManager {
 		float tiles = (dm.widthPixels / 256 + 2) * (dm.heightPixels / 256 + 2) * 3;
 		log.info("Bitmap tiles to load in memory : " + tiles);
 		bitmapTilesCache.setMaxCacheSize((int) (tiles));
+
+		File path = context.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
+		if (!path.exists()) {
+			path.mkdir();
+		}
 	}
 
 	public BitmapTilesCache getBitmapTilesCache() {
@@ -437,7 +445,7 @@ public class ResourceManager {
 			Map<String, String> mapping = assetMapping(context.getAssets());
 			File appPath = context.getAppPath(null);
 			if (appPath.canWrite()) {
-				for (Map.Entry<String,String> entry : mapping.entrySet()) {
+				for (Entry<String,String> entry : mapping.entrySet()) {
 					File jsFile = new File(appPath, entry.getValue());
 					if (entry.getValue().contains("-tts") && entry.getValue()
 							.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
@@ -725,13 +733,7 @@ public class ResourceManager {
 						resource.setUseForPublicTransport(true);
 					}
 					if (mapReader.containsPoiData()) {
-						try {
-							RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$
-							amenityRepositories.put(f.getName(), new AmenityIndexRepositoryBinary(new BinaryMapIndexReader(raf, mapReader)));
-						} catch (IOException e) {
-							log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
-							warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
-						}
+						amenityRepositories.put(f.getName(), new AmenityIndexRepositoryBinary(resource));
 					}
 				}
 			} catch (SQLiteException e) {
@@ -769,6 +771,20 @@ public class ResourceManager {
 	}
 	
 	////////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////
+
+	public List<AmenityIndexRepository> getAmenityRepositories() {
+		List<String> fileNames = new ArrayList<>(amenityRepositories.keySet());
+		Collections.sort(fileNames, Algorithms.getStringVersionComparator());
+		List<AmenityIndexRepository> res = new ArrayList<>();
+		for (String fileName : fileNames) {
+			AmenityIndexRepository r = amenityRepositories.get(fileName);
+			if (r != null) {
+				res.add(r);
+			}
+		}
+		return res;
+	}
+
 	public List<Amenity> searchAmenities(SearchPoiTypeFilter filter,
 			double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, final ResultMatcher<Amenity> matcher) {
 		final List<Amenity> amenities = new ArrayList<Amenity>();
@@ -779,14 +795,11 @@ public class ResourceManager {
 				int left31 = MapUtils.get31TileNumberX(leftLongitude);
 				int bottom31 = MapUtils.get31TileNumberY(bottomLatitude);
 				int right31 = MapUtils.get31TileNumberX(rightLongitude);
-				List<String> fileNames = new ArrayList<>(amenityRepositories.keySet());
-				Collections.sort(fileNames, Algorithms.getStringVersionComparator());
-				for (String name : fileNames) {
+				for (AmenityIndexRepository index : getAmenityRepositories()) {
 					if (matcher != null && matcher.isCancelled()) {
 						searchAmenitiesInProgress = false;
 						break;
 					}
-					AmenityIndexRepository index = amenityRepositories.get(name);
 					if (index != null && index.checkContainsInt(top31, left31, bottom31, right31)) {
 						List<Amenity> r = index.searchAmenities(top31,
 								left31, bottom31, right31, zoom, filter, matcher);
@@ -820,7 +833,7 @@ public class ResourceManager {
 					rightLongitude = Math.max(rightLongitude, l.getLongitude());
 				}
 				if (!filter.isEmpty()) {
-					for (AmenityIndexRepository index : amenityRepositories.values()) {
+					for (AmenityIndexRepository index : getAmenityRepositories()) {
 						if (index.checkContainsInt(
 								MapUtils.get31TileNumberY(topLatitude), 
 								MapUtils.get31TileNumberX(leftLongitude), 
@@ -847,7 +860,7 @@ public class ResourceManager {
 	
 	
 	public boolean containsAmenityRepositoryToSearch(boolean searchByName){
-		for (AmenityIndexRepository index : amenityRepositories.values()) {
+		for (AmenityIndexRepository index : getAmenityRepositories()) {
 			if(searchByName){
 				if(index instanceof AmenityIndexRepositoryBinary){
 					return true;
@@ -868,7 +881,7 @@ public class ResourceManager {
 		int top = MapUtils.get31TileNumberY(topLatitude);
 		int right = MapUtils.get31TileNumberX(rightLongitude);
 		int bottom = MapUtils.get31TileNumberY(bottomLatitude);
-		for (AmenityIndexRepository index : amenityRepositories.values()) {
+		for (AmenityIndexRepository index : getAmenityRepositories()) {
 			if (matcher != null && matcher.isCancelled()) {
 				break;
 			}
@@ -904,7 +917,7 @@ public class ResourceManager {
 	
 	public Map<PoiCategory, List<String>> searchAmenityCategoriesByName(String searchQuery, double lat, double lon) {
 		Map<PoiCategory, List<String>> map = new LinkedHashMap<PoiCategory, List<String>>();
-		for (AmenityIndexRepository index : amenityRepositories.values()) {
+		for (AmenityIndexRepository index : getAmenityRepositories()) {
 			if (index instanceof AmenityIndexRepositoryBinary) {
 				if (index.checkContains(lat, lon)) {
 					((AmenityIndexRepositoryBinary) index).searchAmenityCategoriesByName(searchQuery, map);
@@ -929,49 +942,86 @@ public class ResourceManager {
 	}
 	
 	public Collection<BinaryMapReaderResource> getFileReaders() {
-		return fileReaders.values();
+		List<String> fileNames = new ArrayList<>(fileReaders.keySet());
+		Collections.sort(fileNames, Algorithms.getStringVersionComparator());
+		List<BinaryMapReaderResource> res = new ArrayList<>();
+		for (String fileName : fileNames) {
+			BinaryMapReaderResource r = fileReaders.get(fileName);
+			if (r != null) {
+				res.add(r);
+			}
+		}
+		return res;
 	}
 	
 	
 	////////////////////////////////////////////// Working with transport ////////////////////////////////////////////////
+
+	public LinkedHashMap<String, TransportIndexRepository> getTransportRepositories() {
+		List<String> fileNames = new ArrayList<>(transportRepositories.keySet());
+		Collections.sort(fileNames, Algorithms.getStringVersionComparator());
+		LinkedHashMap<String, TransportIndexRepository> res = new LinkedHashMap<>();
+		for (String fileName : fileNames) {
+			TransportIndexRepository r = transportRepositories.get(fileName);
+			if (r != null) {
+				res.put(fileName, r);
+			}
+		}
+		return res;
+	}
+
 	public List<TransportIndexRepository> searchTransportRepositories(double latitude, double longitude) {
-		List<TransportIndexRepository> repos = new ArrayList<TransportIndexRepository>();
-		for (TransportIndexRepository index : transportRepositories.values()) {
-			if (index.checkContains(latitude,longitude) && index.isUseForPublicTransport()) {
+		List<TransportIndexRepository> repos = new ArrayList<>();
+		for (TransportIndexRepository index : getTransportRepositories().values()) {
+			if (index.isUseForPublicTransport() && index.checkContains(latitude,longitude)) {
 				repos.add(index);
 			}
 		}
 		return repos;
 	}
-	
-	
-	public List<TransportStop> searchTransportSync(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, ResultMatcher<TransportStop> matcher){
-		List<TransportIndexRepository> repos = new ArrayList<TransportIndexRepository>();
-		List<TransportStop> stops = new ArrayList<>();
-		for (TransportIndexRepository index : transportRepositories.values()) {
-			if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude) && index.isUseForPublicTransport()) {
+
+	public List<TransportStop> searchTransportSync(double topLat, double leftLon, double bottomLat, double rightLon,
+												   ResultMatcher<TransportStop> matcher) throws IOException {
+		List<TransportIndexRepository> repos = new ArrayList<>();
+		TLongObjectHashMap<TransportStop> loadedTransportStops = new TLongObjectHashMap<>();
+		for (TransportIndexRepository index : getTransportRepositories().values()) {
+			if (index.isUseForPublicTransport() && index.checkContains(topLat, leftLon, bottomLat, rightLon)) {
 				repos.add(index);
 			}
 		}
-		if (!repos.isEmpty()){
-			TLongArrayList addedTransportStops = new TLongArrayList();
-			for (TransportIndexRepository repository : repos) {
-				List<TransportStop> ls = new ArrayList<>();
-				repository.searchTransportStops(topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-						-1, ls, matcher);
-				for (TransportStop tstop : ls) {
-					if (!addedTransportStops.contains(tstop.getId())) {
-						addedTransportStops.add(tstop.getId());
-						if (!tstop.isDeleted()) {
-							stops.add(tstop);
-						}
-					}
-				}
+		if (!repos.isEmpty()) {
+			for (TransportIndexRepository r : repos) {
+				List<TransportStop> stops = new ArrayList<>();
+				r.searchTransportStops(topLat, leftLon, bottomLat, rightLon, -1, stops, matcher);
+				BinaryMapIndexReader reader = ((TransportIndexRepositoryBinary) r).getOpenFile();
+				TransportRoutingContext.mergeTransportStops(reader, loadedTransportStops, stops, null, null);
+			}
+		}
+		List<TransportStop> stops = new ArrayList<>();
+		for (TransportStop s : loadedTransportStops.valueCollection()) {
+			if (!s.isDeleted()) {
+				stops.add(s);
 			}
 		}
 		return stops;
 	}
-	
+
+	public List<TransportRoute> getRoutesForStop(TransportStop stop) {
+		List<TransportRoute> routes = new ArrayList<>();
+		LinkedHashMap<String, TransportIndexRepository> repositories = getTransportRepositories();
+		LinkedHashMap<String, int[]> referencesToRoutes = stop.getReferencesToRoutesMap();
+		if (referencesToRoutes != null) {
+			for (Entry<String, int[]> refs : referencesToRoutes.entrySet()) {
+				TransportIndexRepository r = repositories.get(refs.getKey());
+				if (r != null) {
+					List<TransportRoute> rr = r.getRoutesForReferences(refs.getValue());
+					routes.addAll(rr);
+				}
+			}
+		}
+		return routes;
+	}
+
 	////////////////////////////////////////////// Working with map ////////////////////////////////////////////////
 	public boolean updateRenderedMapNeeded(RotatedTileBox rotatedTileBox, DrawSettings drawSettings) {
 		return renderer.updateMapIsNeeded(rotatedTileBox, drawSettings);
@@ -1026,9 +1076,10 @@ public class ResourceManager {
 	
 	
 	public BinaryMapIndexReader[] getRoutingMapFiles() {
+		Collection<BinaryMapReaderResource> fileReaders = getFileReaders();
 		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
-		for(BinaryMapReaderResource r : fileReaders.values()) {
-			if(r.isUseForRouting()) {
+		for (BinaryMapReaderResource r : fileReaders) {
+			if (r.isUseForRouting()) {
 				BinaryMapIndexReader reader = r.getReader(BinaryMapReaderResourceType.ROUTING);
 				if (reader != null) {
 					readers.add(reader);
@@ -1039,9 +1090,10 @@ public class ResourceManager {
 	}
 
 	public BinaryMapIndexReader[] getTransportRoutingMapFiles() {
+		Collection<BinaryMapReaderResource> fileReaders = getFileReaders();
 		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
-		for(BinaryMapReaderResource r : fileReaders.values()) {
-			if(r.isUseForPublicTransport()) {
+		for (BinaryMapReaderResource r : fileReaders) {
+			if  (r.isUseForPublicTransport()) {
 				BinaryMapIndexReader reader = r.getReader(BinaryMapReaderResourceType.TRANSPORT_ROUTING);
 				if (reader != null) {
 					readers.add(reader);
@@ -1052,9 +1104,10 @@ public class ResourceManager {
 	}
 
 	public BinaryMapIndexReader[] getQuickSearchFiles() {
+		Collection<BinaryMapReaderResource> fileReaders = getFileReaders();
 		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
-		for(BinaryMapReaderResource r : fileReaders.values()) {
-			if(r.getShallowReader().containsPoiData() || 
+		for (BinaryMapReaderResource r : fileReaders) {
+			if (r.getShallowReader().containsPoiData() ||
 					r.getShallowReader().containsAddressData()) {
 				readers.add(r.getReader(BinaryMapReaderResourceType.QUICK_SEARCH));
 			}

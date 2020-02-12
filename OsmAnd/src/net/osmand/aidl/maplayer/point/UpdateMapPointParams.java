@@ -6,10 +6,12 @@ import android.os.Parcelable;
 public class UpdateMapPointParams implements Parcelable {
 	private String layerId;
 	private AMapPoint point;
+	private boolean updateOpenedMenuAndMap;
 
-	public UpdateMapPointParams(String layerId, AMapPoint point) {
+	public UpdateMapPointParams(String layerId, AMapPoint point, boolean updateOpenedMenuAndMap) {
 		this.layerId = layerId;
 		this.point = point;
+		this.updateOpenedMenuAndMap = updateOpenedMenuAndMap;
 	}
 
 	public UpdateMapPointParams(Parcel in) {
@@ -35,14 +37,20 @@ public class UpdateMapPointParams implements Parcelable {
 		return point;
 	}
 
+	public boolean isUpdateOpenedMenuAndMap() {
+		return updateOpenedMenuAndMap;
+	}
+
 	public void writeToParcel(Parcel out, int flags) {
 		out.writeString(layerId);
 		out.writeParcelable(point, flags);
+		out.writeInt(updateOpenedMenuAndMap ? 1 : 0);
 	}
 
 	private void readFromParcel(Parcel in) {
 		layerId = in.readString();
 		point = in.readParcelable(AMapPoint.class.getClassLoader());
+		updateOpenedMenuAndMap = in.readInt() != 0;
 	}
 
 	public int describeContents() {

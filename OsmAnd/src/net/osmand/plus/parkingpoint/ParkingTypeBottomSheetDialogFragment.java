@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 
+import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -63,15 +64,17 @@ public class ParkingTypeBottomSheetDialogFragment extends MenuBottomSheetDialogF
 				plugin.showDeleteEventWarning(mapActivity);
 			}
 			if (limited) {
-				plugin.setParkingPosition(mapActivity, latitude, longitude, true);
+				plugin.setParkingPosition(latitude, longitude, true);
 				plugin.showSetTimeLimitDialog(mapActivity, new Dialog(getContext()));
 				mapActivity.refreshMap();
 			} else {
 				plugin.addOrRemoveParkingEvent(false);
-				plugin.setParkingPosition(mapActivity, latitude, longitude, false);
+				plugin.setParkingPosition(latitude, longitude, false);
 				plugin.showContextMenuIfNeeded(mapActivity, true);
 				mapActivity.refreshMap();
 			}
+			mapActivity.getMyApplication().getFavorites().setSpecialPoint(
+					plugin.getParkingPosition(), FavouritePoint.SpecialPointType.PARKING, null);
 		}
 		dismiss();
 	}

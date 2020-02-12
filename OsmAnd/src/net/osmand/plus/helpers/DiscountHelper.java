@@ -80,7 +80,7 @@ public class DiscountHelper {
 	public static void checkAndDisplay(final MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
-		if (settings.DO_NOT_SHOW_STARTUP_MESSAGES.get() || !settings.INAPPS_READ.get()) {
+		if (settings.DO_NOT_SHOW_STARTUP_MESSAGES.get() || !settings.INAPPS_READ.get() || Version.isHuawei(app)) {
 			return;
 		}
 		if (mBannerVisible) {
@@ -141,13 +141,8 @@ public class DiscountHelper {
 			JSONObject application = obj.getJSONObject("application");
 			boolean showChristmasDialog = obj.optBoolean("show_christmas_dialog", false);
 
-			if (data.url.startsWith(INAPP_PREFIX) && data.url.length() > INAPP_PREFIX.length()) {
-				String inAppSku = data.url.substring(INAPP_PREFIX.length());
-				InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
-				if (purchaseHelper != null
-						&& purchaseHelper.isPurchased(inAppSku) || InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
-					return;
-				}
+			if (!validateUrl(app, data.url)) {
+				return;
 			}
 
 			if (data.oneOfConditions != null) {
@@ -215,7 +210,19 @@ public class DiscountHelper {
 		}
 	}
 
-	private static String parseUrl(OsmandApplication app, String url) {
+	public static boolean validateUrl(OsmandApplication app, String url) {
+		if (url.startsWith(INAPP_PREFIX) && url.length() > INAPP_PREFIX.length()) {
+			String inAppSku = url.substring(INAPP_PREFIX.length());
+			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
+			if (purchaseHelper != null
+					&& purchaseHelper.isPurchased(inAppSku) || InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public static String parseUrl(OsmandApplication app, String url) {
 		if (!Algorithms.isEmpty(url)) {
 			int i = url.indexOf("osmand-market-app:");
 			if (i != -1) {
@@ -261,7 +268,7 @@ public class DiscountHelper {
 			View.OnClickListener clickListener = new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					mapActivity.getMyApplication().logEvent(mapActivity, "motd_click");
+					mapActivity.getMyApplication().logEvent("motd_click");
 					mBannerVisible = false;
 					mapActivity.hideTopToolbar(toolbarController);
 					openUrl(mapActivity, data.url);
@@ -274,7 +281,7 @@ public class DiscountHelper {
 		toolbarController.setOnCloseButtonClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mapActivity.getMyApplication().logEvent(mapActivity, "motd_close");
+				mapActivity.getMyApplication().logEvent("motd_close");
 				mBannerVisible = false;
 				mapActivity.hideTopToolbar(toolbarController);
 			}
@@ -297,13 +304,13 @@ public class DiscountHelper {
 		mFilterVisible = true;
 	}
 
-	private static void openUrl(final MapActivity mapActivity, String url) {
+	public static void openUrl(final MapActivity mapActivity, String url) {
 		if (url.startsWith(INAPP_PREFIX)) {
 			OsmandApplication app = mapActivity.getMyApplication();
 			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 			if (purchaseHelper != null) {
 				if (url.contains(purchaseHelper.getFullVersion().getSku())) {
-					app.logEvent(mapActivity, "in_app_purchase_redirect");
+					app.logEvent("in_app_purchase_redirect");
 					purchaseHelper.purchaseFullVersion(mapActivity);
 				} else {
 					for (InAppPurchase p : purchaseHelper.getLiveUpdates().getAllSubscriptions()) {
@@ -441,7 +448,7 @@ public class DiscountHelper {
 			res.iconId = obj.getString("icon");
 			res.url = parseUrl(app, obj.getString("url"));
 			res.textBtnTitle = obj.optString("button_title");
-			res.iconColor = parseColor("icon_color", obj);
+			res.iconColor = parseColor("icon_color_default_light", obj);
 			res.bgColor = parseColor("bg_color", obj);
 			res.titleColor = parseColor("title_color", obj);
 			res.descrColor = parseColor("description_color", obj);
@@ -470,8 +477,8 @@ public class DiscountHelper {
 			setSingleLineTitle(false);
 			setBackBtnIconClrIds(0, 0);
 			setCloseBtnIconClrIds(0, 0);
-			setTitleTextClrIds(R.color.primary_text_dark, R.color.primary_text_dark);
-			setDescrTextClrIds(R.color.primary_text_dark, R.color.primary_text_dark);
+			setTitleTextClrIds(R.color.text_color_tab_active_light, R.color.text_color_tab_active_dark);
+			setDescrTextClrIds(R.color.text_color_tab_active_light, R.color.text_color_tab_active_dark);
 			setBgIds(R.color.discount_bar_bg, R.color.discount_bar_bg,
 					R.drawable.discount_bar_bg_land, R.drawable.discount_bar_bg_land);
 		}

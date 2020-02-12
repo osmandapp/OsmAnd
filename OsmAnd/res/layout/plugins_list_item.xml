@@ -15,7 +15,7 @@
         android:layout_gravity="center"
         android:layout_margin="8dp"
         android:adjustViewBounds="true"
-        android:background="@drawable/bg_plugin_logo_enabled"
+        android:background="@drawable/bg_plugin_logo_enabled_light"
         android:padding="12dp"
         android:scaleType="fitCenter"
         tools:src="@drawable/ic_extension_dark" />

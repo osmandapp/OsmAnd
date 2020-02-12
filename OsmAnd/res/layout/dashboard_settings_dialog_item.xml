@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/list_item_height"
+    android:background="?attr/selectableItemBackground"
     android:paddingLeft="20dp"
     android:orientation="horizontal">
 
@@ -14,7 +15,7 @@
         android:id="@+id/text"
         style="@style/DashboardSubHeader"
         android:layout_marginLeft="16dp"
-        android:textColor="@color/dashboard_black"
+        android:textColor="?android:textColorPrimary"
         android:textSize="@dimen/default_list_text_size"
         osmand:typeface="@string/font_roboto_regular"
         tools:text="@string/lorem_ipsum"/>
@@ -25,7 +26,7 @@
         android:layout_height="48dp"
         android:layout_gravity="center_vertical"
         android:id="@+id/numberOfRowsTextView"
-        android:textColor="@color/dashboard_blue"
+        android:textColor="@color/active_color_primary_light"
         android:textSize="@dimen/default_list_text_size"
         osmand:typeface="@string/font_roboto_regular"
         android:gravity="center"

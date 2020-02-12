@@ -36,10 +36,11 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.IRouteInformationListener;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
 import net.osmand.util.Algorithms;
 
@@ -185,7 +186,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		mapTextLayer = view.getLayerByClass(MapTextLayer.class);
 	}
 
-
 	public int getRadiusPoi(RotatedTileBox tb) {
 		int r;
 		final double zoom = tb.getZoom();
@@ -200,6 +200,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		} else {
 			r = 18;
 		}
+
 		return (int) (r * view.getScaleCoefficient());
 	}
 
@@ -222,6 +223,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				if (objects != null) {
 					float iconSize = poiBackground.getWidth() * 3 / 2;
 					QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
+					WaypointHelper wph = app.getWaypointHelper();
 
 					for (Amenity o : objects) {
 						float x = tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation()
@@ -230,7 +232,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 								.getLongitude());
 
 						if (tileBox.containsPoint(x, y, iconSize)) {
-							if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
+							if (intersects(boundIntersections, x, y, iconSize, iconSize) ||
+									(app.getSettings().SHOW_NEARBY_POI.get() && wph.isRouteCalculated() && !wph.isAmenityNoPassed(o))) {
 								canvas.drawBitmap(poiBackgroundSmall, x - poiBackgroundSmall.getWidth() / 2, y - poiBackgroundSmall.getHeight() / 2, paintIconBackground);
 								smallObjectsLatLon.add(new LatLon(o.getLocation().getLatitude(),
 										o.getLocation().getLongitude()));
@@ -329,7 +332,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		textView.setLayoutParams(llTextParams);
 		textView.setPadding(textMargin, textMargin, textMargin, textMargin);
 		textView.setTextSize(16);
-		textView.setTextColor(ContextCompat.getColor(app, light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
+		textView.setTextColor(ContextCompat.getColor(app, light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
 		textView.setAutoLinkMask(Linkify.ALL);
 		textView.setLinksClickable(true);
 		textView.setText(text);
@@ -405,8 +408,13 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	}
 
 	@Override
-	public int getTextShift(Amenity o, RotatedTileBox rb) {
-		return getRadiusPoi(rb);
+	public int getTextShift(Amenity amenity, RotatedTileBox rb) {
+		int radiusPoi = getRadiusPoi(rb);
+		if (isPresentInFullObjects(amenity.getLocation())) {
+			radiusPoi += poiBackground.getHeight() / 2 - poiBackgroundSmall.getHeight() / 2;
+		}
+
+		return radiusPoi;
 	}
 
 	@Override

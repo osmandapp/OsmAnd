@@ -30,7 +30,7 @@
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/ctx_menu_info_view_bg"
+        android:background="?attr/activity_background_color"
         android:divider="@null"
         android:dividerHeight="0dp"
         android:drawSelectorOnTop="true"/>

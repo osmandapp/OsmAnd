@@ -49,6 +49,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Map.Entry;
+
+import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -222,7 +224,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			}
 		});
 
-		final int colorId = isLightTheme ? R.color.inactive_item_orange : R.color.dash_search_icon_dark;
+		final int colorId = isLightTheme ? R.color.active_color_primary_light : R.color.active_color_primary_dark;
 		final int color = getResources().getColor(colorId);
 		onlineDocumentationButton.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_help, color));
 		final ImageButton poiTypeButton = (ImageButton) view.findViewById(R.id.poiTypeButton);
@@ -263,6 +265,8 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			}
 		});
 		poiNameEditText.setText(editPoiData.getTag(OSMSettings.OSMTagKey.NAME.getValue()));
+		poiNameEditText.requestFocus();
+		AndroidUtils.showSoftKeyboard(poiNameEditText);
 		poiTypeTextInputLayout = (TextInputLayout) view.findViewById(R.id.poiTypeTextInputLayout);
 		poiTypeEditText = (AutoCompleteTextView) view.findViewById(R.id.poiTypeEditText);
 		poiTypeEditText.setText(editPoiData.getPoiTypeString());

@@ -1,33 +1,41 @@
 package net.osmand.router;
 
-import gnu.trove.iterator.TIntIterator;
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.set.hash.TIntHashSet;
-
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import gnu.trove.iterator.TIntIterator;
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.set.hash.TIntHashSet;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.osm.MapRenderingTypes;
+import net.osmand.render.RenderingRuleSearchRequest;
+import net.osmand.render.RenderingRulesStorage;
+import net.osmand.render.RenderingRulesStorage.RenderingRulesStorageResolver;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
+import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
-
-import org.apache.commons.logging.Log;
 
 public class RouteResultPreparation {
 
@@ -41,7 +49,7 @@ public class RouteResultPreparation {
 	 */
 	List<RouteSegmentResult> prepareResult(RoutingContext ctx, FinalRouteSegment finalSegment) throws IOException {
 		List<RouteSegmentResult> result  = convertFinalSegmentToResults(ctx, finalSegment);
-		prepareResult(ctx, result);
+		prepareResult(ctx, result, false);
 		return result;
 	}
 	
@@ -156,13 +164,13 @@ public class RouteResultPreparation {
 		return intersections % 2 == 1;
 	}
 
-	List<RouteSegmentResult> prepareResult(RoutingContext ctx, List<RouteSegmentResult> result) throws IOException {
+	List<RouteSegmentResult> prepareResult(RoutingContext ctx, List<RouteSegmentResult> result, boolean recalculation) throws IOException {
 		for(int i = 0; i < result.size(); i++) {
 			checkAndInitRouteRegion(ctx, result.get(i).getObject());
 		}
 		combineWayPointsForAreaRouting(ctx, result);
 		validateAllPointsConnected(result);
-		splitRoadsAndAttachRoadSegments(ctx, result);
+		splitRoadsAndAttachRoadSegments(ctx, result, recalculation);
 		calculateTimeSpeed(ctx, result);
 		
 		for (int i = 0; i < result.size(); i ++) {
@@ -222,6 +230,11 @@ public class RouteResultPreparation {
 		}
 	}
 
+	// decrease speed proportionally from 15ms (50kmh)
+	private static final double SLOW_DOWN_SPEED_THRESHOLD = 15;
+	// reference speed 30ms (108kmh) - 2ms (7kmh)
+	private static final double SLOW_DOWN_SPEED = 2;
+	
 	private void calculateTimeSpeed(RoutingContext ctx, List<RouteSegmentResult> result) throws IOException {
 		//for Naismith
 		boolean usePedestrianHeight = ((((GeneralRouter) ctx.getRouter()).getProfile() == GeneralRouterProfile.PEDESTRIAN) && ((GeneralRouter) ctx.getRouter()).getHeightObstacles());
@@ -232,12 +245,10 @@ public class RouteResultPreparation {
 			double distOnRoadToPass = 0;
 			double speed = ctx.getRouter().defineVehicleSpeed(road);
 			if (speed == 0) {
-				speed = ctx.getRouter().getMinDefaultSpeed();
+				speed = ctx.getRouter().getDefaultSpeed();
 			} else {
-				if(speed > 15) {
-					// decrease speed proportionally from 15ms=50kmh - 
-					// reference speed 30ms=108kmh - 7kmh
-					speed = speed - ((speed - 15f) / (30f - 15f) * 2f);
+				if (speed > SLOW_DOWN_SPEED_THRESHOLD) {
+					speed = speed - (speed / SLOW_DOWN_SPEED_THRESHOLD - 1) * SLOW_DOWN_SPEED;
 				}
 			}
 			boolean plus = rr.getStartPointIndex() < rr.getEndPointIndex();
@@ -287,7 +298,7 @@ public class RouteResultPreparation {
 		}
 	}
 
-	private void splitRoadsAndAttachRoadSegments(RoutingContext ctx, List<RouteSegmentResult> result) throws IOException {
+	private void splitRoadsAndAttachRoadSegments(RoutingContext ctx, List<RouteSegmentResult> result, boolean recalculation) throws IOException {
 		for (int i = 0; i < result.size(); i++) {
 			if (ctx.checkIfMemoryLimitCritical(ctx.config.memoryLimitation)) {
 				ctx.unloadUnusedTiles(ctx.config.memoryLimitation);
@@ -298,10 +309,10 @@ public class RouteResultPreparation {
 			for (int j = rr.getStartPointIndex(); j != rr.getEndPointIndex(); j = next) {
 				next = plus ? j + 1 : j - 1;
 				if (j == rr.getStartPointIndex()) {
-					attachRoadSegments(ctx, result, i, j, plus);
+					attachRoadSegments(ctx, result, i, j, plus, recalculation);
 				}
 				if (next != rr.getEndPointIndex()) {
-					attachRoadSegments(ctx, result, i, next, plus);
+					attachRoadSegments(ctx, result, i, next, plus, recalculation);
 				}
 				List<RouteSegmentResult> attachedRoutes = rr.getAttachedRoutes(next);
 				boolean tryToSplit = next != rr.getEndPointIndex() && !rr.getObject().roundabout() && attachedRoutes != null;
@@ -516,12 +527,17 @@ public class RouteResultPreparation {
 				}
 				StringBuilder additional = new StringBuilder();
 				additional.append("time = \"").append(res.getSegmentTime()).append("\" ");
-				additional.append("rtime = \"").append(res.getRoutingTime()).append("\" ");
+				if (res.getRoutingTime() > 0) {
+					additional.append("rspeed = \"")
+							.append((int) Math.round(res.getDistance() / res.getRoutingTime() * 3.6)).append("\" ");
+				}
+				
+//				additional.append("rtime = \"").append(res.getRoutingTime()).append("\" ");
 				additional.append("name = \"").append(name).append("\" ");
 //				float ms = res.getSegmentSpeed();
 				float ms = res.getObject().getMaximumSpeed(res.isForwardDirection());
 				if(ms > 0) {
-					additional.append("maxspeed = \"").append(ms * 3.6f).append("\" ").append(res.getObject().getHighway()).append(" ");
+					additional.append("maxspeed = \"").append((int) Math.round(ms * 3.6f)).append("\" ").append(res.getObject().getHighway()).append(" ");
 				}
 				additional.append("distance = \"").append(res.getDistance()).append("\" ");
 				if (res.getTurnType() != null) {
@@ -600,6 +616,52 @@ public class RouteResultPreparation {
 		}
 		println("</test>");
 		println(msg);
+		
+		
+//		calculateStatistics(result);
+	}
+
+	private void calculateStatistics(List<RouteSegmentResult> result) {
+		InputStream is = RenderingRulesStorage.class.getResourceAsStream("default.render.xml");
+		final Map<String, String> renderingConstants = new LinkedHashMap<String, String>();
+		try {
+			InputStream pis = RenderingRulesStorage.class.getResourceAsStream("default.render.xml");
+			try {
+				XmlPullParser parser = PlatformUtil.newXMLPullParser();
+				parser.setInput(pis, "UTF-8");
+				int tok;
+				while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
+					if (tok == XmlPullParser.START_TAG) {
+						String tagName = parser.getName();
+						if (tagName.equals("renderingConstant")) {
+							if (!renderingConstants.containsKey(parser.getAttributeValue("", "name"))) {
+								renderingConstants.put(parser.getAttributeValue("", "name"), 
+										parser.getAttributeValue("", "value"));
+							}
+						}
+					}
+				}
+			} finally {
+				pis.close();
+			}
+			RenderingRulesStorage rrs = new RenderingRulesStorage("default", renderingConstants);
+			rrs.parseRulesFromXmlInputStream(is, new RenderingRulesStorageResolver() {
+				
+				@Override
+				public RenderingRulesStorage resolve(String name, RenderingRulesStorageResolver ref)
+						throws XmlPullParserException, IOException {
+					throw new UnsupportedOperationException();
+				}
+			});
+			RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
+			List<RouteStatistics> rsr = RouteStatisticsHelper.calculateRouteStatistic(result, null, rrs, null, req);
+			for(RouteStatistics r : rsr) {
+				System.out.println(r);
+			}
+		} catch (Exception e) {
+			throw new IllegalStateException(e.getMessage(), e);
+		}
+		
 	}
 
 	private void printAdditionalPointInfo(RouteSegmentResult res) {
@@ -964,7 +1026,7 @@ public class RouteResultPreparation {
 			return MAX_SPEAK_PRIORITY;
 		}
 		if (highway.endsWith("_link")  || highway.endsWith("unclassified") || highway.endsWith("road") 
-				|| highway.endsWith("living_street") || highway.endsWith("residential") )  {
+				|| highway.endsWith("living_street") || highway.endsWith("residential") || highway.endsWith("tertiary") )  {
 			return 1;
 		}
 		return 0;
@@ -1025,14 +1087,15 @@ public class RouteResultPreparation {
 				t = attachKeepLeftInfoAndLanes(leftSide, prev, rr);
 			}
 			if (t != null) {
-				t.setTurnAngle((float) -mpi);
+				t.setTurnAngle((float) - mpi);
 			}
 		}
 		return t;
 	}
 
-	private int[] getTurnLanesInfo(RouteSegmentResult prevSegm, int mainTurnType) {		String turnLanes = getTurnLanesString(prevSegm);
-		int[] lanesArray ;
+	private int[] getTurnLanesInfo(RouteSegmentResult prevSegm, int mainTurnType) {
+		String turnLanes = getTurnLanesString(prevSegm);
+		int[] lanesArray;
 		if (turnLanes == null) {
 			if(prevSegm.getTurnType() != null && prevSegm.getTurnType().getLanes() != null
 					&& prevSegm.getDistance() < 100) {
@@ -1193,7 +1256,7 @@ public class RouteResultPreparation {
 			if (turn == TurnType.TU || sturn == TurnType.TU || tturn == TurnType.TU) {
 				possiblyLeftTurn = true;
 			}
-			if (turn == TurnType.TRU || sturn == TurnType.TRU || sturn == TurnType.TRU) {
+			if (turn == TurnType.TRU || sturn == TurnType.TRU || tturn == TurnType.TRU) {
 				possiblyRightTurn = true;
 			}
 		}
@@ -1631,7 +1694,7 @@ public class RouteResultPreparation {
 	}
 
 	
-	private void attachRoadSegments(RoutingContext ctx, List<RouteSegmentResult> result, int routeInd, int pointInd, boolean plus) throws IOException {
+	private void attachRoadSegments(RoutingContext ctx, List<RouteSegmentResult> result, int routeInd, int pointInd, boolean plus, boolean recalculation) throws IOException {
 		RouteSegmentResult rr = result.get(routeInd);
 		RouteDataObject road = rr.getObject();
 		long nextL = pointInd < road.getPointsLength() - 1 ? getPoint(road, pointInd + 1) : 0;
@@ -1676,9 +1739,12 @@ public class RouteResultPreparation {
 				public void remove() {
 				}
 			};	
-		} else {
+		} else if (recalculation) {
 			RouteSegment rt = ctx.loadRouteSegment(road.getPoint31XTile(pointInd), road.getPoint31YTile(pointInd), ctx.config.memoryLimitation);
 			it = rt == null ? null : rt.getIterator();
+		} else {
+			// Here we assume that all segments should be attached by native
+			it = null;
 		}
 		// try to attach all segments except with current id
 		while (it != null && it.hasNext()) {

@@ -12,15 +12,9 @@ import org.mozilla.javascript.NativeJSON;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public class JSCommandBuilder extends CommandBuilder {
 
@@ -61,13 +55,18 @@ public class JSCommandBuilder extends CommandBuilder {
     }
 
     private JSCommandBuilder addCommand(String name, Object... args){
-        Object obj = jsScope.get(name);
+        addToCommandList(name, args);
+	    Object obj = jsScope.get(name);
         if (obj instanceof Function) {
             Function jsFunction = (Function) obj;
             Object jsResult = jsFunction.call(jsContext, jsScope, jsScope, args);
             listStruct.add(Context.toString(jsResult));
         }
         return this;
+    }
+
+    private boolean isJSCommandExists(String name) {
+        return jsScope.get(name) instanceof Function;
     }
 
     public JSCommandBuilder goAhead(){
@@ -118,6 +117,16 @@ public class JSCommandBuilder extends CommandBuilder {
 
     public JSCommandBuilder turn(String param, double dist, StreetName streetName) {
         return addCommand(C_TURN, param, dist, convertStreetName(streetName));
+    }
+
+    public JSCommandBuilder takeExit(String turnType, String exitString, int exitInt, StreetName streetName) {
+        return takeExit(turnType, -1, exitString, exitInt, streetName);
+    }
+
+    public JSCommandBuilder takeExit(String turnType, double dist, String exitString, int exitInt, StreetName streetName) {
+        return isJSCommandExists(C_TAKE_EXIT) ?
+                addCommand(C_TAKE_EXIT, turnType, dist, exitString, exitInt, convertStreetName(streetName)) :
+                addCommand(C_TURN, turnType, dist, convertStreetName(streetName));
     }
 
     /**
@@ -216,8 +225,8 @@ public class JSCommandBuilder extends CommandBuilder {
     }
 
     @Override
-    public void play(){
-        this.commandPlayer.playCommands(this);
+    public List<String> play(){
+        return this.commandPlayer.playCommands(this);
     }
 
     @Override

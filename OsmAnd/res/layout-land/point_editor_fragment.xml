@@ -10,7 +10,7 @@
         android:id="@+id/background_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/ctx_menu_info_view_bg"
+        android:background="?attr/activity_background_color"
         android:clickable="true"
         android:orientation="vertical">
 
@@ -30,7 +30,7 @@
             android:id="@+id/editor_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?attr/ctx_menu_info_view_bg"
+            android:background="?attr/activity_background_color"
             android:fillViewport="true">
 
             <LinearLayout
@@ -237,7 +237,7 @@
             android:id="@+id/buttons_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/ctx_menu_info_view_bg"
+            android:background="?attr/activity_background_color"
             android:orientation="horizontal">
 
             <Button

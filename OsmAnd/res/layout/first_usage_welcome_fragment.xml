@@ -11,7 +11,7 @@
         android:id="@+id/background_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg_color_dark"
+        android:background="@color/list_background_color_dark"
         android:scaleType="centerCrop"/>
 
     <LinearLayout
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/first_usage_title_margin_bottom"
-            android:background="@drawable/btn_round_blue"
+            android:background="@drawable/btn_round_light"
             android:padding="14dp"
             android:text="@string/get_started"
             android:textColor="@color/color_white"/>

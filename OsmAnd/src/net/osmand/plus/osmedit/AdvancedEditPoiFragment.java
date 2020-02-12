@@ -1,7 +1,6 @@
 package net.osmand.plus.osmedit;
 
-import static net.osmand.plus.osmedit.EditPoiDialogFragment.AMENITY_TEXT_LENGTH;
-
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import net.osmand.PlatformUtil;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -26,6 +27,7 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.OSMSettings;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.util.Algorithms;
@@ -36,6 +38,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+
+import static net.osmand.plus.osmedit.EditPoiDialogFragment.AMENITY_TEXT_LENGTH;
 
 public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 		implements EditPoiDialogFragment.OnFragmentActivatedListener {
@@ -58,17 +62,19 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final View view = inflater.inflate(R.layout.fragment_edit_poi_advanced, container, false);
+		int themeRes = requireMyApplication().getSettings().isLightActionBar() ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
+		Context themedContext = new ContextThemeWrapper(getContext(), themeRes);
+		final View view = inflater.cloneInContext(themedContext).inflate(R.layout.fragment_edit_poi_advanced, container, false);
 
-		deleteDrawable = getPaintedContentIcon(R.drawable.ic_action_remove_dark,
-				getActivity().getResources().getColor(R.color.dash_search_icon_dark));
+		OsmandApplication app = requireMyApplication();
+		deleteDrawable = app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark, app.getSettings().isLightContent());
 		nameTextView = (TextView) view.findViewById(R.id.nameTextView);
 		amenityTagTextView = (TextView) view.findViewById(R.id.amenityTagTextView);
 		amenityTextView = (TextView) view.findViewById(R.id.amenityTextView);
 		LinearLayout editTagsLineaLayout =
 				(LinearLayout) view.findViewById(R.id.editTagsList);
 
-		final MapPoiTypes mapPoiTypes = getMyApplication().getPoiTypes();
+		final MapPoiTypes mapPoiTypes = app.getPoiTypes();
 		mAdapter = new TagAdapterLinearLayoutHack(editTagsLineaLayout, getData());
 		// It is possible to not restart initialization every time, and probably move initialization to appInit
 		Map<String, PoiType> translatedTypes = getData().getAllTranslatedSubTypes();

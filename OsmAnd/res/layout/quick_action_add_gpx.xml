@@ -75,7 +75,7 @@
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="2dp"
                     android:scaleType="centerInside"
-                    android:tint="?attr/primary_icon_color"
+                    android:tint="?attr/default_icon_color"
                     android:src="@drawable/ic_action_fav_dark"/>
 
             </LinearLayout>
@@ -150,7 +150,7 @@
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="2dp"
                     android:scaleType="centerInside"
-                    android:tint="?attr/primary_icon_color"
+                    android:tint="?attr/default_icon_color"
                     android:src="@drawable/ic_action_folder"/>
 
             </LinearLayout>

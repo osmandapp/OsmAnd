@@ -17,9 +17,12 @@ import net.osmand.plus.parkingpoint.ParkingAction;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.quickaction.actions.AddOSMBugAction;
 import net.osmand.plus.quickaction.actions.AddPOIAction;
+import net.osmand.plus.quickaction.actions.ContourLinesAction;
+import net.osmand.plus.quickaction.actions.HillshadeAction;
 import net.osmand.plus.quickaction.actions.MapSourceAction;
 import net.osmand.plus.quickaction.actions.MapStyleAction;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -108,6 +111,14 @@ public class QuickActionRegistry {
 					skip = true;
 				}
 				if (action.type == AddOSMBugAction.TYPE) {
+					skip = true;
+				}
+			}
+			if (OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null) {
+				if (action.type == ContourLinesAction.TYPE) {
+					skip = true;
+				}
+				if (action.type == HillshadeAction.TYPE) {
 					skip = true;
 				}
 			}

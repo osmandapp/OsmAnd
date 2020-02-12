@@ -2,6 +2,7 @@ package net.osmand.plus.mapmarkers;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
@@ -147,7 +149,9 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		View mainView = inflater.inflate(R.layout.fragment_map_markers_dialog, container);
 
 		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.map_markers_toolbar);
-		toolbar.setNavigationIcon(getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back));
+		Drawable icArrowBack = getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back, 
+				lightTheme ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark);
+		toolbar.setNavigationIcon(icArrowBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -163,13 +167,13 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		viewPager.setAdapter(adapter);
 
 		progressBar = (ProgressBar) mainView.findViewById(R.id.progress_bar);
-
+		
+		TextView toolbarTitle = mainView.findViewById(R.id.map_markers_toolbar_title);
 		bottomNav = mainView.findViewById(R.id.map_markers_bottom_navigation);
 		BottomNavigationViewHelper.disableShiftMode(bottomNav);
-		if (!lightTheme) {
-			bottomNav.setItemIconTintList(ContextCompat.getColorStateList(getContext(), R.color.bottom_navigation_color_selector_dark));
-			bottomNav.setItemTextColor(ContextCompat.getColorStateList(getContext(), R.color.bottom_navigation_color_selector_dark));
-		}
+		toolbarTitle.setTextColor(ContextCompat.getColor(getContext(), lightTheme ? R.color.active_buttons_and_links_text_light : R.color.text_color_primary_dark));
+		bottomNav.setItemIconTintList(ContextCompat.getColorStateList(getContext(), lightTheme ? R.color.bottom_navigation_color_selector_light : R.color.bottom_navigation_color_selector_dark));
+		bottomNav.setItemTextColor(ContextCompat.getColorStateList(getContext(), lightTheme ? R.color.bottom_navigation_color_selector_light : R.color.bottom_navigation_color_selector_dark));
 		if (groupIdToOpen != null) {
 			activeFragment.stopLocationUpdate();
 			groupsFragment.startLocationUpdate();
@@ -180,22 +184,22 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 			@Override
 			public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-				switch (menuItem.getItemId()) {
-					case R.id.action_active:
-						setupLocationUpdate(true, false);
-						setupActiveFragment(ACTIVE_MARKERS_POSITION);
-						return true;
-					case R.id.action_groups:
-						setupLocationUpdate(false, true);
-						setupActiveFragment(GROUPS_POSITION);
-						return true;
-					case R.id.action_history:
-						setupLocationUpdate(false, false);
-						setupActiveFragment(HISTORY_MARKERS_POSITION);
-						return true;
-					case R.id.action_more:
-						showOptionsMenuFragment();
-						return true;
+				int i = menuItem.getItemId();
+				if (i == R.id.action_active) {
+					setupLocationUpdate(true, false);
+					setupActiveFragment(ACTIVE_MARKERS_POSITION);
+					return true;
+				} else if (i == R.id.action_groups) {
+					setupLocationUpdate(false, true);
+					setupActiveFragment(GROUPS_POSITION);
+					return true;
+				} else if (i == R.id.action_history) {
+					setupLocationUpdate(false, false);
+					setupActiveFragment(HISTORY_MARKERS_POSITION);
+					return true;
+				} else if (i == R.id.action_more) {
+					showOptionsMenuFragment();
+					return true;
 				}
 				return false;
 			}
@@ -445,7 +449,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 									}
 								}
 							});
-					AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);
+					AndroidUtils.setSnackbarTextColor(snackbar, R.color.active_color_primary_dark);
 					snackbar.show();
 				}
 			}
@@ -479,7 +483,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 			@Override
 			public void saveGpx(final String fileName) {
 				final String gpxPath = mapActivity.getMyApplication().getMapMarkersHelper().generateGpx(fileName);
-				snackbar = Snackbar.make(viewPager, fileName + " " + getString(R.string.is_saved) + ".", Snackbar.LENGTH_LONG)
+				snackbar = Snackbar.make(viewPager, String.format(getString(R.string.shared_string_file_is_saved), fileName) + ".", Snackbar.LENGTH_LONG)
 						.setAction(R.string.shared_string_show, new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
@@ -490,7 +494,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 								startActivity(intent);
 							}
 						});
-				AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);
+				AndroidUtils.setSnackbarTextColor(snackbar, R.color.active_color_primary_dark);
 				snackbar.show();
 			}
 		};

@@ -33,7 +33,7 @@
 				android:layout_marginStart="@dimen/list_content_padding"
 				android:layout_marginTop="@dimen/wikivoyage_start_editing_card_text_image_padding"
 				android:layout_weight="1"
-				android:textColor="@color/primary_text_dark"
+				android:textColor="@color/text_color_tab_active_dark"
 				android:textSize="@dimen/default_list_text_size"
 				tools:text="@string/start_editing_card_image_text" />
 
@@ -48,6 +48,7 @@
 
 		<TextView
 			android:id="@+id/description"
+			android:textColor="?android:textColorPrimary"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:lineSpacingMultiplier="@dimen/text_button_line_spacing_multiplier"

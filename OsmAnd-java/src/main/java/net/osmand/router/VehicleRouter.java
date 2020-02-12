@@ -62,14 +62,21 @@ public interface VehicleRouter {
 	 * 
 	 * @return minimal speed at road in m/s
 	 */
-	public float getMinDefaultSpeed();
+	public float getDefaultSpeed();
+
+	/**
+	 * Used as minimal threshold of default speed
+	 *
+	 * @return minimal speed at road in m/s
+	 */
+	public float getMinSpeed();
 
 	/**
 	 * Used for A* routing to predict h(x) : it should be great any g(x)
 	 * 
 	 * @return maximum speed to calculate shortest distance
 	 */
-	public float getMaxDefaultSpeed();
+	public float getMaxSpeed();
 	
 	/**
 	 * aware of road restrictions

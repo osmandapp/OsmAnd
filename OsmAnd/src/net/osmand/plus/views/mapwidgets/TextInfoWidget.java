@@ -1,11 +1,9 @@
 package net.osmand.plus.views.mapwidgets;
 
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import android.app.Activity;
 import android.graphics.Paint.Style;
 import android.graphics.Typeface;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -15,6 +13,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 
 public class TextInfoWidget  {
 
@@ -35,10 +38,12 @@ public class TextInfoWidget  {
 	private boolean isNight;
 	private ViewGroup bottomLayout;
 
+	private Integer cachedMetricSystem = null;
+	private Integer cachedAngularUnits = null;
 
 	public TextInfoWidget(Activity activity) {
 		app = (OsmandApplication) activity.getApplication();
-		view = activity.getLayoutInflater().inflate(R.layout.map_hud_widget, null);
+		view = UiUtilities.getInflater(activity, isNight).inflate(R.layout.map_hud_widget, null);
 		bottomLayout = (ViewGroup) view.findViewById(R.id.widget_bottom_layout);
 		topImageView = (ImageView) view.findViewById(R.id.widget_top_icon);
 		topTextView = (TextView) view.findViewById(R.id.widget_top_icon_text);
@@ -69,6 +74,10 @@ public class TextInfoWidget  {
 	public void setImageDrawable(Drawable imageDrawable, boolean gone) {
 		if(imageDrawable != null) {
 			imageView.setImageDrawable(imageDrawable);
+			Object anim = imageView.getDrawable();
+			if (anim instanceof AnimationDrawable) {
+				((AnimationDrawable) anim).start();
+			}
 			imageView.setVisibility(View.VISIBLE);
 		} else {
 			imageView.setVisibility(gone ? View.GONE : View.INVISIBLE);
@@ -181,6 +190,29 @@ public class TextInfoWidget  {
 	}
 
 	public boolean updateInfo(DrawSettings drawSettings) {
+		return false;
+	}
+
+	public boolean isUpdateNeeded() {
+		boolean res = false;
+		if (isMetricSystemDepended()) {
+			int metricSystem = app.getSettings().METRIC_SYSTEM.get().ordinal();
+			res |= cachedMetricSystem == null || cachedMetricSystem != metricSystem;
+			cachedMetricSystem = metricSystem;
+		}
+		if (isAngularUnitsDepended()) {
+			int angularUnits = app.getSettings().ANGULAR_UNITS.get().ordinal();
+			res |= cachedAngularUnits == null || cachedAngularUnits != angularUnits;
+			cachedAngularUnits = angularUnits;
+		}
+		return res;
+	}
+
+	public boolean isMetricSystemDepended() {
+		return false;
+	}
+
+	public boolean isAngularUnitsDepended() {
 		return false;
 	}
 

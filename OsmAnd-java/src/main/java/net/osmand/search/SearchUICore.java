@@ -39,6 +39,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -218,7 +219,8 @@ public class SearchUICore {
 		}
 
 		public boolean sameSearchResult(SearchResult r1, SearchResult r2) {
-			if (r1.location != null && r2.location != null) {
+			if (r1.location != null && r2.location != null &&
+					!ObjectType.isTopVisible(r1.objectType) && !ObjectType.isTopVisible(r2.objectType)) {
 				if (r1.objectType == r2.objectType) {
 					if (r1.objectType == ObjectType.STREET) {
 						Street st1 = (Street) r1.object;
@@ -340,6 +342,14 @@ public class SearchUICore {
 		for (SearchCoreAPI capi : apis) {
 			if (capi instanceof SearchAmenityTypesAPI) {
 				((SearchAmenityTypesAPI) capi).addCustomFilter(poiFilter, priority);
+			}
+		}
+	}
+	
+	public void setFilterOrders(Map<String, Integer> filterOrders) {
+		for (SearchCoreAPI capi : apis) {
+			if (capi instanceof SearchAmenityTypesAPI) {
+				((SearchAmenityTypesAPI) capi).setFilterOrders(filterOrders);
 			}
 		}
 	}
@@ -702,6 +712,14 @@ public class SearchUICore {
 						break;
 					}
 				}
+				if (Algorithms.isEmpty(object.alternateName) && object.object instanceof Amenity) {
+					for (String value : ((Amenity) object.object).getAdditionalInfo().values()) {
+						if (phrase.getNameStringMatcher().matches(value)) {
+							object.alternateName = value;
+							break;
+						}
+					}
+				}
 			}
 			if (Algorithms.isEmpty(object.localeName) && object.alternateName != null) {
 				object.localeName = object.alternateName;
@@ -844,8 +862,8 @@ public class SearchUICore {
 			boolean topVisible1 = ObjectType.isTopVisible(o1.objectType);
 			boolean topVisible2 = ObjectType.isTopVisible(o2.objectType);
 			if ((!topVisible1 && !topVisible2) || (topVisible1 && topVisible2)) {
-				if (o1.isUnknownPhraseMatches() != o2.isUnknownPhraseMatches()) {
-					return o1.isUnknownPhraseMatches() ? -1 : 1;
+				if (o1.getUnknownPhraseMatchWeight() != o2.getUnknownPhraseMatchWeight()) {
+					return -Double.compare(o1.getUnknownPhraseMatchWeight(), o2.getUnknownPhraseMatchWeight());
 				} else if (o1.getFoundWordCount() != o2.getFoundWordCount()) {
 					return -Algorithms.compare(o1.getFoundWordCount(), o2.getFoundWordCount());
 				}
@@ -863,9 +881,11 @@ public class SearchUICore {
 			if (st1 != st2) {
 				return Algorithms.compare(st1, st2);
 			}
+			String localeName1 = o1.localeName == null ? "" : o1.localeName;
+			String localeName2 = o2.localeName == null ? "" : o2.localeName;
 			if (o1.parentSearchResult != null && o2.parentSearchResult != null) {
 				if (o1.parentSearchResult == o2.parentSearchResult) {
-					int cmp = collator.compare(o1.localeName, o2.localeName);
+					int cmp = collator.compare(localeName1, localeName2);
 					if (cmp != 0) {
 						return cmp;
 					}
@@ -874,7 +894,7 @@ public class SearchUICore {
 				double s2 = o2.getSearchDistance(loc, 1);
 				return Double.compare(s1, s2);
 			}
-			int cmp = collator.compare(o1.localeName, o2.localeName);
+			int cmp = collator.compare(localeName1, localeName2);
 			if (cmp != 0) {
 				return cmp;
 			}
@@ -884,12 +904,12 @@ public class SearchUICore {
 				Amenity a2 = (Amenity) o2.object;
 				String type1 = a1.getType().getKeyName();
 				String type2 = a2.getType().getKeyName();
-				String subType1 = a1.getSubType();
-				String subType2 = a2.getSubType();
 				cmp = collator.compare(type1, type2);
 				if (cmp != 0) {
 					return cmp;
 				}
+				String subType1 = a1.getSubType() == null ? "" : a1.getSubType();
+				String subType2 = a2.getSubType() == null ? "" : a2.getSubType();
 				cmp = collator.compare(subType1, subType2);
 				if (cmp != 0) {
 					return cmp;

@@ -299,7 +299,7 @@ public class MapAlgorithms {
 	 * count the intersections when going from lat, lon to outside the ring
 	 * @param polyNodes2 
 	 */
-	private static int countIntersections(Collection<Node> polyNodes, double latitude, double longitude) {
+	public static int countIntersections(Collection<Node> polyNodes, double latitude, double longitude) {
 		int intersections = 0;
 		if (polyNodes.size() == 0)
 			return 0;

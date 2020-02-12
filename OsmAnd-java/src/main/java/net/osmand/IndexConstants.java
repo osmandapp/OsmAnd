@@ -40,7 +40,10 @@ public class IndexConstants {
 	public static final String FONT_INDEX_EXT = ".otf"; //$NON-NLS-1$
 	public static final String FONT_INDEX_EXT_ZIP = ".otf.zip"; //$NON-NLS-1$
 
+	public static final String OSMAND_SETTINGS_FILE_EXT = ".osf";
 	
+	public static final String ROUTING_FILE_EXT = ".xml";
+
 	public static final String RENDERER_INDEX_EXT = ".render.xml"; //$NON-NLS-1$
 	
 	public final static String POI_TABLE = "poi"; //$NON-NLS-1$
@@ -69,4 +72,5 @@ public class IndexConstants {
 	public static final String ROUTING_XML_FILE= "routing.xml";
 	public static final String SETTINGS_DIR = "settings/"; //$NON-NLS-1$
 	public static final String TEMP_DIR = "temp/";
+	public static final String ROUTING_PROFILES_DIR = "routing/";
 }

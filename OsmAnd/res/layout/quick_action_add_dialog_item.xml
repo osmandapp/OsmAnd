@@ -19,7 +19,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginRight="16dp"
         android:scaleType="centerInside"
-        android:tint="?attr/primary_icon_color"
+        android:tint="?attr/default_icon_color"
         android:src="@drawable/ic_action_flag_dark" />
 
     <TextView

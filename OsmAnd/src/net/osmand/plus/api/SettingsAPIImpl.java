@@ -28,7 +28,13 @@ public class SettingsAPIImpl implements SettingsAPI {
 				edit.remove(key);
 				return this;
 			}
-			
+
+			@Override
+			public SettingsEditor clear() {
+				edit.clear();
+				return this;
+			}
+
 			@Override
 			public SettingsEditor putString(String key, String value) {
 				edit.putString(key, value);

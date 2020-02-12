@@ -2,10 +2,12 @@ package net.osmand.plus.search;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
@@ -21,9 +23,9 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.concurrent.ExecutionException;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -57,7 +59,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 	private TextView barTitle;
 	private TextView barButton;
 	private boolean editMode;
-
+	private boolean nightMode;
 
 	public QuickSearchCustomPoiFragment() {
 	}
@@ -69,10 +71,8 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		boolean isLightTheme =
-				getMyApplication().getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
-		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
-		setStyle(STYLE_NO_FRAME, themeId);
+		this.nightMode = getMyApplication().getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_DARK_THEME;
+		setStyle(STYLE_NO_FRAME, nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
 	}
 
 	@Override
@@ -97,7 +97,9 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		view = inflater.inflate(R.layout.search_custom_poi, container, false);
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark));
+		Drawable icClose = app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark,
+				nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light);
+		toolbar.setNavigationIcon(icClose);
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -105,6 +107,8 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 				dismiss();
 			}
 		});
+		toolbar.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_color_dark : R.color.app_bar_color_light));
+		toolbar.setTitleTextColor(ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light));
 
 		TextView title = (TextView) view.findViewById(R.id.title);
 		if (editMode) {
@@ -113,8 +117,8 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 
 		listView = (ListView) view.findViewById(android.R.id.list);
 		listView.setBackgroundColor(getResources().getColor(
-				app.getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
-						: R.color.ctx_menu_info_view_bg_dark));
+				app.getSettings().isLightContent() ? R.color.activity_background_color_light
+						: R.color.activity_background_color_dark));
 
 		View header = getLayoutInflater(savedInstanceState).inflate(R.layout.list_shadow_header, null);
 		listView.addHeaderView(header, null, false);
@@ -247,6 +251,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 				AppCompatTextView titleView = (AppCompatTextView) row.findViewById(R.id.title);
 				AppCompatTextView descView = (AppCompatTextView) row.findViewById(R.id.description);
 				SwitchCompat check = (SwitchCompat) row.findViewById(R.id.toggle_item);
+				UiUtilities.setupCompoundButton(check, nightMode, UiUtilities.CompoundButtonType.GLOBAL);
 
 				boolean categorySelected = filter.isTypeAccepted(category);
 				UiUtilities ic = app.getUIUtilities();
@@ -261,8 +266,8 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 					iconView.setImageDrawable(null);
 				}
 				secondaryIconView.setImageDrawable(
-						ic.getIcon(R.drawable.ic_action_additional_option,
-								app.getSettings().isLightContent() ? R.color.icon_color_light : 0));
+						ic.getIcon(R.drawable.ic_action_additional_option, nightMode 
+								? R.color.icon_color_default_dark : R.color.icon_color_default_light));
 				check.setOnCheckedChangeListener(null);
 				check.setChecked(filter.isTypeAccepted(category));
 				String textString = category.getTranslation();
@@ -381,8 +386,16 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 				.inflate(R.layout.subcategories_dialog_title, null);
 		TextView titleTextView = (TextView) titleView.findViewById(R.id.title);
 		titleTextView.setText(poiCategory.getTranslation());
-		SwitchCompat check = (SwitchCompat) titleView.findViewById(R.id.check);
-		check.setChecked(allSelected);
+		View toggleButtonContainer = titleView.findViewById(R.id.buttonContainer);
+		final CompoundButton selectAllToggle = (CompoundButton) toggleButtonContainer.findViewById(R.id.check);
+		UiUtilities.setupCompoundButton(selectAllToggle, nightMode, UiUtilities.CompoundButtonType.GLOBAL);
+		toggleButtonContainer.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				selectAllToggle.setChecked(!selectAllToggle.isChecked());
+			}
+		});
+		selectAllToggle.setChecked(allSelected);
 		builder.setCustomTitle(titleView);
 
 		builder.setCancelable(true);
@@ -417,17 +430,20 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 						listView.setSelectionFromTop(index, top);
 					}
 				});
-
-		builder.setMultiChoiceItems(visibleNames, selected,
-				new DialogInterface.OnMultiChoiceClickListener() {
-
+		int activeColor = ContextCompat.getColor(getMyApplication(), nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		final DialogListItemAdapter adapter = DialogListItemAdapter.createMultiChoiceAdapter(visibleNames,
+				nightMode, selected, getMyApplication(), activeColor, themeRes, new View.OnClickListener() {
 					@Override
-					public void onClick(DialogInterface dialog, int item, boolean isChecked) {
-						selected[item] = isChecked;
+					public void onClick(View v) {
+						int which = (int) v.getTag();
+						selected[which] = !selected[which];
 					}
 				});
+		builder.setAdapter(adapter, null);
 		final AlertDialog dialog = builder.show();
-		check.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+		adapter.setDialog(dialog);
+		selectAllToggle.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (isChecked) {
@@ -438,6 +454,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 				for (int i = 0; i < selected.length; i++) {
 					dialog.getListView().setItemChecked(i, selected[i]);
 				}
+				adapter.notifyDataSetChanged();
 			}
 		});
 	}

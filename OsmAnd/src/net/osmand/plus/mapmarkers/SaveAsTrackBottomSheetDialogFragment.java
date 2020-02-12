@@ -61,11 +61,13 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 		final boolean nightMode = !app.getSettings().isLightContent();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		final int textPrimaryColor = nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_save_as_track_bottom_sheet_dialog, container);
 		LinearLayout contentLayout = (LinearLayout) mainView.findViewById(R.id.content_linear_layout);
 		TextView titleTv = (TextView) mainView.findViewById(R.id.save_as_track_title);
 		titleTv.setText(openFromCoordinateInput ? R.string.coord_input_save_as_track : R.string.marker_save_as_track);
+		titleTv.setTextColor(ContextCompat.getColor(getContext(), textPrimaryColor));
 		TextView descriptionTv = (TextView) mainView.findViewById(R.id.save_as_track_description);
 		descriptionTv.setText(openFromCoordinateInput ? getString(R.string.coord_input_save_as_track_descr, number) : getString(R.string.marker_save_as_track_descr));
 		int layoutRes;
@@ -83,7 +85,7 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 			if (textBox instanceof TextInputLayout) {
 				((TextInputLayout) textBox).setHintTextAppearance(R.style.TextAppearance_App_DarkTextInputLayout);
 			} else if (textBox instanceof OsmandTextFieldBoxes) {
-				((OsmandTextFieldBoxes) textBox).setPrimaryColor(ContextCompat.getColor(app, R.color.color_dialog_buttons_dark));
+				((OsmandTextFieldBoxes) textBox).setPrimaryColor(ContextCompat.getColor(app, R.color.active_color_primary_dark));
 			}
 		}
 
@@ -102,6 +104,7 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 		}
 		final EditText nameEditText = (EditText) mainView.findViewById(R.id.name_edit_text);
 		nameEditText.setText(displayedName);
+		nameEditText.setTextColor(ContextCompat.getColor(getContext(), textPrimaryColor));
 		if (textBox instanceof OsmandTextFieldBoxes) {
 			((OsmandTextFieldBoxes) textBox).activate(true);
 		}

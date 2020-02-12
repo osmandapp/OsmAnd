@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <LinearLayout
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -26,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
+            android:textColor="?android:textColorSecondary"
             tools:text="@string/device_memory"/>
 
         <TextView
@@ -33,6 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:textColor="?android:textColorSecondary"
             tools:text="@string/free"/>
     </LinearLayout>
 
@@ -43,7 +43,6 @@
         android:layout_height="20dp"
         android:progressDrawable="?attr/size_progress_bar"
         tools:progress="50"/>
-
 
 </LinearLayout>
 

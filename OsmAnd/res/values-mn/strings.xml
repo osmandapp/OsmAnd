@@ -1,3 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
     <string name="back_to_search">Гэр тайхар</string>
-    </resources>
+    <string name="rendering_attr_highway_class_road_name">Зам</string>
+    <string name="rendering_attr_highway_class_street_name">Гудамж</string>
+    <string name="routeInfo_road_types_name">замын төрөл</string>
+    <string name="search_street">Гудамж хайх</string>
+    <string name="search_no_results_feedback">илэрц алга</string>
+    <string name="download_all">Бүгдийг татах</string>
+    <string name="download_file">Файл татах</string>
+    <string name="wikivoyage_download_pics">Зураг татах</string>
+    <string name="delete_search_history">Хайсан түүхийг устгах</string>
+    <string name="restart_search">Дахин хайх</string>
+    <string name="srtm_menu_download_descr">татах</string>
+    <string name="do_not_send_anonymous_app_usage_desc">татах</string>
+    <string name="search_map_hint">Хот болон улс хайх</string>
+    <string name="custom_search">Чөлөөт хайлт</string>
+    <string name="coords_search">Координат хайх</string>
+</resources>
