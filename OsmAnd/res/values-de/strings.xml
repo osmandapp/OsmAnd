@@ -3466,9 +3466,6 @@ Lon %2$s</string>
     <string name="monitoring_min_speed">Mindesttempo</string>
     <string name="monitoring_min_accuracy">Minimale Genauigkeit</string>
     <string name="monitoring_min_distance">Minimale Verschiebung</string>
-    <string name="tracks_view_path">\'Menü → Meine Orte → Tracks\'</string>
-    <string name="multimedia_notes_view_path">\'Menü → Meine Orte → Notizen\'</string>
-    <string name="osm_edits_view_path">\'Menü → Meine Orte → OSM-Änderungen\'</string>
     <string name="reset_plugin_to_default">Plugin-Einstellungen auf Voreinstellung zurücksetzen</string>
     <string name="osm_authorization_success">Autorisierung ist erfolgreich</string>
     <string name="shared_string_available">Verfügbar</string>

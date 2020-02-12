@@ -3465,9 +3465,6 @@
     <string name="monitoring_min_speed">Найменша швидкість</string>
     <string name="monitoring_min_accuracy">Найменша точність</string>
     <string name="monitoring_min_distance">Найменше зміщення</string>
-    <string name="tracks_view_path">Меню - Мої місця - Треки</string>
-    <string name="multimedia_notes_view_path">Меню — Мої місця — Примітки</string>
-    <string name="osm_edits_view_path">Меню — Мої місця — OSM правки</string>
     <string name="reset_plugin_to_default">Скинути налаштування втулка до усталених</string>
     <string name="multimedia_rec_split_title">Розділений записувач</string>
     <string name="multimedia_use_system_camera">Використовувати системний застосунок</string>

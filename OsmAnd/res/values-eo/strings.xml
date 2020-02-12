@@ -3447,9 +3447,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="monitoring_min_speed">Minimuma rapido</string>
     <string name="monitoring_min_accuracy">Minimuma precizo</string>
     <string name="monitoring_min_distance">Minimuma delokiĝo</string>
-    <string name="tracks_view_path">menuo → miaj ejoj → spuroj</string>
-    <string name="multimedia_notes_view_path">menuo → mia ejoj → notoj</string>
-    <string name="osm_edits_view_path">menuo → miaj ejoj → OSM‑redaktoj</string>
     <string name="reset_plugin_to_default">Restarigi implicitajn agordojn de kromprogramo</string>
     <string name="multimedia_rec_split_title">Dividilo de registraĵoj</string>
     <string name="multimedia_use_system_camera">Uzi sisteman aplikaĵon</string>

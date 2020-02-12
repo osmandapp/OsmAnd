@@ -3474,9 +3474,6 @@ POIの更新は利用できません</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">ナビゲーションまたは移動中にアイコンが表示されます。</string>
     <string name="select_map_icon_descr">静止時にアイコンが表示されます</string>
-    <string name="tracks_view_path">メニュー — ブックマーク — 経路</string>
-    <string name="multimedia_notes_view_path">メニュー — ブックマーク — メモ</string>
-    <string name="osm_edits_view_path">メニュー — ブックマーク — OSM編集</string>
     <string name="reset_plugin_to_default">プラグイン設定を初期値に戻す</string>
     <string name="multimedia_rec_split_title">記録を分割</string>
     <string name="multimedia_use_system_camera">システムアプリを使用</string>

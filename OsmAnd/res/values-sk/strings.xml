@@ -3445,9 +3445,6 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="monitoring_min_speed">Minimálna rýchlosť</string>
     <string name="monitoring_min_accuracy">Minimálna presnosť</string>
     <string name="monitoring_min_distance">Minimálny posun</string>
-    <string name="tracks_view_path">Menu — Moje miesta — Stopy</string>
-    <string name="multimedia_notes_view_path">Menu — Moje miesta — Poznámky</string>
-    <string name="osm_edits_view_path">Menu — Moje miesta — Zmeny v OSM</string>
     <string name="reset_plugin_to_default">Resetovať modul do východzieho stavu</string>
     <string name="multimedia_rec_split_title">Rozdelenie nahrávania</string>
     <string name="multimedia_use_system_camera">Použiť systémovú aplikáciu</string>

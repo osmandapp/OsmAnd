@@ -3462,9 +3462,6 @@ Pôr do Sol: %2$s</string>
     <string name="monitoring_min_speed">Velocidade mínima</string>
     <string name="monitoring_min_accuracy">Precisão mínima</string>
     <string name="monitoring_min_distance">Deslocamento mínimo</string>
-    <string name="tracks_view_path">Menu - Meus lugares - Faixas</string>
-    <string name="multimedia_notes_view_path">Menu - Meus lugares - Notas</string>
-    <string name="osm_edits_view_path">Menu - Meus lugares - Edições OSM</string>
     <string name="reset_plugin_to_default">Redefinir as configurações do plug-in para o padrão</string>
     <string name="multimedia_rec_split_title">Divisão do gravador</string>
     <string name="multimedia_use_system_camera">Usar aplicativo do sistema</string>

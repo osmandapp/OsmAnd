@@ -3474,9 +3474,6 @@ Lon %2$s</string>
     <string name="monitoring_min_speed">Velocidad mínima</string>
     <string name="monitoring_min_accuracy">Precisión mínima</string>
     <string name="monitoring_min_distance">Desplazamiento mínimo</string>
-    <string name="tracks_view_path">Menú — Mis sitios — Trazas</string>
-    <string name="multimedia_notes_view_path">Menú — Mis sitios — Notas</string>
-    <string name="osm_edits_view_path">Menú — Mis sitios — Ediciones de OSM</string>
     <string name="reset_plugin_to_default">Restablecer ajustes del complemento a valores predefinidos</string>
     <string name="multimedia_rec_split_title">División de grabación</string>
     <string name="multimedia_use_system_camera">Usar la aplicación del sistema</string>
