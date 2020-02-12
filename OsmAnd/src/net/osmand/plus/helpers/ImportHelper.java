@@ -50,6 +50,8 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.settings.ImportDuplicatesFragment;
+import net.osmand.plus.settings.ImportSettingsFragment;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;

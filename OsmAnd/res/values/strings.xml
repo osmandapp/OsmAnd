@@ -11,6 +11,13 @@
 	Thx - Hardy
 
 -->
+    <string name="replace_all_desc">Current items will be replaced with items from the file</string>
+    <string name="replace_all">Replace all</string>
+    <string name="keep_both">Keep both</string>
+    <string name="keep_both_desc">Imported items will be added with prexif</string>
+    <string name="import_duplicates_description">OsmAnd already has elements with the same names as those imported.\n\nSelect an action.</string>
+    <string name="import_duplicates_title">Some items already exist</string>
+    <string name="select_data_to_import">Select the data to be imported.</string>
     <string name="routing_profile_direct_to">Direct-to-point</string>
     <string name="clear_recorded_data">Clear recorded data</string>
     <string name="release_3_6">
@@ -27,9 +34,6 @@
     • Added correct transliteration into the map of Japan\n\n
     • Added Antarctica map\n\n
     </string>
-    <string name="import_duplicates_description">OsmAnd already has elements with the same names as those imported.\n\nSelect an action.</string>
-    <string name="import_duplicates_title">Some items already exist</string>
-    <string name="select_data_to_import">Select the data to be imported.</string>
     <string name="copy_coordinates">Copy coordinates</string>
     <string name="reset_to_default_category_button_promo">Reset to default will reset sort order to the default state after installation.</string>
     <string name="use_system_screen_timeout">Use system screen timeout</string>
