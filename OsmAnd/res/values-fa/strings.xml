@@ -61,7 +61,7 @@
     <string name="shared_string_control_start">شروع</string>
     <string name="map_widget_av_notes">یادداشت‌های صوتی/تصویری</string>
     <string name="map_widget_audionotes">یادداشت‌های صوتی</string>
-    <string name="audionotes_plugin_description">با استفاده از افزونهٔ یادداشت صوتی/تصویری در حین سفر یادداشت‌های صوتی/عکسی/ویدئویی بگذارید. این کار با استفاده از دکمه‌ای بر روی نقشه امکان‌پذیر است. همچنین می‌توانید با استفاده از منوی زمینه برای هر نقطه روی نقشه یادداشت بگذارید.</string>
+    <string name="audionotes_plugin_description">در هنگام سفر یادداشت‌های صوتی/عکسی/ویدئویی بگذارید. این کار با استفاده از دکمه‌ای بر روی نقشه یا منوی زمینه برای هر نقطه روی نقشه امکان‌پذیر است.</string>
     <string name="audionotes_plugin_name">یادداشت‌های صوتی/تصویری</string>
     <string name="download_select_map_types">نقشه‌های دیگر</string>
     <string name="download_regular_maps">نقشهٔ استاندارد</string>
@@ -137,7 +137,7 @@
     <string name="osmand_parking_pm">ب.ظ.</string>
     <string name="osmand_parking_am">ق.ظ.</string>
     <string name="osmand_parking_position_name">جای پارک</string>
-    <string name="osmand_parking_plugin_description">با افزونهٔ «جای پارک» محل پارک‌کردن خودروی خود را ثبت کنید و اگر پارکینگ محدودیت زمانی دارد حساب زمان باقی‌مانده را داشته باشید. هم مکان و هم زمان در پیشخوان OsmAnd و نیز در ابزارک افزونه روی نقشه قابل‌رؤیت است. همچنین می‌توانید برای یادآوری، هشداری را به تقویم اندروید اضافه کنید.</string>
+    <string name="osmand_parking_plugin_description">محل پارک‌کردن خودروی خود را ثبت کنید و حساب زمان پارکینگ را داشته باشید. هم مکان و هم زمان در پیشخوان و نیز در ابزارکی روی نقشه قابل‌رؤیت است. همچنین می‌توانید هشداری را به‌عنوان یادآور به تقویم اندروید اضافه کنید.</string>
     <string name="osmand_parking_plugin_name">جای پارک</string>
     <string name="context_menu_item_add_parking_point">علامت‌گذاری جای پارک</string>
     <string name="context_menu_item_delete_parking_point">حذف نشانهٔ جای پارک</string>
@@ -623,7 +623,7 @@
     <string name="native_app_allocated_memory_descr">کل حافظهٔ اختصاص‌یافته به برنامه %1$s مگابایت (دالویک %2$s مگابایت، بقیه %3$s مگابایت).
 \nحافظهٔ نسبی %4$s مگابایت (حد آندروئید %5$s مگابایت، دالویک %6$s مگابایت).</string>
     <string name="global_app_allocated_memory_descr">حافظهٔ اختصاص‌یافته %1$s مگابایت (حد اندروید %2$s مگابایت، دالویک %3$s مگابایت).</string>
-    <string name="shared_location">مکان اشتراک‌گذاری‌شده</string>
+    <string name="shared_location">مکان هم‌رسانده</string>
     <string name="gpxup_trackable">قابل‌ردگیری</string>
     <string name="gpxup_identifiable">قابل‌شناسایی</string>
     <string name="navigate_point_format">قالب</string>
@@ -651,8 +651,8 @@
     <string name="update_poi_does_not_change_indexes">تغییراتی که به‌وسیلهٔ برنامه روی POIها انجام می‌دهید روی نقشه‌های دانلود‌شده تأثیری ندارد. تغییرات روی فایل دیگری در دستگاه ذخیره می‌شود.</string>
     <string name="show_current_gpx_title">نمایش رد جاری</string>
     <string name="fav_export_confirmation">قبلاً نقاط برگزیده را برون‌برد کرده‌اید و فایل آن وجود دارد. برون‌برد جدید را جایگزین آن می‌کنید؟</string>
-    <string name="osmand_development_plugin_description">به‌وسیلهٔ این افزونه می‌توانید تنظیمات توسعه‌ای و امکانات عیب‌یابی را مشاهده کنید؛ مانند شبیه‌سازی مسیریابی، آزمایش عملکرد رندر یا امتحان‌کردن پیام‌های گفتاری. 
-\nاین تنظیمات برای توسعه‌دهندگان فراهم شده است و به کار کاربران عادی نمی‌آید.</string>
+    <string name="osmand_development_plugin_description">تنظیمات توسعه‌ای و امکانات عیب‌یابی را مشاهده کنید؛ مانند شبیه‌سازی ناوبری، آزمایش عملکرد رندر یا امتحان‌کردن پیام‌های گفتاری. 
+\nاین تنظیمات برای توسعه‌دهندگان فراهم شده است و برای کاربردهای عادی برنامه لازم نیست.</string>
     <string name="animate_route_off">پایان شبیه‌سازی</string>
     <string name="animate_route">شروع شبیه‌سازی</string>
     <string name="where_am_i">من کجا هستم؟</string>
@@ -742,12 +742,12 @@
     <string name="yard">yd</string>
     <string name="foot">ft</string>
     <string name="mile">mi</string>
-    <string name="send_location_way_choose_title">اشتراک‌گذاری مکان با</string>
+    <string name="send_location_way_choose_title">هم‌رسانی مکان با</string>
     <string name="send_location_sms_pattern">موقعیت:
 \n%1$s
 \n%2$s</string>
     <string name="send_location">ارسال مکان</string>
-    <string name="context_menu_item_share_location">اشتراک‌گذاری مکان</string>
+    <string name="context_menu_item_share_location">هم‌رسانی مکان</string>
     <string name="indexing_address">در حال نمایه‌کردن نشانی…</string>
     <string name="indexing_map">در حال نمایه‌کردن نقشه…</string>
     <string name="indexing_poi">نمایه‌کردن POI‏…</string>
@@ -760,7 +760,7 @@
     <string name="speak_speed_limit">سرعت مجاز</string>
     <string name="speak_cameras">دوربین‌های کنترل سرعت</string>
     <string name="speak_traffic_warnings">هشدارهای ترافیکی</string>
-    <string name="osmand_distance_planning_plugin_description">این افزونه، یک ابزارک روی نقشه می‌گذارد که به‌وسیلهٔ آن می‌توانید با رسم مسیر روی نقشه برای سفر خود طرح بریزید یا مسافت بین نقاط را اندازه بگیرید. رسم مسیر با زدن روی صفحه امکان‌پذیر است. همچنین می‌توانید از فایل‌های GPX موجود استفاده کنید یا آن‌ها را تغییر دهید. کار نهایی نیز به‌صورت فایل GPX قابل ذخیره‌سازی است تا بعداً از آن برای راهنمایی استفاده کنید.</string>
+    <string name="osmand_distance_planning_plugin_description">با رسم مسیر روی نقشه برای سفر خود طرح بریزید یا مسافت بین نقاط را اندازه بگیرید. رسم مسیر با زدن روی صفحه امکان‌پذیر است. همچنین می‌توانید از فایل‌های GPX موجود استفاده کنید یا آن‌ها را تغییر دهید. کار نهایی نیز به‌صورت فایل GPX قابل ذخیره‌سازی است تا بعداً از آن برای راهنمایی استفاده کنید.</string>
     <string name="layer_hillshade">لایهٔ سایه‌روشن</string>
     <string name="index_name_openmaps">نقشه‌های اتحادیهٔ اروپا</string>
     <string name="download_hillshade_maps">سایه‌روشن‌ها</string>
@@ -975,20 +975,13 @@
 \n- راهنمای خط عبوری، نمایش محدودیت سرعت، راهنمای گفتاری با صدای انسانی یا ماشینی
 \n</string>
     <string name="asap">دراسرع‌وقت</string>
-    <string name="osmand_rastermaps_plugin_description">با استفاده از این افزونه به انواع مختلفی از نقشه‌های آنلاین دسترسی پیدا می‌کنید (اصطلاحاً tile یا raster)؛ مانند کاشی‌های پیش‌فرض اوپن‌استریت‌مپ (مانند مَپنیک)، تصاویر ماهواره‌ای، لایه‌های خاص مانند نقشه‌های آب‌و‌هوایی، هواشناسی، جغرافیایی، لایه‌های سایه‌روشن و... . 
+    <string name="osmand_rastermaps_plugin_description">به انواع مختلفی از نقشه‌های آنلاین (اصطلاحاً tile یا raster) دسترسی داشته باشید؛ مانند کاشی‌های پیش‌فرض اوپن‌استریت‌مپ (مانند مَپنیک)، تصاویر ماهواره‌ای، لایه‌های خاص مانند نقشه‌های آب‌و‌هوایی، هواشناسی، جغرافیایی، لایه‌های سایه‌روشن و... . 
 \n 
 \nهرکدام از این نقشه‌ها هم به‌عنوان نقشهٔ پایه و هم به‌عنوان لایهٔ رویی یا زیری برای لایهٔ پایه (مثلاً نقشه‌های آفلاین OsmAnd) قابل‌تنظیم هستند. برای اینکه لایهٔ زیری را نمایان‌تر کنید می‌توانید اجزای خاصی را در نقشه‌های بُرداری OsmAnd از طریق منوی «پیکربندی نقشه» مخفی کنید. 
 \n 
-\nنقشه‌ها مستقیماً از طریق منابع آنلاین قابل‌دریافت هستند. همچنین می‌توانید آن‌ها را به‌صورت پایگاه‌دادهٔ SQLite برای استفادهٔ آفلاین آماده کنید و سپس در پوشهٔ داده‌های OsmAnd قرار دهید. نرم‌افزارهای مختلفی برای انجام این کار وجود دارد.</string>
-    <string name="osmand_accessibility_description">این افزونه امکانات قابلیت‌دسترسی (accessibility) در دستگاهتان را مستقیماً در OsmAnd به کار می‌گیرد و تسهیلاتی را در اختیارتان می‌گذارد؛ مانند تنظیم‌کردن سرعت گفتار موتور صوتی، تبدیل متن به گفتار (مثل اعلام موقعیت شما)، پیمایش صفحه به‌کمک صفحهٔ جهت‌دار و استفاده از توپک برای تنظیم بزرگ‌نمایی.</string>
-    <string name="osm_editing_plugin_description">به‌وسیلهٔ این افزونه در تکمیل نقشهٔ OSM مشارکت کنید. مثلاً با ایجاد یا اصلاح نقاط توجه (POI)، ارسال فایل‌های GPXای که ضبط کرده‌اید و نوشتن یادداشت‌های OSMای. 
-\nدربارهٔ یادداشت‌های OSM: 
-\nhttps://wiki.osm.org/wiki/Fa:Notes 
-\n 
-\nجامعهٔ OSM در راستای پیشبرد پروژهٔ نقشه‌کشی تلاش می‌کند؛ برای ایجاد نقشه‌ای که آزادانه در اختیار همه باشد. برای اطلاع از جزئیات بیشتر به وبسایت آن مراجعه کنید: 
-\nhttps://openstreetmap.org 
-\n 
-\nشما هم می‌توانید مستقیماً از طریق برنامهٔ OsmAnd در تکمیل نقشه مشارکت کنید. برای این منظور لازم است اطلاعات عضویت در سایت OSM را در برنامه وارد کنید.</string>
+\nنقشه‌های کاشی‌وار را مستقیماً به‌طور آنلاین دانلود کنید یا همچنین می‌توانید آن‌ها را به‌صورت پایگاه‌دادهٔ SQLite برای استفادهٔ آفلاین آماده کنید و سپس در پوشهٔ داده‌های OsmAnd قرار دهید. نرم‌افزارهای مختلفی برای انجام این کار وجود دارد.</string>
+    <string name="osmand_accessibility_description">این افزونه امکانات قابلیت‌دسترسی (accessibility) در دستگاهتان را مستقیماً در OsmAnd به کار می‌گیرد و تسهیلاتی را در اختیارتان می‌گذارد؛ مانند تنظیم‌کردن سرعت گفتار موتور صوتی، تبدیل متن به گفتار (مثل اعلام موقعیت شما)، پیمایش صفحه به‌کمک صفحهٔ جهتی (D-pad) و استفاده از توپک (trackball) برای تنظیم بزرگ‌نمایی.</string>
+    <string name="osm_editing_plugin_description">با ایجاد یا اصلاح نقاط توجه (POI)، ایجاد یادداشت‌های OSM یا نظردادن روی آن‌ها و بارگذاری فایل‌های GPXای که ضبط کرده‌اید در تکمیل نقشهٔ OSM مشارکت کنید. برای این منظور لازم است نام کاربری و گذرواژهٔ خود را در OsmAnd وارد کنید. OpenStreetMap.org یک پروژهٔ نقشه‌کشی جامعه‌محور، جهانی و در مالکیت عمومی است.</string>
     <string name="play_commands_of_currently_selected_voice">گفتاری را انتخاب کنید و با پخش پیام‌ها، آن را امتحان کنید:</string>
     <string name="native_rendering">رندر بومی</string>
     <string name="accessibility_mode">حالت دسترسی آسان</string>
@@ -1129,7 +1122,7 @@
     <string name="app_mode_truck">کامیون</string>
     <string name="android_19_location_disabled">از اندروید ۴٫۴ (کیت‌کت) به بعد پوشهٔ ذخیره‌سازی پیشین (%s) منسوخ شده است. همهٔ فایل‌های OsmAnd به ذخیره‌گاه جدید منتقل شوند؟ 
 \n نکتهٔ ۱: فایل‌های قدیمی‌تان دست‌نخورده باقی می‌ماند (می‌توانید به‌صورت دستی آن‌ها را پاک کنید). 
-\n نکتهٔ ۲: در ذخیره‌گاه جدید نمی‌توانید فایل‌ها را بین OsmAnd و OsmAnd+‎ به‌اشتراک بگذارید.</string>
+\n نکتهٔ ۲: در ذخیره‌گاه جدید نمی‌توانید فایل‌ها را بین OsmAnd و OsmAnd+‎ هم‌رسانی کنید.</string>
     <string name="copying_osmand_one_file_descr">در حال کپی فایل (%s) به محل جدید…</string>
     <string name="copying_osmand_files_descr">در حال کپی فایل‌های دادهٔ OsmAnd به محل جدید (%s)…</string>
     <string name="copying_osmand_files">در حال کپی فایل‌های دادهٔ OsmAnd…</string>
@@ -1213,16 +1206,16 @@
     <string name="localization_pref_title">بومی‌سازی</string>
     <string name="interrupt_music_descr">پیام‌های گفتاری پخش موسیقی را قطع می‌کند.</string>
     <string name="interrupt_music">مکث موسیقی</string>
-    <string name="share_route_as_gpx">اشتراک‌گذاری مسیر در قالب فایل GPX</string>
-    <string name="share_route_subject">مسیر از طریق OsmAnd به‌اشتراک گذاشته شد</string>
+    <string name="share_route_as_gpx">هم‌رسانی مسیر در قالب فایل GPX</string>
+    <string name="share_route_subject">مسیر از طریق OsmAnd هم‌رسانی شد</string>
     <string name="keep_informing_never">دستی (روی فِلِش بزنید)</string>
     <string name="keep_informing_descr">دستورات ناوبری در بازه‌های منظم بازگو می‌شود.</string>
     <string name="keep_informing">تکرار دستورات ناوبری</string>
     <string name="navigation_intent_invalid">قالب نامعتبر: %s</string>
     <string name="arrival_distance">اعلام رسیدن</string>
     <string name="arrival_distance_descr">چه‌زمانی پیام رسیدن به مقصد اعلام شود؟</string>
-    <string name="shared_string_share">اشتراک‌گذاری</string>
-    <string name="share_fav_subject">نقاط برگزیده به‌وسیلهٔ OsmAnd به‌اشتراک گذاشته شد</string>
+    <string name="shared_string_share">هم‌رسانی</string>
+    <string name="share_fav_subject">نقاط برگزیده به‌وسیلهٔ OsmAnd هم‌رسانی شد</string>
     <string name="use_points_as_intermediates">محاسبهٔ مسیر بین نقاط</string>
     <string name="rendering_value_pink_name">صورتی</string>
     <string name="rendering_value_brown_name">قهوه‌ای</string>
@@ -1333,7 +1326,7 @@
     <string name="save_track_interval_globally">بازهٔ زمانی ثبت</string>
     <string name="record_plugin_description">این افزونه یک ابزارک ضبط GPX روی نقشه اضافه می‌کند و با انتخاب آن می‌توانید رد خود را ضبط و در قالب فایل GPX ذخیره کنید. همچنین این امکان را فراهم می‌کند که هنگام مسیریابی، به‌طور خودکار این کار برای شما انجام شود. 
 \n 
-\nردهای ضبط‌شده را با دوستان یا برای استفاده در مشارکت‌های OSM به‌اشتراک بگذارید. 
+\nردهای ضبط‌شده را با دوستان یا برای استفاده در مشارکت‌های OSM هم‌رسانی کنید. 
 \nورزشکاران می‌توانند برای کنترل تمرین‌هایشان از ردهای ضبط‌شده استفاده کنند. 
 \nبرنامهٔ OsmAnd پردازش‌های ساده‌ای مانند محاسبهٔ lap timeها، سرعت متوسط و... را روی ردهای ضبط‌شده انجام می‌دهد؛ البته می‌توانید این ردها را در سایر نرم‌افزارهای تحلیلگر نیز آنالیز کنید.</string>
     <string name="lang_al">آلبانیایی</string>
@@ -1355,7 +1348,7 @@
     <string name="back_to_map">برگشتن به نقشه</string>
     <string name="plugin_touringview_name">نمای گردشگری نقشه</string>
     <string name="shared_string_audio">شنیداری</string>
-    <string name="share_note">به‌اشتراک‌گذاری یادداشت</string>
+    <string name="share_note">هم‌رسانی یادداشت</string>
     <string name="location_on_map">موقعیت: 
 \n عرض %1$s
 \n طول %2$s</string>
@@ -1685,7 +1678,7 @@
     <string name="confirmation_to_delete_history_items">موارد انتخاب‌شده را از سابقه حذف می‌کنید؟</string>
     <string name="show_something_on_map">%1$s را روی نقشه نشان بده</string>
     <string name="dist_away_from_my_location">جست‌وجو تا %1$s دورتر</string>
-    <string name="share_history_subject">اشتراک‌گذاری‌شده با OSMAnd</string>
+    <string name="share_history_subject">هم‌رسانده با OSMAnd</string>
     <string name="search_categories">دسته‌ها</string>
     <string name="postcode">کدپستی</string>
     <string name="shared_string_from">از</string>
@@ -1992,7 +1985,7 @@
     <string name="go_to_map">نقشه را نشان بده</string>
     <string name="simulate_initial_startup_descr">با این تنظیم برنامه فکر می‌کند اولین بار است که راه‌اندازی می‌شود. تنظیمات دیگر دست‌نخورده می‌مانند.</string>
     <string name="simulate_initial_startup">شبیه‌سازی اولین اجرای برنامه</string>
-    <string name="share_menu_location">به‌اشتراک‌گذاشتن مکان</string>
+    <string name="share_menu_location">هم‌رسانی مکان</string>
     <string name="shared_string_send">ارسال</string>
     <string name="favorite_category_dublicate_message">لطفاً برای اسم دسته از نامی استفاده کنید که قبلاً به کار نبرده باشید.</string>
     <string name="favorite_category_name">نام دسته</string>
@@ -2308,7 +2301,7 @@
     <string name="online_photos">تصاویر آنلاین</string>
     <string name="shared_string_add_photos">افزودن تصویر</string>
     <string name="no_photos_descr">اینجا عکسی ندارد.</string>
-    <string name="mapillary_action_descr">نمای خیابانی را از دید خودتان به‌وسیلهٔ مپیلاری به‌اشتراک بگذارید.</string>
+    <string name="mapillary_action_descr">نمای خیابانی را از دید خود به‌وسیلهٔ مپیلاری هم‌رسانی کنید.</string>
     <string name="mapillary_widget">ابزارک مپیلاری</string>
     <string name="mapillary_widget_descr">به‌وسیلهٔ این ابزارک با مپیلاری سریع‌تر کار کنید.</string>
     <string name="mapillary_descr">تصاویر خیابانی آنلاین برای همه. مکان‌ها را کشف کنید، همکاری کنید و جهان را به‌تصویر درآورید.</string>
@@ -2395,7 +2388,7 @@
     <string name="passed">آخرین استفاده: %1$s</string>
     <string name="save_as_line">ذخیره‌کردن به‌عنوان خط</string>
     <string name="store_tracks_in_monthly_directories">ذخیرهٔ ردهای ضبط‌شده در پوشه‌های ماهانه</string>
-    <string name="store_tracks_in_monthly_directories_descrp">"ردهای ضبط‌شده در زیرپوشه‌های ماهانه ذخیره می‌شود (مثلاً  ‎۲۰۱۸-۰۱)."</string>
+    <string name="store_tracks_in_monthly_directories_descrp">ردهای ضبط‌شده در زیرپوشه‌های ماهانه ذخیره می‌شود (مثلاً ‎۲۰۱۸-۰۱).</string>
     <string name="display_zoom_level">زوم نمایش: %1$s</string>
     <string name="gpx_no_tracks_title">هنوز فایل GPXای ندارید</string>
     <string name="gpx_no_tracks_title_folder">همچنین می‌توانید فایل‌های GPX را در این پوشه قرار دهید</string>
@@ -2462,7 +2455,7 @@
 \n • نقاط توجه (POIها یا Points of interest) اطرافتان را نشان می‌دهد 
 \n • نقشه را در راستای حرکتتان (یا قطب‌نما) تنظیم می‌کند 
 \n • موقعیت و سوی جهت‌گیری‌تان را نشان می‌دهد 
-\n • موقعیتتان را با دوستانتان به‌اشتراک بگذارید تا شما را پیدا کنند 
+\n • موقعیتتان را با دوستانتان هم‌رسانی کنید تا شما را پیدا کنند 
 \n • جاهایی را که دوست دارید در قسمت نقاط برگزیده ذخیره کنید 
 \n • شیوهٔ نمایش نام‌های روی نقشه را انتخاب کنید: انگلیسی، محلی یا نویسه‌گردانی‌شده 
 \n • نمایش نقشه‌های تخصصی آنلاین، تصاویر ماهواره‌ای (بینگ) و رولایه‌های مختلف مانند ردهای GPX گردشگردی یا ناوبری با امکان تنظیم شفافیت
@@ -2507,14 +2500,15 @@
 \n • مسیرهای دوچرخه را روی نقشه بیابید 
 \n • در حالت دوچرخه، مسیریابی GPS بر اساس مسیرهای دوچرخه انجام می‌شود 
 \n • ارتفاع و سرعتتان را مشاهده کنید 
-\n • با استفاده از ضبط GPX مسیر سفرتان را ضبط کنید و به‌اشتراک بگذارید 
-\n • با استفاده از یک افزونهٔ دیگر می‌توانید منحنی‌های میزان و سایه‌روشن‌ها را فعال کنید</string>
+\n • با استفاده از ضبط GPX مسیر سفرتان را ضبط و هم‌رسانی کنید
+\n• با استفاده از یک افزونهٔ دیگر می‌توانید منحنی‌های میزان و سایه‌روشن‌ها را فعال کنید</string>
     <string name="osmand_extended_description_part6">پیاده‌روی، پیاده‌گردی و گردش در شهر 
 \n • مسیرهای پیاده‌روی و پیاده‌گردی را نقشه نشانتان می‌دهد 
 \n • هنگام گشت‌زدن در شهر، با ویکی‌پدیا اطلاعات مفیدی به زبان خودتان در مورد مکان‌ها به‌دست آورید 
 \n • برای شهرهای جدید، وجود ایستگاه‌های حمل‌ونقل عمومی (اتوبوس، تراموا، قطار) همراه با نام خطوط، کمک‌کار شما خواهد بود 
 \n • ناوبری GPS در حالت پیاده مسیرتان را بر اساس راه‌های پیاده محاسبه می‌کند 
-\n • مسیرهای GPX را دانلود کنید و بپیمایید یا اینکه مسیر خودتان را ضبط کنید و به‌اشتراک بگذارید</string>
+\n • مسیرهای GPX را دانلود کنید و بپیمایید یا اینکه مسیر خودتان را ضبط و هم‌رسانی کنید
+\n</string>
     <string name="osmand_extended_description_part7">مشارکت در نقشهٔ باز شهری (OSM) 
 \n • گزارش مشکل در داده‌ها 
 \n • آپلود ردهای GPX به OSM مستقیماً از طریق برنامه 
@@ -2573,11 +2567,12 @@
 \n • دانلود نامحدود مستقیماً از طریق برنامه 
 \n • نقشه‌های بُرداری فشرده که حداقل ماهی یک بار به‌روز می‌شود 
 \n • امکان انتخاب میان نقشهٔ کامل یا فقط شبکهٔ راه‌های یک منطقه (مثلاً نقشهٔ کامل ژاپن ۷۰۰ مگابایت است و نقشهٔ راه‌های ژاپن ۲۰۰ مگابایت است)</string>
-    <string name="osmand_plus_extended_description_part5">امکانات ایمنی
-\n • تغییر خودکار بین حالت شب یا روز
-\n • نمایش اختیاری محدودیت سرعت، با امکان هشدار در صورت تجاوز از سرعت مجاز
-\n • قابلیت اختیاری زوم وابسته به سرعت
-\n • مکانتان را با دوستانتان به‌اشتراک بگذارید تا شما را پیدا کنند</string>
+    <string name="osmand_plus_extended_description_part5">امکانات ایمنی 
+\n • تغییر خودکار بین حالت شب یا روز 
+\n • نمایش اختیاری محدودیت سرعت، با امکان هشدار در صورت تجاوز از سرعت مجاز 
+\n • قابلیت اختیاری زوم وابسته به سرعت 
+\n • مکانتان را با دوستانتان هم‌رسانی کنید تا شما را پیدا کنند
+\n</string>
     <string name="osmand_plus_extended_description_part6">قابلیت‌های مخصوص به دوچرخه و پیاده 
 \n • نمایش مسیرهای عبور پیاده، پیاده‌گردی و دوچرخه‌سواری؛ مناسب برای گشت و گذار 
 \n • مسیریابی و حالت‌های نمایش اختصاصی برای دوچرخه و پیاده 
@@ -2635,7 +2630,7 @@
     <string name="looking_for_tracks_with_waypoints">در حال جست‌وجوی ردهای دارای نقطهٔ بین‌راهی</string>
     <string name="empty_state_osm_edits">اشیای OSM را بسازید یا ویرایش کنید</string>
     <string name="empty_state_osm_edits_descr">‏POIها را اضافه یا ویرایش کنید، یادداشت‌های OSMای اضافه کنید یا روی آن‌ها نظر بدهید و فایل‌های GPX ضبط‌شده را آپلود کنید.</string>
-    <string name="shared_string_deleted">حذف شد</string>
+    <string name="shared_string_deleted">حذف‌شده(ها)</string>
     <string name="shared_string_edited">ویرایش شد</string>
     <string name="shared_string_added">افزوده شد</string>
     <string name="marker_activated">نشانهٔ %s فعال شد.</string>
@@ -3070,10 +3065,10 @@
     <string name="make_osmand_better_descr">به OsmAnd اجازه بدهید دربارهٔ نحوهٔ استفاده از برنامه داده‌های ناشناس جمع‌آوری و پردازش کند. دربارهٔ موقعیت شما یا جاهایی که روی نقشه می‌بینید داده‌ای جمع‌آوری نمی‌کنیم.
 \n
 \nهمواره می‌توانید این تنظیم را از بخش «تنظیمات ← حریم خصوصی و امنیت» تغییر دهید.</string>
-    <string name="choose_data_to_share">چه نوع داده‌هایی را مایل هستید به اشتراک بگذارید:</string>
+    <string name="choose_data_to_share">چه نوع داده‌هایی را مایل هستید هم‌رسانی کنید:</string>
     <string name="downloaded_maps">نقشه‌هایی که دانلود کرده‌اید</string>
     <string name="visited_screens">صفحه‌هایی که دیده‌اید</string>
-    <string name="collected_data_descr">"مشخص کنید OsmAnd مجاز است چه داده‌هایی را  به اشتراک بگذارد."</string>
+    <string name="collected_data_descr">مشخص کنید OsmAnd مجاز است چه داده‌هایی را هم‌رسانی کند.</string>
     <string name="downloaded_maps_collect_descr">کمک می‌کند تا محبوبیت نقشه‌های کشوری و منطقه‌ای را بدانیم.</string>
     <string name="visited_screens_collect_descr">کمک می‌کند تا محبوبیت قابلیت‌های OsmAnd را بدانیم.</string>
     <string name="settings_privacy_and_security">حریم خصوصی و امنیت</string>
@@ -3156,7 +3151,7 @@
     <string name="app_mode_monowheel">یکچرخه</string>
     <string name="app_mode_scooter">اسکوتر</string>
     <string name="privacy_and_security_change_descr">اگر %1$s ما را می‌پذیرید «اجازه می‌دهم» را برگزینید</string>
-    <string name="settings_privacy_and_security_desc">انتخاب داده‌هایی که به اشتراک می‌گذارید</string>
+    <string name="settings_privacy_and_security_desc">انتخاب داده‌هایی که هم‌رسانی می‌کنید</string>
     <string name="shared_string_allow">اجازه می‌دهم</string>
     <string name="osmand_routing_promo">"می‌توانید نسخهٔ اصلاح‌شدهٔ خودتان از فایل  routing.xml را در ‎..osmand/routing اضافه کنید"</string>
     <string name="show_compass_ruler">با درجه‌بندی قطب‌نما</string>
@@ -3433,7 +3428,7 @@
     <string name="shared_string_turn_off">خاموش</string>
     <string name="join_segments">پیوند پاره‌ها</string>
     <string name="save_heading">ثبت جهت</string>
-    <string name="save_heading_descr">هنگام ضبط، جهت (=heading) را برای هر یک از نقطه‌های رد ثبت می‌کند.</string>
+    <string name="save_heading_descr">هنگام ضبط، جهت (heading) را برای هر یک از نقطه‌های رد ثبت می‌کند.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="street_city">%1$s،‏ %2$s</string>
     <string name="personal_category_name">شخصی</string>
@@ -3464,7 +3459,7 @@
     <string name="import_from_file">درون‌برد از فایل</string>
     <string name="import_routing_file">درون‌برد فایل مسیریابی</string>
     <string name="import_profile">درون‌برد پروفایل</string>
-    <string name="permission_is_required"/>
+    <string name="permission_is_required">برای استفاده از این گزینه مجوز لازم است.</string>
     <string name="monitoring_min_speed_descr">این یک پالایهٔ قطع‌کننده برای سرعت‌های پایین است تا نقاطی که سرعتشان از حدی پایین‌تر است ضبط نشوند. می‌تواند سبب شود که ردهای ضبط‌شده به‌شکل هموارتری روی نقشه دیده شوند.</string>
     <string name="monitoring_min_speed_descr_side_effect">اثر جانبی: همهٔ قطعه‌هایی که در آن‌ها به حداقل سرعت معیار نرسید از رد حذف خواهد شد (مثلاً هنگامی که دوچرخه‌تان را بالای یک تپه با شیب تند می‌برید). همچنین هیچ اطلاعاتی دربارهٔ بازه‌های توقف، مانند استراحت‌ها، ضبط نمی‌شود. این مسئله بر همهٔ تحلیل‌ها یا پس‌پردازش‌ها تأثیر می‌گذارد، مانند زمانی که بخواهید مسافت کلی سفر، مدت حرکت یا سرعت متوسط خود را بدانید.</string>
     <string name="monitoring_min_speed_descr_recommendation">توصیه: ابتدا از پالایهٔ «کمترین جابه‌جایی» به‌منظور تشخیص حرکت استفاده کنید (B). این‌گونه شاید نتایج بهتری بگیرید و همچنین دادهٔ کمتری از دست می‌دهید. اگر ردها در سرعت‌های پایین نویز دارد، برای اینجا از مقدارهای غیرصفر استفاده کنید. لطفاً توجه نمایید که برخی اندازه‌گیری‌ها ممکن است اصلاً هیچ سرعتی را گزارش نکنند (برخی روش‌های مبتنی بر شبکه)، که در این صورت هیچ چیزی ضبط نخواهد شد.</string>
@@ -3472,7 +3467,7 @@
     <string name="monitoring_min_accuracy_descr">این مورد فقط نقاطی را ضبط می‌کند که با شاخص کمترین صحت (به متر/فوت، مطابق گزارش اندروید از چیپست) اندازه‌گیری شده‌اند. منظور از صحت، نمودار نقطه‌ای اندازه‌گیری‌های تکراری است و مستقیماً مربوط به دقت نمی‌شود (دقت: میزان نزدیکی اندازه‌گیری‌ها به موقعیت واقعی).</string>
     <string name="monitoring_min_accuracy_descr_side_effect">اثر جانبی: درنتیجهٔ پالایش بر اساس صحت، ممکن است مثلاً زیر پل‌ها، زیر درختان، میان ساختمان‌های بلند یا در شرایط جوّی بخصوص، نقاط تماماً از دست بروند.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">توصیه: سخت است آنچه ثبت می‌شود یا آنچه ثبت نمی‌شود را پیشبینی کنیم. شاید بهتر باشد این پالایه را خاموش کنید.</string>
-    <string name="monitoring_min_accuracy_descr_remark">توجه: اگر بلافاصله پیش از ضبط، GPS خاموش بوده، ممکن است نخستین نقطه صحت کمتری داشته باشد؛ بنابراین ممکن است بخواهیم طوری کدنویسی کنیم که یک نقطه با یک یا چند ثانیه تأخیر ضبط شود (یا از سه نقطهٔ پی‌درپی بهترینشان را ضبط کنیم و...)، البته این هنوز انجام نشده.</string>
+    <string name="monitoring_min_accuracy_descr_remark">توجه: اگر بلافاصله پیش از ضبط، GPS خاموش بوده، ممکن است نخستین نقطه صحت کمتری داشته باشد؛ بنابراین ممکن است بخواهیم طوری کدنویسی کنیم که یک نقطه با یک یا چند ثانیه تأخیر ضبط شود (یا از سه نقطهٔ پی‌درپی بهترینشان را ضبط کنیم و...)، البته این هنوز پیاده نشده.</string>
     <string name="monitoring_notification">اعلان</string>
     <string name="monitoring_min_speed">کمترین سرعت</string>
     <string name="monitoring_min_accuracy">کمترین صحت</string>
@@ -3499,11 +3494,63 @@
     <string name="select_map_icon_descr">نمادی که هنگام توقف نمایش داده می‌شود.</string>
     <string name="search_offline_geo_error">تجزیهٔ geo intent \'%s\'‎ ناموفق بود.</string>
     <string name="monitoring_min_distance_descr">این پالایه هنگامی که جابه‌جایی‌های بسیار اندکی رخ بدهد، از ضبط نقاط تکراری جلوگیری می‌کند و درنتیجه ردهایی که بعداً پس‌پردازش نمی‌شوند ظاهر فضایی زیباتری خواهند داشت.</string>
-    <string name="monitoring_min_distance_descr_side_effect">اثرات جانبی: بازه‌های توقف یا اصلاً ضبط نخواهند شد یا فقط یک نقطه به‌ازای هر کدام ضبط می‌شود. جابه‌جایی‌های واقعیِ کوچک احتمالاً حذف می‌شود. فایل نهایی اطلاعات کمتری برای پس‌پردازش خواهد داشت و همچنین با حذف نقاط زائد در هنگام ضبط و حفظ بالقوهٔ نقاط غیرواقعی، ناشی از گیرایی ضعیف یا اثرات چیپست GPS، اطلاعات آماری فایل بدتر می‌شود.</string>
+    <string name="monitoring_min_distance_descr_side_effect">اثرات جانبی: بازه‌های توقف یا اصلاً ضبط نخواهند شد یا فقط یک نقطه به‌ازای هر کدام ضبط می‌شود. جابه‌جایی‌های واقعیِ کوچک احتمالاً حذف می‌شود. فایل نهایی اطلاعات کمتری برای پس‌پردازش خواهد داشت و همچنین با حذف نقاط زائد در هنگام ضبط و حفظ بالقوهٔ نقاط غیرواقعی (ناشی از گیرایی ضعیف یا اثرات چیپست GPS) اطلاعات آماریِ فایل بدتر می‌شود.</string>
     <string name="monitoring_min_distance_descr_recommendation">توصیه: اگر به جزئیات بیشتر از ۵ متر نیاز ندارید و در زمان توقف نمی‌خواهید داده ضبط کنید، تنظیم حدود ۵ متر احتمالاً خوب جواب بدهد.</string>
     <string name="live_monitoring_time_buffer">مدت حافظهٔ تأخیری</string>
     <string name="live_monitoring_tracking_interval">بازهٔ زمانی ردیابی</string>
     <string name="live_monitoring_adress">نشانی وب</string>
     <string name="live_monitoring_adress_descr">نشانی اینترنتی را با این پارامترها تعریف کنید: 
 \nlat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
+    <string name="live_monitoring_descr">اجازه می‌دهد موقعیت کنونی با استفاده از ضبط سفر هم‌رسانی شود.</string>
+    <string name="tracks_view_descr">ردهای ضبط‌شدهٔ شما در %1$s یا در پوشهٔ OsmAnd قرار دارند.</string>
+    <string name="multimedia_notes_view_descr">یادداشت‌های OSMای شما در %1$s قرار دارند.</string>
+    <string name="osm_edits_view_descr">ویرایش‌ها یا یادداشت‌های OSMای خود که هنوز بارگذاری نشده‌اند را در %1$s ببینید. نقاط بارگذاری‌شده را دیگر نمی‌بینید.</string>
+    <string name="logcat_buffer_descr">لاگ‌های جزئی برنامه را ببینید و هم‌رسانی کنید</string>
+    <string name="multimedia_use_system_camera">استفاده از برنامهٔ سیستم</string>
+    <string name="multimedia_photo_play_sound">صدای شاتر دوربین</string>
+    <string name="osm_authorization_success">احراز هویت موفقیت‌آمیز بود</string>
+    <string name="rearrange_categories">مرتب‌سازی دسته‌ها</string>
+    <string name="create_custom_categories_list_promo">می‌توانید دسته‌های سفارشی بیفزایید، دسته‌های غیرلازم را مخفی کنید و ترتیب لیست را تغییر دهید. لیست را می‌توانید همراه پروفایل‌ها برون‌برد یا درون‌برد کنید.</string>
+    <string name="add_new_custom_category_button_promo">با انتخاب یک یا چند دسته می‌توانید یک دستهٔ تازه بیفزایید.</string>
+    <string name="reset_to_default_category_button_promo">بازنشانی به پیشفرض، ترتیب را به حالت اولیهٔ پس از نصب برمی‌گرداند.</string>
+    <string name="add_custom_category">افزودن دستهٔ سفارشی</string>
+    <string name="rendering_attr_streetLightingNight_name">فقط هنگام شب نشان بده</string>
+    <string name="plugin_prefs_reset_successful">همهٔ تنظیمات افزونه به حالت پیشفرض بازگشت.</string>
+    <string name="profile_prefs_reset_successful">همهٔ تنظیمات افزونه به حالت پیشفرض بازگشت.</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s‏/%2$s</string>
+    <string name="sunset_at">غروب خورشید در %1$s</string>
+    <string name="sunrise_at">طلوع خورشید در %1$s</string>
+    <string name="accessibility_mode_disabled">حالت دسترسی آسان در دستگاه شما غیرفعال است.</string>
+    <string name="use_system_screen_timeout">از زمان روشن‌ماندن صفحهٔ دستگاه استفاده شود</string>
+    <string name="use_system_screen_timeout_promo">پیشفرض غیرفعال است، اگر OsmAnd در پیش‌زمینه اجرا باشد صفحه خاموش نمی‌شود.
+\n
+\nاگر فعال باشد، OsmAnd از تنظیمات دستگاه برای زمان خاموش‌شدن صفحه استفاده می‌کند.</string>
+    <string name="clear_recorded_data">پاک‌سازی دادهٔ ضبط‌شده</string>
+    <string name="release_3_6">• پروفایل‌ها: اکنون می‌توانید ترتیب پروفایل‌ها و نماد آن‌ها را تنظیم کنید. تنظیمات پروفایل‌های پایه را تغییر دهید یا آن‌ها را به پیشفرض بازنشانی کنید.
+\n
+\n • شمارهٔ خروجی به ناوبری افزوده شد
+\n
+\n • تنظیمات افزونه‌ها بازسازی شد
+\n
+\n • صفحهٔ تنظیمات برای دسترسی فوری به همهٔ پروفایل‌ها بازسازی شد
+\n
+\n • گزینه‌ای برای کپی‌کردن تنظیمات از پروفایل دیکر افزوده شد
+\n
+\n • امکان تغییر، مرتب‌سازی یا مخفی‌کردن دسته‌بندی نقاط توجه (POI) هنگام جست‌وجو افزوده شد
+\n
+\n • چینش نماد نقاط توجه روی نقشه درست شد
+\n
+\n • دادهٔ غروب/طلوع خورشید به «پیکربندی نقشه» افزوده شد
+\n
+\n • نمادهای خانه/کار روی نقشه افزوده شد
+\n
+\n • از توضیحات چندخطی در تنظیمات پشتیبانی می‌شود
+\n
+\n • نویسه‌گردانیِ درست به نقشهٔ ژاپن افزوده شد
+\n
+\n • نقشهٔ جنوبگان افزوده شد
+\n
+\n</string>
+    <string name="copy_coordinates">کپی مختصات</string>
+    <string name="routing_profile_direct_to">مستقیم تا نقطه</string>
 </resources>
