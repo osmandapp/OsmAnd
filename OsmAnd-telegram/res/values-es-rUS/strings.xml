@@ -267,4 +267,5 @@
     <string name="last_update_from_telegram_duration">Última actualización de Telegram: Hace %1$s</string>
     <string name="last_response_duration">Última respuesta: Hace %1$s</string>
     <string name="duration_ago">Hace %1$s</string>
+    <string name="shared_string_error_short">ERR</string>
 </resources>
