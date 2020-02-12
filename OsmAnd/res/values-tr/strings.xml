@@ -3482,4 +3482,5 @@
 \n
 \n</string>
     <string name="copy_coordinates">Koordinatları kopyala</string>
+    <string name="routing_profile_direct_to">Doğrudan noktaya</string>
 </resources>
