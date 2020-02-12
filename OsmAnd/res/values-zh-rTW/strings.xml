@@ -3490,4 +3490,32 @@
     <string name="use_system_screen_timeout_promo">預設停用，如果 OsmAnd 在前景執行，畫面就不會有逾時的問題。
 \n
 \n若啟用，OsmAnd 將會使用系統逾時設定。</string>
+    <string name="clear_recorded_data">清除已紀錄的資料</string>
+    <string name="release_3_6">• 設定檔：現在您可以變更順序、設定地圖圖示、變更基本設定檔的所有設定以及將它們復原
+\n
+\n • 在導航中新增了出口編號
+\n
+\n • 改善外掛程式設定
+\n
+\n • 改善後的設定畫面可快速存取所有設定檔
+\n
+\n • 新曾了可從其他設定複製設定的選項
+\n
+\n • 新增了在搜尋中變更順序或隱藏 POI 分類的功能
+\n
+\n • 在地圖上正確地對齊 POI 圖示
+\n
+\n • 新增日落／日出資料到設定地圖中
+\n
+\n • 在地圖上新增家／工作地點的圖示
+\n
+\n • 在設定中新增了對多行描述的支援
+\n
+\n • 在日本地圖中加入了正確的音譯
+\n
+\n • 新增了南極洲的地圖
+\n
+\n</string>
+    <string name="copy_coordinates">複製座標</string>
+    <string name="routing_profile_direct_to">點對點</string>
 </resources>
