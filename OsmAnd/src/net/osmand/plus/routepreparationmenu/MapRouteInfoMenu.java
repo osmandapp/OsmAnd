@@ -62,6 +62,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
+import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -1098,7 +1099,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				if (app != null) {
 					String voiceProvider = app.getSettings().VOICE_PROVIDER.getModeValue(appMode);
 					if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
-						mapActivity.showVoiceProviderDialog(appMode, false);
+						OsmAndDialogs.showVoiceProviderDialog(mapActivity, appMode, false);
 					} else {
 						app.getRoutingOptionsHelper().switchSound();
 					}

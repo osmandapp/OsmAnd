@@ -251,7 +251,7 @@ public abstract class OsmandPlugin {
 		boolean paid = plugin.isPaid();
 		if ((Version.isDeveloperVersion(app) || !Version.isProductionVersion(app)) && !paid) {
 			// for test reasons
-			marketEnabled = false;
+			// marketEnabled = false;
 		}
 		if (pckg || (!marketEnabled && !paid)) {
 			if (pckg && !app.getSettings().getPlugins().contains("-" + plugin.getId())) {
@@ -285,8 +285,12 @@ public abstract class OsmandPlugin {
 	}
 
 	private static boolean checkPluginPackage(OsmandApplication app, OsmandPlugin plugin) {
-		return isPackageInstalled(plugin.getComponentId1(), app) || isPackageInstalled(plugin.getComponentId2(), app)
-				|| InAppPurchaseHelper.isSubscribedToLiveUpdates(app);
+		return plugin.checkPluginPackage(app);
+
+	}
+
+	protected boolean checkPluginPackage(OsmandApplication app) {
+		return isPackageInstalled(getComponentId1(), app) || isPackageInstalled(getComponentId2(), app);
 	}
 
 	public static boolean enablePlugin(@Nullable Activity activity, OsmandApplication app, OsmandPlugin plugin, boolean enable) {

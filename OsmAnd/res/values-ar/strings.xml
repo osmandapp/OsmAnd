@@ -3399,4 +3399,9 @@
     <string name="sunset_at">غروب الشمس على %1$s</string>
     <string name="sunrise_at">شروق الشمس على %1$s</string>
     <string name="accessibility_mode_disabled">تم تعطيل وضع إمكانية الوصول في النظام الخاص بك.</string>
+    <string name="reset_to_default_category_button_promo">ستؤدي إعادة التعيين إلى الوضع الافتراضي إلى إعادة تعيين ترتيب الفرز إلى الحالة الافتراضية بعد التثبيت.</string>
+    <string name="use_system_screen_timeout">استخدام مهلة انطفاء شاشة النظام</string>
+    <string name="use_system_screen_timeout_promo">معطل افتراضيا، اذا كان التطبيق شغالا في المقدمة، الشاشة لن تنطفـأ.
+\n
+\nالتطبيق سيستخدم إعدادات النظام لمهلة انطفاء الشاشة إذا تم التفعيل.</string>
 </resources>

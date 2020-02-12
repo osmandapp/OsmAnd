@@ -3463,6 +3463,38 @@ représentant la zone : %1$s x %2$s</string>
     <string name="sunrise_at">Lever de soleil à %1$s</string>
     <string name="rearrange_categories">Réorganiser les catégories</string>
     <string name="create_custom_categories_list_promo">Vous pouvez ajouter des catégories personnelles, masquer les catégories que vous ne souhaitez pas utiliser et les trier. La liste des catégories peut être importée et exportée grâce aux profils.</string>
-    <string name="reset_to_default_category_button_promo">Réinitialiser supprimera toutes les catégories personnelles et réinitialisera le tri.</string>
+    <string name="reset_to_default_category_button_promo">Restaurer les valeurs par défaut réinitialisera l\'ordre de tri.</string>
     <string name="accessibility_mode_disabled">Le mode d\'accessibilité est désactivé dans votre système.</string>
+    <string name="add_new_custom_category_button_promo">Vous pouvez ajouter une catégorie personnelle en sélectionnant la ou les catégories souhaitées.</string>
+    <string name="use_system_screen_timeout">Utiliser le délai système pour mettre en veille l\'écran</string>
+    <string name="use_system_screen_timeout_promo">Inactif par défaut (lorsqu\'OsmAnd s’exécute en avant-plan, l\'écran reste toujours allumé). 
+\n 
+\nSi actif, OsmAnd utilisera le délai système pour mettre en veille l\'écran.</string>
+    <string name="clear_recorded_data">Effacer les données enregistrées</string>
+    <string name="release_3_6">• Profils : vous pouvez désormais modifier leur ordre, définir leur icône, modifier tous les paramètres de base des profils et restaurer les valeurs par défaut
+\n
+\n• Ajout du numéro de sortie dans les indications de navigation
+\n
+\n• Amélioration des paramètres de greffon
+\n
+\n• Amélioration des paramètres de l\'écran pour un accès plus rapide à tous les profils
+\n
+\n• Ajout d\'une option pour copier les paramètres d\'un autre profil
+\n
+\n• Possibilité de modifier l\'ordre ou de masquer les catégories de POI dans la Recherche
+\n
+\n• Meilleur alignement des icônes de POI sur la carte
+\n
+\n• Ajout des données de Coucher / Lever du soleil
+\n
+\n• Ajout des icônes Domicile / Travail sur la carte
+\n
+\n• Possibilité d\'ajouter plusieurs lignes de description dans les Paramètres
+\n
+\n• Correction des translittérations pour la carte du Japon
+\n
+\n• Ajout de la carte de l\'Antarctique
+\n
+\n</string>
+    <string name="copy_coordinates">Copier les coordonnées</string>
 </resources>

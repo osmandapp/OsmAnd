@@ -187,13 +187,13 @@ public class RoutingOptionsHelper {
 	public void applyVoiceProvider(MapActivity mapActivity, String provider, boolean applyAllModes) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		ApplicationMode selectedAppMode = app.getRoutingHelper().getAppMode();
+		OsmandSettings.OsmandPreference<String> VP = app.getSettings().VOICE_PROVIDER;
 		if (applyAllModes) {
 			for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-				app.getSettings().VOICE_PROVIDER.setModeValue(mode, provider);
+				VP.setModeValue(mode, provider);
 			}
-		} else {
-			app.getSettings().VOICE_PROVIDER.setModeValue(selectedAppMode, provider);
 		}
+		VP.setModeValue(selectedAppMode, provider);
 		app.initVoiceCommandPlayer(mapActivity, selectedAppMode, false, null, true, false, applyAllModes);
 	}
 

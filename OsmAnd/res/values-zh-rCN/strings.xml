@@ -2808,4 +2808,6 @@
     <string name="reset_confirmation_descr">如果点击 %1$s，您将丢失所有更改。</string>
     <string name="reset_all_profile_settings_descr">所有配置设置将会重置为安装后的状态。</string>
     <string name="reset_all_profile_settings">要将所有配置设置重置为默认值吗？</string>
+    <string name="permission_is_required">使用此选项需要授权。</string>
+    <string name="shared_string_available">可用</string>
 </resources>

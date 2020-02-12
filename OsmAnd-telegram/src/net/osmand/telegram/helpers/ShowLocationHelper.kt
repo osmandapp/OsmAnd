@@ -43,23 +43,21 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 
 		const val LIVE_TRACKS_DIR = "livetracks"
 
-		const val GPX_COLORS_COUNT = 10
-
 		private const val STATUS_WIDGET_ID = "status_widget"
 		private const val STATUS_WIDGET_MENU_ICON = "widget_location_sharing_night"
 		private const val STATUS_WIDGET_MENU_ICON_OLD = "ic_action_relative_bearing"
 		private const val STATUS_WIDGET_ICON_OLD = "widget_relative_bearing_day"
-		private const val STATUS_WIDGET_ANIM_ICON_DAY = "anim_widget_location_sharing_day"
-		private const val STATUS_WIDGET_ANIM_ICON_NIGHT = "anim_widget_location_sharing_night"
-		private const val STATUS_WIDGET_ON_ANIM_ICON_DAY = "anim_widget_location_sharing_on_day"
-		private const val STATUS_WIDGET_ON_ANIM_ICON_NIGHT = "anim_widget_location_sharing_on_night"
+		private const val STATUS_WIDGET_ICON_DAY = "widget_location_sharing_day"
+		private const val STATUS_WIDGET_ICON_NIGHT = "widget_location_sharing_night"
+		private const val STATUS_WIDGET_ON_ICON_DAY = "widget_location_sharing_on_day"
+		private const val STATUS_WIDGET_ON_ICON_NIGHT = "widget_location_sharing_on_night"
 		private const val STATUS_WIDGET_OFF_ICON_DAY = "widget_location_sharing_off_day"
 		private const val STATUS_WIDGET_OFF_ICON_NIGHT = "widget_location_sharing_off_night"
 
 		val GPX_COLORS = arrayOf(
-			"red", "orange", "lightblue", "blue", "purple",
+			"red", "orange", "lightblue", "blue", "purple", "pink",
 			"translucent_red", "translucent_orange", "translucent_lightblue",
-			"translucent_blue", "translucent_purple"
+			"translucent_blue", "translucent_purple", "translucent_pink"
 		)
 	}
 
@@ -232,21 +230,27 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 			STATUS_WIDGET_MENU_ICON_OLD
 		}
 		val text = when {
-			time > 0L -> {
-				iconDay = STATUS_WIDGET_ANIM_ICON_DAY
-				iconNight = STATUS_WIDGET_ANIM_ICON_NIGHT
+			time > 0L && isSending -> {
+				iconDay = STATUS_WIDGET_ON_ICON_DAY
+				iconNight = STATUS_WIDGET_ON_ICON_NIGHT
+				val diffTime = (System.currentTimeMillis() - time) / 1000
+				OsmandFormatter.getFormattedDurationForWidget(diffTime)
+			}
+			time > 0L && !isSending -> {
+				iconDay = STATUS_WIDGET_ICON_DAY
+				iconNight = STATUS_WIDGET_ICON_NIGHT
 				val diffTime = (System.currentTimeMillis() - time) / 1000
 				OsmandFormatter.getFormattedDurationForWidget(diffTime)
 			}
 			time == 0L && isSending -> {
-				iconDay = STATUS_WIDGET_ON_ANIM_ICON_DAY
-				iconNight = STATUS_WIDGET_ON_ANIM_ICON_NIGHT
+				iconDay = STATUS_WIDGET_ON_ICON_DAY
+				iconNight = STATUS_WIDGET_ON_ICON_NIGHT
 				app.getString(R.string.shared_string_ok)
 			}
 			time == 0L && !isSending -> {
-				iconDay = STATUS_WIDGET_ANIM_ICON_DAY
-				iconNight = STATUS_WIDGET_ANIM_ICON_NIGHT
-				app.getString(R.string.shared_string_ok)
+				iconDay = STATUS_WIDGET_ICON_DAY
+				iconNight = STATUS_WIDGET_ICON_NIGHT
+				app.getString(R.string.shared_string_error_short)
 			}
 			else -> {
 				iconDay = STATUS_WIDGET_OFF_ICON_DAY

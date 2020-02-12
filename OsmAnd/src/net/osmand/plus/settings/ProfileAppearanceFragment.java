@@ -96,6 +96,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	private View saveButton;
 
 	private boolean isBaseProfileImported;
+	private boolean isNewProfile;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -118,7 +119,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			profile.routeService = baseModeForNewProfile.getRouteService();
 			profile.locationIcon = baseModeForNewProfile.getLocationIcon();
 			profile.navigationIcon = baseModeForNewProfile.getNavigationIcon();
-			onAppModeChanged(ApplicationMode.valueOfStringKey(baseModeForNewProfile.getStringKey(), null));
 		} else {
 			profile.stringKey = getSelectedAppMode().getStringKey();
 			profile.parent = getSelectedAppMode().getParent();
@@ -148,6 +148,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			changedProfile.locationIcon = profile.locationIcon;
 			changedProfile.navigationIcon = profile.navigationIcon;
 		}
+		isNewProfile = ApplicationMode.valueOfStringKey(changedProfile.stringKey, null) == null;
 	}
 
 	private String createNonDuplicateName(String oldName) {
@@ -189,7 +190,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		findPreference(SELECT_ICON).setIconSpaceReserved(false);
 		findPreference(SELECT_LOCATION_ICON).setIconSpaceReserved(false);
 		findPreference(SELECT_NAV_ICON).setIconSpaceReserved(false);
-		if (getSelectedAppMode().equals(ApplicationMode.DEFAULT)) {
+		if (getSelectedAppMode().equals(ApplicationMode.DEFAULT) && !isNewProfile) {
 			findPreference(SELECT_ICON).setVisible(false);
 			findPreference(ICON_ITEMS).setVisible(false);
 		}
@@ -228,10 +229,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 					if (getActivity() != null) {
 						hideKeyboard();
 						if (isChanged()) {
-							boolean isNew = ApplicationMode.valueOfStringKey(changedProfile.stringKey, null) == null;
-							if (saveProfile(isNew)) {
+							if (saveProfile()) {
 								profile = changedProfile;
-								if (isNew) {
+								if (isNewProfile) {
 									ProfileAppearanceFragment.this.dismiss();
 									BaseSettingsFragment.showInstance(getMapActivity(), SettingsScreenType.CONFIGURE_PROFILE,
 											ApplicationMode.valueOfStringKey(changedProfile.stringKey, null));
@@ -645,7 +645,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		}
 	}
 
-	private boolean saveProfile(boolean isNew) {
+	private boolean saveProfile() {
 		if (changedProfile.name.replace(" ", "").length() < 1) {
 			if (getActivity() != null) {
 				createWarningDialog(getActivity(),
@@ -653,7 +653,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			}
 			return false;
 		}
-		if (isNew) {
+		if (isNewProfile) {
 			ApplicationMode.ApplicationModeBuilder builder = ApplicationMode
 					.createCustomMode(changedProfile.parent, changedProfile.stringKey, app)
 					.setIconResName(ProfileIcons.getResStringByResId(changedProfile.iconRes))
