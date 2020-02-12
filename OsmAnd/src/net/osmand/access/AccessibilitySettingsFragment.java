@@ -14,6 +14,7 @@ import android.support.v7.preference.PreferenceViewHolder;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityManager.AccessibilityStateChangeListener;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import net.osmand.AndroidUtils;
@@ -126,6 +127,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 		ListPreferenceEx accessibilityMode = (ListPreferenceEx) findPreference(settings.ACCESSIBILITY_MODE.getId());
 		accessibilityMode.setEntries(entries);
 		accessibilityMode.setEntryValues(entryValues);
+		accessibilityMode.setIcon(getPersistentPrefIcon(R.drawable.ic_action_android));
 		accessibilityMode.setDescription(R.string.accessibility_mode_descr);
 	}
 
@@ -222,7 +224,8 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 	@Override
 	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
-		if (ACCESSIBILITY_OPTIONS.equals(preference.getKey())) {
+		String prefId = preference.getKey();
+		if (ACCESSIBILITY_OPTIONS.equals(prefId)) {
 			View selectableView = holder.itemView.findViewById(R.id.selectable_list_item);
 			if (selectableView != null) {
 				int color = AndroidUtils.getColorFromAttr(app, R.attr.activity_background_color);
@@ -239,6 +242,12 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 				}
 				LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) selectableView.getLayoutParams();
 				params.setMargins(params.leftMargin, AndroidUtils.dpToPx(app, 6), params.rightMargin, params.bottomMargin);
+			}
+		} else if (settings.ACCESSIBILITY_MODE.getId().equals(prefId)) {
+			ImageView imageView = (ImageView) holder.findViewById(android.R.id.icon);
+			if (imageView != null) {
+				boolean enabled = preference.isEnabled() && app.accessibilityEnabledForMode(getSelectedAppMode());
+				imageView.setEnabled(enabled);
 			}
 		}
 	}

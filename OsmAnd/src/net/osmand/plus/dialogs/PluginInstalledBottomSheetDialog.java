@@ -163,6 +163,20 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 	}
 
 	@Override
+	protected void onDismissButtonClickAction() {
+		OsmandApplication app = getMyApplication();
+		OsmandPlugin plugin = OsmandPlugin.getPlugin(pluginId);
+		if (app != null && plugin != null) {
+			Activity activity = getActivity();
+			OsmandPlugin.enablePlugin(activity, app, plugin, false);
+
+			if (activity instanceof PluginStateListener) {
+				((PluginStateListener) activity).onPluginStateChanged(plugin);
+			}
+		}
+	}
+
+	@Override
 	protected int getRightBottomButtonTextId() {
 		return R.string.shared_string_ok;
 	}
@@ -306,5 +320,11 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);
 		}
+	}
+
+	public interface PluginStateListener {
+
+		void onPluginStateChanged(OsmandPlugin plugin);
+
 	}
 }

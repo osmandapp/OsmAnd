@@ -118,6 +118,7 @@ public class NavigationFragment extends BaseSettingsFragment {
 			}
 			bundle.putString(DIALOG_TYPE, TYPE_NAV_PROFILE);
 			dialog.setArguments(bundle);
+			dialog.setUsedOnMap(false);
 			if (getActivity() != null) {
 				getActivity().getSupportFragmentManager().beginTransaction()
 						.add(dialog, "select_nav_type").commitAllowingStateLoss();

@@ -21,11 +21,12 @@ import net.osmand.aidl.ConnectedApp;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.dialogs.PluginInstalledBottomSheetDialog;
 import net.osmand.plus.download.DownloadIndexesThread;
 
 import java.util.ArrayList;
 
-public class PluginsActivity extends OsmandListActivity implements DownloadIndexesThread.DownloadEvents {
+public class PluginsActivity extends OsmandListActivity implements DownloadIndexesThread.DownloadEvents, PluginInstalledBottomSheetDialog.PluginStateListener {
 
 	public static final int ACTIVE_PLUGINS_LIST_MODIFIED = 1;
 
@@ -117,6 +118,11 @@ public class PluginsActivity extends OsmandListActivity implements DownloadIndex
 				((DownloadIndexesThread.DownloadEvents) fragment).downloadHasFinished();
 			}
 		}
+	}
+
+	@Override
+	public void onPluginStateChanged(OsmandPlugin plugin) {
+		getListAdapter().notifyDataSetChanged();
 	}
 
 	protected class PluginsListAdapter extends ArrayAdapter<Object> {

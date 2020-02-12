@@ -6,7 +6,7 @@
 	android:orientation="vertical"
 	android:paddingLeft="@dimen/content_padding"
 	android:paddingRight="@dimen/content_padding"
-	android:paddingBottom="@dimen/route_info_list_text_padding">
+	android:paddingBottom="@dimen/dialog_button_height">
 
 	<net.osmand.plus.widgets.TextViewEx
 		android:layout_width="match_parent"
