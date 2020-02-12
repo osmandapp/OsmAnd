@@ -1965,6 +1965,7 @@
     <string name="none_selected_gpx">Specify a GPX file by long-tapping first.</string>
     <string name="local_index_select_gpx_file">Select a track</string>
     <string name="gpx_split_interval">Split interval</string>
+    <string name="sort_by_category">Sort by category</string>
     <string name="sort_by_distance">Sort by distance</string>
     <string name="sort_by_name">Sort by name</string>
     <string name="show_zoom_buttons_navigation_descr">Show zoom buttons during navigation.</string>
