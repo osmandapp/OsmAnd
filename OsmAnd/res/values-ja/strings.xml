@@ -2151,15 +2151,15 @@ POIの更新は利用できません</string>
     <string name="quick_actions_delete_text">クイックアクション\"%s\"を削除してもよろしいですか？</string>
     <string name="quick_favorites_show_favorites_dialog">お気に入りダイアログを表示</string>
     <string name="quick_favorites_name_preset">プリセットに名前を付ける</string>
-    <string name="quick_action_add_marker_descr">画面中央アイコンの位置にマップマーカーが追加されます。</string>
-    <string name="quick_action_add_gpx_descr">画面中央アイコンの地点をGPX経由地点として追加します。</string>
-    <string name="quick_action_take_audio_note_descr">画面中央アイコンの地点に音声メモを追加します。</string>
-    <string name="quick_action_take_video_note_descr">画面中央アイコンの地点に動画メモが追加されます。</string>
-    <string name="quick_action_take_photo_note_descr">画面中央アイコンの地点に写真メモが追加されます。</string>
-    <string name="quick_action_add_osm_bug_descr">画面中央アイコンの地点にOSMメモが追加されます。</string>
-    <string name="quick_action_add_poi_descr">画面中央アイコンの地点にPOIが追加されます。</string>
-    <string name="quick_action_navigation_voice_descr">アクションボタンをタップするとナビゲーション中の案内音声ON/OFF切替が出来ます。</string>
-    <string name="quick_action_add_parking_descr">画面中央アイコンの地点を駐車場所として設定します。</string>
+    <string name="quick_action_add_marker_descr">画面中央にマップマーカーを追加するためのボタンです。</string>
+    <string name="quick_action_add_gpx_descr">画面中央にGPX経由地点を追加するボタンです。</string>
+    <string name="quick_action_take_audio_note_descr">画面中央に音声メモを追加するボタンです。</string>
+    <string name="quick_action_take_video_note_descr">画面中央に動画メモを追加するボタンです。</string>
+    <string name="quick_action_take_photo_note_descr">画面中央に写真メモを追加するボタンです。</string>
+    <string name="quick_action_add_osm_bug_descr">画面中央にOSMメモを追加するボタンです。</string>
+    <string name="quick_action_add_poi_descr">画面中央にPOIを追加できるボタンです。</string>
+    <string name="quick_action_navigation_voice_descr">ナビゲーション中の案内音声の有効無効を切り替えることが出来ます。</string>
+    <string name="quick_action_add_parking_descr">画面中央に駐車場所を追加するボタンです。</string>
     <string name="quick_action_interim_dialog">実行時に入力画面を表示</string>
     <string name="favorite_empty_place_name">場所</string>
     <string name="quick_action_duplicates">重複を避けるためにクイックアクション名は[%1$s]に変更されました。</string>
@@ -2927,7 +2927,7 @@ POIの更新は利用できません</string>
     <string name="osm_recipient_stat">編集 %1$s, 合計 %2$s mBTC</string>
     <string name="shared_string_launch">起動</string>
     <string name="lang_gn_py">グアラニー語</string>
-    <string name="quick_action_switch_day_night_descr">OsmAndマップ表示の昼/夜モードを切り替えます</string>
+    <string name="quick_action_switch_day_night_descr">OsmAndマップ表示の昼/夜モードを切り替えることが出来ます。</string>
     <string name="quick_action_switch_day_mode">昼モード</string>
     <string name="quick_action_switch_night_mode">夜モード</string>
     <string name="quick_action_day_night_switch_mode">昼/夜モードの切り替え</string>
@@ -3500,4 +3500,7 @@ POIの更新は利用できません</string>
     <string name="use_system_screen_timeout_promo">デフォルトでは無効になっています。OsmAndがフォアグラウンドで実行されている場合、画面は消灯しません。
 \n
 \n有効にするとOsmAndはシステム設定のスリープ時間に従って消灯します。</string>
+    <string name="clear_recorded_data">記録データの消去</string>
+    <string name="copy_coordinates">座標をコピー</string>
+    <string name="routing_profile_direct_to">直接指示</string>
 </resources>
