@@ -437,7 +437,7 @@ public class RoutingHelper {
 
 				// 2. Analyze if we need to recalculate route
 				// >100m off current route (sideways)
-				if (currentRoute > 0) {
+				if (currentRoute > 0 && !route.noRecalculations) {
 					distOrth = getOrthogonalDistance(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
 					if ((!settings.DISABLE_OFFROUTE_RECALC.get()) && (distOrth > (1.7 * posTolerance))) {
 						log.info("Recalculate route, because correlation  : " + distOrth); //$NON-NLS-1$
@@ -448,7 +448,8 @@ public class RoutingHelper {
 				// 3. Identify wrong movement direction
 				Location next = route.getNextRouteLocation();
 				boolean wrongMovementDirection = checkWrongMovementDirection(currentLocation, next);
-				if ((!settings.DISABLE_WRONG_DIRECTION_RECALC.get()) && wrongMovementDirection && (currentLocation.distanceTo(routeNodes.get(currentRoute)) > (2 * posTolerance))) {
+				if ((!settings.DISABLE_WRONG_DIRECTION_RECALC.get()) && wrongMovementDirection
+						&& (currentLocation.distanceTo(routeNodes.get(currentRoute)) > (2 * posTolerance)) && !route.noRecalculations) {
 					log.info("Recalculate route, because wrong movement direction: " + currentLocation.distanceTo(routeNodes.get(currentRoute))); //$NON-NLS-1$
 					isDeviatedFromRoute = true;
 					calculateRoute = true;
@@ -464,11 +465,11 @@ public class RoutingHelper {
 					if (!inRecalc && !wrongMovementDirection) {
 						voiceRouter.updateStatus(currentLocation, false);
 						voiceRouterStopped = false;
-					} else if (isDeviatedFromRoute && !voiceRouterStopped) {
+					} else if (isDeviatedFromRoute && !voiceRouterStopped && !route.noRecalculations) {
 						voiceRouter.interruptRouteCommands();
 						voiceRouterStopped = true; // Prevents excessive execution of stop() code
 					}
-					if (distOrth > mode.getOffRouteDistance()) {
+					if (distOrth > mode.getOffRouteDistance() && !route.noRecalculations) {
 						voiceRouter.announceOffRoute(distOrth);
 					}
 				}

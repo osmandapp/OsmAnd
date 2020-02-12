@@ -63,7 +63,7 @@ public class RouteCalculationResult {
 	protected int currentWaypointGPX = 0;
 	protected int lastWaypointGPX = 0;
 	protected ApplicationMode appMode;
-
+	protected boolean noRecalculations = false;
 	protected boolean showOriginalRoute = false;
 
 	public RouteCalculationResult(String errorMessage) {
@@ -113,6 +113,7 @@ public class RouteCalculationResult {
 		updateDirectionsTime(this.directions, this.listDistance);
 
 		this.showOriginalRoute = params.showOriginalRoute;
+		this.noRecalculations = params.noRecalculations;
 	}
 
 	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end, List<LatLon> intermediates,

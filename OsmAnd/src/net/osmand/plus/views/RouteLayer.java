@@ -17,6 +17,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.Pair;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -315,7 +316,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		}
 	}
 
-	private void drawProjectionPoint(RotatedTileBox box, Canvas canvas, double[] projectionXY) {
+	private void drawProjectionPoint(Canvas canvas, double[] projectionXY) {
 		if (projectionIcon == null) {
 			projectionIcon = (LayerDrawable) view.getResources().getDrawable(helper.getSettings().getApplicationMode().getLocationIcon().getIconId());
 		}
@@ -1120,16 +1121,16 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			}
 			if (helper.getRoute().isShowOriginalRoute()) {
 				//add projection point on original route
-				double[] projectionOnRoute = calculateProjectionOnRoutePoint(helper.getLastProjection(),
+				double[] projectionOnRoute = calculateProjectionOnRoutePoint(
 						helper.getOriginalRouteAllLoc(), helper, tb);
 				if (projectionOnRoute != null) {
-					drawProjectionPoint(tb, canvas, projectionOnRoute);
+					drawProjectionPoint(canvas, projectionOnRoute);
 				}
 			}
 		}
 	}
 	
-	private double[] calculateProjectionOnRoutePoint(Location lastProjection, List<Location> routeNodes, RoutingHelper helper, RotatedTileBox box) {
+	private double[] calculateProjectionOnRoutePoint(List<Location> routeNodes, RoutingHelper helper, RotatedTileBox box) {
 		double[] projectionXY;
 		boolean visible;
 		Location previousInRoute = null;
@@ -1148,25 +1149,30 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			nextInRoute = routeNodes.get(routeNodes.size() - 1);
 		}
 
-		int centerX = box.getPixXFromLonNoRot(nextInRoute.getLongitude());
-		int centerY = box.getPixYFromLatNoRot(nextInRoute.getLatitude());
-		int aX = box.getPixXFromLonNoRot(lastProjection.getLongitude());
-		int aY = box.getPixYFromLatNoRot(lastProjection.getLatitude());
-		int bX = box.getPixXFromLonNoRot(previousInRoute.getLongitude());
-		int bY = box.getPixYFromLatNoRot(previousInRoute.getLatitude());
+		if (nextInRoute != null && previousInRoute != null) {
+			final Location ll = view.getApplication().getLocationProvider().getLastKnownLocation();
+			final int aX = box.getPixXFromLonNoRot(ll.getLongitude());
+			final int aY = box.getPixYFromLatNoRot(ll.getLatitude());
+			final int centerX = box.getPixXFromLonNoRot(nextInRoute.getLongitude());
+			final int centerY = box.getPixYFromLatNoRot(nextInRoute.getLatitude());
+			final int bX = box.getPixXFromLonNoRot(previousInRoute.getLongitude());
+			final int bY = box.getPixYFromLatNoRot(previousInRoute.getLatitude());
 
-		double radius = MapUtils.getVectorMagnitude(centerX, centerY, aX, aY);
-		double angle2 = MapUtils.getAngleForRadiusVector(centerX, centerY, bX, bY);
-		projectionXY = MapUtils.getCoordinatesFromRadiusAndAngle(centerX, centerY, radius, angle2);
-		visible = box.containsPoint((float)projectionXY[0], (float)projectionXY[1], 20.0f)
-				&& Math.abs(Math.toDegrees(MapUtils.getAngleBetweenVectors(centerX, centerY, aX, aY, centerX, centerY, bX, bY))) < 90;
-
-		if (visible) {
-			return projectionXY;
-		} else {
-			return null;
+			double radius = MapUtils.getVectorMagnitude(centerX, centerY, aX, aY);
+			double angle2 = MapUtils.getAngleForRadiusVector(centerX, centerY, bX, bY);
+			projectionXY = MapUtils.getCoordinatesFromRadiusAndAngle(centerX, centerY, radius, angle2);
+			double distanceLoc2Proj = MapUtils.getVectorMagnitude(aX, aY, (int)projectionXY[0], (int)projectionXY[1]);
+			boolean isProjectionOnSegment = MapUtils.getVectorMagnitude(centerX ,centerY, (int) projectionXY[0], (int) projectionXY[1])
+					< MapUtils.getVectorMagnitude(centerX, centerY, bX, bY);
+			visible = box.containsPoint((float)projectionXY[0], (float)projectionXY[1], 20.0f)
+					&& Math.abs(Math.toDegrees(MapUtils.getAngleBetweenVectors(centerX, centerY, aX, aY, centerX, centerY, bX, bY))) < 90
+					&& distanceLoc2Proj > AndroidUtils.dpToPx(view.getContext(), 52) / 2.0
+					&& isProjectionOnSegment;
+			if (visible) {
+				return projectionXY;
+			}
 		}
-
+		return null;
 	}
 
 	private List<Location> calculateActionPoints(double topLatitude, double leftLongitude, double bottomLatitude,

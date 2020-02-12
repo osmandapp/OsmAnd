@@ -35,6 +35,7 @@ public class RouteCalculationParams {
 	public RouteCalculationResultListener resultListener;
 
 	public boolean showOriginalRoute;
+	public boolean noRecalculations;
 
 	public interface RouteCalculationResultListener {
 		void onRouteCalculated(RouteCalculationResult route);
