@@ -1197,7 +1197,7 @@
     <string name="select_gpx">GPX-Datei auswählen…</string>
     <string name="route_descr_select_destination">Ziel auswählen</string>
     <string name="interrupt_music_descr">Musikwiedergabe während Sprachansagen pausieren.</string>
-    <string name="always_center_position_on_map">Standort immer in Bildschirmmitte anzeigen</string>
+    <string name="always_center_position_on_map">Standort immer in der Bildschirmmitte anzeigen</string>
     <string name="voice_pref_title">Stimme</string>
     <string name="misc_pref_title">Verschiedenes</string>
     <string name="share_route_as_gpx">Route als GPX-Datei teilen</string>
@@ -1335,7 +1335,7 @@
     <string name="gpx_visibility_txt">Sichtbarkeit</string>
     <string name="gpx_tags_txt">Tags</string>
     <string name="shared_string_description">Beschreibung</string>
-    <string name="gpx_monitoring_disabled_warn">Aufzeichnung mit der GPX-Taste oder unter \'Erweiterungen → Streckenaufzeichnung → Einstellungen\'.</string>
+    <string name="gpx_monitoring_disabled_warn">Aufzeichnung mit der Schaltfläche \'GPX\' oder unter \'Erweiterungen → Streckenaufzeichnung → Einstellungen\'.</string>
     <string name="shared_string_gpx_route">GPX-Route</string>
     <string name="gpx_option_reverse_route">GPX-Route umkehren</string>
     <string name="gpx_option_destination_point">Derzeitiges Ziel verwenden</string>
@@ -1356,7 +1356,7 @@
     <string name="shared_string_all">Alle</string>
     <string name="shared_string_waypoints">Wegpunkte</string>
     <string name="way_alarms">Verkehrswarnungen</string>
-    <string name="record_plugin_description">Diese Erweiterung ermöglicht es, Tracks durch Drücken der GPX-Schaltfläche auf dem Kartenbildschirm aufzunehmen bzw. alle navigierten Routen automatisch zu protokollieren und sie als GPX-Datei lokal (oder über Webdienste auch online) abzuspeichern.
+    <string name="record_plugin_description">Diese Erweiterung ermöglicht es, Tracks durch Drücken der Schaltfläche \'GPX\' auf dem Kartenbildschirm aufzunehmen bzw. alle navigierten Routen automatisch zu protokollieren und sie als GPX-Datei lokal (oder über Webdienste auch online) abzuspeichern. 
 \n 
 \nAufgenommene Tracks können z. B. mit Bekannten geteilt oder als Beiträge zu OSM verwendet werden. Sportler können gespeicherte Tracks zur Überwachung ihres Trainings verwenden. Einige Basisauswertungen sind direkt in OsmAnd enthalten, wie Rundenzeiten, Durchschnittsgeschwindigkeit usw. Die Aufzeichnungen können natürlich auch mit speziellen Analysetools von Drittanbietern nachbearbeitet werden.</string>
     <string name="route_descr_destination">Ziel</string>
@@ -2373,9 +2373,9 @@ Lon %2$s</string>
     <string name="quick_action_add_destination">Ziel festlegen</string>
     <string name="quick_action_replace_destination">Ziel ersetzen</string>
     <string name="quick_action_add_first_intermediate">Ersten Zwischenstopp hinzufügen</string>
-    <string name="quick_action_add_destination_desc">Eine Schaltfläche, um den Bildschirmmittelpunkt zum Routenziel zu machen. Ein zuvor gewähltes Ziel würde zum letzten Zwischenziel werden.</string>
+    <string name="quick_action_add_destination_desc">Eine Schaltfläche, um die Bildschirmmitte zum Routenziel zu machen. Ein zuvor gewähltes Ziel würde zum letzten Zwischenziel werden.</string>
     <string name="quick_action_replace_destination_desc">Eine Schaltfläche, um die Bildschirmmitte zum neuen Routenziel zu machen und das zuvor ausgewählte Ziel (falls vorhanden) zu ersetzen.</string>
-    <string name="quick_action_add_first_intermediate_desc">Eine Schaltfläche, um den Bildschirmmittelpunkt zum ersten Zwischenziel zu machen.</string>
+    <string name="quick_action_add_first_intermediate_desc">Eine Schaltfläche, um die Bildschirmmitte zum ersten Zwischenziel zu machen.</string>
     <string name="subscribe_email_error">Fehler</string>
     <string name="subscribe_email_desc">Abonnieren Sie unsere Mailingliste zu App-Angeboten und erhalten Sie dafür 3 zusätzliche Karten-Downloads!</string>
     <string name="depth_contour_descr">Meeresbodenkonturlinien und Seezeichen.</string>
