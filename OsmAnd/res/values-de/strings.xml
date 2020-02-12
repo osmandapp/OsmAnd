@@ -437,7 +437,7 @@
     <string name="map_underlay">Underlay-Karte</string>
     <string name="map_underlay_descr">Underlay-Karte auswählen</string>
     <string name="layer_overlay">Overlay-Karte…</string>
-    <string name="shared_string_none">Keine(r/s)</string>
+    <string name="shared_string_none">Keine</string>
     <string name="map_overlay">Overlay-Karte</string>
     <string name="map_overlay_descr">Overlay-Karte auswählen</string>
     <string name="tile_source_already_installed">Karte schon installiert, Einstellungen werden aktualisiert.</string>
@@ -1227,7 +1227,7 @@
     <string name="save_as_favorites_points">Als Favoritengruppe speichern</string>
     <string name="select_destination_and_intermediate_points">Ziele auswählen</string>
     <string name="sort_by_distance">Nach Entfernung sortieren</string>
-    <string name="sort_by_name">Nach Name sortieren</string>
+    <string name="sort_by_name">Nach Namen sortieren</string>
     <string name="show_zoom_buttons_navigation_descr">Zoomtasten bei Navigation anzeigen.</string>
     <string name="show_zoom_buttons_navigation">Zoomtasten anzeigen</string>
     <string name="no_index_file_to_download">Keine Downloads gefunden, bitte die Internet-Verbindung überprüfen.</string>
@@ -3495,7 +3495,7 @@ Lon %2$s</string>
     <string name="live_monitoring">Online-Aufzeichnung</string>
     <string name="clear_recorded_data">Aufgezeichnete Daten löschen</string>
     <string name="copy_coordinates">Koordinaten kopieren</string>
-    <string name="monitoring_min_speed_descr_remark">Bemerkung: Geschwindigkeit &gt; 0 Kontrolle: Die meisten GPS-Chipsätze geben nur dann einen Geschwindigkeitswert an, wenn der Algorithmus feststellt, dass Sie in Bewegung sind, und keinen, wenn Sie nicht in Bewegung sind. Die Verwendung der Einstellung &gt; 0 in diesem Filter nutzt also gewissermaßen die Bewegungserkennung des GPS-Chipsatzes. Aber selbst wenn nicht zur Aufnahmezeit gefiltert wurde, verwenden wir diese Funktion in unserer GPX-Analyse, um die Distanz korrigiert zu bestimmen, d.h. der in diesem Feld angezeigte Wert ist die während der Bewegung aufgezeichnete Distanz.</string>
+    <string name="monitoring_min_speed_descr_remark">Bemerkung: Geschwindigkeit &gt; 0 Kontrolle: Die meisten GPS-Chipsätze geben nur dann einen Geschwindigkeitswert an, wenn der Algorithmus feststellt, dass Sie in Bewegung sind, und keinen, wenn Sie nicht in Bewegung sind. Die Verwendung der Einstellung &gt; 0 in diesem Filter nutzt also gewissermaßen die Bewegungserkennung des GPS-Chipsatzes. Aber selbst wenn nicht zur Aufnahmezeit gefiltert wurde, verwenden wir diese Funktion in unserer GPX-Analyse, um die Distanz korrigiert zu bestimmen, d. h., der in diesem Feld angezeigte Wert ist die während der Bewegung aufgezeichnete Distanz.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Nebeneffekt: Als Ergebnis der Filterung nach Genauigkeit können Punkte z.B. unter Brücken, unter Bäumen, zwischen hohen Gebäuden oder bei bestimmten Wetterbedingungen ganz fehlen.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Empfehlung: Es ist schwer vorherzusagen, was aufgezeichnet wird und was nicht, es ist vielleicht am besten, diesen Filter auszuschalten.</string>
     <string name="monitoring_min_distance_descr">Dieser Filter verhindert, dass doppelte Punkte aufgenommen werden, bei denen möglicherweise zu wenig tatsächliche Bewegung stattgefunden hat, und sorgt für ein schöneres räumliches Erscheinungsbild von Spuren, die später nicht nachbearbeitet werden.</string>
@@ -3526,4 +3526,5 @@ Lon %2$s</string>
 \n • Karte der Antarktis hinzugefügt
 \n
 \n</string>
+    <string name="sort_by_category">Nach Kategorie sortieren</string>
 </resources>
