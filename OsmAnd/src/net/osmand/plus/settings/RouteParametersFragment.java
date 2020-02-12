@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.PreferenceViewHolder;
+import android.text.SpannableStringBuilder;
 import android.widget.ImageView;
 
 import net.osmand.StateChangedListener;
@@ -136,9 +137,13 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		fastRoute.setSummaryOn(R.string.shared_string_on);
 		fastRoute.setSummaryOff(R.string.shared_string_off);
 
+
 		ApplicationMode am = getSelectedAppMode();
 		if (am.getRouteService() != RouteProvider.RouteService.OSMAND) {
 			screen.addPreference(fastRoute);
+			if (am.getRouteService() == RouteProvider.RouteService.STRAIGHT) {
+				setupSelectRouteRecalcDistance(screen);
+			}
 		} else {
 			GeneralRouter router = getRouter(getMyApplication().getRoutingConfig(), am);
 			clearParameters();
@@ -226,6 +231,21 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 				}
 			}
 		}
+	}
+
+	private void setupSelectRouteRecalcDistance(PreferenceScreen screen) {
+		Float[] entryValues = new Float[] {10.f, 20.0f, 30.0f, 50.0f, 100.0f, 200.0f, 500.0f, 1000.0f, 1500.0f};
+		String[] entries = new String[entryValues.length];
+		entries[0] = getString(R.string.shared_string_not_selected);
+		for (int i = 1; i < entryValues.length; i++) {
+			entries[i] = entryValues[i].intValue() + " " + getString(R.string.m) + "  (" + Math.round(entryValues[i] / 0.3048f) + " " + getString(R.string.foot) + ")";
+		}
+		ListPreferenceEx routeRecalculationDist = createListPreferenceEx(settings.ROUTE_RECALCULATION_DISTANCE.getId(),
+				entries, entryValues, R.string.route_recalculation_dist_title, R.layout.preference_with_descr);
+		routeRecalculationDist.setEntries(entries);
+		routeRecalculationDist.setEntryValues(entryValues);
+		routeRecalculationDist.setDescription(getString(R.string.route_recalculation_dist_descr));
+		screen.addPreference(routeRecalculationDist);
 	}
 
 	@Override
