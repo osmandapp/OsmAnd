@@ -21,11 +21,12 @@ import net.osmand.aidl.ConnectedApp;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.dialogs.PluginInstalledBottomSheetDialog;
 import net.osmand.plus.download.DownloadIndexesThread;
 
 import java.util.ArrayList;
 
-public class PluginsActivity extends OsmandListActivity implements DownloadIndexesThread.DownloadEvents {
+public class PluginsActivity extends OsmandListActivity implements DownloadIndexesThread.DownloadEvents, PluginInstalledBottomSheetDialog.PluginStateListener {
 
 	public static final int ACTIVE_PLUGINS_LIST_MODIFIED = 1;
 
@@ -80,9 +81,6 @@ public class PluginsActivity extends OsmandListActivity implements DownloadIndex
 				listModified = true;
 			}
 			getListAdapter().notifyDataSetChanged();
-			if (plugin.isActive() && plugin.isMarketPlugin()) {
-				plugin.showInstallDialog(this);
-			}
 		}
 	}
 
@@ -117,6 +115,11 @@ public class PluginsActivity extends OsmandListActivity implements DownloadIndex
 				((DownloadIndexesThread.DownloadEvents) fragment).downloadHasFinished();
 			}
 		}
+	}
+
+	@Override
+	public void onPluginStateChanged(OsmandPlugin plugin) {
+		getListAdapter().notifyDataSetChanged();
 	}
 
 	protected class PluginsListAdapter extends ArrayAdapter<Object> {
@@ -200,7 +203,7 @@ public class PluginsActivity extends OsmandListActivity implements DownloadIndex
 			if (active) {
 				pluginLogo.setBackgroundResource(isLightTheme ? R.drawable.bg_plugin_logo_enabled_light : R.drawable.bg_plugin_logo_enabled_dark);
 			} else {
-				TypedArray attributes = getTheme().obtainStyledAttributes(new int[]{R.attr.bg_plugin_logo_disabled});
+				TypedArray attributes = getTheme().obtainStyledAttributes(new int[] {R.attr.bg_plugin_logo_disabled});
 				pluginLogo.setBackgroundDrawable(attributes.getDrawable(0));
 				attributes.recycle();
 			}

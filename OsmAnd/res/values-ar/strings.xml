@@ -3379,9 +3379,6 @@
     <string name="monitoring_min_speed">الحد الأدنى للسرعة</string>
     <string name="monitoring_min_accuracy">دقة الحد الأدنى</string>
     <string name="monitoring_min_distance">الحد الأدنى للإزاحة</string>
-    <string name="tracks_view_path">القائمة - الأماكن الخاصة بي - المسارات</string>
-    <string name="multimedia_notes_view_path">القائمة - الأماكن الخاصة بي - ملاحظات</string>
-    <string name="osm_edits_view_path">القائمة - أماكني - تعديلات OSM</string>
     <string name="reset_plugin_to_default">إعادة تعيين إعدادات البرنامج المساعد الافتراضي</string>
     <string name="multimedia_rec_split_title">تقسيم المسجل</string>
     <string name="multimedia_use_system_camera">استخدام تطبيق النظام</string>

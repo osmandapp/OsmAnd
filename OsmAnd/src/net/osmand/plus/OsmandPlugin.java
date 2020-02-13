@@ -24,9 +24,9 @@ import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.dialogs.PluginDisabledBottomSheet;
 import net.osmand.plus.dialogs.PluginInstalledBottomSheetDialog;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapillary.MapillaryPlugin;
@@ -166,6 +166,15 @@ public abstract class OsmandPlugin {
 		}
 	}
 
+	public void showDisableDialog(@Nullable Activity activity) {
+		if (activity instanceof FragmentActivity) {
+			FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
+			if (fragmentManager != null) {
+				PluginDisabledBottomSheet.showInstance(fragmentManager, getId(), activity instanceof MapActivity);
+			}
+		}
+	}
+
 	public void disable(OsmandApplication app) {
 	}
 
@@ -247,7 +256,7 @@ public abstract class OsmandPlugin {
 
 	private static boolean updateMarketPlugin(@NonNull OsmandApplication app, @NonNull Set<String> enabledPlugins, @NonNull OsmandPlugin plugin) {
 		boolean marketEnabled = Version.isMarketEnabled(app);
-		boolean pckg = checkPluginPackage(app, plugin);
+		boolean pckg = plugin.pluginAvailable(app);
 		boolean paid = plugin.isPaid();
 		if ((Version.isDeveloperVersion(app) || !Version.isProductionVersion(app)) && !paid) {
 			// for test reasons
@@ -276,7 +285,7 @@ public abstract class OsmandPlugin {
 	public static void checkInstalledMarketPlugins(@NonNull OsmandApplication app, @Nullable Activity activity) {
 		Set<String> enabledPlugins = app.getSettings().getEnabledPlugins();
 		for (OsmandPlugin plugin : OsmandPlugin.getMarketPlugins()) {
-			if (plugin.getInstallURL() != null && checkPluginPackage(app, plugin)) {
+			if (plugin.getInstallURL() != null && plugin.pluginAvailable(app)) {
 				plugin.onInstall(app, activity);
 				initPlugin(app, plugin);
 			}
@@ -284,13 +293,12 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	private static boolean checkPluginPackage(OsmandApplication app, OsmandPlugin plugin) {
-		return plugin.checkPluginPackage(app);
-
+	protected boolean pluginAvailable(OsmandApplication app) {
+		return checkPluginPackage(app, this);
 	}
 
-	protected boolean checkPluginPackage(OsmandApplication app) {
-		return isPackageInstalled(getComponentId1(), app) || isPackageInstalled(getComponentId2(), app);
+	public static boolean checkPluginPackage(@NonNull OsmandApplication app, @NonNull OsmandPlugin plugin) {
+		return isPackageInstalled(plugin.getComponentId1(), app) || isPackageInstalled(plugin.getComponentId2(), app);
 	}
 
 	public static boolean enablePlugin(@Nullable Activity activity, OsmandApplication app, OsmandPlugin plugin, boolean enable) {
@@ -306,17 +314,27 @@ public abstract class OsmandPlugin {
 			plugin.setActive(false);
 		}
 		app.getSettings().enablePlugin(plugin.getId(), enable);
-		if (activity != null && activity instanceof MapActivity) {
-			final MapActivity mapActivity = (MapActivity) activity;
-			plugin.updateLayers(mapActivity.getMapView(), mapActivity);
-			mapActivity.getDashboard().refreshDashboardFragments();
+		if (activity != null) {
+			if (activity instanceof MapActivity) {
+				final MapActivity mapActivity = (MapActivity) activity;
+				plugin.updateLayers(mapActivity.getMapView(), mapActivity);
+				mapActivity.getDashboard().refreshDashboardFragments();
 
-			DashFragmentData fragmentData = plugin.getCardFragment();
-			if (!enable && fragmentData != null) {
-				FragmentManager fm = mapActivity.getSupportFragmentManager();
-				Fragment fragment = fm.findFragmentByTag(fragmentData.tag);
-				if (fragment != null) {
-					fm.beginTransaction().remove(fragment).commit();
+				DashFragmentData fragmentData = plugin.getCardFragment();
+				if (!enable && fragmentData != null) {
+					FragmentManager fm = mapActivity.getSupportFragmentManager();
+					Fragment fragment = fm.findFragmentByTag(fragmentData.tag);
+					if (fragment != null) {
+						fm.beginTransaction().remove(fragment).commit();
+					}
+				}
+			}
+
+			if (plugin.isMarketPlugin()) {
+				if (plugin.isActive()) {
+					plugin.showInstallDialog(activity);
+				} else if (OsmandPlugin.checkPluginPackage(app, plugin)) {
+					plugin.showDisableDialog(activity);
 				}
 			}
 		}

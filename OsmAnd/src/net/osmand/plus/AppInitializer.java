@@ -563,6 +563,8 @@ public class AppInitializer implements IProgress {
 					return app.getString(R.string.index_name_north_america);
 				} else if(WorldRegion.SOUTH_AMERICA_REGION_ID.equals(id)){
 					return app.getString(R.string.index_name_south_america);
+				} else if(WorldRegion.ANTARCTICA_REGION_ID.equals(id)){
+					return app.getString(R.string.index_name_antarctica);
 				}
 				return null;
 			}

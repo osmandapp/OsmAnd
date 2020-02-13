@@ -3430,9 +3430,6 @@
     <string name="monitoring_min_speed">Minimum hız</string>
     <string name="monitoring_min_accuracy">Minimum doğruluk</string>
     <string name="monitoring_min_distance">Minimum yer değiştirme</string>
-    <string name="tracks_view_path">Menü — Yerlerim — İzlenen yollar</string>
-    <string name="multimedia_notes_view_path">Menü — Yerlerim — Notlar</string>
-    <string name="osm_edits_view_path">Menü — Yerlerim — OSM Düzenlemeleri</string>
     <string name="reset_plugin_to_default">Eklenti ayarlarını varsayılana sıfırla</string>
     <string name="multimedia_rec_split_title">Kaydedici bölmesi</string>
     <string name="multimedia_use_system_camera">Sistem uygulamasını kullan</string>

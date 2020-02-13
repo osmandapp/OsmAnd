@@ -12,10 +12,10 @@
 		android:title="@string/accessibility_mode_disabled" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
-		android:icon="@drawable/ic_action_android"
 		android:key="accessibility_mode"
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/accessibility_mode"
+		tools:icon="@drawable/ic_action_android"
 		tools:summary="@string/accessibility_default" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
