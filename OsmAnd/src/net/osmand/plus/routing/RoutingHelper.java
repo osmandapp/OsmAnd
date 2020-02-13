@@ -398,6 +398,13 @@ public class RoutingHelper {
 		return getOrthogonalDistance(lastFixedLocation, routeNodes.get(route.currentRoute -1), routeNodes.get(route.currentRoute));
 	}
 
+	public float getPosTolerance(Location currentLocation) {
+		if(currentLocation.hasAccuracy()) {
+			return POSITION_TOLERANCE / 2 + currentLocation.getAccuracy();
+		}
+		return POSITION_TOLERANCE;
+	}
+
 	private Location setCurrentLocation(Location currentLocation, boolean returnUpdatedLocation,
 			RouteCalculationResult previousRoute, boolean targetPointsChanged) {
 		Location locationProjection = currentLocation;
@@ -413,10 +420,7 @@ public class RoutingHelper {
 			isDeviatedFromRoute = false;
 			return locationProjection;
 		}
-		float posTolerance = POSITION_TOLERANCE;
-		if(currentLocation.hasAccuracy()) {
-			posTolerance = POSITION_TOLERANCE / 2 + currentLocation.getAccuracy();
-		}
+		float posTolerance = getPosTolerance(currentLocation);
 		boolean calculateRoute = false;
 		synchronized (this) {
 			isDeviatedFromRoute = false;
@@ -436,10 +440,11 @@ public class RoutingHelper {
 				int currentRoute = route.currentRoute;
 
 				// 2. Analyze if we need to recalculate route
-				// >100m off current route (sideways)
+				// >100m off current route (sideways) or parameter (for Straight line)
 				if (currentRoute > 0 && !route.noRecalculations) {
+					double allowableDeviation = route.routeRecalcDistance <= 0 ? (1.7 * posTolerance) : route.routeRecalcDistance;
 					distOrth = getOrthogonalDistance(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
-					if ((!settings.DISABLE_OFFROUTE_RECALC.get()) && (distOrth > (1.7 * posTolerance))) {
+					if ((!settings.DISABLE_OFFROUTE_RECALC.get()) && (distOrth > allowableDeviation)) {
 						log.info("Recalculate route, because correlation  : " + distOrth); //$NON-NLS-1$
 						isDeviatedFromRoute = true;
 						calculateRoute = true;
@@ -448,8 +453,9 @@ public class RoutingHelper {
 				// 3. Identify wrong movement direction
 				Location next = route.getNextRouteLocation();
 				boolean wrongMovementDirection = checkWrongMovementDirection(currentLocation, next);
+				double allowableDeviation = route.routeRecalcDistance <= 0 ? (2 * posTolerance) : route.routeRecalcDistance;
 				if ((!settings.DISABLE_WRONG_DIRECTION_RECALC.get()) && wrongMovementDirection
-						&& (currentLocation.distanceTo(routeNodes.get(currentRoute)) > (2 * posTolerance)) && !route.noRecalculations) {
+						&& (currentLocation.distanceTo(routeNodes.get(currentRoute)) > allowableDeviation) && !route.noRecalculations) {
 					log.info("Recalculate route, because wrong movement direction: " + currentLocation.distanceTo(routeNodes.get(currentRoute))); //$NON-NLS-1$
 					isDeviatedFromRoute = true;
 					calculateRoute = true;
@@ -1099,6 +1105,7 @@ public class RoutingHelper {
 			params.fast = settings.FAST_ROUTE_MODE.getModeValue(mode);
 			params.mode = mode;
 			params.ctx = app;
+			params.routeRecalculationDistance = settings.ROUTE_RECALCULATION_DISTANCE.getModeValue(mode);
 			boolean updateProgress = false;
 			if (params.mode.getRouteService() == RouteService.OSMAND) {
 				params.calculationProgress = new RouteCalculationProgress();

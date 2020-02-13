@@ -952,7 +952,8 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		}
 		
 		private void drawSegments(RotatedTileBox tb, Canvas canvas, double topLatitude, double leftLongitude,
-				double bottomLatitude, double rightLongitude, Location lastProjection, int currentRoute, boolean showOriginalRoute) {
+				double bottomLatitude, double rightLongitude, Location lastProjection, int currentRoute, boolean showOriginalRoute,
+		                          Location pointToReturn) {
 			if (locations.size() == 0) {
 				return;
 			}
@@ -966,6 +967,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 					new GeometrySolidWayStyle(wayContext, attrs.paint.getColor());
 			GeometryWayStyle style = defaultWayStyle;
 			boolean previousVisible = false;
+
 			if (lastProjection != null) {
 				if (leftLongitude <= lastProjection.getLongitude() && lastProjection.getLongitude() <= rightLongitude
 						&& bottomLatitude <= lastProjection.getLatitude() && lastProjection.getLatitude() <= topLatitude) {
@@ -1099,7 +1101,8 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 				Location startLocation = new Location("transport");
 				startLocation.setLatitude(start.getLatitude());
 				startLocation.setLongitude(start.getLongitude());
-				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude, startLocation, 0, false);
+				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
+						startLocation, 0, false, null);
 			}
 		} else {
 			RouteCalculationResult route = helper.getRoute();
@@ -1107,10 +1110,31 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			routeGeometry.updateRoute(tb, route);
 			if (helper.getRoute().isShowOriginalRoute() && helper.getOriginalStartingLocation() != null) {
 				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-						helper.getOriginalStartingLocation(),  0, true);
+						helper.getOriginalStartingLocation(),  0, true, null);
 			} else {
+				Location currentLoc = helper.getLastProjection();
+				int currentRoute = route == null ? 0 : route.getCurrentRoute();
+				Location pointToReturn = null;
+				if (route != null && currentRoute > 0 && route.getRouteRecalcDistance() > 0) {
+					final Location from = routeGeometry.locations.get(currentRoute - 1);
+					final Location to = routeGeometry.locations.get(currentRoute);
+					final LatLon projection = MapUtils.getProjection(currentLoc.getLatitude(),
+							currentLoc.getLongitude(), from.getLatitude(), from.getLongitude(),
+							to.getLatitude(), to.getLongitude());
+
+					final double deviation = MapUtils.getDistance(projection.getLatitude(), projection.getLongitude(), currentLoc.getLatitude(), currentLoc.getLongitude());
+					if (deviation < route.getRouteRecalcDistance()) {
+						double distFromProjectionToEnd = Math.sqrt(Math.pow(to.getLatitude() - projection.getLatitude(), 2) + Math.pow(to.getLongitude() - projection.getLongitude(), 2));
+						double coef = deviation / distFromProjectionToEnd;
+						pointToReturn = new Location("route_layer");
+						pointToReturn.setLatitude(projection.getLatitude() + (to.getLatitude() - projection.getLatitude()) * coef);
+						pointToReturn.setLongitude(projection.getLongitude() + (to.getLongitude() - projection.getLatitude()) * coef);
+						//how to draw line to this point from lastProjection?!
+					}
+				}
+
 				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-						helper.getLastProjection(), route == null ? 0 : route.getCurrentRoute(), false);
+						helper.getLastProjection(), route == null ? 0 : route.getCurrentRoute(), false, pointToReturn);
 			}
 			List<RouteDirectionInfo> rd = helper.getRouteDirections();
 			Iterator<RouteDirectionInfo> it = rd.iterator();

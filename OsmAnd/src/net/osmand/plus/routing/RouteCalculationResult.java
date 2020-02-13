@@ -65,7 +65,7 @@ public class RouteCalculationResult {
 	protected ApplicationMode appMode;
 	protected boolean noRecalculations = false;
 	protected boolean showOriginalRoute = false;
-	protected float routeRecalcDistance = 10.f;
+	protected float routeRecalcDistance = -1f;
 
 	public RouteCalculationResult(String errorMessage) {
 		this.errorMessage = errorMessage;
@@ -115,6 +115,7 @@ public class RouteCalculationResult {
 
 		this.showOriginalRoute = params.showOriginalRoute;
 		this.noRecalculations = params.noRecalculations;
+		if (params.routeRecalculationDistance != 0)
 		this.routeRecalcDistance = params.routeRecalculationDistance;
 	}
 
@@ -234,6 +235,10 @@ public class RouteCalculationResult {
 				}
 			}
 		}
+	}
+
+	public float getRouteRecalcDistance() {
+		return routeRecalcDistance;
 	}
 
 	public List<RouteSegmentResult> getOriginalRoute() {
