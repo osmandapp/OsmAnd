@@ -4,29 +4,50 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.SettingsHelper.SettingsItem;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.view.ComplexButton;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implements View.OnClickListener {
 
 	public static final String TAG = ImportSettingsFragment.class.getSimpleName();
-
+	private OsmandApplication app;
 	private RecyclerView list;
+	private List<? super Object> duplicatesList;
+	private List<SettingsItem> settingsItems;
+	private DuplicatesSettingsAdapter adapter;
+	private File file;
 
-	public static void showInstance(@NonNull FragmentManager fm) {
+	public static void showInstance(@NonNull FragmentManager fm, List<? super Object> duplicatesList,
+									List<SettingsItem> settingsItems, File file) {
 		ImportDuplicatesFragment fragment = new ImportDuplicatesFragment();
+		fragment.setDuplicatesList(duplicatesList);
+		fragment.setSettingsItems(settingsItems);
+		fragment.setFile(file);
 		fragment.show(fm, TAG);
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		app = getMyApplication();
 	}
 
 	@Nullable
@@ -54,29 +75,67 @@ public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		adapter = new DuplicatesSettingsAdapter(getMyApplication(), prepareDuplicates(), getSettings().isLightContent());
+		list.setLayoutManager(new LinearLayoutManager(getMyApplication()));
+		list.setAdapter(adapter);
+	}
+
+	private List<Object> prepareDuplicates() {
+		List<Object> duplicates = new ArrayList<>();
+		List<ApplicationMode> profiles = new ArrayList<>();
+		List<QuickAction> actions = new ArrayList<>();
+
+		for (Object object : duplicatesList) {
+			if (object instanceof ApplicationMode) {
+				profiles.add((ApplicationMode) object);
+			} else if (object instanceof QuickAction) {
+				actions.add((QuickAction) object);
+			}
+		}
+
+		if (!profiles.isEmpty()) {
+			duplicates.add(getString(R.string.shared_sting_profiles));
+			duplicates.addAll(profiles);
+		}
+
+		if (!actions.isEmpty()) {
+			duplicates.add(getString(R.string.shared_sting_quick_actions));
+			duplicates.addAll(actions);
+		}
+		return duplicates;
+	}
+
+	@Override
 	public void onClick(View view) {
 		switch (view.getId()) {
 			case R.id.keep_both_btn: {
-				keepBothItems();
+				importItems(false);
 				break;
 			}
 			case R.id.replace_all_btn: {
-				replaceAllItems();
+				importItems(true);
 				break;
 			}
 		}
 	}
 
-	private void keepBothItems() {
-
-	}
-
-	private void replaceAllItems() {
-
-	}
-
-	private void importItems(List<SettingsItem> list) {
-
+	private void importItems(boolean shouldReplace) {
+		for (SettingsItem item : settingsItems) {
+			item.setShouldReplace(shouldReplace);
+		}
+		app.getSettingsHelper().importSettings(file, settingsItems, "", 1, new SettingsHelper.SettingsImportListener() {
+			@Override
+			public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
+				if (succeed) {
+					app.showShortToastMessage(app.getString(R.string.file_imported_successfully, file.getName()));
+				} else if (empty) {
+					app.showShortToastMessage(app.getString(R.string.file_import_error, file.getName(), app.getString(R.string.shared_string_unexpected_error)));
+				}
+			}
+		});
+		dismiss();
 	}
 
 	private void setupToolbar(Toolbar toolbar) {
@@ -91,5 +150,17 @@ public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implement
 				dismiss();
 			}
 		});
+	}
+
+	public void setDuplicatesList(List<? super Object> duplicatesList) {
+		this.duplicatesList = duplicatesList;
+	}
+
+	public void setSettingsItems(List<SettingsItem> settingsItems) {
+		this.settingsItems = settingsItems;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
 	}
 }

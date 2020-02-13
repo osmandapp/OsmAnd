@@ -658,8 +658,4 @@ public class SQLiteTileSource implements ITileSource {
 	public String getReferer() {
 		return referer;
 	}
-
-	public String getUrlTemplate() {
-		return urlTemplate;
-	}
 }

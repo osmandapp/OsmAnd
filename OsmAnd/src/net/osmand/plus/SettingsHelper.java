@@ -153,6 +153,8 @@ public class SettingsHelper {
 
 		private SettingsItemType type;
 
+		boolean shouldReplace = false;
+
 		SettingsItem(@NonNull SettingsItemType type) {
 			this.type = type;
 		}
@@ -176,8 +178,12 @@ public class SettingsHelper {
 		@NonNull
 		public abstract String getFileName();
 
-		public Boolean shouldReadOnCollecting() {
+		public boolean shouldReadOnCollecting() {
 			return false;
+		}
+
+		public void setShouldReplace(boolean shouldReplace) {
+			this.shouldReplace = shouldReplace;
 		}
 
 		static SettingsItemType parseItemType(@NonNull JSONObject json) throws IllegalArgumentException, JSONException {
@@ -760,11 +766,17 @@ public class SettingsHelper {
 				QuickActionFactory factory = new QuickActionFactory();
 				List<QuickAction> savedActions = factory.parseActiveActionsList(getSettings().QUICK_ACTION_LIST.get());
 				List<QuickAction> newActions = new ArrayList<>(savedActions);
-				for (QuickAction action : quickActions) {
-					for (QuickAction savedAction : savedActions) {
-						if (action.getName(app).equals(savedAction.getName(app))) {
-							newActions.remove(savedAction);
+				if (shouldReplace) {
+					for (QuickAction action : quickActions) {
+						for (QuickAction savedAction : savedActions) {
+							if (action.getName(app).equals(savedAction.getName(app))) {
+								newActions.remove(savedAction);
+							}
 						}
+					}
+				} else {
+					for (QuickAction action : quickActions) {
+						action.setName("new_" + action.getName(app));
 					}
 				}
 				newActions.addAll(quickActions);
@@ -772,8 +784,24 @@ public class SettingsHelper {
 			}
 		}
 
+		public List<QuickAction> getDuplicates() {
+			List<QuickAction> duplicates = new ArrayList<>();
+			if (!quickActions.isEmpty()) {
+				QuickActionFactory factory = new QuickActionFactory();
+				List<QuickAction> savedActions = factory.parseActiveActionsList(getSettings().QUICK_ACTION_LIST.get());
+				for (QuickAction action : quickActions) {
+					for (QuickAction savedAction : savedActions) {
+						if (action.getName(app).equals(savedAction.getName(app))) {
+							duplicates.add(action);
+						}
+					}
+				}
+			}
+			return duplicates;
+		}
+
 		@Override
-		public Boolean shouldReadOnCollecting() {
+		public boolean shouldReadOnCollecting() {
 			return true;
 		}
 
@@ -916,7 +944,7 @@ public class SettingsHelper {
 		}
 
 		@Override
-		public Boolean shouldReadOnCollecting() {
+		public boolean shouldReadOnCollecting() {
 			return true;
 		}
 
@@ -1053,7 +1081,7 @@ public class SettingsHelper {
 		}
 
 		@Override
-		public Boolean shouldReadOnCollecting() {
+		public boolean shouldReadOnCollecting() {
 			return true;
 		}
 

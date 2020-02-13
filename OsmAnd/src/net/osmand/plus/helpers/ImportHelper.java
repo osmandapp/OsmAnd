@@ -786,11 +786,7 @@ public class ImportHelper {
 							if (succeed) {
 								FragmentManager fragmentManager = activity.getSupportFragmentManager();
 								if (fragmentManager != null) {
-									ExportImportProfileBottomSheet.showInstance(
-											fragmentManager,
-											ExportImportProfileBottomSheet.State.IMPORT,
-											file,
-											items);
+									ImportSettingsFragment.showInstance(fragmentManager, items, file);
 								}
 							} else {
 								app.showShortToastMessage(app.getString(R.string.file_import_error, name, app.getString(R.string.shared_string_unexpected_error)));

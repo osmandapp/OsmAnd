@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
@@ -8,8 +8,10 @@
 	android:orientation="vertical">
 
 	<LinearLayout
+		android:id="@+id/toolbar_layout"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
 		android:background="?attr/colorPrimary"
 		android:orientation="vertical">
 
@@ -38,6 +40,7 @@
 		android:id="@+id/description"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:layout_below="@+id/toolbar_layout"
 		android:background="?attr/bg_color"
 		android:paddingStart="@dimen/content_padding"
 		android:paddingTop="@dimen/list_header_settings_top_margin"
@@ -48,20 +51,27 @@
 		android:textSize="@dimen/default_list_text_size"
 		osmand:typeface="@string/font_roboto_medium" />
 
-	<include layout="@layout/list_item_divider" />
+	<include
+		android:id="@+id/description_divider"
+		layout="@layout/card_bottom_divider"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/description" />
 
 	<ExpandableListView
 		android:id="@android:id/list"
 		android:layout_width="match_parent"
-		android:layout_height="0dp"
-		android:layout_weight="1"
-		android:background="?attr/expandable_list_background"
-		android:groupIndicator="@android:color/transparent" />
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/description_divider"
+		android:layout_marginBottom="@dimen/dialog_button_ex_height"
+		android:groupIndicator="@android:color/transparent"
+		android:listSelector="@android:color/transparent" />
 
 	<LinearLayout
 		android:id="@+id/buttons_container"
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/dialog_button_ex_height"
+		android:layout_alignParentBottom="true"
 		android:background="?attr/bg_color"
 		android:gravity="center"
 		android:orientation="horizontal"
@@ -127,4 +137,4 @@
 
 	</LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

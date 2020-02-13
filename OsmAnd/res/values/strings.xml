@@ -11,6 +11,10 @@
 	Thx - Hardy
 
 -->
+    <string name="shared_sting_nothing_selected">Nothing selected</string>
+    <string name="shared_sting_quick_actions">Quick actions</string>
+    <string name="shared_sting_profiles">Profiles</string>
+    <string name="listed_exist">Listed %1$s, already exist in OsmAnd.</string>
     <string name="replace_all_desc">Current items will be replaced with items from the file</string>
     <string name="replace_all">Replace all</string>
     <string name="keep_both">Keep both</string>
