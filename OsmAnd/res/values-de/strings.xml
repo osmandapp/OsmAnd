@@ -2137,7 +2137,7 @@ Lon %2$s</string>
     <string name="quick_action_add_marker_descr">Eine Schaltfläche zum Hinzufügen einer Kartenmarkierung in der Bildschirmmitte.</string>
     <string name="favorite_empty_place_name">Ort</string>
     <string name="quick_action_showhide_favorites_title">Favoriten ein-/ausblenden</string>
-    <string name="quick_action_take_audio_note_descr">Taste, um eine Audio-Notiz in der Bildschirmmitte einzufügen.</string>
+    <string name="quick_action_take_audio_note_descr">Eine Schaltfläche, um eine Audio-Notiz in der Bildschirmmitte einzufügen.</string>
     <string name="quick_action_take_video_note_descr">Taste, um eine Video-Notiz in der Bildschirmmitte einzufügen.</string>
     <string name="quick_action_take_photo_note_descr">Taste, um eine Foto-Notiz in der Bildschirmmitte einzufügen.</string>
     <string name="quick_action_showhide_poi_title">POI ein-/ausblenden</string>
