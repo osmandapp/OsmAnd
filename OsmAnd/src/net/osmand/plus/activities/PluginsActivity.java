@@ -81,9 +81,6 @@ public class PluginsActivity extends OsmandListActivity implements DownloadIndex
 				listModified = true;
 			}
 			getListAdapter().notifyDataSetChanged();
-			if (plugin.isActive() && plugin.isMarketPlugin()) {
-				plugin.showInstallDialog(this);
-			}
 		}
 	}
 
@@ -206,7 +203,7 @@ public class PluginsActivity extends OsmandListActivity implements DownloadIndex
 			if (active) {
 				pluginLogo.setBackgroundResource(isLightTheme ? R.drawable.bg_plugin_logo_enabled_light : R.drawable.bg_plugin_logo_enabled_dark);
 			} else {
-				TypedArray attributes = getTheme().obtainStyledAttributes(new int[]{R.attr.bg_plugin_logo_disabled});
+				TypedArray attributes = getTheme().obtainStyledAttributes(new int[] {R.attr.bg_plugin_logo_disabled});
 				pluginLogo.setBackgroundDrawable(attributes.getDrawable(0));
 				attributes.recycle();
 			}

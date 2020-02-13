@@ -4,6 +4,7 @@ package net.osmand;
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -156,6 +157,10 @@ public class AndroidUtils {
 		} else {
 			return FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", file);
 		}
+	}
+
+	public static boolean isIntentSafe(Context context, Intent intent) {
+		return intent.resolveActivity(context.getPackageManager()) != null;
 	}
 
 	public static Spannable replaceCharsWithIcon(String text, Drawable icon, String[] chars) {
