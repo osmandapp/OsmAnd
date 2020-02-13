@@ -246,6 +246,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		routeRecalculationDist.setEntries(entries);
 		routeRecalculationDist.setEntryValues(entryValues);
 		routeRecalculationDist.setDescription(getString(R.string.route_recalculation_dist_descr));
+		routeRecalculationDist.setIcon(getRoutingPrefIcon("routing_recalc_distance"));
 		screen.addPreference(routeRecalculationDist);
 	}
 
@@ -423,6 +424,9 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 				return getPersistentPrefIcon(R.drawable.ic_action_fastest_route);
 			case "enable_time_conditional_routing":
 				return getPersistentPrefIcon(R.drawable.ic_action_road_works_dark);
+			case "routing_recalc_distance":
+				return getPersistentPrefIcon(R.drawable.ic_action_minimal_distance);
+
 			default:
 				return null;
 		}
