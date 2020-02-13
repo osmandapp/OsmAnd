@@ -3487,10 +3487,10 @@ Lon %2$s</string>
     <string name="multimedia_use_system_camera">System-App verwenden</string>
     <string name="multimedia_photo_play_sound">Auslöseton der Kamera</string>
     <string name="reset_to_default_category_button_promo">Durch das Zurücksetzen auf die Standardeinstellung wird die Sortierung auf den Standardzustand nach der Installation zurückgesetzt.</string>
-    <string name="accessibility_mode_disabled">Eingabehilfenmodus ist in ihrem System deaktiviert.</string>
+    <string name="accessibility_mode_disabled">Eingabehilfenmodus ist in Ihrem System deaktiviert.</string>
     <string name="use_system_screen_timeout">Zeitlimit für den Systembildschirm verwenden</string>
-    <string name="use_system_screen_timeout_promo">Standardmäßig deaktiviert, wenn OsmAnd im Vordergrund läuft, wird der Bildschirm nicht ausgeblendet.
-\n
+    <string name="use_system_screen_timeout_promo">Standardmäßig deaktiviert. Wenn OsmAnd im Vordergrund läuft, wird der Bildschirm nicht ausgeblendet. 
+\n 
 \nWenn aktiviert, verwendet OsmAnd das Zeitlimit für den Systembildschirm.</string>
     <string name="live_monitoring">Online-Aufzeichnung</string>
     <string name="clear_recorded_data">Aufgezeichnete Daten löschen</string>
