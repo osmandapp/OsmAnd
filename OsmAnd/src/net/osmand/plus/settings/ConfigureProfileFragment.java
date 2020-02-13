@@ -112,6 +112,11 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 				updateToolbarSwitch();
 			}
 		});
+
+		View switchProfile = view.findViewById(R.id.profile_button);
+		if (switchProfile != null) {
+			switchProfile.setVisibility(View.VISIBLE);
+		}
 	}
 
 	@Override

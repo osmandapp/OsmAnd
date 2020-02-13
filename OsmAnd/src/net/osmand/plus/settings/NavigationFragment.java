@@ -51,12 +51,6 @@ public class NavigationFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	protected void createToolbar(LayoutInflater inflater, View view) {
-		super.createToolbar(inflater, view);
-		view.findViewById(R.id.profile_button).setVisibility(View.GONE);
-	}
-
-	@Override
 	protected void setupPreferences() {
 		navigationType = findPreference(NAVIGATION_TYPE);
 		setupNavigationTypePref();
