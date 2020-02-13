@@ -6,6 +6,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.widget.ImageView;
 
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -38,9 +39,10 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		vehicleParametersInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 		vehicleParametersInfo.setTitle(getString(R.string.route_parameters_info, getSelectedAppMode().toHumanString()));
 
-		RouteService routeService = getSelectedAppMode().getRouteService();
+		ApplicationMode mode = getSelectedAppMode();
+		RouteService routeService = mode.getRouteService();
 		if (routeService == RouteService.OSMAND) {
-			GeneralRouter router = getRouter(app.getRoutingConfig(), getSelectedAppMode());
+			GeneralRouter router = getRouter(app.getRoutingConfigForMode(mode), mode);
 			if (router != null) {
 				Map<String, GeneralRouter.RoutingParameter> parameters = router.getParameters();
 

@@ -55,7 +55,6 @@ import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -661,7 +660,7 @@ public class ImportHelper {
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	private void handleRoutingFileImport(final Uri uri, final String fileName, final CallbackWithObject<String> callback) {
+	private void handleRoutingFileImport(final Uri uri, final String fileName, final CallbackWithObject<RoutingConfiguration.Builder> callback) {
 		final AsyncTask<Void, Void, String> routingImportTask = new AsyncTask<Void, Void, String>() {
 			
 			String mFileName;
@@ -698,11 +697,11 @@ public class ImportHelper {
 							if (isActivityNotDestroyed(activity)) {
 								progress.dismiss();
 							}
-							String profileKey = app.getRoutingConfig().getRoutingProfileKeyByFileName(mFileName);
-							if (profileKey != null) {
+							RoutingConfiguration.Builder builder = app.getCustomRoutingConfig(mFileName);
+							if (builder != null) {
 								app.showShortToastMessage(app.getString(R.string.file_imported_successfully, mFileName));
 								if (callback != null) {
-									callback.processResult(profileKey);
+									callback.processResult(builder);
 								}
 							} else {
 								app.showToastMessage(app.getString(R.string.file_does_not_contain_routing_rules, mFileName));

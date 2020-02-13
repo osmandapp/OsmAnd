@@ -19,6 +19,7 @@ import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.router.GeneralRouter;
+import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -158,7 +159,7 @@ public class NavigationFragment extends BaseSettingsFragment {
 		RouteProvider.RouteService routeService;
 		if (profileKey.equals(RoutingProfilesResources.STRAIGHT_LINE_MODE.name())) {
 			routeService = RouteProvider.RouteService.STRAIGHT;
-		} else if (profileKey.equals(RoutingProfilesResources.DIRECT_TO_MODE.name())){
+		} else if (profileKey.equals(RoutingProfilesResources.DIRECT_TO_MODE.name())) {
 			routeService = RouteProvider.RouteService.DIRECT_TO;
 		} else if (profileKey.equals(RoutingProfilesResources.BROUTER_MODE.name())) {
 			routeService = RouteProvider.RouteService.BROUTER;
@@ -227,24 +228,31 @@ public class NavigationFragment extends BaseSettingsFragment {
 					false, null));
 		}
 
-		Map<String, GeneralRouter> inputProfiles = context.getRoutingConfig().getAllRouters();
-		for (Map.Entry<String, GeneralRouter> e : inputProfiles.entrySet()) {
-			if (!e.getKey().equals("geocoding")) {
-				int iconRes = R.drawable.ic_action_gdirections_dark;
-				String name = e.getValue().getProfileName();
-				String description = context.getString(R.string.osmand_default_routing);
-				if (!Algorithms.isEmpty(e.getValue().getFilename())) {
-					description = e.getValue().getFilename();
-				} else if (RoutingProfilesResources.isRpValue(name.toUpperCase())) {
-					iconRes = RoutingProfilesResources.valueOf(name.toUpperCase()).getIconRes();
-					name = context
-							.getString(RoutingProfilesResources.valueOf(name.toUpperCase()).getStringRes());
-				}
-				profilesObjects.put(e.getKey(), new RoutingProfileDataObject(e.getKey(), name, description,
-						iconRes, false, e.getValue().getFilename()));
-			}
+		collectRoutingProfilesFromConfig(context, context.getDefaultRoutingConfig(), profilesObjects);
+		for (RoutingConfiguration.Builder builder : context.getCustomRoutingConfigs().values()) {
+			collectRoutingProfilesFromConfig(context, builder, profilesObjects);
 		}
 		return profilesObjects;
+	}
+
+	private static void collectRoutingProfilesFromConfig(OsmandApplication app, RoutingConfiguration.Builder builder, Map<String, RoutingProfileDataObject> profilesObjects) {
+		for (Map.Entry<String, GeneralRouter> entry : builder.getAllRouters().entrySet()) {
+			String routerKey = entry.getKey();
+			GeneralRouter router = entry.getValue();
+			if (!routerKey.equals("geocoding")) {
+				int iconRes = R.drawable.ic_action_gdirections_dark;
+				String name = router.getProfileName();
+				String description = app.getString(R.string.osmand_default_routing);
+				if (!Algorithms.isEmpty(router.getFilename())) {
+					description = router.getFilename();
+				} else if (RoutingProfilesResources.isRpValue(name.toUpperCase())) {
+					iconRes = RoutingProfilesResources.valueOf(name.toUpperCase()).getIconRes();
+					name = app.getString(RoutingProfilesResources.valueOf(name.toUpperCase()).getStringRes());
+				}
+				profilesObjects.put(routerKey, new RoutingProfileDataObject(routerKey, name, description,
+						iconRes, false, router.getFilename()));
+			}
+		}
 	}
 
 	public static List<ProfileDataObject> getBaseProfiles(Context ctx) {

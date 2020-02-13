@@ -597,10 +597,10 @@ public class RouteProvider {
 		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd();
 		OsmandSettings settings = params.ctx.getSettings();
 		router.setUseFastRecalculation(settings.USE_FAST_RECALCULATION.get());
-		
-		RoutingConfiguration.Builder config = params.ctx.getRoutingConfig();
+
+		RoutingConfiguration.Builder config = params.ctx.getRoutingConfigForMode(params.mode);
 		GeneralRouter generalRouter = SettingsNavigationActivity.getRouter(config, params.mode);
-		if(generalRouter == null) {
+		if (generalRouter == null) {
 			return applicationModeNotSupported(params);
 		}
 		RoutingConfiguration cf = initOsmAndRoutingConfig(config, params, settings, generalRouter);

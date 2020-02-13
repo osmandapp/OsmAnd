@@ -137,11 +137,11 @@ public class CurrentPositionHelper {
 			for (BinaryMapReaderResource rep : checkReaders) {
 				rs[i++] = rep.getReader(BinaryMapReaderResourceType.STREET_LOOKUP);
 			}
-			RoutingConfiguration cfg = app.getRoutingConfig().build(p, 10,
+			RoutingConfiguration cfg = app.getRoutingConfigForMode(am).build(p, 10,
 					new HashMap<String, String>());
 			cfg.routeCalculationTime = System.currentTimeMillis();
 			ctx = new RoutePlannerFrontEnd().buildRoutingContext(cfg, null, rs);
-			RoutingConfiguration defCfg = app.getRoutingConfig().build("geocoding", 10,
+			RoutingConfiguration defCfg = app.getDefaultRoutingConfig().build("geocoding", 10,
 					new HashMap<String, String>());
 			defCtx = new RoutePlannerFrontEnd().buildRoutingContext(defCfg, null, rs);
 		} else {
