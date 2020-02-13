@@ -53,7 +53,7 @@ public class EditTextPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		RelativeLayout editTextLayout = view.findViewById(R.id.text_field_boxes_editTextLayout);
 		if (editTextLayout != null && editTextLayout.getLayoutParams() instanceof RelativeLayout.LayoutParams) {
 			RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) editTextLayout.getLayoutParams();
-			params.setMargins(params.leftMargin, AndroidUtils.dpToPx(ctx, 19), params.rightMargin, params.bottomMargin);
+			params.setMargins(params.leftMargin, AndroidUtils.dpToPx(ctx, 9), params.rightMargin, params.bottomMargin);
 		}
 
 		items.add(new SimpleBottomSheetItem.Builder().setCustomView(view).create());

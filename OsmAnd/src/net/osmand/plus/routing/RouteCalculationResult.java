@@ -35,6 +35,7 @@ public class RouteCalculationResult {
 
 	private static double distanceClosestToIntermediate = 3000;
 	private static double distanceThresholdToIntermediate = 25;
+	private static double DISTANCE_THRESHOLD_TO_INTRODUCE_FIRST_AND_LAST_POINTS = 50;
 	// could not be null and immodifiable!
 	private final List<Location> locations;
 	private final List<RouteDirectionInfo> directions;
@@ -63,6 +64,8 @@ public class RouteCalculationResult {
 	protected int lastWaypointGPX = 0;
 	protected ApplicationMode appMode;
 
+	protected boolean showOriginalRoute = false;
+
 	public RouteCalculationResult(String errorMessage) {
 		this.errorMessage = errorMessage;
 		this.routingTime = 0;
@@ -76,7 +79,7 @@ public class RouteCalculationResult {
 		this.directions = new ArrayList<RouteDirectionInfo>();
 		this.alarmInfo = new ArrayList<AlarmInfo>();
 	}
-	
+
 	public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions, RouteCalculationParams params, List<LocationPoint> waypoints, boolean addMissingTurns) {
 		this.routingTime = 0;
 		this.loadedTiles = 0;
@@ -108,6 +111,8 @@ public class RouteCalculationResult {
 		calculateIntermediateIndexes(params.ctx, this.locations, params.intermediates, localDirections, this.intermediatePoints);
 		this.directions = Collections.unmodifiableList(localDirections);
 		updateDirectionsTime(this.directions, this.listDistance);
+
+		this.showOriginalRoute = params.showOriginalRoute;
 	}
 
 	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end, List<LatLon> intermediates,
@@ -692,22 +697,9 @@ public class RouteCalculationResult {
 	private static void introduceFirstPointAndLastPoint(List<Location> locations, List<RouteDirectionInfo> directions,
 														List<RouteSegmentResult> segs, Location start, LatLon end,
 														OsmandApplication ctx) {
-		if (!locations.isEmpty() && locations.get(0).distanceTo(start) > 50) {
-			// add start point
-			locations.add(0, start);
-			if(segs != null) {
-				segs.add(0, segs.get(0));
-			}
-			if (directions != null && !directions.isEmpty()) {
-				for (RouteDirectionInfo i : directions) {
-					i.routePointOffset++;
-				}
-				RouteDirectionInfo info = new RouteDirectionInfo(directions.get(0).getAverageSpeed(),
-						TurnType.straight());
-				info.routePointOffset = 0;
-				// info.setDescriptionRoute(ctx.getString( R.string.route_head));//; //$NON-NLS-1$
-				directions.add(0, info);
-			}
+		boolean firstPointIntroduced = introduceFirstPoint(locations, directions, segs, start);
+		boolean lastPointIntroduced = introduceLastPoint(locations, directions, segs, end);
+		if (firstPointIntroduced || lastPointIntroduced) {
 			checkForDuplicatePoints(locations, directions);
 		}
 		RouteDirectionInfo lastDirInf = directions.size() > 0 ? directions.get(directions.size() - 1) : null;
@@ -740,6 +732,70 @@ public class RouteCalculationResult {
 			info.routePointOffset = locations.size() - 1;			
 			directions.add(info);
 		}
+	}
+
+	private static boolean introduceFirstPoint(List<Location> locations, List<RouteDirectionInfo> directions,
+	                                           List<RouteSegmentResult> segs, Location start) {
+		if (!locations.isEmpty() && locations.get(0).distanceTo(start) > DISTANCE_THRESHOLD_TO_INTRODUCE_FIRST_AND_LAST_POINTS) {
+			// add start point
+			locations.add(0, start);
+			if (segs != null) {
+				segs.add(0, segs.get(0));
+			}
+			if (directions != null && !directions.isEmpty()) {
+				for (RouteDirectionInfo i : directions) {
+					i.routePointOffset++;
+				}
+				RouteDirectionInfo info = new RouteDirectionInfo(directions.get(0).getAverageSpeed(), TurnType.straight());
+				info.routePointOffset = 0;
+				// info.setDescriptionRoute(ctx.getString( R.string.route_head));//; //$NON-NLS-1$
+				directions.add(0, info);
+			}
+			return true;
+		}
+		return false;
+	}
+
+	private static boolean introduceLastPoint(List<Location> locations, List<RouteDirectionInfo> directions,
+	                                          List<RouteSegmentResult> segs, LatLon end) {
+		if (!locations.isEmpty()) {
+			Location lastFoundLocation = locations.get(locations.size() - 1);
+
+			Location endLocation = new Location(lastFoundLocation.getProvider());
+			endLocation.setLatitude(end.getLatitude());
+			endLocation.setLongitude(end.getLongitude());
+
+			if (lastFoundLocation.distanceTo(endLocation) > DISTANCE_THRESHOLD_TO_INTRODUCE_FIRST_AND_LAST_POINTS) {
+				if (directions != null && !directions.isEmpty()) {
+					if (locations.size() > 2) {
+						int type = TurnType.C;
+						Location prevLast = locations.get(locations.size() - 2);
+						float lastBearing = prevLast.bearingTo(lastFoundLocation);
+						float bearingToEnd = lastFoundLocation.bearingTo(endLocation);
+						double diff = MapUtils.degreesDiff(lastBearing, bearingToEnd);
+						if (Math.abs(diff) > 10) {
+							if (Math.abs(diff) < 60) {
+								type = diff > 0 ? TurnType.TSLL : TurnType.TSLR;
+							} else {
+								type = diff > 0 ? TurnType.TL : TurnType.TR;
+							}
+						}
+
+						RouteDirectionInfo lastDirInf = directions.get(directions.size() - 1);
+						RouteDirectionInfo info = new RouteDirectionInfo(lastDirInf != null ? lastDirInf.getAverageSpeed() : 1, TurnType.valueOf(type, false));
+						info.routePointOffset = locations.size() - 1;
+						directions.add(info);
+					}
+				}
+				// add end point
+				locations.add(endLocation);
+				if (segs != null) {
+					segs.add(segs.get(segs.size() - 1));
+				}
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -1154,5 +1210,8 @@ public class RouteCalculationResult {
 		public int imminent;
 		private int directionInfoInd;
 	}
-	
+
+	public boolean isShowOriginalRoute() {
+		return showOriginalRoute;
+	}
 }

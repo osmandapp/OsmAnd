@@ -181,7 +181,7 @@
     <string name="open_in_osmand">Показати в OsmAnd</string>
     <string name="end_date">Дата завершення</string>
     <string name="start_date">Дата початку</string>
-    <string name="shared_string_map">Карта</string>
+    <string name="shared_string_map">Мапа</string>
     <string name="shared_string_text">Текст</string>
     <string name="map_and_text">Карта та текст</string>
     <string name="process_service">Сервіс OsmAnd Tracker</string>
@@ -266,4 +266,5 @@
     <string name="last_update_from_telegram_duration">Останнє оновлення від Telegram: %1$s тому</string>
     <string name="last_response_duration">Остання відповідь: %1$s тому</string>
     <string name="duration_ago">%1$s тому</string>
+    <string name="shared_string_error_short">ПМЛК</string>
 </resources>

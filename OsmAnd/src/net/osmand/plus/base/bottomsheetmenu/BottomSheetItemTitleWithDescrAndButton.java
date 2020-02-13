@@ -32,7 +32,7 @@ public class BottomSheetItemTitleWithDescrAndButton extends BottomSheetItemWithD
 												  int position,
 												  Drawable icon,
 												  Drawable background,
-												  String title,
+												  CharSequence title,
 												  @ColorRes int titleColorId,
 												  CharSequence description,
 												  @ColorRes int descriptionColorId,

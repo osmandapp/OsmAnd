@@ -20,6 +20,7 @@ public class RoutingProfileDataObject extends ProfileDataObject {
 	}
 
 	public enum RoutingProfilesResources {
+		DIRECT_TO_MODE(R.string.routing_profile_direct_to, R.drawable.ic_action_navigation_type_direct_to),
 		STRAIGHT_LINE_MODE(R.string.routing_profile_straightline, R.drawable.ic_action_split_interval),
 		BROUTER_MODE(R.string.routing_profile_broutrer, R.drawable.ic_action_split_interval),
 		CAR(R.string.rendering_value_car_name, R.drawable.ic_action_car_dark),

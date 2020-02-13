@@ -37,7 +37,7 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 											 int position,
 											 Drawable icon,
 											 Drawable background,
-											 String title,
+											 CharSequence title,
 											 @ColorRes int titleColorId,
 											 CharSequence description,
 											 @ColorRes int descriptionColorId,

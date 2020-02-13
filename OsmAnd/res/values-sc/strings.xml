@@ -3459,9 +3459,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="monitoring_min_speed">Lestresa mìnima</string>
     <string name="monitoring_min_accuracy">Acuradesa mìnima</string>
     <string name="monitoring_min_distance">Movimentu mìnimu</string>
-    <string name="tracks_view_path">Menù — Logos meos — Rastas</string>
-    <string name="multimedia_notes_view_path">Menù — Logos meos — Notas</string>
-    <string name="osm_edits_view_path">Menù — Logos meos — Modìficas de OSM</string>
     <string name="reset_plugin_to_default">Riprìstina sas impostatziones predefinidas de s\'estensione</string>
     <string name="multimedia_use_system_camera">Imprea s\'aplicatzione de sistema</string>
     <string name="multimedia_photo_play_sound">Sonu de s\'oturadore de sa fotocàmera</string>

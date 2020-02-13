@@ -9,6 +9,9 @@ import android.support.v4.view.ViewCompat;
 import android.widget.Toast;
 
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.ShareDialog;
@@ -33,6 +36,7 @@ public class ShareMenu extends BaseMenuController {
 		MESSAGE(R.drawable.ic_action_message, R.string.shared_string_send),
 		CLIPBOARD(R.drawable.ic_action_copy, R.string.shared_string_copy),
 		NAME(R.drawable.ic_action_copy, R.string.copy_location_name),
+		COORDINATES(R.drawable.ic_action_copy, R.string.copy_coordinates),
 		GEO(R.drawable.ic_world_globe_dark, R.string.share_geo),
 		QR_CODE(R.drawable.ic_action_qrcode, R.string.shared_string_qr_code);
 
@@ -62,6 +66,7 @@ public class ShareMenu extends BaseMenuController {
 		list.add(ShareItem.MESSAGE);
 		list.add(ShareItem.CLIPBOARD);
 		list.add(ShareItem.NAME);
+		list.add(ShareItem.COORDINATES);
 		list.add(ShareItem.GEO);
 		list.add(ShareItem.QR_CODE);
 		return list;
@@ -123,6 +128,12 @@ public class ShareMenu extends BaseMenuController {
 							R.string.toast_empty_name_error,
 							Toast.LENGTH_LONG).show();
 				}
+				break;
+			case COORDINATES:
+				OsmandSettings st = ((OsmandApplication) mapActivity.getApplicationContext()).getSettings();
+				int f = st.COORDINATES_FORMAT.get();
+				ShareDialog.sendToClipboard(mapActivity,
+						OsmAndFormatter.getFormattedCoordinates(latLon.getLatitude(), latLon.getLongitude(), f));
 				break;
 			case GEO:
 				Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUrl));

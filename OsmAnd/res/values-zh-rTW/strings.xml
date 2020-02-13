@@ -3465,9 +3465,6 @@
     <string name="monitoring_min_speed">最低速度</string>
     <string name="monitoring_min_accuracy">最低精密度</string>
     <string name="monitoring_min_distance">最小偏移</string>
-    <string name="tracks_view_path">選單 — 我的收藏 — 軌跡</string>
-    <string name="multimedia_notes_view_path">選單 — 我的收藏 — 註記</string>
-    <string name="osm_edits_view_path">選單 — 我的收藏 — OSM 編輯</string>
     <string name="reset_plugin_to_default">重設外掛程式設定為預設值</string>
     <string name="multimedia_rec_split_title">記錄器分黎</string>
     <string name="multimedia_use_system_camera">使用系統應用程式</string>
@@ -3485,4 +3482,37 @@
     <string name="sunset_at">日落於 %1$s</string>
     <string name="sunrise_at">日出於 %1$s</string>
     <string name="accessibility_mode_disabled">您的系統停用了無障礙模式。</string>
+    <string name="reset_to_default_category_button_promo">重設為預設值將會把排序重設回安裝後的預設值。</string>
+    <string name="use_system_screen_timeout">使用系統畫面逾時</string>
+    <string name="use_system_screen_timeout_promo">預設停用，如果 OsmAnd 在前景執行，畫面就不會有逾時的問題。
+\n
+\n若啟用，OsmAnd 將會使用系統逾時設定。</string>
+    <string name="clear_recorded_data">清除已紀錄的資料</string>
+    <string name="release_3_6">• 設定檔：現在您可以變更順序、設定地圖圖示、變更基本設定檔的所有設定以及將它們復原
+\n
+\n • 在導航中新增了出口編號
+\n
+\n • 改善外掛程式設定
+\n
+\n • 改善後的設定畫面可快速存取所有設定檔
+\n
+\n • 新曾了可從其他設定複製設定的選項
+\n
+\n • 新增了在搜尋中變更順序或隱藏 POI 分類的功能
+\n
+\n • 在地圖上正確地對齊 POI 圖示
+\n
+\n • 新增日落／日出資料到設定地圖中
+\n
+\n • 在地圖上新增家／工作地點的圖示
+\n
+\n • 在設定中新增了對多行描述的支援
+\n
+\n • 在日本地圖中加入了正確的音譯
+\n
+\n • 新增了南極洲的地圖
+\n
+\n</string>
+    <string name="copy_coordinates">複製座標</string>
+    <string name="routing_profile_direct_to">點對點</string>
 </resources>

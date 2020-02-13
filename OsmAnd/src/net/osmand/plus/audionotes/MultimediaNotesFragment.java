@@ -62,6 +62,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 
 	private static final Log log = PlatformUtil.getLog(MultimediaNotesFragment.class);
 
+	private static final String OPEN_NOTES_DESCRIPTION = "open_notes_description";
 	private static final String CAMERA_PERMISSION = "camera_permission";
 	private static final String COPY_PLUGIN_SETTINGS = "copy_plugin_settings";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
@@ -244,9 +245,13 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	}
 
 	private void setupPhotoPlaySoundPref(Camera cam, AudioVideoNotesPlugin plugin) {
+		Drawable disabled = getContentIcon(R.drawable.ic_action_music_off);
+		Drawable enabled = getActiveIcon(R.drawable.ic_type_audio);
+		Drawable icon = getPersistentPrefIcon(enabled, disabled);
+
 		SwitchPreferenceEx photoPlaySound = (SwitchPreferenceEx) findPreference(plugin.AV_PHOTO_PLAY_SOUND.getId());
 		photoPlaySound.setDescription(getString(R.string.av_photo_play_sound_descr));
-		photoPlaySound.setIcon(getPersistentPrefIcon(R.drawable.ic_action_music_off));
+		photoPlaySound.setIcon(icon);
 		photoPlaySound.setEnabled(cam != null);
 	}
 
@@ -376,7 +381,10 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	}
 
 	private void setupOpenNotesDescrPref() {
-		String multimediaNotesPath = getString(R.string.multimedia_notes_view_path);
+		String menu = getString(R.string.shared_string_menu);
+		String myPlaces = getString(R.string.shared_string_my_places);
+		String notes = getString(R.string.notes);
+		String multimediaNotesPath = getString(R.string.ltr_or_rtl_triple_combine_via_dash, menu, myPlaces, notes);
 		String multimediaNotesPathDescr = getString(R.string.multimedia_notes_view_descr, multimediaNotesPath);
 
 		int startIndex = multimediaNotesPathDescr.indexOf(multimediaNotesPath);
@@ -384,7 +392,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		Typeface typeface = FontCache.getRobotoMedium(getContext());
 		titleSpan.setSpan(new CustomTypefaceSpan(typeface), startIndex, startIndex + multimediaNotesPath.length(), 0);
 
-		Preference osmEditsDescription = findPreference("open_notes_description");
+		Preference osmEditsDescription = findPreference(OPEN_NOTES_DESCRIPTION);
 		osmEditsDescription.setTitle(titleSpan);
 	}
 
@@ -444,7 +452,8 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	@Override
 	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
-		if (CAMERA_PERMISSION.equals(preference.getKey())) {
+		String prefId = preference.getKey();
+		if (CAMERA_PERMISSION.equals(prefId)) {
 			View selectableView = holder.itemView.findViewById(R.id.selectable_list_item);
 			if (selectableView != null) {
 				int color = AndroidUtils.getColorFromAttr(app, R.attr.activity_background_color);
@@ -460,6 +469,9 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 					AndroidUtils.setBackground(selectableView, bgDrawable);
 				}
 			}
+		} else if (OPEN_NOTES_DESCRIPTION.equals(prefId)) {
+			int minHeight = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_list_item_height);
+			holder.itemView.setMinimumHeight(minHeight);
 		}
 	}
 

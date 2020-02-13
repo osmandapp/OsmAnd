@@ -79,7 +79,8 @@ public class RouteProvider {
 	public enum RouteService {
 		OSMAND("OsmAnd (offline)"),
 		BROUTER("BRouter (offline)"),
-		STRAIGHT("Straight line");
+		STRAIGHT("Straight line"),
+		DIRECT_TO("Direct To");
 
 		private final String name;
 
@@ -305,7 +306,7 @@ public class RouteProvider {
 			try {
 				RouteCalculationResult res;
 				boolean calcGPXRoute = params.gpxRoute != null && !params.gpxRoute.points.isEmpty();
-				if(calcGPXRoute && !params.gpxRoute.calculateOsmAndRoute){
+				if (calcGPXRoute && !params.gpxRoute.calculateOsmAndRoute) {
 					res = calculateGpxRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.OSMAND) {
 					res = findVectorMapsRoute(params, calcGPXRoute);
@@ -315,10 +316,11 @@ public class RouteProvider {
 //					res = findORSRoute(params);
 //				} else if (params.type == RouteService.OSRM) {
 //					res = findOSRMRoute(params);
-				} else if (params.mode.getRouteService() == RouteService.STRAIGHT){
+				} else if (params.mode.getRouteService() == RouteService.STRAIGHT) {
 					res = findStraightRoute(params);
-				}
-				else {
+				} else if (params.mode.getRouteService() == RouteService.DIRECT_TO) {
+					res = findDirectTo(params);
+				} else {
 					res = new RouteCalculationResult("Selected route service is not available");
 				}
 				if(log.isInfoEnabled() ){
@@ -1233,6 +1235,33 @@ public class RouteProvider {
 	}
 
 	private RouteCalculationResult findStraightRoute(RouteCalculationParams params) {
+		double[] lats = new double[] { params.start.getLatitude(), params.end.getLatitude() };
+		double[] lons = new double[] { params.start.getLongitude(), params.end.getLongitude() };
+		List<LatLon> intermediates = params.intermediates;
+		List<Location> dots = new ArrayList<Location>();
+		//writing start location
+		Location location = new Location(String.valueOf("start"));
+		location.setLatitude(lats[0]);
+		location.setLongitude(lons[0]);
+		//adding intermediate dots if they exists
+		if (intermediates != null){
+			for(int i =0; i<intermediates.size();i++){
+				location = new Location(String.valueOf(i));
+				location.setLatitude(intermediates.get(i).getLatitude());
+				location.setLongitude(intermediates.get(i).getLongitude());
+				dots.add(location);
+			}
+		}
+		//writing end location
+		location = new Location(String.valueOf("end"));
+		location.setLatitude(lats[1]);
+		location.setLongitude(lons[1]);
+		dots.add(location);
+		return new RouteCalculationResult(dots, null, params, null, true);
+	}
+
+	private RouteCalculationResult findDirectTo(RouteCalculationParams params) {
+		params.showOriginalRoute = true;
 		double[] lats = new double[] { params.start.getLatitude(), params.end.getLatitude() };
 		double[] lons = new double[] { params.start.getLongitude(), params.end.getLongitude() };
 		List<LatLon> intermediates = params.intermediates;

@@ -57,7 +57,8 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	}
 
 	public static final int ANIMATION_DURATION = 200;
-	public static final float MIDDLE_STATE_KOEF = .75f;
+	public static final float MIDDLE_STATE_KOEF = .7f;
+	public static final int MIDDLE_STATE_MIN_HEIGHT_DP = 520;
 	public static final String MENU_STATE_KEY = "menu_state_key";
 
 	private InterceptorLinearLayout mainView;
@@ -294,7 +295,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		}
 
 		processScreenHeight(container);
-		minHalfY = viewHeight - (int) (viewHeight * MIDDLE_STATE_KOEF);
+		minHalfY = getMinHalfY(mapActivity);
 
 		final GestureDetector swipeDetector = new GestureDetector(app, new HorizontalSwipeConfirm(true));
 
@@ -597,8 +598,13 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		if (mapActivity != null) {
 			screenHeight = container.getHeight() + statusBarHeight;
 			viewHeight = screenHeight - statusBarHeight;
-			minHalfY = viewHeight - (int) (viewHeight * MIDDLE_STATE_KOEF);
+			minHalfY = getMinHalfY(mapActivity);
 		}
+	}
+
+	private int getMinHalfY(MapActivity mapActivity) {
+		return viewHeight - (int) Math.min(viewHeight * MIDDLE_STATE_KOEF,
+				MIDDLE_STATE_MIN_HEIGHT_DP * mapActivity.getMapView().getDensity() );
 	}
 
 	public boolean isMoving() {
@@ -742,12 +748,17 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		int newMenuState = getCurrentMenuState();
 		boolean needMapAdjust = currentMenuState != newMenuState && newMenuState != MenuState.FULL_SCREEN;
 
+		updateMenuState(currentMenuState, newMenuState);
+
 		applyPosY(currentY, needCloseMenu, needMapAdjust, currentMenuState, newMenuState, 0, animated);
 
 		ContextMenuFragmentListener listener = this.listener;
 		if (listener != null) {
 			listener.onContextMenuStateChanged(this, newMenuState);
 		}
+	}
+
+	protected void updateMenuState(int currentMenuState, int newMenuState) {
 	}
 
 

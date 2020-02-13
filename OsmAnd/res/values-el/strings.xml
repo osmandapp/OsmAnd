@@ -3456,9 +3456,6 @@
     <string name="monitoring_min_speed">Ελάχιστη ταχύτητα</string>
     <string name="monitoring_min_accuracy">Ελάχιστη ακρίβεια</string>
     <string name="monitoring_min_distance">Ελάχιστη μετατόπιση</string>
-    <string name="tracks_view_path">Μενού — Οι τοποθεσίες μου — Ίχνη</string>
-    <string name="multimedia_notes_view_path">Μενού — Οι τοποθεσίες μου — Σημειώσεις</string>
-    <string name="osm_edits_view_path">Μενού — Οι τοποθεσίες μου — Επεξεργασίες OSM</string>
     <string name="reset_plugin_to_default">Επαναφορά ρυθμίσεων προσθέτου στην προεπιλογή</string>
     <string name="multimedia_rec_split_title">Καταγραφή διαίρεσης</string>
     <string name="multimedia_use_system_camera">Χρήση εφαρμογής συστήματος</string>

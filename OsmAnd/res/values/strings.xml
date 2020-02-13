@@ -11,6 +11,28 @@
 	Thx - Hardy
 
 -->
+    <string name="open_settings">Open settings</string>
+    <string name="plugin_disabled">Plugin disabled</string>
+    <string name="plugin_disabled_descr">This plugin is a separate application, you will need to remove it separately if you no longer plan to use it.\n\nThe plugin will remain on the device after removing OsmAnd.</string>
+    <string name="shared_string_menu">Menu</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="routing_profile_direct_to">Direct-to-point</string>
+    <string name="clear_recorded_data">Clear recorded data</string>
+    <string name="release_3_6">
+    • Profiles: now you can change order, set icon for map, change all setting for base profiles and restore them back to defaults\n\n
+    • Added exit number in the navigation\n\n
+    • Reworked plugin settings\n\n
+    • Reworked Settings screen for quick access to all profiles\n\n
+    • Added option to copy settings from another profile\n\n
+    • Added ability to change an order or hide POI categories in Search\n\n
+    • Correctly aligned POI icons on the map\n\n
+    • Added Sunset / Sunrise data to Configure Map\n\n
+    • Added Home/Work icons on the map\n\n
+    • Added support for multiline description in Settings\n\n
+    • Added correct transliteration into the map of Japan\n\n
+    • Added Antarctica map\n\n
+    </string>
+    <string name="copy_coordinates">Copy coordinates</string>
     <string name="reset_to_default_category_button_promo">Reset to default will reset sort order to the default state after installation.</string>
     <string name="use_system_screen_timeout">Use system screen timeout</string>
     <string name="use_system_screen_timeout_promo">Disabled by default, if OsmAnd running on foreground, the screen doesn’t time out.\n\nIf enabled OsmAnd will use system timeout settings.</string>
@@ -54,9 +76,6 @@
     <string name="monitoring_min_speed">Minimum speed</string>
     <string name="monitoring_min_accuracy">Minimum accuracy</string>
     <string name="monitoring_min_distance">Minimum displacement</string>
-    <string name="tracks_view_path">Menu — My places — Tracks</string>
-    <string name="multimedia_notes_view_path">Menu — My places — Notes</string>
-    <string name="osm_edits_view_path">Menu — My places — OSM Edits</string>
     <string name="reset_plugin_to_default">Reset plugin settings to default</string>
     <string name="multimedia_rec_split_title">Recorder split</string>
     <string name="multimedia_use_system_camera">Use system app</string>
@@ -1953,6 +1972,7 @@
     <string name="none_selected_gpx">Specify a GPX file by long-tapping first.</string>
     <string name="local_index_select_gpx_file">Select a track</string>
     <string name="gpx_split_interval">Split interval</string>
+    <string name="sort_by_category">Sort by category</string>
     <string name="sort_by_distance">Sort by distance</string>
     <string name="sort_by_name">Sort by name</string>
     <string name="show_zoom_buttons_navigation_descr">Show zoom buttons during navigation.</string>
@@ -2781,6 +2801,7 @@
     <string name="index_name_africa">Africa</string>
     <string name="index_name_asia">Asia</string>
     <string name="index_name_oceania">Australia and Oceania</string>
+    <string name="index_name_antarctica">Antarctica</string>
     <string name="index_name_other">Worldwide and topic maps</string>
     <string name="index_name_wiki">Worldwide Wikipedia POIs</string>
     <string name="index_name_voice">Voice prompts (recorded, limited features)</string>

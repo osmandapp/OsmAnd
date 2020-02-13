@@ -1378,6 +1378,7 @@ public class SettingsHelper {
 
 		private File file;
 		private String latestChanges;
+		private boolean askBeforeImport;
 		private int version;
 
 		private SettingsImportListener listener;
@@ -1387,11 +1388,13 @@ public class SettingsHelper {
 		private SettingsItem currentItem;
 		private AlertDialog dialog;
 
-		ImportAsyncTask(@NonNull File settingsFile, String latestChanges, int version, @Nullable SettingsImportListener listener) {
+		ImportAsyncTask(@NonNull File settingsFile, String latestChanges, int version, boolean askBeforeImport,
+						@Nullable SettingsImportListener listener) {
 			this.file = settingsFile;
 			this.listener = listener;
 			this.latestChanges = latestChanges;
 			this.version = version;
+			this.askBeforeImport = askBeforeImport;
 			importer = new SettingsImporter(app);
 			collectOnly = true;
 		}
@@ -1483,7 +1486,7 @@ public class SettingsHelper {
 							break;
 					}
 				} else {
-					if (item.getType() == SettingsItemType.PROFILE) {
+					if (item.getType() == SettingsItemType.PROFILE && askBeforeImport) {
 						String title = activity.getString(R.string.add_new_profile_q, item.getPublicName(app));
 						dialog = showConfirmDialog(item, title, latestChanges);
 					} else {
@@ -1637,8 +1640,9 @@ public class SettingsHelper {
 		}
 	}
 
-	public void importSettings(@NonNull File settingsFile, String latestChanges, int version, @Nullable SettingsImportListener listener) {
-		new ImportAsyncTask(settingsFile, latestChanges, version, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	public void importSettings(@NonNull File settingsFile, String latestChanges, int version,
+							   boolean askBeforeImport, @Nullable SettingsImportListener listener) {
+		new ImportAsyncTask(settingsFile, latestChanges, version, askBeforeImport, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public void importSettings(@NonNull File settingsFile, @NonNull List<SettingsItem> items, String latestChanges, int version, @Nullable SettingsImportListener listener) {

@@ -42,7 +42,6 @@ public class SQLiteTileSource implements ITileSource {
 	private static final String TIME_SUPPORTED = "timesupported";
 	private static final String EXPIRE_MINUTES = "expireminutes";
 
-
 	private ITileSource base;
 	private String urlTemplate = null;
 	private String name;
@@ -230,7 +229,7 @@ public class SQLiteTileSource implements ITileSource {
 				if(cursor.moveToFirst()) {
 					String[] columnNames = cursor.getColumnNames();
 					List<String> list = Arrays.asList(columnNames);
-					int url = list.indexOf("url");
+					int url = list.indexOf(URL_FIELD);
 					if(url != -1) {
 						String template = cursor.getString(url);
 						if(!Algorithms.isEmpty(template)){
@@ -259,7 +258,7 @@ public class SQLiteTileSource implements ITileSource {
 						timeSupported = hasTimeColumn();
 						addInfoColumn("timecolumn", timeSupported? "yes" : "no");
 					}
-					int expireminutes = list.indexOf("expireminutes");
+					int expireminutes = list.indexOf(EXPIRE_MINUTES);
 					this.expirationTimeMillis = -1;
 					if(expireminutes != -1) {
 						int minutes = (int) cursor.getInt(expireminutes);
@@ -267,14 +266,14 @@ public class SQLiteTileSource implements ITileSource {
 							this.expirationTimeMillis = minutes * 60 * 1000l;
 						}
 					} else {
-						addInfoColumn("expireminutes", "0");
+						addInfoColumn(EXPIRE_MINUTES, "0");
 					}
 					int tsColumn = list.indexOf("tilesize");
 					this.tileSizeSpecified = tsColumn != -1;
 					if(tileSizeSpecified) {
 						this.tileSize = (int) cursor.getInt(tsColumn);
 					}
-					int ellipsoid = list.indexOf("ellipsoid");
+					int ellipsoid = list.indexOf(ELLIPSOID);
 					if(ellipsoid != -1) {
 						int set = (int) cursor.getInt(ellipsoid);
 						if(set == 1){
@@ -292,15 +291,14 @@ public class SQLiteTileSource implements ITileSource {
 					if(randomsId != -1) {
 						this.randoms = cursor.getString(randomsId);
 						this.randomsArray = TileSourceTemplate.buildRandomsArray(this.randoms);
-
 					}
 					//boolean inversiveInfoZoom = tnumbering != -1 && "BigPlanet".equals(cursor.getString(tnumbering));
 					boolean inversiveInfoZoom = inversiveZoom;
-					int mnz = list.indexOf("minzoom");
+					int mnz = list.indexOf(MIN_ZOOM);
 					if(mnz != -1) {
 						minZoom = (int) cursor.getInt(mnz);
 					}
-					int mxz = list.indexOf("maxzoom");
+					int mxz = list.indexOf(MAX_ZOOM);
 					if(mxz != -1) {
 						maxZoom = (int) cursor.getInt(mxz);
 					}
@@ -316,6 +314,33 @@ public class SQLiteTileSource implements ITileSource {
 			}
 		}
 		return db;
+	}
+
+	public void updateFromTileSourceTemplate(TileSourceTemplate r) {
+		if (!onlyReadonlyAvailable) {
+			int maxZoom = r.getMaximumZoomSupported();
+			int minZoom = r.getMinimumZoomSupported();
+			if (inversiveZoom) {
+				int mnz = minZoom;
+				minZoom = 17 - maxZoom;
+				maxZoom = 17 - mnz;
+			}
+			if (getUrlTemplate() != null && !getUrlTemplate().equals(r.getUrlTemplate())) {
+				db.execSQL("update info set " + URL + " = '" + r.getUrlTemplate() + "'");
+			}
+			if (r.getMinimumZoomSupported() != minZoom) {
+				db.execSQL("update info set " + MIN_ZOOM + " = '" + minZoom + "'");
+			}
+			if (r.getMaximumZoomSupported() != maxZoom) {
+				db.execSQL("update info set " + MAX_ZOOM + " = '" + maxZoom + "'");
+			}
+			if (r.isEllipticYTile() != isEllipticYTile()) {
+				db.execSQL("update info set " + ELLIPSOID + " = '" + (r.isEllipticYTile() ? 1 : 0) + "'");
+			}
+			if (r.getExpirationTimeMinutes() != getExpirationTimeMinutes()) {
+				db.execSQL("update info set " + EXPIRE_MINUTES + " = '" + r.getExpirationTimeMinutes() + "'");
+			}
+		}
 	}
 
 	private void addInfoColumn(String columnName, String value) {
@@ -617,4 +642,5 @@ public class SQLiteTileSource implements ITileSource {
 	public String getReferer() {
 		return referer;
 	}
+
 }

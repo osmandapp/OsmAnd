@@ -46,6 +46,7 @@ import net.osmand.plus.activities.DayNightHelper;
 import net.osmand.plus.activities.ExitActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.base.MapViewTrackingUtilities;
@@ -465,7 +466,7 @@ public class OsmandApplication extends MultiDexApplication {
 		if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
 			if (warningNoneProvider && voiceProvider == null) {
 				if (uiContext instanceof MapActivity) {
-					((MapActivity) uiContext).showVoiceProviderDialog(applicationMode, applyAllModes);
+					OsmAndDialogs.showVoiceProviderDialog((MapActivity) uiContext, applicationMode, applyAllModes);
 				}
 			}
 		} else {
