@@ -42,11 +42,6 @@ public class SQLiteTileSource implements ITileSource {
 	private static final String TIME_SUPPORTED = "timesupported";
 	private static final String EXPIRE_MINUTES = "expireminutes";
 
-	private static final String TILES_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS tiles (x INTEGER NOT NULL, y INTEGER NOT NULL, z INTEGER NOT NULL, s INTEGER, image BLOB, time INTEGER, PRIMARY KEY (x, y, z))";
-	private static final String CREATE_INDEX_X = "CREATE INDEX index_tiles_on_x ON tiles (x)";
-	private static final String CREATE_INDEX_Y = "CREATE INDEX index_tiles_on_y ON tiles (y)";
-	private static final String CREATE_INDEX_Z = "CREATE INDEX index_tiles_on_z ON tiles (z)";
-	private static final String CREATE_INDEX_S = "CREATE INDEX index_tiles_on_s ON tiles (s)";
 
 	private ITileSource base;
 	private String urlTemplate = null;
@@ -113,11 +108,11 @@ public class SQLiteTileSource implements ITileSource {
 		db = ctx.getSQLiteAPI().getOrCreateDatabase(
 				ctx.getAppPath(TILES_INDEX_DIR).getAbsolutePath() + "/" + name + SQLITE_EXT, true);
 
-		db.execSQL("CREATE TABLE IF NOT EXISTS info (" +
-				MIN_ZOOM + ", " +
-				MAX_ZOOM +
-				");");
-		db.execSQL("INSERT INTO info (" + MIN_ZOOM + "," + MAX_ZOOM + ") VALUES ('" + minZoom + "','" + maxZoom + "');");
+		db.execSQL("CREATE TABLE tiles (x int, y int, z int, s int, image blob, time long, PRIMARY KEY (x,y,z,s))");
+		db.execSQL("CREATE INDEX IND on tiles (x,y,z,s)");
+		db.execSQL("CREATE TABLE info(tilenumbering,minzoom,maxzoom)");
+		db.execSQL("CREATE TABLE android_metadata (locale TEXT)");
+		db.execSQL("INSERT INTO info (tilenumbering,minzoom,maxzoom) VALUES ('simple','" + minZoom + "','" + maxZoom + "');");
 
 		addInfoColumn(URL, urlTemplate);
 		addInfoColumn(RANDOMS, randoms);
@@ -127,11 +122,7 @@ public class SQLiteTileSource implements ITileSource {
 		addInfoColumn(TIME_SUPPORTED, timeSupported ? "yes" : "no");
 		addInfoColumn(EXPIRE_MINUTES, String.valueOf(getExpirationTimeMinutes()));
 
-		db.execSQL(TILES_TABLE_CREATE);
-		db.execSQL(CREATE_INDEX_X);
-		db.execSQL(CREATE_INDEX_Y);
-		db.execSQL(CREATE_INDEX_Z);
-		db.execSQL(CREATE_INDEX_S);
+
 		db.close();
 	}
 	
