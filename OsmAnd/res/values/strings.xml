@@ -50,6 +50,11 @@
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Sunset at %1$s</string>
     <string name="sunrise_at">Sunrise at %1$s</string>
+    <string name="shared_string_routing">Routing</string>
+    <string name="shared_string_custom_rendering_style">Custom rendering style</string>
+    <string name="shared_string_include_data">Include additional data</string>
+    <string name="import_profile_dialog_description">The imported profile contains additional data. Click Import to import only profile data or select additional data to import.</string>
+    <string name="export_profile_dialog_description">You can select additional data to export along with the profile.</string>
     <string name="permission_is_required">Permission is required to use this option.</string>
     <string name="logcat_buffer_descr">Check and share detailed logs of the application</string>
     <string name="file_does_not_contain_routing_rules">No routing rules in \'%1$s\'. Please choose another file.</string>
