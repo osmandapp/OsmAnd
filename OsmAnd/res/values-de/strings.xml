@@ -2171,7 +2171,7 @@ Lon %2$s</string>
     <string name="configure_screen_quick_action">Schnellaktion</string>
     <string name="quick_action_add_gpx_descr">Eine Schaltfläche, um einen GPX-Wegpunkt in der Bildschirmmitte einzufügen.</string>
     <string name="quick_action_add_osm_bug_descr">Eine Schaltfläche, um eine OSM-Notiz in der Bildschirmmitte einzufügen.</string>
-    <string name="quick_action_add_poi_descr">Taste, um einen POI in der Bildschirmmitte einzufügen.</string>
+    <string name="quick_action_add_poi_descr">Eine Schaltfläche, um einen POI in der Bildschirmmitte einzufügen.</string>
     <string name="quick_action_navigation_voice_descr">Umschalter, um die Sprachansagen während der Navigation ein- oder auszuschalten.</string>
     <string name="quick_action_add_parking_descr">Taste, um eine Parkposition in der Bildschirmmitte einzufügen.</string>
     <string name="quick_action_interim_dialog">Dialog zum Bearbeiten anzeigen</string>
