@@ -17,7 +17,7 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 
 	private Drawable background;
 	private Drawable icon;
-	protected String title;
+	protected CharSequence title;
 	@ColorRes
 	protected int titleColorId = INVALID_ID;
 
@@ -32,7 +32,7 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 								 int position,
 								 Drawable icon,
 								 Drawable background,
-								 String title,
+								 CharSequence title,
 								 @ColorRes int titleColorId) {
 		super(customView, layoutId, tag, disabled, onClickListener, position);
 		this.icon = icon;
@@ -83,7 +83,7 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 
 		protected Drawable icon;
 		protected Drawable background;
-		protected String title;
+		protected CharSequence title;
 		@ColorRes
 		protected int titleColorId = INVALID_ID;
 
@@ -97,7 +97,7 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 			return this;
 		}
 
-		public Builder setTitle(String title) {
+		public Builder setTitle(CharSequence title) {
 			this.title = title;
 			return this;
 		}

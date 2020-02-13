@@ -3400,9 +3400,6 @@
     <string name="monitoring_min_speed">Vähim kiirus</string>
     <string name="monitoring_min_accuracy">Vähim täpsus</string>
     <string name="monitoring_min_distance">Vähim kõrvalekalle</string>
-    <string name="tracks_view_path">Menüü — Minu kohad — Rajad</string>
-    <string name="multimedia_notes_view_path">Menüü — Minu kohad — Märkmed</string>
-    <string name="osm_edits_view_path">Menüü — Minu kohad — OSM Muudatused</string>
     <string name="reset_plugin_to_default">Lähtesta lisaprogrammi seaded vaikeväärtustele</string>
     <string name="multimedia_rec_split_title">Salvesti jagamine</string>
     <string name="multimedia_use_system_camera">Kasuta süsteemi rakendust</string>

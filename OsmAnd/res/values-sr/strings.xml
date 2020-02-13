@@ -3465,9 +3465,6 @@
     <string name="monitoring_min_speed">Минимална брзина</string>
     <string name="monitoring_min_accuracy">Минимална прецизност</string>
     <string name="monitoring_min_distance">Минимални померај</string>
-    <string name="tracks_view_path">Мени — Моја места — Стазе</string>
-    <string name="multimedia_notes_view_path">Мени — Моја места — Белешке</string>
-    <string name="osm_edits_view_path">Мени — Моја места — OSM измене</string>
     <string name="reset_plugin_to_default">Ресетуј поставке додатака на подразумеване вредности</string>
     <string name="multimedia_rec_split_title">Издељивање снимања</string>
     <string name="multimedia_use_system_camera">Користи системску апликацију</string>

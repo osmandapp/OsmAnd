@@ -3472,9 +3472,6 @@
     <string name="monitoring_min_speed">کمترین سرعت</string>
     <string name="monitoring_min_accuracy">کمترین صحت</string>
     <string name="monitoring_min_distance">کمترین جابجایی</string>
-    <string name="tracks_view_path">منو — مکان‌های من — ردها</string>
-    <string name="multimedia_notes_view_path">منو — مکان‌های من — یادداشت‌ها</string>
-    <string name="osm_edits_view_path">منو — مکان‌های من — ویرایش‌های OSM</string>
     <string name="reset_plugin_to_default">بازنشانی تنظیمات افزونه به پیشفرض</string>
     <string name="button_rate">امتیاز بدهید</string>
     <string name="monitoring_prefs_descr">ناوبری، صحت ردنگاری</string>
