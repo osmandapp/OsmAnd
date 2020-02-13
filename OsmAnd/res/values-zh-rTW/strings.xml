@@ -3465,9 +3465,6 @@
     <string name="monitoring_min_speed">最低速度</string>
     <string name="monitoring_min_accuracy">最低精密度</string>
     <string name="monitoring_min_distance">最小偏移</string>
-    <string name="tracks_view_path">選單 — 我的收藏 — 軌跡</string>
-    <string name="multimedia_notes_view_path">選單 — 我的收藏 — 註記</string>
-    <string name="osm_edits_view_path">選單 — 我的收藏 — OSM 編輯</string>
     <string name="reset_plugin_to_default">重設外掛程式設定為預設值</string>
     <string name="multimedia_rec_split_title">記錄器分黎</string>
     <string name="multimedia_use_system_camera">使用系統應用程式</string>

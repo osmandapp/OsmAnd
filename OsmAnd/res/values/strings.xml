@@ -11,6 +11,11 @@
 	Thx - Hardy
 
 -->
+    <string name="open_settings">Open settings</string>
+    <string name="plugin_disabled">Plugin disabled</string>
+    <string name="plugin_disabled_descr">This plugin is a separate application, you will need to remove it separately if you no longer plan to use it.\n\nThe plugin will remain on the device after removing OsmAnd.</string>
+    <string name="shared_string_menu">Menu</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="routing_profile_direct_to">Direct-to-point</string>
     <string name="clear_recorded_data">Clear recorded data</string>
     <string name="release_3_6">
@@ -66,9 +71,6 @@
     <string name="monitoring_min_speed">Minimum speed</string>
     <string name="monitoring_min_accuracy">Minimum accuracy</string>
     <string name="monitoring_min_distance">Minimum displacement</string>
-    <string name="tracks_view_path">Menu — My places — Tracks</string>
-    <string name="multimedia_notes_view_path">Menu — My places — Notes</string>
-    <string name="osm_edits_view_path">Menu — My places — OSM Edits</string>
     <string name="reset_plugin_to_default">Reset plugin settings to default</string>
     <string name="multimedia_rec_split_title">Recorder split</string>
     <string name="multimedia_use_system_camera">Use system app</string>

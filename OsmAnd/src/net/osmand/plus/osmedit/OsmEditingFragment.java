@@ -78,7 +78,10 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	}
 
 	private void setupOsmEditsDescrPref() {
-		String osmEditsPath = getString(R.string.osm_edits_view_path);
+		String menu = getString(R.string.shared_string_menu);
+		String myPlaces = getString(R.string.shared_string_my_places);
+		String osmEdits = getString(R.string.osm_edits);
+		String osmEditsPath = getString(R.string.ltr_or_rtl_triple_combine_via_dash, menu, myPlaces, osmEdits);
 		String osmEditsPathDescr = getString(R.string.osm_edits_view_descr, osmEditsPath);
 
 		int startIndex = osmEditsPathDescr.indexOf(osmEditsPath);

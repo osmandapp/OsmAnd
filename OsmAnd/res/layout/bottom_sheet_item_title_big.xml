@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/bottom_sheet_title_height"
     android:ellipsize="end"
-    android:gravity="bottom"
+    android:gravity="center_vertical"
     android:letterSpacing="@dimen/text_button_letter_spacing"
     android:maxLines="1"
     android:minHeight="@dimen/bottom_sheet_title_height"
