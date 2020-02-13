@@ -3457,4 +3457,29 @@
     <string name="multimedia_use_system_camera">Usar aplicación del sistema</string>
     <string name="multimedia_photo_play_sound">Sonido del obturador de la cámara</string>
     <string name="osm_authorization_success">La autorización ha sido correcta</string>
+    <string name="release_3_6">• Perfiles: ahora puedes cambiar el orden, definir el icono para el mapa, cambiar todos los ajustes para los perfiles base y restaurarlos de nuevo a los valores predefinidos
+\n
+\n • Se han añadido los números de salida en la navegación
+\n
+\n • Se han rediseñado los ajustes de los complementos
+\n
+\n • Se ha rediseñado la pantalla de ajustes, para un acceso rápido a todos los perfiles
+\n
+\n • Se ha añadido la opción de copiar los ajustes de otro perfil
+\n
+\n • Se ha añadido la posibilidad de cambiar el orden u ocultar las categorías de PDI en la búsqueda
+\n
+\n • Se han alineado correctamente en el mapa los iconos de PDI
+\n
+\n • Se han añadido datos del amanecer y ocaso en «Configurar mapa»
+\n
+\n • Se han añadido iconos de «Casa» y «Trabajo» en el mapa
+\n
+\n • Se ha añadido soporte para las múltiples lineas de descripción en «Ajustes»
+\n
+\n • Se ha añadido la correcta transliteración en el mapa de Japón
+\n
+\n • Se ha añadido el mapa de la Antártida
+\n
+\n</string>
 </resources>

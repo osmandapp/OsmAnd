@@ -2548,7 +2548,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="use_system_keyboard">Utilitza el teclat del sistema</string>
     <string name="fast_coordinates_input_descr">Trieu el format d\'entrada de coordenades. Sempre podeu canviar-lo prement \'Opcions\'.</string>
     <string name="fast_coordinates_input">Entrada ràpida de coordenades</string>
-    <string name="routing_attr_avoid_ice_roads_fords_name">Evita les vies amb risc de gel, guals</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Sense vies glaçades ni guals</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Evita les vies amb risc de gel i els guals.</string>
     <string name="make_round_trip_descr">Afegeix una còpia de punt d\'inici com a destinació.</string>
     <string name="make_round_trip">Fes un trajecte tancat</string>

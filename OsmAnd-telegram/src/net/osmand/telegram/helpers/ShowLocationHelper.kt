@@ -74,6 +74,8 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 
 	private var forcedStop: Boolean = false
 
+	var shouldBlinkWidget: Boolean = false
+
 	init {
 		app.osmandAidlHelper.addConnectionListener(object : OsmandAidlHelper.OsmandHelperListener {
 			override fun onOsmandConnectionStateChanged(connected: Boolean) {
@@ -222,8 +224,10 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 	}
 
 	fun addOrUpdateStatusWidget(time: Long, isSending: Boolean) {
+		var noSubText = false
 		var iconDay: String
 		var iconNight: String
+		val diffTime = (System.currentTimeMillis() - time) / 1000
 		val menuIcon = if (isOsmandHasStatusWidgetIcon()) {
 			STATUS_WIDGET_MENU_ICON
 		} else {
@@ -233,14 +237,17 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 			time > 0L && isSending -> {
 				iconDay = STATUS_WIDGET_ON_ICON_DAY
 				iconNight = STATUS_WIDGET_ON_ICON_NIGHT
-				val diffTime = (System.currentTimeMillis() - time) / 1000
 				OsmandFormatter.getFormattedDurationForWidget(diffTime)
 			}
 			time > 0L && !isSending -> {
 				iconDay = STATUS_WIDGET_ICON_DAY
 				iconNight = STATUS_WIDGET_ICON_NIGHT
-				val diffTime = (System.currentTimeMillis() - time) / 1000
-				OsmandFormatter.getFormattedDurationForWidget(diffTime)
+				if (diffTime >= 2 * 60) {
+					OsmandFormatter.getFormattedDurationForWidget(diffTime)
+				} else {
+					noSubText = true
+					app.getString(R.string.shared_string_error_short)
+				}
 			}
 			time == 0L && isSending -> {
 				iconDay = STATUS_WIDGET_ON_ICON_DAY
@@ -263,7 +270,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 			iconNight = STATUS_WIDGET_ICON_OLD
 		}
 		val subText = when {
-			time > 0 -> {
+			time > 0 && !noSubText -> {
 				if (text.length > 2) {
 					app.getString(R.string.shared_string_hour_short)
 				} else {
@@ -272,13 +279,18 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 			}
 			else -> ""
 		}
-		osmandAidlHelper.addMapWidget(
-				STATUS_WIDGET_ID,
-				menuIcon,
-				app.getString(R.string.status_widget_title),
-				iconDay,
-				iconNight,
-				text, subText, 50, getStatusWidgetIntent())
+		if (shouldBlinkWidget && isSending && isOsmandHasStatusWidgetIcon()) {
+			BlinkWidgetTask(app, menuIcon, text, subText, getStatusWidgetIntent()).executeOnExecutor(executor)
+			shouldBlinkWidget = false
+		} else {
+			osmandAidlHelper.addMapWidget(
+					STATUS_WIDGET_ID,
+					menuIcon,
+					app.getString(R.string.status_widget_title),
+					iconDay,
+					iconNight,
+					text, subText, 50, getStatusWidgetIntent())
+		}
 	}
 
 	private fun getStatusWidgetIntent(): Intent {
@@ -542,6 +554,38 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		override fun doInBackground(vararg params: Void?): Void? {
 			app.showLocationHelper.updateTracksOnMap()
 			return null
+		}
+	}
+
+	private class BlinkWidgetTask(private val app: TelegramApplication, private val menuIcon: String,
+								  private val text: String, private val subText: String,
+								  private val intent: Intent) : AsyncTask<Void, Void, Void?>() {
+
+		override fun onPreExecute() {
+			super.onPreExecute()
+			app.osmandAidlHelper.addMapWidget(
+					STATUS_WIDGET_ID,
+					menuIcon,
+					app.getString(R.string.status_widget_title),
+					STATUS_WIDGET_OFF_ICON_DAY,
+					STATUS_WIDGET_OFF_ICON_NIGHT,
+					text, subText, 50, intent)
+		}
+
+		override fun doInBackground(vararg params: Void?): Void? {
+			Thread.sleep(300)
+			return null
+		}
+
+		override fun onPostExecute(result: Void?) {
+			super.onPostExecute(result)
+			app.osmandAidlHelper.addMapWidget(
+					STATUS_WIDGET_ID,
+					menuIcon,
+					app.getString(R.string.status_widget_title),
+					STATUS_WIDGET_ON_ICON_DAY,
+					STATUS_WIDGET_ON_ICON_NIGHT,
+					text, subText, 50, intent)
 		}
 	}
 

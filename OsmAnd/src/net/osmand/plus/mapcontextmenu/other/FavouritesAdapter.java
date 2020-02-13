@@ -42,12 +42,8 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 		if (holder instanceof FavouritesViewHolder) {
 			FavouritesViewHolder favouritesViewHolder = (FavouritesViewHolder) holder;
 			FavouritePoint favouritePoint = getItem(position);
-			favouritesViewHolder.title.setText(favouritePoint.getName());
-			if (favouritePoint.getCategory().equals("")) {
-				favouritesViewHolder.description.setText(R.string.shared_string_favorites);
-			} else {
-				favouritesViewHolder.description.setText(favouritePoint.getCategory());
-			}
+			favouritesViewHolder.title.setText(favouritePoint.getDisplayName(app));
+			favouritesViewHolder.description.setText(favouritePoint.getCategoryDisplayName(app));
 			favouritesViewHolder.favouriteImage.setImageDrawable(
 					FavoriteImageDrawable.getOrCreate(app, favouritePoint.getColor(), false, favouritePoint));
 			app.getUIUtilities().updateLocationView(cache, favouritesViewHolder.arrowImage, favouritesViewHolder.distance,

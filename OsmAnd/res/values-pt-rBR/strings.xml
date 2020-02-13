@@ -3331,13 +3331,13 @@ Pôr do Sol: %2$s</string>
 \n 
 \n  • Nova caixa de diálogo de download de mapa, sugerindo um mapa para baixar enquanto navega 
 \n 
-\n  • Correções do modo noturno
+\n  • Correções do modo noturno 
 \n 
 \n  • Corrigidos vários problemas de roteamento em todo o mundo 
 \n 
 \n  • Mapa base atualizado com rede rodoviária mais detalhada 
 \n 
-\n  • Áreas inundadas fixas em todo o mundo 
+\n  • Corrigidas áreas inundadas em todo o mundo 
 \n 
 \n  • Roteamento de esqui: perfil de elevação e complexidade de rota adicionados aos detalhes da rota 
 \n 
@@ -3487,4 +3487,32 @@ Pôr do Sol: %2$s</string>
     <string name="use_system_screen_timeout_promo">Desabilitada por padrão, se OsmAnd estiver sendo executado em primeiro plano, a tela não atingirá o tempo limite.
 \n
 \nSe ativado, o OsmAnd usará as configurações de tempo limite do sistema.</string>
+    <string name="clear_recorded_data">Limpar dados gravados</string>
+    <string name="release_3_6">• Perfis: agora você pode alterar a ordem, definir o ícone para o mapa, alterar todas as configurações dos perfis básicos e restaurá-los para os padrões
+\n
+\n  • Número de saída adicionado na navegação
+\n
+\n  • Configurações de plug-in reformuladas
+\n
+\n  • Tela Configurações retrabalhadas para acesso rápido a todos os perfis
+\n
+\n  • Opção adicionada para copiar configurações de outro perfil
+\n
+\n  • Adicionado capacidade de alterar um pedido ou ocultar categorias de PI na Pesquisa
+\n
+\n  • Ícones de POI corretamente alinhados no mapa
+\n
+\n  • Dados do pôr-do-sol/nascer do sol adicionados para configurar o mapa
+\n
+\n  • Adicionado ícones Casa/Trabalho no mapa
+\n
+\n  • Adicionado suporte para descrição de múltiplas linhas em Configurações
+\n
+\n  • Adicionado transliteração correta no mapa do Japão
+\n
+\n  • Adicionado mapa da Antártica
+\n
+\n</string>
+    <string name="copy_coordinates">Copiar coordenadas</string>
+    <string name="routing_profile_direct_to">Direto ao ponto</string>
 </resources>

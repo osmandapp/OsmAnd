@@ -32,7 +32,7 @@
     <string name="confirmation_to_clear_history">¿Limpiar el historial?</string>
     <string name="application_dir_change_warning3">¿Mover los archivos de datos de OsmAnd al nuevo destino\?</string>
     <string name="storage_directory">Almacenamiento del mapa</string>
-    <string name="shared_string_places">Lugares</string>
+    <string name="shared_string_places">Sitios</string>
     <string name="delay_to_start_navigation_descr">Indica el tiempo de espera para permanecer en la pantalla de planificación de ruta.</string>
     <string name="delay_to_start_navigation">Iniciar la guía de giro-a-giro luego de…</string>
     <string name="shared_string_go">Ir</string>
@@ -40,7 +40,7 @@
     <string name="action_create">Acción crear</string>
     <string name="action_modify">Acción modificar</string>
     <string name="action_delete">Acción borrar</string>
-    <string name="osm_edits">Ediciones OSM</string>
+    <string name="osm_edits">Ediciones de OSM</string>
     <string name="osmand_parking_hour">h</string>
     <string name="osmand_parking_minute">min</string>
     <string name="parking_place_limited">Estacionamiento limitado hasta las</string>
@@ -764,7 +764,7 @@ Lon %2$s</string>
 \n - Mapas vectoriales compactos disponibles de todo el planeta 
 \n - Descarga de mapas por país o región directamente desde la aplicación 
 \n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés (PDI), Favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable 
-\n - Búsqueda sin conexión de direcciones y lugares (PDI) 
+\n - Búsqueda sin conexión de direcciones y sitios (PDI) 
 \n - Navegación sin conexión para distancias de rango medio 
 \n - Modos de automóvil, bicicleta y peatón con opcional: 
 \n - Cambio automático de modo diurno/nocturno 
@@ -791,7 +791,7 @@ Lon %2$s</string>
 \n - Descarga ilimitada de mapas de países o regiones directamente desde la aplicación 
 \n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, Favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable 
 \n 
-\n - Búsqueda sin conexión de direcciones y lugares (PDI) 
+\n - Búsqueda sin conexión de direcciones y sitios (PDI) 
 \n - Rutas sin conexión para distancias de rango medio 
 \n - Modos de automóvil, bicicleta y peatón con opcional: 
 \n - Cambio automático de modo diurno/nocturno 
@@ -930,7 +930,7 @@ Lon %2$s</string>
     <string name="gpx_visibility_txt">Visibilidad</string>
     <string name="gpx_tags_txt">Etiquetas</string>
     <string name="shared_string_description">Descripción</string>
-    <string name="validate_gpx_upload_name_pwd">Indica el usuario y contraseña de OSM para subir archivos GPX.</string>
+    <string name="validate_gpx_upload_name_pwd">Indica el nombre de usuario y contraseña de OSM para subir archivos GPX.</string>
     <string name="default_buttons_support">Soporte</string>
     <string name="support_new_features">Soporte de nuevas funciones</string>
     <string name="support_new_features_descr">Dona para ver nuevas funciones implementadas en la aplicación.</string>
@@ -1039,7 +1039,7 @@ Lon %2$s</string>
     <string name="general_settings">General</string>
     <string name="general_settings_descr">Configura la pantalla y ajustes globales de la aplicación.</string>
     <string name="global_app_settings">Ajustes globales de la aplicación</string>
-    <string name="user_name">Usuario de OSM</string>
+    <string name="user_name">Nombre de usuario de OSM</string>
     <string name="open_street_map_login_descr">Necesario para envíos a OpenStreetMap.org.</string>
     <string name="user_password">Contraseña de OSM</string>
     <string name="osmand_service">Modo reposo</string>
@@ -1101,7 +1101,7 @@ Lon %2$s</string>
     <string name="favorite_delete_multiple">¿Borrar %1$d Favoritos y %2$d grupos de Favoritos?</string>
     <string name="favorite_home_category">Casa</string>
     <string name="favorite_friends_category">Amigos</string>
-    <string name="favorite_places_category">Lugares</string>
+    <string name="favorite_places_category">Sitios</string>
     <string name="shared_string_others">Otros</string>
     <string name="shared_string_name">Nombre</string>
     <string name="favourites_edit_dialog_category">Categoría</string>
@@ -1663,7 +1663,7 @@ Lon %2$s</string>
     <string name="number_of_rows_in_dash">Número de filas en el panel %1$s</string>
     <string name="please_specify_poi_type">Especifica el tipo de PDI.</string>
     <string name="working_days">Días laborales</string>
-    <string name="recent_places">Lugares recientes</string>
+    <string name="recent_places">Sitios recientes</string>
     <string name="favourites">Favoritos</string>
     <string name="poi_action_delete">borrar</string>
     <string name="saved_at_time">Ahora, guardado como: %1$s</string>
@@ -1760,7 +1760,7 @@ Lon %2$s</string>
     <string name="rendering_attr_hideProposed_name">Objetos propuestos</string>
     <string name="read_more">Leer más</string>
     <string name="whats_new">Novedades en</string>
-    <string name="share_osm_edits_subject">Ediciones OSM compartidas vía OsmAnd</string>
+    <string name="share_osm_edits_subject">Ediciones de OSM compartidas vía OsmAnd</string>
     <string name="lang_nds">Bajo Alemán</string>
     <string name="lang_mk">Macedonio</string>
     <string name="lang_fy">Frisón</string>
@@ -2033,7 +2033,7 @@ Lon %2$s</string>
     <string name="storage_place_description">Almacenamiento de datos de OsmAnd (para mapas, archivos GPX, etc.): %1$s.</string>
     <string name="give_permission">Conceder permiso</string>
     <string name="allow_access_location">Permitir el acceso a la ubicación</string>
-    <string name="first_usage_greeting">Obtén direcciones y descubre lugares nuevos sin una conexión a Internet</string>
+    <string name="first_usage_greeting">Obtén direcciones y descubre sitios nuevos sin una conexión a Internet</string>
     <string name="si_mi_meters">Millas/metros</string>
     <string name="get_for">Obtener por %1$s</string>
     <string name="osm_live_banner_desc">Obtenga descargas ilimitadas de mapas, añadiendo actualizaciones semanales, diarias o incluso por hora.</string>
@@ -2261,9 +2261,10 @@ Lon %2$s</string>
 \n • Ajusta el mapa a la dirección del movimiento (o brújula) 
 \n • Muestra tu ubicación y la dirección hacia dónde miras 
 \n • Comparte la ubicación para que tus amigos te encuentren 
-\n • Guarda lugares importantes en «Mis favoritos» 
-\n • Permite elegir como mostrar los nombres en el mapa: En inglés, local, u ortografía fonética 
-\n • Muestra teselas en línea especiales, vista satelital (de Bing), diferentes superposiciones como trazas de travesía/navegación GPX y capas adicionales con transparencia personalizable</string>
+\n • Guarda sitio importantes en «Mis favoritos» 
+\n • Permite elegir cómo mostrar los nombres en el mapa: En inglés, local, u ortografía fonética 
+\n • Muestra teselas en línea especiales, vista satelital (de Bing), diferentes superposiciones como trazas de travesía/navegación GPX y capas adicionales con transparencia personalizable
+\n</string>
     <string name="osmand_extended_description_part4">Esquí
 \nEl complemento de OsmAnd para el estilo del mapa invernal, muestra trazas con nivel de complejidad y alguna información adicional, como la ubicación de los ascensores y otras instalaciones invernales.</string>
     <string name="osmand_extended_description_part5">Ciclismo 
@@ -2308,7 +2309,7 @@ Lon %2$s</string>
     <string name="osmand_plus_extended_description_part3">Vista del mapa 
 \n • Muestra tu ubicación y orientación 
 \n • (Opcional) Ajusta el mapa a la dirección del movimiento (o la brújula) 
-\n • Guarda lugares importantes en «Favoritos» 
+\n • Guarda sitios importantes en «Favoritos» 
 \n • Muestra PDI (puntos de interés) a tu alrededor 
 \n • Muestra teselas en línea especiales, vista satelital (de Bing), diferentes superposiciones como trazas de travesía/navegación GPX y capas adicionales con transparencia personalizable 
 \n • Permite elegir como mostrar los nombres en el mapa: en inglés, local, u ortografía fonética
@@ -2427,10 +2428,10 @@ Lon %2$s</string>
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Widget de Mapillary</string>
     <string name="mapillary_widget_descr">Permite realizar contribuciones rápidas a Mapillary.</string>
-    <string name="mapillary_descr">Fotos a nivel de calle en línea para todos. Descubre lugares, colabora, captura el mundo.</string>
+    <string name="mapillary_descr">Fotos a nivel de calle en línea para todos. Descubre sitios, colabora, captura el mundo.</string>
     <string name="shared_string_add_photos">Añadir fotos</string>
     <string name="mapillary_action_descr">Comparte tus imágenes a nivel de calle a través de Mapillary.</string>
-    <string name="plugin_mapillary_descr">Fotos a nivel de calle para todos. Descubre lugares, colabora, captura el mundo.</string>
+    <string name="plugin_mapillary_descr">Fotos a nivel de calle para todos. Descubre sitios, colabora, captura el mundo.</string>
     <string name="online_photos">Fotos en línea</string>
     <string name="no_photos_descr">Sin fotos aquí.</string>
     <string name="shared_string_install">Instalar</string>
@@ -2470,7 +2471,7 @@ Lon %2$s</string>
     <string name="quick_action_start_stop_navigation">Iniciar/parar navegación</string>
     <string name="quick_action_start_stop_navigation_descr">Un botón que inicia o detiene la navegación.</string>
     <string name="live_monitoring_max_interval_to_send">Tiempo del búfer para el seguimiento en línea</string>
-    <string name="live_monitoring_max_interval_to_send_desrc">Indica el tiempo que el búfer mantendrá los lugares para enviar sin conexión</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Indica el tiempo que el búfer mantendrá los sitios para enviar sin conexión</string>
     <string name="mappilary_no_internet_desc">Las fotos de Mapillary solo están disponibles en línea.</string>
     <string name="retry">Reintentar</string>
     <string name="measurement_tool_action_bar">Navega por el mapa y añade puntos</string>
@@ -2590,7 +2591,7 @@ Lon %2$s</string>
     <string name="add_group">Añadir un grupo</string>
     <string name="add_group_descr">Importar grupos desde Favoritos o puntos de referencia GPX.</string>
     <string name="empty_state_markers_active">¡Crea marcadores del mapa!</string>
-    <string name="empty_state_markers_active_desc">Pulsa en «Lugares» y luego pulsa la bandera del marcador.</string>
+    <string name="empty_state_markers_active_desc">Pulsa en «Sitios» y luego pulsa la bandera del marcador.</string>
     <string name="empty_state_markers_groups">Importar grupos</string>
     <string name="empty_state_markers_groups_desc">Importar grupos de Favoritos o puntos de referencia, como marcadores.</string>
     <string name="empty_state_markers_history_desc">Los marcadores descartados aparecerán en esta pantalla.</string>
@@ -2730,7 +2731,7 @@ Lon %2$s</string>
     <string name="purchase_dialog_title">Elegir plan</string>
     <string name="purchase_dialog_travel_description">Comprar uno de los siguientes elementos para recibir la característica de la guía turística sin conexión:</string>
     <string name="purchase_dialog_subtitle">Elegir el elemento adecuado</string>
-    <string name="wikivoyage_travel_guide_descr">Las guías de los lugares más interesantes del planeta, dentro de OsmAnd y sin conexión a Internet.</string>
+    <string name="wikivoyage_travel_guide_descr">Las guías de los sitios más interesantes del planeta, dentro de OsmAnd y sin conexión a Internet.</string>
     <string name="wikivoyage_travel_guide">Guías turísticas</string>
     <string name="in_app_purchase">Compras en la aplicación</string>
     <string name="in_app_purchase_desc">Único pago</string>
@@ -2743,7 +2744,7 @@ Lon %2$s</string>
     <string name="monthly_map_updates">Actualizaciones del mapa: cada mes</string>
     <string name="daily_map_updates">Actualizaciones del mapa: cada hora</string>
     <string name="travel_card_update_descr">Nuevos datos disponibles de Wikiviajes, actualiza para disfrutar de ellos.</string>
-    <string name="travel_card_download_descr">Descarga las guías turísticas de Wikiviajes para ver artículos sobre lugares alrededor del mundo, sin una conexión a Internet.</string>
+    <string name="travel_card_download_descr">Descarga las guías turísticas de Wikiviajes para ver artículos sobre sitios alrededor del mundo, sin una conexión a Internet.</string>
     <string name="update_is_available">Actualización disponible</string>
     <string name="download_file">Descargar archivo</string>
     <string name="start_editing_card_image_text">La guía turística libre global que cualquiera puede editar.</string>
@@ -3440,7 +3441,7 @@ Lon %2$s</string>
     <string name="live_monitoring">Seguimiento en línea</string>
     <string name="save_track_logging_accuracy">Precisión de registro</string>
     <string name="tracks_view_descr">Puedes encontrar todas tus trazas grabadas en «%1$s» o en la carpeta OsmAnd usando el administrador de archivos.</string>
-    <string name="multimedia_notes_view_descr">Puedes encontrar todas tus notas en «%1$s».</string>
+    <string name="multimedia_notes_view_descr">Puedes encontrar todas tus notas multimedia en «%1$s».</string>
     <string name="video_notes">Notas de video</string>
     <string name="photo_notes">Notas fotográficas</string>
     <string name="route_recalculation">Recálculo de la ruta</string>
@@ -3474,9 +3475,9 @@ Lon %2$s</string>
     <string name="monitoring_min_speed">Velocidad mínima</string>
     <string name="monitoring_min_accuracy">Precisión mínima</string>
     <string name="monitoring_min_distance">Desplazamiento mínimo</string>
-    <string name="tracks_view_path">Menú — Mis sitios — Trazas</string>
-    <string name="multimedia_notes_view_path">Menú — Mis sitios — Notas</string>
-    <string name="osm_edits_view_path">Menú — Mis sitios — Ediciones de OSM</string>
+    <string name="tracks_view_path">Menú → Mis sitios → Trazas</string>
+    <string name="multimedia_notes_view_path">Menú → Mis sitios → Notas multimedia</string>
+    <string name="osm_edits_view_path">Menú → Mis sitios → Ediciones de OSM</string>
     <string name="reset_plugin_to_default">Restablecer ajustes del complemento a valores predefinidos</string>
     <string name="multimedia_rec_split_title">División de grabación</string>
     <string name="multimedia_use_system_camera">Usar la aplicación del sistema</string>
@@ -3499,4 +3500,32 @@ Lon %2$s</string>
     <string name="use_system_screen_timeout_promo">Desactivado de forma predefinida, si OsmAnd se ejecuta en primer plano, la pantalla se mantendrá encendida.
 \n
 \nSi se activa, OsmAnd utilizará los ajustes de tiempo de espera del sistema.</string>
+    <string name="clear_recorded_data">Vaciar datos grabados</string>
+    <string name="release_3_6">• Perfiles: ahora puedes cambiar el orden, definir el icono para el mapa, cambiar todos los ajustes para los perfiles base y restaurarlos de nuevo a los valores predefinidos
+\n
+\n • Se han añadido los números de salida en la navegación
+\n
+\n • Se han rediseñado los ajustes de los complementos
+\n
+\n • Se ha rediseñado la pantalla de ajustes, para un acceso rápido a todos los perfiles
+\n
+\n • Se ha añadido la opción de copiar los ajustes de otro perfil
+\n
+\n • Se ha añadido la posibilidad de cambiar el orden u ocultar las categorías de PDI en la búsqueda
+\n
+\n • Se han alineado correctamente en el mapa los iconos de PDI
+\n
+\n • Se han añadido datos del amanecer y ocaso en «Configurar mapa»
+\n
+\n • Se han añadido iconos de «Casa» y «Trabajo» en el mapa
+\n
+\n • Se ha añadido soporte para las múltiples lineas de descripción en «Ajustes»
+\n
+\n • Se ha añadido la correcta transliteración en el mapa de Japón
+\n
+\n • Se ha añadido el mapa de la Antártida
+\n
+\n</string>
+    <string name="copy_coordinates">Copiar coordenadas</string>
+    <string name="routing_profile_direct_to">Directo al punto</string>
 </resources>

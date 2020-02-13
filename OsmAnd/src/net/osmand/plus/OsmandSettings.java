@@ -3374,6 +3374,9 @@ public class OsmandSettings {
 	public final CommonPreference<Integer> OSMAND_THEME =
 			new IntPreference("osmand_theme", OSMAND_LIGHT_THEME).makeProfile().cache();
 
+	public final OsmandPreference<Boolean> OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED =
+			new BooleanPreference("open_only_header_route_calculated", false).makeProfile();
+
 	public boolean isLightActionBar() {
 		return isLightContent();
 	}
