@@ -1593,12 +1593,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 		@Override
 		protected void onPreExecute() {
-			getActivity().setProgressBarIndeterminateVisibility(true);
+			((FavoritesActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(true);
 		}
 
 		@Override
 		protected void onPostExecute(String result) {
-			getActivity().setProgressBarIndeterminateVisibility(false);
+			((FavoritesActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(false);
 			allGpxAdapter.refreshSelected();
 			allGpxAdapter.notifyDataSetChanged();
 			if (showOnMap && toShow != null) {
