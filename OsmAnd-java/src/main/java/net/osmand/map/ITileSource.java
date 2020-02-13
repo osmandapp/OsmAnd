@@ -12,6 +12,8 @@ public interface ITileSource {
 
 	public String getUrlToLoad(int x, int y, int zoom);
 
+	public String getUrlTemplate();
+
 	public byte[] getBytes(int x, int y, int zoom, String dirWithTiles) throws IOException;
 
 	public int getMinimumZoomSupported();
@@ -32,4 +34,15 @@ public interface ITileSource {
 
 	public void deleteTiles(String path);
 
+	public int getAvgSize();
+
+	public String getRule();
+
+	public String getRandoms();
+
+	public boolean isInvertedYTile();
+
+	public boolean isTimeSupported();
+
+	public boolean getInversiveZoom();
 }

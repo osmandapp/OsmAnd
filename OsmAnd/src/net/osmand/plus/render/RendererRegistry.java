@@ -343,4 +343,8 @@ public class RendererRegistry {
 		}
 		return null;
 	}
+
+	public Map<String, File> getExternalRenderers() {
+		return externalRenderers;
+	}
 }
