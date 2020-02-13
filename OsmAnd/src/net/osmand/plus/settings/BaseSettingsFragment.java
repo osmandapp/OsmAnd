@@ -165,7 +165,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		updateTheme();
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
-			if (getPreferenceScreen() != null) {
+			if (getPreferenceScreen() != null && currentScreenType != null) {
 				PreferenceManager prefManager = getPreferenceManager();
 				PreferenceScreen preferenceScreen = prefManager.inflateFromResource(prefManager.getContext(), currentScreenType.preferencesResId, null);
 				if (prefManager.setPreferences(preferenceScreen)) {
@@ -293,7 +293,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	@ColorRes
 	public int getStatusBarColorId() {
 		boolean nightMode = isNightMode();
-		if (currentScreenType.profileDependent) {
+		if (isProfileDependent()) {
 			View view = getView();
 			if (view != null && Build.VERSION.SDK_INT >= 23 && !nightMode) {
 				view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -314,6 +314,10 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		return false;
 	}
 
+	public boolean isProfileDependent() {
+		return currentScreenType != null && currentScreenType.profileDependent;
+	}
+
 	@Override
 	public void onDisplayPreferenceDialog(Preference preference) {
 		FragmentManager fragmentManager = getFragmentManager();
@@ -323,13 +327,13 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 		ApplicationMode appMode = getSelectedAppMode();
 		if (preference instanceof ListPreferenceEx) {
-			SingleSelectPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode, currentScreenType.profileDependent, false);
+			SingleSelectPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode, isProfileDependent(), false);
 		} else if (preference instanceof SwitchPreferenceEx) {
-			BooleanPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode, currentScreenType.profileDependent);
+			BooleanPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode, isProfileDependent());
 		} else if (preference instanceof EditTextPreference) {
 			EditTextPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode);
 		} else if (preference instanceof MultiSelectBooleanPreference) {
-			MultiSelectPreferencesBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode, currentScreenType.profileDependent);
+			MultiSelectPreferencesBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode, isProfileDependent());
 		} else {
 			super.onDisplayPreferenceDialog(preference);
 		}
@@ -359,7 +363,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	public void recreate() {
 		FragmentActivity activity = getActivity();
-		if (activity != null) {
+		if (activity != null && currentScreenType != null) {
 			Fragment fragment = Fragment.instantiate(activity, currentScreenType.fragmentName);
 			fragment.setArguments(buildArguments());
 			FragmentManager fm = activity.getSupportFragmentManager();
@@ -386,7 +390,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			titleView.setSingleLine(false);
 		}
 		boolean enabled = preference.isEnabled();
-		if (currentScreenType.profileDependent) {
+		if (isProfileDependent()) {
 			View cb = holder.itemView.findViewById(R.id.switchWidget);
 			if (cb == null) {
 				cb = holder.findViewById(android.R.id.checkbox);
@@ -423,22 +427,28 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		AppBarLayout appBarLayout = (AppBarLayout) view.findViewById(R.id.appbar);
 		ViewCompat.setElevation(appBarLayout, 5.0f);
 
-		View toolbarContainer = UiUtilities.getInflater(getActivity(), isNightMode()).inflate(currentScreenType.toolbarResId, appBarLayout);
+		View toolbarContainer = currentScreenType == null ? null :
+				UiUtilities.getInflater(getActivity(), isNightMode()).inflate(currentScreenType.toolbarResId, appBarLayout);
 
 		TextView toolbarTitle = (TextView) view.findViewById(R.id.toolbar_title);
-		toolbarTitle.setText(getPreferenceScreen().getTitle());
+		if (toolbarTitle != null) {
+			toolbarTitle.setText(getPreferenceScreen().getTitle());
+		}
 
 		View closeButton = view.findViewById(R.id.close_button);
-		closeButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
-					mapActivity.onBackPressed();
+		if (closeButton != null) {
+			closeButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					MapActivity mapActivity = getMapActivity();
+					if (mapActivity != null) {
+						mapActivity.onBackPressed();
+					}
 				}
-			}
-		});
-		View switchProfile = toolbarContainer.findViewById(R.id.profile_button);
+			});
+		}
+
+		View switchProfile = toolbarContainer == null ? null : toolbarContainer.findViewById(R.id.profile_button);
 		if (switchProfile != null) {
 			switchProfile.setContentDescription(getString(R.string.switch_profile));
 			switchProfile.setOnClickListener(new View.OnClickListener() {
@@ -487,7 +497,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 
 		View profileButton = view.findViewById(R.id.profile_button);
-		if (profileButton != null) {
+		if (profileButton != null && currentScreenType != null) {
 			int toolbarRes = currentScreenType.toolbarResId;
 			int iconColor = getActiveProfileColor();
 			int bgColor = UiUtilities.getColorWithAlpha(iconColor, 0.1f);
@@ -521,7 +531,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	private void updatePreferencesScreen() {
-		if (getSelectedAppMode() != null) {
+		if (getSelectedAppMode() != null && currentScreenType != null) {
 			int resId = currentScreenType.preferencesResId;
 			if (resId != -1) {
 				addPreferencesFromResource(resId);
