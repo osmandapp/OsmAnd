@@ -369,7 +369,7 @@ public class UiUtilities {
 				activeColor = ContextCompat.getColor(app, appMode.getIconColorInfo().getColor(nightMode));
 				break;
 			case TOOLBAR:
-				activeColor = ContextCompat.getColor(app, nightMode ? R.color.text_color_tab_active_dark : R.color.text_color_tab_active_light);
+				activeColor = Color.WHITE;
 				inactiveColorPrimary = activeColor;
 				inactiveColorSecondary = UiUtilities.getColorWithAlpha(Color.BLACK, 0.25f);
 				break;
