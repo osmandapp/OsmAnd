@@ -560,7 +560,7 @@
     <string name="unzipping_file">در حال استخراج فایل…</string>
     <string name="network_provider">شبکه</string>
     <string name="int_seconds">ثانیه</string>
-    <string name="int_min">دقیقه</string>
+    <string name="int_min">min.</string>
     <string name="show_route">جزئیات مسیر</string>
     <string name="poi_context_menu_modify">اصلاح POI</string>
     <string name="poi_context_menu_delete">حذف POI</string>
@@ -753,8 +753,8 @@
     <string name="indexing_poi">نمایه‌کردن POI‏…</string>
     <string name="indexing_transport">در حال نمایه‌کردن حمل‌ونقل…</string>
     <string name="shared_string_io_error">خطای ورودی/خروجی</string>
-    <string name="km">ک‌م</string>
-    <string name="m">متر</string>
+    <string name="km">km</string>
+    <string name="m">m</string>
     <string name="map_tile_source">منبع کاشی‌های نقشه</string>
     <string name="mark_point">هدف</string>
     <string name="speak_speed_limit">سرعت مجاز</string>
@@ -1261,8 +1261,8 @@
     <string name="layer_amenity_label">برچسب‌های لایهٔ POI</string>
     <string name="show_zoom_buttons_navigation_descr">هنگام ناوبری دکمه‌های بزرگ‌نمایی را نشان بده.</string>
     <string name="show_zoom_buttons_navigation">نمایش دکمه‌های بزرگ‌نمایی</string>
-    <string name="sort_by_distance">ترتیب براساس مسافت</string>
-    <string name="sort_by_name">ترتیب براساس نام</string>
+    <string name="sort_by_distance">ترتیب بر اساس مسافت</string>
+    <string name="sort_by_name">ترتیب بر اساس نام</string>
     <string name="none_selected_gpx">ابتدا یک فایل GPX را با لمس طولانی انتخاب کنید.</string>
     <string name="local_index_select_gpx_file">یک رد انتخاب کنید</string>
     <string name="no_index_file_to_download">فایلی برای دانلود پیدا نشد. لطفاً اتصال اینترنت را بررسی کنید.</string>
@@ -1801,7 +1801,7 @@
     <string name="rendering_value_medium_w_name">متوسط</string>
     <string name="rendering_value_low_name">کم</string>
     <string name="rendering_attr_hideWaterPolygons_description">آب</string>
-    <string name="rendering_attr_hideWaterPolygons_name">مخفی‌کردن آب</string>
+    <string name="rendering_attr_hideWaterPolygons_name">محدوده‌های آب</string>
     <string name="shared_string_overview">مرور کلی</string>
     <string name="nearest_cities">نزدیکترین شهرها</string>
     <string name="quick_action_auto_zoom_desc">دکمه‌ای برای روشن/خاموش کردن زوم خودکار وابسته به سرعت.</string>
@@ -2037,7 +2037,7 @@
     <string name="shared_string_wikipedia">ویکی‌پدیا</string>
     <string name="local_recordings_delete_all_confirm">از حدف این %1$d یادداشت مطمئن هستید؟</string>
     <string name="osmand_parking_hour">س</string>
-    <string name="osmand_parking_minute">دق‍</string>
+    <string name="osmand_parking_minute">min</string>
     <string name="shared_string_collapse">مخفی شود</string>
     <string name="rendering_attr_roadStyle_description">ظاهر جاده</string>
     <string name="navigate_point_olc">کدِ مکانی باز (OLC)</string>
@@ -2680,7 +2680,7 @@
     <string name="nautical_renderer">دریایی</string>
     <string name="will_open_tomorrow_at">فردا باز می‌شود، در ساعت</string>
     <string name="day_off_label">تعطیل</string>
-    <string name="copy_location_name">کپی‌کردن موقعیت/نام POI</string>
+    <string name="copy_location_name">کپی موقعیت/نام POI</string>
     <string name="toast_empty_name_error">مکان بی‌نام</string>
     <string name="show_closed_notes">دیدن یادداشت‌های بسته</string>
     <string name="switch_osm_notes_visibility_desc">پنهان/آشکارکردن یادداشت‌های OSM.</string>
@@ -2916,7 +2916,7 @@
     <string name="voice_announcements">پیام‌های گفتاری</string>
     <string name="intermediate_destinations">مقصدهای میانی</string>
     <string name="arrive_at_time">زمان رسیدن: %1$s</string>
-    <string name="cubic_m">مترمکعب</string>
+    <string name="cubic_m">m³</string>
     <string name="metric_ton">تن</string>
     <string name="shared_string_capacity">ظرفیت</string>
     <string name="shared_string_width">عرض</string>
@@ -3523,31 +3523,32 @@
 \n
 \nاگر فعال باشد، OsmAnd از تنظیمات دستگاه برای زمان خاموش‌شدن صفحه استفاده می‌کند.</string>
     <string name="clear_recorded_data">پاک‌سازی دادهٔ ضبط‌شده</string>
-    <string name="release_3_6">• پروفایل‌ها: اکنون می‌توانید ترتیب پروفایل‌ها و نماد آن‌ها را تنظیم کنید. تنظیمات پروفایل‌های پایه را تغییر دهید یا آن‌ها را به پیشفرض بازنشانی کنید.
-\n
-\n • شمارهٔ خروجی به ناوبری افزوده شد
-\n
-\n • تنظیمات افزونه‌ها بازسازی شد
-\n
-\n • صفحهٔ تنظیمات برای دسترسی فوری به همهٔ پروفایل‌ها بازسازی شد
-\n
-\n • گزینه‌ای برای کپی‌کردن تنظیمات از پروفایل دیکر افزوده شد
-\n
-\n • امکان تغییر، مرتب‌سازی یا مخفی‌کردن دسته‌بندی نقاط توجه (POI) هنگام جست‌وجو افزوده شد
-\n
-\n • چینش نماد نقاط توجه روی نقشه درست شد
-\n
-\n • دادهٔ غروب/طلوع خورشید به «پیکربندی نقشه» افزوده شد
-\n
-\n • نمادهای خانه/کار روی نقشه افزوده شد
-\n
-\n • از توضیحات چندخطی در تنظیمات پشتیبانی می‌شود
-\n
-\n • نویسه‌گردانیِ درست به نقشهٔ ژاپن افزوده شد
-\n
+    <string name="release_3_6">• پروفایل‌ها: اکنون می‌توانید ترتیب پروفایل‌ها و نماد آن‌ها را تنظیم کنید. تنظیمات پروفایل‌های پایه را تغییر دهید یا آن‌ها را به پیشفرض بازنشانی کنید. 
+\n 
+\n • شمارهٔ خروجی به ناوبری افزوده شد 
+\n 
+\n • تنظیمات افزونه‌ها بازسازی شد 
+\n 
+\n • صفحهٔ تنظیمات برای دسترسی فوری به همهٔ پروفایل‌ها بازسازی شد 
+\n 
+\n • گزینه‌ای برای کپی‌کردن تنظیمات از پروفایل دیگر افزوده شد 
+\n 
+\n • امکان تغییر، مرتب‌سازی یا مخفی‌کردن دسته‌بندی نقاط توجه (POI) هنگام جست‌وجو افزوده شد 
+\n 
+\n • چینش نقاط توجه روی نقشه درست شد 
+\n 
+\n • دادهٔ غروب/طلوع خورشید به «پیکربندی نقشه» افزوده شد 
+\n 
+\n • نمادهای خانه/محل کار روی نقشه افزوده شد 
+\n 
+\n • از توضیحات چندخطی در تنظیمات پشتیبانی می‌شود 
+\n 
+\n • نویسه‌گردانیِ درست به نقشهٔ ژاپن افزوده شد 
+\n 
 \n • نقشهٔ جنوبگان افزوده شد
 \n
 \n</string>
     <string name="copy_coordinates">کپی مختصات</string>
     <string name="routing_profile_direct_to">مستقیم تا نقطه</string>
+    <string name="sort_by_category">ترتیب بر اساس دسته</string>
 </resources>

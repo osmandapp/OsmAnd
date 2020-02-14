@@ -2,7 +2,7 @@
 <resources>
     <string name="close_changeset">Değişiklik listesini kapat</string>
     <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması yüklü değil. Google Play\'de ara\?</string>
-    <string name="rendering_attr_roadColors_description">Yol renk şemasını seç:</string>
+    <string name="rendering_attr_roadColors_description">Bir yol rengi şeması seçin:</string>
     <string name="rendering_attr_roadColors_name">Yol renk şeması</string>
     <string name="map_widget_show_destination_arrow">Hedef yönü göster</string>
     <string name="enable_plugin_monitoring_services">Konum günlüğü hizmetlerini kullanmak için \"Yolculuk kaydı\" eklentisini etkinleştirin (GPX günlüğü, çevrim içi izleme)</string>
@@ -165,7 +165,7 @@
 \n - Eksiksiz çevrim dışı işlevsellik (indirilen vektör veya döşeme haritalarını cihazda saklayın) 
 \n - Tüm dünya için kompakt çevrim dışı vektör haritaları mevcuttur 
 \n - Doğrudan uygulamadan ülke veya bölge haritalarını indirin 
-\n - GPX veya navigasyon rotaları, ilgi noktaları (points of interest), Sık Kullanılanlar, eş yükselti eğrileri, toplu taşıma durakları, özelleştirilebilir şeffaflığa sahip ek haritalar gibi birkaç harita katmanının üst üste konması 
+\n - GPX veya navigasyon rotaları, ilgi çekici noktalar (points of interest), Sık Kullanılanlar, eş yükselti eğrileri, toplu taşıma durakları, özelleştirilebilir şeffaflığa sahip ek haritalar gibi birkaç harita katmanının üst üste konması 
 \n - Adresleri ve yerleri çevrim dışı arama (POI\'ler) 
 \n - Orta menzilli mesafeler için çevrim dışı yönlendirme 
 \n - İsteğe bağlı olarak araba, bisiklet ve yaya modları: 
@@ -191,7 +191,7 @@
 \n - Tüm dünya için kompakt çevrim dışı vektör haritaları mevcuttur 
 \n - Doğrudan uygulamadan sınırsız olarak ülke veya bölge haritalarını indirin 
 \n - Çevrim dışı Wikipedia özelliği (Wikipedia POI\'lerini indir), gezip görmek için harikadır 
-\n - GPX veya navigasyon rotaları, ilgi noktaları (points of interest), Sık Kullanılanlar, eş yükselti eğrileri, toplu taşıma durakları, özelleştirilebilir şeffaflığa sahip ek haritalar gibi birkaç harita katmanının üst üste konması 
+\n - GPX veya navigasyon rotaları, ilgi çekici noktalar (points of interest), Sık Kullanılanlar, eş yükselti eğrileri, toplu taşıma durakları, özelleştirilebilir şeffaflığa sahip ek haritalar gibi birkaç harita katmanının üst üste konması 
 \n 
 \n - Adresleri ve yerleri çevrim dışı arama (POI\'ler) 
 \n - Orta menzilli mesafeler için çevrim dışı yönlendirme 
@@ -203,7 +203,7 @@
 \n</string>
     <string name="day_night_info_description">Gün doğumu:%1$s
 \nGün batımı:%2$s</string>
-    <string name="map_widget_vector_attributes">Öznitelikleri oluşturma</string>
+    <string name="map_widget_vector_attributes">Görselleştirme özellikleri</string>
     <string name="map_widget_renderer">Harita tarzı</string>
     <string name="layer_map_appearance">Ekran yapılandırma</string>
     <string name="show_lanes">Şeritler</string>
@@ -441,14 +441,14 @@
     <string name="route_roundabout">Döner kavşak: %1$d çıkışa girin ve devam edin</string>
     <string name="rendering_attr_noPolygons_description">Tüm arazi alan özelliklerini harita üzerinde şeffaf hale getirin.</string>
     <string name="rendering_attr_noPolygons_name">Çokgenler</string>
-    <string name="rendering_attr_appMode_name">işleme modu</string>
+    <string name="rendering_attr_appMode_name">Görselleştirme modu</string>
     <string name="rendering_attr_appMode_description">Için haritayı optimize et</string>
     <string name="rendering_attr_contourLines_description">Yakınlaştırma seviyesinden görünüm (eş yükselti eğrisi verisi gerektirir):</string>
     <string name="rendering_attr_contourLines_name">Eş yükselti eğrilerini göster</string>
     <string name="rendering_attr_hmRendered_description">Haritanın gösterilen detay miktarını artırın.</string>
     <string name="local_index_routing_data">Rota edilen veri</string>
     <string name="navigate_point_format">Biçim</string>
-    <string name="poi_search_desc">İÇN (İhtiyaç Noktası) arama</string>
+    <string name="poi_search_desc">POI (Point of interest - İlgi çekici nokta) arama</string>
     <string name="navpoint_search_desc">Koordinatlar</string>
     <string name="transport_search_desc">Toplu taşıma için ara</string>
     <string name="offline_navigation_not_available">OsmAnd çevrim dışı yolbul geçici olarak kullanılamıyor.</string>
@@ -477,7 +477,7 @@
     <string name="vector_maps_may_display_faster_on_some_devices">Vektörel haritalar daha hızlı görüntülenir. Bazı aygıtlarda düzgün çalışmayabilir.</string>
     <string name="play_commands_of_currently_selected_voice">Bir ses seçin ve duyuruları oynayarak test edin:</string>
     <string name="debugging_and_development">OsmAnd gelişimi</string>
-    <string name="native_rendering">Yerel render etme</string>
+    <string name="native_rendering">Yerel görselleştirme</string>
     <string name="test_voice_prompts">Sesli uyarıları test et</string>
     <string name="switch_to_raster_map_to_see">Bu konum için \'Ayarlar\' (\'Harita dosyalarını yönet\') kısmından çevrim dışı bir vektör haritası indirin veya \'Çevrim içi haritalar\' eklentisine geçin.</string>
     <string name="send_files_to_osm">GPX dosyalarını OSM ye gönder?</string>
@@ -586,7 +586,7 @@
     <string name="auto_follow_route_navigation">Otomatik-sadece merkezi nav</string>
     <string name="auto_follow_route_navigation_descr">Otomatik-navigasyon yaparken sadece merkezi harita görünümü.</string>
     <string name="auto_follow_location_enabled">Haritayı kullanırken görünümü otomatik olarak ortala.</string>
-    <string name="pref_vector_rendering">Özel seçenekli vektör renderer etme</string>
+    <string name="pref_vector_rendering">Vektör görselleştiriciye özgü seçenekler</string>
     <string name="pref_overlay">Üst katman / alt katman</string>
     <string name="pref_raster_map">Harita kaynağı ayarları</string>
     <string name="pref_vector_map">Vektör harita ayarları</string>
@@ -649,8 +649,8 @@
     <string name="local_indexes_cat_voice">Sesli uyarılar (kaydedilmiş)</string>
     <string name="local_indexes_cat_poi">POI Verisi</string>
     <string name="ttsvoice">TTS sesi</string>
-    <string name="trace_rendering">Hata ayıklama bilgisi dönüştürülüyor</string>
-    <string name="trace_rendering_descr">Rendering performansını görüntüleyin.</string>
+    <string name="trace_rendering">Görselleştirme hata ayıklama bilgisi</string>
+    <string name="trace_rendering_descr">Görselleştirme performansını görüntüleyin.</string>
     <string name="installing_new_resources">Yeni veri(ler) açılıyor…</string>
     <string name="internet_connection_required_for_online_route">Çevrim içi navigasyon çevrim dışı çalışmamaktadır.</string>
     <string name="layer_hillshade">Tepe gölgesi katmanı</string>
@@ -808,21 +808,21 @@
     <string name="items_were_selected">{0} öğe seçildi</string>
     <string name="filter_existing_indexes">İndirilen</string>
     <string name="fast_route_mode_descr">En hızlı rotayı hesaplamayı etkinleştirin veya yakıt tasarrufu rotası için devre dışı bırakın.</string>
-    <string name="continuous_rendering">Devamlı işleme</string>
+    <string name="continuous_rendering">Sürekli görselleştirme</string>
     <string name="rendering_exception">Seçilen alan çizilemedi.</string>
     <string name="show_point_options">Konumu kullan…</string>
-    <string name="renderer_load_sucess">Oluşturucu yüklendi</string>
-    <string name="renderer_load_exception">Oluşturucu yüklenemedi.</string>
-    <string name="poi_context_menu_website">İÇN websitesini göster</string>
-    <string name="poi_context_menu_call">İÇN telefonunu göster</string>
-    <string name="download_type_to_filter">süzmek için yazın</string>
+    <string name="renderer_load_sucess">Görselleştirici yüklendi</string>
+    <string name="renderer_load_exception">Görselleştirici yüklenemedi.</string>
+    <string name="poi_context_menu_website">POI web sitesini göster</string>
+    <string name="poi_context_menu_call">POI telefonunu göster</string>
+    <string name="download_type_to_filter">filtrelemek için yazın</string>
     <string name="context_menu_item_search_transport">Toplu taşıma ara</string>
     <string name="transport_searching_transport">Ulaştırma sonuçları (hedef yok):</string>
     <string name="transport_searching_route">Ulaşım sonuçları (hedefe {0}):</string>
     <string name="transport_search_again">Taşıma aramasını sıfırla</string>
     <string name="gpx_files_not_found">Tracks klasöründe GPX dosyası bulunamadı</string>
     <string name="error_reading_gpx">GPX verileri okunamadı.</string>
-    <string name="poi_context_menu_modify">İÇN düzenle</string>
+    <string name="poi_context_menu_modify">POI düzenle</string>
     <string name="rotate_map_compass_opt">Pusula yönü</string>
     <string name="rotate_map_bearing_opt">Hareket yönü</string>
     <string name="rotate_map_none_opt">Dönme yok (kuzey her zaman yukarı doğru)</string>
@@ -870,10 +870,10 @@
     <string name="show_transport_over_map_description">Toplu taşıma duraklarını haritada göster.</string>
     <string name="show_transport_over_map">Taşıma duraklarını göster</string>
     <string name="hello">OsmAnd yolbul uygulaması</string>
-    <string name="update_poi_success">İÇN verisi güncellendi ({0} yüklendi)</string>
+    <string name="update_poi_success">POI güncellendi ({0} yüklendi)</string>
     <string name="update_poi_error_local">Yerel POI listesi güncellenemedi.</string>
     <string name="update_poi_error_loading">Sunucudan veri yüklenemedi.</string>
-    <string name="update_poi_no_offline_poi_index">Bu alan için çevrim dışı İÇN verisi mevcut değil</string>
+    <string name="update_poi_no_offline_poi_index">Bu alan için çevrim dışı POI verisi mevcut değil</string>
     <string name="search_history_city">Şehir: {0}</string>
     <string name="search_history_street">Sokak: {0}, {1}</string>
     <string name="search_history_building">Bina: {0}, {1}, {2}</string>
@@ -984,7 +984,7 @@
     <string name="amenity_type_seamark">Mark Deniz</string>
     <string name="app_modes_choose_descr">Gösterilen profilleri seç.</string>
     <string name="app_modes_choose">Uygulama profilleri</string>
-    <string name="map_widget_map_rendering">Harita oluşturma</string>
+    <string name="map_widget_map_rendering">Harita görselleştirme</string>
     <string name="app_mode_hiking">Yürüyüş</string>
     <string name="app_mode_motorcycle">Motosikletler</string>
     <string name="app_mode_boat">Tekne</string>
@@ -1454,8 +1454,8 @@
     <string name="transport_to_go_after">Önceki mesafe</string>
     <string name="transport_to_go_before">Sonraki mesafe</string>
     <string name="transport_stops_to_pass">geçmek için durur</string>
-    <string name="update_poi_is_not_available_for_zoom">Yakınlaştırma, İÇN\'leri güncellemenizi sağlar</string>
-    <string name="context_menu_item_update_poi">Güncelleme POI</string>
+    <string name="update_poi_is_not_available_for_zoom">Yakınlaştırma, POI\'leri güncellemenizi sağlar</string>
+    <string name="context_menu_item_update_poi">POI güncelle</string>
     <string name="fav_imported_sucessfully">Sık Kullanılanlar içe aktarıldı</string>
     <string name="import_file_favourites">Verileri GPX dosyası olarak kaydedin ya da ara noktaları \'Sık Kullanılanlar\'a aktarın\?</string>
     <string name="fav_file_to_load_not_found">{0} konumunda Sık Kullanılanlar içeren GPX dosyası bulunamadı</string>
@@ -1479,9 +1479,9 @@
     <string name="install_selected_build">OsmAnd Yükle - {1} {2} üzerinden {0} MB \?</string>
     <string name="tiles_to_download_estimated_size">Yakınlaştırma {0} indirmek {1} fayans ({2} MB)</string>
     <string name="select_max_zoom_preload_area">Önceden yükleme için maksimum zoom</string>
-    <string name="continuous_rendering_descr">Bir kerede görüntü yerine sürekli görüntü oluşturmayı göster.</string>
-    <string name="renderers">vektör render</string>
-    <string name="renderers_descr">Oluşturma görünümünü seçin</string>
+    <string name="continuous_rendering_descr">Tek seferde görüntü yerine sürekli görselleştirmeyi görüntüleyin.</string>
+    <string name="renderers">Vektör görselleştirici</string>
+    <string name="renderers_descr">Görselleştirme görünümünü seçin</string>
     <string name="use_high_res_maps_descr">Yüksek yoğunluklu ekranlarda (döşeme) haritaları uzatma (ve bulanıklaştırma).</string>
     <string name="indexing_address">Dizin Oluşturma adresi …</string>
     <string name="indexing_map">Dizin Oluşturma haritası …</string>
@@ -1525,9 +1525,9 @@
     <string name="arrival_distance">Varış bildirisi</string>
     <string name="arrival_distance_descr">Varış bildirimini ne yakınlıkta istiyorsun?</string>
     <string name="rendering_attr_alpineHiking_name">Alp yürüyüş ölçeği (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">SAC ölçeğine göre yolları oluşturun.</string>
+    <string name="rendering_attr_alpineHiking_description">SAC ölçeğine göre yolları görselleştir.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Yürüyüş sembolü üst katmanı</string>
-    <string name="rendering_attr_hikingRoutesOSMC_description">OSMC izlerine göre yolları oluşturun.</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">OSMC izlerine göre yolları görselleştir.</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="interrupt_music_descr">Sesli uyarılar müzik çalmayı duraklatır.</string>
     <string name="interrupt_music">Müziği duraklat</string>
@@ -1727,8 +1727,8 @@
     <string name="navigate_point_northing">Kuzeye doğru katedilen mesafe</string>
     <string name="navigate_point_easting">doğuya doğru yönelme</string>
     <string name="no_internet_connection">İndirilemedi, lütfen İnternet bağlantınızı kontrol edin.</string>
-    <string name="use_opengl_render">Kullanım OpenGL render</string>
-    <string name="use_opengl_render_descr">Donanım hızlandırmalı OpenGL renderleme kullanın (daha fazla pil kullanabilir, ya da çok eski cihazlarda çalışmayabilir).</string>
+    <string name="use_opengl_render">OpenGL görselleştirmeyi kullan</string>
+    <string name="use_opengl_render_descr">Donanım hızlandırmalı OpenGL görselleştirme kullan (daha fazla pil kullanabilir, ya da çok eski cihazlarda çalışmayabilir).</string>
     <string name="error_avoid_specific_road">Bypass bulunamadı</string>
     <string name="search_for">Arama</string>
     <string name="rendering_attr_publicTransportMode_name">Otobüs, troleybüs, mekik yolları</string>
@@ -1885,7 +1885,7 @@
     <string name="active_markers">Etkin işaretleyiciler</string>
     <string name="map_markers">Harita işaretleyicileri</string>
     <string name="map_marker">Harita işaretleyici</string>
-    <string name="consider_turning_polygons_off">Poligon görüntülemeyi kapatmanız önerilir.</string>
+    <string name="consider_turning_polygons_off">Poligon görselleştirmeyi kapatmanız önerilir.</string>
     <string name="donations">Bağışlar</string>
     <string name="number_of_recipients">Alıcıların sayısı</string>
     <string name="osm_user_stat">%1$s , rütbe %2$s , toplam düzenlemeleri %3$s düzenler</string>
@@ -1980,7 +1980,7 @@
     <string name="add_new_folder">Yeni klasör ekle</string>
     <string name="points_delete_multiple_succesful">Nokta(lar) silindi.</string>
     <string name="shared_string_gpx_track">Takip et</string>
-    <string name="track_points_category_name">Waypointler, ilgi noktaları, adlandırılmış özellikler</string>
+    <string name="track_points_category_name">Waypointler, ilgi çekici noktalar, adlandırılmış özellikler</string>
     <string name="max_speed">Azami hız</string>
     <string name="average_speed">Ortalama hız</string>
     <string name="shared_string_max">Azami</string>
@@ -2773,7 +2773,7 @@
 \nTemsil ettiği alan: %1$s x %2$s</string>
     <string name="auto_split_recording_title">Boşluktan sonra kayıtları otomatik bölme</string>
     <string name="auto_split_recording_descr">6 dakikalık aralıktan sonra yeni segmenti, 2 saatlik aralıktan sonra yeni izlenen yolu veya tarih değiştiyse daha uzun aralıktan sonra yeni dosyayı başlatın.</string>
-    <string name="rendering_attr_depthContours_description">Derinlik çizgilerini ve noktalarını göster.</string>
+    <string name="rendering_attr_depthContours_description">Eş derinlik eğrilerini ve noktalarını göster.</string>
     <string name="route_points_category_name">Bu rotadan geçmek için döner</string>
     <string name="lang_ber">Berberice</string>
     <string name="do_not_show_startup_messages_desc">Uygulama indirimlerini ve özel yerel etkinlik mesajlarını gösterme.</string>
@@ -2880,12 +2880,12 @@
     <string name="read_wikipedia_offline_description">Wikipedia ve Wikivoyage makalelerini çevrim dışı olarak okumak için OsmAnd Live üyeliği alın.</string>
     <string name="how_to_open_link">Link nasıl açılır\?</string>
     <string name="read_wikipedia_offline">Wikipedia\'yı çevrim dışı olarak oku</string>
-    <string name="nautical_render_descr">Deniz navigasyonu için. Şamandıralar, deniz fenerleri, nehir yolları, deniz şeritleri ve işaretleri, limanlar, deniz kenarı hizmetleri ve eş derinlik çizgileri içermektedir.</string>
+    <string name="nautical_render_descr">Deniz navigasyonu için. Şamandıralar, deniz fenerleri, nehir yolları, deniz şeritleri ve işaretleri, limanlar, deniz kenarı hizmetleri ve eş derinlik eğrilerini içermektedir.</string>
     <string name="ski_map_render_descr">Kayak yapmak için. Pistler, telesiyejler, kros kayak yolları vb. içermektedir. İkincil harita nesnelerini karartır.</string>
     <string name="light_rs_render_descr">Basit sürüş tarzı. Yumuşak gece modu, eş yükselti eğrileri, turuncu tarzdaki zıtlaştırılmış yollar, ikincil harita nesnelerini karartma.</string>
     <string name="topo_render_descr">Yürüyüş, doğa yürüyüşü ve doğa bisikleti için. Dış mekanda okunabilir. Zıtlaştırılmış yollar ve doğal nesneler, farklı rota tipleri, gelişmiş eş yükselti eğrisi seçenekleri, ekstra detaylar. Yüzey bütünlüğünün ayarlanması yol kalitesini ayırt eder. Gece modu yok.</string>
     <string name="mapnik_render_descr">Eski varsayılan \'Mapnik\' tarzı. \'Mapnik\' ile benzer renkler.</string>
-    <string name="default_render_descr">Genel amaçlı stil. Yoğun şehirler temiz bir şekilde gösterilmiştir. Eş yükselti eğrileri, rotalar, yüzey kalitesi, erişim kısıtlamaları, yol kalkanları, SAC ölçeğine göre yol görüntüleme, akarsu sporları öğeleri içermektedir.</string>
+    <string name="default_render_descr">Genel amaçlı stil. Yoğun şehirler temiz bir şekilde gösterilmiştir. Eş yükselti eğrileri, rotalar, yüzey kalitesi, erişim kısıtlamaları, yol kalkanları, SAC ölçeğine göre yol görselleştirme, akarsu sporları öğeleri içermektedir.</string>
     <string name="touring_view_render_descr">Yüksek zıtlık ve maksimum ayrıntı ile turne tarzı. OsmAnd varsayılan stilinin tüm seçenekleri ile birlikte, mümkün olduğu kadar çok ayrıntıyı, özellikle de yolları, patikaları ve seyahat etmenin diğer yollarını gösterir. Yol tipleri arasındaki \"touring atlas\" ayrımını temizleyin. Gündüz, gece ve dış mekan kullanımı için uygundur.</string>
     <string name="off_road_render_descr">\'Topo\' stiline dayalı arazi sürüşleri ve yeşil uydu görüntüleriyle alt tabaka olarak kullanım için. Ana yol kalınlığı azaltılmış, izlenen yollar, patikalar, bisiklet ve diğer rotaların kalınlığı arttırılmıştır.</string>
     <string name="unirs_render_descr">Yaya ve bisiklet yollarının kontrastını artırmak için varsayılan stilin değiştirilmesi. Eski Mapnik renklerini kullanır.</string>
@@ -2922,7 +2922,7 @@
     <string name="transfers">Transferler</string>
     <string name="on_foot">Yürüyerek</string>
     <string name="route_way">Yol</string>
-    <string name="points_of_interests">İlgi noktaları (POI)</string>
+    <string name="points_of_interests">İlgi çekici noktalar (Points of interest - POI)</string>
     <string name="avoid_roads_descr">Haritada veya aşağıdaki listeden navigasyon sırasında kaçınmak istediğiniz bir yol seçin:</string>
     <string name="choose_track_file_to_follow">İzlenecek yol dosyasını seçin</string>
     <string name="arrive_at_time">%1$s\'de ulaş</string>
@@ -3108,7 +3108,7 @@
 \n • Konumunuzu ve yönünüzü gösterin 
 \n • İsteğe bağlı olarak resmi pusulaya veya hareket yönünüze göre hizalayın 
 \n • En önemli yerlerinizi Sık Kullanılanlar olarak kaydedin 
-\n • Çevrenizdeki POI\'leri (ilgi noktaları) görüntüleyin 
+\n • Çevrenizdeki POI\'leri (points of interest - ilgi çekici noktaları) görüntüleyin 
 \n • Özel çevrim içi döşemeleri, uydu görüntüsünü (Bing\'den), tur/gezinme GPX parkurları gibi farklı üst katmanları ve ayarlanabilir şeffaflığı olan ek katmanları görüntüleyin 
 \n • İsteğe bağlı olarak yer adlarını İngilizce, yerel veya fonetik yazım biçiminde görüntüleyin
 \n</string>
@@ -3223,7 +3223,7 @@
     <string name="routing_attr_allow_classic_only_name">Sadece-klasik rotalarına izin ver</string>
     <string name="routing_attr_allow_classic_only_description">Paten yolları olmadan sadece klasik stil için düzenlenmiş rotalar. Buna daha gevşek bir palete sahip daha küçük bir kar arabasıyla düzenlenen rotalar ve kayakçılar tarafından manuel olarak yapılan pistler dahildir.</string>
     <string name="routing_attr_difficulty_preference_name">Tercih edilen zorluk</string>
-    <string name="routing_attr_difficulty_preference_description">Daha zor ya da daha kolay pistler üzerinde yönlendirme daha kısa ise hala mümkün olmasına rağmen, bu zorluktaki yolları tercih edin.</string>
+    <string name="routing_attr_difficulty_preference_description">Bu zorluktaki rotaları tercih et, ancak eğer daha kısa ise daha zor veya daha kolay pistler üzerinden yönlendirmek yine de mümkündür.</string>
     <string name="routing_attr_freeride_policy_name">Pist dışı</string>
     <string name="routing_attr_freeride_policy_description">\'Serbest\' ve \'pist dışı sürüşler\', resmi olmayan yollar ve geçitlerdir. Tipik olarak düzenlenmemiş, bakımı yapılmamış ve akşamları kontrol edilmemiştir. Riski göze alarak girin.</string>
     <string name="external_input_device">Harici giriş cihazları</string>
@@ -3480,4 +3480,5 @@
 \n</string>
     <string name="copy_coordinates">Koordinatları kopyala</string>
     <string name="routing_profile_direct_to">Doğrudan noktaya</string>
+    <string name="sort_by_category">Kategoriye göre sırala</string>
 </resources>

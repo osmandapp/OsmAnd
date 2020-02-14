@@ -22,6 +22,7 @@
     <string name="import_duplicates_description">OsmAnd already has elements with the same names as those imported.\n\nSelect an action.</string>
     <string name="import_duplicates_title">Some items already exist</string>
     <string name="select_data_to_import">Select the data to be imported.</string>
+    <string name="please_provide_profile_name_message">Please provide a name for the profile</string>
     <string name="open_settings">Open settings</string>
     <string name="plugin_disabled">Plugin disabled</string>
     <string name="plugin_disabled_descr">This plugin is a separate application, you will need to remove it separately if you no longer plan to use it.\n\nThe plugin will remain on the device after removing OsmAnd.</string>
