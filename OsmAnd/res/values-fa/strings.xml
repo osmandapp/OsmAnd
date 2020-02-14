@@ -560,7 +560,7 @@
     <string name="unzipping_file">در حال استخراج فایل…</string>
     <string name="network_provider">شبکه</string>
     <string name="int_seconds">ثانیه</string>
-    <string name="int_min">min.</string>
+    <string name="int_min">دقیقه</string>
     <string name="show_route">جزئیات مسیر</string>
     <string name="poi_context_menu_modify">اصلاح POI</string>
     <string name="poi_context_menu_delete">حذف POI</string>
@@ -2037,7 +2037,7 @@
     <string name="shared_string_wikipedia">ویکی‌پدیا</string>
     <string name="local_recordings_delete_all_confirm">از حدف این %1$d یادداشت مطمئن هستید؟</string>
     <string name="osmand_parking_hour">س</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="osmand_parking_minute">دقیقه</string>
     <string name="shared_string_collapse">مخفی شود</string>
     <string name="rendering_attr_roadStyle_description">ظاهر جاده</string>
     <string name="navigate_point_olc">کدِ مکانی باز (OLC)</string>
@@ -2396,7 +2396,7 @@
     <string name="context_menu_item_open_note">ایجاد یادداشت OSM</string>
     <string name="osm_edit_reopened_note">یادداشت OSM بازگشوده</string>
     <string name="osm_edit_created_note">ایجاد یادداشت OSM</string>
-    <string name="rendering_attr_hideProposed_name">عارضه‌های پیشنهادی (Proposed)</string>
+    <string name="rendering_attr_hideProposed_name">طرح‌های آینده (Proposed)</string>
     <string name="osm_edit_created_poi">ایجاد POI</string>
     <string name="logged_as">واردشده با عنوان %1$s</string>
     <string name="moving_time">مدت حرکت</string>
@@ -3551,4 +3551,19 @@
     <string name="copy_coordinates">کپی مختصات</string>
     <string name="routing_profile_direct_to">مستقیم تا نقطه</string>
     <string name="sort_by_category">ترتیب بر اساس دسته</string>
+    <string name="shared_string_available">قابل‌استفاده</string>
+    <string name="please_provide_profile_name_message">لطفاً یک نام برای پروفایل بنویسید</string>
+    <string name="open_settings">بازکردن تنظیمات</string>
+    <string name="plugin_disabled">افزونه غیرفعال شد</string>
+    <string name="plugin_disabled_descr">این افزونه یک برنامهٔ جداگانه است. اگر دیگر لازمش نداشتید باید جداگانه آن را حذف کنید.
+\n
+\nبا حذف OsmAnd، این افزونه روی دستگاه باقی می‌ماند.</string>
+    <string name="shared_string_menu">منو</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_routing">مسیریابی</string>
+    <string name="shared_string_custom_rendering_style">سبک رندر سفارشی</string>
+    <string name="shared_string_include_data">شامل دادهٔ بیشتر</string>
+    <string name="import_profile_dialog_description">پروفایلِ درون‌بردی حاوی دادهٔ بیشتری است. «درون‌برد» را بزنید تا فقط دادهٔ پروفایل درون‌برد شود. «دادهٔ بیشتر» را انتخاب کنید تا آن را نیز درون‌برد کنید.</string>
+    <string name="export_profile_dialog_description">می‌توانید دادهٔ بیشتری را انتخاب کنید تا همراه با پروفایل برون‌برد کنید.</string>
+    <string name="index_name_antarctica">جنوبگان</string>
 </resources>
