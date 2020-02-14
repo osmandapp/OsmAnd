@@ -811,7 +811,7 @@ public class OsmandApplication extends MultiDexApplication {
 		return localizedResources != null ? localizedResources : super.getResources();
 	}
 
-	public RoutingConfiguration.Builder getDefaultRoutingConfig() {
+	public synchronized RoutingConfiguration.Builder getDefaultRoutingConfig() {
 		return RoutingConfiguration.getDefault();
 	}
 
@@ -823,7 +823,7 @@ public class OsmandApplication extends MultiDexApplication {
 		return customRoutingConfigs.get(key);
 	}
 
-	public synchronized RoutingConfiguration.Builder getRoutingConfigForMode(ApplicationMode mode) {
+	public RoutingConfiguration.Builder getRoutingConfigForMode(ApplicationMode mode) {
 		RoutingConfiguration.Builder builder = null;
 		String routingProfileKey = mode.getRoutingProfile();
 		if (!Algorithms.isEmpty(routingProfileKey)) {

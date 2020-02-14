@@ -599,9 +599,9 @@ public class AppInitializer implements IProgress {
 
 			@Override
 			protected Map<String, RoutingConfiguration.Builder> doInBackground(Void... voids) {
+				RoutingConfiguration.getDefault(); // load default builder
 				Map<String, RoutingConfiguration.Builder> customConfigs = new HashMap<>();
 				File routingFolder = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
-				RoutingConfiguration.Builder defaultBuilder = RoutingConfiguration.getDefault();
 				if (routingFolder.isDirectory()) {
 					File[] fl = routingFolder.listFiles();
 					if (fl != null && fl.length > 0) {
@@ -611,6 +611,7 @@ public class AppInitializer implements IProgress {
 									String fileName = f.getName();
 									RoutingConfiguration.Builder builder = new RoutingConfiguration.Builder();
 									RoutingConfiguration.parseFromInputStream(new FileInputStream(f), fileName, builder);
+
 									customConfigs.put(fileName, builder);
 								} catch (XmlPullParserException | IOException e) {
 									throw new IllegalStateException(e);

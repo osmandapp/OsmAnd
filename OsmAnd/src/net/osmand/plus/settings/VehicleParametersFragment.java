@@ -34,15 +34,15 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		if (app == null) {
 			return;
 		}
+		ApplicationMode mode = getSelectedAppMode();
 
 		Preference vehicleParametersInfo = findPreference("vehicle_parameters_info");
 		vehicleParametersInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
-		vehicleParametersInfo.setTitle(getString(R.string.route_parameters_info, getSelectedAppMode().toHumanString()));
+		vehicleParametersInfo.setTitle(getString(R.string.route_parameters_info, mode.toHumanString()));
 
-		ApplicationMode mode = getSelectedAppMode();
 		RouteService routeService = mode.getRouteService();
 		if (routeService == RouteService.OSMAND) {
-			GeneralRouter router = getRouter(app.getRoutingConfigForMode(mode), mode);
+			GeneralRouter router = getRouter(app, mode);
 			if (router != null) {
 				Map<String, GeneralRouter.RoutingParameter> parameters = router.getParameters();
 

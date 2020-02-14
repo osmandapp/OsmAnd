@@ -55,7 +55,7 @@ public class RoutingConfiguration {
 		private String defaultRouter = "";
 		private Map<String, GeneralRouter> routers = new LinkedHashMap<>();
 		private Map<String, String> attributes = new LinkedHashMap<>();
-		private HashMap<Long, Location> impassableRoadLocations = new HashMap<>();
+		private static HashMap<Long, Location> impassableRoadLocations = new HashMap<>();
 
 		// Example
 //		{
@@ -103,11 +103,11 @@ public class RoutingConfiguration {
 			return i;
 		}
 		
-		public Map<Long, Location> getImpassableRoadLocations() {
+		public static Map<Long, Location> getImpassableRoadLocations() {
 			return impassableRoadLocations;
 		}
 		
-		public boolean addImpassableRoad(RouteDataObject route, Location location) {
+		public static boolean addImpassableRoad(RouteDataObject route, Location location) {
 			if (!impassableRoadLocations.containsKey(route.id)){
 				impassableRoadLocations.put(route.id, location);
 				return true;
@@ -148,7 +148,7 @@ public class RoutingConfiguration {
 			return routers;
 		}
 
-		public void removeImpassableRoad(RouteDataObject obj) {
+		public static void removeImpassableRoad(RouteDataObject obj) {
 			impassableRoadLocations.remove(obj.id);
 		}
 	}

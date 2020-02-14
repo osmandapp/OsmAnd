@@ -36,6 +36,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.RouteSegmentSearchResult;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -162,7 +163,7 @@ public class AvoidSpecificRoads {
 		app.getSettings().removeImpassableRoad(latLon);
 		RouteDataObject obj = impassableRoads.remove(latLon);
 		if (obj != null) {
-			app.getDefaultRoutingConfig().removeImpassableRoad(obj);
+			RoutingConfiguration.Builder.removeImpassableRoad(obj);
 		}
 	}
 
@@ -288,7 +289,7 @@ public class AvoidSpecificRoads {
 					final LatLon oldLoc = getLocation(currentObject);
 					app.getSettings().moveImpassableRoad(oldLoc, newLoc);
 					impassableRoads.remove(oldLoc);
-					app.getDefaultRoutingConfig().removeImpassableRoad(currentObject);
+					RoutingConfiguration.Builder.removeImpassableRoad(currentObject);
 					addImpassableRoadInternal(object, ll, showDialog, activity, newLoc);
 
 					if (callback != null) {
@@ -310,7 +311,7 @@ public class AvoidSpecificRoads {
 										   boolean showDialog,
 										   @Nullable MapActivity activity,
 										   @NonNull LatLon loc) {
-		if (app.getDefaultRoutingConfig().addImpassableRoad(object, ll)) {
+		if (RoutingConfiguration.Builder.addImpassableRoad(object, ll)) {
 			impassableRoads.put(loc, object);
 		} else {
 			LatLon location = getLocation(object);
@@ -339,7 +340,7 @@ public class AvoidSpecificRoads {
 	}
 
 	public LatLon getLocation(RouteDataObject object) {
-		Location location = app.getDefaultRoutingConfig().getImpassableRoadLocations().get(object.getId());
+		Location location = RoutingConfiguration.Builder.getImpassableRoadLocations().get(object.getId());
 		return location == null ? null : new LatLon(location.getLatitude(), location.getLongitude());
 	}
 

@@ -55,7 +55,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static net.osmand.plus.activities.SettingsNavigationActivity.getRouter;
 
 public class RoutingOptionsHelper {
 
@@ -409,7 +408,7 @@ public class RoutingOptionsHelper {
 
 	public LocalRoutingParameter getRoutingParameterInnerById(ApplicationMode am, String parameterId) {
 		RouteProvider.GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
-		GeneralRouter rm = getRouter(app.getRoutingConfigForMode(am), am);
+		GeneralRouter rm = SettingsNavigationActivity.getRouter(app, am);
 		if (rm == null || (rparams != null && !rparams.isCalculateOsmAndRoute()) && !rparams.getFile().hasRtePt()) {
 			return null;
 		}
@@ -493,7 +492,7 @@ public class RoutingOptionsHelper {
 
 		RouteProvider.GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
 		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>(getGpxRouterParameters(am));
-		GeneralRouter rm = SettingsNavigationActivity.getRouter(app.getRoutingConfigForMode(am), am);
+		GeneralRouter rm = SettingsNavigationActivity.getRouter(app, am);
 		if (rm == null || (rparams != null && !rparams.isCalculateOsmAndRoute()) && !rparams.getFile().hasRtePt()) {
 			return list;
 		}
@@ -583,7 +582,7 @@ public class RoutingOptionsHelper {
 
 	public List<GeneralRouter.RoutingParameter> getAvoidRoutingPrefsForAppMode(ApplicationMode applicationMode) {
 		List<GeneralRouter.RoutingParameter> avoidParameters = new ArrayList<GeneralRouter.RoutingParameter>();
-		GeneralRouter router = getRouter(app.getRoutingConfigForMode(applicationMode), applicationMode);
+		GeneralRouter router = SettingsNavigationActivity.getRouter(app, applicationMode);
 		if (router != null) {
 			for (Map.Entry<String, GeneralRouter.RoutingParameter> e : router.getParameters().entrySet()) {
 				String param = e.getKey();
@@ -597,7 +596,7 @@ public class RoutingOptionsHelper {
 	}
 
 	public GeneralRouter.RoutingParameter getRoutingPrefsForAppModeById(ApplicationMode applicationMode, String parameterId) {
-		GeneralRouter router = getRouter(app.getRoutingConfigForMode(applicationMode), applicationMode);
+		GeneralRouter router = SettingsNavigationActivity.getRouter(app, applicationMode);
 		GeneralRouter.RoutingParameter parameter = null;
 
 		if (router != null) {

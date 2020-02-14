@@ -243,14 +243,15 @@ public class NavigationFragment extends BaseSettingsFragment {
 				int iconRes = R.drawable.ic_action_gdirections_dark;
 				String name = router.getProfileName();
 				String description = app.getString(R.string.osmand_default_routing);
-				if (!Algorithms.isEmpty(router.getFilename())) {
-					description = router.getFilename();
+				String fileName = router.getFilename();
+				if (!Algorithms.isEmpty(fileName)) {
+					description = fileName;
 				} else if (RoutingProfilesResources.isRpValue(name.toUpperCase())) {
 					iconRes = RoutingProfilesResources.valueOf(name.toUpperCase()).getIconRes();
 					name = app.getString(RoutingProfilesResources.valueOf(name.toUpperCase()).getStringRes());
 				}
 				profilesObjects.put(routerKey, new RoutingProfileDataObject(routerKey, name, description,
-						iconRes, false, router.getFilename()));
+						iconRes, false, fileName));
 			}
 		}
 	}
