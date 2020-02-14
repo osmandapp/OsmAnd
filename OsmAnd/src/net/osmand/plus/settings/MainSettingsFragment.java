@@ -118,6 +118,8 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 			Bundle bundle = new Bundle();
 			bundle.putString(DIALOG_TYPE, TYPE_BASE_APP_PROFILE);
 			dialog.setArguments(bundle);
+			dialog.setUsedOnMap(false);
+			dialog.setAppMode(getSelectedAppMode());
 			if (getActivity() != null) {
 				getActivity().getSupportFragmentManager().beginTransaction()
 						.add(dialog, "select_base_profile").commitAllowingStateLoss();

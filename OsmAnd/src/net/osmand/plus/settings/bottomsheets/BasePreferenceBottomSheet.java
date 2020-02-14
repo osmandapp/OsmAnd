@@ -24,7 +24,7 @@ public abstract class BasePreferenceBottomSheet extends MenuBottomSheetDialogFra
 	private ApplicationMode appMode;
 	private boolean profileDependent;
 
-	protected void setAppMode(ApplicationMode appMode) {
+	public void setAppMode(ApplicationMode appMode) {
 		this.appMode = appMode;
 	}
 

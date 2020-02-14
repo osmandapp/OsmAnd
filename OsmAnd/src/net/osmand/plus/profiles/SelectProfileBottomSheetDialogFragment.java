@@ -22,7 +22,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
@@ -30,6 +29,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.MainSettingsFragment;
 import net.osmand.plus.settings.NavigationFragment;
 import net.osmand.plus.settings.ProfileAppearanceFragment;
+import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 
 import org.apache.commons.logging.Log;
 
@@ -38,7 +38,7 @@ import java.util.List;
 
 import static net.osmand.plus.helpers.ImportHelper.ImportType.ROUTING;
 
-public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
+public class SelectProfileBottomSheetDialogFragment extends BasePreferenceBottomSheet {
 
 	private static final Log LOG = PlatformUtil
 		.getLog(SelectProfileBottomSheetDialogFragment.class);
@@ -239,7 +239,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 		if (type.equals(TYPE_NAV_PROFILE)) {
 			profiles.addAll(NavigationFragment.getSortedRoutingProfiles(app));
 		} else if (type.equals(TYPE_BASE_APP_PROFILE)) {
-			profiles.addAll(NavigationFragment.getBaseProfiles());
+			profiles.addAll(NavigationFragment.getBaseProfiles(app));
 		} else {
 			LOG.error("Check data type!");
 			dismiss();
