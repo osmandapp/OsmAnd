@@ -353,7 +353,8 @@ public class MeasurementEditingContext {
 				}
 			}
 		};
-
+		params.routeRecalculationDistance
+				= application.getSettings().ROUTE_RECALCULATION_DISTANCE.getModeValue(snapToRoadAppMode);
 		return params;
 	}
 

@@ -63,9 +63,9 @@ public class RouteCalculationResult {
 	protected int currentWaypointGPX = 0;
 	protected int lastWaypointGPX = 0;
 	protected ApplicationMode appMode;
-	protected boolean noRecalculations = false;
+
 	protected boolean showOriginalRoute = false;
-	protected float routeRecalcDistance = -1f;
+	protected float routeRecalcDistance = 0.f;
 
 	public RouteCalculationResult(String errorMessage) {
 		this.errorMessage = errorMessage;
@@ -114,9 +114,10 @@ public class RouteCalculationResult {
 		updateDirectionsTime(this.directions, this.listDistance);
 
 		this.showOriginalRoute = params.showOriginalRoute;
-		this.noRecalculations = params.noRecalculations;
-		if (params.routeRecalculationDistance != 0)
-		this.routeRecalcDistance = params.routeRecalculationDistance;
+
+		if (params.routeRecalculationDistance != 0.f) {
+			this.routeRecalcDistance = params.routeRecalculationDistance;
+		}
 	}
 
 	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end, List<LatLon> intermediates,

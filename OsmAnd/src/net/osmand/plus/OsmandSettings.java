@@ -451,7 +451,7 @@ public class OsmandSettings {
 
 	public void copyProfilePreferences(ApplicationMode modeFrom, ApplicationMode modeTo, List<OsmandPreference> profilePreferences) {
 		for (OsmandPreference pref : profilePreferences) {
-			if (prefCanBeCopiedOrReset(pref) && !USER_PROFILE_NAME.getId().equals(pref.getId())) {
+			if (prefCanBeCopiedOrReset(pref) && !USER_PROFILE_NAME.getId().equals(pref.getId()) && !ROUTE_RECALCULATION_DISTANCE.getId().equals(pref.getId())) {
 				CommonPreference profilePref = (CommonPreference) pref;
 				if (PARENT_APP_MODE.getId().equals(pref.getId())) {
 					if (modeTo.isCustomProfile()) {
@@ -1465,7 +1465,7 @@ public class OsmandSettings {
 
 		@Override
 		public SpeedConstants getProfileDefaultValue(ApplicationMode mode) {
-			MetricsConstants mc = METRIC_SYSTEM.get();
+			MetricsConstants mc = METRIC_SYSTEM.getModeValue(mode);
 			if (mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
 				if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
 					return SpeedConstants.MINUTES_PER_KILOMETER;
@@ -3282,7 +3282,15 @@ public class OsmandSettings {
 		return customBooleanRoutingProps.get(attrName);
 	}
 
-	public final CommonPreference<Float> ROUTE_RECALCULATION_DISTANCE = new FloatPreference("routing_recalc_distance", -1.f).makeProfile();
+	public final CommonPreference<Float> ROUTE_RECALCULATION_DISTANCE = new FloatPreference("routing_recalc_distance", 0.f){
+		@Override
+		public Float getProfileDefaultValue(ApplicationMode mode) {
+			if (mode.getRouteService() == RouteService.DIRECT_TO) {
+				return -1.0f;
+			}
+			return super.getProfileDefaultValue(mode);
+		}
+	}.makeProfile();
 
 	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_ROUTING = new BooleanPreference("enable_osmc_routing", true).makeGlobal();
 

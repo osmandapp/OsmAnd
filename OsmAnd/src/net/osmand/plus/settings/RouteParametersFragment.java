@@ -143,7 +143,9 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		if (am.getRouteService() != RouteProvider.RouteService.OSMAND) {
 			screen.addPreference(fastRoute);
 			if (am.getRouteService() == RouteProvider.RouteService.STRAIGHT) {
-				setupSelectRouteRecalcDistance(screen);
+				setupSelectRouteRecalcDistance(screen, 1);
+			} else if (am.getRouteService()  == RouteProvider.RouteService.DIRECT_TO) {
+				setupSelectRouteRecalcDistance(screen, 0);
 			}
 		} else {
 			GeneralRouter router = getRouter(getMyApplication().getRoutingConfig(), am);
@@ -234,29 +236,32 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		}
 	}
 
-	private void setupSelectRouteRecalcDistance(PreferenceScreen screen) {
+	private void setupSelectRouteRecalcDistance(PreferenceScreen screen, int defaultValue) {
 		Float[] entryValues;
-
-
 		OsmandSettings settings = app.getSettings();
 		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		if (mc == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
-			entryValues = new Float[] {-1.0f, 10.f, 20.0f, 30.0f, 50.0f, 100.0f, 200.0f, 500.0f, 1000.0f, 1500.0f};
+			entryValues = new Float[] {-1.0f, 0.f, 10.f, 20.0f, 30.0f, 50.0f, 100.0f, 200.0f, 500.0f, 1000.0f, 1500.0f};
 		} else {
-			entryValues = new Float[] {-1.0f, 9.1f, 18.3f, 30.5f, 45.7f, 91.5f, 183.0f, 482.0f, 965.0f, 1609.0f};
+			entryValues = new Float[] {-1.0f, 0.f, 9.1f, 18.3f, 30.5f, 45.7f, 91.5f, 183.0f, 482.0f, 965.0f, 1609.0f};
 		}
 
 		String[] entries = new String[entryValues.length];
-		entries[0] = getString(R.string.shared_string_not_selected);
-		for (int i = 1; i < entryValues.length; i++) {
+		entries[0] = getString(R.string.no_recalculation_setting);
+		entries[1] = getString(R.string.shared_string_default);
+
+		for (int i = 2; i < entryValues.length; i++) {
 			entries[i] = OsmAndFormatter.getFormattedDistance(entryValues[i], app, false);
 		}
 		ListPreferenceEx routeRecalculationDist = createListPreferenceEx(settings.ROUTE_RECALCULATION_DISTANCE.getId(),
 				entries, entryValues, R.string.route_recalculation_dist_title, R.layout.preference_with_descr);
+
 		routeRecalculationDist.setEntries(entries);
 		routeRecalculationDist.setEntryValues(entryValues);
 		routeRecalculationDist.setDescription(getString(R.string.route_recalculation_dist_descr));
 		routeRecalculationDist.setIcon(getRoutingPrefIcon("routing_recalc_distance"));
+
+
 		screen.addPreference(routeRecalculationDist);
 	}
 

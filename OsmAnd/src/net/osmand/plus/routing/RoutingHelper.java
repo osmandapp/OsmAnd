@@ -441,8 +441,8 @@ public class RoutingHelper {
 
 				// 2. Analyze if we need to recalculate route
 				// >100m off current route (sideways) or parameter (for Straight line)
-				if (currentRoute > 0 && !route.noRecalculations) {
-					double allowableDeviation = route.routeRecalcDistance <= 0 ? (1.7 * posTolerance) : route.routeRecalcDistance;
+				if (currentRoute > 0 && route.getRouteRecalcDistance() >= 0.f) {
+					double allowableDeviation = route.routeRecalcDistance == 0 ? (1.7 * posTolerance) : route.routeRecalcDistance;
 					distOrth = getOrthogonalDistance(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
 					if ((!settings.DISABLE_OFFROUTE_RECALC.get()) && (distOrth > allowableDeviation)) {
 						log.info("Recalculate route, because correlation  : " + distOrth); //$NON-NLS-1$
@@ -453,9 +453,9 @@ public class RoutingHelper {
 				// 3. Identify wrong movement direction
 				Location next = route.getNextRouteLocation();
 				boolean wrongMovementDirection = checkWrongMovementDirection(currentLocation, next);
-				double allowableDeviation = route.routeRecalcDistance <= 0 ? (2 * posTolerance) : route.routeRecalcDistance;
+				double allowableDeviation = route.routeRecalcDistance == 0.f ? (2 * posTolerance) : route.routeRecalcDistance;
 				if ((!settings.DISABLE_WRONG_DIRECTION_RECALC.get()) && wrongMovementDirection
-						&& (currentLocation.distanceTo(routeNodes.get(currentRoute)) > allowableDeviation) && !route.noRecalculations) {
+						&& (currentLocation.distanceTo(routeNodes.get(currentRoute)) > allowableDeviation) && route.getRouteRecalcDistance() >= 0) {
 					log.info("Recalculate route, because wrong movement direction: " + currentLocation.distanceTo(routeNodes.get(currentRoute))); //$NON-NLS-1$
 					isDeviatedFromRoute = true;
 					calculateRoute = true;
@@ -467,15 +467,15 @@ public class RoutingHelper {
 				// 5. Update Voice router
 				// Do not update in route planning mode
 				if (isFollowingMode) {
-					boolean inRecalc = calculateRoute || isRouteBeingCalculated();
+					boolean inRecalc = (calculateRoute || isRouteBeingCalculated());
 					if (!inRecalc && !wrongMovementDirection) {
 						voiceRouter.updateStatus(currentLocation, false);
 						voiceRouterStopped = false;
-					} else if (isDeviatedFromRoute && !voiceRouterStopped && !route.noRecalculations) {
+					} else if (isDeviatedFromRoute && !voiceRouterStopped && route.getRouteRecalcDistance() >= 0.f) {
 						voiceRouter.interruptRouteCommands();
 						voiceRouterStopped = true; // Prevents excessive execution of stop() code
 					}
-					if (distOrth > mode.getOffRouteDistance() && !route.noRecalculations) {
+					if (distOrth > mode.getOffRouteDistance() && route.getRouteRecalcDistance() >= 0.f) {
 						voiceRouter.announceOffRoute(distOrth);
 					}
 				}

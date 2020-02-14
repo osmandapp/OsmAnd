@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="no_recalculation_setting">Disable recalculation</string>
     <string name="open_settings">Open settings</string>
     <string name="plugin_disabled">Plugin disabled</string>
     <string name="plugin_disabled_descr">This plugin is a separate application, you will need to remove it separately if you no longer plan to use it.\n\nThe plugin will remain on the device after removing OsmAnd.</string>
