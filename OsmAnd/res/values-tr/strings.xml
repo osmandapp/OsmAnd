@@ -3481,4 +3481,18 @@
     <string name="copy_coordinates">Koordinatları kopyala</string>
     <string name="routing_profile_direct_to">Doğrudan noktaya</string>
     <string name="sort_by_category">Kategoriye göre sırala</string>
+    <string name="please_provide_profile_name_message">Lütfen profil için bir ad girin</string>
+    <string name="open_settings">Ayarları aç</string>
+    <string name="plugin_disabled">Eklenti devre dışı</string>
+    <string name="plugin_disabled_descr">Bu eklenti ayrı bir uygulamadır, artık kullanmayı düşünmüyorsanız ayrı olarak kaldırmanız gerekecektir.
+\n
+\nEklenti, OsmAnd kaldırıldıktan sonra cihazda kalacaktır.</string>
+    <string name="shared_string_menu">Menü</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_routing">Yönlendirme</string>
+    <string name="shared_string_custom_rendering_style">Özel görselleştirme stili</string>
+    <string name="shared_string_include_data">İlave veriler ekle</string>
+    <string name="import_profile_dialog_description">İçe aktarılan profil ilave veriler içermektedir. Yalnızca profil verilerini içe aktarmak için İçe Aktar\'ı tıklayın veya içe aktarılacak ilave verileri seçin.</string>
+    <string name="export_profile_dialog_description">Profil ile birlikte dışa aktarılacak ilave veriler seçebilirsiniz.</string>
+    <string name="index_name_antarctica">Antarktika</string>
 </resources>
