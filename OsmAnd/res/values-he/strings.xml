@@ -3450,4 +3450,7 @@
     <string name="sunset_at">שקיעה ב־%1$s</string>
     <string name="sunrise_at">זריחה ב־%1$s</string>
     <string name="accessibility_mode_disabled">מצב נגישות מושבת במערכת שלך.</string>
+    <string name="please_provide_profile_name_message">נא לבחור שם לפרופיל</string>
+    <string name="open_settings">פתיחת ההגדרות</string>
+    <string name="plugin_disabled">התוסף מושבת</string>
 </resources>
