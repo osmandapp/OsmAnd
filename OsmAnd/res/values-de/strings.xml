@@ -3525,4 +3525,18 @@ Lon %2$s</string>
 \n</string>
     <string name="sort_by_category">Nach Kategorie sortieren</string>
     <string name="tracks_view_descr">Ihre aufgezeichneten Tracks befinden sich in %1$s oder im OsmAnd-Ordner.</string>
+    <string name="please_provide_profile_name_message">Bitte geben Sie einen Namen für das Profil an</string>
+    <string name="open_settings">Einstellungen öffnen</string>
+    <string name="plugin_disabled">Plugin deaktiviert</string>
+    <string name="plugin_disabled_descr">Dieses Plugin ist eine separate Anwendung, Sie müssen es separat entfernen, wenn Sie nicht mehr vorhaben, es zu verwenden.
+\n
+\nDas Plugin verbleibt nach dem Entfernen von OsmAnd auf dem Gerät.</string>
+    <string name="shared_string_menu">Menü</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_routing">Routing</string>
+    <string name="shared_string_custom_rendering_style">Benutzerdefinierter Rendering-Stil</string>
+    <string name="shared_string_include_data">Zusätzliche Daten einschließen</string>
+    <string name="import_profile_dialog_description">Das importierte Profil enthält zusätzliche Daten. Klicken Sie auf \'Importieren\', um nur Profildaten zu importieren, oder wählen Sie zusätzliche Daten zum Importieren aus.</string>
+    <string name="export_profile_dialog_description">Sie können zusätzliche Daten zum Exportieren zusammen mit dem Profil auswählen.</string>
+    <string name="index_name_antarctica">Antarktis</string>
 </resources>
