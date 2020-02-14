@@ -3283,23 +3283,6 @@ public class OsmandSettings {
 	}
 
 	public final CommonPreference<Float> ROUTE_RECALCULATION_DISTANCE = new FloatPreference("routing_recalc_distance", 0.f){
-		@Override
-		public Float getProfileDefaultValue(ApplicationMode mode) {
-			if (DISABLE_OFFROUTE_RECALC.getModeValue(mode)) {
-				return -1.0f;
-			} else if (mode.getRouteService() == RouteService.DIRECT_TO) {
-				DISABLE_OFFROUTE_RECALC.setModeValue(mode, true);
-				return -1.0f;
-			} else if (mode.getRouteService() == RouteService.STRAIGHT) {
-				MetricsConstants mc = METRIC_SYSTEM.getModeValue(mode);
-				if (mc == MetricsConstants.KILOMETERS_AND_METERS || mc ==MetricsConstants.MILES_AND_METERS) {
-					return 500.f;
-				} else {
-					return 482.0f;
-				}
-			}
-			return super.getProfileDefaultValue(mode);
-		}
 	}.makeProfile();
 
 	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_ROUTING = new BooleanPreference("enable_osmc_routing", true).makeGlobal();

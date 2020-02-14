@@ -42,6 +42,7 @@ public class RoutingHelper {
 
 	private static final float POSITION_TOLERANCE = 60;
 	private static final int CACHE_RADIUS = 100000;
+	public static final float ALLOWED_DEVIATION = 2;
 
 	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
 	private List<WeakReference<IRoutingDataUpdateListener>> updateListeners = new LinkedList<>();
@@ -398,9 +399,30 @@ public class RoutingHelper {
 		return getOrthogonalDistance(lastFixedLocation, routeNodes.get(route.currentRoute -1), routeNodes.get(route.currentRoute));
 	}
 
-	public float getPosTolerance(Location currentLocation) {
-		if(currentLocation.hasAccuracy()) {
-			return POSITION_TOLERANCE / 2 + currentLocation.getAccuracy();
+
+	public static float getDefaultAllowedDeviation(OsmandSettings settings, float posTolerance) {
+		ApplicationMode mode = settings.getApplicationMode();
+
+		if (settings.DISABLE_OFFROUTE_RECALC.getModeValue(mode)) {
+			return -1.0f;
+		} else if (mode.getRouteService() == RouteService.DIRECT_TO) {
+			settings.DISABLE_OFFROUTE_RECALC.setModeValue(mode, true);
+			return -1.0f;
+		} else if (mode.getRouteService() == RouteService.STRAIGHT) {
+			OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.getModeValue(mode);
+			if (mc == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS || mc == OsmandSettings.MetricsConstants.MILES_AND_METERS) {
+				return 500.f;
+			} else {
+				// 1500 ft
+				return 457.2f;
+			}
+		}
+		return posTolerance * ALLOWED_DEVIATION;
+	}
+
+	public static float getPosTolerance(float accuracy) {
+		if(accuracy > 0) {
+			return POSITION_TOLERANCE / 2 + accuracy;
 		}
 		return POSITION_TOLERANCE;
 	}
@@ -420,7 +442,7 @@ public class RoutingHelper {
 			isDeviatedFromRoute = false;
 			return locationProjection;
 		}
-		float posTolerance = getPosTolerance(currentLocation);
+		float posTolerance = getPosTolerance(currentLocation.hasAccuracy() ? currentLocation.getAccuracy() : 0);
 		boolean calculateRoute = false;
 		synchronized (this) {
 			isDeviatedFromRoute = false;
@@ -438,10 +460,13 @@ public class RoutingHelper {
 				}
 				List<Location> routeNodes = route.getImmutableAllLocations();
 				int currentRoute = route.currentRoute;
-				double allowableDeviation = route.routeRecalcDistance == 0 ? (2 * posTolerance) : route.routeRecalcDistance;
+				double allowableDeviation = route.getRouteRecalcDistance();
+				if (allowableDeviation == 0) {
+					allowableDeviation = getDefaultAllowedDeviation(settings, posTolerance);
+				}
 				// 2. Analyze if we need to recalculate route
 				// >100m off current route (sideways) or parameter (for Straight line)
-				if (currentRoute > 0 && route.getRouteRecalcDistance() >= 0.f && !settings.DISABLE_OFFROUTE_RECALC.get()) {
+				if (currentRoute > 0 && allowableDeviation > 0) {
 					distOrth = getOrthogonalDistance(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
 					if (distOrth > allowableDeviation) {
 						log.info("Recalculate route, because correlation  : " + distOrth); //$NON-NLS-1$
@@ -452,7 +477,7 @@ public class RoutingHelper {
 				// 3. Identify wrong movement direction
 				Location next = route.getNextRouteLocation();
 				boolean wrongMovementDirection = checkWrongMovementDirection(currentLocation, next);
-				if (!settings.DISABLE_OFFROUTE_RECALC.get() && wrongMovementDirection
+				if (allowableDeviation > 0 && wrongMovementDirection
 						&& (currentLocation.distanceTo(routeNodes.get(currentRoute)) > allowableDeviation)) {
 					log.info("Recalculate route, because wrong movement direction: " + currentLocation.distanceTo(routeNodes.get(currentRoute))); //$NON-NLS-1$
 					isDeviatedFromRoute = true;
@@ -547,7 +572,7 @@ public class RoutingHelper {
 		return index;
 	}
 
-	private boolean updateCurrentRouteStatus(Location currentLocation, float posTolerance) {
+	private boolean updateCurrentRouteStatus(Location currentLocation, double posTolerance) {
 		List<Location> routeNodes = route.getImmutableAllLocations();
 		int currentRoute = route.currentRoute;
 		// 1. Try to proceed to next point using orthogonal distance (finding minimum orthogonal dist)
@@ -685,7 +710,7 @@ public class RoutingHelper {
 	}
 
 
-	private boolean identifyUTurnIsNeeded(Location currentLocation, float posTolerance) {
+	private boolean identifyUTurnIsNeeded(Location currentLocation, double posTolerance) {
 		if (finalLocation == null || currentLocation == null || !route.isCalculated() || isPublicTransportMode()) {
 			return false;
 		}

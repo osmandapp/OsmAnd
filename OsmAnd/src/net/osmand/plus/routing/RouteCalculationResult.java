@@ -65,7 +65,7 @@ public class RouteCalculationResult {
 	protected ApplicationMode appMode;
 
 	protected boolean showOriginalRoute = false;
-	protected float routeRecalcDistance = 0.f;
+	protected double routeRecalcDistance = 0.d;
 
 	public RouteCalculationResult(String errorMessage) {
 		this.errorMessage = errorMessage;
@@ -238,7 +238,7 @@ public class RouteCalculationResult {
 		}
 	}
 
-	public float getRouteRecalcDistance() {
+	public double getRouteRecalcDistance() {
 		return routeRecalcDistance;
 	}
 
