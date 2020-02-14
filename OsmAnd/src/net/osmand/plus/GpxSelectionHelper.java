@@ -25,6 +25,7 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
+import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -943,6 +944,52 @@ public class GpxSelectionHelper {
 
 		public boolean isGeneralTrack() {
 			return group != null && group.isGeneralTrack();
+		}
+	}
+
+	public static class SelectGpxTask extends AsyncTask<AvailableGPXFragment.GpxInfo, AvailableGPXFragment.GpxInfo, String> {
+
+		private OsmandApplication app;
+		private boolean showOnMap;
+		private WptPt toShow;
+		private AvailableGPXFragment.ProgressListener progressListener;
+
+		public SelectGpxTask(OsmandApplication app, boolean showOnMap, AvailableGPXFragment.ProgressListener progressListener) {
+			this.showOnMap = showOnMap;
+			this.app = app;
+			this.progressListener = progressListener;
+		}
+
+		@Override
+		protected String doInBackground(AvailableGPXFragment.GpxInfo... params) {
+			for (AvailableGPXFragment.GpxInfo info : params) {
+				if (!info.currentlyRecordingTrack) {
+					info.setGpx(GPXUtilities.loadGPXFile(info.file));
+				}
+				publishProgress(info);
+			}
+			return "";
+		}
+
+		@Override
+		protected void onProgressUpdate(AvailableGPXFragment.GpxInfo... values) {
+			for (AvailableGPXFragment.GpxInfo g : values) {
+				final boolean visible = g.isSelected();
+				app.getSelectedGpxHelper().selectGpxFile(g.gpx, visible, false);
+				if (visible && toShow == null) {
+					toShow = g.gpx.findPointToShow();
+				}
+			}
+		}
+
+		@Override
+		protected void onPreExecute() {
+			progressListener.onShowProgress(true);
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			progressListener.onPostExecute(showOnMap, toShow);
 		}
 	}
 }
