@@ -1116,21 +1116,24 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 				int currentRoute = route == null ? 0 : route.getCurrentRoute();
 				Location pointToReturn = null;
 				if (route != null && currentRoute > 0 && route.getRouteRecalcDistance() > 0) {
+					Location currentLoc = helper.getApplication().getLocationProvider().getLastKnownLocation();
 					final Location from = routeGeometry.locations.get(currentRoute - 1);
 					final Location to = routeGeometry.locations.get(currentRoute);
-					final LatLon projection = MapUtils.getProjection(currentLoc.getLatitude(),
-							currentLoc.getLongitude(), from.getLatitude(), from.getLongitude(),
-							to.getLatitude(), to.getLongitude());
-
-					final double deviation = MapUtils.getDistance(projection.getLatitude(), projection.getLongitude(), currentLoc.getLatitude(), currentLoc.getLongitude());
-					if (deviation < route.getRouteRecalcDistance()) {
-						double distFromProjectionToEnd = Math.sqrt(Math.pow(to.getLatitude() - projection.getLatitude(), 2) + Math.pow(to.getLongitude() - projection.getLongitude(), 2));
-						double coef = deviation / distFromProjectionToEnd;
-						pointToReturn = new Location("route_layer");
-						pointToReturn.setLatitude(projection.getLatitude() + (to.getLatitude() - projection.getLatitude()) * coef);
-						pointToReturn.setLongitude(projection.getLongitude() + (to.getLongitude() - projection.getLatitude()) * coef);
-						//how to draw line to this point from lastProjection?!
-					}
+//					final LatLon projection = MapUtils.getProjection(currentLoc.getLatitude(),
+//							currentLoc.getLongitude(), from.getLatitude(), from.getLongitude(),
+//							to.getLatitude(), to.getLongitude());
+//
+//					final double deviation = MapUtils.getDistance(projection.getLatitude(), projection.getLongitude(), currentLoc.getLatitude(), currentLoc.getLongitude());
+//					if (deviation < route.getRouteRecalcDistance()) {
+//						double distFromProjectionToEnd = Math.sqrt(Math.pow(to.getLatitude() - projection.getLatitude(), 2) + Math.pow(to.getLongitude() - projection.getLongitude(), 2));
+//						double coef = deviation / distFromProjectionToEnd;
+//						pointToReturn = new Location("route_layer");
+//						pointToReturn.setLatitude(projection.getLatitude() + (to.getLatitude() - projection.getLatitude()) * coef);
+//						pointToReturn.setLongitude(projection.getLongitude() + (to.getLongitude() - projection.getLatitude()) * coef);
+//					}
+//					if (pointToReturn != null) {
+//						drawProjectionPoint(canvas, new double[]{tb.getPixXFromLonNoRot(pointToReturn.getLongitude()), tb.getPixYFromLatNoRot(pointToReturn.getLatitude())});
+//					}
 				}
 
 				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,

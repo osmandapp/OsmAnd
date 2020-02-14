@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="shared_string_routing_default_w_val">%s (Routing Default)</string>
+    <string name="shared_string_app_default_w_val">App Default (%s)</string>
     <string name="please_provide_profile_name_message">Please provide a name for the profile</string>
     <string name="no_recalculation_setting">Disable recalculation</string>
     <string name="open_settings">Open settings</string>

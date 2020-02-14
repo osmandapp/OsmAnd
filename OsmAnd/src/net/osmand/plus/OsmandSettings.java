@@ -1606,8 +1606,8 @@ public class OsmandSettings {
 		new BooleanAccessibilityPreference("disable_offroute_recalc", false).makeProfile();
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> DISABLE_WRONG_DIRECTION_RECALC =
-		new BooleanAccessibilityPreference("disable_wrong_direction_recalc", false).makeProfile();
+//	public final OsmandPreference<Boolean> DISABLE_WRONG_DIRECTION_RECALC =
+//		new BooleanAccessibilityPreference("disable_wrong_direction_recalc", false).makeProfile();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> DIRECTION_AUDIO_FEEDBACK =
@@ -3285,8 +3285,18 @@ public class OsmandSettings {
 	public final CommonPreference<Float> ROUTE_RECALCULATION_DISTANCE = new FloatPreference("routing_recalc_distance", 0.f){
 		@Override
 		public Float getProfileDefaultValue(ApplicationMode mode) {
-			if (mode.getRouteService() == RouteService.DIRECT_TO) {
+			if (DISABLE_OFFROUTE_RECALC.getModeValue(mode)) {
 				return -1.0f;
+			} else if (mode.getRouteService() == RouteService.DIRECT_TO) {
+				DISABLE_OFFROUTE_RECALC.setModeValue(mode, true);
+				return -1.0f;
+			} else if (mode.getRouteService() == RouteService.STRAIGHT) {
+				MetricsConstants mc = METRIC_SYSTEM.getModeValue(mode);
+				if (mc == MetricsConstants.KILOMETERS_AND_METERS || mc ==MetricsConstants.MILES_AND_METERS) {
+					return 500.f;
+				} else {
+					return 482.0f;
+				}
 			}
 			return super.getProfileDefaultValue(mode);
 		}

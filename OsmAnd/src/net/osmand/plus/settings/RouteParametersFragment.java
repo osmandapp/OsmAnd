@@ -7,9 +7,9 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.PreferenceViewHolder;
-import android.text.SpannableStringBuilder;
 import android.widget.ImageView;
 
+import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
@@ -140,14 +140,16 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 
 
 		ApplicationMode am = getSelectedAppMode();
+		float posTolerance = app.getRoutingHelper().getPosTolerance(new Location(""));
 		if (am.getRouteService() != RouteProvider.RouteService.OSMAND) {
 			screen.addPreference(fastRoute);
 			if (am.getRouteService() == RouteProvider.RouteService.STRAIGHT) {
-				setupSelectRouteRecalcDistance(screen, 1);
+				setupSelectRouteRecalcDistance(screen, 8, posTolerance);
 			} else if (am.getRouteService()  == RouteProvider.RouteService.DIRECT_TO) {
-				setupSelectRouteRecalcDistance(screen, 0);
+				setupSelectRouteRecalcDistance(screen, 0, posTolerance);
 			}
 		} else {
+			setupSelectRouteRecalcDistance(screen, 1, posTolerance);
 			GeneralRouter router = getRouter(getMyApplication().getRoutingConfig(), am);
 			clearParameters();
 			if (router != null) {
@@ -236,7 +238,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		}
 	}
 
-	private void setupSelectRouteRecalcDistance(PreferenceScreen screen, int defaultValue) {
+	private void setupSelectRouteRecalcDistance(PreferenceScreen screen, int defaultValue, float posTolerance) {
 		Float[] entryValues;
 		OsmandSettings settings = app.getSettings();
 		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
@@ -248,11 +250,16 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 
 		String[] entries = new String[entryValues.length];
 		entries[0] = getString(R.string.no_recalculation_setting);
-		entries[1] = getString(R.string.shared_string_default);
+		entries[1] = String.format(getString(R.string.shared_string_app_default_w_val), OsmAndFormatter.getFormattedDistance(posTolerance * 2, app, false));
 
 		for (int i = 2; i < entryValues.length; i++) {
 			entries[i] = OsmAndFormatter.getFormattedDistance(entryValues[i], app, false);
 		}
+
+		if (defaultValue != 1) {
+			entries[defaultValue] = String.format(getString(R.string.shared_string_routing_default_w_val), defaultValue == 0 ? getString(R.string.no_recalculation_setting) : entries[defaultValue]);
+		}
+
 		ListPreferenceEx routeRecalculationDist = createListPreferenceEx(settings.ROUTE_RECALCULATION_DISTANCE.getId(),
 				entries, entryValues, R.string.route_recalculation_dist_title, R.layout.preference_with_descr);
 
@@ -330,6 +337,12 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			return true;
 		} else if ("prouting_short_way".equals(key) && newValue instanceof Boolean) {
 			return app.getSettings().FAST_ROUTE_MODE.setModeValue(getSelectedAppMode(), !(Boolean) newValue);
+		} else if (settings.ROUTE_RECALCULATION_DISTANCE.getId().equals(key) && newValue instanceof Float) {
+			if ((float) newValue == -1.f) {
+				settings.DISABLE_OFFROUTE_RECALC.setModeValue(getSelectedAppMode(), true);
+			} else {
+				settings.DISABLE_OFFROUTE_RECALC.setModeValue(getSelectedAppMode(), false);
+			}
 		}
 
 		return super.onPreferenceChange(preference, newValue);
