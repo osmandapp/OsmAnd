@@ -3430,4 +3430,12 @@
     <string name="copy_coordinates">نسخ الإحداثيات</string>
     <string name="routing_profile_direct_to">مباشر إلى نقطة</string>
     <string name="sort_by_category">الفرز حسب الفئة</string>
+    <string name="please_provide_profile_name_message">يرجى اعطاء اسم للملف الشخصي</string>
+    <string name="open_settings">افتح الإعدادات</string>
+    <string name="plugin_disabled">البرنامج المساعد معطل</string>
+    <string name="shared_string_menu">القائمة</string>
+    <string name="shared_string_routing">التوجيه</string>
+    <string name="shared_string_include_data">تضمين بيانات إضافية</string>
+    <string name="export_profile_dialog_description">يمكنك تحديد بيانات إضافية للتصدير مع الملف الشخصي.</string>
+    <string name="index_name_antarctica">القارة القطبية الجنوبية</string>
 </resources>
