@@ -3495,4 +3495,5 @@ représentant la zone : %1$s x %2$s</string>
 \n</string>
     <string name="copy_coordinates">Copier les coordonnées</string>
     <string name="routing_profile_direct_to">Le plus direct</string>
+    <string name="sort_by_category">Trier par catégorie</string>
 </resources>

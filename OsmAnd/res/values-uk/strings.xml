@@ -3515,4 +3515,5 @@
 \n</string>
     <string name="copy_coordinates">Скопіювати координати</string>
     <string name="routing_profile_direct_to">Пряма точка</string>
+    <string name="sort_by_category">Впорядкувати за категоріями</string>
 </resources>

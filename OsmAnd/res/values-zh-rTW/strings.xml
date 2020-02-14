@@ -3515,4 +3515,5 @@
 \n</string>
     <string name="copy_coordinates">複製座標</string>
     <string name="routing_profile_direct_to">點對點</string>
+    <string name="sort_by_category">按分類排序</string>
 </resources>

@@ -2163,7 +2163,7 @@ Lon %2$s</string>
     <string name="quick_action_map_source_title">Kartenquellen</string>
     <string name="quick_action_map_source_action">Kartenquelle hinzufügen</string>
     <string name="quick_action_map_source_switch">Die Kartenquelle wurde in „%s“ geändert.</string>
-    <string name="quick_action_btn_tutorial_title">Tastenposition ändern</string>
+    <string name="quick_action_btn_tutorial_title">Schaltflächenposition ändern</string>
     <string name="quick_action_favorites_show">Favoriten anzeigen</string>
     <string name="quick_action_favorites_hide">Favoriten ausblenden</string>
     <string name="quick_action_category_descr">Kategorie, in der der Favorit gespeichert werden soll:</string>
@@ -2173,7 +2173,7 @@ Lon %2$s</string>
     <string name="quick_action_add_osm_bug_descr">Eine Schaltfläche, um eine OSM-Notiz in der Bildschirmmitte einzufügen.</string>
     <string name="quick_action_add_poi_descr">Eine Schaltfläche, um einen POI in der Bildschirmmitte einzufügen.</string>
     <string name="quick_action_navigation_voice_descr">Umschalter, um die Sprachansagen während der Navigation ein- oder auszuschalten.</string>
-    <string name="quick_action_add_parking_descr">Taste, um eine Parkposition in der Bildschirmmitte einzufügen.</string>
+    <string name="quick_action_add_parking_descr">Eine Schaltfläche, um eine Parkposition in der Bildschirmmitte einzufügen.</string>
     <string name="quick_action_interim_dialog">Dialog zum Bearbeiten anzeigen</string>
     <string name="favorite_autofill_toast_text">" gespeichert unter "</string>
     <string name="quick_action_duplicates">Schnellaktion in %1$s umbenannt, um Duplikate zu vermeiden.</string>
@@ -2182,7 +2182,7 @@ Lon %2$s</string>
     <string name="quick_action_showhide_poi_descr">Umschalter, um POIs auf der Karte ein- oder auszublenden.</string>
     <string name="quick_action_add_create_items">Objekte erstellen</string>
     <string name="quick_action_bug_descr">Diese Nachricht wird ins Kommentarfeld eingetragen.</string>
-    <string name="quick_action_btn_tutorial_descr">Langes Drücken und Ziehen der Taste ändert ihre Bildschirmposition.</string>
+    <string name="quick_action_btn_tutorial_descr">Langes Drücken und Ziehen der Schaltfläche ändert ihre Bildschirmposition.</string>
     <string name="quick_action_map_overlay_switch">Karten-Overlay wurde in „%s“ geändert.</string>
     <string name="quick_action_map_underlay_switch">Karten-Underlay wurde in „%s“ geändert.</string>
     <string name="navigate_point_olc_info_invalid">Ungültiger OLC
@@ -2194,7 +2194,7 @@ Lon %2$s</string>
     <string name="auto_split_recording_title">Aufzeichnungen bei Lücken automatisch trennen</string>
     <string name="auto_split_recording_descr">Nach 6-minütiger Pause neues Segment, nach 2-stündiger Pause neuen Track und nach Pause mit Datumsänderung neue Datei beginnen.</string>
     <string name="navigate_point_olc">Offener Standortcode (OLC)</string>
-    <string name="quick_action_page_list_descr">Taste, um durch die Liste unten zu blättern.</string>
+    <string name="quick_action_page_list_descr">Eine Schaltfläche, um durch die Liste unten zu blättern.</string>
     <string name="routing_attr_height_obstacles_name">Höhendaten berücksichtigen</string>
     <string name="routing_attr_height_obstacles_description">Faktor im Geländeprofil (über SRTM, ASTER und EU-DEM-Daten).</string>
     <string name="rendering_attr_depthContours_name">Nautische Tiefenlinien</string>
@@ -3484,10 +3484,10 @@ Lon %2$s</string>
     <string name="multimedia_use_system_camera">System-App verwenden</string>
     <string name="multimedia_photo_play_sound">Auslöseton der Kamera</string>
     <string name="reset_to_default_category_button_promo">Durch das Zurücksetzen auf die Standardeinstellung wird die Sortierung auf den Standardzustand nach der Installation zurückgesetzt.</string>
-    <string name="accessibility_mode_disabled">Eingabehilfenmodus ist in ihrem System deaktiviert.</string>
+    <string name="accessibility_mode_disabled">Eingabehilfenmodus ist in Ihrem System deaktiviert.</string>
     <string name="use_system_screen_timeout">Zeitlimit für den Systembildschirm verwenden</string>
-    <string name="use_system_screen_timeout_promo">Standardmäßig deaktiviert, wenn OsmAnd im Vordergrund läuft, wird der Bildschirm nicht ausgeblendet.
-\n
+    <string name="use_system_screen_timeout_promo">Standardmäßig deaktiviert. Wenn OsmAnd im Vordergrund läuft, wird der Bildschirm nicht ausgeblendet. 
+\n 
 \nWenn aktiviert, verwendet OsmAnd das Zeitlimit für den Systembildschirm.</string>
     <string name="live_monitoring">Online-Aufzeichnung</string>
     <string name="clear_recorded_data">Aufgezeichnete Daten löschen</string>
@@ -3524,4 +3524,5 @@ Lon %2$s</string>
 \n
 \n</string>
     <string name="sort_by_category">Nach Kategorie sortieren</string>
+    <string name="tracks_view_descr">Ihre aufgezeichneten Tracks befinden sich in %1$s oder im OsmAnd-Ordner.</string>
 </resources>

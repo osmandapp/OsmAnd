@@ -2784,7 +2784,7 @@
     <string name="poi_aerialway_heating">Hejtado</string>
     <string name="poi_pump">Pumpilo</string>
     <string name="poi_observatory_designation">Apliko</string>
-    <string name="poi_telescope_type">Speco</string>
+    <string name="poi_telescope_type">Speco de teleskopo</string>
     <string name="poi_animal_training_type">Dresado de</string>
     <string name="poi_embassy_type">Speco de diplomata oficejo</string>
     <string name="poi_city_capital">Ĉefurbo</string>
@@ -2819,7 +2819,7 @@
     <string name="poi_shelter_type">Speco de ŝirmejo</string>
     <string name="poi_fireplace">Kameno</string>
     <string name="poi_seasonal">Sezona</string>
-    <string name="poi_water_characteristic">Akvospeco</string>
+    <string name="poi_water_characteristic">Speco de akvo</string>
     <string name="poi_beach_surface_type">Sablobordo</string>
     <string name="poi_nudism">Nudeco</string>
     <string name="poi_wheelchair_accessibility">Rulseĝa alireblo</string>
@@ -3087,7 +3087,7 @@
     <string name="poi_zoo_reptile">rampulejo</string>
     <string name="poi_stands">Spektoteraso</string>
     <string name="poi_motorcycle_services">Servo</string>
-    <string name="poi_motorcycle_type">Motorcikla speco</string>
+    <string name="poi_motorcycle_type">Speco de motorciklo</string>
     <string name="poi_motorcycle_sales_yes">vendo</string>
     <string name="poi_motorcycle_sales_no">vendo: ne</string>
     <string name="poi_motorcycle_sales_yes_used">vendo, brokanto</string>
@@ -3508,7 +3508,7 @@
     <string name="poi_atm">Bankaŭtomato</string>
     <string name="poi_shoe_repair">Ŝu-riparejo</string>
     <string name="poi_bulk_purchase">Vendado sen pakumo</string>
-    <string name="poi_substation_type">Speco</string>
+    <string name="poi_substation_type">Speco de elektrosubcentralo</string>
     <string name="poi_bulk_purchase_yes">jes</string>
     <string name="poi_bulk_purchase_only">nur</string>
     <string name="poi_pipeline_substation">Konduktuba substacio</string>
