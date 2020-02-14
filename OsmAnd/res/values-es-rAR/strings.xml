@@ -3526,4 +3526,18 @@ Lon %2$s</string>
     <string name="copy_coordinates">Copiar coordenadas</string>
     <string name="routing_profile_direct_to">Directo al punto</string>
     <string name="sort_by_category">Ordenar por categoría</string>
+    <string name="please_provide_profile_name_message">Proporciona un nombre para el perfil</string>
+    <string name="open_settings">Abrir los ajustes</string>
+    <string name="plugin_disabled">Complemento desactivado</string>
+    <string name="plugin_disabled_descr">Este complemento es una aplicación independiente, deberás quitarlo por separado si no piensas seguir usándolo.
+\n
+\nEl complemento permanecerá en el dispositivo después de desinstalar OsmAnd.</string>
+    <string name="shared_string_menu">Menú</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s → %2$s → %3$s</string>
+    <string name="shared_string_routing">Enrutamiento</string>
+    <string name="shared_string_custom_rendering_style">Vista de estilo propia</string>
+    <string name="shared_string_include_data">Incluir datos adicionales</string>
+    <string name="import_profile_dialog_description">El perfil importado contiene datos adicionales. Pulsa en «Importar» para importar sólo datos de perfil o marca datos adicionales para importar.</string>
+    <string name="export_profile_dialog_description">Puedes marcar datos adicionales para exportar junto con el perfil.</string>
+    <string name="index_name_antarctica">Antártida</string>
 </resources>
