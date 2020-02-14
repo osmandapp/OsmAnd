@@ -413,8 +413,8 @@ public class RoutingHelper {
 			if (mc == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS || mc == OsmandSettings.MetricsConstants.MILES_AND_METERS) {
 				return 500.f;
 			} else {
-				// 1500 ft
-				return 457.2f;
+				// 1/4 mile
+				return 482.f;
 			}
 		}
 		return posTolerance * ALLOWED_DEVIATION;

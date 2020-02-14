@@ -140,12 +140,12 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 
 
 		ApplicationMode am = getSelectedAppMode();
-		float posTolerance = (float) RoutingHelper.getDefaultAllowedDeviation(settings, RoutingHelper.getPosTolerance(0));
+		float defaultAllowedDeviation = RoutingHelper.getDefaultAllowedDeviation(settings, RoutingHelper.getPosTolerance(0));
 		if (am.getRouteService() != RouteProvider.RouteService.OSMAND) {
 			screen.addPreference(fastRoute);
-			setupSelectRouteRecalcDistance(screen, posTolerance);
+			setupSelectRouteRecalcDistance(screen, defaultAllowedDeviation);
 		} else {
-			setupSelectRouteRecalcDistance(screen, posTolerance);
+			setupSelectRouteRecalcDistance(screen, defaultAllowedDeviation);
 			GeneralRouter router = getRouter(getMyApplication().getRoutingConfig(), am);
 			clearParameters();
 			if (router != null) {
@@ -234,7 +234,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		}
 	}
 
-	private void setupSelectRouteRecalcDistance(PreferenceScreen screen, float posTolerance) {
+	private void setupSelectRouteRecalcDistance(PreferenceScreen screen, float defaultAllowedDeviation) {
 		Float[] entryValues;
 		OsmandSettings settings = app.getSettings();
 		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
@@ -246,18 +246,16 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 
 		String[] entries = new String[entryValues.length];
 		entries[0] = getString(R.string.no_recalculation_setting);
-		String defaultDistance = OsmAndFormatter.getFormattedDistance(settings.ROUTE_RECALCULATION_DISTANCE.getProfileDefaultValue(settings.getApplicationMode()),
-				app, false);
+		String defaultDistance =  defaultAllowedDeviation < 0 ? getString(R.string.no_recalculation_setting) :
+				OsmAndFormatter.getFormattedDistance(defaultAllowedDeviation , app, false);
 		entries[1] = String.format(getString(R.string.shared_string_app_default_w_val), defaultDistance);
 
 		for (int i = 2; i < entryValues.length; i++) {
 			entries[i] = OsmAndFormatter.getFormattedDistance(entryValues[i], app, false);
 		}
 
-
 		ListPreferenceEx routeRecalculationDist = createListPreferenceEx(settings.ROUTE_RECALCULATION_DISTANCE.getId(),
 				entries, entryValues, R.string.route_recalculation_dist_title, R.layout.preference_with_descr);
-
 		routeRecalculationDist.setEntries(entries);
 		routeRecalculationDist.setEntryValues(entryValues);
 		routeRecalculationDist.setDescription(getString(R.string.route_recalculation_dist_descr));
