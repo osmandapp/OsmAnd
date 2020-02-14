@@ -22,7 +22,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
@@ -30,6 +29,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.MainSettingsFragment;
 import net.osmand.plus.settings.NavigationFragment;
 import net.osmand.plus.settings.ProfileAppearanceFragment;
+import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 
 import org.apache.commons.logging.Log;
 
@@ -38,7 +38,7 @@ import java.util.List;
 
 import static net.osmand.plus.helpers.ImportHelper.ImportType.ROUTING;
 
-public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
+public class SelectProfileBottomSheetDialogFragment extends BasePreferenceBottomSheet {
 
 	private static final Log LOG = PlatformUtil
 		.getLog(SelectProfileBottomSheetDialogFragment.class);
@@ -181,7 +181,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 		int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		int iconDefaultColorResId = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
 		
-		View itemView = View.inflate(getContext(), R.layout.bottom_sheet_item_with_descr_and_radio_btn, null);
+		View itemView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.bottom_sheet_item_with_descr_and_radio_btn, null);
 		TextView tvTitle = itemView.findViewById(R.id.title);
 		TextView tvDescription = itemView.findViewById(R.id.description);
 		ImageView ivIcon = itemView.findViewById(R.id.icon);
