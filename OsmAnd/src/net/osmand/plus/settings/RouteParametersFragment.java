@@ -140,7 +140,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 
 
 		ApplicationMode am = getSelectedAppMode();
-		float defaultAllowedDeviation = RoutingHelper.getDefaultAllowedDeviation(settings, RoutingHelper.getPosTolerance(0));
+		float defaultAllowedDeviation = RoutingHelper.getDefaultAllowedDeviation(settings, am,
+				RoutingHelper.getPosTolerance(0));
 		if (am.getRouteService() != RouteProvider.RouteService.OSMAND) {
 			screen.addPreference(fastRoute);
 			setupSelectRouteRecalcDistance(screen, defaultAllowedDeviation);

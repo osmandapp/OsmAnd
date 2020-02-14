@@ -400,13 +400,10 @@ public class RoutingHelper {
 	}
 
 
-	public static float getDefaultAllowedDeviation(OsmandSettings settings, float posTolerance) {
-		ApplicationMode mode = settings.getApplicationMode();
-
+	public static float getDefaultAllowedDeviation(OsmandSettings settings, ApplicationMode mode, float posTolerance) {
 		if (settings.DISABLE_OFFROUTE_RECALC.getModeValue(mode)) {
 			return -1.0f;
 		} else if (mode.getRouteService() == RouteService.DIRECT_TO) {
-			settings.DISABLE_OFFROUTE_RECALC.setModeValue(mode, true);
 			return -1.0f;
 		} else if (mode.getRouteService() == RouteService.STRAIGHT) {
 			OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.getModeValue(mode);
@@ -462,7 +459,7 @@ public class RoutingHelper {
 				int currentRoute = route.currentRoute;
 				double allowableDeviation = route.getRouteRecalcDistance();
 				if (allowableDeviation == 0) {
-					allowableDeviation = getDefaultAllowedDeviation(settings, posTolerance);
+					allowableDeviation = getDefaultAllowedDeviation(settings, route.getAppMode(), posTolerance);
 				}
 				// 2. Analyze if we need to recalculate route
 				// >100m off current route (sideways) or parameter (for Straight line)
