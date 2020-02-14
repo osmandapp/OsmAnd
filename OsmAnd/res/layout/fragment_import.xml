@@ -59,11 +59,14 @@
 		android:layout_below="@+id/description" />
 
 	<ExpandableListView
-		android:id="@android:id/list"
+		android:id="@+id/list"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
+		android:layout_height="match_parent"
 		android:layout_below="@+id/description_divider"
 		android:layout_marginBottom="@dimen/dialog_button_ex_height"
+		android:divider="@null"
+		android:dividerHeight="0dp"
+		android:drawSelectorOnTop="false"
 		android:groupIndicator="@android:color/transparent"
 		android:listSelector="@android:color/transparent" />
 

@@ -8,6 +8,8 @@ public interface ITileSource {
 
 	public String getName();
 
+	public void setName(String name);
+
 	public int getTileSize();
 
 	public String getUrlToLoad(int x, int y, int zoom);
@@ -29,7 +31,7 @@ public interface ITileSource {
 	public long getExpirationTimeMillis();
 
 	public int getExpirationTimeMinutes();
-	
+
 	public String getReferer();
 
 	public void deleteTiles(String path);

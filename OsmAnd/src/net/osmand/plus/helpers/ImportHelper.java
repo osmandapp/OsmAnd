@@ -34,7 +34,6 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
-import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.OsmandApplication;
@@ -51,18 +50,12 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.profiles.AdditionalDataWrapper;
-import net.osmand.plus.profiles.ExportImportProfileBottomSheet;
-import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
-import net.osmand.plus.settings.ImportDuplicatesFragment;
 import net.osmand.plus.settings.ImportSettingsFragment;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;

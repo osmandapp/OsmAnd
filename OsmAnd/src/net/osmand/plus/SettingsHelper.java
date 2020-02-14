@@ -12,6 +12,7 @@ import android.support.v7.app.AlertDialog;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
@@ -61,6 +62,7 @@ import java.util.zip.ZipOutputStream;
 
 import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
 import static net.osmand.IndexConstants.TILES_INDEX_DIR;
+import static net.osmand.plus.ApplicationMode.allPossibleValues;
 
 /*
 	Usage:
@@ -90,6 +92,7 @@ public class SettingsHelper {
 	public static final String SETTINGS_LATEST_CHANGES_KEY = "settings_latest_changes";
 	public static final String SETTINGS_VERSION_KEY = "settings_version";
 
+	private static final String COPY_PREFIX = "copy_";
 	private static final Log LOG = PlatformUtil.getLog(SettingsHelper.class);
 	private static final int BUFFER = 1024;
 
@@ -488,12 +491,21 @@ public class SettingsHelper {
 
 		@Override
 		public boolean exists() {
+			List<ApplicationMode> profiles = ApplicationMode.allPossibleValues();
+			for (ApplicationMode profile : profiles) {
+				if (appMode.toHumanString().equals(profile.toHumanString())) {
+					return true;
+				}
+			}
 			return builder != null && ApplicationMode.valueOfStringKey(getName(), null) != null;
 		}
 
 		@Override
 		public void apply() {
 			if (appMode.isCustomProfile()) {
+				if (!shouldReplace) {
+					appMode.setUserProfileName(COPY_PREFIX + appMode.getUserProfileName());
+				}
 				appMode = ApplicationMode.saveProfile(builder, getSettings().getContext());
 			}
 		}
@@ -710,7 +722,15 @@ public class SettingsHelper {
 			return new StreamSettingsItemReader(this) {
 				@Override
 				public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
-					OutputStream output = new FileOutputStream(file);
+					OutputStream output;
+					if (shouldReplace) {
+						output = new FileOutputStream(file);
+					} else {
+						String path = file.getAbsolutePath();
+						String copyName = path.replaceAll(file.getName(), COPY_PREFIX + file.getName());
+						File copyFile = new File(copyName);
+						output = new FileOutputStream(copyFile);
+					}
 					byte[] buffer = new byte[BUFFER];
 					int count;
 					try {
@@ -740,6 +760,7 @@ public class SettingsHelper {
 	public static class QuickActionSettingsItem extends OsmandSettingsItem {
 
 		private List<QuickAction> quickActions;
+		private List<QuickAction> duplicates;
 
 		private OsmandApplication app;
 
@@ -748,6 +769,7 @@ public class SettingsHelper {
 			super(SettingsItemType.QUICK_ACTION, app.getSettings());
 			this.app = app;
 			this.quickActions = quickActions;
+			this.duplicates = new ArrayList<>();
 		}
 
 		public QuickActionSettingsItem(@NonNull OsmandApplication app,
@@ -762,22 +784,25 @@ public class SettingsHelper {
 
 		@Override
 		public void apply() {
-			if (!quickActions.isEmpty()) {
+			if (!quickActions.isEmpty() || !duplicates.isEmpty()) {
 				QuickActionFactory factory = new QuickActionFactory();
 				List<QuickAction> savedActions = factory.parseActiveActionsList(getSettings().QUICK_ACTION_LIST.get());
 				List<QuickAction> newActions = new ArrayList<>(savedActions);
-				if (shouldReplace) {
-					for (QuickAction action : quickActions) {
-						for (QuickAction savedAction : savedActions) {
-							if (action.getName(app).equals(savedAction.getName(app))) {
-								newActions.remove(savedAction);
+				if (!duplicates.isEmpty()) {
+					if (shouldReplace) {
+						for (QuickAction action : duplicates) {
+							for (QuickAction savedAction : savedActions) {
+								if (action.getName(app).equals(savedAction.getName(app))) {
+									newActions.remove(savedAction);
+								}
 							}
 						}
+					} else {
+						for (QuickAction action : duplicates) {
+							action.setName(COPY_PREFIX + action.getName(app));
+						}
 					}
-				} else {
-					for (QuickAction action : quickActions) {
-						action.setName("new_" + action.getName(app));
-					}
+					newActions.addAll(duplicates);
 				}
 				newActions.addAll(quickActions);
 				((MapActivity) app.getSettingsHelper().getActivity()).getMapLayers().getQuickActionRegistry().updateQuickActions(newActions);
@@ -797,6 +822,8 @@ public class SettingsHelper {
 					}
 				}
 			}
+			this.duplicates = duplicates;
+			this.quickActions.removeAll(duplicates);
 			return duplicates;
 		}
 
@@ -903,6 +930,7 @@ public class SettingsHelper {
 	public static class PoiUiFilterSettingsItem extends OsmandSettingsItem {
 
 		private List<PoiUIFilter> poiUIFilters;
+		private List<PoiUIFilter> duplicates;
 
 		private OsmandApplication app;
 
@@ -910,6 +938,7 @@ public class SettingsHelper {
 			super(SettingsItemType.POI_UI_FILTERS, app.getSettings());
 			this.app = app;
 			this.poiUIFilters = poiUIFilters;
+			this.duplicates = new ArrayList<>();
 		}
 
 		public PoiUiFilterSettingsItem(OsmandApplication app, JSONObject jsonObject) throws JSONException {
@@ -923,12 +952,35 @@ public class SettingsHelper {
 
 		@Override
 		public void apply() {
-			if (!poiUIFilters.isEmpty()) {
+			if (!poiUIFilters.isEmpty() || !duplicates.isEmpty()) {
+				for (PoiUIFilter duplicate : duplicates) {
+					if (!shouldReplace) {
+						duplicate.setName(COPY_PREFIX + duplicate.getName());
+					}
+					poiUIFilters.add(duplicate);
+				}
 				for (PoiUIFilter filter : poiUIFilters) {
 					app.getPoiFilters().createPoiFilter(filter, false);
 				}
 				app.getSearchUICore().refreshCustomPoiFilters();
 			}
+		}
+
+		public List<PoiUIFilter> getDuplicates() {
+			List<PoiUIFilter> duplicates = new ArrayList<>();
+			List<PoiUIFilter> userPoiList = app.getPoiFilters().getUserDefinedPoiFilters(false);
+			if (!poiUIFilters.isEmpty()) {
+				for (PoiUIFilter filter : poiUIFilters) {
+					for (PoiUIFilter userFilter : userPoiList) {
+						if (filter.getName().equals(userFilter.getName())) {
+							duplicates.add(filter);
+						}
+					}
+				}
+			}
+			this.duplicates = duplicates;
+			this.poiUIFilters.removeAll(duplicates);
+			return duplicates;
 		}
 
 		@NonNull
@@ -1039,11 +1091,13 @@ public class SettingsHelper {
 		private OsmandApplication app;
 
 		private List<ITileSource> mapSources;
+		private List<ITileSource> duplicates;
 
 		public MapSourcesSettingsItem(OsmandApplication app, List<ITileSource> mapSources) {
 			super(SettingsItemType.MAP_SOURCES, app.getSettings());
 			this.app = app;
 			this.mapSources = mapSources;
+			this.duplicates = new ArrayList<>();
 		}
 
 		public MapSourcesSettingsItem(OsmandApplication app, JSONObject jsonObject) throws JSONException {
@@ -1057,7 +1111,22 @@ public class SettingsHelper {
 
 		@Override
 		public void apply() {
-			if (!mapSources.isEmpty()) {
+			if (!mapSources.isEmpty() || !duplicates.isEmpty()) {
+				if (shouldReplace) {
+					for (ITileSource tileSource : duplicates) {
+						File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + tileSource.getName());
+						if (f != null && f.exists()) {
+							if (f.delete()) {
+								mapSources.add(tileSource);
+							}
+						}
+					}
+				} else {
+					for (ITileSource tileSource : duplicates) {
+						tileSource.setName(COPY_PREFIX + tileSource.getName());
+					}
+				}
+				mapSources.addAll(duplicates);
 				for (ITileSource template : mapSources) {
 					if (template instanceof TileSourceManager.TileSourceTemplate) {
 						getSettings().installTileSource((TileSourceManager.TileSourceTemplate) template);
@@ -1066,6 +1135,21 @@ public class SettingsHelper {
 					}
 				}
 			}
+		}
+
+		public List<ITileSource> getDuplicates() {
+			List<ITileSource> duplicates = new ArrayList<>();
+			final LinkedHashMap<String, String> tileSourceEntries = new LinkedHashMap<>(app.getSettings().getTileSourceEntries(true));
+			for (Map.Entry<String, String> entry : tileSourceEntries.entrySet()) {
+				for (ITileSource tileSource : mapSources) {
+					if (entry.getValue().equals(tileSource.getName())) {
+						duplicates.add(tileSource);
+					}
+				}
+			}
+			this.duplicates = duplicates;
+			this.mapSources.removeAll(duplicates);
+			return duplicates;
 		}
 
 		@NonNull
@@ -1498,29 +1582,30 @@ public class SettingsHelper {
 			}
 			importSuspended = false;
 			if (item != null) {
-				if (item.exists()) {
-					switch (item.getType()) {
-						case PROFILE: {
-							String title = activity.getString(R.string.overwrite_profile_q, item.getPublicName(app));
-							dialog = showConfirmDialog(item, title, latestChanges);
-							break;
-						}
-						case FILE:
-							// overwrite now
-							acceptItem(item);
-							break;
-						default:
-							acceptItem(item);
-							break;
-					}
-				} else {
-					if (item.getType() == SettingsItemType.PROFILE && askBeforeImport) {
-						String title = activity.getString(R.string.add_new_profile_q, item.getPublicName(app));
-						dialog = showConfirmDialog(item, title, latestChanges);
-					} else {
-						acceptItem(item);
-					}
-				}
+				acceptItem(item);
+//				if (item.exists()) {
+//					switch (item.getType()) {
+//						case PROFILE: {
+//							String title = activity.getString(R.string.overwrite_profile_q, item.getPublicName(app));
+//							dialog = showConfirmDialog(item, title, latestChanges);
+//							break;
+//						}
+//						case FILE:
+//							 overwrite now
+//							acceptItem(item);
+//							break;
+//						default:
+//							acceptItem(item);
+//							break;
+//					}
+//				} else {
+//					if (item.getType() == SettingsItemType.PROFILE && askBeforeImport) {
+//						String title = activity.getString(R.string.add_new_profile_q, item.getPublicName(app));
+//						dialog = showConfirmDialog(item, title, latestChanges);
+//					} else {
+//						acceptItem(item);
+//					}
+//				}
 			} else {
 				processNextItem();
 			}

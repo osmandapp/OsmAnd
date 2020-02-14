@@ -9,12 +9,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.map.ITileSource;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.render.RenderingIcons;
 
 
+import java.io.File;
 import java.util.List;
 
 public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -23,9 +27,7 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 	private static final int ITEM_TYPE = 1;
 
 	private boolean nightMode;
-
 	private OsmandApplication app;
-
 	private List<? super Object> items;
 
 	DuplicatesSettingsAdapter(OsmandApplication app, List<? super Object> items, boolean nightMode) {
@@ -70,6 +72,18 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 			} else if (currentItem instanceof QuickAction) {
 				title = ((QuickAction) currentItem).getName(app);
 				drawable = app.getUIUtilities().getIcon(((QuickAction) currentItem).getIconRes(), nightMode);
+			} else if (currentItem instanceof PoiUIFilter) {
+				title = ((PoiUIFilter) currentItem).getName();
+				int iconRes = RenderingIcons.getBigIconResourceId(((PoiUIFilter) currentItem).getIconId());
+				drawable = app.getUIUtilities().getIcon(iconRes != 0 ? iconRes : R.drawable.ic_person, nightMode);
+			} else if (currentItem instanceof ITileSource) {
+				title = ((ITileSource) currentItem).getName();
+				drawable = app.getUIUtilities().getIcon(R.drawable.ic_action_info_dark, nightMode);
+			} else if (currentItem instanceof File) {
+				title = ((File) currentItem).getName();
+				if (((File) currentItem).getName().contains("/rendering/")) {
+					drawable = app.getUIUtilities().getIcon(R.drawable.ic_action_map_style, nightMode);
+				}
 			}
 			((ItemViewHolder) holder).title.setText(title != null ? title : "");
 			if (subTitle != null) {
