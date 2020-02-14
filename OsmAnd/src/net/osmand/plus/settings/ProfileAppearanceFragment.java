@@ -348,7 +348,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			selectNavTypeBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if (getSelectedAppMode().isCustomProfile()) {
+					if (isNewProfile) {
 						hideKeyboard();
 						final SelectProfileBottomSheetDialogFragment fragment = new SelectProfileBottomSheetDialogFragment();
 						Bundle bundle = new Bundle();

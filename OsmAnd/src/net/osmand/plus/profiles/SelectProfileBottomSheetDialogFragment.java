@@ -181,7 +181,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 		int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		int iconDefaultColorResId = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
 		
-		View itemView = View.inflate(getContext(), R.layout.bottom_sheet_item_with_descr_and_radio_btn, null);
+		View itemView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.bottom_sheet_item_with_descr_and_radio_btn, null);
 		TextView tvTitle = itemView.findViewById(R.id.title);
 		TextView tvDescription = itemView.findViewById(R.id.description);
 		ImageView ivIcon = itemView.findViewById(R.id.icon);
@@ -239,7 +239,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 		if (type.equals(TYPE_NAV_PROFILE)) {
 			profiles.addAll(NavigationFragment.getSortedRoutingProfiles(app));
 		} else if (type.equals(TYPE_BASE_APP_PROFILE)) {
-			profiles.addAll(NavigationFragment.getBaseProfiles(app));
+			profiles.addAll(NavigationFragment.getBaseProfiles());
 		} else {
 			LOG.error("Check data type!");
 			dismiss();

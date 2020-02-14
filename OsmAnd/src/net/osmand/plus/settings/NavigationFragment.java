@@ -241,9 +241,9 @@ public class NavigationFragment extends BaseSettingsFragment {
 		return profilesObjects;
 	}
 
-	public static List<ProfileDataObject> getBaseProfiles(Context ctx) {
+	public static List<ProfileDataObject> getBaseProfiles() {
 		List<ProfileDataObject> profiles = new ArrayList<>();
-		for (ApplicationMode mode : ApplicationMode.getDefaultValues()) {
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
 			if (mode != ApplicationMode.DEFAULT) {
 				profiles.add(new ProfileDataObject(mode.toHumanString(), mode.getDescription(),
 						mode.getStringKey(), mode.getIconRes(), false, mode.getIconColorInfo()));
