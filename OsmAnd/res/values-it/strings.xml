@@ -1482,7 +1482,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="shared_string_clear_all">Cancella tutto</string>
     <string name="shared_string_my_location">La mia posizione</string>
     <string name="shared_string_my_favorites">Preferiti</string>
-    <string name="shared_string_tracks">Le mie tracce</string>
+    <string name="shared_string_tracks">Tracce</string>
     <string name="shared_string_currently_recording_track">Traccia in corso di registrazione</string>
     <string name="waypoint_visit_after">Visita dopo</string>
     <string name="waypoint_visit_before">Visita prima</string>
@@ -3456,4 +3456,70 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Tramonto alle %1$s</string>
     <string name="sunrise_at">Alba alle %1$s</string>
+    <string name="button_rate">Valuta</string>
+    <string name="monitoring_prefs_descr">Navigazione, accuratezza della registrazione</string>
+    <string name="accessibility_announce">Annunci</string>
+    <string name="select_map_icon_descr">Icona visualizzata da fermi.</string>
+    <string name="search_offline_geo_error">Impossibile analizzare il dato geo \'%s\'.</string>
+    <string name="monitoring_min_speed_descr">"Questo è un filtro delle basse velocità per non registrare i punti inferiori a una data velocità.  Questo può permettere di registrare tracce dall\'aspetto più pulito quando visualizzate sulla mappa."</string>
+    <string name="monitoring_min_speed_descr_side_effect">Effetto collaterale: alle tue tracce mancheranno tutte le sezioni in cui il criterio della velocità non sarà soddisfatto (es. quando spingi la tua bici in una elevata pendenza). Altrettanto non ci saranno informazioni nei periodi di riposo o ristoro. Questo ha effetto su tutte le analisi ed elaborazione dei dati, come quando si prova a determinare la lunghezza totale del tuo percorso, il tempo in movimento, o la velocità media.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Raccomandazione: prova prima a utilizzare il sensore del movimento attraverso la registrazione del filtro del minimo dislocamento (B), potrebbe produrre migliori risultati, e perderai meno dati. Se le tue tracce continuano a essere sporche a basse velocità, prova con valori maggiori di zero. Si prega di notare che alcune misurazioni possono non riportare nessuna velocità (alcuni metodi basti sulle reti), in questi casi non registrerai alcun dato.</string>
+    <string name="monitoring_min_speed_descr_remark">Osservazione: controllo velocità &gt; 0 : molti chip GPS riportano un valore di velocità solo se l\'algoritmo determina che tu sei in movimento, e nessuno invece se non lo sei. Quindi utilizzando l\'impostazione &gt; 0 nel filtro, in un certo senso utilizza il sensore di movimento del chip GPS. Ma anche se non filtrati qui nel momento della registrazione, comunque utilizziamo questa caratteristica nell\'analisi dei nostri file GPX per determinare al distanza corretta, es. il valore visualizzato in questo campo è la distanza registrata finché si è in movimento.</string>
+    <string name="monitoring_min_accuracy_descr">Questo registrerà solo punti misurati con un\'accuratezza minima (in metri/piedi, come riportati da Android per il tuo chipset). L\'accuratezza si riferisce alla variabilità di misure ripetute, e non è direttamente correlato alla precisione, che definisce quanto la tua misurazione è vicina alla vera posizione.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Effetto collaterale: come conseguenza del filtraggio per accuratezza, i punti possono essere completamente mancanti per esempio sotto a ponti, alberi, in mezzo a edifici elevati o in certe condizioni meteo.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Raccomandazione: è difficile da predire cosa verrà registrato e cosa no, potrebbe essere preferibile disattivare questo filtro.</string>
+    <string name="monitoring_min_accuracy_descr_remark">Osservazione: se il GPS è stato disattivato poco prima di una registrazione, i primi punti misurati potrebbero avere una minore accuratezza, perciò nel nostro codice noi possiamo voler attendere qualche secondo prima oppure prima di registrare dei punti (o registrare i 3 migliori punti consecutivi, ecc...), ma questo non è ancora implementato .</string>
+    <string name="monitoring_min_distance_descr">Questo filtro evita che punti duplicati siano registrati quando lo spostamento è troppo piccolo, crea un migliore aspetto delle tracce che non vengono successivamente elaborate.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Effetto collaterale: periodi di riposo non sono registrati affatto oppure con un singolo punto. Piccoli (reali) movimenti (es. lateralmente, per marcare un possible spegnimento nel tuo viaggio) possono essere scartati dal filtro. Il file contiene meno informazioni per la post-elaborazione e presenta statistiche peggiori filtrando i punti ovviamente ridondanti al momento della registrazione, mantenendo potenzialmente artefatti causati da cattiva ricezione o effetti del chipset GPS.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Raccomandazione: un valore di 5 metri potrebbe funzionare bene se non necessiti di registrare dettagli che hanno una misura inferiore di questo e non vuoi chiaramente registrare dati quando sei fermo.</string>
+    <string name="live_monitoring_time_buffer">Tempo tampone</string>
+    <string name="live_monitoring_tracking_interval">Intervallo di registrazione</string>
+    <string name="live_monitoring_adress">Indirizzo web</string>
+    <string name="live_monitoring_adress_descr">Specifica l\'indirizzo web con i parametri della sintassi: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
+    <string name="monitoring_notification">Notifiche</string>
+    <string name="monitoring_min_speed">Velocità minima</string>
+    <string name="monitoring_min_accuracy">Accuratezza minima</string>
+    <string name="monitoring_min_distance">Minimo spostamento</string>
+    <string name="tracks_view_path">Menu — I miei luoghi — Tracce</string>
+    <string name="multimedia_notes_view_path">Menu — I miei luoghi — Note</string>
+    <string name="osm_edits_view_path">Menu — I miei luoghi — Modifiche OSM</string>
+    <string name="reset_plugin_to_default">Reimposta le impostazioni dei componenti aggiuntivi a quelle preimpostate</string>
+    <string name="multimedia_rec_split_title">Divisione delle registrazioni</string>
+    <string name="multimedia_use_system_camera">Usa l\'app di sistema</string>
+    <string name="multimedia_photo_play_sound">Sono otturatore fotocamera</string>
+    <string name="osm_authorization_success">L\'autorizzazione è andata a buon fine</string>
+    <string name="reset_to_default_category_button_promo">Il ripristino dei valori preimpostati ripristinerà all\'ordine preimpostato dopo l\'installazione l\'ordine di visualizzazione.</string>
+    <string name="accessibility_mode_disabled">La modalità accessibile è disabilitato nel tuo sistema.</string>
+    <string name="use_system_screen_timeout">Utilizza il salvaschermo di sistema</string>
+    <string name="use_system_screen_timeout_promo">Disabilitato per preimpostazione, se OsmAnd è eseguito in background, lo schermo non andrà in sospensione.
+\n
+\nSe abilitato OsmAnd userà le impostazioni di sospensione del sistema.</string>
+    <string name="clear_recorded_data">Elimina i dati registrati</string>
+    <string name="release_3_6">"• Profili: ora puoi cambiare l\'ordine, impostare l\'icona per le mappe, cambiare tutte le impostazioni dei profili di base e reimpostarle a quelle preimpostate
+\n
+\n • Aggiunto nella navigazione il numero delle uscite
+\n
+\n • Riorganizzate le impostazioni dei componenti aggiuntivi
+\n
+\n • Riorganizzate la finestra delle Impostazioni per un veloce accesso a tutti i  profili
+\n
+\n • Aggiunta l\'opzione per copiare le impostazioni da un profilo a un altro
+\n
+\n • Aggiunta la possibilità di cambiare nella Ricerca l\'ordine delle categorie di PDI o di nasconderle
+\n
+\n • Corretto l\'allineamento dei icone dei PDI nella mappa
+\n
+\n • Aggiunti i dati alba/tramonto in Configura la mappa
+\n
+\n • Aggiunte alla mappa le icone Casa/Lavoro
+\n
+\n • Aggiunto il supporto per le descrizioni su più linee in Impostazioni
+\n
+\n • Aggiunto la traslitterazione corretta nella mappa del Giappone
+\n
+\n • Aggiunto la mappa dell\'Antartide
+\n
+\n"</string>
+    <string name="copy_coordinates">Copia le coordinate</string>
+    <string name="sort_by_category">Ordina per categoria</string>
 </resources>

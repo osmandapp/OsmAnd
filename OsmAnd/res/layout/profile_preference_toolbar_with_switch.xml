@@ -62,7 +62,6 @@
 					android:paddingLeft="@dimen/content_padding"
 					android:paddingRight="@dimen/content_padding"
 					android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
-					android:visibility="gone"
 					tools:text="Some description" />
 			</LinearLayout>
 

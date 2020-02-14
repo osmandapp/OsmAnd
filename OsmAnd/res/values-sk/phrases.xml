@@ -2233,7 +2233,7 @@
     <string name="poi_horse_no">Kone nepovolené</string>
     <string name="poi_animal_yes">Zvieratá povolené</string>
     <string name="poi_animal_no">Zvieratá nepovolené</string>
-    <string name="poi_tomb_war_grave">Typ: vojenský cintorín</string>
+    <string name="poi_tomb_war_grave">Typ: vojnový hrob</string>
     <string name="poi_tomb_tumulus">Typ: mohyla</string>
     <string name="poi_tomb_rock_cut">Typ: skalná jaskyňa</string>
     <string name="poi_tomb_hypogeum">Typ: hypogeum</string>

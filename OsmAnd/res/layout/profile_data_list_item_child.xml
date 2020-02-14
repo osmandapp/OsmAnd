@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:minHeight="66dp">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/content_padding"
+            tools:src="@drawable/ic_action_info_dark" />
+
+        <net.osmand.plus.widgets.TextViewEx
+            android:id="@+id/title_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/default_list_text_size"
+            tools:text="Quick actions" />
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/check_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/content_padding"
+            android:layout_marginEnd="@dimen/content_padding"
+            android:focusable="false" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/list_divider"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+</LinearLayout>

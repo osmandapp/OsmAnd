@@ -9,10 +9,21 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import net.osmand.PlatformUtil;
+import net.osmand.map.ITileSource;
+import net.osmand.map.TileSourceManager;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionFactory;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -33,11 +44,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -46,6 +60,7 @@ import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
+import static net.osmand.IndexConstants.TILES_INDEX_DIR;
 
 /*
 	Usage:
@@ -83,6 +98,7 @@ public class SettingsHelper {
 
 	private boolean importing;
 	private boolean importSuspended;
+	private boolean collectOnly;
 	private ImportAsyncTask importTask;
 
 	public interface SettingsImportListener {
@@ -103,7 +119,7 @@ public class SettingsHelper {
 
 	public void setActivity(Activity activity) {
 		this.activity = activity;
-		if (importing) {
+		if (importing && !collectOnly) {
 			importTask.processNextItem();
 		}
 	}
@@ -128,6 +144,9 @@ public class SettingsHelper {
 		PLUGIN,
 		DATA,
 		FILE,
+		QUICK_ACTION,
+		POI_UI_FILTERS,
+		MAP_SOURCES,
 	}
 
 	public abstract static class SettingsItem {
@@ -156,6 +175,10 @@ public class SettingsHelper {
 
 		@NonNull
 		public abstract String getFileName();
+
+		public Boolean shouldReadOnCollecting() {
+			return false;
+		}
 
 		static SettingsItemType parseItemType(@NonNull JSONObject json) throws IllegalArgumentException, JSONException {
 			return SettingsItemType.valueOf(json.getString("type"));
@@ -307,7 +330,6 @@ public class SettingsHelper {
 					}
 				}
 			});
-
 		}
 	}
 
@@ -419,6 +441,10 @@ public class SettingsHelper {
 			appModeBeanPrefsIds = new HashSet<>(Arrays.asList(settings.appModeBeanPrefsIds));
 		}
 
+		public ApplicationMode getAppMode() {
+			return appMode;
+		}
+
 		@NonNull
 		@Override
 		public String getName() {
@@ -471,7 +497,6 @@ public class SettingsHelper {
 			super.writeToJson(json);
 			json.put("appMode", new JSONObject(appMode.toJson()));
 		}
-
 
 		@NonNull
 		@Override
@@ -706,6 +731,443 @@ public class SettingsHelper {
 		}
 	}
 
+	public static class QuickActionSettingsItem extends OsmandSettingsItem {
+
+		private List<QuickAction> quickActions;
+
+		private OsmandApplication app;
+
+		public QuickActionSettingsItem(@NonNull OsmandApplication app,
+									   @NonNull List<QuickAction> quickActions) {
+			super(SettingsItemType.QUICK_ACTION, app.getSettings());
+			this.app = app;
+			this.quickActions = quickActions;
+		}
+
+		public QuickActionSettingsItem(@NonNull OsmandApplication app,
+									   @NonNull JSONObject jsonObject) throws JSONException {
+			super(SettingsItemType.QUICK_ACTION, app.getSettings(), jsonObject);
+			this.app = app;
+		}
+
+		public List<QuickAction> getQuickActions() {
+			return quickActions;
+		}
+
+		@Override
+		public void apply() {
+			if (!quickActions.isEmpty()) {
+				QuickActionFactory factory = new QuickActionFactory();
+				List<QuickAction> savedActions = factory.parseActiveActionsList(getSettings().QUICK_ACTION_LIST.get());
+				List<QuickAction> newActions = new ArrayList<>(savedActions);
+				for (QuickAction action : quickActions) {
+					for (QuickAction savedAction : savedActions) {
+						if (action.getName(app).equals(savedAction.getName(app))) {
+							newActions.remove(savedAction);
+						}
+					}
+				}
+				newActions.addAll(quickActions);
+				((MapActivity) app.getSettingsHelper().getActivity()).getMapLayers().getQuickActionRegistry().updateQuickActions(newActions);
+			}
+		}
+
+		@Override
+		public Boolean shouldReadOnCollecting() {
+			return true;
+		}
+
+		@NonNull
+		@Override
+		public String getName() {
+			return "quick_actions";
+		}
+
+		@NonNull
+		@Override
+		public String getPublicName(@NonNull Context ctx) {
+			return "quick_actions";
+		}
+
+		@NonNull
+		@Override
+		public String getFileName() {
+			return getName() + ".json";
+		}
+
+		@NonNull
+		@Override
+		SettingsItemReader getReader() {
+			return new OsmandSettingsItemReader(this, getSettings()) {
+
+				@Override
+				protected void readPreferenceFromJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
+
+				}
+
+				@Override
+				public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
+					StringBuilder buf = new StringBuilder();
+					try {
+						BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+						String str;
+						while ((str = in.readLine()) != null) {
+							buf.append(str);
+						}
+					} catch (IOException e) {
+						throw new IOException("Cannot read json body", e);
+					}
+					String jsonStr = buf.toString();
+					if (Algorithms.isEmpty(jsonStr)) {
+						throw new IllegalArgumentException("Cannot find json body");
+					}
+					final JSONObject json;
+					try {
+						quickActions = new ArrayList<>();
+						Gson gson = new Gson();
+						Type type = new TypeToken<HashMap<String, String>>() {
+						}.getType();
+						json = new JSONObject(jsonStr);
+						JSONArray items = json.getJSONArray("items");
+						for (int i = 0; i < items.length(); i++) {
+							JSONObject object = items.getJSONObject(i);
+							String name = object.getString("name");
+							int actionType = object.getInt("type");
+							String paramsString = object.getString("params");
+							HashMap<String, String> params = gson.fromJson(paramsString, type);
+							QuickAction quickAction = new QuickAction(actionType);
+							quickAction.setName(name);
+							quickAction.setParams(params);
+							quickActions.add(quickAction);
+						}
+					} catch (JSONException e) {
+						throw new IllegalArgumentException("Json parse error", e);
+					}
+				}
+			};
+		}
+
+		@NonNull
+		@Override
+		SettingsItemWriter getWriter() {
+			return new OsmandSettingsItemWriter(this, getSettings()) {
+				@Override
+				protected void writePreferenceToJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
+					JSONArray items = new JSONArray();
+					Gson gson = new Gson();
+					Type type = new TypeToken<HashMap<String, String>>() {
+					}.getType();
+					if (!quickActions.isEmpty()) {
+						for (QuickAction action : quickActions) {
+							JSONObject jsonObject = new JSONObject();
+							jsonObject.put("name", action.getName(app));
+							jsonObject.put("type", action.getType());
+							jsonObject.put("params", gson.toJson(action.getParams(), type));
+							items.put(jsonObject);
+						}
+						json.put("items", items);
+					}
+				}
+			};
+		}
+	}
+
+	public static class PoiUiFilterSettingsItem extends OsmandSettingsItem {
+
+		private List<PoiUIFilter> poiUIFilters;
+
+		private OsmandApplication app;
+
+		public PoiUiFilterSettingsItem(OsmandApplication app, List<PoiUIFilter> poiUIFilters) {
+			super(SettingsItemType.POI_UI_FILTERS, app.getSettings());
+			this.app = app;
+			this.poiUIFilters = poiUIFilters;
+		}
+
+		public PoiUiFilterSettingsItem(OsmandApplication app, JSONObject jsonObject) throws JSONException {
+			super(SettingsItemType.POI_UI_FILTERS, app.getSettings(), jsonObject);
+			this.app = app;
+		}
+
+		public List<PoiUIFilter> getPoiUIFilters() {
+			return this.poiUIFilters != null ? this.poiUIFilters : new ArrayList<PoiUIFilter>();
+		}
+
+		@Override
+		public void apply() {
+			if (!poiUIFilters.isEmpty()) {
+				for (PoiUIFilter filter : poiUIFilters) {
+					app.getPoiFilters().createPoiFilter(filter, false);
+				}
+				app.getSearchUICore().refreshCustomPoiFilters();
+			}
+		}
+
+		@NonNull
+		@Override
+		public String getName() {
+			return "poi_ui_filters";
+		}
+
+		@NonNull
+		@Override
+		public String getPublicName(@NonNull Context ctx) {
+			return null;
+		}
+
+		@Override
+		public Boolean shouldReadOnCollecting() {
+			return true;
+		}
+
+		@NonNull
+		@Override
+		public String getFileName() {
+			return getName() + ".json";
+		}
+
+		@NonNull
+		@Override
+		SettingsItemReader getReader() {
+			return new OsmandSettingsItemReader(this, getSettings()) {
+				@Override
+				protected void readPreferenceFromJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
+
+				}
+
+				@Override
+				public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
+					StringBuilder buf = new StringBuilder();
+					try {
+						BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+						String str;
+						while ((str = in.readLine()) != null) {
+							buf.append(str);
+						}
+					} catch (IOException e) {
+						throw new IOException("Cannot read json body", e);
+					}
+					String jsonStr = buf.toString();
+					if (Algorithms.isEmpty(jsonStr)) {
+						throw new IllegalArgumentException("Cannot find json body");
+					}
+					final JSONObject json;
+					try {
+						poiUIFilters = new ArrayList<>();
+						json = new JSONObject(jsonStr);
+						JSONArray items = json.getJSONArray("items");
+						Gson gson = new Gson();
+						Type type = new TypeToken<HashMap<String, LinkedHashSet<String>>>() {
+						}.getType();
+						MapPoiTypes poiTypes = app.getPoiTypes();
+						for (int i = 0; i < items.length(); i++) {
+							JSONObject object = items.getJSONObject(i);
+							String name = object.getString("name");
+							String filterId = object.getString("filterId");
+							String acceptedTypesString = object.getString("acceptedTypes");
+							HashMap<String, LinkedHashSet<String>> acceptedTypes = gson.fromJson(acceptedTypesString, type);
+							Map<PoiCategory, LinkedHashSet<String>> acceptedTypesDone = new HashMap<>();
+							for (Map.Entry<String, LinkedHashSet<String>> mapItem : acceptedTypes.entrySet()) {
+								final PoiCategory a = poiTypes.getPoiCategoryByName(mapItem.getKey());
+								acceptedTypesDone.put(a, mapItem.getValue());
+							}
+							PoiUIFilter filter = new PoiUIFilter(name, filterId, acceptedTypesDone, app);
+							poiUIFilters.add(filter);
+						}
+					} catch (JSONException e) {
+						throw new IllegalArgumentException("Json parse error", e);
+					}
+				}
+			};
+		}
+
+		@NonNull
+		@Override
+		SettingsItemWriter getWriter() {
+			return new OsmandSettingsItemWriter(this, getSettings()) {
+				@Override
+				protected void writePreferenceToJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
+					JSONArray items = new JSONArray();
+					Gson gson = new Gson();
+					Type type = new TypeToken<HashMap<PoiCategory, LinkedHashSet<String>>>() {
+					}.getType();
+					if (!poiUIFilters.isEmpty()) {
+						for (PoiUIFilter filter : poiUIFilters) {
+							JSONObject jsonObject = new JSONObject();
+							jsonObject.put("name", filter.getName());
+							jsonObject.put("filterId", filter.getFilterId());
+							jsonObject.put("acceptedTypes", gson.toJson(filter.getAcceptedTypes(), type));
+							items.put(jsonObject);
+						}
+						json.put("items", items);
+					}
+				}
+			};
+		}
+	}
+
+	public static class MapSourcesSettingsItem extends OsmandSettingsItem {
+
+		private OsmandApplication app;
+
+		private List<ITileSource> mapSources;
+
+		public MapSourcesSettingsItem(OsmandApplication app, List<ITileSource> mapSources) {
+			super(SettingsItemType.MAP_SOURCES, app.getSettings());
+			this.app = app;
+			this.mapSources = mapSources;
+		}
+
+		public MapSourcesSettingsItem(OsmandApplication app, JSONObject jsonObject) throws JSONException {
+			super(SettingsItemType.MAP_SOURCES, app.getSettings(), jsonObject);
+			this.app = app;
+		}
+
+		public List<ITileSource> getMapSources() {
+			return this.mapSources;
+		}
+
+		@Override
+		public void apply() {
+			if (!mapSources.isEmpty()) {
+				for (ITileSource template : mapSources) {
+					if (template instanceof TileSourceManager.TileSourceTemplate) {
+						getSettings().installTileSource((TileSourceManager.TileSourceTemplate) template);
+					} else {
+						((SQLiteTileSource) template).createDataBase();
+					}
+				}
+			}
+		}
+
+		@NonNull
+		@Override
+		public String getName() {
+			return "map_sources";
+		}
+
+		@NonNull
+		@Override
+		public String getPublicName(@NonNull Context ctx) {
+			return null;
+		}
+
+		@Override
+		public Boolean shouldReadOnCollecting() {
+			return true;
+		}
+
+		@NonNull
+		@Override
+		public String getFileName() {
+			return getName() + ".json";
+		}
+
+		@NonNull
+		@Override
+		SettingsItemReader getReader() {
+			return new OsmandSettingsItemReader(this, getSettings()) {
+				@Override
+				protected void readPreferenceFromJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
+
+				}
+
+				@Override
+				public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
+					StringBuilder buf = new StringBuilder();
+					try {
+						BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+						String str;
+						while ((str = in.readLine()) != null) {
+							buf.append(str);
+						}
+					} catch (IOException e) {
+						throw new IOException("Cannot read json body", e);
+					}
+					String jsonStr = buf.toString();
+					if (Algorithms.isEmpty(jsonStr)) {
+						throw new IllegalArgumentException("Cannot find json body");
+					}
+					final JSONObject json;
+					try {
+						mapSources = new ArrayList<>();
+						json = new JSONObject(jsonStr);
+						JSONArray items = json.getJSONArray("items");
+						for (int i = 0; i < items.length(); i++) {
+							JSONObject object = items.getJSONObject(i);
+							boolean sql = object.optBoolean("sql");
+							String name = object.optString("name");
+							int minZoom = object.optInt("minZoom");
+							int maxZoom = object.optInt("maxZoom");
+							String url = object.optString("url");
+							String randoms = object.optString("randoms");
+							boolean ellipsoid = object.optBoolean("ellipsoid", false);
+							boolean invertedY = object.optBoolean("inverted_y", false);
+							String referer = object.optString("referer");
+							boolean timesupported = object.optBoolean("timesupported", false);
+							long expire = object.optLong("expire");
+							boolean inversiveZoom = object.optBoolean("inversiveZoom", false);
+
+							String ext = object.optString("ext");
+							int tileSize = object.optInt("tileSize");
+							int bitDensity = object.optInt("bitDensity");
+							int avgSize = object.optInt("avgSize");
+							String rule = object.optString("rule");
+
+							ITileSource template;
+							if (!sql) {
+								template = new TileSourceManager.TileSourceTemplate(name, url, ext, maxZoom, minZoom, tileSize, bitDensity, avgSize);
+							} else {
+								template = new SQLiteTileSource(app, name, minZoom, maxZoom, url, randoms, ellipsoid, invertedY, referer, timesupported, expire, inversiveZoom);
+							}
+							mapSources.add(template);
+						}
+					} catch (JSONException e) {
+						throw new IllegalArgumentException("Json parse error", e);
+					}
+				}
+			};
+		}
+
+		@NonNull
+		@Override
+		SettingsItemWriter getWriter() {
+			return new OsmandSettingsItemWriter(this, getSettings()) {
+				@Override
+				protected void writePreferenceToJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
+					JSONArray items = new JSONArray();
+					if (!mapSources.isEmpty()) {
+						for (ITileSource template : mapSources) {
+							JSONObject jsonObject = new JSONObject();
+							boolean sql = template instanceof SQLiteTileSource;
+							jsonObject.put("sql", sql);
+							jsonObject.put("name", template.getName());
+							jsonObject.put("minZoom", template.getMinimumZoomSupported());
+							jsonObject.put("maxZoom", template.getMaximumZoomSupported());
+							jsonObject.put("url", template.getUrlTemplate());
+							jsonObject.put("randoms", template.getRandoms());
+							jsonObject.put("ellipsoid", template.isEllipticYTile());
+							jsonObject.put("inverted_y", template.isInvertedYTile());
+							jsonObject.put("referer", template.getReferer());
+							jsonObject.put("timesupported", template.isTimeSupported());
+							jsonObject.put("expire", template.getExpirationTimeMillis());
+							jsonObject.put("inversiveZoom", template.getInversiveZoom());
+
+							jsonObject.put("ext", template.getTileFormat());
+							jsonObject.put("tileSize", template.getTileSize());
+							jsonObject.put("bitDensity", template.getBitDensity());
+							jsonObject.put("avgSize", template.getAvgSize());
+							jsonObject.put("rule", template.getRule());
+
+							items.put(jsonObject);
+						}
+						json.put("items", items);
+					}
+				}
+			};
+		}
+	}
+
 	private static class SettingsItemsFactory {
 
 		private OsmandApplication app;
@@ -761,6 +1223,15 @@ public class SettingsHelper {
 					break;
 				case FILE:
 					item = new FileSettingsItem(app, json);
+					break;
+				case QUICK_ACTION:
+					item = new QuickActionSettingsItem(app, json);
+					break;
+				case POI_UI_FILTERS:
+					item = new PoiUiFilterSettingsItem(app, json);
+					break;
+				case MAP_SOURCES:
+					item = new MapSourcesSettingsItem(app, json);
 					break;
 			}
 			return item;
@@ -873,10 +1344,11 @@ public class SettingsHelper {
 						LOG.error("Error parsing items: " + itemsJson, e);
 						throw new IllegalArgumentException("No items");
 					}
-					while (!collecting && (entry = zis.getNextEntry()) != null) {
+					while ((entry = zis.getNextEntry()) != null) {
 						String fileName = entry.getName();
 						SettingsItem item = itemsFactory.getItemByFileName(fileName);
-						if (item != null) {
+						if (item != null && collecting && item.shouldReadOnCollecting()
+								|| item != null && !collecting && !item.shouldReadOnCollecting()) {
 							try {
 								item.getReader().readFromStream(ois);
 							} catch (IllegalArgumentException e) {
@@ -924,6 +1396,17 @@ public class SettingsHelper {
 			this.version = version;
 			this.askBeforeImport = askBeforeImport;
 			importer = new SettingsImporter(app);
+			collectOnly = true;
+		}
+
+		ImportAsyncTask(@NonNull File settingsFile, @NonNull List<SettingsItem> items, String latestChanges, int version, @Nullable SettingsImportListener listener) {
+			this.file = settingsFile;
+			this.listener = listener;
+			this.items = items;
+			this.latestChanges = latestChanges;
+			this.version = version;
+			importer = new SettingsImporter(app);
+			collectOnly = false;
 		}
 
 		@Override
@@ -938,12 +1421,16 @@ public class SettingsHelper {
 
 		@Override
 		protected List<SettingsItem> doInBackground(Void... voids) {
-			try {
-				return importer.collectItems(file);
-			} catch (IllegalArgumentException e) {
-				LOG.error("Failed to collect items from: " + file.getName(), e);
-			} catch (IOException e) {
-				LOG.error("Failed to collect items from: " + file.getName(), e);
+			if (collectOnly) {
+				try {
+					return importer.collectItems(file);
+				} catch (IllegalArgumentException e) {
+					LOG.error("Failed to collect items from: " + file.getName(), e);
+				} catch (IOException e) {
+					LOG.error("Failed to collect items from: " + file.getName(), e);
+				}
+			} else {
+				return this.items;
 			}
 			return null;
 		}
@@ -951,8 +1438,12 @@ public class SettingsHelper {
 		@Override
 		protected void onPostExecute(List<SettingsItem> items) {
 			this.items = items;
-			if (items != null && items.size() > 0) {
-				processNextItem();
+			if (collectOnly) {
+				listener.onSettingsImportFinished(true, false, items);
+			} else {
+				if (items != null && items.size() > 0) {
+					processNextItem();
+				}
 			}
 		}
 
@@ -1045,6 +1536,24 @@ public class SettingsHelper {
 			processedItems.add(item);
 			processNextItem();
 		}
+
+		public List<SettingsItem> getItems() {
+			return this.items;
+		}
+
+		public File getFile() {
+			return this.file;
+		}
+	}
+
+	@Nullable
+	public List<SettingsItem> getSettingsItems() {
+		return this.importTask.getItems();
+	}
+
+	@Nullable
+	public File getSettingsFile() {
+		return this.importTask.getFile();
 	}
 
 	@SuppressLint("StaticFieldLeak")
@@ -1134,6 +1643,10 @@ public class SettingsHelper {
 	public void importSettings(@NonNull File settingsFile, String latestChanges, int version,
 							   boolean askBeforeImport, @Nullable SettingsImportListener listener) {
 		new ImportAsyncTask(settingsFile, latestChanges, version, askBeforeImport, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	public void importSettings(@NonNull File settingsFile, @NonNull List<SettingsItem> items, String latestChanges, int version, @Nullable SettingsImportListener listener) {
+		new ImportAsyncTask(settingsFile, items, latestChanges, version, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public void exportSettings(@NonNull File fileDir, @NonNull String fileName,

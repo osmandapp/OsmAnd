@@ -92,7 +92,7 @@
     <string name="poi_musical_instrument">Instrumentu musikalak</string>
     <string name="poi_newsagent">Berri agentzia</string>
     <string name="poi_optician">Optometrista</string>
-    <string name="poi_organic">Janari organikoa</string>
+    <string name="poi_organic">Produktu organikoak</string>
     <string name="poi_paint">Margo denda</string>
     <string name="poi_pet">Animali denda</string>
     <string name="poi_photo">Argazkilaritza denda</string>
@@ -3633,4 +3633,20 @@
     <string name="poi_cash_withdrawal_bank_card">Dirua ateratzea</string>
     <string name="poi_bath_type">Mota</string>
     <string name="poi_bath_open_air">Aire zabalean</string>
+    <string name="poi_bicycle_private">Bizikleta sarbidea: pribatua</string>
+    <string name="poi_bicycle_dismount">Bizikleta sarbidea: oinez</string>
+    <string name="poi_bicycle_destination">Bizikleta sarbidea: helmuga</string>
+    <string name="poi_bicycle_permissive">Bizikleta sarbidea: malgua</string>
+    <string name="poi_bicycle_customers">Bizikleta sarbidea: bezeroak</string>
+    <string name="poi_horse_private">Zaldi sarbidea: pribatua</string>
+    <string name="poi_horse_destination">Zaldi sarbidea: helmuga</string>
+    <string name="poi_horse_permissive">Zaldi sarbidea: malgua</string>
+    <string name="poi_foot_yes">Oinezkoentzako sarbidea: bai</string>
+    <string name="poi_foot_private">Oinezkoentzako sarbidea: pribatua</string>
+    <string name="poi_foot_no">Oinezkoentzako sarbidea: ez</string>
+    <string name="poi_foot_destination">Oinezkoentzako sarbidea: helmuga</string>
+    <string name="poi_foot_permissive">Oinezkoentzako sarbidea: malgua</string>
+    <string name="poi_foot_customers">Oinezkoentzako sarbidea: bezeroak</string>
+    <string name="poi_volcano_type">Mota</string>
+    <string name="poi_volcano_status">Egoera</string>
 </resources>
