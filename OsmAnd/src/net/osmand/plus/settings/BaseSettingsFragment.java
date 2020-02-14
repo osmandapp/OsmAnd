@@ -178,6 +178,9 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			createToolbar(inflater, view);
 			setDivider(null);
 			view.setBackgroundColor(ContextCompat.getColor(app, getBackgroundColorRes()));
+			if (Build.VERSION.SDK_INT >= 21) {
+				AndroidUtils.addStatusBarPadding21v(app, view);
+			}
 		}
 		return view;
 	}
@@ -250,9 +253,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 						activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
 					}
 				}
-				if (activity instanceof MapActivity) {
-					((MapActivity) activity).exitFromFullScreen(getView());
-				}
 			}
 		}
 	}
@@ -270,9 +270,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			if (Build.VERSION.SDK_INT >= 21) {
 				if (!(activity instanceof MapActivity) && statusBarColor != -1) {
 					activity.getWindow().setStatusBarColor(statusBarColor);
-				}
-				if (activity instanceof MapActivity) {
-					((MapActivity) activity).enterToFullScreen();
 				}
 			}
 		}
