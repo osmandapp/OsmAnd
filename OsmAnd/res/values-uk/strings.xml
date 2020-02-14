@@ -37,7 +37,7 @@
     <string name="map_online_data_descr">Використовувати мережеві мапи (завантажити та кешувати плитки на карті пам\'яті).</string>
     <string name="shared_string_online_maps">Мережеві мапи</string>
     <string name="online_map_settings_descr">Оберіть мережеві або кешовані джерела (тайлів) мап.</string>
-    <string name="osmand_rastermaps_plugin_description">Цей втулок надає можливість отримати доступ до багатьох видів мережевих (так званих растрових) мап які ви хочете, від попередньо створених квадратів OpenStreetMap (на зразок стилю Mapnik) до супутникових знімків та особливих шарів, як-от погодні, кліматичні та землезнавчі мапи, шари рельєфу й т.і. 
+    <string name="osmand_rastermaps_plugin_description">Цей втулок надає можливість отримати доступ до багатьох видів мережевих (так званих растрових) мап які ви хочете, від попередньо створених квадратів OpenStreetMap (на зразок стилю Mapnik) до супутникових знімків та особливих шарів, як-от погодні, кліматичні та землезнавчі мапи, шари рельєфу тощо.
 \n 
 \n 
 \nБудь яка з цих мап може використовуватись як основна мапа в OsmAnd, або як покриття чи підкладка до іншої основної мапи (наприклад усталена безмережева мапа OsmAnd). Для того, щоб зробити більш помітною будь-яку мапу-підкладку, певні елементи векторної мапи OsmAnd можна легко сховати через меню „Налаштування мапи“ за бажанням, щоб зробити будь-яку мапу підкладки помітнішою.. 
@@ -1638,7 +1638,7 @@
     <string name="context_menu_item_open_note">Відкрити OSM-нотатку</string>
     <string name="osm_edit_reopened_note">Відкрити заново OSM-нотатку</string>
     <string name="osm_edit_commented_note">До OSM-примітки додано коментар</string>
-    <string name="osm_edit_removed_note">Вилучено OSM-нотатку</string>
+    <string name="osm_edit_removed_note">Вилучено OSM-примітку</string>
     <string name="osm_edit_created_note">Створено OSM-нотатку</string>
     <string name="osn_bug_name">OSM-нотатка</string>
     <string name="osn_add_dialog_title">Створити нотатку</string>
@@ -1866,15 +1866,15 @@
     <string name="reports_for">Відзвітувати</string>
     <string name="rendering_attr_showMtbRoutes_name">Показувати гірськовелосипедні маршрути</string>
     <string name="show_on_start_description">\"Вимкнено\" запускає мапу безпосередньо.</string>
-    <string name="add_points_to_map_markers_q">Додати усі точки як позначки мапи?</string>
+    <string name="add_points_to_map_markers_q">Додати всі точки як позначки мапи\?</string>
     <string name="shared_string_add_to_map_markers">Додати до позначок мапи</string>
-    <string name="select_map_markers">Обрати позначки мапи</string>
+    <string name="select_map_markers">Оберіть позначки</string>
     <string name="shared_string_reverse_order">Зворотній порядок</string>
     <string name="show_map_markers_description">Показати елементи з позначок мапи.</string>
     <string name="clear_active_markers_q">Вилучити усі задіяні позначки\?</string>
     <string name="clear_markers_history_q">Очистити дієпис позначок мапи\?</string>
     <string name="active_markers">Поточні позназчки</string>
-    <string name="map_markers">Позначки мапи</string>
+    <string name="map_markers">Позначки</string>
     <string name="map_marker">Позначка мапи</string>
     <string name="consider_turning_polygons_off">Рекомендується вимкнути промальовку полігонів.</string>
     <string name="av_locations_descr">GPX-файл з координатами.</string>
@@ -2572,7 +2572,7 @@
     <string name="import_file">Імпортувати файл</string>
     <string name="tap_on_map_to_hide_interface_descr">Дотик на мапі змінює кнопки управління та віджети.</string>
     <string name="tap_on_map_to_hide_interface">Повноекранний режим</string>
-    <string name="mark_passed">Позначати пройдене</string>
+    <string name="mark_passed">Позначити пройденим</string>
     <string name="digits_quantity">Кількість десяткових цифр</string>
     <string name="show_number_pad">Показати цифрову панель</string>
     <string name="shared_string_paste">Вставити</string>
@@ -3516,4 +3516,18 @@
     <string name="copy_coordinates">Скопіювати координати</string>
     <string name="routing_profile_direct_to">Пряма точка</string>
     <string name="sort_by_category">Впорядкувати за категоріями</string>
+    <string name="please_provide_profile_name_message">Укажіть назву профілю</string>
+    <string name="open_settings">Відкрити налаштування</string>
+    <string name="plugin_disabled">Втулок вимкнено</string>
+    <string name="plugin_disabled_descr">Цей втулок - окремий застосунок, його потрібно буде видалити окремо, якщо ви більше не плануєте ним користуватися.
+\n
+\nВтулок залишиться на пристрої після видалення OsmAnd.</string>
+    <string name="shared_string_menu">Меню</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_routing">Маршрутизація</string>
+    <string name="shared_string_custom_rendering_style">Власний стиль відмальовування</string>
+    <string name="shared_string_include_data">Включати додаткові дані</string>
+    <string name="import_profile_dialog_description">Імпортований профіль містить додаткові дані. Натисніть кнопку імпортувати, щоб імпортувати лише дані профілю або вибрати додаткові дані для імпорту.</string>
+    <string name="export_profile_dialog_description">Ви можете вибрати додаткові дані для експорту разом із профілем.</string>
+    <string name="index_name_antarctica">Антарктида</string>
 </resources>
