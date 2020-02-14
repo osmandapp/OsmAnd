@@ -634,11 +634,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	}
 
 	private void setupBaseProfileView(String stringKey) {
-		for (ApplicationMode am : ApplicationMode.getDefaultValues()) {
-			if (am.getStringKey().equals(stringKey)) {
-				baseProfileName.setText(Algorithms.capitalizeFirstLetter(am.toHumanString()));
-			}
-		}
+		ApplicationMode mode = ApplicationMode.valueOfStringKey(stringKey, ApplicationMode.DEFAULT);
+		baseProfileName.setText(Algorithms.capitalizeFirstLetter(mode.toHumanString()));
 	}
 
 	private boolean saveProfile() {
