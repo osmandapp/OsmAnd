@@ -281,7 +281,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
     }
 
 	private void updateQuickActionButton(boolean widgetVisible) {
-		quickActionButton.setImageDrawable(app.getUIUtilities().getIcon(
+		quickActionButton.setImageDrawable(app.getUIUtilities().getMapIcon(
 				!widgetVisible ? R.drawable.map_quick_action : R.drawable.map_action_cancel, !nightMode));
 		quickActionButton.setBackgroundResource(
 				nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle_trans);

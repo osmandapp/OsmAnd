@@ -123,6 +123,10 @@ public class UiUtilities {
 		return getDrawable(id, light ? R.color.icon_color_default_light : R.color.icon_color_default_dark);
 	}
 
+	public Drawable getMapIcon(@DrawableRes int id, boolean light) {
+		return getDrawable(id, light ? R.color.icon_color_default_light : 0);
+	}
+
 	public static Drawable getSelectableDrawable(Context ctx) {
 		int bgResId = AndroidUtils.resolveAttribute(ctx, R.attr.selectableItemBackground);
 		if (bgResId != 0) {
