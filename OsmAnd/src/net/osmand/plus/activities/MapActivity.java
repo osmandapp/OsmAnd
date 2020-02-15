@@ -643,6 +643,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	protected void onNewIntent(final Intent intent) {
+		super.onNewIntent(intent);
 		setIntent(intent);
 	}
 
