@@ -3500,4 +3500,46 @@ POIの更新は利用できません</string>
     <string name="clear_recorded_data">記録データの消去</string>
     <string name="copy_coordinates">座標をコピー</string>
     <string name="routing_profile_direct_to">直接指示</string>
+    <string name="of">%2$d中の%1$d</string>
+    <string name="button_rate">レート</string>
+    <string name="release_3_6">• プロファイル：表示順序、マップ画面で表示されるアイコン、ベースプロファイルすべての設定などを変更したり、初期状態に戻すことが可能に
+\n
+\n• ナビゲーションに出口番号を追加(※訳注 ジャンクションや高速道路の進路や出口を示す番号)
+\n
+\n• プラグイン設定の修正
+\n
+\n• すべてのプロファイルにすばやくアクセスするために設定画面のUIを変更
+\n
+\n• 別のプロファイルから設定をコピーするオプションの追加
+\n
+\n• 検索にて順序を変更したりPOIカテゴリを非表示にする機能の追加
+\n
+\n• マップ上に表示されるPOIアイコンの修正
+\n
+\n• マップ設定に日出/日没データの追加
+\n
+\n• マップに自宅/勤務先アイコンの追加
+\n
+\n• 各設定に数行の機能説明を追加
+\n
+\n• 日本地図に正しい音訳を追加
+\n
+\n• 南極大陸マップを追加
+\n
+\n</string>
+    <string name="sort_by_category">カテゴリーで並び替え</string>
+    <string name="please_provide_profile_name_message">プロファイルの名前を入力</string>
+    <string name="open_settings">設定を開く</string>
+    <string name="plugin_disabled">プラグインが無効</string>
+    <string name="plugin_disabled_descr">このプラグインは別個のアプリケーションで、使用する予定がなくなった場合は、個別に削除する必要があります。
+\n
+\n故にOsmAndをアンインストールしても、プラグインは削除されずに端末に残ります。</string>
+    <string name="shared_string_menu">メニュー</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_routing">ルート検索</string>
+    <string name="shared_string_custom_rendering_style">描写スタイル</string>
+    <string name="shared_string_include_data">追加データを内包</string>
+    <string name="import_profile_dialog_description">インポートされたプロファイルには追加データが含まれています。 [インポート]をタップしてプロファイルデータのみをインポートするか、インポートする追加データを選択してください。</string>
+    <string name="export_profile_dialog_description">プロファイルとともにエクスポートする追加データを選択できます。</string>
+    <string name="index_name_antarctica">南極大陸</string>
 </resources>

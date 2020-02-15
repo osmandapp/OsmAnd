@@ -37,7 +37,7 @@
     <string name="poi_motorcycle">Tenda de motos</string>
     <string name="poi_musical_instrument">Instrumentos musicais</string>
     <string name="poi_newsagent">Axencia de xornalismo</string>
-    <string name="poi_organic">Comida ecolóxica</string>
+    <string name="poi_organic">Produtos ecolóxicos</string>
     <string name="poi_paint">Tenda de pinturas</string>
     <string name="poi_pet">Tenda de animais</string>
     <string name="poi_second_hand">Tenda de segunda man</string>
@@ -584,7 +584,7 @@
     <string name="poi_internet_access_wlan">Acceso á Internet: rede local sen fíos</string>
     <string name="poi_denomination_mahayana">Mahayana</string>
     <string name="poi_viewpoint">Miradoiro</string>
-    <string name="poi_locality">Localidade</string>
+    <string name="poi_locality">Lugar</string>
     <string name="poi_rest_area">Área de descanso</string>
     <string name="poi_sport_motor">Deporte de motor</string>
     <string name="poi_boundary_stone">Marco</string>
@@ -3779,4 +3779,9 @@
     <string name="poi_volcano_number_of_eruptions">Número de erupcións</string>
     <string name="poi_memorial_ghost_bike">Bicicleta pantasma</string>
     <string name="poi_paintball">Paintball</string>
+    <string name="poi_mountain_rescue">Rescate de montaña</string>
+    <string name="poi_shop_security">Tenda de seguranza</string>
+    <string name="poi_bowling_alley">Birlos</string>
+    <string name="poi_piste_ref">Número de referencia da pista</string>
+    <string name="poi_resort_hunting">Base de caza</string>
 </resources>

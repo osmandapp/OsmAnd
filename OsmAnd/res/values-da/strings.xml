@@ -1076,14 +1076,14 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 \n Note 2: På den nye placering vil det ikke være muligt at dele filer mellem OsmAnd og OsmAnd+.</string>
     <string name="routing_attr_prefer_motorway_name">Foretræk motorveje</string>
     <string name="routing_attr_prefer_motorway_description">Foretræk motorveje</string>
-    <string name="routing_attr_avoid_toll_name">Undgå betalingsveje</string>
-    <string name="routing_attr_avoid_toll_description">Undgå betalingsveje</string>
-    <string name="routing_attr_avoid_unpaved_name">Undgå grusveje</string>
-    <string name="routing_attr_avoid_unpaved_description">Undgå grusveje.</string>
-    <string name="routing_attr_avoid_ferries_name">Undgå færger</string>
-    <string name="routing_attr_avoid_ferries_description">Undgå færger</string>
-    <string name="routing_attr_avoid_motorway_name">Undgå motorveje</string>
-    <string name="routing_attr_avoid_motorway_description">Undgå motorveje</string>
+    <string name="routing_attr_avoid_toll_name">Ingen betalingsveje</string>
+    <string name="routing_attr_avoid_toll_description">Undgår betalingsveje</string>
+    <string name="routing_attr_avoid_unpaved_name">Ingen ikke-asfalterede veje</string>
+    <string name="routing_attr_avoid_unpaved_description">Undgår ikke asfalterede veje</string>
+    <string name="routing_attr_avoid_ferries_name">Ingen færger</string>
+    <string name="routing_attr_avoid_ferries_description">Undgår færger</string>
+    <string name="routing_attr_avoid_motorway_name">Ingen motorveje</string>
+    <string name="routing_attr_avoid_motorway_description">Undgår motorveje</string>
     <string name="routing_attr_weight_name">Vægtgrænse</string>
     <string name="routing_attr_weight_description">Angiv tilladt vægtgrænsen for køretøj på ruter.</string>
     <string name="route_info">Ruteinfo</string>
@@ -1555,7 +1555,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="shared_string_copy">Kopier</string>
     <string name="application_dir_change_warning3">Flyt datafilerne til den nye placering\?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Husnumre</string>
-    <string name="routing_attr_avoid_borders_description">Undgå at krydse landegrænser</string>
+    <string name="routing_attr_avoid_borders_description">Undgår at krydse nationale grænser</string>
     <string name="routing_attr_height_name">Højdegrænse</string>
     <string name="routing_attr_height_description">Angiv køretøjets højde der tillades på ruter.</string>
     <string name="use_fast_recalculation">Smart rutegenberegning</string>
@@ -1806,9 +1806,9 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="access_from_map_description">Menuknappen viser betjeningspanelet, i stedet for menuen</string>
     <string name="access_from_map">Adgang fra kort</string>
     <string name="please_specify_poi_type_only_from_list">Angiv den korrekte IP-type eller spring over.</string>
-    <string name="routing_attr_avoid_stairs_name">Undgå trapper</string>
-    <string name="routing_attr_avoid_stairs_description">Undgå trapper</string>
-    <string name="routing_attr_avoid_borders_name">Undgå grænseovergange</string>
+    <string name="routing_attr_avoid_stairs_name">Ingen trapper</string>
+    <string name="routing_attr_avoid_stairs_description">Undgår trapper</string>
+    <string name="routing_attr_avoid_borders_name">Ingen grænseovergange</string>
     <string name="shared_string_hide">Skjul</string>
     <string name="av_video_quality_low">Laveste kvalitet</string>
     <string name="av_video_quality_high">Højeste kvalitet</string>
@@ -3363,7 +3363,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="apply_preference_to_all_profiles">Anvend ændringer på alle profiler eller kun på den aktuelt valgte.</string>
     <string name="shared_preference">Delt</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Foretræk ikke-asfalterede veje</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_description">Foretræk ikke-asfalterede veje.</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Foretræk ikke-asfalterede veje fremfor asfalterede veje.</string>
     <string name="layer_osm_edits">OSM redigeringer</string>
     <string name="quick_action_contour_lines_descr">En til/fra-knap for at vise eller skjuler højdekurver på kortet.</string>
     <string name="quick_action_contour_lines_show">Vis højdekurver</string>
@@ -3481,4 +3481,23 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Solnedgang kl. %1$s</string>
     <string name="sunrise_at">Solopgang kl. %1$s</string>
+    <string name="reset_to_default_category_button_promo">Nulstilling til standard nulstiller sorteringsrækkefølgen til standardtilstanden efter installationen.</string>
+    <string name="accessibility_mode_disabled">Tilgængelighedstilstand deaktiveret i systemet.</string>
+    <string name="use_system_screen_timeout">Brug systemskærm timeout</string>
+    <string name="clear_recorded_data">Ryd optagede data</string>
+    <string name="copy_coordinates">Kopier koordinater</string>
+    <string name="routing_profile_direct_to">Direkte-til-punkt</string>
+    <string name="sort_by_category">Sorter efter kategori</string>
+    <string name="please_provide_profile_name_message">Angiv et navn til profilen</string>
+    <string name="open_settings">Åbn indstillinger</string>
+    <string name="plugin_disabled">Udvidelse deaktiveret</string>
+    <string name="plugin_disabled_descr">Udvidelsen er et separat program, ska fjernes separat, hvis det ikke længere bruges.
+\n
+\nUdvidelsen vil forblive på enheden efter fjernelse OsmAnd.</string>
+    <string name="shared_string_menu">Menu</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_routing">Ruteplanlægning</string>
+    <string name="shared_string_include_data">Medtag yderligere data</string>
+    <string name="export_profile_dialog_description">Vælg yderligere data, der skal eksporteres sammen med profilen.</string>
+    <string name="index_name_antarctica">Antarktis</string>
 </resources>
