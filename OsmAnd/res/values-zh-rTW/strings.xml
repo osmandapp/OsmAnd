@@ -3516,4 +3516,18 @@
     <string name="copy_coordinates">複製座標</string>
     <string name="routing_profile_direct_to">點對點</string>
     <string name="sort_by_category">按分類排序</string>
+    <string name="please_provide_profile_name_message">請為設定檔命名</string>
+    <string name="open_settings">開啟設定</string>
+    <string name="plugin_disabled">外掛程式已停用</string>
+    <string name="plugin_disabled_descr">此外掛程式是獨立的應用程式，如果您不打算再使用它，請將其移除。
+\n
+\n在您移除 OsmAnd 後，這類的外掛程式仍將繼續存在於裝置上。</string>
+    <string name="shared_string_menu">選單</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_routing">路徑</string>
+    <string name="shared_string_custom_rendering_style">自訂彩現樣式</string>
+    <string name="shared_string_include_data">包含額外資料</string>
+    <string name="import_profile_dialog_description">已匯入的設定檔包含了額外資料。點擊匯入僅匯入設定檔資料或選取額外的資料以匯入。</string>
+    <string name="export_profile_dialog_description">您可以選取額外的資料以與設定檔一起匯出。</string>
+    <string name="index_name_antarctica">南極洲</string>
 </resources>
