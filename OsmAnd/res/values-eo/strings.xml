@@ -3507,4 +3507,18 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="copy_coordinates">Kopii koordinatojn</string>
     <string name="routing_profile_direct_to">Rekte al punkto</string>
     <string name="sort_by_category">Ordigi laŭ kategorio</string>
+    <string name="please_provide_profile_name_message">Bonvolu enigi nomon por la profilo</string>
+    <string name="open_settings">Malfermi agordojn</string>
+    <string name="plugin_disabled">Kromprogramo malaktiva</string>
+    <string name="plugin_disabled_descr">Tiu ĉi kromprogramo estas aparta aplikaĵo, vi devos malinstali ĝin se vi ne plu volas uzi ĝin.
+\n
+\nLa kromprogramo restos en via aparato eĉ post malinstali OsmAnd.</string>
+    <string name="shared_string_menu">Menuo</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_routing">Kurs‑difinado</string>
+    <string name="shared_string_custom_rendering_style">Propra stilo de bildigado</string>
+    <string name="shared_string_include_data">Ampleksi kromajn datumojn</string>
+    <string name="import_profile_dialog_description">La enportata profilo enhavas kromajn datumojn. Frapetu “enporti” por enporti nur profilajn datumojn aŭ elektu kromajn datumojn por enporti.</string>
+    <string name="export_profile_dialog_description">Vi povas elekti kromajn datumojn por elporti kune kun la profilo.</string>
+    <string name="index_name_antarctica">Antarkto</string>
 </resources>
