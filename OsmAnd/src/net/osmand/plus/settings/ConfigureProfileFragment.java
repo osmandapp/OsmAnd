@@ -41,6 +41,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
+import net.osmand.plus.profiles.ExportImportProfileBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
@@ -111,6 +112,11 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 				updateToolbarSwitch();
 			}
 		});
+
+		View switchProfile = view.findViewById(R.id.profile_button);
+		if (switchProfile != null) {
+			switchProfile.setVisibility(View.VISIBLE);
+		}
 	}
 
 	@Override
@@ -395,23 +401,14 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, prefId, this, false, getSelectedAppMode());
 			}
 		} else if (EXPORT_PROFILE.equals(prefId)) {
-			Context ctx = requireContext();
-			final ApplicationMode profile = getSelectedAppMode();
-			File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
-			if (!tempDir.exists()) {
-				tempDir.mkdirs();
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				ExportImportProfileBottomSheet.showInstance(
+						fragmentManager,
+						ExportImportProfileBottomSheet.State.EXPORT,
+						this,
+						getSelectedAppMode());
 			}
-			String fileName = profile.toHumanString();
-			app.getSettingsHelper().exportSettings(tempDir, fileName, new SettingsHelper.SettingsExportListener() {
-				@Override
-				public void onSettingsExportFinished(@NonNull File file, boolean succeed) {
-					if (succeed) {
-						shareProfile(file, profile);
-					} else {
-						app.showToastMessage(R.string.export_profile_failed);
-					}
-				}
-			}, new ProfileSettingsItem(app.getSettings(), profile));
 		} else if (DELETE_PROFILE.equals(prefId)) {
 			onDeleteProfileClick();
 		}

@@ -252,13 +252,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	protected void createToolbar(LayoutInflater inflater, View view) {
-		super.createToolbar(inflater, view);
-		View profileIcon = view.findViewById(R.id.profile_button);
-		profileIcon.setVisibility(View.VISIBLE);
-	}
-
-	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		saveState(outState);
 		super.onSaveInstanceState(outState);
@@ -327,15 +320,16 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				@Override
 				public void afterTextChanged(Editable s) {
 					changedProfile.name = s.toString();
-					if (hasNameDuplicate()) {
-						saveButton.setEnabled(false);
-						profileNameOtfb.setError(app.getString(R.string.profile_alert_duplicate_name_msg), true);
+					if (nameIsEmpty()) {
+						disableSaveButtonWithErrorMessage(app.getString(R.string.please_provide_profile_name_message));
+					} else if (hasNameDuplicate()) {
+						disableSaveButtonWithErrorMessage(app.getString(R.string.profile_alert_duplicate_name_msg));
 					} else {
 						saveButton.setEnabled(true);
 					}
 				}
 			});
-			if (getSelectedAppMode().equals(ApplicationMode.DEFAULT)) {
+			if (getSelectedAppMode().equals(ApplicationMode.DEFAULT) && !isNewProfile) {
 				profileName.setFocusableInTouchMode(false);
 				profileName.setFocusable(false);
 			} else {
@@ -354,10 +348,12 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			selectNavTypeBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if (getSelectedAppMode().isCustomProfile()) {
+					if (isNewProfile) {
 						hideKeyboard();
 						final SelectProfileBottomSheetDialogFragment fragment = new SelectProfileBottomSheetDialogFragment();
 						Bundle bundle = new Bundle();
+						fragment.setUsedOnMap(false);
+						fragment.setAppMode(getSelectedAppMode());
 						if (getSelectedAppMode() != null) {
 							bundle.putString(SELECTED_KEY, getSelectedAppMode().getRoutingProfile());
 						}
@@ -638,11 +634,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	}
 
 	private void setupBaseProfileView(String stringKey) {
-		for (ApplicationMode am : ApplicationMode.getDefaultValues()) {
-			if (am.getStringKey().equals(stringKey)) {
-				baseProfileName.setText(Algorithms.capitalizeFirstLetter(am.toHumanString()));
-			}
-		}
+		ApplicationMode mode = ApplicationMode.valueOfStringKey(stringKey, ApplicationMode.DEFAULT);
+		baseProfileName.setText(Algorithms.capitalizeFirstLetter(mode.toHumanString()));
 	}
 
 	private boolean saveProfile() {
@@ -686,12 +679,21 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 
 	private boolean hasNameDuplicate() {
 		for (ApplicationMode m : ApplicationMode.allPossibleValues()) {
-			if (m.toHumanString().equals(changedProfile.name) &&
-					!m.getStringKey().equals(profile.stringKey)) {
+			if (m.toHumanString().trim().equals(changedProfile.name.trim()) &&
+					!m.getStringKey().trim().equals(profile.stringKey.trim())) {
 				return true;
 			}
 		}
 		return false;
+	}
+	
+	private boolean nameIsEmpty() {
+		return changedProfile.name.trim().equals("");
+	}
+	
+	private void disableSaveButtonWithErrorMessage(String errorMessage) {
+		saveButton.setEnabled(false);
+		profileNameOtfb.setError(errorMessage, true);
 	}
 
 	public boolean isProfileAppearanceChanged(final MapActivity mapActivity) {

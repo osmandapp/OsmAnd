@@ -1844,7 +1844,7 @@ Lon: %2$s</string>
     <string name="edit_filter_save_as_menu_item">Konservi kiel</string>
     <string name="edit_filter_delete_dialog_title">Ĉu forigi tiun ĉi filtrilon\?</string>
     <string name="edit_filter_delete_message">Forigis filtrilon “%1$s”</string>
-    <string name="edit_filter_create_message">Kreis filtrilon “%1$s”</string>
+    <string name="edit_filter_create_message">Kreis filtrilon \'%1$s\'</string>
     <string name="email">retpoŝto</string>
     <string name="av_camera_focus">Speco de fotila fokuso</string>
     <string name="av_camera_focus_descr">Fokuso de fotilo:</string>
@@ -3457,7 +3457,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="monitoring_min_accuracy_descr">Registritaj estos nur punktoj mezuritaj kun la minimuma precizo (en metroj kiel raportitaj fare de Androido per la GPS‑cirkvitaro). Precizo rilatas al disiĝo de valoro dum ripetaj mezuroj kaj ne ĉiam rilatas al ekzakteco, kiu determinas proksimecon de mezuroj al via vera pozicio.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Kromefiko: pro filtri laŭ precizo, iuj punktoj – mezuritaj ekz. sub pontoj aŭ arboj, inter altaj konstruaĵoj, aŭ dum malbonaj veteraj kondiĉoj – povos manki.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Konsilo: estas malfacile antaŭscii pri kio estos registra kaj kio estos filtrita, do estus bone ne aktivigi tiun ĉi filtrilon.</string>
-    <string name="shared_string_available">Disponebla</string>
+    <string name="shared_string_available">Disponeblaj</string>
     <string name="add_custom_category">Aldoni propran kategorion</string>
     <string name="rendering_attr_streetLightingNight_name">Montri nur dum nokto</string>
     <string name="plugin_prefs_reset_successful">Rekomencigis ĉiujn agordojn pri kromprogramoj.</string>
@@ -3479,31 +3479,32 @@ Indikas lokon:  %1$s x %2$s"</string>
 \n
 \nAktivigu tion ĉi por ke OsmAnd uzu sisteman agordon pri malŝalti ekranon.</string>
     <string name="clear_recorded_data">Forviŝi registritajn datumojn</string>
-    <string name="release_3_6">• profiloj: eblo ŝanĝi ilian ordigon, agordi emblemon por mapo, ŝanĝi ĉiujn agordojn por bazaj profiloj kaj restarigi implicitajn valorojn
+    <string name="release_3_6">• profiloj: eblo ŝanĝi ilian ordigon, agordi emblemon por mapo, ŝanĝi ĉiujn agordojn por bazaj profiloj kaj restarigi implicitajn valorojn 
 \n 
-\n• aldonis numeron de elveturejo dum navigadi
+\n• aldonis numeron de elveturejo dum navigadi 
 \n 
-\n• rearanĝitaj agordoj pri kromprogramoj
+\n• rearanĝitaj agordoj pri kromprogramoj 
 \n 
-\n• rearanĝita la ekrano de agordoj por rapide agordi ĉiun profilon
+\n• rearanĝita ekrano de agordoj por rapide agordi ĉiun profilon 
 \n 
-\n• aldonis eblon kopii agordojn el alia profilo
+\n• aldonis eblon kopii agordojn el alia profilo 
 \n 
-\n• aldonis eblon ŝanĝi ordigon kaj kaŝi kategoriojn de interesejoj dum serĉi
+\n• aldonis eblon ŝanĝi ordigon kaj kaŝi kategoriojn de interesejoj dum serĉi 
 \n 
-\n• rektigis emblemojn de interesejoj sur la mapo
+\n• rektigis emblemojn de interesejoj sur la mapo 
 \n 
-\n• aldonis informojn pri senleviĝo/sunsubiro al la ekrano “agordi mapon”
+\n• aldonis informojn pri senleviĝo/sunsubiro al la ekrano “agordi mapon” 
 \n 
-\n• aldonis emblemojn de hejmo kaj laboro al la mapo
+\n• aldonis emblemojn de hejmo kaj laboro al la mapo 
 \n 
-\n• aldonis subtenon por plurliniaj priskriboj al la agordoj
+\n• aldonis subtenon por plurliniaj priskriboj al la agordoj 
 \n 
-\n• ĝusta transliterumo al la mapo de Japanujo
+\n• ĝusta transliterumo al la mapo de Japanujo 
 \n 
 \n• aldonis mapon de Antarkto
 \n
 \n</string>
     <string name="copy_coordinates">Kopii koordinatojn</string>
     <string name="routing_profile_direct_to">Rekte al punkto</string>
+    <string name="sort_by_category">Ordigi laŭ kategorio</string>
 </resources>

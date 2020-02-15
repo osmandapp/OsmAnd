@@ -2,6 +2,7 @@ package net.osmand.plus.profiles;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -174,12 +175,11 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 			}
 		});
 
-		return mainView;
-	}
+		if (Build.VERSION.SDK_INT >= 21) {
+			AndroidUtils.addStatusBarPadding21v(app, mainView);
+		}
 
-	@Override
-	protected boolean isFullScreenAllowed() {
-		return false;
+		return mainView;
 	}
 
 	@Override

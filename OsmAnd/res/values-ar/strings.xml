@@ -1836,7 +1836,7 @@
     <string name="osn_add_dialog_error">حدث استثناء: لم يتم إنشاء الملاحظة.</string>
     <string name="osn_close_dialog_error">حدث استثناء: لم يتم غلق الملاحظة.</string>
     <string name="osb_comment_dialog_error">لا يمكن إضافة تعليق.</string>
-    <string name="shared_string_commit">ارتكاب</string>
+    <string name="shared_string_commit">تقديم</string>
     <string name="context_menu_item_delete_waypoint">حذف إحداثية GPX ؟</string>
     <string name="context_menu_item_edit_waypoint">تعديل/حذف</string>
     <string name="lang_nds">ألمانية منخفضة</string>
@@ -3429,4 +3429,5 @@
 \n</string>
     <string name="copy_coordinates">نسخ الإحداثيات</string>
     <string name="routing_profile_direct_to">مباشر إلى نقطة</string>
+    <string name="sort_by_category">الفرز حسب الفئة</string>
 </resources>

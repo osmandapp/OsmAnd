@@ -3524,4 +3524,5 @@ Lon %2$s</string>
 \n</string>
     <string name="copy_coordinates">Copiar coordenadas</string>
     <string name="routing_profile_direct_to">Directo al punto</string>
+    <string name="sort_by_category">Ordenar por categoría</string>
 </resources>
