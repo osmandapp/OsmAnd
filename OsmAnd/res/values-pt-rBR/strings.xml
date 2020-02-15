@@ -888,7 +888,7 @@ Pôr do Sol: %2$s</string>
     <string name="route_kl">Mantenha à esquerda e siga</string>
     <string name="route_kr">Mantenha à direita e siga</string>
     <string name="rendering_attr_noPolygons_description">Tornar transparente todas as características de terra no mapa.</string>
-    <string name="rendering_attr_noPolygons_name">Polígonos de áreas</string>
+    <string name="rendering_attr_noPolygons_name">Polígonos</string>
     <string name="rendering_attr_appMode_name">Modo de renderização</string>
     <string name="rendering_attr_appMode_description">Otimizar o mapa para</string>
     <string name="rendering_attr_contourLines_description">Exibir a partir do nível de zoom (requer dados de contorno):</string>
@@ -3512,4 +3512,19 @@ Pôr do Sol: %2$s</string>
 \n</string>
     <string name="copy_coordinates">Copiar coordenadas</string>
     <string name="routing_profile_direct_to">Direto ao ponto</string>
+    <string name="sort_by_category">Classificar por categoria</string>
+    <string name="please_provide_profile_name_message">Forneça um nome para o perfil</string>
+    <string name="open_settings">Abrir configurações</string>
+    <string name="plugin_disabled">Plugin desativado</string>
+    <string name="plugin_disabled_descr">Este plugin é um aplicativo separado, você precisará removê-lo separadamente se não planeja mais usá-lo.
+\n
+\nO plug-in permanecerá no dispositivo após a remoção do OsmAnd.</string>
+    <string name="shared_string_menu">Menu</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_routing">Roteamento</string>
+    <string name="shared_string_custom_rendering_style">Estilo de renderização personalizado</string>
+    <string name="shared_string_include_data">Incluir dados adicionais</string>
+    <string name="import_profile_dialog_description">O perfil importado contém dados adicionais. Clique em Importar para importar apenas dados do perfil ou selecione dados adicionais a serem importados.</string>
+    <string name="export_profile_dialog_description">Você pode selecionar dados adicionais para exportar junto com o perfil.</string>
+    <string name="index_name_antarctica">Antártida</string>
 </resources>
