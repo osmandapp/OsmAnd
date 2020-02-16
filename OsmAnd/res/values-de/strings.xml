@@ -2773,7 +2773,7 @@ Lon %2$s</string>
     <string name="osmand_team">OsmAnd-Team</string>
     <string name="shared_string_restart">App neustarten</string>
     <string name="show_images">Bilder anzeigen</string>
-    <string name="purchase_cancelled_dialog_title">Sie haben ihr OsmAnd-Live-Abonnement gekündigt</string>
+    <string name="purchase_cancelled_dialog_title">Sie haben Ihr OsmAnd-Live-Abonnement gekündigt</string>
     <string name="purchase_cancelled_dialog_descr">Erneuern Sie Ihr Abonnement, um weiterhin alle Funktionen nutzen zu können:</string>
     <string name="maps_you_need_descr">Basierend auf den Artikeln, die Sie mit einem Lesezeichen versehen haben, werden Ihnen die folgenden Karten zum Download empfohlen:</string>
     <string name="maps_you_need">Benötigte Karten</string>
@@ -2999,7 +2999,7 @@ Lon %2$s</string>
     <string name="avoid_pt_types_descr">Wählen Sie öffentliche Verkehrsmittel aus, die Sie für die Navigation vermeiden möchten:</string>
     <string name="avoid_pt_types">Verkehrsmittel ausschließen…</string>
     <string name="shared_string_walk">Gehen</string>
-    <string name="save_poi_value_exceed_length">Kürzen sie die Länge des Tags „%s“ auf weniger als 255 Zeichen.</string>
+    <string name="save_poi_value_exceed_length">Kürzen Sie die Länge des Tags „%s“ auf weniger als 255 Zeichen.</string>
     <string name="save_poi_value_exceed_length_title">Länge des Wertes „%s“</string>
     <string name="quick_action_day_night_mode">%s Modus</string>
     <string name="routing_attr_avoid_sett_name">Kein Kopfsteinpflaster oder Pflastersteine</string>
@@ -3058,7 +3058,7 @@ Lon %2$s</string>
     <string name="visited_screens_collect_descr">Helfen Sie uns, die Beliebtheit von OsmAnd-Funktionen zu verstehen.</string>
     <string name="privacy_and_security_change_descr">Auf „Erlauben“ tippen, wenn Sie mit unserer %1$s einverstanden sind</string>
     <string name="settings_privacy_and_security">Datenschutz und Sicherheit</string>
-    <string name="settings_privacy_and_security_desc">Wählen Sie, welche Daten sie freigeben möchten</string>
+    <string name="settings_privacy_and_security_desc">Wählen Sie, welche Daten Sie freigeben möchten</string>
     <string name="shared_string_no_thank_you">Nein, danke</string>
     <string name="shared_string_allow">Erlauben</string>
     <string name="profile_name_hint">Profilname</string>
@@ -3544,4 +3544,5 @@ Lon %2$s</string>
     <string name="monitoring_min_accuracy_descr_remark">Bemerkung: Wenn das GPS unmittelbar vor einer Aufzeichnung ausgeschaltet war, kann der erste gemessene Punkt eine verminderte Genauigkeit haben, sodass wir in unserem Code vielleicht eine Sekunde oder so warten wollen, bevor ein Punkt (oder der beste von 3 aufeinanderfolgenden Punkten usw.) aufgezeichnet wird. Das ist aber noch nicht implementiert.</string>
     <string name="multimedia_rec_split_title">Aufzeichnungsteilung</string>
     <string name="routing_profile_direct_to">Direkt zum Punkt</string>
+    <string name="search_offline_geo_error">Geo-Intent \'%s\' konnte nicht analysiert werden.</string>
 </resources>
