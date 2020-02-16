@@ -28,6 +28,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -149,6 +150,17 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			changedProfile.navigationIcon = profile.navigationIcon;
 		}
 		isNewProfile = ApplicationMode.valueOfStringKey(changedProfile.stringKey, null) == null;
+	}
+
+	@Override
+	protected void createToolbar(LayoutInflater inflater, View view) {
+		super.createToolbar(inflater, view);
+		if (isNewProfile) {
+			TextView toolbarSubtitle = (TextView) view.findViewById(R.id.toolbar_subtitle);
+			if (toolbarSubtitle != null) {
+				toolbarSubtitle.setText(getString(R.string.new_profile));
+			}
+		}
 	}
 
 	private String createNonDuplicateName(String oldName) {
@@ -343,7 +355,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 					? changedProfile.parent.toHumanString()
 					: getSelectedAppMode().toHumanString());
 			OsmandTextFieldBoxes baseProfileNameHint = (OsmandTextFieldBoxes) holder.findViewById(R.id.master_profile_otfb);
-			baseProfileNameHint.setLabelText(getString(R.string.master_profile));
+			baseProfileNameHint.setLabelText(getString(R.string.profile_type_base_string));
 			FrameLayout selectNavTypeBtn = (FrameLayout) holder.findViewById(R.id.select_nav_type_btn);
 			selectNavTypeBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
