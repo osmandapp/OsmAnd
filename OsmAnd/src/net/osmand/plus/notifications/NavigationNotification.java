@@ -121,7 +121,7 @@ public class NavigationNotification extends OsmandNotification {
 
 	@Override
 	public Builder buildNotification(boolean wearable) {
-		if (!isEnabled()) {
+		if (!isEnabled() || !app.getSettings().SHOW_NAVIGATION_NOTIFICATION.get()) {
 			return null;
 		}
 		NavigationService service = app.getNavigationService();
