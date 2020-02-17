@@ -11,6 +11,51 @@
 	Thx - Hardy
 
 -->
+	    <string name="navigation_notification_desc">Show system notification while navigation with navigation instructions.</string>
+    <string name="navigation_notification">Navigation notification</string>
+    <string name="please_provide_profile_name_message">Please provide a name for the profile</string>
+    <string name="open_settings">Open settings</string>
+    <string name="plugin_disabled">Plugin disabled</string>
+    <string name="plugin_disabled_descr">This plugin is a separate application, you will need to remove it separately if you no longer plan to use it.\n\nThe plugin will remain on the device after removing OsmAnd.</string>
+    <string name="shared_string_menu">Menu</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="routing_profile_direct_to">Direct-to-point</string>
+    <string name="clear_recorded_data">Clear recorded data</string>
+    <string name="release_3_6">
+    • Profiles: now you can change order, set icon for map, change all setting for base profiles and restore them back to defaults\n\n
+    • Added exit number in the navigation\n\n
+    • Reworked plugin settings\n\n
+    • Reworked Settings screen for quick access to all profiles\n\n
+    • Added option to copy settings from another profile\n\n
+    • Added ability to change an order or hide POI categories in Search\n\n
+    • Correctly aligned POI icons on the map\n\n
+    • Added Sunset / Sunrise data to Configure Map\n\n
+    • Added Home/Work icons on the map\n\n
+    • Added support for multiline description in Settings\n\n
+    • Added correct transliteration into the map of Japan\n\n
+    • Added Antarctica map\n\n
+    </string>
+    <string name="copy_coordinates">Copy coordinates</string>
+    <string name="reset_to_default_category_button_promo">Reset to default will reset sort order to the default state after installation.</string>
+    <string name="use_system_screen_timeout">Use system screen timeout</string>
+    <string name="use_system_screen_timeout_promo">Disabled by default, if OsmAnd running on foreground, the screen doesn’t time out.\n\nIf enabled OsmAnd will use system timeout settings.</string>
+    <string name="accessibility_mode_disabled">Accessibility mode disabled in your system.</string>
+    <string name="rearrange_categories">Rearrange categories</string>
+    <string name="create_custom_categories_list_promo">You can add custom categories hide categories that you don’t find necessary and change the sort order of the list. The list can be imported and exported with profiles.</string>
+    <string name="add_new_custom_category_button_promo">You can add a new custom category by selecting one or a few needed categories.</string>
+    <string name="shared_string_available">Available</string>
+    <string name="add_custom_category">Add custom category</string>
+    <string name="rendering_attr_streetLightingNight_name">Show only at night</string>
+    <string name="plugin_prefs_reset_successful">All plugin settings restored to default state.</string>
+    <string name="profile_prefs_reset_successful">All profile settings restored to default state.</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="sunset_at">Sunset at %1$s</string>
+    <string name="sunrise_at">Sunrise at %1$s</string>
+    <string name="shared_string_routing">Routing</string>
+    <string name="shared_string_custom_rendering_style">Custom rendering style</string>
+    <string name="shared_string_include_data">Include additional data</string>
+    <string name="import_profile_dialog_description">The imported profile contains additional data. Click Import to import only profile data or select additional data to import.</string>
+    <string name="export_profile_dialog_description">You can select additional data to export along with the profile.</string>
     <string name="permission_is_required">Please grant the required permission to use this option.</string>
     <string name="logcat_buffer_descr">Check and share detailed logs of the app</string>
     <string name="file_does_not_contain_routing_rules">No routing rules in \'%1$s\'. Please choose another file.</string>
@@ -34,10 +79,10 @@
     <string name="monitoring_min_speed">Minimum speed</string>
     <string name="monitoring_min_accuracy">Minimum accuracy</string>
     <string name="monitoring_min_distance">Minimum displacement</string>
+    <string name="reset_plugin_to_default">Reset plugin settings to defaults</string>
     <string name="tracks_view_path">Menu → My places → Tracks</string>
     <string name="multimedia_notes_view_path">Menu → My places → Notes</string>
     <string name="osm_edits_view_path">Menu → My places → OSM edits</string>
-    <string name="reset_plugin_to_default">Reset plugin settings to defaults</string>
     <string name="multimedia_rec_split_title">Recorder split</string>
     <string name="multimedia_use_system_camera">Use system app</string>
     <string name="multimedia_photo_play_sound">Camera shutter sound</string>
