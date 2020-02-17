@@ -1942,7 +1942,7 @@
     <string name="n_items_removed">حذف شدند</string>
     <string name="starting_point">مبدأ</string>
     <string name="shared_string_not_selected">انتخاب نشده</string>
-    <string name="rec_split_desc">هنگامی که فضای استفاده‌شده افزون بر فضای ذخیره‌سازی می‌شود، کلیپ‌ها جایگزین شود.</string>
+    <string name="rec_split_desc">هنگامی که فضای استفاده‌شده افزون بر فضای ذخیره‌سازی می‌شود، کلیپ‌ها بازنویسی شود.</string>
     <string name="rec_split_clip_length_desc">مدت‌زمان کلیپ‌های ضبط‌شده را مشخص کنید.</string>
     <string name="rec_split_storage_size">حجم فضای ذخیره‌سازی</string>
     <string name="rec_split_storage_size_desc">مقدار فضای قابل‌تصرف برای همهٔ کلیپ‌های ضبط‌شده را مشخص کنید.</string>
@@ -3566,4 +3566,7 @@
     <string name="import_profile_dialog_description">پروفایلِ درون‌بردی حاوی دادهٔ بیشتری است. «درون‌برد» را بزنید تا فقط دادهٔ پروفایل درون‌برد شود. «دادهٔ بیشتر» را انتخاب کنید تا آن را نیز درون‌برد کنید.</string>
     <string name="export_profile_dialog_description">می‌توانید دادهٔ بیشتری را انتخاب کنید تا همراه با پروفایل برون‌برد کنید.</string>
     <string name="index_name_antarctica">جنوبگان</string>
+    <string name="accessibility_announce">اعلام</string>
+    <string name="navigation_notification_desc">هنگام ناوبری راهنمای ناوبری را در اعلان‌ها نمایش می‌دهد.</string>
+    <string name="navigation_notification">اعلان ناوبری</string>
 </resources>
