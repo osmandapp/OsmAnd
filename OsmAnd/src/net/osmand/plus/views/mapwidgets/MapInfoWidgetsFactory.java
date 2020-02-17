@@ -1025,8 +1025,8 @@ public class MapInfoWidgetsFactory {
 							text = exitInfo.getExitStreetName();
 						}
 
-						if (nextDirInfo.directionInfo.getRouteDataObject() != null) {
-							object = nextDirInfo.directionInfo.getRouteDataObject();
+						if (directionInfo != null && directionInfo.getRouteDataObject() != null) {
+							object = directionInfo.getRouteDataObject();
 							showShield = true;
 						}
 					}
