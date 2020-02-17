@@ -267,4 +267,5 @@
     <string name="last_update_from_telegram_duration">Ùrtimu agiornamentu dae Telegram: %1$s a como</string>
     <string name="last_response_duration">Ùrtima risposta: %1$s a como</string>
     <string name="duration_ago">%1$s a como</string>
+    <string name="shared_string_error_short">ERR</string>
 </resources>
