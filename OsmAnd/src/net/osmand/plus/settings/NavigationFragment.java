@@ -1,12 +1,9 @@
 package net.osmand.plus.settings;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.SwitchPreferenceCompat;
-import android.view.LayoutInflater;
-import android.view.View;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -113,6 +110,7 @@ public class NavigationFragment extends BaseSettingsFragment {
 			bundle.putString(DIALOG_TYPE, TYPE_NAV_PROFILE);
 			dialog.setArguments(bundle);
 			dialog.setUsedOnMap(false);
+			dialog.setAppMode(getSelectedAppMode());
 			if (getActivity() != null) {
 				getActivity().getSupportFragmentManager().beginTransaction()
 						.add(dialog, "select_nav_type").commitAllowingStateLoss();
@@ -241,11 +239,15 @@ public class NavigationFragment extends BaseSettingsFragment {
 		return profilesObjects;
 	}
 
-	public static List<ProfileDataObject> getBaseProfiles(Context ctx) {
+	public static List<ProfileDataObject> getBaseProfiles(OsmandApplication app) {
 		List<ProfileDataObject> profiles = new ArrayList<>();
-		for (ApplicationMode mode : ApplicationMode.getDefaultValues()) {
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
 			if (mode != ApplicationMode.DEFAULT) {
-				profiles.add(new ProfileDataObject(mode.toHumanString(), mode.getDescription(),
+				String description = mode.getDescription();
+				if (Algorithms.isEmpty(description)) {
+					description = getAppModeDescription(app, mode);
+				}
+				profiles.add(new ProfileDataObject(mode.toHumanString(), description,
 						mode.getStringKey(), mode.getIconRes(), false, mode.getIconColorInfo()));
 			}
 		}

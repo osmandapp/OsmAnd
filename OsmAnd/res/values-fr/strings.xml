@@ -1109,7 +1109,7 @@
     <string name="routing_attr_avoid_unpaved_name">Éviter les voies non revêtues</string>
     <string name="routing_attr_avoid_unpaved_description">Éviter les voies non revêtues</string>
     <string name="routing_attr_avoid_ferries_name">Éviter les ferries</string>
-    <string name="routing_attr_avoid_ferries_description">Éviter les ferries</string>
+    <string name="routing_attr_avoid_ferries_description">Éviter les traversées en ferries</string>
     <string name="routing_attr_avoid_motorway_name">Éviter les autoroutes</string>
     <string name="routing_attr_avoid_motorway_description">Éviter les autoroutes</string>
     <string name="routing_attr_weight_name">Limite de poids</string>
@@ -3175,7 +3175,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="gpx_join_gaps">Relier les trous</string>
     <string name="app_mode_camper">Campeur</string>
     <string name="app_mode_campervan">Camping-car</string>
-    <string name="rendering_attr_showLez_description">Afficher les zones à faible émission sur la carte (n\'influe pas sur l\'itinéraire).</string>
+    <string name="rendering_attr_showLez_description">Afficher les zones à faible émission sur la carte (n\'influe pas sur le calcul d\'itinéraire).</string>
     <string name="rendering_attr_showLez_name">Afficher les zones à faibles émissions</string>
     <string name="new_route_calculated_dist_dbg">Itinéraire : distance %s, durée %s 
 \nCalculs : %.1f secondes, %d routes, %d tuiles)</string>
@@ -3496,4 +3496,18 @@ représentant la zone : %1$s x %2$s</string>
     <string name="copy_coordinates">Copier les coordonnées</string>
     <string name="routing_profile_direct_to">Le plus direct</string>
     <string name="sort_by_category">Trier par catégorie</string>
+    <string name="please_provide_profile_name_message">Veuillez saisir un nom de profil</string>
+    <string name="open_settings">Ouvrir les paramètres</string>
+    <string name="plugin_disabled">Greffon désactivé</string>
+    <string name="plugin_disabled_descr">Ce greffon est une application indépendante, vous devrez la désinstaller séparément si vous ne souhaitez plus l\'utiliser.
+\n
+\nLe greffon sera toujours présent sur l\'appareil après avoir désinstallé OsmAnd.</string>
+    <string name="shared_string_menu">Menu</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_routing">Calcul d\'itinéraire</string>
+    <string name="shared_string_custom_rendering_style">Style de rendu personnalisé</string>
+    <string name="shared_string_include_data">Inclure des données supplémentaires</string>
+    <string name="import_profile_dialog_description">Le profil importé contient des données supplémentaires. Cliquez sur Importer pour n\'importer que les données de profil ou sélectionnez des données supplémentaires à importer.</string>
+    <string name="export_profile_dialog_description">Vous pouvez sélectionner des données supplémentaires à exporter en même temps que le profil.</string>
+    <string name="index_name_antarctica">Antarctique</string>
 </resources>

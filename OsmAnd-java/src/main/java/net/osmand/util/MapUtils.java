@@ -55,6 +55,21 @@ public class MapUtils {
 		// Scalar multiplication between (AB, AC)
 		return (xB - xA) * (xC - xA) + (yB - yA) * (yC - yA);
 	}
+	
+	public static LatLon calculateMidPoint(LatLon s1, LatLon s2) {
+		double lat1 = s1.getLatitude() / 180 * Math.PI;
+		double lon1 = s1.getLongitude() / 180 * Math.PI;
+		double lat2 = s2.getLatitude() / 180 * Math.PI;
+		double lon2 = s2.getLongitude() / 180 * Math.PI;
+		double Bx = Math.cos(lat2) * Math.cos(lon2 - lon1);
+		double By = Math.cos(lat2) * Math.sin(lon2 - lon1);
+		double latMid = Math.atan2(Math.sin(lat1) + Math.sin(lat2),
+				Math.sqrt((Math.cos(lat1) + Bx) * (Math.cos(lat1) + Bx) + By * By));
+		double lonMid = lon1 + Math.atan2(By, Math.cos(lat1) + Bx);
+		LatLon m = new LatLon(MapUtils.checkLatitude(latMid * 180 / Math.PI),
+				MapUtils.checkLongitude(lonMid * 180 / Math.PI));
+		return m;
+	}
 
 	public static double getOrthogonalDistance(double lat, double lon, double fromLat, double fromLon, double toLat, double toLon) {
 		return getDistance(getProjection(lat, lon, fromLat, fromLon, toLat, toLon), lat, lon);

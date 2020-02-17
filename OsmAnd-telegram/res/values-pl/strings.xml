@@ -266,4 +266,5 @@
     <string name="last_update_from_telegram_date">Ostatnia aktualizacja z Telegramu: %1$s</string>
     <string name="last_update_from_telegram_duration">Ostatnia aktualizacja z Telegramu: %1$s temu</string>
     <string name="duration_ago">%1$s temu</string>
+    <string name="shared_string_error_short">ERR</string>
 </resources>

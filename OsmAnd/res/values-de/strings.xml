@@ -2383,7 +2383,7 @@ Lon %2$s</string>
     <string name="index_item_depth_contours_osmand_ext">Nautische Tiefenlinien</string>
     <string name="index_item_depth_points_southern_hemisphere">Nautische Meerestiefen der Südhalbkugel</string>
     <string name="index_item_depth_points_northern_hemisphere">Nautische Meerestiefen der Nordhalbkugel</string>
-    <string name="download_depth_countours">Nautische Tiefenkonturen</string>
+    <string name="download_depth_countours">Nautische Tiefenlinien</string>
     <string name="nautical_maps">Seekarten</string>
     <string name="analyze_on_map">Auf der Karte auswerten</string>
     <string name="shared_string_visible">Sichtbar</string>
@@ -3417,7 +3417,7 @@ Lon %2$s</string>
     <string name="rendering_value_thick_name">Fett</string>
     <string name="desert_render_descr">Für Wüsten und andere dünn besiedelte Gebiete. Umfangreicher.</string>
     <string name="select_navigation_icon">Positionssymbol während der Bewegung</string>
-    <string name="select_map_icon">Positionssymbol im Ruhezustand</string>
+    <string name="select_map_icon">Positionssymbol in Ruhe</string>
     <string name="delete_profiles_descr">Durch Tippen auf \'Anwenden\' werden entfernte Profile dauerhaft gelöscht.</string>
     <string name="master_profile">Hauptprofil</string>
     <string name="select_color">Farbe wählen</string>
@@ -3425,7 +3425,7 @@ Lon %2$s</string>
     <string name="edit_profiles">Profile bearbeiten</string>
     <string name="select_nav_profile_dialog_message">Der \'Navigationstyp\' bestimmt, wie die Routen berechnet werden.</string>
     <string name="profile_appearance">Profildarstellung</string>
-    <string name="choose_icon_color_name">Symbol, Farbe und Namen</string>
+    <string name="choose_icon_color_name">Symbol, Farbe und Name</string>
     <string name="reorder_profiles">Profilliste bearbeiten</string>
     <string name="selected_profile">Ausgewähltes Profil</string>
     <string name="reset_confirmation_descr">Durch Tippen auf %1$s werden alle Ihre Änderungen verworfen.</string>
@@ -3486,17 +3486,17 @@ Lon %2$s</string>
     <string name="reset_to_default_category_button_promo">Durch das Zurücksetzen auf die Standardeinstellung wird die Sortierung auf den Standardzustand nach der Installation zurückgesetzt.</string>
     <string name="accessibility_mode_disabled">Eingabehilfenmodus ist in Ihrem System deaktiviert.</string>
     <string name="use_system_screen_timeout">Zeitlimit für den Systembildschirm verwenden</string>
-    <string name="use_system_screen_timeout_promo">Standardmäßig deaktiviert. Wenn OsmAnd im Vordergrund läuft, wird der Bildschirm nicht ausgeblendet. 
-\n 
+    <string name="use_system_screen_timeout_promo">Standardmäßig deaktiviert. Wenn OsmAnd im Vordergrund läuft, wird der Bildschirm nicht ausgeblendet.
+\n
 \nWenn aktiviert, verwendet OsmAnd das Zeitlimit für den Systembildschirm.</string>
     <string name="live_monitoring">Online-Aufzeichnung</string>
     <string name="clear_recorded_data">Aufgezeichnete Daten löschen</string>
     <string name="copy_coordinates">Koordinaten kopieren</string>
     <string name="monitoring_min_speed_descr_remark">Bemerkung: Geschwindigkeit &gt; 0 Kontrolle: Die meisten GPS-Chipsätze geben nur dann einen Geschwindigkeitswert an, wenn der Algorithmus feststellt, dass Sie in Bewegung sind, und keinen, wenn Sie nicht in Bewegung sind. Die Verwendung der Einstellung &gt; 0 in diesem Filter nutzt also gewissermaßen die Bewegungserkennung des GPS-Chipsatzes. Aber selbst wenn nicht zur Aufnahmezeit gefiltert wurde, verwenden wir diese Funktion in unserer GPX-Analyse, um die Distanz korrigiert zu bestimmen, d. h., der in diesem Feld angezeigte Wert ist die während der Bewegung aufgezeichnete Distanz.</string>
-    <string name="monitoring_min_accuracy_descr_side_effect">Nebeneffekt: Als Ergebnis der Filterung nach Genauigkeit können Punkte z.B. unter Brücken, unter Bäumen, zwischen hohen Gebäuden oder bei bestimmten Wetterbedingungen ganz fehlen.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Nebeneffekt: Als Ergebnis der Filterung nach Genauigkeit können Punkte z. B. unter Brücken, unter Bäumen, zwischen hohen Gebäuden oder bei bestimmten Wetterbedingungen ganz fehlen.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Empfehlung: Es ist schwer vorherzusagen, was aufgezeichnet wird und was nicht, es ist vielleicht am besten, diesen Filter auszuschalten.</string>
-    <string name="monitoring_min_distance_descr">Dieser Filter verhindert, dass doppelte Punkte aufgenommen werden, bei denen möglicherweise zu wenig tatsächliche Bewegung stattgefunden hat, und sorgt für ein schöneres räumliches Erscheinungsbild von Spuren, die später nicht nachbearbeitet werden.</string>
-    <string name="monitoring_min_distance_descr_side_effect">Nebenwirkungen: Die Ruhephasen werden nicht oder nur an jeweils einem Punkt erfasst. Kleine (reale) Bewegungen (z.B. seitwärts, um eine mögliche Abzweigung auf Ihrer Reise zu markieren) können herausgefiltert werden. Ihre Datei enthält weniger Informationen für die Nachbearbeitung und hat schlechtere Statistiken, da offensichtlich überflüssige Punkte zur Aufzeichnungszeit herausgefiltert werden, während Artefakte, die durch schlechten Empfang oder GPS-Chipsatzeffekte verursacht wurden, möglicherweise erhalten bleiben.</string>
+    <string name="monitoring_min_distance_descr">Dieser Filter verhindert, dass doppelte Punkte aufgenommen werden, bei denen möglicherweise zu wenig tatsächliche Bewegung stattgefunden hat. Er sorgt für ein schöneres räumliches Erscheinungsbild von Spuren, die später nicht nachbearbeitet werden.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Nebenwirkungen: Die Ruhephasen werden nicht oder nur an jeweils einem Punkt erfasst. Kleine (reale) Bewegungen (z. B. seitwärts, um eine mögliche Abzweigung auf Ihrer Reise zu markieren) können herausgefiltert werden. Ihre Datei enthält weniger Informationen für die Nachbearbeitung und hat schlechtere Statistiken, da offensichtlich überflüssige Punkte zur Aufzeichnungszeit herausgefiltert werden, während möglicherweise Artefakte erhalten bleiben, die durch schlechten Empfang oder GPS-Chipsatzeffekte verursacht wurden.</string>
     <string name="monitoring_min_distance_descr_recommendation">Empfehlung: Eine Einstellung von 5 Metern kann für Sie gut funktionieren, wenn Sie keine feineren Details erfassen müssen und keine explizite Datenerfassung im Ruhezustand wünschen.</string>
     <string name="release_3_6">• Profile: jetzt können Sie die Reihenfolge ändern, das Symbol für die Karte festlegen, alle Einstellungen für die Basisprofile ändern und sie wieder auf die Standardeinstellungen zurücksetzen
 \n
@@ -3525,4 +3525,24 @@ Lon %2$s</string>
 \n</string>
     <string name="sort_by_category">Nach Kategorie sortieren</string>
     <string name="tracks_view_descr">Ihre aufgezeichneten Tracks befinden sich in %1$s oder im OsmAnd-Ordner.</string>
+    <string name="please_provide_profile_name_message">Bitte geben Sie einen Namen für das Profil an</string>
+    <string name="open_settings">Einstellungen öffnen</string>
+    <string name="plugin_disabled">Plugin deaktiviert</string>
+    <string name="plugin_disabled_descr">Dieses Plugin ist eine separate Anwendung, Sie müssen es separat entfernen, wenn Sie nicht mehr vorhaben, es zu verwenden.
+\n
+\nDas Plugin verbleibt nach dem Entfernen von OsmAnd auf dem Gerät.</string>
+    <string name="shared_string_menu">Menü</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_routing">Routing</string>
+    <string name="shared_string_custom_rendering_style">Benutzerdefinierter Rendering-Stil</string>
+    <string name="shared_string_include_data">Zusätzliche Daten einschließen</string>
+    <string name="import_profile_dialog_description">Das importierte Profil enthält zusätzliche Daten. Klicken Sie auf \'Importieren\', um nur Profildaten zu importieren, oder wählen Sie zusätzliche Daten zum Importieren aus.</string>
+    <string name="export_profile_dialog_description">Sie können zusätzliche Daten zum Exportieren zusammen mit dem Profil auswählen.</string>
+    <string name="index_name_antarctica">Antarktis</string>
+    <string name="osm_edits_view_descr">Sie finden Ihre noch nicht übertragenen Änderungen oder OSM-Fehler in %1$s. Hochgeladene Punkte werden nicht mehr angezeigt.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Empfehlung: Versuchen Sie zunächst, die Bewegungserkennung über den Filter zur Mindestabstandsmessung (B) zu verwenden. Das kann zu besseren Ergebnissen führen und Sie werden weniger Daten verlieren. Sollten Ihre Tracks bei niedrigen Geschwindigkeiten ungenau bleiben, versuchen Sie hier Werte ungleich Null. Bitte beachten Sie, dass einige Messungen (einige netzwerkbasierte Methoden) möglicherweise überhaupt keine Geschwindigkeitswerte anzeigen. In diesem Fall wird nichts aufgezeichnet.</string>
+    <string name="monitoring_min_accuracy_descr">Es werden nur Punkte aufgezeichnet, die gemäß den Angaben der Mindestgenauigkeit gemessen wurden (in Metern/Fuß, wie von Android je nach Chipsatz bereitgestellt). Die Genauigkeit bezieht sich auf die Streuung wiederholter Messungen und steht nicht unmittelbar in Bezug zur Präzision, die bestimmt, wie nah Messungen und wahre Position beieinanderliegen.</string>
+    <string name="monitoring_min_accuracy_descr_remark">Bemerkung: Wenn das GPS unmittelbar vor einer Aufzeichnung ausgeschaltet war, kann der erste gemessene Punkt eine verminderte Genauigkeit haben, sodass wir in unserem Code vielleicht eine Sekunde oder so warten wollen, bevor ein Punkt (oder der beste von 3 aufeinanderfolgenden Punkten usw.) aufgezeichnet wird. Das ist aber noch nicht implementiert.</string>
+    <string name="multimedia_rec_split_title">Aufzeichnungsteilung</string>
+    <string name="routing_profile_direct_to">Direkt zum Punkt</string>
 </resources>

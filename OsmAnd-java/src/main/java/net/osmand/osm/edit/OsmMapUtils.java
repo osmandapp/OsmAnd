@@ -94,11 +94,21 @@ public class OsmMapUtils {
 	}
 	
 	public static LatLon getWeightCenterForWay(Way w) {
-		Collection<Node> nodes = w.getNodes();
+		List<Node> nodes = w.getNodes();
 		if (nodes.isEmpty()) {
 			return null;
 		}
 		boolean area = w.getFirstNodeId() == w.getLastNodeId();
+		// double check for area (could be negative all)
+		if(area) {
+			Node fn = w.getFirstNode();
+			Node ln = w.getLastNode();
+			if(fn != null && fn != null && MapUtils.getDistance(fn.getLatLon(), ln.getLatLon()) < 50) {
+				area = true;
+			} else {
+				area = false;
+			}
+		}
 		LatLon ll = area ? getComplexPolyCenter(nodes) : getWeightCenterForNodes(nodes);
 		if(ll == null) {
 			return null;

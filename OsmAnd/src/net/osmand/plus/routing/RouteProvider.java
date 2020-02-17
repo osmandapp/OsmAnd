@@ -259,9 +259,11 @@ public class RouteProvider {
 				// first of all check tracks
 				if (!useIntermediatePointsRTE) {
 					for (Track tr : file.tracks) {
-						for (TrkSegment tkSeg : tr.segments) {
-							for (WptPt pt : tkSeg.points) {
-								points.add(createLocation(pt));
+						if (!tr.generalTrack) {
+							for (TrkSegment tkSeg : tr.segments) {
+								for (WptPt pt : tkSeg.points) {
+									points.add(createLocation(pt));
+								}
 							}
 						}
 					}
