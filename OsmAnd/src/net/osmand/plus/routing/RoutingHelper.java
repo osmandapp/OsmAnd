@@ -299,6 +299,9 @@ public class RoutingHelper {
 		return lastProjection;
 	}
 
+	public Location getLastFixedLocation() {
+		return lastFixedLocation;
+	}
 
 	public void addRouteDataListener(IRoutingDataUpdateListener listener) {
 		updateListeners = updateListenersList(new ArrayList<>(updateListeners), listener, true);
@@ -453,8 +456,10 @@ public class RoutingHelper {
 				}
 				// 3. Identify wrong movement direction
 				Location next = route.getNextRouteLocation();
+				boolean isStraight =
+						route.getRouteService() == RouteService.DIRECT_TO || route.getRouteService() == RouteService.STRAIGHT;
 				boolean wrongMovementDirection = checkWrongMovementDirection(currentLocation, next);
-				if (allowableDeviation > 0 && wrongMovementDirection
+				if (allowableDeviation > 0 && wrongMovementDirection && !isStraight
 						&& (currentLocation.distanceTo(routeNodes.get(currentRoute)) > allowableDeviation)) {
 					log.info("Recalculate route, because wrong movement direction: " + currentLocation.distanceTo(routeNodes.get(currentRoute))); //$NON-NLS-1$
 					isDeviatedFromRoute = true;
@@ -686,7 +691,7 @@ public class RoutingHelper {
 			int nextPoint = route.currentRoute;
 			for (; nextPoint < routeNodes.size() - 1; nextPoint++) {
 				float bearingTo = currentLocation.bearingTo(routeNodes.get(nextPoint));
-				float bearingTo2 = currentLocation.bearingTo(routeNodes.get(nextPoint + 1));
+				float bearingTo2 = routeNodes.get(nextPoint).bearingTo(routeNodes.get(nextPoint + 1));
 				if (Math.abs(MapUtils.degreesDiff(bearingTo2, bearingTo)) <= ANGLE_TO_DECLINE) {
 					break;
 				}
@@ -695,20 +700,21 @@ public class RoutingHelper {
 			if(nextPoint > 0) {
 				Location next = routeNodes.get(nextPoint);
 				Location prev = routeNodes.get(nextPoint - 1);
-				float bearingTo = currentLocation.bearingTo(next);
-				float bearingPrev = currentLocation.bearingTo(prev);
+				float bearing = prev.bearingTo(next);
+				double bearingTo = Math.abs(MapUtils.degreesDiff(bearing, currentLocation.bearingTo(next)));
+				double bearingPrev = Math.abs(MapUtils.degreesDiff(bearing, currentLocation.bearingTo(prev)));
 				while (true) {
-					Location mp = MapUtils.calculateMidPoint(routeNodes.get(nextPoint - 1), routeNodes.get(nextPoint));
-					if(mp.distanceTo(routeNodes.get(nextPoint)) <= 100) {
+					Location mp = MapUtils.calculateMidPoint(prev, next);
+					if(mp.distanceTo(next) <= 100) {
 						break;
 					}
-					float bearingMid = currentLocation.bearingTo(mp);
-					boolean sharpTo = Math.abs(MapUtils.degreesDiff(bearingMid, bearingTo)) < ANGLE_TO_DECLINE;
-					boolean sharpPrev = Math.abs(MapUtils.degreesDiff(bearingMid, bearingPrev)) < ANGLE_TO_DECLINE;
-					if(sharpPrev) {
+					double bearingMid = Math.abs(MapUtils.degreesDiff(bearing, currentLocation.bearingTo(mp)));
+					if(bearingPrev < ANGLE_TO_DECLINE) {
 						next = mp;
-					} else if(sharpTo){
+						bearingTo = bearingMid;
+					} else if(bearingTo < ANGLE_TO_DECLINE){
 						prev = mp;
+						bearingPrev = bearingMid;
 					} else {
 						break;
 					}

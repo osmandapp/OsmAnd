@@ -1111,12 +1111,16 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 
 			RouteCalculationResult route = helper.getRoute();
 			boolean directTo = route.getRouteService() == RouteProvider.RouteService.DIRECT_TO;
+			boolean straight = route.getRouteService() == RouteProvider.RouteService.STRAIGHT;
 			routeGeometry.clearTransportRoute();
 			routeGeometry.updateRoute(tb, route);
 			RouteProvider.RouteService rs = helper.getRoute().getRouteService();
 			if (directTo) {
 				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
 						null, 0);
+			} else if(straight){
+				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
+						helper.getLastFixedLocation(), route.getCurrentStraightAngleRoute());
 			} else {
 				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
 						helper.getLastProjection(), route.getCurrentStraightAngleRoute());
