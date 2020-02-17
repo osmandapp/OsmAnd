@@ -399,9 +399,8 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		} else if (EXPORT_PROFILE.equals(prefId)) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				ExportImportProfileBottomSheet.showInstance(
+				ExportProfileBottomSheet.showInstance(
 						fragmentManager,
-						ExportImportProfileBottomSheet.State.EXPORT,
 						this,
 						getSelectedAppMode());
 			}

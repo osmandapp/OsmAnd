@@ -66,6 +66,7 @@
 
 			<android.support.v7.widget.AppCompatCheckBox
 				android:id="@+id/check_box"
+				android:focusableInTouchMode="false"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_margin="@dimen/content_padding"

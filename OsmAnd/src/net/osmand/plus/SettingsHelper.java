@@ -436,22 +436,37 @@ public class SettingsHelper {
 		private ApplicationModeBuilder builder;
 		private ApplicationModeBean modeBean;
 		private Set<String> appModeBeanPrefsIds;
+		private OsmandApplication app;
 
-
-		public ProfileSettingsItem(@NonNull OsmandSettings settings, @NonNull ApplicationMode appMode) {
-			super(SettingsItemType.PROFILE, settings);
+		public ProfileSettingsItem(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode) {
+			super(SettingsItemType.PROFILE, app.getSettings());
 			this.appMode = appMode;
-			appModeBeanPrefsIds = new HashSet<>(Arrays.asList(settings.appModeBeanPrefsIds));
+			this.app = app;
+			appModeBeanPrefsIds = new HashSet<>(Arrays.asList(app.getSettings().appModeBeanPrefsIds));
 		}
 
-		public ProfileSettingsItem(@NonNull OsmandSettings settings, @NonNull JSONObject json) throws JSONException {
-			super(SettingsItemType.PROFILE, settings, json);
-			readFromJson(settings.getContext(), json);
-			appModeBeanPrefsIds = new HashSet<>(Arrays.asList(settings.appModeBeanPrefsIds));
+		public ProfileSettingsItem(@NonNull OsmandApplication app, @NonNull ApplicationModeBean modeBean) {
+			super(SettingsItemType.PROFILE, app.getSettings());
+			this.app = app;
+			this.modeBean = modeBean;
+			builder = ApplicationMode.fromModeBean(app, modeBean);
+			appMode = builder.getApplicationMode();
+			appModeBeanPrefsIds = new HashSet<>(Arrays.asList(app.getSettings().appModeBeanPrefsIds));
+		}
+
+		public ProfileSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+			super(SettingsItemType.PROFILE, app.getSettings(), json);
+			this.app = app;
+			readFromJson(app.getSettings().getContext(), json);
+			appModeBeanPrefsIds = new HashSet<>(Arrays.asList(app.getSettings().appModeBeanPrefsIds));
 		}
 
 		public ApplicationMode getAppMode() {
 			return appMode;
+		}
+
+		public ApplicationModeBean getModeBean() {
+			return modeBean;
 		}
 
 		@NonNull
@@ -491,12 +506,6 @@ public class SettingsHelper {
 
 		@Override
 		public boolean exists() {
-			List<ApplicationMode> profiles = ApplicationMode.allPossibleValues();
-			for (ApplicationMode profile : profiles) {
-				if (appMode.toHumanString().equals(profile.toHumanString())) {
-					return true;
-				}
-			}
 			return builder != null && ApplicationMode.valueOfStringKey(getName(), null) != null;
 		}
 
@@ -504,9 +513,12 @@ public class SettingsHelper {
 		public void apply() {
 			if (appMode.isCustomProfile()) {
 				if (!shouldReplace) {
-					appMode.setUserProfileName(COPY_PREFIX + appMode.getUserProfileName());
+					modeBean.stringKey = COPY_PREFIX + modeBean.stringKey;
+					modeBean.userProfileName = COPY_PREFIX + modeBean.userProfileName;
+					builder = ApplicationMode.fromModeBean(app, modeBean);
 				}
 				appMode = ApplicationMode.saveProfile(builder, getSettings().getContext());
+				ApplicationMode.changeProfileAvailability(appMode, true, app);
 			}
 		}
 
@@ -716,6 +728,16 @@ public class SettingsHelper {
 			return file.exists();
 		}
 
+		private File renameFile(File file) {
+			String path = file.getAbsolutePath();
+			String copyName = path.replaceAll(file.getName(), COPY_PREFIX + file.getName());
+			File copyFile = new File(copyName);
+			if (file.exists()) {
+				renameFile(copyFile);
+			}
+			return copyFile;
+		}
+
 		@NonNull
 		@Override
 		SettingsItemReader getReader() {
@@ -723,13 +745,14 @@ public class SettingsHelper {
 				@Override
 				public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
 					OutputStream output;
-					if (shouldReplace) {
+					if (shouldReplace || !file.exists()) {
 						output = new FileOutputStream(file);
 					} else {
-						String path = file.getAbsolutePath();
-						String copyName = path.replaceAll(file.getName(), COPY_PREFIX + file.getName());
-						File copyFile = new File(copyName);
-						output = new FileOutputStream(copyFile);
+//						String path = file.getAbsolutePath();
+//						String copyName = path.replaceAll(file.getName(), COPY_PREFIX + file.getName());
+//						File copyFile = new File(copyName);
+//						output = new FileOutputStream(copyFile);
+						output = new FileOutputStream(renameFile(file));
 					}
 					byte[] buffer = new byte[BUFFER];
 					int count;
@@ -955,7 +978,8 @@ public class SettingsHelper {
 			if (!poiUIFilters.isEmpty() || !duplicates.isEmpty()) {
 				for (PoiUIFilter duplicate : duplicates) {
 					if (!shouldReplace) {
-						duplicate.setName(COPY_PREFIX + duplicate.getName());
+						renamePoiFilter(duplicate);
+//						duplicate.setName(COPY_PREFIX + duplicate.getName());
 					}
 					poiUIFilters.add(duplicate);
 				}
@@ -964,6 +988,23 @@ public class SettingsHelper {
 				}
 				app.getSearchUICore().refreshCustomPoiFilters();
 			}
+		}
+
+		private void renamePoiFilter(PoiUIFilter poiUIFilter) {
+			poiUIFilter.setName(COPY_PREFIX + poiUIFilter.getName());
+			if (duplicateExists(poiUIFilter)) {
+				renamePoiFilter(poiUIFilter);
+			}
+		}
+
+		private boolean duplicateExists(PoiUIFilter poiUIFilter) {
+			List<PoiUIFilter> userPoiList = app.getPoiFilters().getUserDefinedPoiFilters(false);
+			for (PoiUIFilter filter : userPoiList) {
+				if (filter.getName().equals(poiUIFilter.getName())) {
+					return true;
+				}
+			}
+			return false;
 		}
 
 		public List<PoiUIFilter> getDuplicates() {
@@ -1114,19 +1155,28 @@ public class SettingsHelper {
 			if (!mapSources.isEmpty() || !duplicates.isEmpty()) {
 				if (shouldReplace) {
 					for (ITileSource tileSource : duplicates) {
-						File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + tileSource.getName());
-						if (f != null && f.exists()) {
-							if (f.delete()) {
-								mapSources.add(tileSource);
+						if (tileSource instanceof SQLiteTileSource) {
+							File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + tileSource.getName() + IndexConstants.SQLITE_EXT);
+							if (f != null && f.exists()) {
+								if (f.delete()) {
+									mapSources.add(tileSource);
+								}
+							}
+						} else if (tileSource instanceof TileSourceManager.TileSourceTemplate) {
+							File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + tileSource.getName());
+							if (f != null && f.exists() && f.isDirectory()) {
+								if (f.delete()) {
+									mapSources.add(tileSource);
+								}
 							}
 						}
 					}
 				} else {
 					for (ITileSource tileSource : duplicates) {
-						tileSource.setName(COPY_PREFIX + tileSource.getName());
+						renameTileSource(tileSource);
+						mapSources.add(tileSource);
 					}
 				}
-				mapSources.addAll(duplicates);
 				for (ITileSource template : mapSources) {
 					if (template instanceof TileSourceManager.TileSourceTemplate) {
 						getSettings().installTileSource((TileSourceManager.TileSourceTemplate) template);
@@ -1135,6 +1185,23 @@ public class SettingsHelper {
 					}
 				}
 			}
+		}
+
+		private void renameTileSource(ITileSource tileSource) {
+			tileSource.setName(COPY_PREFIX + tileSource.getName());
+			if (duplicateExists(tileSource)) {
+				renameTileSource(tileSource);
+			}
+		}
+
+		private boolean duplicateExists(ITileSource tileSource) {
+			LinkedHashMap<String, String> tileSourceEntries = new LinkedHashMap<>(app.getSettings().getTileSourceEntries(true));
+			for (Map.Entry<String, String> entry : tileSourceEntries.entrySet()) {
+				if (entry.getValue().equals(tileSource.getName())) {
+					return true;
+				}
+			}
+			return false;
 		}
 
 		public List<ITileSource> getDuplicates() {
@@ -1326,7 +1393,7 @@ public class SettingsHelper {
 					item = new GlobalSettingsItem(settings);
 					break;
 				case PROFILE:
-					item = new ProfileSettingsItem(settings, json);
+					item = new ProfileSettingsItem(app, json);
 					break;
 				case PLUGIN:
 					break;

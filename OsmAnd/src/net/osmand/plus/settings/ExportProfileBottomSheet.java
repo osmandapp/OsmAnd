@@ -15,6 +15,7 @@ import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
@@ -30,7 +31,6 @@ import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
-import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -48,37 +48,16 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
+public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 
-	private static final Log LOG = PlatformUtil.getLog(ExportImportProfileBottomSheet.class);
-
-	public static final String TAG = ExportImportProfileBottomSheet.class.getSimpleName();
-
-	private static final String STATE_KEY = "EXPORT_IMPORT_DIALOG_STATE_KEY";
-
+	private static final Log LOG = PlatformUtil.getLog(ExportProfileBottomSheet.class);
+	public static final String TAG = ExportProfileBottomSheet.class.getSimpleName();
 	private static final String INCLUDE_ADDITIONAL_DATA_KEY = "INCLUDE_ADDITIONAL_DATA_KEY";
-
 	private boolean includeAdditionalData = false;
-
-	private boolean containsAdditionalData = false;
-
 	private OsmandApplication app;
-
 	private ApplicationMode profile;
-
-	private State state;
-
 	private List<AdditionalDataWrapper> dataList = new ArrayList<>();
-
-	private List<SettingsHelper.SettingsItem> settingsItems;
-
-	private ExpandableListView listView;
-
 	private ExportImportSettingsAdapter adapter;
-
-	private SettingsHelper.ProfileSettingsItem profileSettingsItem;
-
-	private File file;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -87,24 +66,7 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
 		}
 		super.onCreate(savedInstanceState);
 		app = requiredMyApplication();
-		Bundle bundle = getArguments();
-		if (bundle != null) {
-			this.state = (State) getArguments().getSerializable(STATE_KEY);
-		}
-		if (state == State.IMPORT) {
-			if (settingsItems == null) {
-				settingsItems = app.getSettingsHelper().getSettingsItems();
-			}
-			if (file == null) {
-				file = app.getSettingsHelper().getSettingsFile();
-			}
-			containsAdditionalData = checkAdditionalDataContains();
-		} else {
-			dataList = getAdditionalData();
-//			for (AdditionalDataWrapper dataWrapper : dataList) {
-//				dataToOperate.addAll(dataWrapper.getItems());
-//			}
-		}
+		dataList = getAdditionalData();
 	}
 
 	@Override
@@ -121,7 +83,7 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
 		}
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 
-		profile = state == State.IMPORT ? getAppModeFromSettingsItems() : getAppMode();
+		profile = getAppMode();
 
 		int profileColor = profile.getIconColorInfo().getColor(nightMode);
 		int colorNoAlpha = ContextCompat.getColor(context, profileColor);
@@ -129,9 +91,7 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
 		Drawable backgroundIcon = UiUtilities.getColoredSelectableDrawable(context, colorNoAlpha, 0.3f);
 		Drawable[] layers = {new ColorDrawable(UiUtilities.getColorWithAlpha(colorNoAlpha, 0.10f)), backgroundIcon};
 
-		items.add(new TitleItem(state == State.EXPORT ?
-				getString(R.string.export_profile)
-				: getString(R.string.import_profile)));
+		items.add(new TitleItem(getString(R.string.export_profile)));
 
 		BaseBottomSheetItem profileItem = new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(true)
@@ -145,40 +105,42 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
 				.create();
 		items.add(profileItem);
 
-		if (state == State.IMPORT && containsAdditionalData || state == State.EXPORT && !dataList.isEmpty()) {
-			BaseBottomSheetItem descriptionItem = new BottomSheetItemWithDescription.Builder()
-					.setDescription(state == State.EXPORT ?
-							getString(R.string.export_profile_dialog_description)
-							: getString(R.string.import_profile_dialog_description))
-					.setLayoutId(R.layout.bottom_sheet_item_pref_info)
-					.create();
-			items.add(descriptionItem);
-
+		if (!dataList.isEmpty()) {
 			final View additionalDataView = inflater.inflate(R.layout.bottom_sheet_item_additional_data, null);
-			listView = additionalDataView.findViewById(R.id.list);
-			SwitchCompat switchItem = additionalDataView.findViewById(R.id.switchItem);
+			ExpandableListView listView = additionalDataView.findViewById(R.id.list);
+			adapter = new ExportImportSettingsAdapter(app, nightMode);
+			View listHeader = inflater.inflate(R.layout.item_header_export_expand_list, null);
+			final View topSwitchDivider = listHeader.findViewById(R.id.topSwitchDivider);
+			final View bottomSwitchDivider = listHeader.findViewById(R.id.bottomSwitchDivider);
+			final SwitchCompat switchItem = listHeader.findViewById(R.id.switchItem);
 			switchItem.setTextColor(getResources().getColor(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
 			switchItem.setChecked(includeAdditionalData);
 			switchItem.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
 					includeAdditionalData = !includeAdditionalData;
-					listView.setVisibility(includeAdditionalData ?
-							View.VISIBLE : View.GONE);
-//					if (includeAdditionalData && state == State.IMPORT) {
-//						updateDataToOperateFromSettingsItems();
-//					}
+					topSwitchDivider.setVisibility(includeAdditionalData ? View.VISIBLE : View.GONE);
+					bottomSwitchDivider.setVisibility(includeAdditionalData ? View.VISIBLE : View.GONE);
+					if (includeAdditionalData) {
+						adapter.updateSettingsList(getAdditionalData());
+						adapter.selectAll(true);
+					} else {
+						adapter.selectAll(false);
+						adapter.clearSettingsList();
+					}
+					updateSwitch(switchItem);
 					setupHeightAndBackground(getView());
 				}
 			});
-			listView.setVisibility(includeAdditionalData ? View.VISIBLE : View.GONE);
-			adapter = new ExportImportSettingsAdapter(app, dataList, nightMode, false);
 			listView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 				@Override
 				public void onGroupExpand(int i) {
 					setupHeightAndBackground(getView());
 				}
 			});
+
+			updateSwitch(switchItem);
+			listView.addHeaderView(listHeader);
 			listView.setAdapter(adapter);
 			final SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 					.setCustomView(additionalDataView)
@@ -187,19 +149,25 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
 		}
 	}
 
+	private void updateSwitch(View view) {
+		if (includeAdditionalData) {
+			UiUtilities.setMargins(view, 0, 0, 0, 0);
+			view.setPadding(AndroidUtils.dpToPx(app, 32), 0, AndroidUtils.dpToPx(app, 32), 0);
+		} else {
+			UiUtilities.setMargins(view, AndroidUtils.dpToPx(app, 16), 0, AndroidUtils.dpToPx(app, 16), 0);
+			view.setPadding(AndroidUtils.dpToPx(app, 16), 0, AndroidUtils.dpToPx(app, 16), 0);
+		}
+	}
+
 	@Override
 	protected int getRightBottomButtonTextId() {
-		return state == State.EXPORT ? R.string.shared_string_export : R.string.shared_string_import;
+		return R.string.shared_string_export;
 	}
 
 	@Override
 	protected void onRightBottomButtonClick() {
 		super.onRightBottomButtonClick();
-		if (state == State.EXPORT) {
-			prepareFile();
-		} else {
-			importSettings();
-		}
+		prepareFile();
 	}
 
 	@Override
@@ -212,14 +180,9 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
 		return false;
 	}
 
-	private ApplicationMode getAppModeFromSettingsItems() {
-		for (SettingsHelper.SettingsItem item : settingsItems) {
-			if (item.getType().equals(SettingsHelper.SettingsItemType.PROFILE)) {
-				profileSettingsItem = ((SettingsHelper.ProfileSettingsItem) item);
-				return ((SettingsHelper.ProfileSettingsItem) item).getAppMode();
-			}
-		}
-		return getAppMode();
+	@Override
+	protected boolean useExpandableList() {
+		return true;
 	}
 
 	private List<AdditionalDataWrapper> getAdditionalData() {
@@ -287,7 +250,7 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
 
 	private List<SettingsHelper.SettingsItem> prepareSettingsItemsForExport() {
 		List<SettingsHelper.SettingsItem> settingsItems = new ArrayList<>();
-		settingsItems.add(new SettingsHelper.ProfileSettingsItem(app.getSettings(), profile));
+		settingsItems.add(new SettingsHelper.ProfileSettingsItem(app, profile));
 		if (includeAdditionalData) {
 			settingsItems.addAll(prepareAdditionalSettingsItems());
 		}
@@ -321,39 +284,6 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
 			settingsItems.add(new SettingsHelper.MapSourcesSettingsItem(app, tileSourceTemplates));
 		}
 		return settingsItems;
-	}
-
-	private Boolean checkAdditionalDataContains() {
-		boolean containsData = false;
-		for (SettingsHelper.SettingsItem item : settingsItems) {
-			containsData = item.getType().equals(SettingsHelper.SettingsItemType.QUICK_ACTION)
-					|| item.getType().equals(SettingsHelper.SettingsItemType.POI_UI_FILTERS)
-					|| item.getType().equals(SettingsHelper.SettingsItemType.MAP_SOURCES)
-					|| item.getType().equals(SettingsHelper.SettingsItemType.FILE);
-			if (containsData) {
-				break;
-			}
-		}
-		return containsData;
-	}
-
-	private void importSettings() {
-		List<SettingsHelper.SettingsItem> list = new ArrayList<>();
-		list.add(profileSettingsItem);
-		if (includeAdditionalData) {
-			list.addAll(prepareAdditionalSettingsItems());
-		}
-		app.getSettingsHelper().importSettings(file, list, "", 1, new SettingsHelper.SettingsImportListener() {
-			@Override
-			public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
-				if (succeed) {
-					app.showShortToastMessage(app.getString(R.string.file_imported_successfully, file.getName()));
-				} else if (empty) {
-					app.showShortToastMessage(app.getString(R.string.file_import_error, file.getName(), app.getString(R.string.shared_string_unexpected_error)));
-				}
-			}
-		});
-		dismiss();
 	}
 
 	private void prepareFile() {
@@ -393,14 +323,10 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
-									   State state,
 									   Fragment target,
 									   @NonNull ApplicationMode appMode) {
 		try {
-			Bundle bundle = new Bundle();
-			bundle.putSerializable(STATE_KEY, state);
-			ExportImportProfileBottomSheet fragment = new ExportImportProfileBottomSheet();
-			fragment.setArguments(bundle);
+			ExportProfileBottomSheet fragment = new ExportProfileBottomSheet();
 			fragment.setAppMode(appMode);
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
@@ -408,40 +334,5 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
 		} catch (RuntimeException e) {
 			return false;
 		}
-	}
-
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
-									   State state,
-									   File file,
-									   List<SettingsHelper.SettingsItem> items) {
-		try {
-			Bundle bundle = new Bundle();
-			bundle.putSerializable(STATE_KEY, state);
-			ExportImportProfileBottomSheet fragment = new ExportImportProfileBottomSheet();
-			fragment.setArguments(bundle);
-			fragment.setSettingsItems(items);
-			fragment.setFile(file);
-			fragment.show(fragmentManager, TAG);
-			return true;
-		} catch (RuntimeException e) {
-			return false;
-		}
-	}
-
-	public void setSettingsItems(List<SettingsHelper.SettingsItem> settingsItems) {
-		this.settingsItems = settingsItems;
-	}
-
-	public File getFile() {
-		return file;
-	}
-
-	public void setFile(File file) {
-		this.file = file;
-	}
-
-	public enum State {
-		EXPORT,
-		IMPORT
 	}
 }

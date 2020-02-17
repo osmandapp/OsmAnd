@@ -111,10 +111,9 @@ public class SQLiteTileSource implements ITileSource {
 		db = ctx.getSQLiteAPI().getOrCreateDatabase(
 				ctx.getAppPath(TILES_INDEX_DIR).getAbsolutePath() + "/" + name + SQLITE_EXT, true);
 
-		db.execSQL("CREATE TABLE IF NOT EXIST tiles (x int, y int, z int, s int, image blob, time long, PRIMARY KEY (x,y,z,s))");
+		db.execSQL("CREATE TABLE tiles (x int, y int, z int, s int, image blob, time long, PRIMARY KEY (x,y,z,s))");
 		db.execSQL("CREATE INDEX IND on tiles (x,y,z,s)");
-		db.execSQL("CREATE TABLE IF NOT EXIST info(tilenumbering,minzoom,maxzoom)");
-		db.execSQL("CREATE TABLE IF NOT EXIST android_metadata (locale TEXT)");
+		db.execSQL("CREATE TABLE info(tilenumbering,minzoom,maxzoom)");
 		db.execSQL("INSERT INTO info (tilenumbering,minzoom,maxzoom) VALUES ('simple','" + minZoom + "','" + maxZoom + "');");
 
 		addInfoColumn(URL, urlTemplate);

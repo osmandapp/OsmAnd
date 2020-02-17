@@ -11,14 +11,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.AdditionalDataWrapper;
+import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.render.RenderingIcons;
 
@@ -42,11 +45,19 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		this.importState = importState;
 		this.dataToOperate = new ArrayList<>();
 		this.profileColor = app.getSettings().getApplicationMode().getIconColorInfo().getColor(nightMode);
-		if (!importState) {
-			for (AdditionalDataWrapper dataWrapper : dataList) {
-				dataToOperate.addAll(dataWrapper.getItems());
-			}
-		}
+//		if (!importState) {
+//			for (AdditionalDataWrapper dataWrapper : dataList) {
+//				dataToOperate.addAll(dataWrapper.getItems());
+//			}
+//		}
+	}
+
+	ExportImportSettingsAdapter(OsmandApplication app, boolean nightMode) {
+		this.app = app;
+		this.nightMode = nightMode;
+		this.dataList = new ArrayList<>();
+		this.dataToOperate = new ArrayList<>();
+		this.profileColor = app.getSettings().getApplicationMode().getIconColorInfo().getColor(nightMode);
 	}
 
 	@Override
@@ -136,9 +147,11 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
 		switch (type) {
 			case PROFILE:
-				title.setText(((ApplicationMode) currentItem).toHumanString());
-				subText.setText(((ApplicationMode) currentItem).getDescription());
-				icon.setImageDrawable(app.getUIUtilities().getIcon(((ApplicationMode) currentItem).getIconRes(), profileColor));
+				title.setText(((ApplicationMode.ApplicationModeBean) currentItem).userProfileName);
+				subText.setText(((ApplicationMode.ApplicationModeBean) currentItem).routingProfile);
+				int profileIconRes = AndroidUtils.getDrawableId(app, ((ApplicationMode.ApplicationModeBean) currentItem).iconName);
+				ProfileIconColors iconColor = ((ApplicationMode.ApplicationModeBean) currentItem).iconColor;
+				icon.setImageDrawable(app.getUIUtilities().getIcon(profileIconRes, iconColor.getColor(nightMode)));
 				subText.setVisibility(View.VISIBLE);
 				icon.setVisibility(View.VISIBLE);
 				break;
@@ -244,6 +257,11 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
 	public void updateSettingsList(List<AdditionalDataWrapper> settingsList) {
 		this.dataList = settingsList;
+		notifyDataSetChanged();
+	}
+
+	public void clearSettingsList() {
+		this.dataList.clear();
 		notifyDataSetChanged();
 	}
 
