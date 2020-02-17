@@ -49,6 +49,11 @@ public class ErrorNotification extends OsmandNotification {
 	}
 
 	@Override
+	public boolean isUpdateDisabled() {
+		return false;
+	}
+
+	@Override
 	public NotificationCompat.Builder buildNotification(boolean wearable) {
 		String notificationTitle;
 		String notificationText;
