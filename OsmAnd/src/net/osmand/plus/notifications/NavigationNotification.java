@@ -115,13 +115,18 @@ public class NavigationNotification extends OsmandNotification {
 	}
 
 	@Override
+	public boolean isUpdateDisabled() {
+		return app.getSettings().MAP_ACTIVITY_ENABLED.get() && !app.getSettings().SHOW_NAVIGATION_NOTIFICATION.get();
+	}
+
+	@Override
 	public Intent getContentIntent() {
 		return new Intent(app, MapActivity.class);
 	}
 
 	@Override
 	public Builder buildNotification(boolean wearable) {
-		if (!isEnabled() || !app.getSettings().SHOW_NAVIGATION_NOTIFICATION.get()) {
+		if (!isEnabled()) {
 			return null;
 		}
 		NavigationService service = app.getNavigationService();
