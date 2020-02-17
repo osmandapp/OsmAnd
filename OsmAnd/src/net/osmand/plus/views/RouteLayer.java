@@ -1145,6 +1145,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		Location previousInRoute = null;
 		Location nextInRoute = null;
 		//need to change this code by fixing helper.route.getCurrentRoute() miscalculation
+		// TODO simplifiy all culation!
 		if (helper.getRoute().getIntermediatePointsToPass() > 0) {
 			for (int i = 1; i < routeNodes.size(); i++) {
 				LatLon routePoint = new LatLon(routeNodes.get(i).getLatitude(), routeNodes.get(i).getLongitude());
@@ -1159,6 +1160,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		}
 
 		if (nextInRoute != null && previousInRoute != null) {
+
 			final Location ll = view.getApplication().getLocationProvider().getLastKnownLocation();
 			final int aX = box.getPixXFromLonNoRot(ll.getLongitude());
 			final int aY = box.getPixYFromLatNoRot(ll.getLatitude());
