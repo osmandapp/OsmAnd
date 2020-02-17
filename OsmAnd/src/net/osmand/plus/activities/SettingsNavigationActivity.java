@@ -314,7 +314,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			cat.addPreference(fastRoute);
 		} else {
 			ApplicationMode am = settings.getApplicationMode();
-			GeneralRouter router = OsmandApplication.getRouter(settings.getContext(), am);
+			GeneralRouter router = settings.getContext().getRouter(am);
 			clearParameters();
 			if (router != null) {
 				GeneralRouterProfile routerProfile = router.getProfile();
@@ -719,7 +719,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final OsmandSettings settings = app.getSettings();
 
-		GeneralRouter router = OsmandApplication.getRouter(app, mode);
+		GeneralRouter router = app.getRouter(mode);
 		SpeedConstants units = settings.SPEED_SYSTEM.getModeValue(mode);
 		String speedUnits = units.toShortString(activity);
 		final float[] ratio = new float[1];

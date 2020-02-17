@@ -600,7 +600,7 @@ public class RouteProvider {
 		router.setUseFastRecalculation(settings.USE_FAST_RECALCULATION.get());
 
 		RoutingConfiguration.Builder config = params.ctx.getRoutingConfigForMode(params.mode);
-		GeneralRouter generalRouter = OsmandApplication.getRouter(config, params.mode);
+		GeneralRouter generalRouter = params.ctx.getRouter(config, params.mode);
 		if (generalRouter == null) {
 			return applicationModeNotSupported(params);
 		}

@@ -844,12 +844,12 @@ public class OsmandApplication extends MultiDexApplication {
 		return builder != null ? builder : getDefaultRoutingConfig();
 	}
 
-	public static GeneralRouter getRouter(OsmandApplication app, ApplicationMode mode) {
-		Builder builder = app.getRoutingConfigForMode(mode);
+	public GeneralRouter getRouter(ApplicationMode mode) {
+		Builder builder = getRoutingConfigForMode(mode);
 		return getRouter(builder, mode);
 	}
 
-	public static GeneralRouter getRouter(Builder builder, ApplicationMode am) {
+	public GeneralRouter getRouter(Builder builder, ApplicationMode am) {
 		GeneralRouter router = builder.getRouter(am.getRoutingProfile());
 		if (router == null && am.getParent() != null) {
 			router = builder.getRouter(am.getParent().getStringKey());

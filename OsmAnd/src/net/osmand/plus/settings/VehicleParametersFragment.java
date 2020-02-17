@@ -41,7 +41,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 
 		RouteService routeService = mode.getRouteService();
 		if (routeService == RouteService.OSMAND) {
-			GeneralRouter router = OsmandApplication.getRouter(app, mode);
+			GeneralRouter router = app.getRouter(mode);
 			if (router != null) {
 				Map<String, GeneralRouter.RoutingParameter> parameters = router.getParameters();
 
