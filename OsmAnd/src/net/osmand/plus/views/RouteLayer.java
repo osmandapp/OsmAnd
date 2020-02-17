@@ -953,8 +953,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		}
 		
 		private void drawSegments(RotatedTileBox tb, Canvas canvas, double topLatitude, double leftLongitude,
-				double bottomLatitude, double rightLongitude, Location lastProjection, int currentRoute, boolean showOriginalRoute,
-		                          Location pointToReturn) {
+				double bottomLatitude, double rightLongitude, Location lastProjection, int currentRoute) {
 			if (locations.size() == 0) {
 				return;
 			}
@@ -969,26 +968,20 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			GeometryWayStyle style = defaultWayStyle;
 			boolean previousVisible = false;
 
-			if (lastProjection != null) {
-				if (leftLongitude <= lastProjection.getLongitude() && lastProjection.getLongitude() <= rightLongitude
-						&& bottomLatitude <= lastProjection.getLatitude() && lastProjection.getLatitude() <= topLatitude) {
-					addLocation(tb, lastProjection, style, tx, ty, angles, distances, 0, styles);
-					previousVisible = true;
-				}
+			Location lastPoint = lastProjection;
+			if (lastPoint != null) {
+				previousVisible = addPoint(tb, topLatitude, leftLongitude, bottomLatitude, rightLongitude, style, previousVisible, lastPoint);
 			}
-			List<Location> routeNodes;
-			if (showOriginalRoute && helper.getOriginalRoute() != null && helper.getOriginalRouteAllLoc() != null) {
-				routeNodes = helper.getOriginalRouteAllLoc();
-			} else {
-				routeNodes = locations;
+			Location sp = helper.getRoute().getCurrentStraightAnglePoint();
+			if (sp != null) {
+				lastPoint = sp;
+				previousVisible = addPoint(tb, topLatitude, leftLongitude, bottomLatitude, rightLongitude, style, previousVisible, sp);
 			}
+			List<Location> routeNodes = locations;
 			int previous = -1;
 			for (int i = currentRoute; i < routeNodes.size(); i++) {
 				Location ls = routeNodes.get(i);
 				style = getStyle(i, defaultWayStyle);
-				if (!showOriginalRoute && (simplification.getQuick(i) == 0 && !styleMap.containsKey(i))) {
-					continue;
-				}
 				if (leftLongitude <= ls.getLongitude() && ls.getLongitude() <= rightLongitude && bottomLatitude <= ls.getLatitude()
 						&& ls.getLatitude() <= topLatitude) {
 					double dist = 0;
@@ -1017,6 +1010,15 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 				previous = i;
 			}
 			drawRouteSegment(tb, canvas, tx, ty, angles, distances, 0, styles);
+		}
+
+		private boolean addPoint(RotatedTileBox tb, double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, GeometryWayStyle style, boolean previousVisible, Location lastPoint) {
+			if (leftLongitude <= lastPoint .getLongitude() && lastPoint .getLongitude() <= rightLongitude
+					&& bottomLatitude <= lastPoint .getLatitude() && lastPoint .getLatitude() <= topLatitude) {
+				addLocation(tb, lastPoint, style, tx, ty, angles, distances, 0, styles);
+				previousVisible = true;
+			}
+			return previousVisible;
 		}
 
 		private void clearArrays() {
@@ -1103,7 +1105,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 				startLocation.setLatitude(start.getLatitude());
 				startLocation.setLongitude(start.getLongitude());
 				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-						startLocation, 0, false, null);
+						startLocation, 0);
 			}
 		} else {
 
@@ -1112,36 +1114,12 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			routeGeometry.clearTransportRoute();
 			routeGeometry.updateRoute(tb, route);
 			RouteProvider.RouteService rs = helper.getRoute().getRouteService();
-			if (directTo && helper.getOriginalStartingLocation() != null) {
+			if (directTo) {
 				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-						helper.getOriginalStartingLocation(),  0, true, null);
+						null, 0);
 			} else {
-				Location currentLoc = helper.getLastProjection();
-				int currentRoute = route == null ? 0 : route.getCurrentRoute();
-				Location pointToReturn = null;
-				if (route != null && currentRoute > 0 && route.getRouteRecalcDistance() > 0) {
-//					Location currentLoc = helper.getApplication().getLocationProvider().getLastKnownLocation();
-//					final Location from = routeGeometry.locations.get(currentRoute - 1);o
-//					final Location to = routeGeometry.locations.get(currentRoute);
-//					final LatLon projection = MapUtils.getProjection(currentLoc.getLatitude(),
-//							currentLoc.getLongitude(), from.getLatitude(), from.getLongitude(),
-//							to.getLatitude(), to.getLongitude());
-//
-//					final double deviation = MapUtils.getDistance(projection.getLatitude(), projection.getLongitude(), currentLoc.getLatitude(), currentLoc.getLongitude());
-//					if (deviation < route.getRouteRecalcDistance()) {
-//						double distFromProjectionToEnd = Math.sqrt(Math.pow(to.getLatitude() - projection.getLatitude(), 2) + Math.pow(to.getLongitude() - projection.getLongitude(), 2));
-//						double coef = deviation / distFromProjectionToEnd;
-//						pointToReturn = new Location("route_layer");
-//						pointToReturn.setLatitude(projection.getLatitude() + (to.getLatitude() - projection.getLatitude()) * coef);
-//						pointToReturn.setLongitude(projection.getLongitude() + (to.getLongitude() - projection.getLatitude()) * coef);
-//					}
-//					if (pointToReturn != null) {
-//						drawProjectionPoint(canvas, new double[]{tb.getPixXFromLonNoRot(pointToReturn.getLongitude()), tb.getPixYFromLatNoRot(pointToReturn.getLatitude())});
-//					}
-				}
-
 				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-						helper.getLastProjection(), route == null ? 0 : route.getCurrentRoute(), false, pointToReturn);
+						helper.getLastProjection(), route.getCurrentStraightAngleRoute());
 			}
 			List<RouteDirectionInfo> rd = helper.getRouteDirections();
 			Iterator<RouteDirectionInfo> it = rd.iterator();
@@ -1153,7 +1131,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			if (directTo) {
 				//add projection point on original route
 				double[] projectionOnRoute = calculateProjectionOnRoutePoint(
-						helper.getOriginalRouteAllLoc(), helper, tb);
+						helper.getRoute().getImmutableAllLocations(), helper, tb);
 				if (projectionOnRoute != null) {
 					drawProjectionPoint(canvas, projectionOnRoute);
 				}

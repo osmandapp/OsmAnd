@@ -61,7 +61,6 @@ public class RoutingHelper {
 	private List<LatLon> intermediatePoints;
 	private Location lastProjection;
 	private Location lastFixedLocation;
-	private Location originalStartingLocation;
 
 	private RouteCalculationResult originalRoute = null;
 
@@ -180,31 +179,11 @@ public class RoutingHelper {
 	}
 
 	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, List<LatLon> intermediatePoints, Location currentLocation){
-		setOriginalStartLocation(currentLocation);
 		checkAndUpdateStartLocation(currentLocation);
 		RouteCalculationResult previousRoute = route;
 		clearCurrentRoute(finalLocation, intermediatePoints);
 		// to update route
 		setCurrentLocation(currentLocation, false, previousRoute, true);
-	}
-
-	public RouteCalculationResult getOriginalRoute() {
-		return originalRoute;
-	}
-	public List<Location> getOriginalRouteAllLoc() {
-		return originalRoute.getImmutableAllLocations();
-	}
-
-	public void setOriginalRoute(RouteCalculationResult originalRoute) {
-		this.originalRoute = originalRoute;
-	}
-
-	private void setOriginalStartLocation(Location currentLocation) {
-		originalStartingLocation = currentLocation;
-	}
-
-	public Location getOriginalStartingLocation() {
-		return originalStartingLocation;
 	}
 
 	public synchronized void clearCurrentRoute(LatLon newFinalLocation, List<LatLon> newIntermediatePoints) {
