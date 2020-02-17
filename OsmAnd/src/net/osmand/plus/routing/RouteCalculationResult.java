@@ -1056,7 +1056,7 @@ public class RouteCalculationResult {
 		info.directionInfoInd = -1;
 		info.distanceTo = -1;
 		info.directionInfo = null;
-		return null;
+		return info;
 	}
 	
 	/*public */NextDirectionInfo getNextRouteDirectionInfoAfter(NextDirectionInfo prev, NextDirectionInfo next, boolean toSpeak) {
