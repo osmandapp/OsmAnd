@@ -1117,7 +1117,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 				Location pointToReturn = null;
 				if (route != null && currentRoute > 0 && route.getRouteRecalcDistance() > 0) {
 //					Location currentLoc = helper.getApplication().getLocationProvider().getLastKnownLocation();
-//					final Location from = routeGeometry.locations.get(currentRoute - 1);
+//					final Location from = routeGeometry.locations.get(currentRoute - 1);o
 //					final Location to = routeGeometry.locations.get(currentRoute);
 //					final LatLon projection = MapUtils.getProjection(currentLoc.getLatitude(),
 //							currentLoc.getLongitude(), from.getLatitude(), from.getLongitude(),

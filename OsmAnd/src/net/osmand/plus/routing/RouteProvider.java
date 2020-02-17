@@ -9,9 +9,12 @@ import android.util.Base64;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.WptLocationPoint;
+import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.Way;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.GPXUtilities;
@@ -75,6 +78,7 @@ public class RouteProvider {
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(RouteProvider.class);
 	private static final String OSMAND_ROUTER = "OsmAndRouter";
 	private static final int MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT = 60;
+	private static final int MIN_STRAIGHT_DIST = 50000;
 
 	public enum RouteService {
 		OSMAND("OsmAnd (offline)"),
@@ -1241,24 +1245,26 @@ public class RouteProvider {
 		double[] lons = new double[] { params.start.getLongitude(), params.end.getLongitude() };
 		List<LatLon> intermediates = params.intermediates;
 		List<Location> dots = new ArrayList<Location>();
-		//writing start location
+		List<Location> segment;
 		Location location = new Location(String.valueOf("start"));
 		location.setLatitude(lats[0]);
 		location.setLongitude(lons[0]);
+		dots.add(location);
 		//adding intermediate dots if they exists
-		if (intermediates != null){
-			for(int i =0; i<intermediates.size();i++){
-				location = new Location(String.valueOf(i));
-				location.setLatitude(intermediates.get(i).getLatitude());
-				location.setLongitude(intermediates.get(i).getLongitude());
-				dots.add(location);
+		if (!Algorithms.isEmpty(intermediates)) {
+			for (int i = 0; i < intermediates.size(); i++) {
+				if (i == 0) {
+					segment = calcStraightRoute(new LatLon(lats[0], lons[0]), intermediates.get(0));
+				} else {
+					segment = calcStraightRoute(intermediates.get(i-1), intermediates.get(i));
+				}
+				dots.addAll(segment.subList(0, segment.size()-1));
 			}
 		}
-		//writing end location
-		location = new Location(String.valueOf("end"));
-		location.setLatitude(lats[1]);
-		location.setLongitude(lons[1]);
-		dots.add(location);
+		segment = calcStraightRoute(new LatLon(dots.get(dots.size()-1).getLatitude(), dots.get(dots.size()-1).getLongitude()),
+				new LatLon(lats[1], lons[1]));
+		dots.addAll(segment.subList(0, segment.size()-1));
+
 		return new RouteCalculationResult(dots, null, params, null, true);
 	}
 
@@ -1287,5 +1293,39 @@ public class RouteProvider {
 		location.setLongitude(lons[1]);
 		dots.add(location);
 		return new RouteCalculationResult(dots, null, params, null, true);
+	}
+
+	private List<Location> calcStraightRoute(LatLon startRoute, LatLon endRoute) {
+		List<Way> ways = new ArrayList<>();
+		{
+			Way w = new Way(1);
+			w.addNode(new net.osmand.osm.edit.Node(startRoute.getLatitude(), startRoute.getLongitude(), -1));
+			addStraightLine(w, startRoute, endRoute);
+
+			ways.add(w);
+		}
+		List<Location> points = new ArrayList<>();
+		for (Way w : ways) {
+			List<Node> nodes = w.getNodes();
+			for (int n = 0; n < nodes.size(); n++) {
+				Location ll = new Location("");
+				ll.setLatitude(nodes.get(n).getLatitude());
+				ll.setLongitude(nodes.get(n).getLongitude());
+				points.add(ll);
+			}
+		}
+		return points;
+	}
+
+	private void addStraightLine(Way w, LatLon s1, LatLon s2) {
+		if(MapUtils.getDistance(s1, s2) > MIN_STRAIGHT_DIST) {
+			double mlat = (s1.getLatitude() + s2.getLatitude()) / 2;
+			double mlon = (s1.getLongitude() + s2.getLongitude()) / 2;
+			LatLon m = new LatLon(mlat, mlon);
+			addStraightLine(w, s1, m);
+			addStraightLine(w, m, s2);
+		} else {
+			w.addNode(new net.osmand.osm.edit.Node(s2.getLatitude(), s2.getLongitude(), -1));
+		}
 	}
 }
