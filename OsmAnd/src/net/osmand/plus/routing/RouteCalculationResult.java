@@ -60,7 +60,7 @@ public class RouteCalculationResult {
 	protected final ApplicationMode appMode;
 	protected final RouteProvider.RouteService routeService;
 	protected final double routeRecalcDistance;
-	protected final double routeVisibleAngle = 30;
+	protected final double routeVisibleAngle;
 
 	// Note always currentRoute > get(currentDirectionInfo).routeOffset, 
 	//         but currentRoute <= get(currentDirectionInfo+1).routeOffset 
@@ -71,8 +71,6 @@ public class RouteCalculationResult {
 	protected int lastWaypointGPX = 0;
 	protected int currentStraightAngleRoute = -1;
 	protected Location currentStraightAnglePoint = null;
-
-
 
 
 	public RouteCalculationResult(String errorMessage) {
@@ -90,6 +88,7 @@ public class RouteCalculationResult {
 		this.routeService = null;
 		this.appMode = null;
 		this.routeRecalcDistance = 0;
+		this.routeVisibleAngle = 0;
 	}
 
 	public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions, RouteCalculationParams params, List<LocationPoint> waypoints, boolean addMissingTurns) {
@@ -126,8 +125,11 @@ public class RouteCalculationResult {
 		this.routeService = params.mode.getRouteService();
 		if(params.ctx != null) {
 			this.routeRecalcDistance = params.ctx.getSettings().ROUTE_RECALCULATION_DISTANCE.getModeValue(params.mode);
+			this.routeVisibleAngle = routeService == RouteProvider.RouteService.STRAIGHT ?
+					params.ctx.getSettings().ROUTE_STRAIGHT_ANGLE.getModeValue(params.mode) : 0;
 		} else {
 			this.routeRecalcDistance = 0;
+			this.routeVisibleAngle = 0;
 		}
 	}
 
@@ -160,6 +162,8 @@ public class RouteCalculationResult {
 		updateDirectionsTime(this.directions, this.listDistance);
 		this.alarmInfo = Collections.unmodifiableList(alarms);
 		this.routeRecalcDistance = ctx.getSettings().ROUTE_RECALCULATION_DISTANCE.getModeValue(mode);
+		this.routeVisibleAngle = routeService == RouteProvider.RouteService.STRAIGHT ?
+				ctx.getSettings().ROUTE_STRAIGHT_ANGLE.getModeValue(mode) : 0;
 	}
 	
 	public ApplicationMode getAppMode() {

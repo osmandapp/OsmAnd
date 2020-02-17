@@ -3283,6 +3283,7 @@ public class OsmandSettings {
 	}
 
 	public final CommonPreference<Float> ROUTE_RECALCULATION_DISTANCE = new FloatPreference("routing_recalc_distance", 0.f).makeProfile();
+	public final CommonPreference<Float> ROUTE_STRAIGHT_ANGLE = new FloatPreference("routing_straight_angle", 30.f).makeProfile();
 
 	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_ROUTING = new BooleanPreference("enable_osmc_routing", true).makeGlobal();
 

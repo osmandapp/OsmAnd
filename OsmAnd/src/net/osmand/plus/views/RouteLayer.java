@@ -993,7 +993,9 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 						} else if (lastProjection != null) {
 							lt = lastProjection;
 						}
-						addLocation(tb, lt, style, tx, ty, angles, distances, 0, styles); // first point
+						if(lt != null) {
+							addLocation(tb, lt, style, tx, ty, angles, distances, 0, styles); // first point
+						}
 					}
 					addLocation(tb, ls, style, tx, ty, angles, distances, dist, styles);
 					previousVisible = true;
@@ -1118,7 +1120,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			if (directTo) {
 				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
 						null, 0);
-			} else if(straight){
+			} else if (straight) {
 				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
 						helper.getLastFixedLocation(), route.getCurrentStraightAngleRoute());
 			} else {
