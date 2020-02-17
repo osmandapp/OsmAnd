@@ -11,7 +11,7 @@
 	Thx - Hardy
 
 -->
-    <string name="navigation_notification_desc">Display a system notification allowing navigation.</string>
+    <string name="navigation_notification_desc">Show system notification while navigation with navigation instructions.</string>
     <string name="navigation_notification">Navigation notification</string>
     <string name="please_provide_profile_name_message">Please provide a name for the profile</string>
     <string name="open_settings">Open settings</string>
