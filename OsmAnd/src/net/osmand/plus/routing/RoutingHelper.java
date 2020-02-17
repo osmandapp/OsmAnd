@@ -1136,7 +1136,6 @@ public class RoutingHelper {
 			params.fast = settings.FAST_ROUTE_MODE.getModeValue(mode);
 			params.mode = mode;
 			params.ctx = app;
-			params.routeRecalculationDistance = settings.ROUTE_RECALCULATION_DISTANCE.getModeValue(mode);
 			boolean updateProgress = false;
 			if (params.mode.getRouteService() == RouteService.OSMAND) {
 				params.calculationProgress = new RouteCalculationProgress();
