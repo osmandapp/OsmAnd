@@ -52,10 +52,6 @@ import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_E
 import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_HIPERFOCAL;
 import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_INFINITY;
 import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_MACRO;
-import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_AUDIO;
-import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_CHOOSE;
-import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_TAKEPICTURE;
-import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_VIDEO;
 import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
 import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.cameraPictureSizeDefault;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
@@ -76,8 +72,6 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	protected void setupPreferences() {
 		AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
 		if (plugin != null) {
-			setupDefaultWidgetActionPref(plugin);
-
 			setupCameraPhotoPrefs(plugin);
 
 			setupAudioFormatPref(plugin);
@@ -96,29 +90,6 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 			setupCopyProfileSettingsPref();
 			setupResetToDefaultPref();
 		}
-	}
-
-	private void setupDefaultWidgetActionPref(AudioVideoNotesPlugin plugin) {
-		ListPreferenceEx defaultWidgetActions = (ListPreferenceEx) findPreference(plugin.AV_DEFAULT_ACTION.getId());
-		defaultWidgetActions.setDescription(R.string.av_widget_action_descr);
-		defaultWidgetActions.setIcon(getPersistentPrefIcon(R.drawable.ic_action_camera_focus));
-
-		List<String> items = new ArrayList<String>();
-		List<Integer> itemsValues = new ArrayList<Integer>();
-		items.add(getString(R.string.av_def_action_choose));
-		itemsValues.add(AV_DEFAULT_ACTION_CHOOSE);
-		items.add(getString(R.string.av_def_action_audio));
-		itemsValues.add(AV_DEFAULT_ACTION_AUDIO);
-		items.add(getString(R.string.av_def_action_video));
-		itemsValues.add(AV_DEFAULT_ACTION_VIDEO);
-		items.add(getString(R.string.av_def_action_picture));
-		itemsValues.add(AV_DEFAULT_ACTION_TAKEPICTURE);
-
-		String[] entries = items.toArray(new String[0]);
-		Integer[] entryValues = itemsValues.toArray(new Integer[0]);
-
-		defaultWidgetActions.setEntries(entries);
-		defaultWidgetActions.setEntryValues(entryValues);
 	}
 
 	private void setupCameraPhotoPrefs(AudioVideoNotesPlugin plugin) {

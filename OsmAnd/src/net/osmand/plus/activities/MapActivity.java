@@ -109,6 +109,7 @@ import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.ImportHelper;
 import net.osmand.plus.helpers.ImportHelper.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.helpers.LockHelper;
+import net.osmand.plus.helpers.ScrollHelper;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
@@ -181,7 +182,8 @@ import static net.osmand.plus.OsmandSettings.WUNDERLINQ_EXTERNAL_DEVICE;
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
 		MapMarkerChangedListener, OnDismissDialogFragmentListener, OnDrawMapListener,
-		OsmAndAppCustomizationListener, LockHelper.LockUIAdapter, PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
+		OsmAndAppCustomizationListener, LockHelper.LockUIAdapter, PreferenceFragmentCompat.OnPreferenceStartFragmentCallback,
+		ScrollHelper.OnScrollEventListener {
 
 	public static final String INTENT_KEY_PARENT_MAP_ACTIVITY = "intent_parent_map_activity_key";
 	public static final String INTENT_PARAMS = "intent_prarams";
@@ -192,6 +194,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private static final int ZOOM_LABEL_DISPLAY = 16;
 	private static final int MIN_ZOOM_LABEL_DISPLAY = 12;
 	private static final int SECOND_SPLASH_TIME_OUT = 8000;
+	
+	private static final int SMALL_SCROLLING_UNIT = 1;
+	private static final int BIG_SCROLLING_UNIT = 200;
 
 	private static final Log LOG = PlatformUtil.getLog(MapActivity.class);
 
@@ -247,6 +252,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 	private LockHelper lockHelper;
+	private ScrollHelper mapScrollHelper;
 
 	private StateChangedListener<Integer> mapScreenOrientationSettingListener = new StateChangedListener<Integer>() {
 		@Override
@@ -269,6 +275,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app = getMyApplication();
 		settings = app.getSettings();
 		lockHelper = app.getLockHelper();
+		mapScrollHelper = new ScrollHelper(app);
 		app.applyTheme(this);
 		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -1404,6 +1411,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		super.onStart();
 		stopped = false;
 		lockHelper.onStart(this);
+		mapScrollHelper.setListener(this);
 		getMyApplication().getNotificationHelper().showNotifications();
 	}
 
@@ -1423,6 +1431,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		stopped = true;
 		lockHelper.onStop(this);
+		mapScrollHelper.setListener(null);
 		super.onStop();
 	}
 
@@ -1605,13 +1614,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				uiHandler.sendMessageDelayed(msg, LONG_KEYPRESS_DELAY);
 			}
 			return true;
+		} else if (mapScrollHelper.isScrollingDirectionKeyCode(keyCode)) {
+			return mapScrollHelper.onKeyDown(keyCode, event);
 		}
 		return super.onKeyDown(keyCode, event);
 	}
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		final int scrollingUnit = 15;
 		if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
 			if (!app.accessibilityEnabled()) {
 				mapActions.contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
@@ -1624,6 +1634,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			// repeat count 0 doesn't work for samsung, 1 doesn't work for lg
 			toggleDrawer();
 			return true;
+		} else if (keyCode == KeyEvent.KEYCODE_C) {
+			mapViewTrackingUtilities.backToLocationImpl();
 		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == PARROT_EXTERNAL_DEVICE) {
 			// Parrot device has only dpad left and right
 			if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
@@ -1648,6 +1660,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				startActivity(intent);
 				return true;
 			}
+		} else if (mapScrollHelper.isScrollingDirectionKeyCode(keyCode)) {
+			return mapScrollHelper.onKeyUp(keyCode, event);
 		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == GENERIC_EXTERNAL_DEVICE) {
 			if (keyCode == KeyEvent.KEYCODE_MINUS) {
 				changeZoom(-1);
@@ -1655,25 +1669,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			} else if (keyCode == KeyEvent.KEYCODE_PLUS) {
 				changeZoom(1);
 				return true;
-			} else if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
-				scrollMap(0, scrollingUnit);
-				return true;
-			} else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
-				scrollMap(0, -scrollingUnit);
-				return true;
-			} else if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
-				scrollMap(-scrollingUnit, 0);
-				return true;
-			} else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
-				scrollMap(scrollingUnit, 0);
-				return true;
 			}
-		} else if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT || keyCode == KeyEvent.KEYCODE_DPAD_RIGHT
-				|| keyCode == KeyEvent.KEYCODE_DPAD_DOWN || keyCode == KeyEvent.KEYCODE_DPAD_UP) {
-			int dx = keyCode == KeyEvent.KEYCODE_DPAD_RIGHT ? scrollingUnit : (keyCode == KeyEvent.KEYCODE_DPAD_LEFT ? -scrollingUnit : 0);
-			int dy = keyCode == KeyEvent.KEYCODE_DPAD_DOWN ? scrollingUnit : (keyCode == KeyEvent.KEYCODE_DPAD_UP ? -scrollingUnit : 0);
-			scrollMap(dx, dy);
-			return true;
 		} else if (OsmandPlugin.onMapActivityKeyUp(this, keyCode)) {
 			return true;
 		}
@@ -2173,6 +2169,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void onScrollEvent(boolean continuousScrolling, boolean up, boolean down, boolean left, boolean right) {
+		int scrollingUnit = continuousScrolling ? SMALL_SCROLLING_UNIT : BIG_SCROLLING_UNIT;
+		int dx = (left ? -scrollingUnit : 0) + (right ? scrollingUnit : 0);
+		int dy = (up ? -scrollingUnit : 0) + (down ? scrollingUnit : 0);
+		scrollMap(dx, dy);
 	}
 
 	private class ScreenOffReceiver extends BroadcastReceiver {

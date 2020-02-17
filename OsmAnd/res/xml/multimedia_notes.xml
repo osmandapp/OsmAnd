@@ -3,13 +3,6 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:title="@string/audionotes_plugin_name">
 
-	<net.osmand.plus.settings.preferences.ListPreferenceEx
-		android:icon="@drawable/ic_action_camera_focus"
-		android:key="av_default_action"
-		android:layout="@layout/preference_with_descr"
-		android:title="@string/av_widget_action"
-		tools:summary="@string/av_widget_action_descr" />
-
 	<PreferenceCategory
 		android:key="photo_notes"
 		android:layout="@layout/preference_category_with_descr"

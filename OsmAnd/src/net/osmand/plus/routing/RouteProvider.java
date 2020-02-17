@@ -1243,6 +1243,7 @@ public class RouteProvider {
 	private RouteCalculationResult findStraightRoute(RouteCalculationParams params) {
 		double[] lats = new double[] { params.start.getLatitude(), params.end.getLatitude() };
 		double[] lons = new double[] { params.start.getLongitude(), params.end.getLongitude() };
+		Location currentLocation = params.currentLocation;
 		List<LatLon> intermediates = params.intermediates;
 		List<Location> dots = new ArrayList<Location>();
 		List<Location> segment;
@@ -1250,19 +1251,19 @@ public class RouteProvider {
 		location.setLatitude(lats[0]);
 		location.setLongitude(lons[0]);
 		dots.add(location);
-		//adding intermediate dots if they exists
+		//adding intermediate dots if they exists, TODO: need to integrate with back-to-route mechanics
 		if (!Algorithms.isEmpty(intermediates)) {
 			for (int i = 0; i < intermediates.size(); i++) {
 				if (i == 0) {
-					segment = calcStraightRoute(new LatLon(lats[0], lons[0]), intermediates.get(0));
+					segment = calcStraightRoute(new LatLon(lats[0], lons[0]), intermediates.get(0), null);
 				} else {
-					segment = calcStraightRoute(intermediates.get(i-1), intermediates.get(i));
+					segment = calcStraightRoute(intermediates.get(i-1), intermediates.get(i), null);
 				}
 				dots.addAll(segment.subList(0, segment.size()-1));
 			}
 		}
 		segment = calcStraightRoute(new LatLon(dots.get(dots.size()-1).getLatitude(), dots.get(dots.size()-1).getLongitude()),
-				new LatLon(lats[1], lons[1]));
+				new LatLon(lats[1], lons[1]), null);
 		dots.addAll(segment.subList(0, segment.size()-1));
 
 		return new RouteCalculationResult(dots, null, params, null, true);
@@ -1295,15 +1296,21 @@ public class RouteProvider {
 		return new RouteCalculationResult(dots, null, params, null, true);
 	}
 
-	private List<Location> calcStraightRoute(LatLon startRoute, LatLon endRoute) {
+	public List<Location> calcStraightRoute(LatLon startRoute, LatLon endRoute, Location currentLocation) {
 		List<Way> ways = new ArrayList<>();
 		{
 			Way w = new Way(1);
 			w.addNode(new net.osmand.osm.edit.Node(startRoute.getLatitude(), startRoute.getLongitude(), -1));
 			addStraightLine(w, startRoute, endRoute);
 
-			ways.add(w);
+			if (currentLocation == null) {
+				ways.add(w);
+			} else {
+				calcRouteToPointOfReturn(ways, w, null);
+			}
+
 		}
+
 		List<Location> points = new ArrayList<>();
 		for (Way w : ways) {
 			List<Node> nodes = w.getNodes();
@@ -1315,6 +1322,66 @@ public class RouteProvider {
 			}
 		}
 		return points;
+	}
+
+	private void calcRouteToPointOfReturn(List<Way> ways, Way w, Location currentLocation) {
+		if (currentLocation != null) {
+			double minDist = w.getFirstNode().getLocation().distanceTo(currentLocation);
+			int minInd = 0;
+			LatLon prev = null;
+			// search closest point and save prev
+			for (int ind = 1; ind < w.getNodes().size(); ind++) {
+				float dt = w.getNodes().get(ind).getLocation().distanceTo(currentLocation);
+				if(dt < minDist) {
+					minDist = dt;
+					minInd = ind;
+					prev = w.getNodes().get(ind - 1).getLatLon();
+				}
+			}
+			while(minInd > 0) {
+				w.removeNodeByIndex(0);
+				minInd --;
+			}
+			// proceed to the next point with min acceptable bearing
+			for (; w.getNodes().size() > 1; ) {
+				Node s = w.getFirstNode();
+				Node n = w.getNodes().get(1);
+				float bearingTo = currentLocation.bearingTo(s.getLocation());
+				float bearingTo2 = currentLocation.bearingTo(n.getLocation());
+				if(Math.abs(MapUtils.degreesDiff(bearingTo2, bearingTo)) > RoutingHelper.ANGLE_TO_DECLINE) {
+					w.removeNodeByIndex(0);
+					prev = s.getLatLon();
+				} else {
+					break;
+				}
+			}
+
+			if(prev != null) {
+				LatLon f = w.getFirstNode().getLatLon();
+				float bearingTo = currentLocation.bearingTo(w.getFirstNode().getLocation());
+				LatLon mp = MapUtils.calculateMidPoint(prev, f);
+				while (MapUtils.getDistance(mp, f) > 100) {
+					Location l = new Location("");
+					l.setLatitude(mp.getLatitude());
+					l.setLongitude(mp.getLongitude());
+					float bearingMid = currentLocation.bearingTo(l);
+					if (Math.abs(MapUtils.degreesDiff(bearingMid, bearingTo)) < RoutingHelper.ANGLE_TO_DECLINE) {
+						prev = mp;
+						w.addNode(new Node(mp.getLatitude(), mp.getLongitude(), -1l), 0);
+						break;
+					}
+					mp = MapUtils.calculateMidPoint(mp, f);
+				}
+			}
+
+			Way wr = new Way(2);
+			wr.addNode(new net.osmand.osm.edit.Node(currentLocation.getLatitude(),currentLocation.getLongitude(), -1l), 0);
+			addStraightLine(wr, new LatLon(currentLocation.getLatitude(), currentLocation.getLongitude()), w.getNodes().get(0).getLatLon());
+			for(int i = 1; i < w.getNodes().size(); i++) {
+				wr.addNode(w.getNodes().get(i));
+			}
+			ways.add(wr);
+		}
 	}
 
 	private void addStraightLine(Way w, LatLon s1, LatLon s2) {

@@ -1,5 +1,6 @@
 package net.osmand.osm.edit;
 
+import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.util.Algorithms;
 
@@ -23,6 +24,13 @@ public class Node extends Entity implements Serializable {
 	@Override
 	public LatLon getLatLon() {
 		return new LatLon(getLatitude(), getLongitude());
+	}
+	
+	public Location getLocation() {
+		Location l = new Location("");
+		l.setLatitude(getLatitude());
+		l.setLongitude(getLongitude());
+		return l;
 	}
 	
 	@Override

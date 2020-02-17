@@ -43,6 +43,7 @@ public class RoutingHelper {
 	private static final float POSITION_TOLERANCE = 60;
 	private static final int CACHE_RADIUS = 100000;
 	public static final float ALLOWED_DEVIATION = 2;
+	public static final double ANGLE_TO_DECLINE = 15;
 
 	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
 	private List<WeakReference<IRoutingDataUpdateListener>> updateListeners = new LinkedList<>();
@@ -1143,6 +1144,9 @@ public class RoutingHelper {
 						});
 					}
 				};
+			}
+			if (lastProjection != null) {
+				params.currentLocation = lastFixedLocation;
 			}
 			startRouteCalculationThread(params, paramsChanged, updateProgress);
 		}
