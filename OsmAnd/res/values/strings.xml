@@ -80,9 +80,6 @@
     <string name="monitoring_min_accuracy">Minimum accuracy</string>
     <string name="monitoring_min_distance">Minimum displacement</string>
     <string name="reset_plugin_to_default">Reset plugin settings to defaults</string>
-    <string name="tracks_view_path">Menu → My places → Tracks</string>
-    <string name="multimedia_notes_view_path">Menu → My places → Notes</string>
-    <string name="osm_edits_view_path">Menu → My places → OSM edits</string>
     <string name="multimedia_rec_split_title">Recorder split</string>
     <string name="multimedia_use_system_camera">Use system app</string>
     <string name="multimedia_photo_play_sound">Camera shutter sound</string>
