@@ -1250,6 +1250,7 @@ public class RouteProvider {
 				points.add(new Location("", l.getLatitude(), l.getLongitude()));
 			}
 		}
+		points.add(new Location("", params.end.getLatitude(), params.end.getLongitude()));
 		Location lastAdded = points.poll();
 		segments.add(lastAdded);
 		while(!points.isEmpty()) {
