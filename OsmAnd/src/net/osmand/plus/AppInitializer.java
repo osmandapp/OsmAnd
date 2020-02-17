@@ -599,8 +599,9 @@ public class AppInitializer implements IProgress {
 
 			@Override
 			protected Map<String, RoutingConfiguration.Builder> doInBackground(Void... voids) {
-				RoutingConfiguration.getDefault(); // load default builder
+				Map<String, String> defaultAttributes = getDefaultAttributes();
 				Map<String, RoutingConfiguration.Builder> customConfigs = new HashMap<>();
+
 				File routingFolder = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
 				if (routingFolder.isDirectory()) {
 					File[] fl = routingFolder.listFiles();
@@ -609,7 +610,7 @@ public class AppInitializer implements IProgress {
 							if (f.isFile() && f.getName().endsWith(IndexConstants.ROUTING_FILE_EXT) && f.canRead()) {
 								try {
 									String fileName = f.getName();
-									RoutingConfiguration.Builder builder = new RoutingConfiguration.Builder();
+									RoutingConfiguration.Builder builder = new RoutingConfiguration.Builder(defaultAttributes);
 									RoutingConfiguration.parseFromInputStream(new FileInputStream(f), fileName, builder);
 
 									customConfigs.put(fileName, builder);
@@ -630,6 +631,19 @@ public class AppInitializer implements IProgress {
 				}
 				callback.onRoutingFilesLoaded();
 			}
+
+			private Map<String, String> getDefaultAttributes() {
+				Map<String, String> defaultAttributes = new HashMap<>();
+				RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
+				for (Map.Entry<String, String> entry : builder.getAttributes().entrySet()) {
+					String key = entry.getKey();
+					if (!"routerName".equals(key)) {
+						defaultAttributes.put(key, entry.getValue());
+					}
+				}
+				return defaultAttributes;
+			}
+
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 

@@ -67,6 +67,7 @@ import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
+import net.osmand.router.GeneralRouter;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.search.SearchUICore;
@@ -79,6 +80,7 @@ import java.io.FileWriter;
 import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
@@ -811,6 +813,12 @@ public class OsmandApplication extends MultiDexApplication {
 		return localizedResources != null ? localizedResources : super.getResources();
 	}
 
+	public List<RoutingConfiguration.Builder> getAllRoutingConfigs() {
+		List<RoutingConfiguration.Builder> builders = new ArrayList<>(customRoutingConfigs.values());
+		builders.add(0, getDefaultRoutingConfig());
+		return builders;
+	}
+
 	public synchronized RoutingConfiguration.Builder getDefaultRoutingConfig() {
 		return RoutingConfiguration.getDefault();
 	}
@@ -834,6 +842,19 @@ public class OsmandApplication extends MultiDexApplication {
 			}
 		}
 		return builder != null ? builder : getDefaultRoutingConfig();
+	}
+
+	public static GeneralRouter getRouter(OsmandApplication app, ApplicationMode mode) {
+		Builder builder = app.getRoutingConfigForMode(mode);
+		return getRouter(builder, mode);
+	}
+
+	public static GeneralRouter getRouter(Builder builder, ApplicationMode am) {
+		GeneralRouter router = builder.getRouter(am.getRoutingProfile());
+		if (router == null && am.getParent() != null) {
+			router = builder.getRouter(am.getParent().getStringKey());
+		}
+		return router;
 	}
 
 	public OsmandRegions getRegions() {

@@ -18,7 +18,6 @@ import net.osmand.router.GeneralRouter;
 
 import java.util.Map;
 
-import static net.osmand.plus.activities.SettingsNavigationActivity.getRouter;
 import static net.osmand.plus.activities.SettingsNavigationActivity.showSeekbarSettingsDialog;
 
 public class VehicleParametersFragment extends BaseSettingsFragment implements OnPreferenceChanged {
@@ -42,7 +41,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 
 		RouteService routeService = mode.getRouteService();
 		if (routeService == RouteService.OSMAND) {
-			GeneralRouter router = getRouter(app, mode);
+			GeneralRouter router = OsmandApplication.getRouter(app, mode);
 			if (router != null) {
 				Map<String, GeneralRouter.RoutingParameter> parameters = router.getParameters();
 

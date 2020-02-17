@@ -27,7 +27,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
@@ -601,7 +600,7 @@ public class RouteProvider {
 		router.setUseFastRecalculation(settings.USE_FAST_RECALCULATION.get());
 
 		RoutingConfiguration.Builder config = params.ctx.getRoutingConfigForMode(params.mode);
-		GeneralRouter generalRouter = SettingsNavigationActivity.getRouter(config, params.mode);
+		GeneralRouter generalRouter = OsmandApplication.getRouter(config, params.mode);
 		if (generalRouter == null) {
 			return applicationModeNotSupported(params);
 		}

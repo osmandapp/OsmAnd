@@ -139,7 +139,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		if (am.getRouteService() != RouteProvider.RouteService.OSMAND) {
 			screen.addPreference(fastRoute);
 		} else {
-			GeneralRouter router = SettingsNavigationActivity.getRouter(app, am);
+			GeneralRouter router = OsmandApplication.getRouter(app, am);
 			clearParameters();
 			if (router != null) {
 				Map<String, RoutingParameter> parameters = router.getParameters();

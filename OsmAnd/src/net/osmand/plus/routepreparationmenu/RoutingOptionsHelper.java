@@ -31,7 +31,6 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsBaseActivity;
-import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
@@ -408,7 +407,7 @@ public class RoutingOptionsHelper {
 
 	public LocalRoutingParameter getRoutingParameterInnerById(ApplicationMode am, String parameterId) {
 		RouteProvider.GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
-		GeneralRouter rm = SettingsNavigationActivity.getRouter(app, am);
+		GeneralRouter rm = OsmandApplication.getRouter(app, am);
 		if (rm == null || (rparams != null && !rparams.isCalculateOsmAndRoute()) && !rparams.getFile().hasRtePt()) {
 			return null;
 		}
@@ -492,7 +491,7 @@ public class RoutingOptionsHelper {
 
 		RouteProvider.GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
 		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>(getGpxRouterParameters(am));
-		GeneralRouter rm = SettingsNavigationActivity.getRouter(app, am);
+		GeneralRouter rm = OsmandApplication.getRouter(app, am);
 		if (rm == null || (rparams != null && !rparams.isCalculateOsmAndRoute()) && !rparams.getFile().hasRtePt()) {
 			return list;
 		}
@@ -582,7 +581,7 @@ public class RoutingOptionsHelper {
 
 	public List<GeneralRouter.RoutingParameter> getAvoidRoutingPrefsForAppMode(ApplicationMode applicationMode) {
 		List<GeneralRouter.RoutingParameter> avoidParameters = new ArrayList<GeneralRouter.RoutingParameter>();
-		GeneralRouter router = SettingsNavigationActivity.getRouter(app, applicationMode);
+		GeneralRouter router = OsmandApplication.getRouter(app, applicationMode);
 		if (router != null) {
 			for (Map.Entry<String, GeneralRouter.RoutingParameter> e : router.getParameters().entrySet()) {
 				String param = e.getKey();
@@ -596,7 +595,7 @@ public class RoutingOptionsHelper {
 	}
 
 	public GeneralRouter.RoutingParameter getRoutingPrefsForAppModeById(ApplicationMode applicationMode, String parameterId) {
-		GeneralRouter router = SettingsNavigationActivity.getRouter(app, applicationMode);
+		GeneralRouter router = OsmandApplication.getRouter(app, applicationMode);
 		GeneralRouter.RoutingParameter parameter = null;
 
 		if (router != null) {

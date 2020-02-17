@@ -220,8 +220,7 @@ public class NavigationFragment extends BaseSettingsFragment {
 					false, null));
 		}
 
-		collectRoutingProfilesFromConfig(context, context.getDefaultRoutingConfig(), profilesObjects);
-		for (RoutingConfiguration.Builder builder : context.getCustomRoutingConfigs().values()) {
+		for (RoutingConfiguration.Builder builder : context.getAllRoutingConfigs()) {
 			collectRoutingProfilesFromConfig(context, builder, profilesObjects);
 		}
 		return profilesObjects;

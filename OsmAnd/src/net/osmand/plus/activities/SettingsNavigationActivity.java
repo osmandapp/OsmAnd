@@ -52,7 +52,6 @@ import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
-import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -315,7 +314,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			cat.addPreference(fastRoute);
 		} else {
 			ApplicationMode am = settings.getApplicationMode();
-			GeneralRouter router = getRouter(getMyApplication(), am);
+			GeneralRouter router = OsmandApplication.getRouter(settings.getContext(), am);
 			clearParameters();
 			if (router != null) {
 				GeneralRouterProfile routerProfile = router.getProfile();
@@ -431,20 +430,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		reliefFactorParameters.clear();
 	}
 
-	public static GeneralRouter getRouter(OsmandApplication app, ApplicationMode mode) {
-		RoutingConfiguration.Builder builder = app.getRoutingConfigForMode(mode);
-		return getRouter(builder, mode);
-	}
-
-	public static GeneralRouter getRouter(net.osmand.router.RoutingConfiguration.Builder builder, ApplicationMode am) {
-		GeneralRouter router = builder.getRouter(am.getRoutingProfile());
-		if (router == null && am.getParent() != null) {
-			router = builder.getRouter(am.getParent().getStringKey());
-		}
-		return router;
-	}
-
-	public void updateAllSettings() {	
+	public void updateAllSettings() {
 		prepareRoutingPrefs(getPreferenceScreen());
 		reloadVoiceListPreference(getPreferenceScreen());
 		super.updateAllSettings();
@@ -733,7 +719,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final OsmandSettings settings = app.getSettings();
 
-		GeneralRouter router = getRouter(app, mode);
+		GeneralRouter router = OsmandApplication.getRouter(app, mode);
 		SpeedConstants units = settings.SPEED_SYSTEM.getModeValue(mode);
 		String speedUnits = units.toShortString(activity);
 		final float[] ratio = new float[1];
