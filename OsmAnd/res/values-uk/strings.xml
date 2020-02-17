@@ -3530,4 +3530,6 @@
     <string name="import_profile_dialog_description">Імпортований профіль містить додаткові дані. Натисніть кнопку імпортувати, щоб імпортувати лише дані профілю або вибрати додаткові дані для імпорту.</string>
     <string name="export_profile_dialog_description">Ви можете вибрати додаткові дані для експорту разом із профілем.</string>
     <string name="index_name_antarctica">Антарктида</string>
+    <string name="navigation_notification_desc">Показувати системне сповіщення з навігаційними вказівками під час навігації.</string>
+    <string name="navigation_notification">Навігаційне сповіщення</string>
 </resources>
