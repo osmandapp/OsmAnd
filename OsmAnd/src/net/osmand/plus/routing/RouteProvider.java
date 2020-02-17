@@ -9,9 +9,12 @@ import android.util.Base64;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.WptLocationPoint;
+import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.Way;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.GPXUtilities;
@@ -59,6 +62,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -74,6 +78,7 @@ public class RouteProvider {
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(RouteProvider.class);
 	private static final String OSMAND_ROUTER = "OsmAndRouter";
 	private static final int MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT = 60;
+	private static final int MIN_STRAIGHT_DIST = 50000;
 
 	public enum RouteService {
 		OSMAND("OsmAnd (offline)"),
@@ -317,10 +322,9 @@ public class RouteProvider {
 //					res = findORSRoute(params);
 //				} else if (params.type == RouteService.OSRM) {
 //					res = findOSRMRoute(params);
-				} else if (params.mode.getRouteService() == RouteService.STRAIGHT) {
+				} else if (params.mode.getRouteService() == RouteService.STRAIGHT ||
+						params.mode.getRouteService() == RouteService.DIRECT_TO) {
 					res = findStraightRoute(params);
-				} else if (params.mode.getRouteService() == RouteService.DIRECT_TO) {
-					res = findDirectTo(params);
 				} else {
 					res = new RouteCalculationResult("Selected route service is not available");
 				}
@@ -1236,55 +1240,30 @@ public class RouteProvider {
 	}
 
 	private RouteCalculationResult findStraightRoute(RouteCalculationParams params) {
-		double[] lats = new double[] { params.start.getLatitude(), params.end.getLatitude() };
-		double[] lons = new double[] { params.start.getLongitude(), params.end.getLongitude() };
-		List<LatLon> intermediates = params.intermediates;
-		List<Location> dots = new ArrayList<Location>();
-		//writing start location
-		Location location = new Location(String.valueOf("start"));
-		location.setLatitude(lats[0]);
-		location.setLongitude(lons[0]);
-		//adding intermediate dots if they exists
-		if (intermediates != null){
-			for(int i =0; i<intermediates.size();i++){
-				location = new Location(String.valueOf(i));
-				location.setLatitude(intermediates.get(i).getLatitude());
-				location.setLongitude(intermediates.get(i).getLongitude());
-				dots.add(location);
+		Location currentLocation = params.currentLocation;
+		LinkedList<Location> points = new LinkedList<>();
+		List<Location> segments = new ArrayList<>();
+		points.add(params.start);
+		if(params.intermediates != null) {
+			for (LatLon l : params.intermediates) {
+				points.add(new Location("", l.getLatitude(), l.getLongitude()));
 			}
 		}
-		//writing end location
-		location = new Location(String.valueOf("end"));
-		location.setLatitude(lats[1]);
-		location.setLongitude(lons[1]);
-		dots.add(location);
-		return new RouteCalculationResult(dots, null, params, null, true);
+		points.add(new Location("", params.end.getLatitude(), params.end.getLongitude()));
+		Location lastAdded = points.poll();
+		segments.add(lastAdded);
+		while(!points.isEmpty()) {
+			Location pl = points.peek();
+			if (lastAdded.distanceTo(pl) < MIN_STRAIGHT_DIST) {
+				lastAdded = points.poll();
+				segments.add(lastAdded);
+			} else {
+				Location mp = MapUtils.calculateMidPoint(lastAdded, pl);
+				points.add(0, mp);
+			}
+		}
+		return new RouteCalculationResult(segments, null, params, null, false);
 	}
 
-	private RouteCalculationResult findDirectTo(RouteCalculationParams params) {
-		params.showOriginalRoute = true;
-		double[] lats = new double[] { params.start.getLatitude(), params.end.getLatitude() };
-		double[] lons = new double[] { params.start.getLongitude(), params.end.getLongitude() };
-		List<LatLon> intermediates = params.intermediates;
-		List<Location> dots = new ArrayList<Location>();
-		//writing start location
-		Location location = new Location(String.valueOf("start"));
-		location.setLatitude(lats[0]);
-		location.setLongitude(lons[0]);
-		//adding intermediate dots if they exists
-		if (intermediates != null){
-			for(int i =0; i<intermediates.size();i++){
-				location = new Location(String.valueOf(i));
-				location.setLatitude(intermediates.get(i).getLatitude());
-				location.setLongitude(intermediates.get(i).getLongitude());
-				dots.add(location);
-			}
-		}
-		//writing end location
-		location = new Location(String.valueOf("end"));
-		location.setLatitude(lats[1]);
-		location.setLongitude(lons[1]);
-		dots.add(location);
-		return new RouteCalculationResult(dots, null, params, null, true);
-	}
+
 }
