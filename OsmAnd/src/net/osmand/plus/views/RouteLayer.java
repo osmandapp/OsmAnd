@@ -38,6 +38,7 @@ import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.TrackChartPoints;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
+import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.transport.TransportStopRoute;
@@ -1105,10 +1106,13 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 						startLocation, 0, false, null);
 			}
 		} else {
+
 			RouteCalculationResult route = helper.getRoute();
+			boolean directTo = route.getRouteService() == RouteProvider.RouteService.DIRECT_TO;
 			routeGeometry.clearTransportRoute();
 			routeGeometry.updateRoute(tb, route);
-			if (helper.getRoute().isShowOriginalRoute() && helper.getOriginalStartingLocation() != null) {
+			RouteProvider.RouteService rs = helper.getRoute().getRouteService();
+			if (directTo && helper.getOriginalStartingLocation() != null) {
 				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
 						helper.getOriginalStartingLocation(),  0, true, null);
 			} else {
@@ -1141,12 +1145,12 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			}
 			List<RouteDirectionInfo> rd = helper.getRouteDirections();
 			Iterator<RouteDirectionInfo> it = rd.iterator();
-			if (!helper.getRoute().isShowOriginalRoute() && tb.getZoom() >= 14) {
+			if (!directTo && tb.getZoom() >= 14) {
 				List<Location> actionPoints = calculateActionPoints(topLatitude, leftLongitude, bottomLatitude, rightLongitude, helper.getLastProjection(),
 						helper.getRoute().getRouteLocations(), helper.getRoute().getCurrentRoute(), it, tb.getZoom());
 				drawAction(tb, canvas, actionPoints);
 			}
-			if (helper.getRoute().isShowOriginalRoute()) {
+			if (directTo) {
 				//add projection point on original route
 				double[] projectionOnRoute = calculateProjectionOnRoutePoint(
 						helper.getOriginalRouteAllLoc(), helper, tb);
