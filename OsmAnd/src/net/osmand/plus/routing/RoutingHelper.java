@@ -693,20 +693,27 @@ public class RoutingHelper {
 			}
 
 			if(nextPoint > 0) {
-				float bearingTo = currentLocation.bearingTo(routeNodes.get(nextPoint));
-				Location mp = MapUtils.calculateMidPoint(routeNodes.get(nextPoint - 1), routeNodes.get(nextPoint));
-				boolean found = false;
-				while (mp.distanceTo(routeNodes.get(nextPoint)) > 100) {
+				Location next = routeNodes.get(nextPoint);
+				Location prev = routeNodes.get(nextPoint - 1);
+				float bearingTo = currentLocation.bearingTo(next);
+				float bearingPrev = currentLocation.bearingTo(prev);
+				while (true) {
+					Location mp = MapUtils.calculateMidPoint(routeNodes.get(nextPoint - 1), routeNodes.get(nextPoint));
+					if(mp.distanceTo(routeNodes.get(nextPoint)) <= 100) {
+						break;
+					}
 					float bearingMid = currentLocation.bearingTo(mp);
-					if (Math.abs(MapUtils.degreesDiff(bearingMid, bearingTo)) <= ANGLE_TO_DECLINE) {
-						route.updateNextVisiblePoint(nextPoint, mp);
-						found = true;
+					boolean sharpTo = Math.abs(MapUtils.degreesDiff(bearingMid, bearingTo)) < ANGLE_TO_DECLINE;
+					boolean sharpPrev = Math.abs(MapUtils.degreesDiff(bearingMid, bearingPrev)) < ANGLE_TO_DECLINE;
+					if(sharpPrev) {
+						next = mp;
+					} else if(sharpTo){
+						prev = mp;
+					} else {
 						break;
 					}
 				}
-				if(!found) {
-					route.updateNextVisiblePoint(nextPoint, null);
-				}
+				route.updateNextVisiblePoint(nextPoint, next);
 			}
 
 		}
@@ -922,7 +929,7 @@ public class RoutingHelper {
 		if(l != null && l.hasSpeed()) {
 			speed = l.getSpeed();
 		}
-		if(next != null) {
+		if(next != null && n.directionInfo != null) {
 			next[0] = n.directionInfo.getTurnType();
 		}
 		if(n.distanceTo > 0  && n.directionInfo != null && !n.directionInfo.getTurnType().isSkipToSpeak() &&
