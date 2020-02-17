@@ -1259,7 +1259,7 @@ public class RouteProvider {
 				segments.add(lastAdded);
 			} else {
 				Location mp = MapUtils.calculateMidPoint(lastAdded, pl);
-				segments.add(0, mp);
+				points.add(0, mp);
 			}
 		}
 		return new RouteCalculationResult(segments, null, params, null, false);
