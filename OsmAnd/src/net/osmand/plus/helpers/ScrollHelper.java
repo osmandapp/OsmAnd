@@ -33,12 +33,7 @@ public class ScrollHelper {
 		public void run() {
 			isInContinuousScrolling = true;
 			while (hasActiveDirections()) {
-				app.runInUIThread(new Runnable() {
-					@Override
-					public void run() {
-						notifyListener(true);
-					}
-				});
+				notifyListener(true);
 				try {
 					Thread.sleep(REFRESHING_DELAY_MS);
 				} catch (InterruptedException e) {
