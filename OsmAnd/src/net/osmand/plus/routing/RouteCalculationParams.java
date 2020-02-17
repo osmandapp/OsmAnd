@@ -34,8 +34,6 @@ public class RouteCalculationParams {
 	public RouteCalculationProgressCallback calculationProgressCallback;
 	public RouteCalculationResultListener resultListener;
 
-	public float routeRecalculationDistance;
-
 	public interface RouteCalculationResultListener {
 		void onRouteCalculated(RouteCalculationResult route);
 	}

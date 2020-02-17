@@ -56,7 +56,7 @@ public class RouteCalculationResult {
 	protected List<RouteDirectionInfo> cacheAgreggatedDirections;
 	protected List<LocationPoint> locationPoints = new ArrayList<LocationPoint>();
 
-	// parmas
+	// params
 	protected final ApplicationMode appMode;
 	protected final RouteProvider.RouteService routeService;
 	protected final double routeRecalcDistance;
