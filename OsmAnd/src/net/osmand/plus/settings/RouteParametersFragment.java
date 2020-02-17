@@ -33,7 +33,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static net.osmand.plus.activities.SettingsNavigationActivity.getRouter;
 import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
 
 public class RouteParametersFragment extends BaseSettingsFragment implements OnPreferenceChanged {
@@ -140,7 +139,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		if (am.getRouteService() != RouteProvider.RouteService.OSMAND) {
 			screen.addPreference(fastRoute);
 		} else {
-			GeneralRouter router = getRouter(getMyApplication().getRoutingConfig(), am);
+			GeneralRouter router = app.getRouter(am);
 			clearParameters();
 			if (router != null) {
 				Map<String, RoutingParameter> parameters = router.getParameters();

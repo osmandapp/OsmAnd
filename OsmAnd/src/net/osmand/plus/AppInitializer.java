@@ -69,8 +69,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Random;
 
 import btools.routingapp.BRouterServiceConnection;
@@ -593,19 +595,25 @@ public class AppInitializer implements IProgress {
 	}
 
 	public static void loadRoutingFiles(final OsmandApplication app, final LoadRoutingFilesCallback callback) {
-		new AsyncTask<Void, Void, RoutingConfiguration.Builder>() {
-			
+		new AsyncTask<Void, Void, Map<String, RoutingConfiguration.Builder>>() {
+
 			@Override
-			protected RoutingConfiguration.Builder doInBackground(Void... voids) {
+			protected Map<String, RoutingConfiguration.Builder> doInBackground(Void... voids) {
+				Map<String, String> defaultAttributes = getDefaultAttributes();
+				Map<String, RoutingConfiguration.Builder> customConfigs = new HashMap<>();
+
 				File routingFolder = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
-				RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
 				if (routingFolder.isDirectory()) {
 					File[] fl = routingFolder.listFiles();
 					if (fl != null && fl.length > 0) {
 						for (File f : fl) {
-							if (f.isFile() && f.getName().endsWith(".xml") && f.canRead()) {
+							if (f.isFile() && f.getName().endsWith(IndexConstants.ROUTING_FILE_EXT) && f.canRead()) {
 								try {
-									RoutingConfiguration.parseFromInputStream(new FileInputStream(f), f.getName(), builder);
+									String fileName = f.getName();
+									RoutingConfiguration.Builder builder = new RoutingConfiguration.Builder(defaultAttributes);
+									RoutingConfiguration.parseFromInputStream(new FileInputStream(f), fileName, builder);
+
+									customConfigs.put(fileName, builder);
 								} catch (XmlPullParserException | IOException e) {
 									throw new IllegalStateException(e);
 								}
@@ -613,15 +621,29 @@ public class AppInitializer implements IProgress {
 						}
 					}
 				}
-				return builder;
+				return customConfigs;
 			}
 
 			@Override
-			protected void onPostExecute(RoutingConfiguration.Builder builder) {
-				super.onPostExecute(builder);
-				app.updateRoutingConfig(builder);
+			protected void onPostExecute(Map<String, RoutingConfiguration.Builder> customConfigs) {
+				if (!customConfigs.isEmpty()) {
+					app.getCustomRoutingConfigs().putAll(customConfigs);
+				}
 				callback.onRoutingFilesLoaded();
 			}
+
+			private Map<String, String> getDefaultAttributes() {
+				Map<String, String> defaultAttributes = new HashMap<>();
+				RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
+				for (Map.Entry<String, String> entry : builder.getAttributes().entrySet()) {
+					String key = entry.getKey();
+					if (!"routerName".equals(key)) {
+						defaultAttributes.put(key, entry.getValue());
+					}
+				}
+				return defaultAttributes;
+			}
+
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
