@@ -20,7 +20,6 @@ public class RouteCalculationParams {
 	public Location currentLocation;
 
 	public OsmandApplication ctx;
-	public RoutingContext cachedRoutingContext;
 	public ApplicationMode mode;
 	public GPXRouteParams gpxRoute;
 	public RouteCalculationResult previousToRecalculate;
@@ -35,7 +34,6 @@ public class RouteCalculationParams {
 	public RouteCalculationProgressCallback calculationProgressCallback;
 	public RouteCalculationResultListener resultListener;
 
-	public boolean showOriginalRoute;
 	public float routeRecalculationDistance;
 
 	public interface RouteCalculationResultListener {

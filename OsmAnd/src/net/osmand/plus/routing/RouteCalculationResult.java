@@ -2,6 +2,7 @@ package net.osmand.plus.routing;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.system.Os;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -55,6 +56,12 @@ public class RouteCalculationResult {
 	protected List<RouteDirectionInfo> cacheAgreggatedDirections;
 	protected List<LocationPoint> locationPoints = new ArrayList<LocationPoint>();
 
+	// parmas
+	protected final ApplicationMode appMode;
+	protected final RouteProvider.RouteService routeService;
+	protected final double routeRecalcDistance;
+	protected final double routeVisibleAngle = 30;
+
 	// Note always currentRoute > get(currentDirectionInfo).routeOffset, 
 	//         but currentRoute <= get(currentDirectionInfo+1).routeOffset 
 	protected int currentDirectionInfo = 0;
@@ -62,10 +69,11 @@ public class RouteCalculationResult {
 	protected int nextIntermediate = 0;
 	protected int currentWaypointGPX = 0;
 	protected int lastWaypointGPX = 0;
-	protected ApplicationMode appMode;
+	protected int currentStraightAngleRoute = -1;
+	protected Location currentStraightAnglePoint = null;
 
-	protected boolean showOriginalRoute = false;
-	protected double routeRecalcDistance = 0.d;
+
+
 
 	public RouteCalculationResult(String errorMessage) {
 		this.errorMessage = errorMessage;
@@ -79,6 +87,9 @@ public class RouteCalculationResult {
 		this.listDistance = new int[0];
 		this.directions = new ArrayList<RouteDirectionInfo>();
 		this.alarmInfo = new ArrayList<AlarmInfo>();
+		this.routeService = null;
+		this.appMode = null;
+		this.routeRecalcDistance = 0;
 	}
 
 	public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions, RouteCalculationParams params, List<LocationPoint> waypoints, boolean addMissingTurns) {
@@ -112,11 +123,11 @@ public class RouteCalculationResult {
 		calculateIntermediateIndexes(params.ctx, this.locations, params.intermediates, localDirections, this.intermediatePoints);
 		this.directions = Collections.unmodifiableList(localDirections);
 		updateDirectionsTime(this.directions, this.listDistance);
-
-		this.showOriginalRoute = params.showOriginalRoute;
-
-		if (params.routeRecalculationDistance != 0.f) {
-			this.routeRecalcDistance = params.routeRecalculationDistance;
+		this.routeService = params.mode.getRouteService();
+		if(params.ctx != null) {
+			this.routeRecalcDistance = params.ctx.getSettings().ROUTE_RECALCULATION_DISTANCE.getModeValue(params.mode);
+		} else {
+			this.routeRecalcDistance = 0;
 		}
 	}
 
@@ -143,10 +154,12 @@ public class RouteCalculationResult {
 		calculateIntermediateIndexes(ctx, this.locations, intermediates, computeDirections, this.intermediatePoints);
 		updateListDistanceTime(this.listDistance, this.locations);
 		this.appMode = mode;
+		this.routeService = mode.getRouteService();
 		
 		this.directions = Collections.unmodifiableList(computeDirections);
 		updateDirectionsTime(this.directions, this.listDistance);
 		this.alarmInfo = Collections.unmodifiableList(alarms);
+		this.routeRecalcDistance = ctx.getSettings().ROUTE_RECALCULATION_DISTANCE.getModeValue(mode);
 	}
 	
 	public ApplicationMode getAppMode() {
@@ -240,6 +253,14 @@ public class RouteCalculationResult {
 
 	public double getRouteRecalcDistance() {
 		return routeRecalcDistance;
+	}
+
+	public RouteProvider.RouteService getRouteService() {
+		return routeService;
+	}
+
+	public double getRouteVisibleAngle() {
+		return routeVisibleAngle;
 	}
 
 	public List<RouteSegmentResult> getOriginalRoute() {
@@ -1210,7 +1231,20 @@ public class RouteCalculationResult {
 	private int getListDistance(int index) {
 		return listDistance.length > index ? listDistance[index] : 0;
 	}
-	
+
+	public int getCurrentStraightAngleRoute() {
+		return currentStraightAngleRoute > currentRoute ? currentStraightAngleRoute : currentRoute;
+	}
+
+	public Location getCurrentStraightAnglePoint() {
+		return currentStraightAnglePoint;
+	}
+
+	public void updateNextVisiblePoint(int nextPoint, Location mp) {
+		currentStraightAngleRoute = nextPoint;
+		currentStraightAnglePoint = mp;
+	}
+
 	public static class NextDirectionInfo {
 		public RouteDirectionInfo directionInfo;
 		public int distanceTo;
@@ -1220,7 +1254,4 @@ public class RouteCalculationResult {
 		private int directionInfoInd;
 	}
 
-	public boolean isShowOriginalRoute() {
-		return showOriginalRoute;
-	}
 }

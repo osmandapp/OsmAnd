@@ -43,7 +43,6 @@ public class RoutingHelper {
 	private static final float POSITION_TOLERANCE = 60;
 	private static final int CACHE_RADIUS = 100000;
 	public static final float ALLOWED_DEVIATION = 2;
-	public static final double ANGLE_TO_DECLINE = 15;
 
 	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
 	private List<WeakReference<IRoutingDataUpdateListener>> updateListeners = new LinkedList<>();
@@ -462,6 +461,7 @@ public class RoutingHelper {
 				if (allowableDeviation == 0) {
 					allowableDeviation = getDefaultAllowedDeviation(settings, route.getAppMode(), posTolerance);
 				}
+
 				// 2. Analyze if we need to recalculate route
 				// >100m off current route (sideways) or parameter (for Straight line)
 				if (currentRoute > 0 && allowableDeviation > 0) {
@@ -697,6 +697,37 @@ public class RoutingHelper {
 				finishCurrentRoute();
 				// targets.clearPointToNavigate(false);
 				return true;
+			}
+		}
+
+		// 4. update angle point
+		if (route.getRouteVisibleAngle() > 0) {
+			// proceed to the next point with min acceptable bearing
+			double ANGLE_TO_DECLINE = route.getRouteVisibleAngle();
+			int nextPoint = route.currentRoute;
+			for (; nextPoint < routeNodes.size() - 1; nextPoint++) {
+				float bearingTo = currentLocation.bearingTo(routeNodes.get(nextPoint));
+				float bearingTo2 = currentLocation.bearingTo(routeNodes.get(nextPoint + 1));
+				if (Math.abs(MapUtils.degreesDiff(bearingTo2, bearingTo)) <= ANGLE_TO_DECLINE) {
+					break;
+				}
+			}
+
+			if(nextPoint > 0) {
+				float bearingTo = currentLocation.bearingTo(routeNodes.get(nextPoint));
+				Location mp = MapUtils.calculateMidPoint(routeNodes.get(nextPoint - 1), routeNodes.get(nextPoint));
+				boolean found = false;
+				while (mp.distanceTo(routeNodes.get(nextPoint)) > 100) {
+					float bearingMid = currentLocation.bearingTo(mp);
+					if (Math.abs(MapUtils.degreesDiff(bearingMid, bearingTo)) <= ANGLE_TO_DECLINE) {
+						route.updateNextVisiblePoint(nextPoint, mp);
+						found = true;
+						break;
+					}
+				}
+				if(!found) {
+					route.updateNextVisiblePoint(nextPoint, null);
+				}
 			}
 
 		}

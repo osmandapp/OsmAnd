@@ -1270,7 +1270,6 @@ public class RouteProvider {
 	}
 
 	private RouteCalculationResult findDirectTo(RouteCalculationParams params) {
-		params.showOriginalRoute = true;
 		double[] lats = new double[] { params.start.getLatitude(), params.end.getLatitude() };
 		double[] lons = new double[] { params.start.getLongitude(), params.end.getLongitude() };
 		List<LatLon> intermediates = params.intermediates;
