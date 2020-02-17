@@ -451,7 +451,7 @@ public class OsmandSettings {
 
 	public void copyProfilePreferences(ApplicationMode modeFrom, ApplicationMode modeTo, List<OsmandPreference> profilePreferences) {
 		for (OsmandPreference pref : profilePreferences) {
-			if (prefCanBeCopiedOrReset(pref) && !USER_PROFILE_NAME.getId().equals(pref.getId()) && !ROUTE_RECALCULATION_DISTANCE.getId().equals(pref.getId())) {
+			if (prefCanBeCopiedOrReset(pref) && !USER_PROFILE_NAME.getId().equals(pref.getId())) {
 				CommonPreference profilePref = (CommonPreference) pref;
 				if (PARENT_APP_MODE.getId().equals(pref.getId())) {
 					if (modeTo.isCustomProfile()) {
