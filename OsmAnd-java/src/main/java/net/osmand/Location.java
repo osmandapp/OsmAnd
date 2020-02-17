@@ -67,6 +67,12 @@ public class Location {
         mProvider = provider;
     }
 
+	public Location(String provider, double lat, double lon) {
+		mProvider = provider;
+		setLatitude(lat);
+		setLongitude(lon);
+	}
+
     /**
      * Constructs a new Location object that is a copy of the given
      * location.
