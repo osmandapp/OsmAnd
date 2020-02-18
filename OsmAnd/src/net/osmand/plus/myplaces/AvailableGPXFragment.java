@@ -87,7 +87,6 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.text.Collator;
 import java.text.DateFormat;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -97,7 +96,6 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -624,7 +622,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 						if (sf == null) {
 							sf = new SelectedGpxFile();
 						}
-						sf.setLoadedName(gpxInfo.fileName);
+						sf.setLoadingFileName(gpxInfo.fileName);
 						selectedGpxHelper.addRemoveSelected(visible, sf);
 					}
 				}
@@ -1560,15 +1558,15 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 		@Override
 		protected void onPreExecute() {
-			if(getActivity()!=null){
+			if (getActivity() != null) {
 				((FavoritesActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(true);
 			}
 		}
 
 		@Override
 		protected void onPostExecute(String result) {
-			if(getActivity()!=null) {
-				((FavoritesActivity)getActivity()).setSupportProgressBarIndeterminateVisibility(false);
+			if (getActivity() != null) {
+				((FavoritesActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(false);
 			}
 			Toast.makeText(getActivity(), result, Toast.LENGTH_LONG).show();
 		}
@@ -1884,7 +1882,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		SelectedGpxFile sgpx = getSelectedGpxFile(gpxInfo, app);
 		GPXTrackAnalysis analysis = null;
 		if (sgpx != null) {
-			if (sgpx.getLoadedName().isEmpty()) {
+			if (sgpx.isLoaded()) {
 				analysis = sgpx.getTrackAnalysis(app);
 			}
 		} else if (gpxInfo.currentlyRecordingTrack) {

@@ -443,7 +443,7 @@ public class GpxSelectionHelper {
 	private SelectedGpxFile getSelectedFileByLoadedFileName(String path) {
 		List<SelectedGpxFile> newList = new ArrayList<>(selectedGPXFiles);
 		for (SelectedGpxFile s : newList) {
-			if (path.endsWith("/" + s.getLoadedName())) {
+			if (path.endsWith("/" + s.getLoadingFileName())) {
 				return s;
 			}
 		}
@@ -462,10 +462,10 @@ public class GpxSelectionHelper {
 
 	public SelectedGpxFile getSelectedFileByName(String path) {
 		for (SelectedGpxFile s : selectedGPXFiles) {
-			if (path.equals(s.getLoadedName())) {
+			if (path.equals(s.getLoadingFileName())) {
 				return s;
 			}
-			if (s.getLoadedName().isEmpty() && s.getGpxFile().path.endsWith("/" + path)) {
+			if (s.isLoaded() && s.getGpxFile().path.endsWith("/" + path)) {
 				return s;
 			}
 		}
@@ -623,12 +623,12 @@ public class GpxSelectionHelper {
 					sf.setJoinSegments(dataItem.isJoinSegments());
 				}
 				sf.setGpxFile(gpx, app);
-				sf.setLoadedName("");
+				sf.setLoadingFileName("");
 				sf.notShowNavigationDialog = notShowNavigationDialog;
 				sf.selectedByUser = selectedByUser;
 			}
 		}
-		if (sf != null && sf.getLoadedName().isEmpty()) {
+		if (sf != null && sf.isLoaded()) {
 			if (displayed != show) {
 				List<SelectedGpxFile> newSelectedGPXFiles = new ArrayList<>(selectedGPXFiles);
 				if (show) {
@@ -727,14 +727,18 @@ public class GpxSelectionHelper {
 		private boolean joinSegments;
 		private boolean showCurrentTrack;
 		private boolean splitProcessed = false;
-		private String loadedName = "";
+		private String loadingFileName = "";
 
-		public String getLoadedName() {
-			return loadedName;
+		String getLoadingFileName() {
+			return loadingFileName;
 		}
 
-		public void setLoadedName(String loadedName) {
-			this.loadedName = loadedName;
+		public boolean isLoaded(){
+			return getLoadingFileName().isEmpty();
+		}
+
+		public void setLoadingFileName(String loadingFileName) {
+			this.loadingFileName = loadingFileName;
 		}
 
 		public void setGpxFile(GPXFile gpxFile, OsmandApplication app) {
