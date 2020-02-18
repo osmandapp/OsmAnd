@@ -36,13 +36,11 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.profiles.ProfileIcons;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment;
-import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
@@ -116,8 +114,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			profile.name = baseModeForNewProfile.toHumanString();
 			profile.color = baseModeForNewProfile.getIconColorInfo();
 			profile.iconRes = baseModeForNewProfile.getIconRes();
-			profile.routingProfile = baseModeForNewProfile.getRoutingProfile();
-			profile.routeService = baseModeForNewProfile.getRouteService();
 			profile.locationIcon = baseModeForNewProfile.getLocationIcon();
 			profile.navigationIcon = baseModeForNewProfile.getNavigationIcon();
 		} else {
@@ -126,8 +122,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			profile.name = getSelectedAppMode().toHumanString();
 			profile.color = getSelectedAppMode().getIconColorInfo();
 			profile.iconRes = getSelectedAppMode().getIconRes();
-			profile.routingProfile = getSelectedAppMode().getRoutingProfile();
-			profile.routeService = getSelectedAppMode().getRouteService();
 			profile.locationIcon = getSelectedAppMode().getLocationIcon();
 			profile.navigationIcon = getSelectedAppMode().getNavigationIcon();
 		}
@@ -144,8 +138,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			}
 			changedProfile.color = profile.color;
 			changedProfile.iconRes = profile.iconRes;
-			changedProfile.routingProfile = profile.routingProfile;
-			changedProfile.routeService = profile.routeService;
 			changedProfile.locationIcon = profile.locationIcon;
 			changedProfile.navigationIcon = profile.navigationIcon;
 		}
@@ -388,7 +380,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			for (ProfileIconColors color : ProfileIconColors.values()) {
 				View colorItem = createColorItemView(color, colorItems);
 				colorItems.addView(colorItem, new FlowLayout.LayoutParams(0, 0));
-
 			}
 			updateColorSelector(changedProfile.color);
 		} else if (ICON_ITEMS.equals(preference.getKey())) {
@@ -663,12 +654,11 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			return false;
 		}
 		if (isNewProfile) {
+			changedProfile.stringKey = changedProfile.parent.getStringKey() + "_" + System.currentTimeMillis();
 			ApplicationMode.ApplicationModeBuilder builder = ApplicationMode
 					.createCustomMode(changedProfile.parent, changedProfile.stringKey, app)
 					.setIconResName(ProfileIcons.getResStringByResId(changedProfile.iconRes))
 					.setUserProfileName(changedProfile.name.trim())
-					.setRoutingProfile(changedProfile.routingProfile)
-					.setRouteService(changedProfile.routeService)
 					.setIconColor(changedProfile.color)
 					.setLocationIcon(changedProfile.locationIcon)
 					.setNavigationIcon(changedProfile.navigationIcon);
@@ -683,13 +673,10 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			mode.setParentAppMode(changedProfile.parent);
 			mode.setIconResName(ProfileIcons.getResStringByResId(changedProfile.iconRes));
 			mode.setUserProfileName(changedProfile.name.trim());
-			mode.setRoutingProfile(changedProfile.routingProfile);
-			mode.setRouteService(changedProfile.routeService);
 			mode.setIconColor(changedProfile.color);
 			mode.setLocationIcon(changedProfile.locationIcon);
 			mode.setNavigationIcon(changedProfile.navigationIcon);
 		}
-
 		return true;
 	}
 
@@ -712,7 +699,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		profileNameOtfb.setError(errorMessage, true);
 	}
 
-	public boolean isProfileAppearanceChanged(final MapActivity mapActivity) {
+	public boolean isProfileAppearanceChanged() {
 		hideKeyboard();
 		if (isChanged()) {
 			AlertDialog.Builder dismissDialog = createWarningDialog(getActivity(),
@@ -782,8 +769,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		String name;
 		ProfileIconColors color;
 		int iconRes;
-		String routingProfile;
-		RouteProvider.RouteService routeService;
 		NavigationIcon navigationIcon;
 		LocationIcon locationIcon;
 
@@ -800,9 +785,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			if (parent != null ? !parent.equals(that.parent) : that.parent != null) return false;
 			if (name != null ? !name.equals(that.name) : that.name != null) return false;
 			if (color != that.color) return false;
-			if (routingProfile != null ? !routingProfile.equals(that.routingProfile) : that.routingProfile != null)
-				return false;
-			if (routeService != that.routeService) return false;
 			if (navigationIcon != that.navigationIcon) return false;
 			return locationIcon == that.locationIcon;
 		}
@@ -814,8 +796,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			result = 31 * result + (name != null ? name.hashCode() : 0);
 			result = 31 * result + (color != null ? color.hashCode() : 0);
 			result = 31 * result + iconRes;
-			result = 31 * result + (routingProfile != null ? routingProfile.hashCode() : 0);
-			result = 31 * result + (routeService != null ? routeService.hashCode() : 0);
 			result = 31 * result + (navigationIcon != null ? navigationIcon.hashCode() : 0);
 			result = 31 * result + (locationIcon != null ? locationIcon.hashCode() : 0);
 			return result;
