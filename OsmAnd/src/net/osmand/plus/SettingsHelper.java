@@ -435,16 +435,16 @@ public class SettingsHelper {
 
 	public static class ProfileSettingsItem extends OsmandSettingsItem {
 
+		private OsmandApplication app;
 		private ApplicationMode appMode;
 		private ApplicationModeBuilder builder;
 		private ApplicationModeBean modeBean;
 		private Set<String> appModeBeanPrefsIds;
-		private OsmandApplication app;
 
 		public ProfileSettingsItem(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode) {
 			super(SettingsItemType.PROFILE, app.getSettings());
-			this.appMode = appMode;
 			this.app = app;
+			this.appMode = appMode;
 			appModeBeanPrefsIds = new HashSet<>(Arrays.asList(app.getSettings().appModeBeanPrefsIds));
 		}
 
@@ -805,7 +805,7 @@ public class SettingsHelper {
 
 		private List<QuickAction> quickActions;
 		private List<QuickAction> duplicates;
-
+		private QuickActionFactory factory;
 		private OsmandApplication app;
 
 		public QuickActionSettingsItem(@NonNull OsmandApplication app,
@@ -814,12 +814,14 @@ public class SettingsHelper {
 			this.app = app;
 			this.quickActions = quickActions;
 			this.duplicates = new ArrayList<>();
+			this.factory = new QuickActionFactory();
 		}
 
 		public QuickActionSettingsItem(@NonNull OsmandApplication app,
 									   @NonNull JSONObject jsonObject) throws JSONException {
 			super(SettingsItemType.QUICK_ACTION, app.getSettings(), jsonObject);
 			this.app = app;
+			this.factory = new QuickActionFactory();
 		}
 
 		public List<QuickAction> getQuickActions() {
@@ -834,7 +836,6 @@ public class SettingsHelper {
 		}
 
 		private boolean duplicateExists(QuickAction quickAction) {
-			QuickActionFactory factory = new QuickActionFactory();
 			List<QuickAction> savedActions = factory.parseActiveActionsList(getSettings().QUICK_ACTION_LIST.get());
 			for (QuickAction action : savedActions) {
 				if (action.getName(app).equals(quickAction.getName(app))) {
@@ -847,7 +848,6 @@ public class SettingsHelper {
 		@Override
 		public void apply() {
 			if (!quickActions.isEmpty() || !duplicates.isEmpty()) {
-				QuickActionFactory factory = new QuickActionFactory();
 				List<QuickAction> savedActions = factory.parseActiveActionsList(getSettings().QUICK_ACTION_LIST.get());
 				List<QuickAction> newActions = new ArrayList<>(savedActions);
 				if (!duplicates.isEmpty()) {
@@ -874,7 +874,6 @@ public class SettingsHelper {
 		public List<QuickAction> getDuplicates() {
 			List<QuickAction> duplicates = new ArrayList<>();
 			if (!quickActions.isEmpty()) {
-				QuickActionFactory factory = new QuickActionFactory();
 				List<QuickAction> savedActions = factory.parseActiveActionsList(getSettings().QUICK_ACTION_LIST.get());
 				for (QuickAction action : quickActions) {
 					for (QuickAction savedAction : savedActions) {
@@ -1689,29 +1688,6 @@ public class SettingsHelper {
 			importSuspended = false;
 			if (item != null) {
 				acceptItem(item);
-//				if (item.exists()) {
-//					switch (item.getType()) {
-//						case PROFILE: {
-//							String title = activity.getString(R.string.overwrite_profile_q, item.getPublicName(app));
-//							dialog = showConfirmDialog(item, title, latestChanges);
-//							break;
-//						}
-//						case FILE:
-//							 overwrite now
-//							acceptItem(item);
-//							break;
-//						default:
-//							acceptItem(item);
-//							break;
-//					}
-//				} else {
-//					if (item.getType() == SettingsItemType.PROFILE && askBeforeImport) {
-//						String title = activity.getString(R.string.add_new_profile_q, item.getPublicName(app));
-//						dialog = showConfirmDialog(item, title, latestChanges);
-//					} else {
-//						acceptItem(item);
-//					}
-//				}
 			} else {
 				processNextItem();
 			}
