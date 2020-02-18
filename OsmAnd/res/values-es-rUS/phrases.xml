@@ -77,7 +77,7 @@
     <string name="poi_computer">Tienda de informática</string>
     <string name="poi_copyshop">Tienda de fotocopiado;Fotocopiadora</string>
     <string name="poi_curtain">Blanquería;Cortinas</string>
-    <string name="poi_fabric">Mercería</string>
+    <string name="poi_fabric">Tienda textil;Telas;Mercería</string>
     <string name="poi_bedding">Tienda de ropa de cama</string>
     <string name="poi_dive">Equipo de buceo</string>
     <string name="poi_doityourself">Mejoras para el hogar</string>
@@ -133,7 +133,7 @@
     <string name="poi_atv">Cuatriciclos;Concesionaria de cuatriciclos</string>
     <string name="poi_cosmetics">Cosméticos</string>
     <string name="poi_marketplace">Mercado</string>
-    <string name="poi_sewing">Costuras;Telas</string>
+    <string name="poi_sewing">Artículos de costura;Telas;Mercería</string>
     <string name="poi_police">Policía</string>
     <string name="poi_fire_station">Cuartel de bomberos</string>
     <string name="poi_emergency_phone">Teléfono de emergencia</string>
@@ -2873,7 +2873,7 @@
     <string name="poi_cuisine_pizza">Pizza</string>
     <string name="poi_cuisine_burger">Hamburguesas</string>
     <string name="poi_cuisine_coffee">Café</string>
-    <string name="poi_cuisine_sandwich">Emparedados;Sándwich</string>
+    <string name="poi_cuisine_sandwich">Sándwich</string>
     <string name="poi_cuisine_kebab">Kebab;Brochetas</string>
     <string name="poi_cuisine_chicken">Pollo</string>
     <string name="poi_cuisine_ice_cream">Helado</string>

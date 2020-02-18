@@ -1607,7 +1607,7 @@ Punktar</string>
     <string name="speech_rate">Talhraði</string>
     <string name="amenity_type_seamark">Sjómerki</string>
     <string name="animate_routing_route_not_calculated">Reikna leiðina fyrst</string>
-    <string name="local_index_tile_data_name">Tíglagögn: %1$s</string>
+    <string name="local_index_tile_data_name">Kortaflísagögn: %1$s</string>
     <string name="edit_tilesource_elliptic_tile">Sporöskjulagað Mercator</string>
     <string name="speak_traffic_warnings">Aðvaranir vegna umferðar</string>
     <string name="osb_author_or_password_not_specified">Settu OSM-notandanafn og lykilorð inn í stillingarnar</string>
@@ -2016,7 +2016,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="fonts_header">Letur fyrir kort</string>
     <string name="right_side_navigation">Ekið á hægri akrein</string>
     <string name="driving_region_automatic">Sjálfvirkt</string>
-    <string name="routing_attr_height_obstacles_description">Nota í yfirborðshæðargögnum (í gegnum SRTM, ASTER og EU-DEM).</string>
+    <string name="routing_attr_height_obstacles_description">Nota yfirborðshæðargögn (í gegnum SRTM, ASTER og EU-DEM).</string>
     <string name="auto_split_recording_title">Skipta skráningu sjálfvirkt eftir bil</string>
     <string name="incremental_search_city">Stigvaxandi leit í borg</string>
     <string name="rendering_attr_showRoadMaps_description">Veldu þegar birta á kort einungis með vegum:</string>
@@ -3500,6 +3500,20 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Sólsetur kl. %1$s</string>
     <string name="sunrise_at">Sólarupprás kl. %1$s</string>
-    <string name="reset_to_default_category_button_promo">Endurstilling á sjálfgefið mun eyða öllum sérsniðnum flokkum og setja röðun í upprunalega stöðu eftir uppsetningu.</string>
+    <string name="reset_to_default_category_button_promo">Endurstilling á sjálfgefið mun setja röðun í upprunalega stöðu eftir uppsetningu.</string>
     <string name="accessibility_mode_disabled">Altækur aðgangur er óvirkur á kerfinu þínu.</string>
+    <string name="use_system_screen_timeout">Nota tímamörk kerfis fyrir skjá</string>
+    <string name="clear_recorded_data">Hreinsa upptökugögn</string>
+    <string name="copy_coordinates">Afrita staðsetningarhnit</string>
+    <string name="routing_profile_direct_to">Beint-á-punkt</string>
+    <string name="sort_by_category">Raða eftir flokki</string>
+    <string name="please_provide_profile_name_message">Gefðu þessu sniði eitthvað nafn</string>
+    <string name="open_settings">Opna stillingar</string>
+    <string name="plugin_disabled">Viðbótin er óvirk</string>
+    <string name="shared_string_menu">Valmynd</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_routing">Leiðagerð</string>
+    <string name="shared_string_custom_rendering_style">Sérsniðinn myndgerðaðrstíll</string>
+    <string name="shared_string_include_data">Taka með viðbótargögn</string>
+    <string name="index_name_antarctica">Suðurskautslandið</string>
 </resources>

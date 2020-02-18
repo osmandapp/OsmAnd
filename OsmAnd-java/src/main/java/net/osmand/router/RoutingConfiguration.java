@@ -57,6 +57,14 @@ public class RoutingConfiguration {
 		private Map<String, String> attributes = new LinkedHashMap<>();
 		private HashMap<Long, Location> impassableRoadLocations = new HashMap<>();
 
+		public Builder() {
+
+		}
+
+		public Builder(Map<String, String> defaultAttributes) {
+			attributes.putAll(defaultAttributes);
+		}
+
 		// Example
 //		{
 //			impassableRoadLocations.add(23000069L);
@@ -114,8 +122,11 @@ public class RoutingConfiguration {
 			}
 			return false;
 		}
-		
-		
+
+		public Map<String, String> getAttributes() {
+			return attributes;
+		}
+
 		private String getAttribute(VehicleRouter router, String propertyName) {
 			if (router.containsAttribute(propertyName)) {
 				return router.getAttribute(propertyName);

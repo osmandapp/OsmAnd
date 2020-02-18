@@ -452,7 +452,7 @@ public class TransportRoutingHelper {
 		}
 
 		private List<TransportRouteResult> calculateRouteImpl(TransportRouteCalculationParams params) throws IOException, InterruptedException {
-			RoutingConfiguration.Builder config = params.ctx.getRoutingConfig();
+			RoutingConfiguration.Builder config = params.ctx.getRoutingConfigForMode(params.mode);
 			BinaryMapIndexReader[] files = params.ctx.getResourceManager().getTransportRoutingMapFiles();
 			params.params.clear();
 			OsmandSettings settings = params.ctx.getSettings();

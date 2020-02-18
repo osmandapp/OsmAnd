@@ -30,7 +30,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
@@ -603,10 +602,10 @@ public class RouteProvider {
 		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd();
 		OsmandSettings settings = params.ctx.getSettings();
 		router.setUseFastRecalculation(settings.USE_FAST_RECALCULATION.get());
-		
-		RoutingConfiguration.Builder config = params.ctx.getRoutingConfig();
-		GeneralRouter generalRouter = SettingsNavigationActivity.getRouter(config, params.mode);
-		if(generalRouter == null) {
+
+		RoutingConfiguration.Builder config = params.ctx.getRoutingConfigForMode(params.mode);
+		GeneralRouter generalRouter = params.ctx.getRouter(config, params.mode);
+		if (generalRouter == null) {
 			return applicationModeNotSupported(params);
 		}
 		RoutingConfiguration cf = initOsmAndRoutingConfig(config, params, settings, generalRouter);
@@ -1241,7 +1240,6 @@ public class RouteProvider {
 	}
 
 	private RouteCalculationResult findStraightRoute(RouteCalculationParams params) {
-		Location currentLocation = params.currentLocation;
 		LinkedList<Location> points = new LinkedList<>();
 		List<Location> segments = new ArrayList<>();
 		points.add(params.start);

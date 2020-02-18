@@ -430,7 +430,13 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 
 		boolean osmandRouter = applicationMode.getRouteService() == RouteProvider.RouteService.OSMAND;
 		if (!osmandRouter) {
-			routingParameters = AppModeOptions.OTHER.routingParameters;
+			if (applicationMode.getRouteService() == RouteProvider.RouteService.STRAIGHT) {
+				routingParameters = AppModeOptions.STRAIGHT.routingParameters;
+			} else if (applicationMode.getRouteService() == RouteProvider.RouteService.DIRECT_TO) {
+				routingParameters = AppModeOptions.DIRECT_TO.routingParameters;
+			} else {
+				routingParameters = AppModeOptions.OTHER.routingParameters;
+			}
 		} else if (applicationMode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 			routingParameters = AppModeOptions.CAR.routingParameters;
 		} else if (applicationMode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
@@ -576,6 +582,22 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				AvoidRoadsRoutingParameter.KEY,
 				ShowAlongTheRouteItem.KEY,
 				TimeConditionalRoutingItem.KEY,
+				DividerItem.KEY,
+				GpxLocalRoutingParameter.KEY,
+				OtherSettingsRoutingParameter.KEY,
+				RouteSimulationItem.KEY),
+
+		STRAIGHT(MuteSoundRoutingParameter.KEY,
+				DividerItem.KEY,
+				ShowAlongTheRouteItem.KEY,
+				DividerItem.KEY,
+				GpxLocalRoutingParameter.KEY,
+				OtherSettingsRoutingParameter.KEY,
+				RouteSimulationItem.KEY),
+
+		DIRECT_TO(MuteSoundRoutingParameter.KEY,
+				DividerItem.KEY,
+				ShowAlongTheRouteItem.KEY,
 				DividerItem.KEY,
 				GpxLocalRoutingParameter.KEY,
 				OtherSettingsRoutingParameter.KEY,

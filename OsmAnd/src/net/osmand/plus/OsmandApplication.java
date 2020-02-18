@@ -25,12 +25,9 @@ import android.support.v7.app.AlertDialog;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
-import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
@@ -59,7 +56,6 @@ import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
@@ -71,6 +67,7 @@ import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
+import net.osmand.router.GeneralRouter;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.search.SearchUICore;
@@ -83,11 +80,16 @@ import java.io.FileWriter;
 import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
+
+import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
 
 public class OsmandApplication extends MultiDexApplication {
 	public static final String EXCEPTION_PATH = "exception.log";
@@ -143,7 +145,8 @@ public class OsmandApplication extends MultiDexApplication {
 
 	private Resources localizedResources;
 
-	private RoutingConfiguration.Builder routingConfig;
+	private Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
+
 	private Locale preferredLocale = null;
 	private Locale defaultLocale;
 	private File externalStorageDirectory;
@@ -810,18 +813,48 @@ public class OsmandApplication extends MultiDexApplication {
 		return localizedResources != null ? localizedResources : super.getResources();
 	}
 
-	public synchronized RoutingConfiguration.Builder getRoutingConfig() {
-		RoutingConfiguration.Builder rc;
-		if(routingConfig == null) {
-			rc = new RoutingConfiguration.Builder();
-		} else {
-			rc = routingConfig;
-		}
-		return rc;
+	public List<RoutingConfiguration.Builder> getAllRoutingConfigs() {
+		List<RoutingConfiguration.Builder> builders = new ArrayList<>(customRoutingConfigs.values());
+		builders.add(0, getDefaultRoutingConfig());
+		return builders;
 	}
 
-	public void updateRoutingConfig(Builder update) {
-			routingConfig = update;
+	public synchronized RoutingConfiguration.Builder getDefaultRoutingConfig() {
+		return RoutingConfiguration.getDefault();
+	}
+
+	public Map<String, RoutingConfiguration.Builder> getCustomRoutingConfigs() {
+		return customRoutingConfigs;
+	}
+
+	public RoutingConfiguration.Builder getCustomRoutingConfig(String key) {
+		return customRoutingConfigs.get(key);
+	}
+
+	public RoutingConfiguration.Builder getRoutingConfigForMode(ApplicationMode mode) {
+		RoutingConfiguration.Builder builder = null;
+		String routingProfileKey = mode.getRoutingProfile();
+		if (!Algorithms.isEmpty(routingProfileKey)) {
+			int index = routingProfileKey.indexOf(ROUTING_FILE_EXT);
+			if (index != -1) {
+				String configKey = routingProfileKey.substring(0, index + ROUTING_FILE_EXT.length());
+				builder = customRoutingConfigs.get(configKey);
+			}
+		}
+		return builder != null ? builder : getDefaultRoutingConfig();
+	}
+
+	public GeneralRouter getRouter(ApplicationMode mode) {
+		Builder builder = getRoutingConfigForMode(mode);
+		return getRouter(builder, mode);
+	}
+
+	public GeneralRouter getRouter(Builder builder, ApplicationMode am) {
+		GeneralRouter router = builder.getRouter(am.getRoutingProfile());
+		if (router == null && am.getParent() != null) {
+			router = builder.getRouter(am.getParent().getStringKey());
+		}
+		return router;
 	}
 
 	public OsmandRegions getRegions() {

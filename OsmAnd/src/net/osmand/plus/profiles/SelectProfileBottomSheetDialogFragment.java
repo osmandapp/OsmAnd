@@ -30,6 +30,7 @@ import net.osmand.plus.settings.MainSettingsFragment;
 import net.osmand.plus.settings.NavigationFragment;
 import net.osmand.plus.settings.ProfileAppearanceFragment;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
+import net.osmand.router.RoutingConfiguration;
 
 import org.apache.commons.logging.Log;
 
@@ -160,9 +161,9 @@ public class SelectProfileBottomSheetDialogFragment extends BasePreferenceBottom
 						return;
 					}
 					mapActivity.getImportHelper().chooseFileToImport(ROUTING, false,
-							new CallbackWithObject<String>() {
+							new CallbackWithObject<RoutingConfiguration.Builder>() {
 								@Override
-								public boolean processResult(String profileKey) {
+								public boolean processResult(RoutingConfiguration.Builder builder) {
 									refreshView();
 									return false;
 								}

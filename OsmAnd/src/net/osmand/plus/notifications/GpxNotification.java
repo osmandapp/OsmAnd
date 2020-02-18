@@ -104,6 +104,11 @@ public class GpxNotification extends OsmandNotification {
 	}
 
 	@Override
+	public boolean isUpdateDisabled() {
+		return app.getSettings().MAP_ACTIVITY_ENABLED.get() && !app.getSettings().SHOW_TRIP_REC_NOTIFICATION.get();
+	}
+
+	@Override
 	public void onNotificationDismissed() {
 		if (!wasNoDataDismissed) {
 			wasNoDataDismissed = lastBuiltNoData;
@@ -122,7 +127,7 @@ public class GpxNotification extends OsmandNotification {
 		boolean isGpxRecording = app.getSavingTrackHelper().getIsRecording();
 		float recordedDistance = app.getSavingTrackHelper().getDistance();
 		ongoing = true;
-        lastBuiltNoData = false;
+		lastBuiltNoData = false;
 		if (isGpxRecording) {
 			color = app.getResources().getColor(R.color.osmand_orange);
 			notificationTitle = app.getString(R.string.shared_string_trip) + " • "

@@ -876,11 +876,11 @@
     <string name="index_name_gb">أوروبا - بريطانيا العظمى</string>
     <string name="route_preferences">تفضيلات الطريق</string>
     <string name="route_info">معلومات الطريق</string>
-    <string name="routing_attr_avoid_toll_name">تجنب الطرق ذات الرسوم</string>
+    <string name="routing_attr_avoid_toll_name">لا توجد طرق رسوم</string>
     <string name="routing_attr_avoid_toll_description">تجنب الطرق برسوم</string>
     <string name="routing_attr_avoid_unpaved_name">تجنب الطرق غير المعبّدة</string>
     <string name="routing_attr_avoid_unpaved_description">اجتناب الطرق الترابية والوعرة</string>
-    <string name="routing_attr_avoid_ferries_name">تجنب العبّارات</string>
+    <string name="routing_attr_avoid_ferries_name">لا العبارات</string>
     <string name="routing_attr_weight_name">وزن المركبة</string>
     <string name="android_19_location_disabled">منذ نسخة أندرويد كتكات 4.4، لا يمكنك تحميل أو تحديث الخرائط في مكان التخزين السابق (%s). هل تريد التغيير إلى مكان مسموح ونسخ كل الملفات إليه ؟ ملاحظات: 1-الملفات القديمة ستبقى كما هي (يمكن حذفها يدويا). 2-لايمكن مشاركة الملفات بين OsmAnd و +OsmAnd في مكان التخزين الجديد.</string>
     <string name="copying_osmand_one_file_descr">ينسخ الملف (%s) إلى مساره الجديد…</string>
@@ -1240,8 +1240,8 @@
     <string name="route_descr_select_destination">حدد الوجهة</string>
     <string name="routing_attr_prefer_motorway_name">تفضيل طرق الدراجات النارية</string>
     <string name="routing_attr_prefer_motorway_description">تفضيل طرق الدراجات النارية</string>
-    <string name="routing_attr_avoid_ferries_description">تجنب العبّارات المائية</string>
-    <string name="routing_attr_avoid_motorway_name">تجنب الطرق السريعة</string>
+    <string name="routing_attr_avoid_ferries_description">تجنب العبّارات</string>
+    <string name="routing_attr_avoid_motorway_name">لا طرق السريعة</string>
     <string name="routing_attr_avoid_motorway_description">تجنب طرق الدراجات النارية</string>
     <string name="routing_attr_weight_description">تحديد الوزن الأعلى المسموح به على الطرق.</string>
     <string name="copying_osmand_files_descr">نسخ ملفات OsmAnd إلى المسار الجديد (%s)…</string>
@@ -1852,7 +1852,7 @@
     <string name="nm">ميل بحري</string>
     <string name="nm_h">ميل بحري/س</string>
     <string name="simulate_your_location_descr">إجراء محاكاة تخيلية باستخدام توجيه نشط أو مسار مسجل.</string>
-    <string name="routing_attr_avoid_shuttle_train_name">تجنب قطار المدينة</string>
+    <string name="routing_attr_avoid_shuttle_train_name">لا خدمة نقل القطار</string>
     <string name="routing_attr_avoid_shuttle_train_description">يتجنب استخدام القطارات المكوكية</string>
     <string name="traffic_warning_hazard">خطر</string>
     <string name="rendering_value_boldOutline_name">مخطط واضح</string>
@@ -1877,9 +1877,9 @@
     <string name="map_preferred_locale_descr">اللغة المفضلة للمسميات على الخريطة (إذا لم تكن متوفرة ستتحول إلى اللغة الإنجليزية أو الأسماء المحلية).</string>
     <string name="rendering_attr_hideWoodScrubs_name">خشب وشجيرات</string>
     <string name="lang_hu_formal">الهنغارية (الرسمية)</string>
-    <string name="routing_attr_avoid_stairs_name">تجنب الأدراج</string>
-    <string name="routing_attr_avoid_stairs_description">تجنب الأدراج</string>
-    <string name="routing_attr_avoid_borders_description">تجنب عبور الحدود إلى بلد آخر</string>
+    <string name="routing_attr_avoid_stairs_name">لا سلالم</string>
+    <string name="routing_attr_avoid_stairs_description">تجنب السلالم</string>
+    <string name="routing_attr_avoid_borders_description">تجنب عبور الحدود الوطنية</string>
     <string name="routing_attr_height_description">تحديد الارتفاع الأعلى المسموح به على الطرق.</string>
     <string name="disable_complex_routing_descr">تعطيل 2-مرحلة التوجيه للملاحة بالسيارة.</string>
     <string name="rendering_attr_alpineHiking_name">نادي جبال الألب السويسرية</string>
@@ -2157,7 +2157,7 @@
     <string name="navigate_point_olc_info_invalid">خطأ في OLC
 \n</string>
     <string name="quick_action_btn_tutorial_descr">قم بالضغط على الزر لفترة أطوَل ثم اسحبه لتغيير مكانه على الشاشة.</string>
-    <string name="rendering_attr_depthContours_name">محيطات الأعماق البحرية</string>
+    <string name="rendering_attr_depthContours_name">معالم العمق البحري</string>
     <string name="auto_split_recording_title">تقسيم المسارات آلياً إلى أجزاء بعد كل فراغ</string>
     <string name="navigate_point_olc_info_short">تقصير رمز التموضع المفتوح يُرجى تقديم رمزٍ كامل</string>
     <string name="quick_action_duplicate">اسم الإجراء السريع مكرر</string>
@@ -2545,7 +2545,7 @@
     <string name="go_to_next_field">الانتقال إلى الحقل التالي</string>
     <string name="rename_marker">تعديل تسمية العلامة</string>
     <string name="total_donations">مجموع التبرعات</string>
-    <string name="rendering_attr_hidePOILabels_name">POI تسميات</string>
+    <string name="rendering_attr_hidePOILabels_name">تسميات POI</string>
     <string name="shared_string_without_name">بدون اسم</string>
     <string name="parked_at">توقفت عند</string>
     <string name="add_favourites_group_to_markers_descr">حدد مفضلة لإضافتها إلى العلامات.</string>
@@ -3438,4 +3438,10 @@
     <string name="shared_string_include_data">تضمين بيانات إضافية</string>
     <string name="export_profile_dialog_description">يمكنك تحديد بيانات إضافية للتصدير مع الملف الشخصي.</string>
     <string name="index_name_antarctica">القارة القطبية الجنوبية</string>
+    <string name="plugin_disabled_descr">هذا البرنامج المساعد هو تطبيق منفصل ، بإمكانك إزالته بشكل منفصل إذا لم تعد تخطط لاستخدامه.
+\n
+\nسيبقى المكوّن الإضافي على الجهاز بعد إزالة OsmAnd.</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_custom_rendering_style">أسلوب تقديم مخصص</string>
+    <string name="import_profile_dialog_description">يحتوي ملف التعريف المستوردة على بيانات إضافية. انقر فوق \"استيراد\" لاستيراد بيانات ملف التعريف فقط أو حدد بيانات إضافية لاستيرادها.</string>
 </resources>
