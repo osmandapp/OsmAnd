@@ -80,7 +80,7 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings nightMode) {
-		if(box.getZoom() < 3) {
+		if (box.getZoom() < 3) {
 			return;
 		}
 		// draw
@@ -88,7 +88,7 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 		Location lastKnownLocation = locationProvider.getLastStaleKnownLocation();
 		updateIcons(view.getSettings().getApplicationMode(), nm,
 				view.getApplication().getLocationProvider().getLastKnownLocation() == null);
-		if(lastKnownLocation == null || view == null){
+		if (lastKnownLocation == null || view == null) {
 			return;
 		}
 		int locationX;
@@ -96,8 +96,8 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 		if (mapViewTrackingUtilities.isMapLinkedToLocation()
 				&& !MapViewTrackingUtilities.isSmallSpeedForAnimation(lastKnownLocation)
 				&& !mapViewTrackingUtilities.isMovingToMyLocation()) {
-			locationX = box.getPixXFromLonNoRot(box.getLongitude());
-			locationY = box.getPixYFromLatNoRot(box.getLatitude());
+			locationX = box.getCenterPixelX();
+			locationY = box.getCenterPixelY();
 		} else {
 			locationX = box.getPixXFromLonNoRot(lastKnownLocation.getLongitude());
 			locationY = box.getPixYFromLatNoRot(lastKnownLocation.getLatitude());
@@ -105,7 +105,6 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 
 		final double dist = box.getDistance(0, box.getPixHeight() / 2, box.getPixWidth(), box.getPixHeight() / 2);
 		int radius = (int) (((double) box.getPixWidth()) / dist * lastKnownLocation.getAccuracy());
-
 		if (radius > RADIUS * box.getDensity()) {
 			int allowedRad = Math.min(box.getPixWidth() / 2, box.getPixHeight() / 2);
 			canvas.drawCircle(locationX, locationY, Math.min(radius, allowedRad), area);
