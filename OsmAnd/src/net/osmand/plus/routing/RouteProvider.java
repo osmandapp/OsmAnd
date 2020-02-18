@@ -79,7 +79,7 @@ public class RouteProvider {
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(RouteProvider.class);
 	private static final String OSMAND_ROUTER = "OsmAndRouter";
 	private static final int MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT = 60;
-	private static final int MIN_STRAIGHT_DIST = 50000;
+	private static final int MIN_STRAIGHT_DIST = 150;
 
 	public enum RouteService {
 		OSMAND("OsmAnd (offline)"),
@@ -1247,23 +1247,31 @@ public class RouteProvider {
 		points.add(params.start);
 		if(params.intermediates != null) {
 			for (LatLon l : params.intermediates) {
-				points.add(new Location("", l.getLatitude(), l.getLongitude()));
+				points.add(new Location("pnt", l.getLatitude(), l.getLongitude()));
 			}
 		}
 		points.add(new Location("", params.end.getLatitude(), params.end.getLongitude()));
 		Location lastAdded = points.poll();
 		segments.add(lastAdded);
+		float speed = params.mode.getDefaultSpeed();
+		List<RouteDirectionInfo> computeDirections = new ArrayList<RouteDirectionInfo>();
 		while(!points.isEmpty()) {
 			Location pl = points.peek();
 			if (lastAdded.distanceTo(pl) < MIN_STRAIGHT_DIST) {
 				lastAdded = points.poll();
+				if(lastAdded.getProvider().equals("pnt")) {
+					RouteDirectionInfo previousInfo = new RouteDirectionInfo(speed, TurnType.straight());
+					previousInfo.routePointOffset = segments.size();
+					previousInfo.setDescriptionRoute(params.ctx.getString(R.string.route_head));
+					computeDirections.add(previousInfo);
+				}
 				segments.add(lastAdded);
 			} else {
 				Location mp = MapUtils.calculateMidPoint(lastAdded, pl);
 				points.add(0, mp);
 			}
 		}
-		return new RouteCalculationResult(segments, null, params, null, false);
+		return new RouteCalculationResult(segments, computeDirections, params, null, false);
 	}
 
 
