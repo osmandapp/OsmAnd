@@ -319,7 +319,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 
 	private void drawProjectionPoint(Canvas canvas, double[] projectionXY) {
 		if (projectionIcon == null) {
-			projectionIcon = (LayerDrawable) view.getResources().getDrawable(helper.getSettings().getApplicationMode().getLocationIcon().getIconId());
+			projectionIcon = (LayerDrawable) view.getResources().getDrawable(helper.getSettings().getApplicationMode().getLocationIcon().DEFAULT.getIconId());
 		}
 		int locationX = (int) projectionXY[0];
 		int locationY = (int) projectionXY[1];

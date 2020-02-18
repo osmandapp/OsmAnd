@@ -1,14 +1,23 @@
 package net.osmand.plus.settings;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.PreferenceViewHolder;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
+import net.osmand.GPXUtilities;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.ApplicationMode;
@@ -17,6 +26,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.BooleanPreference;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.routing.RouteProvider;
@@ -83,7 +93,6 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		routeParametersInfo.setTitle(getString(R.string.route_parameters_info, getSelectedAppMode().toHumanString()));
 
 		setupRoutingPrefs();
-		setupTimeConditionalRoutingPref();
 	}
 
 	@Override
@@ -131,21 +140,19 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		}
 		PreferenceScreen screen = getPreferenceScreen();
 
+		ApplicationMode am = getSelectedAppMode();
+
 		SwitchPreferenceEx fastRoute = createSwitchPreferenceEx(app.getSettings().FAST_ROUTE_MODE.getId(), R.string.fast_route_mode, R.layout.preference_with_descr_dialog_and_switch);
 		fastRoute.setIcon(getRoutingPrefIcon(app.getSettings().FAST_ROUTE_MODE.getId()));
 		fastRoute.setDescription(getString(R.string.fast_route_mode_descr));
 		fastRoute.setSummaryOn(R.string.shared_string_on);
 		fastRoute.setSummaryOff(R.string.shared_string_off);
 
-
-		ApplicationMode am = getSelectedAppMode();
 		float defaultAllowedDeviation = RoutingHelper.getDefaultAllowedDeviation(settings, am,
 				RoutingHelper.getPosTolerance(0));
-		if (am.getRouteService() != RouteProvider.RouteService.OSMAND) {
-			screen.addPreference(fastRoute);
-			setupSelectRouteRecalcDistance(screen, defaultAllowedDeviation);
-		} else {
-			setupSelectRouteRecalcDistance(screen, defaultAllowedDeviation);
+		setupSelectRouteRecalcDistance(screen, defaultAllowedDeviation);
+
+		if (am.getRouteService() == RouteProvider.RouteService.OSMAND){
 			GeneralRouter router = app.getRouter(am);
 			clearParameters();
 			if (router != null) {
@@ -231,7 +238,85 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 					}
 				}
 			}
+			setupTimeConditionalRoutingPref();
+		} else if (am.getRouteService() == RouteProvider.RouteService.BROUTER) {
+			screen.addPreference(fastRoute);
+			setupTimeConditionalRoutingPref();
+		} else if (am.getRouteService() == RouteProvider.RouteService.STRAIGHT) {
+			Preference straightAngle = new Preference(app.getApplicationContext());
+			straightAngle.setPersistent(false);
+			straightAngle.setKey(settings.ROUTE_STRAIGHT_ANGLE.getId());
+			straightAngle.setTitle(getString(R.string.recalc_angle_dialog_title));
+			straightAngle.setSummary(String.format(getString(R.string.shared_string_angle_param), (int) am.getStrAngle()));
+			straightAngle.setLayoutResource(R.layout.preference_with_descr);
+			straightAngle.setIcon(getRoutingPrefIcon("routing_recalc_distance")); //TODO change for appropriate icon when available
+			getPreferenceScreen().addPreference(straightAngle);
 		}
+	}
+
+	@Override
+	public boolean onPreferenceClick(Preference preference) {
+		if (preference.getKey().equals(settings.ROUTE_STRAIGHT_ANGLE.getId())) {
+			showSeekbarSettingsDialog(getActivity(), getSelectedAppMode());
+		}
+		return super.onPreferenceClick(preference);
+	}
+
+	private void showSeekbarSettingsDialog(Activity activity, final ApplicationMode mode) {
+		if (activity == null || mode == null) {
+			return;
+		}
+		final OsmandApplication app = (OsmandApplication) activity.getApplication();
+		final float[] angleValue = new float[] {mode.getStrAngle()};
+		boolean nightMode = !app.getSettings().isLightContentForMode(mode);
+		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
+		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
+		View seekbarView = LayoutInflater.from(themedContext).inflate(R.layout.recalculation_angle_dialog, null, false);
+		builder.setView(seekbarView);
+		builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				mode.setStrAngle(angleValue[0]);
+				updateAllSettings();
+				RoutingHelper routingHelper = app.getRoutingHelper();
+				if (mode.equals(routingHelper.getAppMode()) && (routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated())) {
+					routingHelper.recalculateRouteDueToSettingsChange();
+				}
+			}
+		});
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+
+		int selectedModeColor = ContextCompat.getColor(app, mode.getIconColorInfo().getColor(nightMode));
+		setupAngleSlider(angleValue, seekbarView, nightMode, selectedModeColor);
+		builder.show();
+	}
+
+	private static void setupAngleSlider(final float[] angleValue,
+	                                     View seekbarView,
+	                                     final boolean nightMode,
+	                                     final int activeColor) {
+
+		final SeekBar angleBar = seekbarView.findViewById(R.id.angle_seekbar);
+		final TextView angleTv = seekbarView.findViewById(R.id.angle_text);
+
+		angleTv.setText(String.valueOf(angleValue[0]));
+		angleBar.setProgress((int) angleValue[0]);
+		angleBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+				int value = progress - (progress % 5);
+				angleValue[0] = value;
+				angleTv.setText(String.valueOf(value));
+			}
+
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {}
+
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {}
+		});
+		UiUtilities.setupSeekBar(angleBar, activeColor, nightMode);
 	}
 
 	private void setupSelectRouteRecalcDistance(PreferenceScreen screen, float defaultAllowedDeviation) {

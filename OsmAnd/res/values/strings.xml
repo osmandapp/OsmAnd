@@ -11,6 +11,10 @@
 	Thx - Hardy
 
 -->
+    <string name="shared_string_angle_param">Angle: %s°</string>
+    <string name="shared_string_angle">Angle</string>
+    <string name="recalc_angle_dialog_descr">Extra straight segment between my location and calculated route will be displayed until the route is recalculated</string>
+    <string name="recalc_angle_dialog_title">Minimum angle between my location and route</string>
     <string name="navigation_notification_desc">Show system notification while navigation with navigation instructions.</string>
     <string name="navigation_notification">Navigation notification</string>
     <string name="shared_string_app_default_w_val">App Default (%s)</string>
