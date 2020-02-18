@@ -204,7 +204,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		super.onPause();
 		updateEnable = false;
 		if (operationTask != null) {
-			operationTask.cancel(true);
+			if (!(operationTask instanceof SelectGpxTask)) {
+				operationTask.cancel(true);
+			}
 		}
 		if (actionMode != null) {
 			actionMode.finish();
@@ -615,6 +617,17 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			private void runSelection(boolean showOnMap) {
 				operationTask = new SelectGpxTask(showOnMap);
 				originalSelectedItems.addAll(selectedItems);
+				for (GpxInfo gpxInfo : originalSelectedItems) {
+					if (!gpxInfo.currentlyRecordingTrack) {
+						final boolean visible = selectedItems.contains(gpxInfo);
+						SelectedGpxFile sf = selectedGpxHelper.getSelectedFileByName(gpxInfo.fileName);
+						if (sf == null) {
+							sf = new SelectedGpxFile();
+						}
+						sf.setLoadedName(gpxInfo.fileName);
+						selectedGpxHelper.addRemoveSelected(visible, sf);
+					}
+				}
 				operationTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, originalSelectedItems.toArray(new GpxInfo[originalSelectedItems.size()]));
 			}
 
@@ -678,7 +691,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 				builder.setMessage(getString(R.string.local_index_action_do, actionButton.toLowerCase(),
-						selectedItems.size()));
+						String.valueOf(selectedItems.size())));
 				builder.setPositiveButton(actionButton, listener);
 				builder.setNegativeButton(R.string.shared_string_cancel, null);
 				builder.show();
@@ -1547,12 +1560,16 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 		@Override
 		protected void onPreExecute() {
-			getActivity().setProgressBarIndeterminateVisibility(true);
+			if(getActivity()!=null){
+				((FavoritesActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(true);
+			}
 		}
 
 		@Override
 		protected void onPostExecute(String result) {
-			getActivity().setProgressBarIndeterminateVisibility(false);
+			if(getActivity()!=null) {
+				((FavoritesActivity)getActivity()).setSupportProgressBarIndeterminateVisibility(false);
+			}
 			Toast.makeText(getActivity(), result, Toast.LENGTH_LONG).show();
 		}
 	}
@@ -1593,12 +1610,16 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 		@Override
 		protected void onPreExecute() {
-			getActivity().setProgressBarIndeterminateVisibility(true);
+			if (getActivity() != null) {
+				((FavoritesActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(true);
+			}
 		}
 
 		@Override
 		protected void onPostExecute(String result) {
-			getActivity().setProgressBarIndeterminateVisibility(false);
+			if (getActivity() != null) {
+				((FavoritesActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(false);
+			}
 			allGpxAdapter.refreshSelected();
 			allGpxAdapter.notifyDataSetChanged();
 			if (showOnMap && toShow != null) {
@@ -1863,7 +1884,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		SelectedGpxFile sgpx = getSelectedGpxFile(gpxInfo, app);
 		GPXTrackAnalysis analysis = null;
 		if (sgpx != null) {
-			analysis = sgpx.getTrackAnalysis(app);
+			if (sgpx.getLoadedName().isEmpty()) {
+				analysis = sgpx.getTrackAnalysis(app);
+			}
 		} else if (gpxInfo.currentlyRecordingTrack) {
 			analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis(app);
 		} else if (gpxInfo.file != null) {
