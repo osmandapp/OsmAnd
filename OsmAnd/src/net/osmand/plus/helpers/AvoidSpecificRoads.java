@@ -66,12 +66,17 @@ public class AvoidSpecificRoads {
 	public void initRouteObjects(boolean force) {
 		for (Map.Entry<LatLon, AvoidRoadInfo> entry : impassableRoads.entrySet()) {
 			AvoidRoadInfo roadInfo = entry.getValue();
+			if (roadInfo.id != 0) {
+				for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {
+					if (force) {
+						builder.removeImpassableRoad(roadInfo.id);
+					} else {
+						builder.addImpassableRoad(roadInfo.id);
+					}
+				}
+			}
 			if (force || roadInfo.id == 0) {
 				addImpassableRoad(null, entry.getKey(), false, true, roadInfo.appModeKey);
-			} else {
-				for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {
-					builder.addImpassableRoad(roadInfo.id);
-				}
 			}
 		}
 	}
