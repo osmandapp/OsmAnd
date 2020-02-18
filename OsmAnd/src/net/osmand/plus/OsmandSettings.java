@@ -1465,7 +1465,7 @@ public class OsmandSettings {
 
 		@Override
 		public SpeedConstants getProfileDefaultValue(ApplicationMode mode) {
-			MetricsConstants mc = METRIC_SYSTEM.get();
+			MetricsConstants mc = METRIC_SYSTEM.getModeValue(mode);
 			if (mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
 				if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
 					return SpeedConstants.MINUTES_PER_KILOMETER;
@@ -1606,8 +1606,8 @@ public class OsmandSettings {
 		new BooleanAccessibilityPreference("disable_offroute_recalc", false).makeProfile();
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> DISABLE_WRONG_DIRECTION_RECALC =
-		new BooleanAccessibilityPreference("disable_wrong_direction_recalc", false).makeProfile();
+//	public final OsmandPreference<Boolean> DISABLE_WRONG_DIRECTION_RECALC =
+//		new BooleanAccessibilityPreference("disable_wrong_direction_recalc", false).makeProfile();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> DIRECTION_AUDIO_FEEDBACK =
@@ -1972,6 +1972,8 @@ public class OsmandSettings {
 	{
 		SHOW_ZOOM_BUTTONS_NAVIGATION.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
 	}
+
+	public final CommonPreference<Boolean> SHOW_NAVIGATION_NOTIFICATION = new BooleanPreference("show_navigation_notification", true).makeProfile();
 
 	// Json
 	public final OsmandPreference<String> SELECTED_GPX = new StringPreference("selected_gpx", "").makeGlobal();
@@ -3281,6 +3283,9 @@ public class OsmandSettings {
 		}
 		return customBooleanRoutingProps.get(attrName);
 	}
+
+	public final CommonPreference<Float> ROUTE_RECALCULATION_DISTANCE = new FloatPreference("routing_recalc_distance", 0.f).makeProfile();
+	public final CommonPreference<Float> ROUTE_STRAIGHT_ANGLE = new FloatPreference("routing_straight_angle", 30.f).makeProfile();
 
 	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_ROUTING = new BooleanPreference("enable_osmc_routing", true).makeGlobal();
 

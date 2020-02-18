@@ -178,6 +178,9 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			createToolbar(inflater, view);
 			setDivider(null);
 			view.setBackgroundColor(ContextCompat.getColor(app, getBackgroundColorRes()));
+			if (Build.VERSION.SDK_INT >= 21) {
+				AndroidUtils.addStatusBarPadding21v(app, view);
+			}
 		}
 		return view;
 	}
@@ -250,9 +253,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 						activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
 					}
 				}
-				if (activity instanceof MapActivity) {
-					((MapActivity) activity).exitFromFullScreen(getView());
-				}
 			}
 		}
 	}
@@ -270,9 +270,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			if (Build.VERSION.SDK_INT >= 21) {
 				if (!(activity instanceof MapActivity) && statusBarColor != -1) {
 					activity.getWindow().setStatusBarColor(statusBarColor);
-				}
-				if (activity instanceof MapActivity) {
-					((MapActivity) activity).enterToFullScreen();
 				}
 			}
 		}
@@ -390,14 +387,16 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			titleView.setSingleLine(false);
 		}
 		boolean enabled = preference.isEnabled();
-		if (isProfileDependent()) {
-			View cb = holder.itemView.findViewById(R.id.switchWidget);
-			if (cb == null) {
-				cb = holder.findViewById(android.R.id.checkbox);
-			}
-			if (cb instanceof CompoundButton) {
+		View cb = holder.itemView.findViewById(R.id.switchWidget);
+		if (cb == null) {
+			cb = holder.findViewById(android.R.id.checkbox);
+		}
+		if (cb instanceof CompoundButton) {
+			if (isProfileDependent()) {
 				int color = enabled ? getActiveProfileColor() : getDisabledTextColor();
 				UiUtilities.setupCompoundButton(isNightMode(), color, (CompoundButton) cb);
+			} else {
+				UiUtilities.setupCompoundButton((CompoundButton) cb, isNightMode(), UiUtilities.CompoundButtonType.GLOBAL);
 			}
 		}
 		if ((preference.isPersistent() || preference instanceof TwoStatePreference) && !(preference instanceof PreferenceCategory)) {

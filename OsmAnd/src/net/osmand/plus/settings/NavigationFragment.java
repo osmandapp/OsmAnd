@@ -1,12 +1,9 @@
 package net.osmand.plus.settings;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.SwitchPreferenceCompat;
-import android.view.LayoutInflater;
-import android.view.View;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -19,6 +16,7 @@ import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.router.GeneralRouter;
+import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -66,6 +64,7 @@ public class NavigationFragment extends BaseSettingsFragment {
 
 		setupSpeakRoutingAlarmsPref();
 		setupVehicleParametersPref();
+		setupNavigationNotificationPref();
 
 		animateMyLocation.setDescription(getString(R.string.animate_my_location_desc));
 	}
@@ -113,6 +112,7 @@ public class NavigationFragment extends BaseSettingsFragment {
 			bundle.putString(DIALOG_TYPE, TYPE_NAV_PROFILE);
 			dialog.setArguments(bundle);
 			dialog.setUsedOnMap(false);
+			dialog.setAppMode(getSelectedAppMode());
 			if (getActivity() != null) {
 				getActivity().getSupportFragmentManager().beginTransaction()
 						.add(dialog, "select_nav_type").commitAllowingStateLoss();
@@ -152,7 +152,7 @@ public class NavigationFragment extends BaseSettingsFragment {
 		RouteProvider.RouteService routeService;
 		if (profileKey.equals(RoutingProfilesResources.STRAIGHT_LINE_MODE.name())) {
 			routeService = RouteProvider.RouteService.STRAIGHT;
-		} else if (profileKey.equals(RoutingProfilesResources.DIRECT_TO_MODE.name())){
+		} else if (profileKey.equals(RoutingProfilesResources.DIRECT_TO_MODE.name())) {
 			routeService = RouteProvider.RouteService.DIRECT_TO;
 		} else if (profileKey.equals(RoutingProfilesResources.BROUTER_MODE.name())) {
 			routeService = RouteProvider.RouteService.BROUTER;
@@ -221,31 +221,42 @@ public class NavigationFragment extends BaseSettingsFragment {
 					false, null));
 		}
 
-		Map<String, GeneralRouter> inputProfiles = context.getRoutingConfig().getAllRouters();
-		for (Map.Entry<String, GeneralRouter> e : inputProfiles.entrySet()) {
-			if (!e.getKey().equals("geocoding")) {
-				int iconRes = R.drawable.ic_action_gdirections_dark;
-				String name = e.getValue().getProfileName();
-				String description = context.getString(R.string.osmand_default_routing);
-				if (!Algorithms.isEmpty(e.getValue().getFilename())) {
-					description = e.getValue().getFilename();
-				} else if (RoutingProfilesResources.isRpValue(name.toUpperCase())) {
-					iconRes = RoutingProfilesResources.valueOf(name.toUpperCase()).getIconRes();
-					name = context
-							.getString(RoutingProfilesResources.valueOf(name.toUpperCase()).getStringRes());
-				}
-				profilesObjects.put(e.getKey(), new RoutingProfileDataObject(e.getKey(), name, description,
-						iconRes, false, e.getValue().getFilename()));
-			}
+		for (RoutingConfiguration.Builder builder : context.getAllRoutingConfigs()) {
+			collectRoutingProfilesFromConfig(context, builder, profilesObjects);
 		}
 		return profilesObjects;
 	}
 
-	public static List<ProfileDataObject> getBaseProfiles(Context ctx) {
+	private static void collectRoutingProfilesFromConfig(OsmandApplication app, RoutingConfiguration.Builder builder, Map<String, RoutingProfileDataObject> profilesObjects) {
+		for (Map.Entry<String, GeneralRouter> entry : builder.getAllRouters().entrySet()) {
+			String routerKey = entry.getKey();
+			GeneralRouter router = entry.getValue();
+			if (!routerKey.equals("geocoding")) {
+				int iconRes = R.drawable.ic_action_gdirections_dark;
+				String name = router.getProfileName();
+				String description = app.getString(R.string.osmand_default_routing);
+				String fileName = router.getFilename();
+				if (!Algorithms.isEmpty(fileName)) {
+					description = fileName;
+				} else if (RoutingProfilesResources.isRpValue(name.toUpperCase())) {
+					iconRes = RoutingProfilesResources.valueOf(name.toUpperCase()).getIconRes();
+					name = app.getString(RoutingProfilesResources.valueOf(name.toUpperCase()).getStringRes());
+				}
+				profilesObjects.put(routerKey, new RoutingProfileDataObject(routerKey, name, description,
+						iconRes, false, fileName));
+			}
+		}
+	}
+
+	public static List<ProfileDataObject> getBaseProfiles(OsmandApplication app) {
 		List<ProfileDataObject> profiles = new ArrayList<>();
-		for (ApplicationMode mode : ApplicationMode.getDefaultValues()) {
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
 			if (mode != ApplicationMode.DEFAULT) {
-				profiles.add(new ProfileDataObject(mode.toHumanString(), mode.getDescription(),
+				String description = mode.getDescription();
+				if (Algorithms.isEmpty(description)) {
+					description = getAppModeDescription(app, mode);
+				}
+				profiles.add(new ProfileDataObject(mode.toHumanString(), description,
 						mode.getStringKey(), mode.getIconRes(), false, mode.getIconColorInfo()));
 			}
 		}
@@ -256,6 +267,12 @@ public class NavigationFragment extends BaseSettingsFragment {
 		Preference vehicleParameters = findPreference("vehicle_parameters");
 		int iconRes = getSelectedAppMode().getIconRes();
 		vehicleParameters.setIcon(getContentIcon(iconRes));
+	}
+
+	private void setupNavigationNotificationPref() {
+		SwitchPreferenceEx navigationNotification = (SwitchPreferenceEx) findPreference(settings.SHOW_NAVIGATION_NOTIFICATION.getId());
+		navigationNotification.setDescription(getString(R.string.navigation_notification_desc));
+		navigationNotification.setIcon(getPersistentPrefIcon(R.drawable.ic_action_notification));
 	}
 
 	private void updateMenu() {

@@ -3256,7 +3256,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="language_and_output">Lingua ed emissione</string>
     <string name="reset_to_default">Reimposta predefiniti</string>
     <string name="manage_profiles_descr">Crea, importa, modifica profili</string>
-    <string name="osmand_settings_descr">Ha effetto sull\'intera applicazione</string>
+    <string name="osmand_settings_descr">Hanno effetto sull\'intera applicazione</string>
     <string name="copy_from_other_profile">Copia da un altro profilo</string>
     <string name="turn_screen_on">Accendi lo schermo</string>
     <string name="map_during_navigation_info">Mappa durante la navigazione</string>

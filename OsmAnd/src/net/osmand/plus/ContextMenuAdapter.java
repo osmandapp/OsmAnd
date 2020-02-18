@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
@@ -201,6 +202,7 @@ public class ContextMenuAdapter {
 				convertView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), layoutId, null);
 				convertView.setTag(layoutId);
 			}
+			UiUtilities.setupLayoutDirection(convertView);
 			if (item.getMinHeight() > 0) {
 				convertView.setMinimumHeight(item.getMinHeight());
 			}
@@ -336,7 +338,12 @@ public class ContextMenuAdapter {
 					int paddingInPixels = (int) (24 * density);
 					int drawableSizeInPixels = (int) (24 * density); // 32
 					drawable.setBounds(0, 0, drawableSizeInPixels, drawableSizeInPixels);
-					tv.setCompoundDrawables(drawable, null, null, null);
+					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+						tv.setCompoundDrawablesRelative(drawable, null, null, null);
+						UiUtilities.setupLayoutDirection(tv);
+					} else {
+						tv.setCompoundDrawables(drawable, null, null, null);
+					}
 					tv.setCompoundDrawablePadding(paddingInPixels);
 				}
 			} else {

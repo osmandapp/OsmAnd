@@ -3418,8 +3418,8 @@
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="button_rate">Tasa</string>
-    <string name="file_does_not_contain_routing_rules">El archivo \'%1$s\' no contiene reglas de enrutado, por favor elige otro archivo.</string>
-    <string name="not_support_file_type_with_ext">Tipo de archivo no admitido. Tienes que seleccionar un archivo con la extensión %1$s.</string>
+    <string name="file_does_not_contain_routing_rules">No hay reglas de enrutado en \"%1$s\". Por favor, elige otro archivo.</string>
+    <string name="not_support_file_type_with_ext">Selecciona un archivo con la extensión %1$s en su lugar.</string>
     <string name="import_from_file">Importar desde archivo</string>
     <string name="import_routing_file">Importar archivo de enrutado</string>
     <string name="import_profile">Importar perfil</string>
@@ -3482,4 +3482,41 @@
 \n • Se ha añadido el mapa de la Antártida
 \n
 \n</string>
+    <string name="monitoring_min_speed_descr">Éste es un filtro de corte de baja velocidad para no registrar puntos por debajo de cierta velocidad. Esto puede hacer que las pistas grabadas sean más suaves cuando se ven en el mapa.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Recomendación: Intenta usar primero la detección de movimiento a través del filtro de desplazamiento mínimo (B), puede producir mejores resultados, y perderás menos datos. Si tus trazas siguen siendo ruidosas a bajas velocidades, prueba con valores distintos de cero aquí. Ten en cuenta que algunas mediciones pueden no informar de ningún valor de velocidad (algunos métodos basados en la red), en cuyo caso no se registraría nada.</string>
+    <string name="monitoring_min_speed_descr_remark">Observación: comprobación de velocidad &gt; 0: La mayoría de los chips de GPS reportan un valor de velocidad sólo si el algoritmo determina que estás en movimiento, y ninguno si no lo estás. Por lo tanto, usar el ajuste &gt; 0 en este filtro en cierto sentido utiliza la detección de movimiento de los chips del GPS. Pero incluso si no se filtra aquí en el momento de la grabación, seguimos utilizando esta característica en nuestro análisis de GPX para determinar la distancia corregida, es decir, el valor mostrado en ese campo es la distancia registrada miestras está en movimiento.</string>
+    <string name="monitoring_min_accuracy_descr">Esto registrará sólo los puntos medidos con una precisión mínima indicada (en metros/pies, según lo informado por Android para tu conjunto de chips). La precisión se refiere a la dispersión de las mediciones repetidas, y no está directamente relacionada con la precisión, lo que define lo cerca que están tus mediciones a tu verdadera posición.</string>
+    <string name="rearrange_categories">Reorganizar categorías</string>
+    <string name="create_custom_categories_list_promo">Puedes añadir categorías personalizadas, ocultar las categorías que no te parezcan necesarias y cambiar el criterio de ordenación de la lista. La lista puede ser importada y exportada con perfiles.</string>
+    <string name="add_new_custom_category_button_promo">Puedes añadir una nueva categoría personalizada seleccionando una o varias categorías necesarias.</string>
+    <string name="reset_to_default_category_button_promo">Restablecer valores predeterminados restablecerá el orden de clasificación al estado predeterminado tras la instalación.</string>
+    <string name="shared_string_available">Disponible</string>
+    <string name="add_custom_category">Añadir categoría personalizada</string>
+    <string name="rendering_attr_streetLightingNight_name">Mostrar sólo por la noche</string>
+    <string name="plugin_prefs_reset_successful">Todos los ajustes del complemento se restauraron al estado predeterminado.</string>
+    <string name="profile_prefs_reset_successful">Todos los ajustes del perfil se restauran al estado predeterminado.</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="sunset_at">Ocaso a las %1$s</string>
+    <string name="sunrise_at">Amanece a las %1$s</string>
+    <string name="accessibility_mode_disabled">Modo de accesibilidad desactivado en el sistema.</string>
+    <string name="use_system_screen_timeout">Usar el tiempo de espera de la pantalla del sistema</string>
+    <string name="use_system_screen_timeout_promo">Desactivado por defecto, si OsmAnd se ejecuta en primer plano, la pantalla no se apaga.
+\n
+\nSi está activada, OsmAnd utilizará los ajustes de tiempo de espera del sistema.</string>
+    <string name="clear_recorded_data">Borrar datos grabados</string>
+    <string name="copy_coordinates">Copiar coordenadas</string>
+    <string name="routing_profile_direct_to">Directo al punto</string>
+    <string name="please_provide_profile_name_message">Por favor, proporciona un nombre para el perfil</string>
+    <string name="open_settings">Abrir configuración</string>
+    <string name="plugin_disabled">Complemento desactivado</string>
+    <string name="plugin_disabled_descr">Este complemento es una aplicación separada, deberás eliminarlo por separado si ya no planeas usarlo.
+\n
+\nEl complemento permanecerá en el dispositivo después de eliminar OsmAnd.</string>
+    <string name="shared_string_menu">Menú</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_routing">Enrutado</string>
+    <string name="shared_string_custom_rendering_style">Estilo de representación personalizado</string>
+    <string name="shared_string_include_data">Incluir datos adicionales</string>
+    <string name="import_profile_dialog_description">El perfil importado contiene datos adicionales. Pulsa en Importar para importar solo datos de perfil o seleccione datos adicionales para importar.</string>
+    <string name="export_profile_dialog_description">Puedes seleccionar datos adicionales para exportar junto con el perfil.</string>
 </resources>

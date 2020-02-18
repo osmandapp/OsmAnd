@@ -11,6 +11,9 @@
 	Thx - Hardy
 
 -->
+    <string name="navigation_notification_desc">Show system notification while navigation with navigation instructions.</string>
+    <string name="navigation_notification">Navigation notification</string>
+    <string name="shared_string_app_default_w_val">App Default (%s)</string>
     <string name="shared_sting_preparing">Preparing</string>
     <string name="shared_sting_poi_types">POI types</string>
     <string name="shared_sting_nothing_selected">Nothing selected</string>
@@ -25,11 +28,14 @@
     <string name="import_duplicates_title">Some items already exist</string>
     <string name="select_data_to_import">Select the data to be imported.</string>
     <string name="please_provide_profile_name_message">Please provide a name for the profile</string>
+    <string name="no_recalculation_setting">Disable recalculation</string>
     <string name="open_settings">Open settings</string>
     <string name="plugin_disabled">Plugin disabled</string>
     <string name="plugin_disabled_descr">This plugin is a separate application, you will need to remove it separately if you no longer plan to use it.\n\nThe plugin will remain on the device after removing OsmAnd.</string>
     <string name="shared_string_menu">Menu</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="route_recalculation_dist_title">Minimal distance to recalculate route</string>
+    <string name="route_recalculation_dist_descr">The route will be recalculated if the distance to the route is longer than specified parameter</string>
     <string name="routing_profile_direct_to">Direct-to-point</string>
     <string name="clear_recorded_data">Clear recorded data</string>
     <string name="release_3_6">

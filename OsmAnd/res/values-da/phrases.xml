@@ -62,7 +62,7 @@
     <string name="poi_musical_instrument">Musikinstrumenter</string>
     <string name="poi_newsagent">Aviskiosk</string>
     <string name="poi_optician">Optiker</string>
-    <string name="poi_organic">Økologiske fødevarer</string>
+    <string name="poi_organic">Økologiske produkter</string>
     <string name="poi_outdoor">Friluftsudstyr</string>
     <string name="poi_paint">Farvehandel</string>
     <string name="poi_pet">Dyrehandel</string>
@@ -2448,7 +2448,7 @@
     <string name="poi_vacuum_cleaner_no">Støvsuger: nej</string>
     <string name="poi_amenity_vacuum_cleaner">Støvsuger</string>
     <string name="poi_sport_free_flying">Freeflying (sport)</string>
-    <string name="poi_bicycle_repair_station">Cykelreparationsstander</string>
+    <string name="poi_bicycle_repair_station">Cykelreparationsstation;Cykel-selv-reparationstation</string>
     <string name="poi_water_tap">Vandhane</string>
     <string name="poi_button_operated_yes">Knapbetjent: ja</string>
     <string name="poi_button_operated_no">Knapbetjent: nej</string>
@@ -3727,11 +3727,11 @@
     <string name="poi_disabled_designated">Udpeget</string>
     <string name="poi_cellar_entrance">Kælderindgang</string>
     <string name="poi_health_food">Helsekost</string>
-    <string name="poi_craft_builder">Bygger</string>
+    <string name="poi_craft_builder">Bygherre</string>
     <string name="poi_craft_distillery">Destilleri</string>
     <string name="poi_craft_joiner">Snedker</string>
     <string name="poi_craft_floorer">Gulvlægger</string>
-    <string name="poi_craft_bakery">Bager</string>
+    <string name="poi_craft_bakery">Bakehouse</string>
     <string name="poi_craft_cabinet_maker">Møbelsnedker</string>
     <string name="poi_charge">Gebyr</string>
     <string name="poi_pet_grooming">Kæledyrspleje</string>
@@ -3741,7 +3741,7 @@
     <string name="poi_cash_withdrawal">Hævning af kontanter</string>
     <string name="poi_cash_withdrawal_type_checkout">Hævning af kontanter: kasse</string>
     <string name="poi_cash_withdrawal_type_self_checkout">Hævning af kontanter: selvbetjening</string>
-    <string name="poi_cash_withdrawal_limit">Hævning af kontanter begrænsning</string>
+    <string name="poi_cash_withdrawal_limit">Hævning af kontanter grænse</string>
     <string name="poi_cash_withdrawal_currency">Hævning af kontanter valuta</string>
     <string name="poi_cash_withdrawal_purchase_required_yes">Hævning af kontanter: køb kræves</string>
     <string name="poi_cash_withdrawal_purchase_required_no">Hævning af kontanter: der kræves ingen køb</string>
@@ -3774,7 +3774,7 @@
     <string name="poi_community_gender_female">Fællesskabet køn: kvinde</string>
     <string name="poi_community_gender_male">Fællesskabets køn: mand</string>
     <string name="poi_community_gender_mixed">Fællesskabet køn: blandet</string>
-    <string name="poi_cash_withdrawal_operator">Hævning af kontanter operatør</string>
+    <string name="poi_cash_withdrawal_operator">Operatør af hævning af kontanter</string>
     <string name="poi_parking_space">Parkeringsplads</string>
     <string name="poi_url">URL</string>
     <string name="poi_volcano_type">Type</string>

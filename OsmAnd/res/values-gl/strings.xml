@@ -323,7 +323,7 @@
     <string name="plugin_distance_point">Punto</string>
     <string name="gpx_file_name">Nome do ficheiro GPX</string>
     <string name="gpx_saved_sucessfully">O ficheiro GPX foi gardado en {0}</string>
-    <string name="osmand_distance_planning_plugin_description">Este engadido fornece un trebello no mapa, permitindo crear camiños premenso no mapa, empregando ou modificando ficheiros GPX existentes, para planificar unha viaxe e medir a distancia entre puntos. Os resultados poden gardarse coma un ficheiro GPX e empregarse despois para a orientación.</string>
+    <string name="osmand_distance_planning_plugin_description">Crea camiños premendo no mapa, empregando ou modificando ficheiros GPX existentes, para planificar unha viaxe e medir a distancia entre puntos. Os resultados poden gardarse coma un ficheiro GPX e empregarse despois para a orientación.</string>
     <string name="osmand_distance_planning_plugin_name">Calculadora de distancias e ferramenta de planificación</string>
     <string name="use_distance_measurement_help">* Prema para marcar un punto. 
 \n * Manteña premido o mapa para riscar-lo punto anterior. 
@@ -696,11 +696,11 @@
 \n 
 \nBaixa as teselas dos mapas directamente en liña, ou prepárao para o seu emprego sen conexión (copiar de xeito manual no cartagol de datos OsmAnd) coma unha base de datos SQLite que pode ser producida por unha variedade de ferramentas de preparación de mapas de terceiros.</string>
     <string name="osmand_accessibility_description">Activa as funcións de accesibilidade do dispositivo de xeito directo no OsmAnd. Fai máis doado por exemplo, o axuste da velocidade da voz para sintetizadores de voz, os axustes de navegación D-pad, empregando a roda de desprazamento para o control do achegamento (zoom), ou a retroalimentación de texto a voz, por exemplo, para anunciar a túa posición de xeito automático.</string>
-    <string name="osmand_development_plugin_description">Este engadido amosa os axustes de funcións de desenvolvemento e depuración para probar a simulación de rutas, o rendimiento do renderizado, ou as indicacióbs por voz. Estes axustes están destinados para os desenvolvedores e non son necesarios para o usuario xeral.</string>
+    <string name="osmand_development_plugin_description">Axusta as funcións de desenvolvemento e depuración, como a simulación de navegación, o rendemento do renderizado ou as indicacións por voz. Destinado para desenvolvedores, non é necesario para o normal uso da aplicación.</string>
     <string name="plugins_screen">Engadidos</string>
     <string name="prefs_plugins_descr">Os engadidos activan opcións avanzadas e funcionalidades adicionais.</string>
     <string name="prefs_plugins">Engadidos</string>
-    <string name="osm_editing_plugin_description">Con este engadido pódese emprega-lo OsmAnd para achegar melloras ó OSM, coma crear ou modificar obxectos de punto de interese do OSM, abrir ou comentar fallos do OSM e enviar ficheiros GPX gravados. OSM é un proxecto comunitario de creación de mapas globais no dominio público. Para máis detalles, olle https://openstreetmap.org. Agradécese a participación activa e as contribucións pódense realizar directamente dende o OsmAnd se se indican as credenciais persoais do OSM na aplicación.</string>
+    <string name="osm_editing_plugin_description">Fai contribucións no OSM, como o crear ou modificar obxectos PDI, abrir ou comentar notas do OSM e contribuír con ficheiros de pistas GPX gravados no OsmAnd, fornecendo o teu nome de usuario e contrasinal. O OpenStreetMap.org é un proxecto de cartografado de dominio público, global, ceibe e impulsado pola comunidade.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Os mapas vectoriais seguramente amósanse máis axiña. Poden non funcionar ben nalgúns dispositivos.</string>
     <string name="play_commands_of_currently_selected_voice">Escolle unha voz e reproduce probas dos avisos:</string>
     <string name="debugging_and_development">Desenvolvemento do OsmAnd</string>
@@ -3530,4 +3530,64 @@ Lon %2$s</string>
     <string name="multimedia_use_system_camera">Empregar aplicación do sistema</string>
     <string name="multimedia_photo_play_sound">Son do obturador da cámara</string>
     <string name="osm_authorization_success">A autorización foi correcta</string>
+    <string name="rearrange_categories">Reorganizar categorías</string>
+    <string name="create_custom_categories_list_promo">Podes engadir categorías personalizadas, agochar as categorías que non semellen necesarias e mudar a orde de clasificación da listaxe. A listaxe pode ser importada e exportada con perfís.</string>
+    <string name="add_new_custom_category_button_promo">Podes engadir unha nova categoría personalizada marcando unha ou varias categorías necesarias.</string>
+    <string name="reset_to_default_category_button_promo">Restabelecer ó valor por defecto, restabelecerá a orde de clasificación ó estado por defecto após a instalación.</string>
+    <string name="shared_string_available">Dispoñíbel</string>
+    <string name="add_custom_category">Engadir categoría personalizada</string>
+    <string name="rendering_attr_streetLightingNight_name">Amosar só á noite</string>
+    <string name="plugin_prefs_reset_successful">Todos os axustes do engadido restabelecéronse ó estado por defecto.</string>
+    <string name="profile_prefs_reset_successful">Todos os axustes do perfil restabelecéronse ó estado por defecto.</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="sunset_at">Solpor ás %1$s</string>
+    <string name="sunrise_at">Amencer ás %1$s</string>
+    <string name="accessibility_mode_disabled">Modo de accesibilidade desactivado no teu sistema.</string>
+    <string name="use_system_screen_timeout">Empregar o tempo de espera da pantalla do sistema</string>
+    <string name="use_system_screen_timeout_promo">Desactivado de xeito predefinido, se o OsmAnd é executado en primeiro plano, a pantalla manterase acendida. 
+\n 
+\nSe se activa, o OsmAnd empregará os axustes de tempo de espera do sistema.</string>
+    <string name="clear_recorded_data">Limpar datos gravados</string>
+    <string name="release_3_6">• Perfís: agora podes mudar a orde, definir a icona para o mapa, mudar todos os axustes para os perfís base e restabelecelos de novo ó valores por defecto 
+\n 
+\n • Engadíronse os números de saída na navegación 
+\n 
+\n • Redeseñáronse os axustes dos engadidos 
+\n 
+\n • Redeseñouse a lapela de axustes, para un acceso rápido a todos os perfís 
+\n 
+\n • Engadiuse a opción de copiar os axustes doutro perfil 
+\n 
+\n • Engadiuse a posibilidade de mudar a orde ou agochar as categorías de PDI na procura 
+\n 
+\n • Aliñáronse de xeito correcto no mapa as iconas de PDI 
+\n 
+\n • Engadíronse datos do amencer e solpor en \"Configurar o mapa\" 
+\n 
+\n • Engadíronse iconas de \"Casa\" e \"Traballo\" no mapa 
+\n 
+\n • Engadiuse soporte para as múltiples liñas de descrición nos Axustes 
+\n 
+\n • Engadiuse a correcta transliteración no mapa do Xapón 
+\n 
+\n • Engadiuse o mapa da Antártida
+\n
+\n</string>
+    <string name="copy_coordinates">Copiar coordenadas</string>
+    <string name="routing_profile_direct_to">Directo ó punto</string>
+    <string name="sort_by_category">Ordenar por categoría</string>
+    <string name="please_provide_profile_name_message">Fornece un nome para o perfil</string>
+    <string name="open_settings">Abrir os axustes</string>
+    <string name="plugin_disabled">Engadido desactivado</string>
+    <string name="plugin_disabled_descr">Este engadido é unha aplicación independente, terás que eliminalo por separado se non pensas seguir empregándoo.
+\n
+\nO engadido ficará no dispositivo após desinstalar o OsmAnd.</string>
+    <string name="shared_string_menu">Menú</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_routing">Enrutamento</string>
+    <string name="shared_string_custom_rendering_style">Estilo de renderización personalizado</string>
+    <string name="shared_string_include_data">Incluír datos adicionais</string>
+    <string name="import_profile_dialog_description">O perfil importado contén datos adicionais. Preme en \"Importar\" para importar só datos de perfil ou marca datos adicionais para importar.</string>
+    <string name="export_profile_dialog_description">Podes marcar datos adicionais para exportar ó carón do perfil.</string>
+    <string name="index_name_antarctica">Antártida</string>
 </resources>

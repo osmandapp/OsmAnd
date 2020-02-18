@@ -1106,13 +1106,13 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="app_mode_truck">Camió</string>
     <string name="routing_attr_prefer_motorway_name">Preferència per autopistes</string>
     <string name="routing_attr_prefer_motorway_description">Preferència per autopistes</string>
-    <string name="routing_attr_avoid_toll_name">Evita vies de peatge</string>
+    <string name="routing_attr_avoid_toll_name">Sense vies de peatge</string>
     <string name="routing_attr_avoid_toll_description">Evita les vies de peatge</string>
-    <string name="routing_attr_avoid_unpaved_name">Evita les vies sense pavimentar</string>
+    <string name="routing_attr_avoid_unpaved_name">Només vies pavimentades</string>
     <string name="routing_attr_avoid_unpaved_description">Evita les vies sense pavimentar.</string>
-    <string name="routing_attr_avoid_ferries_name">Evita transbordadors</string>
+    <string name="routing_attr_avoid_ferries_name">Sense transbordadors</string>
     <string name="routing_attr_avoid_ferries_description">Evita els transbordadors</string>
-    <string name="routing_attr_avoid_motorway_name">Evita autopistes</string>
+    <string name="routing_attr_avoid_motorway_name">Sense autopistes</string>
     <string name="routing_attr_avoid_motorway_description">Evita autopistes</string>
     <string name="routing_attr_weight_name">Límit de pes</string>
     <string name="routing_attr_weight_description">Especifica el límit de pes permès del vehicle a les rutes.</string>
@@ -1653,7 +1653,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="app_name_osmand">OsmAnd</string>
     <string name="offline_maps_and_navigation">Mapes fora de línia\ni navegació</string>
     <string name="commit_poi">Publica els PDI</string>
-    <string name="routing_attr_avoid_shuttle_train_name">Evita tren llançadora</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Sense trens llançadora</string>
     <string name="routing_attr_avoid_shuttle_train_description">Evita l\'ús de trens llançadora</string>
     <string name="plugin_settings">Connectors</string>
     <string name="tab_title_basic">Bàsic</string>
@@ -1807,9 +1807,9 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="use_dashboard_btn">Utilitza el tauler</string>
     <string name="use_drawer_btn">Utilitza el menú</string>
     <string name="please_specify_poi_type_only_from_list">Especifiqueu el tipus de PDI adient o deixeu-ho buit.</string>
-    <string name="routing_attr_avoid_stairs_name">Evita les escales</string>
-    <string name="routing_attr_avoid_stairs_description">Evita les escales</string>
-    <string name="routing_attr_avoid_borders_name">Evita els pasos fronterers</string>
+    <string name="routing_attr_avoid_stairs_name">Sense escales</string>
+    <string name="routing_attr_avoid_stairs_description">Sense escales</string>
+    <string name="routing_attr_avoid_borders_name">Sense pasos fronterers</string>
     <string name="rendering_attr_horseRoutes_name">Rutes a cavall</string>
     <string name="no_address_found">No s\'ha determinat cap adreça</string>
     <string name="shared_string_near">Prop de</string>
@@ -2098,7 +2098,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="show_legacy_search">Mostra la cerca de llegat</string>
     <string name="show_legacy_search_desc">Afegeix la cerca de llegat en la llista desplegable.</string>
     <string name="routing_attr_allow_motorway_name">Utilitza les autopistes</string>
-    <string name="routing_attr_allow_motorway_description">Permet les autopistes</string>
+    <string name="routing_attr_allow_motorway_description">Admet autopistes.</string>
     <string name="lang_sr_latn">Serbi (llatí)</string>
     <string name="lang_zh_hk">Xinès (Hong Kong)</string>
     <string name="rendering_attr_contourWidth_description">Gruix de la corba de nivell</string>
@@ -3007,7 +3007,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_milliradians">Mil·liradiants</string>
     <string name="angular_measeurement">Unitat angular</string>
     <string name="angular_measeurement_descr">Canvia la unitat de mesura de l\'azimut.</string>
-    <string name="routing_attr_avoid_sett_name">Evita els empedrats i els llambordins</string>
+    <string name="routing_attr_avoid_sett_name">Sense empedrats ni llambordins</string>
     <string name="routing_attr_avoid_sett_description">Evita els empedrats i els llambordins</string>
     <string name="routing_attr_avoid_tram_name">Sense el tram</string>
     <string name="routing_attr_avoid_tram_description">Evita el tram</string>
@@ -3467,4 +3467,15 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="add_custom_category">Afegeix una categoria personalitzada</string>
     <string name="rendering_attr_streetLightingNight_name">Mostra només de nit</string>
     <string name="plugin_prefs_reset_successful">Tots els ajustaments dels connectors s\'han restaurat a l\'estat predeterminat.</string>
+    <string name="rendering_attr_piste_type_sled_name">Trineu</string>
+    <string name="clear_recorded_data">Esborra les dades registrades</string>
+    <string name="copy_coordinates">Copia les coordenades</string>
+    <string name="please_provide_profile_name_message">Proporcioneu un nom per al perfil</string>
+    <string name="open_settings">Obre la configuració</string>
+    <string name="plugin_disabled">Connector desactivat</string>
+    <string name="plugin_disabled_descr">Aquest connector és una aplicació independent, us caldrà esborrar-la apart si ja no penseu utilitzar-la
+\n
+\nEl connector continua al dispositiu encara que desinstal·leu OsmAnd.</string>
+    <string name="shared_string_menu">Menú</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
 </resources>

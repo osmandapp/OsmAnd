@@ -17,6 +17,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.Pair;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -37,6 +38,7 @@ import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.TrackChartPoints;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
+import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.transport.TransportStopRoute;
@@ -315,7 +317,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		}
 	}
 
-	private void drawProjectionPoint(RotatedTileBox box, Canvas canvas, double[] projectionXY) {
+	private void drawProjectionPoint(Canvas canvas, double[] projectionXY) {
 		if (projectionIcon == null) {
 			projectionIcon = (LayerDrawable) view.getResources().getDrawable(helper.getSettings().getApplicationMode().getLocationIcon().getIconId());
 		}
@@ -951,7 +953,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		}
 		
 		private void drawSegments(RotatedTileBox tb, Canvas canvas, double topLatitude, double leftLongitude,
-				double bottomLatitude, double rightLongitude, Location lastProjection, int currentRoute, boolean showOriginalRoute) {
+				double bottomLatitude, double rightLongitude, Location lastProjection, int currentRoute) {
 			if (locations.size() == 0) {
 				return;
 			}
@@ -965,26 +967,21 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 					new GeometrySolidWayStyle(wayContext, attrs.paint.getColor());
 			GeometryWayStyle style = defaultWayStyle;
 			boolean previousVisible = false;
-			if (lastProjection != null) {
-				if (leftLongitude <= lastProjection.getLongitude() && lastProjection.getLongitude() <= rightLongitude
-						&& bottomLatitude <= lastProjection.getLatitude() && lastProjection.getLatitude() <= topLatitude) {
-					addLocation(tb, lastProjection, style, tx, ty, angles, distances, 0, styles);
-					previousVisible = true;
-				}
+
+			Location lastPoint = lastProjection;
+			if (lastPoint != null) {
+				previousVisible = addPoint(tb, topLatitude, leftLongitude, bottomLatitude, rightLongitude, style, previousVisible, lastPoint);
 			}
-			List<Location> routeNodes;
-			if (showOriginalRoute && helper.getOriginalRoute() != null && helper.getOriginalRouteAllLoc() != null) {
-				routeNodes = helper.getOriginalRouteAllLoc();
-			} else {
-				routeNodes = locations;
+			Location sp = helper.getRoute().getCurrentStraightAnglePoint();
+			if (sp != null) {
+				lastPoint = sp;
+				previousVisible = addPoint(tb, topLatitude, leftLongitude, bottomLatitude, rightLongitude, style, previousVisible, sp);
 			}
+			List<Location> routeNodes = locations;
 			int previous = -1;
 			for (int i = currentRoute; i < routeNodes.size(); i++) {
 				Location ls = routeNodes.get(i);
 				style = getStyle(i, defaultWayStyle);
-				if (!showOriginalRoute && (simplification.getQuick(i) == 0 && !styleMap.containsKey(i))) {
-					continue;
-				}
 				if (leftLongitude <= ls.getLongitude() && ls.getLongitude() <= rightLongitude && bottomLatitude <= ls.getLatitude()
 						&& ls.getLatitude() <= topLatitude) {
 					double dist = 0;
@@ -996,7 +993,9 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 						} else if (lastProjection != null) {
 							lt = lastProjection;
 						}
-						addLocation(tb, lt, style, tx, ty, angles, distances, 0, styles); // first point
+						if(lt != null) {
+							addLocation(tb, lt, style, tx, ty, angles, distances, 0, styles); // first point
+						}
 					}
 					addLocation(tb, ls, style, tx, ty, angles, distances, dist, styles);
 					previousVisible = true;
@@ -1013,6 +1012,15 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 				previous = i;
 			}
 			drawRouteSegment(tb, canvas, tx, ty, angles, distances, 0, styles);
+		}
+
+		private boolean addPoint(RotatedTileBox tb, double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, GeometryWayStyle style, boolean previousVisible, Location lastPoint) {
+			if (leftLongitude <= lastPoint .getLongitude() && lastPoint .getLongitude() <= rightLongitude
+					&& bottomLatitude <= lastPoint .getLatitude() && lastPoint .getLatitude() <= topLatitude) {
+				addLocation(tb, lastPoint, style, tx, ty, angles, distances, 0, styles);
+				previousVisible = true;
+			}
+			return previousVisible;
 		}
 
 		private void clearArrays() {
@@ -1098,43 +1106,52 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 				Location startLocation = new Location("transport");
 				startLocation.setLatitude(start.getLatitude());
 				startLocation.setLongitude(start.getLongitude());
-				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude, startLocation, 0, false);
+				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
+						startLocation, 0);
 			}
 		} else {
+
 			RouteCalculationResult route = helper.getRoute();
+			boolean directTo = route.getRouteService() == RouteProvider.RouteService.DIRECT_TO;
+			boolean straight = route.getRouteService() == RouteProvider.RouteService.STRAIGHT;
 			routeGeometry.clearTransportRoute();
 			routeGeometry.updateRoute(tb, route);
-			if (helper.getRoute().isShowOriginalRoute() && helper.getOriginalStartingLocation() != null) {
+			RouteProvider.RouteService rs = helper.getRoute().getRouteService();
+			if (directTo) {
 				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-						helper.getOriginalStartingLocation(),  0, true);
+						null, 0);
+			} else if (straight) {
+				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
+						helper.getLastFixedLocation(), route.getCurrentStraightAngleRoute());
 			} else {
 				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-						helper.getLastProjection(), route == null ? 0 : route.getCurrentRoute(), false);
+						helper.getLastProjection(), route.getCurrentStraightAngleRoute());
 			}
 			List<RouteDirectionInfo> rd = helper.getRouteDirections();
 			Iterator<RouteDirectionInfo> it = rd.iterator();
-			if (!helper.getRoute().isShowOriginalRoute() && tb.getZoom() >= 14) {
+			if (!directTo && tb.getZoom() >= 14) {
 				List<Location> actionPoints = calculateActionPoints(topLatitude, leftLongitude, bottomLatitude, rightLongitude, helper.getLastProjection(),
 						helper.getRoute().getRouteLocations(), helper.getRoute().getCurrentRoute(), it, tb.getZoom());
 				drawAction(tb, canvas, actionPoints);
 			}
-			if (helper.getRoute().isShowOriginalRoute()) {
+			if (directTo) {
 				//add projection point on original route
-				double[] projectionOnRoute = calculateProjectionOnRoutePoint(helper.getLastProjection(),
-						helper.getOriginalRouteAllLoc(), helper, tb);
+				double[] projectionOnRoute = calculateProjectionOnRoutePoint(
+						helper.getRoute().getImmutableAllLocations(), helper, tb);
 				if (projectionOnRoute != null) {
-					drawProjectionPoint(tb, canvas, projectionOnRoute);
+					drawProjectionPoint(canvas, projectionOnRoute);
 				}
 			}
 		}
 	}
 	
-	private double[] calculateProjectionOnRoutePoint(Location lastProjection, List<Location> routeNodes, RoutingHelper helper, RotatedTileBox box) {
+	private double[] calculateProjectionOnRoutePoint(List<Location> routeNodes, RoutingHelper helper, RotatedTileBox box) {
 		double[] projectionXY;
 		boolean visible;
 		Location previousInRoute = null;
 		Location nextInRoute = null;
 		//need to change this code by fixing helper.route.getCurrentRoute() miscalculation
+		// TODO simplifiy all culation!
 		if (helper.getRoute().getIntermediatePointsToPass() > 0) {
 			for (int i = 1; i < routeNodes.size(); i++) {
 				LatLon routePoint = new LatLon(routeNodes.get(i).getLatitude(), routeNodes.get(i).getLongitude());
@@ -1148,25 +1165,31 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			nextInRoute = routeNodes.get(routeNodes.size() - 1);
 		}
 
-		int centerX = box.getPixXFromLonNoRot(nextInRoute.getLongitude());
-		int centerY = box.getPixYFromLatNoRot(nextInRoute.getLatitude());
-		int aX = box.getPixXFromLonNoRot(lastProjection.getLongitude());
-		int aY = box.getPixYFromLatNoRot(lastProjection.getLatitude());
-		int bX = box.getPixXFromLonNoRot(previousInRoute.getLongitude());
-		int bY = box.getPixYFromLatNoRot(previousInRoute.getLatitude());
+		if (nextInRoute != null && previousInRoute != null) {
 
-		double radius = MapUtils.getVectorMagnitude(centerX, centerY, aX, aY);
-		double angle2 = MapUtils.getAngleForRadiusVector(centerX, centerY, bX, bY);
-		projectionXY = MapUtils.getCoordinatesFromRadiusAndAngle(centerX, centerY, radius, angle2);
-		visible = box.containsPoint((float)projectionXY[0], (float)projectionXY[1], 20.0f)
-				&& Math.abs(Math.toDegrees(MapUtils.getAngleBetweenVectors(centerX, centerY, aX, aY, centerX, centerY, bX, bY))) < 90;
+			final Location ll = view.getApplication().getLocationProvider().getLastKnownLocation();
+			final int aX = box.getPixXFromLonNoRot(ll.getLongitude());
+			final int aY = box.getPixYFromLatNoRot(ll.getLatitude());
+			final int centerX = box.getPixXFromLonNoRot(nextInRoute.getLongitude());
+			final int centerY = box.getPixYFromLatNoRot(nextInRoute.getLatitude());
+			final int bX = box.getPixXFromLonNoRot(previousInRoute.getLongitude());
+			final int bY = box.getPixYFromLatNoRot(previousInRoute.getLatitude());
 
-		if (visible) {
-			return projectionXY;
-		} else {
-			return null;
+			double radius = MapUtils.getVectorMagnitude(centerX, centerY, aX, aY);
+			double angle2 = MapUtils.getAngleForRadiusVector(centerX, centerY, bX, bY);
+			projectionXY = MapUtils.getCoordinatesFromRadiusAndAngle(centerX, centerY, radius, angle2);
+			double distanceLoc2Proj = MapUtils.getVectorMagnitude(aX, aY, (int)projectionXY[0], (int)projectionXY[1]);
+			boolean isProjectionOnSegment = MapUtils.getVectorMagnitude(centerX ,centerY, (int) projectionXY[0], (int) projectionXY[1])
+					< MapUtils.getVectorMagnitude(centerX, centerY, bX, bY);
+			visible = box.containsPoint((float)projectionXY[0], (float)projectionXY[1], 20.0f)
+					&& Math.abs(Math.toDegrees(MapUtils.getAngleBetweenVectors(centerX, centerY, aX, aY, centerX, centerY, bX, bY))) < 90
+					&& distanceLoc2Proj > AndroidUtils.dpToPx(view.getContext(), 52) / 2.0
+					&& isProjectionOnSegment;
+			if (visible) {
+				return projectionXY;
+			}
 		}
-
+		return null;
 	}
 
 	private List<Location> calculateActionPoints(double topLatitude, double leftLongitude, double bottomLatitude,

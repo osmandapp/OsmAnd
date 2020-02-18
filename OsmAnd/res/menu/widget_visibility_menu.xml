@@ -10,7 +10,8 @@
     <group
         android:id="@+id/button_group"
         android:orderInCategory="2"
-        android:checkableBehavior="none">
+        android:checkableBehavior="none"
+        android:menuCategory="container">
         <item
             android:id="@+id/action_show"
             android:icon="@drawable/ic_action_view"

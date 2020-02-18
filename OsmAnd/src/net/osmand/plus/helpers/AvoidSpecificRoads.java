@@ -36,6 +36,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.RouteSegmentSearchResult;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -162,7 +163,9 @@ public class AvoidSpecificRoads {
 		app.getSettings().removeImpassableRoad(latLon);
 		RouteDataObject obj = impassableRoads.remove(latLon);
 		if (obj != null) {
-			app.getRoutingConfig().removeImpassableRoad(obj);
+			for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {
+				builder.removeImpassableRoad(obj);
+			}
 		}
 	}
 
@@ -288,7 +291,9 @@ public class AvoidSpecificRoads {
 					final LatLon oldLoc = getLocation(currentObject);
 					app.getSettings().moveImpassableRoad(oldLoc, newLoc);
 					impassableRoads.remove(oldLoc);
-					app.getRoutingConfig().removeImpassableRoad(currentObject);
+					for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {
+						builder.removeImpassableRoad(currentObject);
+					}
 					addImpassableRoadInternal(object, ll, showDialog, activity, newLoc);
 
 					if (callback != null) {
@@ -310,7 +315,11 @@ public class AvoidSpecificRoads {
 										   boolean showDialog,
 										   @Nullable MapActivity activity,
 										   @NonNull LatLon loc) {
-		if (app.getRoutingConfig().addImpassableRoad(object, ll)) {
+		boolean roadAdded = false;
+		for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {
+			roadAdded |= builder.addImpassableRoad(object, ll);
+		}
+		if (roadAdded) {
 			impassableRoads.put(loc, object);
 		} else {
 			LatLon location = getLocation(object);
@@ -339,7 +348,13 @@ public class AvoidSpecificRoads {
 	}
 
 	public LatLon getLocation(RouteDataObject object) {
-		Location location = app.getRoutingConfig().getImpassableRoadLocations().get(object.getId());
+		Location location = null;
+		for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {
+			location = builder.getImpassableRoadLocations().get(object.getId());
+			if (location != null) {
+				break;
+			}
+		}
 		return location == null ? null : new LatLon(location.getLatitude(), location.getLongitude());
 	}
 

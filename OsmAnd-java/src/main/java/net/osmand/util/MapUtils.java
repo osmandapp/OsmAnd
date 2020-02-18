@@ -23,6 +23,8 @@ import static com.jwetherell.openmap.common.MoreMath.QUAD_PI_D;
  */
 public class MapUtils {
 
+	private static final int EARTH_RADIUS_B = 6356752;
+	private static final int EARTH_RADIUS_A = 6378137;
 	public static final double MIN_LATITUDE = -85.0511;
 	public static final double MAX_LATITUDE = 85.0511;
 	public static final double LATITUDE_TURN = 180.0;
@@ -54,6 +56,37 @@ public class MapUtils {
 	private static double scalarMultiplication(double xA, double yA, double xB, double yB, double xC, double yC) {
 		// Scalar multiplication between (AB, AC)
 		return (xB - xA) * (xC - xA) + (yB - yA) * (yC - yA);
+	}
+
+	public static Location calculateMidPoint(Location s1, Location s2) {
+		double lat1 = s1.getLatitude() / 180 * Math.PI;
+		double lon1 = s1.getLongitude() / 180 * Math.PI;
+		double lat2 = s2.getLatitude() / 180 * Math.PI;
+		double lon2 = s2.getLongitude() / 180 * Math.PI;
+		double Bx = Math.cos(lat2) * Math.cos(lon2 - lon1);
+		double By = Math.cos(lat2) * Math.sin(lon2 - lon1);
+		double latMid = Math.atan2(Math.sin(lat1) + Math.sin(lat2),
+				Math.sqrt((Math.cos(lat1) + Bx) * (Math.cos(lat1) + Bx) + By * By));
+		double lonMid = lon1 + Math.atan2(By, Math.cos(lat1) + Bx);
+		Location r = new Location("");
+		r.setLatitude(MapUtils.checkLatitude(latMid * 180 / Math.PI));
+		r.setLongitude(MapUtils.checkLongitude(lonMid * 180 / Math.PI));
+		return r;
+	}
+
+	public static LatLon calculateMidPoint(LatLon s1, LatLon s2) {
+		double lat1 = s1.getLatitude() / 180 * Math.PI;
+		double lon1 = s1.getLongitude() / 180 * Math.PI;
+		double lat2 = s2.getLatitude() / 180 * Math.PI;
+		double lon2 = s2.getLongitude() / 180 * Math.PI;
+		double Bx = Math.cos(lat2) * Math.cos(lon2 - lon1);
+		double By = Math.cos(lat2) * Math.sin(lon2 - lon1);
+		double latMid = Math.atan2(Math.sin(lat1) + Math.sin(lat2),
+				Math.sqrt((Math.cos(lat1) + Bx) * (Math.cos(lat1) + Bx) + By * By));
+		double lonMid = lon1 + Math.atan2(By, Math.cos(lat1) + Bx);
+		LatLon m = new LatLon(MapUtils.checkLatitude(latMid * 180 / Math.PI),
+				MapUtils.checkLongitude(lonMid * 180 / Math.PI));
+		return m;
 	}
 
 	public static double getOrthogonalDistance(double lat, double lon, double fromLat, double fromLon, double toLat, double toLon) {
@@ -208,8 +241,8 @@ public class MapUtils {
 
 	public static double getTileEllipsoidNumberY(float zoom, double latitude) {
 		final double E2 = (double) latitude * Math.PI / 180;
-		final long sradiusa = 6378137;
-		final long sradiusb = 6356752;
+		final long sradiusa = EARTH_RADIUS_A;
+		final long sradiusb = EARTH_RADIUS_B;
 		final double J2 = (double) Math.sqrt(sradiusa * sradiusa - sradiusb * sradiusb) / sradiusa;
 		final double M2 = (double) Math.log((1 + Math.sin(E2))
 				/ (1 - Math.sin(E2))) / 2 - J2 * Math.log((1 + J2 * Math.sin(E2)) / (1 - J2 * Math.sin(E2))) / 2;
@@ -219,8 +252,8 @@ public class MapUtils {
 
 	public static double getLatitudeFromEllipsoidTileY(float zoom, float tileNumberY) {
 		final double MerkElipsK = 0.0000001;
-		final long sradiusa = 6378137;
-		final long sradiusb = 6356752;
+		final long sradiusa = EARTH_RADIUS_A;
+		final long sradiusb = EARTH_RADIUS_B;
 		final double FExct = (double) Math.sqrt(sradiusa * sradiusa
 				- sradiusb * sradiusb)
 				/ sradiusa;
@@ -636,10 +669,9 @@ public class MapUtils {
 				|| (l1 != null && l2 != null && Math.abs(l1.getLatitude() - l2.getLatitude()) < 0.00001
 				&& Math.abs(l1.getLongitude() - l2.getLongitude()) < 0.00001);
 	}
-
-	public static LatLon rhumbDestinationPoint(LatLon latLon, double distance, double bearing)
-	{
-		double radius = 6371e3;
+	
+	public static LatLon rhumbDestinationPoint(LatLon latLon, double distance, double bearing){
+		double radius = EARTH_RADIUS_A;
 
 		double d = distance / radius; // angular distance in radians
 		double phi1 = Math.toRadians(latLon.getLatitude());
@@ -650,11 +682,12 @@ public class MapUtils {
 		double phi2 = phi1 + deltaPhi;
 
 		// check for some daft bugger going past the pole, normalise latitude if so
-		//if (ABS(phi2) > M_PI_2)
-		//    phi2 = phi2>0 ? M_PI-phi2 : -M_PI-phi2;
+		// if (ABS(phi2) > M_PI_2)
+		// phi2 = phi2>0 ? M_PI-phi2 : -M_PI-phi2;
 
 		double deltaPsi = Math.log(Math.tan(phi2 / 2 + QUAD_PI_D) / Math.tan(phi1 / 2 + QUAD_PI_D));
-		double q = Math.abs(deltaPsi) > 10e-12 ? deltaPhi / deltaPsi : Math.cos(phi1); // E-W course becomes incorrect with 0/0
+		double q = Math.abs(deltaPsi) > 10e-12 ? deltaPhi / deltaPsi : Math.cos(phi1); // E-W course becomes incorrect
+																						// with 0/0
 
 		double deltalambda = d * Math.sin(theta) / q;
 		double lambda2 = lambda1 + deltalambda;

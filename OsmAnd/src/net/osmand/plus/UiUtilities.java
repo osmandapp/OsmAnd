@@ -17,6 +17,8 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v4.text.TextUtilsCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.TintableCompoundButton;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.SwitchCompat;
@@ -34,6 +36,8 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.widgets.TextViewEx;
+
+import java.util.Locale;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
 
@@ -122,6 +126,10 @@ public class UiUtilities {
 
 	public Drawable getIcon(@DrawableRes int id, boolean light) {
 		return getDrawable(id, light ? R.color.icon_color_default_light : R.color.icon_color_default_dark);
+	}
+
+	public Drawable getMapIcon(@DrawableRes int id, boolean light) {
+		return getDrawable(id, light ? R.color.icon_color_default_light : 0);
 	}
 
 	public static Drawable getSelectableDrawable(Context ctx) {
@@ -334,6 +342,13 @@ public class UiUtilities {
 			screenOrientation = 0;
 		}
 		return screenOrientation;
+	}
+	
+	public static void setupLayoutDirection(View layout) {
+		Context ctx = layout.getContext();
+		Locale currentLocale = ctx.getResources().getConfiguration().locale;
+		int direction = TextUtilsCompat.getLayoutDirectionFromLocale(currentLocale);
+		ViewCompat.setLayoutDirection(layout, direction);
 	}
 
 	public static void setupCompoundButtonDrawable(Context ctx, boolean nightMode, @ColorInt int activeColor, Drawable drawable) {

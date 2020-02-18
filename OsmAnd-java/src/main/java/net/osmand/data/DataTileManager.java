@@ -65,6 +65,14 @@ public class DataTileManager<T> {
 		int tileXDown = (int) MapUtils.getTileNumberX(zoom, longitudeDown) + 1;
 		int tileYDown = (int) MapUtils.getTileNumberY(zoom, latitudeDown) + 1;
 		List<T> result = new ArrayList<T>();
+		if(tileXUp > tileXDown) {
+			tileXDown = tileXUp;
+			tileXUp = 0;
+		}
+		if(tileYUp > tileYDown) {
+			tileYDown = tileYUp;
+			tileXUp = 0;
+		}
 		for (int i = tileXUp; i <= tileXDown; i++) {
 			for (int j = tileYUp; j <= tileYDown; j++) {
 				putObjects(i, j, result);

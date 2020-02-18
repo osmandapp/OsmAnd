@@ -6,6 +6,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.widget.ImageView;
 
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -17,7 +18,6 @@ import net.osmand.router.GeneralRouter;
 
 import java.util.Map;
 
-import static net.osmand.plus.activities.SettingsNavigationActivity.getRouter;
 import static net.osmand.plus.activities.SettingsNavigationActivity.showSeekbarSettingsDialog;
 
 public class VehicleParametersFragment extends BaseSettingsFragment implements OnPreferenceChanged {
@@ -33,14 +33,15 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		if (app == null) {
 			return;
 		}
+		ApplicationMode mode = getSelectedAppMode();
 
 		Preference vehicleParametersInfo = findPreference("vehicle_parameters_info");
 		vehicleParametersInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
-		vehicleParametersInfo.setTitle(getString(R.string.route_parameters_info, getSelectedAppMode().toHumanString()));
+		vehicleParametersInfo.setTitle(getString(R.string.route_parameters_info, mode.toHumanString()));
 
-		RouteService routeService = getSelectedAppMode().getRouteService();
+		RouteService routeService = mode.getRouteService();
 		if (routeService == RouteService.OSMAND) {
-			GeneralRouter router = getRouter(app.getRoutingConfig(), getSelectedAppMode());
+			GeneralRouter router = app.getRouter(mode);
 			if (router != null) {
 				Map<String, GeneralRouter.RoutingParameter> parameters = router.getParameters();
 

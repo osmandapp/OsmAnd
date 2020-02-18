@@ -200,7 +200,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 
 	private void setupShowTripRecNotificationPref() {
 		SwitchPreferenceEx showTripRecNotification = (SwitchPreferenceEx) findPreference(settings.SHOW_TRIP_REC_NOTIFICATION.getId());
-		showTripRecNotification.setDescription(getString(R.string.trip_rec_notification_settings));
+		showTripRecNotification.setDescription(getString(R.string.trip_rec_notification_settings_desc));
 		showTripRecNotification.setIcon(getPersistentPrefIcon(R.drawable.ic_action_notification));
 	}
 

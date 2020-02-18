@@ -11,5 +11,10 @@
     <!-- Compass control widget ids-->
     <item name="compass_ruler_control_widget_state_show" type="id"/>
     <item name="compass_ruler_control_widget_state_hide" type="id"/>
+    <!-- AV notes widget ids-->
+    <item name="av_notes_widget_state_ask" type="id"/>
+    <item name="av_notes_widget_state_audio" type="id"/>
+    <item name="av_notes_widget_state_video" type="id"/>
+    <item name="av_notes_widget_state_photo" type="id"/>
 
 </resources>

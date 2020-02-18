@@ -234,13 +234,13 @@
     <string name="poi_musical_instrument">Magasin d\'instruments de musique</string>
     <string name="poi_nature_reserve">Réserve naturelle</string>
     <string name="poi_military_naval_base">Base navale militaire</string>
-    <string name="poi_neighbourhood">Quartier</string>
+    <string name="poi_neighbourhood">Quartier de voisinage</string>
     <string name="poi_newsagent">Marchand de journaux</string>
     <string name="poi_newspaper">Entreprise de presse</string>
     <string name="poi_ngo">ONG</string>
     <string name="poi_nightclub">Boite de nuit; Boîte de nuit</string>
     <string name="poi_optician">Opticien</string>
-    <string name="poi_organic">Produits biologiques</string>
+    <string name="poi_organic">Produits de l\'agriculture biologique</string>
     <string name="poi_orienteering">Course d\'orientation</string>
     <string name="poi_outdoor">Magasin d\'activités de plein air</string>
     <string name="poi_paddle_tennis">Paddel-tennis</string>
@@ -667,7 +667,7 @@
     <string name="poi_training">Centre de formation</string>
     <string name="poi_field_hockey">Hockey sur gazon</string>
     <string name="poi_smoking_area">Zone fumeur</string>
-    <string name="poi_quarter">Quartier</string>
+    <string name="poi_quarter">Grand quartier</string>
     <string name="poi_rest_area">Aire de repos</string>
     <string name="poi_reservoir">Réservoir hydrique</string>
     <string name="poi_piste_ice_skate">Itinéraire de patinage sur glace</string>
@@ -3786,4 +3786,9 @@
     <string name="poi_bowling_alley">Bowling</string>
     <string name="poi_piste_ref">Numéro de piste</string>
     <string name="poi_resort_hunting">Base de chasse</string>
+    <string name="poi_monastery_type_monastics">monacal</string>
+    <string name="poi_monastery_type_canonry">canonique</string>
+    <string name="poi_monastery_type_clerks_regular">Clercs réguliers</string>
+    <string name="poi_volcano_type_stratovolcano">Stratovolcan</string>
+    <string name="poi_memorial_ghost_bike">Vélo fantôme</string>
 </resources>

@@ -9,8 +9,10 @@ import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.widget.ImageView;
 
+import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.BooleanPreference;
@@ -33,7 +35,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static net.osmand.plus.activities.SettingsNavigationActivity.getRouter;
 import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
 
 public class RouteParametersFragment extends BaseSettingsFragment implements OnPreferenceChanged {
@@ -136,11 +137,16 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		fastRoute.setSummaryOn(R.string.shared_string_on);
 		fastRoute.setSummaryOff(R.string.shared_string_off);
 
+
 		ApplicationMode am = getSelectedAppMode();
+		float defaultAllowedDeviation = RoutingHelper.getDefaultAllowedDeviation(settings, am,
+				RoutingHelper.getPosTolerance(0));
 		if (am.getRouteService() != RouteProvider.RouteService.OSMAND) {
 			screen.addPreference(fastRoute);
+			setupSelectRouteRecalcDistance(screen, defaultAllowedDeviation);
 		} else {
-			GeneralRouter router = getRouter(getMyApplication().getRoutingConfig(), am);
+			setupSelectRouteRecalcDistance(screen, defaultAllowedDeviation);
+			GeneralRouter router = app.getRouter(am);
 			clearParameters();
 			if (router != null) {
 				Map<String, RoutingParameter> parameters = router.getParameters();
@@ -228,6 +234,37 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		}
 	}
 
+	private void setupSelectRouteRecalcDistance(PreferenceScreen screen, float defaultAllowedDeviation) {
+		Float[] entryValues;
+		OsmandSettings settings = app.getSettings();
+		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
+		if (mc == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
+			entryValues = new Float[] {-1.0f, 0.f, 10.f, 20.0f, 30.0f, 50.0f, 100.0f, 200.0f, 500.0f, 1000.0f, 1500.0f};
+		} else {
+			entryValues = new Float[] {-1.0f, 0.f, 9.1f, 18.3f, 30.5f, 45.7f, 91.5f, 183.0f, 482.0f, 965.0f, 1609.0f};
+		}
+
+		String[] entries = new String[entryValues.length];
+		entries[0] = getString(R.string.no_recalculation_setting);
+		String defaultDistance =  defaultAllowedDeviation < 0 ? getString(R.string.no_recalculation_setting) :
+				OsmAndFormatter.getFormattedDistance(defaultAllowedDeviation , app, false);
+		entries[1] = String.format(getString(R.string.shared_string_app_default_w_val), defaultDistance);
+
+		for (int i = 2; i < entryValues.length; i++) {
+			entries[i] = OsmAndFormatter.getFormattedDistance(entryValues[i], app, false);
+		}
+
+		ListPreferenceEx routeRecalculationDist = createListPreferenceEx(settings.ROUTE_RECALCULATION_DISTANCE.getId(),
+				entries, entryValues, R.string.route_recalculation_dist_title, R.layout.preference_with_descr);
+		routeRecalculationDist.setEntries(entries);
+		routeRecalculationDist.setEntryValues(entryValues);
+		routeRecalculationDist.setDescription(getString(R.string.route_recalculation_dist_descr));
+		routeRecalculationDist.setIcon(getRoutingPrefIcon("routing_recalc_distance"));
+
+
+		screen.addPreference(routeRecalculationDist);
+	}
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -293,6 +330,12 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			return true;
 		} else if ("prouting_short_way".equals(key) && newValue instanceof Boolean) {
 			return app.getSettings().FAST_ROUTE_MODE.setModeValue(getSelectedAppMode(), !(Boolean) newValue);
+		} else if (settings.ROUTE_RECALCULATION_DISTANCE.getId().equals(key) && newValue instanceof Float) {
+			if ((float) newValue == -1.f) {
+				settings.DISABLE_OFFROUTE_RECALC.setModeValue(getSelectedAppMode(), true);
+			} else {
+				settings.DISABLE_OFFROUTE_RECALC.setModeValue(getSelectedAppMode(), false);
+			}
 		}
 
 		return super.onPreferenceChange(preference, newValue);
@@ -402,6 +445,9 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 				return getPersistentPrefIcon(R.drawable.ic_action_fastest_route);
 			case "enable_time_conditional_routing":
 				return getPersistentPrefIcon(R.drawable.ic_action_road_works_dark);
+			case "routing_recalc_distance":
+				return getPersistentPrefIcon(R.drawable.ic_action_minimal_distance);
+
 			default:
 				return null;
 		}

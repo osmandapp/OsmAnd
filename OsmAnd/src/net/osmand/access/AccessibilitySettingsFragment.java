@@ -64,9 +64,6 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 		setupSmartAutoAnnouncePref();
 		setupAutoAnnouncePeriodPref();
 
-		setupDisableOffRouteRecalculationPref();
-		setupDisableWrongDirectionRecalculationPref();
-
 		setupDirectionStylePref();
 		setupDirectionAudioFeedbackPref();
 		setupDirectionHapticFeedbackPref();
@@ -175,15 +172,6 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 		autoAnnouncePeriod.setDescription(R.string.access_autoannounce_period_descr);
 	}
 
-	private void setupDisableOffRouteRecalculationPref() {
-		SwitchPreferenceEx disableOffRouteRecalculation = (SwitchPreferenceEx) findPreference(settings.DISABLE_OFFROUTE_RECALC.getId());
-		disableOffRouteRecalculation.setDescription(getString(R.string.access_disable_offroute_recalc_descr));
-	}
-
-	private void setupDisableWrongDirectionRecalculationPref() {
-		SwitchPreferenceEx disableWrongDirectionRecalculation = (SwitchPreferenceEx) findPreference(settings.DISABLE_WRONG_DIRECTION_RECALC.getId());
-		disableWrongDirectionRecalculation.setDescription(getString(R.string.access_disable_wrong_direction_recalc_descr));
-	}
 
 	private void setupDirectionStylePref() {
 		RelativeDirectionStyle[] relativeDirectionStyles = RelativeDirectionStyle.values();
