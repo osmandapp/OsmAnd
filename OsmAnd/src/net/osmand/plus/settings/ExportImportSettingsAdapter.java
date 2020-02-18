@@ -24,6 +24,7 @@ import net.osmand.plus.profiles.AdditionalDataWrapper;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -147,12 +148,25 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
 		switch (type) {
 			case PROFILE:
-				title.setText(((ApplicationMode.ApplicationModeBean) currentItem).userProfileName);
-				subText.setText(((ApplicationMode.ApplicationModeBean) currentItem).routingProfile);
+				String profileName = ((ApplicationMode.ApplicationModeBean) currentItem).userProfileName;
+				if (Algorithms.isEmpty(profileName)) {
+					ApplicationMode appMode = ApplicationMode.valueOfStringKey(((ApplicationMode.ApplicationModeBean) currentItem).stringKey, null);
+					profileName = app.getString(appMode.getNameKeyResource());
+				}
+				title.setText(profileName);
+				String routingProfile = (((ApplicationMode.ApplicationModeBean) currentItem).routingProfile);
+				if (Algorithms.isEmpty(routingProfile)) {
+					subText.setVisibility(View.GONE);
+				} else {
+					subText.setText(String.format(
+							app.getString(R.string.ltr_or_rtl_combine_via_colon),
+							app.getString(R.string.nav_type_hint),
+							routingProfile));
+					subText.setVisibility(View.VISIBLE);
+				}
 				int profileIconRes = AndroidUtils.getDrawableId(app, ((ApplicationMode.ApplicationModeBean) currentItem).iconName);
 				ProfileIconColors iconColor = ((ApplicationMode.ApplicationModeBean) currentItem).iconColor;
 				icon.setImageDrawable(app.getUIUtilities().getIcon(profileIconRes, iconColor.getColor(nightMode)));
-				subText.setVisibility(View.VISIBLE);
 				icon.setVisibility(View.VISIBLE);
 				break;
 			case QUICK_ACTIONS:

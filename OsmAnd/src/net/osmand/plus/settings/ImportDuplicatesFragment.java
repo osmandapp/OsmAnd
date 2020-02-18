@@ -45,6 +45,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implement
 		fragment.setDuplicatesList(duplicatesList);
 		fragment.setSettingsItems(settingsItems);
 		fragment.setFile(file);
+		fragment.setRetainInstance(true);
 		fragment.show(fm, TAG);
 	}
 
@@ -90,7 +91,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implement
 
 	private List<Object> prepareDuplicates() {
 		List<? super Object> duplicates = new ArrayList<>();
-		List<ApplicationMode> profiles = new ArrayList<>();
+		List<ApplicationMode.ApplicationModeBean> profiles = new ArrayList<>();
 		List<QuickAction> actions = new ArrayList<>();
 		List<PoiUIFilter> filters = new ArrayList<>();
 		List<ITileSource> tileSources = new ArrayList<>();
@@ -98,8 +99,8 @@ public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implement
 		List<File> routingFilesList = new ArrayList<>();
 
 		for (Object object : duplicatesList) {
-			if (object instanceof ApplicationMode) {
-				profiles.add((ApplicationMode) object);
+			if (object instanceof ApplicationMode.ApplicationModeBean) {
+				profiles.add((ApplicationMode.ApplicationModeBean) object);
 			} else if (object instanceof QuickAction) {
 				actions.add((QuickAction) object);
 			} else if (object instanceof PoiUIFilter) {

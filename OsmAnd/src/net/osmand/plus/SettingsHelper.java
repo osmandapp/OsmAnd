@@ -2,6 +2,7 @@ package net.osmand.plus;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
@@ -23,6 +24,7 @@ import net.osmand.plus.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.profiles.ProfileIcons;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionFactory;
 import net.osmand.util.Algorithms;
@@ -520,14 +522,29 @@ public class SettingsHelper {
 
 		@Override
 		public void apply() {
-			if (appMode.isCustomProfile()) {
-				if (!shouldReplace && exists()) {
-					renameProfile();
-					builder = ApplicationMode.fromModeBean(app, modeBean);
-				}
-				appMode = ApplicationMode.saveProfile(builder, getSettings().getContext());
-				ApplicationMode.changeProfileAvailability(appMode, true, app);
+			if (!appMode.isCustomProfile() && !shouldReplace) {
+				ApplicationMode parent = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
+				renameProfile();
+				ApplicationMode.ApplicationModeBuilder builder = ApplicationMode
+						.createCustomMode(parent, modeBean.stringKey, app)
+						.setIconResName(modeBean.iconName)
+						.setUserProfileName(modeBean.userProfileName)
+						.setRoutingProfile(modeBean.routingProfile)
+						.setRouteService(modeBean.routeService)
+						.setIconColor(modeBean.iconColor)
+						.setLocationIcon(modeBean.locIcon)
+						.setNavigationIcon(modeBean.navIcon);
+				app.getSettings().copyPreferencesFromProfile(parent, builder.getApplicationMode());
+				appMode = ApplicationMode.saveProfile(builder, app);
+			} else if (!shouldReplace && exists()) {
+				renameProfile();
+				builder = ApplicationMode.fromModeBean(app, modeBean);
+				appMode = ApplicationMode.saveProfile(builder, app);
+			} else {
+				builder = ApplicationMode.fromModeBean(app, modeBean);
+				appMode = ApplicationMode.saveProfile(builder, app);
 			}
+			ApplicationMode.changeProfileAvailability(appMode, true, app);
 		}
 
 		@Override
@@ -1809,6 +1826,7 @@ public class SettingsHelper {
 		private SettingsExporter exporter;
 		private File file;
 		private SettingsExportListener listener;
+		private ProgressDialog progress;
 
 		ExportAsyncTask(@NonNull File settingsFile,
 						@Nullable SettingsExportListener listener,
@@ -1819,6 +1837,12 @@ public class SettingsHelper {
 			for (SettingsItem item : items) {
 				exporter.addSettingsItem(item);
 			}
+		}
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			progress = ProgressDialog.show(activity, app.getString(R.string.export_profile), app.getString(R.string.shared_sting_preparing));
 		}
 
 		@Override
@@ -1836,6 +1860,7 @@ public class SettingsHelper {
 
 		@Override
 		protected void onPostExecute(Boolean success) {
+			progress.dismiss();
 			if (listener != null) {
 				listener.onSettingsExportFinished(file, success);
 			}

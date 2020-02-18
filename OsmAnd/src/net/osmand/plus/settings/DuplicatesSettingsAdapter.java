@@ -1,6 +1,5 @@
 package net.osmand.plus.settings;
 
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,13 +8,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.util.Algorithms;
 
 
 import java.io.File;
@@ -59,45 +61,53 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 					(String) currentItem));
 			((HeaderViewHolder) holder).divider.setVisibility(View.VISIBLE);
 		} else if (holder instanceof ItemViewHolder) {
-			String title = null;
-			String subTitle = null;
-			Drawable drawable = null;
-			if (currentItem instanceof ApplicationMode) {
-				title = ((ApplicationMode) currentItem).toHumanString();
-				subTitle = ((ApplicationMode) currentItem).getRoutingProfile();
-				drawable = app.getUIUtilities().getIcon(
-						((ApplicationMode) currentItem).getIconRes(),
-						((ApplicationMode) currentItem).getIconColorInfo().getColor(nightMode)
-				);
-			} else if (currentItem instanceof QuickAction) {
-				title = ((QuickAction) currentItem).getName(app);
-				drawable = app.getUIUtilities().getIcon(((QuickAction) currentItem).getIconRes(), nightMode);
-			} else if (currentItem instanceof PoiUIFilter) {
-				title = ((PoiUIFilter) currentItem).getName();
-				int iconRes = RenderingIcons.getBigIconResourceId(((PoiUIFilter) currentItem).getIconId());
-				drawable = app.getUIUtilities().getIcon(iconRes != 0 ? iconRes : R.drawable.ic_person, nightMode);
-			} else if (currentItem instanceof ITileSource) {
-				title = ((ITileSource) currentItem).getName();
-				drawable = app.getUIUtilities().getIcon(R.drawable.ic_action_info_dark, nightMode);
-			} else if (currentItem instanceof File) {
-				title = ((File) currentItem).getName();
-				if (((File) currentItem).getName().contains("/rendering/")) {
-					drawable = app.getUIUtilities().getIcon(R.drawable.ic_action_map_style, nightMode);
+			if (currentItem instanceof ApplicationMode.ApplicationModeBean) {
+				String profileName = ((ApplicationMode.ApplicationModeBean) currentItem).userProfileName;
+				if (Algorithms.isEmpty(profileName)) {
+					ApplicationMode appMode = ApplicationMode.valueOfStringKey(((ApplicationMode.ApplicationModeBean) currentItem).stringKey, null);
+					profileName = app.getString(appMode.getNameKeyResource());
 				}
-			}
-			((ItemViewHolder) holder).title.setText(title != null ? title : "");
-			if (subTitle != null) {
-				((ItemViewHolder) holder).subTitle.setText(subTitle);
-				((ItemViewHolder) holder).subTitle.setVisibility(View.VISIBLE);
-			} else {
+				((ItemViewHolder) holder).title.setText(profileName);
+				String routingProfile = (((ApplicationMode.ApplicationModeBean) currentItem).routingProfile);
+				if (Algorithms.isEmpty(routingProfile)) {
+					((ItemViewHolder) holder).subTitle.setVisibility(View.GONE);
+				} else {
+					((ItemViewHolder) holder).subTitle.setText(String.format(
+							app.getString(R.string.ltr_or_rtl_combine_via_colon),
+							app.getString(R.string.nav_type_hint),
+							routingProfile));
+					((ItemViewHolder) holder).subTitle.setVisibility(View.VISIBLE);
+				}
+				int profileIconRes = AndroidUtils.getDrawableId(app, ((ApplicationMode.ApplicationModeBean) currentItem).iconName);
+				ProfileIconColors iconColor = ((ApplicationMode.ApplicationModeBean) currentItem).iconColor;
+				((ItemViewHolder) holder).icon.setImageDrawable(app.getUIUtilities().getIcon(profileIconRes, iconColor.getColor(nightMode)));
+				((ItemViewHolder) holder).icon.setVisibility(View.VISIBLE);
+			} else if (currentItem instanceof QuickAction) {
+				((ItemViewHolder) holder).title.setText(((QuickAction) currentItem).getName(app.getApplicationContext()));
+				((ItemViewHolder) holder).icon.setImageDrawable(app.getUIUtilities().getIcon(((QuickAction) currentItem).getIconRes(), nightMode));
 				((ItemViewHolder) holder).subTitle.setVisibility(View.GONE);
-			}
-			if (drawable != null) {
-				((ItemViewHolder) holder).icon.setImageDrawable(drawable);
-				((ItemViewHolder) holder).icon.setImageResource(View.VISIBLE);
-			} else {
+				((ItemViewHolder) holder).icon.setVisibility(View.VISIBLE);
+			} else if (currentItem instanceof PoiUIFilter) {
+				((ItemViewHolder) holder).title.setText(((PoiUIFilter) currentItem).getName());
+				int iconRes = RenderingIcons.getBigIconResourceId(((PoiUIFilter) currentItem).getIconId());
+				((ItemViewHolder) holder).icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes != 0 ? iconRes : R.drawable.ic_person, nightMode));
+				((ItemViewHolder) holder).subTitle.setVisibility(View.GONE);
+				((ItemViewHolder) holder).icon.setVisibility(View.VISIBLE);
+			} else if (currentItem instanceof ITileSource) {
+				((ItemViewHolder) holder).title.setText(((ITileSource) currentItem).getName());
 				((ItemViewHolder) holder).icon.setImageResource(R.drawable.ic_action_info_dark);
+				((ItemViewHolder) holder).subTitle.setVisibility(View.GONE);
 				((ItemViewHolder) holder).icon.setVisibility(View.INVISIBLE);
+			} else if (currentItem instanceof File) {
+				((ItemViewHolder) holder).title.setText(((File) currentItem).getName());
+				if (((File) currentItem).getName().contains("/rendering/")) {
+					((ItemViewHolder) holder).icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_map_style, nightMode));
+					((ItemViewHolder) holder).icon.setVisibility(View.VISIBLE);
+				} else {
+					((ItemViewHolder) holder).icon.setImageResource(R.drawable.ic_action_info_dark);
+					((ItemViewHolder) holder).icon.setVisibility(View.INVISIBLE);
+				}
+				((ItemViewHolder) holder).subTitle.setVisibility(View.GONE);
 			}
 			((ItemViewHolder) holder).divider.setVisibility(shouldShowDivider(position) ? View.VISIBLE : View.GONE);
 		}
