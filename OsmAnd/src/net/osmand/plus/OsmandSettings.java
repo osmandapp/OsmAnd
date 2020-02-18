@@ -2820,8 +2820,8 @@ public class OsmandSettings {
 
 				AvoidRoadInfo avoidRoadInfo = new AvoidRoadInfo();
 				avoidRoadInfo.id = roadIds.get(i);
-				avoidRoadInfo.lat = latLon.getLatitude();
-				avoidRoadInfo.lon = latLon.getLongitude();
+				avoidRoadInfo.latitude = latLon.getLatitude();
+				avoidRoadInfo.longitude = latLon.getLongitude();
 				avoidRoadInfo.name = description.getName();
 				avoidRoadsInfo.add(avoidRoadInfo);
 			}
@@ -2834,7 +2834,7 @@ public class OsmandSettings {
 			List<String> descriptions = getPointDescriptions(points.size());
 			List<Long> roadIds = getRoadIds(points.size());
 
-			points.add(0, new LatLon(avoidRoadInfo.lat, avoidRoadInfo.lon));
+			points.add(0, new LatLon(avoidRoadInfo.latitude, avoidRoadInfo.longitude));
 			descriptions.add(0, PointDescription.serializeToString(new PointDescription("", avoidRoadInfo.name)));
 			roadIds.add(0, avoidRoadInfo.id);
 
@@ -2846,7 +2846,7 @@ public class OsmandSettings {
 			List<Long> roadIds = getRoadIds(points.size());
 			List<String> descriptions = getPointDescriptions(points.size());
 
-			int index = points.indexOf(new LatLon(avoidRoadInfo.lat, avoidRoadInfo.lon));
+			int index = points.indexOf(new LatLon(avoidRoadInfo.latitude, avoidRoadInfo.longitude));
 			if (index != -1) {
 				roadIds.set(index, avoidRoadInfo.id);
 				descriptions.set(index, PointDescription.serializeToString(new PointDescription("", avoidRoadInfo.name)));

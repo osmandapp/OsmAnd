@@ -165,7 +165,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	public LatLon getObjectLocation(Object o) {
 		if (o instanceof AvoidRoadInfo) {
 			AvoidRoadInfo avoidRoadInfo = (AvoidRoadInfo) o;
-			return new LatLon(avoidRoadInfo.lat, avoidRoadInfo.lon);
+			return new LatLon(avoidRoadInfo.latitude, avoidRoadInfo.longitude);
 		}
 		return null;
 	}

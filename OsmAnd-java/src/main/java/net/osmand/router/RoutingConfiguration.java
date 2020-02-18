@@ -1,7 +1,6 @@
 package net.osmand.router;
 
 import net.osmand.PlatformUtil;
-import net.osmand.binary.RouteDataObject;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.GeneralRouter.RouteAttributeContext;
 import net.osmand.router.GeneralRouter.RouteDataObjectAttribute;
@@ -12,11 +11,10 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Stack;
 
 public class RoutingConfiguration {
@@ -56,7 +54,7 @@ public class RoutingConfiguration {
 		private String defaultRouter = "";
 		private Map<String, GeneralRouter> routers = new LinkedHashMap<>();
 		private Map<String, String> attributes = new LinkedHashMap<>();
-		private List<Long> impassableRoadLocations = new ArrayList<>();
+		private Set<Long> impassableRoadLocations = new HashSet<>();
 
 		public Builder() {
 
@@ -111,17 +109,13 @@ public class RoutingConfiguration {
 //			i.planRoadDirection = 1;
 			return i;
 		}
-		
-		public List<Long> getImpassableRoadLocations() {
+
+		public Set<Long> getImpassableRoadLocations() {
 			return impassableRoadLocations;
 		}
 		
 		public boolean addImpassableRoad(long routeId) {
-			if (!impassableRoadLocations.contains(routeId)) {
-				impassableRoadLocations.add(routeId);
-				return true;
-			}
-			return false;
+			return impassableRoadLocations.add(routeId);
 		}
 
 		public Map<String, String> getAttributes() {

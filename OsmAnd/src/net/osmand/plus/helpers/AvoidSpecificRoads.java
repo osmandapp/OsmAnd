@@ -55,7 +55,7 @@ public class AvoidSpecificRoads {
 	public AvoidSpecificRoads(final OsmandApplication app) {
 		this.app = app;
 		for (AvoidRoadInfo avoidRoadInfo : app.getSettings().getImpassableRoadPoints()) {
-			impassableRoads.put(new LatLon(avoidRoadInfo.lat, avoidRoadInfo.lon), avoidRoadInfo);
+			impassableRoads.put(new LatLon(avoidRoadInfo.latitude, avoidRoadInfo.longitude), avoidRoadInfo);
 		}
 	}
 
@@ -94,7 +94,7 @@ public class AvoidSpecificRoads {
 				((ImageView) v.findViewById(R.id.waypoint_icon))
 						.setImageDrawable(getIcon(R.drawable.ic_action_road_works_dark));
 
-				LatLon latLon = item != null ? new LatLon(item.lat, item.lon) : null;
+				LatLon latLon = item != null ? new LatLon(item.latitude, item.longitude) : null;
 				String name = item != null ? item.name : app.getString(R.string.shared_string_road);
 				((TextView) v.findViewById(R.id.waypoint_dist)).setText(getDist(mapLocation, latLon));
 				((TextView) v.findViewById(R.id.waypoint_text)).setText(name);
@@ -187,7 +187,7 @@ public class AvoidSpecificRoads {
 				public void onClick(DialogInterface dialog, int which) {
 					AvoidRoadInfo point = listAdapter.getItem(which);
 					if (point != null) {
-						showOnMap(mapActivity, point.lat, point.lon, point.name);
+						showOnMap(mapActivity, point.latitude, point.longitude, point.name);
 					}
 					dialog.dismiss();
 				}
@@ -355,7 +355,7 @@ public class AvoidSpecificRoads {
 	public LatLon getLocation(AvoidRoadInfo avoidRoadInfo) {
 		for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {
 			if (builder.getImpassableRoadLocations().contains(avoidRoadInfo.id)) {
-				return new LatLon(avoidRoadInfo.lat, avoidRoadInfo.lon);
+				return new LatLon(avoidRoadInfo.latitude, avoidRoadInfo.longitude);
 			}
 		}
 		return null;
@@ -374,16 +374,16 @@ public class AvoidSpecificRoads {
 			avoidRoadInfo = new AvoidRoadInfo();
 		}
 		avoidRoadInfo.id = object != null ? object.id : 0;
-		avoidRoadInfo.lat = lat;
-		avoidRoadInfo.lon = lon;
+		avoidRoadInfo.latitude = lat;
+		avoidRoadInfo.longitude = lon;
 		avoidRoadInfo.name = getRoadName(object);
 		return avoidRoadInfo;
 	}
 
 	public static class AvoidRoadInfo {
 		public long id;
-		public double lat;
-		public double lon;
+		public double latitude;
+		public double longitude;
 		public String name;
 	}
 }
