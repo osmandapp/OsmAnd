@@ -256,7 +256,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		if (preference.getKey().equals(settings.ROUTE_STRAIGHT_ANGLE.getId())) {
-			showSeekbarSettingsDialog(getActivity(), settings.getApplicationMode());
+			showSeekbarSettingsDialog(getActivity(), getSelectedAppMode());
 		}
 		return super.onPreferenceClick(preference);
 	}
@@ -276,8 +276,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				mode.setStrAngle(angleValue[0]);
-				getPreferenceScreen().getPreference(1)
-						.setSummary(String.format(getString(R.string.shared_string_angle_param), (int) angleValue[0]));
+				updateAllSettings();
 				RoutingHelper routingHelper = app.getRoutingHelper();
 				if (mode.equals(routingHelper.getAppMode()) && (routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated())) {
 					routingHelper.recalculateRouteDueToSettingsChange();
