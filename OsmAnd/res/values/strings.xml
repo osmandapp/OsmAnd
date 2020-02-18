@@ -11,6 +11,10 @@
 	Thx - Hardy
 
 -->
+    <string name="shared_string_angle_param">Angle: %s°</string>
+    <string name="shared_string_angle">Angle</string>
+    <string name="recalc_angle_dialog_descr">Angle to calculate back-to-route path from current location</string>
+    <string name="recalc_angle_dialog_title">Acceptable deviation angle</string>
     <string name="navigation_notification_desc">Show system notification while navigation with navigation instructions.</string>
     <string name="navigation_notification">Navigation notification</string>
     <string name="shared_string_app_default_w_val">App Default (%s)</string>
