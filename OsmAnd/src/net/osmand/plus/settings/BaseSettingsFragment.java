@@ -387,14 +387,16 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			titleView.setSingleLine(false);
 		}
 		boolean enabled = preference.isEnabled();
-		if (isProfileDependent()) {
-			View cb = holder.itemView.findViewById(R.id.switchWidget);
-			if (cb == null) {
-				cb = holder.findViewById(android.R.id.checkbox);
-			}
-			if (cb instanceof CompoundButton) {
+		View cb = holder.itemView.findViewById(R.id.switchWidget);
+		if (cb == null) {
+			cb = holder.findViewById(android.R.id.checkbox);
+		}
+		if (cb instanceof CompoundButton) {
+			if (isProfileDependent()) {
 				int color = enabled ? getActiveProfileColor() : getDisabledTextColor();
 				UiUtilities.setupCompoundButton(isNightMode(), color, (CompoundButton) cb);
+			} else {
+				UiUtilities.setupCompoundButton((CompoundButton) cb, isNightMode(), UiUtilities.CompoundButtonType.GLOBAL);
 			}
 		}
 		if ((preference.isPersistent() || preference instanceof TwoStatePreference) && !(preference instanceof PreferenceCategory)) {
