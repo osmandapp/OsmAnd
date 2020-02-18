@@ -2710,4 +2710,8 @@
     <string name="poi_url">URL</string>
     <string name="poi_volcano_type">Tipo</string>
     <string name="poi_volcano_status">Stato</string>
+    <string name="reddit">Reddit</string>
+    <string name="poi_water_tap">Rubinetto</string>
+    <string name="poi_free_flying_site_takeoff">Decollo</string>
+    <string name="poi_free_flying_site_landing">Atterraggio</string>
 </resources>

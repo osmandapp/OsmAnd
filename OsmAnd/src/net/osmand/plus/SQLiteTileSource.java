@@ -528,6 +528,7 @@ public class SQLiteTileSource implements ITileSource {
 			return;
 		}
 		db.execSQL("DELETE FROM tiles");
+		db.execSQL("VACUUM");
 	}
 
 	@Override

@@ -3510,4 +3510,10 @@ représentant la zone : %1$s x %2$s</string>
     <string name="import_profile_dialog_description">Le profil importé contient des données supplémentaires. Cliquez sur Importer pour n\'importer que les données de profil ou sélectionnez des données supplémentaires à importer.</string>
     <string name="export_profile_dialog_description">Vous pouvez sélectionner des données supplémentaires à exporter en même temps que le profil.</string>
     <string name="index_name_antarctica">Antarctique</string>
+    <string name="navigation_notification_desc">Pendant la navigation, afficher une notification système avec les directions.</string>
+    <string name="navigation_notification">Notification pendant la navigation</string>
+    <string name="shared_string_app_default_w_val">Par défaut pour l\'application (%s)</string>
+    <string name="no_recalculation_setting">Désactiver le re-calcul</string>
+    <string name="route_recalculation_dist_title">Distance à partir de laquelle recalculer l’itinéraire</string>
+    <string name="route_recalculation_dist_descr">L’itinéraire sera recalculé si votre éloignement de l\'itinéraire est supérieur à ce paramètre</string>
 </resources>

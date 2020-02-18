@@ -3495,4 +3495,10 @@
     <string name="import_profile_dialog_description">İçe aktarılan profil ilave veriler içermektedir. Yalnızca profil verilerini içe aktarmak için İçe Aktar\'ı tıklayın veya içe aktarılacak ilave verileri seçin.</string>
     <string name="export_profile_dialog_description">Profil ile birlikte dışa aktarılacak ilave veriler seçebilirsiniz.</string>
     <string name="index_name_antarctica">Antarktika</string>
+    <string name="navigation_notification_desc">Navigasyon talimatları ile navigasyon sırasında sistem bildirimini göster.</string>
+    <string name="navigation_notification">Navigasyon bildirimi</string>
+    <string name="shared_string_app_default_w_val">Uygulama Varsayılanı (%s)</string>
+    <string name="no_recalculation_setting">Yeniden hesaplamayı devre dışı bırak</string>
+    <string name="route_recalculation_dist_title">Rotayı yeniden hesaplamak için minimum mesafe</string>
+    <string name="route_recalculation_dist_descr">Rotaya olan mesafe belirtilen parametreden daha uzunsa rota yeniden hesaplanacak</string>
 </resources>

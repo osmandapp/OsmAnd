@@ -3256,7 +3256,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="language_and_output">Lingua ed emissione</string>
     <string name="reset_to_default">Reimposta predefiniti</string>
     <string name="manage_profiles_descr">Crea, importa, modifica profili</string>
-    <string name="osmand_settings_descr">Ha effetto sull\'intera applicazione</string>
+    <string name="osmand_settings_descr">Hanno effetto sull\'intera applicazione</string>
     <string name="copy_from_other_profile">Copia da un altro profilo</string>
     <string name="turn_screen_on">Accendi lo schermo</string>
     <string name="map_during_navigation_info">Mappa durante la navigazione</string>
@@ -3522,4 +3522,15 @@ Rappresenta l\'area: %1$s x %2$s</string>
 \n"</string>
     <string name="copy_coordinates">Copia le coordinate</string>
     <string name="sort_by_category">Ordina per categoria</string>
+    <string name="please_provide_profile_name_message">Dai un nome a questo profilo</string>
+    <string name="open_settings">Apri le impostazioni</string>
+    <string name="plugin_disabled">Plugin disabilitato</string>
+    <string name="plugin_disabled_descr">Questo plugin è stato aggiunto tramite un\' applicazione separata. Se non vuoi più utilizzarlo, rimuovi l\' applicazione separatamente.
+\n
+\nSe rimuovi OsmAnd, il plugin resterà sul dispositivo.</string>
+    <string name="shared_string_menu">Menu</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="no_recalculation_setting">Disattiva ricalcolo percorso</string>
+    <string name="route_recalculation_dist_title">Distanza minima per il ricalcolo del percorso</string>
+    <string name="route_recalculation_dist_descr">Il percorso viene ricalcolato quando la distanza dal percorso è maggiore di quella specificata</string>
 </resources>

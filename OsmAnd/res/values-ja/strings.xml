@@ -1367,9 +1367,9 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_shareTaxiRoutes_name">タクシーのルート共有</string>
     <string name="rendering_attr_trolleybusRoutes_name">トロリーバスでのルート</string>
     <string name="rendering_attr_busRoutes_name">バスでのルート</string>
-    <string name="rendering_category_hide">描写の省略</string>
-    <string name="rendering_category_routes">ルートの追加描写</string>
-    <string name="rendering_category_details">描写の追加</string>
+    <string name="rendering_category_hide">非表示</string>
+    <string name="rendering_category_routes">ルート</string>
+    <string name="rendering_category_details">詳細</string>
     <string name="rendering_category_transport">交通機関の追加描写</string>
     <string name="rendering_category_others">その他のマップ属性</string>
     <string name="map_widget_appearance_rem">その他の要素</string>
@@ -2569,7 +2569,7 @@ POIの更新は利用できません</string>
     <string name="distance_indication_descr">アクティブマーカーまでの距離を示す情報をどこに表示するか選択してください。</string>
     <string name="active_markers_descr">マーカーの方向と距離を示すインジケーターの数を選択してください。</string>
     <string name="favourites_group">お気に入り地点のカテゴリー</string>
-    <string name="empty_state_markers_active_desc">任意の場所をロングまたはショートタップで指定後、旗のボタンでマーカーを作成します。</string>
+    <string name="empty_state_markers_active_desc">任意の場所をロングタップなどで指定後、旗のボタンでマーカーをつけられます。</string>
     <string name="shared_string_gpx_waypoints">経路データ内の経由地点</string>
     <string name="show_passed">通過済みも表示</string>
     <string name="hide_passed">通過済みは非表示</string>
@@ -2578,7 +2578,7 @@ POIの更新は利用できません</string>
     <string name="one_tap_active_descr">コンテキストメニューを開かずにマップ上のマーカーをタップするだけで1番目のマーカーとしてアクティブ化させます。</string>
     <string name="one_tap_active">ワンタップアクティブ</string>
     <string name="empty_state_av_notes">場所に関するメモをつけよう！</string>
-    <string name="empty_state_av_notes_desc">ウィジェットやコンテキストメニューから、音声、動画、写真を使ったメモなどの注釈をマップ上のどの場所にでもつけることができます。</string>
+    <string name="empty_state_av_notes_desc">ウィジェットやコンテキストメニューから音声、動画、写真を利用したメモを、マップ上のどの場所にでもつけることができます。</string>
     <string name="by_date">日付別</string>
     <string name="by_type">種類別</string>
     <string name="digits_quantity">小数点以下の桁数</string>
@@ -2611,7 +2611,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_added">追加しました</string>
     <string name="notes_by_date">日付別OSMメモ</string>
     <string name="add_group">グループの追加</string>
-    <string name="empty_state_osm_edits_descr">OSMで用いられるPOIの作成や変更、OSMメモを開いたり注釈を加えたり、記録したGPXファイルの提供などがおこなえます。</string>
+    <string name="empty_state_osm_edits_descr">OSM用のPOIの作成や変更、OSMメモを開いたり注釈を加えたりはもちろん、記録したGPXファイルをOSMへアップロードすることもできます。</string>
     <string name="mark_passed">通過済みにする</string>
     <string name="add_segment_to_the_track">GPXファイルに追加</string>
     <string name="shared_string_current">現在地</string>
