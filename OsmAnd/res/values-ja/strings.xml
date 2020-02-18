@@ -2569,7 +2569,7 @@ POIの更新は利用できません</string>
     <string name="distance_indication_descr">アクティブマーカーまでの距離を示す情報をどこに表示するか選択してください。</string>
     <string name="active_markers_descr">マーカーの方向と距離を示すインジケーターの数を選択してください。</string>
     <string name="favourites_group">お気に入り地点のカテゴリー</string>
-    <string name="empty_state_markers_active_desc">任意の場所をロングまたはショートタップで指定後、旗のボタンでマーカーを作成します。</string>
+    <string name="empty_state_markers_active_desc">任意の場所をロングタップなどで指定後、旗のボタンでマーカーをつけられます。</string>
     <string name="shared_string_gpx_waypoints">経路データ内の経由地点</string>
     <string name="show_passed">通過済みも表示</string>
     <string name="hide_passed">通過済みは非表示</string>
