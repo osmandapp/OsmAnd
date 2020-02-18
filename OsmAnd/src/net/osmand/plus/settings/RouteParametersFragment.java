@@ -249,6 +249,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			straightAngle.setTitle(getString(R.string.recalc_angle_dialog_title));
 			straightAngle.setSummary(String.format(getString(R.string.shared_string_angle_param), (int) am.getStrAngle()));
 			straightAngle.setLayoutResource(R.layout.preference_with_descr);
+			straightAngle.setIcon(getRoutingPrefIcon("routing_recalc_distance")); //TODO change for appropriate icon when available
 			getPreferenceScreen().addPreference(straightAngle);
 		}
 	}
