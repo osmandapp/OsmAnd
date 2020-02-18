@@ -3545,4 +3545,6 @@ Lon %2$s</string>
     <string name="multimedia_rec_split_title">Aufzeichnungsteilung</string>
     <string name="routing_profile_direct_to">Direkt zum Punkt</string>
     <string name="search_offline_geo_error">Geo-Intent \'%s\' konnte nicht analysiert werden.</string>
+    <string name="navigation_notification_desc">Systembenachrichtigung während der Navigation mit Navigationsanweisungen anzeigen.</string>
+    <string name="navigation_notification">Navigations-Benachrichtigung</string>
 </resources>

@@ -3521,4 +3521,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="import_profile_dialog_description">La enportata profilo enhavas kromajn datumojn. Frapetu “enporti” por enporti nur profilajn datumojn aŭ elektu kromajn datumojn por enporti.</string>
     <string name="export_profile_dialog_description">Vi povas elekti kromajn datumojn por elporti kune kun la profilo.</string>
     <string name="index_name_antarctica">Antarkto</string>
+    <string name="navigation_notification_desc">Montri sisteman sciigon dum navigi montrantan instrukciojn turno-post-turno.</string>
+    <string name="navigation_notification">Sciigo dum navigado</string>
 </resources>
