@@ -1242,7 +1242,7 @@ public class RouteProvider {
 	private RouteCalculationResult findStraightRoute(RouteCalculationParams params) {
 		LinkedList<Location> points = new LinkedList<>();
 		List<Location> segments = new ArrayList<>();
-		points.add(params.start);
+		points.add(new Location("pnt", params.start.getLatitude(), params.start.getLongitude()));
 		if(params.intermediates != null) {
 			for (LatLon l : params.intermediates) {
 				points.add(new Location("pnt", l.getLatitude(), l.getLongitude()));
