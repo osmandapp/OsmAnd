@@ -739,7 +739,7 @@ public class AppInitializer implements IProgress {
 			notifyEvent(InitEvents.RESTORE_BACKUPS);
 			app.mapMarkersHelper.syncAllGroupsAsync();
 			app.searchUICore.initSearchUICore();
-			app.avoidSpecificRoads.initRouteObjects();
+			app.avoidSpecificRoads.initRouteObjects(false);
 			
 			checkLiveUpdatesAlerts();
 			

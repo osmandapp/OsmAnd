@@ -1,6 +1,5 @@
 package net.osmand.router;
 
-import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
@@ -13,8 +12,10 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
@@ -55,7 +56,7 @@ public class RoutingConfiguration {
 		private String defaultRouter = "";
 		private Map<String, GeneralRouter> routers = new LinkedHashMap<>();
 		private Map<String, String> attributes = new LinkedHashMap<>();
-		private HashMap<Long, Location> impassableRoadLocations = new HashMap<>();
+		private List<Long> impassableRoadLocations = new ArrayList<>();
 
 		public Builder() {
 
@@ -95,7 +96,7 @@ public class RoutingConfiguration {
 			i.initialDirection = direction;
 			i.recalculateDistance = parseSilentFloat(getAttribute(i.router, "recalculateDistanceHelp"), i.recalculateDistance) ;
 			i.heuristicCoefficient = parseSilentFloat(getAttribute(i.router, "heuristicCoefficient"), i.heuristicCoefficient);
-			i.router.addImpassableRoads(impassableRoadLocations.keySet());
+			i.router.addImpassableRoads(new HashSet<>(impassableRoadLocations));
 			i.ZOOM_TO_LOAD_TILES = parseSilentInt(getAttribute(i.router, "zoomToLoadTiles"), i.ZOOM_TO_LOAD_TILES);
 			int desirable = parseSilentInt(getAttribute(i.router, "memoryLimitInMB"), 0);
 			if(desirable != 0) {
@@ -111,13 +112,13 @@ public class RoutingConfiguration {
 			return i;
 		}
 		
-		public Map<Long, Location> getImpassableRoadLocations() {
+		public List<Long> getImpassableRoadLocations() {
 			return impassableRoadLocations;
 		}
 		
-		public boolean addImpassableRoad(RouteDataObject route, Location location) {
-			if (!impassableRoadLocations.containsKey(route.id)){
-				impassableRoadLocations.put(route.id, location);
+		public boolean addImpassableRoad(RouteDataObject route) {
+			if (!impassableRoadLocations.contains(route.id)) {
+				impassableRoadLocations.add(route.id);
 				return true;
 			}
 			return false;
@@ -159,8 +160,8 @@ public class RoutingConfiguration {
 			return routers;
 		}
 
-		public void removeImpassableRoad(RouteDataObject obj) {
-			impassableRoadLocations.remove(obj.id);
+		public void removeImpassableRoad(long routeId) {
+			impassableRoadLocations.remove(routeId);
 		}
 	}
 

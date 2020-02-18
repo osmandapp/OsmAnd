@@ -42,6 +42,7 @@ import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.api.SettingsAPI.SettingsEditor;
 import net.osmand.plus.api.SettingsAPIImpl;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialogFragment;
+import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
@@ -2627,6 +2628,7 @@ public class OsmandSettings {
 
 	private static final String IMPASSABLE_ROAD_POINTS = "impassable_road_points";
 	private static final String IMPASSABLE_ROADS_DESCRIPTIONS = "impassable_roads_descriptions";
+	private static final String IMPASSABLE_ROADS_IDS = "impassable_roads_ids";
 	private ImpassableRoadsStorage mImpassableRoadsStorage = new ImpassableRoadsStorage();
 
 	public void backupPointToStart() {
@@ -2989,11 +2991,11 @@ public class OsmandSettings {
 		return settingsAPI.edit(globalPreferences).putInt(POINT_NAVIGATE_ROUTE, NAVIGATE).commit();
 	}
 
-	public List<LatLon> getImpassableRoadPoints() {
-		return mImpassableRoadsStorage.getPoints();
+	public List<AvoidRoadInfo> getImpassableRoadPoints() {
+		return mImpassableRoadsStorage.getImpassableRoadsInfo();
 	}
-	public boolean addImpassableRoad(double latitude, double longitude) {
-		return mImpassableRoadsStorage.insertPoint(latitude, longitude, null, 0);
+	public boolean addImpassableRoad(AvoidRoadInfo avoidRoadInfo) {
+		return mImpassableRoadsStorage.addImpassableRoadInfo(avoidRoadInfo);
 	}
 
 	public boolean removeImpassableRoad(int index) {

@@ -50,22 +50,24 @@ public class AvoidSpecificRoads {
 
 	private OsmandApplication app;
 
-	private Map<LatLon, RouteDataObject> impassableRoads = new LinkedHashMap<>();
+	private Map<LatLon, AvoidRoadInfo> impassableRoads = new LinkedHashMap<>();
 
 	public AvoidSpecificRoads(final OsmandApplication app) {
 		this.app = app;
-		for (LatLon latLon : app.getSettings().getImpassableRoadPoints()) {
-			impassableRoads.put(latLon, null);
+		for (AvoidRoadInfo avoidRoadInfo : app.getSettings().getImpassableRoadPoints()) {
+			impassableRoads.put(new LatLon(avoidRoadInfo.lat, avoidRoadInfo.lon), avoidRoadInfo);
 		}
 	}
 
-	public Map<LatLon, RouteDataObject> getImpassableRoads() {
+	public Map<LatLon, AvoidRoadInfo> getImpassableRoads() {
 		return impassableRoads;
 	}
 
-	public void initRouteObjects() {
-		for (LatLon latLon : impassableRoads.keySet()) {
-			addImpassableRoad(null, latLon, false, true);
+	public void initRouteObjects(boolean force) {
+		for (Map.Entry<LatLon, AvoidRoadInfo> entry : impassableRoads.entrySet()) {
+			if (force || entry.getValue().id == 0) {
+				addImpassableRoad(null, entry.getKey(), false, true);
+			}
 		}
 	}
 
@@ -117,25 +119,15 @@ public class AvoidSpecificRoads {
 
 	public String getText(@Nullable LatLon point) {
 		if (point != null) {
-			RouteDataObject obj = impassableRoads.get(point);
-			if (obj != null) {
-				String locale = app.getSettings().MAP_PREFERRED_LOCALE.get();
-				boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
-				String name = RoutingHelper.formatStreetName(
-						obj.getName(locale, transliterate),
-						obj.getRef(locale, transliterate, true),
-						obj.getDestinationName(locale, transliterate, true),
-						app.getString(R.string.towards)
-				);
-				if (!TextUtils.isEmpty(name)) {
-					return name;
-				}
+			AvoidRoadInfo obj = impassableRoads.get(point);
+			if (obj != null && !TextUtils.isEmpty(obj.name)) {
+				return obj.name;
 			}
 		}
 		return app.getString(R.string.shared_string_road);
 	}
 
-	public String getText(@Nullable RouteDataObject obj) {
+	public String getRoadName(@Nullable RouteDataObject obj) {
 		if (obj != null) {
 			String locale = app.getSettings().MAP_PREFERRED_LOCALE.get();
 			boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
@@ -347,21 +339,35 @@ public class AvoidSpecificRoads {
 		MapActivity.launchMapActivityMoveToTop(ctx);
 	}
 
-	public LatLon getLocation(RouteDataObject object) {
-		Location location = null;
+	public LatLon getLocation(AvoidRoadInfo avoidRoadInfo) {
 		for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {
-			location = builder.getImpassableRoadLocations().get(object.getId());
-			if (location != null) {
-				break;
+			if (builder.getImpassableRoadLocations().contains(avoidRoadInfo.id)) {
+				return new LatLon(avoidRoadInfo.lat, avoidRoadInfo.lon);
 			}
 		}
-		return location == null ? null : new LatLon(location.getLatitude(), location.getLongitude());
+		return null;
 	}
 
 	public interface AvoidSpecificRoadsCallback {
 
-		void onAddImpassableRoad(boolean success, RouteDataObject newObject);
+		void onAddImpassableRoad(boolean success, AvoidRoadInfo avoidRoadInfo);
 
 		boolean isCancelled();
+	}
+
+	private AvoidRoadInfo createAvoidRoadInfo(@Nullable RouteDataObject object, double lat, double lon) {
+		AvoidRoadInfo avoidRoadInfo = new AvoidRoadInfo();
+		avoidRoadInfo.id = object != null ? object.id : 0;
+		avoidRoadInfo.lat = lat;
+		avoidRoadInfo.lon = lon;
+		avoidRoadInfo.name = getRoadName(object);
+		return avoidRoadInfo;
+	}
+
+	public static class AvoidRoadInfo {
+		public long id;
+		public double lat;
+		public double lon;
+		public String name;
 	}
 }
