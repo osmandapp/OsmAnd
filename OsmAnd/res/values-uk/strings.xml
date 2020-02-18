@@ -3532,4 +3532,8 @@
     <string name="index_name_antarctica">Антарктида</string>
     <string name="navigation_notification_desc">Показувати системне сповіщення з навігаційними вказівками під час навігації.</string>
     <string name="navigation_notification">Навігаційне сповіщення</string>
+    <string name="shared_string_app_default_w_val">Усталений застосунок (%s)</string>
+    <string name="no_recalculation_setting">Вимкнути перерахунок</string>
+    <string name="route_recalculation_dist_title">Найменша відстань для перерахунку маршруту</string>
+    <string name="route_recalculation_dist_descr">Маршрут буде перераховано, якщо відстань до нього перевищує вказане</string>
 </resources>
