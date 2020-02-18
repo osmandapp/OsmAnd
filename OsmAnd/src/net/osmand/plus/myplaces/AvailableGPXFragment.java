@@ -201,10 +201,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	public void onPause() {
 		super.onPause();
 		updateEnable = false;
-		if (operationTask != null) {
-			if (!(operationTask instanceof SelectGpxTask)) {
-				operationTask.cancel(true);
-			}
+		if (operationTask != null && !(operationTask instanceof SelectGpxTask)) {
+			operationTask.cancel(true);
 		}
 		if (actionMode != null) {
 			actionMode.finish();

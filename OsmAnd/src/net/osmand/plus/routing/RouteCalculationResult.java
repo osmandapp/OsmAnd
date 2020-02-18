@@ -1037,10 +1037,7 @@ public class RouteCalculationResult {
 					nextInd++;
 				}
 			}
-			int dist = getListDistance(currentRoute);
-			if (fromLoc != null) {
-				dist += fromLoc.distanceTo(locations.get(currentRoute));
-			}
+			int dist = getDistanceToFinish(fromLoc);
 			if (nextInd < directions.size()) {
 				info.directionInfo = directions.get(nextInd);
 				if (directions.get(nextInd).routePointOffset <= currentRoute
@@ -1156,16 +1153,28 @@ public class RouteCalculationResult {
 		}
 		return 0;
 	}
+
+	public int getDistanceFromPoint(int locationIndex) {
+		if(listDistance != null && locationIndex < listDistance.length) {
+			return listDistance[locationIndex];
+		}
+		return 0;
+	}
 	
 	public boolean isPointPassed(int locationIndex) {
 		return locationIndex <= currentRoute;
 	}
 	
 	public int getDistanceToFinish(Location fromLoc) {
-		if(listDistance != null && currentRoute < listDistance.length){
-			int dist = listDistance[currentRoute];
-			Location l = locations.get(currentRoute);
-			if(fromLoc != null){
+		Location ap = this.currentStraightAnglePoint;
+		int rp = currentStraightAngleRoute > currentRoute ? currentStraightAngleRoute : currentRoute;
+		if(listDistance != null && rp < listDistance.length){
+			int dist = listDistance[rp];
+			Location l = locations.get(rp);
+			if(ap != null){
+				dist += fromLoc.distanceTo(ap);
+				dist += ap.distanceTo(l);
+			} else {
 				dist += fromLoc.distanceTo(l);
 			}
 			return dist;
@@ -1174,12 +1183,8 @@ public class RouteCalculationResult {
 	}
 	
 	public int getDistanceToNextIntermediate(Location fromLoc) {
+		int dist = getDistanceToFinish(fromLoc);
 		if(listDistance != null && currentRoute < listDistance.length){
-			int dist = listDistance[currentRoute];
-			Location l = locations.get(currentRoute);
-			if(fromLoc != null){
-				dist += fromLoc.distanceTo(l);
-			}
 			if(nextIntermediate >= intermediatePoints.length ){
 				return 0;
 			} else {
@@ -1245,8 +1250,8 @@ public class RouteCalculationResult {
 	}
 
 	public void updateNextVisiblePoint(int nextPoint, Location mp) {
-		currentStraightAngleRoute = nextPoint;
 		currentStraightAnglePoint = mp;
+		currentStraightAngleRoute = nextPoint;
 	}
 
 	public static class NextDirectionInfo {
