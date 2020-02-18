@@ -78,7 +78,7 @@ public class RouteProvider {
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(RouteProvider.class);
 	private static final String OSMAND_ROUTER = "OsmAndRouter";
 	private static final int MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT = 60;
-	private static final int MIN_STRAIGHT_DIST = 150;
+	private static final int MIN_STRAIGHT_DIST = 50000;
 
 	public enum RouteService {
 		OSMAND("OsmAnd (offline)"),
@@ -1249,13 +1249,12 @@ public class RouteProvider {
 			}
 		}
 		points.add(new Location("", params.end.getLatitude(), params.end.getLongitude()));
-		Location lastAdded = points.poll();
-		segments.add(lastAdded);
+		Location lastAdded = null;
 		float speed = params.mode.getDefaultSpeed();
 		List<RouteDirectionInfo> computeDirections = new ArrayList<RouteDirectionInfo>();
 		while(!points.isEmpty()) {
 			Location pl = points.peek();
-			if (lastAdded.distanceTo(pl) < MIN_STRAIGHT_DIST) {
+			if (lastAdded == null || lastAdded.distanceTo(pl) < MIN_STRAIGHT_DIST) {
 				lastAdded = points.poll();
 				if(lastAdded.getProvider().equals("pnt")) {
 					RouteDirectionInfo previousInfo = new RouteDirectionInfo(speed, TurnType.straight());
