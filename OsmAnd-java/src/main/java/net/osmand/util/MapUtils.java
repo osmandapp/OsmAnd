@@ -49,6 +49,11 @@ public class MapUtils {
         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '_', '~'
     };
 
+
+
+	public static double getDistance(Location l1, Location l2) {
+		return getDistance(l1.getLatitude(), l1.getLongitude(), l2.getLatitude(), l2.getLongitude());
+	}
 	public static double getDistance(LatLon l, double latitude, double longitude) {
 		return getDistance(l.getLatitude(), l.getLongitude(), latitude, longitude);
 	}

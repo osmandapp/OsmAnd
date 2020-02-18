@@ -35,6 +35,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.TrackChartPoints;
+import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
@@ -319,7 +320,8 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 
 	private void drawProjectionPoint(Canvas canvas, double[] projectionXY) {
 		if (projectionIcon == null) {
-			projectionIcon = (LayerDrawable) view.getResources().getDrawable(helper.getSettings().getApplicationMode().getLocationIcon().DEFAULT.getIconId());
+			helper.getSettings().getApplicationMode().getLocationIcon();
+			projectionIcon = (LayerDrawable) view.getResources().getDrawable(LocationIcon.DEFAULT.getIconId());
 		}
 		int locationX = (int) projectionXY[0];
 		int locationY = (int) projectionXY[1];
@@ -1148,33 +1150,32 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 	private double[] calculateProjectionOnRoutePoint(List<Location> routeNodes, RoutingHelper helper, RotatedTileBox box) {
 		double[] projectionXY;
 		boolean visible;
-		Location previousInRoute = null;
 		Location nextInRoute = null;
-		//need to change this code by fixing helper.route.getCurrentRoute() miscalculation
 		// TODO simplifiy all culation!
+		Location ll = helper.getLastFixedLocation();
+		Location  previousInRoute = routeNodes.get(helper.getRoute().getCurrentRoute() > 0 ? helper.getRoute().getCurrentRoute() - 1 : 0);
 		if (helper.getRoute().getIntermediatePointsToPass() > 0) {
 			for (int i = 1; i < routeNodes.size(); i++) {
 				LatLon routePoint = new LatLon(routeNodes.get(i).getLatitude(), routeNodes.get(i).getLongitude());
 				if (routePoint.equals(helper.getIntermediatePoints().get(0))) {
-					previousInRoute = routeNodes.get(i - 1);
 					nextInRoute = routeNodes.get(i);
 				}
 			}
 		} else {
-			previousInRoute = routeNodes.get(routeNodes.size() - 2);
-			nextInRoute = routeNodes.get(routeNodes.size() - 1);
+			nextInRoute = routeNodes.get(routeNodes.size()-1);
 		}
 
 		if (nextInRoute != null && previousInRoute != null) {
 
-			final Location ll = view.getApplication().getLocationProvider().getLastKnownLocation();
+//			double Ri = MapUtils.getDistance(nextInRoute, ll);
+//
+
 			final int aX = box.getPixXFromLonNoRot(ll.getLongitude());
 			final int aY = box.getPixYFromLatNoRot(ll.getLatitude());
 			final int centerX = box.getPixXFromLonNoRot(nextInRoute.getLongitude());
 			final int centerY = box.getPixYFromLatNoRot(nextInRoute.getLatitude());
 			final int bX = box.getPixXFromLonNoRot(previousInRoute.getLongitude());
 			final int bY = box.getPixYFromLatNoRot(previousInRoute.getLatitude());
-
 			double radius = MapUtils.getVectorMagnitude(centerX, centerY, aX, aY);
 			double angle2 = MapUtils.getAngleForRadiusVector(centerX, centerY, bX, bY);
 			projectionXY = MapUtils.getCoordinatesFromRadiusAndAngle(centerX, centerY, radius, angle2);
