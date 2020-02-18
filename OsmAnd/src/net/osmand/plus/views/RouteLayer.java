@@ -1153,18 +1153,15 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		RouteCalculationResult route = helper.getRoute();
 		List<Location> locs = route.getImmutableAllLocations();
 		int cr = route.getCurrentRoute();
-		if(cr == 0) {
-			cr = 1;
-		}
 		int locIndex = locs.size() - 1;
 		if(route.getIntermediatePointsToPass() > 0) {
 			locIndex = route.getIndexOfIntermediate(route.getIntermediatePointsToPass() - 1);
 		}
-		if(ll != null && cr < locs.size() && locIndex >= 0 && locIndex < locs.size()) {
+		if(ll != null && cr > 0 && cr < locs.size() && locIndex >= 0 && locIndex < locs.size()) {
 			Location loc1 = locs.get(cr - 1);
 			Location loc2 = locs.get(cr);
-			double distDelta = route.getDistanceFromPoint(locIndex);
-			double baDist = route.getDistanceFromPoint(cr) - route.getDistanceFromPoint(cr - 1);
+			double distLeft = route.getDistanceFromPoint(cr) - route.getDistanceFromPoint(locIndex);
+			double baDist = route.getDistanceFromPoint(cr - 1) - route.getDistanceFromPoint(cr);
 			Location target = locs.get(locIndex);
 			double dTarget = ll.distanceTo(target);
 			final int aX = box.getPixXFromLonNoRot(loc1.getLongitude());
@@ -1172,7 +1169,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			final int bX = box.getPixXFromLonNoRot(loc2.getLongitude());
 			final int bY = box.getPixYFromLatNoRot(loc2.getLatitude());
 			if(baDist != 0) {
-				double CF = dTarget - distDelta / baDist;
+				double CF = (dTarget - distLeft) / baDist;
 				double rX = bX - CF * (bX - aX);
 				double rY = bY - CF * (bY - aY);
 				projectionXY = new double[] {rX, rY};
