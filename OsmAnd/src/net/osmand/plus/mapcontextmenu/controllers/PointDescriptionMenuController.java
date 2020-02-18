@@ -33,7 +33,7 @@ public class PointDescriptionMenuController extends MenuController {
 					MapActivity activity = getMapActivity();
 					if (activity != null) {
 						AvoidSpecificRoads roads = activity.getMyApplication().getAvoidSpecificRoads();
-						roads.addImpassableRoad(activity, getLatLon(), false, false);
+						roads.addImpassableRoad(activity, getLatLon(), false, false, null);
 					}
 				}
 			};
