@@ -1155,7 +1155,7 @@ public class RouteCalculationResult {
 	}
 
 	public int getDistanceFromPoint(int locationIndex) {
-		if(listDistance != null && locationIndex < listDistance.length {
+		if(listDistance != null && locationIndex < listDistance.length) {
 			return listDistance[locationIndex];
 		}
 		return 0;
