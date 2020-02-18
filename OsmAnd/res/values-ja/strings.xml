@@ -2578,7 +2578,7 @@ POIの更新は利用できません</string>
     <string name="one_tap_active_descr">コンテキストメニューを開かずにマップ上のマーカーをタップするだけで1番目のマーカーとしてアクティブ化させます。</string>
     <string name="one_tap_active">ワンタップアクティブ</string>
     <string name="empty_state_av_notes">場所に関するメモをつけよう！</string>
-    <string name="empty_state_av_notes_desc">ウィジェットやコンテキストメニューから、音声、動画、写真を使ったメモなどの注釈をマップ上のどの場所にでもつけることができます。</string>
+    <string name="empty_state_av_notes_desc">ウィジェットやコンテキストメニューから音声、動画、写真を利用したメモを、マップ上のどの場所にでもつけることができます。</string>
     <string name="by_date">日付別</string>
     <string name="by_type">種類別</string>
     <string name="digits_quantity">小数点以下の桁数</string>
