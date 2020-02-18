@@ -9,14 +9,12 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -25,10 +23,15 @@ import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
+import net.osmand.view.ThreeStateCheckbox;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.view.ThreeStateCheckbox.State.CHECKED;
+import static net.osmand.view.ThreeStateCheckbox.State.UNCHECKED;
+import static net.osmand.view.ThreeStateCheckbox.State.MISC;
 
 class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
@@ -46,11 +49,6 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		this.importState = importState;
 		this.dataToOperate = new ArrayList<>();
 		this.profileColor = app.getSettings().getApplicationMode().getIconColorInfo().getColor(nightMode);
-//		if (!importState) {
-//			for (AdditionalDataWrapper dataWrapper : dataList) {
-//				dataToOperate.addAll(dataWrapper.getItems());
-//			}
-//		}
 	}
 
 	ExportImportSettingsAdapter(OsmandApplication app, boolean nightMode) {
@@ -74,7 +72,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
 		TextView titleTv = group.findViewById(R.id.title_tv);
 		TextView subTextTv = group.findViewById(R.id.sub_text_tv);
-		final CheckBox checkBox = group.findViewById(R.id.check_box);
+		final ThreeStateCheckbox checkBox = group.findViewById(R.id.check_box);
 		ImageView expandIv = group.findViewById(R.id.explist_indicator);
 		View lineDivider = group.findViewById(R.id.divider);
 		View cardTopDivider = group.findViewById(R.id.card_top_divider);
@@ -89,11 +87,22 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		final List<?> listItems = dataList.get(groupPosition).getItems();
 		subTextTv.setText(String.valueOf(listItems.size()));
 
-		checkBox.setChecked(dataToOperate.containsAll(listItems));
+		if (dataToOperate.containsAll(listItems)) {
+			checkBox.setState(CHECKED);
+		} else {
+			boolean contains = false;
+			for (Object object : listItems) {
+				if (dataToOperate.contains(object)) {
+					contains = true;
+					break;
+				}
+			}
+			checkBox.setState(contains ? MISC : UNCHECKED);
+		}
 		checkBox.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (checkBox.isChecked()) {
+				if (checkBox.getState() == CHECKED) {
 					for (Object object : listItems) {
 						if (!dataToOperate.contains(object)) {
 							dataToOperate.add(object);
