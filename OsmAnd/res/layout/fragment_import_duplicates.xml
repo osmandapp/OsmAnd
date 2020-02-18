@@ -47,14 +47,17 @@
 		android:textSize="@dimen/default_list_text_size"
 		osmand:typeface="@string/font_roboto_medium" />
 
-	<include layout="@layout/list_item_divider" />
+	<include
+		android:id="@+id/description_divider"
+		layout="@layout/card_bottom_divider"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content" />
 
 	<android.support.v7.widget.RecyclerView
 		android:id="@+id/list"
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
-		android:layout_weight="1"
-		android:background="?attr/list_background_color" />
+		android:layout_weight="1" />
 
 	<LinearLayout
 		android:layout_width="match_parent"

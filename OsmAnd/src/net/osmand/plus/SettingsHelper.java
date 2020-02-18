@@ -93,6 +93,7 @@ public class SettingsHelper {
 	public static final String SETTINGS_VERSION_KEY = "settings_version";
 
 	private static final String COPY_PREFIX = "copy_";
+	private static final String COPY_SUFFIX = "_copy";
 	private static final Log LOG = PlatformUtil.getLog(SettingsHelper.class);
 	private static final int BUFFER = 1024;
 
@@ -509,12 +510,19 @@ public class SettingsHelper {
 			return builder != null && ApplicationMode.valueOfStringKey(getName(), null) != null;
 		}
 
+		private void renameProfile() {
+			modeBean.stringKey = COPY_PREFIX + modeBean.stringKey;
+			modeBean.userProfileName = COPY_PREFIX + modeBean.userProfileName;
+			if (ApplicationMode.valueOfStringKey(modeBean.stringKey, null) != null) {
+				renameProfile();
+			}
+		}
+
 		@Override
 		public void apply() {
 			if (appMode.isCustomProfile()) {
-				if (!shouldReplace) {
-					modeBean.stringKey = COPY_PREFIX + modeBean.stringKey;
-					modeBean.userProfileName = COPY_PREFIX + modeBean.userProfileName;
+				if (!shouldReplace && exists()) {
+					renameProfile();
 					builder = ApplicationMode.fromModeBean(app, modeBean);
 				}
 				appMode = ApplicationMode.saveProfile(builder, getSettings().getContext());
@@ -748,10 +756,6 @@ public class SettingsHelper {
 					if (shouldReplace || !file.exists()) {
 						output = new FileOutputStream(file);
 					} else {
-//						String path = file.getAbsolutePath();
-//						String copyName = path.replaceAll(file.getName(), COPY_PREFIX + file.getName());
-//						File copyFile = new File(copyName);
-//						output = new FileOutputStream(copyFile);
 						output = new FileOutputStream(renameFile(file));
 					}
 					byte[] buffer = new byte[BUFFER];
@@ -805,6 +809,24 @@ public class SettingsHelper {
 			return quickActions;
 		}
 
+		private void renameAction(QuickAction quickAction) {
+			quickAction.setName(COPY_PREFIX + quickAction.getName(app));
+			if (duplicateExists(quickAction)) {
+				renameAction(quickAction);
+			}
+		}
+
+		private boolean duplicateExists(QuickAction quickAction) {
+			QuickActionFactory factory = new QuickActionFactory();
+			List<QuickAction> savedActions = factory.parseActiveActionsList(getSettings().QUICK_ACTION_LIST.get());
+			for (QuickAction action : savedActions) {
+				if (action.getName(app).equals(quickAction.getName(app))) {
+					return true;
+				}
+			}
+			return false;
+		}
+
 		@Override
 		public void apply() {
 			if (!quickActions.isEmpty() || !duplicates.isEmpty()) {
@@ -822,7 +844,7 @@ public class SettingsHelper {
 						}
 					} else {
 						for (QuickAction action : duplicates) {
-							action.setName(COPY_PREFIX + action.getName(app));
+							renameAction(action);
 						}
 					}
 					newActions.addAll(duplicates);
@@ -979,7 +1001,6 @@ public class SettingsHelper {
 				for (PoiUIFilter duplicate : duplicates) {
 					if (!shouldReplace) {
 						renamePoiFilter(duplicate);
-//						duplicate.setName(COPY_PREFIX + duplicate.getName());
 					}
 					poiUIFilters.add(duplicate);
 				}
@@ -992,6 +1013,7 @@ public class SettingsHelper {
 
 		private void renamePoiFilter(PoiUIFilter poiUIFilter) {
 			poiUIFilter.setName(COPY_PREFIX + poiUIFilter.getName());
+			poiUIFilter.setFilterId(poiUIFilter.getFilterId() + COPY_SUFFIX);
 			if (duplicateExists(poiUIFilter)) {
 				renamePoiFilter(poiUIFilter);
 			}

@@ -97,7 +97,7 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 				((ItemViewHolder) holder).icon.setImageResource(View.VISIBLE);
 			} else {
 				((ItemViewHolder) holder).icon.setImageResource(R.drawable.ic_action_info_dark);
-				((ItemViewHolder) holder).icon.setVisibility(View.GONE);
+				((ItemViewHolder) holder).icon.setVisibility(View.INVISIBLE);
 			}
 			((ItemViewHolder) holder).divider.setVisibility(shouldShowDivider(position) ? View.VISIBLE : View.GONE);
 		}

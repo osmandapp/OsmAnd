@@ -169,10 +169,6 @@ public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implement
 				}
 			}
 		});
-//		if (getFragmentManager() != null) {
-//			ImportSettingsFragment fragment = (ImportSettingsFragment) getFragmentManager().findFragmentByTag(ImportSettingsFragment.TAG);
-//			fragment.dismiss();
-//		}
 		dismiss();
 	}
 
