@@ -116,9 +116,9 @@ public class RoutingConfiguration {
 			return impassableRoadLocations;
 		}
 		
-		public boolean addImpassableRoad(RouteDataObject route) {
-			if (!impassableRoadLocations.contains(route.id)) {
-				impassableRoadLocations.add(route.id);
+		public boolean addImpassableRoad(long routeId) {
+			if (!impassableRoadLocations.contains(routeId)) {
+				impassableRoadLocations.add(routeId);
 				return true;
 			}
 			return false;

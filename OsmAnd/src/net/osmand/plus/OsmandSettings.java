@@ -2798,9 +2798,136 @@ public class OsmandSettings {
 	}
 
 	private class ImpassableRoadsStorage extends MapPointsStorage {
+
+		protected String roadsIdsKey;
+
 		public ImpassableRoadsStorage() {
 			pointsKey = IMPASSABLE_ROAD_POINTS;
 			descriptionsKey = IMPASSABLE_ROADS_DESCRIPTIONS;
+			roadsIdsKey = IMPASSABLE_ROADS_IDS;
+		}
+
+		public List<AvoidRoadInfo> getImpassableRoadsInfo() {
+			List<LatLon> points = mImpassableRoadsStorage.getPoints();
+			List<String> descriptions = mImpassableRoadsStorage.getPointDescriptions(points.size());
+			List<Long> roadIds = getRoadIds(points.size());
+
+			List<AvoidRoadInfo> avoidRoadsInfo = new ArrayList<>();
+
+			for (int i = 0; i < points.size(); i++) {
+				LatLon latLon = points.get(i);
+				PointDescription description = PointDescription.deserializeFromString(descriptions.get(i), null);
+
+				AvoidRoadInfo avoidRoadInfo = new AvoidRoadInfo();
+				avoidRoadInfo.id = roadIds.get(i);
+				avoidRoadInfo.lat = latLon.getLatitude();
+				avoidRoadInfo.lon = latLon.getLongitude();
+				avoidRoadInfo.name = description.getName();
+				avoidRoadsInfo.add(avoidRoadInfo);
+			}
+
+			return avoidRoadsInfo;
+		}
+
+		public boolean addImpassableRoadInfo(AvoidRoadInfo avoidRoadInfo) {
+			List<LatLon> points = getPoints();
+			List<String> descriptions = getPointDescriptions(points.size());
+			List<Long> roadIds = getRoadIds(points.size());
+
+			points.add(0, new LatLon(avoidRoadInfo.lat, avoidRoadInfo.lon));
+			descriptions.add(0, PointDescription.serializeToString(new PointDescription("", avoidRoadInfo.name)));
+			roadIds.add(0, avoidRoadInfo.id);
+
+			return savePoints(points, descriptions) && saveRoadIds(roadIds);
+		}
+
+		public boolean updateImpassableRoadInfo(AvoidRoadInfo avoidRoadInfo) {
+			List<LatLon> points = getPoints();
+			List<Long> roadIds = getRoadIds(points.size());
+			List<String> descriptions = getPointDescriptions(points.size());
+
+			int index = points.indexOf(new LatLon(avoidRoadInfo.lat, avoidRoadInfo.lon));
+			if (index != -1) {
+				roadIds.set(index, avoidRoadInfo.id);
+				descriptions.set(index, PointDescription.serializeToString(new PointDescription("", avoidRoadInfo.name)));
+				return savePoints(points, descriptions) && saveRoadIds(roadIds);
+			}
+			return false;
+		}
+
+		public List<Long> getRoadIds(int size) {
+			List<Long> list = new ArrayList<>();
+			String roadIds = settingsAPI.getString(globalPreferences, roadsIdsKey, "");
+			if (roadIds.trim().length() > 0) {
+				StringTokenizer tok = new StringTokenizer(roadIds, ",");
+				while (tok.hasMoreTokens() && list.size() <= size) {
+					String token = tok.nextToken();
+					list.add(Long.parseLong(token));
+				}
+			}
+			while (list.size() < size) {
+				list.add(0L);
+			}
+			return list;
+		}
+
+		@Override
+		public boolean deletePoint(int index) {
+			List<LatLon> points = getPoints();
+			List<Long> roadIds = getRoadIds(points.size());
+			List<String> descriptions = getPointDescriptions(points.size());
+
+			if (index < points.size()) {
+				points.remove(index);
+				roadIds.remove(index);
+				descriptions.remove(index);
+				return savePoints(points, descriptions) && saveRoadIds(roadIds);
+			}
+			return false;
+		}
+
+		@Override
+		public boolean deletePoint(LatLon latLon) {
+			List<LatLon> points = getPoints();
+			List<String> descriptions = getPointDescriptions(points.size());
+			List<Long> roadIds = getRoadIds(points.size());
+			int index = points.indexOf(latLon);
+			if (index != -1) {
+				points.remove(index);
+				roadIds.remove(index);
+				descriptions.remove(index);
+				return savePoints(points, descriptions) && saveRoadIds(roadIds);
+			}
+			return false;
+		}
+
+		@Override
+		public boolean movePoint(LatLon latLonEx, LatLon latLonNew) {
+			List<LatLon> points = getPoints();
+			List<String> descriptions = getPointDescriptions(points.size());
+			List<Long> roadIds = getRoadIds(points.size());
+
+			int i = points.indexOf(latLonEx);
+			if (i != -1) {
+				points.set(i, latLonNew);
+				return savePoints(points, descriptions) && saveRoadIds(roadIds);
+			} else {
+				return false;
+			}
+		}
+
+		public boolean saveRoadIds(List<Long> roadIds) {
+			StringBuilder stringBuilder = new StringBuilder();
+			Iterator<Long> iterator = roadIds.iterator();
+			while (iterator.hasNext()) {
+				stringBuilder.append(iterator.next());
+				if (iterator.hasNext()) {
+					stringBuilder.append(",");
+				}
+			}
+			return settingsAPI.edit(globalPreferences)
+					.putString(roadsIdsKey, stringBuilder.toString())
+					.commit();
 		}
 	}
 
@@ -2994,8 +3121,13 @@ public class OsmandSettings {
 	public List<AvoidRoadInfo> getImpassableRoadPoints() {
 		return mImpassableRoadsStorage.getImpassableRoadsInfo();
 	}
+
 	public boolean addImpassableRoad(AvoidRoadInfo avoidRoadInfo) {
 		return mImpassableRoadsStorage.addImpassableRoadInfo(avoidRoadInfo);
+	}
+
+	public boolean updateImpassableRoadInfo(AvoidRoadInfo avoidRoadInfo) {
+		return mImpassableRoadsStorage.updateImpassableRoadInfo(avoidRoadInfo);
 	}
 
 	public boolean removeImpassableRoad(int index) {
