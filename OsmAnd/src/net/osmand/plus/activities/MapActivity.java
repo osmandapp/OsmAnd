@@ -698,7 +698,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		ProfileAppearanceFragment profileAppearanceFragment = getProfileAppearanceFragment();
 		if (profileAppearanceFragment != null) {
-			if (profileAppearanceFragment.isProfileAppearanceChanged(this)) {
+			if (profileAppearanceFragment.isProfileAppearanceChanged()) {
 				return;
 			}
 		}
