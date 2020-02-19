@@ -3573,4 +3573,9 @@
     <string name="no_recalculation_setting">غیرفعال‌سازی محاسبهٔ مجدد</string>
     <string name="route_recalculation_dist_title">مسافت کمینی برای مسیریابی مجدد</string>
     <string name="route_recalculation_dist_descr">اگر مسافت تا مسیر بیش از پارامتر تعیین‌شده باشد، مسیر دوباره محاسبه می‌شود</string>
+    <string name="profile_type_custom_string">پروفایل سفارشی</string>
+    <string name="shared_string_angle_param">زاویه: ‎%s°</string>
+    <string name="shared_string_angle">زاویه</string>
+    <string name="recalc_angle_dialog_descr">تا مسیریابی مجدد انجام شود میان موقعیت من و مسیر محاسبه‌شده یک پاره‌خط مستقیم اضافه می‌شود</string>
+    <string name="recalc_angle_dialog_title">کمترین زاویه میان موقعیت من و مسیر</string>
 </resources>
