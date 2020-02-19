@@ -94,7 +94,7 @@ public class ImportSettingsFragment extends BaseOsmAndDialogFragment
 			}
 			case R.id.continue_button: {
 				if (adapter.getDataToOperate().isEmpty()) {
-					app.showShortToastMessage(getString(R.string.shared_sting_nothing_selected));
+					app.showShortToastMessage(getString(R.string.shared_string_nothing_selected));
 				} else {
 					importItems();
 				}
@@ -124,6 +124,7 @@ public class ImportSettingsFragment extends BaseOsmAndDialogFragment
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private List<Object> getDuplicatesData(List<SettingsItem> items) {
 		List<Object> duplicateItems = new ArrayList<>();
 		for (SettingsItem item : items) {
@@ -132,17 +133,17 @@ public class ImportSettingsFragment extends BaseOsmAndDialogFragment
 					duplicateItems.add(((SettingsHelper.ProfileSettingsItem) item).getModeBean());
 				}
 			} else if (item instanceof SettingsHelper.QuickActionSettingsItem) {
-				List<QuickAction> duplicates = ((SettingsHelper.QuickActionSettingsItem) item).getDuplicates();
+				List<QuickAction> duplicates = ((SettingsHelper.QuickActionSettingsItem) item).excludeDuplicateItems();
 				if (!duplicates.isEmpty()) {
 					duplicateItems.addAll(duplicates);
 				}
 			} else if (item instanceof SettingsHelper.PoiUiFilterSettingsItem) {
-				List<PoiUIFilter> duplicates = ((SettingsHelper.PoiUiFilterSettingsItem) item).getDuplicates();
+				List<PoiUIFilter> duplicates = ((SettingsHelper.PoiUiFilterSettingsItem) item).excludeDuplicateItems();
 				if (!duplicates.isEmpty()) {
 					duplicateItems.addAll(duplicates);
 				}
 			} else if (item instanceof SettingsHelper.MapSourcesSettingsItem) {
-				List<ITileSource> duplicates = ((SettingsHelper.MapSourcesSettingsItem) item).getDuplicates();
+				List<ITileSource> duplicates = ((SettingsHelper.MapSourcesSettingsItem) item).excludeDuplicateItems();
 				if (!duplicates.isEmpty()) {
 					duplicateItems.addAll(duplicates);
 				}
@@ -191,6 +192,7 @@ public class ImportSettingsFragment extends BaseOsmAndDialogFragment
 		return settingsItems;
 	}
 
+	@SuppressWarnings("unchecked")
 	private List<AdditionalDataWrapper> getSettingsToOperate() {
 		List<AdditionalDataWrapper> settingsToOperate = new ArrayList<>();
 		List<ApplicationMode.ApplicationModeBean> profiles = new ArrayList<>();
@@ -204,11 +206,11 @@ public class ImportSettingsFragment extends BaseOsmAndDialogFragment
 			if (item.getType().equals(SettingsHelper.SettingsItemType.PROFILE)) {
 				profiles.add(((SettingsHelper.ProfileSettingsItem) item).getModeBean());
 			} else if (item.getType().equals(SettingsHelper.SettingsItemType.QUICK_ACTION)) {
-				quickActions.addAll(((SettingsHelper.QuickActionSettingsItem) item).getQuickActions());
+				quickActions.addAll(((SettingsHelper.QuickActionSettingsItem) item).getItems());
 			} else if (item.getType().equals(SettingsHelper.SettingsItemType.POI_UI_FILTERS)) {
-				poiUIFilters.addAll(((SettingsHelper.PoiUiFilterSettingsItem) item).getPoiUIFilters());
+				poiUIFilters.addAll(((SettingsHelper.PoiUiFilterSettingsItem) item).getItems());
 			} else if (item.getType().equals(SettingsHelper.SettingsItemType.MAP_SOURCES)) {
-				tileSourceTemplates.addAll(((SettingsHelper.MapSourcesSettingsItem) item).getMapSources());
+				tileSourceTemplates.addAll(((SettingsHelper.MapSourcesSettingsItem) item).getItems());
 			} else if (item.getType().equals(SettingsHelper.SettingsItemType.FILE)) {
 				if (item.getName().startsWith("/rendering/")) {
 					renderFilesList.add(((SettingsHelper.FileSettingsItem) item).getFile());

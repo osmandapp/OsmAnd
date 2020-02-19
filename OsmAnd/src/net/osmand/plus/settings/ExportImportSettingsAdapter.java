@@ -262,7 +262,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	private int getGroupTitle(AdditionalDataWrapper.Type type) {
 		switch (type) {
 			case PROFILE:
-				return R.string.shared_sting_profiles;
+				return R.string.shared_string_profiles;
 			case QUICK_ACTIONS:
 				return R.string.configure_screen_quick_action;
 			case POI_TYPES:

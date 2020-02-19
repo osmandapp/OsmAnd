@@ -451,7 +451,7 @@ public class MapWidgetRegistry {
 		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_right, mapActivity)
 				.setCategory(true).setLayout(R.layout.list_group_empty_title_with_switch).createItem());
 
-		boolean selected = mapActivity.getMapLayers().getQuickActionRegistry().isQuickActionOn();
+		boolean selected = app.getQuickActionRegistry().isQuickActionOn();
 		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.configure_screen_quick_action, mapActivity)
 				.setIcon(R.drawable.map_quick_action)
@@ -482,7 +482,7 @@ public class MapWidgetRegistry {
 											   int position,
 											   boolean visible) {
 
-						mapActivity.getMapLayers().getQuickActionRegistry().setQuickActionFabState(visible);
+						app.getQuickActionRegistry().setQuickActionFabState(visible);
 
 						MapQuickActionLayer mil = mapActivity.getMapLayers().getMapQuickActionLayer();
 						if (mil != null) {

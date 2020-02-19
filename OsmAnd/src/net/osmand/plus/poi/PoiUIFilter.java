@@ -726,10 +726,6 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		return filterId;
 	}
 
-	public void setFilterId(String filterId) {
-		this.filterId = filterId;
-	}
-
 	public Map<String, PoiType> getPoiAdditionals() {
 		return poiAdditionals;
 	}

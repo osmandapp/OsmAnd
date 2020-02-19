@@ -8,8 +8,6 @@ public interface ITileSource {
 
 	public String getName();
 
-	public void setName(String name);
-
 	public int getTileSize();
 
 	public String getUrlToLoad(int x, int y, int zoom);

@@ -59,6 +59,7 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
+import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
@@ -142,6 +143,7 @@ public class OsmandApplication extends MultiDexApplication {
 	LockHelper lockHelper;
 	SettingsHelper settingsHelper;
 	GpxDbHelper gpxDbHelper;
+	QuickActionRegistry quickActionRegistry;
 
 	private Resources localizedResources;
 
@@ -198,6 +200,7 @@ public class OsmandApplication extends MultiDexApplication {
 		System.out.println("Time to init plugins " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 
 		SearchUICore.setDebugMode(OsmandPlugin.isDevelopment());
+		quickActionRegistry = new QuickActionRegistry(getSettings());
 	}
 
 	public boolean isPlusVersionInApp() {
@@ -271,7 +274,10 @@ public class OsmandApplication extends MultiDexApplication {
 	public OsmAndAppCustomization getAppCustomization() {
 		return appCustomization;
 	}
-	
+
+	public QuickActionRegistry getQuickActionRegistry() {
+		return quickActionRegistry;
+	}
 	
 	public void setAppCustomization(OsmAndAppCustomization appCustomization) {
 		this.appCustomization = appCustomization;

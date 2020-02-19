@@ -14,11 +14,11 @@
     <string name="navigation_notification_desc">Show system notification while navigation with navigation instructions.</string>
     <string name="navigation_notification">Navigation notification</string>
     <string name="shared_string_app_default_w_val">App Default (%s)</string>
-    <string name="shared_sting_preparing">Preparing</string>
-    <string name="shared_sting_poi_types">POI types</string>
-    <string name="shared_sting_nothing_selected">Nothing selected</string>
-    <string name="shared_sting_quick_actions">Quick actions</string>
-    <string name="shared_sting_profiles">Profiles</string>
+    <string name="shared_string_preparing">Preparing</string>
+    <string name="shared_string_poi_types">POI types</string>
+    <string name="shared_string_nothing_selected">Nothing selected</string>
+    <string name="shared_string_quick_actions">Quick actions</string>
+    <string name="shared_string_profiles">Profiles</string>
     <string name="listed_exist">Listed %1$s, already exist in OsmAnd.</string>
     <string name="replace_all_desc">Current items will be replaced with items from the file</string>
     <string name="replace_all">Replace all</string>

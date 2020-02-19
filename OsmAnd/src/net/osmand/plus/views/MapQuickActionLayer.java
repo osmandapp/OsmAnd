@@ -81,7 +81,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
         this.contextMenuLayer = contextMenuLayer;
         app = activity.getMyApplication();
         settings = activity.getMyApplication().getSettings();
-        quickActionRegistry = activity.getMapLayers().getQuickActionRegistry();
+        quickActionRegistry = app.getQuickActionRegistry();
 		measurementToolLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
         mapMarkersLayer = mapActivity.getMapLayers().getMapMarkersLayer();
     }

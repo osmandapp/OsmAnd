@@ -149,11 +149,6 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	@Override
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	@Override
 	public String getTileFormat() {
 		return base != null ? base.getTileFormat() : ".png"; //$NON-NLS-1$
 	}

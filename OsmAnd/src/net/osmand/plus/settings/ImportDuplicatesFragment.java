@@ -108,23 +108,24 @@ public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implement
 			} else if (object instanceof ITileSource) {
 				tileSources.add((ITileSource) object);
 			} else if (object instanceof File) {
-				if (((File) object).getAbsolutePath().contains("files/rendering")) {
-					renderFilesList.add((File) object);
-				} else if (((File) object).getAbsolutePath().contains("files/routing")) {
-					routingFilesList.add((File) object);
+				File file = (File) object;
+				if (file.getAbsolutePath().contains("files/rendering")) {
+					renderFilesList.add(file);
+				} else if (file.getAbsolutePath().contains("files/routing")) {
+					routingFilesList.add(file);
 				}
 			}
 		}
 		if (!profiles.isEmpty()) {
-			duplicates.add(getString(R.string.shared_sting_profiles));
+			duplicates.add(getString(R.string.shared_string_profiles));
 			duplicates.addAll(profiles);
 		}
 		if (!actions.isEmpty()) {
-			duplicates.add(getString(R.string.shared_sting_quick_actions));
+			duplicates.add(getString(R.string.shared_string_quick_actions));
 			duplicates.addAll(actions);
 		}
 		if (!filters.isEmpty()) {
-			duplicates.add(getString(R.string.shared_sting_poi_types));
+			duplicates.add(getString(R.string.shared_string_poi_types));
 			duplicates.addAll(filters);
 		}
 		if (!tileSources.isEmpty()) {
