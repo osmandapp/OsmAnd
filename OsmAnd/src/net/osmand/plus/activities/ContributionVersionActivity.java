@@ -264,7 +264,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 				StringBuilder format = new StringBuilder();
 				format.append(AndroidUtils.formatDateTime(getMyApplication(), build.date.getTime()))/*.append(" : ").append(build.size).append(" MB")*/;
 				description.setText(format.toString());
-				int color = getResources().getColor(R.color.color_unknown);
+				int color = getResources().getColor(R.color.text_color_secondary_dark);
 				if (currentInstalledDate != null) {
 					if (currentInstalledDate.before(build.date)) {
 						color = getResources().getColor(R.color.color_update);
