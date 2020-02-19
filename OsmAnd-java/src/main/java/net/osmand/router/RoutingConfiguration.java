@@ -1,8 +1,6 @@
 package net.osmand.router;
 
-import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.binary.RouteDataObject;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.GeneralRouter.RouteAttributeContext;
 import net.osmand.router.GeneralRouter.RouteDataObjectAttribute;
@@ -13,9 +11,10 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.Stack;
 
 public class RoutingConfiguration {
@@ -55,7 +54,7 @@ public class RoutingConfiguration {
 		private String defaultRouter = "";
 		private Map<String, GeneralRouter> routers = new LinkedHashMap<>();
 		private Map<String, String> attributes = new LinkedHashMap<>();
-		private HashMap<Long, Location> impassableRoadLocations = new HashMap<>();
+		private Set<Long> impassableRoadLocations = new HashSet<>();
 
 		public Builder() {
 
@@ -95,7 +94,7 @@ public class RoutingConfiguration {
 			i.initialDirection = direction;
 			i.recalculateDistance = parseSilentFloat(getAttribute(i.router, "recalculateDistanceHelp"), i.recalculateDistance) ;
 			i.heuristicCoefficient = parseSilentFloat(getAttribute(i.router, "heuristicCoefficient"), i.heuristicCoefficient);
-			i.router.addImpassableRoads(impassableRoadLocations.keySet());
+			i.router.addImpassableRoads(new HashSet<>(impassableRoadLocations));
 			i.ZOOM_TO_LOAD_TILES = parseSilentInt(getAttribute(i.router, "zoomToLoadTiles"), i.ZOOM_TO_LOAD_TILES);
 			int desirable = parseSilentInt(getAttribute(i.router, "memoryLimitInMB"), 0);
 			if(desirable != 0) {
@@ -110,17 +109,13 @@ public class RoutingConfiguration {
 //			i.planRoadDirection = 1;
 			return i;
 		}
-		
-		public Map<Long, Location> getImpassableRoadLocations() {
+
+		public Set<Long> getImpassableRoadLocations() {
 			return impassableRoadLocations;
 		}
 		
-		public boolean addImpassableRoad(RouteDataObject route, Location location) {
-			if (!impassableRoadLocations.containsKey(route.id)){
-				impassableRoadLocations.put(route.id, location);
-				return true;
-			}
-			return false;
+		public boolean addImpassableRoad(long routeId) {
+			return impassableRoadLocations.add(routeId);
 		}
 
 		public Map<String, String> getAttributes() {
@@ -159,8 +154,8 @@ public class RoutingConfiguration {
 			return routers;
 		}
 
-		public void removeImpassableRoad(RouteDataObject obj) {
-			impassableRoadLocations.remove(obj.id);
+		public void removeImpassableRoad(long routeId) {
+			impassableRoadLocations.remove(routeId);
 		}
 	}
 

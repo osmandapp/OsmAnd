@@ -10,7 +10,6 @@ import android.graphics.PointF;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -18,6 +17,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
+import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidSpecificRoadsCallback;
 import net.osmand.plus.views.ContextMenuLayer.ApplyMovedObjectCallback;
 
@@ -55,7 +55,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		if (contextMenuLayer.getMoveableObject() instanceof RouteDataObject) {
+		if (contextMenuLayer.getMoveableObject() instanceof AvoidRoadInfo) {
 			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
 			drawPoint(canvas, pf.x, pf.y, true);
 		}
@@ -64,11 +64,11 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (tileBox.getZoom() >= START_ZOOM) {
-			for (Map.Entry<LatLon, RouteDataObject> entry : avoidSpecificRoads.getImpassableRoads().entrySet()) {
+			for (Map.Entry<LatLon, AvoidRoadInfo> entry : avoidSpecificRoads.getImpassableRoads().entrySet()) {
 				LatLon location = entry.getKey();
-				RouteDataObject road = entry.getValue();
-				if (road != null && contextMenuLayer.getMoveableObject() instanceof RouteDataObject) {
-					RouteDataObject object = (RouteDataObject) contextMenuLayer.getMoveableObject();
+				AvoidRoadInfo road = entry.getValue();
+				if (road != null && contextMenuLayer.getMoveableObject() instanceof AvoidRoadInfo) {
+					AvoidRoadInfo object = (AvoidRoadInfo) contextMenuLayer.getMoveableObject();
 					if (object.id == road.id) {
 						continue;
 					}
@@ -146,9 +146,9 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 			int compare = getRadiusPoi(tileBox);
 			int radius = compare * 3 / 2;
 
-			for (Map.Entry<LatLon, RouteDataObject> entry : avoidSpecificRoads.getImpassableRoads().entrySet()) {
+			for (Map.Entry<LatLon, AvoidRoadInfo> entry : avoidSpecificRoads.getImpassableRoads().entrySet()) {
 				LatLon location = entry.getKey();
-				RouteDataObject road = entry.getValue();
+				AvoidRoadInfo road = entry.getValue();
 				if (location != null && road != null) {
 					int x = (int) tileBox.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
 					int y = (int) tileBox.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
@@ -163,36 +163,37 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 
 	@Override
 	public LatLon getObjectLocation(Object o) {
-		if (o instanceof RouteDataObject) {
-			return avoidSpecificRoads.getLocation((RouteDataObject) o);
+		if (o instanceof AvoidRoadInfo) {
+			AvoidRoadInfo avoidRoadInfo = (AvoidRoadInfo) o;
+			return new LatLon(avoidRoadInfo.latitude, avoidRoadInfo.longitude);
 		}
 		return null;
 	}
 
 	@Override
 	public PointDescription getObjectName(Object o) {
-		if (o instanceof RouteDataObject) {
-			RouteDataObject route = (RouteDataObject) o;
-			return new PointDescription(PointDescription.POINT_TYPE_BLOCKED_ROAD, route.getName());
+		if (o instanceof AvoidRoadInfo) {
+			AvoidRoadInfo route = (AvoidRoadInfo) o;
+			return new PointDescription(PointDescription.POINT_TYPE_BLOCKED_ROAD, route.name);
 		}
 		return null;
 	}
 
 	@Override
 	public boolean isObjectMovable(Object o) {
-		return o instanceof RouteDataObject;
+		return o instanceof AvoidRoadInfo;
 	}
 
 	@Override
 	public void applyNewObjectPosition(@NonNull Object o,
 									   @NonNull LatLon position,
 									   @Nullable final ApplyMovedObjectCallback callback) {
-		if (o instanceof RouteDataObject) {
-			final RouteDataObject object = (RouteDataObject) o;
+		if (o instanceof AvoidRoadInfo) {
+			final AvoidRoadInfo object = (AvoidRoadInfo) o;
 			final OsmandApplication application = activity.getMyApplication();
 			application.getAvoidSpecificRoads().replaceImpassableRoad(activity, object, position, false, new AvoidSpecificRoadsCallback() {
 				@Override
-				public void onAddImpassableRoad(boolean success, RouteDataObject newObject) {
+				public void onAddImpassableRoad(boolean success, AvoidRoadInfo newObject) {
 					if (callback != null) {
 						callback.onApplyMovedObject(success, newObject);
 					}
