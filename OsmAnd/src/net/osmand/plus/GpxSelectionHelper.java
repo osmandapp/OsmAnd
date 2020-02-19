@@ -959,4 +959,51 @@ public class GpxSelectionHelper {
 			return group != null && group.isGeneralTrack();
 		}
 	}
+
+	public interface SelectGpxTaskListener {
+
+		void onProgressUpdate(GPXFile gpxFile);
+
+		void onPreExecute();
+
+		void onPostExecute();
+
+	}
+
+	public static class SelectGpxTask extends AsyncTask<GPXFile, GPXFile, String> {
+
+		private SelectGpxTaskListener gpxTaskListener;
+
+		public SelectGpxTask(SelectGpxTaskListener gpxTaskListener) {
+			this.gpxTaskListener = gpxTaskListener;
+		}
+
+		@Override
+		protected String doInBackground(GPXFile... params) {
+			for (GPXFile file : params) {
+				if (!file.showCurrentTrack) {
+					file = GPXUtilities.loadGPXFile(new File(file.path));
+				}
+				publishProgress(file);
+			}
+			return "";
+		}
+
+		@Override
+		protected void onProgressUpdate(GPXFile... values) {
+			gpxTaskListener.onProgressUpdate(values[0]);
+
+		}
+
+		@Override
+		protected void onPreExecute() {
+			gpxTaskListener.onPreExecute();
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			gpxTaskListener.onPostExecute();
+
+		}
+	}
 }
