@@ -440,16 +440,6 @@ public class GpxSelectionHelper {
 		}
 	}
 
-	private SelectedGpxFile getSelectedFileByLoadedFileName(String path) {
-		List<SelectedGpxFile> newList = new ArrayList<>(selectedGPXFiles);
-		for (SelectedGpxFile s : newList) {
-			if (path.endsWith("/" + s.getLoadedName())) {
-				return s;
-			}
-		}
-		return null;
-	}
-
 	public SelectedGpxFile getSelectedFileByPath(String path) {
 		List<SelectedGpxFile> newList = new ArrayList<>(selectedGPXFiles);
 		for (SelectedGpxFile s : newList) {
@@ -462,10 +452,7 @@ public class GpxSelectionHelper {
 
 	public SelectedGpxFile getSelectedFileByName(String path) {
 		for (SelectedGpxFile s : selectedGPXFiles) {
-			if (path.equals(s.getLoadedName())) {
-				return s;
-			}
-			if (s.getLoadedName().isEmpty() && s.getGpxFile().path.endsWith("/" + path)) {
+			if (s.getGpxFile().path.endsWith("/" + path)) {
 				return s;
 			}
 		}
@@ -604,17 +591,11 @@ public class GpxSelectionHelper {
 			}
 		} else {
 			assert gpx != null;
-			sf = getSelectedFileByLoadedFileName(gpx.path);
-			if (sf == null) {
-				sf = getSelectedFileByPath(gpx.path);
-			}
+			sf = getSelectedFileByPath(gpx.path);
 			displayed = sf != null;
 			if (show) {
 				if (sf == null) {
 					sf = new SelectedGpxFile();
-					List<SelectedGpxFile> newSelectedGPXFiles = new ArrayList<>(selectedGPXFiles);
-					newSelectedGPXFiles.add(sf);
-					selectedGPXFiles = newSelectedGPXFiles;
 				}
 				if (dataItem != null) {
 					if (dataItem.getColor() != 0) {
@@ -623,22 +604,13 @@ public class GpxSelectionHelper {
 					sf.setJoinSegments(dataItem.isJoinSegments());
 				}
 				sf.setGpxFile(gpx, app);
-				sf.setLoadedName("");
 				sf.notShowNavigationDialog = notShowNavigationDialog;
 				sf.selectedByUser = selectedByUser;
 			}
 		}
-		if (sf != null && sf.getLoadedName().isEmpty()) {
+		if (sf != null && sf.isLoaded()) {
 			if (displayed != show) {
-				List<SelectedGpxFile> newSelectedGPXFiles = new ArrayList<>(selectedGPXFiles);
-				if (show) {
-					if (!newSelectedGPXFiles.contains(sf)) {
-						newSelectedGPXFiles.add(sf);
-					}
-				} else {
-					newSelectedGPXFiles.remove(sf);
-				}
-				selectedGPXFiles = newSelectedGPXFiles;
+				addRemoveSelected(show, sf);
 			}
 		}
 		if (syncGroup) {
@@ -727,15 +699,6 @@ public class GpxSelectionHelper {
 		private boolean joinSegments;
 		private boolean showCurrentTrack;
 		private boolean splitProcessed = false;
-		private String loadedName = "";
-
-		public String getLoadedName() {
-			return loadedName;
-		}
-
-		public void setLoadedName(String loadedName) {
-			this.loadedName = loadedName;
-		}
 
 		public void setGpxFile(GPXFile gpxFile, OsmandApplication app) {
 			this.gpxFile = gpxFile;
@@ -743,6 +706,10 @@ public class GpxSelectionHelper {
 				this.color = gpxFile.tracks.get(0).getColor(0);
 			}
 			processPoints(app);
+		}
+
+		public boolean isLoaded() {
+			return gpxFile.modifiedTime != 0 || gpxFile.showCurrentTrack;
 		}
 
 		public GPXTrackAnalysis getTrackAnalysis(OsmandApplication app) {

@@ -623,8 +623,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 						SelectedGpxFile sf = selectedGpxHelper.getSelectedFileByName(gpxInfo.fileName);
 						if (sf == null) {
 							sf = new SelectedGpxFile();
+							sf.setGpxFile(new GPXFile(null), app);
 						}
-						sf.setLoadedName(gpxInfo.fileName);
+						sf.getGpxFile().path = gpxInfo.file.getPath();
 						selectedGpxHelper.addRemoveSelected(visible, sf);
 					}
 				}
@@ -1884,7 +1885,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		SelectedGpxFile sgpx = getSelectedGpxFile(gpxInfo, app);
 		GPXTrackAnalysis analysis = null;
 		if (sgpx != null) {
-			if (sgpx.getLoadedName().isEmpty()) {
+			if (sgpx.isLoaded()) {
 				analysis = sgpx.getTrackAnalysis(app);
 			}
 		} else if (gpxInfo.currentlyRecordingTrack) {
