@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="profile_type_custom_string">Custom profile</string>
     <string name="shared_string_angle_param">Angle: %s°</string>
     <string name="shared_string_angle">Angle</string>
     <string name="recalc_angle_dialog_descr">Extra straight segment between my location and calculated route will be displayed until the route is recalculated</string>
