@@ -2794,7 +2794,7 @@
     <string name="purchase_cancelled_dialog_title">اشتراک OsmAnd Live خود را لغو کردید</string>
     <string name="purchase_cancelled_dialog_descr">اشتراکتان را تجدید کنید تا از همهٔ قابلیت‌ها بهره‌مند شوید:</string>
     <string name="download_all">دانلود همه</string>
-    <string name="open_wikipedia_link_online">بازکردن آنلاین لینک ویکی‌پدیا</string>
+    <string name="open_wikipedia_link_online">ویکی‌پدیا آنلاین</string>
     <string name="open_wikipedia_link_online_description">پیوند در یک مرورگر باز می‌شود.</string>
     <string name="hide_full_description">نمایش توضیح کوتاه</string>
     <string name="show_full_description">نمایش توضیح کامل</string>
@@ -3569,4 +3569,8 @@
     <string name="accessibility_announce">اعلام</string>
     <string name="navigation_notification_desc">هنگام ناوبری راهنمای ناوبری را در اعلان‌ها نمایش می‌دهد.</string>
     <string name="navigation_notification">اعلان ناوبری</string>
+    <string name="shared_string_app_default_w_val">پیشفرض برنامه</string>
+    <string name="no_recalculation_setting">غیرفعال‌سازی محاسبهٔ مجدد</string>
+    <string name="route_recalculation_dist_title">مسافت کمینی برای مسیریابی مجدد</string>
+    <string name="route_recalculation_dist_descr">اگر مسافت تا مسیر بیش از پارامتر تعیین‌شده باشد، مسیر دوباره محاسبه می‌شود</string>
 </resources>
