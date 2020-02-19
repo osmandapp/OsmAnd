@@ -3532,4 +3532,8 @@
     <string name="index_name_antarctica">南極洲</string>
     <string name="navigation_notification_desc">使用導航說明時喜訕系統通知。</string>
     <string name="navigation_notification">導航通知</string>
+    <string name="shared_string_app_default_w_val">應用程式預設值 (%s)</string>
+    <string name="no_recalculation_setting">停用重新計算</string>
+    <string name="route_recalculation_dist_title">重新計算路線的最小距離</string>
+    <string name="route_recalculation_dist_descr">如果到路線的距離大於指定的參數，則路線將會重新計算</string>
 </resources>

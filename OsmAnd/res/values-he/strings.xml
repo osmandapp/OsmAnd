@@ -3453,4 +3453,13 @@
     <string name="please_provide_profile_name_message">נא לבחור שם לפרופיל</string>
     <string name="open_settings">פתיחת ההגדרות</string>
     <string name="plugin_disabled">התוסף מושבת</string>
+    <string name="clear_recorded_data">מחיקת הנתונים שהוקלטו</string>
+    <string name="copy_coordinates">העתקת נקודות ציון</string>
+    <string name="plugin_disabled_descr">תוסף זה הוא יישומון נפרד, יהיה עליך להסיר אותו בנפרד אם אין לך כוונה להשתמש בו עוד.
+\n
+\nהתוסף יישאר על המכשיר גם לאחר הסרת OsmAnd.</string>
+    <string name="shared_string_menu">תפריט</string>
+    <string name="no_recalculation_setting">השבתת חישוב מחדש</string>
+    <string name="route_recalculation_dist_title">מרחק מזערי לחישוב המסלול מחדש</string>
+    <string name="route_recalculation_dist_descr">המסלול יחושב מחדש אם המרחק למסלול הוא ארוך מהמשתנה שצוין</string>
 </resources>
