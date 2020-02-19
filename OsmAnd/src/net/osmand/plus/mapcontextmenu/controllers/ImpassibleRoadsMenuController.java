@@ -4,24 +4,24 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 
-import net.osmand.binary.RouteDataObject;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.routing.RoutingHelper;
 
 public class ImpassibleRoadsMenuController extends MenuController {
 
-	private RouteDataObject route;
+	private AvoidRoadInfo avoidRoadInfo;
 
 	public ImpassibleRoadsMenuController(@NonNull MapActivity mapActivity,
 										 @NonNull PointDescription pointDescription,
-										 @NonNull RouteDataObject route) {
+										 @NonNull AvoidRoadInfo avoidRoadInfo) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
-		this.route = route;
+		this.avoidRoadInfo = avoidRoadInfo;
 		final OsmandApplication app = mapActivity.getMyApplication();
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
@@ -29,7 +29,7 @@ public class ImpassibleRoadsMenuController extends MenuController {
 				MapActivity activity = getMapActivity();
 				if (activity != null) {
 					app.getAvoidSpecificRoads().removeImpassableRoad(
-							ImpassibleRoadsMenuController.this.route);
+							ImpassibleRoadsMenuController.this.avoidRoadInfo);
 					RoutingHelper rh = app.getRoutingHelper();
 					if (rh.isRouteCalculated() || rh.isRouteBeingCalculated()) {
 						rh.recalculateRouteDueToSettingsChange();
@@ -44,12 +44,12 @@ public class ImpassibleRoadsMenuController extends MenuController {
 
 	@Override
 	protected void setObject(Object object) {
-		route = (RouteDataObject) object;
+		avoidRoadInfo = (AvoidRoadInfo) object;
 	}
 
 	@Override
 	protected Object getObject() {
-		return route;
+		return avoidRoadInfo;
 	}
 
 	@NonNull
