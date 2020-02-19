@@ -3516,4 +3516,48 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="shared_string_custom_rendering_style">Sérsniðinn myndgerðaðrstíll</string>
     <string name="shared_string_include_data">Taka með viðbótargögn</string>
     <string name="index_name_antarctica">Suðurskautslandið</string>
+    <string name="use_system_screen_timeout_promo">Þetta er sjálfgefið óvirkt, ef OsmAnd keyrir í forgrunni rennur skjárinn ekki út á tíma.
+\n
+\nEf þetta er virkt mun OsmAnd nota tímamörk kerfisins.</string>
+    <string name="release_3_6">• Notandasnið: núna geturðu breytt röðun, stillt táknmyndir fyrir kort, breytt öllum stillingum grunnsniða og fært þær aftur á upphaflegar stillingar
+\n
+\n • Bætt við númerum afreina í leiðsögn
+\n
+\n • Endurhönnun á stillingum viðbótar
+\n
+\n • Endurhönnun á stillingaskjánum fyrir flýtiaðgengi að öllum sniðum
+\n
+\n • Bætt við valkosti til að afrita stillingar úr öðrum sniðum
+\n
+\n • Nú er hægt að breyta röðun eða fela flokka merkisstaða í leit
+\n
+\n • Rétt hliðjöfnun táknmynda merkisstaða á kortinu
+\n
+\n • Gögnum fyrir sólarupprás/sólsetur bætt við kortastillingar
+\n
+\n • Táknmyndum fyrir Heima/Vinna bætt við kortið
+\n
+\n • Bætt við stuðningi við margar línur á lýsingum stillinga
+\n
+\n • Bætt við réttum umritunum á kort af Japan
+\n
+\n • Bætt við korti fyrir Suðurskautslandið
+\n
+\n</string>
+    <string name="plugin_disabled_descr">Þessi viðbót er sérstakt forrit, þú þarft að fjarlægja það sérstaklega ef þú ætlar þér ekki að nota það.
+\n
+\nViðbótin helst áfram uppsett á tækinu þó þú fjarlægir OsmAnd.</string>
+    <string name="import_profile_dialog_description">Innflutta sniðið inniheldur viðbótargögn. Smelltu á að flytja inn til að sækja aðeins gögn sniðsins eða veldu þau viðbótargögn sem ætti að flytja inn.</string>
+    <string name="export_profile_dialog_description">Hægt er að velja viðbótargögn til útflutnings með sniðinu.</string>
+    <string name="navigation_notification_desc">Birta kerfistilkynningu með leiðbeiningum á meðan leiðsögn stendur.</string>
+    <string name="navigation_notification">Tilkynning við leiðsögn</string>
+    <string name="shared_string_app_default_w_val">Sjálfgefið fyrir forrit (%s)</string>
+    <string name="no_recalculation_setting">Gera endurútreikning óvirkan</string>
+    <string name="route_recalculation_dist_title">Lágmarksvegalengd til að leið sé endurreiknuð</string>
+    <string name="route_recalculation_dist_descr">Leiðin verður endurreiknuð ef vegalengd að leiðinni er lengri en uppgefið viðfang</string>
+    <string name="profile_type_custom_string">Sérsniðið notandasnið</string>
+    <string name="shared_string_angle_param">Horn: %s°</string>
+    <string name="shared_string_angle">Horn</string>
+    <string name="recalc_angle_dialog_descr">Aukalegur beinn bútur á milli staðsetningar minnar og reiknaðrar leiðar verður sýndur þar til leiðin hefur verið endurreiknuð</string>
+    <string name="recalc_angle_dialog_title">Lágmarkshorn milli staðsetningar og leiðar</string>
 </resources>
