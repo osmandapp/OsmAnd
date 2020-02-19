@@ -192,9 +192,15 @@ public class SelectProfileBottomSheetDialogFragment extends BasePreferenceBottom
 		tvTitle.setText(profile.getName());
 		tvDescription.setText(profile.getDescription());
 		
-		final boolean isSelected = profile.getStringKey().equals(selectedItemKey);
-		final Drawable drawableIcon = app.getUIUtilities().getIcon(profile.getIconRes(), 
-				isSelected ? activeColorResId : iconDefaultColorResId);
+		boolean isSelected = profile.getStringKey().equals(selectedItemKey);
+		int iconColor;
+		if (type.equals(TYPE_BASE_APP_PROFILE)) {
+			iconColor = profile.getIconColor(nightMode);
+		} else {
+			iconColor = isSelected ? activeColorResId : iconDefaultColorResId;
+		}
+
+		Drawable drawableIcon = app.getUIUtilities().getIcon(profile.getIconRes(), iconColor);
 		ivIcon.setImageDrawable(drawableIcon);
 		compoundButton.setChecked(isSelected);
 		UiUtilities.setupCompoundButton(compoundButton, nightMode, UiUtilities.CompoundButtonType.GLOBAL);

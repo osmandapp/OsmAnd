@@ -367,7 +367,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 						fragment.setUsedOnMap(false);
 						fragment.setAppMode(getSelectedAppMode());
 						if (getSelectedAppMode() != null) {
-							bundle.putString(SELECTED_KEY, getSelectedAppMode().getRoutingProfile());
+							bundle.putString(SELECTED_KEY, getSelectedAppMode().getStringKey());
 						}
 						bundle.putString(DIALOG_TYPE, TYPE_BASE_APP_PROFILE);
 						fragment.setArguments(bundle);
