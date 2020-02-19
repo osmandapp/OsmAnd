@@ -28,7 +28,6 @@ import android.support.annotation.AttrRes;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v4.text.TextUtilsCompat;
@@ -340,18 +339,6 @@ public class AndroidUtils {
 		res.setId(1, android.R.id.progress);
 
 		return res;
-	}
-
-	public static void setSnackbarTextColor(Snackbar snackbar, @ColorRes int colorId) {
-		View view = snackbar.getView();
-		TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_action);
-		tv.setTextColor(ContextCompat.getColor(view.getContext(), colorId));
-	}
-
-	public static void setSnackbarTextMaxLines(Snackbar snackbar, int maxLines) {
-		View view = snackbar.getView();
-		TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
-		tv.setMaxLines(maxLines);
 	}
 
 	public static void setBackground(Context ctx, View view, boolean night, int lightResId, int darkResId) {

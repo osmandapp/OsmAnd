@@ -15,6 +15,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.text.TextUtilsCompat;
@@ -341,6 +342,40 @@ public class UiUtilities {
 			screenOrientation = 0;
 		}
 		return screenOrientation;
+	}
+	
+	public static void setupSnackbar(Snackbar snackbar, boolean nightMode) {
+		setupSnackbar(snackbar, nightMode, null, null, null, null);
+	}
+	
+	public static void setupSnackbar(Snackbar snackbar, boolean nightMode, Integer maxLines) {
+		setupSnackbar(snackbar, nightMode, null, null, null, maxLines);
+	}
+	
+	public static void setupSnackbar(Snackbar snackbar, boolean nightMode, @ColorRes Integer backgroundColor,
+	                                 @ColorRes Integer messageColor, @ColorRes Integer actionColor, Integer maxLines) {
+		if (snackbar == null) {
+			return;
+		}
+		View view = snackbar.getView();
+		Context ctx = view.getContext();
+		TextView tvMessage = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+		TextView tvAction = (TextView) view.findViewById(android.support.design.R.id.snackbar_action);
+		if (messageColor == null) {
+			messageColor = nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
+		}
+		tvMessage.setTextColor(ContextCompat.getColor(ctx, messageColor));
+		if (actionColor == null) {
+			actionColor = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		}
+		tvAction.setTextColor(ContextCompat.getColor(ctx, actionColor));
+		if (maxLines != null) {
+			tvMessage.setMaxLines(maxLines);
+		}
+		if (backgroundColor == null) {
+			backgroundColor = nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
+		}
+		view.setBackgroundColor(ContextCompat.getColor(ctx, backgroundColor));
 	}
 	
 	public static void setupLayoutDirection(View layout) {

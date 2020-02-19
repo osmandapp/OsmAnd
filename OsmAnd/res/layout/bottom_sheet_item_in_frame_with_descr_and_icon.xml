@@ -46,6 +46,7 @@
 			android:ellipsize="end"
 			android:maxLines="2"
 			android:lineSpacingMultiplier="@dimen/text_button_line_spacing_multiplier"
+			android:textColor="?android:textColorSecondary"
 			android:textSize="@dimen/default_sub_text_size"
 			tools:text="Some description" />
 
