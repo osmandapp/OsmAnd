@@ -813,8 +813,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public static String getAppModeDescription(Context ctx, ApplicationMode mode) {
 		String description;
 		if (mode.isCustomProfile()) {
-			description = String.format(ctx.getString(R.string.profile_type_descr_string),
-					Algorithms.capitalizeFirstLetterAndLowercase(mode.getParent().toHumanString()));
+			description = ctx.getString(R.string.profile_type_custom_string);
 		} else {
 			description = ctx.getString(R.string.profile_type_base_string);
 		}
