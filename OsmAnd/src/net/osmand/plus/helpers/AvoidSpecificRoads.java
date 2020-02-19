@@ -231,10 +231,8 @@ public class AvoidSpecificRoads {
 		ll.setLongitude(loc.getLongitude());
 
 		ApplicationMode defaultAppMode = app.getRoutingHelper().getAppMode();
-		final ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, defaultAppMode);
-		if (appMode == null) {
-			return;
-		}
+		final ApplicationMode appMode = appModeKey != null ? ApplicationMode.valueOfStringKey(appModeKey, defaultAppMode) : defaultAppMode;
+
 		List<RouteSegmentResult> roads = app.getRoutingHelper().getRoute().getOriginalRoute();
 		if (mapActivity != null && roads != null) {
 			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
