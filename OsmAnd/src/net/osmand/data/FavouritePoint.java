@@ -12,7 +12,6 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 
-
 public class FavouritePoint implements Serializable, LocationPoint {
 	private static final long serialVersionUID = 729654300829771466L;
 
@@ -30,6 +29,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	private int color;
 	private boolean visible = true;
 	private SpecialPointType specialPointType = null;
+	private BackType backType = null;
 
 	public FavouritePoint() {
 	}
@@ -56,6 +56,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.originObjectName = favouritePoint.originObjectName;
 		this.address = favouritePoint.address;
 		this.iconId = favouritePoint.iconId;
+		this.backType = favouritePoint.backType;
 		initPersonalType();
 	}
 
@@ -196,6 +197,17 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.description = description;
 	}
 
+	private void setBackType(BackType backType) {
+		this.backType = backType;
+	}
+
+	public BackType getBackType() {
+		if (backType == null) {
+			return BackType.CIRCLE;
+		}
+		return backType;
+	}
+
 	@NonNull
 	@Override
 	public String toString() {
@@ -284,6 +296,25 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		}
 	}
 
+	public enum BackType {
+		CIRCLE("CIRCLE", R.drawable.bg_point_circle),
+		RHOMB("RHOMB", R.drawable.bg_point_rhomb),
+		SQUARE("SQUARE", R.drawable.bg_point_square);
+
+		private String typeName;
+		@StringRes
+		private int iconId;
+
+		BackType(@NonNull String typeName, @DrawableRes int iconId){
+			this.typeName = typeName;
+			this.iconId = iconId;
+		}
+
+		public int getIconId() {
+			return iconId;
+		}
+	}
+
 	public static FavouritePoint fromWpt(@NonNull WptPt pt, @NonNull Context ctx) {
 		String name = pt.name;
 		String categoryName = pt.category != null ? pt.category : "";
@@ -303,6 +334,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		if (iconName != null) {
 			fp.setIconIdFromName(ctx, iconName);
 		}
+		fp.setBackType(BackType.valueOf((pt.getBackType())));
 		return fp;
 	}
 
@@ -318,6 +350,9 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		}
 		if (iconId != 0) {
 			pt.setIconName(getIconEntryName(ctx).substring(3));
+		}
+		if(backType != null) {
+			pt.setBackType(backType.typeName);
 		}
 		if (getColor() != 0) {
 			pt.setColor(getColor());

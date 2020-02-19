@@ -57,8 +57,10 @@ public class FavoriteImageDrawable extends Drawable {
 		}
 		listDrawable = ((OsmandApplication) ctx.getApplicationContext()).getUIUtilities()
 				.getIcon(uiIconId, R.color.color_white);
+		int backgroundIconId = point!=null ? getMapBackIconId(ctx,point.getBackType().getIconId()):R.drawable.map_white_favorite_shield;
 		int col = color == 0 || color == Color.BLACK ? res.getColor(R.color.color_favorite) : color;
-		favBackground = BitmapFactory.decodeResource(res, R.drawable.map_white_favorite_shield);
+		favBackground = BitmapFactory.decodeResource(res,backgroundIconId);
+//		favBackground = BitmapFactory.decodeResource(res, R.drawable.map_white_favorite_shield);
 		syncedStroke = BitmapFactory.decodeResource(res, R.drawable.map_shield_marker_point_stroke);
 		syncedColor = BitmapFactory.decodeResource(res, R.drawable.map_shield_marker_point_color);
 		syncedShadow = BitmapFactory.decodeResource(res, R.drawable.map_shield_marker_point_shadow);
@@ -73,6 +75,12 @@ public class FavoriteImageDrawable extends Drawable {
 		String iconName = ctx.getResources().getResourceEntryName(iconId);
 		return ctx.getResources().getIdentifier(iconName
 				.replaceFirst("mx_", "mm_"), "drawable", ctx.getPackageName());
+	}
+
+	private int getMapBackIconId(Context ctx, int iconId) {
+		String iconName = ctx.getResources().getResourceEntryName(iconId);
+		return ctx.getResources().getIdentifier("map_"+iconName + "_center"
+				, "drawable", ctx.getPackageName());
 	}
 
 	private void initSimplePaint(Paint paint, int color) {

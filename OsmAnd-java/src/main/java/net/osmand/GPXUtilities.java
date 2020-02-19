@@ -44,6 +44,8 @@ public class GPXUtilities {
 	public final static Log log = PlatformUtil.getLog(GPXUtilities.class);
 	private static final String ICON_NAME_EXTENSION = "icon";
 	private static final String DEFAULT_ICON_NAME = "special_star";
+	public static final String BACK_TYPE_EXTENSION = "background";
+	private static final String DEFAULT_BACK_TYPE = "bg_point_circle";
 
 	private final static String GPX_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'"; //$NON-NLS-1$
 	private final static String GPX_TIME_FORMAT_MILLIS = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"; //$NON-NLS-1$
@@ -269,6 +271,18 @@ public class GPXUtilities {
 
 		public void setIconName(String iconName) {
 			getExtensionsToWrite().put(ICON_NAME_EXTENSION, iconName);
+		}
+
+		public String getBackType() {
+			String backType = getExtensionsToRead().get(BACK_TYPE_EXTENSION);
+			if (backType == null) {
+				backType = DEFAULT_ICON_NAME;
+			}
+			return backType;
+		}
+
+		public void setBackType(String backType) {
+			getExtensionsToWrite().put(BACK_TYPE_EXTENSION, backType);
 		}
 
 		@Override
