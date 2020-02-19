@@ -232,7 +232,9 @@ public class AvoidSpecificRoads {
 
 		ApplicationMode defaultAppMode = app.getRoutingHelper().getAppMode();
 		final ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, defaultAppMode);
-
+		if (appMode == null) {
+			return;
+		}
 		List<RouteSegmentResult> roads = app.getRoutingHelper().getRoute().getOriginalRoute();
 		if (mapActivity != null && roads != null) {
 			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
