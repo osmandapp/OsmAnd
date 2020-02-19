@@ -366,8 +366,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 						Bundle bundle = new Bundle();
 						fragment.setUsedOnMap(false);
 						fragment.setAppMode(getSelectedAppMode());
-						if (getSelectedAppMode() != null) {
-							bundle.putString(SELECTED_KEY, getSelectedAppMode().getStringKey());
+						if (changedProfile.parent != null) {
+							bundle.putString(SELECTED_KEY, changedProfile.parent.getStringKey());
 						}
 						bundle.putString(DIALOG_TYPE, TYPE_BASE_APP_PROFILE);
 						fragment.setArguments(bundle);
