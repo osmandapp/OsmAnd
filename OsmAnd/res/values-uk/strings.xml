@@ -3536,4 +3536,9 @@
     <string name="no_recalculation_setting">Вимкнути перерахунок</string>
     <string name="route_recalculation_dist_title">Найменша відстань для перерахунку маршруту</string>
     <string name="route_recalculation_dist_descr">Маршрут буде перераховано, якщо відстань до нього перевищує вказане</string>
+    <string name="profile_type_custom_string">Користувацький профіль</string>
+    <string name="shared_string_angle_param">Кут: %s°</string>
+    <string name="shared_string_angle">Кут</string>
+    <string name="recalc_angle_dialog_descr">Додатковий прямий відрізок між моїм розташуванням та розрахунковим маршрутом відображатиметься, поки маршрут не буде перераховано</string>
+    <string name="recalc_angle_dialog_title">Найменший кут між моїм розташуванням та маршрутом</string>
 </resources>
