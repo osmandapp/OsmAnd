@@ -104,11 +104,6 @@ public class GpxNotification extends OsmandNotification {
 	}
 
 	@Override
-	public boolean isUpdateDisabled() {
-		return app.getSettings().MAP_ACTIVITY_ENABLED.get() && !app.getSettings().SHOW_TRIP_REC_NOTIFICATION.get();
-	}
-
-	@Override
 	public void onNotificationDismissed() {
 		if (!wasNoDataDismissed) {
 			wasNoDataDismissed = lastBuiltNoData;

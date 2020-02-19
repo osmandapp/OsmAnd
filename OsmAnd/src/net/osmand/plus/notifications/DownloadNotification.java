@@ -54,11 +54,6 @@ public class DownloadNotification extends OsmandNotification {
 	}
 
 	@Override
-	public boolean isUpdateDisabled() {
-		return false;
-	}
-
-	@Override
 	public NotificationCompat.Builder buildNotification(boolean wearable) {
 		icon = android.R.drawable.stat_sys_download;
 		ongoing = true;

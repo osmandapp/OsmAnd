@@ -3540,8 +3540,6 @@ Lon %2$s</string>
     <string name="import_profile_dialog_description">El perfil importado contiene datos adicionales. Pulsa en «Importar» para importar sólo datos de perfil o marca datos adicionales para importar.</string>
     <string name="export_profile_dialog_description">Puedes marcar datos adicionales para exportar junto con el perfil.</string>
     <string name="index_name_antarctica">Antártida</string>
-    <string name="navigation_notification_desc">Muestra la notificación del sistema durante la navegación con instrucciones de navegación.</string>
-    <string name="navigation_notification">Notificación de navegación</string>
     <string name="shared_string_app_default_w_val">Aplicación predefinida (%s)</string>
     <string name="no_recalculation_setting">Desactivar el recálculo</string>
     <string name="route_recalculation_dist_title">Distancia mínima para recalcular la ruta</string>

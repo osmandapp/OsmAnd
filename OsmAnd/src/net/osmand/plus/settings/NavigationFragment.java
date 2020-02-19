@@ -64,7 +64,6 @@ public class NavigationFragment extends BaseSettingsFragment {
 
 		setupSpeakRoutingAlarmsPref();
 		setupVehicleParametersPref();
-		setupNavigationNotificationPref();
 
 		animateMyLocation.setDescription(getString(R.string.animate_my_location_desc));
 	}
@@ -267,12 +266,6 @@ public class NavigationFragment extends BaseSettingsFragment {
 		Preference vehicleParameters = findPreference("vehicle_parameters");
 		int iconRes = getSelectedAppMode().getIconRes();
 		vehicleParameters.setIcon(getContentIcon(iconRes));
-	}
-
-	private void setupNavigationNotificationPref() {
-		SwitchPreferenceEx navigationNotification = (SwitchPreferenceEx) findPreference(settings.SHOW_NAVIGATION_NOTIFICATION.getId());
-		navigationNotification.setDescription(getString(R.string.navigation_notification_desc));
-		navigationNotification.setIcon(getPersistentPrefIcon(R.drawable.ic_action_notification));
 	}
 
 	private void updateMenu() {
