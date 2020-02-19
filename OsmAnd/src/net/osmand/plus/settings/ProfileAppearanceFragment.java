@@ -156,9 +156,13 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	protected void createToolbar(LayoutInflater inflater, View view) {
 		super.createToolbar(inflater, view);
 		if (isNewProfile) {
+			TextView toolbarTitle = (TextView) view.findViewById(R.id.toolbar_title);
+			if (toolbarTitle != null) {
+				toolbarTitle.setText(getString(R.string.new_profile));
+			}
 			TextView toolbarSubtitle = (TextView) view.findViewById(R.id.toolbar_subtitle);
 			if (toolbarSubtitle != null) {
-				toolbarSubtitle.setText(getString(R.string.new_profile));
+				toolbarSubtitle.setVisibility(View.GONE);
 			}
 		}
 	}
