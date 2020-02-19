@@ -35,6 +35,7 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
+	        android:textColor="?android:textColorPrimary"
             tools:text="Today"/>
 
         <android.support.v7.widget.SwitchCompat
@@ -68,6 +69,7 @@
 			android:ellipsize="end"
 			android:maxLines="3"
 			android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
+			android:textColor="?android:textColorSecondary"
 			tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard." />
 
 		<net.osmand.plus.widgets.TextViewEx

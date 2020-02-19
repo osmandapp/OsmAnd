@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.text.Html;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 
 import net.osmand.IndexConstants;
 import net.osmand.ResultMatcher;
@@ -86,7 +87,7 @@ public class WikiArticleHelper {
 			activityRef = new WeakReference<>(activity);
 			this.isNightMode = nightMode;
 			this.url = url;
-			dialog = createProgressDialog(activity);
+			dialog = createProgressDialog(activity, isNightMode);
 		}
 
 		@Override
@@ -215,9 +216,9 @@ public class WikiArticleHelper {
 		return "";
 	}
 
-	private static ProgressDialog createProgressDialog(@NonNull FragmentActivity activity) {
+	private static ProgressDialog createProgressDialog(@NonNull FragmentActivity activity, boolean nightMode) {
 		if (activity != null) {
-			ProgressDialog dialog = new ProgressDialog(activity);
+			ProgressDialog dialog = new ProgressDialog(new ContextThemeWrapper(activity, nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme));
 			dialog.setCancelable(false);
 			dialog.setMessage(activity.getString(R.string.wiki_article_search_text));
 			return dialog;

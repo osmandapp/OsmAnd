@@ -204,7 +204,10 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 										ldh.restoreSavedArticle(article);
 									}
 								});
-						AndroidUtils.setSnackbarTextColor(snackbar, R.color.wikivoyage_active_dark);
+						boolean nightMode = !settings.isLightContent();
+						UiUtilities.setupSnackbar(snackbar, nightMode);
+						int wikivoyageActiveColorResId = nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light;
+						UiUtilities.setupSnackbar(snackbar, nightMode, null, null, wikivoyageActiveColorResId, null);
 						snackbar.show();
 					}
 				}
