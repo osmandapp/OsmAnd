@@ -3169,7 +3169,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="sett_generic_ext_input">Clavier</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="sett_parrot_ext_input">Parrot</string>
-    <string name="select_base_profile_dialog_message">Basez votre profil personnalisé sur l\'un des profils par défaut pour définir les unités de vitesse, de distance ou la visibilité des widgets. Voici les profils par défaut de l\'application ainsi que des exemples de profils personnalisés :</string>
+    <string name="select_base_profile_dialog_message">Basez votre profil personnel sur l\'un des profils par défaut pour définir les unités de vitesse, de distance ou la visibilité des widgets. Voici les profils par défaut de l\'application ainsi que des exemples de profils personnalisés :</string>
     <string name="temporary_conditional_routing">Prendre en compte les limitations temporaires</string>
     <string name="shared_string_default">Par défaut</string>
     <string name="gpx_join_gaps">Relier les trous</string>
@@ -3516,4 +3516,9 @@ représentant la zone : %1$s x %2$s</string>
     <string name="no_recalculation_setting">Désactiver le re-calcul</string>
     <string name="route_recalculation_dist_title">Distance à partir de laquelle recalculer l’itinéraire</string>
     <string name="route_recalculation_dist_descr">L’itinéraire sera recalculé si votre éloignement de l\'itinéraire est supérieur à ce paramètre</string>
+    <string name="profile_type_custom_string">Profil personnel</string>
+    <string name="shared_string_angle_param">Angle : %s°</string>
+    <string name="shared_string_angle">Angle</string>
+    <string name="recalc_angle_dialog_descr">Un segment supplémentaire sera affiché entre ma position et l\'itinéraire initial jusqu\'à ce que l\'itinéraire soit recalculé</string>
+    <string name="recalc_angle_dialog_title">Angle minimum entre ma position et mon itinéraire</string>
 </resources>
