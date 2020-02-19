@@ -40,6 +40,7 @@ import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
+import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.render.RendererRegistry;
@@ -527,6 +528,7 @@ public class AppInitializer implements IProgress {
 		app.travelDbHelper = startupInit(app.travelDbHelper, TravelDbHelper.class);
 		app.lockHelper = startupInit(new LockHelper(app), LockHelper.class);
 		app.settingsHelper = startupInit(new SettingsHelper(app), SettingsHelper.class);
+		app.quickActionRegistry = startupInit(new QuickActionRegistry(app.getSettings()), QuickActionRegistry.class);
 
 
 		initOpeningHoursParser();

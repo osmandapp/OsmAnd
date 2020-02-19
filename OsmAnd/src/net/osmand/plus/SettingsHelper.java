@@ -23,7 +23,6 @@ import net.osmand.plus.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.quickaction.QuickActionFactory;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -90,8 +89,6 @@ public class SettingsHelper {
 	public static final String SETTINGS_LATEST_CHANGES_KEY = "settings_latest_changes";
 	public static final String SETTINGS_VERSION_KEY = "settings_version";
 
-	private static final String COPY_PREFIX = "copy_";
-	private static final String COPY_SUFFIX = "_copy";
 	private static final Log LOG = PlatformUtil.getLog(SettingsHelper.class);
 	private static final int BUFFER = 1024;
 
@@ -242,8 +239,8 @@ public class SettingsHelper {
 	public abstract static class CollectionSettingsItem<T> extends SettingsItem {
 
 		protected List<T> items;
-		List<T> duplicateItems;
-		List<T> savedItems;
+		protected List<T> duplicateItems;
+		protected List<T> existingItems;
 
 		CollectionSettingsItem(@NonNull SettingsItemType type, @NonNull List<T> items) {
 			super(type);
@@ -254,6 +251,7 @@ public class SettingsHelper {
 			super(type, json);
 		}
 
+		@NonNull
 		public List<T> getItems() {
 			return items;
 		}
@@ -263,6 +261,7 @@ public class SettingsHelper {
 
 		public abstract boolean isDuplicate(T item);
 
+		@NonNull
 		public abstract T renameItem(T item);
 	}
 
@@ -833,48 +832,40 @@ public class SettingsHelper {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static class QuickActionSettingsItem extends CollectionSettingsItem {
+	public static class QuickActionSettingsItem extends CollectionSettingsItem<QuickAction> {
 
 		private OsmandApplication app;
-		private QuickActionFactory factory;
 
 		public QuickActionSettingsItem(@NonNull OsmandApplication app,
 									   @NonNull List<QuickAction> items) {
 			super(SettingsItemType.QUICK_ACTION, items);
 			this.app = app;
-			this.factory = new QuickActionFactory();
-			savedItems = factory.parseActiveActionsList(app.getSettings().QUICK_ACTION_LIST.get());
+			existingItems = app.getQuickActionRegistry().getQuickActions();
 		}
 
 		QuickActionSettingsItem(@NonNull OsmandApplication app,
 								@NonNull JSONObject json) throws JSONException {
 			super(SettingsItemType.QUICK_ACTION, json);
 			this.app = app;
-			this.factory = new QuickActionFactory();
-			savedItems = factory.parseActiveActionsList(app.getSettings().QUICK_ACTION_LIST.get());
+			existingItems = app.getQuickActionRegistry().getQuickActions();
 		}
 
 		@Override
-		public Object renameItem(Object item) {
-			return app.getQuickActionRegistry().generateUniqueName((QuickAction) item, app);
+		public boolean isDuplicate(QuickAction item) {
+			return !app.getQuickActionRegistry().isNameUnique(item, app);
 		}
 
+		@NonNull
 		@Override
-		public boolean isDuplicate(Object item) {
-			String actionName = ((QuickAction) item).getName(app);
-			for (QuickAction savedItem : (List<QuickAction>) savedItems) {
-				if (savedItem.getName(app).equals(actionName)) {
-					return true;
-				}
-			}
-			return false;
+		public QuickAction renameItem(QuickAction item) {
+			return app.getQuickActionRegistry().generateUniqueName(item, app);
 		}
 
 		@NonNull
 		@Override
 		public List excludeDuplicateItems() {
 			duplicateItems = new ArrayList<>();
-			for (Object item : items) {
+			for (QuickAction item : items) {
 				if (isDuplicate(item)) {
 					duplicateItems.add(item);
 				}
@@ -886,18 +877,18 @@ public class SettingsHelper {
 		@Override
 		public void apply() {
 			if (!items.isEmpty() || !duplicateItems.isEmpty()) {
-				List<QuickAction> newActions = new ArrayList<>(savedItems);
+				List<QuickAction> newActions = new ArrayList<>(existingItems);
 				if (!duplicateItems.isEmpty()) {
 					if (shouldReplace) {
-						for (QuickAction duplicateItem : (List<QuickAction>) duplicateItems) {
-							for (QuickAction savedAction : (List<QuickAction>) savedItems) {
+						for (QuickAction duplicateItem : duplicateItems) {
+							for (QuickAction savedAction : existingItems) {
 								if (duplicateItem.getName(app).equals(savedAction.getName(app))) {
 									newActions.remove(savedAction);
 								}
 							}
 						}
 					} else {
-						for (Object duplicateItem : duplicateItems) {
+						for (QuickAction duplicateItem : duplicateItems) {
 							renameItem(duplicateItem);
 						}
 					}
@@ -953,7 +944,7 @@ public class SettingsHelper {
 					}
 					final JSONObject json;
 					try {
-						items = new ArrayList<QuickAction>();
+						items = new ArrayList<>();
 						Gson gson = new Gson();
 						Type type = new TypeToken<HashMap<String, String>>() {
 						}.getType();
@@ -990,7 +981,7 @@ public class SettingsHelper {
 					}.getType();
 					if (!items.isEmpty()) {
 						try {
-							for (QuickAction action : (List<QuickAction>) items) {
+							for (QuickAction action : items) {
 								JSONObject jsonObject = new JSONObject();
 								jsonObject.put("name", action.getName(app));
 								jsonObject.put("type", action.getType());
@@ -1018,29 +1009,29 @@ public class SettingsHelper {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static class PoiUiFilterSettingsItem extends CollectionSettingsItem {
+	public static class PoiUiFilterSettingsItem extends CollectionSettingsItem<PoiUIFilter> {
 
 		private OsmandApplication app;
 
 		public PoiUiFilterSettingsItem(@NonNull OsmandApplication app, @NonNull List items) {
 			super(SettingsItemType.POI_UI_FILTERS, items);
 			this.app = app;
-			savedItems = app.getPoiFilters().getUserDefinedPoiFilters(false);
+			existingItems = app.getPoiFilters().getUserDefinedPoiFilters(false);
 		}
 
 		PoiUiFilterSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			super(SettingsItemType.POI_UI_FILTERS, json);
 			this.app = app;
-			savedItems = app.getPoiFilters().getUserDefinedPoiFilters(false);
+			existingItems = app.getPoiFilters().getUserDefinedPoiFilters(false);
 		}
 
 		@Override
 		public void apply() {
 			if (!items.isEmpty() || !duplicateItems.isEmpty()) {
-				for (Object duplicate : duplicateItems) {
+				for (PoiUIFilter duplicate : duplicateItems) {
 					items.add(shouldReplace ? duplicate : renameItem(duplicate));
 				}
-				for (PoiUIFilter filter : (List<PoiUIFilter>) items) {
+				for (PoiUIFilter filter : items) {
 					app.getPoiFilters().createPoiFilter(filter, false);
 				}
 				app.getSearchUICore().refreshCustomPoiFilters();
@@ -1048,9 +1039,9 @@ public class SettingsHelper {
 		}
 
 		@Override
-		public boolean isDuplicate(Object item) {
-			String savedName = ((PoiUIFilter) item).getName();
-			for (PoiUIFilter filter : (List<PoiUIFilter>) savedItems) {
+		public boolean isDuplicate(PoiUIFilter item) {
+			String savedName = item.getName();
+			for (PoiUIFilter filter : existingItems) {
 				if (filter.getName().equals(savedName)) {
 					return true;
 				}
@@ -1063,9 +1054,9 @@ public class SettingsHelper {
 		public List excludeDuplicateItems() {
 			duplicateItems = new ArrayList<>();
 			if (!items.isEmpty()) {
-				for (Object object : items) {
-					if (isDuplicate(object)) {
-						duplicateItems.add(object);
+				for (PoiUIFilter item : items) {
+					if (isDuplicate(item)) {
+						duplicateItems.add(item);
 					}
 				}
 			}
@@ -1073,16 +1064,17 @@ public class SettingsHelper {
 			return duplicateItems;
 		}
 
+
+		@NonNull
 		@Override
-		public Object renameItem(Object item) {
+		public PoiUIFilter renameItem(PoiUIFilter item) {
 			int number = 0;
-			PoiUIFilter oldItem = (PoiUIFilter) item;
 			while (true) {
 				number++;
 				PoiUIFilter renamedItem = new PoiUIFilter(
-						oldItem.getName() + "_" + number,
-						oldItem.getFilterId() + "_" + number,
-						oldItem.getAcceptedTypes(), app);
+						item.getName() + "_" + number,
+						item.getFilterId() + "_" + number,
+						item.getAcceptedTypes(), app);
 				if (!isDuplicate(renamedItem)) {
 					return renamedItem;
 				}
@@ -1175,7 +1167,7 @@ public class SettingsHelper {
 					}.getType();
 					if (!items.isEmpty()) {
 						try {
-							for (PoiUIFilter filter : (List<PoiUIFilter>) items) {
+							for (PoiUIFilter filter : items) {
 								JSONObject jsonObject = new JSONObject();
 								jsonObject.put("name", filter.getName());
 								jsonObject.put("filterId", filter.getFilterId());
@@ -1203,29 +1195,30 @@ public class SettingsHelper {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static class MapSourcesSettingsItem extends CollectionSettingsItem {
+	public static class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> {
 
 		private OsmandApplication app;
+		private List<String> existingItemsNames;
 
 		public MapSourcesSettingsItem(@NonNull OsmandApplication app, @NonNull List items) {
 			super(SettingsItemType.MAP_SOURCES, items);
 			this.app = app;
 			Collection values = new LinkedHashMap<>(app.getSettings().getTileSourceEntries(true)).values();
-			savedItems = new ArrayList(values);
+			existingItemsNames = new ArrayList(values);
 		}
 
 		MapSourcesSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			super(SettingsItemType.MAP_SOURCES, json);
 			this.app = app;
 			Collection values = new LinkedHashMap<>(app.getSettings().getTileSourceEntries(true)).values();
-			savedItems = new ArrayList(values);
+			existingItemsNames = new ArrayList(values);
 		}
 
 		@Override
 		public void apply() {
 			if (!items.isEmpty() || !duplicateItems.isEmpty()) {
 				if (shouldReplace) {
-					for (ITileSource tileSource : (List<ITileSource>) duplicateItems) {
+					for (ITileSource tileSource : duplicateItems) {
 						if (tileSource instanceof SQLiteTileSource) {
 							File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + tileSource.getName() + IndexConstants.SQLITE_EXT);
 							if (f != null && f.exists()) {
@@ -1243,15 +1236,15 @@ public class SettingsHelper {
 						}
 					}
 				} else {
-					for (ITileSource tileSource : (List<ITileSource>) duplicateItems) {
+					for (ITileSource tileSource : duplicateItems) {
 						items.add(renameItem(tileSource));
 					}
 				}
-				for (Object template : items) {
-					if (template instanceof TileSourceManager.TileSourceTemplate) {
-						app.getSettings().installTileSource((TileSourceManager.TileSourceTemplate) template);
-					} else if (template instanceof SQLiteTileSource) {
-						((SQLiteTileSource) template).createDataBase();
+				for (ITileSource tileSource : items) {
+					if (tileSource instanceof TileSourceManager.TileSourceTemplate) {
+						app.getSettings().installTileSource((TileSourceManager.TileSourceTemplate) tileSource);
+					} else if (tileSource instanceof SQLiteTileSource) {
+						((SQLiteTileSource) tileSource).createDataBase();
 					}
 				}
 			}
@@ -1262,8 +1255,8 @@ public class SettingsHelper {
 		@Override
 		public List excludeDuplicateItems() {
 			duplicateItems = new ArrayList<>();
-			for (String name : (List<String>) savedItems) {
-				for (ITileSource tileSource : (List<ITileSource>) items) {
+			for (String name : existingItemsNames) {
+				for (ITileSource tileSource : items) {
 					if (name.equals(tileSource.getName())) {
 						duplicateItems.add(tileSource);
 					}
@@ -1273,8 +1266,9 @@ public class SettingsHelper {
 			return duplicateItems;
 		}
 
+		@NonNull
 		@Override
-		public Object renameItem(Object item) {
+		public ITileSource renameItem(ITileSource item) {
 			int number = 0;
 			while (true) {
 				number++;
@@ -1304,10 +1298,11 @@ public class SettingsHelper {
 			}
 		}
 
+
 		@Override
-		public boolean isDuplicate(Object item) {
-			for (String name : (List<String>) savedItems) {
-				if (name.equals(((ITileSource) item).getName())) {
+		public boolean isDuplicate(ITileSource item) {
+			for (String name : existingItemsNames) {
+				if (name.equals(item.getName())) {
 					return true;
 				}
 			}
@@ -1407,7 +1402,7 @@ public class SettingsHelper {
 					JSONArray jsonArray = new JSONArray();
 					if (!items.isEmpty()) {
 						try {
-							for (ITileSource template : (List<ITileSource>) items) {
+							for (ITileSource template : items) {
 								JSONObject jsonObject = new JSONObject();
 								boolean sql = template instanceof SQLiteTileSource;
 								jsonObject.put("sql", sql);
@@ -1877,9 +1872,11 @@ public class SettingsHelper {
 
 		@Override
 		protected void onPostExecute(Boolean success) {
-			progress.dismiss();
-			if (listener != null) {
-				listener.onSettingsExportFinished(file, success);
+			if (activity != null) {
+				progress.dismiss();
+				if (listener != null) {
+					listener.onSettingsExportFinished(file, success);
+				}
 			}
 		}
 	}
