@@ -197,15 +197,15 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.description = description;
 	}
 
-	private void setBackType(BackType backType) {
-		this.backType = backType;
-	}
-
 	public BackType getBackType() {
 		if (backType == null) {
 			return BackType.CIRCLE;
 		}
 		return backType;
+	}
+
+	private void setBackType(BackType backType) {
+		this.backType = backType;
 	}
 
 	@NonNull
@@ -305,7 +305,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		@StringRes
 		private int iconId;
 
-		BackType(@NonNull String typeName, @DrawableRes int iconId){
+		BackType(@NonNull String typeName, @DrawableRes int iconId) {
 			this.typeName = typeName;
 			this.iconId = iconId;
 		}

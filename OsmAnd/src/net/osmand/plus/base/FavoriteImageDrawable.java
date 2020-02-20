@@ -28,7 +28,9 @@ public class FavoriteImageDrawable extends Drawable {
 	private boolean synced;
 	private boolean history;
 	private Drawable favIcon;
-	private Bitmap favBackground;
+	private Bitmap favBackgroundTop;
+	private Bitmap favBackgroundCenter;
+	private Bitmap favBackgroundBottom;
 	private Bitmap syncedStroke;
 	private Bitmap syncedColor;
 	private Bitmap syncedShadow;
@@ -57,17 +59,20 @@ public class FavoriteImageDrawable extends Drawable {
 		}
 		listDrawable = ((OsmandApplication) ctx.getApplicationContext()).getUIUtilities()
 				.getIcon(uiIconId, R.color.color_white);
-		int backgroundIconId = point!=null ? getMapBackIconId(ctx,point.getBackType().getIconId()):R.drawable.map_white_favorite_shield;
+		int backgroundTopIconId = getMapBackIconId(ctx, point, "top");
+		int backgroundCenterIconId = getMapBackIconId(ctx, point, "center");
+		int backgroundBottomIconId = getMapBackIconId(ctx, point, "bottom");
 		int col = color == 0 || color == Color.BLACK ? res.getColor(R.color.color_favorite) : color;
-		favBackground = BitmapFactory.decodeResource(res,backgroundIconId);
-//		favBackground = BitmapFactory.decodeResource(res, R.drawable.map_white_favorite_shield);
+		favBackgroundTop = BitmapFactory.decodeResource(res, backgroundTopIconId);
+		favBackgroundCenter = BitmapFactory.decodeResource(res, backgroundCenterIconId);
+		favBackgroundBottom = BitmapFactory.decodeResource(res, backgroundBottomIconId);
 		syncedStroke = BitmapFactory.decodeResource(res, R.drawable.map_shield_marker_point_stroke);
 		syncedColor = BitmapFactory.decodeResource(res, R.drawable.map_shield_marker_point_color);
 		syncedShadow = BitmapFactory.decodeResource(res, R.drawable.map_shield_marker_point_shadow);
 		syncedIcon = BitmapFactory.decodeResource(res, R.drawable.map_marker_point_14dp);
 		initSimplePaint(paintOuter, color == 0 || color == Color.BLACK ? 0x88555555 : color);
 		initSimplePaint(paintInnerCircle, col);
-		colorFilter = new PorterDuffColorFilter(col, PorterDuff.Mode.MULTIPLY);
+		colorFilter = new PorterDuffColorFilter(col, PorterDuff.Mode.SRC_IN);
 		grayFilter = new PorterDuffColorFilter(res.getColor(R.color.color_favorite_gray), PorterDuff.Mode.MULTIPLY);
 	}
 
@@ -77,10 +82,14 @@ public class FavoriteImageDrawable extends Drawable {
 				.replaceFirst("mx_", "mm_"), "drawable", ctx.getPackageName());
 	}
 
-	private int getMapBackIconId(Context ctx, int iconId) {
-		String iconName = ctx.getResources().getResourceEntryName(iconId);
-		return ctx.getResources().getIdentifier("map_"+iconName + "_center"
-				, "drawable", ctx.getPackageName());
+	private int getMapBackIconId(Context ctx, FavouritePoint point, String layer) {
+		if (point != null) {
+			int iconId = point.getBackType().getIconId();
+			String iconName = ctx.getResources().getResourceEntryName(iconId);
+			return ctx.getResources().getIdentifier("map_" + iconName + "_" + layer
+					, "drawable", ctx.getPackageName());
+		}
+		return R.drawable.map_white_favorite_shield;
 	}
 
 	private void initSimplePaint(Paint paint, int color) {
@@ -94,22 +103,23 @@ public class FavoriteImageDrawable extends Drawable {
 		super.onBoundsChange(bounds);
 		Rect bs = new Rect(bounds);
 		//bs.inset((int) (4 * density), (int) (4 * density));
-		bs.inset(bs.width() / 4, bs.height() / 4);
 		if (!withShadow && !synced) {
+			bs.inset(bs.width() / 4, bs.height() / 4);
 			listDrawable.setBounds(bs);
 		} else if (withShadow) {
+			bs.inset(bs.width() / 3, bs.height() / 3);
 			favIcon.setBounds(bs);
 		}
 	}
 
 	@Override
 	public int getIntrinsicHeight() {
-		return synced ? syncedShadow.getHeight() : favBackground.getHeight();
+		return synced ? syncedShadow.getHeight() : favBackgroundCenter.getHeight();
 	}
 
 	@Override
 	public int getIntrinsicWidth() {
-		return synced ? syncedShadow.getWidth() : favBackground.getWidth();
+		return synced ? syncedShadow.getWidth() : favBackgroundCenter.getWidth();
 	}
 
 	@Override
@@ -122,7 +132,9 @@ public class FavoriteImageDrawable extends Drawable {
 			canvas.drawBitmap(syncedStroke, bs.exactCenterX() - syncedStroke.getWidth() / 2f, bs.exactCenterY() - syncedStroke.getHeight() / 2f, paintBackground);
 			canvas.drawBitmap(syncedIcon, bs.exactCenterX() - syncedIcon.getWidth() / 2f, bs.exactCenterY() - syncedIcon.getHeight() / 2f, paintIcon);
 		} else if (withShadow) {
-			canvas.drawBitmap(favBackground, bs.exactCenterX() - favBackground.getWidth() / 2f, bs.exactCenterY() - favBackground.getHeight() / 2f, paintBackground);
+			canvas.drawBitmap(favBackgroundBottom, bs.exactCenterX() - favBackgroundBottom.getWidth() / 2f, bs.exactCenterY() - favBackgroundBottom.getHeight() / 2f, new Paint());
+			canvas.drawBitmap(favBackgroundCenter, bs.exactCenterX() - favBackgroundCenter.getWidth() / 2f, bs.exactCenterY() - favBackgroundCenter.getHeight() / 2f, paintBackground);
+			canvas.drawBitmap(favBackgroundTop, bs.exactCenterX() - favBackgroundTop.getWidth() / 2f, bs.exactCenterY() - favBackgroundTop.getHeight() / 2f, new Paint());
 			favIcon.draw(canvas);
 		} else {
 			int min = Math.min(bs.width(), bs.height());
