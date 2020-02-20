@@ -3462,4 +3462,12 @@
     <string name="no_recalculation_setting">השבתת חישוב מחדש</string>
     <string name="route_recalculation_dist_title">מרחק מזערי לחישוב המסלול מחדש</string>
     <string name="route_recalculation_dist_descr">המסלול יחושב מחדש אם המרחק למסלול הוא ארוך מהמשתנה שצוין</string>
+    <string name="navigation_notification_desc">להציג את התראות המערכת בזמן הניווט עם הנחיות ניווט.</string>
+    <string name="navigation_notification">התראות ניווט</string>
+    <string name="shared_string_app_default_w_val">בררת המחדל של היישומון (%s)</string>
+    <string name="profile_type_custom_string">פרופיל בהתאמה אישית</string>
+    <string name="shared_string_angle_param">זווית: ‎%s°‎</string>
+    <string name="shared_string_angle">זווית</string>
+    <string name="recalc_angle_dialog_descr">קטע ישר נוסף יוצג בין המיקום שלי והיעד עד לחישוב המסלול</string>
+    <string name="recalc_angle_dialog_title">הזווית המזערית בין המיקום שלי והמסלול</string>
 </resources>
