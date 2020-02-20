@@ -192,7 +192,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 				final View contentView = useScrollableItemsContainer() ? mainView.findViewById(R.id.scroll_view) : itemsContainer;
 				if (contentView.getHeight() > contentHeight) {
-					if (useScrollableItemsContainer()) {
+					if (useScrollableItemsContainer() || useExpandableList()) {
 						contentView.getLayoutParams().height = contentHeight;
 					} else {
 						contentView.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -229,6 +229,10 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	protected boolean useScrollableItemsContainer() {
 		return true;
+	}
+
+	protected boolean useExpandableList() {
+		return false;
 	}
 
 	protected boolean hideButtonsContainer() {

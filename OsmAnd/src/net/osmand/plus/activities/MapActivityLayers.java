@@ -35,7 +35,6 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.MapVectorLayer;
 import net.osmand.plus.render.RenderingIcons;
@@ -92,7 +91,6 @@ public class MapActivityLayers {
 	private MapQuickActionLayer mapQuickActionLayer;
 	private DownloadedRegionsLayer downloadedRegionsLayer;
 	private MapWidgetRegistry mapWidgetRegistry;
-	private QuickActionRegistry quickActionRegistry;
 	private MeasurementToolLayer measurementToolLayer;
 	
 	private StateChangedListener<Integer> transparencyListener;
@@ -100,11 +98,6 @@ public class MapActivityLayers {
 	public MapActivityLayers(MapActivity activity) {
 		this.activity = activity;
 		this.mapWidgetRegistry = new MapWidgetRegistry(activity.getMyApplication());
-		this.quickActionRegistry = new QuickActionRegistry(activity.getMyApplication().getSettings());
-	}
-
-	public QuickActionRegistry getQuickActionRegistry() {
-		return quickActionRegistry;
 	}
 
 	public MapWidgetRegistry getMapWidgetRegistry() {

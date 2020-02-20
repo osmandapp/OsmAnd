@@ -1,31 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingBottom="20dp">
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:paddingBottom="@dimen/title_padding">
 
-    <android.support.v7.widget.SwitchCompat
-        android:id="@+id/switchItem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/content_padding"
-        android:layout_marginEnd="@dimen/content_padding"
-        android:minHeight="48dp"
-        android:text="@string/shared_string_include_data"
-        android:textSize="@dimen/default_list_text_size"
-        tools:text="@string/shared_string_include_data" />
-
-    <ExpandableListView
-        android:id="@+id/list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@null"
-        android:dividerHeight="0dp"
-        android:drawSelectorOnTop="false"
-        android:groupIndicator="@android:color/transparent"
-        android:visibility="gone"
-        tools:visibility="visible" />
+	<ExpandableListView
+		android:id="@+id/list"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:divider="@null"
+		android:headerDividersEnabled="false"
+		android:dividerHeight="0dp"
+		android:drawSelectorOnTop="false"
+		android:groupIndicator="@android:color/transparent"
+		tools:visibility="visible" />
 
 </LinearLayout>

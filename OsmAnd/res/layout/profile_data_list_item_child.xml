@@ -1,49 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_vertical"
-    android:orientation="vertical">
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:gravity="center_vertical"
+	android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:minHeight="66dp">
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="?attr/bg_color">
 
-        <ImageView
-            android:id="@+id/icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/content_padding"
-            tools:src="@drawable/ic_action_info_dark" />
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="?attr/selectableItemBackground"
+			android:gravity="center_vertical"
+			android:minHeight="66dp">
 
-        <net.osmand.plus.widgets.TextViewEx
-            android:id="@+id/title_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="@dimen/default_list_text_size"
-            tools:text="Quick actions" />
+			<ImageView
+				android:id="@+id/icon"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="@dimen/content_padding"
+				tools:src="@drawable/ic_action_info_dark" />
 
-        <android.support.v7.widget.AppCompatCheckBox
-            android:id="@+id/check_box"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/content_padding"
-            android:layout_marginEnd="@dimen/content_padding"
-            android:focusable="false" />
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:layout_weight="1"
+				android:orientation="vertical">
 
-    </LinearLayout>
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/title_tv"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/default_list_text_size"
+					tools:text="Quick actions" />
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?attr/list_divider"
-        android:visibility="gone"
-        tools:visibility="visible" />
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/sub_title_tv"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/default_desc_text_size"
+					android:visibility="gone"
+					tools:text="description"
+					tools:visibility="visible" />
+
+			</LinearLayout>
+
+			<android.support.v7.widget.AppCompatCheckBox
+				android:id="@+id/check_box"
+				android:layout_width="wrap_content"
+				android:focusableInTouchMode="false"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:focusable="false" />
+
+		</LinearLayout>
+
+	</FrameLayout>
+
+	<View
+		android:id="@+id/divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/list_divider"
+		android:visibility="gone"
+		tools:visibility="visible" />
+
+	<include
+		android:id="@+id/card_bottom_divider"
+		layout="@layout/card_bottom_divider"
+		android:visibility="gone"
+		tools:visibility="visible" />
 
 </LinearLayout>

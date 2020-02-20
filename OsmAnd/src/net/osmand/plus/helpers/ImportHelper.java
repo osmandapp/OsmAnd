@@ -50,8 +50,8 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.profiles.ExportImportProfileBottomSheet;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.settings.ImportSettingsFragment;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
@@ -780,11 +780,7 @@ public class ImportHelper {
 							if (succeed) {
 								FragmentManager fragmentManager = activity.getSupportFragmentManager();
 								if (fragmentManager != null) {
-									ExportImportProfileBottomSheet.showInstance(
-											fragmentManager,
-											ExportImportProfileBottomSheet.State.IMPORT,
-											file,
-											items);
+									ImportSettingsFragment.showInstance(fragmentManager, items, file);
 								}
 							} else {
 								app.showShortToastMessage(app.getString(R.string.file_import_error, name, app.getString(R.string.shared_string_unexpected_error)));

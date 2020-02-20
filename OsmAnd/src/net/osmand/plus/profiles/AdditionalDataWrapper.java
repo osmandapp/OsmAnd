@@ -26,6 +26,7 @@ public class AdditionalDataWrapper {
 	}
 
 	public enum Type {
+		PROFILE,
 		QUICK_ACTIONS,
 		POI_TYPES,
 		MAP_SOURCES,

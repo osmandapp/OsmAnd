@@ -28,20 +28,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
-import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.SettingsHelper;
-import net.osmand.plus.SettingsHelper.ProfileSettingsItem;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
-import net.osmand.plus.profiles.ExportImportProfileBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
@@ -403,9 +399,8 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		} else if (EXPORT_PROFILE.equals(prefId)) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				ExportImportProfileBottomSheet.showInstance(
+				ExportProfileBottomSheet.showInstance(
 						fragmentManager,
-						ExportImportProfileBottomSheet.State.EXPORT,
 						this,
 						getSelectedAppMode());
 			}
