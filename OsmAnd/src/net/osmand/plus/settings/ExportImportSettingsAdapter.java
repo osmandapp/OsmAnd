@@ -17,6 +17,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.AdditionalDataWrapper;
 import net.osmand.plus.profiles.ProfileIconColors;
@@ -213,6 +214,13 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				icon.setVisibility(View.VISIBLE);
 				subText.setVisibility(View.GONE);
 				break;
+			case AVOID_ROADS:
+				AvoidRoadInfo avoidRoadInfo = (AvoidRoadInfo) currentItem;
+				title.setText(avoidRoadInfo.name);
+				icon.setImageResource(R.drawable.map_pin_avoid_road);
+				icon.setVisibility(View.VISIBLE);
+				subText.setVisibility(View.GONE);
+				break;
 			default:
 				return child;
 		}
@@ -273,6 +281,8 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				return R.string.shared_string_custom_rendering_style;
 			case CUSTOM_ROUTING:
 				return R.string.shared_string_routing;
+			case AVOID_ROADS:
+				return R.string.avoid_road;
 			default:
 				return R.string.access_empty_list;
 		}

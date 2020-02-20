@@ -19,6 +19,7 @@ import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.SettingsHelper.SettingsItem;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.view.ComplexButton;
@@ -97,6 +98,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implement
 		List<ITileSource> tileSources = new ArrayList<>();
 		List<File> renderFilesList = new ArrayList<>();
 		List<File> routingFilesList = new ArrayList<>();
+		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
 
 		for (Object object : duplicatesList) {
 			if (object instanceof ApplicationMode.ApplicationModeBean) {
@@ -114,6 +116,8 @@ public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implement
 				} else if (file.getAbsolutePath().contains("files/routing")) {
 					routingFilesList.add(file);
 				}
+			} else if (object instanceof AvoidRoadInfo) {
+				avoidRoads.add((AvoidRoadInfo) object);
 			}
 		}
 		if (!profiles.isEmpty()) {
@@ -139,6 +143,10 @@ public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implement
 		if (!renderFilesList.isEmpty()) {
 			duplicates.add(getString(R.string.shared_string_custom_rendering_style));
 			duplicates.addAll(renderFilesList);
+		}
+		if (!avoidRoads.isEmpty()) {
+			duplicates.add(getString(R.string.avoid_road));
+			duplicates.addAll(avoidRoads);
 		}
 		return duplicates;
 	}

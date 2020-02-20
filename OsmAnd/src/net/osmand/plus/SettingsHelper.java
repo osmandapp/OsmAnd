@@ -14,6 +14,7 @@ import com.google.gson.reflect.TypeToken;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.osm.MapPoiTypes;
@@ -21,6 +22,8 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.plus.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.helpers.AvoidSpecificRoads;
+import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
@@ -147,6 +150,7 @@ public class SettingsHelper {
 		QUICK_ACTION,
 		POI_UI_FILTERS,
 		MAP_SOURCES,
+		AVOID_ROADS
 	}
 
 	public abstract static class SettingsItem {
@@ -1435,6 +1439,191 @@ public class SettingsHelper {
 		}
 	}
 
+	public static class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo> {
+
+		private OsmandApplication app;
+		private OsmandSettings settings;
+		private AvoidSpecificRoads specificRoads;
+
+		public AvoidRoadsSettingsItem(@NonNull OsmandApplication app, @NonNull List<AvoidRoadInfo> items) {
+			super(SettingsItemType.AVOID_ROADS, items);
+			this.app = app;
+			settings = app.getSettings();
+			specificRoads = app.getAvoidSpecificRoads();
+			existingItems = new ArrayList<>(specificRoads.getImpassableRoads().values());
+		}
+
+		AvoidRoadsSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+			super(SettingsItemType.AVOID_ROADS, json);
+			this.app = app;
+			settings = app.getSettings();
+			specificRoads = app.getAvoidSpecificRoads();
+			existingItems = new ArrayList<>(specificRoads.getImpassableRoads().values());
+		}
+
+		@NonNull
+		@Override
+		public String getName() {
+			return "avoid_roads";
+		}
+
+		@NonNull
+		@Override
+		public String getPublicName(@NonNull Context ctx) {
+			return "avoid_roads";
+		}
+
+		@NonNull
+		@Override
+		public String getFileName() {
+			return getName() + ".json";
+		}
+
+		@Override
+		public void apply() {
+			for (AvoidRoadInfo duplicate : duplicateItems) {
+				if (shouldReplace) {
+					LatLon latLon = new LatLon(duplicate.latitude, duplicate.longitude);
+					if (settings.removeImpassableRoad(latLon)) {
+						settings.addImpassableRoad(duplicate);
+					}
+				} else {
+					settings.addImpassableRoad(duplicate);
+				}
+			}
+			for (AvoidRoadInfo avoidRoad : items) {
+				settings.addImpassableRoad(avoidRoad);
+			}
+			specificRoads.loadImpassableRoads();
+			specificRoads.initRouteObjects(true);
+		}
+
+		@NonNull
+		@Override
+		public List<AvoidRoadInfo> excludeDuplicateItems() {
+			duplicateItems = new ArrayList<>();
+			for (AvoidRoadInfo item : items) {
+				if (isDuplicate(item)) {
+					duplicateItems.add(item);
+				}
+			}
+			items.removeAll(duplicateItems);
+			return duplicateItems;
+		}
+
+		@Override
+		public boolean isDuplicate(AvoidRoadInfo item) {
+			for (AvoidRoadInfo existingItem : existingItems) {
+				if (item.latitude == existingItem.latitude && item.longitude == existingItem.longitude) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		@Override
+		public boolean shouldReadOnCollecting() {
+			return true;
+		}
+
+		@NonNull
+		@Override
+		public AvoidRoadInfo renameItem(AvoidRoadInfo item) {
+			int number = 0;
+			while (true) {
+				number++;
+				AvoidRoadInfo renamedItem = item;
+				renamedItem.name = renamedItem.name + "_" + number;
+				if (!isDuplicate(renamedItem)) {
+					return renamedItem;
+				}
+			}
+		}
+
+		@NonNull
+		@Override
+		SettingsItemReader getReader() {
+			return new SettingsItemReader(this) {
+				@Override
+				public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
+					StringBuilder buf = new StringBuilder();
+					try {
+						BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+						String str;
+						while ((str = in.readLine()) != null) {
+							buf.append(str);
+						}
+					} catch (IOException e) {
+						throw new IOException("Cannot read json body", e);
+					}
+					String jsonStr = buf.toString();
+					if (Algorithms.isEmpty(jsonStr)) {
+						throw new IllegalArgumentException("Cannot find json body");
+					}
+					final JSONObject json;
+					try {
+						items = new ArrayList<>();
+						json = new JSONObject(jsonStr);
+						JSONArray jsonArray = json.getJSONArray("items");
+						for (int i = 0; i < jsonArray.length(); i++) {
+							JSONObject object = jsonArray.getJSONObject(i);
+							double latitude = object.optDouble("latitude");
+							double longitude = object.optDouble("longitude");
+							String name = object.optString("name");
+							String appModeKey = object.optString("appModeKey");
+							AvoidRoadInfo roadInfo = new AvoidRoadInfo();
+							roadInfo.id = 0;
+							roadInfo.latitude = latitude;
+							roadInfo.longitude = longitude;
+							roadInfo.name = name;
+							roadInfo.appModeKey = appModeKey;
+							items.add(roadInfo);
+						}
+					} catch (JSONException e) {
+						throw new IllegalArgumentException("Json parse error", e);
+					}
+				}
+			};
+		}
+
+		@NonNull
+		@Override
+		SettingsItemWriter getWriter() {
+			return new SettingsItemWriter(this) {
+				@Override
+				public boolean writeToStream(@NonNull OutputStream outputStream) throws IOException {
+					JSONObject json = new JSONObject();
+					JSONArray jsonArray = new JSONArray();
+					if (!items.isEmpty()) {
+						try {
+							for (AvoidRoadInfo avoidRoad : items) {
+								JSONObject jsonObject = new JSONObject();
+								jsonObject.put("latitude", avoidRoad.latitude);
+								jsonObject.put("longitude", avoidRoad.longitude);
+								jsonObject.put("name", avoidRoad.name);
+								jsonObject.put("appModeKey", avoidRoad.appModeKey);
+								jsonArray.put(jsonObject);
+							}
+							json.put("items", jsonArray);
+						} catch (JSONException e) {
+							LOG.error("Failed write to json", e);
+						}
+					}
+					if (json.length() > 0) {
+						try {
+							String s = json.toString(2);
+							outputStream.write(s.getBytes("UTF-8"));
+						} catch (JSONException e) {
+							LOG.error("Failed to write json to stream", e);
+						}
+						return true;
+					}
+					return false;
+				}
+			};
+		}
+	}
+
 	private static class SettingsItemsFactory {
 
 		private OsmandApplication app;
@@ -1499,6 +1688,9 @@ public class SettingsHelper {
 					break;
 				case MAP_SOURCES:
 					item = new MapSourcesSettingsItem(app, json);
+					break;
+				case AVOID_ROADS:
+					item = new AvoidRoadsSettingsItem(app, json);
 					break;
 			}
 			return item;

@@ -20,6 +20,7 @@ import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.SettingsHelper.SettingsItem;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.AdditionalDataWrapper;
 import net.osmand.plus.quickaction.QuickAction;
@@ -124,7 +125,6 @@ public class ImportSettingsFragment extends BaseOsmAndDialogFragment
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	private List<Object> getDuplicatesData(List<SettingsItem> items) {
 		List<Object> duplicateItems = new ArrayList<>();
 		for (SettingsItem item : items) {
@@ -151,6 +151,11 @@ public class ImportSettingsFragment extends BaseOsmAndDialogFragment
 				if (item.exists()) {
 					duplicateItems.add(((SettingsHelper.FileSettingsItem) item).getFile());
 				}
+			} else if (item instanceof SettingsHelper.AvoidRoadsSettingsItem) {
+				List<AvoidRoadInfo> avoidRoads = ((SettingsHelper.AvoidRoadsSettingsItem) item).excludeDuplicateItems();
+				if (!avoidRoads.isEmpty()) {
+					duplicateItems.addAll(avoidRoads);
+				}
 			}
 		}
 		return duplicateItems;
@@ -165,6 +170,7 @@ public class ImportSettingsFragment extends BaseOsmAndDialogFragment
 		List<QuickAction> quickActions = new ArrayList<>();
 		List<PoiUIFilter> poiUIFilters = new ArrayList<>();
 		List<ITileSource> tileSourceTemplates = new ArrayList<>();
+		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
 		for (Object object : dataToOperate) {
 			if (object instanceof ApplicationMode.ApplicationModeBean) {
 				settingsItems.add(new SettingsHelper.ProfileSettingsItem(app, (ApplicationMode.ApplicationModeBean) object));
@@ -178,6 +184,8 @@ public class ImportSettingsFragment extends BaseOsmAndDialogFragment
 				tileSourceTemplates.add((ITileSource) object);
 			} else if (object instanceof File) {
 				settingsItems.add(new SettingsHelper.FileSettingsItem(getMyApplication(), (File) object));
+			} else if (object instanceof AvoidRoadInfo) {
+				avoidRoads.add((AvoidRoadInfo) object);
 			}
 		}
 		if (!quickActions.isEmpty()) {
@@ -189,10 +197,12 @@ public class ImportSettingsFragment extends BaseOsmAndDialogFragment
 		if (!tileSourceTemplates.isEmpty()) {
 			settingsItems.add(new SettingsHelper.MapSourcesSettingsItem(getMyApplication(), tileSourceTemplates));
 		}
+		if (!avoidRoads.isEmpty()) {
+			settingsItems.add(new SettingsHelper.AvoidRoadsSettingsItem(getMyApplication(), avoidRoads));
+		}
 		return settingsItems;
 	}
 
-	@SuppressWarnings("unchecked")
 	private List<AdditionalDataWrapper> getSettingsToOperate() {
 		List<AdditionalDataWrapper> settingsToOperate = new ArrayList<>();
 		List<ApplicationMode.ApplicationModeBean> profiles = new ArrayList<>();
@@ -201,6 +211,7 @@ public class ImportSettingsFragment extends BaseOsmAndDialogFragment
 		List<ITileSource> tileSourceTemplates = new ArrayList<>();
 		List<File> routingFilesList = new ArrayList<>();
 		List<File> renderFilesList = new ArrayList<>();
+		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
 
 		for (SettingsHelper.SettingsItem item : settingsItems) {
 			if (item.getType().equals(SettingsHelper.SettingsItemType.PROFILE)) {
@@ -217,6 +228,8 @@ public class ImportSettingsFragment extends BaseOsmAndDialogFragment
 				} else if (item.getName().startsWith("/routing/")) {
 					routingFilesList.add(((SettingsHelper.FileSettingsItem) item).getFile());
 				}
+			} else if (item.getType().equals(SettingsHelper.SettingsItemType.AVOID_ROADS)) {
+				avoidRoads.addAll(((SettingsHelper.AvoidRoadsSettingsItem) item).getItems());
 			}
 		}
 
@@ -251,6 +264,12 @@ public class ImportSettingsFragment extends BaseOsmAndDialogFragment
 			settingsToOperate.add(new AdditionalDataWrapper(
 					AdditionalDataWrapper.Type.CUSTOM_ROUTING,
 					routingFilesList
+			));
+		}
+		if (!avoidRoads.isEmpty()) {
+			settingsToOperate.add(new AdditionalDataWrapper(
+					AdditionalDataWrapper.Type.AVOID_ROADS,
+					avoidRoads
 			));
 		}
 		return settingsToOperate;

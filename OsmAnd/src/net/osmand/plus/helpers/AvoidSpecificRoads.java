@@ -54,6 +54,10 @@ public class AvoidSpecificRoads {
 
 	public AvoidSpecificRoads(final OsmandApplication app) {
 		this.app = app;
+		loadImpassableRoads();
+	}
+
+	public void loadImpassableRoads(){
 		for (AvoidRoadInfo avoidRoadInfo : app.getSettings().getImpassableRoadPoints()) {
 			impassableRoads.put(new LatLon(avoidRoadInfo.latitude, avoidRoadInfo.longitude), avoidRoadInfo);
 		}
