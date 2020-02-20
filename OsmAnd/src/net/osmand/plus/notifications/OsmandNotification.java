@@ -104,8 +104,6 @@ public abstract class OsmandNotification {
 
 	public abstract boolean isEnabled();
 
-	public abstract boolean isUpdateDisabled();
-
 	public abstract Intent getContentIntent();
 
 	public void setupNotification(Notification notification) {
@@ -126,7 +124,7 @@ public abstract class OsmandNotification {
 		NotificationManagerCompat notificationManager = NotificationManagerCompat.from(app);
 		if (isEnabled()) {
 			Builder notificationBuilder = buildNotification(false);
-			if (notificationBuilder != null && !isUpdateDisabled()) {
+			if (notificationBuilder != null) {
 				Notification notification = getNotification(notificationBuilder, false);
 				setupNotification(notification);
 				notificationManager.notify(top ? TOP_NOTIFICATION_SERVICE_ID : getOsmandNotificationId(), notification);
@@ -142,9 +140,6 @@ public abstract class OsmandNotification {
 		if (isEnabled()) {
 			Builder notificationBuilder = buildNotification(false);
 			if (notificationBuilder != null) {
-				if (isUpdateDisabled()) {
-					return false;
-				}
 				Notification notification = getNotification(notificationBuilder, true);
 				setupNotification(notification);
 				if (top) {

@@ -115,11 +115,6 @@ public class NavigationNotification extends OsmandNotification {
 	}
 
 	@Override
-	public boolean isUpdateDisabled() {
-		return app.getSettings().MAP_ACTIVITY_ENABLED.get() && !app.getSettings().SHOW_NAVIGATION_NOTIFICATION.get();
-	}
-
-	@Override
 	public Intent getContentIntent() {
 		return new Intent(app, MapActivity.class);
 	}

@@ -3538,8 +3538,6 @@ Pro praghere iscrie su còdighe intreu</string>
 \n</string>
     <string name="sort_by_category">Òrdina pro categoria</string>
     <string name="index_name_antarctica">Antàrticu</string>
-    <string name="navigation_notification_desc">Ammustra notìficas de sistema durante sa navigatzione cun istrutziones de navigatzione.</string>
-    <string name="navigation_notification">Notìfica de navigatzione</string>
     <string name="shared_string_app_default_w_val">Predefinidu in s\'aplicatzione (%s)</string>
     <string name="no_recalculation_setting">Disabìlita su ri-càlculu de s\'àndala</string>
     <string name="route_recalculation_dist_title">Distàntzia mìnima pro torrare a calculare s\'àndala</string>
