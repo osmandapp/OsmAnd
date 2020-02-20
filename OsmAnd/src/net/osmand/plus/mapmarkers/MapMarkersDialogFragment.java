@@ -33,6 +33,7 @@ import net.osmand.plus.MapMarkersHelper.OnGroupSyncedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.OnPointsSavedListener;
@@ -449,7 +450,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 									}
 								}
 							});
-					AndroidUtils.setSnackbarTextColor(snackbar, R.color.active_color_primary_dark);
+					UiUtilities.setupSnackbar(snackbar, !lightTheme);
 					snackbar.show();
 				}
 			}
@@ -494,7 +495,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 								startActivity(intent);
 							}
 						});
-				AndroidUtils.setSnackbarTextColor(snackbar, R.color.active_color_primary_dark);
+				UiUtilities.setupSnackbar(snackbar, !lightTheme);
 				snackbar.show();
 			}
 		};

@@ -192,9 +192,15 @@ public class SelectProfileBottomSheetDialogFragment extends BasePreferenceBottom
 		tvTitle.setText(profile.getName());
 		tvDescription.setText(profile.getDescription());
 		
-		final boolean isSelected = profile.getStringKey().equals(selectedItemKey);
-		final Drawable drawableIcon = app.getUIUtilities().getIcon(profile.getIconRes(), 
-				isSelected ? activeColorResId : iconDefaultColorResId);
+		boolean isSelected = profile.getStringKey().equals(selectedItemKey);
+		int iconColor;
+		if (type.equals(TYPE_BASE_APP_PROFILE)) {
+			iconColor = profile.getIconColor(nightMode);
+		} else {
+			iconColor = isSelected ? activeColorResId : iconDefaultColorResId;
+		}
+
+		Drawable drawableIcon = app.getUIUtilities().getIcon(profile.getIconRes(), iconColor);
 		ivIcon.setImageDrawable(drawableIcon);
 		compoundButton.setChecked(isSelected);
 		UiUtilities.setupCompoundButton(compoundButton, nightMode, UiUtilities.CompoundButtonType.GLOBAL);
@@ -220,7 +226,7 @@ public class SelectProfileBottomSheetDialogFragment extends BasePreferenceBottom
 	private void addButtonItem(int titleId, int iconId, OnClickListener listener) {
 		OsmandApplication app = requiredMyApplication();
 		
-		int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		int activeColorResId = isNightMode(app) ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		
 		View buttonView = View.inflate(app, R.layout.bottom_sheet_item_preference_btn, null);
 		TextView tvTitle = buttonView.findViewById(R.id.title);

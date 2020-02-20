@@ -3497,4 +3497,13 @@
     <string name="index_name_antarctica">Antarktika</string>
     <string name="navigation_notification_desc">Navigasyon talimatları ile navigasyon sırasında sistem bildirimini göster.</string>
     <string name="navigation_notification">Navigasyon bildirimi</string>
+    <string name="shared_string_app_default_w_val">Uygulama Varsayılanı (%s)</string>
+    <string name="no_recalculation_setting">Yeniden hesaplamayı devre dışı bırak</string>
+    <string name="route_recalculation_dist_title">Rotayı yeniden hesaplamak için minimum mesafe</string>
+    <string name="route_recalculation_dist_descr">Rotaya olan mesafe belirtilen parametreden daha uzunsa rota yeniden hesaplanacak</string>
+    <string name="profile_type_custom_string">Özel profil</string>
+    <string name="shared_string_angle_param">Açı: %s°</string>
+    <string name="shared_string_angle">Açı</string>
+    <string name="recalc_angle_dialog_descr">Konumum ve hesaplanan rota arasındaki ekstra düz segment, rota yeniden hesaplanıncaya kadar görüntülenecek</string>
+    <string name="recalc_angle_dialog_title">Konumum ve rota arasındaki minimum açı</string>
 </resources>

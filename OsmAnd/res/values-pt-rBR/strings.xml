@@ -3527,4 +3527,10 @@ Pôr do Sol: %2$s</string>
     <string name="import_profile_dialog_description">O perfil importado contém dados adicionais. Clique em Importar para importar apenas dados do perfil ou selecione dados adicionais a serem importados.</string>
     <string name="export_profile_dialog_description">Você pode selecionar dados adicionais para exportar junto com o perfil.</string>
     <string name="index_name_antarctica">Antártida</string>
+    <string name="navigation_notification_desc">Mostrar notificação do sistema durante a navegação com instruções de navegação.</string>
+    <string name="navigation_notification">Notificação de navegação</string>
+    <string name="shared_string_app_default_w_val">Aplicativo padrão (%s)</string>
+    <string name="no_recalculation_setting">Desativar recálculo</string>
+    <string name="route_recalculation_dist_title">Distância mínima para recalcular a rota</string>
+    <string name="route_recalculation_dist_descr">A rota será recalculada se a distância até a rota for maior que o parâmetro especificado</string>
 </resources>

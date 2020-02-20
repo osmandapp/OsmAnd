@@ -420,6 +420,14 @@ public class ApplicationMode {
 		app.getSettings().MAX_SPEED.setModeValue(this, defaultSpeed);
 	}
 
+	public float getStrAngle() {
+		return app.getSettings().ROUTE_STRAIGHT_ANGLE.getModeValue(this);
+	}
+
+	public void setStrAngle(float angle) {
+		app.getSettings().ROUTE_STRAIGHT_ANGLE.setModeValue(this, angle);
+	}
+
 	public String getUserProfileName() {
 		return app.getSettings().USER_PROFILE_NAME.getModeValue(this);
 	}

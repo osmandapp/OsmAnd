@@ -541,6 +541,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					if (operation == DELETE_OPERATION) {
 						File f = new File(info.getPathToData());
 						successfull = Algorithms.removeAllFiles(f);
+
 						if (InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication())) {
 							String fileNameWithoutExtension =
 									Algorithms.getFileNameWithoutExtension(f);
@@ -550,6 +551,14 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 						}
 						if (successfull) {
 							getMyApplication().getResourceManager().closeFile(info.getFileName());
+							File tShm = new File(f.getParentFile(), f.getName() + "-shm");
+							File tWal = new File(f.getParentFile(), f.getName() + "-wal");
+							if(tShm.exists()) {
+								Algorithms.removeAllFiles(tShm);
+							}
+							if(tWal.exists()) {
+								Algorithms.removeAllFiles(tWal);
+							}
 						}
 					} else if (operation == RESTORE_OPERATION) {
 						successfull = move(new File(info.getPathToData()), getFileToRestore(info));

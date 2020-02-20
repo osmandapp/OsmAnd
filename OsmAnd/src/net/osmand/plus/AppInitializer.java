@@ -631,6 +631,7 @@ public class AppInitializer implements IProgress {
 				if (!customConfigs.isEmpty()) {
 					app.getCustomRoutingConfigs().putAll(customConfigs);
 				}
+				app.avoidSpecificRoads.initRouteObjects(false);
 				callback.onRoutingFilesLoaded();
 			}
 
@@ -741,8 +742,7 @@ public class AppInitializer implements IProgress {
 			notifyEvent(InitEvents.RESTORE_BACKUPS);
 			app.mapMarkersHelper.syncAllGroupsAsync();
 			app.searchUICore.initSearchUICore();
-			app.avoidSpecificRoads.initRouteObjects();
-			
+
 			checkLiveUpdatesAlerts();
 			
 		} catch (RuntimeException e) {

@@ -38,7 +38,6 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
-import net.osmand.binary.RouteDataObject;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -67,6 +66,7 @@ import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenuFragment;
 import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -110,13 +110,13 @@ import org.apache.commons.logging.Log;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
-import java.util.TreeMap;
 
 public class MapRouteInfoMenu implements IRouteInformationListener, CardListener, FavoritesListener {
 
@@ -1204,7 +1204,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		final LinearLayout item = createToolbarOptionView(false, null, -1, -1, null);
 		if (item != null) {
 			item.findViewById(R.id.route_option_container).setVisibility(View.GONE);
-			Map<LatLon, RouteDataObject> impassableRoads = new TreeMap<>();
+			Map<LatLon, AvoidRoadInfo> impassableRoads = new HashMap<>();
 			if (parameter instanceof AvoidRoadsRoutingParameter) {
 				impassableRoads = app.getAvoidSpecificRoads().getImpassableRoads();
 			}
@@ -1232,22 +1232,19 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		return avoidedParameters;
 	}
 
-	private void createImpassableRoadsItems(MapActivity mapActivity, Map<LatLon, RouteDataObject> impassableRoads, final LocalRoutingParameter parameter, final RouteMenuAppModes mode, final LinearLayout item) {
-		OsmandApplication app = mapActivity.getMyApplication();
-		Iterator<RouteDataObject> it = impassableRoads.values().iterator();
+	private void createImpassableRoadsItems(MapActivity mapActivity, Map<LatLon, AvoidRoadInfo> impassableRoads,
+	                                        final LocalRoutingParameter parameter, final RouteMenuAppModes mode, final LinearLayout item) {
+		Iterator<AvoidRoadInfo> it = impassableRoads.values().iterator();
 		while (it.hasNext()) {
-			final RouteDataObject routeDataObject = it.next();
-			final View container = createToolbarSubOptionView(false, app.getAvoidSpecificRoads().getText(routeDataObject), R.drawable.ic_action_remove_dark, !it.hasNext(), new OnClickListener() {
+			final AvoidRoadInfo avoidRoadInfo = it.next();
+			final View container = createToolbarSubOptionView(false, avoidRoadInfo.name, R.drawable.ic_action_remove_dark, !it.hasNext(), new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					MapActivity mapActivity = getMapActivity();
 					if (mapActivity != null) {
 						OsmandApplication app = mapActivity.getMyApplication();
-						RoutingHelper routingHelper = app.getRoutingHelper();
-						if (routeDataObject != null) {
-							app.getAvoidSpecificRoads().removeImpassableRoad(routeDataObject);
-						}
-						routingHelper.recalculateRouteDueToSettingsChange();
+						app.getAvoidSpecificRoads().removeImpassableRoad(avoidRoadInfo);
+						app.getRoutingHelper().recalculateRouteDueToSettingsChange();
 						if (app.getAvoidSpecificRoads().getImpassableRoads().isEmpty() && getAvoidedParameters(app).isEmpty()) {
 							mode.parameters.remove(parameter);
 						}

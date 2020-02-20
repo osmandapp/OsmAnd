@@ -3523,4 +3523,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="index_name_antarctica">Antarkto</string>
     <string name="navigation_notification_desc">Montri sisteman sciigon dum navigi montrantan instrukciojn turno-post-turno.</string>
     <string name="navigation_notification">Sciigo dum navigado</string>
+    <string name="shared_string_app_default_w_val">Implicita valoro (%s)</string>
+    <string name="no_recalculation_setting">Malaktivigi rekalkulon</string>
+    <string name="route_recalculation_dist_title">Minimuma distanco por rekalkuli kurson</string>
+    <string name="route_recalculation_dist_descr">Kurso estos rekalkulita se la distanco estos pli granda ol tiu ĉi valoro</string>
 </resources>

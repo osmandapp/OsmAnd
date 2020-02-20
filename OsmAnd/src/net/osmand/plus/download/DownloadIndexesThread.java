@@ -118,6 +118,7 @@ public class DownloadIndexesThread {
 		if (app.getDownloadService() != null) {
 			app.getDownloadService().stopService(app);
 		}
+		app.getAvoidSpecificRoads().initRouteObjects(true);
 	}
 
 	public void initSettingsFirstMap(WorldRegion reg) {

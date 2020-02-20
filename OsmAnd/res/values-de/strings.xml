@@ -3547,4 +3547,13 @@ Lon %2$s</string>
     <string name="search_offline_geo_error">Geo-Intent \'%s\' konnte nicht analysiert werden.</string>
     <string name="navigation_notification_desc">Systembenachrichtigung während der Navigation mit Navigationsanweisungen anzeigen.</string>
     <string name="navigation_notification">Navigations-Benachrichtigung</string>
+    <string name="shared_string_app_default_w_val">App-Standard (%s)</string>
+    <string name="no_recalculation_setting">Neuberechnung deaktivieren</string>
+    <string name="route_recalculation_dist_title">Minimale Entfernung zum Neuberechnen der Route</string>
+    <string name="route_recalculation_dist_descr">Die Route wird neu berechnet, wenn der Abstand zur Route länger ist als der angegebene Parameter</string>
+    <string name="profile_type_custom_string">Benutzerdefiniertes Profil</string>
+    <string name="shared_string_angle_param">Winkel: %s°</string>
+    <string name="shared_string_angle">Winkel</string>
+    <string name="recalc_angle_dialog_descr">Zusätzliches gerades Segment zwischen meinem Standort und berechneter Route wird angezeigt, bis die Route neu berechnet wird</string>
+    <string name="recalc_angle_dialog_title">Minimaler Winkel zwischen meinem Standort und der Route</string>
 </resources>

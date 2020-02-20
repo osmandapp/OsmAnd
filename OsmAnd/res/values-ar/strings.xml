@@ -3446,4 +3446,8 @@
     <string name="import_profile_dialog_description">يحتوي ملف التعريف المستوردة على بيانات إضافية. انقر فوق \"استيراد\" لاستيراد بيانات ملف التعريف فقط أو حدد بيانات إضافية لاستيرادها.</string>
     <string name="navigation_notification_desc">عرض إشعارات النظام أثناء التنقل بالتوجيهات .</string>
     <string name="navigation_notification">إشعار الملاحة</string>
+    <string name="shared_string_app_default_w_val">التطبيق الافتراضي (%s)</string>
+    <string name="no_recalculation_setting">تعطيل إعادة الحساب</string>
+    <string name="route_recalculation_dist_title">الحد الأدنى من المسافة لإعادة حساب المسار</string>
+    <string name="route_recalculation_dist_descr">سيتم إعادة حساب المسار إذا كانت المسافة إلى المسار أطول من المعلمة المحددة</string>
 </resources>

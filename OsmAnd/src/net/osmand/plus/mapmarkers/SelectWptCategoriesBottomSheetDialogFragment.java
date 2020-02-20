@@ -48,6 +48,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 		if (gpxFile == null) {
 			return;
 		}
+		int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		isUpdateMode = getArguments().getBoolean(UPDATE_CATEGORIES_KEY);
 		List<String> categories = getArguments().getStringArrayList(ACTIVE_CATEGORIES_KEY);
 
@@ -58,6 +59,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 		final BottomSheetItemWithCompoundButton[] selectAllItem = new BottomSheetItemWithCompoundButton[1];
 		selectAllItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(!isUpdateMode || categories!=null&&categories.size() == gpxFile.getPointsByCategories().size())
+				.setCompoundButtonColorId(activeColorResId)
 				.setDescription(getString(R.string.shared_string_total) + ": " + gpxFile.getPoints().size())
 				.setIcon(getContentIcon(R.drawable.ic_action_group_select_all))
 				.setTitle(getString(R.string.shared_string_select_all))
@@ -93,6 +95,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 							}
 						}
 					})
+					.setCompoundButtonColorId(activeColorResId)
 					.setDescription(String.valueOf(pointsByCategories.get(category).size()))
 					.setIcon(getContentIcon(R.drawable.ic_action_folder))
 					.setTitle(category.equals("") ? getString(R.string.shared_string_waypoints) : category)

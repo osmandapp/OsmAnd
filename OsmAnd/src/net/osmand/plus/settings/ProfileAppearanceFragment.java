@@ -156,9 +156,13 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	protected void createToolbar(LayoutInflater inflater, View view) {
 		super.createToolbar(inflater, view);
 		if (isNewProfile) {
+			TextView toolbarTitle = (TextView) view.findViewById(R.id.toolbar_title);
+			if (toolbarTitle != null) {
+				toolbarTitle.setText(getString(R.string.new_profile));
+			}
 			TextView toolbarSubtitle = (TextView) view.findViewById(R.id.toolbar_subtitle);
 			if (toolbarSubtitle != null) {
-				toolbarSubtitle.setText(getString(R.string.new_profile));
+				toolbarSubtitle.setVisibility(View.GONE);
 			}
 		}
 	}
@@ -366,8 +370,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 						Bundle bundle = new Bundle();
 						fragment.setUsedOnMap(false);
 						fragment.setAppMode(getSelectedAppMode());
-						if (getSelectedAppMode() != null) {
-							bundle.putString(SELECTED_KEY, getSelectedAppMode().getRoutingProfile());
+						if (changedProfile.parent != null) {
+							bundle.putString(SELECTED_KEY, changedProfile.parent.getStringKey());
 						}
 						bundle.putString(DIALOG_TYPE, TYPE_BASE_APP_PROFILE);
 						fragment.setArguments(bundle);
