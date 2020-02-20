@@ -107,6 +107,21 @@ public class SQLiteTileSource implements ITileSource {
 		this.inversiveZoom = inversiveZoom;
 	}
 
+	public SQLiteTileSource(SQLiteTileSource tileSource, int suffixNum, OsmandApplication ctx) {
+		this.ctx = ctx;
+		this.name = tileSource.getName() + "_" + suffixNum;
+		this.urlTemplate = tileSource.getUrlTemplate();
+		this.maxZoom = tileSource.getMaximumZoomSupported();
+		this.minZoom = tileSource.getMinimumZoomSupported();
+		this.isEllipsoid = tileSource.isEllipticYTile();
+		this.expirationTimeMillis = tileSource.getExpirationTimeMillis();
+		this.randoms = tileSource.getRandoms();
+		this.referer = tileSource.getReferer();
+		this.invertedY = tileSource.isInvertedYTile();
+		this.timeSupported = tileSource.isTimeSupported();
+		this.inversiveZoom = tileSource.getInversiveZoom();
+	}
+
 	public void createDataBase() {
 		db = ctx.getSQLiteAPI().getOrCreateDatabase(
 				ctx.getAppPath(TILES_INDEX_DIR).getAbsolutePath() + "/" + name + SQLITE_EXT, true);

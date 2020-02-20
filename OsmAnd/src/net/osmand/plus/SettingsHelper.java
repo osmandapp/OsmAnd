@@ -23,6 +23,7 @@ import net.osmand.plus.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -831,39 +832,41 @@ public class SettingsHelper {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public static class QuickActionSettingsItem extends CollectionSettingsItem<QuickAction> {
 
 		private OsmandApplication app;
+		private QuickActionRegistry actionRegistry;
 
 		public QuickActionSettingsItem(@NonNull OsmandApplication app,
 									   @NonNull List<QuickAction> items) {
 			super(SettingsItemType.QUICK_ACTION, items);
 			this.app = app;
-			existingItems = app.getQuickActionRegistry().getQuickActions();
+			actionRegistry = app.getQuickActionRegistry();
+			existingItems = actionRegistry.getQuickActions();
 		}
 
 		QuickActionSettingsItem(@NonNull OsmandApplication app,
 								@NonNull JSONObject json) throws JSONException {
 			super(SettingsItemType.QUICK_ACTION, json);
 			this.app = app;
-			existingItems = app.getQuickActionRegistry().getQuickActions();
+			actionRegistry = app.getQuickActionRegistry();
+			existingItems = actionRegistry.getQuickActions();
 		}
 
 		@Override
 		public boolean isDuplicate(QuickAction item) {
-			return !app.getQuickActionRegistry().isNameUnique(item, app);
+			return !actionRegistry.isNameUnique(item, app);
 		}
 
 		@NonNull
 		@Override
 		public QuickAction renameItem(QuickAction item) {
-			return app.getQuickActionRegistry().generateUniqueName(item, app);
+			return actionRegistry.generateUniqueName(item, app);
 		}
 
 		@NonNull
 		@Override
-		public List excludeDuplicateItems() {
+		public List<QuickAction> excludeDuplicateItems() {
 			duplicateItems = new ArrayList<>();
 			for (QuickAction item : items) {
 				if (isDuplicate(item)) {
@@ -1008,12 +1011,11 @@ public class SettingsHelper {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public static class PoiUiFilterSettingsItem extends CollectionSettingsItem<PoiUIFilter> {
 
 		private OsmandApplication app;
 
-		public PoiUiFilterSettingsItem(@NonNull OsmandApplication app, @NonNull List items) {
+		public PoiUiFilterSettingsItem(@NonNull OsmandApplication app, @NonNull List<PoiUIFilter> items) {
 			super(SettingsItemType.POI_UI_FILTERS, items);
 			this.app = app;
 			existingItems = app.getPoiFilters().getUserDefinedPoiFilters(false);
@@ -1051,7 +1053,7 @@ public class SettingsHelper {
 
 		@NonNull
 		@Override
-		public List excludeDuplicateItems() {
+		public List<PoiUIFilter> excludeDuplicateItems() {
 			duplicateItems = new ArrayList<>();
 			if (!items.isEmpty()) {
 				for (PoiUIFilter item : items) {
@@ -1071,10 +1073,7 @@ public class SettingsHelper {
 			int number = 0;
 			while (true) {
 				number++;
-				PoiUIFilter renamedItem = new PoiUIFilter(
-						item.getName() + "_" + number,
-						item.getFilterId() + "_" + number,
-						item.getAcceptedTypes(), app);
+				PoiUIFilter renamedItem = new PoiUIFilter(item, number, app);
 				if (!isDuplicate(renamedItem)) {
 					return renamedItem;
 				}
@@ -1194,13 +1193,12 @@ public class SettingsHelper {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public static class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> {
 
 		private OsmandApplication app;
 		private List<String> existingItemsNames;
 
-		public MapSourcesSettingsItem(@NonNull OsmandApplication app, @NonNull List items) {
+		public MapSourcesSettingsItem(@NonNull OsmandApplication app, @NonNull List<ITileSource> items) {
 			super(SettingsItemType.MAP_SOURCES, items);
 			this.app = app;
 			Collection values = new LinkedHashMap<>(app.getSettings().getTileSourceEntries(true)).values();
@@ -1253,7 +1251,7 @@ public class SettingsHelper {
 
 		@NonNull
 		@Override
-		public List excludeDuplicateItems() {
+		public List<ITileSource> excludeDuplicateItems() {
 			duplicateItems = new ArrayList<>();
 			for (String name : existingItemsNames) {
 				for (ITileSource tileSource : items) {
@@ -1274,17 +1272,7 @@ public class SettingsHelper {
 				number++;
 				if (item instanceof SQLiteTileSource) {
 					SQLiteTileSource oldItem = (SQLiteTileSource) item;
-					SQLiteTileSource renamedItem = new SQLiteTileSource(app,
-							oldItem.getName() + "_" + number,
-							oldItem.getMinimumZoomSupported(),
-							oldItem.getMaximumZoomSupported(),
-							oldItem.getUrlTemplate(),
-							oldItem.getRandoms(),
-							oldItem.isEllipticYTile(),
-							oldItem.isInvertedYTile(),
-							oldItem.getReferer(), oldItem.isTimeSupported(),
-							oldItem.getExpirationTimeMillis(),
-							oldItem.getInversiveZoom());
+					SQLiteTileSource renamedItem = new SQLiteTileSource(oldItem, number, app);
 					if (!isDuplicate(renamedItem)) {
 						return renamedItem;
 					}
@@ -1297,7 +1285,6 @@ public class SettingsHelper {
 				}
 			}
 		}
-
 
 		@Override
 		public boolean isDuplicate(ITileSource item) {
