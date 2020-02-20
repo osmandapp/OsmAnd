@@ -3297,11 +3297,7 @@
     <string name="new_route_calculated_dist_dbg">المسار: المسافة%s ، وقت جهاز التوجيه%s
 \nالحساب:%.1f ثانية ،%d طرق ،%d تجانب)</string>
     <string name="lang_oc">الأوكيتانية</string>
-    <string name="get_discount_title">احصل على خصم بمقدار %d %@ at %d%% .</string>
-    <string name="get_discount_first_part">%1$s للأول %2$s</string>
-    <string name="get_discount_first_few_part">%1$s للأول %2$s</string>
     <string name="get_discount_second_part">ثم %1$s</string>
-    <string name="price_and_discount">%1$s • وفر %2$s</string>
     <string name="apply_to_current_profile">تطبيق فقط على \"%1$s\"</string>
     <string name="route_parameters_info">إعدادات التوجيه في ملف التعريف المحدد \"%1$s\".</string>
     <string name="routing_attr_width_name">حد العرض</string>
