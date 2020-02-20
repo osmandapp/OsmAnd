@@ -3518,8 +3518,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="import_profile_dialog_description">Zaimportowany profil zawiera dodatkowe dane. Kliknij przycisk Importuj, aby zaimportować tylko dane profilu lub wybierz dodatkowe dane do zaimportowania.</string>
     <string name="export_profile_dialog_description">Możesz wybrać dodatkowe dane do wyeksportowania wraz z profilem.</string>
     <string name="routing_profile_direct_to">Bezpośrednio do punktu</string>
-    <string name="navigation_notification_desc">Pokaż powiadomienia systemowe podczas nawigacji z instrukcjami nawigacji.</string>
-    <string name="navigation_notification">Powiadomienie nawigacyjne</string>
     <string name="shared_string_app_default_w_val">Aplikacja domyślna (%s)</string>
     <string name="no_recalculation_setting">Wyłącz ponowne obliczanie</string>
     <string name="route_recalculation_dist_title">Minimalna odległość do ponownego obliczenia trasy</string>
