@@ -3545,8 +3545,6 @@ Lon %2$s</string>
     <string name="multimedia_rec_split_title">Aufzeichnungsteilung</string>
     <string name="routing_profile_direct_to">Direkt zum Punkt</string>
     <string name="search_offline_geo_error">Geo-Intent \'%s\' konnte nicht analysiert werden.</string>
-    <string name="navigation_notification_desc">Systembenachrichtigung während der Navigation mit Navigationsanweisungen anzeigen.</string>
-    <string name="navigation_notification">Navigations-Benachrichtigung</string>
     <string name="shared_string_app_default_w_val">App-Standard (%s)</string>
     <string name="no_recalculation_setting">Neuberechnung deaktivieren</string>
     <string name="route_recalculation_dist_title">Minimale Entfernung zum Neuberechnen der Route</string>
