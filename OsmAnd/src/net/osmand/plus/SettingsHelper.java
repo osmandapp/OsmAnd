@@ -260,10 +260,10 @@ public class SettingsHelper {
 		@NonNull
 		public abstract List<T> excludeDuplicateItems();
 
-		public abstract boolean isDuplicate(T item);
+		public abstract boolean isDuplicate(@NonNull T item);
 
 		@NonNull
-		public abstract T renameItem(T item);
+		public abstract T renameItem(@NonNull T item);
 	}
 
 	public abstract static class SettingsItemReader<T extends SettingsItem> {
@@ -854,13 +854,13 @@ public class SettingsHelper {
 		}
 
 		@Override
-		public boolean isDuplicate(QuickAction item) {
+		public boolean isDuplicate(@NonNull QuickAction item) {
 			return !actionRegistry.isNameUnique(item, app);
 		}
 
 		@NonNull
 		@Override
-		public QuickAction renameItem(QuickAction item) {
+		public QuickAction renameItem(@NonNull QuickAction item) {
 			return actionRegistry.generateUniqueName(item, app);
 		}
 
@@ -898,7 +898,7 @@ public class SettingsHelper {
 					newActions.addAll(duplicateItems);
 				}
 				newActions.addAll(items);
-				app.getQuickActionRegistry().updateQuickActions(newActions);
+				actionRegistry.updateQuickActions(newActions);
 			}
 		}
 
@@ -1044,7 +1044,7 @@ public class SettingsHelper {
 		}
 
 		@Override
-		public boolean isDuplicate(PoiUIFilter item) {
+		public boolean isDuplicate(@NonNull PoiUIFilter item) {
 			String savedName = item.getName();
 			for (PoiUIFilter filter : existingItems) {
 				if (filter.getName().equals(savedName)) {
@@ -1072,11 +1072,13 @@ public class SettingsHelper {
 
 		@NonNull
 		@Override
-		public PoiUIFilter renameItem(PoiUIFilter item) {
+		public PoiUIFilter renameItem(@NonNull PoiUIFilter item) {
 			int number = 0;
 			while (true) {
 				number++;
-				PoiUIFilter renamedItem = new PoiUIFilter(item, number, app);
+				PoiUIFilter renamedItem = new PoiUIFilter(item,
+						item.getName() + "_" + number,
+						item.getFilterId() + "_" + number);
 				if (!isDuplicate(renamedItem)) {
 					return renamedItem;
 				}
@@ -1269,13 +1271,16 @@ public class SettingsHelper {
 
 		@NonNull
 		@Override
-		public ITileSource renameItem(ITileSource item) {
+		public ITileSource renameItem(@NonNull ITileSource item) {
 			int number = 0;
 			while (true) {
 				number++;
 				if (item instanceof SQLiteTileSource) {
 					SQLiteTileSource oldItem = (SQLiteTileSource) item;
-					SQLiteTileSource renamedItem = new SQLiteTileSource(oldItem, number, app);
+					SQLiteTileSource renamedItem = new SQLiteTileSource(
+							oldItem,
+							oldItem.getName() + "_" + number,
+							app);
 					if (!isDuplicate(renamedItem)) {
 						return renamedItem;
 					}
@@ -1290,7 +1295,7 @@ public class SettingsHelper {
 		}
 
 		@Override
-		public boolean isDuplicate(ITileSource item) {
+		public boolean isDuplicate(@NonNull ITileSource item) {
 			for (String name : existingItemsNames) {
 				if (name.equals(item.getName())) {
 					return true;

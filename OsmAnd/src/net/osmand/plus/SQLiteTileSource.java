@@ -107,9 +107,9 @@ public class SQLiteTileSource implements ITileSource {
 		this.inversiveZoom = inversiveZoom;
 	}
 
-	public SQLiteTileSource(SQLiteTileSource tileSource, int suffixNum, OsmandApplication ctx) {
+	public SQLiteTileSource(SQLiteTileSource tileSource, String name, OsmandApplication ctx) {
 		this.ctx = ctx;
-		this.name = tileSource.getName() + "_" + suffixNum;
+		this.name = name;
 		this.urlTemplate = tileSource.getUrlTemplate();
 		this.maxZoom = tileSource.getMaximumZoomSupported();
 		this.minZoom = tileSource.getMinimumZoomSupported();
