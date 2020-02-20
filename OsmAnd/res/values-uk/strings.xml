@@ -37,11 +37,9 @@
     <string name="map_online_data_descr">Використовувати мережеві мапи (завантажити та кешувати плитки на карті пам\'яті).</string>
     <string name="shared_string_online_maps">Мережеві мапи</string>
     <string name="online_map_settings_descr">Оберіть мережеві або кешовані джерела (тайлів) мап.</string>
-    <string name="osmand_rastermaps_plugin_description">Цей втулок надає можливість отримати доступ до багатьох видів мережевих (так званих растрових) мап які ви хочете, від попередньо створених квадратів OpenStreetMap (на зразок стилю Mapnik) до супутникових знімків та особливих шарів, як-от погодні, кліматичні та землезнавчі мапи, шари рельєфу тощо.
-\n 
+    <string name="osmand_rastermaps_plugin_description">Цей втулок надає можливість отримати доступ до багатьох видів мережевих (так званих растрових) мап які ви хочете, від попередньо створених квадратів OpenStreetMap (на зразок стилю Mapnik) до супутникових знімків та особливих шарів, як-от погодні, кліматичні та землезнавчі мапи, шари рельєфу тощо. 
 \n 
 \nБудь яка з цих мап може використовуватись як основна мапа в OsmAnd, або як покриття чи підкладка до іншої основної мапи (наприклад усталена безмережева мапа OsmAnd). Для того, щоб зробити більш помітною будь-яку мапу-підкладку, певні елементи векторної мапи OsmAnd можна легко сховати через меню „Налаштування мапи“ за бажанням, щоб зробити будь-яку мапу підкладки помітнішою.. 
-\n 
 \n 
 \nКвадрати мап можна отримувати безпосередньо з мережевих джерел або підготувати їх для безмережевого використання (та вручну скопіювати в теку даних OsmAnd) у вигляді бази даних SQLite, яку можна створити за допомогою різноманітних сторонніх знаряддь підготовки мап.</string>
     <string name="osmand_background_plugin_description">Показує налаштування для увімкнення фонового трекінгу та навігації шляхом періодичного пробудження GPS-передавача (з вимкненим екраном).</string>
@@ -50,7 +48,7 @@
     <string name="plugins_screen">Втулки</string>
     <string name="prefs_plugins_descr">Втулки надають додаткові можливості.</string>
     <string name="prefs_plugins">Втулки</string>
-    <string name="osm_editing_plugin_description">Зробіть внески OSM, такі як створення або модифікація об\'єктів OSM POI, відкриття або коментування приміток OSM та додавання записаних файлів GPX в OsmAnd, надаючи своє ім’я користувача та пароль. OpenStreetMap.org - це глобальний проєкт зі спільного прилюдного домену, який керується спільнотою.</string>
+    <string name="osm_editing_plugin_description">Зробіть внески OSM, такі як створення або модифікація об\'єктів OSM POI, відкриття або коментування нотаток OSM та додавання записаних файлів GPX в OsmAnd, надаючи своє ім’я користувача та пароль. OpenStreetMap.org - це глобальний проєкт зі спільного прилюдного домену, який керується спільнотою.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Векторні мапи відображаються швидше. Підтримуються не всіма пристроями.</string>
     <string name="play_commands_of_currently_selected_voice">Відтворити оголошення вибраним голосом:</string>
     <string name="debugging_and_development">Налагодження і розробка OsmAnd</string>
@@ -124,13 +122,13 @@
     <string name="offline_edition_descr">Завжди використовувати оффлайн редагування.</string>
     <string name="update_poi_does_not_change_indexes">Зміни POI всередині застосунку не впливають на завантажені файли мап - вони зберігаються в окремий файл на вашому пристрої.</string>
     <string name="local_openstreetmap_uploading">Вивантаження…</string>
-    <string name="local_openstreetmap_were_uploaded">{0} POI/примітки вивантажено</string>
+    <string name="local_openstreetmap_were_uploaded">{0} POI/нотатки вивантажено</string>
     <string name="local_openstreetmap_uploadall">Вивантажити усе</string>
     <string name="local_openstreetmap_upload">Вивантажити правки в OSM</string>
     <string name="local_openstreetmap_delete">Видалити редагування</string>
     <string name="local_openstreetmap_descr_title">Асинхронне редагування OSM:</string>
-    <string name="local_openstreetmap_settings">OSM-POI/Примітки, збережено на пристрої</string>
-    <string name="local_openstreetmap_settings_descr">Перегляд і керування OSM-POI/примітками, збереженими у базі даних на пристрої.</string>
+    <string name="local_openstreetmap_settings">OSM-POI/Нотатки, збережено на пристрої</string>
+    <string name="local_openstreetmap_settings_descr">Перегляд і керування OSM-POI/нотатками, збереженими у базі даних на пристрої.</string>
     <string name="live_monitoring_interval_descr">Вкажіть інтервал надсилання даних.</string>
     <string name="live_monitoring_interval">Інтервал надсилання даних</string>
     <string name="live_monitoring_url_descr">Вкажіть веб-адресу з наступними параметрами: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
@@ -440,7 +438,7 @@
     <string name="layer_yandex_traffic">Яндекс Пробки</string>
     <string name="layer_route">Маршрут</string>
     <string name="shared_string_favorites">Закладки</string>
-    <string name="layer_osm_bugs">Примітки OSM (мережеві)</string>
+    <string name="layer_osm_bugs">Нотатки OSM (мережеві)</string>
     <string name="layer_poi">POI-накладення…</string>
     <string name="layer_map">Джерело мапи…</string>
     <string name="menu_layers">Шари мапи</string>
@@ -491,7 +489,7 @@
     <string name="search_poi_location">Очікування сигналу…</string>
     <string name="search_near_map">Шукати поблизу поточного центру мапи</string>
     <string name="search_nearby">Шукати поруч</string>
-    <string name="map_orientation_default">По замовчуванню</string>
+    <string name="map_orientation_default">Усталено</string>
     <string name="map_orientation_portrait">Портрет</string>
     <string name="map_orientation_landscape">Альбом</string>
     <string name="map_screen_orientation">Орієнтація екрану</string>
@@ -617,7 +615,7 @@
     <string name="map_view_3d">3D вид</string>
     <string name="show_poi_over_map_description">Відображати останні вибрані POI на мапі.</string>
     <string name="show_poi_over_map">Відображати POI</string>
-    <string name="map_tile_source_descr">Оберіть джерело мережевих або кешованих плиток мап</string>
+    <string name="map_tile_source_descr">Оберіть джерело мережевих або кешованих плиток мап.</string>
     <string name="map_tile_source">Джерело растрових мап</string>
     <string name="map_source">Джерело мапи</string>
     <string name="use_internet">Використовувати Інтернет</string>
@@ -783,7 +781,7 @@
     <string name="recording_photo_description">Світлина %1$s %2$s</string>
     <string name="av_def_action_picture">Зробити світлину</string>
     <string name="recording_context_menu_precord">Зробити світлину</string>
-    <string name="dropbox_plugin_description">Взаємозберігайте треки та звуко/відео-примітки з вашим обліковим записом Dropbox.</string>
+    <string name="dropbox_plugin_description">Взаємозберігайте треки та звуко/відео-нотатки з вашим обліковим записом Dropbox.</string>
     <string name="dropbox_plugin_name">Втулок Dropbox</string>
     <string name="intermediate_points_change_order">Змінити порядок</string>
     <string name="srtm_paid_version_msg">Будь ласка, зверніть увагу на оплату втулка \"Поземистості\" для підтримки подальшого розвитку.</string>
@@ -802,7 +800,7 @@
     <string name="recording_unavailable">недоступно</string>
     <string name="shared_string_control_stop">Стоп</string>
     <string name="shared_string_control_start">Почати</string>
-    <string name="map_widget_av_notes">Звуко/відео-примітки</string>
+    <string name="map_widget_av_notes">Звуко/відео-нотатки</string>
     <string name="osmand_srtm_short_description_80_chars">Втулок OsmAnd для відображення поземистостей (горизонталей) в автономному режимі</string>
     <string name="av_use_external_camera">Використовувати програму Камера</string>
     <string name="av_settings_descr">Налаштування авдіо/відео запису.</string>
@@ -826,9 +824,9 @@
 \n 
 \nВсесвітні дані (між 70° на півночі і 70° на півдні) базуються на вимірюваннях SRTM (Shuttle Radar Topography Mission) і ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), даних інструменту відмальовуванню Terra, флагманського супутника системи спостереження Землі від NASA. ASTER — це підсумок спільної роботи NASA, міністерства економіки Японії, міністерства торгівлі і промисловості Японії (METI), агенції космічних систем Японії (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Вимірювання відстаней</string>
-    <string name="map_widget_audionotes">Звукопримітки</string>
-    <string name="audionotes_plugin_description">Зробіть звуко/світлино/відео примітки під час подорожі, використовуючи або кнопку мапи, або контекстне меню розташування.</string>
-    <string name="audionotes_plugin_name">Звуко/відео-примітки</string>
+    <string name="map_widget_audionotes">Звуконотатки</string>
+    <string name="audionotes_plugin_description">Зробіть звуко/світлино/відео нотатки під час подорожі, використовуючи або кнопку мапи, або контекстне меню розташування.</string>
+    <string name="audionotes_plugin_name">Звуко/відео-нотатки</string>
     <string name="index_srtm_parts">частин</string>
     <string name="index_srtm_ele">Поземистості</string>
     <string name="srtm_plugin_description">Цей втулок показує як шар поземистостей, так і шар рельєфу поверх усталених мап OsmAnd. Ця функціональність стане в нагоді спортсменам, туристам, мандрівникам та будь-кому, хто цікавиться структурою рельєфу місцевості. (Зверніть увагу, що дані про поземистості є окремими від даних про рельєф; додаткові завантаження доступні після задіювання втулку.) 
@@ -849,7 +847,7 @@
     <string name="safe_mode_description">Запустити програму в безпечному режимі (використовує повільніші Android-функції замість власних).</string>
     <string name="safe_mode">Безпечний режим</string>
     <string name="native_library_not_running">Програму запущено в безпечному режимі (вимкніть його в \'Налаштуваннях\').</string>
-    <string name="audionotes_location_not_defined">Оберіть \"Використати місцезнаходження...\" для прив\'язки примітки до даного місцезнаходження.</string>
+    <string name="audionotes_location_not_defined">Оберіть \"Використати місцезнаходження...\" для прив\'язки нотатки до даного місцезнаходження.</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="background_service_is_enabled_question">Фоновий режим OsmAnd досі запущений. Зупинити його роботу також?</string>
     <string name="close_changeset">Закрити набір змін</string>
@@ -1235,8 +1233,8 @@
     <string name="routing_attr_avoid_motorway_description">Уникати автомагістралей</string>
     <string name="routing_attr_weight_name">Обмеження по вазі</string>
     <string name="routing_attr_weight_description">Вказати дозволений ліміт ваги автомобіля на маршрутах.</string>
-    <string name="android_19_location_disabled">Починаючи з Android версії 4.4 (KitKat) ви не в змозі завантажувати та оновлювати мапи у попередню теку (%s). Скопіювати всі файли OsmAnd в нове місце\?
-\n Примітка 1: ваші старі фали залишаться недоторканими (їх можна вилучити вручну). 
+    <string name="android_19_location_disabled">Починаючи з Android версії 4.4 (KitKat) ви не в змозі завантажувати та оновлювати мапи у попередню теку (%s). Скопіювати всі файли OsmAnd в нове місце\? 
+\n Примітка 1: ваші старі файли залишаться недоторканими (їх можна вилучити вручну). 
 \n Примітка 2: в новій теці спільне використання файлів програмами OsmAnd та OsmAnd+ неможливе.</string>
     <string name="copying_osmand_one_file_descr">Файл (%s) копіюється на нове місце…</string>
     <string name="copying_osmand_files_descr">Копіювання файлів даних OsmAnd до нового місця (%s)…</string>
@@ -1380,7 +1378,7 @@
     <string name="shared_string_dismiss">Відхилити</string>
     <string name="shared_string_audio">Аудіо</string>
     <string name="share_note">Поділитись нотаткою</string>
-    <string name="notes">A/V примітки</string>
+    <string name="notes">A/V нотатки</string>
     <string name="online_map">Мережева мапа</string>
     <string name="roads_only">Тільки дороги</string>
     <string name="free">Вільно %1$s</string>
@@ -1540,7 +1538,7 @@
     <string name="shared_string_copy">Копіювати</string>
     <string name="filter_poi_hint">Фільтрувати за назвою</string>
     <string name="search_poi_category_hint">Введіть запит для пошуку всіх</string>
-    <string name="rendering_value__name">За замовчуванням</string>
+    <string name="rendering_value__name">Усталено</string>
     <string name="rendering_value_highContrastRoads_name">Контрастні дороги</string>
     <string name="index_name_netherlands">Європа - Нідерланди</string>
     <string name="routing_attr_avoid_borders_description">Уникати перетину національних кордонів</string>
@@ -1611,7 +1609,7 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Забарвлення згідно приналежності мережі</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Розмальовування відповідно пішохідній символіці OSMC</string>
     <string name="shared_string_logoff">Вийти</string>
-    <string name="local_recordings_delete_all_confirm">Ви збираєтеся видалити %1$d приміток. Ви впевнені\?</string>
+    <string name="local_recordings_delete_all_confirm">Ви збираєтеся видалити %1$d нотаток. Ви впевнені\?</string>
     <string name="download_wikipedia_maps">Вікіпедія</string>
     <string name="rendering_value_default13_name">Усталено (13)</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Усталено (напівпрозорий блакитний)</string>
@@ -1637,18 +1635,18 @@
     <string name="osm_edit_deleted_poi">OSM POI видалено</string>
     <string name="context_menu_item_open_note">Відкрити OSM-нотатку</string>
     <string name="osm_edit_reopened_note">Відкрити заново OSM-нотатку</string>
-    <string name="osm_edit_commented_note">До OSM-примітки додано коментар</string>
-    <string name="osm_edit_removed_note">Вилучено OSM-примітку</string>
+    <string name="osm_edit_commented_note">До OSM-нотатки додано коментар</string>
+    <string name="osm_edit_removed_note">Вилучено OSM-нотатку</string>
     <string name="osm_edit_created_note">Створено OSM-нотатку</string>
     <string name="osn_bug_name">OSM-нотатка</string>
     <string name="osn_add_dialog_title">Створити нотатку</string>
     <string name="osn_comment_dialog_title">Додати коментар</string>
-    <string name="osn_reopen_dialog_title">Відкрити заново нотатку</string>
+    <string name="osn_reopen_dialog_title">Перевідкрити нотатку</string>
     <string name="osn_close_dialog_title">Закрити нотатку</string>
     <string name="osn_add_dialog_success">Нотатку створено</string>
-    <string name="osn_add_dialog_error">Не вдалося створити примітку.</string>
+    <string name="osn_add_dialog_error">Не вдалося створити нотатку.</string>
     <string name="osn_close_dialog_success">Нотатку закрито</string>
-    <string name="osn_close_dialog_error">Не вдалося закрити примітку.</string>
+    <string name="osn_close_dialog_error">Не вдалося закрити нотатку.</string>
     <string name="shared_string_commit">Підтвердити</string>
     <string name="context_menu_item_delete_waypoint">Вилучити GPX точку?</string>
     <string name="context_menu_item_edit_waypoint">Редагувати GPX точку</string>
@@ -1963,7 +1961,7 @@
     <string name="osm_live_header">Передплата дозволяє щогодини отримувати оновлення для мап по всьому світу. 
 \nЧастина від передплати переводиться спільноті OSM та виплачується кожному землеписцю за його внесок. 
 \nЯкщо Вам подобається OsmAnd та OSM, і хочете підтримати і бути підтриманими ними, це ідеальний спосіб зробити це.</string>
-    <string name="upload_osm_note_description">Надішліть вашу OSM-примітку таємно, або скориставшись обліковим записом на OSM.org.</string>
+    <string name="upload_osm_note_description">Надішліть вашу OSM-нотатку таємно, або скориставшись обліковим записом на OSM.org.</string>
     <string name="upload_osm_note">Надіслати нотатку в OSM</string>
     <string name="file_name_containes_illegal_char">Ім\'я файлу містить неприпустимі знаки</string>
     <string name="follow_us">Слідкуйте за нами</string>
@@ -2104,7 +2102,7 @@
     <string name="quick_action_item_action">Дія %d</string>
     <string name="configure_screen_quick_action">Швидка дія</string>
     <string name="quick_action_item_screen">Екран %d</string>
-    <string name="quick_action_add_marker">Будь ласка, додайте позначки на мапі</string>
+    <string name="quick_action_add_marker">Додати позначку</string>
     <string name="quick_action_add_poi">Додати POI</string>
     <string name="quick_action_map_style">Змінити стиль мапи</string>
     <string name="quick_action_map_style_switch">Стиль мапи був змінений на „%s“.</string>
@@ -2166,7 +2164,7 @@
 Будь ласка, введіть повний код</string>
     <string name="navigate_point_olc_info_area">Коректний повний OLC
 Описує область: %1$s x %2$s</string>
-    <string name="quick_action_navigation_voice">Голос вкл/викл</string>
+    <string name="quick_action_navigation_voice">Голос увімк/вимк</string>
     <string name="quick_action_navigation_voice_off">Зняти приглушення голосу</string>
     <string name="quick_action_navigation_voice_on">Приглушити голос</string>
     <string name="quick_action_duplicates">Швидку дію перейменовано на %1$s, щоб уникнути дублювання.</string>
@@ -2189,14 +2187,14 @@
     <string name="navigate_point_olc">Відкритий код розташування (OLC)</string>
     <string name="quick_action_take_audio_note">Нова аудіонотатка</string>
     <string name="quick_action_take_video_note">Нова відеонотатка</string>
-    <string name="quick_action_take_photo_note">Нова світлино-примітка</string>
+    <string name="quick_action_take_photo_note">Нова світлино-нотатка</string>
     <string name="quick_favorites_name_preset">Найменування</string>
     <string name="quick_action_add_marker_descr">Кнопка для додавання позначки мапи посередині екрану.</string>
     <string name="quick_action_add_gpx_descr">Натискання на цю кнопку додасть маршрутну точку GPX посередині екрану.</string>
-    <string name="quick_action_take_audio_note_descr">Натискання цієї кнопки додає авдіопримітку посередині екрану.</string>
-    <string name="quick_action_take_video_note_descr">Натискання цієї кнопки додає відеопримітку посередині екрану.</string>
-    <string name="quick_action_take_photo_note_descr">Натискання цієї кнопки додає світлинопримітку посередині екрану.</string>
-    <string name="quick_action_add_osm_bug_descr">Натискання цієї кнопки додає OSM-примітку посередині екрану.</string>
+    <string name="quick_action_take_audio_note_descr">Натискання цієї кнопки додає авдіонотатку посередині екрану.</string>
+    <string name="quick_action_take_video_note_descr">Натискання цієї кнопки додає відеонотатку посередині екрану.</string>
+    <string name="quick_action_take_photo_note_descr">Натискання цієї кнопки додає світлинонотатку посередині екрану.</string>
+    <string name="quick_action_add_osm_bug_descr">Натискання цієї кнопки додає OSM-нотатку посередині екрану.</string>
     <string name="quick_action_add_poi_descr">Натискання цієї кнопки додає POI посередині екрану.</string>
     <string name="quick_action_navigation_voice_descr">Перемикач, щоб вимкнути або увімкнути голосові підказки під час навігації.</string>
     <string name="quick_action_add_parking_descr">Кнопка для додавання місця паркування посередині екрана.</string>
@@ -2234,10 +2232,10 @@
     <string name="nothing_found">Нічого не знайдено</string>
     <string name="private_access_routing_req">Місце призначення знаходиться в області з приватним доступом. Дозволити доступ по приватних дорогах для цієї подорожі\?</string>
     <string name="nothing_found_descr">Змініть пошуковий запит або ж розширте пошуковий радіус.</string>
-    <string name="quick_action_showhide_osmbugs_title">Показати/приховати OSM-примітки</string>
-    <string name="quick_action_osmbugs_show">Показати OSM-примітки</string>
-    <string name="quick_action_osmbugs_hide">Приховати OSM-примітки</string>
-    <string name="quick_action_showhide_osmbugs_descr">Натискання на кнопку дії покаже чи приховає OSM-примітки на мапі.</string>
+    <string name="quick_action_showhide_osmbugs_title">Показати/приховати OSM-нотатки</string>
+    <string name="quick_action_osmbugs_show">Показати OSM-нотатки</string>
+    <string name="quick_action_osmbugs_hide">Приховати OSM-нотатки</string>
+    <string name="quick_action_showhide_osmbugs_descr">Натискання на кнопку дії покаже чи приховає OSM-нотатки на мапі.</string>
     <string name="sorted_by_distance">Відсортоване за відстанню</string>
     <string name="search_favorites">Пошук у закладках</string>
     <string name="hillshade_menu_download_descr">Для того, щоб відобразити затінення рельєфу, потрібно завантажити спеціальну мапу для цієї області.</string>
@@ -2263,8 +2261,8 @@
     <string name="nearest_cities">Найближчі міста</string>
     <string name="select_city">Виберіть місто</string>
     <string name="select_postcode">Виберіть поштовий індекс</string>
-    <string name="quick_action_auto_zoom">Автомасштаб мапи вкл/викл</string>
-    <string name="quick_action_auto_zoom_desc">Кнопка для перемикання самочинного наближення при збільшеній швидкості</string>
+    <string name="quick_action_auto_zoom">Автомасштаб мапи увімк/вимк</string>
+    <string name="quick_action_auto_zoom_desc">Кнопка для перемикання самочинного наближення при збільшеній швидкості.</string>
     <string name="quick_action_auto_zoom_on">Увімкнути самомасштабування мапи</string>
     <string name="quick_action_auto_zoom_off">Вимкнути самомасштабування мапи</string>
     <string name="quick_action_add_destination">Установити місце призначення</string>
@@ -2551,9 +2549,9 @@
     <string name="routing_attr_avoid_ice_roads_fords_description">Уникає льодових доріг і бродів.</string>
     <string name="make_round_trip_descr">Додати копію початкової точки як місце призначення.</string>
     <string name="make_round_trip">Зробити кругову подорож</string>
-    <string name="osn_modify_dialog_error">Не вдалося змінити примітку.</string>
-    <string name="osn_modify_dialog_title">Змінити примітку</string>
-    <string name="context_menu_item_modify_note">Змінити OSM-примітку</string>
+    <string name="osn_modify_dialog_error">Не вдалося змінити нотатку.</string>
+    <string name="osn_modify_dialog_title">Змінити нотатку</string>
+    <string name="context_menu_item_modify_note">Змінити OSM-нотатку</string>
     <string name="wrong_input">Неправильний ввід</string>
     <string name="wrong_format">Неправильний формат</string>
     <string name="shared_string_road">Дорога</string>
@@ -2601,16 +2599,16 @@
     <string name="looking_for_tracks_with_waypoints">Пошук треків з шляховими точками</string>
     <string name="shared_string_more_without_dots">Більше</string>
     <string name="empty_state_osm_edits">Створити або змінити OSM-об\'єкти</string>
-    <string name="empty_state_osm_edits_descr">Створюйте або змінюйте цікаві точки в OSM, відкривайте або коментуйте OSM-примітки, а також надсилайте записані GPX-файли.</string>
+    <string name="empty_state_osm_edits_descr">Створюйте або змінюйте цікаві точки в OSM, відкривайте або коментуйте OSM-нотатки, а також надсилайте записані GPX-файли.</string>
     <string name="shared_string_deleted">Вилучено</string>
     <string name="shared_string_edited">Відредаговано</string>
     <string name="shared_string_added">Додано</string>
     <string name="marker_activated">Позначку %s задіяно.</string>
     <string name="one_tap_active_descr">Натискання на позначку на мапі перемістить її на перше місце в списку задіяних позначок, не відкриваючи контекстне меню.</string>
     <string name="one_tap_active">Задіювання одним натисненням</string>
-    <string name="empty_state_av_notes">Робіть примітки!</string>
-    <string name="empty_state_av_notes_desc">Додайте аудіо, відео або світлино-примітку в будь-яку точку на мапі, використовуючи віджет або контекстне меню.</string>
-    <string name="notes_by_date">OSM-примітки за датою</string>
+    <string name="empty_state_av_notes">Робіть нотатки!</string>
+    <string name="empty_state_av_notes_desc">Додайте аудіо, відео або світлино-нотатку в будь-яку точку на мапі, використовуючи віджет або контекстне меню.</string>
+    <string name="notes_by_date">OSM-нотатки за датою</string>
     <string name="by_date">За датою</string>
     <string name="by_type">За типом</string>
     <string name="modify_the_search_query">Змінити пошуковий запит.</string>
@@ -2645,16 +2643,16 @@
     <string name="last_intermediate_dest_description">Додає проміжну зупинку</string>
     <string name="first_intermediate_dest_description">Додає першу зупинку</string>
     <string name="subsequent_dest_description">Пересунути призначення далі і створити його</string>
-    <string name="show_closed_notes">Показати закриті примітки</string>
-    <string name="switch_osm_notes_visibility_desc">Показати/приховати OSM-примітки на мапі.</string>
+    <string name="show_closed_notes">Показати закриті нотатки</string>
+    <string name="switch_osm_notes_visibility_desc">Показати/приховати OSM-нотатки на мапі.</string>
     <string name="gpx_file_desc">GPX — підходить для експорту в JOSM та інші OSM-редактори.</string>
     <string name="osc_file_desc">OSC — підходить для експорту в OSM.</string>
     <string name="shared_string_gpx_file">GPX-файл</string>
     <string name="osc_file">OSC-файл</string>
     <string name="choose_file_type">Виберіть тип файлу</string>
-    <string name="osm_edits_export_desc">Виберіть вид експорту: OSM-примітки, POI чи і те і те.</string>
+    <string name="osm_edits_export_desc">Виберіть вид експорту: OSM-нотатки, POI чи і те і те.</string>
     <string name="all_data">Усі дані</string>
-    <string name="osm_notes">OSM-примітки</string>
+    <string name="osm_notes">OSM-нотатки</string>
     <string name="will_open_tomorrow_at">Відкриється завтра о</string>
     <string name="rendering_attr_hidePOILabels_name">Підписи до цікавих точок</string>
     <string name="shared_string_without_name">Без назви</string>
@@ -2693,7 +2691,7 @@
     <string name="show_full_description">Показати повний опис</string>
     <string name="coord_input_save_as_track_descr">Ви додали %1$s точок. Введіть назву файлу та натисніть \"Зберегти\".</string>
     <string name="error_notification_desc">Будь ласка, надішліть знімок екрану цього повідомлення на support@osmand.net</string>
-    <string name="unirs_render_descr">Модифікація стилю за замовчуванням з метою підвищення контрасту пішохідних та велосипедних доріжок. Використовує застарілі кольори Mapnik.</string>
+    <string name="unirs_render_descr">Модифікація усталеного стилю з метою підвищення контрасту пішохідних та велосипедних доріжок. Використовує застарілі кольори Mapnik.</string>
     <string name="paid_plugin">Платний втулок</string>
     <string name="point_deleted">Точку %1$s видалено</string>
     <string name="nautical_render_descr">Стиль морської навігації. Ключові особливості: буї, маяки, річкові шляхи, морські шляхи та знаки, гавані, послуги морських судів, контури глибин.</string>
@@ -2706,8 +2704,8 @@
     <string name="light_rs_render_descr">Простий і контрастний стиль для автомобільної навігації. Зручний для очей в нічному режимі. Ключові особливості: поземистості, контрастні помаранчеві дороги, менш відволікаючі другорядні об\'єкти мапи.</string>
     <string name="topo_render_descr">Для походів і катання на природі. Читання на відкритому повітрі. Контрастні дороги та природні об’єкти, різні типи маршрутів, розширені варіанти контуру, додаткові деталі. Регулювання цілісності поверхні відрізняє якість дороги. Нічного режиму немає.</string>
     <string name="mapnik_render_descr">Старий усталений стиль \"Mapnik\". Подібні кольори до \'Mapnik\'.</string>
-    <string name="touring_view_render_descr">Туристичний стиль з високим контрастом і щонайбільшою деталізацією. Включає всі параметри стилю OsmAnd за замовчуванням, відображаючи при цьому найдетальніші відомості, зокрема дороги, путі та інші шляхи подорожі. Чіткий \"туристичний атлас\" відрізняє типи доріг. Підходить для денного, нічного та зовнішнього використання.</string>
-    <string name="default_render_descr">Стиль загального призначення. Густі міста показані чисто. Особливості контурних ліній, маршрутів, якості поверхні, обмеження доступу, дорожні щити, надання доріжок за шкалою SAC, пункти біловодних видів спорту.</string>
+    <string name="touring_view_render_descr">Туристичний стиль з високим контрастом і щонайбільшою деталізацією. Включає всі усталені параметри стилю OsmAnd, відображаючи при цьому найдетальніші відомості, зокрема дороги, путі та інші шляхи подорожі. Чіткий \"туристичний атлас\" відрізняє типи доріг. Підходить для денного, нічного та зовнішнього використання.</string>
+    <string name="default_render_descr">Стиль загального призначення. Густі міста показані чисто. Особливості поземистостей, маршрутів, якості поверхні, обмеження доступу, дорожні щити, надання доріжок за шкалою SAC, пункти біловодних видів спорту.</string>
     <string name="open_wikipedia_link_online">Відкрити посилання Вікіпедії в мережі</string>
     <string name="open_wikipedia_link_online_description">Посилання буде відкрите в веб-браузері.</string>
     <string name="read_wikipedia_offline_description">Отримайте підписку на OsmAnd Live, щоб читати статті з Вікіпедії та Вікімандрів в автономному режимі.</string>
@@ -3327,7 +3325,7 @@
     <string name="shared_string_memory_used_gb_desc">Використано %1$s ГБ</string>
     <string name="shared_string_memory_used_mb_desc">Використано %1$s МБ</string>
     <string name="shared_string_memory_used_kb_desc">Використано %1$s КБ</string>
-    <string name="contour_lines_and_hillshade">Контурні лінії та затемнення рельєфу</string>
+    <string name="contour_lines_and_hillshade">Поземистості та рельєф місцевості</string>
     <string name="routing_attr_prefer_unpaved_name">Надавати перевагу ґрунтовим дорогам</string>
     <string name="routing_attr_prefer_unpaved_description">Надавати перевагу ґрунтовим дорогам.</string>
     <string name="update_all_maps">Оновити всі мапи</string>
@@ -3354,10 +3352,10 @@
     <string name="routing_attr_driving_style_prefer_unpaved_name">Надавати перевагу ґрунтовим дорогам</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Надати перевагу незаасфальтованим над асфальтованими дорогами для прокладки.</string>
     <string name="layer_osm_edits">Правки OSM</string>
-    <string name="quick_action_contour_lines_descr">Кнопка, що показує чи приховує контурні лінії на мапі.</string>
-    <string name="quick_action_contour_lines_show">Показати контурні лінії</string>
-    <string name="quick_action_contour_lines_hide">Сховати контурні лінії</string>
-    <string name="quick_action_show_hide_contour_lines">Показати/приховати контурні лінії</string>
+    <string name="quick_action_contour_lines_descr">Увімк/вимк показ поземистостей.</string>
+    <string name="quick_action_contour_lines_show">Показати поземистості</string>
+    <string name="quick_action_contour_lines_hide">Сховати поземистості</string>
+    <string name="quick_action_show_hide_contour_lines">Показати/приховати поземистості</string>
     <string name="quick_action_hillshade_descr">Кнопка, що показує чи приховує поземистості на мапі.</string>
     <string name="quick_action_hillshade_show">Показати затемнення рельєфу</string>
     <string name="quick_action_hillshade_hide">Приховати затемнення рельєфу</string>
@@ -3431,9 +3429,9 @@
     <string name="live_monitoring">Мережеве відстеження</string>
     <string name="save_track_logging_accuracy">Точність часопису</string>
     <string name="tracks_view_descr">Ви можете знайти всі записи в %1$s або в теці OsmAnd за допомогою файлового провідника.</string>
-    <string name="multimedia_notes_view_descr">Ваші примітки OSM знаходяться в %1$s.</string>
-    <string name="video_notes">Відеопримітки</string>
-    <string name="photo_notes">Світлинопримітки</string>
+    <string name="multimedia_notes_view_descr">Ваші нотатки OSM знаходяться в %1$s.</string>
+    <string name="video_notes">Відеонотатки</string>
+    <string name="photo_notes">Світлинонотатки</string>
     <string name="route_recalculation">Перерахунок маршруту</string>
     <string name="accessibility_announce">Оголошення</string>
     <string name="login_and_pass">Ім\'я користувача і пароль</string>
