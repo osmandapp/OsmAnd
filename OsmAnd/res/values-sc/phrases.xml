@@ -787,7 +787,7 @@
     <string name="poi_transport_construction">Fràigu de mèdios de trasportu</string>
     <string name="poi_coffee">Tzilleri (cafè)</string>
     <string name="poi_doors">Ghennas</string>
-    <string name="poi_scuba_diving_shop">Artìculos pro immersiones</string>
+    <string name="poi_scuba_diving_shop">Artìculos pro imbèrghidas in s\'abba</string>
     <string name="poi_energy">Cummèrtziu de energia</string>
     <string name="poi_perfumery">Butega de profumos</string>
     <string name="poi_ford_stepping_stones">Ponte de perdas</string>
@@ -3789,4 +3789,5 @@
     <string name="poi_bowling_alley">Tzentru pro su bowling</string>
     <string name="poi_piste_ref">Nùmeru de referèntzia de sa pista</string>
     <string name="poi_resort_hunting">Base pro sa cassa</string>
+    <string name="poi_dive_centre">Tzentru pro sas imbèrghidas in s\'abba</string>
 </resources>

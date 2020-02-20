@@ -65,6 +65,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.TrackActivity;
@@ -1092,7 +1093,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 								startActivity(intent);
 							}
 						});
-				AndroidUtils.setSnackbarTextColor(snackbar, R.color.active_color_primary_dark);
+				UiUtilities.setupSnackbar(snackbar, !lightTheme);
 				snackbar.show();
 			}
 		};
@@ -1119,7 +1120,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 								adapter.notifyDataSetChanged();
 							}
 						});
-				AndroidUtils.setSnackbarTextColor(snackbar, R.color.active_color_primary_dark);
+				UiUtilities.setupSnackbar(snackbar, !lightTheme);
 				snackbar.show();
 			}
 

@@ -1405,8 +1405,7 @@ public class MapInfoWidgetsFactory {
 							ctx.startActivity(Intent.createChooser(intent, ctx.getString(R.string.send_location)));
 						}
 					});
-			AndroidUtils.setSnackbarTextColor(snackbar, R.color.active_color_primary_dark);
-			AndroidUtils.setSnackbarTextMaxLines(snackbar, 5);
+			UiUtilities.setupSnackbar(snackbar, nightMode, 5);
 			snackbar.show();
 		}
 

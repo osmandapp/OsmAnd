@@ -3530,4 +3530,15 @@
     <string name="import_profile_dialog_description">Імпортований профіль містить додаткові дані. Натисніть кнопку імпортувати, щоб імпортувати лише дані профілю або вибрати додаткові дані для імпорту.</string>
     <string name="export_profile_dialog_description">Ви можете вибрати додаткові дані для експорту разом із профілем.</string>
     <string name="index_name_antarctica">Антарктида</string>
+    <string name="navigation_notification_desc">Показувати системне сповіщення з навігаційними вказівками під час навігації.</string>
+    <string name="navigation_notification">Навігаційне сповіщення</string>
+    <string name="shared_string_app_default_w_val">Усталений застосунок (%s)</string>
+    <string name="no_recalculation_setting">Вимкнути перерахунок</string>
+    <string name="route_recalculation_dist_title">Найменша відстань для перерахунку маршруту</string>
+    <string name="route_recalculation_dist_descr">Маршрут буде перераховано, якщо відстань до нього перевищує вказане</string>
+    <string name="profile_type_custom_string">Користувацький профіль</string>
+    <string name="shared_string_angle_param">Кут: %s°</string>
+    <string name="shared_string_angle">Кут</string>
+    <string name="recalc_angle_dialog_descr">Додатковий прямий відрізок між моїм розташуванням та розрахунковим маршрутом відображатиметься, поки маршрут не буде перераховано</string>
+    <string name="recalc_angle_dialog_title">Найменший кут між моїм розташуванням та маршрутом</string>
 </resources>

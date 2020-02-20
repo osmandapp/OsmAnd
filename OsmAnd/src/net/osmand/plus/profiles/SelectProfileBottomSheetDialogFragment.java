@@ -226,7 +226,7 @@ public class SelectProfileBottomSheetDialogFragment extends BasePreferenceBottom
 	private void addButtonItem(int titleId, int iconId, OnClickListener listener) {
 		OsmandApplication app = requiredMyApplication();
 		
-		int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		int activeColorResId = isNightMode(app) ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		
 		View buttonView = View.inflate(app, R.layout.bottom_sheet_item_preference_btn, null);
 		TextView tvTitle = buttonView.findViewById(R.id.title);
