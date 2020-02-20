@@ -35,9 +35,11 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 public class GpxSelectionHelper {
 
@@ -443,7 +445,7 @@ public class GpxSelectionHelper {
 	public SelectedGpxFile getSelectedFileByPath(String path) {
 		List<SelectedGpxFile> newList = new ArrayList<>(selectedGPXFiles);
 		for (SelectedGpxFile s : newList) {
-			if (s.getGpxFile() != null && s.getGpxFile().path.equals(path)) {
+			if (s.getGpxFile().path.equals(path)) {
 				return s;
 			}
 		}
@@ -960,9 +962,42 @@ public class GpxSelectionHelper {
 		}
 	}
 
+	public void runSelection(Map<String, Boolean> selectedItems, SelectGpxTaskListener gpxTaskListener) {
+		final Set<GPXFile> originalSelectedItems = new HashSet<>();
+		AsyncTask<GPXFile, ?, ?> selectGpxTask = new SelectGpxTask(gpxTaskListener);
+		for (String filePath : selectedItems.keySet()) {
+			if (!filePath.equals(CURRENT_TRACK)) {
+				boolean visible = false;
+				if (selectedItems.get(filePath) != null) {
+					visible = selectedItems.get(filePath);
+				}
+				SelectedGpxFile sf = getSelectedFileByPath(filePath);
+				if (sf == null) {
+					sf = new SelectedGpxFile();
+					sf.setGpxFile(new GPXFile(null), app);
+				}
+				sf.getGpxFile().path = filePath;
+				addRemoveSelected(visible, sf);
+				if (visible) {
+					originalSelectedItems.add(sf.getGpxFile());
+				}
+			} else {
+				SelectedGpxFile sf = getSelectedCurrentRecordingTrack();
+				if (sf == null) {
+					sf = new SelectedGpxFile();
+					sf.setGpxFile(new GPXFile(null), app);
+					sf.getGpxFile().showCurrentTrack = true;
+				}
+				originalSelectedItems.add(sf.getGpxFile());
+			}
+		}
+		selectGpxTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, originalSelectedItems.toArray(new GPXFile[0]));
+	}
+
+
 	public interface SelectGpxTaskListener {
 
-		void onProgressUpdate(GPXFile gpxFile);
+		void onProgressUpdate();
 
 		void onPreExecute();
 
@@ -970,11 +1005,11 @@ public class GpxSelectionHelper {
 
 	}
 
-	public static class SelectGpxTask extends AsyncTask<GPXFile, GPXFile, String> {
+	public class SelectGpxTask extends AsyncTask<GPXFile, GPXFile, String> {
 
 		private SelectGpxTaskListener gpxTaskListener;
 
-		public SelectGpxTask(SelectGpxTaskListener gpxTaskListener) {
+		SelectGpxTask(SelectGpxTaskListener gpxTaskListener) {
 			this.gpxTaskListener = gpxTaskListener;
 		}
 
@@ -991,8 +1026,10 @@ public class GpxSelectionHelper {
 
 		@Override
 		protected void onProgressUpdate(GPXFile... values) {
-			gpxTaskListener.onProgressUpdate(values[0]);
-
+			for (GPXFile gpxFile : values) {
+				selectGpxFile(gpxFile, true, false);
+				gpxTaskListener.onProgressUpdate();
+			}
 		}
 
 		@Override
@@ -1003,7 +1040,6 @@ public class GpxSelectionHelper {
 		@Override
 		protected void onPostExecute(String result) {
 			gpxTaskListener.onPostExecute();
-
 		}
 	}
 }

@@ -91,6 +91,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -105,6 +106,7 @@ import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 public class AvailableGPXFragment extends OsmandExpandableListFragment implements
 	FavoritesFragmentStateHolder {
 
+	private static final String CURRENT_TRACK = "currentTrack";
 	public static final Pattern ILLEGAL_PATH_NAME_CHARACTERS = Pattern.compile("[?:\"*|<>]");
 	public static final int SEARCH_ID = -1;
 	// public static final int ACTION_ID = 0;
@@ -117,7 +119,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	private GpxIndexesAdapter allGpxAdapter;
 	private ContextMenuAdapter optionsMenuAdapter;
 	private AsyncTask<GpxInfo, ?, ?> operationTask;
-	private AsyncTask<GPXFile, ?, ?> selectGpxTask;
 	private GpxSelectionHelper selectedGpxHelper;
 	private OsmandApplication app;
 	private boolean updateEnable;
@@ -582,31 +583,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		showOnMapMode = true;
 		selectedItems.clear();
 		selectedGroups.clear();
-		final Set<GPXFile> originalSelectedItems;
-		selectedItems.addAll(allGpxAdapter.getSelectedGpx());
-		originalSelectedItems = new HashSet<>();
-		for (GpxInfo gpxInfo : selectedItems) {
-			originalSelectedItems.add(gpxInfo.gpx);
-		}
+		final Set<GpxInfo> originalSelectedItems = allGpxAdapter.getSelectedGpx();
+		selectedItems.addAll(originalSelectedItems);
 		gpxTaskListener = new GpxSelectionHelper.SelectGpxTaskListener() {
 			@Override
-			public void onProgressUpdate(GPXFile gpxFile) {
-
-				final boolean visible = isContains(gpxFile);
-				selectedGpxHelper.selectGpxFile(gpxFile, visible, false);
+			public void onProgressUpdate() {
 				allGpxAdapter.notifyDataSetInvalidated();
-			}
-
-			boolean isContains(GPXFile gpxFile) {
-				for (GpxInfo gpxInfo : selectedItems) {
-					if (gpxInfo.currentlyRecordingTrack && gpxFile.showCurrentTrack) {
-						return true;
-					}
-					if (gpxInfo.gpx.path.equals(gpxFile.path)) {
-						return true;
-					}
-				}
-				return false;
 			}
 
 			@Override
@@ -623,7 +605,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		};
 
 		actionMode = getActionBarActivity().startSupportActionMode(new ActionMode.Callback() {
-
 
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
@@ -644,38 +625,20 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 			@Override
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-				runSelection();
+				HashMap<String, Boolean> selectedItemsFileNames = new HashMap<>();
+				originalSelectedItems.addAll(selectedItems);
+				for (GpxInfo gpxInfo : originalSelectedItems) {
+					if (gpxInfo.currentlyRecordingTrack) {
+						selectedItemsFileNames.put(CURRENT_TRACK, true);
+					} else {
+						selectedItemsFileNames.put(gpxInfo.file.getAbsolutePath(), selectedItems.contains(gpxInfo));
+					}
+				}
+				selectedGpxHelper.runSelection(selectedItemsFileNames, gpxTaskListener);
 				actionMode.finish();
 				allGpxAdapter.refreshSelected();
 				allGpxAdapter.notifyDataSetChanged();
 				return true;
-			}
-
-			private void runSelection() {
-				selectGpxTask = new GpxSelectionHelper.SelectGpxTask(gpxTaskListener);
-				for (GpxInfo gpxInfo : selectedItems) {
-					if (!gpxInfo.currentlyRecordingTrack) {
-						final boolean visible = selectedItems.contains(gpxInfo);
-						SelectedGpxFile sf = selectedGpxHelper.getSelectedFileByName(gpxInfo.getFileName());
-						if (sf == null) {
-							sf = new SelectedGpxFile();
-							sf.setGpxFile(new GPXFile(null), app);
-						}
-						sf.getGpxFile().path = gpxInfo.file.getPath();
-						selectedGpxHelper.addRemoveSelected(visible, sf);
-						originalSelectedItems.add(sf.getGpxFile());
-					} else {
-						SelectedGpxFile sf = selectedGpxHelper.getSelectedCurrentRecordingTrack();
-						if (sf == null) {
-							sf = new SelectedGpxFile();
-							sf.setGpxFile(new GPXFile(null), app);
-							sf.getGpxFile().showCurrentTrack = true;
-						}
-						originalSelectedItems.add(sf.getGpxFile());
-					}
-				}
-				selectGpxTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
-						originalSelectedItems.toArray(new GPXFile[originalSelectedItems.size()]));
 			}
 
 			@Override
