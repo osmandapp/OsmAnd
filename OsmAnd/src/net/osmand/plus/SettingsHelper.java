@@ -960,7 +960,9 @@ public class SettingsHelper {
 							String paramsString = object.getString("params");
 							HashMap<String, String> params = gson.fromJson(paramsString, type);
 							QuickAction quickAction = new QuickAction(actionType);
-							quickAction.setName(name);
+							if (!name.isEmpty()) {
+								quickAction.setName(name);
+							}
 							quickAction.setParams(params);
 							items.add(quickAction);
 						}
@@ -986,7 +988,8 @@ public class SettingsHelper {
 						try {
 							for (QuickAction action : items) {
 								JSONObject jsonObject = new JSONObject();
-								jsonObject.put("name", action.getName(app));
+								jsonObject.put("name", action.hasCustomName(app)
+										? action.getName(app) : "");
 								jsonObject.put("type", action.getType());
 								jsonObject.put("params", gson.toJson(action.getParams(), type));
 								jsonArray.put(jsonObject);
