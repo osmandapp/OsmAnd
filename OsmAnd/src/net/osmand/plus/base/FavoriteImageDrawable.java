@@ -173,13 +173,14 @@ public class FavoriteImageDrawable extends Drawable {
 	private static TreeMap<String, FavoriteImageDrawable> cache = new TreeMap<>();
 
 	private static FavoriteImageDrawable getOrCreate(Context ctx, int color, boolean withShadow, boolean synced, FavouritePoint point) {
-		String iconName = "";
+		String uniqueId = "";
 		if (point != null) {
-			iconName = point.getIconEntryName(ctx);
+			uniqueId = point.getIconEntryName(ctx);
+			uniqueId += point.getBackType().name();
 		}
 		color = color | 0xff000000;
 		int hash = (color << 4) + ((withShadow ? 1 : 0) << 2) + ((synced ? 3 : 0) << 2);
-		String uniqueId = hash + iconName;
+		uniqueId = hash + uniqueId;
 		FavoriteImageDrawable drawable = cache.get(uniqueId);
 		if (drawable == null) {
 			drawable = new FavoriteImageDrawable(ctx, color, withShadow, synced, point);
