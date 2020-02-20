@@ -3542,4 +3542,15 @@ POIの更新は利用できません</string>
     <string name="import_profile_dialog_description">インポートされたプロファイルには追加データが含まれています。 [インポート]をタップしてプロファイルデータのみをインポートするか、インポートする追加データを選択してください。</string>
     <string name="export_profile_dialog_description">プロファイルとともにエクスポートする追加データを選択できます。</string>
     <string name="index_name_antarctica">南極大陸</string>
+    <string name="navigation_notification_desc">ナビゲーション稼働中にもシステム通知を表示します。</string>
+    <string name="navigation_notification">ナビゲーション通知</string>
+    <string name="profile_type_custom_string">カスタムプロファイル</string>
+    <string name="shared_string_angle_param">角度: %s°</string>
+    <string name="shared_string_angle">角度</string>
+    <string name="recalc_angle_dialog_descr">ルートの再計算が終わるまで、現在地と計算済みルートの間に余剰分の直線セグメントが表示されます</string>
+    <string name="recalc_angle_dialog_title">現在地とルート間の最小角度</string>
+    <string name="shared_string_app_default_w_val">アプリデフォルト(%s)</string>
+    <string name="no_recalculation_setting">再計算の無効化</string>
+    <string name="route_recalculation_dist_title">ルートを再計算する最小距離</string>
+    <string name="route_recalculation_dist_descr">距離が指定された値よりも長い場合にルートが再計算されるようになります</string>
 </resources>
