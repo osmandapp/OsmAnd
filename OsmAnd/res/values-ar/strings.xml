@@ -3456,4 +3456,16 @@
     <string name="shared_string_profiles">الملفات الشخصية</string>
     <string name="replace_all_desc">سيتم استبدال العناصر الحالية بعناصر من الملف</string>
     <string name="replace_all">استبدال الكل</string>
+    <string name="get_discount_title">احصل على %1$d %2$s عند %3$s مقابل.</string>
+    <string name="get_discount_first_part">%1$s لأول %2$s</string>
+    <string name="get_discount_first_few_part">%1$s لأول %2$s</string>
+    <string name="price_and_discount">%1$s • وفر %2$s</string>
+    <string name="listed_exist">المدرجة %1$s, موجودة بالفعل في OsmAnd.</string>
+    <string name="keep_both">احتفظ بكليهما</string>
+    <string name="keep_both_desc">سيتم إضافة العناصر المستوردة مع البادئة</string>
+    <string name="import_duplicates_description">أوسماند لديه بالفعل عناصر بنفس الأسماء مثل تلك المستوردة.
+\n
+\nحدد إجراء.</string>
+    <string name="import_duplicates_title">بعض العناصر موجودة بالفعل</string>
+    <string name="select_data_to_import">حدد البيانات التي سيتم استيرادها.</string>
 </resources>
