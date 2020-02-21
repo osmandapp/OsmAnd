@@ -18,7 +18,6 @@ import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v4.text.TextUtilsCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.TintableCompoundButton;
 import android.support.v7.view.ContextThemeWrapper;
@@ -378,11 +377,17 @@ public class UiUtilities {
 		}
 		view.setBackgroundColor(ContextCompat.getColor(ctx, backgroundColor));
 	}
+
+	public static void rotateImageByLayoutDirection(ImageView image, int layoutDirection) {
+		if (image == null) {
+			return;
+		}
+		int rotation = layoutDirection == View.LAYOUT_DIRECTION_LTR ? 0 : 180;
+		image.setRotationY(rotation);
+	}
 	
 	public static void setupLayoutDirection(View layout) {
-		Context ctx = layout.getContext();
-		Locale currentLocale = ctx.getResources().getConfiguration().locale;
-		int direction = TextUtilsCompat.getLayoutDirectionFromLocale(currentLocale);
+		int direction = AndroidUtils.getLayoutDirection(layout.getContext());
 		ViewCompat.setLayoutDirection(layout, direction);
 	}
 
