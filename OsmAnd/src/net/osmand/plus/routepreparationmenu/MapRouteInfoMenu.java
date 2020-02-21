@@ -860,6 +860,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			return;
 		}
 		OsmandApplication app = mapActivity.getMyApplication();
+		final int layoutDirection = AndroidUtils.getLayoutDirection(app);
 		final ApplicationMode am = app.getRoutingHelper().getAppMode();
 		final Set<ApplicationMode> selected = new HashSet<>();
 		selected.add(am);
@@ -894,8 +895,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		scrollView.setVerticalScrollBarEnabled(false);
 		scrollView.setHorizontalScrollBarEnabled(false);
 
-		int leftTogglePadding = AndroidUtils.dpToPx(mapActivity, 8f);
-		final int rightTogglePadding = mapActivity.getResources().getDimensionPixelSize(R.dimen.content_padding);
+		int contentPadding = mapActivity.getResources().getDimensionPixelSize(R.dimen.content_padding);
+		int contentPaddingHalf = mapActivity.getResources().getDimensionPixelSize(R.dimen.content_padding_half);
+		final int startTogglePadding = layoutDirection == View.LAYOUT_DIRECTION_LTR ? contentPaddingHalf : contentPadding;
+		final int endTogglePadding = layoutDirection == View.LAYOUT_DIRECTION_LTR ? contentPadding : contentPaddingHalf;
 		final View[] buttons = new View[values.size()];
 		int k = 0;
 		Iterator<ApplicationMode> iterator = values.iterator();
@@ -905,14 +908,25 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			View toggle = AppModeDialog.createToggle(mapActivity.getLayoutInflater(), app, R.layout.mode_view_route_preparation,
 					(LinearLayout) ll.findViewById(R.id.app_modes_content), mode, true);
 
-			if (firstMode && toggle.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
-				firstMode = false;
+			if (toggle.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
 				ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) toggle.getLayoutParams();
-				p.setMargins(p.leftMargin + leftTogglePadding, p.topMargin, p.rightMargin, p.bottomMargin);
-			}
-			if (!iterator.hasNext() && toggle.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
-				ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) toggle.getLayoutParams();
-				p.setMargins(p.leftMargin, p.topMargin, p.rightMargin + rightTogglePadding, p.bottomMargin);
+				if (layoutDirection == View.LAYOUT_DIRECTION_RTL) {
+					if (firstMode) {
+						firstMode = false;
+						p.setMargins(p.leftMargin, p.topMargin, p.rightMargin + startTogglePadding, p.bottomMargin);
+					}
+					if (!iterator.hasNext()) {
+						p.setMargins(p.leftMargin + endTogglePadding, p.topMargin, p.rightMargin, p.bottomMargin);
+					}
+				} else { // LTR
+					if (firstMode) {
+						firstMode = false;
+						p.setMargins(p.leftMargin + startTogglePadding, p.topMargin, p.rightMargin, p.bottomMargin);
+					}
+					if (!iterator.hasNext()) {
+						p.setMargins(p.leftMargin, p.topMargin, p.rightMargin + endTogglePadding, p.bottomMargin);
+					}
+				}
 			}
 
 			buttons[k++] = toggle;
@@ -929,7 +943,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			@Override
 			public void onGlobalLayout() {
 				LinearLayout container = ll.findViewById(R.id.app_modes_content);
-				int s = container.getChildAt(idx) != null ? container.getChildAt(idx).getRight() + rightTogglePadding : 0;
+				int s = container.getChildAt(idx) != null ? container.getChildAt(idx).getRight() + endTogglePadding : 0;
 				scrollView.scrollTo(s - scrollView.getWidth() > 0 ? s - scrollView.getWidth() : 0, 0);
 				if (Build.VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN) {
 					ll.getViewTreeObserver().removeOnGlobalLayoutListener(this);
@@ -981,14 +995,18 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			return;
 		}
 		createRoutingParametersButtons(mapActivity, mode, optionsContainer);
-		int rightPadding = AndroidUtils.dpToPx(app, 70);
+		int endPadding = mapActivity.getResources().getDimensionPixelSize(R.dimen.action_bar_image_side_margin);
 		if (mode.parameters.size() > 2) {
 			optionsTitle.setVisibility(View.GONE);
 		} else {
 			optionsTitle.setVisibility(View.VISIBLE);
-			rightPadding += AndroidUtils.getTextWidth(app.getResources().getDimensionPixelSize(R.dimen.text_button_text_size), app.getString(R.string.shared_string_options));
+			endPadding += AndroidUtils.getTextWidth(app.getResources().getDimensionPixelSize(R.dimen.text_button_text_size), app.getString(R.string.shared_string_options));
 		}
-		optionsContainer.setPadding(optionsContainer.getPaddingLeft(), optionsContainer.getPaddingTop(), rightPadding, optionsContainer.getPaddingBottom());
+		if (AndroidUtils.getLayoutDirection(app) == View.LAYOUT_DIRECTION_RTL) {
+			optionsContainer.setPadding(endPadding, optionsContainer.getPaddingTop(), optionsContainer.getPaddingRight(), optionsContainer.getPaddingBottom());
+		} else { // LTR
+			optionsContainer.setPadding(optionsContainer.getPaddingLeft(), optionsContainer.getPaddingTop(), endPadding, optionsContainer.getPaddingBottom());
+		}
 	}
 
 	private void updateControlButtons(MapActivity mapActivity, View mainView) {

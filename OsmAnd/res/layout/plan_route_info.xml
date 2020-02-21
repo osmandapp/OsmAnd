@@ -125,6 +125,7 @@
 							android:layout_height="wrap_content"
 							android:layout_marginTop="5dp"
 							android:layout_marginRight="@dimen/list_content_padding"
+							android:layout_marginEnd="@dimen/list_content_padding"
 							android:layout_marginBottom="3dp"
 							android:text="@string/route_from"
 							android:textColor="@color/description_font_and_bottom_sheet_icons"
@@ -136,7 +137,7 @@
 							android:layout_height="wrap_content"
 							android:layout_marginEnd="@dimen/list_content_padding"
 							android:layout_marginRight="@dimen/list_content_padding"
-							android:gravity="left"
+							android:gravity="start"
 							android:singleLine="true"
 							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"
@@ -241,7 +242,7 @@
 							android:layout_marginTop="5dp"
 							android:layout_marginBottom="3dp"
 							android:ellipsize="end"
-							android:gravity="left"
+							android:gravity="start"
 							android:singleLine="true"
 							android:text="@string/intermediate_destinations"
 							android:textColor="@color/description_font_and_bottom_sheet_icons"
@@ -253,7 +254,7 @@
 							android:layout_height="wrap_content"
 							android:layout_marginEnd="@dimen/list_content_padding"
 							android:layout_marginRight="@dimen/list_content_padding"
-							android:gravity="left"
+							android:gravity="start"
 							android:singleLine="true"
 							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"
@@ -366,7 +367,7 @@
 							android:layout_height="wrap_content"
 							android:layout_marginEnd="@dimen/list_content_padding"
 							android:layout_marginRight="@dimen/list_content_padding"
-							android:gravity="left"
+							android:gravity="start"
 							android:singleLine="true"
 							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"
@@ -453,11 +454,8 @@
 						android:layout_width="wrap_content"
 						android:layout_height="match_parent"
 						android:gravity="start"
-						android:orientation="horizontal"
-						android:paddingStart="5dp"
-						android:paddingLeft="5dp"
-						android:paddingEnd="70dp"
-						android:paddingRight="70dp">
+						android:layout_gravity="start"
+						android:orientation="horizontal">
 
 					</LinearLayout>
 
@@ -468,9 +466,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="match_parent"
 					android:layout_gravity="end"
-					android:orientation="horizontal"
-					android:paddingStart="@dimen/route_info_buttons_padding_top_bottom"
-					android:paddingLeft="@dimen/route_info_buttons_padding_top_bottom">
+					android:orientation="horizontal">
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/map_options_route_button_title"

@@ -643,6 +643,11 @@ public class AndroidUtils {
 			return baseString;
 		}
 	}
+	
+	public static int getLayoutDirection(@NonNull Context ctx) {
+		Locale currentLocale = ctx.getResources().getConfiguration().locale;
+		return TextUtilsCompat.getLayoutDirectionFromLocale(currentLocale);
+	}
 
 	public static float getFreeSpaceGb(File dir) {
 		if (dir.canRead()) {
