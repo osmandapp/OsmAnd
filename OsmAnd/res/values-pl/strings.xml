@@ -2244,14 +2244,14 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="subscribe_email_error">Błąd</string>
     <string name="quick_action_add_destination">Ustaw cel podróży</string>
     <string name="quick_action_replace_destination">Zastąp cel trasy</string>
-    <string name="quick_action_auto_zoom_on">Włącz automatyczne przybliżanie mapy</string>
-    <string name="quick_action_auto_zoom_off">Wyłącz automatyczne przybliżanie mapy</string>
+    <string name="quick_action_auto_zoom_on">Włącz automatyczne powiększanie</string>
+    <string name="quick_action_auto_zoom_off">Wyłącz automatyczne powiększanie</string>
     <string name="quick_action_auto_zoom">Przełącz automatyczne przybliżanie</string>
     <string name="quick_action_add_first_intermediate">Dodaj pierwszy pośredni cel trasy</string>
-    <string name="quick_action_auto_zoom_desc">Przełącznik włączenia/wyłączenia automatycznego przybliżania mapy zależnego od prędkości ruchu.</string>
+    <string name="quick_action_auto_zoom_desc">Przycisk do włączania lub wyłączania automatycznego zoomu z regulacją prędkości.</string>
     <string name="quick_action_add_destination_desc">Przycisk ustalenia celu trasy w położeniu na środku ekranu; poprzednio ustalony cel zamieniony będzie na ostatni cel pośredni.</string>
-    <string name="quick_action_replace_destination_desc">Naciśnięcie przycisku ustali nowy cel podróży w położeniu na środku ekranu, zastępując poprzednio wybrany cel (jeśli jest).</string>
-    <string name="quick_action_add_first_intermediate_desc">Przycisk służący do ustawiania środka ekranu jako pierwszego pośredniego celu podróży.</string>
+    <string name="quick_action_replace_destination_desc">Przycisk do wyśrodkowania na ekranie nowego celu podróży, zastępujący poprzednio wybrany cel podróży (jeśli istnieje).</string>
+    <string name="quick_action_add_first_intermediate_desc">Przycisk umożliwiający wyśrodkowanie ekranu jako pierwszego pośredniego celu podróży.</string>
     <string name="type_address">Wprowadź adres</string>
     <string name="type_city_town">Wprowadź miasto/miejscowość</string>
     <string name="type_postcode">Wprowadź kod pocztowy</string>
@@ -2303,7 +2303,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="hillshade_purchase_header">Zainstaluj wtyczkę \'Poziomice\', aby pokazać stopniowane obszary pionowe.</string>
     <string name="hillshade_menu_download_descr">Pobierz mapę \"Cieniowanie Rzeźby Terenu\", by wyświetlić cieniowanie pionowe.</string>
     <string name="srtm_purchase_header">Kup i zainstaluj wtyczkę \'Poziomice\', aby pokazać stopniowane obszary pionowe.</string>
-    <string name="quick_action_showhide_osmbugs_title">Przełącz wyświetlanie uwag OSM</string>
+    <string name="quick_action_showhide_osmbugs_title">Pokaż lub ukryj notatki OSM</string>
     <string name="quick_action_osmbugs_show">Pokaż uwagi OSM</string>
     <string name="quick_action_osmbugs_hide">Ukryj uwagi OSM</string>
     <string name="osmand_plus_extended_description_part8">Przybliżony zasięg i jakość mapy:
@@ -2321,7 +2321,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n Od Afganistanu po Zimbabwe, przez Australię po USA. Argentyna, Brazylia, Kanada, Francja, Niemcy, Polska, Meksyk, Wielka Brytania, Hiszpania, …
 \n</string>
     <string name="sorted_by_distance">Posortowane wg odległości</string>
-    <string name="quick_action_showhide_osmbugs_descr">Przełącznik wyświetlania i ukrycia na mapie uwag OSM.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Przycisk do wyświetlania lub ukrywania notatek OSM na mapie.</string>
     <string name="restart_search">Rozpocznij ponownie wyszukiwanie</string>
     <string name="increase_search_radius">Zwiększ promień wyszukiwania</string>
     <string name="nothing_found">Nic nie odnaleziono</string>
@@ -2367,9 +2367,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="moving_time">Czas w ruchu</string>
     <string name="max_min">Maks./min.</string>
     <string name="quick_action_resume_pause_navigation">Wstrzymaj/wznów nawigowanie</string>
-    <string name="quick_action_resume_pause_navigation_descr">Naciśnij ten przycisk, aby wstrzymać lub wznowić nawigowanie.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Przycisk do wstrzymania lub wznowienia nawigacji.</string>
     <string name="quick_action_start_stop_navigation">Rozpocznij/zatrzymaj nawigowanie</string>
-    <string name="quick_action_start_stop_navigation_descr">Naciśnij ten przycisk, aby rozpocząć lub zakończyć nawigowanie.</string>
+    <string name="quick_action_start_stop_navigation_descr">Przycisk rozpoczęcia lub zakończenia nawigacji.</string>
     <string name="quick_action_show_navigation_finish_dialog">Wyświetl ekran końca nawigowania</string>
     <string name="measurement_tool_action_bar">Przeglądanie mapy i dodawanie punktów</string>
     <string name="measurement_tool">Mierzenie odległości</string>
@@ -2912,7 +2912,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="show_more">Wyświetl więcej</string>
     <string name="tracks_on_map">Wyświetlane ślady</string>
     <string name="quick_action_show_hide_gpx_tracks">Przełącz widoczność śladów GPX</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Przełącznik wyświetlania i ukrywania wybranych śladów GPX na mapie.</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Przycisk do pokazywania lub ukrywania wybranych ścieżek GPX na mapie.</string>
     <string name="quick_action_gpx_tracks_hide">Ukryj ślady GPX</string>
     <string name="quick_action_gpx_tracks_show">Wyświetl ślady GPX</string>
     <string name="add_destination_query">Proszę najpierw ustalić cel</string>
@@ -3366,7 +3366,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="quick_action_hillshade_show">Wyświetl cieniowanie terenu</string>
     <string name="quick_action_hillshade_hide">Ukryj cieniowanie terenu</string>
     <string name="quick_action_show_hide_hillshade">Przełącz widoczność cieniowania terenu</string>
-    <string name="quick_action_hillshade_descr">Przełącza wyświetlanie cieniowania terenu na mapie.</string>
+    <string name="quick_action_hillshade_descr">Przycisk do pokazywania lub ukrywania cieniowania terenu na mapie.</string>
     <string name="tts_initialization_error">Nie można uruchomić mechanizmu zamiany tekstu na mowę.</string>
     <string name="shared_preference">Wspólne</string>
     <string name="simulate_your_location_gpx_descr">Symuluje położenie używając zarejestrowanego śladu GPX.</string>
@@ -3386,12 +3386,12 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="track_saved">Zapisano ślad</string>
     <string name="empty_filename">Nazwa pliku jest pusta</string>
     <string name="shared_string_revert">Przywróć</string>
-    <string name="quick_action_directions_from_desc">Przycisk służący do ustawienia środka ekranu jako punktu wyjazdu i obliczenia trasy do miejsca docelowego lub otwarcia okna dialogowego w celu wybrania miejsca docelowego, jeśli znacznik miejsca docelowego nie znajduje się na mapie.</string>
+    <string name="quick_action_directions_from_desc">Przycisk umożliwiający wyśrodkowanie ekranu w punkcie wyjścia. Następnie poprosi o ustawienie miejsca docelowego lub uruchomi obliczanie trasy.</string>
     <string name="clear_confirmation_msg">Wyczyścić %1$s\?</string>
     <string name="download_map_dialog">Dialog pobierania map</string>
     <string name="dialogs_and_notifications_title">Dialogi i powiadomienia</string>
     <string name="suggested_maps">Sugerowane mapy</string>
-    <string name="suggested_maps_descr">Te mapy są wymagane do użycia z wtyczką</string>
+    <string name="suggested_maps_descr">Te mapy są wymagane do użycia z wtyczką.</string>
     <string name="added_profiles">Dodano profile</string>
     <string name="added_profiles_descr">Profile dodane przez wtyczkę</string>
     <string name="shared_string_turn_off">Wyłącz</string>
@@ -3542,4 +3542,22 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="profile_type_custom_string">Dostosowany profil</string>
     <string name="shared_string_angle_param">Kąt: %s°</string>
     <string name="shared_string_angle">Kąt</string>
+    <string name="monitoring_min_speed_descr_recommendation">Zalecenie: Spróbuj najpierw zastosować wykrywanie ruchu przez filtr rejestrowania minimalnego przemieszczenia (B), może to dać lepsze wyniki, a stracisz mniej danych. Jeśli twoje ścieżki pozostają głośne przy niskich prędkościach, wypróbuj tutaj wartości niezerowe. Należy pamiętać, że niektóre pomiary mogą w ogóle nie zgłaszać żadnej wartości prędkości (niektóre metody sieciowe), w którym to przypadku nie rejestruje się niczego.</string>
+    <string name="monitoring_min_accuracy_descr_remark">Uwaga: Jeśli GPS został wyłączony bezpośrednio przed nagraniem, pierwszy zmierzony punkt może mieć zmniejszoną dokładność, więc w naszym kodzie możemy chcieć poczekać sekundę przed nagraniem punktu (lub nagrać najlepszy z 3 kolejnych punktów itp.), ale nie jest to jeszcze realizowane.</string>
+    <string name="multimedia_rec_split_title">Dzielenie nagrań</string>
+    <string name="recalc_angle_dialog_descr">Dodatkowy prosty odcinek pomiędzy moją pozycją a obliczoną trasą zostanie wyświetlony do czasu ponownego obliczenia trasy</string>
+    <string name="recalc_angle_dialog_title">Minimalny kąt między moją lokalizacją a trasą</string>
+    <string name="shared_string_preparing">Przygotowanie</string>
+    <string name="shared_string_poi_types">Rodzaje POI</string>
+    <string name="shared_string_nothing_selected">Nic nie zaznaczono</string>
+    <string name="shared_string_profiles">Profile</string>
+    <string name="listed_exist">Wymienione %1$s, już istnieją w OsmAnd.</string>
+    <string name="replace_all_desc">Bieżące elementy zostaną zastąpione elementami z pliku</string>
+    <string name="replace_all">Zastąp wszystkie</string>
+    <string name="keep_both_desc">Zaimportowane elementy zostaną dodane z prexif</string>
+    <string name="import_duplicates_description">OsmAnd ma już elementy o takich samych nazwach jak te importowane.
+\n
+\nWybierz akcję.</string>
+    <string name="import_duplicates_title">Niektóre elementy już istnieją</string>
+    <string name="select_data_to_import">Wybierz dane, które mają zostać zaimportowane.</string>
 </resources>
