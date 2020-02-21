@@ -43,7 +43,7 @@ import java.util.Set;
 
 public class GpxSelectionHelper {
 
-	private static final String CURRENT_TRACK = "currentTrack";
+	public static final String CURRENT_TRACK = "currentTrack";
 	private static final String FILE = "file";
 	private static final String BACKUP = "backup";
 	private static final String BACKUPMODIFIEDTIME = "backupTime";
@@ -56,6 +56,7 @@ public class GpxSelectionHelper {
 	private Map<GPXFile, Long> selectedGpxFilesBackUp = new java.util.HashMap<>();
 	private SavingTrackHelper savingTrackHelper;
 	private final static Log LOG = PlatformUtil.getLog(GpxSelectionHelper.class);
+	SelectGpxTask selectGpxTask;
 
 
 	public GpxSelectionHelper(OsmandApplication osmandApplication, SavingTrackHelper trackHelper) {
@@ -711,7 +712,7 @@ public class GpxSelectionHelper {
 		}
 
 		public boolean isLoaded() {
-			return gpxFile.modifiedTime != 0 || gpxFile.showCurrentTrack;
+			return gpxFile.modifiedTime != 0;
 		}
 
 		public GPXTrackAnalysis getTrackAnalysis(OsmandApplication app) {
@@ -963,83 +964,91 @@ public class GpxSelectionHelper {
 	}
 
 	public void runSelection(Map<String, Boolean> selectedItems, SelectGpxTaskListener gpxTaskListener) {
-		final Set<GPXFile> originalSelectedItems = new HashSet<>();
-		AsyncTask<GPXFile, ?, ?> selectGpxTask = new SelectGpxTask(gpxTaskListener);
-		for (String filePath : selectedItems.keySet()) {
-			if (!filePath.equals(CURRENT_TRACK)) {
-				boolean visible = false;
-				if (selectedItems.get(filePath) != null) {
-					visible = selectedItems.get(filePath);
-				}
-				SelectedGpxFile sf = getSelectedFileByPath(filePath);
-				if (sf == null) {
-					sf = new SelectedGpxFile();
-					sf.setGpxFile(new GPXFile(null), app);
-				}
-				sf.getGpxFile().path = filePath;
-				addRemoveSelected(visible, sf);
-				if (visible) {
-					originalSelectedItems.add(sf.getGpxFile());
-				}
-			} else {
-				SelectedGpxFile sf = getSelectedCurrentRecordingTrack();
-				if (sf == null) {
-					sf = new SelectedGpxFile();
-					sf.setGpxFile(new GPXFile(null), app);
-					sf.getGpxFile().showCurrentTrack = true;
-				}
-				originalSelectedItems.add(sf.getGpxFile());
-			}
+		if (selectGpxTask != null && (selectGpxTask.getStatus() == AsyncTask.Status.RUNNING
+				|| selectGpxTask.getStatus() == AsyncTask.Status.PENDING)) {
+			selectGpxTask.cancel(false);
 		}
-		selectGpxTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, originalSelectedItems.toArray(new GPXFile[0]));
+		selectGpxTask = new SelectGpxTask(selectedItems, gpxTaskListener);
+		selectGpxTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
-
 
 	public interface SelectGpxTaskListener {
 
-		void onProgressUpdate();
+		void gpxSelectionInProgress();
 
-		void onPreExecute();
+		void gpxSelectionStarted();
 
-		void onPostExecute();
+		void gpxSelectionFinished();
 
 	}
 
-	public class SelectGpxTask extends AsyncTask<GPXFile, GPXFile, String> {
+	public class SelectGpxTask extends AsyncTask<Void, Void, String> {
 
+		final Set<GPXFile> originalSelectedItems = new HashSet<>();
 		private SelectGpxTaskListener gpxTaskListener;
+		Map<String, Boolean> selectedItems;
 
-		SelectGpxTask(SelectGpxTaskListener gpxTaskListener) {
+		SelectGpxTask(Map<String, Boolean> selectedItems, SelectGpxTaskListener gpxTaskListener) {
 			this.gpxTaskListener = gpxTaskListener;
+			this.selectedItems = selectedItems;
 		}
 
 		@Override
-		protected String doInBackground(GPXFile... params) {
-			for (GPXFile file : params) {
-				if (!file.showCurrentTrack) {
-					file = GPXUtilities.loadGPXFile(new File(file.path));
+		protected String doInBackground(Void... params) {
+			for (GPXFile gpxFile : originalSelectedItems) {
+				if (isCancelled()) {
+					break;
 				}
-				publishProgress(file);
+				if (!gpxFile.showCurrentTrack) {
+					gpxFile = GPXUtilities.loadGPXFile(new File(gpxFile.path));
+				}
+				selectGpxFile(gpxFile, true, false);
+				publishProgress();
 			}
 			return "";
 		}
 
 		@Override
-		protected void onProgressUpdate(GPXFile... values) {
-			for (GPXFile gpxFile : values) {
-				selectGpxFile(gpxFile, true, false);
-				gpxTaskListener.onProgressUpdate();
-			}
+		protected void onProgressUpdate(Void... values) {
+			gpxTaskListener.gpxSelectionInProgress();
 		}
 
 		@Override
 		protected void onPreExecute() {
-			gpxTaskListener.onPreExecute();
+			collectSelectedItems();
+			gpxTaskListener.gpxSelectionStarted();
+		}
+
+		private void collectSelectedItems() {
+			for (String filePath : selectedItems.keySet()) {
+				SelectedGpxFile sf;
+				if (!filePath.equals(CURRENT_TRACK)) {
+					sf = getSelectedFileByPath(filePath);
+					if (sf == null) {
+						sf = new SelectedGpxFile();
+						sf.setGpxFile(new GPXFile(null), app);
+					}
+					sf.getGpxFile().path = filePath;
+				} else {
+					sf = getSelectedCurrentRecordingTrack();
+					if (sf == null) {
+						sf = savingTrackHelper.getCurrentTrack();
+					}
+				}
+				boolean visible = false;
+				if (selectedItems.get(filePath) != null) {
+					visible = selectedItems.get(filePath);
+				}
+				if (visible) {
+					originalSelectedItems.add(sf.getGpxFile());
+				}
+				addRemoveSelected(visible, sf);
+			}
 		}
 
 		@Override
 		protected void onPostExecute(String result) {
-			gpxTaskListener.onPostExecute();
+			gpxTaskListener.gpxSelectionFinished();
 		}
 	}
 }
