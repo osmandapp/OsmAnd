@@ -114,15 +114,15 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	public PointDescription getPointDescription(@NonNull Context ctx) {
 		return new PointDescription(PointDescription.POINT_TYPE_FAVORITE, getDisplayName(ctx));
 	}
-	
+
 	public void setColor(int color) {
 		this.color = color;
 	}
-	
+
 	public boolean isVisible() {
 		return visible;
 	}
-	
+
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
@@ -159,7 +159,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
-	
+
 	public String getCategory() {
 		return category;
 	}
@@ -167,7 +167,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	public String getCategoryDisplayName(@NonNull Context ctx) {
 		return FavouritesDbHelper.FavoriteGroup.getDisplayName(ctx, category);
 	}
-	
+
 	public void setCategory(String category) {
 		this.category = category;
 		initPersonalType();
@@ -179,7 +179,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		}
 		return name;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -297,9 +297,9 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	public enum BackType {
-		CIRCLE("CIRCLE", R.drawable.bg_point_circle),
-		RHOMB("RHOMB", R.drawable.bg_point_rhomb),
-		SQUARE("SQUARE", R.drawable.bg_point_square);
+		CIRCLE("circle", R.drawable.bg_point_circle),
+		RHOMB("rhomb", R.drawable.bg_point_rhomb),
+		SQUARE("sqare", R.drawable.bg_point_square);
 
 		private String typeName;
 		@StringRes
@@ -334,7 +334,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		if (iconName != null) {
 			fp.setIconIdFromName(ctx, iconName);
 		}
-		fp.setBackType(BackType.valueOf((pt.getBackType())));
+		fp.setBackType(BackType.valueOf((pt.getBackType().toUpperCase())));
 		return fp;
 	}
 
