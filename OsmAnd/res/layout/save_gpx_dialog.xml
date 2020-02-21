@@ -26,7 +26,7 @@
         android:layout_marginStart="@dimen/bottom_sheet_content_margin"
         android:gravity="center_horizontal"
         android:text="@string/file_with_name_already_exists"
-        android:textColor="@color/marker_red"
+        android:textColor="@color/color_warning"
         android:visibility="invisible"/>
 
     <View
@@ -36,6 +36,7 @@
         android:background="?attr/dashboard_divider"/>
 
     <RelativeLayout
+        android:id="@+id/button_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/content_padding">
@@ -58,6 +59,7 @@
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/toggle_row_toggle"
             android:layout_toStartOf="@id/toggle_row_toggle"
+            android:textColor="?android:textColorPrimary"
             android:text="@string/show_on_map_after_saving"/>
     </RelativeLayout>
 

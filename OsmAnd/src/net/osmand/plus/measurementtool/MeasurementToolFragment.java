@@ -1157,7 +1157,15 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			final View view = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.save_gpx_dialog, null);
 			final EditText nameEt = (EditText) view.findViewById(R.id.gpx_name_et);
 			final TextView warningTextView = (TextView) view.findViewById(R.id.file_exists_text_view);
+			final View buttonView = view.findViewById(R.id.button_view);
 			final SwitchCompat showOnMapToggle = (SwitchCompat) view.findViewById(R.id.toggle_show_on_map);
+			UiUtilities.setupCompoundButton(showOnMapToggle, nightMode, UiUtilities.CompoundButtonType.GLOBAL);
+			buttonView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					showOnMapToggle.setChecked(!showOnMapToggle.isChecked());
+				}
+			});
 			showOnMapToggle.setChecked(true);
 
 			final String suggestedName = new SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(new Date());
