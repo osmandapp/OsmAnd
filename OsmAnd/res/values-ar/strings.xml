@@ -62,7 +62,7 @@
     <string name="incremental_search_city">بحث مدينة تدريجياً</string>
     <string name="safe_mode">الوضع الآمن</string>
     <string name="close_changeset">إغلاق تغيير تعيين</string>
-    <string name="enable_plugin_monitoring_services">تمكين البرنامج المساعد لتسجيل الرحلة باستعمال خدمات تحديد المواقع (تسجيل GPX، وتعقب عبر الإنترنت)</string>
+    <string name="enable_plugin_monitoring_services">تمكين البرنامج المساعد لتسجيل الرحلة باستعمال خدمات تحديد المواقع (تسجيل GPX، وتتبع عبر الإنترنت)</string>
     <string name="non_optimal_route_calculation">ربما لا يكون من الأحسن حساب الطريق لمسافات طويلة</string>
     <string name="map_widget_show_destination_arrow">عرض اتجاه المقصد</string>
     <string name="map_widget_monitoring_services">خدمات التسجيل</string>
@@ -112,7 +112,7 @@
     <string name="osmand_parking_warning">تحذير</string>
     <string name="gpxup_public">عام</string>
     <string name="gpxup_identifiable">يمكن تحديدها</string>
-    <string name="gpxup_trackable">تعقبها</string>
+    <string name="gpxup_trackable">قابل للتتبع</string>
     <string name="gpxup_private">خاص</string>
     <string name="route_kl">الزم اليسار</string>
     <string name="route_kr">الزم اليمين</string>
@@ -330,7 +330,7 @@
     <string name="local_osm_changes_backup_failed">فشلت عملية النسخ الاحتياطي لتعديل OSM.</string>
     <string name="local_osm_changes_backup">نسخ الاحتياطي كتعديل OSM</string>
     <string name="files_limit">%1$d ملف بقى</string>
-    <string name="osmand_background_plugin_description">يظهر الإعدادات لتمكين التعقب والملاحة في وضعية السكون ( الشاشة مغلقة ) عبر إيقاظ دوري لجهاز GPS.</string>
+    <string name="osmand_background_plugin_description">يظهر الإعدادات لتمكين التتبع والملاحة في وضعية السكون ( الشاشة مغلقة ) عبر إيقاظ دوري لجهاز GPS.</string>
     <string name="precise_routing_mode_descr">تمكين لحساب المسارات بدقة دون أخطاء. لا يزال محدود المسافة وبطيء.</string>
     <string name="recording_photo_description">صورة %1$s %2$s</string>
     <string name="dropbox_plugin_description">مزامنة المسارات والملاحظات الصوتية / الفيديو مع حساب Dropbox الخاص بك.</string>
@@ -533,9 +533,9 @@
     <string name="local_openstreetmap_descr_title">التّحرير غير المتزامن مع OSM:</string>
     <string name="local_openstreetmap_settings">نقاط OSM المحفوظة على الجهاز</string>
     <string name="local_openstreetmap_settings_descr">إظهار وإدارة النقاط المهمة / ملاحظات OSM المذكورة في قاعدة البيانات على الجهاز.</string>
-    <string name="live_monitoring_interval_descr">حدد فواصل التعقب المباشر.</string>
-    <string name="live_monitoring_interval">فترة التعقب المباشر</string>
-    <string name="live_monitoring_url">التعقب مباشرة عبر عنوان ويب</string>
+    <string name="live_monitoring_interval_descr">حدد فواصل التتبع المباشر.</string>
+    <string name="live_monitoring_interval">فترة التتبع المباشر</string>
+    <string name="live_monitoring_url">التتبع مباشرة عبر عنوان ويب</string>
     <string name="av_camera_focus_edof">وضع التركيز الكلي (عن قرب)</string>
     <string name="edit_filter_create_message">عامل تصفية %1$s تم إنشاؤه</string>
     <string name="edit_filter_delete_message">عامل تصفية %1$s تم حذفه</string>
@@ -562,7 +562,6 @@
 \n 
 \nالبيانات العالمية (بين 70 درجة شمالا و70 جنوبا) مبنية حسب قياسات SRTM (مكوك رادار البعثة الطبوغرافية) وASTER (المكوك المتقدم الخاص بالانبعاث الحراري والانعكاس الإشعاعي)، أداة تصوير على متن Terra، القمر الصناعي الرئيسي لنظام رصد الأرض التابع لناسا. ASTER هو جهد تعاوني فيما بين وكالة ناسا، وزارة الاقتصاد اليابانية، التجارة والصناعة (METI)، و أنظمة الفضاء اليابانية (J-spacesystems).</string>
     <string name="srtm_plugin_description">يوفر هذا الملحق خطوط محيطية وطبقة تضاريس (طبيعية) تظهر على خرائط أوسماند. هذه الوظيفة ستعجب كثيرا الرياضيين، المتجولين، الرحالة، و كل من تهمه بنية التضاريس الطبيعية (يرجى ملاحظة أن بيانات الخطوط المحيطية / أو المساعدة منفصلة ، وتتوفر تنزيلات إضافية بعد تنشيط الملحق.)
-\n
 \nالبيانات العالمية (ما بين 70 درجة شمالا و70 جنوبا) مبنية على مقاييس SRTM (مكوك رادار البعثة الطبوغرافية) و ASTER (الانبعاث الحراري الفضائي المتقدم والإنعكاس الإشعاعي)، أداة التصوير على متن Terra، القمر الصناعي الرئيسي لنظام رصد الأرض التابع لناسا. 
 \n ASTER هو جهد تعاوني بين كل من وكالة ناسا، وزارة الاقتصاد اليابانية، التجارة والصناعة (METI)، ونظم الفضاء اليابانية (J-spacesystems).</string>
     <string name="osmand_long_description_1000_chars">أوسماند (اتجاهات التنقل الآلية OSM) 
@@ -596,11 +595,9 @@
 \nأجزاء الخرائط يمكن الحصول عليها من مصادر إنترنت، أو تحضيرها للإستخدام دون إنترنت ( ونسخها يدويا إلى مجلد بيانات التطبيق) كقاعدة بيانات SQLite والتي يمكن إنتاجها عن طريق مجموعة متنوعة من أدوات تحضير الخرائط المستقلة.</string>
     <string name="update_poi_does_not_change_indexes">التغييرات POI داخل التطبيق لا تؤثرعلى ملفات الخرائط المحملة، يتم حفظ التغييرات إلى ملف محلي بدلا من ذلك.</string>
     <string name="av_camera_focus_descr">وضع تركيز الكاميرا:</string>
-    <string name="osmand_plus_long_description_1000_chars">أوسماند
-\n 
-\n عبارة عن تطبيق ملاحة مفتوح المصدر مع إمكانية الوصول إلى العديد من بيانات عالمية للموقع. 
-\n كل بيانات الخرائط (خرائط التوجيه أو الخرائط الجزئية) يمكن تخزينها في ذاكرة الجهاز للإستخدام دون إنترنت. يوفر التطبيق كذلك وظائف توجيه بما في ذلك التوجيه الصوتي. 
-\n 
+    <string name="osmand_plus_long_description_1000_chars">أوسماند+ (OSM اتجاهات التنقل التلقائية)
+\n عبارة عن تطبيق ملاحة مفتوح المصدر مع إمكانية الوصول إلى العديد من بيانات عالمية للموقع. كل بيانات الخرائط (خرائط التوجيه أو الخرائط الجزئية) يمكن تخزينها في ذاكرة الجهاز للإستخدام دون إنترنت. يوفر التطبيق كذلك وظائف توجيه بما في ذلك التوجيه الصوتي. 
+\n
 \nبعض الميزات الأساسية: 
 \n - تشغيل كامل دون إنترنت( خزن الخرائط التوجيه أو الخرائط الجزئية المنزلة في ذاكرة الجهاز) 
 \n - خرائط التوجيه المدمجة للعالم ككل متاحة لتعمل دون إنترنت 
@@ -883,6 +880,7 @@
     <string name="routing_attr_avoid_ferries_name">لا العبارات</string>
     <string name="routing_attr_weight_name">وزن المركبة</string>
     <string name="android_19_location_disabled">منذ نسخة أندرويد كتكات 4.4، لا يمكنك تحميل أو تحديث الخرائط في مكان التخزين السابق (%s). هل تريد التغيير إلى مكان مسموح ونسخ كل الملفات إليه ؟ ملاحظات: 1-الملفات القديمة ستبقى كما هي (يمكن حذفها يدويا). 
+\n
 \n2-لايمكن مشاركة الملفات بين أوسماند و +أوسماند في مكان التخزين الجديد.</string>
     <string name="copying_osmand_one_file_descr">ينسخ الملف (%s) إلى مساره الجديد…</string>
     <string name="arrival_distance">تنبيه الوصول</string>
@@ -989,7 +987,7 @@
     <string name="rotate_map_compass_opt">حسب البوصلة</string>
     <string name="gpx_monitoring_start">بدء التسجيل</string>
     <string name="traffic_warning_stop">إشارة توقف</string>
-    <string name="live_monitoring_stop">إيقاف التعقب على الإنترنت</string>
+    <string name="live_monitoring_stop">إيقاف التتبع على الإنترنت</string>
     <string name="gpx_monitoring_stop">إيقاف</string>
     <string name="transport_Stop">موقف</string>
     <string name="transport_stops">مواقف</string>
@@ -1129,9 +1127,9 @@
     <string name="lang_he">العبرية</string>
     <string name="forward">للأمام</string>
     <string name="home">لوحة التحكم</string>
-    <string name="live_monitoring_m_descr">إرسال التعقب لخدمة ويب محددة إذا تم تمكين تسجيل GPX.</string>
-    <string name="live_monitoring_m">التعقب المباشر (GPX مطلوب)</string>
-    <string name="live_monitoring_start">بدء التعقب على الإنترنت</string>
+    <string name="live_monitoring_m_descr">إرسال التتبع لخدمة ويب محددة إذا تم تمكين تسجيل GPX.</string>
+    <string name="live_monitoring_m">التتبع المباشر (GPX مطلوب)</string>
+    <string name="live_monitoring_start">بدء التتبع على الإنترنت</string>
     <string name="gpx_start_new_segment">بدء تسجيل جديد</string>
     <string name="rendering_attr_hideBuildings_name">المباني</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">الطرق السريعة غير المخصصة للمركبات</string>
@@ -1332,7 +1330,7 @@
     <string name="none_region_found">لا توجد أي بيانات بدون اتصال للمناطق والأقاليم على الذاكرة. قم بتحميل المناطق من الإنترنت.</string>
     <string name="any_poi">أي</string>
     <string name="background_service_int_descr">حدد الفاصل الزمني للإيقاظ لخدمة الخلفية:</string>
-    <string name="background_router_service_descr">يتعقب موقعك أثناء إيقاف تشغيل الشاشة.</string>
+    <string name="background_router_service_descr">تتبع موقعك أثناء إيقاف تشغيل الشاشة.</string>
     <string name="off_router_service_no_gps_available">يجب تشغيل الموقع.</string>
     <string name="first_time_download">تحميل المناطق</string>
     <string name="transport_finish_search">إنهاء البحث</string>
@@ -1930,7 +1928,7 @@
     <string name="layer_yandex_traffic">حركة مرور Yandex</string>
     <string name="layer_poi">نقاط الاهتمام POI…</string>
     <string name="context_menu_item_search_poi">بحث عن نقاط الاهتمام</string>
-    <string name="use_trackball_descr">استخدم كرة التعقب لتحريك الخريطة.</string>
+    <string name="use_trackball_descr">استخدم كرة التتبع لتحريك الخريطة.</string>
     <string name="use_trackball">استخدم كرة التعقب</string>
     <string name="route_stops_before">%1$s محطة توقف قبل</string>
     <string name="map_legend">مفتاح الخريطة</string>
@@ -1991,6 +1989,7 @@
     <string name="value_downloaded_of_max">%1$.1f من %2$.1f مب</string>
     <string name="file_size_in_mb">%.1f مب</string>
     <string name="plugin_ski_descr">أداة أوسماند هذه تضع بين يديك تفاصيل منحدرات تزلج عالمية، مسارات تزلج عبر كامل البلاد، التلفريك ومصاعد التزلج. الطرقات والمعابر مبينة بألوان حسب الصعوبة،
+\n
 \nومصورة بنمط خريطة مميز \'شتوي\' تمثل مناظر الطبيعة بلون مثلج شتوي.</string>
     <string name="rendering_attr_hideOverground_name">أشياء فوق سطح الأرض</string>
     <string name="shared_string_change">تغيير</string>
@@ -2220,7 +2219,7 @@
     <string name="select_gpx_folder">حدد مجلد المسار</string>
     <string name="shared_string_gpx_tracks">المسارات</string>
     <string name="shared_string_time">الوقت</string>
-    <string name="osmand_plus_extended_description_part8">التغطية التقريبية للخريطة و جودتها : 
+    <string name="osmand_plus_extended_description_part8">التغطية التقريبية للخريطة و جودتها :
 \n• أوروبا الغربية : **** 
 \n• أوروبا الشرقية : *** 
 \n• روسيا : *** 
@@ -2326,9 +2325,17 @@
 \n• يدعم النقاط الوسيطة وسط مسار الرحلة 
 \n• يمكنك تسجيل مسار GPX الخاص بك أو رفعه ومتابعته
 \n</string>
-    <string name="osmand_extended_description_part3">خريطة • \"عرض النقاط POI\" (نقطة اهتمام) من حولك • ضبط الخريطة اتجاه الحركة أو (البوصلة) • إظهار مكانك الحالي وما يقابلك • مشاركة موقعك حتى يتسنى لأصدقاء إيجادك • الاحتفاظ بأهم الأماكن في المفضلة • يسمح لك باختيار كيفية عرض الأسماء على الخريطة: باللغة الإنجليزية، اللغة المحلية أو حسب الإملاء الصوتي • إظهار نمط خريطة إنترنت متخصص ، صورة قمر صناعي (بينج)، إظهار طبقات خريطة متراكبة مختلفة كالسياحة/مسارات GPX للملاحة وطبقات إضافية مع شفافية قابلة للتعديل
+    <string name="osmand_extended_description_part3">خريطة 
+\n• \"عرض النقاط POI\" (نقطة اهتمام) من حولك 
+\n• ضبط الخريطة اتجاه الحركة أو (البوصلة)
+\n• إظهار مكانك الحالي وما يقابلك 
+\n• مشاركة موقعك حتى يتسنى لأصدقاء إيجادك 
+\n• الاحتفاظ بأهم الأماكن في المفضلة 
+\n• يسمح لك باختيار كيفية عرض الأسماء على الخريطة: باللغة الإنجليزية، اللغة المحلية أو حسب الإملاء الصوتي 
+\n• إظهار نمط خريطة إنترنت متخصص ، صورة قمر صناعي (بينج)، إظهار طبقات خريطة متراكبة مختلفة كالسياحة/مسارات GPX للملاحة وطبقات إضافية مع شفافية قابلة للتعديل
 \n</string>
-    <string name="osmand_extended_description_part4">البرنامج المساعد لخرائط تزلج أوسماند للتزلج يمكنك من مشاهدة مسارات التزلج مع مستوى من التعقيد وبعض المعلومات الإضافية، كمواقع المصاعد والمرافق الأخرى.</string>
+    <string name="osmand_extended_description_part4">التزلج
+\nالبرنامج المساعد لخرائط تزلج أوسماند للتزلج يمكنك من مشاهدة مسارات التزلج مع مستوى من التعقيد وبعض المعلومات الإضافية، كمواقع المصاعد والمرافق الأخرى.</string>
     <string name="osmand_extended_description_part5">ركوب الدراجات الهوائية
 \n• العثورعلى مسار دراجات على الخريطة
 \n• التنقل في وضع ركوب الدراجات تقترح لك مسار دراجات
@@ -2340,7 +2347,6 @@
 \n• ويكيبيديا سيخبرك الكثير اثناء جولتك وبلغتك المفضلة 
 \n• مواقف نقل عام (حافلة ،ترام ،قطار)، بما في ذلك أسماء خطوط النقل ويساعدك على التجول في مدينة جديدة 
 \n• التجول عبر الGPS وفي وضع المشاة يحدد طريقك باستعمال ممرات المشي 
-\n 
 \n• يمكنك تسجيل ورفع مسارات الGPX ومتابعتها ومشاركتها
 \n</string>
     <string name="osmand_extended_description_part8">أوسماند تطبيق بمصدر مفتوح ويتم تطويره بنشاط. يمكن للجميع أن يساهم بالإبلاغ عن الأخطاء، تحسين الترجمة أو تطوير ميزات جديدة. هذا المشروع في تحسين مستمر عبر جميع أشكال تفاعل المطورين والمستخدمين. التقدم المحرز في المشروع يعتمد أيضا على المساهمات المالية لتمويل التطوير واختبار الميزات جديدة. 
@@ -2365,10 +2371,20 @@
 \n• يدعم نقاط وسيطة خلال مسارك 
 \n• إعادة تلقائية للتوجيه كلما انحرفت عن الطريق 
 \n• البحث عن الأماكن حسب العنوان، النوع (مثل: مطعم، فندق، محطة وقود، متحف)، أو حسب الإحداثيات الجغرافية</string>
-    <string name="osmand_plus_extended_description_part3">عرض الخريطة • عرض موقعك والتوجيه • محاذاة اختيارية للصورة وفق البوصلة أو توجيه الحركة • حفظ أهم أماكنك المفضلة • عرض النقاط المهمة من حولك (POI) • عرض متخصص لبيانات خرائط على الإنترنت، الرؤية من الأقمار الصناعية (من بينج) وتراكب طبقات خرائط مختلفة كالسياحة ومسارات GPX للملاحة وطبقات إضافية مع شفافية قابلة للتعديل • عرض اختياري لأسماء الأماكن باللغة الإنكليزية، اللغة المحلية، أو عبر الإملاء الصوتي
+    <string name="osmand_plus_extended_description_part3">عرض الخريطة 
+\n• عرض موقعك والتوجيه 
+\n• محاذاة اختيارية للصورة وفق البوصلة أو توجيه الحركة 
+\n• حفظ أهم أماكنك المفضلة 
+\n• عرض النقاط المهمة من حولك (POI) 
+\n• عرض متخصص لبيانات خرائط على الإنترنت، الرؤية من الأقمار الصناعية (من بينج) وتراكب طبقات خرائط مختلفة كالسياحة ومسارات GPX للملاحة وطبقات إضافية مع شفافية قابلة للتعديل 
+\n• عرض اختياري لأسماء الأماكن باللغة الإنكليزية، اللغة المحلية، أو عبر الإملاء الصوتي
 \n</string>
     <string name="osmand_plus_extended_description_part4">استخدام OSM وبيانات ويكيبيديا • جودة معلومات من أفضل المشاريع التعاونية العالمية • بيانات OSM متاحة لكل بلد أو منطقة • POI ويكيبيديا، الأفضل لمشاهدة المعالم السياحية • التنزيلات مجانية غير محدودة، مباشرة من التطبيق • خرائط فيكتور مدمجة تحدث مرة واحدة في شهر على الأقل • اختر بين بيانات منطقة كاملة أو شبكة الطرق فقط (مثال: سعة اليابان 700 MB في حين 200 MB لشبكة الطرق فقط)</string>
-    <string name="osmand_plus_extended_description_part5">ميزات الأمان • عرض اختياري لوضع النهار/اليل • عرض اختياري للحد الأقصى للسرعة، مع التذكير إذا حصل تجاوز • تكبير/تصغيير اختياري حسب السرعة • مشاركة موقعك حتى يتمكن لأصدقاءك ايجادك
+    <string name="osmand_plus_extended_description_part5">ميزات الأمان 
+\n• عرض اختياري لوضع النهار/اليل 
+\n• عرض اختياري للحد الأقصى للسرعة، مع التذكير إذا حصل تجاوز 
+\n• تكبير/تصغيير اختياري حسب السرعة 
+\n• مشاركة موقعك حتى يتمكن لأصدقاءك ايجادك
 \n</string>
     <string name="osmand_plus_extended_description_part6">ميزات الدراجة والمشاة • عرض ممرات المشاة، التنزه، وأنشطة الهواء الطلق • توجيه متخصص وعرض طرق خاصة باللدراجات الهوائية والمشاة • محطات نقل عام اختيارية (حافلات، الترامواي، القطار) بما في ذلك أسماء خطوط النقل • تسجيل رحلة اختياري إلى ملف GPX محلي أو لخدمة على الإنترنت • عرض اختياري للسرعة والارتفاع • عرض الخطوط الكنتورية والتضاريس (عن طريق برامج مساعدة إضافية)</string>
     <string name="osmand_plus_extended_description_part7">المساهمة مباشرة في OSM 
@@ -2411,7 +2427,7 @@
     <string name="quick_action_start_stop_navigation">بدء/إنهاء الملاحة</string>
     <string name="quick_action_start_stop_navigation_descr">زر لبدء أو إنهاء التنقل.</string>
     <string name="live_monitoring_max_interval_to_send">الوقت الفاصل</string>
-    <string name="live_monitoring_max_interval_to_send_desrc">حدد فاصل لوقت التخزين المؤقت للحفاظ على المواقع لإرسالها دون اتصال عند التعقب المباشر</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">حدد فاصل لوقت التخزين المؤقت للحفاظ على المواقع لإرسالها دون اتصال عند التتبع المباشر</string>
     <string name="mappilary_no_internet_desc">تحتاج أن تكون متصلا بالإنترنت لعرض صور من mapillary.</string>
     <string name="retry">أعد المحاولة</string>
     <string name="measurement_tool_action_bar">تصفح الخريطة وإضافة نقاط</string>
@@ -3346,7 +3362,7 @@
     <string name="osm_editing_prefs_descr">تسجيل الدخول ، كلمة المرور ، تحرير دون نت</string>
     <string name="accessibility_prefs_descr">اختر الرمز ،اللون والاسم</string>
     <string name="live_monitoring_descr">تتيح لك مشاركة الموقع الحالي باستخدام تسجيل الرحلة.</string>
-    <string name="live_monitoring">تعقب عبر الانترنت</string>
+    <string name="live_monitoring">تتبع عبر الانترنت</string>
     <string name="save_track_logging_accuracy">دقة التسجيل</string>
     <string name="video_notes">ملاحظات الفيديو</string>
     <string name="photo_notes">ملاحظات الصورة</string>
