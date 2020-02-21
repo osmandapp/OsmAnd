@@ -805,7 +805,7 @@ public class SettingsHelper {
 				@Override
 				public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
 					OutputStream output;
-					if (shouldReplace || !file.exists()) {
+					if (!file.exists() || file.exists() && shouldReplace) {
 						output = new FileOutputStream(file);
 					} else {
 						output = new FileOutputStream(renameFile(file));
@@ -847,6 +847,7 @@ public class SettingsHelper {
 			this.app = app;
 			actionRegistry = app.getQuickActionRegistry();
 			existingItems = actionRegistry.getQuickActions();
+			duplicateItems = new ArrayList<>();
 		}
 
 		QuickActionSettingsItem(@NonNull OsmandApplication app,
@@ -855,6 +856,7 @@ public class SettingsHelper {
 			this.app = app;
 			actionRegistry = app.getQuickActionRegistry();
 			existingItems = actionRegistry.getQuickActions();
+			duplicateItems = new ArrayList<>();
 		}
 
 		@Override
@@ -871,7 +873,6 @@ public class SettingsHelper {
 		@NonNull
 		@Override
 		public List<QuickAction> excludeDuplicateItems() {
-			duplicateItems = new ArrayList<>();
 			for (QuickAction item : items) {
 				if (isDuplicate(item)) {
 					duplicateItems.add(item);
@@ -1026,12 +1027,14 @@ public class SettingsHelper {
 			super(SettingsItemType.POI_UI_FILTERS, items);
 			this.app = app;
 			existingItems = app.getPoiFilters().getUserDefinedPoiFilters(false);
+			duplicateItems = new ArrayList<>();
 		}
 
 		PoiUiFilterSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			super(SettingsItemType.POI_UI_FILTERS, json);
 			this.app = app;
 			existingItems = app.getPoiFilters().getUserDefinedPoiFilters(false);
+			duplicateItems = new ArrayList<>();
 		}
 
 		@Override
@@ -1061,7 +1064,6 @@ public class SettingsHelper {
 		@NonNull
 		@Override
 		public List<PoiUIFilter> excludeDuplicateItems() {
-			duplicateItems = new ArrayList<>();
 			if (!items.isEmpty()) {
 				for (PoiUIFilter item : items) {
 					if (isDuplicate(item)) {
@@ -1212,6 +1214,7 @@ public class SettingsHelper {
 			this.app = app;
 			Collection values = new LinkedHashMap<>(app.getSettings().getTileSourceEntries(true)).values();
 			existingItemsNames = new ArrayList(values);
+			duplicateItems = new ArrayList<>();
 		}
 
 		MapSourcesSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
@@ -1219,6 +1222,7 @@ public class SettingsHelper {
 			this.app = app;
 			Collection values = new LinkedHashMap<>(app.getSettings().getTileSourceEntries(true)).values();
 			existingItemsNames = new ArrayList(values);
+			duplicateItems = new ArrayList<>();
 		}
 
 		@Override
@@ -1261,7 +1265,6 @@ public class SettingsHelper {
 		@NonNull
 		@Override
 		public List<ITileSource> excludeDuplicateItems() {
-			duplicateItems = new ArrayList<>();
 			for (String name : existingItemsNames) {
 				for (ITileSource tileSource : items) {
 					if (name.equals(tileSource.getName())) {
@@ -1456,6 +1459,7 @@ public class SettingsHelper {
 			settings = app.getSettings();
 			specificRoads = app.getAvoidSpecificRoads();
 			existingItems = new ArrayList<>(specificRoads.getImpassableRoads().values());
+			duplicateItems = new ArrayList<>();
 		}
 
 		AvoidRoadsSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
@@ -1464,6 +1468,7 @@ public class SettingsHelper {
 			settings = app.getSettings();
 			specificRoads = app.getAvoidSpecificRoads();
 			existingItems = new ArrayList<>(specificRoads.getImpassableRoads().values());
+			duplicateItems = new ArrayList<>();
 		}
 
 		@NonNull
@@ -1486,27 +1491,28 @@ public class SettingsHelper {
 
 		@Override
 		public void apply() {
-			for (AvoidRoadInfo duplicate : duplicateItems) {
-				if (shouldReplace) {
-					LatLon latLon = new LatLon(duplicate.latitude, duplicate.longitude);
-					if (settings.removeImpassableRoad(latLon)) {
-						settings.addImpassableRoad(duplicate);
+			if (!items.isEmpty() || !duplicateItems.isEmpty()) {
+				for (AvoidRoadInfo duplicate : duplicateItems) {
+					if (shouldReplace) {
+						LatLon latLon = new LatLon(duplicate.latitude, duplicate.longitude);
+						if (settings.removeImpassableRoad(latLon)) {
+							settings.addImpassableRoad(duplicate);
+						}
+					} else {
+						settings.addImpassableRoad(renameItem(duplicate));
 					}
-				} else {
-					settings.addImpassableRoad(duplicate);
 				}
+				for (AvoidRoadInfo avoidRoad : items) {
+					settings.addImpassableRoad(avoidRoad);
+				}
+				specificRoads.loadImpassableRoads();
+				specificRoads.initRouteObjects(true);
 			}
-			for (AvoidRoadInfo avoidRoad : items) {
-				settings.addImpassableRoad(avoidRoad);
-			}
-			specificRoads.loadImpassableRoads();
-			specificRoads.initRouteObjects(true);
 		}
 
 		@NonNull
 		@Override
 		public List<AvoidRoadInfo> excludeDuplicateItems() {
-			duplicateItems = new ArrayList<>();
 			for (AvoidRoadInfo item : items) {
 				if (isDuplicate(item)) {
 					duplicateItems.add(item);
@@ -1517,9 +1523,11 @@ public class SettingsHelper {
 		}
 
 		@Override
-		public boolean isDuplicate(AvoidRoadInfo item) {
+		public boolean isDuplicate(@NonNull AvoidRoadInfo item) {
 			for (AvoidRoadInfo existingItem : existingItems) {
-				if (item.latitude == existingItem.latitude && item.longitude == existingItem.longitude) {
+				if (item.latitude == existingItem.latitude
+						&& item.longitude == existingItem.longitude
+						&& item.name.equals(existingItem.name)) {
 					return true;
 				}
 			}
@@ -1537,9 +1545,13 @@ public class SettingsHelper {
 			int number = 0;
 			while (true) {
 				number++;
-				AvoidRoadInfo renamedItem = item;
-				renamedItem.name = renamedItem.name + "_" + number;
+				AvoidRoadInfo renamedItem = new AvoidRoadInfo();
+				renamedItem.name = item.name + "_" + number;
 				if (!isDuplicate(renamedItem)) {
+					renamedItem.id = item.id;
+					renamedItem.latitude = item.latitude;
+					renamedItem.longitude = item.longitude;
+					renamedItem.appModeKey = item.appModeKey;
 					return renamedItem;
 				}
 			}
@@ -1581,7 +1593,11 @@ public class SettingsHelper {
 							roadInfo.latitude = latitude;
 							roadInfo.longitude = longitude;
 							roadInfo.name = name;
-							roadInfo.appModeKey = appModeKey;
+							if (ApplicationMode.valueOfStringKey(appModeKey, null) != null) {
+								roadInfo.appModeKey = appModeKey;
+							} else {
+								roadInfo.appModeKey = app.getRoutingHelper().getAppMode().getStringKey();
+							}
 							items.add(roadInfo);
 						}
 					} catch (JSONException e) {
@@ -1814,7 +1830,12 @@ public class SettingsHelper {
 						if (item != null && collecting && item.shouldReadOnCollecting()
 								|| item != null && !collecting && !item.shouldReadOnCollecting()) {
 							try {
-								item.getReader().readFromStream(ois);
+								for (SettingsItem settingsItem : items) {
+									if (item.getFileName().equals(settingsItem.getFileName())) {
+										item.setShouldReplace(settingsItem.shouldReplace);
+										item.getReader().readFromStream(ois);
+									}
+								}
 							} catch (IllegalArgumentException e) {
 								LOG.error("Error reading item data: " + item.getName(), e);
 							} catch (IOException e) {

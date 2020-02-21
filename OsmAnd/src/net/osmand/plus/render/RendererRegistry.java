@@ -239,9 +239,20 @@ public class RendererRegistry {
 	}
 	
 	public void initRenderers(IProgress progress) {
+		updateExternalRenderers();
+		String r = app.getSettings().RENDERER.get();
+		if(r != null){
+			RenderingRulesStorage obj = getRenderer(r);
+			if(obj != null){
+				setCurrentSelectedRender(obj);
+			}
+		}
+	}
+
+	public void updateExternalRenderers() {
 		File file = app.getAppPath(IndexConstants.RENDERERS_DIR);
 		file.mkdirs();
-		Map<String, File> externalRenderers = new LinkedHashMap<String, File>(); 
+		Map<String, File> externalRenderers = new LinkedHashMap<String, File>();
 		if (file.exists() && file.canRead()) {
 			File[] lf = file.listFiles();
 			if (lf != null) {
@@ -256,13 +267,6 @@ public class RendererRegistry {
 			}
 		}
 		this.externalRenderers = externalRenderers;
-		String r = app.getSettings().RENDERER.get();
-		if(r != null){
-			RenderingRulesStorage obj = getRenderer(r);
-			if(obj != null){
-				setCurrentSelectedRender(obj);
-			}
-		}
 	}
 	
 	public Collection<String> getRendererNames(){

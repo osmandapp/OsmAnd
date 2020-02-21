@@ -1,9 +1,13 @@
 package net.osmand.plus.settings;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +16,7 @@ import android.widget.ExpandableListView;
 
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -43,7 +48,7 @@ public class ImportSettingsFragment extends BaseOsmAndDialogFragment
 	private boolean allSelected;
 	private boolean nightMode;
 
-	public static void showInstance(@NonNull FragmentManager fm, @NonNull List<SettingsItem> settingsItems, @NonNull File file) {
+	public static void showInstance(@NonNull FragmentManager fm, List<SettingsItem> settingsItems, @NonNull File file) {
 		ImportSettingsFragment fragment = new ImportSettingsFragment();
 		fragment.setSettingsItems(settingsItems);
 		fragment.setFile(file);
@@ -57,9 +62,15 @@ public class ImportSettingsFragment extends BaseOsmAndDialogFragment
 		nightMode = !getSettings().isLightContent();
 		if (settingsItems == null) {
 			settingsItems = app.getSettingsHelper().getSettingsItems();
+			if (settingsItems == null) {
+				dismiss();
+			}
 		}
 		if (file == null) {
 			file = app.getSettingsHelper().getSettingsFile();
+			if (file == null) {
+				dismiss();
+			}
 		}
 	}
 
@@ -82,6 +93,17 @@ public class ImportSettingsFragment extends BaseOsmAndDialogFragment
 		super.onViewCreated(view, savedInstanceState);
 		adapter = new ExportImportSettingsAdapter(getMyApplication(), getSettingsToOperate(), nightMode, true);
 		expandableList.setAdapter(adapter);
+	}
+
+	@NonNull
+	@Override
+	public Dialog onCreateDialog(Bundle savedInstanceState) {
+		return new Dialog(requireActivity(), getTheme()) {
+			@Override
+			public void onBackPressed() {
+				showExitDialog();
+			}
+		};
 	}
 
 	@Override
@@ -113,6 +135,12 @@ public class ImportSettingsFragment extends BaseOsmAndDialogFragment
 				public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
 					if (succeed) {
 						app.showShortToastMessage(app.getString(R.string.file_imported_successfully, file.getName()));
+						app.getRendererRegistry().updateExternalRenderers();
+						AppInitializer.loadRoutingFiles(app, new AppInitializer.LoadRoutingFilesCallback() {
+							@Override
+							public void onRoutingFilesLoaded() {
+							}
+						});
 					} else if (empty) {
 						app.showShortToastMessage(app.getString(R.string.file_import_error, file.getName(), app.getString(R.string.shared_string_unexpected_error)));
 					}
@@ -125,7 +153,7 @@ public class ImportSettingsFragment extends BaseOsmAndDialogFragment
 		}
 	}
 
-	private List<Object> getDuplicatesData(List<SettingsItem> items) {
+	public static List<Object> getDuplicatesData(List<SettingsItem> items) {
 		List<Object> duplicateItems = new ArrayList<>();
 		for (SettingsItem item : items) {
 			if (item instanceof SettingsHelper.ProfileSettingsItem) {
@@ -275,15 +303,30 @@ public class ImportSettingsFragment extends BaseOsmAndDialogFragment
 		return settingsToOperate;
 	}
 
+	public void showExitDialog() {
+		Context themedContext = UiUtilities.getThemedContext(getActivity(), nightMode);
+		AlertDialog.Builder dismissDialog = new AlertDialog.Builder(themedContext);
+		dismissDialog.setTitle(getString(R.string.shared_string_dismiss));
+		dismissDialog.setMessage(getString(R.string.exit_without_saving));
+		dismissDialog.setNegativeButton(R.string.shared_string_cancel, null);
+		dismissDialog.setPositiveButton(R.string.shared_string_exit, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dismiss();
+			}
+		});
+		dismissDialog.show();
+	}
+
 	private void setupToolbar(Toolbar toolbar) {
-		toolbar.setNavigationIcon(getPaintedContentIcon(R.drawable.headline_close_button, nightMode
+		toolbar.setNavigationIcon(getPaintedContentIcon(R.drawable.ic_action_close, nightMode
 				? getResources().getColor(R.color.active_buttons_and_links_text_dark)
 				: getResources().getColor(R.color.active_buttons_and_links_text_light)));
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismiss();
+				showExitDialog();
 			}
 		});
 	}

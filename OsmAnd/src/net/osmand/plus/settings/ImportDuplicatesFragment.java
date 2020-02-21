@@ -1,5 +1,6 @@
 package net.osmand.plus.settings;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import net.osmand.map.ITileSource;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -27,6 +29,8 @@ import net.osmand.view.ComplexButton;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.plus.settings.ImportSettingsFragment.getDuplicatesData;
 
 
 public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implements View.OnClickListener {
@@ -46,7 +50,6 @@ public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implement
 		fragment.setDuplicatesList(duplicatesList);
 		fragment.setSettingsItems(settingsItems);
 		fragment.setFile(file);
-		fragment.setRetainInstance(true);
 		fragment.show(fm, TAG);
 	}
 
@@ -55,6 +58,20 @@ public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implement
 		super.onCreate(savedInstanceState);
 		app = getMyApplication();
 		nightMode = !getSettings().isLightContent();
+		if (settingsItems == null) {
+			settingsItems = app.getSettingsHelper().getSettingsItems();
+			if (settingsItems != null) {
+				duplicatesList = getDuplicatesData(settingsItems);
+			} else {
+				dismiss();
+			}
+		}
+		if (file == null) {
+			file = app.getSettingsHelper().getSettingsFile();
+			if (file == null) {
+				dismiss();
+			}
+		}
 	}
 
 	@Nullable
@@ -80,6 +97,21 @@ public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implement
 		list = root.findViewById(R.id.list);
 
 		return root;
+	}
+
+	@NonNull
+	@Override
+	public Dialog onCreateDialog(Bundle savedInstanceState) {
+		return new Dialog(requireActivity(), getTheme()) {
+			@Override
+			public void onBackPressed() {
+				FragmentManager fm = getFragmentManager();
+				if (fm != null) {
+					ImportSettingsFragment.showInstance(fm, null, file);
+				}
+				dismiss();
+			}
+		};
 	}
 
 	@Override
@@ -174,6 +206,12 @@ public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implement
 			public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
 				if (succeed) {
 					app.showShortToastMessage(app.getString(R.string.file_imported_successfully, file.getName()));
+					app.getRendererRegistry().updateExternalRenderers();
+					AppInitializer.loadRoutingFiles(app, new AppInitializer.LoadRoutingFilesCallback() {
+						@Override
+						public void onRoutingFilesLoaded() {
+						}
+					});
 				} else if (empty) {
 					app.showShortToastMessage(app.getString(R.string.file_import_error, file.getName(), app.getString(R.string.shared_string_unexpected_error)));
 				}
@@ -191,6 +229,10 @@ public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implement
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				FragmentManager fm = getFragmentManager();
+				if (fm != null) {
+					ImportSettingsFragment.showInstance(fm, null, file);
+				}
 				dismiss();
 			}
 		});

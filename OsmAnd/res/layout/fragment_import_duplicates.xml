@@ -44,8 +44,7 @@
 		android:paddingBottom="@dimen/list_header_settings_top_margin"
 		android:text="@string/import_duplicates_description"
 		android:textColor="?android:textColorPrimary"
-		android:textSize="@dimen/default_list_text_size"
-		osmand:typeface="@string/font_roboto_medium" />
+		android:textSize="@dimen/default_list_text_size" />
 
 	<include
 		android:id="@+id/description_divider"
@@ -57,8 +56,7 @@
 		android:layout_height="0dp"
 		android:layout_weight="1" />
 
-	<include
-		layout="@layout/card_top_divider" />
+	<include layout="@layout/divider" />
 
 	<LinearLayout
 		android:layout_width="match_parent"

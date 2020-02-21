@@ -121,7 +121,7 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 				itemHolder.subTitle.setVisibility(View.GONE);
 			} else if (currentItem instanceof AvoidRoadInfo) {
 				itemHolder.title.setText(((AvoidRoadInfo) currentItem).name);
-				itemHolder.icon.setImageResource(R.drawable.map_pin_avoid_road);
+				itemHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_alert, nightMode));
 				itemHolder.subTitle.setVisibility(View.GONE);
 				itemHolder.icon.setVisibility(View.VISIBLE);
 			}

@@ -217,7 +217,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 			case AVOID_ROADS:
 				AvoidRoadInfo avoidRoadInfo = (AvoidRoadInfo) currentItem;
 				title.setText(avoidRoadInfo.name);
-				icon.setImageResource(R.drawable.map_pin_avoid_road);
+				icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_alert, nightMode));
 				icon.setVisibility(View.VISIBLE);
 				subText.setVisibility(View.GONE);
 				break;
