@@ -14,6 +14,7 @@ import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -462,22 +463,29 @@ public class UiUtilities {
 		compoundButton.setBackgroundColor(Color.TRANSPARENT);
 	}
 	
-	public static void setupSeekBar(OsmandApplication app, SeekBar seekBar, boolean nightMode, boolean profileDependent) {
+	public static void setupSeekBar(@NonNull OsmandApplication app, @NonNull SeekBar seekBar, 
+	                                boolean nightMode, boolean profileDependent) {
 		int activeColor = ContextCompat.getColor(app, profileDependent ?
 				app.getSettings().APPLICATION_MODE.get().getIconColorInfo().getColor(nightMode) :
 				nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 		setupSeekBar(seekBar, activeColor, nightMode);
 	}
 
-	public static void setupSeekBar(SeekBar seekBar, @ColorInt int activeColor, boolean nightMode) {
-		int backgroundColor = ContextCompat.getColor(seekBar.getContext(),
-				nightMode ? R.color.icon_color_secondary_dark : R.color.icon_color_default_light);
+	public static void setupSeekBar(@NonNull SeekBar seekBar, @ColorInt int activeColor, boolean nightMode) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-			LayerDrawable progressBarDrawable = (LayerDrawable) seekBar.getProgressDrawable();
-			Drawable backgroundDrawable = progressBarDrawable.getDrawable(0);
-			Drawable progressDrawable = progressBarDrawable.getDrawable(2);
-			backgroundDrawable.setColorFilter(backgroundColor, PorterDuff.Mode.SRC_IN);
-			progressDrawable.setColorFilter(activeColor, PorterDuff.Mode.SRC_IN);
+			int backgroundColor = ContextCompat.getColor(seekBar.getContext(), nightMode
+					? R.color.icon_color_secondary_dark : R.color.icon_color_default_light);
+			if (seekBar.getProgressDrawable() instanceof LayerDrawable) {
+				LayerDrawable progressDrawable = (LayerDrawable) seekBar.getProgressDrawable();
+				Drawable background = progressDrawable.findDrawableByLayerId(android.R.id.background);
+				if (background != null) {
+					background.setColorFilter(backgroundColor, PorterDuff.Mode.SRC_IN);
+				}
+				Drawable progress = progressDrawable.findDrawableByLayerId(android.R.id.progress);
+				if (progress != null) {
+					progress.setColorFilter(activeColor, PorterDuff.Mode.SRC_IN);
+				}
+			}
 			seekBar.getThumb().setColorFilter(activeColor, PorterDuff.Mode.SRC_IN);
 		}
 	}
