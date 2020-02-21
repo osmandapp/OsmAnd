@@ -205,7 +205,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	@Override
 	public void onResume() {
 		super.onResume();
-
+		selectedGpxHelper.setGpxTaskListener(gpxTaskListener);
 		if (!importing) {
 			if (asyncLoader == null || asyncLoader.getResult() == null) {
 				asyncLoader = new LoadGpxTask();
@@ -225,6 +225,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	@Override
 	public void onPause() {
 		super.onPause();
+		selectedGpxHelper.setGpxTaskListener(null);
 		updateEnable = false;
 		if (operationTask != null) {
 			operationTask.cancel(true);
@@ -656,7 +657,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			String path = gpxInfo.currentlyRecordingTrack ? CURRENT_TRACK : gpxInfo.file.getAbsolutePath();
 			selectedItemsFileNames.put(path, selectedItems.contains(gpxInfo));
 		}
-		selectedGpxHelper.runSelection(selectedItemsFileNames, gpxTaskListener);
+		selectedGpxHelper.runSelection(selectedItemsFileNames);
 	}
 
 	public void openSelectionMode(final int actionResId, int darkIcon, int lightIcon,

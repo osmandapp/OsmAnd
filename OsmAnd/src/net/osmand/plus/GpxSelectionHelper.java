@@ -56,8 +56,12 @@ public class GpxSelectionHelper {
 	private Map<GPXFile, Long> selectedGpxFilesBackUp = new java.util.HashMap<>();
 	private SavingTrackHelper savingTrackHelper;
 	private final static Log LOG = PlatformUtil.getLog(GpxSelectionHelper.class);
-	SelectGpxTask selectGpxTask;
+	private SelectGpxTask selectGpxTask;
+	private SelectGpxTaskListener gpxTaskListener;
 
+	public void setGpxTaskListener(SelectGpxTaskListener gpxTaskListener) {
+		this.gpxTaskListener = gpxTaskListener;
+	}
 
 	public GpxSelectionHelper(OsmandApplication osmandApplication, SavingTrackHelper trackHelper) {
 		this.app = osmandApplication;
@@ -625,7 +629,7 @@ public class GpxSelectionHelper {
 		return sf;
 	}
 
-	public void addRemoveSelected(boolean show, SelectedGpxFile sf) {
+	private void addRemoveSelected(boolean show, SelectedGpxFile sf) {
 		List<SelectedGpxFile> newSelectedGPXFiles = new ArrayList<>(selectedGPXFiles);
 		if (show) {
 			if (!newSelectedGPXFiles.contains(sf)) {
@@ -963,12 +967,12 @@ public class GpxSelectionHelper {
 		}
 	}
 
-	public void runSelection(Map<String, Boolean> selectedItems, SelectGpxTaskListener gpxTaskListener) {
+	public void runSelection(Map<String, Boolean> selectedItems) {
 		if (selectGpxTask != null && (selectGpxTask.getStatus() == AsyncTask.Status.RUNNING
 				|| selectGpxTask.getStatus() == AsyncTask.Status.PENDING)) {
 			selectGpxTask.cancel(false);
 		}
-		selectGpxTask = new SelectGpxTask(selectedItems, gpxTaskListener);
+		selectGpxTask = new SelectGpxTask(selectedItems);
 		selectGpxTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
@@ -984,12 +988,10 @@ public class GpxSelectionHelper {
 
 	public class SelectGpxTask extends AsyncTask<Void, Void, String> {
 
-		final Set<GPXFile> originalSelectedItems = new HashSet<>();
-		private SelectGpxTaskListener gpxTaskListener;
-		Map<String, Boolean> selectedItems;
+		private Set<GPXFile> originalSelectedItems = new HashSet<>();
+		private Map<String, Boolean> selectedItems;
 
-		SelectGpxTask(Map<String, Boolean> selectedItems, SelectGpxTaskListener gpxTaskListener) {
-			this.gpxTaskListener = gpxTaskListener;
+		SelectGpxTask(Map<String, Boolean> selectedItems) {
 			this.selectedItems = selectedItems;
 		}
 
@@ -1010,13 +1012,17 @@ public class GpxSelectionHelper {
 
 		@Override
 		protected void onProgressUpdate(Void... values) {
-			gpxTaskListener.gpxSelectionInProgress();
+			if (gpxTaskListener != null) {
+				gpxTaskListener.gpxSelectionInProgress();
+			}
 		}
 
 		@Override
 		protected void onPreExecute() {
 			collectSelectedItems();
-			gpxTaskListener.gpxSelectionStarted();
+			if (gpxTaskListener != null) {
+				gpxTaskListener.gpxSelectionStarted();
+			}
 		}
 
 		private void collectSelectedItems() {
@@ -1048,7 +1054,9 @@ public class GpxSelectionHelper {
 
 		@Override
 		protected void onPostExecute(String result) {
-			gpxTaskListener.gpxSelectionFinished();
+			if (gpxTaskListener != null) {
+				gpxTaskListener.gpxSelectionFinished();
+			}
 		}
 	}
 }
