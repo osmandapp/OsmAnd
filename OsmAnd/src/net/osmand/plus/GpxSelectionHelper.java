@@ -57,11 +57,6 @@ public class GpxSelectionHelper {
 	private SavingTrackHelper savingTrackHelper;
 	private final static Log LOG = PlatformUtil.getLog(GpxSelectionHelper.class);
 	private SelectGpxTask selectGpxTask;
-	private SelectGpxTaskListener gpxTaskListener;
-
-	public void setGpxTaskListener(SelectGpxTaskListener gpxTaskListener) {
-		this.gpxTaskListener = gpxTaskListener;
-	}
 
 	public GpxSelectionHelper(OsmandApplication osmandApplication, SavingTrackHelper trackHelper) {
 		this.app = osmandApplication;
@@ -967,12 +962,12 @@ public class GpxSelectionHelper {
 		}
 	}
 
-	public void runSelection(Map<String, Boolean> selectedItems) {
+	public void runSelection(Map<String, Boolean> selectedItems, SelectGpxTaskListener gpxTaskListener) {
 		if (selectGpxTask != null && (selectGpxTask.getStatus() == AsyncTask.Status.RUNNING
 				|| selectGpxTask.getStatus() == AsyncTask.Status.PENDING)) {
 			selectGpxTask.cancel(false);
 		}
-		selectGpxTask = new SelectGpxTask(selectedItems);
+		selectGpxTask = new SelectGpxTask(selectedItems, gpxTaskListener);
 		selectGpxTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
@@ -990,9 +985,11 @@ public class GpxSelectionHelper {
 
 		private Set<GPXFile> originalSelectedItems = new HashSet<>();
 		private Map<String, Boolean> selectedItems;
+		private SelectGpxTaskListener gpxTaskListener;
 
-		SelectGpxTask(Map<String, Boolean> selectedItems) {
+		SelectGpxTask(Map<String, Boolean> selectedItems, SelectGpxTaskListener gpxTaskListener) {
 			this.selectedItems = selectedItems;
+			this.gpxTaskListener = gpxTaskListener;
 		}
 
 		@Override
@@ -1012,17 +1009,13 @@ public class GpxSelectionHelper {
 
 		@Override
 		protected void onProgressUpdate(Void... values) {
-			if (gpxTaskListener != null) {
 				gpxTaskListener.gpxSelectionInProgress();
-			}
 		}
 
 		@Override
 		protected void onPreExecute() {
 			collectSelectedItems();
-			if (gpxTaskListener != null) {
 				gpxTaskListener.gpxSelectionStarted();
-			}
 		}
 
 		private void collectSelectedItems() {
