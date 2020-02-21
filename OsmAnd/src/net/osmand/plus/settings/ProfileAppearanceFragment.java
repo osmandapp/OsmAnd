@@ -112,7 +112,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		if (baseModeForNewProfile != null) {
 			setupAppProfileObjectFromAppMode(baseModeForNewProfile);
 			profile.parent = baseModeForNewProfile;
-			profile.stringKey = baseModeForNewProfile.getStringKey() + "_" + System.currentTimeMillis();
+			profile.stringKey = getUniqueStringKey(baseModeForNewProfile);
 		} else {
 			setupAppProfileObjectFromAppMode(getSelectedAppMode());
 		}
@@ -661,7 +661,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			return false;
 		}
 		if (isNewProfile) {
-			changedProfile.stringKey = changedProfile.parent.getStringKey() + "_" + System.currentTimeMillis();
+			changedProfile.stringKey = getUniqueStringKey(changedProfile.parent);
 			ApplicationMode.ApplicationModeBuilder builder = ApplicationMode
 					.createCustomMode(changedProfile.parent, changedProfile.stringKey, app)
 					.setIconResName(ProfileIcons.getResStringByResId(changedProfile.iconRes))
@@ -689,6 +689,10 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			mode.setNavigationIcon(changedProfile.navigationIcon);
 		}
 		return true;
+	}
+
+	private String getUniqueStringKey(ApplicationMode mode) {
+		return mode.getStringKey() + "_" + System.currentTimeMillis();
 	}
 
 	private boolean hasNameDuplicate() {
