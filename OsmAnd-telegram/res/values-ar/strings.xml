@@ -73,4 +73,5 @@
     <string name="last_response_date">الرد الأخير:٪ 1 $ s</string>
     <string name="last_update_from_telegram_duration">آخر تحديث من تيليجرام: %1$s قبل</string>
     <string name="last_response_duration">الرد الأخير: قبل٪ 1 $ s</string>
+    <string name="shared_string_error_short">خطا</string>
 </resources>
