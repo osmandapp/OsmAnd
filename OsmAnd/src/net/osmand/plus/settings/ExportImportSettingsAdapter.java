@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -74,6 +75,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		TextView titleTv = group.findViewById(R.id.title_tv);
 		TextView subTextTv = group.findViewById(R.id.sub_text_tv);
 		final ThreeStateCheckbox checkBox = group.findViewById(R.id.check_box);
+		FrameLayout checkBoxContainer = group.findViewById(R.id.check_box_container);
 		ImageView expandIv = group.findViewById(R.id.explist_indicator);
 		View lineDivider = group.findViewById(R.id.divider);
 		View cardTopDivider = group.findViewById(R.id.card_top_divider);
@@ -100,9 +102,10 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 			}
 			checkBox.setState(contains ? MISC : UNCHECKED);
 		}
-		checkBox.setOnClickListener(new View.OnClickListener() {
+		checkBoxContainer.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				checkBox.performClick();
 				if (checkBox.getState() == CHECKED) {
 					for (Object object : listItems) {
 						if (!dataToOperate.contains(object)) {
