@@ -3519,4 +3519,19 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_angle">Angle</string>
     <string name="recalc_angle_dialog_descr">Un segment supplémentaire sera affiché entre ma position et l\'itinéraire initial jusqu\'à ce que l\'itinéraire soit recalculé</string>
     <string name="recalc_angle_dialog_title">Angle minimum entre ma position et mon itinéraire</string>
+    <string name="shared_string_preparing">Préparation en cours</string>
+    <string name="shared_string_poi_types">Types de PI</string>
+    <string name="shared_string_nothing_selected">Aucun élément sélectionné</string>
+    <string name="shared_string_quick_actions">Actions rapides</string>
+    <string name="shared_string_profiles">Profils</string>
+    <string name="listed_exist">Les %1$ listés existent déjà dans OsmAnd.</string>
+    <string name="replace_all_desc">Les éléments actuels seront remplacés par les éléments du fichier</string>
+    <string name="replace_all">Tout remplacer</string>
+    <string name="keep_both">Conserver les deux</string>
+    <string name="keep_both_desc">Les éléments seront importés avec un préfixe</string>
+    <string name="import_duplicates_description">Des éléments portant les mêmes noms existent déjà dans OsmAnd.
+\n
+\nQue souhaitez-vous faire \?</string>
+    <string name="import_duplicates_title">Certains éléments existent déjà</string>
+    <string name="select_data_to_import">Sélectionnez les données à importer.</string>
 </resources>
