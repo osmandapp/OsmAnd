@@ -3449,4 +3449,11 @@
     <string name="shared_string_angle">زاوية</string>
     <string name="recalc_angle_dialog_descr">سيتم عرض جزء مستقيم إضافي بين موقعي والمسار المحسوب حتى يتم إعادة حساب المسار</string>
     <string name="recalc_angle_dialog_title">الحد الأدنى للزاوية بين موقعي ومساري</string>
+    <string name="shared_string_preparing">تحضير</string>
+    <string name="shared_string_poi_types">أنواع POI</string>
+    <string name="shared_string_nothing_selected">لا شيء محدد</string>
+    <string name="shared_string_quick_actions">إجراءات سريعة</string>
+    <string name="shared_string_profiles">الملفات الشخصية</string>
+    <string name="replace_all_desc">سيتم استبدال العناصر الحالية بعناصر من الملف</string>
+    <string name="replace_all">استبدال الكل</string>
 </resources>
