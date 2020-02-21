@@ -86,8 +86,10 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 
 		int startIndex = osmEditsPathDescr.indexOf(osmEditsPath);
 		SpannableString titleSpan = new SpannableString(osmEditsPathDescr);
-		Typeface typeface = FontCache.getRobotoMedium(getContext());
-		titleSpan.setSpan(new CustomTypefaceSpan(typeface), startIndex, startIndex + osmEditsPath.length(), 0);
+		if (startIndex != -1) {
+			Typeface typeface = FontCache.getRobotoMedium(getContext());
+			titleSpan.setSpan(new CustomTypefaceSpan(typeface), startIndex, startIndex + osmEditsPath.length(), 0);
+		}
 
 		Preference osmEditsDescription = findPreference("osm_edits_description");
 		osmEditsDescription.setTitle(titleSpan);

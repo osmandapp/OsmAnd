@@ -3534,4 +3534,9 @@
     <string name="no_recalculation_setting">停用重新計算</string>
     <string name="route_recalculation_dist_title">重新計算路線的最小距離</string>
     <string name="route_recalculation_dist_descr">如果到路線的距離大於指定的參數，則路線將會重新計算</string>
+    <string name="profile_type_custom_string">自訂設定檔</string>
+    <string name="shared_string_angle_param">角度：%s°</string>
+    <string name="shared_string_angle">角度</string>
+    <string name="recalc_angle_dialog_descr">將顯示我的位置和計算出來的路線之間的額外直線線段，直到路線重新計算完成為止</string>
+    <string name="recalc_angle_dialog_title">我的位置語錄線間的最小角度</string>
 </resources>

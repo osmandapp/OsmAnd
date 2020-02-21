@@ -163,6 +163,15 @@
 		<attr name="typeface" format="string|reference"/>
 		<attr name="textAllCapsCompat" format="reference|boolean" />
 	</declare-styleable>
-	<!--<declare-styleable name="ButtonEx" parent="TextViewEx" />
-	<declare-styleable name="SwitchEx" parent="ButtonEx" />-->
+
+    <declare-styleable name="ComplexButton">
+        <attr name="setText" format="string" />
+        <attr name="setTextColor" format="color" />
+        <attr name="setSubText" format="string" />
+        <attr name="setSubTextColor" format="color" />
+        <attr name="setIcon" format="reference" />
+    </declare-styleable>
+
+    <!--<declare-styleable name="ButtonEx" parent="TextViewEx" />
+    <declare-styleable name="SwitchEx" parent="ButtonEx" />-->
 </resources>

@@ -29,7 +29,7 @@ public interface ITileSource {
 	public long getExpirationTimeMillis();
 
 	public int getExpirationTimeMinutes();
-	
+
 	public String getReferer();
 
 	public void deleteTiles(String path);
