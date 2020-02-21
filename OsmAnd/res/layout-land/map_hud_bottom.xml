@@ -16,7 +16,7 @@
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|left">
+            android:layout_gravity="bottom|start">
 
             <!-- ALARM -->
 
@@ -24,9 +24,10 @@
                 android:id="@+id/map_alarm_warning"
                 android:layout_width="@dimen/map_alarm_size"
                 android:layout_height="@dimen/map_alarm_size"
-                android:layout_gravity="bottom|left"
+                android:layout_gravity="bottom|start"
                 android:layout_marginBottom="@dimen/map_alarm_bottom_margin_land"
-                android:layout_marginLeft="@dimen/map_button_shadow_margin">
+                android:layout_marginLeft="@dimen/map_button_shadow_margin"
+                android:layout_marginStart="@dimen/map_button_shadow_margin">
 
                 <ImageView
                     android:id="@+id/map_alarm_warning_icon"
@@ -64,6 +65,7 @@
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="130dp"
                 android:layout_marginLeft="@dimen/map_button_margin"
+                android:layout_marginStart="@dimen/map_button_margin"
                 android:gravity="center_horizontal"
                 android:textSize="@dimen/map_button_text_size"
                 tools:text="13.88"/>
@@ -71,7 +73,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|left">
+                android:layout_gravity="bottom|start">
 
                 <!-- PREPARATION SCREEN -->
 
@@ -79,15 +81,17 @@
                     layout="@layout/recording_note_fragment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|left"/>
+                    android:layout_gravity="bottom|start"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|left"
+                    android:layout_gravity="bottom|start"
                     android:layout_marginBottom="@dimen/map_button_margin"
                     android:layout_marginLeft="@dimen/map_button_margin"
+                    android:layout_marginStart="@dimen/map_button_margin"
                     android:layout_marginRight="@dimen/map_button_spacing_land"
+                    android:layout_marginEnd="@dimen/map_button_spacing_land"
                     android:orientation="horizontal">
 
                     <ImageButton
@@ -103,6 +107,7 @@
                         android:layout_width="@dimen/map_button_size"
                         android:layout_height="@dimen/map_button_size"
                         android:layout_marginLeft="@dimen/map_button_spacing_land"
+                        android:layout_marginStart="@dimen/map_button_spacing_land"
                         android:background="@drawable/btn_round"
                         android:contentDescription="@string/layer_route"
                         tools:src="@drawable/ic_action_test_light"/>
@@ -210,6 +215,8 @@
             android:layout_gravity="bottom"
             android:layout_marginBottom="@dimen/map_button_margin"
             android:layout_marginLeft="@dimen/map_button_spacing_land"
+            android:layout_marginStart="@dimen/map_button_spacing_land"
+            android:layout_marginEnd="@dimen/map_button_margin"
             android:layout_marginRight="@dimen/map_button_margin">
 
             <ImageButton
@@ -226,6 +233,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="@dimen/map_button_spacing_land"
+                android:layout_marginStart="@dimen/map_button_spacing_land"
                 android:orientation="vertical">
 
                 <ImageButton
@@ -254,14 +262,14 @@
         layout="@layout/move_marker_bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|left"
+        android:layout_gravity="bottom|start"
         tools:visibility="visible"/>
 
     <include
         layout="@layout/add_gpx_point_bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|left"
+        android:layout_gravity="bottom|start"
         tools:visibility="visible"/>
 
     <FrameLayout

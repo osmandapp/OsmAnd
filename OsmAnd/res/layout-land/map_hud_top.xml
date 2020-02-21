@@ -295,20 +295,20 @@
         android:id="@+id/map_route_land_left_margin"
         android:layout_width="@dimen/map_route_planning_land_width_minus_shadow"
         android:layout_height="0dp"
-        android:layout_gravity="top|left"
+        android:layout_gravity="top|start"
         android:visibility="gone"/>
     <!-- LEFT widgets colon -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="top|left"
+        android:layout_gravity="top|start"
         android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/map_left_widgets_panel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="top|left"
+            android:layout_gravity="top|start"
             android:orientation="vertical">
 
             <include
@@ -431,6 +431,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="2dp"
+                            android:layout_marginStart="2dp"
                             android:maxLines="2"
                             android:textColor="@color/osmand_orange"
                             android:textSize="@dimen/default_list_text_size"
@@ -442,6 +443,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom"
                             android:layout_marginLeft="2dp"
+                            android:layout_marginStart="2dp"
                             android:drawablePadding="2dp"
                             android:maxLines="1"
                             android:textColor="@color/osmand_orange"
@@ -456,6 +458,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="4dp"
+                        android:layout_marginStart="4dp"
                         android:layout_weight="1">
 
 
@@ -655,8 +658,9 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top|left"
+                android:layout_gravity="top|start"
                 android:layout_marginLeft="@dimen/map_button_margin"
+                android:layout_marginStart="@dimen/map_button_margin"
                 android:layout_marginTop="@dimen/map_button_margin"
                 android:orientation="horizontal">
 
@@ -690,6 +694,7 @@
                 android:layout_width="@dimen/map_small_button_size"
                 android:layout_height="@dimen/map_small_button_size"
                 android:layout_marginLeft="@dimen/map_small_button_margin"
+                android:layout_marginStart="@dimen/map_small_button_margin"
                 android:background="@drawable/btn_inset_circle_trans"
                 android:contentDescription="@string/map_widget_search"
                 tools:src="@drawable/ic_action_test_light"/>
@@ -758,19 +763,19 @@
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="top|right">
+        android:layout_gravity="top|end">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="top|right"
+            android:layout_gravity="top|end"
             android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/map_right_widgets_panel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top|right"
+                android:layout_gravity="top|end"
                 android:orientation="vertical">
 
                 <include layout="@layout/map_hud_widget"/>
