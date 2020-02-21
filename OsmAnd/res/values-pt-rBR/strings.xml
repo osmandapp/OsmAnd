@@ -3543,4 +3543,12 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_profiles">Perfis</string>
     <string name="listed_exist">Listado %1$s já existe no OsmAnd.</string>
     <string name="replace_all_desc">Os itens atuais serão substituídos pelos itens do arquivo</string>
+    <string name="replace_all">Substituir tudo</string>
+    <string name="keep_both">Manter os dois</string>
+    <string name="keep_both_desc">Os itens importados serão adicionados com prefixo</string>
+    <string name="import_duplicates_description">OsmAnd já possui elementos com os mesmos nomes dos importados.
+\n
+\nSelecione uma ação.</string>
+    <string name="import_duplicates_title">Alguns itens já existem</string>
+    <string name="select_data_to_import">Selecione os dados a serem importados.</string>
 </resources>
