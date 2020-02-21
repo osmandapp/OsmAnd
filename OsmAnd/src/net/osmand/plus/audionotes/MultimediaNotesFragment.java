@@ -387,13 +387,16 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		String multimediaNotesPath = getString(R.string.ltr_or_rtl_triple_combine_via_dash, menu, myPlaces, notes);
 		String multimediaNotesPathDescr = getString(R.string.multimedia_notes_view_descr, multimediaNotesPath);
 
-		int startIndex = multimediaNotesPathDescr.indexOf(multimediaNotesPath);
-		SpannableString titleSpan = new SpannableString(multimediaNotesPathDescr);
-		Typeface typeface = FontCache.getRobotoMedium(getContext());
-		titleSpan.setSpan(new CustomTypefaceSpan(typeface), startIndex, startIndex + multimediaNotesPath.length(), 0);
-
 		Preference osmEditsDescription = findPreference(OPEN_NOTES_DESCRIPTION);
-		osmEditsDescription.setTitle(titleSpan);
+		int startIndex = multimediaNotesPathDescr.indexOf(multimediaNotesPath);
+		if (startIndex != -1) {
+			SpannableString titleSpan = new SpannableString(multimediaNotesPathDescr);
+			Typeface typeface = FontCache.getRobotoMedium(getContext());
+			titleSpan.setSpan(new CustomTypefaceSpan(typeface), startIndex, startIndex + multimediaNotesPath.length(), 0);
+			osmEditsDescription.setTitle(titleSpan);
+		} else {
+			osmEditsDescription.setTitle(multimediaNotesPathDescr);
+		}
 	}
 
 	private void setupOpenNotesPref() {
