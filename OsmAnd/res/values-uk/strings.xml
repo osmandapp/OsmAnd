@@ -3537,4 +3537,19 @@
     <string name="shared_string_angle">Кут</string>
     <string name="recalc_angle_dialog_descr">Додатковий прямий відрізок між моїм розташуванням та розрахунковим маршрутом відображатиметься, поки маршрут не буде перераховано</string>
     <string name="recalc_angle_dialog_title">Найменший кут між моїм розташуванням та маршрутом</string>
+    <string name="shared_string_preparing">Підготування</string>
+    <string name="shared_string_poi_types">Види POI</string>
+    <string name="shared_string_nothing_selected">Нічого не вибрано</string>
+    <string name="shared_string_quick_actions">Швидкі дії</string>
+    <string name="shared_string_profiles">Профілі</string>
+    <string name="listed_exist">Перелічені %1$s вже існують у OsmAnd.</string>
+    <string name="replace_all_desc">Поточні елементи будуть замінені на елементи з файлу</string>
+    <string name="replace_all">Замінити все</string>
+    <string name="keep_both">Зберегти обидва</string>
+    <string name="keep_both_desc">Імпортовані елементи будуть додані з префіксом</string>
+    <string name="import_duplicates_description">У OsmAnd вже є елементи з тими ж назвами, що й імпортовані.
+\n
+\nВиберіть дію.</string>
+    <string name="import_duplicates_title">Деякі елементи вже є</string>
+    <string name="select_data_to_import">Виберіть дані, які потрібно імпортувати.</string>
 </resources>
