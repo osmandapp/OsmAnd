@@ -3524,7 +3524,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_nothing_selected">Aucun élément sélectionné</string>
     <string name="shared_string_quick_actions">Actions rapides</string>
     <string name="shared_string_profiles">Profils</string>
-    <string name="listed_exist">Les %1$ listés existent déjà dans OsmAnd.</string>
+    <string name="listed_exist">Les %1$s listés existent déjà dans OsmAnd.</string>
     <string name="replace_all_desc">Les éléments actuels seront remplacés par les éléments du fichier</string>
     <string name="replace_all">Tout remplacer</string>
     <string name="keep_both">Conserver les deux</string>
