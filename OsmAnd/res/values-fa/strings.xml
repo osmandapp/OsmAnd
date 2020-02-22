@@ -3567,7 +3567,7 @@
     <string name="export_profile_dialog_description">می‌توانید دادهٔ بیشتری را انتخاب کنید تا همراه با پروفایل برون‌برد کنید.</string>
     <string name="index_name_antarctica">جنوبگان</string>
     <string name="accessibility_announce">اعلام</string>
-    <string name="shared_string_app_default_w_val">پیشفرض برنامه</string>
+    <string name="shared_string_app_default_w_val">پیشفرض برنامه (%s)</string>
     <string name="no_recalculation_setting">غیرفعال‌سازی محاسبهٔ مجدد</string>
     <string name="route_recalculation_dist_title">مسافت کمینی برای مسیریابی مجدد</string>
     <string name="route_recalculation_dist_descr">اگر مسافت تا مسیر بیش از پارامتر تعیین‌شده باشد، مسیر دوباره محاسبه می‌شود</string>
