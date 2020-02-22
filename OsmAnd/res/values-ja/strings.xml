@@ -3486,8 +3486,8 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_streetLightingNight_name">夜間限定表示</string>
     <string name="plugin_prefs_reset_successful">すべてのプラグイン設定が初期状態に戻りました。</string>
     <string name="profile_prefs_reset_successful">すべてのプロファイル設定が初期状態に戻りました。</string>
-    <string name="sunset_at">日出時刻 %1$s</string>
-    <string name="sunrise_at">日没時刻 %1$s</string>
+    <string name="sunset_at">日没時刻 %1$s</string>
+    <string name="sunrise_at">日出時刻 %1$s</string>
     <string name="accessibility_mode_disabled">端末本体のアクセシビリティモードが無効になっています。</string>
     <string name="search_offline_geo_error">geoインテント \'%s\'の解析に失敗しました。</string>
     <string name="reset_to_default_category_button_promo">リセットすると、ソート順がインストール後の初期状態に戻ります。</string>
@@ -3501,28 +3501,28 @@ POIの更新は利用できません</string>
     <string name="routing_profile_direct_to">直接指示</string>
     <string name="of">%2$d中の%1$d</string>
     <string name="button_rate">レート</string>
-    <string name="release_3_6">• プロファイル：表示順序、マップ画面で表示されるアイコン、ベースプロファイルすべての設定などを変更したり、初期状態に戻すことが可能に
-\n
-\n• ナビゲーションに出口番号を追加(※訳注 ジャンクションや高速道路の進路や出口を示す番号)
-\n
-\n• プラグイン設定の修正
-\n
-\n• すべてのプロファイルにすばやくアクセスするために設定画面のUIを変更
-\n
-\n• 別のプロファイルから設定をコピーするオプションの追加
-\n
-\n• 検索にて順序を変更したりPOIカテゴリを非表示にする機能の追加
-\n
-\n• マップ上に表示されるPOIアイコンの修正
-\n
-\n• マップ設定に日出/日没データの追加
-\n
-\n• マップに自宅/勤務先アイコンの追加
-\n
-\n• 各設定に数行の機能説明を追加
-\n
-\n• 日本地図に正しい音訳を追加
-\n
+    <string name="release_3_6">• プロファイル：表示順序、マップ画面で表示されるアイコン、ベースプロファイルすべての設定などを変更したり、初期状態に戻すことが可能に 
+\n 
+\n• ナビゲーションに出口番号(ジャンクションや高速道路の進路や出口を示す番号) を追加 
+\n 
+\n• プラグイン設定の修正 
+\n 
+\n• すべてのプロファイルにすばやくアクセスするために設定画面のUIを変更 
+\n 
+\n• 別のプロファイルから設定をコピーするオプションの追加 
+\n 
+\n• 検索にて順序を変更したりPOIカテゴリを非表示にする機能の追加 
+\n 
+\n• マップ上に表示されるPOIアイコンの修正 
+\n 
+\n• マップ設定に日出/日没データの追加 
+\n 
+\n• マップに自宅/勤務先アイコンの追加 
+\n 
+\n• 各設定に数行の機能説明を追加 
+\n 
+\n• 日本地図に正しい音訳を追加 
+\n 
 \n• 南極大陸マップを追加
 \n
 \n</string>
