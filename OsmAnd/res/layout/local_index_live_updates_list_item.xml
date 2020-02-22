@@ -13,7 +13,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/list_content_padding"
+        android:layout_marginStart="@dimen/list_content_padding"
         android:layout_marginRight="@dimen/favorites_icon_right_margin"
+        android:layout_marginEnd="@dimen/favorites_icon_right_margin"
         android:layout_marginTop="@dimen/favorites_icon_top_margin"
         android:focusable="false"
         android:src="@drawable/ic_map"/>
@@ -24,7 +26,9 @@
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
         android:layout_toLeftOf="@id/options"
+        android:layout_toStartOf="@id/options"
         android:layout_toRightOf="@id/icon"
+        android:layout_toEndOf="@id/icon"
         android:orientation="vertical">
 
         <TextView
@@ -42,6 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="7dp"
+            android:layout_marginEnd="7dp"
             android:textColor="?android:textColorSecondary"
             android:textSize="@dimen/default_sub_text_size"
             tools:text="11.1 MB"
@@ -52,6 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="7dp"
+            android:layout_marginEnd="7dp"
             android:ellipsize="end"
             android:lines="1"
             android:textColor="?android:textColorSecondary"
@@ -65,6 +71,7 @@
         android:layout_width="@dimen/list_item_height"
         android:layout_height="@dimen/list_item_height"
         android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
         android:background="?attr/dashboard_button"
@@ -77,5 +84,6 @@
         android:layout_height="1dp"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="56dp"
+        android:layout_marginStart="56dp"
         android:background="?attr/dashboard_divider"/>
 </RelativeLayout>
