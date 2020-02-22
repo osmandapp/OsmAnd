@@ -81,7 +81,7 @@ public class FavouritesDbHelper {
 			return PERSONAL_CATEGORY.equals(name);
 		}
 
-		public static boolean isPersonalCategoryDisplayName(Context ctx, String name){
+		public static boolean isPersonalCategoryDisplayName(Context ctx, String name) {
 			return name.equals(ctx.getString(R.string.personal_category_name));
 		}
 
@@ -116,7 +116,7 @@ public class FavouritesDbHelper {
 		}
 
 		public static String convertDisplayNameToGroupIdName(Context context, String name) {
-			if (isPersonalCategoryDisplayName(context,name)) {
+			if (isPersonalCategoryDisplayName(context, name)) {
 				return PERSONAL_CATEGORY;
 			}
 			if (name.equals(context.getString(R.string.shared_string_favorites))) {
@@ -589,7 +589,7 @@ public class FavouritesDbHelper {
 	}
 
 	public void addEmptyCategory(String name, int color) {
-			addEmptyCategory(name, color, true);
+		addEmptyCategory(name, color, true);
 	}
 
 	public void addEmptyCategory(String name, int color, boolean visible) {
@@ -598,7 +598,7 @@ public class FavouritesDbHelper {
 		group.color = color;
 		group.visible = visible;
 		favoriteGroups.add(group);
-		flatGroups.put(name, group);
+		flatGroups.put(group.name, group);
 	}
 
 	public List<FavouritePoint> getFavouritePoints() {
@@ -639,6 +639,7 @@ public class FavouritesDbHelper {
 		return false;
 	}
 
+	@Nullable
 	public FavoriteGroup getGroup(FavouritePoint p) {
 		if (flatGroups.containsKey(p.getCategory())) {
 			return flatGroups.get(p.getCategory());
@@ -647,6 +648,7 @@ public class FavouritesDbHelper {
 		}
 	}
 
+	@Nullable
 	public FavoriteGroup getGroup(String nameId) {
 		if (flatGroups.containsKey(nameId)) {
 			return flatGroups.get(nameId);
@@ -655,6 +657,7 @@ public class FavouritesDbHelper {
 		}
 	}
 
+	@Nullable
 	private FavouritePoint findFavoriteByAllProperties(String category, String name, double lat, double lon) {
 		if (flatGroups.containsKey(category)) {
 			FavoriteGroup fg = flatGroups.get(category);

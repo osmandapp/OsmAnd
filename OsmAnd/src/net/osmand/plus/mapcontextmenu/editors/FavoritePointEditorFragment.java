@@ -147,9 +147,9 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	public void setCategory(String name, int color) {
 		FavouritesDbHelper helper = getHelper();
 		if (helper != null) {
-			FavoriteGroup group = helper.getGroup(FavouritesDbHelper.FavoriteGroup.convertDisplayNameToGroupIdName(requireContext(), name));
+			FavoriteGroup group = helper.getGroup(FavoriteGroup.convertDisplayNameToGroupIdName(requireContext(), name));
 			this.group = group;
-			super.setCategory(name, group.getColor());
+			super.setCategory(name, group != null ? group.getColor() : 0);
 		}
 	}
 
