@@ -3103,7 +3103,7 @@
     <string name="navigate_point_format_utm">معيار الإحداثيات</string>
     <string name="navigate_point_format_olc">فتح رمز الموقع</string>
     <string name="coordinates_format_info">سيتم تطبيق التنسيق المحدد في كل أنحاء التطبيق.</string>
-    <string name="pref_selected_by_default_for_profiles">يتم تحديد هذا الاعداد بشكل افتراضي لملفات التعريف: s%</string>
+    <string name="pref_selected_by_default_for_profiles">يتم تحديد هذا الاعداد بشكل افتراضي لملفات التعريف: %s</string>
     <string name="change_default_settings">تغيير الإعدادات</string>
     <string name="discard_changes">تجاهل التغيير</string>
     <string name="apply_to_all_profiles">تطبيق علي كافة ملفات التعريف</string>

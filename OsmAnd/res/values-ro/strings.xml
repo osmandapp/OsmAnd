@@ -2419,7 +2419,7 @@
     <string name="plugins_settings">Setări plugin</string>
     <string name="shared_string_by_default">În mod implicit</string>
     <string name="download_detailed_map">Descărcați harta detaliată %s, pentru a vizualiza această zonă.</string>
-    <string name="change_data_storage_full_description">Mută fişierele de date OsmAnd la noua destinaţie\?</string>
+    <string name="change_data_storage_full_description">Mută fişierele de date OsmAnd la noua destinaţie\?\n%1$s &gt; %2$s</string>
     <string name="data_storage_preference_summary">%1$s %2$s</string>
     <string name="data_storage_space_description">%1$s GB free (of %2$s GB)</string>
     <string name="enter_path_to_folder">Introduceți calea către folder</string>
@@ -2656,7 +2656,7 @@
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Personal</string>
-    <string name="shared_string_downloading_formatted">Descarcarea</string>
+    <string name="shared_string_downloading_formatted">Descarcarea %s</string>
     <string name="rendering_value_thick_name">Gros</string>
     <string name="desert_render_descr">Pentru deșerturi și alte zone slab populate.</string>
     <string name="select_navigation_icon">Selecteaza iconul pentru navigatie</string>
