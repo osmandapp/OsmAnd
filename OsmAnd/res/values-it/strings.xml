@@ -3548,4 +3548,19 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_angle">Angolo</string>
     <string name="recalc_angle_dialog_descr">Una linea retta sarà visualizzata fra la mia localizzazione e la destinazione finché il percorso viene elaborato</string>
     <string name="recalc_angle_dialog_title">Angolo minimo tra la mia localizzazione e la destinazione</string>
+    <string name="shared_string_preparing">Preparando</string>
+    <string name="shared_string_poi_types">Tipi di PDI</string>
+    <string name="shared_string_nothing_selected">Nessuna selezione</string>
+    <string name="shared_string_quick_actions">Azioni veloci</string>
+    <string name="shared_string_profiles">Profili</string>
+    <string name="listed_exist">Gli elencati %1$s, esistono già in OsmAnd.</string>
+    <string name="replace_all_desc">Gli oggetti attuali verranno sostituiti con gli oggetti dal file</string>
+    <string name="replace_all">Sostituisci tutti</string>
+    <string name="keep_both">Tieni entrambi</string>
+    <string name="keep_both_desc">Agli oggetti importati verrà aggiunto il prefisso</string>
+    <string name="import_duplicates_description">OsmAnd ha già elementi con gli stessi nomi di quelli importati.
+\n
+\nScegli un\'azione.</string>
+    <string name="import_duplicates_title">Alcuni oggetti esistono già</string>
+    <string name="select_data_to_import">Seleziona i dati da importare.</string>
 </resources>

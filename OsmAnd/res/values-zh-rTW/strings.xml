@@ -3539,4 +3539,19 @@
     <string name="shared_string_angle">角度</string>
     <string name="recalc_angle_dialog_descr">將顯示我的位置和計算出來的路線之間的額外直線線段，直到路線重新計算完成為止</string>
     <string name="recalc_angle_dialog_title">我的位置語錄線間的最小角度</string>
+    <string name="shared_string_preparing">正在準備</string>
+    <string name="shared_string_poi_types">POI 類型</string>
+    <string name="shared_string_nothing_selected">未選取</string>
+    <string name="shared_string_quick_actions">快速動作</string>
+    <string name="shared_string_profiles">設定檔</string>
+    <string name="listed_exist">列出的 %1$s 已存在於 OsmAnd 中。</string>
+    <string name="replace_all_desc">目前的項目將會被從檔案而來的項目所取代</string>
+    <string name="replace_all">取代全部</string>
+    <string name="keep_both">保留雙方</string>
+    <string name="keep_both_desc">匯入的項目將會加入前綴</string>
+    <string name="import_duplicates_description">OsmAnd 已有與匯入的名稱相同的元素。
+\n
+\n選取動作。</string>
+    <string name="import_duplicates_title">一些項目已存在</string>
+    <string name="select_data_to_import">選取要匯入的資料。</string>
 </resources>

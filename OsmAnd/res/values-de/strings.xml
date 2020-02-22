@@ -3554,4 +3554,7 @@ Lon %2$s</string>
     <string name="shared_string_angle">Winkel</string>
     <string name="recalc_angle_dialog_descr">Zusätzliches gerades Segment zwischen meinem Standort und berechneter Route wird angezeigt, bis die Route neu berechnet wird</string>
     <string name="recalc_angle_dialog_title">Minimaler Winkel zwischen meinem Standort und der Route</string>
+    <string name="shared_string_quick_actions">Schnellaktionen</string>
+    <string name="shared_string_profiles">Profile</string>
+    <string name="listed_exist">Die aufgelisteten %1$s sind in OsmAnd bereits vorhanden.</string>
 </resources>
