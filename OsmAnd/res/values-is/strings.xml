@@ -3558,4 +3558,19 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="shared_string_angle">Horn</string>
     <string name="recalc_angle_dialog_descr">Aukalegur beinn bútur á milli staðsetningar minnar og reiknaðrar leiðar verður sýndur þar til leiðin hefur verið endurreiknuð</string>
     <string name="recalc_angle_dialog_title">Lágmarkshorn milli staðsetningar og leiðar</string>
+    <string name="shared_string_preparing">Undirbý</string>
+    <string name="shared_string_poi_types">Gerðir POI-merkisstaða</string>
+    <string name="shared_string_nothing_selected">Ekkert valið</string>
+    <string name="shared_string_quick_actions">Flýtiaðgerðir</string>
+    <string name="shared_string_profiles">Notandasnið</string>
+    <string name="listed_exist">Taldi upp %1$s, er þegar til staðar í OsmAnd.</string>
+    <string name="replace_all_desc">Fyrirliggjandi atriðum verður skipt út með atriðum úr skránni</string>
+    <string name="replace_all">Skipta öllu út</string>
+    <string name="keep_both">Halda báðum</string>
+    <string name="keep_both_desc">Forskeyti verður bætt við innflutt atriði</string>
+    <string name="import_duplicates_description">OsmAnd er með atriði með sömu nöfnum og þau sem voru flutt inn.
+\n
+\nVeldu aðgerð.</string>
+    <string name="import_duplicates_title">Sum atriðin eru þegar til staðar</string>
+    <string name="select_data_to_import">Veldu þau gögn sem á að flytja inn.</string>
 </resources>
