@@ -3525,4 +3525,24 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="no_recalculation_setting">Malaktivigi rekalkulon</string>
     <string name="route_recalculation_dist_title">Minimuma distanco por rekalkuli kurson</string>
     <string name="route_recalculation_dist_descr">Kurso estos rekalkulita se la distanco estos pli granda ol tiu ĉi valoro</string>
+    <string name="profile_type_custom_string">Propra profilo</string>
+    <string name="shared_string_angle_param">Angulo: %s°</string>
+    <string name="shared_string_angle">Angulo</string>
+    <string name="recalc_angle_dialog_descr">Kroma rekta segmento inter mia pozicio kaj la kalkulita kurso montriĝos ĝis la kurso estos rekalkulita</string>
+    <string name="recalc_angle_dialog_title">Minimuma angulo inter mia pozicio kaj kurso</string>
+    <string name="shared_string_preparing">Preparado</string>
+    <string name="shared_string_poi_types">Specoj de interesejoj</string>
+    <string name="shared_string_nothing_selected">Nenio elektita</string>
+    <string name="shared_string_quick_actions">Rapidaj agoj</string>
+    <string name="shared_string_profiles">Profiloj</string>
+    <string name="listed_exist">Listigitaj %1$s jam ekzistas en OsmAnd.</string>
+    <string name="replace_all_desc">La nunaj elementoj estos anstataŭigitaj per elementoj el la dosiero</string>
+    <string name="replace_all">Anstataŭigi ĉiujn</string>
+    <string name="keep_both">Konservi ambaŭ</string>
+    <string name="keep_both_desc">Enportitaj elementoj aldoniĝos kun prefikso</string>
+    <string name="import_duplicates_description">OsmAnd jam havas elementojn kun la samaj nomoj, kiel tiuj enportataj.
+\n
+\nElektu kion fari.</string>
+    <string name="import_duplicates_title">Iuj elementoj jam ekzistas</string>
+    <string name="select_data_to_import">Elektu datumojn por enporti.</string>
 </resources>
