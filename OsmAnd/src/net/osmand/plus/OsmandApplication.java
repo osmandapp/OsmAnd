@@ -190,6 +190,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 		checkPreferredLocale();
 		appInitializer.onCreateApplication();
+		appInitializer.migrateHomeWorkFromSettings();
 //		if(!osmandSettings.FOLLOW_THE_ROUTE.get()) {
 //			targetPointsHelper.clearPointToNavigate(false);
 //		}
