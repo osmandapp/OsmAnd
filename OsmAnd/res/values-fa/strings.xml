@@ -188,7 +188,7 @@
     <string name="local_indexes_cat_av">داده‌های صوتی/تصویری</string>
     <string name="precise_routing_mode">مسیریابی دقیق (آلفا)</string>
     <string name="recording_photo_description">تصویر %1$s از %2$s</string>
-    <string name="av_widget_action">عملکرد پیش‌فرض ابزارک</string>
+    <string name="av_widget_action">کنش پیش‌فرض ابزارک</string>
     <string name="destination_point">مقصد %1$s</string>
     <string name="context_menu_item_destination_point">تنظیم به عنوان مقصد</string>
     <string name="email">ایمیل</string>
@@ -207,9 +207,9 @@
     <string name="poi_remove_success">حذف شد</string>
     <string name="poi_action_add">افزودن</string>
     <string name="poi_action_change">تغییر</string>
-    <string name="poi_action_succeded_template">عملیات {0} انجام شد.</string>
-    <string name="poi_error_unexpected_template">انجام عملیات {0} ناموفق بود.</string>
-    <string name="poi_error_io_error_template">خطای I/O در حین انجام عملیات {0}.</string>
+    <string name="poi_action_succeded_template">کنش {0} انجام شد.</string>
+    <string name="poi_error_unexpected_template">انجام کنش {0} ناموفق بود.</string>
+    <string name="poi_error_io_error_template">خطای I/O در حین انجام کنش {0}.</string>
     <string name="poi_error_info_not_loaded">اطلاعات نقطه بار نشد</string>
     <string name="osb_comment_dialog_message">پیام</string>
     <string name="osb_comment_dialog_author">نویسنده</string>
@@ -441,7 +441,7 @@
     <string name="use_distance_measurement_help">* با لمس، یک نقطه را نشان کنید. 
 \n * قسمتی از نقشه را لمس کنید و نگه دارید تا نقطهٔ قبلی پاک شود. 
 \n * نقطه‌ای را لمس کنید و نگه دارید تا توضیحی را ببینید یا اضافه کنید. 
-\n * ابزارک اندازه‌گیری را لمس کنید تا کارهای بیشتری را ببینید.</string>
+\n * ابزارک اندازه‌گیری را لمس کنید تا کنش‌های بیشتری را ببینید.</string>
     <string name="menu_layers">لایه‌های نقشه</string>
     <string name="layer_map_appearance">چینش صفحه</string>
     <string name="map_widget_config">چینش صفحه</string>
@@ -517,7 +517,7 @@
     <string name="use_kalman_filter_compass_descr">اغتشاشات قطب‌نما را کاهش می‌دهد اما اینرسی را بیشتر می‌کند.</string>
     <string name="monitoring_settings">ضبط سفر</string>
     <string name="monitoring_settings_descr">شیوهٔ ضبط سفرهای خود را تنظیم کنید.</string>
-    <string name="shared_string_more_actions">عملیات‌های بیشتر</string>
+    <string name="shared_string_more_actions">کنش‌های بیشتر</string>
     <string name="prefer_motorways">ترجیح آزادراه‌ها</string>
     <string name="prefer_in_routing_descr">آزادراه‌ها را ترجیح می‌دهم.</string>
     <string name="local_indexes_cat_srtm">منحنی‌های میزان</string>
@@ -528,7 +528,7 @@
     <string name="dropbox_plugin_description">ردها و یادداشت‌های صوتی/تصویری را با حساب دراپ‌باکس خود همگام کنید.</string>
     <string name="srtm_paid_version_msg">لطفاً افزونهٔ منحنی‌های میزان را بخرید تا به توسعهٔ بیشتر نرم‌افزار کمک کنید.</string>
     <string name="srtm_paid_version_title">افزونهٔ منحنی‌های میزان</string>
-    <string name="av_widget_action_descr">عملکرد پیش‌فرض ابزارک:</string>
+    <string name="av_widget_action_descr">کنش پیش‌فرض ابزارک:</string>
     <string name="recording_is_recorded">در حال ضبط صدا/ویدئو. توقف ضبط با لمس ابزارک صدا/ویدئو.</string>
     <string name="recording_playing">صدایی از فایل ضبط‌شدهٔ موردنظر در حال پخش است. 
 \n%1$s</string>
@@ -1631,9 +1631,9 @@
     <string name="shared_string_commit">ارسال</string>
     <string name="share_geo">geo:</string>
     <string name="nm_h">kn</string>
-    <string name="action_create">عملیات ایجاد</string>
-    <string name="action_modify">عملیات اصلاح</string>
-    <string name="action_delete">عملیات حذف</string>
+    <string name="action_create">کنش ایجاد</string>
+    <string name="action_modify">کنش اصلاح</string>
+    <string name="action_delete">کنش حذف</string>
     <string name="rendering_attr_alpineHiking_name">مقیاس پیاده‌گردی آلپاین (SAC)</string>
     <string name="opening_at">بازکردن در</string>
     <string name="closing_at">بستن در</string>
@@ -2167,8 +2167,8 @@
     <string name="number_of_edits">تعداد ویرایش‌ها</string>
     <string name="reports_for">گزارش برای</string>
     <string name="file_name_containes_illegal_char">در نام فایل از نویسهٔ غیرمجاز استفاده شده است</string>
-    <string name="configure_screen_quick_action">عملیات فوری</string>
-    <string name="quick_action_item_action">عملیات %d</string>
+    <string name="configure_screen_quick_action">کنش فوری</string>
+    <string name="quick_action_item_action">کنش %d</string>
     <string name="quick_action_item_screen">صفحهٔ %d</string>
     <string name="quick_action_add_poi">افزودن POI</string>
     <string name="quick_action_map_style">تغییر سبک نقشه</string>
@@ -2181,12 +2181,12 @@
     <string name="quick_action_navigation_voice_off">روشن‌کردن گفتار</string>
     <string name="quick_action_navigation_voice_on">خاموش‌کردن گفتار</string>
     <string name="quick_action_add_parking">افزودن جای پارک</string>
-    <string name="quick_action_new_action">افزودن عملیات</string>
-    <string name="quick_action_edit_action">اصلاح عملیات</string>
+    <string name="quick_action_new_action">افزودن کنش</string>
+    <string name="quick_action_edit_action">اصلاح کنش</string>
     <string name="quick_action_add_favorite">افزودن نقطهٔ برگزیده</string>
-    <string name="dialog_add_action_title">افزودن عملیات</string>
-    <string name="quick_actions_delete">حذف عملیات</string>
-    <string name="quick_actions_delete_text">آیا از حذف‌کردن عملیات «%s» مطمئن هستید؟</string>
+    <string name="dialog_add_action_title">افزودن کنش</string>
+    <string name="quick_actions_delete">حذف کنش</string>
+    <string name="quick_actions_delete_text">آیا از حذف کنش «%s» مطمئن هستید؟</string>
     <string name="quick_favorites_show_favorites_dialog">کادر نقاط برگزیده را نشان بده</string>
     <string name="quick_action_add_marker_descr">دکمه‌ای برای ایجاد یک نشانه در مرکز صفحه.</string>
     <string name="quick_action_take_audio_note_descr">دکمه‌ای برای ایجاد یک یادداشت صوتی در مرکز صفحه.</string>
@@ -2198,8 +2198,8 @@
     <string name="quick_action_add_parking_descr">دکمه‌ای برای علامت‌گذاری یک جای پارک در مرکز صفحه.</string>
     <string name="favorite_autofill_toast_text">" اینجا ذخیره شد: "</string>
     <string name="favorite_empty_place_name">مکان</string>
-    <string name="quick_action_duplicates">نام عملیات فوری برای پرهیز از تکرار، به «%1$s» تغییر یافت.</string>
-    <string name="quick_action_duplicate">نام تکراری برای عملیات فوری</string>
+    <string name="quick_action_duplicates">برای پرهیز از تکرار، نام کنش فوری به «%1$s» تغییر یافت.</string>
+    <string name="quick_action_duplicate">نام تکراری برای کنش فوری</string>
     <string name="quick_action_showhide_favorites_descr">دکمه‌ای برای پنهان/آشکارکردن نقاط برگزیده روی نقشه.</string>
     <string name="quick_action_showhide_poi_descr">دکمه‌ای برای پنهان/آشکارکردن POIها روی نقشه.</string>
     <string name="quick_action_showhide_favorites_title">آشکار/پنهان‌کردن نقاط برگزیده</string>
@@ -2212,7 +2212,7 @@
     <string name="quick_action_add_configure_map">پیکربندی نقشه</string>
     <string name="quick_action_add_navigation">ناوبری</string>
     <string name="quick_action_fav_name_descr">خالی بگذارید تا از نشانی یا نام محل استفاده شود.</string>
-    <string name="quick_action_bug_descr">این نوشته به‌صورت خودکار در قسمت پیام درج می‌شود.</string>
+    <string name="quick_action_bug_descr">این نوشته در قسمت پیام درج می‌شود.</string>
     <string name="quick_action_bug_message">پیام</string>
     <string name="quick_action_category_descr">دستهٔ ذخیره‌سازی نقطهٔ برگزیده:</string>
     <string name="quick_action_gpx_category_descr">یکی از دسته‌ها را برگزینید.</string>
@@ -2234,7 +2234,7 @@
     <string name="quick_action_map_source_switch">منبع نقشه به «%s» تغییر کرد.</string>
     <string name="quick_action_btn_tutorial_title">تغییر جای دکمه</string>
     <string name="quick_action_btn_tutorial_descr">دکمه را لمس کنید و نگه دارید تا جای آن را روی صفحه عوض کنید.</string>
-    <string name="shared_string_action_name">نام عملیات</string>
+    <string name="shared_string_action_name">نام کنش</string>
     <string name="mappilary_no_internet_desc">برای اینکه تصاویر مَپیلاری را ببینید به اینترنت وصل شوید.</string>
     <string name="retry">تلاش مجدد</string>
     <string name="add_line">افزودن خط</string>
@@ -2377,7 +2377,7 @@
     <string name="lang_ber">بربری</string>
     <string name="osm_edit_context_menu_delete">حذف ویرایش OSM</string>
     <string name="shared_string_logoff">خروج</string>
-    <string name="shared_string_action_template">عملیات {0}</string>
+    <string name="shared_string_action_template">کنش {0}</string>
     <string name="osn_modify_dialog_error">ویرایش یادداشت ناموفق بود.</string>
     <string name="osn_modify_dialog_title">اصلاح یادداشت</string>
     <string name="context_menu_item_modify_note">اصلاح یادداشت OSM</string>
@@ -2664,10 +2664,10 @@
     <string name="will_close_at">ساعت تعطیل‌کردن</string>
     <string name="will_open_at">ساعت بازکردن</string>
     <string name="will_open_on">زمان بازشدن</string>
-    <string name="additional_actions">عملیات بیشتر</string>
+    <string name="additional_actions">کنش‌های بیشتر</string>
     <string name="av_locations_selected_desc">فایل GPX از مختصات و مشخصات یادداشت‌های انتخابی.</string>
     <string name="av_locations_all_desc">فایل GPX از مختصات و مشخصات همهٔ یادداشت‌ها.</string>
-    <string name="shared_string_actions">عملیات</string>
+    <string name="shared_string_actions">کنش‌ها</string>
     <string name="shared_string_marker">نشانه</string>
     <string name="osm_recipient_stat">ویرایش‌ها: %1$s، مبلغ: %2$s هزارم بیت‌کوین</string>
     <string name="osm_recipients_label">گیرندگان OSM</string>
@@ -2815,7 +2815,7 @@
     <string name="unirs_render_descr">اصلاح‌یافتهٔ سبک پیشفرض برای ایجاد پادنمایی بیشتر در راه‌های پیاده و دوچرخه. از رنگ‌بندی مپنیک استفاده می‌کند.</string>
     <string name="shared_string_gpx_files">فایل‌های GPX</string>
     <string name="get_osmand_live">‏‏OsmAnd Live را تهیه کنید تا همهٔ این قابلیت‌ها باز شود: به‌روزآوری روزانهٔ نقشه و دانلودهای نامحدود، همهٔ افزونه‌های رایگان و پولی، ویکی‌پدیا، ویکی‌سفر و...</string>
-    <string name="quick_action_edit_actions">ویرایش عملیات</string>
+    <string name="quick_action_edit_actions">ویرایش کنش‌ها</string>
     <string name="error_notification_desc">لطفاً یک نماگرفت از این اعلان به support@osmand.net بفرستید</string>
     <string name="coord_input_edit_point">اصلاح نقطه</string>
     <string name="coord_input_add_point">افزودن نقطه</string>
@@ -3164,7 +3164,7 @@
     <string name="base_profile_descr_boat">کشتی، روئینگ، بادبانی‌رانی</string>
     <string name="application_profiles_descr">پروفایل‌ها را انتخاب کنید تا در برنامه فعال شوند.</string>
     <string name="application_profiles">پروفایل‌های برنامه</string>
-    <string name="quick_action_need_to_add_item_to_list">در تنظیمات «عملیات فوری» حداقل یک مورد به لیست اضافه کنید</string>
+    <string name="quick_action_need_to_add_item_to_list">در تنظیمات «کنش فوری» حداقل یک مورد به لیست اضافه کنید</string>
     <string name="routing_attr_allow_intermediate_name">مسیرهای متوسط مجاز باشد</string>
     <string name="routing_attr_allow_intermediate_description">مسیرهای سخت‌تر با سراشیبی‌های تندتر. معمولاً موانعی هست که باید مراقبشان باشید.</string>
     <string name="routing_attr_allow_advanced_name">مسیرهای دشوار مجاز باشد</string>
@@ -3576,4 +3576,8 @@
     <string name="shared_string_angle">زاویه</string>
     <string name="recalc_angle_dialog_descr">تا مسیریابی مجدد انجام شود میان موقعیت من و مسیر محاسبه‌شده یک پاره‌خط مستقیم اضافه می‌شود</string>
     <string name="recalc_angle_dialog_title">کمترین زاویه میان موقعیت من و مسیر</string>
+    <string name="shared_string_preparing">آماده‌سازی</string>
+    <string name="shared_string_nothing_selected">چیزی انتخاب نشده</string>
+    <string name="shared_string_quick_actions">کنش‌های فوری</string>
+    <string name="shared_string_profiles">پروفایل‌ها</string>
 </resources>
