@@ -3548,4 +3548,19 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_angle">Àngulu</string>
     <string name="recalc_angle_dialog_descr">Unu segmentu dritu intre sa positzione mea e s\'àndala carculada at a èssere ammustradu finas a cando s\'àndala no at a bènnere carculada torra</string>
     <string name="recalc_angle_dialog_title">Àngulu mìnimu intre sa positzione mea e s\'àndala</string>
+    <string name="shared_string_preparing">Ammaniende</string>
+    <string name="shared_string_poi_types">Castas de PDI</string>
+    <string name="shared_string_nothing_selected">Nudda de ischertadu</string>
+    <string name="shared_string_quick_actions">Atziones lestras</string>
+    <string name="shared_string_profiles">Profilos</string>
+    <string name="listed_exist">Sos %1$s allistados esistint giai in OsmAnd.</string>
+    <string name="replace_all_desc">Sos elementos atuales ant a èssere remplasados cun elementos dae su documentu</string>
+    <string name="replace_all">Remplasa totu</string>
+    <string name="keep_both">Mantene ambos</string>
+    <string name="keep_both_desc">Sos elementos importados ant a èssere annànghidos cun unu prefissu</string>
+    <string name="import_duplicates_description">OsmAnd tenet giai elementos cun su matessi nùmene de cussos importados.
+\n
+\nIscherta un\'atzione.</string>
+    <string name="import_duplicates_title">Carchi elementu esistit giai</string>
+    <string name="select_data_to_import">Ischerta sos datos de importare.</string>
 </resources>
