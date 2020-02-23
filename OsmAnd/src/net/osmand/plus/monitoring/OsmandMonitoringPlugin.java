@@ -288,7 +288,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	public void controlDialog(final Activity activity, final boolean showTrackSelection) {
 		final boolean wasTrackMonitored = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
-		boolean nightMode;
+		final boolean nightMode;
 		if (activity instanceof MapActivity) {
 			nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		} else {
@@ -328,7 +328,17 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 						startGPXMonitoring(activity, showTrackSelection);
 					}
 				} else if (item == R.string.clear_recorded_data) {
-					app.getSavingTrackHelper().clearRecordedData(true);
+					AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
+					builder.setTitle(R.string.clear_recorded_data);
+					builder.setMessage(R.string.are_you_sure);
+					builder.setNegativeButton(R.string.shared_string_cancel, null).setPositiveButton(
+							R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									app.getSavingTrackHelper().clearRecordedData(true);
+								}
+							});
+					builder.show();
 				} else if(item == R.string.gpx_monitoring_stop) {
 					stopRecording();
 				} else if(item == R.string.gpx_start_new_segment) {
