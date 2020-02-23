@@ -205,10 +205,6 @@ public class AppInitializer implements IProgress {
 				app.getSettings().migratePreferences();
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_5).commit();
 			}
-			if (prevAppVersion < VERSION_3_5 || Version.getAppVersion(app).equals("3.5.3")) {
-				app.getSettings().migrateHomeWorkParkingToFavorites();
-				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_5).commit();
-			}
 			if (prevAppVersion < VERSION_3_6) {
 				app.getSettings().migratePreferences();
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_6).commit();
@@ -219,6 +215,13 @@ public class AppInitializer implements IProgress {
 		app.getSettings().SHOW_TRAVEL_UPDATE_CARD.set(true);
 		app.getSettings().SHOW_TRAVEL_NEEDED_MAPS_CARD.set(true);
 		initSettings = true;
+	}
+
+	void migrateHomeWorkFromSettings() {
+		if (prevAppVersion < VERSION_3_5 || Version.getAppVersion(app).equals("3.5.3")) {
+			app.getSettings().migrateHomeWorkParkingToFavorites();
+			startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_5).commit();
+		}
 	}
 
 	public int getNumberOfStarts() {
