@@ -145,7 +145,7 @@
     <string name="disable_all_sharing_desc">إيقاف مشاركة الموقع إلى جميع الدردشات المحددة (%1$d).</string>
     <string name="disable_all_sharing">تعطيل كل المشاركة</string>
     <string name="turn_off_all">إيقاف تشغيل الكل</string>
-    <string name="shared_string_exit">مخرج</string>
+    <string name="shared_string_exit">خروج</string>
     <string name="time_ago">قبل</string>
     <string name="last_response">الاستجابة الأخيرة</string>
     <string name="shared_string_group">مجموعة</string>
