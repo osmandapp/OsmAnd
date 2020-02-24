@@ -1066,7 +1066,7 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="routing_attr_avoid_toll_name">Vyhnúť sa spoplatneným cestám</string>
     <string name="routing_attr_avoid_toll_description">Vyhnúť sa spoplatneným cestám</string>
     <string name="routing_attr_avoid_unpaved_name">Vyhnúť sa nespevneným cestám</string>
-    <string name="routing_attr_avoid_unpaved_description">Vyhnúť sa nespevneným cestám.</string>
+    <string name="routing_attr_avoid_unpaved_description">Vyhnúť sa nespevneným cestám</string>
     <string name="routing_attr_avoid_ferries_name">Vyhnúť sa trajektom</string>
     <string name="routing_attr_avoid_ferries_description">Vyhnúť sa trajektom</string>
     <string name="routing_attr_avoid_motorway_name">Vyhnúť sa diaľniciam</string>
@@ -3467,4 +3467,15 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="use_system_screen_timeout_promo">Predvolene vypnuté, ak OsmAnd beží v popredí, obrazovka nezhasne.
 \n
 \nAk je zapnuté, OsmAnd zhasne obrazovku podľa limitu nastaveného v systéme.</string>
+    <string name="shared_string_app_default_w_val">Predvolená hodnota aplikácie (%s)</string>
+    <string name="profile_type_custom_string">Vlastný profil</string>
+    <string name="shared_string_angle_param">Uhol: %s°</string>
+    <string name="shared_string_angle">Uhol</string>
+    <string name="recalc_angle_dialog_descr">Samostatný rovný úsek medzi mojou polohou a vypočítanou trasou bude zobrazený kým nebude trasa prepočítaná</string>
+    <string name="recalc_angle_dialog_title">Minimálny uhol medzi mojou polohou a trasou</string>
+    <string name="shared_string_preparing">Pripravujem</string>
+    <string name="shared_string_poi_types">Typy bodov záujmu</string>
+    <string name="shared_string_nothing_selected">Nič nie je zvolené</string>
+    <string name="shared_string_quick_actions">Rýchle akcie</string>
+    <string name="shared_string_profiles">Profily</string>
 </resources>

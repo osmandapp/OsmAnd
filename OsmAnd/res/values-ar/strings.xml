@@ -261,7 +261,7 @@
     <string name="show_gps_coordinates_text">عرض الإحداثيات على الخريطة</string>
     <string name="use_internet">اسخدام الإنترنت</string>
     <string name="show_location">عرض موقعك</string>
-    <string name="shared_string_exit">مخرج</string>
+    <string name="shared_string_exit">خروج</string>
     <string name="search_address">عنوان البحث</string>
     <string name="choose_building">اختيار مبنى</string>
     <string name="choose_street">اختيار الشارع</string>
