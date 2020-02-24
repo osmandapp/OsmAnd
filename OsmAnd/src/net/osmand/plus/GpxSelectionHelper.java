@@ -711,7 +711,7 @@ public class GpxSelectionHelper {
 		}
 
 		public boolean isLoaded() {
-			return gpxFile.modifiedTime != 0;
+			return gpxFile.modifiedTime != -1;
 		}
 
 		public GPXTrackAnalysis getTrackAnalysis(OsmandApplication app) {
@@ -963,8 +963,7 @@ public class GpxSelectionHelper {
 	}
 
 	public void runSelection(Map<String, Boolean> selectedItems, SelectGpxTaskListener gpxTaskListener) {
-		if (selectGpxTask != null && (selectGpxTask.getStatus() == AsyncTask.Status.RUNNING
-				|| selectGpxTask.getStatus() == AsyncTask.Status.PENDING)) {
+		if (selectGpxTask != null && (selectGpxTask.getStatus() == AsyncTask.Status.RUNNING)) {
 			selectGpxTask.cancel(false);
 		}
 		selectGpxTask = new SelectGpxTask(selectedItems, gpxTaskListener);
@@ -1039,6 +1038,9 @@ public class GpxSelectionHelper {
 					visible = selectedItems.get(filePath);
 				}
 				if (visible) {
+					if (!sf.isShowCurrentTrack()) {
+						sf.getGpxFile().modifiedTime = -1;
+					}
 					originalSelectedItems.add(sf.getGpxFile());
 				}
 				addRemoveSelected(visible, sf);
