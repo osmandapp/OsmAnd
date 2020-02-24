@@ -1,16 +1,20 @@
 package net.osmand.plus.settings;
 
 import android.app.Dialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.LinearLayout;
 
 import net.osmand.map.ITileSource;
 import net.osmand.plus.AppInitializer;
@@ -38,9 +42,10 @@ public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implement
 	public static final String TAG = ImportSettingsFragment.class.getSimpleName();
 	private OsmandApplication app;
 	private RecyclerView list;
+	private LinearLayout buttonsContainer;
+	private NestedScrollView nestedScroll;
 	private List<? super Object> duplicatesList;
 	private List<SettingsItem> settingsItems;
-	private DuplicatesSettingsAdapter adapter;
 	private File file;
 	private boolean nightMode;
 
@@ -82,6 +87,8 @@ public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implement
 		setupToolbar((Toolbar) root.findViewById(R.id.toolbar));
 		ComplexButton replaceAllBtn = root.findViewById(R.id.replace_all_btn);
 		ComplexButton keepBothBtn = root.findViewById(R.id.keep_both_btn);
+		buttonsContainer = root.findViewById(R.id.buttons_container);
+		nestedScroll = root.findViewById(R.id.nested_scroll);
 		keepBothBtn.setIcon(getPaintedContentIcon(R.drawable.ic_action_keep_both,
 				nightMode
 						? getResources().getColor(R.color.icon_color_active_dark)
@@ -95,6 +102,22 @@ public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implement
 		keepBothBtn.setOnClickListener(this);
 		replaceAllBtn.setOnClickListener(this);
 		list = root.findViewById(R.id.list);
+		ViewTreeObserver treeObserver = buttonsContainer.getViewTreeObserver();
+		treeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				if (buttonsContainer != null) {
+					ViewTreeObserver vts = buttonsContainer.getViewTreeObserver();
+					int height = buttonsContainer.getMeasuredHeight();
+					nestedScroll.setPadding(0, 0, 0, height);
+					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+						vts.removeOnGlobalLayoutListener(this);
+					} else {
+						vts.removeGlobalOnLayoutListener(this);
+					}
+				}
+			}
+		});
 
 		return root;
 	}
@@ -117,7 +140,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implement
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		adapter = new DuplicatesSettingsAdapter(getMyApplication(), prepareDuplicates(), nightMode);
+		DuplicatesSettingsAdapter adapter = new DuplicatesSettingsAdapter(getMyApplication(), prepareDuplicates(), nightMode);
 		list.setLayoutManager(new LinearLayoutManager(getMyApplication()));
 		list.setAdapter(adapter);
 	}
@@ -236,6 +259,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implement
 				dismiss();
 			}
 		});
+		toolbar.setTitle(getString(R.string.import_duplicates_title));
 	}
 
 	public void setDuplicatesList(List<? super Object> duplicatesList) {
