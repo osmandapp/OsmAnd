@@ -864,8 +864,10 @@ public class SearchUICore {
 			if ((!topVisible1 && !topVisible2) || (topVisible1 && topVisible2)) {
 				if (o1.getUnknownPhraseMatchWeight() != o2.getUnknownPhraseMatchWeight()) {
 					return -Double.compare(o1.getUnknownPhraseMatchWeight(), o2.getUnknownPhraseMatchWeight());
-				} else if (o1.getFoundWordCount() != o2.getFoundWordCount()) {
-					return -Algorithms.compare(o1.getFoundWordCount(), o2.getFoundWordCount());
+				} else {
+					if (o1.getFoundWordCount() != o2.getFoundWordCount()) {
+						return -Algorithms.compare(o1.getFoundWordCount(), o2.getFoundWordCount());
+					}
 				}
 			}
 			if (!sortByName) {

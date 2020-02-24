@@ -37,6 +37,7 @@ public class Amenity extends MapObject {
 	public static final String CONTENT = "content";
 	public static final String CUISINE = "cuisine";
 	public static final String DISH = "dish";
+	public static final String REF = "ref";
 	public static final String OSM_DELETE_VALUE = "delete";
 	public static final String OSM_DELETE_TAG = "osmand_change";
 
