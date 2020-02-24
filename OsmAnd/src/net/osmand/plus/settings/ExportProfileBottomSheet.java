@@ -1,5 +1,6 @@
 package net.osmand.plus.settings;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -15,7 +16,6 @@ import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ExpandableListView;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
@@ -42,6 +42,7 @@ import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -287,15 +288,29 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	private void prepareFile() {
-		if (app != null) {
+		Context context = getContext();
+		if (app != null && context != null) {
 			File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
 			if (!tempDir.exists()) {
 				tempDir.mkdirs();
 			}
 			String fileName = profile.toHumanString();
+
+			ProgressDialog progress = new ProgressDialog(context);
+			progress.setTitle(app.getString(R.string.export_profile));
+			progress.setMessage(app.getString(R.string.shared_string_preparing));
+			progress.setCancelable(false);
+			progress.show();
+
+			final WeakReference<ProgressDialog> progressRef = new WeakReference<>(progress);
+
 			app.getSettingsHelper().exportSettings(tempDir, fileName, new SettingsHelper.SettingsExportListener() {
 				@Override
 				public void onSettingsExportFinished(@NonNull File file, boolean succeed) {
+					ProgressDialog progress = progressRef.get();
+					if (progress != null) {
+						progress.dismiss();
+					}
 					if (succeed) {
 						shareProfile(file, profile);
 					} else {

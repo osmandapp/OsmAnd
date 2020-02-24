@@ -2,7 +2,6 @@ package net.osmand.plus;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
@@ -1831,7 +1830,6 @@ public class SettingsHelper {
 		private SettingsExporter exporter;
 		private File file;
 		private SettingsExportListener listener;
-		private ProgressDialog progress;
 
 		ExportAsyncTask(@NonNull File settingsFile,
 						@Nullable SettingsExportListener listener,
@@ -1841,14 +1839,6 @@ public class SettingsHelper {
 			this.exporter = new SettingsExporter();
 			for (SettingsItem item : items) {
 				exporter.addSettingsItem(item);
-			}
-		}
-
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			if (activity != null) {
-				progress = ProgressDialog.show(activity, app.getString(R.string.export_profile), app.getString(R.string.shared_string_preparing));
 			}
 		}
 
@@ -1867,11 +1857,8 @@ public class SettingsHelper {
 
 		@Override
 		protected void onPostExecute(Boolean success) {
-			if (activity != null) {
-				progress.dismiss();
-				if (listener != null) {
-					listener.onSettingsExportFinished(file, success);
-				}
+			if (listener != null) {
+				listener.onSettingsExportFinished(file, success);
 			}
 		}
 	}

@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="saving_new_profile">Saving new profile</string>
+    <string name="profile_backup_failed">Could not back up profile.</string>
     <string name="profile_type_custom_string">Custom profile</string>
     <string name="shared_string_angle_param">Angle: %s°</string>
     <string name="shared_string_angle">Angle</string>
