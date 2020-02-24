@@ -7,12 +7,14 @@
 	<TextView
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginLeft="24dp"
-		android:layout_marginTop="16dp"
-		android:layout_marginRight="16dp"
+		android:layout_marginLeft="@dimen/dialog_content_margin"
+		android:layout_marginTop="@dimen/content_padding"
+		android:layout_marginRight="@dimen/content_padding"
 		android:textColor="?android:attr/textColorSecondary"
-		android:layout_marginBottom="8dp"
-		android:text="@string/animate_routing_gpx" />
+		android:layout_marginBottom="@dimen/content_padding_half"
+		android:text="@string/animate_routing_gpx"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:layout_marginStart="@dimen/dialog_content_margin" />
 
 	<LinearLayout
 		android:id="@+id/layout_animate_gpx"
@@ -23,27 +25,33 @@
 		<TextView
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginLeft="24dp"
-			android:layout_marginTop="5dp"
-			android:layout_marginRight="16dp"
+			android:layout_marginLeft="@dimen/dialog_content_margin"
+			android:layout_marginTop="@dimen/map_small_button_margin"
+			android:layout_marginRight="@dimen/content_padding"
 			android:textColor="?android:attr/textColorSecondary"
-			android:gravity="left"
-			android:text="@string/select_animate_speedup" />
+			android:gravity="start"
+			android:text="@string/select_animate_speedup"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginStart="@dimen/dialog_content_margin" />
 
 		<SeekBar
 			android:id="@+id/Speedup"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginLeft="24dp"
-			android:layout_marginTop="5dp"
-			android:layout_marginRight="16dp" />
+			android:layout_marginLeft="@dimen/dialog_content_margin"
+			android:layout_marginTop="@dimen/map_small_button_margin"
+			android:layout_marginRight="@dimen/content_padding"
+			android:layout_marginStart="@dimen/dialog_content_margin"
+			android:layout_marginEnd="@dimen/content_padding" />
 
 		<LinearLayout
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginLeft="24dp"
-			android:layout_marginTop="5dp"
-			android:layout_marginRight="16dp">
+			android:layout_marginLeft="@dimen/dialog_content_margin"
+			android:layout_marginTop="@dimen/map_small_button_margin"
+			android:layout_marginRight="@dimen/content_padding"
+			android:layout_marginStart="@dimen/dialog_content_margin"
+			android:layout_marginEnd="@dimen/content_padding">
 
 			<TextView
 				android:id="@+id/MinSpeedup"
@@ -51,7 +59,7 @@
 				android:layout_height="wrap_content"
 				android:textColor="?android:attr/textColorSecondary"
 				android:layout_weight="0.5"
-				android:gravity="left"
+				android:gravity="start"
 				android:text="10" />
 
 			<TextView
@@ -60,7 +68,7 @@
 				android:layout_height="wrap_content"
 				android:textColor="?android:attr/textColorSecondary"
 				android:layout_weight="0.5"
-				android:gravity="right"
+				android:gravity="end"
 				android:text="15" />
 		</LinearLayout>
 	</LinearLayout>

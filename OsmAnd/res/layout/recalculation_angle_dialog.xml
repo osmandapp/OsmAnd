@@ -18,7 +18,9 @@
             android:paddingLeft="@dimen/content_padding"
             android:paddingRight="@dimen/content_padding"
             android:paddingTop="@dimen/content_padding"
-            android:paddingBottom="@dimen/content_padding_half">
+            android:paddingBottom="@dimen/content_padding_half"
+	        android:paddingEnd="@dimen/content_padding"
+	        android:paddingStart="@dimen/content_padding">
 
             <net.osmand.plus.widgets.TextViewEx
                 android:layout_width="match_parent"
@@ -69,7 +71,8 @@
                     android:paddingRight="4dp"
                     android:textColor="?android:textColorPrimary"
                     android:textSize="@dimen/default_list_text_size"
-                    tools:text="60" />
+                    tools:text="60"
+	                android:paddingEnd="4dp" />
 
                 <TextView
                     android:id="@+id/angle_units"

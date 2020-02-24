@@ -14,7 +14,9 @@
 		android:paddingRight="@dimen/route_info_icon_padding_left"
 		android:paddingTop="@dimen/route_info_icon_vertical_padding"
 		android:scaleType="center"
-		tools:src="@drawable/ic_dashboard_dark" />
+		tools:src="@drawable/ic_dashboard_dark"
+		android:paddingEnd="@dimen/route_info_icon_padding_left"
+		android:paddingStart="@dimen/route_info_icon_padding_left" />
 
 	<View
 		android:id="@+id/selection"

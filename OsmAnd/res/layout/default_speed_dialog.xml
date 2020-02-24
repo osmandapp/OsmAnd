@@ -18,7 +18,9 @@
 			android:paddingLeft="@dimen/content_padding"
 			android:paddingRight="@dimen/content_padding"
 			android:paddingTop="@dimen/content_padding"
-			android:paddingBottom="@dimen/content_padding_half">
+			android:paddingBottom="@dimen/content_padding_half"
+			android:paddingStart="@dimen/content_padding"
+			android:paddingEnd="@dimen/content_padding">
 
 			<net.osmand.plus.widgets.TextViewEx
 				android:layout_width="match_parent"
@@ -61,7 +63,9 @@
 			android:paddingLeft="@dimen/content_padding"
 			android:paddingRight="@dimen/content_padding"
 			android:paddingTop="@dimen/content_padding"
-			android:paddingBottom="@dimen/content_padding_half">
+			android:paddingBottom="@dimen/content_padding_half"
+			android:paddingEnd="@dimen/content_padding"
+			android:paddingStart="@dimen/content_padding">
 
 			<include
 				android:id="@+id/default_speed_layout"
@@ -83,7 +87,9 @@
 			android:paddingLeft="@dimen/content_padding"
 			android:paddingRight="@dimen/content_padding"
 			android:paddingTop="@dimen/content_padding"
-			android:paddingBottom="@dimen/content_padding_half">
+			android:paddingBottom="@dimen/content_padding_half"
+			android:paddingEnd="@dimen/content_padding"
+			android:paddingStart="@dimen/content_padding">
 
 			<include
 				android:id="@+id/max_speed_layout"

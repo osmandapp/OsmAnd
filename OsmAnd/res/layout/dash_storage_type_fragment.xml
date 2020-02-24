@@ -9,7 +9,9 @@
               android:layout_marginRight="@dimen/dash_margin_h"
               android:layout_marginTop="@dimen/dash_margin"
               android:background="?attr/bg_card"
-              android:orientation="vertical">
+              android:orientation="vertical"
+	android:layout_marginStart="@dimen/dash_margin_h"
+	android:layout_marginEnd="@dimen/dash_margin_h">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +20,9 @@
         android:orientation="vertical"
         android:paddingLeft="@dimen/list_content_padding"
         android:paddingRight="@dimen/list_content_padding"
-        android:paddingTop="@dimen/list_content_padding">
+        android:paddingTop="@dimen/list_content_padding"
+	    android:paddingEnd="@dimen/list_content_padding"
+	    android:paddingStart="@dimen/list_content_padding">
 
         <TextView
             android:layout_width="wrap_content"
@@ -79,7 +83,9 @@
         android:paddingRight="@dimen/list_content_padding"
         android:paddingTop="3dp"
         android:text="@string/android_19_location_disabled"
-        android:textSize="@dimen/default_list_text_size"/>
+        android:textSize="@dimen/default_list_text_size"
+	    android:paddingEnd="@dimen/list_content_padding"
+	    android:paddingStart="@dimen/list_content_padding" />
 
     <View
         android:id="@+id/divider"
@@ -108,7 +114,9 @@
             android:paddingRight="5dp"
             android:text="@string/shared_string_cancel"
             osmand:textAllCapsCompat="true"
-            osmand:typeface="@string/font_roboto_medium"/>
+            osmand:typeface="@string/font_roboto_medium"
+	        android:paddingStart="5dp"
+	        android:paddingEnd="5dp" />
 
         <net.osmand.plus.widgets.ButtonEx
             android:id="@+id/dont_copy_maps"

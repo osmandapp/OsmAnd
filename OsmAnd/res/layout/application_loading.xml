@@ -5,13 +5,13 @@
 			  android:layout_height="wrap_content"
 			  android:layout_gravity="top|start"
 			  android:gravity="end"
-			  android:paddingTop="5dp"
+			  android:paddingTop="@dimen/map_small_button_margin"
 			  android:orientation="horizontal">
 
 		<ProgressBar
 			android:id="@+id/ProgressBar"
 			android:layout_width="wrap_content"
-			android:layout_height="30dp"/>
+			android:layout_height="@dimen/card_button_progress_size"/>
 
 		<TextView
 			android:id="@+id/ProgressMessage"
@@ -21,7 +21,8 @@
 			android:visibility="gone"
 			android:layout_gravity="center_vertical"
 			android:text="@string/loading_data"
-			android:layout_marginRight="5dp"
-			android:textSize="@dimen/default_desc_text_size"/>
+			android:layout_marginRight="@dimen/map_small_button_margin"
+			android:textSize="@dimen/default_desc_text_size"
+			android:layout_marginEnd="@dimen/map_small_button_margin" />
 
 </LinearLayout>

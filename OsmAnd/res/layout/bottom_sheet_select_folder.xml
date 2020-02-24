@@ -16,7 +16,9 @@
 		android:paddingRight="@dimen/content_padding"
 		app:labelText="@string/enter_path_to_folder"
 		app:primaryColor="?android:textColorPrimary"
-		app:secondaryColor="?android:textColorSecondary">
+		app:secondaryColor="?android:textColorSecondary"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingEnd="@dimen/content_padding">
 
 		<studio.carbonylgroup.textfieldboxes.ExtendedEditText
 			android:id="@+id/text"
@@ -34,7 +36,9 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginLeft="@dimen/content_padding"
-		android:layout_marginRight="@dimen/content_padding">
+		android:layout_marginRight="@dimen/content_padding"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:layout_marginStart="@dimen/content_padding">
 
 		<TextView
 			android:id="@+id/description"
@@ -48,7 +52,9 @@
 			android:paddingRight="@dimen/content_padding"
 			android:textColor="?android:textColorSecondary"
 			android:textSize="@dimen/default_sub_text_size"
-			tools:text="EditText description" />
+			tools:text="EditText description"
+			android:paddingEnd="@dimen/content_padding"
+			android:paddingStart="@dimen/content_padding" />
 
 	</FrameLayout>
 

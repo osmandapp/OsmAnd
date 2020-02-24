@@ -53,7 +53,8 @@
                     android:textColor="@color/color_white"
                     android:textSize="@dimen/default_desc_text_size"
                     tools:drawableRight="@drawable/ic_action_car_dark"
-                    tools:text="car"/>
+                    tools:text="car"
+	                tools:drawableEnd="@drawable/ic_action_car_dark" />
             </LinearLayout>
 
         </android.support.v7.widget.Toolbar>
@@ -78,7 +79,9 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="@dimen/bottom_sheet_content_margin_small"
                 android:layout_marginRight="@dimen/bottom_sheet_content_margin_small"
-                tools:src="@drawable/img_help_markers_direction_device_night"/>
+                tools:src="@drawable/img_help_markers_direction_device_night"
+	            android:layout_marginStart="@dimen/bottom_sheet_content_margin_small"
+	            android:layout_marginEnd="@dimen/bottom_sheet_content_margin_small" />
         </FrameLayout>
 
         <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
@@ -91,7 +94,9 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/content_padding"
                 android:layout_marginRight="@dimen/content_padding"
-                android:orientation="vertical">
+                android:orientation="vertical"
+	            android:layout_marginEnd="@dimen/content_padding"
+	            android:layout_marginStart="@dimen/content_padding">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -128,7 +133,8 @@
                             android:textColor="?attr/contextMenuButtonColor"
                             android:textSize="@dimen/default_list_text_size"
                             tools:drawableRight="@drawable/ic_action_arrow_drop_down"
-                            tools:text="Two"/>
+                            tools:text="Two"
+	                        tools:drawableEnd="@drawable/ic_action_arrow_drop_down" />
                     </LinearLayout>
 
                     <View
@@ -163,7 +169,9 @@
                         android:layout_height="@dimen/bottom_sheet_title_height"
                         android:background="?attr/selectableItemBackground"
                         android:paddingLeft="@dimen/content_padding"
-                        android:paddingRight="@dimen/content_padding">
+                        android:paddingRight="@dimen/content_padding"
+	                    android:paddingStart="@dimen/content_padding"
+	                    android:paddingEnd="@dimen/content_padding">
 
                         <TextView
                             android:layout_width="0dp"
@@ -204,7 +212,9 @@
                         android:paddingTop="@dimen/content_padding_small"
                         android:text="@string/distance_indication_descr"
                         android:textColor="?android:textColorSecondary"
-                        android:textSize="@dimen/default_desc_text_size"/>
+                        android:textSize="@dimen/default_desc_text_size"
+	                    android:layout_marginStart="@dimen/content_padding"
+	                    android:layout_marginEnd="@dimen/content_padding" />
 
                     <LinearLayout
                         android:id="@+id/top_bar_row"
@@ -301,7 +311,9 @@
                         android:layout_height="@dimen/bottom_sheet_title_height"
                         android:background="?attr/selectableItemBackground"
                         android:paddingLeft="@dimen/content_padding"
-                        android:paddingRight="@dimen/content_padding">
+                        android:paddingRight="@dimen/content_padding"
+	                    android:paddingStart="@dimen/content_padding"
+	                    android:paddingEnd="@dimen/content_padding">
 
                         <TextView
                             android:layout_width="0dp"
@@ -342,7 +354,9 @@
                         android:paddingTop="@dimen/content_padding_small"
                         android:text="@string/show_arrows_descr"
                         android:textColor="?android:textColorSecondary"
-                        android:textSize="@dimen/default_desc_text_size"/>
+                        android:textSize="@dimen/default_desc_text_size"
+	                    android:layout_marginStart="@dimen/content_padding"
+	                    android:layout_marginEnd="@dimen/content_padding" />
 
                 </LinearLayout>
 
@@ -359,7 +373,9 @@
                         android:layout_height="@dimen/bottom_sheet_title_height"
                         android:background="?attr/selectableItemBackground"
                         android:paddingLeft="@dimen/content_padding"
-                        android:paddingRight="@dimen/content_padding">
+                        android:paddingRight="@dimen/content_padding"
+	                    android:paddingStart="@dimen/content_padding"
+	                    android:paddingEnd="@dimen/content_padding">
 
                         <TextView
                             android:layout_width="0dp"
@@ -400,7 +416,9 @@
                         android:paddingTop="@dimen/content_padding_small"
                         android:text="@string/show_guide_line_descr"
                         android:textColor="?android:textColorSecondary"
-                        android:textSize="@dimen/default_desc_text_size"/>
+                        android:textSize="@dimen/default_desc_text_size"
+	                    android:layout_marginEnd="@dimen/content_padding"
+	                    android:layout_marginStart="@dimen/content_padding" />
 
                 </LinearLayout>
 
@@ -417,7 +435,9 @@
                         android:layout_height="@dimen/bottom_sheet_title_height"
                         android:background="?attr/selectableItemBackground"
                         android:paddingLeft="@dimen/content_padding"
-                        android:paddingRight="@dimen/content_padding">
+                        android:paddingRight="@dimen/content_padding"
+	                    android:paddingEnd="@dimen/content_padding"
+	                    android:paddingStart="@dimen/content_padding">
 
                         <TextView
                             android:layout_width="0dp"
@@ -458,7 +478,9 @@
                         android:paddingTop="@dimen/content_padding_small"
                         android:text="@string/one_tap_active_descr"
                         android:textColor="?android:textColorSecondary"
-                        android:textSize="@dimen/default_desc_text_size"/>
+                        android:textSize="@dimen/default_desc_text_size"
+	                    android:layout_marginStart="@dimen/content_padding"
+	                    android:layout_marginEnd="@dimen/content_padding" />
 
                 </LinearLayout>
 
@@ -476,7 +498,9 @@
                         android:layout_height="@dimen/bottom_sheet_title_height"
                         android:background="?attr/selectableItemBackground"
                         android:paddingLeft="@dimen/content_padding"
-                        android:paddingRight="@dimen/content_padding">
+                        android:paddingRight="@dimen/content_padding"
+	                    android:paddingStart="@dimen/content_padding"
+	                    android:paddingEnd="@dimen/content_padding">
 
                         <TextView
                             android:layout_width="0dp"
@@ -517,7 +541,9 @@
                         android:paddingTop="@dimen/content_padding_small"
                         android:text="@string/keep_passed_markers_descr"
                         android:textColor="?android:textColorSecondary"
-                        android:textSize="@dimen/default_desc_text_size"/>
+                        android:textSize="@dimen/default_desc_text_size"
+	                    android:layout_marginStart="@dimen/content_padding"
+	                    android:layout_marginEnd="@dimen/content_padding" />
 
                 </LinearLayout>
 

@@ -10,9 +10,10 @@
 		android:id="@+id/divider_list"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:layout_marginLeft="54dp"
+		android:layout_marginLeft="@dimen/route_info_list_text_padding"
 		android:background="?attr/dashboard_divider"
-		android:visibility="gone"/>
+		android:visibility="gone"
+		android:layout_marginStart="@dimen/route_info_list_text_padding" />
 
 	<View
 		android:id="@+id/divider_dash"
@@ -33,7 +34,8 @@
 			android:layout_height="wrap_content"
 			android:layout_marginLeft="@dimen/list_content_padding"
 			android:focusable="false"
-			android:visibility="gone"/>
+			android:visibility="gone"
+			android:layout_marginStart="@dimen/list_content_padding" />
 
 		<ImageView
 			android:id="@+id/icon"
@@ -41,7 +43,8 @@
 			android:layout_height="wrap_content"
 			android:layout_marginLeft="@dimen/list_content_padding"
 			android:src="@drawable/ic_action_polygom_dark"
-			android:visibility="visible"/>
+			android:visibility="visible"
+			android:layout_marginStart="@dimen/list_content_padding" />
 
 
 		<LinearLayout
@@ -52,7 +55,9 @@
 			android:paddingLeft="@dimen/subHeaderMarginLeft"
 			android:paddingRight="@dimen/showAllButtonMarginRight"
 			android:layout_weight="1"
-			android:orientation="vertical">
+			android:orientation="vertical"
+			android:paddingEnd="@dimen/showAllButtonMarginRight"
+			android:paddingStart="@dimen/subHeaderMarginLeft">
 
 			<TextView
 				android:id="@+id/name"
@@ -75,7 +80,8 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginRight="@dimen/gpx_small_icon_margin"
-					android:src="@drawable/ic_small_distance"/>
+					android:src="@drawable/ic_small_distance"
+					android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
 
 				<TextView
 					android:id="@+id/distance"
@@ -84,14 +90,16 @@
 					android:layout_marginRight="@dimen/gpx_small_text_margin"
                     android:includeFontPadding="false"
 					android:textColor="?android:textColorSecondary"
-					android:textSize="@dimen/default_sub_text_size"/>
+					android:textSize="@dimen/default_sub_text_size"
+					android:layout_marginEnd="@dimen/gpx_small_text_margin" />
 
 				<ImageView
 					android:id="@+id/points_icon"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginRight="@dimen/gpx_small_icon_margin"
-					android:src="@drawable/ic_small_point"/>
+					android:src="@drawable/ic_small_point"
+					android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
 
 				<TextView
 					android:id="@+id/points_count"
@@ -100,14 +108,16 @@
 					android:layout_marginRight="@dimen/gpx_small_text_margin"
                     android:includeFontPadding="false"
 					android:textColor="?android:textColorSecondary"
-					android:textSize="@dimen/default_sub_text_size"/>
+					android:textSize="@dimen/default_sub_text_size"
+					android:layout_marginEnd="@dimen/gpx_small_text_margin" />
 
 				<ImageView
 					android:id="@+id/time_icon"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginRight="@dimen/gpx_small_icon_margin"
-					android:src="@drawable/ic_small_time"/>
+					android:src="@drawable/ic_small_time"
+					android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
 
 				<TextView
 					android:id="@+id/time"
@@ -116,7 +126,8 @@
 					android:layout_marginRight="@dimen/gpx_small_text_margin"
 					android:textColor="?android:textColorSecondary"
                     android:includeFontPadding="false"
-					android:textSize="@dimen/default_sub_text_size"/>
+					android:textSize="@dimen/default_sub_text_size"
+					android:layout_marginEnd="@dimen/gpx_small_text_margin" />
 
 			</LinearLayout>
 
@@ -153,7 +164,8 @@
 			android:layout_marginLeft="@dimen/favorites_icon_right_margin"
 			android:background="?attr/dashboard_button"
 			android:src="@drawable/ic_action_gsave_dark"
-			android:visibility="gone"/>
+			android:visibility="gone"
+			android:layout_marginStart="@dimen/favorites_icon_right_margin" />
 
 		<ImageButton
 			android:id="@+id/stop"
@@ -179,14 +191,15 @@
 			android:layout_height="wrap_content"
             android:gravity="center_vertical"
 			android:layout_marginRight="@dimen/list_content_padding"
-            android:visibility="gone">
+            android:visibility="gone"
+			android:layout_marginEnd="@dimen/list_content_padding">
 
 			<android.support.v7.widget.SwitchCompat
 				android:id="@+id/toggle_item"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:paddingTop="4dp"
-				android:paddingBottom="4dp"
+				android:paddingTop="@dimen/list_item_button_padding"
+				android:paddingBottom="@dimen/list_item_button_padding"
                 android:clickable="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
@@ -196,8 +209,8 @@
 				android:id="@+id/toggle_checkbox_item"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
+                android:paddingTop="@dimen/list_item_button_padding"
+                android:paddingBottom="@dimen/list_item_button_padding"
                 android:clickable="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"

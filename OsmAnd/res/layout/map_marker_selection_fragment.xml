@@ -29,7 +29,8 @@
             android:textColor="@color/color_white"
             android:textSize="@dimen/default_list_text_size_large"
             android:textStyle="bold"
-            app:typeface="@string/font_roboto_regular"/>
+            app:typeface="@string/font_roboto_regular"
+	        android:layout_marginStart="16dp" />
 
     </LinearLayout>
 

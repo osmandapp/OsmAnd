@@ -22,9 +22,11 @@
 		android:minHeight="@dimen/route_info_card_item_height"
 		android:orientation="horizontal"
 		android:paddingLeft="@dimen/list_content_padding"
-		android:paddingTop="8dp"
+		android:paddingTop="@dimen/content_padding_half"
 		android:paddingRight="@dimen/list_content_padding"
-		android:paddingBottom="8dp">
+		android:paddingBottom="@dimen/content_padding_half"
+		android:paddingEnd="@dimen/list_content_padding"
+		android:paddingStart="@dimen/list_content_padding">
 
 		<android.support.v7.widget.AppCompatImageView
 			android:id="@+id/imageView"

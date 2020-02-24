@@ -14,7 +14,9 @@
         android:paddingBottom="8dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:paddingTop="8dp">
+        android:paddingTop="8dp"
+	    android:paddingEnd="16dp"
+	    android:paddingStart="16dp">
 
         <CheckBox
             android:id="@+id/toggle_item"
@@ -24,7 +26,8 @@
             android:layout_marginRight="20dp"
             android:focusable="false"
             android:visibility="gone"
-            tools:visibility="visible"/>
+            tools:visibility="visible"
+	        android:layout_marginEnd="20dp" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -32,14 +35,16 @@
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="8dp"
-            android:scaleType="centerInside"/>
+            android:scaleType="centerInside"
+	        android:layout_marginEnd="8dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="8dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+	        android:layout_marginStart="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -56,7 +61,8 @@
                     android:paddingRight="16dp"
                     android:textColor="?android:textColorPrimary"
                     android:textSize="@dimen/default_list_text_size"
-                    tools:text="Amsterdam"/>
+                    tools:text="Amsterdam"
+	                android:paddingEnd="16dp" />
 
                 <LinearLayout
                     android:id="@+id/compass_layout"
@@ -79,7 +85,8 @@
                         android:layout_marginLeft="2dp"
                         android:textColor="?android:textColorSecondary"
                         android:textSize="@dimen/default_sub_text_size"
-                        tools:text="100500 km"/>
+                        tools:text="100500 km"
+	                    android:layout_marginStart="2dp" />
 
                 </LinearLayout>
 
@@ -88,7 +95,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right"
+                android:gravity="end"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -104,7 +111,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="4dp"
                         android:layout_marginTop="4.5dp"
-                        android:src="@drawable/ic_small_group" />
+                        android:src="@drawable/ic_small_group"
+	                    android:layout_marginEnd="4dp" />
 
                     <TextView
                         android:id="@+id/subtitle"
@@ -129,7 +137,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="@dimen/gpx_small_icon_margin"
-                        android:src="@drawable/ic_small_time"/>
+                        android:src="@drawable/ic_small_time"
+	                    android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
 
                     <TextView
                         android:id="@+id/time"

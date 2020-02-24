@@ -6,7 +6,9 @@
 	android:layout_height="wrap_content"
 	android:layout_marginLeft="1dp"
 	android:layout_marginRight="1dp"
-	android:orientation="vertical">
+	android:orientation="vertical"
+	android:layout_marginEnd="1dp"
+	android:layout_marginStart="1dp">
 
 	<LinearLayout
 		android:id="@+id/button_container"
@@ -15,7 +17,9 @@
 		android:baselineAligned="false"
 		android:orientation="vertical"
 		android:paddingLeft="@dimen/card_padding"
-		android:paddingRight="@dimen/card_padding">
+		android:paddingRight="@dimen/card_padding"
+		android:paddingEnd="@dimen/card_padding"
+		android:paddingStart="@dimen/card_padding">
 
 		<LinearLayout
 			android:layout_width="match_parent"

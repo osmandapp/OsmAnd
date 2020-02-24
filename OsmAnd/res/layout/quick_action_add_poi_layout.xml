@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:padding="16dp"
+                android:padding="@dimen/content_padding"
                 android:text="@string/quick_action_interim_dialog"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/default_list_text_size"/>
@@ -36,8 +36,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"/>
+                android:layout_marginLeft="@dimen/content_padding"
+                android:layout_marginRight="@dimen/content_padding"
+	            android:layout_marginEnd="@dimen/content_padding"
+	            android:layout_marginStart="@dimen/content_padding" />
 
         </LinearLayout>
 
@@ -52,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/content_padding"
             android:scaleType="fitXY"
             android:src="@drawable/bg_shadow_list_top"/>
 
@@ -60,8 +62,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/bg_color"
-            android:paddingTop="16dp"
-            android:paddingBottom="8dp"
+            android:paddingTop="@dimen/content_padding"
+            android:paddingBottom="@dimen/content_padding_half"
             osmand:layout_scrollFlags="scroll">
             <!--android:layout_marginLeft="72dp"-->
 
@@ -78,8 +80,9 @@
                 android:id="@+id/poiTypeTextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_weight="1">
+                android:layout_marginLeft="@dimen/content_padding"
+                android:layout_weight="1"
+	            android:layout_marginStart="@dimen/content_padding">
 
                 <AutoCompleteTextView
                     android:id="@+id/poiTypeEditText"
@@ -92,7 +95,9 @@
                     android:imeOptions="actionSend"
                     android:inputType="text"
                     android:layout_marginLeft="-4dp"
-                    tools:text="@string/lorem_ipsum"/>
+                    tools:text="@string/lorem_ipsum"
+	                android:drawableEnd="@drawable/ic_action_arrow_drop_down"
+	                android:layout_marginStart="-4dp" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -139,15 +144,18 @@
                 android:id="@+id/addTagButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginLeft="@dimen/content_padding"
+                android:layout_marginTop="@dimen/content_padding"
                 android:background="@drawable/bg_orange_rounded_coners"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
+                android:paddingLeft="@dimen/content_padding"
+                android:paddingRight="@dimen/content_padding"
                 android:text="@string/add_tag"
                 android:textColor="@color/color_white"
                 android:textSize="@dimen/default_sub_text_size"
-                osmand:typeface="@string/font_roboto_medium"/>
+                osmand:typeface="@string/font_roboto_medium"
+	            android:layout_marginStart="@dimen/content_padding"
+	            android:paddingEnd="@dimen/content_padding"
+	            android:paddingStart="@dimen/content_padding" />
 
             <!--<net.osmand.plus.widgets.ButtonEx-->
                 <!--android:id="@+id/addTypeButton"-->

@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
-            android:paddingBottom="8dp"
+            android:paddingBottom="@dimen/content_padding_half"
             android:orientation="horizontal">
 
             <CheckBox
@@ -26,28 +26,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/list_content_padding"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="@dimen/content_padding_small"
                 android:focusable="false"
-                android:visibility="gone"/>
+                android:visibility="gone"
+	            android:layout_marginStart="@dimen/list_content_padding" />
 
             <ImageView
                 android:id="@+id/icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/list_content_padding"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="@dimen/content_padding_small"
                 android:src="@drawable/monitoring_rec_big"
-                android:visibility="visible"/>
+                android:visibility="visible"
+	            android:layout_marginStart="@dimen/list_content_padding" />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="12dp"
+                android:paddingTop="@dimen/content_padding_small"
                 android:layout_marginLeft="@dimen/subHeaderMarginLeft"
                 android:layout_marginRight="@dimen/showAllButtonMarginRight"
                 android:gravity="center_vertical"
-                android:orientation="vertical">
+                android:orientation="vertical"
+	            android:layout_marginEnd="@dimen/showAllButtonMarginRight"
+	            android:layout_marginStart="@dimen/subHeaderMarginLeft">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -94,7 +98,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/gpx_small_icon_margin"
-                        android:src="@drawable/ic_small_distance"/>
+                        android:src="@drawable/ic_small_distance"
+	                    android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
 
                     <TextView
                         android:id="@+id/distance"
@@ -102,14 +107,16 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/gpx_small_text_margin"
                         android:textColor="?android:textColorSecondary"
-                        android:textSize="@dimen/default_sub_text_size"/>
+                        android:textSize="@dimen/default_sub_text_size"
+	                    android:layout_marginEnd="@dimen/gpx_small_text_margin" />
 
                     <ImageView
                         android:id="@+id/points_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/gpx_small_icon_margin"
-                        android:src="@drawable/ic_small_point"/>
+                        android:src="@drawable/ic_small_point"
+	                    android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
 
                     <TextView
                         android:id="@+id/points_count"
@@ -117,7 +124,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/gpx_small_text_margin"
                         android:textColor="?android:textColorSecondary"
-                        android:textSize="@dimen/default_sub_text_size"/>
+                        android:textSize="@dimen/default_sub_text_size"
+	                    android:layout_marginEnd="@dimen/gpx_small_text_margin" />
 
                 </LinearLayout>
 
@@ -153,8 +161,9 @@
             android:id="@+id/divider_list"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginLeft="54dp"
-            android:background="?attr/dashboard_divider"/>
+            android:layout_marginLeft="@dimen/route_info_list_text_padding"
+            android:background="?attr/dashboard_divider"
+	        android:layout_marginStart="@dimen/route_info_list_text_padding" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -170,7 +179,11 @@
                 android:textColor="?attr/color_dialog_buttons"
                 android:background="?attr/selectableItemBackground"
                 android:drawableLeft="@drawable/ic_action_rec_stop"
-                android:text="@string/shared_string_control_stop"/>
+                android:text="@string/shared_string_control_stop"
+	            android:paddingStart="10dp"
+	            android:layout_marginStart="40dp"
+	            android:paddingEnd="10dp"
+	            android:drawableStart="@drawable/ic_action_rec_stop" />
 
             <Button
                 android:id="@+id/save_button"
@@ -183,7 +196,10 @@
                 android:textColor="?attr/color_dialog_buttons"
                 android:text="@string/shared_string_save"
                 android:visibility="gone"
-                tools:visibility="visible"/>
+                tools:visibility="visible"
+	            android:drawableStart="@drawable/ic_action_gsave_dark"
+	            android:paddingEnd="10dp"
+	            android:paddingStart="10dp" />
 
         </LinearLayout>
 

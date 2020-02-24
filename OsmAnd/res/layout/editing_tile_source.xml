@@ -10,7 +10,9 @@
         android:paddingRight="@dimen/context_menu_padding_margin_large"
 	    android:paddingTop="@dimen/context_menu_padding_margin_large"
 	    android:paddingBottom="@dimen/context_menu_padding_margin_large"
-        android:orientation="vertical">
+        android:orientation="vertical"
+	    android:paddingEnd="@dimen/context_menu_padding_margin_large"
+	    android:paddingStart="@dimen/context_menu_padding_margin_large">
 
         <TextView
 	        android:textColor="?android:textColorSecondary"
@@ -25,7 +27,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/text_margin_small"
             android:layout_marginRight="@dimen/text_margin_small"
-            android:text="">
+            android:text=""
+	        android:layout_marginStart="@dimen/text_margin_small"
+	        android:layout_marginEnd="@dimen/text_margin_small">
 
             <requestFocus/>
         </EditText>
@@ -46,7 +50,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/text_margin_small"
-            android:layout_marginRight="@dimen/text_margin_small"/>
+            android:layout_marginRight="@dimen/text_margin_small"
+	        android:layout_marginStart="@dimen/text_margin_small"
+	        android:layout_marginEnd="@dimen/text_margin_small" />
 
         <TextView
 	        android:textColor="?android:textColorSecondary"

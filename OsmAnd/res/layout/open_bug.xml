@@ -4,7 +4,9 @@
               android:layout_height="fill_parent"
               android:orientation="vertical"
               android:paddingLeft="?dialogPreferredPadding"
-              android:paddingRight="?dialogPreferredPadding">
+              android:paddingRight="?dialogPreferredPadding"
+	android:paddingStart="?dialogPreferredPadding"
+	android:paddingEnd="?dialogPreferredPadding">
 
     <TextView
         android:layout_width="wrap_content"

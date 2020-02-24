@@ -15,7 +15,9 @@
         android:textSize="@dimen/default_sub_text_size"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
-        tools:text="Screen 1"/>
+        tools:text="Screen 1"
+	    android:layout_marginStart="24dp"
+	    android:layout_marginEnd="24dp" />
 
     <View android:id="@+id/divider"
         android:layout_width="match_parent"

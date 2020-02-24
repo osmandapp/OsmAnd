@@ -57,7 +57,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="@dimen/content_padding"
                             android:baselineAligned="false"
                             android:orientation="horizontal">
 
@@ -70,8 +70,8 @@
                                     android:id="@+id/name_image"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="12dp"
-                                    android:layout_marginStart="12dp"
+                                    android:layout_marginLeft="@dimen/content_padding_small"
+                                    android:layout_marginStart="@dimen/content_padding_small"
                                     android:layout_marginTop="2dp"
                                     android:scaleType="centerInside"
                                     android:src="@drawable/ic_action_building_number"/>
@@ -81,7 +81,7 @@
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="16dp"
+                                android:layout_marginBottom="@dimen/content_padding"
                                 android:layout_weight="1"
                                 android:orientation="vertical">
 
@@ -89,24 +89,28 @@
                                     android:id="@+id/name_caption"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="12dp"
-                                    android:layout_marginRight="12dp"
+                                    android:layout_marginLeft="@dimen/content_padding_small"
+                                    android:layout_marginRight="@dimen/content_padding_small"
                                     android:text="@string/shared_string_name"
                                     android:textColor="?android:textColorSecondary"
-                                    android:textSize="@dimen/default_list_text_size"/>
+                                    android:textSize="@dimen/default_list_text_size"
+	                                android:layout_marginEnd="@dimen/content_padding_small"
+	                                android:layout_marginStart="@dimen/content_padding_small" />
 
                                 <EditText
                                     android:id="@+id/name_edit"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="8dp"
-                                    android:layout_marginRight="16dp"
-                                    android:layout_marginTop="8dp"
+                                    android:layout_marginLeft="@dimen/content_padding_half"
+                                    android:layout_marginRight="@dimen/content_padding"
+                                    android:layout_marginTop="@dimen/content_padding_half"
                                     android:imeOptions="actionDone"
                                     android:inputType="text"
                                     android:textColor="?android:textColorPrimary"
                                     android:textColorHint="?android:textColorSecondary"
-                                    tools:text="@string/shared_string_name"/>
+                                    tools:text="@string/shared_string_name"
+	                                android:layout_marginStart="@dimen/content_padding_half"
+	                                android:layout_marginEnd="@dimen/content_padding" />
 
 
                             </LinearLayout>
@@ -129,8 +133,8 @@
                                     android:id="@+id/category_image"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="12dp"
-                                    android:layout_marginStart="12dp"
+                                    android:layout_marginLeft="@dimen/content_padding_small"
+                                    android:layout_marginStart="@dimen/content_padding_small"
                                     android:layout_marginTop="2dp"
                                     android:scaleType="centerInside"
                                     android:src="@drawable/ic_action_building_number"/>
@@ -140,7 +144,7 @@
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="16dp"
+                                android:layout_marginBottom="@dimen/content_padding"
                                 android:layout_weight="1"
                                 android:orientation="vertical">
 
@@ -148,21 +152,26 @@
                                     android:id="@+id/category_caption"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="12dp"
-                                    android:layout_marginRight="12dp"
+                                    android:layout_marginLeft="@dimen/content_padding_small"
+                                    android:layout_marginRight="@dimen/content_padding_small"
                                     android:text="@string/shared_string_name"
                                     android:textColor="?android:textColorSecondary"
-                                    android:textSize="@dimen/default_list_text_size"/>
+                                    android:textSize="@dimen/default_list_text_size"
+	                                android:layout_marginStart="@dimen/content_padding_small"
+	                                android:layout_marginEnd="@dimen/content_padding_small" />
 
                                 <net.osmand.plus.widgets.AutoCompleteTextViewEx
                                     android:id="@+id/category_edit"
                                     android:layout_width="fill_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="8dp"
-                                    android:layout_marginRight="16dp"
-                                    android:layout_marginTop="8dp"
+                                    android:layout_marginLeft="@dimen/content_padding_half"
+                                    android:layout_marginRight="@dimen/content_padding"
+                                    android:layout_marginTop="@dimen/content_padding_half"
                                     android:drawableRight="@drawable/ic_action_arrow_drop_down"
-                                    android:editable="false"/>
+                                    android:editable="false"
+	                                android:drawableEnd="@drawable/ic_action_arrow_drop_down"
+	                                android:layout_marginEnd="@dimen/content_padding"
+	                                android:layout_marginStart="@dimen/content_padding_half" />
 
                             </LinearLayout>
 
@@ -192,8 +201,8 @@
                                     android:id="@+id/description_image"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="12dp"
-                                    android:layout_marginStart="12dp"
+                                    android:layout_marginLeft="@dimen/content_padding_small"
+                                    android:layout_marginStart="@dimen/content_padding_small"
                                     android:layout_marginTop="10dp"
                                     android:scaleType="center"
                                     android:src="@drawable/ic_action_note_dark"/>
@@ -203,7 +212,7 @@
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="8dp"
+                                android:layout_marginBottom="@dimen/content_padding_half"
                                 android:layout_weight="1"
                                 android:orientation="vertical">
 
@@ -212,12 +221,14 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
-                                    android:layout_marginLeft="8dp"
-                                    android:layout_marginRight="16dp"
+                                    android:layout_marginLeft="@dimen/content_padding_half"
+                                    android:layout_marginRight="@dimen/content_padding"
                                     android:inputType="textMultiLine"
                                     android:maxLines="1000"
                                     android:textColor="?android:textColorPrimary"
-                                    android:textColorHint="?android:textColorSecondary"/>
+                                    android:textColorHint="?android:textColorSecondary"
+	                                android:layout_marginStart="@dimen/content_padding_half"
+	                                android:layout_marginEnd="@dimen/content_padding" />
 
 
                             </LinearLayout>
@@ -259,7 +270,9 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:text="@string/shared_string_delete"
-                    android:textColor="?attr/contextMenuButtonColor"/>
+                    android:textColor="?attr/contextMenuButtonColor"
+	                android:paddingStart="10dp"
+	                android:paddingEnd="10dp" />
 
                 <Button
                     android:id="@+id/replace_button"
@@ -270,7 +283,9 @@
                     android:paddingRight="10dp"
                     android:text="@string/update_existing"
                     android:textColor="?attr/contextMenuButtonColor"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+	                android:paddingStart="10dp"
+	                android:paddingEnd="10dp" />
 
                 <View
                     android:layout_width="0dp"
@@ -285,7 +300,9 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:text="@string/shared_string_cancel"
-                    android:textColor="?attr/contextMenuButtonColor"/>
+                    android:textColor="?attr/contextMenuButtonColor"
+	                android:paddingEnd="10dp"
+	                android:paddingStart="10dp" />
 
                 <Button
                     android:id="@+id/save_button"
@@ -295,7 +312,9 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:text="@string/shared_string_save"
-                    android:textColor="?attr/contextMenuButtonColor"/>
+                    android:textColor="?attr/contextMenuButtonColor"
+	                android:paddingEnd="10dp"
+	                android:paddingStart="10dp" />
 
             </LinearLayout>
 

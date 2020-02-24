@@ -17,7 +17,9 @@
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/card_content_padding_large"
             android:paddingRight="@dimen/content_padding"
-            android:orientation="vertical">
+            android:orientation="vertical"
+	        android:paddingEnd="@dimen/content_padding"
+	        android:paddingStart="@dimen/card_content_padding_large">
             
             <net.osmand.plus.widgets.TextViewEx
                 android:id="@+id/title"
@@ -46,7 +48,9 @@
             android:paddingTop="@dimen/content_padding_half"
             android:paddingBottom="@dimen/content_padding_half"
             android:background="?attr/selectableItemBackground"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+	        android:paddingStart="@dimen/card_content_padding_large"
+	        android:paddingEnd="@dimen/content_padding">
 
             <TextView
                 android:layout_width="0dp"

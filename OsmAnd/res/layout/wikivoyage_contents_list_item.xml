@@ -43,7 +43,9 @@
 			android:background="?attr/selectableItemBackground"
 			android:scaleType="center"
 			android:visibility="gone"
-			tools:src="@drawable/ic_action_arrow_up" />
+			tools:src="@drawable/ic_action_arrow_up"
+			android:paddingEnd="@dimen/list_content_padding"
+			android:paddingStart="@dimen/list_content_padding" />
 
 	</LinearLayout>
 

@@ -16,6 +16,7 @@
               android:layout_height="match_parent"
               android:gravity="center"
               android:layout_marginLeft="10dp"
-              android:singleLine="true" />
+              android:singleLine="true"
+	    android:layout_marginStart="10dp" />
 
 </LinearLayout>

@@ -9,7 +9,8 @@
     android:paddingLeft="@dimen/list_content_padding"
     android:paddingRight="@dimen/list_content_padding" 
     android:descendantFocusability="blocksDescendants"
-    >
+	android:paddingEnd="@dimen/list_content_padding"
+	android:paddingStart="@dimen/list_content_padding">
 
     <ImageView
         android:id="@+id/poi_icon"
@@ -17,14 +18,16 @@
         android:layout_height="@dimen/standard_icon_size"
         android:layout_gravity="center_vertical"
         android:layout_marginRight="@dimen/favorites_icon_right_margin"
-        tools:visiblity="visible" />
+        tools:visiblity="visible"
+	    android:layout_marginEnd="@dimen/favorites_icon_right_margin" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="bottom"
-        android:paddingRight="3dp" >
+        android:paddingRight="3dp"
+	    android:paddingEnd="3dp">
 
         <TextView
             android:id="@+id/poi_label"
@@ -61,7 +64,8 @@
                 android:textColor="?android:textColorSecondary"
                 android:textSize="@dimen/default_sub_text_size"
                 android:layout_marginRight="@dimen/gpx_small_text_margin"
-                tools:text="300 km" />
+                tools:text="300 km"
+	            android:layout_marginEnd="@dimen/gpx_small_text_margin" />
 
             <ImageView
                 android:id="@+id/time_icon"
@@ -69,7 +73,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="@dimen/gpx_small_icon_margin"
-                android:src="@drawable/ic_small_time" />
+                android:src="@drawable/ic_small_time"
+	            android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
 
             <TextView
                 android:id="@+id/time"
@@ -83,7 +88,8 @@
                 
                 android:layout_marginRight="@dimen/gpx_small_text_margin"
                 android:textColor="?android:textColorSecondary"
-                android:textSize="@dimen/default_sub_text_size" />
+                android:textSize="@dimen/default_sub_text_size"
+	            android:layout_marginEnd="@dimen/gpx_small_text_margin" />
         </LinearLayout>
     </LinearLayout>
 

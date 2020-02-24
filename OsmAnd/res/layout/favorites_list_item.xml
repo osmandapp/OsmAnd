@@ -21,14 +21,16 @@
         android:layout_height="1dp"
         android:background="?attr/dashboard_divider"
         android:layout_marginLeft="54dp"
-        android:visibility="gone"/>
+        android:visibility="gone"
+	    android:layout_marginStart="54dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/list_content_padding">
+        android:paddingLeft="@dimen/list_content_padding"
+	    android:paddingStart="@dimen/list_content_padding">
 
         <FrameLayout
             android:layout_width="wrap_content"
@@ -42,14 +44,16 @@
                 android:layout_marginRight="@dimen/list_content_padding"
                 android:focusable="false"
                 android:visibility="gone"
-                tools:visibility="visible" />
+                tools:visibility="visible"
+	            android:layout_marginEnd="@dimen/list_content_padding" />
 
             <ImageView
                 android:id="@+id/favourite_icon"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="@dimen/guide_line_vertical_offset" />
+                android:layout_marginRight="@dimen/guide_line_vertical_offset"
+	            android:layout_marginEnd="@dimen/guide_line_vertical_offset" />
         </FrameLayout>
 
         <LinearLayout
@@ -60,7 +64,8 @@
             android:orientation="vertical"
             android:paddingTop="6dp"
             android:paddingRight="@dimen/list_content_padding"
-            android:paddingBottom="6dp">
+            android:paddingBottom="6dp"
+	        android:paddingEnd="@dimen/list_content_padding">
 
             <TextView
                 android:id="@+id/favourite_label"
@@ -90,7 +95,8 @@
                     android:layout_marginLeft="2dp"
                     android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/default_sub_text_size"
-                    tools:text="100500 km"/>
+                    tools:text="100500 km"
+	                android:layout_marginStart="2dp" />
 
                 <ImageView
                     android:id="@+id/group_image"
@@ -98,7 +104,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="4dp"
-                    android:src="@drawable/ic_small_group"/>
+                    android:src="@drawable/ic_small_group"
+	                android:layout_marginStart="4dp" />
 
                 <TextView
                     android:id="@+id/group_name"
@@ -107,7 +114,8 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="2dp"
                     android:textColor="?android:textColorSecondary"
-                    android:textSize="@dimen/default_sub_text_size"/>
+                    android:textSize="@dimen/default_sub_text_size"
+	                android:layout_marginStart="2dp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -120,7 +128,8 @@
             android:layout_marginLeft="@dimen/dashFavIconMargin"
             android:background="?attr/dashboard_button"
             android:src="@drawable/ic_action_test_light"
-            android:visibility="gone"/>
+            android:visibility="gone"
+	        android:layout_marginStart="@dimen/dashFavIconMargin" />
 
         <ImageButton
             android:id="@+id/options"

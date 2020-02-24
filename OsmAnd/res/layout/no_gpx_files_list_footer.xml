@@ -16,7 +16,9 @@
         android:layout_marginTop="16dp"
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+	    android:paddingStart="24dp"
+	    android:paddingEnd="24dp">
 
         <TextView
             android:id="@+id/title"
@@ -45,7 +47,9 @@
             android:paddingRight="14dp"
             android:background="@drawable/blue_button_drawable"
             android:textColor="@color/color_white"
-            android:text="@string/gpx_add_track"/>
+            android:text="@string/gpx_add_track"
+	        android:paddingEnd="14dp"
+	        android:paddingStart="14dp" />
 
     </LinearLayout>
 
