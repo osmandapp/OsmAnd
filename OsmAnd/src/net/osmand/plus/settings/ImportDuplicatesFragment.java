@@ -68,19 +68,10 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 		nightMode = !app.getSettings().isLightContent();
 		if (settingsItems == null) {
 			settingsItems = app.getSettingsHelper().getSettingsItems();
-			if (settingsItems != null) {
-				duplicatesList = getDuplicatesData(settingsItems);
-			} else {
-//				fm.beginTransaction().remove(this).commit();
-
-				//				dismiss();
-			}
+			duplicatesList = getDuplicatesData(settingsItems);
 		}
 		if (file == null) {
 			file = app.getSettingsHelper().getSettingsFile();
-			if (file == null) {
-//				dismiss();
-			}
 		}
 	}
 
