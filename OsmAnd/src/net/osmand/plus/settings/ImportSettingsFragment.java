@@ -1,12 +1,14 @@
 package net.osmand.plus.settings;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.AppInitializer;
@@ -24,7 +27,7 @@ import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.SettingsHelper.SettingsItem;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.AdditionalDataWrapper;
@@ -35,7 +38,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImportSettingsFragment extends BaseOsmAndDialogFragment
+public class ImportSettingsFragment extends BaseOsmAndFragment
 		implements View.OnClickListener {
 
 	public static final String TAG = ImportSettingsFragment.class.getSimpleName();
@@ -52,25 +55,19 @@ public class ImportSettingsFragment extends BaseOsmAndDialogFragment
 		ImportSettingsFragment fragment = new ImportSettingsFragment();
 		fragment.setSettingsItems(settingsItems);
 		fragment.setFile(file);
-		fragment.show(fm, TAG);
+		fm.beginTransaction().replace(R.id.fragmentContainer, fragment, TAG).addToBackStack(null).commit();
 	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = getMyApplication();
-		nightMode = !getSettings().isLightContent();
+		app = requireMyApplication();
+		nightMode = !app.getSettings().isLightContent();
 		if (settingsItems == null) {
 			settingsItems = app.getSettingsHelper().getSettingsItems();
-			if (settingsItems == null) {
-				dismiss();
-			}
 		}
 		if (file == null) {
 			file = app.getSettingsHelper().getSettingsFile();
-			if (file == null) {
-				dismiss();
-			}
 		}
 	}
 
@@ -79,31 +76,24 @@ public class ImportSettingsFragment extends BaseOsmAndDialogFragment
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		inflater = UiUtilities.getInflater(app, nightMode);
 		View root = inflater.inflate(R.layout.fragment_import, container, false);
-		setupToolbar((Toolbar) root.findViewById(R.id.toolbar));
+		AppBarLayout appBar = root.findViewById(R.id.appbar);
+		setupToolbar((Toolbar) root.findViewById(R.id.toolbar), appBar);
 		TextViewEx continueBtn = root.findViewById(R.id.continue_button);
 		selectBtn = root.findViewById(R.id.select_button);
 		expandableList = root.findViewById(R.id.list);
 		continueBtn.setOnClickListener(this);
 		selectBtn.setOnClickListener(this);
+		if (Build.VERSION.SDK_INT >= 21) {
+			AndroidUtils.addStatusBarPadding21v(app, root);
+		}
 		return root;
 	}
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		adapter = new ExportImportSettingsAdapter(getMyApplication(), getSettingsToOperate(), nightMode, true);
+		adapter = new ExportImportSettingsAdapter(app, getSettingsToOperate(), nightMode, true);
 		expandableList.setAdapter(adapter);
-	}
-
-	@NonNull
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		return new Dialog(requireActivity(), getTheme()) {
-			@Override
-			public void onBackPressed() {
-				showExitDialog();
-			}
-		};
 	}
 
 	@Override
@@ -146,10 +136,12 @@ public class ImportSettingsFragment extends BaseOsmAndDialogFragment
 					}
 				}
 			});
-			dismiss();
+			FragmentManager fm = getFragmentManager();
+			if (fm != null) {
+				fm.popBackStackImmediate();
+			}
 		} else {
-			ImportDuplicatesFragment.showInstance(getFragmentManager(), duplicateItems, settingsItems, file);
-			dismiss();
+			ImportDuplicatesFragment.showInstance(requireActivity().getSupportFragmentManager(), duplicateItems, settingsItems, file);
 		}
 	}
 
@@ -211,22 +203,22 @@ public class ImportSettingsFragment extends BaseOsmAndDialogFragment
 					|| object instanceof SQLiteTileSource) {
 				tileSourceTemplates.add((ITileSource) object);
 			} else if (object instanceof File) {
-				settingsItems.add(new SettingsHelper.FileSettingsItem(getMyApplication(), (File) object));
+				settingsItems.add(new SettingsHelper.FileSettingsItem(app, (File) object));
 			} else if (object instanceof AvoidRoadInfo) {
 				avoidRoads.add((AvoidRoadInfo) object);
 			}
 		}
 		if (!quickActions.isEmpty()) {
-			settingsItems.add(new SettingsHelper.QuickActionSettingsItem(getMyApplication(), quickActions));
+			settingsItems.add(new SettingsHelper.QuickActionSettingsItem(app, quickActions));
 		}
 		if (!poiUIFilters.isEmpty()) {
-			settingsItems.add(new SettingsHelper.PoiUiFilterSettingsItem(getMyApplication(), poiUIFilters));
+			settingsItems.add(new SettingsHelper.PoiUiFilterSettingsItem(app, poiUIFilters));
 		}
 		if (!tileSourceTemplates.isEmpty()) {
-			settingsItems.add(new SettingsHelper.MapSourcesSettingsItem(getMyApplication(), tileSourceTemplates));
+			settingsItems.add(new SettingsHelper.MapSourcesSettingsItem(app, tileSourceTemplates));
 		}
 		if (!avoidRoads.isEmpty()) {
-			settingsItems.add(new SettingsHelper.AvoidRoadsSettingsItem(getMyApplication(), avoidRoads));
+			settingsItems.add(new SettingsHelper.AvoidRoadsSettingsItem(app, avoidRoads));
 		}
 		return settingsItems;
 	}
@@ -303,6 +295,11 @@ public class ImportSettingsFragment extends BaseOsmAndDialogFragment
 		return settingsToOperate;
 	}
 
+	@Override
+	public int getStatusBarColorId() {
+		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
+	}
+
 	public void showExitDialog() {
 		Context themedContext = UiUtilities.getThemedContext(getActivity(), nightMode);
 		AlertDialog.Builder dismissDialog = new AlertDialog.Builder(themedContext);
@@ -312,13 +309,16 @@ public class ImportSettingsFragment extends BaseOsmAndDialogFragment
 		dismissDialog.setPositiveButton(R.string.shared_string_exit, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				dismiss();
+				FragmentManager fm = getFragmentManager();
+				if (fm != null) {
+					fm.popBackStackImmediate();
+				}
 			}
 		});
 		dismissDialog.show();
 	}
 
-	private void setupToolbar(Toolbar toolbar) {
+	private void setupToolbar(Toolbar toolbar, AppBarLayout appBarLayout) {
 		toolbar.setNavigationIcon(getPaintedContentIcon(R.drawable.ic_action_close, nightMode
 				? getResources().getColor(R.color.active_buttons_and_links_text_dark)
 				: getResources().getColor(R.color.active_buttons_and_links_text_light)));
@@ -329,6 +329,7 @@ public class ImportSettingsFragment extends BaseOsmAndDialogFragment
 				showExitDialog();
 			}
 		});
+		ViewCompat.setElevation(appBarLayout, 5.0f);
 	}
 
 	public void setFile(File file) {

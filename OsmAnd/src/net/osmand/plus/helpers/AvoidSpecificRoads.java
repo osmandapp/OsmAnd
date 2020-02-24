@@ -402,5 +402,20 @@ public class AvoidSpecificRoads {
 		public double longitude;
 		public String name;
 		public String appModeKey;
+
+		@Override
+		public boolean equals(@Nullable Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+
+			AvoidRoadInfo other = (AvoidRoadInfo) obj;
+			return Math.abs(latitude - other.latitude) < 0.00001
+					&& Math.abs(longitude - other.longitude) < 0.00001
+					&& name.equals(other.name);
+		}
 	}
 }

@@ -140,6 +140,7 @@ import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.settings.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.settings.ConfigureProfileFragment;
 import net.osmand.plus.settings.DataStorageFragment;
+import net.osmand.plus.settings.ImportSettingsFragment;
 import net.osmand.plus.settings.ProfileAppearanceFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
@@ -731,6 +732,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		QuickActionListFragment quickActionListFragment = getQuickActionListFragment();
 		if ( quickActionListFragment != null && quickActionListFragment.isVisible()) {
 			this.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN, null);
+		}
+		ImportSettingsFragment importSettingsFragment = getImportSettingsFragment();
+		if (importSettingsFragment != null) {
+			importSettingsFragment.showExitDialog();
+			return;
 		}
 
 		super.onBackPressed();
@@ -2445,6 +2451,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public QuickActionListFragment getQuickActionListFragment() {
 		return  getFragment(QuickActionListFragment.TAG);
+	}
+
+	public ImportSettingsFragment getImportSettingsFragment() {
+		return getFragment(ImportSettingsFragment.TAG);
 	}
 
 	public void backToConfigureProfileFragment() {

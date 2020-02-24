@@ -237,7 +237,9 @@ public class SettingsHelper {
 			}
 
 			SettingsItem item = (SettingsItem) other;
-			return item.getType() == getType() && item.getName().equals(getName());
+			return item.getType() == getType()
+					&& item.getName().equals(getName())
+					&& item.getFileName().equals(getFileName());
 		}
 	}
 
@@ -262,7 +264,17 @@ public class SettingsHelper {
 		}
 
 		@NonNull
-		public abstract List<T> excludeDuplicateItems();
+		public List<T> excludeDuplicateItems() {
+			if (!items.isEmpty()) {
+				for (T item : items) {
+					if (isDuplicate(item)) {
+						duplicateItems.add(item);
+					}
+				}
+			}
+			items.removeAll(duplicateItems);
+			return duplicateItems;
+		}
 
 		public abstract boolean isDuplicate(@NonNull T item);
 
@@ -805,7 +817,7 @@ public class SettingsHelper {
 				@Override
 				public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
 					OutputStream output;
-					if (!file.exists() || file.exists() && shouldReplace) {
+					if (!file.exists() || shouldReplace) {
 						output = new FileOutputStream(file);
 					} else {
 						output = new FileOutputStream(renameFile(file));
@@ -868,18 +880,6 @@ public class SettingsHelper {
 		@Override
 		public QuickAction renameItem(@NonNull QuickAction item) {
 			return actionRegistry.generateUniqueName(item, app);
-		}
-
-		@NonNull
-		@Override
-		public List<QuickAction> excludeDuplicateItems() {
-			for (QuickAction item : items) {
-				if (isDuplicate(item)) {
-					duplicateItems.add(item);
-				}
-			}
-			items.removeAll(duplicateItems);
-			return duplicateItems;
 		}
 
 		@Override
@@ -1060,21 +1060,6 @@ public class SettingsHelper {
 			}
 			return false;
 		}
-
-		@NonNull
-		@Override
-		public List<PoiUIFilter> excludeDuplicateItems() {
-			if (!items.isEmpty()) {
-				for (PoiUIFilter item : items) {
-					if (isDuplicate(item)) {
-						duplicateItems.add(item);
-					}
-				}
-			}
-			items.removeAll(duplicateItems);
-			return duplicateItems;
-		}
-
 
 		@NonNull
 		@Override
@@ -1259,21 +1244,6 @@ public class SettingsHelper {
 					}
 				}
 			}
-		}
-
-
-		@NonNull
-		@Override
-		public List<ITileSource> excludeDuplicateItems() {
-			for (String name : existingItemsNames) {
-				for (ITileSource tileSource : items) {
-					if (name.equals(tileSource.getName())) {
-						duplicateItems.add(tileSource);
-					}
-				}
-			}
-			items.removeAll(duplicateItems);
-			return duplicateItems;
 		}
 
 		@NonNull
@@ -1510,28 +1480,9 @@ public class SettingsHelper {
 			}
 		}
 
-		@NonNull
-		@Override
-		public List<AvoidRoadInfo> excludeDuplicateItems() {
-			for (AvoidRoadInfo item : items) {
-				if (isDuplicate(item)) {
-					duplicateItems.add(item);
-				}
-			}
-			items.removeAll(duplicateItems);
-			return duplicateItems;
-		}
-
 		@Override
 		public boolean isDuplicate(@NonNull AvoidRoadInfo item) {
-			for (AvoidRoadInfo existingItem : existingItems) {
-				if (item.latitude == existingItem.latitude
-						&& item.longitude == existingItem.longitude
-						&& item.name.equals(existingItem.name)) {
-					return true;
-				}
-			}
-			return false;
+			return existingItems.contains(item);
 		}
 
 		@Override
@@ -1541,7 +1492,7 @@ public class SettingsHelper {
 
 		@NonNull
 		@Override
-		public AvoidRoadInfo renameItem(AvoidRoadInfo item) {
+		public AvoidRoadInfo renameItem(@NonNull AvoidRoadInfo item) {
 			int number = 0;
 			while (true) {
 				number++;
@@ -1831,7 +1782,7 @@ public class SettingsHelper {
 								|| item != null && !collecting && !item.shouldReadOnCollecting()) {
 							try {
 								for (SettingsItem settingsItem : items) {
-									if (item.getFileName().equals(settingsItem.getFileName())) {
+									if (item.equals(settingsItem)) {
 										item.setShouldReplace(settingsItem.shouldReplace);
 										item.getReader().readFromStream(ois);
 									}

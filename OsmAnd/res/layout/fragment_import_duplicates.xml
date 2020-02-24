@@ -101,6 +101,7 @@
 	</LinearLayout>
 
 	<android.support.design.widget.AppBarLayout
+		android:id="@+id/appbar"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="?attr/actionModeBackground">
@@ -121,7 +122,7 @@
 				android:minHeight="@dimen/toolbar_height"
 				osmand:layout_collapseMode="pin"
 				osmand:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
-				osmand:title="@string/shared_string_import">
+				osmand:title="@string/import_duplicates_title">
 
 			</android.support.v7.widget.Toolbar>
 

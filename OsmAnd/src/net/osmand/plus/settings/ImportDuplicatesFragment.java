@@ -1,11 +1,13 @@
 package net.osmand.plus.settings;
 
-import android.app.Dialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 
+import net.osmand.AndroidUtils;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.ApplicationMode;
@@ -24,7 +27,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.SettingsHelper.SettingsItem;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
@@ -37,9 +40,9 @@ import java.util.List;
 import static net.osmand.plus.settings.ImportSettingsFragment.getDuplicatesData;
 
 
-public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implements View.OnClickListener {
+public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View.OnClickListener {
 
-	public static final String TAG = ImportSettingsFragment.class.getSimpleName();
+	public static final String TAG = ImportDuplicatesFragment.class.getSimpleName();
 	private OsmandApplication app;
 	private RecyclerView list;
 	private LinearLayout buttonsContainer;
@@ -55,26 +58,28 @@ public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implement
 		fragment.setDuplicatesList(duplicatesList);
 		fragment.setSettingsItems(settingsItems);
 		fragment.setFile(file);
-		fragment.show(fm, TAG);
+		fm.beginTransaction().replace(R.id.fragmentContainer, fragment, TAG).addToBackStack(null).commit();
 	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = getMyApplication();
-		nightMode = !getSettings().isLightContent();
+		app = requireMyApplication();
+		nightMode = !app.getSettings().isLightContent();
 		if (settingsItems == null) {
 			settingsItems = app.getSettingsHelper().getSettingsItems();
 			if (settingsItems != null) {
 				duplicatesList = getDuplicatesData(settingsItems);
 			} else {
-				dismiss();
+//				fm.beginTransaction().remove(this).commit();
+
+				//				dismiss();
 			}
 		}
 		if (file == null) {
 			file = app.getSettingsHelper().getSettingsFile();
 			if (file == null) {
-				dismiss();
+//				dismiss();
 			}
 		}
 	}
@@ -84,7 +89,8 @@ public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implement
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		inflater = UiUtilities.getInflater(app, nightMode);
 		View root = inflater.inflate(R.layout.fragment_import_duplicates, container, false);
-		setupToolbar((Toolbar) root.findViewById(R.id.toolbar));
+		AppBarLayout appBar = root.findViewById(R.id.appbar);
+		setupToolbar((Toolbar) root.findViewById(R.id.toolbar), appBar);
 		ComplexButton replaceAllBtn = root.findViewById(R.id.replace_all_btn);
 		ComplexButton keepBothBtn = root.findViewById(R.id.keep_both_btn);
 		buttonsContainer = root.findViewById(R.id.buttons_container);
@@ -118,29 +124,18 @@ public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implement
 				}
 			}
 		});
+		if (Build.VERSION.SDK_INT >= 21) {
+			AndroidUtils.addStatusBarPadding21v(app, root);
+		}
 
 		return root;
 	}
 
-	@NonNull
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		return new Dialog(requireActivity(), getTheme()) {
-			@Override
-			public void onBackPressed() {
-				FragmentManager fm = getFragmentManager();
-				if (fm != null) {
-					ImportSettingsFragment.showInstance(fm, null, file);
-				}
-				dismiss();
-			}
-		};
-	}
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		DuplicatesSettingsAdapter adapter = new DuplicatesSettingsAdapter(getMyApplication(), prepareDuplicates(), nightMode);
+		DuplicatesSettingsAdapter adapter = new DuplicatesSettingsAdapter(app, prepareDuplicates(), nightMode);
 		list.setLayoutManager(new LinearLayoutManager(getMyApplication()));
 		list.setAdapter(adapter);
 	}
@@ -220,6 +215,11 @@ public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implement
 		}
 	}
 
+	@Override
+	public int getStatusBarColorId() {
+		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
+	}
+
 	private void importItems(boolean shouldReplace) {
 		for (SettingsItem item : settingsItems) {
 			item.setShouldReplace(shouldReplace);
@@ -240,10 +240,18 @@ public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implement
 				}
 			}
 		});
-		dismiss();
+		FragmentManager fm = getFragmentManager();
+		if (fm != null) {
+			fm.popBackStackImmediate();
+			Fragment fragment = fm.findFragmentByTag(ImportSettingsFragment.TAG);
+			if (fragment != null) {
+				fm.beginTransaction().remove(fragment).commit();
+				fm.popBackStackImmediate();
+			}
+		}
 	}
 
-	private void setupToolbar(Toolbar toolbar) {
+	private void setupToolbar(Toolbar toolbar, AppBarLayout appBarLayout) {
 		toolbar.setNavigationIcon(getPaintedContentIcon(R.drawable.ic_arrow_back,
 				nightMode
 						? getResources().getColor(R.color.active_buttons_and_links_text_dark)
@@ -254,12 +262,12 @@ public class ImportDuplicatesFragment extends BaseOsmAndDialogFragment implement
 			public void onClick(View v) {
 				FragmentManager fm = getFragmentManager();
 				if (fm != null) {
+					fm.popBackStackImmediate();
 					ImportSettingsFragment.showInstance(fm, null, file);
 				}
-				dismiss();
 			}
 		});
-		toolbar.setTitle(getString(R.string.import_duplicates_title));
+		ViewCompat.setElevation(appBarLayout, 5.0f);
 	}
 
 	public void setDuplicatesList(List<? super Object> duplicatesList) {
