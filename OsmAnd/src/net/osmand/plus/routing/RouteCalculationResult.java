@@ -34,13 +34,8 @@ import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 public class RouteCalculationResult {
 	private final static Log log = PlatformUtil.getLog(RouteCalculationResult.class);
 
-	/**
-	 * When generating list of directions from segments, algorithm attempts to evaluate street names
-	 * that follow the route after turn. It's quite often segments follow roundabout exit refer to
-	 * unnamed road, so algorithm scans several segments following the exit to find out the street
-	 * name.
-	 * Maximum distance to scan in meter is specified by this parameter.
-	 */
+	// Evaluates street name that the route follows after turn within specified distance.
+	// It is useful to find names for short segments on intersections and roundabouts.
 	private static float distanceSeekStreetName = 150;
 
 	private static double distanceClosestToIntermediate = 3000;
@@ -377,21 +372,19 @@ public class RouteCalculationResult {
 					info.setRef(ref);
 					String streetName = next.getObject().getName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
 							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get());
-					if(Algorithms.isEmpty(streetName)) {
+					if (Algorithms.isEmpty(streetName)) {
 						// try to get street names from following segments
-                        float distanceFromTurn = next.getDistance();
-						for(int n = lind+1; n+1 < list.size(); n++) {
+						float distanceFromTurn = next.getDistance();
+						for (int n = lind + 1; n + 1 < list.size(); n++) {
 							RouteSegmentResult s1 = list.get(n);
-							if(s1.getTurnType() != null)
-								break; // scan the list only until the next turn
+							// scan the list only until the next turn
+							if (s1.getTurnType() != null || distanceFromTurn > distanceSeekStreetName ||
+									!Algorithms.isEmpty(streetName)) {
+								break;
+							}
 							streetName = s1.getObject().getName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
 									ctx.getSettings().MAP_TRANSLITERATE_NAMES.get());
-							if(!Algorithms.isEmpty(streetName))
-								break;
-							if(0 < s1.getDistance())
-                                distanceFromTurn += s1.getDistance();
-                            if(distanceFromTurn > distanceSeekStreetName)
-                                break;
+							distanceFromTurn += s1.getDistance();
 						}
 					}
 					info.setStreetName(streetName);
