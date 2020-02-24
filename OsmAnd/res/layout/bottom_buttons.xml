@@ -8,7 +8,9 @@
 	android:layout_gravity="bottom"
 	android:orientation="horizontal"
 	android:paddingLeft="@dimen/content_padding"
-	android:paddingRight="@dimen/content_padding">
+	android:paddingRight="@dimen/content_padding"
+	android:paddingEnd="@dimen/content_padding"
+	android:paddingStart="@dimen/content_padding">
 
 	<include
 		android:id="@+id/dismiss_button"

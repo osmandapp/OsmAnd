@@ -12,4 +12,6 @@
     android:paddingTop="11dp"
     android:paddingBottom="11dip"
     android:text="@string/layer_poi"
-    android:textSize="@dimen/default_list_text_size"/>
+    android:textSize="@dimen/default_list_text_size"
+	android:paddingEnd="11dp"
+	android:paddingStart="24dp" />

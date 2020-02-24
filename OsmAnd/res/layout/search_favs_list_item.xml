@@ -15,7 +15,9 @@
         android:paddingBottom="8dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:paddingTop="8dp">
+        android:paddingTop="8dp"
+	    android:paddingStart="16dp"
+	    android:paddingEnd="16dp">
 
         <ImageView
             android:id="@+id/imageView"
@@ -23,14 +25,16 @@
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="8dp"
-            android:scaleType="centerInside"/>
+            android:scaleType="centerInside"
+	        android:layout_marginEnd="8dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="8dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+	        android:layout_marginStart="8dp">
 
             <TextView
                 android:id="@+id/title"
@@ -39,7 +43,8 @@
                 android:paddingRight="16dp"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/default_list_text_size"
-                tools:text="Amsterdam"/>
+                tools:text="Amsterdam"
+	            android:paddingEnd="16dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -68,7 +73,8 @@
                         android:layout_marginLeft="2dp"
                         android:textColor="?android:textColorSecondary"
                         android:textSize="@dimen/default_sub_text_size"
-                        tools:text="100500 km"/>
+                        tools:text="100500 km"
+	                    android:layout_marginStart="2dp" />
 
                 </LinearLayout>
 
@@ -77,7 +83,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="right"
+                    android:gravity="end"
                     android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/default_sub_text_size"
                     tools:text="Favorites"/>
@@ -93,6 +99,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginLeft="56dp"
-        android:background="?attr/dashboard_divider"/>
+        android:background="?attr/dashboard_divider"
+	    android:layout_marginStart="56dp" />
 
 </LinearLayout>

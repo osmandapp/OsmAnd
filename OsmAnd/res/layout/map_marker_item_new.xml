@@ -174,7 +174,9 @@
                     android:layout_marginRight="@dimen/bottom_sheet_content_margin"
                     android:layout_marginTop="@dimen/bottom_sheet_content_margin"
                     android:visibility="gone"
-                    tools:visibility="visible"/>
+                    tools:visibility="visible"
+	                android:layout_marginStart="@dimen/bottom_sheet_content_margin"
+	                android:layout_marginEnd="@dimen/bottom_sheet_content_margin" />
             </FrameLayout>
 
         </LinearLayout>

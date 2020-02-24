@@ -16,7 +16,9 @@
         android:layout_marginRight="24dp"
         android:textSize="@dimen/dialog_header_text_size"
         android:textColor="?android:textColorPrimary"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="8dp"
+	    android:layout_marginEnd="24dp"
+	    android:layout_marginStart="24dp" />
 
 
     <android.support.v7.widget.RecyclerView
@@ -35,8 +37,9 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/shared_string_dismiss"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:background="?attr/selectableItemBackground"
         android:textColor="?attr/color_dialog_buttons"
-        android:textAllCaps="true"/>
+        android:textAllCaps="true"
+	    android:layout_marginEnd="8dp" />
 </LinearLayout>

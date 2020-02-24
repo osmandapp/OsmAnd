@@ -23,7 +23,9 @@
 			android:layout_marginLeft="@dimen/content_padding"
 			android:layout_marginRight="@dimen/content_padding"
 			android:layout_marginTop="@dimen/content_padding"
-			android:src="@drawable/ic_action_fav_dark" />
+			android:src="@drawable/ic_action_fav_dark"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding" />
 
 		<LinearLayout
 			android:layout_width="0dp"
@@ -48,7 +50,7 @@
 			<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="2dp">
+				android:layout_marginTop="@dimen/subHeaderPadding">
 
 				<TextView
 					android:id="@+id/waypoint_dist"
@@ -65,9 +67,9 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_gravity="bottom"
-					android:layout_marginLeft="6dp"
-					android:layout_marginStart="6dp"
-					android:drawablePadding="2dp"
+					android:layout_marginLeft="@dimen/dashPadding"
+					android:layout_marginStart="@dimen/dashPadding"
+					android:drawablePadding="@dimen/subHeaderPadding"
 					android:maxLines="1"
 					android:textColor="@color/text_color_secondary_dark"
 					android:textSize="@dimen/default_sub_text_size"
@@ -92,11 +94,11 @@
 		<ImageButton
 			android:id="@+id/info_close"
 			style="@style/Widget.AppCompat.ActionButton"
-			android:layout_width="48dp"
-			android:layout_height="48dp"
+			android:layout_width="@dimen/bottom_sheet_list_item_height"
+			android:layout_height="@dimen/bottom_sheet_list_item_height"
 			android:layout_gravity="center_vertical"
-			android:layout_marginEnd="2dp"
-			android:layout_marginRight="2dp"
+			android:layout_marginEnd="@dimen/subHeaderPadding"
+			android:layout_marginRight="@dimen/subHeaderPadding"
 			android:contentDescription="@string/shared_string_delete"
 			android:focusable="false"
 			android:scaleType="center"
@@ -108,7 +110,7 @@
 		android:id="@+id/bottom_divider"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:layout_marginTop="8dp"
+		android:layout_marginTop="@dimen/content_padding_half"
 		android:background="?attr/divider_color_basic" />
 
 </LinearLayout>

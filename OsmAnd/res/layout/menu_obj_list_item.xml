@@ -14,7 +14,9 @@
         android:paddingRight="@dimen/list_content_padding"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+	    android:paddingStart="@dimen/list_content_padding"
+	    android:paddingEnd="@dimen/list_content_padding">
 
         <LinearLayout
             android:layout_width="0dp"

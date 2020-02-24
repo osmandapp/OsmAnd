@@ -22,7 +22,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="@dimen/list_content_padding"
-            android:paddingRight="@dimen/list_content_padding">
+            android:paddingRight="@dimen/list_content_padding"
+	        android:paddingStart="@dimen/list_content_padding"
+	        android:paddingEnd="@dimen/list_content_padding">
 
             <LinearLayout
                 android:id="@+id/freeVersionBannerTitle"

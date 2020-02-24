@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="@dimen/list_item_height"
-        android:paddingLeft="@dimen/list_content_padding">
+        android:paddingLeft="@dimen/list_content_padding"
+	    android:paddingStart="@dimen/list_content_padding">
 
         <ImageView
             android:id="@+id/icon"
@@ -20,7 +21,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="@dimen/favorites_icon_right_margin"
-            tools:src="@drawable/ic_map"/>
+            tools:src="@drawable/ic_map"
+	        android:layout_marginEnd="@dimen/favorites_icon_right_margin" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -76,7 +78,8 @@
             android:scaleType="center"
             android:visibility="gone"
             tools:src="@drawable/ic_action_import"
-            tools:visibility="visible"/>
+            tools:visibility="visible"
+	        android:layout_marginStart="@dimen/dashFavIconMargin" />
 
         <Button
             android:id="@+id/rightButton"
@@ -91,7 +94,11 @@
             android:layout_marginRight="8dp"
             android:textColor="@color/buy_button_color"
             android:text="@string/buy"
-            android:visibility="gone"/>
+            android:visibility="gone"
+	        android:layout_marginStart="@dimen/dashFavIconMargin"
+	        android:layout_marginEnd="8dp"
+	        android:paddingEnd="18dp"
+	        android:paddingStart="18dp" />
 
     </LinearLayout>
 

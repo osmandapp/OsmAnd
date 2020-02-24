@@ -17,7 +17,9 @@
 		android:paddingLeft="@dimen/list_content_padding"
 		android:paddingTop="@dimen/list_header_padding"
 		android:paddingRight="@dimen/list_content_padding"
-		android:paddingBottom="@dimen/list_header_padding">
+		android:paddingBottom="@dimen/list_header_padding"
+		android:paddingStart="@dimen/list_content_padding"
+		android:paddingEnd="@dimen/list_content_padding">
 
 		<ProgressBar
 			android:id="@+id/card_button_progress"

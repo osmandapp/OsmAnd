@@ -21,7 +21,9 @@
             android:layout_marginRight="@dimen/dialog_content_margin"
             android:scaleType="center"
             android:src="@drawable/ic_action_plus"
-            android:tint="?attr/wikivoyage_active_color"/>
+            android:tint="?attr/wikivoyage_active_color"
+	        android:layout_marginEnd="@dimen/dialog_content_margin"
+	        android:layout_marginStart="@dimen/list_content_padding" />
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/img_purchased"
@@ -31,7 +33,9 @@
             android:layout_marginRight="@dimen/dialog_content_margin"
             android:layout_gravity="center"
             android:src="@drawable/img_feature_purchased"
-            android:visibility="gone"/>
+            android:visibility="gone"
+	        android:layout_marginEnd="@dimen/dialog_content_margin"
+	        android:layout_marginStart="@dimen/list_content_padding" />
 
         <net.osmand.plus.widgets.TextViewEx
             android:id="@+id/title"

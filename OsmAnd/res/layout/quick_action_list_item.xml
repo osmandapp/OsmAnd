@@ -24,7 +24,8 @@
             android:focusable="false"
             android:scaleType="centerInside"
             android:tint="?attr/secondary_icon_color"
-            android:src="@drawable/ic_action_reorder"/>
+            android:src="@drawable/ic_action_reorder"
+	        android:layout_marginEnd="4dp" />
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/imageView"
@@ -34,7 +35,8 @@
             android:layout_marginRight="8dp"
             android:scaleType="centerInside"
             android:tint="?attr/default_icon_color"
-            android:src="@drawable/ic_action_flag_dark"/>
+            android:src="@drawable/ic_action_flag_dark"
+	        android:layout_marginEnd="8dp" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -44,7 +46,8 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:paddingBottom="8dp"
-            android:paddingTop="8dp">
+            android:paddingTop="8dp"
+	        android:layout_marginStart="8dp">
 
             <TextView
                 android:id="@+id/title"
@@ -53,7 +56,8 @@
                 android:paddingRight="16dp"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/default_list_text_size"
-                tools:text="Add marker"/>
+                tools:text="Add marker"
+	            android:paddingEnd="16dp" />
 
             <TextView
                 android:id="@+id/subtitle"

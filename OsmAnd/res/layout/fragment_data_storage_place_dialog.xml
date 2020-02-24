@@ -15,12 +15,13 @@
             android:id="@+id/folderIconImageView"
             android:layout_width="56dp"
             android:layout_height="56dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginRight="@dimen/content_padding"
             android:layout_marginTop="4dp"
             android:layout_row="0"
             android:scaleType="center"
             tools:background="@color/color_warning"
-            tools:src="@drawable/ic_action_folder"/>
+            tools:src="@drawable/ic_action_folder"
+	        android:layout_marginEnd="@dimen/content_padding" />
 
     </LinearLayout>
 
@@ -88,10 +89,11 @@
                         android:id="@+id/deviceMemoryImageView"
                         android:layout_width="wrap_content"
                         android:layout_height="56dp"
-                        android:paddingRight="16dp"
+                        android:paddingRight="@dimen/content_padding"
                         android:scaleType="center"
                         android:src="@drawable/ic_action_phone"
-                        tools:background="@color/color_warning"/>
+                        tools:background="@color/color_warning"
+	                    android:paddingEnd="@dimen/content_padding" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -139,10 +141,11 @@
                         android:id="@+id/sharedMemoryImageView"
                         android:layout_width="wrap_content"
                         android:layout_height="56dp"
-                        android:paddingRight="16dp"
+                        android:paddingRight="@dimen/content_padding"
                         android:scaleType="center"
                         android:src="@drawable/ic_action_phone"
-                        tools:background="@color/color_warning"/>
+                        tools:background="@color/color_warning"
+	                    android:paddingEnd="@dimen/content_padding" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -187,10 +190,11 @@
                         android:id="@+id/memoryStickImageView"
                         android:layout_width="wrap_content"
                         android:layout_height="56dp"
-                        android:paddingRight="16dp"
+                        android:paddingRight="@dimen/content_padding"
                         android:scaleType="center"
                         android:src="@drawable/ic_sdcard"
-                        tools:background="@color/color_warning"/>
+                        tools:background="@color/color_warning"
+	                    android:paddingEnd="@dimen/content_padding" />
 
                     <LinearLayout
                         android:layout_width="match_parent"

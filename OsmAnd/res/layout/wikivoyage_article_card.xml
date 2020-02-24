@@ -25,7 +25,9 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginLeft="@dimen/content_padding"
-				android:layout_marginRight="@dimen/content_padding">
+				android:layout_marginRight="@dimen/content_padding"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginEnd="@dimen/content_padding">
 
 				<LinearLayout
 					android:layout_width="0dp"
@@ -82,7 +84,9 @@
 				android:ellipsize="end"
 				android:maxLines="1"
 				android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
-				tools:text="England • United Kingdom"/>
+				tools:text="England • United Kingdom"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginEnd="@dimen/content_padding" />
 
 			<LinearLayout
 				android:layout_width="match_parent"
@@ -115,7 +119,10 @@
 						tools:drawableLeft="@drawable/ic_action_read_article"
 						tools:drawableTint="?attr/wikivoyage_active_color"
 						tools:ignore="UnusedAttribute"
-						tools:text="Read"/>
+						tools:text="Read"
+						android:paddingStart="@dimen/bottom_sheet_content_padding_small"
+						android:paddingEnd="@dimen/bottom_sheet_content_padding_small"
+						tools:drawableStart="@drawable/ic_action_read_article" />
 
 				</FrameLayout>
 
@@ -151,7 +158,10 @@
 						tools:drawableRight="@drawable/ic_action_read_later_fill"
 						tools:drawableTint="?attr/wikivoyage_active_color"
 						tools:ignore="UnusedAttribute"
-						tools:text="Delete"/>
+						tools:text="Delete"
+						tools:drawableEnd="@drawable/ic_action_read_later_fill"
+						android:paddingEnd="@dimen/bottom_sheet_content_padding_small"
+						android:paddingStart="@dimen/bottom_sheet_content_padding_small" />
 
 				</FrameLayout>
 

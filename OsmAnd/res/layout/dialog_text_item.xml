@@ -13,4 +13,6 @@
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
     android:ellipsize="marquee"
-    android:textAlignment="inherit"/>
+    android:textAlignment="inherit"
+	android:paddingStart="24dp"
+	android:paddingEnd="24dp" />

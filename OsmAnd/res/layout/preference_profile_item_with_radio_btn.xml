@@ -16,7 +16,9 @@
 		android:layout_marginRight="@dimen/content_padding"
 		android:layout_marginBottom="@dimen/bottom_sheet_icon_margin"
 		tools:src="@drawable/ic_action_coordinates_latitude"
-		tools:tint="?attr/default_icon_color" />
+		tools:tint="?attr/default_icon_color"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginEnd="@dimen/content_padding" />
 
 	<LinearLayout
 		android:layout_width="0dp"
@@ -56,6 +58,8 @@
 		android:background="@null"
 		android:clickable="false"
 		android:focusable="false"
-		android:saveEnabled="false" />
+		android:saveEnabled="false"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:layout_marginStart="@dimen/content_padding" />
 
 </LinearLayout>

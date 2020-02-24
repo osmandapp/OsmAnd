@@ -38,5 +38,7 @@
         android:layout_weight="1"
         android:dividerHeight="0.5dp"
         android:divider="?attr/ctx_menu_info_divider"
-        android:groupIndicator="@android:color/transparent"/>
+        android:groupIndicator="@android:color/transparent"
+	    android:layout_marginStart="0dp"
+	    android:layout_marginEnd="0dp" />
 </LinearLayout>

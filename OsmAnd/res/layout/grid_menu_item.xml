@@ -9,7 +9,9 @@
 	android:paddingLeft="@dimen/bottom_sheet_content_padding_small"
 	android:paddingRight="@dimen/bottom_sheet_content_padding_small"
 	tools:background="#17171A"
-	tools:layout_gravity="center">
+	tools:layout_gravity="center"
+	android:paddingEnd="@dimen/bottom_sheet_content_padding_small"
+	android:paddingStart="@dimen/bottom_sheet_content_padding_small">
 
 	<ImageView
 		android:id="@+id/icon"
