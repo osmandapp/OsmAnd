@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+	    android:layout_marginStart="30dp">
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/icon_sadface"
@@ -34,7 +35,9 @@
             android:ellipsize="end"
             tools:textColor="?android:textColorPrimary"
             android:textSize="@dimen/default_list_text_size"
-            android:text="@string/no_photos_descr"/>
+            android:text="@string/no_photos_descr"
+	        android:paddingEnd="24dp"
+	        android:paddingStart="20dp" />
 
     </LinearLayout>
 
@@ -77,7 +80,8 @@
                     android:textSize="@dimen/default_desc_text_size"
                     tools:textColor="?attr/color_dialog_buttons"
                     android:layout_gravity="center_vertical"
-                    android:text="@string/shared_string_add_photos"/>
+                    android:text="@string/shared_string_add_photos"
+	                android:layout_marginStart="16dp" />
 
             </LinearLayout>
 

@@ -6,7 +6,9 @@
     android:minHeight="48dp"
     android:orientation="horizontal"
     android:paddingLeft="16dp"
-    android:paddingRight="16dp">
+    android:paddingRight="16dp"
+	android:paddingStart="16dp"
+	android:paddingEnd="16dp">
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/icon"
@@ -27,7 +29,8 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginLeft="11dp"
-        tools:text="Some title text" />
+        tools:text="Some title text"
+	    android:layout_marginStart="11dp" />
 
     <CheckBox
         android:id="@+id/toggle_item"
@@ -35,6 +38,7 @@
         android:layout_height="@dimen/list_item_height"
         android:layout_marginLeft="11dp"
         android:focusable="false"
-        android:layout_gravity="center_vertical" />
+        android:layout_gravity="center_vertical"
+	    android:layout_marginStart="11dp" />
 
 </LinearLayout>

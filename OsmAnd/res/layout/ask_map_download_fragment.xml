@@ -19,13 +19,13 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="56dp"
+                android:layout_width="@dimen/context_menu_action_buttons_height"
                 android:layout_height="match_parent">
 
                 <ImageView
                     android:id="@+id/titleIconImageView"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
+                    android:layout_width="@dimen/context_menu_action_buttons_height"
+                    android:layout_height="@dimen/context_menu_action_buttons_height"
                     android:scaleType="center"
                     tools:background="@color/color_warning"
                     tools:src="@drawable/ic_map"/>
@@ -48,18 +48,20 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginLeft="8dp"
-                        android:paddingRight="8dp"
+                        android:layout_marginTop="@dimen/content_padding"
+                        android:layout_marginLeft="@dimen/content_padding_half"
+                        android:paddingRight="@dimen/content_padding_half"
                         android:text="@string/index_item_world_basemap"
                         android:textColor="?android:textColorPrimary"
-                        android:textSize="@dimen/dialog_header_text_size"/>
+                        android:textSize="@dimen/dialog_header_text_size"
+	                    android:layout_marginStart="@dimen/content_padding_half"
+	                    android:paddingEnd="@dimen/content_padding_half" />
 
                     <ImageButton
                         android:id="@+id/closeImageButton"
                         android:contentDescription="@string/shared_string_close"
-                        android:layout_width="44dp"
-                        android:layout_height="44dp"
+                        android:layout_width="@dimen/bottom_sheet_list_item_height"
+                        android:layout_height="@dimen/bottom_sheet_list_item_height"
                         android:layout_gravity="center"
                         style="@style/Widget.AppCompat.Button.Borderless"
                         tools:background="@color/color_warning"
@@ -72,41 +74,48 @@
                     android:id="@+id/descriptionTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginLeft="8dp"
-                    android:paddingRight="8dp"
+                    android:layout_marginTop="@dimen/content_padding"
+                    android:layout_marginLeft="@dimen/content_padding_half"
+                    android:paddingRight="@dimen/content_padding_half"
                     android:text="@string/world_map_download_descr"
                     android:textColor="?android:textColorSecondary"
-                    android:textSize="@dimen/default_list_text_size"/>
+                    android:textSize="@dimen/default_list_text_size"
+	                android:paddingEnd="@dimen/content_padding_half"
+	                android:layout_marginStart="@dimen/content_padding_half" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="@dimen/context_menu_padding_margin_medium"
+                    android:layout_marginBottom="@dimen/context_menu_padding_margin_medium"
                     android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/actionButtonOk"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
+                    android:paddingLeft="@dimen/content_padding_half"
+                    android:paddingRight="@dimen/content_padding_half"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:textColor="?attr/contextMenuButtonColor"
                     tools:background="@color/color_warning"
-                    android:text="@string/shared_string_download"/>
+                    android:text="@string/shared_string_download"
+	                android:paddingStart="@dimen/content_padding_half"
+	                android:paddingEnd="@dimen/content_padding_half" />
 
                 <Button
                     android:id="@+id/actionButtonCancel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
+                    android:layout_marginLeft="@dimen/context_menu_padding_margin_medium"
+                    android:paddingLeft="@dimen/content_padding_half"
+                    android:paddingRight="@dimen/content_padding_half"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     tools:background="@color/color_warning"
-                    android:text="@string/later"/>
+                    android:text="@string/later"
+	                android:paddingEnd="@dimen/content_padding_half"
+	                android:layout_marginStart="@dimen/context_menu_padding_margin_medium"
+	                android:paddingStart="@dimen/content_padding_half" />
 
                 </LinearLayout>
 

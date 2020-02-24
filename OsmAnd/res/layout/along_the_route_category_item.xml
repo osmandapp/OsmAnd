@@ -22,21 +22,25 @@
 			android:layout_marginLeft="@dimen/content_padding"
 			android:layout_marginRight="@dimen/content_padding"
 			android:layout_marginTop="@dimen/content_padding"
-			tools:src="@drawable/ic_action_arrow_down" />
+			tools:src="@drawable/ic_action_arrow_down"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding" />
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/title"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
-			android:layout_marginLeft="64dp"
-			android:layout_marginRight="64dp"
+			android:layout_marginLeft="@dimen/bottom_sheet_divider_margin_start"
+			android:layout_marginRight="@dimen/bottom_sheet_divider_margin_start"
 			android:ellipsize="end"
 			android:maxLines="1"
 			android:textAppearance="@style/TextAppearance.ListItemTitle"
 			android:textColor="?attr/active_color_basic"
 			osmand:typeface="@string/font_roboto_medium"
-			tools:text="Some Title" />
+			tools:text="Some Title"
+			android:layout_marginEnd="@dimen/bottom_sheet_divider_margin_start"
+			android:layout_marginStart="@dimen/bottom_sheet_divider_margin_start" />
 
 		<android.support.v7.widget.SwitchCompat
 			android:id="@+id/compound_button"
@@ -48,7 +52,9 @@
 			android:background="@null"
 			android:clickable="false"
 			android:focusable="false"
-			android:focusableInTouchMode="false" />
+			android:focusableInTouchMode="false"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginStart="@dimen/content_padding" />
 
 	</FrameLayout>
 

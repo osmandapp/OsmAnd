@@ -44,7 +44,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_marginLeft="8dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+	                android:layout_marginStart="8dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -60,7 +61,8 @@
                             android:paddingRight="8dp"
                             android:text="@string/arrived_at_destination"
                             android:textColor="?android:textColorPrimary"
-                            android:textSize="@dimen/dialog_header_text_size"/>
+                            android:textSize="@dimen/dialog_header_text_size"
+	                        android:paddingEnd="8dp" />
 
                         <ImageButton
                             android:id="@+id/closeImageButton"
@@ -84,10 +86,13 @@
                         android:paddingRight="8dp"
                         android:drawableLeft="@drawable/ic_action_parking_dark"
                         android:drawablePadding="12dp"
-                        android:gravity="left|center_vertical"
+                        android:gravity="start|center_vertical"
                         android:textColor="?android:textColorPrimary"
                         style="@style/Widget.AppCompat.Button.Borderless"
-                        android:text="@string/find_parking"/>
+                        android:text="@string/find_parking"
+	                    android:drawableStart="@drawable/ic_action_parking_dark"
+	                    android:paddingStart="8dp"
+	                    android:paddingEnd="8dp" />
 
                     <View
                         android:layout_width="match_parent"
@@ -105,10 +110,13 @@
                         android:paddingRight="8dp"
                         android:drawableLeft="@drawable/ic_action_gdirections_dark"
                         android:drawablePadding="12dp"
-                        android:gravity="left|center_vertical"
+                        android:gravity="start|center_vertical"
                         android:textColor="?android:textColorPrimary"
                         style="@style/Widget.AppCompat.Button.Borderless"
-                        android:text="@string/recalculate_route"/>
+                        android:text="@string/recalculate_route"
+	                    android:paddingStart="8dp"
+	                    android:paddingEnd="8dp"
+	                    android:drawableStart="@drawable/ic_action_gdirections_dark" />
 
                     <View
                         android:layout_width="match_parent"
@@ -126,10 +134,13 @@
                         android:paddingRight="8dp"
                         android:drawableLeft="@drawable/ic_action_done"
                         android:drawablePadding="12dp"
-                        android:gravity="left|center_vertical"
+                        android:gravity="start|center_vertical"
                         android:textColor="?android:textColorPrimary"
                         style="@style/Widget.AppCompat.Button.Borderless"
-                        android:text="@string/finish_navigation"/>
+                        android:text="@string/finish_navigation"
+	                    android:paddingEnd="8dp"
+	                    android:paddingStart="8dp"
+	                    android:drawableStart="@drawable/ic_action_done" />
 
                 </LinearLayout>
 

@@ -8,7 +8,9 @@
     		  android:layout_marginBottom="@dimen/dash_margin"
     		  android:layout_marginLeft="@dimen/dash_margin_h"
     		  android:layout_marginRight="@dimen/dash_margin_h"
-			  android:orientation="vertical">
+			  android:orientation="vertical"
+	android:layout_marginEnd="@dimen/dash_margin_h"
+	android:layout_marginStart="@dimen/dash_margin_h">
 
 	<LinearLayout
 		android:id="@+id/parking_header"
@@ -26,7 +28,9 @@
 			android:layout_marginRight="@dimen/dashFavIconMargin"
 			android:src="@drawable/ic_action_start_navigation"
 			android:scaleType="center"
-			android:background="@drawable/btn_inset_circle_no_shadow"/>
+			android:background="@drawable/btn_inset_circle_no_shadow"
+			android:layout_marginStart="@dimen/dashboard_parking_left_margin"
+			android:layout_marginEnd="@dimen/dashFavIconMargin" />
 
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -61,7 +65,8 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginRight="@dimen/dashFavIconMargin"
-					tools:text="@string/app_mode_aircraft"/>
+					tools:text="@string/app_mode_aircraft"
+					android:layout_marginEnd="@dimen/dashFavIconMargin" />
 
 
 			</LinearLayout>
@@ -86,6 +91,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginRight="0dp"
-		android:text="@string/remove_the_tag"/>
+		android:text="@string/remove_the_tag"
+		android:layout_marginEnd="0dp" />
 
 </LinearLayout>

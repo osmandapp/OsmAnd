@@ -24,7 +24,8 @@
             android:focusable="false"
             android:tint="?attr/secondary_icon_color"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_action_reorder"/>
+            android:src="@drawable/ic_action_reorder"
+	        android:layout_marginEnd="4dp" />
 
         <TextView
             android:id="@+id/title"
@@ -36,7 +37,8 @@
             android:maxLines="1"
             android:textColor="?android:textColorPrimary"
             android:textSize="@dimen/default_list_text_size"
-            tools:text="Add marker"/>
+            tools:text="Add marker"
+	        android:layout_marginStart="16dp" />
 
         <ImageView
             android:id="@+id/delete"
@@ -55,6 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginLeft="72dp"
-        android:background="?attr/dashboard_divider"/>
+        android:background="?attr/dashboard_divider"
+	    android:layout_marginStart="72dp" />
 
 </LinearLayout>

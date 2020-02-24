@@ -17,7 +17,9 @@
 		android:layout_marginRight="@dimen/content_padding"
 		android:tint="?attr/active_color_basic"
 		tools:visibility="visible"
-		android:src="@drawable/ic_action_plus"/>
+		android:src="@drawable/ic_action_plus"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:layout_marginStart="@dimen/content_padding" />
 
 	<FrameLayout
 		android:layout_width="match_parent"
@@ -25,7 +27,9 @@
 		android:layout_gravity="top"
 		android:orientation="vertical"
 		android:paddingLeft="@dimen/content_padding"
-		android:paddingRight="@dimen/content_padding">
+		android:paddingRight="@dimen/content_padding"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingEnd="@dimen/content_padding">
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/button_text"

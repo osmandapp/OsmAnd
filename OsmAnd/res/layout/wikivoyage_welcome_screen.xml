@@ -37,7 +37,9 @@
 		android:layout_height="match_parent"
 		android:layout_marginLeft="@dimen/wikivoyage_welcome_content_margin"
 		android:layout_marginRight="@dimen/wikivoyage_welcome_content_margin"
-		android:orientation="vertical">
+		android:orientation="vertical"
+		android:layout_marginStart="@dimen/wikivoyage_welcome_content_margin"
+		android:layout_marginEnd="@dimen/wikivoyage_welcome_content_margin">
 
 		<TextView
 			android:layout_width="match_parent"
@@ -82,7 +84,9 @@
 				android:text="@string/shared_string_continue"
 				android:textColor="@color/color_white"
 				android:textSize="@dimen/text_button_text_size"
-				osmand:typeface="@string/font_roboto_medium"/>
+				osmand:typeface="@string/font_roboto_medium"
+				android:paddingEnd="@dimen/content_padding"
+				android:paddingStart="@dimen/content_padding" />
 
 		</FrameLayout>
 

@@ -14,7 +14,9 @@
         android:layout_height="wrap_content"
         android:background="?attr/bg_color"
         android:paddingLeft="16dp"
-        android:paddingRight="16dp">
+        android:paddingRight="16dp"
+	    android:paddingStart="16dp"
+	    android:paddingEnd="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,7 +29,8 @@
                 android:layout_height="16dp"
                 tools:src="@drawable/ic_action_split_interval"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="12dp"/>
+                android:layout_marginRight="12dp"
+	            android:layout_marginEnd="12dp" />
 
             <net.osmand.plus.widgets.TextViewEx
                 android:id="@+id/overview_text"
@@ -45,7 +48,7 @@
                 android:id="@+id/fragment_count_text"
                 android:background="@null"
                 android:layout_gravity="center_vertical"
-                android:gravity="right"
+                android:gravity="end"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="?android:attr/textColorSecondary"
@@ -57,7 +60,8 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginLeft="28dp"
-            android:background="?attr/dashboard_divider"/>
+            android:background="?attr/dashboard_divider"
+	        android:layout_marginStart="28dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -71,7 +75,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+	            android:layout_marginEnd="3dp">
 
                 <ImageView
                     android:layout_marginTop="2dp"
@@ -79,7 +84,8 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     tools:src="@drawable/ic_action_track_16"
-                    android:layout_marginRight="12dp"/>
+                    android:layout_marginRight="12dp"
+	                android:layout_marginEnd="12dp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -115,7 +121,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+	            android:layout_marginEnd="3dp">
 
                 <ImageView
                     android:layout_marginTop="2dp"
@@ -123,7 +130,8 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     tools:src="@drawable/ic_action_time_start_16"
-                    android:layout_marginRight="12dp"/>
+                    android:layout_marginRight="12dp"
+	                android:layout_marginEnd="12dp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -166,7 +174,8 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     tools:src="@drawable/ic_action_time_end_16"
-                    android:layout_marginRight="12dp"/>
+                    android:layout_marginRight="12dp"
+	                android:layout_marginEnd="12dp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -204,7 +213,8 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginLeft="28dp"
-            android:background="?attr/dashboard_divider"/>
+            android:background="?attr/dashboard_divider"
+	        android:layout_marginStart="28dp" />
 
         <LinearLayout
             android:id="@+id/elevation_layout"
@@ -219,7 +229,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+	            android:layout_marginEnd="3dp">
 
                 <ImageView
                     android:layout_marginTop="2dp"
@@ -227,7 +238,8 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     tools:src="@drawable/ic_action_altitude_average_16"
-                    android:layout_marginRight="12dp"/>
+                    android:layout_marginRight="12dp"
+	                android:layout_marginEnd="12dp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -262,7 +274,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+	            android:layout_marginEnd="3dp">
 
                 <ImageView
                     android:layout_marginTop="2dp"
@@ -270,7 +283,8 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     tools:src="@drawable/ic_action_altitude_range_16"
-                    android:layout_marginRight="12dp"/>
+                    android:layout_marginRight="12dp"
+	                android:layout_marginEnd="12dp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -333,7 +347,8 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     tools:src="@drawable/ic_action_altitude_descent_ascent_16"
-                    android:layout_marginRight="12dp"/>
+                    android:layout_marginRight="12dp"
+	                android:layout_marginEnd="12dp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -390,7 +405,8 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginLeft="28dp"
-            android:background="?attr/dashboard_divider"/>
+            android:background="?attr/dashboard_divider"
+	        android:layout_marginStart="28dp" />
 
         <LinearLayout
             android:id="@+id/speed_layout"
@@ -405,7 +421,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+	            android:layout_marginEnd="3dp">
 
                 <ImageView
                     android:layout_marginTop="2dp"
@@ -413,7 +430,8 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     tools:src="@drawable/ic_action_time_moving_16"
-                    android:layout_marginRight="12dp"/>
+                    android:layout_marginRight="12dp"
+	                android:layout_marginEnd="12dp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -448,7 +466,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+	            android:layout_marginEnd="3dp">
 
                 <ImageView
                     android:layout_marginTop="2dp"
@@ -456,7 +475,8 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     tools:src="@drawable/ic_action_speed_16"
-                    android:layout_marginRight="12dp"/>
+                    android:layout_marginRight="12dp"
+	                android:layout_marginEnd="12dp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -498,7 +518,8 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     tools:src="@drawable/ic_action_max_speed_16"
-                    android:layout_marginRight="12dp"/>
+                    android:layout_marginRight="12dp"
+	                android:layout_marginEnd="12dp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"

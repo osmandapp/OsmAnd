@@ -8,7 +8,9 @@
     android:minHeight="@dimen/list_item_height"
     android:orientation="horizontal"
     android:paddingLeft="@dimen/list_content_padding"
-    android:paddingRight="@dimen/list_content_padding">
+    android:paddingRight="@dimen/list_content_padding"
+	android:paddingStart="@dimen/list_content_padding"
+	android:paddingEnd="@dimen/list_content_padding">
 
     <ImageView
         android:id="@+id/change_color_icon"

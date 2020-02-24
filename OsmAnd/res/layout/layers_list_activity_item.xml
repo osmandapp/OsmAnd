@@ -6,7 +6,9 @@
               android:descendantFocusability="blocksDescendants"
               android:orientation="horizontal"
               android:paddingLeft="@dimen/list_content_padding"
-              android:paddingRight="@dimen/list_content_padding" >
+              android:paddingRight="@dimen/list_content_padding"
+	android:paddingEnd="@dimen/list_content_padding"
+	android:paddingStart="@dimen/list_content_padding">
 
     <ImageView
         android:id="@+id/icon"
@@ -17,7 +19,8 @@
         android:layout_marginRight="@dimen/list_content_padding"
         android:gravity="center_vertical"
         android:layout_gravity="center_vertical"
-        android:src="@drawable/ic_action_settings" />
+        android:src="@drawable/ic_action_settings"
+	    android:layout_marginEnd="@dimen/list_content_padding" />
 
     <TextView
         android:id="@+id/title"
@@ -39,9 +42,10 @@
         android:gravity="center_vertical"
         android:paddingTop="6dp"
         android:paddingBottom="6dp"
-        android:paddingLeft="16dp"
+        android:paddingLeft="@dimen/content_padding"
         android:textSize="@dimen/default_list_text_size"
-        android:visibility="gone"/>
+        android:visibility="gone"
+	    android:paddingStart="@dimen/content_padding" />
 
     <CheckBox
         android:id="@+id/toggle_item"

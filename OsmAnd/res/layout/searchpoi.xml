@@ -12,7 +12,8 @@
         android:layout_marginLeft="5dp"
         tools:visibility="visible"
         android:visibility="gone"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+	    android:layout_marginStart="5dp">
 
         <ImageView
             android:id="@+id/search_icon"
@@ -20,7 +21,8 @@
             android:layout_height="@dimen/standard_icon_size"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="8dp"
-            android:src="@android:drawable/ic_search_category_default" />
+            android:src="@android:drawable/ic_search_category_default"
+	        android:layout_marginEnd="8dp" />
 
         <!-- to not gain focus everytime  -->
         <LinearLayout
@@ -43,7 +45,8 @@
             android:nextFocusUp="@id/searchEditText"
             android:textColor="?android:textColorPrimary"
             android:imeOptions="actionSearch"
-            tools:text="@string/lorem_ipsum" >
+            tools:text="@string/lorem_ipsum"
+	        android:layout_marginEnd="@dimen/list_content_padding">
         </EditText>
 
         <ImageView

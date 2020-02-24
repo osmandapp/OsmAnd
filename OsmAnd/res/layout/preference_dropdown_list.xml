@@ -20,10 +20,11 @@
 			android:id="@+id/type_down_arrow"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical|right"
+			android:layout_gravity="center_vertical|end"
 			android:paddingRight="@dimen/content_padding"
 			android:src="@drawable/ic_action_arrow_drop_down"
-			android:tint="@color/settings_divider" />
+			android:tint="@color/settings_divider"
+			android:paddingEnd="@dimen/content_padding" />
 
 		<net.osmand.plus.widgets.OsmandTextFieldBoxes
 			android:id="@+id/master_profile_otfb"

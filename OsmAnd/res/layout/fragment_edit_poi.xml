@@ -16,8 +16,8 @@
         android:background="?attr/pstsTabBackground"
         android:minHeight="@dimen/dashboard_map_toolbar"
         android:theme="?attr/toolbar_theme"
-        app:contentInsetLeft="72dp"
-        app:contentInsetStart="72dp"/>
+        app:contentInsetLeft="@dimen/settings_divider_margin_start"
+        app:contentInsetStart="@dimen/settings_divider_margin_start"/>
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -41,8 +41,10 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/shared_string_name"
                     android:importantForAutofill="noExcludeDescendants"
-                    android:layout_marginLeft="72dp"
-                    android:layout_marginRight="16dp">
+                    android:layout_marginLeft="@dimen/settings_divider_margin_start"
+                    android:layout_marginRight="@dimen/content_padding"
+	                android:layout_marginStart="@dimen/settings_divider_margin_start"
+	                android:layout_marginEnd="@dimen/content_padding">
 
                     <EditText
                         android:id="@+id/poiNameEditText"
@@ -59,14 +61,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="@dimen/content_padding_half"
                 app:layout_scrollFlags="scroll">
                 <!--android:layout_marginLeft="72dp"-->
                 <ImageButton
                     android:id="@+id/poiTypeButton"
                     android:contentDescription="@string/poi_dialog_poi_type"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="@dimen/context_menu_buttons_bottom_height"
+                    android:layout_height="@dimen/context_menu_buttons_bottom_height"
                     android:layout_gravity="bottom"
                     android:background="@null"
                     android:src="@drawable/ic_action_label"/>
@@ -78,7 +80,8 @@
                     android:hint="@string/poi_dialog_poi_type"
                     android:importantForAutofill="noExcludeDescendants"
                     android:layout_marginLeft="24dp"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+	                android:layout_marginStart="24dp">
 
                     <AutoCompleteTextView
                         android:id="@+id/poiTypeEditText"
@@ -89,15 +92,16 @@
                         android:importantForAutofill="noExcludeDescendants"
                         android:imeOptions="actionSend"
                         android:inputType="text"
-                        tools:text="@string/lorem_ipsum"/>
+                        tools:text="@string/lorem_ipsum"
+	                    android:drawableEnd="@drawable/ic_action_arrow_drop_down" />
 
                 </android.support.design.widget.TextInputLayout>
 
                 <ImageButton
                     android:id="@+id/onlineDocumentationButton"
                     android:contentDescription="@string/shared_string_help"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="@dimen/context_menu_buttons_bottom_height"
+                    android:layout_height="@dimen/context_menu_buttons_bottom_height"
                     android:layout_gravity="bottom"
                     android:background="@null"
                     tools:src="@drawable/ic_action_help"/>
@@ -133,28 +137,29 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:gravity="right">
+        android:gravity="end">
 
         <net.osmand.plus.widgets.ButtonEx
             android:id="@+id/deleteButton"
             style="@style/DashboardGeneralButton"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/context_menu_buttons_bottom_height"
             android:layout_marginLeft="@dimen/showAllButtonMarginRight"
             android:gravity="center"
             android:text="@string/shared_string_delete"
             android:visibility="gone"
             app:textAllCapsCompat="true"
-            tools:visibility="visible"/>
+            tools:visibility="visible"
+	        android:layout_marginStart="@dimen/showAllButtonMarginRight" />
 
         <Space
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/context_menu_buttons_bottom_height"
             android:layout_weight="1"/>
 
         <net.osmand.plus.widgets.ButtonEx
             android:id="@+id/cancelButton"
             style="@style/DashboardGeneralButton"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/context_menu_buttons_bottom_height"
             android:gravity="center"
             android:text="@string/shared_string_cancel"
             app:textAllCapsCompat="true"/>
@@ -162,7 +167,7 @@
         <net.osmand.plus.widgets.ButtonEx
             android:id="@+id/saveButton"
             style="@style/DashboardGeneralButton"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/context_menu_buttons_bottom_height"
             android:gravity="center"
             app:textAllCapsCompat="true"
             tools:text="Save"/>

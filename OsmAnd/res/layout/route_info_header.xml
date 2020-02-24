@@ -129,7 +129,9 @@
 		android:layout_marginTop="@dimen/route_info_details_padding"
 		android:layout_marginRight="@dimen/route_info_buttons_padding_top_bottom"
 		android:layout_marginBottom="@dimen/route_info_buttons_padding_top_bottom"
-		android:orientation="horizontal">
+		android:orientation="horizontal"
+		android:layout_marginEnd="@dimen/route_info_buttons_padding_top_bottom"
+		android:layout_marginStart="@dimen/route_info_buttons_padding_top_bottom">
 
 		<FrameLayout
 			android:id="@+id/details_button"
@@ -440,7 +442,9 @@
 		android:layout_marginTop="@dimen/route_info_details_padding"
 		android:layout_marginRight="@dimen/route_info_buttons_padding_top_bottom"
 		android:layout_marginBottom="@dimen/route_info_details_padding"
-		android:visibility="visible">
+		android:visibility="visible"
+		android:layout_marginEnd="@dimen/route_info_buttons_padding_top_bottom"
+		android:layout_marginStart="@dimen/route_info_buttons_padding_top_bottom">
 
 		<FrameLayout
 			android:id="@+id/analyse_button"

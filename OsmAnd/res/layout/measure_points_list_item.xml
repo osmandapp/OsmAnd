@@ -97,7 +97,9 @@
                     android:textSize="@dimen/default_sub_text_size"
                     android:layout_marginLeft="@dimen/bottom_sheet_content_margin_small"
                     android:layout_marginRight="@dimen/bottom_sheet_content_margin_small"
-                    tools:text="Altitude: 345 m"/>
+                    tools:text="Altitude: 345 m"
+	                android:layout_marginStart="@dimen/bottom_sheet_content_margin_small"
+	                android:layout_marginEnd="@dimen/bottom_sheet_content_margin_small" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:maxLines="1"

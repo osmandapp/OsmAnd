@@ -18,7 +18,9 @@
             android:layout_marginLeft="24dp"
             android:layout_marginRight="24dp"
             android:text="@string/upload_osm_note_description"
-            android:textSize="@dimen/default_desc_text_size"/>
+            android:textSize="@dimen/default_desc_text_size"
+	        android:layout_marginStart="24dp"
+	        android:layout_marginEnd="24dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,7 +29,9 @@
             android:layout_marginBottom="16dp"
             android:layout_marginLeft="24dp"
             android:layout_marginRight="24dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+	        android:layout_marginEnd="24dp"
+	        android:layout_marginStart="24dp">
 
             <TextView
                 android:layout_width="0dp"
@@ -57,7 +61,9 @@
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
         android:layout_marginTop="16dp"
-        android:text="@string/osb_comment_dialog_message"/>
+        android:text="@string/osb_comment_dialog_message"
+	    android:layout_marginEnd="24dp"
+	    android:layout_marginStart="24dp" />
 
     <EditText
         android:id="@+id/message_field"
@@ -66,7 +72,9 @@
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
         android:inputType="textMultiLine"
-        android:minLines="1"/>
+        android:minLines="1"
+	    android:layout_marginEnd="24dp"
+	    android:layout_marginStart="24dp" />
 
     <CheckBox
         android:id="@+id/close_change_set_checkbox"
@@ -75,7 +83,9 @@
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
         android:layout_marginBottom="16dp"
-        android:text="@string/close_changeset"/>
+        android:text="@string/close_changeset"
+	    android:layout_marginStart="24dp"
+	    android:layout_marginEnd="24dp" />
 
     <include layout="@layout/osm_user_login_details"/>
 </LinearLayout>

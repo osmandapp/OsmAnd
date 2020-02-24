@@ -13,7 +13,9 @@
 		android:layout_marginLeft="@dimen/content_padding_half"
 		android:layout_marginRight="@dimen/content_padding_half"
 		android:minHeight="@dimen/bottom_sheet_list_item_height"
-		android:orientation="horizontal">
+		android:orientation="horizontal"
+		android:layout_marginEnd="@dimen/content_padding_half"
+		android:layout_marginStart="@dimen/content_padding_half">
 
 		<ImageView
 			android:id="@android:id/icon"
@@ -22,7 +24,9 @@
 			android:layout_marginLeft="@dimen/content_padding_half"
 			android:layout_marginTop="@dimen/content_padding_small"
 			android:layout_marginRight="@dimen/content_padding_half"
-			tools:src="@drawable/ic_action_lock" />
+			tools:src="@drawable/ic_action_lock"
+			android:layout_marginEnd="@dimen/content_padding_half"
+			android:layout_marginStart="@dimen/content_padding_half" />
 
 		<LinearLayout
 			android:layout_width="match_parent"

@@ -15,4 +15,6 @@
     android:textAppearance="@style/TextAppearance.ListItemTitle"
     android:textSize="@dimen/bottom_sheet_title_big"
     osmand:typeface="@string/font_roboto_medium"
-    tools:text="@string/new_plugin_added" />
+    tools:text="@string/new_plugin_added"
+	android:paddingEnd="@dimen/content_padding"
+	android:paddingStart="@dimen/content_padding" />

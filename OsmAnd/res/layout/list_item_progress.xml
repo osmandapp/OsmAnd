@@ -9,7 +9,8 @@
     android:gravity="center_vertical"
     android:minHeight="72dp"
     android:orientation="vertical"
-    android:paddingLeft="16dp">
+    android:paddingLeft="@dimen/content_padding"
+	android:paddingStart="@dimen/content_padding">
 
     <TextView
         android:id="@+id/title"
@@ -37,9 +38,11 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="16dp"
-            android:max="255"/>
+            android:layout_marginLeft="@dimen/content_padding_half"
+            android:layout_marginRight="@dimen/content_padding"
+            android:max="255"
+	        android:layout_marginStart="@dimen/content_padding_half"
+	        android:layout_marginEnd="@dimen/content_padding" />
     </LinearLayout>
 
 </LinearLayout>

@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:minHeight="@dimen/list_item_height"
         android:gravity="center_vertical"
-        android:paddingLeft="@dimen/list_content_padding">
+        android:paddingLeft="@dimen/list_content_padding"
+	    android:paddingStart="@dimen/list_content_padding">
 
         <ImageView
             android:id="@+id/icon"
@@ -80,10 +81,14 @@
             android:background="@drawable/buy_btn_background_light"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/dashFavIconMargin"
-            android:layout_marginRight="8dp"
+            android:layout_marginRight="@dimen/content_padding_half"
             android:textColor="@color/buy_button_color"
             android:text="@string/buy"
-            android:visibility="gone"/>
+            android:visibility="gone"
+	        android:layout_marginStart="@dimen/dashFavIconMargin"
+	        android:paddingStart="18dp"
+	        android:paddingEnd="18dp"
+	        android:layout_marginEnd="@dimen/content_padding_half" />
 
     </LinearLayout>
 
@@ -92,6 +97,7 @@
         android:layout_width="wrap_content"
         android:layout_height="1dp"
         android:layout_marginLeft="56dp"
-        android:background="?attr/dashboard_divider"/>
+        android:background="?attr/dashboard_divider"
+	    android:layout_marginStart="56dp" />
 
 </LinearLayout>
