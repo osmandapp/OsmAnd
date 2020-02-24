@@ -12,6 +12,7 @@ import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.TextWatcher;
@@ -198,7 +199,8 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	protected int getZoomToDisplay(T item){
 		return 15;
 	}
-	
+
+	@Nullable
 	protected LatLon getLocation(T item) {
 		if (item instanceof MapObject) {
 			return ((MapObject) item).getLocation();

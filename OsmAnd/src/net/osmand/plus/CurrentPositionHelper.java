@@ -219,10 +219,13 @@ public class CurrentPositionHelper {
 		int y31 = MapUtils.get31TileNumberY(lat);
 		int x31 = MapUtils.get31TileNumberX(lon);
 		for(BinaryMapReaderResource r : app.getResourceManager().getFileReaders()) {
-			if(!r.isClosed() && r.getShallowReader().containsRouteData(x31, y31, x31, y31, 15)) {
-				if(!res.contains(r)) {
-					res = new ArrayList<>(res);
-					res.add(r);
+			if (!r.isClosed()) {
+				BinaryMapIndexReader shallowReader = r.getShallowReader();
+				if (shallowReader != null && shallowReader.containsRouteData(x31, y31, x31, y31, 15)) {
+					if (!res.contains(r)) {
+						res = new ArrayList<>(res);
+						res.add(r);
+					}
 				}
 			}
 		}
@@ -241,10 +244,12 @@ public class CurrentPositionHelper {
 						continue;
 					}
 					BinaryMapIndexReader reader = rt.getReader(BinaryMapReaderResourceType.STREET_LOOKUP);
-					for (RouteRegion rb : reader.getRoutingIndexes()) {
-						if (r.regionFP == rb.getFilePointer() && r.regionLen == rb.getLength()) {
-							foundRepo = reader;
-							break;
+					if (reader != null) {
+						for (RouteRegion rb : reader.getRoutingIndexes()) {
+							if (r.regionFP == rb.getFilePointer() && r.regionLen == rb.getLength()) {
+								foundRepo = reader;
+								break;
+							}
 						}
 					}
 				}
