@@ -203,6 +203,18 @@ public class AppInitializer implements IProgress {
 			if (prevAppVersion < VERSION_3_5 || Version.getAppVersion(app).equals("3.5.3")
 					|| Version.getAppVersion(app).equals("3.5.4")) {
 				app.getSettings().migratePreferences();
+				app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+					@Override
+					public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+						if (event.equals(InitEvents.FAVORITES_INITIALIZED)) {
+							app.getSettings().migrateHomeWorkParkingToFavorites();
+						}
+					}
+
+					@Override
+					public void onFinish(AppInitializer init) {
+					}
+				});
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_5).commit();
 			}
 			if (prevAppVersion < VERSION_3_6) {
@@ -215,13 +227,6 @@ public class AppInitializer implements IProgress {
 		app.getSettings().SHOW_TRAVEL_UPDATE_CARD.set(true);
 		app.getSettings().SHOW_TRAVEL_NEEDED_MAPS_CARD.set(true);
 		initSettings = true;
-	}
-
-	void migrateHomeWorkFromSettings() {
-		if (prevAppVersion < VERSION_3_5 || Version.getAppVersion(app).equals("3.5.3")) {
-			app.getSettings().migrateHomeWorkParkingToFavorites();
-			startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_5).commit();
-		}
 	}
 
 	public int getNumberOfStarts() {
