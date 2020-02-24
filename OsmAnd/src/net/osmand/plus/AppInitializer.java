@@ -203,9 +203,9 @@ public class AppInitializer implements IProgress {
 			if (prevAppVersion < VERSION_3_5 || Version.getAppVersion(app).equals("3.5.3")
 					|| Version.getAppVersion(app).equals("3.5.4")) {
 				app.getSettings().migratePreferences();
-				app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+				addListener(new AppInitializeListener() {
 					@Override
-					public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+					public void onProgress(AppInitializer init, InitEvents event) {
 						if (event.equals(InitEvents.FAVORITES_INITIALIZED)) {
 							app.getSettings().migrateHomeWorkParkingToFavorites();
 						}
