@@ -3509,7 +3509,7 @@
     <string name="shared_string_nothing_selected">Hiçbir şey seçilmedi</string>
     <string name="shared_string_quick_actions">Hızlı eylemler</string>
     <string name="shared_string_profiles">Profiller</string>
-    <string name="listed_exist">Listelenen %1$1, OsmAnd\'da zaten var.</string>
+    <string name="listed_exist">Listelenen %1$s, OsmAnd\'da zaten var.</string>
     <string name="replace_all_desc">Geçerli ögeler, dosyadaki ögelerle değiştirilecek</string>
     <string name="replace_all">Hepsini değiştir</string>
     <string name="keep_both">Her ikisini de sakla</string>
