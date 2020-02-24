@@ -3501,7 +3501,6 @@
     <string name="plugin_disabled">Додатак искључен</string>
     <string name="shared_string_menu">Мени</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
-    <string name="shared_string_custom_rendering_style">Произвољни стил исцртавања</string>
     <string name="shared_string_include_data">Укључи додатне податке</string>
     <string name="import_profile_dialog_description">Увезени профил садржи додатне податке. Кликните на Увоз да увезете да увезете само профилне податке или одаберите које додатне податке увести.</string>
     <string name="export_profile_dialog_description">Поред профила, можете одабрати додатне податке за извоз.</string>
