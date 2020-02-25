@@ -45,9 +45,9 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 
@@ -205,9 +205,9 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 		}
 
 		List<ITileSource> iTileSources = new ArrayList<>();
-		final LinkedHashMap<String, String> tileSourceEntries = new LinkedHashMap<>(app.getSettings().getTileSourceEntries(true));
-		for (Map.Entry<String, String> entry : tileSourceEntries.entrySet()) {
-			File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + entry.getKey());
+		Set<String> tileSourceNames = app.getSettings().getTileSourceEntries(true).keySet();
+		for (String name : tileSourceNames) {
+			File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + name);
 			if (f != null) {
 				ITileSource template;
 				if (f.getName().endsWith(SQLiteTileSource.EXT)) {

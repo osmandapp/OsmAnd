@@ -245,7 +245,7 @@ public class SettingsHelper {
 
 	public abstract static class CollectionSettingsItem<T> extends SettingsItem {
 
-		protected List<T> items;
+		protected List<T> items = new ArrayList<>();
 		protected List<T> duplicateItems = new ArrayList<>();
 		protected List<T> existingItems;
 
@@ -931,7 +931,7 @@ public class SettingsHelper {
 		@NonNull
 		@Override
 		SettingsItemReader getReader() {
-			return new SettingsItemReader(this) {
+			return new SettingsItemReader<QuickActionSettingsItem>(this) {
 				@Override
 				public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
 					StringBuilder buf = new StringBuilder();
@@ -950,7 +950,6 @@ public class SettingsHelper {
 					}
 					final JSONObject json;
 					try {
-						items = new ArrayList<>();
 						Gson gson = new Gson();
 						Type type = new TypeToken<HashMap<String, String>>() {
 						}.getType();
@@ -979,7 +978,7 @@ public class SettingsHelper {
 		@NonNull
 		@Override
 		SettingsItemWriter getWriter() {
-			return new SettingsItemWriter(this) {
+			return new SettingsItemWriter<QuickActionSettingsItem>(this) {
 				@Override
 				public boolean writeToStream(@NonNull OutputStream outputStream) throws IOException {
 					JSONObject json = new JSONObject();
@@ -1098,7 +1097,7 @@ public class SettingsHelper {
 		@NonNull
 		@Override
 		SettingsItemReader getReader() {
-			return new SettingsItemReader(this) {
+			return new SettingsItemReader<PoiUiFilterSettingsItem>(this) {
 				@Override
 				public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
 					StringBuilder buf = new StringBuilder();
@@ -1117,7 +1116,6 @@ public class SettingsHelper {
 					}
 					final JSONObject json;
 					try {
-						items = new ArrayList<>();
 						json = new JSONObject(jsonStr);
 						JSONArray jsonArray = json.getJSONArray("items");
 						Gson gson = new Gson();
@@ -1148,7 +1146,7 @@ public class SettingsHelper {
 		@NonNull
 		@Override
 		SettingsItemWriter getWriter() {
-			return new SettingsItemWriter(this) {
+			return new SettingsItemWriter<PoiUiFilterSettingsItem>(this) {
 				@Override
 				public boolean writeToStream(@NonNull OutputStream outputStream) throws IOException {
 					JSONObject json = new JSONObject();
@@ -1193,15 +1191,13 @@ public class SettingsHelper {
 		public MapSourcesSettingsItem(@NonNull OsmandApplication app, @NonNull List<ITileSource> items) {
 			super(SettingsItemType.MAP_SOURCES, items);
 			this.app = app;
-			Collection values = new LinkedHashMap<>(app.getSettings().getTileSourceEntries(true)).values();
-			existingItemsNames = new ArrayList(values);
+			existingItemsNames = new ArrayList<>(app.getSettings().getTileSourceEntries().values());
 		}
 
 		MapSourcesSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			super(SettingsItemType.MAP_SOURCES, json);
 			this.app = app;
-			Collection values = new LinkedHashMap<>(app.getSettings().getTileSourceEntries(true)).values();
-			existingItemsNames = new ArrayList(values);
+			existingItemsNames = new ArrayList<>(app.getSettings().getTileSourceEntries().values());
 		}
 
 		@Override
@@ -1301,7 +1297,7 @@ public class SettingsHelper {
 		@NonNull
 		@Override
 		SettingsItemReader getReader() {
-			return new SettingsItemReader(this) {
+			return new SettingsItemReader<MapSourcesSettingsItem>(this) {
 				@Override
 				public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
 					StringBuilder buf = new StringBuilder();
@@ -1320,7 +1316,6 @@ public class SettingsHelper {
 					}
 					final JSONObject json;
 					try {
-						items = new ArrayList<>();
 						json = new JSONObject(jsonStr);
 						JSONArray jsonArray = json.getJSONArray("items");
 						for (int i = 0; i < jsonArray.length(); i++) {
@@ -1361,7 +1356,7 @@ public class SettingsHelper {
 		@NonNull
 		@Override
 		SettingsItemWriter getWriter() {
-			return new SettingsItemWriter(this) {
+			return new SettingsItemWriter<MapSourcesSettingsItem>(this) {
 				@Override
 				public boolean writeToStream(@NonNull OutputStream outputStream) throws IOException {
 					JSONObject json = new JSONObject();
@@ -1503,7 +1498,7 @@ public class SettingsHelper {
 		@NonNull
 		@Override
 		SettingsItemReader getReader() {
-			return new SettingsItemReader(this) {
+			return new SettingsItemReader<AvoidRoadsSettingsItem>(this) {
 				@Override
 				public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
 					StringBuilder buf = new StringBuilder();
@@ -1522,7 +1517,6 @@ public class SettingsHelper {
 					}
 					final JSONObject json;
 					try {
-						items = new ArrayList<>();
 						json = new JSONObject(jsonStr);
 						JSONArray jsonArray = json.getJSONArray("items");
 						for (int i = 0; i < jsonArray.length(); i++) {
@@ -1553,7 +1547,7 @@ public class SettingsHelper {
 		@NonNull
 		@Override
 		SettingsItemWriter getWriter() {
-			return new SettingsItemWriter(this) {
+			return new SettingsItemWriter<AvoidRoadsSettingsItem>(this) {
 				@Override
 				public boolean writeToStream(@NonNull OutputStream outputStream) throws IOException {
 					JSONObject json = new JSONObject();
@@ -1599,9 +1593,14 @@ public class SettingsHelper {
 			JSONArray itemsJson = json.getJSONArray("items");
 			for (int i = 0; i < itemsJson.length(); i++) {
 				JSONObject itemJson = itemsJson.getJSONObject(i);
-				SettingsItem item = createItem(itemJson);
-				if (item != null) {
-					items.add(item);
+				SettingsItem item;
+				try {
+					item = createItem(itemJson);
+					if (item != null) {
+						items.add(item);
+					}
+				} catch (IllegalArgumentException e) {
+					LOG.error("Error creating item from json: " + itemJson, e);
 				}
 			}
 			if (items.size() == 0) {
@@ -1811,7 +1810,7 @@ public class SettingsHelper {
 
 		private SettingsImportListener listener;
 		private SettingsImporter importer;
-		private List<SettingsItem> items;
+		private List<SettingsItem> items = new ArrayList<>();
 		private List<SettingsItem> processedItems = new ArrayList<>();
 		private SettingsItem currentItem;
 		private AlertDialog dialog;
@@ -1864,10 +1863,12 @@ public class SettingsHelper {
 		}
 
 		@Override
-		protected void onPostExecute(List<SettingsItem> items) {
-			this.items = items;
+		protected void onPostExecute(@Nullable List<SettingsItem> items) {
+			if (items != null) {
+				this.items = items;
+			}
 			if (collectOnly) {
-				listener.onSettingsImportFinished(true, false, items);
+				listener.onSettingsImportFinished(true, false, this.items);
 			} else {
 				if (items != null && items.size() > 0) {
 					processNextItem();
@@ -1972,7 +1973,7 @@ public class SettingsHelper {
 		}
 	}
 
-	private void finishImport(@Nullable SettingsImportListener listener, boolean success, boolean empty, List<SettingsItem> items) {
+	private void finishImport(@Nullable SettingsImportListener listener, boolean success, boolean empty, @NonNull List<SettingsItem> items) {
 		importing = false;
 		importSuspended = false;
 		importTask = null;
