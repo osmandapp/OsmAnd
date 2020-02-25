@@ -77,8 +77,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		inflater = UiUtilities.getInflater(app, nightMode);
 		View root = inflater.inflate(R.layout.fragment_import, container, false);
-		AppBarLayout appBar = root.findViewById(R.id.appbar);
-		setupToolbar((Toolbar) root.findViewById(R.id.toolbar), appBar);
+		setupToolbar((Toolbar) root.findViewById(R.id.toolbar));
 		TextViewEx continueBtn = root.findViewById(R.id.continue_button);
 		selectBtn = root.findViewById(R.id.select_button);
 		expandableList = root.findViewById(R.id.list);
@@ -324,7 +323,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		dismissDialog.show();
 	}
 
-	private void setupToolbar(Toolbar toolbar, AppBarLayout appBarLayout) {
+	private void setupToolbar(Toolbar toolbar) {
 		toolbar.setNavigationIcon(getPaintedContentIcon(R.drawable.ic_action_close, nightMode
 				? getResources().getColor(R.color.active_buttons_and_links_text_dark)
 				: getResources().getColor(R.color.active_buttons_and_links_text_light)));
@@ -335,7 +334,6 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 				showExitDialog();
 			}
 		});
-		ViewCompat.setElevation(appBarLayout, 5.0f);
 	}
 
 	public void setFile(File file) {

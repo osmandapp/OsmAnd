@@ -80,8 +80,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		inflater = UiUtilities.getInflater(app, nightMode);
 		View root = inflater.inflate(R.layout.fragment_import_duplicates, container, false);
-		AppBarLayout appBar = root.findViewById(R.id.appbar);
-		setupToolbar((Toolbar) root.findViewById(R.id.toolbar), appBar);
+		setupToolbar((Toolbar) root.findViewById(R.id.toolbar));
 		ComplexButton replaceAllBtn = root.findViewById(R.id.replace_all_btn);
 		ComplexButton keepBothBtn = root.findViewById(R.id.keep_both_btn);
 		buttonsContainer = root.findViewById(R.id.buttons_container);
@@ -242,7 +241,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 		}
 	}
 
-	private void setupToolbar(Toolbar toolbar, AppBarLayout appBarLayout) {
+	private void setupToolbar(Toolbar toolbar) {
 		toolbar.setNavigationIcon(getPaintedContentIcon(R.drawable.ic_arrow_back,
 				nightMode
 						? getResources().getColor(R.color.active_buttons_and_links_text_dark)
@@ -258,7 +257,6 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 				}
 			}
 		});
-		ViewCompat.setElevation(appBarLayout, 5.0f);
 	}
 
 	public void setDuplicatesList(List<? super Object> duplicatesList) {

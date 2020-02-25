@@ -1755,9 +1755,8 @@ public class SettingsHelper {
 						zis.closeEntry();
 					}
 					if (collecting) {
-						SettingsItemsFactory itemsFactory;
 						try {
-							itemsFactory = new SettingsItemsFactory(app, itemsJson);
+							SettingsItemsFactory itemsFactory = new SettingsItemsFactory(app, itemsJson);
 							items.addAll(itemsFactory.getItems());
 						} catch (IllegalArgumentException e) {
 							LOG.error("Error parsing items: " + itemsJson, e);
@@ -1769,19 +1768,23 @@ public class SettingsHelper {
 					}
 					while ((entry = zis.getNextEntry()) != null) {
 						String fileName = entry.getName();
-						for (SettingsItem item : items) {
-							if (item != null && item.getFileName().equals(fileName)
-									&& (collecting && item.shouldReadOnCollecting()
-									|| !collecting && !item.shouldReadOnCollecting())) {
-								try {
-									item.getReader().readFromStream(ois);
-								} catch (IllegalArgumentException e) {
-									LOG.error("Error reading item data: " + item.getName(), e);
-								} catch (IOException e) {
-									LOG.error("Error reading item data: " + item.getName(), e);
-								} finally {
-									zis.closeEntry();
-								}
+						SettingsItem item = null;
+						for (SettingsItem settingsItem : items) {
+							if (settingsItem != null && settingsItem.getFileName().equals(fileName)) {
+								item = settingsItem;
+								break;
+							}
+						}
+						if (item != null && collecting && item.shouldReadOnCollecting()
+								|| item != null && !collecting && !item.shouldReadOnCollecting()) {
+							try {
+								item.getReader().readFromStream(ois);
+							} catch (IllegalArgumentException e) {
+								LOG.error("Error reading item data: " + item.getName(), e);
+							} catch (IOException e) {
+								LOG.error("Error reading item data: " + item.getName(), e);
+							} finally {
+								zis.closeEntry();
 							}
 						}
 					}

@@ -100,14 +100,15 @@
 
 	<android.support.design.widget.AppBarLayout
 		android:id="@+id/appbar"
-		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="?attr/actionModeBackground">
+		android:layout_width="match_parent"
+		android:background="@android:color/transparent">
 
 		<android.support.design.widget.CollapsingToolbarLayout
 			android:id="@+id/toolbar_layout"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/toolbar_height_expanded"
+			android:background="?attr/colorPrimary"
 			osmand:collapsedTitleTextAppearance="@style/AppBarTitle"
 			osmand:expandedTitleGravity="start|bottom"
 			osmand:expandedTitleTextAppearance="@style/AppBarTitle"
@@ -125,6 +126,13 @@
 			</android.support.v7.widget.Toolbar>
 
 		</android.support.design.widget.CollapsingToolbarLayout>
+
+		<ImageView
+			android:id="@+id/shadowView"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/abp__shadow_height"
+			android:src="@drawable/preference_activity_action_bar_shadow"
+			tools:ignore="ContentDescription" />
 
 	</android.support.design.widget.AppBarLayout>
 
