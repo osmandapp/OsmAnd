@@ -4,6 +4,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:gravity="center_vertical"
+	android:minHeight="@dimen/setting_list_item_small_height"
 	android:orientation="vertical">
 
 	<FrameLayout
@@ -15,8 +16,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:background="?attr/selectableItemBackground"
-			android:gravity="center_vertical"
-			android:minHeight="66dp">
+			android:gravity="center_vertical">
 
 			<ImageView
 				android:id="@+id/icon"
@@ -30,12 +30,16 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"
 				android:layout_weight="1"
-				android:orientation="vertical">
+				android:orientation="vertical"
+				android:paddingTop="@dimen/content_padding_small"
+				android:paddingBottom="@dimen/content_padding_small">
 
 				<net.osmand.plus.widgets.TextViewEx
 					android:id="@+id/title_tv"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:ellipsize="end"
+					android:maxLines="1"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_list_text_size"
 					tools:text="Quick actions" />
@@ -44,6 +48,8 @@
 					android:id="@+id/sub_title_tv"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:ellipsize="end"
+					android:maxLines="1"
 					android:textColor="?android:textColorSecondary"
 					android:textSize="@dimen/default_desc_text_size"
 					android:visibility="gone"

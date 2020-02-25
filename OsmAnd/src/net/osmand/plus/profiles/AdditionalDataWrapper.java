@@ -31,6 +31,7 @@ public class AdditionalDataWrapper {
 		POI_TYPES,
 		MAP_SOURCES,
 		CUSTOM_RENDER_STYLE,
-		CUSTOM_ROUTING
+		CUSTOM_ROUTING,
+		AVOID_ROADS
 	}
 }

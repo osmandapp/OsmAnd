@@ -3523,7 +3523,6 @@
     <string name="shared_string_menu">Меню</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Маршрутизація</string>
-    <string name="shared_string_custom_rendering_style">Власний стиль відмальовування</string>
     <string name="shared_string_include_data">Включати додаткові дані</string>
     <string name="import_profile_dialog_description">Імпортований профіль містить додаткові дані. Натисніть кнопку імпортувати, щоб імпортувати лише дані профілю або вибрати додаткові дані для імпорту.</string>
     <string name="export_profile_dialog_description">Ви можете вибрати додаткові дані для експорту разом із профілем.</string>

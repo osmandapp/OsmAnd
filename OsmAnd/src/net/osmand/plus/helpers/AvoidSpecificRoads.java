@@ -37,6 +37,7 @@ import net.osmand.plus.routing.RoutingHelper.RouteSegmentSearchResult;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -54,6 +55,10 @@ public class AvoidSpecificRoads {
 
 	public AvoidSpecificRoads(final OsmandApplication app) {
 		this.app = app;
+		loadImpassableRoads();
+	}
+
+	public void loadImpassableRoads(){
 		for (AvoidRoadInfo avoidRoadInfo : app.getSettings().getImpassableRoadPoints()) {
 			impassableRoads.put(new LatLon(avoidRoadInfo.latitude, avoidRoadInfo.longitude), avoidRoadInfo);
 		}
@@ -398,5 +403,20 @@ public class AvoidSpecificRoads {
 		public double longitude;
 		public String name;
 		public String appModeKey;
+
+		@Override
+		public boolean equals(@Nullable Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+
+			AvoidRoadInfo other = (AvoidRoadInfo) obj;
+			return Math.abs(latitude - other.latitude) < 0.00001
+					&& Math.abs(longitude - other.longitude) < 0.00001
+					&& Algorithms.objectEquals(name, other.name);
+		}
 	}
 }

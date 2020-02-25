@@ -3278,7 +3278,6 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="shared_string_menu">Izvēlne</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Maršrutēšana</string>
-    <string name="shared_string_custom_rendering_style">Pielāgots renderēšanas stils</string>
     <string name="shared_string_include_data">Iekļaut papildus datus</string>
     <string name="import_profile_dialog_description">Importētais profils satur papildus datus. Spiediet uz Importēt, lai importētu tikai profilu datus vai izvēlieties arī papildus datus, ko importēt.</string>
     <string name="export_profile_dialog_description">Jūs varat izvēlēties arī papildus datus, ko eksportēt kopā ar profilu.</string>

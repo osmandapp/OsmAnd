@@ -3585,7 +3585,6 @@ Lon %2$s</string>
     <string name="shared_string_menu">Menú</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Enrutamento</string>
-    <string name="shared_string_custom_rendering_style">Estilo de renderización personalizado</string>
     <string name="shared_string_include_data">Incluír datos adicionais</string>
     <string name="import_profile_dialog_description">O perfil importado contén datos adicionais. Preme en \"Importar\" para importar só datos de perfil ou marca datos adicionais para importar.</string>
     <string name="export_profile_dialog_description">Podes marcar datos adicionais para exportar ó carón do perfil.</string>
