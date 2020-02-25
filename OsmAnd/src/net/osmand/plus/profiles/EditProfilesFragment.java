@@ -2,6 +2,7 @@ package net.osmand.plus.profiles;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -64,7 +65,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 		}
 		nightMode = !app.getSettings().isLightContent();
 
-		View mainView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.edit_profiles_list_fragment, container, false);
+		View mainView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.edit_arrangement_list_fragment, container, false);
 		ImageButton closeButton = mainView.findViewById(R.id.close_button);
 		closeButton.setImageResource(R.drawable.ic_action_remove_dark);
 		closeButton.setOnClickListener(new View.OnClickListener() {
@@ -174,12 +175,11 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 			}
 		});
 
-		return mainView;
-	}
+		if (Build.VERSION.SDK_INT >= 21) {
+			AndroidUtils.addStatusBarPadding21v(app, mainView);
+		}
 
-	@Override
-	protected boolean isFullScreenAllowed() {
-		return false;
+		return mainView;
 	}
 
 	@Override

@@ -834,8 +834,8 @@
     <string name="filter_current_poiButton">篩選</string>
     <string name="edit_filter_save_as_menu_item">另存</string>
     <string name="edit_filter_delete_dialog_title">刪除此過濾規則？</string>
-    <string name="edit_filter_delete_message">過濾規則「{0}」已被刪除</string>
-    <string name="edit_filter_create_message">過濾規則「{0}」已建立</string>
+    <string name="edit_filter_delete_message">過濾規則「%1$s」已被刪除</string>
+    <string name="edit_filter_create_message">過濾規則「%1$s」已建立</string>
     <string name="email">電子郵件</string>
     <string name="recording_context_menu_vrecord">拍攝視訊附註</string>
     <string name="intermediate_items_sort_by_distance">排序送貨到門</string>
@@ -1391,7 +1391,7 @@
     <string name="rendering_attr_pisteRoutes_name">滑雪斜坡</string>
     <string name="roads_only">僅道路</string>
     <string name="watch">觀看</string>
-    <string name="notes">OSM 註記</string>
+    <string name="notes">音訊與視訊註記</string>
     <string name="online_map">線上地圖</string>
     <string name="share_note">分享註解</string>
     <string name="plugin_touringview_name">旅遊地圖檢視</string>
@@ -3465,12 +3465,93 @@
     <string name="monitoring_min_speed">最低速度</string>
     <string name="monitoring_min_accuracy">最低精密度</string>
     <string name="monitoring_min_distance">最小偏移</string>
-    <string name="tracks_view_path">選單 — 我的收藏 — 軌跡</string>
-    <string name="multimedia_notes_view_path">選單 — 我的收藏 — 註記</string>
-    <string name="osm_edits_view_path">選單 — 我的收藏 — OSM 編輯</string>
     <string name="reset_plugin_to_default">重設外掛程式設定為預設值</string>
     <string name="multimedia_rec_split_title">記錄器分黎</string>
     <string name="multimedia_use_system_camera">使用系統應用程式</string>
     <string name="multimedia_photo_play_sound">相機快門聲</string>
     <string name="osm_authorization_success">驗證成功</string>
+    <string name="rearrange_categories">重新排列分類</string>
+    <string name="create_custom_categories_list_promo">您可以新增自訂的分類，隱藏您不需要的分類並變更清單順序。清單可與設定檔一起匯入與匯出。</string>
+    <string name="add_new_custom_category_button_promo">您可以透過選取一個或多個需要的分類來新增自訂的分類。</string>
+    <string name="shared_string_available">可用</string>
+    <string name="add_custom_category">新增自訂分類</string>
+    <string name="rendering_attr_streetLightingNight_name">僅在夜間顯示</string>
+    <string name="plugin_prefs_reset_successful">所有外掛程式設定都已恢復為預設狀態。</string>
+    <string name="profile_prefs_reset_successful">所有設定檔的設定都已恢復為預設狀態。</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="sunset_at">日落於 %1$s</string>
+    <string name="sunrise_at">日出於 %1$s</string>
+    <string name="accessibility_mode_disabled">您的系統停用了無障礙模式。</string>
+    <string name="reset_to_default_category_button_promo">重設為預設值將會把排序重設回安裝後的預設值。</string>
+    <string name="use_system_screen_timeout">使用系統畫面逾時</string>
+    <string name="use_system_screen_timeout_promo">預設停用，如果 OsmAnd 在前景執行，畫面就不會有逾時的問題。
+\n
+\n若啟用，OsmAnd 將會使用系統逾時設定。</string>
+    <string name="clear_recorded_data">清除已紀錄的資料</string>
+    <string name="release_3_6">• 設定檔：現在您可以變更順序、設定地圖圖示、變更基本設定檔的所有設定以及將它們復原
+\n
+\n • 在導航中新增了出口編號
+\n
+\n • 改善外掛程式設定
+\n
+\n • 改善後的設定畫面可快速存取所有設定檔
+\n
+\n • 新曾了可從其他設定複製設定的選項
+\n
+\n • 新增了在搜尋中變更順序或隱藏 POI 分類的功能
+\n
+\n • 在地圖上正確地對齊 POI 圖示
+\n
+\n • 新增日落／日出資料到設定地圖中
+\n
+\n • 在地圖上新增家／工作地點的圖示
+\n
+\n • 在設定中新增了對多行描述的支援
+\n
+\n • 在日本地圖中加入了正確的音譯
+\n
+\n • 新增了南極洲的地圖
+\n
+\n</string>
+    <string name="copy_coordinates">複製座標</string>
+    <string name="routing_profile_direct_to">點對點</string>
+    <string name="sort_by_category">按分類排序</string>
+    <string name="please_provide_profile_name_message">請為設定檔命名</string>
+    <string name="open_settings">開啟設定</string>
+    <string name="plugin_disabled">外掛程式已停用</string>
+    <string name="plugin_disabled_descr">此外掛程式是獨立的應用程式，如果您不打算再使用它，請將其移除。
+\n
+\n在您移除 OsmAnd 後，這類的外掛程式仍將繼續存在於裝置上。</string>
+    <string name="shared_string_menu">選單</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_routing">路徑</string>
+    <string name="shared_string_custom_rendering_style">自訂彩現樣式</string>
+    <string name="shared_string_include_data">包含額外資料</string>
+    <string name="import_profile_dialog_description">已匯入的設定檔包含了額外資料。點擊匯入僅匯入設定檔資料或選取額外的資料以匯入。</string>
+    <string name="export_profile_dialog_description">您可以選取額外的資料以與設定檔一起匯出。</string>
+    <string name="index_name_antarctica">南極洲</string>
+    <string name="shared_string_app_default_w_val">應用程式預設值 (%s)</string>
+    <string name="no_recalculation_setting">停用重新計算</string>
+    <string name="route_recalculation_dist_title">重新計算路線的最小距離</string>
+    <string name="route_recalculation_dist_descr">如果到路線的距離大於指定的參數，則路線將會重新計算</string>
+    <string name="profile_type_custom_string">自訂設定檔</string>
+    <string name="shared_string_angle_param">角度：%s°</string>
+    <string name="shared_string_angle">角度</string>
+    <string name="recalc_angle_dialog_descr">將顯示我的位置和計算出來的路線之間的額外直線線段，直到路線重新計算完成為止</string>
+    <string name="recalc_angle_dialog_title">我的位置語錄線間的最小角度</string>
+    <string name="shared_string_preparing">正在準備</string>
+    <string name="shared_string_poi_types">POI 類型</string>
+    <string name="shared_string_nothing_selected">未選取</string>
+    <string name="shared_string_quick_actions">快速動作</string>
+    <string name="shared_string_profiles">設定檔</string>
+    <string name="listed_exist">列出的 %1$s 已存在於 OsmAnd 中。</string>
+    <string name="replace_all_desc">目前的項目將會被從檔案而來的項目所取代</string>
+    <string name="replace_all">取代全部</string>
+    <string name="keep_both">保留雙方</string>
+    <string name="keep_both_desc">匯入的項目將會加入前綴</string>
+    <string name="import_duplicates_description">OsmAnd 已有與匯入的名稱相同的元素。
+\n
+\n選取動作。</string>
+    <string name="import_duplicates_title">一些項目已存在</string>
+    <string name="select_data_to_import">選取要匯入的資料。</string>
 </resources>

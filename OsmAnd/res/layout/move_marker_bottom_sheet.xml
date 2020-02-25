@@ -15,7 +15,7 @@
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="16dp"
+        android:padding="@dimen/content_padding"
         android:src="@drawable/ic_action_photo_dark"/>
 
     <LinearLayout
@@ -27,34 +27,41 @@
             style="@style/TextAppearance.ContextMenuTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/move_marker_bottom_sheet_title"/>
+            android:layout_marginLeft="@dimen/content_padding"
+            android:layout_marginRight="@dimen/content_padding"
+            android:layout_marginTop="@dimen/content_padding"
+            android:text="@string/move_marker_bottom_sheet_title"
+	        android:layout_marginEnd="@dimen/content_padding"
+	        android:layout_marginStart="@dimen/content_padding" />
 
         <TextView
             android:id="@+id/description"
             style="@style/TextAppearance.ContextMenuSubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="8dp"
-            tools:text="Lat: 50.45375\nLon: 30.48693"/>
+            android:layout_marginBottom="@dimen/content_padding_half"
+            android:layout_marginLeft="@dimen/content_padding"
+            android:layout_marginRight="@dimen/content_padding"
+            android:layout_marginTop="@dimen/content_padding_half"
+            tools:text="Lat: 50.45375\nLon: 30.48693"
+	        android:layout_marginEnd="@dimen/content_padding"
+	        android:layout_marginStart="@dimen/content_padding" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp">
+            android:layout_marginBottom="@dimen/content_padding"
+            android:layout_marginLeft="@dimen/content_padding_small"
+            android:layout_marginRight="@dimen/content_padding_small"
+	        android:layout_marginStart="@dimen/content_padding_small"
+	        android:layout_marginEnd="@dimen/content_padding_small">
 
             <Button
                 android:id="@+id/apply_button"
                 style="@style/DialogActionButton"
-                android:layout_marginRight="8dp"
-                android:text="@string/shared_string_apply"/>
+                android:layout_marginRight="@dimen/content_padding_half"
+                android:text="@string/shared_string_apply"
+	            android:layout_marginEnd="@dimen/content_padding_half" />
 
             <Button
                 android:id="@+id/cancel_button"

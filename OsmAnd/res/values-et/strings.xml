@@ -2806,7 +2806,6 @@
     <string name="internet_not_available">Tegevust ei saa sooritada ilma internetiühenduseta.</string>
     <string name="level_to_switch_vector_raster_descr">Kasuta rasterkaarte kõigeks seda taset ületavaks.</string>
     <string name="level_to_switch_vector_raster">Vähim vektori suurendustase</string>
-    <string name="create_poi_link_to_osm_doc"> string name=\"lat_lon_pattern\"&gt;Laius: %1$.5f pikkus: %2$.5f&lt;/string </string>
     <string name="preferred_locale_descr">Rakenduse keel (kasutusel peale OsmAnd taaskäivitamist).</string>
     <string name="preferred_locale">Keel</string>
     <string name="send_location_email_pattern">Asukoha nägemiseks järgi veebilinki %1$s või Androidi soovitud linki %2$s</string>
@@ -2894,7 +2893,7 @@
     <string name="searching">Otsimine…</string>
     <string name="searching_address">Aadressi otsimine…</string>
     <string name="search_offline_address">Võrguühenduseta otsing</string>
-    <string name="route_general_information">Vahemaa kokku %1$s, sõiduaeg %2$d h %2$d min.</string>
+    <string name="route_general_information">Vahemaa kokku %1$s, sõiduaeg %2$d h %3$d min.</string>
     <string name="sd_dir_not_accessible">Mälukaardil olevale andmesalvestuskaustale pole juurdepääsu!</string>
     <string name="download_question">Laadida alla {0} - {1} \?</string>
     <string name="download_question_exist">Võrguühenduseta andmed {0} on juba olemas ({1}). Värskendada see ({2})\?</string>
@@ -3002,8 +3001,8 @@
     <string name="filter_current_poiButton">Filter</string>
     <string name="edit_filter_save_as_menu_item">Salvesta nimega</string>
     <string name="edit_filter_delete_dialog_title">Kustutada see filter\?</string>
-    <string name="edit_filter_delete_message">\'{0}\' filter kustutatud</string>
-    <string name="edit_filter_create_message">\'{0}\' filter loodud</string>
+    <string name="edit_filter_delete_message">\'%1$s\' filter kustutatud</string>
+    <string name="edit_filter_create_message">\'%1$s\' filter loodud</string>
     <string name="email">e-post</string>
     <string name="av_camera_focus">Kaamera fookuse liik</string>
     <string name="av_camera_focus_descr">Kaamera fookuse režiim:</string>
@@ -3400,9 +3399,6 @@
     <string name="monitoring_min_speed">Vähim kiirus</string>
     <string name="monitoring_min_accuracy">Vähim täpsus</string>
     <string name="monitoring_min_distance">Vähim kõrvalekalle</string>
-    <string name="tracks_view_path">Menüü — Minu kohad — Rajad</string>
-    <string name="multimedia_notes_view_path">Menüü — Minu kohad — Märkmed</string>
-    <string name="osm_edits_view_path">Menüü — Minu kohad — OSM Muudatused</string>
     <string name="reset_plugin_to_default">Lähtesta lisaprogrammi seaded vaikeväärtustele</string>
     <string name="multimedia_rec_split_title">Salvesti jagamine</string>
     <string name="multimedia_use_system_camera">Kasuta süsteemi rakendust</string>

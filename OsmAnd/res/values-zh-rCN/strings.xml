@@ -800,8 +800,8 @@
     <string name="poi_error_info_not_loaded">节点的信息未能加载</string>
     <string name="poi_dialog_other_tags_message">所有其他标记都已保留</string>
     <string name="edit_filter_delete_dialog_title">是否删除选中的过滤器？</string>
-    <string name="edit_filter_delete_message">过滤器 {0} 已被删除</string>
-    <string name="edit_filter_create_message">过滤器 {0} 已创建</string>
+    <string name="edit_filter_delete_message">过滤器 %1$s 已被删除</string>
+    <string name="edit_filter_create_message">过滤器 %1$s 已创建</string>
     <string name="av_camera_focus_auto">自动聚焦</string>
     <string name="clear_intermediate_points">清除中途点</string>
     <string name="keep_intermediate_points">保持中途点</string>
@@ -1302,7 +1302,7 @@
     <string name="routing_attr_avoid_stairs_description">避免阶梯</string>
     <string name="routing_attr_avoid_borders_name">避开边界穿越</string>
     <string name="routing_attr_avoid_borders_description">避免穿越边境线进入其它国家</string>
-    <string name="routing_attr_weight_description">指定路线上允许的车辆重量</string>
+    <string name="routing_attr_weight_description">指定路线上允许的车辆重量。</string>
     <string name="routing_attr_height_name">高度限制</string>
     <string name="routing_attr_height_description">指定路线上允许的车辆高度。</string>
     <string name="android_19_location_disabled">Android 4.4 版（KitKat）之后，您无法使用先前的存储文件夹（%s）下载或更新地图。您是否想要修改为允许的存储位置并将所有 OsmAnd 文件复制到新位置？
@@ -2808,4 +2808,14 @@
     <string name="reset_confirmation_descr">如果点击 %1$s，您将丢失所有更改。</string>
     <string name="reset_all_profile_settings_descr">所有配置设置将会重置为安装后的状态。</string>
     <string name="reset_all_profile_settings">要将所有配置设置重置为默认值吗？</string>
+    <string name="permission_is_required">使用此选项需要授权。</string>
+    <string name="shared_string_available">可用</string>
+    <string name="routing_attr_width_name">宽度限制</string>
+    <string name="routing_attr_width_description">指定路线上允许的车辆宽度。</string>
+    <string name="import_from_file">从文件导入</string>
+    <string name="multimedia_notes_prefs_descr">照片尺寸、音频和视频质量</string>
+    <string name="login_and_pass">用户名和密码</string>
+    <string name="multimedia_use_system_camera">使用系统应用程序</string>
+    <string name="multimedia_photo_play_sound">相机快门声音</string>
+    <string name="osm_authorization_success">授权成功</string>
 </resources>

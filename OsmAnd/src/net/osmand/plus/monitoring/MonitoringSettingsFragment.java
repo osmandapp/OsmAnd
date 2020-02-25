@@ -2,6 +2,8 @@ package net.osmand.plus.monitoring;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.Preference;
 import android.text.SpannableString;
@@ -12,6 +14,7 @@ import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
@@ -29,13 +32,14 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-import static net.osmand.plus.OsmandSettings.DAILY_DIRECTORY;
 import static net.osmand.plus.OsmandSettings.MONTHLY_DIRECTORY;
 import static net.osmand.plus.OsmandSettings.REC_DIRECTORY;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.MINUTES;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.SECONDS;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
-public class MonitoringSettingsFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
+public class MonitoringSettingsFragment extends BaseSettingsFragment
+		implements CopyAppModePrefsListener, ResetAppModePrefsListener {
 
 	private static final String COPY_PLUGIN_SETTINGS = "copy_plugin_settings";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
@@ -69,7 +73,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	private void setupSaveTrackToGpxPref() {
 		SwitchPreferenceEx saveTrackToGpx = (SwitchPreferenceEx) findPreference(settings.SAVE_TRACK_TO_GPX.getId());
 		saveTrackToGpx.setDescription(getString(R.string.save_track_to_gpx_descrp));
-		saveTrackToGpx.setIcon(getContentIcon(R.drawable.ic_action_gdirections_dark));
+		saveTrackToGpx.setIcon(getPersistentPrefIcon(R.drawable.ic_action_gdirections_dark));
 	}
 
 	private void setupSaveTrackIntervalPref() {
@@ -86,6 +90,12 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		ListPreferenceEx saveTrackInterval = (ListPreferenceEx) findPreference(settings.SAVE_GLOBAL_TRACK_INTERVAL.getId());
 		saveTrackInterval.setEntries(entry.values().toArray(new String[0]));
 		saveTrackInterval.setEntryValues(entry.keySet().toArray());
+		ApplicationMode selectedAppMode = getSelectedAppMode();
+		if (!settings.SAVE_GLOBAL_TRACK_REMEMBER.getModeValue(selectedAppMode)) {
+			saveTrackInterval.setValue(settings.SAVE_GLOBAL_TRACK_REMEMBER.getModeValue(selectedAppMode));
+		} else {
+			saveTrackInterval.setValue(settings.SAVE_GLOBAL_TRACK_INTERVAL.getModeValue(selectedAppMode));
+		}
 		saveTrackInterval.setIcon(getActiveIcon(R.drawable.ic_action_time_span));
 		saveTrackInterval.setDescription(R.string.save_global_track_interval_descr);
 	}
@@ -190,16 +200,16 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 
 	private void setupShowTripRecNotificationPref() {
 		SwitchPreferenceEx showTripRecNotification = (SwitchPreferenceEx) findPreference(settings.SHOW_TRIP_REC_NOTIFICATION.getId());
-		showTripRecNotification.setDescription(getString(R.string.trip_rec_notification_settings));
-		showTripRecNotification.setIcon(getContentIcon(R.drawable.ic_action_notification));
+		showTripRecNotification.setDescription(getString(R.string.trip_rec_notification_settings_desc));
+		showTripRecNotification.setIcon(getPersistentPrefIcon(R.drawable.ic_action_notification));
 	}
 
 	private void setupTrackStorageDirectoryPref() {
-		Integer[] entryValues = new Integer[] {REC_DIRECTORY, MONTHLY_DIRECTORY, DAILY_DIRECTORY};
+		Integer[] entryValues = new Integer[] {REC_DIRECTORY, MONTHLY_DIRECTORY};
 		String[] entries = new String[entryValues.length];
 		entries[0] = getString(R.string.store_tracks_in_rec_directory);
 		entries[1] = getString(R.string.store_tracks_in_monthly_directories);
-		entries[2] = getString(R.string.store_tracks_in_daily_directories);
+//		entries[2] = getString(R.string.store_tracks_in_daily_directories);
 
 		ListPreferenceEx trackStorageDirectory = (ListPreferenceEx) findPreference(settings.TRACK_STORAGE_DIRECTORY.getId());
 		trackStorageDirectory.setEntries(entries);
@@ -209,13 +219,20 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	}
 
 	private void setupLiveMonitoringPref() {
+		Drawable disabled = getContentIcon(R.drawable.ic_action_offline);
+		Drawable enabled = getActiveIcon(R.drawable.ic_world_globe_dark);
+		Drawable icon = getPersistentPrefIcon(enabled, disabled);
+
 		SwitchPreferenceEx liveMonitoring = (SwitchPreferenceEx) findPreference(settings.LIVE_MONITORING.getId());
 		liveMonitoring.setDescription(getString(R.string.live_monitoring_m_descr));
-		liveMonitoring.setIcon(getContentIcon(R.drawable.ic_world_globe_dark));
+		liveMonitoring.setIcon(icon);
 	}
 
 	private void setupOpenNotesDescrPref() {
-		String tracksPath = getString(R.string.tracks_view_path);
+		String menu = getString(R.string.shared_string_menu);
+		String myPlaces = getString(R.string.shared_string_my_places);
+		String tracks = getString(R.string.shared_string_tracks);
+		String tracksPath = getString(R.string.ltr_or_rtl_triple_combine_via_dash, menu, myPlaces, tracks);
 		String tracksPathDescr = getString(R.string.tracks_view_descr, tracksPath);
 
 		int startIndex = tracksPathDescr.indexOf(tracksPath);
@@ -246,10 +263,13 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
 		if (OPEN_TRACKS.equals(prefId)) {
+			Bundle bundle = new Bundle();
+			bundle.putInt(TAB_ID, FavoritesActivity.GPX_TAB);
+
 			OsmAndAppCustomization appCustomization = app.getAppCustomization();
 			Intent favorites = new Intent(preference.getContext(), appCustomization.getFavoritesActivity());
 			favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-			app.getSettings().FAVORITES_TAB.set(FavoritesActivity.GPX_TAB);
+			favorites.putExtra(MapActivity.INTENT_PARAMS, bundle);
 			startActivity(favorites);
 			return true;
 		} else if (COPY_PLUGIN_SETTINGS.equals(prefId)) {
@@ -320,6 +340,18 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 			app.getSettings().resetProfilePreferences(appMode, plugin.getPreferences());
 			app.showToastMessage(R.string.plugin_prefs_reset_successful);
 			updateAllSettings();
+		}
+	}
+
+	@Override
+	public void onSettingApplied(String prefId, boolean appliedToAllProfiles) {
+		if (settings.SAVE_GLOBAL_TRACK_INTERVAL.getId().equals(prefId)) {
+			if (appliedToAllProfiles) {
+				app.getSettings().setPreferenceForAllModes(settings.SAVE_GLOBAL_TRACK_REMEMBER.getId(), true);
+			} else {
+				app.getSettings().setPreference(settings.SAVE_GLOBAL_TRACK_REMEMBER.getId(), true, getSelectedAppMode());
+			}
+
 		}
 	}
 }

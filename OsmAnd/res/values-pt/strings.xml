@@ -382,8 +382,8 @@
     <string name="filter_current_poiButton">Filtro</string>
     <string name="edit_filter_save_as_menu_item">Guardar como</string>
     <string name="edit_filter_delete_dialog_title">Eliminar o filtro selecionado\?</string>
-    <string name="edit_filter_delete_message">Filtro {0} eliminado</string>
-    <string name="edit_filter_create_message">Filtro {0} foi criado</string>
+    <string name="edit_filter_delete_message">Filtro %1$s eliminado</string>
+    <string name="edit_filter_create_message">Filtro %1$s foi criado</string>
     <string name="local_index_routing_data">Informação de Percurso</string>
     <string name="navigate_point_format">Format</string>
     <string name="poi_search_desc">Pesquisar POI (ponto de interesse)</string>

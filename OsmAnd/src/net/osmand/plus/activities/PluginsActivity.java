@@ -16,15 +16,17 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.aidl.ConnectedApp;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.dialogs.PluginInstalledBottomSheetDialog;
 import net.osmand.plus.download.DownloadIndexesThread;
 
 import java.util.ArrayList;
 
-public class PluginsActivity extends OsmandListActivity implements DownloadIndexesThread.DownloadEvents {
+public class PluginsActivity extends OsmandListActivity implements DownloadIndexesThread.DownloadEvents, PluginInstalledBottomSheetDialog.PluginStateListener {
 
 	public static final int ACTIVE_PLUGINS_LIST_MODIFIED = 1;
 
@@ -115,6 +117,11 @@ public class PluginsActivity extends OsmandListActivity implements DownloadIndex
 		}
 	}
 
+	@Override
+	public void onPluginStateChanged(OsmandPlugin plugin) {
+		getListAdapter().notifyDataSetChanged();
+	}
+
 	protected class PluginsListAdapter extends ArrayAdapter<Object> {
 
 		PluginsListAdapter() {
@@ -169,7 +176,10 @@ public class PluginsActivity extends OsmandListActivity implements DownloadIndex
 				}
 				name = plugin.getName();
 				pluginDescription.setText(plugin.getDescription());
-				pluginLogo.setImageResource(plugin.getLogoResourceId());
+
+				OsmandApplication app = getMyApplication();
+				int color = AndroidUtils.getColorFromAttr(app, R.attr.list_background_color);
+				pluginLogo.setImageDrawable(app.getUIUtilities().getPaintedIcon(plugin.getLogoResourceId(), color));
 				pluginLogo.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -193,7 +203,7 @@ public class PluginsActivity extends OsmandListActivity implements DownloadIndex
 			if (active) {
 				pluginLogo.setBackgroundResource(isLightTheme ? R.drawable.bg_plugin_logo_enabled_light : R.drawable.bg_plugin_logo_enabled_dark);
 			} else {
-				TypedArray attributes = getTheme().obtainStyledAttributes(new int[]{R.attr.bg_plugin_logo_disabled});
+				TypedArray attributes = getTheme().obtainStyledAttributes(new int[] {R.attr.bg_plugin_logo_disabled});
 				pluginLogo.setBackgroundDrawable(attributes.getDrawable(0));
 				attributes.recycle();
 			}

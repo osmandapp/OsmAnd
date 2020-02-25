@@ -106,7 +106,7 @@ public class CreateEditActionDialog extends DialogFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        quickActionRegistry = ((MapActivity) getActivity()).getMapLayers().getQuickActionRegistry();
+        quickActionRegistry = getApplication().getQuickActionRegistry();
 
         long actionId =  savedInstanceState == null
                 ? getArguments().getLong(KEY_ACTION_ID)

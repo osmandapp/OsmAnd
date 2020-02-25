@@ -13,14 +13,18 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
-        android:text="@string/user_name"/>
+        android:text="@string/user_name"
+	    android:layout_marginEnd="24dp"
+	    android:layout_marginStart="24dp" />
 
     <EditText
         android:id="@+id/user_name_field"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"/>
+        android:layout_marginRight="24dp"
+	    android:layout_marginEnd="24dp"
+	    android:layout_marginStart="24dp" />
 
 
     <TextView
@@ -29,7 +33,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
-        android:text="@string/user_password"/>
+        android:text="@string/user_password"
+	    android:layout_marginEnd="24dp"
+	    android:layout_marginStart="24dp" />
 
     <EditText
         android:id="@+id/password_field"
@@ -38,5 +44,7 @@
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
-        android:inputType="textPassword"/>
+        android:inputType="textPassword"
+	    android:layout_marginEnd="24dp"
+	    android:layout_marginStart="24dp" />
 </LinearLayout>

@@ -74,6 +74,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		ImageView markerImageViewToUpdate;
 		int drawableResToUpdate;
 		int markerColor = MapMarker.getColorId(marker.colorIndex);
+		int actionIconColor = night ? R.color.icon_color_primary_dark : R.color.icon_color_primary_light;
 		LatLon markerLatLon = new LatLon(marker.getLatitude(), marker.getLongitude());
 		final boolean displayedInWidget = pos < mapActivity.getMyApplication().getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.get();
 		if (showDirectionEnabled && displayedInWidget) {
@@ -98,7 +99,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 			holder.title.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.text_color_primary_dark : R.color.text_color_primary_light));
 			holder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.app_bar_color_dark : R.color.divider_color_light));
 			holder.optionsBtn.setBackgroundDrawable(mapActivity.getResources().getDrawable(night ? R.drawable.marker_circle_background_dark_with_inset : R.drawable.marker_circle_background_light_with_inset));
-			holder.optionsBtn.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_marker_passed, night ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light));
+			holder.optionsBtn.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_marker_passed, actionIconColor));
 			holder.iconReorder.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_reorder));
 			holder.description.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.icon_color_default_dark : R.color.icon_color_default_light));
 
@@ -162,8 +163,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 								notifyDataSetChanged();
 							}
 						});
-				AndroidUtils.setSnackbarTextColor(snackbar, night ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
-				snackbar.getView().setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.list_background_color_dark : R.color.list_background_color_light));
+				UiUtilities.setupSnackbar(snackbar, night);
 				snackbar.show();
 			}
 		});
@@ -229,8 +229,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 						notifyDataSetChanged();
 					}
 				});
-		AndroidUtils.setSnackbarTextColor(snackbar, night ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
-		snackbar.getView().setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.list_background_color_dark : R.color.list_background_color_light));
+		UiUtilities.setupSnackbar(snackbar, night);
 		snackbar.show();
 	}
 

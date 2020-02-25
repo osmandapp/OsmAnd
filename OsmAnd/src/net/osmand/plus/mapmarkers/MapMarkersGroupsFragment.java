@@ -207,7 +207,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 									updateAdapter();
 								}
 							});
-					AndroidUtils.setSnackbarTextColor(snackbar, R.color.active_color_primary_dark);
+					UiUtilities.setupSnackbar(snackbar, night);
 					snackbar.show();
 				}
 			}

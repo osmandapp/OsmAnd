@@ -37,7 +37,9 @@
                 android:text="@string/join_segments"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="@dimen/default_list_text_size"
-                osmand:typeface="@string/font_roboto_regular" />
+                osmand:typeface="@string/font_roboto_regular"
+	            android:paddingStart="@dimen/content_padding"
+	            android:paddingEnd="@dimen/content_padding" />
 
             <android.support.v7.widget.SwitchCompat
                 android:id="@+id/gpx_join_gaps_switch"
@@ -48,7 +50,9 @@
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:paddingLeft="@dimen/content_padding"
-                android:paddingRight="@dimen/content_padding" />
+                android:paddingRight="@dimen/content_padding"
+	            android:paddingStart="@dimen/content_padding"
+	            android:paddingEnd="@dimen/content_padding" />
 
         </LinearLayout>
 
@@ -65,7 +69,8 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="16dp">
+                android:paddingLeft="16dp"
+	            android:paddingStart="16dp">
 
                 <ImageView
                     android:id="@+id/distance_icon"
@@ -78,7 +83,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginLeft="18dp">
+                    android:layout_marginLeft="18dp"
+	                android:layout_marginStart="18dp">
 
                     <net.osmand.plus.widgets.TextViewEx
                         android:id="@+id/distance_text"
@@ -109,7 +115,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:paddingLeft="16dp">
+                android:paddingLeft="16dp"
+	            android:paddingStart="16dp">
 
                 <ImageView
                     android:id="@+id/duration_icon"
@@ -122,7 +129,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginLeft="18dp">
+                    android:layout_marginLeft="18dp"
+	                android:layout_marginStart="18dp">
 
                     <net.osmand.plus.widgets.TextViewEx
                         android:id="@+id/duration_text"
@@ -161,8 +169,10 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="16dp"
-                android:paddingRight="8dp">
+                android:paddingLeft="@dimen/content_padding"
+                android:paddingRight="@dimen/content_padding_half"
+	            android:paddingStart="@dimen/content_padding"
+	            android:paddingEnd="@dimen/content_padding_half">
 
                 <View
                     android:layout_width="match_parent"
@@ -176,8 +186,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:paddingLeft="8dp"
-                android:paddingRight="16dp">
+                android:paddingLeft="@dimen/content_padding_half"
+                android:paddingRight="@dimen/content_padding"
+	            android:paddingEnd="@dimen/content_padding"
+	            android:paddingStart="@dimen/content_padding_half">
 
                 <View
                     android:layout_width="match_parent"
@@ -201,7 +213,8 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="16dp">
+                android:paddingLeft="@dimen/content_padding"
+	            android:paddingStart="@dimen/content_padding">
 
                 <ImageView
                     android:id="@+id/start_time_icon"
@@ -214,7 +227,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginLeft="18dp">
+                    android:layout_marginLeft="18dp"
+	                android:layout_marginStart="18dp">
 
                     <net.osmand.plus.widgets.TextViewEx
                         android:id="@+id/start_time_text"
@@ -240,7 +254,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/content_padding_half"
                         android:text="@string/shared_string_start_time"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_sub_text_size"/>
@@ -254,7 +268,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:paddingLeft="16dp">
+                android:paddingLeft="@dimen/content_padding"
+	            android:paddingStart="@dimen/content_padding">
 
                 <ImageView
                     android:id="@+id/end_time_icon"
@@ -267,7 +282,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginLeft="18dp">
+                    android:layout_marginLeft="18dp"
+	                android:layout_marginStart="18dp">
 
                     <net.osmand.plus.widgets.TextViewEx
                         android:id="@+id/end_time_text"
@@ -293,7 +309,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/content_padding_half"
                         android:text="@string/shared_string_end_time"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_sub_text_size"/>
@@ -321,11 +337,13 @@
                 tools:visibility="visible"
                 android:id="@+id/overflow_menu"
                 android:background="@null"
-                android:paddingRight="16dp"
-                android:paddingLeft="16dp"
+                android:paddingRight="@dimen/content_padding"
+                android:paddingLeft="@dimen/content_padding"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                tools:src="@drawable/ic_overflow_menu_dark"/>
+                tools:src="@drawable/ic_overflow_menu_dark"
+	            android:paddingStart="@dimen/content_padding"
+	            android:paddingEnd="@dimen/content_padding" />
 
             <net.osmand.plus.widgets.TextViewEx
                 android:background="?attr/selectableItemBackground"
@@ -333,14 +351,16 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:gravity="left|center_vertical"
+                android:paddingLeft="@dimen/content_padding"
+                android:paddingRight="@dimen/content_padding"
+                android:gravity="start|center_vertical"
                 android:textColor="?attr/color_dialog_buttons"
                 android:textSize="@dimen/default_sub_text_size"
                 osmand:textAllCapsCompat="true"
                 osmand:typeface="@string/font_roboto_medium"
-                android:text="@string/gpx_split_interval"/>
+                android:text="@string/gpx_split_interval"
+	            android:paddingEnd="@dimen/content_padding"
+	            android:paddingStart="@dimen/content_padding" />
 
             <net.osmand.plus.widgets.TextViewEx
                 android:background="?attr/selectableItemBackground"
@@ -348,14 +368,16 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:gravity="right|center_vertical"
+                android:paddingLeft="@dimen/content_padding"
+                android:paddingRight="@dimen/content_padding"
+                android:gravity="end|center_vertical"
                 android:textColor="?attr/color_dialog_buttons"
                 android:textSize="@dimen/default_sub_text_size"
                 osmand:textAllCapsCompat="true"
                 osmand:typeface="@string/font_roboto_medium"
-                android:text="@string/analyze_on_map"/>
+                android:text="@string/analyze_on_map"
+	            android:paddingEnd="@dimen/content_padding"
+	            android:paddingStart="@dimen/content_padding" />
 
         </LinearLayout>
 

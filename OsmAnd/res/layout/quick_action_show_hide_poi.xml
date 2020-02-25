@@ -52,11 +52,12 @@
             android:background="@color/color_transparent"
             android:padding="16dp"
             android:layout_marginLeft="56dp"
-            android:gravity="left"
+            android:gravity="start"
             android:text="@string/quick_action_add_category"
             android:textAllCaps="true"
             android:textColor="@color/active_color_primary_light"
-            android:textSize="@dimen/default_list_text_size" />
+            android:textSize="@dimen/default_list_text_size"
+	        android:layout_marginStart="56dp" />
 
     </LinearLayout>
 

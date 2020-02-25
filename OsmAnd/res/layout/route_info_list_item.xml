@@ -18,7 +18,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/list_content_padding"
             android:layout_gravity="center_vertical"
-            android:orientation="vertical">
+            android:orientation="vertical"
+	        android:layout_marginStart="@dimen/list_content_padding">
 
             <TextView
                 android:id="@+id/cumulative_distance"
@@ -47,7 +48,9 @@
             android:layout_marginRight="@dimen/list_header_padding"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+	        android:layout_marginEnd="@dimen/list_header_padding"
+	        android:layout_marginStart="@dimen/list_header_padding" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -55,7 +58,8 @@
             android:layout_gravity="center_vertical"
             android:minWidth="46dp"
             android:layout_marginRight="@dimen/list_header_padding"
-            android:orientation="vertical">
+            android:orientation="vertical"
+	        android:layout_marginEnd="@dimen/list_header_padding">
 
             <TextView
                 android:id="@+id/distance"

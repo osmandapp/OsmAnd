@@ -940,8 +940,8 @@
     <string name="filter_current_poiButton">Фильтровать</string>
     <string name="edit_filter_save_as_menu_item">Сохранить как</string>
     <string name="edit_filter_delete_dialog_title">Удалить этот фильтр\?</string>
-    <string name="edit_filter_delete_message">\'{0}\' фильтр удален</string>
-    <string name="edit_filter_create_message">\'{0}\' фильтр создан</string>
+    <string name="edit_filter_delete_message">\'%1$s\' фильтр удален</string>
+    <string name="edit_filter_create_message">\'%1$s\' фильтр создан</string>
     <string name="accessibility_mode">Режим специальных возможностей</string>
     <string name="accessibility_mode_descr">Включает дополнительные возможности для невизуального доступа.</string>
     <string name="shared_string_on">Вкл.</string>

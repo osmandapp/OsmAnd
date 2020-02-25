@@ -337,7 +337,7 @@ public class MapMarkersWidgetsFactory {
 			}
 			boolean res = false;
 			int d = getDistance();
-			if (cachedMeters != d) {
+			if (isUpdateNeeded() || cachedMeters != d) {
 				cachedMeters = d;
 				String ds = OsmAndFormatter.getFormattedDistance(cachedMeters, view.getApplication());
 				int ls = ds.lastIndexOf(' ');
@@ -362,6 +362,11 @@ public class MapMarkersWidgetsFactory {
 				}
 			}
 			return res;
+		}
+
+		@Override
+		public boolean isMetricSystemDepended() {
+			return true;
 		}
 
 		public LatLon getPointToNavigate() {

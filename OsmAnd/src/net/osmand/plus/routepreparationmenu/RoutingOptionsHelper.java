@@ -31,7 +31,6 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsBaseActivity;
-import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
@@ -55,7 +54,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static net.osmand.plus.activities.SettingsNavigationActivity.getRouter;
 
 public class RoutingOptionsHelper {
 
@@ -113,7 +111,7 @@ public class RoutingOptionsHelper {
 		mapActivity.getMyApplication().getAvoidSpecificRoads().showDialog(mapActivity);
 	}
 
-	public void selectVoiceGuidance(final MapActivity mapActivity, final CallbackWithObject<String> callback) {
+	public void selectVoiceGuidance(final MapActivity mapActivity, final CallbackWithObject<String> callback, ApplicationMode applicationMode) {
 		final ContextMenuAdapter adapter = new ContextMenuAdapter();
 
 		String[] entries;
@@ -123,7 +121,7 @@ public class RoutingOptionsHelper {
 		entrieValues = new String[voiceFiles.size() + 2];
 		int k = 0;
 		int selected = -1;
-		String selectedValue = mapActivity.getMyApplication().getSettings().VOICE_PROVIDER.get();
+		String selectedValue = mapActivity.getMyApplication().getSettings().VOICE_PROVIDER.getModeValue(applicationMode);
 		entrieValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
 		entries[k] = mapActivity.getResources().getString(R.string.shared_string_do_not_use);
 		ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder();
@@ -187,13 +185,13 @@ public class RoutingOptionsHelper {
 	public void applyVoiceProvider(MapActivity mapActivity, String provider, boolean applyAllModes) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		ApplicationMode selectedAppMode = app.getRoutingHelper().getAppMode();
+		OsmandSettings.OsmandPreference<String> VP = app.getSettings().VOICE_PROVIDER;
 		if (applyAllModes) {
 			for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-				app.getSettings().VOICE_PROVIDER.setModeValue(mode, provider);
+				VP.setModeValue(mode, provider);
 			}
-		} else {
-			app.getSettings().VOICE_PROVIDER.setModeValue(selectedAppMode, provider);
 		}
+		VP.setModeValue(selectedAppMode, provider);
 		app.initVoiceCommandPlayer(mapActivity, selectedAppMode, false, null, true, false, applyAllModes);
 	}
 
@@ -409,7 +407,7 @@ public class RoutingOptionsHelper {
 
 	public LocalRoutingParameter getRoutingParameterInnerById(ApplicationMode am, String parameterId) {
 		RouteProvider.GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
-		GeneralRouter rm = getRouter(app.getRoutingConfig(), am);
+		GeneralRouter rm = app.getRouter(am);
 		if (rm == null || (rparams != null && !rparams.isCalculateOsmAndRoute()) && !rparams.getFile().hasRtePt()) {
 			return null;
 		}
@@ -493,7 +491,7 @@ public class RoutingOptionsHelper {
 
 		RouteProvider.GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
 		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>(getGpxRouterParameters(am));
-		GeneralRouter rm = SettingsNavigationActivity.getRouter(app.getRoutingConfig(), am);
+		GeneralRouter rm = app.getRouter(am);
 		if (rm == null || (rparams != null && !rparams.isCalculateOsmAndRoute()) && !rparams.getFile().hasRtePt()) {
 			return list;
 		}
@@ -583,7 +581,7 @@ public class RoutingOptionsHelper {
 
 	public List<GeneralRouter.RoutingParameter> getAvoidRoutingPrefsForAppMode(ApplicationMode applicationMode) {
 		List<GeneralRouter.RoutingParameter> avoidParameters = new ArrayList<GeneralRouter.RoutingParameter>();
-		GeneralRouter router = getRouter(app.getRoutingConfig(), applicationMode);
+		GeneralRouter router = app.getRouter(applicationMode);
 		if (router != null) {
 			for (Map.Entry<String, GeneralRouter.RoutingParameter> e : router.getParameters().entrySet()) {
 				String param = e.getKey();
@@ -597,7 +595,7 @@ public class RoutingOptionsHelper {
 	}
 
 	public GeneralRouter.RoutingParameter getRoutingPrefsForAppModeById(ApplicationMode applicationMode, String parameterId) {
-		GeneralRouter router = getRouter(app.getRoutingConfig(), applicationMode);
+		GeneralRouter router = app.getRouter(applicationMode);
 		GeneralRouter.RoutingParameter parameter = null;
 
 		if (router != null) {

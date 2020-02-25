@@ -583,8 +583,8 @@
     <string name="filter_current_poiButton">Filtre</string>
     <string name="edit_filter_save_as_menu_item">Enregistrer sous</string>
     <string name="edit_filter_delete_dialog_title">Supprimer ce filtre \?</string>
-    <string name="edit_filter_delete_message">Le filtre \'{0}\' a été supprimé</string>
-    <string name="edit_filter_create_message">Le filtre \'{0}\' a été créé</string>
+    <string name="edit_filter_delete_message">Le filtre \'%1$s\' a été supprimé</string>
+    <string name="edit_filter_create_message">Le filtre \'%1$s\' a été créé</string>
     <string name="offline_navigation_not_available">Navigation hors-ligne temporairement indisponible.</string>
     <string name="left_side_navigation">Conduite à gauche</string>
     <string name="left_side_navigation_descr">Pour les pays où la circulation s\'effectue sur la partie gauche de la route.</string>
@@ -1109,7 +1109,7 @@
     <string name="routing_attr_avoid_unpaved_name">Éviter les voies non revêtues</string>
     <string name="routing_attr_avoid_unpaved_description">Éviter les voies non revêtues</string>
     <string name="routing_attr_avoid_ferries_name">Éviter les ferries</string>
-    <string name="routing_attr_avoid_ferries_description">Éviter les ferries</string>
+    <string name="routing_attr_avoid_ferries_description">Éviter les traversées en ferries</string>
     <string name="routing_attr_avoid_motorway_name">Éviter les autoroutes</string>
     <string name="routing_attr_avoid_motorway_description">Éviter les autoroutes</string>
     <string name="routing_attr_weight_name">Limite de poids</string>
@@ -2228,9 +2228,9 @@ représentant la zone : %1$s x %2$s</string>
     <string name="right_side_navigation">Conduite à droite</string>
     <string name="driving_region_automatic">Automatique</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd collecte des informations sur les écrans affichés lors de l\'utilisation de l\'application. Votre position n\'est jamais collectée, ni aucune des données saisies par l\'utilisateur dans l\'application comme les zones affichées, les recherches ou les téléchargements réalisés.</string>
-    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap (OSM).
-\n
-\nProfitez d\'un guidage vocal comme visuel; Découvrez des points d\'intérêt; Créez et gérez des traces GPX; Installez des greffons pour visualiser l\'altitude et les courbes de niveaux; Utilisez les modes Conduite, Piéton, Cycliste; Contribuez à l\'amélioration des cartes OSM et bien plus encore.</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap (OSM). 
+\n 
+\nProfitez d\'un guidage vocal comme visuel ; Découvrez des points d\'intérêt ; Créez et gérez des traces GPX ; Installez des greffons pour visualiser l\'altitude et les courbes de niveaux ; Utilisez les modes Conduite, Piéton, Cycliste ; Contribuez à l\'amélioration des cartes OSM et bien plus encore.</string>
     <string name="osmand_extended_description_part4">Ski
 \nLe greffon OsmAnd ski maps permet de visualiser les pistes de ski avec leur niveau de difficulté et d\'autres informations utiles comme l\'emplacement et le type des remontées mécaniques.</string>
     <string name="osmand_extended_description_part7">Contribuez à OpenStreetMap (OSM)
@@ -2265,11 +2265,11 @@ représentant la zone : %1$s x %2$s</string>
 \n 
 \nOsmAnd est une application open source très active. Toutes les contributions sont bienvenues que ce soit en signalant des bugs, en participant à la traduction ou en développant de nouvelles fonctionnalités. Grâce aux interactions entre les utilisateurs et les développeurs l\'application est en évolution permanente. Le projet est bien sûr ouvert à toute participation financière pour accélérer encore son développement.</string>
     <string name="analyze_on_map">Analyser sur la carte</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OpenStreetMap Automated Navigation and Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap. Bénéficiez d\'un guidage vocal comme visuel; découvrez des points d\'intérêt; créez et gérez des traces GPX; installez des greffons pour visualiser l\'altitude et les courbes de niveaux; utilisez les modes Automobile, Piéton, Cycliste; contribuez à l\'amélioration des cartes et bien plus encore ! 
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OpenStreetMap Automated Navigation and Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap. Bénéficiez d\'un guidage vocal comme visuel ; découvrez des points d\'intérêt ; créez et gérez des traces GPX ; installez des greffons pour visualiser l\'altitude et les courbes de niveaux ; utilisez les modes Automobile, Piéton, Cycliste ; contribuez à l\'amélioration des cartes et bien plus encore ! 
 \n 
-\nOsmAnd+ est la version payante de l\'application, en l\'achetant vous supportez le projet, financez le développement de nouvelles fonctionnalités, et recevez les dernières mises à jour.
-\n
-\nQuelques-unes des fonctionnalités :</string>
+\nOsmAnd+ est la version payante de l\'application, en l\'achetant vous supportez le projet, financez le développement de nouvelles fonctionnalités et recevez les dernières mises à jour. 
+\n 
+\nFonctionnalités principales :</string>
     <string name="sea_depth_thanks">Merci d\'avoir acheté le greffon Lignes de sonde marines</string>
     <string name="index_item_depth_contours_osmand_ext">Isobathes</string>
     <string name="index_item_depth_points_southern_hemisphere">Lignes de sonde marines pour l\'hémisphère sud</string>
@@ -3169,13 +3169,13 @@ représentant la zone : %1$s x %2$s</string>
     <string name="sett_generic_ext_input">Clavier</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="sett_parrot_ext_input">Parrot</string>
-    <string name="select_base_profile_dialog_message">Basez votre profil personnalisé sur l\'un des profils par défaut pour définir les unités de vitesse, de distance ou la visibilité des widgets. Voici les profils par défaut de l\'application ainsi que des exemples de profils personnalisés :</string>
+    <string name="select_base_profile_dialog_message">Basez votre profil personnel sur l\'un des profils par défaut pour définir les unités de vitesse, de distance ou la visibilité des widgets. Voici les profils par défaut de l\'application ainsi que des exemples de profils personnalisés :</string>
     <string name="temporary_conditional_routing">Prendre en compte les limitations temporaires</string>
     <string name="shared_string_default">Par défaut</string>
     <string name="gpx_join_gaps">Relier les trous</string>
     <string name="app_mode_camper">Campeur</string>
     <string name="app_mode_campervan">Camping-car</string>
-    <string name="rendering_attr_showLez_description">Afficher les zones à faible émission sur la carte (n\'influe pas sur l\'itinéraire).</string>
+    <string name="rendering_attr_showLez_description">Afficher les zones à faible émission sur la carte (n\'influe pas sur le calcul d\'itinéraire).</string>
     <string name="rendering_attr_showLez_name">Afficher les zones à faibles émissions</string>
     <string name="new_route_calculated_dist_dbg">Itinéraire : distance %s, durée %s 
 \nCalculs : %.1f secondes, %d routes, %d tuiles)</string>
@@ -3448,7 +3448,90 @@ représentant la zone : %1$s x %2$s</string>
     <string name="monitoring_min_accuracy_descr">Seuls les points mesurés avec un minimum de précision en mètres/pieds (information communiquée par votre puce GPS) seront enregistrés. La précision fait référence à la dispersion de plusieurs mesures successives et n\'est pas directement liée à la distance entre ces mesures et votre position réelle.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Effet secondaire : avec le filtrage par précision certains points peuvent manquer ; par exemple : sous un pont, en forêt, entre de hauts bâtiments ou dans certaines conditions météorologiques.</string>
     <string name="monitoring_min_accuracy_descr_remark">Remarque : si la localisation GPS est activée juste avant le début d\'enregistrement, la première position peut être imprécise. L\'application pourrait attendre quelques secondes avant d\'enregistrer un point (ou enregistrer le meilleur de 3 points successifs, etc), mais ces évolutions ne sont pas encore disponibles.</string>
-    <string name="tracks_view_path">Menu &gt; Mes lieux favoris &gt; Traces</string>
-    <string name="multimedia_notes_view_path">Menu &gt; Mes lieux favoris &gt; Notes</string>
-    <string name="osm_edits_view_path">Menu &gt; Mes lieux favoris &gt; Modifications OSM</string>
+    <string name="monitoring_min_speed_descr_remark">Remarque : vérification de vitesse &gt; 0. La plupart des puces GPS fournissent une vitesse uniquement lorsque vous êtes en mouvement. Par conséquent, l\'indication du paramètre &gt; 0 pour ce filtre utilise la détection de mouvement par la puce GPS. Mais même s\'il n\'est pas filtré ici au moment de l\'enregistrement, nous utilisons toujours cette fonctionnalité dans notre analyse des traces GPX pour déterminer la distance corrigée, c\'est-à-dire que la valeur affichée dans ce champ est la distance enregistrée en déplacement.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Effet secondaire : les périodes de repos ne seront pas enregistrées ou seulement par un point. De petits mouvements, comme des pas sur le côté, pourront être ignorés. Votre fichier contiendra moins d\'informations exploitables en post-traitement et aura des statistiques moins exactes (éliminant les points redondants mais conservant les erreurs de position dues à une mauvaise réception ou aux artefacts de la puce GPS).</string>
+    <string name="shared_string_available">Disponible</string>
+    <string name="add_custom_category">Ajouter une catégorie personnelle</string>
+    <string name="rendering_attr_streetLightingNight_name">Afficher seulement de nuit</string>
+    <string name="plugin_prefs_reset_successful">Tous les paramètres du greffon ont été restaurés à leurs valeurs par défaut.</string>
+    <string name="profile_prefs_reset_successful">Tous les paramètres du profile ont été restaurés à leurs valeurs par défaut.</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="sunset_at">Coucher de soleil à %1$s</string>
+    <string name="sunrise_at">Lever de soleil à %1$s</string>
+    <string name="rearrange_categories">Réorganiser les catégories</string>
+    <string name="create_custom_categories_list_promo">Vous pouvez ajouter des catégories personnelles, masquer les catégories que vous ne souhaitez pas utiliser et les trier. La liste des catégories peut être importée et exportée grâce aux profils.</string>
+    <string name="reset_to_default_category_button_promo">Restaurer les valeurs par défaut réinitialisera l\'ordre de tri.</string>
+    <string name="accessibility_mode_disabled">Le mode d\'accessibilité est désactivé dans votre système.</string>
+    <string name="add_new_custom_category_button_promo">Vous pouvez ajouter une catégorie personnelle en sélectionnant la ou les catégories souhaitées.</string>
+    <string name="use_system_screen_timeout">Utiliser le délai système pour mettre en veille l\'écran</string>
+    <string name="use_system_screen_timeout_promo">Inactif par défaut (lorsqu\'OsmAnd s’exécute en avant-plan, l\'écran reste toujours allumé). 
+\n 
+\nSi actif, OsmAnd utilisera le délai système pour mettre en veille l\'écran.</string>
+    <string name="clear_recorded_data">Effacer les données enregistrées</string>
+    <string name="release_3_6">• Profils : vous pouvez désormais modifier leur ordre, définir leur icône, modifier tous les paramètres de base des profils et restaurer les valeurs par défaut
+\n
+\n• Ajout du numéro de sortie dans les indications de navigation
+\n
+\n• Amélioration des paramètres de greffon
+\n
+\n• Amélioration des paramètres de l\'écran pour un accès plus rapide à tous les profils
+\n
+\n• Ajout d\'une option pour copier les paramètres d\'un autre profil
+\n
+\n• Possibilité de modifier l\'ordre ou de masquer les catégories de POI dans la Recherche
+\n
+\n• Meilleur alignement des icônes de POI sur la carte
+\n
+\n• Ajout des données de Coucher / Lever du soleil
+\n
+\n• Ajout des icônes Domicile / Travail sur la carte
+\n
+\n• Possibilité d\'ajouter plusieurs lignes de description dans les Paramètres
+\n
+\n• Correction des translittérations pour la carte du Japon
+\n
+\n• Ajout de la carte de l\'Antarctique
+\n
+\n</string>
+    <string name="copy_coordinates">Copier les coordonnées</string>
+    <string name="routing_profile_direct_to">Le plus direct</string>
+    <string name="sort_by_category">Trier par catégorie</string>
+    <string name="please_provide_profile_name_message">Veuillez saisir un nom de profil</string>
+    <string name="open_settings">Ouvrir les paramètres</string>
+    <string name="plugin_disabled">Greffon désactivé</string>
+    <string name="plugin_disabled_descr">Ce greffon est une application indépendante, vous devrez la désinstaller séparément si vous ne souhaitez plus l\'utiliser.
+\n
+\nLe greffon sera toujours présent sur l\'appareil après avoir désinstallé OsmAnd.</string>
+    <string name="shared_string_menu">Menu</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_routing">Calcul d\'itinéraire</string>
+    <string name="shared_string_custom_rendering_style">Style de rendu personnalisé</string>
+    <string name="shared_string_include_data">Inclure des données supplémentaires</string>
+    <string name="import_profile_dialog_description">Le profil importé contient des données supplémentaires. Cliquez sur Importer pour n\'importer que les données de profil ou sélectionnez des données supplémentaires à importer.</string>
+    <string name="export_profile_dialog_description">Vous pouvez sélectionner des données supplémentaires à exporter en même temps que le profil.</string>
+    <string name="index_name_antarctica">Antarctique</string>
+    <string name="shared_string_app_default_w_val">Par défaut pour l\'application (%s)</string>
+    <string name="no_recalculation_setting">Désactiver le re-calcul</string>
+    <string name="route_recalculation_dist_title">Distance à partir de laquelle recalculer l’itinéraire</string>
+    <string name="route_recalculation_dist_descr">L’itinéraire sera recalculé si votre éloignement de l\'itinéraire est supérieur à ce paramètre</string>
+    <string name="profile_type_custom_string">Profil personnel</string>
+    <string name="shared_string_angle_param">Angle : %s°</string>
+    <string name="shared_string_angle">Angle</string>
+    <string name="recalc_angle_dialog_descr">Un segment supplémentaire sera affiché entre ma position et l\'itinéraire initial jusqu\'à ce que l\'itinéraire soit recalculé</string>
+    <string name="recalc_angle_dialog_title">Angle minimum entre ma position et mon itinéraire</string>
+    <string name="shared_string_preparing">Préparation en cours</string>
+    <string name="shared_string_poi_types">Types de PI</string>
+    <string name="shared_string_nothing_selected">Aucun élément sélectionné</string>
+    <string name="shared_string_quick_actions">Actions rapides</string>
+    <string name="shared_string_profiles">Profils</string>
+    <string name="listed_exist">Les %1$s listés existent déjà dans OsmAnd.</string>
+    <string name="replace_all_desc">Les éléments actuels seront remplacés par les éléments du fichier</string>
+    <string name="replace_all">Tout remplacer</string>
+    <string name="keep_both">Conserver les deux</string>
+    <string name="keep_both_desc">Les éléments seront importés avec un préfixe</string>
+    <string name="import_duplicates_description">Des éléments portant les mêmes noms existent déjà dans OsmAnd.
+\n
+\nQue souhaitez-vous faire \?</string>
+    <string name="import_duplicates_title">Certains éléments existent déjà</string>
+    <string name="select_data_to_import">Sélectionnez les données à importer.</string>
 </resources>

@@ -722,8 +722,8 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="filter_current_poiButton">Filtras</string>
     <string name="edit_filter_save_as_menu_item">Išsaugoti kaip</string>
     <string name="edit_filter_delete_dialog_title">Ištrinti pasirinktą filtrą?</string>
-    <string name="edit_filter_delete_message">Filtras {0} buvo ištrintas</string>
-    <string name="edit_filter_create_message">Filtras {0} buvo sukurtas</string>
+    <string name="edit_filter_delete_message">Filtras %1$s buvo ištrintas</string>
+    <string name="edit_filter_create_message">Filtras %1$s buvo sukurtas</string>
     <string name="global_app_allocated_memory_descr">Skirta %1$s MB atminties (Android limitas %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Skirta atminties</string>
     <string name="native_app_allocated_memory_descr">Bendras skirtos atminties kiekis yra %1$s MB (Dalvik %2$s MB, kita %3$s MB).

@@ -49,7 +49,7 @@ public class AddQuickActionDialog extends DialogFragment {
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
         List<QuickAction> active = ((MapActivity) getActivity())
-                .getMapLayers()
+                .getMyApplication()
                 .getQuickActionRegistry()
                 .getQuickActions();
 

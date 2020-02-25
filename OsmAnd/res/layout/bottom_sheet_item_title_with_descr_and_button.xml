@@ -7,7 +7,8 @@
     android:background="?attr/selectableItemBackground"
     android:gravity="center_vertical"
     android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
-    android:paddingLeft="@dimen/content_padding">
+    android:paddingLeft="@dimen/content_padding"
+	android:paddingStart="@dimen/content_padding">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -56,6 +57,9 @@
         android:textSize="@dimen/default_desc_text_size"
         osmand:typeface="@string/font_roboto_medium"
         tools:drawableRight="@drawable/ic_action_sort_by_name"
-        tools:text="Some button" />
+        tools:text="Some button"
+	    tools:drawableEnd="@drawable/ic_action_sort_by_name"
+	    android:paddingEnd="@dimen/content_padding"
+	    android:paddingStart="@dimen/content_padding" />
 
 </LinearLayout>

@@ -6,7 +6,9 @@
 	android:orientation="horizontal"
 	android:paddingLeft="@dimen/content_padding_half"
 	android:paddingRight="@dimen/content_padding_half"
-	android:paddingBottom="@dimen/context_menu_padding_margin_small">
+	android:paddingBottom="@dimen/context_menu_padding_margin_small"
+	android:paddingStart="@dimen/content_padding_half"
+	android:paddingEnd="@dimen/content_padding_half">
 
 	<include
 		android:id="@+id/additional_button_left_view"

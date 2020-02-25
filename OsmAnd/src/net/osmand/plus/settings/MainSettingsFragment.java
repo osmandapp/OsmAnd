@@ -19,6 +19,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.SettingsHelper.*;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SelectProfileListener;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -88,9 +89,8 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 				AndroidUtils.setBackground(selectedProfile, backgroundDrawable);
 			}
 		}
-		if (ApplicationMode.DEFAULT.getStringKey().equals(preference.getKey())) {
-			holder.findViewById(R.id.switchWidget).setVisibility(View.GONE);
-		}
+		boolean visible = !ApplicationMode.DEFAULT.getStringKey().equals(key);
+		AndroidUiHelper.updateVisibility(holder.findViewById(R.id.switchWidget), visible);
 	}
 
 	@Override
@@ -118,6 +118,8 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 			Bundle bundle = new Bundle();
 			bundle.putString(DIALOG_TYPE, TYPE_BASE_APP_PROFILE);
 			dialog.setArguments(bundle);
+			dialog.setUsedOnMap(false);
+			dialog.setAppMode(getSelectedAppMode());
 			if (getActivity() != null) {
 				getActivity().getSupportFragmentManager().beginTransaction()
 						.add(dialog, "select_base_profile").commitAllowingStateLoss();
@@ -125,7 +127,7 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 		} else if (IMPORT_PROFILE.equals(prefId)) {
 			final MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
-				mapActivity.getImportHelper().chooseFileToImport(SETTINGS, new CallbackWithObject<List<SettingsItem>>() {
+				mapActivity.getImportHelper().chooseFileToImport(SETTINGS, false, new CallbackWithObject<List<SettingsItem>>() {
 					
 					@Override
 					public boolean processResult(List<SettingsItem> result) {

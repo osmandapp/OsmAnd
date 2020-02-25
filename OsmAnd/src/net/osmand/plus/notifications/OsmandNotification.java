@@ -11,7 +11,6 @@ import android.support.v4.app.NotificationManagerCompat;
 
 import net.osmand.plus.NotificationHelper;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.activities.MapActivity;
 
 public abstract class OsmandNotification {
 

@@ -281,7 +281,7 @@ public class RotatedTileBox {
 	}
 
 	public int getPixXFromLonNoRot(double longitude) {
-		double dTilex = (float) MapUtils.getTileNumberX(zoom, longitude) - oxTile;
+		double dTilex = MapUtils.getTileNumberX(zoom, longitude) - oxTile;
 		return (int) (dTilex * zoomFactor + cx);
 	}
 
@@ -291,8 +291,8 @@ public class RotatedTileBox {
 	}
 
 	public int getPixYFromLatNoRot(double latitude) {
-		double dTileY  = MapUtils.getTileNumberY(zoom, latitude) - oyTile;
-		return (int) ((dTileY * zoomFactor) + cy);
+		double dTileY = MapUtils.getTileNumberY(zoom, latitude) - oyTile;
+		return (int) (dTileY * zoomFactor + cy);
 	}
 
 	public int getPixYFromTileYNoRot(double tileY) {

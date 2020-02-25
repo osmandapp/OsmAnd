@@ -44,6 +44,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	public final static String USER_PREFIX = "user_"; //$NON-NLS-1$
 	public final static String CUSTOM_FILTER_ID = USER_PREFIX + "custom_id"; //$NON-NLS-1$
 	public final static String BY_NAME_FILTER_ID = USER_PREFIX + "by_name"; //$NON-NLS-1$
+	public final static int INVALID_ORDER  = -1;
 
 	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<>();
 	private Map<String, PoiType> poiAdditionals = new HashMap<>();
@@ -52,6 +53,8 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	protected String standardIconId = "";
 	protected String name;
 	protected boolean isStandardFilter;
+	protected int order = INVALID_ORDER;
+	protected boolean isActive = true;
 
 	protected final OsmandApplication app;
 
@@ -120,6 +123,18 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		combineWithPoiFilters(filtersToMerge);
 		filterId = PoiUIFilter.STD_PREFIX + "combined";
 		name = app.getPoiFilters().getFiltersName(filtersToMerge);
+	}
+
+	public PoiUIFilter(PoiUIFilter filter, String name, String filterId) {
+		this.app = filter.app;
+		this.name = name;
+		this.filterId = filterId;
+		isStandardFilter = false;
+		poiTypes = filter.poiTypes;
+		acceptedTypes = filter.getAcceptedTypes();
+		poiAdditionals = filter.getPoiAdditionals();
+		filterByName = filter.filterByName;
+		savedFilterByName = filter.savedFilterByName;
 	}
 
 	public boolean isDeleted() {
@@ -718,6 +733,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		updatePoiAdditionals();
 	}
 
+	@Override
 	public String getFilterId() {
 		return filterId;
 	}
@@ -741,6 +757,22 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 
 	public void setStandardFilter(boolean isStandardFilter) {
 		this.isStandardFilter = isStandardFilter;
+	}
+
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean active) {
+		isActive = active;
 	}
 
 	public Context getApplication() {
@@ -773,12 +805,14 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 
 	@Override
 	public int compareTo(@NonNull PoiUIFilter another) {
-		if (another.filterId.equals(this.filterId)) {
+		if (this.order != INVALID_ORDER && another.order != INVALID_ORDER) {
+			return (this.order < another.order) ? -1 : ((this.order == another.order) ? 0 : 1);
+		} else if (another.filterId.equals(this.filterId)) {
 			String thisFilterByName = this.filterByName == null ? "" : this.filterByName;
 			String anotherFilterByName = another.filterByName == null ? "" : another.filterByName;
 			return thisFilterByName.compareToIgnoreCase(anotherFilterByName);
 		} else {
-			return this.name.compareTo(another.name);
+			return this.name.compareToIgnoreCase(another.name);
 		}
 	}
 

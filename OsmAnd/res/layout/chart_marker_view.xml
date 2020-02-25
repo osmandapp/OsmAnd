@@ -18,7 +18,9 @@
             android:paddingTop="2dp"
             android:paddingBottom="2dp"
             android:paddingLeft="6dp"
-            android:paddingRight="6dp">
+            android:paddingRight="6dp"
+	        android:paddingEnd="6dp"
+	        android:paddingStart="6dp">
 
             <TextView
                 android:id="@+id/text_alt_value"
@@ -59,7 +61,9 @@
             android:paddingTop="2dp"
             android:paddingBottom="2dp"
             android:paddingLeft="6dp"
-            android:paddingRight="6dp">
+            android:paddingRight="6dp"
+	        android:paddingEnd="6dp"
+	        android:paddingStart="6dp">
 
             <TextView
                 android:id="@+id/text_spd_value"
@@ -92,7 +96,9 @@
             android:paddingTop="2dp"
             android:paddingBottom="2dp"
             android:paddingLeft="6dp"
-            android:paddingRight="6dp">
+            android:paddingRight="6dp"
+	        android:paddingEnd="6dp"
+	        android:paddingStart="6dp">
 
             <TextView
                 android:id="@+id/text_slp_value"

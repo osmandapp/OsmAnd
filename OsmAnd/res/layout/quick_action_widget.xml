@@ -9,7 +9,7 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/content_padding_half"
         android:background="@drawable/bg_card_light"
         android:clickable="true"
         android:orientation="vertical">
@@ -32,8 +32,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="?attr/selectableItemBackground"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp" />
+                android:paddingLeft="@dimen/content_padding"
+                android:paddingRight="@dimen/content_padding"
+	            android:paddingStart="@dimen/content_padding"
+	            android:paddingEnd="@dimen/content_padding" />
 
             <LinearLayout
                 android:id="@+id/dots"
@@ -49,8 +51,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="?attr/selectableItemBackground"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp" />
+                android:paddingLeft="@dimen/content_padding"
+                android:paddingRight="@dimen/content_padding"
+	            android:paddingStart="@dimen/content_padding"
+	            android:paddingEnd="@dimen/content_padding" />
 
         </LinearLayout>
 

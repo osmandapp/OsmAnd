@@ -65,8 +65,8 @@
     <string name="filter_current_poiButton">Filter</string>
     <string name="edit_filter_save_as_menu_item">Shrani kot</string>
     <string name="edit_filter_delete_dialog_title">Ali želite izbrisati izbrani filter?</string>
-    <string name="edit_filter_delete_message">Filter {0} je izbrisan</string>
-    <string name="edit_filter_create_message">Filter {0} je ustvarjen</string>
+    <string name="edit_filter_delete_message">Filter %1$s je izbrisan</string>
+    <string name="edit_filter_create_message">Filter %1$s je ustvarjen</string>
     <string name="email">elektronski naslov</string>
     <string name="context_menu_item_first_intermediate_point">Dodaj kot prvi vmesni cilj</string>
     <string name="context_menu_item_last_intermediate_point">Dodaj kot zadnji vmesni cilj</string>

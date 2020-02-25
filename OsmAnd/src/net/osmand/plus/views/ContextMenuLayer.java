@@ -48,6 +48,7 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
+import net.osmand.osm.edit.OsmMapUtils;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
@@ -686,15 +687,19 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				double cosRotateTileSize = Math.cos(Math.toRadians(rc.rotate)) * TILE_SIZE;
 				double sinRotateTileSize = Math.sin(Math.toRadians(rc.rotate)) * TILE_SIZE;
 				for (RenderedObject r : renderedObjects) {
-					double cx = r.getBbox().centerX();
-					double cy = r.getBbox().centerY();
-					double dTileX = (cx * cosRotateTileSize + cy * sinRotateTileSize) / (TILE_SIZE * TILE_SIZE);
-					double dTileY = (cy * cosRotateTileSize - cx * sinRotateTileSize) / (TILE_SIZE * TILE_SIZE);
-					int x31 = (int) ((dTileX + rc.leftX) * rc.tileDivisor);
-					int y31 = (int) ((dTileY + rc.topY) * rc.tileDivisor);
-					double lat = MapUtils.get31LatitudeY(y31);
-					double lon = MapUtils.get31LongitudeX(x31);
-					r.setLabelLatLon(new LatLon(lat, lon));
+					if (r.getLabelX() != 0 && r.getLabelY() != 0) {
+						r.setLabelLatLon(new LatLon(MapUtils.get31LatitudeY(r.getLabelY()), MapUtils.get31LongitudeX(r.getLabelX())));
+					} else {
+						double cx = r.getBbox().centerX();
+						double cy = r.getBbox().centerY();
+						double dTileX = (cx * cosRotateTileSize + cy * sinRotateTileSize) / (TILE_SIZE * TILE_SIZE);
+						double dTileY = (cy * cosRotateTileSize - cx * sinRotateTileSize) / (TILE_SIZE * TILE_SIZE);
+						int x31 = (int) ((dTileX + rc.leftX) * rc.tileDivisor);
+						int y31 = (int) ((dTileY + rc.topY) * rc.tileDivisor);
+						double lat = MapUtils.get31LatitudeY(y31);
+						double lon = MapUtils.get31LongitudeX(x31);
+						r.setLabelLatLon(new LatLon(lat, lon));
+					}
 				}
 				for (RenderedObject renderedObject : renderedObjects) {
 					if (renderedObject.getX() != null && renderedObject.getX().size() == 1
@@ -942,9 +947,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		if (selectOnMap != null) {
 			LatLon latlon = tileBox.getLatLonFromPixel(point.x, point.y);
+			menu.init(latlon, null, null);
 			CallbackWithObject<LatLon> cb = selectOnMap;
 			cb.processResult(latlon);
-			menu.init(latlon, null, null);
 			selectOnMap = null;
 			return true;
 		}

@@ -167,6 +167,10 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 			descriptionEdit.setHint(R.string.access_hint_enter_description);
 		}
 
+		if (Build.VERSION.SDK_INT >= 21) {
+			AndroidUtils.addStatusBarPadding21v(app, view);
+		}
+
 		return view;
 	}
 
@@ -232,11 +236,6 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 	@Override
 	public int getStatusBarColorId() {
 		return R.color.status_bar_color_light;
-	}
-
-	@Override
-	protected boolean isFullScreenAllowed() {
-		return false;
 	}
 
 	private void hideKeyboard() {

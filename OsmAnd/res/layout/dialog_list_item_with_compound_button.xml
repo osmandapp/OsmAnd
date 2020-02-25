@@ -23,7 +23,9 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
 			android:layout_marginLeft="@dimen/context_menu_padding_margin_large"
-			android:layout_marginRight="@dimen/context_menu_padding_margin_large">
+			android:layout_marginRight="@dimen/context_menu_padding_margin_large"
+			android:layout_marginStart="@dimen/context_menu_padding_margin_large"
+			android:layout_marginEnd="@dimen/context_menu_padding_margin_large">
 			
 			<android.support.v7.widget.AppCompatRadioButton
 				android:id="@+id/radio"

@@ -15,16 +15,17 @@
             android:id="@+id/clockIconImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="@dimen/content_padding"
             android:src="@drawable/ic_action_time"/>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginLeft="@dimen/content_padding"
+            android:layout_marginTop="@dimen/content_padding"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+	        android:layout_marginStart="@dimen/content_padding">
 
             <TextView
                 android:id="@+id/daysTextView"
@@ -53,8 +54,8 @@
             android:id="@+id/deleteItemImageButton"
             android:contentDescription="@string/shared_string_delete"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="@dimen/bottom_sheet_list_item_height"
+            android:layout_height="@dimen/bottom_sheet_list_item_height"
             android:layout_gravity="top"
             android:src="@drawable/ic_action_remove_dark"/>
 
@@ -68,6 +69,8 @@
         android:layout_toRightOf="@id/clockIconImageView"
         android:layout_below="@id/timeListContainer"
         android:textColor="?attr/color_dialog_buttons"
-        style="@style/Widget.AppCompat.Button.Borderless"/>
+        style="@style/Widget.AppCompat.Button.Borderless"
+	    android:layout_toEndOf="@id/clockIconImageView"
+	    android:layout_marginStart="60dp" />
 
 </LinearLayout>

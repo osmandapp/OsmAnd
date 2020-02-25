@@ -13,7 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+	    android:layout_marginStart="16dp"
+	    android:layout_marginEnd="16dp">
 
         <TextView
             android:id="@+id/openingTextView"
@@ -38,7 +40,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+	    android:layout_marginStart="16dp">
 
         <TextView
             android:id="@+id/closingTextView"

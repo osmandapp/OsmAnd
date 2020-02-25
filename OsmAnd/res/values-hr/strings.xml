@@ -235,8 +235,8 @@
     <string name="email">E-pošta</string>
     <string name="edit_filter_save_as_menu_item">Spremi kao</string>
     <string name="edit_filter_delete_dialog_title">Obriši odabrani filter?</string>
-    <string name="edit_filter_delete_message">Filter {0} je izbrisan</string>
-    <string name="edit_filter_create_message">Filter {0} je stvoren</string>
+    <string name="edit_filter_delete_message">Filter %1$s je izbrisan</string>
+    <string name="edit_filter_create_message">Filter %1$s je stvoren</string>
     <string name="shared_string_clear">Resetiraj</string>
     <string name="filter_current_poiButton">Filter</string>
     <string name="poi_dialog_opening_hours">Otvori</string>

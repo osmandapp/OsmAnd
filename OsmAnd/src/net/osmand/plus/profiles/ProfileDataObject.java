@@ -1,8 +1,9 @@
 package net.osmand.plus.profiles;
 
 import android.support.annotation.ColorRes;
+import android.support.annotation.NonNull;
 
-public class ProfileDataObject {
+public class ProfileDataObject implements Comparable<ProfileDataObject> {
 
 	private String name;
 	private String description;
@@ -46,5 +47,10 @@ public class ProfileDataObject {
 
 	@ColorRes  public int getIconColor(boolean isNightMode) {
 		return iconColor.getColor(isNightMode);
+	}
+
+	@Override
+	public int compareTo(@NonNull ProfileDataObject another) {
+		return this.name.compareToIgnoreCase(another.name);
 	}
 }

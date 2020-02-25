@@ -260,7 +260,7 @@
 	<string name="poi_musical_instrument">Musical instruments</string>
 	<string name="poi_newsagent">Newsagent</string>
 	<string name="poi_optician">Optometrist</string>
-	<string name="poi_organic">Organic food</string>
+	<string name="poi_organic">Organic products</string>
 	<string name="poi_outdoor">Outdoor store</string>
 	<string name="poi_paint">Paint store</string>
 	<string name="poi_pet">Pet store</string>
@@ -634,7 +634,6 @@
 	<string name="poi_healthcare_alternative">Alternative medicine</string>
 	<string name="poi_audiologist">Audiologist</string>
 	<string name="poi_blood_bank">Blood bank</string>
-	<string name="poi_healthcare_centre">Medical center</string>
 	<string name="poi_midwife">Midwife</string>
 	<string name="poi_occupational_therapist">Occupational therapist</string>
 	<string name="poi_optometrist">Optometrist</string>
@@ -4189,5 +4188,7 @@
 	<string name="poi_piste_ref">Piste reference number</string>
 
 	<string name="poi_resort_hunting">Hunting base</string>
+
+	<string name="poi_dive_centre">Scuba diving centre</string>
 
 </resources>

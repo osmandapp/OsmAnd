@@ -25,12 +25,9 @@ import android.support.v7.app.AlertDialog;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
-import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
@@ -46,6 +43,7 @@ import net.osmand.plus.activities.DayNightHelper;
 import net.osmand.plus.activities.ExitActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.base.MapViewTrackingUtilities;
@@ -58,10 +56,10 @@ import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
+import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
@@ -70,6 +68,7 @@ import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
+import net.osmand.router.GeneralRouter;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.search.SearchUICore;
@@ -82,11 +81,16 @@ import java.io.FileWriter;
 import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
+
+import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
 
 public class OsmandApplication extends MultiDexApplication {
 	public static final String EXCEPTION_PATH = "exception.log";
@@ -139,17 +143,17 @@ public class OsmandApplication extends MultiDexApplication {
 	LockHelper lockHelper;
 	SettingsHelper settingsHelper;
 	GpxDbHelper gpxDbHelper;
+	QuickActionRegistry quickActionRegistry;
 
 	private Resources localizedResources;
 
-	private RoutingConfiguration.Builder routingConfig;
+	private Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
+
 	private Locale preferredLocale = null;
 	private Locale defaultLocale;
 	private File externalStorageDirectory;
 	private boolean externalStorageDirectoryReadOnly;
 
-	private String firstSelectedVoiceProvider;
-	
 	// Typeface
 	
 	@Override
@@ -269,7 +273,10 @@ public class OsmandApplication extends MultiDexApplication {
 	public OsmAndAppCustomization getAppCustomization() {
 		return appCustomization;
 	}
-	
+
+	public QuickActionRegistry getQuickActionRegistry() {
+		return quickActionRegistry;
+	}
 	
 	public void setAppCustomization(OsmAndAppCustomization appCustomization) {
 		this.appCustomization = appCustomization;
@@ -466,68 +473,15 @@ public class OsmandApplication extends MultiDexApplication {
 		String voiceProvider = osmandSettings.VOICE_PROVIDER.getModeValue(applicationMode);
 		if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
 			if (warningNoneProvider && voiceProvider == null) {
-				boolean nightMode = daynightHelper.isNightModeForMapControls();
-				final AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(uiContext, nightMode));
-
-				View view = UiUtilities.getInflater(uiContext, nightMode).inflate(R.layout.select_voice_first, null);
-
-				((ImageView) view.findViewById(R.id.icon))
-						.setImageDrawable(getUIUtilities().getIcon(R.drawable.ic_action_volume_up, getSettings().isLightContent()));
-
-				view.findViewById(R.id.spinner).setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(final View v) {
-						routingOptionsHelper.selectVoiceGuidance((MapActivity) uiContext, new CallbackWithObject<String>() {
-							@Override
-							public boolean processResult(String result) {
-								boolean acceptableValue = !RoutePreferencesMenu.MORE_VALUE.equals(firstSelectedVoiceProvider);
-								if (acceptableValue) {
-									((TextView) v.findViewById(R.id.selectText))
-											.setText(routingOptionsHelper.getVoiceProviderName(uiContext, result));
-									firstSelectedVoiceProvider = result;
-								}
-								return acceptableValue;
-							}
-						});
-					}
-				});
-
-				((ImageView) view.findViewById(R.id.dropDownIcon))
-						.setImageDrawable(getUIUtilities().getIcon(R.drawable.ic_action_arrow_drop_down, getSettings().isLightContent()));
-
-				builder.setCancelable(true);
-				builder.setNegativeButton(R.string.shared_string_cancel, null);
-				builder.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						if (!Algorithms.isEmpty(firstSelectedVoiceProvider)) {
-							routingOptionsHelper.applyVoiceProvider((MapActivity) uiContext, firstSelectedVoiceProvider, applyAllModes);
-						}
-					}
-				});
-				builder.setNeutralButton(R.string.shared_string_do_not_use, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialogInterface, int i) {
-						if (applyAllModes) {
-							for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-								osmandSettings.VOICE_PROVIDER.setModeValue(mode, OsmandSettings.VOICE_PROVIDER_NOT_USE);
-							}
-						} else {
-							osmandSettings.VOICE_PROVIDER.setModeValue(applicationMode, OsmandSettings.VOICE_PROVIDER_NOT_USE);
-						}
-					}
-				});
-
-				builder.setView(view);
-				builder.show();
+				if (uiContext instanceof MapActivity) {
+					OsmAndDialogs.showVoiceProviderDialog((MapActivity) uiContext, applicationMode, applyAllModes);
+				}
 			}
-
 		} else {
 			if (player == null || !Algorithms.objectEquals(voiceProvider, player.getCurrentVoice()) || force) {
 				appInitializer.initVoiceDataInDifferentThread(uiContext, applicationMode, voiceProvider, run, showDialog);
 			}
 		}
-
 	}
 
 	public NavigationService getNavigationService() {
@@ -830,6 +784,16 @@ public class OsmandApplication extends MultiDexApplication {
 			}
 		}
 	}
+
+	public String getCountry() {
+		String country;
+		if (preferredLocale != null) {
+			country = preferredLocale.getCountry();
+		} else {
+			country = Locale.getDefault().getCountry();
+		}
+		return country;
+	}
 	
 	public String getLanguage() {
 		String lang;
@@ -854,18 +818,48 @@ public class OsmandApplication extends MultiDexApplication {
 		return localizedResources != null ? localizedResources : super.getResources();
 	}
 
-	public synchronized RoutingConfiguration.Builder getRoutingConfig() {
-		RoutingConfiguration.Builder rc;
-		if(routingConfig == null) {
-			rc = new RoutingConfiguration.Builder();
-		} else {
-			rc = routingConfig;
-		}
-		return rc;
+	public List<RoutingConfiguration.Builder> getAllRoutingConfigs() {
+		List<RoutingConfiguration.Builder> builders = new ArrayList<>(customRoutingConfigs.values());
+		builders.add(0, getDefaultRoutingConfig());
+		return builders;
 	}
 
-	public void updateRoutingConfig(Builder update) {
-			routingConfig = update;
+	public synchronized RoutingConfiguration.Builder getDefaultRoutingConfig() {
+		return RoutingConfiguration.getDefault();
+	}
+
+	public Map<String, RoutingConfiguration.Builder> getCustomRoutingConfigs() {
+		return customRoutingConfigs;
+	}
+
+	public RoutingConfiguration.Builder getCustomRoutingConfig(String key) {
+		return customRoutingConfigs.get(key);
+	}
+
+	public RoutingConfiguration.Builder getRoutingConfigForMode(ApplicationMode mode) {
+		RoutingConfiguration.Builder builder = null;
+		String routingProfileKey = mode.getRoutingProfile();
+		if (!Algorithms.isEmpty(routingProfileKey)) {
+			int index = routingProfileKey.indexOf(ROUTING_FILE_EXT);
+			if (index != -1) {
+				String configKey = routingProfileKey.substring(0, index + ROUTING_FILE_EXT.length());
+				builder = customRoutingConfigs.get(configKey);
+			}
+		}
+		return builder != null ? builder : getDefaultRoutingConfig();
+	}
+
+	public GeneralRouter getRouter(ApplicationMode mode) {
+		Builder builder = getRoutingConfigForMode(mode);
+		return getRouter(builder, mode);
+	}
+
+	public GeneralRouter getRouter(Builder builder, ApplicationMode am) {
+		GeneralRouter router = builder.getRouter(am.getRoutingProfile());
+		if (router == null && am.getParent() != null) {
+			router = builder.getRouter(am.getParent().getStringKey());
+		}
+		return router;
 	}
 
 	public OsmandRegions getRegions() {
@@ -886,6 +880,10 @@ public class OsmandApplication extends MultiDexApplication {
 		} else if (mode == AccessibilityMode.OFF) {
 			return false;
 		}
+		return systemAccessibilityEnabled();
+	}
+
+	public boolean systemAccessibilityEnabled() {
 		return ((AccessibilityManager) getSystemService(Context.ACCESSIBILITY_SERVICE)).isEnabled();
 	}
 

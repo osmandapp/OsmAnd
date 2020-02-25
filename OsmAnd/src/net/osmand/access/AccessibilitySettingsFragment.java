@@ -1,12 +1,27 @@
 package net.osmand.access;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.os.Build;
+import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+import android.support.v7.preference.PreferenceViewHolder;
+import android.view.View;
+import android.view.accessibility.AccessibilityManager;
+import android.view.accessibility.AccessibilityManager.AccessibilityStateChangeListener;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.access.RelativeDirectionStyle;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
@@ -21,19 +36,33 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 public class AccessibilitySettingsFragment extends BaseSettingsFragment implements OnPreferenceChanged, CopyAppModePrefsListener, ResetAppModePrefsListener {
 
+	private static final String ACCESSIBILITY_OPTIONS = "accessibility_options";
 	private static final String COPY_PLUGIN_SETTINGS = "copy_plugin_settings";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
 
+	private AccessibilityStateChangeListener accessibilityListener;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		accessibilityListener = new AccessibilityStateChangeListener() {
+			@Override
+			public void onAccessibilityStateChanged(boolean b) {
+				if (isResumed() && useSystemAccessibility()) {
+					updateAllSettings();
+				}
+			}
+		};
+	}
+
 	@Override
 	protected void setupPreferences() {
+		setupAccessibilityPermissionPref();
 		setupAccessibilityModePref();
 		setupSpeechRatePref();
 
 		setupSmartAutoAnnouncePref();
 		setupAutoAnnouncePeriodPref();
-
-		setupDisableOffRouteRecalculationPref();
-		setupDisableWrongDirectionRecalculationPref();
 
 		setupDirectionStylePref();
 		setupDirectionAudioFeedbackPref();
@@ -43,6 +72,43 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 		setupResetToDefaultPref();
 
 		updateAccessibilityOptions();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		Preference accessibilityPrefs = findPreference(ACCESSIBILITY_OPTIONS);
+		if (useSystemAccessibility() && accessibilityPrefs.isVisible() == app.systemAccessibilityEnabled()) {
+			updateAllSettings();
+		}
+		AccessibilityManager accessibilityManager = (AccessibilityManager) app.getSystemService(Context.ACCESSIBILITY_SERVICE);
+		accessibilityManager.addAccessibilityStateChangeListener(accessibilityListener);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		AccessibilityManager accessibilityManager = (AccessibilityManager) app.getSystemService(Context.ACCESSIBILITY_SERVICE);
+		accessibilityManager.removeAccessibilityStateChangeListener(accessibilityListener);
+	}
+
+	private void setupAccessibilityPermissionPref() {
+		Preference accessibilityPrefs = findPreference(ACCESSIBILITY_OPTIONS);
+		if (!useSystemAccessibility() || app.systemAccessibilityEnabled()) {
+			accessibilityPrefs.setVisible(false);
+		} else {
+			Intent accessibilitySettings = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
+			accessibilityPrefs.setVisible(true);
+			if (accessibilitySettings.resolveActivity(app.getPackageManager()) != null) {
+				accessibilityPrefs.setIntent(accessibilitySettings);
+			} else {
+				accessibilityPrefs.setSummary(null);
+			}
+		}
+	}
+
+	private boolean useSystemAccessibility() {
+		return AccessibilityMode.DEFAULT == settings.ACCESSIBILITY_MODE.getModeValue(getSelectedAppMode());
 	}
 
 	private void setupAccessibilityModePref() {
@@ -58,6 +124,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 		ListPreferenceEx accessibilityMode = (ListPreferenceEx) findPreference(settings.ACCESSIBILITY_MODE.getId());
 		accessibilityMode.setEntries(entries);
 		accessibilityMode.setEntryValues(entryValues);
+		accessibilityMode.setIcon(getPersistentPrefIcon(R.drawable.ic_action_android));
 		accessibilityMode.setDescription(R.string.accessibility_mode_descr);
 	}
 
@@ -105,15 +172,6 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 		autoAnnouncePeriod.setDescription(R.string.access_autoannounce_period_descr);
 	}
 
-	private void setupDisableOffRouteRecalculationPref() {
-		SwitchPreferenceEx disableOffRouteRecalculation = (SwitchPreferenceEx) findPreference(settings.DISABLE_OFFROUTE_RECALC.getId());
-		disableOffRouteRecalculation.setDescription(getString(R.string.access_disable_offroute_recalc_descr));
-	}
-
-	private void setupDisableWrongDirectionRecalculationPref() {
-		SwitchPreferenceEx disableWrongDirectionRecalculation = (SwitchPreferenceEx) findPreference(settings.DISABLE_WRONG_DIRECTION_RECALC.getId());
-		disableWrongDirectionRecalculation.setDescription(getString(R.string.access_disable_wrong_direction_recalc_descr));
-	}
 
 	private void setupDirectionStylePref() {
 		RelativeDirectionStyle[] relativeDirectionStyles = RelativeDirectionStyle.values();
@@ -152,9 +210,40 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 	}
 
 	@Override
+	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+		super.onBindPreferenceViewHolder(preference, holder);
+		String prefId = preference.getKey();
+		if (ACCESSIBILITY_OPTIONS.equals(prefId)) {
+			View selectableView = holder.itemView.findViewById(R.id.selectable_list_item);
+			if (selectableView != null) {
+				int color = AndroidUtils.getColorFromAttr(app, R.attr.activity_background_color);
+				int selectedColor = UiUtilities.getColorWithAlpha(getActiveProfileColor(), 0.3f);
+
+				if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+					Drawable bgDrawable = getPaintedIcon(R.drawable.rectangle_rounded, color);
+					Drawable selectable = getPaintedIcon(R.drawable.ripple_rectangle_rounded, selectedColor);
+					Drawable[] layers = {bgDrawable, selectable};
+					AndroidUtils.setBackground(selectableView, new LayerDrawable(layers));
+				} else {
+					Drawable bgDrawable = getPaintedIcon(R.drawable.rectangle_rounded, color);
+					AndroidUtils.setBackground(selectableView, bgDrawable);
+				}
+				LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) selectableView.getLayoutParams();
+				params.setMargins(params.leftMargin, AndroidUtils.dpToPx(app, 6), params.rightMargin, params.bottomMargin);
+			}
+		} else if (settings.ACCESSIBILITY_MODE.getId().equals(prefId)) {
+			ImageView imageView = (ImageView) holder.findViewById(android.R.id.icon);
+			if (imageView != null) {
+				boolean enabled = preference.isEnabled() && app.accessibilityEnabledForMode(getSelectedAppMode());
+				imageView.setEnabled(enabled);
+			}
+		}
+	}
+
+	@Override
 	public void onPreferenceChanged(String prefId) {
 		if (settings.ACCESSIBILITY_MODE.getId().equals(prefId)) {
-			updateAccessibilityOptions();
+			updateAllSettings();
 		}
 	}
 
@@ -202,8 +291,11 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 			for (int i = 0; i < screen.getPreferenceCount(); i++) {
 				Preference preference = screen.getPreference(i);
 				String prefId = preference.getKey();
-				if (!settings.ACCESSIBILITY_MODE.getId().equals(prefId) && !settings.SPEECH_RATE.getId().equals(prefId)
-						&& !RESET_TO_DEFAULT.equals(prefId) && !COPY_PLUGIN_SETTINGS.equals(prefId))
+				if (!settings.ACCESSIBILITY_MODE.getId().equals(prefId)
+						&& !settings.SPEECH_RATE.getId().equals(prefId)
+						&& !RESET_TO_DEFAULT.equals(prefId)
+						&& !COPY_PLUGIN_SETTINGS.equals(prefId)
+						&& !ACCESSIBILITY_OPTIONS.equals(prefId))
 					preference.setEnabled(accessibilityEnabled);
 			}
 		}

@@ -15,7 +15,9 @@
 		android:paddingTop="@dimen/content_padding_small"
 		android:textColor="?android:textColorSecondary"
 		android:textSize="@dimen/default_sub_text_size"
-		osmand:typeface="@string/font_roboto_regular" />
+		osmand:typeface="@string/font_roboto_regular"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:layout_marginStart="@dimen/content_padding" />
 
 	<include layout="@layout/card_top_divider" />
 

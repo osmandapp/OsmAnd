@@ -16,6 +16,7 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -54,7 +55,7 @@ public class PoiFiltersHelper {
 			UDF_CAR_AID, UDF_FOR_TOURISTS, UDF_FOOD_SHOP, UDF_FUEL, UDF_SIGHTSEEING, UDF_EMERGENCY,
 			UDF_PUBLIC_TRANSPORT, UDF_ACCOMMODATION, UDF_RESTAURANTS, UDF_PARKING
 	};
-
+	
 	public PoiFiltersHelper(OsmandApplication application) {
 		this.application = application;
 		PoiFilterDbHelper helper = openDbHelperNoPois();
@@ -170,7 +171,6 @@ public class PoiFiltersHelper {
 				PoiUIFilter lf = new PoiUIFilter(tp, application, "");
 				ArrayList<PoiUIFilter> copy = new ArrayList<>(cacheTopStandardFilters);
 				copy.add(lf);
-				Collections.sort(copy);
 				cacheTopStandardFilters = copy;
 				return lf;
 			}
@@ -179,7 +179,6 @@ public class PoiFiltersHelper {
 				PoiUIFilter lf = new PoiUIFilter(lt, application, "");
 				ArrayList<PoiUIFilter> copy = new ArrayList<>(cacheTopStandardFilters);
 				copy.add(lf);
-				Collections.sort(copy);
 				cacheTopStandardFilters = copy;
 				return lf;
 			}
@@ -235,7 +234,6 @@ public class PoiFiltersHelper {
 				PoiUIFilter f = new PoiUIFilter(t, application, "");
 				top.add(f);
 			}
-			Collections.sort(top);
 			cacheTopStandardFilters = top;
 		}
 		List<PoiUIFilter> result = new ArrayList<>();
@@ -246,6 +244,118 @@ public class PoiFiltersHelper {
 		}
 		result.add(getShowAllPOIFilter());
 		return result;
+	}
+
+	public Map<String, Integer> getPoiFilterOrders(boolean onlyActive) {
+		Map<String, Integer> filterOrders = new HashMap<>();
+		List<PoiUIFilter> sortedFilters = getSortedPoiFilters(onlyActive);
+		for (PoiUIFilter filter : sortedFilters) {
+			filterOrders.put(filter.getFilterId(), filter.getOrder());
+		}
+		return filterOrders;
+	}
+
+	public List<PoiUIFilter> getSortedPoiFilters(boolean onlyActive) {
+		initPoiUIFiltersState();
+		List<PoiUIFilter> allFilters = new ArrayList<>();
+		allFilters.addAll(getTopDefinedPoiFilters());
+		allFilters.addAll(getSearchPoiFilters());
+		Collections.sort(allFilters);
+		if (onlyActive) {
+			List<PoiUIFilter> onlyActiveFilters = new ArrayList<>();
+			for (PoiUIFilter f : allFilters) {
+				if (f.isActive()) {
+					onlyActiveFilters.add(f);
+				}
+			}
+			return onlyActiveFilters;
+		} else {
+			return allFilters;
+		}
+	}
+	
+	private void initPoiUIFiltersState() {
+		List<PoiUIFilter> allFilters = new ArrayList<>();
+		allFilters.addAll(getTopDefinedPoiFilters());
+		allFilters.addAll(getSearchPoiFilters());
+
+		refreshPoiFiltersActivation(allFilters);
+		refreshPoiFiltersOrder(allFilters);
+		
+		//set up the biggest order to custom filter
+		PoiUIFilter customFilter = getCustomPOIFilter();
+		customFilter.setActive(true);
+		customFilter.setOrder(allFilters.size());
+	}
+	
+	private void refreshPoiFiltersOrder(List<PoiUIFilter> filters) {
+		Map<String, Integer> orders = getPoiFiltersOrder();
+		List<PoiUIFilter> existedFilters = new ArrayList<>();
+		List<PoiUIFilter> newFilters = new ArrayList<>();
+		if (orders != null) {
+			//set up orders from settings
+			for (PoiUIFilter filter : filters) {
+				Integer order = orders.get(filter.getFilterId());
+				if (order != null) {
+					filter.setOrder(order);
+					existedFilters.add(filter);
+				} else {
+					newFilters.add(filter);
+				}
+			}
+			//make order values without spaces
+			Collections.sort(existedFilters);
+			for (int i = 0; i < existedFilters.size(); i++) {
+				existedFilters.get(i).setOrder(i);
+			}
+			//set up maximum orders for new poi filters
+			Collections.sort(newFilters);
+			for (PoiUIFilter filter : newFilters) {
+				filter.setOrder(existedFilters.size());
+				existedFilters.add(filter);
+			}
+		} else {
+			for (PoiUIFilter filter : filters) {
+				filter.setOrder(PoiUIFilter.INVALID_ORDER);
+			}
+		}
+	}
+	
+	private void refreshPoiFiltersActivation(List<PoiUIFilter> filters) {
+		List<String> inactiveFiltersIds = getInactivePoiFiltersIds();
+		if (inactiveFiltersIds != null) {
+			for (PoiUIFilter filter : filters) {
+				filter.setActive(!inactiveFiltersIds.contains(filter.getFilterId()));
+			}
+		} else {
+			for (PoiUIFilter filter : filters) {
+				filter.setActive(true);
+			}
+		}
+	}
+
+	public void saveFiltersOrder(List<String> filterIds) {
+		application.getSettings().POI_FILTERS_ORDER.setStringsList(filterIds);
+	}
+
+	public void saveInactiveFilters(List<String> filterIds) {
+		application.getSettings().INACTIVE_POI_FILTERS.setStringsList(filterIds);
+	}
+
+	public Map<String, Integer> getPoiFiltersOrder() {
+		List<String> ids = application.getSettings().POI_FILTERS_ORDER.getStringsList();
+		if (ids == null) {
+			return null;
+		}
+		Map<String, Integer> result = new HashMap<>();
+		for (int i = 0; i < ids.size(); i++) {
+			result.put(ids.get(i), i);
+		}
+		return result;
+	}
+	
+	public List<String> getInactivePoiFiltersIds() {
+		return application.getSettings().INACTIVE_POI_FILTERS.getStringsList();
 	}
 
 	private PoiFilterDbHelper openDbHelperNoPois() {

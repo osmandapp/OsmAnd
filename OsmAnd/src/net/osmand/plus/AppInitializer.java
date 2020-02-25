@@ -40,6 +40,7 @@ import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
+import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.render.RendererRegistry;
@@ -69,8 +70,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Random;
 
 import btools.routingapp.BRouterServiceConnection;
@@ -107,7 +110,7 @@ public class AppInitializer implements IProgress {
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED"; //$NON-NLS-1$
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
 
-	public static final String LATEST_CHANGES_URL = "https://osmand.net/blog/osmand-3-5-released";
+	public static final String LATEST_CHANGES_URL = "https://osmand.net/blog/osmand-3-6-released";
 //	public static final String LATEST_CHANGES_URL = null; // not enough to read
 	public static final int APP_EXIT_CODE = 4;
 	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
@@ -200,10 +203,18 @@ public class AppInitializer implements IProgress {
 			if (prevAppVersion < VERSION_3_5 || Version.getAppVersion(app).equals("3.5.3")
 					|| Version.getAppVersion(app).equals("3.5.4")) {
 				app.getSettings().migratePreferences();
-				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_5).commit();
-			}
-			if (prevAppVersion < VERSION_3_5 || Version.getAppVersion(app).equals("3.5.3")) {
-				app.getSettings().migrateHomeWorkParkingToFavorites();
+				addListener(new AppInitializeListener() {
+					@Override
+					public void onProgress(AppInitializer init, InitEvents event) {
+						if (event.equals(InitEvents.FAVORITES_INITIALIZED)) {
+							app.getSettings().migrateHomeWorkParkingToFavorites();
+						}
+					}
+
+					@Override
+					public void onFinish(AppInitializer init) {
+					}
+				});
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_5).commit();
 			}
 			if (prevAppVersion < VERSION_3_6) {
@@ -525,6 +536,7 @@ public class AppInitializer implements IProgress {
 		app.travelDbHelper = startupInit(app.travelDbHelper, TravelDbHelper.class);
 		app.lockHelper = startupInit(new LockHelper(app), LockHelper.class);
 		app.settingsHelper = startupInit(new SettingsHelper(app), SettingsHelper.class);
+		app.quickActionRegistry = startupInit(new QuickActionRegistry(app.getSettings()), QuickActionRegistry.class);
 
 
 		initOpeningHoursParser();
@@ -563,11 +575,13 @@ public class AppInitializer implements IProgress {
 					return app.getString(R.string.index_name_north_america);
 				} else if(WorldRegion.SOUTH_AMERICA_REGION_ID.equals(id)){
 					return app.getString(R.string.index_name_south_america);
+				} else if(WorldRegion.ANTARCTICA_REGION_ID.equals(id)){
+					return app.getString(R.string.index_name_antarctica);
 				}
 				return null;
 			}
 		});
-		app.regions.setLocale(app.getLanguage());
+		app.regions.setLocale(app.getLanguage(), app.getCountry());
 	}
 
 
@@ -591,19 +605,25 @@ public class AppInitializer implements IProgress {
 	}
 
 	public static void loadRoutingFiles(final OsmandApplication app, final LoadRoutingFilesCallback callback) {
-		new AsyncTask<Void, Void, RoutingConfiguration.Builder>() {
-			
+		new AsyncTask<Void, Void, Map<String, RoutingConfiguration.Builder>>() {
+
 			@Override
-			protected RoutingConfiguration.Builder doInBackground(Void... voids) {
+			protected Map<String, RoutingConfiguration.Builder> doInBackground(Void... voids) {
+				Map<String, String> defaultAttributes = getDefaultAttributes();
+				Map<String, RoutingConfiguration.Builder> customConfigs = new HashMap<>();
+
 				File routingFolder = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
-				RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
 				if (routingFolder.isDirectory()) {
 					File[] fl = routingFolder.listFiles();
 					if (fl != null && fl.length > 0) {
 						for (File f : fl) {
-							if (f.isFile() && f.getName().endsWith(".xml") && f.canRead()) {
+							if (f.isFile() && f.getName().endsWith(IndexConstants.ROUTING_FILE_EXT) && f.canRead()) {
 								try {
-									RoutingConfiguration.parseFromInputStream(new FileInputStream(f), f.getName(), builder);
+									String fileName = f.getName();
+									RoutingConfiguration.Builder builder = new RoutingConfiguration.Builder(defaultAttributes);
+									RoutingConfiguration.parseFromInputStream(new FileInputStream(f), fileName, builder);
+
+									customConfigs.put(fileName, builder);
 								} catch (XmlPullParserException | IOException e) {
 									throw new IllegalStateException(e);
 								}
@@ -611,15 +631,30 @@ public class AppInitializer implements IProgress {
 						}
 					}
 				}
-				return builder;
+				return customConfigs;
 			}
 
 			@Override
-			protected void onPostExecute(RoutingConfiguration.Builder builder) {
-				super.onPostExecute(builder);
-				app.updateRoutingConfig(builder);
+			protected void onPostExecute(Map<String, RoutingConfiguration.Builder> customConfigs) {
+				if (!customConfigs.isEmpty()) {
+					app.getCustomRoutingConfigs().putAll(customConfigs);
+				}
+				app.avoidSpecificRoads.initRouteObjects(false);
 				callback.onRoutingFilesLoaded();
 			}
+
+			private Map<String, String> getDefaultAttributes() {
+				Map<String, String> defaultAttributes = new HashMap<>();
+				RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
+				for (Map.Entry<String, String> entry : builder.getAttributes().entrySet()) {
+					String key = entry.getKey();
+					if (!"routerName".equals(key)) {
+						defaultAttributes.put(key, entry.getValue());
+					}
+				}
+				return defaultAttributes;
+			}
+
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
@@ -715,8 +750,7 @@ public class AppInitializer implements IProgress {
 			notifyEvent(InitEvents.RESTORE_BACKUPS);
 			app.mapMarkersHelper.syncAllGroupsAsync();
 			app.searchUICore.initSearchUICore();
-			app.avoidSpecificRoads.initRouteObjects();
-			
+
 			checkLiveUpdatesAlerts();
 			
 		} catch (RuntimeException e) {

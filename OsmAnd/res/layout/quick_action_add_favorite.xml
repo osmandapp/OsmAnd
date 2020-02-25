@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:padding="@dimen/content_padding"
             android:layout_gravity="center"
             android:text="@string/quick_action_interim_dialog"
             android:textColor="?android:textColorPrimary"
@@ -28,8 +28,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"/>
+            android:layout_marginRight="@dimen/content_padding"
+            android:layout_marginLeft="@dimen/content_padding"
+	        android:layout_marginStart="@dimen/content_padding"
+	        android:layout_marginEnd="@dimen/content_padding" />
 
     </LinearLayout>
 
@@ -45,7 +47,7 @@
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
         android:layout_gravity="top"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/content_padding"
         android:src="@drawable/bg_shadow_list_top"/>
 
     <LinearLayout
@@ -71,8 +73,8 @@
                     android:id="@+id/name_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginStart="12dp"
+                    android:layout_marginLeft="@dimen/content_padding_small"
+                    android:layout_marginStart="@dimen/content_padding_small"
                     android:layout_marginTop="2dp"
                     android:scaleType="centerInside"
                     android:tint="?attr/default_icon_color"
@@ -83,32 +85,37 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="@dimen/content_padding"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+	            android:layout_marginStart="@dimen/content_padding">
 
                 <TextView
                     android:id="@+id/name_caption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
+                    android:layout_marginLeft="@dimen/content_padding_small"
+                    android:layout_marginRight="@dimen/content_padding_small"
                     android:text="@string/shared_string_name"
                     android:textColor="?android:textColorSecondary"
-                    android:textSize="@dimen/default_sub_text_size"/>
+                    android:textSize="@dimen/default_sub_text_size"
+	                android:layout_marginEnd="@dimen/content_padding_small"
+	                android:layout_marginStart="@dimen/content_padding_small" />
 
                 <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/name_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="@dimen/content_padding_half"
+                    android:layout_marginRight="@dimen/content_padding"
+                    android:layout_marginTop="@dimen/content_padding_half"
                     android:imeOptions="actionDone"
                     android:inputType="text"
                     android:textColor="?android:textColorPrimary"
                     android:textColorHint="?android:textColorSecondary"
-                    tools:text="@string/shared_string_name"/>
+                    tools:text="@string/shared_string_name"
+	                android:layout_marginStart="@dimen/content_padding_half"
+	                android:layout_marginEnd="@dimen/content_padding" />
 
             </LinearLayout>
 
@@ -118,18 +125,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="68dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginRight="@dimen/content_padding"
             android:text="@string/quick_action_fav_name_descr"
             android:textColor="?android:textColorSecondary"
             android:textSize="@dimen/default_sub_text_size"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="@dimen/content_padding"
+	        android:layout_marginStart="68dp"
+	        android:layout_marginEnd="@dimen/content_padding" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="@dimen/content_padding"
             android:background="@color/shadow_color"
-            android:layout_marginLeft="68dp"/>
+            android:layout_marginLeft="68dp"
+	        android:layout_marginStart="68dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -146,8 +156,8 @@
                     android:id="@+id/category_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginStart="12dp"
+                    android:layout_marginLeft="@dimen/content_padding_small"
+                    android:layout_marginStart="@dimen/content_padding_small"
                     android:layout_marginTop="2dp"
                     android:scaleType="centerInside"
                     android:tint="?attr/default_icon_color"
@@ -158,31 +168,37 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="@dimen/content_padding"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+	            android:layout_marginStart="@dimen/content_padding">
 
                 <TextView
                     android:id="@+id/category_caption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
+                    android:layout_marginLeft="@dimen/content_padding_small"
+                    android:layout_marginRight="@dimen/content_padding_small"
                     android:text="@string/favourites_edit_dialog_category"
                     android:textColor="?android:textColorSecondary"
-                    android:textSize="@dimen/default_sub_text_size"/>
+                    android:textSize="@dimen/default_sub_text_size"
+	                android:layout_marginStart="@dimen/content_padding_small"
+	                android:layout_marginEnd="@dimen/content_padding_small" />
 
                 <net.osmand.plus.widgets.AutoCompleteTextViewEx
                     android:id="@+id/category_edit"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="@dimen/content_padding_half"
+                    android:layout_marginRight="@dimen/content_padding"
+                    android:layout_marginTop="@dimen/content_padding_half"
                     android:focusable="false"
                     android:text="@string/shared_string_favorites"
                     android:drawableRight="@drawable/ic_action_arrow_drop_down"
-                    android:editable="false"/>
+                    android:editable="false"
+	                android:layout_marginEnd="@dimen/content_padding"
+	                android:layout_marginStart="@dimen/content_padding_half"
+	                android:drawableEnd="@drawable/ic_action_arrow_drop_down" />
 
             </LinearLayout>
 
@@ -192,11 +208,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="68dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginRight="@dimen/content_padding"
             android:text="@string/quick_action_category_descr"
             android:textColor="?android:textColorSecondary"
             android:textSize="@dimen/default_sub_text_size"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="@dimen/content_padding"
+	        android:layout_marginEnd="@dimen/content_padding"
+	        android:layout_marginStart="68dp" />
 
     </LinearLayout>
 

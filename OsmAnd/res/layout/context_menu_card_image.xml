@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:padding="16dp"
+            android:padding="@dimen/content_padding"
             android:background="?attr/bg_color"
             android:textColor="?attr/color_dialog_buttons"
             android:textSize="@dimen/default_list_text_size"
@@ -39,23 +39,26 @@
             android:layout_marginLeft="10dp"
             android:visibility="gone"
             tools:src="@drawable/ic_action_photo_dark"
-            tools:visibility="visible"/>
+            tools:visibility="visible"
+	        android:layout_marginStart="10dp" />
 
         <TextView
             android:id="@+id/watermark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
+            android:layout_gravity="bottom|end"
             android:paddingLeft="4dp"
             android:paddingTop="4dp"
-            android:paddingRight="8dp"
-            android:paddingBottom="8dp"
+            android:paddingRight="@dimen/content_padding_half"
+            android:paddingBottom="@dimen/content_padding_half"
             android:background="@color/map_widget_dark"
             android:textColor="@color/color_white"
             android:textSize="@dimen/default_sub_text_size"
             android:visibility="gone"
             tools:text="\@user123"
-            tools:visibility="visible"/>
+            tools:visibility="visible"
+	        android:paddingStart="4dp"
+	        android:paddingEnd="@dimen/content_padding_half" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/button"
@@ -63,14 +66,16 @@
             android:layout_height="40dp"
             android:background="@drawable/blue_button_drawable"
             android:layout_gravity="bottom|center_horizontal"
-            android:drawablePadding="8dp"
+            android:drawablePadding="@dimen/content_padding_half"
             android:paddingLeft="14dp"
             android:paddingRight="14dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="@dimen/content_padding"
             android:textColor="@color/color_white"
             android:visibility="gone"
             tools:visibility="visible"
-            tools:text="Button"/>
+            tools:text="Button"
+	        android:paddingStart="14dp"
+	        android:paddingEnd="14dp" />
 
         <ProgressBar
             android:id="@+id/progress"

@@ -288,7 +288,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	public void controlDialog(final Activity activity, final boolean showTrackSelection) {
 		final boolean wasTrackMonitored = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
-		boolean nightMode;
+		final boolean nightMode;
 		if (activity instanceof MapActivity) {
 			nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		} else {
@@ -310,6 +310,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		}
 		if (app.getSavingTrackHelper().hasDataToSave()) {
 			items.add(R.string.save_current_track);
+			items.add(R.string.clear_recorded_data);
 		}
 		String[] strings = new String[items.size()];
 		for (int i = 0; i < strings.length; i++) {
@@ -326,6 +327,18 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 					if (app.getLocationProvider().checkGPSEnabled(activity)) {
 						startGPXMonitoring(activity, showTrackSelection);
 					}
+				} else if (item == R.string.clear_recorded_data) {
+					AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
+					builder.setTitle(R.string.clear_recorded_data);
+					builder.setMessage(R.string.are_you_sure);
+					builder.setNegativeButton(R.string.shared_string_cancel, null).setPositiveButton(
+							R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									app.getSavingTrackHelper().clearRecordedData(true);
+								}
+							});
+					builder.show();
 				} else if(item == R.string.gpx_monitoring_stop) {
 					stopRecording();
 				} else if(item == R.string.gpx_start_new_segment) {
@@ -338,12 +351,12 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 					showIntervalChooseDialog(activity, app.getString(R.string.live_monitoring_interval) + " : %s",
 							app.getString(R.string.save_track_to_gpx_globally), SECONDS, MINUTES,
 							null, vs, showTrackSelection, new OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							settings.LIVE_MONITORING_INTERVAL.set(vs.value);
-							settings.LIVE_MONITORING.set(true);
-						}
-					});
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									settings.LIVE_MONITORING_INTERVAL.set(vs.value);
+									settings.LIVE_MONITORING.set(true);
+								}
+							});
 				}
 				if (monitoringControl != null) {
 					monitoringControl.updateInfo(null);

@@ -107,7 +107,7 @@
     <string name="poi_musical_instrument">樂器行</string>
     <string name="poi_newsagent">書報攤</string>
     <string name="poi_optician">驗光師</string>
-    <string name="poi_organic">有機食品</string>
+    <string name="poi_organic">有機產品</string>
     <string name="poi_outdoor">戶外用品店</string>
     <string name="poi_paint">油漆店</string>
     <string name="poi_pet">寵物店</string>
@@ -3784,4 +3784,11 @@
     <string name="poi_volcano_status_inactive">不活躍火山</string>
     <string name="poi_volcano_number_of_eruptions">噴發次數</string>
     <string name="poi_memorial_ghost_bike">幽靈單車</string>
+    <string name="poi_paintball">漆彈</string>
+    <string name="poi_mountain_rescue">山區救援</string>
+    <string name="poi_shop_security">安全商店</string>
+    <string name="poi_bowling_alley">保齡球館</string>
+    <string name="poi_piste_ref">滑雪道參考編號</string>
+    <string name="poi_resort_hunting">狩獵基地</string>
+    <string name="poi_dive_centre">水肺潛水中心</string>
 </resources>

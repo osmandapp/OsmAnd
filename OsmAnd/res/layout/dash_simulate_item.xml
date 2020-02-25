@@ -25,7 +25,8 @@
             android:layout_marginLeft="@dimen/local_index_check_right_margin"
             android:layout_marginTop="@dimen/favorites_icon_top_margin"
             android:focusable="false"
-            android:visibility="gone" />
+            android:visibility="gone"
+	        android:layout_marginStart="@dimen/local_index_check_right_margin" />
 
         <ImageView
             android:id="@+id/icon"
@@ -34,7 +35,8 @@
             android:layout_marginLeft="@dimen/list_content_padding"
             android:layout_marginTop="@dimen/favorites_icon_top_margin"
             android:src="@drawable/ic_gpx_track"
-            android:visibility="gone" />
+            android:visibility="gone"
+	        android:layout_marginStart="@dimen/list_content_padding" />
 
         <TextView
             android:id="@+id/name"
@@ -46,7 +48,9 @@
 			android:layout_marginLeft="@dimen/subHeaderMarginLeft"
 			android:layout_marginRight="@dimen/showAllButtonMarginRight"
 			android:layout_weight="1"
-            tools:text="@string/validate_gpx_upload_name_pwd" />
+            tools:text="@string/validate_gpx_upload_name_pwd"
+	        android:layout_marginEnd="@dimen/showAllButtonMarginRight"
+	        android:layout_marginStart="@dimen/subHeaderMarginLeft" />
 
         <ImageButton
             android:id="@+id/stop"

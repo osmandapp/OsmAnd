@@ -650,8 +650,8 @@
     <string name="filter_current_poiButton">Szűrő</string>
     <string name="edit_filter_save_as_menu_item">Mentés más néven</string>
     <string name="edit_filter_delete_dialog_title">Törli ezt a szűrőt\?</string>
-    <string name="edit_filter_delete_message">{0} szűrő törölve</string>
-    <string name="edit_filter_create_message">{0} szűrő létrehozva</string>
+    <string name="edit_filter_delete_message">%1$s szűrő törölve</string>
+    <string name="edit_filter_create_message">%1$s szűrő létrehozva</string>
     <string name="offline_navigation_not_available">Az OsmAnd offline navigációja átmenetileg nem elérhető.</string>
     <string name="left_side_navigation">Bal oldali közlekedés</string>
     <string name="left_side_navigation_descr">Azon országok számára, ahol a járművek az út bal oldalán haladnak.</string>
@@ -3448,4 +3448,15 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="select_nav_icon_descr">Az ikon csak navigáció vagy mozgás közben lesz látható.</string>
     <string name="select_map_icon_descr">A térképikon csak a térképen jelenik meg, navigáció közben pedig navigációs ikonra vált.</string>
     <string name="logcat_buffer_descr">Az alkalmazás részletes naplóinak ellenőrzése és megosztása</string>
+    <string name="permission_is_required">A beállítás használatához engedélyre van szükség.</string>
+    <string name="rearrange_categories">Kategóriák átrendezése</string>
+    <string name="create_custom_categories_list_promo">Hozzáadhat egyedi kategóriát, elrejtheti a fölöslegesnek ítélt kategóriákat, és módosíthatja a lista sorrendjét. A lista a profilokkal importálható és exportálható.</string>
+    <string name="add_new_custom_category_button_promo">Egy vagy több szükséges kategória kijelölésével hozzáadhat egy egyedi kategóriát.</string>
+    <string name="shared_string_available">Rendelkezésre áll</string>
+    <string name="add_custom_category">Egyedi kategória hozzáadása</string>
+    <string name="rendering_attr_streetLightingNight_name">Csak éjszaka jelenjék meg</string>
+    <string name="plugin_prefs_reset_successful">Minden bővítménybeállítás visszaállt az alapértelmezett helyzetbe.</string>
+    <string name="profile_prefs_reset_successful">Minden profilbeállítás visszaállt az alapértelmezett helyzetbe.</string>
+    <string name="sunset_at">Napnyugta: %1$s</string>
+    <string name="sunrise_at">Napkelte: %1$s</string>
 </resources>

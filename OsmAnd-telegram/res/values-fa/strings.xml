@@ -29,7 +29,7 @@
     <string name="shared_string_all">همه</string>
     <string name="shared_string_off">خاموش</string>
     <string name="shared_string_install">نصب</string>
-    <string name="shared_string_share">اشتراک‌گذاری</string>
+    <string name="shared_string_share">هم‌رسانی</string>
     <string name="shared_string_back">عقب</string>
     <string name="shared_string_continue">ادامه</string>
     <string name="shared_string_cancel">لغو</string>
@@ -38,8 +38,8 @@
     <string name="yard">yd</string>
     <string name="foot">ft</string>
     <string name="mile">mi</string>
-    <string name="km">ک‌م</string>
-    <string name="m">متر</string>
+    <string name="km">km</string>
+    <string name="m">m</string>
     <string name="nm">nmi</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>

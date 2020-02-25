@@ -50,7 +50,8 @@
             android:scaleType="centerInside"
             app:tint="?attr/app_bar_primary_item_color"
             android:layout_marginTop="24dp"
-            android:src="@drawable/ic_action_flag_dark" />
+            android:src="@drawable/ic_action_flag_dark"
+	        android:layout_marginStart="16dp" />
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/name"
@@ -66,7 +67,10 @@
             android:layout_marginLeft="-4dp"
             android:layout_marginRight="16dp"
             android:layout_alignLeft="@+id/title"
-            android:layout_below="@+id/title"/>
+            android:layout_below="@+id/title"
+	        android:layout_alignStart="@+id/title"
+	        android:layout_marginEnd="16dp"
+	        android:layout_marginStart="-4dp" />
 
         <TextView
             android:id="@+id/title"
@@ -80,7 +84,9 @@
             android:maxLines="1"
             android:layout_marginLeft="32dp"
             android:layout_toEndOf="@+id/image"
-            android:layout_toRightOf="@+id/image" />
+            android:layout_toRightOf="@+id/image"
+	        android:layout_marginEnd="16dp"
+	        android:layout_marginStart="32dp" />
 
     </RelativeLayout>
 

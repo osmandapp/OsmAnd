@@ -11,6 +11,7 @@ import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.StatFs;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -27,6 +28,7 @@ import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
@@ -52,6 +54,7 @@ import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_I
 import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_MACRO;
 import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
 import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.cameraPictureSizeDefault;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
 public class MultimediaNotesFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
 
@@ -59,6 +62,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 
 	private static final Log log = PlatformUtil.getLog(MultimediaNotesFragment.class);
 
+	private static final String OPEN_NOTES_DESCRIPTION = "open_notes_description";
 	private static final String CAMERA_PERMISSION = "camera_permission";
 	private static final String COPY_PLUGIN_SETTINGS = "copy_plugin_settings";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
@@ -113,14 +117,14 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	private void setupExternalPhotoCamPref(Camera cam, AudioVideoNotesPlugin plugin) {
 		SwitchPreferenceEx externalPhotoCam = (SwitchPreferenceEx) findPreference(plugin.AV_EXTERNAL_PHOTO_CAM.getId());
 		externalPhotoCam.setDescription(getString(R.string.av_use_external_camera_descr));
-		externalPhotoCam.setIcon(getActiveIcon(R.drawable.ic_action_photo_dark));
+		externalPhotoCam.setIcon(getPersistentPrefIcon(R.drawable.ic_action_photo_dark));
 		externalPhotoCam.setEnabled(cam != null);
 	}
 
 	private void setupCameraPictureSizePref(Camera cam, AudioVideoNotesPlugin plugin) {
 		ListPreferenceEx cameraPictureSize = (ListPreferenceEx) findPreference(plugin.AV_CAMERA_PICTURE_SIZE.getId());
 		cameraPictureSize.setDescription(R.string.av_camera_pic_size_descr);
-		cameraPictureSize.setIcon(getActiveIcon(R.drawable.ic_action_picture_size));
+		cameraPictureSize.setIcon(getPersistentPrefIcon(R.drawable.ic_action_picture_size));
 
 		if (cam == null) {
 			cameraPictureSize.setEnabled(false);
@@ -192,7 +196,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	private void setupCameraFocusTypePref(Camera cam, AudioVideoNotesPlugin plugin) {
 		ListPreferenceEx cameraFocusType = (ListPreferenceEx) findPreference(plugin.AV_CAMERA_FOCUS_TYPE.getId());
 		cameraFocusType.setDescription(R.string.av_camera_focus_descr);
-		cameraFocusType.setIcon(getActiveIcon(R.drawable.ic_action_camera_focus));
+		cameraFocusType.setIcon(getPersistentPrefIcon(R.drawable.ic_action_camera_focus));
 
 		if (cam == null) {
 			cameraFocusType.setEnabled(false);
@@ -241,9 +245,13 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	}
 
 	private void setupPhotoPlaySoundPref(Camera cam, AudioVideoNotesPlugin plugin) {
+		Drawable disabled = getContentIcon(R.drawable.ic_action_music_off);
+		Drawable enabled = getActiveIcon(R.drawable.ic_type_audio);
+		Drawable icon = getPersistentPrefIcon(enabled, disabled);
+
 		SwitchPreferenceEx photoPlaySound = (SwitchPreferenceEx) findPreference(plugin.AV_PHOTO_PLAY_SOUND.getId());
 		photoPlaySound.setDescription(getString(R.string.av_photo_play_sound_descr));
-		photoPlaySound.setIcon(getContentIcon(R.drawable.ic_action_music_off));
+		photoPlaySound.setIcon(icon);
 		photoPlaySound.setEnabled(cam != null);
 	}
 
@@ -270,7 +278,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	private void setupExternalRecorderPref(AudioVideoNotesPlugin plugin) {
 		SwitchPreferenceEx externalRecorder = (SwitchPreferenceEx) findPreference(plugin.AV_EXTERNAL_RECORDER.getId());
 		externalRecorder.setDescription(getString(R.string.av_use_external_recorder_descr));
-		externalRecorder.setIcon(getContentIcon(R.drawable.ic_action_video_dark));
+		externalRecorder.setIcon(getPersistentPrefIcon(R.drawable.ic_action_video_dark));
 	}
 
 	private void setupVideoQualityPref(AudioVideoNotesPlugin plugin) {
@@ -308,7 +316,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		videoQuality.setEntries(entries);
 		videoQuality.setEntryValues(entryValues);
 		videoQuality.setDescription(R.string.av_video_quality_descr);
-		videoQuality.setIcon(getContentIcon(R.drawable.ic_action_picture_size));
+		videoQuality.setIcon(getActiveIcon(R.drawable.ic_action_picture_size));
 	}
 
 	private void setupRecorderSplitPref(AudioVideoNotesPlugin plugin) {
@@ -366,23 +374,29 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 			storageSize.setEntries(entries);
 			storageSize.setEntryValues(entryValues);
 			storageSize.setDescription(R.string.rec_split_storage_size_desc);
-			storageSize.setIcon(getContentIcon(R.drawable.ic_sdcard));
+			storageSize.setIcon(getActiveIcon(R.drawable.ic_sdcard));
 		} else {
 			storageSize.setVisible(false);
 		}
 	}
 
 	private void setupOpenNotesDescrPref() {
-		String multimediaNotesPath = getString(R.string.multimedia_notes_view_path);
+		String menu = getString(R.string.shared_string_menu);
+		String myPlaces = getString(R.string.shared_string_my_places);
+		String notes = getString(R.string.notes);
+		String multimediaNotesPath = getString(R.string.ltr_or_rtl_triple_combine_via_dash, menu, myPlaces, notes);
 		String multimediaNotesPathDescr = getString(R.string.multimedia_notes_view_descr, multimediaNotesPath);
 
+		Preference osmEditsDescription = findPreference(OPEN_NOTES_DESCRIPTION);
 		int startIndex = multimediaNotesPathDescr.indexOf(multimediaNotesPath);
-		SpannableString titleSpan = new SpannableString(multimediaNotesPathDescr);
-		Typeface typeface = FontCache.getRobotoMedium(getContext());
-		titleSpan.setSpan(new CustomTypefaceSpan(typeface), startIndex, startIndex + multimediaNotesPath.length(), 0);
-
-		Preference osmEditsDescription = findPreference("open_notes_description");
-		osmEditsDescription.setTitle(titleSpan);
+		if (startIndex != -1) {
+			SpannableString titleSpan = new SpannableString(multimediaNotesPathDescr);
+			Typeface typeface = FontCache.getRobotoMedium(getContext());
+			titleSpan.setSpan(new CustomTypefaceSpan(typeface), startIndex, startIndex + multimediaNotesPath.length(), 0);
+			osmEditsDescription.setTitle(titleSpan);
+		} else {
+			osmEditsDescription.setTitle(multimediaNotesPathDescr);
+		}
 	}
 
 	private void setupOpenNotesPref() {
@@ -404,10 +418,13 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
 		if (OPEN_NOTES.equals(prefId)) {
+			Bundle bundle = new Bundle();
+			bundle.putInt(TAB_ID, NOTES_TAB);
+
 			OsmAndAppCustomization appCustomization = app.getAppCustomization();
 			Intent favorites = new Intent(preference.getContext(), appCustomization.getFavoritesActivity());
 			favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-			app.getSettings().FAVORITES_TAB.set(NOTES_TAB);
+			favorites.putExtra(MapActivity.INTENT_PARAMS, bundle);
 			startActivity(favorites);
 			return true;
 		} else if (COPY_PLUGIN_SETTINGS.equals(prefId)) {
@@ -438,7 +455,8 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	@Override
 	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
-		if (CAMERA_PERMISSION.equals(preference.getKey())) {
+		String prefId = preference.getKey();
+		if (CAMERA_PERMISSION.equals(prefId)) {
 			View selectableView = holder.itemView.findViewById(R.id.selectable_list_item);
 			if (selectableView != null) {
 				int color = AndroidUtils.getColorFromAttr(app, R.attr.activity_background_color);
@@ -454,6 +472,9 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 					AndroidUtils.setBackground(selectableView, bgDrawable);
 				}
 			}
+		} else if (OPEN_NOTES_DESCRIPTION.equals(prefId)) {
+			int minHeight = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_list_item_height);
+			holder.itemView.setMinimumHeight(minHeight);
 		}
 	}
 

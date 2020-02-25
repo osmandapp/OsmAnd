@@ -58,7 +58,9 @@
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     android:text="@string/shared_string_skip"
-                    android:textColor="@color/active_color_primary_light"/>
+                    android:textColor="@color/active_color_primary_light"
+	                android:paddingEnd="16dp"
+	                android:paddingStart="16dp" />
 
             </LinearLayout>
 
@@ -72,7 +74,9 @@
                 android:minHeight="106dp"
                 android:text="@string/first_usage_wizard_desc"
                 android:textColor="?android:attr/textColorPrimary"
-                android:textSize="@dimen/default_list_text_size"/>
+                android:textSize="@dimen/default_list_text_size"
+	            android:layout_marginStart="54dp"
+	            android:layout_marginEnd="54dp" />
 
             <android.support.v7.widget.CardView
                 android:id="@+id/no_location_card"
@@ -83,7 +87,9 @@
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="24dp"
                 android:visibility="gone"
-                osmand:cardBackgroundColor="@color/color_white">
+                osmand:cardBackgroundColor="@color/color_white"
+	            android:layout_marginEnd="40dp"
+	            android:layout_marginStart="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -117,7 +123,8 @@
                                 android:layout_marginRight="14dp"
                                 android:gravity="center_vertical"
                                 android:minHeight="35dp"
-                                android:orientation="vertical">
+                                android:orientation="vertical"
+	                            android:layout_marginEnd="14dp">
 
                                 <TextView
                                     android:id="@+id/no_location_title"
@@ -161,7 +168,9 @@
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="24dp"
                 android:visibility="gone"
-                osmand:cardBackgroundColor="@color/color_white">
+                osmand:cardBackgroundColor="@color/color_white"
+	            android:layout_marginEnd="40dp"
+	            android:layout_marginStart="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -195,7 +204,8 @@
                                 android:layout_marginRight="14dp"
                                 android:gravity="center_vertical"
                                 android:minHeight="35dp"
-                                android:orientation="vertical">
+                                android:orientation="vertical"
+	                            android:layout_marginEnd="14dp">
 
                                 <TextView
                                     android:id="@+id/no_inet_title"
@@ -248,7 +258,9 @@
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="24dp"
                 android:visibility="gone"
-                osmand:cardBackgroundColor="@color/color_white">
+                osmand:cardBackgroundColor="@color/color_white"
+	            android:layout_marginEnd="40dp"
+	            android:layout_marginStart="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -271,7 +283,8 @@
                                 android:layout_width="32dp"
                                 android:layout_height="32dp"
                                 android:layout_marginRight="8dp"
-                                android:indeterminate="true"/>
+                                android:indeterminate="true"
+	                            android:layout_marginEnd="8dp" />
 
                         </LinearLayout>
 
@@ -288,7 +301,8 @@
                                 android:layout_marginRight="14dp"
                                 android:gravity="center_vertical"
                                 android:minHeight="35dp"
-                                android:orientation="vertical">
+                                android:orientation="vertical"
+	                            android:layout_marginEnd="14dp">
 
                                 <TextView
                                     android:id="@+id/search_location_title"
@@ -328,7 +342,9 @@
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="24dp"
                 android:visibility="gone"
-                osmand:cardBackgroundColor="@color/color_white">
+                osmand:cardBackgroundColor="@color/color_white"
+	            android:layout_marginEnd="40dp"
+	            android:layout_marginStart="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -351,7 +367,8 @@
                                 android:layout_width="32dp"
                                 android:layout_height="32dp"
                                 android:layout_marginRight="8dp"
-                                android:indeterminate="true"/>
+                                android:indeterminate="true"
+	                            android:layout_marginEnd="8dp" />
 
                         </LinearLayout>
 
@@ -368,7 +385,8 @@
                                 android:layout_marginRight="14dp"
                                 android:gravity="center_vertical"
                                 android:minHeight="35dp"
-                                android:orientation="vertical">
+                                android:orientation="vertical"
+	                            android:layout_marginEnd="14dp">
 
                                 <TextView
                                     android:id="@+id/search_map_title"
@@ -408,7 +426,9 @@
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="24dp"
                 android:visibility="gone"
-                osmand:cardBackgroundColor="@color/color_white">
+                osmand:cardBackgroundColor="@color/color_white"
+	            android:layout_marginStart="40dp"
+	            android:layout_marginEnd="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -442,7 +462,8 @@
                                 android:layout_marginRight="14dp"
                                 android:gravity="center_vertical"
                                 android:minHeight="35dp"
-                                android:orientation="vertical">
+                                android:orientation="vertical"
+	                            android:layout_marginEnd="14dp">
 
                                 <TextView
                                     android:id="@+id/map_download_title"
@@ -492,7 +513,9 @@
                 android:paddingRight="16dp"
                 android:text="@string/search_another_country"
                 android:textColor="@color/active_color_primary_light"
-                android:visibility="gone"/>
+                android:visibility="gone"
+	            android:paddingEnd="16dp"
+	            android:paddingStart="16dp" />
 
             <android.support.v7.widget.CardView
                 android:id="@+id/map_downloading_card"
@@ -504,7 +527,9 @@
                 android:layout_marginTop="24dp"
                 android:visibility="gone"
                 osmand:cardBackgroundColor="@color/color_white"
-                tools:visibility="visible">
+                tools:visibility="visible"
+	            android:layout_marginEnd="40dp"
+	            android:layout_marginStart="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -682,7 +707,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+	                    android:layout_marginStart="16dp">
 
                         <TextView
                             android:id="@+id/storage_title"
@@ -731,7 +757,9 @@
                         android:paddingLeft="16dp"
                         android:paddingRight="16dp"
                         android:text="@string/shared_string_change"
-                        android:textColor="@color/active_color_primary_light"/>
+                        android:textColor="@color/active_color_primary_light"
+	                    android:paddingEnd="16dp"
+	                    android:paddingStart="16dp" />
 
                 </LinearLayout>
 

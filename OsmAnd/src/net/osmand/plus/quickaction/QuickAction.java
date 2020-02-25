@@ -41,7 +41,7 @@ public class QuickAction {
         this.type = type;
     }
 
-    protected QuickAction(int type) {
+    public QuickAction(int type) {
         this.id = System.currentTimeMillis();
         this.type = type;
         this.nameRes = QuickActionFactory.getActionName(type);
@@ -157,5 +157,8 @@ public class QuickAction {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }
-}
 
+    public boolean hasCustomName(Context context) {
+        return !getName(context).equals(context.getString(nameRes));
+    }
+}

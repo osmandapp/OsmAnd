@@ -792,8 +792,8 @@
   
   <string name="edit_filter_save_as_menu_item">ჩაწერა როგორც</string>
   <string name="edit_filter_delete_dialog_title">წავშალო მონიშნული ფილტრი?</string>
-  <string name="edit_filter_delete_message">წაიშალა ფილტრი {0}</string>
-  <string name="edit_filter_create_message">შეიქმნა ფილტრი {0}</string>
+  <string name="edit_filter_delete_message">წაიშალა ფილტრი %1$s</string>
+  <string name="edit_filter_create_message">შეიქმნა ფილტრი %1$s</string>
   
   <string name="local_index_routing_data">გზის მონაცემები</string>
   <string name="navigate_point_format">ფორმატი:</string>

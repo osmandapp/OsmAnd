@@ -3,6 +3,7 @@ package net.osmand.plus.quickaction;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -73,6 +75,10 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
             }
         });
 
+        if (Build.VERSION.SDK_INT >= 21) {
+            AndroidUtils.addStatusBarPadding21v(getContext(), view);
+        }
+
         return view;
     }
 
@@ -80,7 +86,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        quickActionRegistry = getMapActivity().getMapLayers().getQuickActionRegistry();
+        quickActionRegistry = getMyApplication().getQuickActionRegistry();
 
         setUpToolbar(view);
         setUpQuickActionRV();
@@ -143,11 +149,6 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
         getMapActivity().enableDrawer();
         quickActionRegistry.setUpdatesListener(null);
-    }
-
-    @Override
-    protected boolean isFullScreenAllowed() {
-        return false;
     }
 
     @Override

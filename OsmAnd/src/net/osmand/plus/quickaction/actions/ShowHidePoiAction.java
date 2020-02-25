@@ -283,10 +283,7 @@ public class ShowHidePoiAction extends QuickAction {
 
 		final List<PoiUIFilter> list = new ArrayList<>();
 
-		for (PoiUIFilter f : poiFilters.getTopDefinedPoiFilters()) {
-			addFilterToList(adapter, list, f);
-		}
-		for (PoiUIFilter f : poiFilters.getSearchPoiFilters()) {
+		for (PoiUIFilter f : poiFilters.getSortedPoiFilters(true)) {
 			addFilterToList(adapter, list, f);
 		}
 

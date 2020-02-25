@@ -15,6 +15,7 @@ import android.provider.OpenableColumns;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.style.ForegroundColorSpan;
@@ -50,12 +51,12 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.settings.ImportSettingsFragment;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -182,7 +183,7 @@ public class ImportHelper {
 		} else if (fileName != null && fileName.endsWith(IndexConstants.SQLITE_EXT)) {
 			handleSqliteTileImport(intentUri, fileName);
 		} else if (fileName != null && fileName.endsWith(OSMAND_SETTINGS_FILE_EXT)) {
-			handleOsmAndSettingsImport(intentUri, fileName, extras, null);
+			handleOsmAndSettingsImport(intentUri, fileName, extras, true, null);
 		} else if (fileName != null && fileName.endsWith(ROUTING_FILE_EXT)) {
 			handleRoutingFileImport(intentUri, fileName, null);
 		} else {
@@ -606,7 +607,7 @@ public class ImportHelper {
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public void chooseFileToImport(final ImportType importType, final CallbackWithObject callback) {
+	public void chooseFileToImport(final ImportType importType, final boolean askBeforeImport, final CallbackWithObject callback) {
 		final MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return;
@@ -644,7 +645,7 @@ public class ImportHelper {
 					
 					if (fileName.endsWith(importType.getExtension())) {
 						if (importType.equals(ImportType.SETTINGS)) {
-							handleOsmAndSettingsImport(data, fileName, resultData.getExtras(), callback);
+							handleOsmAndSettingsImport(data, fileName, resultData.getExtras(), askBeforeImport, callback);
 						} else if (importType.equals(ImportType.ROUTING)){
 							handleRoutingFileImport(data, fileName, callback);
 						}
@@ -661,7 +662,7 @@ public class ImportHelper {
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	private void handleRoutingFileImport(final Uri uri, final String fileName, final CallbackWithObject<String> callback) {
+	private void handleRoutingFileImport(final Uri uri, final String fileName, final CallbackWithObject<RoutingConfiguration.Builder> callback) {
 		final AsyncTask<Void, Void, String> routingImportTask = new AsyncTask<Void, Void, String>() {
 			
 			String mFileName;
@@ -698,11 +699,11 @@ public class ImportHelper {
 							if (isActivityNotDestroyed(activity)) {
 								progress.dismiss();
 							}
-							String profileKey = app.getRoutingConfig().getRoutingProfileKeyByFileName(mFileName);
-							if (profileKey != null) {
+							RoutingConfiguration.Builder builder = app.getCustomRoutingConfig(mFileName);
+							if (builder != null) {
 								app.showShortToastMessage(app.getString(R.string.file_imported_successfully, mFileName));
 								if (callback != null) {
-									callback.processResult(profileKey);
+									callback.processResult(builder);
 								}
 							} else {
 								app.showToastMessage(app.getString(R.string.file_does_not_contain_routing_rules, mFileName));
@@ -733,20 +734,19 @@ public class ImportHelper {
 		}
 	}
 	
-	private void handleOsmAndSettingsImport(Uri intentUri, String fileName, Bundle extras, 
-	                                        CallbackWithObject<List<SettingsHelper.SettingsItem>> callback) {
+	private void handleOsmAndSettingsImport(Uri intentUri, String fileName, Bundle extras, boolean askBeforeImport, CallbackWithObject<List<SettingsHelper.SettingsItem>> callback) {
 		if (extras != null && extras.containsKey(SettingsHelper.SETTINGS_VERSION_KEY) && extras.containsKey(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY)) {
 			int version = extras.getInt(SettingsHelper.SETTINGS_VERSION_KEY, -1);
 			String latestChanges = extras.getString(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY);
-			handleOsmAndSettingsImport(intentUri, fileName, latestChanges, version, callback);
+			handleOsmAndSettingsImport(intentUri, fileName, latestChanges, version, askBeforeImport, callback);
 		} else {
-			handleOsmAndSettingsImport(intentUri, fileName, null, -1, callback);
+			handleOsmAndSettingsImport(intentUri, fileName, null, -1, askBeforeImport, callback);
 		}
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	private void handleOsmAndSettingsImport(final Uri uri, final String name, final String latestChanges, final int version, 
-	                                        final CallbackWithObject<List<SettingsHelper.SettingsItem>> callback) {
+	private void handleOsmAndSettingsImport(final Uri uri, final String name, final String latestChanges, final int version,
+	                                        final boolean askBeforeImport, final CallbackWithObject<List<SettingsHelper.SettingsItem>> callback) {
 		final AsyncTask<Void, Void, String> settingsImportTask = new AsyncTask<Void, Void, String>() {
 
 			ProgressDialog progress;
@@ -769,20 +769,20 @@ public class ImportHelper {
 			@Override
 			protected void onPostExecute(String error) {
 				File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
-				File file = new File(tempDir, name);
+				final File file = new File(tempDir, name);
 				if (error == null && file.exists()) {
-					app.getSettingsHelper().importSettings(file, latestChanges, version, new SettingsImportListener() {
+					app.getSettingsHelper().importSettings(file, latestChanges, version, askBeforeImport, new SettingsImportListener() {
 						@Override
 						public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
 							if (isActivityNotDestroyed(activity)) {
 								progress.dismiss();
 							}
 							if (succeed) {
-								app.showShortToastMessage(app.getString(R.string.file_imported_successfully, name));
-								if (callback != null) {
-									callback.processResult(items);
+								FragmentManager fragmentManager = activity.getSupportFragmentManager();
+								if (fragmentManager != null) {
+									ImportSettingsFragment.showInstance(fragmentManager, items, file);
 								}
-							} else if (!empty) {
+							} else {
 								app.showShortToastMessage(app.getString(R.string.file_import_error, name, app.getString(R.string.shared_string_unexpected_error)));
 							}
 						}

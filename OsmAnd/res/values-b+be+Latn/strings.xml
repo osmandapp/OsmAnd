@@ -1390,8 +1390,8 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="filter_current_poiButton">Fіltravać</string>
     <string name="edit_filter_save_as_menu_item">Zachavać jak</string>
     <string name="edit_filter_delete_dialog_title">Vydalić abrany fіltr?</string>
-    <string name="edit_filter_delete_message">Fіltr {0} byŭ vydaleny</string>
-    <string name="edit_filter_create_message">Fіltr {0} byŭ stvorany</string>
+    <string name="edit_filter_delete_message">Fіltr %1$s byŭ vydaleny</string>
+    <string name="edit_filter_create_message">Fіltr %1$s byŭ stvorany</string>
     <string name="email">e-mail</string>
     <string name="av_camera_focus">Typ fakusoŭkі kamiery</string>
     <string name="av_camera_focus_descr">Vybierycie typ fokusu ŭbudavanaj kamiery.</string>

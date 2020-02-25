@@ -42,6 +42,7 @@ import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.api.SettingsAPI.SettingsEditor;
 import net.osmand.plus.api.SettingsAPIImpl;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialogFragment;
+import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
@@ -1051,6 +1052,31 @@ public class OsmandSettings {
 			}
 			return false;
 		}
+
+		public List<String> getStringsList() {
+			final String listAsString = get();
+			if (listAsString != null) {
+				if (listAsString.contains(delimiter)) {
+					return Arrays.asList(listAsString.split(delimiter));
+				} else {
+					return new ArrayList<String>() {
+						{add(listAsString);}
+					};
+				}
+			}
+			return null;
+		}
+
+		public void setStringsList(List<String> values) {
+			if (values == null || values.size() == 0) {
+				set(null);
+				return;
+			}
+			clearAll();
+			for (String value : values) {
+				addValue(value);
+			}
+		}
 	}
 
 	public class EnumIntPreference<E extends Enum<E>> extends CommonPreference<E> {
@@ -1236,7 +1262,7 @@ public class OsmandSettings {
 	public final CommonPreference<WikiArticleShowImages> WIKI_ARTICLE_SHOW_IMAGES = new EnumIntPreference<>("wikivoyage_show_imgs", WikiArticleShowImages.OFF, WikiArticleShowImages.values()).makeGlobal();
 
 	public final CommonPreference<Boolean> SELECT_MARKER_ON_SINGLE_TAP = new BooleanPreference("select_marker_on_single_tap", false).makeProfile();
-	public final CommonPreference<Boolean> KEEP_PASSED_MARKERS_ON_MAP = new BooleanPreference("keep_passed_markers_on_map", false).makeProfile();
+	public final CommonPreference<Boolean> KEEP_PASSED_MARKERS_ON_MAP = new BooleanPreference("keep_passed_markers_on_map", true).makeProfile();
 
 	public final CommonPreference<Boolean> COORDS_INPUT_USE_RIGHT_SIDE = new BooleanPreference("coords_input_use_right_side", true).makeGlobal();
 	public final OsmandPreference<Format> COORDS_INPUT_FORMAT = new EnumIntPreference<>("coords_input_format", Format.DD_MM_MMM, Format.values()).makeGlobal();
@@ -1440,7 +1466,7 @@ public class OsmandSettings {
 
 		@Override
 		public SpeedConstants getProfileDefaultValue(ApplicationMode mode) {
-			MetricsConstants mc = METRIC_SYSTEM.get();
+			MetricsConstants mc = METRIC_SYSTEM.getModeValue(mode);
 			if (mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
 				if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
 					return SpeedConstants.MINUTES_PER_KILOMETER;
@@ -1581,8 +1607,8 @@ public class OsmandSettings {
 		new BooleanAccessibilityPreference("disable_offroute_recalc", false).makeProfile();
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> DISABLE_WRONG_DIRECTION_RECALC =
-		new BooleanAccessibilityPreference("disable_wrong_direction_recalc", false).makeProfile();
+//	public final OsmandPreference<Boolean> DISABLE_WRONG_DIRECTION_RECALC =
+//		new BooleanAccessibilityPreference("disable_wrong_direction_recalc", false).makeProfile();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> DIRECTION_AUDIO_FEEDBACK =
@@ -1742,6 +1768,8 @@ public class OsmandSettings {
 	public final CommonPreference<Integer> PROXY_PORT = new IntPreference("proxy_port", 8118).makeGlobal();
 	public final CommonPreference<String> USER_ANDROID_ID = new StringPreference("user_android_id", "").makeGlobal();
 
+	public final CommonPreference<Boolean> USE_SYSTEM_SCREEN_TIMEOUT = new BooleanPreference("use_system_screen_timeout", false).makeGlobal();
+
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SAVE_CURRENT_TRACK = "save_current_track"; //$NON-NLS-1$
 
@@ -1759,7 +1787,7 @@ public class OsmandSettings {
 
 	public static final Integer REC_DIRECTORY = 0;
 	public static final Integer MONTHLY_DIRECTORY = 1;
-	public static final Integer DAILY_DIRECTORY = 2;
+//	public static final Integer DAILY_DIRECTORY = 2;
 
 	public final CommonPreference<Boolean> DISABLE_RECORDING_ONCE_APP_KILLED = new BooleanPreference("disable_recording_once_app_killed", false).makeProfile();
 
@@ -2598,6 +2626,8 @@ public class OsmandSettings {
 
 	private static final String IMPASSABLE_ROAD_POINTS = "impassable_road_points";
 	private static final String IMPASSABLE_ROADS_DESCRIPTIONS = "impassable_roads_descriptions";
+	private static final String IMPASSABLE_ROADS_IDS = "impassable_roads_ids";
+	private static final String IMPASSABLE_ROADS_APP_MODE_KEYS = "impassable_roads_app_mode_keys";
 	private ImpassableRoadsStorage mImpassableRoadsStorage = new ImpassableRoadsStorage();
 
 	public void backupPointToStart() {
@@ -2767,9 +2797,184 @@ public class OsmandSettings {
 	}
 
 	private class ImpassableRoadsStorage extends MapPointsStorage {
+
+		protected String roadsIdsKey;
+		protected String appModeKey;
+
 		public ImpassableRoadsStorage() {
 			pointsKey = IMPASSABLE_ROAD_POINTS;
 			descriptionsKey = IMPASSABLE_ROADS_DESCRIPTIONS;
+			roadsIdsKey = IMPASSABLE_ROADS_IDS;
+			appModeKey = IMPASSABLE_ROADS_APP_MODE_KEYS;
+		}
+
+		public List<Long> getRoadIds(int size) {
+			List<Long> list = new ArrayList<>();
+			String roadIds = settingsAPI.getString(globalPreferences, roadsIdsKey, "");
+			if (roadIds.trim().length() > 0) {
+				StringTokenizer tok = new StringTokenizer(roadIds, ",");
+				while (tok.hasMoreTokens() && list.size() <= size) {
+					list.add(Long.parseLong(tok.nextToken()));
+				}
+			}
+			while (list.size() < size) {
+				list.add(0L);
+			}
+			return list;
+		}
+
+		public List<String> getAppModeKeys(int size) {
+			List<String> list = new ArrayList<>();
+			String roadIds = settingsAPI.getString(globalPreferences, appModeKey, "");
+			if (roadIds.trim().length() > 0) {
+				StringTokenizer tok = new StringTokenizer(roadIds, ",");
+				while (tok.hasMoreTokens() && list.size() <= size) {
+					list.add(tok.nextToken());
+				}
+			}
+			while (list.size() < size) {
+				list.add("");
+			}
+			return list;
+		}
+
+		public List<AvoidRoadInfo> getImpassableRoadsInfo() {
+			List<LatLon> points = getPoints();
+			List<Long> roadIds = getRoadIds(points.size());
+			List<String> appModeKeys = getAppModeKeys(points.size());
+			List<String> descriptions = getPointDescriptions(points.size());
+
+			List<AvoidRoadInfo> avoidRoadsInfo = new ArrayList<>();
+
+			for (int i = 0; i < points.size(); i++) {
+				LatLon latLon = points.get(i);
+				PointDescription description = PointDescription.deserializeFromString(descriptions.get(i), null);
+
+				AvoidRoadInfo avoidRoadInfo = new AvoidRoadInfo();
+				avoidRoadInfo.id = roadIds.get(i);
+				avoidRoadInfo.latitude = latLon.getLatitude();
+				avoidRoadInfo.longitude = latLon.getLongitude();
+				avoidRoadInfo.name = description.getName();
+				avoidRoadInfo.appModeKey = appModeKeys.get(i);
+				avoidRoadsInfo.add(avoidRoadInfo);
+			}
+
+			return avoidRoadsInfo;
+		}
+
+		public boolean addImpassableRoadInfo(AvoidRoadInfo avoidRoadInfo) {
+			List<LatLon> points = getPoints();
+			List<Long> roadIds = getRoadIds(points.size());
+			List<String> appModeKeys = getAppModeKeys(points.size());
+			List<String> descriptions = getPointDescriptions(points.size());
+
+			roadIds.add(0, avoidRoadInfo.id);
+			points.add(0, new LatLon(avoidRoadInfo.latitude, avoidRoadInfo.longitude));
+			appModeKeys.add(0, avoidRoadInfo.appModeKey);
+			descriptions.add(0, PointDescription.serializeToString(new PointDescription("", avoidRoadInfo.name)));
+
+			return saveAvoidRoadData(points, descriptions, roadIds, appModeKeys);
+		}
+
+		public boolean updateImpassableRoadInfo(AvoidRoadInfo avoidRoadInfo) {
+			List<LatLon> points = getPoints();
+
+			int index = points.indexOf(new LatLon(avoidRoadInfo.latitude, avoidRoadInfo.longitude));
+			if (index != -1) {
+				List<Long> roadIds = getRoadIds(points.size());
+				List<String> appModeKeys = getAppModeKeys(points.size());
+				List<String> descriptions = getPointDescriptions(points.size());
+
+				roadIds.set(index, avoidRoadInfo.id);
+				appModeKeys.set(index, avoidRoadInfo.appModeKey);
+				descriptions.set(index, PointDescription.serializeToString(new PointDescription("", avoidRoadInfo.name)));
+				return saveAvoidRoadData(points, descriptions, roadIds, appModeKeys);
+			}
+			return false;
+		}
+
+		@Override
+		public boolean deletePoint(int index) {
+			List<LatLon> points = getPoints();
+			List<Long> roadIds = getRoadIds(points.size());
+			List<String> appModeKeys = getAppModeKeys(points.size());
+			List<String> descriptions = getPointDescriptions(points.size());
+
+			if (index < points.size()) {
+				points.remove(index);
+				roadIds.remove(index);
+				appModeKeys.remove(index);
+				descriptions.remove(index);
+				return saveAvoidRoadData(points, descriptions, roadIds, appModeKeys);
+			}
+			return false;
+		}
+
+		@Override
+		public boolean deletePoint(LatLon latLon) {
+			List<LatLon> points = getPoints();
+			List<Long> roadIds = getRoadIds(points.size());
+			List<String> appModeKeys = getAppModeKeys(points.size());
+			List<String> descriptions = getPointDescriptions(points.size());
+
+			int index = points.indexOf(latLon);
+			if (index != -1) {
+				points.remove(index);
+				roadIds.remove(index);
+				appModeKeys.remove(index);
+				descriptions.remove(index);
+				return saveAvoidRoadData(points, descriptions, roadIds, appModeKeys);
+			}
+			return false;
+		}
+
+		@Override
+		public boolean movePoint(LatLon latLonEx, LatLon latLonNew) {
+			List<LatLon> points = getPoints();
+			List<Long> roadIds = getRoadIds(points.size());
+			List<String> appModeKeys = getAppModeKeys(points.size());
+			List<String> descriptions = getPointDescriptions(points.size());
+
+			int i = points.indexOf(latLonEx);
+			if (i != -1) {
+				points.set(i, latLonNew);
+				return saveAvoidRoadData(points, descriptions, roadIds, appModeKeys);
+			} else {
+				return false;
+			}
+		}
+
+		public boolean saveAvoidRoadData(List<LatLon> points, List<String> descriptions,
+		                                 List<Long> roadIds, List<String> appModeKeys) {
+			return savePoints(points, descriptions) && saveRoadIds(roadIds) && saveAppModeKeys(appModeKeys);
+		}
+
+		public boolean saveRoadIds(List<Long> roadIds) {
+			StringBuilder stringBuilder = new StringBuilder();
+			Iterator<Long> iterator = roadIds.iterator();
+			while (iterator.hasNext()) {
+				stringBuilder.append(iterator.next());
+				if (iterator.hasNext()) {
+					stringBuilder.append(",");
+				}
+			}
+			return settingsAPI.edit(globalPreferences)
+					.putString(roadsIdsKey, stringBuilder.toString())
+					.commit();
+		}
+
+		public boolean saveAppModeKeys(List<String> appModeKeys) {
+			StringBuilder stringBuilder = new StringBuilder();
+			Iterator<String> iterator = appModeKeys.iterator();
+			while (iterator.hasNext()) {
+				stringBuilder.append(iterator.next());
+				if (iterator.hasNext()) {
+					stringBuilder.append(",");
+				}
+			}
+			return settingsAPI.edit(globalPreferences)
+					.putString(appModeKey, stringBuilder.toString())
+					.commit();
 		}
 	}
 
@@ -2960,11 +3165,16 @@ public class OsmandSettings {
 		return settingsAPI.edit(globalPreferences).putInt(POINT_NAVIGATE_ROUTE, NAVIGATE).commit();
 	}
 
-	public List<LatLon> getImpassableRoadPoints() {
-		return mImpassableRoadsStorage.getPoints();
+	public List<AvoidRoadInfo> getImpassableRoadPoints() {
+		return mImpassableRoadsStorage.getImpassableRoadsInfo();
 	}
-	public boolean addImpassableRoad(double latitude, double longitude) {
-		return mImpassableRoadsStorage.insertPoint(latitude, longitude, null, 0);
+
+	public boolean addImpassableRoad(AvoidRoadInfo avoidRoadInfo) {
+		return mImpassableRoadsStorage.addImpassableRoadInfo(avoidRoadInfo);
+	}
+
+	public boolean updateImpassableRoadInfo(AvoidRoadInfo avoidRoadInfo) {
+		return mImpassableRoadsStorage.updateImpassableRoadInfo(avoidRoadInfo);
 	}
 
 	public boolean removeImpassableRoad(int index) {
@@ -3160,6 +3370,12 @@ public class OsmandSettings {
 	public void setSelectedPoiFilters(final Set<String> poiFilters) {
 		SELECTED_POI_FILTER_FOR_MAP.set(android.text.TextUtils.join(",", poiFilters));
 	}
+	
+	public final ListStringPreference POI_FILTERS_ORDER = (ListStringPreference)
+			new ListStringPreference("poi_filters_order", null, ",,").makeProfile().cache();
+	
+	public final ListStringPreference INACTIVE_POI_FILTERS = (ListStringPreference)
+			new ListStringPreference("inactive_poi_filters", null, ",,").makeProfile().cache();
 
 	public static final String VOICE_PROVIDER_NOT_USE = "VOICE_PROVIDER_NOT_USE";
 
@@ -3248,6 +3464,9 @@ public class OsmandSettings {
 		}
 		return customBooleanRoutingProps.get(attrName);
 	}
+
+	public final CommonPreference<Float> ROUTE_RECALCULATION_DISTANCE = new FloatPreference("routing_recalc_distance", 0.f).makeProfile();
+	public final CommonPreference<Float> ROUTE_STRAIGHT_ANGLE = new FloatPreference("routing_straight_angle", 30.f).makeProfile();
 
 	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_ROUTING = new BooleanPreference("enable_osmc_routing", true).makeGlobal();
 
@@ -3340,6 +3559,9 @@ public class OsmandSettings {
 
 	public final CommonPreference<Integer> OSMAND_THEME =
 			new IntPreference("osmand_theme", OSMAND_LIGHT_THEME).makeProfile().cache();
+
+	public final OsmandPreference<Boolean> OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED =
+			new BooleanPreference("open_only_header_route_calculated", false).makeProfile();
 
 	public boolean isLightActionBar() {
 		return isLightContent();

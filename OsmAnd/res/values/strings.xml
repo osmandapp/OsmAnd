@@ -11,12 +11,71 @@
 	Thx - Hardy
 
 -->
+    <string name="profile_type_custom_string">Custom profile</string>
+    <string name="shared_string_angle_param">Angle: %s°</string>
+    <string name="shared_string_angle">Angle</string>
+    <string name="recalc_angle_dialog_descr">Extra straight segment between my location and calculated route will be displayed until the route is recalculated</string>
+    <string name="recalc_angle_dialog_title">Minimum angle between my location and route</string>
+    <string name="shared_string_app_default_w_val">App Default (%s)</string>
+    <string name="shared_string_preparing">Preparing</string>
+    <string name="shared_string_poi_types">POI types</string>
+    <string name="shared_string_nothing_selected">Nothing selected</string>
+    <string name="shared_string_quick_actions">Quick actions</string>
+    <string name="shared_string_profiles">Profiles</string>
+    <string name="listed_exist">Listed %1$s, already exist in OsmAnd.</string>
+    <string name="replace_all_desc">Current items will be replaced with items from the file</string>
+    <string name="replace_all">Replace all</string>
+    <string name="keep_both">Keep both</string>
+    <string name="keep_both_desc">Imported items will be added with prexif</string>
+    <string name="import_duplicates_description">OsmAnd already has elements with the same names as those imported.\n\nSelect an action.</string>
+    <string name="import_duplicates_title">Some items already exist</string>
+    <string name="select_data_to_import">Select the data to be imported.</string>
+    <string name="please_provide_profile_name_message">Please provide a name for the profile</string>
+    <string name="no_recalculation_setting">Disable recalculation</string>
+    <string name="open_settings">Open settings</string>
+    <string name="plugin_disabled">Plugin disabled</string>
+    <string name="plugin_disabled_descr">This plugin is a separate application, you will need to remove it separately if you no longer plan to use it.\n\nThe plugin will remain on the device after removing OsmAnd.</string>
+    <string name="shared_string_menu">Menu</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="route_recalculation_dist_title">Minimal distance to recalculate route</string>
+    <string name="route_recalculation_dist_descr">The route will be recalculated if the distance to the route is longer than specified parameter</string>
+    <string name="routing_profile_direct_to">Direct-to-point</string>
+    <string name="clear_recorded_data">Clear recorded data</string>
+    <string name="release_3_6">
+    • Profiles: now you can change order, set icon for map, change all setting for base profiles and restore them back to defaults\n\n
+    • Added exit number in the navigation\n\n
+    • Reworked plugin settings\n\n
+    • Reworked Settings screen for quick access to all profiles\n\n
+    • Added option to copy settings from another profile\n\n
+    • Added ability to change an order or hide POI categories in Search\n\n
+    • Correctly aligned POI icons on the map\n\n
+    • Added Sunset / Sunrise data to Configure Map\n\n
+    • Added Home/Work icons on the map\n\n
+    • Added support for multiline description in Settings\n\n
+    • Added correct transliteration into the map of Japan\n\n
+    • Added Antarctica map\n\n
+    </string>
+    <string name="copy_coordinates">Copy coordinates</string>
+    <string name="reset_to_default_category_button_promo">Reset to default will reset sort order to the default state after installation.</string>
+    <string name="use_system_screen_timeout">Use system screen timeout</string>
+    <string name="use_system_screen_timeout_promo">Disabled by default, if OsmAnd running on foreground, the screen doesn’t time out.\n\nIf enabled OsmAnd will use system timeout settings.</string>
+    <string name="accessibility_mode_disabled">Accessibility mode disabled in your system.</string>
+    <string name="rearrange_categories">Rearrange categories</string>
+    <string name="create_custom_categories_list_promo">You can add custom categories hide categories that you don’t find necessary and change the sort order of the list. The list can be imported and exported with profiles.</string>
+    <string name="add_new_custom_category_button_promo">You can add a new custom category by selecting one or a few needed categories.</string>
+    <string name="shared_string_available">Available</string>
+    <string name="add_custom_category">Add custom category</string>
     <string name="rendering_attr_streetLightingNight_name">Show only at night</string>
     <string name="plugin_prefs_reset_successful">All plugin settings restored to default state.</string>
     <string name="profile_prefs_reset_successful">All profile settings restored to default state.</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Sunset at %1$s</string>
     <string name="sunrise_at">Sunrise at %1$s</string>
+    <string name="shared_string_routing">Routing</string>
+    <string name="shared_string_custom_rendering_style">Custom rendering style</string>
+    <string name="shared_string_include_data">Include additional data</string>
+    <string name="import_profile_dialog_description">The imported profile contains additional data. Click Import to import only profile data or select additional data to import.</string>
+    <string name="export_profile_dialog_description">You can select additional data to export along with the profile.</string>
     <string name="permission_is_required">Permission is required to use this option.</string>
     <string name="logcat_buffer_descr">Check and share detailed logs of the application</string>
     <string name="file_does_not_contain_routing_rules">No routing rules in \'%1$s\'. Please choose another file.</string>
@@ -40,9 +99,6 @@
     <string name="monitoring_min_speed">Minimum speed</string>
     <string name="monitoring_min_accuracy">Minimum accuracy</string>
     <string name="monitoring_min_distance">Minimum displacement</string>
-    <string name="tracks_view_path">Menu — My places — Tracks</string>
-    <string name="multimedia_notes_view_path">Menu — My places — Notes</string>
-    <string name="osm_edits_view_path">Menu — My places — OSM Edits</string>
     <string name="reset_plugin_to_default">Reset plugin settings to default</string>
     <string name="multimedia_rec_split_title">Recorder split</string>
     <string name="multimedia_use_system_camera">Use system app</string>
@@ -1939,6 +1995,7 @@
     <string name="none_selected_gpx">Specify a GPX file by long-tapping first.</string>
     <string name="local_index_select_gpx_file">Select a track</string>
     <string name="gpx_split_interval">Split interval</string>
+    <string name="sort_by_category">Sort by category</string>
     <string name="sort_by_distance">Sort by distance</string>
     <string name="sort_by_name">Sort by name</string>
     <string name="show_zoom_buttons_navigation_descr">Show zoom buttons during navigation.</string>
@@ -2767,6 +2824,7 @@
     <string name="index_name_africa">Africa</string>
     <string name="index_name_asia">Asia</string>
     <string name="index_name_oceania">Australia and Oceania</string>
+    <string name="index_name_antarctica">Antarctica</string>
     <string name="index_name_other">Worldwide and topic maps</string>
     <string name="index_name_wiki">Worldwide Wikipedia POIs</string>
     <string name="index_name_voice">Voice prompts (recorded, limited features)</string>
@@ -3267,8 +3325,8 @@
     <string name="filter_current_poiButton">Filter</string>
     <string name="edit_filter_save_as_menu_item">Save As</string>
     <string name="edit_filter_delete_dialog_title">Delete this filter?</string>
-    <string name="edit_filter_delete_message">\'{0}\' filter deleted</string>
-    <string name="edit_filter_create_message">\'{0}\' filter created</string>
+    <string name="edit_filter_delete_message">\'%1$s\' filter deleted</string>
+    <string name="edit_filter_create_message">\'%1$s\' filter created</string>
     <string name="email">e-mail</string>
     <string name="av_camera_focus">Camera focus type</string>
     <string name="av_camera_focus_descr">Camera focus mode:</string>
@@ -3371,7 +3429,6 @@
     <string name="use_drawer_btn">Use menu</string>
     <string name="dashboard_or_drawer_title">Dashboard or menu control</string>
     <string name="dashboard_or_drawer_description">A choice is offered to primarily control the app via the flexible dashboard or a static menu. Your choice can always be changed in the dashboard settings.</string>
-    <string name="update">Update</string>
     <string name="only_download_over_wifi">Only download on Wi-Fi</string>
     <string name="live_update">Live update</string>
     <string name="update_now">Update now</string>

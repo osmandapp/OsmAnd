@@ -420,6 +420,14 @@ public class ApplicationMode {
 		app.getSettings().MAX_SPEED.setModeValue(this, defaultSpeed);
 	}
 
+	public float getStrAngle() {
+		return app.getSettings().ROUTE_STRAIGHT_ANGLE.getModeValue(this);
+	}
+
+	public void setStrAngle(float angle) {
+		app.getSettings().ROUTE_STRAIGHT_ANGLE.setModeValue(this, angle);
+	}
+
 	public String getUserProfileName() {
 		return app.getSettings().USER_PROFILE_NAME.getModeValue(this);
 	}
@@ -601,6 +609,11 @@ public class ApplicationMode {
 	}
 
 	public String toJson() {
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		return gson.toJson(toModeBean());
+	}
+
+	public ApplicationModeBean toModeBean(){
 		ApplicationModeBean mb = new ApplicationModeBean();
 		mb.stringKey = stringKey;
 		mb.userProfileName = getUserProfileName();
@@ -612,8 +625,7 @@ public class ApplicationMode {
 		mb.locIcon = getLocationIcon();
 		mb.navIcon = getNavigationIcon();
 		mb.order = getOrder();
-		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		return gson.toJson(mb);
+		return mb;
 	}
 
 	public static void deleteCustomModes(List<ApplicationMode> modes, OsmandApplication app) {
@@ -789,25 +801,25 @@ public class ApplicationMode {
 		}
 	}
 
-	static class ApplicationModeBean {
+	public static class ApplicationModeBean {
 		@Expose
-		String stringKey;
+		public String stringKey;
 		@Expose
-		String userProfileName;
+		public String userProfileName;
 		@Expose
-		String parent;
+		public String parent;
 		@Expose
-		String iconName = "map_world_globe_dark";
+		public String iconName = "map_world_globe_dark";
 		@Expose
-		ProfileIconColors iconColor = ProfileIconColors.DEFAULT;
+		public ProfileIconColors iconColor = ProfileIconColors.DEFAULT;
 		@Expose
-		String routingProfile = null;
+		public String routingProfile = null;
 		@Expose
-		RouteService routeService = RouteService.OSMAND;
+		public RouteService routeService = RouteService.OSMAND;
 		@Expose
-		LocationIcon locIcon = null;
+		public LocationIcon locIcon = null;
 		@Expose
-		NavigationIcon navIcon = null;
+		public NavigationIcon navIcon = null;
 		@Expose
 		int order = -1;
 	}

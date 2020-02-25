@@ -4,6 +4,7 @@ package net.osmand;
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -27,7 +28,6 @@ import android.support.annotation.AttrRes;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v4.text.TextUtilsCompat;
@@ -56,7 +56,6 @@ import android.widget.TextView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.download.DownloadActivity;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -157,6 +156,10 @@ public class AndroidUtils {
 		} else {
 			return FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", file);
 		}
+	}
+
+	public static boolean isIntentSafe(Context context, Intent intent) {
+		return intent.resolveActivity(context.getPackageManager()) != null;
 	}
 
 	public static Spannable replaceCharsWithIcon(String text, Drawable icon, String[] chars) {
@@ -264,6 +267,17 @@ public class AndroidUtils {
 				lightNormal, lightChecked, darkNormal, darkChecked);
 	}
 
+	public static ColorStateList createEnabledColorStateList(Context ctx, @ColorRes int normal, @ColorRes int pressed) {
+		return createEnabledColorStateList(ctx, false, normal, pressed, 0, 0);
+	}
+
+	public static ColorStateList createEnabledColorStateList(Context ctx, boolean night,
+	                                                         @ColorRes int lightNormal, @ColorRes int lightPressed,
+	                                                         @ColorRes int darkNormal, @ColorRes int darkPressed) {
+		return createColorStateList(ctx, night, android.R.attr.state_enabled,
+				lightNormal, lightPressed, darkNormal, darkPressed);
+	}
+
 	public static ColorStateList createPressedColorStateList(Context ctx, @ColorRes int normal, @ColorRes int pressed) {
 		return createPressedColorStateList(ctx, false, normal, pressed, 0, 0);
 	}
@@ -298,6 +312,10 @@ public class AndroidUtils {
 		return createStateListDrawable(normal, pressed, android.R.attr.state_pressed);
 	}
 
+	public static StateListDrawable createEnabledStateListDrawable(Drawable disabled, Drawable enabled) {
+		return createStateListDrawable(disabled, enabled, android.R.attr.state_enabled);
+	}
+
 	private static StateListDrawable createStateListDrawable(Drawable normal, Drawable stateDrawable, int state) {
 		StateListDrawable res = new StateListDrawable();
 		res.addState(new int[]{state}, stateDrawable);
@@ -321,18 +339,6 @@ public class AndroidUtils {
 		res.setId(1, android.R.id.progress);
 
 		return res;
-	}
-
-	public static void setSnackbarTextColor(Snackbar snackbar, @ColorRes int colorId) {
-		View view = snackbar.getView();
-		TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_action);
-		tv.setTextColor(ContextCompat.getColor(view.getContext(), colorId));
-	}
-
-	public static void setSnackbarTextMaxLines(Snackbar snackbar, int maxLines) {
-		View view = snackbar.getView();
-		TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
-		tv.setMaxLines(maxLines);
 	}
 
 	public static void setBackground(Context ctx, View view, boolean night, int lightResId, int darkResId) {
@@ -636,6 +642,11 @@ public class AndroidUtils {
 		} else {
 			return baseString;
 		}
+	}
+	
+	public static int getLayoutDirection(@NonNull Context ctx) {
+		Locale currentLocale = ctx.getResources().getConfiguration().locale;
+		return TextUtilsCompat.getLayoutDirectionFromLocale(currentLocale);
 	}
 
 	public static float getFreeSpaceGb(File dir) {

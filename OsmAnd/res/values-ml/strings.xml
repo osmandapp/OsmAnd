@@ -1055,8 +1055,8 @@
     <string name="error_calculating_route_occured">"റൂട്ട് കണ്ടെത്താനായില്ല "</string>
     <string name="empty_route_calculated">"കണ്ട് പിടിച്ച റൂട്ട് ശൂന്യമാണ് "</string>
     <string name="favourites_context_menu_edit">താല്‍പര്യമുള്ളവ ക്രമീകരിക്കുക</string>
-    <string name="edit_filter_delete_message">"{0} അരിപ്പ (ഫില്‍ട്ടര്‍) നീക്കം ചെയ്തിരിക്കുന്നു "</string>
-    <string name="edit_filter_create_message">{0} അരിപ്പക്ക് (ഫില്‍ട്ടര്‍) രൂപം നല്‍കിയിരിയിരിക്കുന്നു</string>
+    <string name="edit_filter_delete_message">"%1$s അരിപ്പ (ഫില്‍ട്ടര്‍) നീക്കം ചെയ്തിരിക്കുന്നു "</string>
+    <string name="edit_filter_create_message">%1$s അരിപ്പക്ക് (ഫില്‍ട്ടര്‍) രൂപം നല്‍കിയിരിയിരിക്കുന്നു</string>
     <string name="create_custom_poi">"കസ്റ്റം അരിപ്പക്ക്(ഫില്‍ട്ടര്‍)  രുപം നല്‍കുക"</string>
     <string name="custom_search">"കസ്റ്റം തെരച്ചില്‍ "</string>
     <string name="new_filter">പുതിയ അരിപ്പ (ഫില്‍റ്റര്‍)</string>

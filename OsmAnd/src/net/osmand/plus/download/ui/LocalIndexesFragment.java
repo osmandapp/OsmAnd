@@ -23,6 +23,7 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -180,7 +181,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		builder.show();
 	}
 
-
 	private void basicFileOperation(final LocalIndexInfo info, ContextMenuAdapter adapter) {
 		ItemClickListener listener = new ItemClickListener() {
 			@Override
@@ -225,7 +225,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					getDownloadActivity().reloadLocalIndexes();
 				}
 			});
-		} else if (resId == R.string.clear_tile_data) {		
+		} else if (resId == R.string.clear_tile_data) {
 			AlertDialog.Builder confirm = new AlertDialog.Builder(getActivity());
 			confirm.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				@Override
@@ -252,7 +252,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					getDownloadActivity().reloadLocalIndexes();
 					return true;
 				}
-					}, info.getName());
+					}, info.getFileName());
 		} else if (resId == R.string.local_index_mi_restore) {
 			new LocalIndexOperationTask(getDownloadActivity(), listAdapter, LocalIndexOperationTask.RESTORE_OPERATION).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, info);
 		} else if (resId == R.string.shared_string_delete) {
@@ -318,8 +318,16 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 								@Override
 								public void onClick(View v) {
 									OsmandApplication app = (OsmandApplication) a.getApplication();
-									if (renameGpxFile(app, f, editText.getText().toString() + ext, false, callback) != null) {
-										alertDialog.dismiss();
+									if (ext.equals(SQLiteTileSource.EXT)) {
+										if (renameSQLiteFile(app, f, editText.getText().toString() + ext,
+												callback) != null) {
+											alertDialog.dismiss();
+										}
+									} else {
+										if (renameGpxFile(app, f, editText.getText().toString() + ext,
+												false, callback) != null) {
+											alertDialog.dismiss();
+										}
 									}
 								}
 							});
@@ -329,7 +337,55 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		}
 	}
 
-	public static File renameGpxFile(OsmandApplication ctx, File source, String newName, boolean dirAllowed, RenameCallback callback) {
+	private static File renameSQLiteFile(OsmandApplication ctx, File source, String newName,
+	                                     RenameCallback callback) {
+		File dest = checkRenamePossibility(ctx, source, newName, false);
+		if (dest == null) {
+			return null;
+		}
+		if (!dest.getParentFile().exists()) {
+			dest.getParentFile().mkdirs();
+		}
+		if (source.renameTo(dest)) {
+			final String[] suffixes = new String[]{"-journal", "-wal", "-shm"};
+			for (String s : suffixes) {
+				File file = new File(ctx.getDatabasePath(source + s).toString());
+				if (file.exists()) {
+					file.renameTo(ctx.getDatabasePath(dest + s));
+				}
+			}
+			if (callback != null) {
+				callback.renamedTo(dest);
+			}
+			return dest;
+		} else {
+			Toast.makeText(ctx, R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
+		}
+		return null;
+	}
+
+	public static File renameGpxFile(OsmandApplication ctx, File source, String newName, boolean dirAllowed,
+	                                 RenameCallback callback) {
+		File dest = checkRenamePossibility(ctx, source, newName, dirAllowed);
+		if (dest == null) {
+			return null;
+		}
+		if (!dest.getParentFile().exists()) {
+			dest.getParentFile().mkdirs();
+		}
+		if (source.renameTo(dest)) {
+			ctx.getGpxDbHelper().rename(source, dest);
+			if (callback != null) {
+				callback.renamedTo(dest);
+			}
+			return dest;
+		} else {
+			Toast.makeText(ctx, R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
+		}
+		return null;
+	}
+
+	public static File checkRenamePossibility(OsmandApplication ctx, File source, String newName, boolean dirAllowed) {
 		if (Algorithms.isEmpty(newName)) {
 			Toast.makeText(ctx, R.string.empty_filename, Toast.LENGTH_LONG).show();
 			return null;
@@ -342,21 +398,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		File dest = new File(source.getParentFile(), newName);
 		if (dest.exists()) {
 			Toast.makeText(ctx, R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
-		} else {
-			if (!dest.getParentFile().exists()) {
-				dest.getParentFile().mkdirs();
-			}
-			if (source.renameTo(dest)) {
-				ctx.getGpxDbHelper().rename(source, dest);
-				if (callback != null) {
-					callback.renamedTo(dest);
-				}
-				return dest;
-			} else {
-				Toast.makeText(ctx, R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
-			}
+			return null;
 		}
-		return null;
+		return dest;
 	}
 
 
@@ -497,6 +541,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					if (operation == DELETE_OPERATION) {
 						File f = new File(info.getPathToData());
 						successfull = Algorithms.removeAllFiles(f);
+
 						if (InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication())) {
 							String fileNameWithoutExtension =
 									Algorithms.getFileNameWithoutExtension(f);
@@ -506,6 +551,14 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 						}
 						if (successfull) {
 							getMyApplication().getResourceManager().closeFile(info.getFileName());
+							File tShm = new File(f.getParentFile(), f.getName() + "-shm");
+							File tWal = new File(f.getParentFile(), f.getName() + "-wal");
+							if(tShm.exists()) {
+								Algorithms.removeAllFiles(tShm);
+							}
+							if(tWal.exists()) {
+								Algorithms.removeAllFiles(tWal);
+							}
 						}
 					} else if (operation == RESTORE_OPERATION) {
 						successfull = move(new File(info.getPathToData()), getFileToRestore(info));
@@ -1226,7 +1279,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				}
 			});
 		}
-
 		item = optionsMenu.getMenu().add(R.string.shared_string_rename)
 				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -1236,8 +1288,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				return true;
 			}
 		});
-		if (info.getType() == LocalIndexType.TILES_DATA && (info.getAttachedObject() instanceof ITileSource) &&
-				((ITileSource) info.getAttachedObject()).couldBeDownloadedFromInternet()) {
+		if (info.getType() == LocalIndexType.TILES_DATA
+				&& ((info.getAttachedObject() instanceof TileSourceManager.TileSourceTemplate)
+				|| ((info.getAttachedObject() instanceof SQLiteTileSource)
+				&& ((SQLiteTileSource) info.getAttachedObject()).couldBeDownloadedFromInternet()))) {
 			item = optionsMenu.getMenu().add(R.string.shared_string_edit)
 					.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark));
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -1248,8 +1302,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				}
 			});
 		}
-		if (info.getType() == LocalIndexType.TILES_DATA && (info.getAttachedObject() instanceof ITileSource) &&
-				((ITileSource)info.getAttachedObject()).couldBeDownloadedFromInternet()) {
+		if (info.getType() == LocalIndexType.TILES_DATA && (info.getAttachedObject() instanceof ITileSource)
+				&& ((ITileSource) info.getAttachedObject()).couldBeDownloadedFromInternet()) {
 			item = optionsMenu.getMenu().add(R.string.clear_tile_data)
 					.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_remove_dark));
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {

@@ -28,16 +28,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
-import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.SettingsHelper;
-import net.osmand.plus.SettingsHelper.ProfileSettingsItem;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
@@ -100,19 +98,20 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		toolbarSubtitle.setText(R.string.configure_profile);
 		toolbarSubtitle.setVisibility(View.VISIBLE);
 
-		if (!getSelectedAppMode().equals(ApplicationMode.DEFAULT)) {
-			view.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					ApplicationMode selectedMode = getSelectedAppMode();
-					List<ApplicationMode> availableAppModes = ApplicationMode.values(getMyApplication());
-					boolean isChecked = availableAppModes.contains(selectedMode);
-					ApplicationMode.changeProfileAvailability(selectedMode, !isChecked, getMyApplication());
-					updateToolbarSwitch();
-				}
-			});
-		} else {
-			view.findViewById(R.id.switchWidget).setVisibility(View.GONE);
+		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				ApplicationMode selectedMode = getSelectedAppMode();
+				List<ApplicationMode> availableAppModes = ApplicationMode.values(getMyApplication());
+				boolean isChecked = availableAppModes.contains(selectedMode);
+				ApplicationMode.changeProfileAvailability(selectedMode, !isChecked, getMyApplication());
+				updateToolbarSwitch();
+			}
+		});
+
+		View switchProfile = view.findViewById(R.id.profile_button);
+		if (switchProfile != null) {
+			switchProfile.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -148,6 +147,9 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			updateToolbarSwitch();
 			TextView toolbarTitle = view.findViewById(R.id.toolbar_title);
 			toolbarTitle.setText(getSelectedAppMode().toHumanString());
+
+			boolean visible = !getSelectedAppMode().equals(ApplicationMode.DEFAULT);
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.switchWidget), visible);
 		}
 	}
 
@@ -395,23 +397,13 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, prefId, this, false, getSelectedAppMode());
 			}
 		} else if (EXPORT_PROFILE.equals(prefId)) {
-			Context ctx = requireContext();
-			final ApplicationMode profile = getSelectedAppMode();
-			File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
-			if (!tempDir.exists()) {
-				tempDir.mkdirs();
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				ExportProfileBottomSheet.showInstance(
+						fragmentManager,
+						this,
+						getSelectedAppMode());
 			}
-			String fileName = profile.toHumanString();
-			app.getSettingsHelper().exportSettings(tempDir, fileName, new SettingsHelper.SettingsExportListener() {
-				@Override
-				public void onSettingsExportFinished(@NonNull File file, boolean succeed) {
-					if (succeed) {
-						shareProfile(file, profile);
-					} else {
-						app.showToastMessage(R.string.export_profile_failed);
-					}
-				}
-			}, new ProfileSettingsItem(app.getSettings(), profile));
 		} else if (DELETE_PROFILE.equals(prefId)) {
 			onDeleteProfileClick();
 		}

@@ -15,7 +15,7 @@
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="16dp"
+        android:padding="@dimen/content_padding"
         android:src="@drawable/ic_action_photo_dark"/>
 
     <LinearLayout
@@ -29,21 +29,25 @@
             style="@style/TextAppearance.ContextMenuTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/waypoint_one"/>
+            android:layout_marginLeft="@dimen/content_padding"
+            android:layout_marginRight="@dimen/content_padding"
+            android:layout_marginTop="@dimen/content_padding"
+            android:text="@string/waypoint_one"
+	        android:layout_marginEnd="@dimen/content_padding"
+	        android:layout_marginStart="@dimen/content_padding" />
 
         <TextView
             android:id="@+id/description"
             style="@style/TextAppearance.ContextMenuSubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="8dp"
-            tools:text="Lat: 50.45375 Lon: 30.48693"/>
+            android:layout_marginBottom="@dimen/content_padding_half"
+            android:layout_marginLeft="@dimen/content_padding"
+            android:layout_marginRight="@dimen/content_padding"
+            android:layout_marginTop="@dimen/content_padding_half"
+            tools:text="Lat: 50.45375 Lon: 30.48693"
+	        android:layout_marginEnd="@dimen/content_padding"
+	        android:layout_marginStart="@dimen/content_padding" />
 
     </LinearLayout>
 
@@ -60,7 +64,8 @@
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="@dimen/content_padding"
         android:layout_gravity="center_vertical"
-        android:text="@string/shared_string_cancel"/>
+        android:text="@string/shared_string_cancel"
+	    android:layout_marginEnd="@dimen/content_padding" />
 </LinearLayout>

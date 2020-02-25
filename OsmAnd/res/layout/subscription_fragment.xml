@@ -30,7 +30,8 @@
             android:textColor="@color/color_white"
             android:textSize="@dimen/default_list_text_size_large"
             android:textStyle="bold"
-            app:typeface="@string/font_roboto_regular"/>
+            app:typeface="@string/font_roboto_regular"
+	        android:layout_marginStart="20dp" />
 
     </LinearLayout>
 
@@ -86,7 +87,10 @@
                                 android:layout_marginTop="8dp"
                                 android:paddingLeft="2dp"
                                 android:text="@string/osm_live_subscription_desc"
-                                android:textColor="?android:attr/textColorPrimary"/>
+                                android:textColor="?android:attr/textColorPrimary"
+	                            android:layout_marginEnd="16dp"
+	                            android:paddingStart="2dp"
+	                            android:layout_marginStart="16dp" />
 
                         </LinearLayout>
 
@@ -104,7 +108,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="16dp"
                                 android:paddingLeft="34dp"
-                                android:text="@string/donation_to_osm"/>
+                                android:text="@string/donation_to_osm"
+	                            android:paddingStart="34dp"
+	                            android:layout_marginStart="16dp" />
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -114,7 +120,10 @@
                                 android:layout_marginTop="8dp"
                                 android:paddingLeft="2dp"
                                 android:text="@string/donation_to_osm_desc"
-                                android:textColor="?android:attr/textColorSecondary"/>
+                                android:textColor="?android:attr/textColorSecondary"
+	                            android:layout_marginEnd="16dp"
+	                            android:layout_marginStart="72dp"
+	                            android:paddingStart="2dp" />
 
                         </LinearLayout>
 
@@ -154,14 +163,17 @@
                                 android:layout_marginLeft="16dp"
                                 android:layout_marginRight="16dp"
                                 android:layout_marginTop="8dp"
-                                android:orientation="vertical">
+                                android:orientation="vertical"
+	                            android:layout_marginStart="16dp"
+	                            android:layout_marginEnd="16dp">
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:paddingLeft="2dp"
                                     android:text="@string/osm_live_support_region"
-                                    android:textColor="?android:attr/textColorSecondary"/>
+                                    android:textColor="?android:attr/textColorSecondary"
+	                                android:paddingStart="2dp" />
 
                                 <net.osmand.plus.widgets.AutoCompleteTextViewEx
                                     android:id="@+id/selectCountryEdit"
@@ -171,7 +183,10 @@
                                     android:editable="false"
                                     android:paddingLeft="2dp"
                                     android:paddingRight="0dp"
-                                    android:text="Ukraine"/>
+                                    android:text="Ukraine"
+	                                android:paddingStart="2dp"
+	                                android:paddingEnd="0dp"
+	                                android:drawableEnd="@drawable/ic_action_arrow_drop_down" />
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -179,7 +194,8 @@
                                     android:layout_marginTop="8dp"
                                     android:paddingLeft="2dp"
                                     android:text="@string/osm_live_region_desc"
-                                    android:textColor="?android:attr/textColorSecondary"/>
+                                    android:textColor="?android:attr/textColorSecondary"
+	                                android:paddingStart="2dp" />
 
 
                             </LinearLayout>
@@ -208,7 +224,10 @@
                                 android:layout_marginRight="16dp"
                                 android:hint="@string/shared_string_email_address"
                                 android:inputType="textEmailAddress"
-                                android:paddingLeft="2dp"/>
+                                android:paddingLeft="2dp"
+	                            android:layout_marginStart="16dp"
+	                            android:layout_marginEnd="16dp"
+	                            android:paddingStart="2dp" />
 
                         </LinearLayout>
 
@@ -220,7 +239,10 @@
                             android:layout_marginRight="16dp"
                             android:paddingLeft="2dp"
                             android:text="@string/osm_live_email_desc"
-                            android:textColor="?android:attr/textColorSecondary"/>
+                            android:textColor="?android:attr/textColorSecondary"
+	                        android:paddingStart="2dp"
+	                        android:layout_marginStart="72dp"
+	                        android:layout_marginEnd="16dp" />
 
 
                         <LinearLayout
@@ -250,7 +272,10 @@
                                     android:layout_marginRight="16dp"
                                     android:hint="@string/osm_live_user_public_name"
                                     android:inputType="text"
-                                    android:paddingLeft="2dp"/>
+                                    android:paddingLeft="2dp"
+	                                android:layout_marginEnd="16dp"
+	                                android:layout_marginStart="16dp"
+	                                android:paddingStart="2dp" />
 
 
                             </LinearLayout>
@@ -265,7 +290,10 @@
                                 android:layout_marginTop="8dp"
                                 android:paddingLeft="4dp"
                                 android:text="@string/osm_live_hide_user_name"
-                                android:textColor="?android:attr/textColorPrimary"/>
+                                android:textColor="?android:attr/textColorPrimary"
+	                            android:layout_marginEnd="16dp"
+	                            android:paddingStart="4dp"
+	                            android:layout_marginStart="72dp" />
 
                         </LinearLayout>
 
@@ -289,7 +317,11 @@
                             android:paddingLeft="16dp"
                             android:paddingRight="16dp"
                             android:text="@string/shared_string_save_changes"
-                            android:textColor="@color/color_white"/>
+                            android:textColor="@color/color_white"
+	                        android:layout_marginStart="72dp"
+	                        android:layout_marginEnd="16dp"
+	                        android:paddingStart="16dp"
+	                        android:paddingEnd="16dp" />
 
                     </LinearLayout>
 
