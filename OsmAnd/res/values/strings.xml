@@ -72,7 +72,7 @@
     <string name="sunset_at">Sunset at %1$s</string>
     <string name="sunrise_at">Sunrise at %1$s</string>
     <string name="shared_string_routing">Routing</string>
-    <string name="shared_string_custom_rendering_style">Custom rendering style</string>
+    <string name="shared_string_rendering_style">Rendering style</string>
     <string name="shared_string_include_data">Include additional data</string>
     <string name="import_profile_dialog_description">The imported profile contains additional data. Click Import to import only profile data or select additional data to import.</string>
     <string name="export_profile_dialog_description">You can select additional data to export along with the profile.</string>

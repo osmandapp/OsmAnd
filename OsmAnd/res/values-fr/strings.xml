@@ -3505,7 +3505,6 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_menu">Menu</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Calcul d\'itinéraire</string>
-    <string name="shared_string_custom_rendering_style">Style de rendu personnalisé</string>
     <string name="shared_string_include_data">Inclure des données supplémentaires</string>
     <string name="import_profile_dialog_description">Le profil importé contient des données supplémentaires. Cliquez sur Importer pour n\'importer que les données de profil ou sélectionnez des données supplémentaires à importer.</string>
     <string name="export_profile_dialog_description">Vous pouvez sélectionner des données supplémentaires à exporter en même temps que le profil.</string>

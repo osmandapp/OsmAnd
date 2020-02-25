@@ -319,6 +319,7 @@
 	<dimen name="coords_input_keyboard_item_height">56dp</dimen>
 
 	<dimen name="toolbar_height">56dp</dimen>
+	<dimen name="toolbar_height_expanded">112dp</dimen>
 
 	<dimen name="wikivoyage_search_list_header_height">36dp</dimen>
 	<dimen name="wikivoyage_article_card_icon_size">80dp</dimen>
@@ -353,5 +354,6 @@
 	<dimen name="setting_profile_item_switch_margin">18dp</dimen>
 	<dimen name="settings_divider_margin_start">72dp</dimen>
 	<dimen name="setting_list_item_large_height">72dp</dimen>
+	<dimen name="setting_list_item_small_height">42dp</dimen>
 
 </resources>

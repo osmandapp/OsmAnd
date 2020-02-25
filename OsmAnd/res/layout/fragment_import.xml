@@ -1,136 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="?attr/activity_background_basic"
-	android:orientation="vertical">
-
-	<LinearLayout
-		android:id="@+id/toolbar_layout"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:background="?attr/colorPrimary"
-		android:orientation="vertical">
-
-		<android.support.v7.widget.Toolbar
-			android:id="@+id/toolbar"
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/toolbar_height"
-			android:minHeight="@dimen/toolbar_height" />
-
-		<net.osmand.plus.widgets.TextViewEx
-			android:id="@+id/title"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:paddingStart="@dimen/content_padding"
-			android:paddingTop="@dimen/list_header_settings_top_margin"
-			android:paddingEnd="@dimen/content_padding"
-			android:paddingBottom="@dimen/list_header_settings_top_margin"
-			android:text="@string/shared_string_import"
-			android:textColor="?attr/app_bar_primary_item_color"
-			android:textSize="@dimen/dialog_header_text_size"
-			osmand:typeface="@string/font_roboto_medium" />
-
-	</LinearLayout>
-
-	<net.osmand.plus.widgets.TextViewEx
-		android:id="@+id/description"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:background="?attr/bg_color"
-		android:paddingStart="@dimen/content_padding"
-		android:paddingTop="@dimen/list_header_settings_top_margin"
-		android:paddingEnd="@dimen/content_padding"
-		android:paddingBottom="@dimen/list_header_settings_top_margin"
-		android:text="@string/select_data_to_import"
-		android:textColor="?android:textColorPrimary"
-		android:textSize="@dimen/default_list_text_size"
-		osmand:typeface="@string/font_roboto_medium" />
-
-	<include layout="@layout/card_bottom_divider" />
+	android:background="?attr/activity_background_basic">
 
 	<ExpandableListView
 		android:id="@+id/list"
 		android:layout_width="match_parent"
-		android:layout_height="0dp"
-		android:layout_weight="1"
+		android:layout_height="match_parent"
 		android:divider="@null"
 		android:dividerHeight="0dp"
 		android:drawSelectorOnTop="false"
+		android:focusable="false"
 		android:groupIndicator="@android:color/transparent"
-		android:listSelector="@android:color/transparent" />
-
-	<include layout="@layout/card_top_divider" />
+		android:listSelector="@android:color/transparent"
+		android:paddingBottom="@dimen/dialog_button_ex_height"
+		osmand:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 	<LinearLayout
 		android:id="@+id/buttons_container"
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/dialog_button_ex_height"
+		android:layout_gravity="bottom"
 		android:background="?attr/bg_color"
 		android:gravity="center"
-		android:orientation="horizontal"
-		android:paddingLeft="@dimen/content_padding"
-		android:paddingTop="@dimen/content_padding_small"
-		android:paddingRight="@dimen/content_padding"
-		android:paddingBottom="@dimen/content_padding_small">
+		android:orientation="vertical">
 
-		<FrameLayout
-			android:layout_width="0dp"
+		<include layout="@layout/divider" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:layout_weight="1">
+			android:orientation="horizontal"
+			android:paddingLeft="@dimen/content_padding"
+			android:paddingTop="@dimen/content_padding_small"
+			android:paddingRight="@dimen/content_padding"
+			android:paddingBottom="@dimen/content_padding_small">
 
-			<net.osmand.plus.widgets.TextViewEx
-				android:id="@+id/select_button"
-				android:layout_width="match_parent"
+			<FrameLayout
+				android:layout_width="0dp"
 				android:layout_height="match_parent"
-				android:background="?attr/selectableItemBackground"
-				android:ellipsize="end"
-				android:gravity="start|center_vertical"
-				android:maxLines="1"
-				android:paddingLeft="@dimen/content_padding_small"
-				android:paddingTop="@dimen/content_padding_half"
-				android:paddingRight="@dimen/content_padding_small"
-				android:paddingBottom="@dimen/content_padding_half"
-				android:text="@string/shared_string_select_all"
-				android:textColor="?attr/active_color_basic"
-				android:textSize="@dimen/default_desc_text_size"
-				osmand:typeface="@string/font_roboto_medium"
-				tools:text="Select all" />
+				android:layout_weight="1">
 
-		</FrameLayout>
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/select_button"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:background="?attr/selectableItemBackground"
+					android:ellipsize="end"
+					android:gravity="start|center_vertical"
+					android:maxLines="1"
+					android:paddingLeft="@dimen/content_padding_small"
+					android:paddingTop="@dimen/content_padding_half"
+					android:paddingRight="@dimen/content_padding_small"
+					android:paddingBottom="@dimen/content_padding_half"
+					android:text="@string/shared_string_select_all"
+					android:textColor="?attr/active_color_basic"
+					android:textSize="@dimen/default_desc_text_size"
+					osmand:typeface="@string/font_roboto_medium"
+					tools:text="Select all" />
 
-		<View
-			android:layout_width="@dimen/content_padding"
-			android:layout_height="match_parent" />
+			</FrameLayout>
 
-		<FrameLayout
-			android:layout_width="0dp"
-			android:layout_height="match_parent"
-			android:layout_weight="1"
-			android:background="?attr/dlg_btn_primary">
+			<View
+				android:layout_width="@dimen/content_padding"
+				android:layout_height="match_parent" />
 
-			<net.osmand.plus.widgets.TextViewEx
-				android:id="@+id/continue_button"
-				android:layout_width="match_parent"
+			<FrameLayout
+				android:layout_width="0dp"
 				android:layout_height="match_parent"
-				android:background="?attr/selectableItemBackground"
-				android:ellipsize="end"
-				android:gravity="end|center_vertical"
-				android:maxLines="1"
-				android:paddingLeft="@dimen/content_padding_small"
-				android:paddingTop="@dimen/content_padding_half"
-				android:paddingRight="@dimen/content_padding_small"
-				android:paddingBottom="@dimen/content_padding_half"
-				android:text="@string/shared_string_continue"
-				android:textColor="?attr/dlg_btn_primary_text"
-				android:textSize="@dimen/default_desc_text_size"
-				osmand:typeface="@string/font_roboto_medium"
-				tools:text="Continue" />
+				android:layout_weight="1"
+				android:background="?attr/dlg_btn_primary">
 
-		</FrameLayout>
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/continue_button"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:background="?attr/selectableItemBackground"
+					android:ellipsize="end"
+					android:gravity="end|center_vertical"
+					android:maxLines="1"
+					android:paddingLeft="@dimen/content_padding_small"
+					android:paddingTop="@dimen/content_padding_half"
+					android:paddingRight="@dimen/content_padding_small"
+					android:paddingBottom="@dimen/content_padding_half"
+					android:text="@string/shared_string_continue"
+					android:textColor="?attr/dlg_btn_primary_text"
+					android:textSize="@dimen/default_desc_text_size"
+					osmand:typeface="@string/font_roboto_medium"
+					tools:text="Continue" />
+
+			</FrameLayout>
+
+		</LinearLayout>
 
 	</LinearLayout>
 
-</LinearLayout>
+	<android.support.design.widget.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:background="@android:color/transparent">
+
+		<android.support.design.widget.CollapsingToolbarLayout
+			android:id="@+id/toolbar_layout"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/toolbar_height_expanded"
+			android:background="?attr/colorPrimary"
+			osmand:collapsedTitleTextAppearance="@style/AppBarTitle"
+			osmand:expandedTitleGravity="start|bottom"
+			osmand:expandedTitleTextAppearance="@style/AppBarTitle"
+			osmand:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+			<android.support.v7.widget.Toolbar
+				android:id="@+id/toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/toolbar_height"
+				android:minHeight="@dimen/toolbar_height"
+				osmand:layout_collapseMode="pin"
+				osmand:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
+				osmand:title="@string/shared_string_import">
+
+			</android.support.v7.widget.Toolbar>
+
+		</android.support.design.widget.CollapsingToolbarLayout>
+
+		<ImageView
+			android:id="@+id/shadowView"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/abp__shadow_height"
+			android:src="@drawable/preference_activity_action_bar_shadow"
+			tools:ignore="ContentDescription" />
+
+	</android.support.design.widget.AppBarLayout>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -15,12 +15,12 @@ import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ExpandableListView;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.ApplicationMode;
@@ -33,6 +33,7 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.AdditionalDataWrapper;
 import net.osmand.plus.quickaction.QuickAction;
@@ -245,6 +246,13 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 			}
 		}
 
+		Map<LatLon, AvoidRoadInfo> impassableRoads = app.getAvoidSpecificRoads().getImpassableRoads();
+		if (!impassableRoads.isEmpty()) {
+			dataList.add(new AdditionalDataWrapper(
+					AdditionalDataWrapper.Type.AVOID_ROADS,
+					new ArrayList<>(impassableRoads.values())
+			));
+		}
 		return dataList;
 	}
 
@@ -262,6 +270,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 		List<QuickAction> quickActions = new ArrayList<>();
 		List<PoiUIFilter> poiUIFilters = new ArrayList<>();
 		List<ITileSource> tileSourceTemplates = new ArrayList<>();
+		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
 		for (Object object : adapter.getDataToOperate()) {
 			if (object instanceof QuickAction) {
 				quickActions.add((QuickAction) object);
@@ -272,6 +281,8 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 				tileSourceTemplates.add((ITileSource) object);
 			} else if (object instanceof File) {
 				settingsItems.add(new SettingsHelper.FileSettingsItem(app, (File) object));
+			} else if (object instanceof AvoidRoadInfo) {
+				avoidRoads.add((AvoidRoadInfo) object);
 			}
 		}
 		if (!quickActions.isEmpty()) {
@@ -282,6 +293,9 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 		}
 		if (!tileSourceTemplates.isEmpty()) {
 			settingsItems.add(new SettingsHelper.MapSourcesSettingsItem(app, tileSourceTemplates));
+		}
+		if (!avoidRoads.isEmpty()) {
+			settingsItems.add(new SettingsHelper.AvoidRoadsSettingsItem(app, avoidRoads));
 		}
 		return settingsItems;
 	}

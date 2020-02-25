@@ -3500,5 +3500,4 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_include_data">Medtag yderligere data</string>
     <string name="export_profile_dialog_description">Vælg yderligere data, der skal eksporteres sammen med profilen.</string>
     <string name="index_name_antarctica">Antarktis</string>
-    <string name="shared_string_custom_rendering_style">Brugerdefineret renderingssstil</string>
 </resources>

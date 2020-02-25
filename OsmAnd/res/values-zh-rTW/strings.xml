@@ -3525,7 +3525,6 @@
     <string name="shared_string_menu">選單</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">路徑</string>
-    <string name="shared_string_custom_rendering_style">自訂彩現樣式</string>
     <string name="shared_string_include_data">包含額外資料</string>
     <string name="import_profile_dialog_description">已匯入的設定檔包含了額外資料。點擊匯入僅匯入設定檔資料或選取額外的資料以匯入。</string>
     <string name="export_profile_dialog_description">您可以選取額外的資料以與設定檔一起匯出。</string>

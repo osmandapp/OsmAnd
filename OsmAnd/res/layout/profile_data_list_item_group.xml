@@ -64,12 +64,24 @@
 				android:layout_marginBottom="@dimen/content_padding"
 				android:background="?attr/list_divider" />
 
-			<net.osmand.view.ThreeStateCheckbox
-				android:id="@+id/check_box"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_margin="@dimen/content_padding"
-				android:focusable="false" />
+			<FrameLayout
+				android:id="@+id/check_box_container"
+				android:layout_width="@dimen/acceptable_touch_radius"
+				android:layout_height="@dimen/acceptable_touch_radius"
+				android:layout_marginEnd="@dimen/text_margin_small"
+				android:layout_marginRight="@dimen/text_margin_small"
+				android:background="?attr/selectableItemBackgroundBorderless">
+
+				<net.osmand.view.ThreeStateCheckbox
+					android:id="@+id/check_box"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center"
+					android:clickable="false"
+					android:enabled="false"
+					android:focusable="false" />
+
+			</FrameLayout>
 
 		</LinearLayout>
 

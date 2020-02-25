@@ -749,4 +749,9 @@
         <item name="colorControlHighlight">?attr/app_bar_primary_item_color</item>
 
     </style>
+
+    <style name="AppBarTitle" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">?attr/app_bar_primary_item_color</item>
+        <item name="android:textSize">@dimen/dialog_header_text_size</item>
+    </style>
 </resources>
