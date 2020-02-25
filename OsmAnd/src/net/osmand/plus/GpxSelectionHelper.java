@@ -728,7 +728,10 @@ public class GpxSelectionHelper {
 		}
 
 		public List<TrkSegment> getPointsToDisplay() {
-			return joinSegments ? gpxFile.getGeneralTrack().segments : processedPointsToDisplay;
+			if (joinSegments && gpxFile != null && gpxFile.getGeneralTrack() != null) {
+				return gpxFile.getGeneralTrack().segments;
+			}
+			return processedPointsToDisplay;
 		}
 
 		public List<TrkSegment> getModifiablePointsToDisplay() {
