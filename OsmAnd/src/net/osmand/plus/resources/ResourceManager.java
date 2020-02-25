@@ -219,7 +219,6 @@ public class ResourceManager {
 	private HandlerThread renderingBufferImageThread;
 	
 	protected boolean internetIsNotAccessible = false;
-	private java.text.DateFormat dateFormat;
 	private boolean depthContours;
 	
 	public ResourceManager(OsmandApplication context) {
@@ -237,7 +236,6 @@ public class ResourceManager {
 		renderingBufferImageThread.start();
 
 		tileDownloader = MapTileDownloader.getInstance(Version.getFullVersion(context));
-		dateFormat = DateFormat.getDateFormat(context);
 		resetStoreDirectory();
 
 		WindowManager mgr = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
@@ -296,7 +294,7 @@ public class ResourceManager {
 	}
 	
 	public java.text.DateFormat getDateFormat() {
-		return dateFormat;
+		return DateFormat.getDateFormat(context);
 	}
 	
 	public OsmandApplication getContext() {
@@ -405,6 +403,7 @@ public class ResourceManager {
 		if (file.exists() && file.canRead()) {
 			File[] lf = file.listFiles();
 			if (lf != null) {
+				java.text.DateFormat dateFormat = getDateFormat();
 				for (File f : lf) {
 					if (f.isDirectory()) {
 						String lang = f.getName().replace("-tts", "");
@@ -430,6 +429,7 @@ public class ResourceManager {
 		if (file.exists() && file.canRead()) {
 			File[] lf = file.listFiles();
 			if (lf != null) {
+				java.text.DateFormat dateFormat = getDateFormat();
 				for (File f : lf) {
 					if (!f.isDirectory()) {
 						indexFileNames.put(f.getName(), dateFormat.format(f.lastModified()));
@@ -671,6 +671,7 @@ public class ResourceManager {
 		if (hasWorldBasemap && worldBasemapMini != null) {
 			files.remove(worldBasemapMini);
 		}
+		java.text.DateFormat dateFormat = getDateFormat();
 		for (File f : files) {
 			progress.startTask(context.getString(R.string.indexing_map) + " " + f.getName(), -1); //$NON-NLS-1$
 			try {
