@@ -1593,15 +1593,14 @@ public class SettingsHelper {
 			JSONArray itemsJson = json.getJSONArray("items");
 			for (int i = 0; i < itemsJson.length(); i++) {
 				JSONObject itemJson = itemsJson.getJSONObject(i);
-				SettingsItem item = null;
+				SettingsItem item;
 				try {
 					item = createItem(itemJson);
-				} catch (IllegalArgumentException e) {
-					LOG.error("Error creating item from json: " + itemJson, e);
-				} finally {
 					if (item != null) {
 						items.add(item);
 					}
+				} catch (IllegalArgumentException e) {
+					LOG.error("Error creating item from json: " + itemJson, e);
 				}
 			}
 			if (items.size() == 0) {
@@ -1864,10 +1863,12 @@ public class SettingsHelper {
 		}
 
 		@Override
-		protected void onPostExecute(List<SettingsItem> items) {
-			this.items = items;
+		protected void onPostExecute(@Nullable List<SettingsItem> items) {
+			if (items != null) {
+				this.items = items;
+			}
 			if (collectOnly) {
-				listener.onSettingsImportFinished(true, false, items);
+				listener.onSettingsImportFinished(true, false, this.items);
 			} else {
 				if (items != null && items.size() > 0) {
 					processNextItem();

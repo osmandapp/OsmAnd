@@ -205,9 +205,9 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 		}
 
 		List<ITileSource> iTileSources = new ArrayList<>();
-		Set<String> tileSourceKeys = app.getSettings().getTileSourceEntries(true).keySet();
-		for (String key : tileSourceKeys) {
-			File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + key);
+		Set<String> tileSourceNames = app.getSettings().getTileSourceEntries(true).keySet();
+		for (String name : tileSourceNames) {
+			File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + name);
 			if (f != null) {
 				ITileSource template;
 				if (f.getName().endsWith(SQLiteTileSource.EXT)) {
