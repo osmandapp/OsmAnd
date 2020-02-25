@@ -113,8 +113,6 @@ public class OsmMapUtils {
 		
 	}
 	
-//	private void findClosestPoint
-	
 	private static void linkWaysIntoRing(List<Node> ring, Iterator<Way> it) {
 		while (it.hasNext()) {
 			Way candidate = it.next();
