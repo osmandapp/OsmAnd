@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 
 import net.osmand.data.LatLon;
 import net.osmand.osm.edit.Relation.RelationMember;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
 
@@ -32,20 +35,104 @@ public class OsmMapUtils {
 		} else if (e instanceof Way) {
 			return getWeightCenterForWay(((Way) e));
 		} else if (e instanceof Relation) {
+			LatLon res = null;
 			List<LatLon> list = new ArrayList<LatLon>();
-			for (RelationMember fe : ((Relation) e).getMembers()) {
-				LatLon c = null;
-				// skip relations to avoid circular dependencies
-				if (!(fe.getEntity() instanceof Relation) && fe.getEntity() != null) {
-					c = getCenter(fe.getEntity());
+			if (e.getTag("type").equals("multipolygon")) {
+				res = multipolygonPoiCenter(e);
+			} 
+			if (res == null) {
+				for (RelationMember fe : ((Relation) e).getMembers()) {
+					LatLon c = null;
+					// skip relations to avoid circular dependencies
+					if (!(fe.getEntity() instanceof Relation) && fe.getEntity() != null) {
+						c = getCenter(fe.getEntity());
+					}
+					if (c != null) {
+						list.add(c);
+					}
 				}
-				if (c != null) {
-					list.add(c);
-				}
+				res = getWeightCenter(list);
+				
 			}
-			return getWeightCenter(list);
+			return res;
+			
+			
 		}
 		return null;
+	}
+	
+	private static LatLon multipolygonPoiCenter(Entity e) {
+		if (!(e instanceof Relation) || !e.getTag("type").equals("multipolygon")) {
+			return null;
+		}
+		LatLon center = null;
+		List<Way> outerWays = new ArrayList<>();
+		Node firstNode;
+		List<Node> ring = new LinkedList<>();
+		
+		// for finding center we need only outer ways
+		for (RelationMember es : ((Relation) e).getMembers()) {
+			if (es.getEntity() instanceof Way) {
+				boolean outer = "outer".equals(es.getRole()); //$NON-NLS-1$
+				if (outer) {
+					outerWays.add((Way) es.getEntity());
+				}
+			}
+		}
+		
+		if (Algorithms.isEmpty(outerWays)) {
+			return null;
+		} else if (outerWays.size() == 1) {
+			Way oneWay = outerWays.get(0);
+			if (oneWay.getFirstNode().equals(oneWay.getLastNode())) {
+				ring = oneWay.getNodes();
+			} else {
+				return null;
+			}
+		} else {
+			//add nodes from first way and remove it from collection
+			ring.addAll(outerWays.get(0).getNodes());
+			outerWays.remove(0);
+			int size = outerWays.size();
+			//in case ways are in wrong order, we will iterate until there are no ways or we will not check all variants (need to find better way):
+			for (int i = 0; i < size; i++) {
+				if (outerWays.size() > 0 && !Algorithms.isEmpty(ring)) {
+					Iterator<Way> it = outerWays.iterator();
+					//link ways in correct order and try to close ring
+					linkWaysIntoRing(ring, it);						
+				} else {
+					break;
+				}
+			}
+		}
+		if (!Algorithms.isEmpty(ring) && ring.get(0).equals(ring.get(ring.size()-1))) {
+			return getComplexPolyCenter(ring);
+		} else {
+			return null;
+		}
+		
+	}
+	
+//	private void findClosestPoint
+	
+	private static void linkWaysIntoRing(List<Node> ring, Iterator<Way> it) {
+		while (it.hasNext()) {
+			Way candidate = it.next();
+			List<Node> cn = candidate.getNodes();
+			Node lastInRing = ring.get(ring.size()-1);
+			//check if first node of way same as last from ring (best scenario)
+			if (candidate.getFirstNode().compareNode(lastInRing)) {
+				cn.remove(0);
+				ring.addAll(cn);
+				it.remove();
+			//check if way reversed in relation to previous
+			} else if (candidate.getLastNode().compareNode(lastInRing)) {
+				Collections.reverse(cn);
+				cn.remove(0);
+				ring.addAll(cn);
+				it.remove();
+			} 
+		}
 	}
 	
 	public static LatLon getComplexPolyCenter(Collection<Node> nodes) {
@@ -132,7 +219,6 @@ public class OsmMapUtils {
 		return new LatLon(flat, flon);
 
 	}
-	
 
 	public static LatLon getMathWeightCenterForNodes(Collection<Node> nodes) {
 		if (nodes.isEmpty()) {
