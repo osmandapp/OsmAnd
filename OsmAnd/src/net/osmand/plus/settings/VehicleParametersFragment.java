@@ -61,7 +61,9 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 					setupDefaultSpeedPref();
 				}
 			}
-		} else if (routeService == RouteService.STRAIGHT) {
+		} else if (routeService == RouteService.STRAIGHT
+				|| routeService == RouteService.BROUTER
+				|| routeService == RouteService.DIRECT_TO) {
 			setupDefaultSpeedPref();
 		}
 	}
