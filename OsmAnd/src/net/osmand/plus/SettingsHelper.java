@@ -1754,37 +1754,34 @@ public class SettingsHelper {
 					} finally {
 						zis.closeEntry();
 					}
-					SettingsItemsFactory itemsFactory;
-					try {
-						itemsFactory = new SettingsItemsFactory(app, itemsJson);
-						if (collecting) {
+					if (collecting) {
+						SettingsItemsFactory itemsFactory;
+						try {
+							itemsFactory = new SettingsItemsFactory(app, itemsJson);
 							items.addAll(itemsFactory.getItems());
+						} catch (IllegalArgumentException e) {
+							LOG.error("Error parsing items: " + itemsJson, e);
+							throw new IllegalArgumentException("No items");
+						} catch (JSONException e) {
+							LOG.error("Error parsing items: " + itemsJson, e);
+							throw new IllegalArgumentException("No items");
 						}
-					} catch (IllegalArgumentException e) {
-						LOG.error("Error parsing items: " + itemsJson, e);
-						throw new IllegalArgumentException("No items");
-					} catch (JSONException e) {
-						LOG.error("Error parsing items: " + itemsJson, e);
-						throw new IllegalArgumentException("No items");
 					}
 					while ((entry = zis.getNextEntry()) != null) {
 						String fileName = entry.getName();
-						SettingsItem item = itemsFactory.getItemByFileName(fileName);
-						if (item != null && collecting && item.shouldReadOnCollecting()
-								|| item != null && !collecting && !item.shouldReadOnCollecting()) {
-							try {
-								for (SettingsItem settingsItem : items) {
-									if (item.equals(settingsItem)) {
-										item.setShouldReplace(settingsItem.shouldReplace);
-										item.getReader().readFromStream(ois);
-									}
+						for (SettingsItem item : items) {
+							if (item != null && item.getFileName().equals(fileName)
+									&& (collecting && item.shouldReadOnCollecting()
+									|| !collecting && !item.shouldReadOnCollecting())) {
+								try {
+									item.getReader().readFromStream(ois);
+								} catch (IllegalArgumentException e) {
+									LOG.error("Error reading item data: " + item.getName(), e);
+								} catch (IOException e) {
+									LOG.error("Error reading item data: " + item.getName(), e);
+								} finally {
+									zis.closeEntry();
 								}
-							} catch (IllegalArgumentException e) {
-								LOG.error("Error reading item data: " + item.getName(), e);
-							} catch (IOException e) {
-								LOG.error("Error reading item data: " + item.getName(), e);
-							} finally {
-								zis.closeEntry();
 							}
 						}
 					}
