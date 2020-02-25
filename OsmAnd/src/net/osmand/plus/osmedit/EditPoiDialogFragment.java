@@ -104,7 +104,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	private EditPoiData editPoiData;
-	private ViewPager viewPager;
+	private EditPoiViewPager viewPager;
 	private AutoCompleteTextView poiTypeEditText;
 
 	private OpenstreetmapUtil mOpenstreetmapUtil;
@@ -153,7 +153,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			}
 		});
 
-		viewPager = (ViewPager) view.findViewById(R.id.viewpager);
+		viewPager = (EditPoiViewPager) view.findViewById(R.id.viewpager);
 		String basicTitle = getResources().getString(R.string.tab_title_basic);
 		String extendedTitle = getResources().getString(R.string.tab_title_advanced);
 		final MyAdapter pagerAdapter = new MyAdapter(getChildFragmentManager(), basicTitle, extendedTitle);

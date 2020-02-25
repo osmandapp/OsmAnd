@@ -19,10 +19,15 @@
         app:contentInsetLeft="72dp"
         app:contentInsetStart="72dp"/>
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:orientation="vertical">
 
         <android.support.design.widget.AppBarLayout
@@ -111,17 +116,12 @@
                 app:tabTextColor="@android:color/darker_gray"/>
         </android.support.design.widget.AppBarLayout>
 
-        <ScrollView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:fillViewport="true">
-
-            <android.support.v4.view.ViewPager
+            <net.osmand.plus.osmedit.EditPoiViewPager
                 android:id="@+id/viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-        </ScrollView>
     </LinearLayout>
+</ScrollView>
 
     <View
         android:id="@+id/buttonDivider"
