@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.map.ITileSource;
@@ -81,6 +82,11 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		TextViewEx continueBtn = root.findViewById(R.id.continue_button);
 		selectBtn = root.findViewById(R.id.select_button);
 		expandableList = root.findViewById(R.id.list);
+		ViewCompat.setNestedScrollingEnabled(expandableList, true);
+		View header = inflater.inflate(R.layout.list_item_description_header, container, false);
+		TextView description = header.findViewById(R.id.description);
+		description.setText(R.string.select_data_to_import);
+		expandableList.addHeaderView(header);
 		continueBtn.setOnClickListener(this);
 		selectBtn.setOnClickListener(this);
 		if (Build.VERSION.SDK_INT >= 21) {
