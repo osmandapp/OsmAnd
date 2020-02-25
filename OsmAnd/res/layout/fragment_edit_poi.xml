@@ -48,8 +48,8 @@
                     android:importantForAutofill="noExcludeDescendants"
                     android:layout_marginLeft="@dimen/settings_divider_margin_start"
                     android:layout_marginRight="@dimen/content_padding"
-	                android:layout_marginStart="@dimen/settings_divider_margin_start"
-	                android:layout_marginEnd="@dimen/content_padding">
+                    android:layout_marginStart="@dimen/settings_divider_margin_start"
+                    android:layout_marginEnd="@dimen/content_padding">
 
                     <EditText
                         android:id="@+id/poiNameEditText"
@@ -86,7 +86,7 @@
                     android:importantForAutofill="noExcludeDescendants"
                     android:layout_marginLeft="24dp"
                     android:layout_weight="1"
-	                android:layout_marginStart="24dp">
+                    android:layout_marginStart="24dp">
 
                     <AutoCompleteTextView
                         android:id="@+id/poiTypeEditText"
@@ -98,7 +98,7 @@
                         android:imeOptions="actionSend"
                         android:inputType="text"
                         tools:text="@string/lorem_ipsum"
-	                    android:drawableEnd="@drawable/ic_action_arrow_drop_down" />
+                        android:drawableEnd="@drawable/ic_action_arrow_drop_down" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -152,7 +152,7 @@
             android:visibility="gone"
             app:textAllCapsCompat="true"
             tools:visibility="visible"
-	        android:layout_marginStart="@dimen/showAllButtonMarginRight" />
+            android:layout_marginStart="@dimen/showAllButtonMarginRight" />
 
         <Space
             android:layout_width="0dp"
