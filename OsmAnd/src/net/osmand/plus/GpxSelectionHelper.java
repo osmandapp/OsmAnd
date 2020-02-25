@@ -35,6 +35,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -599,6 +600,9 @@ public class GpxSelectionHelper {
 					if (dataItem.getColor() != 0) {
 						gpx.setColor(dataItem.getColor());
 					}
+					if (gpx.getGeneralTrack() == null) {
+						app.getGpxDbHelper().updateJoinSegments(dataItem, false);
+					}
 					sf.setJoinSegments(dataItem.isJoinSegments());
 				}
 				sf.setGpxFile(gpx, app);
@@ -728,8 +732,12 @@ public class GpxSelectionHelper {
 		}
 
 		public List<TrkSegment> getPointsToDisplay() {
-			if (joinSegments && gpxFile != null && gpxFile.getGeneralTrack() != null) {
-				return gpxFile.getGeneralTrack().segments;
+			if (joinSegments) {
+				if (gpxFile != null && gpxFile.getGeneralTrack() != null) {
+					return gpxFile.getGeneralTrack().segments;
+				} else {
+					return Collections.emptyList();
+				}
 			}
 			return processedPointsToDisplay;
 		}
