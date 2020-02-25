@@ -600,9 +600,6 @@ public class GpxSelectionHelper {
 					if (dataItem.getColor() != 0) {
 						gpx.setColor(dataItem.getColor());
 					}
-					if (gpx.getGeneralTrack() == null) {
-						app.getGpxDbHelper().updateJoinSegments(dataItem, false);
-					}
 					sf.setJoinSegments(dataItem.isJoinSegments());
 				}
 				sf.setGpxFile(gpx, app);
