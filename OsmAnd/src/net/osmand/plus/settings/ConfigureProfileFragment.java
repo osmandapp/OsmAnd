@@ -323,22 +323,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
 	}
 
-	private void shareProfile(@NonNull File file, @NonNull ApplicationMode profile) {
-		try {
-			Context ctx = requireContext();
-			final Intent sendIntent = new Intent();
-			sendIntent.setAction(Intent.ACTION_SEND);
-			sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.exported_osmand_profile, profile.toHumanString()));
-			sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMyApplication(), file));
-			sendIntent.setType("*/*");
-			sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-			startActivity(sendIntent);
-		} catch (Exception e) {
-			app.showToastMessage(R.string.export_profile_failed);
-			LOG.error("Share profile error", e);
-		}
-	}
-
 	private void setupOsmandPluginsPref(PreferenceCategory preferenceCategory) {
 		Context ctx = getContext();
 		if (ctx == null) {

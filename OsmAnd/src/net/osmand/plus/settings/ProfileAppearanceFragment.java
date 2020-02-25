@@ -735,8 +735,13 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		progress.setOnShowListener(new DialogInterface.OnShowListener() {
 			@Override
 			public void onShow(DialogInterface dialog) {
-				ApplicationMode mode = saveNewProfile();
-				saveProfileBackup(mode, listener);
+				app.runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						ApplicationMode mode = saveNewProfile();
+						saveProfileBackup(mode, listener);
+					}
+				});
 			}
 		});
 		progress.show();
