@@ -246,7 +246,7 @@ public class SettingsHelper {
 	public abstract static class CollectionSettingsItem<T> extends SettingsItem {
 
 		protected List<T> items;
-		protected List<T> duplicateItems;
+		protected List<T> duplicateItems = new ArrayList<>();
 		protected List<T> existingItems;
 
 		CollectionSettingsItem(@NonNull SettingsItemType type, @NonNull List<T> items) {
@@ -859,7 +859,6 @@ public class SettingsHelper {
 			this.app = app;
 			actionRegistry = app.getQuickActionRegistry();
 			existingItems = actionRegistry.getQuickActions();
-			duplicateItems = new ArrayList<>();
 		}
 
 		QuickActionSettingsItem(@NonNull OsmandApplication app,
@@ -868,7 +867,6 @@ public class SettingsHelper {
 			this.app = app;
 			actionRegistry = app.getQuickActionRegistry();
 			existingItems = actionRegistry.getQuickActions();
-			duplicateItems = new ArrayList<>();
 		}
 
 		@Override
@@ -1027,14 +1025,12 @@ public class SettingsHelper {
 			super(SettingsItemType.POI_UI_FILTERS, items);
 			this.app = app;
 			existingItems = app.getPoiFilters().getUserDefinedPoiFilters(false);
-			duplicateItems = new ArrayList<>();
 		}
 
 		PoiUiFilterSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			super(SettingsItemType.POI_UI_FILTERS, json);
 			this.app = app;
 			existingItems = app.getPoiFilters().getUserDefinedPoiFilters(false);
-			duplicateItems = new ArrayList<>();
 		}
 
 		@Override
@@ -1199,7 +1195,6 @@ public class SettingsHelper {
 			this.app = app;
 			Collection values = new LinkedHashMap<>(app.getSettings().getTileSourceEntries(true)).values();
 			existingItemsNames = new ArrayList(values);
-			duplicateItems = new ArrayList<>();
 		}
 
 		MapSourcesSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
@@ -1207,7 +1202,6 @@ public class SettingsHelper {
 			this.app = app;
 			Collection values = new LinkedHashMap<>(app.getSettings().getTileSourceEntries(true)).values();
 			existingItemsNames = new ArrayList(values);
-			duplicateItems = new ArrayList<>();
 		}
 
 		@Override
@@ -1429,7 +1423,6 @@ public class SettingsHelper {
 			settings = app.getSettings();
 			specificRoads = app.getAvoidSpecificRoads();
 			existingItems = new ArrayList<>(specificRoads.getImpassableRoads().values());
-			duplicateItems = new ArrayList<>();
 		}
 
 		AvoidRoadsSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
@@ -1438,7 +1431,6 @@ public class SettingsHelper {
 			settings = app.getSettings();
 			specificRoads = app.getAvoidSpecificRoads();
 			existingItems = new ArrayList<>(specificRoads.getImpassableRoads().values());
-			duplicateItems = new ArrayList<>();
 		}
 
 		@NonNull

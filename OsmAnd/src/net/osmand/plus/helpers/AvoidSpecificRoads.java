@@ -37,6 +37,7 @@ import net.osmand.plus.routing.RoutingHelper.RouteSegmentSearchResult;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -415,7 +416,7 @@ public class AvoidSpecificRoads {
 			AvoidRoadInfo other = (AvoidRoadInfo) obj;
 			return Math.abs(latitude - other.latitude) < 0.00001
 					&& Math.abs(longitude - other.longitude) < 0.00001
-					&& name.equals(other.name);
+					&& Algorithms.objectEquals(name, other.name);
 		}
 	}
 }

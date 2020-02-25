@@ -281,7 +281,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 			case MAP_SOURCES:
 				return R.string.quick_action_map_source_title;
 			case CUSTOM_RENDER_STYLE:
-				return R.string.shared_string_custom_rendering_style;
+				return R.string.shared_string_rendering_style;
 			case CUSTOM_ROUTING:
 				return R.string.shared_string_routing;
 			case AVOID_ROADS:

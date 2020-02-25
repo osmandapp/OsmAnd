@@ -182,7 +182,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 			duplicates.addAll(routingFilesList);
 		}
 		if (!renderFilesList.isEmpty()) {
-			duplicates.add(getString(R.string.shared_string_custom_rendering_style));
+			duplicates.add(getString(R.string.shared_string_rendering_style));
 			duplicates.addAll(renderFilesList);
 		}
 		if (!avoidRoads.isEmpty()) {
