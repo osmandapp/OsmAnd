@@ -114,7 +114,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/list_content_padding"
                             android:layout_marginRight="@dimen/list_content_padding"
-                            android:src="@drawable/ic_action_altitude_average"/>
+                            android:src="@drawable/ic_action_altitude_average"
+	                        android:layout_marginStart="@dimen/list_content_padding"
+	                        android:layout_marginEnd="@dimen/list_content_padding" />
 
                         <TextView
                             android:id="@+id/y_axis_title"
@@ -124,14 +126,16 @@
                             android:layout_marginRight="8dp"
                             android:textColor="?android:attr/textColorPrimary"
                             android:textSize="@dimen/default_desc_text_size"
-                            tools:text="@string/altitude"/>
+                            tools:text="@string/altitude"
+	                        android:layout_marginEnd="8dp" />
 
                         <ImageView
                             android:id="@+id/y_axis_arrow"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
-                            android:src="@drawable/ic_action_arrow_drop_down"/>
+                            android:src="@drawable/ic_action_arrow_drop_down"
+	                        android:layout_marginEnd="8dp" />
 
                     </LinearLayout>
 
@@ -158,7 +162,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/list_content_padding"
                             android:layout_marginRight="@dimen/list_content_padding"
-                            android:src="@drawable/ic_action_speed"/>
+                            android:src="@drawable/ic_action_speed"
+	                        android:layout_marginStart="@dimen/list_content_padding"
+	                        android:layout_marginEnd="@dimen/list_content_padding" />
 
                         <TextView
                             android:id="@+id/x_axis_title"
@@ -168,14 +174,16 @@
                             android:layout_marginRight="8dp"
                             android:textColor="?android:attr/textColorPrimary"
                             android:textSize="@dimen/default_desc_text_size"
-                            tools:text="@string/map_widget_speed"/>
+                            tools:text="@string/map_widget_speed"
+	                        android:layout_marginEnd="8dp" />
 
                         <ImageView
                             android:id="@+id/x_axis_arrow"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
-                            android:src="@drawable/ic_action_arrow_drop_down"/>
+                            android:src="@drawable/ic_action_arrow_drop_down"
+	                        android:layout_marginEnd="8dp" />
 
                     </LinearLayout>
 

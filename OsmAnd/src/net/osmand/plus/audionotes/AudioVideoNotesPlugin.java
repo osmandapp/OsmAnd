@@ -1142,7 +1142,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		if (mediaRec != null) {
 			try {
 				mediaRec.stop();
-			} catch (IllegalStateException e) {
+			} catch (RuntimeException e) {
 				log.error(e.getMessage(), e);
 			}
 			indexFile(true, mediaRecFile);

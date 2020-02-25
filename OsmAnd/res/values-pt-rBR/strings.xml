@@ -3530,4 +3530,16 @@ Pôr do Sol: %2$s</string>
     <string name="no_recalculation_setting">Desativar recálculo</string>
     <string name="route_recalculation_dist_title">Distância mínima para recalcular a rota</string>
     <string name="route_recalculation_dist_descr">A rota será recalculada se a distância até a rota for maior que o parâmetro especificado</string>
+    <string name="profile_type_custom_string">Perfil personalizado</string>
+    <string name="shared_string_angle_param">Ângulo: %s°</string>
+    <string name="shared_string_angle">Ângulo</string>
+    <string name="recalc_angle_dialog_descr">Segmento extra reto entre minha localização e a rota calculada será exibido até que a rota seja recalculada</string>
+    <string name="recalc_angle_dialog_title">Ângulo mínimo entre minha localização e rota</string>
+    <string name="shared_string_preparing">Preparando</string>
+    <string name="shared_string_poi_types">Tipos de POI</string>
+    <string name="shared_string_nothing_selected">Nada selecionado</string>
+    <string name="shared_string_quick_actions">Ações rápidas</string>
+    <string name="shared_string_profiles">Perfis</string>
+    <string name="listed_exist">Listado %1$s já existe no OsmAnd.</string>
+    <string name="replace_all_desc">Os itens atuais serão substituídos pelos itens do arquivo</string>
 </resources>

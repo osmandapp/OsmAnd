@@ -44,7 +44,9 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
             android:layout_marginRight="@dimen/bottom_sheet_content_margin"
-            android:focusableInTouchMode="true"/>
+            android:focusableInTouchMode="true"
+	        android:layout_marginStart="@dimen/bottom_sheet_content_margin"
+	        android:layout_marginEnd="@dimen/bottom_sheet_content_margin" />
 
     </LinearLayout>
 
@@ -94,7 +96,9 @@
 			android:textSize="@dimen/default_desc_text_size"
 			osmand:typeface="@string/font_roboto_medium"
 			tools:ignore="UnusedAttribute"
-			tools:text="Read" />
+			tools:text="Read"
+			android:paddingEnd="@dimen/bottom_sheet_content_padding_small"
+			android:paddingStart="@dimen/bottom_sheet_content_padding_small" />
 
 	</LinearLayout>
 

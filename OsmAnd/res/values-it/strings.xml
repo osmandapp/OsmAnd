@@ -3440,7 +3440,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="login_and_pass">Nome utente e password</string>
     <string name="plugin_global_prefs_info">Queste impostazioni del plugin sono globali e si applicano a tutti i profili.</string>
     <string name="osm_editing">Modifica di OpenStreetMap</string>
-    <string name="osm_edits_view_descr">È possibile visualizzare tutte le modifiche non caricate o le note OSM in Menu - I miei luoghi - Modifiche OSM. I punti caricati non vengono visualizzati in OsmAnd.</string>
+    <string name="osm_edits_view_descr">È possibile visualizzare tutte le modifiche non caricate o le note OSM in %1$s. I punti caricati non vengono visualizzati in OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">L\'icona viene visualizzata solo durante la navigazione o in movimento.</string>
     <string name="logcat_buffer_descr">Controlla e condividi i log dettagliati dell\'applicazione</string>
@@ -3461,7 +3461,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="accessibility_announce">Annunci</string>
     <string name="select_map_icon_descr">Icona visualizzata da fermi.</string>
     <string name="search_offline_geo_error">Impossibile analizzare il dato geo \'%s\'.</string>
-    <string name="monitoring_min_speed_descr">"Questo è un filtro delle basse velocità per non registrare i punti inferiori a una data velocità.  Questo può permettere di registrare tracce dall\'aspetto più pulito quando visualizzate sulla mappa."</string>
+    <string name="monitoring_min_speed_descr">Questo è un filtro delle basse velocità per non registrare i punti inferiori a una data velocità. Questo può permettere di registrare tracce dall\'aspetto più pulito quando visualizzate sulla mappa.</string>
     <string name="monitoring_min_speed_descr_side_effect">Effetto collaterale: alle tue tracce mancheranno tutte le sezioni in cui il criterio della velocità non sarà soddisfatto (es. quando spingi la tua bici in una elevata pendenza). Altrettanto non ci saranno informazioni nei periodi di riposo o ristoro. Questo ha effetto su tutte le analisi ed elaborazione dei dati, come quando si prova a determinare la lunghezza totale del tuo percorso, il tempo in movimento, o la velocità media.</string>
     <string name="monitoring_min_speed_descr_recommendation">Raccomandazione: prova prima a utilizzare il sensore del movimento attraverso la registrazione del filtro del minimo dislocamento (B), potrebbe produrre migliori risultati, e perderai meno dati. Se le tue tracce continuano a essere sporche a basse velocità, prova con valori maggiori di zero. Si prega di notare che alcune misurazioni possono non riportare nessuna velocità (alcuni metodi basti sulle reti), in questi casi non registrerai alcun dato.</string>
     <string name="monitoring_min_speed_descr_remark">Osservazione: controllo velocità &gt; 0 : molti chip GPS riportano un valore di velocità solo se l\'algoritmo determina che tu sei in movimento, e nessuno invece se non lo sei. Quindi utilizzando l\'impostazione &gt; 0 nel filtro, in un certo senso utilizza il sensore di movimento del chip GPS. Ma anche se non filtrati qui nel momento della registrazione, comunque utilizziamo questa caratteristica nell\'analisi dei nostri file GPX per determinare al distanza corretta, es. il valore visualizzato in questo campo è la distanza registrata finché si è in movimento.</string>
@@ -3495,31 +3495,31 @@ Rappresenta l\'area: %1$s x %2$s</string>
 \n
 \nSe abilitato OsmAnd userà le impostazioni di sospensione del sistema.</string>
     <string name="clear_recorded_data">Elimina i dati registrati</string>
-    <string name="release_3_6">"• Profili: ora puoi cambiare l\'ordine, impostare l\'icona per le mappe, cambiare tutte le impostazioni dei profili di base e reimpostarle a quelle preimpostate
-\n
-\n • Aggiunto nella navigazione il numero delle uscite
-\n
-\n • Riorganizzate le impostazioni dei componenti aggiuntivi
-\n
-\n • Riorganizzate la finestra delle Impostazioni per un veloce accesso a tutti i  profili
-\n
-\n • Aggiunta l\'opzione per copiare le impostazioni da un profilo a un altro
-\n
-\n • Aggiunta la possibilità di cambiare nella Ricerca l\'ordine delle categorie di PDI o di nasconderle
-\n
-\n • Corretto l\'allineamento dei icone dei PDI nella mappa
-\n
-\n • Aggiunti i dati alba/tramonto in Configura la mappa
-\n
-\n • Aggiunte alla mappa le icone Casa/Lavoro
-\n
-\n • Aggiunto il supporto per le descrizioni su più linee in Impostazioni
-\n
-\n • Aggiunto la traslitterazione corretta nella mappa del Giappone
-\n
+    <string name="release_3_6">• Profili: ora puoi cambiare l\'ordine, impostare l\'icona per le mappe, cambiare tutte le impostazioni dei profili di base e reimpostarle a quelle preimpostate 
+\n 
+\n • Aggiunto nella navigazione il numero delle uscite 
+\n 
+\n • Riorganizzate le impostazioni dei componenti aggiuntivi 
+\n 
+\n • Riorganizzate la finestra delle Impostazioni per un veloce accesso a tutti i profili 
+\n 
+\n • Aggiunta l\'opzione per copiare le impostazioni da un profilo a un altro 
+\n 
+\n • Aggiunta la possibilità di cambiare nella Ricerca l\'ordine delle categorie di PDI o di nasconderle 
+\n 
+\n • Corretto l\'allineamento dei icone dei PDI nella mappa 
+\n 
+\n • Aggiunti i dati alba/tramonto in Configura la mappa 
+\n 
+\n • Aggiunte alla mappa le icone Casa/Lavoro 
+\n 
+\n • Aggiunto il supporto per le descrizioni su più linee in Impostazioni 
+\n 
+\n • Aggiunto la traslitterazione corretta nella mappa del Giappone 
+\n 
 \n • Aggiunto la mappa dell\'Antartide
 \n
-\n"</string>
+\n</string>
     <string name="copy_coordinates">Copia le coordinate</string>
     <string name="sort_by_category">Ordina per categoria</string>
     <string name="please_provide_profile_name_message">Dai un nome a questo profilo</string>
@@ -3533,4 +3533,19 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="no_recalculation_setting">Disattiva ricalcolo percorso</string>
     <string name="route_recalculation_dist_title">Distanza minima per il ricalcolo del percorso</string>
     <string name="route_recalculation_dist_descr">Il percorso viene ricalcolato quando la distanza dal percorso è maggiore di quella specificata</string>
+    <string name="routing_profile_direct_to">Dritto-al-punto</string>
+    <string name="shared_string_routing">Calcolo percorso</string>
+    <string name="shared_string_custom_rendering_style">Stile di rappresentazione personalizzato</string>
+    <string name="shared_string_include_data">Include dati addizionali</string>
+    <string name="import_profile_dialog_description">Il profilo importato contiene datti aggiuntivi. Clicca Importa per importare solo i dati del profilo o scegli i dati aggiuntivi da importare.</string>
+    <string name="export_profile_dialog_description">Puoi selezionare dati aggiuntivi da esportare unitamente al profilo.</string>
+    <string name="index_name_antarctica">Antartide</string>
+    <string name="navigation_notification_desc">Mostra le notifiche di sistema con le istruzioni di navigazione durante la navigazione.</string>
+    <string name="navigation_notification">Notifiche di navigazione</string>
+    <string name="shared_string_app_default_w_val">App preimpostata (%s)</string>
+    <string name="profile_type_custom_string">Profilo personalizzato</string>
+    <string name="shared_string_angle_param">Angolo: %s°</string>
+    <string name="shared_string_angle">Angolo</string>
+    <string name="recalc_angle_dialog_descr">Una linea retta sarà visualizzata fra la mia localizzazione e la destinazione finché il percorso viene elaborato</string>
+    <string name="recalc_angle_dialog_title">Angolo minimo tra la mia localizzazione e la destinazione</string>
 </resources>

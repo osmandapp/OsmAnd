@@ -3422,8 +3422,8 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="reset_all_profile_settings_descr">Profilaren ezarpen guztiak instalazioaren uneko egoerara itzuliko dira.</string>
     <string name="reset_all_profile_settings">Berrezarri profileko ezarpen guztiak lehenespenetara\?</string>
     <string name="ltr_or_rtl_combine">%1$s: %2$s</string>
-    <string name="file_does_not_contain_routing_rules">\'%1$s\' fitxategiak ez dauka ibilbide araurik, hautatu beste fitxategiren bat.</string>
-    <string name="not_support_file_type_with_ext">Euskarririk gabeko fitxategi mota. %1$s luzapena duen fitxategi bat hautatu behar duzu.</string>
+    <string name="file_does_not_contain_routing_rules">\'%1$s\'-k ez dauka ibilbide araurik, hautatu beste fitxategiren bat.</string>
+    <string name="not_support_file_type_with_ext">Onartutako %1$s luzapena duen fitxategi bat hautatu behar duzu.</string>
     <string name="import_from_file">Inportatu fitxategitik</string>
     <string name="import_routing_file">Inportatu ibilbide fitxategia</string>
     <string name="import_profile">Inportatu profila</string>
@@ -3434,4 +3434,82 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="live_monitoring_descr">Zure kokalekua partekatzeko aukera, bidai grabaketa erabiliz.</string>
     <string name="live_monitoring">Lineako jarraipena</string>
     <string name="save_track_logging_accuracy">Egunkariaren zehaztasuna</string>
+    <string name="logcat_buffer_descr">Egiaztatu eta partekatu aplikazioaren erregistro zehatzak</string>
+    <string name="permission_is_required">Baimena beharrezkoa da aukera hau erabiltzeko.</string>
+    <string name="monitoring_min_speed_descr">Hau abiadura txikiko atalase iragazkia da, abiadura jakin baten azpitik puntuak ez erregistratzeko. Grabatutako ibilbideak leunagoak izan daitezke mapan ikusitakoan.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Albo-efektua: Zure ibilbidean gutxieneko abiadura irizpidea betetzen ez duten zati guztiak faltako zaizkizu (adibidez, bizikletaz aldapa bat igotzen duzunean). Gainera, ez da atsedenaldi-epeei buruzko informaziorik egongo,. Horrek edozein azterketeta edo post-prozesuri eragingo dio, adibidez, bidaiaren guztizko iraupena, denbora martxan, edo batez besteko abiadura zehazten saiatzean.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Gomendioa: Saiatu lehenbizi mugimenduaren detekzioa erregistroko gutxieneko desplazamendu iragazkiaren bidez (B), emaitza hobeak sor ditzake eta datu gutxiago galduko dituzu. Zure ibilbideak abiadura baxuan zaratatsuak badira, saiatu zeroz kanpoko balioak hemen. Kontuan izan behar da neurketa batzuek ez dutela abiadura balioa emango (sarean oinarritutako metodo batzuk), kasu horretan ez zenuke ezer grabatuko.</string>
+    <string name="monitoring_min_speed_descr_remark">Oharra: abiadura&gt; 0 egiaztatzea: GPS txip gehienek algoritmoak mugimenduan zaudela zehazten duenean bakarrik adierazten dute abiaduraren balioa, eta deus ez bestela. Hori dela eta, iragazki honetan &gt; 0 ezarpena erabiltzean GPS txiparen mugimendua detekzioa erabiltzen duzula esan daiteke. Baina grabaketa garaian hemen iragazi ez bada ere, funtzio hau erabiltzen dugu gure GPX azterketan zuzendutako distantzia zehazteko, hau da, eremu horretan erakutsitako balioa mugimenduan grabatutako distantzia da.</string>
+    <string name="monitoring_min_accuracy_descr">Honek gutxieneko zehaztasun adierazlearekin neurtutako puntuak soilik erregistratuko ditu (metro edo oinetan, Android-ek zure txiperako jakinarazi duen moduan). Zehaztasunak neurri errepikatuen sakabanaketari egiten dio erreferentzia, eta ez du prezisioarekin lotura zuzena, azken honek neurriak zure benetako posiziotik zenbat aldentzen diren definitzen du.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Albo-efektua: Zehaztasunaren arabera iragaztearen ondorioz, puntuak falta daitezke, adibidez, zubien azpian, zuhaitzen azpian, eraikin altuen artean, edo eguraldi jakin batzuekin.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Gomendioa: Zaila da zer grabatuko den eta zer ez aurreikustea, agian egokiena iragazki hau desaktibatzea da.</string>
+    <string name="rearrange_categories">Berrantolatu kategoriak</string>
+    <string name="create_custom_categories_list_promo">Kategoria pertsonalizatuak gehitu ditzakezu, beharrezkotzat jotzen ez dituzun kategoriak ezkutatu, eta zerrendaren ordena aldatu. Zerrenda profilekin inportatu eta esportatu daiteke.</string>
+    <string name="add_new_custom_category_button_promo">Kategoria pertsonalizatu berri bat gehi dezakezu behar diren kategoria bat edo batzuk hautatuta.</string>
+    <string name="reset_to_default_category_button_promo">Lehenetsitakoak berrezartzea ordenazio irizpidea instalazioaren unekora itzuliko du.</string>
+    <string name="shared_string_available">Eskuragarri</string>
+    <string name="add_custom_category">Gehitu kategoria pertsonalizatua</string>
+    <string name="rendering_attr_streetLightingNight_name">Erakutsi gauez bakarrik</string>
+    <string name="plugin_prefs_reset_successful">Gehigarriaren ezarpen guztiak lehenetsitako egoerara leheneratu dira.</string>
+    <string name="profile_prefs_reset_successful">Profileko ezarpen guztiak lehenetsitako egoerara leheneratu dira.</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="sunset_at">Ilunabarra %1$s-tan</string>
+    <string name="sunrise_at">Egunsentia %1$s-tan</string>
+    <string name="accessibility_mode_disabled">Irisgarritasun modua desgaituta dago zure sisteman.</string>
+    <string name="use_system_screen_timeout">Erabili sistemaren pantaila denbora-muga</string>
+    <string name="use_system_screen_timeout_promo">Berez desgaituta dago, OsmAnd lehen planoan exekutatzen bada, pantailak ez du denbora mugarik.
+\n
+\nGaituta badago OsmAnd-ek sistemaren denbora-muga ezarpenak erabiliko ditu.</string>
+    <string name="clear_recorded_data">Garbitu grabatutako datuak</string>
+    <string name="release_3_6">• Profilak: orain ordena aldatu ahal izango duzu, maparen ikonoa ezarri, oinarrizko profilen ezarpen guztiak aldatu, eta lehenetsitako balioetara leheneratu
+\n
+\n• Nabigaziora irteera zenbakia gehitu da
+\n
+\n• Gehigarrien ezarpenak berregin dira
+\n
+\n• Profiletara azkar sartzeko pantailaren ezarpenak berregin dira
+\n
+\n• Beste profil bateko ezarpenak kopiatzeko aukera gehitu da
+\n
+\n• Ordena aldatzeko edo POI kategoriak ezkutatzeko aukera gehitu da
+\n
+\n• POI ikonoak mapan behar bezala lerrokatuta
+\n
+\n• Ilunabarra / egunsentia datuak gehitu da maparen konfigurazioan
+\n
+\n• Hasiera/Lana ikonoak mapara gehitu dira
+\n
+\n• Hainbat lerroko deskripzioa gehitzeko euskarria gehitu da ezarpenetan
+\n
+\n•Japoniako maparen transliterazio zuzena gehitu da
+\n
+\n• Antartikako mapa gehitu da
+\n
+\n</string>
+    <string name="copy_coordinates">Kopiatu koordenatuak</string>
+    <string name="routing_profile_direct_to">Zuzen puntura</string>
+    <string name="please_provide_profile_name_message">Eman izena profilari</string>
+    <string name="open_settings">Ireki ezarpenak</string>
+    <string name="plugin_disabled">Gehigarria desgaituta</string>
+    <string name="plugin_disabled_descr">Gehigarri hau aparteko aplikazioa da, hura kendu beharko duzu erabiltzeko asmorik ez baduzu.
+\n
+\nOsmAnd kendu ondoren gehigarria gailuan geratuko da.</string>
+    <string name="shared_string_menu">Menua</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_routing">Ibilbidea</string>
+    <string name="shared_string_custom_rendering_style">Errendatzeko estilo pertsonalizatua</string>
+    <string name="shared_string_include_data">Gehitu datu osagarriak</string>
+    <string name="import_profile_dialog_description">Inportatutako profilak datu osagarriak ditu. Sakatu Inportatu profileko datuak bakarrik inportatzeko edo hautatu inportatu beharreko datu gehigarriak.</string>
+    <string name="export_profile_dialog_description">Datu osagarriak hauta ditzakezu profilarekin batera esportatzeko.</string>
+    <string name="navigation_notification_desc">Erakutsi sistemaren jakinarazpena nabigazioan zehar nabigazio argibideekin.</string>
+    <string name="navigation_notification">Nabigazio-jakinarazpena</string>
+    <string name="shared_string_app_default_w_val">Aplikazioan lehenetsia (%s)</string>
+    <string name="no_recalculation_setting">Desgaitu berkalkulua</string>
+    <string name="route_recalculation_dist_title">Gutxieneko distantzia ibilbidea birkalkulatzeko</string>
+    <string name="route_recalculation_dist_descr">Ibilbidea berriro kalkulatuko da ibilbidera distantzia zehaztutako parametroa baino luzeagoa bada</string>
+    <string name="profile_type_custom_string">Profil pertsonalizatua</string>
+    <string name="shared_string_angle_param">Angelua: %s</string>
+    <string name="shared_string_angle">Angelua</string>
+    <string name="recalc_angle_dialog_descr">Nire kokapenaren eta kalkulatutako ibilbidearen artean segmentu zuzen bat agertuko da ibilbidea berriz kalkulatu arte</string>
+    <string name="recalc_angle_dialog_title">Nire kokapena eta ibilbidearen arteko angelu minimoa</string>
 </resources>

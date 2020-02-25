@@ -272,8 +272,9 @@ public class GpxUiHelper {
 			}
 
 			for (SelectedGpxFile selectedGpx : selectedGpxFiles) {
-				if (!selectedGpx.getGpxFile().showCurrentTrack) {
-					list.add(new GPXInfo(selectedGpx.getGpxFile().path.substring(gpxDirLength + 1), selectedGpx.getGpxFile().modifiedTime, 0));
+				GPXFile gpxFile = selectedGpx.getGpxFile();
+				if (!gpxFile.showCurrentTrack && gpxFile.path.length() > gpxDirLength + 1) {
+					list.add(new GPXInfo(gpxFile.path.substring(gpxDirLength + 1), gpxFile.modifiedTime, 0));
 				}
 			}
 

@@ -2461,7 +2461,7 @@ Lon %2$s</string>
     <string name="edit_map_marker">Editar marcaxe do mapa</string>
     <string name="third_party_application">Aplicación de terceiros</string>
     <string name="search_street">Procurar rúa</string>
-    <string name="start_search_from_city">Primeiro especificar a cidade, vila ou localidade</string>
+    <string name="start_search_from_city">Primeiro especificar a cidade, vila ou lugar</string>
     <string name="shared_string_restore">Restaurar</string>
     <string name="keep_passed_markers">Manter no mapa as marcaxes desbotadas</string>
     <string name="more_transport_on_stop_hint">Máis transportes dispoñíbeis dende esta paraxe.</string>
@@ -3589,4 +3589,15 @@ Lon %2$s</string>
     <string name="import_profile_dialog_description">O perfil importado contén datos adicionais. Preme en \"Importar\" para importar só datos de perfil ou marca datos adicionais para importar.</string>
     <string name="export_profile_dialog_description">Podes marcar datos adicionais para exportar ó carón do perfil.</string>
     <string name="index_name_antarctica">Antártida</string>
+    <string name="navigation_notification_desc">Amosar notificación do sistema durante a navegación con instrucións de navegación.</string>
+    <string name="navigation_notification">Notificación de navegación</string>
+    <string name="shared_string_app_default_w_val">Aplicación por defecto (%s)</string>
+    <string name="no_recalculation_setting">Desactivar recálculo</string>
+    <string name="route_recalculation_dist_title">Distancia mínima para recalcular a ruta</string>
+    <string name="route_recalculation_dist_descr">A ruta será recalculada se a distancia á ruta é maior que o parámetro especificado</string>
+    <string name="profile_type_custom_string">Perfil personalizado</string>
+    <string name="shared_string_angle_param">Ángulo: %s°</string>
+    <string name="shared_string_angle">Ángulo</string>
+    <string name="recalc_angle_dialog_descr">Amosarase un segmento recto adicional entre a miña localización e a ruta calculada até que se volva calcular a ruta</string>
+    <string name="recalc_angle_dialog_title">Ángulo mínimo entre a miña localización e ruta</string>
 </resources>

@@ -14,9 +14,10 @@
         android:id="@+id/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="@dimen/content_padding"
         android:layout_gravity="center_vertical"
-        android:visibility="gone"/>
+        android:visibility="gone"
+	    android:layout_marginStart="@dimen/content_padding" />
 
     <ImageView
         android:id="@+id/waypoint_icon"
@@ -55,7 +56,8 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="4dp"
                 android:src="@drawable/ic_direction_arrow"
-                android:visibility="gone"/>
+                android:visibility="gone"
+	            android:layout_marginEnd="4dp" />
 
             <TextView
                 android:id="@+id/waypoint_dist"
@@ -75,7 +77,8 @@
                 android:drawablePadding="2dp"
                 android:maxLines="1"
                 android:textColor="?android:textColorSecondary"
-                android:textSize="@dimen/default_sub_text_size"/>
+                android:textSize="@dimen/default_sub_text_size"
+	            android:layout_marginStart="6dp" />
 
             <TextView
                 android:id="@+id/waypoint_desc_text"
@@ -117,7 +120,8 @@
         android:focusable="false"
         android:scaleType="center"
         android:src="@drawable/map_overflow_menu_white"
-        android:visibility="gone"/>
+        android:visibility="gone"
+	    android:layout_marginEnd="2dp" />
 
     <ImageButton
         android:id="@+id/info_close"
@@ -129,7 +133,8 @@
         android:contentDescription="@string/shared_string_delete"
         android:focusable="false"
         android:scaleType="center"
-        android:src="@drawable/ic_action_remove_dark"/>
+        android:src="@drawable/ic_action_remove_dark"
+	    android:layout_marginEnd="2dp" />
 
     <ImageView
         android:id="@+id/info_move"
@@ -142,6 +147,7 @@
         android:focusable="false"
         android:scaleType="center"
         android:src="@drawable/ic_flat_list_dark"
-        android:visibility="gone"/>
+        android:visibility="gone"
+	    android:layout_marginEnd="2dp" />
 
 </LinearLayout>

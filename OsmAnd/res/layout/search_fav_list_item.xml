@@ -22,7 +22,9 @@
             android:textAppearance="@style/TextAppearance.ListItemTitle"
             android:textStyle="normal"
             tools:drawableLeft="@drawable/ic_action_search_dark"
-            tools:text="@string/layer_poi"/>
+            tools:text="@string/layer_poi"
+	        android:paddingStart="16dp"
+	        tools:drawableStart="@drawable/ic_action_search_dark" />
 
     </LinearLayout>
 

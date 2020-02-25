@@ -23,7 +23,9 @@
         android:paddingLeft="26dp"
         android:paddingRight="@dimen/list_content_padding"
         android:textColor="?android:attr/textColorPrimary"
-        android:textSize="@dimen/default_list_text_size"/>
+        android:textSize="@dimen/default_list_text_size"
+	    android:paddingEnd="@dimen/list_content_padding"
+	    android:paddingStart="26dp" />
 
     <TextView
         android:id="@+id/description"
@@ -34,7 +36,9 @@
         android:paddingBottom="6dp"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="@dimen/default_desc_text_size"
-        android:visibility="gone"/>
+        android:visibility="gone"
+	    android:paddingStart="26dp"
+	    android:paddingEnd="48dp" />
 
     <View
         android:id="@+id/bottomDivider"

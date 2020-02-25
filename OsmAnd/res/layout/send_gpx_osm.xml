@@ -11,7 +11,8 @@
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:gravity="center_horizontal"
-        android:text="@string/send_files_to_osm" />
+        android:text="@string/send_files_to_osm"
+	    android:layout_marginStart="5dp" />
 
     <TableRow android:layout_width="fill_parent">
 
@@ -19,7 +20,8 @@
             android:id="@+id/TextView"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="@string/shared_string_description" />
+            android:text="@string/shared_string_description"
+	        android:layout_marginStart="5dp" />
 
         <EditText
             android:id="@+id/memory_size"
@@ -28,7 +30,9 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:minLines="3"
-            android:text="" />
+            android:text=""
+	        android:layout_marginStart="5dp"
+	        android:layout_marginEnd="5dp" />
     </TableRow>
 
     <TableRow android:layout_width="fill_parent">
@@ -36,7 +40,8 @@
         <TextView
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="@string/gpx_tags_txt" />
+            android:text="@string/gpx_tags_txt"
+	        android:layout_marginStart="5dp" />
 
         <EditText
             android:id="@+id/TagsText"
@@ -44,7 +49,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:text="osmand" />
+            android:text="osmand"
+	        android:layout_marginEnd="5dp"
+	        android:layout_marginStart="5dp" />
     </TableRow>
 
     <TableRow android:layout_width="fill_parent">
@@ -52,14 +59,17 @@
         <TextView
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="@string/gpx_visibility_txt" />
+            android:text="@string/gpx_visibility_txt"
+	        android:layout_marginStart="5dp" />
 
         <Spinner
             android:id="@+id/Visibility"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp" />
+            android:layout_marginRight="5dp"
+	        android:layout_marginEnd="5dp"
+	        android:layout_marginStart="5dp" />
     </TableRow>
 
 

@@ -3078,7 +3078,7 @@
     <string name="navigate_point_format_utm">معيار الإحداثيات</string>
     <string name="navigate_point_format_olc">فتح رمز الموقع</string>
     <string name="coordinates_format_info">سيتم تطبيق التنسيق المحدد في كل أنحاء التطبيق.</string>
-    <string name="pref_selected_by_default_for_profiles">يتم تحديد هذا الاعداد بشكل افتراضي لملفات التعريف: s%</string>
+    <string name="pref_selected_by_default_for_profiles">يتم تحديد هذا الاعداد بشكل افتراضي لملفات التعريف: %s</string>
     <string name="change_default_settings">تغيير الإعدادات</string>
     <string name="discard_changes">تجاهل التغيير</string>
     <string name="apply_to_all_profiles">تطبيق علي كافة ملفات التعريف</string>
@@ -3443,4 +3443,28 @@
     <string name="no_recalculation_setting">تعطيل إعادة الحساب</string>
     <string name="route_recalculation_dist_title">الحد الأدنى من المسافة لإعادة حساب المسار</string>
     <string name="route_recalculation_dist_descr">سيتم إعادة حساب المسار إذا كانت المسافة إلى المسار أطول من المعلمة المحددة</string>
+    <string name="profile_type_custom_string">ملف تعريف مخصص</string>
+    <string name="shared_string_angle_param">الزاوية: %s°</string>
+    <string name="shared_string_angle">زاوية</string>
+    <string name="recalc_angle_dialog_descr">سيتم عرض جزء مستقيم إضافي بين موقعي والمسار المحسوب حتى يتم إعادة حساب المسار</string>
+    <string name="recalc_angle_dialog_title">الحد الأدنى للزاوية بين موقعي ومساري</string>
+    <string name="shared_string_preparing">تحضير</string>
+    <string name="shared_string_poi_types">أنواع النقاط</string>
+    <string name="shared_string_nothing_selected">لا شيء محدد</string>
+    <string name="shared_string_quick_actions">إجراءات سريعة</string>
+    <string name="shared_string_profiles">الملفات الشخصية</string>
+    <string name="replace_all_desc">سيتم استبدال العناصر الحالية بعناصر من الملف</string>
+    <string name="replace_all">استبدال الكل</string>
+    <string name="get_discount_title">احصل على %1$d %2$s عند %3$s مقابل.</string>
+    <string name="get_discount_first_part">%1$s لأول %2$s</string>
+    <string name="get_discount_first_few_part">%1$s لأول %2$s</string>
+    <string name="price_and_discount">%1$s • وفر %2$s</string>
+    <string name="listed_exist">المدرجة %1$s, موجودة بالفعل في OsmAnd.</string>
+    <string name="keep_both">احتفظ بكليهما</string>
+    <string name="keep_both_desc">سيتم إضافة العناصر المستوردة مع البادئة</string>
+    <string name="import_duplicates_description">أوسماند لديه بالفعل عناصر بنفس الأسماء مثل تلك المستوردة.
+\n
+\nحدد إجراء.</string>
+    <string name="import_duplicates_title">بعض العناصر موجودة بالفعل</string>
+    <string name="select_data_to_import">حدد البيانات التي سيتم استيرادها.</string>
 </resources>

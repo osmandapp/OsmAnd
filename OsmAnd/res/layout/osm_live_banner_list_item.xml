@@ -6,8 +6,8 @@
     android:layout_height="wrap_content"
     android:descendantFocusability="blocksDescendants"
     android:minHeight="@dimen/list_item_height"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp"
+    android:paddingTop="@dimen/content_padding_half"
+    android:paddingBottom="@dimen/content_padding_half"
     android:orientation="vertical">
 
     <LinearLayout
@@ -15,7 +15,9 @@
         android:layout_height="wrap_content"
         android:minHeight="@dimen/list_item_height"
         android:paddingLeft="@dimen/list_content_padding"
-        android:paddingRight="@dimen/list_content_padding">
+        android:paddingRight="@dimen/list_content_padding"
+	    android:paddingStart="@dimen/list_content_padding"
+	    android:paddingEnd="@dimen/list_content_padding">
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/icon"
@@ -24,7 +26,8 @@
             android:layout_marginRight="@dimen/favorites_icon_right_margin"
             android:paddingTop="6dp"
             android:tint="@color/map_widget_blue"
-            android:src="@drawable/ic_action_osm_live"/>
+            android:src="@drawable/ic_action_osm_live"
+	        android:layout_marginEnd="@dimen/favorites_icon_right_margin" />
 
         <LinearLayout
             android:layout_width="0dp"

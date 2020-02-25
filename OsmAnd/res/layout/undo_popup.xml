@@ -19,7 +19,9 @@
         android:singleLine="true"
         android:textColor="@color/popup_text_color"
         android:text="@string/item_removed"
-        android:textSize="@dimen/default_list_text_size"/>
+        android:textSize="@dimen/default_list_text_size"
+	    android:paddingStart="16dp"
+	    android:paddingEnd="16dp" />
 
     <View
         android:layout_width="1dp"

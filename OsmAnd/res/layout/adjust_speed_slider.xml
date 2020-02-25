@@ -30,10 +30,11 @@
 			android:gravity="end"
 			android:maxLength="4"
 			android:maxLines="1"
-			android:paddingRight="4dp"
+			android:paddingRight="@dimen/text_margin_small"
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
-			tools:text="60" />
+			tools:text="60"
+			android:paddingEnd="@dimen/text_margin_small" />
 
 		<TextView
 			android:id="@+id/speed_units"

@@ -1,14 +1,7 @@
 package net.osmand.plus.resources;
 
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -18,8 +11,6 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
-import net.osmand.binary.GeocodingUtilities;
-import net.osmand.binary.GeocodingUtilities.GeocodingResult;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
@@ -33,6 +24,14 @@ import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResourceType;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 
 public class RegionAddressRepositoryBinary implements RegionAddressRepository {
@@ -67,26 +66,30 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	public synchronized void preloadCities(ResultMatcher<City> resultMatcher) {
 		if (cities.isEmpty()) {
 			try {
-				List<City> cs = getOpenFile().getCities(BinaryMapIndexReader.buildAddressRequest(resultMatcher),
-						BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE);
-				LinkedHashMap<Long, City> ncities = new LinkedHashMap<Long, City>();
-				for (City c : cs) {
-					ncities.put(c.getId(), c);
-					LatLon loc = c.getLocation();
-					if (loc != null) {
-						int y31 = MapUtils.get31TileNumberY(loc.getLatitude());
-						int x31 = MapUtils.get31TileNumberX(loc.getLongitude());
-						int dz = (31 - ZOOM_QTREE);
-						citiesQtree.insert(c, new QuadRect((x31 >> dz) - 1, (y31 >> dz) - 1, (x31 >> dz) + 1, (y31 >> dz) + 1));
+				BinaryMapIndexReader reader = getOpenFile();
+				if (reader != null) {
+					List<City> cs = reader.getCities(BinaryMapIndexReader.buildAddressRequest(resultMatcher),
+							BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE);
+					LinkedHashMap<Long, City> ncities = new LinkedHashMap<Long, City>();
+					for (City c : cs) {
+						ncities.put(c.getId(), c);
+						LatLon loc = c.getLocation();
+						if (loc != null) {
+							int y31 = MapUtils.get31TileNumberY(loc.getLatitude());
+							int x31 = MapUtils.get31TileNumberX(loc.getLongitude());
+							int dz = (31 - ZOOM_QTREE);
+							citiesQtree.insert(c, new QuadRect((x31 >> dz) - 1, (y31 >> dz) - 1, (x31 >> dz) + 1, (y31 >> dz) + 1));
+						}
 					}
+					cities = ncities;
 				}
-				cities = ncities;
 			} catch (IOException e) {
 				log.error("Disk operation failed", e); //$NON-NLS-1$
 			}
 		}
 	}
 
+	@Nullable
 	private BinaryMapIndexReader getOpenFile() {
 		return resource.getReader(BinaryMapReaderResourceType.ADDRESS);
 	}
@@ -121,8 +124,11 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	public synchronized void preloadBuildings(Street street, ResultMatcher<Building> resultMatcher) {
 		if (street.getBuildings().isEmpty() && street.getIntersectedStreets().isEmpty()) {
 			try {
-				getOpenFile().preloadBuildings(street, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
-				street.sortBuildings();
+				BinaryMapIndexReader reader = getOpenFile();
+				if (reader != null) {
+					reader.preloadBuildings(street, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
+					street.sortBuildings();
+				}
 			} catch (IOException e) {
 				log.error("Disk operation failed", e); //$NON-NLS-1$
 			}
@@ -150,7 +156,10 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 			return;
 		}
 		try {
-			getOpenFile().preloadStreets(o, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
+			BinaryMapIndexReader reader = getOpenFile();
+			if (reader != null) {
+				reader.preloadStreets(o, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
+			}
 		} catch (IOException e) {
 			log.error("Disk operation failed", e);  //$NON-NLS-1$
 		}
@@ -164,7 +173,10 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(resultMatcher, name,
 				StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 		try {
-			getOpenFile().searchAddressDataByName(req, typeFilter);
+			BinaryMapIndexReader reader = getOpenFile();
+			if (reader != null) {
+				reader.searchAddressDataByName(req, typeFilter);
+			}
 		} catch (IOException e) {
 			log.error("Disk operation failed", e); //$NON-NLS-1$
 		}
@@ -274,7 +286,8 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 
 	@Override
 	public String getCountryName() {
-		return resource.getShallowReader().getCountryName();
+		BinaryMapIndexReader shallowReader = resource.getShallowReader();
+		return shallowReader != null ? shallowReader.getCountryName() : "";
 	}
 
 	@Override
@@ -282,6 +295,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		return resource.getFileName();
 	}
 
+	@NonNull
 	@Override
 	public String toString() {
 		return getName() + " repository";
@@ -300,28 +314,31 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		preloadCities(null);
 		if (!cities.containsKey(id)) {
 			try {
-				getOpenFile().getCities(BinaryMapIndexReader.buildAddressRequest(new ResultMatcher<City>() {
-					boolean canceled = false;
+				BinaryMapIndexReader reader = getOpenFile();
+				if (reader != null) {
+					reader.getCities(BinaryMapIndexReader.buildAddressRequest(new ResultMatcher<City>() {
+						boolean canceled = false;
 
-					@Override
-					public boolean isCancelled() {
-						return canceled;
-					}
+						@Override
+						public boolean isCancelled() {
+							return canceled;
+						}
 
-					@Override
-					public boolean publish(City object) {
-						if (id < -1) {
-							if (object.getName().toUpperCase().equals(cmpName)) {
-								addCityToPreloadedList(object);
+						@Override
+						public boolean publish(City object) {
+							if (id < -1) {
+								if (object.getName().toUpperCase().equals(cmpName)) {
+									addCityToPreloadedList(object);
+									canceled = true;
+								}
+							} else if (object.getId() != null && object.getId().longValue() == id) {
+								addCityToPreloadedList((City) object);
 								canceled = true;
 							}
-						} else if (object.getId() != null && object.getId().longValue() == id) {
-							addCityToPreloadedList((City) object);
-							canceled = true;
+							return false;
 						}
-						return false;
-					}
-				}), id < -1 ? BinaryMapAddressReaderAdapter.POSTCODES_TYPE : BinaryMapAddressReaderAdapter.VILLAGES_TYPE);
+					}), id < -1 ? BinaryMapAddressReaderAdapter.POSTCODES_TYPE : BinaryMapAddressReaderAdapter.VILLAGES_TYPE);
+				}
 			} catch (IOException e) {
 				log.error("Disk operation failed", e); //$NON-NLS-1$
 			}
@@ -354,9 +371,11 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 
 	}
 
+	@Nullable
 	@Override
 	public LatLon getEstimatedRegionCenter() {
-		return resource.getShallowReader().getRegionCenter();
+		BinaryMapIndexReader shallowReader = resource.getShallowReader();
+		return shallowReader != null ? shallowReader.getRegionCenter() : null;
 	}
 
 }

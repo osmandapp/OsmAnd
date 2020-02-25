@@ -67,7 +67,6 @@ import net.osmand.plus.settings.bottomsheets.SingleSelectPreferenceBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -450,6 +449,10 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 					}
 				}
 			});
+			if (closeButton instanceof ImageView) {
+				UiUtilities.rotateImageByLayoutDirection(
+						(ImageView) closeButton, AndroidUtils.getLayoutDirection(app));
+			}
 		}
 
 		View switchProfile = toolbarContainer == null ? null : toolbarContainer.findViewById(R.id.profile_button);

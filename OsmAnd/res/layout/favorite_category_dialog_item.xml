@@ -13,8 +13,11 @@
         android:paddingRight="10dp"
         android:background="?attr/selectableItemBackground"
         android:text="Restaurant"
-        android:gravity="left|center_vertical"
+        android:gravity="start|center_vertical"
         android:textSize="@dimen/default_list_text_size"
-        android:textAllCaps="false"/>
+        android:textAllCaps="false"
+	    android:paddingStart="10dp"
+	    android:paddingEnd="10dp"
+	    android:drawableStart="@drawable/ic_action_folder" />
 
 </LinearLayout>

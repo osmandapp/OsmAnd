@@ -11,7 +11,9 @@
         android:orientation="horizontal"
         android:minHeight="48dp"
         android:paddingLeft="16dp"
-        android:paddingRight="16dp">
+        android:paddingRight="16dp"
+	    android:paddingStart="16dp"
+	    android:paddingEnd="16dp">
 
 
         <CheckBox
@@ -22,7 +24,8 @@
             android:layout_marginRight="20dp"
             android:focusable="false"
             android:visibility="gone"
-            tools:visibility="visible"/>
+            tools:visibility="visible"
+	        android:layout_marginEnd="20dp" />
 
         <TextView
             android:id="@+id/title"

@@ -8,7 +8,9 @@
 	android:layout_marginLeft="@dimen/text_margin_small"
 	android:layout_marginRight="@dimen/text_margin_small"
 	android:background="?attr/wikivoyage_travel_card_bg"
-	android:orientation="vertical">
+	android:orientation="vertical"
+	android:layout_marginEnd="@dimen/text_margin_small"
+	android:layout_marginStart="@dimen/text_margin_small">
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -56,7 +58,9 @@
 		android:layout_height="wrap_content"
 		android:layout_marginBottom="@dimen/bottom_sheet_content_margin_small"
 		android:layout_marginLeft="@dimen/bottom_sheet_content_margin_small"
-		android:layout_marginRight="@dimen/bottom_sheet_content_margin_small">
+		android:layout_marginRight="@dimen/bottom_sheet_content_margin_small"
+		android:layout_marginStart="@dimen/bottom_sheet_content_margin_small"
+		android:layout_marginEnd="@dimen/bottom_sheet_content_margin_small">
 
 		<FrameLayout
 			android:id="@+id/secondary_btn_container"

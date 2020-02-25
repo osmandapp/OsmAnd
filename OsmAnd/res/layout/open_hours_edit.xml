@@ -24,7 +24,8 @@
             android:layout_marginLeft="5dp"
             android:id="@+id/TimePickerEnd"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"></TimePicker>
+            android:layout_height="wrap_content"
+	        android:layout_marginStart="5dp"></TimePicker>
     </LinearLayout>
 
 </LinearLayout>

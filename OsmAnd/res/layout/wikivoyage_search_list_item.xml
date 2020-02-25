@@ -18,7 +18,9 @@
 			android:background="?attr/selectableItemBackground"
 			android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
 			android:paddingLeft="@dimen/wikivoyage_search_icon_margin_left"
-			android:paddingRight="@dimen/wikivoyage_search_icon_margin_left">
+			android:paddingRight="@dimen/wikivoyage_search_icon_margin_left"
+			android:paddingStart="@dimen/wikivoyage_search_icon_margin_left"
+			android:paddingEnd="@dimen/wikivoyage_search_icon_margin_left">
 
 			<ImageView
 				android:id="@+id/icon"

@@ -15,20 +15,22 @@
         android:layout_marginLeft="24dp"
         android:gravity="center"
         android:visibility="gone"
-        tools:visibility="visible"/>
+        tools:visibility="visible"
+	    android:layout_marginStart="24dp" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="11dip"
-        android:layout_marginLeft="12dp"
+        android:layout_marginLeft="@dimen/content_padding_small"
         android:layout_marginTop="11dp"
         android:layout_weight="1"
         android:gravity="center_vertical"
         android:text="@string/layer_poi"
         android:textColor="?android:textColorPrimary"
-        android:textSize="@dimen/default_list_text_size"/>
+        android:textSize="@dimen/default_list_text_size"
+	    android:layout_marginStart="@dimen/content_padding_small" />
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/icon_settings"

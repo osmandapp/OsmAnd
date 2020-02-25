@@ -18,7 +18,9 @@
         android:paddingBottom="18dp"
         android:paddingLeft="26dp"
         android:paddingRight="16dp"
-        android:paddingTop="18dp">
+        android:paddingTop="18dp"
+	    android:paddingStart="26dp"
+	    android:paddingEnd="16dp">
 
         <TextView
             android:id="@+id/title"
@@ -35,7 +37,8 @@
             android:layout_height="48dp"
             android:layout_marginLeft="-8dp"
             android:layout_marginTop="12dp"
-            android:textSize="@dimen/default_list_text_size"/>
+            android:textSize="@dimen/default_list_text_size"
+	        android:layout_marginStart="-8dp" />
 
         <View
             android:layout_width="match_parent"

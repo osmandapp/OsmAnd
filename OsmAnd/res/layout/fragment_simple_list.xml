@@ -24,11 +24,12 @@
             android:id="@+id/titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="@dimen/content_padding"
             android:textColor="@color/color_white"
             android:textSize="@dimen/default_list_text_size_large"
             android:textStyle="bold"
-            app:typeface="@string/font_roboto_regular"/>
+            app:typeface="@string/font_roboto_regular"
+	        android:layout_marginStart="@dimen/content_padding" />
 
     </LinearLayout>
 

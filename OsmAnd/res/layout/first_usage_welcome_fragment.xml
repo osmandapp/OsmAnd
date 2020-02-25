@@ -24,7 +24,9 @@
         android:orientation="vertical"
         android:paddingLeft="40dp"
         android:paddingRight="40dp"
-        android:paddingTop="@dimen/first_usage_title_margin">
+        android:paddingTop="@dimen/first_usage_title_margin"
+	    android:paddingStart="40dp"
+	    android:paddingEnd="40dp">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -46,7 +48,9 @@
             android:layout_marginRight="20dp"
             android:textSize="@dimen/first_usage_subtitle_text_size"
             android:textStyle="bold"
-            osmand:typeface="@string/font_roboto_regular"/>
+            osmand:typeface="@string/font_roboto_regular"
+	        android:layout_marginEnd="20dp"
+	        android:layout_marginStart="20dp" />
 
 
         <View

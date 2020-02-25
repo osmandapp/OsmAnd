@@ -31,7 +31,9 @@
 		android:orientation="vertical"
 		android:paddingLeft="@dimen/route_info_buttons_padding_top_bottom"
 		android:paddingTop="@dimen/content_padding"
-		android:paddingRight="@dimen/route_info_buttons_padding_top_bottom">
+		android:paddingRight="@dimen/route_info_buttons_padding_top_bottom"
+		android:paddingEnd="@dimen/route_info_buttons_padding_top_bottom"
+		android:paddingStart="@dimen/route_info_buttons_padding_top_bottom">
 
 		<net.osmand.plus.widgets.FlowLayout
 			android:id="@+id/routes_badges"

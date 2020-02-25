@@ -6,14 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingTop="16dp">
+    android:paddingTop="@dimen/content_padding">
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="16dp"
-        android:layout_weight="1">
+        android:layout_marginLeft="@dimen/content_padding_small"
+        android:layout_marginRight="@dimen/content_padding"
+        android:layout_weight="1"
+	    android:layout_marginStart="@dimen/content_padding_small"
+	    android:layout_marginEnd="@dimen/content_padding">
 
         <AutoCompleteTextView
             android:id="@+id/tagEditText"

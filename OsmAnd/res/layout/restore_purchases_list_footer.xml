@@ -29,7 +29,8 @@
             android:layout_height="wrap_content"
             android:minHeight="@dimen/list_item_height"
             android:paddingLeft="@dimen/list_content_padding"
-            android:background="@android:drawable/list_selector_background">
+            android:background="@android:drawable/list_selector_background"
+	        android:paddingStart="@dimen/list_content_padding">
 
             <ImageView
                 android:id="@+id/icon"
@@ -37,7 +38,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="@dimen/favorites_icon_right_margin"
-                tools:src="@drawable/ic_action_reset_to_default_dark"/>
+                tools:src="@drawable/ic_action_reset_to_default_dark"
+	            android:layout_marginEnd="@dimen/favorites_icon_right_margin" />
 
             <TextView
                 android:id="@+id/title"
@@ -56,7 +58,8 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="8dp"
                 android:indeterminate="true"
-                android:visibility="gone"/>
+                android:visibility="gone"
+	            android:layout_marginEnd="8dp" />
 
         </LinearLayout>
 
