@@ -3544,4 +3544,24 @@ Lon %2$s</string>
     <string name="no_recalculation_setting">Desactivar el recálculo</string>
     <string name="route_recalculation_dist_title">Distancia mínima para recalcular la ruta</string>
     <string name="route_recalculation_dist_descr">La ruta será recalculada si la distancia a la ruta es mayor que el parámetro especificado</string>
+    <string name="profile_type_custom_string">Perfil personalizado</string>
+    <string name="shared_string_angle_param">Ángulo: %s°</string>
+    <string name="shared_string_angle">Ángulo</string>
+    <string name="recalc_angle_dialog_descr">Se muestra un segmento recto adicional entre la ubicación y la ruta calculada, hasta que la ruta sea recalculada</string>
+    <string name="recalc_angle_dialog_title">Ángulo mínimo entre la ubicación y la ruta</string>
+    <string name="shared_string_preparing">Preparando</string>
+    <string name="shared_string_poi_types">Tipos de PDI</string>
+    <string name="shared_string_nothing_selected">Nada marcado</string>
+    <string name="shared_string_quick_actions">Acciones rápidas</string>
+    <string name="shared_string_profiles">Perfiles</string>
+    <string name="listed_exist">El listado «%1$s», ya existe en OsmAnd.</string>
+    <string name="replace_all_desc">Los elementos actuales serán reemplazados por elementos del archivo</string>
+    <string name="replace_all">Reemplazar todo</string>
+    <string name="keep_both">Mantener ambos</string>
+    <string name="keep_both_desc">Los elementos serán importados con un prefijo</string>
+    <string name="import_duplicates_description">OsmAnd ya tiene elementos con los mismos nombres que los importados.
+\n
+\nElige una acción.</string>
+    <string name="import_duplicates_title">Algunos elementos ya existen</string>
+    <string name="select_data_to_import">Marca los datos a importar.</string>
 </resources>
