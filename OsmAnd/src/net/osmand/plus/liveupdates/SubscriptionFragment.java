@@ -303,7 +303,7 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 
 	@Override
 	public void onItemPurchased(String sku, boolean active) {
-		dismiss();
+		dismissAllowingStateLoss();
 	}
 
 	@Override

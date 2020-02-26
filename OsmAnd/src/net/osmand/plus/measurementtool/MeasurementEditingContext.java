@@ -1,12 +1,13 @@
 package net.osmand.plus.measurementtool;
 
+import android.support.annotation.Nullable;
 import android.util.Pair;
 
+import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.GPXUtilities.TrkSegment;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.measurementtool.command.MeasurementCommandManager;
 import net.osmand.plus.routing.RouteCalculationParams;
@@ -212,14 +213,17 @@ public class MeasurementEditingContext {
 		snapToRoadPairsToCalculate.clear();
 		findPointsToCalculate(Arrays.asList(before.points, after.points));
 		RoutingHelper routingHelper = application.getRoutingHelper();
-		if (!snapToRoadPairsToCalculate.isEmpty() && progressListener != null && !routingHelper.isRouteBeingCalculated()) {
-			routingHelper.startRouteCalculationThread(getParams(), true, true);
-			application.runInUIThread(new Runnable() {
-				@Override
-				public void run() {
-					progressListener.showProgressBar();
-				}
-			});
+		if (progressListener != null && !routingHelper.isRouteBeingCalculated()) {
+			RouteCalculationParams params = getParams();
+			if (params != null) {
+				routingHelper.startRouteCalculationThread(params, true, true);
+				application.runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						progressListener.showProgressBar();
+					}
+				});
+			}
 		}
 	}
 
@@ -270,9 +274,12 @@ public class MeasurementEditingContext {
 		}
 	}
 
+	@Nullable
 	private RouteCalculationParams getParams() {
 		final Pair<WptPt, WptPt> currentPair = snapToRoadPairsToCalculate.poll();
-
+		if (currentPair == null) {
+			return null;
+		}
 		Location start = new Location("");
 		start.setLatitude(currentPair.first.getLatitude());
 		start.setLongitude(currentPair.first.getLongitude());
@@ -341,8 +348,9 @@ public class MeasurementEditingContext {
 						progressListener.refresh();
 					}
 				});
-				if (!snapToRoadPairsToCalculate.isEmpty()) {
-					application.getRoutingHelper().startRouteCalculationThread(getParams(), true, true);
+				RouteCalculationParams params = getParams();
+				if (params != null) {
+					application.getRoutingHelper().startRouteCalculationThread(params, true, true);
 				} else {
 					application.runInUIThread(new Runnable() {
 						@Override
