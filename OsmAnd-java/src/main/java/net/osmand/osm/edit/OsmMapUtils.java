@@ -56,32 +56,17 @@ public class OsmMapUtils {
 				}
 				
 				List<Multipolygon> multipolygons = original.splitPerOuterRing(null);
-
-				List<List<LatLon>> rings = new ArrayList<List<LatLon>>();
 				if (!Algorithms.isEmpty(multipolygons)){
 					Multipolygon m = multipolygons.get(0);
-					Ring out = m.getOuterRings().get(0);
-					if(out.getBorder().size() != 0) {
-						List<LatLon> ringll = new ArrayList<>();
-						for (Node n : out.getBorder()) {
-							ringll.add(n.getLatLon());
-						}
-						rings.add(ringll);
-
+					List<Node> out = m.getOuterRings().get(0).getBorder();
+					List<List<Node>> inner = new ArrayList<List<Node>>();
+					if(!Algorithms.isEmpty(out)) {
 						for (Ring r : m.getInnerRings()) {
-							List<LatLon> innerRingll = new ArrayList<>();
-							if (r.getBorder().size() == 0) {
-								continue;
-							}
-							for (Node n : r.getBorder()) {
-								ringll.add(n.getLatLon());
-							}
-							rings.add(ringll);
+							inner.add(r.getBorder());
 						}
-
 					}
-					if (!Algorithms.isEmpty(rings)) {
-						return getPolylabelPoint(rings);
+					if (!Algorithms.isEmpty(out)) {
+						return getComplexPolyCenter(out, inner);
 					}
 				}
 			}
