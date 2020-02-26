@@ -97,7 +97,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		adapter = new ExportImportSettingsAdapter(app, getSettingsToOperate(), nightMode, true);
+		adapter = new ExportImportSettingsAdapter(app, getSettingsToOperate(settingsItems), nightMode, true);
 		expandableList.setAdapter(adapter);
 	}
 
@@ -136,15 +136,15 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 							public void onRoutingFilesLoaded() {
 							}
 						});
+						FragmentManager fm = getFragmentManager();
+						if (fm != null) {
+							ImportCompleteFragment.showInstance(fm, items, file.getName());
+						}
 					} else if (empty) {
 						app.showShortToastMessage(app.getString(R.string.file_import_error, file.getName(), app.getString(R.string.shared_string_unexpected_error)));
 					}
 				}
 			});
-			FragmentManager fm = getFragmentManager();
-			if (fm != null) {
-				fm.popBackStackImmediate();
-			}
 		} else {
 			ImportDuplicatesFragment.showInstance(requireActivity().getSupportFragmentManager(), duplicateItems, settingsItems, file);
 		}
@@ -228,7 +228,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		return settingsItems;
 	}
 
-	private List<AdditionalDataWrapper> getSettingsToOperate() {
+	public static List<AdditionalDataWrapper> getSettingsToOperate(List<SettingsItem> settingsItems) {
 		List<AdditionalDataWrapper> settingsToOperate = new ArrayList<>();
 		List<ApplicationMode.ApplicationModeBean> profiles = new ArrayList<>();
 		List<QuickAction> quickActions = new ArrayList<>();

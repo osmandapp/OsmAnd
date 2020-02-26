@@ -205,15 +205,15 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				String renderName = ((File) currentItem).getName();
 				renderName = renderName.replace('_', ' ').replaceAll(".render.xml", "");
 				title.setText(renderName);
-				icon.setImageResource(R.drawable.ic_action_info_dark);
-				icon.setVisibility(View.INVISIBLE);
+				icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_map_style, nightMode));
+				icon.setVisibility(View.VISIBLE);
 				subText.setVisibility(View.GONE);
 				break;
 			case CUSTOM_ROUTING:
 				String routingName = ((File) currentItem).getName();
 				routingName = routingName.replace('_', ' ').replaceAll(".xml", "");
 				title.setText(routingName);
-				icon.setImageResource(R.drawable.ic_action_map_style);
+				icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_route_distance, nightMode));
 				icon.setVisibility(View.VISIBLE);
 				subText.setVisibility(View.GONE);
 				break;

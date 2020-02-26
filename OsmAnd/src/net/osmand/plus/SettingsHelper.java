@@ -103,6 +103,7 @@ public class SettingsHelper {
 	private boolean importSuspended;
 	private boolean collectOnly;
 	private ImportAsyncTask importTask;
+	private List<SettingsItem> importedItems;
 
 	public interface SettingsImportListener {
 		void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items);
@@ -1937,6 +1938,15 @@ public class SettingsHelper {
 		return this.importTask.getFile();
 	}
 
+	@Nullable
+	public List<SettingsItem> getImportedItems() {
+		return importedItems;
+	}
+
+	public void setImportedItems(List<SettingsItem> importedItems) {
+		this.importedItems = importedItems;
+	}
+
 	@SuppressLint("StaticFieldLeak")
 	private class ImportItemsAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
@@ -1980,6 +1990,7 @@ public class SettingsHelper {
 		if (listener != null) {
 			listener.onSettingsImportFinished(success, empty, items);
 		}
+		importedItems = items;
 	}
 
 	@SuppressLint("StaticFieldLeak")

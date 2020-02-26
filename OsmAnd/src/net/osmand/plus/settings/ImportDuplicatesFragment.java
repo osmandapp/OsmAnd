@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -225,20 +226,15 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 						public void onRoutingFilesLoaded() {
 						}
 					});
+					FragmentManager fm = getFragmentManager();
+					if (fm != null) {
+						ImportCompleteFragment.showInstance(fm, items, file.getName());
+					}
 				} else if (empty) {
 					app.showShortToastMessage(app.getString(R.string.file_import_error, file.getName(), app.getString(R.string.shared_string_unexpected_error)));
 				}
 			}
 		});
-		FragmentManager fm = getFragmentManager();
-		if (fm != null) {
-			fm.popBackStackImmediate();
-			Fragment fragment = fm.findFragmentByTag(ImportSettingsFragment.TAG);
-			if (fragment != null) {
-				fm.beginTransaction().remove(fragment).commit();
-				fm.popBackStackImmediate();
-			}
-		}
 	}
 
 	private void setupToolbar(Toolbar toolbar) {
