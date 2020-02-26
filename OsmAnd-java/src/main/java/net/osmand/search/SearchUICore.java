@@ -856,26 +856,27 @@ public class SearchUICore {
 			loc = sp.getLastTokenLocation();
 			sortByName = sp.isSortByName();
 		}
+		
 
 		@Override
 		public int compare(SearchResult o1, SearchResult o2) {
 			boolean topVisible1 = ObjectType.isTopVisible(o1.objectType);
 			boolean topVisible2 = ObjectType.isTopVisible(o2.objectType);
-			if ((!topVisible1 && !topVisible2) || (topVisible1 && topVisible2)) {
-				if (o1.getUnknownPhraseMatchWeight() != o2.getUnknownPhraseMatchWeight()) {
-					return -Double.compare(o1.getUnknownPhraseMatchWeight(), o2.getUnknownPhraseMatchWeight());
-				} else {
-					if (o1.getFoundWordCount() != o2.getFoundWordCount()) {
-						return -Algorithms.compare(o1.getFoundWordCount(), o2.getFoundWordCount());
-					}
-				}
+			if (topVisible1 != topVisible2) {
+				// -1 - means 1st is less than 2nd
+				return topVisible1 ? -1 : 1;
+			}
+//			if (o1.getUnknownPhraseMatchWeight() != o2.getUnknownPhraseMatchWeight()) {
+//				return -Double.compare(o1.getUnknownPhraseMatchWeight(), o2.getUnknownPhraseMatchWeight());
+//			} 
+			if (o1.getFoundWordCount() != o2.getFoundWordCount()) {
+				return -Algorithms.compare(o1.getFoundWordCount(), o2.getFoundWordCount());
 			}
 			if (!sortByName) {
 				double s1 = o1.getSearchDistance(loc);
 				double s2 = o2.getSearchDistance(loc);
-				int cmp = Double.compare(s1, s2);
-				if (cmp != 0) {
-					return cmp;
+				if (s1 != s2) {
+					return Double.compare(s1, s2);
 				}
 			}
 			int st1 = o1.localeName == null ? -10000 : Algorithms.extractFirstIntegerNumber(o1.localeName);
@@ -885,22 +886,30 @@ public class SearchUICore {
 			}
 			String localeName1 = o1.localeName == null ? "" : o1.localeName;
 			String localeName2 = o2.localeName == null ? "" : o2.localeName;
-			if (o1.parentSearchResult != null && o2.parentSearchResult != null) {
-				if (o1.parentSearchResult == o2.parentSearchResult) {
-					int cmp = collator.compare(localeName1, localeName2);
-					if (cmp != 0) {
-						return cmp;
-					}
-				}
-				double s1 = o1.getSearchDistance(loc, 1);
-				double s2 = o2.getSearchDistance(loc, 1);
-				return Double.compare(s1, s2);
-			}
+			double s1 = o1.getSearchDistance(loc, 1);
+			double s2 = o2.getSearchDistance(loc, 1);
+			// ????
+//			if (o1.parentSearchResult != null && o2.parentSearchResult != null) {
+//				if (o1.parentSearchResult == o2.parentSearchResult) {
+//					int cmp = collator.compare(localeName1, localeName2);
+//					if (cmp != 0) {
+//						return cmp;
+//					}
+//				}
+//				return Double.compare(s1, s2);
+//			}
 			int cmp = collator.compare(localeName1, localeName2);
 			if (cmp != 0) {
 				return cmp;
 			}
-			if (o1.object instanceof Amenity && o2.object instanceof Amenity) {
+			if (s1 != s2) {
+				return Double.compare(s1, s2);
+			}
+			boolean am1 = o2.object instanceof Amenity;
+			boolean am2 = o2.object instanceof Amenity;
+			if (am1 != am2) {
+				return Boolean.compare(am1, am2);
+			} else if (am1 && am2) {
 				// here 2 points are amenity
 				Amenity a1 = (Amenity) o1.object;
 				Amenity a2 = (Amenity) o2.object;
@@ -910,6 +919,7 @@ public class SearchUICore {
 				if (cmp != 0) {
 					return cmp;
 				}
+
 				String subType1 = a1.getSubType() == null ? "" : a1.getSubType();
 				String subType2 = a2.getSubType() == null ? "" : a2.getSubType();
 				cmp = collator.compare(subType1, subType2);
@@ -917,10 +927,7 @@ public class SearchUICore {
 					return cmp;
 				}
 			}
-
-			double s1 = o1.getSearchDistance(loc, 1);
-			double s2 = o2.getSearchDistance(loc, 1);
-			return Double.compare(s1, s2);
+			return 0;
 		}
 
 	}
