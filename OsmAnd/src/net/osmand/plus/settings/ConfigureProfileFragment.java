@@ -28,11 +28,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
+import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -165,10 +167,33 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	@Override
 	public void resetAppModePrefs(ApplicationMode appMode) {
 		if (appMode != null) {
-			app.getSettings().resetPreferencesForProfile(appMode);
-			app.showToastMessage(R.string.profile_prefs_reset_successful);
-			updateCopiedOrResetPrefs();
+			if (appMode.isCustomProfile()) {
+				File file = getBackupFileForCustomMode(appMode);
+				if (file.exists()) {
+					app.getSettingsHelper().importSettings(file, "", 1, false, true, new SettingsHelper.SettingsImportListener() {
+						@Override
+						public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
+							app.showToastMessage(R.string.profile_prefs_reset_successful);
+							updateCopiedOrResetPrefs();
+						}
+					});
+				}
+			} else {
+				app.getSettings().resetPreferencesForProfile(appMode);
+				app.showToastMessage(R.string.profile_prefs_reset_successful);
+				updateCopiedOrResetPrefs();
+			}
 		}
+	}
+
+	private File getBackupFileForCustomMode(ApplicationMode appMode) {
+		String fileName = appMode.getStringKey() + IndexConstants.OSMAND_SETTINGS_FILE_EXT;
+		File backupDir = app.getAppPath(IndexConstants.BACKUP_INDEX_DIR);
+		if (!backupDir.exists()) {
+			backupDir.mkdirs();
+		}
+
+		return new File(backupDir, fileName);
 	}
 
 	private void updateCopiedOrResetPrefs() {
@@ -303,7 +328,8 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 
 	private void setupResetToDefaultPref() {
 		Preference resetToDefault = findPreference(RESET_TO_DEFAULT);
-		if (getSelectedAppMode().isCustomProfile()) {
+		if (getSelectedAppMode().isCustomProfile()
+				&& !getBackupFileForCustomMode(getSelectedAppMode()).exists()) {
 			resetToDefault.setVisible(false);
 		} else {
 			resetToDefault.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_reset_to_default_dark,

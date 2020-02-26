@@ -1650,6 +1650,7 @@ public class SettingsHelper {
 		private File file;
 		private String latestChanges;
 		private boolean askBeforeImport;
+		private boolean forceImport;
 		private int version;
 
 		private SettingsImportListener listener;
@@ -1660,12 +1661,13 @@ public class SettingsHelper {
 		private AlertDialog dialog;
 
 		ImportAsyncTask(@NonNull File settingsFile, String latestChanges, int version, boolean askBeforeImport,
-						@Nullable SettingsImportListener listener) {
+		                boolean forceImport, @Nullable SettingsImportListener listener) {
 			this.file = settingsFile;
 			this.listener = listener;
 			this.latestChanges = latestChanges;
 			this.version = version;
 			this.askBeforeImport = askBeforeImport;
+			this.forceImport = forceImport;
 			importer = new SettingsImporter(app);
 			collectOnly = true;
 		}
@@ -1692,7 +1694,7 @@ public class SettingsHelper {
 
 		@Override
 		protected List<SettingsItem> doInBackground(Void... voids) {
-			if (collectOnly) {
+			if (collectOnly || forceImport) {
 				try {
 					return importer.collectItems(file);
 				} catch (IllegalArgumentException e) {
@@ -1709,10 +1711,15 @@ public class SettingsHelper {
 		@Override
 		protected void onPostExecute(List<SettingsItem> items) {
 			this.items = items;
-			if (collectOnly) {
+			if (collectOnly && !forceImport) {
 				listener.onSettingsImportFinished(true, false, items);
 			} else {
 				if (items != null && items.size() > 0) {
+					if (forceImport) {
+						for (SettingsItem item : items) {
+							item.setShouldReplace(true);
+						}
+					}
 					processNextItem();
 				}
 			}
@@ -1864,8 +1871,8 @@ public class SettingsHelper {
 	}
 
 	public void importSettings(@NonNull File settingsFile, String latestChanges, int version,
-							   boolean askBeforeImport, @Nullable SettingsImportListener listener) {
-		new ImportAsyncTask(settingsFile, latestChanges, version, askBeforeImport, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	                           boolean askBeforeImport, boolean forceImport, @Nullable SettingsImportListener listener) {
+		new ImportAsyncTask(settingsFile, latestChanges, version, askBeforeImport, forceImport, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public void importSettings(@NonNull File settingsFile, @NonNull List<SettingsItem> items, String latestChanges, int version, @Nullable SettingsImportListener listener) {
