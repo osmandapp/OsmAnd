@@ -34,7 +34,9 @@
 				android:layout_marginLeft="@dimen/content_padding_half"
 				android:layout_marginRight="@dimen/content_padding_half"
 				android:layout_weight="1"
-				android:orientation="horizontal">
+				android:orientation="horizontal"
+				android:layout_marginEnd="@dimen/content_padding_half"
+				android:layout_marginStart="@dimen/content_padding_half">
 
 				<ImageView
 					android:id="@+id/lat_icon"
@@ -75,7 +77,9 @@
 				android:layout_marginLeft="@dimen/content_padding_half"
 				android:layout_marginRight="@dimen/content_padding_half"
 				android:layout_weight="1"
-				android:orientation="horizontal">
+				android:orientation="horizontal"
+				android:layout_marginEnd="@dimen/content_padding_half"
+				android:layout_marginStart="@dimen/content_padding_half">
 
 				<ImageView
 					android:id="@+id/lon_icon"
@@ -120,7 +124,9 @@
 			android:layout_marginLeft="5dp"
 			android:layout_marginRight="5dp"
 			android:gravity="center"
-			android:orientation="horizontal">
+			android:orientation="horizontal"
+			android:layout_marginStart="5dp"
+			android:layout_marginEnd="5dp">
 
 			<TextView
 				android:id="@+id/map_exit_ref"
@@ -137,7 +143,9 @@
 				android:textStyle="bold"
 				tools:text="8"
 
-				tools:visibility="visible" />
+				tools:visibility="visible"
+				android:paddingStart="@dimen/text_margin_small"
+				android:paddingEnd="@dimen/text_margin_small" />
 
 			<ImageView
 				android:id="@+id/map_turn_icon"
@@ -202,7 +210,9 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/map_button_margin"
                     android:layout_marginRight="@dimen/map_button_margin"
-                    tools:src="@drawable/ic_action_test_light"/>
+                    tools:src="@drawable/ic_action_test_light"
+	                android:layout_marginStart="@dimen/map_button_margin"
+	                android:layout_marginEnd="@dimen/map_button_margin" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -584,7 +594,8 @@
                                 android:text="  •  Dmitr"
                                 android:textColor="@color/marker_top_2nd_line_color"
                                 android:textSize="@dimen/default_list_text_size"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold"
+	                            android:layout_toEndOf="@+id/map_marker_dist_2nd" />
 
                         </RelativeLayout>
 
@@ -770,7 +781,9 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/widget_turn_lane_border"
                 android:layout_marginRight="@dimen/widget_turn_lane_border"
-                android:layout_marginTop="@dimen/widget_turn_lane_border"/>
+                android:layout_marginTop="@dimen/widget_turn_lane_border"
+	            android:layout_marginStart="@dimen/widget_turn_lane_border"
+	            android:layout_marginEnd="@dimen/widget_turn_lane_border" />
 
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -789,7 +802,9 @@
                     android:maxLines="1"
                     android:textColor="@color/color_black"
                     android:textSize="@dimen/map_button_text_size"
-                    tools:text="1048 km"/>
+                    tools:text="1048 km"
+	                android:layout_marginEnd="@dimen/widget_turn_lane_border"
+	                android:layout_marginStart="@dimen/widget_turn_lane_border" />
 
                 <TextView
                     android:id="@+id/map_lanes_dist_text"
@@ -801,7 +816,9 @@
                     android:maxLines="1"
                     android:textColor="@color/color_black"
                     android:textSize="@dimen/map_button_text_size"
-                    tools:text="1048 km"/>
+                    tools:text="1048 km"
+	                android:layout_marginEnd="@dimen/widget_turn_lane_border"
+	                android:layout_marginStart="@dimen/widget_turn_lane_border" />
 
             </FrameLayout>
 

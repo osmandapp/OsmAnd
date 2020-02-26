@@ -28,7 +28,9 @@
         android:orientation="horizontal"
         android:minHeight="48dp"
         android:paddingLeft="56dp"
-        android:paddingRight="16dp">
+        android:paddingRight="16dp"
+	    android:paddingEnd="16dp"
+	    android:paddingStart="56dp">
 
         <TextView
             android:id="@+id/title"
@@ -45,6 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginLeft="56dp"
-        android:background="?attr/dashboard_divider"/>
+        android:background="?attr/dashboard_divider"
+	    android:layout_marginStart="56dp" />
 
 </LinearLayout>

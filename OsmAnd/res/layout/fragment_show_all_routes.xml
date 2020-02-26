@@ -40,7 +40,8 @@
 			android:background="@drawable/btn_circle_transparent_full"
 			android:contentDescription="@string/shared_string_back"
 			android:src="@drawable/ic_arrow_back"
-			android:tint="?attr/text_color_tab_active_white" />
+			android:tint="?attr/text_color_tab_active_white"
+			android:layout_marginStart="8dp" />
 
 		<LinearLayout
 			android:id="@+id/toolbar_options_flow_bg"
@@ -51,7 +52,9 @@
 			android:gravity="center"
 			android:orientation="horizontal"
 			android:paddingLeft="20dp"
-			android:paddingRight="20dp" />
+			android:paddingRight="20dp"
+			android:paddingStart="20dp"
+			android:paddingEnd="20dp" />
 
 		<LinearLayout
 			android:id="@+id/toolbar_options_flow"
@@ -60,8 +63,10 @@
 			android:layout_gravity="end|center_vertical"
 			android:gravity="center_vertical"
 			android:orientation="horizontal"
-			android:paddingLeft="12dp"
-			android:paddingRight="12dp">
+			android:paddingLeft="@dimen/content_padding_small"
+			android:paddingRight="@dimen/content_padding_small"
+			android:paddingStart="@dimen/content_padding_small"
+			android:paddingEnd="@dimen/content_padding_small">
 
 			<android.support.v7.widget.AppCompatImageButton
 				android:id="@+id/print_route_flow"
@@ -129,7 +134,9 @@
 					android:contentDescription="@string/shared_string_close"
 					android:scaleType="center"
 					android:src="@drawable/ic_arrow_back"
-					android:tint="?attr/text_color_tab_active_white" />
+					android:tint="?attr/text_color_tab_active_white"
+					android:layout_marginEnd="@dimen/content_padding"
+					android:layout_marginStart="@dimen/content_padding" />
 
 			</LinearLayout>
 
@@ -163,9 +170,11 @@
 				android:layout_gravity="end|center_vertical"
 				android:gravity="center_vertical"
 				android:orientation="horizontal"
-				android:paddingLeft="12dp"
-				android:paddingRight="12dp"
-				android:visibility="visible">
+				android:paddingLeft="@dimen/content_padding_small"
+				android:paddingRight="@dimen/content_padding_small"
+				android:visibility="visible"
+				android:paddingEnd="@dimen/content_padding_small"
+				android:paddingStart="@dimen/content_padding_small">
 
 				<android.support.v7.widget.AppCompatImageView
 					android:id="@+id/print_route"
@@ -217,20 +226,25 @@
 		android:layout_marginLeft="5dp"
 		android:layout_marginRight="5dp"
 		android:background="?attr/pages_bg"
-		android:gravity="center">
+		android:gravity="center"
+		android:layout_marginEnd="5dp"
+		android:layout_marginStart="5dp">
 
 		<View
 			android:layout_width="@dimen/pages_item_size"
 			android:layout_height="@dimen/pages_item_size"
 			android:layout_marginLeft="@dimen/pages_item_margin"
 			android:layout_marginRight="@dimen/pages_item_padding"
-			android:background="@drawable/pages_active_dark" />
+			android:background="@drawable/pages_active_dark"
+			android:layout_marginEnd="@dimen/pages_item_padding"
+			android:layout_marginStart="@dimen/pages_item_margin" />
 
 		<View
 			android:layout_width="@dimen/pages_item_size"
 			android:layout_height="@dimen/pages_item_size"
 			android:layout_marginRight="@dimen/pages_item_margin"
-			android:background="@drawable/pages_inactive_dark" />
+			android:background="@drawable/pages_inactive_dark"
+			android:layout_marginEnd="@dimen/pages_item_margin" />
 
 
 	</LinearLayout>
@@ -241,7 +255,9 @@
 		android:layout_height="wrap_content"
 		android:layout_gravity="end|bottom"
 		android:layout_marginLeft="@dimen/fab_margin_right"
-		android:layout_marginRight="@dimen/fab_margin_right">
+		android:layout_marginRight="@dimen/fab_margin_right"
+		android:layout_marginStart="@dimen/fab_margin_right"
+		android:layout_marginEnd="@dimen/fab_margin_right">
 
 		<ImageButton
 			android:id="@+id/map_my_location_button"

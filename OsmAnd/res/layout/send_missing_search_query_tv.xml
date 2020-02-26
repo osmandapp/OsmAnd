@@ -9,4 +9,6 @@
 	android:paddingLeft="@dimen/content_padding"
 	android:paddingRight="@dimen/content_padding"
 	android:textAppearance="@style/TextAppearance.ListItemTitle"
-	tools:text="Some Title" />
+	tools:text="Some Title"
+	android:paddingStart="@dimen/content_padding"
+	android:paddingEnd="@dimen/content_padding" />

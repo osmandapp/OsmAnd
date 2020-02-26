@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.AdditionalDataWrapper;
 import net.osmand.plus.profiles.ProfileIconColors;
@@ -73,6 +75,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		TextView titleTv = group.findViewById(R.id.title_tv);
 		TextView subTextTv = group.findViewById(R.id.sub_text_tv);
 		final ThreeStateCheckbox checkBox = group.findViewById(R.id.check_box);
+		FrameLayout checkBoxContainer = group.findViewById(R.id.check_box_container);
 		ImageView expandIv = group.findViewById(R.id.explist_indicator);
 		View lineDivider = group.findViewById(R.id.divider);
 		View cardTopDivider = group.findViewById(R.id.card_top_divider);
@@ -99,9 +102,10 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 			}
 			checkBox.setState(contains ? MISC : UNCHECKED);
 		}
-		checkBox.setOnClickListener(new View.OnClickListener() {
+		checkBoxContainer.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				checkBox.performClick();
 				if (checkBox.getState() == CHECKED) {
 					for (Object object : listItems) {
 						if (!dataToOperate.contains(object)) {
@@ -213,6 +217,13 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				icon.setVisibility(View.VISIBLE);
 				subText.setVisibility(View.GONE);
 				break;
+			case AVOID_ROADS:
+				AvoidRoadInfo avoidRoadInfo = (AvoidRoadInfo) currentItem;
+				title.setText(avoidRoadInfo.name);
+				icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_alert, nightMode));
+				icon.setVisibility(View.VISIBLE);
+				subText.setVisibility(View.GONE);
+				break;
 			default:
 				return child;
 		}
@@ -270,9 +281,11 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 			case MAP_SOURCES:
 				return R.string.quick_action_map_source_title;
 			case CUSTOM_RENDER_STYLE:
-				return R.string.shared_string_custom_rendering_style;
+				return R.string.shared_string_rendering_style;
 			case CUSTOM_ROUTING:
 				return R.string.shared_string_routing;
+			case AVOID_ROADS:
+				return R.string.avoid_road;
 			default:
 				return R.string.access_empty_list;
 		}

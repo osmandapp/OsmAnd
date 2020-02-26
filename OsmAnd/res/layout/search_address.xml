@@ -5,7 +5,9 @@
     android:paddingRight="@dimen/list_content_padding"
     android:background="?attr/expandable_list_item_background"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+	android:paddingEnd="@dimen/list_content_padding"
+	android:paddingStart="@dimen/list_content_padding">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -27,7 +29,8 @@
 
                 <TableRow
                     android:id="@+id/TableRow"
-                    android:layout_marginLeft="5dp">
+                    android:layout_marginLeft="5dp"
+	                android:layout_marginStart="5dp">
 
                     <TextView
                         android:id="@+id/TextView"
@@ -46,11 +49,13 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="5dp"
                         android:background="@drawable/ic_action_remove_dark"
-                        android:contentDescription="@string/shared_string_clear" />
+                        android:contentDescription="@string/shared_string_clear"
+	                    android:layout_marginEnd="5dp" />
                 </TableRow>
 
                 <TableRow
-                    android:layout_marginLeft="5dp">
+                    android:layout_marginLeft="5dp"
+	                android:layout_marginStart="5dp">
 
                     <TextView
                         android:text="@string/search_address_city" />
@@ -68,11 +73,13 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="5dp"
                         android:background="@drawable/ic_action_remove_dark"
-                        android:contentDescription="@string/shared_string_clear" />
+                        android:contentDescription="@string/shared_string_clear"
+	                    android:layout_marginEnd="5dp" />
                 </TableRow>
 
                 <TableRow
-                    android:layout_marginLeft="5dp">
+                    android:layout_marginLeft="5dp"
+	                android:layout_marginStart="5dp">
 
                     <TextView
                         android:text="@string/search_address_street" />
@@ -90,11 +97,13 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="5dp"
                         android:background="@drawable/ic_action_remove_dark"
-                        android:contentDescription="@string/shared_string_clear" />
+                        android:contentDescription="@string/shared_string_clear"
+	                    android:layout_marginEnd="5dp" />
                 </TableRow>
 
                 <TableRow
-                    android:layout_marginLeft="5dp">
+                    android:layout_marginLeft="5dp"
+	                android:layout_marginStart="5dp">
 
                     <TextView
                         android:id="@+id/BuildingText"
@@ -113,7 +122,8 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="5dp"
                         android:background="@drawable/ic_action_remove_dark"
-                        android:contentDescription="@string/shared_string_clear" />
+                        android:contentDescription="@string/shared_string_clear"
+	                    android:layout_marginEnd="5dp" />
                 </TableRow>
             </TableLayout>
 
@@ -123,7 +133,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_span="3"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+	            android:layout_marginStart="5dp">
 
                 <RadioButton
                     android:id="@+id/RadioBuilding"
@@ -136,7 +147,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="@string/search_address_street_option" />
+                    android:text="@string/search_address_street_option"
+	                android:layout_marginStart="5dp" />
             </RadioGroup>
         </net.osmand.view.ExpandableLinearLayout>
     </LinearLayout>

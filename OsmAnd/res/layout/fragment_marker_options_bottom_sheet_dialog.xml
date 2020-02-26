@@ -34,7 +34,9 @@
                     android:paddingRight="@dimen/content_padding"
                     android:text="@string/shared_string_options"
                     android:textAppearance="@style/TextAppearance.ListItemTitle"
-                    osmand:typeface="@string/font_roboto_medium"/>
+                    osmand:typeface="@string/font_roboto_medium"
+	                android:paddingStart="@dimen/content_padding"
+	                android:paddingEnd="@dimen/content_padding" />
 
                 <LinearLayout
                     android:id="@+id/sort_by_row"
@@ -43,7 +45,9 @@
                     android:background="?attr/selectableItemBackground"
                     android:minHeight="@dimen/bottom_sheet_list_item_height"
                     android:paddingLeft="@dimen/content_padding"
-                    android:paddingRight="@dimen/content_padding">
+                    android:paddingRight="@dimen/content_padding"
+	                android:paddingStart="@dimen/content_padding"
+	                android:paddingEnd="@dimen/content_padding">
 
                     <ImageView
                         android:id="@+id/sort_by_icon"
@@ -79,7 +83,9 @@
                     android:background="?attr/selectableItemBackground"
                     android:minHeight="@dimen/bottom_sheet_list_item_height"
                     android:paddingLeft="@dimen/content_padding"
-                    android:paddingRight="@dimen/content_padding">
+                    android:paddingRight="@dimen/content_padding"
+	                android:paddingStart="@dimen/content_padding"
+	                android:paddingEnd="@dimen/content_padding">
 
                     <ImageView
                         android:id="@+id/show_direction_icon"
@@ -108,7 +114,9 @@
                     android:background="?attr/selectableItemBackground"
                     android:minHeight="@dimen/bottom_sheet_list_item_height"
                     android:paddingLeft="@dimen/content_padding"
-                    android:paddingRight="@dimen/content_padding">
+                    android:paddingRight="@dimen/content_padding"
+	                android:paddingEnd="@dimen/content_padding"
+	                android:paddingStart="@dimen/content_padding">
 
                     <ImageView
                         android:id="@+id/coordinate_input_icon"
@@ -135,7 +143,9 @@
                     android:background="?attr/selectableItemBackground"
                     android:minHeight="@dimen/bottom_sheet_list_item_height"
                     android:paddingLeft="@dimen/content_padding"
-                    android:paddingRight="@dimen/content_padding">
+                    android:paddingRight="@dimen/content_padding"
+	                android:paddingEnd="@dimen/content_padding"
+	                android:paddingStart="@dimen/content_padding">
 
                     <ImageView
                         android:id="@+id/build_route_icon"
@@ -171,7 +181,9 @@
                     android:background="?attr/selectableItemBackground"
                     android:minHeight="@dimen/bottom_sheet_list_item_height"
                     android:paddingLeft="@dimen/content_padding"
-                    android:paddingRight="@dimen/content_padding">
+                    android:paddingRight="@dimen/content_padding"
+	                android:paddingEnd="@dimen/content_padding"
+	                android:paddingStart="@dimen/content_padding">
 
                     <ImageView
                         android:id="@+id/save_as_new_track_icon"
@@ -198,7 +210,9 @@
                     android:background="?attr/selectableItemBackground"
                     android:minHeight="@dimen/bottom_sheet_list_item_height"
                     android:paddingLeft="@dimen/content_padding"
-                    android:paddingRight="@dimen/content_padding">
+                    android:paddingRight="@dimen/content_padding"
+	                android:paddingStart="@dimen/content_padding"
+	                android:paddingEnd="@dimen/content_padding">
 
                     <ImageView
                         android:id="@+id/move_all_to_history_icon"

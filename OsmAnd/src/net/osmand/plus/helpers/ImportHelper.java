@@ -782,7 +782,7 @@ public class ImportHelper {
 								if (fragmentManager != null) {
 									ImportSettingsFragment.showInstance(fragmentManager, items, file);
 								}
-							} else {
+							} else if (empty) {
 								app.showShortToastMessage(app.getString(R.string.file_import_error, name, app.getString(R.string.shared_string_unexpected_error)));
 							}
 						}

@@ -79,7 +79,9 @@
 			android:layout_marginTop="@dimen/route_info_details_padding"
 			android:layout_marginRight="@dimen/route_info_buttons_padding_top_bottom"
 			android:layout_marginBottom="@dimen/route_info_details_padding"
-			android:orientation="horizontal">
+			android:orientation="horizontal"
+			android:layout_marginEnd="@dimen/route_info_buttons_padding_top_bottom"
+			android:layout_marginStart="@dimen/route_info_buttons_padding_top_bottom">
 
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/button_descr"

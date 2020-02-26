@@ -226,7 +226,9 @@
 					android:paddingTop="@dimen/context_menu_padding_margin_tiny"
 					android:text="@string/search_no_results_feedback"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium" />
+					osmand:typeface="@string/font_roboto_medium"
+					android:paddingStart="@dimen/bottom_sheet_content_margin"
+					android:paddingEnd="@dimen/bottom_sheet_content_margin" />
 
 				<FrameLayout
 					android:id="@+id/send_empty_search_button"
@@ -236,7 +238,9 @@
 					android:layout_marginLeft="@dimen/context_menu_padding_margin_small"
 					android:layout_marginRight="@dimen/context_menu_padding_margin_small"
 					android:layout_marginTop="@dimen/content_padding_small"
-					android:background="?attr/btn_border_bg">
+					android:background="?attr/btn_border_bg"
+					android:layout_marginStart="@dimen/context_menu_padding_margin_small"
+					android:layout_marginEnd="@dimen/context_menu_padding_margin_small">
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/send_empty_search_text"
@@ -254,7 +258,9 @@
 						android:text="@string/shared_string_send"
 						android:textColor="?attr/wikivoyage_active_color"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_medium" />
+						osmand:typeface="@string/font_roboto_medium"
+						android:paddingStart="@dimen/context_menu_padding_margin_small"
+						android:paddingEnd="@dimen/context_menu_padding_margin_small" />
 
 				</FrameLayout>
 
@@ -268,7 +274,7 @@
 		android:id="@+id/fab"
 		android:layout_width="@dimen/fab_size_with_shadow"
 		android:layout_height="@dimen/fab_size_with_shadow"
-		android:layout_gravity="right|bottom"
+		android:layout_gravity="end|bottom"
 		android:layout_marginBottom="@dimen/fab_margin_right"
 		android:layout_marginRight="@dimen/fab_margin_right"
 		android:background="@drawable/fab_background_style"
@@ -276,6 +282,7 @@
 		android:contentDescription="@string/save_filter"
 		android:scaleType="center"
 		android:src="@drawable/ic_action_save"
-		tools:layout_marginBottom="@dimen/action_bar_image_top_margin_land" />
+		tools:layout_marginBottom="@dimen/action_bar_image_top_margin_land"
+		android:layout_marginEnd="@dimen/fab_margin_right" />
 
 </FrameLayout>

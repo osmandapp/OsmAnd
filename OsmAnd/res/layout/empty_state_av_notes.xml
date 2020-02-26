@@ -35,6 +35,8 @@
         android:gravity="center"
         android:text="@string/empty_state_av_notes_desc"
         android:textColor="?android:attr/textColorSecondary"
-        android:textSize="@dimen/empty_state_text_desc_size"/>
+        android:textSize="@dimen/empty_state_text_desc_size"
+	    android:layout_marginEnd="@dimen/empty_state_text_desc_margin"
+	    android:layout_marginStart="@dimen/empty_state_text_desc_margin" />
 
 </LinearLayout>

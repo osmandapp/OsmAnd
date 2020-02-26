@@ -9,7 +9,9 @@
     android:layout_marginBottom="@dimen/dash_margin"
     android:layout_marginLeft="@dimen/dash_margin_h"
     android:layout_marginRight="@dimen/dash_margin_h"
-	android:orientation="vertical">
+	android:orientation="vertical"
+	android:layout_marginStart="@dimen/dash_margin_h"
+	android:layout_marginEnd="@dimen/dash_margin_h">
 
 	<LinearLayout
 		android:layout_width="wrap_content"
@@ -26,7 +28,9 @@
 			android:scaleType="center"
 			android:layout_marginLeft="@dimen/dashFavIconMargin"
 			android:layout_marginRight="@dimen/dashFavIconMargin"
-			android:src="@drawable/ic_action_remove_dark"/>
+			android:src="@drawable/ic_action_remove_dark"
+			android:layout_marginEnd="@dimen/dashFavIconMargin"
+			android:layout_marginStart="@dimen/dashFavIconMargin" />
 
 		<TextView
 			android:id="@+id/error_header"

@@ -6,7 +6,9 @@
               android:orientation="vertical"
               android:paddingLeft="24dp"
               android:paddingRight="16dp"
-              android:paddingTop="18dp">
+              android:paddingTop="18dp"
+	android:paddingStart="24dp"
+	android:paddingEnd="16dp">
 
     <net.osmand.plus.widgets.TextViewEx
         android:id="@+id/title"

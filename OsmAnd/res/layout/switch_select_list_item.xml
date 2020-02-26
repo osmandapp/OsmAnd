@@ -7,7 +7,9 @@
     android:minHeight="48dp"
     android:orientation="horizontal"
     android:paddingLeft="@dimen/list_content_padding"
-    android:paddingRight="@dimen/list_content_padding">
+    android:paddingRight="@dimen/list_content_padding"
+	android:paddingEnd="@dimen/list_content_padding"
+	android:paddingStart="@dimen/list_content_padding">
 
     <ImageView
         android:id="@+id/icon"
@@ -15,7 +17,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginRight="@dimen/list_content_padding"
-        android:src="@drawable/ic_action_gabout_dark" />
+        android:src="@drawable/ic_action_gabout_dark"
+	    android:layout_marginEnd="@dimen/list_content_padding" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -24,7 +27,8 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+	    android:layout_marginEnd="8dp">
 
         <TextView
             android:id="@+id/header_text"
@@ -52,10 +56,12 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:maxWidth="150dp"
-        android:gravity="center_vertical|right"
+        android:gravity="center_vertical|end"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:text="@string/shared_string_select"
-        android:textSize="@dimen/default_list_text_size"/>
+        android:textSize="@dimen/default_list_text_size"
+	    android:paddingStart="8dp"
+	    android:paddingEnd="8dp" />
 
 </LinearLayout>

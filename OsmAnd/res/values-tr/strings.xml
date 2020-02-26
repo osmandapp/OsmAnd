@@ -3490,7 +3490,6 @@
     <string name="shared_string_menu">Menü</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Yönlendirme</string>
-    <string name="shared_string_custom_rendering_style">Özel görselleştirme stili</string>
     <string name="shared_string_include_data">İlave veriler ekle</string>
     <string name="import_profile_dialog_description">İçe aktarılan profil ilave veriler içermektedir. Yalnızca profil verilerini içe aktarmak için İçe Aktar\'ı tıklayın veya içe aktarılacak ilave verileri seçin.</string>
     <string name="export_profile_dialog_description">Profil ile birlikte dışa aktarılacak ilave veriler seçebilirsiniz.</string>

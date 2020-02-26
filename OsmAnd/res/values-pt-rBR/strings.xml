@@ -3522,7 +3522,6 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_menu">Menu</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Roteamento</string>
-    <string name="shared_string_custom_rendering_style">Estilo de renderização personalizado</string>
     <string name="shared_string_include_data">Incluir dados adicionais</string>
     <string name="import_profile_dialog_description">O perfil importado contém dados adicionais. Clique em Importar para importar apenas dados do perfil ou selecione dados adicionais a serem importados.</string>
     <string name="export_profile_dialog_description">Você pode selecionar dados adicionais para exportar junto com o perfil.</string>

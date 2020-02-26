@@ -15,6 +15,7 @@ import net.osmand.plus.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.quickaction.QuickAction;
@@ -118,6 +119,11 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 					itemHolder.icon.setVisibility(View.INVISIBLE);
 				}
 				itemHolder.subTitle.setVisibility(View.GONE);
+			} else if (currentItem instanceof AvoidRoadInfo) {
+				itemHolder.title.setText(((AvoidRoadInfo) currentItem).name);
+				itemHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_alert, nightMode));
+				itemHolder.subTitle.setVisibility(View.GONE);
+				itemHolder.icon.setVisibility(View.VISIBLE);
 			}
 			itemHolder.divider.setVisibility(shouldShowDivider(position) ? View.VISIBLE : View.GONE);
 		}

@@ -114,7 +114,9 @@
             android:textSize="@dimen/default_sub_text_size"
             android:text="@string/apply_filters"
             osmand:typeface="@string/font_roboto_medium"
-            osmand:textAllCapsCompat="true"/>
+            osmand:textAllCapsCompat="true"
+	        android:paddingStart="16dp"
+	        android:paddingEnd="16dp" />
 
     </LinearLayout>
 

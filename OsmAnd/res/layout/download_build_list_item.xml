@@ -3,8 +3,10 @@
     android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
 	android:minHeight="@dimen/list_item_height"
-	android:paddingLeft="16dp"
-	android:paddingRight="10dp">
+	android:paddingLeft="@dimen/content_padding"
+	android:paddingRight="10dp"
+	android:paddingEnd="10dp"
+	android:paddingStart="@dimen/content_padding">
 
     <TextView
         android:id="@+id/download_tag"
@@ -23,6 +25,7 @@
         android:layout_width="90dp"
         android:maxLines="2"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/default_desc_text_size"/>
+        android:textSize="@dimen/default_desc_text_size"
+	    android:layout_marginStart="3dp" />
 
 </LinearLayout>

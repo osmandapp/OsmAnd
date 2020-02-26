@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/bg_color"
-        android:padding="16dp"
+        android:padding="@dimen/content_padding"
         android:text="@string/quick_action_start_stop_navigation_descr"
         android:textColor="?android:textColorPrimary"
         android:textSize="@dimen/default_list_text_size"/>
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/content_padding"
         android:scaleType="fitXY"
         android:src="@drawable/bg_shadow_list_top"/>
 
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:padding="16dp"
+            android:padding="@dimen/content_padding"
             android:text="@string/quick_action_show_navigation_finish_dialog"
             android:textColor="?android:textColorPrimary"
             android:textSize="@dimen/default_list_text_size"/>
@@ -51,8 +51,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"/>
+            android:layout_marginLeft="@dimen/content_padding"
+            android:layout_marginRight="@dimen/content_padding"
+	        android:layout_marginEnd="@dimen/content_padding"
+	        android:layout_marginStart="@dimen/content_padding" />
     </LinearLayout>
 
     <ImageView

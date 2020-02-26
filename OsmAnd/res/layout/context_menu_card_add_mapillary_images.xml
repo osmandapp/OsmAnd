@@ -12,15 +12,17 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="104dp"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp"
-        android:paddingTop="2dp"
+        android:paddingLeft="@dimen/dialog_content_margin"
+        android:paddingRight="@dimen/dialog_content_margin"
+        android:paddingTop="@dimen/subHeaderPadding"
         android:maxLines="4"
         android:gravity="center"
         android:ellipsize="end"
         tools:textColor="?android:textColorPrimary"
         android:textSize="@dimen/default_list_text_size"
-        android:text="@string/mapillary_action_descr"/>
+        android:text="@string/mapillary_action_descr"
+	    android:paddingEnd="@dimen/dialog_content_margin"
+	    android:paddingStart="@dimen/dialog_content_margin" />
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/button"
@@ -31,12 +33,14 @@
         android:layout_gravity="bottom|center_horizontal"
         android:drawableLeft="@drawable/ic_action_mapillary"
         android:drawableStart="@drawable/ic_action_mapillary"
-        android:drawablePadding="8dp"
+        android:drawablePadding="@dimen/content_padding_half"
         android:paddingLeft="10dp"
         android:paddingRight="14dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="@dimen/content_padding"
         android:textColor="@color/color_white"
-        android:text="@string/shared_string_add_photos"/>
+        android:text="@string/shared_string_add_photos"
+	    android:paddingEnd="14dp"
+	    android:paddingStart="10dp" />
 
     <View
         android:id="@+id/card_background"

@@ -6,14 +6,16 @@
               android:paddingBottom="@dimen/dialog_content_bottom_margin"
               android:paddingLeft="@dimen/dialog_content_margin"
               android:paddingRight="@dimen/dialog_content_margin"
-              android:paddingTop="@dimen/dialog_content_bottom_margin">
+              android:paddingTop="@dimen/dialog_content_bottom_margin"
+	android:paddingEnd="@dimen/dialog_content_margin"
+	android:paddingStart="@dimen/dialog_content_margin">
 
 
     <EditText
         android:id="@+id/edit_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="@dimen/content_padding_small"
         android:hint="@string/favorite_category_name"/>
 
     <Spinner

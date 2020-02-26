@@ -30,7 +30,7 @@
 			<ProgressBar android:id="@+id/ProgressBar"
 						 android:layout_width="wrap_content"
 						 android:layout_height="wrap_content"
-						 android:layout_gravity="right"/>
+						 android:layout_gravity="end"/>
 
 		</android.support.v7.widget.Toolbar>
 

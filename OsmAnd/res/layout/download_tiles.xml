@@ -5,7 +5,9 @@
     android:paddingTop="@dimen/content_padding"
     android:paddingLeft="@dimen/content_padding"
     android:paddingRight="@dimen/content_padding"
-    android:orientation="vertical">
+    android:orientation="vertical"
+	android:paddingEnd="@dimen/content_padding"
+	android:paddingStart="@dimen/content_padding">
 
     <TextView
         android:text="@string/select_max_zoom_preload_area"
@@ -15,7 +17,9 @@
         android:textColor="?android:textColorSecondary"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp" />
+        android:layout_marginTop="5dp"
+	    android:layout_marginEnd="10dp"
+	    android:layout_marginStart="10dp" />
 
     <SeekBar
         android:id="@+id/ZoomToDownload"
@@ -23,7 +27,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/content_padding"
         android:layout_marginRight="@dimen/content_padding"
-        android:layout_marginTop="@dimen/content_padding_small"/>
+        android:layout_marginTop="@dimen/content_padding_small"
+	    android:layout_marginEnd="@dimen/content_padding"
+	    android:layout_marginStart="@dimen/content_padding" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -38,7 +44,9 @@
             android:paddingLeft="@dimen/content_padding_small"
             android:paddingRight="@dimen/content_padding_small"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+	        android:paddingEnd="@dimen/content_padding_small"
+	        android:paddingStart="@dimen/content_padding_small" />
 
         <TextView
             android:text="15"
@@ -49,7 +57,9 @@
             android:paddingLeft="@dimen/content_padding_small"
             android:paddingRight="@dimen/content_padding_small"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+	        android:paddingStart="@dimen/content_padding_small"
+	        android:paddingEnd="@dimen/content_padding_small" />
     </LinearLayout>
 
     <TextView
@@ -68,5 +78,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:id="@+id/AreaPreview" />
+        android:id="@+id/AreaPreview"
+	    android:layout_marginEnd="10dp"
+	    android:layout_marginStart="10dp" />
 </LinearLayout>

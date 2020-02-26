@@ -64,7 +64,9 @@
                     android:textAllCaps="true"
                     android:textColor="@color/color_white"
                     android:textSize="@dimen/default_list_text_size"
-                    osmand:typeface="@string/font_roboto_medium"/>
+                    osmand:typeface="@string/font_roboto_medium"
+	                android:paddingStart="16dp"
+	                android:paddingEnd="16dp" />
 
             </LinearLayout>
 

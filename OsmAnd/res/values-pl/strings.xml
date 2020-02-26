@@ -3513,7 +3513,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n 
 \nWtyczka pozostanie na urządzeniu po usunięciu OsmAnd.</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
-    <string name="shared_string_custom_rendering_style">Własny styl wyświetlania</string>
     <string name="shared_string_include_data">Uwzględnij dodatkowe dane</string>
     <string name="import_profile_dialog_description">Zaimportowany profil zawiera dodatkowe dane. Kliknij przycisk Importuj, aby zaimportować tylko dane profilu lub wybierz dodatkowe dane do zaimportowania.</string>
     <string name="export_profile_dialog_description">Można wybrać dodatkowe dane do wyeksportowania wraz z profilem.</string>

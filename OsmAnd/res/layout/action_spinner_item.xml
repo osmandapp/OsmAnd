@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="right"
+    android:gravity="end"
     android:textColor="?attr/color_dialog_buttons"
     android:textSize="@dimen/default_list_text_size"
-    android:padding="8dp"
+    android:padding="@dimen/content_padding_half"
     tools:text="Test text"/>

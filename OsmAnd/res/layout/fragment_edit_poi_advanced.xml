@@ -23,7 +23,9 @@
                 android:layout_marginRight="14dp"
                 android:layout_marginTop="14dp"
                 android:background="?attr/bg_card"
-                android:orientation="vertical">
+                android:orientation="vertical"
+	            android:layout_marginStart="14dp"
+	            android:layout_marginEnd="14dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -39,7 +41,9 @@
                         android:text="@string/tag_poi_name"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="@dimen/default_desc_text_size"
-                        osmand:typeface="@string/font_roboto_regular"/>
+                        osmand:typeface="@string/font_roboto_regular"
+	                    android:layout_marginEnd="16dp"
+	                    android:layout_marginStart="16dp" />
 
                     <View
                         android:layout_width="1dp"
@@ -57,7 +61,9 @@
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="@dimen/default_desc_text_size"
                         osmand:typeface="@string/font_roboto_medium"
-                        tools:text="very very very long poi name"/>
+                        tools:text="very very very long poi name"
+	                    android:layout_marginStart="16dp"
+	                    android:layout_marginEnd="16dp" />
                 </LinearLayout>
 
                 <View
@@ -80,7 +86,9 @@
                         android:text="@string/tag_poi_amenity"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="@dimen/default_desc_text_size"
-                        osmand:typeface="@string/font_roboto_regular"/>
+                        osmand:typeface="@string/font_roboto_regular"
+	                    android:layout_marginStart="16dp"
+	                    android:layout_marginEnd="16dp" />
 
                     <View
                         android:layout_width="1dp"
@@ -96,7 +104,9 @@
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="@dimen/default_desc_text_size"
                         osmand:typeface="@string/font_roboto_medium"
-                        tools:text="landmark"/>
+                        tools:text="landmark"
+	                    android:layout_marginEnd="16dp"
+	                    android:layout_marginStart="16dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -115,7 +125,8 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/add_tag"
                 android:textSize="@dimen/default_sub_text_size"
-                osmand:typeface="@string/font_roboto_medium"/>
+                osmand:typeface="@string/font_roboto_medium"
+	            android:layout_marginStart="12dp" />
         </LinearLayout>
     </FrameLayout>
 </android.support.v4.widget.NestedScrollView>

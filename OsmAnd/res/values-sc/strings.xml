@@ -3501,7 +3501,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_menu">Menù</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Càrculu de s\'àndala</string>
-    <string name="shared_string_custom_rendering_style">Istile de renderizatzione personalizadu</string>
     <string name="shared_string_include_data">Inclue datos additzionales</string>
     <string name="import_profile_dialog_description">Su profilu importadu tenet datos additzionales. Incarca in \"Importa\" pro importare sos datos de su profilu ebbia o ischerta sos datos additzionales de importare.</string>
     <string name="export_profile_dialog_description">Podes ischertare datos additzionales de esportare in paris cun su profilu.</string>
