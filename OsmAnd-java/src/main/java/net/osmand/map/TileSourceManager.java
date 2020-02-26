@@ -550,7 +550,11 @@ public class TileSourceManager {
 
 	private static String findOneTile(File dir) {
 		if (dir.isDirectory()) {
-			for (File file : dir.listFiles()) {
+			File[] files = dir.listFiles();
+			if (files == null) {
+				return null;
+			}
+			for (File file : files) {
 				if (file.isDirectory()) {
 					String ext = findOneTile(file);
 					if (ext != null) {
