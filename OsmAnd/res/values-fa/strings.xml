@@ -3588,4 +3588,5 @@
 \nکنشی را برگزینید.</string>
     <string name="import_duplicates_title">برخی موارد وجود دارند</string>
     <string name="select_data_to_import">دادهٔ موردنظر را برای درون‌برد انتخاب کنید.</string>
+    <string name="shared_string_rendering_style">سبک رندر</string>
 </resources>
