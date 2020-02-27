@@ -224,7 +224,7 @@
     <string name="shared_string_start">Почати</string>
     <string name="start_end_date">Дата початку - кінця</string>
     <string name="gpx_settings">Налаштування GPX</string>
-    <string name="timeline_no_data_descr">Накопичені дані для обраного дня відсутні</string>
+    <string name="timeline_no_data_descr">Ми не збирали дані за вибраний день</string>
     <string name="send_location_as">Надіслати місцезнаходження як</string>
     <string name="send_location_as_descr">Виберіть, як виглядатимуть повідомлення з вашим місцезнаходженням.</string>
     <string name="time_on_the_move">Час руху</string>
