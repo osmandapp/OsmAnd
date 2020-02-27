@@ -1254,7 +1254,7 @@ Lon %2$s</string>
     <string name="filter_existing_indexes">Descargados</string>
     <string name="fast_route_mode">Ruta más rápida</string>
     <string name="fast_route_mode_descr">Activar para calcular la ruta más rápida o desactivar para la más eficiente en combustible.</string>
-    <string name="tiles_to_download_estimated_size">En el zoom {0}, descarga {1} teselas ({2} MB)</string>
+    <string name="tiles_to_download_estimated_size">En el zoom {0}, se descargarán {1} teselas ({2} MB)</string>
     <string name="shared_string_download_map">Descargar mapa</string>
     <string name="select_max_zoom_preload_area">Zoom máximo a precargar</string>
     <string name="maps_could_not_be_downloaded">No se pudo descargar el mapa</string>
@@ -3563,4 +3563,5 @@ Lon %2$s</string>
 \nElige una acción.</string>
     <string name="import_duplicates_title">Algunos elementos ya existen</string>
     <string name="select_data_to_import">Marca los datos a importar.</string>
+    <string name="shared_string_rendering_style">Estilo de renderizado</string>
 </resources>
