@@ -7,8 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
@@ -50,9 +50,9 @@ public class EditTextPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		editText = view.findViewById(R.id.edit_text);
 		editText.setText(text);
 
-		RelativeLayout editTextLayout = view.findViewById(R.id.text_field_boxes_editTextLayout);
-		if (editTextLayout != null && editTextLayout.getLayoutParams() instanceof RelativeLayout.LayoutParams) {
-			RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) editTextLayout.getLayoutParams();
+		ViewGroup editTextLayout = view.findViewById(R.id.text_field_boxes_editTextLayout);
+		if (editTextLayout != null && editTextLayout.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+			ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) editTextLayout.getLayoutParams();
 			params.setMargins(params.leftMargin, AndroidUtils.dpToPx(ctx, 9), params.rightMargin, params.bottomMargin);
 		}
 
