@@ -893,15 +893,6 @@ public class SearchUICore {
 			if (ps1 != ps2) {
 				return Double.compare(ps1, ps2);
 			}
-//			if (o1.parentSearchResult != null && o2.parentSearchResult != null) {
-//				if (o1.parentSearchResult == o2.parentSearchResult) {
-//					int cmp = collator.compare(localeName1, localeName2);
-//					if (cmp != 0) {
-//						return cmp;
-//					}
-//				}
-//				return Double.compare(s1, s2);
-//			}
 			int cmp = collator.compare(localeName1, localeName2);
 			if (cmp != 0) {
 				return cmp;
