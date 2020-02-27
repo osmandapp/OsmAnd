@@ -263,7 +263,7 @@
     <string name="unit_of_speed_system">وحدة السرعة</string>
     <string name="buffer_time_descr">الحد الأقصى للوقت لتخزين النقاط في التخزين المؤقت</string>
     <string name="buffer_time">وقت انتهاء صلاحية التخزين المؤقت</string>
-    <string name="shared_string_suggested">اقترح</string>
+    <string name="shared_string_suggested">مقترح</string>
     <string name="status_widget_title">تتبع حالة أوسماند</string>
     <string name="back_to_osmand">العودة إلى OsmAnd</string>
     <string name="duration_ago">%1$s منذ</string>

@@ -71,7 +71,7 @@
     <string name="route_descr_lat_lon">عرض %1$.3f، طول %2$.3f</string>
     <string name="no_buildings_found">ساختمانی یافت نشد.</string>
     <string name="search_villages_and_postcodes">جست‌وجوی روستاها یا کدهای پستی بیشتر</string>
-    <string name="replace_destination_point">جایگزین مقصد کن</string>
+    <string name="replace_destination_point">جانشین مقصد کن</string>
     <string name="new_destination_point_dialog">قبلاً مقصدی را انتخاب کرده بودید:</string>
     <string name="poi_filter_parking">پارکینگ</string>
     <string name="poi_filter_emergency">اورژانس</string>
@@ -291,7 +291,7 @@
     <string name="shared_string_downloading">در حال دانلود…</string>
     <string name="fav_points_edited">نقطهٔ برگزیده ویرایش شد</string>
     <string name="fav_points_not_exist">هیچ نقطهٔ برگزیده‌ای وجود ندارد</string>
-    <string name="update_existing">جایگزین‌کردن</string>
+    <string name="update_existing">جانشینی</string>
     <string name="only_show">مسیر را نشان بده</string>
     <string name="follow">شروع هدایت</string>
     <string name="mark_final_location_first">لطفاً ابتدا مقصد را تنظیم کنید</string>
@@ -311,8 +311,8 @@
     <string name="unit_of_length_descr">یکاهای طول را تغییر دهید.</string>
     <string name="unit_of_length">یکاهای طول</string>
     <string name="local_index_descr_title">مدیریت فایل‌های نقشه</string>
-    <string name="local_index_mi_restore">فعال‌کردن</string>
-    <string name="local_index_mi_backup">غیرفعال‌کردن</string>
+    <string name="local_index_mi_restore">فعال‌سازی</string>
+    <string name="local_index_mi_backup">غیرفعال‌سازی</string>
     <string name="shared_string_download">دانلود</string>
     <string name="local_index_poi_data">اطلاعات POI</string>
     <string name="local_index_address_data">اطلاعات نشانی</string>
@@ -382,7 +382,7 @@
     <string name="local_openstreetmap_delete">حذف ویرایش</string>
     <string name="local_openstreetmap_descr_title">ویرایش ناهمزمان OSM:</string>
     <string name="free_version_message">شما می‌توانید %1$s نقشه دانلود یا به‌روز کنید.</string>
-    <string name="free_version_title">‎نسخهٔ رایگان</string>
+    <string name="free_version_title">نسخهٔ رایگان</string>
     <string name="poi_context_menu_showdescription">نمایش توضیحات POI.</string>
     <string name="index_name_north_america">آمریکای شمالی</string>
     <string name="index_name_us">آمریکای شمالی - ایالات متحده</string>
@@ -650,7 +650,7 @@
     <string name="local_openstreetmap_were_uploaded">تعداد {0} یادداشت/POI آپلود شد</string>
     <string name="update_poi_does_not_change_indexes">تغییراتی که به‌وسیلهٔ برنامه روی POIها انجام می‌دهید روی نقشه‌های دانلود‌شده تأثیری ندارد. تغییرات روی فایل دیگری در دستگاه ذخیره می‌شود.</string>
     <string name="show_current_gpx_title">نمایش رد جاری</string>
-    <string name="fav_export_confirmation">قبلاً نقاط برگزیده را برون‌برد کرده‌اید و فایل آن وجود دارد. برون‌برد جدید را جایگزین آن می‌کنید؟</string>
+    <string name="fav_export_confirmation">قبلاً نقاط برگزیده را برون‌برد کرده‌اید و فایل آن وجود دارد. برون‌برد جدید را جانشین آن می‌کنید؟</string>
     <string name="osmand_development_plugin_description">تنظیمات توسعه‌ای و امکانات عیب‌یابی را مشاهده کنید؛ مانند شبیه‌سازی ناوبری، آزمایش عملکرد رندر یا امتحان‌کردن پیام‌های گفتاری. 
 \nاین تنظیمات برای توسعه‌دهندگان فراهم شده است و برای کاربردهای عادی برنامه لازم نیست.</string>
     <string name="animate_route_off">پایان شبیه‌سازی</string>
@@ -1357,7 +1357,7 @@
     <string name="online_map">نقشهٔ آنلاین</string>
     <string name="roads_only">فقط راه‌ها</string>
     <string name="rendering_attr_pisteRoutes_name">سراشیبی‌های اسکی</string>
-    <string name="device_memory">‎حافظهٔ دستگاه</string>
+    <string name="device_memory">حافظهٔ دستگاه</string>
     <string name="rendering_attr_pisteGrooming_name">آماده‌سازی پیست</string>
     <string name="plugin_ski_name">نمای اسکی برای نقشه</string>
     <string name="plugin_nautical_name">نمای دریایی نقشه</string>
@@ -1667,7 +1667,7 @@
     <string name="clear_tile_data">پاک‌کردن همهٔ کاشی‌ها</string>
     <string name="routing_attr_short_way_name">راه صرفه‌جویی سوخت</string>
     <string name="routing_attr_short_way_description">انتخاب راه مناسب برای مصرف سوخت کمتر (معمولاً کوتاه‌تر).</string>
-    <string name="replace_favorite_confirmation">آیا این نقطهٔ جدید را جایگزین «%1$s» می‌کنید؟</string>
+    <string name="replace_favorite_confirmation">آیا این نقطهٔ جدید را جانشین «%1$s» می‌کنید؟</string>
     <string name="rendering_attr_hideOverground_name">اشیای روی زمین</string>
     <string name="shared_string_change">تغییر</string>
     <string name="get_started">شروع</string>
@@ -1708,7 +1708,7 @@
     <string name="access_smart_autoannounce">اعلام هوشمند خودکار</string>
     <string name="access_smart_autoannounce_descr">فقط اگر جهتم از سمت نقطهٔ مقصد منحرف شد، اعلام شود.</string>
     <string name="access_autoannounce_period">بازهٔ زمانی اعلام خودکار</string>
-    <string name="access_autoannounce_period_descr">کمترین فاصلهٔ زمانی بین اعلام پیام‌ها.</string>
+    <string name="access_autoannounce_period_descr">بازهٔ زمانی کمینی بین اعلام پیام‌ها.</string>
     <string name="access_default_color">رنگ پیش‌فرض</string>
     <string name="access_category_choice">انتخاب دسته</string>
     <string name="access_hint_enter_name">نام</string>
@@ -2330,7 +2330,7 @@
     <string name="edit_name">اصلاح نام</string>
     <string name="animate_my_location">پویانمایی موقعیت من</string>
     <string name="quick_action_add_destination_desc">دکمه‌ای که نقطهٔ مرکزی صفحه را به‌عنوان مقصد تنظیم می‌کند. مقصد قبلی می‌شود آخرین مقصد میانی.</string>
-    <string name="quick_action_replace_destination_desc">دکمه‌ای که مقصد را با نقطهٔ مرکزی صفحه جایگزین می‌کند و مقصد پیشین حذف می‌شود.</string>
+    <string name="quick_action_replace_destination_desc">دکمه‌ای که نقطهٔ مرکزی صفحه را به‌عنوان مقصد جدید تعریف می‌کند و جانشین مقصد قبلی می‌شود (اگر باشد).</string>
     <string name="quick_action_add_first_intermediate_desc">دکمه‌ای که نقطهٔ مرکزی صفحه را به‌عنوان اولین نقطهٔ میانی تنظیم می‌کند.</string>
     <string name="no_overlay">بدون لایهٔ رویی</string>
     <string name="no_underlay">بدون لایهٔ زیری</string>
@@ -2635,7 +2635,7 @@
     <string name="shared_string_added">افزوده شد</string>
     <string name="marker_activated">نشانهٔ %s فعال شد.</string>
     <string name="one_tap_active_descr">یکی از نشانه‌های روی نقشه را لمس کنید تا بدون نیاز به بازکردن منوی زمینه، آن را در صدر نشانه‌های فعال قرار دهید.</string>
-    <string name="one_tap_active">فعال‌کردن «با یک لمس»</string>
+    <string name="one_tap_active">فعال‌سازی «با یک لمس»</string>
     <string name="empty_state_av_notes">یادداشت بگذارید!</string>
     <string name="empty_state_av_notes_desc">با استفاده از ابزارک یا منوی زمینه، برای هر نقطه‌ای روی نقشه یادداشت صوتی، عکسی یا ویدئویی بگذارید.</string>
     <string name="notes_by_date">یادداشت‌های OSM بر اساس تاریخ</string>
@@ -3573,10 +3573,19 @@
     <string name="profile_type_custom_string">پروفایل سفارشی</string>
     <string name="shared_string_angle_param">زاویه: ‎%s°</string>
     <string name="shared_string_angle">زاویه</string>
-    <string name="recalc_angle_dialog_descr">تا مسیریابی مجدد انجام شود میان موقعیت من و مسیر محاسبه‌شده یک پاره‌خط مستقیم اضافه می‌شود</string>
+    <string name="recalc_angle_dialog_descr">تا مسیریابی مجدد انجام شود، از موقعیت من تا مسیر محاسبه‌شده پاره‌خط مستقیمی نمایش داده می‌شود</string>
     <string name="recalc_angle_dialog_title">کمترین زاویه میان موقعیت من و مسیر</string>
     <string name="shared_string_preparing">آماده‌سازی</string>
     <string name="shared_string_nothing_selected">چیزی انتخاب نشده</string>
     <string name="shared_string_quick_actions">کنش‌های فوری</string>
     <string name="shared_string_profiles">پروفایل‌ها</string>
+    <string name="replace_all_desc">موارد موجود در فایل، جانشین موارد کنونی می‌شود</string>
+    <string name="replace_all">جانشانی همه</string>
+    <string name="keep_both">حفظ هر دو</string>
+    <string name="keep_both_desc">موارد درون‌بردی با پیشوند اضافه می‌شوند</string>
+    <string name="import_duplicates_description">چیزهایی در OsmAnd همنام با موارد درون‌بردی است.
+\n
+\nکنشی را برگزینید.</string>
+    <string name="import_duplicates_title">برخی موارد وجود دارند</string>
+    <string name="select_data_to_import">دادهٔ موردنظر را برای درون‌برد انتخاب کنید.</string>
 </resources>

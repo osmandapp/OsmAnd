@@ -3541,4 +3541,5 @@
     <string name="poi_shop_security">Bezpečnostný obchod</string>
     <string name="poi_bowling_alley">Bowlingové centrum</string>
     <string name="poi_piste_ref">Číslo zjazdovky</string>
+    <string name="poi_charge">Výška poplatku</string>
 </resources>

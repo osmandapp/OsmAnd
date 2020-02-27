@@ -193,7 +193,8 @@
     <string name="global_settings">Globálne nastavenia</string>
     <string name="global_app_settings">Globálne nastavenia aplikácie</string>
     <string name="download_files_not_enough_space">Nie je dostatok voľného miesta pre stiahnutie %1$s MB (voľné: %2$s).</string>
-    <string name="download_files_question_space">Stiahnuť {0} súbor(ov)\? Bude použitých {1} MB (z {2} MB).</string>
+    <string name="download_files_question_space">Stiahnuť {0} súbor(ov)\?
+\n Bude použitých {1} MB (z {2} MB).</string>
     <string name="use_transparent_map_theme">Priehľadná téma</string>
     <string name="native_library_not_supported">Natívna knižnica nie je podporovaná na tomto zariadení.</string>
     <string name="init_native_library">Inicializácia natívnej knižnice…</string>
@@ -609,7 +610,7 @@
     <string name="settings_preset">Prednastavený profil</string>
     <string name="save_current_track_descr">Uložiť aktuálnu stopu ako súbor GPX.</string>
     <string name="save_current_track">Uložiť aktuálnu stopu</string>
-    <string name="save_track_interval_descr">Zvoť interval zaznamenávania stopy počas navigácie.</string>
+    <string name="save_track_interval_descr">Zadajte interval zaznamenávania stopy počas navigácie</string>
     <string name="save_track_interval">Interval zaznamenávania pri navigácii</string>
     <string name="save_track_to_gpx_descrp">GPX stopa bude počas navigácie automaticky ukladaná do priečinku stôp.</string>
     <string name="save_track_to_gpx">Automaticky zaznamenávať stopu počas navigácie</string>
@@ -883,13 +884,13 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="recording_default_name">Nahrávka</string>
     <string name="map_widget_av_notes">Mediálne poznámky</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd modul pre offline vrstevnice</string>
-    <string name="osmand_srtm_long_description_1000_chars">Tento modul poskytuje vrstevnice a tieňované reliéfy, ktoré môžu byť zobrazené ponad štandardné mapy. Táto funkcia je vhodná pre atlétov, turistov, chodcov a všetkých, ktorých zaujíma reliéf terénu. 
+    <string name="osmand_srtm_long_description_1000_chars">Tento modul poskytuje vrstevnice a tieňované reliéfy, ktoré môžu byť zobrazené ponad štandardné mapy. Táto funkcia je vhodná pre atlétov, turistov, chodcov a všetkých, ktorých zaujíma reliéf terénu.
 \n 
 \nGlobálne údaje (medzi 70° severne a 70° južne) sú založené na meraní SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), zobrazovacieho nástroja na palube Terra, vlajkového satelitu NASA Earth Observing System. ASTER je kooperatívne úsilie medzi NASA, Japonským ministerstvom hospodárstva, obchodu a priemyslu (METI) a Japonských vesmírnych systémov (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Meranie vzdialenosti</string>
     <string name="audionotes_location_not_defined">Umiestnenie na spojenie s poznámkou ešte nie je definované. Ak chcete priradiť poznámku k vybranému umiestneniu, použite \"Použiť umiestnenie…\".</string>
     <string name="map_widget_audionotes">Zvukové poznámky</string>
-    <string name="audionotes_plugin_description">Modul Audio/video poznámok poskytuje funkcie na vytváranie obrazových/zvukových/video poznámok počas výletu, buď tlačidlom na mape alebo priamo v kontextovom menu bodu na mape.</string>
+    <string name="audionotes_plugin_description">Vytvárajte obrazové/zvukové/video poznámky počas výletu, buď tlačidlom na mape alebo v kontextovom menu polohy na mape.</string>
     <string name="audionotes_plugin_name">Audio/video poznámky</string>
     <string name="srtm_plugin_description">Tento modul poskytuje vrstevnice a tieňované reliéfy, ktoré môžu byť zobrazené ponad štandardné mapy. Táto funkcia je vhodná pre atlétov, turistov, chodcov a všetkých, ktorých zaujíma reliéf terénu. (Samotné vrstevnice sú samostatnými dátami, ktoré je potrebné stiahnuť po aktivovaní modulu.) 
 \n 
@@ -927,8 +928,8 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="street_name">Názov ulice</string>
     <string name="hno">Číslo domu</string>
     <string name="monitoring_settings">Zaznamenávanie výletu</string>
-    <string name="monitoring_settings_descr">Konfigurovať ako sa majú zaznamenať vaše výlety.</string>
-    <string name="choose_osmand_theme_descr">Zvoľte ako má aplikácia vyzerať.</string>
+    <string name="monitoring_settings_descr">Nastavte ako sa majú zaznamenať vaše výlety.</string>
+    <string name="choose_osmand_theme_descr">Upravte vzhľad aplikácie.</string>
     <string name="choose_osmand_theme">Téma aplikácie</string>
     <string name="accessibility_options">Voľby zjednodušeného prístupu</string>
     <string name="select_address_activity">Vybrať adresu</string>
@@ -956,7 +957,7 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="gpx_file_name">Názov súboru GPX</string>
     <string name="gpx_saved_sucessfully">Súbor GPX bol uložený do {0}</string>
     <string name="search_street_in_neighborhood_cities">Hľadať ulicu v susednom meste</string>
-    <string name="local_osm_changes_backup_failed">Nepodarilo sa zálohovať zmeny OSM</string>
+    <string name="local_osm_changes_backup_failed">Nepodarilo sa zálohovať zmeny OSM.</string>
     <string name="local_osm_changes_backup">Zálohovať ako OSM zmenu</string>
     <string name="please_select_address">Najskôr vyberte mesto alebo ulicu</string>
     <string name="local_osm_changes_backup_successful">Zmenový súbor pre OSM bol vygenerovaný %1$s</string>
@@ -1004,7 +1005,7 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="edit_tilesource_choose_existing">Zvoliť existujúci…</string>
     <string name="maps_define_edit">Určiť/Upraviť…</string>
     <string name="map_widget_fps_info">Ladiace info o FPS</string>
-    <string name="driving_region_descr">Vybrať jazdnú oblasť: USA, Európa, Spojené kráľovstvo, Ázia a ostatné.</string>
+    <string name="driving_region_descr">Vyberte jazdnú oblasť: USA, Európa, Spojené kráľovstvo, Ázia a ostatné.</string>
     <string name="driving_region">Jazdná oblasť</string>
     <string name="driving_region_japan">Japonsko</string>
     <string name="driving_region_us">Spojené štáty</string>
@@ -1012,7 +1013,7 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="driving_region_europe_asia">Európa, Ázia, Latinská Amerika a podobné</string>
     <string name="driving_region_uk">UK, India a podobné</string>
     <string name="speak_title">Ohlásiť…</string>
-    <string name="speak_descr">Konfigurácia ohlásení názvov ulíc, dopravných varovaní (vynútené zastavenia, spomaľovače), upozornení na radary, obmedzení rýchlosti.</string>
+    <string name="speak_descr">Nastavte ohlásenia názvov ulíc, dopravné varovania (vynútené zastavenia, spomaľovače), upozornenia na radary a obmedzenia rýchlosti.</string>
     <string name="speak_street_names">Názvy ulíc (TTS)</string>
     <string name="osb_author_or_password_not_specified">Prosím, zadajte používateľa OSM a heslo v \"Nastaveniach\"</string>
     <string name="clear_intermediate_points">Zmazať prechodné body</string>
@@ -1037,19 +1038,19 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="animate_routing_route_not_calculated">Prosím najprv vypočítajte trasu</string>
     <string name="animate_routing_route">Simulovať pomocou vypočítanej trasy </string>
     <string name="animate_routing_gpx">Simulovať pomocou stopy GPX</string>
-    <string name="local_osm_changes_delete_all_confirm">Chystáte sa odstrániť %1$d OSM zmien. Ste si istý?</string>
+    <string name="local_osm_changes_delete_all_confirm">Naozaj chcete odstrániť %1$d OSM zmien\?</string>
     <string name="app_mode_hiking">Turistika</string>
     <string name="app_mode_motorcycle">Motocykel</string>
     <string name="app_mode_boat">Loď</string>
     <string name="app_mode_aircraft">Lietadlo</string>
     <string name="app_modes_choose">Profily aplikácie</string>
     <string name="map_widget_map_rendering">Vykresľovanie mapy</string>
-    <string name="app_modes_choose_descr">Zvoľte profily, ktoré majú byť viditeľné v aplikácii.</string>
+    <string name="app_modes_choose_descr">Zvoľte profily, ktoré majú byť viditeľné.</string>
     <string name="amenity_type_seamark">Morská značka</string>
     <string name="complex_route_calculation_failed">Rýchly prepočet trasy zlyhal (%s), použije sa pomalý výpočet.</string>
     <string name="disable_complex_routing_descr">Vypnúť dvojfázovú navigáciu pre režim auta.</string>
     <string name="disable_complex_routing">Vypnúť komplexnú navigáciu</string>
-    <string name="speech_rate_descr">Zadajte rýchlosť reči TTS.</string>
+    <string name="speech_rate_descr">Zadajte rýchlosť prevodu textu na reč.</string>
     <string name="speech_rate">Rýchlosť reči</string>
     <string name="guidance_preferences_descr">Nastavenia navigácie</string>
     <string name="routing_preferences_descr">Nastavenia určovania trasy</string>
@@ -1058,19 +1059,19 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="copying_osmand_files">Kopírujem dátové súbory OsmAnd…</string>
     <string name="copying_osmand_one_file_descr">Kopírujem súbor (%s) do nového cieľa…</string>
     <string name="calculate_osmand_route_gpx">Offline výpočet trasy OsmAnd</string>
-    <string name="android_19_location_disabled">Od Androidu verzie 4.4 (KitKat) nie je možné sťahovať a aktualizovať mapy v starom úložnom priečinku (%s). Skopírovať všetky súbory OsmAnd do nového úložiska?
+    <string name="android_19_location_disabled">Od Androidu verzie 4.4 (KitKat) je starý úložný priečinok (%s) zastaralý. Skopírovať všetky súbory OsmAnd do nového úložiska\? 
 \n Poznámka 1: pôvodné súbory zostanú nedotknuté (môžete ich neskôr vymazať ručne).
 \n Poznámka 2: v novom úložisku nebude možné zdieľať súbory medzi OsmAnd a OsmAnd+.</string>
     <string name="routing_attr_prefer_motorway_name">Uprednostniť diaľnice</string>
     <string name="routing_attr_prefer_motorway_description">Uprednostniť diaľnice</string>
     <string name="routing_attr_avoid_toll_name">Vyhnúť sa spoplatneným cestám</string>
-    <string name="routing_attr_avoid_toll_description">Vyhnúť sa spoplatneným cestám</string>
-    <string name="routing_attr_avoid_unpaved_name">Vyhnúť sa nespevneným cestám</string>
+    <string name="routing_attr_avoid_toll_description">Vyhne sa spoplatneným cestám</string>
+    <string name="routing_attr_avoid_unpaved_name">Žiadne nespevnené cesty</string>
     <string name="routing_attr_avoid_unpaved_description">Vyhnúť sa nespevneným cestám</string>
-    <string name="routing_attr_avoid_ferries_name">Vyhnúť sa trajektom</string>
+    <string name="routing_attr_avoid_ferries_name">Žiadne trajekty</string>
     <string name="routing_attr_avoid_ferries_description">Vyhnúť sa trajektom</string>
-    <string name="routing_attr_avoid_motorway_name">Vyhnúť sa diaľniciam</string>
-    <string name="routing_attr_avoid_motorway_description">Vyhnúť sa diaľniciam</string>
+    <string name="routing_attr_avoid_motorway_name">Žiadne diaľnice</string>
+    <string name="routing_attr_avoid_motorway_description">Vyhne sa diaľniciam</string>
     <string name="routing_attr_weight_name">Hmotnostný limit</string>
     <string name="routing_attr_weight_description">Zadajte hmotnosť vozidla, ktorá musí byť povolená na cestách.</string>
     <string name="select_gpx">Vybrať GPX…</string>
@@ -1180,14 +1181,14 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="gpx_selection_points">%1$s \nBody</string>
     <string name="gpx_selection_track">%1$s \nStopa %2$s</string>
     <string name="save_as_favorites_points">Uložiť ako skupinu Obľúbených</string>
-    <string name="select_destination_and_intermediate_points">Vybrať ciele</string>
+    <string name="select_destination_and_intermediate_points">Určite ciele</string>
     <string name="layer_amenity_label">Prekrývacie popisy bodov</string>
     <string name="show_zoom_buttons_navigation_descr">Zobraziť tlačidlá priblíženia počas navigácie.</string>
     <string name="show_zoom_buttons_navigation">Zobraziť tlačidlá priblíženia</string>
     <string name="sort_by_distance">Zoradiť podľa vzdialenosti</string>
     <string name="sort_by_name">Zoradiť podľa názvu</string>
-    <string name="none_selected_gpx">Žiadny súbor GPX nebol vybraný. Zvoľte jeden dlhým stlačením.</string>
-    <string name="local_index_select_gpx_file">Vybrať na zobrazenie</string>
+    <string name="none_selected_gpx">Zvoľte GPX súbor dlhým stlačením.</string>
+    <string name="local_index_select_gpx_file">Zvoľte stopu</string>
     <string name="route_descr_destination">Cieľ</string>
     <string name="no_index_file_to_download">Nenašlo sa nič na stiahnutie, prosím skontrolujte pripojenie na Internet.</string>
     <string name="stop_navigation_service">Zastaviť</string>
@@ -1245,7 +1246,7 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="rendering_value_browse_map_name">Štandardná</string>
     <string name="rendering_value_car_name">Automobil</string>
     <string name="rendering_value_bicycle_name">Bicykel</string>
-    <string name="rendering_value_pedestrian_name">Chodec</string>
+    <string name="rendering_value_pedestrian_name">Peši</string>
     <string name="download_additional_maps">Stiahnuť chýbajúce mapy %1$s (%2$d MB)?</string>
     <string name="shared_string_waypoints">Prechodné body</string>
     <string name="way_alarms">Dopravné varovania</string>
@@ -1253,18 +1254,18 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="speak_poi">Blízke body záujmu</string>
     <string name="shared_string_all">Všetky</string>
     <string name="index_tours">Výlety</string>
-    <string name="record_plugin_description">Tento modul zapne funkciu nahratia a uloženia vašich stôp stlačením tlačidla záznamu GPX na mape. Taktiež umožňuje nastaviť automatické zaznamenávanie navigačných trás do GPX súboru. 
-\n
+    <string name="record_plugin_description">Tento modul zapne funkciu nahratia a uloženia vašich stôp stlačením tlačidla záznamu GPX na mape. Taktiež umožňuje nastaviť automatické zaznamenávanie navigačných trás do GPX súboru.
+\n 
 \nZaznamenané stopy môžete zdieľať s priateľmi alebo odoslať ako príspevok do OSM. Atléti môžu použiť záznamy na sledovanie svojich tréningov. Základná analýza môže byť vykonaná už priamo v OsmAnd, napr. trvanie stopy, priemerná rýchlosť. Stopy môžu následne skúmať ďalšie špecializované programy.</string>
     <string name="record_plugin_name">Zaznamenávanie výletov</string>
     <string name="int_hour">hod</string>
     <string name="duration">Trvanie</string>
     <string name="distance">Vzdialenosť</string>
     <string name="confirm_every_run">Vždy sa pýtať</string>
-    <string name="save_global_track_interval_descr">Zvoľ interval pre všeobecné zaznamenávanie trasy (prístupné cez tlačidlo záznamu GPX na mape).</string>
+    <string name="save_global_track_interval_descr">Zadajte interval pre všeobecné zaznamenávanie trasy (prístupné cez tlačidlo záznamu GPX na mape).</string>
     <string name="save_global_track_interval">Interval všeobecného zaznamenávania</string>
     <string name="save_track_to_gpx_globally">Zaznamenať stopu do GPX súboru</string>
-    <string name="save_track_to_gpx_globally_descr">Zaznamenávanie polohy do GPX súboru môže byť zapnuté a vypnuté cez tlačidlo záznamu GPX na obrazovke mapy.</string>
+    <string name="save_track_to_gpx_globally_descr">Zaznamenávanie polohy do GPX súboru môže byť zapnuté a vypnuté cez tlačidlo záznamu GPX na mape.</string>
     <string name="save_track_interval_globally">Interval zaznamenávania</string>
     <string name="rendering_attr_publicTransportMode_name">Linky autobusov a trolejbusov</string>
     <string name="traffic_warning_speed_limit">Obmedzenie rýchlosti</string>
@@ -1277,9 +1278,9 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="local_index_description">Stlačte existujúcu položku pre zobrazenie detailov. Podržte pre vypnutie alebo odstránenie. Dát je v súčasnosti na zariadení (%1$s voľné):</string>
     <string name="text_size_descr">Nastaviť veľkosť textu na mape.</string>
     <string name="text_size">Veľkosť textu</string>
-    <string name="fav_point_dublicate">Duplicitný názov obľúbeného bodu</string>
-    <string name="fav_point_dublicate_message">Zadaný názov Obľúbeného bodu už existuje. Nový bod bol zmenený na %1$s, aby nevznikla duplicita.</string>
-    <string name="fav_point_emoticons_message">Názov Obľúbeného bodu bol upravený na %1$s, aby bolo možné správne uložiť názov s emotikonom do súboru.</string>
+    <string name="fav_point_dublicate">Zadaný duplicitný názov obľúbeného bodu</string>
+    <string name="fav_point_dublicate_message">Obľúbený bod bol premenovaný na %1$s, aby nevznikla duplicita.</string>
+    <string name="fav_point_emoticons_message">Obľúbený bod premenovaný na \'%1$s\', aby bolo možné uložiť názov s emotikonom do súboru.</string>
     <string name="print_route">Vytlačiť trasu</string>
     <string name="speed_limit_exceed">Tolerancia prekročenia povolenej rýchlosti</string>
     <string name="speed_limit_exceed_message">Zvoľte toleranciu prekročenia povolenej rýchlosti, po ktorej dostanete hlasové oznámenie.</string>
@@ -1354,9 +1355,9 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="enable_proxy_title">Povoliť HTTP proxy server</string>
     <string name="enable_proxy_descr">Nastaviť HTTP proxy server pre všetky sieťové požiadavky.</string>
     <string name="proxy_host_title">Proxy server</string>
-    <string name="proxy_host_descr">Nastaviť názov proxy servera (napr. 127.0.0.1).</string>
+    <string name="proxy_host_descr">Zadajte názov proxy servera (napr. 127.0.0.1).</string>
     <string name="proxy_port_title">Proxy port</string>
-    <string name="proxy_port_descr">Nastaviť port proxy servera (napr. 8118).</string>
+    <string name="proxy_port_descr">Zadajte port proxy servera (napr. 8118).</string>
     <string name="version_settings_descr">Stiahnuť vývojové verzie.</string>
     <string name="version_settings">Verzie</string>
     <string name="shared_string_gpx_points">Body</string>
@@ -1368,14 +1369,14 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="get_plugin">Získať</string>
     <string name="plugin_ski_name">Lyžiarsky mapový pohľad</string>
     <string name="plugin_nautical_name">Námorný mapový pohľad</string>
-    <string name="world_ski_missing">Pre zobrazenie lyžiarskym máp je potrebné stiahnuť samostatnú lyžiarsku mapu pre offline použitie</string>
-    <string name="nautical_maps_missing">Pre zobrazenie námorných máp je potrebné stiahnuť samostatnú námornú mapu pre offline použitie</string>
+    <string name="world_ski_missing">Stiahnite samostatnú lyžiarsku mapu pre zobrazenie zariadení pre lyžovanie.</string>
+    <string name="nautical_maps_missing">Stiahnite samostatnú námornú mapu pre zobrazenie námorných detailov.</string>
     <string name="rendering_attr_pisteGrooming_name">Úprava zjazdovky</string>
     <string name="free">%1$s voľných</string>
     <string name="device_memory">Pamäť zariadenia</string>
     <string name="rendering_attr_pisteRoutes_name">Lyžiarske svahy</string>
     <string name="share_note">Zdieľať poznámku</string>
-    <string name="notes">Poznámky</string>
+    <string name="notes">A/V poznámky</string>
     <string name="online_map">Online mapa</string>
     <string name="roads_only">Iba cesty</string>
     <string name="plugin_nautical_descr">Tento modul obohatí OsmAnd o možnosť zobrazenia námorných máp pre lode, plachetnice a iné vodné športy. 
@@ -1537,7 +1538,7 @@ Dĺžka %2$s</string>
     <string name="shared_string_copy">Kopírovať</string>
     <string name="application_dir_change_warning3">Presunúť údaje OsmAnd do nového cieľa\?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Čísla domov</string>
-    <string name="routing_attr_avoid_borders_description">Vyhnúť sa prekročeniu hraníc krajín</string>
+    <string name="routing_attr_avoid_borders_description">Vyhne sa prekročeniu hraníc krajín</string>
     <string name="routing_attr_height_name">Výškový limit</string>
     <string name="routing_attr_height_description">Zadajte výšku vozidla, ktorá musí byť povolená na cestách.</string>
     <string name="use_fast_recalculation">Inteligentné prepočítanie trasy</string>
@@ -1788,9 +1789,9 @@ Dĺžka %2$s</string>
     <string name="use_dashboard_btn">Použiť úvodný panel</string>
     <string name="use_drawer_btn">Použiť menu</string>
     <string name="please_specify_poi_type_only_from_list">Prosím zadajte správny typ POI alebo ho preskočte.</string>
-    <string name="routing_attr_avoid_stairs_name">Vyhnúť sa schodom</string>
-    <string name="routing_attr_avoid_stairs_description">Vyhnúť sa schodom</string>
-    <string name="routing_attr_avoid_borders_name">Vyhnúť sa hraničným priechodom</string>
+    <string name="routing_attr_avoid_stairs_name">Žiadne schody</string>
+    <string name="routing_attr_avoid_stairs_description">Vyhne sa schodom</string>
+    <string name="routing_attr_avoid_borders_name">Žiadne hraničné priechody</string>
     <string name="shared_string_near">Blízko</string>
     <string name="shared_string_hide">Skryť</string>
     <string name="av_video_quality_low">Najnižšia kvalita</string>
@@ -1864,8 +1865,11 @@ Dĺžka %2$s</string>
     <string name="rendering_attr_showMtbRoutes_name">Zobraziť trasy pre horské bicykle</string>
     <string name="select_map_marker">Zvoľte mapovú značku</string>
     <string name="map_markers_other">Iné značky</string>
-    <string name="download_files_error_not_enough_space">Nedostatok miesta! V úložisku je dočasne je potrebných {3} MB, natrvalo {1} MB. (Dostupných je len {2} MB.)</string>
-    <string name="download_files_question_space_with_temp">Naozaj stiahnuť {0} súbor(ov)\? V úložisku je dočasne je potrebných {3} MB, natrvalo {1} MB. (Z {2} MB.)</string>
+    <string name="download_files_error_not_enough_space">Nedostatok miesta!
+\n V úložisku je dočasne je potrebných {3} MB, natrvalo {1} MB.
+\n (Dostupných je len {2} MB.)</string>
+    <string name="download_files_question_space_with_temp">Naozaj stiahnuť {0} súbor(ov)\?
+\n V úložisku je dočasne je potrebných {3} MB, natrvalo {1} MB. (Z {2} MB.)</string>
     <string name="upload_osm_note_description">Odošlite OSM poznámku anonymne alebo použite svoj účet na OpenStreetMap.org.</string>
     <string name="upload_osm_note">Odoslať OSM poznámku</string>
     <string name="map_marker_1st">Prvá mapová značka</string>
@@ -1905,11 +1909,13 @@ Dĺžka %2$s</string>
     <string name="osm_live_region_desc">Časť z príspevku bude zaslaná používateľom OSM, ktorí upravujú mapu v danom regióne.</string>
     <string name="osm_live_subscription_settings">Nastavenia registrácie</string>
     <string name="osm_live_ask_for_purchase">Prosím zakúpte si najprv predplatné OsmAnd Live</string>
-    <string name="osm_live_header">Registrácia umožní hodinové aktualizácie všetkých máp sveta. Časť príjmu ide späť do OSM komunity a za každý príspevok do OSM je vyplatená odmena. Ak máte radi OsmAnd a OSM a chcete ich podporiť alebo byť podporovaný, toto je výborný spôsob ako to urobiť.</string>
+    <string name="osm_live_header">Registrácia umožní hodinové aktualizácie všetkých máp sveta.
+\n Časť príjmu ide späť do OSM komunity a za každý príspevok do OSM je vyplatená odmena.
+\n Ak máte radi OsmAnd a OSM a chcete ich podporiť alebo byť podporovaný, toto je výborný spôsob ako to urobiť.</string>
     <string name="show_transparency_seekbar">Zobraziť panel priesvitnosti</string>
     <string name="recalculate_route">Prepočítať trasu</string>
     <string name="shared_string_topbar">Horný panel</string>
-    <string name="storage_directory_readonly_desc">Zvolený priečinok na ukladanie dát je len na čítanie. Prosím zvoľte zapisovateľný priečinok na ukladanie.</string>
+    <string name="storage_directory_readonly_desc">Zvolený priečinok na ukladanie dát je chránený proti zápisu. Prosím zvoľte zapisovateľný priečinok na ukladanie.</string>
     <string name="storage_directory_shared">Zdieľaná pamäť</string>
     <string name="avoid_road">Vyhnúť sa ceste</string>
     <string name="finish_navigation">Dokončiť navigáciu</string>
@@ -1920,7 +1926,7 @@ Dĺžka %2$s</string>
     <string name="report">Prehľad</string>
     <string name="storage_permission_restart_is_required">Aplikácia teraz má povolenie zapisovať do externého úložiska, ale je potrebný reštart aplikácie.</string>
     <string name="full_report">Podrobný prehľad</string>
-    <string name="open_street_map_login_and_pass">Meno a heslo pre OpenStreetMap</string>
+    <string name="open_street_map_login_and_pass">Meno a heslo pre OSM</string>
     <string name="file_name_containes_illegal_char">Názov súboru obsahuje nepovolený znak</string>
     <string name="rendering_value_thin_name">Tenké</string>
     <string name="rendering_value_medium_name">Stredné</string>
@@ -2022,8 +2028,8 @@ Dĺžka %2$s</string>
     <string name="osmand_plus_banner_desc">Neobmedzené sťahovanie máp, aktualizácií a modul Wikipédia.</string>
     <string name="si_mi_meters">Míle/metre</string>
     <string name="osm_live_payment_desc">Predplatné bude spoplatnené každý mesiac. Predplatné zrušte kedykoľvek na Google Play.</string>
-    <string name="donation_to_osm">Príspevok komunite OpenStreetMap</string>
-    <string name="donation_to_osm_desc">Časť príspevku bude zaslaná používateľom, ktorí zasielajú zmeny do OpenStreetMap. Cena predplatného zostáva rovnaká.</string>
+    <string name="donation_to_osm">Príspevok komunite OSM</string>
+    <string name="donation_to_osm_desc">Časť príspevku bude zaslaná prispievateľom do OSM. Cena predplatného zostáva rovnaká.</string>
     <string name="osm_live_subscription_desc">Predplatné umožňuje hodinové, denné, týždenné aktualizácie a neobmedzené sťahovanie máp celého sveta.</string>
     <string name="driving_region_australia">Austrália</string>
     <string name="lang_kab">Kabylsky</string>
@@ -2356,8 +2362,8 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="quick_action_replace_destination">Nahradiť cieľ</string>
     <string name="quick_action_add_first_intermediate">Pridať prvý prechodný bod</string>
     <string name="quick_action_add_destination_desc">Tlačidlo na určenie stredu obrazovky novým cieľom trasy a doterajší cieľ sa stane posledným prechodným cieľom.</string>
-    <string name="quick_action_replace_destination_desc">Aktivovaním tohto tlačidla sa stred obrazovky stane novým cieľom trasy a nahradí doterajší cieľ (ak existoval).</string>
-    <string name="quick_action_add_first_intermediate_desc">Tlačidlo pre nastavenie stredu obrazovky ako prvý prechodný bod trasy.</string>
+    <string name="quick_action_replace_destination_desc">Tlačidlo na určenie stredu obrazovky novým cieľom, ktorý nahradí doterajší cieľ (ak existoval).</string>
+    <string name="quick_action_add_first_intermediate_desc">Tlačidlo pre nastavenie stredu obrazovky prvým prechodným bodom trasy.</string>
     <string name="no_overlay">Žiadna prekrývacia vrstva</string>
     <string name="no_underlay">Žiadna podkladová vrstva</string>
     <string name="subscribe_email_error">Chyba</string>
@@ -3366,7 +3372,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="profile_import_descr">Pridajte profil otvorením jeho súboru v OsmAnd.</string>
     <string name="file_import_error">Chyba pri importovaní %1$s: %2$s</string>
     <string name="file_imported_successfully">%1$s importovaný.</string>
-    <string name="quick_action_directions_from_desc">Tlačidlo pre nastavenie východzieho bodu do stredu obrazovky a výpočet trasy do cieľa alebo otvorenie dialógu na výber cieľa, ak značka pre cieľ nie je ešte na mape.</string>
+    <string name="quick_action_directions_from_desc">Tlačidlo na určenie stredu obrazovky ako východzieho bodu a výpočet trasy do cieľa alebo otvorenie dialógu na výber cieľa.</string>
     <string name="download_map_dialog">Okno sťahovania máp</string>
     <string name="dialogs_and_notifications_title">Okná a upozornenia</string>
     <string name="dialogs_and_notifications_descr">Ovládať okná a upozornenia.</string>
@@ -3478,4 +3484,68 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="shared_string_nothing_selected">Nič nie je zvolené</string>
     <string name="shared_string_quick_actions">Rýchle akcie</string>
     <string name="shared_string_profiles">Profily</string>
+    <string name="monitoring_min_speed_descr_remark">Poznámka: kontrola na nenulovú rýchlosť: Väčšina čipov GPS hlási hodnotu rýchlosti len ak algoritmus usúdi, že sa pohybujete, inak nevráti žiadnu rýchlosť. Preto použitie nenulového nastavenia v tomto filtri vlastne použije detekciu pohybu v GPS čipe. Ale aj keď nebude rýchlosť filtrovaná tu pri zázname, použijeme túto funkciu pri analýze GPX pre zistenie Opravenej vzdialenosti, teda hodnoty zobrazenej v tomto poli je vzdialenosť zaznamenaná počas pohybu.</string>
+    <string name="monitoring_min_accuracy_descr">Toto zaznamená len body zmerané pri indikovanej minimálnej presnosti (v metroch/stopách, ako ju hlási Android pre vaše zariadenie). Presnosť znamená rozptyl opakovaných meraní a nesúvisí priamo s presnosťou, ktorá určuje ako blízko je vaše meranie k skutočnej polohe.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Vedľajší efekt: Následkom filtrovania podľa presnosti môžu celkom chýbať body napr. pod mostami, stromami, medzi vysokými budovami alebo pri niektorých poveternostných podmienkach.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Odporúčanie: Je ťažké predpovedať, čo bude zaznamenané a čo nie, preto môže byť vhodné tento filter vypnúť.</string>
+    <string name="monitoring_min_accuracy_descr_remark">Poznámka: ak bolo GPS vypnuté tesne pred zaznamenávaním, prvý zmeraný bod môže znížiť presnosť a preto by sme mohli v našom programe chvíľu počkať pred zaznamenaním prvého bodu (alebo zaznamenať najlepší z troch po sebe idúcich bodov), ale toto ešte nie je implementované.</string>
+    <string name="monitoring_min_distance_descr">Tento filter zamedzí zaznamenaniu duplicitných bodov, kde sa udial príliš malý pohyb, čo vytvára krajšie vyzerajúce stopy, ktoré nebudú neskôr ešte spracovávané.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Vedľajšie efekty: Obdobia v pokoji nie sú vôbec zaznamenané, alebo každé len jedným bodom. Malé pohyby (napr. do strany na označenie možnej odbočky na výlete) môžu byť odfiltrované. Váš súbor bude obsahovať menej informácií pre následné spracovanie a má horšie štatistiky odfiltrovaním zjavne nadbytočných bodov pri zázname, ale zachovaním pozostatkov zlého príjmu alebo efektov GPS čipu.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Odporúčanie: Nastavenie 5 metrov môže pre vás fungovať, ak nepotrebujete zaznamenať detaily jemnejšie ako toľko, a tiež nechcete výslovne zaznamenávať údaje v pokoji (bez pohybu).</string>
+    <string name="clear_recorded_data">Vymazať zaznamenané údaje</string>
+    <string name="release_3_6">• Profily: teraz môžete zmeniť poradie, nastaviť ikonu pre mapu, zmeniť všetky nastavenia základných profilov a resetovať ich do východzieho stavu
+\n
+\n • V navigácii bolo pridané číslo výjazdu
+\n
+\n • Prepracované nastavenia zásuvných modulov
+\n
+\n • Prepracovaná obrazovka nastavení pre rýchly prístup ku všetkým profilom
+\n
+\n • Pridaná možnosť kopírovať nastavenia z iného profilu
+\n
+\n • Pridaná možnosť skryť alebo zmeniť poradie kategórií bodov záujmu pri hľadaní
+\n
+\n • Spresnené umiestnenie ikon bodov záujmu na mape
+\n
+\n • Do nastavenia mapy pridané údaje o východe / západe slnka
+\n
+\n • Na mape boli pridané ikony Domov a Práca
+\n
+\n • V nastaveniach bola pridaná podpora pre viacriadkové popisy
+\n
+\n • V mape Japonska bola pridaná správna transliterácia
+\n
+\n • Pridaná mapa Antarktídy
+\n
+\n</string>
+    <string name="copy_coordinates">Kopírovať súradnice</string>
+    <string name="routing_profile_direct_to">Priamo k bodu</string>
+    <string name="sort_by_category">Zoradiť podľa kategórie</string>
+    <string name="please_provide_profile_name_message">Prosím zadajte názov pre profil</string>
+    <string name="open_settings">Otvoriť nastavenia</string>
+    <string name="plugin_disabled">Modul vypnutý</string>
+    <string name="plugin_disabled_descr">Tento modul je samostatnou aplikáciou a budete ho musieť samostatne odstrániť, ak ho už nebudete chcieť používať.
+\n
+\nModul zostane v zariadení aj po odstránení OsmAndu.</string>
+    <string name="shared_string_menu">Menu</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_routing">Navigácia</string>
+    <string name="shared_string_custom_rendering_style">Vlastný štýl vykresľovania</string>
+    <string name="shared_string_include_data">Zahrnúť dodatočné údaje</string>
+    <string name="import_profile_dialog_description">Importovaný profil obsahuje dodatočné údaje. Kliknite Import pre importovanie len údaje profilu alebo zvoľte, ktoré dodatočné údaje majú byť importované.</string>
+    <string name="export_profile_dialog_description">Môžete zvoliť dodatočné údaje na importovanie spolu s profilom.</string>
+    <string name="index_name_antarctica">Antarktída</string>
+    <string name="no_recalculation_setting">Vypnúť prepočítavanie</string>
+    <string name="route_recalculation_dist_title">Minimálna vzdialenosť pre prepočítanie trasy</string>
+    <string name="route_recalculation_dist_descr">Trasa bude prepočítaná ak vzdialenosť od trasy je väčšia ako uvedený parameter</string>
+    <string name="listed_exist">Zobrazený %1$s už existuje v OsmAnd.</string>
+    <string name="replace_all_desc">Súčasné položky budú nahradené položkami zo súboru</string>
+    <string name="replace_all">Nahradiť všetky</string>
+    <string name="keep_both">Ponechať obe</string>
+    <string name="keep_both_desc">Importované položky budú pridané s predponou</string>
+    <string name="import_duplicates_description">OsmAnd už má položky s rovnakými názvami ako sú importované.
+\n
+\nZvoľte akciu.</string>
+    <string name="import_duplicates_title">Niektoré položky už existujú</string>
+    <string name="select_data_to_import">Zvoľte údaje na importovanie.</string>
 </resources>

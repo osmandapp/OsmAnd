@@ -2261,9 +2261,9 @@ Lon %2$s</string>
 \n • Ajusta el mapa a la dirección del movimiento (o brújula) 
 \n • Muestra tu ubicación y la dirección hacia dónde miras 
 \n • Comparte la ubicación para que tus amigos te encuentren 
-\n • Guarda sitio importantes en «Mis favoritos» 
+\n • Guarda sitios importantes en «Mis favoritos» 
 \n • Permite elegir cómo mostrar los nombres en el mapa: En inglés, local, u ortografía fonética 
-\n • Muestra teselas en línea especiales, vista satelital (de Bing), diferentes superposiciones como trazas de travesía/navegación GPX y capas adicionales con transparencia personalizable
+\n • Muestra teselas en línea especiales, vista satelital (de Bing), diferentes superposiciones como trazas de travesía/navegación GPX y capas adicionales con transparencia personalizable 
 \n</string>
     <string name="osmand_extended_description_part4">Esquí
 \nEl complemento de OsmAnd para el estilo del mapa invernal, muestra trazas con nivel de complejidad y alguna información adicional, como la ubicación de los ascensores y otras instalaciones invernales.</string>
