@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="clear_recorded_data_warning">Are you sure you want to clear recorded data?</string>
     <string name="profile_type_custom_string">Custom profile</string>
     <string name="shared_string_angle_param">Angle: %s°</string>
     <string name="shared_string_angle">Angle</string>
