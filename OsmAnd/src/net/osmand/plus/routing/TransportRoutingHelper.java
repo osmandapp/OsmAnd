@@ -471,7 +471,8 @@ public class TransportRoutingHelper {
 					params.params.put(key, vl);
 				}
 			}
-			TransportRoutingConfiguration cfg = new TransportRoutingConfiguration(config, params.params);
+			GeneralRouter prouter = config.getRouter(params.mode.getRoutingProfile());
+			TransportRoutingConfiguration cfg = new TransportRoutingConfiguration(prouter, params.params);
 			TransportRoutePlanner planner = new TransportRoutePlanner();
 			TransportRoutingContext ctx = new TransportRoutingContext(cfg, files);
 			ctx.calculationProgress =  params.calculationProgress;

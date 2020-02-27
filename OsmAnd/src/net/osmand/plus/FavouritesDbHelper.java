@@ -641,7 +641,7 @@ public class FavouritesDbHelper {
 
 	@Nullable
 	public FavoriteGroup getGroup(FavouritePoint p) {
-		if (flatGroups.containsKey(p.getCategory())) {
+		if (p != null && flatGroups.containsKey(p.getCategory())) {
 			return flatGroups.get(p.getCategory());
 		} else {
 			return null;

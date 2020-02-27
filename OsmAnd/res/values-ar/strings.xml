@@ -3468,7 +3468,7 @@
     <string name="no_recalculation_setting">تعطيل إعادة الحساب</string>
     <string name="route_recalculation_dist_title">الحد الأدنى من المسافة لإعادة حساب المسار</string>
     <string name="route_recalculation_dist_descr">سيتم إعادة حساب المسار إذا كانت المسافة إلى المسار أطول من المعلمة المحددة</string>
-    <string name="profile_type_custom_string">ملف تعريف مخصص</string>
+    <string name="profile_type_custom_string">ملف شخصي مخصص</string>
     <string name="shared_string_angle_param">الزاوية: %s°</string>
     <string name="shared_string_angle">زاوية</string>
     <string name="recalc_angle_dialog_descr">سيتم عرض جزء مستقيم إضافي بين موقعي والمسار المحسوب حتى يتم إعادة حساب المسار</string>
