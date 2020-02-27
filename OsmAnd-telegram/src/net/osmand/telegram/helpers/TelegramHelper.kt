@@ -533,8 +533,9 @@ class TelegramHelper private constructor() {
 			}
 			resultArticles.forEach {
 				shareInfo.lastTextMessageHandled = false
-				client?.send(TdApi.SendInlineQueryResultMessage(shareInfo.chatId, 0, true,
-					true, inlineQueryResults.inlineQueryId, it.id, false)) { obj ->
+				val sendOptions = TdApi.SendMessageOptions(true, true, null)
+				client?.send(TdApi.SendInlineQueryResultMessage(shareInfo.chatId, 0, sendOptions,
+					inlineQueryResults.inlineQueryId, it.id, false)) { obj ->
 					handleTextLocationMessageUpdate(obj, shareInfo, true)
 				}
 			}
@@ -861,7 +862,8 @@ class TelegramHelper private constructor() {
 			shareInfo.pendingTdLibText++
 			shareInfo.lastSendTextMessageTime = (System.currentTimeMillis() / 1000).toInt()
 			log.error("sendNewTextLocation ${shareInfo.pendingTdLibText}")
-			client?.send(TdApi.SendMessage(shareInfo.chatId, 0, false, true, null, content)) { obj ->
+			val sendOptions = TdApi.SendMessageOptions(false, true, null)
+			client?.send(TdApi.SendMessage(shareInfo.chatId, 0, sendOptions, null, content)) { obj ->
 				handleTextLocationMessageUpdate(obj, shareInfo, false)
 			}
 		}
@@ -893,7 +895,8 @@ class TelegramHelper private constructor() {
 			shareInfo.pendingTdLibMap++
 			shareInfo.lastSendMapMessageTime = (System.currentTimeMillis() / 1000).toInt()
 			log.error("sendNewMapLocation ${shareInfo.pendingTdLibMap}")
-			client?.send(TdApi.SendMessage(shareInfo.chatId, 0, false, true, null, content)) { obj ->
+			val sendOptions = TdApi.SendMessageOptions(false, true, null)
+			client?.send(TdApi.SendMessage(shareInfo.chatId, 0, sendOptions, null, content)) { obj ->
 				handleMapLocationMessageUpdate(obj, shareInfo, false)
 			}
 		}
@@ -1224,7 +1227,7 @@ class TelegramHelper private constructor() {
 					val updateUser = obj as TdApi.UpdateUser
 					val user = updateUser.user
 					users[updateUser.user.id] = user
-					if (user.outgoingLink is TdApi.LinkStateIsContact) {
+					if (user.isContact) {
 						contacts[user.id] = user
 					}
 					if (isOsmAndBot(user.id)) {
