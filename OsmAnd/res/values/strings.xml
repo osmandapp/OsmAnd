@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="shared_string_importing">Importing</string>
+    <string name="checking_for_duplicate_description">OsmAnd check %1$s for duplicates with existing items in the application. It may take some time.</string>
     <string name="added_one_item">Added: %1$s item</string>
     <string name="added_two_items">Added: %1$s items</string>
     <string name="added_five_items">Added: %1$s items</string>

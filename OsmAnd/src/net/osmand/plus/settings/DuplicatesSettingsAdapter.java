@@ -114,7 +114,7 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 				if (file.getName().contains("/rendering/")) {
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_map_style, nightMode));
 					itemHolder.icon.setVisibility(View.VISIBLE);
-				} else {
+				} else if (file.getName().contains("/routing/")) {
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_route_distance, nightMode));
 					itemHolder.icon.setVisibility(View.VISIBLE);
 				}

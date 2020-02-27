@@ -2,15 +2,16 @@ package net.osmand.plus.settings;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,8 @@ import net.osmand.plus.profiles.AdditionalDataWrapper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.widgets.TextViewEx;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +46,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		implements View.OnClickListener {
 
 	public static final String TAG = ImportSettingsFragment.class.getSimpleName();
+	public static final String IMPORT_SETTINGS_TAG = "import_settings_tag";
 	private OsmandApplication app;
 	private ExportImportSettingsAdapter adapter;
 	private ExpandableListView expandableList;
@@ -51,12 +55,17 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 	private File file;
 	private boolean allSelected;
 	private boolean nightMode;
+	private Toolbar toolbar;
+	private TextView description;
 
 	public static void showInstance(@NonNull FragmentManager fm, List<SettingsItem> settingsItems, @NonNull File file) {
 		ImportSettingsFragment fragment = new ImportSettingsFragment();
 		fragment.setSettingsItems(settingsItems);
 		fragment.setFile(file);
-		fm.beginTransaction().replace(R.id.fragmentContainer, fragment, TAG).addToBackStack(null).commit();
+		fm.beginTransaction().
+				replace(R.id.fragmentContainer, fragment, TAG)
+				.addToBackStack(IMPORT_SETTINGS_TAG)
+				.commit();
 	}
 
 	@Override
@@ -77,13 +86,14 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		inflater = UiUtilities.getInflater(app, nightMode);
 		View root = inflater.inflate(R.layout.fragment_import, container, false);
-		setupToolbar((Toolbar) root.findViewById(R.id.toolbar));
+		toolbar = root.findViewById(R.id.toolbar);
+		setupToolbar(toolbar);
 		TextViewEx continueBtn = root.findViewById(R.id.continue_button);
 		selectBtn = root.findViewById(R.id.select_button);
 		expandableList = root.findViewById(R.id.list);
 		ViewCompat.setNestedScrollingEnabled(expandableList, true);
 		View header = inflater.inflate(R.layout.list_item_description_header, container, false);
-		TextView description = header.findViewById(R.id.description);
+		description = header.findViewById(R.id.description);
 		description.setText(R.string.select_data_to_import);
 		expandableList.addHeaderView(header);
 		continueBtn.setOnClickListener(this);
@@ -122,6 +132,13 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 	}
 
 	private void importItems() {
+		description.setText(AndroidUtils.getStyledString(
+				String.format(getString(R.string.checking_for_duplicate_description), file.getName()),
+				file.getName(),
+				new StyleSpan(Typeface.BOLD),
+				null));
+
+		final FragmentManager fm = getFragmentManager();
 		List<SettingsItem> settingsItems = getSettingsItemsFromData(adapter.getDataToOperate());
 		List<Object> duplicateItems = getDuplicatesData(settingsItems);
 		if (duplicateItems.isEmpty()) {
@@ -129,24 +146,32 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 				@Override
 				public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
 					if (succeed) {
-						app.showShortToastMessage(app.getString(R.string.file_imported_successfully, file.getName()));
 						app.getRendererRegistry().updateExternalRenderers();
 						AppInitializer.loadRoutingFiles(app, new AppInitializer.LoadRoutingFilesCallback() {
 							@Override
 							public void onRoutingFilesLoaded() {
 							}
 						});
-						FragmentManager fm = getFragmentManager();
 						if (fm != null) {
 							ImportCompleteFragment.showInstance(fm, items, file.getName());
 						}
 					} else if (empty) {
 						app.showShortToastMessage(app.getString(R.string.file_import_error, file.getName(), app.getString(R.string.shared_string_unexpected_error)));
+						dismissFragment();
 					}
 				}
 			});
 		} else {
-			ImportDuplicatesFragment.showInstance(requireActivity().getSupportFragmentManager(), duplicateItems, settingsItems, file);
+			if (fm != null) {
+				ImportDuplicatesFragment.showInstance(fm, duplicateItems, settingsItems, file);
+			}
+		}
+	}
+
+	private void dismissFragment() {
+		FragmentManager fm = getFragmentManager();
+		if (fm != null) {
+			getFragmentManager().popBackStack(IMPORT_SETTINGS_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
 	}
 
@@ -316,7 +341,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 			public void onClick(DialogInterface dialog, int which) {
 				FragmentManager fm = getFragmentManager();
 				if (fm != null) {
-					fm.popBackStackImmediate();
+					fm.popBackStack(IMPORT_SETTINGS_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 				}
 			}
 		});
@@ -334,6 +359,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 				showExitDialog();
 			}
 		});
+		toolbar.setTitle(R.string.shared_string_import);
 	}
 
 	public void setFile(File file) {

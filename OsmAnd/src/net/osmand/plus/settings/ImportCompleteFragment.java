@@ -31,6 +31,7 @@ import net.osmand.plus.search.QuickSearchDialogFragment;
 
 import java.util.List;
 
+import static net.osmand.plus.settings.ImportSettingsFragment.IMPORT_SETTINGS_TAG;
 import static net.osmand.plus.settings.ImportSettingsFragment.getSettingsToOperate;
 
 public class ImportCompleteFragment extends BaseOsmAndFragment {
@@ -47,7 +48,10 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		ImportCompleteFragment fragment = new ImportCompleteFragment();
 		fragment.setSettingsItems(settingsItems);
 		fragment.setFileName(fileName);
-		fm.beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
+		fm.beginTransaction()
+				.replace(R.id.fragmentContainer, fragment, TAG)
+				.addToBackStack(IMPORT_SETTINGS_TAG)
+				.commit();
 	}
 
 	@Override
@@ -70,15 +74,18 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		inflater = UiUtilities.getInflater(app, nightMode);
 		View root = inflater.inflate(R.layout.fragment_import_complete, container, false);
 		TextView description = root.findViewById(R.id.description);
+		description.setText(AndroidUtils.getStyledString(
+				String.format(getString(R.string.checking_for_duplicate_description), fileName),
+				fileName,
+				new StyleSpan(Typeface.BOLD),
+				null));
+
 		setupDescription(description);
 		TextView btnClose = root.findViewById(R.id.button_close);
 		btnClose.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				FragmentManager fm = getFragmentManager();
-				if (fm != null) {
-					fm.popBackStackImmediate();
-				}
+				dismissFragment();
 			}
 		});
 		recyclerView = root.findViewById(R.id.list);
@@ -109,6 +116,13 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(FILE_NAME_KEY, fileName);
+	}
+
+	public void dismissFragment() {
+		FragmentManager fm = getFragmentManager();
+		if (fm != null) {
+			getFragmentManager().popBackStack(IMPORT_SETTINGS_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+		}
 	}
 
 	private void navigateTo(AdditionalDataWrapper.Type type) {
@@ -148,16 +162,10 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 			default:
 				return;
 		}
-		for (Fragment f : fm.getFragments()) {
-			if (f instanceof NavigationFragment) {
-				continue;
-			} else if (f != null) {
-				fm.beginTransaction().remove(fragment).commit();
-			}
-		}
+		dismissFragment();
 		fm.beginTransaction()
-				.add(R.id.fragmentContainer, fragment, TAG)
-				.commitAllowingStateLoss();
+				.replace(R.id.fragmentContainer, fragment, TAG)
+				.commit();
 	}
 
 	@Override

@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import net.osmand.AndroidUtils;
 import net.osmand.map.ITileSource;
@@ -38,6 +39,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.osmand.plus.settings.ImportSettingsFragment.IMPORT_SETTINGS_TAG;
 import static net.osmand.plus.settings.ImportSettingsFragment.getDuplicatesData;
 
 
@@ -52,6 +54,8 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 	private List<SettingsItem> settingsItems;
 	private File file;
 	private boolean nightMode;
+	private ProgressBar progressBar;
+	private Toolbar toolbar;
 
 	public static void showInstance(@NonNull FragmentManager fm, List<? super Object> duplicatesList,
 									List<SettingsItem> settingsItems, File file) {
@@ -59,7 +63,10 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 		fragment.setDuplicatesList(duplicatesList);
 		fragment.setSettingsItems(settingsItems);
 		fragment.setFile(file);
-		fm.beginTransaction().replace(R.id.fragmentContainer, fragment, TAG).addToBackStack(null).commit();
+		fm.beginTransaction()
+				.replace(R.id.fragmentContainer, fragment, TAG)
+				.addToBackStack(IMPORT_SETTINGS_TAG)
+				.commit();
 	}
 
 	@Override
@@ -81,11 +88,13 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		inflater = UiUtilities.getInflater(app, nightMode);
 		View root = inflater.inflate(R.layout.fragment_import_duplicates, container, false);
-		setupToolbar((Toolbar) root.findViewById(R.id.toolbar));
+		toolbar = root.findViewById(R.id.toolbar);
+		setupToolbar(toolbar);
 		ComplexButton replaceAllBtn = root.findViewById(R.id.replace_all_btn);
 		ComplexButton keepBothBtn = root.findViewById(R.id.keep_both_btn);
 		buttonsContainer = root.findViewById(R.id.buttons_container);
 		nestedScroll = root.findViewById(R.id.nested_scroll);
+		progressBar = root.findViewById(R.id.progress_bar);
 		keepBothBtn.setIcon(getPaintedContentIcon(R.drawable.ic_action_keep_both,
 				nightMode
 						? getResources().getColor(R.color.icon_color_active_dark)
@@ -211,7 +220,18 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
 	}
 
+	private void dismissFragment() {
+		FragmentManager fm = getFragmentManager();
+		if (fm != null) {
+			fm.popBackStack(IMPORT_SETTINGS_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+		}
+	}
+
 	private void importItems(boolean shouldReplace) {
+		progressBar.setVisibility(View.VISIBLE);
+		list.setVisibility(View.GONE);
+		buttonsContainer.setVisibility(View.GONE);
+		toolbar.setTitle(getString(R.string.shared_string_importing));
 		for (SettingsItem item : settingsItems) {
 			item.setShouldReplace(shouldReplace);
 		}
@@ -238,6 +258,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 	}
 
 	private void setupToolbar(Toolbar toolbar) {
+		toolbar.setTitle(R.string.import_duplicates_title);
 		toolbar.setNavigationIcon(getPaintedContentIcon(R.drawable.ic_arrow_back,
 				nightMode
 						? getResources().getColor(R.color.active_buttons_and_links_text_dark)
@@ -249,7 +270,6 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 				FragmentManager fm = getFragmentManager();
 				if (fm != null) {
 					fm.popBackStackImmediate();
-					ImportSettingsFragment.showInstance(fm, null, file);
 				}
 			}
 		});
