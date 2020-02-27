@@ -3518,4 +3518,5 @@
 \nBir eylem seçin.</string>
     <string name="import_duplicates_title">Bazı ögeler zaten var</string>
     <string name="select_data_to_import">İçe aktarılacak verileri seçin.</string>
+    <string name="shared_string_rendering_style">Görselleştirme stili</string>
 </resources>
