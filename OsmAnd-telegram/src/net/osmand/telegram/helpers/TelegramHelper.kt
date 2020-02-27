@@ -446,7 +446,7 @@ class TelegramHelper private constructor() {
 					offsetOrder = last.order
 					offsetChatId = last.chatId
 				}
-				client?.send(TdApi.GetChats(offsetOrder, offsetChatId, CHATS_LIMIT - chatList.size)) { obj ->
+				client?.send(TdApi.GetChats(TdApi.ChatListMain(), offsetOrder, offsetChatId, CHATS_LIMIT - chatList.size)) { obj ->
 					when (obj.constructor) {
 						TdApi.Error.CONSTRUCTOR -> {
 							val error = obj as TdApi.Error
