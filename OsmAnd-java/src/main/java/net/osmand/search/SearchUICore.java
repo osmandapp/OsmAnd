@@ -866,9 +866,9 @@ public class SearchUICore {
 				// -1 - means 1st is less than 2nd
 				return topVisible1 ? -1 : 1;
 			}
-//			if (o1.getUnknownPhraseMatchWeight() != o2.getUnknownPhraseMatchWeight()) {
-//				return -Double.compare(o1.getUnknownPhraseMatchWeight(), o2.getUnknownPhraseMatchWeight());
-//			} 
+			if (o1.getUnknownPhraseMatchWeight() != o2.getUnknownPhraseMatchWeight()) {
+				return -Double.compare(o1.getUnknownPhraseMatchWeight(), o2.getUnknownPhraseMatchWeight());
+			}
 			if (o1.getFoundWordCount() != o2.getFoundWordCount()) {
 				return -Algorithms.compare(o1.getFoundWordCount(), o2.getFoundWordCount());
 			}
@@ -879,25 +879,24 @@ public class SearchUICore {
 					return Double.compare(s1, s2);
 				}
 			}
-			int st1 = o1.localeName == null ? -10000 : Algorithms.extractFirstIntegerNumber(o1.localeName);
-			int st2 = o2.localeName == null ? -10000 : Algorithms.extractFirstIntegerNumber(o2.localeName);
+			String localeName1 = o1.localeName == null ? "" : o1.localeName;
+			String localeName2 = o2.localeName == null ? "" : o2.localeName;
+			int st1 = Algorithms.extractFirstIntegerNumber(localeName1);
+			int st2 = Algorithms.extractFirstIntegerNumber(localeName2);
 			if (st1 != st2) {
 				return Algorithms.compare(st1, st2);
 			}
-			String localeName1 = o1.localeName == null ? "" : o1.localeName;
-			String localeName2 = o2.localeName == null ? "" : o2.localeName;
 			double s1 = o1.getSearchDistance(loc, 1);
 			double s2 = o2.getSearchDistance(loc, 1);
-			// ????
-//			if (o1.parentSearchResult != null && o2.parentSearchResult != null) {
-//				if (o1.parentSearchResult == o2.parentSearchResult) {
-//					int cmp = collator.compare(localeName1, localeName2);
-//					if (cmp != 0) {
-//						return cmp;
-//					}
-//				}
-//				return Double.compare(s1, s2);
-//			}
+			if (o1.parentSearchResult != null && o2.parentSearchResult != null) {
+				if (o1.parentSearchResult == o2.parentSearchResult) {
+					int cmp = collator.compare(localeName1, localeName2);
+					if (cmp != 0) {
+						return cmp;
+					}
+				}
+				return Double.compare(s1, s2);
+			}
 			int cmp = collator.compare(localeName1, localeName2);
 			if (cmp != 0) {
 				return cmp;
@@ -905,7 +904,7 @@ public class SearchUICore {
 			if (s1 != s2) {
 				return Double.compare(s1, s2);
 			}
-			boolean am1 = o2.object instanceof Amenity;
+			boolean am1 = o1.object instanceof Amenity;
 			boolean am2 = o2.object instanceof Amenity;
 			if (am1 != am2) {
 				return Boolean.compare(am1, am2);

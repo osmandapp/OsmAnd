@@ -222,8 +222,7 @@ public class SearchCoreUITest {
 		});
 		if (files != null) {
 			for (File f : files) {
-				// FIXME
-//				testSearchImpl(f);
+				testSearchImpl(f);
 			}
 		}
 	}
