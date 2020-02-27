@@ -82,7 +82,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		selectBtn = root.findViewById(R.id.select_button);
 		expandableList = root.findViewById(R.id.list);
 		ViewCompat.setNestedScrollingEnabled(expandableList, true);
-		View header = inflater.inflate(R.layout.list_item_description_header, container, false);
+		View header = inflater.inflate(R.layout.list_item_description_header, null);
 		TextView description = header.findViewById(R.id.description);
 		description.setText(R.string.select_data_to_import);
 		expandableList.addHeaderView(header);
