@@ -329,10 +329,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 					}
 				} else if (item == R.string.clear_recorded_data) {
 					AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
-					builder.setTitle(R.string.clear_recorded_data);
-					builder.setMessage(R.string.are_you_sure);
-					builder.setNegativeButton(R.string.shared_string_cancel, null).setPositiveButton(
-							R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+					builder.setTitle(R.string.clear_recorded_data_warning);
+					builder.setNegativeButton(R.string.shared_string_no, null).setPositiveButton(
+							R.string.shared_string_clear, new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
 									app.getSavingTrackHelper().clearRecordedData(true);
