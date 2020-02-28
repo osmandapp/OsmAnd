@@ -49,7 +49,6 @@ import java.io.OutputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -1804,8 +1803,6 @@ public class SettingsHelper {
 
 		private File file;
 		private String latestChanges;
-		private boolean askBeforeImport;
-		private boolean forceImport;
 		private int version;
 
 		private SettingsImportListener listener;
@@ -1815,14 +1812,11 @@ public class SettingsHelper {
 		private SettingsItem currentItem;
 		private AlertDialog dialog;
 
-		ImportAsyncTask(@NonNull File settingsFile, String latestChanges, int version, boolean askBeforeImport,
-		                boolean forceImport, @Nullable SettingsImportListener listener) {
+		ImportAsyncTask(@NonNull File settingsFile, String latestChanges, int version, @Nullable SettingsImportListener listener) {
 			this.file = settingsFile;
 			this.listener = listener;
 			this.latestChanges = latestChanges;
 			this.version = version;
-			this.askBeforeImport = askBeforeImport;
-			this.forceImport = forceImport;
 			importer = new SettingsImporter(app);
 			collectOnly = true;
 		}
@@ -1849,7 +1843,7 @@ public class SettingsHelper {
 
 		@Override
 		protected List<SettingsItem> doInBackground(Void... voids) {
-			if (collectOnly || forceImport) {
+			if (collectOnly) {
 				try {
 					return importer.collectItems(file);
 				} catch (IllegalArgumentException e) {
@@ -1868,17 +1862,10 @@ public class SettingsHelper {
 			if (items != null) {
 				this.items = items;
 			}
-			if (collectOnly && !forceImport) {
+			if (collectOnly) {
 				listener.onSettingsImportFinished(true, false, this.items);
-			} else {
-				if (items != null && items.size() > 0) {
-					if (forceImport) {
-						for (SettingsItem item : items) {
-							item.setShouldReplace(true);
-						}
-					}
-					processNextItem();
-				}
+			} else if (items != null && items.size() > 0) {
+				processNextItem();
 			}
 		}
 
@@ -2027,9 +2014,8 @@ public class SettingsHelper {
 		}
 	}
 
-	public void importSettings(@NonNull File settingsFile, String latestChanges, int version,
-	                           boolean askBeforeImport, boolean forceImport, @Nullable SettingsImportListener listener) {
-		new ImportAsyncTask(settingsFile, latestChanges, version, askBeforeImport, forceImport, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	public void importSettings(@NonNull File settingsFile, String latestChanges, int version, @Nullable SettingsImportListener listener) {
+		new ImportAsyncTask(settingsFile, latestChanges, version, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public void importSettings(@NonNull File settingsFile, @NonNull List<SettingsItem> items, String latestChanges, int version, @Nullable SettingsImportListener listener) {

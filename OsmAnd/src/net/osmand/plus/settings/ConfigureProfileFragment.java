@@ -170,7 +170,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			if (appMode.isCustomProfile()) {
 				File file = getBackupFileForCustomMode(appMode);
 				if (file.exists()) {
-					app.getSettingsHelper().importSettings(file, "", 1, false, true, new SettingsHelper.SettingsImportListener() {
+					app.getSettingsHelper().importSettings(file, "", 1, new SettingsHelper.SettingsImportListener() {
 						@Override
 						public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
 							app.showToastMessage(R.string.profile_prefs_reset_successful);

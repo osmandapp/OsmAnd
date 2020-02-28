@@ -16,7 +16,8 @@ import net.osmand.CallbackWithObject;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.SettingsHelper.*;
+import net.osmand.plus.SettingsHelper.SettingsItem;
+import net.osmand.plus.SettingsHelper.SettingsItemType;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -127,8 +128,8 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 		} else if (IMPORT_PROFILE.equals(prefId)) {
 			final MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
-				mapActivity.getImportHelper().chooseFileToImport(SETTINGS, false, new CallbackWithObject<List<SettingsItem>>() {
-					
+				mapActivity.getImportHelper().chooseFileToImport(SETTINGS, new CallbackWithObject<List<SettingsItem>>() {
+
 					@Override
 					public boolean processResult(List<SettingsItem> result) {
 						for (SettingsItem item : result) {
