@@ -495,7 +495,7 @@ dependencies {
 		exclude group: 'com.android.support'
 	}
 	implementation 'com.github.PhilJay:MPAndroidChart:v3.0.1'
-	implementation ("com.github.HITGIF:TextFieldBoxes:1.3.5"){
+	implementation ("com.github.HITGIF:TextFieldBoxes:1.4.4"){
 		exclude group: 'com.android.support'
 	}
 
