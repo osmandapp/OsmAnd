@@ -7,7 +7,6 @@
 	android:orientation="vertical">
 
 	<FrameLayout
-		android:id="@+id/select_nav_type_btn"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginStart="@dimen/list_content_padding"
@@ -44,6 +43,13 @@
 				tools:text="Car" />
 
 		</net.osmand.plus.widgets.OsmandTextFieldBoxes>
+
+		<FrameLayout
+			android:id="@+id/select_nav_type_btn"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:clickable="true"
+			android:focusable="true" />
 
 	</FrameLayout>
 
