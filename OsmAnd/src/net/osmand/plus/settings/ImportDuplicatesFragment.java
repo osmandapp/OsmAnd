@@ -44,7 +44,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.plus.settings.ImportSettingsFragment.IMPORT_SETTINGS_TAG;
-import static net.osmand.plus.settings.ImportSettingsFragment.getDuplicatesData;
 
 
 public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View.OnClickListener {
@@ -83,11 +82,16 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 		if (settingsItems == null) {
 			settingsItems = app.getSettingsHelper().getSettingsItems();
 			if (settingsItems != null) {
-				duplicatesList = getDuplicatesData(settingsItems);
+//				duplicatesList = getDuplicatesData(settingsItems);
+			} else {
+				dismissFragment();
 			}
 		}
 		if (file == null) {
 			file = app.getSettingsHelper().getSettingsFile();
+			if (file == null) {
+				dismissFragment();
+			}
 		}
 	}
 

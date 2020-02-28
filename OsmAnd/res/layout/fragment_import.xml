@@ -128,17 +128,6 @@
 
 		</android.support.design.widget.CollapsingToolbarLayout>
 
-		<FrameLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content">
-
-		<ImageView
-			android:id="@+id/shadowView"
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/abp__shadow_height"
-			android:src="@drawable/preference_activity_action_bar_shadow"
-			tools:ignore="ContentDescription" />
-
 		<ProgressBar
 			android:id="@+id/progress_bar"
 			style="?android:attr/progressBarStyleHorizontal"
@@ -148,8 +137,6 @@
 			android:minHeight="0dp"
 			android:visibility="gone"
 			tools:visibility="visible" />
-
-	</FrameLayout>
 
 	</android.support.design.widget.AppBarLayout>
 

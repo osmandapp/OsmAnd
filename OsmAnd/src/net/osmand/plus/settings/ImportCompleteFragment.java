@@ -41,11 +41,11 @@ import static net.osmand.plus.settings.ImportSettingsFragment.getSettingsToOpera
 public class ImportCompleteFragment extends BaseOsmAndFragment {
 	public static final String TAG = ImportCompleteFragment.class.getSimpleName();
 	private static final String FILE_NAME_KEY = "FILE_NAME_KEY";
+	private OsmandApplication app;
+	private RecyclerView recyclerView;
 	private List<SettingsItem> settingsItems;
 	private String fileName;
-	private OsmandApplication app;
 	private boolean nightMode;
-	private RecyclerView recyclerView;
 
 	public static void showInstance(FragmentManager fm, @NonNull List<SettingsItem> settingsItems,
 									@NonNull String fileName) {
@@ -68,6 +68,9 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		nightMode = !app.getSettings().isLightContent();
 		if (settingsItems == null) {
 			settingsItems = app.getSettingsHelper().getImportedItems();
+			if (settingsItems == null) {
+				dismissFragment();
+			}
 		}
 	}
 
@@ -78,20 +81,19 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		inflater = UiUtilities.getInflater(app, nightMode);
 		View root = inflater.inflate(R.layout.fragment_import_complete, container, false);
 		TextView description = root.findViewById(R.id.description);
+		TextView btnClose = root.findViewById(R.id.button_close);
+		recyclerView = root.findViewById(R.id.list);
 		description.setText(UiUtilities.createSpannableString(
 				String.format(getString(R.string.import_complete_description), fileName),
 				fileName,
 				new StyleSpan(Typeface.BOLD)
 		));
-
-		TextView btnClose = root.findViewById(R.id.button_close);
 		btnClose.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				dismissFragment();
 			}
 		});
-		recyclerView = root.findViewById(R.id.list);
 		if (Build.VERSION.SDK_INT >= 21) {
 			AndroidUtils.addStatusBarPadding21v(app, root);
 		}
@@ -128,6 +130,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		if (fm != null) {
 			getFragmentManager().popBackStack(IMPORT_SETTINGS_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
+		app.getSettingsHelper().setImportedItems(null);
 	}
 
 	private void navigateTo(AdditionalDataWrapper.Type type) {
@@ -135,6 +138,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		if (fm == null) {
 			return;
 		}
+		dismissFragment();
 		switch (type) {
 			case CUSTOM_ROUTING:
 			case PROFILE:
@@ -152,7 +156,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 				new QuickSearchDialogFragment().show(fm, QuickSearchDialogFragment.TAG);
 				break;
 			case MAP_SOURCES:
-				Activity activity = getActivity();
+				Activity activity = requireActivity();
 				if (activity instanceof MapActivity) {
 					((MapActivity) activity).getDashboard()
 							.setDashboardVisibility(
@@ -169,17 +173,14 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 				new AvoidRoadsBottomSheetDialogFragment().show(fm, AvoidRoadsBottomSheetDialogFragment.TAG);
 				break;
 			default:
-				return;
+				break;
 		}
-//		dismissFragment();
-		app.getSettingsHelper().setImportedItems(null);
 	}
 
 	@Override
 	public int getStatusBarColorId() {
 		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
 	}
-
 
 	public void setSettingsItems(List<SettingsItem> settingsItems) {
 		this.settingsItems = settingsItems;

@@ -270,6 +270,11 @@ public class SettingsHelper {
 		}
 
 		@NonNull
+		public List<T> getDuplicateItems() {
+			return duplicateItems;
+		}
+
+		@NonNull
 		public List<T> excludeDuplicateItems() {
 			if (!items.isEmpty()) {
 				for (T item : items) {

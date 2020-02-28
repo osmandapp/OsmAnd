@@ -59,7 +59,6 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 	private File file;
 	private boolean allSelected;
 	private boolean nightMode;
-	private String fileName;
 	private LinearLayout buttonsContainer;
 	private ProgressBar progressBar;
 	private CollapsingToolbarLayout toolbarLayout;
@@ -81,9 +80,15 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		nightMode = !app.getSettings().isLightContent();
 		if (settingsItems == null) {
 			settingsItems = app.getSettingsHelper().getSettingsItems();
+			if (settingsItems == null) {
+				dismissFragment();
+			}
 		}
 		if (file == null) {
 			file = app.getSettingsHelper().getSettingsFile();
+			if (file == null) {
+				dismissFragment();
+			}
 		}
 	}
 
@@ -198,42 +203,6 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		}
 	}
 
-	public static List<Object> getDuplicatesData(List<SettingsItem> items) {
-		List<Object> duplicateItems = new ArrayList<>();
-		for (SettingsItem item : items) {
-			if (item instanceof SettingsHelper.ProfileSettingsItem) {
-				if (item.exists()) {
-					duplicateItems.add(((SettingsHelper.ProfileSettingsItem) item).getModeBean());
-				}
-			} else if (item instanceof SettingsHelper.QuickActionSettingsItem) {
-				List<QuickAction> duplicates = ((SettingsHelper.QuickActionSettingsItem) item).excludeDuplicateItems();
-				if (!duplicates.isEmpty()) {
-					duplicateItems.addAll(duplicates);
-				}
-			} else if (item instanceof SettingsHelper.PoiUiFilterSettingsItem) {
-				List<PoiUIFilter> duplicates = ((SettingsHelper.PoiUiFilterSettingsItem) item).excludeDuplicateItems();
-				if (!duplicates.isEmpty()) {
-					duplicateItems.addAll(duplicates);
-				}
-			} else if (item instanceof SettingsHelper.MapSourcesSettingsItem) {
-				List<ITileSource> duplicates = ((SettingsHelper.MapSourcesSettingsItem) item).excludeDuplicateItems();
-				if (!duplicates.isEmpty()) {
-					duplicateItems.addAll(duplicates);
-				}
-			} else if (item instanceof SettingsHelper.FileSettingsItem) {
-				if (item.exists()) {
-					duplicateItems.add(((SettingsHelper.FileSettingsItem) item).getFile());
-				}
-			} else if (item instanceof SettingsHelper.AvoidRoadsSettingsItem) {
-				List<AvoidRoadInfo> avoidRoads = ((SettingsHelper.AvoidRoadsSettingsItem) item).excludeDuplicateItems();
-				if (!avoidRoads.isEmpty()) {
-					duplicateItems.addAll(avoidRoads);
-				}
-			}
-		}
-		return duplicateItems;
-	}
-
 	public void setSettingsItems(List<SettingsItem> settingsItems) {
 		this.settingsItems = settingsItems;
 	}
@@ -291,10 +260,13 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 				profiles.add(((SettingsHelper.ProfileSettingsItem) item).getModeBean());
 			} else if (item.getType().equals(SettingsHelper.SettingsItemType.QUICK_ACTION)) {
 				quickActions.addAll(((SettingsHelper.QuickActionSettingsItem) item).getItems());
+				quickActions.addAll(((SettingsHelper.QuickActionSettingsItem) item).getDuplicateItems());
 			} else if (item.getType().equals(SettingsHelper.SettingsItemType.POI_UI_FILTERS)) {
 				poiUIFilters.addAll(((SettingsHelper.PoiUiFilterSettingsItem) item).getItems());
+				poiUIFilters.addAll(((SettingsHelper.PoiUiFilterSettingsItem) item).getDuplicateItems());
 			} else if (item.getType().equals(SettingsHelper.SettingsItemType.MAP_SOURCES)) {
 				tileSourceTemplates.addAll(((SettingsHelper.MapSourcesSettingsItem) item).getItems());
+				tileSourceTemplates.addAll(((SettingsHelper.MapSourcesSettingsItem) item).getDuplicateItems());
 			} else if (item.getType().equals(SettingsHelper.SettingsItemType.FILE)) {
 				if (item.getName().startsWith("/rendering/")) {
 					renderFilesList.add(((SettingsHelper.FileSettingsItem) item).getFile());
@@ -303,6 +275,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 				}
 			} else if (item.getType().equals(SettingsHelper.SettingsItemType.AVOID_ROADS)) {
 				avoidRoads.addAll(((SettingsHelper.AvoidRoadsSettingsItem) item).getItems());
+				avoidRoads.addAll(((SettingsHelper.AvoidRoadsSettingsItem) item).getDuplicateItems());
 			}
 		}
 
