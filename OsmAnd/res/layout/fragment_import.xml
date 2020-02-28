@@ -53,9 +53,7 @@
 					android:gravity="start|center_vertical"
 					android:maxLines="1"
 					android:paddingLeft="@dimen/content_padding_small"
-					android:paddingTop="@dimen/content_padding_half"
 					android:paddingRight="@dimen/content_padding_small"
-					android:paddingBottom="@dimen/content_padding_half"
 					android:text="@string/shared_string_select_all"
 					android:textColor="?attr/active_color_basic"
 					android:textSize="@dimen/default_desc_text_size"
@@ -80,12 +78,10 @@
 					android:layout_height="match_parent"
 					android:background="?attr/selectableItemBackground"
 					android:ellipsize="end"
-					android:gravity="end|center_vertical"
+					android:gravity="center"
 					android:maxLines="1"
 					android:paddingLeft="@dimen/content_padding_small"
-					android:paddingTop="@dimen/content_padding_half"
 					android:paddingRight="@dimen/content_padding_small"
-					android:paddingBottom="@dimen/content_padding_half"
 					android:text="@string/shared_string_continue"
 					android:textColor="?attr/dlg_btn_primary_text"
 					android:textSize="@dimen/default_desc_text_size"
@@ -109,6 +105,9 @@
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/toolbar_height_expanded"
 			android:background="?attr/colorPrimary"
+			osmand:expandedTitleMarginBottom="@dimen/content_padding_small"
+			osmand:expandedTitleMarginEnd="@dimen/content_padding"
+			osmand:expandedTitleMarginStart="@dimen/content_padding"
 			osmand:collapsedTitleTextAppearance="@style/AppBarTitle"
 			osmand:expandedTitleGravity="start|bottom"
 			osmand:expandedTitleTextAppearance="@style/AppBarTitle"
@@ -116,6 +115,8 @@
 
 			<android.support.v7.widget.Toolbar
 				android:id="@+id/toolbar"
+				osmand:titleMarginEnd="0dp"
+				osmand:titleMarginStart="0dp"
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/toolbar_height"
 				android:minHeight="@dimen/toolbar_height"
@@ -126,13 +127,6 @@
 			</android.support.v7.widget.Toolbar>
 
 		</android.support.design.widget.CollapsingToolbarLayout>
-
-		<ImageView
-			android:id="@+id/shadowView"
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/abp__shadow_height"
-			android:src="@drawable/preference_activity_action_bar_shadow"
-			tools:ignore="ContentDescription" />
 
 	</android.support.design.widget.AppBarLayout>
 
