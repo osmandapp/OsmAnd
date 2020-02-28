@@ -294,7 +294,7 @@ public abstract class OsmandPlugin {
 	}
 
 	protected boolean pluginAvailable(OsmandApplication app) {
-		return checkPluginPackage(app, this);
+		return checkPluginPackage(app, this) || !isPaid();
 	}
 
 	public static boolean checkPluginPackage(@NonNull OsmandApplication app, @NonNull OsmandPlugin plugin) {

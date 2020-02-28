@@ -335,6 +335,9 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			}
 
 			protected void onPostExecute(OsmBugResult obj) {
+				if (activity == null || activity.isFinishing() || activity.isActivityDestroyed()) {
+					return;
+				}
 				if (obj != null && obj.warning == null) {
 					if (local == osmbugsUtil) {
 						Toast.makeText(activity, R.string.osm_changes_added_to_local_edits, Toast.LENGTH_LONG).show();
