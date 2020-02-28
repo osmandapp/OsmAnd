@@ -3550,4 +3550,5 @@ Pôr do Sol: %2$s</string>
 \nSelecione uma ação.</string>
     <string name="import_duplicates_title">Alguns itens já existem</string>
     <string name="select_data_to_import">Selecione os dados a serem importados.</string>
+    <string name="shared_string_rendering_style">Estilo de renderização</string>
 </resources>
