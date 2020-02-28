@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
@@ -16,6 +17,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
@@ -57,6 +60,10 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 	private boolean nightMode;
 	private Toolbar toolbar;
 	private TextView description;
+	private String fileName;
+	private LinearLayout buttonsContainer;
+	private ProgressBar progressBar;
+	private CollapsingToolbarLayout toolbarLayout;
 
 	public static void showInstance(@NonNull FragmentManager fm, List<SettingsItem> settingsItems, @NonNull File file) {
 		ImportSettingsFragment fragment = new ImportSettingsFragment();
@@ -87,17 +94,20 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		inflater = UiUtilities.getInflater(app, nightMode);
 		View root = inflater.inflate(R.layout.fragment_import, container, false);
 		toolbar = root.findViewById(R.id.toolbar);
+		toolbarLayout = root.findViewById(R.id.toolbar_layout);
 		setupToolbar(toolbar);
 		TextViewEx continueBtn = root.findViewById(R.id.continue_button);
 		selectBtn = root.findViewById(R.id.select_button);
 		expandableList = root.findViewById(R.id.list);
 		ViewCompat.setNestedScrollingEnabled(expandableList, true);
-		View header = inflater.inflate(R.layout.list_item_description_header, container, false);
+		View header = inflater.inflate(R.layout.list_item_description_header, null);
 		description = header.findViewById(R.id.description);
 		description.setText(R.string.select_data_to_import);
 		expandableList.addHeaderView(header);
 		continueBtn.setOnClickListener(this);
 		selectBtn.setOnClickListener(this);
+		buttonsContainer = root.findViewById(R.id.buttons_container);
+		progressBar = root.findViewById(R.id.progress_bar);
 		if (Build.VERSION.SDK_INT >= 21) {
 			AndroidUtils.addStatusBarPadding21v(app, root);
 		}
@@ -109,6 +119,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		super.onViewCreated(view, savedInstanceState);
 		adapter = new ExportImportSettingsAdapter(app, getSettingsToOperate(settingsItems), nightMode, true);
 		expandableList.setAdapter(adapter);
+		toolbarLayout.setTitle(getString(R.string.shared_string_import));
 	}
 
 	@Override
@@ -132,16 +143,25 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 	}
 
 	private void importItems() {
-		description.setText(AndroidUtils.getStyledString(
+		toolbarLayout.setTitle(getString(R.string.shared_string_preparing));
+		description.setText(UiUtilities.createSpannableString(
 				String.format(getString(R.string.checking_for_duplicate_description), file.getName()),
 				file.getName(),
-				new StyleSpan(Typeface.BOLD),
-				null));
-
+				new StyleSpan(Typeface.BOLD)
+		));
+		buttonsContainer.setVisibility(View.GONE);
+		progressBar.setVisibility(View.VISIBLE);
+		adapter.clearSettingsList();
 		final FragmentManager fm = getFragmentManager();
 		List<SettingsItem> settingsItems = getSettingsItemsFromData(adapter.getDataToOperate());
 		List<Object> duplicateItems = getDuplicatesData(settingsItems);
 		if (duplicateItems.isEmpty()) {
+			toolbarLayout.setTitle(getString(R.string.shared_string_importing));
+			description.setText(UiUtilities.createSpannableString(
+					String.format(getString(R.string.importing_from), file.getName()),
+					file.getName(),
+					new StyleSpan(Typeface.BOLD)
+			));
 			app.getSettingsHelper().importSettings(file, settingsItems, "", 1, new SettingsHelper.SettingsImportListener() {
 				@Override
 				public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
@@ -359,7 +379,6 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 				showExitDialog();
 			}
 		});
-		toolbar.setTitle(R.string.shared_string_import);
 	}
 
 	public void setFile(File file) {

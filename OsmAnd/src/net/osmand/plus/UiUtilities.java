@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -23,6 +24,9 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.TintableCompoundButton;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.SwitchCompat;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -558,5 +562,16 @@ public class UiUtilities {
 			p.setMargins(l, t, r, b);
 			v.requestLayout();
 		}
+	}
+
+	public static SpannableString createSpannableString(String text, String textToStyle, StyleSpan styleSpan) {
+		int startIndex = text.indexOf(textToStyle);
+		SpannableString spannable = new SpannableString(text);
+		spannable.setSpan(
+				styleSpan,
+				startIndex,
+				startIndex + textToStyle.length(),
+				Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+		return spannable;
 	}
 }

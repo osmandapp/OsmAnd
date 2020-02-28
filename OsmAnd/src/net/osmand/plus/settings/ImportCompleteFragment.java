@@ -74,13 +74,12 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		inflater = UiUtilities.getInflater(app, nightMode);
 		View root = inflater.inflate(R.layout.fragment_import_complete, container, false);
 		TextView description = root.findViewById(R.id.description);
-		description.setText(AndroidUtils.getStyledString(
-				String.format(getString(R.string.checking_for_duplicate_description), fileName),
+		description.setText(UiUtilities.createSpannableString(
+				String.format(getString(R.string.import_complete_description), fileName),
 				fileName,
-				new StyleSpan(Typeface.BOLD),
-				null));
+				new StyleSpan(Typeface.BOLD)
+		));
 
-		setupDescription(description);
 		TextView btnClose = root.findViewById(R.id.button_close);
 		btnClose.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -98,18 +97,20 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		ImportedSettingsItemsAdapter adapter = new ImportedSettingsItemsAdapter(
-				app,
-				getSettingsToOperate(settingsItems),
-				nightMode,
-				new ImportedSettingsItemsAdapter.OnItemClickListener() {
-					@Override
-					public void onItemClick(AdditionalDataWrapper.Type type) {
-						navigateTo(type);
-					}
-				});
-		recyclerView.setLayoutManager(new LinearLayoutManager(getMyApplication()));
-		recyclerView.setAdapter(adapter);
+		if (settingsItems != null) {
+			ImportedSettingsItemsAdapter adapter = new ImportedSettingsItemsAdapter(
+					app,
+					getSettingsToOperate(settingsItems),
+					nightMode,
+					new ImportedSettingsItemsAdapter.OnItemClickListener() {
+						@Override
+						public void onItemClick(AdditionalDataWrapper.Type type) {
+							navigateTo(type);
+						}
+					});
+			recyclerView.setLayoutManager(new LinearLayoutManager(getMyApplication()));
+			recyclerView.setAdapter(adapter);
+		}
 	}
 
 	@Override
@@ -134,26 +135,30 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		String TAG;
 		switch (type) {
 			case PROFILE:
-				fragment = new GeneralProfileSettingsFragment();
-				TAG = GeneralProfileSettingsFragment.TAG;
+				BaseSettingsFragment.showInstance(
+						getActivity(),
+						BaseSettingsFragment.SettingsScreenType.MAIN_SETTINGS
+				);
 				break;
 			case QUICK_ACTIONS:
-				fragment = new QuickActionListFragment();
-				TAG = QuickActionListFragment.TAG;
+				fm.beginTransaction()
+						.add(R.id.fragmentContainer, new QuickActionListFragment(), QuickActionListFragment.TAG)
+						.addToBackStack(QuickActionListFragment.TAG).commitAllowingStateLoss();
 				break;
 			case POI_TYPES:
-				fragment = new QuickSearchDialogFragment();
-				TAG = QuickSearchDialogFragment.TAG;
+				QuickSearchDialogFragment quickSearchDialogFragment = new QuickSearchDialogFragment();
+				quickSearchDialogFragment.show(fm, QuickSearchDialogFragment.TAG);
 				break;
 			case MAP_SOURCES:
-				fragment = new GeneralProfileSettingsFragment();
-				TAG = QuickActionListFragment.TAG;
+
 				break;
 			case CUSTOM_RENDER_STYLE:
+
 				fragment = new SelectMapStyleBottomSheetDialogFragment();
 				TAG = SelectMapStyleBottomSheetDialogFragment.TAG;
 				break;
 			case CUSTOM_ROUTING:
+
 				return;
 			case AVOID_ROADS:
 				fragment = new AvoidRoadsBottomSheetDialogFragment();
@@ -163,9 +168,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 				return;
 		}
 		dismissFragment();
-		fm.beginTransaction()
-				.replace(R.id.fragmentContainer, fragment, TAG)
-				.commit();
+		app.getSettingsHelper().setImportedItems(null);
 	}
 
 	@Override
@@ -173,18 +176,6 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
 	}
 
-	private void setupDescription(TextView description) {
-		String descriptionText = String.format(getString(
-				R.string.import_complete_description), fileName);
-		int startIndex = descriptionText.indexOf(fileName);
-		SpannableString spannableDescription = new SpannableString(descriptionText);
-		spannableDescription.setSpan(
-				new StyleSpan(Typeface.BOLD),
-				startIndex,
-				startIndex + fileName.length(),
-				Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-		description.setText(spannableDescription);
-	}
 
 	public void setSettingsItems(List<SettingsItem> settingsItems) {
 		this.settingsItems = settingsItems;

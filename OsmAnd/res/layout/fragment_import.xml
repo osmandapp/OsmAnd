@@ -112,6 +112,7 @@
 			osmand:collapsedTitleTextAppearance="@style/AppBarTitle"
 			osmand:expandedTitleGravity="start|bottom"
 			osmand:expandedTitleTextAppearance="@style/AppBarTitle"
+			tools:title="@string/shared_string_import"
 			osmand:layout_scrollFlags="scroll|exitUntilCollapsed">
 
 			<android.support.v7.widget.Toolbar
@@ -120,8 +121,7 @@
 				android:layout_height="@dimen/toolbar_height"
 				android:minHeight="@dimen/toolbar_height"
 				osmand:layout_collapseMode="pin"
-				osmand:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
-				osmand:title="@string/shared_string_import">
+				osmand:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed">
 
 			</android.support.v7.widget.Toolbar>
 

@@ -1,10 +1,12 @@
 package net.osmand.plus.settings;
 
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -13,12 +15,14 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.map.ITileSource;
@@ -56,6 +60,8 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 	private boolean nightMode;
 	private ProgressBar progressBar;
 	private Toolbar toolbar;
+	private CollapsingToolbarLayout toolbarLayout;
+	private TextView description;
 
 	public static void showInstance(@NonNull FragmentManager fm, List<? super Object> duplicatesList,
 									List<SettingsItem> settingsItems, File file) {
@@ -76,7 +82,9 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 		nightMode = !app.getSettings().isLightContent();
 		if (settingsItems == null) {
 			settingsItems = app.getSettingsHelper().getSettingsItems();
-			duplicatesList = getDuplicatesData(settingsItems);
+			if (settingsItems != null) {
+				duplicatesList = getDuplicatesData(settingsItems);
+			}
 		}
 		if (file == null) {
 			file = app.getSettingsHelper().getSettingsFile();
@@ -94,7 +102,9 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 		ComplexButton keepBothBtn = root.findViewById(R.id.keep_both_btn);
 		buttonsContainer = root.findViewById(R.id.buttons_container);
 		nestedScroll = root.findViewById(R.id.nested_scroll);
+		description = root.findViewById(R.id.description);
 		progressBar = root.findViewById(R.id.progress_bar);
+		toolbarLayout = root.findViewById(R.id.toolbar_layout);
 		keepBothBtn.setIcon(getPaintedContentIcon(R.drawable.ic_action_keep_both,
 				nightMode
 						? getResources().getColor(R.color.icon_color_active_dark)
@@ -138,6 +148,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 		DuplicatesSettingsAdapter adapter = new DuplicatesSettingsAdapter(app, prepareDuplicates(), nightMode);
 		list.setLayoutManager(new LinearLayoutManager(getMyApplication()));
 		list.setAdapter(adapter);
+		toolbarLayout.setTitle(getString(R.string.import_duplicates_title));
 	}
 
 	private List<Object> prepareDuplicates() {
@@ -228,10 +239,15 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 	}
 
 	private void importItems(boolean shouldReplace) {
+		toolbarLayout.setTitle(getString(R.string.shared_string_importing));
+		description.setText(UiUtilities.createSpannableString(
+				String.format(getString(R.string.importing_from), file.getName()),
+				file.getName(),
+				new StyleSpan(Typeface.BOLD)
+		));
 		progressBar.setVisibility(View.VISIBLE);
 		list.setVisibility(View.GONE);
 		buttonsContainer.setVisibility(View.GONE);
-		toolbar.setTitle(getString(R.string.shared_string_importing));
 		for (SettingsItem item : settingsItems) {
 			item.setShouldReplace(shouldReplace);
 		}
@@ -239,7 +255,6 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 			@Override
 			public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
 				if (succeed) {
-					app.showShortToastMessage(app.getString(R.string.file_imported_successfully, file.getName()));
 					app.getRendererRegistry().updateExternalRenderers();
 					AppInitializer.loadRoutingFiles(app, new AppInitializer.LoadRoutingFilesCallback() {
 						@Override
@@ -251,6 +266,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 						ImportCompleteFragment.showInstance(fm, items, file.getName());
 					}
 				} else if (empty) {
+					dismissFragment();
 					app.showShortToastMessage(app.getString(R.string.file_import_error, file.getName(), app.getString(R.string.shared_string_unexpected_error)));
 				}
 			}
