@@ -3568,4 +3568,5 @@ Lon %2$s</string>
 \nWählen Sie eine Aktion aus.</string>
     <string name="import_duplicates_title">Einige Elemente sind bereits vorhanden</string>
     <string name="select_data_to_import">Wählen Sie die zu importierenden Daten aus.</string>
+    <string name="shared_string_rendering_style">Darstellungsstil</string>
 </resources>

@@ -24,7 +24,7 @@
     <string name="shared_string_apply">Apply</string>
     <string name="set_time_timeline_descr">Select time to display</string>
     <string name="start_end_date">Start — End date</string>
-    <string name="timeline_no_data_descr">We don`t have collected data for the selected day</string>
+    <string name="timeline_no_data_descr">We don\'t have collected data for the selected day</string>
     <string name="timeline_no_data">No data</string>
     <string name="shared_string_select">Select</string>
     <string name="min_logging_distance">Minimum logging distance</string>

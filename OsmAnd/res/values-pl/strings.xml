@@ -3559,4 +3559,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \nWybierz akcję.</string>
     <string name="import_duplicates_title">Niektóre elementy już istnieją</string>
     <string name="select_data_to_import">Wybierz dane, które mają zostać zaimportowane.</string>
+    <string name="import_routing_file">Importuj plik routingu</string>
+    <string name="monitoring_min_speed_descr">Jest to filtr odcięcia niskiej prędkości, który nie rejestruje punktów poniżej określonej prędkości. Może to sprawić, że zarejestrowane ślady będą wyglądać na bardziej płynne podczas przeglądania na mapie.</string>
+    <string name="shared_string_quick_actions">Szybka czynność</string>
+    <string name="keep_both">Zatrzymaj oba</string>
+    <string name="shared_string_rendering_style">Styl renderowania</string>
 </resources>
