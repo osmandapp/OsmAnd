@@ -721,7 +721,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			@Override
 			public void onSettingsExportFinished(@NonNull File file, boolean succeed) {
 				ProgressDialog progress = progressRef.get();
-				if (progress != null) {
+				if (progress != null && progress.isShowing()) {
 					progress.dismiss();
 				}
 				if (succeed) {
