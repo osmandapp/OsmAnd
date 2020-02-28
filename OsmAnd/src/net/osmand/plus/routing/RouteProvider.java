@@ -440,6 +440,19 @@ public class RouteProvider {
 			Location w = intermediates.get(i);
 			rp.intermediates.add(new LatLon(w.getLatitude(), w.getLongitude()));
 		}
+
+		if (routeParams.mode.getRouteService() == RouteService.BROUTER) {
+			try {
+				return findBROUTERRoute(rp);
+			} catch (ParserConfigurationException e) {
+				throw new IOException(e);
+			} catch (SAXException e) {
+				throw new IOException(e);
+			}
+		} else if (routeParams.mode.getRouteService() == RouteService.STRAIGHT ||
+				routeParams.mode.getRouteService() == RouteService.DIRECT_TO) {
+			return findStraightRoute(rp);
+		}
 		return findVectorMapsRoute(rp, false);
 	}
 

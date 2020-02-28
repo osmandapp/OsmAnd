@@ -112,6 +112,9 @@
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/toolbar_height_expanded"
 			android:background="?attr/colorPrimary"
+			osmand:expandedTitleMarginBottom="@dimen/content_padding_small"
+			osmand:expandedTitleMarginEnd="@dimen/content_padding"
+			osmand:expandedTitleMarginStart="@dimen/content_padding"
 			osmand:collapsedTitleTextAppearance="@style/AppBarTitle"
 			osmand:expandedTitleGravity="start|bottom"
 			osmand:expandedTitleTextAppearance="@style/AppBarTitle"
@@ -122,6 +125,8 @@
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/toolbar_height"
 				android:minHeight="@dimen/toolbar_height"
+				osmand:titleMarginEnd="0dp"
+				osmand:titleMarginStart="0dp"
 				osmand:layout_collapseMode="pin"
 				osmand:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
 				tools:title="@string/import_duplicates_title">
