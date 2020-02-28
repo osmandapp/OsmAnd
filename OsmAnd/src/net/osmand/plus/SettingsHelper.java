@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.text.style.AlignmentSpan;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -111,6 +112,10 @@ public class SettingsHelper {
 
 	public interface SettingsExportListener {
 		void onSettingsExportFinished(@NonNull File file, boolean succeed);
+	}
+
+	public interface CheckDuplicatesListener {
+		void onDuplicatesChecked(@NonNull List<Object> duplicates, List<SettingsItem> items);
 	}
 
 	public SettingsHelper(OsmandApplication app) {
@@ -2042,6 +2047,88 @@ public class SettingsHelper {
 				}
 			}
 		}
+	}
+
+	@SuppressLint("StaticFieldLeak")
+	public class CheckDuplicateTask extends AsyncTask<Void, Void, List<Object>> {
+
+		private List<SettingsItem> items;
+		private List<Object> duplicates;
+		private CheckDuplicatesListener listener;
+		private long startTime;
+
+		CheckDuplicateTask(@NonNull List<SettingsItem> items, CheckDuplicatesListener listener) {
+			this.items = items;
+			this.listener = listener;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			startTime = System.currentTimeMillis();
+			super.onPreExecute();
+		}
+
+		@Override
+		protected List<Object> doInBackground(Void... voids) {
+			return getDuplicatesData(this.items);
+		}
+
+		@Override
+		protected void onPostExecute(List<Object> objects) {
+			duplicates = objects;
+			long currentTime = System.currentTimeMillis();
+			if (currentTime - startTime < 700) {
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			if (listener != null) {
+				listener.onDuplicatesChecked(objects, this.items);
+			}
+			super.onPostExecute(objects);
+		}
+
+		private List<Object> getDuplicatesData(List<SettingsItem> items) {
+			List<Object> duplicateItems = new ArrayList<>();
+			for (SettingsItem item : items) {
+				if (item instanceof SettingsHelper.ProfileSettingsItem) {
+					if (item.exists()) {
+						duplicateItems.add(((SettingsHelper.ProfileSettingsItem) item).getModeBean());
+					}
+				} else if (item instanceof SettingsHelper.QuickActionSettingsItem) {
+					List<QuickAction> duplicates = ((SettingsHelper.QuickActionSettingsItem) item).excludeDuplicateItems();
+					if (!duplicates.isEmpty()) {
+						duplicateItems.addAll(duplicates);
+					}
+				} else if (item instanceof SettingsHelper.PoiUiFilterSettingsItem) {
+					List<PoiUIFilter> duplicates = ((SettingsHelper.PoiUiFilterSettingsItem) item).excludeDuplicateItems();
+					if (!duplicates.isEmpty()) {
+						duplicateItems.addAll(duplicates);
+					}
+				} else if (item instanceof SettingsHelper.MapSourcesSettingsItem) {
+					List<ITileSource> duplicates = ((SettingsHelper.MapSourcesSettingsItem) item).excludeDuplicateItems();
+					if (!duplicates.isEmpty()) {
+						duplicateItems.addAll(duplicates);
+					}
+				} else if (item instanceof SettingsHelper.FileSettingsItem) {
+					if (item.exists()) {
+						duplicateItems.add(((SettingsHelper.FileSettingsItem) item).getFile());
+					}
+				} else if (item instanceof SettingsHelper.AvoidRoadsSettingsItem) {
+					List<AvoidRoadInfo> avoidRoads = ((SettingsHelper.AvoidRoadsSettingsItem) item).excludeDuplicateItems();
+					if (!avoidRoads.isEmpty()) {
+						duplicateItems.addAll(avoidRoads);
+					}
+				}
+			}
+			return duplicateItems;
+		}
+	}
+
+	public void checkDuplicates(@NonNull List<SettingsItem> items, CheckDuplicatesListener listener) {
+		new CheckDuplicateTask(items, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public void importSettings(@NonNull File settingsFile, String latestChanges, int version,

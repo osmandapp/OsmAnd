@@ -80,7 +80,7 @@
 					android:layout_height="match_parent"
 					android:background="?attr/selectableItemBackground"
 					android:ellipsize="end"
-					android:gravity="end|center_vertical"
+					android:gravity="start|center_vertical"
 					android:maxLines="1"
 					android:paddingLeft="@dimen/content_padding_small"
 					android:paddingTop="@dimen/content_padding_half"
@@ -110,6 +110,8 @@
 			android:layout_height="@dimen/toolbar_height_expanded"
 			android:background="?attr/colorPrimary"
 			osmand:collapsedTitleTextAppearance="@style/AppBarTitle"
+			osmand:expandedTitleMarginStart="16dp"
+			osmand:expandedTitleMarginBottom="12dp"
 			osmand:expandedTitleGravity="start|bottom"
 			osmand:expandedTitleTextAppearance="@style/AppBarTitle"
 			tools:title="@string/shared_string_import"
@@ -121,7 +123,8 @@
 				android:layout_height="@dimen/toolbar_height"
 				android:minHeight="@dimen/toolbar_height"
 				osmand:layout_collapseMode="pin"
-				osmand:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed">
+				osmand:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
+				android:layout_marginLeft="0dp">
 
 			</android.support.v7.widget.Toolbar>
 

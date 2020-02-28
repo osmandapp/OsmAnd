@@ -1,5 +1,6 @@
 package net.osmand.plus.settings;
 
+import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,7 +23,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SettingsHelper.SettingsItem;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.profiles.AdditionalDataWrapper;
 import net.osmand.plus.quickaction.QuickActionListFragment;
@@ -131,43 +135,43 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		if (fm == null) {
 			return;
 		}
-		Fragment fragment;
-		String TAG;
 		switch (type) {
+			case CUSTOM_ROUTING:
 			case PROFILE:
 				BaseSettingsFragment.showInstance(
-						getActivity(),
+						requireActivity(),
 						BaseSettingsFragment.SettingsScreenType.MAIN_SETTINGS
 				);
 				break;
 			case QUICK_ACTIONS:
 				fm.beginTransaction()
 						.add(R.id.fragmentContainer, new QuickActionListFragment(), QuickActionListFragment.TAG)
-						.addToBackStack(QuickActionListFragment.TAG).commitAllowingStateLoss();
+						.addToBackStack(QuickActionListFragment.TAG).commit();
 				break;
 			case POI_TYPES:
-				QuickSearchDialogFragment quickSearchDialogFragment = new QuickSearchDialogFragment();
-				quickSearchDialogFragment.show(fm, QuickSearchDialogFragment.TAG);
+				new QuickSearchDialogFragment().show(fm, QuickSearchDialogFragment.TAG);
 				break;
 			case MAP_SOURCES:
-
+				Activity activity = getActivity();
+				if (activity instanceof MapActivity) {
+					((MapActivity) activity).getDashboard()
+							.setDashboardVisibility(
+									true,
+									DashboardOnMap.DashboardType.CONFIGURE_MAP,
+									null
+							);
+				}
 				break;
 			case CUSTOM_RENDER_STYLE:
-
-				fragment = new SelectMapStyleBottomSheetDialogFragment();
-				TAG = SelectMapStyleBottomSheetDialogFragment.TAG;
+				new SelectMapStyleBottomSheetDialogFragment().show(fm, SelectMapStyleBottomSheetDialogFragment.TAG);
 				break;
-			case CUSTOM_ROUTING:
-
-				return;
 			case AVOID_ROADS:
-				fragment = new AvoidRoadsBottomSheetDialogFragment();
-				TAG = AvoidRoadsBottomSheetDialogFragment.TAG;
+				new AvoidRoadsBottomSheetDialogFragment().show(fm, AvoidRoadsBottomSheetDialogFragment.TAG);
 				break;
 			default:
 				return;
 		}
-		dismissFragment();
+//		dismissFragment();
 		app.getSettingsHelper().setImportedItems(null);
 	}
 
