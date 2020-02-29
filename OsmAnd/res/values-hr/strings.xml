@@ -1411,4 +1411,24 @@
     <string name="move_maps">Premjesti karte</string>
     <string name="dont_move_maps">Nemoj premjestiti</string>
     <string name="searching_gps">Tražim GPS</string>
+    <string name="routing_profile_direct_to">Izravno do točke</string>
+    <string name="please_provide_profile_name_message">Navedite naziv profila</string>
+    <string name="open_settings">Otvaranje postavki</string>
+    <string name="plugin_disabled">Dodatak onemogućen</string>
+    <string name="shared_string_menu">izbornik</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="no_recalculation_setting">Onemogući ponovni izračun</string>
+    <string name="profile_type_custom_string">Prilagođeni profil</string>
+    <string name="shared_string_angle_param">Kut: %s°</string>
+    <string name="shared_string_angle">Kut</string>
+    <string name="shared_string_preparing">Priprema</string>
+    <string name="shared_string_nothing_selected">Ništa nije odabrano</string>
+    <string name="shared_string_quick_actions">Brze akcije</string>
+    <string name="shared_string_profiles">Profili</string>
+    <string name="listed_exist">Navedene %1$s, već postoje u OsmAnd.</string>
+    <string name="replace_all_desc">Trenutne stavke bit će zamijenjene stavkama iz datoteke</string>
+    <string name="replace_all">Zamijeni sve</string>
+    <string name="keep_both">Zadrzi oboje</string>
+    <string name="import_duplicates_title">Neke stavke već postoje</string>
+    <string name="select_data_to_import">Odaberite podatke koje želite uvesti.</string>
 </resources>
