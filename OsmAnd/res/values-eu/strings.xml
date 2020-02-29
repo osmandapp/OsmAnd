@@ -3536,7 +3536,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Nabigatu edo mugitzean erakutsitako ikonoa.</string>
     <string name="select_map_icon_descr">Atsedenean erakutsitako ikonoa.</string>
-    <string name="search_offline_geo_error">Ezin izan da \'% s\' geo intent-a errendatu.</string>
+    <string name="search_offline_geo_error">Ezin izan da \'%s\' geo intent-a errendatu.</string>
     <string name="monitoring_min_accuracy_descr_remark">Oharra: Grabatzen hasi aurretik GPSa itzalita egon bada, neurtutako lehen puntuak zehaztasun txikia izan dezake. Gure kodean puntu bat grabatu aurretik segundo bat itxaron genezake (edo jarraian grabatutako hirutik onena hartu, etab.), baina oraindik ez da hau garatu.</string>
     <string name="monitoring_min_distance_descr">Iragazki honek puntu bikoiztuak grabatzea saihesten du mugimendu txikiegia egon bada. Gero prozesatu ez diren ibilbideetan itxura hobe bat lortzen da.</string>
     <string name="monitoring_min_distance_descr_side_effect">Albo ondorioak: Atseden aldiak ez dira batere erregistratzen edo puntu bakarrarekin erregistratzen dira. Mugimendu txikiak (adibidez, albo batera) iragazi daitezke. Zure fitxategiak informazio gutxiago dauka post-prozesatzeko eta estatistika txarragoakk ditu erregistratzeko garaian puntu erredundanteak iragazi dituelako, agian harrera txarra edo GPS txiparen efektuak eragindako akatsak mantentzen dituen bitartean.</string>
