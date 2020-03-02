@@ -1971,7 +1971,7 @@ public class SettingsHelper {
 		return checkDuplicatesTask != null ? checkDuplicatesTask.getDuplicates() : null;
 	}
 
-	public void setImportedItems(List<SettingsItem> importedItems) {
+	public void setImportedItems(@Nullable List<SettingsItem> importedItems) {
 		this.importedItems = importedItems;
 	}
 

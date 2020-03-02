@@ -38,15 +38,20 @@ import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.widgets.TextViewEx;
+
+import org.apache.commons.logging.Log;
 
 import java.util.Locale;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class UiUtilities {
+
+	private static final Log LOG = PlatformUtil.getLog(UiUtilities.class);
 
 	private TLongObjectHashMap<Drawable> drawableCache = new TLongObjectHashMap<>();
 	private OsmandApplication app;
@@ -564,14 +569,21 @@ public class UiUtilities {
 		}
 	}
 
-	public static SpannableString createSpannableString(String text, String textToStyle, StyleSpan styleSpan) {
-		int startIndex = text.indexOf(textToStyle);
+	public static SpannableString createSpannableString(@NonNull String text,
+														@NonNull String textToStyle,
+														@NonNull StyleSpan styleSpan) {
 		SpannableString spannable = new SpannableString(text);
-		spannable.setSpan(
-				styleSpan,
-				startIndex,
-				startIndex + textToStyle.length(),
-				Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-		return spannable;
+		try {
+			int startIndex = text.indexOf(textToStyle);
+			spannable.setSpan(
+					styleSpan,
+					startIndex,
+					startIndex + textToStyle.length(),
+					Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+			return spannable;
+		} catch (RuntimeException e) {
+			LOG.error("Error trying to find index of " + textToStyle + " " + e);
+			return spannable;
+		}
 	}
 }
