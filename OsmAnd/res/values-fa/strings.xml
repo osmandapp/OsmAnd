@@ -358,7 +358,7 @@
     <string name="global_app_settings">تنظیمات کلی برنامه</string>
     <string name="user_name">نام کاربری OSM شما</string>
     <string name="open_street_map_login_descr">برای ارسال داده‌ها به سایت openstreetmap.org لازم است.</string>
-    <string name="user_password">رمز عبور OSM شما</string>
+    <string name="user_password">گذرواژهٔ OSM شما</string>
     <string name="west_south_west">غرب-جنوب‌غرب</string>
     <string name="west">غرب</string>
     <string name="west_north_west">غرب-شمال‌غرب</string>
@@ -412,7 +412,7 @@
     <string name="gpx_visibility_txt">محرمانگی</string>
     <string name="gpx_tags_txt">برچسب‌ها</string>
     <string name="shared_string_description">توضیحات</string>
-    <string name="validate_gpx_upload_name_pwd">برای آپلودکردن فایل‌های GPX لطفاً نام کاربری و رمز عبور OSM خود را وارد کنید.</string>
+    <string name="validate_gpx_upload_name_pwd">برای آپلودکردن فایل‌های GPX لطفاً نام کاربری و گذرواژهٔ OSM خود را وارد کنید.</string>
     <string name="default_buttons_support">حمایت</string>
     <string name="support_new_features">حمایت از قابلیت‌های جدید</string>
     <string name="support_new_features_descr">برای اینکه قابلیت‌های جدیدی را در برنامه ببینید کمک مالی کنید.</string>
@@ -716,7 +716,7 @@
     <string name="tts_missing_language_data_title">داده‌ها وجود ندارد</string>
     <string name="gpx_option_reverse_route">برعکس‌کردن جهت GPX</string>
     <string name="gpx_option_destination_point">از مقصد جاری استفاده کن</string>
-    <string name="gpx_option_from_start_point">از سرتاسر رد عبور کن</string>
+    <string name="gpx_option_from_start_point">گذر از همهٔ رد</string>
     <string name="switch_to_vector_map_to_see">برای این محل نقشهٔ بُرداری آفلاین وجود دارد. 
 \n
 \n\tفعال‌سازی:
@@ -1051,7 +1051,7 @@
     <string name="navigate_point_format_DM">DDD MM.MMM</string>
     <string name="navigate_point_format_DMS">DDD MM SS.S</string>
     <string name="poi_error_poi_not_found">نقطه پیدا نشد، یا مکان از چند نقطه تشکیل شده است که فعلاً پشتیبانی نمی‌شود.</string>
-    <string name="osb_author_or_password_not_specified">لطفاً نام کاربری و رمز عبورتان برای سایت OSM را در قسمت تنظیمات وارد کنید</string>
+    <string name="osb_author_or_password_not_specified">لطفاً نام کاربری و گذرواژه‌تان برای سایت OSM را در قسمت تنظیمات وارد کنید</string>
     <string name="clear_intermediate_points">پاک‌کردن مقصدهای میانی</string>
     <string name="keep_intermediate_points">نگه‌داشتن مقصدهای میانی</string>
     <string name="new_directions_point_dialog">مقصدهای میانی را قبلاً چیده‌اید.</string>
@@ -1059,7 +1059,7 @@
     <string name="context_menu_item_directions_from">مسیریابی از اینجا</string>
     <string name="route_descr_map_location">نقشه: </string>
     <string name="route_to">به:</string>
-    <string name="osb_author_dialog_password">رمز عبور OSM (اختیاری)</string>
+    <string name="osb_author_dialog_password">گذرواژهٔ OSM (اختیاری)</string>
     <string name="speak_title">اعلام‌کردن…</string>
     <string name="speak_descr">پیکربندی‌های مربوط به اعلام نام خیابان‌ها، هشدارهای ترافیکی (مانند توقف‌های اجباری، سرعتگیرها)، هشدار دوربین‌های کنترل سرعت و محدودیت‌های سرعت را انجام دهید.</string>
     <string name="speak_street_names">نام خیابان‌ها (موتور صوتی)</string>
@@ -1739,7 +1739,7 @@
     <string name="shared_string_topbar">نوار بالا</string>
     <string name="full_report">گزارش کامل</string>
     <string name="recalculate_route">پیداکردن مجدد مسیر</string>
-    <string name="open_street_map_login_and_pass">نام کاربری و رمز عبورِ OSM</string>
+    <string name="open_street_map_login_and_pass">نام کاربری و گذرواژهٔ OSM</string>
     <string name="donations">کمک‌های مالی</string>
     <string name="number_of_recipients">تعداد گیرندگان</string>
     <string name="osm_user_stat">اصلاحات: %1$s، رتبه: %2$s، کل اصلاحات: %3$s</string>
@@ -2600,7 +2600,7 @@
     <string name="import_file">درون‌برد فایل</string>
     <string name="tap_on_map_to_hide_interface_descr">با لمس نقشه، دکمه‌ها و ابزارک‌ها را پنهان/آشکار کنید.</string>
     <string name="tap_on_map_to_hide_interface">حالت تمام‌صفحه</string>
-    <string name="mark_passed">از این عبور کردم</string>
+    <string name="mark_passed">از این گذشتم</string>
     <string name="rename_marker">تغییر نام نشانه</string>
     <string name="digits_quantity">تعداد رقم‌های اعشاری</string>
     <string name="shared_string_right">راست</string>
@@ -2625,7 +2625,7 @@
     <string name="empty_state_markers_active_desc">مکان‌ها را به‌صورت کوتاه یا طولانی لمس کنید و سپس دکمهٔ پرچم را بزنید.</string>
     <string name="empty_state_markers_groups">گروه درون‌برد کنید</string>
     <string name="empty_state_markers_groups_desc">گروه‌های نقاط برگزیده یا نقاط بین‌راهی را در قالب نشانه درون‌برد کنید.</string>
-    <string name="empty_state_markers_history_desc">نشانه‌هایی که به‌عنوان عبورکرده مشخص شده‌اند در این صفحه نشان داده می‌شوند.</string>
+    <string name="empty_state_markers_history_desc">نشانه‌هایی که به‌عنوان گذرانده مشخص شود در این صفحه نشان داده می‌شود.</string>
     <string name="shared_string_more_without_dots">بیشتر</string>
     <string name="looking_for_tracks_with_waypoints">در حال جست‌وجوی ردهای دارای نقطهٔ بین‌راهی</string>
     <string name="empty_state_osm_edits">اشیای OSM را بسازید یا ویرایش کنید</string>
@@ -2868,7 +2868,7 @@
     <string name="search_street">جست‌وجوی خیابان</string>
     <string name="start_search_from_city">ابتدا شهر/محل را انتخاب کنید</string>
     <string name="shared_string_restore">بازیابی</string>
-    <string name="keep_passed_markers_descr">نشانه‌هایی که در قالب گروهی از برگزیده‌ها یا نقاط بین‌راهی GPX وارد شده‌اند و از آن‌ها عبور کرده‌اید روی نقشه باقی می‌مانند. اگر گروه مربوط به آن‌ها را غیرفعال کنید، نشانه‌ها از روی نقشه محو می‌شوند.</string>
+    <string name="keep_passed_markers_descr">نشانه‌هایی که در قالب گروهی از برگزیده‌ها یا نقاط بین‌راهی GPX وارد شده‌اند و از آن‌ها گذشته‌اید روی نقشه باقی می‌مانند. اگر گروه مربوط به آن‌ها را غیرفعال کنید، نشانه‌ها از روی نقشه محو می‌شوند.</string>
     <string name="keep_passed_markers">نشانه‌های پشت سر گذاشته را روی نقشه نگه دار</string>
     <string name="markers_remove_dialog_msg">نشانهٔ %s حذف شود؟</string>
     <string name="edit_map_marker">ویرایش نشانه</string>
