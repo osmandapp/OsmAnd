@@ -35,7 +35,7 @@ public class QuickAction {
         this.id = System.currentTimeMillis();
     }
 
-    protected QuickAction(int type, int nameRes) {
+    protected QuickAction(int type, @StringRes int nameRes) {
         this.id = System.currentTimeMillis();
         this.nameRes = nameRes;
         this.type = type;
@@ -89,7 +89,7 @@ public class QuickAction {
     }
 
     public String getName(Context context) {
-        return name == null || name.isEmpty() ? nameRes > 0 ? context.getString(nameRes) : "" : name;
+        return name == null || name.isEmpty() ? context.getString(nameRes) : name;
     }
 
     public HashMap<String, String> getParams() {
