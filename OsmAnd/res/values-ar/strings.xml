@@ -278,7 +278,7 @@
     <string name="local_index_tile_data_downloadable">قابل للتحميل: %1$s</string>
     <string name="local_index_tile_data_maxzoom">أقصى تكبير: %1$s</string>
     <string name="local_index_tile_data_minzoom">أدنى تكبير: %1$s</string>
-    <string name="maps_define_edit">تعريف/تعديل…</string>
+    <string name="maps_define_edit">تعريف/تعديل</string>
     <string name="speak_descr">ضبط إعدادات نطق أسماء الشوارع، وتحذيرات المرور (توقيفات الإجبارية، ومطبات السرعة)، و تحذيرات كاميرات السرعة، و السرعة القصوى.</string>
     <string name="speak_street_names">نطق أسماء الشوارع ( نطق آلي TTS )</string>
     <string name="speak_speed_limit">السرعة القصوى</string>
@@ -2506,7 +2506,7 @@
     <string name="group_will_be_removed_after_restart">سيتم إزالة المجموعة بعد إعادة تشغيل التطبيق.</string>
     <string name="shared_string_markers">العلامات</string>
     <string name="coordinates_format">نمط الإحداثيات</string>
-    <string name="use_system_keyboard">استخدم لوحة مفاتيح النظام</string>
+    <string name="use_system_keyboard">لوحة مفاتيح النظام</string>
     <string name="fast_coordinates_input_descr">اختر نسق إدخال الأحداثيات. يمكنك دائماً تغييره بالنقر على خيارات.</string>
     <string name="fast_coordinates_input">إدخال إحداثيات سريع</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">تجنب طرق الثلوج والطين</string>
@@ -2601,7 +2601,7 @@
     <string name="west_abbreviation">غ</string>
     <string name="south_abbreviation">ج</string>
     <string name="north_abbreviation">ش</string>
-    <string name="optional_point_name">الاسم الاختياري للنقطة</string>
+    <string name="optional_point_name">اسم النقطة</string>
     <string name="transport_nearby_routes_within">الطرق القريبة التي في الداخل</string>
     <string name="enter_the_file_name">أدخل اسم الملف.</string>
     <string name="map_import_error">خطأ أثناء استرجاع الخريطة</string>
