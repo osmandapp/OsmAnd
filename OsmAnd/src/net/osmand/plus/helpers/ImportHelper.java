@@ -915,7 +915,7 @@ public class ImportHelper {
 				} else {
 					app.showShortToastMessage(app.getString(R.string.file_import_error, mFileName, error));
 				}
-				if (isActivityNotDestroyed(activity)) {
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
 					progress.dismiss();
 				}
 			}
