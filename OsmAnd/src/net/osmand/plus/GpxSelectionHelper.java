@@ -35,14 +35,16 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 public class GpxSelectionHelper {
 
-	private static final String CURRENT_TRACK = "currentTrack";
+	public static final String CURRENT_TRACK = "currentTrack";
 	private static final String FILE = "file";
 	private static final String BACKUP = "backup";
 	private static final String BACKUPMODIFIEDTIME = "backupTime";
@@ -55,7 +57,7 @@ public class GpxSelectionHelper {
 	private Map<GPXFile, Long> selectedGpxFilesBackUp = new java.util.HashMap<>();
 	private SavingTrackHelper savingTrackHelper;
 	private final static Log LOG = PlatformUtil.getLog(GpxSelectionHelper.class);
-
+	private SelectGpxTask selectGpxTask;
 
 	public GpxSelectionHelper(OsmandApplication osmandApplication, SavingTrackHelper trackHelper) {
 		this.app = osmandApplication;
@@ -594,8 +596,10 @@ public class GpxSelectionHelper {
 			assert gpx != null;
 			sf = getSelectedFileByPath(gpx.path);
 			displayed = sf != null;
-			if (show && sf == null) {
-				sf = new SelectedGpxFile();
+			if (show) {
+				if (sf == null) {
+					sf = new SelectedGpxFile();
+				}
 				if (dataItem != null) {
 					if (dataItem.getColor() != 0) {
 						gpx.setColor(dataItem.getColor());
@@ -607,14 +611,10 @@ public class GpxSelectionHelper {
 				sf.selectedByUser = selectedByUser;
 			}
 		}
-		if (displayed != show) {
-			List<SelectedGpxFile> newSelectedGPXFiles = new ArrayList<>(selectedGPXFiles);
-			if (show) {
-				newSelectedGPXFiles.add(sf);
-			} else {
-				newSelectedGPXFiles.remove(sf);
+		if (sf != null && sf.isLoaded()) {
+			if (displayed != show) {
+				addRemoveSelected(show, sf);
 			}
-			selectedGPXFiles = newSelectedGPXFiles;
 		}
 		if (syncGroup) {
 			syncGpxWithMarkers(gpx);
@@ -623,6 +623,18 @@ public class GpxSelectionHelper {
 			sf.splitProcessed = false;
 		}
 		return sf;
+	}
+
+	private void addRemoveSelected(boolean show, SelectedGpxFile sf) {
+		List<SelectedGpxFile> newSelectedGPXFiles = new ArrayList<>(selectedGPXFiles);
+		if (show) {
+			if (!newSelectedGPXFiles.contains(sf)) {
+				newSelectedGPXFiles.add(sf);
+			}
+		} else {
+			newSelectedGPXFiles.remove(sf);
+		}
+		selectedGPXFiles = newSelectedGPXFiles;
 	}
 
 	public SelectedGpxFile selectGpxFile(GPXFile gpx, boolean show, boolean notShowNavigationDialog) {
@@ -697,6 +709,10 @@ public class GpxSelectionHelper {
 				this.color = gpxFile.tracks.get(0).getColor(0);
 			}
 			processPoints(app);
+		}
+
+		public boolean isLoaded() {
+			return gpxFile.modifiedTime != -1;
 		}
 
 		public GPXTrackAnalysis getTrackAnalysis(OsmandApplication app) {
@@ -951,6 +967,99 @@ public class GpxSelectionHelper {
 
 		public boolean isGeneralTrack() {
 			return group != null && group.isGeneralTrack();
+		}
+	}
+
+	public void runSelection(Map<String, Boolean> selectedItems, SelectGpxTaskListener gpxTaskListener) {
+		if (selectGpxTask != null && (selectGpxTask.getStatus() == AsyncTask.Status.RUNNING)) {
+			selectGpxTask.cancel(false);
+		}
+		selectGpxTask = new SelectGpxTask(selectedItems, gpxTaskListener);
+		selectGpxTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	public interface SelectGpxTaskListener {
+
+		void gpxSelectionInProgress();
+
+		void gpxSelectionStarted();
+
+		void gpxSelectionFinished();
+
+	}
+
+	public class SelectGpxTask extends AsyncTask<Void, Void, String> {
+
+		private Set<GPXFile> originalSelectedItems = new HashSet<>();
+		private Map<String, Boolean> selectedItems;
+		private SelectGpxTaskListener gpxTaskListener;
+
+		SelectGpxTask(Map<String, Boolean> selectedItems, SelectGpxTaskListener gpxTaskListener) {
+			this.selectedItems = selectedItems;
+			this.gpxTaskListener = gpxTaskListener;
+		}
+
+		@Override
+		protected String doInBackground(Void... params) {
+			for (GPXFile gpxFile : originalSelectedItems) {
+				if (isCancelled()) {
+					break;
+				}
+				if (!gpxFile.showCurrentTrack) {
+					gpxFile = GPXUtilities.loadGPXFile(new File(gpxFile.path));
+				}
+				selectGpxFile(gpxFile, true, false);
+				publishProgress();
+			}
+			return "";
+		}
+
+		@Override
+		protected void onProgressUpdate(Void... values) {
+				gpxTaskListener.gpxSelectionInProgress();
+		}
+
+		@Override
+		protected void onPreExecute() {
+			collectSelectedItems();
+				gpxTaskListener.gpxSelectionStarted();
+		}
+
+		private void collectSelectedItems() {
+			for (String filePath : selectedItems.keySet()) {
+				SelectedGpxFile sf;
+				if (!filePath.equals(CURRENT_TRACK)) {
+					sf = getSelectedFileByPath(filePath);
+					if (sf == null) {
+						sf = new SelectedGpxFile();
+						sf.setGpxFile(new GPXFile(null), app);
+					}
+					sf.getGpxFile().path = filePath;
+				} else {
+					sf = getSelectedCurrentRecordingTrack();
+					if (sf == null) {
+						sf = savingTrackHelper.getCurrentTrack();
+					}
+				}
+				boolean visible = false;
+				if (selectedItems.get(filePath) != null) {
+					visible = selectedItems.get(filePath);
+				}
+				if (visible) {
+					if (!sf.isShowCurrentTrack()) {
+						sf.getGpxFile().modifiedTime = -1;
+					}
+					originalSelectedItems.add(sf.getGpxFile());
+				}
+				addRemoveSelected(visible, sf);
+			}
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			if (gpxTaskListener != null) {
+				gpxTaskListener.gpxSelectionFinished();
+			}
 		}
 	}
 }
