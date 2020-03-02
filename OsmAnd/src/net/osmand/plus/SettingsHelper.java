@@ -2111,7 +2111,6 @@ public class SettingsHelper {
 			checkingDuplicates = true;
 			checkDuplicatesTask = this;
 			startTime = System.currentTimeMillis();
-			super.onPreExecute();
 		}
 
 		@Override
@@ -2135,7 +2134,6 @@ public class SettingsHelper {
 				listener.onDuplicatesChecked(objects, this.items);
 			}
 			checkingDuplicates = false;
-			super.onPostExecute(objects);
 		}
 
 		private List<Object> getDuplicatesData(List<SettingsItem> items) {
@@ -2145,29 +2143,14 @@ public class SettingsHelper {
 					if (item.exists()) {
 						duplicateItems.add(((SettingsHelper.ProfileSettingsItem) item).getModeBean());
 					}
-				} else if (item instanceof SettingsHelper.QuickActionSettingsItem) {
-					List<QuickAction> duplicates = ((SettingsHelper.QuickActionSettingsItem) item).excludeDuplicateItems();
-					if (!duplicates.isEmpty()) {
-						duplicateItems.addAll(duplicates);
-					}
-				} else if (item instanceof SettingsHelper.PoiUiFilterSettingsItem) {
-					List<PoiUIFilter> duplicates = ((SettingsHelper.PoiUiFilterSettingsItem) item).excludeDuplicateItems();
-					if (!duplicates.isEmpty()) {
-						duplicateItems.addAll(duplicates);
-					}
-				} else if (item instanceof SettingsHelper.MapSourcesSettingsItem) {
-					List<ITileSource> duplicates = ((SettingsHelper.MapSourcesSettingsItem) item).excludeDuplicateItems();
+				} else if (item instanceof SettingsHelper.CollectionSettingsItem) {
+					List duplicates = ((CollectionSettingsItem) item).excludeDuplicateItems();
 					if (!duplicates.isEmpty()) {
 						duplicateItems.addAll(duplicates);
 					}
 				} else if (item instanceof SettingsHelper.FileSettingsItem) {
 					if (item.exists()) {
 						duplicateItems.add(((SettingsHelper.FileSettingsItem) item).getFile());
-					}
-				} else if (item instanceof SettingsHelper.AvoidRoadsSettingsItem) {
-					List<AvoidRoadInfo> avoidRoads = ((SettingsHelper.AvoidRoadsSettingsItem) item).excludeDuplicateItems();
-					if (!avoidRoads.isEmpty()) {
-						duplicateItems.addAll(avoidRoads);
 					}
 				}
 			}

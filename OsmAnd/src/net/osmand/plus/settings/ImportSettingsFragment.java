@@ -22,6 +22,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.IndexConstants;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.AppInitializer;
@@ -301,9 +302,9 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 				tileSourceTemplates.addAll(((SettingsHelper.MapSourcesSettingsItem) item).getItems());
 				tileSourceTemplates.addAll(((SettingsHelper.MapSourcesSettingsItem) item).getDuplicateItems());
 			} else if (item.getType().equals(SettingsHelper.SettingsItemType.FILE)) {
-				if (item.getName().startsWith("/rendering/")) {
+				if (item.getName().contains(IndexConstants.RENDERERS_DIR)) {
 					renderFilesList.add(((SettingsHelper.FileSettingsItem) item).getFile());
-				} else if (item.getName().startsWith("/routing/")) {
+				} else if (item.getName().contains(IndexConstants.ROUTING_PROFILES_DIR)) {
 					routingFilesList.add(((SettingsHelper.FileSettingsItem) item).getFile());
 				}
 			} else if (item.getType().equals(SettingsHelper.SettingsItemType.AVOID_ROADS)) {
