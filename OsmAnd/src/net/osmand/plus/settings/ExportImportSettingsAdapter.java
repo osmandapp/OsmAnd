@@ -44,18 +44,10 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	private boolean importState;
 	private int profileColor;
 
-	ExportImportSettingsAdapter(OsmandApplication app, List<AdditionalDataWrapper> dataList, boolean nightMode, boolean importState) {
+	ExportImportSettingsAdapter(OsmandApplication app, boolean nightMode, boolean importState) {
 		this.app = app;
-		this.dataList = dataList;
 		this.nightMode = nightMode;
 		this.importState = importState;
-		this.dataToOperate = new ArrayList<>();
-		this.profileColor = app.getSettings().getApplicationMode().getIconColorInfo().getColor(nightMode);
-	}
-
-	ExportImportSettingsAdapter(OsmandApplication app, boolean nightMode) {
-		this.app = app;
-		this.nightMode = nightMode;
 		this.dataList = new ArrayList<>();
 		this.dataToOperate = new ArrayList<>();
 		this.profileColor = app.getSettings().getApplicationMode().getIconColorInfo().getColor(nightMode);

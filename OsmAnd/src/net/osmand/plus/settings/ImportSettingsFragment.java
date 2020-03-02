@@ -39,7 +39,6 @@ import net.osmand.plus.profiles.AdditionalDataWrapper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.widgets.TextViewEx;
 
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -62,32 +61,44 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 	private LinearLayout buttonsContainer;
 	private ProgressBar progressBar;
 	private CollapsingToolbarLayout toolbarLayout;
+	private SettingsHelper settingsHelper;
 
-	public static void showInstance(@NonNull FragmentManager fm, List<SettingsItem> settingsItems, @NonNull File file) {
+	public static void showInstance(@NonNull FragmentManager fm, @NonNull List<SettingsItem> settingsItems, @NonNull File file) {
 		ImportSettingsFragment fragment = new ImportSettingsFragment();
 		fragment.setSettingsItems(settingsItems);
 		fragment.setFile(file);
 		fm.beginTransaction().
 				replace(R.id.fragmentContainer, fragment, TAG)
 				.addToBackStack(IMPORT_SETTINGS_TAG)
-				.commit();
+				.commitAllowingStateLoss();
 	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
+		settingsHelper = app.getSettingsHelper();
 		nightMode = !app.getSettings().isLightContent();
 		if (settingsItems == null) {
 			settingsItems = app.getSettingsHelper().getSettingsItems();
-			if (settingsItems == null) {
-				dismissFragment();
-			}
 		}
 		if (file == null) {
 			file = app.getSettingsHelper().getSettingsFile();
-			if (file == null) {
-				dismissFragment();
+		}
+		List<Object> duplicates = settingsHelper.getDuplicatesItems();
+		if (duplicates == null) {
+			SettingsHelper.CheckDuplicatesTask checkDuplicatesTask = settingsHelper.getCheckDuplicatesTask();
+			if (checkDuplicatesTask != null) {
+				settingsHelper.getCheckDuplicatesTask().setListener(getDuplicatesListener());
+			}
+		} else {
+			FragmentManager fm = getFragmentManager();
+			if (duplicates.isEmpty()) {
+				app.getSettingsHelper().importSettings(file, settingsItems, "", 1, getImportListener());
+			} else {
+				if (fm != null) {
+					ImportDuplicatesFragment.showInstance(fm, duplicates, settingsItems, file);
+				}
 			}
 		}
 	}
@@ -98,11 +109,13 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		inflater = UiUtilities.getInflater(app, nightMode);
 		View root = inflater.inflate(R.layout.fragment_import, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
-		toolbarLayout = root.findViewById(R.id.toolbar_layout);
-		setupToolbar(toolbar);
 		TextViewEx continueBtn = root.findViewById(R.id.continue_button);
+		toolbarLayout = root.findViewById(R.id.toolbar_layout);
 		selectBtn = root.findViewById(R.id.select_button);
 		expandableList = root.findViewById(R.id.list);
+		buttonsContainer = root.findViewById(R.id.buttons_container);
+		progressBar = root.findViewById(R.id.progress_bar);
+		setupToolbar(toolbar);
 		ViewCompat.setNestedScrollingEnabled(expandableList, true);
 		View header = inflater.inflate(R.layout.list_item_description_header, null);
 		description = header.findViewById(R.id.description);
@@ -110,8 +123,6 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		expandableList.addHeaderView(header);
 		continueBtn.setOnClickListener(this);
 		selectBtn.setOnClickListener(this);
-		buttonsContainer = root.findViewById(R.id.buttons_container);
-		progressBar = root.findViewById(R.id.progress_bar);
 		if (Build.VERSION.SDK_INT >= 21) {
 			AndroidUtils.addStatusBarPadding21v(app, root);
 		}
@@ -121,9 +132,19 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		adapter = new ExportImportSettingsAdapter(app, getSettingsToOperate(settingsItems), nightMode, true);
+		adapter = new ExportImportSettingsAdapter(app, nightMode, true);
+		if (settingsItems != null) {
+			adapter.updateSettingsList(getSettingsToOperate(settingsItems));
+		}
 		expandableList.setAdapter(adapter);
-		toolbarLayout.setTitle(getString(R.string.shared_string_import));
+
+		if (settingsHelper.isCheckingDuplicates()) {
+			updateUi(R.string.shared_string_preparing, R.string.checking_for_duplicate_description);
+		} else if (settingsHelper.isImporting() && !settingsHelper.isCollectOnly()) {
+			updateUi(R.string.shared_string_importing, R.string.importing_from);
+		} else {
+			toolbarLayout.setTitle(getString(R.string.shared_string_import));
+		}
 	}
 
 	@Override
@@ -146,54 +167,66 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		}
 	}
 
-	private void importItems() {
-		toolbarLayout.setTitle(getString(R.string.shared_string_preparing));
+	private void updateUi(int toolbarTitleRes, int descriptionRes) {
+		toolbarLayout.setTitle(getString(toolbarTitleRes));
 		description.setText(UiUtilities.createSpannableString(
-				String.format(getString(R.string.checking_for_duplicate_description), file.getName()),
+				String.format(getString(descriptionRes), file.getName()),
 				file.getName(),
 				new StyleSpan(Typeface.BOLD)
 		));
 		buttonsContainer.setVisibility(View.GONE);
 		progressBar.setVisibility(View.VISIBLE);
 		adapter.clearSettingsList();
-		final FragmentManager fm = getFragmentManager();
+	}
+
+	private void importItems() {
+		updateUi(R.string.shared_string_preparing, R.string.checking_for_duplicate_description);
 		List<SettingsItem> settingsItems = getSettingsItemsFromData(adapter.getDataToOperate());
-		app.getSettingsHelper().checkDuplicates(settingsItems, new SettingsHelper.CheckDuplicatesListener() {
+		settingsHelper.checkDuplicates(settingsItems, getDuplicatesListener());
+	}
+
+	private SettingsHelper.SettingsImportListener getImportListener() {
+		return new SettingsHelper.SettingsImportListener() {
 			@Override
-			public void onDuplicatesChecked(@NonNull List<Object> duplicates, List<SettingsItem> items) {
-				if (duplicates.isEmpty()) {
-					toolbarLayout.setTitle(getString(R.string.shared_string_importing));
-					description.setText(UiUtilities.createSpannableString(
-							String.format(getString(R.string.importing_from), file.getName()),
-							file.getName(),
-							new StyleSpan(Typeface.BOLD)
-					));
-					app.getSettingsHelper().importSettings(file, items, "", 1, new SettingsHelper.SettingsImportListener() {
+			public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
+				FragmentManager fm = getFragmentManager();
+				if (succeed) {
+					app.getRendererRegistry().updateExternalRenderers();
+					AppInitializer.loadRoutingFiles(app, new AppInitializer.LoadRoutingFilesCallback() {
 						@Override
-						public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
-							if (succeed) {
-								app.getRendererRegistry().updateExternalRenderers();
-								AppInitializer.loadRoutingFiles(app, new AppInitializer.LoadRoutingFilesCallback() {
-									@Override
-									public void onRoutingFilesLoaded() {
-									}
-								});
-								if (fm != null) {
-									ImportCompleteFragment.showInstance(fm, items, file.getName());
-								}
-							} else if (empty) {
-								app.showShortToastMessage(app.getString(R.string.file_import_error, file.getName(), app.getString(R.string.shared_string_unexpected_error)));
-								dismissFragment();
-							}
+						public void onRoutingFilesLoaded() {
 						}
 					});
+					if (fm != null) {
+						ImportCompleteFragment.showInstance(fm, items, file.getName());
+					}
+				} else if (empty) {
+					app.showShortToastMessage(app.getString(R.string.file_import_error, file.getName(), app.getString(R.string.shared_string_unexpected_error)));
+					dismissFragment();
+				}
+			}
+		};
+	}
+
+	private SettingsHelper.CheckDuplicatesListener getDuplicatesListener() {
+		return new SettingsHelper.CheckDuplicatesListener() {
+			@Override
+			public void onDuplicatesChecked(@NonNull List<Object> duplicates, List<SettingsItem> items) {
+				FragmentManager fm = getFragmentManager();
+				if (duplicates.isEmpty()) {
+					if (isAdded()) {
+						updateUi(R.string.shared_string_importing, R.string.importing_from);
+					}
+					settingsHelper.importSettings(file, items, "", 1, getImportListener());
 				} else {
 					if (fm != null) {
-						ImportDuplicatesFragment.showInstance(fm, duplicates, items, file);
+						if (!isStateSaved()) {
+							ImportDuplicatesFragment.showInstance(fm, duplicates, items, file);
+						}
 					}
 				}
 			}
-		});
+		};
 	}
 
 	private void dismissFragment() {

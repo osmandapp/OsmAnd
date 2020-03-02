@@ -6,12 +6,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.SpannableString;
-import android.text.Spanned;
 import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +23,6 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.profiles.AdditionalDataWrapper;
 import net.osmand.plus.quickaction.QuickActionListFragment;
@@ -35,6 +31,7 @@ import net.osmand.plus.search.QuickSearchDialogFragment;
 
 import java.util.List;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.plus.settings.ImportSettingsFragment.IMPORT_SETTINGS_TAG;
 import static net.osmand.plus.settings.ImportSettingsFragment.getSettingsToOperate;
 
@@ -128,7 +125,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 	public void dismissFragment() {
 		FragmentManager fm = getFragmentManager();
 		if (fm != null) {
-			getFragmentManager().popBackStack(IMPORT_SETTINGS_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+			fm.popBackStack(IMPORT_SETTINGS_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
 		app.getSettingsHelper().setImportedItems(null);
 	}
@@ -139,6 +136,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 			return;
 		}
 		dismissFragment();
+		fm.popBackStack(DRAWER_SETTINGS_ID + ".new", FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		switch (type) {
 			case CUSTOM_ROUTING:
 			case PROFILE:

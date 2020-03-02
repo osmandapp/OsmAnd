@@ -109,7 +109,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 		if (!dataList.isEmpty()) {
 			final View additionalDataView = inflater.inflate(R.layout.bottom_sheet_item_additional_data, null);
 			ExpandableListView listView = additionalDataView.findViewById(R.id.list);
-			adapter = new ExportImportSettingsAdapter(app, nightMode);
+			adapter = new ExportImportSettingsAdapter(app, nightMode, false);
 			View listHeader = inflater.inflate(R.layout.item_header_export_expand_list, null);
 			final View topSwitchDivider = listHeader.findViewById(R.id.topSwitchDivider);
 			final View bottomSwitchDivider = listHeader.findViewById(R.id.bottomSwitchDivider);
