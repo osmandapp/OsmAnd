@@ -736,10 +736,10 @@
     <string name="overlay_transparency">شفافية الخريطة</string>
     <string name="map_transparency_descr">ضبط شفافية الخريطة الأساسية.</string>
     <string name="map_transparency">شفافية الخريطة</string>
-    <string name="layer_underlay">الخريطة السفلية</string>
+    <string name="layer_underlay">الخريطة السفلية…</string>
     <string name="map_underlay">الخريطة السفلية</string>
     <string name="map_underlay_descr">اختيار الخريطة الأساسية التي تقوم عليه الخريطة</string>
-    <string name="layer_overlay">الخريطة العلوية</string>
+    <string name="layer_overlay">الخريطة العلوية…</string>
     <string name="shared_string_none">بدون</string>
     <string name="map_overlay">الخريطة العلوية</string>
     <string name="map_overlay_descr">اختيار خريطة التراكب</string>
@@ -977,7 +977,7 @@
     <string name="layer_map">مصدر الخريطة…</string>
     <string name="map_source">مصدر الخريطة</string>
     <string name="layer_amenity_label">عرض أسماء المفضلة</string>
-    <string name="layer_gpx_layer">المسارات المسجلة</string>
+    <string name="layer_gpx_layer">المسارات المسجلة…</string>
     <string name="map_locale">لغة الخريطة</string>
     <string name="rendering_category_details">التفاصيل</string>
     <string name="map_widget_plain_time">الوقت الحالي</string>
