@@ -243,7 +243,7 @@ public class ImportHelper {
 
 			@Override
 			protected void onPostExecute(GPXFile result) {
-				if (isActivityNotDestroyed(activity)) {
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
 					progress.dismiss();
 				}
 				handleResult(result, fileName, save, useImportDir, false);
@@ -315,7 +315,7 @@ public class ImportHelper {
 
 			@Override
 			protected void onPostExecute(final GPXFile result) {
-				if (isActivityNotDestroyed(activity)) {
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
 					progress.dismiss();
 				}
 
@@ -353,7 +353,7 @@ public class ImportHelper {
 
 				@Override
 				protected void onPostExecute(GPXFile result) {
-					if (isActivityNotDestroyed(activity)) {
+					if (AndroidUtils.isActivityNotDestroyed(activity)) {
 						progress.dismiss();
 					}
 					Toast.makeText(activity, R.string.fav_imported_sucessfully, Toast.LENGTH_LONG)
@@ -426,7 +426,7 @@ public class ImportHelper {
 
 			@Override
 			protected void onPostExecute(GPXFile result) {
-				if (isActivityNotDestroyed(activity)) {
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
 					progress.dismiss();
 				}
 				handleResult(result, name, save, useImportDir, false);
@@ -474,7 +474,7 @@ public class ImportHelper {
 
 			@Override
 			protected void onPostExecute(GPXFile result) {
-				if (isActivityNotDestroyed(activity)) {
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
 					progress.dismiss();
 				}
 				handleResult(result, name, save, useImportDir, false);
@@ -506,7 +506,7 @@ public class ImportHelper {
 
 			@Override
 			protected void onPostExecute(String message) {
-				if (isActivityNotDestroyed(activity)) {
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
 					progress.dismiss();
 				}
 				Toast.makeText(app, message, Toast.LENGTH_SHORT).show();
@@ -587,7 +587,7 @@ public class ImportHelper {
 
 			@Override
 			protected void onPostExecute(String error) {
-				if (isActivityNotDestroyed(activity)) {
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
 					progress.dismiss();
 				}
 				if (error == null) {
@@ -696,7 +696,7 @@ public class ImportHelper {
 					loadRoutingFiles(app, new AppInitializer.LoadRoutingFilesCallback() {
 						@Override
 						public void onRoutingFilesLoaded() {
-							if (isActivityNotDestroyed(activity)) {
+							if (AndroidUtils.isActivityNotDestroyed(activity)) {
 								progress.dismiss();
 							}
 							RoutingConfiguration.Builder builder = app.getCustomRoutingConfig(mFileName);
@@ -711,7 +711,7 @@ public class ImportHelper {
 						}
 					});
 				} else {
-					if (isActivityNotDestroyed(activity)) {
+					if (AndroidUtils.isActivityNotDestroyed(activity)) {
 						progress.dismiss();
 					}
 					app.showShortToastMessage(app.getString(R.string.file_import_error, mFileName, error));
@@ -774,7 +774,7 @@ public class ImportHelper {
 					app.getSettingsHelper().importSettings(file, latestChanges, version, new SettingsImportListener() {
 						@Override
 						public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
-							if (isActivityNotDestroyed(activity)) {
+							if (AndroidUtils.isActivityNotDestroyed(activity)) {
 								progress.dismiss();
 							}
 							if (succeed) {
@@ -788,7 +788,7 @@ public class ImportHelper {
 						}
 					});
 				} else {
-					if (isActivityNotDestroyed(activity)) {
+					if (AndroidUtils.isActivityNotDestroyed(activity)) {
 						progress.dismiss();
 					}
 					app.showShortToastMessage(app.getString(R.string.file_import_error, name, error));
@@ -809,13 +809,6 @@ public class ImportHelper {
 		} else {
 			settingsImportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
-	}
-
-	private boolean isActivityNotDestroyed(Activity activity) {
-		if (Build.VERSION.SDK_INT >= 17) {
-			return !activity.isFinishing() && !activity.isDestroyed();
-		}
-		return !activity.isFinishing();
 	}
 
 	private void handleResult(final GPXFile result, final String name, final boolean save,

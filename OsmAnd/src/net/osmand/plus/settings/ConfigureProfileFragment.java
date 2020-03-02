@@ -170,13 +170,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			if (appMode.isCustomProfile()) {
 				File file = getBackupFileForCustomMode(appMode);
 				if (file.exists()) {
-					app.getSettingsHelper().importSettings(file, "", 1, new SettingsHelper.SettingsImportListener() {
-						@Override
-						public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
-							app.showToastMessage(R.string.profile_prefs_reset_successful);
-							updateCopiedOrResetPrefs();
-						}
-					});
+					restoreCustomModeFromFile(file);
 				}
 			} else {
 				app.getSettings().resetPreferencesForProfile(appMode);
@@ -184,6 +178,30 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 				updateCopiedOrResetPrefs();
 			}
 		}
+	}
+
+	private void restoreCustomModeFromFile(final File file) {
+		app.getSettingsHelper().importSettings(file, "", 1, new SettingsHelper.SettingsImportListener() {
+			@Override
+			public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
+				if (succeed) {
+					for (SettingsHelper.SettingsItem item : items) {
+						item.setShouldReplace(true);
+					}
+					importBackupSettingsItems(file, items);
+				}
+			}
+		});
+	}
+
+	private void importBackupSettingsItems(File file, List<SettingsHelper.SettingsItem> items) {
+		app.getSettingsHelper().importSettings(file, items, "", 1, new SettingsHelper.SettingsImportListener() {
+			@Override
+			public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
+				app.showToastMessage(R.string.profile_prefs_reset_successful);
+				updateCopiedOrResetPrefs();
+			}
+		});
 	}
 
 	private File getBackupFileForCustomMode(ApplicationMode appMode) {
