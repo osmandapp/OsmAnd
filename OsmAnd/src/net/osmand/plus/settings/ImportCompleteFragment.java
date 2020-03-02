@@ -136,6 +136,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 
 	private void navigateTo(AdditionalDataWrapper.Type type) {
 		FragmentManager fm = getFragmentManager();
+		Activity activity = requireActivity();
 		if (fm == null) {
 			return;
 		}
@@ -155,10 +156,18 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 						.addToBackStack(QuickActionListFragment.TAG).commit();
 				break;
 			case POI_TYPES:
-				new QuickSearchDialogFragment().show(fm, QuickSearchDialogFragment.TAG);
+				if (activity instanceof MapActivity) {
+					QuickSearchDialogFragment.showInstance(
+							(MapActivity) activity,
+							"",
+							null,
+							QuickSearchDialogFragment.QuickSearchType.REGULAR,
+							QuickSearchDialogFragment.QuickSearchTab.CATEGORIES,
+							null
+					);
+				}
 				break;
 			case MAP_SOURCES:
-				Activity activity = requireActivity();
 				if (activity instanceof MapActivity) {
 					((MapActivity) activity).getDashboard()
 							.setDashboardVisibility(
