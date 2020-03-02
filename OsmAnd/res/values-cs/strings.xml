@@ -177,7 +177,7 @@
     <string name="favorite_places_category">Místa</string>
     <string name="shared_string_others">Ostatní</string>
     <string name="shared_string_no_thanks">Není potřeba</string>
-    <string name="basemap_missing">Stáhněte základní mapu světa a získejte tak přehled po celém světě při nízké úrovni přiblížení.</string>
+    <string name="basemap_missing">Stáhněte základní mapu světa a získejte tak přehled o celém světě při nízké úrovni přiblížení.</string>
     <string name="vector_data_missing">Stáhněte (\'offline\') data, aby bylo možné používat mapy bez připojení k Internetu.</string>
     <string name="local_index_gpx_info_show">"
 \n
@@ -242,7 +242,7 @@
     <string name="reading_cached_tiles">Načítání uložených dlaždic…</string>
     <string name="version_index_is_big_for_memory">Index \'\'{0}\'\' se nevejde do paměti</string>
     <string name="version_index_is_not_supported">Verze indexu \'\'{0}\'\' není podporována</string>
-    <string name="osmand_net_previously_installed">Všechna off-line data budou podporována novou aplikací, avšak Oblíbená místa musí být vyexportované ve staré verzi a potom naimportované do nové.</string>
+    <string name="osmand_net_previously_installed">Všechna off-line data budou podporována novou aplikací, avšak Oblíbená místa musí být vyexportovaná ve staré verzi a potom naimportovaná do nové.</string>
     <string name="build_installed">Balíček {0} byl instalován ({1}).</string>
     <string name="downloading_build">Stahování balíčku…</string>
     <string name="install_selected_build">Instalovat OsmAnd - {0} z {1} {2} MB\?</string>
@@ -296,7 +296,7 @@
     <string name="preferred_locale">Jazyk</string>
     <string name="shared_string_next">Další</string>
     <string name="shared_string_previous">Předchozí</string>
-    <string name="unit_of_length_descr">Zvolte v čem se měří vzdálenost.</string>
+    <string name="unit_of_length_descr">Zvolte, v čem se měří vzdálenost.</string>
     <string name="unit_of_length">Jednotky vzdálenosti</string>
     <string name="si_mi_feet">Míle/stopy</string>
     <string name="si_mi_yard">Míle/yardy</string>
@@ -317,7 +317,7 @@
     <string name="specified_dir_doesnt_exist">Nemohu najít zadaný adresář.</string>
     <string name="application_dir">Adresář pro data</string>
     <string name="gps_status_app_not_found">Aplikace pro zobrazení stavu GPS není nainstalovaná. Hledat v obchodě?</string>
-    <string name="voice_is_not_available_msg">Hlasové navádění je nedostupné. Přejděte do „Nastavení“ → „Nastavení navigace“ → „Hlasová data“ a vyberte, nebo stáhněte balíček s hlasovými pokyny.</string>
+    <string name="voice_is_not_available_msg">Hlasové navádění je nedostupné. Přejděte do „Nastavení“ → „Nastavení navigace“ → „Hlasová data“ a vyberte nebo stáhněte balíček s hlasovými pokyny.</string>
     <string name="voice_is_not_available_title">Žádná hlasová data nejsou zvolena</string>
     <string name="trace_rendering_descr">Zaškrtněte pro zobrazení statistik o vykreslování mapy.</string>
     <string name="trace_rendering">Sledovat vykreslování</string>
@@ -407,7 +407,7 @@
     <string name="background_service_int">Interval zaměřování GPS</string>
     <string name="background_service_provider_descr">Vyberte způsob získání polohy pro službu na pozadí.</string>
     <string name="background_service_provider">Poskytovatel polohy</string>
-    <string name="background_router_service_descr">Sleduje svou pozici i když je obrazovka vypnutá.</string>
+    <string name="background_router_service_descr">Sleduje vaši pozici i když je obrazovka vypnutá.</string>
     <string name="background_router_service">Sledování polohy na pozadí</string>
     <string name="off_router_service_no_gps_available">Služba pro navigaci na pozadí vyžaduje zapnutý zdroj polohy.</string>
     <string name="hide_poi_filter">Skrýt filtr</string>

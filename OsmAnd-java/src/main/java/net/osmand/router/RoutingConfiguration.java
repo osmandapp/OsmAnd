@@ -236,9 +236,9 @@ public class RoutingConfiguration {
 		String id = parser.getAttributeValue("", "id");
 		String type = parser.getAttributeValue("", "type");
 		boolean defaultValue = Boolean.parseBoolean(parser.getAttributeValue("", "default"));
-		if (type.equalsIgnoreCase("boolean")) {
+		if ("boolean".equalsIgnoreCase(type)) {
 			currentRouter.registerBooleanParameter(id, Algorithms.isEmpty(group) ? null : group, name, description, defaultValue);
-		} else if(type.equalsIgnoreCase("numeric")) {
+		} else if ("numeric".equalsIgnoreCase(type)) {
 			String values = parser.getAttributeValue("", "values");
 			String valueDescriptions = parser.getAttributeValue("", "valueDescriptions");
 			String[] strValues = values.split(",");
@@ -292,7 +292,7 @@ public class RoutingConfiguration {
 				for (int i = 0; i < stack.size(); i++) {
 					addSubclause(stack.get(i), ctx);
 				}
-			} else if(stack.size() > 0 && stack.peek().tagName.equals("select")) {
+			} else if (stack.size() > 0 && "select".equals(stack.peek().tagName)) {
 				addSubclause(rr, ctx);
 			}
 			stack.push(rr);
@@ -312,11 +312,11 @@ public class RoutingConfiguration {
 		if (!Algorithms.isEmpty(rr.t)) {
 			ctx.getLastRule().registerAndTagValueCondition(rr.t, Algorithms.isEmpty(rr.v) ? null : rr.v, not);
 		}
-		if (rr.tagName.equals("gt")) {
+		if ("gt".equals(rr.tagName)) {
 			ctx.getLastRule().registerGreatCondition(rr.value1, rr.value2, rr.type);
-		} else if (rr.tagName.equals("le")) {
+		} else if ("le".equals(rr.tagName)) {
 			ctx.getLastRule().registerLessCondition(rr.value1, rr.value2, rr.type);
-		} else if (rr.tagName.equals("eq")) {
+		} else if ("eq".equals(rr.tagName)) {
 			ctx.getLastRule().registerEqualCondition(rr.value1, rr.value2, rr.type);
 		}
 	}

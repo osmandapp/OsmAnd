@@ -268,4 +268,5 @@
     <string name="last_update_from_telegram_duration">Апошняе абнаўленне з Telegram: %1$s таму</string>
     <string name="last_response_duration">Апошні адказ: %1$s таму</string>
     <string name="duration_ago">%1$s таму</string>
+    <string name="shared_string_error_short">ERR</string>
 </resources>

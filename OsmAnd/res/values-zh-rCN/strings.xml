@@ -2818,4 +2818,5 @@
     <string name="multimedia_use_system_camera">使用系统应用程序</string>
     <string name="multimedia_photo_play_sound">相机快门声音</string>
     <string name="osm_authorization_success">授权成功</string>
+    <string name="day"></string>
 </resources>

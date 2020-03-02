@@ -454,7 +454,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 	}
 
 	protected void reloadData() {
-		new ReloadData(activity, getMyApplication()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		new ReloadData(activity, app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 	@Override

@@ -3470,4 +3470,39 @@
     <string name="shared_string_angle">זווית</string>
     <string name="recalc_angle_dialog_descr">קטע ישר נוסף יוצג בין המיקום שלי והיעד עד לחישוב המסלול</string>
     <string name="recalc_angle_dialog_title">הזווית המזערית בין המיקום שלי והמסלול</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">המלצה: קשה לחזות מה יוקלט ומה לא, יכול להיות שעדיף לכבות את המסנן הזה.</string>
+    <string name="use_system_screen_timeout">להשתמש בתפוגת שומר המסך של המערכת</string>
+    <string name="use_system_screen_timeout_promo">מושבת כבררת מחדל, אם OsmAnd מופעל בחזית, המסך לא נכבה.
+\n
+\nאם פעיל, OsmAnd ישתמש בהגדרות כיבוי המסך של המערכת.</string>
+    <string name="release_3_6">• פרופילים: מעתה ניתן לשנות סדר, להגדיר סמל למפה, לשנות את כל ההגדרות לפרופיל הבסיסי ולשחזר אותן לבררות המחדל
+\n
+\n • נוסף מספר יציאה בניווט
+\n
+\n • הגדרות התוספים שופצו
+\n
+\n • מסך ההגדרות שופץ לטובת גישה מהירה לכל הפרופילים
+\n
+\n • נוספה אפשרות להעתיק הגדרות מפרופיל אחר
+\n
+\n • נוספה האפשרות לשנות את הסדר או להסתיר קטגוריות של נקודות עניין בחיפוש
+\n
+\n • הסמלים של נקודות העניין מיושרים נכון במפה
+\n
+\n • נוספו נתוני שקיעה/זריחה להגדרות המפה
+\n
+\n • נוספו סמלי בית/עבודה למפה
+\n
+\n • נוספה תמיכה בתיאור עם מספר שורות בהגדרות
+\n
+\n • נוסף תעתיק נכון למפת יפן
+\n
+\n • נוספה המפה של אנטארקטיקה
+\n
+\n</string>
+    <string name="shared_string_include_data">לכלול נתונים נוספים</string>
+    <string name="export_profile_dialog_description">ניתן לבחור נתונים נוספים לייצוא יחד עם הפרופיל.</string>
+    <string name="shared_string_rendering_style">סגנון העיבוד</string>
+    <string name="import_duplicates_title">חלק מהפריטים קיימים</string>
+    <string name="select_data_to_import">נא לבחור את הנתונים לייבוא.</string>
 </resources>

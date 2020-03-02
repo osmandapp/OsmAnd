@@ -649,7 +649,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 	public void onGetItems() {
 		OsmandApplication app = getMyApplication();
 		if (app != null && InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
-			dismiss();
+			dismissAllowingStateLoss();
 		}
 	}
 
@@ -661,7 +661,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 				showDonationSettings();
 			}
 		}
-		dismiss();
+		dismissAllowingStateLoss();
 	}
 
 	@Override

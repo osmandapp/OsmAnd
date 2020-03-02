@@ -19,10 +19,15 @@
         app:contentInsetLeft="@dimen/settings_divider_margin_start"
         app:contentInsetStart="@dimen/settings_divider_margin_start"/>
 
-    <android.support.design.widget.CoordinatorLayout
-        android:layout_width="match_parent"
+    <ScrollView
+        android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:orientation="vertical">
 
         <android.support.design.widget.AppBarLayout
@@ -43,8 +48,8 @@
                     android:importantForAutofill="noExcludeDescendants"
                     android:layout_marginLeft="@dimen/settings_divider_margin_start"
                     android:layout_marginRight="@dimen/content_padding"
-	                android:layout_marginStart="@dimen/settings_divider_margin_start"
-	                android:layout_marginEnd="@dimen/content_padding">
+                    android:layout_marginStart="@dimen/settings_divider_margin_start"
+                    android:layout_marginEnd="@dimen/content_padding">
 
                     <EditText
                         android:id="@+id/poiNameEditText"
@@ -81,7 +86,7 @@
                     android:importantForAutofill="noExcludeDescendants"
                     android:layout_marginLeft="24dp"
                     android:layout_weight="1"
-	                android:layout_marginStart="24dp">
+                    android:layout_marginStart="24dp">
 
                     <AutoCompleteTextView
                         android:id="@+id/poiTypeEditText"
@@ -93,7 +98,7 @@
                         android:imeOptions="actionSend"
                         android:inputType="text"
                         tools:text="@string/lorem_ipsum"
-	                    android:drawableEnd="@drawable/ic_action_arrow_drop_down" />
+                        android:drawableEnd="@drawable/ic_action_arrow_drop_down" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -118,14 +123,12 @@
                 app:tabTextColor="@android:color/darker_gray"/>
         </android.support.design.widget.AppBarLayout>
 
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
-    </android.support.design.widget.CoordinatorLayout>
+            <net.osmand.plus.osmedit.EditPoiViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+    </LinearLayout>
+</ScrollView>
 
     <View
         android:id="@+id/buttonDivider"
@@ -149,7 +152,7 @@
             android:visibility="gone"
             app:textAllCapsCompat="true"
             tools:visibility="visible"
-	        android:layout_marginStart="@dimen/showAllButtonMarginRight" />
+            android:layout_marginStart="@dimen/showAllButtonMarginRight" />
 
         <Space
             android:layout_width="0dp"

@@ -3281,4 +3281,9 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="shared_string_include_data">Iekļaut papildus datus</string>
     <string name="import_profile_dialog_description">Importētais profils satur papildus datus. Spiediet uz Importēt, lai importētu tikai profilu datus vai izvēlieties arī papildus datus, ko importēt.</string>
     <string name="export_profile_dialog_description">Jūs varat izvēlēties arī papildus datus, ko eksportēt kopā ar profilu.</string>
+    <string name="tts_initialization_error">Nevar sākt teksta-runas lietotni.</string>
+    <string name="profile_import">Importēt profilu</string>
+    <string name="profile_import_descr">Pievienot profilu, atverot tā failu ar OsmAnd.</string>
+    <string name="file_import_error">%1$s importēšanas kļūda: %2$s</string>
+    <string name="file_imported_successfully">%1$s importēti.</string>
 </resources>

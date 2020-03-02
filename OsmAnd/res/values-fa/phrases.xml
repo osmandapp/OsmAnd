@@ -1244,7 +1244,7 @@
     <string name="poi_crossing_supervision_no">نظارت بر گذرگاه: خیر</string>
     <string name="poi_crossing_supervision_attendant">نظارت بر گذرگاه: متصدی</string>
     <string name="poi_crossing_supervision_camera">نظارت بر گذرگاه: دوربین</string>
-    <string name="poi_trade_agricultural_supplies">اقلام کشاورزی</string>
+    <string name="poi_trade_agricultural_supplies">تجهیزات کشاورزی</string>
     <string name="poi_meadow_agricultural">نوع: کشاورزی</string>
     <string name="poi_agrarian">فروشگاه کشاورزی</string>
     <string name="poi_payment_terminal">کارت‌خوان</string>
@@ -1348,4 +1348,8 @@
     <string name="poi_park_ride_tram">تراموا</string>
     <string name="poi_park_ride_ferry">فرابر</string>
     <string name="poi_logistics">دفتر باربری</string>
+    <string name="poi_trade_building_supplies">مصالح ساختمانی</string>
+    <string name="poi_trade_plumbing">لوازم لوله‌کشی</string>
+    <string name="poi_trade_wood">لوازم چوب</string>
+    <string name="poi_trade_tile">کاشی و موزاییک</string>
 </resources>
