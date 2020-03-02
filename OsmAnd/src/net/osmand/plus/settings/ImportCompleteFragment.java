@@ -18,6 +18,7 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.SettingsHelper.SettingsItem;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -43,6 +44,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 	private List<SettingsItem> settingsItems;
 	private String fileName;
 	private boolean nightMode;
+	private SettingsHelper settingsHelper;
 
 	public static void showInstance(FragmentManager fm, @NonNull List<SettingsItem> settingsItems,
 									@NonNull String fileName) {
@@ -62,9 +64,10 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 			fileName = savedInstanceState.getString(FILE_NAME_KEY);
 		}
 		app = requireMyApplication();
+		settingsHelper = app.getSettingsHelper();
 		nightMode = !app.getSettings().isLightContent();
 		if (settingsItems == null) {
-			settingsItems = app.getSettingsHelper().getImportedItems();
+			settingsItems = settingsHelper.getImportedItems();
 			if (settingsItems == null) {
 				dismissFragment();
 			}
@@ -127,7 +130,8 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		if (fm != null) {
 			fm.popBackStack(IMPORT_SETTINGS_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
-		app.getSettingsHelper().setImportedItems(null);
+		settingsHelper.setImportedItems(null);
+		settingsHelper.setSelectedItems(null);
 	}
 
 	private void navigateTo(AdditionalDataWrapper.Type type) {

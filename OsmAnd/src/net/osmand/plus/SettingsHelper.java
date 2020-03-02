@@ -1990,6 +1990,10 @@ public class SettingsHelper {
 		return selectedItems;
 	}
 
+	public void setSelectedItems(@Nullable List<SettingsItem> selectedItems) {
+		this.selectedItems = selectedItems;
+	}
+
 	@SuppressLint("StaticFieldLeak")
 	private class ImportItemsAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
