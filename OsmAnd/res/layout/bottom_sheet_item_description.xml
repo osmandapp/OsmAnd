@@ -12,4 +12,6 @@
 	android:paddingRight="@dimen/content_padding"
 	android:textColor="?android:textColorSecondary"
 	android:textSize="@dimen/default_desc_text_size"
-	tools:text="Some long description"/>
+	tools:text="Some long description"
+	android:paddingEnd="@dimen/content_padding"
+	android:paddingStart="@dimen/content_padding" />

@@ -107,6 +107,21 @@ public class SQLiteTileSource implements ITileSource {
 		this.inversiveZoom = inversiveZoom;
 	}
 
+	public SQLiteTileSource(SQLiteTileSource tileSource, String name, OsmandApplication ctx) {
+		this.ctx = ctx;
+		this.name = name;
+		this.urlTemplate = tileSource.getUrlTemplate();
+		this.maxZoom = tileSource.getMaximumZoomSupported();
+		this.minZoom = tileSource.getMinimumZoomSupported();
+		this.isEllipsoid = tileSource.isEllipticYTile();
+		this.expirationTimeMillis = tileSource.getExpirationTimeMillis();
+		this.randoms = tileSource.getRandoms();
+		this.referer = tileSource.getReferer();
+		this.invertedY = tileSource.isInvertedYTile();
+		this.timeSupported = tileSource.isTimeSupported();
+		this.inversiveZoom = tileSource.getInversiveZoom();
+	}
+
 	public void createDataBase() {
 		db = ctx.getSQLiteAPI().getOrCreateDatabase(
 				ctx.getAppPath(TILES_INDEX_DIR).getAbsolutePath() + "/" + name + SQLITE_EXT, true);
@@ -114,7 +129,6 @@ public class SQLiteTileSource implements ITileSource {
 		db.execSQL("CREATE TABLE tiles (x int, y int, z int, s int, image blob, time long, PRIMARY KEY (x,y,z,s))");
 		db.execSQL("CREATE INDEX IND on tiles (x,y,z,s)");
 		db.execSQL("CREATE TABLE info(tilenumbering,minzoom,maxzoom)");
-		db.execSQL("CREATE TABLE android_metadata (locale TEXT)");
 		db.execSQL("INSERT INTO info (tilenumbering,minzoom,maxzoom) VALUES ('simple','" + minZoom + "','" + maxZoom + "');");
 
 		addInfoColumn(URL, urlTemplate);
@@ -128,7 +142,7 @@ public class SQLiteTileSource implements ITileSource {
 
 		db.close();
 	}
-	
+
 	@Override
 	public int getBitDensity() {
 		return base != null ? base.getBitDensity() : 16;

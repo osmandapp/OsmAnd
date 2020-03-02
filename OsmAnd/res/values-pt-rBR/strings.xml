@@ -3522,15 +3522,33 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_menu">Menu</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Roteamento</string>
-    <string name="shared_string_custom_rendering_style">Estilo de renderização personalizado</string>
     <string name="shared_string_include_data">Incluir dados adicionais</string>
     <string name="import_profile_dialog_description">O perfil importado contém dados adicionais. Clique em Importar para importar apenas dados do perfil ou selecione dados adicionais a serem importados.</string>
     <string name="export_profile_dialog_description">Você pode selecionar dados adicionais para exportar junto com o perfil.</string>
     <string name="index_name_antarctica">Antártida</string>
-    <string name="navigation_notification_desc">Mostrar notificação do sistema durante a navegação com instruções de navegação.</string>
-    <string name="navigation_notification">Notificação de navegação</string>
     <string name="shared_string_app_default_w_val">Aplicativo padrão (%s)</string>
     <string name="no_recalculation_setting">Desativar recálculo</string>
     <string name="route_recalculation_dist_title">Distância mínima para recalcular a rota</string>
     <string name="route_recalculation_dist_descr">A rota será recalculada se a distância até a rota for maior que o parâmetro especificado</string>
+    <string name="profile_type_custom_string">Perfil personalizado</string>
+    <string name="shared_string_angle_param">Ângulo: %s°</string>
+    <string name="shared_string_angle">Ângulo</string>
+    <string name="recalc_angle_dialog_descr">Segmento extra reto entre minha localização e a rota calculada será exibido até que a rota seja recalculada</string>
+    <string name="recalc_angle_dialog_title">Ângulo mínimo entre minha localização e rota</string>
+    <string name="shared_string_preparing">Preparando</string>
+    <string name="shared_string_poi_types">Tipos de POI</string>
+    <string name="shared_string_nothing_selected">Nada selecionado</string>
+    <string name="shared_string_quick_actions">Ações rápidas</string>
+    <string name="shared_string_profiles">Perfis</string>
+    <string name="listed_exist">Listado %1$s já existe no OsmAnd.</string>
+    <string name="replace_all_desc">Os itens atuais serão substituídos pelos itens do arquivo</string>
+    <string name="replace_all">Substituir tudo</string>
+    <string name="keep_both">Manter os dois</string>
+    <string name="keep_both_desc">Os itens importados serão adicionados com prefixo</string>
+    <string name="import_duplicates_description">OsmAnd já possui elementos com os mesmos nomes dos importados.
+\n
+\nSelecione uma ação.</string>
+    <string name="import_duplicates_title">Alguns itens já existem</string>
+    <string name="select_data_to_import">Selecione os dados a serem importados.</string>
+    <string name="shared_string_rendering_style">Estilo de renderização</string>
 </resources>

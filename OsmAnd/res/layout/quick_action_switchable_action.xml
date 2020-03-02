@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:padding="16dp"
+            android:padding="@dimen/content_padding"
             android:text="@string/quick_action_interim_dialog"
             android:textColor="?android:textColorPrimary"
             android:textSize="@dimen/default_list_text_size" />
@@ -29,8 +29,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp" />
+            android:layout_marginLeft="@dimen/content_padding"
+            android:layout_marginRight="@dimen/content_padding"
+	        android:layout_marginStart="@dimen/content_padding"
+	        android:layout_marginEnd="@dimen/content_padding" />
 
     </LinearLayout>
 
@@ -45,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/content_padding"
         android:scaleType="fitXY"
         android:src="@drawable/bg_shadow_list_top" />
 
@@ -58,7 +60,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:padding="@dimen/content_padding"
             android:orientation="vertical">
 
             <TextView
@@ -95,13 +97,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/color_transparent"
-            android:padding="16dp"
+            android:padding="@dimen/content_padding"
             android:layout_marginLeft="56dp"
-            android:gravity="left"
+            android:gravity="start"
             android:text="@string/quick_action_map_style_action"
             android:textAllCaps="true"
             android:textColor="@color/active_color_primary_light"
-            android:textSize="@dimen/default_list_text_size" />
+            android:textSize="@dimen/default_list_text_size"
+	        android:layout_marginStart="56dp" />
 
     </LinearLayout>
 

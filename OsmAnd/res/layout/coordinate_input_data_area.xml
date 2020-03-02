@@ -29,7 +29,9 @@
 			android:layout_marginRight="@dimen/content_padding"
 			android:animateLayoutChanges="true"
 			android:orientation="vertical"
-			tools:background="@drawable/context_menu_controller_bg_dark">
+			tools:background="@drawable/context_menu_controller_bg_dark"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginStart="@dimen/content_padding">
 
 			<ImageView
 				android:id="@+id/south_side_iv"
@@ -176,7 +178,9 @@
 			android:layout_marginLeft="@dimen/content_padding"
 			android:layout_marginRight="@dimen/content_padding"
 			android:animateLayoutChanges="true"
-			tools:background="@drawable/context_menu_controller_bg_dark">
+			tools:background="@drawable/context_menu_controller_bg_dark"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginStart="@dimen/content_padding">
 
 			<ImageView
 				android:id="@+id/east_side_iv"

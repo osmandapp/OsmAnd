@@ -157,5 +157,8 @@ public class QuickAction {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }
-}
 
+    public boolean hasCustomName(Context context) {
+        return !getName(context).equals(context.getString(nameRes));
+    }
+}

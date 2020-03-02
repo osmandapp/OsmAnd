@@ -7,7 +7,9 @@
               android:paddingLeft="16dp"
               android:paddingRight="16dp"
               android:minHeight="50dp"
-              android:layout_marginBottom="5dp">
+              android:layout_marginBottom="5dp"
+	android:paddingStart="16dp"
+	android:paddingEnd="16dp">
 
     <LinearLayout
         android:id="@+id/firstCellContainer"
@@ -36,7 +38,8 @@
             android:layout_gravity="center_vertical"
             android:layout_marginTop="2dp"
             android:text="500 m"
-            android:layout_marginRight="16dp" />
+            android:layout_marginRight="16dp"
+	        android:layout_marginEnd="16dp" />
 
     </LinearLayout>
 
@@ -67,7 +70,8 @@
             android:layout_gravity="center_vertical"
             android:layout_marginTop="2dp"
             android:text="Cinema"
-            android:layout_marginRight="16dp" />
+            android:layout_marginRight="16dp"
+	        android:layout_marginEnd="16dp" />
 
     </LinearLayout>
 

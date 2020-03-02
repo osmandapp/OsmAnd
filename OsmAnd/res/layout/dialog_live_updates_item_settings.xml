@@ -12,13 +12,15 @@
         android:orientation="vertical"
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
-        android:paddingTop="15dp">
+        android:paddingTop="15dp"
+	    android:paddingEnd="24dp"
+	    android:paddingStart="24dp">
 
         <TextView
             android:id="@+id/regionNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="@dimen/content_padding_half"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/color_white"
             tools:text="Flevoland"/>
@@ -33,11 +35,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="@dimen/content_padding_half"
+            android:layout_marginTop="@dimen/content_padding_half"
             android:gravity="center"
             android:textColor="@color/color_white"
-            android:textSize="12sp"
+            android:textSize="@dimen/default_sub_text_size"
             tools:text="@string/last_map_change"/>
 
         <TextView
@@ -45,10 +47,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="@dimen/content_padding_half"
             android:gravity="center"
             android:textColor="@color/color_white"
-            android:textSize="12sp"
+            android:textSize="@dimen/default_sub_text_size"
             tools:text="@string/last_update"/>
     </LinearLayout>
 
@@ -59,14 +61,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="@dimen/content_padding"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
                 android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp">
+                android:layout_marginRight="24dp"
+	            android:layout_marginStart="24dp"
+	            android:layout_marginEnd="24dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -75,7 +79,7 @@
                     android:gravity="center_vertical"
                     android:text="@string/live_update"
                     android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="16sp"/>
+                    android:textSize="@dimen/default_list_text_size"/>
 
                 <android.support.v7.widget.SwitchCompat
                     android:id="@+id/toggle_item"
@@ -89,7 +93,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
                 android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp">
+                android:layout_marginRight="24dp"
+	            android:layout_marginEnd="24dp"
+	            android:layout_marginStart="24dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -98,23 +104,25 @@
                     android:gravity="center_vertical"
                     android:text="@string/only_download_over_wifi"
                     android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/default_list_text_size"
                     tools:text="Only download over WiFi long text like really long"/>
 
                 <CheckBox
                     android:id="@+id/downloadOverWiFiSwitch"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_gravity="right|center_vertical"
+                    android:layout_gravity="end|center_vertical"
                     android:checked="true"
-                    android:textSize="16sp"/>
+                    android:textSize="@dimen/default_list_text_size"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
                 android:layout_marginLeft="24dp"
-                android:layout_marginRight="16dp">
+                android:layout_marginRight="@dimen/content_padding"
+	            android:layout_marginEnd="@dimen/content_padding"
+	            android:layout_marginStart="24dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -123,7 +131,7 @@
                     android:layout_weight="1"
                     android:text="@string/shared_string_update"
                     android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="16sp"/>
+                    android:textSize="@dimen/default_list_text_size"/>
 
                 <!--style="@style/OsmandLightTheme.Spinner"-->
                 <Spinner
@@ -131,8 +139,9 @@
                     style="@style/OsmandLightTheme.Spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:gravity="right"
-                    android:paddingLeft="0dp"/>
+                    android:gravity="end"
+                    android:paddingLeft="0dp"
+	                android:paddingStart="0dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -140,7 +149,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
                 android:layout_marginLeft="24dp"
-                android:layout_marginRight="16dp">
+                android:layout_marginRight="@dimen/content_padding"
+	            android:layout_marginStart="24dp"
+	            android:layout_marginEnd="@dimen/content_padding">
 
                 <TextView
                     android:layout_width="0dp"
@@ -150,22 +161,25 @@
                     android:gravity="center_vertical"
                     android:text="@string/update_time"
                     android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="16sp"/>
+                    android:textSize="@dimen/default_list_text_size"/>
 
                 <Spinner
                     android:id="@+id/updateTimesOfDaySpinner"
                     style="@style/OsmandLightTheme.Spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:gravity="right"
-                    android:paddingLeft="0dp"/>
+                    android:gravity="end"
+                    android:paddingLeft="0dp"
+	                android:paddingStart="0dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
                 android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp">
+                android:layout_marginRight="24dp"
+	            android:layout_marginEnd="24dp"
+	            android:layout_marginStart="24dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -174,7 +188,7 @@
                     android:gravity="center_vertical"
                     android:text="@string/updates_size"
                     android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="16sp"/>
+                    android:textSize="@dimen/default_list_text_size"/>
 
                 <TextView
                     android:id="@+id/sizeTextView"
@@ -182,7 +196,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/default_list_text_size"
                     tools:text="64MB"/>
 
             </LinearLayout>

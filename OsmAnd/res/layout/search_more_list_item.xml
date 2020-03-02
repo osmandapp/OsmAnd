@@ -82,7 +82,9 @@
         android:paddingBottom="8dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:paddingTop="8dp">
+        android:paddingTop="8dp"
+	    android:paddingStart="16dp"
+	    android:paddingEnd="16dp">
 
         <net.osmand.plus.widgets.TextViewEx
             android:id="@+id/title"

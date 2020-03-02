@@ -47,7 +47,9 @@
 			android:text="@string/shared_string_cancel"
 			android:textColor="?attr/wikivoyage_active_color"
 			android:textSize="@dimen/text_button_text_size"
-			osmand:typeface="@string/font_roboto_medium" />
+			osmand:typeface="@string/font_roboto_medium"
+			android:paddingEnd="@dimen/bottom_sheet_content_padding_small"
+			android:paddingStart="@dimen/bottom_sheet_content_margin" />
 
 		<View
 			android:layout_width="wrap_content"
@@ -77,7 +79,10 @@
 			tools:drawableRight="@drawable/ic_action_type_add"
 			tools:drawableTint="?attr/wikivoyage_active_color"
 			tools:ignore="UnusedAttribute"
-			tools:text="@string/shared_string_add" />
+			tools:text="@string/shared_string_add"
+			android:paddingEnd="@dimen/bottom_sheet_content_margin"
+			android:paddingStart="@dimen/bottom_sheet_content_padding_small"
+			tools:drawableEnd="@drawable/ic_action_type_add" />
 
 	</LinearLayout>
 

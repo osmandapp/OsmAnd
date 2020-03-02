@@ -52,7 +52,10 @@
 					tools:drawableLeft="@drawable/ic_action_map_language"
 					tools:ignore="UnusedAttribute"
 					tools:text="En"
-					tools:textColor="?attr/wikivoyage_active_color"/>
+					tools:textColor="?attr/wikivoyage_active_color"
+					android:layout_marginStart="@dimen/context_menu_padding_margin_small"
+					android:layout_marginEnd="@dimen/context_menu_padding_margin_small"
+					tools:drawableStart="@drawable/ic_action_map_language" />
 
 			</LinearLayout>
 
@@ -110,7 +113,10 @@
 				osmand:typeface="@string/font_roboto_medium"
 				tools:drawableLeft="@drawable/ic_action_list_header"
 				tools:drawableTint="?attr/wikivoyage_active_color"
-				tools:ignore="UnusedAttribute" />
+				tools:ignore="UnusedAttribute"
+				android:paddingEnd="@dimen/bottom_sheet_content_padding_small"
+				android:paddingStart="@dimen/bottom_sheet_content_margin"
+				tools:drawableStart="@drawable/ic_action_list_header" />
 			
 			
 			<net.osmand.plus.widgets.TextViewEx
@@ -135,7 +141,10 @@
 				osmand:typeface="@string/font_roboto_medium"
 				tools:drawableLeft="@drawable/ic_action_markers_dark"
 				tools:drawableTint="?attr/wikivoyage_active_color"
-				tools:ignore="UnusedAttribute" />
+				tools:ignore="UnusedAttribute"
+				android:paddingStart="@dimen/bottom_sheet_content_margin"
+				tools:drawableStart="@drawable/ic_action_markers_dark"
+				android:paddingEnd="@dimen/bottom_sheet_content_padding_small" />
 
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/save_button"
@@ -159,7 +168,10 @@
 				tools:drawableRight="@drawable/ic_action_read_later_fill"
 				tools:drawableTint="?attr/wikivoyage_active_color"
 				tools:ignore="UnusedAttribute"
-				tools:text="Save" />
+				tools:text="Save"
+				android:paddingStart="@dimen/bottom_sheet_content_padding_small"
+				android:paddingEnd="@dimen/bottom_sheet_content_margin"
+				tools:drawableEnd="@drawable/ic_action_read_later_fill" />
 
 		</LinearLayout>
 

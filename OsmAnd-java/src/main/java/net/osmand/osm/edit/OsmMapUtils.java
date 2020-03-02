@@ -8,11 +8,17 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 import net.osmand.data.LatLon;
+import net.osmand.data.Multipolygon;
+import net.osmand.data.MultipolygonBuilder;
+import net.osmand.data.Ring;
 import net.osmand.osm.edit.Relation.RelationMember;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
 
 public class OsmMapUtils {
+	
+	private static final double POLY_CENTER_PRECISION= 1e-6;
 
 	public static double getDistance(Node e1, Node e2) {
 		return MapUtils.getDistance(e1.getLatitude(), e1.getLongitude(), e2.getLatitude(), e2.getLongitude());
@@ -33,6 +39,38 @@ public class OsmMapUtils {
 			return getWeightCenterForWay(((Way) e));
 		} else if (e instanceof Relation) {
 			List<LatLon> list = new ArrayList<LatLon>();
+			if (e.getTag("type").equals("multipolygon")) {
+				MultipolygonBuilder original = new MultipolygonBuilder();
+				original.setId(e.getId());
+
+				// fill the multipolygon with all ways from the Relation
+				for (RelationMember es : ((Relation) e).getMembers()) {
+					if (es.getEntity() instanceof Way) {
+						boolean inner = "inner".equals(es.getRole()); //$NON-NLS-1$
+						if (inner) {
+							original.addInnerWay((Way) es.getEntity());
+						} else if("outer".equals(es.getRole())){
+							original.addOuterWay((Way) es.getEntity());
+						}
+					}
+				}
+				
+				List<Multipolygon> multipolygons = original.splitPerOuterRing(null);
+				if (!Algorithms.isEmpty(multipolygons)){
+					Multipolygon m = multipolygons.get(0);
+					List<Node> out = m.getOuterRings().get(0).getBorder();
+					List<List<Node>> inner = new ArrayList<List<Node>>();
+					if(!Algorithms.isEmpty(out)) {
+						for (Ring r : m.getInnerRings()) {
+							inner.add(r.getBorder());
+						}
+					}
+					if (!Algorithms.isEmpty(out)) {
+						return getComplexPolyCenter(out, inner);
+					}
+				}
+			}
+			
 			for (RelationMember fe : ((Relation) e).getMembers()) {
 				LatLon c = null;
 				// skip relations to avoid circular dependencies
@@ -48,16 +86,26 @@ public class OsmMapUtils {
 		return null;
 	}
 	
-	public static LatLon getComplexPolyCenter(Collection<Node> nodes) {
-		double precision = 1e-5; //where to set precision constant?
-		
+	public static LatLon getComplexPolyCenter(Collection<Node> outer, List<List<Node>> inner) {
 		final List<List<LatLon>> rings = new ArrayList<>();
 		List<LatLon> outerRing = new ArrayList<>();
-		for (Node n : nodes) {
+		
+		for (Node n : outer) {
 			outerRing.add(new LatLon(n.getLatitude(), n.getLongitude()));	
 		}
 		rings.add(outerRing);
-		return getPolylabelPoint(rings, precision);
+		if (!Algorithms.isEmpty(inner)) {
+			for (List<Node> ring: inner) {
+				if (!Algorithms.isEmpty(ring)) {
+					List <LatLon> ringll = new ArrayList<LatLon>();
+					for (Node n : ring) {
+						ringll.add(n.getLatLon());
+					} 
+					rings.add(ringll);
+				}
+			}
+		}
+		return getPolylabelPoint(rings);
 	}
 
 	public static LatLon getWeightCenter(Collection<LatLon> nodes) {
@@ -109,7 +157,7 @@ public class OsmMapUtils {
 				area = false;
 			}
 		}
-		LatLon ll = area ? getComplexPolyCenter(nodes) : getWeightCenterForNodes(nodes);
+		LatLon ll = area ? getComplexPolyCenter(nodes, null) : getWeightCenterForNodes(nodes);
 		if(ll == null) {
 			return null;
 		}
@@ -464,11 +512,10 @@ public class OsmMapUtils {
 	/**
 	 * Calculate "visual" center point of polygons (based on Mapbox' polylabel algorithm)
 	 * @param rings - list of lists of nodes
-	 * @param precision - precision of calculation, should be small, like 1e-4 or less.
 	 * @return coordinates of calculated center
 	 */
 	
-    private static LatLon getPolylabelPoint(List<List<LatLon>> rings, double precision) {
+    public static LatLon getPolylabelPoint(List<List<LatLon>> rings) {
         // find the bounding box of the outer ring
         double minX = Double.MAX_VALUE;
         double minY = Double.MAX_VALUE;
@@ -520,7 +567,7 @@ public class OsmMapUtils {
 
             // do not drill down further if there's no chance of a better solution
 //            System.out.println(String.format("check for precision: cell.max - bestCell.d = %f Precision: %f", cell.max, precision));
-            if (cell.max - bestCell.d <= precision) continue;
+            if (cell.max - bestCell.d <= POLY_CENTER_PRECISION) continue;
 
             // split the cell into four cells
             h = cell.h / 2;

@@ -49,7 +49,9 @@
             android:maxLines="2"
             android:textColor="?android:textColorPrimary"
             android:textSize="@dimen/default_sub_text_size"
-            tools:text="Add marker"/>
+            tools:text="Add marker"
+	        android:layout_marginEnd="16dp"
+	        android:layout_marginStart="16dp" />
 
     </LinearLayout>
 
@@ -57,7 +59,7 @@
         android:id="@+id/dividerRight"
         android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:background="?attr/dashboard_divider"
         android:visibility="gone"/>
 

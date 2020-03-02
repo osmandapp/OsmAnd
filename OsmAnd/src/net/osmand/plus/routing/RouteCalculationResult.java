@@ -34,6 +34,10 @@ import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 public class RouteCalculationResult {
 	private final static Log log = PlatformUtil.getLog(RouteCalculationResult.class);
 
+	// Evaluates street name that the route follows after turn within specified distance.
+	// It is useful to find names for short segments on intersections and roundabouts.
+	private static float distanceSeekStreetName = 150;
+
 	private static double distanceClosestToIntermediate = 3000;
 	private static double distanceThresholdToIntermediate = 25;
 	private static double DISTANCE_THRESHOLD_TO_INTRODUCE_FIRST_AND_LAST_POINTS = 50;
@@ -366,8 +370,24 @@ public class RouteCalculationResult {
 					String ref = next.getObject().getRef(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
 							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), next.isForwardDirection());
 					info.setRef(ref);
-					info.setStreetName(next.getObject().getName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(), 
-							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get()));
+					String streetName = next.getObject().getName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
+							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get());
+					if (Algorithms.isEmpty(streetName)) {
+						// try to get street names from following segments
+						float distanceFromTurn = next.getDistance();
+						for (int n = lind + 1; n + 1 < list.size(); n++) {
+							RouteSegmentResult s1 = list.get(n);
+							// scan the list only until the next turn
+							if (s1.getTurnType() != null || distanceFromTurn > distanceSeekStreetName ||
+									!Algorithms.isEmpty(streetName)) {
+								break;
+							}
+							streetName = s1.getObject().getName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
+									ctx.getSettings().MAP_TRANSLITERATE_NAMES.get());
+							distanceFromTurn += s1.getDistance();
+						}
+					}
+					info.setStreetName(streetName);
 					info.setDestinationName(next.getObject().getDestinationName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
 							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), next.isForwardDirection()));
 					if (s.getObject().isExitPoint() && next.getObject().getHighway().equals("motorway_link")) {

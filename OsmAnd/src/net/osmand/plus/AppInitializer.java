@@ -40,6 +40,7 @@ import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
+import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.render.RendererRegistry;
@@ -202,10 +203,18 @@ public class AppInitializer implements IProgress {
 			if (prevAppVersion < VERSION_3_5 || Version.getAppVersion(app).equals("3.5.3")
 					|| Version.getAppVersion(app).equals("3.5.4")) {
 				app.getSettings().migratePreferences();
-				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_5).commit();
-			}
-			if (prevAppVersion < VERSION_3_5 || Version.getAppVersion(app).equals("3.5.3")) {
-				app.getSettings().migrateHomeWorkParkingToFavorites();
+				addListener(new AppInitializeListener() {
+					@Override
+					public void onProgress(AppInitializer init, InitEvents event) {
+						if (event.equals(InitEvents.FAVORITES_INITIALIZED)) {
+							app.getSettings().migrateHomeWorkParkingToFavorites();
+						}
+					}
+
+					@Override
+					public void onFinish(AppInitializer init) {
+					}
+				});
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_5).commit();
 			}
 			if (prevAppVersion < VERSION_3_6) {
@@ -527,6 +536,7 @@ public class AppInitializer implements IProgress {
 		app.travelDbHelper = startupInit(app.travelDbHelper, TravelDbHelper.class);
 		app.lockHelper = startupInit(new LockHelper(app), LockHelper.class);
 		app.settingsHelper = startupInit(new SettingsHelper(app), SettingsHelper.class);
+		app.quickActionRegistry = startupInit(new QuickActionRegistry(app.getSettings()), QuickActionRegistry.class);
 
 
 		initOpeningHoursParser();

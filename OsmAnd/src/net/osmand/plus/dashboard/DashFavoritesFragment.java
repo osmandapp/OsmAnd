@@ -16,6 +16,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoritesListener;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
@@ -94,8 +95,11 @@ public class DashFavoritesFragment extends DashLocationFragment {
 
 	public void setupFavorites() {
 		View mainView = getView();
-		final FavouritesDbHelper helper = getMyApplication().getFavorites();
-		points = new ArrayList<FavouritePoint>(helper.getFavouritePoints());
+		OsmandApplication app = getMyApplication();
+		if (mainView == null || app == null) {
+			return;
+		}
+		points = new ArrayList<FavouritePoint>(app.getFavorites().getFavouritePoints());
 		if (points.size() == 0) {
 			(mainView.findViewById(R.id.main_fav)).setVisibility(View.GONE);
 			return;

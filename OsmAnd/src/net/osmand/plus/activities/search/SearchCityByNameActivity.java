@@ -22,6 +22,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.resources.RegionAddressRepository;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.Collection;

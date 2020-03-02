@@ -125,6 +125,18 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		name = app.getPoiFilters().getFiltersName(filtersToMerge);
 	}
 
+	public PoiUIFilter(PoiUIFilter filter, String name, String filterId) {
+		this.app = filter.app;
+		this.name = name;
+		this.filterId = filterId;
+		isStandardFilter = false;
+		poiTypes = filter.poiTypes;
+		acceptedTypes = filter.getAcceptedTypes();
+		poiAdditionals = filter.getPoiAdditionals();
+		filterByName = filter.filterByName;
+		savedFilterByName = filter.savedFilterByName;
+	}
+
 	public boolean isDeleted() {
 		return deleted;
 	}

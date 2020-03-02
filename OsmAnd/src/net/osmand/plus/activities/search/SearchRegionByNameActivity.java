@@ -10,6 +10,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.resources.RegionAddressRepository;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
@@ -36,6 +37,7 @@ public class SearchRegionByNameActivity extends SearchByNameAbstractActivity<Reg
 		super.reset();
 	}
 
+	@Nullable
 	@Override
 	protected LatLon getLocation(RegionAddressRepository item) {
 		return item.getEstimatedRegionCenter();

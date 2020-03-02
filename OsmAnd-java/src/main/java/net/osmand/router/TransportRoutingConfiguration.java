@@ -76,13 +76,8 @@ public class TransportRoutingConfiguration {
 	public int getBoardingTime() {
 		return boardingTime;
 	}
-	
-	public TransportRoutingConfiguration(RoutingConfiguration.Builder builder) {
-		this(builder, new TreeMap<String, String>());
-	}
-	
-	public TransportRoutingConfiguration(RoutingConfiguration.Builder builder, Map<String, String> params) {
-		GeneralRouter prouter = builder == null ? null : builder.getRouter("public_transport");
+
+	public TransportRoutingConfiguration(GeneralRouter prouter, Map<String, String> params) {
 		if(prouter != null) {
 			this.router = prouter.build(params);
 			walkRadius =  router.getIntAttribute("walkRadius", walkRadius);

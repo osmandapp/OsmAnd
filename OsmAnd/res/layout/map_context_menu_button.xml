@@ -27,7 +27,9 @@
 			android:textSize="@dimen/default_desc_text_size"
 			osmand:typeface="@string/font_roboto_medium"
 			android:duplicateParentState="true"
-			tools:text="Button" />
+			tools:text="Button"
+			android:paddingStart="@dimen/context_menu_button_padding_x"
+			android:paddingEnd="@dimen/context_menu_button_padding_x" />
 
 	</LinearLayout>
 

@@ -20,7 +20,8 @@
         android:layout_height="wrap_content"
         android:descendantFocusability="blocksDescendants"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/list_content_padding" >
+        android:paddingLeft="@dimen/list_content_padding"
+	    android:paddingStart="@dimen/list_content_padding">
 
         <ImageView
             android:id="@+id/icon"
@@ -28,7 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/favorites_icon_right_margin"
             android:layout_marginTop="@dimen/favorites_icon_top_margin"
-            android:src="@drawable/ic_sdcard" />
+            android:src="@drawable/ic_sdcard"
+	        android:layout_marginEnd="@dimen/favorites_icon_right_margin" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -65,7 +67,8 @@
                     android:layout_gravity="center_vertical"
                     android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/default_sub_text_size"
-                    tools:text="100500 km" />
+                    tools:text="100500 km"
+	                android:layout_marginStart="2dp" />
 
                 <ImageView
                     android:id="@+id/type_name_icon"
@@ -73,7 +76,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_small_group" />
+                    android:src="@drawable/ic_small_group"
+	                android:layout_marginStart="4dp" />
 
                 <TextView
                     android:id="@+id/type_name"
@@ -82,7 +86,8 @@
                     android:layout_marginLeft="2dp"
                     android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/default_sub_text_size"
-                    tools:text="100500 km" />
+                    tools:text="100500 km"
+	                android:layout_marginStart="2dp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -106,7 +111,8 @@
             android:layout_marginLeft="@dimen/dashFavIconMargin"
             android:background="?attr/dashboard_button"
             android:src="@drawable/ic_action_test_light"
-            android:visibility="gone" />
+            android:visibility="gone"
+	        android:layout_marginStart="@dimen/dashFavIconMargin" />
     </LinearLayout>
 
 </LinearLayout>

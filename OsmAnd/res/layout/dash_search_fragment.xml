@@ -8,12 +8,14 @@
               android:layout_marginRight="@dimen/dash_margin_h"
               android:layout_marginTop="@dimen/dash_margin"
               android:background="?attr/bg_card"
-              android:orientation="vertical">
+              android:orientation="vertical"
+	android:layout_marginEnd="@dimen/dash_margin_h"
+	android:layout_marginStart="@dimen/dash_margin_h">
 
     <LinearLayout
         android:id="@+id/search_card"
         android:layout_width="fill_parent"
-        android:layout_height="56dp"
+        android:layout_height="@dimen/wpt_list_item_height"
         android:background="?attr/selectableItemBackground">
 
         <TextView

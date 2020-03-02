@@ -34,6 +34,8 @@
         android:layout_marginRight="@dimen/empty_state_text_desc_margin"
         android:text="@string/empty_state_osm_edits_descr"
         android:textColor="?android:attr/textColorSecondary"
-        android:textSize="@dimen/empty_state_text_desc_size"/>
+        android:textSize="@dimen/empty_state_text_desc_size"
+	    android:layout_marginStart="@dimen/empty_state_text_desc_margin"
+	    android:layout_marginEnd="@dimen/empty_state_text_desc_margin" />
 
 </LinearLayout>

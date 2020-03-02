@@ -3490,15 +3490,33 @@
     <string name="shared_string_menu">Menü</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Yönlendirme</string>
-    <string name="shared_string_custom_rendering_style">Özel görselleştirme stili</string>
     <string name="shared_string_include_data">İlave veriler ekle</string>
     <string name="import_profile_dialog_description">İçe aktarılan profil ilave veriler içermektedir. Yalnızca profil verilerini içe aktarmak için İçe Aktar\'ı tıklayın veya içe aktarılacak ilave verileri seçin.</string>
     <string name="export_profile_dialog_description">Profil ile birlikte dışa aktarılacak ilave veriler seçebilirsiniz.</string>
     <string name="index_name_antarctica">Antarktika</string>
-    <string name="navigation_notification_desc">Navigasyon talimatları ile navigasyon sırasında sistem bildirimini göster.</string>
-    <string name="navigation_notification">Navigasyon bildirimi</string>
     <string name="shared_string_app_default_w_val">Uygulama Varsayılanı (%s)</string>
     <string name="no_recalculation_setting">Yeniden hesaplamayı devre dışı bırak</string>
     <string name="route_recalculation_dist_title">Rotayı yeniden hesaplamak için minimum mesafe</string>
     <string name="route_recalculation_dist_descr">Rotaya olan mesafe belirtilen parametreden daha uzunsa rota yeniden hesaplanacak</string>
+    <string name="profile_type_custom_string">Özel profil</string>
+    <string name="shared_string_angle_param">Açı: %s°</string>
+    <string name="shared_string_angle">Açı</string>
+    <string name="recalc_angle_dialog_descr">Konumum ve hesaplanan rota arasındaki ekstra düz segment, rota yeniden hesaplanıncaya kadar görüntülenecek</string>
+    <string name="recalc_angle_dialog_title">Konumum ve rota arasındaki minimum açı</string>
+    <string name="shared_string_preparing">Hazırlama</string>
+    <string name="shared_string_poi_types">POI türleri</string>
+    <string name="shared_string_nothing_selected">Hiçbir şey seçilmedi</string>
+    <string name="shared_string_quick_actions">Hızlı eylemler</string>
+    <string name="shared_string_profiles">Profiller</string>
+    <string name="listed_exist">Listelenen %1$s, OsmAnd\'da zaten var.</string>
+    <string name="replace_all_desc">Geçerli ögeler, dosyadaki ögelerle değiştirilecek</string>
+    <string name="replace_all">Hepsini değiştir</string>
+    <string name="keep_both">Her ikisini de sakla</string>
+    <string name="keep_both_desc">İçe aktarılan ögeler ön ek ile eklenecek</string>
+    <string name="import_duplicates_description">OsmAnd\'da içe aktarılanlarla aynı isme sahip ögeler zaten var.
+\n
+\nBir eylem seçin.</string>
+    <string name="import_duplicates_title">Bazı ögeler zaten var</string>
+    <string name="select_data_to_import">İçe aktarılacak verileri seçin.</string>
+    <string name="shared_string_rendering_style">Görselleştirme stili</string>
 </resources>

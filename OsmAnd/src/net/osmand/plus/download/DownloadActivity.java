@@ -71,11 +71,9 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -833,15 +831,18 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 					.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							OsmandApplication app = (OsmandApplication) getActivity().getApplication();
-							app.getSettings().setMapLocationToShow(
-									regionCenter.getLatitude(),
-									regionCenter.getLongitude(),
-									5,
-									new PointDescription(PointDescription.POINT_TYPE_WORLD_REGION_SHOW_ON_MAP, ""));
+							FragmentActivity activity = getActivity();
+							if (activity != null && regionCenter != null) {
+								OsmandApplication app = (OsmandApplication) activity.getApplication();
+								app.getSettings().setMapLocationToShow(
+										regionCenter.getLatitude(),
+										regionCenter.getLongitude(),
+										5,
+										new PointDescription(PointDescription.POINT_TYPE_WORLD_REGION_SHOW_ON_MAP, ""));
 
-							dismiss();
-							MapActivity.launchMapActivityMoveToTop(getActivity());
+								dismiss();
+								MapActivity.launchMapActivityMoveToTop(activity);
+							}
 						}
 					});
 

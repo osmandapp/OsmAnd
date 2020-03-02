@@ -9,7 +9,9 @@
     android:paddingRight="24dp"
     android:paddingLeft="24dp"
     android:background="?attr/selectableItemBackground"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+	android:paddingStart="24dp"
+	android:paddingEnd="24dp">
 
 
     <ImageView
@@ -20,7 +22,8 @@
         android:layout_marginRight="16dp"
         android:scaleType="centerInside"
         android:tint="?attr/default_icon_color"
-        android:src="@drawable/ic_action_flag_dark" />
+        android:src="@drawable/ic_action_flag_dark"
+	    android:layout_marginEnd="16dp" />
 
     <TextView
         android:id="@+id/title"

@@ -440,6 +440,19 @@ public class RouteProvider {
 			Location w = intermediates.get(i);
 			rp.intermediates.add(new LatLon(w.getLatitude(), w.getLongitude()));
 		}
+
+		if (routeParams.mode.getRouteService() == RouteService.BROUTER) {
+			try {
+				return findBROUTERRoute(rp);
+			} catch (ParserConfigurationException e) {
+				throw new IOException(e);
+			} catch (SAXException e) {
+				throw new IOException(e);
+			}
+		} else if (routeParams.mode.getRouteService() == RouteService.STRAIGHT ||
+				routeParams.mode.getRouteService() == RouteService.DIRECT_TO) {
+			return findStraightRoute(rp);
+		}
 		return findVectorMapsRoute(rp, false);
 	}
 
@@ -546,8 +559,17 @@ public class RouteProvider {
 		newParams.leftSide = rParams.leftSide;
 		RouteCalculationResult newRes = null;
 		try {
-			newRes = findVectorMapsRoute(newParams, false);
+			if (rParams.mode.getRouteService() == RouteService.OSMAND) {
+				newRes = findVectorMapsRoute(newParams, false);
+			} else if (rParams.mode.getRouteService() == RouteService.BROUTER) {
+				newRes= findBROUTERRoute(newParams);
+			} else if (rParams.mode.getRouteService() == RouteService.STRAIGHT ||
+				rParams.mode.getRouteService() == RouteService.DIRECT_TO) {
+				newRes = findStraightRoute(newParams);
+			}
 		} catch (IOException e) {
+		} catch (SAXException e) {
+		} catch (ParserConfigurationException e) {
 		}
 		return newRes;
 	}

@@ -47,11 +47,13 @@
             android:id="@+id/widget_icon"
             android:layout_width="@dimen/map_widget_icon"
             android:layout_height="@dimen/map_widget_icon"
-            android:layout_gravity="left|center_vertical"
+            android:layout_gravity="start|center_vertical"
             android:layout_marginLeft="@dimen/map_widget_icon_margin"
             android:layout_marginRight="@dimen/map_widget_icon_margin"
             android:gravity="center"
-            android:src="@drawable/ic_action_test_light"/>
+            android:src="@drawable/ic_action_test_light"
+	        android:layout_marginEnd="@dimen/map_widget_icon_margin"
+	        android:layout_marginStart="@dimen/map_widget_icon_margin" />
 
         <FrameLayout
             android:layout_width="wrap_content"

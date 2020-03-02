@@ -8,7 +8,9 @@
 	android:gravity="center_vertical"
 	android:minHeight="@dimen/bottom_sheet_list_item_height"
 	android:paddingLeft="@dimen/content_padding"
-	android:paddingRight="@dimen/content_padding">
+	android:paddingRight="@dimen/content_padding"
+	android:paddingEnd="@dimen/content_padding"
+	android:paddingStart="@dimen/content_padding">
 
 	<android.support.v7.widget.AppCompatRadioButton
 		android:id="@+id/compound_button"

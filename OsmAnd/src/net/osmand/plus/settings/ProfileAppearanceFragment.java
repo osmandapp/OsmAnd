@@ -36,7 +36,6 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
@@ -111,25 +110,11 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			isBaseProfileImported = arguments.getBoolean(IS_BASE_PROFILE_IMPORTED);
 		}
 		if (baseModeForNewProfile != null) {
-			profile.stringKey = baseModeForNewProfile.getStringKey() + "_" + System.currentTimeMillis();
+			setupAppProfileObjectFromAppMode(baseModeForNewProfile);
 			profile.parent = baseModeForNewProfile;
-			profile.name = baseModeForNewProfile.toHumanString();
-			profile.color = baseModeForNewProfile.getIconColorInfo();
-			profile.iconRes = baseModeForNewProfile.getIconRes();
-			profile.routingProfile = baseModeForNewProfile.getRoutingProfile();
-			profile.routeService = baseModeForNewProfile.getRouteService();
-			profile.locationIcon = baseModeForNewProfile.getLocationIcon();
-			profile.navigationIcon = baseModeForNewProfile.getNavigationIcon();
+			profile.stringKey = getUniqueStringKey(baseModeForNewProfile);
 		} else {
-			profile.stringKey = getSelectedAppMode().getStringKey();
-			profile.parent = getSelectedAppMode().getParent();
-			profile.name = getSelectedAppMode().toHumanString();
-			profile.color = getSelectedAppMode().getIconColorInfo();
-			profile.iconRes = getSelectedAppMode().getIconRes();
-			profile.routingProfile = getSelectedAppMode().getRoutingProfile();
-			profile.routeService = getSelectedAppMode().getRouteService();
-			profile.locationIcon = getSelectedAppMode().getLocationIcon();
-			profile.navigationIcon = getSelectedAppMode().getNavigationIcon();
+			setupAppProfileObjectFromAppMode(getSelectedAppMode());
 		}
 		changedProfile = new ApplicationProfileObject();
 		if (savedInstanceState != null) {
@@ -152,13 +137,29 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		isNewProfile = ApplicationMode.valueOfStringKey(changedProfile.stringKey, null) == null;
 	}
 
+	public void setupAppProfileObjectFromAppMode(ApplicationMode baseModeForNewProfile) {
+		profile.stringKey = baseModeForNewProfile.getStringKey();
+		profile.parent = baseModeForNewProfile.getParent();
+		profile.name = baseModeForNewProfile.toHumanString();
+		profile.color = baseModeForNewProfile.getIconColorInfo();
+		profile.iconRes = baseModeForNewProfile.getIconRes();
+		profile.routingProfile = baseModeForNewProfile.getRoutingProfile();
+		profile.routeService = baseModeForNewProfile.getRouteService();
+		profile.locationIcon = baseModeForNewProfile.getLocationIcon();
+		profile.navigationIcon = baseModeForNewProfile.getNavigationIcon();
+	}
+
 	@Override
 	protected void createToolbar(LayoutInflater inflater, View view) {
 		super.createToolbar(inflater, view);
 		if (isNewProfile) {
+			TextView toolbarTitle = (TextView) view.findViewById(R.id.toolbar_title);
+			if (toolbarTitle != null) {
+				toolbarTitle.setText(getString(R.string.new_profile));
+			}
 			TextView toolbarSubtitle = (TextView) view.findViewById(R.id.toolbar_subtitle);
 			if (toolbarSubtitle != null) {
-				toolbarSubtitle.setText(getString(R.string.new_profile));
+				toolbarSubtitle.setVisibility(View.GONE);
 			}
 		}
 	}
@@ -384,7 +385,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			for (ProfileIconColors color : ProfileIconColors.values()) {
 				View colorItem = createColorItemView(color, colorItems);
 				colorItems.addView(colorItem, new FlowLayout.LayoutParams(0, 0));
-
 			}
 			updateColorSelector(changedProfile.color);
 		} else if (ICON_ITEMS.equals(preference.getKey())) {
@@ -603,7 +603,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		if (iconItem != null) {
 			AndroidUtils.setBackground(iconItem.findViewById(R.id.backgroundCircle),
 					UiUtilities.tintDrawable(ContextCompat.getDrawable(app, R.drawable.circle_background_light),
-					UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, changedProfile.color.getColor(isNightMode())), 0.1f)));
+							UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, changedProfile.color.getColor(isNightMode())), 0.1f)));
 			ImageView outlineCircle = iconItem.findViewById(R.id.outlineCircle);
 			GradientDrawable circleContourDrawable = (GradientDrawable) ContextCompat.getDrawable(app, R.drawable.circle_contour_bg_light);
 			if (circleContourDrawable != null) {
@@ -642,6 +642,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		deleteImportedProfile();
 		setupBaseProfileView(profileKey);
 		changedProfile.parent = ApplicationMode.valueOfStringKey(profileKey, ApplicationMode.DEFAULT);
+		changedProfile.routingProfile = changedProfile.parent.getRoutingProfile();
+		changedProfile.routeService = changedProfile.parent.getRouteService();
 		this.isBaseProfileImported = isBaseProfileImported;
 	}
 
@@ -651,7 +653,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	}
 
 	private boolean saveProfile() {
-		if (changedProfile.name.replace(" ", "").length() < 1) {
+		if (changedProfile.name.trim().isEmpty()) {
 			if (getActivity() != null) {
 				createWarningDialog(getActivity(),
 						R.string.profile_alert_need_profile_name_title, R.string.profile_alert_need_profile_name_msg, R.string.shared_string_dismiss).show();
@@ -659,6 +661,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			return false;
 		}
 		if (isNewProfile) {
+			changedProfile.stringKey = getUniqueStringKey(changedProfile.parent);
 			ApplicationMode.ApplicationModeBuilder builder = ApplicationMode
 					.createCustomMode(changedProfile.parent, changedProfile.stringKey, app)
 					.setIconResName(ProfileIcons.getResStringByResId(changedProfile.iconRes))
@@ -685,8 +688,11 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			mode.setLocationIcon(changedProfile.locationIcon);
 			mode.setNavigationIcon(changedProfile.navigationIcon);
 		}
-
 		return true;
+	}
+
+	private String getUniqueStringKey(ApplicationMode mode) {
+		return mode.getStringKey() + "_" + System.currentTimeMillis();
 	}
 
 	private boolean hasNameDuplicate() {
@@ -708,7 +714,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		profileNameOtfb.setError(errorMessage, true);
 	}
 
-	public boolean isProfileAppearanceChanged(final MapActivity mapActivity) {
+	public boolean isProfileAppearanceChanged() {
 		hideKeyboard();
 		if (isChanged()) {
 			AlertDialog.Builder dismissDialog = createWarningDialog(getActivity(),

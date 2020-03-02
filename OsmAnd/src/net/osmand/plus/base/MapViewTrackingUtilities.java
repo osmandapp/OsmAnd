@@ -7,6 +7,7 @@ import android.view.WindowManager;
 
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
+import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
@@ -30,6 +31,7 @@ import net.osmand.util.MapUtils;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Map;
 
 public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLocationListener,
 		OsmAndCompassListener, MapMarkerChangedListener {
@@ -456,7 +458,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		protected WorldRegion doInBackground(LatLon... latLons) {
 			try {
 				if (latLons != null && latLons.length > 0) {
-					return app.getRegions().getSmallestBinaryMapDataObjectAt(latLons[0]).getKey();
+					Map.Entry<WorldRegion, BinaryMapDataObject> reg = app.getRegions().getSmallestBinaryMapDataObjectAt(latLons[0]);
+					if(reg != null) {
+						return reg.getKey();
+					}
 				}
 			} catch (IOException e) {
 				// ignore

@@ -3,10 +3,12 @@
     android:id="@+id/text1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="12dp"
-    android:paddingBottom="12dp"
+    android:paddingLeft="@dimen/content_padding"
+    android:paddingRight="@dimen/content_padding"
+    android:paddingTop="@dimen/content_padding_small"
+    android:paddingBottom="@dimen/content_padding_small"
     android:textColor="?android:attr/textColorPrimary"
     android:textSize="@dimen/default_list_text_size"
-    xmlns:android="http://schemas.android.com/apk/res/android"/>
+    xmlns:android="http://schemas.android.com/apk/res/android"
+	android:paddingStart="@dimen/content_padding"
+	android:paddingEnd="@dimen/content_padding" />

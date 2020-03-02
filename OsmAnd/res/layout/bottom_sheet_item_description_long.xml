@@ -13,4 +13,6 @@
     android:textSize="@dimen/default_desc_text_size"
 	android:linksClickable="true"
 	android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
-    tools:text="Some long description"/>
+    tools:text="Some long description"
+	android:paddingEnd="@dimen/content_padding"
+	android:paddingStart="@dimen/content_padding" />

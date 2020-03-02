@@ -1974,8 +1974,6 @@ public class OsmandSettings {
 		SHOW_ZOOM_BUTTONS_NAVIGATION.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
 	}
 
-	public final CommonPreference<Boolean> SHOW_NAVIGATION_NOTIFICATION = new BooleanPreference("show_navigation_notification", true).makeProfile();
-
 	// Json
 	public final OsmandPreference<String> SELECTED_GPX = new StringPreference("selected_gpx", "").makeGlobal();
 

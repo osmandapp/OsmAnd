@@ -11,7 +11,8 @@
         android:layout_marginLeft="5dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone" />
+        android:visibility="gone"
+	    android:layout_marginStart="5dp" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -23,13 +24,15 @@
             android:text="@string/filename_input"
             android:layout_marginLeft="5dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+	        android:layout_marginStart="5dp" />
 
         <EditText
             android:id="@+id/FileNameEdit"
             android:layout_marginLeft="5dp"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+	        android:layout_marginStart="5dp" />
     </LinearLayout>
 
     <LinearLayout
