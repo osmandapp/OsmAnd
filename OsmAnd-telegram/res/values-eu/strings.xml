@@ -187,4 +187,11 @@
     <string name="set_time_timeline_descr">Hautatu bistaratzeko denbora</string>
     <string name="start_end_date">Hasiera — Amaiera data</string>
     <string name="shared_string_enabled">Gaituta</string>
+    <string name="saved_messages">Gordetako mezuak</string>
+    <string name="units_and_formats">Unitate eta formatuak</string>
+    <string name="unit_of_length_descr">Aldatu distantzia neurtzeko unitateak.</string>
+    <string name="unit_of_length">Luzera unitatea</string>
+    <string name="unit_of_speed_system_descr">Zehaztu abiadura unitatea.</string>
+    <string name="unit_of_speed_system">Abiadura unitatea</string>
+    <string name="shared_string_error_short">ERR</string>
 </resources>
