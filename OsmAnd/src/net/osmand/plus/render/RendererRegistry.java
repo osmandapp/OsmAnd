@@ -257,9 +257,9 @@ public class RendererRegistry {
 			File[] lf = file.listFiles();
 			if (lf != null) {
 				for (File f : lf) {
-					if (f != null && f.getName().endsWith(IndexConstants.RENDERER_INDEX_EXT)) {
+					if (f != null && f.getName().endsWith(IndexConstants.ROUTING_AND_RENDERING_FILE_EXT)) {
 						if(!internalRenderers.containsValue(f.getName())) {
-							String name = f.getName().substring(0, f.getName().length() - IndexConstants.RENDERER_INDEX_EXT.length());
+							String name = f.getName().substring(0, f.getName().length() - IndexConstants.ROUTING_AND_RENDERING_FILE_EXT.length());
 							externalRenderers.put(name.replace('_', ' ').replace('-', ' '), f);
 						}
 					}
