@@ -613,7 +613,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	@ColorRes
 	protected int getActiveProfileColorRes() {
-		return getSelectedAppMode().getIconColorInfo().getColor(isNightMode());
+		return isProfileDependent() ? getSelectedAppMode().getIconColorInfo().getColor(isNightMode()) : R.color.icon_color_active_light;
 	}
 
 	@ColorRes
