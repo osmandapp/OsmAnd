@@ -1190,6 +1190,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 					onChildClick(null, v, groupPosition, childPosition, 0);
 				}
 			});
+			UiUtilities.setupLayoutDirection(v);
 			return v;
 		}
 
@@ -1249,6 +1250,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			adjustIndicator(app, groupPosition, isExpanded, v, light);
 			TextView nameView = ((TextView) v.findViewById(R.id.category_name));
 			nameView.setText(t.toString());
+			UiUtilities.setupLayoutDirection(v);
 
 			return v;
 		}

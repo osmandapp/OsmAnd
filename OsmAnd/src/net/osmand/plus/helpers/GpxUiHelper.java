@@ -604,6 +604,7 @@ public class GpxUiHelper {
 					builder.setTitle(R.string.show_gpx);
 				} else {
 					final View apprTitleView = View.inflate(new ContextThemeWrapper(activity, themeRes), R.layout.select_gpx_appearance_title, null);
+					UiUtilities.setupLayoutDirection(apprTitleView);
 
 					final OsmandSettings.CommonPreference<String> prefWidth
 							= app.getSettings().getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR);
@@ -619,7 +620,7 @@ public class GpxUiHelper {
 							popup.setAnchorView(apprTitleView);
 							popup.setContentWidth(AndroidUtils.dpToPx(activity, 200f));
 							popup.setModal(true);
-							popup.setDropDownGravity(Gravity.RIGHT | Gravity.TOP);
+							popup.setDropDownGravity(Gravity.END | Gravity.TOP);
 							popup.setVerticalOffset(AndroidUtils.dpToPx(activity, -48f));
 							popup.setHorizontalOffset(AndroidUtils.dpToPx(activity, -6f));
 							final GpxAppearanceAdapter gpxApprAdapter = new GpxAppearanceAdapter(new ContextThemeWrapper(activity, themeRes),

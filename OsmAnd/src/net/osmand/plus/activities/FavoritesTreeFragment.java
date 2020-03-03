@@ -46,6 +46,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -173,8 +174,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			View searchView = inflater.inflate(R.layout.search_fav_list_item, null);
 			searchView.setBackgroundResource(light ? R.color.list_background_color_light : R.color.list_background_color_dark);
 			TextView title = (TextView) searchView.findViewById(R.id.title);
-			title.setCompoundDrawablesWithIntrinsicBounds(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_search_dark), null, null, null);
-			title.setHint(R.string.shared_string_search);
+			Drawable searchIcon = getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_search_dark);
+			AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(title, searchIcon, null, null, null);
 			searchView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -237,6 +238,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				listView.setSelection(selection);
 			}
 		}
+		UiUtilities.setupLayoutDirection(view);
 		return view;
 	}
 
@@ -904,6 +906,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			} else {
 				ch.setVisibility(View.GONE);
 			}
+			UiUtilities.setupLayoutDirection(row);
 			return row;
 		}
 
@@ -1007,6 +1010,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				row.findViewById(R.id.favourite_icon).setVisibility(View.VISIBLE);
 				ch.setVisibility(View.GONE);
 			}
+			UiUtilities.setupLayoutDirection(row);
 			return row;
 		}
 

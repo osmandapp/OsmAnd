@@ -15,6 +15,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -38,6 +39,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.widgets.TextViewEx;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
@@ -387,9 +389,34 @@ public class UiUtilities {
 		image.setRotationY(rotation);
 	}
 	
-	public static void setupLayoutDirection(View layout) {
-		int direction = AndroidUtils.getLayoutDirection(layout.getContext());
+	public static void setupLayoutDirection(View view) {
+		if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN_MR1) {
+			return;
+		}
+		int layoutDirection = AndroidUtils.getLayoutDirection(view.getContext());
+		if (view instanceof ViewGroup) {
+			setupLayoutDirection(view, layoutDirection);
+			ArrayList<View> childrenViews = AndroidUtils.getChildrenViews((ViewGroup) view);
+			if (childrenViews != null) {
+				for (View child : childrenViews) {
+					setupLayoutDirection(child);
+				}
+			}
+		} else if (view instanceof TextView) {
+			int textDirection = layoutDirection ==
+					ViewCompat.LAYOUT_DIRECTION_RTL ?
+					View.TEXT_DIRECTION_RTL : View.TEXT_DIRECTION_LTR;
+			setupTextDirection((TextView) view, textDirection);
+		}
+	}
+
+	private static void setupLayoutDirection(View layout, int direction) {
 		ViewCompat.setLayoutDirection(layout, direction);
+	}
+
+	@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+	private static void setupTextDirection(TextView text, int direction) {
+		text.setTextDirection(direction);
 	}
 
 	public static void setupCompoundButtonDrawable(Context ctx, boolean nightMode, @ColorInt int activeColor, Drawable drawable) {

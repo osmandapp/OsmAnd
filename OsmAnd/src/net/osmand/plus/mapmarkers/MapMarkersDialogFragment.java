@@ -213,6 +213,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 				}
 			}
 		});
+		UiUtilities.setupLayoutDirection(mainView);
 
 		return mainView;
 	}

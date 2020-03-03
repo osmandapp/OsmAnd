@@ -44,6 +44,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.util.Algorithms;
@@ -480,6 +481,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 				}
 			}
 			ViewCompat.setAccessibilityDelegate(view, accessibilityAssistant);
+			UiUtilities.setupLayoutDirection(view);
 			return view;
 		}
 

@@ -350,6 +350,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 
 		parseLocation();
 		updateControlsVisibility();
+		UiUtilities.setupLayoutDirection(view);
 
 		return view;
 	}

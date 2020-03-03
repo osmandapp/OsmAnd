@@ -63,6 +63,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 				listener.onItemClick(view);
 			}
 		});
+		UiUtilities.setupLayoutDirection(view);
 		return new MapMarkerItemViewHolder(view);
 	}
 

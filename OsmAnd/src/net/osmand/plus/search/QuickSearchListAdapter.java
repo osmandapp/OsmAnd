@@ -23,6 +23,7 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
@@ -438,12 +439,13 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 					divider.setLayoutParams(p);
 				} else {
 					LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp1);
-					p.setMargins(dp56, 0, 0 ,0);
+					AndroidUtils.setMargins(p, dp56, 0, 0, 0);
 					divider.setLayoutParams(p);
 				}
 			}
 		}
 		ViewCompat.setAccessibilityDelegate(view, accessibilityAssistant);
+		UiUtilities.setupLayoutDirection(view);
 		return view;
 	}
 

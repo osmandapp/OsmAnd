@@ -422,28 +422,37 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 			LayoutInflater inflater = UiUtilities.getInflater(ctx, nightMode);
 			ItemType type = viewTypeId < ItemType.values().length ? ItemType.values()[viewTypeId] : SPACE;
 			View itemView;
+			RecyclerView.ViewHolder viewHolder;
 			switch (type) {
 				case POI:
 					itemView = inflater.inflate(R.layout.order_poi_list_item, parent, false);
-					return new PoiViewHolder(itemView);
+					viewHolder = new PoiViewHolder(itemView);
+					break;
 				case SPACE:
 					itemView = new View(ctx);
-					return new SpaceViewHolder(itemView);
+					viewHolder = new SpaceViewHolder(itemView);
+					break;
 				case BUTTON:
 					itemView = inflater.inflate(R.layout.preference_button, parent, false);
-					return new ButtonViewHolder(itemView);
+					viewHolder = new ButtonViewHolder(itemView);
+					break;
 				case HEADER:
 					itemView = inflater.inflate(R.layout.preference_category_with_descr, parent, false);
-					return new HeaderViewHolder(itemView);
+					viewHolder = new HeaderViewHolder(itemView);
+					break;
 				case DIVIDER:
 					itemView = inflater.inflate(R.layout.divider, parent, false);
-					return new DividerViewHolder(itemView);
+					viewHolder = new DividerViewHolder(itemView);
+					break;
 				case DESCRIPTION:
 					itemView = inflater.inflate(R.layout.bottom_sheet_item_description_long, parent, false);
-					return new DescriptionViewHolder(itemView);
+					viewHolder = new DescriptionViewHolder(itemView);
+					break;
 				default:
 					throw new IllegalArgumentException("Unsupported view type");
 			}
+			UiUtilities.setupLayoutDirection(itemView);
+			return viewHolder;
 		}
 
 		@SuppressLint("ClickableViewAccessibility")

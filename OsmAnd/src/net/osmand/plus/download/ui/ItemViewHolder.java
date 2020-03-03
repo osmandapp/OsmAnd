@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 import net.osmand.plus.activities.LocalIndexInfo;
@@ -98,6 +99,7 @@ public class ItemViewHolder {
 		textColorPrimary = typedValue.data;
 		theme.resolveAttribute(android.R.attr.textColorSecondary, typedValue, true);
 		textColorSecondary = typedValue.data;
+		UiUtilities.setupLayoutDirection(view);
 	}
 	
 	public void setShowRemoteDate(boolean showRemoteDate) {

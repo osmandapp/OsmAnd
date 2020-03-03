@@ -231,27 +231,31 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 	@Override
 	public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+		View view;
+		RecyclerView.ViewHolder viewHolder;
 		if (viewType == MARKER_TYPE) {
-			View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_new, viewGroup, false);
+			view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_new, viewGroup, false);
 			view.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
 					listener.onItemClick(view);
 				}
 			});
-			return new MapMarkerItemViewHolder(view);
+			viewHolder = new MapMarkerItemViewHolder(view);
 		} else if (viewType == HEADER_TYPE) {
-			View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_header, viewGroup, false);
-			return new MapMarkerHeaderViewHolder(view);
+			view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_header, viewGroup, false);
+			viewHolder = new MapMarkerHeaderViewHolder(view);
 		} else if (viewType == SHOW_HIDE_HISTORY_TYPE) {
-			View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_show_hide_history, viewGroup, false);
-			return new MapMarkersShowHideHistoryViewHolder(view);
+			view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_show_hide_history, viewGroup, false);
+			viewHolder = new MapMarkersShowHideHistoryViewHolder(view);
 		} else if (viewType == CATEGORIES_TYPE) {
-			View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_subheader, viewGroup, false);
-			return new MapMarkerCategoriesViewHolder(view);
+			view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_subheader, viewGroup, false);
+			viewHolder = new MapMarkerCategoriesViewHolder(view);
 		} else {
 			throw new IllegalArgumentException("Unsupported view type");
 		}
+		UiUtilities.setupLayoutDirection(view);
+		return viewHolder;
 	}
 
 	@Override
