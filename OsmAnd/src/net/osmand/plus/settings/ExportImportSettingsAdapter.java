@@ -173,33 +173,28 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				int profileIconRes = AndroidUtils.getDrawableId(app, ((ApplicationMode.ApplicationModeBean) currentItem).iconName);
 				ProfileIconColors iconColor = ((ApplicationMode.ApplicationModeBean) currentItem).iconColor;
 				icon.setImageDrawable(app.getUIUtilities().getIcon(profileIconRes, iconColor.getColor(nightMode)));
-				icon.setVisibility(View.VISIBLE);
 				break;
 			case QUICK_ACTIONS:
 				title.setText(((QuickAction) currentItem).getName(app.getApplicationContext()));
 				icon.setImageDrawable(app.getUIUtilities().getIcon(((QuickAction) currentItem).getIconRes(), nightMode));
 				subText.setVisibility(View.GONE);
-				icon.setVisibility(View.VISIBLE);
 				break;
 			case POI_TYPES:
 				title.setText(((PoiUIFilter) currentItem).getName());
 				int iconRes = RenderingIcons.getBigIconResourceId(((PoiUIFilter) currentItem).getIconId());
 				icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes != 0 ? iconRes : R.drawable.ic_person, profileColor));
 				subText.setVisibility(View.GONE);
-				icon.setVisibility(View.VISIBLE);
 				break;
 			case MAP_SOURCES:
 				title.setText(((ITileSource) currentItem).getName());
-				icon.setImageResource(R.drawable.ic_action_info_dark);
+				icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_map, nightMode));
 				subText.setVisibility(View.GONE);
-				icon.setVisibility(View.INVISIBLE);
 				break;
 			case CUSTOM_RENDER_STYLE:
 				String renderName = ((File) currentItem).getName();
 				renderName = renderName.replace('_', ' ').replaceAll(IndexConstants.RENDERER_INDEX_EXT, "");
 				title.setText(renderName);
 				icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_map_style, nightMode));
-				icon.setVisibility(View.VISIBLE);
 				subText.setVisibility(View.GONE);
 				break;
 			case CUSTOM_ROUTING:
@@ -207,14 +202,12 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				routingName = routingName.replace('_', ' ').replaceAll(".xml", "");
 				title.setText(routingName);
 				icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_route_distance, nightMode));
-				icon.setVisibility(View.VISIBLE);
 				subText.setVisibility(View.GONE);
 				break;
 			case AVOID_ROADS:
 				AvoidRoadInfo avoidRoadInfo = (AvoidRoadInfo) currentItem;
 				title.setText(avoidRoadInfo.name);
 				icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_alert, nightMode));
-				icon.setVisibility(View.VISIBLE);
 				subText.setVisibility(View.GONE);
 				break;
 			default:

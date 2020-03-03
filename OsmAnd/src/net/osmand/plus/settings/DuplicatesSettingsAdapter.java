@@ -90,25 +90,21 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 				int profileIconRes = AndroidUtils.getDrawableId(app, modeBean.iconName);
 				ProfileIconColors iconColor = modeBean.iconColor;
 				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(profileIconRes, iconColor.getColor(nightMode)));
-				itemHolder.icon.setVisibility(View.VISIBLE);
 			} else if (currentItem instanceof QuickAction) {
 				QuickAction action = (QuickAction) currentItem;
 				itemHolder.title.setText(action.getName(app));
 				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(action.getIconRes(), nightMode));
 				itemHolder.subTitle.setVisibility(View.GONE);
-				itemHolder.icon.setVisibility(View.VISIBLE);
 			} else if (currentItem instanceof PoiUIFilter) {
 				PoiUIFilter filter = (PoiUIFilter) currentItem;
 				itemHolder.title.setText(filter.getName());
 				int iconRes = RenderingIcons.getBigIconResourceId(filter.getIconId());
 				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(iconRes != 0 ? iconRes : R.drawable.ic_person, nightMode));
 				itemHolder.subTitle.setVisibility(View.GONE);
-				itemHolder.icon.setVisibility(View.VISIBLE);
 			} else if (currentItem instanceof ITileSource) {
 				itemHolder.title.setText(((ITileSource) currentItem).getName());
-				itemHolder.icon.setImageResource(R.drawable.ic_action_info_dark);
+				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_map, nightMode));
 				itemHolder.subTitle.setVisibility(View.GONE);
-				itemHolder.icon.setVisibility(View.INVISIBLE);
 			} else if (currentItem instanceof File) {
 				File file = (File) currentItem;
 				itemHolder.title.setText(file.getName());
@@ -117,13 +113,11 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 				} else if (file.getAbsolutePath().contains(IndexConstants.ROUTING_PROFILES_DIR)) {
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_route_distance, nightMode));
 				}
-				itemHolder.icon.setVisibility(View.VISIBLE);
 				itemHolder.subTitle.setVisibility(View.GONE);
 			} else if (currentItem instanceof AvoidRoadInfo) {
 				itemHolder.title.setText(((AvoidRoadInfo) currentItem).name);
 				itemHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_alert, nightMode));
 				itemHolder.subTitle.setVisibility(View.GONE);
-				itemHolder.icon.setVisibility(View.VISIBLE);
 			}
 			itemHolder.divider.setVisibility(shouldShowDivider(position) ? View.VISIBLE : View.GONE);
 		}
