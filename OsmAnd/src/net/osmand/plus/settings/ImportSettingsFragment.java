@@ -127,6 +127,15 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		if (Build.VERSION.SDK_INT >= 21) {
 			AndroidUtils.addStatusBarPadding21v(app, root);
 		}
+		final int buttonsHeight = app.getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_height);
+		expandableList.setPadding(0, 0, 0, buttonsHeight * 2);
+		expandableList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+			@Override
+			public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
+				expandableList.setPadding(0, 0, 0, buttonsHeight);
+				return false;
+			}
+		});
 		return root;
 	}
 
