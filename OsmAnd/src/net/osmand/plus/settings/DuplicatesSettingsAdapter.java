@@ -112,13 +112,12 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 			} else if (currentItem instanceof File) {
 				File file = (File) currentItem;
 				itemHolder.title.setText(file.getName());
-				if (file.getName().contains(IndexConstants.RENDERERS_DIR)) {
+				if (file.getAbsolutePath().contains(IndexConstants.RENDERERS_DIR)) {
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_map_style, nightMode));
-					itemHolder.icon.setVisibility(View.VISIBLE);
-				} else if (file.getName().contains(IndexConstants.ROUTING_PROFILES_DIR)) {
+				} else if (file.getAbsolutePath().contains(IndexConstants.ROUTING_PROFILES_DIR)) {
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_route_distance, nightMode));
-					itemHolder.icon.setVisibility(View.VISIBLE);
 				}
+				itemHolder.icon.setVisibility(View.VISIBLE);
 				itemHolder.subTitle.setVisibility(View.GONE);
 			} else if (currentItem instanceof AvoidRoadInfo) {
 				itemHolder.title.setText(((AvoidRoadInfo) currentItem).name);
