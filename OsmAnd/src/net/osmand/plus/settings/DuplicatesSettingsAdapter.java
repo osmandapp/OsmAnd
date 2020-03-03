@@ -36,12 +36,16 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 	private OsmandApplication app;
 	private UiUtilities uiUtilities;
 	private List<? super Object> items;
+	private int activeColorRes;
 
 	DuplicatesSettingsAdapter(OsmandApplication app, List<? super Object> items, boolean nightMode) {
 		this.app = app;
 		this.items = items;
 		this.nightMode = nightMode;
-		this.uiUtilities = app.getUIUtilities();
+		uiUtilities = app.getUIUtilities();
+		activeColorRes = nightMode
+				? R.color.icon_color_active_dark
+				: R.color.icon_color_active_light;
 	}
 
 	@NonNull
@@ -93,30 +97,30 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 			} else if (currentItem instanceof QuickAction) {
 				QuickAction action = (QuickAction) currentItem;
 				itemHolder.title.setText(action.getName(app));
-				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(action.getIconRes(), nightMode));
+				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(action.getIconRes(), activeColorRes));
 				itemHolder.subTitle.setVisibility(View.GONE);
 			} else if (currentItem instanceof PoiUIFilter) {
 				PoiUIFilter filter = (PoiUIFilter) currentItem;
 				itemHolder.title.setText(filter.getName());
 				int iconRes = RenderingIcons.getBigIconResourceId(filter.getIconId());
-				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(iconRes != 0 ? iconRes : R.drawable.ic_person, nightMode));
+				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(iconRes != 0 ? iconRes : R.drawable.ic_person, activeColorRes));
 				itemHolder.subTitle.setVisibility(View.GONE);
 			} else if (currentItem instanceof ITileSource) {
 				itemHolder.title.setText(((ITileSource) currentItem).getName());
-				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_map, nightMode));
+				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_map, activeColorRes));
 				itemHolder.subTitle.setVisibility(View.GONE);
 			} else if (currentItem instanceof File) {
 				File file = (File) currentItem;
 				itemHolder.title.setText(file.getName());
 				if (file.getAbsolutePath().contains(IndexConstants.RENDERERS_DIR)) {
-					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_map_style, nightMode));
+					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_map_style, activeColorRes));
 				} else if (file.getAbsolutePath().contains(IndexConstants.ROUTING_PROFILES_DIR)) {
-					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_route_distance, nightMode));
+					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
 				}
 				itemHolder.subTitle.setVisibility(View.GONE);
 			} else if (currentItem instanceof AvoidRoadInfo) {
 				itemHolder.title.setText(((AvoidRoadInfo) currentItem).name);
-				itemHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_alert, nightMode));
+				itemHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_alert, activeColorRes));
 				itemHolder.subTitle.setVisibility(View.GONE);
 			}
 			itemHolder.divider.setVisibility(shouldShowDivider(position) ? View.VISIBLE : View.GONE);
