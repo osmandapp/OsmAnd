@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="restore_all_profile_settings_descr">All profile settings will be restored to their original state after creating/importing this profile.</string>
+    <string name="restore_all_profile_settings">Restore all profile settings?</string>
     <string name="saving_new_profile">Saving new profile</string>
     <string name="profile_backup_failed">Could not back up profile.</string>
     <string name="import_rendering_file">Import rendering file</string>
