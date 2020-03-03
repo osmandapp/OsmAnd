@@ -168,7 +168,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	public void resetAppModePrefs(ApplicationMode appMode) {
 		if (appMode != null) {
 			if (appMode.isCustomProfile()) {
-				File file = getBackupFileForCustomMode(appMode);
+				File file = getBackupFileForCustomMode(app, appMode.getStringKey());
 				if (file.exists()) {
 					restoreCustomModeFromFile(file);
 				}
@@ -202,16 +202,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 				updateCopiedOrResetPrefs();
 			}
 		});
-	}
-
-	private File getBackupFileForCustomMode(ApplicationMode appMode) {
-		String fileName = appMode.getStringKey() + IndexConstants.OSMAND_SETTINGS_FILE_EXT;
-		File backupDir = app.getAppPath(IndexConstants.BACKUP_INDEX_DIR);
-		if (!backupDir.exists()) {
-			backupDir.mkdirs();
-		}
-
-		return new File(backupDir, fileName);
 	}
 
 	private void updateCopiedOrResetPrefs() {
@@ -346,8 +336,8 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 
 	private void setupResetToDefaultPref() {
 		Preference resetToDefault = findPreference(RESET_TO_DEFAULT);
-		if (getSelectedAppMode().isCustomProfile()
-				&& !getBackupFileForCustomMode(getSelectedAppMode()).exists()) {
+		ApplicationMode mode = getSelectedAppMode();
+		if (mode.isCustomProfile() && !getBackupFileForCustomMode(app, mode.getStringKey()).exists()) {
 			resetToDefault.setVisible(false);
 		} else {
 			resetToDefault.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_reset_to_default_dark,
@@ -469,5 +459,15 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 						Toast.LENGTH_SHORT).show();
 			}
 		}
+	}
+
+	public static File getBackupFileForCustomMode(OsmandApplication app, String appModeKey) {
+		String fileName = appModeKey + IndexConstants.OSMAND_SETTINGS_FILE_EXT;
+		File backupDir = app.getAppPath(IndexConstants.BACKUP_INDEX_DIR);
+		if (!backupDir.exists()) {
+			backupDir.mkdirs();
+		}
+
+		return new File(backupDir, fileName);
 	}
 }

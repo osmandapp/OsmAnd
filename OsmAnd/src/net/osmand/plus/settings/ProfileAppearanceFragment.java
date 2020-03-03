@@ -53,7 +53,6 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -69,6 +68,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	private static final Log LOG = PlatformUtil.getLog(ProfileAppearanceFragment.class);
 
 	public static final String TAG = ProfileAppearanceFragment.class.getName();
+
 	private static final String MASTER_PROFILE = "master_profile";
 	private static final String PROFILE_NAME = "profile_name";
 	private static final String SELECT_COLOR = "select_color";
@@ -89,7 +89,13 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	public static final String PROFILE_NAVIGATION_ICON_KEY = "profile_navigation_icon_key";
 	public static final String BASE_PROFILE_FOR_NEW = "base_profile_for_new";
 	public static final String IS_BASE_PROFILE_IMPORTED = "is_base_profile_imported";
+	public static final String IS_NEW_PROFILE_KEY = "is_new_profile_key";
+
 	private SelectProfileBottomSheetDialogFragment.SelectProfileListener parentProfileListener;
+	private SettingsHelper.SettingsExportListener exportListener;
+
+	private ProgressDialog progress;
+
 	private EditText baseProfileName;
 	private ApplicationProfileObject profile;
 	private ApplicationProfileObject changedProfile;
@@ -108,6 +114,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		profile = new ApplicationProfileObject();
+		exportListener = getSettingsExportListener();
 		ApplicationMode baseModeForNewProfile = null;
 		if (getArguments() != null) {
 			Bundle arguments = getArguments();
@@ -139,8 +146,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			changedProfile.routeService = profile.routeService;
 			changedProfile.locationIcon = profile.locationIcon;
 			changedProfile.navigationIcon = profile.navigationIcon;
+			isNewProfile = ApplicationMode.valueOfStringKey(changedProfile.stringKey, null) == null;
 		}
-		isNewProfile = ApplicationMode.valueOfStringKey(changedProfile.stringKey, null) == null;
 	}
 
 	public void setupAppProfileObjectFromAppMode(ApplicationMode baseModeForNewProfile) {
@@ -275,6 +282,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		if (changedProfile.parent != null) {
 			outState.putString(PROFILE_PARENT_KEY, changedProfile.parent.getStringKey());
 		}
+		outState.putBoolean(IS_NEW_PROFILE_KEY, isNewProfile);
 		outState.putBoolean(IS_BASE_PROFILE_IMPORTED, isBaseProfileImported);
 		outState.putSerializable(PROFILE_LOCATION_ICON_KEY, changedProfile.locationIcon);
 		outState.putSerializable(PROFILE_NAVIGATION_ICON_KEY, changedProfile.navigationIcon);
@@ -290,6 +298,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		isBaseProfileImported = savedInstanceState.getBoolean(IS_BASE_PROFILE_IMPORTED);
 		changedProfile.locationIcon = (LocationIcon) savedInstanceState.getSerializable(PROFILE_LOCATION_ICON_KEY);
 		changedProfile.navigationIcon = (NavigationIcon) savedInstanceState.getSerializable(PROFILE_NAVIGATION_ICON_KEY);
+		isNewProfile = savedInstanceState.getBoolean(IS_NEW_PROFILE_KEY);
 	}
 
 	@Override
@@ -635,6 +644,27 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		return parentProfileListener;
 	}
 
+	public SettingsHelper.SettingsExportListener getSettingsExportListener() {
+		if (exportListener == null) {
+			exportListener = new SettingsHelper.SettingsExportListener() {
+
+				@Override
+				public void onSettingsExportFinished(@NonNull File file, boolean succeed) {
+					FragmentActivity activity = getActivity();
+					if (progress != null && activity != null && AndroidUtils.isActivityNotDestroyed(activity)) {
+						progress.dismiss();
+					}
+					if (succeed) {
+						customProfileSaved();
+					} else {
+						app.showToastMessage(R.string.profile_backup_failed);
+					}
+				}
+			};
+		}
+		return exportListener;
+	}
+
 	void updateParentProfile(String profileKey, boolean isBaseProfileImported) {
 		deleteImportedProfile();
 		setupBaseProfileView(profileKey);
@@ -675,7 +705,10 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			mode.setLocationIcon(changedProfile.locationIcon);
 			mode.setNavigationIcon(changedProfile.navigationIcon);
 
-			profileSaved();
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				activity.onBackPressed();
+			}
 		}
 	}
 
@@ -757,6 +790,18 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 						ApplicationMode.valueOfStringKey(changedProfile.stringKey, null));
 			} else {
 				activity.onBackPressed();
+			}
+		}
+	}
+
+	private void customProfileSaved() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			FragmentManager fragmentManager = activity.getSupportFragmentManager();
+			if (!fragmentManager.isStateSaved()) {
+				fragmentManager.popBackStack();
+				BaseSettingsFragment.showInstance(activity, SettingsScreenType.CONFIGURE_PROFILE,
+						ApplicationMode.valueOfStringKey(changedProfile.stringKey, null));
 			}
 		}
 	}

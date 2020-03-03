@@ -101,6 +101,7 @@ public class SettingsHelper {
 	private boolean importSuspended;
 	private boolean collectOnly;
 	private ImportAsyncTask importTask;
+	private Map<File, ExportAsyncTask> exportAsyncTasks = new HashMap<>();
 
 	public interface SettingsImportListener {
 		void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items);
@@ -1930,6 +1931,17 @@ public class SettingsHelper {
 		return this.importTask.getFile();
 	}
 
+	public boolean isFileExporting(File file) {
+		return exportAsyncTasks.containsKey(file);
+	}
+
+	public void updateExportListener(File file, SettingsExportListener listener) {
+		ExportAsyncTask exportAsyncTask = exportAsyncTasks.get(file);
+		if (exportAsyncTask != null) {
+			exportAsyncTask.listener = listener;
+		}
+	}
+
 	@SuppressLint("StaticFieldLeak")
 	private class ImportItemsAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
@@ -2008,6 +2020,7 @@ public class SettingsHelper {
 
 		@Override
 		protected void onPostExecute(Boolean success) {
+			exportAsyncTasks.remove(file);
 			if (listener != null) {
 				listener.onSettingsExportFinished(file, success);
 			}
@@ -2022,11 +2035,11 @@ public class SettingsHelper {
 		new ImportAsyncTask(settingsFile, items, latestChanges, version, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public void exportSettings(@NonNull File fileDir, @NonNull String fileName,
-							   @Nullable SettingsExportListener listener,
-							   @NonNull List<SettingsItem> items) {
-		new ExportAsyncTask(new File(fileDir, fileName + OSMAND_SETTINGS_FILE_EXT), listener, items)
-				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	public void exportSettings(@NonNull File fileDir, @NonNull String fileName, @Nullable SettingsExportListener listener, @NonNull List<SettingsItem> items) {
+		File file = new File(fileDir, fileName + OSMAND_SETTINGS_FILE_EXT);
+		ExportAsyncTask exportAsyncTask = new ExportAsyncTask(file, listener, items);
+		exportAsyncTasks.put(file, exportAsyncTask);
+		exportAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public void exportSettings(@NonNull File fileDir, @NonNull String fileName, @Nullable SettingsExportListener listener,
