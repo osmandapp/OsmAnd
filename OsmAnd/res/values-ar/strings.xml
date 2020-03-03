@@ -278,7 +278,7 @@
     <string name="local_index_tile_data_downloadable">قابل للتحميل: %1$s</string>
     <string name="local_index_tile_data_maxzoom">أقصى تكبير: %1$s</string>
     <string name="local_index_tile_data_minzoom">أدنى تكبير: %1$s</string>
-    <string name="maps_define_edit">تعريف/تعديل…</string>
+    <string name="maps_define_edit">تعريف/تعديل</string>
     <string name="speak_descr">ضبط إعدادات نطق أسماء الشوارع، وتحذيرات المرور (توقيفات الإجبارية، ومطبات السرعة)، و تحذيرات كاميرات السرعة، و السرعة القصوى.</string>
     <string name="speak_street_names">نطق أسماء الشوارع ( نطق آلي TTS )</string>
     <string name="speak_speed_limit">السرعة القصوى</string>
@@ -509,7 +509,8 @@
     <string name="local_indexes_cat_srtm">بيانات الخطوط المحيطية</string>
     <string name="srtm_paid_version_msg">من فضلك فكر في شراء ملحق الخطوط المحيطية من Google Play لدعم المزيد من التطوير.</string>
     <string name="srtm_paid_version_title">الخطوط المحيطية</string>
-    <string name="recording_playing">جار تشغيل صوت من التّسجيل المحدد. %1$s</string>
+    <string name="recording_playing">جار تشغيل صوت من التّسجيل المحدد. 
+\n%1$s</string>
     <string name="zxing_barcode_scanner_not_found">برنامج ZXing للبحث عن الباركود غيرُ مثبّت. بحث في السّوق ؟</string>
     <string name="rendering_attr_contourLines_description">مستوى تكبير الخطوط المحيطية:</string>
     <string name="back_left">الأيسر الخلفي</string>
@@ -747,7 +748,7 @@
     <string name="amenity_type_seamark">سيمارك</string>
     <string name="poi_dialog_comment_default">متغير POI</string>
     <string name="tile_source_already_installed">الخريطة مثبتة بالفعل.</string>
-    <string name="select_tile_source_to_install">اختر خرائط :</string>
+    <string name="select_tile_source_to_install">اختر خرائط (جزء محدد) للتثبيت أو التحديث.</string>
     <string name="internet_not_available">لا يوجد اتصال بالإنترنت.</string>
     <string name="install_more">المزيد…</string>
     <string name="level_to_switch_vector_raster_descr">مستوى التقريب الأدنى لاستخدام خرائط التوجيه.</string>
@@ -1926,7 +1927,7 @@
     <string name="poi_namefinder_query_empty">أدخل موضوع البحث لإيجاد POI</string>
     <string name="thanks_yandex_traffic">شكراً Yandex على معلومات حركة المرور.</string>
     <string name="layer_yandex_traffic">حركة مرور Yandex</string>
-    <string name="layer_poi">نقاط الاهتمام POI</string>
+    <string name="layer_poi">نقاط الاهتمام POI…</string>
     <string name="context_menu_item_search_poi">بحث عن نقاط الاهتمام</string>
     <string name="use_trackball_descr">استخدم كرة التتبع لتحريك الخريطة.</string>
     <string name="use_trackball">استخدم كرة التعقب</string>
@@ -1970,7 +1971,8 @@
     <string name="background_service_wait_int">الانتظار الأقصى للإصلاح</string>
     <string name="voice_data_not_supported">إصدار غير معتمد من البيانات الصوتية</string>
     <string name="voice_data_corrupted">البيانات الصوتية المحددة تالفة</string>
-    <string name="sd_unmounted">بطاقة الذاكرة غير متاحة. لن تكون قادرا على رؤية الخرائط أو العثور على أماكن.</string>
+    <string name="sd_unmounted">بطاقة الذاكرة غير متاحة. 
+\nلن تكون قادرا على رؤية الخرائط أو العثور على أماكن.</string>
     <string name="sd_mounted_ro">بطاقة الذاكرة في وضع القراءة فقط. يمكنك فقط مشاهدة الخريطة المحملة مسبقا ولا يمكنك التحميل من الإنترنت.</string>
     <string name="route_tshr">انعطف يميناً بشكل حاد</string>
     <string name="route_tshl">انعطف يساراً بشكل حاد</string>
@@ -2144,8 +2146,7 @@
     <string name="quick_action_map_source">مصدر الخريطة</string>
     <string name="quick_action_map_source_title">مصدر الخريطة</string>
     <string name="quick_action_map_source_action">إضافة مصدر خريطة</string>
-    <string name="quick_action_map_source_switch">مصدر الخريطة:
-\n\"%s\"</string>
+    <string name="quick_action_map_source_switch">مصدر الخريطة تغير الى \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">تغيير موقع الزر</string>
     <string name="quick_action_showhide_favorites_descr">الضغط على زر الإجراء سيقوم بعرض أو إخفاء نقاطك المفضلة على الخريطة.</string>
     <string name="quick_action_fav_name_descr">دع الحقل فارغا إن كنت ترغب في استعمال العنوان أو اسم المكان.</string>
@@ -2505,7 +2506,7 @@
     <string name="group_will_be_removed_after_restart">سيتم إزالة المجموعة بعد إعادة تشغيل التطبيق.</string>
     <string name="shared_string_markers">العلامات</string>
     <string name="coordinates_format">نمط الإحداثيات</string>
-    <string name="use_system_keyboard">استخدم لوحة مفاتيح النظام</string>
+    <string name="use_system_keyboard">لوحة مفاتيح النظام</string>
     <string name="fast_coordinates_input_descr">اختر نسق إدخال الأحداثيات. يمكنك دائماً تغييره بالنقر على خيارات.</string>
     <string name="fast_coordinates_input">إدخال إحداثيات سريع</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">تجنب طرق الثلوج والطين</string>
@@ -2600,7 +2601,7 @@
     <string name="west_abbreviation">غ</string>
     <string name="south_abbreviation">ج</string>
     <string name="north_abbreviation">ش</string>
-    <string name="optional_point_name">الاسم الاختياري للنقطة</string>
+    <string name="optional_point_name">اسم النقطة</string>
     <string name="transport_nearby_routes_within">الطرق القريبة التي في الداخل</string>
     <string name="enter_the_file_name">أدخل اسم الملف.</string>
     <string name="map_import_error">خطأ أثناء استرجاع الخريطة</string>
@@ -3102,7 +3103,7 @@
     <string name="utm_format_descr">يستخدم أوسماند تنسيق UTM وهو مشابه ولكن غير مطابق لتنسيق UTM الناتو.</string>
     <string name="shared_string_example">مثال</string>
     <string name="navigate_point_format_utm">معيار الإحداثيات</string>
-    <string name="navigate_point_format_olc">فتح رمز الموقع</string>
+    <string name="navigate_point_format_olc">رمز موقع مفتوح</string>
     <string name="coordinates_format_info">سيتم تطبيق التنسيق المحدد في كل أنحاء التطبيق.</string>
     <string name="pref_selected_by_default_for_profiles">يتم تحديد هذا الاعداد بشكل افتراضي لملفات التعريف: %s</string>
     <string name="change_default_settings">تغيير الإعدادات</string>
@@ -3320,8 +3321,8 @@
     <string name="sett_generic_ext_input">لوحة المفاتيح</string>
     <string name="sett_wunderlinq_ext_input">وندرلينك</string>
     <string name="sett_parrot_ext_input">ببغاء</string>
-    <string name="new_route_calculated_dist_dbg">"المسار: المسافة%s ، وقت  التوجيه%s 
-\nالحساب:%.1f ث ،%d طرق ،%d تجانب)"</string>
+    <string name="new_route_calculated_dist_dbg">المسار: المسافة%s، وقت التوجيه %s.
+\nالحساب: %.1f ث، %d طريق، %d تجانب)</string>
     <string name="lang_oc">الأوكيتانية</string>
     <string name="get_discount_second_part">ثم %1$s</string>
     <string name="apply_to_current_profile">تطبيق فقط على \"%1$s\"</string>

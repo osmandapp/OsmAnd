@@ -1623,4 +1623,12 @@
     <string name="poi_park_ride_ferry">عبّارة</string>
     <string name="poi_generator_source_biomass">مصدر الطاقة: الكتلة الحيوية</string>
     <string name="reddit">موقع Reddit</string>
+    <string name="poi_park_ride">اصطف واركب</string>
+    <string name="poi_rtsa_scale_filter">فئة الصعوبة</string>
+    <string name="poi_climbing_crag_filter">تسلق الصخور</string>
+    <string name="poi_climbing_crag">نعم</string>
+    <string name="poi_access_bus">منفذ للحافلة</string>
+    <string name="poi_access_motorcycle">مدخل دراجات نارية</string>
+    <string name="poi_access_disabled">مدخل معاقين</string>
+    <string name="poi_cash_withdrawal_bank_card">سحب نقدي</string>
 </resources>
