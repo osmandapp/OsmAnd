@@ -16,6 +16,7 @@ import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -127,13 +128,20 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		if (Build.VERSION.SDK_INT >= 21) {
 			AndroidUtils.addStatusBarPadding21v(app, root);
 		}
-		final int buttonsHeight = app.getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_height);
-		expandableList.setPadding(0, 0, 0, buttonsHeight * 2);
-		expandableList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+		ViewTreeObserver treeObserver = buttonsContainer.getViewTreeObserver();
+		treeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
-			public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
-				expandableList.setPadding(0, 0, 0, buttonsHeight);
-				return false;
+			public void onGlobalLayout() {
+				if (buttonsContainer != null) {
+					ViewTreeObserver vts = buttonsContainer.getViewTreeObserver();
+					int height = buttonsContainer.getMeasuredHeight();
+					expandableList.setPadding(0, 0, 0, height);
+					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+						vts.removeOnGlobalLayoutListener(this);
+					} else {
+						vts.removeGlobalOnLayoutListener(this);
+					}
+				}
 			}
 		});
 		return root;
