@@ -71,10 +71,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="100dp"
                     android:gravity="center"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
+                    android:paddingLeft="@dimen/content_padding"
+                    android:paddingRight="@dimen/content_padding"
                     android:textSize="@dimen/default_list_text_size_large"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+	                android:paddingStart="@dimen/content_padding"
+	                android:paddingEnd="@dimen/content_padding" />
 
             </LinearLayout>
 

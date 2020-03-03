@@ -42,14 +42,17 @@
                     android:layout_marginRight="16dp"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:clickable="false"/>
+                    android:clickable="false"
+	                android:layout_marginStart="-8dp"
+	                android:layout_marginEnd="16dp" />
 
                 <ImageView
                     android:id="@+id/monthDropDownIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="16dp"
-                    android:src="@drawable/ic_action_arrow_drop_down"/>
+                    android:src="@drawable/ic_action_arrow_drop_down"
+	                android:layout_marginEnd="16dp" />
 
             </LinearLayout>
 
@@ -57,7 +60,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="56dp"
-                android:background="?attr/dashboard_divider"/>
+                android:background="?attr/dashboard_divider"
+	            android:layout_marginStart="56dp" />
 
             <LinearLayout
                 android:id="@+id/reportsButton"
@@ -81,7 +85,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+	                android:layout_marginEnd="16dp">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -105,7 +110,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="16dp"
-                    android:src="@drawable/ic_action_arrow_drop_down"/>
+                    android:src="@drawable/ic_action_arrow_drop_down"
+	                android:layout_marginEnd="16dp" />
 
             </LinearLayout>
         </LinearLayout>
@@ -152,7 +158,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="16dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+	                    android:layout_marginEnd="16dp">
 
                         <TextView
                             android:id="@+id/numberOfContributorsTitle"
@@ -178,7 +185,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="56dp"
-                android:background="?attr/dashboard_divider"/>
+                android:background="?attr/dashboard_divider"
+	            android:layout_marginStart="56dp" />
 
             <LinearLayout
                 android:id="@+id/numberOfEditsLayout"
@@ -201,7 +209,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+	                android:layout_marginEnd="16dp">
 
                     <TextView
                         android:id="@+id/numberOfEditsTitle"
@@ -226,7 +235,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="56dp"
-                android:background="?attr/dashboard_divider"/>
+                android:background="?attr/dashboard_divider"
+	            android:layout_marginStart="56dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -247,7 +257,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+	                android:layout_marginEnd="16dp">
 
                     <TextView
                         android:id="@+id/donationsTitle"
@@ -272,7 +283,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="56dp"
-                android:background="?attr/dashboard_divider"/>
+                android:background="?attr/dashboard_divider"
+	            android:layout_marginStart="56dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -300,7 +312,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="16dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+	                    android:layout_marginEnd="16dp">
 
                         <TextView
                             android:id="@+id/donationsTotalTitle"
@@ -325,7 +338,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginLeft="56dp"
-                    android:background="?attr/dashboard_divider"/>
+                    android:background="?attr/dashboard_divider"
+	                android:layout_marginStart="56dp" />
 
             </LinearLayout>
 
@@ -350,7 +364,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+	                android:layout_marginEnd="16dp">
 
                     <TextView
                         android:id="@+id/numberOfRecipientsTitle"
@@ -409,7 +424,7 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:clickable="false"
-                    android:gravity="left|center_vertical"
+                    android:gravity="start|center_vertical"
                     android:textSize="@dimen/default_desc_text_size"
                     osmand:textAllCapsCompat="false"
                     osmand:typeface="@string/font_roboto_medium"

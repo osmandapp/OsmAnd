@@ -52,7 +52,10 @@
 				tools:drawableLeft="@drawable/ic_action_map_language"
 				tools:ignore="UnusedAttribute"
 				tools:text="En"
-				tools:textColor="?attr/wikivoyage_active_color" />
+				tools:textColor="?attr/wikivoyage_active_color"
+				android:layout_marginEnd="@dimen/context_menu_padding_margin_small"
+				android:layout_marginStart="@dimen/context_menu_padding_margin_small"
+				tools:drawableStart="@drawable/ic_action_map_language" />
 
 			<android.support.v7.widget.AppCompatImageView
 				android:id="@+id/options_button"

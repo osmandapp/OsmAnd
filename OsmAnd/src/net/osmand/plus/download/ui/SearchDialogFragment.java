@@ -31,6 +31,7 @@ import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.OsmAndCollator;
 import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.Amenity;
@@ -61,6 +62,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class SearchDialogFragment extends DialogFragment implements DownloadEvents, OnItemClickListener {
 
@@ -416,7 +418,10 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 				Amenity amenity = cityItem.getAmenity();
 				WorldRegion downloadRegion = null;
 				try {
-					downloadRegion = osmandRegions.getSmallestBinaryMapDataObjectAt(amenity.getLocation()).getKey();
+					Map.Entry<WorldRegion, BinaryMapDataObject> res = osmandRegions.getSmallestBinaryMapDataObjectAt(amenity.getLocation());
+					if(res != null) {
+						downloadRegion = res.getKey();
+					}
 				} catch (IOException e) {
 					// ignore
 				}

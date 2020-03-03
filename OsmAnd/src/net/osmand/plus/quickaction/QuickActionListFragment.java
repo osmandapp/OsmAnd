@@ -86,7 +86,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        quickActionRegistry = getMapActivity().getMapLayers().getQuickActionRegistry();
+        quickActionRegistry = getMyApplication().getQuickActionRegistry();
 
         setUpToolbar(view);
         setUpQuickActionRV();

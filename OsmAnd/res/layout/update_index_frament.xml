@@ -13,7 +13,9 @@
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
         android:layout_marginTop="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+	    android:layout_marginEnd="0dp"
+	    android:layout_marginStart="0dp" />
 
     <net.osmand.plus.widgets.ButtonEx
         android:id="@+id/updateAllButton"

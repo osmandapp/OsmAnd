@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="regions">অঞ্চল</string>
-    
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="regions">অঞ্চল</string>
     <string name="region_maps">অঞ্চলভিত্তিক মানচিত্র</string>
     <string name="world_maps">বিশ্ব মানচিত্র</string>
-    
     <string name="hillshade_layer_disabled">পর্বতছায়া স্তর নিষ্ক্রিয়</string>
     <string name="favorite_category_add_new">নতুন সংযোজন</string>
     <string name="shared_string_markers">চিহ্নসমুহ</string>
@@ -15,4 +15,10 @@
     <string name="shared_string_finish">সম্পূর্ণ</string>
     <string name="plan_route">রাস্তা পরিকল্পনা</string>
     <string name="shared_string_sort">সাজানো</string>
-    </resources>
+    <string name="shared_string_app_default_w_val">এপ মনোনিত</string>
+    <string name="shared_string_angle">কোন</string>
+    <string name="recalc_angle_dialog_descr">আমার নিজের অবস্থান এবং গন্তব্য এর হিসাব করা অতিরিক্ত সরলরেখাংশ গুলো দেখানো হবে, যতক্ষণ না গন্তব্যে পৌছানোর রাস্তাটি আবার খুঁজে পাওয়া যাচ্ছে</string>
+    <string name="recalc_angle_dialog_title">আমার অবস্থান ও গন্তব্য এর মধ্যকার সর্বনিম্ন কোন</string>
+    <string name="shared_string_preparing">তৈরী করা হচ্ছে</string>
+    <string name="shared_string_nothing_selected">কিছু নির্বাচন করা হয়নি</string>
+</resources>

@@ -67,7 +67,6 @@ import net.osmand.plus.settings.bottomsheets.SingleSelectPreferenceBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -450,6 +449,10 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 					}
 				}
 			});
+			if (closeButton instanceof ImageView) {
+				UiUtilities.rotateImageByLayoutDirection(
+						(ImageView) closeButton, AndroidUtils.getLayoutDirection(app));
+			}
 		}
 
 		View switchProfile = toolbarContainer == null ? null : toolbarContainer.findViewById(R.id.profile_button);
@@ -610,7 +613,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	@ColorRes
 	protected int getActiveProfileColorRes() {
-		return getSelectedAppMode().getIconColorInfo().getColor(isNightMode());
+		return isProfileDependent() ? getSelectedAppMode().getIconColorInfo().getColor(isNightMode()) : R.color.icon_color_active_light;
 	}
 
 	@ColorRes
@@ -813,8 +816,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public static String getAppModeDescription(Context ctx, ApplicationMode mode) {
 		String description;
 		if (mode.isCustomProfile()) {
-			description = String.format(ctx.getString(R.string.profile_type_descr_string),
-					Algorithms.capitalizeFirstLetterAndLowercase(mode.getParent().toHumanString()));
+			description = ctx.getString(R.string.profile_type_custom_string);
 		} else {
 			description = ctx.getString(R.string.profile_type_base_string);
 		}

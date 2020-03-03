@@ -1996,15 +1996,15 @@ public class OpeningHoursParser {
 
 	private static void fillRuleArray(boolean[] array, Token[] pair) {
 		if (pair[0].mainNumber <= pair[1].mainNumber) {
-			for (int j = pair[0].mainNumber; j <= pair[1].mainNumber && j < array.length; j++) {
+			for (int j = pair[0].mainNumber; j <= pair[1].mainNumber && j >= 0 && j < array.length; j++) {
 				array[j] = true;
 			}
 		} else {
 			// overflow
-			for (int j = pair[0].mainNumber; j < array.length; j++) {
+			for (int j = pair[0].mainNumber; j >= 0 && j < array.length; j++) {
 				array[j] = true;
 			}
-			for (int j = 0; j <= pair[1].mainNumber; j++) {
+			for (int j = 0; j <= pair[1].mainNumber && j < array.length; j++) {
 				array[j] = true;
 			}
 		}

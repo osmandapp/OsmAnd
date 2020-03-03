@@ -27,7 +27,8 @@
         android:layout_height="32dp"
         android:layout_marginRight="8dp"
         android:indeterminate="true"
-        android:visibility="gone"/>
+        android:visibility="gone"
+	    android:layout_marginEnd="8dp" />
 
     <ImageButton
         android:id="@+id/clearButton"

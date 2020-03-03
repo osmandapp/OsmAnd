@@ -52,7 +52,9 @@
 						android:layout_marginLeft="@dimen/list_content_padding"
 						android:layout_marginRight="@dimen/list_content_padding"
 						android:contentDescription="@string/info_button"
-						android:src="@drawable/ic_action_info_dark" />
+						android:src="@drawable/ic_action_info_dark"
+						android:layout_marginEnd="@dimen/list_content_padding"
+						android:layout_marginStart="@dimen/list_content_padding" />
 
 					<LinearLayout
 						android:id="@+id/InfoDistance"
@@ -64,7 +66,7 @@
 							android:id="@+id/DistanceText"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:gravity="left"
+							android:gravity="start"
 							android:singleLine="true"
 							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"
@@ -74,7 +76,7 @@
 							android:id="@+id/DistanceTitle"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:gravity="left"
+							android:gravity="start"
 							android:text="@string/distance"
 							android:textColor="@color/description_font_and_bottom_sheet_icons"
 							android:textSize="@dimen/default_sub_text_size" />
@@ -106,7 +108,9 @@
 						android:layout_marginLeft="@dimen/list_content_padding"
 						android:layout_marginRight="@dimen/list_content_padding"
 						android:contentDescription="@string/info_button"
-						android:src="@drawable/ic_action_time" />
+						android:src="@drawable/ic_action_time"
+						android:layout_marginEnd="@dimen/list_content_padding"
+						android:layout_marginStart="@dimen/list_content_padding" />
 
 					<LinearLayout
 						android:id="@+id/InfoDuration"
@@ -118,7 +122,7 @@
 							android:id="@+id/DurationText"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:gravity="left"
+							android:gravity="start"
 							android:singleLine="true"
 							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"
@@ -128,7 +132,7 @@
 							android:id="@+id/DurationTitle"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:gravity="left"
+							android:gravity="start"
 							android:textColor="@color/description_font_and_bottom_sheet_icons"
 							android:textSize="@dimen/default_sub_text_size"
 							tools:text="@string/arrive_at_time" />
@@ -156,7 +160,9 @@
 			android:layout_marginTop="@dimen/route_info_details_padding"
 			android:layout_marginRight="@dimen/route_info_buttons_padding_top_bottom"
 			android:layout_marginBottom="@dimen/route_info_details_padding"
-			android:orientation="horizontal">
+			android:orientation="horizontal"
+			android:layout_marginEnd="@dimen/route_info_buttons_padding_top_bottom"
+			android:layout_marginStart="@dimen/route_info_buttons_padding_top_bottom">
 
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/details_button_descr"

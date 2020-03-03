@@ -130,17 +130,18 @@ public class ResourceManager {
 				readers.add(null);
 			}
 		}
-		
+
+		@Nullable
 		public BinaryMapIndexReader getReader(BinaryMapReaderResourceType type) {
 			BinaryMapIndexReader r = readers.get(type.ordinal());
-			if(r == null) {
+			BinaryMapIndexReader initialReader = this.initialReader;
+			if (r == null && initialReader != null) {
 				try {
 					RandomAccessFile raf = new RandomAccessFile(filename, "r");
 					r = new BinaryMapIndexReader(raf, initialReader);
 					readers.set(type.ordinal(), r);
 				} catch (IOException e) {
 					log.error("Fail to initialize " + filename.getName(), e);
-					e.printStackTrace();
 				}
 			}
 			return r;
@@ -150,16 +151,16 @@ public class ResourceManager {
 			return filename.getName();
 		}
 
-		
 		// should not use methods to read from file!
+		@Nullable
 		public BinaryMapIndexReader getShallowReader() {
 			return initialReader;
 		}
 
 		public void close() {
 			close(initialReader);
-			for(BinaryMapIndexReader rr : readers) {
-				if(rr != null) {
+			for (BinaryMapIndexReader rr : readers) {
+				if (rr != null) {
 					close(rr);
 				}
 			}
@@ -175,7 +176,6 @@ public class ResourceManager {
 				r.close();
 			} catch (IOException e) {
 				log.error("Fail to close " + filename.getName(), e);
-				e.printStackTrace();
 			}
 		}
 
@@ -219,7 +219,6 @@ public class ResourceManager {
 	private HandlerThread renderingBufferImageThread;
 	
 	protected boolean internetIsNotAccessible = false;
-	private java.text.DateFormat dateFormat;
 	private boolean depthContours;
 	
 	public ResourceManager(OsmandApplication context) {
@@ -237,7 +236,6 @@ public class ResourceManager {
 		renderingBufferImageThread.start();
 
 		tileDownloader = MapTileDownloader.getInstance(Version.getFullVersion(context));
-		dateFormat = DateFormat.getDateFormat(context);
 		resetStoreDirectory();
 
 		WindowManager mgr = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
@@ -296,7 +294,7 @@ public class ResourceManager {
 	}
 	
 	public java.text.DateFormat getDateFormat() {
-		return dateFormat;
+		return DateFormat.getDateFormat(context);
 	}
 	
 	public OsmandApplication getContext() {
@@ -405,6 +403,7 @@ public class ResourceManager {
 		if (file.exists() && file.canRead()) {
 			File[] lf = file.listFiles();
 			if (lf != null) {
+				java.text.DateFormat dateFormat = getDateFormat();
 				for (File f : lf) {
 					if (f.isDirectory()) {
 						String lang = f.getName().replace("-tts", "");
@@ -430,6 +429,7 @@ public class ResourceManager {
 		if (file.exists() && file.canRead()) {
 			File[] lf = file.listFiles();
 			if (lf != null) {
+				java.text.DateFormat dateFormat = getDateFormat();
 				for (File f : lf) {
 					if (!f.isDirectory()) {
 						indexFileNames.put(f.getName(), dateFormat.format(f.lastModified()));
@@ -671,6 +671,7 @@ public class ResourceManager {
 		if (hasWorldBasemap && worldBasemapMini != null) {
 			files.remove(worldBasemapMini);
 		}
+		java.text.DateFormat dateFormat = getDateFormat();
 		for (File f : files) {
 			progress.startTask(context.getString(R.string.indexing_map) + " " + f.getName(), -1); //$NON-NLS-1$
 			try {
@@ -994,7 +995,9 @@ public class ResourceManager {
 				List<TransportStop> stops = new ArrayList<>();
 				r.searchTransportStops(topLat, leftLon, bottomLat, rightLon, -1, stops, matcher);
 				BinaryMapIndexReader reader = ((TransportIndexRepositoryBinary) r).getOpenFile();
-				TransportRoutingContext.mergeTransportStops(reader, loadedTransportStops, stops, null, null);
+				if (reader != null) {
+					TransportRoutingContext.mergeTransportStops(reader, loadedTransportStops, stops, null, null);
+				}
 			}
 		}
 		List<TransportStop> stops = new ArrayList<>();
@@ -1107,9 +1110,12 @@ public class ResourceManager {
 		Collection<BinaryMapReaderResource> fileReaders = getFileReaders();
 		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
 		for (BinaryMapReaderResource r : fileReaders) {
-			if (r.getShallowReader().containsPoiData() ||
-					r.getShallowReader().containsAddressData()) {
-				readers.add(r.getReader(BinaryMapReaderResourceType.QUICK_SEARCH));
+			BinaryMapIndexReader shallowReader = r.getShallowReader();
+			if (shallowReader != null && (shallowReader.containsPoiData() || shallowReader.containsAddressData())) {
+				BinaryMapIndexReader reader = r.getReader(BinaryMapReaderResourceType.QUICK_SEARCH);
+				if (reader != null) {
+					readers.add(reader);
+				}
 			}
 		}
 		return readers.toArray(new BinaryMapIndexReader[readers.size()]);

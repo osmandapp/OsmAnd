@@ -29,26 +29,26 @@ public class SearchResult {
 	public boolean firstUnknownWordMatches = true;
 	public boolean unknownPhraseMatches = false;
 
+	public SearchResult(SearchPhrase sp) {
+		this.requiredSearchPhrase = sp;
+	}
+
 	public double getUnknownPhraseMatchWeight() {
+		return getUnknownPhraseMatchWeight(false);
+	}
+
+	private double getUnknownPhraseMatchWeight(boolean isHouse) {
 		double res = 0;
-		boolean isHouse = objectType == ObjectType.HOUSE;
+		isHouse = isHouse || objectType == ObjectType.HOUSE;
 		if (unknownPhraseMatches) {
-			res = ObjectType.getTypeWeight(objectType);
+			res = isHouse ? ObjectType.getTypeWeight(ObjectType.HOUSE) : ObjectType.getTypeWeight(objectType);
 		}
-		if (res == 0 && parentSearchResult != null && parentSearchResult.unknownPhraseMatches) {
-			if (isHouse && parentSearchResult.objectType == ObjectType.STREET) {
-				res = ObjectType.getTypeWeight(ObjectType.HOUSE);
-			} else {
-				res = ObjectType.getTypeWeight(parentSearchResult.objectType);
-			}
+		if (res == 0 && parentSearchResult != null) {
+			return parentSearchResult.getUnknownPhraseMatchWeight(isHouse);
 		}
 		return res;
 	}
 
-	public SearchResult(SearchPhrase sp) {
-		this.requiredSearchPhrase = sp;
-	}
-	
 	public int getFoundWordCount() {
 		int inc = 0;
 		if (firstUnknownWordMatches) {

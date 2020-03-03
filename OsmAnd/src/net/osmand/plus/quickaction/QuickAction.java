@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.util.Algorithms;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +25,7 @@ public class QuickAction {
     protected int type;
     protected long id;
 
-    private @StringRes int nameRes;
+    private @StringRes Integer nameRes;
     private @DrawableRes int iconRes;
     private boolean isActionEditable;
 
@@ -35,7 +36,7 @@ public class QuickAction {
         this.id = System.currentTimeMillis();
     }
 
-    protected QuickAction(int type, int nameRes) {
+    protected QuickAction(int type, @StringRes int nameRes) {
         this.id = System.currentTimeMillis();
         this.nameRes = nameRes;
         this.type = type;
@@ -89,7 +90,11 @@ public class QuickAction {
     }
 
     public String getName(Context context) {
-        return name == null || name.isEmpty() ? nameRes > 0 ? context.getString(nameRes) : "" : name;
+        if (Algorithms.isEmpty(name)) {
+            return nameRes != null ? context.getString(nameRes) : "";
+        } else {
+            return name;
+        }
     }
 
     public HashMap<String, String> getParams() {
@@ -157,5 +162,8 @@ public class QuickAction {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }
-}
 
+    public boolean hasCustomName(Context context) {
+        return !getName(context).equals(context.getString(nameRes));
+    }
+}

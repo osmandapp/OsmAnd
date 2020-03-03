@@ -292,7 +292,7 @@
     <string name="shared_string_refresh">Actualizar</string>
     <string name="fast_route_mode">Ruta más rápida</string>
     <string name="fast_route_mode_descr">Activar para calcular la ruta más rápida o desactivar para la más eficiente en combustible.</string>
-    <string name="tiles_to_download_estimated_size">En el zoom {0}, descarga {1} teselas ({2} MB)</string>
+    <string name="tiles_to_download_estimated_size">En el zoom {0}, se descargarán {1} teselas ({2} MB)</string>
     <string name="shared_string_download_map">Descargar mapa</string>
     <string name="select_max_zoom_preload_area">Zoom máximo a precargar</string>
     <string name="maps_could_not_be_downloaded">No se pudo descargar el mapa</string>
@@ -3515,7 +3515,6 @@
     <string name="shared_string_menu">Menú</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Enrutado</string>
-    <string name="shared_string_custom_rendering_style">Estilo de representación personalizado</string>
     <string name="shared_string_include_data">Incluir datos adicionales</string>
     <string name="import_profile_dialog_description">El perfil importado contiene datos adicionales. Pulsa en Importar para importar solo datos de perfil o seleccione datos adicionales para importar.</string>
     <string name="export_profile_dialog_description">Puedes seleccionar datos adicionales para exportar junto con el perfil.</string>

@@ -68,7 +68,7 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 		long id = args.getLong(SwitchableAction.KEY_ID);
 		OsmandApplication app = mapActivity.getMyApplication();
 
-		QuickActionRegistry quickActionRegistry = mapActivity.getMapLayers().getQuickActionRegistry();
+		QuickActionRegistry quickActionRegistry = app.getQuickActionRegistry();
 		action = quickActionRegistry.getQuickAction(id);
 		action = QuickActionFactory.produceAction(action);
 		if (action == null) {

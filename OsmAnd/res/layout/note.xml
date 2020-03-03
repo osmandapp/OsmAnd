@@ -19,7 +19,8 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:minHeight="@dimen/list_item_height"
-		android:paddingLeft="@dimen/list_content_padding">
+		android:paddingLeft="@dimen/list_content_padding"
+		android:paddingStart="@dimen/list_content_padding">
 		<CheckBox
 			android:id="@+id/check_local_index"
 			android:layout_width="wrap_content"
@@ -27,7 +28,8 @@
 			android:layout_gravity="center_vertical"
 			android:layout_marginRight="@dimen/local_index_check_right_margin"
 			android:focusable="false"
-			android:visibility="gone"/>
+			android:visibility="gone"
+			android:layout_marginEnd="@dimen/local_index_check_right_margin" />
 
 		<ImageView
 			android:id="@+id/icon"
@@ -35,7 +37,8 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
 			android:layout_marginRight="@dimen/favorites_icon_right_margin"
-			android:src="@drawable/ic_sdcard"/>
+			android:src="@drawable/ic_sdcard"
+			android:layout_marginEnd="@dimen/favorites_icon_right_margin" />
 
 		<LinearLayout
 			android:layout_width="0dp"
@@ -84,7 +87,8 @@
 			android:layout_gravity="center_vertical"
 			android:layout_marginLeft="@dimen/dashFavIconMargin"
 			android:background="?attr/dashboard_button"
-			android:src="@drawable/ic_play_dark"/>
+			android:src="@drawable/ic_play_dark"
+			android:layout_marginStart="@dimen/dashFavIconMargin" />
 		</LinearLayout>
 
 

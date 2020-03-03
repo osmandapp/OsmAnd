@@ -5,7 +5,9 @@
               xmlns:osmand="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:paddingLeft="@dimen/list_content_padding"
-              android:paddingRight="@dimen/list_content_padding">
+              android:paddingRight="@dimen/list_content_padding"
+	android:paddingStart="@dimen/list_content_padding"
+	android:paddingEnd="@dimen/list_content_padding">
 
     <net.osmand.plus.widgets.TextViewEx
         android:id="@+id/header_title"

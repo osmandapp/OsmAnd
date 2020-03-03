@@ -19,6 +19,8 @@
         android:contentDescription="@string/shared_string_delete"
         android:paddingLeft="2dp"
         android:paddingRight="2dp"
-        android:paddingTop="2dp" />
+        android:paddingTop="2dp"
+	    android:paddingEnd="2dp"
+	    android:paddingStart="2dp" />
 
 </LinearLayout>

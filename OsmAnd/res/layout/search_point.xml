@@ -5,7 +5,9 @@
     android:paddingLeft="@dimen/list_content_padding"
     android:paddingRight="@dimen/list_content_padding"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+	android:paddingEnd="@dimen/list_content_padding"
+	android:paddingStart="@dimen/list_content_padding">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -41,7 +43,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="@string/navigate_point_latitude"></TextView>
+                        android:text="@string/navigate_point_latitude"
+	                    android:layout_marginStart="5dp"></TextView>
 
                     <EditText
                         android:layout_width="fill_parent"
@@ -49,7 +52,9 @@
                         android:id="@+id/LatitudeEdit"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
-                        android:inputType="numberSigned|numberDecimal|time"></EditText>
+                        android:inputType="numberSigned|numberDecimal|time"
+	                    android:layout_marginStart="5dp"
+	                    android:layout_marginEnd="5dp"></EditText>
                 </TableRow>
 
                 <TableRow android:layout_width="fill_parent" android:id="@+id/lon_row">
@@ -59,7 +64,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="@string/navigate_point_longitude"></TextView>
+                        android:text="@string/navigate_point_longitude"
+	                    android:layout_marginStart="5dp"></TextView>
 
                     <EditText
                         android:layout_width="fill_parent"
@@ -67,7 +73,9 @@
                         android:id="@+id/LongitudeEdit"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
-                        android:inputType="numberSigned|numberDecimal|time"></EditText>
+                        android:inputType="numberSigned|numberDecimal|time"
+	                    android:layout_marginEnd="5dp"
+	                    android:layout_marginStart="5dp"></EditText>
                 </TableRow>
                 <TableRow android:layout_width="fill_parent" android:id="@+id/northing_row">
 
@@ -76,7 +84,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="@string/navigate_point_northing"></TextView>
+                        android:text="@string/navigate_point_northing"
+	                    android:layout_marginStart="5dp"></TextView>
 
                     <EditText
                         android:layout_width="fill_parent"
@@ -84,7 +93,9 @@
                         android:id="@+id/NorthingEdit"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
-                        android:inputType="numberSigned|numberDecimal|time"></EditText>
+                        android:inputType="numberSigned|numberDecimal|time"
+	                    android:layout_marginEnd="5dp"
+	                    android:layout_marginStart="5dp"></EditText>
                 </TableRow>
                 
                   <TableRow android:layout_width="fill_parent" android:id="@+id/easting_row">
@@ -94,7 +105,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="@string/navigate_point_easting"></TextView>
+                        android:text="@string/navigate_point_easting"
+	                    android:layout_marginStart="5dp"></TextView>
 
                     <EditText
                         android:layout_width="fill_parent"
@@ -102,7 +114,9 @@
                         android:id="@+id/EastingEdit"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
-                        android:inputType="numberSigned|numberDecimal|time"></EditText>
+                        android:inputType="numberSigned|numberDecimal|time"
+	                    android:layout_marginEnd="5dp"
+	                    android:layout_marginStart="5dp"></EditText>
                 </TableRow>
                 
                 <TableRow android:layout_width="fill_parent" android:id="@+id/zone_row">
@@ -112,14 +126,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="@string/navigate_point_zone"></TextView>
+                        android:text="@string/navigate_point_zone"
+	                    android:layout_marginStart="5dp"></TextView>
 
                     <EditText
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/ZoneEdit"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"></EditText>
+                        android:layout_marginRight="5dp"
+	                    android:layout_marginStart="5dp"
+	                    android:layout_marginEnd="5dp"></EditText>
                 </TableRow>
 
                 <TableRow android:layout_width="fill_parent" >
@@ -129,14 +146,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="@string/navigate_point_format"></TextView>
+                        android:text="@string/navigate_point_format"
+	                    android:layout_marginStart="5dp"></TextView>
 
                     <Spinner
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/Format"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"></Spinner>
+                        android:layout_marginRight="5dp"
+	                    android:layout_marginStart="5dp"
+	                    android:layout_marginEnd="5dp"></Spinner>
                 </TableRow>
 
                 <TextView

@@ -826,7 +826,7 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="always_center_position_on_map">Näytä sijainti aina keskellä</string>
     <string name="voice_is_not_available_msg">Ääniohjausta ei ole saatavilla. Mene \\\'Asetukset\\\' → \\\'Yleiset asetukset\\\' → \'\\Ääniohjaus\\\' ja valitse tai lataa äänikehote.</string>
     <string name="download_type_to_filter">etsi</string>
-    <string name="search_map_hint">Etsi kaupunkia tai aluetta</string>
+    <string name="search_map_hint">Kaupunki tai alue</string>
     <string name="route_roundabout_short">Poistu %1$d. liittymästä</string>
     <string name="route_calculation">Reitin laskenta</string>
     <string name="gpx_no_tracks_title">Sinulla ei ole vielä yhtään GPX-tiedostoa</string>
@@ -979,7 +979,7 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="storage_permission_restart_is_required">Sovelluksella on nyt lupa kirjoittaa ulkoiselle tallennusvälineelle. Uudelleenkäynnistys vaaditaan.</string>
     <string name="shared_string_topbar">Yläpalkki</string>
     <string name="full_report">Koko raportti</string>
-    <string name="open_street_map_login_and_pass">"OpenStreetMap-käyttäjätunnus ja  -salasana"</string>
+    <string name="open_street_map_login_and_pass">OSM-käyttäjänimi ja -salasana</string>
     <string name="osm_live_subscription">OSM Live -tilaus</string>
     <string name="osm_live_support_region">Tukialue</string>
     <string name="osm_live_month_cost">Kuukausikustannus</string>
@@ -1850,8 +1850,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="install_more">Asenna lisää…</string>
     <string name="level_to_switch_vector_raster_descr">Käytä rasterikarttoja kaikkeen, joka ylittää tämän tason.</string>
     <string name="level_to_switch_vector_raster">Pienin vektorien zoomaustaso</string>
-    <string name="create_poi_link_to_osm_doc">
-        <u>Online OSM</u> karttaluokittelu kuvilla.</string>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> karttaluokittelu kuvilla.</string>
     <string name="error_doing_search">Ei voitu suorittaa offline-hakua.</string>
     <string name="system_locale">Järjestelmä</string>
     <string name="preferred_locale_descr">Sovelluksen näyttökieli (käytetään, kun OsmAnd käynnistetään uudelleen).</string>
@@ -1955,8 +1954,8 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="coordinates_format">Koordinaattien muoto</string>
     <string name="use_system_keyboard">Käytä järjestelmän näppäimistöä</string>
     <string name="fast_coordinates_input">Nopea koordinaattien syöttö</string>
-    <string name="routing_attr_avoid_ice_roads_fords_name">Vältä jääteitä, kahlaamoja</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">Vältä jääteitä ja kahlaamoja.</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Ei jääteitä tai kahlaamoja</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Välttää jääteitä ja kahlaamoja.</string>
     <string name="use_location">Käytä sijaintia</string>
     <string name="add_location_as_first_point_descr">Lisää sijaintisi täydellisen reittisuunnitelmasi lähtöpisteeksi.</string>
     <string name="my_location">Sijaintini</string>
@@ -1972,7 +1971,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="remove_from_map_markers">Poista karttamarkkereista</string>
     <string name="descendingly">laskeva</string>
     <string name="ascendingly">nouseva</string>
-    <string name="date_added">Päiväys lisätty</string>
+    <string name="date_added">Lisätty</string>
     <string name="order_by">Järjestysperuste:</string>
     <string name="all_markers_moved_to_history">Kaikki karttamarkkerit siirretty historiaan</string>
     <string name="marker_moved_to_history">Karttamarkkeri siirretty historiaan</string>
@@ -2018,7 +2017,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="shared_string_install">Asenna</string>
     <string name="online_photos">Online-kuvat</string>
     <string name="shared_string_add_photos">Lisää kuviin</string>
-    <string name="no_photos_descr">Tästä sijainnista ei ole kuvia.</string>
+    <string name="no_photos_descr">Täällä ei ole kuvia.</string>
     <string name="mapillary">Mapillary</string>
     <string name="restart_search">Käynnistä haku uudelleen</string>
     <string name="nothing_found">Mitään ei löytynyt</string>
@@ -2108,7 +2107,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="last_intermediate_dest_description">Lisää välipysähdys</string>
     <string name="first_intermediate_dest_description">Lisää ensimmäisen pysähdys</string>
     <string name="show_closed_notes">Näytä suljetut huomautukset</string>
-    <string name="switch_osm_notes_visibility_desc">Näytä/Piilota OSM-huomautukset kartalla.</string>
+    <string name="switch_osm_notes_visibility_desc">Näytä/piilota OSM-huomautukset kartalla.</string>
     <string name="gpx_file_desc">GPX - soveltuu vietäväksi JOSM:iin tai muihin OSM-editoreihin.</string>
     <string name="osc_file_desc">OSC - soveltuu vietäväksi OpenStreetMappiin.</string>
     <string name="shared_string_gpx_file">GPX-tiedosto</string>
@@ -2118,7 +2117,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="all_data">Kaikki data</string>
     <string name="osm_notes">OSM-huomautukset</string>
     <string name="will_open_tomorrow_at">Aukeaa huomenna kello</string>
-    <string name="shared_string_without_name">Ilman nimiä</string>
+    <string name="shared_string_without_name">Ilman nimeä</string>
     <string name="what_is_here">Täällä on:</string>
     <string name="parked_at">pysäköity</string>
     <string name="pick_up_till">Noudettava ennen</string>
@@ -2193,7 +2192,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="route_is_calculated">Reitti laskettu</string>
     <string name="round_trip">Edestakainen matka</string>
     <string name="plan_route_no_markers_toast">Sinun täytyy lisätä ainakin yksi markkeri käyttääksesti tätä toimintoa.</string>
-    <string name="osn_modify_dialog_error">Huomautusta ei voitu muokata</string>
+    <string name="osn_modify_dialog_error">Huomautusta ei voitu muokata.</string>
     <string name="fast_coordinates_input_descr">Valitse koordinaattien syöttömuoto. Voit aina vaihtaa sen tökkäämällä asetuksia.</string>
     <string name="show_guide_line">Näytä suuntaviivat</string>
     <string name="show_passed">Näytä ohitetut</string>
@@ -2236,7 +2235,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="quick_action_auto_zoom_desc">Tämän toimintonappulan koskettaminen ottaa käyttöön/poistaa käytöstä nopeuteesi perustuvan kartan automaattisen tarkennuksen.</string>
     <string name="quick_action_auto_zoom_on">"Ota kartan automaattinen tarkennus käyttöön "</string>
     <string name="quick_action_auto_zoom_off">"Poista kartan automaattinen tarkennus käytöstä "</string>
-    <string name="quick_action_add_destination">Lisää määränpää</string>
+    <string name="quick_action_add_destination">Aseta määränpää</string>
     <string name="quick_action_replace_destination">Korvaa määränpää</string>
     <string name="quick_action_add_first_intermediate">Lisää ensimmäinen välietappi</string>
     <string name="quick_action_add_marker_descr">Näpäyttämällä tätä toimintonäppäintä lisäät karttamarkerin sijaintiin ruudun keskellä.</string>
@@ -2332,10 +2331,10 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="quick_action_show_hide_hillshade">Näytä/piilota rinnevarjostus</string>
     <string name="export_profile">Vie profiili</string>
     <string name="exported_osmand_profile">OsmAnd profiili: %1$s</string>
-    <string name="overwrite_profile_q">Profiili \'%1$s\' on jo olemassa. Korvataanko\?</string>
-    <string name="profile_import">Profiilin tuonti</string>
+    <string name="overwrite_profile_q">\'%1$s\' on jo olemassa. Korvataanko\?</string>
+    <string name="profile_import">Tuo profiili</string>
     <string name="file_import_error">%1$s tuontivirhe: %2$s</string>
-    <string name="file_imported_successfully">%1$s tuotu onnistuneesti.</string>
+    <string name="file_imported_successfully">%1$s tuotu.</string>
     <string name="rendering_value_white_name">Valkoinen</string>
     <string name="swap_two_places">Vaihda %1$s ja %2$s</string>
     <string name="route_start_point">Lähtöpiste</string>
@@ -2421,7 +2420,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="osm_live_payment_renews_monthly">Uudistuu kuukausittain</string>
     <string name="osm_live_payment_renews_annually">Uusitaan vuosittain</string>
     <string name="osm_live_payment_header">Maksuaika:</string>
-    <string name="osm_live_payment_contribute_descr">Lahjoitukset auttavat rahoittamaan OpenStreetMap-kartografiaa.</string>
+    <string name="osm_live_payment_contribute_descr">Lahjoitukset auttavat rahoittamaan OSM-kartografiaa.</string>
     <string name="shared_string_launch">Käynnistä</string>
     <string name="time_of_day">Vuorokaudenaika</string>
     <string name="shared_string_milliradians">milliradiaanit</string>
@@ -2444,7 +2443,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="base_profile_descr_car">Auto, kuorma-auto, moottoripyörä</string>
     <string name="base_profile_descr_bicycle">Maastopyörä, mopo, hevonen</string>
     <string name="base_profile_descr_pedestrian">Kävely, vaellus, juokseminen</string>
-    <string name="base_profile_descr_public_transport">Kaikki julkisen liikenteen tyypit</string>
+    <string name="base_profile_descr_public_transport">Julkisen liikenteen tyypit</string>
     <string name="base_profile_descr_boat">Laiva, soutu, purjehdus</string>
     <string name="base_profile_descr_aircraft">Lentokone, riippuliito</string>
     <string name="routing_profile_straightline">Suora viiva</string>
@@ -2469,7 +2468,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="routing_attr_width_name">Leveysraja</string>
     <string name="apply_preference_to_all_profiles">Voit käyttää tätä muutosta kaikkiin profiileihin tai vain valittuna olevaan profiiliin.</string>
     <string name="export_profile_failed">Profiilia ei voitu viedä.</string>
-    <string name="profile_import_descr">Jos haluat tuoda profiilin, valitse sen tiedosto laitteella ja avaa se OsmAnd-sovelluksella.</string>
+    <string name="profile_import_descr">Lisää profiili avaamalla sen tiedosto OsmAnd-sovelluksella.</string>
     <string name="local_openstreetmap_settings_descr">Näytä ja hallitse OSM KP:ta/laitteesi tietokannassa olevia huomautuksia.</string>
     <string name="mile_per_hour">mph</string>
     <string name="poi_namefinder_query_empty">Kirjoita löytääksesi KP:n</string>
@@ -2501,4 +2500,32 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="new_plugin_added">Uusi laajennus lisätty</string>
     <string name="join_segments">Yhdistä segmentit</string>
     <string name="add_segment_to_the_track">Lisää GPX-tiedostoon</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / kuukausi</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / kuukausi</string>
+    <string name="month">Kuukausi</string>
+    <string name="months_2_4">Kuukaudet</string>
+    <string name="months_3">Kolme kuukautta</string>
+    <string name="price_free">Ilmainen</string>
+    <string name="rendering_value_thick_name">Paksu</string>
+    <string name="choose_icon_color_name">Kuvake, väri ja nimi</string>
+    <string name="accessibility_prefs_descr">Valitse kuvake, väri ja nimi</string>
+    <string name="login_and_pass">Käyttäjänimi ja salasana</string>
+    <string name="shared_string_available">Saatavilla</string>
+    <string name="rendering_attr_streetLightingNight_name">Näytä vain yöllä</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="sunset_at">Auringonlasku klo %1$s</string>
+    <string name="sunrise_at">Auringonnousu klo %1$s</string>
+    <string name="clear_recorded_data">Tyhjennä tallennetut tiedot</string>
+    <string name="copy_coordinates">Kopioi koordinaatit</string>
+    <string name="open_settings">Avaa asetukset</string>
+    <string name="shared_string_menu">Valikko</string>
+    <string name="shared_string_routing">Reititys</string>
+    <string name="shared_string_angle_param">Kulma: %s°</string>
+    <string name="shared_string_angle">Kulma</string>
+    <string name="shared_string_preparing">Valmistellaan</string>
+    <string name="shared_string_poi_types">KP-tyypit</string>
+    <string name="shared_string_quick_actions">Pikatoiminnot</string>
+    <string name="shared_string_profiles">Profiilit</string>
+    <string name="replace_all">Korvaa kaikki</string>
+    <string name="keep_both">Pidä molemmat</string>
 </resources>

@@ -3169,7 +3169,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="sett_generic_ext_input">Clavier</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="sett_parrot_ext_input">Parrot</string>
-    <string name="select_base_profile_dialog_message">Basez votre profil personnalisé sur l\'un des profils par défaut pour définir les unités de vitesse, de distance ou la visibilité des widgets. Voici les profils par défaut de l\'application ainsi que des exemples de profils personnalisés :</string>
+    <string name="select_base_profile_dialog_message">Basez votre profil personnel sur l\'un des profils par défaut pour définir les unités de vitesse, de distance ou la visibilité des widgets. Voici les profils par défaut de l\'application ainsi que des exemples de profils personnalisés :</string>
     <string name="temporary_conditional_routing">Prendre en compte les limitations temporaires</string>
     <string name="shared_string_default">Par défaut</string>
     <string name="gpx_join_gaps">Relier les trous</string>
@@ -3505,15 +3505,33 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_menu">Menu</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Calcul d\'itinéraire</string>
-    <string name="shared_string_custom_rendering_style">Style de rendu personnalisé</string>
     <string name="shared_string_include_data">Inclure des données supplémentaires</string>
     <string name="import_profile_dialog_description">Le profil importé contient des données supplémentaires. Cliquez sur Importer pour n\'importer que les données de profil ou sélectionnez des données supplémentaires à importer.</string>
     <string name="export_profile_dialog_description">Vous pouvez sélectionner des données supplémentaires à exporter en même temps que le profil.</string>
     <string name="index_name_antarctica">Antarctique</string>
-    <string name="navigation_notification_desc">Pendant la navigation, afficher une notification système avec les directions.</string>
-    <string name="navigation_notification">Notification pendant la navigation</string>
     <string name="shared_string_app_default_w_val">Par défaut pour l\'application (%s)</string>
     <string name="no_recalculation_setting">Désactiver le re-calcul</string>
     <string name="route_recalculation_dist_title">Distance à partir de laquelle recalculer l’itinéraire</string>
     <string name="route_recalculation_dist_descr">L’itinéraire sera recalculé si votre éloignement de l\'itinéraire est supérieur à ce paramètre</string>
+    <string name="profile_type_custom_string">Profil personnel</string>
+    <string name="shared_string_angle_param">Angle : %s°</string>
+    <string name="shared_string_angle">Angle</string>
+    <string name="recalc_angle_dialog_descr">Un segment supplémentaire sera affiché entre ma position et l\'itinéraire initial jusqu\'à ce que l\'itinéraire soit recalculé</string>
+    <string name="recalc_angle_dialog_title">Angle minimum entre ma position et mon itinéraire</string>
+    <string name="shared_string_preparing">Préparation en cours</string>
+    <string name="shared_string_poi_types">Types de PI</string>
+    <string name="shared_string_nothing_selected">Aucun élément sélectionné</string>
+    <string name="shared_string_quick_actions">Actions rapides</string>
+    <string name="shared_string_profiles">Profils</string>
+    <string name="listed_exist">Les %1$s listés existent déjà dans OsmAnd.</string>
+    <string name="replace_all_desc">Les éléments actuels seront remplacés par les éléments du fichier</string>
+    <string name="replace_all">Tout remplacer</string>
+    <string name="keep_both">Conserver les deux</string>
+    <string name="keep_both_desc">Les éléments seront importés avec un préfixe</string>
+    <string name="import_duplicates_description">Des éléments portant les mêmes noms existent déjà dans OsmAnd.
+\n
+\nQue souhaitez-vous faire \?</string>
+    <string name="import_duplicates_title">Certains éléments existent déjà</string>
+    <string name="select_data_to_import">Sélectionnez les données à importer.</string>
+    <string name="shared_string_rendering_style">Style de rendu</string>
 </resources>

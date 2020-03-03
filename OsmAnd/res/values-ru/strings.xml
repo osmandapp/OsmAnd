@@ -3413,4 +3413,84 @@
     <string name="reset_all_profile_settings_descr">Все настройки профиля будут сброшены в значения по умолчанию после установки.</string>
     <string name="reset_all_profile_settings">Сбросить все настройки профиля в значения по умолчанию\?</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
+    <string name="file_does_not_contain_routing_rules">Нет правил маршрутизации в \'%1$s\'. Пожалуйста, выберите другой файл.</string>
+    <string name="permission_is_required">Для использования этой опции требуется разрешение.</string>
+    <string name="monitoring_min_speed_descr">Это низкоскоростной фильтр отсечки, чтобы не записывать точки ниже определенной скорости. Это может сделать записанные треки более гладкими при просмотре на карте.</string>
+    <string name="rearrange_categories">Перегруппировка категорий</string>
+    <string name="create_custom_categories_list_promo">Вы можете добавить пользовательские категории, скрыть категории, которые вам не нужны, и изменить порядок сортировки списка. Список можно импортировать и экспортировать с помощью профилей.</string>
+    <string name="add_new_custom_category_button_promo">Вы можете добавить новую пользовательскую категорию, выбрав одну или несколько необходимых категорий.</string>
+    <string name="reset_to_default_category_button_promo">Сброс к настройкам по умолчанию приведет к сбросу порядка сортировки к настройкам по умолчанию после установки.</string>
+    <string name="add_custom_category">Добавить пользовательскую категорию</string>
+    <string name="rendering_attr_streetLightingNight_name">Показывать только ночью</string>
+    <string name="plugin_prefs_reset_successful">Все настройки плагина восстановлены до состояния по умолчанию.</string>
+    <string name="profile_prefs_reset_successful">Все настройки профиля восстановлены до состояния по умолчанию.</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="sunset_at">Закат в %1$s</string>
+    <string name="sunrise_at">Восход в %1$s</string>
+    <string name="accessibility_mode_disabled">Режим специальных возможностей отключен в системе.</string>
+    <string name="use_system_screen_timeout">Использовать системную блокировку экрана</string>
+    <string name="use_system_screen_timeout_promo">По умолчанию отключено, если OsmAnd работает на переднем плане, экран не отключается.
+\n
+\nЕсли включено, OsmAnd будет использовать системные настройки блокировки экрана.</string>
+    <string name="clear_recorded_data">Очистить записанные данные</string>
+    <string name="release_3_6">• Профили: теперь вы можете изменить порядок, установить значок для карты, изменить все настройки для базовых профилей и вернуть их к настройкам по умолчанию
+\n
+\n• Добавлен номер съезда в навигации
+\n
+\n• Переработаны настройки плагина
+\n
+\n• Переработан экран настроек для быстрого доступа ко всем профилям
+\n
+\n• Добавлена возможность копирования настроек из другого профиля
+\n
+\n• Добавлена возможность изменить порядок или скрыть категории POI в поиске
+\n
+\n• Правильно выровненные значки POI на карте
+\n
+\n• Добавлены данные захода/восхода солнца для настройки карты
+\n
+\n• Добавлены значки \"Дом/работа\" на карте
+\n
+\n• Добавлена поддержка многострочного описания в настройках
+\n
+\n• Добавлена корректная транслитерация на карте Японии
+\n
+\n• Добавлена карта Антарктиды
+\n
+\n</string>
+    <string name="copy_coordinates">Копировать координаты</string>
+    <string name="please_provide_profile_name_message">Укажите имя профиля</string>
+    <string name="open_settings">Открыть настройки</string>
+    <string name="plugin_disabled">Плагин отключен</string>
+    <string name="plugin_disabled_descr">Этот плагин представляет собой отдельное приложение, вам нужно будет удалить его отдельно, если вы больше не планируете его использовать.
+\n
+\nПлагин останется на устройстве после удаления OsmAnd.</string>
+    <string name="shared_string_menu">Меню</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_routing">Маршрутизация</string>
+    <string name="shared_string_include_data">Включить дополнительные данные</string>
+    <string name="import_profile_dialog_description">Импортированный профиль содержит дополнительные данные. Нажмите «Импорт», чтобы импортировать только данные профиля, или выберите дополнительные данные для импорта.</string>
+    <string name="export_profile_dialog_description">Вы можете выбрать дополнительные данные для экспорта вместе с профилем.</string>
+    <string name="shared_string_app_default_w_val">Приложение по умолчанию (%s)</string>
+    <string name="no_recalculation_setting">Отключить перерасчет</string>
+    <string name="route_recalculation_dist_title">Минимальное расстояние для перерасчета маршрута</string>
+    <string name="route_recalculation_dist_descr">Маршрут будет пересчитан, если расстояние до него больше заданного параметра</string>
+    <string name="profile_type_custom_string">Пользовательский профиль</string>
+    <string name="shared_string_angle_param">Угол: %s°</string>
+    <string name="shared_string_angle">Угол</string>
+    <string name="recalc_angle_dialog_title">Минимальный угол между моим местоположением и маршрутом</string>
+    <string name="shared_string_preparing">Подготовка</string>
+    <string name="shared_string_poi_types">Типы POI</string>
+    <string name="shared_string_nothing_selected">Ничего не выбрано</string>
+    <string name="shared_string_quick_actions">Быстрые действия</string>
+    <string name="shared_string_profiles">Профили</string>
+    <string name="replace_all_desc">Текущие элементы будут заменены элементами из файла</string>
+    <string name="replace_all">Заменить все</string>
+    <string name="keep_both">Оставить оба</string>
+    <string name="keep_both_desc">Импортированные элементы будут добавлены с префиксом</string>
+    <string name="import_duplicates_description">В OsmAnd уже есть элементы с теми же именами, что и импортированные.
+\n
+\nВыберите действие.</string>
+    <string name="import_duplicates_title">Некоторые элементы уже существуют</string>
+    <string name="select_data_to_import">Выберите данные для импорта.</string>
 </resources>

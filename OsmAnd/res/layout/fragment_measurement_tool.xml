@@ -230,7 +230,10 @@
                     android:paddingLeft="@dimen/measurement_tool_button_padding"
                     android:paddingRight="@dimen/measurement_tool_button_padding"
                     android:text="@string/shared_string_add"
-                    android:textColor="@color/color_white"/>
+                    android:textColor="@color/color_white"
+	                android:drawableStart="@drawable/ic_action_plus"
+	                android:paddingEnd="@dimen/measurement_tool_button_padding"
+	                android:paddingStart="@dimen/measurement_tool_button_padding" />
             </FrameLayout>
 
         </LinearLayout>
@@ -257,7 +260,9 @@
                 android:paddingLeft="@dimen/measurement_tool_button_padding"
                 android:paddingRight="@dimen/measurement_tool_button_padding"
                 android:text="@string/shared_string_apply"
-                android:textColor="@color/color_white"/>
+                android:textColor="@color/color_white"
+	            android:paddingEnd="@dimen/measurement_tool_button_padding"
+	            android:paddingStart="@dimen/measurement_tool_button_padding" />
 
             <net.osmand.plus.widgets.TextViewEx
                 android:id="@+id/cancel_move_point_button"
@@ -316,7 +321,9 @@
                 android:paddingLeft="@dimen/measurement_tool_button_padding"
                 android:paddingRight="@dimen/measurement_tool_button_padding"
                 android:text="@string/shared_string_apply"
-                android:textColor="?attr/color_dialog_buttons"/>
+                android:textColor="?attr/color_dialog_buttons"
+	            android:paddingEnd="@dimen/measurement_tool_button_padding"
+	            android:paddingStart="@dimen/measurement_tool_button_padding" />
 
             <Button
                 android:id="@+id/add_point_before_after_button"
@@ -332,7 +339,10 @@
                 android:paddingLeft="@dimen/measurement_tool_button_padding"
                 android:paddingRight="@dimen/measurement_tool_button_padding"
                 android:text="@string/shared_string_add"
-                android:textColor="@color/color_white"/>
+                android:textColor="@color/color_white"
+	            android:drawableStart="@drawable/ic_action_plus"
+	            android:paddingEnd="@dimen/measurement_tool_button_padding"
+	            android:paddingStart="@dimen/measurement_tool_button_padding" />
         </LinearLayout>
 
     </LinearLayout>

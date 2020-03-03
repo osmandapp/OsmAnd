@@ -13,9 +13,12 @@
         android:layout_marginLeft="@dimen/dialog_elements_vertical_margin"
         android:layout_marginRight="@dimen/dialog_elements_vertical_margin"
         android:layout_weight="1"
+	    android:textColor="?android:textColorPrimary"
         android:gravity="center_vertical"
         android:textSize="@dimen/default_list_text_size"
-        tools:text="@string/lorem_ipsum"/>
+        tools:text="@string/lorem_ipsum"
+	    android:layout_marginEnd="@dimen/dialog_elements_vertical_margin"
+	    android:layout_marginStart="@dimen/dialog_elements_vertical_margin" />
 
     <ImageView
         android:id="@+id/iconImageView"
@@ -27,6 +30,8 @@
         android:gravity="center_vertical"
         android:maxLines="2"
         android:src="@drawable/ic_action_remove_dark"
-        android:textSize="@dimen/default_desc_text_size"/>
+        android:textSize="@dimen/default_desc_text_size"
+	    android:layout_marginEnd="@dimen/dialog_elements_vertical_margin"
+	    android:layout_marginStart="3dp" />
 
 </LinearLayout>

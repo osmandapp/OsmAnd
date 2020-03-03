@@ -251,12 +251,12 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		if (app.getSettings().SHOW_DOWNLOAD_MAP_DIALOG.get()
 				&& zoom >= ZOOM_MIN_TO_SHOW_DOWNLOAD_DIALOG && zoom <= ZOOM_MAX_TO_SHOW_DOWNLOAD_DIALOG
 				&& currentObjects != null) {
-			WorldRegion regionData;
+
 			Map<WorldRegion, BinaryMapDataObject> selectedObjects = new LinkedHashMap<>();
 			for (int i = 0; i < currentObjects.size(); i++) {
 				final BinaryMapDataObject o = currentObjects.get(i);
 				String fullName = osmandRegions.getFullName(o);
-				regionData = osmandRegions.getRegionData(fullName);
+				WorldRegion regionData = osmandRegions.getRegionData(fullName);
 				if (regionData != null && regionData.isRegionMapDownload()) {
 					String regionDownloadName = regionData.getRegionDownloadName();
 					if (regionDownloadName != null) {
@@ -272,8 +272,9 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 			IndexItem indexItem = null;
 			String name = null;
-			regionData  = app.getRegions().getSmallestBinaryMapDataObjectAt(selectedObjects).getKey();
-			if (regionData != null) {
+			Map.Entry<WorldRegion, BinaryMapDataObject> res = app.getRegions().getSmallestBinaryMapDataObjectAt(selectedObjects);
+			if (res != null && res.getKey() != null) {
+				WorldRegion regionData  = res.getKey();
 				DownloadIndexesThread downloadThread = app.getDownloadThread();
 				List<IndexItem> indexItems = downloadThread.getIndexes().getIndexItems(regionData);
 				if (indexItems.size() == 0) {

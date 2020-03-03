@@ -9,7 +9,9 @@
     android:layout_marginBottom="@dimen/dash_margin"
     android:layout_marginLeft="@dimen/dash_margin_h"
     android:layout_marginRight="@dimen/dash_margin_h"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+	android:layout_marginStart="@dimen/dash_margin_h"
+	android:layout_marginEnd="@dimen/dash_margin_h">
 
     <LinearLayout
         android:layout_width="fill_parent"

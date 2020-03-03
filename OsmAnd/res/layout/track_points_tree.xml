@@ -14,7 +14,9 @@
         android:divider="@null"
         android:dividerHeight="0dp"
         android:drawSelectorOnTop="false"
-        android:groupIndicator="@android:color/transparent"/>
+        android:groupIndicator="@android:color/transparent"
+	    android:layout_marginEnd="0dp"
+	    android:layout_marginStart="0dp" />
 
     <View
         android:id="@+id/overlay_view"

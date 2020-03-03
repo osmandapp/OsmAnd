@@ -7,13 +7,15 @@
               android:descendantFocusability="blocksDescendants"
               android:minHeight="@dimen/list_item_height"
               android:orientation="horizontal"
-              android:paddingLeft="@dimen/list_content_padding">
+              android:paddingLeft="@dimen/list_content_padding"
+              android:paddingStart="@dimen/list_content_padding">
 
     <CheckBox
         android:id="@+id/check_local_index"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/local_index_check_right_margin"
+        android:layout_marginEnd="@dimen/local_index_check_right_margin"
         android:layout_marginTop="@dimen/favorites_icon_top_margin"
         android:focusable="false"
         android:visibility="gone"/>
@@ -23,6 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/favorites_icon_right_margin"
+        android:layout_marginEnd="@dimen/favorites_icon_right_margin"
         android:layout_marginTop="@dimen/favorites_icon_top_margin"
         android:focusable="false"
         android:src="@drawable/ic_gpx_track"/>
@@ -53,6 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="7dp"
+                android:layout_marginEnd="7dp"
                 android:textColor="?android:textColorSecondary"
                 android:textSize="@dimen/default_sub_text_size"
                 tools:text="12.34 Mb * 10/4/2015"/>

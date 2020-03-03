@@ -6,7 +6,9 @@
     android:paddingTop="1dp"
     android:paddingBottom="1dp"
     android:paddingLeft="16dp"
-    android:paddingRight="16dp">
+    android:paddingRight="16dp"
+	android:paddingStart="16dp"
+	android:paddingEnd="16dp">
 
     <!--
         ppenguin 2016-03-07: more compact layout (less padding) for landscape, to allow the maximum

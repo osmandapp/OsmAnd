@@ -19,7 +19,9 @@
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
         android:layout_marginBottom="0dp"
-        android:layout_marginTop="0dp" >
+        android:layout_marginTop="0dp"
+	    android:layout_marginEnd="3dp"
+	    android:layout_marginStart="3dp">
 
         <ProgressBar
             android:id="@+id/ProgressBar"
@@ -49,7 +51,9 @@
             android:layout_marginBottom="-5dp"
             android:layout_marginTop="0dp"
             android:padding="0dp"
-            android:text="@string/shared_string_clear" />
+            android:text="@string/shared_string_clear"
+	        android:layout_marginStart="0dp"
+	        android:layout_marginEnd="0dp" />
 
     </LinearLayout>
 
@@ -60,6 +64,8 @@
         android:dividerHeight="1dp"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
-        android:layout_marginTop="0dp" />
+        android:layout_marginTop="0dp"
+	    android:layout_marginEnd="3dp"
+	    android:layout_marginStart="3dp" />
 
 </LinearLayout>

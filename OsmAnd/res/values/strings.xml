@@ -11,13 +11,26 @@
 	Thx - Hardy
 
 -->
+    <string name="import_rendering_file">Import rendering file</string>
+    <string name="profile_type_custom_string">Custom profile</string>
     <string name="shared_string_angle_param">Angle: %s°</string>
     <string name="shared_string_angle">Angle</string>
     <string name="recalc_angle_dialog_descr">Extra straight segment between my location and calculated route will be displayed until the route is recalculated</string>
     <string name="recalc_angle_dialog_title">Minimum angle between my location and route</string>
-    <string name="navigation_notification_desc">Show system notification while navigation with navigation instructions.</string>
-    <string name="navigation_notification">Navigation notification</string>
     <string name="shared_string_app_default_w_val">App Default (%s)</string>
+    <string name="shared_string_preparing">Preparing</string>
+    <string name="shared_string_poi_types">POI types</string>
+    <string name="shared_string_nothing_selected">Nothing selected</string>
+    <string name="shared_string_quick_actions">Quick actions</string>
+    <string name="shared_string_profiles">Profiles</string>
+    <string name="listed_exist">Listed %1$s, already exist in OsmAnd.</string>
+    <string name="replace_all_desc">Current items will be replaced with items from the file</string>
+    <string name="replace_all">Replace all</string>
+    <string name="keep_both">Keep both</string>
+    <string name="keep_both_desc">Imported items will be added with prexif</string>
+    <string name="import_duplicates_description">OsmAnd already has elements with the same names as those imported.\n\nSelect an action.</string>
+    <string name="import_duplicates_title">Some items already exist</string>
+    <string name="select_data_to_import">Select the data to be imported.</string>
     <string name="please_provide_profile_name_message">Please provide a name for the profile</string>
     <string name="no_recalculation_setting">Disable recalculation</string>
     <string name="open_settings">Open settings</string>
@@ -60,7 +73,7 @@
     <string name="sunset_at">Sunset at %1$s</string>
     <string name="sunrise_at">Sunrise at %1$s</string>
     <string name="shared_string_routing">Routing</string>
-    <string name="shared_string_custom_rendering_style">Custom rendering style</string>
+    <string name="shared_string_rendering_style">Rendering style</string>
     <string name="shared_string_include_data">Include additional data</string>
     <string name="import_profile_dialog_description">The imported profile contains additional data. Click Import to import only profile data or select additional data to import.</string>
     <string name="export_profile_dialog_description">You can select additional data to export along with the profile.</string>

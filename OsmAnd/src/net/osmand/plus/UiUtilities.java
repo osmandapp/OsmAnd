@@ -14,17 +14,18 @@ import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v4.text.TextUtilsCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.TintableCompoundButton;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -377,11 +378,17 @@ public class UiUtilities {
 		}
 		view.setBackgroundColor(ContextCompat.getColor(ctx, backgroundColor));
 	}
+
+	public static void rotateImageByLayoutDirection(ImageView image, int layoutDirection) {
+		if (image == null) {
+			return;
+		}
+		int rotation = layoutDirection == View.LAYOUT_DIRECTION_LTR ? 0 : 180;
+		image.setRotationY(rotation);
+	}
 	
 	public static void setupLayoutDirection(View layout) {
-		Context ctx = layout.getContext();
-		Locale currentLocale = ctx.getResources().getConfiguration().locale;
-		int direction = TextUtilsCompat.getLayoutDirectionFromLocale(currentLocale);
+		int direction = AndroidUtils.getLayoutDirection(layout.getContext());
 		ViewCompat.setLayoutDirection(layout, direction);
 	}
 
@@ -456,22 +463,29 @@ public class UiUtilities {
 		compoundButton.setBackgroundColor(Color.TRANSPARENT);
 	}
 	
-	public static void setupSeekBar(OsmandApplication app, SeekBar seekBar, boolean nightMode, boolean profileDependent) {
+	public static void setupSeekBar(@NonNull OsmandApplication app, @NonNull SeekBar seekBar, 
+	                                boolean nightMode, boolean profileDependent) {
 		int activeColor = ContextCompat.getColor(app, profileDependent ?
 				app.getSettings().APPLICATION_MODE.get().getIconColorInfo().getColor(nightMode) :
 				nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 		setupSeekBar(seekBar, activeColor, nightMode);
 	}
 
-	public static void setupSeekBar(SeekBar seekBar, @ColorInt int activeColor, boolean nightMode) {
-		int backgroundColor = ContextCompat.getColor(seekBar.getContext(),
-				nightMode ? R.color.icon_color_secondary_dark : R.color.icon_color_default_light);
+	public static void setupSeekBar(@NonNull SeekBar seekBar, @ColorInt int activeColor, boolean nightMode) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-			LayerDrawable progressBarDrawable = (LayerDrawable) seekBar.getProgressDrawable();
-			Drawable backgroundDrawable = progressBarDrawable.getDrawable(0);
-			Drawable progressDrawable = progressBarDrawable.getDrawable(2);
-			backgroundDrawable.setColorFilter(backgroundColor, PorterDuff.Mode.SRC_IN);
-			progressDrawable.setColorFilter(activeColor, PorterDuff.Mode.SRC_IN);
+			int backgroundColor = ContextCompat.getColor(seekBar.getContext(), nightMode
+					? R.color.icon_color_secondary_dark : R.color.icon_color_default_light);
+			if (seekBar.getProgressDrawable() instanceof LayerDrawable) {
+				LayerDrawable progressDrawable = (LayerDrawable) seekBar.getProgressDrawable();
+				Drawable background = progressDrawable.findDrawableByLayerId(android.R.id.background);
+				if (background != null) {
+					background.setColorFilter(backgroundColor, PorterDuff.Mode.SRC_IN);
+				}
+				Drawable progress = progressDrawable.findDrawableByLayerId(android.R.id.progress);
+				if (progress != null) {
+					progress.setColorFilter(activeColor, PorterDuff.Mode.SRC_IN);
+				}
+			}
 			seekBar.getThumb().setColorFilter(activeColor, PorterDuff.Mode.SRC_IN);
 		}
 	}
@@ -536,5 +550,13 @@ public class UiUtilities {
 
 	public static Context getThemedContext(Context context, boolean nightMode, int lightStyle, int darkStyle) {
 		return new ContextThemeWrapper(context, nightMode ? darkStyle : lightStyle);
+	}
+
+	public static void setMargins(View v, int l, int t, int r, int b) {
+		if (v.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+			ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+			p.setMargins(l, t, r, b);
+			v.requestLayout();
+		}
 	}
 }

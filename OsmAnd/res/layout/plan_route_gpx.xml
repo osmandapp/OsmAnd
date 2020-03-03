@@ -8,7 +8,9 @@
 	android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
 	android:orientation="horizontal"
 	android:paddingLeft="@dimen/content_padding"
-	android:paddingRight="@dimen/content_padding">
+	android:paddingRight="@dimen/content_padding"
+	android:paddingEnd="@dimen/content_padding"
+	android:paddingStart="@dimen/content_padding">
 
 	<ImageView
 		android:id="@+id/icon"

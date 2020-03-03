@@ -33,7 +33,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:layout_margin="16dp"
+                android:layout_margin="@dimen/content_padding"
                 tools:src="@drawable/ic_action_gabout_dark" />
 
             <android.support.v7.widget.SwitchCompat
@@ -43,10 +43,10 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginEnd="@dimen/content_padding"
+                android:layout_marginLeft="@dimen/content_padding"
+                android:layout_marginRight="@dimen/content_padding"
+                android:layout_marginStart="@dimen/content_padding"
                 android:focusable="false" />
 
             <android.support.v7.widget.AppCompatTextView
@@ -65,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"
                 android:layout_alignParentBottom="true"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="@dimen/content_padding_small"
                 android:layout_toEndOf="@+id/toggle_row_icon"
                 android:layout_toRightOf="@+id/toggle_row_icon"
                 android:background="?attr/dashboard_divider" />
@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_margin="16dp"
+                android:layout_margin="@dimen/content_padding"
                 tools:src="@drawable/ic_layer_top" />
 
             <Button
@@ -93,8 +93,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginEnd="@dimen/content_padding"
+                android:layout_marginRight="@dimen/content_padding"
                 android:background="?attr/selectableItemBackground"
                 android:gravity="end|center_vertical"
                 android:minWidth="0dp"
@@ -112,7 +112,7 @@
                 android:layout_toStartOf="@id/button_reload_tile"
                 android:minHeight="60dp"
                 android:orientation="vertical"
-                android:paddingBottom="12dp"
+                android:paddingBottom="@dimen/content_padding_small"
                 android:paddingTop="10dp">
 
                 <android.support.v7.widget.AppCompatTextView
@@ -155,8 +155,10 @@
                 android:gravity="center"
                 android:minHeight="48dp"
                 android:orientation="vertical"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp">
+                android:paddingLeft="@dimen/content_padding"
+                android:paddingRight="@dimen/content_padding"
+	            android:paddingStart="@dimen/content_padding"
+	            android:paddingEnd="@dimen/content_padding">
 
                 <net.osmand.plus.widgets.TextViewEx
                     android:layout_width="match_parent"
@@ -193,18 +195,18 @@
                 android:id="@+id/mapillary_filters_user_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_margin="@dimen/content_padding"
                 tools:src="@drawable/ic_action_user" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginEnd="@dimen/content_padding"
+                android:layout_marginRight="@dimen/content_padding"
                 android:minHeight="60dp"
                 android:orientation="vertical"
-                android:paddingBottom="12dp"
+                android:paddingBottom="@dimen/content_padding_small"
                 android:paddingTop="10dp">
 
                 <android.support.v7.widget.AppCompatTextView
@@ -237,8 +239,8 @@
                 android:id="@+id/auto_complete_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginEnd="@dimen/content_padding"
+                android:layout_marginRight="@dimen/content_padding"
                 android:completionThreshold="1"
                 android:hint="@string/mapillary_menu_edit_text_hint"
                 android:inputType="text"
@@ -262,8 +264,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="@dimen/content_padding_half"
+                    android:layout_marginStart="@dimen/content_padding_half"
                     android:text="@string/wrong_user_name"
                     android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/default_sub_text_size"
@@ -287,18 +289,18 @@
                 android:id="@+id/mapillary_filters_date_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_margin="@dimen/content_padding"
                 tools:src="@drawable/ic_action_data" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginEnd="@dimen/content_padding"
+                android:layout_marginRight="@dimen/content_padding"
                 android:minHeight="60dp"
                 android:orientation="vertical"
-                android:paddingBottom="12dp"
+                android:paddingBottom="@dimen/content_padding_small"
                 android:paddingTop="10dp">
 
                 <android.support.v7.widget.AppCompatTextView
@@ -329,14 +331,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp">
+                android:layout_marginEnd="@dimen/content_padding"
+                android:layout_marginRight="@dimen/content_padding">
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
-                    android:layout_marginRight="12dp"
+                    android:layout_marginEnd="@dimen/content_padding_small"
+                    android:layout_marginRight="@dimen/content_padding_small"
                     android:layout_weight="1">
 
                     <EditText
@@ -353,8 +355,8 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginStart="12dp"
+                    android:layout_marginLeft="@dimen/content_padding_small"
+                    android:layout_marginStart="@dimen/content_padding_small"
                     android:layout_weight="1">
 
                     <EditText
@@ -372,7 +374,7 @@
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/content_padding"
                 android:background="?attr/dashboard_divider" />
         </LinearLayout>
 
@@ -391,10 +393,10 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginEnd="@dimen/content_padding"
+                android:layout_marginLeft="@dimen/content_padding"
+                android:layout_marginRight="@dimen/content_padding"
+                android:layout_marginStart="@dimen/content_padding"
                 android:focusable="false" />
 
             <android.support.v7.widget.AppCompatTextView
@@ -406,7 +408,8 @@
                 android:layout_alignParentStart="true"
                 android:textAppearance="@style/TextAppearance.ListItemTitle"
                 android:text="@string/mapillary_menu_title_pano"
-                android:paddingLeft="52dp" />
+                android:paddingLeft="52dp"
+	            android:paddingStart="52dp" />
         </RelativeLayout>
 
         <LinearLayout
@@ -454,8 +457,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
+                    android:layout_marginEnd="@dimen/content_padding"
+                    android:layout_marginRight="@dimen/content_padding"
                     android:background="?attr/selectableItemBackground"
                     android:gravity="end|center_vertical"
                     android:minWidth="0dp"

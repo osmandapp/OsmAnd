@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
@@ -36,7 +37,9 @@ public class WhatsNewDialogFragment extends DialogFragment {
 				public void onClick(DialogInterface dialog, int which) {
 					Intent i = new Intent(Intent.ACTION_VIEW);
 					i.setData(Uri.parse(AppInitializer.LATEST_CHANGES_URL));
-					startActivity(i);
+					if (AndroidUtils.isIntentSafe(osmandApplication, i)) {
+						startActivity(i);
+					}
 					dismiss();
 				}
 			});

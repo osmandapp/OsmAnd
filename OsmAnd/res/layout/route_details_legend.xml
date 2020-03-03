@@ -8,7 +8,9 @@
 	android:minHeight="@dimen/route_info_legend_item_size"
 	android:orientation="horizontal"
 	android:paddingLeft="@dimen/content_padding"
-	android:paddingRight="@dimen/content_padding">
+	android:paddingRight="@dimen/content_padding"
+	android:paddingStart="@dimen/content_padding"
+	android:paddingEnd="@dimen/content_padding">
 
 	<ImageView
 		android:id="@+id/legend_icon_color"

@@ -44,7 +44,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="12dp"
-                    android:gravity="left|center_vertical">
+                    android:gravity="start|center_vertical"
+	                android:layout_marginStart="12dp">
 
                     <ImageView
                         android:id="@+id/leftButtonIcon"
@@ -63,7 +64,9 @@
                         android:layout_marginRight="8dp"
                         android:text="@string/shared_string_hide"
                         android:textColor="?android:textColorSecondary"
-                        android:textSize="@dimen/default_list_text_size"/>
+                        android:textSize="@dimen/default_list_text_size"
+	                    android:layout_marginEnd="8dp"
+	                    android:layout_marginStart="8dp" />
 
                 </LinearLayout>
 
@@ -99,7 +102,9 @@
                         android:layout_marginRight="8dp"
                         android:text="@string/shared_string_control_stop"
                         android:textColor="?android:textColorSecondary"
-                        android:textSize="@dimen/default_list_text_size"/>
+                        android:textSize="@dimen/default_list_text_size"
+	                    android:layout_marginEnd="8dp"
+	                    android:layout_marginStart="8dp" />
 
                 </LinearLayout>
 
@@ -137,7 +142,9 @@
                         android:layout_marginRight="8dp"
                         android:text="@string/shared_string_control_stop"
                         android:textColor="?android:textColorSecondary"
-                        android:textSize="@dimen/default_list_text_size"/>
+                        android:textSize="@dimen/default_list_text_size"
+	                    android:layout_marginEnd="8dp"
+	                    android:layout_marginStart="8dp" />
 
                 </LinearLayout>
 
@@ -157,10 +164,12 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
-                    android:gravity="right"
+                    android:gravity="end"
                     android:text="00:00:00"
                     android:textColor="?android:textColorSecondary"
-                    android:textSize="@dimen/default_list_text_size"/>
+                    android:textSize="@dimen/default_list_text_size"
+	                android:layout_marginStart="12dp"
+	                android:layout_marginEnd="12dp" />
 
             </LinearLayout>
 

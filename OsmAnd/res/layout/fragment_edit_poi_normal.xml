@@ -15,11 +15,12 @@
             android:id="@+id/contactInfoTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="@dimen/content_padding"
             android:layout_marginTop="18dp"
             android:text="@string/contact_info"
             android:textColor="?android:textColorPrimary"
-            osmand:typeface="@string/font_roboto_medium"/>
+            osmand:typeface="@string/font_roboto_medium"
+	        android:layout_marginStart="@dimen/content_padding" />
 
         <ImageView
             android:id="@+id/streetImageView"
@@ -93,12 +94,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/descriptionEditText"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="@dimen/content_padding"
             android:layout_marginTop="18dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="@dimen/content_padding"
             android:text="@string/opening_hours"
             android:textColor="?android:textColorPrimary"
-            osmand:typeface="@string/font_roboto_medium"/>
+            osmand:typeface="@string/font_roboto_medium"
+	        android:layout_marginStart="@dimen/content_padding" />
 
         <LinearLayout
             android:id="@+id/openHoursContainer"
@@ -112,7 +114,7 @@
             android:id="@+id/openingHoursImageView"
             style="@style/edit_poi_imageview_style"
             android:layout_below="@id/openHoursContainer"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="@dimen/content_padding_small"
             tools:src="@drawable/ic_action_time"/>
 
         <net.osmand.plus.widgets.ButtonEx
@@ -123,6 +125,7 @@
             android:layout_marginLeft="72dp"
             android:text="@string/add_opening_hours"
             android:textSize="@dimen/default_sub_text_size"
-            osmand:typeface="@string/font_roboto_medium"/>
+            osmand:typeface="@string/font_roboto_medium"
+	        android:layout_marginStart="72dp" />
     </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>
