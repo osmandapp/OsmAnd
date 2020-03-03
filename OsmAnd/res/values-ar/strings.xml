@@ -3495,4 +3495,5 @@
     <string name="import_duplicates_title">بعض العناصر موجودة بالفعل</string>
     <string name="select_data_to_import">حدد البيانات التي سيتم استيرادها.</string>
     <string name="shared_string_rendering_style">أسلوب التقديم</string>
+    <string name="import_rendering_file">استيراد ملف الrendering</string>
 </resources>
