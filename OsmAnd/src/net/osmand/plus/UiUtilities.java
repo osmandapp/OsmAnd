@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -23,6 +24,9 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.TintableCompoundButton;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.SwitchCompat;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,15 +38,20 @@ import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.widgets.TextViewEx;
+
+import org.apache.commons.logging.Log;
 
 import java.util.Locale;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class UiUtilities {
+
+	private static final Log LOG = PlatformUtil.getLog(UiUtilities.class);
 
 	private TLongObjectHashMap<Drawable> drawableCache = new TLongObjectHashMap<>();
 	private OsmandApplication app;
@@ -557,6 +566,24 @@ public class UiUtilities {
 			ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
 			p.setMargins(l, t, r, b);
 			v.requestLayout();
+		}
+	}
+
+	public static SpannableString createSpannableString(@NonNull String text,
+														@NonNull String textToStyle,
+														@NonNull StyleSpan styleSpan) {
+		SpannableString spannable = new SpannableString(text);
+		try {
+			int startIndex = text.indexOf(textToStyle);
+			spannable.setSpan(
+					styleSpan,
+					startIndex,
+					startIndex + textToStyle.length(),
+					Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+			return spannable;
+		} catch (RuntimeException e) {
+			LOG.error("Error trying to find index of " + textToStyle + " " + e);
+			return spannable;
 		}
 	}
 }

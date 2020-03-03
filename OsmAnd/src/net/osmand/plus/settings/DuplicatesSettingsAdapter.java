@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.IndexConstants;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ApplicationMode.ApplicationModeBean;
@@ -111,12 +112,12 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 			} else if (currentItem instanceof File) {
 				File file = (File) currentItem;
 				itemHolder.title.setText(file.getName());
-				if (file.getName().contains("/rendering/")) {
+				if (file.getName().contains(IndexConstants.RENDERERS_DIR)) {
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_map_style, nightMode));
 					itemHolder.icon.setVisibility(View.VISIBLE);
-				} else {
-					itemHolder.icon.setImageResource(R.drawable.ic_action_info_dark);
-					itemHolder.icon.setVisibility(View.INVISIBLE);
+				} else if (file.getName().contains(IndexConstants.ROUTING_PROFILES_DIR)) {
+					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_route_distance, nightMode));
+					itemHolder.icon.setVisibility(View.VISIBLE);
 				}
 				itemHolder.subTitle.setVisibility(View.GONE);
 			} else if (currentItem instanceof AvoidRoadInfo) {

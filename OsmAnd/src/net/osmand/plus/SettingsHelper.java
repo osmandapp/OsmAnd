@@ -50,7 +50,6 @@ import java.io.OutputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -102,7 +101,11 @@ public class SettingsHelper {
 	private boolean importing;
 	private boolean importSuspended;
 	private boolean collectOnly;
+	private boolean checkingDuplicates;
 	private ImportAsyncTask importTask;
+	private CheckDuplicatesTask checkDuplicatesTask;
+	private List<SettingsItem> importedItems;
+	private List<SettingsItem> selectedItems;
 
 	public interface SettingsImportListener {
 		void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items);
@@ -110,6 +113,10 @@ public class SettingsHelper {
 
 	public interface SettingsExportListener {
 		void onSettingsExportFinished(@NonNull File file, boolean succeed);
+	}
+
+	public interface CheckDuplicatesListener {
+		void onDuplicatesChecked(@NonNull List<Object> duplicates, List<SettingsItem> items);
 	}
 
 	public SettingsHelper(OsmandApplication app) {
@@ -139,6 +146,14 @@ public class SettingsHelper {
 
 	public boolean isImporting() {
 		return importing;
+	}
+
+	public boolean isCheckingDuplicates() {
+		return checkingDuplicates;
+	}
+
+	public boolean isCollectOnly() {
+		return collectOnly;
 	}
 
 	public enum SettingsItemType {
@@ -261,6 +276,11 @@ public class SettingsHelper {
 		@NonNull
 		public List<T> getItems() {
 			return items;
+		}
+
+		@NonNull
+		public List<T> getDuplicateItems() {
+			return duplicateItems;
 		}
 
 		@NonNull
@@ -1801,7 +1821,7 @@ public class SettingsHelper {
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	private class ImportAsyncTask extends AsyncTask<Void, Void, List<SettingsItem>> {
+	public class ImportAsyncTask extends AsyncTask<Void, Void, List<SettingsItem>> {
 
 		private File file;
 		private String latestChanges;
@@ -1925,16 +1945,53 @@ public class SettingsHelper {
 		public File getFile() {
 			return this.file;
 		}
+
+		public void setListener(SettingsImportListener listener) {
+			this.listener = listener;
+		}
 	}
 
 	@Nullable
 	public List<SettingsItem> getSettingsItems() {
-		return this.importTask.getItems();
+		return importTask != null ? importTask.getItems() : null;
 	}
 
 	@Nullable
 	public File getSettingsFile() {
-		return this.importTask.getFile();
+		return importTask != null ? importTask.getFile() : null;
+	}
+
+	@Nullable
+	public List<SettingsItem> getImportedItems() {
+		return importedItems;
+	}
+
+	@Nullable
+	public List<Object> getDuplicatesItems() {
+		return checkDuplicatesTask != null ? checkDuplicatesTask.getDuplicates() : null;
+	}
+
+	public void setImportedItems(@Nullable List<SettingsItem> importedItems) {
+		this.importedItems = importedItems;
+	}
+
+	@Nullable
+	public CheckDuplicatesTask getCheckDuplicatesTask() {
+		return checkDuplicatesTask;
+	}
+
+	@Nullable
+	public ImportAsyncTask getImportTask() {
+		return importTask;
+	}
+
+	@Nullable
+	public List<SettingsItem> getSelectedItems() {
+		return selectedItems;
+	}
+
+	public void setSelectedItems(@Nullable List<SettingsItem> selectedItems) {
+		this.selectedItems = selectedItems;
 	}
 
 	@SuppressLint("StaticFieldLeak")
@@ -1977,9 +2034,11 @@ public class SettingsHelper {
 		importing = false;
 		importSuspended = false;
 		importTask = null;
+		checkDuplicatesTask = null;
 		if (listener != null) {
 			listener.onSettingsImportFinished(success, empty, items);
 		}
+		importedItems = items;
 	}
 
 	@SuppressLint("StaticFieldLeak")
@@ -2031,6 +2090,84 @@ public class SettingsHelper {
 				}
 			}
 		}
+	}
+
+	@SuppressLint("StaticFieldLeak")
+	public class CheckDuplicatesTask extends AsyncTask<Void, Void, List<Object>> {
+
+		private List<SettingsItem> items;
+		private List<Object> duplicates;
+		private CheckDuplicatesListener listener;
+		private long startTime;
+
+		CheckDuplicatesTask(@NonNull List<SettingsItem> items, CheckDuplicatesListener listener) {
+			this.items = items;
+			this.listener = listener;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			selectedItems = this.items;
+			checkingDuplicates = true;
+			checkDuplicatesTask = this;
+			startTime = System.currentTimeMillis();
+		}
+
+		@Override
+		protected List<Object> doInBackground(Void... voids) {
+			long currentTime = System.currentTimeMillis();
+			List<Object> duplicateItems = getDuplicatesData(this.items);
+			if (currentTime - startTime < 700) {
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					LOG.error("Error on check duplicates delay" + e);
+				}
+			}
+			return duplicateItems;
+		}
+
+		@Override
+		protected void onPostExecute(List<Object> objects) {
+			duplicates = objects;
+			if (listener != null) {
+				listener.onDuplicatesChecked(objects, this.items);
+			}
+			checkingDuplicates = false;
+		}
+
+		private List<Object> getDuplicatesData(List<SettingsItem> items) {
+			List<Object> duplicateItems = new ArrayList<>();
+			for (SettingsItem item : items) {
+				if (item instanceof SettingsHelper.ProfileSettingsItem) {
+					if (item.exists()) {
+						duplicateItems.add(((SettingsHelper.ProfileSettingsItem) item).getModeBean());
+					}
+				} else if (item instanceof SettingsHelper.CollectionSettingsItem) {
+					List duplicates = ((CollectionSettingsItem) item).excludeDuplicateItems();
+					if (!duplicates.isEmpty()) {
+						duplicateItems.addAll(duplicates);
+					}
+				} else if (item instanceof SettingsHelper.FileSettingsItem) {
+					if (item.exists()) {
+						duplicateItems.add(((SettingsHelper.FileSettingsItem) item).getFile());
+					}
+				}
+			}
+			return duplicateItems;
+		}
+
+		public void setListener(CheckDuplicatesListener listener) {
+			this.listener = listener;
+		}
+
+		List<Object> getDuplicates() {
+			return duplicates;
+		}
+	}
+
+	public void checkDuplicates(@NonNull List<SettingsItem> items, CheckDuplicatesListener listener) {
+		new CheckDuplicatesTask(items, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public void importSettings(@NonNull File settingsFile, String latestChanges, int version,

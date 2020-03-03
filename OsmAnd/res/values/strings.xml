@@ -12,6 +12,13 @@
 
 -->
     <string name="import_rendering_file">Import rendering file</string>
+    <string name="importing_from">Importing data from %1$s</string>
+    <string name="shared_string_importing">Importing</string>
+    <string name="checking_for_duplicate_description">OsmAnd check %1$s for duplicates with existing items in the application.\n\nIt may take some time.</string>
+    <string name="items_added">Items added: %1$s</string>
+    <string name="shared_string_quick_action">Quick action</string>
+    <string name="shared_string_import_complete">Import complete</string>
+    <string name="import_complete_description">All data from the %1$s is imported, you can use buttons below to open needed part of the application to manage it.</string>
     <string name="profile_type_custom_string">Custom profile</string>
     <string name="shared_string_angle_param">Angle: %s°</string>
     <string name="shared_string_angle">Angle</string>

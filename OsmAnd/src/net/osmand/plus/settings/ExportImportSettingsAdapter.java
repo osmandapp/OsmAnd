@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.IndexConstants;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -44,18 +45,10 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	private boolean importState;
 	private int profileColor;
 
-	ExportImportSettingsAdapter(OsmandApplication app, List<AdditionalDataWrapper> dataList, boolean nightMode, boolean importState) {
+	ExportImportSettingsAdapter(OsmandApplication app, boolean nightMode, boolean importState) {
 		this.app = app;
-		this.dataList = dataList;
 		this.nightMode = nightMode;
 		this.importState = importState;
-		this.dataToOperate = new ArrayList<>();
-		this.profileColor = app.getSettings().getApplicationMode().getIconColorInfo().getColor(nightMode);
-	}
-
-	ExportImportSettingsAdapter(OsmandApplication app, boolean nightMode) {
-		this.app = app;
-		this.nightMode = nightMode;
 		this.dataList = new ArrayList<>();
 		this.dataToOperate = new ArrayList<>();
 		this.profileColor = app.getSettings().getApplicationMode().getIconColorInfo().getColor(nightMode);
@@ -203,17 +196,17 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				break;
 			case CUSTOM_RENDER_STYLE:
 				String renderName = ((File) currentItem).getName();
-				renderName = renderName.replace('_', ' ').replaceAll(".render.xml", "");
+				renderName = renderName.replace('_', ' ').replaceAll(IndexConstants.RENDERER_INDEX_EXT, "");
 				title.setText(renderName);
-				icon.setImageResource(R.drawable.ic_action_info_dark);
-				icon.setVisibility(View.INVISIBLE);
+				icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_map_style, nightMode));
+				icon.setVisibility(View.VISIBLE);
 				subText.setVisibility(View.GONE);
 				break;
 			case CUSTOM_ROUTING:
 				String routingName = ((File) currentItem).getName();
 				routingName = routingName.replace('_', ' ').replaceAll(".xml", "");
 				title.setText(routingName);
-				icon.setImageResource(R.drawable.ic_action_map_style);
+				icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_route_distance, nightMode));
 				icon.setVisibility(View.VISIBLE);
 				subText.setVisibility(View.GONE);
 				break;

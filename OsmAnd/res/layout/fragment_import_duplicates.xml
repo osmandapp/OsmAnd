@@ -129,11 +129,21 @@
 				osmand:titleMarginStart="0dp"
 				osmand:layout_collapseMode="pin"
 				osmand:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
-				osmand:title="@string/import_duplicates_title">
+				tools:title="@string/import_duplicates_title">
 
 			</android.support.v7.widget.Toolbar>
 
 		</android.support.design.widget.CollapsingToolbarLayout>
+
+		<ProgressBar
+				android:id="@+id/progress_bar"
+				style="?android:attr/progressBarStyleHorizontal"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:minHeight="0dp"
+				android:indeterminate="true"
+				android:visibility="gone"
+				tools:visibility="visible" />
 
 	</android.support.design.widget.AppBarLayout>
 
