@@ -60,7 +60,7 @@ public class ImportedSettingsItemsAdapter extends
 				listener.onItemClick(currentItem.getType());
 			}
 		});
-		setupSubTitle(holder.subTitle, currentItem.getItems().size());
+		holder.subTitle.setText(String.format(app.getString(R.string.items_added), String.valueOf(currentItem.getItems().size())));
 
 		switch (currentItem.getType()) {
 			case PROFILE:
@@ -93,29 +93,6 @@ public class ImportedSettingsItemsAdapter extends
 				break;
 		}
 	}
-
-	private void setupSubTitle(TextView subTitle, int count) {
-		int stringRes;
-		if (count > 100)
-			count %= 100;
-		if (count > 20)
-			count %= 10;
-		switch (count) {
-			case 1:
-				stringRes = R.string.added_one_item;
-				break;
-			case 2:
-			case 3:
-			case 4:
-				stringRes = R.string.added_two_items;
-				break;
-			default:
-				stringRes = R.string.added_five_items;
-				break;
-		}
-		subTitle.setText(String.format(app.getString(stringRes), String.valueOf(count)));
-	}
-
 
 	@Override
 	public int getItemCount() {
