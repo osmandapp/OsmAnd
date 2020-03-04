@@ -1899,7 +1899,7 @@ Punktar</string>
     <string name="routing_attr_height_obstacles_name">Nota hæðargögn</string>
     <string name="move_marker_bottom_sheet_title">Færa kortið til að breyta staðsetningu kortamerkis</string>
     <string name="osm_user_stat">Breytingar %1$s, vægi %2$s, heildarfjöldi breytinga %3$s</string>
-    <string name="osm_editors_ranking">Vægisröðun OSM-ritsjóra</string>
+    <string name="osm_editors_ranking">Vægisröðun OSM-ritstjóra</string>
     <string name="download_files_error_not_enough_space">Ekki nægilegt geymslupláss!
 \n {3} MB þarf tímabundið, {1} MB varanlega. (Tiltækt pláss er einungis {2} MB.)</string>
     <string name="download_files_question_space_with_temp">Sækja {0} skrá(r)\?
@@ -3572,4 +3572,6 @@ Stendur fyrir svæði: %1$s x %2$s</string>
 \nVeldu aðgerð.</string>
     <string name="import_duplicates_title">Sum atriðin eru þegar til staðar</string>
     <string name="select_data_to_import">Veldu þau gögn sem á að flytja inn.</string>
+    <string name="shared_string_rendering_style">Myndgerðarstíll</string>
+    <string name="import_rendering_file">Flytja inn myndgerðarskrá</string>
 </resources>
