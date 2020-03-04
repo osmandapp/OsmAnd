@@ -11,6 +11,9 @@
 	Thx - Hardy
 
 -->
+    <string name="shared_string_legend">Legend</string>
+    <string name="shared_string_zoom_levels">Zoom levels</string>
+    <string name="shared_string_transparency">Transparency</string>
     <string name="slope_read_more">You can read more about Slopes in %1$s.</string>
     <string name="slope_download_description">Additional maps are needed to view Slopes on the map.</string>
     <string name="hillshade_download_description">Additional maps are needed to view Hillshade on the map.</string>

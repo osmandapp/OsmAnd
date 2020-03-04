@@ -19,6 +19,7 @@ import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.TerrainMode;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -42,6 +43,7 @@ import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.HILLSHADE_LAYER;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN;
 
 public class SRTMPlugin extends OsmandPlugin {
 
@@ -156,6 +158,14 @@ public class SRTMPlugin extends OsmandPlugin {
 		return settings.HILLSHADE.get();
 	}
 
+	public boolean isTerrainLayerEnabled() {
+		return settings.TERRAIN.get();
+	}
+
+	public TerrainMode getTerrainMode() {
+		return settings.TERRAIN_MODE.get();
+	}
+
 	public static boolean isContourLinesLayerEnabled(OsmandApplication app) {
 		boolean contourLinesEnabled = false;
 
@@ -198,6 +208,9 @@ public class SRTMPlugin extends OsmandPlugin {
 					return false;
 				} else if (itemId == R.string.layer_hillshade) {
 					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.HILLSHADE, viewCoordinates);
+					return false;
+				} else if (itemId == R.string.shared_string_terrain) {
+					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.TERRAIN, viewCoordinates);
 					return false;
 				}
 				return true;
@@ -288,6 +301,18 @@ public class SRTMPlugin extends OsmandPlugin {
 				.setListener(listener)
 				.setPosition(13)
 				.createItem());
+		boolean terrainEnabled = settings.TERRAIN.get();
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setId(TERRAIN)
+				.setTitleId(R.string.shared_string_terrain, mapActivity)
+				.setSelected(terrainEnabled)
+				.setColor(terrainEnabled ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setIcon(R.drawable.ic_action_hillshade_dark)
+				.setSecondaryIcon(R.drawable.ic_action_additional_option)
+				.setListener(listener)
+				.setPosition(14)
+				.createItem()
+		);
 	}
 
 	@Override

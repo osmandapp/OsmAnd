@@ -45,6 +45,7 @@ public interface OsmAndCustomizationConstants {
 	String UNDERLAY_MAP = SHOW_ITEMS_ID_SCHEME + "underlay_map";
 	String CONTOUR_LINES = SHOW_ITEMS_ID_SCHEME + "contour_lines";
 	String HILLSHADE_LAYER = SHOW_ITEMS_ID_SCHEME + "hillshade_layer";
+	String TERRAIN = SHOW_ITEMS_ID_SCHEME + "terrain";
 
 	String MAP_RENDERING_CATEGORY_ID = RENDERING_ITEMS_ID_SCHEME + "category";
 	String MAP_STYLE_ID = RENDERING_ITEMS_ID_SCHEME + "map_style";

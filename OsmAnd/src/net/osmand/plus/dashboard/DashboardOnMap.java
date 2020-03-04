@@ -79,6 +79,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.srtmplugin.ContourLinesMenu;
 import net.osmand.plus.srtmplugin.HillshadeMenu;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
+import net.osmand.plus.srtmplugin.TerrainFragment;
 import net.osmand.plus.views.DownloadedRegionsLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -173,7 +174,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		MAPILLARY,
 		CONTOUR_LINES,
 		HILLSHADE,
-		OSM_NOTES
+		OSM_NOTES,
+		TERRAIN,
+		SLOPE
 	}
 
 	private Map<DashboardActionButtonType, DashboardActionButton> actionButtons = new HashMap<>();
@@ -320,6 +323,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			tv.setText(R.string.layer_hillshade);
 		} else if (visibleType == DashboardType.OSM_NOTES) {
 			tv.setText(R.string.osm_notes);
+		} else if (visibleType == DashboardType.TERRAIN) {
+			tv.setText(R.string.shared_string_terrain);
 		}
 		ImageView edit = (ImageView) dashboardView.findViewById(R.id.toolbar_edit);
 		edit.setVisibility(View.GONE);
@@ -588,12 +593,18 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			updateDownloadBtn();
 			View listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
 			ScrollView scrollView = (ScrollView) dashboardView.findViewById(R.id.main_scroll);
-			if (visibleType == DashboardType.DASHBOARD || visibleType == DashboardType.MAPILLARY) {
+			if (visibleType == DashboardType.DASHBOARD
+					|| visibleType == DashboardType.MAPILLARY
+					|| visibleType == DashboardType.TERRAIN) {
 				if (visibleType == DashboardType.DASHBOARD) {
 					addOrUpdateDashboardFragments();
-				} else {
+				} else if (visibleType == DashboardType.MAPILLARY) {
 					mapActivity.getSupportFragmentManager().beginTransaction()
 							.replace(R.id.content, new MapillaryFiltersFragment(), MapillaryFiltersFragment.TAG)
+							.commit();
+				} else {
+					mapActivity.getSupportFragmentManager().beginTransaction()
+							.replace(R.id.content, new TerrainFragment(), TerrainFragment.TAG)
 							.commit();
 				}
 				scrollView.setVisibility(View.VISIBLE);
