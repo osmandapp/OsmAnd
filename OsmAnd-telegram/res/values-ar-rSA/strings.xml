@@ -71,7 +71,7 @@
     <string name="min_logging_speed">الحد الأدنى لسرعة التسجيل</string>
     <string name="min_logging_speed_descr">عامل التصفية: لا تسجيل أقل من السرعة المحددة</string>
     <string name="gpx_settings">إعدادات GPX</string>
-    <string name="timeline_no_data_descr">ليس لدينا بيانات تم جمعها لليوم المحدد</string>
+    <string name="timeline_no_data_descr">تهانينا، صندوق الوارد فارغ</string>
     <string name="timeline_no_data">لا توجد بيانات</string>
     <string name="shared_string_end">نهاية</string>
     <string name="shared_string_start">بدء</string>
@@ -90,11 +90,11 @@
     <string name="shared_string_suggested">اقترح</string>
     <string name="status_widget_title">تتبع حالة أوسماند</string>
     <string name="back_to_osmand">العودة إلى OsmAnd</string>
-    <string name="last_update_from_telegram_date">آخر تحديث من تيليجرام: %1$s</string>
+    <string name="last_update_from_telegram_date">الرسائل الجديدة تظهر هنا</string>
     <string name="last_response_date">الرد الأخير:٪ 1 $ s</string>
     <string name="last_update_from_telegram_duration">آخر تحديث من تيليجرام: %1$s قبل</string>
     <string name="last_response_duration">الرد الأخير: قبل٪ 1 $ s</string>
-    <string name="shared_string_error_short">خطا</string>
+    <string name="shared_string_error_short">تهانينا، صندوق الوارد فارغ</string>
     <string name="device_added_successfully">%1$s المضاف.</string>
     <string name="shared_string_add">إضافة</string>
     <string name="error_adding_new_device">تعذر إضافة جهاز جديد</string>
