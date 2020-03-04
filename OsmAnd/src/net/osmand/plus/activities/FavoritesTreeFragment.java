@@ -46,7 +46,6 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -238,7 +237,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				listView.setSelection(selection);
 			}
 		}
-		UiUtilities.setupLayoutDirection(view);
 		return view;
 	}
 
@@ -906,7 +904,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			} else {
 				ch.setVisibility(View.GONE);
 			}
-			UiUtilities.setupLayoutDirection(row);
 			return row;
 		}
 
@@ -1010,7 +1007,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				row.findViewById(R.id.favourite_icon).setVisibility(View.VISIBLE);
 				ch.setVisibility(View.GONE);
 			}
-			UiUtilities.setupLayoutDirection(row);
 			return row;
 		}
 

@@ -451,7 +451,6 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 				default:
 					throw new IllegalArgumentException("Unsupported view type");
 			}
-			UiUtilities.setupLayoutDirection(itemView);
 			return viewHolder;
 		}
 

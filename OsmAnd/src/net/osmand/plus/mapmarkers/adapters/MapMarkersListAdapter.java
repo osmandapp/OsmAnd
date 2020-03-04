@@ -79,7 +79,6 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 				listener.onItemClick(view);
 			}
 		});
-		UiUtilities.setupLayoutDirection(view);
 		return new MapMarkerItemViewHolder(view);
 	}
 

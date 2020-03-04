@@ -254,7 +254,6 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		} else {
 			throw new IllegalArgumentException("Unsupported view type");
 		}
-		UiUtilities.setupLayoutDirection(view);
 		return viewHolder;
 	}
 

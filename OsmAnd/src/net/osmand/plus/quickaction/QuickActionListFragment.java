@@ -412,7 +412,6 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
                 handleView.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_reorder));
                 closeBtn.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_remove_dark));
-                UiUtilities.setupLayoutDirection(itemView);
             }
         }
 
@@ -423,7 +422,6 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
             public QuickActionHeaderVH(View itemView) {
                 super(itemView);
                 headerName = (TextView) itemView.findViewById(R.id.header);
-                UiUtilities.setupLayoutDirection(itemView);
             }
 
 	        @Override

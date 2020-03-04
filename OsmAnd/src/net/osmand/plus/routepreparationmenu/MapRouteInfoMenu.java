@@ -531,7 +531,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		updateOptionsButtons();
 
 		updateCards();
-		UiUtilities.setupLayoutDirection(mainView);
 	}
 
 	private void applyCardsState(@NonNull List<BaseCard> newCards, @NonNull List<BaseCard> prevCards) {
@@ -954,7 +953,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			}
 		};
 		ll.getViewTreeObserver().addOnGlobalLayoutListener(globalListener);
-		UiUtilities.setupLayoutDirection(ll);
 	}
 
 	private void updateOptionsButtons() {
@@ -1008,7 +1006,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		} else { // LTR
 			optionsContainer.setPadding(optionsContainer.getPaddingLeft(), optionsContainer.getPaddingTop(), endPadding, optionsContainer.getPaddingBottom());
 		}
-		UiUtilities.setupLayoutDirection(optionsContainer);
 	}
 
 	private void updateControlButtons(MapActivity mapActivity, View mainView) {

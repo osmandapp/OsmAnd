@@ -604,7 +604,6 @@ public class GpxUiHelper {
 					builder.setTitle(R.string.show_gpx);
 				} else {
 					final View apprTitleView = View.inflate(new ContextThemeWrapper(activity, themeRes), R.layout.select_gpx_appearance_title, null);
-					UiUtilities.setupLayoutDirection(apprTitleView);
 
 					final OsmandSettings.CommonPreference<String> prefWidth
 							= app.getSettings().getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR);

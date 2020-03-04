@@ -110,7 +110,6 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		}
 		updateBottomButtons();
 		setupHeightAndBackground(mainView);
-		UiUtilities.setupLayoutDirection(mainView);
 		return mainView;
 	}
 

@@ -413,7 +413,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 				imageView.setEnabled(enabled);
 			}
 		}
-		UiUtilities.setupLayoutDirection(holder.itemView);
 	}
 
 	@SuppressLint("RestrictedApi")

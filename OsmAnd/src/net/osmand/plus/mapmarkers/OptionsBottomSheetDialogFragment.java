@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
@@ -183,7 +182,6 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 				}
 			}
 		});
-		UiUtilities.setupLayoutDirection(view);
 
 		return view;
 	}

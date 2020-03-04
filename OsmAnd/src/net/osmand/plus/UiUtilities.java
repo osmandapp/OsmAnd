@@ -388,27 +388,6 @@ public class UiUtilities {
 		int rotation = layoutDirection == View.LAYOUT_DIRECTION_LTR ? 0 : 180;
 		image.setRotationY(rotation);
 	}
-	
-	public static void setupLayoutDirection(View view) {
-		if (view == null || !AndroidUtils.isSupportRTL()) {
-			return;
-		}
-		Context ctx = view.getContext();
-		int layoutDirection = AndroidUtils.getLayoutDirection(ctx);
-		if (view instanceof ViewGroup) {
-			view.setLayoutDirection(layoutDirection);
-			ArrayList<View> childrenViews = AndroidUtils.getChildrenViews((ViewGroup) view);
-			if (childrenViews != null) {
-				for (View child : childrenViews) {
-					setupLayoutDirection(child);
-				}
-			}
-		} else if (view instanceof TextView) {
-			int textDirection = layoutDirection == ViewCompat.LAYOUT_DIRECTION_RTL ?
-					View.TEXT_DIRECTION_RTL : View.TEXT_DIRECTION_LTR;
-			view.setTextDirection(textDirection);
-		}
-	}
 
 	public static void setupCompoundButtonDrawable(Context ctx, boolean nightMode, @ColorInt int activeColor, Drawable drawable) {
 		int inactiveColor = ContextCompat.getColor(ctx, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);

@@ -23,7 +23,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.LockableViewPager;
@@ -213,7 +212,6 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 				}
 			}
 		});
-		UiUtilities.setupLayoutDirection(mainView);
 
 		return mainView;
 	}

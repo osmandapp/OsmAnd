@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.MenuItemCompat;
@@ -132,7 +131,6 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		listView.setOnChildClickListener(this);
 		listAdapter = new DownloadResourceGroupAdapter(activity);
 		listView.setAdapter(listAdapter);
-		UiUtilities.setupLayoutDirection(view);
 
 		return view;
 	}
@@ -527,7 +525,6 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		public DownloadGroupViewHolder(DownloadActivity ctx, View v) {
 			this.ctx = ctx;
 			textView = (TextView) v.findViewById(R.id.title);
-			UiUtilities.setupLayoutDirection(textView);
 		}
 		
 		private boolean isParentWorld(DownloadResourceGroup group) {
@@ -678,7 +675,6 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			Resources.Theme theme = ctx.getTheme();
 			theme.resolveAttribute(R.attr.activity_background_color, typedValue, true);
 			v.setBackgroundColor(typedValue.data);
-			UiUtilities.setupLayoutDirection(v);
 
 			return v;
 		}

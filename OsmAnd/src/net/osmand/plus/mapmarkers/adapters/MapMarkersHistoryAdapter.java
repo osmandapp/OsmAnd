@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
@@ -110,7 +109,6 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 		} else {
 			throw new IllegalArgumentException("Unsupported view type");
 		}
-		UiUtilities.setupLayoutDirection(view);
 		return viewHolder;
 	}
 

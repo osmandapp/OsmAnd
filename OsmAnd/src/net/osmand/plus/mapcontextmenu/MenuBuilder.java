@@ -722,7 +722,6 @@ public class MenuBuilder {
 			});
 		}
 
-		UiUtilities.setupLayoutDirection(baseView);
 		((LinearLayout) view).addView(baseView);
 
 		rowBuilt();

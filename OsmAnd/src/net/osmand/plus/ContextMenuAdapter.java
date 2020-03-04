@@ -202,7 +202,6 @@ public class ContextMenuAdapter {
 				convertView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), layoutId, null);
 				convertView.setTag(layoutId);
 			}
-			UiUtilities.setupLayoutDirection(convertView);
 			if (item.getMinHeight() > 0) {
 				convertView.setMinimumHeight(item.getMinHeight());
 			}

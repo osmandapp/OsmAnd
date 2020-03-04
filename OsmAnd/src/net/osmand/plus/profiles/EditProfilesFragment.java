@@ -344,7 +344,6 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 			} else {
 				throw new IllegalArgumentException("Unsupported view type");
 			}
-			UiUtilities.setupLayoutDirection(itemView);
 			return viewHolder;
 		}
 

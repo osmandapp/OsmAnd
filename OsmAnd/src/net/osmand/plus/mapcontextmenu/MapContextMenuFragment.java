@@ -663,7 +663,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			}
 		};
 
-		UiUtilities.setupLayoutDirection(view);
 		created = true;
 		return view;
 	}

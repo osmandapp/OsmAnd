@@ -37,7 +37,6 @@ import android.widget.TextView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexInfo;
@@ -436,7 +435,6 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 			} else {
 				divider.setVisibility(View.VISIBLE);
 			}
-			UiUtilities.setupLayoutDirection(view);
 			return view;
 		}
 

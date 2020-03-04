@@ -23,7 +23,6 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
@@ -445,7 +444,6 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			}
 		}
 		ViewCompat.setAccessibilityDelegate(view, accessibilityAssistant);
-		UiUtilities.setupLayoutDirection(view);
 		return view;
 	}
 
