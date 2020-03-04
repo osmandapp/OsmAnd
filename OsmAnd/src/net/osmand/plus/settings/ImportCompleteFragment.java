@@ -54,7 +54,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		fm.beginTransaction()
 				.replace(R.id.fragmentContainer, fragment, TAG)
 				.addToBackStack(IMPORT_SETTINGS_TAG)
-				.commit();
+				.commitAllowingStateLoss();
 	}
 
 	@Override
