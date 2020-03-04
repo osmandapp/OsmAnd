@@ -1458,8 +1458,8 @@
     <string name="poi_payment_yandexmoney_yes">Yandex.Money</string>
     <string name="poi_payment_yandexmoney_no">Yandex.Money malakceptata</string>
     <string name="poi_description_payment">Pagmaniero</string>
-    <string name="poi_internet_access_fee_yes">Interret-aliro - pagenda</string>
-    <string name="poi_internet_access_fee_no">Interret-aliro - senpaga</string>
+    <string name="poi_internet_access_fee_yes">Interret-aliro: pagenda</string>
+    <string name="poi_internet_access_fee_no">Interret-aliro: senpaga</string>
     <string name="poi_events_venue">Domo de ceremonioj</string>
     <string name="poi_diet_vegetarian_only">nur senvianda</string>
     <string name="poi_diet_vegetarian_yes">senvianda (vegetara)</string>
@@ -3785,4 +3785,17 @@
     <string name="poi_piste_ref">Referenc‑numero de skivojo</string>
     <string name="poi_resort_hunting">bazo de ĉasistoj</string>
     <string name="poi_dive_centre">Centro de subakva naĝado</string>
+    <string name="poi_sms">SMS</string>
+    <string name="poi_video_telephone">Videotelefono</string>
+    <string name="poi_sms_yes">jes</string>
+    <string name="poi_sms_no">ne</string>
+    <string name="poi_covered_booth">budo</string>
+    <string name="poi_booth">Speco de budo</string>
+    <string name="poi_video_yes">jes</string>
+    <string name="poi_video_no">ne</string>
+    <string name="poi_internet_access_fee_customers">Interret-aliro: nur por klientoj</string>
+    <string name="poi_traffic_signals_sound_locate">aldirektanta</string>
+    <string name="poi_tactile_paving_contrasted">kontrasta</string>
+    <string name="poi_tactile_paving_primitive">primitiva</string>
+    <string name="poi_tactile_paving_incorrect">malĝusta</string>
 </resources>
