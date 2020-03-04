@@ -221,4 +221,18 @@
     <string name="shared_string_start">Principiu</string>
     <string name="set_time_timeline_descr">Seleiciona la hora de visualización</string>
     <string name="start_end_date">Data d\'Aniciu — Fin</string>
+    <string name="time_zone_descr">Seleiciona\'l fusu horariu a amosar nos tos mensaxes d\'allugamientu.</string>
+    <string name="time_zone">Fusu horariu</string>
+    <string name="units_and_formats">Unidaes y formatos</string>
+    <string name="buffer_time_descr">Tiempu máximu pa caltener puntos na memoria intermedia</string>
+    <string name="buffer_time">Tiempu de caducidá de la memoria intermedia</string>
+    <string name="shared_string_suggested">Suxerencia</string>
+    <string name="status_widget_title">Estau de OsmAnd Tracker</string>
+    <string name="back_to_osmand">Volver a OsmAnd</string>
+    <string name="last_update_from_telegram_date">Caberu anovamientu dende Telegram: %1$s</string>
+    <string name="last_response_date">Cabera respuesta: %1$s</string>
+    <string name="last_update_from_telegram_duration">Caberu anovamientu dende Telegram: va %1$s</string>
+    <string name="last_response_duration">Cabera respuesta: va %1$s</string>
+    <string name="duration_ago">va %1$s</string>
+    <string name="shared_string_error_short">ERR</string>
 </resources>
