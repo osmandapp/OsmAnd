@@ -2,10 +2,6 @@ package net.osmand.telegram.ui
 
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.Toolbar
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -13,11 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.*
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import net.osmand.telegram.R
-import net.osmand.telegram.TelegramSettings.ProxyType
-import net.osmand.telegram.TelegramSettings.ProxyPref
-import net.osmand.telegram.TelegramSettings.ProxyMTProtoPref
-import net.osmand.telegram.TelegramSettings.ProxySOCKS5Pref
+import net.osmand.telegram.TelegramSettings.*
 
 class ProxySettingsDialogFragment : BaseDialogFragment() {
 
@@ -202,7 +197,7 @@ class ProxySettingsDialogFragment : BaseDialogFragment() {
 		private const val TAG = "ProxySettingsDialogFragment"
 		const val PROXY_PREFERENCES_UPDATED_REQUEST_CODE = 6
 
-		fun showInstance(fm: FragmentManager, target: Fragment): Boolean {
+		fun showInstance(fm: androidx.fragment.app.FragmentManager, target: androidx.fragment.app.Fragment): Boolean {
 			return try {
 				ProxySettingsDialogFragment().apply {
 					setTargetFragment(target, PROXY_PREFERENCES_UPDATED_REQUEST_CODE)

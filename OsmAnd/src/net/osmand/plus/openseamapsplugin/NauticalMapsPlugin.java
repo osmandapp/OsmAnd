@@ -1,8 +1,9 @@
 package net.osmand.plus.openseamapsplugin;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;

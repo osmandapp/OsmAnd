@@ -1,9 +1,10 @@
 package net.osmand.plus.widgets;
 
 import android.content.Context;
-import android.support.v7.widget.AppCompatEditText;
 import android.text.InputFilter.LengthFilter;
 import android.util.AttributeSet;
+
+import androidx.appcompat.widget.AppCompatEditText;
 
 
 public class EditTextEx extends AppCompatEditText {

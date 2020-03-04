@@ -1,14 +1,12 @@
 package net.osmand.telegram.ui
 
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
-import android.support.v4.app.DialogFragment
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.DialogFragment
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import net.osmand.telegram.R
 import net.osmand.telegram.ui.views.BottomSheetDialog
 
@@ -61,7 +59,7 @@ class LogoutBottomSheet : DialogFragment() {
 
 		private const val TAG = "DisableSharingBottomSheet"
 
-		fun showInstance(fm: FragmentManager, target: Fragment): Boolean {
+		fun showInstance(fm: androidx.fragment.app.FragmentManager, target: androidx.fragment.app.Fragment): Boolean {
 			return try {
 				LogoutBottomSheet().apply {
 					setTargetFragment(target, LOGOUT_REQUEST_CODE)

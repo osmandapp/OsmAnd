@@ -8,7 +8,7 @@
               android:paddingBottom="@dimen/list_header_padding"
               android:paddingTop="@dimen/list_header_padding">
 
-    <android.support.v7.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/header_img"
         android:layout_width="@dimen/card_title_row_min_height"
         android:layout_height="match_parent"

@@ -11,14 +11,14 @@
 		android:layout_height="match_parent"
 		android:orientation="vertical">
 
-		<android.support.design.widget.AppBarLayout
+		<com.google.android.material.appbar.AppBarLayout
 			android:id="@+id/app_bar"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:orientation="vertical"
 			tools:background="@color/route_info_bg_dark">
 
-			<android.support.v7.widget.Toolbar
+			<androidx.appcompat.widget.Toolbar
 				android:id="@+id/coordinate_input_toolbar"
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/dashboard_map_toolbar"
@@ -74,13 +74,13 @@
 
 				</LinearLayout>
 
-			</android.support.v7.widget.Toolbar>
+			</androidx.appcompat.widget.Toolbar>
 
 			<include layout="@layout/coordinate_input_data_area"/>
 
-		</android.support.design.widget.AppBarLayout>
+		</com.google.android.material.appbar.AppBarLayout>
 
-		<android.support.v7.widget.RecyclerView
+		<androidx.recyclerview.widget.RecyclerView
 			android:id="@+id/markers_recycler_view"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"

@@ -11,7 +11,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/card_row_min_height">
 
-		<android.support.v7.widget.AppCompatImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@android:id/icon"
 			android:layout_width="@dimen/standard_icon_size"
 			android:layout_height="@dimen/standard_icon_size"

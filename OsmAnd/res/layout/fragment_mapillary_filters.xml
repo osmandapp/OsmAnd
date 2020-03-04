@@ -26,7 +26,7 @@
             android:minHeight="60dp"
             tools:layout_height="60dp">
 
-            <android.support.v7.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/toggle_row_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
                 android:layout_margin="@dimen/content_padding"
                 tools:src="@drawable/ic_action_gabout_dark" />
 
-            <android.support.v7.widget.SwitchCompat
+            <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/toggle_row_toggle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -49,7 +49,7 @@
                 android:layout_marginStart="@dimen/content_padding"
                 android:focusable="false" />
 
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/toggle_row_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
             android:background="?attr/bg_color"
             android:minHeight="60dp">
 
-            <android.support.v7.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/mapillary_filters_tile_cache_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -115,13 +115,13 @@
                 android:paddingBottom="@dimen/content_padding_small"
                 android:paddingTop="10dp">
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/mapillary_menu_title_tile_cache"
                     android:textAppearance="@style/TextAppearance.ListItemTitle" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:ellipsize="end"
@@ -191,7 +191,7 @@
             android:background="?attr/bg_color"
             android:minHeight="60dp">
 
-            <android.support.v7.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/mapillary_filters_user_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -209,13 +209,13 @@
                 android:paddingBottom="@dimen/content_padding_small"
                 android:paddingTop="10dp">
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/mapillary_menu_title_username"
                     android:textAppearance="@style/TextAppearance.ListItemTitle" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:ellipsize="end"
@@ -285,7 +285,7 @@
             android:background="?attr/bg_color"
             android:minHeight="60dp">
 
-            <android.support.v7.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/mapillary_filters_date_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -303,13 +303,13 @@
                 android:paddingBottom="@dimen/content_padding_small"
                 android:paddingTop="10dp">
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/mapillary_menu_title_dates"
                     android:textAppearance="@style/TextAppearance.ListItemTitle" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:ellipsize="end"
@@ -334,7 +334,7 @@
                 android:layout_marginEnd="@dimen/content_padding"
                 android:layout_marginRight="@dimen/content_padding">
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/content_padding_small"
@@ -350,9 +350,9 @@
                         android:textColor="?android:textColorPrimary"
                         android:textSize="@dimen/default_list_text_size"
                         tools:text="From" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/content_padding_small"
@@ -368,7 +368,7 @@
                         android:textColor="?android:textColorPrimary"
                         android:textSize="@dimen/default_list_text_size"
                         tools:text="To" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <View
@@ -386,7 +386,7 @@
             android:minHeight="60dp"
             tools:layout_height="60dp">
 
-            <android.support.v7.widget.SwitchCompat
+            <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/pano_row_toggle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -399,7 +399,7 @@
                 android:layout_marginStart="@dimen/content_padding"
                 android:focusable="false" />
 
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/pano_row_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

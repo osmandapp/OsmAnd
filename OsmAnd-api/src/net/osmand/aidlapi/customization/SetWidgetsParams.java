@@ -2,7 +2,8 @@ package net.osmand.aidlapi.customization;
 
 import android.os.Bundle;
 import android.os.Parcel;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 import net.osmand.aidlapi.AidlParams;
 

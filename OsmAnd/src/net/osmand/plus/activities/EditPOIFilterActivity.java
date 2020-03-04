@@ -6,8 +6,6 @@ package net.osmand.plus.activities;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +17,9 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.view.MenuItemCompat;
 
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;

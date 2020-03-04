@@ -1,14 +1,16 @@
 package net.osmand.plus.helpers;
 
-import net.osmand.PlatformUtil;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Surface;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+
+import net.osmand.PlatformUtil;
 
 /**
  * Created by dummy on 28.01.15.

@@ -8,13 +8,13 @@
 	android:fitsSystemWindows="true"
 	android:orientation="vertical">
 
-	<android.support.design.widget.AppBarLayout
+	<com.google.android.material.appbar.AppBarLayout
 		android:id="@+id/app_bar_layout"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="?attr/card_bg_color">
 
-		<android.support.v7.widget.Toolbar
+		<androidx.appcompat.widget.Toolbar
 			android:id="@+id/toolbar"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/action_bar_height">
@@ -30,9 +30,9 @@
 				android:textSize="@dimen/title_text_size"
 				app:typeface="@string/font_roboto_mono_bold"/>
 
-		</android.support.v7.widget.Toolbar>
+		</androidx.appcompat.widget.Toolbar>
 
-	</android.support.design.widget.AppBarLayout>
+	</com.google.android.material.appbar.AppBarLayout>
 
 	<ScrollView
 		android:layout_width="match_parent"

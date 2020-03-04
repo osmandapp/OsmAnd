@@ -23,7 +23,7 @@
             android:layout_weight="1"
             android:id="@+id/textView3" />
 
-        <android.support.v7.widget.SwitchCompat
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/saveButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -102,7 +102,7 @@
 	                android:layout_marginEnd="@dimen/content_padding_small"
 	                android:layout_marginStart="@dimen/content_padding_small" />
 
-                <android.support.v7.widget.AppCompatEditText
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/name_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -1,6 +1,6 @@
 package net.osmand.plus.routing;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.OsmAndFormatter;

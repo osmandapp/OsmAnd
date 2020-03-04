@@ -1,6 +1,6 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.data.LatLon;

@@ -1,6 +1,6 @@
 package net.osmand.plus.dashboard.tools;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.activities.MapActivity;

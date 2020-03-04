@@ -2,8 +2,6 @@ package net.osmand.plus.measurementtool;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.BottomSheetDialog;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.Window;
@@ -12,6 +10,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
@@ -23,7 +25,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SnapToRoadBottomSheetDialogFragment extends android.support.design.widget.BottomSheetDialogFragment {
+public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
 	public static final String TAG = "SnapToRoadBottomSheetDialogFragment";
 
@@ -99,7 +101,7 @@ public class SnapToRoadBottomSheetDialogFragment extends android.support.design.
 				@Override
 				public void onShow(DialogInterface dialogInterface) {
 					BottomSheetDialog dialog = (BottomSheetDialog) dialogInterface;
-					FrameLayout bottomSheet = (FrameLayout) dialog.findViewById(android.support.design.R.id.design_bottom_sheet);
+					FrameLayout bottomSheet = (FrameLayout) dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
 					BottomSheetBehavior.from(bottomSheet).setState(BottomSheetBehavior.STATE_EXPANDED);
 				}
 			});

@@ -1,17 +1,9 @@
 package net.osmand.plus.liveupdates;
 
-import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.liveupdates.Protocol.RankingUserByMonthResponse;
-import net.osmand.plus.liveupdates.Protocol.UserRankingByMonth;
-import net.osmand.plus.liveupdates.ReportsFragment.GetJsonAsyncTask;
-import net.osmand.plus.liveupdates.ReportsFragment.GetJsonAsyncTask.OnResponseListener;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
-import android.support.annotation.DrawableRes;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +12,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+
+import net.osmand.plus.R;
+import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.liveupdates.Protocol.RankingUserByMonthResponse;
+import net.osmand.plus.liveupdates.Protocol.UserRankingByMonth;
+import net.osmand.plus.liveupdates.ReportsFragment.GetJsonAsyncTask;
+import net.osmand.plus.liveupdates.ReportsFragment.GetJsonAsyncTask.OnResponseListener;
 
 public class UsersReportFragment extends BaseOsmAndDialogFragment {
 

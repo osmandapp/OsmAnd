@@ -1,6 +1,6 @@
 package net.osmand.plus;
 
-import android.support.annotation.DrawableRes;
+import androidx.annotation.DrawableRes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
