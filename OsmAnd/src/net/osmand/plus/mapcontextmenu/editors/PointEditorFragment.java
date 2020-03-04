@@ -31,6 +31,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
+import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
 
 import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
@@ -48,7 +49,7 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 							 Bundle savedInstanceState) {
 
 		boolean nightMode = !getMyApplication().getSettings().isLightContent();
-		view = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.point_editor_fragment, container, false);
+		view = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.new_point_editor_fragment, container, false);
 
 		PointEditor editor = getEditor();
 		if (editor == null) {
@@ -59,14 +60,12 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 		editor.updateNightMode();
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		toolbar.setBackgroundColor(ContextCompat.getColor(getContext(), !editor.isLight() ? R.color.app_bar_color_dark : R.color.app_bar_color_light));
 		toolbar.setTitle(getToolbarTitle());
 
 		OsmandApplication app = requireMyApplication();
-		Drawable icBack = app.getUIUtilities().getIcon(R.drawable.ic_arrow_back, !editor.isLight() ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light);
+		Drawable icBack = app.getUIUtilities().getIcon(R.drawable.ic_arrow_back, nightMode ? R.color.active_buttons_and_links_text_dark : R.color.description_font_and_bottom_sheet_icons);
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setTitleTextColor(getResources().getColor(getResIdFromAttribute(getMapActivity(), R.attr.pstsTextColor)));
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -75,6 +74,8 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 		});
 		
 		int activeColorResId = !editor.isLight() ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		ImageView toolbarAction  = (ImageView) view.findViewById(R.id.toolbar_action);
+		toolbarAction.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_replace,activeColorResId));
 
 		Button saveButton = (Button) view.findViewById(R.id.save_button);
 		saveButton.setTextColor(getResources().getColor(activeColorResId));
@@ -110,61 +111,59 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 			deleteButton.setVisibility(View.VISIBLE);
 		}
 
-		view.findViewById(R.id.background_layout).setBackgroundResource(!editor.isLight() ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
-		view.findViewById(R.id.buttons_layout).setBackgroundResource(!editor.isLight() ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
-		view.findViewById(R.id.title_view).setBackgroundResource(!editor.isLight() ? R.color.list_background_color_dark : R.color.list_background_color_light);
-		view.findViewById(R.id.description_info_view).setBackgroundResource(!editor.isLight() ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
+//		view.findViewById(R.id.background_layout).setBackgroundResource(!editor.isLight() ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
+//		view.findViewById(R.id.buttons_layout).setBackgroundResource(!editor.isLight() ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
+//		view.findViewById(R.id.title_view).setBackgroundResource(!editor.isLight() ? R.color.list_background_color_dark : R.color.list_background_color_light);
+//		view.findViewById(R.id.description_caption).setBackgroundResource(!editor.isLight() ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
 
-		TextView nameCaption = (TextView) view.findViewById(R.id.name_caption);
-		AndroidUtils.setTextSecondaryColor(view.getContext(), nameCaption, !editor.isLight());
-		nameCaption.setText(getNameCaption());
-		TextView categoryCaption = (TextView) view.findViewById(R.id.category_caption);
-		AndroidUtils.setTextSecondaryColor(view.getContext(), categoryCaption, !editor.isLight());
-		categoryCaption.setText(getCategoryCaption());
+		OsmandTextFieldBoxes nameCaption = (OsmandTextFieldBoxes) view.findViewById(R.id.name_caption);
+		AndroidUtils.setTextSecondaryColor(view.getContext(), nameCaption.getEditText(), !editor.isLight());
+		nameCaption.getEditText().setText(getNameCaption());
+//		TextView categoryCaption = (TextView) view.findViewById(R.id.category_caption);
+//		AndroidUtils.setTextSecondaryColor(view.getContext(), categoryCaption, !editor.isLight());
+//		categoryCaption.setText(getCategoryCaption());
 
 		nameEdit = (EditText) view.findViewById(R.id.name_edit);
 		AndroidUtils.setTextPrimaryColor(view.getContext(), nameEdit, !editor.isLight());
 		AndroidUtils.setHintTextSecondaryColor(view.getContext(), nameEdit, !editor.isLight());
 		nameEdit.setText(getNameInitValue());
-		AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) view.findViewById(R.id.category_edit);
-		AndroidUtils.setTextPrimaryColor(view.getContext(), categoryEdit, !editor.isLight());
-		categoryEdit.setText(getCategoryInitValue());
-		categoryEdit.setFocusable(false);
-		categoryEdit.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(final View v, MotionEvent event) {
-				if (event.getAction() == MotionEvent.ACTION_UP) {
-					DialogFragment dialogFragment = createSelectCategoryDialog();
-					if (dialogFragment != null) {
-						dialogFragment.show(getChildFragmentManager(), SelectCategoryDialogFragment.TAG);
-					}
-					return true;
-				}
-				return false;
-			}
-		});
+//		AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) view.findViewById(R.id.category_edit);
+//		AndroidUtils.setTextPrimaryColor(view.getContext(), categoryEdit, !editor.isLight());
+//		categoryEdit.setText(getCategoryInitValue());
+//		categoryEdit.setFocusable(false);
+//		categoryEdit.setOnTouchListener(new View.OnTouchListener() {
+//			@Override
+//			public boolean onTouch(final View v, MotionEvent event) {
+//				if (event.getAction() == MotionEvent.ACTION_UP) {
+//					DialogFragment dialogFragment = createSelectCategoryDialog();
+//					if (dialogFragment != null) {
+//						dialogFragment.show(getChildFragmentManager(), SelectCategoryDialogFragment.TAG);
+//					}
+//					return true;
+//				}
+//				return false;
+//			}
+//		});
 
-		final EditText descriptionEdit = (EditText) view.findViewById(R.id.description_edit);
-		AndroidUtils.setTextPrimaryColor(view.getContext(), descriptionEdit, !editor.isLight());
-		AndroidUtils.setHintTextSecondaryColor(view.getContext(), descriptionEdit, !editor.isLight());
-		if (getDescriptionInitValue() != null) {
-			descriptionEdit.setText(getDescriptionInitValue());
-		}
+//		final EditText descriptionEdit = (EditText) view.findViewById(R.id.description_edit);
+//		AndroidUtils.setTextPrimaryColor(view.getContext(), descriptionEdit, !editor.isLight());
+//		AndroidUtils.setHintTextSecondaryColor(view.getContext(), descriptionEdit, !editor.isLight());
+//		if (getDescriptionInitValue() != null) {
+//			descriptionEdit.setText(getDescriptionInitValue());
+//		}
 
-		ImageView nameImage = (ImageView) view.findViewById(R.id.name_image);
-		nameImage.setImageDrawable(getNameIcon());
-		ImageView categoryImage = (ImageView) view.findViewById(R.id.category_image);
-		categoryImage.setImageDrawable(getCategoryIcon());
+//		ImageView nameImage = (ImageView) view.findViewById(R.id.name_image);
+//		nameImage.setImageDrawable(getNameIcon());
+//		ImageView categoryImage = (ImageView) view.findViewById(R.id.category_image);
+//		categoryImage.setImageDrawable(getCategoryIcon());
 
-		ImageView descriptionImage = (ImageView) view.findViewById(R.id.description_image);
-		descriptionImage.setImageDrawable(getRowIcon(R.drawable.ic_action_note_dark));
 
 		if (app.accessibilityEnabled()) {
 			nameCaption.setFocusable(true);
-			categoryCaption.setFocusable(true);
-			nameEdit.setHint(R.string.access_hint_enter_name);
-			categoryEdit.setHint(R.string.access_hint_enter_category);
-			descriptionEdit.setHint(R.string.access_hint_enter_description);
+//			categoryCaption.setFocusable(true);
+//			nameEdit.setHint(R.string.access_hint_enter_name);
+//			categoryEdit.setHint(R.string.access_hint_enter_category);
+//			descriptionEdit.setHint(R.string.access_hint_enter_description);
 		}
 		return view;
 	}
@@ -206,6 +205,19 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 			nameEdit.selectAll();
 			nameEdit.requestFocus();
 			AndroidUtils.softKeyboardDelayed(nameEdit);
+		}
+		if (Build.VERSION.SDK_INT >= 21) {
+			Activity activity = getActivity();
+			if (activity != null) {
+				int colorId = getStatusBarColorId();
+				if (colorId != -1) {
+					if (activity instanceof MapActivity) {
+						((MapActivity) activity).updateStatusBarColor();
+					} else {
+						activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
+					}
+				}
+			}
 		}
 	}
 
@@ -354,15 +366,15 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 	}
 
 	public String getCategoryTextValue() {
-		AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) view.findViewById(R.id.category_edit);
-		String name = categoryEdit.getText().toString().trim();
-		if (isPersonalCategoryDisplayName(requireContext(), name)) {
-			return PERSONAL_CATEGORY;
-		}
-		if(name.equals(getDefaultCategoryName())) {
+//		AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) view.findViewById(R.id.category_edit);
+//		String name = categoryEdit.getText().toString().trim();
+//		if (isPersonalCategoryDisplayName(requireContext(), name)) {
+//			return PERSONAL_CATEGORY;
+//		}
+//		if(name.equals(getDefaultCategoryName())) {
 			return "";
-		}
-		return name;
+//		}
+//		return name;
 	}
 
 	public String getDescriptionTextValue() {

@@ -11,6 +11,10 @@
 	Thx - Hardy
 
 -->
+    <string name="select_shape">Select shape</string>
+    <string name="select_group">Select group</string>
+    <string name="add_description">Add description</string>
+    <string name="delete_description">Delete description</string>
     <string name="import_rendering_file">Import rendering file</string>
     <string name="profile_type_custom_string">Custom profile</string>
     <string name="shared_string_angle_param">Angle: %s°</string>
