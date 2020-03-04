@@ -60,7 +60,11 @@ public class ImportedSettingsItemsAdapter extends
 				listener.onItemClick(currentItem.getType());
 			}
 		});
-		holder.subTitle.setText(String.format(app.getString(R.string.items_added), String.valueOf(currentItem.getItems().size())));
+		holder.subTitle.setText(String.format(
+				app.getString(R.string.ltr_or_rtl_combine_via_colon),
+				app.getString(R.string.items_added),
+				String.valueOf(currentItem.getItems().size()))
+		);
 
 		switch (currentItem.getType()) {
 			case PROFILE:
