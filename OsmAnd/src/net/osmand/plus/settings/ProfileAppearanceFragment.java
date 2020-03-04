@@ -15,6 +15,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AlertDialog;
@@ -132,6 +133,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		changedProfile = new ApplicationProfileObject();
 		if (savedInstanceState != null) {
 			restoreState(savedInstanceState);
+			checkSavingProfile();
 		} else {
 			changedProfile.stringKey = profile.stringKey;
 			changedProfile.parent = profile.parent;
@@ -693,7 +695,19 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 
 	private void saveProfile() {
 		if (isNewProfile) {
-			showNewProfileSavingDialog();
+			DialogInterface.OnShowListener showListener = new DialogInterface.OnShowListener() {
+				@Override
+				public void onShow(DialogInterface dialog) {
+					app.runInUIThread(new Runnable() {
+						@Override
+						public void run() {
+							ApplicationMode mode = saveNewProfile();
+							saveProfileBackup(mode, exportListener);
+						}
+					});
+				}
+			};
+			showNewProfileSavingDialog(showListener);
 		} else {
 			ApplicationMode mode = getSelectedAppMode();
 			mode.setParentAppMode(changedProfile.parent);
@@ -743,54 +757,25 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		}
 	}
 
-	private void showNewProfileSavingDialog() {
-		ProgressDialog progress = new ProgressDialog(getContext());
+	private void showNewProfileSavingDialog(@Nullable DialogInterface.OnShowListener showListener) {
+		if (progress != null) {
+			progress.dismiss();
+		}
+		progress = new ProgressDialog(getContext());
 		progress.setMessage(getString(R.string.saving_new_profile));
 		progress.setCancelable(false);
-
-		final WeakReference<ProgressDialog> progressRef = new WeakReference<>(progress);
-		final SettingsHelper.SettingsExportListener listener = new SettingsHelper.SettingsExportListener() {
-
-			@Override
-			public void onSettingsExportFinished(@NonNull File file, boolean succeed) {
-				ProgressDialog progress = progressRef.get();
-				if (progress != null && progress.isShowing()) {
-					progress.dismiss();
-				}
-				if (succeed) {
-					profileSaved();
-				} else {
-					app.showToastMessage(R.string.profile_backup_failed);
-				}
-			}
-		};
-
-		progress.setOnShowListener(new DialogInterface.OnShowListener() {
-			@Override
-			public void onShow(DialogInterface dialog) {
-				app.runInUIThread(new Runnable() {
-					@Override
-					public void run() {
-						ApplicationMode mode = saveNewProfile();
-						saveProfileBackup(mode, listener);
-					}
-				});
-			}
-		});
+		progress.setOnShowListener(showListener);
 		progress.show();
 	}
 
-	private void profileSaved() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			profile = changedProfile;
-			if (isNewProfile) {
-				ProfileAppearanceFragment.this.dismiss();
-				BaseSettingsFragment.showInstance(activity, SettingsScreenType.CONFIGURE_PROFILE,
-						ApplicationMode.valueOfStringKey(changedProfile.stringKey, null));
-			} else {
-				activity.onBackPressed();
-			}
+	private void checkSavingProfile() {
+		File file = ConfigureProfileFragment.getBackupFileForCustomMode(app, changedProfile.stringKey);
+		boolean fileExporting = app.getSettingsHelper().isFileExporting(file);
+		if (fileExporting) {
+			showNewProfileSavingDialog(null);
+			app.getSettingsHelper().updateExportListener(file, exportListener);
+		} else if (isNewProfile) {
+			customProfileSaved();
 		}
 	}
 
