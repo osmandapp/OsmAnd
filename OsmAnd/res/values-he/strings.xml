@@ -3503,4 +3503,6 @@
     <string name="shared_string_include_data">לכלול נתונים נוספים</string>
     <string name="export_profile_dialog_description">ניתן לבחור נתונים נוספים לייצוא יחד עם הפרופיל.</string>
     <string name="shared_string_rendering_style">סגנון העיבוד</string>
+    <string name="import_duplicates_title">חלק מהפריטים קיימים</string>
+    <string name="select_data_to_import">נא לבחור את הנתונים לייבוא.</string>
 </resources>

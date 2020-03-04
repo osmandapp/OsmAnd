@@ -131,6 +131,8 @@
 	<string name="poi_bath_open_air">Open air</string>
 	<string name="poi_volcano_type">Type</string>
 	<string name="poi_volcano_status">Status</string>
+	<string name="poi_sms">SMS</string>
+	<string name="poi_video_telephone">Video</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -876,8 +878,8 @@
 	<string name="poi_internet_access_service">Internet access: service</string>
 	<string name="poi_internet_access_yes">Internet access: yes</string>
 	<string name="poi_internet_access_no">Internet access: no</string>
-	<string name="poi_internet_access_fee_yes">Internet access - fee charged</string>
-	<string name="poi_internet_access_fee_no">Internet access - no fee</string>
+	<string name="poi_internet_access_fee_yes">Internet access: fee charged</string>
+	<string name="poi_internet_access_fee_no">Internet access: no fee</string>
 
 	<string name="poi_monastery">Monastery</string>
 <!--	<string name="poi_historic_monastery">Historic monastery</string>-->
@@ -4190,5 +4192,18 @@
 	<string name="poi_resort_hunting">Hunting base</string>
 
 	<string name="poi_dive_centre">Scuba diving centre</string>
+
+	<string name="poi_sms_yes">Yes</string>
+	<string name="poi_sms_no">No</string>
+	<string name="poi_covered_booth">Booth</string>
+	<string name="poi_booth">Booth type</string>
+	<string name="poi_video_yes">Yes</string>
+	<string name="poi_video_no">No</string>
+
+	<string name="poi_internet_access_fee_customers">Signal to find the pole</string>
+	<string name="poi_traffic_signals_sound_locate">Only when walking is allowed</string>
+	<string name="poi_tactile_paving_contrasted">Contrasted</string>
+	<string name="poi_tactile_paving_primitive">Primitive</string>
+	<string name="poi_tactile_paving_incorrect">Incorrect</string>
 
 </resources>

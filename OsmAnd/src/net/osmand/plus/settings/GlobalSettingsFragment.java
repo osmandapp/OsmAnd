@@ -122,7 +122,8 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 		}
 
 		ListPreferenceEx defaultApplicationMode = (ListPreferenceEx) findPreference(settings.DEFAULT_APPLICATION_MODE.getId());
-		defaultApplicationMode.setIcon(getActiveIcon(settings.DEFAULT_APPLICATION_MODE.get().getIconRes()));
+		defaultApplicationMode.setIcon(getIcon(settings.DEFAULT_APPLICATION_MODE.get().getIconRes(),
+				settings.getApplicationMode().getIconColorInfo().getColor(isNightMode())));
 		defaultApplicationMode.setEntries(entries);
 		defaultApplicationMode.setEntryValues(entryValues);
 	}

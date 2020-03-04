@@ -13,7 +13,7 @@
     <string name="osmand_service">حالة وضع السكون</string>
     <string name="nm_h">ميل بحري</string>
     <string name="si_nm_h">ميل بحري في الساعة (عقدة)</string>
-    <string name="si_km_m">كم ، متر</string>
+    <string name="si_km_m">كم ، م</string>
     <string name="shared_string_end">نهاية</string>
     <string name="saved_messages">الرسائل المحفوظة</string>
     <string name="shared_string_update">تحديث</string>
@@ -43,7 +43,7 @@
     <string name="yard">ياردة</string>
     <string name="foot">قدم</string>
     <string name="mile">ميل</string>
-    <string name="km">كلم</string>
+    <string name="km">كم</string>
     <string name="m">م</string>
     <string name="nm">ميل بحري</string>
     <string name="min_mile">د/م</string>
@@ -58,7 +58,7 @@
     <string name="si_mi_feet">ميل ، قدم</string>
     <string name="si_mi_yard">ميل ، ياردة</string>
     <string name="si_nm">ميل بحري</string>
-    <string name="si_mi_meters">ميل ، متر</string>
+    <string name="si_mi_meters">ميل ، م</string>
     <string name="shared_string_search">بحث</string>
     <string name="altitude">الارتفاع</string>
     <string name="shared_string_enable">تفعيل</string>
@@ -252,7 +252,7 @@
     <string name="min_logging_speed">الحد الأدنى لسرعة التسجيل</string>
     <string name="min_logging_speed_descr">عامل التصفية: لا تسجيل أقل من السرعة المحددة</string>
     <string name="gpx_settings">إعدادات GPX</string>
-    <string name="timeline_no_data_descr">ليس لدينا بيانات تم جمعها لليوم المحدد</string>
+    <string name="timeline_no_data_descr">ليس لدينا بيانات مجمعة لليوم المحدد</string>
     <string name="timeline_no_data">لا توجد بيانات</string>
     <string name="set_time_timeline_descr">تحديد وقت للعرض</string>
     <string name="start_end_date">تاريخ البدء — تاريخ الانتهاء</string>
