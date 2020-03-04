@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
@@ -26,20 +27,20 @@ public class DownloadGroupViewHolder {
 	}
 
 	private Drawable getIconForGroup(DownloadResourceGroup group) {
-		Drawable iconLeft;
+		Drawable iconStart;
 		if (group.getType() == DownloadResourceGroup.DownloadResourceGroupType.VOICE_REC
 				|| group.getType() == DownloadResourceGroup.DownloadResourceGroupType.VOICE_TTS) {
-			iconLeft = ctx.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_volume_up);
+			iconStart = ctx.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_volume_up);
 		} else if (group.getType() == DownloadResourceGroup.DownloadResourceGroupType.FONTS) {
-			iconLeft = ctx.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_map_language);
+			iconStart = ctx.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_map_language);
 		} else {
 			UiUtilities cache = ctx.getMyApplication().getUIUtilities();
 			if (isParentWorld(group) || isParentWorld(group.getParentGroup())) {
-				iconLeft = cache.getThemedIcon(R.drawable.ic_world_globe_dark);
+				iconStart = cache.getThemedIcon(R.drawable.ic_world_globe_dark);
 			} else {
 				DownloadResourceGroup ggr = group
 						.getSubGroupById(DownloadResourceGroup.DownloadResourceGroupType.REGION_MAPS.getDefaultId());
-				iconLeft = cache.getThemedIcon(R.drawable.ic_map);
+				iconStart = cache.getThemedIcon(R.drawable.ic_map);
 				if (ggr != null && ggr.getIndividualResources() != null) {
 					IndexItem item = null;
 					for (IndexItem ii : ggr.getIndividualResources()) {
@@ -53,21 +54,21 @@ public class DownloadGroupViewHolder {
 					}
 					if (item != null) {
 						if (item.isOutdated()) {
-							iconLeft = cache.getIcon(R.drawable.ic_map, R.color.color_distance);
+							iconStart = cache.getIcon(R.drawable.ic_map, R.color.color_distance);
 						} else {
-							iconLeft = cache.getIcon(R.drawable.ic_map, R.color.color_ok);
+							iconStart = cache.getIcon(R.drawable.ic_map, R.color.color_ok);
 						}
 					}
 				}
 			}
 		}
-		return iconLeft;
+		return iconStart;
 	}
 
 	public void bindItem(DownloadResourceGroup group) {
-		Drawable iconLeft = getIconForGroup(group);
-		textView.setCompoundDrawablesWithIntrinsicBounds(iconLeft, null, null, null);
 		String name = group.getName(ctx);
 		textView.setText(name);
+		Drawable iconStart = getIconForGroup(group);
+		AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(textView, iconStart, null, null, null);
 	}
 }

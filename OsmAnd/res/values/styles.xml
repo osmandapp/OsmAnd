@@ -102,6 +102,7 @@
 
     <!-- Osmand themes styles -->
     <style name="OsmandLightTheme" parent="Theme.AppCompat.Light">
+        <item name="android:textDirection">locale</item>
         <item name="android:statusBarColor">@color/status_bar_color_light</item>
         <item name="mapBackground">@color/map_background_color_light</item>
         <item name="chart_marker_background">@drawable/chart_marker_background_light</item>
@@ -378,6 +379,7 @@
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
+        <item name="android:textDirection">locale</item>
         <item name="android:statusBarColor">@color/status_bar_color_dark</item>
         <item name="mapBackground">@color/map_background_color_dark</item>
         <item name="chart_marker_background">@drawable/chart_marker_background_dark</item>

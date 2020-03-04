@@ -15,6 +15,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -38,6 +39,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.widgets.TextViewEx;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
@@ -385,11 +387,6 @@ public class UiUtilities {
 		}
 		int rotation = layoutDirection == View.LAYOUT_DIRECTION_LTR ? 0 : 180;
 		image.setRotationY(rotation);
-	}
-	
-	public static void setupLayoutDirection(View layout) {
-		int direction = AndroidUtils.getLayoutDirection(layout.getContext());
-		ViewCompat.setLayoutDirection(layout, direction);
 	}
 
 	public static void setupCompoundButtonDrawable(Context ctx, boolean nightMode, @ColorInt int activeColor, Drawable drawable) {

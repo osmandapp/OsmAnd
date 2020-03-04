@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
@@ -93,21 +92,24 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 
 	@Override
 	public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+		View view;
+		RecyclerView.ViewHolder viewHolder;
 		if (viewType == MARKER_TYPE) {
-			View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_new, viewGroup, false);
+			view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_new, viewGroup, false);
 			view.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
 					listener.onItemClick(view);
 				}
 			});
-			return new MapMarkerItemViewHolder(view);
+			viewHolder = new MapMarkerItemViewHolder(view);
 		} else if (viewType == HEADER_TYPE) {
-			View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_header, viewGroup, false);
-			return new MapMarkerHeaderViewHolder(view);
+			view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_header, viewGroup, false);
+			viewHolder = new MapMarkerHeaderViewHolder(view);
 		} else {
 			throw new IllegalArgumentException("Unsupported view type");
 		}
+		return viewHolder;
 	}
 
 	@Override
