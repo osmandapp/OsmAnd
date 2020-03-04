@@ -1396,4 +1396,5 @@
     <string name="wake_time">Hora d\'activamientu</string>
     <string name="descendingly">Z-A</string>
     <string name="ascendingly">A-Z</string>
+    <string name="units_and_formats">Unidaes y formatos</string>
 </resources>
