@@ -599,7 +599,7 @@
     <string name="poi_herbalist">Gyógynövénybolt</string>
     <string name="poi_hifi">Hifi szaküzlet</string>
     <string name="poi_newsagent">Újságárus</string>
-    <string name="poi_organic">Bioélelmiszer</string>
+    <string name="poi_organic">Biotermék</string>
     <string name="poi_outdoor">Túrafelszerelés-bolt</string>
     <string name="poi_second_hand">Használtáru-bolt</string>
     <string name="poi_scuba_diving_shop">Búvárfelszerelés-bolt</string>
@@ -1148,8 +1148,8 @@
     <string name="poi_cargo_bicycle">Kerékpár</string>
     <string name="poi_cargo_container">Konténer</string>
     <string name="poi_cargo_hgv">Nehéz teherautó</string>
-    <string name="poi_internet_access_fee_yes">Fizetős internetcsatlakozás</string>
-    <string name="poi_internet_access_fee_no">Ingyenes internetcsatlakozás</string>
+    <string name="poi_internet_access_fee_yes">Internetcsatlakozás: fizetős</string>
+    <string name="poi_internet_access_fee_no">Internetcsatlakozás: ingyenes</string>
     <string name="poi_events_venue">Rendezvényközpont</string>
     <string name="poi_diet_vegetarian_only">Csak vegetáriánus</string>
     <string name="poi_diet_vegetarian_yes">Vegetáriánus</string>
@@ -3778,4 +3778,15 @@
     <string name="poi_volcano_status_inactive">Nem aktív</string>
     <string name="poi_volcano_number_of_eruptions">Kitörések száma</string>
     <string name="poi_paintball">Paintball</string>
+    <string name="poi_memorial_ghost_bike">Emlékkerékpár</string>
+    <string name="poi_dive_centre">Palackos búvárkodási központ</string>
+    <string name="poi_sms">SMS</string>
+    <string name="poi_video_telephone">Video</string>
+    <string name="poi_sms_yes">igen</string>
+    <string name="poi_sms_no">nem</string>
+    <string name="poi_covered_booth">Fülke</string>
+    <string name="poi_booth">Fülke típusa</string>
+    <string name="poi_video_yes">igen</string>
+    <string name="poi_video_no">nem</string>
+    <string name="poi_traffic_signals_sound_locate">Csak amikor át szabad menni</string>
 </resources>
