@@ -88,7 +88,7 @@ import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
 public class MapContextMenuFragment extends BaseOsmAndFragment implements DownloadEvents {
 	public static final String TAG = "MapContextMenuFragment";
 
-	public static final float ZOOM_PADDING_TOP_DP = 10f;
+	public static final float ZOOM_PADDING_TOP_DP = 4f;
 	public static final float MARKER_PADDING_DP = 20f;
 	public static final float MARKER_PADDING_X_DP = 50f;
 	public static final int ZOOM_IN_STANDARD = 17;
@@ -2101,7 +2101,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private int getZoomButtonsY(int y) {
-		return y - zoomButtonsHeight - topScreenPosY - zoomPaddingTop;
+		return y - mainView.getTop() - zoomButtonsHeight + zoomPaddingTop;
 	}
 
 	private void doLayoutMenu() {
