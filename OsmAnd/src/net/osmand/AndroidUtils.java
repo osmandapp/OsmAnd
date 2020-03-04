@@ -647,24 +647,15 @@ public class AndroidUtils {
 	}
 
 	public static void setCompoundDrawablesWithIntrinsicBounds(@NonNull TextView tv, Drawable start, Drawable top, Drawable end, Drawable bottom){
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+		if (isSupportRTL()) {
 			tv.setCompoundDrawablesRelativeWithIntrinsicBounds(start, top, end, bottom);
 		} else {
 			tv.setCompoundDrawablesWithIntrinsicBounds(start, top, end, bottom);
 		}
 	}
 
-	public static ArrayList<View> getChildrenViews(ViewGroup vg) {
-		ArrayList<View> result = new ArrayList<>();
-		for (int i = 0; i < vg.getChildCount(); i++) {
-			View child = vg.getChildAt(i);
-			result.add(child);
-		}
-		return result;
-	}
-
 	public static void setPadding(View view, int start, int top, int end, int bottom) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+		if (isSupportRTL()) {
 			view.setPaddingRelative(start, top, end, bottom);
 		} else {
 			view.setPadding(start, top, end, bottom);
@@ -673,7 +664,7 @@ public class AndroidUtils {
 
 	public static void setMargins(ViewGroup.MarginLayoutParams layoutParams, int start, int top, int end, int bottom) {
 		layoutParams.setMargins(start, top, end, bottom);
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+		if (isSupportRTL()) {
 			layoutParams.setMarginStart(start);
 			layoutParams.setMarginEnd(end);
 		}
@@ -684,12 +675,25 @@ public class AndroidUtils {
 		return TextUtilsCompat.getLayoutDirectionFromLocale(currentLocale);
 	}
 
+	public static boolean isSupportRTL() {
+		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1;
+	}
+
 	public static float getFreeSpaceGb(File dir) {
 		if (dir.canRead()) {
 			StatFs fs = new StatFs(dir.getAbsolutePath());
 			return (float) (fs.getBlockSize()) * fs.getAvailableBlocks() / (1 << 30);
 		}
 		return -1;
+	}
+
+	public static ArrayList<View> getChildrenViews(ViewGroup vg) {
+		ArrayList<View> result = new ArrayList<>();
+		for (int i = 0; i < vg.getChildCount(); i++) {
+			View child = vg.getChildAt(i);
+			result.add(child);
+		}
+		return result;
 	}
 
 	public static float getTotalSpaceGb(File dir) {

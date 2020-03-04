@@ -390,12 +390,13 @@ public class UiUtilities {
 	}
 	
 	public static void setupLayoutDirection(View view) {
-		if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN_MR1) {
+		if (view == null || !AndroidUtils.isSupportRTL()) {
 			return;
 		}
-		int layoutDirection = AndroidUtils.getLayoutDirection(view.getContext());
+		Context ctx = view.getContext();
+		int layoutDirection = AndroidUtils.getLayoutDirection(ctx);
 		if (view instanceof ViewGroup) {
-			setupLayoutDirection(view, layoutDirection);
+			view.setLayoutDirection(layoutDirection);
 			ArrayList<View> childrenViews = AndroidUtils.getChildrenViews((ViewGroup) view);
 			if (childrenViews != null) {
 				for (View child : childrenViews) {
@@ -403,20 +404,10 @@ public class UiUtilities {
 				}
 			}
 		} else if (view instanceof TextView) {
-			int textDirection = layoutDirection ==
-					ViewCompat.LAYOUT_DIRECTION_RTL ?
+			int textDirection = layoutDirection == ViewCompat.LAYOUT_DIRECTION_RTL ?
 					View.TEXT_DIRECTION_RTL : View.TEXT_DIRECTION_LTR;
-			setupTextDirection((TextView) view, textDirection);
+			view.setTextDirection(textDirection);
 		}
-	}
-
-	private static void setupLayoutDirection(View layout, int direction) {
-		ViewCompat.setLayoutDirection(layout, direction);
-	}
-
-	@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-	private static void setupTextDirection(TextView text, int direction) {
-		text.setTextDirection(direction);
 	}
 
 	public static void setupCompoundButtonDrawable(Context ctx, boolean nightMode, @ColorInt int activeColor, Drawable drawable) {
