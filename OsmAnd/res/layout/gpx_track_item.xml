@@ -19,8 +19,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:minHeight="@dimen/list_item_height"
-        android:layout_marginLeft="@dimen/dialog_content_margin"
-        android:layout_marginStart="@dimen/dialog_content_margin"
+        android:paddingLeft="@dimen/dialog_content_margin"
+        android:paddingStart="@dimen/dialog_content_margin"
+        android:paddingRight="0dp"
+        android:paddingEnd="0dp"
         android:gravity="center_vertical">
 
         <CheckBox
@@ -31,8 +33,10 @@
             android:visibility="gone"
             android:paddingTop="4dp"
             android:paddingBottom="4dp"
-            android:layout_marginRight="@dimen/dialog_content_margin"
-            android:layout_marginEnd="@dimen/dialog_content_margin"
+            android:paddingRight="@dimen/dialog_content_margin"
+            android:paddingEnd="@dimen/dialog_content_margin"
+            android:paddingLeft="0dp"
+            android:paddingStart="0dp"
             android:clickable="false"
             android:focusableInTouchMode="false" />
 
@@ -79,8 +83,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/gpx_small_icon_margin"
-                    android:src="@drawable/ic_small_distance"
-	                android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
+                    android:layout_marginEnd="@dimen/gpx_small_icon_margin"
+                    android:src="@drawable/ic_small_distance" />
 
                 <TextView
                     android:id="@+id/distance"
@@ -97,8 +101,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/gpx_small_icon_margin"
-                    android:src="@drawable/ic_small_point"
-	                android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
+                    android:layout_marginEnd="@dimen/gpx_small_icon_margin"
+                    android:src="@drawable/ic_small_point" />
 
                 <TextView
                     android:id="@+id/points_count"
@@ -115,8 +119,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/gpx_small_icon_margin"
-                    android:src="@drawable/ic_small_time"
-	                android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
+                    android:layout_marginEnd="@dimen/gpx_small_icon_margin"
+                    android:src="@drawable/ic_small_time" />
 
                 <TextView
                     android:id="@+id/time"
@@ -161,10 +165,10 @@
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"
             android:layout_marginLeft="@dimen/favorites_icon_right_margin"
+            android:layout_marginStart="@dimen/favorites_icon_right_margin"
             android:background="?attr/dashboard_button"
             android:src="@drawable/ic_action_gsave_dark"
-            android:visibility="gone"
-	        android:layout_marginStart="@dimen/favorites_icon_right_margin" />
+            android:visibility="gone" />
 
         <ImageButton
             android:id="@+id/stop"

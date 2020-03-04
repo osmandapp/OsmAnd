@@ -9,9 +9,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:orientation="vertical"
-	    android:layout_marginStart="24dp">
+        android:paddingLeft="24dp"
+        android:paddingStart="24dp"
+        android:paddingRight="0dp"
+        android:paddingEnd="0dp"
+        android:orientation="vertical">
 
         <net.osmand.plus.widgets.TextViewEx
             android:id="@+id/title"
