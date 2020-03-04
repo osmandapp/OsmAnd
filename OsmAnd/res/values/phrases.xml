@@ -132,7 +132,7 @@
 	<string name="poi_volcano_type">Type</string>
 	<string name="poi_volcano_status">Status</string>
 	<string name="poi_sms">SMS</string>
-	<string name="poi_video">Video</string>
+	<string name="poi_video_telephone">Video</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
