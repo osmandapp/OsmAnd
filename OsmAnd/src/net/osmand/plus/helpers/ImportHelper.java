@@ -788,6 +788,9 @@ public class ImportHelper {
 							if (succeed) {
 								FragmentManager fragmentManager = activity.getSupportFragmentManager();
 								if (fragmentManager != null) {
+									if (activity instanceof MapActivity) {
+										((MapActivity) activity).closeDrawer();
+									}
 									ImportSettingsFragment.showInstance(fragmentManager, items, file);
 								}
 							} else if (empty) {
