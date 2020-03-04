@@ -456,12 +456,12 @@ dependencies {
 	implementation project(path: ':OsmAnd-java', configuration: 'android')
 	implementation project(':OsmAnd-api')
 	implementation 'com.android.support:multidex:1.0.1'
-	implementation 'com.android.support:gridlayout-v7:27.1.1'
-	implementation 'com.android.support:cardview-v7:27.1.1'
-	implementation 'com.android.support:appcompat-v7:27.1.1'
-	implementation 'com.android.support:design:27.1.1'
-	implementation 'com.android.support:customtabs:27.1.1'
-	implementation 'com.android.support:preference-v7:27.1.1'
+	implementation 'com.android.support:gridlayout-v7:28.0.0'
+	implementation 'com.android.support:cardview-v7:28.0.0'
+	implementation 'com.android.support:appcompat-v7:28.0.0'
+	implementation 'com.android.support:design:28.0.0'
+	implementation 'com.android.support:customtabs:28.0.0'
+	implementation 'com.android.support:preference-v7:28.0.0'
 	implementation fileTree(include:  ['gnu-trove-osmand.jar', 'icu4j-49_1_patched.jar'], dir: 'libs')
 
 	implementation group: 'commons-logging', name: 'commons-logging', version: '1.2'

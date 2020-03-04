@@ -91,6 +91,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/bg_color"
         app:itemBackground="?attr/bg_color"
+	    app:labelVisibilityMode="labeled"
         app:itemIconTint="@color/bottom_navigation_color_selector_light"
         app:itemTextColor="@color/bottom_navigation_color_selector_light"
         app:menu="@menu/map_markers_bottom_navigation"/>
