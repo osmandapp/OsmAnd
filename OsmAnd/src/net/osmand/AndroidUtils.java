@@ -679,14 +679,6 @@ public class AndroidUtils {
 		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1;
 	}
 
-	public static float getFreeSpaceGb(File dir) {
-		if (dir.canRead()) {
-			StatFs fs = new StatFs(dir.getAbsolutePath());
-			return (float) (fs.getBlockSize()) * fs.getAvailableBlocks() / (1 << 30);
-		}
-		return -1;
-	}
-
 	public static ArrayList<View> getChildrenViews(ViewGroup vg) {
 		ArrayList<View> result = new ArrayList<>();
 		for (int i = 0; i < vg.getChildCount(); i++) {
@@ -694,6 +686,14 @@ public class AndroidUtils {
 			result.add(child);
 		}
 		return result;
+	}
+
+	public static float getFreeSpaceGb(File dir) {
+		if (dir.canRead()) {
+			StatFs fs = new StatFs(dir.getAbsolutePath());
+			return (float) (fs.getBlockSize()) * fs.getAvailableBlocks() / (1 << 30);
+		}
+		return -1;
 	}
 
 	public static float getTotalSpaceGb(File dir) {
