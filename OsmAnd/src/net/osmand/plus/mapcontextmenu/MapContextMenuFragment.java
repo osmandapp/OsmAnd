@@ -2101,7 +2101,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private int getZoomButtonsY(int y) {
-		return y - zoomButtonsHeight - shadowHeight - zoomPaddingTop;
+		return y - mainView.getTop() - zoomButtonsHeight + zoomPaddingTop;
 	}
 
 	private void doLayoutMenu() {
