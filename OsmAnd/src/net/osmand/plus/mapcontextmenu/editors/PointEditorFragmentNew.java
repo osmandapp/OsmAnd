@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -35,6 +36,8 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 
 	private View view;
 	private EditText nameEdit;
+	private ImageView nameIcon;
+	private Button addDelDescription;
 	private boolean cancelled;
 	private boolean nightMode;
 
@@ -46,7 +49,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		nightMode = !getMyApplication().getSettings().isLightContent();
 		view = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.point_editor_fragment_new, container, false);
 
-		PointEditor editor = getEditor();
+		final PointEditor editor = getEditor();
 		if (editor == null) {
 			return view;
 		}
@@ -57,7 +60,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setTitle(getToolbarTitle());
 
-		OsmandApplication app = requireMyApplication();
+		final OsmandApplication app = requireMyApplication();
 		Drawable icBack = app.getUIUtilities().getIcon(R.drawable.ic_arrow_back, nightMode ? R.color.active_buttons_and_links_text_dark : R.color.description_font_and_bottom_sheet_icons);
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
@@ -70,7 +73,28 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 
 		int activeColorResId = !editor.isLight() ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		ImageView toolbarAction = (ImageView) view.findViewById(R.id.toolbar_action);
-		toolbarAction.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_replace, activeColorResId));
+
+
+		ImageView groupListIcon = (ImageView) view.findViewById(R.id.group_list_button_icon);
+		groupListIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_group_select_all, activeColorResId));
+
+		ImageView replaceIcon = (ImageView) view.findViewById(R.id.replace_action_icon);
+		replaceIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_replace, activeColorResId));
+
+		ImageView deleteIcon = (ImageView) view.findViewById(R.id.delete_action_icon);
+		deleteIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_delete_dark, activeColorResId));
+
+		View groupList = view.findViewById(R.id.group_list_button);
+		groupList.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				DialogFragment dialogFragment = createSelectCategoryDialog();
+				if (dialogFragment != null) {
+					dialogFragment.show(getChildFragmentManager(), SelectCategoryDialogFragment.TAG);
+				}
+			}
+		});
+
 
 		Button saveButton = (Button) view.findViewById(R.id.save_button);
 		saveButton.setTextColor(getResources().getColor(activeColorResId));
@@ -100,17 +124,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			}
 		});
 
-		if (editor.isNew()) {
-			deleteButton.setVisibility(View.GONE);
-		} else {
-			deleteButton.setVisibility(View.VISIBLE);
-		}
-
-//		view.findViewById(R.id.background_layout).setBackgroundResource(!editor.isLight() ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
-//		view.findViewById(R.id.buttons_layout).setBackgroundResource(!editor.isLight() ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
-//		view.findViewById(R.id.title_view).setBackgroundResource(!editor.isLight() ? R.color.list_background_color_dark : R.color.list_background_color_light);
-//		view.findViewById(R.id.description_caption).setBackgroundResource(!editor.isLight() ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
-
 		OsmandTextFieldBoxes nameCaption = (OsmandTextFieldBoxes) view.findViewById(R.id.name_caption);
 		AndroidUtils.setTextSecondaryColor(view.getContext(), nameCaption.getEditText(), !editor.isLight());
 		nameCaption.getEditText().setText(getNameCaption());
@@ -122,6 +135,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		AndroidUtils.setTextPrimaryColor(view.getContext(), nameEdit, !editor.isLight());
 		AndroidUtils.setHintTextSecondaryColor(view.getContext(), nameEdit, !editor.isLight());
 		nameEdit.setText(getNameInitValue());
+		nameIcon = (ImageView) view.findViewById(R.id.name_icon);
 //		AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) view.findViewById(R.id.category_edit);
 //		AndroidUtils.setTextPrimaryColor(view.getContext(), categoryEdit, !editor.isLight());
 //		categoryEdit.setText(getCategoryInitValue());
@@ -140,15 +154,30 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 //			}
 //		});
 
-//		final EditText descriptionEdit = (EditText) view.findViewById(R.id.description_edit);
-//		AndroidUtils.setTextPrimaryColor(view.getContext(), descriptionEdit, !editor.isLight());
-//		AndroidUtils.setHintTextSecondaryColor(view.getContext(), descriptionEdit, !editor.isLight());
-//		if (getDescriptionInitValue() != null) {
-//			descriptionEdit.setText(getDescriptionInitValue());
-//		}
+		final EditText descriptionEdit = (EditText) view.findViewById(R.id.description_edit);
+		AndroidUtils.setTextPrimaryColor(view.getContext(), descriptionEdit, !editor.isLight());
+		AndroidUtils.setHintTextSecondaryColor(view.getContext(), descriptionEdit, !editor.isLight());
+		if (getDescriptionInitValue() != null) {
+			descriptionEdit.setText(getDescriptionInitValue());
+		}
 
-//		ImageView nameImage = (ImageView) view.findViewById(R.id.name_image);
-//		nameImage.setImageDrawable(getNameIcon());
+		final OsmandTextFieldBoxes descriptionCaption = (OsmandTextFieldBoxes) view.findViewById(R.id.description_caption);
+		addDelDescription = (Button) view.findViewById(R.id.description_button);
+		addDelDescription.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (!descriptionCaption.isActivated()) {
+					descriptionCaption.activate(true);
+					descriptionCaption.setVisibility(View.VISIBLE);
+					addDelDescription.setText(view.getResources().getString(R.string.delete_description));
+				} else {
+					descriptionCaption.deactivate();
+					descriptionCaption.setVisibility(View.GONE);
+					addDelDescription.setText(view.getResources().getString(R.string.add_description));
+				}
+			}
+		});
+		nameIcon.setImageDrawable(getNameIcon());
 //		ImageView categoryImage = (ImageView) view.findViewById(R.id.category_image);
 //		categoryImage.setImageDrawable(getCategoryIcon());
 
@@ -159,6 +188,26 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 //			nameEdit.setHint(R.string.access_hint_enter_name);
 //			categoryEdit.setHint(R.string.access_hint_enter_category);
 //			descriptionEdit.setHint(R.string.access_hint_enter_description);
+		}
+
+		if (editor.isNew()) {
+			toolbarAction.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_replace, activeColorResId));
+			deleteButton.setVisibility(View.GONE);
+			descriptionCaption.setVisibility(View.GONE);
+			deleteIcon.setVisibility(View.GONE);
+		} else {
+			toolbarAction.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_delete_dark, activeColorResId));
+			deleteButton.setVisibility(View.VISIBLE);
+			deleteIcon.setVisibility(View.VISIBLE);
+			if (!descriptionEdit.getText().toString().isEmpty()) {
+				descriptionCaption.activate(true);
+				descriptionCaption.setVisibility(View.VISIBLE);
+				addDelDescription.setText(app.getString(R.string.delete_description));
+			} else {
+				descriptionCaption.deactivate();
+				descriptionCaption.setVisibility(View.GONE);
+				addDelDescription.setText(app.getString(R.string.add_description));
+			}
 		}
 		return view;
 	}
@@ -281,6 +330,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	public abstract String getToolbarTitle();
 
 	public void setCategory(String name, int color) {
+		//todo renew category list
 		AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) view.findViewById(R.id.category_edit);
 		String n = name.length() == 0 ? getDefaultCategoryName() : name;
 		categoryEdit.setText(n);

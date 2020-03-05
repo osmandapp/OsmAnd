@@ -33,6 +33,7 @@
 				android:layout_width="@dimen/list_item_height"
 				android:layout_height="match_parent"
 				android:layout_gravity="end"
+				android:layout_marginRight="8dp"
 				android:background="?attr/card_and_list_background_basic"
 				android:contentDescription="@string/replace_all"
 				android:scaleType="center"
@@ -70,6 +71,15 @@
 							android:layout_marginLeft="@dimen/list_content_padding"
 							android:layout_marginRight="@dimen/list_content_padding">
 
+							<ImageView
+								android:id="@+id/name_icon"
+								android:layout_width="@dimen/favorites_icon_size"
+								android:layout_height="@dimen/favorites_icon_size"
+								android:layout_gravity="end"
+								android:layout_margin="10dp"
+								android:contentDescription="@string/icon"
+								android:src="@drawable/ic_action_home_dark" />
+
 							<LinearLayout
 								android:layout_width="match_parent"
 								android:layout_height="wrap_content"
@@ -102,18 +112,10 @@
 
 							</LinearLayout>
 
-							<ImageView
-								android:id="@+id/toolbar_action_1"
-								android:layout_width="@dimen/favorites_icon_size"
-								android:layout_height="@dimen/favorites_icon_size"
-								android:layout_gravity="end"
-								android:layout_margin="10dp"
-								android:contentDescription="@string/replace_all"
-								android:scaleType="center"
-								android:src="@drawable/ic_action_home_dark" />
 						</FrameLayout>
 
 						<LinearLayout
+							android:id="@+id/description"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:layout_marginTop="@dimen/card_padding"
@@ -164,18 +166,61 @@
 							android:layout_height="1dp"
 							android:background="?attr/dashboard_divider" />
 
-						<net.osmand.plus.widgets.TextViewEx
+						<LinearLayout
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:letterSpacing="@dimen/description_letter_spacing"
-							android:paddingLeft="16dp"
-							android:paddingTop="14dp"
-							android:paddingRight="16dp"
-							android:paddingBottom="14dp"
-							android:text="@string/select_group"
-							android:textColor="?android:textColorSecondary"
-							android:textSize="@dimen/default_desc_text_size"
-							osmand:typeface="@string/font_roboto_regular" />
+							android:orientation="horizontal">
+
+							<net.osmand.plus.widgets.TextViewEx
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:layout_weight="1"
+								android:letterSpacing="@dimen/description_letter_spacing"
+								android:paddingLeft="16dp"
+								android:paddingTop="14dp"
+								android:paddingRight="16dp"
+								android:paddingBottom="14dp"
+								android:text="@string/select_group"
+								android:textColor="?android:textColorSecondary"
+								android:textSize="@dimen/default_desc_text_size"
+								osmand:typeface="@string/font_roboto_regular" />
+
+							<LinearLayout
+								android:id="@+id/group_list_button"
+								android:layout_width="wrap_content"
+								android:layout_height="match_parent"
+								android:layout_gravity="end"
+								android:orientation="horizontal">
+
+								<net.osmand.plus.widgets.TextViewEx
+									android:id="@+id/group_list_button_title"
+									android:layout_width="wrap_content"
+									android:layout_height="match_parent"
+									android:layout_gravity="end"
+									android:ellipsize="end"
+									android:gravity="center"
+									android:letterSpacing="@dimen/text_button_letter_spacing"
+									android:maxLines="1"
+									android:text="@string/shared_string_list"
+									android:textColor="?attr/active_color_basic"
+									android:textSize="@dimen/text_button_text_size"
+									osmand:typeface="@string/font_roboto_medium"
+									tools:ignore="UnusedAttribute" />
+
+								<ImageView
+									android:id="@+id/group_list_button_icon"
+									android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:layout_gravity="center_vertical"
+									android:paddingStart="@dimen/content_padding_small"
+									android:paddingLeft="@dimen/content_padding_small"
+									android:paddingEnd="@dimen/route_info_buttons_padding_top_bottom"
+									android:paddingRight="@dimen/route_info_buttons_padding_top_bottom"
+									android:src="@drawable/ic_action_folder"
+									tools:src="@drawable/ic_action_group_select_all" />
+
+							</LinearLayout>
+						</LinearLayout>
 
 						<View
 							android:layout_width="wrap_content"
@@ -235,6 +280,44 @@
 							android:layout_width="wrap_content"
 							android:layout_height="1dp"
 							android:background="?attr/dashboard_divider" />
+
+						<LinearLayout
+							android:id="@+id/button_replace_container"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_gravity="center"
+							android:gravity="center_vertical"
+							android:orientation="horizontal">
+
+							<ImageView
+								android:id="@+id/replace_action_icon"
+								android:layout_width="wrap_content"
+								android:layout_height="match_parent"
+								android:contentDescription="@string/replace_all"
+								android:paddingLeft="16dp"
+								android:paddingTop="21dp"
+								android:paddingBottom="21dp"
+								android:src="@drawable/ic_action_replace" />
+						</LinearLayout>
+
+						<LinearLayout
+							android:id="@+id/button_delete_container"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_gravity="center"
+							android:gravity="center_vertical"
+							android:orientation="horizontal">
+
+							<ImageView
+								android:id="@+id/delete_action_icon"
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:contentDescription="@string/delete_point"
+								android:paddingLeft="16dp"
+								android:paddingTop="8dp"
+								android:paddingBottom="8dp"
+								android:src="@drawable/ic_action_delete_dark" />
+						</LinearLayout>
 
 					</LinearLayout>
 
