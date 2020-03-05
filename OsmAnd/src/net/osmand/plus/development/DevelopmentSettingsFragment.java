@@ -2,7 +2,8 @@ package net.osmand.plus.development;
 
 import android.content.Intent;
 import android.os.Debug;
-import android.support.v7.preference.Preference;
+
+import androidx.preference.Preference;
 
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.R;

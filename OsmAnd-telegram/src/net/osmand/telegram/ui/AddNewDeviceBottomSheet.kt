@@ -3,10 +3,6 @@ package net.osmand.telegram.ui
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.content.ContextCompat
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -16,8 +12,9 @@ import android.view.WindowManager
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import net.osmand.telegram.R
-import net.osmand.telegram.TelegramSettings
 import net.osmand.telegram.ui.views.BottomSheetDialog
 import net.osmand.telegram.utils.AndroidNetworkUtils
 import net.osmand.telegram.utils.OsmandApiUtils
@@ -171,7 +168,7 @@ class AddNewDeviceBottomSheet : BaseDialogFragment() {
 		const val MAX_DEVICE_NAME_LENGTH = 200
 
 		private const val TAG = "AddNewDeviceBottomSheet"
-		fun showInstance(fm: FragmentManager, target: Fragment): Boolean {
+		fun showInstance(fm: androidx.fragment.app.FragmentManager, target: androidx.fragment.app.Fragment): Boolean {
 			return try {
 				AddNewDeviceBottomSheet().apply {
 					setTargetFragment(target, NEW_DEVICE_REQUEST_CODE)

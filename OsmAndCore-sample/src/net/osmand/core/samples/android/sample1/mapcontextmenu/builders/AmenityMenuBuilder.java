@@ -1,14 +1,10 @@
 package net.osmand.core.samples.android.sample1.mapcontextmenu.builders;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.view.ContextThemeWrapper;
-import android.support.v7.widget.AppCompatButton;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -21,6 +17,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatButton;
+
 import net.osmand.core.samples.android.sample1.MainActivity;
 import net.osmand.core.samples.android.sample1.OsmandResources;
 import net.osmand.core.samples.android.sample1.R;
@@ -28,9 +27,7 @@ import net.osmand.core.samples.android.sample1.SampleApplication;
 import net.osmand.core.samples.android.sample1.data.PointDescription;
 import net.osmand.core.samples.android.sample1.mapcontextmenu.ContextMenuHelper;
 import net.osmand.core.samples.android.sample1.mapcontextmenu.MenuBuilder;
-import net.osmand.core.samples.android.sample1.mapcontextmenu.MenuController;
 import net.osmand.data.Amenity;
-import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;

@@ -17,10 +17,11 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-import android.support.v4.graphics.ColorUtils;
 import android.util.Pair;
 import android.view.MotionEvent;
+
+import androidx.annotation.NonNull;
+import androidx.core.graphics.ColorUtils;
 
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;

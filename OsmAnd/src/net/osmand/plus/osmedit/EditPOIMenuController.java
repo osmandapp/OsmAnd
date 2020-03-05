@@ -2,8 +2,9 @@ package net.osmand.plus.osmedit;
 
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.data.PointDescription;
 import net.osmand.osm.PoiType;

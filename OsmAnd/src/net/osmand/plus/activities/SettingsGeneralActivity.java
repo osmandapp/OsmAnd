@@ -19,10 +19,6 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.AppCompatCheckedTextView;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +28,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatCheckedTextView;
+import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;

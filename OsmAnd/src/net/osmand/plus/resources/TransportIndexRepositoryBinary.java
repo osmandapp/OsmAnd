@@ -1,13 +1,6 @@
 package net.osmand.plus.resources;
 
-import android.support.annotation.Nullable;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -20,6 +13,13 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class TransportIndexRepositoryBinary implements TransportIndexRepository {
 	private static final Log log = PlatformUtil.getLog(TransportIndexRepositoryBinary.class);

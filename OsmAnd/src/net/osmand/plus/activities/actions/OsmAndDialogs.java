@@ -1,16 +1,14 @@
 package net.osmand.plus.activities.actions;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.ApplicationMode;
@@ -22,6 +20,9 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.util.Algorithms;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class OsmAndDialogs {
 

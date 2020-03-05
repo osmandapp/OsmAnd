@@ -3,12 +3,13 @@ package net.osmand.plus.srtmplugin;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.ArrayAdapter;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
@@ -29,7 +30,6 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;

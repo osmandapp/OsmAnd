@@ -1,8 +1,9 @@
 package net.osmand.plus.dashboard.tools;
 
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;

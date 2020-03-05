@@ -1,7 +1,5 @@
 package net.osmand.plus.mapcontextmenu.other;
 
-import android.support.v4.app.Fragment;
-
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.BaseMenuController;
 

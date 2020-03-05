@@ -1,13 +1,14 @@
 package net.osmand.plus.dashboard;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;

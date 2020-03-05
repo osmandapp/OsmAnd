@@ -1,9 +1,10 @@
 package net.osmand.view;
 
 import android.content.Context;
-import android.support.v7.widget.AppCompatCheckBox;
 import android.util.AttributeSet;
 import android.widget.CompoundButton;
+
+import androidx.appcompat.widget.AppCompatCheckBox;
 
 import net.osmand.plus.R;
 

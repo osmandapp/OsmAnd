@@ -1,15 +1,14 @@
 package net.osmand.telegram.ui.views
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.View
 
-class EmptyStateRecyclerView : RecyclerView {
+class EmptyStateRecyclerView : androidx.recyclerview.widget.RecyclerView {
 
 	private var emptyView: View? = null
 
-	private val emptyStateObserver = object : RecyclerView.AdapterDataObserver() {
+	private val emptyStateObserver = object : androidx.recyclerview.widget.RecyclerView.AdapterDataObserver() {
 		override fun onChanged() {
 			checkIfEmpty()
 		}
@@ -33,7 +32,7 @@ class EmptyStateRecyclerView : RecyclerView {
 		defStyle
 	)
 
-	override fun setAdapter(adapter: RecyclerView.Adapter<*>?) {
+	override fun setAdapter(adapter: androidx.recyclerview.widget.RecyclerView.Adapter<*>?) {
 		val oldAdapter = getAdapter()
 		oldAdapter?.unregisterAdapterDataObserver(emptyStateObserver)
 		super.setAdapter(adapter)

@@ -1,10 +1,11 @@
 package net.osmand.plus.views;
 
 import android.os.SystemClock;
-import android.support.v4.util.Pair;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
+
+import androidx.core.util.Pair;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;

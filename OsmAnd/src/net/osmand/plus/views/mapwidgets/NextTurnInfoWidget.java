@@ -13,9 +13,10 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorRes;
-import android.support.annotation.NonNull;
 import android.text.TextPaint;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;

@@ -2,8 +2,9 @@ package net.osmand.plus;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;

@@ -1,8 +1,9 @@
 package net.osmand.plus.chooseplan;
 
 import android.app.Activity;
-import android.support.annotation.Nullable;
 import android.view.View;
+
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;

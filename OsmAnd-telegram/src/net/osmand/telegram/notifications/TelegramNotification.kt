@@ -3,8 +3,8 @@ package net.osmand.telegram.notifications
 import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Intent
-import android.support.v4.app.NotificationCompat
-import android.support.v4.app.NotificationManagerCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.ui.MainActivity
 import net.osmand.telegram.ui.OPEN_MY_LOCATION_TAB_KEY
@@ -53,7 +53,7 @@ abstract class TelegramNotification(protected var app: TelegramApplication, val 
 			app.notificationHelper.createNotificationChannel()
 		}
 		val builder = NotificationCompat.Builder(app, NotificationHelper.NOTIFICATION_CHANEL_ID)
-				.setVisibility(android.support.v4.app.NotificationCompat.VISIBILITY_PUBLIC)
+				.setVisibility(androidx.core.app.NotificationCompat.VISIBILITY_PUBLIC)
 				.setPriority(priority)
 				.setOngoing(ongoing && !wearable)
 				.setContentIntent(contentPendingIntent)

@@ -4,13 +4,14 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SwitchCompat;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.FavouritesDbHelper;

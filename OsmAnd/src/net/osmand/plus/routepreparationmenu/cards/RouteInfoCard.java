@@ -1,10 +1,6 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
 import android.graphics.drawable.Drawable;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.ColorUtils;
-import android.support.v7.view.ContextThemeWrapper;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.StyleSpan;
@@ -14,6 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.ColorUtils;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.data.BarData;

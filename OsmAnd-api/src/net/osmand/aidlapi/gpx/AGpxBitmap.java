@@ -3,7 +3,8 @@ package net.osmand.aidlapi.gpx;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Parcel;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.aidlapi.AidlParams;
 

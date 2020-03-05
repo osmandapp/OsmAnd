@@ -3470,7 +3470,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="osm_authorization_success">S\'autorizatzione est resèssida</string>
     <string name="monitoring_min_speed_descr_recommendation">Impòsitu: Proa a impreare, in antis, su rilevamentu de movimentu pro mèdiu de sul filtru de movimentu mìnimu (B). Diat pòdere produire risultados mègius, e tue dias pòdere pèrdere datos de mancu. Si sas rastas tuas abarrant burdellosas a lestresas bassas, proa a impreare inoghe valores diferentes dae zero. Pro praghere ammenta·ti chi carchi mèdida diat pòdere non rilevare perunu valore de lestresa (unas àteras maneras basadas in subra de sa retza), e chi in custu casu non dias registrare nudda.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Impòsitu: est prus difìtzile a intzertare ite at a èssere registradu e ite nono. Diat èssere mègius a istudare custu filtru.</string>
-    <string name="live_monitoring_time_buffer">Intervallu tampone (buffer)</string>
+    <string name="live_monitoring_time_buffer">Durada de sa memòria tampone (buffer)</string>
     <string name="rearrange_categories">Torra a ordinare sas categorias</string>
     <string name="create_custom_categories_list_promo">Podes importare categorias personalizadas, cuare categorias chi non pensas chi ti serbant e mudare s\'òrdine de sa lista. Sa lista podet èssere importada e esportada cun sos profilos.</string>
     <string name="add_new_custom_category_button_promo">Podes annànghere una categoria personalizada noa ischertende·nde una o unas cantas pagas chi ti serbint.</string>
@@ -3485,7 +3485,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="monitoring_min_accuracy_descr">Custu at a registrare petzi sos puntos medidos cun un\'acuradesa mìnima indicada (in metros/pees, comente benit sinnaladu dae Android pro su chipset tuo). S\'acuradesa si riferit a sa dispersione de movimentos torrados a repìtere, e no est ligada diretamente a sa pretzisione, chi definit canto sa medida tua est a curtzu a sa positzione bera tua.</string>
     <string name="reset_to_default_category_button_promo">Ripristinende sos valores predefinidos as a torrare a impostare s\'istadu predefinidu a pustis de s\'installatzione.</string>
     <string name="accessibility_mode_disabled">Sa modalidade de atzessibilidade est disabilitada in su sistema tuo.</string>
-    <string name="use_system_screen_timeout">Imprea su tempus de isetu de su sistema</string>
+    <string name="use_system_screen_timeout">Imprea su tempus de isetu de s\'ischermu de su sistema</string>
     <string name="use_system_screen_timeout_promo">Disabilitadu in sas impostatziones predefinidas. Si OsmAnd est traballende in primu pranu, s\'ischermu non s\'at a mòrrere.
 \n
 \nSi est abilitadu OsmAnd at a impreare sas impostatziones de istudadura de su sistema.</string>
@@ -3563,4 +3563,5 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="import_duplicates_title">Carchi elementu esistit giai</string>
     <string name="select_data_to_import">Ischerta sos datos de importare.</string>
     <string name="shared_string_rendering_style">Istile de renderizatzione</string>
+    <string name="import_rendering_file">Importa unu documentu de renderizatzione</string>
 </resources>

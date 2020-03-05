@@ -1,10 +1,11 @@
 package net.osmand.plus.widgets;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class EmptyStateRecyclerView extends RecyclerView {
 	private View emptyView;

@@ -3534,4 +3534,5 @@ représentant la zone : %1$s x %2$s</string>
     <string name="import_duplicates_title">Certains éléments existent déjà</string>
     <string name="select_data_to_import">Sélectionnez les données à importer.</string>
     <string name="shared_string_rendering_style">Style de rendu</string>
+    <string name="import_rendering_file">Importer un fichier de rendu</string>
 </resources>

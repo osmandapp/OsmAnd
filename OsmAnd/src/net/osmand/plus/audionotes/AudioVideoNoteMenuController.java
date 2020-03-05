@@ -5,8 +5,9 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;

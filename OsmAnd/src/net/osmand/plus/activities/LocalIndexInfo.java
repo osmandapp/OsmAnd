@@ -1,12 +1,12 @@
 package net.osmand.plus.activities;
 
-import java.io.File;
+import androidx.annotation.NonNull;
 
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
-import android.os.Parcel;
-import android.support.annotation.NonNull;
+
+import java.io.File;
 
 public class LocalIndexInfo {
 

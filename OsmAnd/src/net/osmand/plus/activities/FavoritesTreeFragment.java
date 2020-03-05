@@ -1,8 +1,5 @@
 package net.osmand.plus.activities;
 
-import static net.osmand.plus.myplaces.FavoritesActivity.FAV_TAB;
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,11 +10,6 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.view.ActionMode;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -33,6 +25,12 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ActionMode;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.MenuItemCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.data.FavouritePoint;
@@ -66,6 +64,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import static net.osmand.plus.myplaces.FavoritesActivity.FAV_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
 
 public class FavoritesTreeFragment extends OsmandExpandableListFragment implements

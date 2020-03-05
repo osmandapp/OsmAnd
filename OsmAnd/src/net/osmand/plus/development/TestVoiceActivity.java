@@ -5,11 +5,10 @@ import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Gravity;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -17,14 +16,16 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.routing.data.StreetName;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
-import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
+import net.osmand.plus.voice.TTSCommandPlayerImpl;
 
 import java.util.HashMap;
 import java.util.Map;

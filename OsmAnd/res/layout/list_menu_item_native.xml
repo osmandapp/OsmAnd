@@ -7,7 +7,7 @@
     android:orientation="horizontal"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v7.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         tools:visibility="visible"
 	    android:layout_marginStart="24dp" />
 
-    <android.support.v7.widget.AppCompatTextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
         android:textSize="@dimen/default_list_text_size"
 	    android:layout_marginStart="@dimen/content_padding_small" />
 
-    <android.support.v7.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/icon_settings"
         android:contentDescription="@string/shared_string_settings"
         android:layout_width="wrap_content"
@@ -43,7 +43,7 @@
         tools:visibility="visible"/>
 
     <!-- android:button="@drawable/ic_btn_wocheckbox" -->
-    <android.support.v7.widget.AppCompatCheckBox
+    <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/toggle_item"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

@@ -28,7 +28,7 @@
             android:layout_height="@dimen/map_button_shadow_width"
             android:background="?attr/selectableItemBackground">
 
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:textSize="@dimen/default_list_text_size"
                 tools:text="3"
                 android:gravity="center"
@@ -39,7 +39,7 @@
                 android:visibility="gone"
                 tools:visibility="visible"/>
 
-            <android.support.v7.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/map_marker_reorder_icon"
                 android:layout_width="@dimen/map_button_shadow_width"
                 android:layout_height="@dimen/map_button_shadow_width"
@@ -55,7 +55,7 @@
                 android:visibility="gone"
                 tools:visibility="visible"/>
 
-            <android.support.v7.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/map_marker_icon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
@@ -74,7 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/map_marker_title_height">
 
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/map_marker_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical">
 
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/map_marker_first_descr"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
                         android:layout_marginRight="@dimen/text_margin_small"
                         tools:src="@drawable/ic_direction_arrow"/>
 
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/map_marker_distance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -124,7 +124,7 @@
                         android:layout_width="@dimen/text_margin_small"
                         android:layout_height="match_parent"/>
 
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/map_marker_point_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -139,7 +139,7 @@
                         android:layout_width="@dimen/text_margin_small"
                         android:layout_height="match_parent"/>
 
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/map_marker_description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

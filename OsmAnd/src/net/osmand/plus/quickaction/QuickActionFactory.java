@@ -1,7 +1,7 @@
 package net.osmand.plus.quickaction;
 
-import android.support.annotation.DrawableRes;
-import android.support.annotation.StringRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.StringRes;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

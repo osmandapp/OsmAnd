@@ -1,9 +1,10 @@
 package net.osmand.plus.settings;
 
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.SwitchPreferenceCompat;
 import android.view.LayoutInflater;
 import android.view.View;
+
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.plus.R;
 

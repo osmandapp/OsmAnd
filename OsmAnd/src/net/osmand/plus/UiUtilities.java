@@ -11,18 +11,6 @@ import android.graphics.drawable.RippleDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Build;
-import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.widget.TintableCompoundButton;
-import android.support.v7.view.ContextThemeWrapper;
-import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,13 +20,25 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.widget.TintableCompoundButton;
+
+import com.google.android.material.snackbar.Snackbar;
+
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.widgets.TextViewEx;
-
-import java.util.Locale;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
 
@@ -360,8 +360,8 @@ public class UiUtilities {
 		}
 		View view = snackbar.getView();
 		Context ctx = view.getContext();
-		TextView tvMessage = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
-		TextView tvAction = (TextView) view.findViewById(android.support.design.R.id.snackbar_action);
+		TextView tvMessage = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_text);
+		TextView tvAction = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_action);
 		if (messageColor == null) {
 			messageColor = nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
 		}

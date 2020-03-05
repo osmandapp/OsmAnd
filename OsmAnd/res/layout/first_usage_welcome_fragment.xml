@@ -58,7 +58,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"/>
 
-        <android.support.v7.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/start_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

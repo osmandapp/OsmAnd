@@ -2,7 +2,8 @@ package net.osmand.plus.settings;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.IdRes;
+
+import androidx.annotation.IdRes;
 
 public class DataStorageMenuItem implements Parcelable, Cloneable {
 

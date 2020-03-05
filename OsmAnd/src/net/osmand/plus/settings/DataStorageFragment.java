@@ -8,18 +8,19 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.preference.CheckBoxPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
-import android.support.v7.preference.PreferenceViewHolder;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.preference.CheckBoxPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.PreferenceViewHolder;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
@@ -40,9 +41,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.text.DecimalFormat;
-import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
 import static net.osmand.plus.settings.DataStorageHelper.INTERNAL_STORAGE;
 import static net.osmand.plus.settings.DataStorageHelper.MANUALLY_SPECIFIED;
@@ -50,8 +49,8 @@ import static net.osmand.plus.settings.DataStorageHelper.OTHER_MEMORY;
 import static net.osmand.plus.settings.DataStorageHelper.TILES_MEMORY;
 import static net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet.CHOSEN_DIRECTORY;
 import static net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet.MOVE_DATA;
-import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.PATH_CHANGED;
 import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.NEW_PATH;
+import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.PATH_CHANGED;
 
 public class DataStorageFragment extends BaseSettingsFragment implements DataStorageHelper.UpdateMemoryInfoUIAdapter {
 	public final static int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 500;

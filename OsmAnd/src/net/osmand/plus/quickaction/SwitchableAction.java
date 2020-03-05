@@ -2,12 +2,6 @@ package net.osmand.plus.quickaction;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.StringRes;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.MotionEventCompat;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SwitchCompat;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,6 +10,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.StringRes;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.view.MotionEventCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;

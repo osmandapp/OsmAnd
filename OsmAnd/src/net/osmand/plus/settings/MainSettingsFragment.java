@@ -3,13 +3,14 @@ package net.osmand.plus.settings;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.ColorRes;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceCategory;
-import android.support.v7.preference.PreferenceViewHolder;
 import android.view.View;
+
+import androidx.annotation.ColorRes;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceViewHolder;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;

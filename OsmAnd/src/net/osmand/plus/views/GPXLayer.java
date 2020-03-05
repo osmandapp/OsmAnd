@@ -16,11 +16,12 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.util.Pair;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;

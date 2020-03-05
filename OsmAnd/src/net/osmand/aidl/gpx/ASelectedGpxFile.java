@@ -2,11 +2,9 @@ package net.osmand.aidl.gpx;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.text.TextUtils;
 
-import java.io.File;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class ASelectedGpxFile implements Parcelable {
 

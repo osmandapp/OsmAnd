@@ -4,14 +4,12 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
-import android.support.v4.app.DialogFragment
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.DialogFragment
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.ui.views.BottomSheetDialog
@@ -167,7 +165,7 @@ class SetTimeBottomSheet : DialogFragment() {
 
 		private const val TAG = "SetTimeBottomSheet"
 
-		fun showInstance(fm: FragmentManager, target: Fragment, start: Long, end: Long): Boolean {
+		fun showInstance(fm: androidx.fragment.app.FragmentManager, target: androidx.fragment.app.Fragment, start: Long, end: Long): Boolean {
 			return try {
 				SetTimeBottomSheet().apply {
 					arguments = Bundle().apply {

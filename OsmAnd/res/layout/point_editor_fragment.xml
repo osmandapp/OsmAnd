@@ -17,7 +17,7 @@
         android:clickable="true"
         android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/dashboard_map_toolbar"
@@ -27,7 +27,7 @@
             app:contentInsetLeft="72dp"
             app:contentInsetStart="72dp">
 
-        </android.support.v7.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
         <ScrollView
             android:id="@+id/editor_scroll_view"

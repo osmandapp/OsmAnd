@@ -1,11 +1,7 @@
 package net.osmand.plus.dashboard;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,11 +10,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
+
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
-import net.osmand.plus.routepreparationmenu.RouteDetailsFragment;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routing.RoutingHelper;
 
 /**

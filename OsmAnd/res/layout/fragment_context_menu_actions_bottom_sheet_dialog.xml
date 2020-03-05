@@ -7,13 +7,13 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/scroll_view_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <android.support.v4.widget.NestedScrollView
+        <androidx.core.widget.NestedScrollView
             android:id="@+id/bottom_sheet_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,9 +28,9 @@
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/bottom_sheet_content_padding_small"/>
 
-        </android.support.v4.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
 
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <LinearLayout
         android:id="@+id/cancel_row_background"

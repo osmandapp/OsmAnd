@@ -6,7 +6,7 @@
 	android:layout_height="match_parent"
 	android:orientation="vertical">
 
-	<android.support.design.widget.AppBarLayout
+	<com.google.android.material.appbar.AppBarLayout
 		android:id="@+id/app_bar_layout"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
@@ -133,9 +133,9 @@
 
 		</FrameLayout>
 
-	</android.support.design.widget.AppBarLayout>
+	</com.google.android.material.appbar.AppBarLayout>
 
-	<android.support.v4.widget.SwipeRefreshLayout
+	<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 		android:id="@+id/swipe_refresh"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
@@ -158,6 +158,6 @@
 
 		</FrameLayout>
 
-	</android.support.v4.widget.SwipeRefreshLayout>
+	</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

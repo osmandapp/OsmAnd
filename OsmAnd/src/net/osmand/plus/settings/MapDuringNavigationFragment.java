@@ -1,6 +1,6 @@
 package net.osmand.plus.settings;
 
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;

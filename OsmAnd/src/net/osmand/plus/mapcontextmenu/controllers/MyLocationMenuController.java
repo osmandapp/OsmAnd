@@ -1,10 +1,10 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.data.PointDescription;
-import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;

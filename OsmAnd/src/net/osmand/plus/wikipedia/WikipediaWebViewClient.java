@@ -3,9 +3,10 @@ package net.osmand.plus.wikipedia;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.app.FragmentActivity;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.data.Amenity;
 
