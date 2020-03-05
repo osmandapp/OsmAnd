@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:visibility="gone"/>
 
-    <android.support.v7.widget.AppCompatCheckedTextView
+    <androidx.appcompat.widget.AppCompatCheckedTextView
         android:id="@+id/text1"
         android:checkMark="?android:attr/listChoiceIndicatorSingle"
         android:layout_height="wrap_content"

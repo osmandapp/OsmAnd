@@ -9,7 +9,7 @@
     android:orientation="vertical"
     tools:context="net.osmand.plus.osmedit.EditPoiDialogFragment">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/dashboard_map_toolbar"
@@ -30,7 +30,7 @@
         android:layout_height="0dp"
         android:orientation="vertical">
 
-        <android.support.design.widget.AppBarLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/pstsTabBackground"
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 app:layout_scrollFlags="scroll">
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/shared_string_name"
@@ -60,7 +60,7 @@
                         android:inputType="textCapSentences"
                         tools:text="@string/lorem_ipsum"/>
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -78,7 +78,7 @@
                     android:background="@null"
                     android:src="@drawable/ic_action_label"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/poiTypeTextInputLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
                         tools:text="@string/lorem_ipsum"
                         android:drawableEnd="@drawable/ic_action_arrow_drop_down" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <ImageButton
                     android:id="@+id/onlineDocumentationButton"
@@ -112,7 +112,7 @@
                     tools:src="@drawable/ic_action_help"/>
             </LinearLayout>
 
-            <android.support.design.widget.TabLayout
+            <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -121,7 +121,7 @@
                 app:tabIndicatorColor="@color/osmand_orange"
                 app:tabSelectedTextColor="@color/osmand_orange"
                 app:tabTextColor="@android:color/darker_gray"/>
-        </android.support.design.widget.AppBarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
             <net.osmand.plus.osmedit.EditPoiViewPager
                 android:id="@+id/viewpager"

@@ -8,10 +8,11 @@ import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.PointF;
-import android.support.annotation.NonNull;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapDataObject;

@@ -1,16 +1,14 @@
 package net.osmand.telegram.ui
 
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
-import android.support.v4.app.DialogFragment
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.DialogFragment
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.TelegramSettings
@@ -87,8 +85,8 @@ class SortByBottomSheet : DialogFragment() {
 		private const val TAG = "SortByBottomSheet"
 
 		fun showInstance(
-			fm: FragmentManager,
-			target: Fragment
+			fm: androidx.fragment.app.FragmentManager,
+			target: androidx.fragment.app.Fragment
 		): Boolean {
 			return try {
 				SortByBottomSheet().apply {

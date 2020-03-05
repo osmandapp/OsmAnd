@@ -28,7 +28,7 @@
 		android:paddingEnd="@dimen/list_content_padding"
 		android:paddingStart="@dimen/list_content_padding">
 
-		<android.support.v7.widget.AppCompatImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/imageView"
 			android:layout_width="24dp"
 			android:layout_height="24dp"

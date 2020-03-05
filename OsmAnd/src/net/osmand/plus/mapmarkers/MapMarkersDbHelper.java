@@ -1,6 +1,6 @@
 package net.osmand.plus.mapmarkers;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;

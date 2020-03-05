@@ -1,7 +1,8 @@
 package net.osmand.plus.osmedit;
 
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;

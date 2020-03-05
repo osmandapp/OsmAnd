@@ -1,14 +1,14 @@
 package net.osmand.plus.download.ui;
 
-import android.content.Context;
 import android.graphics.Typeface;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;

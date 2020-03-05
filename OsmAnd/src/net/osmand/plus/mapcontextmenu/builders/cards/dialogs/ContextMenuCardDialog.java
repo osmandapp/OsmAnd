@@ -1,9 +1,10 @@
 package net.osmand.plus.mapcontextmenu.builders.cards.dialogs;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.Menu;
 import android.view.View;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;

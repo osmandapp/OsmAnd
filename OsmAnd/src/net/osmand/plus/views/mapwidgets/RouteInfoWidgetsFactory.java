@@ -15,17 +15,17 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.hardware.GeomagneticField;
 import android.os.BatteryManager;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
-import net.osmand.StateChangedListener;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;

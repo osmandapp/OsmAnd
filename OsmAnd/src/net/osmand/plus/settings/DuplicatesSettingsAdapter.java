@@ -1,12 +1,13 @@
 package net.osmand.plus.settings;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.map.ITileSource;
@@ -21,7 +22,6 @@ import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
-
 
 import java.io.File;
 import java.util.List;

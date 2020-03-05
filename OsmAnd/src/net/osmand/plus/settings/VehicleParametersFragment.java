@@ -2,9 +2,10 @@ package net.osmand.plus.settings;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceViewHolder;
 import android.widget.ImageView;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;

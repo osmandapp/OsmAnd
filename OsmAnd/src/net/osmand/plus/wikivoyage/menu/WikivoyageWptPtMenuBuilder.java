@@ -1,7 +1,8 @@
 package net.osmand.plus.wikivoyage.menu;
 
-import android.support.annotation.NonNull;
 import android.view.View;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.R;

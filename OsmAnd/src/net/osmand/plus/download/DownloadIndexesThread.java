@@ -9,10 +9,11 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.StatFs;
-import android.support.annotation.UiThread;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.UiThread;
+import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.IndexConstants;

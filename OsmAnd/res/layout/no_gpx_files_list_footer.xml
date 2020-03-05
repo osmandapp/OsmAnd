@@ -37,7 +37,7 @@
             android:textColor="?android:attr/textColorSecondary"
             android:textSize="@dimen/default_sub_text_size"/>
 
-        <android.support.v7.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

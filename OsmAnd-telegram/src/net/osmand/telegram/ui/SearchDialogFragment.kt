@@ -4,18 +4,16 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import net.osmand.Location
 import net.osmand.PlatformUtil
 import net.osmand.data.LatLon
@@ -105,10 +103,10 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 			layoutManager = LinearLayoutManager(context)
 			adapter = this@SearchDialogFragment.adapter
 			setEmptyView(emptyView)
-			addOnScrollListener(object : RecyclerView.OnScrollListener() {
-				override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+			addOnScrollListener(object : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
+				override fun onScrollStateChanged(recyclerView: androidx.recyclerview.widget.RecyclerView, newState: Int) {
 					super.onScrollStateChanged(recyclerView, newState)
-					val scrolling = newState != RecyclerView.SCROLL_STATE_IDLE
+					val scrolling = newState != androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
 					locationUiUpdateAllowed = !scrolling
 					if (scrolling) {
 						hideKeyboard()
@@ -352,7 +350,7 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 		outState.putLongArray(SELECTED_USERS_KEY, selectedUsers.toLongArray())
 	}
 
-	inner class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ChatViewHolder>() {
+	inner class SearchAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<SearchAdapter.ChatViewHolder>() {
 
 		var items = mutableListOf<TdApi.Object>()
 			set(value) {
@@ -513,7 +511,7 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 
 		override fun getItemCount() = items.size
 
-		inner class ChatViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+		inner class ChatViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 			val icon: ImageView? = view.findViewById(R.id.icon)
 			val title: TextView? = view.findViewById(R.id.title)
 			val locationViewContainer: View? = view.findViewById(R.id.location_view_container)
@@ -575,7 +573,7 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 		const val SEARCH_ITEMS_REQUEST_CODE = 3
 		const val CLEAR_SELECTED_ITEMS_REQUEST_CODE = 4
 
-		fun showInstance(fm: FragmentManager, target: Fragment?, selectedChats: Set<Long>, selectedUsers: Set<Long>): Boolean {
+		fun showInstance(fm: androidx.fragment.app.FragmentManager, target: androidx.fragment.app.Fragment?, selectedChats: Set<Long>, selectedUsers: Set<Long>): Boolean {
 			return try {
 				SearchDialogFragment().apply {
 					arguments = Bundle().apply {

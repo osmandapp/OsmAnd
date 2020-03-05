@@ -12,8 +12,6 @@ import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.Toolbar;
 import android.text.util.Linkify;
 import android.util.TypedValue;
 import android.view.View;
@@ -22,6 +20,9 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;

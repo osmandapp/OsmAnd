@@ -3,7 +3,8 @@ package net.osmand.access;
 import android.app.Activity;
 import android.media.AudioManager;
 import android.media.SoundPool;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;

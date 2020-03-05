@@ -7,13 +7,13 @@
 	android:gravity="center_vertical"
 	android:minHeight="@dimen/bottom_sheet_selected_item_title_height">
 
-	<android.support.v7.widget.RecyclerView
+	<androidx.recyclerview.widget.RecyclerView
 		android:id="@+id/recycler_view"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:clipToPadding="false"
 		android:orientation="horizontal"
-		app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+		app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 		tools:listitem="@layout/bottom_sheet_item_with_descr_56dp" />
 
 </LinearLayout>

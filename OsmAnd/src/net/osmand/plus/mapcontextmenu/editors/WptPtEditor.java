@@ -1,11 +1,11 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
-import net.osmand.data.LatLon;
-import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.data.LatLon;
+import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.activities.MapActivity;
 

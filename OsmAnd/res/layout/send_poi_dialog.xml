@@ -40,7 +40,7 @@
                 android:text="@string/upload_anonymously"
                 android:textSize="@dimen/default_desc_text_size"/>
 
-            <android.support.v7.widget.SwitchCompat
+            <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/upload_anonymously_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

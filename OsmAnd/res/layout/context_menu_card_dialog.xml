@@ -16,7 +16,7 @@
         android:clickable="true"
         android:orientation="horizontal">
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/close_button"
             style="@style/Widget.AppCompat.ActionButton"
             android:layout_width="56dp"
@@ -63,7 +63,7 @@
 
         </LinearLayout>
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/more_button"
             style="@style/Widget.AppCompat.ActionButton"
             android:layout_width="48dp"
