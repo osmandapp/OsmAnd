@@ -134,7 +134,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		changedProfile = new ApplicationProfileObject();
 		if (savedInstanceState != null) {
 			restoreState(savedInstanceState);
-			checkSavingProfile();
 		} else {
 			changedProfile.stringKey = profile.stringKey;
 			changedProfile.parent = profile.parent;
@@ -427,20 +426,18 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		updateExportListener(exportListener);
+		checkSavingProfile();
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		updateExportListener(null);
-	}
-
-	private void updateExportListener(SettingsHelper.SettingsExportListener listener) {
-		File file = ConfigureProfileFragment.getBackupFileForCustomMode(app, changedProfile.stringKey);
-		boolean fileExporting = app.getSettingsHelper().isFileExporting(file);
-		if (fileExporting) {
-			app.getSettingsHelper().updateExportListener(file, listener);
+		if (isNewProfile) {
+			File file = ConfigureProfileFragment.getBackupFileForCustomMode(app, changedProfile.stringKey);
+			boolean fileExporting = app.getSettingsHelper().isFileExporting(file);
+			if (fileExporting) {
+				app.getSettingsHelper().updateExportListener(file, null);
+			}
 		}
 	}
 
@@ -673,10 +670,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 
 				@Override
 				public void onSettingsExportFinished(@NonNull File file, boolean succeed) {
-					FragmentActivity activity = getActivity();
-					if (progress != null && activity != null && AndroidUtils.isActivityNotDestroyed(activity)) {
-						progress.dismiss();
-					}
+					dismissProfileSavingDialog();
 					if (succeed) {
 						customProfileSaved();
 					} else {
@@ -717,6 +711,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	private void saveProfile() {
 		if (isNewProfile) {
 			DialogInterface.OnShowListener showListener = new DialogInterface.OnShowListener() {
+
 				@Override
 				public void onShow(DialogInterface dialog) {
 					app.runInUIThread(new Runnable() {
@@ -790,13 +785,23 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	}
 
 	private void checkSavingProfile() {
-		File file = ConfigureProfileFragment.getBackupFileForCustomMode(app, changedProfile.stringKey);
-		boolean fileExporting = app.getSettingsHelper().isFileExporting(file);
-		if (fileExporting) {
-			showNewProfileSavingDialog(null);
-			app.getSettingsHelper().updateExportListener(file, exportListener);
-		} else if (isNewProfile) {
-			customProfileSaved();
+		if (isNewProfile) {
+			File file = ConfigureProfileFragment.getBackupFileForCustomMode(app, changedProfile.stringKey);
+			boolean fileExporting = app.getSettingsHelper().isFileExporting(file);
+			if (fileExporting) {
+				showNewProfileSavingDialog(null);
+				app.getSettingsHelper().updateExportListener(file, exportListener);
+			} else if (file.exists()) {
+				dismissProfileSavingDialog();
+				customProfileSaved();
+			}
+		}
+	}
+
+	private void dismissProfileSavingDialog() {
+		FragmentActivity activity = getActivity();
+		if (progress != null && activity != null && AndroidUtils.isActivityNotDestroyed(activity)) {
+			progress.dismiss();
 		}
 	}
 
