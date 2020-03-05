@@ -162,8 +162,16 @@ public class SRTMPlugin extends OsmandPlugin {
 		return settings.TERRAIN.get();
 	}
 
+	public void setTerrainLayerEnabled(boolean enabled) {
+		settings.TERRAIN.set(enabled);
+	}
+
 	public TerrainMode getTerrainMode() {
 		return settings.TERRAIN_MODE.get();
+	}
+
+	public void setTerrainMode(TerrainMode mode) {
+		settings.TERRAIN_MODE.set(mode);
 	}
 
 	public static boolean isContourLinesLayerEnabled(OsmandApplication app) {

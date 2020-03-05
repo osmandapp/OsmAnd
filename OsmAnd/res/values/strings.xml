@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="shared_string_hillshade">Hillshade</string>
+    <string name="terrain_empty_state_text">Turn on to view the layer with shading relief or a map of the slope of the slopes. \n\nYou can find out why such cards are needed and how they work on our website</string>
     <string name="shared_string_legend">Legend</string>
     <string name="shared_string_zoom_levels">Zoom levels</string>
     <string name="shared_string_transparency">Transparency</string>
@@ -3238,7 +3240,7 @@
     <string name="error_calculating_route">Could not calculate route.</string>
     <string name="error_calculating_route_occured">Could not calculate route.</string>
     <string name="empty_route_calculated">The calculated route is empty.</string>
-    <string name="new_route_calculated_dist_dbg">Route: distance %s, router time %s \nCalculation: %.1f sec, %d roads, %d tiles)</string>
+    <string name="new_route_calculated_dist_dbg" formatted="false">Route: distance %s, router time %s \nCalculation: %.1f sec, %d roads, %d tiles)</string>
     <string name="arrived_at_destination">You have arrived.</string>
     <string name="invalid_locations">Invalid coordinates</string>
     <string name="go_back_to_osmand">Go back to map</string>

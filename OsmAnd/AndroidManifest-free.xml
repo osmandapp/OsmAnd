@@ -20,7 +20,7 @@
             android:process="net.osmand"/>
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             tools:replace="android:authorities"
             android:authorities="net.osmand.fileprovider"/>
     </application>
