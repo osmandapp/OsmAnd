@@ -2,12 +2,13 @@ package net.osmand.plus.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.widget.SwitchCompat;
-import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
+
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.appcompat.widget.Toolbar;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;

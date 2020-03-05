@@ -1313,7 +1313,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="wake_on_voice_descr">Accendi lo schermo (se spento) all\'approssimarsi di una svolta.</string>
     <string name="lock_screen_request_explanation">%1$s necessita di questa autorizzazione per spegnere lo schermo per la funzionalità di risparmio energetico.</string>
     <string name="coordinates">Coordinate</string>
-    <string name="home_button">Schermata iniziale</string>
+    <string name="home_button">Casa</string>
     <string name="map_update">Ci sono aggiornamenti per %1$s mappe</string>
     <string name="search_for">Cerca</string>
     <string name="error_avoid_specific_road">Nessuna alternativa trovata</string>
@@ -2896,7 +2896,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="run_full_osmand_msg">Stai utilizzando la mappa {0} che è sviluppata da OsmAnd. Vuoi lanciare la versione completa di OsmAnd\?</string>
     <string name="run_full_osmand_header">Lanciare OsmAnd\?</string>
     <string name="previous_route">Percorsi precedenti</string>
-    <string name="add_home">Aggiungi home</string>
+    <string name="add_home">Aggiungi casa</string>
     <string name="step_by_step">Svolta per svolta</string>
     <string name="routeInfo_road_types_name">Tipi di strade</string>
     <string name="show_more">Mostra di più</string>

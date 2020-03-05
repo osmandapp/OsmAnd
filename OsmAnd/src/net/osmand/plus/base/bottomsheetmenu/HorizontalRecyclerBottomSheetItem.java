@@ -1,12 +1,12 @@
 package net.osmand.plus.base.bottomsheetmenu;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import net.osmand.plus.OsmandApplication;
+import androidx.annotation.LayoutRes;
+import androidx.recyclerview.widget.RecyclerView;
+
 import net.osmand.plus.R;
 
 public class HorizontalRecyclerBottomSheetItem extends BaseBottomSheetItem {

@@ -634,7 +634,7 @@
                         android:visibility="gone"
                         osmand:typeface="@string/font_roboto_medium"/>
 
-                    <android.support.v7.widget.SwitchCompat
+                    <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/widget_top_bar_switch"
                         android:layout_width="wrap_content"
                         android:layout_height="56dp"

@@ -1,7 +1,7 @@
 package net.osmand.plus.views.controls;
 
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 public class ReorderItemTouchHelperCallback extends ItemTouchHelper.Callback {

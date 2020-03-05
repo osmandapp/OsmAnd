@@ -3,15 +3,13 @@ package net.osmand.telegram.ui
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
-import android.support.v4.app.DialogFragment
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.DialogFragment
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.TelegramUiHelper
@@ -86,7 +84,7 @@ class DisableSharingBottomSheet : DialogFragment() {
 		private const val TAG = "DisableSharingBottomSheet"
 		private const val CHATS_COUNT_KEY = "chats_count"
 
-		fun showInstance(fm: FragmentManager, target: Fragment, chatsCount: Int): Boolean {
+		fun showInstance(fm: androidx.fragment.app.FragmentManager, target: androidx.fragment.app.Fragment, chatsCount: Int): Boolean {
 			return try {
 				DisableSharingBottomSheet().apply {
 					arguments = Bundle().apply { putInt(CHATS_COUNT_KEY, chatsCount) }

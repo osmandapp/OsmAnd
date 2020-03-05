@@ -3,11 +3,6 @@ package net.osmand.telegram.ui
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.ListPopupWindow
-import android.support.v7.widget.RecyclerView
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +12,10 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.widget.ListPopupWindow
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import net.osmand.Location
 import net.osmand.data.LatLon
 import net.osmand.telegram.R
@@ -72,16 +71,16 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 		AndroidUtils.addStatusBarPadding19v(context!!, appBarLayout)
 		adapter = LiveNowListAdapter()
-		mainView.findViewById<RecyclerView>(R.id.recycler_view).apply {
+		mainView.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.recycler_view).apply {
 			layoutManager = LinearLayoutManager(context)
 			adapter = this@LiveNowTabFragment.adapter
-			addOnScrollListener(object : RecyclerView.OnScrollListener() {
-				override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+			addOnScrollListener(object : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
+				override fun onScrollStateChanged(recyclerView: androidx.recyclerview.widget.RecyclerView, newState: Int) {
 					super.onScrollStateChanged(recyclerView, newState)
-					locationUiUpdateAllowed = newState == RecyclerView.SCROLL_STATE_IDLE
+					locationUiUpdateAllowed = newState == androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
 					when (newState) {
-						RecyclerView.SCROLL_STATE_DRAGGING -> animateOpenOsmAndBtn(false)
-						RecyclerView.SCROLL_STATE_IDLE -> animateOpenOsmAndBtn(true)
+						androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING -> animateOpenOsmAndBtn(false)
+						androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE -> animateOpenOsmAndBtn(true)
 					}
 				}
 			})
@@ -98,7 +97,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			}
 		}
 
-		mainView.findViewById<SwipeRefreshLayout>(R.id.swipe_refresh).apply {
+		mainView.findViewById<androidx.swiperefreshlayout.widget.SwipeRefreshLayout>(R.id.swipe_refresh).apply {
 			setOnRefreshListener {
 				app.shareLocationHelper.checkNetworkType()
 				app.telegramHelper.scanChatsHistory()
@@ -398,7 +397,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		)
 	}
 
-	inner class LiveNowListAdapter : RecyclerView.Adapter<BaseViewHolder>() {
+	inner class LiveNowListAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<BaseViewHolder>() {
 
 		private val menuList =
 			listOf(getString(R.string.shared_string_off), getString(R.string.shared_string_all))
@@ -603,7 +602,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			}
 		}
 
-		abstract inner class BaseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+		abstract inner class BaseViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 			val icon: ImageView? = view.findViewById(R.id.icon)
 			val title: TextView? = view.findViewById(R.id.title)
 			val locationViewContainer: View? = view.findViewById(R.id.location_view_container)

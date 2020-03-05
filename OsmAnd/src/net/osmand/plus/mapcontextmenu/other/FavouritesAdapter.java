@@ -1,19 +1,20 @@
 package net.osmand.plus.mapcontextmenu.other;
 
-import java.util.List;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.base.FavoriteImageDrawable;
-import android.app.Activity;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+
+import java.util.List;
 
 public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

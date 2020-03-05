@@ -3,9 +3,23 @@
  */
 package net.osmand.plus.activities;
 
-import java.text.Collator;
-import java.util.Comparator;
-import java.util.List;
+import android.app.Activity;
+import android.content.Intent;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import androidx.core.view.ViewCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
@@ -21,22 +35,10 @@ import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.util.MapUtils;
-import android.app.Activity;
-import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewCompat;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
+
+import java.text.Collator;
+import java.util.Comparator;
+import java.util.List;
 
 public class FavoritesListFragment extends OsmAndListFragment implements SearchActivityChild, OsmAndCompassListener {
 

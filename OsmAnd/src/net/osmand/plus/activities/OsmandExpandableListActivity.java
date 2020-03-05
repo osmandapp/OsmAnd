@@ -1,17 +1,19 @@
 package net.osmand.plus.activities;
 
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import android.app.ActionBar;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.view.MenuItemCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
+
+import androidx.core.view.MenuItemCompat;
+
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 
 
 public abstract class OsmandExpandableListActivity extends

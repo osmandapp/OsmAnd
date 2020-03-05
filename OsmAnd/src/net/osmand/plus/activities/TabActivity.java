@@ -1,9 +1,9 @@
 package net.osmand.plus.activities;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import java.util.List;
 
@@ -44,7 +44,7 @@ public class TabActivity extends ActionBarProgressActivity {
 		}
 
 		/**
-		 * Return the {@link android.support.v4.app.Fragment} to be displayed at {@code position}.
+		 * Return the {@link Fragment} to be displayed at {@code position}.
 		 * <p>
 		 */
 		@Override

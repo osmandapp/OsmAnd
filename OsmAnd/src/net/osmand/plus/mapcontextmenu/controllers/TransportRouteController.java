@@ -1,9 +1,10 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.binary.OsmandOdb.TransportRouteStop;
 import net.osmand.data.LatLon;

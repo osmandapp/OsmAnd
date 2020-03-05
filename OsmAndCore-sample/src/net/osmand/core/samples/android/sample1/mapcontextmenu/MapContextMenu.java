@@ -3,11 +3,12 @@ package net.osmand.core.samples.android.sample1.mapcontextmenu;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import net.osmand.core.samples.android.sample1.MainActivity;
 import net.osmand.core.samples.android.sample1.data.PointDescription;

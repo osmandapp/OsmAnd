@@ -194,7 +194,7 @@
             android:visibility="gone"
 			android:layout_marginEnd="@dimen/list_content_padding">
 
-			<android.support.v7.widget.SwitchCompat
+			<androidx.appcompat.widget.SwitchCompat
 				android:id="@+id/toggle_item"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -205,7 +205,7 @@
                 android:focusableInTouchMode="false"
 				android:gravity="center_vertical"/>
 
-			<android.support.v7.widget.AppCompatCheckBox
+			<androidx.appcompat.widget.AppCompatCheckBox
 				android:id="@+id/toggle_checkbox_item"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"

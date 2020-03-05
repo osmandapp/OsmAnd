@@ -5,8 +5,6 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AlertDialog;
 import android.text.format.DateFormat;
 import android.text.format.Time;
 import android.view.View;
@@ -14,6 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.TimePicker;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;

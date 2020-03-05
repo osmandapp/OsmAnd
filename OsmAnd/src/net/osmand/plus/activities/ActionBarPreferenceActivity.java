@@ -4,16 +4,17 @@ import android.app.Activity;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-
 import android.widget.TextView;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.ViewCompat;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;

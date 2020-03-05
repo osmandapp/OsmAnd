@@ -16,7 +16,7 @@
         android:background="?attr/left_menu_view_bg"
         android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/plan_route_toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dashboard_map_toolbar"
@@ -97,7 +97,7 @@
 	                android:paddingEnd="@dimen/list_content_padding" />
             </LinearLayout>
 
-        </android.support.v7.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
         <ProgressBar
             android:id="@+id/snap_to_road_progress_bar"
@@ -114,7 +114,7 @@
             android:layout_height="match_parent"
             android:background="@color/activity_background_color_dark">
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/markers_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>

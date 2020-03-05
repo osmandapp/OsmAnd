@@ -9,7 +9,7 @@
 	android:background="?attr/card_bg_color"
 	android:orientation="vertical">
 
-	<android.support.design.widget.AppBarLayout
+	<com.google.android.material.appbar.AppBarLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="?attr/card_bg_color">
@@ -81,14 +81,14 @@
 
 		</LinearLayout>
 
-	</android.support.design.widget.AppBarLayout>
+	</com.google.android.material.appbar.AppBarLayout>
 
 	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
 		android:layout_weight="1">
 
-		<android.support.v7.widget.RecyclerView
+		<androidx.recyclerview.widget.RecyclerView
 			android:id="@+id/recycler_view"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"

@@ -3542,4 +3542,14 @@
     <string name="poi_bowling_alley">Bowlingové centrum</string>
     <string name="poi_piste_ref">Číslo zjazdovky</string>
     <string name="poi_charge">Výška poplatku</string>
+    <string name="poi_bath_type_hot_spring">Horúci prameň</string>
+    <string name="poi_bath_type_hammam">Hammam</string>
+    <string name="poi_bath_type_thermal">Termálny</string>
+    <string name="poi_bath_type_river">Rieka</string>
+    <string name="poi_bath_type_lake">Jazero</string>
+    <string name="poi_bath_type_foot_bath">Kúpeľ pre nohy</string>
+    <string name="poi_bath_open_air_yes">Áno</string>
+    <string name="poi_bath_open_air_no">Nie</string>
+    <string name="poi_resort_hunting">Poľovnícka základňa</string>
+    <string name="poi_dive_centre">Potápačské centrum</string>
 </resources>

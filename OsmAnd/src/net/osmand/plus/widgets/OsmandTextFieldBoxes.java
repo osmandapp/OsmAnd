@@ -1,10 +1,11 @@
 package net.osmand.plus.widgets;
 
 import android.content.Context;
-import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+
+import androidx.core.view.ViewCompat;
 
 import net.osmand.plus.R;
 

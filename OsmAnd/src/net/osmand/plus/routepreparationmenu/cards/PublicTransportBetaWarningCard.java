@@ -1,7 +1,8 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
 import android.net.Uri;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;

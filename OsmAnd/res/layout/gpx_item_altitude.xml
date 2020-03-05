@@ -41,7 +41,7 @@
 	            android:paddingStart="@dimen/content_padding"
 	            android:paddingEnd="@dimen/content_padding" />
 
-            <android.support.v7.widget.SwitchCompat
+            <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/gpx_join_gaps_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"

@@ -2,14 +2,16 @@ package net.osmand.plus.dashboard;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v4.view.ViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.core.view.ViewCompat;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;

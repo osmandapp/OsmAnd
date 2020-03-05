@@ -1,7 +1,5 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
-import android.Manifest;
-import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.TextView;
 

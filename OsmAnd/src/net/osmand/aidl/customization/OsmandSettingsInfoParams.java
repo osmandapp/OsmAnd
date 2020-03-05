@@ -3,7 +3,8 @@ package net.osmand.aidl.customization;
 import android.annotation.SuppressLint;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 public class OsmandSettingsInfoParams implements Parcelable {
 

@@ -9,12 +9,12 @@
     android:background="?attr/activity_background_color"
     android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dashboard_map_toolbar"
         android:background="?attr/actionModeBackground">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dashboard_map_toolbar"
@@ -57,9 +57,9 @@
 	                tools:drawableEnd="@drawable/ic_action_car_dark" />
             </LinearLayout>
 
-        </android.support.v7.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -183,7 +183,7 @@
                             android:text="@string/show_direction"
                             android:textAppearance="@style/TextAppearance.ListItemTitle"/>
 
-                        <android.support.v7.widget.SwitchCompat
+                        <androidx.appcompat.widget.SwitchCompat
                             android:id="@+id/distance_indication_switch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -325,7 +325,7 @@
                             android:text="@string/show_arrows_on_the_map"
                             android:textAppearance="@style/TextAppearance.ListItemTitle"/>
 
-                        <android.support.v7.widget.SwitchCompat
+                        <androidx.appcompat.widget.SwitchCompat
                             android:id="@+id/show_arrows_switch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -387,7 +387,7 @@
                             android:text="@string/show_guide_line"
                             android:textAppearance="@style/TextAppearance.ListItemTitle"/>
 
-                        <android.support.v7.widget.SwitchCompat
+                        <androidx.appcompat.widget.SwitchCompat
                             android:id="@+id/show_guide_line_switch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -449,7 +449,7 @@
                             android:text="@string/one_tap_active"
                             android:textAppearance="@style/TextAppearance.ListItemTitle"/>
 
-                        <android.support.v7.widget.SwitchCompat
+                        <androidx.appcompat.widget.SwitchCompat
                             android:id="@+id/one_tap_active_switch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -512,7 +512,7 @@
                             android:text="@string/keep_passed_markers"
                             android:textAppearance="@style/TextAppearance.ListItemTitle"/>
 
-                        <android.support.v7.widget.SwitchCompat
+                        <androidx.appcompat.widget.SwitchCompat
                             android:id="@+id/keep_passed_switch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

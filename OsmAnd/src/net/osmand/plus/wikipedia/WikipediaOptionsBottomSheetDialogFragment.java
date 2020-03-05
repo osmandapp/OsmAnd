@@ -1,11 +1,12 @@
 package net.osmand.plus.wikipedia;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.PopupMenu;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+
+import androidx.appcompat.widget.PopupMenu;
+import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
