@@ -2,7 +2,8 @@ package net.osmand.plus.views;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.QuadRect;

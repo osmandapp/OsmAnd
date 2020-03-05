@@ -2,8 +2,9 @@ package net.osmand.plus.base;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v4.util.Pair;
 import android.view.WindowManager;
+
+import androidx.core.util.Pair;
 
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
@@ -27,7 +28,6 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.MapUtils;
-
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;

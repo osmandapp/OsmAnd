@@ -1,16 +1,10 @@
 package net.osmand.core.samples.android.sample1.mapcontextmenu;
 
 import android.app.Dialog;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.provider.Settings;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.PopupMenu;
-import android.support.v7.widget.Toolbar;
 import android.text.util.Linkify;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -24,15 +18,18 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.PopupMenu;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.MenuItemCompat;
+
 import net.osmand.AndroidUtils;
 import net.osmand.core.samples.android.sample1.OsmandResources;
 import net.osmand.core.samples.android.sample1.R;
 import net.osmand.core.samples.android.sample1.SampleApplication;
-import net.osmand.core.samples.android.sample1.data.PointDescription;
 import net.osmand.data.Amenity;
 import net.osmand.util.Algorithms;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;

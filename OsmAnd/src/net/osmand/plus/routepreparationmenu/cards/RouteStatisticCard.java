@@ -2,8 +2,6 @@ package net.osmand.plus.routepreparationmenu.cards;
 
 import android.graphics.Matrix;
 import android.os.Build;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.MotionEvent;
@@ -13,6 +11,9 @@ import android.view.View.OnTouchListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;

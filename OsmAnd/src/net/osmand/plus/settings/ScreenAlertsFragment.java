@@ -3,15 +3,16 @@ package net.osmand.plus.settings;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceViewHolder;
-import android.support.v7.preference.SwitchPreferenceCompat;
-import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;

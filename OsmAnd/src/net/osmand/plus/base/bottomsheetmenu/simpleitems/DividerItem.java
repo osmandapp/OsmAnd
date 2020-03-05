@@ -1,14 +1,14 @@
 package net.osmand.plus.base.bottomsheetmenu.simpleitems;
 
 import android.content.Context;
-import android.support.annotation.ColorRes;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import androidx.annotation.ColorRes;
+import androidx.core.content.ContextCompat;
+
 import net.osmand.AndroidUtils;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 

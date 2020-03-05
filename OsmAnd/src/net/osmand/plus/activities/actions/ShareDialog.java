@@ -9,10 +9,11 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.text.ClipboardManager;
 import android.text.Html;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;

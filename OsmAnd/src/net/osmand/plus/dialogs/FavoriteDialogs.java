@@ -9,7 +9,6 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -19,8 +18,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+
 import net.osmand.AndroidUtils;
-import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -30,12 +31,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.FavoritesListFragment.FavouritesAdapter;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.util.MapUtils;
 
-import java.text.Collator;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class FavoriteDialogs {

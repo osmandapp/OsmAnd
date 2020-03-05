@@ -1,15 +1,16 @@
 package net.osmand.plus.profiles;
 
-import android.support.annotation.ColorRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.view.ContextThemeWrapper;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;

@@ -9,8 +9,9 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
+
+import androidx.core.content.ContextCompat;
 
 import net.osmand.core.android.CoreResourcesFromAndroidAssets;
 import net.osmand.core.android.NativeCore;

@@ -4,10 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentManager;
 import android.view.ContextThemeWrapper;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -16,11 +17,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
 
 import org.apache.commons.logging.Log;
-
-import java.util.Calendar;
 
 public class RateUsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 	public static final String TAG = "RateUsBottomSheetDialogFragment";

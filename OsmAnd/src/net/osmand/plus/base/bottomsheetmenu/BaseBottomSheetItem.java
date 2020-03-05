@@ -1,13 +1,13 @@
 package net.osmand.plus.base.bottomsheetmenu;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import net.osmand.plus.OsmandApplication;
+import androidx.annotation.LayoutRes;
+
 import net.osmand.plus.R;
 
 public class BaseBottomSheetItem {

@@ -1,19 +1,20 @@
 package net.osmand.plus.wikivoyage.data;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;

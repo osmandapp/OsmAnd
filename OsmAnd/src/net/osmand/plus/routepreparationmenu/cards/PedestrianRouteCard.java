@@ -2,13 +2,14 @@ package net.osmand.plus.routepreparationmenu.cards;
 
 import android.graphics.Typeface;
 import android.os.Build;
-import android.support.annotation.NonNull;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmAndFormatter;

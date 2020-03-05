@@ -14,21 +14,19 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.StateListDrawable
 import android.net.Uri
 import android.os.Build
-import android.support.annotation.AttrRes
-import android.support.annotation.ColorInt
-import android.support.annotation.ColorRes
-import android.support.design.widget.Snackbar
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.DialogFragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.FileProvider
 import android.util.TypedValue
 import android.util.TypedValue.COMPLEX_UNIT_DIP
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
+import androidx.annotation.AttrRes
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
+import com.google.android.material.snackbar.Snackbar
 import net.osmand.telegram.R
 import java.io.File
 
@@ -62,9 +60,9 @@ object AndroidUtils {
 		}
 	}
 
-	fun dismissAllDialogs(fm: FragmentManager) {
+	fun dismissAllDialogs(fm: androidx.fragment.app.FragmentManager) {
 		for (fragment in fm.fragments) {
-			if (fragment is DialogFragment) {
+			if (fragment is androidx.fragment.app.DialogFragment) {
 				fragment.dismissAllowingStateLoss()
 			}
 			dismissAllDialogs(fragment.childFragmentManager)
@@ -169,7 +167,7 @@ object AndroidUtils {
 
 	fun setSnackbarTextColor(snackbar: Snackbar, @ColorRes colorId: Int) {
 		val view = snackbar.view
-		val tv = view.findViewById(android.support.design.R.id.snackbar_action) as TextView
+		val tv = view.findViewById(com.google.android.material.R.id.snackbar_action) as TextView
 		tv.setTextColor(ContextCompat.getColor(view.context, colorId))
 	}
 

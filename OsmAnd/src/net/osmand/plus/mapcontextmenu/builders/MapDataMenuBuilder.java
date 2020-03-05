@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 

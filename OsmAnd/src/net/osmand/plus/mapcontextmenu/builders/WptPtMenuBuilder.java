@@ -2,11 +2,12 @@ package net.osmand.plus.mapcontextmenu.builders;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;

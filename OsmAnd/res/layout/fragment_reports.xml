@@ -390,7 +390,7 @@
 
         <include layout="@layout/card_bottom_divider"/>
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/card_view"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
@@ -430,7 +430,7 @@
                     osmand:typeface="@string/font_roboto_medium"
                     tools:text="http://osmand.net/osm_live"/>
             </LinearLayout>
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 </ScrollView>

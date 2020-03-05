@@ -18,13 +18,13 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.binary.GeocodingUtilities;
 import net.osmand.binary.GeocodingUtilities.GeocodingResult;
 import net.osmand.data.LatLon;
 import net.osmand.util.MapUtils;

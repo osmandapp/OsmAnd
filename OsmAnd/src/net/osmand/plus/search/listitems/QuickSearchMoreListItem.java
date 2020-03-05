@@ -1,6 +1,6 @@
 package net.osmand.plus.search.listitems;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;

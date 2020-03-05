@@ -2,12 +2,13 @@ package net.osmand.plus.quickaction.actions;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v4.util.Pair;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.util.Pair;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

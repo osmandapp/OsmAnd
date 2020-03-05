@@ -3,11 +3,12 @@ package net.osmand.plus.dialogs;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;

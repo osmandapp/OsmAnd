@@ -2,11 +2,11 @@ package net.osmand.telegram
 
 import android.content.Context
 import android.location.LocationManager
-import android.support.annotation.ColorRes
-import android.support.annotation.DrawableRes
-import android.support.annotation.StringRes
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import net.osmand.PlatformUtil
 import net.osmand.telegram.helpers.OsmandAidlHelper
 import net.osmand.telegram.helpers.ShareLocationHelper.Companion.MAX_MESSAGES_IN_TDLIB_PER_CHAT

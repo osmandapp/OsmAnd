@@ -1,7 +1,7 @@
 package net.osmand.plus.profiles;
 
-import android.support.annotation.ColorRes;
-import android.support.annotation.NonNull;
+import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
 
 public class ProfileDataObject implements Comparable<ProfileDataObject> {
 

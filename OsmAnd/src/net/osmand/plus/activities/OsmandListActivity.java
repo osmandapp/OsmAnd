@@ -1,11 +1,7 @@
 package net.osmand.plus.activities;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import android.app.ActionBar;
 import android.os.Bundle;
-import android.support.v4.view.MenuItemCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +9,12 @@ import android.widget.AdapterView;
 import android.widget.HeaderViewListAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import androidx.core.view.MenuItemCompat;
+
+import net.osmand.AndroidUtils;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 
 
 public abstract class OsmandListActivity extends

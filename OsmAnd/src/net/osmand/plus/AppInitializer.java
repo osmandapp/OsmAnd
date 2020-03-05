@@ -13,7 +13,8 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.v7.app.AlertDialog;
+
+import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;

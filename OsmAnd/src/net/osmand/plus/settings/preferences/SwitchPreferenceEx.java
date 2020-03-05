@@ -1,8 +1,9 @@
 package net.osmand.plus.settings.preferences;
 
 import android.content.Context;
-import android.support.v7.preference.SwitchPreferenceCompat;
 import android.util.AttributeSet;
+
+import androidx.preference.SwitchPreferenceCompat;
 
 public class SwitchPreferenceEx extends SwitchPreferenceCompat {
 

@@ -1,11 +1,12 @@
 package net.osmand.plus.settings.bottomsheets;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.preference.DialogPreference.TargetFragment;
-import android.support.v7.preference.Preference;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.DialogPreference.TargetFragment;
+import androidx.preference.Preference;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;

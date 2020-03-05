@@ -9,7 +9,7 @@
     android:background="?attr/wikivoyage_bg_color"
     android:orientation="vertical">
 
-	<android.support.v7.widget.Toolbar
+	<androidx.appcompat.widget.Toolbar
 		android:id="@+id/toolbar"
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/toolbar_height"
@@ -57,7 +57,7 @@
 				android:layout_marginStart="@dimen/context_menu_padding_margin_small"
 				tools:drawableStart="@drawable/ic_action_map_language" />
 
-			<android.support.v7.widget.AppCompatImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/options_button"
 				style="@style/Widget.AppCompat.ActionButton"
 				android:layout_width="48dp"
@@ -68,7 +68,7 @@
 
             </LinearLayout>
 
-        </android.support.v7.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
 
     <FrameLayout

@@ -5,28 +5,27 @@ import android.app.Dialog;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
+
 import net.osmand.AndroidUtils;
-import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
 
 public class SelectCategoryDialogFragment extends DialogFragment {
 

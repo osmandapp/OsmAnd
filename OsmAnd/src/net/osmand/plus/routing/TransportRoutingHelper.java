@@ -1,8 +1,9 @@
 package net.osmand.plus.routing;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Pair;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;

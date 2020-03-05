@@ -33,7 +33,7 @@
             android:orientation="horizontal"
 	        android:layout_marginEnd="8dp">
 
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -53,7 +53,7 @@
 	            android:paddingStart="16dp"
 	            android:paddingEnd="16dp">
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/widthTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                     android:textAppearance="@style/TextAppearance.ListItemTitle"
 	                android:layout_marginEnd="8dp" />
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/colorImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

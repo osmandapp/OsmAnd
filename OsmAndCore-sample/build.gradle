@@ -121,9 +121,9 @@ repositories {
 
 dependencies {
     implementation project(path: ':OsmAnd-java', configuration: 'android')
-    implementation 'com.android.support:multidex:1.0.3'
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:design:27.1.1'
+    implementation 'androidx.multidex:multidex:2.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
     implementation 'commons-logging:commons-logging-api:1.1'
     implementation 'com.moparisthebest:junidecode:0.1.1'
 

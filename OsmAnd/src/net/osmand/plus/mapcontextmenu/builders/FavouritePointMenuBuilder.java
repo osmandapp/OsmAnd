@@ -2,9 +2,10 @@ package net.osmand.plus.mapcontextmenu.builders;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;

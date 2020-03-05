@@ -4,9 +4,10 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentManager;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;

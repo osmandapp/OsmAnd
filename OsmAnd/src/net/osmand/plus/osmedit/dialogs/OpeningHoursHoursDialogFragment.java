@@ -4,14 +4,15 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
 import android.text.format.DateFormat;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.TextView;
 import android.widget.TimePicker;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 
 import net.osmand.plus.R;
 import net.osmand.plus.osmedit.BasicEditPoiFragment;

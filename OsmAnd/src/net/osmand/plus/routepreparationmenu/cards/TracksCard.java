@@ -1,14 +1,15 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
 import android.annotation.SuppressLint;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;

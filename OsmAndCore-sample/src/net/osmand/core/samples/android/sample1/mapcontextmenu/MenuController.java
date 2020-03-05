@@ -1,16 +1,16 @@
 package net.osmand.core.samples.android.sample1.mapcontextmenu;
 
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.core.samples.android.sample1.MainActivity;
 import net.osmand.core.samples.android.sample1.OsmandResources;
 import net.osmand.core.samples.android.sample1.R;
 import net.osmand.core.samples.android.sample1.SampleApplication;
-import net.osmand.core.samples.android.sample1.SampleUtils;
 import net.osmand.core.samples.android.sample1.data.PointDescription;
 import net.osmand.core.samples.android.sample1.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.core.samples.android.sample1.mapcontextmenu.controllers.MyLocationMenuController;

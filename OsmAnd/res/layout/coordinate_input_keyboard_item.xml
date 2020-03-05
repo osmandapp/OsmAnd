@@ -13,7 +13,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.25"/>
 
-    <android.support.v7.widget.AppCompatTextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/keyboard_item_text"
         android:layout_width="match_parent"
         android:layout_height="0dp"

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
@@ -94,13 +94,13 @@
 
 	</LinearLayout>
 
-	<android.support.design.widget.AppBarLayout
+	<com.google.android.material.appbar.AppBarLayout
 		android:id="@+id/appbar"
 		android:layout_height="wrap_content"
 		android:layout_width="match_parent"
 		android:background="@android:color/transparent">
 
-		<android.support.design.widget.CollapsingToolbarLayout
+		<com.google.android.material.appbar.CollapsingToolbarLayout
 			android:id="@+id/toolbar_layout"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/toolbar_height_expanded"
@@ -113,7 +113,7 @@
 			osmand:expandedTitleTextAppearance="@style/AppBarTitle"
 			osmand:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-			<android.support.v7.widget.Toolbar
+			<androidx.appcompat.widget.Toolbar
 				android:id="@+id/toolbar"
 				osmand:titleMarginEnd="0dp"
 				osmand:titleMarginStart="0dp"
@@ -124,10 +124,10 @@
 				osmand:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
 				osmand:title="@string/shared_string_import">
 
-			</android.support.v7.widget.Toolbar>
+			</androidx.appcompat.widget.Toolbar>
 
-		</android.support.design.widget.CollapsingToolbarLayout>
+		</com.google.android.material.appbar.CollapsingToolbarLayout>
 
-	</android.support.design.widget.AppBarLayout>
+	</com.google.android.material.appbar.AppBarLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,7 +1,8 @@
 package net.osmand.plus.mapmarkers;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.FavouritesDbHelper;

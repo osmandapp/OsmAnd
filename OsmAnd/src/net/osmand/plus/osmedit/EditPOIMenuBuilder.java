@@ -1,9 +1,9 @@
 package net.osmand.plus.osmedit;
 
-import android.support.annotation.NonNull;
 import android.view.View;
 
-import net.osmand.data.PointDescription;
+import androidx.annotation.NonNull;
+
 import net.osmand.osm.PoiType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;

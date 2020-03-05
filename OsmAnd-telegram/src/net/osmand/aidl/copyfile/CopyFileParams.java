@@ -2,7 +2,8 @@ package net.osmand.aidl.copyfile;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 public class CopyFileParams implements Parcelable {
 	private String fileName;

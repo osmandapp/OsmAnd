@@ -5,20 +5,20 @@
 	android:background="?attr/activity_background_color"
 	android:orientation="vertical">
 
-	<android.support.design.widget.AppBarLayout
+	<com.google.android.material.appbar.AppBarLayout
 		android:id="@+id/appbar"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content">
 
 		<include layout="@layout/global_preference_toolbar" />
 
-	</android.support.design.widget.AppBarLayout>
+	</com.google.android.material.appbar.AppBarLayout>
 
 	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
 
-		<android.support.v7.widget.RecyclerView
+		<androidx.recyclerview.widget.RecyclerView
 			android:id="@+id/profiles_list"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"

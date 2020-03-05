@@ -2,11 +2,12 @@ package net.osmand.plus.quickaction;
 
 
 import android.content.Context;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.StringRes;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.StringRes;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
