@@ -1703,8 +1703,8 @@
     <string name="poi_payment_yandexmoney_yes">Yandex.Money</string>
     <string name="poi_payment_yandexmoney_no">No atzetat Yandex.Money</string>
     <string name="poi_description_payment">Informatziones de pagamentu</string>
-    <string name="poi_internet_access_fee_yes">Atzessu a ìnternet - a pagamentu</string>
-    <string name="poi_internet_access_fee_no">Atzessu a ìnternet - de badas</string>
+    <string name="poi_internet_access_fee_yes">Atzessu a ìnternet: a pagamentu</string>
+    <string name="poi_internet_access_fee_no">Atzessu a ìnternet: de badas</string>
     <string name="poi_payment_laser_yes">Laser</string>
     <string name="poi_payment_laser_no">No atzetat cartas Laser</string>
     <string name="poi_building_type_pyramid">Casta de edifìtziu: piràmide</string>
@@ -3790,4 +3790,17 @@
     <string name="poi_piste_ref">Nùmeru de referèntzia de sa pista</string>
     <string name="poi_resort_hunting">Base pro sa cassa</string>
     <string name="poi_dive_centre">Tzentru pro sas imbèrghidas in s\'abba</string>
+    <string name="poi_sms">SMS</string>
+    <string name="poi_video_telephone">Vìdeu</string>
+    <string name="poi_sms_yes">Eja</string>
+    <string name="poi_sms_no">Nono</string>
+    <string name="poi_covered_booth">Cabina</string>
+    <string name="poi_booth">Casta de cabina</string>
+    <string name="poi_video_yes">Eja</string>
+    <string name="poi_video_no">Nono</string>
+    <string name="poi_internet_access_fee_customers">Sinnale pro agatare su palu</string>
+    <string name="poi_traffic_signals_sound_locate">Petzi cando si podet camminare</string>
+    <string name="poi_tactile_paving_contrasted">Cuntrastadu</string>
+    <string name="poi_tactile_paving_primitive">Primitivu</string>
+    <string name="poi_tactile_paving_incorrect">Incorretu</string>
 </resources>
