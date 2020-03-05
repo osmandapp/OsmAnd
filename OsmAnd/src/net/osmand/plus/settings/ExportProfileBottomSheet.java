@@ -1,5 +1,6 @@
 package net.osmand.plus.settings;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -16,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
@@ -52,29 +54,41 @@ import java.util.Set;
 
 public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 
-	private static final Log LOG = PlatformUtil.getLog(ExportProfileBottomSheet.class);
 	public static final String TAG = ExportProfileBottomSheet.class.getSimpleName();
+
+	private static final Log LOG = PlatformUtil.getLog(ExportProfileBottomSheet.class);
+
 	private static final String INCLUDE_ADDITIONAL_DATA_KEY = "INCLUDE_ADDITIONAL_DATA_KEY";
-	private boolean includeAdditionalData = false;
+	private static final String EXPORTING_PROFILE_KEY = "exporting_profile_key";
+
 	private OsmandApplication app;
 	private ApplicationMode profile;
 	private List<AdditionalDataWrapper> dataList = new ArrayList<>();
 	private ExportImportSettingsAdapter adapter;
 
+	private SettingsHelper.SettingsExportListener exportListener;
+	private ProgressDialog progress;
+
+	private boolean includeAdditionalData = false;
+	private boolean exportingProfile = false;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		if (savedInstanceState != null) {
-			includeAdditionalData = savedInstanceState.getBoolean(INCLUDE_ADDITIONAL_DATA_KEY);
-		}
 		super.onCreate(savedInstanceState);
 		app = requiredMyApplication();
+		profile = getAppMode();
 		dataList = getAdditionalData();
+		if (savedInstanceState != null) {
+			includeAdditionalData = savedInstanceState.getBoolean(INCLUDE_ADDITIONAL_DATA_KEY);
+			exportingProfile = savedInstanceState.getBoolean(EXPORTING_PROFILE_KEY);
+		}
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putBoolean(INCLUDE_ADDITIONAL_DATA_KEY, includeAdditionalData);
+		outState.putBoolean(EXPORTING_PROFILE_KEY, exportingProfile);
 	}
 
 	@Override
@@ -84,8 +98,6 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 			return;
 		}
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
-
-		profile = getAppMode();
 
 		int profileColor = profile.getIconColorInfo().getColor(nightMode);
 		int colorNoAlpha = ContextCompat.getColor(context, profileColor);
@@ -185,6 +197,21 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 	@Override
 	protected boolean useExpandableList() {
 		return true;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		checkExportingFile();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		if (exportingProfile) {
+			File file = getExportFile();
+			app.getSettingsHelper().updateExportListener(file, null);
+		}
 	}
 
 	private List<AdditionalDataWrapper> getAdditionalData() {
@@ -303,22 +330,81 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 
 	private void prepareFile() {
 		if (app != null) {
-			File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
-			if (!tempDir.exists()) {
-				tempDir.mkdirs();
-			}
+			exportingProfile = true;
+			showExportProgressDialog();
+			File tempDir = getTempDir();
 			String fileName = profile.toHumanString();
-			app.getSettingsHelper().exportSettings(tempDir, fileName, new SettingsHelper.SettingsExportListener() {
+			app.getSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), prepareSettingsItemsForExport());
+		}
+	}
+
+	private void showExportProgressDialog() {
+		Context context = getContext();
+		if (context == null) {
+			return;
+		}
+		if (progress != null) {
+			progress.dismiss();
+		}
+		progress = new ProgressDialog(context);
+		progress.setTitle(app.getString(R.string.export_profile));
+		progress.setMessage(app.getString(R.string.shared_string_preparing));
+		progress.setCancelable(false);
+		progress.show();
+	}
+
+	private SettingsHelper.SettingsExportListener getSettingsExportListener() {
+		if (exportListener == null) {
+			exportListener = new SettingsHelper.SettingsExportListener() {
+
 				@Override
 				public void onSettingsExportFinished(@NonNull File file, boolean succeed) {
+					dismissExportProgressDialog();
+					exportingProfile = false;
 					if (succeed) {
 						shareProfile(file, profile);
 					} else {
 						app.showToastMessage(R.string.export_profile_failed);
 					}
 				}
-			}, prepareSettingsItemsForExport());
+			};
 		}
+		return exportListener;
+	}
+
+	private void checkExportingFile() {
+		if (exportingProfile) {
+			File file = getExportFile();
+			boolean fileExporting = app.getSettingsHelper().isFileExporting(file);
+			if (fileExporting) {
+				showExportProgressDialog();
+				app.getSettingsHelper().updateExportListener(file, getSettingsExportListener());
+			} else if (file.exists()) {
+				dismissExportProgressDialog();
+				shareProfile(file, profile);
+			}
+		}
+	}
+
+	private void dismissExportProgressDialog() {
+		FragmentActivity activity = getActivity();
+		if (progress != null && activity != null && AndroidUtils.isActivityNotDestroyed(activity)) {
+			progress.dismiss();
+		}
+	}
+
+	private File getExportFile() {
+		File tempDir = getTempDir();
+		String fileName = profile.toHumanString();
+		return new File(tempDir, fileName + IndexConstants.OSMAND_SETTINGS_FILE_EXT);
+	}
+
+	private File getTempDir() {
+		File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
+		if (!tempDir.exists()) {
+			tempDir.mkdirs();
+		}
+		return tempDir;
 	}
 
 	private void shareProfile(@NonNull File file, @NonNull ApplicationMode profile) {

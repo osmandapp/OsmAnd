@@ -1,5 +1,6 @@
 package net.osmand.plus.search;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
@@ -171,8 +172,9 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 	public void onDismiss(DialogInterface dialog) {
 		if (editMode) {
 			QuickSearchDialogFragment quickSearchDialogFragment = getQuickSearchDialogFragment();
-			if (quickSearchDialogFragment != null) {
-				getMyApplication().getSearchUICore().refreshCustomPoiFilters();
+			OsmandApplication app = getMyApplication();
+			if (app != null && quickSearchDialogFragment != null) {
+				app.getSearchUICore().refreshCustomPoiFilters();
 				quickSearchDialogFragment.replaceQueryWithUiFilter(filter, "");
 				quickSearchDialogFragment.reloadCategories();
 			}
@@ -314,25 +316,16 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		}
 	}
 
+	@SuppressLint("SetTextI18n")
 	private void saveFilter() {
 		helper.editPoiFilter(filter);
-		if (!editMode) {
+		Context ctx = getContext();
+		if (ctx != null) {
 			if (filter.isEmpty()) {
 				bottomBarShadow.setVisibility(View.GONE);
 				bottomBar.setVisibility(View.GONE);
 			} else {
-				barTitle.setText(getContext().getString(R.string.selected_categories) + ": " + filter
-						.getAcceptedTypesCount());
-				bottomBarShadow.setVisibility(View.VISIBLE);
-				bottomBar.setVisibility(View.VISIBLE);
-			}
-		} else {
-			if (filter.isEmpty()) {
-				bottomBarShadow.setVisibility(View.GONE);
-				bottomBar.setVisibility(View.GONE);
-			} else {
-				barTitle.setText(getContext().getString(R.string.selected_categories) + ": " + filter
-						.getAcceptedTypesCount());
+				barTitle.setText(ctx.getString(R.string.selected_categories) + ": " + filter.getAcceptedTypesCount());
 				bottomBarShadow.setVisibility(View.VISIBLE);
 				bottomBar.setVisibility(View.VISIBLE);
 			}
