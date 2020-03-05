@@ -73,6 +73,6 @@ public class FavoritePointEditor extends PointEditor {
 		}
 		isNew = false;
 		this.favorite = favorite;
-		FavoritePointEditorFragment.showInstance(mapActivity);
+		FavoritePointEditorFragmentNew.showInstance(mapActivity);
 	}
 }
