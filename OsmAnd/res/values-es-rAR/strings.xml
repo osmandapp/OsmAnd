@@ -3564,4 +3564,5 @@ Lon %2$s</string>
     <string name="import_duplicates_title">Algunos elementos ya existen</string>
     <string name="select_data_to_import">Marca los datos a importar.</string>
     <string name="shared_string_rendering_style">Estilo de renderizado</string>
+    <string name="import_rendering_file">Importar archivo de renderizado</string>
 </resources>
