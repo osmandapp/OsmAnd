@@ -116,7 +116,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		profile = new ApplicationProfileObject();
-		exportListener = getSettingsExportListener();
 		ApplicationMode baseModeForNewProfile = null;
 		if (getArguments() != null) {
 			Bundle arguments = getArguments();
@@ -769,7 +768,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			if (!tempDir.exists()) {
 				tempDir.mkdirs();
 			}
-			app.getSettingsHelper().exportSettings(tempDir, mode.getStringKey(), exportListener, new SettingsHelper.ProfileSettingsItem(app, mode));
+			app.getSettingsHelper().exportSettings(tempDir, mode.getStringKey(),
+					getSettingsExportListener(), new SettingsHelper.ProfileSettingsItem(app, mode));
 		}
 	}
 
@@ -790,7 +790,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			boolean fileExporting = app.getSettingsHelper().isFileExporting(file);
 			if (fileExporting) {
 				showNewProfileSavingDialog(null);
-				app.getSettingsHelper().updateExportListener(file, exportListener);
+				app.getSettingsHelper().updateExportListener(file, getSettingsExportListener());
 			} else if (file.exists()) {
 				dismissProfileSavingDialog();
 				customProfileSaved();

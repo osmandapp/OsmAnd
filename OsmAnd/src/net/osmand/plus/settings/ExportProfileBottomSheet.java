@@ -78,7 +78,6 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 		app = requiredMyApplication();
 		profile = getAppMode();
 		dataList = getAdditionalData();
-		exportListener = getSettingsExportListener();
 		if (savedInstanceState != null) {
 			includeAdditionalData = savedInstanceState.getBoolean(INCLUDE_ADDITIONAL_DATA_KEY);
 			exportingProfile = savedInstanceState.getBoolean(EXPORTING_PROFILE_KEY);
@@ -335,7 +334,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 			showExportProgressDialog();
 			File tempDir = getTempDir();
 			String fileName = profile.toHumanString();
-			app.getSettingsHelper().exportSettings(tempDir, fileName, exportListener, prepareSettingsItemsForExport());
+			app.getSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), prepareSettingsItemsForExport());
 		}
 	}
 
@@ -379,7 +378,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 			boolean fileExporting = app.getSettingsHelper().isFileExporting(file);
 			if (fileExporting) {
 				showExportProgressDialog();
-				app.getSettingsHelper().updateExportListener(file, exportListener);
+				app.getSettingsHelper().updateExportListener(file, getSettingsExportListener());
 			} else if (file.exists()) {
 				dismissExportProgressDialog();
 				shareProfile(file, profile);

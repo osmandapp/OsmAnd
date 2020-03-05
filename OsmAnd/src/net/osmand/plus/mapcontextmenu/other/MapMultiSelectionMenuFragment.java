@@ -18,6 +18,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
@@ -252,7 +253,10 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 		if (menu.getMapActivity().getContextMenu().isVisible()) {
 			menu.getMapActivity().getContextMenu().hide();
 		} else {
-			menu.getMapActivity().getSupportFragmentManager().popBackStack();
+			FragmentManager fragmentManager = menu.getMapActivity().getSupportFragmentManager();
+			if (!fragmentManager.isStateSaved()) {
+				fragmentManager.popBackStack();
+			}
 		}
 	}
 }
