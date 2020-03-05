@@ -278,7 +278,7 @@
     <string name="local_index_tile_data_downloadable">قابل للتحميل: %1$s</string>
     <string name="local_index_tile_data_maxzoom">أقصى تكبير: %1$s</string>
     <string name="local_index_tile_data_minzoom">أدنى تكبير: %1$s</string>
-    <string name="maps_define_edit">تعريف/تعديل</string>
+    <string name="maps_define_edit">تعريف/تعديل…</string>
     <string name="speak_descr">ضبط إعدادات نطق أسماء الشوارع، وتحذيرات المرور (توقيفات الإجبارية، ومطبات السرعة)، و تحذيرات كاميرات السرعة، و السرعة القصوى.</string>
     <string name="speak_street_names">نطق أسماء الشوارع ( نطق آلي TTS )</string>
     <string name="speak_speed_limit">السرعة القصوى</string>
