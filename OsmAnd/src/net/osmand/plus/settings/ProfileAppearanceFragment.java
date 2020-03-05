@@ -82,16 +82,16 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	private static final String SELECT_NAV_ICON = "select_nav_icon";
 	private static final String NAV_ICON_ITEMS = "nav_icon_items";
 
-	public static final String PROFILE_NAME_KEY = "profile_name_key";
-	public static final String PROFILE_STRINGKEY_KEY = "profile_stringkey_key";
-	public static final String PROFILE_ICON_RES_KEY = "profile_icon_res_key";
-	public static final String PROFILE_COLOR_KEY = "profile_color_key";
-	public static final String PROFILE_PARENT_KEY = "profile_parent_key";
-	public static final String PROFILE_LOCATION_ICON_KEY = "profile_location_icon_key";
-	public static final String PROFILE_NAVIGATION_ICON_KEY = "profile_navigation_icon_key";
-	public static final String BASE_PROFILE_FOR_NEW = "base_profile_for_new";
-	public static final String IS_BASE_PROFILE_IMPORTED = "is_base_profile_imported";
-	public static final String IS_NEW_PROFILE_KEY = "is_new_profile_key";
+	private static final String PROFILE_NAME_KEY = "profile_name_key";
+	private static final String PROFILE_STRINGKEY_KEY = "profile_stringkey_key";
+	private static final String PROFILE_ICON_RES_KEY = "profile_icon_res_key";
+	private static final String PROFILE_COLOR_KEY = "profile_color_key";
+	private static final String PROFILE_PARENT_KEY = "profile_parent_key";
+	private static final String PROFILE_LOCATION_ICON_KEY = "profile_location_icon_key";
+	private static final String PROFILE_NAVIGATION_ICON_KEY = "profile_navigation_icon_key";
+	private static final String BASE_PROFILE_FOR_NEW = "base_profile_for_new";
+	private static final String IS_BASE_PROFILE_IMPORTED = "is_base_profile_imported";
+	private static final String IS_NEW_PROFILE_KEY = "is_new_profile_key";
 
 	private SelectProfileBottomSheetDialogFragment.SelectProfileListener parentProfileListener;
 	private SettingsHelper.SettingsExportListener exportListener;
@@ -424,6 +424,26 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		}
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		updateExportListener(exportListener);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		updateExportListener(null);
+	}
+
+	private void updateExportListener(SettingsHelper.SettingsExportListener listener) {
+		File file = ConfigureProfileFragment.getBackupFileForCustomMode(app, changedProfile.stringKey);
+		boolean fileExporting = app.getSettingsHelper().isFileExporting(file);
+		if (fileExporting) {
+			app.getSettingsHelper().updateExportListener(file, listener);
+		}
+	}
+
 	private View createColorItemView(final ProfileIconColors colorRes, ViewGroup rootView) {
 		FrameLayout colorItemView = (FrameLayout) UiUtilities.getInflater(getContext(), isNightMode())
 				.inflate(R.layout.preference_circle_item, rootView, false);
@@ -647,7 +667,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		return parentProfileListener;
 	}
 
-	public SettingsHelper.SettingsExportListener getSettingsExportListener() {
+	private SettingsHelper.SettingsExportListener getSettingsExportListener() {
 		if (exportListener == null) {
 			exportListener = new SettingsHelper.SettingsExportListener() {
 
@@ -668,7 +688,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		return exportListener;
 	}
 
-	void updateParentProfile(String profileKey, boolean isBaseProfileImported) {
+	private void updateParentProfile(String profileKey, boolean isBaseProfileImported) {
 		deleteImportedProfile();
 		setupBaseProfileView(profileKey);
 		changedProfile.parent = ApplicationMode.valueOfStringKey(profileKey, ApplicationMode.DEFAULT);
@@ -703,7 +723,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 						@Override
 						public void run() {
 							ApplicationMode mode = saveNewProfile();
-							saveProfileBackup(mode, exportListener);
+							saveProfileBackup(mode);
 						}
 					});
 				}
@@ -748,13 +768,13 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		return mode;
 	}
 
-	private void saveProfileBackup(ApplicationMode mode, SettingsHelper.SettingsExportListener listener) {
+	private void saveProfileBackup(ApplicationMode mode) {
 		if (app != null) {
 			File tempDir = app.getAppPath(IndexConstants.BACKUP_INDEX_DIR);
 			if (!tempDir.exists()) {
 				tempDir.mkdirs();
 			}
-			app.getSettingsHelper().exportSettings(tempDir, mode.getStringKey(), listener, new SettingsHelper.ProfileSettingsItem(app, mode));
+			app.getSettingsHelper().exportSettings(tempDir, mode.getStringKey(), exportListener, new SettingsHelper.ProfileSettingsItem(app, mode));
 		}
 	}
 
