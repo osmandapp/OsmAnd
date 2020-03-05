@@ -1,7 +1,6 @@
 package net.osmand.plus.srtmplugin;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -27,7 +26,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.widgets.TextViewEx;
 
 public class TerrainFragment extends BaseOsmAndFragment {
 
@@ -98,45 +96,55 @@ public class TerrainFragment extends BaseOsmAndFragment {
 		legendContainer = root.findViewById(R.id.legend_container);
 		switchCompat = root.findViewById(R.id.switch_compat);
 		descriptionTv = root.findViewById(R.id.description);
+		emptyState = root.findViewById(R.id.empty_state);
 		titleTv = root.findViewById(R.id.title_tv);
 		stateTv = root.findViewById(R.id.state_tv);
 		iconIv = root.findViewById(R.id.icon_iv);
 
-		adjustUi();
+		setupClickableText(emptyStateDescriptionTv,
+				String.format(getString(R.string.slope_read_more), PLUGIN_URL),
+				PLUGIN_URL,
+				PLUGIN_URL);
+
+		adjustUiMode();
 
 		return root;
 	}
 
-	private void adjustUi() {
+	private void adjustUiMode() {
 		TerrainMode mode = srtmPlugin.getTerrainMode();
-		switch (mode) {
-			case HILLSHADE:
-				descriptionTv.setText(R.string.hillshade_description);
-				downloadDescriptionTv.setText(R.string.hillshade_download_description);
-				break;
-			case SLOPE:
-				descriptionTv.setText(R.string.slope_description);
-				downloadDescriptionTv.setText(R.string.slope_download_description);
-				String wikiString = getString(R.string.shared_string_wikipedia);
-				setupClickableText(slopeReadMoreTv,
-						String.format(getString(R.string.slope_read_more), wikiString),
-						wikiString,
-						SLOPES_WIKI_URL);
-				break;
-		}
-
-		if (!terrainEnabled) {
-			setupClickableText(emptyStateDescriptionTv,
-					String.format(getString(R.string.slope_read_more), PLUGIN_URL),
-					PLUGIN_URL,
-					PLUGIN_URL);
+		if (terrainEnabled) {
+			iconIv.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_hillshade_dark, colorProfile));
+			stateTv.setText(R.string.shared_string_enable);
+			switch (mode) {
+				case HILLSHADE:
+					descriptionTv.setText(R.string.hillshade_description);
+					downloadDescriptionTv.setText(R.string.hillshade_download_description);
+					break;
+				case SLOPE:
+					descriptionTv.setText(R.string.slope_description);
+					downloadDescriptionTv.setText(R.string.slope_download_description);
+					String wikiString = getString(R.string.shared_string_wikipedia);
+					setupClickableText(slopeReadMoreTv,
+							String.format(getString(R.string.slope_read_more), wikiString),
+							wikiString,
+							SLOPES_WIKI_URL);
+					break;
+			}
+		} else {
+			iconIv.setImageDrawable(uiUtilities.getIcon(
+					R.drawable.ic_action_hillshade_dark,
+					nightMode
+							? R.color.icon_color_secondary_dark
+							: R.color.icon_color_secondary_light));
+			stateTv.setText(R.string.shared_string_disabled);
 		}
 		adjustGlobalVisibility();
 		adjustLegendVisibility(mode);
 	}
 
 	private void adjustGlobalVisibility() {
-		emptyStateDescriptionTv.setVisibility(terrainEnabled ? View.GONE : View.VISIBLE);
+		emptyState.setVisibility(terrainEnabled ? View.GONE : View.VISIBLE);
 		titleBottomDivider.setVisibility(terrainEnabled ? View.GONE : View.VISIBLE);
 		contentContainer.setVisibility(terrainEnabled ? View.VISIBLE : View.GONE);
 	}

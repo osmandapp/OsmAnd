@@ -14,8 +14,9 @@
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="@dimen/content_padding_half"
-			android:layout_marginBottom="@dimen/content_padding_half"
+			android:paddingTop="@dimen/content_padding_half"
+			android:paddingBottom="@dimen/content_padding_half"
+			android:background="?attr/bg_color"
 			android:gravity="center_vertical"
 			android:orientation="horizontal">
 
@@ -276,7 +277,8 @@
 
 		</LinearLayout>
 
-		<FrameLayout
+		<LinearLayout
+			android:orientation="vertical"
 			android:id="@+id/empty_state"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
@@ -296,7 +298,7 @@
 				android:textSize="@dimen/default_desc_text_size"
 				tools:text="Включите для просмотра слоя с затенениями рельефа или картой уклона склонов. О том зачем нужные такие карты и как они работают, вы можете узнать на нашем сайте: https://osmand.net/features/contour-lines-plugin *" />
 
-		</FrameLayout>
+		</LinearLayout>
 
 	</LinearLayout>
 
