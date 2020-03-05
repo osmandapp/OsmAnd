@@ -18,6 +18,7 @@ import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 
 public class GpxDescriptionDialogFragment extends BaseOsmAndDialogFragment {
@@ -33,7 +34,7 @@ public class GpxDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 		final Toolbar topBar = new Toolbar(ctx);
 		topBar.setClickable(true);
 		Drawable back = getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back);
-		topBar.setNavigationIcon(back);
+		topBar.setNavigationIcon(UiUtilities.getIconByLayoutDirection(ctx, back));
 		topBar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		topBar.setTitle(R.string.shared_string_description);
 		topBar.setBackgroundColor(ContextCompat.getColor(ctx, AndroidUtils.resolveAttribute(ctx, R.attr.pstsTabBackground)));

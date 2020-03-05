@@ -85,7 +85,8 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 		textView.setText(R.string.show_along_the_route);
 
 		Toolbar toolbar = (Toolbar) titleView.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(getContentIcon(R.drawable.ic_arrow_back));
+		Drawable icBack = getContentIcon(R.drawable.ic_arrow_back);
+		toolbar.setNavigationIcon(UiUtilities.getIconByLayoutDirection(ctx, icBack));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override

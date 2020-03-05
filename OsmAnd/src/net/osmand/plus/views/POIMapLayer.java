@@ -36,6 +36,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -314,7 +315,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		final Toolbar topBar = new Toolbar(ctx);
 		topBar.setClickable(true);
 		Drawable back = app.getUIUtilities().getIcon(R.drawable.ic_arrow_back);
-		topBar.setNavigationIcon(back);
+		topBar.setNavigationIcon(UiUtilities.getIconByLayoutDirection(ctx, back));
 		topBar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		topBar.setTitle(title);
 		topBar.setBackgroundColor(ContextCompat.getColor(ctx, getResIdFromAttribute(ctx, R.attr.pstsTabBackground)));

@@ -133,7 +133,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		Drawable icBack = app.getUIUtilities().getIcon(R.drawable.ic_arrow_back, 
 				isLightTheme ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark);
-		toolbar.setNavigationIcon(icBack);
+		toolbar.setNavigationIcon(UiUtilities.getIconByLayoutDirection(app, icBack));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override

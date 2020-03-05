@@ -45,6 +45,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.util.Algorithms;
@@ -106,7 +107,8 @@ public class FavoritesSearchFragment extends DialogFragment {
 		}
 
 		toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_arrow_back));
+		Drawable icBack = app.getUIUtilities().getThemedIcon(R.drawable.ic_arrow_back);
+		toolbar.setNavigationIcon(UiUtilities.getIconByLayoutDirection(activity, icBack));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(
 				new View.OnClickListener() {

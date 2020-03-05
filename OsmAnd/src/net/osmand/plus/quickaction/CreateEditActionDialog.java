@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -152,7 +153,8 @@ public class CreateEditActionDialog extends DialogFragment {
         int buttonsAndLinksTextColorResId = isLightContent ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
         toolbar.setTitleTextColor(ContextCompat.getColor(getContext(), buttonsAndLinksTextColorResId));
 
-        toolbar.setNavigationIcon(getIconsCache().getIcon(R.drawable.ic_arrow_back, buttonsAndLinksTextColorResId));
+        Drawable icBack = getIconsCache().getIcon(R.drawable.ic_arrow_back, buttonsAndLinksTextColorResId);
+        toolbar.setNavigationIcon(UiUtilities.getIconByLayoutDirection(getContext(), icBack));
 
         toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 

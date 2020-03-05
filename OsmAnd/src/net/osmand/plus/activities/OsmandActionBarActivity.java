@@ -9,6 +9,7 @@ import androidx.appcompat.app.ActionBar;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 
 @SuppressLint("Registered")
 public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity {
@@ -24,7 +25,7 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity {
         if (supportActionBar != null) {
             supportActionBar.setHomeButtonEnabled(true);
             supportActionBar.setDisplayHomeAsUpEnabled(true);
-            supportActionBar.setHomeAsUpIndicator(back);
+            supportActionBar.setHomeAsUpIndicator(UiUtilities.getIconByLayoutDirection(getApplication(), back));
         }
     }
 

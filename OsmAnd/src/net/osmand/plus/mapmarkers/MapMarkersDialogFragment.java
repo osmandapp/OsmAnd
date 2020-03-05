@@ -152,7 +152,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.map_markers_toolbar);
 		Drawable icArrowBack = getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back, 
 				lightTheme ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark);
-		toolbar.setNavigationIcon(icArrowBack);
+		toolbar.setNavigationIcon(UiUtilities.getIconByLayoutDirection(getContext(), icArrowBack));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override

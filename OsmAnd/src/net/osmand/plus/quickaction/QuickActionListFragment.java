@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -122,9 +123,10 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
     private void setUpToolbar(View view) {
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.custom_toolbar);
-        Drawable back = getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back,
+        OsmandApplication app = requireMyApplication();
+        Drawable back = app.getUIUtilities().getIcon(R.drawable.ic_arrow_back,
                 isLightContent ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark);
-        toolbar.setNavigationIcon(back);
+        toolbar.setNavigationIcon(UiUtilities.getIconByLayoutDirection(app, back));
         toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

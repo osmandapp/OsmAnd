@@ -2,6 +2,7 @@ package net.osmand.plus;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
@@ -379,11 +380,32 @@ public class UiUtilities {
 		view.setBackgroundColor(ContextCompat.getColor(ctx, backgroundColor));
 	}
 
+	public static Drawable getIconByLayoutDirection(Context ctx, Drawable drawable) {
+		if (ctx == null) {
+			return drawable;
+		}
+		final int angle = AndroidUtils.getLayoutDirection(ctx) == ViewCompat.LAYOUT_DIRECTION_RTL ? 180 : 0;
+		return getRotateDrawable(drawable, angle);
+	}
+
+	public static Drawable getRotateDrawable(final Drawable d, final float angle) {
+		final Drawable[] arD = { d };
+		return new LayerDrawable(arD) {
+			@Override
+			public void draw(final Canvas canvas) {
+				canvas.save();
+				canvas.rotate(angle, d.getBounds().width() / 2, d.getBounds().height() / 2);
+				super.draw(canvas);
+				canvas.restore();
+			}
+		};
+	}
+
 	public static void rotateImageByLayoutDirection(ImageView image, int layoutDirection) {
 		if (image == null) {
 			return;
 		}
-		int rotation = layoutDirection == View.LAYOUT_DIRECTION_LTR ? 0 : 180;
+		int rotation = layoutDirection == ViewCompat.LAYOUT_DIRECTION_RTL ? 180 : 0;
 		image.setRotationY(rotation);
 	}
 

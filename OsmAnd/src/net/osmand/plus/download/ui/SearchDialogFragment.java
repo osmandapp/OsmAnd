@@ -41,6 +41,7 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.download.CityItem;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivity.BannerAndDownloadFreeVersion;
@@ -114,7 +115,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		Drawable icBack = getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back, iconColorResId);
-		toolbar.setNavigationIcon(icBack);
+		toolbar.setNavigationIcon(UiUtilities.getIconByLayoutDirection(getContext(), icBack));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
