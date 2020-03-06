@@ -72,7 +72,6 @@ import net.osmand.plus.views.AidlMapLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
@@ -320,14 +319,11 @@ public class OsmandAidlApi {
 							ApplicationMode.regWidgetVisibility(widget.getId(), (ApplicationMode[]) null);
 							TextInfoWidget control = connectedApp.createWidgetControl(mapActivity, widgetId);
 							connectedApp.getWidgetControls().put(widgetId, control);
+
 							int iconId = AndroidUtils.getDrawableId(app, widget.getMenuIconName());
 							int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
-							MapWidgetRegInfo widgetInfo = layer.registerSideWidget(control,
-									menuIconId, widget.getMenuTitle(), "aidl_widget_" + widgetId,
-									false, widget.getOrder());
-							if (!mapActivity.getMapLayers().getMapWidgetRegistry().isVisible(widgetInfo.key)) {
-								mapActivity.getMapLayers().getMapWidgetRegistry().setVisibility(widgetInfo, true, false);
-							}
+							String widgetKey = "aidl_widget_" + widgetId;
+							layer.registerSideWidget(control, menuIconId, widget.getMenuTitle(), widgetKey, false, widget.getOrder());
 							layer.recreateControls();
 						}
 					}
