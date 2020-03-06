@@ -3564,4 +3564,8 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="select_data_to_import">Ischerta sos datos de importare.</string>
     <string name="shared_string_rendering_style">Istile de renderizatzione</string>
     <string name="import_rendering_file">Importa unu documentu de renderizatzione</string>
+    <string name="restore_all_profile_settings_descr">Totu sas impostatziones de profilu ant a torrare a s\'istadu predefinidu issoro a pustis chi as a creare/importare custu profilu.</string>
+    <string name="restore_all_profile_settings">Ripristinare totu sas impostatziones de profilu\?</string>
+    <string name="saving_new_profile">Sarvende su profilu nou</string>
+    <string name="profile_backup_failed">Sarvatàgiu de su profilu faddidu.</string>
 </resources>
