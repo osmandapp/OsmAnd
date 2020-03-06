@@ -163,6 +163,13 @@ public class AndroidUtils {
 		return intent.resolveActivity(context.getPackageManager()) != null;
 	}
 
+	public static boolean isActivityNotDestroyed(Activity activity) {
+		if (Build.VERSION.SDK_INT >= 17) {
+			return !activity.isFinishing() && !activity.isDestroyed();
+		}
+		return !activity.isFinishing();
+	}
+
 	public static Spannable replaceCharsWithIcon(String text, Drawable icon, String[] chars) {
 		Spannable spannable = new SpannableString(text);
 		for (String entry : chars) {

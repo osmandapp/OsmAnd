@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
@@ -204,8 +205,11 @@ public class DestinationReachedMenuFragment extends Fragment {
 
 	public void dismissMenu() {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && !mapActivity.isActivityDestroyed()) {
-			mapActivity.getSupportFragmentManager().popBackStack();
+		if (mapActivity != null) {
+			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+			if (!fragmentManager.isStateSaved()) {
+				fragmentManager.popBackStack();
+			}
 		}
 	}
 

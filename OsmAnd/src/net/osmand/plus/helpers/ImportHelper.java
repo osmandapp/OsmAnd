@@ -192,7 +192,7 @@ public class ImportHelper {
 		} else if (fileName != null && fileName.endsWith(IndexConstants.SQLITE_EXT)) {
 			handleSqliteTileImport(intentUri, fileName);
 		} else if (fileName != null && fileName.endsWith(OSMAND_SETTINGS_FILE_EXT)) {
-			handleOsmAndSettingsImport(intentUri, fileName, extras, true, null);
+			handleOsmAndSettingsImport(intentUri, fileName, extras, null);
 		} else if (fileName != null && fileName.endsWith(ROUTING_AND_RENDERING_FILE_EXT)) {
 			handleXmlFileImport(intentUri, fileName);
 		} else {
@@ -252,7 +252,7 @@ public class ImportHelper {
 
 			@Override
 			protected void onPostExecute(GPXFile result) {
-				if (isActivityNotDestroyed(activity)) {
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
 					progress.dismiss();
 				}
 				handleResult(result, fileName, save, useImportDir, false);
@@ -324,7 +324,7 @@ public class ImportHelper {
 
 			@Override
 			protected void onPostExecute(final GPXFile result) {
-				if (isActivityNotDestroyed(activity)) {
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
 					progress.dismiss();
 				}
 
@@ -362,7 +362,7 @@ public class ImportHelper {
 
 				@Override
 				protected void onPostExecute(GPXFile result) {
-					if (isActivityNotDestroyed(activity)) {
+					if (AndroidUtils.isActivityNotDestroyed(activity)) {
 						progress.dismiss();
 					}
 					Toast.makeText(activity, R.string.fav_imported_sucessfully, Toast.LENGTH_LONG)
@@ -435,7 +435,7 @@ public class ImportHelper {
 
 			@Override
 			protected void onPostExecute(GPXFile result) {
-				if (isActivityNotDestroyed(activity)) {
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
 					progress.dismiss();
 				}
 				handleResult(result, name, save, useImportDir, false);
@@ -483,7 +483,7 @@ public class ImportHelper {
 
 			@Override
 			protected void onPostExecute(GPXFile result) {
-				if (isActivityNotDestroyed(activity)) {
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
 					progress.dismiss();
 				}
 				handleResult(result, name, save, useImportDir, false);
@@ -515,7 +515,7 @@ public class ImportHelper {
 
 			@Override
 			protected void onPostExecute(String message) {
-				if (isActivityNotDestroyed(activity)) {
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
 					progress.dismiss();
 				}
 				Toast.makeText(app, message, Toast.LENGTH_SHORT).show();
@@ -596,7 +596,7 @@ public class ImportHelper {
 
 			@Override
 			protected void onPostExecute(String error) {
-				if (isActivityNotDestroyed(activity)) {
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
 					progress.dismiss();
 				}
 				if (error == null) {
@@ -616,7 +616,7 @@ public class ImportHelper {
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public void chooseFileToImport(final ImportType importType, final boolean askBeforeImport, final CallbackWithObject callback) {
+	public void chooseFileToImport(final ImportType importType, final CallbackWithObject callback) {
 		final MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return;
@@ -654,7 +654,7 @@ public class ImportHelper {
 					
 					if (fileName.endsWith(importType.getExtension())) {
 						if (importType.equals(ImportType.SETTINGS)) {
-							handleOsmAndSettingsImport(data, fileName, resultData.getExtras(), askBeforeImport, callback);
+							handleOsmAndSettingsImport(data, fileName, resultData.getExtras(), callback);
 						} else if (importType.equals(ImportType.ROUTING)){
 							handleRoutingFileImport(data, fileName, callback);
 						}
@@ -705,7 +705,7 @@ public class ImportHelper {
 					loadRoutingFiles(app, new AppInitializer.LoadRoutingFilesCallback() {
 						@Override
 						public void onRoutingFilesLoaded() {
-							if (isActivityNotDestroyed(activity)) {
+							if (AndroidUtils.isActivityNotDestroyed(activity)) {
 								progress.dismiss();
 							}
 							RoutingConfiguration.Builder builder = app.getCustomRoutingConfig(mFileName);
@@ -720,7 +720,7 @@ public class ImportHelper {
 						}
 					});
 				} else {
-					if (isActivityNotDestroyed(activity)) {
+					if (AndroidUtils.isActivityNotDestroyed(activity)) {
 						progress.dismiss();
 					}
 					app.showShortToastMessage(app.getString(R.string.file_import_error, mFileName, error));
@@ -742,20 +742,20 @@ public class ImportHelper {
 			routingImportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
-	
-	private void handleOsmAndSettingsImport(Uri intentUri, String fileName, Bundle extras, boolean askBeforeImport, CallbackWithObject<List<SettingsHelper.SettingsItem>> callback) {
+
+	private void handleOsmAndSettingsImport(Uri intentUri, String fileName, Bundle extras, CallbackWithObject<List<SettingsHelper.SettingsItem>> callback) {
 		if (extras != null && extras.containsKey(SettingsHelper.SETTINGS_VERSION_KEY) && extras.containsKey(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY)) {
 			int version = extras.getInt(SettingsHelper.SETTINGS_VERSION_KEY, -1);
 			String latestChanges = extras.getString(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY);
-			handleOsmAndSettingsImport(intentUri, fileName, latestChanges, version, askBeforeImport, callback);
+			handleOsmAndSettingsImport(intentUri, fileName, latestChanges, version, callback);
 		} else {
-			handleOsmAndSettingsImport(intentUri, fileName, null, -1, askBeforeImport, callback);
+			handleOsmAndSettingsImport(intentUri, fileName, null, -1, callback);
 		}
 	}
 
 	@SuppressLint("StaticFieldLeak")
 	private void handleOsmAndSettingsImport(final Uri uri, final String name, final String latestChanges, final int version,
-	                                        final boolean askBeforeImport, final CallbackWithObject<List<SettingsHelper.SettingsItem>> callback) {
+	                                        final CallbackWithObject<List<SettingsHelper.SettingsItem>> callback) {
 		final AsyncTask<Void, Void, String> settingsImportTask = new AsyncTask<Void, Void, String>() {
 
 			ProgressDialog progress;
@@ -780,10 +780,10 @@ public class ImportHelper {
 				File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
 				final File file = new File(tempDir, name);
 				if (error == null && file.exists()) {
-					app.getSettingsHelper().importSettings(file, latestChanges, version, askBeforeImport, new SettingsImportListener() {
+					app.getSettingsHelper().importSettings(file, latestChanges, version, new SettingsImportListener() {
 						@Override
 						public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
-							if (isActivityNotDestroyed(activity)) {
+							if (AndroidUtils.isActivityNotDestroyed(activity)) {
 								progress.dismiss();
 							}
 							if (succeed) {
@@ -797,7 +797,7 @@ public class ImportHelper {
 						}
 					});
 				} else {
-					if (isActivityNotDestroyed(activity)) {
+					if (AndroidUtils.isActivityNotDestroyed(activity)) {
 						progress.dismiss();
 					}
 					app.showShortToastMessage(app.getString(R.string.file_import_error, name, error));
@@ -818,13 +818,6 @@ public class ImportHelper {
 		} else {
 			settingsImportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
-	}
-
-	private boolean isActivityNotDestroyed(Activity activity) {
-		if (Build.VERSION.SDK_INT >= 17) {
-			return !activity.isFinishing() && !activity.isDestroyed();
-		}
-		return !activity.isFinishing();
 	}
 
 	private void handleXmlFileImport(final Uri intentUri, final String fileName) {
@@ -923,7 +916,7 @@ public class ImportHelper {
 				} else {
 					app.showShortToastMessage(app.getString(R.string.file_import_error, mFileName, error));
 				}
-				if (isActivityNotDestroyed(activity)) {
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
 					progress.dismiss();
 				}
 			}

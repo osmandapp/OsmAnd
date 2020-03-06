@@ -11,6 +11,10 @@
 	Thx - Hardy
 
 -->
+    <string name="restore_all_profile_settings_descr">All profile settings will be restored to their original state after creating/importing this profile.</string>
+    <string name="restore_all_profile_settings">Restore all profile settings?</string>
+    <string name="saving_new_profile">Saving new profile</string>
+    <string name="profile_backup_failed">Could not back up profile.</string>
     <string name="shared_string_hillshade">Hillshade</string>
     <string name="terrain_empty_state_text">Turn on to view the layer with shading relief or a map of the slope of the slopes. \n\nYou can find out why such cards are needed and how they work on our website</string>
     <string name="shared_string_legend">Legend</string>

@@ -161,14 +161,13 @@ public class SelectProfileBottomSheetDialogFragment extends BasePreferenceBottom
 					if (mapActivity == null) {
 						return;
 					}
-					mapActivity.getImportHelper().chooseFileToImport(ROUTING, false,
-							new CallbackWithObject<RoutingConfiguration.Builder>() {
-								@Override
-								public boolean processResult(RoutingConfiguration.Builder builder) {
-									refreshView();
-									return false;
-								}
-							});
+					mapActivity.getImportHelper().chooseFileToImport(ROUTING, new CallbackWithObject<RoutingConfiguration.Builder>() {
+						@Override
+						public boolean processResult(RoutingConfiguration.Builder builder) {
+							refreshView();
+							return false;
+						}
+					});
 				}
 			});
 			items.add(new BaseBottomSheetItem.Builder()
