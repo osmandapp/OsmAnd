@@ -21,7 +21,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.AidlMapLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
@@ -174,11 +173,8 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 				widgetControls.put(widget.getId(), control);
 				int iconId = AndroidUtils.getDrawableId(mapActivity.getMyApplication(), widget.getMenuIconName());
 				int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
-				MapWidgetRegistry.MapWidgetRegInfo widgetInfo = layer.registerSideWidget(control, menuIconId,
-						widget.getMenuTitle(), "aidl_widget_" + widget.getId(), false, widget.getOrder());
-				if (!mapActivity.getMapLayers().getMapWidgetRegistry().isVisible(widgetInfo.key)) {
-					mapActivity.getMapLayers().getMapWidgetRegistry().setVisibility(widgetInfo, true, false);
-				}
+				String widgetKey = "aidl_widget_" + widget.getId();
+				layer.registerSideWidget(control, menuIconId, widget.getMenuTitle(), widgetKey, false, widget.getOrder());
 			}
 		}
 	}
