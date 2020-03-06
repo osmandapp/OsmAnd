@@ -3552,5 +3552,9 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="import_duplicates_title">Niektoré položky už existujú</string>
     <string name="select_data_to_import">Zvoľte údaje na importovanie.</string>
     <string name="shared_string_rendering_style">Štýl vykresľovania</string>
-    <string name="import_rendering_file"></string>
+    <string name="import_rendering_file">Importovať súbor vykresľovania</string>
+    <string name="restore_all_profile_settings_descr">Po vytvorení/importovaní tohto profilu budú všetky nastavenia profilu resetované do pôvodného stavu.</string>
+    <string name="restore_all_profile_settings">Obnoviť všetky nastavenia profilu\?</string>
+    <string name="saving_new_profile">Ukladá sa nový profil</string>
+    <string name="profile_backup_failed">Nepodarilo sa zálohovať profil.</string>
 </resources>
