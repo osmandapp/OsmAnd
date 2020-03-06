@@ -5,21 +5,16 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
-import android.support.design.widget.CoordinatorLayout
-import android.support.design.widget.Snackbar
-import android.support.v4.app.DialogFragment
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.view.PagerAdapter
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.ListPopupWindow
 import android.view.Gravity
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.ListPopupWindow
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentPagerAdapter
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import net.osmand.PlatformUtil
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
@@ -35,7 +30,6 @@ import net.osmand.telegram.utils.OsmandApiUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import java.io.File
 import java.lang.ref.WeakReference
-import java.time.MonthDay
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -69,8 +63,8 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 
 	private lateinit var buttonsBar: LinearLayout
 	private lateinit var bottomNav: BottomNavigationView
-	private lateinit var coordinatorLayout: CoordinatorLayout
-	private lateinit var viewPager: ViewPager
+	private lateinit var coordinatorLayout: androidx.coordinatorlayout.widget.CoordinatorLayout
+	private lateinit var viewPager: androidx.viewpager.widget.ViewPager
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -163,7 +157,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 	}
 
-	override fun onAttachFragment(fragment: Fragment?) {
+	override fun onAttachFragment(fragment: androidx.fragment.app.Fragment?) {
 		if (fragment is TelegramListener) {
 			listeners.add(WeakReference(fragment))
 		}
@@ -521,16 +515,16 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 	}
 
-	class ViewPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+	class ViewPagerAdapter(fm: androidx.fragment.app.FragmentManager) : FragmentPagerAdapter(fm) {
 
-		private val fragments = listOf<Fragment>(MyLocationTabFragment(), LiveNowTabFragment(), TimelineTabFragment())
+		private val fragments = listOf<androidx.fragment.app.Fragment>(MyLocationTabFragment(), LiveNowTabFragment(), TimelineTabFragment())
 
 		override fun getItem(position: Int) = fragments[position]
 
 		override fun getCount() = fragments.size
 
 		override fun getItemPosition(`object`: Any): Int {
-			return PagerAdapter.POSITION_NONE
+			return androidx.viewpager.widget.PagerAdapter.POSITION_NONE
 		}
 	}
 }

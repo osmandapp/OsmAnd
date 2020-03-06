@@ -9,30 +9,33 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.ColorRes;
-import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceCategory;
-import android.support.v7.preference.PreferenceGroup;
-import android.support.v7.preference.PreferenceGroupAdapter;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceGroupAdapter;
+import androidx.recyclerview.widget.RecyclerView;
+
 import net.osmand.AndroidUtils;
+import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -165,10 +168,41 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	@Override
 	public void resetAppModePrefs(ApplicationMode appMode) {
 		if (appMode != null) {
-			app.getSettings().resetPreferencesForProfile(appMode);
-			app.showToastMessage(R.string.profile_prefs_reset_successful);
-			updateCopiedOrResetPrefs();
+			if (appMode.isCustomProfile()) {
+				File file = getBackupFileForCustomMode(app, appMode.getStringKey());
+				if (file.exists()) {
+					restoreCustomModeFromFile(file);
+				}
+			} else {
+				app.getSettings().resetPreferencesForProfile(appMode);
+				app.showToastMessage(R.string.profile_prefs_reset_successful);
+				updateCopiedOrResetPrefs();
+			}
 		}
+	}
+
+	private void restoreCustomModeFromFile(final File file) {
+		app.getSettingsHelper().importSettings(file, "", 1, new SettingsHelper.SettingsImportListener() {
+			@Override
+			public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
+				if (succeed) {
+					for (SettingsHelper.SettingsItem item : items) {
+						item.setShouldReplace(true);
+					}
+					importBackupSettingsItems(file, items);
+				}
+			}
+		});
+	}
+
+	private void importBackupSettingsItems(File file, List<SettingsHelper.SettingsItem> items) {
+		app.getSettingsHelper().importSettings(file, items, "", 1, new SettingsHelper.SettingsImportListener() {
+			@Override
+			public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
+				app.showToastMessage(R.string.profile_prefs_reset_successful);
+				updateCopiedOrResetPrefs();
+			}
+		});
 	}
 
 	private void updateCopiedOrResetPrefs() {
@@ -303,7 +337,8 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 
 	private void setupResetToDefaultPref() {
 		Preference resetToDefault = findPreference(RESET_TO_DEFAULT);
-		if (getSelectedAppMode().isCustomProfile()) {
+		ApplicationMode mode = getSelectedAppMode();
+		if (mode.isCustomProfile() && !getBackupFileForCustomMode(app, mode.getStringKey()).exists()) {
 			resetToDefault.setVisible(false);
 		} else {
 			resetToDefault.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_reset_to_default_dark,
@@ -321,22 +356,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		Preference deleteProfile = findPreference(DELETE_PROFILE);
 		deleteProfile.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_delete_dark,
 				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
-	}
-
-	private void shareProfile(@NonNull File file, @NonNull ApplicationMode profile) {
-		try {
-			Context ctx = requireContext();
-			final Intent sendIntent = new Intent();
-			sendIntent.setAction(Intent.ACTION_SEND);
-			sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.exported_osmand_profile, profile.toHumanString()));
-			sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMyApplication(), file));
-			sendIntent.setType("*/*");
-			sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-			startActivity(sendIntent);
-		} catch (Exception e) {
-			app.showToastMessage(R.string.export_profile_failed);
-			LOG.error("Share profile error", e);
-		}
 	}
 
 	private void setupOsmandPluginsPref(PreferenceCategory preferenceCategory) {
@@ -441,5 +460,15 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 						Toast.LENGTH_SHORT).show();
 			}
 		}
+	}
+
+	public static File getBackupFileForCustomMode(OsmandApplication app, String appModeKey) {
+		String fileName = appModeKey + IndexConstants.OSMAND_SETTINGS_FILE_EXT;
+		File backupDir = app.getAppPath(IndexConstants.BACKUP_INDEX_DIR);
+		if (!backupDir.exists()) {
+			backupDir.mkdirs();
+		}
+
+		return new File(backupDir, fileName);
 	}
 }

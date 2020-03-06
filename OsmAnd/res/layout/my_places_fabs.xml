@@ -6,7 +6,7 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 xmlns:osmand="http://schemas.android.com/apk/res-auto">
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/menu_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
         app:fabSize="normal"
         app:useCompatPadding="true"/>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/waypoint_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
 
     </FrameLayout>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/route_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
 
     </FrameLayout>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/line_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

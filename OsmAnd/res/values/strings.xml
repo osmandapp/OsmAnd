@@ -15,6 +15,10 @@
     <string name="select_group">Select group</string>
     <string name="add_description">Add description</string>
     <string name="delete_description">Delete description</string>
+    <string name="restore_all_profile_settings_descr">All profile settings will be restored to their original state after creating/importing this profile.</string>
+    <string name="restore_all_profile_settings">Restore all profile settings?</string>
+    <string name="saving_new_profile">Saving new profile</string>
+    <string name="profile_backup_failed">Could not back up profile.</string>
     <string name="import_rendering_file">Import rendering file</string>
     <string name="profile_type_custom_string">Custom profile</string>
     <string name="shared_string_angle_param">Angle: %s°</string>

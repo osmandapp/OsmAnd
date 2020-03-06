@@ -7,12 +7,12 @@
 	android:background="?attr/activity_background_basic"
 	android:orientation="vertical">
 
-	<android.support.design.widget.AppBarLayout
+	<com.google.android.material.appbar.AppBarLayout
 		android:id="@+id/appbar"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content">
 
-		<android.support.v7.widget.Toolbar
+		<androidx.appcompat.widget.Toolbar
 			android:id="@+id/toolbar"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
@@ -20,9 +20,9 @@
 			android:minHeight="?attr/actionBarSize"
 			app:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
-		</android.support.v7.widget.Toolbar>
+		</androidx.appcompat.widget.Toolbar>
 
-	</android.support.design.widget.AppBarLayout>
+	</com.google.android.material.appbar.AppBarLayout>
 
 	<View
 		android:layout_width="match_parent"
@@ -94,7 +94,7 @@
 				android:text="@string/downloaded_maps"
 				android:textAppearance="@style/TextAppearance.ListItemTitle" />
 
-			<android.support.v7.widget.SwitchCompat
+			<androidx.appcompat.widget.SwitchCompat
 				android:id="@+id/downloaded_maps_button"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -147,7 +147,7 @@
 				android:text="@string/visited_screens"
 				android:textAppearance="@style/TextAppearance.ListItemTitle" />
 
-			<android.support.v7.widget.SwitchCompat
+			<androidx.appcompat.widget.SwitchCompat
 				android:id="@+id/visited_screens_button"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"

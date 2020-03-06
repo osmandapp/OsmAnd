@@ -2,12 +2,12 @@ package net.osmand.plus;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -50,7 +50,6 @@ import java.io.OutputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -103,6 +102,7 @@ public class SettingsHelper {
 	private boolean importSuspended;
 	private boolean collectOnly;
 	private ImportAsyncTask importTask;
+	private Map<File, ExportAsyncTask> exportAsyncTasks = new HashMap<>();
 
 	public interface SettingsImportListener {
 		void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items);
@@ -1805,7 +1805,6 @@ public class SettingsHelper {
 
 		private File file;
 		private String latestChanges;
-		private boolean askBeforeImport;
 		private int version;
 
 		private SettingsImportListener listener;
@@ -1815,13 +1814,11 @@ public class SettingsHelper {
 		private SettingsItem currentItem;
 		private AlertDialog dialog;
 
-		ImportAsyncTask(@NonNull File settingsFile, String latestChanges, int version, boolean askBeforeImport,
-						@Nullable SettingsImportListener listener) {
+		ImportAsyncTask(@NonNull File settingsFile, String latestChanges, int version, @Nullable SettingsImportListener listener) {
 			this.file = settingsFile;
 			this.listener = listener;
 			this.latestChanges = latestChanges;
 			this.version = version;
-			this.askBeforeImport = askBeforeImport;
 			importer = new SettingsImporter(app);
 			collectOnly = true;
 		}
@@ -1869,10 +1866,8 @@ public class SettingsHelper {
 			}
 			if (collectOnly) {
 				listener.onSettingsImportFinished(true, false, this.items);
-			} else {
-				if (items != null && items.size() > 0) {
-					processNextItem();
-				}
+			} else if (items != null && items.size() > 0) {
+				processNextItem();
 			}
 		}
 
@@ -1937,6 +1932,17 @@ public class SettingsHelper {
 		return this.importTask.getFile();
 	}
 
+	public boolean isFileExporting(File file) {
+		return exportAsyncTasks.containsKey(file);
+	}
+
+	public void updateExportListener(File file, SettingsExportListener listener) {
+		ExportAsyncTask exportAsyncTask = exportAsyncTasks.get(file);
+		if (exportAsyncTask != null) {
+			exportAsyncTask.listener = listener;
+		}
+	}
+
 	@SuppressLint("StaticFieldLeak")
 	private class ImportItemsAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
@@ -1988,7 +1994,6 @@ public class SettingsHelper {
 		private SettingsExporter exporter;
 		private File file;
 		private SettingsExportListener listener;
-		private ProgressDialog progress;
 
 		ExportAsyncTask(@NonNull File settingsFile,
 						@Nullable SettingsExportListener listener,
@@ -1998,14 +2003,6 @@ public class SettingsHelper {
 			this.exporter = new SettingsExporter();
 			for (SettingsItem item : items) {
 				exporter.addSettingsItem(item);
-			}
-		}
-
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			if (activity != null) {
-				progress = ProgressDialog.show(activity, app.getString(R.string.export_profile), app.getString(R.string.shared_string_preparing));
 			}
 		}
 
@@ -2024,29 +2021,26 @@ public class SettingsHelper {
 
 		@Override
 		protected void onPostExecute(Boolean success) {
-			if (activity != null) {
-				progress.dismiss();
-				if (listener != null) {
-					listener.onSettingsExportFinished(file, success);
-				}
+			exportAsyncTasks.remove(file);
+			if (listener != null) {
+				listener.onSettingsExportFinished(file, success);
 			}
 		}
 	}
 
-	public void importSettings(@NonNull File settingsFile, String latestChanges, int version,
-							   boolean askBeforeImport, @Nullable SettingsImportListener listener) {
-		new ImportAsyncTask(settingsFile, latestChanges, version, askBeforeImport, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	public void importSettings(@NonNull File settingsFile, String latestChanges, int version, @Nullable SettingsImportListener listener) {
+		new ImportAsyncTask(settingsFile, latestChanges, version, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public void importSettings(@NonNull File settingsFile, @NonNull List<SettingsItem> items, String latestChanges, int version, @Nullable SettingsImportListener listener) {
 		new ImportAsyncTask(settingsFile, items, latestChanges, version, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public void exportSettings(@NonNull File fileDir, @NonNull String fileName,
-							   @Nullable SettingsExportListener listener,
-							   @NonNull List<SettingsItem> items) {
-		new ExportAsyncTask(new File(fileDir, fileName + OSMAND_SETTINGS_FILE_EXT), listener, items)
-				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	public void exportSettings(@NonNull File fileDir, @NonNull String fileName, @Nullable SettingsExportListener listener, @NonNull List<SettingsItem> items) {
+		File file = new File(fileDir, fileName + OSMAND_SETTINGS_FILE_EXT);
+		ExportAsyncTask exportAsyncTask = new ExportAsyncTask(file, listener, items);
+		exportAsyncTasks.put(file, exportAsyncTask);
+		exportAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public void exportSettings(@NonNull File fileDir, @NonNull String fileName, @Nullable SettingsExportListener listener,

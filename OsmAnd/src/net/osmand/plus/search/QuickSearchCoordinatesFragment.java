@@ -6,11 +6,6 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
@@ -26,16 +21,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
+
 import com.google.openlocationcode.OpenLocationCode;
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.UTMPoint;
-
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
@@ -57,6 +51,13 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import static android.text.InputType.TYPE_CLASS_PHONE;
 import static android.text.InputType.TYPE_CLASS_TEXT;

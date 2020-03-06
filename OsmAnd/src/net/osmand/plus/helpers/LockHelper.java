@@ -10,8 +10,9 @@ import android.hardware.SensorManager;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.OsmandApplication;

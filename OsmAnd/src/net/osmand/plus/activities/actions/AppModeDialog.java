@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
-import android.support.annotation.LayoutRes;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
+import androidx.annotation.LayoutRes;
+import androidx.core.content.ContextCompat;
+
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
@@ -22,10 +23,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import org.apache.commons.logging.Log;
 
 public class AppModeDialog {
 

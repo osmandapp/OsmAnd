@@ -1,6 +1,6 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;

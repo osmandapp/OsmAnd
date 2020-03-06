@@ -1,6 +1,6 @@
 package net.osmand.plus.profiles;
 
-import android.support.annotation.DrawableRes;
+import androidx.annotation.DrawableRes;
 
 import net.osmand.plus.R;
 

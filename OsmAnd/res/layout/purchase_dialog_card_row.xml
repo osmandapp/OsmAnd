@@ -13,7 +13,7 @@
         android:minHeight="@dimen/card_row_min_height"
         android:orientation="horizontal">
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -25,7 +25,7 @@
 	        android:layout_marginEnd="@dimen/dialog_content_margin"
 	        android:layout_marginStart="@dimen/list_content_padding" />
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_purchased"
             android:layout_width="@dimen/standard_icon_size"
             android:layout_height="@dimen/standard_icon_size"

@@ -208,4 +208,5 @@
     <string name="location_recording_enabled">Beleženje trenutnega mesta je omogočeno</string>
     <string name="units_and_formats">Enote in zapisi</string>
     <string name="unit_of_length_descr">Izbor enote za prikaz razdalje.</string>
+    <string name="unit_of_length">Enote dolžine</string>
 </resources>

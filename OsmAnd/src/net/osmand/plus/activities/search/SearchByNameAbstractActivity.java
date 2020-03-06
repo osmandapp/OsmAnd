@@ -12,7 +12,6 @@ import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.TextWatcher;
@@ -34,6 +33,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.TextView.OnEditorActionListener;
+
+import androidx.annotation.Nullable;
 
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;

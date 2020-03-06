@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnShowListener;
 import android.graphics.Color;
 import android.os.AsyncTask;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -20,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.Location;
 import net.osmand.TspAnt;

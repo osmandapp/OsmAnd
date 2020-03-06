@@ -1,10 +1,6 @@
 package net.osmand.plus.resources;
 
-import android.support.annotation.Nullable;
-
-import java.text.Collator;
-import java.util.Comparator;
-import java.util.List;
+import androidx.annotation.Nullable;
 
 import net.osmand.ResultMatcher;
 import net.osmand.data.Building;
@@ -13,6 +9,10 @@ import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.util.MapUtils;
+
+import java.text.Collator;
+import java.util.Comparator;
+import java.util.List;
 
 
 public interface RegionAddressRepository {

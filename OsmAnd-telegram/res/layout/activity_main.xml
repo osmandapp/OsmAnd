@@ -8,7 +8,7 @@
 	android:orientation="vertical"
 	tools:context=".ui.MainActivity">
 
-	<android.support.design.widget.CoordinatorLayout
+	<androidx.coordinatorlayout.widget.CoordinatorLayout
 		android:layout_width="match_parent"
 		android:id="@+id/coordinator"
 		android:layout_height="0dp"
@@ -19,21 +19,21 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"/>
 
-		<android.support.v7.widget.AppCompatImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_gravity="bottom"
 			android:scaleType="fitXY"
 			android:src="?attr/bottom_nav_shadow"/>
 
-	</android.support.design.widget.CoordinatorLayout>
+	</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 	<include
 		layout="@layout/bottom_buttons_bar"
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/buttons_bottom_bar_height" />
 
-	<android.support.design.widget.BottomNavigationView
+	<com.google.android.material.bottomnavigation.BottomNavigationView
 		android:id="@+id/bottom_navigation"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"

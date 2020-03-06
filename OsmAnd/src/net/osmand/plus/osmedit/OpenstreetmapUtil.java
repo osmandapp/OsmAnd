@@ -1,6 +1,6 @@
 package net.osmand.plus.osmedit;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import net.osmand.data.MapObject;
 import net.osmand.osm.edit.Entity;

@@ -9,7 +9,7 @@
     android:minHeight="60dp"
     tools:layout_height="60dp">
 
-    <android.support.v7.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,14 +39,14 @@
             android:layout_height="0dp"
             android:layout_weight="1"/>
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.ListItemTitle"
             tools:text="Some title text"/>
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
             android:layout_weight="1"/>
     </LinearLayout>
 
-    <android.support.v7.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/secondary_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
         android:layout_toStartOf="@+id/toggle_item"
         tools:src="@drawable/ic_action_gabout_dark"/>
 
-    <android.support.v7.widget.SwitchCompat
+    <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/toggle_item"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

@@ -2,10 +2,11 @@ package net.osmand.plus.profiles;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.ContextThemeWrapper;
 import android.view.View;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;

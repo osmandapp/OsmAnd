@@ -24,14 +24,6 @@ import android.os.Build;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.StatFs;
-import android.support.annotation.AttrRes;
-import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
-import android.support.v4.text.TextUtilsCompat;
-import android.support.v4.view.ViewCompat;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -53,6 +45,15 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import androidx.annotation.AttrRes;
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+import androidx.core.text.TextUtilsCompat;
+import androidx.core.view.ViewCompat;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -160,6 +161,13 @@ public class AndroidUtils {
 
 	public static boolean isIntentSafe(Context context, Intent intent) {
 		return intent.resolveActivity(context.getPackageManager()) != null;
+	}
+
+	public static boolean isActivityNotDestroyed(Activity activity) {
+		if (Build.VERSION.SDK_INT >= 17) {
+			return !activity.isFinishing() && !activity.isDestroyed();
+		}
+		return !activity.isFinishing();
 	}
 
 	public static Spannable replaceCharsWithIcon(String text, Drawable icon, String[] chars) {

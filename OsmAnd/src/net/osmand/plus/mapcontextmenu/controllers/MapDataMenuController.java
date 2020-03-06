@@ -5,9 +5,10 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
@@ -21,7 +22,6 @@ import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;

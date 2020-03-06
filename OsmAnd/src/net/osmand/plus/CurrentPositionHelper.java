@@ -1,8 +1,8 @@
 package net.osmand.plus;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.util.LongSparseArray;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.collection.LongSparseArray;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;

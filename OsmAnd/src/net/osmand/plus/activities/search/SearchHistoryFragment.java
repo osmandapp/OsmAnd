@@ -1,6 +1,29 @@
 package net.osmand.plus.activities.search;
 
-import java.util.List;
+import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.TextView.BufferType;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.core.view.ViewCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -17,29 +40,8 @@ import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.util.MapUtils;
-import android.app.Activity;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.PopupMenu;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.TextView.BufferType;
+
+import java.util.List;
 
 
 public class SearchHistoryFragment extends OsmAndListFragment implements SearchActivityChild, OsmAndCompassListener  {

@@ -3,8 +3,6 @@ package net.osmand.plus.activities;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -19,6 +17,9 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.core.view.MenuItemCompat;
+import androidx.fragment.app.Fragment;
 
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.UTMPoint;

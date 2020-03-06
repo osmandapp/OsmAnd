@@ -3,12 +3,13 @@ package net.osmand.plus;
 
 import android.app.Activity;
 import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ContextThemeWrapper;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;

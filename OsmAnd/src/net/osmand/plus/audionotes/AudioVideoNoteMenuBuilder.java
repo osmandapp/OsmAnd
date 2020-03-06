@@ -4,12 +4,13 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;

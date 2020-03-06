@@ -1,10 +1,10 @@
 package net.osmand.plus.voice;
 
 import android.content.Context;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
-
 import android.media.AudioManager;
+
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;

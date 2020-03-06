@@ -39,7 +39,7 @@ public class OsmMapUtils {
 			return getWeightCenterForWay(((Way) e));
 		} else if (e instanceof Relation) {
 			List<LatLon> list = new ArrayList<LatLon>();
-			if (e.getTag("type").equals("multipolygon")) {
+			if (e.getTag("type") != null && e.getTag("type").equals("multipolygon")) {
 				MultipolygonBuilder original = new MultipolygonBuilder();
 				original.setId(e.getId());
 
