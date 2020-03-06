@@ -242,11 +242,11 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 	}
 
 	private void setupToolbar(Toolbar toolbar) {
-		Drawable icBack = getPaintedContentIcon(R.drawable.ic_arrow_back,
+		Drawable icBack = getPaintedContentIcon(AndroidUtils.getNavigationIconResId(getContext()),
 				nightMode
 						? getResources().getColor(R.color.active_buttons_and_links_text_dark)
 						: getResources().getColor(R.color.active_buttons_and_links_text_light));
-		toolbar.setNavigationIcon(UiUtilities.getIconByLayoutDirection(getContext(), icBack));
+		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override

@@ -117,8 +117,8 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		listView.setDynamicListViewCallbacks(this);
 
 		final ImageView backButton = (ImageView) view.findViewById(R.id.back_button);
-		Drawable icBack = getContentIcon(R.drawable.ic_arrow_back);
-		backButton.setImageDrawable(UiUtilities.getIconByLayoutDirection(mapActivity, icBack));
+		Drawable icBack = getContentIcon(AndroidUtils.getNavigationIconResId(mapActivity));
+		backButton.setImageDrawable(icBack);
 		backButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

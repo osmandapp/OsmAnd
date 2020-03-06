@@ -21,8 +21,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 
 public class WikiBaseDialogFragment extends BaseOsmAndDialogFragment {
@@ -85,8 +85,8 @@ public class WikiBaseDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	protected void setupToolbar(Toolbar toolbar) {
-		Drawable icBack = getContentIcon(R.drawable.ic_arrow_back);
-		toolbar.setNavigationIcon(UiUtilities.getIconByLayoutDirection(getContext(), icBack));
+		Drawable icBack = getContentIcon(AndroidUtils.getNavigationIconResId(getContext()));
+		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override

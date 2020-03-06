@@ -11,9 +11,9 @@ import android.widget.CompoundButton;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 
 public class PrivacyAndSecurityActivity extends OsmandActionBarActivity {
 
@@ -28,8 +28,8 @@ public class PrivacyAndSecurityActivity extends OsmandActionBarActivity {
 		tb.setTitle(R.string.settings_privacy_and_security);
 
 		tb.setClickable(true);
-		Drawable icBack = ((OsmandApplication) getApplication()).getUIUtilities().getIcon(R.drawable.ic_arrow_back);
-		tb.setNavigationIcon(UiUtilities.getIconByLayoutDirection(app, icBack));
+		Drawable icBack = ((OsmandApplication) getApplication()).getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app));
+		tb.setNavigationIcon(icBack);
 		tb.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		tb.setBackgroundColor(getResources().getColor(resolveResourceId(this, R.attr.pstsTabBackground)));
 		tb.setTitleTextColor(getResources().getColor(resolveResourceId(this, R.attr.pstsTextColor)));

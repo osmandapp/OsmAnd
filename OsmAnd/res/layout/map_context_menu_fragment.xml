@@ -679,31 +679,37 @@
             app:contentInsetLeft="4dp"
             app:contentInsetStart="4dp">
 
-            <ImageView
-                android:id="@+id/context_menu_toolbar_back"
-                android:layout_width="@dimen/list_item_height"
-                android:layout_height="match_parent"
-                android:layout_gravity="start"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/shared_string_collapse"
-                android:scaleType="center"
-                android:src="@drawable/ic_arrow_back"
-                tools:visibility="visible"/>
-
-            <TextView
-                android:id="@+id/context_menu_toolbar_text"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:ellipsize="end"
-                android:lines="1"
-                android:maxLines="1"
-                android:scaleType="center"
-                android:singleLine="true"
-                android:textColor="@color/abc_primary_text_material_dark"
-                android:textSize="@dimen/abc_text_size_large_material"
-                tools:text="Toolbar"
-                tools:visibility="visible"/>
+                android:gravity="center_vertical|start"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/context_menu_toolbar_back"
+                    android:layout_width="@dimen/list_item_height"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/shared_string_collapse"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_arrow_back"
+                    tools:visibility="visible"/>
+
+                <TextView
+                    android:id="@+id/context_menu_toolbar_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:scaleType="center"
+                    android:singleLine="true"
+                    android:textColor="@color/abc_primary_text_material_dark"
+                    android:textSize="@dimen/abc_text_size_large_material"
+                    tools:text="Toolbar"
+                    tools:visibility="visible"/>
+
+            </LinearLayout>
 
         </androidx.appcompat.widget.Toolbar>
 

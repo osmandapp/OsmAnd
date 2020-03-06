@@ -124,9 +124,9 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
     private void setUpToolbar(View view) {
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.custom_toolbar);
         OsmandApplication app = requireMyApplication();
-        Drawable back = app.getUIUtilities().getIcon(R.drawable.ic_arrow_back,
+        Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app),
                 isLightContent ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark);
-        toolbar.setNavigationIcon(UiUtilities.getIconByLayoutDirection(app, back));
+        toolbar.setNavigationIcon(icBack);
         toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

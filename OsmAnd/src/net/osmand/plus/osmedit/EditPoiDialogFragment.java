@@ -68,7 +68,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.osmedit.OsmPoint.Action;
@@ -147,8 +146,8 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setTitle(isAddingPoi ? R.string.poi_create_title : R.string.poi_edit_title);
-		Drawable icBack = getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back);
-		toolbar.setNavigationIcon(UiUtilities.getIconByLayoutDirection(getContext(), icBack));
+		Drawable icBack = getMyApplication().getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(getContext()));
+		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override

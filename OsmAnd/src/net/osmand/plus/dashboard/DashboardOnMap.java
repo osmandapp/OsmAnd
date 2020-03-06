@@ -336,8 +336,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		ImageView lst = (ImageView) dashboardView.findViewById(R.id.toolbar_list);
 		lst.setVisibility(View.GONE);
 		ImageView back = (ImageView) dashboardView.findViewById(R.id.toolbar_back);
-		Drawable icBack = getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back);
-		back.setImageDrawable(UiUtilities.getIconByLayoutDirection(mapActivity, icBack));
+		Drawable icBack = getMyApplication().getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(mapActivity));
+		back.setImageDrawable(icBack);
 		back.setOnClickListener(new View.OnClickListener() {
 
 			@Override

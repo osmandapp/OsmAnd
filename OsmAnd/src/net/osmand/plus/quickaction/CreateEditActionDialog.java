@@ -22,6 +22,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -153,8 +154,8 @@ public class CreateEditActionDialog extends DialogFragment {
         int buttonsAndLinksTextColorResId = isLightContent ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
         toolbar.setTitleTextColor(ContextCompat.getColor(getContext(), buttonsAndLinksTextColorResId));
 
-        Drawable icBack = getIconsCache().getIcon(R.drawable.ic_arrow_back, buttonsAndLinksTextColorResId);
-        toolbar.setNavigationIcon(UiUtilities.getIconByLayoutDirection(getContext(), icBack));
+        Drawable icBack = getIconsCache().getIcon(AndroidUtils.getNavigationIconResId(getContext()), buttonsAndLinksTextColorResId);
+        toolbar.setNavigationIcon(icBack);
 
         toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 

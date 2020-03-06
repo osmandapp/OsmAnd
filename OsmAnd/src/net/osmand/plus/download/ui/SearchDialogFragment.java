@@ -28,6 +28,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.OsmAndCollator;
@@ -41,7 +42,6 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.download.CityItem;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivity.BannerAndDownloadFreeVersion;
@@ -114,8 +114,9 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 		int iconColorResId = isLightContent ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		Drawable icBack = getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back, iconColorResId);
-		toolbar.setNavigationIcon(UiUtilities.getIconByLayoutDirection(getContext(), icBack));
+		Drawable icBack = getMyApplication().getUIUtilities().getIcon(
+				AndroidUtils.getNavigationIconResId(getContext()), iconColorResId);
+		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override

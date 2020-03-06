@@ -683,6 +683,14 @@ public class AndroidUtils {
 		return TextUtilsCompat.getLayoutDirectionFromLocale(currentLocale);
 	}
 
+	public static int getNavigationIconResId(Context ctx) {
+		if (ctx == null) {
+			return R.drawable.ic_arrow_back;
+		}
+		return getLayoutDirection(ctx) == ViewCompat.LAYOUT_DIRECTION_RTL ?
+				R.drawable.ic_arrow_forward : R.drawable.ic_arrow_back;
+	}
+
 	public static boolean isSupportRTL() {
 		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1;
 	}

@@ -119,8 +119,8 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		if (trackActivityActionBar != null) {
 			titleTextView.setText(trackActivityActionBar.getTitle());
 		}
-		Drawable icBack = ic.getIcon(R.drawable.ic_arrow_back);
-		toolbar.setNavigationIcon(UiUtilities.getIconByLayoutDirection(app, icBack));
+		Drawable icBack = ic.getIcon(AndroidUtils.getNavigationIconResId(app));
+		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
