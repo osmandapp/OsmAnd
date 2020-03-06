@@ -16,6 +16,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -23,10 +25,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -34,6 +39,10 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 import net.osmand.util.Algorithms;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 
@@ -43,6 +52,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	private Button addDelDescription;
 	private boolean cancelled;
 	private boolean nightMode;
+	GroupAdapter groupListAdapter;
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
@@ -208,6 +218,26 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 				addDelDescription.setText(app.getString(R.string.add_description));
 			}
 		}
+
+		groupListAdapter = new GroupAdapter(app);
+
+		groupListAdapter.setItemClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+//				int position = recyclerView.getChildAdapterPosition(v);
+//				if (position == RecyclerView.NO_POSITION) {
+//					return;
+//				}
+//				selectFavorite(favouritePoints.get(position));
+			}
+		});
+
+		LinearLayoutManager layoutManager = new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false);
+		RecyclerView recyclerView = view.findViewById(R.id.group_recycler_view);
+		recyclerView.setAdapter(groupListAdapter);
+		recyclerView.setLayoutManager(layoutManager);
+		groupListAdapter.notifyDataSetChanged();
+
 		return view;
 	}
 
@@ -420,5 +450,87 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 
 	protected Drawable getPaintedIcon(int iconId, int color) {
 		return getPaintedContentIcon(iconId, color);
+	}
+
+	class GroupAdapter extends RecyclerView.Adapter<GroupsViewHolder> {
+
+		private static final int VIEW_TYPE_FOOTER = 1;
+		private static final int VIEW_TYPE_CELL = 0;
+		View.OnClickListener listener;
+		OsmandApplication app;
+		List<FavouritesDbHelper.FavoriteGroup> items;
+
+		public GroupAdapter(OsmandApplication app) {
+			this.app = app;
+			items = app.getFavorites().getFavoriteGroups();
+		}
+
+		@NonNull
+		@Override
+		public GroupsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+			View view;
+			if (viewType == VIEW_TYPE_CELL) {
+				view = LayoutInflater.from(parent.getContext()).inflate(R.layout.point_group_select_item, parent, false);
+				view.setOnClickListener(listener);
+			} else {
+				view = LayoutInflater.from(parent.getContext()).inflate(R.layout.point_group_select_item, parent, false);
+				((ImageView) view.findViewById(R.id.groupIcon)).setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_add));
+				((TextView) view.findViewById(R.id.groupName)).setText(requireMyApplication().getString(R.string.add_group));
+			}
+			return new GroupsViewHolder(view);
+		}
+
+		@Override
+		public void onBindViewHolder(@NonNull GroupsViewHolder holder, int position) {
+			if (position == items.size()) {
+				holder.groupButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						Set<String> categories = new HashSet<>();
+						for (FavouritesDbHelper.FavoriteGroup fg : items) {
+							categories.add(fg.getDisplayName(app));
+						}
+						EditCategoryDialogFragment dialogFragment =
+								EditCategoryDialogFragment.createInstance("editorTag", categories, false);
+						dialogFragment.show(getActivity().getSupportFragmentManager(), EditCategoryDialogFragment.TAG);
+					}
+				});
+			} else {
+				final FavouritesDbHelper.FavoriteGroup group = items.get(position);
+				holder.groupName.setText(group.getDisplayName(getMyApplication()));
+				holder.pointsCounter.setText(String.valueOf(group.getPoints().size()));
+			}
+		}
+
+		@Override
+		public int getItemViewType(int position) {
+			return (position == items.size()) ? VIEW_TYPE_FOOTER : VIEW_TYPE_CELL;
+		}
+
+		@Override
+		public int getItemCount() {
+			return items == null ? 0 : items.size() + 1;
+		}
+
+		public void setItemClickListener(View.OnClickListener listener) {
+			this.listener = listener;
+		}
+	}
+
+	class GroupsViewHolder extends RecyclerView.ViewHolder {
+
+		final TextView pointsCounter;
+		final TextView groupName;
+		final ImageView groupIcon;
+		final ImageView groupButton;
+
+
+		public GroupsViewHolder(View itemView) {
+			super(itemView);
+			pointsCounter = (TextView) itemView.findViewById(R.id.counter);
+			groupName = (TextView) itemView.findViewById(R.id.groupName);
+			groupIcon = (ImageView) itemView.findViewById(R.id.groupIcon);
+			groupButton = (ImageView) itemView.findViewById(R.id.outlineRect);
+		}
 	}
 }
