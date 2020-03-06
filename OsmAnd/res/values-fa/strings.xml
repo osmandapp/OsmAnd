@@ -184,7 +184,7 @@
     <string name="download_using_mobile_internet">به وای‌فای وصل نیستید. با همین اتصال اینترنتی دانلود می‌کنید؟</string>
     <string name="item_checked">انتخاب‌شده</string>
     <string name="item_unchecked">انتخاب‌نشده</string>
-    <string name="prefer_in_routing_title">ترجیح‌دادن…</string>
+    <string name="prefer_in_routing_title">ترجیحِ…</string>
     <string name="local_indexes_cat_av">داده‌های صوتی/تصویری</string>
     <string name="precise_routing_mode">مسیریابی دقیق (آلفا)</string>
     <string name="recording_photo_description">تصویر %1$s از %2$s</string>
@@ -519,7 +519,7 @@
     <string name="monitoring_settings_descr">شیوهٔ ضبط سفرهای خود را تنظیم کنید.</string>
     <string name="shared_string_more_actions">کنش‌های بیشتر</string>
     <string name="prefer_motorways">ترجیح آزادراه‌ها</string>
-    <string name="prefer_in_routing_descr">آزادراه‌ها را ترجیح می‌دهم.</string>
+    <string name="prefer_in_routing_descr">اولویت را به آزادراه‌ها را می‌دهد.</string>
     <string name="local_indexes_cat_srtm">منحنی‌های میزان</string>
     <string name="precise_routing_mode_descr">محاسبهٔ مسیرهایی دقیق و بدون اشکال. البته این حالت محدودیت مسافت دارد و کُند است.</string>
     <string name="recording_context_menu_show">نشان بده</string>
@@ -1128,7 +1128,7 @@
     <string name="copying_osmand_files">در حال کپی فایل‌های دادهٔ OsmAnd…</string>
     <string name="calculate_osmand_route_gpx">مسیریابی آفلاین OsmAnd</string>
     <string name="routing_attr_prefer_motorway_name">ترجیح آزادراه‌ها</string>
-    <string name="routing_attr_prefer_motorway_description">آزادراه‌ها را ترجیح می‌دهم</string>
+    <string name="routing_attr_prefer_motorway_description">اولویت را به آزادراه‌ها می‌دهد</string>
     <string name="routing_attr_avoid_toll_name">جادهٔ عوارضی‌دار</string>
     <string name="routing_attr_avoid_toll_description">از جاده‌های عوارضی‌دار پرهیز می‌کند</string>
     <string name="routing_attr_avoid_unpaved_name">مسیر روسازی‌نشده (خاکی)</string>
@@ -3358,7 +3358,7 @@
     <string name="shared_string_memory_used_kb_desc">استفاده‌شده %1$s کیلوبایت</string>
     <string name="contour_lines_and_hillshade">سایه‌روشن و منحنی‌های میزان</string>
     <string name="routing_attr_prefer_unpaved_name">ترجیح جاده‌های روسازی‌نشده</string>
-    <string name="routing_attr_prefer_unpaved_description">جاده‌های روسازی‌نشده را ترجیح می‌دهم.</string>
+    <string name="routing_attr_prefer_unpaved_description">اولویت را به جاده‌های روسازی‌نشده می‌دهد.</string>
     <string name="update_all_maps">به‌روزرسانی همهٔ نقشه‌ها</string>
     <string name="update_all_maps_q">آیا همهٔ نقشه‌ها (%1$d) را به‌روز می‌کنید؟</string>
     <string name="release_3_5">• تنظیمات برنامه و پروفایل‌ها به‌روز شد: تنظیمات بر اساس نوع مرتب شده‌اند و امکان شخصی‌سازی هر پروفایل اضافه شده است. 
@@ -3381,7 +3381,7 @@
     <string name="apply_preference_to_all_profiles">این تنظیم را می‌توانید بر همهٔ پروفایل‌ها یا فقط بر پروفایل جاری به کار ببندید.</string>
     <string name="shared_preference">مشترک</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">ترجیح جاده‌های روسازی‌نشده</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_description">جاده‌های روسازی‌نشده را به روسازی‌شده ترجیح می‌دهم.</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">در مسیریابی، جاده‌های روسازی‌نشده را به روسازی‌شده ترجیح می‌دهد.</string>
     <string name="layer_osm_edits">ویرایش‌های OSM</string>
     <string name="quick_action_contour_lines_descr">دکمه‌ای برای آشکار/پنهان کردن منحنی‌های میزان روی نقشه.</string>
     <string name="quick_action_contour_lines_show">نشان‌دادن منحنی‌های میزان</string>
