@@ -3795,4 +3795,13 @@
     <string name="poi_piste_ref">Pistenreferenznummer</string>
     <string name="poi_resort_hunting">Jagdbasis</string>
     <string name="poi_dive_centre">Tauchzentrum</string>
+    <string name="poi_sms">SMS</string>
+    <string name="poi_video_telephone">Video</string>
+    <string name="poi_sms_yes">Ja</string>
+    <string name="poi_sms_no">Nein</string>
+    <string name="poi_video_yes">Ja</string>
+    <string name="poi_video_no">Nein</string>
+    <string name="poi_traffic_signals_sound_locate">Nur wenn Gehen erlaubt ist</string>
+    <string name="poi_tactile_paving_contrasted">Kontrastiert</string>
+    <string name="poi_tactile_paving_incorrect">Falsch</string>
 </resources>

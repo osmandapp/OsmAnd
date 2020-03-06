@@ -787,8 +787,8 @@
     <string name="poi_internet_access_service">Доступ в Інтернет: службовий</string>
     <string name="poi_internet_access_yes">Доступ в Інтернет: є</string>
     <string name="poi_internet_access_no">Доступ в Інтернет: відсутній</string>
-    <string name="poi_internet_access_fee_yes">Доступ в Інтернет - стягується плата</string>
-    <string name="poi_internet_access_fee_no">Доступ в Інтернет - безкоштовно</string>
+    <string name="poi_internet_access_fee_yes">Доступ в Інтернет: стягується плата</string>
+    <string name="poi_internet_access_fee_no">Доступ в Інтернет: безплатно</string>
     <string name="poi_monastery">Монастир</string>
     <string name="poi_religious">Релігійне землекористування</string>
     <string name="poi_wayside_cross">Придорожній хрест</string>
@@ -3780,4 +3780,17 @@
     <string name="poi_piste_ref">Довідковий номер траси</string>
     <string name="poi_resort_hunting">Мисливська база</string>
     <string name="poi_dive_centre">Осередок підводного плавання</string>
+    <string name="poi_sms">SMS</string>
+    <string name="poi_video_telephone">Відео</string>
+    <string name="poi_sms_yes">Так</string>
+    <string name="poi_sms_no">Ні</string>
+    <string name="poi_covered_booth">Стенд</string>
+    <string name="poi_booth">Вид стенда</string>
+    <string name="poi_video_yes">Так</string>
+    <string name="poi_video_no">Ні</string>
+    <string name="poi_internet_access_fee_customers">Сигнал, щоб знайти полюс</string>
+    <string name="poi_traffic_signals_sound_locate">Допускається лише при ходінні</string>
+    <string name="poi_tactile_paving_contrasted">Контрастний</string>
+    <string name="poi_tactile_paving_primitive">Примітивний</string>
+    <string name="poi_tactile_paving_incorrect">Неправильний</string>
 </resources>

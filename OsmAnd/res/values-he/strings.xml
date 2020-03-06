@@ -3505,4 +3505,18 @@
     <string name="shared_string_rendering_style">סגנון העיבוד</string>
     <string name="import_duplicates_title">חלק מהפריטים קיימים</string>
     <string name="select_data_to_import">נא לבחור את הנתונים לייבוא.</string>
+    <string name="import_profile_dialog_description">הפרופיל המיובא מכיל נתונים נוספים. יש ללחוץ על ייבוא כדי לייבא את נתוני הפרופיל בלבד או לבחור בנתונים נוספים לייבוא.</string>
+    <string name="shared_string_preparing">בהכנה</string>
+    <string name="shared_string_poi_types">סוגי נקודות עניין</string>
+    <string name="shared_string_nothing_selected">שום דבר לא נבחר</string>
+    <string name="shared_string_quick_actions">פעולות מהירות</string>
+    <string name="shared_string_profiles">פרופילים</string>
+    <string name="replace_all_desc">הפריטים הנוכחיים יוחלפו בפריטים מהקובץ</string>
+    <string name="replace_all">להחליף הכול</string>
+    <string name="keep_both">להשאיר את שניהם</string>
+    <string name="keep_both_desc">הפריטים הנוכחיים יתווספו עם קידומת</string>
+    <string name="import_duplicates_description">ל־OsmAnd כבר יש פריטים באותם השמות כמו אלו המיובאים.
+\n
+\nנא לבחור פעולה.</string>
+    <string name="import_rendering_file">ייבוא קובץ עיבוד</string>
 </resources>

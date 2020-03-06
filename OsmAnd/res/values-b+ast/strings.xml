@@ -677,12 +677,13 @@
     <string name="shared_string_restore">Restaurar</string>
     <string name="keep_passed_markers">Caltener marcadores pasaos nel mapa</string>
     <string name="ask_for_location_permission">Da-y el permisu d\'allugamientu a OsmAnd pa siguir, por favor.</string>
-    <string name="poi_cannot_be_found">Nun pue alcontrase\'l noyu o camín.</string>
-    <string name="search_no_results_feedback">¿Nun hai resultaos de gueta\?
+    <string name="poi_cannot_be_found">Nun pudo alcontrase\'l noyu o camín.</string>
+    <string name="search_no_results_feedback">¿Nengún resultáu na gueta\? 
 \nComéntanoslo</string>
-    <string name="increase_search_radius_to">Aumentar el radiu de gueta hasta %1$s</string>
-    <string name="send_search_query_description">Vamos unviar la consulta «%1$s» amás del to allugamientu. \n
-        \nNun recoyemos la información personal, namái precisamos estos datos p\'ameyorar l\'algoritmu de gueta.</string>
+    <string name="increase_search_radius_to">Estender el radiu de gueta hasta %1$s</string>
+    <string name="send_search_query_description">Vamos unviar la consulta de gueta a: «%1$s», amás del to allugamientu. 
+\n 
+\nNun recoyemos información personal, namái los datos de la gueta precisos p\'ameyorala.</string>
     <string name="send_search_query">¿Unviar la consulta de gueta\?</string>
     <string name="shared_string_world">Mundu</string>
     <string name="coord_input_save_as_track_descr">Amestesti %1$s puntos. Teclexa un nome y toca «Guardar».</string>
@@ -697,7 +698,7 @@
     <string name="osm_live_payment_current_subscription">La soscripción actual</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Intervalu de pagu:</string>
-    <string name="osm_live_payment_contribute_descr">Les donaciones ayuden a financiar la cartografía d\'OpenStreetMap</string>
+    <string name="osm_live_payment_contribute_descr">Les donaciones ayuden a financiar la cartografía d\'OSM.</string>
     <string name="markers_remove_dialog_msg">¿Desaniciar el marcador «%s» del mapa\?</string>
     <string name="third_party_application">Aplicación de terceros</string>
     <string name="error_notification_desc">Unvia una captura d\'esti avisu a support@osmand.net, por favor</string>
@@ -714,8 +715,8 @@
     <string name="start_editing">Apenzar la edición</string>
     <string name="welcome_to_open_beta">Afáyate na beta abierta</string>
     <string name="wikivoyage_travel_guide_descr">Guíes de los llugares más interesantes del planeta, dientro d\'OsmAnd, ensin conexón a internet.</string>
-    <string name="monthly_map_updates">Anovamientos del mapa: cada mes</string>
-    <string name="daily_map_updates">Anovamientos del mapa: cada hora</string>
+    <string name="monthly_map_updates">Anovamientos mensuales del mapa</string>
+    <string name="daily_map_updates">Anovamientos del mapa horarios</string>
     <string name="wikivoyage_offline">Wikivoyage fuera de llinia</string>
     <string name="unlimited_downloads">Descargues ensin llende</string>
     <string name="wikipedia_offline">Wikipedia fuera de llinia</string>
@@ -730,8 +731,8 @@
     <string name="saved_articles">Artículos en marcadores</string>
     <string name="nothing_found_in_radius">Nun pudo alcontrase nada:</string>
     <string name="shared_string_total">Total</string>
-    <string name="distance_farthest">Distancia: primero lo más lloñe</string>
-    <string name="distance_nearest">Distancia: primero lo más cerca</string>
+    <string name="distance_farthest">Primero lo más lloñe</string>
+    <string name="distance_nearest">primero lo más cercano</string>
     <string name="dd_mm_ss_format">GG°MM′SS″</string>
     <string name="dd_dddddd_format">GG.GGGGGGº</string>
     <string name="dd_ddddd_format">GG.GGGGGº</string>
@@ -1213,7 +1214,7 @@
     <string name="shared_string_capacity">Capacidá</string>
     <string name="shared_string_width">Anchor</string>
     <string name="shared_string_height">Altor</string>
-    <string name="add_start_point">Amiestu d\'un puntu d\'aniciu</string>
+    <string name="add_start_point">Define\'l puntu de salida</string>
     <string name="intermediate_waypoint">Puntu intermediu</string>
     <string name="get_osmand_live">Consigui OsmAnd pa desbloquiar toles caratuerístiques: Anovamientos diarios del mapa con descargues ensin llende, tolos plugins de pagu y de baldre, Wikipedia, Wikivoyage y muncho más.</string>
     <string name="maps_you_need_descr">Según los artículos qu\'amestesti a marcadores, aconséyase que baxes los mapes de darréu:</string>
@@ -1221,7 +1222,7 @@
     <string name="paid_app">Aplicación de pagu</string>
     <string name="paid_plugin">Plugin de pagu</string>
     <string name="welcome_to_open_beta_description">Anguaño les guíes de viaxes básense en Wikivoyage. Prueba de baldre toles carauterístiques na beta abierta. Dempués, eses guíes van tar disponibles pa los soscriptores d\'OsmAnd Unlimited y dueños dOsmAnd +.</string>
-    <string name="start_editing_card_description">Pues y deberíes editar cualesquier artículu de Wikivoyage. Comparti\'l talentu, curiáu, la conocencia y esperiencia que tengas</string>
+    <string name="start_editing_card_description">Puedes y tendríes d\'editar cualesquier artículu de Wikivoyage. Comparti la conocencia, esperiencia, talentu y atención</string>
     <string name="get_unlimited_access">Consiguir l\'accesu ensin llende</string>
     <string name="all_markers_moved_to_history">Tolos marcadores del mapa moviéronse al historial</string>
     <string name="passed">Últimu usu: %1$s</string>
@@ -1231,7 +1232,7 @@
     <string name="osm_editors_ranking">Clasificación d\'editores d\'OSM</string>
     <string name="world_map_download_descr">Falta o nun s\'anovó\'l mapamundi base (que cubre tol mundu a un nivel baxu de zoom). Considera baxalu pa una previsualización global, por favor.</string>
     <string name="osm_changes_added_to_local_edits">Los cambeos d\'OSM amestáronse al conxuntu de cambeos llocal</string>
-    <string name="shared_string_enabled">Activóse</string>
+    <string name="shared_string_enabled">Activada</string>
     <string name="max_min">Máx/Mín</string>
     <string name="min_max">Mín/Máx</string>
     <string name="index_item_world_basemap">Mapamundi xeneral</string>
@@ -1315,8 +1316,8 @@
     <string name="quick_action_add_create_items">Creación d\'elementos</string>
     <string name="quick_action_add_configure_map">Configuración del mapa</string>
     <string name="waypoint_one">Puntu 1</string>
-    <string name="add_start_and_end_points">Amiesta los puntos d\'aniciu y fin</string>
-    <string name="route_descr_select_start_point">Esbilla\'l puntu d\'aniciu</string>
+    <string name="add_start_and_end_points">Amestar orixe y destín</string>
+    <string name="route_descr_select_start_point">Seleiciona\'l puntu de salida</string>
     <string name="shared_string_swap">Intercambiar</string>
     <string name="app_mode_public_transport">Tresporte públicu</string>
     <string name="avoid_roads_descr">Esbilla una carretera que quieras evitar demientres la navegación, nel mapa o dende la llista d\'embaxo:</string>
@@ -1340,8 +1341,8 @@
     <string name="rendering_attr_surface_gravel_name">Grava</string>
     <string name="rendering_attr_surface_fine_gravel_name">Grava fino</string>
     <string name="step_by_step">Xiru a xiru</string>
-    <string name="start_search_from_city">Esbillar primero la ciudá</string>
-    <string name="modify_the_search_query">Modifica la consulta de gueta.</string>
+    <string name="start_search_from_city">Indica primero la ciudá/villa/llocalidá</string>
+    <string name="modify_the_search_query">Cambiar la gueta.</string>
     <string name="type_city_town">Teclexa una ciudá o villa</string>
     <string name="apply_filters">Aplicar peñeres</string>
     <string name="map_marker">Marcador del mapa</string>
@@ -1384,17 +1385,84 @@
     <string name="localization_pref_title">Traducción</string>
     <string name="plan_route">Planificar una ruta</string>
     <string name="shared_string_search">Guetar</string>
-    <string name="searching_gps">Guetando GPS</string>
+    <string name="searching_gps">Güetando GPS</string>
     <string name="days_2_4">Díes</string>
     <string name="price_free">De baldre</string>
     <string name="get_discount_title">Consigui %1$d %2$s con un %3$s de descuentu.</string>
-    <string name="get_discount_first_part">%1$s los primeros %2$s</string>
-    <string name="get_discount_first_few_part">%1$s los primeros %2$s</string>
+    <string name="get_discount_first_part">%1$s pa los primeros %2$s</string>
+    <string name="get_discount_first_few_part">%1$s pa los primeros %2$s</string>
     <string name="get_discount_second_part">llueu %1$s</string>
-    <string name="configure_profile_info">Tolos axustes qu\'apaecen darréu afeuten únicamente al perfil escoyíu.</string>
+    <string name="configure_profile_info">Configuració del perfil:</string>
     <string name="shared_string_example">Exemplu</string>
     <string name="wake_time">Hora d\'activamientu</string>
     <string name="descendingly">Z-A</string>
     <string name="ascendingly">A-Z</string>
     <string name="units_and_formats">Unidaes y formatos</string>
+    <string name="osmand_service">Mou en segundu planu</string>
+    <string name="unit_of_length_descr">Cambia les unidaes de midida de distancia.</string>
+    <string name="shared_string_sort">Ordenar</string>
+    <string name="more_transport_on_stop_hint">Más tresporte disponible desde esta parada.</string>
+    <string name="reset_to_default_category_button_promo">Reestablecer a los valores predeterminaos reestablecerá l\'orde de clasificación al estáu predetermináu tres la instalación.</string>
+    <string name="use_system_screen_timeout">Usar el tiempu d\'espera de la pantalla del sistema</string>
+    <string name="clear_recorded_data">Llimpiar los datos grabaos</string>
+    <string name="release_3_6">• Perfiles: agora pues cambiar l\'orde, configurar l\'iconu pal mapa, cambiar toles configuraciones de los perfiles base y restauralos nuevamente a los valores predeterminaos 
+\n 
+\n • Añadiéronse los númberos de salida na navegación 
+\n 
+\n • Rediseñáronse les configuraciones de los complementos 
+\n 
+\n • Rediseñóse la pantalla de configuraciones, pa un accesu rápidu a tolos perfiles 
+\n 
+\n • Añadióse la opción de copiar la configuración d\'otru perfil 
+\n 
+\n • Añadióse la posibilidá de cambiar l\'orde o tapecer les categoríes de PDI na gueta 
+\n 
+\n • Iconos de PDI correutamente alliniaos nel mapa
+\n 
+\n • Añadiéronse datos del riscar y atapecer en «Configurar mapa» 
+\n 
+\n • Añadiéronse iconos de «Casa» y «Trabayu» nel mapa 
+\n 
+\n • Añadióse encontu pa llinies múltiples de descripción en «Configuración» 
+\n 
+\n • Añadióse la treslliteración correuta nel mapa del Xapón 
+\n 
+\n • Añadióse\'l mapa de la Antártida
+\n
+\n</string>
+    <string name="copy_coordinates">Copiar les coordenaes</string>
+    <string name="routing_profile_direct_to">Direuto al puntu</string>
+    <string name="please_provide_profile_name_message">Proporciona un nome pal perfil</string>
+    <string name="open_settings">Abrir configuración</string>
+    <string name="plugin_disabled">Complementu desactiváu</string>
+    <string name="plugin_disabled_descr">Esti complementu ye una aplicación independiente, tendrás de desanicialu por separáu si yá nun pienses usalu. 
+\n 
+\nEl complementu quedará nel preséu después de desaniciar OsmAnd.</string>
+    <string name="shared_string_menu">Menú</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_app_default_w_val">Predeterminao de la app (%s)</string>
+    <string name="no_recalculation_setting">Desactivar el recálculu</string>
+    <string name="route_recalculation_dist_title">Distancia mínima pa recalcular la ruta</string>
+    <string name="route_recalculation_dist_descr">La ruta recalcularáse si la distancia a la ruta ye mayor que\'l parámetru especificáu</string>
+    <string name="profile_type_custom_string">Perfil personalizáu</string>
+    <string name="shared_string_angle_param">Ángulu: %s°</string>
+    <string name="shared_string_angle">Ángulu</string>
+    <string name="recalc_angle_dialog_descr">Amosaráse un segmentu rectu estra ente\'l mio allugamientu y la ruta calculada fasta que vuelva a calculase la ruta</string>
+    <string name="recalc_angle_dialog_title">Ángulu mínimu ente\'l mio allugamientu y la ruta</string>
+    <string name="shared_string_preparing">Preparando</string>
+    <string name="shared_string_poi_types">Tipos de PDI</string>
+    <string name="shared_string_nothing_selected">Nun hai nada seleicionao</string>
+    <string name="shared_string_quick_actions">Aiciones rápides</string>
+    <string name="shared_string_profiles">Perfiles</string>
+    <string name="listed_exist">%1$s llistáu, yá existe n\'OsmAnd.</string>
+    <string name="replace_all_desc">Los elementos actuales sustituiránse por elementos del ficheru</string>
+    <string name="replace_all">Sustituir too</string>
+    <string name="keep_both">Caltener dambos</string>
+    <string name="keep_both_desc">Los elementos importaos amestaránse con prefixu</string>
+    <string name="import_duplicates_description">OsmAnd yá tien elementos colos mesmos nomes que los importaos. 
+\n 
+\nSeleiciona una aición.</string>
+    <string name="import_duplicates_title">Dalgunos elementos yá esisten</string>
+    <string name="select_data_to_import">Seleiciona los datos que quies importar.</string>
+    <string name="import_rendering_file">Importar ficheru de dibuxáu</string>
 </resources>

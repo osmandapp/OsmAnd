@@ -3554,4 +3554,5 @@
     <string name="import_duplicates_title">一些項目已存在</string>
     <string name="select_data_to_import">選取要匯入的資料。</string>
     <string name="shared_string_rendering_style">算繪樣式</string>
+    <string name="import_rendering_file">匯入算繪檔案</string>
 </resources>
