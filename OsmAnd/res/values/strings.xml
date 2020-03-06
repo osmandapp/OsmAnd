@@ -31,7 +31,7 @@
     <string name="replace_all_desc">Current items will be replaced with items from the file</string>
     <string name="replace_all">Replace all</string>
     <string name="keep_both">Keep both</string>
-    <string name="keep_both_desc">Imported items will be added with prexif</string>
+    <string name="keep_both_desc">Imported items will be added with prefix</string>
     <string name="import_duplicates_description">OsmAnd already has elements with the same names as those imported.\n\nSelect an action.</string>
     <string name="import_duplicates_title">Some items already exist</string>
     <string name="select_data_to_import">Select the data to be imported.</string>
