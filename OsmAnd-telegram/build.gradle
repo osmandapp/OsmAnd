@@ -145,11 +145,11 @@ dependencies {
 	implementation 'androidx.appcompat:appcompat:1.0.0'
 	implementation 'com.google.android.material:material:1.0.0'
 	implementation 'androidx.browser:browser:1.0.0'
-	implementation 'androidx.annotation:annotation:1.0.0'
+	implementation 'androidx.annotation:annotation:1.1.0'
 	implementation 'commons-logging:commons-logging-api:1.1'
-	implementation 'androidx.recyclerview:recyclerview:1.0.0'
+	implementation 'androidx.recyclerview:recyclerview:1.1.0'
 	implementation 'com.vividsolutions:jts-core:1.14.0'
-	implementation("com.github.HITGIF:TextFieldBoxes:1.4.4") {
+	implementation("com.github.HITGIF:TextFieldBoxes:1.4.5") {
 		exclude group: 'com.android.support'
 	}
 	implementation 'org.jetbrains:annotations-java5:15.0'
