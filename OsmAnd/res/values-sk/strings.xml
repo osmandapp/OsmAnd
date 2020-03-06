@@ -3552,4 +3552,5 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="import_duplicates_title">Niektoré položky už existujú</string>
     <string name="select_data_to_import">Zvoľte údaje na importovanie.</string>
     <string name="shared_string_rendering_style">Štýl vykresľovania</string>
+    <string name="import_rendering_file"></string>
 </resources>
