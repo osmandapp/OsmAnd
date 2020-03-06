@@ -3535,4 +3535,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="select_data_to_import">Sélectionnez les données à importer.</string>
     <string name="shared_string_rendering_style">Style de rendu</string>
     <string name="import_rendering_file">Importer un fichier de rendu</string>
+    <string name="restore_all_profile_settings_descr">Tous les paramètres du profil seront restaurés à leurs valeurs d\'origine après création ou import du profil.</string>
+    <string name="restore_all_profile_settings">Restaurer tous les paramètres du profil \?</string>
+    <string name="saving_new_profile">Enregistrement du nouveau profil</string>
+    <string name="profile_backup_failed">Impossible de sauvegarder le profil.</string>
 </resources>
