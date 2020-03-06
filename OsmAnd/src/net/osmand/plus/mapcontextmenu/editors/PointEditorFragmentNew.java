@@ -7,12 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +17,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import androidx.appcompat.widget.Toolbar;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
+
+import com.google.android.material.textfield.TextInputLayout;
+
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -29,7 +33,6 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
-import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
 
 public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
@@ -124,16 +127,16 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			}
 		});
 
-		OsmandTextFieldBoxes nameCaption = (OsmandTextFieldBoxes) view.findViewById(R.id.name_caption);
-		AndroidUtils.setTextSecondaryColor(view.getContext(), nameCaption.getEditText(), !editor.isLight());
-		nameCaption.getEditText().setText(getNameCaption());
+		TextInputLayout nameCaption = (TextInputLayout) view.findViewById(R.id.name_caption);
+//		AndroidUtils.setTextSecondaryColor(view.getContext(), nameCaption.getEditText(), !editor.isLight());
+		nameCaption.setHint(getNameCaption());
 //		TextView categoryCaption = (TextView) view.findViewById(R.id.category_caption);
 //		AndroidUtils.setTextSecondaryColor(view.getContext(), categoryCaption, !editor.isLight());
 //		categoryCaption.setText(getCategoryCaption());
 
 		nameEdit = (EditText) view.findViewById(R.id.name_edit);
-		AndroidUtils.setTextPrimaryColor(view.getContext(), nameEdit, !editor.isLight());
-		AndroidUtils.setHintTextSecondaryColor(view.getContext(), nameEdit, !editor.isLight());
+//		AndroidUtils.setTextPrimaryColor(view.getContext(), nameEdit, !editor.isLight());
+//		AndroidUtils.setHintTextSecondaryColor(view.getContext(), nameEdit, !editor.isLight());
 		nameEdit.setText(getNameInitValue());
 		nameIcon = (ImageView) view.findViewById(R.id.name_icon);
 //		AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) view.findViewById(R.id.category_edit);
@@ -161,17 +164,15 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			descriptionEdit.setText(getDescriptionInitValue());
 		}
 
-		final OsmandTextFieldBoxes descriptionCaption = (OsmandTextFieldBoxes) view.findViewById(R.id.description_caption);
+		final TextInputLayout descriptionCaption = (TextInputLayout) view.findViewById(R.id.description_caption);
 		addDelDescription = (Button) view.findViewById(R.id.description_button);
 		addDelDescription.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (!descriptionCaption.isActivated()) {
-					descriptionCaption.activate(true);
 					descriptionCaption.setVisibility(View.VISIBLE);
 					addDelDescription.setText(view.getResources().getString(R.string.delete_description));
 				} else {
-					descriptionCaption.deactivate();
 					descriptionCaption.setVisibility(View.GONE);
 					addDelDescription.setText(view.getResources().getString(R.string.add_description));
 				}
@@ -200,11 +201,9 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			deleteButton.setVisibility(View.VISIBLE);
 			deleteIcon.setVisibility(View.VISIBLE);
 			if (!descriptionEdit.getText().toString().isEmpty()) {
-				descriptionCaption.activate(true);
 				descriptionCaption.setVisibility(View.VISIBLE);
 				addDelDescription.setText(app.getString(R.string.delete_description));
 			} else {
-				descriptionCaption.deactivate();
 				descriptionCaption.setVisibility(View.GONE);
 				addDelDescription.setText(app.getString(R.string.add_description));
 			}

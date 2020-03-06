@@ -16,7 +16,7 @@
 		android:background="?attr/card_and_list_background_basic"
 		android:orientation="vertical">
 
-		<android.support.v7.widget.Toolbar
+		<androidx.appcompat.widget.Toolbar
 			android:id="@+id/toolbar"
 			android:layout_width="fill_parent"
 			android:layout_height="@dimen/dashboard_map_toolbar"
@@ -39,7 +39,7 @@
 				android:scaleType="center"
 				android:src="@drawable/ic_action_replace" />
 
-		</android.support.v7.widget.Toolbar>
+		</androidx.appcompat.widget.Toolbar>
 
 		<ScrollView
 			android:id="@+id/editor_scroll_view"
@@ -66,7 +66,7 @@
 						android:orientation="vertical">
 
 						<FrameLayout
-							android:layout_width="wrap_content"
+							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:layout_marginLeft="@dimen/list_content_padding"
 							android:layout_marginRight="@dimen/list_content_padding">
@@ -86,20 +86,21 @@
 								android:gravity="center_vertical"
 								android:orientation="horizontal">
 
-								<net.osmand.plus.widgets.OsmandTextFieldBoxes
+								<com.google.android.material.textfield.TextInputLayout
 									android:id="@+id/name_caption"
 									android:layout_width="0dp"
 									android:layout_height="wrap_content"
+									android:hint="@string/shared_string_name"
 									android:layout_weight="1"
 									app:errorColor="@color/color_invalid"
-									app:labelText="@string/shared_string_name"
 									app:primaryColor="@color/active_color_primary_dark"
 									app:secondaryColor="?android:textColorSecondary">
 
-									<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+									<com.google.android.material.textfield.TextInputEditText
 										android:id="@+id/name_edit"
 										android:layout_width="match_parent"
 										android:layout_height="wrap_content"
+										android:minHeight="60dp"
 										android:layout_marginEnd="48dp"
 										android:layout_marginRight="48dp"
 										android:inputType="textMultiLine"
@@ -108,7 +109,7 @@
 										android:textSize="16sp"
 										tools:text="@string/lorem_ipsum" />
 
-								</net.osmand.plus.widgets.OsmandTextFieldBoxes>
+								</com.google.android.material.textfield.TextInputLayout>
 
 							</LinearLayout>
 
@@ -122,29 +123,30 @@
 							android:gravity="center_vertical"
 							android:orientation="horizontal">
 
-							<net.osmand.plus.widgets.OsmandTextFieldBoxes
+							<com.google.android.material.textfield.TextInputLayout
 								android:id="@+id/description_caption"
 								android:layout_width="0dp"
 								android:layout_height="wrap_content"
 								android:layout_marginLeft="@dimen/list_content_padding"
 								android:layout_marginRight="@dimen/list_content_padding"
+								android:hint="@string/shared_string_description"
 								android:layout_weight="1"
 								app:errorColor="@color/color_invalid"
-								app:labelText="@string/shared_string_description"
 								app:primaryColor="@color/active_color_primary_dark"
 								app:secondaryColor="?android:textColorSecondary">
 
-								<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+								<com.google.android.material.textfield.TextInputEditText
 									android:id="@+id/description_edit"
 									android:layout_width="match_parent"
 									android:layout_height="wrap_content"
+									android:minHeight="60dp"
 									android:inputType="textMultiLine"
 									android:maxLines="4"
 									android:scrollHorizontally="false"
 									android:textSize="16sp"
 									tools:text="@string/lorem_ipsum" />
 
-							</net.osmand.plus.widgets.OsmandTextFieldBoxes>
+							</com.google.android.material.textfield.TextInputLayout>
 						</LinearLayout>
 
 						<Button
