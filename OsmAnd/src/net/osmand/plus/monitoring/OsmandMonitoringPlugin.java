@@ -50,16 +50,17 @@ import gnu.trove.list.array.TIntArrayList;
 import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 public class OsmandMonitoringPlugin extends OsmandPlugin {
+
 	public static final String ID = "osmand.monitoring";
 	public final static String OSMAND_SAVE_SERVICE_ACTION = "OSMAND_SAVE_SERVICE_ACTION";
+
 	private OsmandSettings settings;
-	private OsmandApplication app;
 	private TextInfoWidget monitoringControl;
 	private LiveMonitoringHelper liveMonitoringHelper;
 	private boolean isSaving;
 
 	public OsmandMonitoringPlugin(OsmandApplication app) {
-		this.app = app;
+		super(app);
 		liveMonitoringHelper = new LiveMonitoringHelper(app);
 		final List<ApplicationMode> am = ApplicationMode.allPossibleValues();
 		ApplicationMode.regWidgetVisibility("monitoring", am.toArray(new ApplicationMode[am.size()]));

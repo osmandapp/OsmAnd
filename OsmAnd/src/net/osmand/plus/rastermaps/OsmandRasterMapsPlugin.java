@@ -61,20 +61,20 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
 import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
+
 	public static final String ID = "osmand.rastermaps";
 	// Constants for determining the order of items in the additional actions context menu
 	private static final int UPDATE_MAP_ITEM_ORDER = 12300;
 	private static final int DOWNLOAD_MAP_ITEM_ORDER = 12600;
 
 	private OsmandSettings settings;
-	private OsmandApplication app;
 
 	private MapTileLayer overlayLayer;
 	private MapTileLayer underlayLayer;
 	private StateChangedListener<Integer> overlayLayerListener;
 
 	public OsmandRasterMapsPlugin(OsmandApplication app) {
-		this.app = app;
+		super(app);
 		settings = app.getSettings();
 	}
 

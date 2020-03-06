@@ -44,10 +44,11 @@ import static android.content.Intent.ACTION_VIEW;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAPILLARY;
 
 public class MapillaryPlugin extends OsmandPlugin {
+
 	public static final String ID = "osmand.mapillary";
 	private static final String MAPILLARY_PACKAGE_ID = "app.mapillary";
+
 	private OsmandSettings settings;
-	private OsmandApplication app;
 
 	private MapillaryRasterLayer rasterLayer;
 	private MapillaryVectorLayer vectorLayer;
@@ -55,7 +56,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	private MapWidgetRegInfo mapillaryWidgetRegInfo;
 
 	public MapillaryPlugin(OsmandApplication app) {
-		this.app = app;
+		super(app);
 		settings = app.getSettings();
 	}
 

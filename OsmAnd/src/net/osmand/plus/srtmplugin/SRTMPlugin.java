@@ -57,19 +57,16 @@ public class SRTMPlugin extends OsmandPlugin {
 	public static final String CONTOUR_WIDTH_ATTR = "contourWidth";
 	public static final String CONTOUR_DENSITY_ATTR = "contourDensity";
 
-	private OsmandApplication app;
 	private OsmandSettings settings;
-
-	private boolean paid;
 	private HillshadeLayer hillshadeLayer;
 
 	@Override
 	public String getId() {
-		return paid ? ID : FREE_ID;
+		return FREE_ID;
 	}
 
 	public SRTMPlugin(OsmandApplication app) {
-		this.app = app;
+		super(app);
 		settings = app.getSettings();
 	}
 	

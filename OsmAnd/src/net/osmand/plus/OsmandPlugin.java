@@ -55,13 +55,20 @@ public abstract class OsmandPlugin {
 
 	public static final String PLUGIN_ID_KEY = "plugin_id";
 
-	private static List<OsmandPlugin> allPlugins = new ArrayList<OsmandPlugin>();
 	private static final Log LOG = PlatformUtil.getLog(OsmandPlugin.class);
+
+	private static List<OsmandPlugin> allPlugins = new ArrayList<OsmandPlugin>();
+
+	protected OsmandApplication app;
 
 	protected List<OsmandSettings.OsmandPreference> pluginPreferences = new ArrayList<>();
 
 	private boolean active;
 	private String installURL = null;
+
+	public OsmandPlugin(OsmandApplication app) {
+		this.app = app;
+	}
 
 	public abstract String getId();
 

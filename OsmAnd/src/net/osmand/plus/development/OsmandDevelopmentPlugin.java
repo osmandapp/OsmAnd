@@ -22,11 +22,11 @@ import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
+
 	private static final String ID = "osmand.development";
-	private OsmandApplication app;
 
 	public OsmandDevelopmentPlugin(OsmandApplication app) {
-		this.app = app;
+		super(app);
 		//ApplicationMode.regWidgetVisibility("fps", new ApplicationMode[0]);
 	}
 

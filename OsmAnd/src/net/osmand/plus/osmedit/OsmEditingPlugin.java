@@ -71,7 +71,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	private static final int MODIFY_OSM_NOTE_ITEM_ORDER = 7600;
 
 	private OsmandSettings settings;
-	private OsmandApplication app;
 	private OpenstreetmapsDbHelper dbpoi;
 	private OsmBugsDbHelper dbbug;
 	private OpenstreetmapLocalUtil localUtil;
@@ -80,7 +79,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	private OsmBugsLocalUtil localNotesUtil;
 
 	public OsmEditingPlugin(OsmandApplication app) {
-		this.app = app;
+		super(app);
 		settings = app.getSettings();
 	}
 

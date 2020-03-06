@@ -18,10 +18,8 @@ public class SkiMapsPlugin extends OsmandPlugin {
 	public static final String ID = "skimaps.plugin";
 	public static final String COMPONENT = "net.osmand.skimapsPlugin";
 
-	private OsmandApplication app;
-
 	public SkiMapsPlugin(OsmandApplication app) {
-		this.app = app;
+		super(app);
 	}
 
 	@Override
@@ -33,12 +31,12 @@ public class SkiMapsPlugin extends OsmandPlugin {
 	public String getName() {
 		return app.getString(net.osmand.plus.R.string.plugin_ski_name);
 	}
-	
+
 	@Override
 	public int getLogoResourceId() {
 		return R.drawable.ic_action_skiing;
 	}
-	
+
 	@Override
 	public int getAssetResourceName() {
 		return R.drawable.ski_map;

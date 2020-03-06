@@ -19,10 +19,8 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	public static final String ID = "nauticalPlugin.plugin";
 	public static final String COMPONENT = "net.osmand.nauticalPlugin";
 
-	private OsmandApplication app;
-
 	public NauticalMapsPlugin(OsmandApplication app) {
-		this.app = app;
+		super(app);
 	}
 	
 	@Override
