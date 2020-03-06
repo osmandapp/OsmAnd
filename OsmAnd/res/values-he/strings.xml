@@ -3519,4 +3519,13 @@
 \n
 \nנא לבחור פעולה.</string>
     <string name="import_rendering_file">ייבוא קובץ עיבוד</string>
+    <string name="multimedia_use_system_camera">להשתמש ביישומון המערכת</string>
+    <string name="multimedia_photo_play_sound">צליל צמצם מצלמה</string>
+    <string name="osm_authorization_success">האימות הצליח</string>
+    <string name="sort_by_category">מיון לפי קטגוריה</string>
+    <string name="index_name_antarctica">אנטארקטיקה</string>
+    <string name="restore_all_profile_settings_descr">כל הגדרות הפרופיל ישוחזרו למצבן המקורי לאחר יצירת/ייבוא הפרופיל הזה.</string>
+    <string name="restore_all_profile_settings">לשחזר את כל הגדרות הפרופיל\?</string>
+    <string name="saving_new_profile">שמירת פרופיל חדש</string>
+    <string name="profile_backup_failed">לא ניתן לגבות את הפרופיל.</string>
 </resources>
