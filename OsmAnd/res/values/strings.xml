@@ -16,7 +16,7 @@
     <string name="saving_new_profile">Saving new profile</string>
     <string name="profile_backup_failed">Could not back up profile.</string>
     <string name="shared_string_hillshade">Hillshade</string>
-    <string name="terrain_empty_state_text">Turn on to view the layer with shading relief or a map of the slope of the slopes. \n\nYou can find out why such cards are needed and how they work on our website</string>
+    <string name="terrain_empty_state_text">Enable to view hillshade or slope map. You can read more about this map types on our site</string>
     <string name="shared_string_legend">Legend</string>
     <string name="shared_string_zoom_levels">Zoom levels</string>
     <string name="shared_string_transparency">Transparency</string>

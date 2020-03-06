@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -9,7 +10,7 @@
 
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
+		android:layout_height="match_parent"
 		android:orientation="vertical">
 
 		<LinearLayout
@@ -173,11 +174,20 @@
 
 				</LinearLayout>
 
-				<androidx.appcompat.widget.AppCompatSeekBar
+				<com.google.android.material.slider.Slider
 					android:id="@+id/transparency_slider"
+					style="@style/Widget.MaterialComponents.Slider"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_marginTop="@dimen/list_header_settings_top_margin" />
+					android:layout_marginTop="@dimen/list_header_settings_top_margin"
+					android:stepSize="1"
+					android:theme="@style/Theme.MaterialComponents"
+					android:valueFrom="0"
+					android:valueTo="100"
+					app:haloRadius="@dimen/slider_thumb_halo_size"
+					app:thumbRadius="@dimen/slider_thumb_size"
+					app:tickColor="@android:color/transparent"
+					app:trackHeight="@dimen/slider_track_height" />
 
 				<View
 					android:layout_width="match_parent"
@@ -228,6 +238,7 @@
 				<LinearLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:gravity="center_vertical"
 					android:orientation="horizontal"
 					android:paddingStart="@dimen/content_padding"
 					android:paddingEnd="@dimen/content_padding">
@@ -242,17 +253,24 @@
 						tools:text="3" />
 
 					<com.google.android.material.slider.Slider
+						android:id="@+id/zoom_slider"
+						style="@style/Widget.MaterialComponents.Slider"
 						android:layout_width="0dp"
 						android:layout_height="wrap_content"
-						android:layout_marginStart="@dimen/content_padding"
-						android:layout_marginEnd="@dimen/content_padding"
-						android:layout_weight="1" />
+						android:layout_weight="1"
+						android:stepSize="1"
+						android:theme="@style/Theme.MaterialComponents"
+						android:valueFrom="2"
+						android:valueTo="22"
+						app:haloRadius="@dimen/slider_thumb_halo_size"
+						app:thumbRadius="@dimen/slider_thumb_size"
+						app:trackHeight="@dimen/slider_track_height" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/zoom_value_max"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_gravity="end"
+						android:gravity="end"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
 						tools:text="19" />
@@ -358,16 +376,72 @@
 			android:background="?attr/bg_color"
 			android:orientation="vertical">
 
-			<ImageView
-				android:id="@+id/empty_state_image"
+			<FrameLayout
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content" />
+				android:layout_height="wrap_content"
+				android:layout_margin="@dimen/content_padding_small">
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/empty_state_image"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:adjustViewBounds="true"
+					android:scaleType="fitCenter"
+					android:src="@drawable/img_empty_state_terrain" />
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:orientation="horizontal">
+
+					<FrameLayout
+						android:layout_width="0dp"
+						android:layout_height="match_parent"
+						android:layout_weight="1">
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="start|bottom"
+							android:layout_margin="@dimen/content_padding_half"
+							android:background="@drawable/bg_dark_transp"
+							android:gravity="start|bottom"
+							android:padding="@dimen/map_button_margin"
+							android:text="@string/shared_string_hillshade"
+							android:textColor="@color/color_white" />
+
+					</FrameLayout>
+
+					<FrameLayout
+						android:layout_width="0dp"
+						android:layout_height="match_parent"
+						android:layout_weight="1">
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="start|bottom"
+							android:layout_margin="@dimen/content_padding_half"
+							android:background="@drawable/bg_dark_transp"
+							android:gravity="start|bottom"
+							android:padding="@dimen/map_button_margin"
+							android:text="@string/shared_string_slope"
+							android:textColor="@color/color_white" />
+
+					</FrameLayout>
+
+				</LinearLayout>
+
+			</FrameLayout>
 
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/empty_state_description"
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_margin="@dimen/content_padding"
+				android:layout_height="match_parent"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:layout_marginBottom="@dimen/content_padding"
+				android:gravity="start"
 				android:textColor="?android:textColorSecondary"
 				android:textSize="@dimen/default_desc_text_size"
 				tools:text="@string/terrain_empty_state_text" />

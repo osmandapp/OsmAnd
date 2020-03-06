@@ -460,5 +460,6 @@
 
 	<color name="terrain_active_button">#1A237BFF</color>
 	<color name="terrain_active_button_stroke">#80237BFF</color>
+	<color name="terrain_empty_hint_bg">#80000000</color>
 
 </resources>

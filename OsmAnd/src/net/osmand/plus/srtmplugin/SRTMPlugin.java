@@ -74,12 +74,12 @@ public class SRTMPlugin extends OsmandPlugin {
 		this.app = app;
 		settings = app.getSettings();
 	}
-	
+
 	@Override
 	public int getLogoResourceId() {
 		return R.drawable.ic_plugin_srtm;
 	}
-	
+
 	@Override
 	public int getAssetResourceName() {
 		return R.drawable.contour_lines;
@@ -129,13 +129,14 @@ public class SRTMPlugin extends OsmandPlugin {
 	public String getHelpFileName() {
 		return "feature_articles/contour-lines-plugin.html";
 	}
+
 	@Override
 	public boolean init(@NonNull final OsmandApplication app, Activity activity) {
 		OsmandSettings settings = app.getSettings();
 		CommonPreference<String> pref = settings.getCustomRenderProperty("contourLines");
-		if(pref.get().equals("")) {
-			for(ApplicationMode m : ApplicationMode.allPossibleValues()) {
-				if(pref.getModeValue(m).equals("")) {
+		if (pref.get().equals("")) {
+			for (ApplicationMode m : ApplicationMode.allPossibleValues()) {
+				if (pref.getModeValue(m).equals("")) {
 					pref.setModeValue(m, "13");
 				}
 			}
@@ -174,6 +175,72 @@ public class SRTMPlugin extends OsmandPlugin {
 		settings.TERRAIN_MODE.set(mode);
 	}
 
+	public void setTransparency(int transparency) {
+		switch (getTerrainMode()) {
+			case HILLSHADE:
+				settings.HILLSHADE_TRANSPARENCY.set(transparency);
+				break;
+			case SLOPE:
+				settings.SLOPE_TRANSPARENCY.set(transparency);
+				break;
+		}
+	}
+
+	public void setZoomValues(int minZoom, int maxZoom) {
+		switch (getTerrainMode()) {
+			case HILLSHADE:
+				settings.HILLSHADE_MIN_ZOOM.set(minZoom);
+				settings.HILLSHADE_MAX_ZOOM.set(maxZoom);
+				break;
+			case SLOPE:
+				settings.SLOPE_MIN_ZOOM.set(minZoom);
+				settings.SLOPE_MAX_ZOOM.set(maxZoom);
+				break;
+		}
+	}
+
+	public int getTransparency() {
+		switch (getTerrainMode()) {
+			case HILLSHADE:
+				return settings.HILLSHADE_TRANSPARENCY.get();
+			case SLOPE:
+				return settings.SLOPE_TRANSPARENCY.get();
+		}
+		return 100;
+	}
+
+	public int getHillshadeTransparency(){
+		return settings.HILLSHADE_TRANSPARENCY.get();
+	}
+
+	public int getHillshadeMinZoom(){
+		return settings.HILLSHADE_MIN_ZOOM.get();
+	}
+	public int getHillshadeMaxZoom(){
+		return settings.HILLSHADE_MAX_ZOOM.get();
+	}
+
+
+	public int getMinZoom() {
+		switch (getTerrainMode()) {
+			case HILLSHADE:
+				return settings.HILLSHADE_MIN_ZOOM.get();
+			case SLOPE:
+				return settings.SLOPE_MIN_ZOOM.get();
+		}
+		return 2;
+	}
+
+	public int getMaxZoom() {
+		switch (getTerrainMode()) {
+			case HILLSHADE:
+				return settings.HILLSHADE_MAX_ZOOM.get();
+			case SLOPE:
+				return settings.SLOPE_MAX_ZOOM.get();
+		}
+		return 19;
+	}
+
 	public static boolean isContourLinesLayerEnabled(OsmandApplication app) {
 		boolean contourLinesEnabled = false;
 
@@ -203,7 +270,7 @@ public class SRTMPlugin extends OsmandPlugin {
 			}
 		}
 	}
-	
+
 	@Override
 	public void registerLayerContextMenuActions(final OsmandMapTileView mapView, ContextMenuAdapter adapter, final MapActivity mapActivity) {
 		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.OnRowItemClick() {
@@ -379,8 +446,8 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public void toggleHillshade(final MapActivity activity,
-								   final boolean isChecked,
-								   final Runnable callback) {
+								final boolean isChecked,
+								final Runnable callback) {
 		settings.HILLSHADE.set(isChecked);
 		if (callback != null) {
 			callback.run();
@@ -396,9 +463,9 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public void selectPropertyValue(final MapActivity activity,
-									 final RenderingRuleProperty p,
-									 final OsmandSettings.CommonPreference<String> pref,
-									 final Runnable callback) {
+									final RenderingRuleProperty p,
+									final OsmandSettings.CommonPreference<String> pref,
+									final Runnable callback) {
 		final String propertyDescr = SettingsActivity.getStringPropertyDescription(activity,
 				p.getAttrName(), p.getName());
 		boolean nightMode = isNightMode(activity, app);

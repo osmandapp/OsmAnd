@@ -1,9 +1,8 @@
 package net.osmand.plus.srtmplugin;
 
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.res.ColorStateList;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -12,7 +11,6 @@ import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,11 +18,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatSeekBar;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
 
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
+import com.google.android.material.slider.Slider;
+
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -33,25 +32,19 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
-import net.osmand.plus.download.DownloadActivityType;
-import net.osmand.plus.download.DownloadIndexesThread;
-import net.osmand.plus.download.DownloadResources;
-import net.osmand.plus.download.DownloadValidationManager;
-import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 
-import java.io.IOException;
+import org.apache.commons.logging.Log;
+
 import java.util.List;
 
-import static net.osmand.plus.srtmplugin.ContourLinesMenu.closeDashboard;
 
-public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickListener {
+public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickListener,
+		Slider.OnSliderTouchListener, Slider.OnChangeListener {
 
 	public static final String TAG = TerrainFragment.class.getSimpleName();
-
-	//	TODO replace with correct string
-	private static final String SLOPES_WIKI_URL = "https://osmand.net/features/contour-lines-plugin";
+	private static final Log LOG = PlatformUtil.getLog(TerrainFragment.class.getSimpleName());
+	private static final String SLOPES_WIKI_URL = "https://en.wikipedia.org/wiki/Grade_(slope)";
 	private static final String PLUGIN_URL = "https://osmand.net/features/contour-lines-plugin";
 
 	private OsmandApplication app;
@@ -63,28 +56,33 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	private boolean terrainEnabled;
 
 	private int colorProfile;
+	private ColorStateList colorProfileStateList;
+	private ColorStateList colorProfileInactiveStateList;
 
-	private TextView downloadDescriptionTv;
 	private TextView emptyStateDescriptionTv;
+	private TextView downloadDescriptionTv;
 	private TextView transparencyValueTv;
 	private TextView slopeReadMoreTv;
 	private TextView descriptionTv;
+	private TextView hillshadeBtn;
+	private TextView minZoomTv;
+	private TextView maxZoomTv;
+	private TextView slopeBtn;
 	private TextView titleTv;
 	private TextView stateTv;
-	private TextView slopeBtn;
-	private TextView hillshadeBtn;
-	private FrameLayout slopeBtnContainer;
 	private FrameLayout hillshadeBtnContainer;
+	private FrameLayout slopeBtnContainer;
 	private SwitchCompat switchCompat;
 	private ImageView iconIv;
-	private LinearLayout legendContainer;
 	private LinearLayout emptyState;
+	private LinearLayout legendContainer;
 	private LinearLayout contentContainer;
 	private LinearLayout downloadContainer;
-	private View legendTopDivider;
 	private View legendBottomDivider;
 	private View titleBottomDivider;
-	private AppCompatSeekBar transparencySlider;
+	private View legendTopDivider;
+	private Slider transparencySlider;
+	private Slider zoomSlider;
 
 	public TerrainFragment() {
 
@@ -100,6 +98,9 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		srtmEnabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null
 				|| InAppPurchaseHelper.isSubscribedToLiveUpdates(app);
 		colorProfile = settings.getApplicationMode().getIconColorInfo().getColor(nightMode);
+		colorProfileStateList = ColorStateList.valueOf(ContextCompat.getColor(app, colorProfile));
+		colorProfileInactiveStateList = ColorStateList
+				.valueOf(UiUtilities.getColorWithAlpha(colorProfile, 0.6f));
 		terrainEnabled = srtmPlugin.isTerrainLayerEnabled();
 		super.onCreate(savedInstanceState);
 	}
@@ -126,29 +127,54 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		stateTv = root.findViewById(R.id.state_tv);
 		iconIv = root.findViewById(R.id.icon_iv);
 		slopeBtn = root.findViewById(R.id.slope_btn);
+		zoomSlider = root.findViewById(R.id.zoom_slider);
+		minZoomTv = root.findViewById(R.id.zoom_value_min);
+		maxZoomTv = root.findViewById(R.id.zoom_value_max);
 		hillshadeBtn = root.findViewById(R.id.hillshade_btn);
 		slopeBtnContainer = root.findViewById(R.id.slope_btn_container);
-		hillshadeBtnContainer = root.findViewById(R.id.hillshade_btn_container);
 		downloadContainer = root.findViewById(R.id.download_container);
+		hillshadeBtnContainer = root.findViewById(R.id.hillshade_btn_container);
 
 		titleTv.setText(R.string.shared_string_terrain);
-		String emptyStateText = String.format(
-				getString(R.string.ltr_or_rtl_combine_via_colon),
-				getString(R.string.terrain_empty_state_text),
-				PLUGIN_URL
-		);
-		setupClickableText(emptyStateDescriptionTv, emptyStateText, PLUGIN_URL, PLUGIN_URL);
 		String wikiString = getString(R.string.shared_string_wikipedia);
 		String readMoreText = String.format(
 				getString(R.string.slope_read_more),
 				wikiString
 		);
+		String emptyStateText = String.format(
+				getString(R.string.ltr_or_rtl_combine_via_space),
+				getString(R.string.terrain_empty_state_text),
+				PLUGIN_URL
+		);
 		setupClickableText(slopeReadMoreTv, readMoreText, wikiString, SLOPES_WIKI_URL);
+		setupClickableText(emptyStateDescriptionTv, emptyStateText, PLUGIN_URL, PLUGIN_URL);
 
 		switchCompat.setChecked(terrainEnabled);
+		hillshadeBtn.setOnClickListener(this);
 		switchCompat.setOnClickListener(this);
 		slopeBtn.setOnClickListener(this);
-		hillshadeBtn.setOnClickListener(this);
+
+		transparencySlider.setTrackColorInactive(colorProfileInactiveStateList);
+		transparencySlider.setTrackColorActive(colorProfileStateList);
+		transparencySlider.setHaloColor(colorProfileInactiveStateList);
+		transparencySlider.setThumbColor(colorProfileStateList);
+		transparencySlider.setLabelBehavior(Slider.LABEL_GONE);
+		zoomSlider.setTrackColorInactive(colorProfileInactiveStateList);
+		zoomSlider.setTrackColorActive(colorProfileStateList);
+		zoomSlider.setHaloColor(colorProfileInactiveStateList);
+		zoomSlider.setThumbColor(colorProfileStateList);
+		zoomSlider.setLabelBehavior(Slider.LABEL_GONE);
+		zoomSlider.setTickColor(nightMode
+				? ColorStateList.valueOf(R.color.color_white)
+				: ColorStateList.valueOf(R.color.color_black));
+
+		transparencySlider.addOnSliderTouchListener(this);
+		zoomSlider.addOnSliderTouchListener(this);
+		transparencySlider.addOnChangeListener(this);
+		zoomSlider.addOnChangeListener(this);
+
+		UiUtilities.setupCompoundButton(switchCompat, nightMode, UiUtilities.CompoundButtonType.PROFILE_DEPENDENT);
+
 		updateUiMode();
 		return root;
 	}
@@ -170,15 +196,63 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		}
 	}
 
+	@Override
+	public void onStartTrackingTouch(@NonNull Slider slider) {
+
+	}
+
+	@Override
+	public void onStopTrackingTouch(@NonNull Slider slider) {
+		switch (slider.getId()) {
+			case R.id.transparency_slider:
+				srtmPlugin.setTransparency((int) slider.getValue());
+				break;
+			case R.id.zoom_slider:
+				List<Float> values = slider.getValues();
+				srtmPlugin.setZoomValues(values.get(0).intValue(), values.get(1).intValue());
+				break;
+		}
+		MapActivity mapActivity = (MapActivity) getActivity();
+		srtmPlugin.updateLayers(mapActivity.getMapView(), mapActivity);
+	}
+
+	@Override
+	public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
+		if (fromUser) {
+			switch (slider.getId()) {
+				case R.id.transparency_slider:
+					String transparency = (int) value + "%";
+					transparencyValueTv.setText(transparency);
+					break;
+				case R.id.zoom_slider:
+					List<Float> values = slider.getValues();
+					minZoomTv.setText(String.valueOf(values.get(0).intValue()));
+					maxZoomTv.setText(String.valueOf(values.get(1).intValue()));
+					break;
+			}
+		}
+	}
+
 	private void updateUiMode() {
 		TerrainMode mode = srtmPlugin.getTerrainMode();
 		if (terrainEnabled) {
+			int transparencyValue = srtmPlugin.getTransparency();
+			String transparency = transparencyValue + "%";
+			int minZoom = srtmPlugin.getMinZoom();
+			int maxZoom = srtmPlugin.getMaxZoom();
 			iconIv.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_hillshade_dark, colorProfile));
 			stateTv.setText(R.string.shared_string_enabled);
+			transparencySlider.setValue(transparencyValue);
+			transparencyValueTv.setText(transparency);
+			zoomSlider.setValues((float) minZoom, (float) maxZoom);
+			minZoomTv.setText(String.valueOf(minZoom));
+			maxZoomTv.setText(String.valueOf(maxZoom));
 			switch (mode) {
 				case HILLSHADE:
 					descriptionTv.setText(R.string.hillshade_description);
 					downloadDescriptionTv.setText(R.string.hillshade_download_description);
+//					zoomSlider.setValueFrom();
+//					zoomSlider.setValueTo();
 					break;
 				case SLOPE:
 					descriptionTv.setText(R.string.slope_description);
@@ -255,7 +329,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 					? getResources().getColor(R.color.active_color_primary_dark)
 					: getResources().getColor(R.color.active_color_primary_light));
 		} catch (RuntimeException e) {
-//			LOG.error("Error trying to find index of " + clickableText + " " + e);
+			LOG.error("Error trying to find index of " + clickableText + " " + e);
 		}
 	}
 
@@ -273,6 +347,4 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 			updateUiMode();
 		}
 	}
-
 }
-

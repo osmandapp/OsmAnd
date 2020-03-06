@@ -38,6 +38,7 @@ public class HillshadeLayer extends MapTileLayer {
 	private final static int MAX_TRANSPARENCY_ZOOM = 17;
 	private final static int DEFAULT_ALPHA = 100;
 	private final static int MAX_TRANSPARENCY_ALPHA = 20;
+	private SRTMPlugin srtmPlugin;
 
 	private QuadTree<String> indexedResources = new QuadTree<String>(new QuadRect(0, 0, 1 << (ZOOM_BOUNDARY+1), 1 << (ZOOM_BOUNDARY+1)), 8, 0.55f);
 
@@ -47,6 +48,7 @@ public class HillshadeLayer extends MapTileLayer {
 		indexHillshadeFiles(app);
 		setAlpha(DEFAULT_ALPHA);
 		setMap(createTileSource(activity));
+		this.srtmPlugin = srtmPlugin;
 	}
 
 	@Override
@@ -54,7 +56,7 @@ public class HillshadeLayer extends MapTileLayer {
 		if (tileBox.getZoom() >= MAX_TRANSPARENCY_ZOOM) {
 			setAlpha(MAX_TRANSPARENCY_ALPHA);
 		} else {
-			setAlpha(DEFAULT_ALPHA);
+			setAlpha(srtmPlugin.getHillshadeTransparency());
 		}
 		super.onPrepareBufferImage(canvas, tileBox, drawSettings);
 	}
