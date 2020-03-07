@@ -3555,4 +3555,8 @@
     <string name="select_data_to_import">選取要匯入的資料。</string>
     <string name="shared_string_rendering_style">算繪樣式</string>
     <string name="import_rendering_file">匯入算繪檔案</string>
+    <string name="restore_all_profile_settings_descr">建立／匯入此設定檔後，所有設定檔將會被復原為其原始狀態。</string>
+    <string name="restore_all_profile_settings">復原所有設定檔？</string>
+    <string name="saving_new_profile">正在儲存新設定檔</string>
+    <string name="profile_backup_failed">無法備份設定檔。</string>
 </resources>
