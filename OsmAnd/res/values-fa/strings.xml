@@ -3508,7 +3508,7 @@
     <string name="osm_authorization_success">احراز هویت موفقیت‌آمیز بود</string>
     <string name="rearrange_categories">مرتب‌سازی دسته‌ها</string>
     <string name="create_custom_categories_list_promo">می‌توانید دسته‌های سفارشی بیفزایید، دسته‌های غیرلازم را مخفی کنید و ترتیب لیست را تغییر دهید. لیست را می‌توانید همراه پروفایل‌ها برون‌برد یا درون‌برد کنید.</string>
-    <string name="add_new_custom_category_button_promo">با انتخاب یک یا چند دسته می‌توانید یک دستهٔ تازه بیفزایید.</string>
+    <string name="add_new_custom_category_button_promo">با انتخاب یک یا چند دستهٔ موردنیاز می‌توانید یک دستهٔ سفارشیِ تازه بیفزایید.</string>
     <string name="reset_to_default_category_button_promo">بازنشانی به پیشفرض، ترتیب را به حالت اولیهٔ پس از نصب برمی‌گرداند.</string>
     <string name="add_custom_category">افزودن دستهٔ سفارشی</string>
     <string name="rendering_attr_streetLightingNight_name">فقط هنگام شب نشان بده</string>
@@ -3589,4 +3589,9 @@
     <string name="import_duplicates_title">برخی موارد وجود دارند</string>
     <string name="select_data_to_import">دادهٔ موردنظر را برای درون‌برد انتخاب کنید.</string>
     <string name="shared_string_rendering_style">سبک رندر</string>
+    <string name="import_rendering_file">درون‌برد فایل render</string>
+    <string name="restore_all_profile_settings_descr">پس از درون‌برد/ایجاد این پروفایل همهٔ تنظیمات آن به حالت اولیه بازمی‌گردد.</string>
+    <string name="restore_all_profile_settings">همهٔ تنظیمات پروفایل بازگردد؟</string>
+    <string name="saving_new_profile">در حال ذخیرهٔ پروفایل تازه</string>
+    <string name="profile_backup_failed">نمی‌توان از پروفایل پشتیبان گرفت.</string>
 </resources>
