@@ -1,19 +1,8 @@
 package net.osmand.binary;
 
-import gnu.trove.iterator.TLongObjectIterator;
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.list.array.TLongArrayList;
-import gnu.trove.map.hash.TIntObjectHashMap;
-import gnu.trove.map.hash.TLongObjectHashMap;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import com.google.protobuf.CodedInputStream;
+import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.protobuf.WireFormat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -25,27 +14,51 @@ import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteEncodingRule;
 import net.osmand.binary.OsmandOdb.RestrictionData;
 import net.osmand.binary.OsmandOdb.RouteData;
 import net.osmand.binary.RouteDataObject.RestrictionInfo;
+import net.osmand.router.RouteDataResources;
 import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser;
 
 import org.apache.commons.logging.Log;
 
-import com.google.protobuf.CodedInputStream;
-import com.google.protobuf.InvalidProtocolBufferException;
-import com.google.protobuf.WireFormat;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import gnu.trove.iterator.TLongObjectIterator;
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.list.array.TLongArrayList;
+import gnu.trove.map.hash.TIntObjectHashMap;
+import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class BinaryMapRouteReaderAdapter {
 	protected static final Log LOG = PlatformUtil.getLog(BinaryMapRouteReaderAdapter.class);
 	private static final int SHIFT_COORDINATES = 4;
 
-	private static class RouteTypeCondition {
+	private static class RouteTypeCondition implements StringExternalizable<RouteDataBundle> {
 		String condition = "";
 		OpeningHoursParser.OpeningHours hours = null;
 		String value;
 		int ruleid;
+
+		@Override
+		public void writeToBundle(RouteDataBundle bundle) {
+			bundle.putString("condition", condition);
+			bundle.putString("value", value);
+			bundle.putInt("ruleid", ruleid);
+		}
+
+		@Override
+		public void readFromBundle(RouteDataBundle bundle) {
+
+		}
 	}
 
-	public static class RouteTypeRule {
+	public static class RouteTypeRule implements StringExternalizable<RouteDataBundle> {
 		private final static int ACCESS = 1;
 		private final static int ONEWAY = 2;
 		private final static int HIGHWAY_TYPE = 3;
@@ -77,6 +90,22 @@ public class BinaryMapRouteReaderAdapter {
 				System.err.println("Error analyzing tag/value = " + t + "/" +v);
 				throw e;
 			}
+		}
+
+		@Override
+		public void writeToBundle(RouteDataBundle bundle) {
+			bundle.putString("t", t);
+			bundle.putString("v", v);
+			bundle.putInt("intValue", intValue);
+			bundle.putFloat("floatValue", floatValue);
+			bundle.putInt("type", type);
+			bundle.putList("conditions", "condition", conditions);
+			bundle.putInt("forward", forward);
+		}
+
+		@Override
+		public void readFromBundle(RouteDataBundle bundle) {
+
 		}
 
 		public int isForward() {
@@ -228,7 +257,7 @@ public class BinaryMapRouteReaderAdapter {
 		}
 	}
 
-	public static class RouteRegion extends BinaryIndexPart {
+	public static class RouteRegion extends BinaryIndexPart implements StringExternalizable<RouteDataBundle> {
 		public int regionsRead;
 		public List<RouteTypeRule> routeEncodingRules = new ArrayList<BinaryMapRouteReaderAdapter.RouteTypeRule>();
 		public Map<String, Integer> decodingRules = null;
@@ -240,11 +269,36 @@ public class BinaryMapRouteReaderAdapter {
 		int destinationTypeRule = -1;
 		int destinationRefTypeRule = -1;
 		private RouteRegion referenceRouteRegion;
-		
+
+		@Override
+		public void writeToBundle(RouteDataBundle bundle) {
+			bundle.putInt("regionsRead", regionsRead);
+			bundle.putList("routeEncodingRules", "rule", routeEncodingRules);
+			bundle.putMap("decodingRules", decodingRules);
+			bundle.putList("subregions", "subregion", subregions);
+			bundle.putList("basesubregions", "subregion", basesubregions);
+
+			bundle.putInt("nameTypeRule", nameTypeRule);
+			bundle.putInt("refTypeRule", refTypeRule);
+			bundle.putInt("destinationTypeRule", destinationTypeRule);
+			bundle.putInt("destinationRefTypeRule", destinationRefTypeRule);
+
+			if (referenceRouteRegion != null) {
+				List<RouteRegion> regions = bundle.getResources().getRouteRegions();
+				int regionIndex = regions.indexOf(referenceRouteRegion);
+				assert regionIndex != -1;
+				bundle.putInt("referenceRouteRegionIndex", regionIndex);
+			}
+		}
+
+		@Override
+		public void readFromBundle(RouteDataBundle bundle) {
+
+		}
+
 		public String getPartName() {
 			return "Routing";
 		}
-		
 
 		public int getFieldNumber() {
 			return OsmandOdb.OsmAndStructure.ROUTINGINDEX_FIELD_NUMBER;
@@ -452,7 +506,7 @@ public class BinaryMapRouteReaderAdapter {
 	}
 	
 	// Used in C++
-	public static class RouteSubregion {
+	public static class RouteSubregion implements StringExternalizable<RouteDataBundle> {
 		private final static int INT_SIZE = 4;
 		public final RouteRegion routeReg;
 		public RouteSubregion(RouteSubregion copy) {
@@ -477,7 +531,52 @@ public class BinaryMapRouteReaderAdapter {
 		public int shiftToData;
 		public List<RouteSubregion> subregions = null;
 		public List<RouteDataObject> dataObjects = null;
-		
+
+		public void collectResources(RouteDataResources resources) {
+			List<RouteDataObject> dataObjects = resources.getRouteDataObjects();
+			List<RouteRegion> regions = resources.getRouteRegions();
+			if (this.dataObjects != null) {
+				for (RouteDataObject dataObject : this.dataObjects) {
+					if (!dataObjects.contains(dataObject)) {
+						dataObjects.add(dataObject);
+					}
+				}
+			}
+			if (routeReg != null && !regions.contains(routeReg)) {
+				regions.add(routeReg);
+			}
+			if (subregions != null) {
+				for (RouteSubregion subregion : subregions) {
+					RouteRegion routeReg = subregion.routeReg;
+					if (routeReg != null && !regions.contains(routeReg)) {
+						regions.add(routeReg);
+					}
+					subregion.collectResources(resources);
+				}
+			}
+		}
+
+		@Override
+		public void writeToBundle(RouteDataBundle bundle) {
+			List<RouteRegion> regions = bundle.getResources().getRouteRegions();
+			int regionIndex = regions.indexOf(routeReg);
+			assert regionIndex == -1;
+			bundle.putInt("routeRegIndex", regionIndex);
+
+			bundle.putInt("left", left);
+			bundle.putInt("right", right);
+			bundle.putInt("top", top);
+			bundle.putInt("bottom", bottom);
+
+			bundle.putList("subregions", "subregion", subregions);
+			bundle.putList("dataObjects", "object", dataObjects);
+		}
+
+		@Override
+		public void readFromBundle(RouteDataBundle bundle) {
+
+		}
+
 		public int getEstimatedSize(){
 			int shallow = 7 * INT_SIZE + 4*3;
 			if (subregions != null) {

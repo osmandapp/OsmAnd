@@ -94,14 +94,27 @@ public class GPXUtilities {
 		}
 	}
 
+	public interface GPXExtensionsWriter {
+		public void writeExtensions(XmlSerializer serializer);
+	}
+
 	public static class GPXExtensions {
 		Map<String, String> extensions = null;
+		GPXExtensionsWriter extensionsWriter = null;
 
 		public Map<String, String> getExtensionsToRead() {
 			if (extensions == null) {
 				return Collections.emptyMap();
 			}
 			return extensions;
+		}
+
+		public GPXExtensionsWriter getExtensionsWriter() {
+			return extensionsWriter;
+		}
+
+		public void setExtensionsWriter(GPXExtensionsWriter extensionsWriter) {
+			this.extensionsWriter = extensionsWriter;
 		}
 
 		public int getColor(int defColor) {
@@ -1600,10 +1613,17 @@ public class GPXUtilities {
 	}
 
 	private static void writeExtensions(XmlSerializer serializer, GPXExtensions p) throws IOException {
-		if (!p.getExtensionsToRead().isEmpty()) {
+		Map<String, String> extensionsToRead = p.getExtensionsToRead();
+		GPXExtensionsWriter extensionsWriter = p.getExtensionsWriter();
+		if (!extensionsToRead.isEmpty() || extensionsWriter != null) {
 			serializer.startTag(null, "extensions");
-			for (Entry<String, String> s : p.getExtensionsToRead().entrySet()) {
-				writeNotNullText(serializer, s.getKey(), s.getValue());
+			if (!extensionsToRead.isEmpty()) {
+				for (Entry<String, String> s : extensionsToRead.entrySet()) {
+					writeNotNullText(serializer, s.getKey(), s.getValue());
+				}
+			}
+			if (extensionsWriter != null) {
+				extensionsWriter.writeExtensions(serializer);
 			}
 			serializer.endTag(null, "extensions");
 		}

@@ -6,23 +6,20 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
 
-import net.osmand.Location;
-import net.osmand.PlatformUtil;
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.data.DataTileManager;
-import net.osmand.data.LatLon;
-import net.osmand.data.LocationPoint;
-import net.osmand.data.WptLocationPoint;
-import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.Way;
-import net.osmand.osm.io.NetworkUtils;
-import net.osmand.plus.ApplicationMode;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Route;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.Location;
+import net.osmand.PlatformUtil;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.LatLon;
+import net.osmand.data.LocationPoint;
+import net.osmand.data.WptLocationPoint;
+import net.osmand.osm.io.NetworkUtils;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
@@ -902,6 +899,17 @@ public class RouteProvider {
 					if (sturn != null) {
 						turnType.setTurnAngle((float) Double.parseDouble(sturn));
 					}
+					String slanes = item.getExtensionsToRead().get("lanes");
+					if (slanes != null) {
+						try {
+							int[] lanes = Algorithms.stringToArray(slanes);
+							if (lanes != null && lanes.length > 0) {
+								turnType.setLanes(lanes);
+							}
+						} catch (NumberFormatException e) {
+							// ignore
+						}
+					}
 					RouteDirectionInfo dirInfo = new RouteDirectionInfo(avgSpeed, turnType);
 					dirInfo.setDescriptionRoute(item.desc); //$NON-NLS-1$
 					dirInfo.routePointOffset = offset;
@@ -1057,6 +1065,10 @@ public class RouteProvider {
 						if (TurnType.C != turnType) {
 							extensions.put("turn", dirInfo.getTurnType().toXmlString());
 							extensions.put("turn-angle", dirInfo.getTurnType().getTurnAngle() + "");
+						}
+						int[] lanes = dirInfo.getTurnType().getLanes();
+						if (lanes != null && lanes.length > 0) {
+							extensions.put("lanes", Algorithms.arrayToString(lanes));
 						}
 						extensions.put("offset", (dirInfo.routePointOffset - currentRoute) + "");
 

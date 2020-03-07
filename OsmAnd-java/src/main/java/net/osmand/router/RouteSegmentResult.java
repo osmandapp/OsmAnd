@@ -1,19 +1,23 @@
 package net.osmand.router;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
+import net.osmand.binary.RouteDataBundle;
 import net.osmand.binary.RouteDataObject;
+import net.osmand.binary.StringExternalizable;
 import net.osmand.data.LatLon;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
-public class RouteSegmentResult {
+
+public class RouteSegmentResult implements StringExternalizable<RouteDataBundle> {
 	private final RouteDataObject object;
 	private int startPointIndex;
 	private int endPointIndex;
@@ -34,7 +38,123 @@ public class RouteSegmentResult {
 		this.endPointIndex = endPointIndex;
 		updateCapacity();
 	}
-	
+
+	void collectResources(RouteDataResources resources) {
+		List<RouteSegmentResult> segments = resources.getRouteSegments();
+		List<RouteDataObject> dataObjects = resources.getRouteDataObjects();
+		List<RouteRegion> regions = resources.getRouteRegions();
+		if (!segments.contains(this)) {
+			segments.add(this);
+		}
+		if (attachedRoutes != null) {
+			for (List<RouteSegmentResult> routes : attachedRoutes) {
+				if (routes != null) {
+					for (RouteSegmentResult route : routes) {
+						if (!segments.contains(route)) {
+							segments.add(route);
+						}
+					}
+				}
+			}
+		}
+		if (preAttachedRoutes != null) {
+			for (RouteSegmentResult[] routes : preAttachedRoutes) {
+				if (routes != null) {
+					for (RouteSegmentResult route : routes) {
+						if (!segments.contains(route)) {
+							segments.add(route);
+						}
+					}
+				}
+			}
+		}
+		if (!dataObjects.contains(object)) {
+			dataObjects.add(object);
+		}
+		RouteRegion region = object.region;
+		if (!regions.contains(region)) {
+			regions.add(region);
+		}
+		List<RouteSubregion> baseSubregions = region.getBaseSubregions();
+		if (baseSubregions != null) {
+			for (RouteSubregion subregion : baseSubregions) {
+				subregion.collectResources(resources);
+			}
+		}
+		List<RouteSubregion> subregions = region.getSubregions();
+		if (subregions != null) {
+			for (RouteSubregion subregion : subregions) {
+				subregion.collectResources(resources);
+			}
+		}
+	}
+
+	@Override
+	public void writeToBundle(RouteDataBundle bundle) {
+		List<RouteDataObject> dataObjects = bundle.getResources().getRouteDataObjects();
+		int dataObjectIndex = dataObjects.indexOf(object);
+		assert dataObjectIndex != -1;
+		bundle.putInt("objectIndex", dataObjectIndex);
+
+		bundle.putInt("startPointIndex", startPointIndex);
+		bundle.putInt("endPointIndex", endPointIndex);
+
+		List<RouteSegmentResult> segments = bundle.getResources().getRouteSegments();
+		if (attachedRoutes != null) {
+			Set<Integer> attachedRoutesIndexes = new HashSet<>();
+			for (List<RouteSegmentResult> routes : attachedRoutes) {
+				if (routes != null) {
+					for (RouteSegmentResult route : routes) {
+						int segmentIndex = segments.indexOf(route);
+						assert segmentIndex != -1;
+						attachedRoutesIndexes.add(segmentIndex);
+					}
+				}
+			}
+			int[] attachedRoutesIndexesArray = new int[attachedRoutesIndexes.size()];
+			Iterator<Integer> it = attachedRoutesIndexes.iterator();
+			int i = 0;
+			while (it.hasNext()) {
+				int index = it.next();
+				attachedRoutesIndexesArray[i++] = index;
+			}
+			bundle.putArray("attachedRoutes", attachedRoutesIndexesArray);
+		}
+
+		if (preAttachedRoutes != null) {
+			Set<Integer> preAttachedRoutesIndexes = new HashSet<>();
+			for (RouteSegmentResult[] routes : preAttachedRoutes) {
+				if (routes != null) {
+					for (RouteSegmentResult route : routes) {
+						int segmentIndex = segments.indexOf(route);
+						assert segmentIndex != -1;
+						preAttachedRoutesIndexes.add(segmentIndex);
+					}
+				}
+			}
+			int[] preAttachedRoutesIndexesArray = new int[preAttachedRoutesIndexes.size()];
+			Iterator<Integer> it = preAttachedRoutesIndexes.iterator();
+			int i = 0;
+			while (it.hasNext()) {
+				int index = it.next();
+				preAttachedRoutesIndexesArray[i++] = index;
+			}
+			bundle.putArray("preAttachedRoutes", preAttachedRoutesIndexesArray);
+		}
+		bundle.putFloat("segmentTime", segmentTime);
+		bundle.putFloat("routingTime", routingTime);
+		bundle.putFloat("speed", speed);
+		bundle.putFloat("distance", distance);
+		bundle.putString("description", description);
+
+		bundle.putObject("turnType", turnType);
+	}
+
+	@Override
+	public void readFromBundle(RouteDataBundle bundle) {
+
+	}
+
 	public float[] getHeightValues() {
 		float[] pf = object.calculateHeightArray();
 		if(pf == null || pf.length == 0) {

@@ -1,9 +1,13 @@
 package net.osmand.router;
 
+import net.osmand.binary.RouteDataBundle;
+import net.osmand.binary.StringBundle;
+import net.osmand.binary.StringExternalizable;
+
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.set.hash.TIntHashSet;
 
-public class TurnType {
+public class TurnType implements StringExternalizable<RouteDataBundle> {
 	public static final int C = 1;//"C"; // continue (go straight) //$NON-NLS-1$
 	public static final int TL = 2; // turn left //$NON-NLS-1$
 	public static final int TSLL = 3; // turn slightly left //$NON-NLS-1$
@@ -18,7 +22,23 @@ public class TurnType {
 	public static final int OFFR = 12; // Off route //$NON-NLS-1$
 	public static final int RNDB = 13; // Roundabout
 	public static final int RNLB = 14; // Roundabout left
-	
+
+	@Override
+	public void writeToBundle(RouteDataBundle bundle) {
+		bundle.putInt("value", value);
+		bundle.putInt("exitOut", exitOut);
+		bundle.putFloat("turnAngle", turnAngle);
+		bundle.putBoolean("skipToSpeak", skipToSpeak);
+		bundle.putArray("lanes", lanes);
+		bundle.putBoolean("possiblyLeftTurn", possiblyLeftTurn);
+		bundle.putBoolean("possiblyRightTurn", possiblyRightTurn);
+	}
+
+	@Override
+	public void readFromBundle(RouteDataBundle bundle) {
+
+	}
+
 	public static TurnType straight() {
 		return valueOf(C, false);
 	}
