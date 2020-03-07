@@ -3554,4 +3554,8 @@
     <string name="select_data_to_import">Виберіть дані, які потрібно імпортувати.</string>
     <string name="shared_string_rendering_style">Стиль відмальовування</string>
     <string name="import_rendering_file">Імпортувати файл відмальовування</string>
+    <string name="restore_all_profile_settings_descr">Усі налаштування профілю будуть відновлені до початкового стану після створення/імпорту цього профілю.</string>
+    <string name="restore_all_profile_settings">Відновити всі налаштування профілю\?</string>
+    <string name="saving_new_profile">Збереження нового профілю</string>
+    <string name="profile_backup_failed">Не вдалося створити резервну копію профілю.</string>
 </resources>
