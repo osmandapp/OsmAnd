@@ -3565,4 +3565,8 @@ Lon %2$s</string>
     <string name="select_data_to_import">Marca los datos a importar.</string>
     <string name="shared_string_rendering_style">Estilo de renderizado</string>
     <string name="import_rendering_file">Importar archivo de renderizado</string>
+    <string name="restore_all_profile_settings_descr">Todos los ajustes del perfil serán restaurados a su estado original después de crear/importar este perfil.</string>
+    <string name="restore_all_profile_settings">¿Restaurar todos los ajustes del perfil\?</string>
+    <string name="saving_new_profile">Guardando el nuevo perfil</string>
+    <string name="profile_backup_failed">No se pudo respaldar el perfil.</string>
 </resources>
