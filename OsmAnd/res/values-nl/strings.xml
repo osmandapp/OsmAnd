@@ -1231,7 +1231,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="arrival_distance_factor_early">Vroegtijdig</string>
     <string name="arrival_distance_factor_normally">Op tijd</string>
     <string name="arrival_distance_factor_late">Laat</string>
-    <string name="arrival_distance_factor_at_last">Een paar meter voor de bestemming</string>
+    <string name="arrival_distance_factor_at_last">In de laatste meters</string>
     <string name="av_camera_pic_size">Foto-formaat</string>
     <string name="av_camera_pic_size_descr">Kies de grootte van de Foto\'s</string>
     <string name="rendering_value_browse_map_name">Bekijk kaart</string>
@@ -2149,7 +2149,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="quick_action_sh_poi_descr">Je kunt één of meerdere POI-categorieën kiezen om weer te geven.</string>
     <string name="quick_action_page_list_descr">Druk knop om door de onderstaande lijst te bladeren.</string>
     <string name="quick_action_map_style_action">Kaartstijl toevoegen</string>
-    <string name="quick_action_empty_param_error">Parameter mag niet leeg zijn</string>
+    <string name="quick_action_empty_param_error">Alle parameters invullen</string>
     <string name="quick_action_map_styles">Kaartstijlen</string>
     <string name="quick_action_map_overlay">Overlay-kaart wijzigen</string>
     <string name="quick_action_map_overlay_title">Overlay-kaarten</string>
@@ -3105,7 +3105,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="voice_announces">Gesproken instructies</string>
     <string name="screen_alerts">Meldingen</string>
     <string name="route_parameters_descr">Configureer routeparameters</string>
-    <string name="route_parameters">Routeberekening</string>
+    <string name="route_parameters">Routeparameters</string>
     <string name="application_profile_changed">Profiel gewijzigd naar \"%s\"</string>
     <string name="layer_osm_edits">OSM-aanpassingen</string>
     <string name="empty_filename">Bestandsnaam is leeg</string>
@@ -3326,4 +3326,84 @@ voor Gebied: %1$s x %2$s</string>
     <string name="select_map_icon_descr">Kaarticoon verschijnt op de kaart en wijzigt slechts bij het navigeren in het navigatie-icoon.</string>
     <string name="logcat_buffer_descr">Controleer en deel gedetailleerde logs van de applicatie</string>
     <string name="permission_is_required">Toestemming is vereist om deze optie te gebruiken.</string>
+    <string name="monitoring_min_speed_descr">Dit is een filter waarbij geen punten worden geregistreerd bij een bepaalde lage snelheid. Dit zorgt voor effener tracks op de kaart.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Bijwerking: alle segmenten waar de minimum snelheid niet werd gehaald zullen ontbreken in je track (bvb waar je je fiets een steile helling opduwde). Ook zal info over rustperiodes ontbreken. Dat heeft gevolgen voor latere analyse of verwerking, zoals het bepalen van de totale lengte van je trip, tijd in beweging of gemiddelde snelheid.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Aanbeveling: probeer eerst de bewegingsdetectie via het minimum verplaatsingsfilter loggen (B) om betere resultaten en minder gegevensverlies te bekomen. Probeer waardes hoger dan 0 wanneer je tracks te veel ruis bevatten bij lage snelheid. Noteer dat sommige metingen totaal geen snelheid rapporteren (op netwerk gebaseerde methodes), zodat je niets vastlegt.</string>
+    <string name="monitoring_min_accuracy_descr">Dit zal slechts punten met een minimale nauwkeurigheid-indicatie opnemen (in meter/voet, zoals voor jouw chipset door Android gerapporteerd). Nauwkeurigheid refereert naar de spreiding van opeenvolgende metingen en is niet rechtstreeks gerelateerd met precisie, die definieert hoe nabij je metingen zich tot je echte positie bevinden.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Aanbeveling: een instelling van 5 meter kan voor jou goed werken wanneer je geen fijnere details dan die nodig hebt. Of wanneer je niet expliciet gegevens wil verzamelen tijdens het rusten.</string>
+    <string name="live_monitoring_time_buffer">Tijd-buffer</string>
+    <string name="live_monitoring_tracking_interval">Registratie-interval</string>
+    <string name="live_monitoring_adress">Web adres</string>
+    <string name="live_monitoring_adress_descr">Geef de webadres parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
+    <string name="monitoring_notification">Melding</string>
+    <string name="monitoring_min_speed">Minimum snelheid</string>
+    <string name="monitoring_min_accuracy">Minimum nauwkeurigheid</string>
+    <string name="monitoring_min_distance">Minimum verplaatsing</string>
+    <string name="reset_plugin_to_default">Herstel plugin instellingen naar standaard</string>
+    <string name="multimedia_rec_split_title">Opname splitsing</string>
+    <string name="multimedia_use_system_camera">Gebruik systeem app</string>
+    <string name="multimedia_photo_play_sound">Camera sluiter geluid</string>
+    <string name="osm_authorization_success">Toestemming is gelukt</string>
+    <string name="rearrange_categories">Herschik categorieën</string>
+    <string name="create_custom_categories_list_promo">Je kan eigen categorieën toevoegen, categorieën die niet nuttig zijn verbergen en de sorteervolgorde van de lijst wijzigen. De lijst kan met profielen geïmporteerd en geëxporteerd worden.</string>
+    <string name="add_new_custom_category_button_promo">Je kan een nieuwe eigen categorie toevoegen door een of meerdere benodigde categorieën te kiezen.</string>
+    <string name="reset_to_default_category_button_promo">Herstel naar standaard zal de sorteervolgorde terugzetten zoals die was bij installatie.</string>
+    <string name="shared_string_available">Beschikbaar</string>
+    <string name="add_custom_category">Eigen categorie toevoegen</string>
+    <string name="rendering_attr_streetLightingNight_name">Enkel \'s nachts tonen</string>
+    <string name="plugin_prefs_reset_successful">Alle plugin instellingen teruggezet naar standaardwaarden.</string>
+    <string name="profile_prefs_reset_successful">Alle profielinstellingen teruggezet naar standaardwaarden.</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="sunset_at">Zonsondergang om %1$s</string>
+    <string name="sunrise_at">Zonsopkomst om %1$s</string>
+    <string name="accessibility_mode_disabled">Toegankelijkheidsmodus uitgeschakeld in je systeem.</string>
+    <string name="use_system_screen_timeout">Gebruik de scherm time-out van het systeem</string>
+    <string name="use_system_screen_timeout_promo">Standaard niet actief. Wanneer OsmAnd in de voorgrond loopt zal het scherm niet uitschakelen.
+\n
+\nBij activatie zal OsmAnd de time-out instellingen van het systeem volgen.</string>
+    <string name="clear_recorded_data">Verwijder opgenomen gegevens</string>
+    <string name="copy_coordinates">Kopieer coördinaten</string>
+    <string name="routing_profile_direct_to">Recht-naar-punt</string>
+    <string name="please_provide_profile_name_message">Kies een naam voor het profiel</string>
+    <string name="open_settings">Open instellingen</string>
+    <string name="plugin_disabled">Plugin uitgeschakeld</string>
+    <string name="plugin_disabled_descr">Deze plugin is een afzonderlijke App. Je zal die afzonderlijk dienen te verwijderen als je die niet meer nodig denkt te hebben.
+\n
+\nDe plugin blijft op je toestel bij het verwijderen van OsmAnd.</string>
+    <string name="shared_string_menu">Menu</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_routing">Routering</string>
+    <string name="shared_string_include_data">Bijkomende gegevens insluiten</string>
+    <string name="import_profile_dialog_description">Het geïmporteerde profiel bevat bijkomende gegevens. Klik \'importeer\' om enkel de profielgegevens te importeren of kies bijkomende gegevens om te importeren.</string>
+    <string name="export_profile_dialog_description">Je kan bijkomende gegevens om mee met het profiel te exporteren.</string>
+    <string name="shared_string_app_default_w_val">App Standaardwaarde (%s)</string>
+    <string name="no_recalculation_setting">Herberekening uitschakelen</string>
+    <string name="route_recalculation_dist_title">Minimale afstand om route te herbereken</string>
+    <string name="route_recalculation_dist_descr">De route wordt herberekend wanneer de afstand tot die route groter is dan de opgegeven parameter</string>
+    <string name="profile_type_custom_string">Eigen profiel</string>
+    <string name="shared_string_angle_param">Hoek: %s°</string>
+    <string name="shared_string_angle">Hoek</string>
+    <string name="recalc_angle_dialog_descr">Een extra recht segment tussen mijn locatie en de berekende route zal getoond worden tot de route herberekend is</string>
+    <string name="recalc_angle_dialog_title">Minimale hoek tussen mijn locatie en de route</string>
+    <string name="shared_string_preparing">Voorbereiding</string>
+    <string name="shared_string_poi_types">POI types</string>
+    <string name="shared_string_nothing_selected">Niets geselecteerd</string>
+    <string name="shared_string_quick_actions">Snelle acties</string>
+    <string name="shared_string_profiles">Profielen</string>
+    <string name="listed_exist">De getoonde %1$s zijn in OsmAnd reeds beschikbaar.</string>
+    <string name="replace_all_desc">Huidige elementen worden vervangen door elementen uit het bestand</string>
+    <string name="replace_all">Alle vervangen</string>
+    <string name="keep_both">Beide houden</string>
+    <string name="keep_both_desc">Geïmporteerde elementen zullen toegevoegd worden met een voorvoegsel</string>
+    <string name="import_duplicates_description">OsmAnd heeft reeds elementen met dezelfde naam als de geïmporteerde.
+\n
+\nKies een actie.</string>
+    <string name="import_duplicates_title">Sommige elementen bestaan reeds</string>
+    <string name="select_data_to_import">Kies de te importeren gegevens.</string>
+    <string name="shared_string_rendering_style">Weergavestijl</string>
+    <string name="import_rendering_file">Importeer reproduceer-bestand</string>
+    <string name="restore_all_profile_settings_descr">Alle profielinstellingen zullen hersteld worden naar hun standaardwaarden na het maken/importeren van dit profiel.</string>
+    <string name="restore_all_profile_settings">Alle profielinstellingen herstellen\?</string>
+    <string name="saving_new_profile">Slaat nieuw profiel op</string>
+    <string name="profile_backup_failed">Kan profiel niet back-uppen.</string>
 </resources>
