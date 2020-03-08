@@ -66,7 +66,7 @@
     <string name="poi_musical_instrument">Muziekinstrumentenwinkel</string>
     <string name="poi_newsagent">Krantenkiosk</string>
     <string name="poi_optician">Opticien</string>
-    <string name="poi_organic">Biologische voedingswinkel</string>
+    <string name="poi_organic">Bio producten</string>
     <string name="poi_outdoor">Buitensportwinkel</string>
     <string name="poi_paint">Verfwinkel</string>
     <string name="poi_pet">Dierenwinkel</string>
@@ -2974,4 +2974,6 @@
     <string name="poi_bath_open_air">Openlucht</string>
     <string name="poi_volcano_type">Type</string>
     <string name="poi_volcano_status">Status</string>
+    <string name="poi_sms">SMS</string>
+    <string name="poi_video_telephone">Video</string>
 </resources>
