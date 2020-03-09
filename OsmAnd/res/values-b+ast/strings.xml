@@ -1465,4 +1465,5 @@
     <string name="import_duplicates_title">Dalgunos elementos yá esisten</string>
     <string name="select_data_to_import">Seleiciona los datos que quies importar.</string>
     <string name="import_rendering_file">Importar ficheru de dibuxáu</string>
+    <string name="shared_string_rendering_style">Estilu de dibuxáu</string>
 </resources>
