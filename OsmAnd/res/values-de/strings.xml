@@ -3573,4 +3573,5 @@ Lon %2$s</string>
     <string name="restore_all_profile_settings">Alle Profileinstellungen wiederherstellen\?</string>
     <string name="saving_new_profile">Neues Profil wird gespeichert</string>
     <string name="profile_backup_failed">Konnte das Profil nicht sichern.</string>
+    <string name="import_rendering_file">Rendering-Datei importieren</string>
 </resources>
