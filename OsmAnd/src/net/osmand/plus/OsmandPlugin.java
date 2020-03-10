@@ -158,6 +158,10 @@ public abstract class OsmandPlugin {
 		return Collections.emptyList();
 	}
 
+	public List<String> getRendererNames() {
+		return Collections.emptyList();
+	}
+
 	/**
 	 * Plugin was installed
 	 */
@@ -454,6 +458,16 @@ public abstract class OsmandPlugin {
 		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
 		for (OsmandPlugin p : allPlugins) {
 			if (p.isActive()) {
+				lst.add(p);
+			}
+		}
+		return lst;
+	}
+
+	public static List<OsmandPlugin> getDisabledPlugins() {
+		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
+		for (OsmandPlugin p : allPlugins) {
+			if (!p.isActive()) {
 				lst.add(p);
 			}
 		}

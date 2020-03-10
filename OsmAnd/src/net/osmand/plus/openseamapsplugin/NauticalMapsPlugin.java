@@ -9,6 +9,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.render.RendererRegistry;
 
 import java.util.Collections;
 import java.util.List;
@@ -77,7 +78,12 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	public List<ApplicationMode> getAddedAppModes() {
 		return Collections.singletonList(ApplicationMode.BOAT);
 	}
-	
+
+	@Override
+	public List<String> getRendererNames() {
+		return Collections.singletonList(RendererRegistry.NAUTICAL_RENDER);
+	}
+
 	@Override
 	public void disable(OsmandApplication app) {
 		super.disable(app);

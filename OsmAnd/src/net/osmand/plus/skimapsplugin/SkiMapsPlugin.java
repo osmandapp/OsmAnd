@@ -9,6 +9,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.render.RendererRegistry;
 
 import java.util.Collections;
 import java.util.List;
@@ -75,6 +76,11 @@ public class SkiMapsPlugin extends OsmandPlugin {
 	@Override
 	public List<ApplicationMode> getAddedAppModes() {
 		return Collections.singletonList(ApplicationMode.SKI);
+	}
+
+	@Override
+	public List<String> getRendererNames() {
+		return Collections.singletonList(RendererRegistry.WINTER_SKI_RENDER);
 	}
 
 	@Override
