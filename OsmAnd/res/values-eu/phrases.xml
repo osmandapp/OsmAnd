@@ -1813,8 +1813,8 @@
     <string name="poi_denomination_shingon_shu">Shingon shu</string>
     <string name="poi_denomination_maronite">Maronita</string>
     <string name="poi_denomination_mahayana">Mahayana</string>
-    <string name="poi_internet_access_fee_yes">Internet sarbidea - ordainpekoa</string>
-    <string name="poi_internet_access_fee_no">Internet sarbidea - doan</string>
+    <string name="poi_internet_access_fee_yes">Internet sarbidea: ordainpekoa</string>
+    <string name="poi_internet_access_fee_no">Internet sarbidea: doan</string>
     <string name="poi_monastery">Monasterioa</string>
     <string name="poi_religious">Area erlijiosoa</string>
     <string name="poi_wayside_cross">Bide ondoko gurutzea</string>
@@ -3781,4 +3781,17 @@
     <string name="poi_piste_ref">Hobetsitako pista zenbakia</string>
     <string name="poi_resort_hunting">Ehizarako basea</string>
     <string name="poi_dive_centre">Urpekaritza zentroa</string>
+    <string name="poi_sms">SMS</string>
+    <string name="poi_video_telephone">Bideoa</string>
+    <string name="poi_sms_yes">Bai</string>
+    <string name="poi_sms_no">Ez</string>
+    <string name="poi_covered_booth">Kabina</string>
+    <string name="poi_booth">Kabina mota</string>
+    <string name="poi_video_yes">Bai</string>
+    <string name="poi_video_no">Ez</string>
+    <string name="poi_internet_access_fee_customers">Zutoina aurkitzeko seinalea</string>
+    <string name="poi_traffic_signals_sound_locate">Ibiltzea baimenduta dagoenean soilik</string>
+    <string name="poi_tactile_paving_contrasted">Kontrastatua</string>
+    <string name="poi_tactile_paving_primitive">Primitiboa</string>
+    <string name="poi_tactile_paving_incorrect">Okerra</string>
 </resources>

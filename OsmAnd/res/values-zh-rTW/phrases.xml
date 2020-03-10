@@ -1464,8 +1464,8 @@
     <string name="poi_payment_yandexmoney_yes">接受 Yandex.Money</string>
     <string name="poi_payment_yandexmoney_no">不接受 Yandex.Money</string>
     <string name="poi_description_payment">付款說明</string>
-    <string name="poi_internet_access_fee_yes">網路存取 - 收取費用</string>
-    <string name="poi_internet_access_fee_no">網路存取 - 不收費</string>
+    <string name="poi_internet_access_fee_yes">網路存取：收取費用</string>
+    <string name="poi_internet_access_fee_no">網路存取：不收費</string>
     <string name="poi_events_venue">活動場地</string>
     <string name="poi_diet_vegetarian_only">只有素食</string>
     <string name="poi_diet_vegetarian_yes">純素食</string>
@@ -3791,4 +3791,17 @@
     <string name="poi_piste_ref">滑雪道參考編號</string>
     <string name="poi_resort_hunting">狩獵基地</string>
     <string name="poi_dive_centre">水肺潛水中心</string>
+    <string name="poi_sms">SMS</string>
+    <string name="poi_video_telephone">視訊</string>
+    <string name="poi_sms_yes">是</string>
+    <string name="poi_sms_no">否</string>
+    <string name="poi_covered_booth">亭</string>
+    <string name="poi_booth">亭類型</string>
+    <string name="poi_video_yes">是</string>
+    <string name="poi_video_no">否</string>
+    <string name="poi_internet_access_fee_customers">找到極點的訊號</string>
+    <string name="poi_traffic_signals_sound_locate">僅在步行時允許</string>
+    <string name="poi_tactile_paving_contrasted">對比</string>
+    <string name="poi_tactile_paving_primitive">粗糙</string>
+    <string name="poi_tactile_paving_incorrect">不正確</string>
 </resources>

@@ -26,7 +26,8 @@ import org.apache.commons.logging.Log;
 public class RoutePlannerFrontEnd {
 
 	protected static final Log log = PlatformUtil.getLog(RoutePlannerFrontEnd.class);
-	protected static final double GPS_POSSIBLE_ERROR = 10;
+	// Check issue #8649
+	protected static final double GPS_POSSIBLE_ERROR = 7;
 	public boolean useSmartRouteRecalculation = true;
 
 	

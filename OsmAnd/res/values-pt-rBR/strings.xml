@@ -3552,4 +3552,8 @@ Pôr do Sol: %2$s</string>
     <string name="select_data_to_import">Selecione os dados a serem importados.</string>
     <string name="shared_string_rendering_style">Estilo de renderização</string>
     <string name="import_rendering_file">Importar arquivo de renderização</string>
+    <string name="restore_all_profile_settings_descr">Todas as configurações de perfil serão restauradas ao seu estado original após a criação/importação deste perfil.</string>
+    <string name="restore_all_profile_settings">Restaurar todas as configurações de perfil\?</string>
+    <string name="saving_new_profile">Salvando novo perfil</string>
+    <string name="profile_backup_failed">Não foi possível fazer o backup do perfil.</string>
 </resources>
