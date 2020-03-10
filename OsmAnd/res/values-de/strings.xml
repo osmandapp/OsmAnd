@@ -3569,4 +3569,9 @@ Lon %2$s</string>
     <string name="import_duplicates_title">Einige Elemente sind bereits vorhanden</string>
     <string name="select_data_to_import">Wählen Sie die zu importierenden Daten aus.</string>
     <string name="shared_string_rendering_style">Darstellungsstil</string>
+    <string name="restore_all_profile_settings_descr">Alle Profileinstellungen werden nach dem Erstellen/Importieren dieses Profils wieder in ihren ursprünglichen Zustand versetzt.</string>
+    <string name="restore_all_profile_settings">Alle Profileinstellungen wiederherstellen\?</string>
+    <string name="saving_new_profile">Neues Profil wird gespeichert</string>
+    <string name="profile_backup_failed">Konnte das Profil nicht sichern.</string>
+    <string name="import_rendering_file">Rendering-Datei importieren</string>
 </resources>

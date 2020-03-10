@@ -3557,7 +3557,7 @@ Lon %2$s</string>
     <string name="replace_all_desc">Los elementos actuales serán reemplazados por elementos del archivo</string>
     <string name="replace_all">Reemplazar todo</string>
     <string name="keep_both">Mantener ambos</string>
-    <string name="keep_both_desc">Los elementos serán importados con un prefijo</string>
+    <string name="keep_both_desc">Se importarán los elementos con un prefijo</string>
     <string name="import_duplicates_description">OsmAnd ya tiene elementos con los mismos nombres que los importados.
 \n
 \nElige una acción.</string>

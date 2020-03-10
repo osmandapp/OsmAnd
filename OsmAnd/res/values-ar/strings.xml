@@ -1927,7 +1927,7 @@
     <string name="poi_namefinder_query_empty">أدخل موضوع البحث لإيجاد POI</string>
     <string name="thanks_yandex_traffic">شكراً Yandex على معلومات حركة المرور.</string>
     <string name="layer_yandex_traffic">حركة مرور Yandex</string>
-    <string name="layer_poi">نقاط الاهتمام POI</string>
+    <string name="layer_poi">نقاط الاهتمام POI…</string>
     <string name="context_menu_item_search_poi">بحث عن نقاط الاهتمام</string>
     <string name="use_trackball_descr">استخدم كرة التتبع لتحريك الخريطة.</string>
     <string name="use_trackball">استخدم كرة التعقب</string>
@@ -2146,8 +2146,7 @@
     <string name="quick_action_map_source">مصدر الخريطة</string>
     <string name="quick_action_map_source_title">مصدر الخريطة</string>
     <string name="quick_action_map_source_action">إضافة مصدر خريطة</string>
-    <string name="quick_action_map_source_switch">مصدر الخريطة:
-\n\"%s\".</string>
+    <string name="quick_action_map_source_switch">مصدر الخريطة \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">تغيير موقع الزر</string>
     <string name="quick_action_showhide_favorites_descr">الضغط على زر الإجراء سيقوم بعرض أو إخفاء نقاطك المفضلة على الخريطة.</string>
     <string name="quick_action_fav_name_descr">دع الحقل فارغا إن كنت ترغب في استعمال العنوان أو اسم المكان.</string>
@@ -3044,8 +3043,7 @@
     <string name="routing_attr_prefer_unpaved_description">تفضيل الطرق الغير معبدة.</string>
     <string name="update_all_maps">تحديث كل الخرائط</string>
     <string name="update_all_maps_q">هل أنت متأكد من رغبتك بتحديث (%1$d) خريطة؟</string>
-    <string name="release_3_5">• تحديث التطبيق وإعدادات الأوضاع:
-\n يتم ترتيب الإعدادات الآن حسب النوع. يمكن تخصيص كل وضع بشكل منفصل. 
+    <string name="release_3_5">• تحديث التطبيق وإعدادات الأوضاع: يتم ترتيب الإعدادات الآن حسب النوع. يمكن تخصيص كل وضع بشكل منفصل. 
 \n 
 \n • نافذة جديدة لتنزيل الخريطة المقترحة أثناء تصفح الخرائط 
 \n 
@@ -3195,25 +3193,24 @@
     <string name="new_profile">وضع جديد</string>
     <string name="shared_string_crash">خروج مفاجئ</string>
     <string name="last_launch_crashed">فشل العملية الأخيرة لأوسماند. الرجاء مساعدتنا في التحسين من خلال مشاركة رسالة الخطأ.</string>
-    <string name="release_3_4">• أوضاع التطبيق:
-\n قم بإنشاء وضع مخصص لاحتياجاتك الخاصة ، باستخدام رمز ولون مخصصين
-\n
-\n• قم الآن بتخصيص سرعات أي وضع افتراضي وسرعات الحد الأدنى / الحد الأقصى
-\n
-\n• إضافة عنصر واجهة مستخدم للإحداثيات الحالية
-\n
-\n• خيارات مضافة لإظهار البوصلة ومسطرة دائرة نصف قطرها على الخريطة
-\n
-\n• إصلاح تسجيل مسار الخلفية
-\n
-\n• تحسين تنزيلات خريطة الخلفية
-\n
-\n• خيار \"تشغيل الشاشة\" المرتجع
-\n
-\n• اختيار لغة ويكيبيديا الثابتة
-\n
-\n• سلوك زر بوصلة ثابتة أثناء التنقل
-\n
+    <string name="release_3_4">• أوضاع التطبيق: قم بإنشاء وضع مخصص لاحتياجاتك الخاصة ، باستخدام رمز ولون مخصصين 
+\n 
+\n• قم الآن بتخصيص سرعات أي وضع افتراضي وسرعات الحد الأدنى / الحد الأقصى 
+\n 
+\n• إضافة عنصر واجهة مستخدم للإحداثيات الحالية 
+\n 
+\n• خيارات مضافة لإظهار البوصلة ومسطرة دائرة نصف قطرها على الخريطة 
+\n 
+\n• إصلاح تسجيل مسار الخلفية 
+\n 
+\n• تحسين تنزيلات خريطة الخلفية 
+\n 
+\n• خيار \"تشغيل الشاشة\" المرتجع 
+\n 
+\n• اختيار لغة ويكيبيديا الثابتة 
+\n 
+\n• سلوك زر بوصلة ثابتة أثناء التنقل 
+\n 
 \n• إصلاحات أخرى في الأخطاء
 \n
 \n</string>
@@ -3530,4 +3527,8 @@
     <string name="select_data_to_import">حدد البيانات التي سيتم استيرادها.</string>
     <string name="shared_string_rendering_style">أسلوب التقديم</string>
     <string name="import_rendering_file">استيراد ملف الrendering</string>
+    <string name="restore_all_profile_settings_descr">ستتم استعادة كافة إعدادات ملف التعريف إلى حالتها الأصلية بعد إنشاء/استيراد هذا الملف الشخصي.</string>
+    <string name="restore_all_profile_settings">استعادة جميع إعدادات الملف الشخصي؟</string>
+    <string name="saving_new_profile">حفظ ملف تعريف جديد</string>
+    <string name="profile_backup_failed">لا يمكن عمل نسخة احتياطية من الملف الشخصي.</string>
 </resources>
