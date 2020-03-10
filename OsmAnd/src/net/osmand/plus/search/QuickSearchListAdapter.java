@@ -440,7 +440,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 					divider.setLayoutParams(p);
 				} else {
 					LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp1);
-					p.setMargins(dp56, 0, 0 ,0);
+					AndroidUtils.setMargins(p, dp56, 0, 0, 0);
 					divider.setLayoutParams(p);
 				}
 			}

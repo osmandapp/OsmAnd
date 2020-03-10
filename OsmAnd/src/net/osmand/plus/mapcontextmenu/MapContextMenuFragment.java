@@ -628,8 +628,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 		Drawable drawable = getIcon(iconResId, bottomButtonsColor);
 		directionsButton.setTextColor(ContextCompat.getColor(mapActivity, bottomButtonsColor));
-		directionsButton.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
-		directionsButton.setCompoundDrawablePadding(dpToPx(8));
+		AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(directionsButton, null, null, drawable, null);
+		int contentPaddingHalf = (int) getResources().getDimension(R.dimen.content_padding_half);
+		directionsButton.setCompoundDrawablePadding(contentPaddingHalf);
 		directionsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
