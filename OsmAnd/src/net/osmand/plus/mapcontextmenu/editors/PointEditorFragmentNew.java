@@ -277,10 +277,14 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	private View createIconItemView(final String iconName, ViewGroup rootView) {
 		OsmandApplication app = getMyApplication();
 		FrameLayout iconItemView = (FrameLayout) UiUtilities.getInflater(getContext(), nightMode)
-				.inflate(R.layout.preference_circle_item, rootView, false);
-		ImageView checkMark = iconItemView.findViewById(R.id.checkMark);
+				.inflate(R.layout.point_editor_circle_button, rootView, false);
+		ImageView backgroundCircle = iconItemView.findViewById(R.id.backgroundCircle);
+		AndroidUtils.setBackground(backgroundCircle,
+				UiUtilities.tintDrawable(ContextCompat.getDrawable(app, R.drawable.bg_point_circle),
+						ContextCompat.getColor(app, R.color.list_background_color_light)));
+		ImageView icon = iconItemView.findViewById(R.id.icon);
 		int iconRes = getMyApplication().getResources().getIdentifier("mx_" + iconName, "drawable", app.getPackageName());
-		checkMark.setImageDrawable(getMyApplication().getUIUtilities().getIcon(iconRes, R.color.icon_color_default_light));
+		icon.setImageDrawable(getMyApplication().getUIUtilities().getIcon(iconRes, R.color.icon_color_default_light));
 		return iconItemView;
 	}
 
@@ -567,8 +571,9 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 				});
 				final FavouritesDbHelper.FavoriteGroup group = items.get(position);
 				holder.groupName.setText(group.getDisplayName(getMyApplication()));
+				int color = group.getColor() == 0 ? getResources().getColor(R.color.color_favorite) : group.getColor();
 				holder.groupIcon.setImageDrawable(UiUtilities.tintDrawable(
-						ContextCompat.getDrawable(app, R.drawable.ic_action_folder), group.getColor()));
+						ContextCompat.getDrawable(app, R.drawable.ic_action_folder), color));
 				holder.pointsCounter.setText(String.valueOf(group.getPoints().size()));
 				int strokeColor;
 				int strokeWidth;

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:paddingLeft="16dp"
+	android:paddingStart="16dp"
+	android:paddingRight="1dp"
+	android:paddingEnd="1dp">
+
+	<ImageView
+		android:id="@+id/outlineCircle"
+		android:layout_width="44dp"
+		android:layout_height="44dp"
+		app:srcCompat="@drawable/circle_contour_bg_light" />
+
+	<ImageView
+		android:id="@+id/backgroundCircle"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_margin="2dp"
+		android:background="@drawable/bg_point_circle" />
+
+	<ImageView
+		android:id="@+id/icon"
+		android:layout_width="24dp"
+		android:layout_height="24dp"
+		android:layout_marginLeft="10dp"
+		android:layout_marginTop="10dp"
+		android:layout_marginRight="10dp"
+		android:layout_marginBottom="10dp"
+		android:clickable="false"
+		android:layout_marginStart="10dp"
+		android:layout_marginEnd="10dp" />
+</FrameLayout>
