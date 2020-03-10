@@ -27,6 +27,8 @@ import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.util.Algorithms;
 
+import java.util.HashSet;
+import java.util.Set;
 
 public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 
@@ -342,5 +344,14 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 			color = defaultColor;
 		}
 		return color;
+	}
+
+	@Override
+	public Set<String> getCategories() {
+		Set<String> categories = new HashSet<>();
+		for (FavouritesDbHelper.FavoriteGroup fg : getHelper().getFavoriteGroups()) {
+			categories.add(fg.getDisplayName(getMyApplication()));
+		}
+		return categories;
 	}
 }
