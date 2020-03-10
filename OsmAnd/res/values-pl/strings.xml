@@ -563,7 +563,7 @@
     <string name="plugins_screen">Wtyczki</string>
     <string name="prefs_plugins_descr">Aktywuje zaawansowane ustawienia i dodatkową funkcjonalność.</string>
     <string name="prefs_plugins">Wtyczki</string>
-    <string name="osm_editing_plugin_description">Umożliwia wprowadzanie zmian w zasobach OSM, takich jak dodawanie lub modyfikowanie obiektów POI, zgłaszanie i komentowanie błędów oraz wysyłanie zarejestrowanych plików GPX. OSM jest publicznym projektem tworzenia map przez społeczność. Więcej szczegółów pod adresem https://openstreetmap.org. Aktywny udział jest mile widziany, modyfikacji można dokonywać bezpośrednio z poziomu programu po wprowadzeniu danych uwierzytelniających OSM.</string>
+    <string name="osm_editing_plugin_description">Wnieś wkład w OSM, taki jak tworzenie lub modyfikowanie obiektów OSM POI, otwieranie lub komentowanie notatek OSM i tworzenie nagranych plików GPX w OsmAnd podając swoją nazwę użytkownika i hasło. OpenStreetMap.org jest projektem mapowania globalnej domeny publicznej opartej na społeczności.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Mapy wektorowe mogą wyświetlać się szybciej. Może nie działać dobrze na niektórych urządzeniach.</string>
     <string name="play_commands_of_currently_selected_voice">Wybierz głos i przetestuj, odtwarzając komunikaty:</string>
     <string name="debugging_and_development">Rozwój OsmAnd</string>
@@ -995,7 +995,7 @@
     <string name="plugin_distance_point">Punkt</string>
     <string name="gpx_file_name">Nazwa pliku GPX</string>
     <string name="gpx_saved_sucessfully">Zapisano plik GPX do {0}</string>
-    <string name="osmand_distance_planning_plugin_description">Dodaje widżet za pomocą, którego można tworzyć ślady klikając na mapie. Dostarcza również możliwość użycia lub modyfikowania istniejących już plików GPX, co przydaje się do planowania wycieczek lub mierzenia odległości pomiędzy punktami. Wynik może zostać zapisany jako plik GPX i użyty ponownie.</string>
+    <string name="osmand_distance_planning_plugin_description">Utwórz ścieżki, dotykając mapy lub używając lub modyfikując istniejące pliki GPX, aby zaplanować podróż i zmierzyć odległość między punktami. Wynik można zapisać jako plik GPX, aby użyć później w celu uzyskania wskazówek.</string>
     <string name="osmand_distance_planning_plugin_name">Kalkulator odległości i narzędzie planowania</string>
     <string name="use_distance_measurement_help">* Naciśnij, aby zaznaczyć punkt. 
 \n * Naciśnij i przytrzymaj mapę, aby usunąć poprzedni punkt. 
@@ -3411,7 +3411,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="rendering_value_thick_name">Gruby</string>
     <string name="select_navigation_icon">Ikona położenia podczas ruchu</string>
     <string name="select_map_icon">Ikona położenia podczas spoczynku</string>
-    <string name="delete_profiles_descr">Po dotknięciu Zastosuj usunięte profile zostaną całkowicie utracone.</string>
+    <string name="delete_profiles_descr">Stuknięcie „Zastosuj” powoduje trwałe usunięcie usuniętych profili.</string>
     <string name="master_profile">Główny profil</string>
     <string name="select_color">Wybór koloru</string>
     <string name="edit_profiles_descr">Nie można usunąć domyślnych profili OsmAnd, ale można je wyłączyć (na poprzednim ekranie) lub przenieść na dół.</string>
@@ -3553,7 +3553,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="listed_exist">Wymienione %1$s, już istnieją w OsmAnd.</string>
     <string name="replace_all_desc">Bieżące elementy zostaną zastąpione elementami z pliku</string>
     <string name="replace_all">Zastąp wszystkie</string>
-    <string name="keep_both_desc">Zaimportowane elementy zostaną dodane z prexif</string>
+    <string name="keep_both_desc">Zaimportowane elementy zostaną dodane z prefiksem</string>
     <string name="import_duplicates_description">OsmAnd ma już elementy o takich samych nazwach jak te importowane.
 \n
 \nWybierz akcję.</string>
@@ -3564,4 +3564,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_quick_actions">Szybka czynność</string>
     <string name="keep_both">Zatrzymaj oba</string>
     <string name="shared_string_rendering_style">Styl renderowania</string>
+    <string name="osm_edits_view_descr">Zobacz swoje zmiany lub błędy OSM, które nie zostały jeszcze przesłane w %1$s. Przesłane punkty nie będą już wyświetlane.</string>
+    <string name="import_rendering_file">Importowanie pliku renderowania</string>
+    <string name="restore_all_profile_settings">Przywrócić wszystkie ustawienia profilu\?</string>
+    <string name="saving_new_profile">Zapisywanie nowego profilu</string>
 </resources>

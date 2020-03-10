@@ -585,7 +585,7 @@
     <string name="poi_denomination_mahayana">Mahayana</string>
     <string name="poi_viewpoint">Miradoiro</string>
     <string name="poi_locality">Lugar</string>
-    <string name="poi_rest_area">Área de descanso</string>
+    <string name="poi_rest_area">Área de repouso</string>
     <string name="poi_sport_motor">Deporte de motor</string>
     <string name="poi_boundary_stone">Marco</string>
     <string name="poi_general_tourist_attraction_yes">Atracción turística xeral</string>
@@ -1166,8 +1166,8 @@
     <string name="poi_denomination_ethiopian_orthodox_tewahedo">Ortodoxa etíope tewahido</string>
     <string name="poi_denomination_shaktism">Shaktismo</string>
     <string name="poi_denomination_shingon_shu">Shingon shu</string>
-    <string name="poi_internet_access_fee_yes">Acceso á Internet - só pagamento</string>
-    <string name="poi_internet_access_fee_no">Acceso á Internet - de balde</string>
+    <string name="poi_internet_access_fee_yes">Acceso á Internet: só pagamento</string>
+    <string name="poi_internet_access_fee_no">Acceso á Internet: de balde</string>
     <string name="poi_hanami">Hanami</string>
     <string name="poi_club_art">Club de arte</string>
     <string name="poi_club_music">Club de música</string>
@@ -1934,7 +1934,7 @@
     <string name="poi_daymark">"Marcaxe do día "</string>
     <string name="poi_seamark_dyke">Dique náutico</string>
     <string name="poi_harbour_basin">Conca do porto</string>
-    <string name="poi_landmark">Referenza terrestre</string>
+    <string name="poi_landmark">Referencia terrestre</string>
     <string name="poi_seamark_light">Luz náutica</string>
     <string name="poi_seamark_light_major">Luz náutica maior</string>
     <string name="poi_seamark_light_minor">Luz náutica menor</string>
@@ -1968,7 +1968,7 @@
     <string name="poi_route_hiking_nwn_poi">Roteiro nacional de sendeirismo</string>
     <string name="poi_route_hiking_rwn_poi">Roteiro rexional de sendeirismo</string>
     <string name="poi_route_hiking_lwn_poi">Roteiro local de sendeirismo</string>
-    <string name="poi_route_hiking_ref_poi">Referenza do roteiro de sendeirismo</string>
+    <string name="poi_route_hiking_ref_poi">Referencia do roteiro de sendeirismo</string>
     <string name="poi_wholesale">Venda maiorista</string>
     <string name="poi_content_slurry">Contido: mesturanza</string>
     <string name="poi_content_sewage">Contido: augas residuais</string>
@@ -3785,4 +3785,17 @@
     <string name="poi_piste_ref">Número de referencia da pista</string>
     <string name="poi_resort_hunting">Base de caza</string>
     <string name="poi_dive_centre">Centro de mergullo</string>
+    <string name="poi_sms">SMS</string>
+    <string name="poi_video_telephone">Vídeo</string>
+    <string name="poi_sms_yes">Si</string>
+    <string name="poi_sms_no">Non</string>
+    <string name="poi_covered_booth">Cabina</string>
+    <string name="poi_booth">Tipo de cabina</string>
+    <string name="poi_video_yes">Si</string>
+    <string name="poi_video_no">Non</string>
+    <string name="poi_internet_access_fee_customers">Sinal para atopar o poste</string>
+    <string name="poi_traffic_signals_sound_locate">Só é permitido ó camiñar</string>
+    <string name="poi_tactile_paving_contrasted">Contrastado</string>
+    <string name="poi_tactile_paving_primitive">Primitivo</string>
+    <string name="poi_tactile_paving_incorrect">Incorrecto</string>
 </resources>
