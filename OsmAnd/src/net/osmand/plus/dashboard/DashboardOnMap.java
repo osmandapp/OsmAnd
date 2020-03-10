@@ -345,6 +345,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				backPressed();
 			}
 		});
+		int layoutDirection = AndroidUtils.getLayoutDirection(mapActivity);
+		UiUtilities.rotateImageByLayoutDirection(back, layoutDirection);
 
 		if (visibleType == DashboardType.DASHBOARD || visibleType == DashboardType.LIST_MENU) {
 			settingsButton.setVisibility(View.VISIBLE);
