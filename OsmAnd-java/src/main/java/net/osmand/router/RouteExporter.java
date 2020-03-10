@@ -53,15 +53,7 @@ public class RouteExporter {
 			sr.writeToBundle(itemBundle);
 			routeItems.add(itemBundle);
 		}
-		bundle.putBundleList("route", "segment", routeItems);
-
-		List<StringBundle> segments = new ArrayList<>();
-		for (RouteSegmentResult segment : resources.getRouteSegments()) {
-			RouteDataBundle segmentBundle = new RouteDataBundle(resources);
-			segment.writeToBundle(segmentBundle);
-			segments.add(segmentBundle);
-		}
-		bundle.putBundleList("segments", "segment", segments);
+		bundle.putBundleList("route", "s", routeItems);
 
 		List<StringBundle> dataObjects = new ArrayList<>();
 		for (RouteDataObject dataObject : resources.getRouteDataObjects()) {
@@ -69,7 +61,7 @@ public class RouteExporter {
 			dataObject.writeToBundle(objectBundle);
 			dataObjects.add(objectBundle);
 		}
-		bundle.putBundleList("objects", "object", dataObjects);
+		bundle.putBundleList("objects", "o", dataObjects);
 
 		List<StringBundle> regions = new ArrayList<>();
 		for (RouteRegion routeRegion : resources.getRouteRegions()) {
@@ -77,7 +69,7 @@ public class RouteExporter {
 			routeRegion.writeToBundle(regionBundle);
 			regions.add(regionBundle);
 		}
-		bundle.putBundleList("regions", "region", regions);
+		bundle.putBundleList("regions", "r", regions);
 
 		GPXFile gpx = new GPXFile("OsmAnd");
 		gpx.author = OSMAND_ROUTER;

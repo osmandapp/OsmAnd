@@ -25,13 +25,13 @@ public class TurnType implements StringExternalizable<RouteDataBundle> {
 
 	@Override
 	public void writeToBundle(RouteDataBundle bundle) {
-		bundle.putInt("value", value);
-		bundle.putInt("exitOut", exitOut);
-		bundle.putFloat("turnAngle", turnAngle);
-		bundle.putBoolean("skipToSpeak", skipToSpeak);
-		bundle.putArray("lanes", lanes);
-		bundle.putBoolean("possiblyLeftTurn", possiblyLeftTurn);
-		bundle.putBoolean("possiblyRightTurn", possiblyRightTurn);
+		bundle.putInt("v", value);
+		bundle.putInt("eo", exitOut);
+		bundle.putFloat("ta", turnAngle);
+		bundle.putBoolean("sts", skipToSpeak);
+		bundle.putArray("ln", lanes);
+		bundle.putBoolean("plt", possiblyLeftTurn);
+		bundle.putBoolean("prt", possiblyRightTurn);
 	}
 
 	@Override

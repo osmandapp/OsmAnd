@@ -11,10 +11,7 @@ import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 
 public class RouteSegmentResult implements StringExternalizable<RouteDataBundle> {
@@ -40,34 +37,8 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	}
 
 	void collectResources(RouteDataResources resources) {
-		List<RouteSegmentResult> segments = resources.getRouteSegments();
 		List<RouteDataObject> dataObjects = resources.getRouteDataObjects();
 		List<RouteRegion> regions = resources.getRouteRegions();
-		if (!segments.contains(this)) {
-			segments.add(this);
-		}
-		if (attachedRoutes != null) {
-			for (List<RouteSegmentResult> routes : attachedRoutes) {
-				if (routes != null) {
-					for (RouteSegmentResult route : routes) {
-						if (!segments.contains(route)) {
-							segments.add(route);
-						}
-					}
-				}
-			}
-		}
-		if (preAttachedRoutes != null) {
-			for (RouteSegmentResult[] routes : preAttachedRoutes) {
-				if (routes != null) {
-					for (RouteSegmentResult route : routes) {
-						if (!segments.contains(route)) {
-							segments.add(route);
-						}
-					}
-				}
-			}
-		}
 		if (!dataObjects.contains(object)) {
 			dataObjects.add(object);
 		}
@@ -94,60 +65,17 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		List<RouteDataObject> dataObjects = bundle.getResources().getRouteDataObjects();
 		int dataObjectIndex = dataObjects.indexOf(object);
 		assert dataObjectIndex != -1;
-		bundle.putInt("objectIndex", dataObjectIndex);
+		bundle.putInt("i", dataObjectIndex);
 
-		bundle.putInt("startPointIndex", startPointIndex);
-		bundle.putInt("endPointIndex", endPointIndex);
+		bundle.putInt("si", startPointIndex);
+		bundle.putInt("ei", endPointIndex);
 
-		List<RouteSegmentResult> segments = bundle.getResources().getRouteSegments();
-		if (attachedRoutes != null) {
-			Set<Integer> attachedRoutesIndexes = new HashSet<>();
-			for (List<RouteSegmentResult> routes : attachedRoutes) {
-				if (routes != null) {
-					for (RouteSegmentResult route : routes) {
-						int segmentIndex = segments.indexOf(route);
-						assert segmentIndex != -1;
-						attachedRoutesIndexes.add(segmentIndex);
-					}
-				}
-			}
-			int[] attachedRoutesIndexesArray = new int[attachedRoutesIndexes.size()];
-			Iterator<Integer> it = attachedRoutesIndexes.iterator();
-			int i = 0;
-			while (it.hasNext()) {
-				int index = it.next();
-				attachedRoutesIndexesArray[i++] = index;
-			}
-			bundle.putArray("attachedRoutes", attachedRoutesIndexesArray);
-		}
+		bundle.putFloat("st", segmentTime);
+		bundle.putFloat("rt", routingTime);
+		bundle.putFloat("s", speed);
+		bundle.putFloat("d", distance);
 
-		if (preAttachedRoutes != null) {
-			Set<Integer> preAttachedRoutesIndexes = new HashSet<>();
-			for (RouteSegmentResult[] routes : preAttachedRoutes) {
-				if (routes != null) {
-					for (RouteSegmentResult route : routes) {
-						int segmentIndex = segments.indexOf(route);
-						assert segmentIndex != -1;
-						preAttachedRoutesIndexes.add(segmentIndex);
-					}
-				}
-			}
-			int[] preAttachedRoutesIndexesArray = new int[preAttachedRoutesIndexes.size()];
-			Iterator<Integer> it = preAttachedRoutesIndexes.iterator();
-			int i = 0;
-			while (it.hasNext()) {
-				int index = it.next();
-				preAttachedRoutesIndexesArray[i++] = index;
-			}
-			bundle.putArray("preAttachedRoutes", preAttachedRoutesIndexesArray);
-		}
-		bundle.putFloat("segmentTime", segmentTime);
-		bundle.putFloat("routingTime", routingTime);
-		bundle.putFloat("speed", speed);
-		bundle.putFloat("distance", distance);
-		bundle.putString("description", description);
-
-		bundle.putObject("turnType", turnType);
+		bundle.putObject("t", turnType);
 	}
 
 	@Override

@@ -47,9 +47,9 @@ public class BinaryMapRouteReaderAdapter {
 
 		@Override
 		public void writeToBundle(RouteDataBundle bundle) {
-			bundle.putString("condition", condition);
-			bundle.putString("value", value);
-			bundle.putInt("ruleid", ruleid);
+			bundle.putString("c", condition);
+			bundle.putString("v", value);
+			bundle.putInt("id", ruleid);
 		}
 
 		@Override
@@ -96,11 +96,19 @@ public class BinaryMapRouteReaderAdapter {
 		public void writeToBundle(RouteDataBundle bundle) {
 			bundle.putString("t", t);
 			bundle.putString("v", v);
-			bundle.putInt("intValue", intValue);
-			bundle.putFloat("floatValue", floatValue);
-			bundle.putInt("type", type);
-			bundle.putList("conditions", "condition", conditions);
-			bundle.putInt("forward", forward);
+			if (intValue != 0) {
+				bundle.putInt("i", intValue);
+			}
+			if (floatValue != 0) {
+				bundle.putFloat("f", floatValue);
+			}
+			if (type != 0) {
+				bundle.putInt("tp", type);
+			}
+			if (forward != 0) {
+				bundle.putInt("fw", forward);
+			}
+			bundle.putList("conditions", "c", conditions);
 		}
 
 		@Override
@@ -272,11 +280,11 @@ public class BinaryMapRouteReaderAdapter {
 
 		@Override
 		public void writeToBundle(RouteDataBundle bundle) {
-			bundle.putInt("regionsRead", regionsRead);
-			bundle.putList("routeEncodingRules", "rule", routeEncodingRules);
-			bundle.putMap("decodingRules", decodingRules);
-			bundle.putList("subregions", "subregion", subregions);
-			bundle.putList("basesubregions", "subregion", basesubregions);
+			bundle.putInt("regRead", regionsRead);
+			bundle.putList("encRules", "r", routeEncodingRules);
+			bundle.putMap("decRules", decodingRules);
+			bundle.putList("subreg", "s", subregions);
+			bundle.putList("basesubreg", "s", basesubregions);
 
 			bundle.putInt("nameTypeRule", nameTypeRule);
 			bundle.putInt("refTypeRule", refTypeRule);
@@ -561,15 +569,15 @@ public class BinaryMapRouteReaderAdapter {
 			List<RouteRegion> regions = bundle.getResources().getRouteRegions();
 			int regionIndex = regions.indexOf(routeReg);
 			assert regionIndex == -1;
-			bundle.putInt("routeRegIndex", regionIndex);
+			bundle.putInt("ri", regionIndex);
 
-			bundle.putInt("left", left);
-			bundle.putInt("right", right);
-			bundle.putInt("top", top);
-			bundle.putInt("bottom", bottom);
+			bundle.putInt("l", left);
+			bundle.putInt("r", right);
+			bundle.putInt("t", top);
+			bundle.putInt("b", bottom);
 
-			bundle.putList("subregions", "subregion", subregions);
-			bundle.putList("dataObjects", "object", dataObjects);
+			bundle.putList("subregions", "s", subregions);
+			bundle.putList("dataObjects", "o", dataObjects);
 		}
 
 		@Override

@@ -11,6 +11,7 @@ import org.xmlpull.v1.XmlSerializer;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.List;
 import java.util.Map.Entry;
 
 public class StringBundleXmlWriter extends StringBundleWriter {
@@ -70,17 +71,26 @@ public class StringBundleXmlWriter extends StringBundleWriter {
 			switch (item.getType()) {
 				case STRING: {
 					StringItem stringItem = (StringItem) item;
-					serializer.startTag(null, "s");
-					serializer.attribute(null, "n", name);
-					serializer.text(stringItem.getValue());
-					serializer.endTag(null, "s");
+					serializer.attribute(null, name, stringItem.getValue());
+					//serializer.startTag(null, "s");
+					//serializer.attribute(null, "n", name);
+					//serializer.text(stringItem.getValue());
+					//serializer.endTag(null, "s");
 					break;
 				}
 				case LIST: {
 					StringListItem listItem = (StringListItem) item;
 					serializer.startTag(null, name);
-					for (Item i : listItem.getValue()) {
-						writeItemImpl(i.getName(), i);
+					List<Item> list = listItem.getValue();
+					for (Item i : list) {
+						if (i.getType() == StringBundle.ItemType.STRING) {
+							writeItemImpl(i.getName(), i);
+						}
+					}
+					for (Item i : list) {
+						if (i.getType() != StringBundle.ItemType.STRING) {
+							writeItemImpl(i.getName(), i);
+						}
 					}
 					serializer.endTag(null, name);
 					break;
@@ -89,7 +99,16 @@ public class StringBundleXmlWriter extends StringBundleWriter {
 					StringMapItem mapItem = (StringMapItem) item;
 					serializer.startTag(null, name);
 					for (Entry<String, Item> entry : mapItem.getValue().entrySet()) {
-						writeItemImpl(entry.getKey(), entry.getValue());
+						Item i = entry.getValue();
+						if (i.getType() == StringBundle.ItemType.STRING) {
+							writeItemImpl(entry.getKey(), i);
+						}
+					}
+					for (Entry<String, Item> entry : mapItem.getValue().entrySet()) {
+						Item i = entry.getValue();
+						if (i.getType() != StringBundle.ItemType.STRING) {
+							writeItemImpl(entry.getKey(), i);
+						}
 					}
 					serializer.endTag(null, name);
 					break;

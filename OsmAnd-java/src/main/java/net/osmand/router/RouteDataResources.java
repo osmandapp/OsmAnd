@@ -10,13 +10,8 @@ import java.util.Set;
 
 public class RouteDataResources {
 
-	private List<RouteSegmentResult> routeSegments = new LinkedList<>();
 	private List<RouteDataObject> routeDataObjects = new LinkedList<>();
 	private List<RouteRegion> routeRegions = new LinkedList<>();
-
-	public List<RouteSegmentResult> getRouteSegments() {
-		return routeSegments;
-	}
 
 	public List<RouteDataObject> getRouteDataObjects() {
 		return routeDataObjects;

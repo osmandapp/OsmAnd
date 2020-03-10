@@ -43,19 +43,14 @@ public class RouteDataObject implements StringExternalizable<RouteDataBundle> {
 		List<RouteRegion> regions = bundle.getResources().getRouteRegions();
 		int regionIndex = regions.indexOf(region);
 		assert regionIndex != -1;
-		bundle.putInt("regionIndex", regionIndex);
+		bundle.putInt("ri", regionIndex);
 
-		bundle.putArray("types", types);
-		bundle.putArray("pointsX", pointsX);
-		bundle.putArray("pointsY", pointsY);
-		bundle.putArray("restrictions", restrictions);
-		bundle.putArray("pointTypes", pointTypes);
-		bundle.putArray("pointNames", pointNames);
-		bundle.putArray("pointNameTypes", pointNameTypes);
-		bundle.putLong("id", id);
-		bundle.putMap("names", names);
-		bundle.putArray("nameIds", nameIds);
-		bundle.putArray("heightDistanceArray", heightDistanceArray);
+		bundle.putArray("t", types);
+		bundle.putArray("pt", pointTypes);
+		bundle.putArray("pn", pointNames);
+		bundle.putArray("pnt", pointNameTypes);
+		bundle.putMap("n", names);
+		bundle.putArray("ni", nameIds);
 	}
 
 	@Override
