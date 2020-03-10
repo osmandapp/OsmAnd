@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:background="?attr/expandable_list_item_background"
-              android:descendantFocusability="blocksDescendants"
-              android:minHeight="@dimen/list_item_height"
-              android:orientation="horizontal"
-              android:paddingLeft="@dimen/list_content_padding"
-              android:paddingStart="@dimen/list_content_padding">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/list_content_padding"
+    android:paddingStart="@dimen/list_content_padding"
+    android:paddingRight="0dp"
+    android:paddingEnd="0dp"
+    android:background="?attr/expandable_list_item_background"
+    android:descendantFocusability="blocksDescendants"
+    android:minHeight="@dimen/list_item_height"
+    android:orientation="horizontal">
 
     <CheckBox
         android:id="@+id/check_local_index"

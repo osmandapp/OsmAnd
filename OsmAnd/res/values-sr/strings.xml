@@ -3560,4 +3560,10 @@
 \nОдаберите радњу.</string>
     <string name="import_duplicates_title">Неке ставке већ постоје</string>
     <string name="select_data_to_import">Одаберите податке за увожење.</string>
+    <string name="shared_string_rendering_style">Стил исцртавања</string>
+    <string name="import_rendering_file">Увозим фајл за исцртавање</string>
+    <string name="restore_all_profile_settings_descr">Све поставке профила ће бити враћене на оригинално стање пре креирања/увожења овог профила.</string>
+    <string name="restore_all_profile_settings">Поврати све поставке профила\?</string>
+    <string name="saving_new_profile">Чувам нови профил</string>
+    <string name="profile_backup_failed">Не могу да направим резервну копију профила.</string>
 </resources>

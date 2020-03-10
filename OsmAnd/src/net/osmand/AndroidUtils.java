@@ -39,6 +39,7 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
@@ -61,6 +62,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -161,6 +163,13 @@ public class AndroidUtils {
 
 	public static boolean isIntentSafe(Context context, Intent intent) {
 		return intent.resolveActivity(context.getPackageManager()) != null;
+	}
+
+	public static boolean isActivityNotDestroyed(Activity activity) {
+		if (Build.VERSION.SDK_INT >= 17) {
+			return !activity.isFinishing() && !activity.isDestroyed();
+		}
+		return !activity.isFinishing();
 	}
 
 	public static Spannable replaceCharsWithIcon(String text, Drawable icon, String[] chars) {
@@ -644,10 +653,47 @@ public class AndroidUtils {
 			return baseString;
 		}
 	}
+
+	public static void setCompoundDrawablesWithIntrinsicBounds(@NonNull TextView tv, Drawable start, Drawable top, Drawable end, Drawable bottom){
+		if (isSupportRTL()) {
+			tv.setCompoundDrawablesRelativeWithIntrinsicBounds(start, top, end, bottom);
+		} else {
+			tv.setCompoundDrawablesWithIntrinsicBounds(start, top, end, bottom);
+		}
+	}
+
+	public static void setPadding(View view, int start, int top, int end, int bottom) {
+		if (isSupportRTL()) {
+			view.setPaddingRelative(start, top, end, bottom);
+		} else {
+			view.setPadding(start, top, end, bottom);
+		}
+	}
+
+	public static void setMargins(ViewGroup.MarginLayoutParams layoutParams, int start, int top, int end, int bottom) {
+		layoutParams.setMargins(start, top, end, bottom);
+		if (isSupportRTL()) {
+			layoutParams.setMarginStart(start);
+			layoutParams.setMarginEnd(end);
+		}
+	}
 	
 	public static int getLayoutDirection(@NonNull Context ctx) {
 		Locale currentLocale = ctx.getResources().getConfiguration().locale;
 		return TextUtilsCompat.getLayoutDirectionFromLocale(currentLocale);
+	}
+
+	public static boolean isSupportRTL() {
+		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1;
+	}
+
+	public static ArrayList<View> getChildrenViews(ViewGroup vg) {
+		ArrayList<View> result = new ArrayList<>();
+		for (int i = 0; i < vg.getChildCount(); i++) {
+			View child = vg.getChildAt(i);
+			result.add(child);
+		}
+		return result;
 	}
 
 	public static float getFreeSpaceGb(File dir) {

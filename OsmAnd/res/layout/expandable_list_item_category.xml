@@ -19,9 +19,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/list_content_padding"
+        android:paddingStart="@dimen/list_content_padding"
+        android:paddingRight="0dp"
+        android:paddingEnd="0dp"
         android:minHeight="@dimen/list_item_height"
-        android:background="?attr/expandable_list_item_background"
-	    android:paddingStart="@dimen/list_content_padding">
+        android:background="?attr/expandable_list_item_background">
 
         <CheckBox
             android:id="@+id/toggle_item"

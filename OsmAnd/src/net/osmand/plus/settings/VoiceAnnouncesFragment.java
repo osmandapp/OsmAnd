@@ -213,7 +213,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		if (ctx == null) {
 			return;
 		}
-		AlertDialog.Builder bld = new AlertDialog.Builder(ctx);
+		AlertDialog.Builder bld = new AlertDialog.Builder(UiUtilities.getThemedContext(ctx, isNightMode()));
 		bld.setMessage(R.string.confirm_usage_speed_cameras);
 		bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 

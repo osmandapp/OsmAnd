@@ -3616,4 +3616,9 @@ Lon %2$s</string>
     <string name="import_duplicates_title">Algúns elementos xa existen</string>
     <string name="select_data_to_import">Selecciona os datos para ser importados.</string>
     <string name="shared_string_rendering_style">Estilo da renderización</string>
+    <string name="import_rendering_file">Importar ficheiro de renderización</string>
+    <string name="restore_all_profile_settings_descr">Todos os axustes de perfil restabeleceranse ó seu estado orixinal após crear/importar este perfil.</string>
+    <string name="restore_all_profile_settings">Restabelecer todos os axustes de perfil\?</string>
+    <string name="saving_new_profile">Gardando novo perfil</string>
+    <string name="profile_backup_failed">Non foi posíbel facer unha copia de seguranza do perfil.</string>
 </resources>
