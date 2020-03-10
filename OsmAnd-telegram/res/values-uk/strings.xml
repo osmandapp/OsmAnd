@@ -156,7 +156,7 @@
     <string name="shared_string_hour_short">г</string>
     <string name="shared_string_minute_short">хв</string>
     <string name="shared_string_second_short">сек</string>
-    <string name="welcome_descr"> <b>OsmAnd Tracker</b> дозволяє Вам транслювати свою позицію та бачити позицію інших в OsmAnd.<br/> <br/>Застосунок використовує Telegram API та потребує облікового запису Telegram.</string>
+    <string name="welcome_descr"><b>OsmAnd Tracker</b> дозволяє Вам транслювати свою позицію та бачити позицію інших в OsmAnd.<br/><br/>Застосунок використовує Telegram API та потребує облікового запису Telegram.</string>
     <string name="my_location">Моя позиція</string>
     <string name="send_my_location_desc">Встановіть мінімальний інтервал між надсиланням позиції.</string>
     <string name="expire_at">Діє до</string>
