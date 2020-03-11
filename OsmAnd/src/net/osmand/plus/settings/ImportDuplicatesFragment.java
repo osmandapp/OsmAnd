@@ -79,24 +79,18 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 		app = requireMyApplication();
 		settingsHelper = app.getSettingsHelper();
 		nightMode = !app.getSettings().isLightContent();
-		if (settingsItems == null) {
-			settingsItems = settingsHelper.getSelectedItems();
-		}
-		if (duplicatesList == null) {
-			duplicatesList = settingsHelper.getDuplicatesItems();
-		}
-		if (file == null) {
-			file = settingsHelper.getSettingsFile();
-		}
-		SettingsHelper.ImportAsyncTask importAsyncTask = settingsHelper.getImportTask();
-		List<SettingsItem> importedItems = settingsHelper.getImportedItems();
-		if (importAsyncTask != null) {
-			importAsyncTask.setListener(getImportListener());
-		} else if (importedItems != null) {
-			FragmentManager fm = getFragmentManager();
-			if (fm != null) {
-				ImportCompleteFragment.showInstance(fm, importedItems, file.getName());
+		SettingsHelper.ImportAsyncTask importTask = settingsHelper.getImportTask();
+		if (importTask != null) {
+			if (settingsItems == null) {
+				settingsItems = importTask.getSelectedItems();
 			}
+			if (duplicatesList == null) {
+				duplicatesList = importTask.getDuplicates();
+			}
+			if (file == null) {
+				file = importTask.getFile();
+			}
+			importTask.setImportListener(getImportListener());
 		}
 	}
 
@@ -150,20 +144,21 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 		return root;
 	}
 
-
 	@Override
-	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
+	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
 		if (duplicatesList != null) {
 			DuplicatesSettingsAdapter adapter = new DuplicatesSettingsAdapter(app, prepareDuplicates(duplicatesList), nightMode);
 			list.setLayoutManager(new LinearLayoutManager(getMyApplication()));
 			list.setAdapter(adapter);
 		}
-		if (settingsHelper.isImporting() && !settingsHelper.isCollectOnly()) {
+		SettingsHelper.State state = settingsHelper.getImportTaskState();
+		if (settingsHelper.isImporting() && !settingsHelper.isCollectOnly() && state != null && state.equals(SettingsHelper.State.IMPORT)) {
 			setupImportingUi();
 		} else {
 			toolbarLayout.setTitle(getString(R.string.import_duplicates_title));
 		}
+		toolbarLayout.setTitle(getString(R.string.import_duplicates_title));
 	}
 
 	private List<Object> prepareDuplicates(List<? super Object> duplicatesList) {
@@ -287,7 +282,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 						}
 					});
 					FragmentManager fm = getFragmentManager();
-					if (fm != null) {
+					if (fm != null && file != null) {
 						ImportCompleteFragment.showInstance(fm, items, file.getName());
 					}
 				} else if (empty) {

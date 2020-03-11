@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.SettingsHelper.SettingsItem;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -39,19 +38,18 @@ import static net.osmand.plus.settings.ImportSettingsFragment.getSettingsToOpera
 
 public class ImportCompleteFragment extends BaseOsmAndFragment {
 	public static final String TAG = ImportCompleteFragment.class.getSimpleName();
-	private static final String FILE_NAME_KEY = "FILE_NAME_KEY";
 	private OsmandApplication app;
 	private RecyclerView recyclerView;
 	private List<SettingsItem> settingsItems;
 	private String fileName;
 	private boolean nightMode;
-	private SettingsHelper settingsHelper;
 
 	public static void showInstance(FragmentManager fm, @NonNull List<SettingsItem> settingsItems,
 									@NonNull String fileName) {
 		ImportCompleteFragment fragment = new ImportCompleteFragment();
 		fragment.setSettingsItems(settingsItems);
 		fragment.setFileName(fileName);
+		fragment.setRetainInstance(true);
 		fm.beginTransaction()
 				.replace(R.id.fragmentContainer, fragment, TAG)
 				.addToBackStack(IMPORT_SETTINGS_TAG)
@@ -61,18 +59,8 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if (savedInstanceState != null) {
-			fileName = savedInstanceState.getString(FILE_NAME_KEY);
-		}
 		app = requireMyApplication();
-		settingsHelper = app.getSettingsHelper();
 		nightMode = !app.getSettings().isLightContent();
-		if (settingsItems == null) {
-			settingsItems = settingsHelper.getImportedItems();
-			if (settingsItems == null) {
-				dismissFragment();
-			}
-		}
 	}
 
 	@Nullable
@@ -120,19 +108,11 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	@Override
-	public void onSaveInstanceState(@NonNull Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putString(FILE_NAME_KEY, fileName);
-	}
-
 	public void dismissFragment() {
 		FragmentManager fm = getFragmentManager();
 		if (fm != null) {
 			fm.popBackStack(IMPORT_SETTINGS_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
-		settingsHelper.setImportedItems(null);
-		settingsHelper.setSelectedItems(null);
 	}
 
 	private void navigateTo(AdditionalDataWrapper.Type type) {

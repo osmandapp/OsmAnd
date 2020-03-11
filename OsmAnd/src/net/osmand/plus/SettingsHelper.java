@@ -104,9 +104,6 @@ public class SettingsHelper {
 	private boolean checkingDuplicates;
 	private ImportAsyncTask importTask;
 	private Map<File, ExportAsyncTask> exportAsyncTasks = new HashMap<>();
-	private CheckDuplicatesTask checkDuplicatesTask;
-	private List<SettingsItem> importedItems;
-	private List<SettingsItem> selectedItems;
 
 	public interface SettingsImportListener {
 		void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items);
@@ -1828,36 +1825,52 @@ public class SettingsHelper {
 		private String latestChanges;
 		private int version;
 
-		private SettingsImportListener listener;
+		private SettingsImportListener importListener;
+		private CheckDuplicatesListener duplicatesListener;
 		private SettingsImporter importer;
 		private List<SettingsItem> items = new ArrayList<>();
+		private List<SettingsItem> selectedItems = new ArrayList<>();
 		private List<SettingsItem> processedItems = new ArrayList<>();
 		private SettingsItem currentItem;
 		private AlertDialog dialog;
+		private State state;
+		private List<Object> duplicates;
 
-		ImportAsyncTask(@NonNull File settingsFile, String latestChanges, int version, @Nullable SettingsImportListener listener) {
-			this.file = settingsFile;
-			this.listener = listener;
+		ImportAsyncTask(@NonNull File file, String latestChanges, int version, @Nullable SettingsImportListener importListener) {
+			this.file = file;
+			this.importListener = importListener;
 			this.latestChanges = latestChanges;
 			this.version = version;
 			importer = new SettingsImporter(app);
 			collectOnly = true;
+			state = State.COLLECT;
 		}
 
-		ImportAsyncTask(@NonNull File settingsFile, @NonNull List<SettingsItem> items, String latestChanges, int version, @Nullable SettingsImportListener listener) {
-			this.file = settingsFile;
-			this.listener = listener;
+		ImportAsyncTask(@NonNull File file, @NonNull List<SettingsItem> items, String latestChanges, int version, @Nullable SettingsImportListener importListener) {
+			this.file = file;
+			this.importListener = importListener;
 			this.items = items;
 			this.latestChanges = latestChanges;
 			this.version = version;
 			importer = new SettingsImporter(app);
 			collectOnly = false;
+			state = State.IMPORT;
+		}
+
+		ImportAsyncTask(@NonNull File file, @NonNull List<SettingsItem> items, @NonNull List<SettingsItem> selectedItems, @Nullable CheckDuplicatesListener duplicatesListener) {
+			this.file = file;
+			this.items = items;
+			this.duplicatesListener = duplicatesListener;
+			this.selectedItems = selectedItems;
+			importer = new SettingsImporter(app);
+			collectOnly = true;
+			state = State.CHECK_DUPLICATES;
 		}
 
 		@Override
 		protected void onPreExecute() {
 			if (importing) {
-				finishImport(listener, false, false, items);
+				finishImport(importListener, false, false, items);
 			}
 			importing = true;
 			importSuspended = false;
@@ -1866,29 +1879,58 @@ public class SettingsHelper {
 
 		@Override
 		protected List<SettingsItem> doInBackground(Void... voids) {
-			if (collectOnly) {
-				try {
-					return importer.collectItems(file);
-				} catch (IllegalArgumentException e) {
-					LOG.error("Failed to collect items from: " + file.getName(), e);
-				} catch (IOException e) {
-					LOG.error("Failed to collect items from: " + file.getName(), e);
-				}
-			} else {
-				return this.items;
+			switch (state) {
+				case COLLECT:
+					try {
+						return importer.collectItems(file);
+					} catch (IllegalArgumentException e) {
+						LOG.error("Failed to collect items from: " + file.getName(), e);
+					} catch (IOException e) {
+						LOG.error("Failed to collect items from: " + file.getName(), e);
+					}
+					break;
+				case CHECK_DUPLICATES:
+					checkingDuplicates = true;
+					long startTime = System.currentTimeMillis();
+					List<Object> duplicatesData = getDuplicatesData(this.selectedItems);
+					long diffTime = System.currentTimeMillis() - startTime;
+					if (diffTime < 500 && diffTime >= 0) {
+						try {
+							Thread.sleep(500 - diffTime);
+						} catch (InterruptedException e) {
+							LOG.error("Error on check duplicates delay" + e);
+						}
+					}
+					this.duplicates = duplicatesData;
+					return selectedItems;
+				case IMPORT:
+					return this.items;
 			}
 			return null;
 		}
 
 		@Override
 		protected void onPostExecute(@Nullable List<SettingsItem> items) {
-			if (items != null) {
+			if (items != null && !State.CHECK_DUPLICATES.equals(state)) {
 				this.items = items;
+			} else {
+				selectedItems = items;
 			}
-			if (collectOnly) {
-				listener.onSettingsImportFinished(true, false, this.items);
-			} else if (items != null && items.size() > 0) {
-				processNextItem();
+			switch (state) {
+				case COLLECT:
+					importListener.onSettingsImportFinished(true, false, this.items);
+					break;
+				case CHECK_DUPLICATES:
+					checkingDuplicates = false;
+					if (duplicatesListener != null) {
+						duplicatesListener.onDuplicatesChecked(duplicates, this.selectedItems);
+					}
+					break;
+				case IMPORT:
+					if (items != null && items.size() > 0) {
+						processNextItem();
+					}
+					break;
 			}
 		}
 
@@ -1898,9 +1940,9 @@ public class SettingsHelper {
 			}
 			if (items.size() == 0 && !importSuspended) {
 				if (processedItems.size() > 0) {
-					new ImportItemsAsyncTask(file, listener, processedItems).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					new ImportItemsAsyncTask(file, importListener, processedItems).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				} else {
-					finishImport(listener, false, true, items);
+					finishImport(importListener, false, true, items);
 				}
 				return;
 			}
@@ -1942,38 +1984,46 @@ public class SettingsHelper {
 			return this.file;
 		}
 
-		public void setListener(SettingsImportListener listener) {
-			this.listener = listener;
+		public void setImportListener(SettingsImportListener importListener) {
+			this.importListener = importListener;
 		}
-	}
 
-	@Nullable
-	public List<SettingsItem> getSettingsItems() {
-		return importTask != null ? importTask.getItems() : null;
-	}
+		public void setDuplicatesListener(CheckDuplicatesListener duplicatesListener) {
+			this.duplicatesListener = duplicatesListener;
+		}
 
-	@Nullable
-	public File getSettingsFile() {
-		return importTask != null ? importTask.getFile() : null;
-	}
+		public State getState() {
+			return this.state;
+		}
 
-	@Nullable
-	public List<SettingsItem> getImportedItems() {
-		return importedItems;
-	}
+		public List<Object> getDuplicates() {
+			return this.duplicates;
+		}
 
-	@Nullable
-	public List<Object> getDuplicatesItems() {
-		return checkDuplicatesTask != null ? checkDuplicatesTask.getDuplicates() : null;
-	}
+		public List<SettingsItem> getSelectedItems() {
+			return this.selectedItems;
+		}
 
-	public void setImportedItems(@Nullable List<SettingsItem> importedItems) {
-		this.importedItems = importedItems;
-	}
-
-	@Nullable
-	public CheckDuplicatesTask getCheckDuplicatesTask() {
-		return checkDuplicatesTask;
+		private List<Object> getDuplicatesData(List<SettingsItem> items) {
+			List<Object> duplicateItems = new ArrayList<>();
+			for (SettingsItem item : items) {
+				if (item instanceof SettingsHelper.ProfileSettingsItem) {
+					if (item.exists()) {
+						duplicateItems.add(((SettingsHelper.ProfileSettingsItem) item).getModeBean());
+					}
+				} else if (item instanceof SettingsHelper.CollectionSettingsItem) {
+					List duplicates = ((CollectionSettingsItem) item).excludeDuplicateItems();
+					if (!duplicates.isEmpty()) {
+						duplicateItems.addAll(duplicates);
+					}
+				} else if (item instanceof SettingsHelper.FileSettingsItem) {
+					if (item.exists()) {
+						duplicateItems.add(((SettingsHelper.FileSettingsItem) item).getFile());
+					}
+				}
+			}
+			return duplicateItems;
+		}
 	}
 
 	@Nullable
@@ -1982,12 +2032,8 @@ public class SettingsHelper {
 	}
 
 	@Nullable
-	public List<SettingsItem> getSelectedItems() {
-		return selectedItems;
-	}
-
-	public void setSelectedItems(@Nullable List<SettingsItem> selectedItems) {
-		this.selectedItems = selectedItems;
+	public State getImportTaskState() {
+		return importTask != null ? importTask.getState() : null;
 	}
 
 	public boolean isFileExporting(File file) {
@@ -2041,11 +2087,9 @@ public class SettingsHelper {
 		importing = false;
 		importSuspended = false;
 		importTask = null;
-		checkDuplicatesTask = null;
 		if (listener != null) {
 			listener.onSettingsImportFinished(success, empty, items);
 		}
-		importedItems = items;
 	}
 
 	@SuppressLint("StaticFieldLeak")
@@ -2088,82 +2132,8 @@ public class SettingsHelper {
 		}
 	}
 
-	@SuppressLint("StaticFieldLeak")
-	public class CheckDuplicatesTask extends AsyncTask<Void, Void, List<Object>> {
-
-		private List<SettingsItem> items;
-		private List<Object> duplicates;
-		private CheckDuplicatesListener listener;
-		private long startTime;
-
-		CheckDuplicatesTask(@NonNull List<SettingsItem> items, CheckDuplicatesListener listener) {
-			this.items = items;
-			this.listener = listener;
-		}
-
-		@Override
-		protected void onPreExecute() {
-			selectedItems = this.items;
-			checkingDuplicates = true;
-			checkDuplicatesTask = this;
-			startTime = System.currentTimeMillis();
-		}
-
-		@Override
-		protected List<Object> doInBackground(Void... voids) {
-			long currentTime = System.currentTimeMillis();
-			List<Object> duplicateItems = getDuplicatesData(this.items);
-			if (currentTime - startTime < 700) {
-				try {
-					Thread.sleep(500);
-				} catch (InterruptedException e) {
-					LOG.error("Error on check duplicates delay" + e);
-				}
-			}
-			return duplicateItems;
-		}
-
-		@Override
-		protected void onPostExecute(List<Object> objects) {
-			duplicates = objects;
-			if (listener != null) {
-				listener.onDuplicatesChecked(objects, this.items);
-			}
-			checkingDuplicates = false;
-		}
-
-		private List<Object> getDuplicatesData(List<SettingsItem> items) {
-			List<Object> duplicateItems = new ArrayList<>();
-			for (SettingsItem item : items) {
-				if (item instanceof SettingsHelper.ProfileSettingsItem) {
-					if (item.exists()) {
-						duplicateItems.add(((SettingsHelper.ProfileSettingsItem) item).getModeBean());
-					}
-				} else if (item instanceof SettingsHelper.CollectionSettingsItem) {
-					List duplicates = ((CollectionSettingsItem) item).excludeDuplicateItems();
-					if (!duplicates.isEmpty()) {
-						duplicateItems.addAll(duplicates);
-					}
-				} else if (item instanceof SettingsHelper.FileSettingsItem) {
-					if (item.exists()) {
-						duplicateItems.add(((SettingsHelper.FileSettingsItem) item).getFile());
-					}
-				}
-			}
-			return duplicateItems;
-		}
-
-		public void setListener(CheckDuplicatesListener listener) {
-			this.listener = listener;
-		}
-
-		List<Object> getDuplicates() {
-			return duplicates;
-		}
-	}
-
-	public void checkDuplicates(@NonNull List<SettingsItem> items, CheckDuplicatesListener listener) {
-		new CheckDuplicatesTask(items, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	public void checkDuplicates(@NonNull File file, @NonNull List<SettingsItem> items, @NonNull List<SettingsItem> selectedItems, CheckDuplicatesListener listener) {
+		new ImportAsyncTask(file, items, selectedItems, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public void importSettings(@NonNull File settingsFile, String latestChanges, int version,
@@ -2185,5 +2155,11 @@ public class SettingsHelper {
 	public void exportSettings(@NonNull File fileDir, @NonNull String fileName, @Nullable SettingsExportListener listener,
 							   @NonNull SettingsItem... items) {
 		exportSettings(fileDir, fileName, listener, new ArrayList<>(Arrays.asList(items)));
+	}
+
+	public enum State {
+		COLLECT,
+		CHECK_DUPLICATES,
+		IMPORT
 	}
 }
