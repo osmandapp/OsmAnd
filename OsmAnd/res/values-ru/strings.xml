@@ -3482,6 +3482,7 @@
     <string name="shared_string_preparing">Подготовка</string>
     <string name="shared_string_poi_types">Типы POI</string>
     <string name="shared_string_nothing_selected">Ничего не выбрано</string>
+    <string name="shared_string_quick_actions">Быстрые действия</string>
     <string name="shared_string_profiles">Профили</string>
     <string name="replace_all_desc">Текущие элементы будут заменены элементами из файла</string>
     <string name="replace_all">Заменить все</string>

@@ -3515,6 +3515,7 @@
     <string name="shared_string_preparing">Προετοιμασία</string>
     <string name="shared_string_poi_types">Είδη Σημείων Ενδιαφέροντος</string>
     <string name="shared_string_nothing_selected">Τίποτα δεν επιλέχτηκε</string>
+    <string name="shared_string_quick_actions">Ταχείες ενέργειες</string>
     <string name="shared_string_profiles">Κατανομές</string>
     <string name="listed_exist">Το εισηγμένο %1$s, υπάρχει ήδη στο OsmAnd.</string>
     <string name="replace_all_desc">Τα τρέχοντα αντικείμενα θα αντικατασταθούν με αντικείμενα από το αρχείο</string>

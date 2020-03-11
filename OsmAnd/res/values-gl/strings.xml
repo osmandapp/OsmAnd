@@ -3603,6 +3603,7 @@ Lon %2$s</string>
     <string name="shared_string_preparing">Estase a preparar</string>
     <string name="shared_string_poi_types">Tipos de PDI</string>
     <string name="shared_string_nothing_selected">Ren selecionado</string>
+    <string name="shared_string_quick_actions">Accións rápidas</string>
     <string name="shared_string_profiles">Perfís</string>
     <string name="listed_exist">%1$s listado, xa existe no OsmAnd.</string>
     <string name="replace_all_desc">Os elementos actuais serán substituídos polos elementos do ficheiro</string>

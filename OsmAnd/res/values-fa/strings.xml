@@ -3577,6 +3577,7 @@
     <string name="recalc_angle_dialog_title">کمترین زاویه میان موقعیت من و مسیر</string>
     <string name="shared_string_preparing">آماده‌سازی</string>
     <string name="shared_string_nothing_selected">چیزی انتخاب نشده</string>
+    <string name="shared_string_quick_actions">کنش‌های فوری</string>
     <string name="shared_string_profiles">پروفایل‌ها</string>
     <string name="replace_all_desc">موارد موجود در فایل، جانشین موارد کنونی می‌شود</string>
     <string name="replace_all">جانشانی همه</string>

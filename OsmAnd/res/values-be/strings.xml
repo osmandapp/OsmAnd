@@ -3514,6 +3514,7 @@
     <string name="shared_string_preparing">Падрыхтоўка</string>
     <string name="shared_string_poi_types">Тыпы POI</string>
     <string name="shared_string_nothing_selected">Нічога не абрана</string>
+    <string name="shared_string_quick_actions">Хуткія дзеянні</string>
     <string name="shared_string_profiles">Профілі</string>
     <string name="listed_exist">Дадзеныя %1$s ужо ёсць у OsmAnd.</string>
     <string name="replace_all_desc">Бягучыя элементы заменяцца элементамі з файла</string>

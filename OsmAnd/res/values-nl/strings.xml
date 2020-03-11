@@ -3391,6 +3391,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_preparing">Voorbereiding</string>
     <string name="shared_string_poi_types">POI types</string>
     <string name="shared_string_nothing_selected">Niets geselecteerd</string>
+    <string name="shared_string_quick_actions">Snelle acties</string>
     <string name="shared_string_profiles">Profielen</string>
     <string name="listed_exist">De getoonde %1$s zijn in OsmAnd reeds beschikbaar.</string>
     <string name="replace_all_desc">Huidige elementen worden vervangen door elementen uit het bestand</string>

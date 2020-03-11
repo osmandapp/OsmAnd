@@ -78,7 +78,7 @@ public class ImportedSettingsItemsAdapter extends
 				break;
 			case QUICK_ACTIONS:
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.map_quick_action, activeColorRes));
-				holder.title.setText(R.string.configure_screen_quick_action);
+				holder.title.setText(R.string.shared_string_quick_action);
 				break;
 			case POI_TYPES:
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_search_dark, activeColorRes));

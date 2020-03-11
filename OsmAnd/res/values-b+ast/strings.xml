@@ -1452,6 +1452,7 @@
     <string name="shared_string_preparing">Preparando</string>
     <string name="shared_string_poi_types">Tipos de PDI</string>
     <string name="shared_string_nothing_selected">Nun hai nada seleicionao</string>
+    <string name="shared_string_quick_actions">Aiciones rápides</string>
     <string name="shared_string_profiles">Perfiles</string>
     <string name="listed_exist">%1$s llistáu, yá existe n\'OsmAnd.</string>
     <string name="replace_all_desc">Los elementos actuales sustituiránse por elementos del ficheru</string>

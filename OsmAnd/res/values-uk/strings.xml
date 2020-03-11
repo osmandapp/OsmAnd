@@ -3540,6 +3540,7 @@
     <string name="shared_string_preparing">Підготування</string>
     <string name="shared_string_poi_types">Види POI</string>
     <string name="shared_string_nothing_selected">Нічого не вибрано</string>
+    <string name="shared_string_quick_actions">Швидкі дії</string>
     <string name="shared_string_profiles">Профілі</string>
     <string name="listed_exist">Перелічені %1$s вже існують у OsmAnd.</string>
     <string name="replace_all_desc">Поточні елементи будуть замінені на елементи з файлу</string>
