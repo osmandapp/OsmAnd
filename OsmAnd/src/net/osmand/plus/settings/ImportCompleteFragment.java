@@ -25,10 +25,10 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
-import net.osmand.plus.profiles.AdditionalDataWrapper;
 import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.routepreparationmenu.AvoidRoadsBottomSheetDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment;
+import net.osmand.plus.settings.ExportImportSettingsAdapter.Type;
 
 import java.util.List;
 
@@ -99,7 +99,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 					nightMode,
 					new ImportedSettingsItemsAdapter.OnItemClickListener() {
 						@Override
-						public void onItemClick(AdditionalDataWrapper.Type type) {
+						public void onItemClick(Type type) {
 							navigateTo(type);
 						}
 					});
@@ -115,7 +115,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private void navigateTo(AdditionalDataWrapper.Type type) {
+	private void navigateTo(Type type) {
 		FragmentManager fm = getFragmentManager();
 		Activity activity = requireActivity();
 		if (fm == null) {

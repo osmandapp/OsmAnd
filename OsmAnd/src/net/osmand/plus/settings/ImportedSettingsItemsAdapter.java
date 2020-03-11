@@ -13,27 +13,31 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.profiles.AdditionalDataWrapper;
+import net.osmand.plus.settings.ExportImportSettingsAdapter.Type;
 
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 public class ImportedSettingsItemsAdapter extends
 		RecyclerView.Adapter<ImportedSettingsItemsAdapter.ItemViewHolder> {
-	private List<AdditionalDataWrapper> items;
+	private Map<Type, List<?>> itemsMap;
+	private List<Type> itemsTypes;
 	private UiUtilities uiUtils;
 	private OsmandApplication app;
 	private boolean nightMode;
 	private OnItemClickListener listener;
 
-	ImportedSettingsItemsAdapter(@NonNull OsmandApplication app, @NonNull List<AdditionalDataWrapper> items,
+	ImportedSettingsItemsAdapter(@NonNull OsmandApplication app, Map<Type, List<?>> itemsMap,
 								 boolean nightMode, OnItemClickListener listener) {
 		this.app = app;
-		this.items = items;
+		this.itemsMap = itemsMap;
 		this.nightMode = nightMode;
 		this.listener = listener;
 		uiUtils = app.getUIUtilities();
+		itemsTypes = new ArrayList<>(itemsMap.keySet());
 	}
 
 	@NonNull
@@ -46,8 +50,8 @@ public class ImportedSettingsItemsAdapter extends
 
 	@Override
 	public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-		final AdditionalDataWrapper currentItem = items.get(position);
-		boolean isLastItem = items.size() - 1 == position;
+		final Type currentItemType = itemsTypes.get(position);
+		boolean isLastItem = itemsTypes.size() - 1 == position;
 		int activeColorRes = nightMode
 				? R.color.active_color_primary_dark
 				: R.color.active_color_primary_light;
@@ -58,16 +62,16 @@ public class ImportedSettingsItemsAdapter extends
 		holder.itemView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				listener.onItemClick(currentItem.getType());
+				listener.onItemClick(currentItemType);
 			}
 		});
 		holder.subTitle.setText(String.format(
 				app.getString(R.string.ltr_or_rtl_combine_via_colon),
 				app.getString(R.string.items_added),
-				String.valueOf(currentItem.getItems().size()))
+				String.valueOf(itemsMap.get(currentItemType).size()))
 		);
 
-		switch (currentItem.getType()) {
+		switch (currentItemType) {
 			case PROFILE:
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.map_action_settings, activeColorRes));
 				holder.title.setText(R.string.shared_string_settings);
@@ -101,7 +105,7 @@ public class ImportedSettingsItemsAdapter extends
 
 	@Override
 	public int getItemCount() {
-		return items.size();
+		return itemsMap.keySet().size();
 	}
 
 	public static class ItemViewHolder extends RecyclerView.ViewHolder {
@@ -120,6 +124,6 @@ public class ImportedSettingsItemsAdapter extends
 	}
 
 	interface OnItemClickListener {
-		void onItemClick(AdditionalDataWrapper.Type type);
+		void onItemClick(Type type);
 	}
 }

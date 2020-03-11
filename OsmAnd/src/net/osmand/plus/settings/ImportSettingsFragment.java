@@ -1,9 +1,7 @@
 package net.osmand.plus.settings;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -42,16 +40,18 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.profiles.AdditionalDataWrapper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.widgets.TextViewEx;
+import net.osmand.plus.settings.ExportImportSettingsAdapter.Type;
 
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ImportSettingsFragment extends BaseOsmAndFragment
 		implements View.OnClickListener {
@@ -137,12 +137,6 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 					settingsHelper.importSettings(file, selectedItems, "", 1, getImportListener());
 				}
 			}
-//			else if (!fromPopBackStack) {
-//				FragmentManager fm = getFragmentManager();
-//				if (fm != null && file != null && selectedItems != null) {
-//					ImportDuplicatesFragment.showInstance(fm, duplicates, selectedItems, file);
-//				}
-//			}
 		}
 
 		adapter = new ExportImportSettingsAdapter(app, nightMode, true);
@@ -300,8 +294,8 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		return settingsItems;
 	}
 
-	public static List<AdditionalDataWrapper> getSettingsToOperate(List<SettingsItem> settingsItems) {
-		List<AdditionalDataWrapper> settingsToOperate = new ArrayList<>();
+	public static Map<Type, List<?>> getSettingsToOperate(List<SettingsItem> settingsItems) {
+		Map<Type, List<?>> settingsToOperate = new HashMap<>();
 		List<ApplicationMode.ApplicationModeBean> profiles = new ArrayList<>();
 		List<QuickAction> quickActions = new ArrayList<>();
 		List<PoiUIFilter> poiUIFilters = new ArrayList<>();
@@ -335,43 +329,25 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		}
 
 		if (!profiles.isEmpty()) {
-			settingsToOperate.add(new AdditionalDataWrapper(
-					AdditionalDataWrapper.Type.PROFILE,
-					profiles));
+			settingsToOperate.put(Type.PROFILE, profiles);
 		}
 		if (!quickActions.isEmpty()) {
-			settingsToOperate.add(new AdditionalDataWrapper(
-					AdditionalDataWrapper.Type.QUICK_ACTIONS,
-					quickActions));
+			settingsToOperate.put(Type.QUICK_ACTIONS, quickActions);
 		}
 		if (!poiUIFilters.isEmpty()) {
-			settingsToOperate.add(new AdditionalDataWrapper(
-					AdditionalDataWrapper.Type.POI_TYPES,
-					poiUIFilters));
+			settingsToOperate.put(Type.POI_TYPES, poiUIFilters);
 		}
 		if (!tileSourceTemplates.isEmpty()) {
-			settingsToOperate.add(new AdditionalDataWrapper(
-					AdditionalDataWrapper.Type.MAP_SOURCES,
-					tileSourceTemplates
-			));
+			settingsToOperate.put(Type.MAP_SOURCES, tileSourceTemplates);
 		}
 		if (!renderFilesList.isEmpty()) {
-			settingsToOperate.add(new AdditionalDataWrapper(
-					AdditionalDataWrapper.Type.CUSTOM_RENDER_STYLE,
-					renderFilesList
-			));
+			settingsToOperate.put(Type.CUSTOM_RENDER_STYLE, renderFilesList);
 		}
 		if (!routingFilesList.isEmpty()) {
-			settingsToOperate.add(new AdditionalDataWrapper(
-					AdditionalDataWrapper.Type.CUSTOM_ROUTING,
-					routingFilesList
-			));
+			settingsToOperate.put(Type.CUSTOM_ROUTING, routingFilesList);
 		}
 		if (!avoidRoads.isEmpty()) {
-			settingsToOperate.add(new AdditionalDataWrapper(
-					AdditionalDataWrapper.Type.AVOID_ROADS,
-					avoidRoads
-			));
+			settingsToOperate.put(Type.AVOID_ROADS, avoidRoads);
 		}
 		return settingsToOperate;
 	}
