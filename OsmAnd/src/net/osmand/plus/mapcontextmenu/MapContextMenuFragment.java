@@ -103,7 +103,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private View toolbarContainer;
 	private View toolbarView;
-	private View toolbarBackButton;
+	private ImageView toolbarBackButton;
 	private TextView toolbarTextView;
 	private View topButtonContainer;
 	private LockableScrollView menuScrollView;
@@ -208,14 +208,17 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				openMenuHeaderOnly();
 			}
 		});
+		toolbarBackButton.setImageResource(AndroidUtils.getNavigationIconResId(mapActivity));
 
 		topButtonContainer = view.findViewById(R.id.context_menu_top_button_container);
-		view.findViewById(R.id.context_menu_top_back).setOnClickListener(new View.OnClickListener() {
+		ImageView backButton = (ImageView) view.findViewById(R.id.context_menu_top_back);
+		backButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				openMenuHeaderOnly();
 			}
 		});
+		backButton.setImageResource(AndroidUtils.getNavigationIconResId(mapActivity));
 		updateVisibility(topButtonContainer, 0);
 
 		map = mapActivity.getMapView();

@@ -105,7 +105,8 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		activity.getAccessibilityAssistant().registerPage(view, DownloadActivity.DOWNLOAD_TAB_NUMBER);
 
 		toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back));
+		Drawable icBack = getMyApplication().getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(activity));
+		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override

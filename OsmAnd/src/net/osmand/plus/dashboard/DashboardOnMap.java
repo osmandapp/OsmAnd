@@ -336,8 +336,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		ImageView lst = (ImageView) dashboardView.findViewById(R.id.toolbar_list);
 		lst.setVisibility(View.GONE);
 		ImageView back = (ImageView) dashboardView.findViewById(R.id.toolbar_back);
-		back.setImageDrawable(
-				getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back));
+		Drawable icBack = getMyApplication().getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(mapActivity));
+		back.setImageDrawable(icBack);
 		back.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -345,8 +345,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				backPressed();
 			}
 		});
-		int layoutDirection = AndroidUtils.getLayoutDirection(mapActivity);
-		UiUtilities.rotateImageByLayoutDirection(back, layoutDirection);
 
 		if (visibleType == DashboardType.DASHBOARD || visibleType == DashboardType.LIST_MENU) {
 			settingsButton.setVisibility(View.VISIBLE);
