@@ -484,8 +484,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	}
 
 	private void buildMenuButtons(@NonNull View view) {
-		AppCompatImageView backButton = view.findViewById(R.id.back_button);
-		AppCompatImageButton backButtonFlow = view.findViewById(R.id.back_button_flow);
+		AppCompatImageView backButton = (AppCompatImageView) view.findViewById(R.id.back_button);
+		AppCompatImageButton backButtonFlow = (AppCompatImageButton) view.findViewById(R.id.back_button_flow);
 		OnClickListener backOnClick = new OnClickListener() {
 			@Override
 			public void onClick(View v) {

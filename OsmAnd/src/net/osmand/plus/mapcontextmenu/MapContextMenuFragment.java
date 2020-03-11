@@ -211,7 +211,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		toolbarBackButton.setImageResource(AndroidUtils.getNavigationIconResId(mapActivity));
 
 		topButtonContainer = view.findViewById(R.id.context_menu_top_button_container);
-		ImageView backButton = view.findViewById(R.id.context_menu_top_back);
+		ImageView backButton = (ImageView) view.findViewById(R.id.context_menu_top_back);
 		backButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
