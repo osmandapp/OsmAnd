@@ -2012,7 +2012,6 @@
     <string name="shared_string_preparing">Подготовка</string>
     <string name="shared_string_poi_types">Тип POI</string>
     <string name="shared_string_nothing_selected">Нищо не е избрано</string>
-    <string name="shared_string_quick_actions">Бързи действия</string>
     <string name="shared_string_profiles">Профили</string>
     <string name="listed_exist">Изброените %1$s, вече съществуват в OsmAnd.</string>
     <string name="replace_all_desc">Текущите елементи ще бъдат заменени с елементи от файлът</string>

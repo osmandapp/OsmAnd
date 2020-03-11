@@ -3507,7 +3507,6 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_preparing">Forbereder</string>
     <string name="shared_string_poi_types">IP typer</string>
     <string name="shared_string_nothing_selected">Intet valgt</string>
-    <string name="shared_string_quick_actions">Genveje</string>
     <string name="shared_string_profiles">Profiler</string>
     <string name="replace_all_desc">Aktuelle poster erstattes med poster fra filen</string>
     <string name="replace_all">Erstat alle</string>

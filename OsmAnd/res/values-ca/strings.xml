@@ -3515,7 +3515,6 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_preparing">Preparant</string>
     <string name="shared_string_poi_types">Tipus de PDI</string>
     <string name="shared_string_nothing_selected">No hi ha res seleccionat</string>
-    <string name="shared_string_quick_actions">Accions directes</string>
     <string name="shared_string_profiles">Perfils</string>
     <string name="listed_exist">Els llistats %1$s ja existeixen a OsmAnd.</string>
     <string name="replace_all_desc">Els elements actuals es substituiran amb elements de l\'arxiu</string>

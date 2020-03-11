@@ -3548,7 +3548,6 @@
     <string name="shared_string_preparing">Препремам</string>
     <string name="shared_string_poi_types">Типови тачака од интереса</string>
     <string name="shared_string_nothing_selected">Ништа није означено</string>
-    <string name="shared_string_quick_actions">Брзе радње</string>
     <string name="shared_string_profiles">Профили</string>
     <string name="listed_exist">Излистан %1$s, већ постоји у OsmAnd-у.</string>
     <string name="replace_all_desc">Тренутне ставке ће бити замењене ставкама из фајла</string>

@@ -3538,7 +3538,6 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_preparing">Preparando</string>
     <string name="shared_string_poi_types">Tipos de POI</string>
     <string name="shared_string_nothing_selected">Nada selecionado</string>
-    <string name="shared_string_quick_actions">Ações rápidas</string>
     <string name="shared_string_profiles">Perfis</string>
     <string name="listed_exist">Listado %1$s já existe no OsmAnd.</string>
     <string name="replace_all_desc">Os itens atuais serão substituídos pelos itens do arquivo</string>

@@ -3551,7 +3551,6 @@ Lon %2$s</string>
     <string name="shared_string_preparing">Preparando</string>
     <string name="shared_string_poi_types">Tipos de PDI</string>
     <string name="shared_string_nothing_selected">Nada marcado</string>
-    <string name="shared_string_quick_actions">Acciones rápidas</string>
     <string name="shared_string_profiles">Perfiles</string>
     <string name="listed_exist">El listado «%1$s», ya existe en OsmAnd.</string>
     <string name="replace_all_desc">Los elementos actuales serán reemplazados por elementos del archivo</string>

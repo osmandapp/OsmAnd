@@ -3521,7 +3521,6 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_preparing">Préparation en cours</string>
     <string name="shared_string_poi_types">Types de PI</string>
     <string name="shared_string_nothing_selected">Aucun élément sélectionné</string>
-    <string name="shared_string_quick_actions">Actions rapides</string>
     <string name="shared_string_profiles">Profils</string>
     <string name="listed_exist">Les %1$s listés existent déjà dans OsmAnd.</string>
     <string name="replace_all_desc">Les éléments actuels seront remplacés par les éléments du fichier</string>

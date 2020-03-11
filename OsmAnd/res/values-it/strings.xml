@@ -3551,7 +3551,6 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_preparing">Preparando</string>
     <string name="shared_string_poi_types">Tipi di PDI</string>
     <string name="shared_string_nothing_selected">Nessuna selezione</string>
-    <string name="shared_string_quick_actions">Azioni veloci</string>
     <string name="shared_string_profiles">Profili</string>
     <string name="listed_exist">Gli elencati %1$s, esistono già in OsmAnd.</string>
     <string name="replace_all_desc">Gli oggetti attuali verranno sostituiti con gli oggetti dal file</string>

@@ -3541,7 +3541,6 @@
     <string name="shared_string_preparing">正在準備</string>
     <string name="shared_string_poi_types">POI 類型</string>
     <string name="shared_string_nothing_selected">未選取</string>
-    <string name="shared_string_quick_actions">快速動作</string>
     <string name="shared_string_profiles">設定檔</string>
     <string name="listed_exist">列出的 %1$s 已存在於 OsmAnd 中。</string>
     <string name="replace_all_desc">目前的項目將會被從檔案而來的項目所取代</string>

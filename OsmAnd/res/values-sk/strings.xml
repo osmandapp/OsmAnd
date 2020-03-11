@@ -3485,7 +3485,6 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="shared_string_preparing">Pripravujem</string>
     <string name="shared_string_poi_types">Typy bodov záujmu</string>
     <string name="shared_string_nothing_selected">Nič nie je zvolené</string>
-    <string name="shared_string_quick_actions">Rýchle akcie</string>
     <string name="shared_string_profiles">Profily</string>
     <string name="monitoring_min_speed_descr_remark">Poznámka: kontrola na nenulovú rýchlosť: Väčšina čipov GPS hlási hodnotu rýchlosti len ak algoritmus usúdi, že sa pohybujete, inak nevráti žiadnu rýchlosť. Preto použitie nenulového nastavenia v tomto filtri vlastne použije detekciu pohybu v GPS čipe. Ale aj keď nebude rýchlosť filtrovaná tu pri zázname, použijeme túto funkciu pri analýze GPX pre zistenie Opravenej vzdialenosti, teda hodnoty zobrazenej v tomto poli je vzdialenosť zaznamenaná počas pohybu.</string>
     <string name="monitoring_min_accuracy_descr">Toto zaznamená len body zmerané pri indikovanej minimálnej presnosti (v metroch/stopách, ako ju hlási Android pre vaše zariadenie). Presnosť znamená rozptyl opakovaných meraní a nesúvisí priamo s presnosťou, ktorá určuje ako blízko je vaše meranie k skutočnej polohe.</string>

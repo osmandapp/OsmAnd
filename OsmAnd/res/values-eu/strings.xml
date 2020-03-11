@@ -3559,7 +3559,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_preparing">Prestatzen</string>
     <string name="shared_string_poi_types">POI motak</string>
     <string name="shared_string_nothing_selected">Ez da ezer hautatu</string>
-    <string name="shared_string_quick_actions">Ekintza azkarrak</string>
     <string name="shared_string_profiles">Profilak</string>
     <string name="listed_exist">Zerrendatutako %1$s, badago dagoeneko OsmAnd-en.</string>
     <string name="replace_all_desc">Uneko elementuak fitxategiko elementuekin ordeztuko dira</string>

@@ -1423,7 +1423,6 @@
     <string name="shared_string_angle">Kut</string>
     <string name="shared_string_preparing">Priprema</string>
     <string name="shared_string_nothing_selected">Ništa nije odabrano</string>
-    <string name="shared_string_quick_actions">Brze akcije</string>
     <string name="shared_string_profiles">Profili</string>
     <string name="listed_exist">Navedene %1$s, već postoje u OsmAnd.</string>
     <string name="replace_all_desc">Trenutne stavke bit će zamijenjene stavkama iz datoteke</string>
