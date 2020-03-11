@@ -1,6 +1,5 @@
 package net.osmand.binary;
 
-
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
@@ -10,12 +9,10 @@ import net.osmand.util.TransliterationHelper;
 
 import java.text.MessageFormat;
 import java.util.Arrays;
-import java.util.List;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
-
-public class RouteDataObject implements StringExternalizable<RouteDataBundle> {
+public class RouteDataObject {
 	/*private */static final int RESTRICTION_SHIFT = 3;
 	/*private */static final int RESTRICTION_MASK = 7;
 	public static int HEIGHT_UNDEFINED = -80000;
@@ -37,26 +34,6 @@ public class RouteDataObject implements StringExternalizable<RouteDataBundle> {
 	public int[] nameIds;
 	// mixed array [0, height, cumulative_distance height, cumulative_distance, height, ...] - length is length(points)*2
 	public float[] heightDistanceArray = null;
-
-	@Override
-	public void writeToBundle(RouteDataBundle bundle) {
-		List<RouteRegion> regions = bundle.getResources().getRouteRegions();
-		int regionIndex = regions.indexOf(region);
-		assert regionIndex != -1;
-		bundle.putInt("ri", regionIndex);
-
-		bundle.putArray("t", types);
-		bundle.putArray("pt", pointTypes);
-		bundle.putArray("pn", pointNames);
-		bundle.putArray("pnt", pointNameTypes);
-		bundle.putMap("n", names);
-		bundle.putArray("ni", nameIds);
-	}
-
-	@Override
-	public void readFromBundle(RouteDataBundle bundle) {
-
-	}
 
 	public RouteDataObject(RouteRegion region) {
 		this.region = region;

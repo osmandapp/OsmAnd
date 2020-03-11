@@ -10,7 +10,6 @@ import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlSerializer;
 
 import java.io.IOException;
-import java.io.StringWriter;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -18,22 +17,7 @@ public class StringBundleXmlWriter extends StringBundleWriter {
 
 	public final static Log log = PlatformUtil.getLog(StringBundleXmlWriter.class);
 
-	private StringWriter writer;
 	private XmlSerializer serializer;
-
-	public StringBundleXmlWriter(StringBundle bundle) {
-		super(bundle);
-
-		writer = new StringWriter();
-		serializer = PlatformUtil.newSerializer();
-		try {
-			serializer.setOutput(writer);
-			serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
-			serializer.startDocument("UTF-8", true);
-		} catch (IOException e) {
-			serializer = null;
-		}
-	}
 
 	public StringBundleXmlWriter(StringBundle bundle, XmlSerializer serializer) {
 		super(bundle);
@@ -57,9 +41,6 @@ public class StringBundleXmlWriter extends StringBundleWriter {
 			super.writeBundle();
 			try {
 				serializer.flush();
-				if (writer != null) {
-					result = writer.toString();
-				}
 			} catch (Exception e) {
 				log.error("Error writing string bundle as xml", e);
 			}
@@ -72,10 +53,6 @@ public class StringBundleXmlWriter extends StringBundleWriter {
 				case STRING: {
 					StringItem stringItem = (StringItem) item;
 					serializer.attribute(null, name, stringItem.getValue());
-					//serializer.startTag(null, "s");
-					//serializer.attribute(null, "n", name);
-					//serializer.text(stringItem.getValue());
-					//serializer.endTag(null, "s");
 					break;
 				}
 				case LIST: {

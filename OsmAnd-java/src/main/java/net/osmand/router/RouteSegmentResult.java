@@ -1,17 +1,21 @@
 package net.osmand.router;
 
 
+import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataBundle;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.binary.StringExternalizable;
 import net.osmand.data.LatLon;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 
 public class RouteSegmentResult implements StringExternalizable<RouteDataBundle> {
@@ -27,8 +31,10 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	private String description = "";
 	// this make not possible to make turns in between segment result for now
 	private TurnType turnType;
-	
-	
+
+	private static final DecimalFormat SPEED_FORMATTER = new DecimalFormat("#.##");
+
+
 	public RouteSegmentResult(RouteDataObject object, int startPointIndex, int endPointIndex) {
 		this.object = object;
 		this.startPointIndex = startPointIndex;
@@ -36,46 +42,110 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		updateCapacity();
 	}
 
-	void collectResources(RouteDataResources resources) {
-		List<RouteDataObject> dataObjects = resources.getRouteDataObjects();
-		List<RouteRegion> regions = resources.getRouteRegions();
-		if (!dataObjects.contains(object)) {
-			dataObjects.add(object);
+	void collectTypes(RouteDataResources resources) {
+		Map<RouteTypeRule, Integer> rules = resources.getRules();
+		if (object.types != null) {
+			collectRules(rules, object.types);
 		}
-		RouteRegion region = object.region;
-		if (!regions.contains(region)) {
-			regions.add(region);
-		}
-		List<RouteSubregion> baseSubregions = region.getBaseSubregions();
-		if (baseSubregions != null) {
-			for (RouteSubregion subregion : baseSubregions) {
-				subregion.collectResources(resources);
-			}
-		}
-		List<RouteSubregion> subregions = region.getSubregions();
-		if (subregions != null) {
-			for (RouteSubregion subregion : subregions) {
-				subregion.collectResources(resources);
+		if (object.pointTypes != null) {
+			for (int[] types : object.pointTypes) {
+				if (types != null) {
+					collectRules(rules, types);
+				}
 			}
 		}
 	}
 
+	void collectNames(RouteDataResources resources) {
+		Map<RouteTypeRule, Integer> rules = resources.getRules();
+		if (object.nameIds != null) {
+			for (int nameId : object.nameIds) {
+				String name = object.names.get(nameId);
+				String tag = object.region.quickGetEncodingRule(nameId).getTag();
+				RouteTypeRule r = new RouteTypeRule(tag, name);
+				if (!rules.containsKey(r)) {
+					rules.put(r, rules.size());
+				}
+			}
+		}
+	}
+
+	private void collectRules(Map<RouteTypeRule, Integer> rules, int[] types) {
+		RouteRegion region = object.region;
+		for (int type : types) {
+			RouteTypeRule rule = region.quickGetEncodingRule(type);
+			if (!rules.containsKey(rule)) {
+				rules.put(rule, rules.size());
+			}
+		}
+	}
+
+	private int[] convertTypes(int[] types, Map<RouteTypeRule, Integer> rules) {
+		int[] res = new int[types.length];
+		for (int i = 0; i < types.length; i++) {
+			int type = types[i];
+			RouteTypeRule rule = object.region.quickGetEncodingRule(type);
+			Integer ruleId = rules.get(rule);
+			if (ruleId == null) {
+				throw new IllegalArgumentException("Cannot find collected rule: " + rule.toString());
+			}
+			res[i] = ruleId;
+		}
+		return res;
+	}
+
+	private int[][] convertTypes(int[][] types, Map<RouteTypeRule, Integer> rules) {
+		int[][] res = new int[types.length][];
+		for (int i = 0; i < types.length; i++) {
+			int[] typesArr = types[i];
+			if (typesArr != null) {
+				res[i] = convertTypes(typesArr, rules);
+			}
+		}
+		return res;
+	}
+
+	private int[] convertNameIds(int[] nameIds, Map<RouteTypeRule, Integer> rules) {
+		int[] res = new int[nameIds.length];
+		for (int i = 0; i < nameIds.length; i++) {
+			int nameId = nameIds[i];
+			String name = object.names.get(nameId);
+			String tag = object.region.quickGetEncodingRule(nameId).getTag();
+			RouteTypeRule rule = new RouteTypeRule(tag, name);
+			Integer ruleId = rules.get(rule);
+			if (ruleId == null) {
+				throw new IllegalArgumentException("Cannot find collected rule: " + rule.toString());
+			}
+			res[i] = ruleId;
+		}
+		return res;
+	}
+
 	@Override
 	public void writeToBundle(RouteDataBundle bundle) {
-		List<RouteDataObject> dataObjects = bundle.getResources().getRouteDataObjects();
-		int dataObjectIndex = dataObjects.indexOf(object);
-		assert dataObjectIndex != -1;
-		bundle.putInt("i", dataObjectIndex);
-
-		bundle.putInt("si", startPointIndex);
-		bundle.putInt("ei", endPointIndex);
-
-		bundle.putFloat("st", segmentTime);
-		bundle.putFloat("rt", routingTime);
-		bundle.putFloat("s", speed);
-		bundle.putFloat("d", distance);
-
-		bundle.putObject("t", turnType);
+		Map<RouteTypeRule, Integer> rules = bundle.getResources().getRules();
+		bundle.putFloat("segmentTime", segmentTime);
+		bundle.putString("speed", SPEED_FORMATTER.format(speed));
+		if (turnType != null) {
+			bundle.putString("turnType", turnType.toXmlString());
+			String turnLanes = object.getValue("turn:lanes");
+			if (!Algorithms.isEmpty(turnLanes)) {
+				int[] rawLanes = RouteResultPreparation.calculateRawTurnLanes(turnLanes, turnType.getValue());
+				if (rawLanes.length > 0) {
+					StringBuilder turnLanesRes = new StringBuilder();
+					for (int lane : rawLanes) {
+						if (turnLanesRes.length() > 0) {
+							turnLanesRes.append(",");
+						}
+						turnLanesRes.append(TurnType.valueOf(lane, false).toXmlString());
+					}
+					bundle.putString("turnLanes", turnLanesRes.toString());
+				}
+			}
+		}
+		bundle.putArray("types", convertTypes(object.types, rules));
+		bundle.putArray("pointTypes", convertTypes(object.pointTypes, rules));
+		bundle.putArray("names", convertNameIds(object.nameIds, rules));
 	}
 
 	@Override

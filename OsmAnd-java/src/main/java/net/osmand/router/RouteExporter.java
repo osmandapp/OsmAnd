@@ -7,13 +7,11 @@ import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataBundle;
-import net.osmand.binary.RouteDataObject;
 import net.osmand.binary.StringBundle;
 import net.osmand.binary.StringBundleWriter;
 import net.osmand.binary.StringBundleXmlWriter;
-import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlSerializer;
 
@@ -44,7 +42,10 @@ public class RouteExporter {
 		final RouteDataBundle bundle = new RouteDataBundle(resources);
 
 		for (RouteSegmentResult sr : route) {
-			sr.collectResources(resources);
+			sr.collectTypes(resources);
+		}
+		for (RouteSegmentResult sr : route) {
+			sr.collectNames(resources);
 		}
 
 		List<StringBundle> routeItems = new ArrayList<>();
@@ -53,23 +54,16 @@ public class RouteExporter {
 			sr.writeToBundle(itemBundle);
 			routeItems.add(itemBundle);
 		}
-		bundle.putBundleList("route", "s", routeItems);
+		bundle.putBundleList("route", "segment", routeItems);
 
 		List<StringBundle> dataObjects = new ArrayList<>();
-		for (RouteDataObject dataObject : resources.getRouteDataObjects()) {
+		Map<RouteTypeRule, Integer> rules = resources.getRules();
+		for (RouteTypeRule rule : rules.keySet()) {
 			RouteDataBundle objectBundle = new RouteDataBundle(resources);
-			dataObject.writeToBundle(objectBundle);
+			rule.writeToBundle(objectBundle);
 			dataObjects.add(objectBundle);
 		}
-		bundle.putBundleList("objects", "o", dataObjects);
-
-		List<StringBundle> regions = new ArrayList<>();
-		for (RouteRegion routeRegion : resources.getRouteRegions()) {
-			RouteDataBundle regionBundle = new RouteDataBundle(resources);
-			routeRegion.writeToBundle(regionBundle);
-			regions.add(regionBundle);
-		}
-		bundle.putBundleList("regions", "r", regions);
+		bundle.putBundleList("types", "type", dataObjects);
 
 		GPXFile gpx = new GPXFile("OsmAnd");
 		gpx.author = OSMAND_ROUTER;

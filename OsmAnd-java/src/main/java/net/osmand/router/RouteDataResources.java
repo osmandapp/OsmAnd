@@ -1,23 +1,16 @@
 package net.osmand.router;
 
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
-import net.osmand.binary.RouteDataObject;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class RouteDataResources {
 
-	private List<RouteDataObject> routeDataObjects = new LinkedList<>();
-	private List<RouteRegion> routeRegions = new LinkedList<>();
+	private Map<RouteTypeRule, Integer> rules = new LinkedHashMap<>();
 
-	public List<RouteDataObject> getRouteDataObjects() {
-		return routeDataObjects;
+	public Map<RouteTypeRule, Integer> getRules() {
+		return rules;
 	}
 
-	public List<RouteRegion> getRouteRegions() {
-		return routeRegions;
-	}
 }

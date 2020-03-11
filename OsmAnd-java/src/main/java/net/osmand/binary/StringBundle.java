@@ -310,12 +310,26 @@ public class StringBundle {
 			return null;
 		}
 		StringBuilder b = new StringBuilder();
-		for (int[] value : a) {
-			if (b.length() > 0) {
+		for (int i = 0; i < a.length; i++) {
+			if (i > 0) {
 				b.append(";");
 			}
-			b.append(intArrayToString(value));
+			int[] arr = a[i];
+			if (arr != null && arr.length > 0) {
+				b.append(intArrayToString(arr));
+			}
 		}
+		/*
+		for (int i = 0; i < a.length; i++) {
+			int[] value = a[i];
+			if (value != null && value.length > 0) {
+				if (b.length() > 0) {
+					b.append(";");
+				}
+				b.append(i).append(":").append(intArrayToString(value));
+			}
+		}
+		*/
 		return b.toString();
 	}
 
@@ -323,6 +337,7 @@ public class StringBundle {
 		if (a == null) {
 			return null;
 		}
+		/*
 		String[] items = a.split(";");
 		int[][] res = new int[items.length][];
 		for (int i = 0; i < items.length; i++) {
@@ -332,7 +347,8 @@ public class StringBundle {
 				res[i][k] = Integer.parseInt(subItems[k]);
 			}
 		}
-		return res;
+		*/
+		return null;//res;
 	}
 
 	private String strArrayToString(String[] a) {
@@ -354,11 +370,14 @@ public class StringBundle {
 			return null;
 		}
 		StringBuilder b = new StringBuilder();
-		for (String[] value : a) {
-			if (b.length() > 0) {
-				b.append(0x1F);
+		for (int i = 0; i < a.length; i++) {
+			String[] value = a[i];
+			if (value != null && value.length > 0) {
+				if (b.length() > 0) {
+					b.append(0x1F);
+				}
+				b.append(String.valueOf(i)).append(":").append(strArrayToString(value));
 			}
-			b.append(strArrayToString(value));
 		}
 		return b.toString();
 	}
