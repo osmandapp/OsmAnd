@@ -3421,8 +3421,8 @@
     <string name="file_does_not_contain_routing_rules">Нет правил маршрутизации в \'%1$s\'. Пожалуйста, выберите другой файл.</string>
     <string name="permission_is_required">Для использования этой функции требуется разрешение.</string>
     <string name="monitoring_min_speed_descr">Это низкоскоростной фильтр отсечки, чтобы не записывать точки ниже определенной скорости. Это может сделать записанные треки более гладкими при просмотре на карте.</string>
-    <string name="rearrange_categories">Перегруппировка категорий</string>
-    <string name="create_custom_categories_list_promo">Вы можете добавить пользовательские категории, скрыть категории, которые вам не нужны, и изменить порядок сортировки списка. Список можно импортировать и экспортировать с помощью профилей.</string>
+    <string name="rearrange_categories">Упорядочить категории</string>
+    <string name="create_custom_categories_list_promo">Вы можете добавлять категории, скрыть те, которые вы не находите необходимыми и изменить порядок. Список может быть импортирован и экспортирован с профилями.</string>
     <string name="add_new_custom_category_button_promo">Вы можете добавить новую пользовательскую категорию, выбрав одну или несколько необходимых категорий.</string>
     <string name="reset_to_default_category_button_promo">Сброс к настройкам по умолчанию приведет к сбросу порядка сортировки к настройкам по умолчанию после установки.</string>
     <string name="add_custom_category">Добавить пользовательскую категорию</string>
