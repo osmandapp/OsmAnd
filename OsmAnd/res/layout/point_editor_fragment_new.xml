@@ -90,8 +90,10 @@
 									android:id="@+id/name_caption"
 									android:layout_width="0dp"
 									android:layout_height="wrap_content"
+									android:paddingTop="9dp"
 									android:hint="@string/shared_string_name"
 									android:layout_weight="1"
+									android:background="#4DCCCCCC"
 									app:errorColor="@color/color_invalid"
 									app:primaryColor="@color/active_color_primary_dark"
 									app:secondaryColor="?android:textColorSecondary">
@@ -100,13 +102,18 @@
 										android:id="@+id/name_edit"
 										android:layout_width="match_parent"
 										android:layout_height="wrap_content"
-										android:minHeight="60dp"
-										android:drawableRight="@drawable/btn_circle_transparent_full"
+										android:minHeight="50dp"
+										android:drawablePadding="50dp"
+										android:paddingLeft="12dp"
+										android:paddingRight="12dp"
 										android:inputType="textMultiLine"
 										android:maxLines="4"
 										android:scrollHorizontally="false"
 										android:textSize="16sp"
-										tools:text="@string/lorem_ipsum" />
+										tools:text="@string/lorem_ipsum"
+										android:drawableRight="@drawable/btn_circle_transparent_full"
+										android:drawableEnd="@drawable/btn_circle_transparent_full"
+										android:paddingStart="12dp" />
 
 								</com.google.android.material.textfield.TextInputLayout>
 
@@ -126,10 +133,12 @@
 								android:id="@+id/description_caption"
 								android:layout_width="0dp"
 								android:layout_height="wrap_content"
+								android:paddingTop="9dp"
 								android:layout_marginLeft="@dimen/list_content_padding"
 								android:layout_marginRight="@dimen/list_content_padding"
 								android:hint="@string/shared_string_description"
 								android:layout_weight="1"
+								android:background="#4DCCCCCC"
 								app:errorColor="@color/color_invalid"
 								app:primaryColor="@color/active_color_primary_dark"
 								app:secondaryColor="?android:textColorSecondary">
@@ -138,12 +147,15 @@
 									android:id="@+id/description_edit"
 									android:layout_width="match_parent"
 									android:layout_height="wrap_content"
-									android:minHeight="60dp"
+									android:minHeight="50dp"
 									android:inputType="textMultiLine"
 									android:maxLines="4"
 									android:scrollHorizontally="false"
 									android:textSize="16sp"
-									tools:text="@string/lorem_ipsum" />
+									android:paddingLeft="12dp"
+									android:paddingRight="12dp"
+									tools:text="@string/lorem_ipsum"
+									android:paddingStart="12dp" />
 
 							</com.google.android.material.textfield.TextInputLayout>
 						</LinearLayout>
@@ -210,7 +222,7 @@
 										android:letterSpacing="@dimen/text_button_letter_spacing"
 										android:maxLines="1"
 										android:text="@string/shared_string_list"
-										android:textColor="?attr/active_color_basic"
+										android:textColor="@color/preference_category_title"
 										android:textSize="@dimen/text_button_text_size"
 										osmand:typeface="@string/font_roboto_medium"
 										tools:ignore="UnusedAttribute" />
@@ -253,6 +265,8 @@
 						<View
 							android:layout_width="wrap_content"
 							android:layout_height="1dp"
+							android:layout_marginTop="8dp"
+							android:layout_marginBottom="8dp"
 							android:background="?attr/dashboard_divider" />
 
 						<net.osmand.plus.widgets.TextViewEx
@@ -260,7 +274,7 @@
 							android:layout_height="wrap_content"
 							android:letterSpacing="@dimen/description_letter_spacing"
 							android:paddingLeft="16dp"
-							android:paddingTop="14dp"
+							android:paddingTop="8dp"
 							android:paddingRight="16dp"
 							android:paddingBottom="14dp"
 							android:text="@string/select_icon_profile_dialog_title"
@@ -270,39 +284,82 @@
 
 						<net.osmand.plus.widgets.FlowLayout
 							android:id="@+id/select_icon"
-							android:layout_width="match_parent"
+							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_margin="4dp" />
+							android:layout_marginTop="6dp"
+							android:layout_marginLeft="13dp"
+							android:layout_marginStart="13dp" />
 
 						<View
 							android:layout_width="wrap_content"
 							android:layout_height="1dp"
+							android:layout_marginTop="8dp"
+							android:layout_marginBottom="8dp"
 							android:background="?attr/dashboard_divider" />
 
-						<net.osmand.plus.widgets.TextViewEx
+						<LinearLayout
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:letterSpacing="@dimen/description_letter_spacing"
-							android:paddingLeft="16dp"
-							android:paddingTop="14dp"
-							android:paddingRight="16dp"
-							android:paddingBottom="14dp"
-							android:text="@string/select_color"
-							android:textColor="?android:textColorSecondary"
-							android:textSize="@dimen/default_desc_text_size"
-							osmand:typeface="@string/font_roboto_regular" />
+							android:orientation="horizontal">
+
+							<net.osmand.plus.widgets.TextViewEx
+								android:layout_width="0dp"
+								android:layout_height="wrap_content"
+								android:layout_weight="1"
+								android:letterSpacing="@dimen/description_letter_spacing"
+								android:paddingLeft="16dp"
+								android:paddingTop="8dp"
+								android:paddingRight="16dp"
+								android:paddingBottom="14dp"
+								android:text="@string/select_color"
+								android:textColor="?android:textColorSecondary"
+								android:textSize="@dimen/default_desc_text_size"
+								osmand:typeface="@string/font_roboto_regular" />
+
+							<net.osmand.plus.widgets.TextViewEx
+								android:id="@+id/color_name"
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:letterSpacing="@dimen/description_letter_spacing"
+								android:paddingLeft="16dp"
+								android:paddingTop="8dp"
+								android:paddingRight="16dp"
+								android:paddingBottom="14dp"
+								android:gravity="end"
+								android:text="@string/select_color"
+								android:textColor="?android:textColorSecondary"
+								android:textSize="@dimen/default_desc_text_size"
+								osmand:typeface="@string/font_roboto_regular" />
+						</LinearLayout>
+
+						<net.osmand.plus.widgets.FlowLayout
+							android:id="@+id/select_color"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="6dp"
+							android:layout_marginLeft="13dp"
+							android:layout_marginStart="13dp" />
+
 
 						<View
 							android:layout_width="wrap_content"
 							android:layout_height="1dp"
+							android:layout_marginTop="8dp"
+							android:layout_marginBottom="8dp"
 							android:background="?attr/dashboard_divider" />
 
-						<net.osmand.plus.widgets.TextViewEx
+						<LinearLayout
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
+							android:orientation="horizontal">
+
+						<net.osmand.plus.widgets.TextViewEx
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
 							android:letterSpacing="@dimen/description_letter_spacing"
 							android:paddingLeft="16dp"
-							android:paddingTop="14dp"
+							android:paddingTop="8dp"
 							android:paddingRight="16dp"
 							android:paddingBottom="14dp"
 							android:text="@string/select_shape"
@@ -310,9 +367,35 @@
 							android:textSize="@dimen/default_desc_text_size"
 							osmand:typeface="@string/font_roboto_regular" />
 
+						<net.osmand.plus.widgets.TextViewEx
+							android:id="@+id/shape_name"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:letterSpacing="@dimen/description_letter_spacing"
+							android:paddingLeft="16dp"
+							android:paddingTop="8dp"
+							android:paddingRight="16dp"
+							android:paddingBottom="14dp"
+							android:gravity="end"
+							android:text="@string/select_shape"
+							android:textColor="?android:textColorSecondary"
+							android:textSize="@dimen/default_desc_text_size"
+							osmand:typeface="@string/font_roboto_regular" />
+					</LinearLayout>
+
+						<net.osmand.plus.widgets.FlowLayout
+							android:id="@+id/select_shape"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="6dp"
+							android:layout_marginLeft="13dp"
+							android:layout_marginStart="13dp" />
+
 						<View
 							android:layout_width="wrap_content"
 							android:layout_height="1dp"
+							android:layout_marginTop="8dp"
+							android:layout_marginBottom="8dp"
 							android:background="?attr/dashboard_divider" />
 
 						<LinearLayout

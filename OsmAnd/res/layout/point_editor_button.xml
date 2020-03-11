@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:paddingBottom="6dp"
+	android:paddingRight="11dp"
+	android:paddingLeft="0dp"
+	android:paddingEnd="11dp"
+	android:paddingStart="0dp">
+
+	<ImageView
+		android:id="@+id/outline"
+		android:layout_width="46dp"
+		android:layout_height="46dp"
+		android:visibility="invisible"
+		app:srcCompat="@drawable/circle_contour_bg_light" />
+
+	<ImageView
+		android:id="@+id/background"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_margin="3dp"
+		android:background="@drawable/bg_point_circle" />
+
+	<ImageView
+		android:id="@+id/icon"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_margin="11dp"
+		android:clickable="false"
+		android:visibility="gone"
+		app:srcCompat="@drawable/mx_special_star_stroked"/>
+</FrameLayout>

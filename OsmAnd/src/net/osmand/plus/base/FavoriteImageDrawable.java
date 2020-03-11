@@ -60,7 +60,7 @@ public class FavoriteImageDrawable extends Drawable {
 		int col = color == 0 || color == Color.BLACK ? res.getColor(R.color.color_favorite) : color;
 		uiListIcon = ((OsmandApplication) ctx.getApplicationContext()).getUIUtilities()
 				.getIcon(uiIconId, R.color.color_white);
-		int uiBackgroundIconId = point != null ? point.getBackType().getIconId() : R.drawable.bg_point_circle;
+		int uiBackgroundIconId = point != null ? point.getBackgroundType().getIconId() : R.drawable.bg_point_circle;
 		uiBackgroundIcon = ((OsmandApplication) ctx.getApplicationContext()).getUIUtilities()
 				.getPaintedIcon(uiBackgroundIconId, col);
 		int mapBackgroundIconIdTop = getMapBackIconId(ctx, point, "top");
@@ -85,7 +85,7 @@ public class FavoriteImageDrawable extends Drawable {
 
 	private int getMapBackIconId(Context ctx, FavouritePoint point, String layer) {
 		if (point != null) {
-			int iconId = point.getBackType().getIconId();
+			int iconId = point.getBackgroundType().getIconId();
 			String iconName = ctx.getResources().getResourceEntryName(iconId);
 			return ctx.getResources().getIdentifier("map_" + iconName + "_" + layer
 					, "drawable", ctx.getPackageName());
@@ -172,7 +172,7 @@ public class FavoriteImageDrawable extends Drawable {
 		String uniqueId = "";
 		if (point != null) {
 			uniqueId = point.getIconEntryName(ctx);
-			uniqueId += point.getBackType().name();
+			uniqueId += point.getBackgroundType().name();
 		}
 		color = color | 0xff000000;
 		int hash = (color << 4) + ((withShadow ? 1 : 0) << 2) + ((synced ? 3 : 0) << 2);

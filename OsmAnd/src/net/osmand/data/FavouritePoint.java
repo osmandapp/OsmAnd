@@ -31,7 +31,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	private int color;
 	private boolean visible = true;
 	private SpecialPointType specialPointType = null;
-	private BackType backType = null;
+	private BackgroundType backgroundType = null;
 
 	public FavouritePoint() {
 	}
@@ -58,7 +58,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.originObjectName = favouritePoint.originObjectName;
 		this.address = favouritePoint.address;
 		this.iconId = favouritePoint.iconId;
-		this.backType = favouritePoint.backType;
+		this.backgroundType = favouritePoint.backgroundType;
 		initPersonalType();
 	}
 
@@ -199,15 +199,15 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.description = description;
 	}
 
-	public BackType getBackType() {
-		if (backType == null) {
-			return BackType.CIRCLE;
+	public BackgroundType getBackgroundType() {
+		if (backgroundType == null) {
+			return BackgroundType.CIRCLE;
 		}
-		return backType;
+		return backgroundType;
 	}
 
-	private void setBackType(BackType backType) {
-		this.backType = backType;
+	private void setBackgroundType(BackgroundType backgroundType) {
+		this.backgroundType = backgroundType;
 	}
 
 	@NonNull
@@ -298,16 +298,16 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		}
 	}
 
-	public enum BackType {
+	public enum BackgroundType {
 		CIRCLE("circle", R.drawable.bg_point_circle),
 		RHOMB("rhomb", R.drawable.bg_point_rhomb),
-		SQUARE("sqare", R.drawable.bg_point_square);
+		SQUARE("square", R.drawable.bg_point_square);
 
 		private String typeName;
 		@StringRes
 		private int iconId;
 
-		BackType(@NonNull String typeName, @DrawableRes int iconId) {
+		BackgroundType(@NonNull String typeName, @DrawableRes int iconId) {
 			this.typeName = typeName;
 			this.iconId = iconId;
 		}
@@ -336,7 +336,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		if (iconName != null) {
 			fp.setIconIdFromName(ctx, iconName);
 		}
-		fp.setBackType(BackType.valueOf((pt.getBackType().toUpperCase())));
+		fp.setBackgroundType(BackgroundType.valueOf((pt.getBackType().toUpperCase())));
 		return fp;
 	}
 
@@ -353,8 +353,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		if (iconId != 0) {
 			pt.setIconName(getIconEntryName(ctx).substring(3));
 		}
-		if(backType != null) {
-			pt.setBackType(backType.typeName);
+		if(backgroundType != null) {
+			pt.setBackType(backgroundType.typeName);
 		}
 		if (getColor() != 0) {
 			pt.setColor(getColor());

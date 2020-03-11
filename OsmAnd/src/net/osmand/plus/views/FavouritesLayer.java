@@ -66,10 +66,10 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 		mapMarkersHelper = view.getApplication().getMapMarkersHelper();
 		textLayer = view.getLayerByClass(MapTextLayer.class);
 		paintIcon = new Paint();
-		for (FavouritePoint.BackType backType : FavouritePoint.BackType.values()) {
-			putBitmap(backType, "top");
-			putBitmap(backType, "center");
-			putBitmap(backType, "bottom");
+		for (FavouritePoint.BackgroundType backgroundType : FavouritePoint.BackgroundType.values()) {
+			putBitmap(backgroundType, "top");
+			putBitmap(backgroundType, "center");
+			putBitmap(backgroundType, "bottom");
 		}
 		pointSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_shield_small);
 		defaultColor = ContextCompat.getColor(view.getContext(), R.color.color_favorite);
@@ -77,9 +77,9 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 	}
 
-	private void putBitmap(FavouritePoint.BackType backType, String bottom) {
-		smallIconCache.put(backType.name() + bottom, BitmapFactory.decodeResource(view.getResources(),
-				getSmallIconID(bottom, backType.getIconId())));
+	private void putBitmap(FavouritePoint.BackgroundType backgroundType, String bottom) {
+		smallIconCache.put(backgroundType.name() + bottom, BitmapFactory.decodeResource(view.getResources(),
+				getSmallIconID(bottom, backgroundType.getIconId())));
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
@@ -182,7 +182,7 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 	}
 
 	private Bitmap getBitmap(FavouritePoint o, String layer) {
-		Bitmap pointSmall = smallIconCache.get(o.getBackType().name() + layer);
+		Bitmap pointSmall = smallIconCache.get(o.getBackgroundType().name() + layer);
 		if (pointSmall == null) {
 			pointSmall = this.pointSmall;
 		}
