@@ -3568,4 +3568,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="import_rendering_file">Importowanie pliku renderowania</string>
     <string name="restore_all_profile_settings">Przywrócić wszystkie ustawienia profilu\?</string>
     <string name="saving_new_profile">Zapisywanie nowego profilu</string>
+    <string name="restore_all_profile_settings_descr">Wszystkie ustawienia profilu zostaną przywrócone do pierwotnego stanu po utworzeniu/zaimportowaniu tego profilu.</string>
+    <string name="profile_backup_failed">Nie można utworzyć kopii zapasowej profilu.</string>
 </resources>
