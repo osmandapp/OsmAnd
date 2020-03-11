@@ -176,7 +176,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			TextView title = (TextView) searchView.findViewById(R.id.title);
 			Drawable searchIcon = getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_search_dark);
 			AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(title, searchIcon, null, null, null);
-			title.setHint(R.string.shared_string_search);
 			searchView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

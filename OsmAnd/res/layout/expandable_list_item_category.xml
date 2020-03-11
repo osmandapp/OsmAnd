@@ -52,7 +52,7 @@
             android:textSize="@dimen/default_list_text_size"
             osmand:typeface="@string/font_roboto_medium"
             tools:text="Category name"
-	        android:layout_marginStart="@dimen/list_content_padding" />
+            android:layout_marginStart="@dimen/list_content_padding" />
 
         <ImageView
             android:id="@+id/options"
@@ -67,7 +67,7 @@
             android:src="@drawable/ic_overflow_menu_white"
             android:visibility="gone"
             tools:visiblity="visible"
-	        android:layout_marginEnd="4dp" />
+            android:layout_marginEnd="4dp" />
 
         <ImageView
             android:id="@+id/explist_indicator"
@@ -76,7 +76,7 @@
             android:scaleType="center"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="@dimen/list_content_padding"
-	        android:layout_marginEnd="@dimen/list_content_padding" />
+            android:layout_marginEnd="@dimen/list_content_padding" />
 
     </LinearLayout>
 

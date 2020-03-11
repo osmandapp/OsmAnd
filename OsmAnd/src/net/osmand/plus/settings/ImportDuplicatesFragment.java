@@ -1,5 +1,6 @@
 package net.osmand.plus.settings;
 
+import android.graphics.drawable.Drawable;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;

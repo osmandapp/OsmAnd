@@ -331,21 +331,18 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 		@Override
 		public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 			LayoutInflater inflater = UiUtilities.getInflater(viewGroup.getContext(), nightMode);
-			View itemView;
-			RecyclerView.ViewHolder viewHolder;
 			if (viewType == INFO_TYPE) {
-				itemView = inflater.inflate(R.layout.bottom_sheet_item_description_long, viewGroup, false);
-				viewHolder = new InfoViewHolder(itemView);
+				View itemView = inflater.inflate(R.layout.bottom_sheet_item_description_long, viewGroup, false);
+				return new InfoViewHolder(itemView);
 			} else if (viewType == PROFILE_EDIT_TYPE) {
-				itemView = inflater.inflate(R.layout.profile_edit_list_item, viewGroup, false);
-				viewHolder = new ProfileViewHolder(itemView);
+				View itemView = inflater.inflate(R.layout.profile_edit_list_item, viewGroup, false);
+				return new ProfileViewHolder(itemView);
 			} else if (viewType == CATEGORY_TYPE) {
-				itemView = inflater.inflate(R.layout.simple_category_item, viewGroup, false);
-				viewHolder = new CategoryViewHolder(itemView);
+				View itemView = inflater.inflate(R.layout.simple_category_item, viewGroup, false);
+				return new CategoryViewHolder(itemView);
 			} else {
 				throw new IllegalArgumentException("Unsupported view type");
 			}
-			return viewHolder;
 		}
 
 		@SuppressLint("ClickableViewAccessibility")

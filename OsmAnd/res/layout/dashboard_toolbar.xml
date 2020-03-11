@@ -38,7 +38,6 @@
                 android:contentDescription="@string/backToMenu"
                 android:layout_width="@dimen/list_item_height"
                 android:layout_height="match_parent"
-                android:layout_gravity="start"
                 android:background="@drawable/dashboard_button_light"
                 android:scaleType="center"
                 android:src="@drawable/ic_navigation_drawer"

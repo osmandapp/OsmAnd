@@ -1,6 +1,7 @@
 package net.osmand.plus.activities;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -50,7 +52,9 @@ public abstract class ActionBarPreferenceActivity extends AppCompatPreferenceAct
 		}
 		tb.setClickable(true);
 		int activeButtonsAndLinksTextColorResId = lightTheme ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
-		tb.setNavigationIcon(((OsmandApplication) getApplication()).getUIUtilities().getIcon(R.drawable.ic_arrow_back, activeButtonsAndLinksTextColorResId));
+		int navigationIconResId = AndroidUtils.getNavigationIconResId(getApplication());
+		Drawable icBack = ((OsmandApplication) getApplication()).getUIUtilities().getIcon(navigationIconResId, activeButtonsAndLinksTextColorResId);
+		tb.setNavigationIcon(icBack);
 		tb.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		tb.setBackgroundColor(getResources().getColor(getResIdFromAttribute(this, R.attr.pstsTabBackground)));
 		tb.setTitleTextColor(getResources().getColor(getResIdFromAttribute(this, R.attr.pstsTextColor)));

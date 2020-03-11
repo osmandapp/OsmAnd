@@ -54,17 +54,17 @@
                 android:focusable="false"
                 android:gravity="center_vertical"
                 android:visibility="gone"
-                tools:visibility="visible" />
+                tools:visibility="visible"/>
 
             <!-- android:button="@drawable/ic_btn_wocheckbox" -->
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/toggle_item"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginEnd="24dp"
                 android:layout_marginRight="24dp"
+                android:layout_marginEnd="24dp"
                 android:focusable="false"
+                android:layout_gravity="center"
                 app:buttonTint="?attr/active_color_basic" />
 
         </LinearLayout>
