@@ -127,7 +127,7 @@
     <string name="choose_auto_follow_route_descr">Zadejte interval pro automatický návrat mapy na vaši pozici.</string>
     <string name="auto_follow_route_navigation">Automatické sledování pozice</string>
     <string name="auto_follow_route_navigation_descr">Zapnout automatické sledování pozice pouze v režimu navigace.</string>
-    <string name="auto_follow_location_enabled">Automatické sledování pozice je zapnuto.</string>
+    <string name="auto_follow_location_enabled">Automatické centrování je zapnuto.</string>
     <string name="pref_vector_rendering">Nastavení vektorového vykreslovače</string>
     <string name="pref_overlay">Překryvná/podkresová vrstva</string>
     <string name="pref_raster_map">Nastavení zdroje mapy</string>
@@ -650,7 +650,7 @@
     <string name="left_side_navigation_descr">Pro země, kde se jezdí po levé straně cesty.</string>
     <string name="unknown_from_location">Startovní bod navigace není ještě zvolen</string>
     <string name="confirm_interrupt_download">Přerušit stahování souboru\?</string>
-    <string name="basemap_was_selected_to_download">Základní mapa byla vybrána ke stažení, pro správnou funkci aplikace.</string>
+    <string name="basemap_was_selected_to_download">Základní mapa byla vybrána ke stažení. Je potřeba pro správnou funkci aplikace.</string>
     <string name="map_online_plugin_is_not_installed">Pro výběr různých zdrojů map povolte modul \'Online mapy\'</string>
     <string name="map_online_data">On-line mapy a dlaždice</string>
     <string name="map_online_data_descr">Používat on-line mapy (ukládat dlaždice do mezipaměti na paměťové kartě).</string>
@@ -1379,7 +1379,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="rendering_attr_roadStyle_name">Styl cesty</string>
     <string name="rendering_value_default_name">Výchozí</string>
     <string name="rendering_value_orange_name">Oranžová</string>
-    <string name="rendering_value_germanRoadAtlas_name">Německý Atlas cest</string>
+    <string name="rendering_value_germanRoadAtlas_name">Německý atlas cest</string>
     <string name="traffic_warning_railways">Železniční přejezd</string>
     <string name="traffic_warning_pedestrian">Přechod pro chodce</string>
     <string name="show_railway_warnings">Železniční přejezdy</string>
@@ -2274,7 +2274,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="analyze_on_map">Analyzovat na mapě</string>
     <string name="shared_string_visible">Viditelné</string>
     <string name="shared_string_paused">Pozastaveno</string>
-    <string name="route_is_too_long_v2">Pro velká vzdálenosti: Pokud do 10 minut nebude nalezena trasa, přidejte prosím na trasu mezicíle.</string>
+    <string name="route_is_too_long_v2">Pro velké vzdálenosti: Pokud do 10 minut nebude nalezena trasa, přidejte prosím na trasu mezicíle.</string>
     <string name="save_poi_too_many_uppercase">Název obsahuje příliš mnoho velkých písmen. Pokračovat\?</string>
     <string name="mapillary">Mapillary</string>
     <string name="private_access_routing_req">Váš cíl se nachází v oblasti se soukromým přístupem. Povolit vstup na soukromé pozemky pro tuto cestu?</string>
@@ -2939,10 +2939,10 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="use_osm_live_public_transport">Hromadná doprava z OsmAnd Live</string>
     <string name="by_transport_type">Pomocí %1$s</string>
     <string name="sit_on_the_stop">Nastupte na zastávce</string>
-    <string name="public_transport_warning_descr_blog">Dozvědět se na našem blogu více o tom, jak OsmAnd vypočítává trasy.</string>
+    <string name="public_transport_warning_descr_blog">Zjistěte více o výpočtu trasy v OsmAnd na našem blogu.</string>
     <string name="public_transport_warning_title">Navigace pomocí veřejné dopravy je v současné době v beta testování, očekávejte chyby a nepřesnosti.</string>
     <string name="add_intermediate">Přidat mezicíl</string>
-    <string name="avoid_pt_types_descr">Vyberte typy veřejné dopravy které se chcete vyhnout při navigaci:</string>
+    <string name="avoid_pt_types_descr">Vyberte typy veřejné dopravy, kterým se chcete při navigaci vyhnout:</string>
     <string name="quick_action_day_night_mode">%s režim</string>
     <string name="avoid_pt_types">Vyhněte se typům dopravy…</string>
     <string name="shared_string_walk">Chůze</string>
