@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="clear_recorded_data_warning">Are you sure you want to clear recorded data?</string>
     <string name="restore_all_profile_settings_descr">All profile settings will be restored to their original state after creating/importing this profile.</string>
     <string name="restore_all_profile_settings">Restore all profile settings?</string>
     <string name="saving_new_profile">Saving new profile</string>

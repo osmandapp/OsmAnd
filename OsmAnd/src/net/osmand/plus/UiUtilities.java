@@ -386,11 +386,6 @@ public class UiUtilities {
 		int rotation = layoutDirection == View.LAYOUT_DIRECTION_LTR ? 0 : 180;
 		image.setRotationY(rotation);
 	}
-	
-	public static void setupLayoutDirection(View layout) {
-		int direction = AndroidUtils.getLayoutDirection(layout.getContext());
-		ViewCompat.setLayoutDirection(layout, direction);
-	}
 
 	public static void setupCompoundButtonDrawable(Context ctx, boolean nightMode, @ColorInt int activeColor, Drawable drawable) {
 		int inactiveColor = ContextCompat.getColor(ctx, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);

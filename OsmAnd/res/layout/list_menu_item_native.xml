@@ -13,43 +13,62 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
         android:gravity="center"
         android:visibility="gone"
-        tools:visibility="visible"
-	    android:layout_marginStart="24dp" />
+        tools:visibility="visible" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/title"
+    <FrameLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="11dip"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/content_padding_small"
         android:layout_marginLeft="@dimen/content_padding_small"
-        android:layout_marginTop="11dp"
-        android:layout_weight="1"
-        android:gravity="center_vertical"
-        android:text="@string/layer_poi"
-        android:textColor="?android:textColorPrimary"
-        android:textSize="@dimen/default_list_text_size"
-	    android:layout_marginStart="@dimen/content_padding_small" />
+        android:layout_marginTop="@dimen/content_padding_small"
+        android:layout_marginBottom="@dimen/content_padding_small"
+        android:layout_weight="1">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/icon_settings"
-        android:contentDescription="@string/shared_string_settings"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:focusable="false"
-        android:gravity="center_vertical"
-        android:visibility="gone"
-        tools:visibility="visible"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|start"
+            android:gravity="center_vertical|start"
+            android:layout_marginRight="52dp"
+            android:layout_marginEnd="52dp"
+            android:text="@string/layer_poi"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/default_list_text_size" />
 
-    <!-- android:button="@drawable/ic_btn_wocheckbox" -->
-    <androidx.appcompat.widget.AppCompatCheckBox
-        android:id="@+id/toggle_item"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginRight="24dp"
-        android:layout_marginEnd="24dp"
-        android:focusable="false"
-        app:buttonTint="?attr/active_color_basic" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon_settings"
+                android:contentDescription="@string/shared_string_settings"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:focusable="false"
+                android:gravity="center_vertical"
+                android:visibility="gone"
+                tools:visibility="visible"/>
+
+            <!-- android:button="@drawable/ic_btn_wocheckbox" -->
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/toggle_item"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="24dp"
+                android:layout_marginEnd="24dp"
+                android:focusable="false"
+                android:layout_gravity="center"
+                app:buttonTint="?attr/active_color_basic" />
+
+        </LinearLayout>
+
+    </FrameLayout>
 
 </LinearLayout>
