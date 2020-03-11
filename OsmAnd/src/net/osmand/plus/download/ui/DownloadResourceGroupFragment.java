@@ -534,20 +534,20 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		}
 
 		private Drawable getIconForGroup(DownloadResourceGroup group) {
-			Drawable iconStart;
+			Drawable iconLeft;
 			if (group.getType() == DownloadResourceGroupType.VOICE_REC
 					|| group.getType() == DownloadResourceGroupType.VOICE_TTS) {
-				iconStart = ctx.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_volume_up);
+				iconLeft = ctx.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_volume_up);
 			} else if (group.getType() == DownloadResourceGroupType.FONTS) {
-				iconStart = ctx.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_map_language);
+				iconLeft = ctx.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_map_language);
 			} else {
 				UiUtilities cache = ctx.getMyApplication().getUIUtilities();
 				if (isParentWorld(group) || isParentWorld(group.getParentGroup())) {
-					iconStart = cache.getThemedIcon(R.drawable.ic_world_globe_dark);
+					iconLeft = cache.getThemedIcon(R.drawable.ic_world_globe_dark);
 				} else {
 					DownloadResourceGroup ggr = group
 							.getSubGroupById(DownloadResourceGroupType.REGION_MAPS.getDefaultId());
-					iconStart = cache.getThemedIcon(R.drawable.ic_map);
+					iconLeft = cache.getThemedIcon(R.drawable.ic_map);
 					if (ggr != null && ggr.getIndividualResources() != null) {
 						IndexItem item = null;
 						for (IndexItem ii : ggr.getIndividualResources()) {
@@ -561,22 +561,22 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 						}
 						if (item != null) {
 							if (item.isOutdated()) {
-								iconStart = cache.getIcon(R.drawable.ic_map, R.color.color_distance);
+								iconLeft = cache.getIcon(R.drawable.ic_map, R.color.color_distance);
 							} else {
-								iconStart = cache.getIcon(R.drawable.ic_map, R.color.color_ok);
+								iconLeft = cache.getIcon(R.drawable.ic_map, R.color.color_ok);
 							}
 						}
 					}
 				}
 			}
-			return iconStart;
+			return iconLeft;
 		}
 
 		public void bindItem(DownloadResourceGroup group) {
+			Drawable iconLeft = getIconForGroup(group);
+			textView.setCompoundDrawablesWithIntrinsicBounds(iconLeft, null, null, null);
 			String name = group.getName(ctx);
 			textView.setText(name);
-			Drawable iconStart = getIconForGroup(group);
-			AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(textView, iconStart, null, null, null);
 		}
 	}
 

@@ -562,7 +562,7 @@ public class MenuBuilder {
 
 			ImageView iconView = new ImageView(view.getContext());
 			LinearLayout.LayoutParams llIconParams = new LinearLayout.LayoutParams(dpToPx(24f), dpToPx(24f));
-			AndroidUtils.setMargins(llIconParams, dpToPx(16f), dpToPx(12f), dpToPx(24f), dpToPx(12f));
+			llIconParams.setMargins(dpToPx(16f), dpToPx(12f), dpToPx(24f), dpToPx(12f));
 			llIconParams.gravity = Gravity.CENTER_VERTICAL;
 			iconView.setLayoutParams(llIconParams);
 			iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
@@ -575,7 +575,7 @@ public class MenuBuilder {
 		llText.setOrientation(LinearLayout.VERTICAL);
 		LinearLayout.LayoutParams llTextViewParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
 		llTextViewParams.weight = 1f;
-		AndroidUtils.setMargins(llTextViewParams, 0, 0, dpToPx(10f), 0);
+		llTextViewParams.setMargins(0, 0, dpToPx(10f), 0);
 		llTextViewParams.gravity = Gravity.CENTER_VERTICAL;
 		llText.setLayoutParams(llTextViewParams);
 		ll.addView(llText);
@@ -584,7 +584,7 @@ public class MenuBuilder {
 		if (!Algorithms.isEmpty(textPrefix)) {
 			textPrefixView = new TextViewEx(view.getContext());
 			LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-			AndroidUtils.setMargins(llTextParams, icon == null ? dpToPx(16f) : 0, dpToPx(8f), 0, 0);
+			llTextParams.setMargins(icon == null ? dpToPx(16f) : 0, dpToPx(8f), 0, 0);
 			textPrefixView.setLayoutParams(llTextParams);
 			textPrefixView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
 			textPrefixView.setTextSize(12);
@@ -598,8 +598,7 @@ public class MenuBuilder {
 		// Primary text
 		TextViewEx textView = new TextViewEx(view.getContext());
 		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		AndroidUtils.setMargins(llTextParams,
-				icon != null ? 0 : dpToPx(16f), dpToPx(textPrefixView != null ? 2f : (secondaryText != null ? 10f : 8f)), 0, dpToPx(secondaryText != null ? 6f : 8f));
+		llTextParams.setMargins(icon != null ? 0 : dpToPx(16f), dpToPx(textPrefixView != null ? 2f : (secondaryText != null ? 10f : 8f)), 0, dpToPx(secondaryText != null ? 6f : 8f));
 		textView.setLayoutParams(llTextParams);
 		textView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
 		textView.setTextSize(16);
@@ -630,7 +629,7 @@ public class MenuBuilder {
 		if (!TextUtils.isEmpty(secondaryText)) {
 			TextViewEx textViewSecondary = new TextViewEx(view.getContext());
 			LinearLayout.LayoutParams llTextSecondaryParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-			AndroidUtils.setMargins(llTextSecondaryParams, icon != null ? 0 : dpToPx(16f), 0, 0, dpToPx(6f));
+			llTextSecondaryParams.setMargins(icon != null ? 0 : dpToPx(16f), 0, 0, dpToPx(6f));
 			textViewSecondary.setLayoutParams(llTextSecondaryParams);
 			textViewSecondary.setTypeface(FontCache.getRobotoRegular(view.getContext()));
 			textViewSecondary.setTextSize(14);
@@ -644,7 +643,7 @@ public class MenuBuilder {
 			TextViewEx buttonTextView = new TextViewEx(view.getContext());
 			LinearLayout.LayoutParams buttonTextViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 			buttonTextViewParams.gravity = Gravity.CENTER_VERTICAL;
-			AndroidUtils.setMargins(buttonTextViewParams, dpToPx(8), 0, dpToPx(8), 0);
+			buttonTextViewParams.setMargins(dpToPx(8), 0, dpToPx(8), 0);
 			buttonTextView.setLayoutParams(buttonTextViewParams);
 			buttonTextView.setTypeface(FontCache.getRobotoMedium(view.getContext()));
 			buttonTextView.setAllCaps(true);
@@ -663,7 +662,7 @@ public class MenuBuilder {
 			ll.addView(llIconCollapse);
 
 			LinearLayout.LayoutParams llIconCollapseParams = new LinearLayout.LayoutParams(dpToPx(24f), dpToPx(24f));
-			AndroidUtils.setMargins(llIconCollapseParams, 0, dpToPx(12f), dpToPx(24f), dpToPx(12f));
+			llIconCollapseParams.setMargins(0, dpToPx(12f), dpToPx(24f), dpToPx(12f));
 			llIconCollapseParams.gravity = Gravity.CENTER_VERTICAL;
 			iconViewCollapse.setLayoutParams(llIconCollapseParams);
 			iconViewCollapse.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
@@ -828,7 +827,7 @@ public class MenuBuilder {
 		Button buttonView = new Button(view.getContext());
 		LinearLayout.LayoutParams llBtnParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		buttonView.setLayoutParams(llBtnParams);
-		AndroidUtils.setPadding(buttonView, dpToPx(10f), 0, dpToPx(10f), 0);
+		buttonView.setPadding(dpToPx(10f), 0, dpToPx(10f), 0);
 		buttonView.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
 		//buttonView.setTextSize(view.getResources().getDimension(resolveAttribute(view.getContext(), R.dimen.default_desc_text_size)));
 		buttonView.setTextColor(view.getResources().getColor(AndroidUtils.resolveAttribute(view.getContext(), R.attr.contextMenuButtonColor)));
@@ -852,7 +851,7 @@ public class MenuBuilder {
 		LinearLayout.LayoutParams llHorLineParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(1f));
 		llHorLineParams.gravity = Gravity.BOTTOM;
 		if (!matchWidthDivider) {
-			AndroidUtils.setMargins(llHorLineParams, dpToPx(64f), 0, 0, 0);
+			llHorLineParams.setMargins(dpToPx(64f), 0, 0, 0);
 		}
 		horizontalLine.setLayoutParams(llHorLineParams);
 		horizontalLine.setBackgroundColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_divider_light : R.color.ctx_menu_bottom_view_divider_dark));
@@ -916,12 +915,12 @@ public class MenuBuilder {
 		baseView.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams llBaseViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 		baseView.setLayoutParams(llBaseViewParams);
-		AndroidUtils.setPadding(baseView, dpToPx(16), 0, dpToPx(16), dpToPx(12));
+		baseView.setPadding(dpToPx(16), 0, dpToPx(16), dpToPx(12));
 		baseView.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
 
 		TextViewEx transportRect = new TextViewEx(view.getContext());
 		LinearLayout.LayoutParams trParams = new LinearLayout.LayoutParams(dpToPx(32), dpToPx(18));
-		AndroidUtils.setMargins(trParams, 0, dpToPx(16), 0, 0);
+		trParams.setMargins(0, dpToPx(16), 0, 0);
 		transportRect.setLayoutParams(trParams);
 		transportRect.setGravity(Gravity.CENTER);
 		transportRect.setAllCaps(true);
@@ -944,7 +943,7 @@ public class MenuBuilder {
 		LinearLayout infoView = new LinearLayout(view.getContext());
 		infoView.setOrientation(LinearLayout.VERTICAL);
 		LinearLayout.LayoutParams infoViewLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		AndroidUtils.setMargins(infoViewLayoutParams, dpToPx(16), dpToPx(12), dpToPx(16), 0);
+		infoViewLayoutParams.setMargins(dpToPx(16), dpToPx(12), dpToPx(16), 0);
 		infoView.setLayoutParams(infoViewLayoutParams);
 		baseView.addView(infoView);
 
@@ -963,14 +962,14 @@ public class MenuBuilder {
 		LinearLayout typeView = new LinearLayout(view.getContext());
 		typeView.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams typeViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		AndroidUtils.setMargins(typeViewParams, 0, dpToPx(8), 0, 0);
+		typeViewParams.setMargins(0, dpToPx(8), 0, 0);
 		typeView.setGravity(Gravity.CENTER);
 		typeView.setLayoutParams(typeViewParams);
 		infoView.addView(typeView);
 
 		ImageView typeImageView = new ImageView(view.getContext());
 		LinearLayout.LayoutParams typeImageParams = new LinearLayout.LayoutParams(dpToPx(16), dpToPx(16));
-		AndroidUtils.setMargins(typeImageParams, dpToPx(4), 0, dpToPx(4), 0);
+		typeImageParams.setMargins(dpToPx(4), 0, dpToPx(4), 0);
 		typeImageView.setLayoutParams(typeImageParams);
 		int drawableResId = route.type == null ? R.drawable.ic_action_polygom_dark : route.type.getResourceId();
 		typeImageView.setImageDrawable(getRowIcon(drawableResId));
@@ -1038,7 +1037,7 @@ public class MenuBuilder {
 		final TextViewEx textView = new TextViewEx(context);
 		textView.setVisibility(collapsed ? View.GONE : View.VISIBLE);
 		LinearLayout.LayoutParams llTextDescParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		AndroidUtils.setMargins(llTextDescParams, dpToPx(64f), 0, dpToPx(40f), dpToPx(13f));
+		llTextDescParams.setMargins(dpToPx(64f), 0, dpToPx(40f), dpToPx(13f));
 		textView.setLayoutParams(llTextDescParams);
 		textView.setTypeface(FontCache.getRobotoRegular(context));
 		textView.setTextSize(16);
@@ -1075,7 +1074,7 @@ public class MenuBuilder {
 		view.setVisibility(collapsed ? View.GONE : View.VISIBLE);
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		if (needMargin) {
-			AndroidUtils.setMargins(llParams, dpToPx(64f), 0, dpToPx(12f), 0);
+			llParams.setMargins(dpToPx(64f), 0, dpToPx(12f), 0);
 		}
 		view.setLayoutParams(llParams);
 		return view;
@@ -1088,7 +1087,7 @@ public class MenuBuilder {
 	protected TextViewEx buildButtonInCollapsableView(Context context, boolean selected, boolean showAll, boolean singleLine) {
 		TextViewEx button = new TextViewEx(new ContextThemeWrapper(context, light ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme));
 		LinearLayout.LayoutParams llWikiButtonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		AndroidUtils.setMargins(llWikiButtonParams, 0, 0, 0, dpToPx(8f));
+		llWikiButtonParams.setMargins(0, 0, 0, dpToPx(8f));
 		//button.setMinimumHeight(dpToPx(36f));
 		button.setLayoutParams(llWikiButtonParams);
 		button.setTypeface(FontCache.getRobotoRegular(context));
@@ -1103,7 +1102,7 @@ public class MenuBuilder {
 		button.setBackgroundResource(bg);
 		button.setTextSize(14);
 		int paddingSides = dpToPx(10f);
-		AndroidUtils.setPadding(button, paddingSides, paddingSides, paddingSides, paddingSides);
+		button.setPadding(paddingSides, paddingSides, paddingSides, paddingSides);
 		if (!selected) {
 			ColorStateList buttonColorStateList = AndroidUtils.createPressedColorStateList(context, !light,
 					R.color.ctx_menu_controller_button_text_color_light_n, R.color.ctx_menu_controller_button_text_color_light_p,
