@@ -3791,4 +3791,19 @@
     <string name="poi_resort_hunting">Ambona łowiecka</string>
     <string name="poi_dive_centre">Centrum nurkowania</string>
     <string name="poi_mountain_rescue">Ratownictwo górskie</string>
+    <string name="poi_monastery_type_clerks_regular">Typ klasztoru: urzędnicy regularni</string>
+    <string name="poi_sms">SMS</string>
+    <string name="poi_video_telephone">Video</string>
+    <string name="poi_sms_yes">Tak</string>
+    <string name="poi_sms_no">Nie</string>
+    <string name="poi_video_yes">Tak</string>
+    <string name="poi_video_no">Nie</string>
+    <string name="poi_tactile_paving_primitive">Prymitywny</string>
+    <string name="poi_tactile_paving_incorrect">Błędny</string>
+    <string name="poi_seamark_water_level_part_submerged">Poziom wody: częściowo zanurzony</string>
+    <string name="poi_seamark_water_level_submerged">Poziom wody: zanurzony</string>
+    <string name="poi_seamark_water_level_dry">Poziom wody: suchy</string>
+    <string name="poi_seamark_water_level_floods">Poziom wody: powodzie</string>
+    <string name="poi_seamark_water_level_above_mwl">Poziom wody: powyżej średniego poziomu wody</string>
+    <string name="poi_seamark_obstruction">Niedrożność</string>
 </resources>
