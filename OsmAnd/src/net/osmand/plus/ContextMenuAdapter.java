@@ -203,7 +203,6 @@ public class ContextMenuAdapter {
 				convertView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), layoutId, null);
 				convertView.setTag(layoutId);
 			}
-			UiUtilities.setupLayoutDirection(convertView);
 			if (item.getMinHeight() > 0) {
 				convertView.setMinimumHeight(item.getMinHeight());
 			}
@@ -214,7 +213,7 @@ public class ContextMenuAdapter {
 				
 				TextView title = convertView.findViewById(R.id.title);
 				title.setText(item.getTitle());
-				
+
 				if (layoutId == R.layout.main_menu_drawer_btn_switch_profile) {
 					ImageView icon = convertView.findViewById(R.id.icon);
 					icon.setImageDrawable(mIconsCache.getIcon(item.getIcon(), colorResId));
@@ -341,7 +340,6 @@ public class ContextMenuAdapter {
 					drawable.setBounds(0, 0, drawableSizeInPixels, drawableSizeInPixels);
 					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
 						tv.setCompoundDrawablesRelative(drawable, null, null, null);
-						UiUtilities.setupLayoutDirection(tv);
 					} else {
 						tv.setCompoundDrawables(drawable, null, null, null);
 					}

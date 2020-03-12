@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -145,7 +146,8 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setTitle(isAddingPoi ? R.string.poi_create_title : R.string.poi_edit_title);
-		toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+		Drawable icBack = getMyApplication().getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(getContext()));
+		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
