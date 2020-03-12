@@ -24,6 +24,7 @@ import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.ValueHolder;
@@ -313,8 +314,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 		final Toolbar topBar = new Toolbar(ctx);
 		topBar.setClickable(true);
-		Drawable back = app.getUIUtilities().getIcon(R.drawable.ic_arrow_back);
-		topBar.setNavigationIcon(back);
+		Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(ctx));
+		topBar.setNavigationIcon(icBack);
 		topBar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		topBar.setTitle(title);
 		topBar.setBackgroundColor(ContextCompat.getColor(ctx, getResIdFromAttribute(ctx, R.attr.pstsTabBackground)));

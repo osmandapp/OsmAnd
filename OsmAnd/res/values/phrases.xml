@@ -4206,4 +4206,20 @@
 	<string name="poi_tactile_paving_primitive">Primitive</string>
 	<string name="poi_tactile_paving_incorrect">Incorrect</string>
 
+	<string name="poi_seamark_water_level_part_submerged">Water level: part-submerged</string>
+	<string name="poi_seamark_water_level_submerged">Water level: submerged</string>
+	<string name="poi_seamark_water_level_dry">Water level: dry</string>
+	<string name="poi_seamark_water_level_covers">Water level: covers</string>
+	<string name="poi_seamark_water_level_awash">Water level: awash</string>
+	<string name="poi_seamark_water_level_floods">Water level: floods</string>
+	<string name="poi_seamark_water_level_floating">Water level: floating</string>
+	<string name="poi_seamark_water_level_above_mwl">Water level: above mean water level</string>
+	<string name="poi_seamark_water_level_below_mwl">Water level: below mean water level</string>
+	<string name="poi_seamark_obstruction">Obstruction</string>
+
+	<string name="poi_drinking_water_refill_yes">Drinking water refill: yes</string>
+	<string name="poi_drinking_water_refill_no">Drinking water refill: no</string>
+	<string name="poi_drinking_water_refill_network">Drinking water refill network</string>
+
+
 </resources>
