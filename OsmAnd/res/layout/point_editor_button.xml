@@ -3,16 +3,16 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
-	android:paddingBottom="6dp"
-	android:paddingRight="11dp"
+	android:paddingStart="0dp"
 	android:paddingLeft="0dp"
-	android:paddingEnd="11dp"
-	android:paddingStart="0dp">
+	android:paddingEnd="9dp"
+	android:paddingRight="9dp"
+	android:paddingBottom="4dp">
 
 	<ImageView
 		android:id="@+id/outline"
-		android:layout_width="46dp"
-		android:layout_height="46dp"
+		android:layout_width="48dp"
+		android:layout_height="48dp"
 		android:visibility="invisible"
 		app:srcCompat="@drawable/circle_contour_bg_light" />
 
@@ -20,15 +20,15 @@
 		android:id="@+id/background"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_margin="3dp"
+		android:layout_margin="4dp"
 		android:background="@drawable/bg_point_circle" />
 
 	<ImageView
 		android:id="@+id/icon"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_margin="11dp"
+		android:layout_margin="12dp"
 		android:clickable="false"
 		android:visibility="gone"
-		app:srcCompat="@drawable/mx_special_star_stroked"/>
+		app:srcCompat="@drawable/mx_special_star_stroked" />
 </FrameLayout>

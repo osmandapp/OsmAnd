@@ -257,6 +257,7 @@
 									android:layout_height="wrap_content"
 									android:clipToPadding="false"
 									android:orientation="horizontal"
+									tools:itemCount="1"
 									tools:listitem="@layout/point_group_select_item" />
 							</LinearLayout>
 
@@ -282,13 +283,22 @@
 							android:textSize="@dimen/default_desc_text_size"
 							osmand:typeface="@string/font_roboto_regular" />
 
+						<androidx.recyclerview.widget.RecyclerView
+							android:id="@+id/group_name_recycler_view"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:clipToPadding="false"
+							android:orientation="horizontal"
+							tools:itemCount="1"
+							tools:listitem="@layout/point_group_select_item" />
+
 						<net.osmand.plus.widgets.FlowLayout
 							android:id="@+id/select_icon"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_marginTop="6dp"
-							android:layout_marginLeft="13dp"
-							android:layout_marginStart="13dp" />
+							android:layout_marginStart="12dp"
+							android:layout_marginLeft="12dp"
+							android:layout_marginTop="6dp" />
 
 						<View
 							android:layout_width="wrap_content"
@@ -337,8 +347,8 @@
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:layout_marginTop="6dp"
-							android:layout_marginLeft="13dp"
-							android:layout_marginStart="13dp" />
+							android:layout_marginLeft="12dp"
+							android:layout_marginStart="12dp" />
 
 
 						<View
@@ -388,8 +398,8 @@
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:layout_marginTop="6dp"
-							android:layout_marginLeft="13dp"
-							android:layout_marginStart="13dp" />
+							android:layout_marginLeft="12dp"
+							android:layout_marginStart="12dp" />
 
 						<View
 							android:layout_width="wrap_content"
@@ -409,12 +419,43 @@
 							<ImageView
 								android:id="@+id/replace_action_icon"
 								android:layout_width="wrap_content"
-								android:layout_height="match_parent"
-								android:contentDescription="@string/replace_all"
+								android:layout_height="wrap_content"
+								android:contentDescription="@string/update_existing"
 								android:paddingLeft="16dp"
+								android:paddingStart="16dp"
+								android:paddingRight="32dp"
 								android:paddingTop="21dp"
 								android:paddingBottom="21dp"
-								android:src="@drawable/ic_action_replace" />
+								tools:src="@drawable/ic_action_replace"
+								android:paddingEnd="32dp" />
+
+							<LinearLayout
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:orientation="vertical">
+
+								<TextView
+									android:id="@+id/replace_action_title"
+									android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:maxLines="1"
+									android:text="@string/update_existing"
+									android:textAppearance="@style/TextAppearance.ListItemTitle"
+									tools:text="@string/update_existing" />
+
+								<TextView
+									android:id="@+id/replace_action_description"
+									android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:ellipsize="end"
+									android:lines="1"
+									android:textSize="@dimen/default_desc_text_size"
+									android:text="@string/shared_string_delete"
+									android:textAppearance="@style/TextAppearance.ListItemTitle"
+									tools:text="@string/shared_string_delete" />
+
+							</LinearLayout>
+
 						</LinearLayout>
 
 						<LinearLayout
@@ -431,9 +472,21 @@
 								android:layout_height="wrap_content"
 								android:contentDescription="@string/delete_point"
 								android:paddingLeft="16dp"
-								android:paddingTop="8dp"
-								android:paddingBottom="8dp"
-								android:src="@drawable/ic_action_delete_dark" />
+								android:paddingStart="16dp"
+								android:paddingRight="32dp"
+								android:paddingTop="12dp"
+								android:paddingBottom="12dp"
+								android:src="@drawable/ic_action_delete_dark"
+								android:paddingEnd="32dp" />
+
+							<TextView
+								android:id="@+id/delete_action_title"
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:maxLines="1"
+								android:text="@string/shared_string_delete"
+								android:textAppearance="@style/TextAppearance.ListItemTitle"
+								tools:text="@string/shared_string_delete" />
 						</LinearLayout>
 
 					</LinearLayout>
@@ -456,68 +509,10 @@
 				android:layout_height="1dp"
 				android:background="?attr/divider_color" />
 
-			<LinearLayout
-				android:id="@+id/buttons_layout"
+			<include
+				layout="@layout/bottom_buttons"
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:background="?attr/activity_background_color"
-				android:orientation="horizontal">
-
-				<Button
-					android:id="@+id/delete_button"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:background="?attr/selectableItemBackground"
-					android:paddingStart="10dp"
-					android:paddingLeft="10dp"
-					android:paddingEnd="10dp"
-					android:paddingRight="10dp"
-					android:text="@string/shared_string_delete"
-					android:textColor="?attr/contextMenuButtonColor" />
-
-				<Button
-					android:id="@+id/replace_button"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:background="?attr/selectableItemBackground"
-					android:paddingStart="10dp"
-					android:paddingLeft="10dp"
-					android:paddingEnd="10dp"
-					android:paddingRight="10dp"
-					android:text="@string/update_existing"
-					android:textColor="?attr/contextMenuButtonColor"
-					android:visibility="gone" />
-
-				<View
-					android:layout_width="0dp"
-					android:layout_height="1dp"
-					android:layout_weight="1" />
-
-				<Button
-					android:id="@+id/cancel_button"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:background="?attr/selectableItemBackground"
-					android:paddingStart="10dp"
-					android:paddingLeft="10dp"
-					android:paddingEnd="10dp"
-					android:paddingRight="10dp"
-					android:text="@string/shared_string_cancel"
-					android:textColor="?attr/contextMenuButtonColor" />
-
-				<Button
-					android:id="@+id/save_button"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:background="?attr/selectableItemBackground"
-					android:paddingStart="10dp"
-					android:paddingLeft="10dp"
-					android:paddingEnd="10dp"
-					android:paddingRight="10dp"
-					android:text="@string/shared_string_save"
-					android:textColor="?attr/contextMenuButtonColor" />
-
-			</LinearLayout>
+				android:layout_height="@dimen/dialog_button_ex_height" />
 
 		</LinearLayout>
 	</LinearLayout>
