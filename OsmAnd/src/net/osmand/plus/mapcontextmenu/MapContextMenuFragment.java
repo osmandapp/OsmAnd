@@ -2120,9 +2120,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	public void dismissMenu() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			try {
-				activity.getSupportFragmentManager().popBackStack(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-			} catch (Exception e) {
+			FragmentManager fragmentManager = activity.getSupportFragmentManager();
+			if (!fragmentManager.isStateSaved()) {
+				fragmentManager.popBackStack(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			}
 		}
 	}
