@@ -2,9 +2,9 @@ package net.osmand.plus;
 
 public class CustomOsmandPlugin extends OsmandPlugin {
 
-	private String pluginId;
-	private String name;
-	private String description;
+	public String pluginId;
+	public String name;
+	public String description;
 
 	public CustomOsmandPlugin(OsmandApplication app) {
 		super(app);
@@ -41,7 +41,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 
 	@Override
 	public int getAssetResourceName() {
-		return 0;
+		return R.drawable.contour_lines;
 	}
 
 	@Override

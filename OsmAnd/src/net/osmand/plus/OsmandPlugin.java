@@ -162,6 +162,10 @@ public abstract class OsmandPlugin {
 		return Collections.emptyList();
 	}
 
+	public List<String> getRouterNames() {
+		return Collections.emptyList();
+	}
+
 	/**
 	 * Plugin was installed
 	 */
@@ -240,6 +244,18 @@ public abstract class OsmandPlugin {
 		allPlugins.add(new OsmandDevelopmentPlugin(app));
 
 		activatePlugins(app, enabledPlugins);
+	}
+
+	public static void addCustomPlugin(@NonNull OsmandApplication app, @Nullable Activity activity, @NonNull CustomOsmandPlugin plugin) {
+		OsmandPlugin oldPlugin = OsmandPlugin.getPlugin(plugin.getId());
+		if (oldPlugin != null) {
+			allPlugins.remove(oldPlugin);
+		}
+		allPlugins.add(plugin);
+		if (activity != null) {
+			plugin.onInstall(app, activity);
+		}
+		initPlugin(app, plugin);
 	}
 
 	private static void activatePlugins(OsmandApplication app, Set<String> enabledPlugins) {

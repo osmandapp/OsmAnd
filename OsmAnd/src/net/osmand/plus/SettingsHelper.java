@@ -156,6 +156,7 @@ public class SettingsHelper {
 	public abstract static class SettingsItem {
 
 		private SettingsItemType type;
+		private String pluginDependentId;
 
 		boolean shouldReplace = false;
 
@@ -182,6 +183,11 @@ public class SettingsHelper {
 		@NonNull
 		public abstract String getFileName();
 
+		@Nullable
+		public String getPluginDependentId() {
+			return pluginDependentId;
+		}
+
 		public boolean shouldReadOnCollecting() {
 			return false;
 		}
@@ -203,6 +209,9 @@ public class SettingsHelper {
 		}
 
 		void readFromJson(@NonNull JSONObject json) throws JSONException {
+			if (json.has("pluginId")) {
+				pluginDependentId = json.getString("pluginId");
+			}
 		}
 
 		void writeToJson(@NonNull JSONObject json) throws JSONException {
@@ -240,6 +249,74 @@ public class SettingsHelper {
 			return item.getType() == getType()
 					&& item.getName().equals(getName())
 					&& item.getFileName().equals(getFileName());
+		}
+	}
+
+	public static class PluginSettingsItem extends SettingsItem {
+
+		private OsmandApplication app;
+		private CustomOsmandPlugin plugin;
+
+		PluginSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+			super(SettingsItemType.PLUGIN, json);
+			this.app = app;
+		}
+
+		@NonNull
+		@Override
+		public String getName() {
+			return plugin.getId();
+		}
+
+		@NonNull
+		@Override
+		public String getPublicName(@NonNull Context ctx) {
+			return plugin.getName();
+		}
+
+		@NonNull
+		@Override
+		public String getFileName() {
+			return getName() + ".zip";
+		}
+
+		public CustomOsmandPlugin getPlugin() {
+			return plugin;
+		}
+
+		@Override
+		void readFromJson(@NonNull JSONObject json) throws JSONException {
+			String pluginId = json.getString("pluginId");
+			String name = json.getString("name");
+			String description = json.getString("Description");
+
+			plugin = new CustomOsmandPlugin(app);
+			plugin.pluginId = pluginId;
+			plugin.name = name;
+			plugin.description = description;
+		}
+
+		@NonNull
+		@Override
+		SettingsItemReader getReader() {
+			return new SettingsItemReader<PluginSettingsItem>(this) {
+				@Override
+				public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
+
+				}
+			};
+		}
+
+		@NonNull
+		@Override
+		SettingsItemWriter getWriter() {
+			return new SettingsItemWriter<PluginSettingsItem>(this) {
+				@Override
+				public boolean writeToStream(@NonNull OutputStream outputStream) throws IOException {
+
+					return false;
+				}
+			};
 		}
 	}
 
@@ -499,7 +576,6 @@ public class SettingsHelper {
 		public ProfileSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			super(SettingsItemType.PROFILE, app.getSettings(), json);
 			this.app = app;
-			readFromJson(app.getSettings().getContext(), json);
 			appModeBeanPrefsIds = new HashSet<>(Arrays.asList(app.getSettings().appModeBeanPrefsIds));
 		}
 
@@ -535,7 +611,8 @@ public class SettingsHelper {
 			return "profile_" + getName() + ".json";
 		}
 
-		void readFromJson(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+		void readFromJson(@NonNull JSONObject json) throws JSONException {
+			super.readFromJson(json);
 			String appModeJson = json.getString("appMode");
 			modeBean = ApplicationMode.fromJson(appModeJson);
 			builder = ApplicationMode.fromModeBean(app, modeBean);
@@ -1636,6 +1713,7 @@ public class SettingsHelper {
 					item = new ProfileSettingsItem(app, json);
 					break;
 				case PLUGIN:
+					item = new PluginSettingsItem(app, json);
 					break;
 				case DATA:
 					item = new DataSettingsItem(json);

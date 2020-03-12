@@ -1,7 +1,6 @@
 package net.osmand.plus.helpers;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -42,6 +41,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
+import net.osmand.plus.CustomOsmandPlugin;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.OsmandApplication;
@@ -787,8 +787,16 @@ public class ImportHelper {
 								progress.dismiss();
 							}
 							if (succeed) {
-								FragmentManager fragmentManager = activity.getSupportFragmentManager();
-								if (fragmentManager != null) {
+								boolean pluginImport = false;
+								for (SettingsHelper.SettingsItem item : items) {
+									if (item instanceof SettingsHelper.PluginSettingsItem) {
+										pluginImport = true;
+										CustomOsmandPlugin plugin = ((SettingsHelper.PluginSettingsItem) item).getPlugin();
+										OsmandPlugin.addCustomPlugin(app, activity, plugin);
+									}
+								}
+								if (!pluginImport) {
+									FragmentManager fragmentManager = activity.getSupportFragmentManager();
 									ImportSettingsFragment.showInstance(fragmentManager, items, file);
 								}
 							} else if (empty) {

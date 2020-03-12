@@ -84,6 +84,11 @@ public class SkiMapsPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public List<String> getRouterNames() {
+		return Collections.singletonList("ski");
+	}
+
+	@Override
 	public void disable(OsmandApplication app) {
 		super.disable(app);
 		ApplicationMode.changeProfileAvailability(ApplicationMode.SKI, false, app);

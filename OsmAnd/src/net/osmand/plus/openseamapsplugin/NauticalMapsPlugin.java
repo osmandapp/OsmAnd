@@ -85,6 +85,11 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public List<String> getRouterNames() {
+		return Collections.singletonList("boat");
+	}
+
+	@Override
 	public void disable(OsmandApplication app) {
 		super.disable(app);
 		ApplicationMode.changeProfileAvailability(ApplicationMode.BOAT, false, app);
