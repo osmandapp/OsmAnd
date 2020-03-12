@@ -452,6 +452,14 @@ public class TransportRoutingHelper {
 			params.calculationProgress.isCancelled = true;
 		}
 
+
+		/**
+		 * TODO Check if native lib available and calculate route there.
+		 * @param params
+		 * @return
+		 * @throws IOException
+		 * @throws InterruptedException
+		 */
 		private List<TransportRouteResult> calculateRouteImpl(TransportRouteCalculationParams params) throws IOException, InterruptedException {
 			RoutingConfiguration.Builder config = params.ctx.getRoutingConfigForMode(params.mode);
 			BinaryMapIndexReader[] files = params.ctx.getResourceManager().getTransportRoutingMapFiles();
@@ -472,6 +480,8 @@ public class TransportRoutingHelper {
 					params.params.put(key, vl);
 				}
 			}
+
+
 			GeneralRouter prouter = config.getRouter(params.mode.getRoutingProfile());
 			TransportRoutingConfiguration cfg = new TransportRoutingConfiguration(prouter, params.params);
 			TransportRoutePlanner planner = new TransportRoutePlanner();

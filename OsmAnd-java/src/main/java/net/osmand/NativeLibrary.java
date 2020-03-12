@@ -29,6 +29,7 @@ import net.osmand.router.PrecalculatedRouteDirection;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
+import net.osmand.router.TransportRoutePlanner;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -127,6 +128,9 @@ public class NativeLibrary {
 	public boolean closeMapFile(String filePath) {
 		return closeBinaryMapFile(filePath);
 	}
+
+//todo
+//	public TransportRoutePlanner.TransportRouteResult[] runNativePTRouting() {}
 
 	public RouteSegmentResult[] runNativeRouting(int sx31, int sy31, int ex31, int ey31, RoutingConfiguration config,
 			RouteRegion[] regions, RouteCalculationProgress progress, PrecalculatedRouteDirection precalculatedRouteDirection, 
