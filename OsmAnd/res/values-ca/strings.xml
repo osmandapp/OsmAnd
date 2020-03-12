@@ -3337,7 +3337,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="general_settings_profile_descr">Tema de la aplicació, unitats, regió</string>
     <string name="screen_alerts_descr">Les alertes es mostren abaix a l\'esquerra mentre es navega.</string>
     <string name="language_and_output">Llengua i sortida</string>
-    <string name="reset_to_default">Reinicia els valors per defecte</string>
+    <string name="reset_to_default">Restableix els valors per defecte</string>
     <string name="manage_profiles_descr">Creació, importació i edició de perfils</string>
     <string name="manage_profiles">Gestiona els perfils de l\'aplicació…</string>
     <string name="osmand_settings_descr">Efectiu a tota l\'aplicació</string>
