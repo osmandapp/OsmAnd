@@ -1023,7 +1023,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			hideToolbar();
 			mapActivity.updateStatusBarColor();
 			mapActivity.refreshMap();
-			getChildFragmentManager().popBackStack();
+			FragmentManager fragmentManager = getChildFragmentManager();
+			if (!fragmentManager.isStateSaved()) {
+				fragmentManager.popBackStack();
+			}
 		}
 		super.onDismiss(dialog);
 	}
