@@ -787,17 +787,31 @@ public class ImportHelper {
 								progress.dismiss();
 							}
 							if (succeed) {
-								boolean pluginImport = false;
+								List<SettingsHelper.SettingsItem> pluginIndependentItems = new ArrayList<>();
+								List<SettingsHelper.PluginSettingsItem> pluginSettingsItems = new ArrayList<>();
 								for (SettingsHelper.SettingsItem item : items) {
 									if (item instanceof SettingsHelper.PluginSettingsItem) {
-										pluginImport = true;
-										CustomOsmandPlugin plugin = ((SettingsHelper.PluginSettingsItem) item).getPlugin();
-										OsmandPlugin.addCustomPlugin(app, activity, plugin);
+										pluginSettingsItems.add((SettingsHelper.PluginSettingsItem) item);
+									} else {
+										pluginIndependentItems.add(item);
 									}
 								}
-								if (!pluginImport) {
+								for (SettingsHelper.PluginSettingsItem pluginItem : pluginSettingsItems) {
+									final CustomOsmandPlugin plugin = pluginItem.getPlugin();
+									OsmandPlugin.addCustomPlugin(app, activity, plugin);
+
+									if (!Algorithms.isEmpty(pluginItem.getPluginItems())) {
+										app.getSettingsHelper().importSettings(file, pluginItem.getPluginItems(), "", 1, new SettingsHelper.SettingsImportListener() {
+											@Override
+											public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
+												app.showShortToastMessage(app.getString(R.string.file_imported_successfully, plugin.getName()));
+											}
+										});
+									}
+								}
+								if (!pluginIndependentItems.isEmpty()) {
 									FragmentManager fragmentManager = activity.getSupportFragmentManager();
-									ImportSettingsFragment.showInstance(fragmentManager, items, file);
+									ImportSettingsFragment.showInstance(fragmentManager, pluginIndependentItems, file);
 								}
 							} else if (empty) {
 								app.showShortToastMessage(app.getString(R.string.file_import_error, name, app.getString(R.string.shared_string_unexpected_error)));

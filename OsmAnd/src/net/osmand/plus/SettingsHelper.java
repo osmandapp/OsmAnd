@@ -156,7 +156,6 @@ public class SettingsHelper {
 	public abstract static class SettingsItem {
 
 		private SettingsItemType type;
-		private String pluginDependentId;
 
 		boolean shouldReplace = false;
 
@@ -183,11 +182,6 @@ public class SettingsHelper {
 		@NonNull
 		public abstract String getFileName();
 
-		@Nullable
-		public String getPluginDependentId() {
-			return pluginDependentId;
-		}
-
 		public boolean shouldReadOnCollecting() {
 			return false;
 		}
@@ -209,9 +203,6 @@ public class SettingsHelper {
 		}
 
 		void readFromJson(@NonNull JSONObject json) throws JSONException {
-			if (json.has("pluginId")) {
-				pluginDependentId = json.getString("pluginId");
-			}
 		}
 
 		void writeToJson(@NonNull JSONObject json) throws JSONException {
@@ -256,6 +247,7 @@ public class SettingsHelper {
 
 		private OsmandApplication app;
 		private CustomOsmandPlugin plugin;
+		private List<SettingsItem> pluginItems;
 
 		PluginSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			super(SettingsItemType.PLUGIN, json);
@@ -282,6 +274,10 @@ public class SettingsHelper {
 
 		public CustomOsmandPlugin getPlugin() {
 			return plugin;
+		}
+
+		public List<SettingsItem> getPluginItems() {
+			return pluginItems;
 		}
 
 		@Override
@@ -1666,22 +1662,44 @@ public class SettingsHelper {
 
 		SettingsItemsFactory(OsmandApplication app, String jsonStr) throws IllegalArgumentException, JSONException {
 			this.app = app;
-			JSONObject json = new JSONObject(jsonStr);
+			collectItems(new JSONObject(jsonStr));
+		}
+
+		private void collectItems(JSONObject json) throws IllegalArgumentException, JSONException {
 			JSONArray itemsJson = json.getJSONArray("items");
+			Map<String, List<SettingsItem>> pluginItems = new HashMap<>();
 			for (int i = 0; i < itemsJson.length(); i++) {
 				JSONObject itemJson = itemsJson.getJSONObject(i);
-				SettingsItem item;
+				SettingsItem item = null;
 				try {
 					item = createItem(itemJson);
-					if (item != null) {
-						items.add(item);
-					}
 				} catch (IllegalArgumentException e) {
 					LOG.error("Error creating item from json: " + itemJson, e);
+				}
+				if (item != null) {
+					if (itemJson.has("pluginId") && item.type != SettingsItemType.PLUGIN) {
+						String pluginId = itemJson.getString("pluginId");
+						List<SettingsItem> items = pluginItems.get(pluginId);
+						if (items != null) {
+							items.add(item);
+						} else {
+							items = new ArrayList<>();
+							items.add(item);
+							pluginItems.put(pluginId, items);
+						}
+					} else {
+						items.add(item);
+					}
 				}
 			}
 			if (items.size() == 0) {
 				throw new IllegalArgumentException("No items");
+			}
+			for (SettingsItem item : items) {
+				if (item instanceof PluginSettingsItem) {
+					PluginSettingsItem pluginSettingsItem = ((PluginSettingsItem) item);
+					pluginSettingsItem.pluginItems = pluginItems.get(pluginSettingsItem.getName());
+				}
 			}
 		}
 
