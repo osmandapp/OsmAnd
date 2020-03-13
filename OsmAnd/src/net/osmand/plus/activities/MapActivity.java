@@ -909,7 +909,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 
 		app.getDownloadThread().setUiActivity(this);
-		app.getSettingsHelper().setActivity(this);
 
 		boolean routeWasFinished = routingHelper.isRouteWasFinished();
 		if (routeWasFinished && !DestinationReachedMenu.wasShown()) {
@@ -1510,7 +1509,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app.getMapMarkersHelper().removeListener(this);
 		app.getRoutingHelper().removeListener(this);
 		app.getDownloadThread().resetUiActivity(this);
-		app.getSettingsHelper().resetActivity(this);
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnPause();
 		}

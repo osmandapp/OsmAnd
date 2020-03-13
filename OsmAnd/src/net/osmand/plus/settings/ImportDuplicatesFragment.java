@@ -29,6 +29,8 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SettingsHelper;
+import net.osmand.plus.SettingsHelper.ImportAsyncTask;
+import net.osmand.plus.SettingsHelper.ImportType;
 import net.osmand.plus.SettingsHelper.SettingsItem;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -78,7 +80,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 		app = requireMyApplication();
 		settingsHelper = app.getSettingsHelper();
 		nightMode = !app.getSettings().isLightContent();
-		SettingsHelper.ImportAsyncTask importTask = settingsHelper.getImportTask();
+		ImportAsyncTask importTask = settingsHelper.getImportTask();
 		if (importTask != null) {
 			if (settingsItems == null) {
 				settingsItems = importTask.getSelectedItems();
@@ -151,8 +153,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 			list.setLayoutManager(new LinearLayoutManager(getMyApplication()));
 			list.setAdapter(adapter);
 		}
-		SettingsHelper.State state = settingsHelper.getImportTaskState();
-		if (settingsHelper.isImporting() && !settingsHelper.isCollectOnly() && state != null && state.equals(SettingsHelper.State.IMPORT)) {
+		if (settingsHelper.getImportTaskType() == ImportType.IMPORT) {
 			setupImportingUi();
 		} else {
 			toolbarLayout.setTitle(getString(R.string.import_duplicates_title));
@@ -272,7 +273,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 	private SettingsHelper.SettingsImportListener getImportListener() {
 		return new SettingsHelper.SettingsImportListener() {
 			@Override
-			public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
+			public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsItem> items) {
 				if (succeed) {
 					app.getRendererRegistry().updateExternalRenderers();
 					AppInitializer.loadRoutingFiles(app, new AppInitializer.LoadRoutingFilesCallback() {
@@ -284,9 +285,6 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 					if (fm != null && file != null) {
 						ImportCompleteFragment.showInstance(fm, items, file.getName());
 					}
-				} else if (empty) {
-					dismissFragment();
-					app.showShortToastMessage(app.getString(R.string.file_import_error, file.getName(), app.getString(R.string.shared_string_unexpected_error)));
 				}
 			}
 		};
