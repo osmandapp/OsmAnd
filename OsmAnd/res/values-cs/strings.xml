@@ -3083,7 +3083,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="routing_attr_allow_advanced_description">Obtížné trasy s nebezpečnými překážkami a strmými úseky.</string>
     <string name="routing_attr_allow_expert_name">Povolit trasy pro experty</string>
     <string name="routing_attr_allow_expert_description">Extrémně náročné trasy, s nebezpečnými překážkami a okolím.</string>
-    <string name="routing_attr_allow_classic_only_name">Povolit trasy pro klasické lyžování</string>
+    <string name="routing_attr_allow_classic_only_name">Povolit pouze trasy pro klasické lyžování</string>
     <string name="routing_attr_difficulty_preference_name">Preferovaná obtížnost</string>
     <string name="routing_attr_freeride_policy_name">Mimo sjezdovky</string>
     <string name="rate_dialog_descr">Prosím, dejte nám zpětnou vazbu a ohodnoťte naši práci na Google Play.</string>
@@ -3286,4 +3286,5 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="shared_string_turn_off">Vypnout</string>
     <string name="new_plugin_added">Přidán nový modul</string>
     <string name="add_new_profile_q">Přidat nový profil „%1$s“\?</string>
+    <string name="routing_attr_allow_classic_only_description">Trasy upravené pro klasické lyžování bez bruslení. Zahrnuje trasy upravené menšími sněžnými vozidly a stopy vytvořené samotnými lyžaři.</string>
 </resources>

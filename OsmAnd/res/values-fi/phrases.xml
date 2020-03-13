@@ -1128,4 +1128,5 @@
     <string name="poi_volcano_type">Tyyppi</string>
     <string name="poi_volcano_status">Tila</string>
     <string name="poi_volcano_type_mud">Muta</string>
+    <string name="poi_denomination">Suuntaus</string>
 </resources>

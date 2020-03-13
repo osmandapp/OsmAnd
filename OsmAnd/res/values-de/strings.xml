@@ -3562,7 +3562,7 @@ Lon %2$s</string>
     <string name="replace_all_desc">Aktuelle Elemente werden durch Elemente aus der Datei ersetzt</string>
     <string name="replace_all">Alle ersetzen</string>
     <string name="keep_both">Beide behalten</string>
-    <string name="keep_both_desc">Importierte Elemente werden mit Prefix hinzugefügt</string>
+    <string name="keep_both_desc">Importierte Elemente werden mit Präfix hinzugefügt</string>
     <string name="import_duplicates_description">OsmAnd verfügt bereits über Elemente mit denselben Namen wie die importierten.
 \n
 \nWählen Sie eine Aktion aus.</string>

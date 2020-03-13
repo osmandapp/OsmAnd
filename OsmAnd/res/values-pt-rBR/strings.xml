@@ -3556,4 +3556,5 @@ Pôr do Sol: %2$s</string>
     <string name="restore_all_profile_settings">Restaurar todas as configurações de perfil\?</string>
     <string name="saving_new_profile">Salvando novo perfil</string>
     <string name="profile_backup_failed">Não foi possível fazer o backup do perfil.</string>
+    <string name="clear_recorded_data_warning">Tem certeza de que deseja limpar os dados gravados\?</string>
 </resources>
