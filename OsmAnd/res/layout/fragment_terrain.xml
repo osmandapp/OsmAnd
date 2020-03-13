@@ -305,10 +305,21 @@
 					android:layout_height="wrap_content"
 					android:paddingStart="@dimen/content_padding"
 					android:paddingTop="@dimen/list_header_settings_top_margin"
+					android:paddingBottom="@dimen/content_padding"
 					android:paddingEnd="@dimen/content_padding"
 					android:text="@string/shared_string_legend"
 					android:textColor="@color/preference_category_title"
 					android:textSize="@dimen/default_desc_text_size" />
+
+				<ImageView
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:layout_gravity="center_horizontal"
+					android:layout_marginStart="@dimen/content_padding"
+					android:layout_marginEnd="@dimen/content_padding"
+					android:adjustViewBounds="true"
+					android:scaleType="fitCenter"
+					android:src="@drawable/img_legend_slope" />
 
 				<net.osmand.plus.widgets.TextViewEx
 					android:id="@+id/slope_read_more_tv"

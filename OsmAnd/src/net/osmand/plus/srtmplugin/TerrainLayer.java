@@ -62,7 +62,7 @@ public class TerrainLayer extends MapTileLayer {
 		if (tileBox.getZoom() >= MAX_TRANSPARENCY_ZOOM) {
 			setAlpha(MAX_TRANSPARENCY_ALPHA);
 		} else {
-			setAlpha(mode.equals(HILLSHADE)
+            setAlpha(mode == HILLSHADE
 					? srtmPlugin.getHillshadeTransparency()
 					: srtmPlugin.getSlopeTransparency());
 		}
@@ -72,7 +72,7 @@ public class TerrainLayer extends MapTileLayer {
 	private void indexTerrainFiles(final OsmandApplication app) {
 		@SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
 			private SQLiteDatabase sqliteDb;
-			private String type = mode.equals(HILLSHADE) ? "hillshade" : "slope";
+            private String type = mode == HILLSHADE ? "hillshade" : "slope";
 			@Override
 			protected Void doInBackground(Void... params) {
 				
@@ -80,7 +80,7 @@ public class TerrainLayer extends MapTileLayer {
 				File cacheDir = app.getCacheDir();
 				// fix http://stackoverflow.com/questions/26937152/workaround-for-nexus-9-sqlite-file-write-operations-on-external-dirs
 				sqliteDb = SQLiteDatabase.openDatabase(
-						new File(cacheDir, mode.equals(HILLSHADE) ? HILLSHADE_CACHE : SLOPE_CACHE).getPath(),
+                        new File(cacheDir, mode == HILLSHADE ? HILLSHADE_CACHE : SLOPE_CACHE).getPath(),
 						 null, SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING
 						    | SQLiteDatabase.CREATE_IF_NECESSARY );
 				if(sqliteDb.getVersion() == 0) {
@@ -245,7 +245,7 @@ public class TerrainLayer extends MapTileLayer {
 			
 			@Override
 			public String getName() {
-				return mode.equals(HILLSHADE) ? "Hillshade" : "Slope";
+                return mode == HILLSHADE ? "Hillshade" : "Slope";
 			}
 			
 			@Override

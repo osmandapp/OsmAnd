@@ -56,7 +56,7 @@ import static net.osmand.plus.download.DownloadActivityType.SLOPE_FILE;
 
 
 public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickListener,
-		Slider.OnSliderTouchListener, Slider.OnChangeListener {
+		Slider.OnSliderTouchListener, Slider.OnChangeListener, DownloadIndexesThread.DownloadEvents {
 
 	public static final String TAG = TerrainFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(TerrainFragment.class.getSimpleName());
@@ -100,6 +100,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	private Slider zoomSlider;
 	private ObservableListView observableListView;
 
+	private ArrayAdapter<ContextMenuItem> listAdapter;
 
 	public TerrainFragment() {
 
@@ -297,14 +298,14 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	}
 
 	private void adjustLegendVisibility(TerrainMode mode) {
-		int visibility = SLOPE.equals(mode) ? View.VISIBLE : View.GONE;
+		int visibility = mode == SLOPE ? View.VISIBLE : View.GONE;
 		legendContainer.setVisibility(visibility);
 		legendBottomDivider.setVisibility(visibility);
 		legendTopDivider.setVisibility(visibility);
 	}
 
 	private void adjustModeButtons(TerrainMode mode) {
-		if (SLOPE.equals(mode)) {
+		if (mode == SLOPE) {
 			slopeBtnContainer.setBackgroundResource(R.drawable.btn_border_right_active);
 			slopeBtn.setTextColor(nightMode
 					? getResources().getColor(R.color.text_color_primary_dark)
@@ -362,7 +363,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 
 	private void setupTerrainMode(TerrainMode mode) {
 		TerrainMode currentMode = srtmPlugin.getTerrainMode();
-		if (!currentMode.equals(mode)) {
+		if (currentMode != mode) {
 			srtmPlugin.setTerrainMode(mode);
 			updateUiMode();
 			updateLayers();
@@ -410,9 +411,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 				int currentDownloadingProgress = downloadThread.getCurrentDownloadingItemProgress();
 				List<IndexItem> hillshadeItems = DownloadResources.findIndexItemsAt(
 						app, mapActivity.getMapLocation(),
-						mode.equals(HILLSHADE)
-								? HILLSHADE_FILE
-								: SLOPE_FILE);
+						mode == HILLSHADE ? HILLSHADE_FILE : SLOPE_FILE);
 				if (hillshadeItems.size() > 0) {
 					downloadContainer.setVisibility(View.VISIBLE);
 					downloadTopDivider.setVisibility(View.VISIBLE);
@@ -421,12 +420,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 						ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder()
 								.setLayout(R.layout.list_item_icon_and_download)
 								.setTitle(indexItem.getVisibleName(app, app.getRegions(), false))
-								.setDescription(mode.equals(HILLSHADE)
+								.setDescription(mode == HILLSHADE
 										? HILLSHADE_FILE.getString(app) + " • " + indexItem.getSizeDescription(app)
 										: SLOPE_FILE.getString(app) + " • " + indexItem.getSizeDescription(app))
-								.setIcon(mode.equals(HILLSHADE)
-										? HILLSHADE_FILE.getIconResource()
-										: SLOPE_FILE.getIconResource())
+								.setIcon(mode == HILLSHADE ? HILLSHADE_FILE.getIconResource() : SLOPE_FILE.getIconResource())
 								.setListener(new ContextMenuAdapter.ItemClickListener() {
 									@Override
 									public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
@@ -491,7 +488,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 				e.printStackTrace();
 			}
 		}
-		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(mapActivity, !nightMode);
+		listAdapter = adapter.createListAdapter(mapActivity, !nightMode);
 		observableListView.setAdapter(listAdapter);
 		observableListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
@@ -503,5 +500,32 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 				}
 			}
 		});
+	}
+
+	@Override
+	public void newDownloadIndexes() {
+		updateDownloadSection();
+	}
+
+	@Override
+	public void downloadInProgress() {
+			DownloadIndexesThread downloadThread = getMyApplication().getDownloadThread();
+			IndexItem downloadIndexItem = downloadThread.getCurrentDownloadingItem();
+			if (downloadIndexItem != null) {
+				int downloadProgress = downloadThread.getCurrentDownloadingItemProgress();
+				ArrayAdapter<ContextMenuItem> adapter = (ArrayAdapter<ContextMenuItem>) listAdapter;
+				for (int i = 0; i < adapter.getCount(); i++) {
+					ContextMenuItem item = adapter.getItem(i);
+					if (item != null && item.getProgressListener() != null) {
+						item.getProgressListener().onProgressChanged(
+								downloadIndexItem, downloadProgress, adapter, (int) adapter.getItemId(i), i);
+					}
+				}
+			}
+	}
+
+	@Override
+	public void downloadHasFinished() {
+		updateDownloadSection();
 	}
 }
