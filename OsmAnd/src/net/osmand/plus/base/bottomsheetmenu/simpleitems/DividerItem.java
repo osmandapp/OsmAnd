@@ -42,7 +42,7 @@ public class DividerItem extends BaseBottomSheetItem {
 		int height = AndroidUtils.dpToPx(context, 1);
 
 		LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
-		params.setMargins(getLeftMargin(context), getTopMargin(context), 0, getBottomMargin(context));
+		AndroidUtils.setMargins(params, getStartMargin(context), getTopMargin(context), 0, getBottomMargin(context));
 		params.height = height;
 
 		view.setMinimumHeight(height);
@@ -53,7 +53,7 @@ public class DividerItem extends BaseBottomSheetItem {
 		return context.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_content_padding_small);
 	}
 
-	protected int getLeftMargin(Context context) {
+	protected int getStartMargin(Context context) {
 		return 0;
 	}
 

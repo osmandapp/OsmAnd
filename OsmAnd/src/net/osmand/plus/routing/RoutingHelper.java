@@ -442,10 +442,12 @@ public class RoutingHelper {
 				if (allowableDeviation == 0) {
 					allowableDeviation = getDefaultAllowedDeviation(settings, route.getAppMode(), posTolerance);
 				}
+				boolean isRecalculationActivated = allowableDeviation > 0 &&
+						settings.ROUTE_RECALCULATION_DISTANCE_ACTIVATION.getModeValue(getAppMode());
 
 				// 2. Analyze if we need to recalculate route
 				// >100m off current route (sideways) or parameter (for Straight line)
-				if (currentRoute > 0 && allowableDeviation > 0) {
+				if (currentRoute > 0 && isRecalculationActivated) {
 					distOrth = getOrthogonalDistance(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
 					if (distOrth > allowableDeviation) {
 						log.info("Recalculate route, because correlation  : " + distOrth); //$NON-NLS-1$
@@ -458,7 +460,7 @@ public class RoutingHelper {
 				boolean isStraight =
 						route.getRouteService() == RouteService.DIRECT_TO || route.getRouteService() == RouteService.STRAIGHT;
 				boolean wrongMovementDirection = checkWrongMovementDirection(currentLocation, next);
-				if (allowableDeviation > 0 && wrongMovementDirection && !isStraight
+				if (isRecalculationActivated && wrongMovementDirection && !isStraight
 						&& (currentLocation.distanceTo(routeNodes.get(currentRoute)) > allowableDeviation)) {
 					log.info("Recalculate route, because wrong movement direction: " + currentLocation.distanceTo(routeNodes.get(currentRoute))); //$NON-NLS-1$
 					isDeviatedFromRoute = true;

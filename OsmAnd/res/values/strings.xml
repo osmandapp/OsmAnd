@@ -11,6 +11,9 @@
 	Thx - Hardy
 
 -->
+    <string name="recalculate_route_distance_promo">The route will be recalculated if the distance from the route to the current location is more than selected value.</string>
+    <string name="select_distance_route_will_recalc">Select the distance after which the route will be recalculated.</string>
+    <string name="recalculate_route_in_deviation">Recalculate route in case of deviation</string>
     <string name="clear_recorded_data_warning">Are you sure you want to clear recorded data?</string>
     <string name="restore_all_profile_settings_descr">All profile settings will be restored to their original state after creating/importing this profile.</string>
     <string name="restore_all_profile_settings">Restore all profile settings?</string>

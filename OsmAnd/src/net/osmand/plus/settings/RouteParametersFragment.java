@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
@@ -30,6 +31,7 @@ import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.bottomsheets.RecalculateRouteInDeviationBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -64,6 +66,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 
 	private StateChangedListener<Boolean> booleanRoutingPrefListener;
 	private StateChangedListener<String> customRoutingPrefListener;
+	private StateChangedListener<Float> routeRecalculationDistanceListener;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -261,6 +264,18 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		return super.onPreferenceClick(preference);
 	}
 
+	@Override
+	public void onDisplayPreferenceDialog(Preference preference) {
+		if (preference.getKey().equals(settings.ROUTE_RECALCULATION_DISTANCE_ACTIVATION.getId())) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				RecalculateRouteInDeviationBottomSheet.showInstance(getFragmentManager(), preference.getKey(), this, false, getSelectedAppMode());
+			}
+		} else {
+			super.onDisplayPreferenceDialog(preference);
+		}
+	}
+
 	private void showSeekbarSettingsDialog(Activity activity, final ApplicationMode mode) {
 		if (activity == null || mode == null) {
 			return;
@@ -319,34 +334,35 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	}
 
 	private void setupSelectRouteRecalcDistance(PreferenceScreen screen, float defaultAllowedDeviation) {
-		Float[] entryValues;
-		OsmandSettings settings = app.getSettings();
-		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
-		if (mc == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
-			entryValues = new Float[] {-1.0f, 0.f, 10.f, 20.0f, 30.0f, 50.0f, 100.0f, 200.0f, 500.0f, 1000.0f, 1500.0f};
-		} else {
-			entryValues = new Float[] {-1.0f, 0.f, 9.1f, 18.3f, 30.5f, 45.7f, 91.5f, 183.0f, 482.0f, 965.0f, 1609.0f};
+		OsmandSettings.CommonPreference<Boolean> recalculationActivationPref = settings.ROUTE_RECALCULATION_DISTANCE_ACTIVATION;
+		final SwitchPreferenceEx switchPreferenceEx = createSwitchPreferenceEx(recalculationActivationPref.getId(),
+				R.string.route_recalculation_dist_title, R.layout.preference_with_descr_dialog_and_switch);
+		routeRecalculationDistanceListener = new StateChangedListener<Float>() {
+			@Override
+			public void stateChanged(Float value) {
+				updateSelectRouteRecalcDistancePrefView(switchPreferenceEx);
+			}
+		};
+		if (settings.ROUTE_RECALCULATION_DISTANCE_VALUE.getModeValue(getSelectedAppMode()) < 0) {
+			recalculationActivationPref.set(false);
 		}
+		updateSelectRouteRecalcDistancePrefView(switchPreferenceEx);
+		switchPreferenceEx.setIcon(getRoutingPrefIcon("routing_recalculation_distance_activation"));
+		screen.addPreference(switchPreferenceEx);
+	}
 
-		String[] entries = new String[entryValues.length];
-		entries[0] = getString(R.string.no_recalculation_setting);
-		String defaultDistance =  defaultAllowedDeviation < 0 ? getString(R.string.no_recalculation_setting) :
-				OsmAndFormatter.getFormattedDistance(defaultAllowedDeviation , app, false);
-		entries[1] = String.format(getString(R.string.shared_string_app_default_w_val), defaultDistance);
-
-		for (int i = 2; i < entryValues.length; i++) {
-			entries[i] = OsmAndFormatter.getFormattedDistance(entryValues[i], app, false);
+	private void updateSelectRouteRecalcDistancePrefView(SwitchPreferenceEx switchPreferenceEx) {
+		OsmandSettings.CommonPreference<Float> recalculationValuePref = settings.ROUTE_RECALCULATION_DISTANCE_VALUE;
+		ApplicationMode appMode = getSelectedAppMode();
+		float currentValue = recalculationValuePref.getModeValue(appMode);
+		if (currentValue <= 0) {
+			currentValue = RoutingHelper.getDefaultAllowedDeviation(settings, appMode, RoutingHelper.getPosTolerance(0));
 		}
-
-		ListPreferenceEx routeRecalculationDist = createListPreferenceEx(settings.ROUTE_RECALCULATION_DISTANCE.getId(),
-				entries, entryValues, R.string.route_recalculation_dist_title, R.layout.preference_with_descr);
-		routeRecalculationDist.setEntries(entries);
-		routeRecalculationDist.setEntryValues(entryValues);
-		routeRecalculationDist.setDescription(getString(R.string.route_recalculation_dist_descr));
-		routeRecalculationDist.setIcon(getRoutingPrefIcon("routing_recalc_distance"));
-
-
-		screen.addPreference(routeRecalculationDist);
+		String formattedValue = OsmAndFormatter.getFormattedDistance(currentValue, app, false);
+		String on = String.format(getString(R.string.ltr_or_rtl_combine_via_bold_point), getString(R.string.shared_string_enabled), formattedValue);
+		String off = String.format(getString(R.string.ltr_or_rtl_combine_via_bold_point), getString(R.string.shared_string_disabled), formattedValue);
+		switchPreferenceEx.setSummaryOn(on);
+		switchPreferenceEx.setSummaryOff(off);
 	}
 
 	@Override
@@ -371,6 +387,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	private void addRoutingPrefListeners() {
 		settings.FAST_ROUTE_MODE.addListener(booleanRoutingPrefListener);
 		settings.ENABLE_TIME_CONDITIONAL_ROUTING.addListener(booleanRoutingPrefListener);
+		settings.ROUTE_RECALCULATION_DISTANCE_VALUE.addListener(routeRecalculationDistanceListener);
 
 		for (RoutingParameter parameter : otherRoutingParameters) {
 			if (parameter.getType() == RoutingParameterType.BOOLEAN) {
@@ -386,6 +403,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	private void removeRoutingPrefListeners() {
 		settings.FAST_ROUTE_MODE.removeListener(booleanRoutingPrefListener);
 		settings.ENABLE_TIME_CONDITIONAL_ROUTING.removeListener(booleanRoutingPrefListener);
+		settings.ROUTE_RECALCULATION_DISTANCE_VALUE.removeListener(routeRecalculationDistanceListener);
 
 		for (RoutingParameter parameter : otherRoutingParameters) {
 			if (parameter.getType() == RoutingParameterType.BOOLEAN) {
@@ -414,8 +432,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			return true;
 		} else if ("prouting_short_way".equals(key) && newValue instanceof Boolean) {
 			return app.getSettings().FAST_ROUTE_MODE.setModeValue(getSelectedAppMode(), !(Boolean) newValue);
-		} else if (settings.ROUTE_RECALCULATION_DISTANCE.getId().equals(key) && newValue instanceof Float) {
-			if ((float) newValue == -1.f) {
+		} else if (settings.ROUTE_RECALCULATION_DISTANCE_ACTIVATION.getId().equals(key) && newValue instanceof Boolean) {
+			if (!((boolean) newValue)) {
 				settings.DISABLE_OFFROUTE_RECALC.setModeValue(getSelectedAppMode(), true);
 			} else {
 				settings.DISABLE_OFFROUTE_RECALC.setModeValue(getSelectedAppMode(), false);
@@ -529,7 +547,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 				return getPersistentPrefIcon(R.drawable.ic_action_fastest_route);
 			case "enable_time_conditional_routing":
 				return getPersistentPrefIcon(R.drawable.ic_action_road_works_dark);
-			case "routing_recalc_distance":
+			case "routing_recalculation_distance_activation":
 				return getPersistentPrefIcon(R.drawable.ic_action_minimal_distance);
 
 			default:
