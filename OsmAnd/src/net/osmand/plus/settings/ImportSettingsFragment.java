@@ -34,9 +34,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.SettingsHelper;
-import net.osmand.plus.SettingsHelper.ImportAsyncTask;
-import net.osmand.plus.SettingsHelper.ImportType;
-import net.osmand.plus.SettingsHelper.SettingsItem;
+import net.osmand.plus.SettingsHelper.*;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
@@ -326,27 +324,27 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		List<File> renderFilesList = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
 
-		for (SettingsHelper.SettingsItem item : settingsItems) {
-			if (item.getType().equals(SettingsHelper.SettingsItemType.PROFILE)) {
-				profiles.add(((SettingsHelper.ProfileSettingsItem) item).getModeBean());
-			} else if (item.getType().equals(SettingsHelper.SettingsItemType.QUICK_ACTION)) {
-				quickActions.addAll(((SettingsHelper.QuickActionSettingsItem) item).getItems());
-				quickActions.addAll(((SettingsHelper.QuickActionSettingsItem) item).getDuplicateItems());
-			} else if (item.getType().equals(SettingsHelper.SettingsItemType.POI_UI_FILTERS)) {
-				poiUIFilters.addAll(((SettingsHelper.PoiUiFilterSettingsItem) item).getItems());
-				poiUIFilters.addAll(((SettingsHelper.PoiUiFilterSettingsItem) item).getDuplicateItems());
-			} else if (item.getType().equals(SettingsHelper.SettingsItemType.MAP_SOURCES)) {
-				tileSourceTemplates.addAll(((SettingsHelper.MapSourcesSettingsItem) item).getItems());
-				tileSourceTemplates.addAll(((SettingsHelper.MapSourcesSettingsItem) item).getDuplicateItems());
-			} else if (item.getType().equals(SettingsHelper.SettingsItemType.FILE)) {
+		for (SettingsItem item : settingsItems) {
+			if (item.getType().equals(SettingsItemType.PROFILE)) {
+				profiles.add(((ProfileSettingsItem) item).getModeBean());
+			} else if (item.getType().equals(SettingsItemType.QUICK_ACTION)) {
+				quickActions.addAll(((QuickActionSettingsItem) item).getItems());
+				quickActions.addAll(((QuickActionSettingsItem) item).getDuplicateItems());
+			} else if (item.getType().equals(SettingsItemType.POI_UI_FILTERS)) {
+				poiUIFilters.addAll(((PoiUiFilterSettingsItem) item).getItems());
+				poiUIFilters.addAll(((PoiUiFilterSettingsItem) item).getDuplicateItems());
+			} else if (item.getType().equals(SettingsItemType.MAP_SOURCES)) {
+				tileSourceTemplates.addAll(((MapSourcesSettingsItem) item).getItems());
+				tileSourceTemplates.addAll(((MapSourcesSettingsItem) item).getDuplicateItems());
+			} else if (item.getType().equals(SettingsItemType.FILE)) {
 				if (item.getName().contains(IndexConstants.RENDERERS_DIR)) {
-					renderFilesList.add(((SettingsHelper.FileSettingsItem) item).getFile());
+					renderFilesList.add(((FileSettingsItem) item).getFile());
 				} else if (item.getName().contains(IndexConstants.ROUTING_PROFILES_DIR)) {
-					routingFilesList.add(((SettingsHelper.FileSettingsItem) item).getFile());
+					routingFilesList.add(((FileSettingsItem) item).getFile());
 				}
-			} else if (item.getType().equals(SettingsHelper.SettingsItemType.AVOID_ROADS)) {
-				avoidRoads.addAll(((SettingsHelper.AvoidRoadsSettingsItem) item).getItems());
-				avoidRoads.addAll(((SettingsHelper.AvoidRoadsSettingsItem) item).getDuplicateItems());
+			} else if (item.getType().equals(SettingsItemType.AVOID_ROADS)) {
+				avoidRoads.addAll(((AvoidRoadsSettingsItem) item).getItems());
+				avoidRoads.addAll(((AvoidRoadsSettingsItem) item).getDuplicateItems());
 			}
 		}
 

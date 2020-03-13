@@ -566,9 +566,7 @@ public class UiUtilities {
 		}
 	}
 
-	public static SpannableString createSpannableString(@NonNull String text,
-														@NonNull String textToStyle,
-														@NonNull StyleSpan styleSpan) {
+	public static SpannableString createSpannableString(@NonNull String text, @NonNull String textToStyle, @NonNull StyleSpan styleSpan) {
 		SpannableString spannable = new SpannableString(text);
 		try {
 			int startIndex = text.indexOf(textToStyle);

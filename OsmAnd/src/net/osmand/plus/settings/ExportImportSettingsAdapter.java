@@ -30,6 +30,7 @@ import net.osmand.view.ThreeStateCheckbox;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -115,7 +116,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				notifyDataSetChanged();
 			}
 		});
-		adjustIndicator(app, groupPosition, isExpanded, group, true);
+		adjustIndicator(app, groupPosition, isExpanded, group, nightMode);
 		return group;
 	}
 
@@ -229,7 +230,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
 	@Override
 	public int getGroupCount() {
-		return itemsMap.keySet().size();
+		return itemsTypes.size();
 	}
 
 	@Override
@@ -291,6 +292,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	public void updateSettingsList(Map<Type, List<?>> itemsMap) {
 		this.itemsMap = itemsMap;
 		this.itemsTypes = new ArrayList<>(itemsMap.keySet());
+		Collections.sort(itemsTypes);
 		notifyDataSetChanged();
 	}
 
@@ -303,8 +305,8 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	public void selectAll(boolean selectAll) {
 		dataToOperate.clear();
 		if (selectAll) {
-			for (Map.Entry<Type, List<?>> map : itemsMap.entrySet()) {
-				dataToOperate.addAll(map.getValue());
+			for (List<?> values : itemsMap.values()) {
+				dataToOperate.addAll(values);
 			}
 		}
 		notifyDataSetChanged();
