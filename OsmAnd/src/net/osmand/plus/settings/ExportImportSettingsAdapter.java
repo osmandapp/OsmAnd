@@ -37,6 +37,7 @@ import java.util.Map;
 
 import static net.osmand.view.ThreeStateCheckbox.State.CHECKED;
 import static net.osmand.view.ThreeStateCheckbox.State.MISC;
+import static net.osmand.view.ThreeStateCheckbox.State.UNCHECKED;
 
 class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
@@ -47,7 +48,6 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	private List<Type> itemsTypes;
 	private boolean nightMode;
 	private boolean importState;
-	private int profileColor;
 	private int activeColorRes;
 
 	ExportImportSettingsAdapter(OsmandApplication app, boolean nightMode, boolean importState) {
@@ -57,10 +57,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		this.itemsMap = new HashMap<>();
 		this.itemsTypes = new ArrayList<>();
 		this.dataToOperate = new ArrayList<>();
-		this.profileColor = app.getSettings().getApplicationMode().getIconColorInfo().getColor(nightMode);
-		dataList = new ArrayList<>();
 		dataToOperate = new ArrayList<>();
-		profileColor = app.getSettings().getApplicationMode().getIconColorInfo().getColor(nightMode);
 		uiUtilities = app.getUIUtilities();
 		activeColorRes = nightMode
 				? R.color.icon_color_active_dark
