@@ -3793,4 +3793,17 @@
     <string name="poi_tactile_paving_contrasted">Контрастний</string>
     <string name="poi_tactile_paving_primitive">Примітивний</string>
     <string name="poi_tactile_paving_incorrect">Неправильний</string>
+    <string name="poi_seamark_water_level_part_submerged">Рівень води: частково занурено</string>
+    <string name="poi_seamark_water_level_submerged">Рівень води: занурено</string>
+    <string name="poi_seamark_water_level_dry">Рівень води: сухо</string>
+    <string name="poi_seamark_water_level_covers">Рівень води: покриття</string>
+    <string name="poi_seamark_water_level_awash">Рівень води: врівень</string>
+    <string name="poi_seamark_water_level_floods">Рівень води: повені</string>
+    <string name="poi_seamark_water_level_floating">Рівень води: плавучий</string>
+    <string name="poi_seamark_water_level_above_mwl">Рівень води: вище середнього</string>
+    <string name="poi_seamark_water_level_below_mwl">Рівень води: нижче середнього</string>
+    <string name="poi_seamark_obstruction">Завада</string>
+    <string name="poi_drinking_water_refill_yes">Поповнення питної води: так</string>
+    <string name="poi_drinking_water_refill_no">Поповнення питної води: ні</string>
+    <string name="poi_drinking_water_refill_network">Мережа поповнення питної води</string>
 </resources>
