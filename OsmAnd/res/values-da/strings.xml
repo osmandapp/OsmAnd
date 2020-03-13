@@ -3524,4 +3524,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="saving_new_profile">Gemmer ny profil</string>
     <string name="profile_backup_failed">Profilen kunne ikke sikkerhedskopieres.</string>
     <string name="clear_recorded_data_warning">Bekræft sletning af optagede data\?</string>
+    <string name="importing_from">Importerer data fra %1$s</string>
+    <string name="shared_string_importing">Importerer</string>
+    <string name="shared_string_import_complete">Importen er fuldført</string>
 </resources>
