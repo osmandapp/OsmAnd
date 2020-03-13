@@ -17,6 +17,7 @@ import net.osmand.plus.settings.ExportImportSettingsAdapter.Type;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -38,6 +39,7 @@ public class ImportedSettingsItemsAdapter extends
 		this.listener = listener;
 		uiUtils = app.getUIUtilities();
 		itemsTypes = new ArrayList<>(itemsMap.keySet());
+		Collections.sort(itemsTypes);
 	}
 
 	@NonNull
