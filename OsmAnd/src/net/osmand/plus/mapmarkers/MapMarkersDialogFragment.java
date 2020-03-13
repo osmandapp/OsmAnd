@@ -5,16 +5,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +12,18 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
@@ -41,7 +43,6 @@ import net.osmand.plus.mapmarkers.DirectionIndicationDialogFragment.DirectionInd
 import net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.MarkerOptionsFragmentListener;
 import net.osmand.plus.mapmarkers.OrderByBottomSheetDialogFragment.OrderByFragmentListener;
 import net.osmand.plus.mapmarkers.SaveAsTrackBottomSheetDialogFragment.MarkerSaveAsTrackFragmentListener;
-import net.osmand.plus.widgets.tools.BottomNavigationViewHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,7 +51,7 @@ import java.util.List;
 import static net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.GROUPS_MARKERS_MENU;
 import static net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.HISTORY_MARKERS_MENU;
 
-public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragment implements OnGroupSyncedListener {
+public class MapMarkersDialogFragment extends DialogFragment implements OnGroupSyncedListener {
 
 	public static final String TAG = "MapMarkersDialogFragment";
 
@@ -150,7 +151,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		View mainView = inflater.inflate(R.layout.fragment_map_markers_dialog, container);
 
 		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.map_markers_toolbar);
-		Drawable icArrowBack = getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back, 
+		Drawable icArrowBack = getMyApplication().getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(getContext()),
 				lightTheme ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark);
 		toolbar.setNavigationIcon(icArrowBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
@@ -171,7 +172,6 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		
 		TextView toolbarTitle = mainView.findViewById(R.id.map_markers_toolbar_title);
 		bottomNav = mainView.findViewById(R.id.map_markers_bottom_navigation);
-		BottomNavigationViewHelper.disableShiftMode(bottomNav);
 		toolbarTitle.setTextColor(ContextCompat.getColor(getContext(), lightTheme ? R.color.active_buttons_and_links_text_light : R.color.text_color_primary_dark));
 		bottomNav.setItemIconTintList(ContextCompat.getColorStateList(getContext(), lightTheme ? R.color.bottom_navigation_color_selector_light : R.color.bottom_navigation_color_selector_dark));
 		bottomNav.setItemTextColor(ContextCompat.getColorStateList(getContext(), lightTheme ? R.color.bottom_navigation_color_selector_light : R.color.bottom_navigation_color_selector_dark));

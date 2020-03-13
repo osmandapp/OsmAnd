@@ -34,7 +34,7 @@
 		android:layout_height="wrap_content"
 		android:background="?attr/bg_color">
 
-		<android.support.v7.widget.SwitchCompat
+		<androidx.appcompat.widget.SwitchCompat
 			android:id="@+id/switchItem"
 			android:layout_width="match_parent"
 			android:focusable="false"

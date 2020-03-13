@@ -3292,4 +3292,13 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="selected_profile">Izbrani profil</string>
     <string name="reset_all_profile_settings_descr">Vse nastavitve profila bodo počiščene na stanje takoj po namestitvi.</string>
     <string name="reset_all_profile_settings">Ali želite vse nastavitve profila povrniti na privzete vrednosti\?</string>
+    <string name="shared_string_app_default_w_val">Programsko privzeto (%s)</string>
+    <string name="profile_type_custom_string">Profil po meri</string>
+    <string name="shared_string_angle_param">Kot: %s°</string>
+    <string name="shared_string_angle">Kot</string>
+    <string name="shared_string_preparing">Poteka priprava ...</string>
+    <string name="shared_string_poi_types">Vrste točk POI</string>
+    <string name="shared_string_nothing_selected">Ni izbranih predmetov</string>
+    <string name="shared_string_quick_actions">Hitra dejanja</string>
+    <string name="shared_string_profiles">Profili</string>
 </resources>

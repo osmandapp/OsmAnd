@@ -2,12 +2,13 @@ package net.osmand.plus.settings;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceViewHolder;
-import android.support.v7.preference.SwitchPreferenceCompat;
 import android.util.Pair;
 import android.widget.ImageView;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;

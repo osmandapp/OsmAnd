@@ -1,8 +1,6 @@
 package net.osmand.plus.settings;
 
 import android.content.res.ColorStateList;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.CompoundButtonCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +8,9 @@ import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.CompoundButtonCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
@@ -21,7 +22,6 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.profiles.AdditionalDataWrapper;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.render.RenderingIcons;
@@ -30,10 +30,12 @@ import net.osmand.view.ThreeStateCheckbox;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static net.osmand.view.ThreeStateCheckbox.State.CHECKED;
-import static net.osmand.view.ThreeStateCheckbox.State.UNCHECKED;
 import static net.osmand.view.ThreeStateCheckbox.State.MISC;
 
 class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
@@ -41,7 +43,8 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	private OsmandApplication app;
 	private UiUtilities uiUtilities;
 	private List<? super Object> dataToOperate;
-	private List<AdditionalDataWrapper> dataList;
+	private Map<Type, List<?>> itemsMap;
+	private List<Type> itemsTypes;
 	private boolean nightMode;
 	private boolean importState;
 	private int profileColor;
@@ -51,6 +54,10 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		this.app = app;
 		this.nightMode = nightMode;
 		this.importState = importState;
+		this.itemsMap = new HashMap<>();
+		this.itemsTypes = new ArrayList<>();
+		this.dataToOperate = new ArrayList<>();
+		this.profileColor = app.getSettings().getApplicationMode().getIconColorInfo().getColor(nightMode);
 		dataList = new ArrayList<>();
 		dataToOperate = new ArrayList<>();
 		profileColor = app.getSettings().getApplicationMode().getIconColorInfo().getColor(nightMode);
@@ -69,7 +76,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		}
 
 		boolean isLastGroup = groupPosition == getGroupCount() - 1;
-		final AdditionalDataWrapper.Type type = dataList.get(groupPosition).getType();
+		final Type type = itemsTypes.get(groupPosition);
 
 		TextView titleTv = group.findViewById(R.id.title_tv);
 		TextView subTextTv = group.findViewById(R.id.sub_text_tv);
@@ -86,7 +93,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		cardBottomDivider.setVisibility(importState && !isExpanded ? View.VISIBLE : View.GONE);
 		CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, activeColorRes)));
 
-		final List<?> listItems = dataList.get(groupPosition).getItems();
+		final List<?> listItems = itemsMap.get(type);
 		subTextTv.setText(String.valueOf(listItems.size()));
 
 		if (dataToOperate.containsAll(listItems)) {
@@ -117,7 +124,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				notifyDataSetChanged();
 			}
 		});
-		adjustIndicator(app, groupPosition, isExpanded, group, true);
+		adjustIndicator(app, groupPosition, isExpanded, group, nightMode);
 		return group;
 	}
 
@@ -128,11 +135,11 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 			LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 			child = inflater.inflate(R.layout.profile_data_list_item_child, parent, false);
 		}
-		final Object currentItem = dataList.get(groupPosition).getItems().get(childPosition);
+		final Object currentItem = itemsMap.get(itemsTypes.get(groupPosition)).get(childPosition);
 
 		boolean isLastGroup = groupPosition == getGroupCount() - 1;
 		boolean itemSelected = dataToOperate.contains(currentItem);
-		final AdditionalDataWrapper.Type type = dataList.get(groupPosition).getType();
+		final Type type = itemsTypes.get(groupPosition);
 
 		TextView title = child.findViewById(R.id.title_tv);
 		TextView subText = child.findViewById(R.id.sub_title_tv);
@@ -225,22 +232,22 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
 	@Override
 	public int getGroupCount() {
-		return dataList.size();
+		return itemsTypes.size();
 	}
 
 	@Override
 	public int getChildrenCount(int i) {
-		return dataList.get(i).getItems().size();
+		return itemsMap.get(itemsTypes.get(i)).size();
 	}
 
 	@Override
 	public Object getGroup(int i) {
-		return dataList.get(i);
+		return itemsMap.get(itemsTypes.get(i));
 	}
 
 	@Override
 	public Object getChild(int groupPosition, int childPosition) {
-		return dataList.get(groupPosition).getItems().get(childPosition);
+		return itemsMap.get(itemsTypes.get(groupPosition)).get(childPosition);
 	}
 
 	@Override
@@ -263,7 +270,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		return true;
 	}
 
-	private int getGroupTitle(AdditionalDataWrapper.Type type) {
+	private int getGroupTitle(Type type) {
 		switch (type) {
 			case PROFILE:
 				return R.string.shared_string_profiles;
@@ -284,29 +291,32 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		}
 	}
 
-	private void setupIcon(ImageView icon, int iconRes, boolean itemSelected) {
-		if (itemSelected) {
-			icon.setImageDrawable(uiUtilities.getIcon(iconRes, activeColorRes));
-		} else {
-			icon.setImageDrawable(uiUtilities.getIcon(iconRes, nightMode));
-		}
-	}
+    private void setupIcon(ImageView icon, int iconRes, boolean itemSelected) {
+        if (itemSelected) {
+            icon.setImageDrawable(uiUtilities.getIcon(iconRes, activeColorRes));
+        } else {
+            icon.setImageDrawable(uiUtilities.getIcon(iconRes, nightMode));
+        }
+    }
 
-	public void updateSettingsList(List<AdditionalDataWrapper> settingsList) {
-		this.dataList = settingsList;
+	public void updateSettingsList(Map<Type, List<?>> itemsMap) {
+		this.itemsMap = itemsMap;
+		this.itemsTypes = new ArrayList<>(itemsMap.keySet());
+		Collections.sort(itemsTypes);
 		notifyDataSetChanged();
 	}
 
 	public void clearSettingsList() {
-		this.dataList.clear();
+		this.itemsMap.clear();
+		this.itemsTypes.clear();
 		notifyDataSetChanged();
 	}
 
 	public void selectAll(boolean selectAll) {
 		dataToOperate.clear();
 		if (selectAll) {
-			for (AdditionalDataWrapper item : dataList) {
-				dataToOperate.addAll(item.getItems());
+			for (List<?> values : itemsMap.values()) {
+				dataToOperate.addAll(values);
 			}
 		}
 		notifyDataSetChanged();
@@ -314,5 +324,15 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
 	List<? super Object> getDataToOperate() {
 		return this.dataToOperate;
+	}
+
+	public enum Type {
+		PROFILE,
+		QUICK_ACTIONS,
+		POI_TYPES,
+		MAP_SOURCES,
+		CUSTOM_RENDER_STYLE,
+		CUSTOM_ROUTING,
+		AVOID_ROADS
 	}
 }

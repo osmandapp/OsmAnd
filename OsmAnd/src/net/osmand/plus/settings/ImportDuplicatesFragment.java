@@ -3,15 +3,6 @@ package net.osmand.plus.settings;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.widget.NestedScrollView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +12,16 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+
 import net.osmand.AndroidUtils;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.AppInitializer;
@@ -28,6 +29,8 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SettingsHelper;
+import net.osmand.plus.SettingsHelper.ImportAsyncTask;
+import net.osmand.plus.SettingsHelper.ImportType;
 import net.osmand.plus.SettingsHelper.SettingsItem;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -77,24 +80,18 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 		app = requireMyApplication();
 		settingsHelper = app.getSettingsHelper();
 		nightMode = !app.getSettings().isLightContent();
-		if (settingsItems == null) {
-			settingsItems = settingsHelper.getSelectedItems();
-		}
-		if (duplicatesList == null) {
-			duplicatesList = settingsHelper.getDuplicatesItems();
-		}
-		if (file == null) {
-			file = settingsHelper.getSettingsFile();
-		}
-		SettingsHelper.ImportAsyncTask importAsyncTask = settingsHelper.getImportTask();
-		List<SettingsItem> importedItems = settingsHelper.getImportedItems();
-		if (importAsyncTask != null) {
-			importAsyncTask.setListener(getImportListener());
-		} else if (importedItems != null) {
-			FragmentManager fm = getFragmentManager();
-			if (fm != null) {
-				ImportCompleteFragment.showInstance(fm, importedItems, file.getName());
+		ImportAsyncTask importTask = settingsHelper.getImportTask();
+		if (importTask != null) {
+			if (settingsItems == null) {
+				settingsItems = importTask.getSelectedItems();
 			}
+			if (duplicatesList == null) {
+				duplicatesList = importTask.getDuplicates();
+			}
+			if (file == null) {
+				file = importTask.getFile();
+			}
+			importTask.setImportListener(getImportListener());
 		}
 	}
 
@@ -149,20 +146,20 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 		return root;
 	}
 
-
 	@Override
-	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
+	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
 		if (duplicatesList != null) {
 			DuplicatesSettingsAdapter adapter = new DuplicatesSettingsAdapter(app, prepareDuplicates(duplicatesList), nightMode);
 			list.setLayoutManager(new LinearLayoutManager(getMyApplication()));
 			list.setAdapter(adapter);
 		}
-		if (settingsHelper.isImporting() && !settingsHelper.isCollectOnly()) {
+		if (settingsHelper.getImportTaskType() == ImportType.IMPORT) {
 			setupImportingUi();
 		} else {
 			toolbarLayout.setTitle(getString(R.string.import_duplicates_title));
 		}
+		toolbarLayout.setTitle(getString(R.string.import_duplicates_title));
 	}
 
 	private List<Object> prepareDuplicates(List<? super Object> duplicatesList) {
@@ -245,13 +242,6 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
 	}
 
-	private void dismissFragment() {
-		FragmentManager fm = getFragmentManager();
-		if (fm != null) {
-			fm.popBackStack(IMPORT_SETTINGS_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-		}
-	}
-
 	private void importItems(boolean shouldReplace) {
 		if (settingsItems != null && file != null) {
 			setupImportingUi();
@@ -277,7 +267,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 	private SettingsHelper.SettingsImportListener getImportListener() {
 		return new SettingsHelper.SettingsImportListener() {
 			@Override
-			public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
+			public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsItem> items) {
 				if (succeed) {
 					app.getRendererRegistry().updateExternalRenderers();
 					AppInitializer.loadRoutingFiles(app, new AppInitializer.LoadRoutingFilesCallback() {
@@ -286,12 +276,9 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 						}
 					});
 					FragmentManager fm = getFragmentManager();
-					if (fm != null) {
+					if (fm != null && file != null) {
 						ImportCompleteFragment.showInstance(fm, items, file.getName());
 					}
-				} else if (empty) {
-					dismissFragment();
-					app.showShortToastMessage(app.getString(R.string.file_import_error, file.getName(), app.getString(R.string.shared_string_unexpected_error)));
 				}
 			}
 		};
@@ -308,7 +295,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 			@Override
 			public void onClick(View v) {
 				FragmentManager fm = getFragmentManager();
-				if (fm != null) {
+				if (fm != null && !fm.isStateSaved()) {
 					fm.popBackStackImmediate();
 				}
 			}

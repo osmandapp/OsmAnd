@@ -1441,8 +1441,8 @@
     <string name="poi_payment_gift_card_yes">Cartões de presente</string>
     <string name="poi_payment_gift_card_no">Não aceita cartão presente</string>
     <string name="poi_description_payment">Detalhes de pagamento</string>
-    <string name="poi_internet_access_fee_yes">Acesso à Internet pago</string>
-    <string name="poi_internet_access_fee_no">Acesso à Internet grátis</string>
+    <string name="poi_internet_access_fee_yes">Acesso à Internet: taxa cobrada</string>
+    <string name="poi_internet_access_fee_no">Acesso à Internet: sem taxa</string>
     <string name="poi_events_venue">Salão de eventos</string>
     <string name="poi_diet_vegetarian_only">Apenas vegetariana</string>
     <string name="poi_diet_vegetarian_yes">Vegetariana</string>
@@ -3792,4 +3792,17 @@
     <string name="poi_piste_ref">Número de referência da pista</string>
     <string name="poi_resort_hunting">Base de caça</string>
     <string name="poi_dive_centre">Centro de mergulho</string>
+    <string name="poi_sms">SMS</string>
+    <string name="poi_video_telephone">Vídeo</string>
+    <string name="poi_sms_yes">Sim</string>
+    <string name="poi_sms_no">Não</string>
+    <string name="poi_covered_booth">Cabine</string>
+    <string name="poi_booth">Tipo de cabine</string>
+    <string name="poi_video_yes">Sim</string>
+    <string name="poi_video_no">Não</string>
+    <string name="poi_internet_access_fee_customers">Sinal para encontrar o poste</string>
+    <string name="poi_traffic_signals_sound_locate">Somente quando andar é permitido</string>
+    <string name="poi_tactile_paving_contrasted">Contrastado</string>
+    <string name="poi_tactile_paving_primitive">Primitivo</string>
+    <string name="poi_tactile_paving_incorrect">Incorreto</string>
 </resources>

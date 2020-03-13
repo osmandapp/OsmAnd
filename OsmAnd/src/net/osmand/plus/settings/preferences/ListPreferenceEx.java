@@ -2,9 +2,10 @@ package net.osmand.plus.settings.preferences;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.v7.preference.DialogPreference;
-import android.support.v7.preference.PreferenceDataStore;
 import android.util.AttributeSet;
+
+import androidx.preference.DialogPreference;
+import androidx.preference.PreferenceDataStore;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings.PreferencesDataStore;

@@ -9,7 +9,7 @@
 		android:background="?attr/wikivoyage_bg_color"
 		android:orientation="vertical">
 
-		<android.support.v7.widget.Toolbar
+		<androidx.appcompat.widget.Toolbar
 			android:id="@+id/toolbar"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/toolbar_height"
@@ -59,7 +59,7 @@
 
 			</LinearLayout>
 
-		</android.support.v7.widget.Toolbar>
+		</androidx.appcompat.widget.Toolbar>
 
 	<FrameLayout 
 		    android:layout_width="match_parent"

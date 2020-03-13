@@ -1,11 +1,12 @@
 package net.osmand.plus.search.listitems;
 
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.view.View;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;

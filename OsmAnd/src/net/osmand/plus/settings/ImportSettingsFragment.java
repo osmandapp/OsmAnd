@@ -5,13 +5,6 @@ import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
 import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +15,18 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.ViewCompat;
+import androidx.fragment.app.FragmentManager;
+
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.AppInitializer;
@@ -32,25 +35,32 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.SettingsHelper;
-import net.osmand.plus.SettingsHelper.SettingsItem;
+import net.osmand.plus.SettingsHelper.*;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.profiles.AdditionalDataWrapper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.widgets.TextViewEx;
+import net.osmand.plus.settings.ExportImportSettingsAdapter.Type;
 
+
+import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ImportSettingsFragment extends BaseOsmAndFragment
 		implements View.OnClickListener {
 
 	public static final String TAG = ImportSettingsFragment.class.getSimpleName();
-	public static final String IMPORT_SETTINGS_TAG = "import_settings_tag";
+	public static final Log LOG = PlatformUtil.getLog(ImportSettingsFragment.class.getSimpleName());
+	private static final String DUPLICATES_START_TIME_KEY = "duplicates_start_time";
+	private static final long MIN_DELAY_TIME_MS = 500;
+	static final String IMPORT_SETTINGS_TAG = "import_settings_tag";
 	private OsmandApplication app;
 	private ExportImportSettingsAdapter adapter;
 	private ExpandableListView expandableList;
@@ -64,6 +74,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 	private ProgressBar progressBar;
 	private CollapsingToolbarLayout toolbarLayout;
 	private SettingsHelper settingsHelper;
+	private long duplicateStartTime;
 
 	public static void showInstance(@NonNull FragmentManager fm, @NonNull List<SettingsItem> settingsItems, @NonNull File file) {
 		ImportSettingsFragment fragment = new ImportSettingsFragment();
@@ -76,33 +87,14 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 	}
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		if (savedInstanceState != null) {
+			duplicateStartTime = savedInstanceState.getLong(DUPLICATES_START_TIME_KEY);
+		}
 		app = requireMyApplication();
 		settingsHelper = app.getSettingsHelper();
 		nightMode = !app.getSettings().isLightContent();
-		if (settingsItems == null) {
-			settingsItems = app.getSettingsHelper().getSettingsItems();
-		}
-		if (file == null) {
-			file = app.getSettingsHelper().getSettingsFile();
-		}
-		List<Object> duplicates = settingsHelper.getDuplicatesItems();
-		if (duplicates == null) {
-			SettingsHelper.CheckDuplicatesTask checkDuplicatesTask = settingsHelper.getCheckDuplicatesTask();
-			if (checkDuplicatesTask != null) {
-				settingsHelper.getCheckDuplicatesTask().setListener(getDuplicatesListener());
-			}
-		} else {
-			FragmentManager fm = getFragmentManager();
-			if (duplicates.isEmpty()) {
-				app.getSettingsHelper().importSettings(file, settingsItems, "", 1, getImportListener());
-			} else {
-				if (fm != null) {
-					ImportDuplicatesFragment.showInstance(fm, duplicates, settingsItems, file);
-				}
-			}
-		}
 	}
 
 	@Nullable
@@ -148,21 +140,48 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 	}
 
 	@Override
-	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
+	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		ImportAsyncTask importTask = settingsHelper.getImportTask();
+		if (importTask != null) {
+			if (settingsItems == null) {
+				settingsItems = importTask.getItems();
+			}
+			if (file == null) {
+				file = importTask.getFile();
+			}
+			List<Object> duplicates = importTask.getDuplicates();
+			List<SettingsItem> selectedItems = importTask.getSelectedItems();
+			if (duplicates == null) {
+				importTask.setDuplicatesListener(getDuplicatesListener());
+			} else if (duplicates.isEmpty()) {
+				if (selectedItems != null && file != null) {
+					settingsHelper.importSettings(file, selectedItems, "", 1, getImportListener());
+				}
+			}
+		}
+
 		adapter = new ExportImportSettingsAdapter(app, nightMode, true);
 		if (settingsItems != null) {
 			adapter.updateSettingsList(getSettingsToOperate(settingsItems));
 		}
 		expandableList.setAdapter(adapter);
+		toolbarLayout.setTitle(getString(R.string.shared_string_import));
 
-		if (settingsHelper.isCheckingDuplicates()) {
+		ImportType importTaskType = settingsHelper.getImportTaskType();
+		if (importTaskType == ImportType.CHECK_DUPLICATES && !settingsHelper.isImportDone()) {
 			updateUi(R.string.shared_string_preparing, R.string.checking_for_duplicate_description);
-		} else if (settingsHelper.isImporting() && !settingsHelper.isCollectOnly()) {
+		} else if (importTaskType == ImportType.IMPORT) {
 			updateUi(R.string.shared_string_importing, R.string.importing_from);
 		} else {
 			toolbarLayout.setTitle(getString(R.string.shared_string_import));
 		}
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putLong(DUPLICATES_START_TIME_KEY, duplicateStartTime);
 	}
 
 	@Override
@@ -186,27 +205,33 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 	}
 
 	private void updateUi(int toolbarTitleRes, int descriptionRes) {
-		toolbarLayout.setTitle(getString(toolbarTitleRes));
-		description.setText(UiUtilities.createSpannableString(
-				String.format(getString(descriptionRes), file.getName()),
-				file.getName(),
-				new StyleSpan(Typeface.BOLD)
-		));
-		buttonsContainer.setVisibility(View.GONE);
-		progressBar.setVisibility(View.VISIBLE);
-		adapter.clearSettingsList();
+		if (file != null) {
+			String fileName = file.getName();
+			toolbarLayout.setTitle(getString(toolbarTitleRes));
+			description.setText(UiUtilities.createSpannableString(
+					String.format(getString(descriptionRes), fileName),
+					fileName,
+					new StyleSpan(Typeface.BOLD)
+			));
+			buttonsContainer.setVisibility(View.GONE);
+			progressBar.setVisibility(View.VISIBLE);
+			adapter.clearSettingsList();
+		}
 	}
 
 	private void importItems() {
 		updateUi(R.string.shared_string_preparing, R.string.checking_for_duplicate_description);
-		List<SettingsItem> settingsItems = getSettingsItemsFromData(adapter.getDataToOperate());
-		settingsHelper.checkDuplicates(settingsItems, getDuplicatesListener());
+		List<SettingsItem> selectedItems = getSettingsItemsFromData(adapter.getDataToOperate());
+		if (file != null && settingsItems != null) {
+			duplicateStartTime = System.currentTimeMillis();
+			settingsHelper.checkDuplicates(file, settingsItems, selectedItems, getDuplicatesListener());
+		}
 	}
 
 	private SettingsHelper.SettingsImportListener getImportListener() {
 		return new SettingsHelper.SettingsImportListener() {
 			@Override
-			public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
+			public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsItem> items) {
 				FragmentManager fm = getFragmentManager();
 				if (succeed) {
 					app.getRendererRegistry().updateExternalRenderers();
@@ -215,12 +240,9 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 						public void onRoutingFilesLoaded() {
 						}
 					});
-					if (fm != null) {
+					if (fm != null && file != null) {
 						ImportCompleteFragment.showInstance(fm, items, file.getName());
 					}
-				} else if (empty) {
-					app.showShortToastMessage(app.getString(R.string.file_import_error, file.getName(), app.getString(R.string.shared_string_unexpected_error)));
-					dismissFragment();
 				}
 			}
 		};
@@ -229,27 +251,40 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 	private SettingsHelper.CheckDuplicatesListener getDuplicatesListener() {
 		return new SettingsHelper.CheckDuplicatesListener() {
 			@Override
-			public void onDuplicatesChecked(@NonNull List<Object> duplicates, List<SettingsItem> items) {
-				FragmentManager fm = getFragmentManager();
-				if (duplicates.isEmpty()) {
-					if (isAdded()) {
-						updateUi(R.string.shared_string_importing, R.string.importing_from);
-					}
-					settingsHelper.importSettings(file, items, "", 1, getImportListener());
-				} else {
-					if (fm != null) {
-						if (!isStateSaved()) {
-							ImportDuplicatesFragment.showInstance(fm, duplicates, items, file);
+			public void onDuplicatesChecked(@NonNull final List<Object> duplicates, final List<SettingsItem> items) {
+				long spentTime = System.currentTimeMillis() - duplicateStartTime;
+				if (spentTime < MIN_DELAY_TIME_MS) {
+					long delay = MIN_DELAY_TIME_MS - spentTime;
+					app.runInUIThread(new Runnable() {
+						@Override
+						public void run() {
+							processDuplicates(duplicates, items);
 						}
-					}
+					}, delay);
+				} else {
+					processDuplicates(duplicates, items);
 				}
 			}
 		};
 	}
 
+	private void processDuplicates(List<Object> duplicates, List<SettingsItem> items) {
+		FragmentManager fm = getFragmentManager();
+		if (file != null) {
+			if (duplicates.isEmpty()) {
+				if (isAdded()) {
+					updateUi(R.string.shared_string_importing, R.string.importing_from);
+				}
+				settingsHelper.importSettings(file, items, "", 1, getImportListener());
+			} else if (fm != null && !isStateSaved()) {
+				ImportDuplicatesFragment.showInstance(fm, duplicates, items, file);
+			}
+		}
+	}
+
 	private void dismissFragment() {
 		FragmentManager fm = getFragmentManager();
-		if (fm != null) {
+		if (fm != null && !fm.isStateSaved()) {
 			getFragmentManager().popBackStack(IMPORT_SETTINGS_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
 	}
@@ -296,8 +331,8 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		return settingsItems;
 	}
 
-	public static List<AdditionalDataWrapper> getSettingsToOperate(List<SettingsItem> settingsItems) {
-		List<AdditionalDataWrapper> settingsToOperate = new ArrayList<>();
+	public static Map<Type, List<?>> getSettingsToOperate(List<SettingsItem> settingsItems) {
+		Map<Type, List<?>> settingsToOperate = new HashMap<>();
 		List<ApplicationMode.ApplicationModeBean> profiles = new ArrayList<>();
 		List<QuickAction> quickActions = new ArrayList<>();
 		List<PoiUIFilter> poiUIFilters = new ArrayList<>();
@@ -306,68 +341,50 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		List<File> renderFilesList = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
 
-		for (SettingsHelper.SettingsItem item : settingsItems) {
-			if (item.getType().equals(SettingsHelper.SettingsItemType.PROFILE)) {
-				profiles.add(((SettingsHelper.ProfileSettingsItem) item).getModeBean());
-			} else if (item.getType().equals(SettingsHelper.SettingsItemType.QUICK_ACTION)) {
-				quickActions.addAll(((SettingsHelper.QuickActionSettingsItem) item).getItems());
-				quickActions.addAll(((SettingsHelper.QuickActionSettingsItem) item).getDuplicateItems());
-			} else if (item.getType().equals(SettingsHelper.SettingsItemType.POI_UI_FILTERS)) {
-				poiUIFilters.addAll(((SettingsHelper.PoiUiFilterSettingsItem) item).getItems());
-				poiUIFilters.addAll(((SettingsHelper.PoiUiFilterSettingsItem) item).getDuplicateItems());
-			} else if (item.getType().equals(SettingsHelper.SettingsItemType.MAP_SOURCES)) {
-				tileSourceTemplates.addAll(((SettingsHelper.MapSourcesSettingsItem) item).getItems());
-				tileSourceTemplates.addAll(((SettingsHelper.MapSourcesSettingsItem) item).getDuplicateItems());
-			} else if (item.getType().equals(SettingsHelper.SettingsItemType.FILE)) {
+		for (SettingsItem item : settingsItems) {
+			if (item.getType().equals(SettingsItemType.PROFILE)) {
+				profiles.add(((ProfileSettingsItem) item).getModeBean());
+			} else if (item.getType().equals(SettingsItemType.QUICK_ACTION)) {
+				quickActions.addAll(((QuickActionSettingsItem) item).getItems());
+				quickActions.addAll(((QuickActionSettingsItem) item).getDuplicateItems());
+			} else if (item.getType().equals(SettingsItemType.POI_UI_FILTERS)) {
+				poiUIFilters.addAll(((PoiUiFilterSettingsItem) item).getItems());
+				poiUIFilters.addAll(((PoiUiFilterSettingsItem) item).getDuplicateItems());
+			} else if (item.getType().equals(SettingsItemType.MAP_SOURCES)) {
+				tileSourceTemplates.addAll(((MapSourcesSettingsItem) item).getItems());
+				tileSourceTemplates.addAll(((MapSourcesSettingsItem) item).getDuplicateItems());
+			} else if (item.getType().equals(SettingsItemType.FILE)) {
 				if (item.getName().contains(IndexConstants.RENDERERS_DIR)) {
-					renderFilesList.add(((SettingsHelper.FileSettingsItem) item).getFile());
+					renderFilesList.add(((FileSettingsItem) item).getFile());
 				} else if (item.getName().contains(IndexConstants.ROUTING_PROFILES_DIR)) {
-					routingFilesList.add(((SettingsHelper.FileSettingsItem) item).getFile());
+					routingFilesList.add(((FileSettingsItem) item).getFile());
 				}
-			} else if (item.getType().equals(SettingsHelper.SettingsItemType.AVOID_ROADS)) {
-				avoidRoads.addAll(((SettingsHelper.AvoidRoadsSettingsItem) item).getItems());
-				avoidRoads.addAll(((SettingsHelper.AvoidRoadsSettingsItem) item).getDuplicateItems());
+			} else if (item.getType().equals(SettingsItemType.AVOID_ROADS)) {
+				avoidRoads.addAll(((AvoidRoadsSettingsItem) item).getItems());
+				avoidRoads.addAll(((AvoidRoadsSettingsItem) item).getDuplicateItems());
 			}
 		}
 
 		if (!profiles.isEmpty()) {
-			settingsToOperate.add(new AdditionalDataWrapper(
-					AdditionalDataWrapper.Type.PROFILE,
-					profiles));
+			settingsToOperate.put(Type.PROFILE, profiles);
 		}
 		if (!quickActions.isEmpty()) {
-			settingsToOperate.add(new AdditionalDataWrapper(
-					AdditionalDataWrapper.Type.QUICK_ACTIONS,
-					quickActions));
+			settingsToOperate.put(Type.QUICK_ACTIONS, quickActions);
 		}
 		if (!poiUIFilters.isEmpty()) {
-			settingsToOperate.add(new AdditionalDataWrapper(
-					AdditionalDataWrapper.Type.POI_TYPES,
-					poiUIFilters));
+			settingsToOperate.put(Type.POI_TYPES, poiUIFilters);
 		}
 		if (!tileSourceTemplates.isEmpty()) {
-			settingsToOperate.add(new AdditionalDataWrapper(
-					AdditionalDataWrapper.Type.MAP_SOURCES,
-					tileSourceTemplates
-			));
+			settingsToOperate.put(Type.MAP_SOURCES, tileSourceTemplates);
 		}
 		if (!renderFilesList.isEmpty()) {
-			settingsToOperate.add(new AdditionalDataWrapper(
-					AdditionalDataWrapper.Type.CUSTOM_RENDER_STYLE,
-					renderFilesList
-			));
+			settingsToOperate.put(Type.CUSTOM_RENDER_STYLE, renderFilesList);
 		}
 		if (!routingFilesList.isEmpty()) {
-			settingsToOperate.add(new AdditionalDataWrapper(
-					AdditionalDataWrapper.Type.CUSTOM_ROUTING,
-					routingFilesList
-			));
+			settingsToOperate.put(Type.CUSTOM_ROUTING, routingFilesList);
 		}
 		if (!avoidRoads.isEmpty()) {
-			settingsToOperate.add(new AdditionalDataWrapper(
-					AdditionalDataWrapper.Type.AVOID_ROADS,
-					avoidRoads
-			));
+			settingsToOperate.put(Type.AVOID_ROADS, avoidRoads);
 		}
 		return settingsToOperate;
 	}
@@ -386,10 +403,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		dismissDialog.setPositiveButton(R.string.shared_string_exit, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				FragmentManager fm = getFragmentManager();
-				if (fm != null) {
-					fm.popBackStack(IMPORT_SETTINGS_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-				}
+				dismissFragment();
 			}
 		});
 		dismissDialog.show();

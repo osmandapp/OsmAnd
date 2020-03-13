@@ -2,8 +2,9 @@ package net.osmand.plus.settings;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.SwitchPreferenceCompat;
+
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;

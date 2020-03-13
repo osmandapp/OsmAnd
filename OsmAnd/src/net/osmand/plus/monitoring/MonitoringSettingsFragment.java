@@ -4,10 +4,11 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.preference.Preference;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndAppCustomization;

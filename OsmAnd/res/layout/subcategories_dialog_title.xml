@@ -60,7 +60,7 @@
                 android:textSize="@dimen/default_list_text_size"
                 android:text="@string/shared_string_select_all"/>
 
-            <android.support.v7.widget.SwitchCompat
+            <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/check"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

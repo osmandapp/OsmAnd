@@ -1,10 +1,11 @@
 package net.osmand.plus.mapcontextmenu.builders.cards;
 
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.LockableViewPager;

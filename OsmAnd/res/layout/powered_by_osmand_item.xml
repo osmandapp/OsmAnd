@@ -5,7 +5,7 @@
 	android:layout_gravity="bottom"
 	android:orientation="horizontal">
 
-	<android.support.v7.widget.AppCompatImageView
+	<androidx.appcompat.widget.AppCompatImageView
 		android:layout_width="36dp"
 		android:layout_height="36dp"
 		android:layout_gravity="center"

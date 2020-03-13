@@ -15,7 +15,7 @@
         android:minHeight="60dp"
         android:orientation="horizontal">
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/handle_view"
             android:layout_width="56dp"
             android:layout_height="match_parent"
@@ -27,7 +27,7 @@
             android:src="@drawable/ic_action_reorder"
 	        android:layout_marginEnd="4dp" />
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageView"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -69,7 +69,7 @@
 
         </LinearLayout>
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/closeImageButton"
             android:layout_width="56dp"
             android:layout_height="match_parent"

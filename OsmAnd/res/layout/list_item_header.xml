@@ -36,7 +36,7 @@
                 android:visibility="gone"
                 tools:visibility="visible"/>
 
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/title_text_view"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

@@ -3,9 +3,6 @@ package net.osmand.plus.search;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +11,11 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.core.view.ViewCompat;
+
 import net.osmand.AndroidUtils;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.access.AccessibilityAssistant;
@@ -438,7 +440,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 					divider.setLayoutParams(p);
 				} else {
 					LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp1);
-					p.setMargins(dp56, 0, 0 ,0);
+					AndroidUtils.setMargins(p, dp56, 0, 0, 0);
 					divider.setLayoutParams(p);
 				}
 			}

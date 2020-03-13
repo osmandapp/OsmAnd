@@ -19,13 +19,14 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
-import android.support.multidex.MultiDex;
-import android.support.multidex.MultiDexApplication;
-import android.support.v7.app.AlertDialog;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.multidex.MultiDex;
+import androidx.multidex.MultiDexApplication;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;

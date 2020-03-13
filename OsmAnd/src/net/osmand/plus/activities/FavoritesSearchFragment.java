@@ -8,13 +8,6 @@ import android.content.DialogInterface;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -32,6 +25,15 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.access.AccessibilityAssistant;
@@ -105,7 +107,8 @@ public class FavoritesSearchFragment extends DialogFragment {
 		}
 
 		toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_arrow_back));
+		Drawable icBack = app.getUIUtilities().getThemedIcon(AndroidUtils.getNavigationIconResId(activity));
+		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(
 				new View.OnClickListener() {
@@ -219,7 +222,10 @@ public class FavoritesSearchFragment extends DialogFragment {
 	public void onDismiss(DialogInterface dialog) {
 		Activity activity = getActivity();
 		if (activity != null) {
-			getChildFragmentManager().popBackStack();
+			FragmentManager fragmentManager = getChildFragmentManager();
+			if (!fragmentManager.isStateSaved()) {
+				fragmentManager.popBackStack();
+			}
 		}
 		super.onDismiss(dialog);
 	}

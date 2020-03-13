@@ -7,11 +7,6 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.support.annotation.DrawableRes
-import android.support.v4.app.Fragment
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +14,9 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Switch
 import android.widget.TextView
+import androidx.annotation.DrawableRes
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.LocationMessages
@@ -110,7 +108,7 @@ class TimelineTabFragment : Fragment() {
 			}
 		}
 
-		mainView.findViewById<SwipeRefreshLayout>(R.id.swipe_refresh).apply {
+		mainView.findViewById<androidx.swiperefreshlayout.widget.SwipeRefreshLayout>(R.id.swipe_refresh).apply {
 			setOnRefreshListener {
 				updateList()
 				isRefreshing = false
@@ -224,7 +222,7 @@ class TimelineTabFragment : Fragment() {
 		return list
 	}
 
-	inner class LiveNowListAdapter : RecyclerView.Adapter<BaseViewHolder>() {
+	inner class LiveNowListAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<BaseViewHolder>() {
 
 		var items: List<ListItem> = emptyList()
 			set(value) {
@@ -298,7 +296,7 @@ class TimelineTabFragment : Fragment() {
 
 		override fun getItemCount() = items.size
 
-		inner class BaseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+		inner class BaseViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 			val icon: ImageView? = view.findViewById(R.id.icon)
 			val title: TextView? = view.findViewById(R.id.title)
 			val description: TextView? = view.findViewById(R.id.description)

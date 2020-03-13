@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:descendantFocusability="blocksDescendants"
-    android:minHeight="@dimen/list_item_height"
-    android:paddingTop="@dimen/content_padding_half"
-    android:paddingBottom="@dimen/content_padding_half"
-    android:orientation="vertical">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:descendantFocusability="blocksDescendants"
+	android:minHeight="@dimen/list_item_height"
+	android:paddingTop="@dimen/content_padding_half"
+	android:paddingBottom="@dimen/content_padding_half"
+	android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +17,7 @@
 	    android:paddingStart="@dimen/list_content_padding"
 	    android:paddingEnd="@dimen/list_content_padding">
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

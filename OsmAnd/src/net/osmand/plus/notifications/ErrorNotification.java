@@ -1,7 +1,8 @@
 package net.osmand.plus.notifications;
 
 import android.content.Intent;
-import android.support.v4.app.NotificationCompat;
+
+import androidx.core.app.NotificationCompat;
 
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;

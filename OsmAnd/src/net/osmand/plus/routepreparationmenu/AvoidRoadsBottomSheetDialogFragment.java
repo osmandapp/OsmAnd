@@ -4,11 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.ColorRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +11,12 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
@@ -101,7 +102,8 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		textView.setText(!hideImpassableRoads ? R.string.impassable_road : R.string.avoid_pt_types);
 
 		Toolbar toolbar = (Toolbar) titleView.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(getContentIcon(R.drawable.ic_arrow_back));
+		int icBackResId = AndroidUtils.getNavigationIconResId(app);
+		toolbar.setNavigationIcon(getContentIcon(icBackResId));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override

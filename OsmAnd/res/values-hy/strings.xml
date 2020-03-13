@@ -2743,4 +2743,5 @@
     <string name="language_and_output">Լեզու</string>
     <string name="reset_to_default">Վերականգնել սկզբնական կարգավորումները</string>
     <string name="application_profile_changed">Պրոֆիլը փոխվել է \"%s\"</string>
+    <string name="restore_all_profile_settings_descr">All profile settings will be restored to their original state after creating/importing this profile.</string>
 </resources>

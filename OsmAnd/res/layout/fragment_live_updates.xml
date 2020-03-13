@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-	<android.support.v4.widget.SwipeRefreshLayout
+	<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 		android:id="@+id/swipe_refresh"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
@@ -21,7 +21,7 @@
 			android:orientation="vertical"
 			tools:context=".liveupdates.LiveUpdatesFragment" />
 		
-	</android.support.v4.widget.SwipeRefreshLayout>
+	</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ProgressBar
         android:id="@+id/progress"

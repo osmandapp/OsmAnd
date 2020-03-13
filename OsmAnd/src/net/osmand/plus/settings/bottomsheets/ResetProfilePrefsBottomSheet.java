@@ -6,10 +6,11 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
@@ -31,9 +32,12 @@ public class ResetProfilePrefsBottomSheet extends BasePreferenceBottomSheet {
 			return;
 		}
 
-		items.add(new TitleItem(getString(R.string.reset_all_profile_settings)));
-
 		ApplicationMode mode = getAppMode();
+		boolean customProfile = mode.isCustomProfile();
+
+		String title = getString(customProfile ? R.string.restore_all_profile_settings : R.string.reset_all_profile_settings);
+		items.add(new TitleItem(title));
+
 		int profileColor = mode.getIconColorInfo().getColor(nightMode);
 		int colorNoAlpha = ContextCompat.getColor(ctx, profileColor);
 
@@ -52,12 +56,15 @@ public class ResetProfilePrefsBottomSheet extends BasePreferenceBottomSheet {
 				.create();
 		items.add(profileItem);
 
-		StringBuilder description = new StringBuilder(getString(R.string.reset_confirmation_descr, getString(R.string.shared_string_reset)));
-		description.append("\n\n");
-		description.append(getString(R.string.reset_all_profile_settings_descr));
+		String restoreDescr = getString(customProfile ? R.string.shared_string_restore : R.string.shared_string_reset);
+		String description = getString(customProfile ? R.string.restore_all_profile_settings_descr : R.string.reset_all_profile_settings_descr);
+
+		StringBuilder stringBuilder = new StringBuilder(description);
+		stringBuilder.append("\n\n");
+		stringBuilder.append(getString(R.string.reset_confirmation_descr, restoreDescr));
 
 		BaseBottomSheetItem resetAllSettings = new BottomSheetItemWithDescription.Builder()
-				.setDescription(description)
+				.setDescription(stringBuilder)
 				.setLayoutId(R.layout.bottom_sheet_item_pref_info)
 				.create();
 		items.add(resetAllSettings);
@@ -65,7 +72,7 @@ public class ResetProfilePrefsBottomSheet extends BasePreferenceBottomSheet {
 
 	@Override
 	protected int getRightBottomButtonTextId() {
-		return R.string.shared_string_reset;
+		return getAppMode().isCustomProfile() ? R.string.shared_string_restore : R.string.shared_string_reset;
 	}
 
 	@Override

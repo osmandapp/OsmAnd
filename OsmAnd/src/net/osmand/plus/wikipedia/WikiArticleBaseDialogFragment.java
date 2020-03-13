@@ -2,13 +2,14 @@ package net.osmand.plus.wikipedia;
 
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.ColorRes;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;

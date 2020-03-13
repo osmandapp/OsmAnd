@@ -1,6 +1,6 @@
 package net.osmand.plus.poi;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;

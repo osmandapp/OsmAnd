@@ -7,8 +7,6 @@ import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.support.v7.view.ContextThemeWrapper;
-import android.support.v7.widget.AppCompatButton;
 import android.text.ClipboardManager;
 import android.text.TextUtils;
 import android.text.util.Linkify;
@@ -22,6 +20,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.appcompat.widget.AppCompatButton;
 
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.core.samples.android.sample1.IconsCache;

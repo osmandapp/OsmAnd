@@ -9,15 +9,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.view.ContextThemeWrapper;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.TypedValue;
@@ -29,6 +20,18 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
@@ -481,8 +484,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	}
 
 	private void buildMenuButtons(@NonNull View view) {
-		View backButton = view.findViewById(R.id.back_button);
-		View backButtonFlow = view.findViewById(R.id.back_button_flow);
+		AppCompatImageView backButton = (AppCompatImageView) view.findViewById(R.id.back_button);
+		AppCompatImageButton backButtonFlow = (AppCompatImageButton) view.findViewById(R.id.back_button_flow);
 		OnClickListener backOnClick = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -491,6 +494,9 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		};
 		backButton.setOnClickListener(backOnClick);
 		backButtonFlow.setOnClickListener(backOnClick);
+		int navigationIconResId = AndroidUtils.getNavigationIconResId(getContext());
+		backButton.setImageResource(navigationIconResId);
+		backButtonFlow.setImageResource(navigationIconResId);
 
 		OnClickListener printOnClick = new OnClickListener() {
 			@Override

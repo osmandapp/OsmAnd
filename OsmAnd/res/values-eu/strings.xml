@@ -3572,4 +3572,9 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="import_duplicates_title">Dagoeneko zenbait elementu existitzen dira</string>
     <string name="select_data_to_import">Hautatu inportatu beharreko datuak.</string>
     <string name="shared_string_rendering_style">Errendatze-estiloa</string>
+    <string name="import_rendering_file">Inportatu errendatze fitxategia</string>
+    <string name="restore_all_profile_settings_descr">Profil ezarpen guztiak bere hasierako egoerara berezarriko dira fitxategi hau sortu/inportatu ondoren.</string>
+    <string name="restore_all_profile_settings">Profil ezarpen guztiak berezarri\?</string>
+    <string name="saving_new_profile">Profil berria gordetzen</string>
+    <string name="profile_backup_failed">Ezin izan da profilaren segurtasun kopia bat egin.</string>
 </resources>

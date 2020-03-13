@@ -1,14 +1,15 @@
 package net.osmand.plus;
 
-import android.support.annotation.ColorInt;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ContextThemeWrapper;
 
 public class DialogListItemAdapter extends BaseAdapter {
 
@@ -79,7 +80,6 @@ public class DialogListItemAdapter extends BaseAdapter {
 		}
 		View button = view.findViewById(R.id.button);
 		button.setTag(position);
-		UiUtilities.setupLayoutDirection(button);
 		final CompoundButton cb;
 		if (multiChoice) {
 			cb = view.findViewById(R.id.checkbox);

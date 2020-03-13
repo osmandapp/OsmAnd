@@ -4,31 +4,31 @@ import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.SettingsHelper.SettingsItem;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
-import net.osmand.plus.profiles.AdditionalDataWrapper;
 import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.routepreparationmenu.AvoidRoadsBottomSheetDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment;
+import net.osmand.plus.settings.ExportImportSettingsAdapter.Type;
 
 import java.util.List;
 
@@ -38,40 +38,29 @@ import static net.osmand.plus.settings.ImportSettingsFragment.getSettingsToOpera
 
 public class ImportCompleteFragment extends BaseOsmAndFragment {
 	public static final String TAG = ImportCompleteFragment.class.getSimpleName();
-	private static final String FILE_NAME_KEY = "FILE_NAME_KEY";
 	private OsmandApplication app;
 	private RecyclerView recyclerView;
 	private List<SettingsItem> settingsItems;
 	private String fileName;
 	private boolean nightMode;
-	private SettingsHelper settingsHelper;
 
 	public static void showInstance(FragmentManager fm, @NonNull List<SettingsItem> settingsItems,
 									@NonNull String fileName) {
 		ImportCompleteFragment fragment = new ImportCompleteFragment();
 		fragment.setSettingsItems(settingsItems);
 		fragment.setFileName(fileName);
+		fragment.setRetainInstance(true);
 		fm.beginTransaction()
 				.replace(R.id.fragmentContainer, fragment, TAG)
 				.addToBackStack(IMPORT_SETTINGS_TAG)
-				.commit();
+				.commitAllowingStateLoss();
 	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if (savedInstanceState != null) {
-			fileName = savedInstanceState.getString(FILE_NAME_KEY);
-		}
 		app = requireMyApplication();
-		settingsHelper = app.getSettingsHelper();
 		nightMode = !app.getSettings().isLightContent();
-		if (settingsItems == null) {
-			settingsItems = settingsHelper.getImportedItems();
-			if (settingsItems == null) {
-				dismissFragment();
-			}
-		}
 	}
 
 	@Nullable
@@ -110,7 +99,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 					nightMode,
 					new ImportedSettingsItemsAdapter.OnItemClickListener() {
 						@Override
-						public void onItemClick(AdditionalDataWrapper.Type type) {
+						public void onItemClick(Type type) {
 							navigateTo(type);
 						}
 					});
@@ -119,25 +108,17 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	@Override
-	public void onSaveInstanceState(@NonNull Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putString(FILE_NAME_KEY, fileName);
-	}
-
 	public void dismissFragment() {
 		FragmentManager fm = getFragmentManager();
-		if (fm != null) {
+		if (fm != null && !fm.isStateSaved()) {
 			fm.popBackStack(IMPORT_SETTINGS_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
-		settingsHelper.setImportedItems(null);
-		settingsHelper.setSelectedItems(null);
 	}
 
-	private void navigateTo(AdditionalDataWrapper.Type type) {
+	private void navigateTo(Type type) {
 		FragmentManager fm = getFragmentManager();
 		Activity activity = requireActivity();
-		if (fm == null) {
+		if (fm == null || fm.isStateSaved()) {
 			return;
 		}
 		dismissFragment();

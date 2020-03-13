@@ -1,7 +1,6 @@
 package net.osmand.core.samples.android.sample1.search;
 
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -9,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import androidx.fragment.app.ListFragment;
 
 import net.osmand.core.samples.android.sample1.MainActivity;
 import net.osmand.core.samples.android.sample1.R;

@@ -31,17 +31,17 @@
 			android:layout_gravity="start|center_vertical"
 			android:background="?attr/flow_toolbar_bg" />
 
-		<android.support.v7.widget.AppCompatImageButton
+		<androidx.appcompat.widget.AppCompatImageButton
 			android:id="@+id/back_button_flow"
 			android:layout_width="@dimen/route_info_toolbar_button_size"
 			android:layout_height="@dimen/route_info_toolbar_button_size"
-			android:layout_marginLeft="8dp"
-			android:layout_marginTop="8dp"
+			android:layout_marginLeft="@dimen/content_padding_half"
+			android:layout_marginTop="@dimen/content_padding_half"
+			android:layout_marginStart="@dimen/content_padding_half"
 			android:background="@drawable/btn_circle_transparent_full"
 			android:contentDescription="@string/shared_string_back"
 			android:src="@drawable/ic_arrow_back"
-			android:tint="?attr/text_color_tab_active_white"
-			android:layout_marginStart="8dp" />
+			android:tint="?attr/text_color_tab_active_white" />
 
 		<LinearLayout
 			android:id="@+id/toolbar_options_flow_bg"
@@ -68,7 +68,7 @@
 			android:paddingStart="@dimen/content_padding_small"
 			android:paddingEnd="@dimen/content_padding_small">
 
-			<android.support.v7.widget.AppCompatImageButton
+			<androidx.appcompat.widget.AppCompatImageButton
 				android:id="@+id/print_route_flow"
 				android:layout_width="@dimen/route_info_toolbar_button_size"
 				android:layout_height="@dimen/route_info_toolbar_button_size"
@@ -78,7 +78,7 @@
 				android:src="@drawable/ic_action_gprint_dark"
 				android:tint="?attr/text_color_tab_active_white" />
 
-			<android.support.v7.widget.AppCompatImageButton
+			<androidx.appcompat.widget.AppCompatImageButton
 				android:id="@+id/save_as_gpx_flow"
 				android:layout_width="@dimen/route_info_toolbar_button_size"
 				android:layout_height="@dimen/route_info_toolbar_button_size"
@@ -88,7 +88,7 @@
 				android:src="@drawable/ic_action_gsave_dark"
 				android:tint="?attr/text_color_tab_active_white" />
 
-			<android.support.v7.widget.AppCompatImageButton
+			<androidx.appcompat.widget.AppCompatImageButton
 				android:id="@+id/share_as_gpx_flow"
 				android:layout_width="@dimen/route_info_toolbar_button_size"
 				android:layout_height="@dimen/route_info_toolbar_button_size"
@@ -124,7 +124,7 @@
 				android:layout_gravity="start|center_vertical"
 				android:gravity="center">
 
-				<android.support.v7.widget.AppCompatImageView
+				<androidx.appcompat.widget.AppCompatImageView
 					android:id="@+id/back_button"
 					android:layout_width="@dimen/route_info_toolbar_button_size"
 					android:layout_height="@dimen/route_info_toolbar_button_size"
@@ -176,7 +176,7 @@
 				android:paddingEnd="@dimen/content_padding_small"
 				android:paddingStart="@dimen/content_padding_small">
 
-				<android.support.v7.widget.AppCompatImageView
+				<androidx.appcompat.widget.AppCompatImageView
 					android:id="@+id/print_route"
 					android:layout_width="@dimen/route_info_toolbar_button_size"
 					android:layout_height="@dimen/route_info_toolbar_button_size"
@@ -186,7 +186,7 @@
 					android:src="@drawable/ic_action_gprint_dark"
 					android:tint="?attr/text_color_tab_active_white" />
 
-				<android.support.v7.widget.AppCompatImageView
+				<androidx.appcompat.widget.AppCompatImageView
 					android:id="@+id/save_as_gpx"
 					android:layout_width="@dimen/route_info_toolbar_button_size"
 					android:layout_height="@dimen/route_info_toolbar_button_size"
@@ -196,7 +196,7 @@
 					android:src="@drawable/ic_action_gsave_dark"
 					android:tint="?attr/text_color_tab_active_white" />
 
-				<android.support.v7.widget.AppCompatImageView
+				<androidx.appcompat.widget.AppCompatImageView
 					android:id="@+id/share_as_gpx"
 					android:layout_width="@dimen/route_info_toolbar_button_size"
 					android:layout_height="@dimen/route_info_toolbar_button_size"

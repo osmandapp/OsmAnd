@@ -1,7 +1,5 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -10,6 +8,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+
+import net.osmand.AndroidUtils;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
@@ -64,7 +66,7 @@ public class GpxItemMenuBuilder extends MenuBuilder {
 	private void buildIcon(LinearLayout ll, int gpxSmallIconMargin, int iconId) {
 		ImageView icon = new ImageView(ll.getContext());
 		LinearLayout.LayoutParams llIconParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		llIconParams.setMargins(0, 0, gpxSmallIconMargin, 0);
+		AndroidUtils.setMargins(llIconParams, 0, 0, gpxSmallIconMargin, 0);
 		llIconParams.gravity = Gravity.CENTER_VERTICAL;
 		icon.setLayoutParams(llIconParams);
 		icon.setImageDrawable(app.getUIUtilities().getThemedIcon(iconId));
@@ -74,7 +76,7 @@ public class GpxItemMenuBuilder extends MenuBuilder {
 	private void buildTextView(LinearLayout ll, int gpxSmallTextMargin, float gpxTextSize, int textColor, String text) {
 		TextView textView = new TextView(ll.getContext());
 		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		llTextParams.setMargins(0, 0, gpxSmallTextMargin, 0);
+		AndroidUtils.setMargins(llTextParams, 0, 0, gpxSmallTextMargin, 0);
 		textView.setLayoutParams(llTextParams);
 		textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, gpxTextSize);
 		textView.setTextColor(textColor);

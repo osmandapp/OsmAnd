@@ -7,10 +7,6 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,6 +20,11 @@ import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuItemCompat;
+import androidx.fragment.app.DialogFragment;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
@@ -104,7 +105,8 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		activity.getAccessibilityAssistant().registerPage(view, DownloadActivity.DOWNLOAD_TAB_NUMBER);
 
 		toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back));
+		Drawable icBack = getMyApplication().getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(activity));
+		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -533,20 +535,20 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		}
 
 		private Drawable getIconForGroup(DownloadResourceGroup group) {
-			Drawable iconLeft;
+			Drawable iconStart;
 			if (group.getType() == DownloadResourceGroupType.VOICE_REC
 					|| group.getType() == DownloadResourceGroupType.VOICE_TTS) {
-				iconLeft = ctx.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_volume_up);
+				iconStart = ctx.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_volume_up);
 			} else if (group.getType() == DownloadResourceGroupType.FONTS) {
-				iconLeft = ctx.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_map_language);
+				iconStart = ctx.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_map_language);
 			} else {
 				UiUtilities cache = ctx.getMyApplication().getUIUtilities();
 				if (isParentWorld(group) || isParentWorld(group.getParentGroup())) {
-					iconLeft = cache.getThemedIcon(R.drawable.ic_world_globe_dark);
+					iconStart = cache.getThemedIcon(R.drawable.ic_world_globe_dark);
 				} else {
 					DownloadResourceGroup ggr = group
 							.getSubGroupById(DownloadResourceGroupType.REGION_MAPS.getDefaultId());
-					iconLeft = cache.getThemedIcon(R.drawable.ic_map);
+					iconStart = cache.getThemedIcon(R.drawable.ic_map);
 					if (ggr != null && ggr.getIndividualResources() != null) {
 						IndexItem item = null;
 						for (IndexItem ii : ggr.getIndividualResources()) {
@@ -560,22 +562,22 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 						}
 						if (item != null) {
 							if (item.isOutdated()) {
-								iconLeft = cache.getIcon(R.drawable.ic_map, R.color.color_distance);
+								iconStart = cache.getIcon(R.drawable.ic_map, R.color.color_distance);
 							} else {
-								iconLeft = cache.getIcon(R.drawable.ic_map, R.color.color_ok);
+								iconStart = cache.getIcon(R.drawable.ic_map, R.color.color_ok);
 							}
 						}
 					}
 				}
 			}
-			return iconLeft;
+			return iconStart;
 		}
 
 		public void bindItem(DownloadResourceGroup group) {
-			Drawable iconLeft = getIconForGroup(group);
-			textView.setCompoundDrawablesWithIntrinsicBounds(iconLeft, null, null, null);
 			String name = group.getName(ctx);
 			textView.setText(name);
+			Drawable iconStart = getIconForGroup(group);
+			AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(textView, iconStart, null, null, null);
 		}
 	}
 

@@ -4,9 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +15,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
@@ -26,7 +28,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu.MenuObject;
-import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -252,7 +253,10 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 		if (menu.getMapActivity().getContextMenu().isVisible()) {
 			menu.getMapActivity().getContextMenu().hide();
 		} else {
-			menu.getMapActivity().getSupportFragmentManager().popBackStack();
+			FragmentManager fragmentManager = menu.getMapActivity().getSupportFragmentManager();
+			if (!fragmentManager.isStateSaved()) {
+				fragmentManager.popBackStack();
+			}
 		}
 	}
 }

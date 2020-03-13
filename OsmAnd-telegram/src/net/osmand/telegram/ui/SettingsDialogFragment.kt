@@ -4,10 +4,6 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.FragmentManager
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.ListPopupWindow
-import android.support.v7.widget.Toolbar
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.view.Gravity
@@ -15,6 +11,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.widget.ListPopupWindow
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramSettings
 import net.osmand.telegram.TelegramSettings.ListPreference
@@ -402,7 +401,7 @@ class SettingsDialogFragment : BaseDialogFragment() {
 
 		private const val TAG = "SettingsDialogFragment"
 
-		fun showInstance(fm: FragmentManager): Boolean {
+		fun showInstance(fm: androidx.fragment.app.FragmentManager): Boolean {
 			return try {
 				SettingsDialogFragment().show(fm, TAG)
 				true

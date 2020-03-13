@@ -1,19 +1,20 @@
 package net.osmand.plus.mapcontextmenu.builders.cards.dialogs;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
@@ -133,11 +134,9 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 	public void dismiss() {
 		MapActivity activity = dialog.getMapActivity();
 		if (activity != null) {
-			try {
-				activity.getSupportFragmentManager().popBackStack(TAG,
-						FragmentManager.POP_BACK_STACK_INCLUSIVE);
-			} catch (Exception e) {
-				e.printStackTrace();
+			FragmentManager fragmentManager = activity.getSupportFragmentManager();
+			if (!fragmentManager.isStateSaved()) {
+				fragmentManager.popBackStack(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			}
 		}
 	}

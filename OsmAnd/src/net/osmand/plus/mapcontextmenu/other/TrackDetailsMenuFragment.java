@@ -1,12 +1,8 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +10,12 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
@@ -206,7 +208,8 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 
 			ImageButton backButton = (ImageButton) mainView.findViewById(R.id.top_bar_back_button);
 			if (backButton != null) {
-				backButton.setImageDrawable(getIcon(R.drawable.ic_arrow_back, R.color.color_white));
+				Drawable icBack = getIcon(AndroidUtils.getNavigationIconResId(ctx), R.color.color_white);
+				backButton.setImageDrawable(icBack);
 			}
 		}
 	}

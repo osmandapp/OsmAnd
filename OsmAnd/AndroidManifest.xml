@@ -67,7 +67,7 @@
         <activity android:name="net.osmand.plus.activities.ExitActivity" />
         
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="net.osmand.plus.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true" >

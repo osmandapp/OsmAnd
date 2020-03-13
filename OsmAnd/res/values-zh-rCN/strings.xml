@@ -2818,5 +2818,13 @@
     <string name="multimedia_use_system_camera">使用系统应用程序</string>
     <string name="multimedia_photo_play_sound">相机快门声音</string>
     <string name="osm_authorization_success">授权成功</string>
-    <string name="day"></string>
+    <string name="day"/>
+    <string name="use_system_screen_timeout">使用系统屏幕超时</string>
+    <string name="open_settings">打开设置</string>
+    <string name="plugin_disabled">插件已禁用</string>
+    <string name="shared_string_menu">菜单</string>
+    <string name="shared_string_angle_param">角度：%s°</string>
+    <string name="shared_string_angle">角度</string>
+    <string name="select_data_to_import">选择要导入的数据。</string>
+    <string name="import_rendering_file">导入渲染文件</string>
 </resources>

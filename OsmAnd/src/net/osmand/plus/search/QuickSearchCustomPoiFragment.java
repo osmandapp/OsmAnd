@@ -1,18 +1,10 @@
 package net.osmand.plus.search;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.SwitchCompat;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,13 +15,23 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.DialogListItemAdapter;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
@@ -170,8 +172,9 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 	public void onDismiss(DialogInterface dialog) {
 		if (editMode) {
 			QuickSearchDialogFragment quickSearchDialogFragment = getQuickSearchDialogFragment();
-			if (quickSearchDialogFragment != null) {
-				getMyApplication().getSearchUICore().refreshCustomPoiFilters();
+			OsmandApplication app = getMyApplication();
+			if (app != null && quickSearchDialogFragment != null) {
+				app.getSearchUICore().refreshCustomPoiFilters();
 				quickSearchDialogFragment.replaceQueryWithUiFilter(filter, "");
 				quickSearchDialogFragment.reloadCategories();
 			}
@@ -313,25 +316,16 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		}
 	}
 
+	@SuppressLint("SetTextI18n")
 	private void saveFilter() {
 		helper.editPoiFilter(filter);
-		if (!editMode) {
+		Context ctx = getContext();
+		if (ctx != null) {
 			if (filter.isEmpty()) {
 				bottomBarShadow.setVisibility(View.GONE);
 				bottomBar.setVisibility(View.GONE);
 			} else {
-				barTitle.setText(getContext().getString(R.string.selected_categories) + ": " + filter
-						.getAcceptedTypesCount());
-				bottomBarShadow.setVisibility(View.VISIBLE);
-				bottomBar.setVisibility(View.VISIBLE);
-			}
-		} else {
-			if (filter.isEmpty()) {
-				bottomBarShadow.setVisibility(View.GONE);
-				bottomBar.setVisibility(View.GONE);
-			} else {
-				barTitle.setText(getContext().getString(R.string.selected_categories) + ": " + filter
-						.getAcceptedTypesCount());
+				barTitle.setText(ctx.getString(R.string.selected_categories) + ": " + filter.getAcceptedTypesCount());
 				bottomBarShadow.setVisibility(View.VISIBLE);
 				bottomBar.setVisibility(View.VISIBLE);
 			}

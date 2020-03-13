@@ -3,10 +3,11 @@ package net.osmand.plus.mapcontextmenu.other;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.text.TextUtilsCompat;
-import android.support.v4.view.ViewCompat;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.core.text.TextUtilsCompat;
+import androidx.core.view.ViewCompat;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndFormatter;

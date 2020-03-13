@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:background="?attr/selectableItemBackground">
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/measure_point_reorder_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
             android:tint="?attr/secondary_icon_color"
             tools:src="@drawable/ic_action_reorder"/>
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/measure_point_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
             android:layout_toStartOf="@id/measure_point_remove_image_button"
             android:orientation="vertical">
 
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/measure_point_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:maxLines="1"
                     android:id="@+id/measure_point_descr"
                     android:layout_width="wrap_content"
@@ -86,7 +86,7 @@
                     android:textSize="@dimen/default_sub_text_size"
                     tools:text="@string/shared_string_control_start"/>
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:maxLines="1"
                     android:id="@+id/measure_point_ele"
                     android:layout_toEndOf="@id/measure_point_descr"
@@ -101,7 +101,7 @@
 	                android:layout_marginStart="@dimen/bottom_sheet_content_margin_small"
 	                android:layout_marginEnd="@dimen/bottom_sheet_content_margin_small" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:maxLines="1"
                     android:id="@+id/measure_point_speed"
                     android:layout_toEndOf="@id/measure_point_ele"
