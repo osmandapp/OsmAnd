@@ -59,6 +59,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 
 	public static final String TAG = ImportSettingsFragment.class.getSimpleName();
 	public static final Log LOG = PlatformUtil.getLog(ImportSettingsFragment.class.getSimpleName());
+	private static final String DUPLICATES_START_TIME_KEY = "duplicates_start_time";
 	static final String IMPORT_SETTINGS_TAG = "import_settings_tag";
 	private OsmandApplication app;
 	private ExportImportSettingsAdapter adapter;
@@ -73,6 +74,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 	private ProgressBar progressBar;
 	private CollapsingToolbarLayout toolbarLayout;
 	private SettingsHelper settingsHelper;
+	private long duplicateStartTime;
 
 	public static void showInstance(@NonNull FragmentManager fm, @NonNull List<SettingsItem> settingsItems, @NonNull File file) {
 		ImportSettingsFragment fragment = new ImportSettingsFragment();
@@ -87,6 +89,9 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		if (savedInstanceState != null) {
+			duplicateStartTime = savedInstanceState.getLong(DUPLICATES_START_TIME_KEY);
+		}
 		app = requireMyApplication();
 		settingsHelper = app.getSettingsHelper();
 		nightMode = !app.getSettings().isLightContent();
@@ -158,6 +163,12 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 	}
 
 	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putLong(DUPLICATES_START_TIME_KEY, duplicateStartTime);
+	}
+
+	@Override
 	public void onClick(View view) {
 		switch (view.getId()) {
 			case R.id.select_button: {
@@ -196,6 +207,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		updateUi(R.string.shared_string_preparing, R.string.checking_for_duplicate_description);
 		List<SettingsItem> selectedItems = getSettingsItemsFromData(adapter.getDataToOperate());
 		if (file != null && settingsItems != null) {
+			duplicateStartTime = System.currentTimeMillis();
 			settingsHelper.checkDuplicates(file, settingsItems, selectedItems, getDuplicatesListener());
 		}
 	}
@@ -223,24 +235,39 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 	private SettingsHelper.CheckDuplicatesListener getDuplicatesListener() {
 		return new SettingsHelper.CheckDuplicatesListener() {
 			@Override
-			public void onDuplicatesChecked(@NonNull List<Object> duplicates, List<SettingsItem> items) {
-				FragmentManager fm = getFragmentManager();
-				if (duplicates.isEmpty()) {
-					if (isAdded()) {
-						updateUi(R.string.shared_string_importing, R.string.importing_from);
-					}
-					if (file != null) {
-						settingsHelper.importSettings(file, items, "", 1, getImportListener());
-					}
-				} else {
-					if (fm != null && file != null) {
-						if (!isStateSaved()) {
-							ImportDuplicatesFragment.showInstance(fm, duplicates, items, file);
+			public void onDuplicatesChecked(@NonNull final List<Object> duplicates, final List<SettingsItem> items) {
+				long delay = System.currentTimeMillis() - duplicateStartTime;
+				delay = delay < 500 ? 500 - delay : 0;
+				if (delay != 0) {
+					app.runInUIThread(new Runnable() {
+						@Override
+						public void run() {
+							processDuplicates(duplicates, items);
 						}
-					}
+					}, delay);
+				} else {
+					processDuplicates(duplicates, items);
 				}
 			}
 		};
+	}
+
+	private void processDuplicates(List<Object> duplicates, List<SettingsItem> items) {
+		FragmentManager fm = getFragmentManager();
+		if (duplicates.isEmpty()) {
+			if (isAdded()) {
+				updateUi(R.string.shared_string_importing, R.string.importing_from);
+			}
+			if (file != null) {
+				settingsHelper.importSettings(file, items, "", 1, getImportListener());
+			}
+		} else {
+			if (fm != null && file != null) {
+				if (!isStateSaved()) {
+					ImportDuplicatesFragment.showInstance(fm, duplicates, items, file);
+				}
+			}
+		}
 	}
 
 	private void dismissFragment() {
