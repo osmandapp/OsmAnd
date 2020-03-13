@@ -110,7 +110,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 
 	public void dismissFragment() {
 		FragmentManager fm = getFragmentManager();
-		if (fm != null) {
+		if (fm != null && !fm.isStateSaved()) {
 			fm.popBackStack(IMPORT_SETTINGS_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
 	}
@@ -118,7 +118,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 	private void navigateTo(Type type) {
 		FragmentManager fm = getFragmentManager();
 		Activity activity = requireActivity();
-		if (fm == null) {
+		if (fm == null || fm.isStateSaved()) {
 			return;
 		}
 		dismissFragment();

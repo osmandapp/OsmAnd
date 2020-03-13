@@ -60,7 +60,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 	public static final String TAG = ImportSettingsFragment.class.getSimpleName();
 	public static final Log LOG = PlatformUtil.getLog(ImportSettingsFragment.class.getSimpleName());
 	private static final String DUPLICATES_START_TIME_KEY = "duplicates_start_time";
-	private static final long MIN_DELAY_TIME = 500;
+	private static final long MIN_DELAY_TIME_MS = 500;
 	static final String IMPORT_SETTINGS_TAG = "import_settings_tag";
 	private OsmandApplication app;
 	private ExportImportSettingsAdapter adapter;
@@ -238,8 +238,8 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 			@Override
 			public void onDuplicatesChecked(@NonNull final List<Object> duplicates, final List<SettingsItem> items) {
 				long spentTime = System.currentTimeMillis() - duplicateStartTime;
-				if (spentTime < MIN_DELAY_TIME) {
-					long delay = MIN_DELAY_TIME - spentTime;
+				if (spentTime < MIN_DELAY_TIME_MS) {
+					long delay = MIN_DELAY_TIME_MS - spentTime;
 					app.runInUIThread(new Runnable() {
 						@Override
 						public void run() {
@@ -255,19 +255,21 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 
 	private void processDuplicates(List<Object> duplicates, List<SettingsItem> items) {
 		FragmentManager fm = getFragmentManager();
-		if (duplicates.isEmpty() && file != null) {
-			if (isAdded()) {
-				updateUi(R.string.shared_string_importing, R.string.importing_from);
+		if (file != null) {
+			if (duplicates.isEmpty()) {
+				if (isAdded()) {
+					updateUi(R.string.shared_string_importing, R.string.importing_from);
+				}
+				settingsHelper.importSettings(file, items, "", 1, getImportListener());
+			} else if (fm != null && !isStateSaved()) {
+				ImportDuplicatesFragment.showInstance(fm, duplicates, items, file);
 			}
-			settingsHelper.importSettings(file, items, "", 1, getImportListener());
-		} else if (fm != null && file != null && !isStateSaved()) {
-			ImportDuplicatesFragment.showInstance(fm, duplicates, items, file);
 		}
 	}
 
 	private void dismissFragment() {
 		FragmentManager fm = getFragmentManager();
-		if (fm != null) {
+		if (fm != null && !fm.isStateSaved()) {
 			getFragmentManager().popBackStack(IMPORT_SETTINGS_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
 	}
@@ -386,10 +388,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		dismissDialog.setPositiveButton(R.string.shared_string_exit, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				FragmentManager fm = getFragmentManager();
-				if (fm != null) {
-					fm.popBackStack(IMPORT_SETTINGS_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-				}
+				dismissFragment();
 			}
 		});
 		dismissDialog.show();

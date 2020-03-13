@@ -241,13 +241,6 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
 	}
 
-	private void dismissFragment() {
-		FragmentManager fm = getFragmentManager();
-		if (fm != null) {
-			fm.popBackStack(IMPORT_SETTINGS_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-		}
-	}
-
 	private void importItems(boolean shouldReplace) {
 		if (settingsItems != null && file != null) {
 			setupImportingUi();
@@ -301,7 +294,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 			@Override
 			public void onClick(View v) {
 				FragmentManager fm = getFragmentManager();
-				if (fm != null) {
+				if (fm != null && !fm.isStateSaved()) {
 					fm.popBackStackImmediate();
 				}
 			}
