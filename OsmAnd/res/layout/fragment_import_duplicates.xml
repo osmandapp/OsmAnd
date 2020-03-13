@@ -3,6 +3,7 @@
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:background="?attr/activity_background_basic">
 
 	<androidx.core.widget.NestedScrollView
@@ -128,11 +129,21 @@
 				osmand:titleMarginStart="0dp"
 				osmand:layout_collapseMode="pin"
 				osmand:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
-				osmand:title="@string/import_duplicates_title">
+				tools:title="@string/import_duplicates_title">
 
 			</androidx.appcompat.widget.Toolbar>
 
 		</com.google.android.material.appbar.CollapsingToolbarLayout>
+
+		<ProgressBar
+			android:id="@+id/progress_bar"
+			style="?android:attr/progressBarStyleHorizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:minHeight="0dp"
+			android:indeterminate="true"
+			android:visibility="gone"
+			tools:visibility="visible" />
 
 	</com.google.android.material.appbar.AppBarLayout>
 

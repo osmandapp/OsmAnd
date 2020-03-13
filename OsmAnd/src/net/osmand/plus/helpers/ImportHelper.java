@@ -47,6 +47,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.SettingsHelper;
+import net.osmand.plus.SettingsHelper.SettingsCollectListener;
 import net.osmand.plus.SettingsHelper.SettingsImportListener;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.ActivityResultListener;
@@ -784,17 +785,14 @@ public class ImportHelper {
 				File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
 				final File file = new File(tempDir, name);
 				if (error == null && file.exists()) {
-					app.getSettingsHelper().importSettings(file, latestChanges, version, new SettingsImportListener() {
+					app.getSettingsHelper().collectSettings(file, latestChanges, version, new SettingsCollectListener() {
 						@Override
-						public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
+						public void onSettingsCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
 							if (progress != null && AndroidUtils.isActivityNotDestroyed(activity)) {
 								progress.dismiss();
 							}
 							if (succeed) {
-								FragmentManager fragmentManager = activity.getSupportFragmentManager();
-								if (fragmentManager != null) {
-									ImportSettingsFragment.showInstance(fragmentManager, items, file);
-								}
+								ImportSettingsFragment.showInstance(activity.getSupportFragmentManager(), items, file);
 							} else if (empty) {
 								app.showShortToastMessage(app.getString(R.string.file_import_error, name, app.getString(R.string.shared_string_unexpected_error)));
 							}
