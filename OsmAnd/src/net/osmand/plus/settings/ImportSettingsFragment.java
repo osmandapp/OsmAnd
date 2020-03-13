@@ -60,6 +60,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 	public static final String TAG = ImportSettingsFragment.class.getSimpleName();
 	public static final Log LOG = PlatformUtil.getLog(ImportSettingsFragment.class.getSimpleName());
 	private static final String DUPLICATES_START_TIME_KEY = "duplicates_start_time";
+	private static final long MIN_DELAY_TIME = 500;
 	static final String IMPORT_SETTINGS_TAG = "import_settings_tag";
 	private OsmandApplication app;
 	private ExportImportSettingsAdapter adapter;
@@ -236,9 +237,9 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		return new SettingsHelper.CheckDuplicatesListener() {
 			@Override
 			public void onDuplicatesChecked(@NonNull final List<Object> duplicates, final List<SettingsItem> items) {
-				long delay = System.currentTimeMillis() - duplicateStartTime;
-				delay = delay < 500 ? 500 - delay : 0;
-				if (delay != 0) {
+				long spentTime = System.currentTimeMillis() - duplicateStartTime;
+				if (spentTime < MIN_DELAY_TIME) {
+					long delay = MIN_DELAY_TIME - spentTime;
 					app.runInUIThread(new Runnable() {
 						@Override
 						public void run() {
@@ -254,19 +255,13 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 
 	private void processDuplicates(List<Object> duplicates, List<SettingsItem> items) {
 		FragmentManager fm = getFragmentManager();
-		if (duplicates.isEmpty()) {
+		if (duplicates.isEmpty() && file != null) {
 			if (isAdded()) {
 				updateUi(R.string.shared_string_importing, R.string.importing_from);
 			}
-			if (file != null) {
-				settingsHelper.importSettings(file, items, "", 1, getImportListener());
-			}
-		} else {
-			if (fm != null && file != null) {
-				if (!isStateSaved()) {
-					ImportDuplicatesFragment.showInstance(fm, duplicates, items, file);
-				}
-			}
+			settingsHelper.importSettings(file, items, "", 1, getImportListener());
+		} else if (fm != null && file != null && !isStateSaved()) {
+			ImportDuplicatesFragment.showInstance(fm, duplicates, items, file);
 		}
 	}
 
