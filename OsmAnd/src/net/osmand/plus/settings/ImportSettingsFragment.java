@@ -191,7 +191,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		super.onResume();
 		Activity activity = getActivity();
 		if (activity instanceof MapActivity) {
-			((MapActivity) activity).disableDrawer();
+			((MapActivity) activity).closeDrawer();
 		}
 	}
 
