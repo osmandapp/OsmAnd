@@ -1,5 +1,6 @@
 package net.osmand.plus.settings;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
@@ -37,6 +38,7 @@ import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.SettingsHelper.*;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -182,6 +184,15 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putLong(DUPLICATES_START_TIME_KEY, duplicateStartTime);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		Activity activity = getActivity();
+		if (activity instanceof MapActivity) {
+			((MapActivity) activity).disableDrawer();
+		}
 	}
 
 	@Override
