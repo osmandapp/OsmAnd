@@ -16,7 +16,6 @@
 		android:focusable="false"
 		android:groupIndicator="@android:color/transparent"
 		android:listSelector="@android:color/transparent"
-		android:paddingBottom="@dimen/dialog_button_ex_height"
 		osmand:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 	<LinearLayout
