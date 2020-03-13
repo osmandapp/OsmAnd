@@ -33,6 +33,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.access.AccessibilityAssistant;
@@ -221,7 +222,10 @@ public class FavoritesSearchFragment extends DialogFragment {
 	public void onDismiss(DialogInterface dialog) {
 		Activity activity = getActivity();
 		if (activity != null) {
-			getChildFragmentManager().popBackStack();
+			FragmentManager fragmentManager = getChildFragmentManager();
+			if (!fragmentManager.isStateSaved()) {
+				fragmentManager.popBackStack();
+			}
 		}
 		super.onDismiss(dialog);
 	}

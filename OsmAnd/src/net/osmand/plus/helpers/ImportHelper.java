@@ -341,9 +341,10 @@ public class ImportHelper {
 
 				@Override
 				protected void onPreExecute() {
-					progress = ProgressDialog
-						.show(activity, app.getString(R.string.loading_smth, ""),
-							app.getString(R.string.loading_data));
+					if (AndroidUtils.isActivityNotDestroyed(activity)) {
+						progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""),
+										app.getString(R.string.loading_data));
+					}
 				}
 
 				@Override
@@ -362,7 +363,7 @@ public class ImportHelper {
 
 				@Override
 				protected void onPostExecute(GPXFile result) {
-					if (AndroidUtils.isActivityNotDestroyed(activity)) {
+					if (progress != null && AndroidUtils.isActivityNotDestroyed(activity)) {
 						progress.dismiss();
 					}
 					Toast.makeText(activity, R.string.fav_imported_sucessfully, Toast.LENGTH_LONG)
@@ -679,7 +680,9 @@ public class ImportHelper {
 
 			@Override
 			protected void onPreExecute() {
-				progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""), app.getString(R.string.loading_data));
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
+					progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""), app.getString(R.string.loading_data));
+				}
 				mFileName = fileName;
 			}
 
@@ -705,7 +708,7 @@ public class ImportHelper {
 					loadRoutingFiles(app, new AppInitializer.LoadRoutingFilesCallback() {
 						@Override
 						public void onRoutingFilesLoaded() {
-							if (AndroidUtils.isActivityNotDestroyed(activity)) {
+							if (progress != null && AndroidUtils.isActivityNotDestroyed(activity)) {
 								progress.dismiss();
 							}
 							RoutingConfiguration.Builder builder = app.getCustomRoutingConfig(mFileName);
@@ -720,7 +723,7 @@ public class ImportHelper {
 						}
 					});
 				} else {
-					if (AndroidUtils.isActivityNotDestroyed(activity)) {
+					if (progress != null && AndroidUtils.isActivityNotDestroyed(activity)) {
 						progress.dismiss();
 					}
 					app.showShortToastMessage(app.getString(R.string.file_import_error, mFileName, error));
@@ -762,7 +765,9 @@ public class ImportHelper {
 
 			@Override
 			protected void onPreExecute() {
-				progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""), app.getString(R.string.loading_data));
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
+					progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""), app.getString(R.string.loading_data));
+				}
 			}
 
 			@Override
@@ -783,7 +788,7 @@ public class ImportHelper {
 					app.getSettingsHelper().collectSettings(file, latestChanges, version, new SettingsCollectListener() {
 						@Override
 						public void onSettingsCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
-							if (AndroidUtils.isActivityNotDestroyed(activity)) {
+							if (progress != null && AndroidUtils.isActivityNotDestroyed(activity)) {
 								progress.dismiss();
 							}
 							if (succeed) {
@@ -794,7 +799,7 @@ public class ImportHelper {
 						}
 					});
 				} else {
-					if (AndroidUtils.isActivityNotDestroyed(activity)) {
+					if (progress != null && AndroidUtils.isActivityNotDestroyed(activity)) {
 						progress.dismiss();
 					}
 					app.showShortToastMessage(app.getString(R.string.file_import_error, name, error));
@@ -886,7 +891,9 @@ public class ImportHelper {
 
 			@Override
 			protected void onPreExecute() {
-				progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""), app.getString(R.string.loading_data));
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
+					progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""), app.getString(R.string.loading_data));
+				}
 				mFileName = fileName;
 			}
 
@@ -913,7 +920,7 @@ public class ImportHelper {
 				} else {
 					app.showShortToastMessage(app.getString(R.string.file_import_error, mFileName, error));
 				}
-				if (AndroidUtils.isActivityNotDestroyed(activity)) {
+				if (progress != null && AndroidUtils.isActivityNotDestroyed(activity)) {
 					progress.dismiss();
 				}
 			}

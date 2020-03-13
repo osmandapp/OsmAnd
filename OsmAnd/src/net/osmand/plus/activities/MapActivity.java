@@ -1133,10 +1133,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void dismissCardDialog() {
-		try {
-			getSupportFragmentManager().popBackStack(ContextMenuCardDialogFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-		} catch (Exception e) {
-			e.printStackTrace();
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		if (!fragmentManager.isStateSaved()) {
+			fragmentManager.popBackStack(ContextMenuCardDialogFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
 	}
 
@@ -2170,10 +2169,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void dismissSettingsScreens() {
-		try {
-			getSupportFragmentManager().popBackStack(DRAWER_SETTINGS_ID + ".new", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-		} catch (Exception e) {
-			e.printStackTrace();
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		if (!fragmentManager.isStateSaved()) {
+			fragmentManager.popBackStack(DRAWER_SETTINGS_ID + ".new", FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
 	}
 
@@ -2464,7 +2462,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void backToConfigureProfileFragment() {
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		int backStackEntryCount = fragmentManager.getBackStackEntryCount();
-		if (backStackEntryCount > 0) {
+		if (backStackEntryCount > 0 && !fragmentManager.isStateSaved()) {
 			BackStackEntry entry = fragmentManager.getBackStackEntryAt(backStackEntryCount - 1);
 			if (ConfigureProfileFragment.TAG.equals(entry.getName())) {
 				fragmentManager.popBackStack();
