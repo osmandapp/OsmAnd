@@ -266,7 +266,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 
 	@Override
 	public void onDisplayPreferenceDialog(Preference preference) {
-		if (preference.getKey().equals(settings.ROUTE_RECALCULATION_DISTANCE_ACTIVATION.getId())) {
+		if (preference.getKey().equals(settings.USE_ROUTE_RECALCULATION_DISTANCE.getId())) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
 				RecalculateRouteInDeviationBottomSheet.showInstance(getFragmentManager(), preference.getKey(), this, false, getSelectedAppMode());
@@ -334,7 +334,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	}
 
 	private void setupSelectRouteRecalcDistance(PreferenceScreen screen, float defaultAllowedDeviation) {
-		OsmandSettings.CommonPreference<Boolean> recalculationActivationPref = settings.ROUTE_RECALCULATION_DISTANCE_ACTIVATION;
+		OsmandSettings.CommonPreference<Boolean> recalculationActivationPref = settings.USE_ROUTE_RECALCULATION_DISTANCE;
 		final SwitchPreferenceEx switchPreferenceEx = createSwitchPreferenceEx(recalculationActivationPref.getId(),
 				R.string.route_recalculation_dist_title, R.layout.preference_with_descr_dialog_and_switch);
 		routeRecalculationDistanceListener = new StateChangedListener<Float>() {
@@ -343,7 +343,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 				updateSelectRouteRecalcDistancePrefView(switchPreferenceEx);
 			}
 		};
-		if (settings.ROUTE_RECALCULATION_DISTANCE_VALUE.getModeValue(getSelectedAppMode()) < 0) {
+		if (settings.ROUTE_RECALCULATION_DISTANCE.getModeValue(getSelectedAppMode()) < 0) {
 			recalculationActivationPref.set(false);
 		}
 		updateSelectRouteRecalcDistancePrefView(switchPreferenceEx);
@@ -352,7 +352,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	}
 
 	private void updateSelectRouteRecalcDistancePrefView(SwitchPreferenceEx switchPreferenceEx) {
-		OsmandSettings.CommonPreference<Float> recalculationValuePref = settings.ROUTE_RECALCULATION_DISTANCE_VALUE;
+		OsmandSettings.CommonPreference<Float> recalculationValuePref = settings.ROUTE_RECALCULATION_DISTANCE;
 		ApplicationMode appMode = getSelectedAppMode();
 		float currentValue = recalculationValuePref.getModeValue(appMode);
 		if (currentValue <= 0) {
@@ -387,7 +387,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	private void addRoutingPrefListeners() {
 		settings.FAST_ROUTE_MODE.addListener(booleanRoutingPrefListener);
 		settings.ENABLE_TIME_CONDITIONAL_ROUTING.addListener(booleanRoutingPrefListener);
-		settings.ROUTE_RECALCULATION_DISTANCE_VALUE.addListener(routeRecalculationDistanceListener);
+		settings.ROUTE_RECALCULATION_DISTANCE.addListener(routeRecalculationDistanceListener);
 
 		for (RoutingParameter parameter : otherRoutingParameters) {
 			if (parameter.getType() == RoutingParameterType.BOOLEAN) {
@@ -403,7 +403,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	private void removeRoutingPrefListeners() {
 		settings.FAST_ROUTE_MODE.removeListener(booleanRoutingPrefListener);
 		settings.ENABLE_TIME_CONDITIONAL_ROUTING.removeListener(booleanRoutingPrefListener);
-		settings.ROUTE_RECALCULATION_DISTANCE_VALUE.removeListener(routeRecalculationDistanceListener);
+		settings.ROUTE_RECALCULATION_DISTANCE.removeListener(routeRecalculationDistanceListener);
 
 		for (RoutingParameter parameter : otherRoutingParameters) {
 			if (parameter.getType() == RoutingParameterType.BOOLEAN) {
@@ -432,7 +432,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			return true;
 		} else if ("prouting_short_way".equals(key) && newValue instanceof Boolean) {
 			return app.getSettings().FAST_ROUTE_MODE.setModeValue(getSelectedAppMode(), !(Boolean) newValue);
-		} else if (settings.ROUTE_RECALCULATION_DISTANCE_ACTIVATION.getId().equals(key) && newValue instanceof Boolean) {
+		} else if (settings.USE_ROUTE_RECALCULATION_DISTANCE.getId().equals(key) && newValue instanceof Boolean) {
 			if (!((boolean) newValue)) {
 				settings.DISABLE_OFFROUTE_RECALC.setModeValue(getSelectedAppMode(), true);
 			} else {

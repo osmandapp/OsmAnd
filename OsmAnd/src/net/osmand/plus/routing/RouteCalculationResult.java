@@ -128,7 +128,7 @@ public class RouteCalculationResult {
 		updateDirectionsTime(this.directions, this.listDistance);
 		this.routeService = params.mode.getRouteService();
 		if(params.ctx != null) {
-			this.routeRecalcDistance = params.ctx.getSettings().ROUTE_RECALCULATION_DISTANCE_VALUE.getModeValue(params.mode);
+			this.routeRecalcDistance = params.ctx.getSettings().ROUTE_RECALCULATION_DISTANCE.getModeValue(params.mode);
 			this.routeVisibleAngle = routeService == RouteProvider.RouteService.STRAIGHT ?
 					params.ctx.getSettings().ROUTE_STRAIGHT_ANGLE.getModeValue(params.mode) : 0;
 		} else {
@@ -165,7 +165,7 @@ public class RouteCalculationResult {
 		this.directions = Collections.unmodifiableList(computeDirections);
 		updateDirectionsTime(this.directions, this.listDistance);
 		this.alarmInfo = Collections.unmodifiableList(alarms);
-		this.routeRecalcDistance = ctx.getSettings().ROUTE_RECALCULATION_DISTANCE_VALUE.getModeValue(mode);
+		this.routeRecalcDistance = ctx.getSettings().ROUTE_RECALCULATION_DISTANCE.getModeValue(mode);
 		this.routeVisibleAngle = routeService == RouteProvider.RouteService.STRAIGHT ?
 				ctx.getSettings().ROUTE_STRAIGHT_ANGLE.getModeValue(mode) : 0;
 	}

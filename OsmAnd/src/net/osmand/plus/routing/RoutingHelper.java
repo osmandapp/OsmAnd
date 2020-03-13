@@ -443,7 +443,7 @@ public class RoutingHelper {
 					allowableDeviation = getDefaultAllowedDeviation(settings, route.getAppMode(), posTolerance);
 				}
 				boolean isRecalculationActivated = allowableDeviation > 0 &&
-						settings.ROUTE_RECALCULATION_DISTANCE_ACTIVATION.getModeValue(getAppMode());
+						settings.USE_ROUTE_RECALCULATION_DISTANCE.getModeValue(getAppMode());
 
 				// 2. Analyze if we need to recalculate route
 				// >100m off current route (sideways) or parameter (for Straight line)

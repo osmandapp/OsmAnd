@@ -56,8 +56,8 @@ public class RecalculateRouteInDeviationBottomSheet extends BasePreferenceBottom
 		final OsmandSettings settings = app.getSettings();
 		final ApplicationMode appMode = getAppMode();
 
-		routeRecalculationDistanceValue = settings.ROUTE_RECALCULATION_DISTANCE_VALUE;
-		routeRecalculationDistanceActivation = settings.ROUTE_RECALCULATION_DISTANCE_ACTIVATION;
+		routeRecalculationDistanceValue = settings.ROUTE_RECALCULATION_DISTANCE;
+		routeRecalculationDistanceActivation = settings.USE_ROUTE_RECALCULATION_DISTANCE;
 
 		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		if (mc == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
