@@ -3594,4 +3594,5 @@
     <string name="restore_all_profile_settings">همهٔ تنظیمات پروفایل بازگردد؟</string>
     <string name="saving_new_profile">در حال ذخیرهٔ پروفایل تازه</string>
     <string name="profile_backup_failed">نمی‌توان از پروفایل پشتیبان گرفت.</string>
+    <string name="clear_recorded_data_warning">آیا از پاک‌کردن دادهٔ ضبط‌شده مطمئن هستید؟</string>
 </resources>

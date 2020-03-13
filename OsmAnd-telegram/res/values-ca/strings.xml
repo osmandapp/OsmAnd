@@ -46,7 +46,7 @@
     <string name="closing">S\'està tancant</string>
     <string name="app_name_short">Rastrejador OsmAnd</string>
     <string name="privacy_policy_telegram_client">El rastrejador d\'OsmAnd és un dels clients que usen la plataforma oberta de Telegram. Els vostres contactes poden usar qualsevol altra client de Telegram.</string>
-    <string name="privacy_policy_agree">En clicar \"Continua\" accepteu les condicions de les polítiques de privadesa de Telegram i d\'OsmAnd.</string>
+    <string name="privacy_policy_agree">En clicar \"Continua\" accepteu les condicions en política de privadesa, tant de Telegram com d\'OsmAnd.</string>
     <string name="shared_string_accept">D\'acord</string>
     <string name="telegram_privacy_policy">Política de Privadesa de Telegram</string>
     <string name="osmand_privacy_policy">Política de Privadesa d\'OsmAnd</string>
@@ -249,12 +249,12 @@
     <string name="set_time_timeline_descr">Seleccioneu la durada a mostrar</string>
     <string name="start_end_date">Data d\' Inici — Fi</string>
     <string name="saved_messages">Missatges desats</string>
-    <string name="time_zone_descr">Seleccioneu fus horari per mostrar en els vostres missatges d\'ubicació.</string>
-    <string name="time_zone">Fus horari</string>
+    <string name="time_zone_descr">Trieu la zona horària a mostrar en els missatges d\'ubicació.</string>
+    <string name="time_zone">Zona horària</string>
     <string name="units_and_formats">Unitats i formats</string>
     <string name="unit_of_length_descr">Canvieu en què es mesuren les distàncies.</string>
     <string name="unit_of_length">Unitats de longitud</string>
-    <string name="unit_of_speed_system_descr">Establiu la unitat de velocitat.</string>
+    <string name="unit_of_speed_system_descr">Definiu la unitat de velocitat.</string>
     <string name="unit_of_speed_system">Unitat de velocitat</string>
     <string name="buffer_time_descr">Temps màxim per mantenir punts a la memòria intermèdia</string>
     <string name="buffer_time">Temps de caducitat de la memòria intermèdia</string>

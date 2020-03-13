@@ -801,7 +801,7 @@
 \nOsmAnd jest aktywnie rozwijany i dalszy rozwój jest uzależniony od wkładu pieniężnego na finansowanie rozwoju i testowania nowych funkcjonalności. Proszę rozważyć zakup OsmAnd+, lub finansowanie konkretnych nowych funkcji lub dokonania ogólnej darowizny na https://osmand.net.</string>
     <string name="osmand_plus_short_description_80_chars">OsmAnd to aplikacja open source do nawigacji obsługująca mapy offline i online</string>
     <string name="avoid_motorway">Unikaj autostrad</string>
-    <string name="snap_to_road_descr">Przyciągaj pozycję do dróg podczas nawigacji.</string>
+    <string name="snap_to_road_descr">Przyciąga położenie do dróg podczas nawigowania.</string>
     <string name="snap_to_road">Przyciąganie do drogi</string>
     <string name="day_night_info">Informacja o dniu/nocy</string>
     <string name="map_widget_vector_attributes">Atrybuty renderowania</string>
@@ -3009,7 +3009,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n</string>
     <string name="angular_measeurement">Jednostka kąta</string>
     <string name="angular_measeurement_descr">Określa jednostki miary azymutu.</string>
-    <string name="avoid_pt_types_descr">Proszę wybrać rodzaje transportu publicznego, unikanych dla nawigacji:</string>
+    <string name="avoid_pt_types_descr">Wybiera rodzaje transportu publicznego, unikanych dla nawigacji.</string>
     <string name="avoid_pt_types">Unikanie rodzaju transportu…</string>
     <string name="shared_string_walk">Pieszo</string>
     <string name="save_poi_value_exceed_length">Skróć długość znacznika „%s” do mniej niż 255 znaków.</string>
@@ -3069,21 +3069,21 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="settings_derived_routing_mode_string">Tryb użytkownika, pochodzący z: %s</string>
     <string name="routing_profile_ski">Narty</string>
     <string name="profile_type_descr_string">Rodzaj: %s</string>
-    <string name="profile_type_base_string">Profil bazowy</string>
+    <string name="profile_type_base_string">Profil podstawowy</string>
     <string name="profile_alert_need_routing_type_title">Wybór rodzaju nawigacji</string>
     <string name="profile_alert_need_routing_type_msg">Proszę wybrać rodzaj nawigacji do nowego profilu aplikacji</string>
     <string name="profile_alert_need_profile_name_title">Proszę wprowadzić nazwę profilu</string>
     <string name="profile_alert_need_profile_name_msg">Najpierw należy określić nazwę profilu.</string>
     <string name="profile_alert_duplicate_name_title">Powielona nazwa</string>
     <string name="profile_alert_duplicate_name_msg">Istnieje już profil o takiej nazwie</string>
-    <string name="profile_alert_cant_delete_base">Nie można usunąć profili bazowych OsmAnd</string>
+    <string name="profile_alert_cant_delete_base">Nie można usunąć profili podstawowych OsmAnd</string>
     <string name="profile_alert_need_save_title">Zapisz zmiany</string>
     <string name="profile_alert_need_save_msg">Najpierw zapisz zmiany w profilu</string>
     <string name="profile_alert_delete_title">Usuń profil</string>
-    <string name="profile_alert_delete_msg">Usunąć profil \"%s\"\?</string>
+    <string name="profile_alert_delete_msg">Usunąć profil „%s”\?</string>
     <string name="select_base_profile_dialog_title">Wybierz profil, od którego chcesz rozpocząć</string>
     <string name="select_base_profile_dialog_message">Profil dostosowany można oprzeć na jednym z domyślnych profili aplikacji. Określają one podstawowe ustawienia, takie jak domyślna widoczność widżetów i jednostek prędkości i odległości. Są to domyślne profile aplikacji, wraz z przykładami profili dostosowanych, które można rozszerzyć na:</string>
-    <string name="select_nav_profile_dialog_title">Wybierz typ nawigacji</string>
+    <string name="select_nav_profile_dialog_title">Wybór rodzaju nawigacji</string>
     <string name="base_profile_descr_car">Samochód, ciężarówka, motocykl</string>
     <string name="base_profile_descr_bicycle">Rower górski, motorower, koń</string>
     <string name="base_profile_descr_pedestrian">Spacer, wędrówka piesza, bieganie</string>
@@ -3093,9 +3093,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="routing_profile_geocoding">Geokodowanie</string>
     <string name="routing_profile_straightline">Linia prosta</string>
     <string name="routing_profile_broutrer">BRouter (w trybie offline)</string>
-    <string name="osmand_default_routing">OsmAnd trasa</string>
-    <string name="custom_routing">Niestandardowy profil routingu</string>
-    <string name="special_routing_type">Wyznaczanie tras specjalnych</string>
+    <string name="osmand_default_routing">Wyznacza trasy przez OsmAnd</string>
+    <string name="custom_routing">Wyznacza trasy w dostosowany sposób</string>
+    <string name="special_routing_type">Wyznacza trasy specjalne</string>
     <string name="application_profiles_descr">Wybiera profile widoczne w aplikacji.</string>
     <string name="application_profiles">Profile aplikacji</string>
     <string name="zoom_by_wunderlinq_descr">Zmień powiększenie mapy, pokręć kółkiem w górę i w dół. Escape powraca do aplikacji WunderLINQ.</string>
@@ -3150,7 +3150,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="turn_screen_on_router">Przebudzaj przed zakrętem</string>
     <string name="turn_screen_on_time_descr">Ustaw jak długo ekran będzie włączony.</string>
     <string name="turn_screen_on_sensor">Używanie czujnika zbliżeniowego</string>
-    <string name="turn_screen_on_sensor_descr">Podczas nawigacji, machnij ręką na górze ekranu, by go włączyć.</string>
+    <string name="turn_screen_on_sensor_descr">Włącza ekran podczas nawigacji machaniem ręką nad ekranem.</string>
     <string name="external_input_device">Zewnętrzne urządzenia wejściowe</string>
     <string name="external_input_device_descr">Wybierz urządzenie takie jak zwykła klawiatura lub WundeRLINQ do sterowania zewnętrznego.</string>
     <string name="sett_no_ext_input">Brak</string>
@@ -3202,7 +3202,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="rendering_attr_showLez_description">Wyświetl strefy niskiej emisji na mapie. Nie ma to wpływu na przebieg trasy.</string>
     <string name="rendering_attr_showLez_name">Wyświetl strefy niskiej emisji</string>
     <string name="temporary_conditional_routing">Uwzględnianie tymczasowych ograniczeń</string>
-    <string name="third_party_routing_type">Wyznaczanie tras przez inne osoby</string>
+    <string name="third_party_routing_type">Wyznacza trasy przez zewnętrzne programy</string>
     <string name="app_mode_monowheel">Monocykl</string>
     <string name="shared_string_default">Domyślnie</string>
     <string name="gpx_join_gaps">Połącz luki</string>
@@ -3399,9 +3399,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="dialogs_and_notifications_descr">Kontroluje wyskakujące okienka, okna dialogowe i powiadomienia.</string>
     <string name="join_segments">Połącz segmenty</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Sieci węzłów</string>
-    <string name="add_new_profile_q">Dodać nowy profil \'%1$s\'\?</string>
-    <string name="save_heading">Dołącz kierunek</string>
-    <string name="save_heading_descr">Zapisz podczas nagrywania kierunek do każdego punktu trasy.</string>
+    <string name="add_new_profile_q">Dodać nowy profil „%1$s”\?</string>
+    <string name="save_heading">Dołączenie kierunku</string>
+    <string name="save_heading_descr">Zapisuje podczas rejestrowania kierunek do każdego punktu trasy.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Osobiste</string>
@@ -3416,7 +3416,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="select_color">Wybór koloru</string>
     <string name="edit_profiles_descr">Nie można usunąć domyślnych profili OsmAnd, ale można je wyłączyć (na poprzednim ekranie) lub przenieść na dół.</string>
     <string name="edit_profiles">Edytuj profile</string>
-    <string name="select_nav_profile_dialog_message">\"Typ nawigacji\" określa jak obliczane są trasy.</string>
+    <string name="select_nav_profile_dialog_message">Określa w jaki sposób wyznaczane są trasy.</string>
     <string name="profile_appearance">Wygląd profilu</string>
     <string name="choose_icon_color_name">Ikona, kolor i nazwa</string>
     <string name="reorder_profiles">Edytuj listę profili</string>
@@ -3453,7 +3453,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="monitoring_min_speed_descr_remark">Uwaga: kontrola prędkości &gt; 0: większość zestawów GPS zgłasza wartość prędkości tylko wtedy, gdy algorytm określa, że jesteś w ruchu, a żadna, jeśli nie jesteś. Dlatego użycie ustawienia &gt; 0 w tym filtrze w pewnym sensie wykorzystuje wykrywanie ruchu chipsetu GPS. Ale nawet jeśli nie zostanie przefiltrowane tutaj w czasie nagrywania, nadal używamy tej funkcji w naszej analizie GPX do określenia skorygowanej odległości, tj. wartość wyświetlana w tym polu to odległość zarejestrowana podczas ruchu.</string>
     <string name="monitoring_min_accuracy_descr">Zapisuje tylko punkty zmierzone z minimalną dokładnością (w metrach/stopach, zgłoszoną przez system Android dla chipsetu). Dokładność odnosi się do rozproszenia powtarzanych pomiarów i nie jest bezpośrednio związana z precyzją, która określa, jak blisko są twoje pomiary do twojej prawdziwej pozycji.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Zalecenie: trudno jest przewidzieć, jakie dane zostaną zarejestrowane, a jakie nie. Możliwe, że najlepiej będzie wyłączyć ten filtr.</string>
-    <string name="monitoring_min_distance_descr">Zapobiega zapisywaniu powielonych punktów, zbyt mało oddalonych od siebie. Zapewnia ładniejszy przestrzenny wygląd ścieżek, które nie są później przetwarzane.</string>
+    <string name="monitoring_min_distance_descr">Zapobiega zapisywaniu powielonych punktów, zbyt mało oddalonych od siebie. Zapewnia bardziej przejrzysty wygląd śladów nie poddawanych późniejszej obróbce.</string>
     <string name="search_offline_geo_error">Nie można przeanalizować intencji geograficznej \'%s\'.</string>
     <string name="multimedia_notes_view_descr">Twoje uwagi OSM są w %1$s.</string>
     <string name="osm_authorization_success">Uwierzytelniono</string>
@@ -3541,7 +3541,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="profile_type_custom_string">Dostosowany profil</string>
     <string name="shared_string_angle_param">Kąt: %s°</string>
     <string name="shared_string_angle">Kąt</string>
-    <string name="monitoring_min_speed_descr_recommendation">Zalecenie: Spróbuj najpierw zastosować wykrywanie ruchu przez filtr rejestrowania minimalnego przemieszczenia (B), może to dać lepsze wyniki, a stracisz mniej danych. Jeśli twoje ścieżki pozostają głośne przy niskich prędkościach, wypróbuj tutaj wartości niezerowe. Należy pamiętać, że niektóre pomiary mogą w ogóle nie zgłaszać żadnej wartości prędkości (niektóre metody sieciowe), w którym to przypadku nie rejestruje się niczego.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Zalecenie: Proszę najpierw zastosować wykrywanie ruchu przez filtr rejestrowania minimalnego przemieszczenia (B). Może on dać lepsze wyniki przy mniejszej ilości pominiętych danych. Jeśli ślady pozostaną zaszumione przy niskich prędkościach, proszę spróbować użyć wartości niezerowych. Należy pamiętać, że niektóre pomiary mogą w ogóle nie zgłaszać żadnej wartości prędkości (niektóre metody sieciowe), w którym to przypadku nie rejestruje się niczego.</string>
     <string name="monitoring_min_accuracy_descr_remark">Uwaga: Jeśli GPS został wyłączony bezpośrednio przed nagraniem, pierwszy zmierzony punkt może mieć zmniejszoną dokładność, więc w naszym kodzie możemy chcieć poczekać sekundę przed nagraniem punktu (lub nagrać najlepszy z 3 kolejnych punktów itp.), ale nie jest to jeszcze realizowane.</string>
     <string name="multimedia_rec_split_title">Dzielenie nagrań</string>
     <string name="recalc_angle_dialog_descr">Dodatkowy prosty odcinek pomiędzy moją pozycją a obliczoną trasą zostanie wyświetlony do czasu ponownego obliczenia trasy</string>
@@ -3560,7 +3560,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="import_duplicates_title">Niektóre elementy już istnieją</string>
     <string name="select_data_to_import">Wybierz dane, które mają zostać zaimportowane.</string>
     <string name="import_routing_file">Importuj plik routingu</string>
-    <string name="monitoring_min_speed_descr">Jest to filtr odcięcia niskiej prędkości, który nie rejestruje punktów poniżej określonej prędkości. Może to sprawić, że zarejestrowane ślady będą wyglądać na bardziej płynne podczas przeglądania na mapie.</string>
+    <string name="monitoring_min_speed_descr">Nie rejestruje punktów poniżej określonej prędkości. Może to sprawić, że zarejestrowane ślady będą wyglądać na bardziej płynne podczas przeglądania na mapie.</string>
     <string name="shared_string_quick_actions">Szybka czynność</string>
     <string name="keep_both">Zatrzymaj oba</string>
     <string name="shared_string_rendering_style">Styl renderowania</string>
@@ -3568,4 +3568,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="import_rendering_file">Importowanie pliku renderowania</string>
     <string name="restore_all_profile_settings">Przywrócić wszystkie ustawienia profilu\?</string>
     <string name="saving_new_profile">Zapisywanie nowego profilu</string>
+    <string name="restore_all_profile_settings_descr">Wszystkie ustawienia profilu zostaną przywrócone do pierwotnego stanu po utworzeniu/zaimportowaniu tego profilu.</string>
+    <string name="profile_backup_failed">Nie można utworzyć kopii zapasowej profilu.</string>
+    <string name="clear_recorded_data_warning">Wyczyścić zarejestrowane dane\?</string>
 </resources>
