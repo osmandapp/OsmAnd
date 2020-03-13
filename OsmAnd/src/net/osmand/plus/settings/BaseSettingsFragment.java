@@ -585,7 +585,10 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public void dismiss() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			activity.getSupportFragmentManager().popBackStack();
+			FragmentManager fragmentManager = activity.getSupportFragmentManager();
+			if (!fragmentManager.isStateSaved()) {
+				fragmentManager.popBackStack();
+			}
 		}
 	}
 

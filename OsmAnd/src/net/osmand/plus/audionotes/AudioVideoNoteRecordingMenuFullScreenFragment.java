@@ -8,6 +8,7 @@ import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
@@ -59,6 +60,12 @@ public class AudioVideoNoteRecordingMenuFullScreenFragment extends Fragment {
 
 	public void dismiss() {
 		dismissing = true;
-		getActivity().getSupportFragmentManager().popBackStack();
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			FragmentManager fragmentManager = activity.getSupportFragmentManager();
+			if (!fragmentManager.isStateSaved()) {
+				fragmentManager.popBackStack();
+			}
+		}
 	}
 }

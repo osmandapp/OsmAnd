@@ -36,6 +36,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.SettingsHelper;
+import net.osmand.plus.SettingsHelper.SettingsCollectListener;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -182,9 +183,9 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	}
 
 	private void restoreCustomModeFromFile(final File file) {
-		app.getSettingsHelper().importSettings(file, "", 1, new SettingsHelper.SettingsImportListener() {
+		app.getSettingsHelper().collectSettings(file, "", 1, new SettingsCollectListener() {
 			@Override
-			public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
+			public void onSettingsCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
 				if (succeed) {
 					for (SettingsHelper.SettingsItem item : items) {
 						item.setShouldReplace(true);
@@ -198,7 +199,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	private void importBackupSettingsItems(File file, List<SettingsHelper.SettingsItem> items) {
 		app.getSettingsHelper().importSettings(file, items, "", 1, new SettingsHelper.SettingsImportListener() {
 			@Override
-			public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
+			public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsHelper.SettingsItem> items) {
 				app.showToastMessage(R.string.profile_prefs_reset_successful);
 				updateCopiedOrResetPrefs();
 			}
