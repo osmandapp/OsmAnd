@@ -49,7 +49,6 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.SettingsHelper.SettingsCollectListener;
-import net.osmand.plus.SettingsHelper.SettingsImportListener;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
@@ -809,7 +808,7 @@ public class ImportHelper {
 									if (!Algorithms.isEmpty(pluginItem.getPluginItems())) {
 										app.getSettingsHelper().importSettings(file, pluginItem.getPluginItems(), "", 1, new SettingsHelper.SettingsImportListener() {
 											@Override
-											public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
+											public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsHelper.SettingsItem> items) {
 												app.showShortToastMessage(app.getString(R.string.file_imported_successfully, plugin.getName()));
 											}
 										});
