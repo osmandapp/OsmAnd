@@ -2,7 +2,6 @@ package net.osmand.plus.routing;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
-import android.system.Os;
 
 import net.osmand.IndexConstants;
 import net.osmand.Location;
@@ -13,7 +12,6 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.QuadRect;
-import net.osmand.plus.AppInitializer;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -143,11 +141,18 @@ public class RouteCalculationResult {
 
 	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end, List<LatLon> intermediates,
 								  OsmandApplication ctx, boolean leftSide, RoutingContext rctx, List<LocationPoint> waypoints, ApplicationMode mode) {
-		this.routingTime = rctx.routingTime;
-		this.visitedSegments =  rctx.visitedSegments;
-		this.loadedTiles = rctx.loadedTiles;
-		this.calculateTime = (float) (((System.nanoTime() - rctx.timeToCalculate) / 1e6) / 1000f);
-		if(waypoints != null) {
+		if (rctx != null) {
+			this.routingTime = rctx.routingTime;
+			this.visitedSegments = rctx.visitedSegments;
+			this.loadedTiles = rctx.loadedTiles;
+			this.calculateTime = (float) (((System.nanoTime() - rctx.timeToCalculate) / 1e6) / 1000f);
+		} else {
+			this.routingTime = 0;
+			this.visitedSegments = 0;
+			this.loadedTiles = 0;
+			this.calculateTime = 0;
+		}
+		if (waypoints != null) {
 			this.locationPoints.addAll(waypoints);
 		}
 		List<RouteDirectionInfo> computeDirections = new ArrayList<RouteDirectionInfo>();
@@ -174,7 +179,7 @@ public class RouteCalculationResult {
 				ctx.getSettings().ROUTE_STRAIGHT_ANGLE.getModeValue(mode) : 0;
 
 		RouteExporter exporter = new RouteExporter(new File(ctx.getAppPath(IndexConstants.GPX_INDEX_DIR), "test.gpx"), list, locations);
-		exporter.export();
+		//exporter.exportRoute();
 
 	}
 

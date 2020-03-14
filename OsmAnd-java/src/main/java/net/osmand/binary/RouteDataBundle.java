@@ -10,6 +10,11 @@ public class RouteDataBundle extends StringBundle {
 		this.resources = resources;
 	}
 
+	public RouteDataBundle(RouteDataResources resources, StringBundle bundle) {
+		super(bundle.getMap());
+		this.resources = resources;
+	}
+
 	@Override
 	public StringBundle newInstance() {
 		return new RouteDataBundle(resources);

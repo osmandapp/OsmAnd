@@ -37,8 +37,8 @@ public class RouteExporter {
 		this.locations = locations;
 	}
 
-	public Exception export() {
-		RouteDataResources resources = new RouteDataResources();
+	public Exception exportRoute() {
+		RouteDataResources resources = new RouteDataResources(locations);
 		final RouteDataBundle bundle = new RouteDataBundle(resources);
 
 		for (RouteSegmentResult sr : route) {
@@ -56,14 +56,14 @@ public class RouteExporter {
 		}
 		bundle.putBundleList("route", "segment", routeItems);
 
-		List<StringBundle> dataObjects = new ArrayList<>();
+		List<StringBundle> typeList = new ArrayList<>();
 		Map<RouteTypeRule, Integer> rules = resources.getRules();
 		for (RouteTypeRule rule : rules.keySet()) {
-			RouteDataBundle objectBundle = new RouteDataBundle(resources);
-			rule.writeToBundle(objectBundle);
-			dataObjects.add(objectBundle);
+			RouteDataBundle typeBundle = new RouteDataBundle(resources);
+			rule.writeToBundle(typeBundle);
+			typeList.add(typeBundle);
 		}
-		bundle.putBundleList("types", "type", dataObjects);
+		bundle.putBundleList("types", "type", typeList);
 
 		GPXFile gpx = new GPXFile("OsmAnd");
 		gpx.author = OSMAND_ROUTER;
@@ -72,7 +72,7 @@ public class RouteExporter {
 		gpx.tracks.add(track);
 		TrkSegment trkSegment = new TrkSegment();
 		track.segments.add(trkSegment);
-		for (int i = 0; i< locations.size(); i++) {
+		for (int i = 0; i < locations.size(); i++) {
 			Location loc = locations.get(i);
 			WptPt pt = new WptPt();
 			pt.lat = loc.getLatitude();
@@ -98,7 +98,6 @@ public class RouteExporter {
 		};
 		gpx.setExtensionsWriter(extensionsWriter);
 
-		Exception result = GPXUtilities.writeGpxFile(file, gpx);
-		return result;
+		return GPXUtilities.writeGpxFile(file, gpx);
 	}
 }

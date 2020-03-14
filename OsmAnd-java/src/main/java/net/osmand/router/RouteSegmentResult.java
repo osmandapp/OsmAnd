@@ -1,7 +1,7 @@
 package net.osmand.router;
 
 
-import net.osmand.binary.BinaryMapRouteReaderAdapter;
+import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataBundle;
@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 
 public class RouteSegmentResult implements StringExternalizable<RouteDataBundle> {
@@ -34,6 +36,9 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 
 	private static final DecimalFormat SPEED_FORMATTER = new DecimalFormat("#.##");
 
+	public RouteSegmentResult(RouteDataObject object) {
+		this.object = object;
+	}
 
 	public RouteSegmentResult(RouteDataObject object, int startPointIndex, int endPointIndex) {
 		this.object = object;
@@ -58,10 +63,23 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 
 	void collectNames(RouteDataResources resources) {
 		Map<RouteTypeRule, Integer> rules = resources.getRules();
+		RouteRegion region = object.region;
+		if (region.getNameTypeRule() != -1) {
+			RouteTypeRule r = region.quickGetEncodingRule(region.getNameTypeRule());
+			if (!rules.containsKey(r)) {
+				rules.put(r, rules.size());
+			}
+		}
+		if (region.getRefTypeRule() != -1) {
+			RouteTypeRule r = region.quickGetEncodingRule(region.getRefTypeRule());
+			if (!rules.containsKey(r)) {
+				rules.put(r, rules.size());
+			}
+		}
 		if (object.nameIds != null) {
 			for (int nameId : object.nameIds) {
 				String name = object.names.get(nameId);
-				String tag = object.region.quickGetEncodingRule(nameId).getTag();
+				String tag = region.quickGetEncodingRule(nameId).getTag();
 				RouteTypeRule r = new RouteTypeRule(tag, name);
 				if (!rules.containsKey(r)) {
 					rules.put(r, rules.size());
@@ -81,6 +99,9 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	}
 
 	private int[] convertTypes(int[] types, Map<RouteTypeRule, Integer> rules) {
+		if (types == null || types.length == 0) {
+			return null;
+		}
 		int[] res = new int[types.length];
 		for (int i = 0; i < types.length; i++) {
 			int type = types[i];
@@ -95,6 +116,9 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	}
 
 	private int[][] convertTypes(int[][] types, Map<RouteTypeRule, Integer> rules) {
+		if (types == null || types.length == 0) {
+			return null;
+		}
 		int[][] res = new int[types.length][];
 		for (int i = 0; i < types.length; i++) {
 			int[] typesArr = types[i];
@@ -106,6 +130,9 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	}
 
 	private int[] convertNameIds(int[] nameIds, Map<RouteTypeRule, Integer> rules) {
+		if (nameIds == null || nameIds.length == 0) {
+			return null;
+		}
 		int[] res = new int[nameIds.length];
 		for (int i = 0; i < nameIds.length; i++) {
 			int nameId = nameIds[i];
@@ -121,26 +148,44 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		return res;
 	}
 
+	public void fillData() {
+		if (object.nameIds != null && object.nameIds.length > 0) {
+			RouteRegion region = object.region;
+			int nameTypeRule = region.getNameTypeRule();
+			int refTypeRule = region.getRefTypeRule();
+			object.names = new TIntObjectHashMap<>();
+			for (int nameId : object.nameIds) {
+				RouteTypeRule rule = region.quickGetEncodingRule(nameId);
+				if (rule != null) {
+					if (nameTypeRule != -1 && "name".equals(rule.getTag())) {
+						nameId = nameTypeRule;
+					} else if (refTypeRule != -1 && "ref".equals(rule.getTag())) {
+						nameId = refTypeRule;
+					}
+					object.names.put(nameId, rule.getValue());
+				}
+			}
+		}
+	}
+
 	@Override
 	public void writeToBundle(RouteDataBundle bundle) {
 		Map<RouteTypeRule, Integer> rules = bundle.getResources().getRules();
+		bundle.putInt("length", Math.abs(endPointIndex - startPointIndex) + 1);
 		bundle.putFloat("segmentTime", segmentTime);
 		bundle.putString("speed", SPEED_FORMATTER.format(speed));
 		if (turnType != null) {
 			bundle.putString("turnType", turnType.toXmlString());
-			String turnLanes = object.getValue("turn:lanes");
-			if (!Algorithms.isEmpty(turnLanes)) {
-				int[] rawLanes = RouteResultPreparation.calculateRawTurnLanes(turnLanes, turnType.getValue());
-				if (rawLanes.length > 0) {
-					StringBuilder turnLanesRes = new StringBuilder();
-					for (int lane : rawLanes) {
-						if (turnLanesRes.length() > 0) {
-							turnLanesRes.append(",");
-						}
-						turnLanesRes.append(TurnType.valueOf(lane, false).toXmlString());
+			int[] turnLanes = turnType.getLanes();
+			if (turnLanes != null && turnLanes.length > 0) {
+				StringBuilder turnLanesRes = new StringBuilder();
+				for (int lane : turnLanes) {
+					if (turnLanesRes.length() > 0) {
+						turnLanesRes.append(",");
 					}
-					bundle.putString("turnLanes", turnLanesRes.toString());
+					turnLanesRes.append(TurnType.valueOf(lane, false).toXmlString());
 				}
+				bundle.putString("turnLanes", turnLanesRes.toString());
 			}
 		}
 		bundle.putArray("types", convertTypes(object.types, rules));
@@ -150,7 +195,40 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 
 	@Override
 	public void readFromBundle(RouteDataBundle bundle) {
+		int length = bundle.getInt("length", 0);
+		startPointIndex = 0;
+		endPointIndex = length  > 0 ? length - 1 : 0;
+		segmentTime = bundle.getFloat("segmentTime", segmentTime);
+		speed = bundle.getFloat("speed", speed);
+		String turnTypeStr = bundle.getString("turnType", null);
+		if (!Algorithms.isEmpty(turnTypeStr)) {
+			turnType = TurnType.fromString(turnTypeStr, false);
+			String turnLanesStr = bundle.getString("turnLanes", null);
+			if (!Algorithms.isEmpty(turnLanesStr)) {
+				String[] lanesArr = turnLanesStr.split(",");
+				int[] lanes = new int[lanesArr.length];
+				for (int i = 0; i < lanesArr.length; i++) {
+					String laneStr = lanesArr[i];
+					lanes[i] = TurnType.fromString(laneStr, false).getValue();
+				}
+				turnType.setLanes(lanes);
+			}
+		}
+		object.types = bundle.getIntArray("types", null);
+		object.pointTypes = bundle.getIntIntArray("pointTypes", null);
+		object.nameIds = bundle.getIntArray("names", null);
 
+		object.pointsX = new int[length];
+		object.pointsY = new int[length];
+		RouteDataResources resources = bundle.getResources();
+		Location location = resources.currentLocation();
+		object.pointsX[0] = MapUtils.get31TileNumberX(location.getLongitude());
+		object.pointsY[0] = MapUtils.get31TileNumberY(location.getLatitude());
+		for (int i = 1; i < length; i++) {
+			location = resources.nextLocation();
+			object.pointsX[i] = MapUtils.get31TileNumberX(location.getLongitude());
+			object.pointsY[i] = MapUtils.get31TileNumberY(location.getLatitude());
+		}
 	}
 
 	public float[] getHeightValues() {

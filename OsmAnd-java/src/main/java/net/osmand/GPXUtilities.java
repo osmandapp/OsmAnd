@@ -98,6 +98,10 @@ public class GPXUtilities {
 		public void writeExtensions(XmlSerializer serializer);
 	}
 
+	public interface GPXExtensionsReader {
+		public void readExtensions(GPXFile res, XmlPullParser parser) throws Exception;
+	}
+
 	public static class GPXExtensions {
 		Map<String, String> extensions = null;
 		GPXExtensionsWriter extensionsWriter = null;
@@ -1799,6 +1803,10 @@ public class GPXUtilities {
 	}
 
 	public static GPXFile loadGPXFile(InputStream f) {
+		return loadGPXFile(f, null);
+	}
+
+	public static GPXFile loadGPXFile(InputStream f, GPXExtensionsReader extensionsReader) {
 		GPXFile res = new GPXFile(null);
 		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT, Locale.US);
 		format.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -1825,6 +1833,13 @@ public class GPXUtilities {
 								routePointExtension = true;
 								if (parse instanceof WptPt) {
 									parse.getExtensionsToWrite().put("offset", routeTrackSegment.points.size() + "");
+								}
+								break;
+
+							case "route":
+							case "types":
+								if (extensionsReader != null) {
+									extensionsReader.readExtensions(res, parser);
 								}
 								break;
 

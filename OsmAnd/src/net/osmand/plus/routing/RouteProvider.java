@@ -32,6 +32,7 @@ import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
 import net.osmand.router.PrecalculatedRouteDirection;
+import net.osmand.router.RouteImporter;
 import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.router.RouteSegmentResult;
@@ -49,6 +50,7 @@ import org.xml.sax.SAXException;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -172,6 +174,7 @@ public class RouteProvider {
 		public GPXRouteParams build(Location start, OsmandSettings settings) {
 			GPXRouteParams res = new GPXRouteParams();
 			res.prepareGPXFile(this);
+			res.file = file;
 //			if (passWholeRoute && start != null) {
 //				res.points.add(0, start);
 //			}
@@ -201,6 +204,7 @@ public class RouteProvider {
 		boolean calculateOsmAndRouteParts;
 		boolean useIntermediatePointsRTE;
 		private List<LocationPoint> wpt;
+		private GPXFile file;
 
 		boolean addMissingTurns = true;
 
@@ -357,6 +361,15 @@ public class RouteProvider {
 	}
 
 	private RouteCalculationResult calculateGpxRoute(RouteCalculationParams routeParams) throws IOException {
+
+		RouteImporter routeImporter = new RouteImporter(new File(routeParams.gpxRoute.file.path));
+		List<RouteSegmentResult> route = routeImporter.importRoute();
+
+		RouteCalculationResult res = new RouteCalculationResult(route, routeParams.start, routeParams.end,
+				routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null, null, routeParams.mode);
+
+		return res;
+		/*
 		// get the closest point to start and to end
 		GPXRouteParams gpxParams = routeParams.gpxRoute;
 		if(routeParams.gpxRoute.useIntermediatePointsRTE){
@@ -407,6 +420,7 @@ public class RouteProvider {
 		RouteCalculationResult res = new RouteCalculationResult(gpxRoute, gpxDirections, routeParams, 
 				gpxParams  == null? null: gpxParams.wpt, routeParams.gpxRoute.addMissingTurns);
 		return res;
+		*/
 	}
 
 	private RouteCalculationResult calculateOsmAndRouteWithIntermediatePoints(RouteCalculationParams routeParams,

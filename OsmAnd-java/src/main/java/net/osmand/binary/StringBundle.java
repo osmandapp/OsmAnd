@@ -1,5 +1,7 @@
 package net.osmand.binary;
 
+import net.osmand.util.Algorithms;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -17,6 +19,13 @@ public class StringBundle {
 		STRING,
 		LIST,
 		MAP
+	}
+
+	public StringBundle() {
+	}
+
+	protected StringBundle(Map<String, Item> map) {
+		this.map = map;
 	}
 
 	public StringBundle newInstance() {
@@ -70,8 +79,52 @@ public class StringBundle {
 			super(name, ItemType.STRING, String.valueOf(value));
 		}
 
-		public int asInt() throws NumberFormatException {
-			return Integer.parseInt(getValue());
+		private int asInt(int defaultValue) {
+			try {
+				return Integer.parseInt(getValue());
+			} catch (NumberFormatException e) {
+				return defaultValue;
+			}
+		}
+
+		private long asLong(long defaultValue) {
+			try {
+				return Long.parseLong(getValue());
+			} catch (NumberFormatException e) {
+				return defaultValue;
+			}
+		}
+
+		private float asFloat(float defaultValue) {
+			try {
+				return Float.parseFloat(getValue());
+			} catch (NumberFormatException e) {
+				return defaultValue;
+			}
+		}
+
+		private boolean asBoolean(boolean defaultValue) {
+			try {
+				return Boolean.parseBoolean(getValue());
+			} catch (NumberFormatException e) {
+				return defaultValue;
+			}
+		}
+
+		private int[] asIntArray(int[] defaultValue) {
+			try {
+				return stringToIntArray(getValue());
+			} catch (NumberFormatException e) {
+				return defaultValue;
+			}
+		}
+
+		private int[][] asIntIntArray(int[][] defaultValue) {
+			try {
+				return stringToIntIntArray(getValue());
+			} catch (NumberFormatException e) {
+				return defaultValue;
+			}
 		}
 	}
 
@@ -100,35 +153,55 @@ public class StringBundle {
 		return Collections.unmodifiableMap(map);
 	}
 
+	public Item getItem(String key) {
+		return map.get(key);
+	}
+
 	public void putInt(String key, int value) {
 		map.put(key, new StringItem(key, value));
 	}
 
-	public int getInt(String key) throws IllegalArgumentException {
+	public int getInt(String key, int defaultValue) {
 		Item item = map.get(key);
-		if (item instanceof StringItem) {
-			return ((StringItem) item).asInt();
-		} else {
-			throw new IllegalArgumentException("The item is " + item.getClass().getSimpleName() + " but must be StringItem");
-		}
+		return item instanceof StringItem ? ((StringItem) item).asInt(defaultValue) : defaultValue;
 	}
 
 	public void putLong(String key, long value) {
 		map.put(key, new StringItem(key, value));
 	}
 
+	public long getLong(String key, long defaultValue) {
+		Item item = map.get(key);
+		return item instanceof StringItem ? ((StringItem) item).asLong(defaultValue) : defaultValue;
+	}
+
 	public void putFloat(String key, float value) {
 		map.put(key, new StringItem(key, value));
+	}
+
+	public float getFloat(String key, float defaultValue) {
+		Item item = map.get(key);
+		return item instanceof StringItem ? ((StringItem) item).asFloat(defaultValue) : defaultValue;
 	}
 
 	public void putBoolean(String key, boolean value) {
 		map.put(key, new StringItem(key, value));
 	}
 
+	public boolean getBoolean(String key, boolean defaultValue) {
+		Item item = map.get(key);
+		return item instanceof StringItem ? ((StringItem) item).asBoolean(defaultValue) : defaultValue;
+	}
+
 	public void putString(String key, String value) {
 		if (value != null) {
 			map.put(key, new StringItem(key, value));
 		}
+	}
+
+	public String getString(String key, String defaultValue) {
+		Item item = map.get(key);
+		return item instanceof StringItem ? ((StringItem) item).getValue() : defaultValue;
 	}
 
 	public void putObject(String key, StringExternalizable object) {
@@ -173,10 +246,20 @@ public class StringBundle {
 		}
 	}
 
+	public int[] getIntArray(String key, int[] defaultValue) {
+		Item item = map.get(key);
+		return item instanceof StringItem ? ((StringItem) item).asIntArray(defaultValue) : defaultValue;
+	}
+
 	public void putArray(String key, int[][] array) {
 		if (array != null) {
 			map.put(key, new StringItem(key, intIntArrayToString(array)));
 		}
+	}
+
+	public int[][] getIntIntArray(String key, int[][] defaultValue) {
+		Item item = map.get(key);
+		return item instanceof StringItem ? ((StringItem) item).asIntIntArray(defaultValue) : defaultValue;
 	}
 
 	public void putArray(String key, long[] array) {
@@ -227,7 +310,7 @@ public class StringBundle {
 		}
 	}
 
-	private String intArrayToString(int[] a) {
+	private static String intArrayToString(int[] a) {
 		if (a == null) {
 			return null;
 		}
@@ -241,7 +324,7 @@ public class StringBundle {
 		return b.toString();
 	}
 
-	private int[] stringToIntArray(String a) throws NumberFormatException {
+	private static int[] stringToIntArray(String a) throws NumberFormatException {
 		if (a == null) {
 			return null;
 		}
@@ -253,7 +336,7 @@ public class StringBundle {
 		return res;
 	}
 
-	private String longArrayToString(long[] a) {
+	private static String longArrayToString(long[] a) {
 		if (a == null) {
 			return null;
 		}
@@ -267,7 +350,7 @@ public class StringBundle {
 		return b.toString();
 	}
 
-	private long[] stringToLongArray(String a) throws NumberFormatException {
+	private static long[] stringToLongArray(String a) throws NumberFormatException {
 		if (a == null) {
 			return null;
 		}
@@ -279,7 +362,7 @@ public class StringBundle {
 		return res;
 	}
 
-	private String floatArrayToString(float[] a) {
+	private static String floatArrayToString(float[] a) {
 		if (a == null) {
 			return null;
 		}
@@ -293,7 +376,7 @@ public class StringBundle {
 		return b.toString();
 	}
 
-	private float[] stringToFloatArray(String a) throws NumberFormatException {
+	private static float[] stringToFloatArray(String a) throws NumberFormatException {
 		if (a == null) {
 			return null;
 		}
@@ -305,7 +388,7 @@ public class StringBundle {
 		return res;
 	}
 
-	private String intIntArrayToString(int[][] a) {
+	private static String intIntArrayToString(int[][] a) {
 		if (a == null) {
 			return null;
 		}
@@ -333,9 +416,23 @@ public class StringBundle {
 		return b.toString();
 	}
 
-	private int[][] stringToIntIntArray(String a) throws NumberFormatException {
+	private static int[][] stringToIntIntArray(String a) throws NumberFormatException {
 		if (a == null) {
 			return null;
+		}
+		String[] items = a.split(";");
+		int[][] res = new int[items.length][];
+		for (int i = 0; i < items.length; i++) {
+			String item = items[i];
+			if (Algorithms.isEmpty(item)) {
+				res[i] = null;
+			} else {
+				String[] subItems = item.split(",");
+				res[i] = new int[subItems.length];
+				for (int k = 0; k < subItems.length; k++) {
+					res[i][k] = Integer.parseInt(subItems[k]);
+				}
+			}
 		}
 		/*
 		String[] items = a.split(";");
@@ -348,10 +445,10 @@ public class StringBundle {
 			}
 		}
 		*/
-		return null;//res;
+		return res;
 	}
 
-	private String strArrayToString(String[] a) {
+	private static String strArrayToString(String[] a) {
 		if (a == null) {
 			return null;
 		}
@@ -365,7 +462,7 @@ public class StringBundle {
 		return b.toString();
 	}
 
-	private String strStrArrayToString(String[][] a) {
+	private static String strStrArrayToString(String[][] a) {
 		if (a == null) {
 			return null;
 		}

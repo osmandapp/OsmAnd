@@ -12,7 +12,7 @@ public abstract class StringBundleWriter {
 		this.bundle = bundle;
 	}
 
-	protected StringBundle getBundle() {
+	public StringBundle getBundle() {
 		return bundle;
 	}
 

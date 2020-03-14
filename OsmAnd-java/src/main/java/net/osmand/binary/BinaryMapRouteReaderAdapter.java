@@ -67,23 +67,26 @@ public class BinaryMapRouteReaderAdapter {
 		public final static int TRAFFIC_SIGNALS = 6;
 		public final static int RAILWAY_CROSSING = 7;
 		private final static int LANES = 8;
-		private final String t;
-		private final String v;
+		private String t;
+		private String v;
 		private int intValue;
 		private float floatValue;
 		private int type;
 		private List<RouteTypeCondition> conditions = null;
 		private int forward;
 
+		public RouteTypeRule() {
+		}
+
 		public RouteTypeRule(String t, String v) {
 			this.t = t.intern();
-			if("true".equals(v)) {
+			if ("true".equals(v)) {
 				v = "yes";
 			}
-			if("false".equals(v)) {
+			if ("false".equals(v)) {
 				v = "no";
 			}
-			this.v = v == null? null : v.intern();
+			this.v = v == null ? null : v.intern();
 			try {
 				analyze();
 			} catch(RuntimeException e) {
@@ -116,27 +119,21 @@ public class BinaryMapRouteReaderAdapter {
 		@Override
 		public void writeToBundle(RouteDataBundle bundle) {
 			bundle.putString("t", t);
-			bundle.putString("v", v);
-			/*
-			if (intValue != 0) {
-				bundle.putInt("i", intValue);
+			if (v != null) {
+				bundle.putString("v", v);
 			}
-			if (floatValue != 0) {
-				bundle.putFloat("f", floatValue);
-			}
-			if (type != 0) {
-				bundle.putInt("tp", type);
-			}
-			if (forward != 0) {
-				bundle.putInt("fw", forward);
-			}
-			bundle.putList("conditions", "c", conditions);
-			*/
 		}
 
 		@Override
 		public void readFromBundle(RouteDataBundle bundle) {
-
+			t = bundle.getString("t", null);
+			v = bundle.getString("v", null);
+			try {
+				analyze();
+			} catch(RuntimeException e) {
+				System.err.println("Error analyzing tag/value = " + t + "/" +v);
+				throw e;
+			}
 		}
 
 		@Override
@@ -329,7 +326,15 @@ public class BinaryMapRouteReaderAdapter {
 			}
 			return -1;
 		}
-		
+
+		public int getNameTypeRule() {
+			return nameTypeRule;
+		}
+
+		public int getRefTypeRule() {
+			return refTypeRule;
+		}
+
 		public RouteTypeRule quickGetEncodingRule(int id) {
 			return routeEncodingRules.get(id);
 		}

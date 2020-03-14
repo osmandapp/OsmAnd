@@ -232,31 +232,30 @@ public class TurnType {
 	}
 
 	public static String toString(int[] lns) {
-        String s = "";
+        StringBuilder s = new StringBuilder();
         for (int h = 0; h < lns.length; h++) {
             if (h > 0) {
-                s += "|";
+                s.append("|");
             }
             if (lns[h] % 2 == 1) {
-                s += "+";
+                s.append("+");
             }
             int pt = TurnType.getPrimaryTurn(lns[h]);
             if (pt == 0) {
                 pt = 1;
             }
-            s += TurnType.valueOf(pt, false).toXmlString();
+            s.append(TurnType.valueOf(pt, false).toXmlString());
             int st = TurnType.getSecondaryTurn(lns[h]);
             if (st != 0) {
-                s += "," + TurnType.valueOf(st, false).toXmlString();
+                s.append(",").append(TurnType.valueOf(st, false).toXmlString());
             }
             int tt = TurnType.getTertiaryTurn(lns[h]);
             if (tt != 0) {
-                s += "," + TurnType.valueOf(tt, false).toXmlString();
+                s.append(",").append(TurnType.valueOf(tt, false).toXmlString());
             }
 
         }
-        s += "";
-        return s;
+        return s.toString();
 	}
 	public int[] getLanes() {
 		return lanes;
