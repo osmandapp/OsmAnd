@@ -3476,4 +3476,6 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="saving_new_profile">Új profil mentése</string>
     <string name="profile_backup_failed">Profil biztonsági mentése sikertelen.</string>
     <string name="clear_recorded_data_warning">Biztosan törölni szeretné a rögzített adatokat\?</string>
+    <string name="importing_from">Adatok importálása innen: %1$s</string>
+    <string name="shared_string_importing">Importálás</string>
 </resources>
