@@ -805,8 +805,12 @@ public class ImportHelper {
 									final CustomOsmandPlugin plugin = pluginItem.getPlugin();
 									OsmandPlugin.addCustomPlugin(app, activity, plugin);
 
-									if (!Algorithms.isEmpty(pluginItem.getPluginItems())) {
-										app.getSettingsHelper().importSettings(file, pluginItem.getPluginItems(), "", 1, new SettingsHelper.SettingsImportListener() {
+									List<SettingsHelper.SettingsItem> pluginItems = pluginItem.getPluginItems();
+									if (!Algorithms.isEmpty(pluginItems)) {
+										for (SettingsHelper.SettingsItem item : pluginItems) {
+											item.setShouldReplace(true);
+										}
+										app.getSettingsHelper().importSettings(file, pluginItems, "", 1, new SettingsHelper.SettingsImportListener() {
 											@Override
 											public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsHelper.SettingsItem> items) {
 												app.showShortToastMessage(app.getString(R.string.file_imported_successfully, plugin.getName()));

@@ -1,5 +1,8 @@
 package net.osmand.plus;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class CustomOsmandPlugin extends OsmandPlugin {
 
 	public String pluginId;
@@ -47,5 +50,16 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	@Override
 	public int getLogoResourceId() {
 		return R.drawable.ic_action_skiing;
+	}
+
+	public String toJson() throws JSONException {
+		JSONObject json = new JSONObject();
+
+		json.put("type", SettingsHelper.SettingsItemType.PLUGIN.name());
+		json.put("pluginId", getId());
+		json.put("name", getName());
+		json.put("Description", getDescription());
+
+		return json.toString();
 	}
 }

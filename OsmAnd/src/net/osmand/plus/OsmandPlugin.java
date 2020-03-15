@@ -22,6 +22,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity.TabItem;
+import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
@@ -41,8 +42,12 @@ import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -54,6 +59,9 @@ import java.util.Set;
 public abstract class OsmandPlugin {
 
 	public static final String PLUGIN_ID_KEY = "plugin_id";
+
+	private static final String PLUGINS_PREFERENCES_NAME = "net.osmand.plugins";
+	private static final String CUSTOM_PLUGINS_KEY = "custom_plugins";
 
 	private static final Log LOG = PlatformUtil.getLog(OsmandPlugin.class);
 
@@ -243,6 +251,7 @@ public abstract class OsmandPlugin {
 		allPlugins.add(new OsmEditingPlugin(app));
 		allPlugins.add(new OsmandDevelopmentPlugin(app));
 
+		loadCustomPlugins(app);
 		activatePlugins(app, enabledPlugins);
 	}
 
@@ -256,6 +265,51 @@ public abstract class OsmandPlugin {
 			plugin.onInstall(app, activity);
 		}
 		initPlugin(app, plugin);
+		saveCustomPlugins(app);
+	}
+
+	private static void loadCustomPlugins(@NonNull OsmandApplication app) {
+		SettingsAPI settingsAPI = app.getSettings().getSettingsAPI();
+		Object pluginPrefs = settingsAPI.getPreferenceObject(PLUGINS_PREFERENCES_NAME);
+		String customPluginsJson = settingsAPI.getString(pluginPrefs, CUSTOM_PLUGINS_KEY, "");
+		if (!Algorithms.isEmpty(customPluginsJson)) {
+			try {
+				JSONArray jArray = new JSONArray(customPluginsJson);
+				for (int i = 0; i < jArray.length(); i++) {
+					JSONObject json = jArray.getJSONObject(i);
+
+					String pluginId = json.getString("pluginId");
+					String name = json.getString("name");
+					String description = json.getString("Description");
+
+					CustomOsmandPlugin plugin = new CustomOsmandPlugin(app);
+					plugin.pluginId = pluginId;
+					plugin.name = name;
+					plugin.description = description;
+					allPlugins.add(plugin);
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private static void saveCustomPlugins(OsmandApplication app) {
+		List<CustomOsmandPlugin> customOsmandPlugins = getCustomPlugins();
+		if (!customOsmandPlugins.isEmpty()) {
+			SettingsAPI settingsAPI = app.getSettings().getSettingsAPI();
+			Object pluginPrefs = settingsAPI.getPreferenceObject(PLUGINS_PREFERENCES_NAME);
+			JSONArray itemsJson = new JSONArray();
+			for (CustomOsmandPlugin plugin : customOsmandPlugins) {
+				try {
+					String json = plugin.toJson();
+					itemsJson.put(new JSONObject(json));
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			settingsAPI.edit(pluginPrefs).putString(CUSTOM_PLUGINS_KEY, itemsJson.toString()).commit();
+		}
 	}
 
 	private static void activatePlugins(OsmandApplication app, Set<String> enabledPlugins) {
@@ -525,6 +579,16 @@ public abstract class OsmandPlugin {
 		for (OsmandPlugin p : allPlugins) {
 			if (p.isMarketPlugin()) {
 				lst.add(p);
+			}
+		}
+		return lst;
+	}
+
+	public static List<CustomOsmandPlugin> getCustomPlugins() {
+		ArrayList<CustomOsmandPlugin> lst = new ArrayList<CustomOsmandPlugin>(allPlugins.size());
+		for (OsmandPlugin plugin : allPlugins) {
+			if (plugin instanceof CustomOsmandPlugin) {
+				lst.add((CustomOsmandPlugin) plugin);
 			}
 		}
 		return lst;
