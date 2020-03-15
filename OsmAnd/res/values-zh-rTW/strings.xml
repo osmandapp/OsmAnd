@@ -3562,7 +3562,7 @@
     <string name="clear_recorded_data_warning">您確定您要清除已記錄的資料嗎？</string>
     <string name="importing_from">正在從 %1$s 匯入資料</string>
     <string name="shared_string_importing">正在匯入</string>
-    <string name="checking_for_duplicate_description">OsmAnd 檢查 %1$ 在應用程式中是否有重覆的既有項目。
+    <string name="checking_for_duplicate_description">OsmAnd 檢查 %1$s 在應用程式中是否有重覆的既有項目。
 \n
 \n這可能需要一點時間。</string>
     <string name="items_added">已新增項目</string>
