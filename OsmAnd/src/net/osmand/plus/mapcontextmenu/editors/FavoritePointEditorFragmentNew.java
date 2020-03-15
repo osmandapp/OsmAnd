@@ -38,6 +38,9 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 	private FavouritePoint favorite;
 	@Nullable
 	private FavoriteGroup group;
+
+	private int color;
+
 	@Nullable
 	FavouritesDbHelper helper;
 
@@ -67,6 +70,7 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 			FavouritePoint favorite = editor.getFavorite();
 			this.favorite = favorite;
 			this.group = helper.getGroup(favorite);
+			this.color = favorite.getColor();
 		}
 	}
 
@@ -155,6 +159,12 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 			this.group = group;
 			super.setCategory(name, group != null ? group.getColor() : 0);
 		}
+	}
+
+	@Override
+	public void setColor(int color) {
+		this.color = color;
+
 	}
 
 	@Override
@@ -334,15 +344,25 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 	}
 
 	@Override
+	public int getDefaultColor() {
+		return defaultColor;
+	}
+
+	@Override
 	public int getPointColor() {
-		int color = 0;
+		FavouritePoint favorite = getFavorite();
+		int color = favorite != null ? getColor() : 0;
 		FavoriteGroup group = getGroup();
-		if (group != null) {
+		if (group != null && color == 0) {
 			color = group.getColor();
 		}
 		if (color == 0) {
 			color = defaultColor;
 		}
+		return color;
+	}
+
+	private int getColor() {
 		return color;
 	}
 

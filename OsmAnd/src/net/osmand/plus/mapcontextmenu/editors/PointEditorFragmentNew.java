@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
@@ -68,6 +69,9 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	private boolean cancelled;
 	private boolean nightMode;
 	private String selectedIcon;
+	private int selectedColor;
+	private FavouritePoint.BackgroundType selectedShape = FavouritePoint.BackgroundType.CIRCLE;
+	private ImageView nameIcon;
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
@@ -85,9 +89,10 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		editor.updateLandscapePortrait(requireActivity());
 		editor.updateNightMode();
 
+		selectedColor = 0xb4FFFFFF & getPointColor();
+
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setTitle(getToolbarTitle());
-
 		final OsmandApplication app = requireMyApplication();
 		Drawable icBack = app.getUIUtilities().getIcon(R.drawable.ic_arrow_back,
 				nightMode ? R.color.active_buttons_and_links_text_dark : R.color.description_font_and_bottom_sheet_icons);
@@ -163,7 +168,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 
 		nameEdit = (EditText) view.findViewById(R.id.name_edit);
 		nameEdit.setText(getNameInitValue());
-		ImageView nameIcon = (ImageView) view.findViewById(R.id.name_icon);
+		nameIcon = (ImageView) view.findViewById(R.id.name_icon);
 		TextView categoryEdit = view.findViewById(R.id.groupName);
 		if (categoryEdit != null) {
 			AndroidUtils.setTextPrimaryColor(view.getContext(), categoryEdit, !editor.isLight());
@@ -200,15 +205,15 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			nameEdit.setHint(R.string.access_hint_enter_name);
 			descriptionEdit.setHint(R.string.access_hint_enter_description);
 		}
-
+		LinearLayout deleteButton = (LinearLayout) view.findViewById(R.id.button_delete_container);
 		if (editor.isNew()) {
 			toolbarAction.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_replace, activeColorResId));
-//			deleteButton.setVisibility(View.GONE);
+			deleteButton.setVisibility(View.GONE);
 			descriptionCaption.setVisibility(View.GONE);
 			deleteIcon.setVisibility(View.GONE);
 		} else {
 			toolbarAction.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_delete_dark, activeColorResId));
-//			deleteButton.setVisibility(View.VISIBLE);
+			deleteButton.setVisibility(View.VISIBLE);
 			deleteIcon.setVisibility(View.VISIBLE);
 			if (!descriptionEdit.getText().toString().isEmpty() || descriptionCaption.getVisibility() != View.VISIBLE) {
 				descriptionCaption.setVisibility(View.VISIBLE);
@@ -223,7 +228,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		createIconSelector();
 		createColorSelector();
 		createShapeSelector();
-
+		updateColorSelector(selectedColor, view);
 		return view;
 	}
 
@@ -253,16 +258,53 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		}
 	}
 
-	private View createColorItemView(@ColorRes int color, FlowLayout rootView) {
+	private View createColorItemView(@ColorRes final int color, final FlowLayout rootView) {
 		OsmandApplication app = requireMyApplication();
 		FrameLayout colorItemView = (FrameLayout) UiUtilities.getInflater(getContext(), nightMode)
 				.inflate(R.layout.point_editor_button, rootView, false);
 		ImageView backgroundCircle = colorItemView.findViewById(R.id.background);
 		AndroidUtils.setBackground(backgroundCircle,
-				UiUtilities.tintDrawable(ContextCompat.getDrawable(app, R.drawable.bg_point_circle),
-						color));
-
+				UiUtilities.tintDrawable(ContextCompat.getDrawable(app, R.drawable.bg_point_circle), color));
+		GradientDrawable rectContourDrawable = (GradientDrawable) ContextCompat.getDrawable(app, R.drawable.circle_contour_bg_light);
+		if (rectContourDrawable != null) {
+			rectContourDrawable.setStroke(AndroidUtils.dpToPx(app, 2), ContextCompat.getColor(app, R.color.divider_color_light));
+			ImageView outline = colorItemView.findViewById(R.id.outline);
+			outline.setImageDrawable(rectContourDrawable);
+		}
+		backgroundCircle.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				updateColorSelector(color, rootView);
+			}
+		});
+		colorItemView.setTag(color);
 		return colorItemView;
+	}
+
+	private void updateColorSelector(int color, View rootView) {
+		View oldColor = rootView.findViewWithTag(selectedColor);
+		if (oldColor != null) {
+			oldColor.findViewById(R.id.outline).setVisibility(View.INVISIBLE);
+			ImageView icon = oldColor.findViewById(R.id.icon);
+			icon.setImageDrawable(UiUtilities.tintDrawable(icon.getDrawable(), R.color.icon_color_default_light));
+		}
+		rootView.findViewWithTag(color).findViewById(R.id.outline).setVisibility(View.VISIBLE);
+		int colorName = R.string.rendering_value_darkyellow_name;
+		for (int i = 0; i < ColorDialogs.pallette.length; i++) {
+			if (ColorDialogs.pallette[i] == color) {
+				colorName = ColorDialogs.paletteColors[i];
+				break;
+			}
+		}
+		ImageView icon = view.findViewById(R.id.icon);
+		icon.setImageDrawable(UiUtilities.tintDrawable(icon.getDrawable(), R.color.white_50_transparent));
+		((TextView) view.findViewById(R.id.color_name)).setText(colorName);
+		ImageView backgroundCircle = view.findViewById(R.id.background);
+		AndroidUtils.setBackground(backgroundCircle,
+				UiUtilities.tintDrawable(ContextCompat.getDrawable(view.getContext(), selectedShape.getIconId()), color));
+		selectedColor = color;
+		setColor(color);
+		updateNameIcon();
 	}
 
 	private void createShapeSelector() {
@@ -272,7 +314,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		}
 	}
 
-	private View createShapeItemView(FavouritePoint.BackgroundType backgroundType, FlowLayout rootView) {
+	private View createShapeItemView(final FavouritePoint.BackgroundType backgroundType, final FlowLayout rootView) {
 		OsmandApplication app = requireMyApplication();
 		FrameLayout shapeItemView = (FrameLayout) UiUtilities.getInflater(getContext(), nightMode)
 				.inflate(R.layout.point_editor_button, rootView, false);
@@ -281,16 +323,18 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 				UiUtilities.tintDrawable(ContextCompat.getDrawable(app, backgroundType.getIconId()),
 						ContextCompat.getColor(app, R.color.divider_color_light)));
 		ImageView icon = shapeItemView.findViewById(R.id.icon);
-//		final int iconRes = getMyApplication().getResources().getIdentifier("mx_" + iconName, "drawable", app.getPackageName());
-//		icon.setImageDrawable(getMyApplication().getUIUtilities().getIcon(iconRes, R.color.icon_color_default_light));
-//		backgroundCircle.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				updateIconSelector(iconRes,rootView);
-//			}
-//		});
-//		shapeItemView.setTag(String.valueOf(iconRes));
+		backgroundCircle.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				updateShapeSelector(backgroundType, rootView);
+			}
+		});
+		shapeItemView.setTag(backgroundType);
 		return shapeItemView;
+	}
+
+	private void updateShapeSelector(FavouritePoint.BackgroundType backgroundType, FlowLayout rootView) {
+
 	}
 
 	private void createIconSelector() {
@@ -374,7 +418,20 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 //				UiUtilities.tintDrawable(ContextCompat.getDrawable(app, R.drawable.circle_background_light),
 //						UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
 		selectedIcon = String.valueOf(iconRes);
-//		updateProfileButton();
+		updateNameIcon();
+	}
+
+	private void updateNameIcon() {
+		ImageView nameImage = (ImageView) view.findViewById(R.id.name_icon);
+		if (nameIcon != null) {
+			nameIcon.setImageDrawable(getNameIcon());
+//			AndroidUtils.setBackground(nameIcon, UiUtilities.tintDrawable(ContextCompat.getDrawable(requireContext(),
+//					R.drawable.circle_background_light), selectedColor));
+//			ImageView profileIcon = view.findViewById(R.id.profile_icon);
+//			if (profileIcon != null) {
+//				profileIcon.setImageDrawable(getPaintedIcon(changedProfile.iconRes, iconColor));
+//			}
+		}
 	}
 
 	private String loadJSONFromAsset() {
@@ -521,6 +578,8 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		nameImage.setImageDrawable(getNameIcon());
 	}
 
+	public abstract void setColor(int color);
+
 	protected String getDefaultCategoryName() {
 		return getString(R.string.shared_string_none);
 	}
@@ -566,6 +625,8 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	public abstract Drawable getNameIcon();
 
 	public abstract Drawable getCategoryIcon();
+
+	public abstract int getDefaultColor();
 
 	public abstract int getPointColor();
 
@@ -630,7 +691,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 				view.setOnClickListener(listener);
 			} else {
 				view = LayoutInflater.from(parent.getContext()).inflate(R.layout.point_group_select_item, parent, false);
-				((ImageView) view.findViewById(R.id.groupIcon)).setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_add));
+				((ImageView) view.findViewById(R.id.groupIcon)).setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_add, activeColorResId));
 				((TextView) view.findViewById(R.id.groupName)).setText(requireMyApplication().getString(R.string.add_group));
 			}
 			((TextView) view.findViewById(R.id.groupName)).setTextColor(getResources().getColor(activeColorResId));
@@ -660,7 +721,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 				final FavouritesDbHelper.FavoriteGroup group = items.get(position);
 				holder.groupName.setText(group.getDisplayName(app));
 
-				int color = group.getColor() == 0 ? getResources().getColor(R.color.color_favorite) : group.getColor();
+				int color = group.getColor() == 0 ? getDefaultColor() : group.getColor();
 				holder.groupIcon.setImageDrawable(UiUtilities.tintDrawable(
 						ContextCompat.getDrawable(app, R.drawable.ic_action_folder), color));
 				holder.pointsCounter.setText(String.valueOf(group.getPoints().size()));
