@@ -11,7 +11,6 @@ import net.osmand.data.LatLon;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -33,8 +32,6 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	private String description = "";
 	// this make not possible to make turns in between segment result for now
 	private TurnType turnType;
-
-	private static final DecimalFormat SPEED_FORMATTER = new DecimalFormat("#.##");
 
 	public RouteSegmentResult(RouteDataObject object) {
 		this.object = object;
@@ -172,15 +169,15 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	public void writeToBundle(RouteDataBundle bundle) {
 		Map<RouteTypeRule, Integer> rules = bundle.getResources().getRules();
 		bundle.putInt("length", (Math.abs(endPointIndex - startPointIndex) + 1) * (endPointIndex >= startPointIndex ? 1 : -1));
-		bundle.putFloat("segmentTime", segmentTime);
-		bundle.putString("speed", SPEED_FORMATTER.format(speed));
+		bundle.putFloat("segmentTime", segmentTime, 2);
+		bundle.putFloat("speed", speed, 2);
 		if (turnType != null) {
 			bundle.putString("turnType", turnType.toXmlString());
 			if (turnType.isSkipToSpeak()) {
 				bundle.putBoolean("skipTurn", turnType.isSkipToSpeak());
 			}
 			if (turnType.getTurnAngle() != 0) {
-				bundle.putFloat("turnAngle", turnType.getTurnAngle());
+				bundle.putFloat("turnAngle", turnType.getTurnAngle(), 2);
 			}
 			int[] turnLanes = turnType.getLanes();
 			if (turnLanes != null && turnLanes.length > 0) {

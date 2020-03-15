@@ -2,6 +2,7 @@ package net.osmand.binary;
 
 import net.osmand.util.Algorithms;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -12,6 +13,12 @@ import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
 public class StringBundle {
+
+	private static final DecimalFormat TWO_DIGITS_FORMATTER = new DecimalFormat("#.##");
+	private static final DecimalFormat THREE_DIGITS_FORMATTER = new DecimalFormat("#.###");
+	private static final DecimalFormat FOUR_DIGITS_FORMATTER = new DecimalFormat("#.####");
+	private static final DecimalFormat FIVE_DIGITS_FORMATTER = new DecimalFormat("#.#####");
+	private static final DecimalFormat SIX_DIGITS_FORMATTER = new DecimalFormat("#.######");
 
 	private Map<String, Item> map = new LinkedHashMap<>();
 
@@ -75,8 +82,28 @@ public class StringBundle {
 			super(name, ItemType.STRING, String.valueOf(value));
 		}
 
+		private StringItem(String name, float value, int digits) {
+			super(name, ItemType.STRING, getFormattedValue(value, digits));
+		}
+
 		private StringItem(String name, boolean value) {
 			super(name, ItemType.STRING, String.valueOf(value));
+		}
+
+		private static String getFormattedValue(float value, int digits) {
+			DecimalFormat formatter = null;
+			if (digits == 2) {
+				formatter = TWO_DIGITS_FORMATTER;
+			} else if (digits == 3) {
+				formatter = THREE_DIGITS_FORMATTER;
+			} else if (digits == 4) {
+				formatter = FOUR_DIGITS_FORMATTER;
+			} else if (digits == 5) {
+				formatter = FIVE_DIGITS_FORMATTER;
+			} else if (digits == 6) {
+				formatter = SIX_DIGITS_FORMATTER;
+			}
+			return formatter != null ? formatter.format(value) : String.valueOf(value);
 		}
 
 		private int asInt(int defaultValue) {
@@ -177,6 +204,10 @@ public class StringBundle {
 
 	public void putFloat(String key, float value) {
 		map.put(key, new StringItem(key, value));
+	}
+
+	public void putFloat(String key, float value, int digits) {
+		map.put(key, new StringItem(key, value, digits));
 	}
 
 	public float getFloat(String key, float defaultValue) {

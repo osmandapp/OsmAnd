@@ -260,11 +260,45 @@ public class TurnType {
         return s.toString();
 	}
 
-	public static int[] lanesFromString(String lanes) {
-		if (Algorithms.isEmpty(lanes)) {
+	public static int[] lanesFromString(String lanesString) {
+		if (Algorithms.isEmpty(lanesString)) {
 			return null;
 		}
-		return null;
+		String[] lanesArr = lanesString.split("\\|");
+		int[] lanes = new int[lanesArr.length];
+		for (int l = 0; l < lanesArr.length; l++) {
+			String lane = lanesArr[l];
+			String[] turns = lane.split(",");
+			TurnType primaryTurn = null;
+			TurnType secondaryTurn = null;
+			TurnType tertiaryTurn = null;
+			boolean plus = false;
+			for (int i = 0; i < turns.length; i++) {
+				String turn = turns[i];
+				if (i == 0) {
+					plus = turn.length() > 0 && turn.charAt(0) == '+';
+					if (plus) {
+						turn = turn.substring(1);
+					}
+					primaryTurn = TurnType.fromString(turn, false);
+				} else if (i == 1) {
+					secondaryTurn =TurnType.fromString(turn, false);
+				} else if (i == 2) {
+					tertiaryTurn =TurnType.fromString(turn, false);
+				}
+			}
+			setPrimaryTurnAndReset(lanes, l, primaryTurn.value);
+			if (secondaryTurn != null) {
+				setSecondaryTurn(lanes, l, secondaryTurn.value);
+			}
+			if (tertiaryTurn != null) {
+				setTertiaryTurn(lanes, l, tertiaryTurn.value);
+			}
+			if (plus) {
+				lanes[l] |= 1;
+			}
+		}
+		return lanes;
 	}
 
 	public int[] getLanes() {
