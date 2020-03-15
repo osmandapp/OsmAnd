@@ -3794,4 +3794,9 @@
     <string name="poi_tactile_paving_contrasted">Kontrastatua</string>
     <string name="poi_tactile_paving_primitive">Primitiboa</string>
     <string name="poi_tactile_paving_incorrect">Okerra</string>
+    <string name="poi_seamark_water_level_part_submerged">Ur maila: partzialki urperatuta</string>
+    <string name="poi_seamark_water_level_submerged">Ur maila: urperatuta</string>
+    <string name="poi_seamark_water_level_dry">Ur maila: sikua</string>
+    <string name="poi_seamark_water_level_covers"></string>
+    <string name="poi_seamark_water_level_floods">Ur maila: uholdea</string>
 </resources>
