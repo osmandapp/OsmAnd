@@ -35,12 +35,12 @@ public class RouteDataResources {
 		return locations.size() > 0;
 	}
 
-	public Location currentLocation() {
-		return currentLocation < locations.size() ? locations.get(currentLocation) : null;
+	public Location getLocation(int index) {
+		index += currentLocation;
+		return index < locations.size() ? locations.get(index) : null;
 	}
 
-	public Location nextLocation() {
-		currentLocation++;
-		return currentLocation < locations.size() ? locations.get(currentLocation) : null;
+	public void incrementCurrentLocation(int index) {
+		currentLocation += index;
 	}
 }

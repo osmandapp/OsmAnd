@@ -138,7 +138,7 @@ public class RouteResultPreparationTest {
     private String getLanesString(RouteSegmentResult segment) {
         final int[] lns = segment.getTurnType().getLanes();
         if (lns != null) {
-        	return TurnType.toString(lns);
+        	return TurnType.lanesToString(lns);
         }
         return null;
     }

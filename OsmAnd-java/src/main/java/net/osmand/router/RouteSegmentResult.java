@@ -171,21 +171,21 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	@Override
 	public void writeToBundle(RouteDataBundle bundle) {
 		Map<RouteTypeRule, Integer> rules = bundle.getResources().getRules();
-		bundle.putInt("length", Math.abs(endPointIndex - startPointIndex) + 1);
+		bundle.putInt("length", (Math.abs(endPointIndex - startPointIndex) + 1) * (endPointIndex >= startPointIndex ? 1 : -1));
 		bundle.putFloat("segmentTime", segmentTime);
 		bundle.putString("speed", SPEED_FORMATTER.format(speed));
 		if (turnType != null) {
 			bundle.putString("turnType", turnType.toXmlString());
+			if (turnType.isSkipToSpeak()) {
+				bundle.putBoolean("skipTurn", turnType.isSkipToSpeak());
+			}
+			if (turnType.getTurnAngle() != 0) {
+				bundle.putFloat("turnAngle", turnType.getTurnAngle());
+			}
 			int[] turnLanes = turnType.getLanes();
 			if (turnLanes != null && turnLanes.length > 0) {
-				StringBuilder turnLanesRes = new StringBuilder();
-				for (int lane : turnLanes) {
-					if (turnLanesRes.length() > 0) {
-						turnLanesRes.append(",");
-					}
-					turnLanesRes.append(TurnType.valueOf(lane, false).toXmlString());
-				}
-				bundle.putString("turnLanes", turnLanesRes.toString());
+				//bundle.putArray("turnLanes", turnLanes);
+				bundle.putString("turnLanes", TurnType.lanesToString(turnLanes));
 			}
 		}
 		bundle.putArray("types", convertTypes(object.types, rules));
@@ -196,39 +196,47 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	@Override
 	public void readFromBundle(RouteDataBundle bundle) {
 		int length = bundle.getInt("length", 0);
-		startPointIndex = 0;
-		endPointIndex = length  > 0 ? length - 1 : 0;
+		boolean plus = length >= 0;
+		length = Math.abs(length);
+		startPointIndex = plus ? 0 : length - 1;
+		endPointIndex = plus ? length - 1 : 0;
 		segmentTime = bundle.getFloat("segmentTime", segmentTime);
 		speed = bundle.getFloat("speed", speed);
 		String turnTypeStr = bundle.getString("turnType", null);
 		if (!Algorithms.isEmpty(turnTypeStr)) {
 			turnType = TurnType.fromString(turnTypeStr, false);
-			String turnLanesStr = bundle.getString("turnLanes", null);
-			if (!Algorithms.isEmpty(turnLanesStr)) {
-				String[] lanesArr = turnLanesStr.split(",");
-				int[] lanes = new int[lanesArr.length];
-				for (int i = 0; i < lanesArr.length; i++) {
-					String laneStr = lanesArr[i];
-					lanes[i] = TurnType.fromString(laneStr, false).getValue();
-				}
-				turnType.setLanes(lanes);
-			}
+			turnType.setSkipToSpeak(bundle.getBoolean("skipTurn", turnType.isSkipToSpeak()));
+			turnType.setTurnAngle(bundle.getFloat("turnAngle", turnType.getTurnAngle()));
+			//int[] turnLanes = bundle.getIntArray("turnLanes", null);
+			int[] turnLanes = TurnType.lanesFromString(bundle.getString("turnLanes", null));
+			turnType.setLanes(turnLanes);
 		}
 		object.types = bundle.getIntArray("types", null);
 		object.pointTypes = bundle.getIntIntArray("pointTypes", null);
 		object.nameIds = bundle.getIntArray("names", null);
 
+		RouteDataResources resources = bundle.getResources();
 		object.pointsX = new int[length];
 		object.pointsY = new int[length];
-		RouteDataResources resources = bundle.getResources();
-		Location location = resources.currentLocation();
-		object.pointsX[0] = MapUtils.get31TileNumberX(location.getLongitude());
-		object.pointsY[0] = MapUtils.get31TileNumberY(location.getLatitude());
-		for (int i = 1; i < length; i++) {
-			location = resources.nextLocation();
+		int index = plus ? 0 : length - 1;
+		float distance = 0;
+		Location prevLocation = null;
+		for (int i = 0; i < length; i++) {
+			Location location = resources.getLocation(index);
+			if (prevLocation != null) {
+				distance += MapUtils.getDistance(prevLocation.getLatitude(), prevLocation.getLongitude(), location.getLatitude(), location.getLongitude());
+			}
+			prevLocation = location;
 			object.pointsX[i] = MapUtils.get31TileNumberX(location.getLongitude());
 			object.pointsY[i] = MapUtils.get31TileNumberY(location.getLatitude());
+			if (plus) {
+				index++;
+			} else {
+				index--;
+			}
 		}
+		this.distance = distance;
+		resources.incrementCurrentLocation(length - 1);
 	}
 
 	public float[] getHeightValues() {

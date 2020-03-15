@@ -1,5 +1,7 @@
 package net.osmand.router;
 
+import net.osmand.util.Algorithms;
+
 import gnu.trove.set.hash.TIntHashSet;
 
 public class TurnType {
@@ -231,7 +233,7 @@ public class TurnType {
 		return (laneValue >> 10);
 	}
 
-	public static String toString(int[] lns) {
+	public static String lanesToString(int[] lns) {
         StringBuilder s = new StringBuilder();
         for (int h = 0; h < lns.length; h++) {
             if (h > 0) {
@@ -257,6 +259,14 @@ public class TurnType {
         }
         return s.toString();
 	}
+
+	public static int[] lanesFromString(String lanes) {
+		if (Algorithms.isEmpty(lanes)) {
+			return null;
+		}
+		return null;
+	}
+
 	public int[] getLanes() {
 		return lanes;
 	}
@@ -329,7 +339,7 @@ public class TurnType {
 		}
 		if(vl != null) {
 			if(lanes != null) {
-				vl += "(" + toString(lanes) +")";
+				vl += "(" + lanesToString(lanes) +")";
 			}
 			return vl;
 		}
