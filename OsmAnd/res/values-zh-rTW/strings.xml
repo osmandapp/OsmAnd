@@ -3567,5 +3567,5 @@
 \n這可能需要一點時間。</string>
     <string name="items_added">已新增項目</string>
     <string name="shared_string_import_complete">匯入完成</string>
-    <string name="import_complete_description">所有從 %1$ 而來的資料都已匯入，您可以使用下方的按鈕以開啟應用程式中需要的部份來管理它。</string>
+    <string name="import_complete_description">所有從 %1$s 而來的資料都已匯入，您可以使用下方的按鈕以開啟應用程式中需要的部份來管理它。</string>
 </resources>
