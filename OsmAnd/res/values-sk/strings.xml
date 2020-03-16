@@ -3557,4 +3557,13 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="restore_all_profile_settings">Obnoviť všetky nastavenia profilu\?</string>
     <string name="saving_new_profile">Ukladá sa nový profil</string>
     <string name="profile_backup_failed">Nepodarilo sa zálohovať profil.</string>
+    <string name="clear_recorded_data_warning">Naozaj chcete vymazať zaznamenané údaje\?</string>
+    <string name="importing_from">Importujem údaje z %1$s</string>
+    <string name="shared_string_importing">Importujem</string>
+    <string name="checking_for_duplicate_description">OsmAnd kontroluje %1$s na duplicity s existujúcimi položkami v aplikácii.
+\n
+\nMôže to chvíľu trvať.</string>
+    <string name="items_added">Položky pridané</string>
+    <string name="shared_string_import_complete">Import ukončený</string>
+    <string name="import_complete_description">Všetky údaje z %1$s sú naimportované, môžete použiť tlačidlá nižšie pre otvorenie príslušnej časti aplikácie pre ich správu.</string>
 </resources>

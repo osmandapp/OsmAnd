@@ -3488,28 +3488,28 @@
 \n
 \n若啟用，OsmAnd 將會使用系統逾時設定。</string>
     <string name="clear_recorded_data">清除已紀錄的資料</string>
-    <string name="release_3_6">• 設定檔：現在您可以變更順序、設定地圖圖示、變更基本設定檔的所有設定以及將它們復原
-\n
-\n • 在導航中新增了出口編號
-\n
-\n • 改善外掛程式設定
-\n
-\n • 改善後的設定畫面可快速存取所有設定檔
-\n
-\n • 新曾了可從其他設定複製設定的選項
-\n
-\n • 新增了在搜尋中變更順序或隱藏 POI 分類的功能
-\n
-\n • 在地圖上正確地對齊 POI 圖示
-\n
-\n • 新增日落／日出資料到設定地圖中
-\n
-\n • 在地圖上新增家／工作地點的圖示
-\n
-\n • 在設定中新增了對多行描述的支援
-\n
-\n • 在日本地圖中加入了正確的音譯
-\n
+    <string name="release_3_6">• 設定檔：現在您可以變更順序、設定地圖圖示、變更基本設定檔的所有設定以及將它們復原 
+\n 
+\n • 在導航中新增了出口編號 
+\n 
+\n • 改善外掛程式設定 
+\n 
+\n • 改善後的設定畫面可快速存取所有設定檔 
+\n 
+\n • 新增了可從其他設定複製設定的選項 
+\n 
+\n • 新增了在搜尋中變更順序或隱藏 POI 分類的功能 
+\n 
+\n • 在地圖上正確地對齊 POI 圖示 
+\n 
+\n • 新增日落／日出資料到設定地圖中 
+\n 
+\n • 在地圖上新增家／工作地點的圖示 
+\n 
+\n • 在設定中新增了對多行描述的支援 
+\n 
+\n • 在日本地圖中加入了正確的音譯 
+\n 
 \n • 新增了南極洲的地圖
 \n
 \n</string>
@@ -3559,4 +3559,13 @@
     <string name="restore_all_profile_settings">復原所有設定檔？</string>
     <string name="saving_new_profile">正在儲存新設定檔</string>
     <string name="profile_backup_failed">無法備份設定檔。</string>
+    <string name="clear_recorded_data_warning">您確定您要清除已記錄的資料嗎？</string>
+    <string name="importing_from">正在從 %1$s 匯入資料</string>
+    <string name="shared_string_importing">正在匯入</string>
+    <string name="checking_for_duplicate_description">OsmAnd 檢查 %1$s 在應用程式中是否有重覆的既有項目。
+\n
+\n這可能需要一點時間。</string>
+    <string name="items_added">已新增項目</string>
+    <string name="shared_string_import_complete">匯入完成</string>
+    <string name="import_complete_description">所有從 %1$s 而來的資料都已匯入，您可以使用下方的按鈕以開啟應用程式中需要的部份來管理它。</string>
 </resources>

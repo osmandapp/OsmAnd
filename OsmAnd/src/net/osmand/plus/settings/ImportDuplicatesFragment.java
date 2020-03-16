@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.ViewCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -122,6 +123,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 		keepBothBtn.setOnClickListener(this);
 		replaceAllBtn.setOnClickListener(this);
 		list = root.findViewById(R.id.list);
+		ViewCompat.setNestedScrollingEnabled(list, false);
 		ViewTreeObserver treeObserver = buttonsContainer.getViewTreeObserver();
 		treeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override

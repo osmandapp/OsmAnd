@@ -3568,4 +3568,13 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="restore_all_profile_settings">Ripristinare totu sas impostatziones de profilu\?</string>
     <string name="saving_new_profile">Sarvende su profilu nou</string>
     <string name="profile_backup_failed">Sarvatàgiu de su profilu faddidu.</string>
+    <string name="clear_recorded_data_warning">Ses segùru de chèrrere iscantzellare sos datos registrados\?</string>
+    <string name="importing_from">Importende datos dae %1$s</string>
+    <string name="shared_string_importing">Importende</string>
+    <string name="checking_for_duplicate_description">OsmAnd analizat %1$s pro agatare dopiones cun sos elementos chi esistint giai in s\'aplicatzione.
+\n
+\nBi diat pòdere chèrrere unu pagu de tempus.</string>
+    <string name="items_added">Elementos annànghidos</string>
+    <string name="shared_string_import_complete">Importatzione acabada</string>
+    <string name="import_complete_description">As importadu totu sos datos dae su %1$s, podes impreare sos butones in suta pro abèrrere sa parte de s\'aplicatzione chi serbit pro los amministrare.</string>
 </resources>

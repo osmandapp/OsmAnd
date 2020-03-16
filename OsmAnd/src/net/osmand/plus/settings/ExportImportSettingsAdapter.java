@@ -42,12 +42,13 @@ import static net.osmand.view.ThreeStateCheckbox.State.UNCHECKED;
 class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
 	private OsmandApplication app;
+	private UiUtilities uiUtilities;
 	private List<? super Object> dataToOperate;
 	private Map<Type, List<?>> itemsMap;
 	private List<Type> itemsTypes;
 	private boolean nightMode;
 	private boolean importState;
-	private int profileColor;
+	private int activeColorRes;
 
 	ExportImportSettingsAdapter(OsmandApplication app, boolean nightMode, boolean importState) {
 		this.app = app;
@@ -56,7 +57,11 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		this.itemsMap = new HashMap<>();
 		this.itemsTypes = new ArrayList<>();
 		this.dataToOperate = new ArrayList<>();
-		this.profileColor = app.getSettings().getApplicationMode().getIconColorInfo().getColor(nightMode);
+		dataToOperate = new ArrayList<>();
+		uiUtilities = app.getUIUtilities();
+		activeColorRes = nightMode
+				? R.color.icon_color_active_dark
+				: R.color.icon_color_active_light;
 	}
 
 	@Override
@@ -83,7 +88,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		lineDivider.setVisibility(importState || isExpanded || isLastGroup ? View.GONE : View.VISIBLE);
 		cardTopDivider.setVisibility(importState ? View.VISIBLE : View.GONE);
 		cardBottomDivider.setVisibility(importState && !isExpanded ? View.VISIBLE : View.GONE);
-		CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, profileColor)));
+		CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, activeColorRes)));
 
 		final List<?> listItems = itemsMap.get(type);
 		subTextTv.setText(String.valueOf(listItems.size()));
@@ -130,6 +135,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		final Object currentItem = itemsMap.get(itemsTypes.get(groupPosition)).get(childPosition);
 
 		boolean isLastGroup = groupPosition == getGroupCount() - 1;
+		boolean itemSelected = dataToOperate.contains(currentItem);
 		final Type type = itemsTypes.get(groupPosition);
 
 		TextView title = child.findViewById(R.id.title_tv);
@@ -141,9 +147,9 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
 		lineDivider.setVisibility(!importState && isLastChild && !isLastGroup ? View.VISIBLE : View.GONE);
 		cardBottomDivider.setVisibility(importState && isLastChild ? View.VISIBLE : View.GONE);
-		CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, profileColor)));
+		CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, activeColorRes)));
 
-		checkBox.setChecked(dataToOperate.contains(currentItem));
+		checkBox.setChecked(itemSelected);
 		checkBox.setClickable(false);
 		child.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -177,49 +183,42 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				}
 				int profileIconRes = AndroidUtils.getDrawableId(app, ((ApplicationMode.ApplicationModeBean) currentItem).iconName);
 				ProfileIconColors iconColor = ((ApplicationMode.ApplicationModeBean) currentItem).iconColor;
-				icon.setImageDrawable(app.getUIUtilities().getIcon(profileIconRes, iconColor.getColor(nightMode)));
-				icon.setVisibility(View.VISIBLE);
+				icon.setImageDrawable(uiUtilities.getIcon(profileIconRes, iconColor.getColor(nightMode)));
 				break;
 			case QUICK_ACTIONS:
 				title.setText(((QuickAction) currentItem).getName(app.getApplicationContext()));
-				icon.setImageDrawable(app.getUIUtilities().getIcon(((QuickAction) currentItem).getIconRes(), nightMode));
+				setupIcon(icon, ((QuickAction) currentItem).getIconRes(), itemSelected);
 				subText.setVisibility(View.GONE);
-				icon.setVisibility(View.VISIBLE);
 				break;
 			case POI_TYPES:
 				title.setText(((PoiUIFilter) currentItem).getName());
 				int iconRes = RenderingIcons.getBigIconResourceId(((PoiUIFilter) currentItem).getIconId());
-				icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes != 0 ? iconRes : R.drawable.ic_person, profileColor));
+				setupIcon(icon, iconRes != 0 ? iconRes : R.drawable.ic_person, itemSelected);
 				subText.setVisibility(View.GONE);
-				icon.setVisibility(View.VISIBLE);
 				break;
 			case MAP_SOURCES:
 				title.setText(((ITileSource) currentItem).getName());
-				icon.setImageResource(R.drawable.ic_action_info_dark);
+				setupIcon(icon, R.drawable.ic_map, itemSelected);
 				subText.setVisibility(View.GONE);
-				icon.setVisibility(View.INVISIBLE);
 				break;
 			case CUSTOM_RENDER_STYLE:
 				String renderName = ((File) currentItem).getName();
 				renderName = renderName.replace('_', ' ').replaceAll(IndexConstants.RENDERER_INDEX_EXT, "");
 				title.setText(renderName);
-				icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_map_style, nightMode));
-				icon.setVisibility(View.VISIBLE);
+				setupIcon(icon, R.drawable.ic_action_map_style, itemSelected);
 				subText.setVisibility(View.GONE);
 				break;
 			case CUSTOM_ROUTING:
 				String routingName = ((File) currentItem).getName();
 				routingName = routingName.replace('_', ' ').replaceAll(".xml", "");
 				title.setText(routingName);
-				icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_route_distance, nightMode));
-				icon.setVisibility(View.VISIBLE);
+				setupIcon(icon, R.drawable.ic_action_route_distance, itemSelected);
 				subText.setVisibility(View.GONE);
 				break;
 			case AVOID_ROADS:
 				AvoidRoadInfo avoidRoadInfo = (AvoidRoadInfo) currentItem;
 				title.setText(avoidRoadInfo.name);
-				icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_alert, nightMode));
-				icon.setVisibility(View.VISIBLE);
+				setupIcon(icon, R.drawable.ic_action_alert, itemSelected);
 				subText.setVisibility(View.GONE);
 				break;
 			default:
@@ -288,6 +287,14 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				return R.string.access_empty_list;
 		}
 	}
+
+    private void setupIcon(ImageView icon, int iconRes, boolean itemSelected) {
+        if (itemSelected) {
+            icon.setImageDrawable(uiUtilities.getIcon(iconRes, activeColorRes));
+        } else {
+            icon.setImageDrawable(uiUtilities.getIcon(iconRes, nightMode));
+        }
+    }
 
 	public void updateSettingsList(Map<Type, List<?>> itemsMap) {
 		this.itemsMap = itemsMap;

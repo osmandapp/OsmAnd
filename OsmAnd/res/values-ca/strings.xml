@@ -3337,7 +3337,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="general_settings_profile_descr">Tema de la aplicació, unitats, regió</string>
     <string name="screen_alerts_descr">Les alertes es mostren abaix a l\'esquerra mentre es navega.</string>
     <string name="language_and_output">Llengua i sortida</string>
-    <string name="reset_to_default">Reinicia els valors per defecte</string>
+    <string name="reset_to_default">Restableix els valors per defecte</string>
     <string name="manage_profiles_descr">Creació, importació i edició de perfils</string>
     <string name="manage_profiles">Gestiona els perfils de l\'aplicació…</string>
     <string name="osmand_settings_descr">Efectiu a tota l\'aplicació</string>
@@ -3395,7 +3395,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Via aèria</string>
     <string name="simulate_your_location_gpx_descr">Simula la vostra posició fent servir una traça GPX enregistrada.</string>
     <string name="rendering_value_thick_name">Gruix</string>
-    <string name="select_navigation_icon">Seleccioneu la icona de navegació</string>
+    <string name="select_navigation_icon">Icona de posició en moviment</string>
     <string name="select_map_icon">Seleccioneu la icona del mapa</string>
     <string name="delete_profiles_descr">Si toqueu Aplica, els perfils suprimits es perdran definitivament.</string>
     <string name="master_profile">Perfil principal</string>
@@ -3409,9 +3409,9 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="selected_profile">Perfil seleccionat</string>
     <string name="quick_action_directions_from_desc">Un botó per establir el punt central de la pantalla com el punt de sortida i calcular la ruta vers la destinació o obrir una petició per seleccionar-la si no hi ha un marcador de destinació al mapa.</string>
     <string name="logcat_buffer">Memòria intermèdia del Logcat</string>
-    <string name="reset_confirmation_descr">En fer clic a %1$s perdreu tots els vostres canvis.</string>
-    <string name="reset_all_profile_settings_descr">La configuració de tot el perfil es reinicialitzarà a l\'estat postinstalació.</string>
-    <string name="reset_all_profile_settings">Voleu reinicialitzar totes les configuracions del perfil als valors per defecte\?</string>
+    <string name="reset_confirmation_descr">Prement %1$s es perdran tots els vostres canvis.</string>
+    <string name="reset_all_profile_settings_descr">Restableix tota la configuració del perfil als valors predeterminats de la instal·lació.</string>
+    <string name="reset_all_profile_settings">Voleu restablir la configuració de tots els perfils\?</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="file_does_not_contain_routing_rules">No hi ha normes de navegació a \'%1$s\' . Trieu un altre arxiu.</string>
@@ -3426,21 +3426,21 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="live_monitoring_descr">Permet compartir la ubicació actual utilitzant l\'enregistrament de viatges.</string>
     <string name="live_monitoring">Seguiment en línia</string>
     <string name="save_track_logging_accuracy">Precisió de registre</string>
-    <string name="multimedia_notes_view_descr">Pots trobar totes les teves notes a %1$s</string>
+    <string name="multimedia_notes_view_descr">Les vostres notes OSM són a %1$s.</string>
     <string name="video_notes">Notes de vídeo</string>
     <string name="photo_notes">Notes de fotos</string>
     <string name="app_mode_osm">OSM</string>
     <string name="save_heading">Inclou la direcció</string>
     <string name="save_heading_descr">Desa l\'orientació a cada fita mentre es fa un enregistrament.</string>
-    <string name="tracks_view_descr">Podeu trobar els vostres enregistraments a %1$s o, amb un gestor de fitxers, al directori d\'OsmAnd .</string>
+    <string name="tracks_view_descr">Els vostres enregistraments són a %1$s o al directori d\'OsmAnd .</string>
     <string name="route_recalculation">Recàlcul de la ruta</string>
     <string name="accessibility_announce">Anunci</string>
     <string name="login_and_pass">Nom d\'usuari i contrasenya</string>
-    <string name="plugin_global_prefs_info">Aquesta configuració del connector és global i afecta tots els perfils.</string>
-    <string name="osm_editing">Edició d\'OpenStreetMap</string>
-    <string name="osm_edits_view_descr">Podeu veure totes les vostres edicions no enviades o els errors OSM a %1$s. Els punts enviats no es mostren a OsmAnd.</string>
-    <string name="select_nav_icon_descr">Només veureu la icona mentre navegueu o us mogueu.</string>
-    <string name="select_map_icon_descr">La icona de mapa només es mostra al mapa i es canvia a la icona de navegació quan durant aquesta.</string>
+    <string name="plugin_global_prefs_info">Aquesta configuració afecta tots els perfils.</string>
+    <string name="osm_editing">Edició OSM</string>
+    <string name="osm_edits_view_descr">Consulteu les vostres edicions o errors OSM encara no pujats a %1$s. Els punts enviats ja no es veuran més.</string>
+    <string name="select_nav_icon_descr">La icona es mostra mentre navegueu o us mogueu.</string>
+    <string name="select_map_icon_descr">La icona es mostra en repòs.</string>
     <string name="logcat_buffer_descr">Valida i comparteix enregistraments detallats de l\'aplicació</string>
     <string name="rearrange_categories">Reorganitza les categories</string>
     <string name="create_custom_categories_list_promo">Podeu afegir categories personalitzades, amagar categories que considereu innecessàries i canviar l\'ordenació de la llista. La llista es pot importar i exportar amb perfils.</string>
@@ -3538,4 +3538,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="restore_all_profile_settings">Voleu restaurar tots els paràmetres del perfil\?</string>
     <string name="saving_new_profile">S\'està desant un nou perfil</string>
     <string name="profile_backup_failed">No s\'ha pogut fer una còpia de seguretat del perfil.</string>
+    <string name="clear_recorded_data_warning">Segur que voleu esborrar les dades enregistrades\?</string>
+    <string name="importing_from">S\'estan important dades de %1$s</string>
+    <string name="shared_string_importing">S\'està important</string>
 </resources>

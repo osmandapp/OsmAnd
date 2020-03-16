@@ -3813,4 +3813,14 @@
     <string name="poi_tactile_paving_contrasted">Kontrast</string>
     <string name="poi_tactile_paving_primitive">Primitiv</string>
     <string name="poi_tactile_paving_incorrect">Forkert</string>
+    <string name="poi_seamark_water_level_part_submerged">Vandniveau: delvis nedsænket</string>
+    <string name="poi_seamark_water_level_submerged">Vandniveau: nedsænket</string>
+    <string name="poi_seamark_water_level_dry">Vandniveau: tør</string>
+    <string name="poi_seamark_water_level_covers">Vandniveau: dækker</string>
+    <string name="poi_seamark_water_level_awash">Vandniveau: overskyllet</string>
+    <string name="poi_seamark_water_level_floods">Vandniveau: oversvømmelse</string>
+    <string name="poi_seamark_water_level_floating">Vandniveau: flydende</string>
+    <string name="poi_seamark_water_level_above_mwl">Vandniveau: over gennemsnitlige vandstand</string>
+    <string name="poi_seamark_water_level_below_mwl">Vandniveau: under gennemsnitlig vandstand</string>
+    <string name="poi_seamark_obstruction">Obstruktion</string>
 </resources>

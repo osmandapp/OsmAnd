@@ -188,8 +188,8 @@
     <string name="preferred_locale">Langue de l\'application</string>
     <string name="shared_string_next">Suivant</string>
     <string name="shared_string_previous">Précédent</string>
-    <string name="unit_of_length_descr">Modifier les unités de mesure de distance.</string>
-    <string name="unit_of_length">Unités de distance</string>
+    <string name="unit_of_length_descr">Modifier l\'unité de mesure de distance.</string>
+    <string name="unit_of_length">Unités de longueur</string>
     <string name="si_mi_feet">Miles/pieds</string>
     <string name="si_mi_yard">Miles/yards</string>
     <string name="si_km_m">Kilomètres/mètres</string>
@@ -399,7 +399,7 @@
     <string name="transport_stops_to_pass">nombre d\'arrêts :</string>
     <string name="transport_route_distance">Distance de l\'itinéraire :</string>
     <string name="transport">Transport</string>
-    <string name="shared_string_ok">Ok</string>
+    <string name="shared_string_ok">OK</string>
     <string name="show_transport_over_map_description">Afficher les arrêts de transport publics sur la carte</string>
     <string name="show_transport_over_map">Afficher les arrêts de transports publics</string>
     <string name="hello">Application de navigation OsmAnd</string>
@@ -1744,7 +1744,7 @@
     <string name="osm_edit_created_poi">Point d\'intérêt créé sur OSM</string>
     <string name="map_legend">Légende</string>
     <string name="shared_string_upload">Téléversement</string>
-    <string name="shared_string_update">Mise à jour</string>
+    <string name="shared_string_update">Mettre à jour</string>
     <string name="read_more">En savoir +</string>
     <string name="whats_new">Nouveautés de la version</string>
     <string name="rendering_attr_hideProposed_name">Objets proposés</string>
@@ -3210,7 +3210,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="apply_to_current_profile">Appliquer uniquement à \"%1$s\"</string>
     <string name="apply_to_all_profiles">Appliquer à tous les profils</string>
     <string name="start_up_message_pref">Message au démarrage</string>
-    <string name="units_and_formats">Unités et Formats</string>
+    <string name="units_and_formats">Unités et formats</string>
     <string name="appearance">Apparence</string>
     <string name="list_of_installed_plugins">Greffons installés</string>
     <string name="configure_navigation">Paramétrer la navigation</string>
@@ -3397,7 +3397,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="reset_all_profile_settings">Ré-initialiser tous les paramètres de profil \?</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s : %2$s</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
-    <string name="button_rate">Taux</string>
+    <string name="button_rate">Évaluer</string>
     <string name="file_does_not_contain_routing_rules">Aucune règle de routage n\'est présente dans le fichier \'%1$s\', veuillez sélectionner un autre fichier.</string>
     <string name="not_support_file_type_with_ext">Fichier non pris en charge. Merci de sélectionner un fichier conforme ayant l\'extension %1$s.</string>
     <string name="import_from_file">Importer depuis un fichier</string>
@@ -3539,4 +3539,9 @@ représentant la zone : %1$s x %2$s</string>
     <string name="restore_all_profile_settings">Restaurer tous les paramètres du profil \?</string>
     <string name="saving_new_profile">Enregistrement du nouveau profil</string>
     <string name="profile_backup_failed">Impossible de sauvegarder le profil.</string>
+    <string name="clear_recorded_data_warning">Êtes-vous certain de vouloir supprimer les données enregistrées \?</string>
+    <string name="importing_from">Import de données à partir de %1$s</string>
+    <string name="shared_string_importing">Import en cours</string>
+    <string name="items_added">Éléments ajoutés</string>
+    <string name="shared_string_import_complete">Import terminé</string>
 </resources>

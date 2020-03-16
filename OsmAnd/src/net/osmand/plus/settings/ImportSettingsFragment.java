@@ -1,5 +1,6 @@
 package net.osmand.plus.settings;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
@@ -9,6 +10,7 @@ import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -36,6 +38,7 @@ import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.SettingsHelper.*;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -119,6 +122,22 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		if (Build.VERSION.SDK_INT >= 21) {
 			AndroidUtils.addStatusBarPadding21v(app, root);
 		}
+		ViewTreeObserver treeObserver = buttonsContainer.getViewTreeObserver();
+		treeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				if (buttonsContainer != null) {
+					ViewTreeObserver vts = buttonsContainer.getViewTreeObserver();
+					int height = buttonsContainer.getMeasuredHeight();
+					expandableList.setPadding(0, 0, 0, height);
+					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+						vts.removeOnGlobalLayoutListener(this);
+					} else {
+						vts.removeGlobalOnLayoutListener(this);
+					}
+				}
+			}
+		});
 		return root;
 	}
 
@@ -165,6 +184,15 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putLong(DUPLICATES_START_TIME_KEY, duplicateStartTime);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		Activity activity = getActivity();
+		if (activity instanceof MapActivity) {
+			((MapActivity) activity).closeDrawer();
+		}
 	}
 
 	@Override

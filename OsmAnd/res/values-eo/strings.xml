@@ -3550,4 +3550,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="restore_all_profile_settings">Ĉu restarigi ĉiujn agordojn de la profilo\?</string>
     <string name="saving_new_profile">Konservado de nova profilo</string>
     <string name="profile_backup_failed">Ne povas sekurkopii profilon.</string>
+    <string name="clear_recorded_data_warning">Ĉu vi certe volas forigi registritajn datumojn\?</string>
+    <string name="importing_from">Enportado de datumoj el %1$s</string>
 </resources>
