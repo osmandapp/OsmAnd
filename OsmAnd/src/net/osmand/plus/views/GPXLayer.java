@@ -153,7 +153,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		paintTextIcon.setTextSize(10 * view.getDensity());
 		paintTextIcon.setTextAlign(Align.CENTER);
 		paintTextIcon.setFakeBoldText(true);
-		paintTextIcon.setColor(Color.WHITE);
+//		paintTextIcon.setColor(Color.WHITE);
 		paintTextIcon.setAntiAlias(true);
 
 		textLayer = view.getLayerByClass(MapTextLayer.class);
@@ -164,7 +164,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		paintOuterRect = new Paint();
 		paintOuterRect.setStyle(Style.STROKE);
 		paintOuterRect.setAntiAlias(true);
-		paintOuterRect.setColor(Color.WHITE);
+//		paintOuterRect.setColor(Color.WHITE);
 		paintOuterRect.setStrokeWidth(3);
 		paintOuterRect.setAlpha(255);
 		paintGridCircle = new Paint();
