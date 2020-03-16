@@ -457,8 +457,9 @@
 		</LinearLayout>
 
 		<View
+			android:id="@+id/bottom_empty_space"
 			android:layout_width="match_parent"
-			android:layout_height="@dimen/bottom_sheet_list_item_height"
+			android:layout_height="wrap_content"
 			android:focusable="false" />
 
 	</LinearLayout>

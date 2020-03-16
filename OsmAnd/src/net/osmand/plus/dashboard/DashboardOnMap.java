@@ -78,7 +78,6 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingPar
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.srtmplugin.ContourLinesMenu;
-import net.osmand.plus.srtmplugin.HillshadeMenu;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.srtmplugin.TerrainFragment;
 import net.osmand.plus.views.DownloadedRegionsLayer;
@@ -714,8 +713,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			cm = RasterMapMenu.createListAdapter(mapActivity, OsmandRasterMapsPlugin.RasterMapType.OVERLAY);
 		} else if (visibleType == DashboardType.CONTOUR_LINES) {
 			cm = ContourLinesMenu.createListAdapter(mapActivity);
-		} else if (visibleType == DashboardType.HILLSHADE) {
-			cm = HillshadeMenu.createListAdapter(mapActivity);
 		} else if (visibleType == DashboardType.OSM_NOTES) {
 			cm = OsmNotesMenu.createListAdapter(mapActivity);
 		}

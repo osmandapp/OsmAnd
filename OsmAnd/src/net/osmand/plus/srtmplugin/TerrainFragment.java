@@ -3,7 +3,6 @@ package net.osmand.plus.srtmplugin;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -28,6 +27,7 @@ import androidx.core.content.ContextCompat;
 import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.google.android.material.slider.Slider;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -43,7 +43,6 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
 
 import org.apache.commons.logging.Log;
 
@@ -67,13 +66,11 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	private static final int SLIDER_MAX_ZOOM = 19;
 	private static final int SLIDER_MIN_TRANSPARENCY = 20;
 
-
 	private OsmandApplication app;
 	private UiUtilities uiUtilities;
 	private OsmandSettings settings;
 	private SRTMPlugin srtmPlugin;
 	private boolean nightMode;
-	private boolean srtmEnabled;
 	private boolean terrainEnabled;
 
 	private int colorProfile;
@@ -103,6 +100,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	private Slider transparencySlider;
 	private Slider zoomSlider;
 	private ObservableListView observableListView;
+	private View bottomEmptySpace;
 
 	private ArrayAdapter<ContextMenuItem> listAdapter;
 
@@ -117,8 +115,6 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		uiUtilities = app.getUIUtilities();
 		nightMode = !settings.isLightContent();
 		srtmPlugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
-		srtmEnabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null
-				|| InAppPurchaseHelper.isSubscribedToLiveUpdates(app);
 		colorProfile = settings.getApplicationMode().getIconColorInfo().getColor(nightMode);
 		colorProfileStateList = ColorStateList.valueOf(ContextCompat.getColor(app, colorProfile));
 		terrainEnabled = srtmPlugin.isTerrainLayerEnabled();
@@ -157,6 +153,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		downloadTopDivider = root.findViewById(R.id.download_container_top_divider);
 		downloadBottomDivider = root.findViewById(R.id.download_container_bottom_divider);
 		observableListView = (ObservableListView) root.findViewById(R.id.list_view);
+		bottomEmptySpace = root.findViewById(R.id.bottom_empty_space);
 
 		titleTv.setText(R.string.shared_string_terrain);
 		String wikiString = getString(R.string.shared_string_wikipedia);
@@ -232,7 +229,9 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 				break;
 			case R.id.zoom_slider:
 				List<Float> values = slider.getValues();
-				srtmPlugin.setTerrainZoomValues(values.get(0).intValue(), values.get(1).intValue(), srtmPlugin.getTerrainMode());
+				if (values.size() > 0) {
+					srtmPlugin.setTerrainZoomValues(values.get(0).intValue(), values.get(1).intValue(), srtmPlugin.getTerrainMode());
+				}
 				break;
 		}
 		updateLayers();
@@ -293,6 +292,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		adjustGlobalVisibility();
 		adjustLegendVisibility(mode);
 		adjustModeButtons(mode);
+		setupBottomEmptySpace();
 	}
 
 	private void adjustGlobalVisibility() {
@@ -390,7 +390,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		adapter.setProfileDependent(true);
 		adapter.setNightMode(nightMode);
 
-		final MapActivity mapActivity = (MapActivity) getActivity();
+		final Activity mapActivity = getActivity();
+		if (!(mapActivity instanceof MapActivity)) {
+			return;
+		}
 
 		final DownloadIndexesThread downloadThread = app.getDownloadThread();
 		if (!downloadThread.getIndexes().isDownloadedFromInternet) {
@@ -414,7 +417,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 				IndexItem currentDownloadingItem = downloadThread.getCurrentDownloadingItem();
 				int currentDownloadingProgress = downloadThread.getCurrentDownloadingItemProgress();
 				List<IndexItem> hillshadeItems = DownloadResources.findIndexItemsAt(
-						app, mapActivity.getMapLocation(),
+						app, ((MapActivity) mapActivity).getMapLocation(),
 						mode == HILLSHADE ? HILLSHADE_FILE : SLOPE_FILE);
 				if (hillshadeItems.size() > 0) {
 					downloadContainer.setVisibility(View.VISIBLE);
@@ -441,7 +444,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 												adapter.notifyDataSetChanged();
 											}
 										} else {
-											new DownloadValidationManager(app).startDownload(mapActivity, indexItem);
+											new DownloadValidationManager(app).startDownload((MapActivity) mapActivity, indexItem);
 											if (item != null) {
 												item.setProgress(ContextMenuItem.INVALID_ID);
 												item.setLoading(true);
@@ -513,7 +516,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 
 	@Override
 	public void downloadInProgress() {
-			DownloadIndexesThread downloadThread = getMyApplication().getDownloadThread();
+		DownloadIndexesThread downloadThread = app.getDownloadThread();
 			IndexItem downloadIndexItem = downloadThread.getCurrentDownloadingItem();
 			if (downloadIndexItem != null) {
 				int downloadProgress = downloadThread.getCurrentDownloadingItemProgress();
@@ -531,5 +534,12 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	@Override
 	public void downloadHasFinished() {
 		updateDownloadSection();
+	}
+
+	private void setupBottomEmptySpace() {
+		int h = terrainEnabled ? AndroidUtils.dpToPx(app, 48) : AndroidUtils.getScreenHeight(requireActivity()) / 3;
+		ViewGroup.LayoutParams params = bottomEmptySpace.getLayoutParams();
+		params.height = h;
+		bottomEmptySpace.setLayoutParams(params);
 	}
 }
