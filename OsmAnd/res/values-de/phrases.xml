@@ -3817,4 +3817,7 @@
     <string name="poi_seamark_water_level_above_mwl">Wasserstand: über dem mittleren Wasserstand</string>
     <string name="poi_seamark_water_level_below_mwl">Wasserstand: unter dem mittleren Wasserstand</string>
     <string name="poi_seamark_obstruction">Behinderung</string>
+    <string name="poi_drinking_water_refill_yes">Trinkwassernachfüllung: ja</string>
+    <string name="poi_drinking_water_refill_no">Trinkwassernachfüllung: nein</string>
+    <string name="poi_drinking_water_refill_network">Trinkwassernachfüllnetz</string>
 </resources>
