@@ -42,7 +42,6 @@ import java.util.Collections;
 import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.HILLSHADE_LAYER;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN;
 
 public class SRTMPlugin extends OsmandPlugin {
@@ -151,6 +150,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		}
 		if (settings.TERRAIN.get()) {
 			terrainLayer = new TerrainLayer(activity, this);
+
 			activity.getMapView().addLayer(terrainLayer, 0.6f);
 		}
 	}
@@ -175,8 +175,8 @@ public class SRTMPlugin extends OsmandPlugin {
 		settings.TERRAIN_MODE.set(mode);
 	}
 
-	public void setTransparency(int transparency) {
-		switch (getTerrainMode()) {
+	public void setTerrainTransparency(int transparency, TerrainMode mode) {
+		switch (mode) {
 			case HILLSHADE:
 				settings.HILLSHADE_TRANSPARENCY.set(transparency);
 				break;
@@ -186,8 +186,8 @@ public class SRTMPlugin extends OsmandPlugin {
 		}
 	}
 
-	public void setZoomValues(int minZoom, int maxZoom) {
-		switch (getTerrainMode()) {
+	public void setTerrainZoomValues(int minZoom, int maxZoom, TerrainMode mode) {
+		switch (mode) {
 			case HILLSHADE:
 				settings.HILLSHADE_MIN_ZOOM.set(minZoom);
 				settings.HILLSHADE_MAX_ZOOM.set(maxZoom);
@@ -199,7 +199,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		}
 	}
 
-	public int getTransparency() {
+	public int getTerrainTransparency() {
 		switch (getTerrainMode()) {
 			case HILLSHADE:
 				return settings.HILLSHADE_TRANSPARENCY.get();
@@ -209,23 +209,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		return 100;
 	}
 
-	public int getHillshadeTransparency(){
-		return settings.HILLSHADE_TRANSPARENCY.get();
-	}
-
-	public int getSlopeTransparency() {
-		return settings.SLOPE_TRANSPARENCY.get();
-	}
-
-	public int getHillshadeMinZoom(){
-		return settings.HILLSHADE_MIN_ZOOM.get();
-	}
-	public int getHillshadeMaxZoom(){
-		return settings.HILLSHADE_MAX_ZOOM.get();
-	}
-
-
-	public int getMinZoom() {
+	public int getTerrainMinZoom() {
 		switch (getTerrainMode()) {
 			case HILLSHADE:
 				return settings.HILLSHADE_MIN_ZOOM.get();
@@ -235,7 +219,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		return 2;
 	}
 
-	public int getMaxZoom() {
+	public int getTerrainMaxZoom() {
 		switch (getTerrainMode()) {
 			case HILLSHADE:
 				return settings.HILLSHADE_MAX_ZOOM.get();
@@ -448,8 +432,8 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public void toggleTerrain(final MapActivity activity,
-							  final boolean isChecked,
-							  final Runnable callback) {
+	                          final boolean isChecked,
+	                          final Runnable callback) {
 		settings.TERRAIN.set(isChecked);
 		if (callback != null) {
 			callback.run();

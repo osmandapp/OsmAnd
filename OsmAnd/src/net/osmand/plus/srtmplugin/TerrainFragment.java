@@ -3,6 +3,7 @@ package net.osmand.plus.srtmplugin;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -62,6 +63,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	private static final Log LOG = PlatformUtil.getLog(TerrainFragment.class.getSimpleName());
 	private static final String SLOPES_WIKI_URL = "https://en.wikipedia.org/wiki/Grade_(slope)";
 	private static final String PLUGIN_URL = "https://osmand.net/features/contour-lines-plugin";
+	private static final int SLIDER_MIN_ZOOM = 3;
+	private static final int SLIDER_MAX_ZOOM = 19;
+	private static final int SLIDER_MIN_TRANSPARENCY = 20;
+
 
 	private OsmandApplication app;
 	private UiUtilities uiUtilities;
@@ -73,7 +78,6 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 
 	private int colorProfile;
 	private ColorStateList colorProfileStateList;
-	private ColorStateList colorProfileInactiveStateList;
 
 	private TextView downloadDescriptionTv;
 	private TextView transparencyValueTv;
@@ -117,8 +121,6 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 				|| InAppPurchaseHelper.isSubscribedToLiveUpdates(app);
 		colorProfile = settings.getApplicationMode().getIconColorInfo().getColor(nightMode);
 		colorProfileStateList = ColorStateList.valueOf(ContextCompat.getColor(app, colorProfile));
-		colorProfileInactiveStateList = ColorStateList
-				.valueOf(UiUtilities.getColorWithAlpha(colorProfile, 0.6f));
 		terrainEnabled = srtmPlugin.isTerrainLayerEnabled();
 		super.onCreate(savedInstanceState);
 	}
@@ -175,14 +177,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		switchCompat.setOnClickListener(this);
 		slopeBtn.setOnClickListener(this);
 
-		transparencySlider.setTrackColorInactive(colorProfileInactiveStateList);
 		transparencySlider.setTrackColorActive(colorProfileStateList);
-		transparencySlider.setHaloColor(colorProfileInactiveStateList);
 		transparencySlider.setThumbColor(colorProfileStateList);
 		transparencySlider.setLabelBehavior(Slider.LABEL_GONE);
-		zoomSlider.setTrackColorInactive(colorProfileInactiveStateList);
 		zoomSlider.setTrackColorActive(colorProfileStateList);
-		zoomSlider.setHaloColor(colorProfileInactiveStateList);
 		zoomSlider.setThumbColor(colorProfileStateList);
 		zoomSlider.setLabelBehavior(Slider.LABEL_GONE);
 		zoomSlider.setTickColor(nightMode
@@ -193,6 +191,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		zoomSlider.addOnSliderTouchListener(this);
 		transparencySlider.addOnChangeListener(this);
 		zoomSlider.addOnChangeListener(this);
+		transparencySlider.setValueTo(100);
+		transparencySlider.setValueFrom(SLIDER_MIN_TRANSPARENCY);
+		zoomSlider.setValueTo(SLIDER_MAX_ZOOM);
+		zoomSlider.setValueFrom(SLIDER_MIN_ZOOM);
 
 		UiUtilities.setupCompoundButton(switchCompat, nightMode, UiUtilities.CompoundButtonType.PROFILE_DEPENDENT);
 
@@ -226,11 +228,11 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	public void onStopTrackingTouch(@NonNull Slider slider) {
 		switch (slider.getId()) {
 			case R.id.transparency_slider:
-				srtmPlugin.setTransparency((int) slider.getValue());
+				srtmPlugin.setTerrainTransparency((int) slider.getValue(), srtmPlugin.getTerrainMode());
 				break;
 			case R.id.zoom_slider:
 				List<Float> values = slider.getValues();
-				srtmPlugin.setZoomValues(values.get(0).intValue(), values.get(1).intValue());
+				srtmPlugin.setTerrainZoomValues(values.get(0).intValue(), values.get(1).intValue(), srtmPlugin.getTerrainMode());
 				break;
 		}
 		updateLayers();
@@ -246,8 +248,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 					break;
 				case R.id.zoom_slider:
 					List<Float> values = slider.getValues();
-					minZoomTv.setText(String.valueOf(values.get(0).intValue()));
-					maxZoomTv.setText(String.valueOf(values.get(1).intValue()));
+					if (values.size() > 0) {
+						minZoomTv.setText(String.valueOf(values.get(0).intValue()));
+						maxZoomTv.setText(String.valueOf(values.get(1).intValue()));
+					}
 					break;
 			}
 		}
@@ -256,10 +260,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	private void updateUiMode() {
 		TerrainMode mode = srtmPlugin.getTerrainMode();
 		if (terrainEnabled) {
-			int transparencyValue = srtmPlugin.getTransparency();
+			int transparencyValue = Math.max(srtmPlugin.getTerrainTransparency(), SLIDER_MIN_TRANSPARENCY);
 			String transparency = transparencyValue + "%";
-			int minZoom = srtmPlugin.getMinZoom();
-			int maxZoom = srtmPlugin.getMaxZoom();
+			int minZoom = Math.max(srtmPlugin.getTerrainMinZoom(), SLIDER_MIN_ZOOM);
+			int maxZoom = Math.min(srtmPlugin.getTerrainMaxZoom(), SLIDER_MAX_ZOOM);
 			iconIv.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_hillshade_dark, colorProfile));
 			stateTv.setText(R.string.shared_string_enabled);
 			transparencySlider.setValue(transparencyValue);
