@@ -304,12 +304,23 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					paintInnerRect.setColor(color);
 					paintInnerRect.setAlpha(179);
 
+					paintTextIcon.setColor(txtlabelColor(color));
+					paintOuterRect.setColor(txtlabelColor(color));
+
 					List<GpxDisplayItem> items = groups.get(0).getModifiableList();
 
 					drawSplitItems(canvas, tileBox, items, settings);
 				}
 			}
 		}
+	}
+
+	private int txtlabelColor(int color) {
+		//Hardy, 2020-03-16: Contrast logic for text labels on tracks
+		if (((int) Color.red(color) * .299 + Color.green(color) * .587 + Color.blue(color) * .114) > 149) {
+			return Color.BLACK;
+		}
+		return Color.WHITE;
 	}
 
 	private void drawSplitItems(Canvas canvas, RotatedTileBox tileBox, List<GpxDisplayItem> items, DrawSettings settings) {
