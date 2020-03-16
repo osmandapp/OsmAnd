@@ -3796,4 +3796,25 @@
     <string name="poi_sms_no">Non</string>
     <string name="poi_video_yes">Oui</string>
     <string name="poi_video_no">Non</string>
+    <string name="poi_shop_security">Magasin d\'équipements de sécurité</string>
+    <string name="poi_dive_centre">Centre de plongée</string>
+    <string name="poi_sms">SMS</string>
+    <string name="poi_covered_booth">Cabine</string>
+    <string name="poi_booth">Type de cabine</string>
+    <string name="poi_tactile_paving_contrasted">Contrasté</string>
+    <string name="poi_tactile_paving_primitive">Primitif</string>
+    <string name="poi_tactile_paving_incorrect">Incorrecte</string>
+    <string name="poi_seamark_water_level_part_submerged">Niveau d\'eau : partiellement submergé</string>
+    <string name="poi_seamark_water_level_submerged">Niveau d\'eau : submergé</string>
+    <string name="poi_seamark_water_level_dry">Niveau d\'eau : sec</string>
+    <string name="poi_seamark_water_level_covers">Niveau d\'eau : parfois couvert</string>
+    <string name="poi_seamark_water_level_awash">Niveau d\'eau : touché par les vagues</string>
+    <string name="poi_seamark_water_level_floods">Niveau d\'eau : souvent inondé</string>
+    <string name="poi_seamark_water_level_floating">Niveau d\'eau : flottant</string>
+    <string name="poi_seamark_water_level_above_mwl">Niveau d\'eau : au-dessus du niveau d\'eau moyen</string>
+    <string name="poi_seamark_water_level_below_mwl">Niveau d\'eau : en-dessous du niveau d\'eau moyen</string>
+    <string name="poi_seamark_obstruction">Obstacle</string>
+    <string name="poi_drinking_water_refill_yes">Remplissage d\'eau potable : oui</string>
+    <string name="poi_drinking_water_refill_no">Remplissage d\'eau potable : non</string>
+    <string name="poi_drinking_water_refill_network">Réseau de remplissage d\'eau potable</string>
 </resources>
