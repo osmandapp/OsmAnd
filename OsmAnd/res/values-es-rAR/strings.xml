@@ -2085,7 +2085,7 @@ Lon %2$s</string>
     <string name="gpx_no_tracks_title">Sin archivos GPX aún</string>
     <string name="gpx_no_tracks_title_folder">También puedes añadir archivos GPX a la carpeta</string>
     <string name="gpx_add_track">Añadir GPX</string>
-    <string name="gpx_appearance">Aspecto</string>
+    <string name="shared_string_appearance">Aspecto</string>
     <string name="rendering_value_fine_name">Muy fino</string>
     <string name="route_calculation">Cálculo de la ruta</string>
     <string name="upload_poi">Subir PDI</string>

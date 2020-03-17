@@ -2080,7 +2080,7 @@ Długość %2$s</string>
     <string name="gpx_no_tracks_title">Nie ma na razie żadnych plików GPX</string>
     <string name="gpx_no_tracks_title_folder">Można także dodać pliki GPX do katalogu</string>
     <string name="gpx_add_track">Dodaj więcej…</string>
-    <string name="gpx_appearance">Wygląd</string>
+    <string name="shared_string_appearance">Wygląd</string>
     <string name="rendering_value_fine_name">Bardzo cienki</string>
     <string name="route_calculation">Wyznaczanie trasy</string>
     <string name="upload_poi">Wysyłanie użytecznego miejsca</string>

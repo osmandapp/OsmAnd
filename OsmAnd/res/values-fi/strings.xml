@@ -832,7 +832,7 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="gpx_no_tracks_title">Sinulla ei ole vielä yhtään GPX-tiedostoa</string>
     <string name="gpx_no_tracks_title_folder">Voit myös lisätä GPX-tiedostoja hakemistoon</string>
     <string name="gpx_add_track">Lisää jälki</string>
-    <string name="gpx_appearance">Ulkoasu</string>
+    <string name="shared_string_appearance">Ulkoasu</string>
     <string name="trip_rec_notification_settings">Ota pikanauhoitus käyttöön</string>
     <string name="trip_rec_notification_settings_desc">Näytä ilmoitus, josta voi aloittaa matkan tallennuksen painamalla Nauhoita-näppäintä.</string>
     <string name="shared_string_notifications">Huomautukset</string>

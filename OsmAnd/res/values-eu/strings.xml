@@ -2089,7 +2089,7 @@ mapak eta nabigazioa</string>
     <string name="gpx_no_tracks_title">Ez duzu GPX fitxategirik oraindik</string>
     <string name="gpx_no_tracks_title_folder">GPX fitxategiak karpetara gehitu ditzakezu ere</string>
     <string name="gpx_add_track">Gehitu gehiago…</string>
-    <string name="gpx_appearance">Itxura</string>
+    <string name="shared_string_appearance">Itxura</string>
     <string name="rendering_value_fine_name">Ongi</string>
     <string name="search_map_hint">Hiria edo eskualdea</string>
     <string name="wiki_around">Inguruko Wikipediako artikuluak</string>

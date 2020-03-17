@@ -2066,7 +2066,7 @@
     <string name="shared_string_notifications">الإشعارات</string>
     <string name="gpx_no_tracks_title_folder">يمكنك أيضا إضافة مسارات إلى المجلد</string>
     <string name="gpx_add_track">أضف المزيد…</string>
-    <string name="gpx_appearance">المظهر</string>
+    <string name="shared_string_appearance">المظهر</string>
     <string name="upload_poi">رفع POI</string>
     <string name="route_calculation">حساب المسار</string>
     <string name="gpx_no_tracks_title">ليس لديك مسارات بعد</string>

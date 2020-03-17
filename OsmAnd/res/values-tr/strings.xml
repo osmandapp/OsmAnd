@@ -2332,7 +2332,7 @@
     <string name="gpx_no_tracks_title">Henüz GPX dosyanız yok</string>
     <string name="gpx_no_tracks_title_folder">Ayrıca klasöre GPX dosyaları ekleyebilirsiniz</string>
     <string name="gpx_add_track">Daha fazla ekle…</string>
-    <string name="gpx_appearance">Görünüş</string>
+    <string name="shared_string_appearance">Görünüş</string>
     <string name="trip_rec_notification_settings">Hızlı kaydı aç</string>
     <string name="save_track_min_speed">Kayıt-tutma minimum hızı</string>
     <string name="save_track_min_speed_descr">Filtre: Bu hızın altında nokta kaydı yok.</string>

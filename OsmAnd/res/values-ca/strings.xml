@@ -2070,7 +2070,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="gpx_no_tracks_title">No teniu encara cap fitxer GPX</string>
     <string name="gpx_no_tracks_title_folder">També podeu afegir fitxers GPX a la carpeta</string>
     <string name="gpx_add_track">Afegeix més…</string>
-    <string name="gpx_appearance">Aparença</string>
+    <string name="shared_string_appearance">Aparença</string>
     <string name="rendering_value_fine_name">Bé</string>
     <string name="route_calculation">Càlcul de ruta</string>
     <string name="upload_poi">Puja PDI</string>

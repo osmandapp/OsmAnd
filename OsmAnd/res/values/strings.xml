@@ -295,7 +295,6 @@
     <string name="route_parameters_info">Settings for routing in the selected profile \"%1$s\".</string>
     <string name="wake_time">Wake time</string>
     <string name="units_and_formats">Units &amp; formats</string>
-    <string name="appearance">Appearance</string>
     <string name="map_look_descr">Map appearance</string>
     <string name="map_look">Map look</string>
     <string name="list_of_installed_plugins">Installed plugins</string>
@@ -1165,7 +1164,7 @@
     <string name="gpx_no_tracks_title">You do not have any GPX files yet</string>
     <string name="gpx_no_tracks_title_folder">You may also add GPX files to the folder</string>
     <string name="gpx_add_track">Add more…</string>
-    <string name="gpx_appearance">Appearance</string>
+    <string name="shared_string_appearance">Appearance</string>
     <string name="trip_rec_notification_settings">Turn on quick recording</string>
     <string name="trip_rec_notification_settings_desc">Display a system notification allowing trip recording.</string>
     <string name="shared_string_notifications">Notifications</string>

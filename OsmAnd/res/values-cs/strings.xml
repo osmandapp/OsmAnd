@@ -2023,7 +2023,7 @@ Délka %2$s</string>
     <string name="gpx_no_tracks_title">Nemáte zatím žádné GPX soubory</string>
     <string name="gpx_no_tracks_title_folder">Do složky můžete také přidat GPX soubory</string>
     <string name="gpx_add_track">Přidat další…</string>
-    <string name="gpx_appearance">Vzhled</string>
+    <string name="shared_string_appearance">Vzhled</string>
     <string name="trip_rec_notification_settings">Povolit rychlé spuštění záznamu</string>
     <string name="trip_rec_notification_settings_desc">Zobrazit systémové oznámení, které umožňuje spustit nahrávání.</string>
     <string name="shared_string_notifications">Oznámení</string>

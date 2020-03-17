@@ -2003,7 +2003,7 @@
     <string name="gpx_no_tracks_title">Ви досі не маєте жодних GPX-файлів</string>
     <string name="gpx_no_tracks_title_folder">Ви також можете додати GPX-файли до теки</string>
     <string name="gpx_add_track">Додати ще…</string>
-    <string name="gpx_appearance">Вигляд</string>
+    <string name="shared_string_appearance">Вигляд</string>
     <string name="trip_rec_notification_settings">Ввімкнути швидкий запуск запису</string>
     <string name="trip_rec_notification_settings_desc">Показувати сповіщення, яке дозволить почати запис мандрівки.</string>
     <string name="shared_string_notifications">Повідомлення</string>

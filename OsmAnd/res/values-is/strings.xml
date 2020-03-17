@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="search_map_hint">Borg eða hérað</string>
-    <string name="gpx_appearance">Útlit</string>
+    <string name="shared_string_appearance">Útlit</string>
     <string name="gpx_add_track">Bæta við fleiru…</string>
     <string name="shared_string_notifications">Tilkynningar</string>
     <string name="shared_string_continue">Halda áfram</string>

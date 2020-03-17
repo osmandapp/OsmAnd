@@ -195,7 +195,7 @@
     <string name="gpx_no_tracks_title">У вас пока нет файлов GPX</string>
     <string name="gpx_no_tracks_title_folder">Вы также можете добавить файлы GPX в папку</string>
     <string name="gpx_add_track">Добавь еще…</string>
-    <string name="gpx_appearance">Вид</string>
+    <string name="shared_string_appearance">Вид</string>
     <string name="trip_rec_notification_settings">Включить быструю запись</string>
     <string name="trip_rec_notification_settings_desc">Отображение системного уведомления, позволяющего производить запись поездки.</string>
     <string name="shared_string_notifications">Уведомления</string>

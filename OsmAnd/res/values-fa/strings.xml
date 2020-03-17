@@ -1842,7 +1842,7 @@
     <string name="upload_poi">آپلود POI</string>
     <string name="route_calculation">محاسبهٔ مسیر</string>
     <string name="gpx_add_track">بیشتر بیفزایید…</string>
-    <string name="gpx_appearance">ظاهر</string>
+    <string name="shared_string_appearance">ظاهر</string>
     <string name="trip_rec_notification_settings">روشن‌کردن ضبط فوری</string>
     <string name="shared_string_notifications">اعلان‌ها</string>
     <string name="shared_string_continue">ادامه</string>

@@ -2071,7 +2071,7 @@
     <string name="gpx_no_tracks_title">Vous n\'avez pas encore de fichier GPX</string>
     <string name="gpx_no_tracks_title_folder">Vous pouvez aussi ajouter des fichiers GPX dans le dossier</string>
     <string name="gpx_add_track">Autre trace GPX …</string>
-    <string name="gpx_appearance">Apparence</string>
+    <string name="shared_string_appearance">Apparence</string>
     <string name="rendering_value_fine_name">Bien</string>
     <string name="translit_name_if_miss">Translittérer si le nom %1$s est absent</string>
     <string name="route_calculation">Calcul de l\'itinéraire</string>

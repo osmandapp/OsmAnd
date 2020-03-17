@@ -369,7 +369,7 @@
     <string name="gpx_no_tracks_title">Anda belum memiliki trek</string>
     <string name="gpx_no_tracks_title_folder">Anda juga dapat menambahkan trek ke folder</string>
     <string name="gpx_add_track">Tambah Rute</string>
-    <string name="gpx_appearance">Tampilan</string>
+    <string name="shared_string_appearance">Tampilan</string>
     <string name="trip_rec_notification_settings">Aktifkan rekaman mulai cepat</string>
     <string name="trip_rec_notification_settings_desc">Tampilkan pemberitahuan sistem yang memungkinkan untuk memulai perekaman perjalanan.</string>
     <string name="shared_string_notifications">Pemberitahuan</string>

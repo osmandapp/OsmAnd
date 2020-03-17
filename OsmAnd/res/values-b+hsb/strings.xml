@@ -995,7 +995,7 @@
     <string name="route_calculation">Wobličenje čary</string>
     <string name="gpx_no_tracks_title">Hišće žane GPX-dataje nimaš</string>
     <string name="gpx_add_track">Wjace dodać…</string>
-    <string name="gpx_appearance">Napohlad</string>
+    <string name="shared_string_appearance">Napohlad</string>
     <string name="shared_string_notifications">Zdźělenki</string>
     <string name="shared_string_continue">Pokročić</string>
     <string name="shared_string_paused">Přetorhnjene</string>

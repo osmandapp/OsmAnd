@@ -2084,7 +2084,7 @@ POIの更新は利用できません</string>
     <string name="gpx_no_tracks_title">フォルダ内に経路データが存在しません</string>
     <string name="gpx_no_tracks_title_folder">以下フォルダーにトラックを追加することが可能です</string>
     <string name="gpx_add_track">経路を追加</string>
-    <string name="gpx_appearance">表示形式</string>
+    <string name="shared_string_appearance">表示形式</string>
     <string name="max_speed">最大速度</string>
     <string name="average_speed">平均速度</string>
     <string name="shared_string_time_moving">移動時間</string>

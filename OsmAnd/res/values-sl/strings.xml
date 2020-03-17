@@ -2073,7 +2073,7 @@ Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na d
     <string name="gpx_no_tracks_title">Ni še shranjenih datotek GPX</string>
     <string name="gpx_no_tracks_title_folder">Datoteke GPX je mogoče dodati tudi v mapo</string>
     <string name="gpx_add_track">Dodaj več …</string>
-    <string name="gpx_appearance">Videz</string>
+    <string name="shared_string_appearance">Videz</string>
     <string name="rendering_value_fine_name">Drobno</string>
     <string name="route_roundabout_short">Pojdite na %1$d izhod in nadaljujte</string>
     <string name="search_map_hint">Poišči mesto ali območje</string>
