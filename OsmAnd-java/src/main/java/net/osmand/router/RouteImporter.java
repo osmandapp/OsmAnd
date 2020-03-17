@@ -27,9 +27,14 @@ public class RouteImporter {
 	public final static Log log = PlatformUtil.getLog(RouteImporter.class);
 
 	private File file;
+	private GPXFile gpxFile;
 
 	public RouteImporter(File file) {
 		this.file = file;
+	}
+
+	public RouteImporter(GPXFile gpxFile) {
+		this.gpxFile = gpxFile;
 	}
 
 	public List<RouteSegmentResult> importRoute() {
@@ -40,7 +45,7 @@ public class RouteImporter {
 
 		GPXExtensionsReader extensionsReader = new GPXExtensionsReader() {
 			@Override
-			public void readExtensions(GPXFile res, XmlPullParser parser) throws Exception {
+			public boolean readExtensions(GPXFile res, XmlPullParser parser) throws Exception {
 				if (!resources.hasLocations()) {
 					List<Location> locations = resources.getLocations();
 					if (res.tracks.size() > 0 && res.tracks.get(0).segments.size() > 0 && res.tracks.get(0).segments.get(0).points.size() > 0) {
@@ -66,7 +71,7 @@ public class RouteImporter {
 						} else if (tok == XmlPullParser.END_TAG) {
 							tag = parser.getName();
 							if ("route".equals(tag)) {
-								return;
+								return true;
 							}
 						}
 					}
@@ -87,33 +92,41 @@ public class RouteImporter {
 						} else if (tok == XmlPullParser.END_TAG) {
 							tag = parser.getName();
 							if ("types".equals(tag)) {
-								return;
+								return true;
 							}
 						}
 					}
 				}
+				return false;
 			}
 		};
 
-		FileInputStream fis = null;
-		try {
-			fis = new FileInputStream(file);
-			GPXFile gpxFile = GPXUtilities.loadGPXFile(fis, extensionsReader);
+		if (gpxFile != null) {
+			GPXUtilities.loadGPXFile(null, gpxFile, extensionsReader);
 			for (RouteSegmentResult segment : route) {
 				segment.fillData();
 			}
-			gpxFile.path = file.getAbsolutePath();
-			gpxFile.modifiedTime = file.lastModified();
-		} catch (IOException e) {
-			log.error("Error importing route " + file.getAbsolutePath(), e);
-			return null;
-		} finally {
+		} else if (file != null) {
+			FileInputStream fis = null;
 			try {
-				if (fis != null) {
-					fis.close();
+				fis = new FileInputStream(file);
+				GPXFile gpxFile = GPXUtilities.loadGPXFile(fis, null, extensionsReader);
+				for (RouteSegmentResult segment : route) {
+					segment.fillData();
 				}
-			} catch (IOException ignore) {
-				// ignore
+				gpxFile.path = file.getAbsolutePath();
+				gpxFile.modifiedTime = file.lastModified();
+			} catch (IOException e) {
+				log.error("Error importing route " + file.getAbsolutePath(), e);
+				return null;
+			} finally {
+				try {
+					if (fis != null) {
+						fis.close();
+					}
+				} catch (IOException ignore) {
+					// ignore
+				}
 			}
 		}
 

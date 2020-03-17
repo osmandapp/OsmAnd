@@ -12,6 +12,7 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -46,13 +47,15 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 
 	void collectTypes(RouteDataResources resources) {
 		Map<RouteTypeRule, Integer> rules = resources.getRules();
+		Map<RouteTypeRule, RouteTypeRule> segmentRules = resources.getSegmentRules(this);
 		if (object.types != null) {
-			collectRules(rules, object.types);
+			collectRules(rules, segmentRules, object.types);
 		}
 		if (object.pointTypes != null) {
-			for (int[] types : object.pointTypes) {
+			for (int i = startPointIndex; i <= endPointIndex; i++) {
+				int[] types = object.pointTypes[i];
 				if (types != null) {
-					collectRules(rules, types);
+					collectRules(rules, segmentRules, types);
 				}
 			}
 		}
@@ -85,17 +88,32 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		}
 	}
 
-	private void collectRules(Map<RouteTypeRule, Integer> rules, int[] types) {
+	private void collectRules(Map<RouteTypeRule, Integer> rules, Map<RouteTypeRule, RouteTypeRule> segmentRules, int[] types) {
 		RouteRegion region = object.region;
 		for (int type : types) {
 			RouteTypeRule rule = region.quickGetEncodingRule(type);
-			if (!rules.containsKey(rule)) {
+			RouteTypeRule segmentRule = null;
+			String tag = rule.getTag();
+			if (tag.equals("osmand_ele_start")) {
+				if (object.heightDistanceArray != null && object.heightDistanceArray.length > startPointIndex * 2) {
+					float h = object.heightDistanceArray[startPointIndex * 2 + 1];
+					segmentRule = new RouteTypeRule(tag, String.valueOf(Math.round(h)));
+				}
+			} else if (tag.equals("osmand_ele_end")) {
+				if (object.heightDistanceArray != null && object.heightDistanceArray.length > endPointIndex * 2) {
+					float h = object.heightDistanceArray[endPointIndex * 2 + 1];
+					segmentRule = new RouteTypeRule(tag, String.valueOf(Math.round(h)));
+				}
+			}
+			if (segmentRule != null && !segmentRules.containsKey(rule)) {
+				segmentRules.put(rule, segmentRule);
+			} else if (!rules.containsKey(rule)) {
 				rules.put(rule, rules.size());
 			}
 		}
 	}
 
-	private int[] convertTypes(int[] types, Map<RouteTypeRule, Integer> rules) {
+	private int[] convertTypes(int[] types, Map<RouteTypeRule, Integer> rules, Map<RouteTypeRule, RouteTypeRule> segmentRules) {
 		if (types == null || types.length == 0) {
 			return null;
 		}
@@ -103,16 +121,22 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		for (int i = 0; i < types.length; i++) {
 			int type = types[i];
 			RouteTypeRule rule = object.region.quickGetEncodingRule(type);
-			Integer ruleId = rules.get(rule);
-			if (ruleId == null) {
-				throw new IllegalArgumentException("Cannot find collected rule: " + rule.toString());
+			RouteTypeRule segmentRule = segmentRules.get(rule);
+			if (segmentRule != null) {
+				res[i] = rules.size();
+				rules.put(segmentRule, rules.size());
+			} else {
+				Integer ruleId = rules.get(rule);
+				if (ruleId == null) {
+					throw new IllegalArgumentException("Cannot find collected rule: " + rule.toString());
+				}
+				res[i] = ruleId;
 			}
-			res[i] = ruleId;
 		}
 		return res;
 	}
 
-	private int[][] convertTypes(int[][] types, Map<RouteTypeRule, Integer> rules) {
+	private int[][] convertTypes(int[][] types, Map<RouteTypeRule, Integer> rules, Map<RouteTypeRule, RouteTypeRule> segmentRules) {
 		if (types == null || types.length == 0) {
 			return null;
 		}
@@ -120,7 +144,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		for (int i = 0; i < types.length; i++) {
 			int[] typesArr = types[i];
 			if (typesArr != null) {
-				res[i] = convertTypes(typesArr, rules);
+				res[i] = convertTypes(typesArr, rules, segmentRules);
 			}
 		}
 		return res;
@@ -168,6 +192,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	@Override
 	public void writeToBundle(RouteDataBundle bundle) {
 		Map<RouteTypeRule, Integer> rules = bundle.getResources().getRules();
+		Map<RouteTypeRule, RouteTypeRule> segmentRules = bundle.getResources().getSegmentRules(this);
 		bundle.putInt("length", (Math.abs(endPointIndex - startPointIndex) + 1) * (endPointIndex >= startPointIndex ? 1 : -1));
 		bundle.putFloat("segmentTime", segmentTime, 2);
 		bundle.putFloat("speed", speed, 2);
@@ -181,12 +206,12 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 			}
 			int[] turnLanes = turnType.getLanes();
 			if (turnLanes != null && turnLanes.length > 0) {
-				//bundle.putArray("turnLanes", turnLanes);
 				bundle.putString("turnLanes", TurnType.lanesToString(turnLanes));
 			}
 		}
-		bundle.putArray("types", convertTypes(object.types, rules));
-		bundle.putArray("pointTypes", convertTypes(object.pointTypes, rules));
+		bundle.putLong("id", object.id);
+		bundle.putArray("types", convertTypes(object.types, rules, segmentRules));
+		bundle.putArray("pointTypes", convertTypes(Arrays.copyOfRange(object.pointTypes, startPointIndex, endPointIndex + 1), rules, segmentRules));
 		bundle.putArray("names", convertNameIds(object.nameIds, rules));
 	}
 
@@ -204,10 +229,10 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 			turnType = TurnType.fromString(turnTypeStr, false);
 			turnType.setSkipToSpeak(bundle.getBoolean("skipTurn", turnType.isSkipToSpeak()));
 			turnType.setTurnAngle(bundle.getFloat("turnAngle", turnType.getTurnAngle()));
-			//int[] turnLanes = bundle.getIntArray("turnLanes", null);
 			int[] turnLanes = TurnType.lanesFromString(bundle.getString("turnLanes", null));
 			turnType.setLanes(turnLanes);
 		}
+		object.id = bundle.getLong("id", object.id);
 		object.types = bundle.getIntArray("types", null);
 		object.pointTypes = bundle.getIntIntArray("pointTypes", null);
 		object.nameIds = bundle.getIntArray("names", null);

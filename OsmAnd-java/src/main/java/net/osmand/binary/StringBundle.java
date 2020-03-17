@@ -82,25 +82,25 @@ public class StringBundle {
 			super(name, ItemType.STRING, String.valueOf(value));
 		}
 
-		private StringItem(String name, float value, int digits) {
-			super(name, ItemType.STRING, getFormattedValue(value, digits));
+		private StringItem(String name, float value, int maxDigits) {
+			super(name, ItemType.STRING, getFormattedValue(value, maxDigits));
 		}
 
 		private StringItem(String name, boolean value) {
 			super(name, ItemType.STRING, String.valueOf(value));
 		}
 
-		private static String getFormattedValue(float value, int digits) {
+		private static String getFormattedValue(float value, int maxDigits) {
 			DecimalFormat formatter = null;
-			if (digits == 2) {
+			if (maxDigits == 2) {
 				formatter = TWO_DIGITS_FORMATTER;
-			} else if (digits == 3) {
+			} else if (maxDigits == 3) {
 				formatter = THREE_DIGITS_FORMATTER;
-			} else if (digits == 4) {
+			} else if (maxDigits == 4) {
 				formatter = FOUR_DIGITS_FORMATTER;
-			} else if (digits == 5) {
+			} else if (maxDigits == 5) {
 				formatter = FIVE_DIGITS_FORMATTER;
-			} else if (digits == 6) {
+			} else if (maxDigits == 6) {
 				formatter = SIX_DIGITS_FORMATTER;
 			}
 			return formatter != null ? formatter.format(value) : String.valueOf(value);
@@ -206,8 +206,8 @@ public class StringBundle {
 		map.put(key, new StringItem(key, value));
 	}
 
-	public void putFloat(String key, float value, int digits) {
-		map.put(key, new StringItem(key, value, digits));
+	public void putFloat(String key, float value, int maxDigits) {
+		map.put(key, new StringItem(key, value, maxDigits));
 	}
 
 	public float getFloat(String key, float defaultValue) {

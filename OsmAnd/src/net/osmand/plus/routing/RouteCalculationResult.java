@@ -177,10 +177,6 @@ public class RouteCalculationResult {
 		this.routeRecalcDistance = ctx.getSettings().ROUTE_RECALCULATION_DISTANCE.getModeValue(mode);
 		this.routeVisibleAngle = routeService == RouteProvider.RouteService.STRAIGHT ?
 				ctx.getSettings().ROUTE_STRAIGHT_ANGLE.getModeValue(mode) : 0;
-
-		RouteExporter exporter = new RouteExporter(new File(ctx.getAppPath(IndexConstants.GPX_INDEX_DIR), "test.gpx"), list, locations);
-		//exporter.exportRoute();
-
 	}
 
 	public ApplicationMode getAppMode() {
@@ -285,12 +281,16 @@ public class RouteCalculationResult {
 	}
 
 	public List<RouteSegmentResult> getOriginalRoute() {
+		return getOriginalRoute(0);
+	}
+
+	public List<RouteSegmentResult> getOriginalRoute(int startIndex) {
 		if (segments.size() == 0) {
 			return null;
 		}
 		List<RouteSegmentResult> list = new ArrayList<RouteSegmentResult>();
-		list.add(segments.get(0));
-		for (int i = 1; i < segments.size(); i++) {
+		list.add(segments.get(startIndex++));
+		for (int i = startIndex; i < segments.size(); i++) {
 			if (segments.get(i - 1) != segments.get(i)) {
 				list.add(segments.get(i));
 			}

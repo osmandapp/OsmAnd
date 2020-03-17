@@ -1,6 +1,5 @@
 package net.osmand.router;
 
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXExtensionsWriter;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Track;
@@ -15,29 +14,27 @@ import net.osmand.binary.StringBundleXmlWriter;
 
 import org.xmlpull.v1.XmlSerializer;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 public class RouteExporter {
 
-	private static final String OSMAND_ROUTER = "OsmAndRouter";
+	public static final String OSMAND_ROUTER_V2 = "OsmAndRouterV2";
 
-	private File file;
+	private String name;
 	private List<RouteSegmentResult> route;
 	private List<Location> locations;
+	private List<WptPt> points;
 
-	public RouteExporter(File file, List<RouteSegmentResult> route, List<Location> locations) {
-		this.file = file;
+	public RouteExporter(String name, List<RouteSegmentResult> route, List<Location> locations, List<WptPt> points) {
+		this.name = name;
 		this.route = route;
 		this.locations = locations;
+		this.points = points;
 	}
 
-	public Exception exportRoute() {
+	public GPXFile exportRoute() {
 		RouteDataResources resources = new RouteDataResources(locations);
 		final RouteDataBundle bundle = new RouteDataBundle(resources);
 
@@ -66,12 +63,17 @@ public class RouteExporter {
 		bundle.putBundleList("types", "type", typeList);
 
 		GPXFile gpx = new GPXFile("OsmAnd");
-		gpx.author = OSMAND_ROUTER;
+		gpx.author = OSMAND_ROUTER_V2;
 		Track track = new Track();
-		track.name = new SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(new Date());
+		track.name = name;
 		gpx.tracks.add(track);
 		TrkSegment trkSegment = new TrkSegment();
 		track.segments.add(trkSegment);
+
+		if (locations == null || locations.isEmpty()) {
+			return gpx;
+		}
+
 		for (int i = 0; i < locations.size(); i++) {
 			Location loc = locations.get(i);
 			WptPt pt = new WptPt();
@@ -89,6 +91,12 @@ public class RouteExporter {
 			trkSegment.points.add(pt);
 		}
 
+		if (points != null) {
+			for (WptPt pt : points) {
+				gpx.addPoint(pt);
+			}
+		}
+
 		GPXExtensionsWriter extensionsWriter = new GPXExtensionsWriter() {
 			@Override
 			public void writeExtensions(XmlSerializer serializer) {
@@ -98,6 +106,6 @@ public class RouteExporter {
 		};
 		gpx.setExtensionsWriter(extensionsWriter);
 
-		return GPXUtilities.writeGpxFile(file, gpx);
+		return gpx;
 	}
 }
