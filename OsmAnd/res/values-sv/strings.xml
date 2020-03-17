@@ -2014,7 +2014,7 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="gpx_no_tracks_title">Du har inga GPX-filer ännu</string>
     <string name="gpx_no_tracks_title_folder">Du kan också lägga till GPX-filer i mappen</string>
     <string name="gpx_add_track">Lägg till mer…</string>
-    <string name="gpx_appearance">Utseende</string>
+    <string name="shared_string_appearance">Utseende</string>
     <string name="trip_rec_notification_settings">Aktivera snabbstart av inspelning</string>
     <string name="christmas_desc">Med tanke på den kommande julen och nyåret så kan du välja att visa POI som har med julen att göra: julgranar, julmarknader med mera.</string>
     <string name="rendering_attr_contourWidth_name">Bredd på konturlinjen</string>

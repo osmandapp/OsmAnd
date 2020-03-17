@@ -3803,4 +3803,17 @@
     <string name="poi_tactile_paving_contrasted">Cuntrastadu</string>
     <string name="poi_tactile_paving_primitive">Primitivu</string>
     <string name="poi_tactile_paving_incorrect">Incorretu</string>
+    <string name="poi_seamark_water_level_part_submerged">Raportu cun su livellu de s\'abba: imbèrghidu in parte</string>
+    <string name="poi_seamark_water_level_submerged">Raportu cun su livellu de s\'abba: imbèrghidu</string>
+    <string name="poi_seamark_water_level_dry">Raportu cun su livellu de s\'abba: assutu</string>
+    <string name="poi_seamark_water_level_covers">Raportu cun su livellu de s\'abba: coberit periodicamente</string>
+    <string name="poi_seamark_water_level_awash">Raportu cun su livellu de s\'abba: infustu</string>
+    <string name="poi_seamark_water_level_floods">Raportu cun su livellu de s\'abba: sugetu a alluviones</string>
+    <string name="poi_seamark_water_level_floating">Raportu cun su livellu de s\'abba: gallegiat</string>
+    <string name="poi_seamark_water_level_above_mwl">Raportu cun su livellu de s\'abba: in foras de su livellu mèdiu de s\'abba</string>
+    <string name="poi_seamark_water_level_below_mwl">Raportu cun su livellu de s\'abba: in suta de su livellu mèdiu de s\'abba</string>
+    <string name="poi_seamark_obstruction">Tapadura</string>
+    <string name="poi_drinking_water_refill_yes">Ricàrica de s\'abba potàbile: eja</string>
+    <string name="poi_drinking_water_refill_no">Ricàrica de s\'abba potàbile: nono</string>
+    <string name="poi_drinking_water_refill_network">Retza de ricàrica de s\'abba potàbile</string>
 </resources>

@@ -8,6 +8,8 @@ import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -71,6 +73,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		View root = inflater.inflate(R.layout.fragment_import_complete, container, false);
 		TextView description = root.findViewById(R.id.description);
 		TextView btnClose = root.findViewById(R.id.button_close);
+		final LinearLayout buttonContainer = root.findViewById(R.id.button_container);
 		recyclerView = root.findViewById(R.id.list);
 		description.setText(UiUtilities.createSpannableString(
 				String.format(getString(R.string.import_complete_description), fileName),
@@ -86,6 +89,20 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		if (Build.VERSION.SDK_INT >= 21) {
 			AndroidUtils.addStatusBarPadding21v(app, root);
 		}
+		ViewTreeObserver treeObserver = buttonContainer.getViewTreeObserver();
+		treeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				ViewTreeObserver vts = buttonContainer.getViewTreeObserver();
+				int height = buttonContainer.getMeasuredHeight();
+				recyclerView.setPadding(0, 0, 0, height);
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+					vts.removeOnGlobalLayoutListener(this);
+				} else {
+					vts.removeGlobalOnLayoutListener(this);
+				}
+			}
+		});
 		return root;
 	}
 

@@ -1330,7 +1330,7 @@
     <string name="search_map_hint">Traži grad ili regiju</string>
     <string name="route_calculation">Izračun rute</string>
     <string name="gpx_add_track">Dodati trag</string>
-    <string name="gpx_appearance">Izgled</string>
+    <string name="shared_string_appearance">Izgled</string>
     <string name="edit_filter">Uredi kategoriju</string>
     <string name="subcategories">Podkategorije</string>
     <string name="selected_categories">Odabrane kategorije</string>

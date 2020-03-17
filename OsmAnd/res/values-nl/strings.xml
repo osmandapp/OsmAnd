@@ -2059,7 +2059,7 @@ Lengtegraad:\t\t%2$s</string>
     <string name="gpx_no_tracks_title">Je hebt nog geen GPX-tracks</string>
     <string name="gpx_no_tracks_title_folder">Je kunt ook GPX-tracks toevoegen aan de map</string>
     <string name="gpx_add_track">Meer toevoegen…</string>
-    <string name="gpx_appearance">GPX-stijl</string>
+    <string name="shared_string_appearance">GPX-stijl</string>
     <string name="trip_rec_notification_settings">Snelle opname activeren</string>
     <string name="trip_rec_notification_settings_desc">Toon systeemmelding waarmee ritopname toegestaan wordt.</string>
     <string name="shared_string_notifications">Meldingen</string>

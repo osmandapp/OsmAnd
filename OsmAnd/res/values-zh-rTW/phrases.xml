@@ -3804,4 +3804,17 @@
     <string name="poi_tactile_paving_contrasted">對比</string>
     <string name="poi_tactile_paving_primitive">粗糙</string>
     <string name="poi_tactile_paving_incorrect">不正確</string>
+    <string name="poi_seamark_water_level_part_submerged">水位：部份淹沒</string>
+    <string name="poi_seamark_water_level_submerged">水位：淹沒</string>
+    <string name="poi_seamark_water_level_dry">水位：乾涸</string>
+    <string name="poi_seamark_water_level_covers">水位：覆蓋</string>
+    <string name="poi_seamark_water_level_awash">水位：充沛</string>
+    <string name="poi_seamark_water_level_floods">水位：洪水</string>
+    <string name="poi_seamark_water_level_floating">水位：浮動</string>
+    <string name="poi_seamark_water_level_above_mwl">水位：高於平均水位</string>
+    <string name="poi_seamark_water_level_below_mwl">水位：低於平均水位</string>
+    <string name="poi_seamark_obstruction">堵塞</string>
+    <string name="poi_drinking_water_refill_yes">飲用水填充：是</string>
+    <string name="poi_drinking_water_refill_no">飲用水填充：否</string>
+    <string name="poi_drinking_water_refill_network">飲用水填充網路</string>
 </resources>
