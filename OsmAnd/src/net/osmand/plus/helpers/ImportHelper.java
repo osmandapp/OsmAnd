@@ -809,6 +809,21 @@ public class ImportHelper {
 									if (!Algorithms.isEmpty(pluginItems)) {
 										for (SettingsHelper.SettingsItem item : pluginItems) {
 											item.setShouldReplace(true);
+											if (item instanceof SettingsHelper.QuickActionSettingsItem) {
+												plugin.quickActions = ((SettingsHelper.QuickActionSettingsItem) item).getItems();
+											}
+											if (item instanceof SettingsHelper.PoiUiFilterSettingsItem) {
+												plugin.poiUIFilters = ((SettingsHelper.PoiUiFilterSettingsItem) item).getItems();
+											}
+											if (item instanceof SettingsHelper.MapSourcesSettingsItem) {
+												plugin.mapSources = ((SettingsHelper.MapSourcesSettingsItem) item).getItems();
+											}
+											if (item instanceof SettingsHelper.AvoidRoadsSettingsItem) {
+												plugin.avoidRoadInfos = ((SettingsHelper.AvoidRoadsSettingsItem) item).getItems();
+											}
+											if (item instanceof SettingsHelper.ProfileSettingsItem) {
+												plugin.appModes.add(((SettingsHelper.ProfileSettingsItem) item).getAppMode());
+											}
 										}
 										app.getSettingsHelper().importSettings(file, pluginItems, "", 1, new SettingsHelper.SettingsImportListener() {
 											@Override

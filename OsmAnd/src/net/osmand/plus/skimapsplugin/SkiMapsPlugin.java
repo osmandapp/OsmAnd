@@ -1,10 +1,5 @@
 package net.osmand.plus.skimapsplugin;
 
-import android.app.Activity;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -59,21 +54,6 @@ public class SkiMapsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public boolean init(@NonNull final OsmandApplication app, final Activity activity) {
-		if (activity != null) {
-			// called from UI
-			ApplicationMode.changeProfileAvailability(ApplicationMode.SKI, true, app);
-		}
-		return true;
-	}
-
-	@Override
-	public void onInstall(@NonNull OsmandApplication app, @Nullable Activity activity) {
-		ApplicationMode.changeProfileAvailability(ApplicationMode.SKI, true, app);
-		super.onInstall(app, activity);
-	}
-
-	@Override
 	public List<ApplicationMode> getAddedAppModes() {
 		return Collections.singletonList(ApplicationMode.SKI);
 	}
@@ -86,12 +66,6 @@ public class SkiMapsPlugin extends OsmandPlugin {
 	@Override
 	public List<String> getRouterNames() {
 		return Collections.singletonList("ski");
-	}
-
-	@Override
-	public void disable(OsmandApplication app) {
-		super.disable(app);
-		ApplicationMode.changeProfileAvailability(ApplicationMode.SKI, false, app);
 	}
 
 	@Override

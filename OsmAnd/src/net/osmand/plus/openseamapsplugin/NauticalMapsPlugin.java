@@ -1,10 +1,5 @@
 package net.osmand.plus.openseamapsplugin;
 
-import android.app.Activity;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -23,12 +18,12 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	public NauticalMapsPlugin(OsmandApplication app) {
 		super(app);
 	}
-	
+
 	@Override
 	public int getLogoResourceId() {
 		return R.drawable.ic_plugin_nautical_map;
 	}
-	
+
 	@Override
 	public int getAssetResourceName() {
 		return R.drawable.nautical_map;
@@ -60,21 +55,6 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public boolean init(@NonNull final OsmandApplication app, final Activity activity) {
-		if (activity != null) {
-			// called from UI
-			ApplicationMode.changeProfileAvailability(ApplicationMode.BOAT, true, app);
-		}
-		return true;
-	}
-
-	@Override
-	public void onInstall(@NonNull OsmandApplication app, @Nullable Activity activity) {
-		ApplicationMode.changeProfileAvailability(ApplicationMode.BOAT, true, app);
-		super.onInstall(app, activity);
-	}
-
-	@Override
 	public List<ApplicationMode> getAddedAppModes() {
 		return Collections.singletonList(ApplicationMode.BOAT);
 	}
@@ -87,12 +67,6 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	@Override
 	public List<String> getRouterNames() {
 		return Collections.singletonList("boat");
-	}
-
-	@Override
-	public void disable(OsmandApplication app) {
-		super.disable(app);
-		ApplicationMode.changeProfileAvailability(ApplicationMode.BOAT, false, app);
 	}
 
 	@Override

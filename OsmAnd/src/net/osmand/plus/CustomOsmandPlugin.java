@@ -1,13 +1,29 @@
 package net.osmand.plus;
 
+import net.osmand.map.ITileSource;
+import net.osmand.plus.helpers.AvoidSpecificRoads;
+import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.quickaction.QuickAction;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomOsmandPlugin extends OsmandPlugin {
 
 	public String pluginId;
 	public String name;
 	public String description;
+
+	public List<String> rendererNames = new ArrayList<>();
+	public List<String> routerNames = new ArrayList<>();
+	public List<ApplicationMode> appModes = new ArrayList<>();
+	public List<QuickAction> quickActions = new ArrayList<>();
+	public List<PoiUIFilter> poiUIFilters = new ArrayList<>();
+	public List<ITileSource> mapSources = new ArrayList<>();
+	public List<AvoidSpecificRoads.AvoidRoadInfo> avoidRoadInfos = new ArrayList<>();
 
 	public CustomOsmandPlugin(OsmandApplication app) {
 		super(app);
@@ -61,5 +77,40 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		json.put("Description", getDescription());
 
 		return json.toString();
+	}
+
+	@Override
+	public List<String> getRendererNames() {
+		return rendererNames;
+	}
+
+	@Override
+	public List<String> getRouterNames() {
+		return routerNames;
+	}
+
+	@Override
+	public List<ApplicationMode> getAddedAppModes() {
+		return appModes;
+	}
+
+	@Override
+	public List<QuickAction> getQuickActions() {
+		return quickActions;
+	}
+
+	@Override
+	public List<PoiUIFilter> getPoiUIFilters() {
+		return poiUIFilters;
+	}
+
+	@Override
+	public List<ITileSource> getMapSources() {
+		return mapSources;
+	}
+
+	@Override
+	public List<AvoidSpecificRoads.AvoidRoadInfo> getAvoidRoadInfos() {
+		return avoidRoadInfos;
 	}
 }
