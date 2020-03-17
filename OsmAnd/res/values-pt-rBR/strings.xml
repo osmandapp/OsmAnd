@@ -3557,4 +3557,12 @@ Pôr do Sol: %2$s</string>
     <string name="saving_new_profile">Salvando novo perfil</string>
     <string name="profile_backup_failed">Não foi possível fazer o backup do perfil.</string>
     <string name="clear_recorded_data_warning">Tem certeza de que deseja limpar os dados gravados\?</string>
+    <string name="importing_from">Importando dados de %1$s</string>
+    <string name="shared_string_importing">Importando</string>
+    <string name="checking_for_duplicate_description">OsmAnd verifica %1$s para duplicatas com itens existentes no aplicativo.
+\n
+\nPode levar algum tempo.</string>
+    <string name="items_added">Itens adicionados</string>
+    <string name="shared_string_import_complete">Importação concluída</string>
+    <string name="import_complete_description">Todos os dados do %1$s são importados. Você pode usar os botões abaixo para abrir a parte necessária do aplicativo para gerenciá-lo.</string>
 </resources>
