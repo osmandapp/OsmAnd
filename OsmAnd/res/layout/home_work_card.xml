@@ -41,7 +41,7 @@
 			android:gravity="center_vertical"
 			android:orientation="horizontal">
 
-			<android.support.v7.widget.AppCompatImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/home_img"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
 			android:gravity="center_vertical"
 			android:orientation="horizontal">
 
-			<android.support.v7.widget.AppCompatImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/work_img"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"

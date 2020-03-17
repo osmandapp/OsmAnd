@@ -1,7 +1,8 @@
 package net.osmand.plus.base.bottomsheetmenu.simpleitems;
 
 import android.content.Context;
-import android.support.annotation.ColorRes;
+
+import androidx.annotation.ColorRes;
 
 public class TitleDividerItem extends DividerItem {
 

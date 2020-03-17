@@ -15,7 +15,7 @@
         android:layout_marginStart="@dimen/content_padding_small"
         android:text="@string/keep_showing_on_map"/>
 
-    <android.support.v7.widget.SwitchCompat
+    <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/toggle_show_on_map"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

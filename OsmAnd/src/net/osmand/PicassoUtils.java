@@ -2,20 +2,23 @@ package net.osmand;
 
 import android.content.Context;
 import android.os.StatFs;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
+
+import net.osmand.plus.OsmandApplication;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.osmand.plus.OsmandApplication;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
+
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.JELLY_BEAN_MR2;
 

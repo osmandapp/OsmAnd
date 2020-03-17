@@ -2075,7 +2075,7 @@ Dĺžka %2$s</string>
     <string name="gpx_no_tracks_title">Nemáte zatiaľ žiadne súbory GPX</string>
     <string name="gpx_no_tracks_title_folder">Do priečinka môžete pridať aj súbory GPX</string>
     <string name="gpx_add_track">Pridať viac…</string>
-    <string name="gpx_appearance">Vzhľad</string>
+    <string name="shared_string_appearance">Vzhľad</string>
     <string name="rendering_value_fine_name">Jemné</string>
     <string name="route_calculation">Výpočet trasy</string>
     <string name="route_roundabout_short">Použite výjazd %1$d a pokračujte</string>
@@ -3552,4 +3552,18 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="import_duplicates_title">Niektoré položky už existujú</string>
     <string name="select_data_to_import">Zvoľte údaje na importovanie.</string>
     <string name="shared_string_rendering_style">Štýl vykresľovania</string>
+    <string name="import_rendering_file">Importovať súbor vykresľovania</string>
+    <string name="restore_all_profile_settings_descr">Po vytvorení/importovaní tohto profilu budú všetky nastavenia profilu resetované do pôvodného stavu.</string>
+    <string name="restore_all_profile_settings">Obnoviť všetky nastavenia profilu\?</string>
+    <string name="saving_new_profile">Ukladá sa nový profil</string>
+    <string name="profile_backup_failed">Nepodarilo sa zálohovať profil.</string>
+    <string name="clear_recorded_data_warning">Naozaj chcete vymazať zaznamenané údaje\?</string>
+    <string name="importing_from">Importujem údaje z %1$s</string>
+    <string name="shared_string_importing">Importujem</string>
+    <string name="checking_for_duplicate_description">OsmAnd kontroluje %1$s na duplicity s existujúcimi položkami v aplikácii.
+\n
+\nMôže to chvíľu trvať.</string>
+    <string name="items_added">Položky pridané</string>
+    <string name="shared_string_import_complete">Import ukončený</string>
+    <string name="import_complete_description">Všetky údaje z %1$s sú naimportované, môžete použiť tlačidlá nižšie pre otvorenie príslušnej časti aplikácie pre ich správu.</string>
 </resources>

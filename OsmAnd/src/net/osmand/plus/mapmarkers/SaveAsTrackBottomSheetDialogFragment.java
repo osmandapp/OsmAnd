@@ -2,10 +2,6 @@ package net.osmand.plus.mapmarkers;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.content.ContextCompat;
 import android.text.format.DateFormat;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
@@ -19,13 +15,19 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
+import com.google.android.material.textfield.TextInputLayout;
+
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 
 import java.io.File;
 import java.util.Date;
@@ -105,9 +107,6 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 		final EditText nameEditText = (EditText) mainView.findViewById(R.id.name_edit_text);
 		nameEditText.setText(displayedName);
 		nameEditText.setTextColor(ContextCompat.getColor(getContext(), textPrimaryColor));
-		if (textBox instanceof OsmandTextFieldBoxes) {
-			((OsmandTextFieldBoxes) textBox).activate(true);
-		}
 
 		mainView.findViewById(R.id.save_button).setOnClickListener(new View.OnClickListener() {
 			@Override

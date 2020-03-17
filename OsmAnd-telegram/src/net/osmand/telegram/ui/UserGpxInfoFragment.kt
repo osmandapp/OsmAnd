@@ -7,9 +7,6 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.os.*
-import android.support.design.widget.Snackbar
-import android.support.v4.app.FragmentManager
-import android.support.v4.content.ContextCompat
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
@@ -22,6 +19,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import com.google.android.material.snackbar.Snackbar
 import net.osmand.GPXUtilities
 import net.osmand.PlatformUtil
 import net.osmand.aidl.gpx.AGpxBitmap
@@ -490,7 +489,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		private const val UPDATE_TRACK_INTERVAL_MS = 30 * 1000L // 30 sec
 		private const val TRACK_UPDATE_MSG_ID = 1001
 
-		fun showInstance(fm: FragmentManager, userId: Int, chatId: Long, deviceName: String, start: Long, end: Long): Boolean {
+		fun showInstance(fm: androidx.fragment.app.FragmentManager, userId: Int, chatId: Long, deviceName: String, start: Long, end: Long): Boolean {
 			return try {
 				val fragment = UserGpxInfoFragment().apply {
 					arguments = Bundle().apply {

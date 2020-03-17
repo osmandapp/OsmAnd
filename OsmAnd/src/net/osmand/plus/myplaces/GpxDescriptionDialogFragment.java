@@ -3,16 +3,18 @@ package net.osmand.plus.myplaces;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+
+import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
@@ -30,8 +32,8 @@ public class GpxDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 
 		final Toolbar topBar = new Toolbar(ctx);
 		topBar.setClickable(true);
-		Drawable back = getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back);
-		topBar.setNavigationIcon(back);
+		Drawable icBack = getMyApplication().getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(ctx));
+		topBar.setNavigationIcon(icBack);
 		topBar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		topBar.setTitle(R.string.shared_string_description);
 		topBar.setBackgroundColor(ContextCompat.getColor(ctx, AndroidUtils.resolveAttribute(ctx, R.attr.pstsTabBackground)));

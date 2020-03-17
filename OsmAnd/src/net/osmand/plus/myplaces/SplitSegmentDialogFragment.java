@@ -5,14 +5,9 @@ import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.ListPopupWindow;
-import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -25,6 +20,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.ListPopupWindow;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
@@ -117,7 +119,8 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		if (trackActivityActionBar != null) {
 			titleTextView.setText(trackActivityActionBar.getTitle());
 		}
-		toolbar.setNavigationIcon(ic.getIcon(R.drawable.ic_arrow_back));
+		Drawable icBack = ic.getIcon(AndroidUtils.getNavigationIconResId(app));
+		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -529,7 +532,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 					TextView distanceOrTimeSpanText = (TextView) convertView.findViewById(R.id.distance_or_time_span_text);
 					if (position == 0) {
 						distanceOrTimeSpanImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_track_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
-						float totalDistance = joinSegments && gpxItem.isGeneralTrack() ? analysis.totalDistance : analysis.totalDistanceWithoutGaps;
+						float totalDistance = !joinSegments && gpxItem.isGeneralTrack() ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
 						distanceOrTimeSpanValue.setText(OsmAndFormatter.getFormattedDistance(totalDistance, app));
 						distanceOrTimeSpanText.setText(app.getString(R.string.distance));
 					} else {

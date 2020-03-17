@@ -2,9 +2,6 @@ package net.osmand.access;
 
 import android.app.Activity;
 import android.os.Build;
-import android.support.v4.view.AccessibilityDelegateCompat;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +9,10 @@ import android.view.accessibility.AccessibilityEvent;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import androidx.core.view.AccessibilityDelegateCompat;
+import androidx.core.view.ViewCompat;
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
 import net.osmand.plus.OsmandApplication;
 

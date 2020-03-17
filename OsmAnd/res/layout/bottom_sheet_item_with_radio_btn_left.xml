@@ -12,7 +12,7 @@
 	android:paddingEnd="@dimen/content_padding"
 	android:paddingStart="@dimen/content_padding">
 
-	<android.support.v7.widget.AppCompatRadioButton
+	<androidx.appcompat.widget.AppCompatRadioButton
 		android:id="@+id/compound_button"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"

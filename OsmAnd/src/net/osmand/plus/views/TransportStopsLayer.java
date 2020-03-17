@@ -9,9 +9,10 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
-import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+
+import androidx.core.content.ContextCompat;
 
 import net.osmand.ResultMatcher;
 import net.osmand.data.LatLon;

@@ -2054,7 +2054,7 @@
     <string name="gpx_no_tracks_title">Ainda não tem nenhum percurso</string>
     <string name="gpx_no_tracks_title_folder">Também pode adicionar ficheiros GPX ao diretório</string>
     <string name="gpx_add_track">Adicionar mais…</string>
-    <string name="gpx_appearance">Aparência</string>
+    <string name="shared_string_appearance">Aparência</string>
     <string name="trip_rec_notification_settings">Ativar a gravação de início rápido</string>
     <string name="trip_rec_notification_settings_desc">Mostrar uma notificação de sistema que permite iniciar a gravação da viagem.</string>
     <string name="shared_string_notifications">Notificações</string>

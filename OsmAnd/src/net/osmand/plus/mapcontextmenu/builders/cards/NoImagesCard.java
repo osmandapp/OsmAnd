@@ -1,13 +1,14 @@
 package net.osmand.plus.mapcontextmenu.builders.cards;
 
-import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import net.osmand.AndroidUtils;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 

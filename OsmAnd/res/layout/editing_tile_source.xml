@@ -112,7 +112,7 @@
             android:layout_height="wrap_content"
             android:text=""/>
 
-        <android.support.v7.widget.AppCompatCheckBox
+        <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/EllipticMercator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

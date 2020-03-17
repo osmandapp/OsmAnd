@@ -1,6 +1,6 @@
 package net.osmand.plus.measurementtool.command;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 import net.osmand.plus.measurementtool.command.MeasurementModeCommand.MeasurementCommandType;

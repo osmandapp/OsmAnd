@@ -2,8 +2,8 @@ package net.osmand.telegram.ui.views
 
 import android.content.Context
 import android.content.res.TypedArray
-import android.support.v7.widget.AppCompatTextView
 import android.util.AttributeSet
+import androidx.appcompat.widget.AppCompatTextView
 import net.osmand.telegram.R
 import net.osmand.telegram.helpers.FontCache
 

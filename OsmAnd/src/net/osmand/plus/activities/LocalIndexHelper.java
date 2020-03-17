@@ -2,8 +2,9 @@ package net.osmand.plus.activities;
 
 
 import android.content.Context;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.StringRes;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.StringRes;
 
 import net.osmand.IndexConstants;
 import net.osmand.map.ITileSource;

@@ -6,9 +6,10 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.os.Build;
-import android.support.v7.text.AllCapsTransformationMethod;
 import android.util.AttributeSet;
 import android.widget.TextView;
+
+import androidx.appcompat.text.AllCapsTransformationMethod;
 
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.FontCache;

@@ -23,9 +23,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.StatFs;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.Surface;
@@ -36,6 +33,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IProgress;

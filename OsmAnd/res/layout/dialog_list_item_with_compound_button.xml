@@ -27,7 +27,7 @@
 			android:layout_marginStart="@dimen/context_menu_padding_margin_large"
 			android:layout_marginEnd="@dimen/context_menu_padding_margin_large">
 			
-			<android.support.v7.widget.AppCompatRadioButton
+			<androidx.appcompat.widget.AppCompatRadioButton
 				android:id="@+id/radio"
 				android:checkMark="?android:attr/listChoiceIndicatorSingle"
 				android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
 				android:visibility="gone"
 				android:layout_gravity="center"/>
 
-			<android.support.v7.widget.AppCompatCheckBox
+			<androidx.appcompat.widget.AppCompatCheckBox
 				android:id="@+id/checkbox"
 				android:checkMark="?android:attr/listChoiceIndicatorMultiple"
 				android:layout_height="wrap_content"

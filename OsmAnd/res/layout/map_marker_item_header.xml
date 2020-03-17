@@ -29,7 +29,7 @@
             android:layout_width="@dimen/content_padding"
             android:layout_height="match_parent"/>
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -38,7 +38,7 @@
 	        android:textColor="?android:textColorPrimary"
             tools:text="Today"/>
 
-        <android.support.v7.widget.SwitchCompat
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/disable_group_switch"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

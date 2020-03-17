@@ -2,15 +2,13 @@ package net.osmand.telegram.ui
 
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import net.osmand.Location
 import net.osmand.data.LatLon
 import net.osmand.telegram.R
@@ -65,13 +63,13 @@ class SetTimeDialogFragment : BaseDialogFragment(), TelegramLocationListener, Te
 
 		updateTimeForAllRow()
 
-		view.findViewById<RecyclerView>(R.id.recycler_view).apply {
+		view.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.recycler_view).apply {
 			layoutManager = LinearLayoutManager(context)
 			adapter = this@SetTimeDialogFragment.adapter
-			addOnScrollListener(object : RecyclerView.OnScrollListener() {
-				override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+			addOnScrollListener(object : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
+				override fun onScrollStateChanged(recyclerView: androidx.recyclerview.widget.RecyclerView, newState: Int) {
 					super.onScrollStateChanged(recyclerView, newState)
-					locationUiUpdateAllowed = newState == RecyclerView.SCROLL_STATE_IDLE
+					locationUiUpdateAllowed = newState == androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
 				}
 			})
 		}
@@ -289,7 +287,7 @@ class SetTimeDialogFragment : BaseDialogFragment(), TelegramLocationListener, Te
 		adapter.items = items
 	}
 
-	inner class SetTimeListAdapter : RecyclerView.Adapter<ChatViewHolder>() {
+	inner class SetTimeListAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<ChatViewHolder>() {
 
 		var items: List<TdApi.Object> = emptyList()
 			set(value) {
@@ -384,7 +382,7 @@ class SetTimeDialogFragment : BaseDialogFragment(), TelegramLocationListener, Te
 
 		override fun getItemCount() = items.size
 
-		inner class ChatViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+		inner class ChatViewHolder(val view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 			val icon: ImageView? = view.findViewById(R.id.icon)
 			val title: TextView? = view.findViewById(R.id.title)
 			val directionIcon: ImageView? = view.findViewById(R.id.direction_icon)
@@ -408,7 +406,7 @@ class SetTimeDialogFragment : BaseDialogFragment(), TelegramLocationListener, Te
 		private const val DEFAULT_VISIBLE_TIME_SECONDS = 60 * 60L // 1 hour
 		private const val NO_VALUE = -1L
 
-		fun showInstance(fm: FragmentManager, chatIds: Set<Long>, usersIds: Set<Long>, target: Fragment): Boolean {
+		fun showInstance(fm: androidx.fragment.app.FragmentManager, chatIds: Set<Long>, usersIds: Set<Long>, target: androidx.fragment.app.Fragment): Boolean {
 			return try {
 				val chats = mutableListOf<Long>()
 				for (id in chatIds) {

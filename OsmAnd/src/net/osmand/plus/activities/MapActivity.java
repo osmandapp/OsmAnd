@@ -19,19 +19,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentManager.BackStackEntry;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceFragmentCompat;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -40,13 +27,25 @@ import android.view.View;
 import android.view.ViewStub;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
+import androidx.core.content.ContextCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentManager.BackStackEntry;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+
 import net.osmand.AndroidUtils;
-import net.osmand.CallbackWithObject;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.SecondSplashScreenFragment;
@@ -84,7 +83,6 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -115,7 +113,6 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
 import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
-import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.PlanRouteFragment;
@@ -128,7 +125,6 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenuFragment;
-import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
@@ -140,6 +136,7 @@ import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.settings.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.settings.ConfigureProfileFragment;
 import net.osmand.plus.settings.DataStorageFragment;
+import net.osmand.plus.settings.ImportCompleteFragment;
 import net.osmand.plus.settings.ImportSettingsFragment;
 import net.osmand.plus.settings.ProfileAppearanceFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
@@ -738,6 +735,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			importSettingsFragment.showExitDialog();
 			return;
 		}
+		ImportCompleteFragment importCompleteFragment = getImportCompleteFragment();
+		if (importCompleteFragment != null) {
+			importCompleteFragment.dismissFragment();
+			return;
+		}
 
 		super.onBackPressed();
 	}
@@ -907,7 +909,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 
 		app.getDownloadThread().setUiActivity(this);
-		app.getSettingsHelper().setActivity(this);
 
 		boolean routeWasFinished = routingHelper.isRouteWasFinished();
 		if (routeWasFinished && !DestinationReachedMenu.wasShown()) {
@@ -1132,10 +1133,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void dismissCardDialog() {
-		try {
-			getSupportFragmentManager().popBackStack(ContextMenuCardDialogFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-		} catch (Exception e) {
-			e.printStackTrace();
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		if (!fragmentManager.isStateSaved()) {
+			fragmentManager.popBackStack(ContextMenuCardDialogFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
 	}
 
@@ -1508,7 +1508,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app.getMapMarkersHelper().removeListener(this);
 		app.getRoutingHelper().removeListener(this);
 		app.getDownloadThread().resetUiActivity(this);
-		app.getSettingsHelper().resetActivity(this);
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnPause();
 		}
@@ -2170,10 +2169,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void dismissSettingsScreens() {
-		try {
-			getSupportFragmentManager().popBackStack(DRAWER_SETTINGS_ID + ".new", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-		} catch (Exception e) {
-			e.printStackTrace();
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		if (!fragmentManager.isStateSaved()) {
+			fragmentManager.popBackStack(DRAWER_SETTINGS_ID + ".new", FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
 	}
 
@@ -2457,10 +2455,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return getFragment(ImportSettingsFragment.TAG);
 	}
 
+	public ImportCompleteFragment getImportCompleteFragment() {
+		return getFragment(ImportCompleteFragment.TAG);
+	}
+
 	public void backToConfigureProfileFragment() {
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		int backStackEntryCount = fragmentManager.getBackStackEntryCount();
-		if (backStackEntryCount > 0) {
+		if (backStackEntryCount > 0 && !fragmentManager.isStateSaved()) {
 			BackStackEntry entry = fragmentManager.getBackStackEntryAt(backStackEntryCount - 1);
 			if (ConfigureProfileFragment.TAG.equals(entry.getName())) {
 				fragmentManager.popBackStack();

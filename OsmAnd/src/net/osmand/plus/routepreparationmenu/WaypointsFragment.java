@@ -1,15 +1,10 @@
 package net.osmand.plus.routepreparationmenu;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.annotation.ColorRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -22,6 +17,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
@@ -115,7 +117,8 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		listView.setDynamicListViewCallbacks(this);
 
 		final ImageView backButton = (ImageView) view.findViewById(R.id.back_button);
-		backButton.setImageDrawable(getContentIcon(R.drawable.ic_arrow_back));
+		Drawable icBack = getContentIcon(AndroidUtils.getNavigationIconResId(mapActivity));
+		backButton.setImageDrawable(icBack);
 		backButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

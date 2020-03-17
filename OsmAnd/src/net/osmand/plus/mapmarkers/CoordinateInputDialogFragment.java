@@ -13,21 +13,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v4.widget.TextViewCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.PopupMenu;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -52,12 +37,29 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.core.widget.TextViewCompat;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
+
 import net.osmand.AndroidUtils;
-import net.osmand.IndexConstants;
-import net.osmand.Location;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.IndexConstants;
+import net.osmand.Location;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
@@ -281,7 +283,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		TextView optionsButton = mainView.findViewById(R.id.options_button);
 
 		if (orientationPortrait) {
-			backBtn.setImageDrawable(getColoredIcon(R.drawable.ic_arrow_back, lightTheme ? R.color.color_black : R.color.active_buttons_and_links_text_dark));
+			Drawable icBack = getColoredIcon(AndroidUtils.getNavigationIconResId(getContext()), lightTheme ? R.color.color_black : R.color.active_buttons_and_links_text_dark);
+			backBtn.setImageDrawable(icBack);
 			optionsButton.setTextColor(getResolvedColor(lightTheme ? R.color.active_color_primary_light : R.color.active_color_primary_dark));
 			TextView toolbar = (TextView) mainView.findViewById(R.id.toolbar_text);
 			toolbar.setTextColor(getResolvedColor(lightTheme ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
@@ -289,7 +292,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			setBackgroundColor(R.id.app_bar, lightTheme ? R.color.route_info_bg_light : R.color.route_info_bg_dark);
 			setBackgroundColor(mainView, lightTheme ? R.color.activity_background_color_light : R.color.activity_background_color_dark);
 		} else {
-			backBtn.setImageDrawable(getColoredIcon(R.drawable.ic_arrow_back, lightTheme ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark));
+			Drawable icBack = getColoredIcon(AndroidUtils.getNavigationIconResId(getContext()), lightTheme ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark);
+			backBtn.setImageDrawable(icBack);
 			optionsButton.setTextColor(getResolvedColor(lightTheme ? R.color.color_white : R.color.active_color_primary_dark));
 			TextView toolbar = (TextView) mainView.findViewById(R.id.toolbar_text);
 			toolbar.setTextColor(getResolvedColor(lightTheme ? R.color.color_white : R.color.text_color_primary_dark));

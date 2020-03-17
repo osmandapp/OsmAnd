@@ -1059,7 +1059,7 @@
     <string name="shared_string_continue">המשך</string>
     <string name="shared_string_record">הקלטה</string>
     <string name="gpx_logging_no_data">אין נתונים</string>
-    <string name="gpx_appearance">מראה</string>
+    <string name="shared_string_appearance">מראה</string>
     <string name="shared_string_trip">נסיעה</string>
     <string name="shared_string_notifications">התראות</string>
     <string name="shared_string_pause">הפסקה</string>
@@ -3505,4 +3505,27 @@
     <string name="shared_string_rendering_style">סגנון העיבוד</string>
     <string name="import_duplicates_title">חלק מהפריטים קיימים</string>
     <string name="select_data_to_import">נא לבחור את הנתונים לייבוא.</string>
+    <string name="import_profile_dialog_description">הפרופיל המיובא מכיל נתונים נוספים. יש ללחוץ על ייבוא כדי לייבא את נתוני הפרופיל בלבד או לבחור בנתונים נוספים לייבוא.</string>
+    <string name="shared_string_preparing">בהכנה</string>
+    <string name="shared_string_poi_types">סוגי נקודות עניין</string>
+    <string name="shared_string_nothing_selected">שום דבר לא נבחר</string>
+    <string name="shared_string_quick_actions">פעולות מהירות</string>
+    <string name="shared_string_profiles">פרופילים</string>
+    <string name="replace_all_desc">הפריטים הנוכחיים יוחלפו בפריטים מהקובץ</string>
+    <string name="replace_all">להחליף הכול</string>
+    <string name="keep_both">להשאיר את שניהם</string>
+    <string name="keep_both_desc">הפריטים הנוכחיים יתווספו עם קידומת</string>
+    <string name="import_duplicates_description">ל־OsmAnd כבר יש פריטים באותם השמות כמו אלו המיובאים.
+\n
+\nנא לבחור פעולה.</string>
+    <string name="import_rendering_file">ייבוא קובץ עיבוד</string>
+    <string name="multimedia_use_system_camera">להשתמש ביישומון המערכת</string>
+    <string name="multimedia_photo_play_sound">צליל צמצם מצלמה</string>
+    <string name="osm_authorization_success">האימות הצליח</string>
+    <string name="sort_by_category">מיון לפי קטגוריה</string>
+    <string name="index_name_antarctica">אנטארקטיקה</string>
+    <string name="restore_all_profile_settings_descr">כל הגדרות הפרופיל ישוחזרו למצבן המקורי לאחר יצירת/ייבוא הפרופיל הזה.</string>
+    <string name="restore_all_profile_settings">לשחזר את כל הגדרות הפרופיל\?</string>
+    <string name="saving_new_profile">שמירת פרופיל חדש</string>
+    <string name="profile_backup_failed">לא ניתן לגבות את הפרופיל.</string>
 </resources>

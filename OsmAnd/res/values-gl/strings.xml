@@ -1913,7 +1913,7 @@ Lon %2$s</string>
     <string name="gpx_no_tracks_title">Aínda non tes ningún ficheiro GPX</string>
     <string name="gpx_no_tracks_title_folder">Tamén podes engadir ficheiros GPX ó cartafol</string>
     <string name="gpx_add_track">Engadir máis…</string>
-    <string name="gpx_appearance">Aparencia</string>
+    <string name="shared_string_appearance">Aparencia</string>
     <string name="trip_rec_notification_settings">Activar a gravación rápida</string>
     <string name="trip_rec_notification_settings_desc">Amosa unha notificación do sistema que permite a gravación da viaxe.</string>
     <string name="shared_string_notifications">Notificacións</string>
@@ -3616,4 +3616,9 @@ Lon %2$s</string>
     <string name="import_duplicates_title">Algúns elementos xa existen</string>
     <string name="select_data_to_import">Selecciona os datos para ser importados.</string>
     <string name="shared_string_rendering_style">Estilo da renderización</string>
+    <string name="import_rendering_file">Importar ficheiro de renderización</string>
+    <string name="restore_all_profile_settings_descr">Todos os axustes de perfil restabeleceranse ó seu estado orixinal após crear/importar este perfil.</string>
+    <string name="restore_all_profile_settings">Restabelecer todos os axustes de perfil\?</string>
+    <string name="saving_new_profile">Gardando novo perfil</string>
+    <string name="profile_backup_failed">Non foi posíbel facer unha copia de seguranza do perfil.</string>
 </resources>

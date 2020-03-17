@@ -7,10 +7,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.ListPopupWindow;
-import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.Gravity;
@@ -23,6 +19,11 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.ListPopupWindow;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
@@ -69,7 +70,8 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 		mainView = UiUtilities.getInflater(getContext(), !settings.isLightContent()).inflate(R.layout.fragment_direction_indication_dialog, container);
 
 		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(getIconsCache().getIcon(R.drawable.ic_arrow_back));
+		int navigationIconResId = AndroidUtils.getNavigationIconResId(getContext());
+		toolbar.setNavigationIcon(getIconsCache().getIcon(navigationIconResId));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override

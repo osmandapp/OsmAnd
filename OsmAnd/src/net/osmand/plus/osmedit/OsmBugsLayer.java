@@ -9,12 +9,13 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.os.AsyncTask;
-import android.support.v7.app.AlertDialog;
 import android.util.Xml;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;

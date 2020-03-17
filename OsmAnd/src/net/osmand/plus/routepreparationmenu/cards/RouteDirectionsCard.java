@@ -2,13 +2,14 @@ package net.osmand.plus.routepreparationmenu.cards;
 
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
-import android.support.annotation.NonNull;
-import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.view.ContextThemeWrapper;
 
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;

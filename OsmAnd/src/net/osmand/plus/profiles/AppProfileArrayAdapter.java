@@ -1,10 +1,7 @@
 package net.osmand.plus.profiles;
 
 import android.app.Activity;
-import android.app.Application;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.system.Os;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +9,13 @@ import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import java.util.List;
+
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+
+import java.util.List;
 
 public class AppProfileArrayAdapter extends ArrayAdapter<ProfileDataObject> {
 

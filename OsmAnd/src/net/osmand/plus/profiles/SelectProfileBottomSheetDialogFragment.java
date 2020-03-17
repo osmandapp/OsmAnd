@@ -3,10 +3,6 @@ package net.osmand.plus.profiles;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -15,6 +11,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
@@ -160,14 +161,13 @@ public class SelectProfileBottomSheetDialogFragment extends BasePreferenceBottom
 					if (mapActivity == null) {
 						return;
 					}
-					mapActivity.getImportHelper().chooseFileToImport(ROUTING, false,
-							new CallbackWithObject<RoutingConfiguration.Builder>() {
-								@Override
-								public boolean processResult(RoutingConfiguration.Builder builder) {
-									refreshView();
-									return false;
-								}
-							});
+					mapActivity.getImportHelper().chooseFileToImport(ROUTING, new CallbackWithObject<RoutingConfiguration.Builder>() {
+						@Override
+						public boolean processResult(RoutingConfiguration.Builder builder) {
+							refreshView();
+							return false;
+						}
+					});
 				}
 			});
 			items.add(new BaseBottomSheetItem.Builder()

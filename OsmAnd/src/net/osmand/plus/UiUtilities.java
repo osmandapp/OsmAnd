@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -11,18 +12,9 @@ import android.graphics.drawable.RippleDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Build;
-import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.widget.TintableCompoundButton;
-import android.support.v7.view.ContextThemeWrapper;
-import android.support.v7.widget.SwitchCompat;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,17 +24,36 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.widget.TintableCompoundButton;
+
+import com.google.android.material.snackbar.Snackbar;
+
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.widgets.TextViewEx;
+
+import org.apache.commons.logging.Log;
 
 import java.util.Locale;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class UiUtilities {
+
+	private static final Log LOG = PlatformUtil.getLog(UiUtilities.class);
 
 	private TLongObjectHashMap<Drawable> drawableCache = new TLongObjectHashMap<>();
 	private OsmandApplication app;
@@ -360,8 +371,8 @@ public class UiUtilities {
 		}
 		View view = snackbar.getView();
 		Context ctx = view.getContext();
-		TextView tvMessage = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
-		TextView tvAction = (TextView) view.findViewById(android.support.design.R.id.snackbar_action);
+		TextView tvMessage = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_text);
+		TextView tvAction = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_action);
 		if (messageColor == null) {
 			messageColor = nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
 		}
@@ -383,13 +394,8 @@ public class UiUtilities {
 		if (image == null) {
 			return;
 		}
-		int rotation = layoutDirection == View.LAYOUT_DIRECTION_LTR ? 0 : 180;
+		int rotation = layoutDirection == ViewCompat.LAYOUT_DIRECTION_RTL ? 180 : 0;
 		image.setRotationY(rotation);
-	}
-	
-	public static void setupLayoutDirection(View layout) {
-		int direction = AndroidUtils.getLayoutDirection(layout.getContext());
-		ViewCompat.setLayoutDirection(layout, direction);
 	}
 
 	public static void setupCompoundButtonDrawable(Context ctx, boolean nightMode, @ColorInt int activeColor, Drawable drawable) {
@@ -557,6 +563,22 @@ public class UiUtilities {
 			ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
 			p.setMargins(l, t, r, b);
 			v.requestLayout();
+		}
+	}
+
+	public static SpannableString createSpannableString(@NonNull String text, @NonNull String textToStyle, @NonNull StyleSpan styleSpan) {
+		SpannableString spannable = new SpannableString(text);
+		try {
+			int startIndex = text.indexOf(textToStyle);
+			spannable.setSpan(
+					styleSpan,
+					startIndex,
+					startIndex + textToStyle.length(),
+					Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+			return spannable;
+		} catch (RuntimeException e) {
+			LOG.error("Error trying to find index of " + textToStyle + " " + e);
+			return spannable;
 		}
 	}
 }

@@ -11,6 +11,18 @@
 	Thx - Hardy
 
 -->
+    <string name="clear_recorded_data_warning">Are you sure you want to clear recorded data?</string>
+    <string name="restore_all_profile_settings_descr">All profile settings will be restored to their original state after creating/importing this profile.</string>
+    <string name="restore_all_profile_settings">Restore all profile settings?</string>
+    <string name="saving_new_profile">Saving new profile</string>
+    <string name="profile_backup_failed">Could not back up profile.</string>
+    <string name="importing_from">Importing data from %1$s</string>
+    <string name="shared_string_importing">Importing</string>
+    <string name="checking_for_duplicate_description">OsmAnd check %1$s for duplicates with existing items in the application.\n\nIt may take some time.</string>
+    <string name="items_added">Items added</string>
+    <string name="shared_string_import_complete">Import complete</string>
+    <string name="import_complete_description">All data from the %1$s is imported, you can use buttons below to open needed part of the application to manage it.</string>
+    <string name="import_rendering_file">Import rendering file</string>
     <string name="profile_type_custom_string">Custom profile</string>
     <string name="shared_string_angle_param">Angle: %s°</string>
     <string name="shared_string_angle">Angle</string>
@@ -26,7 +38,7 @@
     <string name="replace_all_desc">Current items will be replaced with items from the file</string>
     <string name="replace_all">Replace all</string>
     <string name="keep_both">Keep both</string>
-    <string name="keep_both_desc">Imported items will be added with prexif</string>
+    <string name="keep_both_desc">Imported items will be added with prefix</string>
     <string name="import_duplicates_description">OsmAnd already has elements with the same names as those imported.\n\nSelect an action.</string>
     <string name="import_duplicates_title">Some items already exist</string>
     <string name="select_data_to_import">Select the data to be imported.</string>
@@ -283,7 +295,6 @@
     <string name="route_parameters_info">Settings for routing in the selected profile \"%1$s\".</string>
     <string name="wake_time">Wake time</string>
     <string name="units_and_formats">Units &amp; formats</string>
-    <string name="appearance">Appearance</string>
     <string name="map_look_descr">Map appearance</string>
     <string name="map_look">Map look</string>
     <string name="list_of_installed_plugins">Installed plugins</string>
@@ -1153,7 +1164,7 @@
     <string name="gpx_no_tracks_title">You do not have any GPX files yet</string>
     <string name="gpx_no_tracks_title_folder">You may also add GPX files to the folder</string>
     <string name="gpx_add_track">Add more…</string>
-    <string name="gpx_appearance">Appearance</string>
+    <string name="shared_string_appearance">Appearance</string>
     <string name="trip_rec_notification_settings">Turn on quick recording</string>
     <string name="trip_rec_notification_settings_desc">Display a system notification allowing trip recording.</string>
     <string name="shared_string_notifications">Notifications</string>

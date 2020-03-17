@@ -6,9 +6,10 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.Nullable;
 import android.view.View;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;

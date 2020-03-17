@@ -5,7 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.SystemClock;
 import android.os.Vibrator;
-import android.support.v7.app.AlertDialog;
+
+import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;

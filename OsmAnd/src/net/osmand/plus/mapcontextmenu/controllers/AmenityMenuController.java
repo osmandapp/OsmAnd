@@ -1,8 +1,9 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;

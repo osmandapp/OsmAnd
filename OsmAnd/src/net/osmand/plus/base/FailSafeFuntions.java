@@ -5,13 +5,14 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnDismissListener;
 import android.os.AsyncTask;
 import android.os.Handler;
-import android.support.v7.app.AlertDialog;
 import android.widget.TextView;
 
-import net.osmand.PlatformUtil;
-import net.osmand.data.LatLon;
+import androidx.appcompat.app.AlertDialog;
+
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;

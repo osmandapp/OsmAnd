@@ -10,11 +10,6 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.support.design.widget.AppBarLayout
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
@@ -23,6 +18,11 @@ import android.util.TypedValue
 import android.view.*
 import android.view.animation.LinearInterpolator
 import android.widget.*
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.appbar.AppBarLayout
 import net.osmand.PlatformUtil
 import net.osmand.telegram.*
 import net.osmand.telegram.helpers.LocationMessages
@@ -206,15 +206,15 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				.setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_action_search_dark))
 		}
 
-		mainView.findViewById<RecyclerView>(R.id.recycler_view).apply {
+		mainView.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.recycler_view).apply {
 			layoutManager = LinearLayoutManager(context)
 			adapter = this@MyLocationTabFragment.adapter
-			addOnScrollListener(object : RecyclerView.OnScrollListener() {
-				override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+			addOnScrollListener(object : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
+				override fun onScrollStateChanged(recyclerView: androidx.recyclerview.widget.RecyclerView, newState: Int) {
 					super.onScrollStateChanged(recyclerView, newState)
 					when (newState) {
-						RecyclerView.SCROLL_STATE_DRAGGING -> animateStartSharingBtn(false)
-						RecyclerView.SCROLL_STATE_IDLE -> animateStartSharingBtn(true)
+						androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING -> animateStartSharingBtn(false)
+						androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE -> animateStartSharingBtn(true)
 					}
 				}
 			})
@@ -614,7 +614,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	}
 
 	inner class MyLocationListAdapter :
-		RecyclerView.Adapter<MyLocationListAdapter.BaseViewHolder>() {
+		androidx.recyclerview.widget.RecyclerView.Adapter<MyLocationListAdapter.BaseViewHolder>() {
 		var items = mutableListOf<Any>()
 			set(value) {
 				field = value
@@ -921,7 +921,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 		override fun getItemCount() = items.size
 
-		abstract inner class BaseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+		abstract inner class BaseViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 			val icon: ImageView? = view.findViewById(R.id.icon)
 			val title: TextView? = view.findViewById(R.id.title)
 			val description: TextView? = view.findViewById(R.id.description)

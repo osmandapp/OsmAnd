@@ -1,13 +1,12 @@
 package net.osmand.plus.activities;
 
 import android.annotation.SuppressLint;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
+
+import net.osmand.AndroidUtils;
+import androidx.appcompat.app.ActionBar;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -20,7 +19,7 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity {
     //should be called after set content view
     protected void setupHomeButton() {
     	boolean lightTheme = getMyApplication().getSettings().isLightContent();
-        Drawable back = ((OsmandApplication)getApplication()).getUIUtilities().getIcon(R.drawable.ic_arrow_back,
+        Drawable back = ((OsmandApplication)getApplication()).getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(getApplication()),
 				lightTheme ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark);
         final ActionBar supportActionBar = getSupportActionBar();
         if (supportActionBar != null) {

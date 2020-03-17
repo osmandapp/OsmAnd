@@ -1,7 +1,8 @@
 package net.osmand.plus.measurementtool;
 
-import android.support.annotation.Nullable;
 import android.util.Pair;
+
+import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;

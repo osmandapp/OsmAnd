@@ -1,12 +1,12 @@
 package net.osmand.plus.quickaction.actions;
 
 import android.content.Context;
-import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import net.osmand.plus.ApplicationMode;
+import androidx.appcompat.widget.SwitchCompat;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;

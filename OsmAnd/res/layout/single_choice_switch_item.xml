@@ -10,7 +10,7 @@
         android:layout_height="1dp"
         android:layout_width="wrap_content"/>
 
-    <android.support.v7.widget.AppCompatCheckedTextView
+    <androidx.appcompat.widget.AppCompatCheckedTextView
         android:checkMark="?android:attr/listChoiceIndicatorSingle"
         android:gravity="center_vertical"
         android:id="@+id/text1"
@@ -45,7 +45,7 @@
             android:textSize="@dimen/default_sub_text_size"
 	        android:paddingEnd="@dimen/list_content_padding" />
 
-        <android.support.v7.widget.SwitchCompat
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/check"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"/>

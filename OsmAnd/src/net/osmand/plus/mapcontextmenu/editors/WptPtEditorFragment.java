@@ -6,15 +6,16 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.view.View;
 
-import net.osmand.data.LatLon;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.data.LatLon;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.MapMarkersHelper;

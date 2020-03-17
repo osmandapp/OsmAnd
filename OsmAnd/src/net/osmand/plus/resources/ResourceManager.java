@@ -5,11 +5,12 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteException;
 import android.os.HandlerThread;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GeoidAltitudeCorrection;

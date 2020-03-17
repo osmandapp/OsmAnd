@@ -1,18 +1,19 @@
 package net.osmand.plus.mapmarkers.adapters;
 
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.UiUtilities;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
+
 import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

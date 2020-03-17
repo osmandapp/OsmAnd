@@ -1,6 +1,6 @@
 package net.osmand.plus.resources;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;

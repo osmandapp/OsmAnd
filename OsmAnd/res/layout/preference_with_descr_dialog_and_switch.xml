@@ -67,7 +67,7 @@
 			android:layout_marginBottom="18dp"
 			android:background="?attr/divider_color_basic" />
 
-		<android.support.v7.widget.SwitchCompat
+		<androidx.appcompat.widget.SwitchCompat
 			android:id="@+id/switchWidget"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"

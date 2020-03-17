@@ -1620,7 +1620,7 @@
     <string name="wiki_around">Nærliggende Wikipiedia-artikler</string>
     <string name="route_roundabout_short">Ta %1$d avkjørsel og fortsett</string>
     <string name="route_calculation">Ruteberegning</string>
-    <string name="gpx_appearance">Utseende</string>
+    <string name="shared_string_appearance">Utseende</string>
     <string name="shared_string_notifications">Varsler</string>
     <string name="shared_string_continue">Fortsett</string>
     <string name="shared_string_pause">Pause</string>

@@ -2055,7 +2055,7 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="gpx_no_tracks_title">Még nincsenek GPX fájljaid</string>
     <string name="gpx_no_tracks_title_folder">A mappához GPX-fájlokat is hozzáadhat</string>
     <string name="gpx_add_track">Továbbiak hozzáadása…</string>
-    <string name="gpx_appearance">Megjelenés</string>
+    <string name="shared_string_appearance">Megjelenés</string>
     <string name="trip_rec_notification_settings">Gyors rögzítés bekapcsolása</string>
     <string name="trip_rec_notification_settings_desc">Az útvonalrögzítést lehetővé tevő rendszerértesítés megjelenítése.</string>
     <string name="shared_string_notifications">Értesítések</string>
@@ -3459,4 +3459,23 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="profile_prefs_reset_successful">Minden profilbeállítás visszaállt az alapértelmezett helyzetbe.</string>
     <string name="sunset_at">Napnyugta: %1$s</string>
     <string name="sunrise_at">Napkelte: %1$s</string>
+    <string name="shared_string_app_default_w_val">Alkalmazás alapértelmezett (%s)</string>
+    <string name="profile_type_custom_string">Egyéni profil</string>
+    <string name="shared_string_angle_param">Szög: %s°</string>
+    <string name="shared_string_angle">Szög</string>
+    <string name="recalc_angle_dialog_descr">Egy egyenes szakasz fog megjelenni a helyzetem és a tervezett útvonal között, amíg az útvonal újraszámításra kerül</string>
+    <string name="recalc_angle_dialog_title">Legkisebb szög a helyzetem és az útvonal között</string>
+    <string name="shared_string_preparing">Előkészület</string>
+    <string name="shared_string_poi_types">POI típusok</string>
+    <string name="shared_string_nothing_selected">Nincs kiválasztott</string>
+    <string name="shared_string_quick_actions">Gyorsműveletek</string>
+    <string name="shared_string_profiles">Profilok</string>
+    <string name="import_rendering_file">Renderfájl importálása</string>
+    <string name="restore_all_profile_settings_descr">Az összes profilbeállítás visszaállításra kerül az eredeti állapotába ezen profil létrehozása/importálása után.</string>
+    <string name="restore_all_profile_settings">Visszaállítja a profil összes beállítását\?</string>
+    <string name="saving_new_profile">Új profil mentése</string>
+    <string name="profile_backup_failed">Profil biztonsági mentése sikertelen.</string>
+    <string name="clear_recorded_data_warning">Biztosan törölni szeretné a rögzített adatokat\?</string>
+    <string name="importing_from">Adatok importálása innen: %1$s</string>
+    <string name="shared_string_importing">Importálás</string>
 </resources>

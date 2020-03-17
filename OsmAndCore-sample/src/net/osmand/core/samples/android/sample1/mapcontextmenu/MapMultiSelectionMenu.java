@@ -1,7 +1,7 @@
 package net.osmand.core.samples.android.sample1.mapcontextmenu;
 
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import net.osmand.core.samples.android.sample1.MainActivity;
 import net.osmand.core.samples.android.sample1.data.PointDescription;

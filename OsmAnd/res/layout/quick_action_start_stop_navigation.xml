@@ -46,7 +46,7 @@
             android:textColor="?android:textColorPrimary"
             android:textSize="@dimen/default_list_text_size"/>
 
-        <android.support.v7.widget.SwitchCompat
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/show_dialog_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

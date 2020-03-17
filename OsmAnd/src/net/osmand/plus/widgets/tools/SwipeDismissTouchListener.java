@@ -2,14 +2,15 @@ package net.osmand.plus.widgets.tools;
 
 import android.app.ListActivity;
 import android.app.ListFragment;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import androidx.core.view.ViewCompat;
+import androidx.core.view.ViewPropertyAnimatorListener;
 
 /**
  * A {@link View.OnTouchListener} that makes any {@link View} dismissable when the
