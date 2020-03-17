@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -78,23 +78,35 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		FavoritePointEditor editor = getFavoritePointEditor();
-		if (view != null && editor != null && editor.isNew()) {
-			Button replaceButton = (Button) view.findViewById(R.id.replace_button);
-			replaceButton.setTextColor(getResources().getColor(!editor.isLight() ? R.color.osmand_orange : R.color.map_widget_blue));
+		if (view != null) {
+			View replaceButton = view.findViewById(R.id.button_replace_container);
 			replaceButton.setVisibility(View.VISIBLE);
 			replaceButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Bundle args = new Bundle();
-					args.putSerializable(FavoriteDialogs.KEY_FAVORITE, getFavorite());
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						FavoriteDialogs.createReplaceFavouriteDialog(activity, args);
-					}
+					replacePressed();
 				}
 			});
+			if (editor != null && editor.isNew()) {
+				ImageView toolbarAction = (ImageView) view.findViewById(R.id.toolbar_action);
+				toolbarAction.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						replacePressed();
+					}
+				});
+			}
 		}
 		return view;
+	}
+
+	private void replacePressed() {
+		Bundle args = new Bundle();
+		args.putSerializable(FavoriteDialogs.KEY_FAVORITE, getFavorite());
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			FavoriteDialogs.createReplaceFavouriteDialog(activity, args);
+		}
 	}
 
 	@Override

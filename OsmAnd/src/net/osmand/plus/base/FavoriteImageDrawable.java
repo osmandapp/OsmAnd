@@ -63,9 +63,9 @@ public class FavoriteImageDrawable extends Drawable {
 		int uiBackgroundIconId = point != null ? point.getBackgroundType().getIconId() : R.drawable.bg_point_circle;
 		uiBackgroundIcon = ((OsmandApplication) ctx.getApplicationContext()).getUIUtilities()
 				.getPaintedIcon(uiBackgroundIconId, col);
-		int mapBackgroundIconIdTop = getMapBackIconId(ctx, point, "top");
-		int mapBackgroundIconIdCenter = getMapBackIconId(ctx, point, "center");
-		int mapBackgroundIconIdBottom = getMapBackIconId(ctx, point, "bottom");
+		int mapBackgroundIconIdTop = getMapBackgroundIconId(ctx, point, "top");
+		int mapBackgroundIconIdCenter = getMapBackgroundIconId(ctx, point, "center");
+		int mapBackgroundIconIdBottom = getMapBackgroundIconId(ctx, point, "bottom");
 		favBackgroundTop = BitmapFactory.decodeResource(res, mapBackgroundIconIdTop);
 		favBackgroundCenter = BitmapFactory.decodeResource(res, mapBackgroundIconIdCenter);
 		favBackgroundBottom = BitmapFactory.decodeResource(res, mapBackgroundIconIdBottom);
@@ -83,7 +83,7 @@ public class FavoriteImageDrawable extends Drawable {
 				.replaceFirst("mx_", "mm_"), "drawable", ctx.getPackageName());
 	}
 
-	private int getMapBackIconId(Context ctx, FavouritePoint point, String layer) {
+	private int getMapBackgroundIconId(Context ctx, FavouritePoint point, String layer) {
 		if (point != null) {
 			int iconId = point.getBackgroundType().getIconId();
 			String iconName = ctx.getResources().getResourceEntryName(iconId);

@@ -299,17 +299,24 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	public enum BackgroundType {
-		CIRCLE("circle", R.drawable.bg_point_circle),
-		RHOMB("rhomb", R.drawable.bg_point_rhomb),
-		SQUARE("square", R.drawable.bg_point_square);
+		CIRCLE("circle", R.string.shared_string_circle, R.drawable.bg_point_circle),
+		RHOMB("rhomb", R.string.shared_string_rhomb, R.drawable.bg_point_rhomb),
+		SQUARE("square", R.string.shared_string_square, R.drawable.bg_point_square);
 
 		private String typeName;
 		@StringRes
+		private int nameId;
+		@DrawableRes
 		private int iconId;
 
-		BackgroundType(@NonNull String typeName, @DrawableRes int iconId) {
+		BackgroundType(@NonNull String typeName, @StringRes int nameId, @DrawableRes int iconId) {
 			this.typeName = typeName;
+			this.nameId = nameId;
 			this.iconId = iconId;
+		}
+
+		public int getNameId() {
+			return nameId;
 		}
 
 		public int getIconId() {

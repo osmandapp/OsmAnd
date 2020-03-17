@@ -14,7 +14,7 @@
 		android:layout_width="48dp"
 		android:layout_height="48dp"
 		android:visibility="invisible"
-		app:srcCompat="@drawable/circle_contour_bg_light" />
+		app:srcCompat="@drawable/bg_point_circle_contour" />
 
 	<ImageView
 		android:id="@+id/background"
