@@ -1,14 +1,22 @@
 package net.osmand.plus;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import net.osmand.map.ITileSource;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 public class CustomOsmandPlugin extends OsmandPlugin {
@@ -76,7 +84,112 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		json.put("name", getName());
 		json.put("Description", getDescription());
 
+		saveAdditionalItemsToJson(json);
+
 		return json.toString();
+	}
+
+	public void saveAdditionalItemsToJson(JSONObject json) throws JSONException {
+		if (!appModes.isEmpty()) {
+			List<String> appModesKeys = new ArrayList<>();
+			for (ApplicationMode mode : appModes) {
+				appModesKeys.add(mode.getStringKey());
+			}
+			JSONArray appModesJson = new JSONArray(appModesKeys);
+			json.put("appModes", appModesJson);
+		}
+		if (!rendererNames.isEmpty()) {
+			JSONArray rendererNamesJson = new JSONArray(rendererNames);
+			json.put("rendererNames", rendererNamesJson);
+		}
+		if (!routerNames.isEmpty()) {
+			JSONArray rendererNamesJson = new JSONArray(routerNames);
+			json.put("routerNames", rendererNamesJson);
+		}
+
+		savePoiUIFiltersToJson(json);
+		saveMapSourcesToJson(json);
+		saveQuickActionsToJson(json);
+		saveAvoidRoadsToJson(json);
+	}
+
+	private void savePoiUIFiltersToJson(JSONObject json) throws JSONException {
+		if (!poiUIFilters.isEmpty()) {
+			JSONArray jsonArray = new JSONArray();
+			Gson gson = new Gson();
+			Type type = new TypeToken<HashMap<PoiCategory, LinkedHashSet<String>>>() {
+			}.getType();
+			for (PoiUIFilter filter : poiUIFilters) {
+				JSONObject jsonObject = new JSONObject();
+				jsonObject.put("name", filter.getName());
+				jsonObject.put("filterId", filter.getFilterId());
+				jsonObject.put("acceptedTypes", gson.toJson(filter.getAcceptedTypes(), type));
+				jsonArray.put(jsonObject);
+			}
+			json.put("poiUIFilters", jsonArray);
+		}
+	}
+
+	private void saveMapSourcesToJson(JSONObject json) throws JSONException {
+		if (!mapSources.isEmpty()) {
+			JSONArray jsonArray = new JSONArray();
+			for (ITileSource template : mapSources) {
+				JSONObject jsonObject = new JSONObject();
+				boolean sql = template instanceof SQLiteTileSource;
+				jsonObject.put("sql", sql);
+				jsonObject.put("name", template.getName());
+				jsonObject.put("minZoom", template.getMinimumZoomSupported());
+				jsonObject.put("maxZoom", template.getMaximumZoomSupported());
+				jsonObject.put("url", template.getUrlTemplate());
+				jsonObject.put("randoms", template.getRandoms());
+				jsonObject.put("ellipsoid", template.isEllipticYTile());
+				jsonObject.put("inverted_y", template.isInvertedYTile());
+				jsonObject.put("referer", template.getReferer());
+				jsonObject.put("timesupported", template.isTimeSupported());
+				jsonObject.put("expire", template.getExpirationTimeMillis());
+				jsonObject.put("inversiveZoom", template.getInversiveZoom());
+				jsonObject.put("ext", template.getTileFormat());
+				jsonObject.put("tileSize", template.getTileSize());
+				jsonObject.put("bitDensity", template.getBitDensity());
+				jsonObject.put("avgSize", template.getAvgSize());
+				jsonObject.put("rule", template.getRule());
+				jsonArray.put(jsonObject);
+			}
+			json.put("mapSources", jsonArray);
+		}
+	}
+
+	private void saveAvoidRoadsToJson(JSONObject json) throws JSONException {
+		if (!avoidRoadInfos.isEmpty()) {
+			JSONArray jsonArray = new JSONArray();
+			for (AvoidSpecificRoads.AvoidRoadInfo avoidRoad : avoidRoadInfos) {
+				JSONObject jsonObject = new JSONObject();
+				jsonObject.put("latitude", avoidRoad.latitude);
+				jsonObject.put("longitude", avoidRoad.longitude);
+				jsonObject.put("name", avoidRoad.name);
+				jsonObject.put("appModeKey", avoidRoad.appModeKey);
+				jsonArray.put(jsonObject);
+			}
+			json.put("avoidRoadInfos", jsonArray);
+		}
+	}
+
+	private void saveQuickActionsToJson(JSONObject json) throws JSONException {
+		if (!quickActions.isEmpty()) {
+			JSONArray jsonArray = new JSONArray();
+			Gson gson = new Gson();
+			Type type = new TypeToken<HashMap<String, String>>() {
+			}.getType();
+
+			for (QuickAction action : quickActions) {
+				JSONObject jsonObject = new JSONObject();
+				jsonObject.put("name", action.hasCustomName(app) ? action.getName(app) : "");
+				jsonObject.put("type", action.getType());
+				jsonObject.put("params", gson.toJson(action.getParams(), type));
+				jsonArray.put(jsonObject);
+			}
+			json.put("quickActions", jsonArray);
+		}
 	}
 
 	@Override

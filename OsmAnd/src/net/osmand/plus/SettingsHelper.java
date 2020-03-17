@@ -229,6 +229,7 @@ public class SettingsHelper {
 		PluginSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			super(SettingsItemType.PLUGIN, json);
 			this.app = app;
+			readFromJson(app, json);
 		}
 
 		@NonNull
@@ -257,8 +258,7 @@ public class SettingsHelper {
 			return pluginItems;
 		}
 
-		@Override
-		void readFromJson(@NonNull JSONObject json) throws JSONException {
+		void readFromJson(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			String pluginId = json.getString("pluginId");
 			String name = json.getString("name");
 			String description = json.getString("Description");
@@ -554,6 +554,7 @@ public class SettingsHelper {
 		public ProfileSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			super(SettingsItemType.PROFILE, app.getSettings(), json);
 			this.app = app;
+			readFromJson(app, json);
 			appModeBeanPrefsIds = new HashSet<>(Arrays.asList(app.getSettings().appModeBeanPrefsIds));
 		}
 
@@ -589,8 +590,7 @@ public class SettingsHelper {
 			return "profile_" + getName() + ".json";
 		}
 
-		void readFromJson(@NonNull JSONObject json) throws JSONException {
-			super.readFromJson(json);
+		void readFromJson(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			String appModeJson = json.getString("appMode");
 			modeBean = ApplicationMode.fromJson(appModeJson);
 			builder = ApplicationMode.fromModeBean(app, modeBean);
@@ -1652,26 +1652,26 @@ public class SettingsHelper {
 			Map<String, List<SettingsItem>> pluginItems = new HashMap<>();
 			for (int i = 0; i < itemsJson.length(); i++) {
 				JSONObject itemJson = itemsJson.getJSONObject(i);
-				SettingsItem item = null;
+				SettingsItem item;
 				try {
 					item = createItem(itemJson);
+					if (item != null) {
+						items.add(item);
+
+						if (itemJson.has("pluginId") && item.type != SettingsItemType.PLUGIN) {
+							String pluginId = itemJson.getString("pluginId");
+							List<SettingsItem> items = pluginItems.get(pluginId);
+							if (items != null) {
+								items.add(item);
+							} else {
+								items = new ArrayList<>();
+								items.add(item);
+								pluginItems.put(pluginId, items);
+							}
+						}
+					}
 				} catch (IllegalArgumentException e) {
 					LOG.error("Error creating item from json: " + itemJson, e);
-				}
-				if (item != null) {
-					if (itemJson.has("pluginId") && item.type != SettingsItemType.PLUGIN) {
-						String pluginId = itemJson.getString("pluginId");
-						List<SettingsItem> items = pluginItems.get(pluginId);
-						if (items != null) {
-							items.add(item);
-						} else {
-							items = new ArrayList<>();
-							items.add(item);
-							pluginItems.put(pluginId, items);
-						}
-					} else {
-						items.add(item);
-					}
 				}
 			}
 			if (items.size() == 0) {

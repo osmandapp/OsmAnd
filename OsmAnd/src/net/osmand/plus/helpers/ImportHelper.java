@@ -802,9 +802,7 @@ public class ImportHelper {
 									}
 								}
 								for (SettingsHelper.PluginSettingsItem pluginItem : pluginSettingsItems) {
-									final CustomOsmandPlugin plugin = pluginItem.getPlugin();
-									OsmandPlugin.addCustomPlugin(app, activity, plugin);
-
+									CustomOsmandPlugin plugin = pluginItem.getPlugin();
 									List<SettingsHelper.SettingsItem> pluginItems = pluginItem.getPluginItems();
 									if (!Algorithms.isEmpty(pluginItems)) {
 										for (SettingsHelper.SettingsItem item : pluginItems) {
@@ -825,10 +823,12 @@ public class ImportHelper {
 												plugin.appModes.add(((SettingsHelper.ProfileSettingsItem) item).getAppMode());
 											}
 										}
+
+										OsmandPlugin.addCustomPlugin(app, activity, plugin);
 										app.getSettingsHelper().importSettings(file, pluginItems, "", 1, new SettingsHelper.SettingsImportListener() {
 											@Override
 											public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsHelper.SettingsItem> items) {
-												app.showShortToastMessage(app.getString(R.string.file_imported_successfully, plugin.getName()));
+												app.showShortToastMessage(app.getString(R.string.file_imported_successfully, ""));
 											}
 										});
 									}
