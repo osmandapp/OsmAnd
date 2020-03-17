@@ -52,7 +52,9 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 			collectRules(rules, segmentRules, object.types);
 		}
 		if (object.pointTypes != null) {
-			for (int i = startPointIndex; i <= endPointIndex; i++) {
+			int start = Math.min(startPointIndex, endPointIndex);
+			int end = Math.max(startPointIndex, endPointIndex);
+			for (int i = start; i <= end; i++) {
 				int[] types = object.pointTypes[i];
 				if (types != null) {
 					collectRules(rules, segmentRules, types);
