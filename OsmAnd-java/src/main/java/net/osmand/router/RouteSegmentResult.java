@@ -54,7 +54,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		if (object.pointTypes != null) {
 			int start = Math.min(startPointIndex, endPointIndex);
 			int end = Math.max(startPointIndex, endPointIndex);
-			for (int i = start; i <= end; i++) {
+			for (int i = start; i <= end && i < object.pointTypes.length; i++) {
 				int[] types = object.pointTypes[i];
 				if (types != null) {
 					collectRules(rules, segmentRules, types);
@@ -97,17 +97,17 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 			RouteTypeRule segmentRule = null;
 			String tag = rule.getTag();
 			if (tag.equals("osmand_ele_start")) {
-				if (object.heightDistanceArray != null && object.heightDistanceArray.length > startPointIndex * 2) {
+				if (object.heightDistanceArray != null && object.heightDistanceArray.length > startPointIndex * 2 + 1) {
 					float h = object.heightDistanceArray[startPointIndex * 2 + 1];
 					segmentRule = new RouteTypeRule(tag, String.valueOf(Math.round(h)));
 				}
 			} else if (tag.equals("osmand_ele_end")) {
-				if (object.heightDistanceArray != null && object.heightDistanceArray.length > endPointIndex * 2) {
+				if (object.heightDistanceArray != null && object.heightDistanceArray.length > endPointIndex * 2 + 1) {
 					float h = object.heightDistanceArray[endPointIndex * 2 + 1];
 					segmentRule = new RouteTypeRule(tag, String.valueOf(Math.round(h)));
 				}
 			}
-			if (segmentRule != null && !segmentRules.containsKey(rule)) {
+			if (segmentRule != null) {
 				segmentRules.put(rule, segmentRule);
 			} else if (!rules.containsKey(rule)) {
 				rules.put(rule, rules.size());
@@ -213,7 +213,10 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		}
 		bundle.putLong("id", object.id);
 		bundle.putArray("types", convertTypes(object.types, rules, segmentRules));
-		bundle.putArray("pointTypes", convertTypes(Arrays.copyOfRange(object.pointTypes, startPointIndex, endPointIndex + 1), rules, segmentRules));
+		int start = Math.min(startPointIndex, endPointIndex);
+		int end = Math.max(startPointIndex, endPointIndex);
+		bundle.putArray("pointTypes", convertTypes(Arrays.copyOfRange(object.pointTypes, start,
+				Math.min(end + 1, object.pointTypes.length)), rules, segmentRules));
 		bundle.putArray("names", convertNameIds(object.nameIds, rules));
 	}
 
