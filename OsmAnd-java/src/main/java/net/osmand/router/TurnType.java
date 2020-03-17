@@ -1,6 +1,7 @@
 package net.osmand.router;
 
-import gnu.trove.list.array.TIntArrayList;
+import net.osmand.util.Algorithms;
+
 import gnu.trove.set.hash.TIntHashSet;
 
 public class TurnType {
@@ -18,7 +19,7 @@ public class TurnType {
 	public static final int OFFR = 12; // Off route //$NON-NLS-1$
 	public static final int RNDB = 13; // Roundabout
 	public static final int RNLB = 14; // Roundabout left
-	
+
 	public static TurnType straight() {
 		return valueOf(C, false);
 	}
@@ -232,33 +233,74 @@ public class TurnType {
 		return (laneValue >> 10);
 	}
 
-	public static String toString(int[] lns) {
-        String s = "";
+	public static String lanesToString(int[] lns) {
+        StringBuilder s = new StringBuilder();
         for (int h = 0; h < lns.length; h++) {
             if (h > 0) {
-                s += "|";
+                s.append("|");
             }
             if (lns[h] % 2 == 1) {
-                s += "+";
+                s.append("+");
             }
             int pt = TurnType.getPrimaryTurn(lns[h]);
             if (pt == 0) {
                 pt = 1;
             }
-            s += TurnType.valueOf(pt, false).toXmlString();
+            s.append(TurnType.valueOf(pt, false).toXmlString());
             int st = TurnType.getSecondaryTurn(lns[h]);
             if (st != 0) {
-                s += "," + TurnType.valueOf(st, false).toXmlString();
+                s.append(",").append(TurnType.valueOf(st, false).toXmlString());
             }
             int tt = TurnType.getTertiaryTurn(lns[h]);
             if (tt != 0) {
-                s += "," + TurnType.valueOf(tt, false).toXmlString();
+                s.append(",").append(TurnType.valueOf(tt, false).toXmlString());
             }
 
         }
-        s += "";
-        return s;
+        return s.toString();
 	}
+
+	public static int[] lanesFromString(String lanesString) {
+		if (Algorithms.isEmpty(lanesString)) {
+			return null;
+		}
+		String[] lanesArr = lanesString.split("\\|");
+		int[] lanes = new int[lanesArr.length];
+		for (int l = 0; l < lanesArr.length; l++) {
+			String lane = lanesArr[l];
+			String[] turns = lane.split(",");
+			TurnType primaryTurn = null;
+			TurnType secondaryTurn = null;
+			TurnType tertiaryTurn = null;
+			boolean plus = false;
+			for (int i = 0; i < turns.length; i++) {
+				String turn = turns[i];
+				if (i == 0) {
+					plus = turn.length() > 0 && turn.charAt(0) == '+';
+					if (plus) {
+						turn = turn.substring(1);
+					}
+					primaryTurn = TurnType.fromString(turn, false);
+				} else if (i == 1) {
+					secondaryTurn =TurnType.fromString(turn, false);
+				} else if (i == 2) {
+					tertiaryTurn =TurnType.fromString(turn, false);
+				}
+			}
+			setPrimaryTurnAndReset(lanes, l, primaryTurn.value);
+			if (secondaryTurn != null) {
+				setSecondaryTurn(lanes, l, secondaryTurn.value);
+			}
+			if (tertiaryTurn != null) {
+				setTertiaryTurn(lanes, l, tertiaryTurn.value);
+			}
+			if (plus) {
+				lanes[l] |= 1;
+			}
+		}
+		return lanes;
+	}
+
 	public int[] getLanes() {
 		return lanes;
 	}
@@ -331,7 +373,7 @@ public class TurnType {
 		}
 		if(vl != null) {
 			if(lanes != null) {
-				vl += "(" + toString(lanes) +")";
+				vl += "(" + lanesToString(lanes) +")";
 			}
 			return vl;
 		}
