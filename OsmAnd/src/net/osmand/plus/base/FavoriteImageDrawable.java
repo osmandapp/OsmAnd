@@ -20,6 +20,7 @@ import net.osmand.GPXUtilities;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 
 import java.util.TreeMap;
 
@@ -47,22 +48,20 @@ public class FavoriteImageDrawable extends Drawable {
 		this.withShadow = withShadow;
 		this.synced = synced;
 		Resources res = ctx.getResources();
+		UiUtilities uiUtilities = ((OsmandApplication) ctx.getApplicationContext()).getUIUtilities();
 		int overlayIconId = point != null ? point.getOverlayIconId() : 0;
 		int uiIconId;
 		if (overlayIconId != 0) {
-			favIcon = ((OsmandApplication) ctx.getApplicationContext()).getUIUtilities()
-					.getIcon(getMapIconId(ctx, overlayIconId), R.color.color_white);
+			favIcon = uiUtilities.getIcon(getMapIconId(ctx, overlayIconId), R.color.color_white);
 			uiIconId = overlayIconId;
 		} else {
 			favIcon = res.getDrawable(R.drawable.mm_special_star);
 			uiIconId = R.drawable.mx_special_star;
 		}
 		int col = color == 0 || color == Color.BLACK ? res.getColor(R.color.color_favorite) : color;
-		uiListIcon = ((OsmandApplication) ctx.getApplicationContext()).getUIUtilities()
-				.getIcon(uiIconId, R.color.color_white);
+		uiListIcon = uiUtilities.getIcon(uiIconId, R.color.color_white);
 		int uiBackgroundIconId = point != null ? point.getBackgroundType().getIconId() : R.drawable.bg_point_circle;
-		uiBackgroundIcon = ((OsmandApplication) ctx.getApplicationContext()).getUIUtilities()
-				.getPaintedIcon(uiBackgroundIconId, col);
+		uiBackgroundIcon = uiUtilities.getPaintedIcon(uiBackgroundIconId, col);
 		int mapBackgroundIconIdTop = getMapBackgroundIconId(ctx, point, "top");
 		int mapBackgroundIconIdCenter = getMapBackgroundIconId(ctx, point, "center");
 		int mapBackgroundIconIdBottom = getMapBackgroundIconId(ctx, point, "bottom");
@@ -127,9 +126,9 @@ public class FavoriteImageDrawable extends Drawable {
 			drawBitmap(canvas, bs, syncedStroke, paintBackground);
 			drawBitmap(canvas, bs, syncedIcon, paintIcon);
 		} else if (withShadow) {
-			drawBitmap(canvas, bs, favBackgroundBottom, new Paint());
+			drawBitmap(canvas, bs, favBackgroundBottom, null);
 			drawBitmap(canvas, bs, favBackgroundCenter, paintBackground);
-			drawBitmap(canvas, bs, favBackgroundTop, new Paint());
+			drawBitmap(canvas, bs, favBackgroundTop, null);
 			favIcon.draw(canvas);
 		} else {
 			uiBackgroundIcon.draw(canvas);
@@ -153,7 +152,7 @@ public class FavoriteImageDrawable extends Drawable {
 
 	@Override
 	public int getOpacity() {
-		return PixelFormat.UNKNOWN;
+		return 0;
 	}
 
 	@Override

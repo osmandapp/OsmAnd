@@ -152,8 +152,8 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 								Bitmap pointSmallTop = getBitmap(o, "top");
 								Bitmap pointSmallCenter = getBitmap(o, "center");
 								Bitmap pointSmallBottom = getBitmap(o, "bottom");
-								float left = x - (pointSmallTop.getWidth() >> 1);
-								float top = y - (pointSmallTop.getHeight() >> 1);
+								float left = x - pointSmallTop.getWidth() / 2f;
+								float top = y - pointSmallTop.getHeight() / 2f;
 								canvas.drawBitmap(pointSmallBottom, left, top, null);
 								canvas.drawBitmap(pointSmallCenter, left, top, paintIcon);
 								canvas.drawBitmap(pointSmallTop, left, top, null);

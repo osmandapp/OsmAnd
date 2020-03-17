@@ -92,7 +92,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 
 		selectedColor = 0xb4FFFFFF & getPointColor();
 		selectedShape = getBackgroundType();
-		selectedIcon = R.drawable.mx_special_star;
+		selectedIcon = getIconId();
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setTitle(getToolbarTitle());
@@ -405,19 +405,22 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 
 	private void updateIconSelector(int iconRes, View rootView) {
 		View oldIcon = rootView.findViewWithTag(selectedIcon);
+		OsmandApplication app = requireMyApplication();
 		if (oldIcon != null) {
 			oldIcon.findViewById(R.id.outline).setVisibility(View.INVISIBLE);
 			ImageView background = oldIcon.findViewById(R.id.background);
 			AndroidUtils.setBackground(background,
-					UiUtilities.tintDrawable(ContextCompat.getDrawable(requireMyApplication(), R.drawable.bg_point_circle),
-							ContextCompat.getColor(requireMyApplication(), R.color.divider_color_light)));
+					UiUtilities.tintDrawable(ContextCompat.getDrawable(app, R.drawable.bg_point_circle),
+							ContextCompat.getColor(app, R.color.divider_color_light)));
+//			ImageView icon = oldIcon.findViewById(R.id.icon);
+//			icon.setImageDrawable(app.getUIUtilities().getIcon(selectedIcon, R.color.icon_color_default_light));
 		}
 
 		View icon = rootView.findViewWithTag(iconRes);
 		if (icon != null) {
-			ImageView iconImage = icon.findViewById(R.id.icon);
+//			ImageView iconImage = icon.findViewById(R.id.icon);
 			icon.findViewById(R.id.outline).setVisibility(View.VISIBLE);
-			iconImage.setImageDrawable(UiUtilities.tintDrawable(iconImage.getDrawable(), R.color.white_50_transparent));
+//			iconImage.setImageDrawable(app.getUIUtilities().getIcon(iconRes, R.color.color_white));
 			ImageView backgroundCircle = icon.findViewById(R.id.background);
 			AndroidUtils.setBackground(backgroundCircle,
 					UiUtilities.tintDrawable(ContextCompat.getDrawable(view.getContext(), R.drawable.bg_point_circle), selectedColor));
@@ -628,6 +631,8 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	public abstract int getPointColor();
 
 	public abstract FavouritePoint.BackgroundType getBackgroundType();
+
+	public abstract int getIconId();
 
 	public abstract Set<String> getCategories();
 

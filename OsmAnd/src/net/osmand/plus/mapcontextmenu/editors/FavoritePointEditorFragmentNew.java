@@ -415,6 +415,11 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 		return backgroundType;
 	}
 
+	@Override
+	public int getIconId() {
+		return iconId;
+	}
+
 	private int getColor() {
 		return color;
 	}
