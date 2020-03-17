@@ -50,7 +50,11 @@ public class RouteImporter {
 					List<Location> locations = resources.getLocations();
 					if (res.tracks.size() > 0 && res.tracks.get(0).segments.size() > 0 && res.tracks.get(0).segments.get(0).points.size() > 0) {
 						for (WptPt point : res.tracks.get(0).segments.get(0).points) {
-							locations.add(new Location("", point.getLatitude(), point.getLongitude()));
+							Location loc = new Location("", point.getLatitude(), point.getLongitude());
+							if (!Double.isNaN(point.ele)) {
+								loc.setAltitude(point.ele);
+							}
+							locations.add(loc);
 						}
 					}
 				}
