@@ -206,7 +206,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		return backgroundType;
 	}
 
-	private void setBackgroundType(BackgroundType backgroundType) {
+	public void setBackgroundType(BackgroundType backgroundType) {
 		this.backgroundType = backgroundType;
 	}
 
