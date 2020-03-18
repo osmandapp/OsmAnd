@@ -11,7 +11,6 @@ import java.util.Map;
 public class RouteDataResources {
 
 	private Map<RouteTypeRule, Integer> rules = new LinkedHashMap<>();
-	private Map<RouteSegmentResult, Map<RouteTypeRule, RouteTypeRule>> segmentRules = new LinkedHashMap<>();
 
 	private List<Location> locations;
 	private int currentLocation;
@@ -26,15 +25,6 @@ public class RouteDataResources {
 
 	public Map<RouteTypeRule, Integer> getRules() {
 		return rules;
-	}
-
-	public Map<RouteTypeRule, RouteTypeRule> getSegmentRules(RouteSegmentResult segmentResult) {
-		Map<RouteTypeRule, RouteTypeRule> ruleMap = segmentRules.get(segmentResult);
-		if (ruleMap == null) {
-			ruleMap = new LinkedHashMap<>();
-			segmentRules.put(segmentResult, ruleMap);
-		}
-		return ruleMap;
 	}
 
 	public List<Location> getLocations() {
