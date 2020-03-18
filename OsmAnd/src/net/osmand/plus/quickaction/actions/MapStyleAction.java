@@ -145,7 +145,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 				final List<String> visibleNamesList = new ArrayList<>();
 				final ArrayList<String> items = new ArrayList<>(app.getRendererRegistry().getRendererNames());
 
-				for (OsmandPlugin plugin : OsmandPlugin.getDisabledPlugins()) {
+				for (OsmandPlugin plugin : OsmandPlugin.getNotEnabledPlugins()) {
 					for (String name : plugin.getRendererNames()) {
 						items.remove(name);
 					}

@@ -177,7 +177,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 		});
 
 		List<String> names = new ArrayList<>(getMyApplication().getRendererRegistry().getRendererNames());
-		for (OsmandPlugin plugin : OsmandPlugin.getDisabledPlugins()) {
+		for (OsmandPlugin plugin : OsmandPlugin.getNotEnabledPlugins()) {
 			for (String name : plugin.getRendererNames()) {
 				names.remove(name);
 			}
