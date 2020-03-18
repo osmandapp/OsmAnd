@@ -1022,7 +1022,9 @@ public class MapInfoWidgetsFactory {
 						}
 
 						if (showExitInfo) {
-							text = exitInfo.getExitStreetName();
+							if(!Algorithms.isEmpty(exitInfo.getExitStreetName())) {
+								text = exitInfo.getExitStreetName();
+							}
 						}
 
 						if (directionInfo != null && directionInfo.getRouteDataObject() != null) {
