@@ -201,9 +201,13 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		bundle.putArray("types", convertTypes(object.types, rules));
 		int start = Math.min(startPointIndex, endPointIndex);
 		int end = Math.max(startPointIndex, endPointIndex);
-		bundle.putArray("pointTypes", convertTypes(Arrays.copyOfRange(object.pointTypes, start,
-				Math.min(end + 1, object.pointTypes.length)), rules));
-		bundle.putArray("names", convertNameIds(object.nameIds, rules));
+		if (object.hasPointTypes()) {
+			bundle.putArray("pointTypes", convertTypes(
+					Arrays.copyOfRange(object.pointTypes, start, Math.min(end + 1, object.pointTypes.length)), rules));
+		}
+		if (object.hasPointNames()) {
+			bundle.putArray("names", convertNameIds(object.nameIds, rules));
+		}
 	}
 
 	@Override
