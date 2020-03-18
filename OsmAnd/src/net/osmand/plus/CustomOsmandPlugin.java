@@ -8,7 +8,6 @@ import com.google.gson.reflect.TypeToken;
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
-import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -25,7 +24,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 
 public class CustomOsmandPlugin extends OsmandPlugin {
 
@@ -334,12 +332,11 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 						int actionType = object.getInt("type");
 						String paramsString = object.getString("params");
 						HashMap<String, String> params = gson.fromJson(paramsString, type);
-						QuickAction quickAction = new QuickAction(actionType);
-						if (!name.isEmpty()) {
-							quickAction.setName(name);
+
+						QuickAction action = app.getQuickActionRegistry().getQuickAction(app, actionType, name, params);
+						if (action != null) {
+							quickActions.add(action);
 						}
-						quickAction.setParams(params);
-						quickActions.add(quickAction);
 					}
 				}
 			} catch (JSONException e) {
@@ -387,23 +384,17 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 				if (!Algorithms.isEmpty(poiUIFiltersStr)) {
 					JSONObject poiUIFiltersJson = new JSONObject(poiUIFiltersStr);
 					JSONArray jsonArray = poiUIFiltersJson.getJSONArray("items");
-					Gson gson = new Gson();
-					Type type = new TypeToken<HashMap<String, LinkedHashSet<String>>>() {
-					}.getType();
-					MapPoiTypes poiTypes = app.getPoiTypes();
+					List<PoiUIFilter> existingItems = app.getPoiFilters().getUserDefinedPoiFilters(false);
+
 					for (int i = 0; i < jsonArray.length(); i++) {
 						JSONObject object = jsonArray.getJSONObject(i);
 						String name = object.getString("name");
 						String filterId = object.getString("filterId");
-						String acceptedTypesString = object.getString("acceptedTypes");
-						HashMap<String, LinkedHashSet<String>> acceptedTypes = gson.fromJson(acceptedTypesString, type);
-						Map<PoiCategory, LinkedHashSet<String>> acceptedTypesDone = new HashMap<>();
-						for (Map.Entry<String, LinkedHashSet<String>> mapItem : acceptedTypes.entrySet()) {
-							final PoiCategory a = poiTypes.getPoiCategoryByName(mapItem.getKey());
-							acceptedTypesDone.put(a, mapItem.getValue());
+						for (PoiUIFilter filter : existingItems) {
+							if (filter.getName().equals(name)) {
+								poiUIFilters.add(filter);
+							}
 						}
-						PoiUIFilter filter = new PoiUIFilter(name, filterId, acceptedTypesDone, app);
-						poiUIFilters.add(filter);
 					}
 				}
 			} catch (JSONException e) {

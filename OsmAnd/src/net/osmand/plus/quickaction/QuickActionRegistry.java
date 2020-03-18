@@ -5,6 +5,7 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
@@ -77,6 +78,11 @@ public class QuickActionRegistry {
 		List<QuickAction> actions = getQuickActions();
 		List<QuickAction> filteredActions = new ArrayList<>();
 
+		List<QuickAction> disabledPluginActions = new ArrayList<>();
+		for (OsmandPlugin plugin : OsmandPlugin.getNotEnabledPlugins()) {
+			disabledPluginActions.addAll(plugin.getQuickActions());
+		}
+
 		for (QuickAction action : actions) {
 			boolean skip = false;
 			if (OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class) == null) {
@@ -121,6 +127,9 @@ public class QuickActionRegistry {
 				if (action.type == HillshadeAction.TYPE) {
 					skip = true;
 				}
+			}
+			if (disabledPluginActions.contains(action)) {
+				skip = true;
 			}
 			if (!skip) {
 				filteredActions.add(action);
@@ -179,6 +188,17 @@ public class QuickActionRegistry {
         }
         return null;
     }
+
+	public QuickAction getQuickAction(OsmandApplication app, int type, String name, Map<String, String> params) {
+		for (QuickAction action : quickActions) {
+			if (action.type == type
+					&& (action.hasCustomName(app) && action.getName(app).equals(name) || !action.hasCustomName(app))
+					&& action.getParams().equals(params)) {
+				return action;
+			}
+		}
+		return null;
+	}
 
     public boolean isNameUnique(QuickAction action, Context context){
         for (QuickAction a: quickActions){
