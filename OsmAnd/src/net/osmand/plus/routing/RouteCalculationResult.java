@@ -1,9 +1,9 @@
 package net.osmand.plus.routing;
 
 import android.content.Context;
-
 import androidx.annotation.Nullable;
 
+import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
@@ -17,6 +17,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.router.ExitInfo;
+import net.osmand.router.RouteExporter;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TurnType;
@@ -25,6 +26,7 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -139,11 +141,18 @@ public class RouteCalculationResult {
 
 	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end, List<LatLon> intermediates,
 								  OsmandApplication ctx, boolean leftSide, RoutingContext rctx, List<LocationPoint> waypoints, ApplicationMode mode) {
-		this.routingTime = rctx.routingTime;
-		this.visitedSegments =  rctx.visitedSegments;
-		this.loadedTiles = rctx.loadedTiles;
-		this.calculateTime = (float) (((System.nanoTime() - rctx.timeToCalculate) / 1e6) / 1000f);
-		if(waypoints != null) {
+		if (rctx != null) {
+			this.routingTime = rctx.routingTime;
+			this.visitedSegments = rctx.visitedSegments;
+			this.loadedTiles = rctx.loadedTiles;
+			this.calculateTime = (float) (((System.nanoTime() - rctx.timeToCalculate) / 1e6) / 1000f);
+		} else {
+			this.routingTime = 0;
+			this.visitedSegments = 0;
+			this.loadedTiles = 0;
+			this.calculateTime = 0;
+		}
+		if (waypoints != null) {
 			this.locationPoints.addAll(waypoints);
 		}
 		List<RouteDirectionInfo> computeDirections = new ArrayList<RouteDirectionInfo>();
@@ -169,7 +178,7 @@ public class RouteCalculationResult {
 		this.routeVisibleAngle = routeService == RouteProvider.RouteService.STRAIGHT ?
 				ctx.getSettings().ROUTE_STRAIGHT_ANGLE.getModeValue(mode) : 0;
 	}
-	
+
 	public ApplicationMode getAppMode() {
 		return appMode;
 	}
@@ -272,12 +281,16 @@ public class RouteCalculationResult {
 	}
 
 	public List<RouteSegmentResult> getOriginalRoute() {
+		return getOriginalRoute(0);
+	}
+
+	public List<RouteSegmentResult> getOriginalRoute(int startIndex) {
 		if (segments.size() == 0) {
 			return null;
 		}
 		List<RouteSegmentResult> list = new ArrayList<RouteSegmentResult>();
-		list.add(segments.get(0));
-		for (int i = 1; i < segments.size(); i++) {
+		list.add(segments.get(startIndex++));
+		for (int i = startIndex; i < segments.size(); i++) {
 			if (segments.get(i - 1) != segments.get(i)) {
 				list.add(segments.get(i));
 			}

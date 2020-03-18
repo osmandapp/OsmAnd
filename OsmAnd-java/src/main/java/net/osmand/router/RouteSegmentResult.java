@@ -1,19 +1,26 @@
 package net.osmand.router;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
+import net.osmand.Location;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
+import net.osmand.binary.RouteDataBundle;
 import net.osmand.binary.RouteDataObject;
+import net.osmand.binary.StringExternalizable;
 import net.osmand.data.LatLon;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
-public class RouteSegmentResult {
+import gnu.trove.map.hash.TIntObjectHashMap;
+
+
+public class RouteSegmentResult implements StringExternalizable<RouteDataBundle> {
 	private final RouteDataObject object;
 	private int startPointIndex;
 	private int endPointIndex;
@@ -26,15 +33,230 @@ public class RouteSegmentResult {
 	private String description = "";
 	// this make not possible to make turns in between segment result for now
 	private TurnType turnType;
-	
-	
+
+	public RouteSegmentResult(RouteDataObject object) {
+		this.object = object;
+	}
+
 	public RouteSegmentResult(RouteDataObject object, int startPointIndex, int endPointIndex) {
 		this.object = object;
 		this.startPointIndex = startPointIndex;
 		this.endPointIndex = endPointIndex;
 		updateCapacity();
 	}
-	
+
+	void collectTypes(RouteDataResources resources) {
+		Map<RouteTypeRule, Integer> rules = resources.getRules();
+		if (object.types != null) {
+			collectRules(rules, object.types);
+		}
+		if (object.pointTypes != null) {
+			int start = Math.min(startPointIndex, endPointIndex);
+			int end = Math.max(startPointIndex, endPointIndex);
+			for (int i = start; i <= end && i < object.pointTypes.length; i++) {
+				int[] types = object.pointTypes[i];
+				if (types != null) {
+					collectRules(rules, types);
+				}
+			}
+		}
+	}
+
+	void collectNames(RouteDataResources resources) {
+		Map<RouteTypeRule, Integer> rules = resources.getRules();
+		RouteRegion region = object.region;
+		if (region.getNameTypeRule() != -1) {
+			RouteTypeRule r = region.quickGetEncodingRule(region.getNameTypeRule());
+			if (!rules.containsKey(r)) {
+				rules.put(r, rules.size());
+			}
+		}
+		if (region.getRefTypeRule() != -1) {
+			RouteTypeRule r = region.quickGetEncodingRule(region.getRefTypeRule());
+			if (!rules.containsKey(r)) {
+				rules.put(r, rules.size());
+			}
+		}
+		if (object.nameIds != null) {
+			for (int nameId : object.nameIds) {
+				String name = object.names.get(nameId);
+				String tag = region.quickGetEncodingRule(nameId).getTag();
+				RouteTypeRule r = new RouteTypeRule(tag, name);
+				if (!rules.containsKey(r)) {
+					rules.put(r, rules.size());
+				}
+			}
+		}
+	}
+
+	private void collectRules(Map<RouteTypeRule, Integer> rules, int[] types) {
+		RouteRegion region = object.region;
+		for (int type : types) {
+			RouteTypeRule rule = region.quickGetEncodingRule(type);
+			String tag = rule.getTag();
+			if (tag.equals("osmand_ele_start") || tag.equals("osmand_ele_end")
+					|| tag.equals("osmand_ele_asc") || tag.equals("osmand_ele_desc"))
+			{
+				continue;
+			}
+			if (!rules.containsKey(rule)) {
+				rules.put(rule, rules.size());
+			}
+		}
+	}
+
+	private int[] convertTypes(int[] types, Map<RouteTypeRule, Integer> rules) {
+		if (types == null || types.length == 0) {
+			return null;
+		}
+		List<Integer> arr = new ArrayList<>();
+		for (int i = 0; i < types.length; i++) {
+			int type = types[i];
+			RouteTypeRule rule = object.region.quickGetEncodingRule(type);
+			Integer ruleId = rules.get(rule);
+			if (ruleId != null) {
+				arr.add(ruleId);
+			}
+		}
+		int[] res = new int[arr.size()];
+		for (int i = 0; i < arr.size(); i++) {
+			res[i] = arr.get(i);
+		}
+		return res;
+	}
+
+	private int[][] convertTypes(int[][] types, Map<RouteTypeRule, Integer> rules) {
+		if (types == null || types.length == 0) {
+			return null;
+		}
+		int[][] res = new int[types.length][];
+		for (int i = 0; i < types.length; i++) {
+			int[] typesArr = types[i];
+			if (typesArr != null) {
+				res[i] = convertTypes(typesArr, rules);
+			}
+		}
+		return res;
+	}
+
+	private int[] convertNameIds(int[] nameIds, Map<RouteTypeRule, Integer> rules) {
+		if (nameIds == null || nameIds.length == 0) {
+			return null;
+		}
+		int[] res = new int[nameIds.length];
+		for (int i = 0; i < nameIds.length; i++) {
+			int nameId = nameIds[i];
+			String name = object.names.get(nameId);
+			String tag = object.region.quickGetEncodingRule(nameId).getTag();
+			RouteTypeRule rule = new RouteTypeRule(tag, name);
+			Integer ruleId = rules.get(rule);
+			if (ruleId == null) {
+				throw new IllegalArgumentException("Cannot find collected rule: " + rule.toString());
+			}
+			res[i] = ruleId;
+		}
+		return res;
+	}
+
+	public void fillData() {
+		if (object.nameIds != null && object.nameIds.length > 0) {
+			RouteRegion region = object.region;
+			int nameTypeRule = region.getNameTypeRule();
+			int refTypeRule = region.getRefTypeRule();
+			object.names = new TIntObjectHashMap<>();
+			for (int nameId : object.nameIds) {
+				RouteTypeRule rule = region.quickGetEncodingRule(nameId);
+				if (rule != null) {
+					if (nameTypeRule != -1 && "name".equals(rule.getTag())) {
+						nameId = nameTypeRule;
+					} else if (refTypeRule != -1 && "ref".equals(rule.getTag())) {
+						nameId = refTypeRule;
+					}
+					object.names.put(nameId, rule.getValue());
+				}
+			}
+		}
+	}
+
+	@Override
+	public void writeToBundle(RouteDataBundle bundle) {
+		Map<RouteTypeRule, Integer> rules = bundle.getResources().getRules();
+		bundle.putInt("length", (Math.abs(endPointIndex - startPointIndex) + 1) * (endPointIndex >= startPointIndex ? 1 : -1));
+		bundle.putFloat("segmentTime", segmentTime, 2);
+		bundle.putFloat("speed", speed, 2);
+		if (turnType != null) {
+			bundle.putString("turnType", turnType.toXmlString());
+			if (turnType.isSkipToSpeak()) {
+				bundle.putBoolean("skipTurn", turnType.isSkipToSpeak());
+			}
+			if (turnType.getTurnAngle() != 0) {
+				bundle.putFloat("turnAngle", turnType.getTurnAngle(), 2);
+			}
+			int[] turnLanes = turnType.getLanes();
+			if (turnLanes != null && turnLanes.length > 0) {
+				bundle.putString("turnLanes", TurnType.lanesToString(turnLanes));
+			}
+		}
+		bundle.putLong("id", object.id);
+		bundle.putArray("types", convertTypes(object.types, rules));
+		int start = Math.min(startPointIndex, endPointIndex);
+		int end = Math.max(startPointIndex, endPointIndex);
+		bundle.putArray("pointTypes", convertTypes(Arrays.copyOfRange(object.pointTypes, start,
+				Math.min(end + 1, object.pointTypes.length)), rules));
+		bundle.putArray("names", convertNameIds(object.nameIds, rules));
+	}
+
+	@Override
+	public void readFromBundle(RouteDataBundle bundle) {
+		int length = bundle.getInt("length", 0);
+		boolean plus = length >= 0;
+		length = Math.abs(length);
+		startPointIndex = plus ? 0 : length - 1;
+		endPointIndex = plus ? length - 1 : 0;
+		segmentTime = bundle.getFloat("segmentTime", segmentTime);
+		speed = bundle.getFloat("speed", speed);
+		String turnTypeStr = bundle.getString("turnType", null);
+		if (!Algorithms.isEmpty(turnTypeStr)) {
+			turnType = TurnType.fromString(turnTypeStr, false);
+			turnType.setSkipToSpeak(bundle.getBoolean("skipTurn", turnType.isSkipToSpeak()));
+			turnType.setTurnAngle(bundle.getFloat("turnAngle", turnType.getTurnAngle()));
+			int[] turnLanes = TurnType.lanesFromString(bundle.getString("turnLanes", null));
+			turnType.setLanes(turnLanes);
+		}
+		object.id = bundle.getLong("id", object.id);
+		object.types = bundle.getIntArray("types", null);
+		object.pointTypes = bundle.getIntIntArray("pointTypes", null);
+		object.nameIds = bundle.getIntArray("names", null);
+
+		RouteDataResources resources = bundle.getResources();
+		object.pointsX = new int[length];
+		object.pointsY = new int[length];
+		object.heightDistanceArray = new float[length * 2];
+		int index = plus ? 0 : length - 1;
+		float distance = 0;
+		Location prevLocation = null;
+		for (int i = 0; i < length; i++) {
+			Location location = resources.getLocation(index);
+			double dist = 0;
+			if (prevLocation != null) {
+				dist = MapUtils.getDistance(prevLocation.getLatitude(), prevLocation.getLongitude(), location.getLatitude(), location.getLongitude());
+				distance += dist;
+			}
+			prevLocation = location;
+			object.pointsX[i] = MapUtils.get31TileNumberX(location.getLongitude());
+			object.pointsY[i] = MapUtils.get31TileNumberY(location.getLatitude());
+			object.heightDistanceArray[i * 2] = (float) dist;
+			object.heightDistanceArray[i * 2 + 1] = (float) location.getAltitude();
+			if (plus) {
+				index++;
+			} else {
+				index--;
+			}
+		}
+		this.distance = distance;
+		resources.incrementCurrentLocation(length - 1);
+	}
+
 	public float[] getHeightValues() {
 		float[] pf = object.calculateHeightArray();
 		if(pf == null || pf.length == 0) {

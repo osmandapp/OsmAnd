@@ -1,19 +1,8 @@
 package net.osmand.binary;
 
-import gnu.trove.iterator.TLongObjectIterator;
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.list.array.TLongArrayList;
-import gnu.trove.map.hash.TIntObjectHashMap;
-import gnu.trove.map.hash.TLongObjectHashMap;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import com.google.protobuf.CodedInputStream;
+import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.protobuf.WireFormat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -25,27 +14,51 @@ import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteEncodingRule;
 import net.osmand.binary.OsmandOdb.RestrictionData;
 import net.osmand.binary.OsmandOdb.RouteData;
 import net.osmand.binary.RouteDataObject.RestrictionInfo;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser;
 
 import org.apache.commons.logging.Log;
 
-import com.google.protobuf.CodedInputStream;
-import com.google.protobuf.InvalidProtocolBufferException;
-import com.google.protobuf.WireFormat;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import gnu.trove.iterator.TLongObjectIterator;
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.list.array.TLongArrayList;
+import gnu.trove.map.hash.TIntObjectHashMap;
+import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class BinaryMapRouteReaderAdapter {
 	protected static final Log LOG = PlatformUtil.getLog(BinaryMapRouteReaderAdapter.class);
 	private static final int SHIFT_COORDINATES = 4;
 
-	private static class RouteTypeCondition {
+	private static class RouteTypeCondition implements StringExternalizable<RouteDataBundle> {
 		String condition = "";
 		OpeningHoursParser.OpeningHours hours = null;
 		String value;
 		int ruleid;
+
+		@Override
+		public void writeToBundle(RouteDataBundle bundle) {
+			bundle.putString("c", condition);
+			bundle.putString("v", value);
+			bundle.putInt("id", ruleid);
+		}
+
+		@Override
+		public void readFromBundle(RouteDataBundle bundle) {
+
+		}
 	}
 
-	public static class RouteTypeRule {
+	public static class RouteTypeRule implements StringExternalizable<RouteDataBundle> {
 		private final static int ACCESS = 1;
 		private final static int ONEWAY = 2;
 		private final static int HIGHWAY_TYPE = 3;
@@ -54,29 +67,78 @@ public class BinaryMapRouteReaderAdapter {
 		public final static int TRAFFIC_SIGNALS = 6;
 		public final static int RAILWAY_CROSSING = 7;
 		private final static int LANES = 8;
-		private final String t;
-		private final String v;
+		private String t;
+		private String v;
 		private int intValue;
 		private float floatValue;
 		private int type;
 		private List<RouteTypeCondition> conditions = null;
 		private int forward;
 
+		public RouteTypeRule() {
+		}
+
 		public RouteTypeRule(String t, String v) {
 			this.t = t.intern();
-			if("true".equals(v)) {
+			if ("true".equals(v)) {
 				v = "yes";
 			}
-			if("false".equals(v)) {
+			if ("false".equals(v)) {
 				v = "no";
 			}
-			this.v = v == null? null : v.intern();
+			this.v = v == null ? null : v.intern();
 			try {
 				analyze();
 			} catch(RuntimeException e) {
 				System.err.println("Error analyzing tag/value = " + t + "/" +v);
 				throw e;
 			}
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((t == null) ? 0 : t.hashCode());
+			result = prime * result + ((v == null) ? 0 : v.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj) {
+				return true;
+			}
+			if (obj == null || getClass() != obj.getClass()) {
+				return false;
+			}
+			RouteTypeRule other = (RouteTypeRule) obj;
+			return Algorithms.objectEquals(other.t, t) && Algorithms.objectEquals(other.v, v);
+		}
+
+		@Override
+		public void writeToBundle(RouteDataBundle bundle) {
+			bundle.putString("t", t);
+			if (v != null) {
+				bundle.putString("v", v);
+			}
+		}
+
+		@Override
+		public void readFromBundle(RouteDataBundle bundle) {
+			t = bundle.getString("t", null);
+			v = bundle.getString("v", null);
+			try {
+				analyze();
+			} catch(RuntimeException e) {
+				System.err.println("Error analyzing tag/value = " + t + "/" +v);
+				throw e;
+			}
+		}
+
+		@Override
+		public String toString() {
+			return t + "=" + v;
 		}
 
 		public int isForward() {
@@ -240,11 +302,10 @@ public class BinaryMapRouteReaderAdapter {
 		int destinationTypeRule = -1;
 		int destinationRefTypeRule = -1;
 		private RouteRegion referenceRouteRegion;
-		
+
 		public String getPartName() {
 			return "Routing";
 		}
-		
 
 		public int getFieldNumber() {
 			return OsmandOdb.OsmAndStructure.ROUTINGINDEX_FIELD_NUMBER;
@@ -265,7 +326,15 @@ public class BinaryMapRouteReaderAdapter {
 			}
 			return -1;
 		}
-		
+
+		public int getNameTypeRule() {
+			return nameTypeRule;
+		}
+
+		public int getRefTypeRule() {
+			return refTypeRule;
+		}
+
 		public RouteTypeRule quickGetEncodingRule(int id) {
 			return routeEncodingRules.get(id);
 		}
@@ -477,7 +546,7 @@ public class BinaryMapRouteReaderAdapter {
 		public int shiftToData;
 		public List<RouteSubregion> subregions = null;
 		public List<RouteDataObject> dataObjects = null;
-		
+
 		public int getEstimatedSize(){
 			int shallow = 7 * INT_SIZE + 4*3;
 			if (subregions != null) {
