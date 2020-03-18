@@ -309,15 +309,8 @@ public abstract class OsmandPlugin {
 				JSONArray jArray = new JSONArray(customPluginsJson);
 				for (int i = 0; i < jArray.length(); i++) {
 					JSONObject json = jArray.getJSONObject(i);
-
-					String pluginId = json.getString("pluginId");
-					String name = json.getString("name");
-					String description = json.getString("Description");
-
-					CustomOsmandPlugin plugin = new CustomOsmandPlugin(app);
-					plugin.pluginId = pluginId;
-					plugin.name = name;
-					plugin.description = description;
+					CustomOsmandPlugin plugin = new CustomOsmandPlugin(app, json);
+					plugin.loadAdditionalItemsFromJson(json);
 					allPlugins.add(plugin);
 				}
 			} catch (JSONException e) {
@@ -334,13 +327,15 @@ public abstract class OsmandPlugin {
 			JSONArray itemsJson = new JSONArray();
 			for (CustomOsmandPlugin plugin : customOsmandPlugins) {
 				try {
-					String json = plugin.toJson();
-					itemsJson.put(new JSONObject(json));
+					itemsJson.put(new JSONObject(plugin.toJson()));
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
 			}
-			settingsAPI.edit(pluginPrefs).putString(CUSTOM_PLUGINS_KEY, itemsJson.toString()).commit();
+			String jsonStr = itemsJson.toString();
+			if (!jsonStr.equals(settingsAPI.getString(pluginPrefs, CUSTOM_PLUGINS_KEY, ""))) {
+				settingsAPI.edit(pluginPrefs).putString(CUSTOM_PLUGINS_KEY, jsonStr).commit();
+			}
 		}
 	}
 

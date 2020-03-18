@@ -259,14 +259,7 @@ public class SettingsHelper {
 		}
 
 		void readFromJson(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
-			String pluginId = json.getString("pluginId");
-			String name = json.getString("name");
-			String description = json.getString("Description");
-
-			plugin = new CustomOsmandPlugin(app);
-			plugin.pluginId = pluginId;
-			plugin.name = name;
-			plugin.description = description;
+			plugin = new CustomOsmandPlugin(app, json);
 		}
 
 		@NonNull

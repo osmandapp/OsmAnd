@@ -805,6 +805,7 @@ public class ImportHelper {
 									CustomOsmandPlugin plugin = pluginItem.getPlugin();
 									List<SettingsHelper.SettingsItem> pluginItems = pluginItem.getPluginItems();
 									if (!Algorithms.isEmpty(pluginItems)) {
+										pluginIndependentItems.removeAll(pluginItems);
 										for (SettingsHelper.SettingsItem item : pluginItems) {
 											item.setShouldReplace(true);
 											if (item instanceof SettingsHelper.QuickActionSettingsItem) {
