@@ -114,7 +114,7 @@ public class RouteImporter {
 		if (gpxFile != null) {
 			GPXUtilities.loadGPXFile(null, gpxFile, extensionsReader);
 			for (RouteSegmentResult segment : route) {
-				segment.fillData();
+				segment.fillNames(resources);
 			}
 		} else if (file != null) {
 			FileInputStream fis = null;
@@ -122,7 +122,7 @@ public class RouteImporter {
 				fis = new FileInputStream(file);
 				GPXFile gpxFile = GPXUtilities.loadGPXFile(fis, null, extensionsReader);
 				for (RouteSegmentResult segment : route) {
-					segment.fillData();
+					segment.fillNames(resources);
 				}
 				gpxFile.path = file.getAbsolutePath();
 				gpxFile.modifiedTime = file.lastModified();

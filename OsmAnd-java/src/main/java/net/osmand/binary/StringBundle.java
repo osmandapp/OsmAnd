@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.map.hash.TIntObjectHashMap;
@@ -305,18 +306,6 @@ public class StringBundle {
 		}
 	}
 
-	public void putArray(String key, String[] array) {
-		if (array != null) {
-			map.put(key, new StringItem(key, strArrayToString(array)));
-		}
-	}
-
-	public void putArray(String key, String[][] array) {
-		if (array != null) {
-			map.put(key, new StringItem(key, strStrArrayToString(array)));
-		}
-	}
-
 	public <T> void putMap(String key, TIntObjectHashMap<T> map) {
 		if (map != null) {
 			StringBundle bundle = newInstance();
@@ -334,7 +323,7 @@ public class StringBundle {
 	public <K, V> void putMap(String key, Map<K, V> map) {
 		if (map != null) {
 			StringBundle bundle = newInstance();
-			for (Map.Entry<K, V> entry : map.entrySet()) {
+			for (Entry<K, V> entry : map.entrySet()) {
 				bundle.putString(String.valueOf(entry.getKey()), String.valueOf(entry.getValue()));
 			}
 			this.map.put(key, new StringBundleItem(key, bundle));
@@ -433,17 +422,6 @@ public class StringBundle {
 				b.append(intArrayToString(arr));
 			}
 		}
-		/*
-		for (int i = 0; i < a.length; i++) {
-			int[] value = a[i];
-			if (value != null && value.length > 0) {
-				if (b.length() > 0) {
-					b.append(";");
-				}
-				b.append(i).append(":").append(intArrayToString(value));
-			}
-		}
-		*/
 		return b.toString();
 	}
 
@@ -465,48 +443,6 @@ public class StringBundle {
 				}
 			}
 		}
-		/*
-		String[] items = a.split(";");
-		int[][] res = new int[items.length][];
-		for (int i = 0; i < items.length; i++) {
-			String[] subItems = a.split(",");
-			res[i] = new int[subItems.length];
-			for (int k = 0; k < subItems.length; k++) {
-				res[i][k] = Integer.parseInt(subItems[k]);
-			}
-		}
-		*/
 		return res;
-	}
-
-	private static String strArrayToString(String[] a) {
-		if (a == null) {
-			return null;
-		}
-		StringBuilder b = new StringBuilder();
-		for (String value : a) {
-			if (b.length() > 0) {
-				b.append(0x1E);
-			}
-			b.append(value);
-		}
-		return b.toString();
-	}
-
-	private static String strStrArrayToString(String[][] a) {
-		if (a == null) {
-			return null;
-		}
-		StringBuilder b = new StringBuilder();
-		for (int i = 0; i < a.length; i++) {
-			String[] value = a[i];
-			if (value != null && value.length > 0) {
-				if (b.length() > 0) {
-					b.append(0x1F);
-				}
-				b.append(String.valueOf(i)).append(":").append(strArrayToString(value));
-			}
-		}
-		return b.toString();
 	}
 }
