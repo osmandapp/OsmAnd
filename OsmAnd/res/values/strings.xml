@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="custom_osmand_plugin">Custom OsmAnd plugin</string>
     <string name="clear_recorded_data_warning">Are you sure you want to clear recorded data?</string>
     <string name="restore_all_profile_settings_descr">All profile settings will be restored to their original state after creating/importing this profile.</string>
     <string name="restore_all_profile_settings">Restore all profile settings?</string>

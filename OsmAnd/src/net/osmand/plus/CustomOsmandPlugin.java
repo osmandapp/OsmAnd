@@ -57,7 +57,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 				names.put(localeKey, name);
 			}
 		}
-		JSONObject descriptionJson = json.getJSONObject("Description");
+		JSONObject descriptionJson = json.getJSONObject("description");
 		if (descriptionJson != null) {
 			for (Iterator<String> it = descriptionJson.keys(); it.hasNext(); ) {
 				String localeKey = it.next();
@@ -137,7 +137,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		for (Map.Entry<String, String> entry : descriptions.entrySet()) {
 			descriptionJson.put(entry.getKey(), entry.getValue());
 		}
-		json.put("Description", descriptionJson);
+		json.put("description", descriptionJson);
 
 		saveAdditionalItemsToJson(json);
 
