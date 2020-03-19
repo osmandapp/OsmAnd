@@ -1,5 +1,7 @@
 package net.osmand.plus;
 
+import android.content.res.Configuration;
+
 import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
@@ -22,16 +24,18 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 
 public class CustomOsmandPlugin extends OsmandPlugin {
 
 	private static final Log LOG = PlatformUtil.getLog(CustomOsmandPlugin.class);
 
 	public String pluginId;
-	public String name;
-	public String description;
+	public Map<String, String> names = new HashMap<>();
+	public Map<String, String> descriptions = new HashMap<>();
 
 	public List<String> rendererNames = new ArrayList<>();
 	public List<String> routerNames = new ArrayList<>();
@@ -44,8 +48,23 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	public CustomOsmandPlugin(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		super(app);
 		pluginId = json.getString("pluginId");
-		name = json.getString("name");
-		description = json.getString("Description");
+
+		JSONObject nameJson = json.getJSONObject("name");
+		if (nameJson != null) {
+			for (Iterator<String> it = nameJson.keys(); it.hasNext(); ) {
+				String localeKey = it.next();
+				String name = nameJson.getString(localeKey);
+				names.put(localeKey, name);
+			}
+		}
+		JSONObject descriptionJson = json.getJSONObject("Description");
+		if (descriptionJson != null) {
+			for (Iterator<String> it = descriptionJson.keys(); it.hasNext(); ) {
+				String localeKey = it.next();
+				String name = descriptionJson.getString(localeKey);
+				descriptions.put(localeKey, name);
+			}
+		}
 	}
 
 //	Prepare ".opr" desert-package manually + add all resources inside (extend json to describe package).
@@ -69,11 +88,26 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 
 	@Override
 	public String getName() {
+		Configuration config = app.getResources().getConfiguration();
+		String lang = config.locale.getLanguage();
+		String name = names.get(lang);
+		if (Algorithms.isEmpty(name)) {
+			name = names.get("");
+		}
+		if (Algorithms.isEmpty(name)) {
+			name = app.getString(R.string.custom_osmand_plugin);
+		}
 		return name;
 	}
 
 	@Override
 	public String getDescription() {
+		Configuration config = app.getResources().getConfiguration();
+		String lang = config.locale.getLanguage();
+		String description = descriptions.get(lang);
+		if (Algorithms.isEmpty(description)) {
+			description = descriptions.get("");
+		}
 		return description;
 	}
 
@@ -92,8 +126,18 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 
 		json.put("type", SettingsHelper.SettingsItemType.PLUGIN.name());
 		json.put("pluginId", getId());
-		json.put("name", getName());
-		json.put("Description", getDescription());
+
+		JSONObject nameJson = new JSONObject();
+		for (Map.Entry<String, String> entry : names.entrySet()) {
+			nameJson.put(entry.getKey(), entry.getValue());
+		}
+		json.put("name", nameJson);
+
+		JSONObject descriptionJson = new JSONObject();
+		for (Map.Entry<String, String> entry : descriptions.entrySet()) {
+			descriptionJson.put(entry.getKey(), entry.getValue());
+		}
+		json.put("Description", descriptionJson);
 
 		saveAdditionalItemsToJson(json);
 
