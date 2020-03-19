@@ -3581,4 +3581,5 @@ Lon %2$s</string>
 \nDas kann einige Zeit dauern.</string>
     <string name="items_added">Elemente hinzugefügt</string>
     <string name="shared_string_import_complete">Import abgeschlossen</string>
+    <string name="clear_recorded_data_warning">Sind Sie sicher, dass Sie die aufgezeichneten Daten löschen möchten\?</string>
 </resources>
