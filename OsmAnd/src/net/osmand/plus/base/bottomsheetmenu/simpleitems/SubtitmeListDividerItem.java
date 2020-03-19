@@ -26,7 +26,7 @@ public class SubtitmeListDividerItem extends DividerItem {
 	}
 
 	@Override
-	protected int getLeftMargin(Context context) {
+	protected int getStartMargin(Context context) {
 		return context.getResources().getDimensionPixelSize(R.dimen.list_content_padding);
 	}
 }
