@@ -245,8 +245,12 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 			prevLocation = location;
 			object.pointsX[i] = MapUtils.get31TileNumberX(location.getLongitude());
 			object.pointsY[i] = MapUtils.get31TileNumberY(location.getLatitude());
-			object.heightDistanceArray[i * 2] = (float) dist;
-			object.heightDistanceArray[i * 2 + 1] = (float) location.getAltitude();
+			if (location.hasAltitude() && object.heightDistanceArray.length > 0) {
+				object.heightDistanceArray[i * 2] = (float) dist;
+				object.heightDistanceArray[i * 2 + 1] = (float) location.getAltitude();
+			} else {
+				object.heightDistanceArray = new float[0];
+			}
 			if (plus) {
 				index++;
 			} else {
