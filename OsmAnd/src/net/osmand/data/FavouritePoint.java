@@ -93,6 +93,9 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	public int getIconId() {
+		if (iconId == 0) {
+			return R.drawable.mx_special_star;
+		}
 		return iconId;
 	}
 
@@ -140,10 +143,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	public int getOverlayIconId() {
 		if (isSpecialPoint()) {
 			return specialPointType.getIconId();
-		} else if (iconId == 0) {
-			return R.drawable.mx_special_star;
 		}
-		return iconId;
+		return getIconId();
 	}
 
 	public double getLatitude() {

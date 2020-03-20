@@ -19,6 +19,7 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.FavouritePointMenuBuilder;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragment;
+import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragmentNew;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.util.OpeningHoursParser;
 
@@ -92,7 +93,13 @@ public class FavouritePointMenuController extends MenuController {
 		if (mapActivity != null) {
 			Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(FavoritePointEditor.TAG);
 			if (fragment != null) {
-				((FavoritePointEditorFragment) fragment).dismiss();
+				// TODO: uncomment & delete if else after switch to new UI Fragment
+				//((FavoritePointEditorFragment) fragment).dismiss();
+				if (fragment instanceof FavoritePointEditorFragmentNew) {
+					((FavoritePointEditorFragmentNew) fragment).dismiss();
+				} else {
+					((FavoritePointEditorFragment) fragment).dismiss();
+				}
 				return true;
 			}
 		}
