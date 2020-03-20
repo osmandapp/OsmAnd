@@ -226,13 +226,13 @@
     <string name="maps_could_not_be_downloaded">Nie udało się pobrać tej mapy</string>
     <string name="continuous_rendering">Renderowanie ciągłe</string>
     <string name="continuous_rendering_descr">Wyświetlaj ciągłe renderowanie zamiast obrazu jednorazowego.</string>
-    <string name="rendering_exception">Nie udało się narysować wybranej powierzchni</string>
+    <string name="rendering_exception">Nie udało się narysować wybranej powierzchni.</string>
     <string name="rendering_out_of_memory">Brak wystarczającej ilości pamięci, aby wyświetlić wybrany obszar</string>
     <string name="show_point_options">Użyj położenia…</string>
     <string name="renderer_load_sucess">Wczytano renderer</string>
     <string name="renderer_load_exception">Nie wczytano renderera.</string>
     <string name="renderers">Renderer wektorowy</string>
-    <string name="renderers_descr">Wybierz wygląd renderingu.</string>
+    <string name="renderers_descr">Wybierz wygląd renderingu</string>
     <string name="poi_context_menu_website">Wyświetl stronę internetową użytecznego miejsca</string>
     <string name="poi_context_menu_call">Wyświetl nr telefonu użytecznego miejsca</string>
     <string name="website">Strona internetowa</string>
@@ -1111,7 +1111,7 @@
     <string name="routing_attr_avoid_toll_name">Omijanie płatnych dróg</string>
     <string name="routing_attr_avoid_toll_description">Omijaj płatne drogi</string>
     <string name="routing_attr_avoid_unpaved_name">Omijanie nieutwardzonych dróg</string>
-    <string name="routing_attr_avoid_unpaved_description">Unikaj nieutwardzonych dróg.</string>
+    <string name="routing_attr_avoid_unpaved_description">Unikaj nieutwardzonych dróg</string>
     <string name="routing_attr_avoid_ferries_name">Omijanie przepraw promowych</string>
     <string name="routing_attr_avoid_ferries_description">Omijaj przeprawy promowe</string>
     <string name="routing_attr_avoid_motorway_name">Omijanie autostrad</string>
@@ -2822,7 +2822,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n• Opcjonalne nagrywanie podróży również w tle (gdy urządzenie znajduje się w trybie uśpienia)
 \nOsmAnd jest aktywnie rozwijanym oprogramowaniem typu open source. Każdy może wnieść swój wkład do aplikacji poprzez zgłaszanie błędów, ulepszanie tłumaczeń lub kodowanie nowych funkcji. Dodatkowo projekt opiera się na wkładzie finansowym na finansowanie kodowania i testowania nowych funkcjonalności.
 \n</string>
-    <string name="test_voice_desrc">Naciśnij przycisk i słuchaj odpowiedniego komunikatu głosowego, aby zidentyfikować brakujące lub błędne monity.</string>
+    <string name="test_voice_desrc">Naciśnij przycisk i słuchaj odpowiedniego komunikatu głosowego, aby zidentyfikować brakujące lub błędne monity</string>
     <string name="ask_for_location_permission">Proszę przyznać uprawnienia udostępniania położenia, aby kontynuować.</string>
     <string name="release_3_2_pre">• Naprawiono awarię podczas uruchamiania, która wystąpiła na niektórych urządzeniach 
 \n 
@@ -2891,7 +2891,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="voice_announcements">Komunikaty głosowe</string>
     <string name="intermediate_destinations">Pośrednie cele podróży</string>
     <string name="arrive_at_time">Dotarcie do celu o %1$s</string>
-    <string name="quick_action_switch_day_night_descr">Przełącznik zmiany pomiędzy trybem dziennym i nocnym w OsmAndzie</string>
+    <string name="quick_action_switch_day_night_descr">Przełącznik zmiany pomiędzy trybem dziennym i nocnym w OsmAndzie.</string>
     <string name="quick_action_switch_day_mode">Tryb dzienny</string>
     <string name="quick_action_switch_night_mode">Tryb nocny</string>
     <string name="quick_action_day_night_switch_mode">Zmień tryb dzienny/nocny</string>
