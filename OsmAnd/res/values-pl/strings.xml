@@ -3571,4 +3571,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="restore_all_profile_settings_descr">Wszystkie ustawienia profilu zostaną przywrócone do pierwotnego stanu po utworzeniu/zaimportowaniu tego profilu.</string>
     <string name="profile_backup_failed">Nie można utworzyć kopii zapasowej profilu.</string>
     <string name="clear_recorded_data_warning">Wyczyścić zarejestrowane dane\?</string>
+    <string name="importing_from">Importowanie danych z %1$s</string>
+    <string name="shared_string_importing">Importowanie</string>
 </resources>
