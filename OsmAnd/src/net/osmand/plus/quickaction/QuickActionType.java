@@ -3,6 +3,8 @@ package net.osmand.plus.quickaction;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class QuickActionType {
 
 	public static final int CREATE_CATEGORY = 0;
@@ -26,6 +28,7 @@ public class QuickActionType {
 		this.id = id;
 		this.stringId = stringId;
 		this.cl = cl;
+		this.actionEditable = cl != null;
 	}
 
 	public QuickActionType nameRes(int nameRes) {
@@ -43,8 +46,8 @@ public class QuickActionType {
 		return this;
 	}
 
-	public QuickActionType editable() {
-		actionEditable = true;
+	public QuickActionType nonEditable() {
+		actionEditable = false;
 		return this;
 	}
 
@@ -61,6 +64,24 @@ public class QuickActionType {
 			}
 		} else {
 			throw new UnsupportedOperationException();
+		}
+	}
+
+	public QuickAction createNew(QuickAction q) {
+		if(cl != null) {
+			try {
+				return cl.getConstructor(QuickAction.class).newInstance(q);
+			} catch (InstantiationException e) {
+				throw new UnsupportedOperationException(e);
+			} catch (IllegalAccessException e) {
+				throw new UnsupportedOperationException(e);
+			} catch (NoSuchMethodException e) {
+				throw new UnsupportedOperationException(e);
+			} catch (InvocationTargetException e) {
+				throw new UnsupportedOperationException(e);
+			}
+		} else {
+			return new QuickAction(q);
 		}
 	}
 
