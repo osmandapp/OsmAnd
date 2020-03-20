@@ -59,8 +59,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	private static final String RELIEF_SMOOTHNESS_FACTOR = "relief_smoothness_factor";
 	private static final String ROUTING_RECALC_DISTANCE= "routing_recalc_distance";
 
-	private static final float ROUTE_RECALC_DISTANCE_DISABLE = -1.0f;
-	private static final float ROUTE_RECALC_DISTANCE_DEFAULT = 0.0f;
+	public static final float DISABLE_MODE = -1.0f;
+	public static final float DEFAULT_MODE = 0.0f;
 
 	private List<RoutingParameter> avoidParameters = new ArrayList<RoutingParameter>();
 	private List<RoutingParameter> preferParameters = new ArrayList<RoutingParameter>();
@@ -70,7 +70,6 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 
 	private StateChangedListener<Boolean> booleanRoutingPrefListener;
 	private StateChangedListener<String> customRoutingPrefListener;
-	private StateChangedListener<Float> routeRecalculationDistanceListener;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -86,12 +85,6 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			@Override
 			public void stateChanged(String change) {
 				recalculateRoute();
-			}
-		};
-		routeRecalculationDistanceListener = new StateChangedListener<Float>() {
-			@Override
-			public void stateChanged(Float value) {
-				updateRouteRecalcDistanceView();
 			}
 		};
 	}
@@ -346,17 +339,17 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 				R.string.route_recalculation_dist_title, R.layout.preference_with_descr_dialog_and_switch);
 		switchPref.setIcon(getRoutingPrefIcon(ROUTING_RECALC_DISTANCE));
 		screen.addPreference(switchPref);
-		updateRouteRecalcDistanceView();
+		updateRouteRecalcDistancePref();
 	}
 
-	private void updateRouteRecalcDistanceView() {
+	private void updateRouteRecalcDistancePref() {
 		SwitchPreferenceEx switchPref = (SwitchPreferenceEx) findPreference(ROUTING_RECALC_DISTANCE);
 		if (switchPref == null) {
 			return;
 		}
 		ApplicationMode appMode = getSelectedAppMode();
 		float allowedValue = settings.ROUTE_RECALCULATION_DISTANCE.getModeValue(appMode);
-		boolean enabled = allowedValue != ROUTE_RECALC_DISTANCE_DISABLE;
+		boolean enabled = allowedValue != DISABLE_MODE;
 		if (allowedValue <= 0) {
 			allowedValue = RoutingHelper.getDefaultAllowedDeviation(settings, appMode, RoutingHelper.getPosTolerance(0));
 		}
@@ -389,7 +382,6 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	private void addRoutingPrefListeners() {
 		settings.FAST_ROUTE_MODE.addListener(booleanRoutingPrefListener);
 		settings.ENABLE_TIME_CONDITIONAL_ROUTING.addListener(booleanRoutingPrefListener);
-		settings.ROUTE_RECALCULATION_DISTANCE.addListener(routeRecalculationDistanceListener);
 
 		for (RoutingParameter parameter : otherRoutingParameters) {
 			if (parameter.getType() == RoutingParameterType.BOOLEAN) {
@@ -405,7 +397,6 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	private void removeRoutingPrefListeners() {
 		settings.FAST_ROUTE_MODE.removeListener(booleanRoutingPrefListener);
 		settings.ENABLE_TIME_CONDITIONAL_ROUTING.removeListener(booleanRoutingPrefListener);
-		settings.ROUTE_RECALCULATION_DISTANCE.removeListener(routeRecalculationDistanceListener);
 
 		for (RoutingParameter parameter : otherRoutingParameters) {
 			if (parameter.getType() == RoutingParameterType.BOOLEAN) {
@@ -437,9 +428,9 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		} else if (ROUTING_RECALC_DISTANCE.equals(key) && newValue instanceof Boolean) {
 			boolean enabled = (Boolean) newValue;
 			settings.ROUTE_RECALCULATION_DISTANCE.setModeValue(getSelectedAppMode(),
-					enabled ? ROUTE_RECALC_DISTANCE_DEFAULT : ROUTE_RECALC_DISTANCE_DISABLE);
+					enabled ? DEFAULT_MODE : DISABLE_MODE);
 			settings.DISABLE_OFFROUTE_RECALC.setModeValue(getSelectedAppMode(), !enabled);
-			updateRouteRecalcDistanceView();
+			updateRouteRecalcDistancePref();
 		}
 
 		return super.onPreferenceChange(preference, newValue);
@@ -449,6 +440,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	public void onPreferenceChanged(String prefId) {
 		if (AVOID_ROUTING_PARAMETER_PREFIX.equals(prefId) || PREFER_ROUTING_PARAMETER_PREFIX.equals(prefId)) {
 			recalculateRoute();
+		} else if (ROUTING_RECALC_DISTANCE.equals(prefId)) {
+			updateRouteRecalcDistancePref();
 		}
 	}
 

@@ -1,8 +1,5 @@
 package net.osmand.plus.settings.bottomsheets;
 
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -32,12 +29,14 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
-public class RecalculateRouteInDeviationBottomSheet extends BasePreferenceBottomSheet {
+import static net.osmand.plus.settings.RouteParametersFragment.DEFAULT_MODE;
+import static net.osmand.plus.settings.RouteParametersFragment.DISABLE_MODE;
+
+public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBottomSheet {
 
 	public static final String TAG = RecalculateRouteInDeviationBottomSheet.class.getSimpleName();
 
-	private static final float DISABLE_MODE = -1.0f;
-	private static final float DEFAULT_MODE = 0.0f;
+	private static final String CURRENT_VALUE = "current_value";
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -64,6 +63,10 @@ public class RecalculateRouteInDeviationBottomSheet extends BasePreferenceBottom
 		final SwitchPreferenceEx switchPref = (SwitchPreferenceEx) getPreference();
 		if (switchPref == null) {
 			return;
+		}
+
+		if (savedInstanceState != null && savedInstanceState.containsKey(CURRENT_VALUE)) {
+			currentValue = savedInstanceState.getFloat(CURRENT_VALUE);
 		}
 
 		int contentPaddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
@@ -101,7 +104,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BasePreferenceBottom
 				.setCompoundButtonColorId(appModeColor)
 				.setTitle(enabled ? on : off)
 				.setTitleColorId(enabled ? activeColor : disabledColor)
-				.setCustomView(getCustomCompoundButtonView(enabled))
+				.setCustomView(getCustomButtonView(enabled))
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -151,6 +154,10 @@ public class RecalculateRouteInDeviationBottomSheet extends BasePreferenceBottom
 		if (enabled && sliderPositionChanged) {
 			preference.setModeValue(getAppMode(), currentValue);
 		}
+		Fragment target = getTargetFragment();
+		if (target instanceof OnPreferenceChanged) {
+			((OnPreferenceChanged) target).onPreferenceChanged(preference.getId());
+		}
 		dismiss();
 	}
 
@@ -159,34 +166,10 @@ public class RecalculateRouteInDeviationBottomSheet extends BasePreferenceBottom
 		return R.string.shared_string_apply;
 	}
 
-	private View getCustomCompoundButtonView(boolean checked) {
-		View customView = UiUtilities.getInflater(app, nightMode).inflate(R.layout.bottom_sheet_item_preference_switch, null);
-		updateCustomButtonView(customView, checked);
-
-		return customView;
-	}
-
-	private void updateCustomButtonView(View customView, boolean checked) {
-		View buttonView = customView.findViewById(R.id.button_container);
-
-		int colorRes = appMode.getIconColorInfo().getColor(nightMode);
-		int color = checked ? getResolvedColor(colorRes) : AndroidUtils.getColorFromAttr(app, R.attr.divider_color_basic);
-		int bgColor = UiUtilities.getColorWithAlpha(color, checked ? 0.1f : 0.5f);
-		int selectedColor = UiUtilities.getColorWithAlpha(color, checked ? 0.3f : 0.5f);
-
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			int bgResId = R.drawable.rectangle_rounded_right;
-			int selectableResId = R.drawable.ripple_rectangle_rounded_right;
-
-			Drawable bgDrawable = app.getUIUtilities().getPaintedIcon(bgResId, bgColor);
-			Drawable selectable = app.getUIUtilities().getPaintedIcon(selectableResId, selectedColor);
-			Drawable[] layers = {bgDrawable, selectable};
-			AndroidUtils.setBackground(buttonView, new LayerDrawable(layers));
-		} else {
-			int bgResId = R.drawable.rectangle_rounded_right;
-			Drawable bgDrawable = app.getUIUtilities().getPaintedIcon(bgResId, bgColor);
-			AndroidUtils.setBackground(buttonView, bgDrawable);
-		}
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putFloat(CURRENT_VALUE, currentValue);
 	}
 
 	private void updateSliderView() {
