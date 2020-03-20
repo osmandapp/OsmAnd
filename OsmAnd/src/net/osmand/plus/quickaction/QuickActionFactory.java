@@ -42,6 +42,7 @@ import net.osmand.plus.quickaction.actions.ShowHideOSMBugAction;
 import net.osmand.plus.quickaction.actions.ShowHidePoiAction;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
+import net.osmand.util.MapUtils;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -49,6 +50,13 @@ import java.util.List;
 
 public class QuickActionFactory {
 
+	public static final QuickActionType TYPE_ADD_ITEMS = new QuickActionType(0, "").
+			nameRes(R.string.quick_action_add_create_items).category(QuickActionType.CREATE_CATEGORY);
+	public static final QuickActionType TYPE_CONFIGURE_MAP = new QuickActionType(0, "").
+			nameRes(R.string.quick_action_add_configure_map).category(QuickActionType.CONFIGURE_MAP);
+	public static final QuickActionType TYPE_NAVIGATION = new QuickActionType(0, "").
+			nameRes(R.string.quick_action_add_navigation).category(QuickActionType.NAVIGATION);
+	)
 	public String quickActionListToString(List<QuickAction> quickActions) {
 		return new Gson().toJson(quickActions);
 	}
@@ -60,125 +68,99 @@ public class QuickActionFactory {
 		return quickActions != null ? quickActions : new ArrayList<QuickAction>();
 	}
 
-	public static List<QuickAction> produceTypeActionsListWithHeaders(List<QuickAction> active) {
-		ArrayList<QuickAction> quickActions = new ArrayList<>();
-		quickActions.add(new QuickAction(0, R.string.quick_action_add_create_items));
-		quickActions.add(new FavoriteAction());
-		quickActions.add(new GPXAction());
-		QuickAction marker = new MarkerAction();
 
-		if (!marker.hasInstanceInList(active)) {
-			quickActions.add(marker);
-		}
+	public static List<QuickActionType> getActionTypes() {
+		List<QuickActionType> quickActionsTypes = new ArrayList<>();
+		quickActionsTypes.add(FavoriteAction.TYPE);
+		quickActionsTypes.add(GPXAction.TYPE);
+		quickActionsTypes.add(MarkerAction.TYPE);
+
+		// FIXME plugins
 
 		if (OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class) != null) {
-			QuickAction audio = new TakeAudioNoteAction();
-			QuickAction photo = new TakePhotoNoteAction();
-			QuickAction video = new TakeVideoNoteAction();
-
-			if (!audio.hasInstanceInList(active)) {
-				quickActions.add(audio);
-			}
-
-			if (!photo.hasInstanceInList(active)) {
-				quickActions.add(photo);
-			}
-
-			if (!video.hasInstanceInList(active)) {
-				quickActions.add(video);
-			}
+			quickActionsTypes.add(TakeAudioNoteAction.TYPE);
+			quickActionsTypes.add(TakePhotoNoteAction.TYPE);
+			quickActionsTypes.add(TakeVideoNoteAction.TYPE);
 		}
 
 		if (OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null) {
-			quickActions.add(new AddPOIAction());
-			quickActions.add(new AddOSMBugAction());
+			quickActionsTypes.add(AddPOIAction.TYPE);
+			quickActionsTypes.add(AddOSMBugAction.TYPE);
 		}
 
 		if (OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class) != null) {
-			QuickAction parking = new ParkingAction();
-			if (!parking.hasInstanceInList(active)) {
-				quickActions.add(parking);
-			}
+			quickActionsTypes.add(ParkingAction.TYPE);
 		}
+		// configure map
+		quickActionsTypes.add(ShowHideFavoritesAction.TYPE);
+		quickActionsTypes.add(ShowHideGpxTracksAction.TYPE);
+		quickActionsTypes.add(ShowHidePoiAction.TYPE);
 
-		quickActions.add(new QuickAction(0, R.string.quick_action_add_configure_map));
-
-		QuickAction favorites = new ShowHideFavoritesAction();
-		if (!favorites.hasInstanceInList(active)) {
-			quickActions.add(favorites);
-		}
-
-		quickActions.add(new ShowHideGpxTracksAction());
-
-		quickActions.add(new ShowHidePoiAction());
 		if (OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null) {
-			QuickAction showHideOSMBugAction = new ShowHideOSMBugAction();
-			if (!showHideOSMBugAction.hasInstanceInList(active)) {
-				quickActions.add(showHideOSMBugAction);
-			}
+			quickActionsTypes.add(ShowHideOSMBugAction.TYPE);
 		}
 
-		quickActions.add(new MapStyleAction());
+		quickActionsTypes.add(MapStyleAction.TYPE);
 		if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null) {
-			quickActions.add(new MapSourceAction());
-			quickActions.add(new MapOverlayAction());
-			quickActions.add(new MapUnderlayAction());
+			quickActionsTypes.add(MapSourceAction.TYPE);
+			quickActionsTypes.add(MapOverlayAction.TYPE);
+			quickActionsTypes.add(MapUnderlayAction.TYPE);
 		}
+
 
 		if (OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null) {
-			quickActions.add(new ContourLinesAction());
-			quickActions.add(new HillshadeAction());
+			quickActionsTypes.add(ContourLinesAction.TYPE);
+			quickActionsTypes.add(HillshadeAction.TYPE);
 		}
 
-		quickActions.add(new DayNightModeAction());
+		quickActionsTypes.add(DayNightModeAction.TYPE);
 
+		// navigation
+		quickActionsTypes.add(NavVoiceAction.TYPE);
+		quickActionsTypes.add(NavDirectionsFromAction.TYPE);
+		quickActionsTypes.add(NavAddDestinationAction.TYPE);
+		quickActionsTypes.add(NavAddFirstIntermediateAction.TYPE);
+		quickActionsTypes.add(NavReplaceDestinationAction.TYPE);
+		quickActionsTypes.add(NavAutoZoomMapAction.TYPE);
+		quickActionsTypes.add(NavStartStopAction.TYPE);
+		quickActionsTypes.add(NavResumePauseAction.TYPE);
+		return quickActionsTypes;
+	}
 
-		QuickAction voice = new NavVoiceAction();
-		QuickAction directionFrom = new NavDirectionsFromAction();
-		QuickAction addDestination = new NavAddDestinationAction();
-		QuickAction addFirstIntermediate = new NavAddFirstIntermediateAction();
-		QuickAction replaceDestination = new NavReplaceDestinationAction();
-		QuickAction autoZoomMap = new NavAutoZoomMapAction();
-		QuickAction startStopNavigation = new NavStartStopAction();
-		QuickAction resumePauseNavigation = new NavResumePauseAction();
-
-		ArrayList<QuickAction> navigationQuickActions = new ArrayList<>();
-
-		if (!voice.hasInstanceInList(active)) {
-			navigationQuickActions.add(voice);
-		}
-		if (!directionFrom.hasInstanceInList(active)) {
-			navigationQuickActions.add(directionFrom);
-		}
-		if (!addDestination.hasInstanceInList(active)) {
-			navigationQuickActions.add(addDestination);
-		}
-		if (!addFirstIntermediate.hasInstanceInList(active)) {
-			navigationQuickActions.add(addFirstIntermediate);
-		}
-		if (!replaceDestination.hasInstanceInList(active)) {
-			navigationQuickActions.add(replaceDestination);
-		}
-		if (!autoZoomMap.hasInstanceInList(active)) {
-			navigationQuickActions.add(autoZoomMap);
-		}
-		if (!startStopNavigation.hasInstanceInList(active)) {
-			navigationQuickActions.add(startStopNavigation);
-		}
-		if (!resumePauseNavigation.hasInstanceInList(active)) {
-			navigationQuickActions.add(resumePauseNavigation);
-		}
-
-		if (navigationQuickActions.size() > 0) {
-			quickActions.add(new QuickAction(0, R.string.quick_action_add_navigation));
-			quickActions.addAll(navigationQuickActions);
-		}
-
+	public static List<QuickActionType> produceTypeActionsListWithHeaders(List<QuickAction> active) {
+		List<QuickActionType> quickActions = new ArrayList<>();
+		List<QuickActionType> tps = getActionTypes();
+		filterQuickActions(active, tps, TYPE_ADD_ITEMS, quickActions);
+		filterQuickActions(active, tps, TYPE_CONFIGURE_MAP, quickActions);
+		filterQuickActions(active, tps, TYPE_NAVIGATION, quickActions);
 		return quickActions;
 	}
 
-	public static QuickAction newActionByType(int type) {
+	private static void filterQuickActions(List<QuickAction> active, List<QuickActionType> allTypes, QuickActionType filter,
+										   List<QuickActionType> result) {
+		result.add(filter);
+		for(QuickActionType t : allTypes) {
+			if(t.getCategory() == filter.getCategory()) {
+				if(t.isActionEditable()) {
+					boolean instanceInList = false;
+					for(QuickAction qa : active) {
+						if(qa.getActionType().getId() == t.getId()) {
+							instanceInList = true;
+							break;
+						}
+					}
+					if (!instanceInList) {
+						result.add(t);
+					}
+				} else {
+					result.add(t);
+				}
+			}
+		}
+	}
 
+	public static QuickAction newActionByType(int type) {
+		// FIXME
 		switch (type) {
 
 			case NewAction.TYPE:
@@ -216,9 +198,6 @@ public class QuickActionFactory {
 
 			case ShowHideOSMBugAction.TYPE:
 				return new ShowHideOSMBugAction();
-
-			case AddOSMBugAction.TYPE:
-				return new AddOSMBugAction();
 
 			case AddPOIAction.TYPE:
 				return new AddPOIAction();
@@ -274,7 +253,7 @@ public class QuickActionFactory {
 	}
 
 	public static QuickAction produceAction(QuickAction quickAction) {
-
+		// FIXME
 		switch (quickAction.type) {
 
 			case NewAction.TYPE:
@@ -312,9 +291,6 @@ public class QuickActionFactory {
 
 			case ShowHideOSMBugAction.TYPE:
 				return new ShowHideOSMBugAction(quickAction);
-
-			case AddOSMBugAction.TYPE:
-				return new AddOSMBugAction(quickAction);
 
 			case AddPOIAction.TYPE:
 				return new AddPOIAction(quickAction);
@@ -409,9 +385,6 @@ public class QuickActionFactory {
 			case ShowHideOSMBugAction.TYPE:
 				return R.drawable.ic_action_bug_dark;
 
-			case AddOSMBugAction.TYPE:
-				return R.drawable.ic_action_bug_dark;
-
 			case AddPOIAction.TYPE:
 				return R.drawable.ic_action_gabout_dark;
 
@@ -504,9 +477,6 @@ public class QuickActionFactory {
 
 			case ShowHideOSMBugAction.TYPE:
 				return R.string.quick_action_showhide_osmbugs_title;
-
-			case AddOSMBugAction.TYPE:
-				return R.string.quick_action_add_osm_bug;
 
 			case AddPOIAction.TYPE:
 				return R.string.quick_action_add_poi;

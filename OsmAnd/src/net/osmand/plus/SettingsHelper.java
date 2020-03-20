@@ -941,6 +941,7 @@ public class SettingsHelper {
 							JSONObject object = itemsJson.getJSONObject(i);
 							String name = object.getString("name");
 							int actionType = object.getInt("type");
+							// TODO
 							String paramsString = object.getString("params");
 							HashMap<String, String> params = gson.fromJson(paramsString, type);
 							QuickAction quickAction = new QuickAction(actionType);

@@ -86,7 +86,7 @@ public class AddQuickActionDialog extends DialogFragment {
         private static final int HEADER = 1;
         private static final int ITEM = 2;
 
-        private List<QuickAction> data;
+        private List<QuickActionType> data;
 
         public class ItemViewHolder extends RecyclerView.ViewHolder {
 
@@ -114,7 +114,7 @@ public class AddQuickActionDialog extends DialogFragment {
             }
         }
 
-        public Adapter(List<QuickAction> data) {
+        public Adapter(List<QuickActionType> data) {
             this.data = data;
         }
 
@@ -138,7 +138,7 @@ public class AddQuickActionDialog extends DialogFragment {
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-            final QuickAction action = data.get(position);
+            final QuickActionType action = data.get(position);
 
             if (getItemViewType(position) == HEADER) {
 
@@ -179,7 +179,7 @@ public class AddQuickActionDialog extends DialogFragment {
         @Override
         public int getItemViewType(int position) {
 
-            if (data.get(position).type == 0)
+            if (data.get(position).getId() == 0)
                 return HEADER;
 
             return ITEM;

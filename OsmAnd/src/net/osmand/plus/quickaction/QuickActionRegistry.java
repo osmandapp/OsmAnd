@@ -67,10 +67,12 @@ public class QuickActionRegistry {
     }
 
     public List<QuickAction> getQuickActions() {
-        List<QuickAction> actions = new ArrayList<>();
-        actions.addAll(quickActions);
-        return actions;
+        return new ArrayList<>(quickActions);
     }
+
+    public List<QuickActionType> getQuickActionTypes() {
+		List<QuickActionType> list = new ArrayList<>();
+	}
 
 	public List<QuickAction> getFilteredQuickActions() {
 

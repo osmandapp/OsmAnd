@@ -13,13 +13,18 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionType;
 
 public class AddOSMBugAction extends QuickAction {
 
-	public static final int TYPE = 12;
 
 	private static final String KEY_MESSAGE = "message";
 	private static final String KEY_SHO_DIALOG = "dialog";
+
+	public static final QuickActionType TYPE = new QuickActionType(12,
+			"osmbug.add", AddOSMBugAction.class).
+			nameRes(R.string.quick_action_add_osm_bug).iconRes(R.drawable.ic_action_bug_dark).
+			category(QuickActionType.CREATE_CATEGORY);
 
 	public AddOSMBugAction() {
 		super(TYPE);
