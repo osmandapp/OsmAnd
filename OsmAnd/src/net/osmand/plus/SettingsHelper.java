@@ -192,7 +192,7 @@ public class SettingsHelper {
 		}
 
 		void readFromJson(@NonNull JSONObject json) throws JSONException {
-			fileName = json.getString("file");
+			fileName = json.has("file") ? json.getString("file") : null;
 			readItemsFromJson(json);
 		}
 
@@ -810,10 +810,10 @@ public class SettingsHelper {
 		@Override
 		void readFromJson(@NonNull JSONObject json) throws JSONException {
 			super.readFromJson(json);
-			name = json.getString("name");
+			name = json.has("name") ? json.getString("name") : null;
 		}
 
-		@NonNull
+		@Nullable
 		@Override
 		public SettingsItemWriter getWriter() {
 			return new StreamSettingsItemWriter(this);
@@ -853,7 +853,7 @@ public class SettingsHelper {
 		void readFromJson(@NonNull JSONObject json) throws JSONException {
 			super.readFromJson(json);
 			String fileName = getFileName();
-			if (Algorithms.isEmpty(name) && !Algorithms.isEmpty(fileName)) {
+			if (!Algorithms.isEmpty(fileName)) {
 				name = Algorithms.getFileNameWithoutExtension(new File(fileName));
 			}
 		}
@@ -898,7 +898,16 @@ public class SettingsHelper {
 		FileSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			super(SettingsItemType.FILE, json);
 			this.file = new File(app.getAppPath(null), name);
-			this.subtype = json.getString("subtype");
+			this.subtype = json.has("subtype") ? json.getString("subtype") : null;
+		}
+
+		@Override
+		void readFromJson(@NonNull JSONObject json) throws JSONException {
+			super.readFromJson(json);
+			String fileName = getFileName();
+			if (!Algorithms.isEmpty(fileName)) {
+				name = fileName;
+			}
 		}
 
 		@NonNull
