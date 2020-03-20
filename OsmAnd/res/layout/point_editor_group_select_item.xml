@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="142dp"
 	android:layout_height="76dp"
-	android:layout_marginLeft="8dp"
-	xmlns:tools="http://schemas.android.com/tools">
+	android:layout_marginLeft="@dimen/content_padding_half"
+	android:layout_marginStart="@dimen/content_padding_half">
 
 	<ImageView
 		android:id="@+id/outlineRect"
@@ -41,10 +42,10 @@
 		android:id="@+id/groupName"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:paddingLeft="8dp"
-		android:paddingStart="8dp"
-		android:paddingRight="8dp"
-		android:paddingEnd="8dp"
+		android:paddingLeft="@dimen/content_padding_half"
+		android:paddingStart="@dimen/content_padding_half"
+		android:paddingRight="@dimen/content_padding_half"
+		android:paddingEnd="@dimen/content_padding_half"
 		android:paddingTop="33dp"
 		tools:text="@string/favorite" />
 

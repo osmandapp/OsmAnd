@@ -382,7 +382,15 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 
 	@Override
 	public Drawable getNameIcon() {
-		return FavoriteImageDrawable.getOrCreate(getMapActivity(), getPointColor(), false, getFavorite());
+		FavouritePoint favorite = getFavorite();
+		FavouritePoint point = null;
+		if (favorite != null) {
+			point = new FavouritePoint(favorite);
+			point.setColor(getPointColor());
+			point.setBackgroundType(backgroundType);
+			point.setIconId(iconId);
+		}
+		return FavoriteImageDrawable.getOrCreate(getMapActivity(), getPointColor(), false, point);
 	}
 
 	@Override
