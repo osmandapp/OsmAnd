@@ -3459,7 +3459,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="sunset_at">Coucher de soleil à %1$s</string>
     <string name="sunrise_at">Lever de soleil à %1$s</string>
     <string name="rearrange_categories">Réorganiser les catégories</string>
-    <string name="create_custom_categories_list_promo">Vous pouvez ajouter des catégories personnelles, masquer les catégories que vous ne souhaitez pas utiliser et les trier. La liste des catégories peut être importée et exportée grâce aux profils.</string>
+    <string name="create_custom_categories_list_promo">Modifiez l\'ordre de tri de la liste, masquez des catégories. Vous pouvez importer et exporter toutes vos modifications via les profils.</string>
     <string name="reset_to_default_category_button_promo">Restaurer les valeurs par défaut réinitialisera l\'ordre de tri.</string>
     <string name="accessibility_mode_disabled">Le mode d\'accessibilité est désactivé dans votre système.</string>
     <string name="add_new_custom_category_button_promo">Vous pouvez ajouter une catégorie personnelle en sélectionnant la ou les catégories souhaitées.</string>
@@ -3544,8 +3544,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_importing">Import en cours</string>
     <string name="items_added">Éléments ajoutés</string>
     <string name="shared_string_import_complete">Import terminé</string>
-    <string name="checking_for_duplicate_description">OsmAnd vérifie que %1$s ne duplique pas un élément déjà existant dans l\'application.
-\n
+    <string name="checking_for_duplicate_description">OsmAnd vérifie que l\'élément %1$s n\'existe pas déjà dans l\'application. 
+\n 
 \nCela peut prendre un certain temps.</string>
     <string name="import_complete_description">Les données de %1$s ont été importées, vous pouvez utiliser les boutons ci-dessous pour ouvrir la partie adéquate de l\'application pour les gérer.</string>
 </resources>
