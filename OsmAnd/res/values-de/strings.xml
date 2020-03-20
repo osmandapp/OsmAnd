@@ -3582,4 +3582,6 @@ Lon %2$s</string>
     <string name="items_added">Elemente hinzugefügt</string>
     <string name="shared_string_import_complete">Import abgeschlossen</string>
     <string name="clear_recorded_data_warning">Sind Sie sicher, dass Sie die aufgezeichneten Daten löschen möchten\?</string>
+    <string name="select_distance_route_will_recalc">Wählen Sie die Entfernung, nach der die Route neu berechnet wird.</string>
+    <string name="recalculate_route_in_deviation">Neuberechnung der Route im Falle einer Abweichung</string>
 </resources>
