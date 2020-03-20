@@ -183,8 +183,6 @@ public class QuickActionFactory {
 			case ShowHidePoiAction.TYPE:
 				return R.drawable.ic_action_gabout_dark;
 
-			case ParkingAction.TYPE:
-				return R.drawable.ic_action_parking_dark;
 
 			case TakeAudioNoteAction.TYPE:
 				return R.drawable.ic_action_micro_dark;
@@ -211,9 +209,6 @@ public class QuickActionFactory {
 			case MapUnderlayAction.TYPE:
 				return R.drawable.ic_layer_bottom;
 
-			case DayNightModeAction.TYPE:
-				return R.drawable.ic_action_map_day;
-
 			case ShowHideGpxTracksAction.TYPE:
 				return R.drawable.ic_gpx_track;
 
@@ -238,8 +233,6 @@ public class QuickActionFactory {
 			case ShowHidePoiAction.TYPE:
 				return R.string.quick_action_showhide_poi_title;
 
-			case ParkingAction.TYPE:
-				return R.string.quick_action_add_parking;
 
 			case TakeAudioNoteAction.TYPE:
 				return R.string.quick_action_take_audio_note;
@@ -266,9 +259,6 @@ public class QuickActionFactory {
 			case MapUnderlayAction.TYPE:
 				return R.string.quick_action_map_underlay;
 
-			case DayNightModeAction.TYPE:
-				return R.string.quick_action_day_night_switch_mode;
-
 			case ShowHideGpxTracksAction.TYPE:
 				return R.string.quick_action_show_hide_gpx_tracks;
 
@@ -288,12 +278,10 @@ public class QuickActionFactory {
 		switch (type) {
 			case ShowHideFavoritesAction.TYPE:
 			case ShowHidePoiAction.TYPE:
-			case ParkingAction.TYPE:
 			case TakeAudioNoteAction.TYPE:
 			case TakePhotoNoteAction.TYPE:
 			case TakeVideoNoteAction.TYPE:
 			case ShowHideOSMBugAction.TYPE:
-			case DayNightModeAction.TYPE:
 			case ShowHideGpxTracksAction.TYPE:
 			case ContourLinesAction.TYPE:
 			case HillshadeAction.TYPE:

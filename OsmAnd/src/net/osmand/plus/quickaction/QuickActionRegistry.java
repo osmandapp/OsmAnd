@@ -29,6 +29,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by rosty on 12/27/16.
@@ -70,65 +72,18 @@ public class QuickActionRegistry {
         return new ArrayList<>(quickActions);
     }
 
-    public List<QuickActionType> getQuickActionTypes() {
-		List<QuickActionType> list = new ArrayList<>();
-	}
-
 	public List<QuickAction> getFilteredQuickActions() {
-
 		List<QuickAction> actions = getQuickActions();
+		Set<Integer> activeTypesInts = new TreeSet<>();
+		for (QuickActionType activeType : QuickActionFactory.getActionTypes()) {
+			activeTypesInts.add(activeType.getId());
+		}
 		List<QuickAction> filteredActions = new ArrayList<>();
-
 		for (QuickAction action : actions) {
-			boolean skip = false;
-			if (OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class) == null) {
-
-				if (action.type == TakeAudioNoteAction.TYPE || action.type == TakePhotoNoteAction.TYPE
-						|| action.type == TakeVideoNoteAction.TYPE) {
-					skip = true;
-				}
-			}
-
-			if (OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class) == null) {
-				if (action.type == ParkingAction.TYPE) {
-					skip = true;
-				}
-			}
-
-			if (OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null) {
-				if (action.type == MapStyleAction.TYPE) {
-					if (((MapStyleAction) QuickActionFactory.produceAction(action)).getFilteredStyles().isEmpty()) {
-						skip = true;
-					}
-				}
-			}
-
-			if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) == null) {
-				if (action.type == MapSourceAction.TYPE) {
-					skip = true;
-				}
-			}
-			if (OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) == null) {
-				if (action.type == AddPOIAction.TYPE) {
-					skip = true;
-				}
-				if (action.type == AddOSMBugAction.TYPE) {
-					skip = true;
-				}
-			}
-			if (OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null) {
-				if (action.type == ContourLinesAction.TYPE) {
-					skip = true;
-				}
-				if (action.type == HillshadeAction.TYPE) {
-					skip = true;
-				}
-			}
-			if (!skip) {
+			if (activeTypesInts.contains(action.getActionType().getId())) {
 				filteredActions.add(action);
 			}
 		}
-
 		return filteredActions;
 	}
 
