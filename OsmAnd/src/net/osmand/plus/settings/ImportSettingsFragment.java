@@ -328,7 +328,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 			}
 		}
 		if (!quickActions.isEmpty()) {
-			settingsItems.add(new SettingsHelper.QuickActionSettingsItem(app, quickActions));
+			settingsItems.add(new QuickActionsSettingsItem(app, quickActions));
 		}
 		if (!poiUIFilters.isEmpty()) {
 			settingsItems.add(new SettingsHelper.PoiUiFilterSettingsItem(app, poiUIFilters));
@@ -355,9 +355,9 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		for (SettingsItem item : settingsItems) {
 			if (item.getType().equals(SettingsItemType.PROFILE)) {
 				profiles.add(((ProfileSettingsItem) item).getModeBean());
-			} else if (item.getType().equals(SettingsItemType.QUICK_ACTION)) {
-				quickActions.addAll(((QuickActionSettingsItem) item).getItems());
-				quickActions.addAll(((QuickActionSettingsItem) item).getDuplicateItems());
+			} else if (item.getType().equals(SettingsItemType.QUICK_ACTIONS)) {
+				quickActions.addAll(((QuickActionsSettingsItem) item).getItems());
+				quickActions.addAll(((QuickActionsSettingsItem) item).getDuplicateItems());
 			} else if (item.getType().equals(SettingsItemType.POI_UI_FILTERS)) {
 				poiUIFilters.addAll(((PoiUiFilterSettingsItem) item).getItems());
 				poiUIFilters.addAll(((PoiUiFilterSettingsItem) item).getDuplicateItems());

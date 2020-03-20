@@ -299,7 +299,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 			}
 		}
 		if (!quickActions.isEmpty()) {
-			settingsItems.add(new SettingsHelper.QuickActionSettingsItem(app, quickActions));
+			settingsItems.add(new SettingsHelper.QuickActionsSettingsItem(app, quickActions));
 		}
 		if (!poiUIFilters.isEmpty()) {
 			settingsItems.add(new SettingsHelper.PoiUiFilterSettingsItem(app, poiUIFilters));

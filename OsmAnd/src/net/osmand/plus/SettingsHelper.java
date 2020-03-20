@@ -87,6 +87,8 @@ import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
 
 public class SettingsHelper {
 
+	public static final int VERSION = 1;
+
 	public static final String SETTINGS_LATEST_CHANGES_KEY = "settings_latest_changes";
 	public static final String SETTINGS_VERSION_KEY = "settings_version";
 
@@ -124,7 +126,7 @@ public class SettingsHelper {
 		PLUGIN,
 		DATA,
 		FILE,
-		QUICK_ACTION,
+		QUICK_ACTIONS,
 		POI_UI_FILTERS,
 		MAP_SOURCES,
 		AVOID_ROADS
@@ -133,6 +135,7 @@ public class SettingsHelper {
 	public abstract static class SettingsItem {
 
 		private SettingsItemType type;
+		private String fileName;
 
 		boolean shouldReplace = false;
 
@@ -157,7 +160,16 @@ public class SettingsHelper {
 		public abstract String getPublicName(@NonNull Context ctx);
 
 		@NonNull
-		public abstract String getFileName();
+		public abstract String getDefaultFileName();
+
+		@NonNull
+		public String getFileName() {
+			return !Algorithms.isEmpty(fileName) ? fileName : getDefaultFileName();
+		}
+
+		public void setFileName(@NonNull String fileName) {
+			this.fileName = fileName;
+		}
 
 		public boolean shouldReadOnCollecting() {
 			return false;
@@ -180,11 +192,14 @@ public class SettingsHelper {
 		}
 
 		void readFromJson(@NonNull JSONObject json) throws JSONException {
+			fileName = json.getString("file");
+			readItemsFromJson(json);
 		}
 
 		void writeToJson(@NonNull JSONObject json) throws JSONException {
 			json.put("type", type.name());
-			json.put("name", getName());
+			json.put("file", getFileName());
+			writeItemsToJson(json);
 		}
 
 		String toJson() throws JSONException {
@@ -193,11 +208,68 @@ public class SettingsHelper {
 			return json.toString();
 		}
 
-		@NonNull
+		void readItemsFromJson(@NonNull JSONObject json) throws IllegalArgumentException {
+			// override
+		}
+
+		void writeItemsToJson(@NonNull JSONObject json) {
+			// override
+		}
+
+		@Nullable
 		abstract SettingsItemReader getReader();
 
-		@NonNull
+		@Nullable
 		abstract SettingsItemWriter getWriter();
+
+		@NonNull
+		SettingsItemReader getJsonReader() {
+			return new SettingsItemReader<SettingsItem>(this) {
+				@Override
+				public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
+					StringBuilder buf = new StringBuilder();
+					try {
+						BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+						String str;
+						while ((str = in.readLine()) != null) {
+							buf.append(str);
+						}
+					} catch (IOException e) {
+						throw new IOException("Cannot read json body", e);
+					}
+					String json = buf.toString();
+					if (json.length() == 0) {
+						throw new IllegalArgumentException("Json body is empty");
+					}
+					try {
+						readItemsFromJson(new JSONObject(json));
+					} catch (JSONException e) {
+						throw new IllegalArgumentException("Json parsing error", e);
+					}
+				}
+			};
+		}
+
+		@NonNull
+		SettingsItemWriter getJsonWriter() {
+			return new SettingsItemWriter<SettingsItem>(this) {
+				@Override
+				public boolean writeToStream(@NonNull OutputStream outputStream) throws IOException {
+					JSONObject json = new JSONObject();
+					writeItemsToJson(json);
+					if (json.length() > 0) {
+						try {
+							String s = json.toString(2);
+							outputStream.write(s.getBytes("UTF-8"));
+						} catch (JSONException e) {
+							LOG.error("Failed to write json to stream", e);
+						}
+						return true;
+					}
+					return false;
+				}
+			};
+		}
 
 		@Override
 		public int hashCode() {
@@ -246,7 +318,7 @@ public class SettingsHelper {
 
 		@NonNull
 		@Override
-		public String getFileName() {
+		public String getDefaultFileName() {
 			return getName() + ".zip";
 		}
 
@@ -262,27 +334,16 @@ public class SettingsHelper {
 			plugin = new CustomOsmandPlugin(app, json);
 		}
 
-		@NonNull
+		@Nullable
 		@Override
 		SettingsItemReader getReader() {
-			return new SettingsItemReader<PluginSettingsItem>(this) {
-				@Override
-				public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
-
-				}
-			};
+			return null;
 		}
 
-		@NonNull
+		@Nullable
 		@Override
 		SettingsItemWriter getWriter() {
-			return new SettingsItemWriter<PluginSettingsItem>(this) {
-				@Override
-				public boolean writeToStream(@NonNull OutputStream outputStream) throws IOException {
-
-					return false;
-				}
-			};
+			return null;
 		}
 	}
 
@@ -488,7 +549,7 @@ public class SettingsHelper {
 
 		@NonNull
 		@Override
-		public String getFileName() {
+		public String getDefaultFileName() {
 			return getName() + ".json";
 		}
 
@@ -497,7 +558,7 @@ public class SettingsHelper {
 			return true;
 		}
 
-		@NonNull
+		@Nullable
 		@Override
 		SettingsItemReader getReader() {
 			return new OsmandSettingsItemReader(this, getSettings()) {
@@ -508,7 +569,7 @@ public class SettingsHelper {
 			};
 		}
 
-		@NonNull
+		@Nullable
 		@Override
 		SettingsItemWriter getWriter() {
 			return new OsmandSettingsItemWriter(this, getSettings()) {
@@ -579,7 +640,7 @@ public class SettingsHelper {
 
 		@NonNull
 		@Override
-		public String getFileName() {
+		public String getDefaultFileName() {
 			return "profile_" + getName() + ".json";
 		}
 
@@ -645,7 +706,7 @@ public class SettingsHelper {
 			json.put("appMode", new JSONObject(appMode.toJson()));
 		}
 
-		@NonNull
+		@Nullable
 		@Override
 		SettingsItemReader getReader() {
 			return new OsmandSettingsItemReader(this, getSettings()) {
@@ -658,7 +719,7 @@ public class SettingsHelper {
 			};
 		}
 
-		@NonNull
+		@Nullable
 		@Override
 		SettingsItemWriter getWriter() {
 			return new OsmandSettingsItemWriter(this, getSettings()) {
@@ -677,7 +738,6 @@ public class SettingsHelper {
 		public StreamSettingsItemReader(@NonNull StreamSettingsItem item) {
 			super(item);
 		}
-
 	}
 
 	public static class StreamSettingsItemWriter extends SettingsItemWriter<StreamSettingsItem> {
@@ -780,7 +840,7 @@ public class SettingsHelper {
 
 		@NonNull
 		@Override
-		public String getFileName() {
+		public String getDefaultFileName() {
 			return getName() + ".dat";
 		}
 
@@ -789,7 +849,16 @@ public class SettingsHelper {
 			return data;
 		}
 
-		@NonNull
+		@Override
+		void readFromJson(@NonNull JSONObject json) throws JSONException {
+			super.readFromJson(json);
+			String fileName = getFileName();
+			if (Algorithms.isEmpty(name) && !Algorithms.isEmpty(fileName)) {
+				name = Algorithms.getFileNameWithoutExtension(new File(fileName));
+			}
+		}
+
+		@Nullable
 		@Override
 		SettingsItemReader getReader() {
 			return new StreamSettingsItemReader(this) {
@@ -808,7 +877,7 @@ public class SettingsHelper {
 			};
 		}
 
-		@NonNull
+		@Nullable
 		@Override
 		public SettingsItemWriter getWriter() {
 			setInputStream(new ByteArrayInputStream(data));
@@ -819,6 +888,7 @@ public class SettingsHelper {
 	public static class FileSettingsItem extends StreamSettingsItem {
 
 		private File file;
+		private String subtype;
 
 		public FileSettingsItem(@NonNull OsmandApplication app, @NonNull File file) {
 			super(SettingsItemType.FILE, file.getPath().replace(app.getAppPath(null).getPath(), ""));
@@ -828,16 +898,21 @@ public class SettingsHelper {
 		FileSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			super(SettingsItemType.FILE, json);
 			this.file = new File(app.getAppPath(null), name);
+			this.subtype = json.getString("subtype");
 		}
 
 		@NonNull
 		@Override
-		public String getFileName() {
+		public String getDefaultFileName() {
 			return getName();
 		}
 
 		public File getFile() {
 			return file;
+		}
+
+		public String getSubtype() {
+			return subtype;
 		}
 
 		@Override
@@ -858,7 +933,7 @@ public class SettingsHelper {
 			}
 		}
 
-		@NonNull
+		@Nullable
 		@Override
 		SettingsItemReader getReader() {
 			return new StreamSettingsItemReader(this) {
@@ -884,7 +959,7 @@ public class SettingsHelper {
 			};
 		}
 
-		@NonNull
+		@Nullable
 		@Override
 		public SettingsItemWriter getWriter() {
 			try {
@@ -896,22 +971,22 @@ public class SettingsHelper {
 		}
 	}
 
-	public static class QuickActionSettingsItem extends CollectionSettingsItem<QuickAction> {
+	public static class QuickActionsSettingsItem extends CollectionSettingsItem<QuickAction> {
 
 		private OsmandApplication app;
 		private QuickActionRegistry actionRegistry;
 
-		public QuickActionSettingsItem(@NonNull OsmandApplication app,
-									   @NonNull List<QuickAction> items) {
-			super(SettingsItemType.QUICK_ACTION, items);
+		public QuickActionsSettingsItem(@NonNull OsmandApplication app,
+										@NonNull List<QuickAction> items) {
+			super(SettingsItemType.QUICK_ACTIONS, items);
 			this.app = app;
 			actionRegistry = app.getQuickActionRegistry();
 			existingItems = actionRegistry.getQuickActions();
 		}
 
-		QuickActionSettingsItem(@NonNull OsmandApplication app,
-								@NonNull JSONObject json) throws JSONException {
-			super(SettingsItemType.QUICK_ACTION, json);
+		QuickActionsSettingsItem(@NonNull OsmandApplication app,
+								 @NonNull JSONObject json) throws JSONException {
+			super(SettingsItemType.QUICK_ACTIONS, json);
 			this.app = app;
 			actionRegistry = app.getQuickActionRegistry();
 			existingItems = actionRegistry.getQuickActions();
@@ -972,95 +1047,68 @@ public class SettingsHelper {
 
 		@NonNull
 		@Override
-		public String getFileName() {
+		public String getDefaultFileName() {
 			return getName() + ".json";
 		}
 
-		@NonNull
 		@Override
-		SettingsItemReader getReader() {
-			return new SettingsItemReader<QuickActionSettingsItem>(this) {
-				@Override
-				public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
-					StringBuilder buf = new StringBuilder();
-					try {
-						BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-						String str;
-						while ((str = in.readLine()) != null) {
-							buf.append(str);
-						}
-					} catch (IOException e) {
-						throw new IOException("Cannot read json body", e);
+		void readItemsFromJson(@NonNull JSONObject json) throws IllegalArgumentException {
+			try {
+				Gson gson = new Gson();
+				Type type = new TypeToken<HashMap<String, String>>() {
+				}.getType();
+				JSONArray itemsJson = json.getJSONArray("items");
+				for (int i = 0; i < itemsJson.length(); i++) {
+					JSONObject object = itemsJson.getJSONObject(i);
+					String name = object.getString("name");
+					int actionType = object.getInt("type");
+					String paramsString = object.getString("params");
+					HashMap<String, String> params = gson.fromJson(paramsString, type);
+					QuickAction quickAction = new QuickAction(actionType);
+					if (!name.isEmpty()) {
+						quickAction.setName(name);
 					}
-					String jsonStr = buf.toString();
-					if (Algorithms.isEmpty(jsonStr)) {
-						throw new IllegalArgumentException("Cannot find json body");
-					}
-					final JSONObject json;
-					try {
-						Gson gson = new Gson();
-						Type type = new TypeToken<HashMap<String, String>>() {
-						}.getType();
-						json = new JSONObject(jsonStr);
-						JSONArray itemsJson = json.getJSONArray("items");
-						for (int i = 0; i < itemsJson.length(); i++) {
-							JSONObject object = itemsJson.getJSONObject(i);
-							String name = object.getString("name");
-							int actionType = object.getInt("type");
-							String paramsString = object.getString("params");
-							HashMap<String, String> params = gson.fromJson(paramsString, type);
-							QuickAction quickAction = new QuickAction(actionType);
-							if (!name.isEmpty()) {
-								quickAction.setName(name);
-							}
-							quickAction.setParams(params);
-							items.add(quickAction);
-						}
-					} catch (JSONException e) {
-						throw new IllegalArgumentException("Json parse error", e);
-					}
+					quickAction.setParams(params);
+					items.add(quickAction);
 				}
-			};
+			} catch (JSONException e) {
+				throw new IllegalArgumentException("Json parse error", e);
+			}
 		}
 
-		@NonNull
+		@Override
+		void writeItemsToJson(@NonNull JSONObject json) {
+			JSONArray jsonArray = new JSONArray();
+			Gson gson = new Gson();
+			Type type = new TypeToken<HashMap<String, String>>() {
+			}.getType();
+			if (!items.isEmpty()) {
+				try {
+					for (QuickAction action : items) {
+						JSONObject jsonObject = new JSONObject();
+						jsonObject.put("name", action.hasCustomName(app)
+								? action.getName(app) : "");
+						jsonObject.put("type", action.getType());
+						jsonObject.put("params", gson.toJson(action.getParams(), type));
+						jsonArray.put(jsonObject);
+					}
+					json.put("items", jsonArray);
+				} catch (JSONException e) {
+					LOG.error("Failed write to json", e);
+				}
+			}
+		}
+
+		@Nullable
+		@Override
+		SettingsItemReader getReader() {
+			return getJsonReader();
+		}
+
+		@Nullable
 		@Override
 		SettingsItemWriter getWriter() {
-			return new SettingsItemWriter<QuickActionSettingsItem>(this) {
-				@Override
-				public boolean writeToStream(@NonNull OutputStream outputStream) throws IOException {
-					JSONObject json = new JSONObject();
-					JSONArray jsonArray = new JSONArray();
-					Gson gson = new Gson();
-					Type type = new TypeToken<HashMap<String, String>>() {
-					}.getType();
-					if (!items.isEmpty()) {
-						try {
-							for (QuickAction action : items) {
-								JSONObject jsonObject = new JSONObject();
-								jsonObject.put("name", action.hasCustomName(app)
-										? action.getName(app) : "");
-								jsonObject.put("type", action.getType());
-								jsonObject.put("params", gson.toJson(action.getParams(), type));
-								jsonArray.put(jsonObject);
-							}
-							json.put("items", jsonArray);
-						} catch (JSONException e) {
-							LOG.error("Failed write to json", e);
-						}
-					}
-					if (json.length() > 0) {
-						try {
-							String s = json.toString(2);
-							outputStream.write(s.getBytes("UTF-8"));
-						} catch (JSONException e) {
-							LOG.error("Failed to write json to stream", e);
-						}
-						return true;
-					}
-					return false;
-				}
-			};
+			return null;
 		}
 	}
 
@@ -1138,96 +1186,69 @@ public class SettingsHelper {
 
 		@NonNull
 		@Override
-		public String getFileName() {
+		public String getDefaultFileName() {
 			return getName() + ".json";
 		}
 
-		@NonNull
 		@Override
-		SettingsItemReader getReader() {
-			return new SettingsItemReader<PoiUiFilterSettingsItem>(this) {
-				@Override
-				public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
-					StringBuilder buf = new StringBuilder();
-					try {
-						BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-						String str;
-						while ((str = in.readLine()) != null) {
-							buf.append(str);
-						}
-					} catch (IOException e) {
-						throw new IOException("Cannot read json body", e);
+		void readItemsFromJson(@NonNull JSONObject json) throws IllegalArgumentException {
+			try {
+				JSONArray jsonArray = json.getJSONArray("items");
+				Gson gson = new Gson();
+				Type type = new TypeToken<HashMap<String, LinkedHashSet<String>>>() {
+				}.getType();
+				MapPoiTypes poiTypes = app.getPoiTypes();
+				for (int i = 0; i < jsonArray.length(); i++) {
+					JSONObject object = jsonArray.getJSONObject(i);
+					String name = object.getString("name");
+					String filterId = object.getString("filterId");
+					String acceptedTypesString = object.getString("acceptedTypes");
+					HashMap<String, LinkedHashSet<String>> acceptedTypes = gson.fromJson(acceptedTypesString, type);
+					Map<PoiCategory, LinkedHashSet<String>> acceptedTypesDone = new HashMap<>();
+					for (Map.Entry<String, LinkedHashSet<String>> mapItem : acceptedTypes.entrySet()) {
+						final PoiCategory a = poiTypes.getPoiCategoryByName(mapItem.getKey());
+						acceptedTypesDone.put(a, mapItem.getValue());
 					}
-					String jsonStr = buf.toString();
-					if (Algorithms.isEmpty(jsonStr)) {
-						throw new IllegalArgumentException("Cannot find json body");
-					}
-					final JSONObject json;
-					try {
-						json = new JSONObject(jsonStr);
-						JSONArray jsonArray = json.getJSONArray("items");
-						Gson gson = new Gson();
-						Type type = new TypeToken<HashMap<String, LinkedHashSet<String>>>() {
-						}.getType();
-						MapPoiTypes poiTypes = app.getPoiTypes();
-						for (int i = 0; i < jsonArray.length(); i++) {
-							JSONObject object = jsonArray.getJSONObject(i);
-							String name = object.getString("name");
-							String filterId = object.getString("filterId");
-							String acceptedTypesString = object.getString("acceptedTypes");
-							HashMap<String, LinkedHashSet<String>> acceptedTypes = gson.fromJson(acceptedTypesString, type);
-							Map<PoiCategory, LinkedHashSet<String>> acceptedTypesDone = new HashMap<>();
-							for (Map.Entry<String, LinkedHashSet<String>> mapItem : acceptedTypes.entrySet()) {
-								final PoiCategory a = poiTypes.getPoiCategoryByName(mapItem.getKey());
-								acceptedTypesDone.put(a, mapItem.getValue());
-							}
-							PoiUIFilter filter = new PoiUIFilter(name, filterId, acceptedTypesDone, app);
-							items.add(filter);
-						}
-					} catch (JSONException e) {
-						throw new IllegalArgumentException("Json parse error", e);
-					}
+					PoiUIFilter filter = new PoiUIFilter(name, filterId, acceptedTypesDone, app);
+					items.add(filter);
 				}
-			};
+			} catch (JSONException e) {
+				throw new IllegalArgumentException("Json parse error", e);
+			}
 		}
 
-		@NonNull
+		@Override
+		void writeItemsToJson(@NonNull JSONObject json) {
+			JSONArray jsonArray = new JSONArray();
+			Gson gson = new Gson();
+			Type type = new TypeToken<HashMap<PoiCategory, LinkedHashSet<String>>>() {
+			}.getType();
+			if (!items.isEmpty()) {
+				try {
+					for (PoiUIFilter filter : items) {
+						JSONObject jsonObject = new JSONObject();
+						jsonObject.put("name", filter.getName());
+						jsonObject.put("filterId", filter.getFilterId());
+						jsonObject.put("acceptedTypes", gson.toJson(filter.getAcceptedTypes(), type));
+						jsonArray.put(jsonObject);
+					}
+					json.put("items", jsonArray);
+				} catch (JSONException e) {
+					LOG.error("Failed write to json", e);
+				}
+			}
+		}
+
+		@Nullable
+		@Override
+		SettingsItemReader getReader() {
+			return getJsonReader();
+		}
+
+		@Nullable
 		@Override
 		SettingsItemWriter getWriter() {
-			return new SettingsItemWriter<PoiUiFilterSettingsItem>(this) {
-				@Override
-				public boolean writeToStream(@NonNull OutputStream outputStream) throws IOException {
-					JSONObject json = new JSONObject();
-					JSONArray jsonArray = new JSONArray();
-					Gson gson = new Gson();
-					Type type = new TypeToken<HashMap<PoiCategory, LinkedHashSet<String>>>() {
-					}.getType();
-					if (!items.isEmpty()) {
-						try {
-							for (PoiUIFilter filter : items) {
-								JSONObject jsonObject = new JSONObject();
-								jsonObject.put("name", filter.getName());
-								jsonObject.put("filterId", filter.getFilterId());
-								jsonObject.put("acceptedTypes", gson.toJson(filter.getAcceptedTypes(), type));
-								jsonArray.put(jsonObject);
-							}
-							json.put("items", jsonArray);
-						} catch (JSONException e) {
-							LOG.error("Failed write to json", e);
-						}
-					}
-					if (json.length() > 0) {
-						try {
-							String s = json.toString(2);
-							outputStream.write(s.getBytes("UTF-8"));
-						} catch (JSONException e) {
-							LOG.error("Failed to write json to stream", e);
-						}
-						return true;
-					}
-					return false;
-				}
-			};
+			return null;
 		}
 	}
 
@@ -1338,119 +1359,92 @@ public class SettingsHelper {
 
 		@NonNull
 		@Override
-		public String getFileName() {
+		public String getDefaultFileName() {
 			return getName() + ".json";
 		}
 
-		@NonNull
 		@Override
-		SettingsItemReader getReader() {
-			return new SettingsItemReader<MapSourcesSettingsItem>(this) {
-				@Override
-				public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
-					StringBuilder buf = new StringBuilder();
-					try {
-						BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-						String str;
-						while ((str = in.readLine()) != null) {
-							buf.append(str);
-						}
-					} catch (IOException e) {
-						throw new IOException("Cannot read json body", e);
-					}
-					String jsonStr = buf.toString();
-					if (Algorithms.isEmpty(jsonStr)) {
-						throw new IllegalArgumentException("Cannot find json body");
-					}
-					final JSONObject json;
-					try {
-						json = new JSONObject(jsonStr);
-						JSONArray jsonArray = json.getJSONArray("items");
-						for (int i = 0; i < jsonArray.length(); i++) {
-							JSONObject object = jsonArray.getJSONObject(i);
-							boolean sql = object.optBoolean("sql");
-							String name = object.optString("name");
-							int minZoom = object.optInt("minZoom");
-							int maxZoom = object.optInt("maxZoom");
-							String url = object.optString("url");
-							String randoms = object.optString("randoms");
-							boolean ellipsoid = object.optBoolean("ellipsoid", false);
-							boolean invertedY = object.optBoolean("inverted_y", false);
-							String referer = object.optString("referer");
-							boolean timesupported = object.optBoolean("timesupported", false);
-							long expire = object.optLong("expire");
-							boolean inversiveZoom = object.optBoolean("inversiveZoom", false);
-							String ext = object.optString("ext");
-							int tileSize = object.optInt("tileSize");
-							int bitDensity = object.optInt("bitDensity");
-							int avgSize = object.optInt("avgSize");
-							String rule = object.optString("rule");
+		void readItemsFromJson(@NonNull JSONObject json) throws IllegalArgumentException {
+			try {
+				JSONArray jsonArray = json.getJSONArray("items");
+				for (int i = 0; i < jsonArray.length(); i++) {
+					JSONObject object = jsonArray.getJSONObject(i);
+					boolean sql = object.optBoolean("sql");
+					String name = object.optString("name");
+					int minZoom = object.optInt("minZoom");
+					int maxZoom = object.optInt("maxZoom");
+					String url = object.optString("url");
+					String randoms = object.optString("randoms");
+					boolean ellipsoid = object.optBoolean("ellipsoid", false);
+					boolean invertedY = object.optBoolean("inverted_y", false);
+					String referer = object.optString("referer");
+					boolean timesupported = object.optBoolean("timesupported", false);
+					long expire = object.optLong("expire");
+					boolean inversiveZoom = object.optBoolean("inversiveZoom", false);
+					String ext = object.optString("ext");
+					int tileSize = object.optInt("tileSize");
+					int bitDensity = object.optInt("bitDensity");
+					int avgSize = object.optInt("avgSize");
+					String rule = object.optString("rule");
 
-							ITileSource template;
-							if (!sql) {
-								template = new TileSourceManager.TileSourceTemplate(name, url, ext, maxZoom, minZoom, tileSize, bitDensity, avgSize);
-							} else {
-								template = new SQLiteTileSource(app, name, minZoom, maxZoom, url, randoms, ellipsoid, invertedY, referer, timesupported, expire, inversiveZoom);
-							}
-							items.add(template);
-						}
-					} catch (JSONException e) {
-						throw new IllegalArgumentException("Json parse error", e);
+					ITileSource template;
+					if (!sql) {
+						template = new TileSourceManager.TileSourceTemplate(name, url, ext, maxZoom, minZoom, tileSize, bitDensity, avgSize);
+					} else {
+						template = new SQLiteTileSource(app, name, minZoom, maxZoom, url, randoms, ellipsoid, invertedY, referer, timesupported, expire, inversiveZoom);
 					}
+					items.add(template);
 				}
-			};
+			} catch (JSONException e) {
+				throw new IllegalArgumentException("Json parse error", e);
+			}
 		}
 
-		@NonNull
+		@Override
+		void writeItemsToJson(@NonNull JSONObject json) {
+			JSONArray jsonArray = new JSONArray();
+			if (!items.isEmpty()) {
+				try {
+					for (ITileSource template : items) {
+						JSONObject jsonObject = new JSONObject();
+						boolean sql = template instanceof SQLiteTileSource;
+						jsonObject.put("sql", sql);
+						jsonObject.put("name", template.getName());
+						jsonObject.put("minZoom", template.getMinimumZoomSupported());
+						jsonObject.put("maxZoom", template.getMaximumZoomSupported());
+						jsonObject.put("url", template.getUrlTemplate());
+						jsonObject.put("randoms", template.getRandoms());
+						jsonObject.put("ellipsoid", template.isEllipticYTile());
+						jsonObject.put("inverted_y", template.isInvertedYTile());
+						jsonObject.put("referer", template.getReferer());
+						jsonObject.put("timesupported", template.isTimeSupported());
+						jsonObject.put("expire", template.getExpirationTimeMillis());
+						jsonObject.put("inversiveZoom", template.getInversiveZoom());
+						jsonObject.put("ext", template.getTileFormat());
+						jsonObject.put("tileSize", template.getTileSize());
+						jsonObject.put("bitDensity", template.getBitDensity());
+						jsonObject.put("avgSize", template.getAvgSize());
+						jsonObject.put("rule", template.getRule());
+						jsonArray.put(jsonObject);
+					}
+					json.put("items", jsonArray);
+
+				} catch (JSONException e) {
+					LOG.error("Failed write to json", e);
+				}
+			}
+		}
+
+		@Nullable
+		@Override
+		SettingsItemReader getReader() {
+			return getJsonReader();
+		}
+
+		@Nullable
 		@Override
 		SettingsItemWriter getWriter() {
-			return new SettingsItemWriter<MapSourcesSettingsItem>(this) {
-				@Override
-				public boolean writeToStream(@NonNull OutputStream outputStream) throws IOException {
-					JSONObject json = new JSONObject();
-					JSONArray jsonArray = new JSONArray();
-					if (!items.isEmpty()) {
-						try {
-							for (ITileSource template : items) {
-								JSONObject jsonObject = new JSONObject();
-								boolean sql = template instanceof SQLiteTileSource;
-								jsonObject.put("sql", sql);
-								jsonObject.put("name", template.getName());
-								jsonObject.put("minZoom", template.getMinimumZoomSupported());
-								jsonObject.put("maxZoom", template.getMaximumZoomSupported());
-								jsonObject.put("url", template.getUrlTemplate());
-								jsonObject.put("randoms", template.getRandoms());
-								jsonObject.put("ellipsoid", template.isEllipticYTile());
-								jsonObject.put("inverted_y", template.isInvertedYTile());
-								jsonObject.put("referer", template.getReferer());
-								jsonObject.put("timesupported", template.isTimeSupported());
-								jsonObject.put("expire", template.getExpirationTimeMillis());
-								jsonObject.put("inversiveZoom", template.getInversiveZoom());
-								jsonObject.put("ext", template.getTileFormat());
-								jsonObject.put("tileSize", template.getTileSize());
-								jsonObject.put("bitDensity", template.getBitDensity());
-								jsonObject.put("avgSize", template.getAvgSize());
-								jsonObject.put("rule", template.getRule());
-								jsonArray.put(jsonObject);
-							}
-							json.put("items", jsonArray);
-
-						} catch (JSONException e) {
-							LOG.error("Failed write to json", e);
-						}
-					}
-					if (json.length() > 0) {
-						try {
-							String s = json.toString(2);
-							outputStream.write(s.getBytes("UTF-8"));
-						} catch (JSONException e) {
-							LOG.error("Failed to write json to stream", e);
-						}
-						return true;
-					}
-					return false;
-				}
-			};
+			return null;
 		}
 	}
 
@@ -1490,7 +1484,7 @@ public class SettingsHelper {
 
 		@NonNull
 		@Override
-		public String getFileName() {
+		public String getDefaultFileName() {
 			return getName() + ".json";
 		}
 
@@ -1543,90 +1537,63 @@ public class SettingsHelper {
 			}
 		}
 
-		@NonNull
 		@Override
-		SettingsItemReader getReader() {
-			return new SettingsItemReader<AvoidRoadsSettingsItem>(this) {
-				@Override
-				public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
-					StringBuilder buf = new StringBuilder();
-					try {
-						BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-						String str;
-						while ((str = in.readLine()) != null) {
-							buf.append(str);
-						}
-					} catch (IOException e) {
-						throw new IOException("Cannot read json body", e);
+		void readItemsFromJson(@NonNull JSONObject json) throws IllegalArgumentException {
+			try {
+				JSONArray jsonArray = json.getJSONArray("items");
+				for (int i = 0; i < jsonArray.length(); i++) {
+					JSONObject object = jsonArray.getJSONObject(i);
+					double latitude = object.optDouble("latitude");
+					double longitude = object.optDouble("longitude");
+					String name = object.optString("name");
+					String appModeKey = object.optString("appModeKey");
+					AvoidRoadInfo roadInfo = new AvoidRoadInfo();
+					roadInfo.id = 0;
+					roadInfo.latitude = latitude;
+					roadInfo.longitude = longitude;
+					roadInfo.name = name;
+					if (ApplicationMode.valueOfStringKey(appModeKey, null) != null) {
+						roadInfo.appModeKey = appModeKey;
+					} else {
+						roadInfo.appModeKey = app.getRoutingHelper().getAppMode().getStringKey();
 					}
-					String jsonStr = buf.toString();
-					if (Algorithms.isEmpty(jsonStr)) {
-						throw new IllegalArgumentException("Cannot find json body");
-					}
-					final JSONObject json;
-					try {
-						json = new JSONObject(jsonStr);
-						JSONArray jsonArray = json.getJSONArray("items");
-						for (int i = 0; i < jsonArray.length(); i++) {
-							JSONObject object = jsonArray.getJSONObject(i);
-							double latitude = object.optDouble("latitude");
-							double longitude = object.optDouble("longitude");
-							String name = object.optString("name");
-							String appModeKey = object.optString("appModeKey");
-							AvoidRoadInfo roadInfo = new AvoidRoadInfo();
-							roadInfo.id = 0;
-							roadInfo.latitude = latitude;
-							roadInfo.longitude = longitude;
-							roadInfo.name = name;
-							if (ApplicationMode.valueOfStringKey(appModeKey, null) != null) {
-								roadInfo.appModeKey = appModeKey;
-							} else {
-								roadInfo.appModeKey = app.getRoutingHelper().getAppMode().getStringKey();
-							}
-							items.add(roadInfo);
-						}
-					} catch (JSONException e) {
-						throw new IllegalArgumentException("Json parse error", e);
-					}
+					items.add(roadInfo);
 				}
-			};
+			} catch (JSONException e) {
+				throw new IllegalArgumentException("Json parse error", e);
+			}
 		}
 
-		@NonNull
+		@Override
+		void writeItemsToJson(@NonNull JSONObject json) {
+			JSONArray jsonArray = new JSONArray();
+			if (!items.isEmpty()) {
+				try {
+					for (AvoidRoadInfo avoidRoad : items) {
+						JSONObject jsonObject = new JSONObject();
+						jsonObject.put("latitude", avoidRoad.latitude);
+						jsonObject.put("longitude", avoidRoad.longitude);
+						jsonObject.put("name", avoidRoad.name);
+						jsonObject.put("appModeKey", avoidRoad.appModeKey);
+						jsonArray.put(jsonObject);
+					}
+					json.put("items", jsonArray);
+				} catch (JSONException e) {
+					LOG.error("Failed write to json", e);
+				}
+			}
+		}
+
+		@Nullable
+		@Override
+		SettingsItemReader getReader() {
+			return getJsonReader();
+		}
+
+		@Nullable
 		@Override
 		SettingsItemWriter getWriter() {
-			return new SettingsItemWriter<AvoidRoadsSettingsItem>(this) {
-				@Override
-				public boolean writeToStream(@NonNull OutputStream outputStream) throws IOException {
-					JSONObject json = new JSONObject();
-					JSONArray jsonArray = new JSONArray();
-					if (!items.isEmpty()) {
-						try {
-							for (AvoidRoadInfo avoidRoad : items) {
-								JSONObject jsonObject = new JSONObject();
-								jsonObject.put("latitude", avoidRoad.latitude);
-								jsonObject.put("longitude", avoidRoad.longitude);
-								jsonObject.put("name", avoidRoad.name);
-								jsonObject.put("appModeKey", avoidRoad.appModeKey);
-								jsonArray.put(jsonObject);
-							}
-							json.put("items", jsonArray);
-						} catch (JSONException e) {
-							LOG.error("Failed write to json", e);
-						}
-					}
-					if (json.length() > 0) {
-						try {
-							String s = json.toString(2);
-							outputStream.write(s.getBytes("UTF-8"));
-						} catch (JSONException e) {
-							LOG.error("Failed to write json to stream", e);
-						}
-						return true;
-					}
-					return false;
-				}
-			};
+			return null;
 		}
 	}
 
@@ -1642,6 +1609,10 @@ public class SettingsHelper {
 
 		private void collectItems(JSONObject json) throws IllegalArgumentException, JSONException {
 			JSONArray itemsJson = json.getJSONArray("items");
+			int version = json.getInt("version");
+			if (version > VERSION) {
+				throw new IllegalArgumentException("Unsupported osf version: " + version);
+			}
 			Map<String, List<SettingsItem>> pluginItems = new HashMap<>();
 			for (int i = 0; i < itemsJson.length(); i++) {
 				JSONObject itemJson = itemsJson.getJSONObject(i);
@@ -1714,8 +1685,8 @@ public class SettingsHelper {
 				case FILE:
 					item = new FileSettingsItem(app, json);
 					break;
-				case QUICK_ACTION:
-					item = new QuickActionSettingsItem(app, json);
+				case QUICK_ACTIONS:
+					item = new QuickActionsSettingsItem(app, json);
 					break;
 				case POI_UI_FILTERS:
 					item = new PoiUiFilterSettingsItem(app, json);
@@ -1754,7 +1725,7 @@ public class SettingsHelper {
 
 		void exportSettings(File file) throws JSONException, IOException {
 			JSONObject json = new JSONObject();
-			json.put("osmand_settings_version", OsmandSettings.VERSION);
+			json.put("version", VERSION);
 			for (Map.Entry<String, String> param : additionalParams.entrySet()) {
 				json.put(param.getKey(), param.getValue());
 			}
@@ -1771,10 +1742,13 @@ public class SettingsHelper {
 				zos.write(json.toString(2).getBytes("UTF-8"));
 				zos.closeEntry();
 				for (SettingsItem item : items.values()) {
-					entry = new ZipEntry(item.getFileName());
-					zos.putNextEntry(entry);
-					item.getWriter().writeToStream(zos);
-					zos.closeEntry();
+					SettingsItemWriter writer = item.getWriter();
+					if (writer != null) {
+						entry = new ZipEntry(item.getFileName());
+						zos.putNextEntry(entry);
+						writer.writeToStream(zos);
+						zos.closeEntry();
+					}
 				}
 				zos.flush();
 				zos.finish();
@@ -1801,30 +1775,23 @@ public class SettingsHelper {
 			processItems(file, items);
 		}
 
-		private List<SettingsItem> processItems(@NonNull File file, @Nullable List<SettingsItem> items) throws IllegalArgumentException, IOException {
-			boolean collecting = items == null;
-			if (collecting) {
-				items = new ArrayList<>();
-			} else {
-				if (items.size() == 0) {
-					throw new IllegalArgumentException("No items");
-				}
-			}
+		private List<SettingsItem> getItemsFromJson(@NonNull File file) throws IOException {
+			List<SettingsItem> items = new ArrayList<>();
 			ZipInputStream zis = new ZipInputStream(new FileInputStream(file));
 			InputStream ois = new BufferedInputStream(zis);
 			try {
-				ZipEntry entry = zis.getNextEntry();
-				if (entry != null && entry.getName().equals("items.json")) {
-					String itemsJson = null;
-					try {
-						itemsJson = Algorithms.readFromInputStream(ois).toString();
-					} catch (IOException e) {
-						LOG.error("Error reading items.json: " + itemsJson, e);
-						throw new IllegalArgumentException("No items");
-					} finally {
-						zis.closeEntry();
-					}
-					if (collecting) {
+				ZipEntry entry;
+				while ((entry = zis.getNextEntry()) != null) {
+					if (entry.getName().equals("items.json")) {
+						String itemsJson = null;
+						try {
+							itemsJson = Algorithms.readFromInputStream(ois).toString();
+						} catch (IOException e) {
+							LOG.error("Error reading items.json: " + itemsJson, e);
+							throw new IllegalArgumentException("No items");
+						} finally {
+							zis.closeEntry();
+						}
 						try {
 							SettingsItemsFactory itemsFactory = new SettingsItemsFactory(app, itemsJson);
 							items.addAll(itemsFactory.getItems());
@@ -1835,31 +1802,55 @@ public class SettingsHelper {
 							LOG.error("Error parsing items: " + itemsJson, e);
 							throw new IllegalArgumentException("No items");
 						}
+						break;
 					}
-					while ((entry = zis.getNextEntry()) != null) {
-						String fileName = entry.getName();
-						SettingsItem item = null;
-						for (SettingsItem settingsItem : items) {
-							if (settingsItem != null && settingsItem.getFileName().equals(fileName)) {
-								item = settingsItem;
-								break;
-							}
-						}
-						if (item != null && collecting && item.shouldReadOnCollecting()
-								|| item != null && !collecting && !item.shouldReadOnCollecting()) {
-							try {
-								item.getReader().readFromStream(ois);
-							} catch (IllegalArgumentException e) {
-								LOG.error("Error reading item data: " + item.getName(), e);
-							} catch (IOException e) {
-								LOG.error("Error reading item data: " + item.getName(), e);
-							} finally {
-								zis.closeEntry();
-							}
+				}
+			} catch (IOException ex) {
+				LOG.error("Failed to read next entry", ex);
+			} finally {
+				Algorithms.closeStream(ois);
+				Algorithms.closeStream(zis);
+			}
+			return items;
+		}
+
+		private List<SettingsItem> processItems(@NonNull File file, @Nullable List<SettingsItem> items) throws IllegalArgumentException, IOException {
+			boolean collecting = items == null;
+			if (collecting) {
+				items = getItemsFromJson(file);
+			} else {
+				if (items.size() == 0) {
+					throw new IllegalArgumentException("No items");
+				}
+			}
+			ZipInputStream zis = new ZipInputStream(new FileInputStream(file));
+			InputStream ois = new BufferedInputStream(zis);
+			try {
+				ZipEntry entry;
+				while ((entry = zis.getNextEntry()) != null) {
+					String fileName = entry.getName();
+					SettingsItem item = null;
+					for (SettingsItem settingsItem : items) {
+						if (settingsItem != null && settingsItem.getFileName().equals(fileName)) {
+							item = settingsItem;
+							break;
 						}
 					}
-				} else {
-					throw new IllegalArgumentException("No items found");
+					if (item != null && collecting && item.shouldReadOnCollecting()
+							|| item != null && !collecting && !item.shouldReadOnCollecting()) {
+						try {
+							SettingsItemReader reader = item.getReader();
+							if (reader != null) {
+								reader.readFromStream(ois);
+							}
+						} catch (IllegalArgumentException e) {
+							LOG.error("Error reading item data: " + item.getName(), e);
+						} catch (IOException e) {
+							LOG.error("Error reading item data: " + item.getName(), e);
+						} finally {
+							zis.closeEntry();
+						}
+					}
 				}
 			} catch (IOException ex) {
 				LOG.error("Failed to read next entry", ex);

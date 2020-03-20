@@ -808,8 +808,8 @@ public class ImportHelper {
 										pluginIndependentItems.removeAll(pluginItems);
 										for (SettingsHelper.SettingsItem item : pluginItems) {
 											item.setShouldReplace(true);
-											if (item instanceof SettingsHelper.QuickActionSettingsItem) {
-												plugin.quickActions = ((SettingsHelper.QuickActionSettingsItem) item).getItems();
+											if (item instanceof SettingsHelper.QuickActionsSettingsItem) {
+												plugin.quickActions = ((SettingsHelper.QuickActionsSettingsItem) item).getItems();
 											}
 											if (item instanceof SettingsHelper.PoiUiFilterSettingsItem) {
 												plugin.poiUIFilters = ((SettingsHelper.PoiUiFilterSettingsItem) item).getItems();
