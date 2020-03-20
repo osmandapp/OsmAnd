@@ -62,8 +62,7 @@ public class RouteExporter {
 		}
 		bundle.putBundleList("types", "type", typeList);
 
-		GPXFile gpx = new GPXFile("OsmAnd");
-		gpx.author = OSMAND_ROUTER_V2;
+		GPXFile gpx = new GPXFile(OSMAND_ROUTER_V2);
 		Track track = new Track();
 		track.name = name;
 		gpx.tracks.add(track);
