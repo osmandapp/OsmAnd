@@ -97,7 +97,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, activeColorRes)));
 
 		final List<?> listItems = itemsMap.get(type);
-		subTextTv.setText(String.valueOf(listItems.size()));
+		subTextTv.setText(getSelectedItemsAmount(listItems));
 
 		if (dataToOperate.containsAll(listItems)) {
 			checkBox.setState(CHECKED);
@@ -281,6 +281,16 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	@Override
 	public boolean isChildSelectable(int i, int i1) {
 		return true;
+	}
+
+	private String getSelectedItemsAmount(List<?> listItems) {
+		int amount = 0;
+		for (Object item : listItems) {
+			if (dataToOperate.contains(item)) {
+				amount++;
+			}
+		}
+		return String.format(app.getString(R.string.n_items_of_z), String.valueOf(amount), String.valueOf(listItems.size()));
 	}
 
 	private int getGroupTitle(Type type) {
