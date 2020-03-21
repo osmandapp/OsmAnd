@@ -188,12 +188,12 @@ public class QuickActionRegistry {
 
 
 	private String quickActionListToString(List<QuickAction> quickActions) {
-		// FIXME backward compatibiltiy
+		// FIXME QA: backward compatibiltiy
 		return new Gson().toJson(quickActions);
 	}
 
 	public List<QuickAction> parseActiveActionsList(String json) {
-		// FIXME backward compatibiltiy
+		// FIXME QA: backward compatibiltiy
 		Type type = new TypeToken<List<QuickAction>>() {
 		}.getType();
 		ArrayList<QuickAction> quickActions = new Gson().fromJson(json, type);
@@ -258,9 +258,18 @@ public class QuickActionRegistry {
 		}
 	}
 
+	public static QuickActionType getActionTypeById(int type) {
+		for (QuickActionType t : getActionTypes()) {
+			if (t.getId() == type) {
+				return t;
+			}
+		}
+		return null;
+	}
+
 	public static QuickAction newActionByType(int type) {
-		for(QuickActionType t : getActionTypes()) {
-			if(t.getId() == type) {
+		for (QuickActionType t : getActionTypes()) {
+			if (t.getId() == type) {
 				return t.createNew();
 			}
 		}

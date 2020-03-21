@@ -36,7 +36,7 @@ public class QuickAction {
     }
 
     public QuickAction(QuickActionType type) {
-    	// FIXME id
+    	// FIXME QA: id
         this.id = System.currentTimeMillis();
         this.actionType = type;
     }

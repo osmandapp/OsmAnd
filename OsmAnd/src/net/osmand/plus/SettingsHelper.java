@@ -25,6 +25,7 @@ import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
+import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -940,16 +941,21 @@ public class SettingsHelper {
 						for (int i = 0; i < itemsJson.length(); i++) {
 							JSONObject object = itemsJson.getJSONObject(i);
 							String name = object.getString("name");
+							// FIXME QA: make type string
 							int actionType = object.getInt("type");
-							// TODO
-							String paramsString = object.getString("params");
-							HashMap<String, String> params = gson.fromJson(paramsString, type);
-							QuickAction quickAction = new QuickAction(actionType);
-							if (!name.isEmpty()) {
-								quickAction.setName(name);
+							QuickActionType tp = QuickActionRegistry.getActionTypeById(actionType);
+							if(tp != null) {
+
+								String paramsString = object.getString("params");
+								HashMap<String, String> params = gson.fromJson(paramsString, type);
+
+								QuickAction quickAction = new QuickAction(actionType);
+								if (!name.isEmpty()) {
+									quickAction.setName(name);
+								}
+								quickAction.setParams(params);
+								items.add(quickAction);
 							}
-							quickAction.setParams(params);
-							items.add(quickAction);
 						}
 					} catch (JSONException e) {
 						throw new IllegalArgumentException("Json parse error", e);
