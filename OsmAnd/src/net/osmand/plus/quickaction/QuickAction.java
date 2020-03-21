@@ -12,6 +12,7 @@ import androidx.annotation.StringRes;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.quickaction.actions.NewAction;
 import net.osmand.util.Algorithms;
 
 import java.util.HashMap;
@@ -24,15 +25,13 @@ public class QuickAction {
         void onActionSelected(QuickAction action);
     }
 
-    protected int type;
     protected long id;
-
     private String name;
     private HashMap<String, String> params;
     private QuickActionType actionType;
 
     protected QuickAction() {
-        this.id = System.currentTimeMillis();
+        this(NewAction.TYPE);
     }
 
     public QuickAction(QuickActionType type) {
@@ -42,7 +41,6 @@ public class QuickAction {
     }
 
     public QuickAction(QuickAction quickAction) {
-        this.type = quickAction.type;
 		this.actionType = quickAction.actionType;
         this.id = quickAction.id;
         this.name = quickAction.name;
@@ -66,7 +64,7 @@ public class QuickAction {
     }
 
 	public int getType() {
-		return type;
+		return actionType.getId();
 	}
 
     public boolean isActionEditable() {
@@ -126,9 +124,9 @@ public class QuickAction {
 
     public boolean hasInstanceInList(List<QuickAction> active){
 
-        for (QuickAction action: active){
-            if (action.type == type) return true;
-        }
+		for (QuickAction action : active) {
+			if (action.getType() == getType()) return true;
+		}
 
         return false;
     }
@@ -142,7 +140,7 @@ public class QuickAction {
 
             QuickAction action = (QuickAction) o;
 
-            if (type != action.type) return false;
+            if (getType() != action.getType()) return false;
             if (id != action.id) return false;
 
             return true;
@@ -152,7 +150,7 @@ public class QuickAction {
 
     @Override
     public int hashCode() {
-        int result = type;
+        int result = getType();
         result = 31 * result + (int) (id ^ (id >>> 32));
         return result;
     }
