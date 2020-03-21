@@ -140,12 +140,18 @@ public class SettingsHelper {
 		boolean shouldReplace = false;
 
 		SettingsItem(@NonNull SettingsItemType type) {
+			init();
 			this.type = type;
 		}
 
 		SettingsItem(@NonNull SettingsItemType type, @NonNull JSONObject json) throws JSONException {
+			init();
 			this.type = type;
 			readFromJson(json);
+		}
+
+		protected void init() {
+			// override
 		}
 
 		@NonNull
@@ -349,9 +355,15 @@ public class SettingsHelper {
 
 	public abstract static class CollectionSettingsItem<T> extends SettingsItem {
 
-		protected List<T> items = new ArrayList<>();
-		protected List<T> duplicateItems = new ArrayList<>();
+		protected List<T> items;
+		protected List<T> duplicateItems;
 		protected List<T> existingItems;
+
+		@Override
+		protected void init() {
+			items = new ArrayList<>();
+			duplicateItems = new ArrayList<>();
+		}
 
 		CollectionSettingsItem(@NonNull SettingsItemType type, @NonNull List<T> items) {
 			super(type);
