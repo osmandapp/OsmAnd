@@ -258,15 +258,6 @@ public class QuickActionRegistry {
 		}
 	}
 
-	public static QuickActionType getActionTypeById(int type) {
-		for (QuickActionType t : getActionTypes()) {
-			if (t.getId() == type) {
-				return t;
-			}
-		}
-		return null;
-	}
-
 	public static QuickAction newActionByType(int type) {
 		for (QuickActionType t : getActionTypes()) {
 			if (t.getId() == type) {

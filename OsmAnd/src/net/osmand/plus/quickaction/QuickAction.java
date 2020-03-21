@@ -65,7 +65,7 @@ public class QuickAction {
         return id;
     }
 
-	public long getType() {
+	public int getType() {
 		return type;
 	}
 

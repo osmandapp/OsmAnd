@@ -943,13 +943,12 @@ public class SettingsHelper {
 							String name = object.getString("name");
 							// FIXME QA: make type string
 							int actionType = object.getInt("type");
-							QuickActionType tp = QuickActionRegistry.getActionTypeById(actionType);
-							if(tp != null) {
+							QuickAction quickAction = QuickActionRegistry.newActionByType(actionType);
+							if (quickAction.getType() != 0) {
 
 								String paramsString = object.getString("params");
 								HashMap<String, String> params = gson.fromJson(paramsString, type);
 
-								QuickAction quickAction = new QuickAction(actionType);
 								if (!name.isEmpty()) {
 									quickAction.setName(name);
 								}
