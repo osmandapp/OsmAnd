@@ -12,6 +12,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.render.RenderingRuleProperty;
 
@@ -20,7 +21,12 @@ import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_DISABLED_VALUE
 
 public class ContourLinesAction extends QuickAction {
 
-	public static final int TYPE = 29;
+	public static final QuickActionType TYPE = new QuickActionType(29,
+			"contourlines.showhide", ContourLinesAction.class).
+			nameRes(R.string.quick_action_show_hide_contour_lines).iconRes(R.drawable.ic_plugin_srtm).nonEditable().
+			category(QuickActionType.CONFIGURE_MAP);
+
+
 
 	public ContourLinesAction() {
 		super(TYPE);

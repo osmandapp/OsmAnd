@@ -70,62 +70,28 @@ public class QuickActionFactory {
 
 
 	public static List<QuickActionType> getActionTypes() {
-		List<QuickActionType> quickActionsTypes = new ArrayList<>();
-		quickActionsTypes.add(NewAction.TYPE);
-		quickActionsTypes.add(FavoriteAction.TYPE);
-		quickActionsTypes.add(GPXAction.TYPE);
-		quickActionsTypes.add(MarkerAction.TYPE);
-
-		// FIXME plugins
-
-		if (OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class) != null) {
-			quickActionsTypes.add(TakeAudioNoteAction.TYPE);
-			quickActionsTypes.add(TakePhotoNoteAction.TYPE);
-			quickActionsTypes.add(TakeVideoNoteAction.TYPE);
-		}
-
-		if (OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null) {
-			quickActionsTypes.add(AddPOIAction.TYPE);
-			quickActionsTypes.add(AddOSMBugAction.TYPE);
-		}
-
-		if (OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class) != null) {
-			quickActionsTypes.add(ParkingAction.TYPE);
-		}
+		List<QuickActionType> quickActionTypes = new ArrayList<>();
+		quickActionTypes.add(NewAction.TYPE);
+		quickActionTypes.add(FavoriteAction.TYPE);
+		quickActionTypes.add(GPXAction.TYPE);
+		quickActionTypes.add(MarkerAction.TYPE);
 		// configure map
-		quickActionsTypes.add(ShowHideFavoritesAction.TYPE);
-		quickActionsTypes.add(ShowHideGpxTracksAction.TYPE);
-		quickActionsTypes.add(ShowHidePoiAction.TYPE);
-
-		if (OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null) {
-			quickActionsTypes.add(ShowHideOSMBugAction.TYPE);
-		}
-
-		quickActionsTypes.add(MapStyleAction.TYPE);
-		if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null) {
-			quickActionsTypes.add(MapSourceAction.TYPE);
-			quickActionsTypes.add(MapOverlayAction.TYPE);
-			quickActionsTypes.add(MapUnderlayAction.TYPE);
-		}
-
-
-		if (OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null) {
-			quickActionsTypes.add(ContourLinesAction.TYPE);
-			quickActionsTypes.add(HillshadeAction.TYPE);
-		}
-
-		quickActionsTypes.add(DayNightModeAction.TYPE);
-
+		quickActionTypes.add(ShowHideFavoritesAction.TYPE);
+		quickActionTypes.add(ShowHideGpxTracksAction.TYPE);
+		quickActionTypes.add(ShowHidePoiAction.TYPE);
+		quickActionTypes.add(MapStyleAction.TYPE);
+		quickActionTypes.add(DayNightModeAction.TYPE);
 		// navigation
-		quickActionsTypes.add(NavVoiceAction.TYPE);
-		quickActionsTypes.add(NavDirectionsFromAction.TYPE);
-		quickActionsTypes.add(NavAddDestinationAction.TYPE);
-		quickActionsTypes.add(NavAddFirstIntermediateAction.TYPE);
-		quickActionsTypes.add(NavReplaceDestinationAction.TYPE);
-		quickActionsTypes.add(NavAutoZoomMapAction.TYPE);
-		quickActionsTypes.add(NavStartStopAction.TYPE);
-		quickActionsTypes.add(NavResumePauseAction.TYPE);
-		return quickActionsTypes;
+		quickActionTypes.add(NavVoiceAction.TYPE);
+		quickActionTypes.add(NavDirectionsFromAction.TYPE);
+		quickActionTypes.add(NavAddDestinationAction.TYPE);
+		quickActionTypes.add(NavAddFirstIntermediateAction.TYPE);
+		quickActionTypes.add(NavReplaceDestinationAction.TYPE);
+		quickActionTypes.add(NavAutoZoomMapAction.TYPE);
+		quickActionTypes.add(NavStartStopAction.TYPE);
+		quickActionTypes.add(NavResumePauseAction.TYPE);
+		OsmandPlugin.registerQuickActionTypesPlugins(quickActionTypes);
+		return quickActionTypes;
 	}
 
 	public static List<QuickActionType> produceTypeActionsListWithHeaders(List<QuickAction> active) {
@@ -173,122 +139,4 @@ public class QuickActionFactory {
 		return quickAction.getActionType().createNew(quickAction);
 	}
 
-	public static @DrawableRes int getActionIcon(int type) {
-
-		switch (type) {
-
-			case ShowHideFavoritesAction.TYPE:
-				return R.drawable.ic_action_fav_dark;
-
-			case ShowHidePoiAction.TYPE:
-				return R.drawable.ic_action_gabout_dark;
-
-
-			case TakeAudioNoteAction.TYPE:
-				return R.drawable.ic_action_micro_dark;
-
-			case TakePhotoNoteAction.TYPE:
-				return R.drawable.ic_action_photo_dark;
-
-			case TakeVideoNoteAction.TYPE:
-				return R.drawable.ic_action_video_dark;
-
-			case ShowHideOSMBugAction.TYPE:
-				return R.drawable.ic_action_bug_dark;
-
-
-			case MapStyleAction.TYPE:
-				return R.drawable.ic_map;
-
-			case MapSourceAction.TYPE:
-				return R.drawable.ic_world_globe_dark;
-
-			case MapOverlayAction.TYPE:
-				return R.drawable.ic_layer_top;
-
-			case MapUnderlayAction.TYPE:
-				return R.drawable.ic_layer_bottom;
-
-			case ShowHideGpxTracksAction.TYPE:
-				return R.drawable.ic_gpx_track;
-
-			case ContourLinesAction.TYPE:
-				return R.drawable.ic_plugin_srtm;
-
-			case HillshadeAction.TYPE:
-				return R.drawable.ic_action_hillshade_dark;
-
-			default:
-				return R.drawable.ic_action_plus;
-		}
-	}
-
-	public static @StringRes int getActionName(int type) {
-
-		switch (type) {
-
-			case ShowHideFavoritesAction.TYPE:
-				return R.string.quick_action_showhide_favorites_title;
-
-			case ShowHidePoiAction.TYPE:
-				return R.string.quick_action_showhide_poi_title;
-
-
-			case TakeAudioNoteAction.TYPE:
-				return R.string.quick_action_take_audio_note;
-
-			case TakePhotoNoteAction.TYPE:
-				return R.string.quick_action_take_photo_note;
-
-			case TakeVideoNoteAction.TYPE:
-				return R.string.quick_action_take_video_note;
-
-			case ShowHideOSMBugAction.TYPE:
-				return R.string.quick_action_showhide_osmbugs_title;
-
-
-			case MapStyleAction.TYPE:
-				return R.string.quick_action_map_style;
-
-			case MapSourceAction.TYPE:
-				return R.string.quick_action_map_source;
-
-			case MapOverlayAction.TYPE:
-				return R.string.quick_action_map_overlay;
-
-			case MapUnderlayAction.TYPE:
-				return R.string.quick_action_map_underlay;
-
-			case ShowHideGpxTracksAction.TYPE:
-				return R.string.quick_action_show_hide_gpx_tracks;
-
-			case ContourLinesAction.TYPE:
-				return R.string.quick_action_show_hide_contour_lines;
-
-			case HillshadeAction.TYPE:
-				return R.string.quick_action_show_hide_hillshade;
-
-			default:
-				return R.string.quick_action_new_action;
-		}
-	}
-
-	public static boolean isActionEditable(int type) {
-
-		switch (type) {
-			case ShowHideFavoritesAction.TYPE:
-			case ShowHidePoiAction.TYPE:
-			case TakeAudioNoteAction.TYPE:
-			case TakePhotoNoteAction.TYPE:
-			case TakeVideoNoteAction.TYPE:
-			case ShowHideOSMBugAction.TYPE:
-			case ShowHideGpxTracksAction.TYPE:
-			case ContourLinesAction.TYPE:
-			case HillshadeAction.TYPE:
-				return false;
-
-			default:
-				return true;
-		}
-	}
 }

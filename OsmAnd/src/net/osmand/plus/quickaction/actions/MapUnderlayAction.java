@@ -21,6 +21,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 
@@ -30,10 +31,14 @@ import java.util.List;
 import java.util.Map;
 
 public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
-	public static final int TYPE = 16;
 
 	private final static String KEY_UNDERLAYS = "underlays";
 	private final static String KEY_NO_UNDERLAY = "no_underlay";
+	public static final QuickActionType TYPE = new QuickActionType(16,
+			"mapunderlay.change", MapUnderlayAction.class).
+			nameRes(R.string.quick_action_map_underlay).iconRes(R.drawable.ic_layer_bottom).
+			category(QuickActionType.CONFIGURE_MAP);
+
 
 	public MapUnderlayAction() {
 		super(TYPE);

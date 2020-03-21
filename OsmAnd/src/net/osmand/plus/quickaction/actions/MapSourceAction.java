@@ -20,6 +20,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 
@@ -31,8 +32,11 @@ import java.util.Map;
 
 public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 
-	public static final int TYPE = 17;
 	public static final String LAYER_OSM_VECTOR = "LAYER_OSM_VECTOR";
+	public static final QuickActionType TYPE = new QuickActionType(17,
+			"mapsource.change", MapSourceAction.class).
+			nameRes(R.string.quick_action_map_source).iconRes(R.drawable.ic_world_globe_dark).
+			category(QuickActionType.CONFIGURE_MAP);
 
 	private final static String KEY_SOURCE = "source";
 

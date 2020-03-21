@@ -37,7 +37,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	private transient ItemTouchHelper touchHelper;
 
-	protected SwitchableAction(int type) {
+	protected SwitchableAction(QuickActionType type) {
 		super(type);
 	}
 

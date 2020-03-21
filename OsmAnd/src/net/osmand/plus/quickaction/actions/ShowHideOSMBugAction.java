@@ -12,10 +12,15 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionType;
 
 public class ShowHideOSMBugAction extends QuickAction {
 
-	public static final int TYPE = 24;
+	public static final QuickActionType TYPE = new QuickActionType(24,
+			"osmbug.showhide", ShowHideOSMBugAction.class).
+			nameRes(R.string.quick_action_showhide_osmbugs_title).iconRes(R.drawable.ic_action_bug_dark).nonEditable().
+			category(QuickActionType.CONFIGURE_MAP);
+
 
 	public ShowHideOSMBugAction() {
 		super(TYPE);

@@ -30,6 +30,9 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.quickaction.actions.ContourLinesAction;
+import net.osmand.plus.quickaction.actions.HillshadeAction;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
@@ -441,5 +444,11 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	private static int getThemeRes(Activity activity, OsmandApplication app) {
 		return isNightMode(activity, app) ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+	}
+
+	@Override
+	protected void registerQuickActionTypes(List<QuickActionType> quickActionTypes) {
+		quickActionTypes.add(ContourLinesAction.TYPE);
+		quickActionTypes.add(HillshadeAction.TYPE);
 	}
 }
