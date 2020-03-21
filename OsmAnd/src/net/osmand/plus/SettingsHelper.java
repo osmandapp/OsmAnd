@@ -204,7 +204,9 @@ public class SettingsHelper {
 
 		void writeToJson(@NonNull JSONObject json) throws JSONException {
 			json.put("type", type.name());
-			json.put("file", getFileName());
+			if (getWriter() != null) {
+				json.put("file", getFileName());
+			}
 			writeItemsToJson(json);
 		}
 
