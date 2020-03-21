@@ -55,7 +55,7 @@ public class AddQuickActionDialog extends DialogFragment {
                 .getQuickActions();
 
         View root = UiUtilities.getInflater(getActivity(), !isLightContent).inflate(R.layout.quick_action_add_dialog, container, false);
-        Adapter adapter = new Adapter(QuickActionFactory.produceTypeActionsListWithHeaders(active));
+        Adapter adapter = new Adapter(QuickActionRegistry.produceTypeActionsListWithHeaders(active));
 
         TextView tvTitle = root.findViewById(R.id.tvTitle);
         RecyclerView recyclerView = (RecyclerView) root.findViewById(R.id.recycler_view);
@@ -161,7 +161,7 @@ public class AddQuickActionDialog extends DialogFragment {
                     @Override
                     public void onClick(View view) {
 
-                        CreateEditActionDialog dialog = CreateEditActionDialog.newInstance(action.type);
+                        CreateEditActionDialog dialog = CreateEditActionDialog.newInstance(action.getId());
                         dialog.show(getFragmentManager(), CreateEditActionDialog.TAG);
 
                         dismiss();

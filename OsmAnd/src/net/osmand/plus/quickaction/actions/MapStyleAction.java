@@ -49,6 +49,16 @@ public class MapStyleAction extends SwitchableAction<String> {
 	}
 
 	@Override
+	public String getSelectedItem(OsmandApplication app) {
+		RenderingRulesStorage current = app.getRendererRegistry().getCurrentSelectedRenderer();
+		if (current != null) {
+			return current.getName();
+		} else {
+			return  RendererRegistry.DEFAULT_RENDER;
+		}
+	}
+
+	@Override
 	public void execute(MapActivity activity) {
 		List<String> mapStyles = getFilteredStyles();
 		if (!Algorithms.isEmpty(mapStyles)) {

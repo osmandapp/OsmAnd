@@ -1,4 +1,4 @@
-package net.osmand.plus.quickaction.actions;
+package net.osmand.plus.osmedit;
 
 import android.view.LayoutInflater;
 import android.view.View;

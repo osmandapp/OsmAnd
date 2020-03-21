@@ -2,7 +2,7 @@ package net.osmand.plus.quickaction;
 
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -158,6 +158,6 @@ public class QuickAction {
     }
 
     public boolean hasCustomName(Context context) {
-        return !getName(context).equals(context.getString(getDefaultName()));
+        return !getName(context).equals(getDefaultName(context));
     }
 }

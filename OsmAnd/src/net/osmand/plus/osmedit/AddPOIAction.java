@@ -1,4 +1,4 @@
-package net.osmand.plus.quickaction.actions;
+package net.osmand.plus.osmedit;
 
 import android.content.Context;
 import android.content.Intent;
@@ -40,13 +40,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.osmedit.EditPoiData;
-import net.osmand.plus.osmedit.EditPoiDialogFragment;
-import net.osmand.plus.osmedit.OpenstreetmapLocalUtil;
-import net.osmand.plus.osmedit.OpenstreetmapPoint;
-import net.osmand.plus.osmedit.OpenstreetmapUtil;
-import net.osmand.plus.osmedit.OsmEditingPlugin;
-import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.osmedit.dialogs.PoiSubTypeDialogFragment;
 import net.osmand.plus.quickaction.CreateEditActionDialog;
 import net.osmand.plus.quickaction.QuickAction;

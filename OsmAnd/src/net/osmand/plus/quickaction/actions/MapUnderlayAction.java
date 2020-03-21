@@ -1,4 +1,4 @@
-package net.osmand.plus.quickaction.actions;
+package net.osmand.plus.rastermaps;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -56,6 +56,11 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 		return filters.size() > 1
 				? filters.get(0).second + " +" + (filters.size() - 1)
 				: filters.get(0).second;
+	}
+
+	@Override
+	public String getSelectedItem(OsmandApplication app) {
+		return app.getSettings().MAP_UNDERLAY.get();
 	}
 
 	@Override

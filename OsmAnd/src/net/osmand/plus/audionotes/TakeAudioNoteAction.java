@@ -11,7 +11,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.quickaction.actions.AddPOIAction;
 
 public class TakeAudioNoteAction extends QuickAction {
 

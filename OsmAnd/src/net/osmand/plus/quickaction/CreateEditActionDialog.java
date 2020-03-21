@@ -123,8 +123,8 @@ public class CreateEditActionDialog extends DialogFragment {
                 ? isNew = actionId == 0
                 : savedInstanceState.getBoolean(KEY_ACTION_IS_NEW);
 
-        action = QuickActionFactory.produceAction(isNew
-                ? QuickActionFactory.newActionByType(type)
+        action = QuickActionRegistry.produceAction(isNew
+                ? QuickActionRegistry.newActionByType(type)
                 : quickActionRegistry.getQuickAction(actionId));
 
         setupToolbar(view);

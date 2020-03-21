@@ -1,4 +1,4 @@
-package net.osmand.plus.quickaction.actions;
+package net.osmand.plus.osmedit;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +9,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
-import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 

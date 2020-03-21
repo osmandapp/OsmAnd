@@ -1,4 +1,4 @@
-package net.osmand.plus.quickaction.actions;
+package net.osmand.plus.srtmplugin;
 
 import android.content.Context;
 import android.view.LayoutInflater;
