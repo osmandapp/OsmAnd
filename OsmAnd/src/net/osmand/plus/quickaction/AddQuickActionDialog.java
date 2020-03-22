@@ -48,14 +48,12 @@ public class AddQuickActionDialog extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-
-        List<QuickAction> active = ((MapActivity) getActivity())
-                .getMyApplication()
-                .getQuickActionRegistry()
-                .getQuickActions();
+		QuickActionRegistry quickActionRegistry = ((MapActivity) getActivity())
+				.getMyApplication()
+				.getQuickActionRegistry();
 
         View root = UiUtilities.getInflater(getActivity(), !isLightContent).inflate(R.layout.quick_action_add_dialog, container, false);
-        Adapter adapter = new Adapter(QuickActionRegistry.produceTypeActionsListWithHeaders(active));
+        Adapter adapter = new Adapter(quickActionRegistry.produceTypeActionsListWithHeaders());
 
         TextView tvTitle = root.findViewById(R.id.tvTitle);
         RecyclerView recyclerView = (RecyclerView) root.findViewById(R.id.recycler_view);

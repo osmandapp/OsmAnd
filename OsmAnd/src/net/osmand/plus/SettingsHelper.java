@@ -937,15 +937,16 @@ public class SettingsHelper {
 						Type type = new TypeToken<HashMap<String, String>>() {
 						}.getType();
 						json = new JSONObject(jsonStr);
+						QuickActionRegistry quickActionRegistry = app.getQuickActionRegistry();
 						JSONArray itemsJson = json.getJSONArray("items");
 						for (int i = 0; i < itemsJson.length(); i++) {
 							JSONObject object = itemsJson.getJSONObject(i);
 							String name = object.getString("name");
 							QuickAction quickAction = null;
 							if(object.has("actionType")) {
-								quickAction = QuickActionRegistry.newActionByStringType(object.getString("actionType"));
+								quickAction = quickActionRegistry .newActionByStringType(object.getString("actionType"));
 							} else if(object.has("type")) {
-								quickAction = QuickActionRegistry.newActionByType(object.getInt("type"));
+								quickAction = quickActionRegistry .newActionByType(object.getInt("type"));
 							}
 							if (quickAction != null) {
 								String paramsString = object.getString("params");

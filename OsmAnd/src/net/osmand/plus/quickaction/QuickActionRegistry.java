@@ -11,10 +11,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -38,14 +35,13 @@ import net.osmand.plus.quickaction.actions.ShowHideGpxTracksAction;
 import net.osmand.plus.quickaction.actions.ShowHidePoiAction;
 import net.osmand.util.Algorithms;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 /**
@@ -72,6 +68,9 @@ public class QuickActionRegistry {
     private final List<QuickAction> quickActions;
     private final Map<String, Boolean> fabStateMap;
     private final Gson gson;
+	private List<QuickActionType> quickActionTypes = new ArrayList<>();
+	private Map<Integer, QuickActionType> quickActionTypesInt = new TreeMap<>();
+	private Map<String, QuickActionType> quickActionTypesStr = new TreeMap<>();
 
 	private QuickActionUpdatesListener updatesListener;
 
@@ -81,6 +80,7 @@ public class QuickActionRegistry {
 		gson = new GsonBuilder().registerTypeAdapter(QuickAction.class, new QuickActionSerializer()).create();
 		quickActions = parseActiveActionsList(settings.QUICK_ACTION_LIST.get());
 		fabStateMap = getQuickActionFabStateMapFromJson(settings.QUICK_ACTION.get());
+		updateActionTypes();
 
 	}
 
@@ -97,14 +97,10 @@ public class QuickActionRegistry {
     }
 
 	public List<QuickAction> getFilteredQuickActions() {
-		List<QuickAction> actions = getQuickActions();
-		Set<Integer> activeTypesInts = new TreeSet<>();
-		for (QuickActionType activeType : getActionTypes()) {
-			activeTypesInts.add(activeType.getId());
-		}
+		List<QuickAction> actions = quickActions;
 		List<QuickAction> filteredActions = new ArrayList<>();
 		for (QuickAction action : actions) {
-			if (activeTypesInts.contains(action.getActionType().getId())) {
+			if (quickActionTypesInt.containsKey(action.getActionType().getId())) {
 				filteredActions.add(action);
 			}
 		}
@@ -113,43 +109,31 @@ public class QuickActionRegistry {
 
     public void addQuickAction(QuickAction action){
         quickActions.add(action);
-        settings.QUICK_ACTION_LIST.set(quickActionListToString(quickActions));
-    }
+		saveActions();
+	}
 
-    public void deleteQuickAction(QuickAction action){
-        int index = quickActions.indexOf(action);
-        if (index >= 0) {
-        	quickActions.remove(index);
-        }
-        settings.QUICK_ACTION_LIST.set(quickActionListToString(quickActions));
-    }
+	private void saveActions() {
+		Type type = new TypeToken<List<QuickAction>>() {}.getType();
+		settings.QUICK_ACTION_LIST.set(gson.toJson(quickActions, type));
+	}
 
-    public void deleteQuickAction(int id){
-
-        int index = -1;
-        for (QuickAction action: quickActions){
-            if (action.id == id) {
-            	index = quickActions.indexOf(action);
-            }
-        }
-        if (index >= 0) {
-        	quickActions.remove(index);
-        }
-        settings.QUICK_ACTION_LIST.set(quickActionListToString(quickActions));
-    }
+	public void deleteQuickAction(QuickAction action){
+    	quickActions.remove(action);
+		saveActions();
+	}
 
     public void updateQuickAction(QuickAction action){
         int index = quickActions.indexOf(action);
         if (index >= 0) {
         	quickActions.set(index, action);
         }
-        settings.QUICK_ACTION_LIST.set(quickActionListToString(quickActions));
-    }
+		saveActions();
+	}
 
     public void updateQuickActions(List<QuickAction>  quickActions){
         this.quickActions.clear();
         this.quickActions.addAll(quickActions);
-        settings.QUICK_ACTION_LIST.set(quickActionListToString(this.quickActions));
+        saveActions();
     }
 
     public QuickAction getQuickAction(long id){
@@ -203,10 +187,6 @@ public class QuickActionRegistry {
     }
 
 
-	private String quickActionListToString(List<QuickAction> quickActions) {
-		Type type = new TypeToken<List<QuickAction>>() {}.getType();
-		return gson.toJson(quickActions, type);
-	}
 
 	public List<QuickAction> parseActiveActionsList(String json) {
 		Type type = new TypeToken<List<QuickAction>>() {}.getType();
@@ -222,8 +202,7 @@ public class QuickActionRegistry {
 		return rquickActions;
 	}
 
-
-	public static List<QuickActionType> getActionTypes() {
+	public List<QuickActionType> updateActionTypes() {
 		List<QuickActionType> quickActionTypes = new ArrayList<>();
 		quickActionTypes.add(NewAction.TYPE);
 		quickActionTypes.add(FavoriteAction.TYPE);
@@ -245,31 +224,37 @@ public class QuickActionRegistry {
 		quickActionTypes.add(NavStartStopAction.TYPE);
 		quickActionTypes.add(NavResumePauseAction.TYPE);
 		OsmandPlugin.registerQuickActionTypesPlugins(quickActionTypes);
+
+		Map<Integer, QuickActionType> quickActionTypesInt = new TreeMap<>();
+		Map<String, QuickActionType> quickActionTypesStr = new TreeMap<>();
+		for(QuickActionType qt : quickActionTypes) {
+			quickActionTypesInt.put(qt.getId(), qt);
+			quickActionTypesStr.put(qt.getStringId(), qt);
+		}
+		this.quickActionTypes = quickActionTypes;
+		this.quickActionTypesInt = quickActionTypesInt;
+		this.quickActionTypesStr = quickActionTypesStr;
 		return quickActionTypes;
 	}
 
-	public static List<QuickActionType> produceTypeActionsListWithHeaders(List<QuickAction> active) {
-		List<QuickActionType> quickActions = new ArrayList<>();
-		List<QuickActionType> tps = getActionTypes();
-		filterQuickActions(active, tps, TYPE_ADD_ITEMS, quickActions);
-		filterQuickActions(active, tps, TYPE_CONFIGURE_MAP, quickActions);
-		filterQuickActions(active, tps, TYPE_NAVIGATION, quickActions);
-		return quickActions;
+	public List<QuickActionType> produceTypeActionsListWithHeaders() {
+		List<QuickActionType> result = new ArrayList<>();
+		filterQuickActions(TYPE_ADD_ITEMS, result);
+		filterQuickActions(TYPE_CONFIGURE_MAP, result);
+		filterQuickActions(TYPE_NAVIGATION, result);
+		return result;
 	}
 
-	private static void filterQuickActions(List<QuickAction> active, List<QuickActionType> allTypes, QuickActionType filter,
-										   List<QuickActionType> result) {
+	private void filterQuickActions(QuickActionType filter, List<QuickActionType> result) {
 		result.add(filter);
-		for(QuickActionType t : allTypes) {
-			if(t.getCategory() == filter.getCategory()) {
-				if(t.isActionEditable()) {
-					boolean instanceInList = false;
-					for(QuickAction qa : active) {
-						if(qa.getActionType().getId() == t.getId()) {
-							instanceInList = true;
-							break;
-						}
-					}
+		Set<Integer> set = new TreeSet<>();
+		for (QuickAction qa : quickActions) {
+			set.add(qa.getActionType().getId());
+		}
+		for (QuickActionType t : quickActionTypes) {
+			if (t.getCategory() == filter.getCategory()) {
+				if (!t.isActionEditable()) {
+					boolean instanceInList = set.contains(t.getId());
 					if (!instanceInList) {
 						result.add(t);
 					}
@@ -280,20 +265,18 @@ public class QuickActionRegistry {
 		}
 	}
 
-	public static QuickAction newActionByStringType(String actionType) {
-		for (QuickActionType t : getActionTypes()) {
-			if (Algorithms.objectEquals(actionType, t.getStringId())) {
-				return t.createNew();
-			}
+	public QuickAction newActionByStringType(String actionType) {
+		QuickActionType quickActionType = quickActionTypesStr.get(actionType);
+		if(quickActionType != null) {
+			return quickActionType.createNew();
 		}
 		return null;
 	}
 
-	public static QuickAction newActionByType(int type) {
-		for (QuickActionType t : getActionTypes()) {
-			if (t.getId() == type) {
-				return t.createNew();
-			}
+	public QuickAction newActionByType(int type) {
+		QuickActionType quickActionType = quickActionTypesInt.get(type);
+		if(quickActionType != null) {
+			return quickActionType.createNew();
 		}
 		return null;
 	}
@@ -302,31 +285,19 @@ public class QuickActionRegistry {
 		return quickAction.getActionType().createNew(quickAction);
 	}
 
-	private static class QuickActionSerializer implements JsonDeserializer<QuickAction>,
+	private class QuickActionSerializer implements JsonDeserializer<QuickAction>,
 			JsonSerializer<QuickAction> {
 
 		@Override
 		public QuickAction deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 			JsonObject obj = json.getAsJsonObject();
-			// TODO improve search iteration
-			List<QuickActionType> types = QuickActionRegistry.getActionTypes();
 			QuickActionType found = null;
 			if(obj.has("actionType")) {
 				String actionType = obj.get("actionType").getAsString();
-				for(QuickActionType q : types) {
-					if(Algorithms.stringsEqual(q.getStringId(), actionType)) {
-						found = q;
-						break;
-					}
-				}
+				found = quickActionTypesStr.get(actionType);
 			} else if(obj.has("type")) {
 				int type = obj.get("type").getAsInt();
-				for(QuickActionType q : types) {
-					if(q.getId() == type) {
-						found = q;
-						break;
-					}
-				}
+				found = quickActionTypesInt.get(type);
 			}
 			if(found != null) {
 				QuickAction qa = found.createNew();

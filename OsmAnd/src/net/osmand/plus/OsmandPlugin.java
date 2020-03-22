@@ -238,6 +238,7 @@ public abstract class OsmandPlugin {
 				initPlugin(app, plugin);
 			}
 		}
+		app.getQuickActionRegistry().updateActionTypes();
 	}
 
 	private static void initPlugin(OsmandApplication app, OsmandPlugin plugin) {
@@ -293,6 +294,7 @@ public abstract class OsmandPlugin {
 			}
 			updateMarketPlugin(app, enabledPlugins, plugin);
 		}
+		app.getQuickActionRegistry().updateActionTypes();
 	}
 
 	protected boolean pluginAvailable(OsmandApplication app) {
@@ -316,6 +318,7 @@ public abstract class OsmandPlugin {
 			plugin.setActive(false);
 		}
 		app.getSettings().enablePlugin(plugin.getId(), enable);
+		app.getQuickActionRegistry().updateActionTypes();
 		if (activity != null) {
 			if (activity instanceof MapActivity) {
 				final MapActivity mapActivity = (MapActivity) activity;
