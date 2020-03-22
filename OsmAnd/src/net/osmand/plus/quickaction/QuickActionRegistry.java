@@ -78,62 +78,7 @@ public class QuickActionRegistry {
     public QuickActionRegistry(OsmandSettings settings) {
 
         this.settings = settings;
-		gson = new GsonBuilder().registerTypeAdapter(QuickAction.class, new JsonSerializer<QuickAction>() {
-			@Override
-			public JsonElement serialize(QuickAction src, Type typeOfSrc, JsonSerializationContext context) {
-				JsonObject el = new JsonObject();
-				el.addProperty("actionType", src.getActionType().getStringId());
-				el.addProperty("id", src.getId());
-				if (src.getRawName() != null) {
-					el.addProperty("name", src.getRawName());
-				}
-				el.add("params", context.serialize(src.getParams()));
-				return el;
-			}
-		}).registerTypeAdapter(QuickAction.class, new JsonDeserializer<QuickAction>() {
-
-			@Override
-			public QuickAction deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-				JsonObject obj = json.getAsJsonObject();
-				// TODO improve search iteration
-				List<QuickActionType> types = QuickActionRegistry.getActionTypes();
-				QuickActionType found = null;
-				if(obj.has("actionType")) {
-					String actionType = obj.get("actionType").getAsString();
-					for(QuickActionType q : types) {
-						if(Algorithms.stringsEqual(q.getStringId(), actionType)) {
-							found = q;
-							break;
-						}
-					}
-				} else if(obj.has("type")) {
-					int type = obj.get("type").getAsInt();
-					for(QuickActionType q : types) {
-						if(q.getId() == type) {
-							found = q;
-							break;
-						}
-					}
-				}
-				if(found != null) {
-					QuickAction qa = found.createNew();
-					if(obj.has("name")) {
-						qa.setName(obj.get("name").getAsString());
-					}
-					if(obj.has("id")) {
-						qa.setId(obj.get("id").getAsLong());
-					}
-					if(obj.has("params")) {
-						qa.setParams(
-								(Map<String, String>) context.deserialize(obj.get("params"),
-										new TypeToken<HashMap<String, String>>(){}.getType())
-						);
-					}
-					return qa;
-				}
-				return null;
-			}
-		}).create();
+		gson = new GsonBuilder().registerTypeAdapter(QuickAction.class, new QuickActionSerializer()).create();
 		quickActions = parseActiveActionsList(settings.QUICK_ACTION_LIST.get());
 		fabStateMap = getQuickActionFabStateMapFromJson(settings.QUICK_ACTION.get());
 
@@ -246,29 +191,29 @@ public class QuickActionRegistry {
 
     public void setQuickActionFabState(boolean isOn) {
         fabStateMap.put(settings.APPLICATION_MODE.get().getStringKey(), isOn);
-        settings.QUICK_ACTION.set(new Gson().toJson(fabStateMap));
+        settings.QUICK_ACTION.set(gson.toJson(fabStateMap));
     }
 
     private Map<String, Boolean> getQuickActionFabStateMapFromJson(String json) {
         Type type = new TypeToken<HashMap<String, Boolean>>() {
         }.getType();
-        HashMap<String, Boolean> quickActions = new Gson().fromJson(json, type);
+        HashMap<String, Boolean> quickActions = gson.fromJson(json, type);
 
         return quickActions != null ? quickActions : new HashMap<String, Boolean>();
     }
 
 
 	private String quickActionListToString(List<QuickAction> quickActions) {
-		return gson.toJson(quickActions);
+		Type type = new TypeToken<List<QuickAction>>() {}.getType();
+		return gson.toJson(quickActions, type);
 	}
 
 	public List<QuickAction> parseActiveActionsList(String json) {
 		Type type = new TypeToken<List<QuickAction>>() {}.getType();
 		List<QuickAction> quickActions = gson.fromJson(json, type);
-		List<QuickActionType> actionTypes = QuickActionRegistry.getActionTypes();
 		List<QuickAction> rquickActions = new ArrayList<>(quickActions.size());
 		if(quickActions != null) {
-			for(QuickAction qa : rquickActions) {
+			for(QuickAction qa : quickActions) {
 				if(qa != null) {
 					rquickActions.add(qa);
 				}
@@ -357,4 +302,61 @@ public class QuickActionRegistry {
 		return quickAction.getActionType().createNew(quickAction);
 	}
 
+	private static class QuickActionSerializer implements JsonDeserializer<QuickAction>,
+			JsonSerializer<QuickAction> {
+
+		@Override
+		public QuickAction deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+			JsonObject obj = json.getAsJsonObject();
+			// TODO improve search iteration
+			List<QuickActionType> types = QuickActionRegistry.getActionTypes();
+			QuickActionType found = null;
+			if(obj.has("actionType")) {
+				String actionType = obj.get("actionType").getAsString();
+				for(QuickActionType q : types) {
+					if(Algorithms.stringsEqual(q.getStringId(), actionType)) {
+						found = q;
+						break;
+					}
+				}
+			} else if(obj.has("type")) {
+				int type = obj.get("type").getAsInt();
+				for(QuickActionType q : types) {
+					if(q.getId() == type) {
+						found = q;
+						break;
+					}
+				}
+			}
+			if(found != null) {
+				QuickAction qa = found.createNew();
+				if(obj.has("name")) {
+					qa.setName(obj.get("name").getAsString());
+				}
+				if(obj.has("id")) {
+					qa.setId(obj.get("id").getAsLong());
+				}
+				if(obj.has("params")) {
+					qa.setParams(
+							(Map<String, String>) context.deserialize(obj.get("params"),
+									new TypeToken<HashMap<String, String>>(){}.getType())
+					);
+				}
+				return qa;
+			}
+			return null;
+		}
+
+		@Override
+		public JsonElement serialize(QuickAction src, Type typeOfSrc, JsonSerializationContext context) {
+			JsonObject el = new JsonObject();
+			el.addProperty("actionType", src.getActionType().getStringId());
+			el.addProperty("id", src.getId());
+			if (src.getRawName() != null) {
+				el.addProperty("name", src.getRawName());
+			}
+			el.add("params", context.serialize(src.getParams()));
+			return el;
+		}
+	}
 }
