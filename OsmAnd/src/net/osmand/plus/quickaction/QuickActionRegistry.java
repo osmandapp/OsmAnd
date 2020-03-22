@@ -78,8 +78,6 @@ public class QuickActionRegistry {
     public QuickActionRegistry(OsmandSettings settings) {
 
         this.settings = settings;
-        quickActions = parseActiveActionsList(settings.QUICK_ACTION_LIST.get());
-        fabStateMap = getQuickActionFabStateMapFromJson(settings.QUICK_ACTION.get());
 		gson = new GsonBuilder().registerTypeAdapter(QuickAction.class, new JsonSerializer<QuickAction>() {
 			@Override
 			public JsonElement serialize(QuickAction src, Type typeOfSrc, JsonSerializationContext context) {
@@ -97,7 +95,7 @@ public class QuickActionRegistry {
 			@Override
 			public QuickAction deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 				JsonObject obj = json.getAsJsonObject();
-				// TODO iteration
+				// TODO improve search iteration
 				List<QuickActionType> types = QuickActionRegistry.getActionTypes();
 				QuickActionType found = null;
 				if(obj.has("actionType")) {
@@ -136,6 +134,8 @@ public class QuickActionRegistry {
 				return null;
 			}
 		}).create();
+		quickActions = parseActiveActionsList(settings.QUICK_ACTION_LIST.get());
+		fabStateMap = getQuickActionFabStateMapFromJson(settings.QUICK_ACTION.get());
 
 	}
 
