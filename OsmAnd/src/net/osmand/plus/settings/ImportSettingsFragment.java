@@ -26,7 +26,6 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.AndroidUtils;
-import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
@@ -36,16 +35,25 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.SettingsHelper;
-import net.osmand.plus.SettingsHelper.*;
+import net.osmand.plus.SettingsHelper.AvoidRoadsSettingsItem;
+import net.osmand.plus.SettingsHelper.FileSettingsItem;
+import net.osmand.plus.SettingsHelper.FileSettingsItem.FileSubtype;
+import net.osmand.plus.SettingsHelper.ImportAsyncTask;
+import net.osmand.plus.SettingsHelper.ImportType;
+import net.osmand.plus.SettingsHelper.MapSourcesSettingsItem;
+import net.osmand.plus.SettingsHelper.PoiUiFilterSettingsItem;
+import net.osmand.plus.SettingsHelper.ProfileSettingsItem;
+import net.osmand.plus.SettingsHelper.QuickActionsSettingsItem;
+import net.osmand.plus.SettingsHelper.SettingsItem;
+import net.osmand.plus.SettingsHelper.SettingsItemType;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.settings.ExportImportSettingsAdapter.Type;
-
+import net.osmand.plus.widgets.TextViewEx;
 
 import org.apache.commons.logging.Log;
 
@@ -322,7 +330,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 					|| object instanceof SQLiteTileSource) {
 				tileSourceTemplates.add((ITileSource) object);
 			} else if (object instanceof File) {
-				settingsItems.add(new SettingsHelper.FileSettingsItem(app, (File) object));
+				settingsItems.add(new FileSettingsItem(app, (File) object));
 			} else if (object instanceof AvoidRoadInfo) {
 				avoidRoads.add((AvoidRoadInfo) object);
 			}
@@ -356,23 +364,28 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 			if (item.getType().equals(SettingsItemType.PROFILE)) {
 				profiles.add(((ProfileSettingsItem) item).getModeBean());
 			} else if (item.getType().equals(SettingsItemType.QUICK_ACTIONS)) {
-				quickActions.addAll(((QuickActionsSettingsItem) item).getItems());
-				quickActions.addAll(((QuickActionsSettingsItem) item).getDuplicateItems());
+				QuickActionsSettingsItem quickActionsItem = (QuickActionsSettingsItem) item;
+				quickActions.addAll(quickActionsItem.getItems());
+				quickActions.addAll(quickActionsItem.getDuplicateItems());
 			} else if (item.getType().equals(SettingsItemType.POI_UI_FILTERS)) {
-				poiUIFilters.addAll(((PoiUiFilterSettingsItem) item).getItems());
-				poiUIFilters.addAll(((PoiUiFilterSettingsItem) item).getDuplicateItems());
+				PoiUiFilterSettingsItem poiUiFilterItem = (PoiUiFilterSettingsItem) item;
+				poiUIFilters.addAll(poiUiFilterItem.getItems());
+				poiUIFilters.addAll(poiUiFilterItem.getDuplicateItems());
 			} else if (item.getType().equals(SettingsItemType.MAP_SOURCES)) {
-				tileSourceTemplates.addAll(((MapSourcesSettingsItem) item).getItems());
-				tileSourceTemplates.addAll(((MapSourcesSettingsItem) item).getDuplicateItems());
+				MapSourcesSettingsItem mapSourcesItem = (MapSourcesSettingsItem) item;
+				tileSourceTemplates.addAll(mapSourcesItem.getItems());
+				tileSourceTemplates.addAll(mapSourcesItem.getDuplicateItems());
 			} else if (item.getType().equals(SettingsItemType.FILE)) {
-				if (item.getName().contains(IndexConstants.RENDERERS_DIR)) {
-					renderFilesList.add(((FileSettingsItem) item).getFile());
-				} else if (item.getName().contains(IndexConstants.ROUTING_PROFILES_DIR)) {
-					routingFilesList.add(((FileSettingsItem) item).getFile());
+				FileSettingsItem fileItem = (FileSettingsItem) item;
+				if (fileItem.getSubtype() == FileSubtype.RENDERING_STYLE) {
+					renderFilesList.add(fileItem.getFile());
+				} else if (fileItem.getSubtype() == FileSubtype.ROUTING_CONFIG) {
+					routingFilesList.add(fileItem.getFile());
 				}
 			} else if (item.getType().equals(SettingsItemType.AVOID_ROADS)) {
-				avoidRoads.addAll(((AvoidRoadsSettingsItem) item).getItems());
-				avoidRoads.addAll(((AvoidRoadsSettingsItem) item).getDuplicateItems());
+				AvoidRoadsSettingsItem avoidRoadsItem = (AvoidRoadsSettingsItem) item;
+				avoidRoads.addAll(avoidRoadsItem.getItems());
+				avoidRoads.addAll(avoidRoadsItem.getDuplicateItems());
 			}
 		}
 

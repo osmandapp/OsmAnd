@@ -901,18 +901,80 @@ public class SettingsHelper {
 
 	public static class FileSettingsItem extends StreamSettingsItem {
 
-		private File file;
-		private String subtype;
+		public enum FileSubtype {
+			UNKNOWN("", null),
+			ROUTING_CONFIG("routing_config", IndexConstants.ROUTING_PROFILES_DIR),
+			RENDERING_STYLE("rendering_style", IndexConstants.RENDERERS_DIR),
+			OBF_MAP("obf_map", IndexConstants.MAPS_PATH),
+			TILES_MAP("tiles_map", IndexConstants.TILES_INDEX_DIR),
+			GPX("gpx", IndexConstants.GPX_INDEX_DIR),
+			VOICE("voice", IndexConstants.VOICE_INDEX_DIR);
 
-		public FileSettingsItem(@NonNull OsmandApplication app, @NonNull File file) {
+			private String subtypeName;
+			private String subtypeFolder;
+
+			FileSubtype(String subtypeName, String subtypeFolder) {
+				this.subtypeName = subtypeName;
+				this.subtypeFolder = subtypeFolder;
+			}
+
+			public String getSubtypeName() {
+				return subtypeName;
+			}
+
+			public String getSubtypeFolder() {
+				return subtypeFolder;
+			}
+
+			public static FileSubtype getSubtypeByName(@NonNull String name) {
+				for (FileSubtype subtype : FileSubtype.values()) {
+					if (name.equals(subtype.subtypeName)) {
+						return subtype;
+					}
+				}
+				return null;
+			}
+
+			public static FileSubtype getSubtypeByFileName(@NonNull String fileName) {
+				String name = fileName.substring(1);
+				for (FileSubtype subtype : FileSubtype.values()) {
+					if (subtype != UNKNOWN && name.startsWith(subtype.subtypeFolder)) {
+						return subtype;
+					}
+				}
+				return UNKNOWN;
+			}
+
+			@Override
+			public String toString() {
+				return subtypeName;
+			}
+		}
+
+		private File file;
+		private FileSubtype subtype;
+
+		public FileSettingsItem(@NonNull OsmandApplication app, @NonNull File file) throws IllegalArgumentException {
 			super(SettingsItemType.FILE, file.getPath().replace(app.getAppPath(null).getPath(), ""));
 			this.file = file;
+			this.subtype = FileSubtype.getSubtypeByFileName(getFileName());
+			if (subtype == FileSubtype.UNKNOWN) {
+				throw new IllegalArgumentException("Unknown file subtype: " + getFileName());
+			}
+		}
+
+		public FileSettingsItem(@NonNull OsmandApplication app, @NonNull FileSubtype subtype, @NonNull File file) throws IllegalArgumentException {
+			super(SettingsItemType.FILE, file.getPath().replace(app.getAppPath(null).getPath(), ""));
+			this.file = file;
+			this.subtype = subtype;
+			if (subtype == FileSubtype.UNKNOWN) {
+				throw new IllegalArgumentException("Unknown file subtype: " + getFileName());
+			}
 		}
 
 		FileSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			super(SettingsItemType.FILE, json);
 			this.file = new File(app.getAppPath(null), name);
-			this.subtype = json.has("subtype") ? json.getString("subtype") : null;
 		}
 
 		@Override
@@ -921,6 +983,22 @@ public class SettingsHelper {
 			String fileName = getFileName();
 			if (!Algorithms.isEmpty(fileName)) {
 				name = fileName;
+			}
+			String subtypeStr = json.has("subtype") ? json.getString("subtype") : null;
+			if (!Algorithms.isEmpty(subtypeStr)) {
+				subtype = FileSubtype.getSubtypeByName(subtypeStr);
+			} else if (!Algorithms.isEmpty(fileName)) {
+				subtype = FileSubtype.getSubtypeByFileName(fileName);
+			} else {
+				subtype = FileSubtype.UNKNOWN;
+			}
+		}
+
+		@Override
+		void writeToJson(@NonNull JSONObject json) throws JSONException {
+			super.writeToJson(json);
+			if (subtype != null) {
+				json.put("subtype", subtype.getSubtypeName());
 			}
 		}
 
@@ -934,7 +1012,7 @@ public class SettingsHelper {
 			return file;
 		}
 
-		public String getSubtype() {
+		public FileSubtype getSubtype() {
 			return subtype;
 		}
 
