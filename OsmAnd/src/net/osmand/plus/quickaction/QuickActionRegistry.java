@@ -65,7 +65,7 @@ public class QuickActionRegistry {
 
     private final OsmandSettings settings;
 
-    private final List<QuickAction> quickActions;
+    private List<QuickAction> quickActions;
     private final Map<String, Boolean> fabStateMap;
     private final Gson gson;
 	private List<QuickActionType> quickActionTypes = new ArrayList<>();
@@ -75,13 +75,10 @@ public class QuickActionRegistry {
 	private QuickActionUpdatesListener updatesListener;
 
     public QuickActionRegistry(OsmandSettings settings) {
-
         this.settings = settings;
 		gson = new GsonBuilder().registerTypeAdapter(QuickAction.class, new QuickActionSerializer()).create();
-		quickActions = parseActiveActionsList(settings.QUICK_ACTION_LIST.get());
 		fabStateMap = getQuickActionFabStateMapFromJson(settings.QUICK_ACTION.get());
 		updateActionTypes();
-
 	}
 
     public void setUpdatesListener(QuickActionUpdatesListener updatesListener) {
@@ -97,14 +94,7 @@ public class QuickActionRegistry {
     }
 
 	public List<QuickAction> getFilteredQuickActions() {
-		List<QuickAction> actions = quickActions;
-		List<QuickAction> filteredActions = new ArrayList<>();
-		for (QuickAction action : actions) {
-			if (quickActionTypesInt.containsKey(action.getActionType().getId())) {
-				filteredActions.add(action);
-			}
-		}
-		return filteredActions;
+		return getQuickActions();
 	}
 
     public void addQuickAction(QuickAction action){
@@ -188,7 +178,7 @@ public class QuickActionRegistry {
 
 
 
-	public List<QuickAction> parseActiveActionsList(String json) {
+	private List<QuickAction> parseActiveActionsList(String json) {
 		Type type = new TypeToken<List<QuickAction>>() {}.getType();
 		List<QuickAction> quickActions = gson.fromJson(json, type);
 		List<QuickAction> rquickActions = new ArrayList<>(quickActions.size());
@@ -199,6 +189,7 @@ public class QuickActionRegistry {
 				}
 			}
 		}
+		this.quickActions = rquickActions;
 		return rquickActions;
 	}
 
@@ -234,6 +225,8 @@ public class QuickActionRegistry {
 		this.quickActionTypes = quickActionTypes;
 		this.quickActionTypesInt = quickActionTypesInt;
 		this.quickActionTypesStr = quickActionTypesStr;
+		// reparse to get new quick actions
+		parseActiveActionsList(settings.QUICK_ACTION_LIST.get());
 		return quickActionTypes;
 	}
 

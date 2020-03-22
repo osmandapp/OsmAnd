@@ -220,7 +220,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 
 
 		QuickActionRegistry registry = app.getQuickActionRegistry();
-		List<QuickAction> actionsList = registry.parseActiveActionsList(app.getSettings().QUICK_ACTION_LIST.get());
+		List<QuickAction> actionsList = registry.getQuickActions();
 		if (!actionsList.isEmpty()) {
 			dataList.put(Type.QUICK_ACTIONS, actionsList);
 		}
