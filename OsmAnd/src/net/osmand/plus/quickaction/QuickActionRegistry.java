@@ -3,7 +3,18 @@ package net.osmand.plus.quickaction;
 import android.content.Context;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -25,9 +36,12 @@ import net.osmand.plus.quickaction.actions.NewAction;
 import net.osmand.plus.quickaction.actions.ShowHideFavoritesAction;
 import net.osmand.plus.quickaction.actions.ShowHideGpxTracksAction;
 import net.osmand.plus.quickaction.actions.ShowHidePoiAction;
+import net.osmand.util.Algorithms;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,15 +71,73 @@ public class QuickActionRegistry {
 
     private final List<QuickAction> quickActions;
     private final Map<String, Boolean> fabStateMap;
+    private final Gson gson;
 
-    private QuickActionUpdatesListener updatesListener;
+	private QuickActionUpdatesListener updatesListener;
 
     public QuickActionRegistry(OsmandSettings settings) {
 
         this.settings = settings;
         quickActions = parseActiveActionsList(settings.QUICK_ACTION_LIST.get());
         fabStateMap = getQuickActionFabStateMapFromJson(settings.QUICK_ACTION.get());
-    }
+		gson = new GsonBuilder().registerTypeAdapter(QuickAction.class, new JsonSerializer<QuickAction>() {
+			@Override
+			public JsonElement serialize(QuickAction src, Type typeOfSrc, JsonSerializationContext context) {
+				JsonObject el = new JsonObject();
+				el.addProperty("actionType", src.getActionType().getStringId());
+				el.addProperty("id", src.getId());
+				if (src.getRawName() != null) {
+					el.addProperty("name", src.getRawName());
+				}
+				el.add("params", context.serialize(src.getParams()));
+				return el;
+			}
+		}).registerTypeAdapter(QuickAction.class, new JsonDeserializer<QuickAction>() {
+
+			@Override
+			public QuickAction deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+				JsonObject obj = json.getAsJsonObject();
+				// TODO iteration
+				List<QuickActionType> types = QuickActionRegistry.getActionTypes();
+				QuickActionType found = null;
+				if(obj.has("actionType")) {
+					String actionType = obj.get("actionType").getAsString();
+					for(QuickActionType q : types) {
+						if(Algorithms.stringsEqual(q.getStringId(), actionType)) {
+							found = q;
+							break;
+						}
+					}
+				} else if(obj.has("type")) {
+					int type = obj.get("type").getAsInt();
+					for(QuickActionType q : types) {
+						if(q.getId() == type) {
+							found = q;
+							break;
+						}
+					}
+				}
+				if(found != null) {
+					QuickAction qa = found.createNew();
+					if(obj.has("name")) {
+						qa.setName(obj.get("name").getAsString());
+					}
+					if(obj.has("id")) {
+						qa.setId(obj.get("id").getAsLong());
+					}
+					if(obj.has("params")) {
+						qa.setParams(
+								(Map<String, String>) context.deserialize(obj.get("params"),
+										new TypeToken<HashMap<String, String>>(){}.getType())
+						);
+					}
+					return qa;
+				}
+				return null;
+			}
+		}).create();
+
+	}
 
     public void setUpdatesListener(QuickActionUpdatesListener updatesListener) {
         this.updatesListener = updatesListener;
@@ -186,18 +258,23 @@ public class QuickActionRegistry {
     }
 
 
-
 	private String quickActionListToString(List<QuickAction> quickActions) {
-		// FIXME QA: backward compatibiltiy
-		return new Gson().toJson(quickActions);
+		return gson.toJson(quickActions);
 	}
 
 	public List<QuickAction> parseActiveActionsList(String json) {
-		// FIXME QA: backward compatibiltiy
-		Type type = new TypeToken<List<QuickAction>>() {
-		}.getType();
-		ArrayList<QuickAction> quickActions = new Gson().fromJson(json, type);
-		return quickActions != null ? quickActions : new ArrayList<QuickAction>();
+		Type type = new TypeToken<List<QuickAction>>() {}.getType();
+		List<QuickAction> quickActions = gson.fromJson(json, type);
+		List<QuickActionType> actionTypes = QuickActionRegistry.getActionTypes();
+		List<QuickAction> rquickActions = new ArrayList<>(quickActions.size());
+		if(quickActions != null) {
+			for(QuickAction qa : rquickActions) {
+				if(qa != null) {
+					rquickActions.add(qa);
+				}
+			}
+		}
+		return rquickActions;
 	}
 
 
@@ -258,13 +335,22 @@ public class QuickActionRegistry {
 		}
 	}
 
+	public static QuickAction newActionByStringType(String actionType) {
+		for (QuickActionType t : getActionTypes()) {
+			if (Algorithms.objectEquals(actionType, t.getStringId())) {
+				return t.createNew();
+			}
+		}
+		return null;
+	}
+
 	public static QuickAction newActionByType(int type) {
 		for (QuickActionType t : getActionTypes()) {
 			if (t.getId() == type) {
 				return t.createNew();
 			}
 		}
-		return new QuickAction();
+		return null;
 	}
 
 	public static QuickAction produceAction(QuickAction quickAction) {

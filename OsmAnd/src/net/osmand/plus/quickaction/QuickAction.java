@@ -7,6 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.google.gson.JsonObject;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 
@@ -15,8 +20,10 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.actions.NewAction;
 import net.osmand.util.Algorithms;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class QuickAction {
 
@@ -24,19 +31,19 @@ public class QuickAction {
 
         void onActionSelected(QuickAction action);
     }
+    private static int SEQ = 0;
 
     protected long id;
     private String name;
-    private HashMap<String, String> params;
+    private Map<String, String> params;
     private QuickActionType actionType;
 
     protected QuickAction() {
-        this(NewAction.TYPE);
+        this(QuickActionRegistry.TYPE_ADD_ITEMS);
     }
 
     public QuickAction(QuickActionType type) {
-    	// FIXME QA: id
-        this.id = System.currentTimeMillis();
+        this.id = System.currentTimeMillis() + (SEQ++);
         this.actionType = type;
     }
 
@@ -67,6 +74,10 @@ public class QuickAction {
 		return actionType.getId();
 	}
 
+	public void setActionType(QuickActionType actionType) {
+		this.actionType = actionType;
+	}
+
     public boolean isActionEditable() {
         return actionType == null ? false : actionType.isActionEditable();
     }
@@ -83,15 +94,19 @@ public class QuickAction {
         }
     }
 
+    public String getRawName() {
+    	return name;
+	}
+
 	@NonNull
 	private String getDefaultName(Context context) {
 		return getNameRes() != 0 ? context.getString(getNameRes()) : "";
 	}
 
-	public HashMap<String, String> getParams() {
-
-        if (params == null) params = new HashMap<>();
-
+	public Map<String, String> getParams() {
+        if (params == null) {
+        	params = new HashMap<>();
+		}
         return params;
     }
 
@@ -99,7 +114,11 @@ public class QuickAction {
         this.name = name;
     }
 
-    public void setParams(HashMap<String, String> params) {
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public void setParams(Map<String, String> params) {
         this.params = params;
     }
 

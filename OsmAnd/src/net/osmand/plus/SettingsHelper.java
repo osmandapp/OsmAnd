@@ -941,11 +941,13 @@ public class SettingsHelper {
 						for (int i = 0; i < itemsJson.length(); i++) {
 							JSONObject object = itemsJson.getJSONObject(i);
 							String name = object.getString("name");
-							// FIXME QA: make type string
-							int actionType = object.getInt("type");
-							QuickAction quickAction = QuickActionRegistry.newActionByType(actionType);
-							if (quickAction.getType() != 0) {
-
+							QuickAction quickAction = null;
+							if(object.has("actionType")) {
+								quickAction = QuickActionRegistry.newActionByStringType(object.getString("actionType"));
+							} else if(object.has("type")) {
+								quickAction = QuickActionRegistry.newActionByType(object.getInt("type"));
+							}
+							if (quickAction != null) {
 								String paramsString = object.getString("params");
 								HashMap<String, String> params = gson.fromJson(paramsString, type);
 

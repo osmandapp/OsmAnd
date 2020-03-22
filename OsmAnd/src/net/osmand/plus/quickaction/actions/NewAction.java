@@ -10,7 +10,7 @@ import net.osmand.plus.quickaction.QuickActionType;
 
 public class NewAction extends QuickAction {
 
-	public static final QuickActionType TYPE = new QuickActionType(0, "new",
+	public static final QuickActionType TYPE = new QuickActionType(1, "new",
 			NewAction.class).
 			nonEditable().iconRes(R.drawable.ic_action_plus).nameRes(R.string.quick_action_new_action);
 

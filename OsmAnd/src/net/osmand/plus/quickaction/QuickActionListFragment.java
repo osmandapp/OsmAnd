@@ -271,7 +271,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
         @Override
         public int getItemViewType(int position) {
-            return itemsList.get(position).type == 0 ? SCREEN_HEADER_TYPE : SCREEN_ITEM_TYPE;
+            return itemsList.get(position).getType() == 0 ? SCREEN_HEADER_TYPE : SCREEN_ITEM_TYPE;
         }
 
         public void deleteItem(int position) {

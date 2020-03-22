@@ -139,7 +139,7 @@ public class CreateEditActionDialog extends DialogFragment {
         super.onSaveInstanceState(outState);
 
         outState.putLong(KEY_ACTION_ID, action.getId());
-        outState.putInt(KEY_ACTION_TYPE, action.type);
+        outState.putInt(KEY_ACTION_TYPE, action.getType());
         outState.putBoolean(KEY_ACTION_IS_NEW, isNew);
     }
 
