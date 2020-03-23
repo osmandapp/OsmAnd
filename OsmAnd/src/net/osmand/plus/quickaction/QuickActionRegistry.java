@@ -50,10 +50,10 @@ import java.util.TreeSet;
 
 public class QuickActionRegistry {
 
-    public interface QuickActionUpdatesListener{
+	public interface QuickActionUpdatesListener {
 
-        void onActionsUpdated();
-    }
+		void onActionsUpdated();
+	}
 
 	public static final QuickActionType TYPE_ADD_ITEMS = new QuickActionType(0, "").
 			nameRes(R.string.quick_action_add_create_items).category(QuickActionType.CREATE_CATEGORY);
@@ -63,128 +63,129 @@ public class QuickActionRegistry {
 			nameRes(R.string.quick_action_add_navigation).category(QuickActionType.NAVIGATION);
 
 
-    private final OsmandSettings settings;
+	private final OsmandSettings settings;
 
-    private List<QuickAction> quickActions;
-    private final Map<String, Boolean> fabStateMap;
-    private final Gson gson;
+	private List<QuickAction> quickActions;
+	private final Map<String, Boolean> fabStateMap;
+	private final Gson gson;
 	private List<QuickActionType> quickActionTypes = new ArrayList<>();
 	private Map<Integer, QuickActionType> quickActionTypesInt = new TreeMap<>();
 	private Map<String, QuickActionType> quickActionTypesStr = new TreeMap<>();
 
 	private QuickActionUpdatesListener updatesListener;
 
-    public QuickActionRegistry(OsmandSettings settings) {
-        this.settings = settings;
+	public QuickActionRegistry(OsmandSettings settings) {
+		this.settings = settings;
 		gson = new GsonBuilder().registerTypeAdapter(QuickAction.class, new QuickActionSerializer()).create();
 		fabStateMap = getQuickActionFabStateMapFromJson(settings.QUICK_ACTION.get());
 		updateActionTypes();
 	}
 
-    public void setUpdatesListener(QuickActionUpdatesListener updatesListener) {
-        this.updatesListener = updatesListener;
-    }
+	public void setUpdatesListener(QuickActionUpdatesListener updatesListener) {
+		this.updatesListener = updatesListener;
+	}
 
-    public void notifyUpdates() {
-        if (updatesListener != null) updatesListener.onActionsUpdated();
-    }
+	public void notifyUpdates() {
+		if (updatesListener != null) updatesListener.onActionsUpdated();
+	}
 
-    public List<QuickAction> getQuickActions() {
-        return new ArrayList<>(quickActions);
-    }
+	public List<QuickAction> getQuickActions() {
+		return new ArrayList<>(quickActions);
+	}
 
 	public List<QuickAction> getFilteredQuickActions() {
 		return getQuickActions();
 	}
 
-    public void addQuickAction(QuickAction action){
-        quickActions.add(action);
+	public void addQuickAction(QuickAction action) {
+		quickActions.add(action);
 		saveActions();
 	}
 
 	private void saveActions() {
-		Type type = new TypeToken<List<QuickAction>>() {}.getType();
+		Type type = new TypeToken<List<QuickAction>>() {
+		}.getType();
 		settings.QUICK_ACTION_LIST.set(gson.toJson(quickActions, type));
 	}
 
-	public void deleteQuickAction(QuickAction action){
-    	quickActions.remove(action);
+	public void deleteQuickAction(QuickAction action) {
+		quickActions.remove(action);
 		saveActions();
 	}
 
-    public void updateQuickAction(QuickAction action){
-        int index = quickActions.indexOf(action);
-        if (index >= 0) {
-        	quickActions.set(index, action);
-        }
+	public void updateQuickAction(QuickAction action) {
+		int index = quickActions.indexOf(action);
+		if (index >= 0) {
+			quickActions.set(index, action);
+		}
 		saveActions();
 	}
 
-    public void updateQuickActions(List<QuickAction>  quickActions){
-        this.quickActions.clear();
-        this.quickActions.addAll(quickActions);
-        saveActions();
-    }
+	public void updateQuickActions(List<QuickAction> quickActions) {
+		this.quickActions.clear();
+		this.quickActions.addAll(quickActions);
+		saveActions();
+	}
 
-    public QuickAction getQuickAction(long id){
-        for (QuickAction action: quickActions){
-            if (action.id == id) {
-            	return action;
-            }
-        }
-        return null;
-    }
+	public QuickAction getQuickAction(long id) {
+		for (QuickAction action : quickActions) {
+			if (action.id == id) {
+				return action;
+			}
+		}
+		return null;
+	}
 
-    public boolean isNameUnique(QuickAction action, Context context){
-        for (QuickAction a: quickActions){
-            if (action.id != a.id) {
-                if (action.getName(context).equals(a.getName(context))) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
+	public boolean isNameUnique(QuickAction action, Context context) {
+		for (QuickAction a : quickActions) {
+			if (action.id != a.id) {
+				if (action.getName(context).equals(a.getName(context))) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 
-    public QuickAction generateUniqueName(QuickAction action, Context context) {
-        int number = 0;
-        String name = action.getName(context);
-        while (true) {
-            number++;
-            action.setName(name + " (" + number + ")");
-            if (isNameUnique(action, context)) {
-            	return action;
-            }
-        }
-    }
+	public QuickAction generateUniqueName(QuickAction action, Context context) {
+		int number = 0;
+		String name = action.getName(context);
+		while (true) {
+			number++;
+			action.setName(name + " (" + number + ")");
+			if (isNameUnique(action, context)) {
+				return action;
+			}
+		}
+	}
 
-    public boolean isQuickActionOn() {
-        Boolean result = fabStateMap.get(settings.APPLICATION_MODE.get().getStringKey());
-        return result != null && result;
-    }
+	public boolean isQuickActionOn() {
+		Boolean result = fabStateMap.get(settings.APPLICATION_MODE.get().getStringKey());
+		return result != null && result;
+	}
 
-    public void setQuickActionFabState(boolean isOn) {
-        fabStateMap.put(settings.APPLICATION_MODE.get().getStringKey(), isOn);
-        settings.QUICK_ACTION.set(gson.toJson(fabStateMap));
-    }
+	public void setQuickActionFabState(boolean isOn) {
+		fabStateMap.put(settings.APPLICATION_MODE.get().getStringKey(), isOn);
+		settings.QUICK_ACTION.set(gson.toJson(fabStateMap));
+	}
 
-    private Map<String, Boolean> getQuickActionFabStateMapFromJson(String json) {
-        Type type = new TypeToken<HashMap<String, Boolean>>() {
-        }.getType();
-        HashMap<String, Boolean> quickActions = gson.fromJson(json, type);
+	private Map<String, Boolean> getQuickActionFabStateMapFromJson(String json) {
+		Type type = new TypeToken<HashMap<String, Boolean>>() {
+		}.getType();
+		HashMap<String, Boolean> quickActions = gson.fromJson(json, type);
 
-        return quickActions != null ? quickActions : new HashMap<String, Boolean>();
-    }
-
+		return quickActions != null ? quickActions : new HashMap<String, Boolean>();
+	}
 
 
 	private List<QuickAction> parseActiveActionsList(String json) {
-		Type type = new TypeToken<List<QuickAction>>() {}.getType();
+		Type type = new TypeToken<List<QuickAction>>() {
+		}.getType();
 		List<QuickAction> quickActions = gson.fromJson(json, type);
 		List<QuickAction> rquickActions = new ArrayList<>(quickActions.size());
-		if(quickActions != null) {
-			for(QuickAction qa : quickActions) {
-				if(qa != null) {
+		if (quickActions != null) {
+			for (QuickAction qa : quickActions) {
+				if (qa != null) {
 					rquickActions.add(qa);
 				}
 			}
@@ -218,7 +219,7 @@ public class QuickActionRegistry {
 
 		Map<Integer, QuickActionType> quickActionTypesInt = new TreeMap<>();
 		Map<String, QuickActionType> quickActionTypesStr = new TreeMap<>();
-		for(QuickActionType qt : quickActionTypes) {
+		for (QuickActionType qt : quickActionTypes) {
 			quickActionTypesInt.put(qt.getId(), qt);
 			quickActionTypesStr.put(qt.getStringId(), qt);
 		}
@@ -260,7 +261,7 @@ public class QuickActionRegistry {
 
 	public QuickAction newActionByStringType(String actionType) {
 		QuickActionType quickActionType = quickActionTypesStr.get(actionType);
-		if(quickActionType != null) {
+		if (quickActionType != null) {
 			return quickActionType.createNew();
 		}
 		return null;
@@ -268,7 +269,7 @@ public class QuickActionRegistry {
 
 	public QuickAction newActionByType(int type) {
 		QuickActionType quickActionType = quickActionTypesInt.get(type);
-		if(quickActionType != null) {
+		if (quickActionType != null) {
 			return quickActionType.createNew();
 		}
 		return null;
@@ -285,25 +286,24 @@ public class QuickActionRegistry {
 		public QuickAction deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 			JsonObject obj = json.getAsJsonObject();
 			QuickActionType found = null;
-			if(obj.has("actionType")) {
+			if (obj.has("actionType")) {
 				String actionType = obj.get("actionType").getAsString();
 				found = quickActionTypesStr.get(actionType);
-			} else if(obj.has("type")) {
+			} else if (obj.has("type")) {
 				int type = obj.get("type").getAsInt();
 				found = quickActionTypesInt.get(type);
 			}
-			if(found != null) {
+			if (found != null) {
 				QuickAction qa = found.createNew();
-				if(obj.has("name")) {
+				if (obj.has("name")) {
 					qa.setName(obj.get("name").getAsString());
 				}
-				if(obj.has("id")) {
+				if (obj.has("id")) {
 					qa.setId(obj.get("id").getAsLong());
 				}
-				if(obj.has("params")) {
-					qa.setParams(
-							(Map<String, String>) context.deserialize(obj.get("params"),
-									new TypeToken<HashMap<String, String>>(){}.getType())
+				if (obj.has("params")) {
+					qa.setParams((Map<String, String>) context.deserialize(obj.get("params"),
+							new TypeToken<HashMap<String, String>>() {}.getType())
 					);
 				}
 				return qa;

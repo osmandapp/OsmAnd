@@ -983,7 +983,6 @@ public class SettingsHelper {
 								JSONObject jsonObject = new JSONObject();
 								jsonObject.put("name", action.hasCustomName(app)
 										? action.getName(app) : "");
-								jsonObject.put("type", action.getType());
 								jsonObject.put("actionType", action.getActionType().getStringId());
 								jsonObject.put("params", gson.toJson(action.getParams(), type));
 								jsonArray.put(jsonObject);
