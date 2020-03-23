@@ -10,11 +10,16 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.routing.RoutingHelper;
 
 public class NavResumePauseAction extends QuickAction {
 
-	public static final int TYPE = 26;
+	public static final QuickActionType TYPE = new QuickActionType(26,
+			"nav.resumepause", NavResumePauseAction .class).
+			nameRes(R.string.quick_action_resume_pause_navigation).iconRes(R.drawable.ic_play_dark).nonEditable().
+			category(QuickActionType.NAVIGATION);
+
 
 	public NavResumePauseAction() {
 		super(TYPE);

@@ -23,12 +23,16 @@ import net.osmand.plus.mapcontextmenu.editors.EditCategoryDialogFragment;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.SelectCategoryDialogFragment;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 
 public class FavoriteAction extends QuickAction {
 
-	public static final int TYPE = 3;
 
+	public static final QuickActionType TYPE = new QuickActionType(3,
+			"fav.add", FavoriteAction.class).
+			nameRes(R.string.quick_action_add_favorite).iconRes(R.drawable.ic_action_fav_dark).
+			category(QuickActionType.CREATE_CATEGORY);
 	public static final String KEY_NAME = "name";
 	public static final String KEY_DIALOG = "dialog";
 	public static final String KEY_CATEGORY_NAME = "category_name";
