@@ -13,7 +13,7 @@
 		android:id="@+id/background_layout"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:background="?attr/card_and_list_background_basic"
+		android:background="?attr/activity_background_color"
 		android:orientation="vertical">
 
 		<androidx.appcompat.widget.Toolbar
@@ -33,7 +33,6 @@
 				android:layout_width="@dimen/list_item_height"
 				android:layout_height="match_parent"
 				android:layout_gravity="end"
-				android:background="?attr/card_and_list_background_basic"
 				android:contentDescription="@string/replace_all"
 				android:scaleType="center"
 				android:src="@drawable/ic_action_replace"
@@ -439,7 +438,7 @@
 							android:layout_height="wrap_content"
 							android:maxLines="1"
 							android:text="@string/update_existing"
-							android:textAppearance="@style/TextAppearance.ListItemTitle"
+							android:textAppearance="@style/TextAppearance.ListItemCategoryTitle"
 							tools:text="@string/update_existing" />
 
 						<TextView
@@ -449,8 +448,7 @@
 							android:ellipsize="end"
 							android:lines="1"
 							android:text="@string/update_existing"
-							android:textAppearance="@style/TextAppearance.ListItemTitle"
-							android:textSize="@dimen/default_desc_text_size"
+							android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
 							tools:text="@string/update_existing" />
 
 					</LinearLayout>
@@ -484,7 +482,7 @@
 						android:layout_height="wrap_content"
 						android:maxLines="1"
 						android:text="@string/shared_string_delete"
-						android:textAppearance="@style/TextAppearance.ListItemTitle"
+						android:textAppearance="@style/TextAppearance.ListItemCategoryTitle"
 						tools:text="@string/shared_string_delete" />
 				</LinearLayout>
 

@@ -545,8 +545,7 @@ public class UiUtilities {
 	}
 
 	private static Context getThemedMaterialContext(Context context, boolean nightMode) {
-		return getThemedContext(context, nightMode,
-				R.style.Theme_MaterialComponents_Light, R.style.Theme_MaterialComponents);
+		return getThemedContext(context, nightMode, R.style.OsmandMaterialLightTheme, R.style.OsmandMaterialDarkTheme);
 	}
 
 	public static LayoutInflater getInflater(Context ctx, boolean nightMode) {

@@ -88,8 +88,11 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 
-		view = UiUtilities.getMaterialInflater(getContext(), nightMode).inflate(R.layout.point_editor_fragment_new, container, false);
 		app = requireMyApplication();
+		nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		view = UiUtilities.getMaterialInflater(getContext(), nightMode)
+				.inflate(R.layout.point_editor_fragment_new, container, false);
+
 		final PointEditor editor = getEditor();
 		if (editor == null) {
 			return view;
@@ -98,15 +101,13 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		editor.updateLandscapePortrait(requireActivity());
 		editor.updateNightMode();
 
-		nightMode = !editor.isLight();
-
 		selectedColor = 0xb4FFFFFF & getPointColor();
 		selectedShape = getBackgroundType();
 		selectedIcon = getIconId();
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setBackgroundColor(ContextCompat.getColor(requireContext(),
-				nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light));
+				nightMode ? R.color.app_bar_color_dark : R.color.list_background_color_light));
 		toolbar.setTitle(getToolbarTitle());
 		Drawable icBack = app.getUIUtilities().getIcon(R.drawable.ic_arrow_back,
 				nightMode ? R.color.active_buttons_and_links_text_dark : R.color.description_font_and_bottom_sheet_icons);
@@ -136,7 +137,8 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 
 		int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		ImageView toolbarAction = (ImageView) view.findViewById(R.id.toolbar_action);
-		view.findViewById(R.id.background_layout).setBackgroundResource(nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light);
+		view.findViewById(R.id.background_layout).setBackgroundResource(nightMode
+				? R.color.app_bar_color_dark : R.color.list_background_color_light);
 		ImageView groupListIcon = (ImageView) view.findViewById(R.id.group_list_button_icon);
 		groupListIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_group_select_all, activeColorResId));
 		ImageView replaceIcon = (ImageView) view.findViewById(R.id.replace_action_icon);
@@ -742,7 +744,8 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 			view = LayoutInflater.from(parent.getContext()).inflate(R.layout.point_editor_group_select_item, parent, false);
 			if (viewType != VIEW_TYPE_CELL) {
-				((ImageView) view.findViewById(R.id.groupIcon)).setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_add, activeColorResId));
+				Drawable iconAdd = app.getUIUtilities().getIcon(R.drawable.ic_action_add, activeColorResId);
+				((ImageView) view.findViewById(R.id.groupIcon)).setImageDrawable(iconAdd);
 				((TextView) view.findViewById(R.id.groupName)).setText(requireMyApplication().getString(R.string.add_group));
 			}
 			((TextView) view.findViewById(R.id.groupName)).setTextColor(getResources().getColor(activeColorResId));
@@ -857,14 +860,16 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			TextView textView = holder.buttonText;
 			int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 			if (category.equals(selectedIconCategory)) {
-				AndroidUtils.setBackground(holder.button, app.getUIUtilities().getIcon(R.drawable.bg_select_icon_group_button));
+				AndroidUtils.setBackground(holder.button, app.getUIUtilities().getPaintedIcon(R.drawable.bg_select_icon_group_button,
+						ContextCompat.getColor(app, activeColorResId)));
 				textView.setTextColor(ContextCompat.getColor(app, R.color.color_white));
 			} else {
 				textView.setTextColor(ContextCompat.getColor(app, R.color.preference_category_title));
-				GradientDrawable rectContourDrawable = (GradientDrawable) ContextCompat.getDrawable(app, R.drawable.bg_select_icon_group_button).mutate();
-				rectContourDrawable.setStroke(AndroidUtils.dpToPx(app, 1), ContextCompat.getColor(app, R.color.divider_color_light));
-				rectContourDrawable.setColor(ContextCompat.getColor(app, R.color.color_white));
-				AndroidUtils.setBackground(holder.button, rectContourDrawable);
+				GradientDrawable buttonBackground = (GradientDrawable) ContextCompat.getDrawable(app,
+						R.drawable.bg_select_icon_group_button).mutate();
+				buttonBackground.setStroke(AndroidUtils.dpToPx(app, 1), ContextCompat.getColor(app, R.color.divider_color_light));
+				buttonBackground.setColor(ContextCompat.getColor(app, R.color.color_transparent));
+				AndroidUtils.setBackground(holder.button, buttonBackground);
 			}
 			textView.setText(category);
 			holder.button.setOnClickListener(new View.OnClickListener() {
