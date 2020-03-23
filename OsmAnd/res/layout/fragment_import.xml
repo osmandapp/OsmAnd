@@ -129,11 +129,12 @@
 
 		<ProgressBar
 			android:id="@+id/progress_bar"
-			style="?android:attr/progressBarStyleHorizontal"
+			style="@style/Widget.AppCompat.ProgressBar.Horizontal"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
+			android:layout_marginTop="-5dp"
+			android:layout_marginBottom="-5dp"
 			android:indeterminate="true"
-			android:minHeight="0dp"
 			android:visibility="gone"
 			tools:visibility="visible" />
 
