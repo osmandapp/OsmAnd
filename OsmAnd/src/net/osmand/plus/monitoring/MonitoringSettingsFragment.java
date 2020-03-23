@@ -33,8 +33,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-import static net.osmand.plus.OsmandSettings.MONTHLY_DIRECTORY;
-import static net.osmand.plus.OsmandSettings.REC_DIRECTORY;
+import static net.osmand.plus.OsmandSettings.RecordingLocation;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.MINUTES;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.SECONDS;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
@@ -206,15 +205,14 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupTrackStorageDirectoryPref() {
-		Integer[] entryValues = new Integer[] {REC_DIRECTORY, MONTHLY_DIRECTORY};
-		String[] entries = new String[entryValues.length];
-		entries[0] = getString(R.string.store_tracks_in_rec_directory);
-		entries[1] = getString(R.string.store_tracks_in_monthly_directories);
-		entries[2] = getString(R.string.store_tracks_in_daily_directories);
+		String[] entries = new String[RecordingLocation.values().length];
+		for (int i = 0; i < RecordingLocation.values().length; i++) {
+			entries[i] = RecordingLocation.values()[i].toHumanString(getMyApplication());
+		}
 
 		ListPreferenceEx trackStorageDirectory = (ListPreferenceEx) findPreference(settings.TRACK_STORAGE_DIRECTORY.getId());
 		trackStorageDirectory.setEntries(entries);
-		trackStorageDirectory.setEntryValues(entryValues);
+		trackStorageDirectory.setEntryValues(RecordingLocation.values());
 		trackStorageDirectory.setDescription(R.string.track_storage_directory_descrp);
 		trackStorageDirectory.setIcon(getActiveIcon(R.drawable.ic_action_folder));
 	}

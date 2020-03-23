@@ -213,10 +213,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					if (!data.get(f).isEmpty()) {
 						WptPt pt = data.get(f).findPointToShow();
 						String fileName = f + "_" + new SimpleDateFormat("HH-mm_EEE", Locale.US).format(new Date(pt.time)); //$NON-NLS-1$
-						Integer track_storage_directory = ctx.getSettings().TRACK_STORAGE_DIRECTORY.get();
-						if (track_storage_directory != OsmandSettings.REC_DIRECTORY) {
+						OsmandSettings.RecordingLocation track_storage_directory = ctx.getSettings().TRACK_STORAGE_DIRECTORY.get();
+						if (track_storage_directory != OsmandSettings.RecordingLocation.REC_DIRECTORY) {
 							SimpleDateFormat dateDirFormat = new SimpleDateFormat("yyyy-MM");
-							if (track_storage_directory == OsmandSettings.DAILY_DIRECTORY) {
+							if (track_storage_directory == OsmandSettings.RecordingLocation.DAILY_DIRECTORY) {
 								dateDirFormat = new SimpleDateFormat("yyyy-MM-dd");
 							}
 							String dateDirName = dateDirFormat.format(new Date(pt.time));

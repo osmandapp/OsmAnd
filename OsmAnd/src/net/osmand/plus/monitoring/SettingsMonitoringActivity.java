@@ -38,9 +38,7 @@ import net.osmand.plus.activities.SettingsBaseActivity;
 
 import java.util.Map;
 
-import static net.osmand.plus.OsmandSettings.DAILY_DIRECTORY;
-import static net.osmand.plus.OsmandSettings.MONTHLY_DIRECTORY;
-import static net.osmand.plus.OsmandSettings.REC_DIRECTORY;
+import static net.osmand.plus.OsmandSettings.RecordingLocation;
 
 public class SettingsMonitoringActivity extends SettingsBaseActivity {
 
@@ -157,12 +155,11 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 		cat.addPreference(createCheckBoxPreference(settings.SAVE_HEADING_TO_GPX, R.string.save_heading,
 				R.string.save_heading_descr));
 
-		Integer[] intValues = new Integer[]{REC_DIRECTORY, MONTHLY_DIRECTORY, DAILY_DIRECTORY};
-		names = new String[intValues.length];
-		names[0] = getString(R.string.store_tracks_in_rec_directory);
-		names[1] = getString(R.string.store_tracks_in_monthly_directories);
-		names[2] = getString(R.string.store_tracks_in_daily_directories);
-		cat.addPreference(createListPreference(settings.TRACK_STORAGE_DIRECTORY, names, intValues,
+		names = new String[RecordingLocation.values().length];
+		for (int i = 0; i < RecordingLocation.values().length; i++) {
+			names[i] = RecordingLocation.values()[i].toHumanString(getMyApplication());
+		}
+		cat.addPreference(createListPreference(settings.TRACK_STORAGE_DIRECTORY, names, RecordingLocation.values(),
 				R.string.track_storage_directory, R.string.track_storage_directory_descrp));
 	}
 
