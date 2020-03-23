@@ -21,7 +21,7 @@ import net.osmand.plus.quickaction.actions.ContourLinesAction;
 import net.osmand.plus.quickaction.actions.DayNightModeAction;
 import net.osmand.plus.quickaction.actions.FavoriteAction;
 import net.osmand.plus.quickaction.actions.GPXAction;
-import net.osmand.plus.quickaction.actions.HillshadeAction;
+import net.osmand.plus.quickaction.actions.TerrainAction;
 import net.osmand.plus.quickaction.actions.MapOverlayAction;
 import net.osmand.plus.quickaction.actions.MapSourceAction;
 import net.osmand.plus.quickaction.actions.MapStyleAction;
@@ -127,7 +127,7 @@ public class QuickActionFactory {
 
 		if (OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null) {
 			quickActions.add(new ContourLinesAction());
-			quickActions.add(new HillshadeAction());
+			quickActions.add(new TerrainAction());
 		}
 
 		quickActions.add(new DayNightModeAction());
@@ -265,8 +265,8 @@ public class QuickActionFactory {
 			case ContourLinesAction.TYPE:
 				return new ContourLinesAction();
 
-			case HillshadeAction.TYPE:
-				return new HillshadeAction();
+			case TerrainAction.TYPE:
+				return new TerrainAction();
 
 			default:
 				return new QuickAction();
@@ -361,8 +361,8 @@ public class QuickActionFactory {
 			case ContourLinesAction.TYPE:
 				return new ContourLinesAction(quickAction);
 
-			case HillshadeAction.TYPE:
-				return new HillshadeAction(quickAction);
+			case TerrainAction.TYPE:
+				return new TerrainAction(quickAction);
 
 			default:
 				return quickAction;
@@ -457,7 +457,7 @@ public class QuickActionFactory {
 			case ContourLinesAction.TYPE:
 				return R.drawable.ic_plugin_srtm;
 
-			case HillshadeAction.TYPE:
+			case TerrainAction.TYPE:
 				return R.drawable.ic_action_hillshade_dark;
 
 			default:
@@ -553,8 +553,8 @@ public class QuickActionFactory {
 			case ContourLinesAction.TYPE:
 				return R.string.quick_action_show_hide_contour_lines;
 
-			case HillshadeAction.TYPE:
-				return R.string.quick_action_show_hide_hillshade;
+			case TerrainAction.TYPE:
+				return R.string.quick_action_show_hide_terrain;
 
 			default:
 				return R.string.quick_action_new_action;
@@ -585,7 +585,7 @@ public class QuickActionFactory {
 			case DayNightModeAction.TYPE:
 			case ShowHideGpxTracksAction.TYPE:
 			case ContourLinesAction.TYPE:
-			case HillshadeAction.TYPE:
+			case TerrainAction.TYPE:
 				return false;
 
 			default:

@@ -2095,7 +2095,7 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> MAP_ONLINE_DATA = new BooleanPreference("map_online_data", false).makeProfile();
 
-	public final CommonPreference<Boolean> HILLSHADE = new BooleanPreference("hillshade_layer", true).makeProfile();
+	public final CommonPreference<TerrainMode> TERRAIN_MODE = new EnumIntPreference<>("terrain_mode", TerrainMode.HILLSHADE, TerrainMode.values()).makeProfile();
 
 	public final CommonPreference<Integer> HILLSHADE_MIN_ZOOM = new IntPreference("hillshade_min_zoom", 3).makeProfile();
 
@@ -2110,8 +2110,6 @@ public class OsmandSettings {
 	public final CommonPreference<Integer> SLOPE_TRANSPARENCY = new IntPreference("slope_transparency", 100).makeProfile();
 
 	public final CommonPreference<Boolean> TERRAIN = new BooleanPreference("terrain_layer", true).makeProfile();
-
-	public final CommonPreference<TerrainMode> TERRAIN_MODE = new EnumIntPreference<>("terrain_mode", TerrainMode.HILLSHADE, TerrainMode.values()).makeProfile();
 
 	public final CommonPreference<String> CONTOUR_LINES_ZOOM = new StringPreference("contour_lines_zoom", null).makeProfile().cache();
 

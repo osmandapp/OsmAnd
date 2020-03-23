@@ -51,7 +51,7 @@ public class HillshadeMenu {
 			return;
 		}
 
-		final boolean selected = plugin.isHillShadeLayerEnabled();
+		final boolean selected = plugin.isTerrainLayerEnabled();
 		final int toggleActionStringId = selected ? R.string.shared_string_on : R.string.shared_string_off;
 
 		ContextMenuAdapter.OnRowItemClick l = new ContextMenuAdapter.OnRowItemClick() {
@@ -68,7 +68,7 @@ public class HillshadeMenu {
 					app.runInUIThread(new Runnable() {
 						@Override
 						public void run() {
-							plugin.toggleHillshade(mapActivity, isChecked, new Runnable() {
+							plugin.toggleTerrain(mapActivity, isChecked, new Runnable() {
 								@Override
 								public void run() {
 									mapActivity.getDashboard().refreshContent(true);

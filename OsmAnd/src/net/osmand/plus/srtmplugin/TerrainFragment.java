@@ -53,6 +53,8 @@ import static net.osmand.plus.OsmandSettings.TerrainMode.HILLSHADE;
 import static net.osmand.plus.OsmandSettings.TerrainMode.SLOPE;
 import static net.osmand.plus.download.DownloadActivityType.HILLSHADE_FILE;
 import static net.osmand.plus.download.DownloadActivityType.SLOPE_FILE;
+import static net.osmand.plus.srtmplugin.SRTMPlugin.TERRAIN_MAX_ZOOM;
+import static net.osmand.plus.srtmplugin.SRTMPlugin.TERRAIN_MIN_ZOOM;
 
 
 public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickListener,
@@ -62,9 +64,6 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	private static final Log LOG = PlatformUtil.getLog(TerrainFragment.class.getSimpleName());
 	private static final String SLOPES_WIKI_URL = "https://en.wikipedia.org/wiki/Grade_(slope)";
 	private static final String PLUGIN_URL = "https://osmand.net/features/contour-lines-plugin";
-	private static final int SLIDER_MIN_ZOOM = 3;
-	private static final int SLIDER_MAX_ZOOM = 19;
-	private static final int SLIDER_MIN_TRANSPARENCY = 20;
 
 	private OsmandApplication app;
 	private UiUtilities uiUtilities;
@@ -103,10 +102,6 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	private View bottomEmptySpace;
 
 	private ArrayAdapter<ContextMenuItem> listAdapter;
-
-	public TerrainFragment() {
-
-	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -189,9 +184,9 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		transparencySlider.addOnChangeListener(this);
 		zoomSlider.addOnChangeListener(this);
 		transparencySlider.setValueTo(100);
-		transparencySlider.setValueFrom(SLIDER_MIN_TRANSPARENCY);
-		zoomSlider.setValueTo(SLIDER_MAX_ZOOM);
-		zoomSlider.setValueFrom(SLIDER_MIN_ZOOM);
+		transparencySlider.setValueFrom(0);
+		zoomSlider.setValueTo(TERRAIN_MAX_ZOOM);
+		zoomSlider.setValueFrom(TERRAIN_MIN_ZOOM);
 
 		UiUtilities.setupCompoundButton(switchCompat, nightMode, UiUtilities.CompoundButtonType.PROFILE_DEPENDENT);
 
@@ -259,10 +254,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	private void updateUiMode() {
 		TerrainMode mode = srtmPlugin.getTerrainMode();
 		if (terrainEnabled) {
-			int transparencyValue = Math.max(srtmPlugin.getTerrainTransparency(), SLIDER_MIN_TRANSPARENCY);
+			int transparencyValue = srtmPlugin.getTerrainTransparency();
 			String transparency = transparencyValue + "%";
-			int minZoom = Math.max(srtmPlugin.getTerrainMinZoom(), SLIDER_MIN_ZOOM);
-			int maxZoom = Math.min(srtmPlugin.getTerrainMaxZoom(), SLIDER_MAX_ZOOM);
+			int minZoom = Math.max(srtmPlugin.getTerrainMinZoom(), TERRAIN_MIN_ZOOM);
+			int maxZoom = Math.min(srtmPlugin.getTerrainMaxZoom(), TERRAIN_MAX_ZOOM);
 			iconIv.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_hillshade_dark, colorProfile));
 			stateTv.setText(R.string.shared_string_enabled);
 			transparencySlider.setValue(transparencyValue);

@@ -58,6 +58,9 @@ public class SRTMPlugin extends OsmandPlugin {
 	public static final String CONTOUR_WIDTH_ATTR = "contourWidth";
 	public static final String CONTOUR_DENSITY_ATTR = "contourDensity";
 
+	public static final int TERRAIN_MIN_ZOOM = 3;
+	public static final int TERRAIN_MAX_ZOOM = 19;
+
 	private OsmandApplication app;
 	private OsmandSettings settings;
 
@@ -155,10 +158,6 @@ public class SRTMPlugin extends OsmandPlugin {
 		}
 	}
 
-	public boolean isHillShadeLayerEnabled() {
-		return settings.HILLSHADE.get();
-	}
-
 	public boolean isTerrainLayerEnabled() {
 		return settings.TERRAIN.get();
 	}
@@ -216,7 +215,7 @@ public class SRTMPlugin extends OsmandPlugin {
 			case SLOPE:
 				return settings.SLOPE_MIN_ZOOM.get();
 		}
-		return 2;
+		return TERRAIN_MIN_ZOOM;
 	}
 
 	public int getTerrainMaxZoom() {
@@ -226,7 +225,7 @@ public class SRTMPlugin extends OsmandPlugin {
 			case SLOPE:
 				return settings.SLOPE_MAX_ZOOM.get();
 		}
-		return 19;
+		return TERRAIN_MAX_ZOOM;
 	}
 
 	public static boolean isContourLinesLayerEnabled(OsmandApplication app) {
@@ -419,15 +418,6 @@ public class SRTMPlugin extends OsmandPlugin {
 			} else {
 				selectPropertyValue(activity, contourLinesProp, pref, callback);
 			}
-		}
-	}
-
-	public void toggleHillshade(final MapActivity activity,
-								final boolean isChecked,
-								final Runnable callback) {
-		settings.HILLSHADE.set(isChecked);
-		if (callback != null) {
-			callback.run();
 		}
 	}
 

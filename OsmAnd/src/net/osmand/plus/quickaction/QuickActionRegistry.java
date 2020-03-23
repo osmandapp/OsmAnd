@@ -18,7 +18,7 @@ import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.quickaction.actions.AddOSMBugAction;
 import net.osmand.plus.quickaction.actions.AddPOIAction;
 import net.osmand.plus.quickaction.actions.ContourLinesAction;
-import net.osmand.plus.quickaction.actions.HillshadeAction;
+import net.osmand.plus.quickaction.actions.TerrainAction;
 import net.osmand.plus.quickaction.actions.MapSourceAction;
 import net.osmand.plus.quickaction.actions.MapStyleAction;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
@@ -118,7 +118,7 @@ public class QuickActionRegistry {
 				if (action.type == ContourLinesAction.TYPE) {
 					skip = true;
 				}
-				if (action.type == HillshadeAction.TYPE) {
+				if (action.type == TerrainAction.TYPE) {
 					skip = true;
 				}
 			}

@@ -13,15 +13,15 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 
-public class HillshadeAction extends QuickAction {
+public class TerrainAction extends QuickAction {
 
 	public static final int TYPE = 30;
 
-	public HillshadeAction() {
+	public TerrainAction() {
 		super(TYPE);
 	}
 
-	public HillshadeAction(QuickAction quickAction) {
+	public TerrainAction(QuickAction quickAction) {
 		super(quickAction);
 	}
 
@@ -29,10 +29,10 @@ public class HillshadeAction extends QuickAction {
 	public void execute(final MapActivity activity) {
 		final SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
 		if (plugin != null) {
-			plugin.toggleHillshade(activity, !plugin.isHillShadeLayerEnabled(), new Runnable() {
+			plugin.toggleTerrain(activity, !plugin.isTerrainLayerEnabled(), new Runnable() {
 				@Override
 				public void run() {
-					if (plugin.isHillShadeLayerEnabled() && !plugin.isActive() && !plugin.needsInstallation()) {
+					if (plugin.isTerrainLayerEnabled() && !plugin.isActive() && !plugin.needsInstallation()) {
 						OsmandPlugin.enablePlugin(activity, activity.getMyApplication(), plugin, true);
 					}
 					plugin.updateLayers(activity.getMapView(), activity);
@@ -47,7 +47,7 @@ public class HillshadeAction extends QuickAction {
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_with_text, parent, false);
 		((TextView) view.findViewById(R.id.text))
-				.setText(R.string.quick_action_hillshade_descr);
+				.setText(R.string.quick_action_terrain_descr);
 		parent.addView(view);
 	}
 
@@ -58,7 +58,7 @@ public class HillshadeAction extends QuickAction {
 
 	@Override
 	public String getActionText(OsmandApplication application) {
-		return application.getSettings().HILLSHADE.get() ? application.getString(R.string.quick_action_hillshade_hide)
-				: application.getString(R.string.quick_action_hillshade_show);
+		return application.getSettings().TERRAIN.get() ? application.getString(R.string.quick_action_terrain_hide)
+				: application.getString(R.string.quick_action_terrain_show);
 	}
 }

@@ -19,6 +19,7 @@ import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.views.MapTileLayer;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -39,9 +40,7 @@ public class TerrainLayer extends MapTileLayer {
 	private final static String HILLSHADE_CACHE = "hillshade.cache";
 	private final static String SLOPE_CACHE = "slope.cache";
 	private int ZOOM_BOUNDARY = 15;
-	private final static int MAX_TRANSPARENCY_ZOOM = 17;
 	private final static int DEFAULT_ALPHA = 100;
-	private final static int MAX_TRANSPARENCY_ALPHA = 20;
 	private SRTMPlugin srtmPlugin;
 	private TerrainMode mode;
 
@@ -71,7 +70,7 @@ public class TerrainLayer extends MapTileLayer {
 	private void indexTerrainFiles(final OsmandApplication app) {
 		@SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
 			private SQLiteDatabase sqliteDb;
-            private String type = mode == HILLSHADE ? "hillshade" : "slope";
+			private String type = mode.name().toLowerCase();
 			@Override
 			protected Void doInBackground(Void... params) {
 				
@@ -104,7 +103,7 @@ public class TerrainLayer extends MapTileLayer {
 			private void indexNonCachedResources(Map<String, Long> fileModified, Map<String, SQLiteTileSource> rs) {
 				for(String filename : fileModified.keySet()) {
 					try {
-						log.info("Indexing" + type + "file " + filename);
+						log.info("Indexing " + type + " file " + filename);
 						ContentValues cv = new ContentValues();
 						cv.put("filename", filename);
 						cv.put("date_modified", fileModified.get(filename));
@@ -244,7 +243,7 @@ public class TerrainLayer extends MapTileLayer {
 			
 			@Override
 			public String getName() {
-                return mode == HILLSHADE ? "Hillshade" : "Slope";
+				return Algorithms.capitalizeFirstLetter(mode.name().toLowerCase());
 			}
 			
 			@Override

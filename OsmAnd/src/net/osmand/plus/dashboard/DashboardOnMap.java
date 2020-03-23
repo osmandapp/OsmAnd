@@ -173,7 +173,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		UNDERLAY_MAP,
 		MAPILLARY,
 		CONTOUR_LINES,
-		HILLSHADE,
 		OSM_NOTES,
 		TERRAIN,
 		SLOPE
@@ -319,8 +318,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			tv.setText(R.string.mapillary);
 		} else if (visibleType == DashboardType.CONTOUR_LINES) {
 			tv.setText(R.string.srtm_plugin_name);
-		} else if (visibleType == DashboardType.HILLSHADE) {
-			tv.setText(R.string.layer_hillshade);
 		} else if (visibleType == DashboardType.OSM_NOTES) {
 			tv.setText(R.string.osm_notes);
 		} else if (visibleType == DashboardType.TERRAIN) {
@@ -678,7 +675,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		if (visibleType != DashboardType.CONFIGURE_SCREEN
 				&& visibleType != DashboardType.CONFIGURE_MAP
 				&& visibleType != DashboardType.CONTOUR_LINES
-				&& visibleType != DashboardType.HILLSHADE
+				&& visibleType != DashboardType.TERRAIN
 				&& visibleType != DashboardType.OSM_NOTES) {
 			listView.setDivider(dividerDrawable);
 			listView.setDividerHeight(AndroidUtils.dpToPx(mapActivity, 1f));
@@ -733,14 +730,14 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	public void onNewDownloadIndexes() {
-		if (visibleType == DashboardType.CONTOUR_LINES || visibleType == DashboardType.HILLSHADE) {
+		if (visibleType == DashboardType.CONTOUR_LINES || visibleType == DashboardType.TERRAIN) {
 			refreshContent(true);
 		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public void onDownloadInProgress() {
-		if (visibleType == DashboardType.CONTOUR_LINES || visibleType == DashboardType.HILLSHADE) {
+		if (visibleType == DashboardType.CONTOUR_LINES || visibleType == DashboardType.TERRAIN) {
 			DownloadIndexesThread downloadThread = getMyApplication().getDownloadThread();
 			IndexItem downloadIndexItem = downloadThread.getCurrentDownloadingItem();
 			if (downloadIndexItem != null) {
@@ -758,11 +755,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	public void onDownloadHasFinished() {
-		if (visibleType == DashboardType.CONTOUR_LINES || visibleType == DashboardType.HILLSHADE) {
+		if (visibleType == DashboardType.CONTOUR_LINES || visibleType == DashboardType.TERRAIN) {
 			refreshContent(true);
-			if (visibleType == DashboardType.HILLSHADE) {
+			if (visibleType == DashboardType.TERRAIN) {
 				SRTMPlugin plugin = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class);
-				if (plugin != null && plugin.isHillShadeLayerEnabled()) {
+				if (plugin != null && plugin.isTerrainLayerEnabled()) {
 					plugin.registerLayers(mapActivity);
 				}
 			}

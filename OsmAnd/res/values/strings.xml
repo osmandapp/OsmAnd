@@ -11,6 +11,10 @@
 	Thx - Hardy
 
 -->
+    <string name="quick_action_terrain_descr">A button to show or hide terrain layer on the map.</string>
+    <string name="quick_action_terrain_show">Show terrain</string>
+    <string name="quick_action_terrain_hide">Hide terrain</string>
+    <string name="quick_action_show_hide_terrain">Show/hide terrain</string>
     <string name="download_slope_maps">Slopes</string>
     <string name="clear_recorded_data_warning">Are you sure you want to clear recorded data?</string>
     <string name="restore_all_profile_settings_descr">All profile settings will be restored to their original state after creating/importing this profile.</string>
