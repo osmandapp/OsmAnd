@@ -210,7 +210,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 		String[] entries = new String[entryValues.length];
 		entries[0] = getString(R.string.store_tracks_in_rec_directory);
 		entries[1] = getString(R.string.store_tracks_in_monthly_directories);
-//		entries[2] = getString(R.string.store_tracks_in_daily_directories);
+		entries[2] = getString(R.string.store_tracks_in_daily_directories);
 
 		ListPreferenceEx trackStorageDirectory = (ListPreferenceEx) findPreference(settings.TRACK_STORAGE_DIRECTORY.getId());
 		trackStorageDirectory.setEntries(entries);
