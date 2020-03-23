@@ -10,9 +10,14 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionType;
 
 public class TakeAudioNoteAction extends QuickAction {
-	public static final int TYPE = 8;
+
+	public static final QuickActionType TYPE = new QuickActionType(8,
+			"audio.note", TakeAudioNoteAction.class).
+			nameRes(R.string.quick_action_take_audio_note).iconRes(R.drawable.ic_action_micro_dark).nonEditable().
+			category(QuickActionType.CREATE_CATEGORY);
 
 	public TakeAudioNoteAction() {
 		super(TYPE);

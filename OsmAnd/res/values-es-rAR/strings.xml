@@ -3481,7 +3481,7 @@ Lon %2$s</string>
     <string name="multimedia_photo_play_sound">Reproducir sonido al fotografiar</string>
     <string name="osm_authorization_success">Autorización exitosa</string>
     <string name="rearrange_categories">Reordenar categorías</string>
-    <string name="create_custom_categories_list_promo">Puedes añadir categorías personalizadas, ocultar las categorías que no parezcan necesarias y cambiar el orden de clasificación de la lista. La lista puede ser importada y exportada con perfiles.</string>
+    <string name="create_custom_categories_list_promo">Cambia el orden de clasificación de la lista u oculta las categorías innecesarias. Puedes importar o exportar todos los cambios con los perfiles.</string>
     <string name="add_new_custom_category_button_promo">Puedes añadir una nueva categoría personalizada marcando una o varias categorías necesarias.</string>
     <string name="shared_string_available">Disponible</string>
     <string name="add_custom_category">Añadir categoría personalizada</string>

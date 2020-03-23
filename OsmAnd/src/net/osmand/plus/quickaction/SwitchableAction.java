@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.SelectMapViewQuickActionsBottomSheet;
@@ -37,7 +38,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	private transient ItemTouchHelper touchHelper;
 
-	protected SwitchableAction(int type) {
+	protected SwitchableAction(QuickActionType type) {
 		super(type);
 	}
 
@@ -117,7 +118,11 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		fragment.setArguments(args);
 		fragment.show(fm, SelectMapViewQuickActionsBottomSheet.TAG);
 	}
-	
+
+	public String getSelectedItem(OsmandApplication app) {
+		return null;
+	}
+
 	protected class Adapter extends RecyclerView.Adapter<Adapter.ItemHolder> implements ReorderItemTouchHelperCallback.OnItemMoveCallback {
 
 		private List<T> itemsList = new ArrayList<>();

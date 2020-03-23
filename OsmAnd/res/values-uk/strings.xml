@@ -3568,4 +3568,7 @@
     <string name="items_added">Елементи додано</string>
     <string name="shared_string_import_complete">Імпорт завершено</string>
     <string name="import_complete_description">Усі дані з %1$s імпортуються, ви можете використовувати кнопки нижче, щоб відкрити необхідну частину застосунку для управління ними.</string>
+    <string name="recalculate_route_distance_promo">Маршрут буде перераховано, якщо відстань від маршруту до поточного місця розташування перевищує вибране значення.</string>
+    <string name="select_distance_route_will_recalc">Виберіть відстань, після якого маршрут буде перераховано.</string>
+    <string name="recalculate_route_in_deviation">Перерахунок маршруту у випадку відхилення</string>
 </resources>

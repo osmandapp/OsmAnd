@@ -25,6 +25,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.render.RenderingIcons;
 
 import java.util.ArrayList;
@@ -34,7 +35,12 @@ import java.util.Set;
 
 public class ShowHidePoiAction extends QuickAction {
 
-	public static final int TYPE = 5;
+
+	public static final QuickActionType TYPE = new QuickActionType(5,
+			"poi.showhide", ShowHidePoiAction.class).
+			nameRes(R.string.quick_action_showhide_poi_title).iconRes(R.drawable.ic_action_gabout_dark).nonEditable().
+			category(QuickActionType.CONFIGURE_MAP);
+
 
 	public static final String KEY_FILTERS = "filters";
 

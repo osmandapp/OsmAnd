@@ -25,6 +25,7 @@ import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
+import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -955,19 +956,27 @@ public class SettingsHelper {
 						Type type = new TypeToken<HashMap<String, String>>() {
 						}.getType();
 						json = new JSONObject(jsonStr);
+						QuickActionRegistry quickActionRegistry = app.getQuickActionRegistry();
 						JSONArray itemsJson = json.getJSONArray("items");
 						for (int i = 0; i < itemsJson.length(); i++) {
 							JSONObject object = itemsJson.getJSONObject(i);
 							String name = object.getString("name");
-							int actionType = object.getInt("type");
-							String paramsString = object.getString("params");
-							HashMap<String, String> params = gson.fromJson(paramsString, type);
-							QuickAction quickAction = new QuickAction(actionType);
-							if (!name.isEmpty()) {
-								quickAction.setName(name);
+							QuickAction quickAction = null;
+							if(object.has("actionType")) {
+								quickAction = quickActionRegistry .newActionByStringType(object.getString("actionType"));
+							} else if(object.has("type")) {
+								quickAction = quickActionRegistry .newActionByType(object.getInt("type"));
 							}
-							quickAction.setParams(params);
-							items.add(quickAction);
+							if (quickAction != null) {
+								String paramsString = object.getString("params");
+								HashMap<String, String> params = gson.fromJson(paramsString, type);
+
+								if (!name.isEmpty()) {
+									quickAction.setName(name);
+								}
+								quickAction.setParams(params);
+								items.add(quickAction);
+							}
 						}
 					} catch (JSONException e) {
 						throw new IllegalArgumentException("Json parse error", e);
@@ -993,7 +1002,7 @@ public class SettingsHelper {
 								JSONObject jsonObject = new JSONObject();
 								jsonObject.put("name", action.hasCustomName(app)
 										? action.getName(app) : "");
-								jsonObject.put("type", action.getType());
+								jsonObject.put("actionType", action.getActionType().getStringId());
 								jsonObject.put("params", gson.toJson(action.getParams(), type));
 								jsonArray.put(jsonObject);
 							}

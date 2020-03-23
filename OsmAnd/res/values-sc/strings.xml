@@ -3472,7 +3472,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Impòsitu: est prus difìtzile a intzertare ite at a èssere registradu e ite nono. Diat èssere mègius a istudare custu filtru.</string>
     <string name="live_monitoring_time_buffer">Durada de sa memòria tampone (buffer)</string>
     <string name="rearrange_categories">Torra a ordinare sas categorias</string>
-    <string name="create_custom_categories_list_promo">Podes importare categorias personalizadas, cuare categorias chi non pensas chi ti serbant e mudare s\'òrdine de sa lista. Sa lista podet èssere importada e esportada cun sos profilos.</string>
+    <string name="create_custom_categories_list_promo">Modìfica s\'òrdine de sa lista e cua sas categorias chi non ti serbint. Podes importare o esportare totu sas modìficas cun sos profilos.</string>
     <string name="add_new_custom_category_button_promo">Podes annànghere una categoria personalizada noa ischertende·nde una o unas cantas pagas chi ti serbint.</string>
     <string name="shared_string_available">Disponìbile</string>
     <string name="add_custom_category">Annanghe una categoria personalizada</string>
@@ -3577,4 +3577,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="items_added">Elementos annànghidos</string>
     <string name="shared_string_import_complete">Importatzione acabada</string>
     <string name="import_complete_description">As importadu totu sos datos dae su %1$s, podes impreare sos butones in suta pro abèrrere sa parte de s\'aplicatzione chi serbit pro los amministrare.</string>
+    <string name="recalculate_route_distance_promo">S\'àndala at a torrare a èssere carculada si sa distàntzia dae s\'àndala a sa positzione de su momentu at a èssere prus manna de su valore ischertadu.</string>
+    <string name="select_distance_route_will_recalc">Ischerta sa distàntzia a pustis de sa cale s\'àndala at a torrare a èssere carculada.</string>
+    <string name="recalculate_route_in_deviation">Torra a carculare s\'àndala in casu de deviatzione</string>
 </resources>
