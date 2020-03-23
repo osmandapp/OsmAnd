@@ -61,10 +61,15 @@ public class TerrainLayer extends MapTileLayer {
 		int zoom = tileBox.getZoom();
 		if (zoom >= srtmPlugin.getTerrainMinZoom() && zoom <= srtmPlugin.getTerrainMaxZoom()) {
 			setAlpha(srtmPlugin.getTerrainTransparency());
+			super.onPrepareBufferImage(canvas, tileBox, drawSettings);
+		} else if(zoom > srtmPlugin.getTerrainMaxZoom()) {
+			// backward compatibility 100 -> 20 with overscale
+			setAlpha(srtmPlugin.getTerrainTransparency() / 5);
+			super.onPrepareBufferImage(canvas, tileBox, drawSettings);
 		} else {
-			setAlpha(0);
+			// ignore 
 		}
-		super.onPrepareBufferImage(canvas, tileBox, drawSettings);
+
 	}
 
 	private void indexTerrainFiles(final OsmandApplication app) {
