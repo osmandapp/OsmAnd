@@ -796,6 +796,9 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 					rectContourDrawable.setStroke(AndroidUtils.dpToPx(app, strokeWidth), strokeColor);
 					holder.groupButton.setImageDrawable(rectContourDrawable);
 				}
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+					AndroidUtils.setBackground(app, holder.groupButton, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
+				}
 			}
 		}
 
