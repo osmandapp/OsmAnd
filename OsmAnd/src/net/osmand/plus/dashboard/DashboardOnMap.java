@@ -565,7 +565,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		DashboardOnMap.staticVisible = visible;
 		DashboardOnMap.staticVisibleType = type;
 		mapActivity.enableDrawer();
-		removeMapillaryFiltersFragment();
+		removeFragment(MapillaryFiltersFragment.TAG);
+		removeFragment(TerrainFragment.TAG);
 
 		if (visible) {
 			mapActivity.dismissCardDialog();
@@ -782,6 +783,14 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			int top = (v == null) ? 0 : (v.getTop() - listView.getPaddingTop());
 			updateListAdapter();
 			((ListView) listView).setSelectionFromTop(index, top);
+		} else if (visibleType == DashboardType.TERRAIN) {
+			Fragment terrainFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(TerrainFragment.TAG);
+			if (terrainFragment != null) {
+				mapActivity.getSupportFragmentManager().beginTransaction()
+						.detach(terrainFragment)
+						.attach(terrainFragment)
+						.commit();
+			}
 		} else {
 			listAdapter.notifyDataSetChanged();
 		}
@@ -982,14 +991,14 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				.getFragmentTransaction().commit();
 	}
 
-	private void removeMapillaryFiltersFragment() {
+	private void removeFragment(String tag) {
 		FragmentManager manager = mapActivity.getSupportFragmentManager();
-		Fragment mapillaryFragment = manager.findFragmentByTag(MapillaryFiltersFragment.TAG);
-		if (mapillaryFragment != null) {
+		Fragment fragment = manager.findFragmentByTag(tag);
+		if (fragment != null) {
 			OsmandSettings settings = getMyApplication().getSettings();
 			TransactionBuilder builder = new TransactionBuilder(manager, settings, mapActivity);
 			builder.getFragmentTransaction()
-					.remove(mapillaryFragment)
+					.remove(fragment)
 					.commit();
 		}
 	}
