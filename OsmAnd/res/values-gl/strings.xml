@@ -1913,7 +1913,7 @@ Lon %2$s</string>
     <string name="gpx_no_tracks_title">Aínda non tes ningún ficheiro GPX</string>
     <string name="gpx_no_tracks_title_folder">Tamén podes engadir ficheiros GPX ó cartafol</string>
     <string name="gpx_add_track">Engadir máis…</string>
-    <string name="gpx_appearance">Aparencia</string>
+    <string name="shared_string_appearance">Aparencia</string>
     <string name="trip_rec_notification_settings">Activar a gravación rápida</string>
     <string name="trip_rec_notification_settings_desc">Amosa unha notificación do sistema que permite a gravación da viaxe.</string>
     <string name="shared_string_notifications">Notificacións</string>

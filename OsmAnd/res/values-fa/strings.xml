@@ -1842,7 +1842,7 @@
     <string name="upload_poi">آپلود POI</string>
     <string name="route_calculation">محاسبهٔ مسیر</string>
     <string name="gpx_add_track">بیشتر بیفزایید…</string>
-    <string name="gpx_appearance">ظاهر</string>
+    <string name="shared_string_appearance">ظاهر</string>
     <string name="trip_rec_notification_settings">روشن‌کردن ضبط فوری</string>
     <string name="shared_string_notifications">اعلان‌ها</string>
     <string name="shared_string_continue">ادامه</string>
@@ -3595,4 +3595,8 @@
     <string name="saving_new_profile">در حال ذخیرهٔ پروفایل تازه</string>
     <string name="profile_backup_failed">نمی‌توان از پروفایل پشتیبان گرفت.</string>
     <string name="clear_recorded_data_warning">آیا از پاک‌کردن دادهٔ ضبط‌شده مطمئن هستید؟</string>
+    <string name="importing_from">درون‌برد داده از %1$s</string>
+    <string name="shared_string_importing">در حال درون‌برد</string>
+    <string name="shared_string_import_complete">درون‌برد کامل شد</string>
+    <string name="import_complete_description">همهٔ داده از %1$s درون‌برد شد. با استفاده از دکمه‌های زیر می‌توانید بخش موردنیاز برنامه را برای مدیریت آن باز کنید.</string>
 </resources>

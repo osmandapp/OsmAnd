@@ -10,10 +10,14 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionType;
 
 public class ParkingAction extends QuickAction {
 
-	public static final int TYPE = 7;
+	public static final QuickActionType TYPE = new QuickActionType(7,
+			"parking.add", ParkingAction.class).
+			nameRes(R.string.quick_action_add_parking).iconRes(R.drawable.ic_action_parking_dark).nonEditable().
+			category(QuickActionType.CREATE_CATEGORY);
 
 	public ParkingAction() {
 		super(TYPE);

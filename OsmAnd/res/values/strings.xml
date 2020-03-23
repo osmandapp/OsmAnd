@@ -16,6 +16,9 @@
     <string name="quick_action_terrain_hide">Hide terrain</string>
     <string name="quick_action_show_hide_terrain">Show/hide terrain</string>
     <string name="download_slope_maps">Slopes</string>
+    <string name="recalculate_route_distance_promo">The route will be recalculated if the distance from the route to the current location is more than selected value.</string>
+    <string name="select_distance_route_will_recalc">Select the distance after which the route will be recalculated.</string>
+    <string name="recalculate_route_in_deviation">Recalculate route in case of deviation</string>
     <string name="clear_recorded_data_warning">Are you sure you want to clear recorded data?</string>
     <string name="restore_all_profile_settings_descr">All profile settings will be restored to their original state after creating/importing this profile.</string>
     <string name="restore_all_profile_settings">Restore all profile settings?</string>
@@ -90,7 +93,7 @@
     <string name="use_system_screen_timeout_promo">Disabled by default, if OsmAnd running on foreground, the screen doesn’t time out.\n\nIf enabled OsmAnd will use system timeout settings.</string>
     <string name="accessibility_mode_disabled">Accessibility mode disabled in your system.</string>
     <string name="rearrange_categories">Rearrange categories</string>
-    <string name="create_custom_categories_list_promo">You can add custom categories hide categories that you don’t find necessary and change the sort order of the list. The list can be imported and exported with profiles.</string>
+    <string name="create_custom_categories_list_promo">Change the sort order of the list, hide unnecessary categories. You can import or export all changes with profiles.</string>
     <string name="add_new_custom_category_button_promo">You can add a new custom category by selecting one or a few needed categories.</string>
     <string name="shared_string_available">Available</string>
     <string name="add_custom_category">Add custom category</string>
@@ -312,7 +315,6 @@
     <string name="route_parameters_info">Settings for routing in the selected profile \"%1$s\".</string>
     <string name="wake_time">Wake time</string>
     <string name="units_and_formats">Units &amp; formats</string>
-    <string name="appearance">Appearance</string>
     <string name="map_look_descr">Map appearance</string>
     <string name="map_look">Map look</string>
     <string name="list_of_installed_plugins">Installed plugins</string>
@@ -1182,7 +1184,7 @@
     <string name="gpx_no_tracks_title">You do not have any GPX files yet</string>
     <string name="gpx_no_tracks_title_folder">You may also add GPX files to the folder</string>
     <string name="gpx_add_track">Add more…</string>
-    <string name="gpx_appearance">Appearance</string>
+    <string name="shared_string_appearance">Appearance</string>
     <string name="trip_rec_notification_settings">Turn on quick recording</string>
     <string name="trip_rec_notification_settings_desc">Display a system notification allowing trip recording.</string>
     <string name="shared_string_notifications">Notifications</string>

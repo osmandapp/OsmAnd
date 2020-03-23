@@ -1414,7 +1414,7 @@
     <string name="routing_attr_allow_motorway_name">允许进入机动车路</string>
     <string name="routing_attr_allow_motorway_description">允许机动车路</string>
     <string name="route_roundabout_short">利用 %1$d 退出并离开</string>
-    <string name="gpx_appearance">外观</string>
+    <string name="shared_string_appearance">外观</string>
     <string name="trip_rec_notification_settings">旅行记录 （没有数据）</string>
     <string name="trip_rec_notification_settings_desc">显示通知，按录制按钮允许开始旅行记录</string>
     <string name="shared_string_trip">旅行</string>

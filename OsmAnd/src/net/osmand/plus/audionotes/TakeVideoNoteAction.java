@@ -10,9 +10,14 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionType;
 
 public class TakeVideoNoteAction extends QuickAction {
-	public static final int TYPE = 9;
+	public static final QuickActionType TYPE = new QuickActionType(9,
+			"video.note", TakeVideoNoteAction.class).
+			nameRes(R.string.quick_action_take_video_note).iconRes(R.drawable.ic_action_video_dark).nonEditable().
+			category(QuickActionType.CREATE_CATEGORY);
+
 
 	public TakeVideoNoteAction() {
 		super(TYPE);

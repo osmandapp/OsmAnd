@@ -1,4 +1,4 @@
-package net.osmand.plus.quickaction.actions;
+package net.osmand.plus.srtmplugin;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,11 +11,15 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.srtmplugin.SRTMPlugin;
+import net.osmand.plus.quickaction.QuickActionType;
 
 public class TerrainAction extends QuickAction {
 
-	public static final int TYPE = 30;
+	public static final QuickActionType TYPE = new QuickActionType(30,
+			"contourlines.showhide", TerrainAction.class).
+			nameRes(R.string.quick_action_show_hide_hillshade).iconRes(R.drawable.ic_action_hillshade_dark).nonEditable().
+			category(QuickActionType.CONFIGURE_MAP);
+
 
 	public TerrainAction() {
 		super(TYPE);
