@@ -87,6 +87,21 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 				}
 			}
 		}
+		if (object.pointNameTypes != null) {
+			int start = Math.min(startPointIndex, endPointIndex);
+			int end = Math.min(Math.max(startPointIndex, endPointIndex) + 1, object.pointNameTypes.length);
+			for (int i = start; i < end; i++) {
+				int[] types = object.pointNameTypes[i];
+				if (types != null) {
+					for (int type : types) {
+						RouteTypeRule r = region.quickGetEncodingRule(type);
+						if (!rules.containsKey(r)) {
+							rules.put(r, rules.size());
+						}
+					}
+				}
+			}
+		}
 	}
 
 	private void collectRules(Map<RouteTypeRule, Integer> rules, int[] types) {
@@ -158,7 +173,34 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		return res;
 	}
 
-	public void fillData() {
+	private int[][] convertPointNames(int[][] nameTypes, Map<RouteTypeRule, Integer> rules) {
+		if (nameTypes == null || nameTypes.length == 0) {
+			return null;
+		}
+		int[][] res = new int[nameTypes.length][];
+		for (int i = 0; i < nameTypes.length; i++) {
+			int[] types = nameTypes[i];
+			if (types != null) {
+				int[] arr = new int[types.length];
+				for (int k = 0; k < types.length; k++) {
+					int type = types[k];
+					String tag = object.region.quickGetEncodingRule(type).getTag();
+					String name = object.pointNames[i][k];
+					RouteTypeRule rule = new RouteTypeRule(tag, name);
+					Integer ruleId = rules.get(rule);
+					if (ruleId == null) {
+						ruleId = rules.size();
+						rules.put(rule, ruleId);
+					}
+					arr[k] = ruleId;
+				}
+				res[i] = arr;
+			}
+		}
+		return res;
+	}
+
+	public void fillNames(RouteDataResources resources) {
 		if (object.nameIds != null && object.nameIds.length > 0) {
 			RouteRegion region = object.region;
 			int nameTypeRule = region.getNameTypeRule();
@@ -176,6 +218,33 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 				}
 			}
 		}
+		String[][] pointNames = null;
+		int[][] pointNameTypes = null;
+		int[][] pointNamesArr = resources.getPointNamesMap().get(object);
+		if (pointNamesArr != null) {
+			pointNames = new String[pointNamesArr.length][];
+			pointNameTypes = new int[pointNamesArr.length][];
+			for (int i = 0; i < pointNamesArr.length; i++) {
+				int[] namesIds = pointNamesArr[i];
+				if (namesIds != null) {
+					pointNames[i] = new String[namesIds.length];
+					pointNameTypes[i] = new int[namesIds.length];
+					for (int k = 0; k < namesIds.length; k++) {
+						int id = namesIds[k];
+						RouteTypeRule r = object.region.quickGetEncodingRule(id);
+						if (r != null) {
+							pointNames[i][k] = r.getValue();
+							int nameType = object.region.searchRouteEncodingRule(r.getTag(), null);
+							if (nameType != -1) {
+								pointNameTypes[i][k] = nameType;
+							}
+						}
+					}
+				}
+			}
+		}
+		object.pointNames = pointNames;
+		object.pointNameTypes = pointNameTypes;
 	}
 
 	@Override
@@ -199,11 +268,22 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		}
 		bundle.putLong("id", object.id);
 		bundle.putArray("types", convertTypes(object.types, rules));
+
 		int start = Math.min(startPointIndex, endPointIndex);
-		int end = Math.max(startPointIndex, endPointIndex);
-		bundle.putArray("pointTypes", convertTypes(Arrays.copyOfRange(object.pointTypes, start,
-				Math.min(end + 1, object.pointTypes.length)), rules));
-		bundle.putArray("names", convertNameIds(object.nameIds, rules));
+		int end = Math.max(startPointIndex, endPointIndex) + 1;
+		if (object.pointTypes != null && start < object.pointTypes.length) {
+			int[][] types = Arrays.copyOfRange(object.pointTypes, start, Math.min(end, object.pointTypes.length));
+			bundle.putArray("pointTypes", convertTypes(types, rules));
+		}
+		if (object.nameIds != null) {
+			bundle.putArray("names", convertNameIds(object.nameIds, rules));
+		}
+		if (object.pointNameTypes != null && start < object.pointNameTypes.length) {
+			int[][] types = Arrays.copyOfRange(object.pointNameTypes, start, Math.min(end, object.pointNameTypes.length));
+			if (object.pointNames != null) {
+				bundle.putArray("pointNames", convertPointNames(types, rules));
+			}
+		}
 	}
 
 	@Override
@@ -227,6 +307,10 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		object.types = bundle.getIntArray("types", null);
 		object.pointTypes = bundle.getIntIntArray("pointTypes", null);
 		object.nameIds = bundle.getIntArray("names", null);
+		int[][] pointNames = bundle.getIntIntArray("pointNames", null);
+		if (pointNames != null) {
+			bundle.getResources().getPointNamesMap().put(object, pointNames);
+		}
 
 		RouteDataResources resources = bundle.getResources();
 		object.pointsX = new int[length];
@@ -245,8 +329,12 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 			prevLocation = location;
 			object.pointsX[i] = MapUtils.get31TileNumberX(location.getLongitude());
 			object.pointsY[i] = MapUtils.get31TileNumberY(location.getLatitude());
-			object.heightDistanceArray[i * 2] = (float) dist;
-			object.heightDistanceArray[i * 2 + 1] = (float) location.getAltitude();
+			if (location.hasAltitude() && object.heightDistanceArray.length > 0) {
+				object.heightDistanceArray[i * 2] = (float) dist;
+				object.heightDistanceArray[i * 2 + 1] = (float) location.getAltitude();
+			} else {
+				object.heightDistanceArray = new float[0];
+			}
 			if (plus) {
 				index++;
 			} else {

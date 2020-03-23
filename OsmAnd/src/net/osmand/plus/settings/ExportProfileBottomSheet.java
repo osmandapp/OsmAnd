@@ -41,7 +41,8 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.quickaction.QuickActionFactory;
+import net.osmand.plus.quickaction.QuickActionRegistry;
+import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.plus.settings.ExportImportSettingsAdapter.Type;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 
@@ -220,8 +221,9 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 	private Map<Type, List<?>> getAdditionalData() {
 		Map<Type, List<?>> dataList = new HashMap<>();
 
-		QuickActionFactory factory = new QuickActionFactory();
-		List<QuickAction> actionsList = factory.parseActiveActionsList(app.getSettings().QUICK_ACTION_LIST.get());
+
+		QuickActionRegistry registry = app.getQuickActionRegistry();
+		List<QuickAction> actionsList = registry.getQuickActions();
 		if (!actionsList.isEmpty()) {
 			dataList.put(Type.QUICK_ACTIONS, actionsList);
 		}

@@ -64,6 +64,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -869,6 +870,12 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		mapActivity.startActivityForResult(intent, 205);
 	}
 
+	@Override
+	protected void registerQuickActionTypes(List<QuickActionType> quickActionTypes) {
+		quickActionTypes.add(TakeAudioNoteAction.TYPE);
+		quickActionTypes.add(TakePhotoNoteAction.TYPE);
+		quickActionTypes.add(TakeVideoNoteAction.TYPE);
+	}
 
 	@Override
 	public void mapActivityScreenOff(MapActivity activity) {

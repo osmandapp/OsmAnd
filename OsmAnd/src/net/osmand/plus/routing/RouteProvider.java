@@ -251,7 +251,7 @@ public class RouteProvider {
 			}
 			if (OSMAND_ROUTER_V2.equals(file.author)) {
 				route = parseOsmAndGPXRoute(points, file);
-				addMissingTurns = reverse;
+				addMissingTurns = false;
 			} else if (file.isCloudmadeRouteFile() || OSMAND_ROUTER.equals(file.author)) {
 				directions = parseOsmAndGPXRoute(points, file, OSMAND_ROUTER.equals(file.author), builder.leftSide, 10);
 				if (OSMAND_ROUTER.equals(file.author)) {

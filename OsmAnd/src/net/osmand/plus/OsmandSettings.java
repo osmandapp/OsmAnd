@@ -959,7 +959,7 @@ public class OsmandSettings {
 		}
 	}
 
-	private class FloatPreference extends CommonPreference<Float> {
+	public class FloatPreference extends CommonPreference<Float> {
 
 
 		private FloatPreference(String id, float defaultValue) {
