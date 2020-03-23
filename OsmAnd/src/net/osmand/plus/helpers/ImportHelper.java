@@ -797,7 +797,7 @@ public class ImportHelper {
 								for (SettingsHelper.SettingsItem item : items) {
 									if (item instanceof SettingsHelper.PluginSettingsItem) {
 										pluginSettingsItems.add((SettingsHelper.PluginSettingsItem) item);
-									} else {
+									} else if (Algorithms.isEmpty(item.getPluginId())) {
 										pluginIndependentItems.add(item);
 									}
 								}
@@ -805,23 +805,16 @@ public class ImportHelper {
 									CustomOsmandPlugin plugin = pluginItem.getPlugin();
 									List<SettingsHelper.SettingsItem> pluginItems = pluginItem.getPluginItems();
 									if (!Algorithms.isEmpty(pluginItems)) {
-										pluginIndependentItems.removeAll(pluginItems);
 										for (SettingsHelper.SettingsItem item : pluginItems) {
 											item.setShouldReplace(true);
-											if (item instanceof SettingsHelper.QuickActionsSettingsItem) {
-												plugin.quickActions = ((SettingsHelper.QuickActionsSettingsItem) item).getItems();
-											}
-											if (item instanceof SettingsHelper.PoiUiFilterSettingsItem) {
-												plugin.poiUIFilters = ((SettingsHelper.PoiUiFilterSettingsItem) item).getItems();
-											}
-											if (item instanceof SettingsHelper.MapSourcesSettingsItem) {
-												plugin.mapSources = ((SettingsHelper.MapSourcesSettingsItem) item).getItems();
-											}
-											if (item instanceof SettingsHelper.AvoidRoadsSettingsItem) {
-												plugin.avoidRoadInfos = ((SettingsHelper.AvoidRoadsSettingsItem) item).getItems();
-											}
-											if (item instanceof SettingsHelper.ProfileSettingsItem) {
-												plugin.appModes.add(((SettingsHelper.ProfileSettingsItem) item).getAppMode());
+											if (item instanceof SettingsHelper.FileSettingsItem) {
+												SettingsHelper.FileSettingsItem fileItem = (SettingsHelper.FileSettingsItem) item;
+												if (fileItem.getSubtype() == SettingsHelper.FileSettingsItem.FileSubtype.RENDERING_STYLE) {
+													plugin.rendererNames.add(fileItem.getFileName());
+												}
+												if (fileItem.getSubtype() == SettingsHelper.FileSettingsItem.FileSubtype.ROUTING_CONFIG) {
+													plugin.routerNames.add(fileItem.getFileName());
+												}
 											}
 										}
 

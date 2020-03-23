@@ -25,7 +25,6 @@ import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
-import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -136,16 +135,20 @@ public class SettingsHelper {
 
 	public abstract static class SettingsItem {
 
+		protected OsmandApplication app;
+
 		private String pluginId;
 		private String fileName;
 
 		boolean shouldReplace = false;
 
-		SettingsItem() {
+		SettingsItem(OsmandApplication app) {
+			this.app = app;
 			init();
 		}
 
-		SettingsItem(@NonNull JSONObject json) throws JSONException {
+		SettingsItem(OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+			this.app = app;
 			init();
 			readFromJson(json);
 		}
@@ -313,14 +316,11 @@ public class SettingsHelper {
 
 	public static class PluginSettingsItem extends SettingsItem {
 
-		private OsmandApplication app;
 		private CustomOsmandPlugin plugin;
 		private List<SettingsItem> pluginItems;
 
 		PluginSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
-			super(json);
-			this.app = app;
-			readFromJson(app, json);
+			super(app, json);
 		}
 
 		@NonNull
@@ -355,7 +355,9 @@ public class SettingsHelper {
 			return pluginItems;
 		}
 
-		void readFromJson(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+		@Override
+		void readFromJson(@NonNull JSONObject json) throws JSONException {
+			super.readFromJson(json);
 			plugin = new CustomOsmandPlugin(app, json);
 		}
 
@@ -384,13 +386,13 @@ public class SettingsHelper {
 			duplicateItems = new ArrayList<>();
 		}
 
-		CollectionSettingsItem(@NonNull List<T> items) {
-			super();
+		CollectionSettingsItem(OsmandApplication app, @NonNull List<T> items) {
+			super(app);
 			this.items = items;
 		}
 
-		CollectionSettingsItem(@NonNull JSONObject json) throws JSONException {
-			super(json);
+		CollectionSettingsItem(OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+			super(app, json);
 		}
 
 		@NonNull
@@ -453,12 +455,12 @@ public class SettingsHelper {
 		private OsmandSettings settings;
 
 		protected OsmandSettingsItem(@NonNull OsmandSettings settings) {
-			super();
+			super(settings.getContext());
 			this.settings = settings;
 		}
 
 		protected OsmandSettingsItem(@NonNull SettingsItemType type, @NonNull OsmandSettings settings, @NonNull JSONObject json) throws JSONException {
-			super(json);
+			super(settings.getContext(), json);
 			this.settings = settings;
 		}
 
@@ -620,7 +622,6 @@ public class SettingsHelper {
 
 	public static class ProfileSettingsItem extends OsmandSettingsItem {
 
-		private OsmandApplication app;
 		private ApplicationMode appMode;
 		private ApplicationModeBuilder builder;
 		private ApplicationModeBean modeBean;
@@ -628,14 +629,12 @@ public class SettingsHelper {
 
 		public ProfileSettingsItem(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode) {
 			super(app.getSettings());
-			this.app = app;
 			this.appMode = appMode;
 			appModeBeanPrefsIds = new HashSet<>(Arrays.asList(app.getSettings().appModeBeanPrefsIds));
 		}
 
 		public ProfileSettingsItem(@NonNull OsmandApplication app, @NonNull ApplicationModeBean modeBean) {
 			super(app.getSettings());
-			this.app = app;
 			this.modeBean = modeBean;
 			builder = ApplicationMode.fromModeBean(app, modeBean);
 			appMode = builder.getApplicationMode();
@@ -644,8 +643,6 @@ public class SettingsHelper {
 
 		public ProfileSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			super(SettingsItemType.PROFILE, app.getSettings(), json);
-			this.app = app;
-			readFromJson(app, json);
 			appModeBeanPrefsIds = new HashSet<>(Arrays.asList(app.getSettings().appModeBeanPrefsIds));
 		}
 
@@ -687,7 +684,9 @@ public class SettingsHelper {
 			return "profile_" + getName() + ".json";
 		}
 
-		void readFromJson(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+		@Override
+		void readFromJson(@NonNull JSONObject json) throws JSONException {
+			super.readFromJson(json);
 			String appModeJson = json.getString("appMode");
 			modeBean = ApplicationMode.fromJson(appModeJson);
 			builder = ApplicationMode.fromModeBean(app, modeBean);
@@ -814,17 +813,17 @@ public class SettingsHelper {
 		private InputStream inputStream;
 		protected String name;
 
-		public StreamSettingsItem(@NonNull String name) {
-			super();
+		public StreamSettingsItem(@NonNull OsmandApplication app, @NonNull String name) {
+			super(app);
 			this.name = name;
 		}
 
-		StreamSettingsItem(@NonNull JSONObject json) throws JSONException {
-			super(json);
+		StreamSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+			super(app, json);
 		}
 
-		public StreamSettingsItem(@NonNull InputStream inputStream, @NonNull String name) {
-			super();
+		public StreamSettingsItem(@NonNull OsmandApplication app, @NonNull InputStream inputStream, @NonNull String name) {
+			super(app);
 			this.inputStream = inputStream;
 			this.name = name;
 		}
@@ -868,16 +867,16 @@ public class SettingsHelper {
 		@Nullable
 		private byte[] data;
 
-		public DataSettingsItem(@NonNull String name) {
-			super(name);
+		public DataSettingsItem(@NonNull OsmandApplication app, @NonNull String name) {
+			super(app, name);
 		}
 
-		DataSettingsItem(@NonNull JSONObject json) throws JSONException {
-			super(json);
+		DataSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+			super(app, json);
 		}
 
-		public DataSettingsItem(@NonNull byte[] data, @NonNull String name) {
-			super(name);
+		public DataSettingsItem(@NonNull OsmandApplication app, @NonNull byte[] data, @NonNull String name) {
+			super(app, name);
 			this.data = data;
 		}
 
@@ -992,7 +991,7 @@ public class SettingsHelper {
 		private FileSubtype subtype;
 
 		public FileSettingsItem(@NonNull OsmandApplication app, @NonNull File file) throws IllegalArgumentException {
-			super(file.getPath().replace(app.getAppPath(null).getPath(), ""));
+			super(app, file.getPath().replace(app.getAppPath(null).getPath(), ""));
 			this.file = file;
 			this.appPath = app.getAppPath(null);
 			this.subtype = FileSubtype.getSubtypeByFileName(getFileName());
@@ -1002,7 +1001,7 @@ public class SettingsHelper {
 		}
 
 		public FileSettingsItem(@NonNull OsmandApplication app, @NonNull FileSubtype subtype, @NonNull File file) throws IllegalArgumentException {
-			super(file.getPath().replace(app.getAppPath(null).getPath(), ""));
+			super(app, file.getPath().replace(app.getAppPath(null).getPath(), ""));
 			this.file = file;
 			this.appPath = app.getAppPath(null);
 			this.subtype = subtype;
@@ -1012,7 +1011,7 @@ public class SettingsHelper {
 		}
 
 		FileSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
-			super(json);
+			super(app, json);
 			this.file = new File(app.getAppPath(null), name);
 			this.appPath = app.getAppPath(null);
 		}
@@ -1176,19 +1175,16 @@ public class SettingsHelper {
 
 	public static class QuickActionsSettingsItem extends CollectionSettingsItem<QuickAction> {
 
-		private OsmandApplication app;
 		private QuickActionRegistry actionRegistry;
 
 		public QuickActionsSettingsItem(@NonNull OsmandApplication app, @NonNull List<QuickAction> items) {
-			super(items);
-			this.app = app;
+			super(app, items);
 			actionRegistry = app.getQuickActionRegistry();
 			existingItems = actionRegistry.getQuickActions();
 		}
 
 		QuickActionsSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
-			super(json);
-			this.app = app;
+			super(app, json);
 			actionRegistry = app.getQuickActionRegistry();
 			existingItems = actionRegistry.getQuickActions();
 		}
@@ -1270,10 +1266,10 @@ public class SettingsHelper {
 					JSONObject object = itemsJson.getJSONObject(i);
 					String name = object.getString("name");
 					QuickAction quickAction = null;
-					if(object.has("actionType")) {
-						quickAction = quickActionRegistry .newActionByStringType(object.getString("actionType"));
-					} else if(object.has("type")) {
-						quickAction = quickActionRegistry .newActionByType(object.getInt("type"));
+					if (object.has("actionType")) {
+						quickAction = quickActionRegistry.newActionByStringType(object.getString("actionType"));
+					} else if (object.has("type")) {
+						quickAction = quickActionRegistry.newActionByType(object.getInt("type"));
 					}
 					if (quickAction != null) {
 						String paramsString = object.getString("params");
@@ -1329,17 +1325,13 @@ public class SettingsHelper {
 
 	public static class PoiUiFilterSettingsItem extends CollectionSettingsItem<PoiUIFilter> {
 
-		private OsmandApplication app;
-
 		public PoiUiFilterSettingsItem(@NonNull OsmandApplication app, @NonNull List<PoiUIFilter> items) {
-			super(items);
-			this.app = app;
+			super(app, items);
 			existingItems = app.getPoiFilters().getUserDefinedPoiFilters(false);
 		}
 
 		PoiUiFilterSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
-			super(json);
-			this.app = app;
+			super(app, json);
 			existingItems = app.getPoiFilters().getUserDefinedPoiFilters(false);
 		}
 
@@ -1479,13 +1471,13 @@ public class SettingsHelper {
 		private List<String> existingItemsNames;
 
 		public MapSourcesSettingsItem(@NonNull OsmandApplication app, @NonNull List<ITileSource> items) {
-			super(items);
+			super(app, items);
 			this.app = app;
 			existingItemsNames = new ArrayList<>(app.getSettings().getTileSourceEntries().values());
 		}
 
 		MapSourcesSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
-			super(json);
+			super(app, json);
 			this.app = app;
 			existingItemsNames = new ArrayList<>(app.getSettings().getTileSourceEntries().values());
 		}
@@ -1682,7 +1674,7 @@ public class SettingsHelper {
 		private AvoidSpecificRoads specificRoads;
 
 		public AvoidRoadsSettingsItem(@NonNull OsmandApplication app, @NonNull List<AvoidRoadInfo> items) {
-			super(items);
+			super(app, items);
 			this.app = app;
 			settings = app.getSettings();
 			specificRoads = app.getAvoidSpecificRoads();
@@ -1690,7 +1682,7 @@ public class SettingsHelper {
 		}
 
 		AvoidRoadsSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
-			super(json);
+			super(app, json);
 			this.app = app;
 			settings = app.getSettings();
 			specificRoads = app.getAvoidSpecificRoads();
@@ -1910,7 +1902,7 @@ public class SettingsHelper {
 					item = new PluginSettingsItem(app, json);
 					break;
 				case DATA:
-					item = new DataSettingsItem(json);
+					item = new DataSettingsItem(app, json);
 					break;
 				case FILE:
 					item = new FileSettingsItem(app, json);

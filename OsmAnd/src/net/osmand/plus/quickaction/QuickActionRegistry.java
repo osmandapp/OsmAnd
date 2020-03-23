@@ -34,7 +34,6 @@ import net.osmand.plus.quickaction.actions.NewAction;
 import net.osmand.plus.quickaction.actions.ShowHideFavoritesAction;
 import net.osmand.plus.quickaction.actions.ShowHideGpxTracksAction;
 import net.osmand.plus.quickaction.actions.ShowHidePoiAction;
-import net.osmand.util.Algorithms;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -194,7 +193,7 @@ public class QuickActionRegistry {
 		Type type = new TypeToken<List<QuickAction>>() {
 		}.getType();
 		List<QuickAction> quickActions = gson.fromJson(json, type);
-		List<QuickAction> rquickActions = new ArrayList<>(quickActions.size());
+		List<QuickAction> rquickActions = new ArrayList<>();
 		if (quickActions != null) {
 			for (QuickAction qa : quickActions) {
 				if (qa != null) {

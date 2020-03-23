@@ -20,7 +20,6 @@ import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
-import net.osmand.map.ITileSource;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.api.SettingsAPI;
@@ -30,7 +29,6 @@ import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.dialogs.PluginDisabledBottomSheet;
 import net.osmand.plus.dialogs.PluginInstalledBottomSheetDialog;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapillary.MapillaryPlugin;
@@ -40,8 +38,6 @@ import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
@@ -185,22 +181,6 @@ public abstract class OsmandPlugin {
 		return Collections.emptyList();
 	}
 
-	public List<QuickAction> getQuickActions() {
-		return Collections.emptyList();
-	}
-
-	public List<PoiUIFilter> getPoiUIFilters() {
-		return Collections.emptyList();
-	}
-
-	public List<ITileSource> getMapSources() {
-		return Collections.emptyList();
-	}
-
-	public List<AvoidSpecificRoads.AvoidRoadInfo> getAvoidRoadInfos() {
-		return Collections.emptyList();
-	}
-
 	/**
 	 * Plugin was installed
 	 */
@@ -311,7 +291,6 @@ public abstract class OsmandPlugin {
 				for (int i = 0; i < jArray.length(); i++) {
 					JSONObject json = jArray.getJSONObject(i);
 					CustomOsmandPlugin plugin = new CustomOsmandPlugin(app, json);
-					plugin.loadAdditionalItemsFromJson(json);
 					allPlugins.add(plugin);
 				}
 			} catch (JSONException e) {
