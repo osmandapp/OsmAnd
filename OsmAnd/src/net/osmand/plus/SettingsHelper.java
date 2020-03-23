@@ -943,7 +943,8 @@ public class SettingsHelper {
 			OBF_MAP("obf_map", IndexConstants.MAPS_PATH),
 			TILES_MAP("tiles_map", IndexConstants.TILES_INDEX_DIR),
 			GPX("gpx", IndexConstants.GPX_INDEX_DIR),
-			VOICE("voice", IndexConstants.VOICE_INDEX_DIR);
+			VOICE("voice", IndexConstants.VOICE_INDEX_DIR),
+			TRAVEL("travel", IndexConstants.WIKIVOYAGE_INDEX_DIR);
 
 			private String subtypeName;
 			private String subtypeFolder;
