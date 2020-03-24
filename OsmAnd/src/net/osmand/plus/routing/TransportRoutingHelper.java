@@ -6,21 +6,29 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Location;
+import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
 import net.osmand.ValueHolder;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.data.TransportRoute;
+import net.osmand.data.TransportSchedule;
+import net.osmand.data.TransportStop;
+import net.osmand.data.TransportStopExit;
 import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.Way;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routing.RouteCalculationParams.RouteCalculationResultListener;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
 import net.osmand.router.GeneralRouter;
+import net.osmand.router.NativeTransportRoutingResult;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.TransportRoutePlanner;
@@ -32,6 +40,7 @@ import net.osmand.util.MapUtils;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -40,6 +49,9 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
+
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TLongObjectHashMap;
 
 import static net.osmand.plus.notifications.OsmandNotification.NotificationType.NAVIGATION;
 
@@ -211,7 +223,8 @@ public class TransportRoutingHelper {
 			final Thread prevRunningJob = currentRunningJob;
 			app.getSettings().LAST_ROUTE_APPLICATION_MODE.set(routingHelper.getAppMode());
 			RouteRecalculationThread newThread =
-					new RouteRecalculationThread("Calculating public transport route", params);
+					new RouteRecalculationThread("Calculating public transport route", params,
+							app.getSettings().SAFE_MODE.get() ? null : NativeOsmandLibrary.getLoadedLibrary());
 			currentRunningJob = newThread;
 			startProgress(params);
 			updateProgress(params);
@@ -439,10 +452,12 @@ public class TransportRoutingHelper {
 		private final Queue<WalkingRouteSegment> walkingSegmentsToCalculate = new ConcurrentLinkedQueue<>();
 		private Map<Pair<TransportRouteResultSegment, TransportRouteResultSegment>, RouteCalculationResult> walkingRouteSegments = new HashMap<>();
 		private boolean walkingSegmentsCalculated;
+		private NativeLibrary lib;
 
-		public RouteRecalculationThread(String name, TransportRouteCalculationParams params) {
+		public RouteRecalculationThread(String name, TransportRouteCalculationParams params, NativeLibrary library) {
 			super(name);
 			this.params = params;
+			this.lib = library;
 			if (params.calculationProgress == null) {
 				params.calculationProgress = new RouteCalculationProgress();
 			}
@@ -460,7 +475,7 @@ public class TransportRoutingHelper {
 		 * @throws IOException
 		 * @throws InterruptedException
 		 */
-		private List<TransportRouteResult> calculateRouteImpl(TransportRouteCalculationParams params) throws IOException, InterruptedException {
+		private List<TransportRouteResult> calculateRouteImpl(TransportRouteCalculationParams params, NativeLibrary library) throws IOException, InterruptedException {
 			RoutingConfiguration.Builder config = params.ctx.getRoutingConfigForMode(params.mode);
 			BinaryMapIndexReader[] files = params.ctx.getResourceManager().getTransportRoutingMapFiles();
 			params.params.clear();
@@ -480,14 +495,23 @@ public class TransportRoutingHelper {
 					params.params.put(key, vl);
 				}
 			}
-
-
 			GeneralRouter prouter = config.getRouter(params.mode.getRoutingProfile());
 			TransportRoutingConfiguration cfg = new TransportRoutingConfiguration(prouter, params.params);
 			TransportRoutePlanner planner = new TransportRoutePlanner();
-			TransportRoutingContext ctx = new TransportRoutingContext(cfg, files);
+			TransportRoutingContext ctx = new TransportRoutingContext(cfg, library, files);
 			ctx.calculationProgress =  params.calculationProgress;
-			return planner.buildRoute(ctx, params.start, params.end);
+			if (ctx.library != null) {
+				NativeTransportRoutingResult[] nativeRes = library.runNativePTRouting(
+						MapUtils.get31TileNumberX(params.start.getLongitude()),
+						MapUtils.get31TileNumberY(params.start.getLatitude()),
+						MapUtils.get31TileNumberX(params.end.getLongitude()),
+						MapUtils.get31TileNumberY(params.end.getLatitude()),
+						cfg, ctx.calculationProgress);
+
+				return convertToTransportRoutingResult(nativeRes, cfg);
+			} else {
+				return planner.buildRoute(ctx, params.start, params.end);
+			}
 		}
 
 		@Nullable
@@ -625,7 +649,7 @@ public class TransportRoutingHelper {
 			List<TransportRouteResult> res = null;
 			String error = null;
 			try {
-				res = calculateRouteImpl(params);
+				res = calculateRouteImpl(params, lib);
 				if (res != null && !params.calculationProgress.isCancelled) {
 					calculateWalkingRoutes(res);
 				}
@@ -667,5 +691,135 @@ public class TransportRoutingHelper {
 		public void setWaitPrevJob(Thread prevRunningJob) {
 			this.prevRunningJob = prevRunningJob;
 		}
+	}
+
+	//cache for converted TransportRoutes:
+	private TLongObjectHashMap<TransportRoute> convertedRoutesCache;
+	private TLongObjectHashMap<TransportStop> convertedStopsCache;
+
+	private List<TransportRouteResult> convertToTransportRoutingResult(NativeTransportRoutingResult[] res,
+																	   TransportRoutingConfiguration cfg) {
+		List<TransportRouteResult> convertedRes = new ArrayList<TransportRouteResult>();
+		for (NativeTransportRoutingResult ntrr : res) {
+			TransportRouteResult trr = new TransportRouteResult(cfg);
+			trr.setFinishWalkDist(ntrr.finishWalkDist);
+			trr.setRouteTime(ntrr.routeTime);
+
+			for (NativeTransportRoutingResult.NativeTransportRouteResultSegment ntrs : ntrr.segments) {
+				TransportRouteResultSegment trs = new TransportRouteResultSegment();
+				trs.route = convertTransportRoute(ntrs.route);
+				trs.walkTime = ntrs.walkTime;
+				trs.travelDistApproximate = ntrs.travelDistApproximate;
+				trs.travelTime = ntrs.travelTime;
+				trs.start = ntrs.start;
+				trs.end = ntrs.end;
+				trs.walkDist = ntrs.walkDist;
+				trs.depTime = ntrs.depTime;
+
+				trr.addSegment(trs);
+			}
+			convertedRes.add(trr);
+		}
+		convertedStopsCache.clear();
+		convertedRoutesCache.clear();
+		return convertedRes;
+	}
+
+	private TransportRoute convertTransportRoute(NativeTransportRoutingResult.NativeTransportRoute nr) {
+		TransportRoute r = new TransportRoute();
+		r.setId(nr.id);
+		r.setLocation(nr.routeLat, nr.routeLon);
+		r.setName(nr.name);
+		r.setEnName(nr.enName);
+		if (nr.namesLng.length > 0 && nr.namesLng.length == nr.namesNames.length) {
+			for (int i = 0; i < nr.namesLng.length; i++) {
+				r.setName(nr.namesLng[i], nr.namesNames[i]);
+			}
+		}
+		r.setFileOffset(nr.fileOffset);
+		r.setForwardStops(convertTransportStops(nr.forwardStops));
+		r.setRef(nr.ref);
+		r.setOperator(nr.routeOperator);
+		r.setType(nr.type);
+		r.setDist(nr.dist);
+		r.setColor(nr.color);
+
+		if (nr.intervals.length > 0 || nr.avgStopIntervals.length > 0 || nr.avgWaitIntervals.length > 0) {
+			r.setSchedule(new TransportSchedule(new TIntArrayList(nr.intervals), new TIntArrayList(nr.avgStopIntervals), new TIntArrayList(nr.avgWaitIntervals)));
+		}
+
+		for (int i = 0; i < nr.waysIds.length; i++) {
+			List<Node> wnodes = new ArrayList<>();
+			for (int j = 0; j < nr.waysNodesIds[i].length; j++) {
+				wnodes.add(new Node(nr.waysNodesLats[i][j], nr.waysNodesLons[i][j], nr.waysNodesIds[i][j]));
+			}
+			r.addWay(new Way(nr.waysIds[i], wnodes));
+		}
+
+		if (convertedRoutesCache == null) {
+			convertedRoutesCache = new TLongObjectHashMap<>();
+		}
+		if (convertedRoutesCache.get(r.getId()) == null) {
+			convertedRoutesCache.put(r.getId(), r);
+		}
+		return r;
+	}
+
+	private List<TransportStop> convertTransportStops(NativeTransportRoutingResult.NativeTransportStop[] nstops) {
+		List<TransportStop> stops = new ArrayList<>();
+		for (NativeTransportRoutingResult.NativeTransportStop ns : nstops) {
+			if (convertedStopsCache != null && convertedStopsCache.get(ns.id) != null) {
+				stops.add(convertedStopsCache.get(ns.id));
+				continue;
+			}
+			TransportStop s = new TransportStop();
+			s.setId(ns.id);
+			s.setLocation(ns.stopLat, ns.stopLon);
+			s.setName(ns.name);
+			s.setEnName(ns.enName);
+			if (ns.namesLng.length > 0 && ns.namesLng.length == ns.namesNames.length) {
+				for (int i = 0; i < ns.namesLng.length; i++) {
+					s.setName(ns.namesLng[i], ns.namesNames[i]);
+				}
+			}
+			s.setFileOffset(ns.fileOffset);
+			s.setReferencesToRoutes(ns.referencesToRoutes);
+			s.setDeletedRoutesIds(ns.deletedRoutesIds);
+			s.setRoutesIds(ns.routesIds);
+			s.distance = ns.distance;
+			s.x31 = ns.x31;
+			s.y31 = ns.y31;
+			List<TransportRoute> routes1 = new ArrayList<>();
+			//cache routes to avoid circular conversion and just search them by id
+			for (int i = 0; i < ns.routes.length; i++) {
+				if (s.getRoutesIds().length == ns.routes.length && convertedRoutesCache != null
+						&& convertedRoutesCache.get(ns.routesIds[i]) != null) {
+					s.addRoute(convertedRoutesCache.get(ns.routesIds[i]));
+				} else {
+					s.addRoute(convertTransportRoute(ns.routes[i]));
+				}
+			}
+
+			if (ns.pTStopExit_refs.length > 0) {
+				for (int i = 0; i < ns.pTStopExit_refs.length; i++) {
+					s.addExit(new TransportStopExit(ns.pTStopExit_x31s[i],
+							ns.pTStopExit_y31s[i], ns.pTStopExit_refs[i]));
+				}
+			}
+
+			if (ns.referenceToRoutesKeys.length > 0) {
+				for (int i = 0; i < ns.referenceToRoutesKeys.length; i++) {
+					s.putReferencesToRoutes(ns.referenceToRoutesKeys[i], ns.referenceToRoutesVals[i]);
+				}
+			}
+			if (convertedStopsCache == null) {
+				convertedStopsCache = new TLongObjectHashMap<>();
+			}
+			if (convertedStopsCache.get(s.getId()) == null) {
+				convertedStopsCache.put(s.getId(), s);
+			}
+			stops.add(s);
+		}
+		return stops;
 	}
 }

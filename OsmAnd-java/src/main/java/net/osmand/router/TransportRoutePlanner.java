@@ -15,6 +15,8 @@ import gnu.trove.iterator.TIntIterator;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
+
+import net.osmand.NativeLibrary;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.LatLon;
@@ -447,9 +449,25 @@ public class TransportRoutePlanner {
 		public TransportRouteResult(TransportRoutingContext ctx) {
 			cfg = ctx.cfg;
 		}
-		
+
+		public TransportRouteResult(TransportRoutingConfiguration cfg) {
+			this.cfg = cfg;
+		}
+
 		public List<TransportRouteResultSegment> getSegments() {
 			return segments;
+		}
+
+		public void setFinishWalkDist(double finishWalkDist) {
+			this.finishWalkDist = finishWalkDist;
+		}
+
+		public void setRouteTime(double routeTime) {
+			this.routeTime = routeTime;
+		}
+
+		public void addSegment(TransportRouteResultSegment seg) {
+			segments.add(seg);
 		}
 
 		public double getWalkDist() {
@@ -678,7 +696,7 @@ public class TransportRoutePlanner {
 	}
 	
 	public static class TransportRoutingContext {
-		
+		public NativeLibrary library;
 		public RouteCalculationProgress calculationProgress;
 		public TLongObjectHashMap<TransportRouteSegment> visitedSegments = new TLongObjectHashMap<TransportRouteSegment>();
 		public TransportRoutingConfiguration cfg;
@@ -705,11 +723,12 @@ public class TransportRoutePlanner {
 		
 		
 		
-		public TransportRoutingContext(TransportRoutingConfiguration cfg, BinaryMapIndexReader... readers) {
+		public TransportRoutingContext(TransportRoutingConfiguration cfg, NativeLibrary library, BinaryMapIndexReader... readers) {
 			this.cfg = cfg;
 			walkRadiusIn31 = (int) (cfg.walkRadius / MapUtils.getTileDistanceWidth(31));
 			walkChangeRadiusIn31 = (int) (cfg.walkChangeRadius / MapUtils.getTileDistanceWidth(31));
 			quadTree = new TLongObjectHashMap<List<TransportRouteSegment>>();
+			this.library = library;
 			for (BinaryMapIndexReader r : readers) {
 				routeMap.put(r, new TIntObjectHashMap<TransportRoute>());
 			}

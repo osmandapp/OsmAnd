@@ -41,7 +41,23 @@ public class TransportRoute extends MapObject {
 	public List<TransportStop> getForwardStops() {
 		return forwardStops;
 	}
-	
+
+	public void setForwardStops(List<TransportStop> forwardStops) {
+		this.forwardStops = forwardStops;
+	}
+
+	public void setDist(Integer dist) {
+		this.dist = dist;
+	}
+
+	public void setForwardWays(List<Way> forwardWays) {
+		this.forwardWays = forwardWays;
+	}
+
+	public void setSchedule(TransportSchedule schedule) {
+		this.schedule = schedule;
+	}
+
 	public List<Way> getForwardWays() {
 		if(forwardWays == null) {
 			return Collections.emptyList();
