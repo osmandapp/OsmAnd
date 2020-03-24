@@ -47,6 +47,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.SettingsHelper;
+import net.osmand.plus.SettingsHelper.CheckDuplicatesListener;
 import net.osmand.plus.SettingsHelper.PluginSettingsItem;
 import net.osmand.plus.SettingsHelper.SettingsCollectListener;
 import net.osmand.plus.SettingsHelper.SettingsImportListener;
@@ -81,6 +82,7 @@ import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.zip.ZipInputStream;
@@ -839,20 +841,33 @@ public class ImportHelper {
 		}
 	}
 
-	private void handlePluginImport(final PluginSettingsItem pluginItem, File file) {
-		List<SettingsItem> pluginItems = new ArrayList<>(pluginItem.getPluginDependentItems());
-		pluginItems.add(0, pluginItem);
-		for (SettingsItem item : pluginItems) {
-			item.setShouldReplace(true);
-		}
-		app.getSettingsHelper().importSettings(file, pluginItems, "", 1, new SettingsImportListener() {
+	private void handlePluginImport(final PluginSettingsItem pluginItem, final File file) {
+		final SettingsImportListener importListener = new SettingsImportListener() {
 			@Override
 			public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsItem> items) {
 				if (activity != null) {
 					pluginItem.getPlugin().onInstall(app, activity);
 				}
+				// will be removed after obf_map subtype fix
+				for (Iterator<SettingsItem> iterator = items.iterator(); iterator.hasNext(); ) {
+					SettingsItem item = iterator.next();
+					if (item instanceof SettingsHelper.ResourcesSettingsItem) {
+						iterator.remove();
+					}
+				}
 				File pluginDir = new File(app.getAppPath(null), IndexConstants.PLUGINS_DIR + pluginItem.getPluginId());
 				app.getSettingsHelper().exportPluginItems(pluginDir, null, items);
+			}
+		};
+		List<SettingsItem> pluginItems = new ArrayList<>(pluginItem.getPluginDependentItems());
+		pluginItems.add(0, pluginItem);
+		app.getSettingsHelper().checkDuplicates(file, pluginItems, pluginItems, new CheckDuplicatesListener() {
+			@Override
+			public void onDuplicatesChecked(@NonNull List<Object> duplicates, List<SettingsItem> items) {
+				for (SettingsItem item : items) {
+					item.setShouldReplace(true);
+				}
+				app.getSettingsHelper().importSettings(file, items, "", 1, importListener);
 			}
 		});
 	}

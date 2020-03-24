@@ -274,7 +274,7 @@ public abstract class OsmandPlugin {
 			allPlugins.remove(oldPlugin);
 		}
 		allPlugins.add(plugin);
-		initPlugin(app, plugin);
+		enablePlugin(null, app, plugin, true);
 		saveCustomPlugins(app);
 	}
 

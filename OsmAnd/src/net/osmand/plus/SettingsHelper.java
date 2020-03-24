@@ -361,18 +361,25 @@ public class SettingsHelper {
 		}
 
 		@Override
+		public boolean exists() {
+			return OsmandPlugin.getPlugin(getPluginId()) != null;
+		}
+
+		@Override
 		public void apply() {
-			for (SettingsHelper.SettingsItem item : pluginDependentItems) {
-				if (item instanceof SettingsHelper.FileSettingsItem) {
-					FileSettingsItem fileItem = (FileSettingsItem) item;
-					if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.RENDERING_STYLE) {
-						plugin.rendererNames.add(fileItem.getFileName());
-					} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.ROUTING_CONFIG) {
-						plugin.routerNames.add(fileItem.getFileName());
+			if (shouldReplace || !exists()) {
+				for (SettingsHelper.SettingsItem item : pluginDependentItems) {
+					if (item instanceof SettingsHelper.FileSettingsItem) {
+						FileSettingsItem fileItem = (FileSettingsItem) item;
+						if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.RENDERING_STYLE) {
+							plugin.rendererNames.add(fileItem.getFileName());
+						} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.ROUTING_CONFIG) {
+							plugin.routerNames.add(fileItem.getFileName());
+						}
 					}
 				}
+				OsmandPlugin.addCustomPlugin(app, plugin);
 			}
-			OsmandPlugin.addCustomPlugin(app, plugin);
 		}
 
 		@Override
@@ -1038,8 +1045,8 @@ public class SettingsHelper {
 
 		FileSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			super(app, json);
-			this.file = new File(app.getAppPath(null), name);
 			this.appPath = app.getAppPath(null);
+			this.file = new File(appPath, name);
 		}
 
 		@NonNull
