@@ -3565,4 +3565,7 @@ Pôr do Sol: %2$s</string>
     <string name="items_added">Itens adicionados</string>
     <string name="shared_string_import_complete">Importação concluída</string>
     <string name="import_complete_description">Todos os dados do %1$s são importados. Você pode usar os botões abaixo para abrir a parte necessária do aplicativo para gerenciá-lo.</string>
+    <string name="recalculate_route_distance_promo">A rota será recalculada se a distância da rota até o local atual for maior que o valor selecionado.</string>
+    <string name="select_distance_route_will_recalc">Selecione a distância após a qual o percurso será recalculado.</string>
+    <string name="recalculate_route_in_deviation">Recalcular rota em caso de desvio</string>
 </resources>
