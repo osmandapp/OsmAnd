@@ -174,8 +174,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		MAPILLARY,
 		CONTOUR_LINES,
 		OSM_NOTES,
-		TERRAIN,
-		SLOPE
+		TERRAIN
 	}
 
 	private Map<DashboardActionButtonType, DashboardActionButton> actionButtons = new HashMap<>();
