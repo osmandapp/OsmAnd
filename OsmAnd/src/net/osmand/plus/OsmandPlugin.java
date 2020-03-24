@@ -268,15 +268,12 @@ public abstract class OsmandPlugin {
 		activatePlugins(app, enabledPlugins);
 	}
 
-	public static void addCustomPlugin(@NonNull OsmandApplication app, @Nullable Activity activity, @NonNull CustomOsmandPlugin plugin) {
+	public static void addCustomPlugin(@NonNull OsmandApplication app, @NonNull CustomOsmandPlugin plugin) {
 		OsmandPlugin oldPlugin = OsmandPlugin.getPlugin(plugin.getId());
 		if (oldPlugin != null) {
 			allPlugins.remove(oldPlugin);
 		}
 		allPlugins.add(plugin);
-		if (activity != null) {
-			plugin.onInstall(app, activity);
-		}
 		initPlugin(app, plugin);
 		saveCustomPlugins(app);
 	}
@@ -307,7 +304,10 @@ public abstract class OsmandPlugin {
 			JSONArray itemsJson = new JSONArray();
 			for (CustomOsmandPlugin plugin : customOsmandPlugins) {
 				try {
-					itemsJson.put(new JSONObject(plugin.toJson()));
+					JSONObject json = new JSONObject();
+					json.put("pluginId", plugin.getId());
+					plugin.writeAdditionalDataToJson(json);
+					itemsJson.put(json);
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}

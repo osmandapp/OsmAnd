@@ -317,10 +317,15 @@ public class SettingsHelper {
 	public static class PluginSettingsItem extends SettingsItem {
 
 		private CustomOsmandPlugin plugin;
-		private List<SettingsItem> pluginItems;
+		private List<SettingsItem> pluginDependentItems;
 
 		PluginSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			super(app, json);
+		}
+
+		@Override
+		protected void init() {
+			pluginDependentItems = new ArrayList<>();
 		}
 
 		@NonNull
@@ -344,21 +349,42 @@ public class SettingsHelper {
 		@NonNull
 		@Override
 		public String getDefaultFileName() {
-			return getName() + ".zip";
+			return getName();
 		}
 
 		public CustomOsmandPlugin getPlugin() {
 			return plugin;
 		}
 
-		public List<SettingsItem> getPluginItems() {
-			return pluginItems;
+		public List<SettingsItem> getPluginDependentItems() {
+			return pluginDependentItems;
+		}
+
+		@Override
+		public void apply() {
+			for (SettingsHelper.SettingsItem item : pluginDependentItems) {
+				if (item instanceof SettingsHelper.FileSettingsItem) {
+					FileSettingsItem fileItem = (FileSettingsItem) item;
+					if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.RENDERING_STYLE) {
+						plugin.rendererNames.add(fileItem.getFileName());
+					} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.ROUTING_CONFIG) {
+						plugin.routerNames.add(fileItem.getFileName());
+					}
+				}
+			}
+			OsmandPlugin.addCustomPlugin(app, plugin);
 		}
 
 		@Override
 		void readFromJson(@NonNull JSONObject json) throws JSONException {
 			super.readFromJson(json);
 			plugin = new CustomOsmandPlugin(app, json);
+		}
+
+		@Override
+		void writeToJson(@NonNull JSONObject json) throws JSONException {
+			super.writeToJson(json);
+			plugin.writeAdditionalDataToJson(json);
 		}
 
 		@Nullable
@@ -1154,8 +1180,7 @@ public class SettingsHelper {
 			}
 			String itemFileName = getFileName();
 			if (itemFileName.endsWith(File.separator)) {
-				if (fileName.startsWith(itemFileName))
-				{
+				if (fileName.startsWith(itemFileName)) {
 					this.file = new File(getPluginPath(), fileName);
 					return true;
 				} else {
@@ -1866,7 +1891,10 @@ public class SettingsHelper {
 			for (SettingsItem item : items) {
 				if (item instanceof PluginSettingsItem) {
 					PluginSettingsItem pluginSettingsItem = ((PluginSettingsItem) item);
-					pluginSettingsItem.pluginItems = pluginItems.get(pluginSettingsItem.getName());
+					List<SettingsItem> pluginDependentItems = pluginItems.get(pluginSettingsItem.getName());
+					if (!Algorithms.isEmpty(pluginDependentItems)) {
+						pluginSettingsItem.getPluginDependentItems().addAll(pluginDependentItems);
+					}
 				}
 			}
 		}
@@ -1931,8 +1959,10 @@ public class SettingsHelper {
 
 		private Map<String, SettingsItem> items;
 		private Map<String, String> additionalParams;
+		private boolean onlyJson;
 
-		SettingsExporter() {
+		SettingsExporter(boolean onlyJson) {
+			this.onlyJson = onlyJson;
 			items = new LinkedHashMap<>();
 			additionalParams = new LinkedHashMap<>();
 		}
@@ -1949,16 +1979,26 @@ public class SettingsHelper {
 		}
 
 		void exportSettings(File file) throws JSONException, IOException {
-			JSONObject json = new JSONObject();
-			json.put("version", VERSION);
-			for (Map.Entry<String, String> param : additionalParams.entrySet()) {
-				json.put(param.getKey(), param.getValue());
+			JSONObject json = createItemsJson();
+			if (onlyJson) {
+				saveJsonItems(file, json);
+			} else {
+				saveZipItems(file, json);
 			}
-			JSONArray itemsJson = new JSONArray();
-			for (SettingsItem item : items.values()) {
-				itemsJson.put(new JSONObject(item.toJson()));
+		}
+
+		private void saveJsonItems(File file, JSONObject json) throws JSONException, IOException {
+			InputStream inputStream = new ByteArrayInputStream(json.toString(2).getBytes("UTF-8"));
+			OutputStream os = new BufferedOutputStream(new FileOutputStream(file), BUFFER);
+			try {
+				Algorithms.streamCopy(inputStream, os);
+			} finally {
+				Algorithms.closeStream(inputStream);
+				Algorithms.closeStream(os);
 			}
-			json.put("items", itemsJson);
+		}
+
+		private void saveZipItems(File file, JSONObject json) throws JSONException, IOException {
 			OutputStream os = new BufferedOutputStream(new FileOutputStream(file), BUFFER);
 			ZipOutputStream zos = new ZipOutputStream(os);
 			try {
@@ -1981,6 +2021,20 @@ public class SettingsHelper {
 				Algorithms.closeStream(zos);
 				Algorithms.closeStream(os);
 			}
+		}
+
+		private JSONObject createItemsJson() throws JSONException {
+			JSONObject json = new JSONObject();
+			json.put("version", VERSION);
+			for (Map.Entry<String, String> param : additionalParams.entrySet()) {
+				json.put(param.getKey(), param.getValue());
+			}
+			JSONArray itemsJson = new JSONArray();
+			for (SettingsItem item : items.values()) {
+				itemsJson.put(new JSONObject(item.toJson()));
+			}
+			json.put("items", itemsJson);
+			return json;
 		}
 	}
 
@@ -2326,10 +2380,10 @@ public class SettingsHelper {
 
 		ExportAsyncTask(@NonNull File settingsFile,
 						@Nullable SettingsExportListener listener,
-						@NonNull List<SettingsItem> items) {
+						@NonNull List<SettingsItem> items, boolean onlyJson) {
 			this.file = settingsFile;
 			this.listener = listener;
-			this.exporter = new SettingsExporter();
+			this.exporter = new SettingsExporter(onlyJson);
 			for (SettingsItem item : items) {
 				exporter.addSettingsItem(item);
 			}
@@ -2372,7 +2426,14 @@ public class SettingsHelper {
 
 	public void exportSettings(@NonNull File fileDir, @NonNull String fileName, @Nullable SettingsExportListener listener, @NonNull List<SettingsItem> items) {
 		File file = new File(fileDir, fileName + OSMAND_SETTINGS_FILE_EXT);
-		ExportAsyncTask exportAsyncTask = new ExportAsyncTask(file, listener, items);
+		ExportAsyncTask exportAsyncTask = new ExportAsyncTask(file, listener, items, false);
+		exportAsyncTasks.put(file, exportAsyncTask);
+		exportAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	public void exportPluginItems(@NonNull File pluginDir, @Nullable SettingsExportListener listener, @NonNull List<SettingsItem> items) {
+		File file = new File(pluginDir, "items.json");
+		ExportAsyncTask exportAsyncTask = new ExportAsyncTask(file, listener, items, true);
 		exportAsyncTasks.put(file, exportAsyncTask);
 		exportAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}

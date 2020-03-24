@@ -1,8 +1,10 @@
 package net.osmand.plus;
 
+import android.app.Activity;
 import android.content.res.Configuration;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.util.Algorithms;
@@ -31,23 +33,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	public CustomOsmandPlugin(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		super(app);
 		pluginId = json.getString("pluginId");
-
-		JSONObject nameJson = json.getJSONObject("name");
-		if (nameJson != null) {
-			for (Iterator<String> it = nameJson.keys(); it.hasNext(); ) {
-				String localeKey = it.next();
-				String name = nameJson.getString(localeKey);
-				names.put(localeKey, name);
-			}
-		}
-		JSONObject descriptionJson = json.getJSONObject("description");
-		if (descriptionJson != null) {
-			for (Iterator<String> it = descriptionJson.keys(); it.hasNext(); ) {
-				String localeKey = it.next();
-				String name = descriptionJson.getString(localeKey);
-				descriptions.put(localeKey, name);
-			}
-		}
+		readAdditionalDataFromJson(json);
 	}
 
 //	Prepare ".opr" desert-package manually + add all resources inside (extend json to describe package).
@@ -63,6 +49,16 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 //P.S.: Functionality similar to Nautical / Ski Maps plugin,
 // so we could remove all code for Nautical / Ski Maps from OsmAnd
 // and put to separate "skimaps.opr", "nautical.opr" in future
+
+	@Override
+	public boolean init(@NonNull OsmandApplication app, @Nullable Activity activity) {
+		return super.init(app, activity);
+	}
+
+	@Override
+	public void disable(OsmandApplication app) {
+		super.disable(app);
+	}
 
 	@Override
 	public String getId() {
@@ -104,12 +100,26 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		return R.drawable.ic_action_skiing;
 	}
 
-	public String toJson() throws JSONException {
-		JSONObject json = new JSONObject();
+	public void readAdditionalDataFromJson(JSONObject json) throws JSONException {
+		JSONObject nameJson = json.has("name") ? json.getJSONObject("name") : null;
+		if (nameJson != null) {
+			for (Iterator<String> it = nameJson.keys(); it.hasNext(); ) {
+				String localeKey = it.next();
+				String name = nameJson.getString(localeKey);
+				names.put(localeKey, name);
+			}
+		}
+		JSONObject descriptionJson = json.has("description") ? json.getJSONObject("description") : null;
+		if (descriptionJson != null) {
+			for (Iterator<String> it = descriptionJson.keys(); it.hasNext(); ) {
+				String localeKey = it.next();
+				String name = descriptionJson.getString(localeKey);
+				descriptions.put(localeKey, name);
+			}
+		}
+	}
 
-		json.put("type", SettingsHelper.SettingsItemType.PLUGIN.name());
-		json.put("pluginId", getId());
-
+	public void writeAdditionalDataToJson(JSONObject json) throws JSONException {
 		JSONObject nameJson = new JSONObject();
 		for (Map.Entry<String, String> entry : names.entrySet()) {
 			nameJson.put(entry.getKey(), entry.getValue());
@@ -121,8 +131,6 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 			descriptionJson.put(entry.getKey(), entry.getValue());
 		}
 		json.put("description", descriptionJson);
-
-		return json.toString();
 	}
 
 	@Override
