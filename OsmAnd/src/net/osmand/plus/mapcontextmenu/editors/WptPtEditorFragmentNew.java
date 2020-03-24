@@ -248,6 +248,8 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 			} else {
 				wpt.removeColor();
 			}
+			wpt.setBackgroundType(backgroundTypeName);
+			wpt.setIconName(iconName);
 			GPXFile gpx = editor.getGpxFile();
 			SavingTrackHelper savingTrackHelper = getSavingTrackHelper();
 			GpxSelectionHelper selectedGpxHelper = getSelectedGpxHelper();
@@ -287,7 +289,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 			if (gpx != null) {
 				if (gpx.showCurrentTrack) {
 					savingTrackHelper.updatePointData(wpt, wpt.getLatitude(), wpt.getLongitude(),
-							System.currentTimeMillis(), description, name, category, color);
+							System.currentTimeMillis(), description, name, category, color, iconName, backgroundTypeName);
 					if (!editor.isGpxSelected()) {
 						selectedGpxHelper.setGpxFileToDisplay(gpx);
 					}

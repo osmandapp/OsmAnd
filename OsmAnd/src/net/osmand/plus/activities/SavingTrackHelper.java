@@ -533,6 +533,11 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 
 	public void updatePointData(WptPt pt, double lat, double lon, long time, String description, String name, String category, int color) {
+		updatePointData(pt, lat, lon, time, description, name, category, color, null, null);
+	}
+
+	public void updatePointData(WptPt pt, double lat, double lon, long time, String description, String name,
+	                            String category, int color, String iconName, String iconBackground) {
 		currentTrack.getModifiableGpxFile().modifiedTime = time;
 
 		List<Object> params = new ArrayList<>();
@@ -593,6 +598,12 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		pt.category = category;
 		if (color != 0) {
 			pt.setColor(color);
+		}
+		if (iconName != null) {
+			pt.setIconName(iconName);
+		}
+		if (iconBackground != null) {
+			pt.setBackgroundType(iconBackground);
 		}
 	}
 
