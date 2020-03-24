@@ -29,7 +29,7 @@ import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.util.Algorithms;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
@@ -358,11 +358,6 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 	}
 
 	@Override
-	public String getHeaderCaption() {
-		return getString(R.string.favourites_edit_dialog_title);
-	}
-
-	@Override
 	public String getNameInitValue() {
 		FavouritePoint favorite = getFavorite();
 		return favorite != null ? favorite.getName() : "";
@@ -434,10 +429,30 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 
 	@Override
 	public Set<String> getCategories() {
-		Set<String> categories = new HashSet<>();
+		Set<String> categories = new LinkedHashSet<>();
 		for (FavouritesDbHelper.FavoriteGroup fg : getHelper().getFavoriteGroups()) {
 			categories.add(fg.getDisplayName(getMyApplication()));
 		}
 		return categories;
+	}
+
+	@Override
+	public int getCategoryPoints(String category) {
+		for (FavouritesDbHelper.FavoriteGroup fg : getHelper().getFavoriteGroups()) {
+			if (fg.getDisplayName(getMyApplication()).equals(category)) {
+				return fg.getPoints().size();
+			}
+		}
+		return 0;
+	}
+
+	@Override
+	public int getCategoryColor(String category) {
+		for (FavouritesDbHelper.FavoriteGroup fg : getHelper().getFavoriteGroups()) {
+			if (fg.getDisplayName(getMyApplication()).equals(category)) {
+				return fg.getColor();
+			}
+		}
+		return defaultColor;
 	}
 }

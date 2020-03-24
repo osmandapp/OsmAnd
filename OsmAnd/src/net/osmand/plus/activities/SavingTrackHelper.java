@@ -508,8 +508,14 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		}
 		currentTrack.getModifiableGpxFile().modifiedTime = time;
 	}
-	
-	public WptPt insertPointData(double lat, double lon, long time, String description, String name, String category, int color) {
+
+	public WptPt insertPointData(double lat, double lon, long time, String description, String name, String category,
+	                             int color) {
+		return insertPointData(lat, lon, time, description, name, category, color, null, null);
+	}
+
+	public WptPt insertPointData(double lat, double lon, long time, String description, String name, String category,
+	                             int color, String iconName, String backgroundName) {
 		final WptPt pt = new WptPt(lat, lon, time, Double.NaN, 0, Double.NaN);
 		pt.name = name;
 		pt.category = category;
@@ -517,6 +523,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		if (color != 0) {
 			pt.setColor(color);
 		}
+		pt.setIconName(iconName);
+		pt.setBackgroundType(backgroundName);
 		ctx.getSelectedGpxHelper().addPoint(pt, currentTrack.getModifiableGpxFile());
 		currentTrack.getModifiableGpxFile().modifiedTime = time;
 		points++;

@@ -344,7 +344,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		if (iconName != null) {
 			fp.setIconIdFromName(ctx, iconName);
 		}
-		fp.setBackgroundType(BackgroundType.valueOf((pt.getBackType().toUpperCase())));
+		fp.setBackgroundType(BackgroundType.valueOf((pt.getBackgroundType().toUpperCase())));
 		return fp;
 	}
 
@@ -362,7 +362,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 			pt.setIconName(getIconEntryName(ctx).substring(3));
 		}
 		if(backgroundType != null) {
-			pt.setBackType(backgroundType.typeName);
+			pt.setBackgroundType(backgroundType.typeName);
 		}
 		if (getColor() != 0) {
 			pt.setColor(getColor());
