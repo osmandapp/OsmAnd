@@ -40,12 +40,13 @@ public class HillshadeLayer extends MapTileLayer {
 	private final static int MAX_TRANSPARENCY_ALPHA = 20;
 
 	private QuadTree<String> indexedResources = new QuadTree<String>(new QuadRect(0, 0, 1 << (ZOOM_BOUNDARY+1), 1 << (ZOOM_BOUNDARY+1)), 8, 0.55f);
+	private final int defaultAlpha;
 
 	public HillshadeLayer(MapActivity activity, SRTMPlugin srtmPlugin) {
 		super(false);
 		final OsmandApplication app = activity.getMyApplication();
 		indexHillshadeFiles(app);
-		setAlpha(DEFAULT_ALPHA);
+		setAlpha(defaultAlpha);
 		setMap(createTileSource(activity));
 	}
 
