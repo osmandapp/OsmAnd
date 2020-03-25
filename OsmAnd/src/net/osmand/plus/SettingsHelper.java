@@ -183,7 +183,7 @@ public class SettingsHelper {
 		}
 
 		public boolean applyFileName(@NonNull String fileName) {
-			return getFileName().equals(fileName);
+			return getFileName().endsWith(fileName);
 		}
 
 		public boolean shouldReadOnCollecting() {
