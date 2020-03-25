@@ -14,14 +14,16 @@ import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings.TerrainMode;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.views.MapTileLayer;
-import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -29,47 +31,59 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.AsyncTask;
 
-public class HillshadeLayer extends MapTileLayer {
+import static net.osmand.plus.OsmandSettings.TerrainMode.HILLSHADE;
 
-	private final static Log log = PlatformUtil.getLog(HillshadeLayer.class);
+public class TerrainLayer extends MapTileLayer {
+
+	private final static Log log = PlatformUtil.getLog(TerrainLayer.class);
 	private Map<String, SQLiteTileSource> resources = new LinkedHashMap<String, SQLiteTileSource>(); 
 	private final static String HILLSHADE_CACHE = "hillshade.cache";
+	private final static String SLOPE_CACHE = "slope.cache";
 	private int ZOOM_BOUNDARY = 15;
-	private final static int MAX_TRANSPARENCY_ZOOM = 17;
 	private final static int DEFAULT_ALPHA = 100;
-	private final static int MAX_TRANSPARENCY_ALPHA = 20;
+	private SRTMPlugin srtmPlugin;
+	private TerrainMode mode;
 
 	private QuadTree<String> indexedResources = new QuadTree<String>(new QuadRect(0, 0, 1 << (ZOOM_BOUNDARY+1), 1 << (ZOOM_BOUNDARY+1)), 8, 0.55f);
-	private final int defaultAlpha;
 
-	public HillshadeLayer(MapActivity activity, SRTMPlugin srtmPlugin) {
+	public TerrainLayer(MapActivity activity, SRTMPlugin srtmPlugin) {
 		super(false);
 		final OsmandApplication app = activity.getMyApplication();
-		indexHillshadeFiles(app);
-		setAlpha(defaultAlpha);
+		this.srtmPlugin = srtmPlugin;
+		mode = srtmPlugin.getTerrainMode();
+		indexTerrainFiles(app);
+		setAlpha(DEFAULT_ALPHA);
 		setMap(createTileSource(activity));
 	}
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
-		if (tileBox.getZoom() >= MAX_TRANSPARENCY_ZOOM) {
-			setAlpha(MAX_TRANSPARENCY_ALPHA);
+		int zoom = tileBox.getZoom();
+		if (zoom >= srtmPlugin.getTerrainMinZoom() && zoom <= srtmPlugin.getTerrainMaxZoom()) {
+			setAlpha(srtmPlugin.getTerrainTransparency());
+			super.onPrepareBufferImage(canvas, tileBox, drawSettings);
+		} else if(zoom > srtmPlugin.getTerrainMaxZoom()) {
+			// backward compatibility 100 -> 20 with overscale
+			setAlpha(srtmPlugin.getTerrainTransparency() / 5);
+			super.onPrepareBufferImage(canvas, tileBox, drawSettings);
 		} else {
-			setAlpha(DEFAULT_ALPHA);
+			// ignore
 		}
-		super.onPrepareBufferImage(canvas, tileBox, drawSettings);
+
 	}
 
-	private void indexHillshadeFiles(final OsmandApplication app ) {
-		AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void> () {
+	private void indexTerrainFiles(final OsmandApplication app) {
+		@SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
 			private SQLiteDatabase sqliteDb;
+			private String type = mode.name().toLowerCase();
 			@Override
 			protected Void doInBackground(Void... params) {
 				
 				File tilesDir = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
 				File cacheDir = app.getCacheDir();
 				// fix http://stackoverflow.com/questions/26937152/workaround-for-nexus-9-sqlite-file-write-operations-on-external-dirs
-				sqliteDb = SQLiteDatabase.openDatabase(new File(cacheDir, HILLSHADE_CACHE).getPath() , 
+				sqliteDb = SQLiteDatabase.openDatabase(
+                        new File(cacheDir, mode == HILLSHADE ? HILLSHADE_CACHE : SLOPE_CACHE).getPath(),
 						 null, SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING
 						    | SQLiteDatabase.CREATE_IF_NECESSARY );
 				if(sqliteDb.getVersion() == 0) {
@@ -94,7 +108,7 @@ public class HillshadeLayer extends MapTileLayer {
 			private void indexNonCachedResources(Map<String, Long> fileModified, Map<String, SQLiteTileSource> rs) {
 				for(String filename : fileModified.keySet()) {
 					try {
-						log.info("Indexing hillshade file " + filename);
+						log.info("Indexing " + type + " file " + filename);
 						ContentValues cv = new ContentValues();
 						cv.put("filename", filename);
 						cv.put("date_modified", fileModified.get(filename));
@@ -141,8 +155,9 @@ public class HillshadeLayer extends MapTileLayer {
 				File[] files = tilesDir.listFiles();
 				if(files != null) {
 					for(File f : files) {
-						if(f != null && f.getName().endsWith(IndexConstants.SQLITE_EXT) && 
-								f.getName().toLowerCase().startsWith("hillshade")) {
+						if (f != null
+								&& f.getName().endsWith(IndexConstants.SQLITE_EXT)
+								&& f.getName().toLowerCase().startsWith(type)) {
 							SQLiteTileSource ts = new SQLiteTileSource(app, f, new ArrayList<TileSourceTemplate>());
 							rs.put(f.getName(), ts);
 							fileModified.put(f.getName(), f.lastModified());
@@ -233,7 +248,7 @@ public class HillshadeLayer extends MapTileLayer {
 			
 			@Override
 			public String getName() {
-				return "Hillshade";
+				return Algorithms.capitalizeFirstLetter(mode.name().toLowerCase());
 			}
 			
 			@Override
@@ -242,6 +257,4 @@ public class HillshadeLayer extends MapTileLayer {
 			}
 		};
 	}
-	
-
 }
