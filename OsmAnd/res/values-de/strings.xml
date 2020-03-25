@@ -3140,7 +3140,7 @@ Lon %2$s</string>
     <string name="shared_string_max_speed">Maximaltempo</string>
     <string name="default_speed_setting_title">Standardtempo</string>
     <string name="default_speed_setting_descr">Einstellungen des Standardtempos ändern</string>
-    <string name="minmax_speed_dialog_title">Tempogrenzen einstellen</string>
+    <string name="minmax_speed_dialog_title">Min./Max. Tempo einstellen</string>
     <string name="new_profile">Neues Profil</string>
     <string name="shared_string_crash">Absturz</string>
     <string name="last_launch_crashed">Der letzte Start von OsmAnd ist fehlgeschlagen. Bitte helfen Sie uns, OsmAnd zu verbessern, indem Sie uns über diesen Fehler informieren.</string>
@@ -3542,12 +3542,12 @@ Lon %2$s</string>
     <string name="monitoring_min_accuracy_descr">Es werden nur Punkte aufgezeichnet, die gemäß den Angaben der Mindestgenauigkeit gemessen wurden (in Metern/Fuß, wie von Android je nach Chipsatz bereitgestellt). Die Genauigkeit bezieht sich auf die Streuung wiederholter Messungen und steht nicht unmittelbar in Bezug zur Präzision, die bestimmt, wie nah Messungen und wahre Position beieinanderliegen.</string>
     <string name="monitoring_min_accuracy_descr_remark">Bemerkung: Wenn das GPS unmittelbar vor einer Aufzeichnung ausgeschaltet war, kann der erste gemessene Punkt eine verminderte Genauigkeit haben, sodass wir in unserem Code vielleicht eine Sekunde oder so warten wollen, bevor ein Punkt (oder der beste von 3 aufeinanderfolgenden Punkten usw.) aufgezeichnet wird. Das ist aber noch nicht implementiert.</string>
     <string name="multimedia_rec_split_title">Aufzeichnungsteilung</string>
-    <string name="routing_profile_direct_to">Direkt zum Punkt</string>
+    <string name="routing_profile_direct_to">Auf direktem Weg</string>
     <string name="search_offline_geo_error">Geo-Intent \'%s\' konnte nicht analysiert werden.</string>
     <string name="shared_string_app_default_w_val">App-Standard (%s)</string>
     <string name="no_recalculation_setting">Neuberechnung deaktivieren</string>
-    <string name="route_recalculation_dist_title">Minimale Entfernung zum Neuberechnen der Route</string>
-    <string name="route_recalculation_dist_descr">Die Route wird neu berechnet, wenn der Abstand zur Route länger ist als der angegebene Parameter</string>
+    <string name="route_recalculation_dist_title">Mindestabstand für Neuberechnung der Route</string>
+    <string name="route_recalculation_dist_descr">"Die Route wird neu berechnet, wenn der Abstand zur Route größer ist als der festgelegte Wert "</string>
     <string name="profile_type_custom_string">Benutzerdefiniertes Profil</string>
     <string name="shared_string_angle_param">Winkel: %s°</string>
     <string name="shared_string_angle">Winkel</string>
@@ -3567,7 +3567,7 @@ Lon %2$s</string>
 \n
 \nWählen Sie eine Aktion aus.</string>
     <string name="import_duplicates_title">Einige Elemente sind bereits vorhanden</string>
-    <string name="select_data_to_import">Wählen Sie die zu importierenden Daten aus.</string>
+    <string name="select_data_to_import">Wählen Sie die zu importierenden Daten.</string>
     <string name="shared_string_rendering_style">Darstellungsstil</string>
     <string name="restore_all_profile_settings_descr">Alle Profileinstellungen werden nach dem Erstellen/Importieren dieses Profils wieder in ihren ursprünglichen Zustand versetzt.</string>
     <string name="restore_all_profile_settings">Alle Profileinstellungen wiederherstellen\?</string>
