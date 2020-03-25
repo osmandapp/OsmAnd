@@ -307,6 +307,7 @@ public abstract class OsmandPlugin {
 					JSONObject json = new JSONObject();
 					json.put("pluginId", plugin.getId());
 					plugin.writeAdditionalDataToJson(json);
+					plugin.writeDependentFilesJson(json);
 					itemsJson.put(json);
 				} catch (JSONException e) {
 					e.printStackTrace();

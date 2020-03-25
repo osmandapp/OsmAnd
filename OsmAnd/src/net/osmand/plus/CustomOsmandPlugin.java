@@ -25,6 +25,7 @@ import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -52,21 +53,8 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		super(app);
 		pluginId = json.getString("pluginId");
 		readAdditionalDataFromJson(json);
+		readDependentFilesFromJson(json);
 	}
-
-//	Prepare ".opr" desert-package manually + add all resources inside (extend json to describe package).
-//
-//Desert package
-//1. Add to Plugins list
-//1.1 Description / image / icon / name
-//1.2 Enable description bottom sheet on Install
-//2. Add custom rendering style to list Configure Map
-//3. Include Special profile for navigation with selected style
-//4. Add custom navigation icon (as example to use another car)
-//
-//P.S.: Functionality similar to Nautical / Ski Maps plugin,
-// so we could remove all code for Nautical / Ski Maps from OsmAnd
-// and put to separate "skimaps.opr", "nautical.opr" in future
 
 	@Override
 	public boolean init(@NonNull OsmandApplication app, @Nullable Activity activity) {
@@ -250,6 +238,37 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 			descriptionJson.put(entry.getKey(), entry.getValue());
 		}
 		json.put("description", descriptionJson);
+	}
+
+	public void readDependentFilesFromJson(JSONObject json) throws JSONException {
+		JSONArray rendererNamesJson = json.has("rendererNames") ? json.getJSONArray("rendererNames") : null;
+		if (rendererNamesJson != null) {
+			for (int i = 0; i < rendererNamesJson.length(); i++) {
+				String renderer = rendererNamesJson.getString(i);
+				rendererNames.add(renderer);
+			}
+		}
+		JSONArray routerNamesJson = json.has("routerNames") ? json.getJSONArray("routerNames") : null;
+		if (routerNamesJson != null) {
+			for (int i = 0; i < routerNamesJson.length(); i++) {
+				String renderer = routerNamesJson.getString(i);
+				routerNames.add(renderer);
+			}
+		}
+	}
+
+	public void writeDependentFilesJson(JSONObject json) throws JSONException {
+		JSONArray rendererNamesJson = new JSONArray();
+		for (String render : rendererNames) {
+			rendererNamesJson.put(render);
+		}
+		json.put("rendererNames", rendererNamesJson);
+
+		JSONArray routerNamesJson = new JSONArray();
+		for (String render : routerNames) {
+			routerNamesJson.put(render);
+		}
+		json.put("routerNames", routerNamesJson);
 	}
 
 	@Override
