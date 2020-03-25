@@ -23,6 +23,7 @@ import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.router.RouteCalculationProgress;
+import net.osmand.router.RouteExporter;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
@@ -245,7 +246,9 @@ public class RoutingHelper {
 		return currentGPXRoute;
 	}
 
-
+    public boolean isCurrentGPXRouteV2() {
+		return currentGPXRoute != null && RouteExporter.OSMAND_ROUTER_V2.equals(currentGPXRoute.getFile().author);
+	}
 
 	public void setGpxParams(GPXRouteParamsBuilder params) {
 		currentGPXRoute = params;

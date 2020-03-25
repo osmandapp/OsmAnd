@@ -38,7 +38,6 @@ import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.quickaction.QuickActionFactory;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.quickaction.QuickActionsWidget;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
@@ -431,7 +430,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 
     @Override
     public void onActionSelected(QuickAction action) {
-        QuickActionFactory.produceAction(action).execute(mapActivity);
+        QuickActionRegistry.produceAction(action).execute(mapActivity);
         setLayerState(false);
     }
 

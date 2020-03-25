@@ -11,9 +11,14 @@ import net.osmand.plus.OsmandSettings.DayNightMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionType;
 
 public class DayNightModeAction extends QuickAction {
-	public static final int TYPE = 27;
+
+	public static final QuickActionType TYPE = new QuickActionType(27,
+			"daynight.switch", DayNightModeAction.class).
+			nameRes(R.string.quick_action_day_night_switch_mode).iconRes(R.drawable.ic_action_map_day).nonEditable().
+			category(QuickActionType.NAVIGATION);
 
 	public DayNightModeAction() {super(TYPE);}
 

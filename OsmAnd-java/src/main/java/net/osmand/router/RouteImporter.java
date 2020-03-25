@@ -22,6 +22,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
+
 public class RouteImporter {
 
 	public final static Log log = PlatformUtil.getLog(RouteImporter.class);
@@ -48,11 +50,15 @@ public class RouteImporter {
 			public boolean readExtensions(GPXFile res, XmlPullParser parser) throws Exception {
 				if (!resources.hasLocations()) {
 					List<Location> locations = resources.getLocations();
+					double lastElevation = HEIGHT_UNDEFINED;
 					if (res.tracks.size() > 0 && res.tracks.get(0).segments.size() > 0 && res.tracks.get(0).segments.get(0).points.size() > 0) {
 						for (WptPt point : res.tracks.get(0).segments.get(0).points) {
 							Location loc = new Location("", point.getLatitude(), point.getLongitude());
 							if (!Double.isNaN(point.ele)) {
 								loc.setAltitude(point.ele);
+								lastElevation = point.ele;
+							} else if (lastElevation != HEIGHT_UNDEFINED) {
+								loc.setAltitude(lastElevation);
 							}
 							locations.add(loc);
 						}
@@ -108,7 +114,7 @@ public class RouteImporter {
 		if (gpxFile != null) {
 			GPXUtilities.loadGPXFile(null, gpxFile, extensionsReader);
 			for (RouteSegmentResult segment : route) {
-				segment.fillData();
+				segment.fillNames(resources);
 			}
 		} else if (file != null) {
 			FileInputStream fis = null;
@@ -116,7 +122,7 @@ public class RouteImporter {
 				fis = new FileInputStream(file);
 				GPXFile gpxFile = GPXUtilities.loadGPXFile(fis, null, extensionsReader);
 				for (RouteSegmentResult segment : route) {
-					segment.fillData();
+					segment.fillNames(resources);
 				}
 				gpxFile.path = file.getAbsolutePath();
 				gpxFile.modifiedTime = file.lastModified();

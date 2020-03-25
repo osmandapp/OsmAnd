@@ -2,8 +2,10 @@ package net.osmand.router;
 
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
+import net.osmand.binary.RouteDataObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +16,7 @@ public class RouteDataResources {
 
 	private List<Location> locations;
 	private int currentLocation;
+	private Map<RouteDataObject, int[][]> pointNamesMap = new HashMap<>();
 
 	public RouteDataResources() {
 		this.locations = new ArrayList<>();
@@ -42,5 +45,9 @@ public class RouteDataResources {
 
 	public void incrementCurrentLocation(int index) {
 		currentLocation += index;
+	}
+
+	public Map<RouteDataObject, int[][]> getPointNamesMap() {
+		return pointNamesMap;
 	}
 }

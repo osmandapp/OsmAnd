@@ -2753,7 +2753,7 @@
     <string name="shared_string_do">افعل</string>
     <string name="wikivoyage_download_pics_descr">صور المقالة يمكن تحمل للاستخدام بدون اتصال. 
 \nدائماً متوفرة في \'اكتشف\'←\'خيارات\'.</string>
-    <string name="online_webpage_warning">الصفحة متوفرة فقط بالاتصال. هل تريد الفتح في المتصفح؟</string>
+    <string name="online_webpage_warning">الصفحة متاحة على الإنترنت فقط. فتح في متصفح الويب؟</string>
     <string name="images_cache">الصور المؤقتة</string>
     <string name="use_two_digits_longitude">استخدم خط طول رقمين</string>
     <string name="last_intermediate_dest_description">إضافة كآخر توقف على طول الطريق</string>
@@ -3531,4 +3531,13 @@
     <string name="restore_all_profile_settings">استعادة جميع إعدادات الملف الشخصي؟</string>
     <string name="saving_new_profile">حفظ ملف تعريف جديد</string>
     <string name="profile_backup_failed">لا يمكن عمل نسخة احتياطية من الملف الشخصي.</string>
+    <string name="clear_recorded_data_warning">هل أنت متأكد من أنك تريد مسح البيانات المسجلة؟</string>
+    <string name="importing_from">استيراد البيانات من %1$s</string>
+    <string name="shared_string_importing">استيراد</string>
+    <string name="checking_for_duplicate_description">OsmAnd تحقق %1$s للتكرارات مع العناصر الموجودة في التطبيق.
+\n
+\nقد يستغرق الأمر بعض الوقت.</string>
+    <string name="items_added">العناصر المضافة</string>
+    <string name="shared_string_import_complete">اكتمل الاستيراد</string>
+    <string name="import_complete_description">يتم استيراد جميع البيانات من %1$s، يمكنك استخدام الأزرار أدناه لفتح الجزء المطلوب من التطبيق لإدارته.</string>
 </resources>

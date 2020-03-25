@@ -33,6 +33,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -40,6 +41,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 
 import java.util.Calendar;
+import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC;
 
@@ -626,5 +628,11 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	@Override
 	public DashFragmentData getCardFragment() {
 		return DashParkingFragment.FRAGMENT_DATA;
+	}
+
+
+	@Override
+	protected void registerQuickActionTypes(List<QuickActionType> quickActionTypes) {
+		quickActionTypes.add(ParkingAction.TYPE);
 	}
 }

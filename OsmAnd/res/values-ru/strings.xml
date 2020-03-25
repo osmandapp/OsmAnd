@@ -252,7 +252,7 @@
     <string name="osm_editors_ranking">Рейтинг картографов OSM</string>
     <string name="show_transparency_seekbar">Отображать регулировку прозрачности</string>
     <string name="show_polygons">Отображать полигоны</string>
-    <string name="rendering_attr_showMtbRoutes_name">Показывать маршруты горных велосипедов</string>
+    <string name="rendering_attr_showMtbRoutes_name">Трассы для горных велосипедов</string>
     <string name="shared_string_select">Выбрать</string>
     <string name="rendering_attr_hideIcons_name">Значки POI</string>
     <string name="rendering_attr_horseRoutes_name">Конные маршруты</string>
@@ -1512,12 +1512,12 @@
     <string name="rendering_attr_hideWoodScrubs_name">Леса и кустарники</string>
     <string name="rendering_attr_moreDetailed_name">Более подробно</string>
     <string name="rendering_attr_lessDetailed_name">Менее подробно</string>
-    <string name="rendering_attr_showSurfaceGrade_name">Отображать качество дорог</string>
-    <string name="rendering_attr_showSurfaces_name">Отображать тип покрытия</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Качество дорог</string>
+    <string name="rendering_attr_showSurfaces_name">Тип дорожного покрытия</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Непроезжие дороги</string>
     <string name="rendering_attr_buildings15zoom_name">Здания на масштабе 15</string>
     <string name="rendering_attr_hideAccess_name">Ограничения доступа</string>
-    <string name="rendering_attr_showAccess_name">Отображать ограничения доступа</string>
+    <string name="rendering_attr_showAccess_name">Ограничения доступа и платный проезд</string>
     <string name="rendering_attr_showCycleRoutes_name">Веломаршруты</string>
     <string name="map_preferred_locale_descr">Предпочтительный язык для меток на карте (если он не доступен, то английский язык или местные названия).</string>
     <string name="map_preferred_locale">Предпочтительный язык на карте</string>
@@ -3195,7 +3195,7 @@
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="sett_parrot_ext_input">Parrot</string>
     <string name="shared_string_track_is_saved">Трек %s сохранен</string>
-    <string name="rendering_attr_showLez_name">Отображать зоны с низким уровнем выбросов</string>
+    <string name="rendering_attr_showLez_name">Зоны с низким уровнем выбросов</string>
     <string name="temporary_conditional_routing">Учитывать временные ограничения</string>
     <string name="new_route_calculated_dist_dbg">Маршрут: расстояние %s, время навигации %s 
 \nРасчет: %.1f с, %d дорог, %d тайлов)</string>
@@ -3342,7 +3342,7 @@
     <string name="dialogs_and_notifications_title">Диалоги и уведомления</string>
     <string name="dialogs_and_notifications_descr">Управление всплывающими окнами, диалогами и уведомлениями.</string>
     <string name="add_new_profile_q">Добавить новый профиль \'%1$s\'\?</string>
-    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Отображать узловые сети велосипедных маршрутов</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Узловые сети велосипедных маршрутов</string>
     <string name="save_heading">Сохранять путевой угол</string>
     <string name="save_heading_descr">Сохранять во время записи путевой угол для каждой точки трека.</string>
     <string name="layer_osm_edits">Правки OSM</string>
@@ -3423,7 +3423,7 @@
     <string name="permission_is_required">Для использования этой функции требуется разрешение.</string>
     <string name="monitoring_min_speed_descr">Это низкоскоростной фильтр отсечки, чтобы не записывать точки ниже определенной скорости. Это может сделать записанные треки более гладкими при просмотре на карте.</string>
     <string name="rearrange_categories">Упорядочить категории</string>
-    <string name="create_custom_categories_list_promo">Вы можете добавлять категории, скрыть те, которые вы не находите необходимыми и изменить порядок. Список может быть импортирован и экспортирован с профилями.</string>
+    <string name="create_custom_categories_list_promo">Изменяйте порядок сортировки списка, скрывайте ненужные категории. Вы можете импортировать или экспортировать все изменения с профилями.</string>
     <string name="add_new_custom_category_button_promo">Вы можете добавить новую пользовательскую категорию, выбрав одну или несколько необходимых категорий.</string>
     <string name="reset_to_default_category_button_promo">Сброс к настройкам по умолчанию приведет к сбросу порядка сортировки к настройкам по умолчанию после установки.</string>
     <string name="add_custom_category">Добавить пользовательскую категорию</string>
@@ -3563,4 +3563,6 @@
     <string name="items_added">Объекты добавлены</string>
     <string name="shared_string_import_complete">Импорт завершен</string>
     <string name="import_complete_description">Все данные из %1$s импортированы, вы можете использовать кнопки ниже, чтобы открыть соответствующий раздел приложения для управления ими.</string>
+    <string name="recalculate_route_distance_promo">Маршрут будет пересчитан, если расстояние от маршрута до текущего местоположения больше выбранного значения.</string>
+    <string name="select_distance_route_will_recalc">Выберите расстояние, после которого маршрут будет пересчитан.</string>
 </resources>

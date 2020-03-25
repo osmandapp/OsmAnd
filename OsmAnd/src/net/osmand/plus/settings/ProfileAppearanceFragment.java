@@ -708,6 +708,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	}
 
 	private void saveProfile() {
+		profile = changedProfile;
 		if (isNewProfile) {
 			DialogInterface.OnShowListener showListener = new DialogInterface.OnShowListener() {
 
