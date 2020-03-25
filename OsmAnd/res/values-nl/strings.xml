@@ -132,8 +132,8 @@
     <string name="osmand_service">Achtergrond modus</string>
     <string name="osmand_service_descr">OsmAnd werkt op de achtergrond als het scherm uit is.</string>
     <string name="download_files_not_enough_space">Er is niet voldoende vrije ruimte %1$s MB te downloaden (vrij: %2$s).</string>
-    <string name="download_files_question_space">"{0} bestand(en) downloaden\? 
-\n{1} MB (van {2} MB) zal gebruikt  worden."</string>
+    <string name="download_files_question_space">{0} bestand(en) downloaden\? 
+\n{1} MB (van {2} MB) zal gebruikt worden.</string>
     <string name="use_transparent_map_theme">Transparant thema</string>
     <string name="native_library_not_supported">Interne bibliotheek wordt niet ondersteund op dit apparaat.</string>
     <string name="init_native_library">Voorbereiden interne bibliotheek…</string>
@@ -1882,7 +1882,9 @@ Lengtegraad:\t\t%2$s</string>
     <string name="map_markers_other">Andere markeervlaggetjes</string>
     <string name="upload_anonymously">Anoniem uploaden</string>
     <string name="show_transparency_seekbar">Toon Transparantie-schuif op kaart</string>
-    <string name="download_files_error_not_enough_space">Niet genoeg opslagruimte! Tijdelijk is {3} MB nodig en permanent {1} MB. (Er is slechts {2} MB beschikbaar.)</string>
+    <string name="download_files_error_not_enough_space">Niet genoeg opslagruimte!
+\nTijdelijk is {3} MB nodig en permanent {1} MB.
+\n(Er is slechts {2} MB beschikbaar.)</string>
     <string name="download_files_question_space_with_temp">{0} bestanden downloaden\?
 \nTijdelijk is {3} MB nodig en permanent {1} MB. (Van {2} MB.)</string>
     <string name="upload_osm_note_description">Je kunt OSM notities anoniem uploaden of je OpenStreetMap.org profiel gebruiken.</string>
@@ -2646,7 +2648,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_total">Totaal</string>
     <string name="hide_full_description">Volledige beschrijving verbergen</string>
     <string name="show_full_description">Volledige beschrijving tonen</string>
-    <string name="off_road_render_descr">"Geschikt voor off-road gebruik in \'Topo\' stijl en voor gebruik met groene satellietbeelden als onderliggende kaart. Verminderde dikte van hoofdwegen, vergrootte dikte van landwegen, paden, fiets-  en andere routes."</string>
+    <string name="off_road_render_descr">Geschikt voor off-road gebruik in \'Topo\' stijl en voor gebruik met groene satellietbeelden als onderliggende kaart. Verminderde dikte van hoofdwegen, vergrootte dikte van landwegen, paden, fiets- en andere routes.</string>
     <string name="nautical_render_descr">Zeekaartstijl. Toont boeien, vuurtorens, rivieren, vaargeulen en -markeringen, havens, bakens, dieptelijnen.</string>
     <string name="ski_map_render_descr">Skistijl. Toont pistes, skiliften en andere ski-gerelateerde elementen. Overige kaartelementen worden verduisterd.</string>
     <string name="light_rs_render_descr">Eenvoudige stijl voor autonavigatie. Zachte nachtmodus, hoogtelijnen, contrasterende wegen in oranje stijl, verduistert overige kaartelementen.</string>
@@ -3067,7 +3069,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_select_folder">Map…</string>
     <string name="move_maps_to_new_destination">Verplaats naar de nieuwe locatie</string>
     <string name="internal_app_storage_description">Interne opslag voor OsmAnd (verborgen voor gebruikers en andere apps).</string>
-    <string name="tts_initialization_error">Kan tekst-naar-spraak service niet starten</string>
+    <string name="tts_initialization_error">Kan tekst-naar-spraak service niet starten.</string>
     <string name="export_profile">Exporteer profiel</string>
     <string name="exported_osmand_profile">OsmAnd profiel: %1$s</string>
     <string name="overwrite_profile_q">\'%1$s\' bestaat al. Overschrijven\?</string>
@@ -3296,7 +3298,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="selected_profile">Geselecteerd profiel</string>
     <string name="select_navigation_icon">Positie-icoon tijdens bewegen</string>
     <string name="reset_confirmation_descr">Op %1$s tikken laat al uw wijzigingen verloren gaan.</string>
-    <string name="reset_all_profile_settings_descr">Alle profiel instellingen terugzetten naar installatie standaardwaarden</string>
+    <string name="reset_all_profile_settings_descr">Alle profiel instellingen terugzetten naar installatie standaardwaarden.</string>
     <string name="reset_all_profile_settings">Alle profiel instellingen terugzetten naar standaard\?</string>
     <string name="button_rate">Beoordeel</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
