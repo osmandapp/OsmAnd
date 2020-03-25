@@ -22,15 +22,15 @@
         android:background="?attr/dashboard_divider"
         android:layout_marginLeft="54dp"
         android:visibility="gone"
-	    android:layout_marginStart="54dp" />
+        android:layout_marginStart="54dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/list_content_padding"
-	    android:paddingStart="@dimen/list_content_padding">
+        android:paddingLeft="@dimen/list_header_padding"
+        android:paddingStart="@dimen/list_header_padding">
 
         <FrameLayout
             android:layout_width="wrap_content"
@@ -45,15 +45,15 @@
                 android:focusable="false"
                 android:visibility="gone"
                 tools:visibility="visible"
-	            android:layout_marginEnd="@dimen/list_content_padding" />
+                android:layout_marginEnd="@dimen/list_content_padding" />
 
             <ImageView
                 android:id="@+id/favourite_icon"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
+                android:layout_width="@dimen/favorites_icon_size"
+                android:layout_height="@dimen/favorites_icon_size"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="@dimen/guide_line_vertical_offset"
-	            android:layout_marginEnd="@dimen/guide_line_vertical_offset" />
+                android:layout_marginRight="@dimen/list_header_padding"
+	            android:layout_marginEnd="@dimen/list_header_padding" />
         </FrameLayout>
 
         <LinearLayout

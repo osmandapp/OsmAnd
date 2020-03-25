@@ -302,7 +302,9 @@ public class FavouritesDbHelper {
 			if (FavouritePoint.SpecialPointType.PARKING.equals(p.getSpecialPointType())) {
 				p.setColor(ContextCompat.getColor(context, R.color.map_widget_blue));
 			} else {
-				p.setColor(group.color);
+				if (p.getColor() == 0) {
+					p.setColor(group.color);
+				}
 			}
 			group.points.add(p);
 			cachedFavoritePoints.add(p);
@@ -440,7 +442,9 @@ public class FavouritesDbHelper {
 			if (FavouritePoint.SpecialPointType.PARKING.equals(p.getSpecialPointType())) {
 				p.setColor(ContextCompat.getColor(context, R.color.map_widget_blue));
 			} else {
-				p.setColor(pg.color);
+				if (p.getColor() == 0) {
+					p.setColor(pg.color);
+				}
 			}
 			pg.points.add(p);
 		}

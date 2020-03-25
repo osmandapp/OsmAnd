@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/buttons_container"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:layout_gravity="bottom"
+	android:gravity="center"
+	android:orientation="horizontal"
+	android:layout_marginRight="@dimen/content_padding_half"
+	android:layout_marginEnd="@dimen/content_padding_half">
+
+	<include
+		android:id="@+id/button"
+		layout="@layout/bottom_sheet_dialog_button" />
+</LinearLayout>
