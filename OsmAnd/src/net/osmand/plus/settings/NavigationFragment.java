@@ -238,7 +238,7 @@ public class NavigationFragment extends BaseSettingsFragment {
 		for (Map.Entry<String, GeneralRouter> entry : builder.getAllRouters().entrySet()) {
 			String routerKey = entry.getKey();
 			GeneralRouter router = entry.getValue();
-			if (!routerKey.equals("geocoding") && !disabledRouterNames.contains(routerKey)) {
+			if (!routerKey.equals("geocoding") && !disabledRouterNames.contains(router.getFilename())) {
 				int iconRes = R.drawable.ic_action_gdirections_dark;
 				String name = router.getProfileName();
 				String description = app.getString(R.string.osmand_default_routing);

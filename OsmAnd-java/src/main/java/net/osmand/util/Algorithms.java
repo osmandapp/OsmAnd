@@ -104,6 +104,14 @@ public class Algorithms {
 		return name.substring(i + 1);
 	}
 
+	public static String getFileWithoutDirs(String name) {
+		int i = name.lastIndexOf(File.separator);
+		if (i != -1) {
+			return name.substring(i + 1);
+		}
+		return name;
+	}
+
 	public static File[] getSortedFilesVersions(File dir) {
 		File[] listFiles = dir.listFiles();
 		if (listFiles != null) {

@@ -22,6 +22,7 @@ import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
+import net.osmand.plus.render.RendererRegistry;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -135,8 +136,11 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 							PoiUiFilterSettingsItem poiUiFilterSettingsItem = (PoiUiFilterSettingsItem) item;
 							List<PoiUIFilter> poiUIFilters = poiUiFilterSettingsItem.getItems();
 							for (PoiUIFilter filter : poiUIFilters) {
-								app.getPoiFilters().removePoiFilter(filter);
+								PoiUIFilter savedFilter = app.getPoiFilters().getFilterById(filter.getFilterId());
+								app.getPoiFilters().removePoiFilter(savedFilter);
 							}
+							app.getPoiFilters().reloadAllPoiFilters();
+							app.getPoiFilters().loadSelectedPoiFilters();
 							app.getSearchUICore().refreshCustomPoiFilters();
 						} else if (item instanceof AvoidRoadsSettingsItem) {
 							AvoidRoadsSettingsItem avoidRoadsSettingsItem = (AvoidRoadsSettingsItem) item;
@@ -279,5 +283,10 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	@Override
 	public List<String> getRouterNames() {
 		return routerNames;
+	}
+
+	public void addRenderer(String fileName) {
+		String renderer = RendererRegistry.formatRenderFileName(fileName);
+		rendererNames.add(renderer.replace('_', ' ').replace('-', ' '));
 	}
 }

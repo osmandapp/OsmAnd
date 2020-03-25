@@ -372,9 +372,9 @@ public class SettingsHelper {
 					if (item instanceof SettingsHelper.FileSettingsItem) {
 						FileSettingsItem fileItem = (FileSettingsItem) item;
 						if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.RENDERING_STYLE) {
-							plugin.rendererNames.add(fileItem.getFileName());
+							plugin.addRenderer(fileItem.getName());
 						} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.ROUTING_CONFIG) {
-							plugin.routerNames.add(fileItem.getFileName());
+							plugin.getRouterNames().add(fileItem.getName());
 						}
 					}
 				}
@@ -1005,7 +1005,10 @@ public class SettingsHelper {
 			}
 
 			public static FileSubtype getSubtypeByFileName(@NonNull String fileName) {
-				String name = fileName.substring(1);
+				String name = fileName;
+				if (fileName.startsWith(File.separator)) {
+					name = fileName.substring(1);
+				}
 				for (FileSubtype subtype : FileSubtype.values()) {
 					if (subtype == ROUTING_CONFIG || subtype == RENDERING_STYLE) {
 						if (name.startsWith(subtype.subtypeFolder) || name.startsWith(subtype.subtypeName)) {
@@ -1080,12 +1083,7 @@ public class SettingsHelper {
 				if (subtype == FileSubtype.OTHER) {
 					name = fileName;
 				} else if (subtype != null && subtype != FileSubtype.UNKNOWN) {
-					int index = fileName.lastIndexOf(File.separator);
-					if (index != -1) {
-						name = fileName.substring(index);
-					} else {
-						name = fileName;
-					}
+					name = Algorithms.getFileWithoutDirs(fileName);
 				}
 			}
 		}
