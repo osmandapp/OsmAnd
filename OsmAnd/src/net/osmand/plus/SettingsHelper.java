@@ -970,6 +970,7 @@ public class SettingsHelper {
 
 		public enum FileSubtype {
 			UNKNOWN("", null),
+			OTHER("other", ""),
 			ROUTING_CONFIG("routing_config", IndexConstants.ROUTING_PROFILES_DIR),
 			RENDERING_STYLE("rendering_style", IndexConstants.RENDERERS_DIR),
 			OBF_MAP("obf_map", IndexConstants.MAPS_PATH),
@@ -1037,20 +1038,16 @@ public class SettingsHelper {
 			}
 		}
 
-		public FileSettingsItem(@NonNull OsmandApplication app, @NonNull FileSubtype subtype, @NonNull File file) throws IllegalArgumentException {
-			super(app, file.getPath().replace(app.getAppPath(null).getPath(), ""));
-			this.file = file;
-			this.appPath = app.getAppPath(null);
-			this.subtype = subtype;
-			if (subtype == FileSubtype.UNKNOWN) {
-				throw new IllegalArgumentException("Unknown file subtype: " + getFileName());
-			}
-		}
-
 		FileSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			super(app, json);
 			this.appPath = app.getAppPath(null);
-			this.file = new File(appPath, name);
+			if (subtype == FileSubtype.OTHER) {
+				this.file = new File(appPath, name);
+			} else if (subtype == FileSubtype.UNKNOWN || subtype == null) {
+				throw new IllegalArgumentException("Unknown file subtype: " + getFileName());
+			} else {
+				this.file = new File(app.getAppPath(subtype.subtypeFolder), name);
+			}
 		}
 
 		@NonNull
@@ -1071,9 +1068,6 @@ public class SettingsHelper {
 		void readFromJson(@NonNull JSONObject json) throws JSONException {
 			super.readFromJson(json);
 			String fileName = getFileName();
-			if (!Algorithms.isEmpty(fileName)) {
-				name = fileName;
-			}
 			String subtypeStr = json.has("subtype") ? json.getString("subtype") : null;
 			if (!Algorithms.isEmpty(subtypeStr)) {
 				subtype = FileSubtype.getSubtypeByName(subtypeStr);
@@ -1081,6 +1075,18 @@ public class SettingsHelper {
 				subtype = FileSubtype.getSubtypeByFileName(fileName);
 			} else {
 				subtype = FileSubtype.UNKNOWN;
+			}
+			if (!Algorithms.isEmpty(fileName)) {
+				if (subtype == FileSubtype.OTHER) {
+					name = fileName;
+				} else if (subtype != null && subtype != FileSubtype.UNKNOWN) {
+					int index = fileName.lastIndexOf(File.separator);
+					if (index != -1) {
+						name = fileName.substring(index);
+					} else {
+						name = fileName;
+					}
+				}
 			}
 		}
 
