@@ -139,6 +139,7 @@ public class UiCustomizationFragment extends BaseOsmAndFragment {
 
 		List<ListItem> items = new ArrayList<>();
 		items.add(new ListItem(AdapterItemType.DESCRIPTION, type));
+		items.addAll(getDrawerListItems());
 		items.add(new ListItem(AdapterItemType.DIVIDER, 1));
 		return items;
 	}
@@ -397,6 +398,15 @@ public class UiCustomizationFragment extends BaseOsmAndFragment {
 		list.add(new UiItemBase(FAVORITES_ID, R.string.shared_string_favorites, R.string.shared_string_favorites, R.drawable.ic_action_fav_dark, 0));
 		list.add(new UiItemBase(POI_OVERLAY_ID, R.string.layer_poi, R.string.layer_poi, R.drawable.ic_action_info_dark, 1));
 		return list;
+	}
+
+	private List<ListItem> getDrawerListItems() {
+		List<UiItemBase> itemBases = getDrawerItems();
+		List<ListItem> listItems = new ArrayList<>();
+		for (UiItemBase itemBase : itemBases) {
+			listItems.add(new ListItem(AdapterItemType.UI_ITEM, itemBase));
+		}
+		return listItems;
 	}
 
 
