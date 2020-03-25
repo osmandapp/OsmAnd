@@ -855,8 +855,9 @@ public class ImportHelper {
 						iterator.remove();
 					}
 				}
-				File pluginDir = new File(app.getAppPath(null), IndexConstants.PLUGINS_DIR + pluginItem.getPluginId());
-				app.getSettingsHelper().exportPluginItems(pluginDir, null, items);
+				String pluginId = pluginItem.getPluginId();
+				File pluginDir = new File(app.getAppPath(null), IndexConstants.PLUGINS_DIR + pluginId);
+				app.getSettingsHelper().exportSettings(pluginDir, "items", null, items, false);
 			}
 		};
 		List<SettingsItem> pluginItems = new ArrayList<>(pluginItem.getPluginDependentItems());

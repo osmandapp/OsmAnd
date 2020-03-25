@@ -42,7 +42,6 @@ import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
-import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.plus.settings.ExportImportSettingsAdapter.Type;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 
@@ -327,7 +326,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 			showExportProgressDialog();
 			File tempDir = getTempDir();
 			String fileName = profile.toHumanString();
-			app.getSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), prepareSettingsItemsForExport());
+			app.getSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), prepareSettingsItemsForExport(), true);
 		}
 	}
 
