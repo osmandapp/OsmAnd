@@ -220,7 +220,8 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	public void onStopTrackingTouch(@NonNull Slider slider) {
 		switch (slider.getId()) {
 			case R.id.transparency_slider:
-				srtmPlugin.setTerrainTransparency((int) slider.getValue(), srtmPlugin.getTerrainMode());
+				double d = (100 - slider.getValue()) / 2.55;
+				srtmPlugin.setTerrainTransparency((int) d, srtmPlugin.getTerrainMode());
 				break;
 			case R.id.zoom_slider:
 				List<Float> values = slider.getValues();
@@ -254,7 +255,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	private void updateUiMode() {
 		TerrainMode mode = srtmPlugin.getTerrainMode();
 		if (terrainEnabled) {
-			int transparencyValue = srtmPlugin.getTerrainTransparency();
+			int transparencyValue = (int) (100 - srtmPlugin.getTerrainTransparency() / 2.55);
 			String transparency = transparencyValue + "%";
 			int minZoom = Math.max(srtmPlugin.getTerrainMinZoom(), TERRAIN_MIN_ZOOM);
 			int maxZoom = Math.min(srtmPlugin.getTerrainMaxZoom(), TERRAIN_MAX_ZOOM);
