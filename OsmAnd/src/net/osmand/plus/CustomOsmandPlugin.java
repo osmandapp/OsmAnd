@@ -6,13 +6,26 @@ import android.content.res.Configuration;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.map.ITileSource;
+import net.osmand.map.TileSourceManager;
+import net.osmand.plus.SettingsHelper.AvoidRoadsSettingsItem;
+import net.osmand.plus.SettingsHelper.MapSourcesSettingsItem;
+import net.osmand.plus.SettingsHelper.PoiUiFilterSettingsItem;
+import net.osmand.plus.SettingsHelper.QuickActionsSettingsItem;
+import net.osmand.plus.SettingsHelper.SettingsCollectListener;
+import net.osmand.plus.SettingsHelper.SettingsItem;
+import net.osmand.plus.helpers.AvoidSpecificRoads;
+import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -52,12 +65,89 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean init(@NonNull OsmandApplication app, @Nullable Activity activity) {
-		return super.init(app, activity);
+		super.init(app, activity);
+		if (activity != null) {
+			// called from UI
+			File pluginItemsFile = getPluginItemsFile();
+			if (pluginItemsFile.exists()) {
+				addPluginItemsFromFile(pluginItemsFile);
+			}
+		}
+		return true;
+	}
+
+	private void addPluginItemsFromFile(final File file) {
+		app.getSettingsHelper().collectSettings(file, "", 1, new SettingsCollectListener() {
+			@Override
+			public void onSettingsCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
+				if (succeed && !items.isEmpty()) {
+
+				}
+			}
+		});
+	}
+
+	private void removePluginItemsFromFile(final File file) {
+		app.getSettingsHelper().collectSettings(file, "", 1, new SettingsCollectListener() {
+			@Override
+			public void onSettingsCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
+				if (succeed && !items.isEmpty()) {
+					for (SettingsItem item : items) {
+						if (item instanceof QuickActionsSettingsItem) {
+							QuickActionsSettingsItem quickActionsSettingsItem = (QuickActionsSettingsItem) item;
+							List<QuickAction> quickActions = quickActionsSettingsItem.getItems();
+							for (QuickAction action : quickActions) {
+								QuickAction savedAction = app.getQuickActionRegistry().getQuickAction(app, action.getType(), action.getName(app), action.getParams());
+								if (savedAction != null) {
+									app.getQuickActionRegistry().deleteQuickAction(savedAction);
+								}
+							}
+						}
+						if (item instanceof MapSourcesSettingsItem) {
+							MapSourcesSettingsItem mapSourcesSettingsItem = (MapSourcesSettingsItem) item;
+							List<ITileSource> mapSources = mapSourcesSettingsItem.getItems();
+
+							for (ITileSource tileSource : mapSources) {
+								if (tileSource instanceof TileSourceManager.TileSourceTemplate) {
+//									app.getSettings().installTileSource((TileSourceManager.TileSourceTemplate) tileSource);
+								} else if (tileSource instanceof SQLiteTileSource) {
+//									((SQLiteTileSource) tileSource).createDataBase();
+								}
+							}
+						}
+						if (item instanceof PoiUiFilterSettingsItem) {
+							PoiUiFilterSettingsItem poiUiFilterSettingsItem = (PoiUiFilterSettingsItem) item;
+							List<PoiUIFilter> poiUIFilters = poiUiFilterSettingsItem.getItems();
+							for (PoiUIFilter filter : poiUIFilters) {
+								app.getPoiFilters().removePoiFilter(filter);
+							}
+							app.getSearchUICore().refreshCustomPoiFilters();
+						}
+						if (item instanceof AvoidRoadsSettingsItem) {
+							AvoidRoadsSettingsItem avoidRoadsSettingsItem = (AvoidRoadsSettingsItem) item;
+							List<AvoidSpecificRoads.AvoidRoadInfo> avoidRoadInfos = avoidRoadsSettingsItem.getItems();
+							for (AvoidSpecificRoads.AvoidRoadInfo avoidRoad : avoidRoadInfos) {
+								app.getAvoidSpecificRoads().removeImpassableRoad(avoidRoad);
+							}
+						}
+					}
+				}
+			}
+		});
 	}
 
 	@Override
 	public void disable(OsmandApplication app) {
 		super.disable(app);
+		File pluginItemsFile = getPluginItemsFile();
+		if (pluginItemsFile.exists()) {
+			removePluginItemsFromFile(pluginItemsFile);
+		}
+	}
+
+	private File getPluginItemsFile() {
+		File pluginDir = new File(app.getAppPath(null), IndexConstants.PLUGINS_DIR + pluginId);
+		return new File(pluginDir, "items" + IndexConstants.OSMAND_SETTINGS_FILE_EXT);
 	}
 
 	@Override

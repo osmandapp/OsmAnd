@@ -1241,26 +1241,31 @@ public class SettingsHelper {
 		@Override
 		public void apply() {
 			if (!items.isEmpty() || !duplicateItems.isEmpty()) {
-				List<QuickAction> newActions = new ArrayList<>(existingItems);
-				if (!duplicateItems.isEmpty()) {
-					if (shouldReplace) {
-						for (QuickAction duplicateItem : duplicateItems) {
-							for (QuickAction savedAction : existingItems) {
-								if (duplicateItem.getName(app).equals(savedAction.getName(app))) {
-									newActions.remove(savedAction);
-								}
-							}
-						}
-					} else {
-						for (QuickAction duplicateItem : duplicateItems) {
-							renameItem(duplicateItem);
-						}
-					}
-					newActions.addAll(duplicateItems);
-				}
-				newActions.addAll(items);
+				List<QuickAction> newActions = getNewActions();
 				actionRegistry.updateQuickActions(newActions);
 			}
+		}
+
+		private List<QuickAction> getNewActions() {
+			List<QuickAction> newActions = new ArrayList<>(existingItems);
+			if (!duplicateItems.isEmpty()) {
+				if (shouldReplace) {
+					for (QuickAction duplicateItem : duplicateItems) {
+						for (QuickAction savedAction : existingItems) {
+							if (duplicateItem.getName(app).equals(savedAction.getName(app))) {
+								newActions.remove(savedAction);
+							}
+						}
+					}
+				} else {
+					for (QuickAction duplicateItem : duplicateItems) {
+						renameItem(duplicateItem);
+					}
+				}
+				newActions.addAll(duplicateItems);
+			}
+			newActions.addAll(items);
+			return newActions;
 		}
 
 		@Override
@@ -1325,9 +1330,10 @@ public class SettingsHelper {
 			Gson gson = new Gson();
 			Type type = new TypeToken<HashMap<String, String>>() {
 			}.getType();
-			if (!items.isEmpty()) {
+			if (!items.isEmpty() || !duplicateItems.isEmpty()) {
+				List<QuickAction> newActions = getNewActions();
 				try {
-					for (QuickAction action : items) {
+					for (QuickAction action : newActions) {
 						JSONObject jsonObject = new JSONObject();
 						jsonObject.put("name", action.hasCustomName(app)
 								? action.getName(app) : "");
@@ -1966,10 +1972,10 @@ public class SettingsHelper {
 
 		private Map<String, SettingsItem> items;
 		private Map<String, String> additionalParams;
-		private boolean onlyJson;
+		private boolean exportItemsFiles;
 
-		SettingsExporter(boolean onlyJson) {
-			this.onlyJson = onlyJson;
+		SettingsExporter(boolean exportItemsFiles) {
+			this.exportItemsFiles = exportItemsFiles;
 			items = new LinkedHashMap<>();
 			additionalParams = new LinkedHashMap<>();
 		}
@@ -1987,25 +1993,6 @@ public class SettingsHelper {
 
 		void exportSettings(File file) throws JSONException, IOException {
 			JSONObject json = createItemsJson();
-			if (onlyJson) {
-				saveJsonItems(file, json);
-			} else {
-				saveZipItems(file, json);
-			}
-		}
-
-		private void saveJsonItems(File file, JSONObject json) throws JSONException, IOException {
-			InputStream inputStream = new ByteArrayInputStream(json.toString(2).getBytes("UTF-8"));
-			OutputStream os = new BufferedOutputStream(new FileOutputStream(file), BUFFER);
-			try {
-				Algorithms.streamCopy(inputStream, os);
-			} finally {
-				Algorithms.closeStream(inputStream);
-				Algorithms.closeStream(os);
-			}
-		}
-
-		private void saveZipItems(File file, JSONObject json) throws JSONException, IOException {
 			OutputStream os = new BufferedOutputStream(new FileOutputStream(file), BUFFER);
 			ZipOutputStream zos = new ZipOutputStream(os);
 			try {
@@ -2013,20 +2000,26 @@ public class SettingsHelper {
 				zos.putNextEntry(entry);
 				zos.write(json.toString(2).getBytes("UTF-8"));
 				zos.closeEntry();
-				for (SettingsItem item : items.values()) {
-					SettingsItemWriter writer = item.getWriter();
-					if (writer != null) {
-						entry = new ZipEntry(item.getFileName());
-						zos.putNextEntry(entry);
-						writer.writeToStream(zos);
-						zos.closeEntry();
-					}
+				if (exportItemsFiles) {
+					writeItemFiles(zos);
 				}
 				zos.flush();
 				zos.finish();
 			} finally {
 				Algorithms.closeStream(zos);
 				Algorithms.closeStream(os);
+			}
+		}
+
+		private void writeItemFiles(ZipOutputStream zos) throws IOException {
+			for (SettingsItem item : items.values()) {
+				ZipEntry entry = new ZipEntry(item.getFileName());
+				zos.putNextEntry(entry);
+				SettingsItemWriter itemWriter = item.getWriter();
+				if (itemWriter != null) {
+					itemWriter.writeToStream(zos);
+				}
+				zos.closeEntry();
 			}
 		}
 
@@ -2387,10 +2380,10 @@ public class SettingsHelper {
 
 		ExportAsyncTask(@NonNull File settingsFile,
 						@Nullable SettingsExportListener listener,
-						@NonNull List<SettingsItem> items, boolean onlyJson) {
+						@NonNull List<SettingsItem> items, boolean exportItemsFiles) {
 			this.file = settingsFile;
 			this.listener = listener;
-			this.exporter = new SettingsExporter(onlyJson);
+			this.exporter = new SettingsExporter(exportItemsFiles);
 			for (SettingsItem item : items) {
 				exporter.addSettingsItem(item);
 			}
@@ -2431,23 +2424,16 @@ public class SettingsHelper {
 		new ImportAsyncTask(settingsFile, items, latestChanges, version, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public void exportSettings(@NonNull File fileDir, @NonNull String fileName, @Nullable SettingsExportListener listener, @NonNull List<SettingsItem> items) {
+	public void exportSettings(@NonNull File fileDir, @NonNull String fileName, @Nullable SettingsExportListener listener, @NonNull List<SettingsItem> items, boolean exportItemsFiles) {
 		File file = new File(fileDir, fileName + OSMAND_SETTINGS_FILE_EXT);
-		ExportAsyncTask exportAsyncTask = new ExportAsyncTask(file, listener, items, false);
-		exportAsyncTasks.put(file, exportAsyncTask);
-		exportAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-	}
-
-	public void exportPluginItems(@NonNull File pluginDir, @Nullable SettingsExportListener listener, @NonNull List<SettingsItem> items) {
-		File file = new File(pluginDir, "items.json");
-		ExportAsyncTask exportAsyncTask = new ExportAsyncTask(file, listener, items, true);
+		ExportAsyncTask exportAsyncTask = new ExportAsyncTask(file, listener, items, exportItemsFiles);
 		exportAsyncTasks.put(file, exportAsyncTask);
 		exportAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public void exportSettings(@NonNull File fileDir, @NonNull String fileName, @Nullable SettingsExportListener listener,
-							   @NonNull SettingsItem... items) {
-		exportSettings(fileDir, fileName, listener, new ArrayList<>(Arrays.asList(items)));
+	                           boolean exportItemsFiles, @NonNull SettingsItem... items) {
+		exportSettings(fileDir, fileName, listener, new ArrayList<>(Arrays.asList(items)), exportItemsFiles);
 	}
 
 	public enum ImportType {
