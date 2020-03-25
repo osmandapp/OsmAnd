@@ -1660,9 +1660,11 @@ public class SettingsHelper {
 		@Override
 		void writeItemsToJson(@NonNull JSONObject json) {
 			JSONArray jsonArray = new JSONArray();
-			if (!items.isEmpty()) {
+			if (!items.isEmpty() || !duplicateItems.isEmpty()) {
+				List<ITileSource> templates = new ArrayList<>(items);
+				templates.addAll(duplicateItems);
 				try {
-					for (ITileSource template : items) {
+					for (ITileSource template : templates) {
 						JSONObject jsonObject = new JSONObject();
 						boolean sql = template instanceof SQLiteTileSource;
 						jsonObject.put("sql", sql);

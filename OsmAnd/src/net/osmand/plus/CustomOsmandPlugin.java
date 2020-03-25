@@ -12,13 +12,16 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.SettingsHelper.AvoidRoadsSettingsItem;
 import net.osmand.plus.SettingsHelper.MapSourcesSettingsItem;
+import net.osmand.plus.SettingsHelper.PluginSettingsItem;
 import net.osmand.plus.SettingsHelper.PoiUiFilterSettingsItem;
+import net.osmand.plus.SettingsHelper.ProfileSettingsItem;
 import net.osmand.plus.SettingsHelper.QuickActionsSettingsItem;
 import net.osmand.plus.SettingsHelper.SettingsCollectListener;
 import net.osmand.plus.SettingsHelper.SettingsItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -81,7 +84,23 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 			@Override
 			public void onSettingsCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
 				if (succeed && !items.isEmpty()) {
-
+					for (Iterator<SettingsItem> iterator = items.iterator(); iterator.hasNext(); ) {
+						SettingsItem item = iterator.next();
+						if (item instanceof ProfileSettingsItem) {
+							ProfileSettingsItem profileSettingsItem = (ProfileSettingsItem) item;
+							ApplicationMode mode = profileSettingsItem.getAppMode();
+							ApplicationMode savedMode = ApplicationMode.valueOfStringKey(mode.getStringKey(), null);
+							if (savedMode != null) {
+								ApplicationMode.changeProfileAvailability(savedMode, true, app);
+							}
+							iterator.remove();
+						} else if (item instanceof PluginSettingsItem) {
+							iterator.remove();
+						} else {
+							item.setShouldReplace(true);
+						}
+					}
+					app.getSettingsHelper().importSettings(file, items, "", 1, null);
 				}
 			}
 		});
@@ -96,14 +115,14 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 						if (item instanceof QuickActionsSettingsItem) {
 							QuickActionsSettingsItem quickActionsSettingsItem = (QuickActionsSettingsItem) item;
 							List<QuickAction> quickActions = quickActionsSettingsItem.getItems();
+							QuickActionRegistry actionRegistry = app.getQuickActionRegistry();
 							for (QuickAction action : quickActions) {
-								QuickAction savedAction = app.getQuickActionRegistry().getQuickAction(app, action.getType(), action.getName(app), action.getParams());
+								QuickAction savedAction = actionRegistry.getQuickAction(app, action.getType(), action.getName(app), action.getParams());
 								if (savedAction != null) {
-									app.getQuickActionRegistry().deleteQuickAction(savedAction);
+									actionRegistry.deleteQuickAction(savedAction);
 								}
 							}
-						}
-						if (item instanceof MapSourcesSettingsItem) {
+						} else if (item instanceof MapSourcesSettingsItem) {
 							MapSourcesSettingsItem mapSourcesSettingsItem = (MapSourcesSettingsItem) item;
 							List<ITileSource> mapSources = mapSourcesSettingsItem.getItems();
 
@@ -114,20 +133,25 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 //									((SQLiteTileSource) tileSource).createDataBase();
 								}
 							}
-						}
-						if (item instanceof PoiUiFilterSettingsItem) {
+						} else if (item instanceof PoiUiFilterSettingsItem) {
 							PoiUiFilterSettingsItem poiUiFilterSettingsItem = (PoiUiFilterSettingsItem) item;
 							List<PoiUIFilter> poiUIFilters = poiUiFilterSettingsItem.getItems();
 							for (PoiUIFilter filter : poiUIFilters) {
 								app.getPoiFilters().removePoiFilter(filter);
 							}
 							app.getSearchUICore().refreshCustomPoiFilters();
-						}
-						if (item instanceof AvoidRoadsSettingsItem) {
+						} else if (item instanceof AvoidRoadsSettingsItem) {
 							AvoidRoadsSettingsItem avoidRoadsSettingsItem = (AvoidRoadsSettingsItem) item;
 							List<AvoidSpecificRoads.AvoidRoadInfo> avoidRoadInfos = avoidRoadsSettingsItem.getItems();
 							for (AvoidSpecificRoads.AvoidRoadInfo avoidRoad : avoidRoadInfos) {
 								app.getAvoidSpecificRoads().removeImpassableRoad(avoidRoad);
+							}
+						} else if (item instanceof ProfileSettingsItem) {
+							ProfileSettingsItem profileSettingsItem = (ProfileSettingsItem) item;
+							ApplicationMode mode = profileSettingsItem.getAppMode();
+							ApplicationMode savedMode = ApplicationMode.valueOfStringKey(mode.getStringKey(), null);
+							if (savedMode != null) {
+								ApplicationMode.changeProfileAvailability(savedMode, false, app);
 							}
 						}
 					}
@@ -183,11 +207,6 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	@Override
 	public int getAssetResourceName() {
 		return R.drawable.contour_lines;
-	}
-
-	@Override
-	public int getLogoResourceId() {
-		return R.drawable.ic_action_skiing;
 	}
 
 	public void readAdditionalDataFromJson(JSONObject json) throws JSONException {
