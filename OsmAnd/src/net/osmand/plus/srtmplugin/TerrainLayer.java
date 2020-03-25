@@ -59,12 +59,13 @@ public class TerrainLayer extends MapTileLayer {
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
 		int zoom = tileBox.getZoom();
+		int transparency = 255 - (int) (2.55 * srtmPlugin.getTerrainTransparency());
 		if (zoom >= srtmPlugin.getTerrainMinZoom() && zoom <= srtmPlugin.getTerrainMaxZoom()) {
-			setAlpha(srtmPlugin.getTerrainTransparency());
+			setAlpha(transparency);
 			super.onPrepareBufferImage(canvas, tileBox, drawSettings);
 		} else if(zoom > srtmPlugin.getTerrainMaxZoom()) {
 			// backward compatibility 100 -> 20 with overscale
-			setAlpha(srtmPlugin.getTerrainTransparency() / 5);
+			setAlpha(transparency / 5);
 			super.onPrepareBufferImage(canvas, tileBox, drawSettings);
 		} else {
 			// ignore
