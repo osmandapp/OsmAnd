@@ -1006,7 +1006,11 @@ public class SettingsHelper {
 			public static FileSubtype getSubtypeByFileName(@NonNull String fileName) {
 				String name = fileName.substring(1);
 				for (FileSubtype subtype : FileSubtype.values()) {
-					if (subtype != UNKNOWN && name.startsWith(subtype.subtypeFolder)) {
+					if (subtype == ROUTING_CONFIG || subtype == RENDERING_STYLE) {
+						if (name.startsWith(subtype.subtypeFolder) || name.startsWith(subtype.subtypeName)) {
+							return subtype;
+						}
+					} else if (subtype != UNKNOWN && name.startsWith(subtype.subtypeFolder)) {
 						return subtype;
 					}
 				}
