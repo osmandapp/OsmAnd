@@ -90,21 +90,14 @@ public abstract class PointEditor {
 		if (mapActivity != null) {
 			Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(getFragmentTag());
 			if (fragment != null) {
-				if (!checkNewUiFragment(fragment, name, color)) { //todo remove "if" after switch to new UI
+				if (fragment instanceof PointEditorFragment) {
 					PointEditorFragment editorFragment = (PointEditorFragment) fragment;
+					editorFragment.setCategory(name, color);
+				} else if (fragment instanceof PointEditorFragmentNew) {
+					PointEditorFragmentNew editorFragment = (PointEditorFragmentNew) fragment;
 					editorFragment.setCategory(name, color);
 				}
 			}
 		}
-	}
-
-	//todo remove after switch to new UI
-	private boolean checkNewUiFragment(Fragment fragment, String name, int color) {
-		if (fragment instanceof PointEditorFragmentNew) {
-			PointEditorFragmentNew editorFragment = (PointEditorFragmentNew) fragment;
-			editorFragment.setCategory(name, color);
-			return true;
-		}
-		return false;
 	}
 }

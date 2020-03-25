@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.GPXUtilities;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -136,9 +137,9 @@ public class FavoriteImageDrawable extends Drawable {
 		}
 	}
 
-	public void drawBitmap(@NonNull Canvas canvas, Rect bs, Bitmap syncedShadow, Paint paintBackground) {
-		canvas.drawBitmap(syncedShadow, bs.exactCenterX() - syncedShadow.getWidth() / 2f,
-				bs.exactCenterY() - syncedShadow.getHeight() / 2f, paintBackground);
+	public void drawBitmap(@NonNull Canvas canvas, Rect bs, Bitmap bitmap, Paint paintBackground) {
+		canvas.drawBitmap(bitmap, bs.exactCenterX() - bitmap.getWidth() / 2f,
+				bs.exactCenterY() - bitmap.getHeight() / 2f, paintBackground);
 	}
 
 	public void drawBitmapInCenter(Canvas canvas, float x, float y, boolean history) {
@@ -206,7 +207,7 @@ public class FavoriteImageDrawable extends Drawable {
 		if (pt != null) {
 			point = new FavouritePoint(pt.getLatitude(), pt.getLongitude(), pt.name, pt.category);
 			point.setIconIdFromName(a, pt.getIconName());
-			point.setBackgroundType(FavouritePoint.BackgroundType.valueOf(pt.getBackgroundType()));
+			point.setBackgroundType(BackgroundType.getByTypeName(pt.getBackgroundType(), BackgroundType.CIRCLE));
 		}
 		return point;
 	}

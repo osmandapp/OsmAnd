@@ -15,7 +15,7 @@ import androidx.fragment.app.DialogFragment;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.data.FavouritePoint;
+import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.GpxSelectionHelper;
@@ -51,7 +51,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	protected boolean skipDialog;
 	private String iconName;
 	@NonNull
-	private String backgroundTypeName = FavouritePoint.BackgroundType.CIRCLE.name();
+	private String backgroundTypeName = BackgroundType.CIRCLE.getTypeName();
 
 	private Map<String, Integer> categoriesMap;
 	private OsmandApplication app;
@@ -357,7 +357,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	}
 
 	@Override
-	public void setBackgroundType(FavouritePoint.BackgroundType backgroundType) {
+	public void setBackgroundType(BackgroundType backgroundType) {
 		this.backgroundTypeName = backgroundType.name();
 	}
 
@@ -419,8 +419,8 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	}
 
 	@Override
-	public FavouritePoint.BackgroundType getBackgroundType() {
-		return FavouritePoint.BackgroundType.valueOf(backgroundTypeName);
+	public BackgroundType getBackgroundType() {
+		return BackgroundType.getByTypeName(backgroundTypeName, BackgroundType.CIRCLE);
 	}
 
 	@Override
@@ -439,7 +439,13 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 
 	@Override
 	public int getCategoryColor(String category) {
-		return categoriesMap != null ? categoriesMap.get(category) : defaultColor;
+		if (categoriesMap != null) {
+			Integer color = categoriesMap.get(category);
+			if (color != null) {
+				return color;
+			}
+		}
+		return defaultColor;
 	}
 
 	@Override

@@ -93,10 +93,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	public int getIconId() {
-		if (iconId == 0) {
-			return R.drawable.mx_special_star;
-		}
-		return iconId;
+		return iconId == 0 ? R.drawable.mx_special_star : iconId;
 	}
 
 	public String getIconEntryName(Context ctx) {
@@ -201,10 +198,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	public BackgroundType getBackgroundType() {
-		if (backgroundType == null) {
-			return BackgroundType.CIRCLE;
-		}
-		return backgroundType;
+		return backgroundType == null ? BackgroundType.CIRCLE : backgroundType;
 	}
 
 	public void setBackgroundType(BackgroundType backgroundType) {
@@ -323,6 +317,19 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		public int getIconId() {
 			return iconId;
 		}
+
+		public String getTypeName() {
+			return typeName;
+		}
+
+		public static BackgroundType getByTypeName(String typeName, BackgroundType defaultValue) {
+			for (BackgroundType type : BackgroundType.values()) {
+				if (type.typeName.equals(typeName)) {
+					return type;
+				}
+			}
+			return defaultValue;
+		}
 	}
 
 	public static FavouritePoint fromWpt(@NonNull WptPt pt, @NonNull Context ctx) {
@@ -344,7 +351,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		if (iconName != null) {
 			fp.setIconIdFromName(ctx, iconName);
 		}
-		fp.setBackgroundType(BackgroundType.valueOf((pt.getBackgroundType().toUpperCase())));
+		BackgroundType backgroundType = BackgroundType.getByTypeName(pt.getBackgroundType(), BackgroundType.CIRCLE);
+		fp.setBackgroundType(backgroundType);
 		return fp;
 	}
 

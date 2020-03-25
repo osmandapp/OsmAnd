@@ -82,7 +82,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	private LinkedHashMap<String, JSONArray> group;
 	private OsmandApplication app;
 
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {

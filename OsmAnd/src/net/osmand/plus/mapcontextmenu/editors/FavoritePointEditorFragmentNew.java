@@ -18,6 +18,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
@@ -43,7 +44,7 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 	private int color;
 	private int iconId;
 	@NonNull
-	private FavouritePoint.BackgroundType backgroundType = FavouritePoint.BackgroundType.CIRCLE;
+	private BackgroundType backgroundType = BackgroundType.CIRCLE;
 
 	@Nullable
 	FavouritesDbHelper helper;
@@ -118,16 +119,7 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-
 		if (autoFill) {
-
-//			String name = favorite.getName() != null && !favorite.getName().isEmpty() ?
-//					favorite.getName() : getString(R.string.favorite_empty_place_name);
-//
-//			String tostText = name + getString(R.string.favorite_autofill_toast_text) + group.name;
-//
-//			Toast.makeText(getContext(), tostText, Toast.LENGTH_SHORT).show();
-
 			save(true);
 		}
 	}
@@ -185,7 +177,7 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 	}
 
 	@Override
-	public void setBackgroundType(@NonNull FavouritePoint.BackgroundType backgroundType) {
+	public void setBackgroundType(@NonNull BackgroundType backgroundType) {
 		this.backgroundType = backgroundType;
 	}
 
@@ -281,7 +273,7 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 	}
 
 	private void doSave(FavouritePoint favorite, String name, String category, String description,
-	                    @ColorInt int color, FavouritePoint.BackgroundType backgroundType, @DrawableRes int iconId, boolean needDismiss) {
+	                    @ColorInt int color, BackgroundType backgroundType, @DrawableRes int iconId, boolean needDismiss) {
 		FavouritesDbHelper helper = getHelper();
 		FavoritePointEditor editor = getFavoritePointEditor();
 		if (editor != null && helper != null) {
@@ -311,7 +303,7 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 	}
 
 	private void doAddFavorite(String name, String category, String description, @ColorInt int color,
-	                           FavouritePoint.BackgroundType backgroundType, @DrawableRes int iconId) {
+	                           BackgroundType backgroundType, @DrawableRes int iconId) {
 		OsmandApplication app = getMyApplication();
 		FavouritesDbHelper helper = getHelper();
 		FavouritePoint favorite = getFavorite();
@@ -414,7 +406,7 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 
 	@Override
 	@NonNull
-	public FavouritePoint.BackgroundType getBackgroundType() {
+	public BackgroundType getBackgroundType() {
 		return backgroundType;
 	}
 
