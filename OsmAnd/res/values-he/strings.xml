@@ -3528,4 +3528,19 @@
     <string name="restore_all_profile_settings">לשחזר את כל הגדרות הפרופיל\?</string>
     <string name="saving_new_profile">שמירת פרופיל חדש</string>
     <string name="profile_backup_failed">לא ניתן לגבות את הפרופיל.</string>
+    <string name="routing_profile_direct_to">ישירות לנקודה</string>
+    <string name="shared_string_routing">ניתוב</string>
+    <string name="listed_exist">%1$s מוצג, כבר קיים ב־OsmAnd.</string>
+    <string name="clear_recorded_data_warning">למחוק את הנתונים שהוקלטו\?</string>
+    <string name="importing_from">מיובאים נתונים מתוך %1</string>
+    <string name="shared_string_importing">מתבצע ייבוא</string>
+    <string name="checking_for_duplicate_description">OsmAnd יחפש כפילויות של %1$s עם פריטים קיימים ביישומון.
+\n
+\nהתהליך עשוי לארוך זמן מה.</string>
+    <string name="items_added">נוספו פריטים</string>
+    <string name="shared_string_import_complete">הייבוא הושלם</string>
+    <string name="import_complete_description">כל הנתונים מתוך %1$s כבר ייובאו, ניתן להשתמש בכפתור שלהלן כדי לפתוח את החלק הנחוץ ביישומון כדי לנהל זאת.</string>
+    <string name="recalculate_route_distance_promo">המסלול יחושב מחדש אם המרחק מהמסלול למיקום הנוכחי עובר את הערך הנבחר.</string>
+    <string name="select_distance_route_will_recalc">נא לבחור את המרחק שלאחריו המסלול יחושב מחדש.</string>
+    <string name="recalculate_route_in_deviation">חישוב המסלול מחדש במקרה של סטייה</string>
 </resources>

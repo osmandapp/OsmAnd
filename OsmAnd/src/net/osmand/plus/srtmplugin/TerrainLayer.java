@@ -45,6 +45,7 @@ public class TerrainLayer extends MapTileLayer {
 	private TerrainMode mode;
 
 	private QuadTree<String> indexedResources = new QuadTree<String>(new QuadRect(0, 0, 1 << (ZOOM_BOUNDARY+1), 1 << (ZOOM_BOUNDARY+1)), 8, 0.55f);
+	private final int defaultAlpha;
 
 	public TerrainLayer(MapActivity activity, SRTMPlugin srtmPlugin) {
 		super(false);
@@ -52,7 +53,8 @@ public class TerrainLayer extends MapTileLayer {
 		this.srtmPlugin = srtmPlugin;
 		mode = srtmPlugin.getTerrainMode();
 		indexTerrainFiles(app);
-		setAlpha(DEFAULT_ALPHA);
+		indexHillshadeFiles(app);
+		setAlpha(defaultAlpha);
 		setMap(createTileSource(activity));
 	}
 
@@ -67,7 +69,7 @@ public class TerrainLayer extends MapTileLayer {
 			setAlpha(srtmPlugin.getTerrainTransparency() / 5);
 			super.onPrepareBufferImage(canvas, tileBox, drawSettings);
 		} else {
-			// ignore 
+			// ignore
 		}
 
 	}
