@@ -11,6 +11,13 @@
 	Thx - Hardy
 
 -->
+    <string name="divider_descr">Elements below this point separated by a divider.</string>
+    <string name="shared_string_divider">Divider</string>
+    <string name="reorder_or_hide_from">Reorder or hide items from the %1$s.</string>
+    <string name="context_menu_actions">Context menu actions</string>
+    <string name="shared_string_drawer">Drawer</string>
+    <string name="ui_customization">UI Customization</string>
+    <string name="ui_customization_description">Customize the quantity of items in Drawer, Configure map and context menu.\n\nYou can disable unused plugins, to hide all its controls from the application.</string>
     <string name="clear_recorded_data_warning">Are you sure you want to clear recorded data?</string>
     <string name="restore_all_profile_settings_descr">All profile settings will be restored to their original state after creating/importing this profile.</string>
     <string name="restore_all_profile_settings">Restore all profile settings?</string>

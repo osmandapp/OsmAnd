@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<ImageView
+		android:id="@+id/image"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:adjustViewBounds="true"
+		tools:src="@drawable/img_settings_customize_configure_map_night" />
+
+	<TextView
+		android:id="@+id/description"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="@dimen/content_padding"
+		android:textColor="?android:textColorSecondary"
+		android:textSize="@dimen/default_desc_text_size"
+		tools:text="@string/ui_customization_description" />
+
+</LinearLayout>

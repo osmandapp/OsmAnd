@@ -71,6 +71,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	private static final String EXPORT_PROFILE = "export_profile";
 	private static final String DELETE_PROFILE = "delete_profile";
 	private static final String PROFILE_APPEARANCE = "profile_appearance";
+	private static final String UI_CUSTOMIZATION = "ui_customization";
 
 	@ColorRes
 	protected int getBackgroundColorRes() {
@@ -273,6 +274,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		setupConfigureMapPref();
 		setupConfigureScreenPref();
 		setupProfileAppearancePref();
+		setupUiCustomizationPref();
 
 		PreferenceCategory pluginSettings = (PreferenceCategory) findPreference(PLUGIN_SETTINGS);
 		setupOsmandPluginsPref(pluginSettings);
@@ -380,6 +382,17 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 
 			preferenceCategory.addPreference(preference);
 		}
+	}
+
+	private void setupUiCustomizationPref() {
+		Context ctx = getContext();
+		if (ctx == null) {
+			return;
+		}
+		Preference uiCustomization = findPreference(UI_CUSTOMIZATION);
+//		TODO change icon
+		uiCustomization.setIcon(getContentIcon(getSelectedAppMode().getIconRes()));
+		uiCustomization.setFragment(UiCustomizationRootFragment.TAG);
 	}
 
 	@Override
