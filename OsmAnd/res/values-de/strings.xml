@@ -3136,10 +3136,10 @@ Lon %2$s</string>
     <string name="routing_attr_freeride_policy_description">Freerides und Strecken abseits der Piste sind inoffizielle Routen und Passagen. Typischerweise unpräpariert, nicht gewartet und abends nicht kontrolliert. Betreten auf eigene Gefahr.</string>
     <string name="press_again_to_change_the_map_orientation">Erneut antippen, um die Kartenausrichtung zu ändern</string>
     <string name="quick_action_need_to_add_item_to_list">Sie müssen mindestens einen Eintrag in die Liste der Schnellaktionseinstellungen hinzufügen</string>
-    <string name="shared_string_min_speed">Mindesttempo</string>
-    <string name="shared_string_max_speed">Maximaltempo</string>
-    <string name="default_speed_setting_title">Standardtempo</string>
-    <string name="default_speed_setting_descr">Einstellungen des Standardtempos ändern</string>
+    <string name="shared_string_min_speed">Min. Geschwindigkeit</string>
+    <string name="shared_string_max_speed">Max. Geschwindigkeit</string>
+    <string name="default_speed_setting_title">Std. Geschwindigkeit</string>
+    <string name="default_speed_setting_descr">Standard-Einstellungen für Geschwindigkeiten</string>
     <string name="minmax_speed_dialog_title">Min./Max. Tempo einstellen</string>
     <string name="new_profile">Neues Profil</string>
     <string name="shared_string_crash">Absturz</string>
@@ -3173,7 +3173,7 @@ Lon %2$s</string>
     <string name="routing_attr_allow_skating_only_description">Nur für Freestyle oder Skating präparierte Routen, keine klassischen Loipen.</string>
     <string name="routing_attr_allow_classic_only_description">Für den klassischen Stil präparierte Loipen, keine Skating-Pisten. Einschließlich durch kleinere Schneemobile präparierte Routen mit lockerer Piste und durch Skifahrer selbstgespurte Bahnen.</string>
     <string name="app_mode_ufo">UFO</string>
-    <string name="app_mode_personal_transporter">Segway Personal Transporter</string>
+    <string name="app_mode_personal_transporter">Einpersonen-Transportmittel</string>
     <string name="edit_profile_setup_title">Profil einrichten</string>
     <string name="edit_profile_setup_subtitle">Das Profil behält seine eigenen Einstellungen bei</string>
     <string name="edit_profile_setup_map_subtitle">Kartenoptionen für das Profil auswählen</string>
@@ -3415,8 +3415,8 @@ Lon %2$s</string>
     <string name="shared_string_downloading_formatted">%s herunterladen</string>
     <string name="rendering_value_thick_name">Fett</string>
     <string name="desert_render_descr">Für Wüsten und andere dünn besiedelte Gebiete. Umfangreicher.</string>
-    <string name="select_navigation_icon">Positionssymbol während der Bewegung</string>
-    <string name="select_map_icon">Positionssymbol in Ruhe</string>
+    <string name="select_navigation_icon">Positionssymbol in Bewegung</string>
+    <string name="select_map_icon">Positionssymbol im Ruhezustand</string>
     <string name="delete_profiles_descr">Durch Tippen auf \'Anwenden\' werden entfernte Profile dauerhaft gelöscht.</string>
     <string name="master_profile">Hauptprofil</string>
     <string name="select_color">Farbe wählen</string>
@@ -3451,7 +3451,7 @@ Lon %2$s</string>
     <string name="select_nav_icon_descr">Symbol, das beim Navigieren oder Bewegen angezeigt wird.</string>
     <string name="multimedia_notes_view_descr">Ihre OSM-Notizen sind in %1$s.</string>
     <string name="button_rate">Bewerten</string>
-    <string name="logcat_buffer_descr">Protokolle der Anwendung sehen und freigeben</string>
+    <string name="logcat_buffer_descr">Protokolle der Anwendung einsehen und freigeben</string>
     <string name="permission_is_required">Für die Verwendung dieser Option ist eine Berechtigung erforderlich.</string>
     <string name="file_does_not_contain_routing_rules">Die Datei \'%1$s\' enthält keine Routing-Regeln. Bitte eine andere Datei wählen.</string>
     <string name="monitoring_min_speed_descr">Dies ist ein Filter, welcher Punkte unter einer gewissen Geschwindigkeit nicht aufzeichnet. Dadurch können aufgezeichnete Tracks auf der Karte gleichmäßiger aussehen.</string>
@@ -3462,7 +3462,7 @@ Lon %2$s</string>
     <string name="live_monitoring_adress">Webadresse</string>
     <string name="live_monitoring_adress_descr">Webadresse angeben mit der Parametersyntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Benachrichtigung</string>
-    <string name="monitoring_min_speed">Mindesttempo</string>
+    <string name="monitoring_min_speed">Min. Geschwindigkeit</string>
     <string name="monitoring_min_accuracy">Minimale Genauigkeit</string>
     <string name="monitoring_min_distance">Minimale Verschiebung</string>
     <string name="reset_plugin_to_default">Plugin-Einstellungen auf Voreinstellung zurücksetzen</string>
@@ -3491,7 +3491,7 @@ Lon %2$s</string>
     <string name="live_monitoring">Online-Aufzeichnung</string>
     <string name="clear_recorded_data">Aufgezeichnete Daten löschen</string>
     <string name="copy_coordinates">Koordinaten kopieren</string>
-    <string name="monitoring_min_speed_descr_remark">Bemerkung: Geschwindigkeit &gt; 0 Kontrolle: Die meisten GPS-Chipsätze geben nur dann einen Geschwindigkeitswert an, wenn der Algorithmus feststellt, dass Sie in Bewegung sind, und keinen, wenn Sie nicht in Bewegung sind. Die Verwendung der Einstellung &gt; 0 in diesem Filter nutzt also gewissermaßen die Bewegungserkennung des GPS-Chipsatzes. Aber selbst wenn nicht zur Aufnahmezeit gefiltert wurde, verwenden wir diese Funktion in unserer GPX-Analyse, um die Distanz korrigiert zu bestimmen, d. h., der in diesem Feld angezeigte Wert ist die während der Bewegung aufgezeichnete Distanz.</string>
+    <string name="monitoring_min_speed_descr_remark">Bemerkung: Geschwindigkeit &gt; 0 Kontrolle: Die meisten GPS-Chipsätze geben nur dann einen Geschwindigkeitswert an, wenn der Algorithmus feststellt, dass Sie in Bewegung sind, und keinen, wenn Sie nicht in Bewegung sind. Die Verwendung der Einstellung &gt; 0 in diesem Filter nutzt also gewissermaßen die Bewegungserkennung des GPS-Chipsatzes. Aber selbst wenn nicht zur Aufnahmezeit gefiltert wurde, verwenden wir diese Funktion in unserer GPX-Analyse, um die Distanz korrigiert zu bestimmen, das heißt, der in diesem Feld angezeigte Wert ist die während der Bewegung aufgezeichnete Distanz.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Nebeneffekt: Als Ergebnis der Filterung nach Genauigkeit können Punkte z. B. unter Brücken, unter Bäumen, zwischen hohen Gebäuden oder bei bestimmten Wetterbedingungen ganz fehlen.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Empfehlung: Es ist schwer vorherzusagen, was aufgezeichnet wird und was nicht, es ist vielleicht am besten, diesen Filter auszuschalten.</string>
     <string name="monitoring_min_distance_descr">Dieser Filter verhindert, dass doppelte Punkte aufgenommen werden, bei denen möglicherweise zu wenig tatsächliche Bewegung stattgefunden hat. Er sorgt für ein schöneres räumliches Erscheinungsbild von Spuren, die später nicht nachbearbeitet werden.</string>
