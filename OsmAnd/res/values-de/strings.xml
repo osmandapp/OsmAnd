@@ -2085,7 +2085,7 @@ Lon %2$s</string>
     <string name="trip_rec_notification_settings">Schnellaufzeichnung einschalten</string>
     <string name="trip_rec_notification_settings_desc">Anzeige einer Systembenachrichtigung zum Starten der Streckenaufzeichnung.</string>
     <string name="shared_string_notifications">Benachrichtigungen</string>
-    <string name="gpx_appearance">Aussehen</string>
+    <string name="shared_string_appearance">Aussehen</string>
     <string name="route_calculation">Routenberechnung</string>
     <string name="gpx_no_tracks_title">Sie haben noch keine GPX-Dateien</string>
     <string name="gpx_no_tracks_title_folder">GPX-Dateien können dem Ordner hinzugefügt werden</string>
@@ -2723,7 +2723,7 @@ Lon %2$s</string>
     <string name="wikivoyage_download_pics">Bilder herunterladen</string>
     <string name="wikivoyage_download_pics_descr">Artikelbilder können für den Offline-Einsatz heruntergeladen werden. 
 \nImmer verfügbar unter \'Durchsuchen → Optionen\'.</string>
-    <string name="online_webpage_warning">Seite ist nur online abrufbar. Im Webbrowser öffnen?</string>
+    <string name="online_webpage_warning">Seite nur online verfügbar. Im Webbrowser öffnen\?</string>
     <string name="delete_search_history">Suchverlauf löschen</string>
     <string name="purchase_dialog_travel_description">Für die Offline-Reiseführerfunktionalität kaufen Sie einen der folgenden Artikel:</string>
     <string name="purchase_dialog_subtitle">Passenden Artikel auswählen</string>
@@ -3473,7 +3473,7 @@ Lon %2$s</string>
     <string name="sunset_at">Sonnenuntergang um %1$s</string>
     <string name="sunrise_at">Sonnenaufgang um %1$s</string>
     <string name="rearrange_categories">Kategorien neu ordnen</string>
-    <string name="create_custom_categories_list_promo">Sie können benutzerdefinierte Kategorien hinzufügen, nicht benötigte Kategorien ausblenden und die Sortierung der Liste ändern. Die Liste kann mit Profilen importiert und exportiert werden.</string>
+    <string name="create_custom_categories_list_promo">Ändern Sie die Sortierung der Liste, blenden Sie unnötige Kategorien aus. Sie können alle Änderungen mit Profilen importieren oder exportieren.</string>
     <string name="add_new_custom_category_button_promo">Sie können eine neue benutzerdefinierte Kategorie hinzufügen, indem Sie eine oder mehrere benötigte Kategorien auswählen.</string>
     <string name="rendering_attr_streetLightingNight_name">Nur nachts anzeigen</string>
     <string name="plugin_prefs_reset_successful">Alle Plugin-Einstellungen werden auf den Standardzustand zurückgesetzt.</string>
@@ -3562,11 +3562,27 @@ Lon %2$s</string>
     <string name="replace_all_desc">Aktuelle Elemente werden durch Elemente aus der Datei ersetzt</string>
     <string name="replace_all">Alle ersetzen</string>
     <string name="keep_both">Beide behalten</string>
-    <string name="keep_both_desc">Importierte Elemente werden mit Prefix hinzugefügt</string>
+    <string name="keep_both_desc">Importierte Elemente werden mit Präfix hinzugefügt</string>
     <string name="import_duplicates_description">OsmAnd verfügt bereits über Elemente mit denselben Namen wie die importierten.
 \n
 \nWählen Sie eine Aktion aus.</string>
     <string name="import_duplicates_title">Einige Elemente sind bereits vorhanden</string>
     <string name="select_data_to_import">Wählen Sie die zu importierenden Daten aus.</string>
     <string name="shared_string_rendering_style">Darstellungsstil</string>
+    <string name="restore_all_profile_settings_descr">Alle Profileinstellungen werden nach dem Erstellen/Importieren dieses Profils wieder in ihren ursprünglichen Zustand versetzt.</string>
+    <string name="restore_all_profile_settings">Alle Profileinstellungen wiederherstellen\?</string>
+    <string name="saving_new_profile">Neues Profil wird gespeichert</string>
+    <string name="profile_backup_failed">Konnte das Profil nicht sichern.</string>
+    <string name="import_rendering_file">Rendering-Datei importieren</string>
+    <string name="importing_from">Daten aus %1$s importieren</string>
+    <string name="shared_string_importing">Importieren</string>
+    <string name="checking_for_duplicate_description">OsmAnd überprüft %1$s auf Duplikate mit bereits vorhandenen Objekten in der Anwendung.
+\n
+\nDas kann einige Zeit dauern.</string>
+    <string name="items_added">Elemente hinzugefügt</string>
+    <string name="shared_string_import_complete">Import abgeschlossen</string>
+    <string name="clear_recorded_data_warning">Sind Sie sicher, dass Sie die aufgezeichneten Daten löschen möchten\?</string>
+    <string name="select_distance_route_will_recalc">Wählen Sie die Entfernung, nach der die Route neu berechnet wird.</string>
+    <string name="recalculate_route_in_deviation">Neuberechnung der Route im Falle einer Abweichung</string>
+    <string name="recalculate_route_distance_promo">Die Route wird neu berechnet, wenn die Entfernung von der Route zur aktuellen Position größer als der ausgewählte Wert ist.</string>
 </resources>

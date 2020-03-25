@@ -184,7 +184,7 @@
     <string name="download_using_mobile_internet">به وای‌فای وصل نیستید. با همین اتصال اینترنتی دانلود می‌کنید؟</string>
     <string name="item_checked">انتخاب‌شده</string>
     <string name="item_unchecked">انتخاب‌نشده</string>
-    <string name="prefer_in_routing_title">ترجیح‌دادن…</string>
+    <string name="prefer_in_routing_title">ترجیحِ…</string>
     <string name="local_indexes_cat_av">داده‌های صوتی/تصویری</string>
     <string name="precise_routing_mode">مسیریابی دقیق (آلفا)</string>
     <string name="recording_photo_description">تصویر %1$s از %2$s</string>
@@ -519,7 +519,7 @@
     <string name="monitoring_settings_descr">شیوهٔ ضبط سفرهای خود را تنظیم کنید.</string>
     <string name="shared_string_more_actions">کنش‌های بیشتر</string>
     <string name="prefer_motorways">ترجیح آزادراه‌ها</string>
-    <string name="prefer_in_routing_descr">آزادراه‌ها را ترجیح می‌دهم.</string>
+    <string name="prefer_in_routing_descr">اولویت را به آزادراه‌ها را می‌دهد.</string>
     <string name="local_indexes_cat_srtm">منحنی‌های میزان</string>
     <string name="precise_routing_mode_descr">محاسبهٔ مسیرهایی دقیق و بدون اشکال. البته این حالت محدودیت مسافت دارد و کُند است.</string>
     <string name="recording_context_menu_show">نشان بده</string>
@@ -1128,7 +1128,7 @@
     <string name="copying_osmand_files">در حال کپی فایل‌های دادهٔ OsmAnd…</string>
     <string name="calculate_osmand_route_gpx">مسیریابی آفلاین OsmAnd</string>
     <string name="routing_attr_prefer_motorway_name">ترجیح آزادراه‌ها</string>
-    <string name="routing_attr_prefer_motorway_description">آزادراه‌ها را ترجیح می‌دهم</string>
+    <string name="routing_attr_prefer_motorway_description">اولویت را به آزادراه‌ها می‌دهد</string>
     <string name="routing_attr_avoid_toll_name">جادهٔ عوارضی‌دار</string>
     <string name="routing_attr_avoid_toll_description">از جاده‌های عوارضی‌دار پرهیز می‌کند</string>
     <string name="routing_attr_avoid_unpaved_name">مسیر روسازی‌نشده (خاکی)</string>
@@ -1842,7 +1842,7 @@
     <string name="upload_poi">آپلود POI</string>
     <string name="route_calculation">محاسبهٔ مسیر</string>
     <string name="gpx_add_track">بیشتر بیفزایید…</string>
-    <string name="gpx_appearance">ظاهر</string>
+    <string name="shared_string_appearance">ظاهر</string>
     <string name="trip_rec_notification_settings">روشن‌کردن ضبط فوری</string>
     <string name="shared_string_notifications">اعلان‌ها</string>
     <string name="shared_string_continue">ادامه</string>
@@ -2403,7 +2403,7 @@
     <string name="saved_at_time">در %1$s ذخیره شد</string>
     <string name="quick_action_interim_dialog">کادری برای تنظیم آن نشان بده</string>
     <string name="quick_action_add_create_items">دکمه‌هایی را اضافه کنید</string>
-    <string name="quick_action_page_list_descr">دکمه‌ای برای چرخیدن بین یکی از موارد موجود در لیست زیر.</string>
+    <string name="quick_action_page_list_descr">دکمه‌ای برای گردش در لیست زیر.</string>
     <string name="quick_action_map_style_action">افزودن یک سبک نقشه</string>
     <string name="empty_state_my_tracks">فایل GPX اضافه کنید</string>
     <string name="empty_state_my_tracks_desc">فایل GPX درون‌برد کنید یا رد خود را ضبط کنید.</string>
@@ -3358,7 +3358,7 @@
     <string name="shared_string_memory_used_kb_desc">استفاده‌شده %1$s کیلوبایت</string>
     <string name="contour_lines_and_hillshade">سایه‌روشن و منحنی‌های میزان</string>
     <string name="routing_attr_prefer_unpaved_name">ترجیح جاده‌های روسازی‌نشده</string>
-    <string name="routing_attr_prefer_unpaved_description">جاده‌های روسازی‌نشده را ترجیح می‌دهم.</string>
+    <string name="routing_attr_prefer_unpaved_description">اولویت را به جاده‌های روسازی‌نشده می‌دهد.</string>
     <string name="update_all_maps">به‌روزرسانی همهٔ نقشه‌ها</string>
     <string name="update_all_maps_q">آیا همهٔ نقشه‌ها (%1$d) را به‌روز می‌کنید؟</string>
     <string name="release_3_5">• تنظیمات برنامه و پروفایل‌ها به‌روز شد: تنظیمات بر اساس نوع مرتب شده‌اند و امکان شخصی‌سازی هر پروفایل اضافه شده است. 
@@ -3381,7 +3381,7 @@
     <string name="apply_preference_to_all_profiles">این تنظیم را می‌توانید بر همهٔ پروفایل‌ها یا فقط بر پروفایل جاری به کار ببندید.</string>
     <string name="shared_preference">مشترک</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">ترجیح جاده‌های روسازی‌نشده</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_description">جاده‌های روسازی‌نشده را به روسازی‌شده ترجیح می‌دهم.</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">در مسیریابی، جاده‌های روسازی‌نشده را به روسازی‌شده ترجیح می‌دهد.</string>
     <string name="layer_osm_edits">ویرایش‌های OSM</string>
     <string name="quick_action_contour_lines_descr">دکمه‌ای برای آشکار/پنهان کردن منحنی‌های میزان روی نقشه.</string>
     <string name="quick_action_contour_lines_show">نشان‌دادن منحنی‌های میزان</string>
@@ -3507,8 +3507,8 @@
     <string name="multimedia_photo_play_sound">صدای شاتر دوربین</string>
     <string name="osm_authorization_success">احراز هویت موفقیت‌آمیز بود</string>
     <string name="rearrange_categories">مرتب‌سازی دسته‌ها</string>
-    <string name="create_custom_categories_list_promo">می‌توانید دسته‌های سفارشی بیفزایید، دسته‌های غیرلازم را مخفی کنید و ترتیب لیست را تغییر دهید. لیست را می‌توانید همراه پروفایل‌ها برون‌برد یا درون‌برد کنید.</string>
-    <string name="add_new_custom_category_button_promo">با انتخاب یک یا چند دسته می‌توانید یک دستهٔ تازه بیفزایید.</string>
+    <string name="create_custom_categories_list_promo">ترتیب لیست را تغییر دهید، دسته‌های غیرلازم را مخفی کنید. می‌توانید همهٔ تغییرات را همراه پروفایل‌ها برون‌برد یا درون‌برد کنید.</string>
+    <string name="add_new_custom_category_button_promo">با انتخاب یک یا چند دستهٔ موردنیاز می‌توانید یک دستهٔ سفارشیِ تازه بیفزایید.</string>
     <string name="reset_to_default_category_button_promo">بازنشانی به پیشفرض، ترتیب را به حالت اولیهٔ پس از نصب برمی‌گرداند.</string>
     <string name="add_custom_category">افزودن دستهٔ سفارشی</string>
     <string name="rendering_attr_streetLightingNight_name">فقط هنگام شب نشان بده</string>
@@ -3589,4 +3589,23 @@
     <string name="import_duplicates_title">برخی موارد وجود دارند</string>
     <string name="select_data_to_import">دادهٔ موردنظر را برای درون‌برد انتخاب کنید.</string>
     <string name="shared_string_rendering_style">سبک رندر</string>
+    <string name="import_rendering_file">درون‌برد فایل render</string>
+    <string name="restore_all_profile_settings_descr">پس از درون‌برد/ایجاد این پروفایل همهٔ تنظیمات آن به حالت اولیه بازمی‌گردد.</string>
+    <string name="restore_all_profile_settings">همهٔ تنظیمات پروفایل بازگردد؟</string>
+    <string name="saving_new_profile">در حال ذخیرهٔ پروفایل تازه</string>
+    <string name="profile_backup_failed">نمی‌توان از پروفایل پشتیبان گرفت.</string>
+    <string name="clear_recorded_data_warning">آیا از پاک‌کردن دادهٔ ضبط‌شده مطمئن هستید؟</string>
+    <string name="importing_from">درون‌برد داده از %1$s</string>
+    <string name="shared_string_importing">در حال درون‌برد</string>
+    <string name="shared_string_import_complete">درون‌برد کامل شد</string>
+    <string name="import_complete_description">همهٔ داده از %1$s درون‌برد شد. با استفاده از دکمه‌های زیر می‌توانید بخش موردنیاز برنامه را برای مدیریت آن باز کنید.</string>
+    <string name="shared_string_poi_types">انواع POI</string>
+    <string name="listed_exist">%1$s که در زیر آمده، هم‌اکنون در OsmAnd وجود دارد.</string>
+    <string name="checking_for_duplicate_description">‏OsmAnd ‏%1$s را برای چیزهای تکراری موجود در برنامه بررسی می‌کند.
+\n
+\nممکن است قدری زمان ببرد.</string>
+    <string name="items_added">افزوده‌ها</string>
+    <string name="recalculate_route_distance_promo">اگر فاصلهٔ مسیر تا موقعیت کنونی بیش از مقدار انتخابی باشد مسیر دوباره محاسبه می‌شود.</string>
+    <string name="select_distance_route_will_recalc">فاصله‌ای که با گذشتن از آن، مسیریابی مجدد انجام شود چقدر باشد.</string>
+    <string name="recalculate_route_in_deviation">مسیریابی مجدد در صورت خروج از مسیر</string>
 </resources>

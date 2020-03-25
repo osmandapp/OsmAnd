@@ -9,10 +9,15 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionType;
 
 public class NavAddDestinationAction extends QuickAction {
 
-	public static final int TYPE = 20;
+
+	public static final QuickActionType TYPE = new QuickActionType(20,
+			"nav.destination.add", NavAddDestinationAction.class).
+			nameRes(R.string.quick_action_add_destination).iconRes(R.drawable.ic_action_point_add_destination).nonEditable().
+			category(QuickActionType.NAVIGATION);
 
 	public NavAddDestinationAction() {
 		super(TYPE);

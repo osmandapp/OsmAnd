@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -122,9 +123,10 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
     private void setUpToolbar(View view) {
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.custom_toolbar);
-        Drawable back = getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back,
+        OsmandApplication app = requireMyApplication();
+        Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app),
                 isLightContent ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark);
-        toolbar.setNavigationIcon(back);
+        toolbar.setNavigationIcon(icBack);
         toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -218,7 +220,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
         @Override
         public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
             int viewType = getItemViewType(position);
-            final QuickAction item = QuickActionFactory.produceAction(itemsList.get(position));
+            final QuickAction item = QuickActionRegistry.produceAction(itemsList.get(position));
 
             if (viewType == SCREEN_ITEM_TYPE) {
                 final QuickActionItemVH itemVH = (QuickActionItemVH) holder;
@@ -269,7 +271,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
         @Override
         public int getItemViewType(int position) {
-            return itemsList.get(position).type == 0 ? SCREEN_HEADER_TYPE : SCREEN_ITEM_TYPE;
+            return itemsList.get(position).getType() == 0 ? SCREEN_HEADER_TYPE : SCREEN_ITEM_TYPE;
         }
 
         public void deleteItem(int position) {

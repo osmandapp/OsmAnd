@@ -109,7 +109,7 @@ public class BinaryMapDataObject {
 	}
 	
 	public boolean containsAdditionalType(int cachedType) {
-		if (cachedType != -1) {
+		if (cachedType != -1 && additionalTypes != null) {
 			for (int i = 0; i < additionalTypes.length; i++) {
 				if (additionalTypes[i] == cachedType) {
 					return true;

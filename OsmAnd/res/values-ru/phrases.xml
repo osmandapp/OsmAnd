@@ -1331,8 +1331,8 @@
     <string name="poi_payment_yandexmoney_yes">Яндекс.Деньги</string>
     <string name="poi_payment_yandexmoney_no">Оплата через Яндекс.Деньги не принимается</string>
     <string name="poi_description_payment">Описание способа оплаты</string>
-    <string name="poi_internet_access_fee_yes">Доступ в Интернет - взимается плата</string>
-    <string name="poi_internet_access_fee_no">Доступ в Интернет - бесплатно</string>
+    <string name="poi_internet_access_fee_yes">Доступ в интернет: взимается плата</string>
+    <string name="poi_internet_access_fee_no">Доступ в интернет: бесплатно</string>
     <string name="poi_events_venue">Место проведения мероприятий</string>
     <string name="poi_diet">Пищевые ограничения</string>
     <string name="poi_diet_vegetarian_filter_yes">Для вегетарианцев</string>
@@ -2237,7 +2237,7 @@
     <string name="twitter">Twitter</string>
     <string name="poi_skype">Скайп;Skype</string>
     <string name="poi_garden_style_kitchen">Стиль сада: кухня</string>
-    <string name="poi_toilets_access_community">Туалет: общественный</string>
+    <string name="poi_toilets_access_community">Доступ в туалет: сообщество</string>
     <string name="poi_internet_access_type_terminal">Терминал</string>
     <string name="poi_historic_period_dominate">Исторический период: Доминат (285 – 476 г. н.э.)</string>
     <string name="poi_conveying_yes">Эскалатор/траволатор</string>
@@ -2804,9 +2804,9 @@
     <string name="poi_fire_operator">Пожарный оператор</string>
     <string name="poi_diaper_table_count">Количество пеленальных столиков</string>
     <string name="poi_water_tank">Пожарный резервуар с водой</string>
-    <string name="poi_toilets_disposal_flush">Смывается водой</string>
-    <string name="poi_toilets_disposal_pitlatrine">Выгребная яма</string>
-    <string name="poi_toilets_disposal_bucket">Утилизация отходов: контейнер</string>
+    <string name="poi_toilets_disposal_flush">Утилизация: смыв</string>
+    <string name="poi_toilets_disposal_pitlatrine">Утилизация: выгребная яма</string>
+    <string name="poi_toilets_disposal_bucket">Утилизация: контейнер</string>
     <string name="poi_length">Длина</string>
     <string name="poi_recycling_waste_oil">Отработанное масло</string>
     <string name="poi_association">Офис ассоциации</string>
@@ -3642,20 +3642,21 @@
     <string name="poi_cuisine_fine_dining">Изысканная кухня</string>
     <string name="poi_network">Сеть</string>
     <string name="poi_parking_space">Парковочное место</string>
-
-	<string name="poi_volcano_type_scoria">Шлаковый конус</string>
-	<string name="poi_volcano_type_stratovolcano">Стратовулкан</string>
-	<string name="poi_volcano_type_shield">Щитовой</string>
-	<string name="poi_volcano_type_maar">Маар</string>
-	<string name="poi_volcano_type_caldera">Калдера</string>
-	<string name="poi_volcano_type_lava_dome">Лавовый купол</string>
-	<string name="poi_volcano_type_mud">Грязевой</string>
-	<string name="poi_volcano_last_eruption">Последнее извержение</string>
-	<string name="poi_volcano_status_extinct">Потухший</string>
-	<string name="poi_volcano_status_dormant">Спящий</string>
-	<string name="poi_volcano_status_active">Активный</string>
-	<string name="poi_volcano_status_inactive">Неактивный</string>
-	<string name="poi_volcano_number_of_eruptions">Число извержений</string>
-
-
+    <string name="poi_volcano_type_scoria">Шлаковый конус</string>
+    <string name="poi_volcano_type_stratovolcano">Стратовулкан</string>
+    <string name="poi_volcano_type_shield">Щитовой</string>
+    <string name="poi_volcano_type_maar">Маар</string>
+    <string name="poi_volcano_type_caldera">Калдера</string>
+    <string name="poi_volcano_type_lava_dome">Лавовый купол</string>
+    <string name="poi_volcano_type_mud">Грязевой</string>
+    <string name="poi_volcano_last_eruption">Последнее извержение</string>
+    <string name="poi_volcano_status_extinct">Потухший</string>
+    <string name="poi_volcano_status_dormant">Спящий</string>
+    <string name="poi_volcano_status_active">Активный</string>
+    <string name="poi_volcano_status_inactive">Неактивный</string>
+    <string name="poi_volcano_number_of_eruptions">Число извержений</string>
+    <string name="poi_toilets_disposal_chemical">Утилизация: химикалии</string>
+    <string name="poi_access_trailer">Доступ для трейлеров</string>
+    <string name="poi_volcano_type">Тип</string>
+    <string name="poi_volcano_status">Статус</string>
 </resources>

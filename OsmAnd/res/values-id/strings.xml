@@ -369,7 +369,7 @@
     <string name="gpx_no_tracks_title">Anda belum memiliki trek</string>
     <string name="gpx_no_tracks_title_folder">Anda juga dapat menambahkan trek ke folder</string>
     <string name="gpx_add_track">Tambah Rute</string>
-    <string name="gpx_appearance">Tampilan</string>
+    <string name="shared_string_appearance">Tampilan</string>
     <string name="trip_rec_notification_settings">Aktifkan rekaman mulai cepat</string>
     <string name="trip_rec_notification_settings_desc">Tampilkan pemberitahuan sistem yang memungkinkan untuk memulai perekaman perjalanan.</string>
     <string name="shared_string_notifications">Pemberitahuan</string>
@@ -463,13 +463,13 @@
     <string name="increase_search_radius_to">Tingkatkan radius pencarian hingga %1$s</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Hindari jalan beku dan arungan sungai.</string>
     <string name="exit_at">Keluar di</string>
-    <string name="rate_dialog_descr">Luangkan waktu 30 detik, beri masukan dan nilai aplikasi kami di Google Play.</string>
+    <string name="rate_dialog_descr">Silakan beri komentar dan nilai kerja kami di aplikasi Google Play</string>
     <string name="shared_string_privacy_policy">Kebijakan Privasi</string>
     <string name="help_us_make_osmand_better">Bantu kami membuat OsmAnd lebih baik!</string>
     <string name="make_osmand_better_descr">Izinkan OsmAnd untuk mengumpulkan dan memproses data penggunaan aplikasi secara anonim. Kami tidak mengumpulkan atau menyimpan data lokasi anda, atau data lokasi yang anda lihat di peta.
 \n
 \nAnda selalu bisa mengubah pilihan anda di Pengaturan &gt; Privasi dan Keamanan.</string>
-    <string name="choose_data_to_share">Pilih tipe data yang ingin anda bagikan:</string>
+    <string name="choose_data_to_share">Tentukan data apa yang ingin anda bagikan:</string>
     <string name="downloaded_maps">Peta yang diunduh</string>
     <string name="visited_screens">Layar yang dikunjungi</string>
     <string name="collected_data_descr">Daftar data yang ingin anda bagikan dengan OsmAnd.</string>
@@ -732,8 +732,8 @@
     <string name="shared_string_capacity">Kapasitas</string>
     <string name="shared_string_width">Lebar</string>
     <string name="shared_string_height">Tinggi</string>
-    <string name="add_home">Tambah rubah</string>
-    <string name="add_work">Tambah kantor</string>
+    <string name="add_home">Tambah lokasi rumah</string>
+    <string name="add_work">Tambah lokasi kantor</string>
     <string name="work_button">Kantor</string>
     <string name="previous_route">Rute sebelumnya</string>
     <string name="show_more">Tampilkan lainnya</string>
@@ -786,4 +786,55 @@
     <string name="send_log">Kirim log</string>
     <string name="public_transport_try_change_settings">Coba ubah pengaturan.</string>
     <string name="public_transport_type">Tipe angkutan</string>
+    <string name="button_rate">Rataan</string>
+    <string name="rearrange_categories">Susun ulang kategori</string>
+    <string name="create_custom_categories_list_promo">Anda dapat menambahkan kategori kustom, juga bisa anda sembunyikan yang tidak ingin anda cari. Anda juga mengatur urutan pada daftar, daftar dapat dimpor dan ekspor beserta profil setelan.</string>
+    <string name="accessibility_mode_disabled">Modus aksesbilitas dinonaktifkan di setelan sistem anda.</string>
+    <string name="clear_recorded_data">Bersihkan data terekam</string>
+    <string name="release_3_6">• Profil: Sekarang anda dapat mengubah urutan, mengganti ikon di map, mengubah setelan dasar dan memulihkan ke kondisi semula.
+\n
+\n • Ditambahkan berbagai jalur untuk rute keluar
+\n
+\n • Setelan plugin yang telah dirombak
+\n
+\n • Tampilan setelan yang dirombak untuk akses profil setelan lebih mudah
+\n
+\n • Ditambahkan opsi setelan untuk menyalin dari setelan profil lain
+\n
+\n • Added ability to change an order or hide POI categories in Search
+\n
+\n • Correctly aligned POI icons on the map
+\n
+\n • Ditambahkan data waktu matahari terbit dan tenggelam
+\n
+\n • Ditambahkan ikon Rumah/Kantor di peta
+\n
+\n • Ditambahkan dukungan deskripsi multibaris pada profil
+\n
+\n • Ditambahkan perbaikan transliterasi untuk nama-nama lokasi di Jepang
+\n
+\n • Peta Antartika telah ditambahkan
+\n
+\n</string>
+    <string name="copy_coordinates">Salin koordinat</string>
+    <string name="please_provide_profile_name_message">Silahkan isi nama profil</string>
+    <string name="open_settings">Buka setelan</string>
+    <string name="plugin_disabled">Plugin dinonaktifkan</string>
+    <string name="plugin_disabled_descr">Plugin ini terpasang secara terpisah. Jika anda tidak ingin menggunakannya lagi, silakan untuk menghapusnya secara manual
+\n
+\nPlugin ini akan tetap ada pada perangkat anda setelah mencopot OsmAnd.</string>
+    <string name="shared_string_menu">Menu</string>
+    <string name="no_recalculation_setting">Nonaktifkan kalkulasi ulang</string>
+    <string name="route_recalculation_dist_title">Jarak minimal untuk mengkalkulasi ulang rute</string>
+    <string name="route_recalculation_dist_descr">Rute akan dikalkulasi ulang jika jarak rute lebih panjang daripada parameter yang telah ditentukan</string>
+    <string name="profile_type_custom_string">Profil kustom</string>
+    <string name="replace_all_desc">Item saat ini akan diganti dengan item berasal dari berkas</string>
+    <string name="replace_all">Ganti semua</string>
+    <string name="keep_both_desc">Item yang diimpor akan ditambahkan prefiks</string>
+    <string name="import_duplicates_description">Elemen yang diimpor sudah ada dalam aplikasi OsmAnd
+\n
+\nSilahkan pilih tindakan.</string>
+    <string name="import_duplicates_title">Beberapa item sudah ada</string>
+    <string name="select_data_to_import">Pilih data yang akan diimpor.</string>
+    <string name="import_rendering_file">Impor berkas render</string>
 </resources>

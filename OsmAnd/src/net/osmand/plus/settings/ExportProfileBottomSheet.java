@@ -38,16 +38,17 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.profiles.AdditionalDataWrapper;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.quickaction.QuickActionFactory;
+import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
+import net.osmand.plus.settings.ExportImportSettingsAdapter.Type;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -63,7 +64,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 
 	private OsmandApplication app;
 	private ApplicationMode profile;
-	private List<AdditionalDataWrapper> dataList = new ArrayList<>();
+	private Map<Type, List<?>> dataList = new HashMap<>();
 	private ExportImportSettingsAdapter adapter;
 
 	private SettingsHelper.SettingsExportListener exportListener;
@@ -122,7 +123,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 		if (!dataList.isEmpty()) {
 			final View additionalDataView = inflater.inflate(R.layout.bottom_sheet_item_additional_data, null);
 			ExpandableListView listView = additionalDataView.findViewById(R.id.list);
-			adapter = new ExportImportSettingsAdapter(app, nightMode);
+			adapter = new ExportImportSettingsAdapter(app, nightMode, false);
 			View listHeader = inflater.inflate(R.layout.item_header_export_expand_list, null);
 			final View topSwitchDivider = listHeader.findViewById(R.id.topSwitchDivider);
 			final View bottomSwitchDivider = listHeader.findViewById(R.id.bottomSwitchDivider);
@@ -214,22 +215,19 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 		}
 	}
 
-	private List<AdditionalDataWrapper> getAdditionalData() {
-		List<AdditionalDataWrapper> dataList = new ArrayList<>();
+	private Map<Type, List<?>> getAdditionalData() {
+		Map<Type, List<?>> dataList = new HashMap<>();
 
-		QuickActionFactory factory = new QuickActionFactory();
-		List<QuickAction> actionsList = factory.parseActiveActionsList(app.getSettings().QUICK_ACTION_LIST.get());
+
+		QuickActionRegistry registry = app.getQuickActionRegistry();
+		List<QuickAction> actionsList = registry.getQuickActions();
 		if (!actionsList.isEmpty()) {
-			dataList.add(new AdditionalDataWrapper(
-					AdditionalDataWrapper.Type.QUICK_ACTIONS, actionsList));
+			dataList.put(Type.QUICK_ACTIONS, actionsList);
 		}
 
 		List<PoiUIFilter> poiList = app.getPoiFilters().getUserDefinedPoiFilters(false);
 		if (!poiList.isEmpty()) {
-			dataList.add(new AdditionalDataWrapper(
-					AdditionalDataWrapper.Type.POI_TYPES,
-					poiList
-			));
+			dataList.put(Type.POI_TYPES, poiList);
 		}
 
 		List<ITileSource> iTileSources = new ArrayList<>();
@@ -249,37 +247,25 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 			}
 		}
 		if (!iTileSources.isEmpty()) {
-			dataList.add(new AdditionalDataWrapper(
-					AdditionalDataWrapper.Type.MAP_SOURCES,
-					iTileSources
-			));
+			dataList.put(Type.MAP_SOURCES, iTileSources);
 		}
 
 		Map<String, File> externalRenderers = app.getRendererRegistry().getExternalRenderers();
 		if (!externalRenderers.isEmpty()) {
-			dataList.add(new AdditionalDataWrapper(
-					AdditionalDataWrapper.Type.CUSTOM_RENDER_STYLE,
-					new ArrayList<>(externalRenderers.values())
-			));
+			dataList.put(Type.CUSTOM_RENDER_STYLE, new ArrayList<>(externalRenderers.values()));
 		}
 
 		File routingProfilesFolder = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
 		if (routingProfilesFolder.exists() && routingProfilesFolder.isDirectory()) {
 			File[] fl = routingProfilesFolder.listFiles();
 			if (fl != null && fl.length > 0) {
-				dataList.add(new AdditionalDataWrapper(
-						AdditionalDataWrapper.Type.CUSTOM_ROUTING,
-						Arrays.asList(fl)
-				));
+				dataList.put(Type.CUSTOM_ROUTING, Arrays.asList(fl));
 			}
 		}
 
 		Map<LatLon, AvoidRoadInfo> impassableRoads = app.getAvoidSpecificRoads().getImpassableRoads();
 		if (!impassableRoads.isEmpty()) {
-			dataList.add(new AdditionalDataWrapper(
-					AdditionalDataWrapper.Type.AVOID_ROADS,
-					new ArrayList<>(impassableRoads.values())
-			));
+			dataList.put(Type.AVOID_ROADS, new ArrayList<>(impassableRoads.values()));
 		}
 		return dataList;
 	}

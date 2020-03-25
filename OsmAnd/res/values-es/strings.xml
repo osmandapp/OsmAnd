@@ -2044,7 +2044,7 @@
     <string name="gpx_no_tracks_title">Sin archivos GPX aún</string>
     <string name="gpx_no_tracks_title_folder">También puedes añadir archivos GPX a la carpeta</string>
     <string name="gpx_add_track">Añadir más…</string>
-    <string name="gpx_appearance">Aspecto</string>
+    <string name="shared_string_appearance">Aspecto</string>
     <string name="shared_string_notifications">Notificaciones</string>
     <string name="shared_string_continue">Continuar</string>
     <string name="shared_string_pause">Pausar</string>

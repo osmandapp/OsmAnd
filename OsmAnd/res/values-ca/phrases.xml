@@ -1485,7 +1485,7 @@
     <string name="poi_information_sign">Signe</string>
     <string name="poi_piste_grooming_classic">Clàssic</string>
     <string name="poi_piste_grooming_classic_skating">Clàssic + Patinatge</string>
-    <string name="poi_piste_grooming_backcountry">Pora de pistes</string>
+    <string name="poi_piste_grooming_backcountry">Fora de pistes</string>
     <string name="poi_piste_grooming_scooter">Motoneu</string>
     <string name="poi_piste_grooming_skating">Patinatge</string>
     <string name="poi_piste_grooming_no">No</string>
@@ -2878,4 +2878,9 @@
     <string name="poi_bulk_purchase">Venda a granel</string>
     <string name="poi_denotation">Denotació</string>
     <string name="reddit">Reddit</string>
+    <string name="poi_climbing_crag">Sí</string>
+    <string name="poi_snowmobile_filter">Accés de motos de neu</string>
+    <string name="poi_access_bus">Accés d\'autobús</string>
+    <string name="poi_access_caravan">Accés de caravana</string>
+    <string name="poi_access_motorhome">Accés per a autocaravanes</string>
 </resources>

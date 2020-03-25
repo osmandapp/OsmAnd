@@ -58,11 +58,11 @@
                     android:layout_weight="1"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    android:paddingRight="16dp"
+                    android:layout_marginRight="@dimen/content_padding"
+                    android:layout_marginEnd="@dimen/content_padding"
                     android:textColor="?android:textColorPrimary"
                     android:textSize="@dimen/default_list_text_size"
-                    tools:text="Amsterdam"
-	                android:paddingEnd="16dp" />
+                    tools:text="Amsterdam" />
 
                 <LinearLayout
                     android:id="@+id/compass_layout"

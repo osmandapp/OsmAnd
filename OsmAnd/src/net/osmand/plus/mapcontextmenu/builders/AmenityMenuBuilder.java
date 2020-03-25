@@ -135,7 +135,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 			ImageView iconView = new ImageView(view.getContext());
 			LinearLayout.LayoutParams llIconParams = new LinearLayout.LayoutParams(dpToPx(24f), dpToPx(24f));
-			llIconParams.setMargins(dpToPx(16f), dpToPx(12f), dpToPx(24f), dpToPx(12f));
+			AndroidUtils.setMargins(llIconParams, dpToPx(16f), dpToPx(12f), dpToPx(24f), dpToPx(12f));
 			llIconParams.gravity = Gravity.CENTER_VERTICAL;
 			iconView.setLayoutParams(llIconParams);
 			iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
@@ -152,7 +152,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		if (!Algorithms.isEmpty(textPrefix)) {
 			textPrefixView = new TextView(view.getContext());
 			LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-			llTextParams.setMargins(icon == null ? dpToPx(16f) : 0, dpToPx(8f), 0, 0);
+			AndroidUtils.setMargins(llTextParams, icon == null ? dpToPx(16f) : 0, dpToPx(8f), 0, 0);
 			textPrefixView.setLayoutParams(llTextParams);
 			textPrefixView.setTextSize(12);
 			textPrefixView.setTextColor(app.getResources().getColor(R.color.ctx_menu_buttons_text_color));
@@ -164,7 +164,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 		TextView textView = new TextView(view.getContext());
 		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		llTextParams.setMargins(icon == null ? dpToPx(16f) : 0,
+		AndroidUtils.setMargins(llTextParams, icon == null ? dpToPx(16f) : 0,
 				textPrefixView == null ? (collapsable ? dpToPx(13f) : dpToPx(8f)) : dpToPx(2f), 0, collapsable && textPrefixView == null ? dpToPx(13f) : dpToPx(8f));
 		textView.setLayoutParams(llTextParams);
 		textView.setTextSize(16);
@@ -200,7 +200,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 		LinearLayout.LayoutParams llTextViewParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
 		llTextViewParams.weight = 1f;
-		llTextViewParams.setMargins(0, 0, dpToPx(10f), 0);
+		AndroidUtils.setMargins(llTextViewParams, 0, 0, dpToPx(10f), 0);
 		llTextViewParams.gravity = Gravity.CENTER_VERTICAL;
 		llText.setLayoutParams(llTextViewParams);
 		if (textPrefixView != null) {
@@ -218,7 +218,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			ll.addView(llIconCollapse);
 
 			LinearLayout.LayoutParams llIconCollapseParams = new LinearLayout.LayoutParams(dpToPx(24f), dpToPx(24f));
-			llIconCollapseParams.setMargins(0, dpToPx(12f), dpToPx(24f), dpToPx(12f));
+			AndroidUtils.setMargins(llIconCollapseParams, 0, dpToPx(12f), dpToPx(24f), dpToPx(12f));
 			llIconCollapseParams.gravity = Gravity.CENTER_VERTICAL;
 			iconViewCollapse.setLayoutParams(llIconCollapseParams);
 			iconViewCollapse.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
@@ -248,7 +248,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		if (isWiki) {
 			TextViewEx button = new TextViewEx(new ContextThemeWrapper(view.getContext(), light ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme));
 			LinearLayout.LayoutParams llWikiButtonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dpToPx(36f));
-			llWikiButtonParams.setMargins(dpToPx(16f), 0, 0, dpToPx(16f));
+			AndroidUtils.setMargins(llWikiButtonParams, dpToPx(16f), 0, 0, dpToPx(16f));
 			button.setLayoutParams(llWikiButtonParams);
 			button.setTypeface(FontCache.getRobotoMedium(app));
 			button.setBackgroundResource(light ? R.drawable.context_menu_controller_bg_light : R.drawable.context_menu_controller_bg_dark);

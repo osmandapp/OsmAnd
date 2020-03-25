@@ -1,11 +1,5 @@
 package net.osmand.binary;
 
-
-import gnu.trove.map.hash.TIntObjectHashMap;
-
-import java.text.MessageFormat;
-import java.util.Arrays;
-
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
@@ -13,12 +7,16 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
 
+import java.text.MessageFormat;
+import java.util.Arrays;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 public class RouteDataObject {
 	/*private */static final int RESTRICTION_SHIFT = 3;
 	/*private */static final int RESTRICTION_MASK = 7;
 	public static int HEIGHT_UNDEFINED = -80000;
-	
+
 	public final RouteRegion region;
 	// all these arrays supposed to be immutable!
 	// These fields accessible from C++
@@ -36,11 +34,11 @@ public class RouteDataObject {
 	public int[] nameIds;
 	// mixed array [0, height, cumulative_distance height, cumulative_distance, height, ...] - length is length(points)*2
 	public float[] heightDistanceArray = null;
-	
+
 	public RouteDataObject(RouteRegion region) {
 		this.region = region;
 	}
-	
+
 	public RouteDataObject(RouteRegion region, int[] nameIds, String[] nameValues) {
 		this.region = region;
 		this.nameIds = nameIds;
@@ -65,7 +63,7 @@ public class RouteDataObject {
 		this.pointNameTypes = copy.pointNameTypes;
 		this.id = copy.id;
 	}
-	
+
 	public boolean compareRoute(RouteDataObject thatObj) {
 		if (this.id == thatObj.id
 				&& Arrays.equals(this.pointsX, thatObj.pointsX)
@@ -76,11 +74,11 @@ public class RouteDataObject {
 			if (thatObj.region == null) {
 				throw new IllegalStateException("Illegal routing object: " + thatObj.id);
 			}
-			
+
 			boolean equals = true;
 			equals = equals && Arrays.equals(this.restrictions, thatObj.restrictions);
 			equals = equals && Arrays.equals(this.restrictionsVia, thatObj.restrictionsVia);
-			
+
 			if (equals) {
 				if (this.types == null || thatObj.types == null) {
 					equals = this.types == thatObj.types;
@@ -161,7 +159,7 @@ public class RouteDataObject {
 		}
 		return false;
 	}
-	
+
 	public float[] calculateHeightArray() {
 		if(heightDistanceArray != null) {
 			return heightDistanceArray;
@@ -172,8 +170,8 @@ public class RouteDataObject {
 			heightDistanceArray = new float[0];
 			return heightDistanceArray;
 		}
-		
-		heightDistanceArray = new float[2*getPointsLength()]; 
+
+		heightDistanceArray = new float[2*getPointsLength()];
 		double plon = 0;
 		double plat = 0;
 		float prevHeight = startHeight;
@@ -214,7 +212,7 @@ public class RouteDataObject {
 					}
 					prevHeight = height;
 				}
-				
+
 			} else {
 				heightDistanceArray[0] = 0;
 				heightDistanceArray[1] = startHeight;
@@ -228,19 +226,19 @@ public class RouteDataObject {
 	public long getId() {
 		return id;
 	}
-	
+
 	public String getName(){
 		if(names != null ) {
 			return names.get(region.nameTypeRule);
 		}
 		return null;
 	}
-	
+
 
 	public String getName(String lang){
 		return getName(lang, false);
 	}
-	
+
 	public String getName(String lang, boolean transliterate){
 		if(names != null ) {
 			if(Algorithms.isEmpty(lang)) {
@@ -263,11 +261,11 @@ public class RouteDataObject {
 		}
 		return null;
 	}
-	
+
 	public int[] getNameIds() {
 		return nameIds;
 	}
-	
+
 	public TIntObjectHashMap<String> getNames() {
 		return names;
 	}
@@ -393,7 +391,7 @@ public class RouteDataObject {
 	public int getRestrictionType(int i) {
 		return (int) (restrictions[i] & RESTRICTION_MASK);
 	}
-	
+
 	public RestrictionInfo getRestrictionInfo(int k) {
 		RestrictionInfo ri = new RestrictionInfo();
 		ri.toWay = getRestrictionId(k);
@@ -403,26 +401,26 @@ public class RouteDataObject {
 		}
 		return ri;
 	}
-	
+
 	public long getRestrictionVia(int i) {
 		if(restrictionsVia != null && restrictionsVia.length > i) {
 			return restrictionsVia[i];
 		}
 		return 0;
 	}
-	
+
 	public long getRestrictionId(int i) {
 		return restrictions[i] >> RESTRICTION_SHIFT;
 	}
-	
+
 	public boolean hasPointTypes() {
 		return pointTypes != null;
 	}
-	
+
 	public boolean hasPointNames() {
 		return pointNames != null;
 	}
-	
+
 
 	public void insert(int pos, int x31, int y31) {
 		int[] opointsX = pointsX;
@@ -455,14 +453,14 @@ public class RouteDataObject {
 			}
 		}
 	}
-	
+
 	public String[] getPointNames(int ind) {
 		if (pointNames == null || ind >= pointNames.length) {
 			return null;
 		}
 		return pointNames[ind];
 	}
-	
+
 	public int[] getPointNameTypes(int ind) {
 		if (pointNameTypes == null || ind >= pointNameTypes.length) {
 			return null;
@@ -476,11 +474,11 @@ public class RouteDataObject {
 		}
 		return pointTypes[ind];
 	}
-	
+
 	public int[] getTypes() {
 		return types;
 	}
-	
+
 	public void processConditionalTags(long conditionalTime) {
 		int sz = types.length;
 		for (int i = 0; i < sz; i++) {
@@ -582,7 +580,7 @@ public class RouteDataObject {
 		}
 		return def;
 	}
-	
+
 	public static float parseLength(String v, float def) {
 		float f = 0;
 		// 14'10" 14 - inches, 10 feet
@@ -602,10 +600,10 @@ public class RouteDataObject {
 				}
 			}
 			if(pref.contains("km")) {
-				f *= 1000;  
+				f *= 1000;
 			}
 			if(pref.contains("\"") ||  pref.contains("in")) {
-				f *= 0.0254; 
+				f *= 0.0254;
 			} else if (pref.contains("\'") || pref.contains("ft") || pref.contains("feet")) {
 				// foot to meters
 				f *= 0.3048;
@@ -618,7 +616,7 @@ public class RouteDataObject {
 		}
 		return def;
 	}
-	
+
 	public static float parseWeightInTon(String v, float def) {
 		int i = Algorithms.findFirstNumberEndIndex(v);
 		if (i > 0) {
@@ -631,7 +629,7 @@ public class RouteDataObject {
 		}
 		return def;
 	}
-	
+
 	public boolean loop() {
 		return pointsX[0] == pointsX[pointsX.length - 1] && pointsY[0] == pointsY[pointsY.length - 1];
 	}
@@ -662,7 +660,7 @@ public class RouteDataObject {
 		}
 		return false;
 	}
-	
+
 	public boolean tunnel(){
 		int sz = types.length;
 		for(int i=0; i<sz; i++) {
@@ -754,7 +752,7 @@ public class RouteDataObject {
 		}
 		return 0;
 	}
-	
+
 	public String getRoute() {
 		int sz = types.length;
 		for (int i = 0; i < sz; i++) {
@@ -803,7 +801,7 @@ public class RouteDataObject {
 		}
 		return null;
 	}
-	
+
 	public String getValue(int pnt, String tag) {
 		if (pointTypes != null && pnt < pointTypes.length && pointTypes[pnt] != null) {
 			for (int i = 0; i < pointTypes[pnt].length; i++) {
@@ -823,7 +821,7 @@ public class RouteDataObject {
 		}
 		return null;
 	}
-	
+
 	public static String getHighway(int[] types, RouteRegion region) {
 		String highway = null;
 		int sz = types.length;
@@ -836,7 +834,7 @@ public class RouteDataObject {
 		}
 		return highway;
 	}
-	
+
 	public int getLanes() {
 		int sz = types.length;
 		for (int i = 0; i < sz; i++) {
@@ -848,7 +846,7 @@ public class RouteDataObject {
 		}
 		return -1;
 	}
-	
+
 	public double directionRoute(int startPoint, boolean plus) {
 		// same goes to C++
 		// Victor : the problem to put more than 5 meters that BinaryRoutePlanner will treat
@@ -865,7 +863,7 @@ public class RouteDataObject {
 		}
 		return direction;
 	}
-	
+
 	public boolean isRoadDeleted() {
 		int[] pt = getTypes();
 		int sz = pt.length;
@@ -921,7 +919,7 @@ public class RouteDataObject {
 			int kx = getPoint31XTile(k + 1);
 			int ky = getPoint31YTile(k + 1);
 			d += simplifyDistance(kx, ky, x, y);
-			
+
 		}
 		return d;
 	}
@@ -957,7 +955,7 @@ public class RouteDataObject {
 	private double simplifyDistance(int x, int y, int px, int py) {
 		return Math.abs(px - x) * 0.011d + Math.abs(py - y) * 0.01863d;
 	}
-	
+
 	private static void assertTrueLength(String vl, float exp){
 		float dest = parseLength(vl, 0);
 		if(exp != dest) {
@@ -966,7 +964,7 @@ public class RouteDataObject {
 			System.out.println("OK " + vl);
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		assertTrueLength("10 km", 10000);
   		assertTrueLength("0.01 km", 10);
@@ -987,7 +985,7 @@ public class RouteDataObject {
  		assertTrueLength("14 feet", 4.2672f);
  		assertTrueLength("14 mile", 22530.76f);
  		assertTrueLength("14 cm", 0.14f);
- 		
+
 // 		float badValue = -1;
 // 		assertTrueLength("none", badValue);
 // 		assertTrueLength("m 4.1", badValue);
@@ -1012,18 +1010,18 @@ public class RouteDataObject {
 		return MessageFormat.format("Road id {0} name {1} ref {2}", (getId() / 64) + "", name == null ? "" : name,
 				rf == null ? "" : rf);
 	}
-	
+
 	public static class RestrictionInfo {
 		public int type;
 		public long toWay;
 		public long viaWay;
-		
+
 		public RestrictionInfo next; // optional to simulate linked list
-		
+
 		public int length() {
 			if(next == null) {
 				return 1;
-			} 
+			}
 			return next.length() + 1;
 		}
 	}
@@ -1047,5 +1045,5 @@ public class RouteDataObject {
 		restrictionsVia[k] = viaWay;
 	}
 
-	
+
 }

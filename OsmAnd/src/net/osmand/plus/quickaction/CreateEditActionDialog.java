@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,6 +22,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -121,8 +123,8 @@ public class CreateEditActionDialog extends DialogFragment {
                 ? isNew = actionId == 0
                 : savedInstanceState.getBoolean(KEY_ACTION_IS_NEW);
 
-        action = QuickActionFactory.produceAction(isNew
-                ? QuickActionFactory.newActionByType(type)
+        action = QuickActionRegistry.produceAction(isNew
+                ? quickActionRegistry.newActionByType(type)
                 : quickActionRegistry.getQuickAction(actionId));
 
         setupToolbar(view);
@@ -137,7 +139,7 @@ public class CreateEditActionDialog extends DialogFragment {
         super.onSaveInstanceState(outState);
 
         outState.putLong(KEY_ACTION_ID, action.getId());
-        outState.putInt(KEY_ACTION_TYPE, action.type);
+        outState.putInt(KEY_ACTION_TYPE, action.getType());
         outState.putBoolean(KEY_ACTION_IS_NEW, isNew);
     }
 
@@ -152,7 +154,8 @@ public class CreateEditActionDialog extends DialogFragment {
         int buttonsAndLinksTextColorResId = isLightContent ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
         toolbar.setTitleTextColor(ContextCompat.getColor(getContext(), buttonsAndLinksTextColorResId));
 
-        toolbar.setNavigationIcon(getIconsCache().getIcon(R.drawable.ic_arrow_back, buttonsAndLinksTextColorResId));
+        Drawable icBack = getIconsCache().getIcon(AndroidUtils.getNavigationIconResId(getContext()), buttonsAndLinksTextColorResId);
+        toolbar.setNavigationIcon(icBack);
 
         toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 
