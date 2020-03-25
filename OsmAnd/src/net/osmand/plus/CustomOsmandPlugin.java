@@ -35,6 +35,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import static net.osmand.IndexConstants.SQLITE_EXT;
+
 public class CustomOsmandPlugin extends OsmandPlugin {
 
 	private static final Log LOG = PlatformUtil.getLog(CustomOsmandPlugin.class);
@@ -128,9 +130,17 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 
 							for (ITileSource tileSource : mapSources) {
 								if (tileSource instanceof TileSourceManager.TileSourceTemplate) {
-//									app.getSettings().installTileSource((TileSourceManager.TileSourceTemplate) tileSource);
+									TileSourceManager.TileSourceTemplate sourceTemplate = (TileSourceManager.TileSourceTemplate) tileSource;
+									File tPath = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
+									File dir = new File(tPath, sourceTemplate.getName());
+									Algorithms.removeAllFiles(dir);
 								} else if (tileSource instanceof SQLiteTileSource) {
-//									((SQLiteTileSource) tileSource).createDataBase();
+									SQLiteTileSource sqLiteTileSource = ((SQLiteTileSource) tileSource);
+									sqLiteTileSource.closeDB();
+
+									File tPath = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
+									File dir = new File(tPath, sqLiteTileSource.getName() + SQLITE_EXT);
+									Algorithms.removeAllFiles(dir);
 								}
 							}
 						} else if (item instanceof PoiUiFilterSettingsItem) {
