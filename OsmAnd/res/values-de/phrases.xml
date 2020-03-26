@@ -3736,7 +3736,7 @@
     <string name="poi_cash_withdrawal">Bargeldbezug</string>
     <string name="poi_cash_withdrawal_operator">Betreiber der Bargeldauszahlungen</string>
     <string name="poi_cash_withdrawal_type_checkout">Bargeldbezugsart: Kasse</string>
-    <string name="poi_cash_withdrawal_type_self_checkout">Bargeldbezugsart: Selbstzahlerkasse</string>
+    <string name="poi_cash_withdrawal_type_self_checkout">Bargeldbezugsart: Selbstbedienungskasse</string>
     <string name="poi_cash_withdrawal_limit">Bargeldbezugslimit</string>
     <string name="poi_cash_withdrawal_currency">Bargeldbezugswährung</string>
     <string name="poi_cash_withdrawal_purchase_required_yes">Bargeldbezug: Kauf erforderlich</string>
@@ -3805,7 +3805,7 @@
     <string name="poi_tactile_paving_contrasted">Kontrastiert</string>
     <string name="poi_tactile_paving_incorrect">Falsch</string>
     <string name="poi_covered_booth">Stand</string>
-    <string name="poi_booth">Standtyp</string>
+    <string name="poi_booth">Unterstand Typ</string>
     <string name="poi_tactile_paving_primitive">Primitiv</string>
     <string name="poi_seamark_water_level_part_submerged">Wasserstand: teilweise überflutet</string>
     <string name="poi_seamark_water_level_submerged">Wasserstand: überflutet</string>
@@ -3820,5 +3820,5 @@
     <string name="poi_drinking_water_refill_yes">Trinkwassernachfüllung: ja</string>
     <string name="poi_drinking_water_refill_no">Trinkwassernachfüllung: nein</string>
     <string name="poi_drinking_water_refill_network">Trinkwassernachfüllnetz</string>
-    <string name="poi_internet_access_fee_customers">Internetzugang Gebühr für Kunden</string>
+    <string name="poi_internet_access_fee_customers"></string>
 </resources>
