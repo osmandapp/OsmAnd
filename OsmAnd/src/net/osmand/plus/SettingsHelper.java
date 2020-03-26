@@ -536,12 +536,10 @@ public class SettingsHelper {
 
 		private void renameProfile() {
 			List<ApplicationMode> values = ApplicationMode.allPossibleValues();
-			if (modeBean.userProfileName.isEmpty()) {
-				for (ApplicationMode mode : values) {
-					if (modeBean.stringKey.equals(mode.getStringKey())) {
-						modeBean.userProfileName = app.getString(mode.getNameKeyResource());
-						break;
-					}
+			if (Algorithms.isEmpty(modeBean.userProfileName)) {
+				ApplicationMode appMode = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
+				if (appMode != null) {
+					modeBean.userProfileName = app.getString(appMode.getNameKeyResource());
 				}
 			}
 			int number = 0;
