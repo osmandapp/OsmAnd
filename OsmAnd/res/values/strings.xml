@@ -23,6 +23,7 @@
     <string name="quick_action_terrain_hide">Hide terrain</string>
     <string name="quick_action_show_hide_terrain">Show/hide terrain</string>
     <string name="download_slope_maps">Slopes</string>
+    <string name="n_items_of_z">%1$s of %2$s</string>
     <string name="recalculate_route_distance_promo">The route will be recalculated if the distance from the route to the current location is more than selected value.</string>
     <string name="select_distance_route_will_recalc">Select the distance after which the route will be recalculated.</string>
     <string name="recalculate_route_in_deviation">Recalculate route in case of deviation</string>

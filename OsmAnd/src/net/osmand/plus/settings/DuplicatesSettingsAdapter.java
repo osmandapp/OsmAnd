@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ApplicationMode.ApplicationModeBean;
@@ -20,15 +21,19 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ProfileIconColors;
+import net.osmand.plus.profiles.RoutingProfileDataObject.RoutingProfilesResources;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.List;
 
 public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+	private static final Log LOG = PlatformUtil.getLog(DuplicatesSettingsAdapter.class.getName());
 	private static final int HEADER_TYPE = 0;
 	private static final int ITEM_TYPE = 1;
 
@@ -81,7 +86,17 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 					profileName = app.getString(appMode.getNameKeyResource());
 				}
 				itemHolder.title.setText(profileName);
-				String routingProfile = modeBean.routingProfile;
+				String routingProfile = "";
+				String routingProfileValue = modeBean.routingProfile;
+				if (!routingProfileValue.isEmpty()) {
+					try {
+						routingProfile = app.getString(RoutingProfilesResources.valueOf(routingProfileValue.toUpperCase()).getStringRes());
+						routingProfile = Algorithms.capitalizeFirstLetterAndLowercase(routingProfile);
+					} catch (IllegalArgumentException e) {
+						routingProfile = Algorithms.capitalizeFirstLetterAndLowercase(routingProfileValue);
+						LOG.error("Error trying to get routing resource for " + routingProfileValue + "\n" + e);
+					}
+				}
 				if (Algorithms.isEmpty(routingProfile)) {
 					itemHolder.subTitle.setVisibility(View.GONE);
 				} else {
