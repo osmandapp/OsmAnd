@@ -508,8 +508,14 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		}
 		currentTrack.getModifiableGpxFile().modifiedTime = time;
 	}
-	
-	public WptPt insertPointData(double lat, double lon, long time, String description, String name, String category, int color) {
+
+	public WptPt insertPointData(double lat, double lon, long time, String description, String name, String category,
+	                             int color) {
+		return insertPointData(lat, lon, time, description, name, category, color, null, null);
+	}
+
+	public WptPt insertPointData(double lat, double lon, long time, String description, String name, String category,
+	                             int color, String iconName, String backgroundName) {
 		final WptPt pt = new WptPt(lat, lon, time, Double.NaN, 0, Double.NaN);
 		pt.name = name;
 		pt.category = category;
@@ -517,6 +523,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		if (color != 0) {
 			pt.setColor(color);
 		}
+		pt.setIconName(iconName);
+		pt.setBackgroundType(backgroundName);
 		ctx.getSelectedGpxHelper().addPoint(pt, currentTrack.getModifiableGpxFile());
 		currentTrack.getModifiableGpxFile().modifiedTime = time;
 		points++;
@@ -525,6 +533,11 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 
 	public void updatePointData(WptPt pt, double lat, double lon, long time, String description, String name, String category, int color) {
+		updatePointData(pt, lat, lon, time, description, name, category, color, null, null);
+	}
+
+	public void updatePointData(WptPt pt, double lat, double lon, long time, String description, String name,
+	                            String category, int color, String iconName, String iconBackground) {
 		currentTrack.getModifiableGpxFile().modifiedTime = time;
 
 		List<Object> params = new ArrayList<>();
@@ -585,6 +598,12 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		pt.category = category;
 		if (color != 0) {
 			pt.setColor(color);
+		}
+		if (iconName != null) {
+			pt.setIconName(iconName);
+		}
+		if (iconBackground != null) {
+			pt.setBackgroundType(iconBackground);
 		}
 	}
 

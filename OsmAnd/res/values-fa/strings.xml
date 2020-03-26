@@ -2403,7 +2403,7 @@
     <string name="saved_at_time">در %1$s ذخیره شد</string>
     <string name="quick_action_interim_dialog">کادری برای تنظیم آن نشان بده</string>
     <string name="quick_action_add_create_items">دکمه‌هایی را اضافه کنید</string>
-    <string name="quick_action_page_list_descr">دکمه‌ای برای چرخیدن بین یکی از موارد موجود در لیست زیر.</string>
+    <string name="quick_action_page_list_descr">دکمه‌ای برای گردش در لیست زیر.</string>
     <string name="quick_action_map_style_action">افزودن یک سبک نقشه</string>
     <string name="empty_state_my_tracks">فایل GPX اضافه کنید</string>
     <string name="empty_state_my_tracks_desc">فایل GPX درون‌برد کنید یا رد خود را ضبط کنید.</string>
@@ -3507,7 +3507,7 @@
     <string name="multimedia_photo_play_sound">صدای شاتر دوربین</string>
     <string name="osm_authorization_success">احراز هویت موفقیت‌آمیز بود</string>
     <string name="rearrange_categories">مرتب‌سازی دسته‌ها</string>
-    <string name="create_custom_categories_list_promo">می‌توانید دسته‌های سفارشی بیفزایید، دسته‌های غیرلازم را مخفی کنید و ترتیب لیست را تغییر دهید. لیست را می‌توانید همراه پروفایل‌ها برون‌برد یا درون‌برد کنید.</string>
+    <string name="create_custom_categories_list_promo">ترتیب لیست را تغییر دهید، دسته‌های غیرلازم را مخفی کنید. می‌توانید همهٔ تغییرات را همراه پروفایل‌ها برون‌برد یا درون‌برد کنید.</string>
     <string name="add_new_custom_category_button_promo">با انتخاب یک یا چند دستهٔ موردنیاز می‌توانید یک دستهٔ سفارشیِ تازه بیفزایید.</string>
     <string name="reset_to_default_category_button_promo">بازنشانی به پیشفرض، ترتیب را به حالت اولیهٔ پس از نصب برمی‌گرداند.</string>
     <string name="add_custom_category">افزودن دستهٔ سفارشی</string>
@@ -3599,4 +3599,13 @@
     <string name="shared_string_importing">در حال درون‌برد</string>
     <string name="shared_string_import_complete">درون‌برد کامل شد</string>
     <string name="import_complete_description">همهٔ داده از %1$s درون‌برد شد. با استفاده از دکمه‌های زیر می‌توانید بخش موردنیاز برنامه را برای مدیریت آن باز کنید.</string>
+    <string name="shared_string_poi_types">انواع POI</string>
+    <string name="listed_exist">%1$s که در زیر آمده، هم‌اکنون در OsmAnd وجود دارد.</string>
+    <string name="checking_for_duplicate_description">‏OsmAnd ‏%1$s را برای چیزهای تکراری موجود در برنامه بررسی می‌کند.
+\n
+\nممکن است قدری زمان ببرد.</string>
+    <string name="items_added">افزوده‌ها</string>
+    <string name="recalculate_route_distance_promo">اگر فاصلهٔ مسیر تا موقعیت کنونی بیش از مقدار انتخابی باشد مسیر دوباره محاسبه می‌شود.</string>
+    <string name="select_distance_route_will_recalc">فاصله‌ای که با گذشتن از آن، مسیریابی مجدد انجام شود چقدر باشد.</string>
+    <string name="recalculate_route_in_deviation">مسیریابی مجدد در صورت خروج از مسیر</string>
 </resources>

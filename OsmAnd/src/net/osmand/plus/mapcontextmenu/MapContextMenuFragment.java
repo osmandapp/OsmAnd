@@ -1287,7 +1287,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			int iconId = menu.getRightIconId();
 			int sizeId = menu.isBigRightIcon() ? R.dimen.context_menu_big_icon_size : R.dimen.map_widget_icon;
 			if (menu.getPointDescription().isFavorite() || menu.getPointDescription().isWpt()) {
-				sizeId = R.dimen.dialog_button_height;
+				sizeId = R.dimen.favorites_icon_size;
 			}
 			int iconViewSize = getResources().getDimensionPixelSize(sizeId);
 			ViewGroup.LayoutParams params = iconView.getLayoutParams();
