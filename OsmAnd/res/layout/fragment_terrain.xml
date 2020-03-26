@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -15,12 +16,10 @@
 
 		<LinearLayout
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
+			android:layout_height="@dimen/setting_list_item_large_height"
 			android:background="?attr/bg_color"
 			android:gravity="center_vertical"
-			android:orientation="horizontal"
-			android:paddingTop="@dimen/content_padding_half"
-			android:paddingBottom="@dimen/content_padding_half">
+			android:orientation="horizontal">
 
 			<ImageView
 				android:id="@+id/icon_iv"
@@ -44,6 +43,7 @@
 					android:layout_height="wrap_content"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_list_text_size"
+					osmand:typeface="@string/font_roboto_regular"
 					tools:text="Terrain" />
 
 				<net.osmand.plus.widgets.TextViewEx
@@ -83,18 +83,18 @@
 
 				<LinearLayout
 					android:layout_width="match_parent"
-					android:layout_height="@dimen/bottom_sheet_list_item_height"
+					android:layout_height="@dimen/dialog_button_height"
 					android:layout_marginStart="@dimen/content_padding"
 					android:layout_marginEnd="@dimen/content_padding"
+					android:background="@drawable/btn_bg_border_inactive"
 					android:baselineAligned="false"
 					android:orientation="horizontal">
 
 					<FrameLayout
 						android:id="@+id/hillshade_btn_container"
-						android:layout_width="wrap_content"
+						android:layout_width="0dp"
 						android:layout_height="match_parent"
-						android:layout_weight="1"
-						tools:background="@drawable/btn_border_left_active">
+						android:layout_weight="1">
 
 						<net.osmand.plus.widgets.TextViewEx
 							android:id="@+id/hillshade_btn"
@@ -110,7 +110,7 @@
 
 					<FrameLayout
 						android:id="@+id/slope_btn_container"
-						android:layout_width="wrap_content"
+						android:layout_width="0dp"
 						android:layout_height="match_parent"
 						android:layout_weight="1">
 
@@ -122,8 +122,7 @@
 							android:gravity="center"
 							android:text="@string/shared_string_slope"
 							android:textSize="@dimen/default_desc_text_size"
-							android:textStyle="bold"
-							tools:background="@drawable/btn_border_right_inactive" />
+							android:textStyle="bold" />
 
 					</FrameLayout>
 
@@ -133,12 +132,19 @@
 					android:id="@+id/description"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_margin="@dimen/content_padding"
+					android:layout_marginStart="@dimen/content_padding"
+					android:layout_marginTop="@dimen/content_padding_small"
+					android:layout_marginEnd="@dimen/content_padding"
+					android:layout_marginBottom="@dimen/content_padding_small"
+					android:lineSpacingExtra="@dimen/line_spacing_extra_description"
 					android:textColor="?android:textColorSecondary"
 					android:textSize="@dimen/default_desc_text_size"
+					osmand:typeface="@string/font_roboto_regular"
 					tools:text="Hillshade map using dark shades to show slopes, peaks and lowlands." />
 
 			</LinearLayout>
+
+			<include layout="@layout/card_bottom_divider" />
 
 			<include layout="@layout/card_top_divider" />
 
@@ -160,16 +166,20 @@
 						android:layout_width="0dp"
 						android:layout_height="wrap_content"
 						android:layout_weight="1"
+						android:lineSpacingExtra="@dimen/line_spacing_extra_description"
 						android:text="@string/shared_string_transparency"
 						android:textColor="?android:textColorPrimary"
-						android:textSize="@dimen/default_list_text_size" />
+						android:textSize="@dimen/default_list_text_size"
+						osmand:typeface="@string/font_roboto_regular" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/transparency_value_tv"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
+						android:lineSpacingExtra="@dimen/line_spacing_extra_description"
 						android:textColor="?android:textColorSecondary"
-						android:textSize="@dimen/default_desc_text_size"
+						android:textSize="@dimen/default_list_text_size"
+						osmand:typeface="@string/font_roboto_regular"
 						tools:text="25%" />
 
 				</LinearLayout>
@@ -179,10 +189,11 @@
 					style="@style/Widget.MaterialComponents.Slider"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_marginTop="@dimen/list_header_settings_top_margin"
+					android:paddingTop="@dimen/list_header_settings_top_margin"
+					android:paddingBottom="@dimen/dialog_content_margin"
 					android:stepSize="1"
 					android:theme="@style/Theme.MaterialComponents"
-					app:haloRadius="@dimen/slider_thumb_halo_size"
+					app:haloRadius="@dimen/slider_thumb_size"
 					app:thumbRadius="@dimen/slider_thumb_size"
 					app:tickColor="@android:color/transparent"
 					app:trackHeight="@dimen/slider_track_height" />
@@ -192,35 +203,36 @@
 					android:layout_height="1dp"
 					android:layout_marginStart="@dimen/content_padding"
 					android:layout_marginLeft="@dimen/content_padding"
-					android:layout_marginTop="@dimen/content_padding_half"
 					android:background="?attr/dashboard_divider"
 					android:focusable="false" />
 
 				<net.osmand.plus.widgets.TextViewEx
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:letterSpacing="@dimen/description_letter_spacing"
 					android:paddingStart="@dimen/content_padding"
 					android:paddingTop="@dimen/list_header_settings_top_margin"
 					android:paddingEnd="@dimen/content_padding"
 					android:text="@string/shared_string_zoom_levels"
 					android:textColor="@color/preference_category_title"
-					android:textSize="@dimen/default_desc_text_size" />
+					android:textSize="@dimen/default_desc_text_size"
+					osmand:typeface="@string/font_roboto_medium" />
 
 				<LinearLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:orientation="horizontal"
-					android:paddingTop="@dimen/content_padding"
 					android:paddingStart="@dimen/content_padding"
-					android:paddingEnd="@dimen/content_padding"
-					android:paddingBottom="@dimen/content_padding_half">
+					android:paddingTop="@dimen/content_padding"
+					android:paddingEnd="@dimen/content_padding">
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:layout_width="0dp"
 						android:layout_height="wrap_content"
 						android:layout_weight="1"
 						android:gravity="start"
-						android:text="Min"
+						android:lineSpacingExtra="@dimen/line_spacing_extra_description"
+						android:text="@string/shared_string_min"
 						android:textColor="?android:textColorPrimary"
 						android:textSize="@dimen/default_list_text_size" />
 
@@ -229,7 +241,8 @@
 						android:layout_height="wrap_content"
 						android:layout_weight="1"
 						android:gravity="end"
-						android:text="Max"
+						android:lineSpacingExtra="@dimen/line_spacing_extra_description"
+						android:text="@string/shared_string_max"
 						android:textColor="?android:textColorPrimary"
 						android:textSize="@dimen/default_list_text_size" />
 
@@ -246,11 +259,12 @@
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/zoom_value_min"
-						android:layout_width="wrap_content"
+						android:layout_width="@dimen/standard_icon_size"
 						android:layout_height="wrap_content"
 						android:gravity="start"
+						android:lineSpacingExtra="@dimen/line_spacing_extra_description"
 						android:textColor="?android:textColorSecondary"
-						android:textSize="@dimen/default_desc_text_size"
+						android:textSize="@dimen/default_list_text_size"
 						tools:text="3" />
 
 					<com.google.android.material.slider.Slider
@@ -260,19 +274,20 @@
 						android:layout_height="wrap_content"
 						android:layout_weight="1"
 						android:stepSize="1"
-						app:tickColor="@color/color_black"
 						android:theme="@style/Theme.MaterialComponents"
-						app:haloRadius="@dimen/slider_thumb_halo_size"
+						app:haloRadius="@dimen/slider_thumb_size"
 						app:thumbRadius="@dimen/slider_thumb_size"
+						app:tickColor="@color/color_black"
 						app:trackHeight="@dimen/slider_track_height" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/zoom_value_max"
-						android:layout_width="wrap_content"
+						android:layout_width="@dimen/standard_icon_size"
 						android:layout_height="wrap_content"
 						android:gravity="end"
+						android:lineSpacingExtra="@dimen/line_spacing_extra_description"
 						android:textColor="?android:textColorSecondary"
-						android:textSize="@dimen/default_desc_text_size"
+						android:textSize="@dimen/default_list_text_size"
 						tools:text="19" />
 
 				</LinearLayout>
@@ -280,7 +295,10 @@
 				<net.osmand.plus.widgets.TextViewEx
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_margin="@dimen/content_padding"
+					android:layout_marginStart="@dimen/content_padding"
+					android:layout_marginEnd="@dimen/content_padding"
+					android:layout_marginBottom="@dimen/content_padding"
+					android:lineSpacingExtra="@dimen/line_spacing_extra_description"
 					android:text="@string/terrain_slider_description"
 					android:textColor="?android:textColorSecondary"
 					android:textSize="@dimen/default_desc_text_size" />
@@ -303,13 +321,15 @@
 				<net.osmand.plus.widgets.TextViewEx
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:letterSpacing="@dimen/description_letter_spacing"
 					android:paddingStart="@dimen/content_padding"
 					android:paddingTop="@dimen/list_header_settings_top_margin"
-					android:paddingBottom="@dimen/content_padding"
 					android:paddingEnd="@dimen/content_padding"
+					android:paddingBottom="@dimen/content_padding"
 					android:text="@string/shared_string_legend"
 					android:textColor="@color/preference_category_title"
-					android:textSize="@dimen/default_desc_text_size" />
+					android:textSize="@dimen/default_desc_text_size"
+					osmand:typeface="@string/font_roboto_medium" />
 
 				<ImageView
 					android:layout_width="wrap_content"
@@ -350,18 +370,23 @@
 				<net.osmand.plus.widgets.TextViewEx
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:letterSpacing="@dimen/description_letter_spacing"
 					android:paddingStart="@dimen/content_padding"
 					android:paddingTop="@dimen/list_header_settings_top_margin"
 					android:paddingEnd="@dimen/content_padding"
 					android:text="@string/welmode_download_maps"
 					android:textColor="@color/preference_category_title"
-					android:textSize="@dimen/default_desc_text_size" />
+					android:textSize="@dimen/default_desc_text_size"
+					osmand:typeface="@string/font_roboto_medium" />
 
 				<net.osmand.plus.widgets.TextViewEx
 					android:id="@+id/download_description_tv"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_margin="@dimen/content_padding"
+					android:layout_marginStart="@dimen/content_padding"
+					android:layout_marginTop="@dimen/content_padding_half"
+					android:layout_marginEnd="@dimen/content_padding"
+					android:lineSpacingExtra="@dimen/line_spacing_extra_description"
 					android:textColor="?android:textColorSecondary"
 					android:textSize="@dimen/default_desc_text_size"
 					tools:text="@string/hillshade_download_description" />
@@ -453,6 +478,7 @@
 				android:layout_marginEnd="@dimen/content_padding"
 				android:layout_marginBottom="@dimen/content_padding"
 				android:gravity="start"
+				android:lineSpacingExtra="@dimen/line_spacing_extra_description"
 				android:textColor="?android:textColorSecondary"
 				android:textSize="@dimen/default_desc_text_size"
 				tools:text="@string/terrain_empty_state_text" />

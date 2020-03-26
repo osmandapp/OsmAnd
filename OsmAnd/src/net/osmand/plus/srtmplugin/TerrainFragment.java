@@ -3,10 +3,13 @@ package net.osmand.plus.srtmplugin;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
@@ -161,8 +164,8 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 				getString(R.string.terrain_empty_state_text),
 				PLUGIN_URL
 		);
-		setupClickableText(slopeReadMoreTv, readMoreText, wikiString, SLOPES_WIKI_URL);
-		setupClickableText(emptyStateDescriptionTv, emptyStateText, PLUGIN_URL, PLUGIN_URL);
+		setupClickableText(slopeReadMoreTv, readMoreText, wikiString, SLOPES_WIKI_URL, false);
+		setupClickableText(emptyStateDescriptionTv, emptyStateText, PLUGIN_URL, PLUGIN_URL, true);
 
 		switchCompat.setChecked(terrainEnabled);
 		hillshadeBtn.setOnClickListener(this);
@@ -305,31 +308,38 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	}
 
 	private void adjustModeButtons(TerrainMode mode) {
+		int activeColor = ContextCompat.getColor(app, nightMode
+				? R.color.active_color_primary_dark
+				: R.color.active_color_primary_light);
+		int textColor = ContextCompat.getColor(app, nightMode
+				? R.color.text_color_primary_dark
+				: R.color.text_color_primary_light);
+		int radius = AndroidUtils.dpToPx(app, 4);
+
+		GradientDrawable background = new GradientDrawable();
+		background.setColor(UiUtilities.getColorWithAlpha(activeColor, 0.1f));
+		background.setStroke(AndroidUtils.dpToPx(app, 1), UiUtilities.getColorWithAlpha(activeColor, 0.5f));
+
 		if (mode == SLOPE) {
-			slopeBtnContainer.setBackgroundResource(R.drawable.btn_border_right_active);
-			slopeBtn.setTextColor(nightMode
-					? getResources().getColor(R.color.text_color_primary_dark)
-					: getResources().getColor(R.color.text_color_primary_light));
-			hillshadeBtnContainer.setBackgroundResource(R.drawable.btn_border_left_inactive);
-			hillshadeBtn.setTextColor(nightMode
-					? getResources().getColor(R.color.active_color_primary_dark)
-					: getResources().getColor(R.color.active_color_primary_light));
+			background.setCornerRadii(new float[]{0, 0, radius, radius, radius, radius, 0, 0});
+			slopeBtnContainer.setBackgroundDrawable(background);
+			slopeBtn.setTextColor(textColor);
+			hillshadeBtnContainer.setBackgroundColor(Color.TRANSPARENT);
+			hillshadeBtn.setTextColor(activeColor);
 		} else {
-			slopeBtnContainer.setBackgroundResource(R.drawable.btn_border_right_inactive);
-			slopeBtn.setTextColor(nightMode
-					? getResources().getColor(R.color.active_color_primary_dark)
-					: getResources().getColor(R.color.active_color_primary_light));
-			hillshadeBtnContainer.setBackgroundResource(R.drawable.btn_border_left_active);
-			hillshadeBtn.setTextColor(nightMode
-					? getResources().getColor(R.color.text_color_primary_dark)
-					: getResources().getColor(R.color.text_color_primary_light));
+			background.setCornerRadii(new float[]{radius, radius, 0, 0, 0, 0, radius, radius});
+			slopeBtnContainer.setBackgroundColor(Color.TRANSPARENT);
+			slopeBtn.setTextColor(activeColor);
+			hillshadeBtnContainer.setBackgroundDrawable(background);
+			hillshadeBtn.setTextColor(textColor);
 		}
 	}
 
 	private void setupClickableText(TextView textView,
-									String text,
-									String clickableText,
-									final String url) {
+	                                String text,
+	                                String clickableText,
+	                                final String url,
+	                                final boolean fakeBold) {
 		SpannableString spannableString = new SpannableString(text);
 		ClickableSpan clickableSpan = new ClickableSpan() {
 			@Override
@@ -337,6 +347,13 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 				Intent i = new Intent(Intent.ACTION_VIEW);
 				i.setData(Uri.parse(url));
 				startActivity(i);
+			}
+
+			@Override
+			public void updateDrawState(@NonNull TextPaint ds) {
+				super.updateDrawState(ds);
+				ds.setFakeBoldText(fakeBold);
+				ds.setUnderlineText(false);
 			}
 		};
 		try {
@@ -533,7 +550,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	}
 
 	private void setupBottomEmptySpace() {
-		int h = terrainEnabled ? AndroidUtils.dpToPx(app, 48) : AndroidUtils.getScreenHeight(requireActivity()) / 3;
+		int h = terrainEnabled ? AndroidUtils.dpToPx(app, 120) : AndroidUtils.getScreenHeight(requireActivity()) / 3;
 		ViewGroup.LayoutParams params = bottomEmptySpace.getLayoutParams();
 		params.height = h;
 		bottomEmptySpace.setLayoutParams(params);
