@@ -1010,12 +1010,20 @@ public class SettingsHelper {
 					name = fileName.substring(1);
 				}
 				for (FileSubtype subtype : FileSubtype.values()) {
-					if (subtype == ROUTING_CONFIG || subtype == RENDERING_STYLE) {
-						if (name.startsWith(subtype.subtypeFolder) || name.startsWith(subtype.subtypeName)) {
-							return subtype;
-						}
-					} else if (subtype != UNKNOWN && name.startsWith(subtype.subtypeFolder)) {
-						return subtype;
+					switch (subtype) {
+						case UNKNOWN:
+						case OTHER:
+							break;
+						case OBF_MAP:
+							if (name.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
+								return subtype;
+							}
+							break;
+						default:
+							if (name.startsWith(subtype.subtypeFolder)) {
+								return subtype;
+							}
+							break;
 					}
 				}
 				return UNKNOWN;
@@ -1029,7 +1037,7 @@ public class SettingsHelper {
 
 		protected File file;
 		private File appPath;
-		private FileSubtype subtype;
+		protected FileSubtype subtype;
 
 		public FileSettingsItem(@NonNull OsmandApplication app, @NonNull File file) throws IllegalArgumentException {
 			super(app, file.getPath().replace(app.getAppPath(null).getPath(), ""));
@@ -1071,13 +1079,15 @@ public class SettingsHelper {
 		void readFromJson(@NonNull JSONObject json) throws JSONException {
 			super.readFromJson(json);
 			String fileName = getFileName();
-			String subtypeStr = json.has("subtype") ? json.getString("subtype") : null;
-			if (!Algorithms.isEmpty(subtypeStr)) {
-				subtype = FileSubtype.getSubtypeByName(subtypeStr);
-			} else if (!Algorithms.isEmpty(fileName)) {
-				subtype = FileSubtype.getSubtypeByFileName(fileName);
-			} else {
-				subtype = FileSubtype.UNKNOWN;
+			if (subtype == null) {
+				String subtypeStr = json.has("subtype") ? json.getString("subtype") : null;
+				if (!Algorithms.isEmpty(subtypeStr)) {
+					subtype = FileSubtype.getSubtypeByName(subtypeStr);
+				} else if (!Algorithms.isEmpty(fileName)) {
+					subtype = FileSubtype.getSubtypeByFileName(fileName);
+				} else {
+					subtype = FileSubtype.UNKNOWN;
+				}
 			}
 			if (!Algorithms.isEmpty(fileName)) {
 				if (subtype == FileSubtype.OTHER) {
@@ -1186,6 +1196,12 @@ public class SettingsHelper {
 		@Override
 		public SettingsItemType getType() {
 			return SettingsItemType.RESOURCES;
+		}
+
+		@Override
+		void readFromJson(@NonNull JSONObject json) throws JSONException {
+			subtype = FileSubtype.OTHER;
+			super.readFromJson(json);
 		}
 
 		@Override
