@@ -69,7 +69,6 @@ public class PerformLiveUpdateAsyncTask
 
 	@Override
 	protected void onPostExecute(IncrementalChangesManager.IncrementalUpdateList result) {
-		LOG.debug("onPostExecute");
 		if (context instanceof AbstractDownloadActivity) {
 			AbstractDownloadActivity activity = (AbstractDownloadActivity) context;
 			activity.setSupportProgressBarIndeterminateVisibility(false);

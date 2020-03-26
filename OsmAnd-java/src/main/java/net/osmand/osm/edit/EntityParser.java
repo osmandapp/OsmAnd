@@ -176,7 +176,8 @@ public class EntityParser {
 		amenitiesList.clear();
 		// it could be collection of amenities
 		boolean relation = entity instanceof Relation;
-		boolean purerelation = relation && !"multipolygon".equals(tags.get("type"));
+		boolean purerelation = relation && 
+				!("multipolygon".equals(tags.get("type")) || "boundary".equals(tags.get("type")));
 		Collection<Map<String, String>> it = MapRenderingTypes.splitTagsIntoDifferentObjects(tags);
 		for (Map<String, String> ts : it) {
 			for (Map.Entry<String, String> e : ts.entrySet()) {

@@ -93,16 +93,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-
 		if (autoFill) {
-
-//			String name = favorite.getName() != null && !favorite.getName().isEmpty() ?
-//					favorite.getName() : getString(R.string.favorite_empty_place_name);
-//
-//			String tostText = name + getString(R.string.favorite_autofill_toast_text) + group.name;
-//
-//			Toast.makeText(getContext(), tostText, Toast.LENGTH_SHORT).show();
-
 			save(true);
 		}
 	}
