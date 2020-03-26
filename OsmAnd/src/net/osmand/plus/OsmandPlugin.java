@@ -185,7 +185,7 @@ public abstract class OsmandPlugin {
 	 * Plugin was installed
 	 */
 	public void onInstall(@NonNull OsmandApplication app, @Nullable Activity activity) {
-		for (ApplicationMode appMode: getAddedAppModes()) {
+		for (ApplicationMode appMode : getAddedAppModes()) {
 			ApplicationMode.changeProfileAvailability(appMode, true, app);
 		}
 		showInstallDialog(activity);
@@ -194,23 +194,19 @@ public abstract class OsmandPlugin {
 	public void showInstallDialog(@Nullable Activity activity) {
 		if (activity instanceof FragmentActivity) {
 			FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
-			if (fragmentManager != null) {
-				PluginInstalledBottomSheetDialog.showInstance(fragmentManager, getId(), activity instanceof MapActivity);
-			}
+			PluginInstalledBottomSheetDialog.showInstance(fragmentManager, getId(), activity instanceof MapActivity);
 		}
 	}
 
 	public void showDisableDialog(@Nullable Activity activity) {
 		if (activity instanceof FragmentActivity) {
 			FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
-			if (fragmentManager != null) {
-				PluginDisabledBottomSheet.showInstance(fragmentManager, getId(), activity instanceof MapActivity);
-			}
+			PluginDisabledBottomSheet.showInstance(fragmentManager, getId(), activity instanceof MapActivity);
 		}
 	}
 
 	public void disable(OsmandApplication app) {
-		for (ApplicationMode appMode: getAddedAppModes()) {
+		for (ApplicationMode appMode : getAddedAppModes()) {
 			ApplicationMode.changeProfileAvailability(appMode, false, app);
 		}
 	}

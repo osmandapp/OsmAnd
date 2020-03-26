@@ -286,7 +286,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	}
 
 	public void addRenderer(String fileName) {
-		String renderer = RendererRegistry.formatRenderFileName(fileName);
+		String renderer = RendererRegistry.formatRendererFileName(fileName);
 		rendererNames.add(renderer.replace('_', ' ').replace('-', ' '));
 	}
 }

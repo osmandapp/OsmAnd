@@ -27,12 +27,12 @@ public class SkiMapsPlugin extends OsmandPlugin {
 	public String getName() {
 		return app.getString(net.osmand.plus.R.string.plugin_ski_name);
 	}
-
+	
 	@Override
 	public int getLogoResourceId() {
 		return R.drawable.ic_action_skiing;
 	}
-
+	
 	@Override
 	public int getAssetResourceName() {
 		return R.drawable.ski_map;

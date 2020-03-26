@@ -62,7 +62,6 @@ public class SRTMPlugin extends OsmandPlugin {
 	public static final int TERRAIN_MIN_ZOOM = 3;
 	public static final int TERRAIN_MAX_ZOOM = 19;
 
-	private OsmandApplication app;
 	private OsmandSettings settings;
 
 	private TerrainLayer terrainLayer;

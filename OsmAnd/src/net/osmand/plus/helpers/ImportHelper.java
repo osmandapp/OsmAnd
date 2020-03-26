@@ -82,7 +82,6 @@ import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.zip.ZipInputStream;
@@ -847,13 +846,6 @@ public class ImportHelper {
 			public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsItem> items) {
 				if (activity != null) {
 					pluginItem.getPlugin().onInstall(app, activity);
-				}
-				// will be removed after obf_map subtype fix
-				for (Iterator<SettingsItem> iterator = items.iterator(); iterator.hasNext(); ) {
-					SettingsItem item = iterator.next();
-					if (item instanceof SettingsHelper.ResourcesSettingsItem) {
-						iterator.remove();
-					}
 				}
 				String pluginId = pluginItem.getPluginId();
 				File pluginDir = new File(app.getAppPath(null), IndexConstants.PLUGINS_DIR + pluginId);

@@ -261,7 +261,7 @@ public class RendererRegistry {
 				for (File f : lf) {
 					if (f != null && f.getName().endsWith(IndexConstants.ROUTING_AND_RENDERING_FILE_EXT)) {
 						if (!internalRenderers.containsValue(f.getName())) {
-							String name = formatRenderFileName(f.getName());
+							String name = formatRendererFileName(f.getName());
 							externalRenderers.put(name, f);
 						}
 					}
@@ -271,7 +271,7 @@ public class RendererRegistry {
 		this.externalRenderers = externalRenderers;
 	}
 
-	public static String formatRenderFileName(String fileName) {
+	public static String formatRendererFileName(String fileName) {
 		String name = fileName.substring(0, fileName.length() - IndexConstants.ROUTING_AND_RENDERING_FILE_EXT.length());
 		return name.replace('_', ' ').replace('-', ' ');
 	}

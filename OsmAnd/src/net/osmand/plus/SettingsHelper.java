@@ -447,7 +447,6 @@ public class SettingsHelper {
 					}
 				}
 			}
-			items.removeAll(duplicateItems);
 			return duplicateItems;
 		}
 
@@ -1265,31 +1264,28 @@ public class SettingsHelper {
 		@Override
 		public void apply() {
 			if (!items.isEmpty() || !duplicateItems.isEmpty()) {
-				List<QuickAction> newActions = getNewActions();
-				actionRegistry.updateQuickActions(newActions);
-			}
-		}
-
-		private List<QuickAction> getNewActions() {
-			List<QuickAction> newActions = new ArrayList<>(existingItems);
-			if (!duplicateItems.isEmpty()) {
-				if (shouldReplace) {
-					for (QuickAction duplicateItem : duplicateItems) {
-						for (QuickAction savedAction : existingItems) {
-							if (duplicateItem.getName(app).equals(savedAction.getName(app))) {
-								newActions.remove(savedAction);
+				List<QuickAction> actions = new ArrayList<>(items);
+				actions.removeAll(duplicateItems);
+				List<QuickAction> newActions = new ArrayList<>(existingItems);
+				if (!duplicateItems.isEmpty()) {
+					if (shouldReplace) {
+						for (QuickAction duplicateItem : duplicateItems) {
+							for (QuickAction savedAction : existingItems) {
+								if (duplicateItem.getName(app).equals(savedAction.getName(app))) {
+									newActions.remove(savedAction);
+								}
 							}
 						}
+					} else {
+						for (QuickAction duplicateItem : duplicateItems) {
+							renameItem(duplicateItem);
+						}
 					}
-				} else {
-					for (QuickAction duplicateItem : duplicateItems) {
-						renameItem(duplicateItem);
-					}
+					newActions.addAll(duplicateItems);
 				}
-				newActions.addAll(duplicateItems);
+				newActions.addAll(actions);
+				actionRegistry.updateQuickActions(newActions);
 			}
-			newActions.addAll(items);
-			return newActions;
 		}
 
 		@Override
@@ -1354,10 +1350,9 @@ public class SettingsHelper {
 			Gson gson = new Gson();
 			Type type = new TypeToken<HashMap<String, String>>() {
 			}.getType();
-			if (!items.isEmpty() || !duplicateItems.isEmpty()) {
-				List<QuickAction> newActions = getNewActions();
+			if (!items.isEmpty()) {
 				try {
-					for (QuickAction action : newActions) {
+					for (QuickAction action : items) {
 						JSONObject jsonObject = new JSONObject();
 						jsonObject.put("name", action.hasCustomName(app)
 								? action.getName(app) : "");
@@ -1406,10 +1401,13 @@ public class SettingsHelper {
 		@Override
 		public void apply() {
 			if (!items.isEmpty() || !duplicateItems.isEmpty()) {
+				List<PoiUIFilter> poiUIFilters = new ArrayList<>(items);
+				poiUIFilters.removeAll(duplicateItems);
+
 				for (PoiUIFilter duplicate : duplicateItems) {
-					items.add(shouldReplace ? duplicate : renameItem(duplicate));
+					poiUIFilters.add(shouldReplace ? duplicate : renameItem(duplicate));
 				}
-				for (PoiUIFilter filter : items) {
+				for (PoiUIFilter filter : poiUIFilters) {
 					app.getPoiFilters().createPoiFilter(filter, false);
 				}
 				app.getSearchUICore().refreshCustomPoiFilters();
@@ -1553,30 +1551,32 @@ public class SettingsHelper {
 		@Override
 		public void apply() {
 			if (!items.isEmpty() || !duplicateItems.isEmpty()) {
+				List<ITileSource> tileSources = new ArrayList<>(items);
+				tileSources.removeAll(duplicateItems);
 				if (shouldReplace) {
 					for (ITileSource tileSource : duplicateItems) {
 						if (tileSource instanceof SQLiteTileSource) {
 							File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + tileSource.getName() + IndexConstants.SQLITE_EXT);
 							if (f != null && f.exists()) {
 								if (f.delete()) {
-									items.add(tileSource);
+									tileSources.add(tileSource);
 								}
 							}
 						} else if (tileSource instanceof TileSourceManager.TileSourceTemplate) {
 							File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + tileSource.getName());
 							if (f != null && f.exists() && f.isDirectory()) {
 								if (f.delete()) {
-									items.add(tileSource);
+									tileSources.add(tileSource);
 								}
 							}
 						}
 					}
 				} else {
 					for (ITileSource tileSource : duplicateItems) {
-						items.add(renameItem(tileSource));
+						tileSources.add(renameItem(tileSource));
 					}
 				}
-				for (ITileSource tileSource : items) {
+				for (ITileSource tileSource : tileSources) {
 					if (tileSource instanceof TileSourceManager.TileSourceTemplate) {
 						app.getSettings().installTileSource((TileSourceManager.TileSourceTemplate) tileSource);
 					} else if (tileSource instanceof SQLiteTileSource) {
@@ -1684,11 +1684,9 @@ public class SettingsHelper {
 		@Override
 		void writeItemsToJson(@NonNull JSONObject json) {
 			JSONArray jsonArray = new JSONArray();
-			if (!items.isEmpty() || !duplicateItems.isEmpty()) {
-				List<ITileSource> templates = new ArrayList<>(items);
-				templates.addAll(duplicateItems);
+			if (!items.isEmpty()) {
 				try {
-					for (ITileSource template : templates) {
+					for (ITileSource template : items) {
 						JSONObject jsonObject = new JSONObject();
 						boolean sql = template instanceof SQLiteTileSource;
 						jsonObject.put("sql", sql);
@@ -1780,6 +1778,8 @@ public class SettingsHelper {
 		@Override
 		public void apply() {
 			if (!items.isEmpty() || !duplicateItems.isEmpty()) {
+				List<AvoidRoadInfo> avoidRoadInfos = new ArrayList<>(items);
+				avoidRoadInfos.removeAll(duplicateItems);
 				for (AvoidRoadInfo duplicate : duplicateItems) {
 					if (shouldReplace) {
 						LatLon latLon = new LatLon(duplicate.latitude, duplicate.longitude);
@@ -1790,7 +1790,7 @@ public class SettingsHelper {
 						settings.addImpassableRoad(renameItem(duplicate));
 					}
 				}
-				for (AvoidRoadInfo avoidRoad : items) {
+				for (AvoidRoadInfo avoidRoad : avoidRoadInfos) {
 					settings.addImpassableRoad(avoidRoad);
 				}
 				specificRoads.loadImpassableRoads();
