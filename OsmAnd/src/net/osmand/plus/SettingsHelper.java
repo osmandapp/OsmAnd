@@ -167,15 +167,22 @@ public class SettingsHelper {
 		public abstract String getPublicName(@NonNull Context ctx);
 
 		@NonNull
-		public abstract String getDefaultFileName();
+		public String getDefaultFileName() {
+			return getName() + getDefaultFileExtension();
+		}
+
+		@NonNull
+		public String getDefaultFileExtension() {
+			return ".json";
+		}
 
 		public String getPluginId() {
 			return pluginId;
 		}
 
-		@NonNull
+		@Nullable
 		public String getFileName() {
-			return !Algorithms.isEmpty(fileName) ? fileName : getDefaultFileName();
+			return fileName;
 		}
 
 		public void setFileName(String fileName) {
@@ -183,7 +190,8 @@ public class SettingsHelper {
 		}
 
 		public boolean applyFileName(@NonNull String fileName) {
-			return getFileName().endsWith(fileName);
+			String n = getFileName();
+			return n != null && n.endsWith(fileName);
 		}
 
 		public boolean shouldReadOnCollecting() {
@@ -195,7 +203,14 @@ public class SettingsHelper {
 		}
 
 		static SettingsItemType parseItemType(@NonNull JSONObject json) throws IllegalArgumentException, JSONException {
-			return SettingsItemType.valueOf(json.getString("type"));
+			String type = json.has("type") ? json.getString("type") : null;
+			if (type == null) {
+				throw new IllegalArgumentException("No type field");
+			}
+			if (type.equals("QUICK_ACTION")) {
+				type = "QUICK_ACTIONS";
+			}
+			return SettingsItemType.valueOf(type);
 		}
 
 		public boolean exists() {
@@ -208,7 +223,12 @@ public class SettingsHelper {
 
 		void readFromJson(@NonNull JSONObject json) throws JSONException {
 			pluginId = json.has("pluginId") ? json.getString("pluginId") : null;
-			fileName = json.has("file") ? json.getString("file") : null;
+			if (json.has("name")) {
+				fileName = json.getString("name") + getDefaultFileExtension();
+			}
+			if (json.has("file")) {
+				fileName = json.getString("file");
+			}
 			readItemsFromJson(json);
 		}
 
@@ -219,7 +239,11 @@ public class SettingsHelper {
 				json.put("pluginId", pluginId);
 			}
 			if (getWriter() != null) {
-				json.put("file", getFileName());
+				String fileName = getFileName();
+				if (Algorithms.isEmpty(fileName)) {
+					fileName = getDefaultFileName();
+				}
+				json.put("file", fileName);
 			}
 			writeItemsToJson(json);
 		}
@@ -310,7 +334,7 @@ public class SettingsHelper {
 			SettingsItem item = (SettingsItem) other;
 			return item.getType() == getType()
 					&& item.getName().equals(getName())
-					&& item.getFileName().equals(getFileName());
+					&& Algorithms.stringsEqual(item.getFileName(), getFileName());
 		}
 	}
 
@@ -618,12 +642,6 @@ public class SettingsHelper {
 			return ctx.getString(R.string.general_settings_2);
 		}
 
-		@NonNull
-		@Override
-		public String getDefaultFileName() {
-			return getName() + ".json";
-		}
-
 		@Override
 		public boolean exists() {
 			return true;
@@ -713,7 +731,7 @@ public class SettingsHelper {
 		@NonNull
 		@Override
 		public String getDefaultFileName() {
-			return "profile_" + getName() + ".json";
+			return "profile_" + getName() + getDefaultFileExtension();
 		}
 
 		@Override
@@ -848,6 +866,7 @@ public class SettingsHelper {
 		public StreamSettingsItem(@NonNull OsmandApplication app, @NonNull String name) {
 			super(app);
 			this.name = name;
+			setFileName(name);
 		}
 
 		StreamSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
@@ -858,6 +877,7 @@ public class SettingsHelper {
 			super(app);
 			this.inputStream = inputStream;
 			this.name = name;
+			setFileName(name);
 		}
 
 		@Nullable
@@ -879,6 +899,12 @@ public class SettingsHelper {
 		@Override
 		public String getPublicName(@NonNull Context ctx) {
 			return getName();
+		}
+
+		@NonNull
+		@Override
+		public String getDefaultFileExtension() {
+			return "";
 		}
 
 		@Override
@@ -920,8 +946,8 @@ public class SettingsHelper {
 
 		@NonNull
 		@Override
-		public String getDefaultFileName() {
-			return getName() + ".dat";
+		public String getDefaultFileExtension() {
+			return ".dat";
 		}
 
 		@Nullable
@@ -1042,9 +1068,12 @@ public class SettingsHelper {
 			super(app, file.getPath().replace(app.getAppPath(null).getPath(), ""));
 			this.file = file;
 			this.appPath = app.getAppPath(null);
-			this.subtype = FileSubtype.getSubtypeByFileName(getFileName());
-			if (subtype == FileSubtype.UNKNOWN) {
-				throw new IllegalArgumentException("Unknown file subtype: " + getFileName());
+			String fileName = getFileName();
+			if (fileName != null) {
+				this.subtype = FileSubtype.getSubtypeByFileName(fileName);
+			}
+			if (subtype == FileSubtype.UNKNOWN || subtype == null) {
+				throw new IllegalArgumentException("Unknown file subtype: " + fileName);
 			}
 		}
 
@@ -1103,12 +1132,6 @@ public class SettingsHelper {
 			if (subtype != null) {
 				json.put("subtype", subtype.getSubtypeName());
 			}
-		}
-
-		@NonNull
-		@Override
-		public String getDefaultFileName() {
-			return getName();
 		}
 
 		@NonNull
@@ -1209,7 +1232,7 @@ public class SettingsHelper {
 				return false;
 			}
 			String itemFileName = getFileName();
-			if (itemFileName.endsWith(File.separator)) {
+			if (itemFileName != null && itemFileName.endsWith(File.separator)) {
 				if (fileName.startsWith(itemFileName)) {
 					this.file = new File(getPluginPath(), fileName);
 					return true;
@@ -1305,15 +1328,12 @@ public class SettingsHelper {
 			return "quick_actions";
 		}
 
-		@NonNull
-		@Override
-		public String getDefaultFileName() {
-			return getName() + ".json";
-		}
-
 		@Override
 		void readItemsFromJson(@NonNull JSONObject json) throws IllegalArgumentException {
 			try {
+				if (!json.has("items")) {
+					return;
+				}
 				Gson gson = new Gson();
 				Type type = new TypeToken<HashMap<String, String>>() {
 				}.getType();
@@ -1457,15 +1477,12 @@ public class SettingsHelper {
 			return true;
 		}
 
-		@NonNull
-		@Override
-		public String getDefaultFileName() {
-			return getName() + ".json";
-		}
-
 		@Override
 		void readItemsFromJson(@NonNull JSONObject json) throws IllegalArgumentException {
 			try {
+				if (!json.has("items")) {
+					return;
+				}
 				JSONArray jsonArray = json.getJSONArray("items");
 				Gson gson = new Gson();
 				Type type = new TypeToken<HashMap<String, LinkedHashSet<String>>>() {
@@ -1638,15 +1655,12 @@ public class SettingsHelper {
 			return true;
 		}
 
-		@NonNull
-		@Override
-		public String getDefaultFileName() {
-			return getName() + ".json";
-		}
-
 		@Override
 		void readItemsFromJson(@NonNull JSONObject json) throws IllegalArgumentException {
 			try {
+				if (!json.has("items")) {
+					return;
+				}
 				JSONArray jsonArray = json.getJSONArray("items");
 				for (int i = 0; i < jsonArray.length(); i++) {
 					JSONObject object = jsonArray.getJSONObject(i);
@@ -1769,12 +1783,6 @@ public class SettingsHelper {
 			return "avoid_roads";
 		}
 
-		@NonNull
-		@Override
-		public String getDefaultFileName() {
-			return getName() + ".json";
-		}
-
 		@Override
 		public void apply() {
 			if (!items.isEmpty() || !duplicateItems.isEmpty()) {
@@ -1829,6 +1837,9 @@ public class SettingsHelper {
 		@Override
 		void readItemsFromJson(@NonNull JSONObject json) throws IllegalArgumentException {
 			try {
+				if (!json.has("items")) {
+					return;
+				}
 				JSONArray jsonArray = json.getJSONArray("items");
 				for (int i = 0; i < jsonArray.length(); i++) {
 					JSONObject object = jsonArray.getJSONObject(i);
@@ -1898,7 +1909,7 @@ public class SettingsHelper {
 
 		private void collectItems(JSONObject json) throws IllegalArgumentException, JSONException {
 			JSONArray itemsJson = json.getJSONArray("items");
-			int version = json.getInt("version");
+			int version = json.has("version") ? json.getInt("version") : 1;
 			if (version > VERSION) {
 				throw new IllegalArgumentException("Unsupported osf version: " + version);
 			}
@@ -1946,7 +1957,7 @@ public class SettingsHelper {
 		@Nullable
 		public SettingsItem getItemByFileName(@NonNull String fileName) {
 			for (SettingsItem item : items) {
-				if (item.getFileName().equals(fileName)) {
+				if (Algorithms.stringsEqual(item.getFileName(), fileName)) {
 					return item;
 				}
 			}
@@ -2039,13 +2050,17 @@ public class SettingsHelper {
 
 		private void writeItemFiles(ZipOutputStream zos) throws IOException {
 			for (SettingsItem item : items.values()) {
-				ZipEntry entry = new ZipEntry(item.getFileName());
-				zos.putNextEntry(entry);
-				SettingsItemWriter itemWriter = item.getWriter();
-				if (itemWriter != null) {
-					itemWriter.writeToStream(zos);
+				SettingsItemWriter writer = item.getWriter();
+				if (writer != null) {
+					String fileName = item.getFileName();
+					if (Algorithms.isEmpty(fileName)) {
+						fileName = item.getDefaultFileName();
+					}
+					ZipEntry entry = new ZipEntry(fileName);
+					zos.putNextEntry(entry);
+					writer.writeToStream(zos);
+					zos.closeEntry();
 				}
-				zos.closeEntry();
 			}
 		}
 
