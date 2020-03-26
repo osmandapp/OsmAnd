@@ -3585,4 +3585,21 @@ Lon %2$s</string>
     <string name="select_distance_route_will_recalc">Wählen Sie die Entfernung, nach der die Route neu berechnet wird.</string>
     <string name="recalculate_route_in_deviation">Neuberechnung der Route im Falle einer Abweichung</string>
     <string name="recalculate_route_distance_promo">Die Route wird neu berechnet, wenn die Entfernung von der Route zur aktuellen Position größer als der ausgewählte Wert ist.</string>
+    <string name="import_complete_description">Alle Daten aus %1$s werden importiert. Sie können die Schaltflächen unten verwenden, um den benötigten Teil der Anwendung zu öffnen, um sie zu verwalten.</string>
+    <string name="shared_string_square">Quadrat</string>
+    <string name="shared_string_rhomb">Raute</string>
+    <string name="shared_string_circle">Kreis</string>
+    <string name="select_shape">Form auswählen</string>
+    <string name="select_group">Gruppe auswählen</string>
+    <string name="add_description">Beschreibung hinzufügen</string>
+    <string name="delete_description">Beschreibung löschen</string>
+    <string name="quick_action_terrain_descr">Eine Schaltfläche zum Ein- und Ausblenden der Geländeebene auf der Karte.</string>
+    <string name="quick_action_terrain_show">Gelände einblenden</string>
+    <string name="quick_action_terrain_hide">Gelände ausblenden</string>
+    <string name="quick_action_show_hide_terrain">Gelände ein-/ausblenden</string>
+    <string name="shared_string_hillshade">Schummerung</string>
+    <string name="shared_string_zoom_levels">Zoomstufen</string>
+    <string name="shared_string_transparency">Transparenz</string>
+    <string name="terrain_slider_description">Stellen Sie die minimale und maximale Zoomstufe ein, bei der die Ebene angezeigt wird.</string>
+    <string name="shared_string_terrain">Gelände</string>
 </resources>
