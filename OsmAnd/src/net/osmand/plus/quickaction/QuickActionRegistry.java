@@ -182,7 +182,7 @@ public class QuickActionRegistry {
 		Type type = new TypeToken<List<QuickAction>>() {
 		}.getType();
 		List<QuickAction> quickActions = gson.fromJson(json, type);
-		List<QuickAction> rquickActions = new ArrayList<>(quickActions.size());
+		List<QuickAction> rquickActions = new ArrayList<>();
 		if (quickActions != null) {
 			for (QuickAction qa : quickActions) {
 				if (qa != null) {
