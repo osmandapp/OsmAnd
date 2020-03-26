@@ -24,7 +24,7 @@
     <string name="traffic_warning_payment">Mautstelle</string>
     <string name="traffic_warning_stop">Stoppzeichen</string>
     <string name="traffic_warning_calming">Verkehrsberuhigung</string>
-    <string name="traffic_warning_speed_camera">Geschwindigkeitskontrolle</string>
+    <string name="traffic_warning_speed_camera">Blitzer</string>
     <string name="traffic_warning">Verkehrswarnung</string>
     <string name="speak_favorites">Favoriten in der Nähe</string>
     <string name="speak_poi">Nahegelegene POI</string>
@@ -95,7 +95,7 @@
     <string name="rendering_attr_roadColors_description">Auswahl eines Straßen-Farbschemas:</string>
     <string name="rendering_attr_roadColors_name">Straßenfarbschema</string>
     <string name="show_warnings_title">Warnungen anzeigen…</string>
-    <string name="show_warnings_descr">Verkehrswarnungen (Tempolimits, Stoppzeichen, Rüttelschwellen, Tunnel), stationäre Radarkontrollen und Fahrspuranzeige konfigurieren.</string>
+    <string name="show_warnings_descr">Verkehrswarnungen (Tempolimits, Stoppzeichen, Rüttelschwellen, Tunnel), Blitzerwarner und Fahrspuranzeige konfigurieren.</string>
     <string name="use_compass_navigation_descr">Kompass verwenden, wenn keine andere Richtungsbestimmung möglich ist.</string>
     <string name="use_compass_navigation">Kompass verwenden</string>
     <string name="avoid_motorway">Keine Autobahnen</string>
@@ -115,10 +115,10 @@
 \n- Direktes Herunterladen von Länder- oder Regionenkarten aus der App heraus 
 \n- Darstellung mehrerer überlagerter Kartenschichten wie GPX oder Navigations-Tracks, POIs (Orte von Interesse), Favoriten, Höhenlinien, ÖPNV-Haltestellen, zusätzliche Karten mit wählbarer Transparenz 
 \n- Offline Adress- und POI-Suche 
-\n- Offlinenavigation für mittlere Entfernungen
+\n- Offlinenavigation für mittlere Entfernungen 
 \n- Auto-, Fahrrad- und Fußgänger-Modus wahlweise mit: 
 \n - automatischer Tag-Nacht-Umschaltung der Anzeige 
-\n - geschwindigkeitsabhängigem Kartenmaßstab 
+\n - geschwindigkeitsabhängiger Kartenmaßstab 
 \n - Kartenausrichtung nach Kompass oder Bewegungsrichtung 
 \n - Fahrspuranzeige, Geschwindigkeitswarnung, aufgenommenen oder TTS-Sprachansagen 
 \n 
@@ -1116,7 +1116,7 @@
     <string name="av_camera_focus_edof">Erweiterte Schärfentiefe (EDOF)</string>
     <string name="av_camera_focus_macro">Makrofokus-Modus (Nahaufnahme)</string>
     <string name="speak_title">Ansagen…</string>
-    <string name="speak_descr">Ansagen zu Straßennamen, Verkehrswarnungen (Stoppzeichen, Rüttelschwellen), stationäre Radarkontrollen und Tempolimits konfigurieren.</string>
+    <string name="speak_descr">Ansagen zu Straßennamen, Verkehrswarnungen (Stoppzeichen, Rüttelschwellen), Blitzerwarnern und Tempolimits konfigurieren.</string>
     <string name="speak_street_names">Straßennamen (TTS)</string>
     <string name="map_widget_fps_info">FPS-Debug-Info</string>
     <string name="driving_region_descr">Fahrregion wählen: USA, Europa, GB, Asien usw.</string>
@@ -3547,7 +3547,7 @@ Lon %2$s</string>
     <string name="shared_string_app_default_w_val">App-Standard (%s)</string>
     <string name="no_recalculation_setting">Neuberechnung deaktivieren</string>
     <string name="route_recalculation_dist_title">Mindestabstand für Neuberechnung der Route</string>
-    <string name="route_recalculation_dist_descr">"Die Route wird neu berechnet, wenn der Abstand zur Route größer ist als der festgelegte Wert "</string>
+    <string name="route_recalculation_dist_descr">Die Route wird neu berechnet, wenn der Abstand zur Route größer ist als der festgelegte Wert</string>
     <string name="profile_type_custom_string">Benutzerdefiniertes Profil</string>
     <string name="shared_string_angle_param">Winkel: %s°</string>
     <string name="shared_string_angle">Winkel</string>
@@ -3585,4 +3585,21 @@ Lon %2$s</string>
     <string name="select_distance_route_will_recalc">Wählen Sie die Entfernung, nach der die Route neu berechnet wird.</string>
     <string name="recalculate_route_in_deviation">Neuberechnung der Route im Falle einer Abweichung</string>
     <string name="recalculate_route_distance_promo">Die Route wird neu berechnet, wenn die Entfernung von der Route zur aktuellen Position größer als der ausgewählte Wert ist.</string>
+    <string name="import_complete_description">Alle Daten aus %1$s werden importiert. Sie können die Schaltflächen unten verwenden, um den benötigten Teil der Anwendung zu öffnen, um sie zu verwalten.</string>
+    <string name="shared_string_square">Quadrat</string>
+    <string name="shared_string_rhomb">Raute</string>
+    <string name="shared_string_circle">Kreis</string>
+    <string name="select_shape">Form auswählen</string>
+    <string name="select_group">Gruppe auswählen</string>
+    <string name="add_description">Beschreibung hinzufügen</string>
+    <string name="delete_description">Beschreibung löschen</string>
+    <string name="quick_action_terrain_descr">Eine Schaltfläche zum Ein- und Ausblenden der Geländeebene auf der Karte.</string>
+    <string name="quick_action_terrain_show">Gelände einblenden</string>
+    <string name="quick_action_terrain_hide">Gelände ausblenden</string>
+    <string name="quick_action_show_hide_terrain">Gelände ein-/ausblenden</string>
+    <string name="shared_string_hillshade">Schummerung</string>
+    <string name="shared_string_zoom_levels">Zoomstufen</string>
+    <string name="shared_string_transparency">Transparenz</string>
+    <string name="terrain_slider_description">Stellen Sie die minimale und maximale Zoomstufe ein, bei der die Ebene angezeigt wird.</string>
+    <string name="shared_string_terrain">Gelände</string>
 </resources>

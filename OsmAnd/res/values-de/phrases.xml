@@ -2004,7 +2004,7 @@
     <string name="poi_shop_additional_yes">mit Geschäften</string>
     <string name="poi_service_bicycle_retail_yes">Einzelhandel</string>
     <string name="poi_service_bicycle_retail_no">Fahrradeinzelhandel: nein</string>
-    <string name="poi_service_bicycle_repair_yes">Verkauf</string>
+    <string name="poi_service_bicycle_repair_yes">Reparatur</string>
     <string name="poi_service_bicycle_repair_no">Fahrradreparatur: nein</string>
     <string name="poi_service_bicycle_rental_yes">Verleih</string>
     <string name="poi_service_bicycle_rental_no">Fahrradverleih: nein</string>
@@ -3672,9 +3672,9 @@
     <string name="poi_caravan_no">Zufahrt Wohnwagen: nein</string>
     <string name="poi_motorhome_no">Zufahrt Wohnmobil: nein</string>
     <string name="poi_bus_no">Anbindung Linienbus: nein</string>
-    <string name="poi_tourist_bus_yes">Reisebuszufahrt: ja</string>
-    <string name="poi_tourist_bus_designated">Reisebuszufahrt: ausgewiesen</string>
-    <string name="poi_tourist_bus_no">Reisebuszufahrt: nein</string>
+    <string name="poi_tourist_bus_yes">Zufahrt Reisebus: ja</string>
+    <string name="poi_tourist_bus_designated">Zufahrt Reisebus: ausgewiesen</string>
+    <string name="poi_tourist_bus_no">Zufahrt Reisebus: nein</string>
     <string name="poi_ski_yes">Zufahrt Ski: ja</string>
     <string name="poi_ski_no">Zufahrt Ski: nein</string>
     <string name="poi_snowmobile_private">Zufahrt Schneemobil: privat</string>
@@ -3683,8 +3683,8 @@
     <string name="poi_psv_yes">Zufahrt öffentliche Verkehrsmittel: ja</string>
     <string name="poi_psv_designated">Zufahrt öffentliche Verkehrsmittel: ausgewiesen</string>
     <string name="poi_psv_no">Zufahrt öffentliche Verkehrsmittel: nein</string>
-    <string name="poi_coach_yes">Zufahrt Bus: ja</string>
-    <string name="poi_coach_no">Zufahrt Bus: nein</string>
+    <string name="poi_coach_yes">Zufahrt Fernbus: ja</string>
+    <string name="poi_coach_no">Zufahrt Fernbus: nein</string>
     <string name="poi_snowmobile_no">Zufahrt Schneemobil: nein</string>
     <string name="poi_agricultural_yes">Zufahrt landwirtschaftliche Fahrzeuge: ja</string>
     <string name="poi_agricultural_no">Zufahrt landwirtschaftliche Fahrzeuge: nein</string>
@@ -3736,7 +3736,7 @@
     <string name="poi_cash_withdrawal">Bargeldbezug</string>
     <string name="poi_cash_withdrawal_operator">Betreiber der Bargeldauszahlungen</string>
     <string name="poi_cash_withdrawal_type_checkout">Bargeldbezugsart: Kasse</string>
-    <string name="poi_cash_withdrawal_type_self_checkout">Bargeldbezugsart: Selbstzahlerkasse</string>
+    <string name="poi_cash_withdrawal_type_self_checkout">Bargeldbezugsart: Selbstbedienungskasse</string>
     <string name="poi_cash_withdrawal_limit">Bargeldbezugslimit</string>
     <string name="poi_cash_withdrawal_currency">Bargeldbezugswährung</string>
     <string name="poi_cash_withdrawal_purchase_required_yes">Bargeldbezug: Kauf erforderlich</string>
@@ -3804,8 +3804,8 @@
     <string name="poi_traffic_signals_sound_locate">Nur wenn Gehen erlaubt ist</string>
     <string name="poi_tactile_paving_contrasted">Kontrastiert</string>
     <string name="poi_tactile_paving_incorrect">Falsch</string>
-    <string name="poi_covered_booth">Stand</string>
-    <string name="poi_booth">Standtyp</string>
+    <string name="poi_covered_booth">Unterstand</string>
+    <string name="poi_booth">Unterstand Typ</string>
     <string name="poi_tactile_paving_primitive">Primitiv</string>
     <string name="poi_seamark_water_level_part_submerged">Wasserstand: teilweise überflutet</string>
     <string name="poi_seamark_water_level_submerged">Wasserstand: überflutet</string>
@@ -3820,5 +3820,5 @@
     <string name="poi_drinking_water_refill_yes">Trinkwassernachfüllung: ja</string>
     <string name="poi_drinking_water_refill_no">Trinkwassernachfüllung: nein</string>
     <string name="poi_drinking_water_refill_network">Trinkwassernachfüllnetz</string>
-    <string name="poi_internet_access_fee_customers">Internetzugang Gebühr für Kunden</string>
+    <string name="poi_internet_access_fee_customers"></string>
 </resources>
