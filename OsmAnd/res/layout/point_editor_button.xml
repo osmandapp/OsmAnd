@@ -9,26 +9,31 @@
 	android:paddingRight="9dp"
 	android:paddingBottom="4dp">
 
-	<ImageView
-		android:id="@+id/outline"
-		android:layout_width="48dp"
-		android:layout_height="48dp"
-		android:visibility="invisible"
-		app:srcCompat="@drawable/bg_point_circle_contour" />
-
-	<ImageView
-		android:id="@+id/background"
+	<FrameLayout
 		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_margin="4dp"
-		android:background="@drawable/bg_point_circle" />
+		android:layout_height="wrap_content">
 
-	<ImageView
-		android:id="@+id/icon"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_margin="12dp"
-		android:clickable="false"
-		android:visibility="gone"
-		app:srcCompat="@drawable/mx_special_star_stroked" />
+		<ImageView
+			android:id="@+id/outline"
+			android:layout_width="48dp"
+			android:layout_height="48dp"
+			android:visibility="invisible"
+			app:srcCompat="@drawable/bg_point_circle_contour" />
+
+		<ImageView
+			android:id="@+id/background"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:background="@drawable/bg_point_circle" />
+
+		<ImageView
+			android:id="@+id/icon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:clickable="false"
+			android:visibility="gone"
+			app:srcCompat="@drawable/mx_special_star_stroked" />
+	</FrameLayout>
 </FrameLayout>

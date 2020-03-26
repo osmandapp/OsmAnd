@@ -100,8 +100,8 @@
 
 					<ImageView
 						android:id="@+id/name_icon"
-						android:layout_width="@dimen/favorites_icon_size"
-						android:layout_height="@dimen/favorites_icon_size"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
 						android:layout_gravity="end"
 						android:layout_margin="10dp"
 						android:contentDescription="@string/icon"
@@ -236,7 +236,7 @@
 						android:layout_height="wrap_content"
 						android:orientation="horizontal"
 						android:paddingTop="6dp"
-						android:paddingBottom="@dimen/content_padding">
+						android:paddingBottom="@dimen/content_padding_half">
 
 						<androidx.recyclerview.widget.RecyclerView
 							android:id="@+id/group_recycler_view"
@@ -403,7 +403,6 @@
 					android:layout_width="match_parent"
 					android:layout_height="1dp"
 					android:layout_marginTop="@dimen/content_padding_half"
-					android:layout_marginBottom="@dimen/content_padding_half"
 					android:background="?attr/dashboard_divider" />
 
 				<LinearLayout
@@ -411,7 +410,6 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_gravity="center"
-					android:gravity="center_vertical"
 					android:orientation="horizontal">
 
 					<ImageView
@@ -430,6 +428,7 @@
 					<LinearLayout
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
+						android:paddingTop="11dp"
 						android:orientation="vertical">
 
 						<TextView
