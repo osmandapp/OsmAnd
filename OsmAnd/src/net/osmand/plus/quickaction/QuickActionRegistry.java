@@ -34,6 +34,7 @@ import net.osmand.plus.quickaction.actions.NewAction;
 import net.osmand.plus.quickaction.actions.ShowHideFavoritesAction;
 import net.osmand.plus.quickaction.actions.ShowHideGpxTracksAction;
 import net.osmand.plus.quickaction.actions.ShowHidePoiAction;
+import net.osmand.util.Algorithms;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -190,19 +191,24 @@ public class QuickActionRegistry {
 
 
 	private List<QuickAction> parseActiveActionsList(String json) {
-		Type type = new TypeToken<List<QuickAction>>() {
-		}.getType();
-		List<QuickAction> quickActions = gson.fromJson(json, type);
-		List<QuickAction> rquickActions = new ArrayList<>();
-		if (quickActions != null) {
-			for (QuickAction qa : quickActions) {
-				if (qa != null) {
-					rquickActions.add(qa);
+		List<QuickAction> resQuickActions;
+		if (!Algorithms.isEmpty(json)) {
+			Type type = new TypeToken<List<QuickAction>>() {
+			}.getType();
+			List<QuickAction> quickActions = gson.fromJson(json, type);
+			resQuickActions = new ArrayList<>(quickActions.size());
+			if (quickActions != null) {
+				for (QuickAction qa : quickActions) {
+					if (qa != null) {
+						resQuickActions.add(qa);
+					}
 				}
 			}
+		} else {
+			resQuickActions = new ArrayList<>();
 		}
-		this.quickActions = rquickActions;
-		return rquickActions;
+		this.quickActions = resQuickActions;
+		return resQuickActions;
 	}
 
 	public List<QuickActionType> updateActionTypes() {

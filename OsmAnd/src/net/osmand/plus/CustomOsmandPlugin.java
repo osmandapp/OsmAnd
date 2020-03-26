@@ -136,8 +136,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 							PoiUiFilterSettingsItem poiUiFilterSettingsItem = (PoiUiFilterSettingsItem) item;
 							List<PoiUIFilter> poiUIFilters = poiUiFilterSettingsItem.getItems();
 							for (PoiUIFilter filter : poiUIFilters) {
-								PoiUIFilter savedFilter = app.getPoiFilters().getFilterById(filter.getFilterId());
-								app.getPoiFilters().removePoiFilter(savedFilter);
+								app.getPoiFilters().removePoiFilter(filter);
 							}
 							app.getPoiFilters().reloadAllPoiFilters();
 							app.getPoiFilters().loadSelectedPoiFilters();

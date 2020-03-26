@@ -753,16 +753,33 @@ public class SettingsHelper {
 		}
 
 		private void renameProfile() {
+			List<ApplicationMode> values = ApplicationMode.allPossibleValues();
+			if (Algorithms.isEmpty(modeBean.userProfileName)) {
+				ApplicationMode appMode = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
+				if (appMode != null) {
+					modeBean.userProfileName = app.getString(appMode.getNameKeyResource());
+				}
+			}
 			int number = 0;
 			while (true) {
 				number++;
 				String key = modeBean.stringKey + "_" + number;
-				if (ApplicationMode.valueOfStringKey(key, null) == null) {
+				String name = modeBean.userProfileName + '_' + number;
+				if (ApplicationMode.valueOfStringKey(key, null) == null && isNameUnique(values, name)) {
+					modeBean.userProfileName = name;
 					modeBean.stringKey = key;
-					modeBean.userProfileName = modeBean.userProfileName + "_" + number;
 					break;
 				}
 			}
+		}
+
+		private boolean isNameUnique(List<ApplicationMode> values, String name) {
+			for (ApplicationMode mode : values) {
+				if (mode.getUserProfileName().equals(name)) {
+					return false;
+				}
+			}
+			return true;
 		}
 
 		@Override
@@ -1224,6 +1241,18 @@ public class SettingsHelper {
 		void readFromJson(@NonNull JSONObject json) throws JSONException {
 			subtype = FileSubtype.OTHER;
 			super.readFromJson(json);
+		}
+
+		@Override
+		void writeToJson(@NonNull JSONObject json) throws JSONException {
+			super.writeToJson(json);
+			String fileName = getFileName();
+			if (!Algorithms.isEmpty(fileName)) {
+				if (fileName.endsWith(File.separator)) {
+					fileName = fileName.substring(0, fileName.length() - 1);
+				}
+				json.put("file", fileName);
+			}
 		}
 
 		@Override
