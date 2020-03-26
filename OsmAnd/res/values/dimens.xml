@@ -14,4 +14,6 @@
     <dimen name="context_img_card_width">280dp</dimen>
     <dimen name="context_img_card_height">160dp</dimen>
 
+    <dimen name="line_spacing_multiplier_description">1.2</dimen>
+
 </resources>

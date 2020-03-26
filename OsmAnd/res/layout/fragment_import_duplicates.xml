@@ -26,6 +26,7 @@
 				android:paddingTop="@dimen/list_header_settings_top_margin"
 				android:paddingEnd="@dimen/content_padding"
 				android:paddingBottom="@dimen/list_header_settings_top_margin"
+				android:lineSpacingMultiplier="@dimen/line_spacing_multiplier_description"
 				android:text="@string/import_duplicates_description"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_list_text_size" />
@@ -135,14 +136,16 @@
 
 		</com.google.android.material.appbar.CollapsingToolbarLayout>
 
-		<ProgressBar
+		<me.zhanghai.android.materialprogressbar.MaterialProgressBar
 			android:id="@+id/progress_bar"
-			style="?android:attr/progressBarStyleHorizontal"
+			style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:minHeight="0dp"
-			android:indeterminate="true"
+			android:layout_height="5dp"
 			android:visibility="gone"
+			android:indeterminate="true"
+			osmand:mpb_progressStyle="horizontal"
+			osmand:mpb_setBothDrawables="true"
+			osmand:mpb_useIntrinsicPadding="false"
 			tools:visibility="visible" />
 
 	</com.google.android.material.appbar.AppBarLayout>
