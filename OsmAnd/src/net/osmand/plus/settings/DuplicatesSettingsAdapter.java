@@ -21,7 +21,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ProfileIconColors;
-import net.osmand.plus.profiles.RoutingProfileDataObject;
+import net.osmand.plus.profiles.RoutingProfileDataObject.RoutingProfilesResources;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
@@ -90,9 +90,10 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 				String routingProfileValue = modeBean.routingProfile;
 				if (!routingProfileValue.isEmpty()) {
 					try {
-						routingProfile = app.getString(RoutingProfileDataObject.RoutingProfilesResources.valueOf(routingProfileValue.toUpperCase()).getStringRes());
+						routingProfile = app.getString(RoutingProfilesResources.valueOf(routingProfileValue.toUpperCase()).getStringRes());
+						routingProfile = Algorithms.capitalizeFirstLetterAndLowercase(routingProfile);
 					} catch (IllegalArgumentException e) {
-						routingProfile = routingProfileValue.substring(0, 1).toUpperCase() + routingProfileValue.substring(1);
+						routingProfile = Algorithms.capitalizeFirstLetterAndLowercase(routingProfileValue);
 						LOG.error("Error trying to get routing resource for " + routingProfileValue + "\n" + e);
 					}
 				}

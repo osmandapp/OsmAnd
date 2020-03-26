@@ -183,8 +183,9 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				if (!routingProfileValue.isEmpty()) {
 					try {
 						routingProfile = app.getString(RoutingProfilesResources.valueOf(routingProfileValue.toUpperCase()).getStringRes());
+						routingProfile = Algorithms.capitalizeFirstLetterAndLowercase(routingProfile);
 					} catch (IllegalArgumentException e) {
-						routingProfile = routingProfileValue.substring(0, 1).toUpperCase() + routingProfileValue.substring(1);
+						routingProfile = Algorithms.capitalizeFirstLetterAndLowercase(routingProfileValue);
 						LOG.error("Error trying to get routing resource for " + routingProfileValue + "\n" + e);
 					}
 				}
