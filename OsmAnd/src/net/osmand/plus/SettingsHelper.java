@@ -1204,6 +1204,18 @@ public class SettingsHelper {
 		}
 
 		@Override
+		void writeToJson(@NonNull JSONObject json) throws JSONException {
+			super.writeToJson(json);
+			String fileName = getFileName();
+			if (!Algorithms.isEmpty(fileName)) {
+				if (fileName.endsWith(File.separator)) {
+					fileName = fileName.substring(0, fileName.length() - 1);
+				}
+				json.put("file", fileName);
+			}
+		}
+
+		@Override
 		public boolean applyFileName(@NonNull String fileName) {
 			if (fileName.endsWith(File.separator)) {
 				return false;
