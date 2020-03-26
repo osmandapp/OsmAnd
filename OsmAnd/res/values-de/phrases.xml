@@ -3804,7 +3804,7 @@
     <string name="poi_traffic_signals_sound_locate">Nur wenn Gehen erlaubt ist</string>
     <string name="poi_tactile_paving_contrasted">Kontrastiert</string>
     <string name="poi_tactile_paving_incorrect">Falsch</string>
-    <string name="poi_covered_booth">Stand</string>
+    <string name="poi_covered_booth">Unterstand</string>
     <string name="poi_booth">Unterstand Typ</string>
     <string name="poi_tactile_paving_primitive">Primitiv</string>
     <string name="poi_seamark_water_level_part_submerged">Wasserstand: teilweise überflutet</string>
