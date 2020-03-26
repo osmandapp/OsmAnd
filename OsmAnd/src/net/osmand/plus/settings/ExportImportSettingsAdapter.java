@@ -291,7 +291,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				amount++;
 			}
 		}
-		return String.format(app.getString(R.string.n_items_of_z), String.valueOf(amount), String.valueOf(listItems.size()));
+		return app.getString(R.string.n_items_of_z, String.valueOf(amount), String.valueOf(listItems.size()));
 	}
 
 	private int getGroupTitle(Type type) {
