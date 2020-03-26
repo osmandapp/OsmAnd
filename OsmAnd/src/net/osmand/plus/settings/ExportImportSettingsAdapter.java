@@ -14,7 +14,9 @@ import androidx.core.widget.CompoundButtonCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
+import net.osmand.plus.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -23,10 +25,13 @@ import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ProfileIconColors;
+import net.osmand.plus.profiles.RoutingProfileDataObject.RoutingProfilesResources;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
 import net.osmand.view.ThreeStateCheckbox;
+
+import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -41,6 +46,7 @@ import static net.osmand.view.ThreeStateCheckbox.State.UNCHECKED;
 
 class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
+	private static final Log LOG = PlatformUtil.getLog(ExportImportSettingsAdapter.class.getName());
 	private OsmandApplication app;
 	private UiUtilities uiUtilities;
 	private List<? super Object> dataToOperate;
@@ -91,7 +97,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, activeColorRes)));
 
 		final List<?> listItems = itemsMap.get(type);
-		subTextTv.setText(String.valueOf(listItems.size()));
+		subTextTv.setText(getSelectedItemsAmount(listItems));
 
 		if (dataToOperate.containsAll(listItems)) {
 			checkBox.setState(CHECKED);
@@ -165,13 +171,24 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
 		switch (type) {
 			case PROFILE:
-				String profileName = ((ApplicationMode.ApplicationModeBean) currentItem).userProfileName;
+				ApplicationModeBean modeBean = (ApplicationModeBean) currentItem;
+				String profileName = modeBean.userProfileName;
 				if (Algorithms.isEmpty(profileName)) {
-					ApplicationMode appMode = ApplicationMode.valueOfStringKey(((ApplicationMode.ApplicationModeBean) currentItem).stringKey, null);
+					ApplicationMode appMode = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
 					profileName = app.getString(appMode.getNameKeyResource());
 				}
 				title.setText(profileName);
-				String routingProfile = (((ApplicationMode.ApplicationModeBean) currentItem).routingProfile);
+				String routingProfile = "";
+				String routingProfileValue = modeBean.routingProfile;
+				if (!routingProfileValue.isEmpty()) {
+					try {
+						routingProfile = app.getString(RoutingProfilesResources.valueOf(routingProfileValue.toUpperCase()).getStringRes());
+						routingProfile = Algorithms.capitalizeFirstLetterAndLowercase(routingProfile);
+					} catch (IllegalArgumentException e) {
+						routingProfile = Algorithms.capitalizeFirstLetterAndLowercase(routingProfileValue);
+						LOG.error("Error trying to get routing resource for " + routingProfileValue + "\n" + e);
+					}
+				}
 				if (Algorithms.isEmpty(routingProfile)) {
 					subText.setVisibility(View.GONE);
 				} else {
@@ -181,8 +198,8 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 							routingProfile));
 					subText.setVisibility(View.VISIBLE);
 				}
-				int profileIconRes = AndroidUtils.getDrawableId(app, ((ApplicationMode.ApplicationModeBean) currentItem).iconName);
-				ProfileIconColors iconColor = ((ApplicationMode.ApplicationModeBean) currentItem).iconColor;
+				int profileIconRes = AndroidUtils.getDrawableId(app, modeBean.iconName);
+				ProfileIconColors iconColor = modeBean.iconColor;
 				icon.setImageDrawable(uiUtilities.getIcon(profileIconRes, iconColor.getColor(nightMode)));
 				break;
 			case QUICK_ACTIONS:
@@ -265,6 +282,16 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	@Override
 	public boolean isChildSelectable(int i, int i1) {
 		return true;
+	}
+
+	private String getSelectedItemsAmount(List<?> listItems) {
+		int amount = 0;
+		for (Object item : listItems) {
+			if (dataToOperate.contains(item)) {
+				amount++;
+			}
+		}
+		return app.getString(R.string.n_items_of_z, String.valueOf(amount), String.valueOf(listItems.size()));
 	}
 
 	private int getGroupTitle(Type type) {

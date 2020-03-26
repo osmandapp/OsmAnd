@@ -172,8 +172,10 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		}
 
 		adapter = new ExportImportSettingsAdapter(app, nightMode, true);
+		Map<Type, List<?>> itemsMap = new HashMap<>();
 		if (settingsItems != null) {
-			adapter.updateSettingsList(getSettingsToOperate(settingsItems));
+			itemsMap = getSettingsToOperate(settingsItems);
+			adapter.updateSettingsList(itemsMap);
 		}
 		expandableList.setAdapter(adapter);
 		toolbarLayout.setTitle(getString(R.string.shared_string_import));
@@ -185,6 +187,9 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 			updateUi(R.string.shared_string_importing, R.string.importing_from);
 		} else {
 			toolbarLayout.setTitle(getString(R.string.shared_string_import));
+		}
+		if (itemsMap.size() == 1 && itemsMap.containsKey(Type.PROFILE)) {
+			expandableList.expandGroup(0);
 		}
 	}
 

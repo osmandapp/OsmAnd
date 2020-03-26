@@ -1,5 +1,6 @@
 package net.osmand.plus.settings;
 
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.ExportImportSettingsAdapter.Type;
 
 
@@ -60,6 +62,10 @@ public class ImportedSettingsItemsAdapter extends
 
 		holder.icon.setPadding(0, 0, AndroidUtils.dpToPx(app, 16), 0);
 		holder.title.setTextColor(app.getResources().getColor(activeColorRes));
+		Typeface typeface = FontCache.getFont(app, app.getString(R.string.font_roboto_medium));
+		if (typeface != null) {
+			holder.title.setTypeface(typeface);
+		}
 		holder.divider.setVisibility(isLastItem ? View.VISIBLE : View.GONE);
 		holder.itemView.setOnClickListener(new View.OnClickListener() {
 			@Override

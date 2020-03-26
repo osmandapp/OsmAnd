@@ -13,6 +13,7 @@
 		android:paddingStart="@dimen/content_padding"
 		android:paddingTop="@dimen/list_header_settings_top_margin"
 		android:paddingEnd="@dimen/content_padding"
+		android:lineSpacingMultiplier="@dimen/line_spacing_multiplier_description"
 		android:paddingBottom="@dimen/list_header_settings_top_margin"
 		android:textColor="?android:textColorPrimary"
 		android:textSize="@dimen/default_list_text_size"
