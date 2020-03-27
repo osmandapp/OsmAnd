@@ -35,6 +35,7 @@ public interface OsmAndCustomizationConstants {
 	String POI_OVERLAY_LABELS_ID = SHOW_ITEMS_ID_SCHEME + "poi_overlay_labels";
 	String TRANSPORT_ID = SHOW_ITEMS_ID_SCHEME + "transport";
 	String GPX_FILES_ID = SHOW_ITEMS_ID_SCHEME + "gpx_files";
+	String WIKIPEDIA_ID = SHOW_ITEMS_ID_SCHEME + "wikipedia";
 	String MAP_MARKERS_ID = SHOW_ITEMS_ID_SCHEME + "map_markers";
 	String MAP_SOURCE_ID = SHOW_ITEMS_ID_SCHEME + "map_source";
 	String RECORDING_LAYER = SHOW_ITEMS_ID_SCHEME + "recording_layer";

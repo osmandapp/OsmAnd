@@ -16,6 +16,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsGeneralActivity;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
+import net.osmand.plus.helpers.LanguageUtilities;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
@@ -139,6 +140,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 		preferredLocale.setSummary(settings.PREFERRED_LOCALE.get());
 
 		Pair<String[], String[]> preferredLocaleInfo = SettingsGeneralActivity.getPreferredLocaleIdsAndValues(ctx);
+//		Pair<String[], String[]> preferredLocaleInfo = LanguageUtilities.getSupportedLocaleIdsAndValues(ctx, true, true);
 		if (preferredLocaleInfo != null) {
 			preferredLocale.setEntries(preferredLocaleInfo.first);
 			preferredLocale.setEntryValues(preferredLocaleInfo.second);

@@ -111,10 +111,6 @@ public class QuickSearchHelper implements ResourceListener {
 		for (CustomSearchPoiFilter udf : poiFilters.getUserDefinedPoiFilters(false)) {
 			core.addCustomSearchPoiFilter(udf, 0);
 		}
-		PoiUIFilter localWikiPoiFilter = poiFilters.getLocalWikiPOIFilter();
-		if (localWikiPoiFilter != null) {
-			core.addCustomSearchPoiFilter(localWikiPoiFilter, 1);
-		}
 		core.addCustomSearchPoiFilter(poiFilters.getShowAllPOIFilter(), 1);
 		refreshFilterOrders();
 	}

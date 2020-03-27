@@ -1012,9 +1012,13 @@ public class OsmandSettings {
 			super(id, defaultValue);
 			this.delimiter = delimiter;
 		}
-		
+
 		public boolean addValue(String res) {
-			String vl = get();
+			return addModeValue(getApplicationMode(), res);
+		}
+
+		public boolean addModeValue(ApplicationMode appMode, String res) {
+			String vl = getModeValue(appMode);
 			if (vl == null || vl.isEmpty()) {
 				vl = res + delimiter;
 			} else {
@@ -1023,9 +1027,13 @@ public class OsmandSettings {
 			set(vl);
 			return true;
 		}
-		
+
 		public void clearAll() {
-			set("");
+			clearAllForProfile(getApplicationMode());
+		}
+
+		public void clearAllForProfile(ApplicationMode appMode) {
+			setModeValue(appMode, "");
 		}
 		
 		public boolean containsValue(String res) {
@@ -1055,7 +1063,11 @@ public class OsmandSettings {
 		}
 
 		public List<String> getStringsList() {
-			final String listAsString = get();
+			return getStringsList(getApplicationMode());
+		}
+
+		public List<String> getStringsList(ApplicationMode appMode) {
+			final String listAsString = getModeValue(appMode);
 			if (listAsString != null) {
 				if (listAsString.contains(delimiter)) {
 					return Arrays.asList(listAsString.split(delimiter));
@@ -1069,11 +1081,15 @@ public class OsmandSettings {
 		}
 
 		public void setStringsList(List<String> values) {
+			setStringsList(getApplicationMode(), values);
+		}
+
+		public void setStringsList(ApplicationMode appMode, List<String> values) {
 			if (values == null || values.size() == 0) {
-				set(null);
+				setModeValue(appMode, null);
 				return;
 			}
-			clearAll();
+			clearAllForProfile(appMode);
 			for (String value : values) {
 				addValue(value);
 			}
@@ -1261,6 +1277,10 @@ public class OsmandSettings {
 
 	public final CommonPreference<Boolean> WIKI_ARTICLE_SHOW_IMAGES_ASKED = new BooleanPreference("wikivoyage_show_images_asked", false).makeGlobal();
 	public final CommonPreference<WikiArticleShowImages> WIKI_ARTICLE_SHOW_IMAGES = new EnumIntPreference<>("wikivoyage_show_imgs", WikiArticleShowImages.OFF, WikiArticleShowImages.values()).makeGlobal();
+	public final CommonPreference<Boolean> SHOW_WIKI_POI = new BooleanPreference("show_wiki_poi", false).makeProfile();
+	public final CommonPreference<Boolean> ENABLE_ALL_WIKI_LANGUAGES = new BooleanPreference("enable_all_wiki_languages", false).makeProfile();
+	public final ListStringPreference ENABLED_WIKI_LANGUAGES = (ListStringPreference)
+			new ListStringPreference("enabled_wiki_languages", null, ",,").makeProfile().cache();
 
 	public final CommonPreference<Boolean> SELECT_MARKER_ON_SINGLE_TAP = new BooleanPreference("select_marker_on_single_tap", false).makeProfile();
 	public final CommonPreference<Boolean> KEEP_PASSED_MARKERS_ON_MAP = new BooleanPreference("keep_passed_markers_on_map", true).makeProfile();

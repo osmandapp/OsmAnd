@@ -47,6 +47,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
@@ -54,6 +55,7 @@ import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.plus.wikipedia.WikipediaPOIMenu;
 import net.osmand.render.RenderingRule;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleStorageProperties;
@@ -98,6 +100,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_RENDERING_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.WIKIPEDIA_ID;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_DENSITY_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
@@ -195,6 +198,10 @@ public class ConfigureMapMenu {
 			} else if (itemId == R.string.layer_gpx_layer && cm.getItem(pos).getSelected()) {
 				showGpxSelectionDialog(adapter, adapter.getItem(pos));
 				return false;
+			} else if (itemId == R.string.shared_string_wikipedia) {
+				ma.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.WIKIPEDIA,
+						AndroidUtils.getCenterViewCoordinates(view));
+				return false;
 			} else {
 				CompoundButton btn = (CompoundButton) view.findViewById(R.id.toggle_item);
 				if (btn != null && btn.getVisibility() == View.VISIBLE) {
@@ -235,6 +242,8 @@ public class ConfigureMapMenu {
 				} else {
 					showGpxSelectionDialog(adapter, adapter.getItem(pos));
 				}
+			} else if (itemId == R.string.shared_string_wikipedia) {
+				WikipediaPOIMenu.toggleWikipediaPOI(ma, isChecked);
 			} else if (itemId == R.string.map_markers) {
 				settings.SHOW_MAP_MARKERS.set(isChecked);
 			} else if (itemId == R.string.layer_map) {
@@ -315,7 +324,7 @@ public class ConfigureMapMenu {
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_fav_dark)
 				.setListener(l).createItem());
-		selected = app.getPoiFilters().isShowingAnyPoi();
+		selected = app.getPoiFilters().isShowingAnyPoiByType(PoiFiltersHelper.PoiUiType.STANDARD);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(POI_OVERLAY_ID)
 				.setTitleId(R.string.layer_poi, activity)
@@ -523,6 +532,16 @@ public class ConfigureMapMenu {
 				.setDescription(app.getSelectedGpxHelper().getGpxDescription())
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_polygom_dark)
+				.setSecondaryIcon(R.drawable.ic_action_additional_option)
+				.setListener(l).createItem());
+
+		selected = settings.SHOW_WIKI_POI.get();
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setId(WIKIPEDIA_ID)
+				.setTitleId(R.string.shared_string_wikipedia, activity)
+				.setSelected(selected)
+				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setIcon(R.drawable.ic_plugin_wikipedia)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(l).createItem());
 

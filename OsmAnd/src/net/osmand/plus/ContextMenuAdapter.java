@@ -405,10 +405,10 @@ public class ContextMenuAdapter {
 					};
 					ch.setOnCheckedChangeListener(listener);
 					ch.setVisibility(View.VISIBLE);
-				} else if (ch != null) {
-					ch.setVisibility(View.GONE);
 				}
-				if (profileDependent) {
+				if (item.shouldHideCompoundButton()) {
+					ch.setVisibility(View.GONE);
+				} else if (profileDependent) {
 					UiUtilities.setupCompoundButton(nightMode, currentModeColor, ch);
 				}
 			}

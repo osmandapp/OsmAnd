@@ -84,6 +84,7 @@ import net.osmand.plus.views.DownloadedRegionsLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.wikipedia.WikipediaPOIMenu;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -174,7 +175,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		MAPILLARY,
 		CONTOUR_LINES,
 		HILLSHADE,
-		OSM_NOTES
+		OSM_NOTES,
+		WIKIPEDIA
 	}
 
 	private Map<DashboardActionButtonType, DashboardActionButton> actionButtons = new HashMap<>();
@@ -321,6 +323,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			tv.setText(R.string.layer_hillshade);
 		} else if (visibleType == DashboardType.OSM_NOTES) {
 			tv.setText(R.string.osm_notes);
+		} else if (visibleType == DashboardType.WIKIPEDIA) {
+			tv.setText(R.string.shared_string_wikipedia);
 		}
 		ImageView edit = (ImageView) dashboardView.findViewById(R.id.toolbar_edit);
 		edit.setVisibility(View.GONE);
@@ -669,7 +673,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				&& visibleType != DashboardType.CONFIGURE_MAP
 				&& visibleType != DashboardType.CONTOUR_LINES
 				&& visibleType != DashboardType.HILLSHADE
-				&& visibleType != DashboardType.OSM_NOTES) {
+				&& visibleType != DashboardType.OSM_NOTES
+				&& visibleType != DashboardType.WIKIPEDIA) {
 			listView.setDivider(dividerDrawable);
 			listView.setDividerHeight(AndroidUtils.dpToPx(mapActivity, 1f));
 		} else {
@@ -707,6 +712,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			cm = HillshadeMenu.createListAdapter(mapActivity);
 		} else if (visibleType == DashboardType.OSM_NOTES) {
 			cm = OsmNotesMenu.createListAdapter(mapActivity);
+		} else if (visibleType == DashboardType.WIKIPEDIA) {
+			cm = WikipediaPOIMenu.createListAdapter(mapActivity);
 		}
 		if (cm != null) {
 			updateListAdapter(cm);
@@ -725,14 +732,16 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	public void onNewDownloadIndexes() {
-		if (visibleType == DashboardType.CONTOUR_LINES || visibleType == DashboardType.HILLSHADE) {
+		if (visibleType == DashboardType.CONTOUR_LINES
+				|| visibleType == DashboardType.HILLSHADE
+				|| visibleType == DashboardType.WIKIPEDIA) {
 			refreshContent(true);
 		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public void onDownloadInProgress() {
-		if (visibleType == DashboardType.CONTOUR_LINES || visibleType == DashboardType.HILLSHADE) {
+		if (visibleType == DashboardType.CONTOUR_LINES || visibleType == DashboardType.HILLSHADE || visibleType == DashboardType.WIKIPEDIA) {
 			DownloadIndexesThread downloadThread = getMyApplication().getDownloadThread();
 			IndexItem downloadIndexItem = downloadThread.getCurrentDownloadingItem();
 			if (downloadIndexItem != null) {
@@ -759,6 +768,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				}
 			}
 			SRTMPlugin.refreshMapComplete(mapActivity);
+		} else if (visibleType == DashboardType.WIKIPEDIA) {
+			refreshContent(true);
 		}
 	}
 

@@ -110,7 +110,7 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	protected View getCustomButtonView(boolean checked) {
-		View customView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.bottom_sheet_item_preference_switch, null);
+		View customView = UiUtilities.getInflater(getContext(), nightMode).inflate(getCompoundButtonLayoutId(), null);
 		updateCustomButtonView(customView, checked);
 
 		return customView;
@@ -126,7 +126,7 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		int selectedColor = UiUtilities.getColorWithAlpha(color, checked ? 0.3f : 0.5f);
 
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			int bgResId = R.drawable.rectangle_rounded_right;
+			int bgResId = getBgResId();
 			int selectableResId = R.drawable.ripple_rectangle_rounded_right;
 
 			Drawable bgDrawable = app.getUIUtilities().getPaintedIcon(bgResId, bgColor);
@@ -138,6 +138,14 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 			Drawable bgDrawable = app.getUIUtilities().getPaintedIcon(bgResId, bgColor);
 			AndroidUtils.setBackground(buttonView, bgDrawable);
 		}
+	}
+
+	protected int getCompoundButtonLayoutId() {
+		return R.layout.bottom_sheet_item_preference_switch;
+	}
+
+	protected int getBgResId() {
+		return R.drawable.rectangle_rounded_right;
 	}
 
 	private SwitchPreferenceEx getSwitchPreferenceEx() {
