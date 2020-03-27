@@ -3598,4 +3598,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="hillshade_description">Mapa Hillshade wykorzystująca ciemne odcienie do pokazania stoków, szczytów i nizin.</string>
     <string name="shared_string_terrain">Teren</string>
     <string name="n_items_of_z">%1$s z %2$s</string>
+    <string name="shared_string_square">Kwadrat</string>
+    <string name="shared_string_rhomb">Romb</string>
+    <string name="shared_string_circle">Okrąg</string>
+    <string name="select_shape">Wybierz kształt</string>
 </resources>
