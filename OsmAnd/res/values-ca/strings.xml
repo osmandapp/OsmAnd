@@ -3551,4 +3551,21 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="recalculate_route_distance_promo">Es tornarà a calcular una nova ruta si la distància de la posició actual respecte la ruta vigent supera el valor seleccionat.</string>
     <string name="select_distance_route_will_recalc">Seleccioneu la desviació per sobre de la qual es tornarà a calcular la ruta.</string>
     <string name="recalculate_route_in_deviation">Recalcula la ruta cas de desviament</string>
+    <string name="shared_string_square">Quadrat</string>
+    <string name="shared_string_rhomb">Rombe</string>
+    <string name="shared_string_circle">Cercle</string>
+    <string name="select_shape">Seleccioneu forma</string>
+    <string name="select_group">Seleccioneu grup</string>
+    <string name="add_description">Afegiu una descripció</string>
+    <string name="delete_description">Suprimeix la descripció</string>
+    <string name="quick_action_terrain_descr">Un botó per mostrar o amagar la capa de terreny al mapa.</string>
+    <string name="quick_action_terrain_show">Mostra el terreny</string>
+    <string name="quick_action_terrain_hide">Amaga el terreny</string>
+    <string name="quick_action_show_hide_terrain">Mostra/amaga el terreny</string>
+    <string name="shared_string_hillshade">Ombrejat del relleu</string>
+    <string name="shared_string_legend">Llegenda</string>
+    <string name="shared_string_zoom_levels">Nivells de zoom</string>
+    <string name="shared_string_transparency">Transparència</string>
+    <string name="hillshade_download_description">Es necessiten mapes addicionals per veure l\'ombrejat de relleu al mapa.</string>
+    <string name="n_items_of_z">%1$s de %2$s</string>
 </resources>

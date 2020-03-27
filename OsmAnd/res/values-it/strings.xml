@@ -3568,4 +3568,26 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="restore_all_profile_settings">Ripristinare tutte le impostazioni del profilo\?</string>
     <string name="saving_new_profile">Salvataggio del nuovo profilo</string>
     <string name="profile_backup_failed">Impossibile fare una copia di salvataggio del profilo.</string>
+    <string name="clear_recorded_data_warning">Sei sicuro di voler eliminare i dati registrati\?</string>
+    <string name="importing_from">Importazione dei dati da %1$s</string>
+    <string name="shared_string_importing">Importazione in corso</string>
+    <string name="items_added">Oggetti aggiunti</string>
+    <string name="shared_string_import_complete">Importazione completata</string>
+    <string name="import_complete_description">Tutti i dati sono stati importati da %1$s, puoi utilizzare i bottoni sottostanti per aprire e gestire le parti dell\' applicazione di cui necessiti.</string>
+    <string name="recalculate_route_distance_promo">Il percorso verrà ricalcolato quando la distanza tra il percorso e la propria posizione è maggiore del valore selezionato.</string>
+    <string name="select_distance_route_will_recalc">Seleziona dopo che distanza effettuare il ricalcolo del percorso.</string>
+    <string name="recalculate_route_in_deviation">Ricalcola il percorso in caso di deviazione</string>
+    <string name="shared_string_square">Quadrato</string>
+    <string name="shared_string_rhomb">Rombo</string>
+    <string name="shared_string_circle">Cerchio</string>
+    <string name="select_shape">Seleziona la forma</string>
+    <string name="select_group">Seleziona il gruppo</string>
+    <string name="add_description">Aggiungi descrizione</string>
+    <string name="delete_description">Elimina descrizione</string>
+    <string name="quick_action_terrain_descr">Un bottone per mostrare o nascondere la vista rilievo sulla mappa.</string>
+    <string name="quick_action_terrain_show">Mostra rilievo</string>
+    <string name="quick_action_terrain_hide">Nascondi rilievo</string>
+    <string name="quick_action_show_hide_terrain">Mostra/nascondi rilievo</string>
+    <string name="download_slope_maps">Pendenze</string>
+    <string name="shared_string_hillshade">Rilievi ombra</string>
 </resources>
