@@ -3602,4 +3602,9 @@ Lon %2$s</string>
     <string name="shared_string_transparency">Transparenz</string>
     <string name="terrain_slider_description">Stellen Sie die minimale und maximale Zoomstufe ein, bei der die Ebene angezeigt wird.</string>
     <string name="shared_string_terrain">Gelände</string>
+    <string name="download_slope_maps">Hänge</string>
+    <string name="terrain_empty_state_text">Aktivieren Sie diese Option, um die Schatten- oder Hangkarte anzuzeigen. Weitere Informationen zu diesen Kartentypen finden Sie auf unserer Website</string>
+    <string name="shared_string_legend">Legende</string>
+    <string name="slope_read_more">Lesen Sie mehr über Hänge in %1$s.</string>
+    <string name="slope_download_description">Zusätzliche Karten sind erforderlich, um Hänge auf der Karte anzuzeigen.</string>
 </resources>
