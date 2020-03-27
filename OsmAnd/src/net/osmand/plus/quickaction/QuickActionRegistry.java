@@ -180,7 +180,7 @@ public class QuickActionRegistry {
 
 	private List<QuickAction> parseActiveActionsList(String json) {
 		List<QuickAction> resQuickActions;
-		if (Algorithms.isEmpty(json)) {
+		if (!Algorithms.isEmpty(json)) {
 			Type type = new TypeToken<List<QuickAction>>() {
 			}.getType();
 			List<QuickAction> quickActions = gson.fromJson(json, type);
