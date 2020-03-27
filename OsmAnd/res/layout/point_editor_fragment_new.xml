@@ -22,8 +22,6 @@
 			android:layout_height="@dimen/dashboard_map_toolbar"
 			android:background="?attr/card_and_list_background_basic"
 			android:minHeight="@dimen/dashboard_map_toolbar"
-			app:contentInsetLeft="72dp"
-			app:contentInsetStart="72dp"
 			osmand:subtitleTextColor="?android:textColorPrimary"
 			osmand:theme="@style/ThemeOverlay.AppCompat.ActionBar"
 			osmand:titleTextColor="?android:textColorPrimary">
@@ -37,6 +35,8 @@
 				android:scaleType="center"
 				android:src="@drawable/ic_action_replace"
 				android:layout_marginRight="@dimen/content_padding_half"
+				android:layout_marginStart="@dimen/content_padding_half"
+				android:layout_marginLeft="@dimen/content_padding_half"
 				android:layout_marginEnd="@dimen/content_padding_half" />
 
 		</androidx.appcompat.widget.Toolbar>
@@ -191,7 +191,7 @@
 							android:text="@string/select_group"
 							android:textColor="?android:textColorSecondary"
 							android:textSize="@dimen/default_desc_text_size"
-							osmand:typeface="@string/font_roboto_regular" />
+							osmand:typeface="@string/font_roboto_medium" />
 
 						<LinearLayout
 							android:id="@+id/group_list_button"
@@ -274,7 +274,7 @@
 					android:text="@string/select_icon_profile_dialog_title"
 					android:textColor="?android:textColorSecondary"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_regular" />
+					osmand:typeface="@string/font_roboto_medium" />
 
 				<androidx.recyclerview.widget.RecyclerView
 					android:id="@+id/group_name_recycler_view"
@@ -323,7 +323,7 @@
 						android:text="@string/select_color"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_regular" />
+						osmand:typeface="@string/font_roboto_medium" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/color_name"
@@ -338,7 +338,7 @@
 						android:text="@string/select_color"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_regular" />
+						osmand:typeface="@string/font_roboto_medium" />
 				</LinearLayout>
 
 				<net.osmand.plus.widgets.FlowLayout
@@ -373,7 +373,7 @@
 						android:text="@string/select_shape"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_regular" />
+						osmand:typeface="@string/font_roboto_medium" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/shape_name"
@@ -388,13 +388,15 @@
 						android:text="@string/select_shape"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_regular" />
+						osmand:typeface="@string/font_roboto_medium" />
 				</LinearLayout>
 
 				<net.osmand.plus.widgets.FlowLayout
 					android:id="@+id/select_shape"
+
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:gravity="start"
 					android:layout_marginStart="12dp"
 					android:layout_marginLeft="12dp"
 					android:layout_marginTop="6dp" />
