@@ -142,6 +142,7 @@ dependencies {
 	implementation( "org.jetbrains.kotlin:kotlin-stdlib:1.2.71") {
 		exclude group: 'org.jetbrains', module: 'annotations'
 	}
+	implementation 'androidx.multidex:multidex:2.0.1'
 	implementation 'androidx.appcompat:appcompat:1.0.0'
 	implementation 'com.google.android.material:material:1.0.0'
 	implementation 'androidx.browser:browser:1.0.0'
@@ -153,5 +154,4 @@ dependencies {
 		exclude group: 'com.android.support'
 	}
 	implementation 'org.jetbrains:annotations-java5:15.0'
-	implementation 'androidx.annotation:annotation:1.1.0'
 }
