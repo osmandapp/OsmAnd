@@ -31,6 +31,7 @@ import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -449,7 +450,14 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	}
 
 	@Override
-	public int getCategoryPoints(String category) {
+	public int getCategoryPointsCount(String category) {
+		WptPtEditor editor = getWptPtEditor();
+		if (editor != null) {
+			List<WptPt> points = editor.getGpxFile().getPointsByCategories().get(category);
+			if (points != null) {
+				return points.size();
+			}
+		}
 		return 0;
 	}
 
