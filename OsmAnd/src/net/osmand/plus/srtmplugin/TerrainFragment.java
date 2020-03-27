@@ -46,6 +46,8 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import org.apache.commons.logging.Log;
 
@@ -339,25 +341,29 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	                                String text,
 	                                String clickableText,
 	                                final String url,
-	                                final boolean fakeBold) {
+	                                final boolean medium) {
 		SpannableString spannableString = new SpannableString(text);
 		ClickableSpan clickableSpan = new ClickableSpan() {
 			@Override
 			public void onClick(@NonNull View view) {
 				Intent i = new Intent(Intent.ACTION_VIEW);
 				i.setData(Uri.parse(url));
-				startActivity(i);
+				if (AndroidUtils.isIntentSafe(app, i)) {
+					startActivity(i);
+				}
 			}
 
 			@Override
 			public void updateDrawState(@NonNull TextPaint ds) {
 				super.updateDrawState(ds);
-				ds.setFakeBoldText(fakeBold);
 				ds.setUnderlineText(false);
 			}
 		};
 		try {
 			int startIndex = text.indexOf(clickableText);
+			if (medium) {
+				spannableString.setSpan(new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), startIndex, startIndex + clickableText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			}
 			spannableString.setSpan(clickableSpan, startIndex, startIndex + clickableText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			textView.setText(spannableString);
 			textView.setMovementMethod(LinkMovementMethod.getInstance());
