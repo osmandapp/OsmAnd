@@ -456,7 +456,7 @@
 	<color name="profile_icon_color_yellow_dark">#F0B400</color>
 	<color name="profile_icon_color_magenta_dark">#CC0063</color>
 
-	<color name="profile_icon_color_outdated_light">#727272</color>
+	<color name="profile_icon_color_outdated_light">#A6A6A6</color>
 	<color name="profile_icon_color_outdated_dark">#727272</color>
 
 	<color name="profile_icon_color_inactive">#727272</color>
