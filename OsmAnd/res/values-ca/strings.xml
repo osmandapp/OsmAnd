@@ -2302,8 +2302,8 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="nautical_maps">Cartes nàutiques</string>
     <string name="quick_action_auto_zoom">Escala automàtica del mapa activa/desactiva</string>
     <string name="quick_action_auto_zoom_desc">Prement aquest botó d\'acció commuteu l\'escala automàtica del mapa segons la vostra velocitat.</string>
-    <string name="quick_action_auto_zoom_on">Activa l\'escala automàtica del mapa</string>
-    <string name="quick_action_auto_zoom_off">Desactiva l\'escala automàtica del mapa</string>
+    <string name="quick_action_auto_zoom_on">Activa l\'escala automàtica</string>
+    <string name="quick_action_auto_zoom_off">Desactiva l\'escala automàtica</string>
     <string name="quick_action_add_destination">Establiu destinació</string>
     <string name="quick_action_replace_destination">Substitueix destinació</string>
     <string name="quick_action_add_first_intermediate">Afegeix primer intermedi</string>
@@ -2375,7 +2375,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
 \nOsmAnd és un programari de codi obert que es desenvolupa activament. Tothom pot recolzar l\'aplicació informant d\'errors, millorant traduccions o programant noves característiques. El projecte també es fonamenta en les aportacions econòmiques per patrocinar la programació i validació de noves funcionalitats.
 \n"</string>
     <string name="shared_string_overview">Visió general</string>
-    <string name="animate_my_location">Situa la meva posició amb una animació</string>
+    <string name="animate_my_location">Anima la pròpia posició</string>
     <string name="animate_my_location_desc">Activa el desplaçament animat del mapa de \'La meva posició\' durant la navegació.</string>
     <string name="favorite_group_name">Nom del grup</string>
     <string name="change_color">Canvia el color</string>
@@ -2390,7 +2390,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="hillshade_menu_download_descr">Baixeu el mapa \'Ombrejat de relleu\' per veure ombrejat segons alçada.</string>
     <string name="hillshade_purchase_header">Per veure ombrejat de relleu en el mapa us cal comprar i Instal·lar el connector \'Corbes de nivell\'</string>
     <string name="shared_string_plugin">Connector</string>
-    <string name="srtm_purchase_header">Per veure les corbes de nivell cal que compreu i instal·leu el connector \'Corbes de nivell\'</string>
+    <string name="srtm_purchase_header">Compreu i instal·leu el connector \'Corbes de nivell\' per visualitzar una gradació vertical d\'àrees.</string>
     <string name="srtm_menu_download_descr">Baixeu el mapa \'Corbes de nivell\' per utilitzar-les en aquesta zona.</string>
     <string name="hide_from_zoom_level">Amaga segons el nivell d\'escala</string>
     <string name="quick_action_showhide_osmbugs_title">Mostra o amaga notes OSM</string>
@@ -3568,4 +3568,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_transparency">Transparència</string>
     <string name="hillshade_download_description">Es necessiten mapes addicionals per veure l\'ombrejat de relleu al mapa.</string>
     <string name="n_items_of_z">%1$s de %2$s</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Recomanació: no és fàcil preveure què s\'enregistrarà i què no; podria ser millor desactivar aquest filtre.</string>
+    <string name="terrain_slider_description">Definiu els nivells de zoom mínim i màxim entre els quals es visualitzarà la capa.</string>
+    <string name="shared_string_terrain">Terreny</string>
 </resources>
