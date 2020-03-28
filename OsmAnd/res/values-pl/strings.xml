@@ -3591,8 +3591,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_legend">Legenda</string>
     <string name="shared_string_zoom_levels">Poziom powiększenia</string>
     <string name="shared_string_transparency">Przejrzystość</string>
-    <string name="slope_read_more">Więcej informacji o stokach można przeczytać w %1$s.</string>
-    <string name="slope_download_description">Do wyświetlania stoków wymagane są dodatkowe mapy.</string>
+    <string name="slope_read_more">Więcej informacji o nachyleniu można przeczytać na %1$s.</string>
+    <string name="slope_download_description">Do wyświetlania nachylenia terenu wymagane są dodatkowe mapy.</string>
     <string name="terrain_slider_description">Ustaw minimalny i maksymalny poziom powiększenia, na których będzie wyświetlana warstwa.</string>
     <string name="slope_description">Nachylenie to pokolorowane wizualizacje terenu.</string>
     <string name="hillshade_description">Cieniowanie wzniesień wykorzystuje ciemne odcienie do pokazania stoków, szczytów i nizin.</string>
