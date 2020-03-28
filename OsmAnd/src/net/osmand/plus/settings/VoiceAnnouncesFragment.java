@@ -199,7 +199,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		};
 		//AudioManager.USE_DEFAULT_STREAM_TYPE};
 
-		ListPreferenceEx audioStreamGuidance = createListPreferenceEx(settings.AUDIO_STREAM_GUIDANCE.getId(), streamTypes, streamIntTypes, R.string.choose_audio_stream, R.layout.preference_with_descr);
+		ListPreferenceEx audioStreamGuidance = createListPreferenceEx(settings.AUDIO_MANAGER_STREAM.getId(), streamTypes, streamIntTypes, R.string.choose_audio_stream, R.layout.preference_with_descr);
 		getPreferenceScreen().addPreference(audioStreamGuidance);
 	}
 
@@ -285,13 +285,13 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 				return true;
 			}
 		}
-		if (prefId.equals(settings.AUDIO_STREAM_GUIDANCE.getId())) {
+		if (prefId.equals(settings.AUDIO_MANAGER_STREAM.getId())) {
 			// Sync DEFAULT value with CAR value, as we have other way to set it for now
 
 			if (getSelectedAppMode().equals(ApplicationMode.CAR) && newValue instanceof Integer) {
-				settings.AUDIO_STREAM_GUIDANCE.setModeValue(ApplicationMode.DEFAULT, (Integer) newValue);
+				settings.AUDIO_MANAGER_STREAM.setModeValue(ApplicationMode.DEFAULT, (Integer) newValue);
 			} else {
-				settings.AUDIO_STREAM_GUIDANCE.setModeValue(ApplicationMode.DEFAULT, settings.AUDIO_STREAM_GUIDANCE.getModeValue(ApplicationMode.CAR));
+				settings.AUDIO_MANAGER_STREAM.setModeValue(ApplicationMode.DEFAULT, settings.AUDIO_MANAGER_STREAM.getModeValue(ApplicationMode.CAR));
 			}
 			settings.AUDIO_USAGE.setModeValue(ApplicationMode.DEFAULT, settings.AUDIO_USAGE.getModeValue(ApplicationMode.CAR));
 

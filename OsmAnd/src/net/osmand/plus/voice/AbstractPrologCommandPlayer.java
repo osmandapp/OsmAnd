@@ -77,7 +77,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 		long time = System.currentTimeMillis();
 		this.ctx = ctx;
 
-		this.streamType = ctx.getSettings().AUDIO_STREAM_GUIDANCE.getModeValue(applicationMode);
+		this.streamType = ctx.getSettings().AUDIO_MANAGER_STREAM.getModeValue(applicationMode);
 		initVoiceDir(voiceProvider);
 		if (voiceDir != null && (MediaCommandPlayerImpl.isMyData(voiceDir) || TTSCommandPlayerImpl.isMyData(voiceDir))) {
 			if (log.isInfoEnabled()) {
@@ -294,7 +294,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 		if (mAudioFocusHelper != null && ctx != null) {
 			boolean audioFocusGranted = mAudioFocusHelper.requestFocus(ctx, applicationMode, streamType);
 			// If AudioManager.STREAM_VOICE_CALL try using BT SCO:
-			if (audioFocusGranted && ctx.getSettings().AUDIO_STREAM_GUIDANCE.getModeValue(applicationMode) == 0) {
+			if (audioFocusGranted && ctx.getSettings().AUDIO_MANAGER_STREAM.getModeValue(applicationMode) == 0) {
 				toggleBtSco(true);
 			}
 		}
@@ -311,7 +311,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	
 	protected synchronized void abandonAudioFocus() {
 		log.debug("abandonAudioFocus");
-		if ((ctx != null && ctx.getSettings().AUDIO_STREAM_GUIDANCE.getModeValue(applicationMode) == 0) || (btScoStatus == true)) {
+		if ((ctx != null && ctx.getSettings().AUDIO_MANAGER_STREAM.getModeValue(applicationMode) == 0) || (btScoStatus == true)) {
 			toggleBtSco(false);
 		}
 		if (ctx != null && mAudioFocusHelper != null) {
