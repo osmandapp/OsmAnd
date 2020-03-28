@@ -3607,4 +3607,6 @@ Lon %2$s</string>
     <string name="shared_string_legend">Legende</string>
     <string name="slope_read_more">Lesen Sie mehr über Hänge in %1$s.</string>
     <string name="slope_download_description">Zusätzliche Karten sind erforderlich, um Hänge auf der Karte anzuzeigen.</string>
+    <string name="hillshade_download_description">Für die Darstellung der Schummerung werden zusätzliche Karten benötigt.</string>
+    <string name="shared_string_min">Min</string>
 </resources>
