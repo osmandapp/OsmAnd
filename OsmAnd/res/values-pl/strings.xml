@@ -3586,7 +3586,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="quick_action_terrain_show">Pokaż teren</string>
     <string name="quick_action_terrain_hide">Ukryj teren</string>
     <string name="quick_action_show_hide_terrain">Pokaż/ukryj teren</string>
-    <string name="download_slope_maps">Stoki narciarskie</string>
+    <string name="download_slope_maps">Nachylenie</string>
     <string name="terrain_empty_state_text">Włącz, aby wyświetlić cieniowanie wzniesień lub stoków. Możesz przeczytać więcej o tego rodzaju mapach na naszej stronie</string>
     <string name="shared_string_legend">Legenda</string>
     <string name="shared_string_zoom_levels">Poziom powiększenia</string>
