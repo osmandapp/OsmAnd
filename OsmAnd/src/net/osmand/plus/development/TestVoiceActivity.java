@@ -284,16 +284,11 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 				}
 				if (description.startsWith("\u25BA (11.2)")) {
 					int ams = ((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get();
-					if (((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].get() == 1000) {
-						((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].set(1500);
-					} else if (((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].get() == 1500) {
-						((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].set(2000);
-					} else if (((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].get() == 2000) {
-						((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].set(2500);
-					} else if (((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].get() == 2500) {
-						((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].set(3000);
+					if (((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].get() >= 3000) {
+						((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].set(0);
 					} else {
-						((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].set(1000);
+						((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].set
+								(((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].get() + 500);
 					}
 					infoButton.setText("\u25BA (11.1) (Tap to refresh)\n" + getVoiceSystemInfo());
 					Toast.makeText(TestVoiceActivity.this, "Voice prompt delay changed to " + ((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].get() + "\u00A0ms.", Toast.LENGTH_LONG).show();
