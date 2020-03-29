@@ -2090,7 +2090,7 @@ public class OsmandSettings {
 			12/*AudioAttributes.USAGE_ASSISTANCE_NAVIGATION_GUIDANCE*/).makeProfile();
 
 	// For now this can be changed only in TestVoiceActivity
-	public final OsmandPreference<Integer>[] VOICE_PROMPT_DELAY = new IntPreference[5];
+	public final OsmandPreference<Integer>[] VOICE_PROMPT_DELAY = new IntPreference[6];
 
 	{
 		// On most devices sound output works pomptly so usually no voice prompt delay needed
