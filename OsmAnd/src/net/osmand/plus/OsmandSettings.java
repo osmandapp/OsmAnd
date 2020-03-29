@@ -2090,7 +2090,15 @@ public class OsmandSettings {
 			12/*AudioAttributes.USAGE_ASSISTANCE_NAVIGATION_GUIDANCE*/).makeProfile();
 
 	// For now this can be changed only in TestVoiceActivity
-	public final OsmandPreference<Integer> BT_SCO_DELAY = new IntPreference("bt_sco_delay",	1500).makeGlobal().cache();
+	public final OsmandPreference<Integer>[] VOICE_PROMPT_DELAY = new IntPreference[5];
+
+	{
+		// On most devices sound output works pomptly so usually no voice prompt delay needed
+		VOICE_PROMPT_DELAY[3] = new IntPreference("voice_prompt_delay_3", 0).makeGlobal().cache();    /*AudioManager.STREAM_MUSIC*/
+		VOICE_PROMPT_DELAY[5] = new IntPreference("voice_prompt_delay_5", 0).makeGlobal().cache();    /*AudioManager.STREAM_NOTIFICATION*/
+		// 1500 ms delay works for most configurations to establish a BT SCO link
+		VOICE_PROMPT_DELAY[0] = new IntPreference("voice_prompt_delay_0", 1500).makeGlobal().cache(); /*AudioManager.STREAM_VOICE_CALL*/
+	}
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> MAP_ONLINE_DATA = new BooleanPreference("map_online_data", false).makeProfile();

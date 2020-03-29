@@ -147,7 +147,8 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 			v += "\n \u25CF BT SCO: The current app profile is not set to use 'Phone call audio'.";
 		}
 
-		v += "\n \u25CF Phone call audio delay: " + ((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() + "\u00A0ms";
+		v += "\n \u25CF Voice prompt delay for selected output: " + ((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY
+				[((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get()].get() + "\u00A0ms";
 		return v;
 	}
 
@@ -230,7 +231,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 
 		addButton(ll, "Voice system info:", builder(p));
 		addButton(ll, "\u25BA (11.1) (Tap to refresh)\n" + getVoiceSystemInfo(), builder(p).attention(""));
-		addButton(ll, "\u25BA (11.2) Tap to change Phone call audio delay (if car stereo cuts off prompts). Default is 1500\u00A0ms.", builder(p).attention(""));
+		addButton(ll, "\u25BA (11.2) Tap to change voice prompt delay (if car stereo cuts off prompts). Default is 1500\u00A0ms for Phone call audio, or else 0\u00A0ms.", builder(p).attention(""));
 		ll.forceLayout();
 	}
 
@@ -282,23 +283,20 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 					Toast.makeText(TestVoiceActivity.this, "Info refreshed.", Toast.LENGTH_LONG).show();
 				}
 				if (description.startsWith("\u25BA (11.2)")) {
-					if (((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get() == 0) {
-						if (((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() == 1000) {
-							((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(1500);
-						} else if (((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() == 1500) {
-							((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(2000);
-						} else if (((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() == 2000) {
-							((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(2500);
-						} else if (((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() == 2500) {
-							((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(3000);
-						} else {
-							((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(1000);
-						}
-						infoButton.setText("\u25BA (11.1) (Tap to refresh)\n" + getVoiceSystemInfo());
-						Toast.makeText(TestVoiceActivity.this, "BT SCO init delay changed to " + ((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() + "\u00A0ms.", Toast.LENGTH_LONG).show();
+					int ams = ((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get();
+					if (((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].get() == 1000) {
+						((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].set(1500);
+					} else if (((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].get() == 1500) {
+						((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].set(2000);
+					} else if (((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].get() == 2000) {
+						((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].set(2500);
+					} else if (((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].get() == 2500) {
+						((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].set(3000);
 					} else {
-						Toast.makeText(TestVoiceActivity.this, "Setting only available when using 'Phone call audio'.", Toast.LENGTH_LONG).show();
+						((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].set(1000);
 					}
+					infoButton.setText("\u25BA (11.1) (Tap to refresh)\n" + getVoiceSystemInfo());
+					Toast.makeText(TestVoiceActivity.this, "Voice prompt delay changed to " + ((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].get() + "\u00A0ms.", Toast.LENGTH_LONG).show();
 				}
 			}
 		});
