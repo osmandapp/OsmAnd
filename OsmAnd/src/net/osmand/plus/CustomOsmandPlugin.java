@@ -354,9 +354,10 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		}
 	}
 
+	@NonNull
 	@Override
-	public int getLogoResourceId() {
-		return super.getLogoResourceId();
+	public Drawable getLogoResource() {
+		return icon != null ? icon : super.getLogoResource();
 	}
 
 	@Override

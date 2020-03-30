@@ -91,14 +91,14 @@ public abstract class OsmandPlugin {
 		return null;
 	}
 
-	@Nullable
-	public Drawable getLogoResource() {
-		return app.getUIUtilities().getIcon(getLogoResourceId());
-	}
-
 	@DrawableRes
 	public int getLogoResourceId() {
 		return R.drawable.ic_extension_dark;
+	}
+
+	@NonNull
+	public Drawable getLogoResource() {
+		return app.getUIUtilities().getIcon(getLogoResourceId());
 	}
 
 	public Class<? extends Activity> getSettingsActivity() {
