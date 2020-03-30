@@ -328,30 +328,29 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 					File[] files = pluginResDir.listFiles();
 					for (File resFile : files) {
 						String path = resFile.getAbsolutePath();
-						for (Map.Entry<String, String> entry : iconNames.entrySet()) {
-							String value = entry.getValue();
-							if (value.startsWith("@")) {
-								value = value.substring(1);
-								if (path.endsWith(value)) {
-									icon = BitmapDrawable.createFromPath(path);
-									break;
-								}
-							}
+						if (icon == null) {
+							icon = getIconForFile(path, iconNames);
 						}
-						for (Map.Entry<String, String> entry : imageNames.entrySet()) {
-							String value = entry.getValue();
-							if (value.startsWith("@")) {
-								value = value.substring(1);
-								if (path.endsWith(value)) {
-									image = BitmapDrawable.createFromPath(path);
-									break;
-								}
-							}
+						if (image == null) {
+							image = getIconForFile(path, imageNames);
 						}
 					}
 				}
 			}
 		}
+	}
+
+	private Drawable getIconForFile(String path, Map<String, String> fileNames) {
+		for (Map.Entry<String, String> entry : fileNames.entrySet()) {
+			String value = entry.getValue();
+			if (value.startsWith("@")) {
+				value = value.substring(1);
+			}
+			if (path.endsWith(value)) {
+				return BitmapDrawable.createFromPath(path);
+			}
+		}
+		return null;
 	}
 
 	@NonNull
