@@ -2060,7 +2060,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Integer> LEVEL_TO_SWITCH_VECTOR_RASTER = new IntPreference("level_to_switch_vector_raster", 1).makeGlobal().cache();
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Integer> AUDIO_STREAM_GUIDANCE = new IntPreference("audio_stream", 3/*AudioManager.STREAM_MUSIC*/) {
+	public final OsmandPreference<Integer> AUDIO_MANAGER_STREAM = new IntPreference("audio_stream", 3/*AudioManager.STREAM_MUSIC*/) {
 		@Override
 		protected boolean setValue(Object prefs, Integer stream) {
 			boolean valueSaved = super.setValue(prefs, stream);
@@ -3401,6 +3401,7 @@ public class OsmandSettings {
 	// this value could localized
 	public final OsmandPreference<String> VOICE_PROVIDER = new StringPreference("voice_provider", null) {
 		protected String getDefaultValue() {
+
 			Configuration config = ctx.getResources().getConfiguration();
 			for (String lang : TTS_AVAILABLE_VOICES) {
 				if (lang.equals(config.locale.getLanguage())) {

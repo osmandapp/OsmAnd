@@ -3614,4 +3614,5 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="hillshade_description">Eman erliebea mapari itzalak erabiliz maldak, gailurrak eta behe-lauak erakusteko.</string>
     <string name="shared_string_terrain">Terrenoa</string>
     <string name="n_items_of_z">%1$s / %2$s</string>
+    <string name="shared_string_min">Min</string>
 </resources>

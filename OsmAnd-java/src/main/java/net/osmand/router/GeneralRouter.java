@@ -580,7 +580,7 @@ public class GeneralRouter implements VehicleRouter {
 			// more like UT
 			if (diff > 2 * Math.PI / 3) {
 				return getLeftTurn();
-			} else if (diff > Math.PI / 2) {
+			} else if (diff > Math.PI / 3) {
 				return getRightTurn();
 			}
 			return 0;

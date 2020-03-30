@@ -34,7 +34,7 @@ class ProxySettingsDialogFragment : BaseDialogFragment() {
 	): View {
 		mainView = inflater.inflate(R.layout.fragment_proxy_settings_dialog, parent)
 
-		val window = dialog.window
+		val window = dialog?.window
 		if (window != null) {
 			window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
 			if (Build.VERSION.SDK_INT >= 21) {

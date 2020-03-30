@@ -43,7 +43,7 @@ class SettingsDialogFragment : BaseDialogFragment() {
 			navigationIcon = uiUtils.getThemedIcon(R.drawable.ic_arrow_back)
 			setNavigationOnClickListener { dismiss() }
 		}
-		val window = dialog.window
+		val window = dialog?.window
 		if (window != null && Build.VERSION.SDK_INT >= 21) {
 			window.statusBarColor = ContextCompat.getColor(app, R.color.card_bg_light)
 		}
