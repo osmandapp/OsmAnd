@@ -147,7 +147,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			public void onClick(View v) {
 				DialogFragment dialogFragment = createSelectCategoryDialog();
 				if (dialogFragment != null) {
-
 					dialogFragment.show(getChildFragmentManager(), SelectCategoryDialogFragment.TAG);
 				}
 			}
@@ -788,7 +787,8 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 						PointEditor editor = getEditor();
 						if (editor != null) {
 							EditCategoryDialogFragment dialogFragment =
-									EditCategoryDialogFragment.createInstance(editor.getFragmentTag(), getCategories(), false);
+									EditCategoryDialogFragment.createInstance(editor.getFragmentTag(), getCategories(),
+											!editor.getFragmentTag().equals(FavoritePointEditor.TAG));
 							dialogFragment.show(requireActivity().getSupportFragmentManager(), EditCategoryDialogFragment.TAG);
 						}
 					}
