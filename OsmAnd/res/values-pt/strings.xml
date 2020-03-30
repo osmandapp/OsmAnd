@@ -365,7 +365,7 @@
     <string name="poi_error_poi_not_found">Nó não pode ser encontrado ou POI não é um único nó</string>
     <string name="poi_remove_confirm_template">Eliminar {0} (comentário)\?</string>
     <string name="poi_remove_title">Eliminar POI</string>
-    <string name="shared_string_delete">Eliminar</string>
+    <string name="shared_string_delete">Apagar</string>
     <string name="poi_remove_success">POI eliminado</string>
     <string name="poi_action_add">Adicionar</string>
     <string name="poi_action_change">Modificar</string>
@@ -1088,7 +1088,7 @@
     <string name="app_mode_motorcycle">Motocicleta</string>
     <string name="app_mode_boat">Barco</string>
     <string name="app_mode_aircraft">Aeronave</string>
-    <string name="local_osm_changes_delete_all_confirm">Vai eliminar %1$d alterações do OpenStreetMap. Tem a certeza\?</string>
+    <string name="local_osm_changes_delete_all_confirm">Tem certeza de que deseja apagar %1$d alterações no OSM\?</string>
     <string name="shared_string_delete_all">Eliminar tudo</string>
     <string name="amenity_type_osmwiki">Wikipédia (off-line)</string>
     <string name="amenity_type_seamark">Marca Marítima</string>
@@ -2040,7 +2040,7 @@
     <string name="rendering_attr_contourWidth_description">Largura das curvas de nível</string>
     <string name="rendering_attr_contourWidth_name">Largura das curvas de nível</string>
     <string name="rendering_attr_hideWaterPolygons_description">Água</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Esconder água</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Ocultar água</string>
     <string name="legacy_search">Pesquisa antiga</string>
     <string name="show_legacy_search">Mostrar pesquisa antiga</string>
     <string name="show_legacy_search_desc">Adicionar pesquisa antiga à lista da gaveta</string>
@@ -3053,7 +3053,7 @@
     <string name="nav_type_hint">Tipo de navegação</string>
     <string name="app_mode_taxi">Táxi</string>
     <string name="app_mode_shuttle_bus">Autocarro de vaivem</string>
-    <string name="app_mode_subway">Metrô</string>
+    <string name="app_mode_subway">Metropolitano</string>
     <string name="app_mode_horse">Cavalo</string>
     <string name="app_mode_helicopter">Helicóptero</string>
     <string name="osmand_routing_promo">Você pode adicionar sua própria versão modificada do ficheiro routing.xml em ..osmand/routing</string>
@@ -3134,28 +3134,28 @@
     <string name="new_profile">Novo perfil</string>
     <string name="shared_string_crash">Travou</string>
     <string name="last_launch_crashed">A última execução de OsmAnd falhou. Por favor ajude-nos a melhorar o OsmAnd enviando-nos uma mensagem de erro.</string>
-    <string name="app_mode_ufo">UFO</string>
-    <string name="release_3_4">"- Perfis de app: crie o seu perfil personalizado para as suas necessidades, com um ícone e cor personalizados 
-\n
+    <string name="app_mode_ufo">OVNI</string>
+    <string name="release_3_4">- Perfis de app: crie o seu perfil personalizado para as suas necessidades, com um ícone e cor personalizados 
+\n 
 \n - Adaptar predefinições para perfis e velocidades mínimas/máximas 
-\n
+\n 
 \n - Um widget para as coordenadas atuais adicionado 
-\n
-\n - Opções para mostrar a bússola no mapa com uma régua de raio adicionados
-\n
-\n - Registo de caminho de fundo corrigido
-\n
-\n - Descarregamento de mapas  em segundo plano melhorado 
-\n
+\n 
+\n - Opções para mostrar a bússola no mapa com uma régua de raio adicionados 
+\n 
+\n - Registo de caminho de fundo corrigido 
+\n 
+\n - Descarregamento de mapas em segundo plano melhorado 
+\n 
 \n- Opção \'Ativar ecrã\' retornada 
-\n
+\n 
 \n - A seleção da língua na Wikipedia corrigida 
-\n
+\n 
 \n - Comportamento fixo do botão da bússola durante a navegação 
-\n
+\n 
 \n - Correções de outros bugs
 \n
-\n"</string>
+\n</string>
     <string name="app_mode_personal_transporter">Transportador pessoal</string>
     <string name="app_mode_monowheel">Monoroda</string>
     <string name="app_mode_scooter">Scooter</string>
@@ -3382,8 +3382,8 @@
     <string name="shared_string_downloading_formatted">Descarregando %s</string>
     <string name="rendering_value_thick_name">Grosso</string>
     <string name="desert_render_descr">Para desertos e outras áreas pouco povoadas. Exibe mais detalhes numa escala de visualização.</string>
-    <string name="select_navigation_icon">Selecione o ícone de navegação</string>
-    <string name="select_map_icon">Selecione o ícone do mapa</string>
+    <string name="select_navigation_icon">Ícone de posição durante a movimentação</string>
+    <string name="select_map_icon">Ícone de posição em repouso</string>
     <string name="delete_profiles_descr">Depois de tocar em Aplicar, os perfis eliminados serão completamente perdidos.</string>
     <string name="master_profile">Perfil principal</string>
     <string name="select_color">Selecione a cor</string>
@@ -3433,8 +3433,188 @@
     <string name="reorder_profiles">Editar lista de perfis</string>
     <string name="selected_profile">Perfil selecionado</string>
     <string name="reset_confirmation_descr">Tocar em %1$s descartará todas as suas alterações.</string>
-    <string name="reset_all_profile_settings_descr">Todas as configurações de perfil serão redefinidas para o estado após a instalação.</string>
-    <string name="reset_all_profile_settings">Redefinir todas as configurações de perfil para o padrão\?</string>
+    <string name="reset_all_profile_settings_descr">Redefinir todas as configurações de perfil para as predefinicões de instalação.</string>
+    <string name="reset_all_profile_settings">Redefinir todas as configurações de perfil\?</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
+    <string name="app_mode_osm">OSM</string>
+    <string name="rendering_attr_streetLightingNight_name">Mostrar apenas à noite</string>
+    <string name="button_rate">Avaliar</string>
+    <string name="shared_string_terrain">Terreno</string>
+    <string name="hillshade_description">Mapa de sombras de relevo usando sombras escuras para mostrar pistas, picos e planícies.</string>
+    <string name="slope_description">Pistas são visualizações coloridas no terreno.</string>
+    <string name="terrain_slider_description">Defina os níveis de zoom mínimos e máximos em que a camada será exibida.</string>
+    <string name="hillshade_download_description">Mapas adicionais são necessários para ver sombras de relevo no mapa.</string>
+    <string name="slope_download_description">Mapas adicionais são necessários para ver Pistas no mapa.</string>
+    <string name="slope_read_more">Pode ler mais sobre Inclinações em %1$s.</string>
+    <string name="shared_string_transparency">Transparência</string>
+    <string name="shared_string_zoom_levels">Níveis de zoom</string>
+    <string name="shared_string_legend">Legenda</string>
+    <string name="terrain_empty_state_text">Ativar ver o mapa de colinas ou encostas. Pode ler mais sobre este tipo de mapa no nosso site</string>
+    <string name="shared_string_hillshade">Sombras de relevo</string>
+    <string name="n_items_of_z">%1$s de %2$s</string>
+    <string name="download_slope_maps">Pistas</string>
+    <string name="quick_action_show_hide_terrain">Mostrar/ocultar terreno</string>
+    <string name="quick_action_terrain_hide">Ocultar terreno</string>
+    <string name="quick_action_terrain_show">Mostrar terreno</string>
+    <string name="quick_action_terrain_descr">Um botão para mostrar ou esconder a camada do terreno no mapa.</string>
+    <string name="delete_description">Apagar descrição</string>
+    <string name="add_description">Adicionar descrição</string>
+    <string name="select_group">Selecione o grupo</string>
+    <string name="select_shape">Selecione a forma</string>
+    <string name="shared_string_circle">Círculo</string>
+    <string name="shared_string_rhomb">Paralelograma</string>
+    <string name="shared_string_min">Mín</string>
+    <string name="shared_string_square">Quadrado</string>
+    <string name="recalculate_route_in_deviation">Recalcular rota em caso de desvio</string>
+    <string name="select_distance_route_will_recalc">Selecione a distância após a qual o percurso será recalculado.</string>
+    <string name="recalculate_route_distance_promo">A rota será recalculada se a distância da rota até o local atual for maior que o valor selecionado.</string>
+    <string name="import_complete_description">Todos os dados do %1$s são importados. Pode usar os botões abaixo para abrir a parte necessária da aplicação para gerá-lo.</string>
+    <string name="shared_string_import_complete">Importação concluída</string>
+    <string name="items_added">Itens adicionados</string>
+    <string name="checking_for_duplicate_description">OsmAnd verifica %1$s para duplicatas com itens existentes na aplicação. 
+\n 
+\nPode levar algum tempo.</string>
+    <string name="shared_string_importing">Importando</string>
+    <string name="importing_from">Importando dados de %1$s</string>
+    <string name="clear_recorded_data_warning">Tem certeza de que deseja limpar os dados gravados\?</string>
+    <string name="profile_backup_failed">Não foi possível fazer o backup do perfil.</string>
+    <string name="saving_new_profile">Gravando novo perfil</string>
+    <string name="restore_all_profile_settings">Restaurar todas as configurações de perfil\?</string>
+    <string name="restore_all_profile_settings_descr">Todas as configurações de perfil serão restauradas ao seu estado original após a criação/importação deste perfil.</string>
+    <string name="import_rendering_file">Importar ficheiro de renderização</string>
+    <string name="shared_string_rendering_style">Estilo de renderização</string>
+    <string name="select_data_to_import">Selecione os dados a serem importados.</string>
+    <string name="import_duplicates_title">Alguns itens já existem</string>
+    <string name="import_duplicates_description">OsmAnd já possui elementos com os mesmos nomes dos importados. 
+\n 
+\nSelecione uma ação.</string>
+    <string name="keep_both_desc">Os itens importados serão adicionados com prefixo</string>
+    <string name="keep_both">Manter os dois</string>
+    <string name="replace_all">Substituir tudo</string>
+    <string name="replace_all_desc">Os itens atuais serão substituídos pelos itens do ficheiro</string>
+    <string name="listed_exist">Listado %1$s já existe no OsmAnd.</string>
+    <string name="shared_string_profiles">Perfis</string>
+    <string name="shared_string_quick_actions">Ações rápidas</string>
+    <string name="shared_string_nothing_selected">Nada selecionado</string>
+    <string name="shared_string_poi_types">Tipos de POI</string>
+    <string name="shared_string_preparing">Preparando</string>
+    <string name="recalc_angle_dialog_title">Ângulo mínimo entre minha localização e rota</string>
+    <string name="recalc_angle_dialog_descr">Segmento reto adicional entre minha localização e a rota calculada será exibida até que a rota seja recalculada</string>
+    <string name="shared_string_angle">Ângulo</string>
+    <string name="shared_string_angle_param">Ângulo: %s°</string>
+    <string name="profile_type_custom_string">Perfil personalizado</string>
+    <string name="route_recalculation_dist_descr">A rota será recalculada se a distância até à rota for maior que o parâmetro especificado</string>
+    <string name="route_recalculation_dist_title">Distância mínima para recalcular a rota</string>
+    <string name="no_recalculation_setting">Desativar recálculo</string>
+    <string name="shared_string_app_default_w_val">App predefinido (%s)</string>
+    <string name="index_name_antarctica">Antártida</string>
+    <string name="export_profile_dialog_description">Pode selecionar dados adicionais para exportar junto com o perfil.</string>
+    <string name="import_profile_dialog_description">O perfil importado contém dados adicionais. Clique em Importar para importar apenas dados do perfil ou selecione dados adicionais a serem importados.</string>
+    <string name="shared_string_include_data">Incluir dados adicionais</string>
+    <string name="shared_string_routing">Roteamento</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_menu">Menu</string>
+    <string name="plugin_disabled_descr">Este plugin é uma aplicação separada, precisará removê-lo separadamente se não planeja usá-lo mais. 
+\n 
+\nO plug-in permanecerá no aparelho após a remoção do OsmAnd.</string>
+    <string name="plugin_disabled">Plugin desativado</string>
+    <string name="open_settings">Abrir configurações</string>
+    <string name="please_provide_profile_name_message">Forneça um nome para o perfil</string>
+    <string name="sort_by_category">Classificar por categoria</string>
+    <string name="routing_profile_direct_to">Direto ao ponto</string>
+    <string name="copy_coordinates">Copiar coordenadas</string>
+    <string name="release_3_6">• Perfis: agora pode alterar a ordem, definir o ícone para o mapa, alterar todas as configurações dos perfis básicos e restaurá-los para as predefinições 
+\n 
+\n  • Número de saída adicionado na navegação 
+\n 
+\n  • Configurações de plug-in reformuladas 
+\n 
+\n  • Ecrã Configurações retrabalhadas para acesso rápido a todos os perfis 
+\n 
+\n  • Opção adicionada para copiar configurações de outro perfil 
+\n 
+\n  • Adicionado capacidade de alterar um pedido ou ocultar categorias de PI na Pesquisa 
+\n 
+\n  • Ícones de POI corretamente alinhados no mapa 
+\n 
+\n  • Dados do pôr-do-sol/nascer do sol adicionados para configurar o mapa 
+\n 
+\n  • Adicionado ícones Casa/Trabalho no mapa 
+\n 
+\n  • Adicionado suporte para descrição de múltiplas linhas em Configurações 
+\n 
+\n  • Adicionado transliteração correta no mapa do Japão 
+\n 
+\n  • Adicionado mapa da Antártica 
+\n 
+\n</string>
+    <string name="clear_recorded_data">Limpar dados gravados</string>
+    <string name="use_system_screen_timeout_promo">Desativado por predefinição, se OsmAnd estiver sendo executado em primeiro plano, o ecrã não atingirá o tempo limite. 
+\n 
+\nSe ativado, o OsmAnd usará as configurações de tempo limite do sistema.</string>
+    <string name="use_system_screen_timeout">Usar tempo limite do ecrã do sistema</string>
+    <string name="accessibility_mode_disabled">Modo de acessibilidade desativado no seu sistema.</string>
+    <string name="sunrise_at">Nascer do sol em %1$s</string>
+    <string name="sunset_at">Pôr do sol em %1$s</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="profile_prefs_reset_successful">Todas as configurações de perfil restauradas para o estado predefinido.</string>
+    <string name="plugin_prefs_reset_successful">Todas as configurações de plug-in restauradas para o estado predefinido.</string>
+    <string name="add_custom_category">Adicionar categoria personalizada</string>
+    <string name="shared_string_available">Disponível</string>
+    <string name="reset_to_default_category_button_promo">Redefinir como predifinição redefinirá a ordem de classificação para o estado predefinido após a instalação.</string>
+    <string name="add_new_custom_category_button_promo">Pode adicionar uma nova categoria personalizada selecionando uma ou algumas categorias necessárias.</string>
+    <string name="create_custom_categories_list_promo">Altere a ordem de classificação da lista, oculte categorias desnecessárias. Pode importar ou exportar todas as alterações com perfis.</string>
+    <string name="rearrange_categories">Reorganizar categorias</string>
+    <string name="osm_authorization_success">Autorização bem sucedida</string>
+    <string name="multimedia_photo_play_sound">Som do obturador da câmera</string>
+    <string name="multimedia_use_system_camera">Usar app do sistema</string>
+    <string name="multimedia_rec_split_title">Divisão do gravador</string>
+    <string name="reset_plugin_to_default">Redefinir as configurações do plug-in para a predefinição</string>
+    <string name="monitoring_min_distance">Deslocamento mínimo</string>
+    <string name="monitoring_min_accuracy">Precisão mínima</string>
+    <string name="monitoring_min_speed">Velocidade mínima</string>
+    <string name="monitoring_notification">Notificação</string>
+    <string name="live_monitoring_adress_descr">Especificar o endereço web com a sintaxe de parâmetros: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
+    <string name="live_monitoring_adress">Endereço da Web</string>
+    <string name="live_monitoring_tracking_interval">Intervalo de rastreamento</string>
+    <string name="live_monitoring_time_buffer">Buffer de tempo</string>
+    <string name="monitoring_min_distance_descr_recommendation">Recomendação: Uma configuração de 5 metros pode funcionar bem se não precisar capturar detalhes mais refinados do que isso e não desejar capturar dados explicitamente enquanto estiver em repouso.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Efeitos colaterais: Períodos em repouso não são registados em absoluto ou em apenas um ponto cada. Pequenos movimentos (do mundo real) (por exemplo, de lado, para marcar um possível desvio na sua viagem) podem ser filtrados. Seu ficheiro contém menos informações para pós-processamento e possui estatísticas piores ao filtrar pontos obviamente redundantes no tempo de gravação, mantendo potencialmente artefatos causados por má recepção ou efeitos de chipset GPS.</string>
+    <string name="monitoring_min_distance_descr">Esse filtro evita que pontos duplicados sejam gravados onde muito pouco movimento real possa ter ocorrido, cria uma aparência espacial mais agradável das faixas que não são processadas posteriormente.</string>
+    <string name="monitoring_min_accuracy_descr_remark">Observação: se o GPS estava desligado imediatamente antes de uma gravação, o primeiro ponto medido pode ter uma precisão diminuída; portanto, no nosso código, podemos esperar um segundo antes da gravação de um ponto (ou gravar o melhor de três pontos consecutivos, etc.), mas isso ainda não foi implementado.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Recomendação: É difícil prever o que será gravado e o que não será, talvez seja melhor desativar esse filtro.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Efeito colateral: como resultado da filtragem por precisão, os pontos podem estar totalmente ausentes por ex. debaixo de pontes, sob árvores, entre prédios altos ou com certas condições climáticas.</string>
+    <string name="monitoring_min_accuracy_descr">Isso registrará apenas os pontos medidos com uma indicação de precisão mínima (em metros/pés, conforme relatado pelo Android para o seu chipset). A precisão refere-se à dispersão de medidas repetidas e não está diretamente relacionada à precisão, que define que perto suas medidas estão da sua posição real.</string>
+    <string name="monitoring_min_speed_descr_remark">Observação: verificação de velocidade &gt; 0: A maioria dos chipsets GPS relata uma velocidade apenas se o algoritmo determinar que esteja em movimento e nenhum se não estiver. Portanto, o uso da configuração &gt; 0 neste filtro usa a deteção de movimento do chipset GPS. Mas mesmo que não seja filtrado no momento da gravação, ainda usamos esse recurso na nossa análise GPX para determinar a Distância corrigida, ou seja, o valor exibido nesse campo é a distância registrada enquanto estiver em movimento.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Recomendação: Tente usar a deteção de movimento através do filtro de deslocamento mínimo de registro (B) primeiro, pode produzir melhores resultados e você perderá menos dados. Se suas faixas permanecerem barulhentas em baixas velocidades, tente valores diferentes de zero. Observe que algumas medições podem não relatar nenhuma velocidade (alguns métodos baseados em rede); nesse caso, não gravaria nada.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Efeito colateral: sua faixa estará ausente de todas as seções em que o critério de velocidade mínima não foi atendido (por exemplo, onde empurra sua bicicleta por uma colina íngreme). Além disso, não haverá informações sobre períodos de descanso, como intervalos. Isso afeta qualquer análise ou pós-processamento, como ao tentar determinar a duração total da sua viagem, o tempo em movimento ou a sua velocidade média.</string>
+    <string name="monitoring_min_speed_descr">Este é um filtro de corte de baixa velocidade para não registar pontos abaixo de uma determinada velocidade. Isso pode fazer com que as faixas gravadas pareçam mais suaves quando visualizadas no mapa.</string>
+    <string name="permission_is_required">É necessária permissão para usar esta opção.</string>
+    <string name="search_offline_geo_error">Não foi possível analisar a intenção geográfica \'%s\'.</string>
+    <string name="logcat_buffer_descr">Verifique e compartilhe logs detalhados da aplicação</string>
+    <string name="select_map_icon_descr">Ícone mostrado em repouso.</string>
+    <string name="select_nav_icon_descr">Ícone mostrado ao navegar ou mover.</string>
+    <string name="osm_edits_view_descr">Pode ver todos os erros de OSM do editor carregado em %1$s. Os pontos enviados não são exibidos no OsmAnd.</string>
+    <string name="osm_editing">Edição OSM</string>
+    <string name="plugin_global_prefs_info">Essas configurações aplicam-se a todos os perfis.</string>
+    <string name="login_and_pass">Utilizador e palavra-passe</string>
+    <string name="accessibility_announce">Anunciar</string>
+    <string name="route_recalculation">Recálculo da rota</string>
+    <string name="photo_notes">Notas fotográficas</string>
+    <string name="video_notes">Notas de vídeo</string>
+    <string name="multimedia_notes_view_descr">Pode encontrar todas as suas anotações em %1$s.</string>
+    <string name="tracks_view_descr">Pode encontrar todas as suas faixas gravadas em %1$ss ou na pasta OsmAnd usando o gerador de ficheiros.</string>
+    <string name="save_track_logging_accuracy">Precisão de registo</string>
+    <string name="live_monitoring">Rastreamento online</string>
+    <string name="live_monitoring_descr">Permite compartilhar a localização atual usando a gravação de viagem.</string>
+    <string name="accessibility_prefs_descr">Escolha ícone, cor e nome</string>
+    <string name="osm_editing_prefs_descr">Entrada, palavra-passe, edição offline</string>
+    <string name="multimedia_notes_prefs_descr">Tamanho da imagem, qualidade de áudio e vídeo</string>
+    <string name="monitoring_prefs_descr">Navegação, precisão de registo</string>
+    <string name="import_profile">Importar perfil</string>
+    <string name="import_routing_file">Importar ficheiro de roteamento</string>
+    <string name="import_from_file">Importar do ficheiro</string>
+    <string name="not_support_file_type_with_ext">Selecione um ficheiro de extensão %1$s suportado.</string>
+    <string name="file_does_not_contain_routing_rules">Nenhuma regra de roteamento em \'%1$s\'. Por favor, escolha outro ficheiro.</string>
 </resources>
