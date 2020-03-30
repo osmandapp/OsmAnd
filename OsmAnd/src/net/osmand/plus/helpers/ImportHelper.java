@@ -846,7 +846,8 @@ public class ImportHelper {
 			@Override
 			public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsItem> items) {
 				CustomOsmandPlugin plugin = pluginItem.getPlugin();
-				plugin.updateCustomItems(items);
+				plugin.loadResources();
+
 				if (activity != null) {
 					plugin.onInstall(app, activity);
 				}

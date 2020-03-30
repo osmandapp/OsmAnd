@@ -398,7 +398,9 @@ public class SettingsHelper {
 						if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.RENDERING_STYLE) {
 							plugin.addRenderer(fileItem.getName());
 						} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.ROUTING_CONFIG) {
-							plugin.getRouterNames().add(fileItem.getName());
+							plugin.addRouter(fileItem.getName());
+						} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.OTHER) {
+							plugin.setResourceDirName(item.getFileName());
 						}
 					}
 				}

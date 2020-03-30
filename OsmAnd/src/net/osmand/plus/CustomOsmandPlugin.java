@@ -45,22 +45,25 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 
 	private static final Log LOG = PlatformUtil.getLog(CustomOsmandPlugin.class);
 
-	public String pluginId;
-	public Map<String, String> names = new HashMap<>();
-	public Map<String, String> descriptions = new HashMap<>();
-	public Map<String, String> iconNames = new HashMap<>();
-	public Map<String, String> imageNames = new HashMap<>();
-	public Drawable icon;
-	public Drawable image;
+	private String pluginId;
+	private String resourceDirName;
+	private Map<String, String> names = new HashMap<>();
+	private Map<String, String> descriptions = new HashMap<>();
+	private Map<String, String> iconNames = new HashMap<>();
+	private Map<String, String> imageNames = new HashMap<>();
 
-	public List<String> rendererNames = new ArrayList<>();
-	public List<String> routerNames = new ArrayList<>();
+	private Drawable icon;
+	private Drawable image;
+
+	private List<String> rendererNames = new ArrayList<>();
+	private List<String> routerNames = new ArrayList<>();
 
 	public CustomOsmandPlugin(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		super(app);
 		pluginId = json.getString("pluginId");
 		readAdditionalDataFromJson(json);
 		readDependentFilesFromJson(json);
+		loadResources();
 	}
 
 	@Override
@@ -211,6 +214,14 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		return description;
 	}
 
+	public String getResourceDirName() {
+		return resourceDirName;
+	}
+
+	public void setResourceDirName(String resourceDirName) {
+		this.resourceDirName = resourceDirName;
+	}
+
 	public void readAdditionalDataFromJson(JSONObject json) throws JSONException {
 		JSONObject iconJson = json.has("icon") ? json.getJSONObject("icon") : null;
 		if (iconJson != null) {
@@ -287,6 +298,23 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 				routerNames.add(renderer);
 			}
 		}
+		JSONObject iconNamesJson = json.has("iconNames") ? json.getJSONObject("iconNames") : null;
+		if (iconNamesJson != null) {
+			for (Iterator<String> it = iconNamesJson.keys(); it.hasNext(); ) {
+				String localeKey = it.next();
+				String name = iconNamesJson.getString(localeKey);
+				iconNames.put(localeKey, name);
+			}
+		}
+		JSONObject imageNamesJson = json.has("imageNames") ? json.getJSONObject("imageNames") : null;
+		if (imageNamesJson != null) {
+			for (Iterator<String> it = imageNamesJson.keys(); it.hasNext(); ) {
+				String localeKey = it.next();
+				String name = imageNamesJson.getString(localeKey);
+				imageNames.put(localeKey, name);
+			}
+		}
+		resourceDirName = json.has("pluginResDir") ? json.getString("pluginResDir") : null;
 	}
 
 	public void writeDependentFilesJson(JSONObject json) throws JSONException {
@@ -301,6 +329,20 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 			routerNamesJson.put(render);
 		}
 		json.put("routerNames", routerNamesJson);
+
+		JSONObject iconNamesJson = new JSONObject();
+		for (Map.Entry<String, String> entry : iconNames.entrySet()) {
+			iconNamesJson.put(entry.getKey(), entry.getValue());
+		}
+		json.put("iconNames", iconNamesJson);
+
+		JSONObject imageNamesJson = new JSONObject();
+		for (Map.Entry<String, String> entry : imageNames.entrySet()) {
+			imageNamesJson.put(entry.getKey(), entry.getValue());
+		}
+		json.put("imageNames", imageNamesJson);
+
+		json.put("pluginResDir", resourceDirName);
 	}
 
 	@Override
@@ -313,27 +355,28 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		return routerNames;
 	}
 
+	public void addRouter(String fileName) {
+		routerNames.add(fileName);
+	}
+
 	public void addRenderer(String fileName) {
 		String renderer = RendererRegistry.formatRendererFileName(fileName);
 		rendererNames.add(renderer.replace('_', ' ').replace('-', ' '));
 	}
 
-	public void updateCustomItems(List<SettingsItem> items) {
-		for (SettingsItem item : items) {
-			if (item instanceof SettingsHelper.ResourcesSettingsItem) {
-				SettingsHelper.ResourcesSettingsItem resourcesSettingsItem = (SettingsHelper.ResourcesSettingsItem) item;
-				File pluginDir = resourcesSettingsItem.getPluginPath();
-				File pluginResDir = new File(pluginDir, resourcesSettingsItem.getFileName());
-				if (pluginResDir.exists() && pluginResDir.isDirectory()) {
-					File[] files = pluginResDir.listFiles();
-					for (File resFile : files) {
-						String path = resFile.getAbsolutePath();
-						if (icon == null) {
-							icon = getIconForFile(path, iconNames);
-						}
-						if (image == null) {
-							image = getIconForFile(path, imageNames);
-						}
+	public void loadResources() {
+		if (!Algorithms.isEmpty(resourceDirName)) {
+			File pluginDir = new File(app.getAppPath(null), IndexConstants.PLUGINS_DIR + pluginId);
+			File pluginResDir = new File(pluginDir, resourceDirName);
+			if (pluginResDir.exists() && pluginResDir.isDirectory()) {
+				File[] files = pluginResDir.listFiles();
+				for (File resFile : files) {
+					String path = resFile.getAbsolutePath();
+					if (icon == null) {
+						icon = getIconForFile(path, iconNames);
+					}
+					if (image == null) {
+						image = getIconForFile(path, imageNames);
 					}
 				}
 			}
