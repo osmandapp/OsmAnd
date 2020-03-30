@@ -738,7 +738,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		return getPaintedContentIcon(iconId, color);
 	}
 
-	private void showExitDialog() {
+	public void showExitDialog() {
 		hideKeyboard();
 		if (!wasSaved()) {
 			AlertDialog.Builder dismissDialog = createWarningDialog(getActivity(),
