@@ -6,13 +6,13 @@
 	android:padding="7dp">
 
 	<ImageView
-		android:id="@+id/outlineCircle"
+		android:id="@+id/outline"
 		android:layout_width="56dp"
 		android:layout_height="56dp"
 		app:srcCompat="@drawable/circle_contour_bg_light" />
 
 	<ImageView
-		android:id="@+id/backgroundCircle"
+		android:id="@+id/background"
 		android:layout_width="48dp"
 		android:layout_height="48dp"
 		android:layout_margin="4dp"

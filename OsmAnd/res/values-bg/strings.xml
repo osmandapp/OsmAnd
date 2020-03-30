@@ -1337,9 +1337,9 @@
     <string name="home_button">Начало</string>
     <string name="coordinates">Координати</string>
     <string name="anonymous_user_hint">Анонимен потребител не може да: 
-\n- създава групи;
-\n- синхронизира групи и устройства със сървъра;
-\n- управлява групи и устройства в частен режим.</string>
+\n- Създава групи; 
+\n- Синхронизира групи и устройства със сървъра; 
+\n- Управлява групи и устройства в частен режим.</string>
     <string name="anonymous_user">Анонимен потребител</string>
     <string name="logged_as">Влезли сте като %1$s</string>
     <string name="print_route">Печат на маршрут</string>
@@ -1397,7 +1397,7 @@
     <string name="shared_string_import2osmand">Импортиране към OsmAnd</string>
     <string name="read_full_article">Прочетете пълната статия (онлайн)</string>
     <string name="local_recordings_delete_all_confirm">Сигурни ли сте, че искате да изтриете %1$d бележки\?</string>
-    <string name="archive_wikipedia_data">"Имате  стари, несъвместими данни от Уикипедия. Искате ли да ги архивирате\?"</string>
+    <string name="archive_wikipedia_data">Имате стари, несъвместими данни от Уикипедия. Искате ли да ги архивирате\?</string>
     <string name="download_wikipedia_files">Изтегляне на допълнителни данни от Уикипедия (%1$s МБ)\?</string>
     <string name="shared_string_release">Издаден</string>
     <string name="keep_informing">Повтаряне на напътствията</string>
@@ -1972,7 +1972,7 @@
     <string name="live_monitoring_tracking_interval">Интервал на следене</string>
     <string name="live_monitoring_adress">Уеб адрес</string>
     <string name="rearrange_categories">Подредба на категориите</string>
-    <string name="create_custom_categories_list_promo">Може да добавите собстевни категории, да скриете категории, които не са ви нужни и променяте подредбата на списъкът. Списъкът може да се импортва и експортва чрез профилите.</string>
+    <string name="create_custom_categories_list_promo">Може да променяте подредбата на списъкът, да скриете ненужните категории. Може да импортирате или експортирате промените чрез профилите.</string>
     <string name="add_new_custom_category_button_promo">Може да добавяте нови собствени категории, избирайки една или няколко от категориите.</string>
     <string name="reset_to_default_category_button_promo">Връщане към стойностите по подразбиране, ще върне реда на сортиране към състоянието при инсталация.</string>
     <string name="shared_string_available">Налично</string>

@@ -535,16 +535,33 @@ public class SettingsHelper {
 		}
 
 		private void renameProfile() {
+			List<ApplicationMode> values = ApplicationMode.allPossibleValues();
+			if (Algorithms.isEmpty(modeBean.userProfileName)) {
+				ApplicationMode appMode = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
+				if (appMode != null) {
+					modeBean.userProfileName = app.getString(appMode.getNameKeyResource());
+				}
+			}
 			int number = 0;
 			while (true) {
 				number++;
 				String key = modeBean.stringKey + "_" + number;
-				if (ApplicationMode.valueOfStringKey(key, null) == null) {
+				String name = modeBean.userProfileName + '_' + number;
+				if (ApplicationMode.valueOfStringKey(key, null) == null && isNameUnique(values, name)) {
+					modeBean.userProfileName = name;
 					modeBean.stringKey = key;
-					modeBean.userProfileName = modeBean.userProfileName + "_" + number;
 					break;
 				}
 			}
+		}
+
+		private boolean isNameUnique(List<ApplicationMode> values, String name) {
+			for (ApplicationMode mode : values) {
+				if (mode.getUserProfileName().equals(name)) {
+					return false;
+				}
+			}
+			return true;
 		}
 
 		@Override

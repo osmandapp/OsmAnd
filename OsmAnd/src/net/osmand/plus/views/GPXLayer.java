@@ -694,7 +694,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				GPXFile gpxFile = selectedGpxFile.getGpxFile();
 				gpxFile.updateWptPt(objectInMotion, position.getLatitude(),
 						position.getLongitude(), System.currentTimeMillis(), objectInMotion.desc,
-						objectInMotion.name, objectInMotion.category, objectInMotion.getColor());
+						objectInMotion.name, objectInMotion.category, objectInMotion.getColor(),
+						objectInMotion.getIconName(), objectInMotion.getBackgroundType());
 				syncGpx(gpxFile);
 				if (gpxFile.showCurrentTrack) {
 					if (callback != null) {

@@ -15,6 +15,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.ColorRes;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
@@ -241,6 +243,17 @@ public class ColorDialogs {
 		d.clearColorFilter();
 		d.setColorFilter(color, PorterDuff.Mode.SRC_IN);
 		return d;
+	}
+
+	public static int getColorName(@ColorRes int color) {
+		int colorName = R.string.rendering_value_darkyellow_name;
+		for (int i = 0; i < ColorDialogs.pallette.length; i++) {
+			if (ColorDialogs.pallette[i] == color) {
+				colorName = ColorDialogs.paletteColors[i];
+				break;
+			}
+		}
+		return colorName;
 	}
 
 	private static int dpToPx(final Activity activity, float dp) {

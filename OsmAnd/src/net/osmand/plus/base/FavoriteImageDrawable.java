@@ -8,7 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
-import android.graphics.Paint.Style;
+import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
@@ -18,8 +18,10 @@ import androidx.annotation.NonNull;
 
 import net.osmand.GPXUtilities;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 
 import java.util.TreeMap;
 
@@ -29,16 +31,17 @@ public class FavoriteImageDrawable extends Drawable {
 	private boolean synced;
 	private boolean history;
 	private Drawable favIcon;
-	private Bitmap favBackground;
+	private Bitmap favBackgroundTop;
+	private Bitmap favBackgroundCenter;
+	private Bitmap favBackgroundBottom;
 	private Bitmap syncedStroke;
 	private Bitmap syncedColor;
 	private Bitmap syncedShadow;
 	private Bitmap syncedIcon;
-	private Drawable listDrawable;
+	private Drawable uiListIcon;
+	private Drawable uiBackgroundIcon;
 	private Paint paintIcon = new Paint();
 	private Paint paintBackground = new Paint();
-	private Paint paintOuter = new Paint();
-	private Paint paintInnerCircle = new Paint();
 	private ColorFilter colorFilter;
 	private ColorFilter grayFilter;
 
@@ -46,27 +49,31 @@ public class FavoriteImageDrawable extends Drawable {
 		this.withShadow = withShadow;
 		this.synced = synced;
 		Resources res = ctx.getResources();
+		UiUtilities uiUtilities = ((OsmandApplication) ctx.getApplicationContext()).getUIUtilities();
 		int overlayIconId = point != null ? point.getOverlayIconId() : 0;
 		int uiIconId;
 		if (overlayIconId != 0) {
-			favIcon = ((OsmandApplication) ctx.getApplicationContext()).getUIUtilities()
-					.getIcon(getMapIconId(ctx, overlayIconId), R.color.color_white);
+			favIcon = uiUtilities.getIcon(getMapIconId(ctx, overlayIconId), R.color.color_white);
 			uiIconId = overlayIconId;
 		} else {
 			favIcon = res.getDrawable(R.drawable.mm_special_star);
 			uiIconId = R.drawable.mx_special_star;
 		}
-		listDrawable = ((OsmandApplication) ctx.getApplicationContext()).getUIUtilities()
-				.getIcon(uiIconId, R.color.color_white);
 		int col = color == 0 || color == Color.BLACK ? res.getColor(R.color.color_favorite) : color;
-		favBackground = BitmapFactory.decodeResource(res, R.drawable.map_white_favorite_shield);
+		uiListIcon = uiUtilities.getIcon(uiIconId, R.color.color_white);
+		int uiBackgroundIconId = point != null ? point.getBackgroundType().getIconId() : R.drawable.bg_point_circle;
+		uiBackgroundIcon = uiUtilities.getPaintedIcon(uiBackgroundIconId, col);
+		int mapBackgroundIconIdTop = getMapBackgroundIconId(ctx, point, "top");
+		int mapBackgroundIconIdCenter = getMapBackgroundIconId(ctx, point, "center");
+		int mapBackgroundIconIdBottom = getMapBackgroundIconId(ctx, point, "bottom");
+		favBackgroundTop = BitmapFactory.decodeResource(res, mapBackgroundIconIdTop);
+		favBackgroundCenter = BitmapFactory.decodeResource(res, mapBackgroundIconIdCenter);
+		favBackgroundBottom = BitmapFactory.decodeResource(res, mapBackgroundIconIdBottom);
 		syncedStroke = BitmapFactory.decodeResource(res, R.drawable.map_shield_marker_point_stroke);
 		syncedColor = BitmapFactory.decodeResource(res, R.drawable.map_shield_marker_point_color);
 		syncedShadow = BitmapFactory.decodeResource(res, R.drawable.map_shield_marker_point_shadow);
 		syncedIcon = BitmapFactory.decodeResource(res, R.drawable.map_marker_point_14dp);
-		initSimplePaint(paintOuter, color == 0 || color == Color.BLACK ? 0x88555555 : color);
-		initSimplePaint(paintInnerCircle, col);
-		colorFilter = new PorterDuffColorFilter(col, PorterDuff.Mode.MULTIPLY);
+		colorFilter = new PorterDuffColorFilter(col, PorterDuff.Mode.SRC_IN);
 		grayFilter = new PorterDuffColorFilter(res.getColor(R.color.color_favorite_gray), PorterDuff.Mode.MULTIPLY);
 	}
 
@@ -76,33 +83,38 @@ public class FavoriteImageDrawable extends Drawable {
 				.replaceFirst("mx_", "mm_"), "drawable", ctx.getPackageName());
 	}
 
-	private void initSimplePaint(Paint paint, int color) {
-		paint.setAntiAlias(true);
-		paint.setStyle(Style.FILL_AND_STROKE);
-		paint.setColor(color);
+	private int getMapBackgroundIconId(Context ctx, FavouritePoint point, String layer) {
+		if (point != null) {
+			int iconId = point.getBackgroundType().getIconId();
+			String iconName = ctx.getResources().getResourceEntryName(iconId);
+			return ctx.getResources().getIdentifier("map_" + iconName + "_" + layer
+					, "drawable", ctx.getPackageName());
+		}
+		return R.drawable.map_white_favorite_shield;
 	}
 
 	@Override
 	protected void onBoundsChange(Rect bounds) {
 		super.onBoundsChange(bounds);
 		Rect bs = new Rect(bounds);
-		//bs.inset((int) (4 * density), (int) (4 * density));
-		bs.inset(bs.width() / 4, bs.height() / 4);
 		if (!withShadow && !synced) {
-			listDrawable.setBounds(bs);
+			uiBackgroundIcon.setBounds(bounds);
+			bs.inset(bs.width() / 5, bs.height() / 5);
+			uiListIcon.setBounds(bs);
 		} else if (withShadow) {
+			bs.inset(bs.width() / 3, bs.height() / 3);
 			favIcon.setBounds(bs);
 		}
 	}
 
 	@Override
 	public int getIntrinsicHeight() {
-		return synced ? syncedShadow.getHeight() : favBackground.getHeight();
+		return synced ? syncedShadow.getHeight() : favBackgroundCenter.getHeight();
 	}
 
 	@Override
 	public int getIntrinsicWidth() {
-		return synced ? syncedShadow.getWidth() : favBackground.getWidth();
+		return synced ? syncedShadow.getWidth() : favBackgroundCenter.getWidth();
 	}
 
 	@Override
@@ -110,21 +122,24 @@ public class FavoriteImageDrawable extends Drawable {
 		paintBackground.setColorFilter(history ? grayFilter : colorFilter);
 		Rect bs = getBounds();
 		if (synced) {
-			canvas.drawBitmap(syncedShadow, bs.exactCenterX() - syncedShadow.getWidth() / 2f, bs.exactCenterY() - syncedShadow.getHeight() / 2f, paintBackground);
-			canvas.drawBitmap(syncedColor, bs.exactCenterX() - syncedColor.getWidth() / 2f, bs.exactCenterY() - syncedColor.getHeight() / 2f, paintBackground);
-			canvas.drawBitmap(syncedStroke, bs.exactCenterX() - syncedStroke.getWidth() / 2f, bs.exactCenterY() - syncedStroke.getHeight() / 2f, paintBackground);
-			canvas.drawBitmap(syncedIcon, bs.exactCenterX() - syncedIcon.getWidth() / 2f, bs.exactCenterY() - syncedIcon.getHeight() / 2f, paintIcon);
+			drawBitmap(canvas, bs, syncedShadow, paintBackground);
+			drawBitmap(canvas, bs, syncedColor, paintBackground);
+			drawBitmap(canvas, bs, syncedStroke, paintBackground);
+			drawBitmap(canvas, bs, syncedIcon, paintIcon);
 		} else if (withShadow) {
-			canvas.drawBitmap(favBackground, bs.exactCenterX() - favBackground.getWidth() / 2f, bs.exactCenterY() - favBackground.getHeight() / 2f, paintBackground);
+			drawBitmap(canvas, bs, favBackgroundBottom, null);
+			drawBitmap(canvas, bs, favBackgroundCenter, paintBackground);
+			drawBitmap(canvas, bs, favBackgroundTop, null);
 			favIcon.draw(canvas);
 		} else {
-			int min = Math.min(bs.width(), bs.height());
-			int r = (min * 4 / 10);
-			int rs = (r - 1);
-			canvas.drawCircle(min / 2, min / 2, r, paintOuter);
-			canvas.drawCircle(min / 2, min / 2, rs, paintInnerCircle);
-			listDrawable.draw(canvas);
+			uiBackgroundIcon.draw(canvas);
+			uiListIcon.draw(canvas);
 		}
+	}
+
+	public void drawBitmap(@NonNull Canvas canvas, Rect bs, Bitmap bitmap, Paint paintBackground) {
+		canvas.drawBitmap(bitmap, bs.exactCenterX() - bitmap.getWidth() / 2f,
+				bs.exactCenterY() - bitmap.getHeight() / 2f, paintBackground);
 	}
 
 	public void drawBitmapInCenter(Canvas canvas, float x, float y, boolean history) {
@@ -154,13 +169,14 @@ public class FavoriteImageDrawable extends Drawable {
 	private static TreeMap<String, FavoriteImageDrawable> cache = new TreeMap<>();
 
 	private static FavoriteImageDrawable getOrCreate(Context ctx, int color, boolean withShadow, boolean synced, FavouritePoint point) {
-		String iconName = "";
+		String uniqueId = "";
 		if (point != null) {
-			iconName = point.getIconEntryName(ctx);
+			uniqueId = point.getIconEntryName(ctx);
+			uniqueId += point.getBackgroundType().name();
 		}
 		color = color | 0xff000000;
 		int hash = (color << 4) + ((withShadow ? 1 : 0) << 2) + ((synced ? 3 : 0) << 2);
-		String uniqueId = hash + iconName;
+		uniqueId = hash + uniqueId;
 		FavoriteImageDrawable drawable = cache.get(uniqueId);
 		if (drawable == null) {
 			drawable = new FavoriteImageDrawable(ctx, color, withShadow, synced, point);
@@ -191,6 +207,7 @@ public class FavoriteImageDrawable extends Drawable {
 		if (pt != null) {
 			point = new FavouritePoint(pt.getLatitude(), pt.getLongitude(), pt.name, pt.category);
 			point.setIconIdFromName(a, pt.getIconName());
+			point.setBackgroundType(BackgroundType.getByTypeName(pt.getBackgroundType(), BackgroundType.CIRCLE));
 		}
 		return point;
 	}

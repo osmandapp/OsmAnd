@@ -3474,4 +3474,5 @@
     <string name="profile_backup_failed">Kunne ikke sikkerhetskopiere profil.</string>
     <string name="importing_from">Importerer data fra %1$s</string>
     <string name="shared_string_importing">Importerer</string>
+    <string name="select_shape">Velg form</string>
 </resources>

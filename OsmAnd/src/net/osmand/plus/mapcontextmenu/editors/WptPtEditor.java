@@ -134,14 +134,14 @@ public class WptPtEditor extends PointEditor {
 	public void showEditorFragment() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			WptPtEditorFragment.showInstance(mapActivity);
+			WptPtEditorFragmentNew.showInstance(mapActivity);
 		}
 	}
 
 	public void showEditorFragment(boolean skipDialog) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			WptPtEditorFragment.showInstance(mapActivity, skipDialog);
+			WptPtEditorFragmentNew.showInstance(mapActivity, skipDialog);
 		}
 	}
 }

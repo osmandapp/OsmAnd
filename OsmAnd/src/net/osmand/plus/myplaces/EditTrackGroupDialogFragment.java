@@ -263,7 +263,8 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 											System.currentTimeMillis(), wpt.desc, wpt.name, category, color);
 								} else {
 									gpxFile.updateWptPt(wpt, wpt.getLatitude(), wpt.getLongitude(),
-											System.currentTimeMillis(), wpt.desc, wpt.name, category, color);
+											System.currentTimeMillis(), wpt.desc, wpt.name, category, color,
+											wpt.getIconName(), wpt.getBackgroundType());
 								}
 							}
 						}

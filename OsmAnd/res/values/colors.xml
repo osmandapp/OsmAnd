@@ -178,7 +178,7 @@
 	<color name="row_selection_color">#CC33BBE0</color>
 
 	<!-- GPX analysis colors -->
-	<color name="gpx_color_point">#cd2c33</color>
+	<color name="gpx_color_point">#d00d0d</color>
 	<color name="gpx_speed">#c79c00</color>
 	<color name="gpx_altitude_desc">#32CD32</color>
 	<color name="gpx_altitude_asc">#EE3232</color>
@@ -455,6 +455,9 @@
 	<color name="profile_icon_color_red_dark">#FF2200</color>
 	<color name="profile_icon_color_yellow_dark">#F0B400</color>
 	<color name="profile_icon_color_magenta_dark">#CC0063</color>
+
+	<color name="profile_icon_color_outdated_light">#A6A6A6</color>
+	<color name="profile_icon_color_outdated_dark">#727272</color>
 
 	<color name="profile_icon_color_inactive">#727272</color>
 

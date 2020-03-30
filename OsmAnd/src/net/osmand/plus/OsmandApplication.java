@@ -379,6 +379,7 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 	}
 
+
 	public void checkPreferredLocale() {
 		Configuration config = getBaseContext().getResources().getConfiguration();
 
@@ -408,6 +409,8 @@ public class OsmandApplication extends MultiDexApplication {
 		if (selectedLocale != null) {
 			Locale.setDefault(selectedLocale);
 			config.locale = selectedLocale;
+			config.setLayoutDirection(selectedLocale);
+
 			getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
 			if (android.os.Build.VERSION.SDK_INT >= 17) {
 				Configuration conf = new Configuration(config);

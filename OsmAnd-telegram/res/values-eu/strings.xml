@@ -194,4 +194,15 @@
     <string name="unit_of_speed_system_descr">Zehaztu abiadura unitatea.</string>
     <string name="unit_of_speed_system">Abiadura unitatea</string>
     <string name="shared_string_error_short">ERR</string>
+    <string name="time_zone_descr">Hautatu ordu-zona zure kokapen-mezuetan erakusteko.</string>
+    <string name="time_zone">Ordu zona</string>
+    <string name="buffer_time_descr">Bufferraren puntuak gordetzeko gehieneko denbora</string>
+    <string name="buffer_time">Bufferraren iraungitze-denbora</string>
+    <string name="shared_string_suggested">Iradokita</string>
+    <string name="status_widget_title">OsmAnd Tracker-en egoera</string>
+    <string name="back_to_osmand">Atzera OsmAnd-era</string>
+    <string name="last_response_date">Azken erantzuna: %1$s</string>
+    <string name="last_update_from_telegram_duration">"Telegram-en azken eguneraketa duela  %1$s"</string>
+    <string name="last_response_duration">Azken erantzuna duela %1$s</string>
+    <string name="duration_ago">duela %1$s</string>
 </resources>

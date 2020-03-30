@@ -1223,7 +1223,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	private void muteStreamMusicAndOutputGuidance() {
         AudioManager am = (AudioManager)app.getSystemService(Context.AUDIO_SERVICE);
-        int voiceGuidanceOutput = app.getSettings().AUDIO_STREAM_GUIDANCE.get();
+        int voiceGuidanceOutput = app.getSettings().AUDIO_MANAGER_STREAM.get();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
             if (voiceGuidanceOutput != AudioManager.STREAM_MUSIC)
@@ -1237,7 +1237,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
     private void unmuteStreamMusicAndOutputGuidance() {
         AudioManager am = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
-        int voiceGuidanceOutput = app.getSettings().AUDIO_STREAM_GUIDANCE.get();
+        int voiceGuidanceOutput = app.getSettings().AUDIO_MANAGER_STREAM.get();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_UNMUTE, 0);
             if (voiceGuidanceOutput != AudioManager.STREAM_MUSIC)

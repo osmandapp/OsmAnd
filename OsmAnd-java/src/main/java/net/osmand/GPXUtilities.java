@@ -45,6 +45,8 @@ public class GPXUtilities {
 	public final static Log log = PlatformUtil.getLog(GPXUtilities.class);
 	private static final String ICON_NAME_EXTENSION = "icon";
 	private static final String DEFAULT_ICON_NAME = "special_star";
+	private static final String BACKGROUND_TYPE_EXTENSION = "background";
+	private static final String DEFAULT_BACKGROUND_TYPE = "circle";
 
 	private final static String GPX_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'"; //$NON-NLS-1$
 	private final static String GPX_TIME_FORMAT_MILLIS = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"; //$NON-NLS-1$
@@ -287,6 +289,18 @@ public class GPXUtilities {
 
 		public void setIconName(String iconName) {
 			getExtensionsToWrite().put(ICON_NAME_EXTENSION, iconName);
+		}
+
+		public String getBackgroundType() {
+			String backgroundType = getExtensionsToRead().get(BACKGROUND_TYPE_EXTENSION);
+			if (backgroundType == null) {
+				backgroundType = DEFAULT_BACKGROUND_TYPE;
+			}
+			return backgroundType;
+		}
+
+		public void setBackgroundType(String backType) {
+			getExtensionsToWrite().put(BACKGROUND_TYPE_EXTENSION, backType);
 		}
 
 		@Override
@@ -1134,6 +1148,11 @@ public class GPXUtilities {
 		}
 
 		public WptPt addWptPt(double lat, double lon, long time, String description, String name, String category, int color) {
+			return addWptPt(lat, lon, time, description, name, category, color, null, null);
+		}
+
+		public WptPt addWptPt(double lat, double lon, long time, String description, String name, String category,
+		                      int color, String iconName, String backgroundType) {
 			double latAdjusted = Double.parseDouble(latLonFormat.format(lat));
 			double lonAdjusted = Double.parseDouble(latLonFormat.format(lon));
 			final WptPt pt = new WptPt(latAdjusted, lonAdjusted, time, Double.NaN, 0, Double.NaN);
@@ -1142,6 +1161,12 @@ public class GPXUtilities {
 			pt.desc = description;
 			if (color != 0) {
 				pt.setColor(color);
+			}
+			if (iconName != null) {
+				pt.setIconName(iconName);
+			}
+			if (backgroundType != null) {
+				pt.setBackgroundType(backgroundType);
 			}
 
 			points.add(pt);
@@ -1228,7 +1253,13 @@ public class GPXUtilities {
 			modifiedTime = System.currentTimeMillis();
 		}
 
-		public void updateWptPt(WptPt pt, double lat, double lon, long time, String description, String name, String category, int color) {
+		public void updateWptPt(WptPt pt, double lat, double lon, long time, String description, String name, String category,
+		                        int color) {
+			updateWptPt(pt, lat, lon, System.currentTimeMillis(), description, name, category, color, null, null);
+		}
+
+		public void updateWptPt(WptPt pt, double lat, double lon, long time, String description, String name, String category,
+		                        int color, String iconName, String backgroundType) {
 			int index = points.indexOf(pt);
 			double latAdjusted = Double.parseDouble(latLonFormat.format(lat));
 			double lonAdjusted = Double.parseDouble(latLonFormat.format(lon));
@@ -1240,6 +1271,12 @@ public class GPXUtilities {
 			pt.category = category;
 			if (color != 0) {
 				pt.setColor(color);
+			}
+			if (iconName != null) {
+				pt.setIconName(iconName);
+			}
+			if (backgroundType != null) {
+				pt.setBackgroundType(backgroundType);
 			}
 
 			if (index != -1) {

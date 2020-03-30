@@ -125,14 +125,14 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		String v ="";
 		v += " \u25CF App profile: " + ((OsmandApplication) getApplication()).getSettings().APPLICATION_MODE.get().getStringKey();
 
-		if (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 3) {
+		if (((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get() == 3) {
 			v += "\n \u25CF Voice guidance output: Media/music audio";
-		} else if (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 5) {
+		} else if (((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get() == 5) {
 			v += "\n \u25CF Voice guidance output: Notification audio";
-		} else if (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
+		} else if (((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get() == 0) {
 			v += "\n \u25CF Voice guidance output: Phone call audio";
 		} else {
-			v += "\n \u25CF Voice guidance output: " + ((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get();
+			v += "\n \u25CF Voice guidance output: " + ((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get();
 		}
 
 		v += "\n \u25CF OsmAnd voice: " + osmandVoice;
@@ -141,7 +141,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		v += "\n \u25CF TTS voice language availability: " + TTSCommandPlayerImpl.getTtsVoiceStatus();
 		v += "\n \u25CF TTS voice actually used: " + TTSCommandPlayerImpl.getTtsVoiceUsed();
 
-		if (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
+		if (((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get() == 0) {
 			v += "\n \u25CF BT SCO: " + AbstractPrologCommandPlayer.btScoInit;
 		} else {
 			v += "\n \u25CF BT SCO: The current app profile is not set to use 'Phone call audio'.";
@@ -282,7 +282,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 					Toast.makeText(TestVoiceActivity.this, "Info refreshed.", Toast.LENGTH_LONG).show();
 				}
 				if (description.startsWith("\u25BA (11.2)")) {
-					if (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
+					if (((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get() == 0) {
 						if (((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() == 1000) {
 							((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(1500);
 						} else if (((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() == 1500) {

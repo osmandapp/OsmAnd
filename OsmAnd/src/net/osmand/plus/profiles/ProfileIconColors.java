@@ -34,4 +34,9 @@ public enum ProfileIconColors {
 	public int getColor(boolean nightMode) {
 		return nightMode ? nightColor : dayColor;
 	}
+
+	public static int getOutdatedLocationColor(boolean nightMode) {
+		return nightMode ? R.color.profile_icon_color_outdated_dark : R.color.profile_icon_color_outdated_light;
+	}
+
 }

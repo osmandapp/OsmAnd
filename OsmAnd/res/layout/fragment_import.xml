@@ -127,14 +127,16 @@
 
 		</com.google.android.material.appbar.CollapsingToolbarLayout>
 
-		<ProgressBar
+		<me.zhanghai.android.materialprogressbar.MaterialProgressBar
 			android:id="@+id/progress_bar"
-			style="?android:attr/progressBarStyleHorizontal"
+			style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:indeterminate="true"
-			android:minHeight="0dp"
+			android:layout_height="5dp"
 			android:visibility="gone"
+			android:indeterminate="true"
+			osmand:mpb_progressStyle="horizontal"
+			osmand:mpb_setBothDrawables="true"
+			osmand:mpb_useIntrinsicPadding="false"
 			tools:visibility="visible" />
 
 	</com.google.android.material.appbar.AppBarLayout>

@@ -804,8 +804,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		// for voice navigation
 		ApplicationMode routingAppMode = getRoutingHelper().getAppMode();
-		if (routingAppMode != null && settings.AUDIO_STREAM_GUIDANCE.getModeValue(routingAppMode) != null) {
-			setVolumeControlStream(settings.AUDIO_STREAM_GUIDANCE.getModeValue(routingAppMode));
+		if (routingAppMode != null && settings.AUDIO_MANAGER_STREAM.getModeValue(routingAppMode) != null) {
+			setVolumeControlStream(settings.AUDIO_MANAGER_STREAM.getModeValue(routingAppMode));
 		} else {
 			setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		}

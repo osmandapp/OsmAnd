@@ -546,6 +546,14 @@ public class UiUtilities {
 		}
 	}
 
+	public static LayoutInflater getMaterialInflater(Context ctx, boolean nightMode) {
+		return LayoutInflater.from(getThemedMaterialContext(ctx, nightMode));
+	}
+
+	private static Context getThemedMaterialContext(Context context, boolean nightMode) {
+		return getThemedContext(context, nightMode, R.style.OsmandMaterialLightTheme, R.style.OsmandMaterialDarkTheme);
+	}
+
 	public static LayoutInflater getInflater(Context ctx, boolean nightMode) {
 		return LayoutInflater.from(getThemedContext(ctx, nightMode));
 	}
