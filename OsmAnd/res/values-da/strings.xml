@@ -1209,7 +1209,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="rendering_attr_hideBuildings_name">Bygninger</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Gang- og cykelstier</string>
     <string name="rendering_attr_hideText_name">Tekst</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Skov og beplantning</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Skov og beplantning</string>
     <string name="rendering_attr_buildings15zoom_name">Bygninger på zoomniveau 15</string>
     <string name="rendering_attr_moreDetailed_name">Flere detaljer</string>
     <string name="rendering_attr_lessDetailed_name">Færre detaljer</string>
@@ -3112,7 +3112,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="routing_attr_piste_type_nordic_name">Langrend / nordisk ski</string>
     <string name="routing_attr_piste_type_nordic_description">Spor til nordisk eller langrend.</string>
     <string name="routing_attr_piste_type_skitour_name">Langrend ski</string>
-    <string name="routing_attr_piste_type_skitour_description">Spor til langrend ski</string>
+    <string name="routing_attr_piste_type_skitour_description">Spor til langrend ski.</string>
     <string name="routing_attr_piste_type_sled_name">Slæde</string>
     <string name="routing_attr_piste_type_sled_description">Pister til kælkning.</string>
     <string name="routing_attr_allow_intermediate_name">Tillad mellemliggende ruter</string>
@@ -3122,7 +3122,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="routing_attr_allow_expert_name">Tillad ekspert ruter</string>
     <string name="routing_attr_allow_expert_description">Ekstremt vanskelige ruter, med farlige forhindringer og omgivelser.</string>
     <string name="routing_attr_allow_skating_only_name">Tillad kun skøjteløb ruter</string>
-    <string name="routing_attr_allow_skating_only_description">Ruter forberedt til freestyle eller kun skøjteløb uden klassiske spor</string>
+    <string name="routing_attr_allow_skating_only_description">Ruter forberedt til freestyle eller kun skøjteløb uden klassiske spor.</string>
     <string name="routing_attr_allow_classic_only_name">Tillad kun klassiske ruter</string>
     <string name="routing_attr_allow_classic_only_description">Ruter forberedt til den klassiske stil uden skøjtebaner. Omfatter ruter udarbejdet af en mindre snescooter med løsere pister og spor lavet manuelt af skiløbere.</string>
     <string name="routing_attr_difficulty_preference_name">Foretrukket sværhedsgrad</string>
@@ -3205,7 +3205,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_track_is_saved">Spor %s er gemt</string>
     <string name="gpx_join_gaps">Forbind mellemrum</string>
     <string name="app_mode_camper">Campingvogn</string>
-    <string name="app_mode_campervan">Autocamper</string>
+    <string name="app_mode_campervan">Autocamper (RV)</string>
     <string name="rendering_attr_showLez_description">Vis miljøzoner på kortet. Påvirker ikke routing.</string>
     <string name="rendering_attr_showLez_name">Vis Miljøzoner</string>
     <string name="temporary_conditional_routing">Overvej midlertidige begrænsninger</string>
@@ -3527,4 +3527,24 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="importing_from">Importerer data fra %1$s</string>
     <string name="shared_string_importing">Importerer</string>
     <string name="shared_string_import_complete">Importen er fuldført</string>
+    <string name="checking_for_duplicate_description">Kontrol af %1$s for dubletter med eksisterende elementer i programmet.
+\n
+\nDet kan tage lidt tid.</string>
+    <string name="recalculate_route_in_deviation">Genberegn rute i tilfælde af afvigelse</string>
+    <string name="select_distance_route_will_recalc">Vælg afstanden, hvorefter ruten genberegnes.</string>
+    <string name="recalculate_route_distance_promo">Ruten genberegnes, hvis afstanden fra ruten til den aktuelle placering er større end den valgte værdi.</string>
+    <string name="n_items_of_z">%1$s af %2$s</string>
+    <string name="download_slope_maps">Skråninger</string>
+    <string name="quick_action_show_hide_terrain">Vis/skjul terræn</string>
+    <string name="quick_action_terrain_hide">Skjul terræn</string>
+    <string name="quick_action_terrain_show">Vis terræn</string>
+    <string name="quick_action_terrain_descr">En knap der viser eller skjuler terrænlag på kortet.</string>
+    <string name="delete_description">Slet beskrivelse</string>
+    <string name="add_description">Tilføj beskrivelse</string>
+    <string name="select_group">Vælg gruppe</string>
+    <string name="select_shape">Vælg form</string>
+    <string name="shared_string_circle">Cirkel</string>
+    <string name="shared_string_rhomb">Rhombe</string>
+    <string name="shared_string_square">Firkant</string>
+    <string name="shared_string_min">Min</string>
 </resources>
