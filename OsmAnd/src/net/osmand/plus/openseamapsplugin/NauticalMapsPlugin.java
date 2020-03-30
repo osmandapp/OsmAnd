@@ -1,5 +1,7 @@
 package net.osmand.plus.openseamapsplugin;
 
+import android.graphics.drawable.Drawable;
+
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -25,8 +27,8 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public int getAssetResourceName() {
-		return R.drawable.nautical_map;
+	public Drawable getAssetResourceImage() {
+		return app.getUIUtilities().getIcon(R.drawable.nautical_map);
 	}
 
 	@Override

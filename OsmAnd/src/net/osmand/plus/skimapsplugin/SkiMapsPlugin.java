@@ -1,5 +1,7 @@
 package net.osmand.plus.skimapsplugin;
 
+import android.graphics.drawable.Drawable;
+
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -34,8 +36,8 @@ public class SkiMapsPlugin extends OsmandPlugin {
 	}
 	
 	@Override
-	public int getAssetResourceName() {
-		return R.drawable.ski_map;
+	public Drawable getAssetResourceImage() {
+		return app.getUIUtilities().getIcon(R.drawable.ski_map);
 	}
 
 	@Override

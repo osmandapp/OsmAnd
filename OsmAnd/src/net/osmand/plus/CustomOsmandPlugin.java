@@ -2,6 +2,8 @@ package net.osmand.plus;
 
 import android.app.Activity;
 import android.content.res.Configuration;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,6 +48,10 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	public String pluginId;
 	public Map<String, String> names = new HashMap<>();
 	public Map<String, String> descriptions = new HashMap<>();
+	public Map<String, String> iconNames = new HashMap<>();
+	public Map<String, String> imageNames = new HashMap<>();
+	public Drawable icon;
+	public Drawable image;
 
 	public List<String> rendererNames = new ArrayList<>();
 	public List<String> routerNames = new ArrayList<>();
@@ -205,12 +211,23 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		return description;
 	}
 
-	@Override
-	public int getAssetResourceName() {
-		return R.drawable.contour_lines;
-	}
-
 	public void readAdditionalDataFromJson(JSONObject json) throws JSONException {
+		JSONObject iconJson = json.has("icon") ? json.getJSONObject("icon") : null;
+		if (iconJson != null) {
+			for (Iterator<String> it = iconJson.keys(); it.hasNext(); ) {
+				String iconKey = it.next();
+				String name = iconJson.getString(iconKey);
+				iconNames.put(iconKey, name);
+			}
+		}
+		JSONObject imageJson = json.has("image") ? json.getJSONObject("image") : null;
+		if (imageJson != null) {
+			for (Iterator<String> it = imageJson.keys(); it.hasNext(); ) {
+				String imageKey = it.next();
+				String name = imageJson.getString(imageKey);
+				imageNames.put(imageKey, name);
+			}
+		}
 		JSONObject nameJson = json.has("name") ? json.getJSONObject("name") : null;
 		if (nameJson != null) {
 			for (Iterator<String> it = nameJson.keys(); it.hasNext(); ) {
@@ -230,6 +247,18 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	}
 
 	public void writeAdditionalDataToJson(JSONObject json) throws JSONException {
+		JSONObject iconJson = new JSONObject();
+		for (Map.Entry<String, String> entry : iconNames.entrySet()) {
+			iconJson.put(entry.getKey(), entry.getValue());
+		}
+		json.put("icon", iconJson);
+
+		JSONObject imageJson = new JSONObject();
+		for (Map.Entry<String, String> entry : imageNames.entrySet()) {
+			imageJson.put(entry.getKey(), entry.getValue());
+		}
+		json.put("image", imageJson);
+
 		JSONObject nameJson = new JSONObject();
 		for (Map.Entry<String, String> entry : names.entrySet()) {
 			nameJson.put(entry.getKey(), entry.getValue());
@@ -287,5 +316,51 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	public void addRenderer(String fileName) {
 		String renderer = RendererRegistry.formatRendererFileName(fileName);
 		rendererNames.add(renderer.replace('_', ' ').replace('-', ' '));
+	}
+
+	public void updateCustomItems(List<SettingsItem> items) {
+		for (SettingsItem item : items) {
+			if (item instanceof SettingsHelper.ResourcesSettingsItem) {
+				SettingsHelper.ResourcesSettingsItem resourcesSettingsItem = (SettingsHelper.ResourcesSettingsItem) item;
+				File pluginDir = resourcesSettingsItem.getPluginPath();
+				File pluginResDir = new File(pluginDir, resourcesSettingsItem.getFileName());
+				if (pluginResDir.exists() && pluginResDir.isDirectory()) {
+					File[] files = pluginResDir.listFiles();
+					for (File resFile : files) {
+						String path = resFile.getAbsolutePath();
+						for (Map.Entry<String, String> entry : iconNames.entrySet()) {
+							String value = entry.getValue();
+							if (value.startsWith("@")) {
+								value = value.substring(1);
+								if (path.endsWith(value)) {
+									icon = BitmapDrawable.createFromPath(path);
+									break;
+								}
+							}
+						}
+						for (Map.Entry<String, String> entry : imageNames.entrySet()) {
+							String value = entry.getValue();
+							if (value.startsWith("@")) {
+								value = value.substring(1);
+								if (path.endsWith(value)) {
+									image = BitmapDrawable.createFromPath(path);
+									break;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@Override
+	public int getLogoResourceId() {
+		return super.getLogoResourceId();
+	}
+
+	@Override
+	public Drawable getAssetResourceImage() {
+		return image;
 	}
 }

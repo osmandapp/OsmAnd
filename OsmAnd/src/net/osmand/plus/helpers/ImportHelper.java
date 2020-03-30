@@ -41,6 +41,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
+import net.osmand.plus.CustomOsmandPlugin;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.OsmandApplication;
@@ -844,8 +845,10 @@ public class ImportHelper {
 		final SettingsImportListener importListener = new SettingsImportListener() {
 			@Override
 			public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsItem> items) {
+				CustomOsmandPlugin plugin = pluginItem.getPlugin();
+				plugin.updateCustomItems(items);
 				if (activity != null) {
-					pluginItem.getPlugin().onInstall(app, activity);
+					plugin.onInstall(app, activity);
 				}
 				String pluginId = pluginItem.getPluginId();
 				File pluginDir = new File(app.getAppPath(null), IndexConstants.PLUGINS_DIR + pluginId);

@@ -3,6 +3,7 @@ package net.osmand.plus.srtmplugin;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -82,8 +83,8 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public int getAssetResourceName() {
-		return R.drawable.contour_lines;
+	public Drawable getAssetResourceImage() {
+		return app.getUIUtilities().getIcon(R.drawable.contour_lines);
 	}
 
 	@Override

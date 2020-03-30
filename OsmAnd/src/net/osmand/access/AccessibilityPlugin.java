@@ -89,11 +89,6 @@ public class AccessibilityPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public int getAssetResourceName() {
-		return 0;
-	}
-
-	@Override
 	public int getLogoResourceId() {
 		return R.drawable.ic_plugin_accessibility;
 	}

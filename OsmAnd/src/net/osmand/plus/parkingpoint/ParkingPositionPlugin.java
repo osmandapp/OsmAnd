@@ -4,6 +4,7 @@ package net.osmand.plus.parkingpoint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.text.format.Time;
@@ -505,8 +506,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public int getAssetResourceName() {
-		return R.drawable.parking_position;
+	public Drawable getAssetResourceImage() {
+		return app.getUIUtilities().getIcon(R.drawable.parking_position);
 	}
 	
 	@Override

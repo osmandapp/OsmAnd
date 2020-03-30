@@ -2,6 +2,7 @@ package net.osmand.plus.rastermaps;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.view.ContextThemeWrapper;
 import android.view.View;
@@ -85,8 +86,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public int getAssetResourceName() {
-		return R.drawable.online_maps;
+	public Drawable getAssetResourceImage() {
+		return app.getUIUtilities().getIcon(R.drawable.online_maps);
 	}
 
 	@Override

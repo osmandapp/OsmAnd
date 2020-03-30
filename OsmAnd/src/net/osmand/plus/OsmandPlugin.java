@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
 
@@ -85,7 +86,15 @@ public abstract class OsmandPlugin {
 
 	public abstract String getDescription();
 
-	public abstract int getAssetResourceName();
+	@Nullable
+	public Drawable getAssetResourceImage() {
+		return null;
+	}
+
+	@Nullable
+	public Drawable getLogoResource() {
+		return app.getUIUtilities().getIcon(getLogoResourceId());
+	}
 
 	@DrawableRes
 	public int getLogoResourceId() {

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -97,8 +98,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 	
 	@Override
-	public int getAssetResourceName() {
-		return R.drawable.trip_recording;
+	public Drawable getAssetResourceImage() {
+		return app.getUIUtilities().getIcon(R.drawable.trip_recording);
 	}
 
 	@Override
