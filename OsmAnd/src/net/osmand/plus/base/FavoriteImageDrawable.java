@@ -8,7 +8,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
-import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
@@ -98,9 +97,11 @@ public class FavoriteImageDrawable extends Drawable {
 		super.onBoundsChange(bounds);
 		Rect bs = new Rect(bounds);
 		if (!withShadow && !synced) {
-			uiBackgroundIcon.setBounds(bounds);
-			bs.inset(bs.width() / 5, bs.height() / 5);
-			uiListIcon.setBounds(bs);
+			uiBackgroundIcon.setBounds(0, 0, uiBackgroundIcon.getIntrinsicWidth(), uiBackgroundIcon.getIntrinsicHeight());
+			int offsetX = bounds.centerX() - uiListIcon.getIntrinsicWidth() / 2;
+			int offsetY = bounds.centerY() - uiListIcon.getIntrinsicHeight() / 2;
+			uiListIcon.setBounds(offsetX, offsetY, uiListIcon.getIntrinsicWidth() + offsetX,
+					uiListIcon.getIntrinsicHeight() + offsetY);
 		} else if (withShadow) {
 			bs.inset(bs.width() / 3, bs.height() / 3);
 			favIcon.setBounds(bs);
@@ -109,12 +110,22 @@ public class FavoriteImageDrawable extends Drawable {
 
 	@Override
 	public int getIntrinsicHeight() {
-		return synced ? syncedShadow.getHeight() : favBackgroundCenter.getHeight();
+		if (synced) {
+			return syncedShadow.getHeight();
+		} else if (withShadow) {
+			return favBackgroundCenter.getHeight();
+		}
+		return uiBackgroundIcon.getIntrinsicHeight();
 	}
 
 	@Override
 	public int getIntrinsicWidth() {
-		return synced ? syncedShadow.getWidth() : favBackgroundCenter.getWidth();
+		if (synced) {
+			return syncedShadow.getWidth();
+		} else if (withShadow) {
+			return favBackgroundCenter.getWidth();
+		}
+		return uiBackgroundIcon.getIntrinsicWidth();
 	}
 
 	@Override

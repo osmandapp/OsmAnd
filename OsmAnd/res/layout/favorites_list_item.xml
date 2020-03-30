@@ -49,11 +49,12 @@
 
             <ImageView
                 android:id="@+id/favourite_icon"
-                android:layout_width="@dimen/favorites_icon_size"
-                android:layout_height="@dimen/favorites_icon_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="@dimen/list_header_padding"
-	            android:layout_marginEnd="@dimen/list_header_padding" />
+                android:scaleType="center"
+                android:layout_marginRight="@dimen/list_header_settings_top_margin"
+                android:layout_marginEnd="@dimen/list_header_settings_top_margin" />
         </FrameLayout>
 
         <LinearLayout
@@ -65,7 +66,7 @@
             android:paddingTop="6dp"
             android:paddingRight="@dimen/list_content_padding"
             android:paddingBottom="6dp"
-	        android:paddingEnd="@dimen/list_content_padding">
+            android:paddingEnd="@dimen/list_content_padding">
 
             <TextView
                 android:id="@+id/favourite_label"
@@ -96,7 +97,7 @@
                     android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/default_sub_text_size"
                     tools:text="100500 km"
-	                android:layout_marginStart="2dp" />
+                    android:layout_marginStart="2dp" />
 
                 <ImageView
                     android:id="@+id/group_image"
@@ -105,7 +106,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="4dp"
                     android:src="@drawable/ic_small_group"
-	                android:layout_marginStart="4dp" />
+                    android:layout_marginStart="4dp" />
 
                 <TextView
                     android:id="@+id/group_name"
@@ -115,7 +116,7 @@
                     android:layout_marginLeft="2dp"
                     android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/default_sub_text_size"
-	                android:layout_marginStart="2dp" />
+                    android:layout_marginStart="2dp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -129,7 +130,7 @@
             android:background="?attr/dashboard_button"
             android:src="@drawable/ic_action_test_light"
             android:visibility="gone"
-	        android:layout_marginStart="@dimen/dashFavIconMargin" />
+            android:layout_marginStart="@dimen/dashFavIconMargin" />
 
         <ImageButton
             android:id="@+id/options"

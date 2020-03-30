@@ -105,7 +105,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		toolbar.setBackgroundColor(ContextCompat.getColor(requireContext(),
 				nightMode ? R.color.app_bar_color_dark : R.color.list_background_color_light));
 		toolbar.setTitle(getToolbarTitle());
-		Drawable icBack = app.getUIUtilities().getIcon(R.drawable.ic_arrow_back,
+		Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app),
 				nightMode ? R.color.active_buttons_and_links_text_dark : R.color.description_font_and_bottom_sheet_icons);
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
@@ -471,9 +471,15 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			oldIcon.findViewById(R.id.outline).setVisibility(View.INVISIBLE);
 			ImageView background = oldIcon.findViewById(R.id.background);
 			setIconSelectorBackground(background);
+			ImageView iconView = oldIcon.findViewById(R.id.icon);
+			iconView.setImageDrawable(UiUtilities.tintDrawable(ContextCompat.getDrawable(app, selectedIcon),
+					ContextCompat.getColor(app, R.color.icon_color_default_light)));
 		}
 		View icon = rootView.findViewWithTag(iconRes);
 		if (icon != null) {
+			ImageView iconView = icon.findViewById(R.id.icon);
+			iconView.setImageDrawable(UiUtilities.tintDrawable(ContextCompat.getDrawable(app, iconRes),
+					ContextCompat.getColor(app, R.color.color_white)));
 			icon.findViewById(R.id.outline).setVisibility(View.VISIBLE);
 			ImageView backgroundCircle = icon.findViewById(R.id.background);
 			AndroidUtils.setBackground(backgroundCircle,
@@ -760,6 +766,14 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 				Drawable iconAdd = app.getUIUtilities().getIcon(R.drawable.ic_action_add, activeColorResId);
 				((ImageView) view.findViewById(R.id.groupIcon)).setImageDrawable(iconAdd);
 				((TextView) view.findViewById(R.id.groupName)).setText(requireMyApplication().getString(R.string.add_group));
+				GradientDrawable rectContourDrawable = (GradientDrawable) ContextCompat.getDrawable(app,
+						R.drawable.bg_select_group_button_outline);
+				if (rectContourDrawable != null) {
+					int strokeColor = ContextCompat.getColor(app, nightMode ? R.color.stroked_buttons_and_links_outline_dark
+							: R.color.stroked_buttons_and_links_outline_light);
+					rectContourDrawable.setStroke(AndroidUtils.dpToPx(app, 1), strokeColor);
+					((ImageView) view.findViewById(R.id.outlineRect)).setImageDrawable(rectContourDrawable);
+				}
 			}
 			((TextView) view.findViewById(R.id.groupName)).setTextColor(getResources().getColor(activeColorResId));
 			return new GroupsViewHolder(view);
