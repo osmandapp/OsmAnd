@@ -14,7 +14,7 @@
 		android:layout_marginTop="@dimen/list_header_top_margin"
 		android:layout_marginEnd="@dimen/list_content_padding"
 		android:layout_marginRight="@dimen/list_content_padding"
-		android:layout_marginBottom="8dp">
+		android:layout_marginBottom="@dimen/content_padding_half">
 
 		<ImageView
 			android:id="@+id/type_down_arrow"
@@ -30,7 +30,7 @@
 			android:id="@+id/master_profile_otfb"
 			android:layout_width="match_parent"
 			android:layout_height="60dp"
-			app:labelText="@string/master_profile"
+			app:labelText="@string/profile_type_base_string"
 			app:primaryColor="@color/active_color_primary_dark"
 			app:secondaryColor="?android:textColorSecondary">
 

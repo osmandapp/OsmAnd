@@ -18,6 +18,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -31,9 +32,13 @@ import java.util.List;
 
 public class MapStyleAction extends SwitchableAction<String> {
 
-	public static final int TYPE = 14;
 
 	private final static String KEY_STYLES = "styles";
+	public static final QuickActionType TYPE = new QuickActionType(14,
+			"mapstyle.change", MapStyleAction.class).
+			nameRes(R.string.quick_action_map_style).iconRes(R.drawable.ic_map).
+			category(QuickActionType.CONFIGURE_MAP);
+
 
 	public MapStyleAction() {
 		super(TYPE);
@@ -41,6 +46,16 @@ public class MapStyleAction extends SwitchableAction<String> {
 
 	public MapStyleAction(QuickAction quickAction) {
 		super(quickAction);
+	}
+
+	@Override
+	public String getSelectedItem(OsmandApplication app) {
+		RenderingRulesStorage current = app.getRendererRegistry().getCurrentSelectedRenderer();
+		if (current != null) {
+			return current.getName();
+		} else {
+			return  RendererRegistry.DEFAULT_RENDER;
+		}
 	}
 
 	@Override

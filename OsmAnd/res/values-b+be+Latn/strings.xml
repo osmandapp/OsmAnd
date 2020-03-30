@@ -2122,7 +2122,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="upload_poi">Vyhryzić POI</string>
     <string name="route_calculation">Razlik maršrutu</string>
     <string name="gpx_add_track">Dadać boĺš…</string>
-    <string name="gpx_appearance">Vyhlad</string>
+    <string name="shared_string_appearance">Vyhlad</string>
     <string name="trip_rec_notification_settings">Ukliučyć chutki zapusk zapisu</string>
     <string name="shared_string_continue">Praciahnuć</string>
     <string name="shared_string_pause">Paŭsa</string>

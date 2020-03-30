@@ -17,11 +17,15 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.editors.EditCategoryDialogFragment;
 import net.osmand.plus.mapcontextmenu.editors.SelectCategoryDialogFragment;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 
 public class GPXAction extends QuickAction {
 
-	public static final int TYPE = 6;
+	public static final QuickActionType TYPE = new QuickActionType(6,
+			"gpx.add", GPXAction.class).
+			nameRes(R.string.quick_action_add_gpx).iconRes(R.drawable.ic_action_flag_dark).
+			category(QuickActionType.CREATE_CATEGORY);
 
 	public static final String KEY_NAME = "name";
 	public static final String KEY_DIALOG = "dialog";

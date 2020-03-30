@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -11,6 +12,9 @@ import android.graphics.drawable.RippleDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Build;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,13 +40,20 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.widgets.TextViewEx;
 
+import org.apache.commons.logging.Log;
+
+import java.util.Locale;
+
 import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class UiUtilities {
+
+	private static final Log LOG = PlatformUtil.getLog(UiUtilities.class);
 
 	private TLongObjectHashMap<Drawable> drawableCache = new TLongObjectHashMap<>();
 	private OsmandApplication app;
@@ -383,13 +394,8 @@ public class UiUtilities {
 		if (image == null) {
 			return;
 		}
-		int rotation = layoutDirection == View.LAYOUT_DIRECTION_LTR ? 0 : 180;
+		int rotation = layoutDirection == ViewCompat.LAYOUT_DIRECTION_RTL ? 180 : 0;
 		image.setRotationY(rotation);
-	}
-	
-	public static void setupLayoutDirection(View layout) {
-		int direction = AndroidUtils.getLayoutDirection(layout.getContext());
-		ViewCompat.setLayoutDirection(layout, direction);
 	}
 
 	public static void setupCompoundButtonDrawable(Context ctx, boolean nightMode, @ColorInt int activeColor, Drawable drawable) {
@@ -540,6 +546,14 @@ public class UiUtilities {
 		}
 	}
 
+	public static LayoutInflater getMaterialInflater(Context ctx, boolean nightMode) {
+		return LayoutInflater.from(getThemedMaterialContext(ctx, nightMode));
+	}
+
+	private static Context getThemedMaterialContext(Context context, boolean nightMode) {
+		return getThemedContext(context, nightMode, R.style.OsmandMaterialLightTheme, R.style.OsmandMaterialDarkTheme);
+	}
+
 	public static LayoutInflater getInflater(Context ctx, boolean nightMode) {
 		return LayoutInflater.from(getThemedContext(ctx, nightMode));
 	}
@@ -557,6 +571,22 @@ public class UiUtilities {
 			ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
 			p.setMargins(l, t, r, b);
 			v.requestLayout();
+		}
+	}
+
+	public static SpannableString createSpannableString(@NonNull String text, @NonNull String textToStyle, @NonNull StyleSpan styleSpan) {
+		SpannableString spannable = new SpannableString(text);
+		try {
+			int startIndex = text.indexOf(textToStyle);
+			spannable.setSpan(
+					styleSpan,
+					startIndex,
+					startIndex + textToStyle.length(),
+					Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+			return spannable;
+		} catch (RuntimeException e) {
+			LOG.error("Error trying to find index of " + textToStyle + " " + e);
+			return spannable;
 		}
 	}
 }

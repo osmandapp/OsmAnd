@@ -3,6 +3,7 @@
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:background="?attr/activity_background_basic">
 
 	<androidx.core.widget.NestedScrollView
@@ -25,6 +26,7 @@
 				android:paddingTop="@dimen/list_header_settings_top_margin"
 				android:paddingEnd="@dimen/content_padding"
 				android:paddingBottom="@dimen/list_header_settings_top_margin"
+				android:lineSpacingMultiplier="@dimen/line_spacing_multiplier_description"
 				android:text="@string/import_duplicates_description"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_list_text_size" />
@@ -128,11 +130,23 @@
 				osmand:titleMarginStart="0dp"
 				osmand:layout_collapseMode="pin"
 				osmand:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
-				osmand:title="@string/import_duplicates_title">
+				tools:title="@string/import_duplicates_title">
 
 			</androidx.appcompat.widget.Toolbar>
 
 		</com.google.android.material.appbar.CollapsingToolbarLayout>
+
+		<me.zhanghai.android.materialprogressbar.MaterialProgressBar
+			android:id="@+id/progress_bar"
+			style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="5dp"
+			android:visibility="gone"
+			android:indeterminate="true"
+			osmand:mpb_progressStyle="horizontal"
+			osmand:mpb_setBothDrawables="true"
+			osmand:mpb_useIntrinsicPadding="false"
+			tools:visibility="visible" />
 
 	</com.google.android.material.appbar.AppBarLayout>
 

@@ -2082,7 +2082,7 @@ Lon %2$s</string>
     <string name="gpx_no_tracks_title">Non tenes galu documentos GPX</string>
     <string name="gpx_no_tracks_title_folder">Podes fintzas annànghere documentos GPX a sa cartella</string>
     <string name="gpx_add_track">Annanghe àteru…</string>
-    <string name="gpx_appearance">Aparèntzia</string>
+    <string name="shared_string_appearance">Aparèntzia</string>
     <string name="rendering_value_fine_name">Bonu</string>
     <string name="route_calculation">Càrculu de s\'àndala</string>
     <string name="upload_poi">Càrriga PDI</string>
@@ -2714,7 +2714,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_wifi_only">WiFi ebbia</string>
     <string name="select_travel_book">Issèbera unu libru de biàgiu</string>
     <string name="shared_string_travel_book">Libru de biàgiu</string>
-    <string name="online_webpage_warning">Pàgina disponìbile petzi in lìnia. La cheres abèrrere in un\'eploradore (unu browser) ìnternet?</string>
+    <string name="online_webpage_warning">Custa pàgina est disponìbile in lìnia ebbia. La cheres abèrrere in s\'esploradore/navigadore (browser) web\?</string>
     <string name="images_cache">Cache de sas immàgines</string>
     <string name="delete_search_history">Iscantzella sa cronologia de sas chircas</string>
     <string name="download_images">Iscàrriga sas immàgines</string>
@@ -3472,7 +3472,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Impòsitu: est prus difìtzile a intzertare ite at a èssere registradu e ite nono. Diat èssere mègius a istudare custu filtru.</string>
     <string name="live_monitoring_time_buffer">Durada de sa memòria tampone (buffer)</string>
     <string name="rearrange_categories">Torra a ordinare sas categorias</string>
-    <string name="create_custom_categories_list_promo">Podes importare categorias personalizadas, cuare categorias chi non pensas chi ti serbant e mudare s\'òrdine de sa lista. Sa lista podet èssere importada e esportada cun sos profilos.</string>
+    <string name="create_custom_categories_list_promo">Modìfica s\'òrdine de sa lista e cua sas categorias chi non ti serbint. Podes importare o esportare totu sas modìficas cun sos profilos.</string>
     <string name="add_new_custom_category_button_promo">Podes annànghere una categoria personalizada noa ischertende·nde una o unas cantas pagas chi ti serbint.</string>
     <string name="shared_string_available">Disponìbile</string>
     <string name="add_custom_category">Annanghe una categoria personalizada</string>
@@ -3568,4 +3568,16 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="restore_all_profile_settings">Ripristinare totu sas impostatziones de profilu\?</string>
     <string name="saving_new_profile">Sarvende su profilu nou</string>
     <string name="profile_backup_failed">Sarvatàgiu de su profilu faddidu.</string>
+    <string name="clear_recorded_data_warning">Ses segùru de chèrrere iscantzellare sos datos registrados\?</string>
+    <string name="importing_from">Importende datos dae %1$s</string>
+    <string name="shared_string_importing">Importende</string>
+    <string name="checking_for_duplicate_description">OsmAnd analizat %1$s pro agatare dopiones cun sos elementos chi esistint giai in s\'aplicatzione.
+\n
+\nBi diat pòdere chèrrere unu pagu de tempus.</string>
+    <string name="items_added">Elementos annànghidos</string>
+    <string name="shared_string_import_complete">Importatzione acabada</string>
+    <string name="import_complete_description">As importadu totu sos datos dae su %1$s, podes impreare sos butones in suta pro abèrrere sa parte de s\'aplicatzione chi serbit pro los amministrare.</string>
+    <string name="recalculate_route_distance_promo">S\'àndala at a torrare a èssere carculada si sa distàntzia dae s\'àndala a sa positzione de su momentu at a èssere prus manna de su valore ischertadu.</string>
+    <string name="select_distance_route_will_recalc">Ischerta sa distàntzia a pustis de sa cale s\'àndala at a torrare a èssere carculada.</string>
+    <string name="recalculate_route_in_deviation">Torra a carculare s\'àndala in casu de deviatzione</string>
 </resources>

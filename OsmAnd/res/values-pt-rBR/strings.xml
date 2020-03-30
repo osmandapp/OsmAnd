@@ -2254,7 +2254,7 @@ Pôr do Sol: %2$s</string>
     <string name="gpx_no_tracks_title">Você não tem arquivos GPX ainda</string>
     <string name="gpx_no_tracks_title_folder">Você pode também adicionar arquivos GPX na pasta</string>
     <string name="gpx_add_track">Adicionar…</string>
-    <string name="gpx_appearance">Aparência</string>
+    <string name="shared_string_appearance">Aparência</string>
     <string name="trip_rec_notification_settings">Ativar gravação rápida</string>
     <string name="shared_string_notifications">Notificações</string>
     <string name="shared_string_continue">Continuar</string>
@@ -3468,7 +3468,7 @@ Pôr do Sol: %2$s</string>
     <string name="multimedia_photo_play_sound">Som do obturador da câmera</string>
     <string name="osm_authorization_success">Autorização bem sucedida</string>
     <string name="rearrange_categories">Reorganizar categorias</string>
-    <string name="create_custom_categories_list_promo">Você pode adicionar categorias personalizadas, ocultar categorias que não considera necessárias e alterar a ordem de classificação da lista. A lista pode ser importada e exportada com perfis.</string>
+    <string name="create_custom_categories_list_promo">Altere a ordem de classificação da lista, oculte categorias desnecessárias. Você pode importar ou exportar todas as alterações com perfis.</string>
     <string name="add_new_custom_category_button_promo">Você pode adicionar uma nova categoria personalizada selecionando uma ou algumas categorias necessárias.</string>
     <string name="shared_string_available">Disponível</string>
     <string name="add_custom_category">Adicionar categoria personalizada</string>
@@ -3556,4 +3556,16 @@ Pôr do Sol: %2$s</string>
     <string name="restore_all_profile_settings">Restaurar todas as configurações de perfil\?</string>
     <string name="saving_new_profile">Salvando novo perfil</string>
     <string name="profile_backup_failed">Não foi possível fazer o backup do perfil.</string>
+    <string name="clear_recorded_data_warning">Tem certeza de que deseja limpar os dados gravados\?</string>
+    <string name="importing_from">Importando dados de %1$s</string>
+    <string name="shared_string_importing">Importando</string>
+    <string name="checking_for_duplicate_description">OsmAnd verifica %1$s para duplicatas com itens existentes no aplicativo.
+\n
+\nPode levar algum tempo.</string>
+    <string name="items_added">Itens adicionados</string>
+    <string name="shared_string_import_complete">Importação concluída</string>
+    <string name="import_complete_description">Todos os dados do %1$s são importados. Você pode usar os botões abaixo para abrir a parte necessária do aplicativo para gerenciá-lo.</string>
+    <string name="recalculate_route_distance_promo">A rota será recalculada se a distância da rota até o local atual for maior que o valor selecionado.</string>
+    <string name="select_distance_route_will_recalc">Selecione a distância após a qual o percurso será recalculado.</string>
+    <string name="recalculate_route_in_deviation">Recalcular rota em caso de desvio</string>
 </resources>

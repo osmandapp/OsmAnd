@@ -198,17 +198,19 @@ public class IncrementalChangesManager {
 		public List<IncrementalUpdate> getItemsForUpdate() {
 			Iterator<IncrementalUpdateGroupByMonth> it = updateByMonth.values().iterator();
 			List<IncrementalUpdate> ll = new ArrayList<IncrementalUpdate>();
-			while(it.hasNext()) {
+			while (it.hasNext()) {
 				IncrementalUpdateGroupByMonth n = it.next();
-				if(it.hasNext()) {
-					if(!n.isMonthUpdateApplicable()) {
-						return null;			
+				if (it.hasNext()) {
+					if (!n.isMonthUpdateApplicable()) {
+						return null;
 					}
 					ll.addAll(n.getMonthUpdate());
 				} else {
-					if(n.isDayUpdateApplicable() && isPreferrableLimitForDayUpdates(n.monthYearPart, n.getDayUpdates())) {
+					// it causes problem when person doesn't restart application for 10 days so updates stop working
+					// && isPreferrableLimitForDayUpdates(n.monthYearPart, n.getDayUpdates())
+					if (n.isDayUpdateApplicable() ) {
 						ll.addAll(n.getDayUpdates());
-					} else if(n.isMonthUpdateApplicable()) {
+					} else if (n.isMonthUpdateApplicable()) {
 						ll.addAll(n.getMonthUpdate());
 					} else {
 						return null;
@@ -220,16 +222,16 @@ public class IncrementalChangesManager {
 
 		public void addUpdate(IncrementalUpdate iu) {
 			String dtMonth = iu.date.substring(0, 5);
-			if(!updateByMonth.containsKey(dtMonth)) {
+			if (!updateByMonth.containsKey(dtMonth)) {
 				IncrementalUpdateGroupByMonth iubm = new IncrementalUpdateGroupByMonth(dtMonth);
 				updateByMonth.put(dtMonth, iubm);
 			}
 			IncrementalUpdateGroupByMonth mm = updateByMonth.get(dtMonth);
-			if(iu.isMonth()) {
+			if (iu.isMonth()) {
 				mm.monthUpdate = iu;
 			} else {
 				mm.dayUpdates.add(iu);
-			}			
+			}
 		}
 	}
 	

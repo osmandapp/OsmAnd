@@ -216,7 +216,7 @@ public class ApplicationMode {
 		regWidgetAvailability(WIDGET_TIME, all);
 		regWidgetAvailability(WIDGET_INTERMEDIATE_TIME, all);
 		regWidgetAvailability(WIDGET_SPEED, all);
-		regWidgetAvailability(WIDGET_MAX_SPEED, CAR);
+		regWidgetAvailability(WIDGET_MAX_SPEED, all);
 		regWidgetAvailability(WIDGET_ALTITUDE, all);
 
 		// all = null everything

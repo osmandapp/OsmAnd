@@ -1485,7 +1485,7 @@
     <string name="poi_information_sign">Signe</string>
     <string name="poi_piste_grooming_classic">Clàssic</string>
     <string name="poi_piste_grooming_classic_skating">Clàssic + Patinatge</string>
-    <string name="poi_piste_grooming_backcountry">Pora de pistes</string>
+    <string name="poi_piste_grooming_backcountry">Fora de pistes</string>
     <string name="poi_piste_grooming_scooter">Motoneu</string>
     <string name="poi_piste_grooming_skating">Patinatge</string>
     <string name="poi_piste_grooming_no">No</string>

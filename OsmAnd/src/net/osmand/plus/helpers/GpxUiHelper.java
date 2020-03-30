@@ -620,7 +620,7 @@ public class GpxUiHelper {
 							popup.setAnchorView(apprTitleView);
 							popup.setContentWidth(AndroidUtils.dpToPx(activity, 200f));
 							popup.setModal(true);
-							popup.setDropDownGravity(Gravity.RIGHT | Gravity.TOP);
+							popup.setDropDownGravity(Gravity.END | Gravity.TOP);
 							popup.setVerticalOffset(AndroidUtils.dpToPx(activity, -48f));
 							popup.setHorizontalOffset(AndroidUtils.dpToPx(activity, -6f));
 							final GpxAppearanceAdapter gpxApprAdapter = new GpxAppearanceAdapter(new ContextThemeWrapper(activity, themeRes),

@@ -2090,7 +2090,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="gpx_no_tracks_title">Endnu ingen GPX-filer</string>
     <string name="gpx_no_tracks_title_folder">Tilføj også GPX-filer til mappen</string>
     <string name="gpx_add_track">Tilføj flere…</string>
-    <string name="gpx_appearance">Udseende</string>
+    <string name="shared_string_appearance">Udseende</string>
     <string name="rendering_value_fine_name">Fin</string>
     <string name="route_calculation">Ruteberegning</string>
     <string name="upload_poi">Overfør IP</string>
@@ -3514,4 +3514,17 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="keep_both">Behold begge</string>
     <string name="shared_string_rendering_style">Renderingsstil</string>
     <string name="search_offline_geo_error">Den geografiske hensigt \'%s\' kunne ikke fortolkes.</string>
+    <string name="shared_string_app_default_w_val">Standard (%s)</string>
+    <string name="keep_both_desc">Importerede poster tilføjes med præfiks</string>
+    <string name="import_duplicates_title">Nogle elementer findes allerede</string>
+    <string name="select_data_to_import">Vælg data der skal importeres.</string>
+    <string name="import_rendering_file">Importer renderingsfil</string>
+    <string name="restore_all_profile_settings_descr">Alle profilindstillinger gendannes til deres oprindelige tilstand efter oprettelse/import af profilen.</string>
+    <string name="restore_all_profile_settings">Gendan alle profilindstillinger\?</string>
+    <string name="saving_new_profile">Gemmer ny profil</string>
+    <string name="profile_backup_failed">Profilen kunne ikke sikkerhedskopieres.</string>
+    <string name="clear_recorded_data_warning">Bekræft sletning af optagede data\?</string>
+    <string name="importing_from">Importerer data fra %1$s</string>
+    <string name="shared_string_importing">Importerer</string>
+    <string name="shared_string_import_complete">Importen er fuldført</string>
 </resources>

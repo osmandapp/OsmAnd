@@ -11,10 +11,15 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionType;
 
 public class NavAutoZoomMapAction extends QuickAction {
 
-	public static final int TYPE = 23;
+	public static final QuickActionType TYPE = new QuickActionType(23,
+			"nav.autozoom", NavAutoZoomMapAction.class).
+			nameRes(R.string.quick_action_auto_zoom).iconRes(R.drawable.ic_action_search_dark).nonEditable().
+			category(QuickActionType.NAVIGATION);
+
 
 	public NavAutoZoomMapAction() {
 		super(TYPE);

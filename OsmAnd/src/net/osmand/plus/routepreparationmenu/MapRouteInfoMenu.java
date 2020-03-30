@@ -954,7 +954,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			}
 		};
 		ll.getViewTreeObserver().addOnGlobalLayoutListener(globalListener);
-		
 	}
 
 	private void updateOptionsButtons() {

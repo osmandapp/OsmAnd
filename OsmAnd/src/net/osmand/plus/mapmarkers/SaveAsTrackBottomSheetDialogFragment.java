@@ -107,9 +107,6 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 		final EditText nameEditText = (EditText) mainView.findViewById(R.id.name_edit_text);
 		nameEditText.setText(displayedName);
 		nameEditText.setTextColor(ContextCompat.getColor(getContext(), textPrimaryColor));
-		if (textBox instanceof OsmandTextFieldBoxes) {
-			((OsmandTextFieldBoxes) textBox).activate(true);
-		}
 
 		mainView.findViewById(R.id.save_button).setOnClickListener(new View.OnClickListener() {
 			@Override

@@ -6,7 +6,7 @@
 	<PreferenceCategory
 		android:key="appearance_category"
 		android:layout="@layout/preference_category_with_descr"
-		android:title="@string/appearance" />
+		android:title="@string/shared_string_appearance" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="osmand_theme"

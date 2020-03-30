@@ -2054,7 +2054,7 @@
     <string name="gpx_no_tracks_title">Ainda não tem nenhum percurso</string>
     <string name="gpx_no_tracks_title_folder">Também pode adicionar ficheiros GPX ao diretório</string>
     <string name="gpx_add_track">Adicionar mais…</string>
-    <string name="gpx_appearance">Aparência</string>
+    <string name="shared_string_appearance">Aparência</string>
     <string name="trip_rec_notification_settings">Ativar a gravação de início rápido</string>
     <string name="trip_rec_notification_settings_desc">Mostrar uma notificação de sistema que permite iniciar a gravação da viagem.</string>
     <string name="shared_string_notifications">Notificações</string>
@@ -3432,7 +3432,7 @@
     <string name="choose_icon_color_name">Escolha o ícone, cor e nome</string>
     <string name="reorder_profiles">Editar lista de perfis</string>
     <string name="selected_profile">Perfil selecionado</string>
-    <string name="reset_confirmation_descr">Ao clicar em %1$s perderá todas as suas alterações.</string>
+    <string name="reset_confirmation_descr">Tocar em %1$s descartará todas as suas alterações.</string>
     <string name="reset_all_profile_settings_descr">Todas as configurações de perfil serão redefinidas para o estado após a instalação.</string>
     <string name="reset_all_profile_settings">Redefinir todas as configurações de perfil para o padrão\?</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>

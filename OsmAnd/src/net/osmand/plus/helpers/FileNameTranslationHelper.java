@@ -19,6 +19,7 @@ public class FileNameTranslationHelper {
 	private static final Log LOG = PlatformUtil.getLog(FileNameTranslationHelper.class);
 	public static final String WIKI_NAME = "_wiki";
 	public static final String HILL_SHADE = "Hillshade_";
+	public static final String SLOPE = "Slope_";
 	public static final String SEA_DEPTH = "Depth_";
 
 	public static String getFileName(Context ctx, OsmandRegions regions, String fileName) {
@@ -30,7 +31,9 @@ public class FileNameTranslationHelper {
 		} else if (fileName.endsWith(IndexConstants.FONT_INDEX_EXT)) { //otf files
 			return getFontName(ctx, basename);
 		} else if (fileName.startsWith(HILL_SHADE)){
-			return getHillShadeName(ctx, regions, basename);
+			return getTerrainName(ctx, regions, basename, R.string.download_hillshade_maps);
+		} else if (fileName.startsWith(SLOPE)) {
+			return getTerrainName(ctx, regions, basename, R.string.download_slope_maps);
 		} else if (fileName.length() == 2) { //voice recorded files
 			try {
 				Field f = R.string.class.getField("lang_"+fileName);
@@ -57,10 +60,11 @@ public class FileNameTranslationHelper {
 		return null;
 	}
 
-	public static String getHillShadeName(Context ctx, OsmandRegions regions, String basename) {
-		String hillsh = ctx.getString(R.string.download_hillshade_maps) + " ";
+	public static String getTerrainName(Context ctx, OsmandRegions regions, String basename,
+										int terrainNameRes) {
+		String terrain = ctx.getString(terrainNameRes) + " ";
 		String locName = regions.getLocaleName(basename.trim(), true);
-		return hillsh + locName;
+		return terrain + locName;
 	}
 
 	public static String getWikiName(Context ctx, String basename){

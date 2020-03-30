@@ -2066,7 +2066,7 @@
     <string name="shared_string_notifications">الإشعارات</string>
     <string name="gpx_no_tracks_title_folder">يمكنك أيضا إضافة مسارات إلى المجلد</string>
     <string name="gpx_add_track">أضف المزيد…</string>
-    <string name="gpx_appearance">المظهر</string>
+    <string name="shared_string_appearance">المظهر</string>
     <string name="upload_poi">رفع POI</string>
     <string name="route_calculation">حساب المسار</string>
     <string name="gpx_no_tracks_title">ليس لديك مسارات بعد</string>
@@ -2753,7 +2753,7 @@
     <string name="shared_string_do">افعل</string>
     <string name="wikivoyage_download_pics_descr">صور المقالة يمكن تحمل للاستخدام بدون اتصال. 
 \nدائماً متوفرة في \'اكتشف\'←\'خيارات\'.</string>
-    <string name="online_webpage_warning">الصفحة متوفرة فقط بالاتصال. هل تريد الفتح في المتصفح؟</string>
+    <string name="online_webpage_warning">الصفحة متاحة على الإنترنت فقط. فتح في متصفح الويب؟</string>
     <string name="images_cache">الصور المؤقتة</string>
     <string name="use_two_digits_longitude">استخدم خط طول رقمين</string>
     <string name="last_intermediate_dest_description">إضافة كآخر توقف على طول الطريق</string>
@@ -3531,4 +3531,41 @@
     <string name="restore_all_profile_settings">استعادة جميع إعدادات الملف الشخصي؟</string>
     <string name="saving_new_profile">حفظ ملف تعريف جديد</string>
     <string name="profile_backup_failed">لا يمكن عمل نسخة احتياطية من الملف الشخصي.</string>
+    <string name="clear_recorded_data_warning">هل أنت متأكد من أنك تريد مسح البيانات المسجلة؟</string>
+    <string name="importing_from">استيراد البيانات من %1$s</string>
+    <string name="shared_string_importing">استيراد</string>
+    <string name="checking_for_duplicate_description">OsmAnd تحقق %1$s للتكرارات مع العناصر الموجودة في التطبيق.
+\n
+\nقد يستغرق الأمر بعض الوقت.</string>
+    <string name="items_added">العناصر المضافة</string>
+    <string name="shared_string_import_complete">اكتمل الاستيراد</string>
+    <string name="import_complete_description">يتم استيراد جميع البيانات من %1$s، يمكنك استخدام الأزرار أدناه لفتح الجزء المطلوب من التطبيق لإدارته.</string>
+    <string name="recalculate_route_distance_promo">سيتم إعادة حساب المسار إذا كانت المسافة من المسار إلى الموقع الحالي أكثر من القيمة المحددة.</string>
+    <string name="select_distance_route_will_recalc">حدد المسافة التي سيتم بعدها إعادة حساب المسار.</string>
+    <string name="recalculate_route_in_deviation">إعادة حساب المسار في حالة الانحراف</string>
+    <string name="shared_string_square">مربع</string>
+    <string name="shared_string_rhomb">معين</string>
+    <string name="shared_string_circle">دائرة</string>
+    <string name="select_shape">تحديد الشكل</string>
+    <string name="select_group">تحديد المجموعة</string>
+    <string name="add_description">إضافة وصف</string>
+    <string name="delete_description">حذف الوصف</string>
+    <string name="quick_action_terrain_descr">زر لإظهار طبقة التضاريس أو إخفائها على الخريطة.</string>
+    <string name="quick_action_terrain_show">إظهار التضاريس</string>
+    <string name="quick_action_terrain_hide">إخفاء التضاريس</string>
+    <string name="quick_action_show_hide_terrain">إظهار/إخفاء التضاريس</string>
+    <string name="download_slope_maps">المنحدرات</string>
+    <string name="shared_string_hillshade">التضاريس</string>
+    <string name="terrain_empty_state_text">تمكين لعرض المنحدرات أو خريطة التضاريس. يمكنك قراءة المزيد عن أنواع الخرائط هذه على موقعنا</string>
+    <string name="shared_string_legend">عنوان تفسيري</string>
+    <string name="shared_string_zoom_levels">مستويات التكبير</string>
+    <string name="shared_string_transparency">الشفافية</string>
+    <string name="slope_read_more">يمكنك قراءة المزيد عن المنحدرات في %1$s.</string>
+    <string name="slope_download_description">تحتاج لخرائط إضافية لعرض المنحدرات على الخريطة.</string>
+    <string name="hillshade_download_description">تحتاج إلى خرائط إضافية لعرض التضاريس على الخريطة.</string>
+    <string name="terrain_slider_description">تعيين مستويات التكبير/التصغير الدنيا والقصوى التي سيتم عرض الطبقة بها.</string>
+    <string name="slope_description">المنحدر الملون ملائم للتضاريس.</string>
+    <string name="hillshade_description">خريطة التضاريس تستخدم ظلال داكنة لإظهار المنحدرات والقمم والأراضي المنخفضة.</string>
+    <string name="shared_string_terrain">التضاريس</string>
+    <string name="n_items_of_z">%1$s من %2$s</string>
 </resources>

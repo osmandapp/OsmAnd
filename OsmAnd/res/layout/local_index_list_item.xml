@@ -1,34 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:background="?attr/expandable_list_item_background"
-              android:descendantFocusability="blocksDescendants"
-              android:minHeight="@dimen/list_item_height"
-              android:orientation="horizontal"
-              android:paddingLeft="@dimen/list_content_padding"
-              android:paddingStart="@dimen/list_content_padding">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/list_content_padding"
+    android:paddingStart="@dimen/list_content_padding"
+    android:paddingRight="0dp"
+    android:paddingEnd="0dp"
+    android:background="?attr/expandable_list_item_background"
+    android:descendantFocusability="blocksDescendants"
+    android:minHeight="@dimen/list_item_height"
+    android:orientation="horizontal">
 
     <CheckBox
         android:id="@+id/check_local_index"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/local_index_check_right_margin"
-        android:layout_marginEnd="@dimen/local_index_check_right_margin"
         android:layout_marginTop="@dimen/favorites_icon_top_margin"
+        android:layout_marginEnd="@dimen/local_index_check_right_margin"
+        android:layout_marginRight="@dimen/local_index_check_right_margin"
         android:focusable="false"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <ImageView
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/favorites_icon_right_margin"
-        android:layout_marginEnd="@dimen/favorites_icon_right_margin"
         android:layout_marginTop="@dimen/favorites_icon_top_margin"
+        android:layout_marginEnd="@dimen/favorites_icon_right_margin"
+        android:layout_marginRight="@dimen/favorites_icon_right_margin"
         android:focusable="false"
-        android:src="@drawable/ic_gpx_track"/>
+        android:src="@drawable/ic_gpx_track" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -43,7 +45,7 @@
             android:layout_height="wrap_content"
             android:textColor="?android:textColorPrimary"
             android:textSize="@dimen/default_list_text_size"
-            tools:text="Bangladesh"/>
+            tools:text="Bangladesh" />
 
 
         <LinearLayout
@@ -55,11 +57,11 @@
                 android:id="@+id/descriptionTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="7dp"
                 android:layout_marginEnd="7dp"
+                android:layout_marginRight="7dp"
                 android:textColor="?android:textColorSecondary"
                 android:textSize="@dimen/default_sub_text_size"
-                tools:text="12.34 Mb * 10/4/2015"/>
+                tools:text="12.34 Mb * 10/4/2015" />
 
         </LinearLayout>
 
@@ -67,11 +69,11 @@
 
     <ImageButton
         android:id="@+id/options"
-        android:contentDescription="@string/shared_string_more"
         android:layout_width="@dimen/list_item_height"
         android:layout_height="@dimen/list_item_height"
         android:background="?attr/dashboard_button"
+        android:contentDescription="@string/shared_string_more"
         android:focusable="false"
-        android:src="@drawable/ic_overflow_menu_white"/>
+        android:src="@drawable/ic_overflow_menu_white" />
 
 </LinearLayout>

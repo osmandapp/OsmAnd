@@ -100,8 +100,19 @@
         <item name="android:textColor">@color/active_color_primary_dark</item>
     </style>
 
+    <style name="OsmandMaterialLightTheme" parent="Theme.MaterialComponents.Light">
+        <item name="dashboard_divider">@color/divider_color_light</item>
+        <item name="divider_color">@color/divider_color</item>
+    </style>
+
+    <style name="OsmandMaterialDarkTheme" parent="Theme.MaterialComponents">
+        <item name="dashboard_divider">@color/divider_color_dark</item>
+        <item name="divider_color">@color/divider_color_dark</item>
+    </style>
+
     <!-- Osmand themes styles -->
     <style name="OsmandLightTheme" parent="Theme.AppCompat.Light">
+        <item name="android:textDirection">locale</item>
         <item name="android:statusBarColor">@color/status_bar_color_light</item>
         <item name="mapBackground">@color/map_background_color_light</item>
         <item name="chart_marker_background">@drawable/chart_marker_background_light</item>
@@ -378,6 +389,7 @@
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
+        <item name="android:textDirection">locale</item>
         <item name="android:statusBarColor">@color/status_bar_color_dark</item>
         <item name="mapBackground">@color/map_background_color_dark</item>
         <item name="chart_marker_background">@drawable/chart_marker_background_dark</item>

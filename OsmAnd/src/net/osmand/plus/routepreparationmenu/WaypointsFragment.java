@@ -1,6 +1,7 @@
 package net.osmand.plus.routepreparationmenu;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -116,7 +117,8 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		listView.setDynamicListViewCallbacks(this);
 
 		final ImageView backButton = (ImageView) view.findViewById(R.id.back_button);
-		backButton.setImageDrawable(getContentIcon(R.drawable.ic_arrow_back));
+		Drawable icBack = getContentIcon(AndroidUtils.getNavigationIconResId(mapActivity));
+		backButton.setImageDrawable(icBack);
 		backButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

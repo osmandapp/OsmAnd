@@ -974,7 +974,7 @@
     <string name="gpx_no_tracks_title">Још увек немате ниједан GPX фајл</string>
     <string name="gpx_no_tracks_title_folder">Такође, можете додати GPX фајлове у фасциклу</string>
     <string name="gpx_add_track">Додај још…</string>
-    <string name="gpx_appearance">Приказ</string>
+    <string name="shared_string_appearance">Приказ</string>
     <string name="trip_rec_notification_settings">Укључи брзо снимање</string>
     <string name="trip_rec_notification_settings_desc">Приказуј обавештење које омогућава снимање путовања.</string>
     <string name="shared_string_notifications">Обавештења</string>

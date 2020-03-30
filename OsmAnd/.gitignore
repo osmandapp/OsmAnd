@@ -50,6 +50,7 @@ use/
 osmand.properties
 osmand.xml
 assets/style.css
+assets/poi_categories.json
 assets/help/*.html
 assets/help/images
 assets/help/screens

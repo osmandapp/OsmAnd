@@ -243,7 +243,7 @@
     <string name="min_logging_speed">Minimalna szybkość rejestrowania</string>
     <string name="min_logging_speed_descr">Filtr: brak rejestrowania poniżej wybranej prędkości</string>
     <string name="gpx_settings">Ustawienia GPX</string>
-    <string name="timeline_no_data_descr">Nie zgromadziliśmy danych dla wybranego dnia</string>
+    <string name="timeline_no_data_descr">Nie zebraliśmy danych dla wybranego dnia</string>
     <string name="timeline_no_data">Brak danych</string>
     <string name="shared_string_end">Koniec</string>
     <string name="shared_string_apply">Zastosuj</string>
@@ -267,4 +267,6 @@
     <string name="last_update_from_telegram_duration">Ostatnia aktualizacja z Telegramu: %1$s temu</string>
     <string name="duration_ago">%1$s temu</string>
     <string name="shared_string_error_short">ERR</string>
+    <string name="last_response_date">Ostatnia odpowiedź: %1$s</string>
+    <string name="last_response_duration">Ostatnia odpowiedź: %1$s temu</string>
 </resources>

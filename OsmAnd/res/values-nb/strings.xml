@@ -1620,7 +1620,7 @@
     <string name="wiki_around">Nærliggende Wikipiedia-artikler</string>
     <string name="route_roundabout_short">Ta %1$d avkjørsel og fortsett</string>
     <string name="route_calculation">Ruteberegning</string>
-    <string name="gpx_appearance">Utseende</string>
+    <string name="shared_string_appearance">Utseende</string>
     <string name="shared_string_notifications">Varsler</string>
     <string name="shared_string_continue">Fortsett</string>
     <string name="shared_string_pause">Pause</string>
@@ -3453,4 +3453,26 @@
     <string name="osm_edits_view_descr">Du kan vise alle dine uopplastede redigeringer eller OSM-feil i %1$s. Opplastede punkter viser ikke i OsmAnd.</string>
     <string name="select_nav_icon_descr">Du vil se ikonet kun under navigasjon eller bevegelse.</string>
     <string name="select_map_icon_descr">Kartikon vises kun på kartet, og endrer seg under navigasjon til navigasjonsikonet.</string>
+    <string name="multimedia_use_system_camera">Bruk systemprogram</string>
+    <string name="shared_string_available">Tilgjengelig</string>
+    <string name="sunrise_at">Soloppgang klokken %1$s</string>
+    <string name="copy_coordinates">Kopier koordinater</string>
+    <string name="sort_by_category">Sorter etter kategori</string>
+    <string name="index_name_antarctica">Antarktis</string>
+    <string name="shared_string_app_default_w_val">Programforvalg (%s)</string>
+    <string name="profile_type_custom_string">Egendefinert profil</string>
+    <string name="shared_string_angle_param">Vinkel: %s°</string>
+    <string name="shared_string_angle">Vinkel</string>
+    <string name="shared_string_preparing">Forbereder</string>
+    <string name="shared_string_poi_types">POI-typer</string>
+    <string name="shared_string_nothing_selected">Ingenting valgt</string>
+    <string name="shared_string_quick_actions">Hurtighandlinger</string>
+    <string name="shared_string_profiles">Profiler</string>
+    <string name="replace_all">Erstatt alle</string>
+    <string name="keep_both">Behold begge</string>
+    <string name="saving_new_profile">Lagrer ny profil</string>
+    <string name="profile_backup_failed">Kunne ikke sikkerhetskopiere profil.</string>
+    <string name="importing_from">Importerer data fra %1$s</string>
+    <string name="shared_string_importing">Importerer</string>
+    <string name="select_shape">Velg form</string>
 </resources>

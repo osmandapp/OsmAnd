@@ -33,6 +33,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.access.AccessibilityAssistant;
@@ -106,7 +107,8 @@ public class FavoritesSearchFragment extends DialogFragment {
 		}
 
 		toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_arrow_back));
+		Drawable icBack = app.getUIUtilities().getThemedIcon(AndroidUtils.getNavigationIconResId(activity));
+		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(
 				new View.OnClickListener() {
@@ -220,7 +222,10 @@ public class FavoritesSearchFragment extends DialogFragment {
 	public void onDismiss(DialogInterface dialog) {
 		Activity activity = getActivity();
 		if (activity != null) {
-			getChildFragmentManager().popBackStack();
+			FragmentManager fragmentManager = getChildFragmentManager();
+			if (!fragmentManager.isStateSaved()) {
+				fragmentManager.popBackStack();
+			}
 		}
 		super.onDismiss(dialog);
 	}

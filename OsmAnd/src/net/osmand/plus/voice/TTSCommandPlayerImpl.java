@@ -88,7 +88,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			cSpeechRate = app.getSettings().SPEECH_RATE.get();
 		}
 		initializeEngine(app, ctx);
-		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, app.getSettings().AUDIO_STREAM_GUIDANCE
+		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, app.getSettings().AUDIO_MANAGER_STREAM
 				.getModeValue(getApplicationMode()).toString());
 	}
 	
@@ -124,7 +124,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 							.build());
 				}
 				// Delay first prompt of each batch to allow BT SCO connection being established
-				if (ctx.getSettings().AUDIO_STREAM_GUIDANCE.getModeValue(getApplicationMode()) == 0) {
+				if (ctx.getSettings().AUDIO_MANAGER_STREAM.getModeValue(getApplicationMode()) == 0) {
 					ttsRequests++;
 					if (android.os.Build.VERSION.SDK_INT < 21) {
 						params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,""+System.currentTimeMillis());

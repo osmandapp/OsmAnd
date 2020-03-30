@@ -1,13 +1,11 @@
 package net.osmand.plus;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -27,6 +25,7 @@ import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
+import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -96,16 +95,20 @@ public class SettingsHelper {
 	private static final int BUFFER = 1024;
 
 	private OsmandApplication app;
-	private Activity activity;
 
-	private boolean importing;
-	private boolean importSuspended;
-	private boolean collectOnly;
 	private ImportAsyncTask importTask;
 	private Map<File, ExportAsyncTask> exportAsyncTasks = new HashMap<>();
 
 	public interface SettingsImportListener {
-		void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items);
+		void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsItem> items);
+	}
+
+	public interface SettingsCollectListener {
+		void onSettingsCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items);
+	}
+
+	public interface CheckDuplicatesListener {
+		void onDuplicatesChecked(@NonNull List<Object> duplicates, List<SettingsItem> items);
 	}
 
 	public interface SettingsExportListener {
@@ -114,31 +117,6 @@ public class SettingsHelper {
 
 	public SettingsHelper(OsmandApplication app) {
 		this.app = app;
-	}
-
-	public Activity getActivity() {
-		return activity;
-	}
-
-	public void setActivity(Activity activity) {
-		this.activity = activity;
-		if (importing && !collectOnly) {
-			importTask.processNextItem();
-		}
-	}
-
-	public void resetActivity(Activity activity) {
-		if (this.activity == activity) {
-			if (importing) {
-				importTask.suspendImport();
-				importSuspended = true;
-			}
-			this.activity = null;
-		}
-	}
-
-	public boolean isImporting() {
-		return importing;
 	}
 
 	public enum SettingsItemType {
@@ -261,6 +239,11 @@ public class SettingsHelper {
 		@NonNull
 		public List<T> getItems() {
 			return items;
+		}
+
+		@NonNull
+		public List<T> getDuplicateItems() {
+			return duplicateItems;
 		}
 
 		@NonNull
@@ -552,16 +535,33 @@ public class SettingsHelper {
 		}
 
 		private void renameProfile() {
+			List<ApplicationMode> values = ApplicationMode.allPossibleValues();
+			if (Algorithms.isEmpty(modeBean.userProfileName)) {
+				ApplicationMode appMode = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
+				if (appMode != null) {
+					modeBean.userProfileName = app.getString(appMode.getNameKeyResource());
+				}
+			}
 			int number = 0;
 			while (true) {
 				number++;
 				String key = modeBean.stringKey + "_" + number;
-				if (ApplicationMode.valueOfStringKey(key, null) == null) {
+				String name = modeBean.userProfileName + '_' + number;
+				if (ApplicationMode.valueOfStringKey(key, null) == null && isNameUnique(values, name)) {
+					modeBean.userProfileName = name;
 					modeBean.stringKey = key;
-					modeBean.userProfileName = modeBean.userProfileName + "_" + number;
 					break;
 				}
 			}
+		}
+
+		private boolean isNameUnique(List<ApplicationMode> values, String name) {
+			for (ApplicationMode mode : values) {
+				if (mode.getUserProfileName().equals(name)) {
+					return false;
+				}
+			}
+			return true;
 		}
 
 		@Override
@@ -954,19 +954,27 @@ public class SettingsHelper {
 						Type type = new TypeToken<HashMap<String, String>>() {
 						}.getType();
 						json = new JSONObject(jsonStr);
+						QuickActionRegistry quickActionRegistry = app.getQuickActionRegistry();
 						JSONArray itemsJson = json.getJSONArray("items");
 						for (int i = 0; i < itemsJson.length(); i++) {
 							JSONObject object = itemsJson.getJSONObject(i);
 							String name = object.getString("name");
-							int actionType = object.getInt("type");
-							String paramsString = object.getString("params");
-							HashMap<String, String> params = gson.fromJson(paramsString, type);
-							QuickAction quickAction = new QuickAction(actionType);
-							if (!name.isEmpty()) {
-								quickAction.setName(name);
+							QuickAction quickAction = null;
+							if(object.has("actionType")) {
+								quickAction = quickActionRegistry .newActionByStringType(object.getString("actionType"));
+							} else if(object.has("type")) {
+								quickAction = quickActionRegistry .newActionByType(object.getInt("type"));
 							}
-							quickAction.setParams(params);
-							items.add(quickAction);
+							if (quickAction != null) {
+								String paramsString = object.getString("params");
+								HashMap<String, String> params = gson.fromJson(paramsString, type);
+
+								if (!name.isEmpty()) {
+									quickAction.setName(name);
+								}
+								quickAction.setParams(params);
+								items.add(quickAction);
+							}
 						}
 					} catch (JSONException e) {
 						throw new IllegalArgumentException("Json parse error", e);
@@ -992,7 +1000,7 @@ public class SettingsHelper {
 								JSONObject jsonObject = new JSONObject();
 								jsonObject.put("name", action.hasCustomName(app)
 										? action.getName(app) : "");
-								jsonObject.put("type", action.getType());
+								jsonObject.put("actionType", action.getActionType().getStringId());
 								jsonObject.put("params", gson.toJson(action.getParams(), type));
 								jsonArray.put(jsonObject);
 							}
@@ -1801,135 +1809,179 @@ public class SettingsHelper {
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	private class ImportAsyncTask extends AsyncTask<Void, Void, List<SettingsItem>> {
+	public class ImportAsyncTask extends AsyncTask<Void, Void, List<SettingsItem>> {
 
 		private File file;
 		private String latestChanges;
 		private int version;
 
-		private SettingsImportListener listener;
+		private SettingsImportListener importListener;
+		private SettingsCollectListener collectListener;
+		private CheckDuplicatesListener duplicatesListener;
 		private SettingsImporter importer;
-		private List<SettingsItem> items = new ArrayList<>();
-		private List<SettingsItem> processedItems = new ArrayList<>();
-		private SettingsItem currentItem;
-		private AlertDialog dialog;
 
-		ImportAsyncTask(@NonNull File settingsFile, String latestChanges, int version, @Nullable SettingsImportListener listener) {
-			this.file = settingsFile;
-			this.listener = listener;
+		private List<SettingsItem> items = new ArrayList<>();
+		private List<SettingsItem> selectedItems = new ArrayList<>();
+		private List<Object> duplicates;
+
+		private ImportType importType;
+		private boolean importDone;
+
+		ImportAsyncTask(@NonNull File file, String latestChanges, int version, @Nullable SettingsCollectListener collectListener) {
+			this.file = file;
+			this.collectListener = collectListener;
 			this.latestChanges = latestChanges;
 			this.version = version;
 			importer = new SettingsImporter(app);
-			collectOnly = true;
+			importType = ImportType.COLLECT;
 		}
 
-		ImportAsyncTask(@NonNull File settingsFile, @NonNull List<SettingsItem> items, String latestChanges, int version, @Nullable SettingsImportListener listener) {
-			this.file = settingsFile;
-			this.listener = listener;
+		ImportAsyncTask(@NonNull File file, @NonNull List<SettingsItem> items, String latestChanges, int version, @Nullable SettingsImportListener importListener) {
+			this.file = file;
+			this.importListener = importListener;
 			this.items = items;
 			this.latestChanges = latestChanges;
 			this.version = version;
 			importer = new SettingsImporter(app);
-			collectOnly = false;
+			importType = ImportType.IMPORT;
+		}
+
+		ImportAsyncTask(@NonNull File file, @NonNull List<SettingsItem> items, @NonNull List<SettingsItem> selectedItems, @Nullable CheckDuplicatesListener duplicatesListener) {
+			this.file = file;
+			this.items = items;
+			this.duplicatesListener = duplicatesListener;
+			this.selectedItems = selectedItems;
+			importer = new SettingsImporter(app);
+			importType = ImportType.CHECK_DUPLICATES;
 		}
 
 		@Override
 		protected void onPreExecute() {
-			if (importing) {
-				finishImport(listener, false, false, items);
+			ImportAsyncTask importTask = SettingsHelper.this.importTask;
+			if (importTask != null && !importTask.importDone) {
+				finishImport(importListener, false, items);
 			}
-			importing = true;
-			importSuspended = false;
-			importTask = this;
+			SettingsHelper.this.importTask = this;
 		}
 
 		@Override
 		protected List<SettingsItem> doInBackground(Void... voids) {
-			if (collectOnly) {
-				try {
-					return importer.collectItems(file);
-				} catch (IllegalArgumentException e) {
-					LOG.error("Failed to collect items from: " + file.getName(), e);
-				} catch (IOException e) {
-					LOG.error("Failed to collect items from: " + file.getName(), e);
-				}
-			} else {
-				return this.items;
+			switch (importType) {
+				case COLLECT:
+					try {
+						return importer.collectItems(file);
+					} catch (IllegalArgumentException e) {
+						LOG.error("Failed to collect items from: " + file.getName(), e);
+					} catch (IOException e) {
+						LOG.error("Failed to collect items from: " + file.getName(), e);
+					}
+					break;
+				case CHECK_DUPLICATES:
+					this.duplicates = getDuplicatesData(selectedItems);
+					return selectedItems;
+				case IMPORT:
+					return items;
 			}
 			return null;
 		}
 
 		@Override
 		protected void onPostExecute(@Nullable List<SettingsItem> items) {
-			if (items != null) {
+			if (items != null && importType != ImportType.CHECK_DUPLICATES) {
 				this.items = items;
-			}
-			if (collectOnly) {
-				listener.onSettingsImportFinished(true, false, this.items);
-			} else if (items != null && items.size() > 0) {
-				processNextItem();
-			}
-		}
-
-		private void processNextItem() {
-			if (activity == null) {
-				return;
-			}
-			if (items.size() == 0 && !importSuspended) {
-				if (processedItems.size() > 0) {
-					new ImportItemsAsyncTask(file, listener, processedItems).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-				} else {
-					finishImport(listener, false, true, items);
-				}
-				return;
-			}
-			final SettingsItem item;
-			if (importSuspended && currentItem != null) {
-				item = currentItem;
-			} else if (items.size() > 0) {
-				item = items.remove(0);
-				currentItem = item;
 			} else {
-				item = null;
+				selectedItems = items;
 			}
-			importSuspended = false;
-			if (item != null) {
-				acceptItem(item);
-			} else {
-				processNextItem();
+			switch (importType) {
+				case COLLECT:
+					importDone = true;
+					collectListener.onSettingsCollectFinished(true, false, this.items);
+					break;
+				case CHECK_DUPLICATES:
+					importDone = true;
+					if (duplicatesListener != null) {
+						duplicatesListener.onDuplicatesChecked(duplicates, selectedItems);
+					}
+					break;
+				case IMPORT:
+					if (items != null && items.size() > 0) {
+						for (SettingsItem item : items) {
+							item.apply();
+						}
+						new ImportItemsAsyncTask(file, importListener, items).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					}
+					break;
 			}
-		}
-
-		private void suspendImport() {
-			if (dialog != null) {
-				dialog.dismiss();
-				dialog = null;
-			}
-		}
-
-		private void acceptItem(SettingsItem item) {
-			item.apply();
-			processedItems.add(item);
-			processNextItem();
 		}
 
 		public List<SettingsItem> getItems() {
-			return this.items;
+			return items;
 		}
 
 		public File getFile() {
-			return this.file;
+			return file;
+		}
+
+		public void setImportListener(SettingsImportListener importListener) {
+			this.importListener = importListener;
+		}
+
+		public void setDuplicatesListener(CheckDuplicatesListener duplicatesListener) {
+			this.duplicatesListener = duplicatesListener;
+		}
+
+		ImportType getImportType() {
+			return importType;
+		}
+
+		boolean isImportDone() {
+			return importDone;
+		}
+
+		public List<Object> getDuplicates() {
+			return duplicates;
+		}
+
+		public List<SettingsItem> getSelectedItems() {
+			return selectedItems;
+		}
+
+		private List<Object> getDuplicatesData(List<SettingsItem> items) {
+			List<Object> duplicateItems = new ArrayList<>();
+			for (SettingsItem item : items) {
+				if (item instanceof ProfileSettingsItem) {
+					if (item.exists()) {
+						duplicateItems.add(((ProfileSettingsItem) item).getModeBean());
+					}
+				} else if (item instanceof CollectionSettingsItem) {
+					List duplicates = ((CollectionSettingsItem) item).excludeDuplicateItems();
+					if (!duplicates.isEmpty()) {
+						duplicateItems.addAll(duplicates);
+					}
+				} else if (item instanceof FileSettingsItem) {
+					if (item.exists()) {
+						duplicateItems.add(((FileSettingsItem) item).getFile());
+					}
+				}
+			}
+			return duplicateItems;
 		}
 	}
 
 	@Nullable
-	public List<SettingsItem> getSettingsItems() {
-		return this.importTask.getItems();
+	public ImportAsyncTask getImportTask() {
+		return importTask;
 	}
 
 	@Nullable
-	public File getSettingsFile() {
-		return this.importTask.getFile();
+	public ImportType getImportTaskType() {
+		ImportAsyncTask importTask = this.importTask;
+		return importTask != null ? importTask.getImportType() : null;
+	}
+
+	public boolean isImportDone() {
+		ImportAsyncTask importTask = this.importTask;
+		return importTask == null || importTask.isImportDone();
 	}
 
 	public boolean isFileExporting(File file) {
@@ -1975,16 +2027,14 @@ public class SettingsHelper {
 
 		@Override
 		protected void onPostExecute(Boolean success) {
-			finishImport(listener, success, false, items);
+			finishImport(listener, success, items);
 		}
 	}
 
-	private void finishImport(@Nullable SettingsImportListener listener, boolean success, boolean empty, @NonNull List<SettingsItem> items) {
-		importing = false;
-		importSuspended = false;
+	private void finishImport(@Nullable SettingsImportListener listener, boolean success, @NonNull List<SettingsItem> items) {
 		importTask = null;
 		if (listener != null) {
-			listener.onSettingsImportFinished(success, empty, items);
+			listener.onSettingsImportFinished(success, items);
 		}
 	}
 
@@ -2028,8 +2078,13 @@ public class SettingsHelper {
 		}
 	}
 
-	public void importSettings(@NonNull File settingsFile, String latestChanges, int version, @Nullable SettingsImportListener listener) {
+	public void collectSettings(@NonNull File settingsFile, String latestChanges, int version,
+								@Nullable SettingsCollectListener listener) {
 		new ImportAsyncTask(settingsFile, latestChanges, version, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	public void checkDuplicates(@NonNull File file, @NonNull List<SettingsItem> items, @NonNull List<SettingsItem> selectedItems, CheckDuplicatesListener listener) {
+		new ImportAsyncTask(file, items, selectedItems, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public void importSettings(@NonNull File settingsFile, @NonNull List<SettingsItem> items, String latestChanges, int version, @Nullable SettingsImportListener listener) {
@@ -2046,5 +2101,11 @@ public class SettingsHelper {
 	public void exportSettings(@NonNull File fileDir, @NonNull String fileName, @Nullable SettingsExportListener listener,
 							   @NonNull SettingsItem... items) {
 		exportSettings(fileDir, fileName, listener, new ArrayList<>(Arrays.asList(items)));
+	}
+
+	public enum ImportType {
+		COLLECT,
+		CHECK_DUPLICATES,
+		IMPORT
 	}
 }

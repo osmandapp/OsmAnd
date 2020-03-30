@@ -70,6 +70,7 @@
 	<dimen name="list_header_bottom_margin">8dp</dimen>
 
 	<dimen name="favorites_icon_right_margin">24dp</dimen>
+	<dimen name="favorites_icon_size">40dp</dimen>
 	<dimen name="local_index_check_right_margin">10dp</dimen>
 	<dimen name="favorites_icon_top_margin">13dp</dimen>
 	<dimen name="dialog_elements_vertical_margin">16dp</dimen>
@@ -355,5 +356,9 @@
 	<dimen name="settings_divider_margin_start">72dp</dimen>
 	<dimen name="setting_list_item_large_height">72dp</dimen>
 	<dimen name="setting_list_item_small_height">42dp</dimen>
+
+	<dimen name="slider_thumb_size">8dp</dimen>
+	<dimen name="slider_thumb_halo_size">12dp</dimen>
+	<dimen name="slider_track_height">2dp</dimen>
 
 </resources>

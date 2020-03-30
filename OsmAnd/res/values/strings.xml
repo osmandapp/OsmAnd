@@ -11,10 +11,46 @@
 	Thx - Hardy
 
 -->
+    <string name="shared_string_min">Min</string>
+    <string name="shared_string_square">Square</string>
+    <string name="shared_string_rhomb">Rhomb</string>
+    <string name="shared_string_circle">Circle</string>
+    <string name="select_shape">Select shape</string>
+    <string name="select_group">Select group</string>
+    <string name="add_description">Add description</string>
+    <string name="delete_description">Delete description</string>
+    <string name="quick_action_terrain_descr">A button to show or hide terrain layer on the map.</string>
+    <string name="quick_action_terrain_show">Show terrain</string>
+    <string name="quick_action_terrain_hide">Hide terrain</string>
+    <string name="quick_action_show_hide_terrain">Show/hide terrain</string>
+    <string name="download_slope_maps">Slopes</string>
+    <string name="n_items_of_z">%1$s of %2$s</string>
+    <string name="recalculate_route_distance_promo">The route will be recalculated if the distance from the route to the current location is more than selected value.</string>
+    <string name="select_distance_route_will_recalc">Select the distance after which the route will be recalculated.</string>
+    <string name="recalculate_route_in_deviation">Recalculate route in case of deviation</string>
+    <string name="clear_recorded_data_warning">Are you sure you want to clear recorded data?</string>
     <string name="restore_all_profile_settings_descr">All profile settings will be restored to their original state after creating/importing this profile.</string>
     <string name="restore_all_profile_settings">Restore all profile settings?</string>
     <string name="saving_new_profile">Saving new profile</string>
     <string name="profile_backup_failed">Could not back up profile.</string>
+    <string name="importing_from">Importing data from %1$s</string>
+    <string name="shared_string_importing">Importing</string>
+    <string name="checking_for_duplicate_description">OsmAnd check %1$s for duplicates with existing items in the application.\n\nIt may take some time.</string>
+    <string name="items_added">Items added</string>
+    <string name="shared_string_import_complete">Import complete</string>
+    <string name="import_complete_description">All data from the %1$s is imported, you can use buttons below to open needed part of the application to manage it.</string>
+    <string name="shared_string_hillshade">Hillshade</string>
+    <string name="terrain_empty_state_text">Enable to view hillshade or slope map. You can read more about this map types on our site</string>
+    <string name="shared_string_legend">Legend</string>
+    <string name="shared_string_zoom_levels">Zoom levels</string>
+    <string name="shared_string_transparency">Transparency</string>
+    <string name="slope_read_more">You can read more about Slopes in %1$s.</string>
+    <string name="slope_download_description">Additional maps are needed to view Slopes on the map.</string>
+    <string name="hillshade_download_description">Additional maps are needed to view Hillshade on the map.</string>
+    <string name="terrain_slider_description">Set the minimum and maximum zoom levels at which the layer will be displayed.</string>
+    <string name="slope_description">Slope is colorized visualisations on terrain.</string>
+    <string name="hillshade_description">Hillshade map using dark shades to show slopes, peaks and lowlands.</string>
+    <string name="shared_string_terrain">Terrain</string>
     <string name="import_rendering_file">Import rendering file</string>
     <string name="profile_type_custom_string">Custom profile</string>
     <string name="shared_string_angle_param">Angle: %s°</string>
@@ -66,7 +102,7 @@
     <string name="use_system_screen_timeout_promo">Disabled by default, if OsmAnd running on foreground, the screen doesn’t time out.\n\nIf enabled OsmAnd will use system timeout settings.</string>
     <string name="accessibility_mode_disabled">Accessibility mode disabled in your system.</string>
     <string name="rearrange_categories">Rearrange categories</string>
-    <string name="create_custom_categories_list_promo">You can add custom categories hide categories that you don’t find necessary and change the sort order of the list. The list can be imported and exported with profiles.</string>
+    <string name="create_custom_categories_list_promo">Change the sort order of the list, hide unnecessary categories. You can import or export all changes with profiles.</string>
     <string name="add_new_custom_category_button_promo">You can add a new custom category by selecting one or a few needed categories.</string>
     <string name="shared_string_available">Available</string>
     <string name="add_custom_category">Add custom category</string>
@@ -288,7 +324,6 @@
     <string name="route_parameters_info">Settings for routing in the selected profile \"%1$s\".</string>
     <string name="wake_time">Wake time</string>
     <string name="units_and_formats">Units &amp; formats</string>
-    <string name="appearance">Appearance</string>
     <string name="map_look_descr">Map appearance</string>
     <string name="map_look">Map look</string>
     <string name="list_of_installed_plugins">Installed plugins</string>
@@ -1158,7 +1193,7 @@
     <string name="gpx_no_tracks_title">You do not have any GPX files yet</string>
     <string name="gpx_no_tracks_title_folder">You may also add GPX files to the folder</string>
     <string name="gpx_add_track">Add more…</string>
-    <string name="gpx_appearance">Appearance</string>
+    <string name="shared_string_appearance">Appearance</string>
     <string name="trip_rec_notification_settings">Turn on quick recording</string>
     <string name="trip_rec_notification_settings_desc">Display a system notification allowing trip recording.</string>
     <string name="shared_string_notifications">Notifications</string>

@@ -38,8 +38,8 @@
     <string name="yard">yd</string>
     <string name="foot">ft</string>
     <string name="mile">mi</string>
-    <string name="km">km</string>
-    <string name="m">m</string>
+    <string name="km">ک‌م</string>
+    <string name="m">متر</string>
     <string name="nm">nmi</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
@@ -72,4 +72,5 @@
     <string name="units_and_formats">یکاها و قالب‌ها</string>
     <string name="unit_of_length_descr">یکاهای طول را تغییر دهید.</string>
     <string name="unit_of_length">یکاهای طول</string>
+    <string name="shared_string_appearance">ظاهر</string>
 </resources>

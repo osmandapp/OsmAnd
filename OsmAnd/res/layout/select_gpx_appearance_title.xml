@@ -10,8 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="24dp"
-        android:orientation="vertical"
-	    android:paddingStart="24dp">
+        android:paddingStart="24dp"
+        android:paddingRight="0dp"
+        android:paddingEnd="0dp"
+        android:orientation="vertical">
 
         <net.osmand.plus.widgets.TextViewEx
             android:id="@+id/title"
@@ -28,16 +30,16 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:gravity="center_vertical"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="8dp"
-            android:orientation="horizontal"
-	        android:layout_marginEnd="8dp">
+            android:layout_marginTop="@dimen/content_padding_half"
+            android:layout_marginRight="@dimen/content_padding_half"
+            android:layout_marginEnd="@dimen/content_padding_half"
+            android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/gpx_appearance"
+                android:text="@string/shared_string_appearance"
                 android:textAppearance="@style/TextAppearance.ListItemTitle"/>
 
             <LinearLayout
@@ -45,13 +47,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
+                android:paddingLeft="@dimen/content_padding"
+                android:paddingRight="@dimen/content_padding"
+                android:paddingStart="@dimen/content_padding"
+                android:paddingEnd="@dimen/content_padding"
                 android:clickable="true"
                 android:background="?attr/selectableItemBackground"
-                android:orientation="horizontal"
-	            android:paddingStart="16dp"
-	            android:paddingEnd="16dp">
+                android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/widthTitle"
@@ -59,9 +61,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:layout_marginRight="8dp"
-                    android:textAppearance="@style/TextAppearance.ListItemTitle"
-	                android:layout_marginEnd="8dp" />
+                    android:layout_marginRight="@dimen/content_padding_half"
+                    android:layout_marginEnd="@dimen/content_padding_half"
+                    android:textAppearance="@style/TextAppearance.ListItemTitle" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/colorImage"

@@ -80,7 +80,6 @@ public class DialogListItemAdapter extends BaseAdapter {
 		}
 		View button = view.findViewById(R.id.button);
 		button.setTag(position);
-		UiUtilities.setupLayoutDirection(button);
 		final CompoundButton cb;
 		if (multiChoice) {
 			cb = view.findViewById(R.id.checkbox);

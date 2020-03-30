@@ -2074,7 +2074,7 @@ Lon: %2$s</string>
     <string name="gpx_no_tracks_title">Vi ankoraŭ havas neniujn GPX-dosierojn</string>
     <string name="gpx_no_tracks_title_folder">Vi ankaŭ povas aldoni GPX-dosierojn al la dosierujo</string>
     <string name="gpx_add_track">Aldoni pli…</string>
-    <string name="gpx_appearance">Aspekto</string>
+    <string name="shared_string_appearance">Aspekto</string>
     <string name="rendering_value_fine_name">Eteta</string>
     <string name="route_calculation">Difinado de vojo</string>
     <string name="upload_poi">Alŝuti interesejo(j)n</string>
@@ -2212,7 +2212,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="points_delete_multiple">Ĉu vi certe volas forigi %1$d punkto(j)n\?</string>
     <string name="route_points_category_name">Turniĝoj sur tiu ĉi kurso</string>
     <string name="track_points_category_name">Navigadpunktoj, interesejoj, objektoj nomitaj</string>
-    <string name="shared_string_slope">Klineco</string>
+    <string name="shared_string_slope">Dekliveco</string>
     <string name="lang_ber">Berbera</string>
     <string name="relief_smoothness_factor_descr">Preferi terenon: ebenan aŭ malebenan.</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Malebena</string>
@@ -3470,7 +3470,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="live_monitoring_tracking_interval">Registrada intertempo</string>
     <string name="search_offline_geo_error">Ne povas pritrakti koordinat‑peton “%s”.</string>
     <string name="rearrange_categories">Reordigi kategoriojn</string>
-    <string name="create_custom_categories_list_promo">Vi povas aldoni proprajn kategoriojn, kaŝi malnecesajn kategoriojn kaj ŝanĝi ilian ordigon. La liston oni povas enporti kaj elporti kune kun profiloj.</string>
+    <string name="create_custom_categories_list_promo">Ŝanĝi ordigon de la listo, kaŝi malnecesajn kategoriojn. Vi povas enporti aŭ elporti ĉiujn ŝanĝojn kun profiloj.</string>
     <string name="add_new_custom_category_button_promo">Vi povas aldoni novan propran kategorion per elekti kelka(j)n bezonata(j)n kategorio(j)n.</string>
     <string name="reset_to_default_category_button_promo">Per restarigi implicitajn agordojn, ordigo de elementoj revenos al la postinstalada stato.</string>
     <string name="accessibility_mode_disabled">Alirebleca reĝimo estas malaktivigita en via sistemo.</string>
@@ -3550,4 +3550,42 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="restore_all_profile_settings">Ĉu restarigi ĉiujn agordojn de la profilo\?</string>
     <string name="saving_new_profile">Konservado de nova profilo</string>
     <string name="profile_backup_failed">Ne povas sekurkopii profilon.</string>
+    <string name="clear_recorded_data_warning">Ĉu vi certe volas forigi registritajn datumojn\?</string>
+    <string name="importing_from">Enportado de datumoj el %1$s</string>
+    <string name="shared_string_importing">Enportado</string>
+    <string name="checking_for_duplicate_description">Kontrolado de %1$s pri duplikatoj kontraŭ la ekzistaj elementoj en la aplikaĵo.
+\n
+\nPovas okupi iom da tempo.</string>
+    <string name="items_added">Elementoj aldonitaj</string>
+    <string name="shared_string_import_complete">Enportado finita</string>
+    <string name="import_complete_description">Ĉiuj datumoj el %1$s estas enportitaj, uzu la butonojn sube por malfermi la taŭgan parton de la aplikaĵo por administri ilin.</string>
+    <string name="recalculate_route_distance_promo">La kurso estos rekalkulita se la distanco inter la kurso kaj la nuna pozicio superas la enigitan valoron.</string>
+    <string name="select_distance_route_will_recalc">Enigu la distancon super kiu la kurso estos rekalkulita.</string>
+    <string name="recalculate_route_in_deviation">Rekalkuli kurson kiam devojiĝi</string>
+    <string name="shared_string_terrain">Tereno</string>
+    <string name="slope_download_description">Kromaj mapoj estas necesaj por vidigi deklivecon sur la mapo.</string>
+    <string name="slope_read_more">Pliaj informoj pri dekliveco en %1$s.</string>
+    <string name="terrain_empty_state_text">Aktivigu por vidigi nivelombrumon (reliefon) aŭ deklivecon. Pliaj informoj pri tiuj ĉi tipoj de mapoj troviĝas ĉe nia retpaĝo</string>
+    <string name="download_slope_maps">Dekliveco</string>
+    <string name="hillshade_description">Uzas tonojn de grizo por vidigi altaĵojn, montpintojn kaj malaltaĵojn.</string>
+    <string name="slope_description">Kolorigas mapon laŭ angulo de dekliveco.</string>
+    <string name="terrain_slider_description">Agordi minimuman kaj maksimuman pligrandigojn inter kiuj la tavolo estos montrata.</string>
+    <string name="hillshade_download_description">Kromaj mapoj estas necesaj por vidigi tavolon de nivelombrumo.</string>
+    <string name="shared_string_transparency">Travideblo</string>
+    <string name="shared_string_zoom_levels">Pligrandigo</string>
+    <string name="shared_string_legend">Mapklarigo</string>
+    <string name="shared_string_hillshade">Nivelombrumo</string>
+    <string name="n_items_of_z">%1$s el %2$s</string>
+    <string name="quick_action_show_hide_terrain">Montri/kaŝi teren‑formon</string>
+    <string name="quick_action_terrain_hide">Kaŝi teren‑formon</string>
+    <string name="quick_action_terrain_show">Montri teren‑formon</string>
+    <string name="quick_action_terrain_descr">Butono por montri/kaŝi tavolon de formo de tereno sur la mapo.</string>
+    <string name="delete_description">Forigi priskribon</string>
+    <string name="add_description">Aldoni priskribon</string>
+    <string name="select_shape">Elekti formon</string>
+    <string name="select_group">Elekti grupon</string>
+    <string name="shared_string_circle">Cirklo</string>
+    <string name="shared_string_rhomb">Rombo</string>
+    <string name="shared_string_square">Kvadrato</string>
+    <string name="shared_string_min">Min.</string>
 </resources>

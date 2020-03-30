@@ -3798,4 +3798,17 @@
     <string name="poi_tactile_paving_contrasted">kontrasta</string>
     <string name="poi_tactile_paving_primitive">primitiva</string>
     <string name="poi_tactile_paving_incorrect">malĝusta</string>
+    <string name="poi_seamark_water_level_part_submerged">Akv-nivelo: parte superakvita je altmaro</string>
+    <string name="poi_seamark_water_level_submerged">Akv-nivelo: ĉiam superakvita</string>
+    <string name="poi_seamark_water_level_dry">Akv-nivelo: ĉiam seka</string>
+    <string name="poi_seamark_water_level_covers">Akv-nivelo: periode superakvata k seka</string>
+    <string name="poi_seamark_water_level_awash">Akv-nivelo: alfrapata per ondoj</string>
+    <string name="poi_seamark_water_level_floods">Akv-nivelo: periode kovrata per pli grandaj ondoj</string>
+    <string name="poi_seamark_water_level_floating">Akv-nivelo: flosanta</string>
+    <string name="poi_seamark_water_level_above_mwl">Akv-nivelo: sub la mezuma nivelo de akvo</string>
+    <string name="poi_seamark_water_level_below_mwl">Akv-nivelo: super la mezuma nivelo de akvo</string>
+    <string name="poi_seamark_obstruction">Baraĵo</string>
+    <string name="poi_drinking_water_refill_yes">Plenigi per trinkebla akvo: jes</string>
+    <string name="poi_drinking_water_refill_no">Plenigi per trinkebla akvo: ne</string>
+    <string name="poi_drinking_water_refill_network">Plenigi per trinkebla akvo: reto</string>
 </resources>

@@ -20,6 +20,7 @@ import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.TerrainMode;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -30,6 +31,7 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
@@ -41,7 +43,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.HILLSHADE_LAYER;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN;
 
 public class SRTMPlugin extends OsmandPlugin {
 
@@ -57,11 +59,14 @@ public class SRTMPlugin extends OsmandPlugin {
 	public static final String CONTOUR_WIDTH_ATTR = "contourWidth";
 	public static final String CONTOUR_DENSITY_ATTR = "contourDensity";
 
+	public static final int TERRAIN_MIN_ZOOM = 3;
+	public static final int TERRAIN_MAX_ZOOM = 19;
+
 	private OsmandApplication app;
 	private OsmandSettings settings;
 
 	private boolean paid;
-	private HillshadeLayer hillshadeLayer;
+	private TerrainLayer terrainLayer;
 
 	@Override
 	public String getId() {
@@ -72,12 +77,12 @@ public class SRTMPlugin extends OsmandPlugin {
 		this.app = app;
 		settings = app.getSettings();
 	}
-	
+
 	@Override
 	public int getLogoResourceId() {
 		return R.drawable.ic_plugin_srtm;
 	}
-	
+
 	@Override
 	public int getAssetResourceName() {
 		return R.drawable.contour_lines;
@@ -127,13 +132,14 @@ public class SRTMPlugin extends OsmandPlugin {
 	public String getHelpFileName() {
 		return "feature_articles/contour-lines-plugin.html";
 	}
+
 	@Override
 	public boolean init(@NonNull final OsmandApplication app, Activity activity) {
 		OsmandSettings settings = app.getSettings();
 		CommonPreference<String> pref = settings.getCustomRenderProperty("contourLines");
-		if(pref.get().equals("")) {
-			for(ApplicationMode m : ApplicationMode.allPossibleValues()) {
-				if(pref.getModeValue(m).equals("")) {
+		if (pref.get().equals("")) {
+			for (ApplicationMode m : ApplicationMode.allPossibleValues()) {
+				if (pref.getModeValue(m).equals("")) {
 					pref.setModeValue(m, "13");
 				}
 			}
@@ -143,17 +149,84 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	@Override
 	public void registerLayers(MapActivity activity) {
-		if (hillshadeLayer != null) {
-			activity.getMapView().removeLayer(hillshadeLayer);
+		if (terrainLayer != null) {
+			activity.getMapView().removeLayer(terrainLayer);
 		}
-		if (settings.HILLSHADE.get()) {
-			hillshadeLayer = new HillshadeLayer(activity, this);
-			activity.getMapView().addLayer(hillshadeLayer, 0.6f);
+		if (settings.TERRAIN.get()) {
+			terrainLayer = new TerrainLayer(activity, this);
+
+			activity.getMapView().addLayer(terrainLayer, 0.6f);
 		}
 	}
 
-	public boolean isHillShadeLayerEnabled() {
-		return settings.HILLSHADE.get();
+	public boolean isTerrainLayerEnabled() {
+		return settings.TERRAIN.get();
+	}
+
+	public void setTerrainLayerEnabled(boolean enabled) {
+		settings.TERRAIN.set(enabled);
+	}
+
+	public TerrainMode getTerrainMode() {
+		return settings.TERRAIN_MODE.get();
+	}
+
+	public void setTerrainMode(TerrainMode mode) {
+		settings.TERRAIN_MODE.set(mode);
+	}
+
+	public void setTerrainTransparency(int transparency, TerrainMode mode) {
+		switch (mode) {
+			case HILLSHADE:
+				settings.HILLSHADE_TRANSPARENCY.set(transparency);
+				break;
+			case SLOPE:
+				settings.SLOPE_TRANSPARENCY.set(transparency);
+				break;
+		}
+	}
+
+	public void setTerrainZoomValues(int minZoom, int maxZoom, TerrainMode mode) {
+		switch (mode) {
+			case HILLSHADE:
+				settings.HILLSHADE_MIN_ZOOM.set(minZoom);
+				settings.HILLSHADE_MAX_ZOOM.set(maxZoom);
+				break;
+			case SLOPE:
+				settings.SLOPE_MIN_ZOOM.set(minZoom);
+				settings.SLOPE_MAX_ZOOM.set(maxZoom);
+				break;
+		}
+	}
+
+	public int getTerrainTransparency() {
+		switch (getTerrainMode()) {
+			case HILLSHADE:
+				return settings.HILLSHADE_TRANSPARENCY.get();
+			case SLOPE:
+				return settings.SLOPE_TRANSPARENCY.get();
+		}
+		return 100;
+	}
+
+	public int getTerrainMinZoom() {
+		switch (getTerrainMode()) {
+			case HILLSHADE:
+				return settings.HILLSHADE_MIN_ZOOM.get();
+			case SLOPE:
+				return settings.SLOPE_MIN_ZOOM.get();
+		}
+		return TERRAIN_MIN_ZOOM;
+	}
+
+	public int getTerrainMaxZoom() {
+		switch (getTerrainMode()) {
+			case HILLSHADE:
+				return settings.HILLSHADE_MAX_ZOOM.get();
+			case SLOPE:
+				return settings.SLOPE_MAX_ZOOM.get();
+		}
+		return TERRAIN_MAX_ZOOM;
 	}
 
 	public static boolean isContourLinesLayerEnabled(OsmandApplication app) {
@@ -173,19 +246,22 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
-		if (settings.HILLSHADE.get() && isActive()) {
-			if (hillshadeLayer == null) {
-				registerLayers(activity);
-			}
+		if (settings.TERRAIN.get() && isActive()) {
+			removeTerrainLayer(mapView, activity);
+			registerLayers(activity);
 		} else {
-			if (hillshadeLayer != null) {
-				mapView.removeLayer(hillshadeLayer);
-				hillshadeLayer = null;
-				activity.refreshMap();
-			}
+			removeTerrainLayer(mapView, activity);
 		}
 	}
-	
+
+	private void removeTerrainLayer(OsmandMapTileView mapView, MapActivity activity) {
+		if (terrainLayer != null) {
+			mapView.removeLayer(terrainLayer);
+			terrainLayer = null;
+			activity.refreshMap();
+		}
+	}
+
 	@Override
 	public void registerLayerContextMenuActions(final OsmandMapTileView mapView, ContextMenuAdapter adapter, final MapActivity mapActivity) {
 		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.OnRowItemClick() {
@@ -196,8 +272,8 @@ public class SRTMPlugin extends OsmandPlugin {
 				if (itemId == R.string.srtm_plugin_name) {
 					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.CONTOUR_LINES, viewCoordinates);
 					return false;
-				} else if (itemId == R.string.layer_hillshade) {
-					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.HILLSHADE, viewCoordinates);
+				} else if (itemId == R.string.shared_string_terrain) {
+					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.TERRAIN, viewCoordinates);
 					return false;
 				}
 				return true;
@@ -236,16 +312,15 @@ public class SRTMPlugin extends OsmandPlugin {
 
 						}
 					});
-				} else if (itemId == R.string.layer_hillshade) {
-					toggleHillshade(mapActivity, isChecked, new Runnable() {
+				} else if (itemId == R.string.shared_string_terrain) {
+					toggleTerrain(mapActivity, isChecked, new Runnable() {
 						@Override
 						public void run() {
-							boolean selected = settings.HILLSHADE.get();
+							boolean selected = settings.TERRAIN.get();
 							SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
 							if (selected && plugin != null && !plugin.isActive() && !plugin.needsInstallation()) {
 								OsmandPlugin.enablePlugin(mapActivity, mapActivity.getMyApplication(), plugin, true);
 							}
-
 							ContextMenuItem item = adapter.getItem(position);
 							if (item != null) {
 								item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
@@ -277,17 +352,18 @@ public class SRTMPlugin extends OsmandPlugin {
 					.setPosition(12)
 					.setListener(listener).createItem());
 		}
-		boolean hillshadeEnabled = settings.HILLSHADE.get();
+		boolean terrainEnabled = settings.TERRAIN.get();
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setId(HILLSHADE_LAYER)
-				.setTitleId(R.string.layer_hillshade, mapActivity)
-				.setSelected(hillshadeEnabled)
-				.setColor(hillshadeEnabled ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setId(TERRAIN)
+				.setTitleId(R.string.shared_string_terrain, mapActivity)
+				.setSelected(terrainEnabled)
+				.setColor(terrainEnabled ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_hillshade_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener)
 				.setPosition(13)
-				.createItem());
+				.createItem()
+		);
 	}
 
 	@Override
@@ -307,6 +383,7 @@ public class SRTMPlugin extends OsmandPlugin {
 			LatLon latLon = app.getMapViewTrackingUtilities().getMapLocation();
 			suggestedMaps.addAll(getMapsForType(latLon, DownloadActivityType.SRTM_COUNTRY_FILE));
 			suggestedMaps.addAll(getMapsForType(latLon, DownloadActivityType.HILLSHADE_FILE));
+			suggestedMaps.addAll(getMapsForType(latLon, DownloadActivityType.SLOPE_FILE));
 		}
 
 		return suggestedMaps;
@@ -345,10 +422,10 @@ public class SRTMPlugin extends OsmandPlugin {
 		}
 	}
 
-	public void toggleHillshade(final MapActivity activity,
-								   final boolean isChecked,
-								   final Runnable callback) {
-		settings.HILLSHADE.set(isChecked);
+	public void toggleTerrain(final MapActivity activity,
+	                          final boolean isChecked,
+	                          final Runnable callback) {
+		settings.TERRAIN.set(isChecked);
 		if (callback != null) {
 			callback.run();
 		}
@@ -363,9 +440,9 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public void selectPropertyValue(final MapActivity activity,
-									 final RenderingRuleProperty p,
-									 final OsmandSettings.CommonPreference<String> pref,
-									 final Runnable callback) {
+									final RenderingRuleProperty p,
+									final OsmandSettings.CommonPreference<String> pref,
+									final Runnable callback) {
 		final String propertyDescr = SettingsActivity.getStringPropertyDescription(activity,
 				p.getAttrName(), p.getName());
 		boolean nightMode = isNightMode(activity, app);
@@ -441,5 +518,11 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	private static int getThemeRes(Activity activity, OsmandApplication app) {
 		return isNightMode(activity, app) ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+	}
+
+	@Override
+	protected void registerQuickActionTypes(List<QuickActionType> quickActionTypes) {
+		quickActionTypes.add(ContourLinesAction.TYPE);
+		quickActionTypes.add(TerrainAction.TYPE);
 	}
 }

@@ -1779,7 +1779,7 @@
     <string name="rendering_value_medium_w_name">ഇടത്തരം</string>
     <string name="rendering_value_low_name">കുറഞ്ഞ</string>
     <string name="rendering_attr_hideWaterPolygons_description">ജലം</string>
-    <string name="gpx_appearance">ദൃശ്യരൂപം</string>
+    <string name="shared_string_appearance">ദൃശ്യരൂപം</string>
     <string name="shared_string_paused">താല്‍ക്കാലികമായി നിര്‍ത്തിയിരിക്കുന്നു</string>
     <string name="lang_lo">ലാവോ</string>
     <string name="proxy_host_title">പ്രോക്സി ഹോസ്റ്റ്</string>

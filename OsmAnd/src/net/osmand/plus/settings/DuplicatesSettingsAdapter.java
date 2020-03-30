@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ApplicationMode.ApplicationModeBean;
@@ -19,15 +21,19 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ProfileIconColors;
+import net.osmand.plus.profiles.RoutingProfileDataObject.RoutingProfilesResources;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.List;
 
 public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+	private static final Log LOG = PlatformUtil.getLog(DuplicatesSettingsAdapter.class.getName());
 	private static final int HEADER_TYPE = 0;
 	private static final int ITEM_TYPE = 1;
 
@@ -35,12 +41,16 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 	private OsmandApplication app;
 	private UiUtilities uiUtilities;
 	private List<? super Object> items;
+	private int activeColorRes;
 
 	DuplicatesSettingsAdapter(OsmandApplication app, List<? super Object> items, boolean nightMode) {
 		this.app = app;
 		this.items = items;
 		this.nightMode = nightMode;
-		this.uiUtilities = app.getUIUtilities();
+		uiUtilities = app.getUIUtilities();
+		activeColorRes = nightMode
+				? R.color.icon_color_active_dark
+				: R.color.icon_color_active_light;
 	}
 
 	@NonNull
@@ -76,7 +86,17 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 					profileName = app.getString(appMode.getNameKeyResource());
 				}
 				itemHolder.title.setText(profileName);
-				String routingProfile = modeBean.routingProfile;
+				String routingProfile = "";
+				String routingProfileValue = modeBean.routingProfile;
+				if (!routingProfileValue.isEmpty()) {
+					try {
+						routingProfile = app.getString(RoutingProfilesResources.valueOf(routingProfileValue.toUpperCase()).getStringRes());
+						routingProfile = Algorithms.capitalizeFirstLetterAndLowercase(routingProfile);
+					} catch (IllegalArgumentException e) {
+						routingProfile = Algorithms.capitalizeFirstLetterAndLowercase(routingProfileValue);
+						LOG.error("Error trying to get routing resource for " + routingProfileValue + "\n" + e);
+					}
+				}
 				if (Algorithms.isEmpty(routingProfile)) {
 					itemHolder.subTitle.setVisibility(View.GONE);
 				} else {
@@ -89,41 +109,34 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 				int profileIconRes = AndroidUtils.getDrawableId(app, modeBean.iconName);
 				ProfileIconColors iconColor = modeBean.iconColor;
 				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(profileIconRes, iconColor.getColor(nightMode)));
-				itemHolder.icon.setVisibility(View.VISIBLE);
 			} else if (currentItem instanceof QuickAction) {
 				QuickAction action = (QuickAction) currentItem;
 				itemHolder.title.setText(action.getName(app));
-				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(action.getIconRes(), nightMode));
+				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(action.getIconRes(), activeColorRes));
 				itemHolder.subTitle.setVisibility(View.GONE);
-				itemHolder.icon.setVisibility(View.VISIBLE);
 			} else if (currentItem instanceof PoiUIFilter) {
 				PoiUIFilter filter = (PoiUIFilter) currentItem;
 				itemHolder.title.setText(filter.getName());
 				int iconRes = RenderingIcons.getBigIconResourceId(filter.getIconId());
-				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(iconRes != 0 ? iconRes : R.drawable.ic_person, nightMode));
+				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(iconRes != 0 ? iconRes : R.drawable.ic_person, activeColorRes));
 				itemHolder.subTitle.setVisibility(View.GONE);
-				itemHolder.icon.setVisibility(View.VISIBLE);
 			} else if (currentItem instanceof ITileSource) {
 				itemHolder.title.setText(((ITileSource) currentItem).getName());
-				itemHolder.icon.setImageResource(R.drawable.ic_action_info_dark);
+				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_map, activeColorRes));
 				itemHolder.subTitle.setVisibility(View.GONE);
-				itemHolder.icon.setVisibility(View.INVISIBLE);
 			} else if (currentItem instanceof File) {
 				File file = (File) currentItem;
 				itemHolder.title.setText(file.getName());
-				if (file.getName().contains("/rendering/")) {
-					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_map_style, nightMode));
-					itemHolder.icon.setVisibility(View.VISIBLE);
-				} else {
-					itemHolder.icon.setImageResource(R.drawable.ic_action_info_dark);
-					itemHolder.icon.setVisibility(View.INVISIBLE);
+				if (file.getAbsolutePath().contains(IndexConstants.RENDERERS_DIR)) {
+					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_map_style, activeColorRes));
+				} else if (file.getAbsolutePath().contains(IndexConstants.ROUTING_PROFILES_DIR)) {
+					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
 				}
 				itemHolder.subTitle.setVisibility(View.GONE);
 			} else if (currentItem instanceof AvoidRoadInfo) {
 				itemHolder.title.setText(((AvoidRoadInfo) currentItem).name);
-				itemHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_alert, nightMode));
+				itemHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_alert, activeColorRes));
 				itemHolder.subTitle.setVisibility(View.GONE);
-				itemHolder.icon.setVisibility(View.VISIBLE);
 			}
 			itemHolder.divider.setVisibility(shouldShowDivider(position) ? View.VISIBLE : View.GONE);
 		}

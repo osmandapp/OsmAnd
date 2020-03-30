@@ -70,7 +70,8 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 		mainView = UiUtilities.getInflater(getContext(), !settings.isLightContent()).inflate(R.layout.fragment_direction_indication_dialog, container);
 
 		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(getIconsCache().getIcon(R.drawable.ic_arrow_back));
+		int navigationIconResId = AndroidUtils.getNavigationIconResId(getContext());
+		toolbar.setNavigationIcon(getIconsCache().getIcon(navigationIconResId));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override

@@ -103,7 +103,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private View toolbarContainer;
 	private View toolbarView;
-	private View toolbarBackButton;
+	private ImageView toolbarBackButton;
 	private TextView toolbarTextView;
 	private View topButtonContainer;
 	private LockableScrollView menuScrollView;
@@ -208,14 +208,17 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				openMenuHeaderOnly();
 			}
 		});
+		toolbarBackButton.setImageResource(AndroidUtils.getNavigationIconResId(mapActivity));
 
 		topButtonContainer = view.findViewById(R.id.context_menu_top_button_container);
-		view.findViewById(R.id.context_menu_top_back).setOnClickListener(new View.OnClickListener() {
+		ImageView backButton = (ImageView) view.findViewById(R.id.context_menu_top_back);
+		backButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				openMenuHeaderOnly();
 			}
 		});
+		backButton.setImageResource(AndroidUtils.getNavigationIconResId(mapActivity));
 		updateVisibility(topButtonContainer, 0);
 
 		map = mapActivity.getMapView();
@@ -628,8 +631,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 		Drawable drawable = getIcon(iconResId, bottomButtonsColor);
 		directionsButton.setTextColor(ContextCompat.getColor(mapActivity, bottomButtonsColor));
-		directionsButton.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
-		directionsButton.setCompoundDrawablePadding(dpToPx(8));
+		AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(directionsButton, null, null, drawable, null);
+		int contentPaddingHalf = (int) getResources().getDimension(R.dimen.content_padding_half);
+		directionsButton.setCompoundDrawablePadding(contentPaddingHalf);
 		directionsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -1283,7 +1287,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			int iconId = menu.getRightIconId();
 			int sizeId = menu.isBigRightIcon() ? R.dimen.context_menu_big_icon_size : R.dimen.map_widget_icon;
 			if (menu.getPointDescription().isFavorite() || menu.getPointDescription().isWpt()) {
-				sizeId = R.dimen.dialog_button_height;
+				sizeId = R.dimen.favorites_icon_size;
 			}
 			int iconViewSize = getResources().getDimensionPixelSize(sizeId);
 			ViewGroup.LayoutParams params = iconView.getLayoutParams();
@@ -2116,9 +2120,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	public void dismissMenu() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			try {
-				activity.getSupportFragmentManager().popBackStack(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-			} catch (Exception e) {
+			FragmentManager fragmentManager = activity.getSupportFragmentManager();
+			if (!fragmentManager.isStateSaved()) {
+				fragmentManager.popBackStack(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			}
 		}
 	}

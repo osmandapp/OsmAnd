@@ -153,7 +153,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		paintTextIcon.setTextSize(10 * view.getDensity());
 		paintTextIcon.setTextAlign(Align.CENTER);
 		paintTextIcon.setFakeBoldText(true);
-		paintTextIcon.setColor(Color.WHITE);
+//		paintTextIcon.setColor(Color.WHITE);
 		paintTextIcon.setAntiAlias(true);
 
 		textLayer = view.getLayerByClass(MapTextLayer.class);
@@ -164,7 +164,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		paintOuterRect = new Paint();
 		paintOuterRect.setStyle(Style.STROKE);
 		paintOuterRect.setAntiAlias(true);
-		paintOuterRect.setColor(Color.WHITE);
+//		paintOuterRect.setColor(Color.WHITE);
 		paintOuterRect.setStrokeWidth(3);
 		paintOuterRect.setAlpha(255);
 		paintGridCircle = new Paint();
@@ -304,12 +304,23 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					paintInnerRect.setColor(color);
 					paintInnerRect.setAlpha(179);
 
+					paintTextIcon.setColor(txtlabelColor(color));
+					paintOuterRect.setColor(txtlabelColor(color));
+
 					List<GpxDisplayItem> items = groups.get(0).getModifiableList();
 
 					drawSplitItems(canvas, tileBox, items, settings);
 				}
 			}
 		}
+	}
+
+	private int txtlabelColor(int color) {
+		//Hardy, 2020-03-16: Contrast logic for text labels on tracks
+		if (((int) Color.red(color) * .299 + Color.green(color) * .587 + Color.blue(color) * .114) > 149) {
+			return Color.BLACK;
+		}
+		return Color.WHITE;
 	}
 
 	private void drawSplitItems(Canvas canvas, RotatedTileBox tileBox, List<GpxDisplayItem> items, DrawSettings settings) {
@@ -683,7 +694,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				GPXFile gpxFile = selectedGpxFile.getGpxFile();
 				gpxFile.updateWptPt(objectInMotion, position.getLatitude(),
 						position.getLongitude(), System.currentTimeMillis(), objectInMotion.desc,
-						objectInMotion.name, objectInMotion.category, objectInMotion.getColor());
+						objectInMotion.name, objectInMotion.category, objectInMotion.getColor(),
+						objectInMotion.getIconName(), objectInMotion.getBackgroundType());
 				syncGpx(gpxFile);
 				if (gpxFile.showCurrentTrack) {
 					if (callback != null) {

@@ -264,7 +264,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 					AudioManager.STREAM_NOTIFICATION, AudioManager.STREAM_VOICE_CALL};
 					//AudioManager.USE_DEFAULT_STREAM_TYPE};
 			ListPreference lp = createListPreference(
-					settings.AUDIO_STREAM_GUIDANCE, streamTypes, streamIntTypes , R.string.choose_audio_stream,
+					settings.AUDIO_MANAGER_STREAM, streamTypes, streamIntTypes , R.string.choose_audio_stream,
 					R.string.choose_audio_stream_descr);
 			final Preference.OnPreferenceChangeListener prev = lp.getOnPreferenceChangeListener();
 			lp.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
@@ -274,11 +274,11 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 					prev.onPreferenceChange(preference, newValue);
 					CommandPlayer player = getMyApplication().getPlayer();
 					if (player != null) {
-						player.updateAudioStream(settings.AUDIO_STREAM_GUIDANCE.get());
+						player.updateAudioStream(settings.AUDIO_MANAGER_STREAM.get());
 					}
 					// Sync corresponding AUDIO_USAGE value
 					ApplicationMode mode = getMyApplication().getSettings().getApplicationMode();
-					int stream = settings.AUDIO_STREAM_GUIDANCE.getModeValue(mode);
+					int stream = settings.AUDIO_MANAGER_STREAM.getModeValue(mode);
 					if (stream == AudioManager.STREAM_MUSIC) {
 						settings.AUDIO_USAGE.setModeValue(mode, AudioAttributes.USAGE_ASSISTANCE_NAVIGATION_GUIDANCE);
 					} else if (stream == AudioManager.STREAM_NOTIFICATION) {
@@ -288,7 +288,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 					}
 
 					// Sync DEFAULT value with CAR value, as we have other way to set it for now
-					settings.AUDIO_STREAM_GUIDANCE.setModeValue(ApplicationMode.DEFAULT, settings.AUDIO_STREAM_GUIDANCE.getModeValue(ApplicationMode.CAR));
+					settings.AUDIO_MANAGER_STREAM.setModeValue(ApplicationMode.DEFAULT, settings.AUDIO_MANAGER_STREAM.getModeValue(ApplicationMode.CAR));
 					settings.AUDIO_USAGE.setModeValue(ApplicationMode.DEFAULT, settings.AUDIO_USAGE.getModeValue(ApplicationMode.CAR));
 					return true;
 				}

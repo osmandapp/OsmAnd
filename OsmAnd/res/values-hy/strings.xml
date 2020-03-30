@@ -367,7 +367,7 @@
     <string name="gpx_no_tracks_title">Դուք դեռ չունեք GPX ֆայլեր</string>
     <string name="gpx_no_tracks_title_folder">Դուք նաև կարող եք ավելացնել GPX թղթապանակի մեջ</string>
     <string name="gpx_add_track">Ավելացնել…</string>
-    <string name="gpx_appearance">Տեսակ</string>
+    <string name="shared_string_appearance">Տեսակ</string>
     <string name="shared_string_notifications">Ծանուցումներ</string>
     <string name="shared_string_continue">Շարունակել</string>
     <string name="shared_string_pause">Դադար</string>

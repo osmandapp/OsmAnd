@@ -10,10 +10,15 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionType;
 
 public class MarkerAction extends QuickAction {
 
-	public static final int TYPE = 2;
+	public static final QuickActionType TYPE = new QuickActionType(2,
+			"marker.add", MarkerAction.class).
+			nameRes(R.string.quick_action_add_marker).iconRes(R.drawable.ic_action_flag_dark).nonEditable().
+			category(QuickActionType.CREATE_CATEGORY);
+
 
 	public MarkerAction() {
 		super(TYPE);

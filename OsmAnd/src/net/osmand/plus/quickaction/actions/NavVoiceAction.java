@@ -9,9 +9,13 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionType;
 
 public class NavVoiceAction extends QuickAction {
-	public static final int TYPE = 11;
+	public static final QuickActionType TYPE = new QuickActionType(11,
+			"nav.voice", NavVoiceAction.class).
+			nameRes(R.string.quick_action_navigation_voice).iconRes(R.drawable.ic_action_volume_up).nonEditable().
+			category(QuickActionType.NAVIGATION);
 
 	public NavVoiceAction() {
 		super(TYPE);

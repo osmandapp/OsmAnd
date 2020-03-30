@@ -127,7 +127,7 @@
     <string name="choose_auto_follow_route_descr">Zadejte interval pro automatický návrat mapy na vaši pozici.</string>
     <string name="auto_follow_route_navigation">Automatické sledování pozice</string>
     <string name="auto_follow_route_navigation_descr">Zapnout automatické sledování pozice pouze v režimu navigace.</string>
-    <string name="auto_follow_location_enabled">Automatické sledování pozice je zapnuto.</string>
+    <string name="auto_follow_location_enabled">Automatické centrování je zapnuto.</string>
     <string name="pref_vector_rendering">Nastavení vektorového vykreslovače</string>
     <string name="pref_overlay">Překryvná/podkresová vrstva</string>
     <string name="pref_raster_map">Nastavení zdroje mapy</string>
@@ -650,7 +650,7 @@
     <string name="left_side_navigation_descr">Pro země, kde se jezdí po levé straně cesty.</string>
     <string name="unknown_from_location">Startovní bod navigace není ještě zvolen</string>
     <string name="confirm_interrupt_download">Přerušit stahování souboru\?</string>
-    <string name="basemap_was_selected_to_download">Základní mapa byla vybrána ke stažení, pro správnou funkci aplikace.</string>
+    <string name="basemap_was_selected_to_download">Základní mapa byla vybrána ke stažení. Je potřeba pro správnou funkci aplikace.</string>
     <string name="map_online_plugin_is_not_installed">Pro výběr různých zdrojů map povolte modul \'Online mapy\'</string>
     <string name="map_online_data">On-line mapy a dlaždice</string>
     <string name="map_online_data_descr">Používat on-line mapy (ukládat dlaždice do mezipaměti na paměťové kartě).</string>
@@ -1379,7 +1379,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="rendering_attr_roadStyle_name">Styl cesty</string>
     <string name="rendering_value_default_name">Výchozí</string>
     <string name="rendering_value_orange_name">Oranžová</string>
-    <string name="rendering_value_germanRoadAtlas_name">Německý Atlas cest</string>
+    <string name="rendering_value_germanRoadAtlas_name">Německý atlas cest</string>
     <string name="traffic_warning_railways">Železniční přejezd</string>
     <string name="traffic_warning_pedestrian">Přechod pro chodce</string>
     <string name="show_railway_warnings">Železniční přejezdy</string>
@@ -2023,7 +2023,7 @@ Délka %2$s</string>
     <string name="gpx_no_tracks_title">Nemáte zatím žádné GPX soubory</string>
     <string name="gpx_no_tracks_title_folder">Do složky můžete také přidat GPX soubory</string>
     <string name="gpx_add_track">Přidat další…</string>
-    <string name="gpx_appearance">Vzhled</string>
+    <string name="shared_string_appearance">Vzhled</string>
     <string name="trip_rec_notification_settings">Povolit rychlé spuštění záznamu</string>
     <string name="trip_rec_notification_settings_desc">Zobrazit systémové oznámení, které umožňuje spustit nahrávání.</string>
     <string name="shared_string_notifications">Oznámení</string>
@@ -2274,7 +2274,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="analyze_on_map">Analyzovat na mapě</string>
     <string name="shared_string_visible">Viditelné</string>
     <string name="shared_string_paused">Pozastaveno</string>
-    <string name="route_is_too_long_v2">Pro velká vzdálenosti: Pokud do 10 minut nebude nalezena trasa, přidejte prosím na trasu mezicíle.</string>
+    <string name="route_is_too_long_v2">Pro velké vzdálenosti: Pokud do 10 minut nebude nalezena trasa, přidejte prosím na trasu mezicíle.</string>
     <string name="save_poi_too_many_uppercase">Název obsahuje příliš mnoho velkých písmen. Pokračovat\?</string>
     <string name="mapillary">Mapillary</string>
     <string name="private_access_routing_req">Váš cíl se nachází v oblasti se soukromým přístupem. Povolit vstup na soukromé pozemky pro tuto cestu?</string>
@@ -2939,10 +2939,10 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="use_osm_live_public_transport">Hromadná doprava z OsmAnd Live</string>
     <string name="by_transport_type">Pomocí %1$s</string>
     <string name="sit_on_the_stop">Nastupte na zastávce</string>
-    <string name="public_transport_warning_descr_blog">Dozvědět se na našem blogu více o tom, jak OsmAnd vypočítává trasy.</string>
+    <string name="public_transport_warning_descr_blog">Zjistěte více o výpočtu trasy v OsmAnd na našem blogu.</string>
     <string name="public_transport_warning_title">Navigace pomocí veřejné dopravy je v současné době v beta testování, očekávejte chyby a nepřesnosti.</string>
     <string name="add_intermediate">Přidat mezicíl</string>
-    <string name="avoid_pt_types_descr">Vyberte typy veřejné dopravy které se chcete vyhnout při navigaci:</string>
+    <string name="avoid_pt_types_descr">Vyberte typy veřejné dopravy, kterým se chcete při navigaci vyhnout:</string>
     <string name="quick_action_day_night_mode">%s režim</string>
     <string name="avoid_pt_types">Vyhněte se typům dopravy…</string>
     <string name="shared_string_walk">Chůze</string>
@@ -3083,14 +3083,14 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="routing_attr_allow_advanced_description">Obtížné trasy s nebezpečnými překážkami a strmými úseky.</string>
     <string name="routing_attr_allow_expert_name">Povolit trasy pro experty</string>
     <string name="routing_attr_allow_expert_description">Extrémně náročné trasy, s nebezpečnými překážkami a okolím.</string>
-    <string name="routing_attr_allow_classic_only_name">Povolit trasy pro klasické lyžování</string>
+    <string name="routing_attr_allow_classic_only_name">Povolit pouze trasy pro klasické lyžování</string>
     <string name="routing_attr_difficulty_preference_name">Preferovaná obtížnost</string>
     <string name="routing_attr_freeride_policy_name">Mimo sjezdovky</string>
     <string name="rate_dialog_descr">Prosím, dejte nám zpětnou vazbu a ohodnoťte naši práci na Google Play.</string>
-    <string name="make_osmand_better_descr">Povolit aplikaci OsmAnd sbírat a zpracovávat anonymní data využívání aplikace. Nesbíráme ani neukládáme data o vaší poloze nebo jakýchkoli polohách zobrazených na mapě.
-\n
-\nKdykoliv můžete změnit vaši volbu v Nastavení &gt; Soukromí a zabezpečení.</string>
-    <string name="downloaded_maps_collect_descr">Pomozte nám pochopit, které regiony a země map jsou nejpopulárnější.</string>
+    <string name="make_osmand_better_descr">Povolit aplikaci OsmAnd sbírat a zpracovávat anonymní data využívání aplikace. Nesbíráme ani neukládáme data o vaší poloze nebo jakýchkoli polohách zobrazených na mapě. 
+\n 
+\nSvoji volbu můžete kdykoliv změnit v Nastavení &gt; Soukromí a zabezpečení.</string>
+    <string name="downloaded_maps_collect_descr">Pomozte nám pochopit, které regiony a země jsou v mapách nejpopulárnější.</string>
     <string name="visited_screens_collect_descr">Pomozte nám pochopit, které funkce OsmAnd jsou nejpopulárnější.</string>
     <string name="osmand_routing_promo">Můžete přidat vaši vlastní upravenou verzi souboru routing.xml v ..osmand/routing</string>
     <string name="press_again_to_change_the_map_orientation">Klepněte znovu pro změnu orientace mapy</string>
@@ -3109,12 +3109,12 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="precision_hdop">Přesnost vodorovně: %s</string>
     <string name="app_mode_offroad">Terénní</string>
     <string name="edit_profile_setup_title">Nastavit profil</string>
-    <string name="edit_profile_setup_subtitle">Profil si udrží jeho vlastní nastavení</string>
+    <string name="edit_profile_setup_subtitle">Profil si udrží své vlastní nastavení</string>
     <string name="edit_profile_setup_map_subtitle">Vybrat výchozí nastavení mapy u profilu</string>
     <string name="edit_profile_screen_options_subtitle">Vybrat výchozí nastavení obrazovky u profilu</string>
     <string name="edit_profile_nav_settings_subtitle">Vybrat výchozí nastavení navigace u profilu</string>
-    <string name="routing_attr_max_num_changes_description">Určete max. počet změn</string>
-    <string name="routing_attr_max_num_changes_name">Počet změn</string>
+    <string name="routing_attr_max_num_changes_description">Určete maximální počet přestupů</string>
+    <string name="routing_attr_max_num_changes_name">Počet přestupů</string>
     <string name="turn_screen_on_router">Probudit na odbočce</string>
     <string name="turn_screen_on_time_descr">Nastavte čas, po který bude obrazovka zapnutá.</string>
     <string name="turn_screen_on_sensor">Použít senzor přiblížení</string>
@@ -3157,22 +3157,22 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="app_mode_wagon">Dodávkové auto</string>
     <string name="app_mode_pickup_truck">Pickup auto</string>
     <string name="day">Den</string>
-    <string name="days_2_4">Dnů</string>
+    <string name="days_2_4">Dny</string>
     <string name="days_5">Dnů</string>
     <string name="week">Týden</string>
-    <string name="weeks_2_4">Týdnů</string>
+    <string name="weeks_2_4">Týdny</string>
     <string name="weeks_5">Týdnů</string>
     <string name="month">Měsíc</string>
-    <string name="months_2_4">Měsíců</string>
+    <string name="months_2_4">Měsíce</string>
     <string name="months_5">Měsíců</string>
     <string name="year">Rok</string>
-    <string name="years_2_4">Let</string>
+    <string name="years_2_4">Roky</string>
     <string name="years_5">Let</string>
     <string name="months_3">Tři měsíce</string>
     <string name="price_free">Zdarma</string>
     <string name="get_discount_title">Získejte %1$d %2$s při slevě %3$s.</string>
-    <string name="get_discount_first_part">%1$s za prvé %2$s</string>
-    <string name="get_discount_first_few_part">%1$s za prvé %2$s</string>
+    <string name="get_discount_first_part">%1$s za první %2$s</string>
+    <string name="get_discount_first_few_part">%1$s za první %2$s</string>
     <string name="get_discount_second_part">potom %1$s</string>
     <string name="cancel_subscription">Zrušit předplatné</string>
     <string name="price_and_discount">%1$s • Ušetřete %2$s</string>
@@ -3227,7 +3227,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="data_storage_space_description">Volno %1$s GB (z %2$s GB)</string>
     <string name="enter_path_to_folder">Zadejte cestu k adresáři</string>
     <string name="shared_string_select_folder">Adresář…</string>
-    <string name="paste_Osmand_data_folder_path">Zadejte cestu ke adresáři s OsmAnd daty</string>
+    <string name="paste_Osmand_data_folder_path">Zadejte cestu k adresáři s OsmAnd daty</string>
     <string name="change_osmand_data_folder_question">Změnit adresář pro OsmAnd data\?</string>
     <string name="move_maps_to_new_destination">Přesunout do nového umístění</string>
     <string name="internal_app_storage_description">Vnitřní úložiště, skryté před uživateli a aplikacemi, přístupné výhradně pro OsmAnd</string>
@@ -3267,7 +3267,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="overwrite_profile_q">Profil „%1$s“ již existuje. Přepsat\?</string>
     <string name="export_profile_failed">Profil nelze exportovat.</string>
     <string name="profile_import">Import profilu:</string>
-    <string name="profile_import_descr">Pro import profilu, vyberte soubor profilu ze zařízení a otevřete ho pomocí OsmAnd.</string>
+    <string name="profile_import_descr">Přidejte profil otevřením jeho souboru pomocí OsmAnd.</string>
     <string name="file_import_error">%1$s chyba importu: %2$s</string>
     <string name="file_imported_successfully">Úspěšně importováno: %1$s</string>
     <string name="swap_two_places">Prohodit %1$s a %2$s</string>
@@ -3286,4 +3286,6 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="shared_string_turn_off">Vypnout</string>
     <string name="new_plugin_added">Přidán nový modul</string>
     <string name="add_new_profile_q">Přidat nový profil „%1$s“\?</string>
+    <string name="routing_attr_allow_classic_only_description">Trasy upravené pro klasické lyžování bez bruslení. Zahrnuje trasy upravené menšími sněžnými vozidly a stopy vytvořené samotnými lyžaři.</string>
+    <string name="routing_attr_allow_skating_only_name">Povolit pouze trasy pro bruslení na lyžích</string>
 </resources>

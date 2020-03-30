@@ -959,7 +959,7 @@ public class OsmandSettings {
 		}
 	}
 
-	private class FloatPreference extends CommonPreference<Float> {
+	public class FloatPreference extends CommonPreference<Float> {
 
 
 		private FloatPreference(String id, float defaultValue) {
@@ -2060,7 +2060,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Integer> LEVEL_TO_SWITCH_VECTOR_RASTER = new IntPreference("level_to_switch_vector_raster", 1).makeGlobal().cache();
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Integer> AUDIO_STREAM_GUIDANCE = new IntPreference("audio_stream", 3/*AudioManager.STREAM_MUSIC*/) {
+	public final OsmandPreference<Integer> AUDIO_MANAGER_STREAM = new IntPreference("audio_stream", 3/*AudioManager.STREAM_MUSIC*/) {
 		@Override
 		protected boolean setValue(Object prefs, Integer stream) {
 			boolean valueSaved = super.setValue(prefs, stream);
@@ -2095,7 +2095,21 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> MAP_ONLINE_DATA = new BooleanPreference("map_online_data", false).makeProfile();
 
-	public final CommonPreference<Boolean> HILLSHADE = new BooleanPreference("hillshade_layer", true).makeProfile();
+	public final CommonPreference<TerrainMode> TERRAIN_MODE = new EnumIntPreference<>("terrain_mode", TerrainMode.HILLSHADE, TerrainMode.values()).makeProfile();
+
+	public final CommonPreference<Integer> HILLSHADE_MIN_ZOOM = new IntPreference("hillshade_min_zoom", 3).makeProfile();
+
+	public final CommonPreference<Integer> HILLSHADE_MAX_ZOOM = new IntPreference("hillshade_max_zoom", 17).makeProfile();
+
+	public final CommonPreference<Integer> HILLSHADE_TRANSPARENCY = new IntPreference("hillshade_transparency", 100).makeProfile();
+
+	public final CommonPreference<Integer> SLOPE_MIN_ZOOM = new IntPreference("slope_min_zoom", 3).makeProfile();
+
+	public final CommonPreference<Integer> SLOPE_MAX_ZOOM = new IntPreference("slope_max_zoom", 17).makeProfile();
+
+	public final CommonPreference<Integer> SLOPE_TRANSPARENCY = new IntPreference("slope_transparency", 80).makeProfile();
+
+	public final CommonPreference<Boolean> TERRAIN = new BooleanPreference("terrain_layer", true).makeProfile();
 
 	public final CommonPreference<String> CONTOUR_LINES_ZOOM = new StringPreference("contour_lines_zoom", null).makeProfile().cache();
 
@@ -3387,6 +3401,7 @@ public class OsmandSettings {
 	// this value could localized
 	public final OsmandPreference<String> VOICE_PROVIDER = new StringPreference("voice_provider", null) {
 		protected String getDefaultValue() {
+
 			Configuration config = ctx.getResources().getConfiguration();
 			for (String lang : TTS_AVAILABLE_VOICES) {
 				if (lang.equals(config.locale.getLanguage())) {
@@ -3871,6 +3886,11 @@ public class OsmandSettings {
 		WikiArticleShowImages(int name) {
 			this.name = name;
 		}
+	}
+
+	public enum TerrainMode {
+		HILLSHADE,
+		SLOPE
 	}
 
 	private OsmandPreference[] generalPrefs = new OsmandPreference[]{

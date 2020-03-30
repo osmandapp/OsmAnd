@@ -1996,7 +1996,7 @@ failu(s)?
     <string name="gpx_no_tracks_title">Nav vēl izveidoti treki</string>
     <string name="gpx_no_tracks_title_folder">Trekus varat pievienot arī mapei</string>
     <string name="gpx_add_track">Pievienot treku</string>
-    <string name="gpx_appearance">Izskats</string>
+    <string name="shared_string_appearance">Izskats</string>
     <string name="trip_rec_notification_settings">Ceļa ieraksts (nav datu)</string>
     <string name="trip_rec_notification_settings_desc">Rādīt ziņojumu, kas ļauj sākt ierakstu, nospiežot ieraksta pogu</string>
     <string name="shared_string_notifications">Ziņojumi</string>

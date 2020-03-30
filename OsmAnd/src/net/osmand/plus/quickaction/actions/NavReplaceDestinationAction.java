@@ -9,10 +9,14 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionType;
 
 public class NavReplaceDestinationAction extends QuickAction {
 
-	public static final int TYPE = 21;
+	public static final QuickActionType TYPE = new QuickActionType(21,
+			"nav.destination.replace", NavReplaceDestinationAction.class).
+			nameRes(R.string.quick_action_replace_destination).iconRes(R.drawable.ic_action_point_add_destination).nonEditable().
+			category(QuickActionType.NAVIGATION);
 
 	public NavReplaceDestinationAction() {
 		super(TYPE);

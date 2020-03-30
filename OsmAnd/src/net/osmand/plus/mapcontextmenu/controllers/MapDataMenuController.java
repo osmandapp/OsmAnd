@@ -96,7 +96,8 @@ public class MapDataMenuController extends MenuController {
 					restoreFromBackup();
 				} else if (indexItem != null && activity != null) {
 					if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
-							|| indexItem.getType() == DownloadActivityType.HILLSHADE_FILE)
+							|| indexItem.getType() == DownloadActivityType.HILLSHADE_FILE
+							|| indexItem.getType() == DownloadActivityType.SLOPE_FILE)
 							&& srtmDisabled) {
 						activity.getContextMenu().close();
 
@@ -400,7 +401,8 @@ public class MapDataMenuController extends MenuController {
 			leftDownloadButtonController.caption = mapActivity.getString(R.string.local_index_mi_restore);
 		} else if (indexItem != null) {
 			if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
-					|| indexItem.getType() == DownloadActivityType.HILLSHADE_FILE)
+					|| indexItem.getType() == DownloadActivityType.HILLSHADE_FILE
+					|| indexItem.getType() == DownloadActivityType.SLOPE_FILE)
 					&& srtmDisabled) {
 				leftDownloadButtonController.caption = mapActivity.getString(R.string.get_plugin);
 				leftDownloadButtonController.clearIcon(true);

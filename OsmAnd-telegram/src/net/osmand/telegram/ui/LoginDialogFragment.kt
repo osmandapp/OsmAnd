@@ -193,7 +193,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 		}
 	}
 
-	override fun onDismiss(dialog: DialogInterface?) {
+	override fun onDismiss(dialog: DialogInterface) {
 		super.onDismiss(dialog)
 		if (!dismissedManually) {
 			getMainActivity()?.closeTelegram()
@@ -300,7 +300,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 							view.findViewById<ImageView>(R.id.no_telegram_button)?.setImageResource(R.drawable.ic_arrow_forward)
 
 							noTelegramViewContainer?.setOnClickListener {
-								val focusedView = dialog.currentFocus
+								val focusedView = dialog?.currentFocus
 								val mainActivity = activity
 								if (focusedView != null && mainActivity != null) {
 									AndroidUtils.hideSoftKeyboard(mainActivity, focusedView)
@@ -479,7 +479,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 			when (loginDialogActiveType) {
 				LoginDialogType.ENTER_PHONE_NUMBER -> {
 					showWelcomeDialog = true
-					val focusedView = dialog.currentFocus
+					val focusedView = dialog?.currentFocus
 					val mainActivity = activity
 					if (focusedView != null && mainActivity != null) {
 						AndroidUtils.hideSoftKeyboard(mainActivity, focusedView)

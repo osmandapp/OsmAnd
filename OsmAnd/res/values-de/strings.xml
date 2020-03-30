@@ -24,7 +24,7 @@
     <string name="traffic_warning_payment">Mautstelle</string>
     <string name="traffic_warning_stop">Stoppzeichen</string>
     <string name="traffic_warning_calming">Verkehrsberuhigung</string>
-    <string name="traffic_warning_speed_camera">Geschwindigkeitskontrolle</string>
+    <string name="traffic_warning_speed_camera">Blitzer</string>
     <string name="traffic_warning">Verkehrswarnung</string>
     <string name="speak_favorites">Favoriten in der Nähe</string>
     <string name="speak_poi">Nahegelegene POI</string>
@@ -95,7 +95,7 @@
     <string name="rendering_attr_roadColors_description">Auswahl eines Straßen-Farbschemas:</string>
     <string name="rendering_attr_roadColors_name">Straßenfarbschema</string>
     <string name="show_warnings_title">Warnungen anzeigen…</string>
-    <string name="show_warnings_descr">Verkehrswarnungen (Tempolimits, Stoppzeichen, Rüttelschwellen, Tunnel), stationäre Radarkontrollen und Fahrspuranzeige konfigurieren.</string>
+    <string name="show_warnings_descr">Verkehrswarnungen (Tempolimits, Stoppzeichen, Rüttelschwellen, Tunnel), Blitzerwarner und Fahrspuranzeige konfigurieren.</string>
     <string name="use_compass_navigation_descr">Kompass verwenden, wenn keine andere Richtungsbestimmung möglich ist.</string>
     <string name="use_compass_navigation">Kompass verwenden</string>
     <string name="avoid_motorway">Keine Autobahnen</string>
@@ -115,10 +115,10 @@
 \n- Direktes Herunterladen von Länder- oder Regionenkarten aus der App heraus 
 \n- Darstellung mehrerer überlagerter Kartenschichten wie GPX oder Navigations-Tracks, POIs (Orte von Interesse), Favoriten, Höhenlinien, ÖPNV-Haltestellen, zusätzliche Karten mit wählbarer Transparenz 
 \n- Offline Adress- und POI-Suche 
-\n- Offlinenavigation für mittlere Entfernungen
+\n- Offlinenavigation für mittlere Entfernungen 
 \n- Auto-, Fahrrad- und Fußgänger-Modus wahlweise mit: 
 \n - automatischer Tag-Nacht-Umschaltung der Anzeige 
-\n - geschwindigkeitsabhängigem Kartenmaßstab 
+\n - geschwindigkeitsabhängiger Kartenmaßstab 
 \n - Kartenausrichtung nach Kompass oder Bewegungsrichtung 
 \n - Fahrspuranzeige, Geschwindigkeitswarnung, aufgenommenen oder TTS-Sprachansagen 
 \n 
@@ -1116,7 +1116,7 @@
     <string name="av_camera_focus_edof">Erweiterte Schärfentiefe (EDOF)</string>
     <string name="av_camera_focus_macro">Makrofokus-Modus (Nahaufnahme)</string>
     <string name="speak_title">Ansagen…</string>
-    <string name="speak_descr">Ansagen zu Straßennamen, Verkehrswarnungen (Stoppzeichen, Rüttelschwellen), stationäre Radarkontrollen und Tempolimits konfigurieren.</string>
+    <string name="speak_descr">Ansagen zu Straßennamen, Verkehrswarnungen (Stoppzeichen, Rüttelschwellen), Blitzerwarnern und Tempolimits konfigurieren.</string>
     <string name="speak_street_names">Straßennamen (TTS)</string>
     <string name="map_widget_fps_info">FPS-Debug-Info</string>
     <string name="driving_region_descr">Fahrregion wählen: USA, Europa, GB, Asien usw.</string>
@@ -2085,7 +2085,7 @@ Lon %2$s</string>
     <string name="trip_rec_notification_settings">Schnellaufzeichnung einschalten</string>
     <string name="trip_rec_notification_settings_desc">Anzeige einer Systembenachrichtigung zum Starten der Streckenaufzeichnung.</string>
     <string name="shared_string_notifications">Benachrichtigungen</string>
-    <string name="gpx_appearance">Aussehen</string>
+    <string name="shared_string_appearance">Aussehen</string>
     <string name="route_calculation">Routenberechnung</string>
     <string name="gpx_no_tracks_title">Sie haben noch keine GPX-Dateien</string>
     <string name="gpx_no_tracks_title_folder">GPX-Dateien können dem Ordner hinzugefügt werden</string>
@@ -2723,7 +2723,7 @@ Lon %2$s</string>
     <string name="wikivoyage_download_pics">Bilder herunterladen</string>
     <string name="wikivoyage_download_pics_descr">Artikelbilder können für den Offline-Einsatz heruntergeladen werden. 
 \nImmer verfügbar unter \'Durchsuchen → Optionen\'.</string>
-    <string name="online_webpage_warning">Seite ist nur online abrufbar. Im Webbrowser öffnen?</string>
+    <string name="online_webpage_warning">Seite nur online verfügbar. Im Webbrowser öffnen\?</string>
     <string name="delete_search_history">Suchverlauf löschen</string>
     <string name="purchase_dialog_travel_description">Für die Offline-Reiseführerfunktionalität kaufen Sie einen der folgenden Artikel:</string>
     <string name="purchase_dialog_subtitle">Passenden Artikel auswählen</string>
@@ -3136,11 +3136,11 @@ Lon %2$s</string>
     <string name="routing_attr_freeride_policy_description">Freerides und Strecken abseits der Piste sind inoffizielle Routen und Passagen. Typischerweise unpräpariert, nicht gewartet und abends nicht kontrolliert. Betreten auf eigene Gefahr.</string>
     <string name="press_again_to_change_the_map_orientation">Erneut antippen, um die Kartenausrichtung zu ändern</string>
     <string name="quick_action_need_to_add_item_to_list">Sie müssen mindestens einen Eintrag in die Liste der Schnellaktionseinstellungen hinzufügen</string>
-    <string name="shared_string_min_speed">Mindesttempo</string>
-    <string name="shared_string_max_speed">Maximaltempo</string>
-    <string name="default_speed_setting_title">Standardtempo</string>
-    <string name="default_speed_setting_descr">Einstellungen des Standardtempos ändern</string>
-    <string name="minmax_speed_dialog_title">Tempogrenzen einstellen</string>
+    <string name="shared_string_min_speed">Min. Geschwindigkeit</string>
+    <string name="shared_string_max_speed">Max. Geschwindigkeit</string>
+    <string name="default_speed_setting_title">Std. Geschwindigkeit</string>
+    <string name="default_speed_setting_descr">Standard-Einstellungen für Geschwindigkeiten</string>
+    <string name="minmax_speed_dialog_title">Min./Max. Geschwindigkeit einstellen</string>
     <string name="new_profile">Neues Profil</string>
     <string name="shared_string_crash">Absturz</string>
     <string name="last_launch_crashed">Der letzte Start von OsmAnd ist fehlgeschlagen. Bitte helfen Sie uns, OsmAnd zu verbessern, indem Sie uns über diesen Fehler informieren.</string>
@@ -3173,7 +3173,7 @@ Lon %2$s</string>
     <string name="routing_attr_allow_skating_only_description">Nur für Freestyle oder Skating präparierte Routen, keine klassischen Loipen.</string>
     <string name="routing_attr_allow_classic_only_description">Für den klassischen Stil präparierte Loipen, keine Skating-Pisten. Einschließlich durch kleinere Schneemobile präparierte Routen mit lockerer Piste und durch Skifahrer selbstgespurte Bahnen.</string>
     <string name="app_mode_ufo">UFO</string>
-    <string name="app_mode_personal_transporter">Segway Personal Transporter</string>
+    <string name="app_mode_personal_transporter">Einpersonen-Transportmittel</string>
     <string name="edit_profile_setup_title">Profil einrichten</string>
     <string name="edit_profile_setup_subtitle">Das Profil behält seine eigenen Einstellungen bei</string>
     <string name="edit_profile_setup_map_subtitle">Kartenoptionen für das Profil auswählen</string>
@@ -3415,8 +3415,8 @@ Lon %2$s</string>
     <string name="shared_string_downloading_formatted">%s herunterladen</string>
     <string name="rendering_value_thick_name">Fett</string>
     <string name="desert_render_descr">Für Wüsten und andere dünn besiedelte Gebiete. Umfangreicher.</string>
-    <string name="select_navigation_icon">Positionssymbol während der Bewegung</string>
-    <string name="select_map_icon">Positionssymbol in Ruhe</string>
+    <string name="select_navigation_icon">Positionssymbol in Bewegung</string>
+    <string name="select_map_icon">Positionssymbol im Ruhezustand</string>
     <string name="delete_profiles_descr">Durch Tippen auf \'Anwenden\' werden entfernte Profile dauerhaft gelöscht.</string>
     <string name="master_profile">Hauptprofil</string>
     <string name="select_color">Farbe wählen</string>
@@ -3451,7 +3451,7 @@ Lon %2$s</string>
     <string name="select_nav_icon_descr">Symbol, das beim Navigieren oder Bewegen angezeigt wird.</string>
     <string name="multimedia_notes_view_descr">Ihre OSM-Notizen sind in %1$s.</string>
     <string name="button_rate">Bewerten</string>
-    <string name="logcat_buffer_descr">Protokolle der Anwendung sehen und freigeben</string>
+    <string name="logcat_buffer_descr">Protokolle der Anwendung einsehen und freigeben</string>
     <string name="permission_is_required">Für die Verwendung dieser Option ist eine Berechtigung erforderlich.</string>
     <string name="file_does_not_contain_routing_rules">Die Datei \'%1$s\' enthält keine Routing-Regeln. Bitte eine andere Datei wählen.</string>
     <string name="monitoring_min_speed_descr">Dies ist ein Filter, welcher Punkte unter einer gewissen Geschwindigkeit nicht aufzeichnet. Dadurch können aufgezeichnete Tracks auf der Karte gleichmäßiger aussehen.</string>
@@ -3462,7 +3462,7 @@ Lon %2$s</string>
     <string name="live_monitoring_adress">Webadresse</string>
     <string name="live_monitoring_adress_descr">Webadresse angeben mit der Parametersyntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Benachrichtigung</string>
-    <string name="monitoring_min_speed">Mindesttempo</string>
+    <string name="monitoring_min_speed">Min. Geschwindigkeit</string>
     <string name="monitoring_min_accuracy">Minimale Genauigkeit</string>
     <string name="monitoring_min_distance">Minimale Verschiebung</string>
     <string name="reset_plugin_to_default">Plugin-Einstellungen auf Voreinstellung zurücksetzen</string>
@@ -3473,7 +3473,7 @@ Lon %2$s</string>
     <string name="sunset_at">Sonnenuntergang um %1$s</string>
     <string name="sunrise_at">Sonnenaufgang um %1$s</string>
     <string name="rearrange_categories">Kategorien neu ordnen</string>
-    <string name="create_custom_categories_list_promo">Sie können benutzerdefinierte Kategorien hinzufügen, nicht benötigte Kategorien ausblenden und die Sortierung der Liste ändern. Die Liste kann mit Profilen importiert und exportiert werden.</string>
+    <string name="create_custom_categories_list_promo">Ändern Sie die Sortierung der Liste, blenden Sie unnötige Kategorien aus. Sie können alle Änderungen mit Profilen importieren oder exportieren.</string>
     <string name="add_new_custom_category_button_promo">Sie können eine neue benutzerdefinierte Kategorie hinzufügen, indem Sie eine oder mehrere benötigte Kategorien auswählen.</string>
     <string name="rendering_attr_streetLightingNight_name">Nur nachts anzeigen</string>
     <string name="plugin_prefs_reset_successful">Alle Plugin-Einstellungen werden auf den Standardzustand zurückgesetzt.</string>
@@ -3491,7 +3491,7 @@ Lon %2$s</string>
     <string name="live_monitoring">Online-Aufzeichnung</string>
     <string name="clear_recorded_data">Aufgezeichnete Daten löschen</string>
     <string name="copy_coordinates">Koordinaten kopieren</string>
-    <string name="monitoring_min_speed_descr_remark">Bemerkung: Geschwindigkeit &gt; 0 Kontrolle: Die meisten GPS-Chipsätze geben nur dann einen Geschwindigkeitswert an, wenn der Algorithmus feststellt, dass Sie in Bewegung sind, und keinen, wenn Sie nicht in Bewegung sind. Die Verwendung der Einstellung &gt; 0 in diesem Filter nutzt also gewissermaßen die Bewegungserkennung des GPS-Chipsatzes. Aber selbst wenn nicht zur Aufnahmezeit gefiltert wurde, verwenden wir diese Funktion in unserer GPX-Analyse, um die Distanz korrigiert zu bestimmen, d. h., der in diesem Feld angezeigte Wert ist die während der Bewegung aufgezeichnete Distanz.</string>
+    <string name="monitoring_min_speed_descr_remark">Bemerkung: Geschwindigkeit &gt; 0 Kontrolle: Die meisten GPS-Chipsätze geben nur dann einen Geschwindigkeitswert an, wenn der Algorithmus feststellt, dass Sie in Bewegung sind, und keinen, wenn Sie nicht in Bewegung sind. Die Verwendung der Einstellung &gt; 0 in diesem Filter nutzt also gewissermaßen die Bewegungserkennung des GPS-Chipsatzes. Aber selbst wenn nicht zur Aufnahmezeit gefiltert wurde, verwenden wir diese Funktion in unserer GPX-Analyse, um die Distanz korrigiert zu bestimmen, das heißt, der in diesem Feld angezeigte Wert ist die während der Bewegung aufgezeichnete Distanz.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Nebeneffekt: Als Ergebnis der Filterung nach Genauigkeit können Punkte z. B. unter Brücken, unter Bäumen, zwischen hohen Gebäuden oder bei bestimmten Wetterbedingungen ganz fehlen.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Empfehlung: Es ist schwer vorherzusagen, was aufgezeichnet wird und was nicht, es ist vielleicht am besten, diesen Filter auszuschalten.</string>
     <string name="monitoring_min_distance_descr">Dieser Filter verhindert, dass doppelte Punkte aufgenommen werden, bei denen möglicherweise zu wenig tatsächliche Bewegung stattgefunden hat. Er sorgt für ein schöneres räumliches Erscheinungsbild von Spuren, die später nicht nachbearbeitet werden.</string>
@@ -3542,12 +3542,12 @@ Lon %2$s</string>
     <string name="monitoring_min_accuracy_descr">Es werden nur Punkte aufgezeichnet, die gemäß den Angaben der Mindestgenauigkeit gemessen wurden (in Metern/Fuß, wie von Android je nach Chipsatz bereitgestellt). Die Genauigkeit bezieht sich auf die Streuung wiederholter Messungen und steht nicht unmittelbar in Bezug zur Präzision, die bestimmt, wie nah Messungen und wahre Position beieinanderliegen.</string>
     <string name="monitoring_min_accuracy_descr_remark">Bemerkung: Wenn das GPS unmittelbar vor einer Aufzeichnung ausgeschaltet war, kann der erste gemessene Punkt eine verminderte Genauigkeit haben, sodass wir in unserem Code vielleicht eine Sekunde oder so warten wollen, bevor ein Punkt (oder der beste von 3 aufeinanderfolgenden Punkten usw.) aufgezeichnet wird. Das ist aber noch nicht implementiert.</string>
     <string name="multimedia_rec_split_title">Aufzeichnungsteilung</string>
-    <string name="routing_profile_direct_to">Direkt zum Punkt</string>
+    <string name="routing_profile_direct_to">Auf direktem Weg</string>
     <string name="search_offline_geo_error">Geo-Intent \'%s\' konnte nicht analysiert werden.</string>
     <string name="shared_string_app_default_w_val">App-Standard (%s)</string>
     <string name="no_recalculation_setting">Neuberechnung deaktivieren</string>
-    <string name="route_recalculation_dist_title">Minimale Entfernung zum Neuberechnen der Route</string>
-    <string name="route_recalculation_dist_descr">Die Route wird neu berechnet, wenn der Abstand zur Route länger ist als der angegebene Parameter</string>
+    <string name="route_recalculation_dist_title">Mindestabstand für Neuberechnung der Route</string>
+    <string name="route_recalculation_dist_descr">Die Route wird neu berechnet, wenn der Abstand zur Route größer ist als der festgelegte Wert</string>
     <string name="profile_type_custom_string">Benutzerdefiniertes Profil</string>
     <string name="shared_string_angle_param">Winkel: %s°</string>
     <string name="shared_string_angle">Winkel</string>
@@ -3562,16 +3562,53 @@ Lon %2$s</string>
     <string name="replace_all_desc">Aktuelle Elemente werden durch Elemente aus der Datei ersetzt</string>
     <string name="replace_all">Alle ersetzen</string>
     <string name="keep_both">Beide behalten</string>
-    <string name="keep_both_desc">Importierte Elemente werden mit Prefix hinzugefügt</string>
+    <string name="keep_both_desc">Importierte Elemente werden mit Präfix hinzugefügt</string>
     <string name="import_duplicates_description">OsmAnd verfügt bereits über Elemente mit denselben Namen wie die importierten.
 \n
 \nWählen Sie eine Aktion aus.</string>
     <string name="import_duplicates_title">Einige Elemente sind bereits vorhanden</string>
-    <string name="select_data_to_import">Wählen Sie die zu importierenden Daten aus.</string>
+    <string name="select_data_to_import">Wählen Sie die zu importierenden Daten.</string>
     <string name="shared_string_rendering_style">Darstellungsstil</string>
     <string name="restore_all_profile_settings_descr">Alle Profileinstellungen werden nach dem Erstellen/Importieren dieses Profils wieder in ihren ursprünglichen Zustand versetzt.</string>
     <string name="restore_all_profile_settings">Alle Profileinstellungen wiederherstellen\?</string>
     <string name="saving_new_profile">Neues Profil wird gespeichert</string>
     <string name="profile_backup_failed">Konnte das Profil nicht sichern.</string>
     <string name="import_rendering_file">Rendering-Datei importieren</string>
+    <string name="importing_from">Daten aus %1$s importieren</string>
+    <string name="shared_string_importing">Importieren</string>
+    <string name="checking_for_duplicate_description">OsmAnd überprüft %1$s auf Duplikate mit bereits vorhandenen Objekten in der Anwendung.
+\n
+\nDas kann einige Zeit dauern.</string>
+    <string name="items_added">Elemente hinzugefügt</string>
+    <string name="shared_string_import_complete">Import abgeschlossen</string>
+    <string name="clear_recorded_data_warning">Sind Sie sicher, dass Sie die aufgezeichneten Daten löschen möchten\?</string>
+    <string name="select_distance_route_will_recalc">Wählen Sie die Entfernung, nach der die Route neu berechnet wird.</string>
+    <string name="recalculate_route_in_deviation">Neuberechnung der Route im Falle einer Abweichung</string>
+    <string name="recalculate_route_distance_promo">Die Route wird neu berechnet, wenn die Entfernung von der Route zur aktuellen Position größer als der ausgewählte Wert ist.</string>
+    <string name="import_complete_description">Alle Daten aus %1$s werden importiert. Sie können die Schaltflächen unten verwenden, um den benötigten Teil der Anwendung zu öffnen, um sie zu verwalten.</string>
+    <string name="shared_string_square">Quadrat</string>
+    <string name="shared_string_rhomb">Raute</string>
+    <string name="shared_string_circle">Kreis</string>
+    <string name="select_shape">Form auswählen</string>
+    <string name="select_group">Gruppe auswählen</string>
+    <string name="add_description">Beschreibung hinzufügen</string>
+    <string name="delete_description">Beschreibung löschen</string>
+    <string name="quick_action_terrain_descr">Eine Schaltfläche zum Ein- und Ausblenden der Geländeebene auf der Karte.</string>
+    <string name="quick_action_terrain_show">Gelände einblenden</string>
+    <string name="quick_action_terrain_hide">Gelände ausblenden</string>
+    <string name="quick_action_show_hide_terrain">Gelände ein-/ausblenden</string>
+    <string name="shared_string_hillshade">Schummerung</string>
+    <string name="shared_string_zoom_levels">Zoomstufen</string>
+    <string name="shared_string_transparency">Transparenz</string>
+    <string name="terrain_slider_description">Stellen Sie die minimale und maximale Zoomstufe ein, bei der die Ebene angezeigt wird.</string>
+    <string name="shared_string_terrain">Gelände</string>
+    <string name="download_slope_maps">Hänge</string>
+    <string name="terrain_empty_state_text">Aktivieren Sie diese Option, um die Schatten- oder Hangkarte anzuzeigen. Weitere Informationen zu diesen Kartentypen finden Sie auf unserer Website</string>
+    <string name="shared_string_legend">Legende</string>
+    <string name="slope_read_more">Lesen Sie mehr über Hänge in %1$s.</string>
+    <string name="slope_download_description">Zusätzliche Karten sind erforderlich, um Hänge auf der Karte anzuzeigen.</string>
+    <string name="hillshade_download_description">Für die Darstellung der Schummerung werden zusätzliche Karten benötigt.</string>
+    <string name="shared_string_min">Min</string>
+    <string name="hillshade_description">Schummerungs-Karte mit dunklen Schattierungen zur Darstellung von Hängen, Gipfeln und Niederungen.</string>
+    <string name="n_items_of_z">%1$s von %2$s</string>
 </resources>

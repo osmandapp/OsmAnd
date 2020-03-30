@@ -45,6 +45,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.RasterMapMenu;
+import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
@@ -678,5 +679,12 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 	public interface OnMapSelectedCallback {
 		void onMapSelected(boolean canceled);
+	}
+
+	@Override
+	protected void registerQuickActionTypes(List<QuickActionType> quickActionTypes) {
+		quickActionTypes.add(MapSourceAction.TYPE);
+		quickActionTypes.add(MapOverlayAction.TYPE);
+		quickActionTypes.add(MapUnderlayAction.TYPE);
 	}
 }

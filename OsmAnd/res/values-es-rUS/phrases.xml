@@ -3812,4 +3812,17 @@
     <string name="poi_tactile_paving_contrasted">Contrastado</string>
     <string name="poi_tactile_paving_primitive">Primitivo</string>
     <string name="poi_tactile_paving_incorrect">Incorrecto</string>
+    <string name="poi_seamark_water_level_part_submerged">Nivel del agua: parcialmente sumergido</string>
+    <string name="poi_seamark_water_level_submerged">Nivel del agua: sumergido</string>
+    <string name="poi_seamark_water_level_dry">Nivel de agua: seco</string>
+    <string name="poi_seamark_water_level_covers">Nivel del agua: cubierto</string>
+    <string name="poi_seamark_water_level_awash">Nivel del agua: inundado</string>
+    <string name="poi_seamark_water_level_floods">Nivel del agua: inundaciones</string>
+    <string name="poi_seamark_water_level_floating">Nivel del agua: flotante</string>
+    <string name="poi_seamark_water_level_above_mwl">Nivel del agua: por encima del nivel medio del agua</string>
+    <string name="poi_seamark_water_level_below_mwl">Nivel del agua: por debajo del nivel medio del agua</string>
+    <string name="poi_seamark_obstruction">Obstrucción</string>
+    <string name="poi_drinking_water_refill_yes">Recarga de agua potable: sí</string>
+    <string name="poi_drinking_water_refill_no">Recarga de agua potable: no</string>
+    <string name="poi_drinking_water_refill_network">Red de recarga de agua potable</string>
 </resources>

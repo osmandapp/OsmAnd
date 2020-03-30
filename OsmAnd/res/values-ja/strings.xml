@@ -1632,7 +1632,7 @@ POIの更新は利用できません</string>
     <string name="rate_this_app">アプリを評価</string>
     <string name="rate_this_app_long">Google PlayでOsmAndの評価をお願いします</string>
     <string name="user_hates_app_get_feedback">理由を教えてください。</string>
-    <string name="user_hates_app_get_feedback_long">提案があれば教えてください。</string>
+    <string name="user_hates_app_get_feedback_long">詳細な理由や提案がありましたら教えていただけると幸いです。</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">所属ネットワークに応じたカラー変更</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMCのハイキングシンボルカラー</string>
     <string name="traffic_warning_hazard">被災域</string>
@@ -2084,7 +2084,7 @@ POIの更新は利用できません</string>
     <string name="gpx_no_tracks_title">フォルダ内に経路データが存在しません</string>
     <string name="gpx_no_tracks_title_folder">以下フォルダーにトラックを追加することが可能です</string>
     <string name="gpx_add_track">経路を追加</string>
-    <string name="gpx_appearance">表示形式</string>
+    <string name="shared_string_appearance">表示形式</string>
     <string name="max_speed">最大速度</string>
     <string name="average_speed">平均速度</string>
     <string name="shared_string_time_moving">移動時間</string>
@@ -3412,7 +3412,7 @@ POIの更新は利用できません</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="select_navigation_icon">移動中の位置アイコン</string>
     <string name="select_map_icon">静止中の位置アイコン</string>
-    <string name="delete_profiles_descr">[適用]をタップすると、プロファイルが完全に削除されます。</string>
+    <string name="delete_profiles_descr">[決定]をタップすると、プロファイルが完全に削除されます。</string>
     <string name="master_profile">マスタープロファイル</string>
     <string name="select_color">プロファイルの色</string>
     <string name="edit_profiles_descr">OsmAndの標準プロファイルは削除できませんが、前の画面でそれらを無効にしたり、リストの下の方へ移動させることはできます。</string>
@@ -3479,7 +3479,7 @@ POIの更新は利用できません</string>
     <string name="multimedia_photo_play_sound">カメラシャッター音</string>
     <string name="osm_authorization_success">認証に成功しました</string>
     <string name="rearrange_categories">カテゴリーの並べ替え</string>
-    <string name="create_custom_categories_list_promo">カスタムカテゴリーを含め、不要なカテゴリーを非表示にしたりリストの順序を変更できます。リストはプロファイルと同様インポート＆エクスポートができます。</string>
+    <string name="create_custom_categories_list_promo">リストの並び順を変更したり、不要なカテゴリを非表示にしたりするほか、プロファイルデータをインポートまたはエクスポートすることもできます。</string>
     <string name="add_new_custom_category_button_promo">一つあるいは複数のカテゴリーを選択して、新しいカスタムカテゴリーを追加できます。</string>
     <string name="shared_string_available">利用可</string>
     <string name="add_custom_category">カスタムカテゴリーを追加</string>
@@ -3500,7 +3500,7 @@ POIの更新は利用できません</string>
     <string name="copy_coordinates">座標をコピー</string>
     <string name="routing_profile_direct_to">直接指示</string>
     <string name="of">%2$d中の%1$d</string>
-    <string name="button_rate">レート</string>
+    <string name="button_rate">評価する</string>
     <string name="release_3_6">• プロファイル：表示順序、マップ画面で表示されるアイコン、ベースプロファイルすべての設定などを変更したり、初期状態に戻すことが可能に 
 \n 
 \n• ナビゲーションに出口番号(ジャンクションや高速道路の進路や出口を示す番号) を追加 
@@ -3551,4 +3551,60 @@ POIの更新は利用できません</string>
     <string name="no_recalculation_setting">再計算の無効化</string>
     <string name="route_recalculation_dist_title">ルートを再計算する最小距離</string>
     <string name="route_recalculation_dist_descr">距離が指定された値よりも長い場合にルートが再計算されるようになります</string>
+    <string name="recalculate_route_distance_promo">ルートから現在地までの距離が選択された値よりも大きい場合、ルートが再計算されます。</string>
+    <string name="select_distance_route_will_recalc">ルートを再計算する距離を選択します。</string>
+    <string name="recalculate_route_in_deviation">ルート再計算の逸脱しきい値</string>
+    <string name="shared_string_poi_types">POIの種類</string>
+    <string name="shared_string_nothing_selected">何も選択されていません</string>
+    <string name="shared_string_quick_actions">クイックアクション</string>
+    <string name="shared_string_profiles">プロファイル</string>
+    <string name="listed_exist">リストされた%1$sは、OsmAndに既に存在します。</string>
+    <string name="replace_all_desc">現在のアイテムは、ファイル内のアイテムに置き換えられます</string>
+    <string name="replace_all">全て置き換える</string>
+    <string name="keep_both">両方を維持する</string>
+    <string name="keep_both_desc">インポートアイテムはデータ先頭に追加されます</string>
+    <string name="import_duplicates_description">OsmAndには、すでにインポートされたものと同じ名前の項目があります。
+\n
+\n対応を選択してください。</string>
+    <string name="import_duplicates_title">一部のアイテムは既に存在します</string>
+    <string name="select_data_to_import">インポートするデータを選択してください。</string>
+    <string name="shared_string_rendering_style">レンダリングのスタイル</string>
+    <string name="import_rendering_file">レンダリングファイルのインポート</string>
+    <string name="restore_all_profile_settings_descr">プロファイルを作成/インポートすると、すべてのプロファイル設定が復元されます。</string>
+    <string name="restore_all_profile_settings">すべてのプロファイル設定を復元しますか？</string>
+    <string name="saving_new_profile">新しいプロファイルの保存</string>
+    <string name="profile_backup_failed">プロファイルのバックアップができませんでした。</string>
+    <string name="clear_recorded_data_warning">記録済みデータを消去してもよいですか？</string>
+    <string name="importing_from">%1$sからデータをインポート</string>
+    <string name="shared_string_importing">インポート中</string>
+    <string name="checking_for_duplicate_description">OsmAnd側でアプリケーション内の既存の項目と重複していないか、%1$sをチェックしています。
+\n
+\n少し時間がかかるかもしれません。</string>
+    <string name="items_added">追加された項目</string>
+    <string name="shared_string_import_complete">インポート完了</string>
+    <string name="import_complete_description">%1$sから全データがインポートされました。以下のボタンよりアプリケーションの管理が可能になります。</string>
+    <string name="shared_string_preparing">準備</string>
+    <string name="shared_string_terrain">地形</string>
+    <string name="hillshade_description">陰影起伏図は斜面、山頂、谷などを表示するために濃淡を利用して分かりやすく表現します。</string>
+    <string name="slope_description">勾配は地形を色分けで可視化したものです。</string>
+    <string name="terrain_slider_description">レイヤーで表示されるズームレベルの最小値と最大値を設定します。</string>
+    <string name="terrain_empty_state_text">陰影を利用した丘陵や斜面のマップを表示することができます。この地図の種類についての詳細はこちらのサイトをご覧ください。</string>
+    <string name="slope_download_description">マップ上に勾配を表示するためには、追加のマップが必要です。</string>
+    <string name="slope_read_more">%1$sの勾配について、より詳しく知ることができます。</string>
+    <string name="shared_string_transparency">透過度</string>
+    <string name="shared_string_zoom_levels">ズームレベル</string>
+    <string name="shared_string_hillshade">陰影起伏図</string>
+    <string name="download_slope_maps">勾配</string>
+    <string name="quick_action_show_hide_terrain">地形を表示/非表示</string>
+    <string name="quick_action_terrain_hide">地形を非表示</string>
+    <string name="quick_action_terrain_show">地形を表示</string>
+    <string name="quick_action_terrain_descr">マップ上の地形レイヤーの表示/非表示を切り替えるボタンです。</string>
+    <string name="delete_description">説明を削除</string>
+    <string name="add_description">説明を追加</string>
+    <string name="select_group">グループを選択</string>
+    <string name="select_shape">形状を選択</string>
+    <string name="shared_string_circle">円形</string>
+    <string name="shared_string_square">四角形</string>
+    <string name="shared_string_rhomb">ひし形</string>
+    <string name="shared_string_min">最小</string>
 </resources>

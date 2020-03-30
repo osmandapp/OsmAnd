@@ -109,14 +109,14 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		return R.string.shared_string_cancel;
 	}
 
-	private View getCustomButtonView(boolean checked) {
+	protected View getCustomButtonView(boolean checked) {
 		View customView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.bottom_sheet_item_preference_switch, null);
 		updateCustomButtonView(customView, checked);
 
 		return customView;
 	}
 
-	private void updateCustomButtonView(View customView, boolean checked) {
+	protected void updateCustomButtonView(View customView, boolean checked) {
 		OsmandApplication app = requiredMyApplication();
 		View buttonView = customView.findViewById(R.id.button_container);
 

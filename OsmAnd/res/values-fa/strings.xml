@@ -753,8 +753,8 @@
     <string name="indexing_poi">نمایه‌کردن POI‏…</string>
     <string name="indexing_transport">در حال نمایه‌کردن حمل‌ونقل…</string>
     <string name="shared_string_io_error">خطای ورودی/خروجی</string>
-    <string name="km">km</string>
-    <string name="m">m</string>
+    <string name="km">ک‌م</string>
+    <string name="m">متر</string>
     <string name="map_tile_source">منبع کاشی‌های نقشه</string>
     <string name="mark_point">هدف</string>
     <string name="speak_speed_limit">سرعت مجاز</string>
@@ -1599,7 +1599,7 @@
     <string name="versions_item">نسخه‌ها</string>
     <string name="feedback">بازخورد</string>
     <string name="contact_us">تماس</string>
-    <string name="map_legend">علائم نقشه</string>
+    <string name="map_legend">کلید نقشه</string>
     <string name="save_poi_without_poi_type_message">‏POI را بدون مشخص‌کردن نوعش ذخیره می‌کنید؟</string>
     <string name="navigation_item_description">تنظیمات ناوبری را انجام دهید.</string>
     <string name="planning_trip_item">طرح‌ریزی سفر</string>
@@ -1828,7 +1828,7 @@
     <string name="average_altitude">میانگین ارتفاع</string>
     <string name="total_distance">مسافت کل</string>
     <string name="routing_attr_height_obstacles_name">استفاده از داده‌های ارتفاعی</string>
-    <string name="routing_attr_height_obstacles_description">فاکتور ارتفاع‌دهی عوارض (با استفاده از داده‌های SRTM،‏ ASTER و EU-DEM).</string>
+    <string name="routing_attr_height_obstacles_description">فاکتور ارتفاع‌دهی عارضه‌ها (با استفاده از داده‌های SRTM،‏ ASTER و EU-DEM).</string>
     <string name="rendering_attr_depthContours_description">نمایش نقاط و منحنی‌های میزان عمقی.</string>
     <string name="rendering_attr_depthContours_name">منحنی‌های میزان عمق دریا</string>
     <string name="rendering_attr_contourDensity_description">تراکم منحنی میزان</string>
@@ -1842,7 +1842,7 @@
     <string name="upload_poi">آپلود POI</string>
     <string name="route_calculation">محاسبهٔ مسیر</string>
     <string name="gpx_add_track">بیشتر بیفزایید…</string>
-    <string name="gpx_appearance">ظاهر</string>
+    <string name="shared_string_appearance">ظاهر</string>
     <string name="trip_rec_notification_settings">روشن‌کردن ضبط فوری</string>
     <string name="shared_string_notifications">اعلان‌ها</string>
     <string name="shared_string_continue">ادامه</string>
@@ -2403,7 +2403,7 @@
     <string name="saved_at_time">در %1$s ذخیره شد</string>
     <string name="quick_action_interim_dialog">کادری برای تنظیم آن نشان بده</string>
     <string name="quick_action_add_create_items">دکمه‌هایی را اضافه کنید</string>
-    <string name="quick_action_page_list_descr">دکمه‌ای برای چرخیدن بین یکی از موارد موجود در لیست زیر.</string>
+    <string name="quick_action_page_list_descr">دکمه‌ای برای گردش در لیست زیر.</string>
     <string name="quick_action_map_style_action">افزودن یک سبک نقشه</string>
     <string name="empty_state_my_tracks">فایل GPX اضافه کنید</string>
     <string name="empty_state_my_tracks_desc">فایل GPX درون‌برد کنید یا رد خود را ضبط کنید.</string>
@@ -3047,7 +3047,8 @@
     <string name="files_moved">%1$d فایل منتقل شد (%2$s).</string>
     <string name="files_copied">%1$d فایل کپی شد (%2$s).</string>
     <string name="files_failed">نمی‌توان %1$d فایل (%2$s) را کپی کرد.</string>
-    <string name="files_present">%1$d فایل (%2$s) در مکان قبلی \'%3$s\' وجود دارد.</string>
+    <string name="files_present">%1$d فایل (%2$s) در مکان قبلی وجود دارد.
+\n\'%3$s\'</string>
     <string name="move_maps">نقشه‌ها را منتقل کن</string>
     <string name="dont_move_maps">منتقل نکن</string>
     <string name="public_transport_ped_route_title">مسیر پیاده حدود %1$s است و احتمالاً از حمل‌ونقل عمومی سریع‌تر باشد</string>
@@ -3507,7 +3508,7 @@
     <string name="multimedia_photo_play_sound">صدای شاتر دوربین</string>
     <string name="osm_authorization_success">احراز هویت موفقیت‌آمیز بود</string>
     <string name="rearrange_categories">مرتب‌سازی دسته‌ها</string>
-    <string name="create_custom_categories_list_promo">می‌توانید دسته‌های سفارشی بیفزایید، دسته‌های غیرلازم را مخفی کنید و ترتیب لیست را تغییر دهید. لیست را می‌توانید همراه پروفایل‌ها برون‌برد یا درون‌برد کنید.</string>
+    <string name="create_custom_categories_list_promo">ترتیب لیست را تغییر دهید، دسته‌های غیرلازم را مخفی کنید. می‌توانید همهٔ تغییرات را همراه پروفایل‌ها برون‌برد یا درون‌برد کنید.</string>
     <string name="add_new_custom_category_button_promo">با انتخاب یک یا چند دستهٔ موردنیاز می‌توانید یک دستهٔ سفارشیِ تازه بیفزایید.</string>
     <string name="reset_to_default_category_button_promo">بازنشانی به پیشفرض، ترتیب را به حالت اولیهٔ پس از نصب برمی‌گرداند.</string>
     <string name="add_custom_category">افزودن دستهٔ سفارشی</string>
@@ -3518,7 +3519,7 @@
     <string name="sunset_at">غروب خورشید در %1$s</string>
     <string name="sunrise_at">طلوع خورشید در %1$s</string>
     <string name="accessibility_mode_disabled">حالت دسترسی آسان در دستگاه شما غیرفعال است.</string>
-    <string name="use_system_screen_timeout">از زمان روشن‌ماندن صفحهٔ دستگاه استفاده شود</string>
+    <string name="use_system_screen_timeout">استفاده از زمان خاموش‌شدن صفحهٔ دستگاه</string>
     <string name="use_system_screen_timeout_promo">پیشفرض غیرفعال است، اگر OsmAnd در پیش‌زمینه اجرا باشد صفحه خاموش نمی‌شود.
 \n
 \nاگر فعال باشد، OsmAnd از تنظیمات دستگاه برای زمان خاموش‌شدن صفحه استفاده می‌کند.</string>
@@ -3561,9 +3562,9 @@
     <string name="shared_string_menu">منو</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">مسیریابی</string>
-    <string name="shared_string_include_data">شامل دادهٔ بیشتر</string>
-    <string name="import_profile_dialog_description">پروفایلِ درون‌بردی حاوی دادهٔ بیشتری است. «درون‌برد» را بزنید تا فقط دادهٔ پروفایل درون‌برد شود. «دادهٔ بیشتر» را انتخاب کنید تا آن را نیز درون‌برد کنید.</string>
-    <string name="export_profile_dialog_description">می‌توانید دادهٔ بیشتری را انتخاب کنید تا همراه با پروفایل برون‌برد کنید.</string>
+    <string name="shared_string_include_data">شامل دادهٔ افزوده</string>
+    <string name="import_profile_dialog_description">پروفایلِ درون‌بردی حاوی دادهٔ افزوده است. «درون‌برد» را بزنید تا فقط دادهٔ پروفایل درون‌برد شود. «دادهٔ افزوده» را انتخاب کنید تا آن را نیز درون‌برد کنید.</string>
+    <string name="export_profile_dialog_description">می‌توانید همراه پروفایل، دادهٔ افزوده را نیز برون‌برد کنید.</string>
     <string name="index_name_antarctica">جنوبگان</string>
     <string name="accessibility_announce">اعلام</string>
     <string name="shared_string_app_default_w_val">پیشفرض برنامه (%s)</string>
@@ -3594,4 +3595,44 @@
     <string name="restore_all_profile_settings">همهٔ تنظیمات پروفایل بازگردد؟</string>
     <string name="saving_new_profile">در حال ذخیرهٔ پروفایل تازه</string>
     <string name="profile_backup_failed">نمی‌توان از پروفایل پشتیبان گرفت.</string>
+    <string name="clear_recorded_data_warning">آیا از پاک‌کردن دادهٔ ضبط‌شده مطمئن هستید؟</string>
+    <string name="importing_from">درون‌برد داده از %1$s</string>
+    <string name="shared_string_importing">در حال درون‌برد</string>
+    <string name="shared_string_import_complete">درون‌برد کامل شد</string>
+    <string name="import_complete_description">همهٔ داده از %1$s درون‌برد شد. با استفاده از دکمه‌های زیر می‌توانید بخش موردنیاز برنامه را برای مدیریت آن باز کنید.</string>
+    <string name="shared_string_poi_types">انواع POI</string>
+    <string name="listed_exist">%1$s که در زیر آمده، هم‌اکنون در OsmAnd وجود دارد.</string>
+    <string name="checking_for_duplicate_description">‏OsmAnd در حال بررسی ‏%1$s برای چیزهای تکراری موجود در برنامه است.
+\n 
+\nممکن است قدری زمان ببرد.</string>
+    <string name="items_added">افزوده‌ها</string>
+    <string name="recalculate_route_distance_promo">اگر فاصلهٔ مسیر تا موقعیت کنونی بیش از مقدار انتخابی باشد مسیر دوباره محاسبه می‌شود.</string>
+    <string name="select_distance_route_will_recalc">فاصله‌ای که با گذشتن از آن، مسیریابی مجدد انجام شود چقدر باشد.</string>
+    <string name="recalculate_route_in_deviation">مسیریابی مجدد در صورت خروج از مسیر</string>
+    <string name="slope_description">تصویرسازی رنگین روی ناهمواری‌ها شیب را نشان می‌دهد.</string>
+    <string name="shared_string_square">مربع</string>
+    <string name="shared_string_min">حداقل</string>
+    <string name="shared_string_terrain">ناهمواری‌ها</string>
+    <string name="hillshade_description">نقشهٔ سایه‌روشن که شیب‌ها، بلندی‌ها و پستی‌ها را با استفاده از سایه‌های تیره نمایان می‌کند.</string>
+    <string name="terrain_slider_description">کمینه و بیشینهٔ زوم برای نمایش لایه را مشخص کنید.</string>
+    <string name="hillshade_download_description">برای مشاهدهٔ سایه‌روشن‌ها روی نقشه باید نقشهٔ دیگری را نیز دانلود کنید.</string>
+    <string name="slope_download_description">برای مشاهدهٔ شیب‌ها روی نقشه باید نقشهٔ دیگری را نیز دانلود کنید.</string>
+    <string name="slope_read_more">دربارهٔ شیب‌ها می‌توانید در %1$s بیشتر بخوانید.</string>
+    <string name="shared_string_transparency">شفافیت</string>
+    <string name="shared_string_zoom_levels">زوم نمایش</string>
+    <string name="shared_string_legend">کلید</string>
+    <string name="terrain_empty_state_text">فعال کنید تا نقشهٔ سایه‌روشن یا شیب را ببینید. در وبسایت ما دربارهٔ این نقشه‌ها بخوانید</string>
+    <string name="shared_string_hillshade">سایه‌روشن</string>
+    <string name="n_items_of_z">%1$s از %2$s</string>
+    <string name="download_slope_maps">شیب‌ها</string>
+    <string name="quick_action_show_hide_terrain">آشکار/پنهان کردن ناهمواری‌ها</string>
+    <string name="quick_action_terrain_hide">پنهان‌کردن ناهمواری‌ها</string>
+    <string name="quick_action_terrain_show">نمایش ناهمواری‌ها</string>
+    <string name="quick_action_terrain_descr">دکمه‌ای برای آشکار یا پنهان کردن لایهٔ ناهمواری‌ها روی نقشه.</string>
+    <string name="shared_string_circle">دایره</string>
+    <string name="shared_string_rhomb">لوزی</string>
+    <string name="delete_description">حذف توضیحات</string>
+    <string name="add_description">افزودن توضیحات</string>
+    <string name="select_group">انتخاب گروه</string>
+    <string name="select_shape">انتخاب شکل</string>
 </resources>

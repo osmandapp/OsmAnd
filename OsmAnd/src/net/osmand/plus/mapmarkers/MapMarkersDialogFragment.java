@@ -25,6 +25,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.LockableViewPager;
@@ -150,7 +151,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 		View mainView = inflater.inflate(R.layout.fragment_map_markers_dialog, container);
 
 		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.map_markers_toolbar);
-		Drawable icArrowBack = getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back, 
+		Drawable icArrowBack = getMyApplication().getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(getContext()),
 				lightTheme ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark);
 		toolbar.setNavigationIcon(icArrowBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);

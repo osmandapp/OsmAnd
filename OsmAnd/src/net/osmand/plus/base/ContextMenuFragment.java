@@ -937,11 +937,9 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		if (isSingleFragment()) {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				try {
-					activity.getSupportFragmentManager().popBackStack(getFragmentTag(),
-							FragmentManager.POP_BACK_STACK_INCLUSIVE);
-				} catch (Exception e) {
-					//
+				FragmentManager fragmentManager = activity.getSupportFragmentManager();
+				if (!fragmentManager.isStateSaved()) {
+					fragmentManager.popBackStack(getFragmentTag(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
 				}
 			}
 		}

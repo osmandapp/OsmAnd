@@ -181,8 +181,9 @@ public class ItemViewHolder {
 			descrTextView.setVisibility(View.VISIBLE);
 			if (indexItem.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE && !depthContoursPurchased) {
 				descrTextView.setText(context.getString(R.string.depth_contour_descr));
-			} else if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE ||
-					indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) && srtmDisabled) {
+			} else if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
+					|| indexItem.getType() == DownloadActivityType.HILLSHADE_FILE
+					|| indexItem.getType() == DownloadActivityType.SLOPE_FILE) && srtmDisabled) {
 				if(showTypeInName) {
 					descrTextView.setText("");
 				} else {
@@ -307,8 +308,9 @@ public class ItemViewHolder {
 		if (indexItem.getBasename().toLowerCase().equals(DownloadResources.WORLD_SEAMARKS_KEY)
 				&& nauticalPluginDisabled) {
 			clickAction = RightButtonAction.ASK_FOR_SEAMARKS_PLUGIN;
-		} else if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE ||
-				indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) && srtmDisabled) {
+		} else if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
+				|| indexItem.getType() == DownloadActivityType.HILLSHADE_FILE
+				|| indexItem.getType() == DownloadActivityType.SLOPE_FILE) && srtmDisabled) {
 			if (srtmNeedsInstallation) {
 				clickAction = RightButtonAction.ASK_FOR_SRTM_PLUGIN_PURCHASE;
 			} else {
@@ -391,6 +393,8 @@ public class ItemViewHolder {
 				public boolean onMenuItemClick(MenuItem item) {
 					LocalIndexType tp = LocalIndexType.MAP_DATA;
 					if (indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) {
+						tp = LocalIndexType.TILES_DATA;
+					} else if (indexItem.getType() == DownloadActivityType.SLOPE_FILE) {
 						tp = LocalIndexType.TILES_DATA;
 					} else if (indexItem.getType() == DownloadActivityType.ROADS_FILE) {
 						tp = LocalIndexType.MAP_DATA;

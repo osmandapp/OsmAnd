@@ -462,10 +462,11 @@ public class RoutingOptionsHelper {
 	}
 
 	public List<LocalRoutingParameter> getGpxRouterParameters(ApplicationMode am) {
+		RoutingHelper routingHelper = app.getRoutingHelper();
 		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>();
-		RouteProvider.GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
+		RouteProvider.GPXRouteParamsBuilder rparams = routingHelper.getCurrentGPXRoute();
 		boolean osmandRouter = am.getRouteService() == RouteProvider.RouteService.OSMAND;
-		if (rparams != null && osmandRouter) {
+		if (rparams != null && !routingHelper.isCurrentGPXRouteV2() && osmandRouter) {
 			GPXUtilities.GPXFile fl = rparams.getFile();
 			if (fl.hasRtePt()) {
 				list.add(new OtherLocalRoutingParameter(R.string.use_points_as_intermediates,

@@ -221,7 +221,7 @@ public class QuickActionsWidget extends LinearLayout {
 
             if (i + (position * ELEMENT_PER_PAGE) < actions.size()) {
 
-                final QuickAction action = QuickActionFactory.produceAction(
+                final QuickAction action = QuickActionRegistry.produceAction(
                         actions.get(i + (position * ELEMENT_PER_PAGE)));
 
                 ((ImageView) view.findViewById(imageView))

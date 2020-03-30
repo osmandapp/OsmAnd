@@ -31,13 +31,9 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.quickaction.CreateEditActionDialog;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.quickaction.QuickActionFactory;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.quickaction.SwitchableAction;
-import net.osmand.plus.quickaction.actions.MapOverlayAction;
-import net.osmand.plus.quickaction.actions.MapSourceAction;
 import net.osmand.plus.quickaction.actions.MapStyleAction;
-import net.osmand.plus.quickaction.actions.MapUnderlayAction;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.render.RenderingRulesStorage;
 
@@ -71,7 +67,7 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 
 		QuickActionRegistry quickActionRegistry = app.getQuickActionRegistry();
 		action = quickActionRegistry.getQuickAction(id);
-		action = QuickActionFactory.produceAction(action);
+		action = QuickActionRegistry.produceAction(action);
 		if (action == null) {
 			return;
 		}
@@ -79,22 +75,7 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 		if (savedInstanceState != null) {
 			selectedItem = savedInstanceState.getString(SELECTED_ITEM_KEY);
 		} else {
-			if (action instanceof MapStyleAction) {
-				RenderingRulesStorage current = app.getRendererRegistry().getCurrentSelectedRenderer();
-				if (current != null) {
-					selectedItem = current.getName();
-				} else {
-					selectedItem = RendererRegistry.DEFAULT_RENDER;
-				}
-			} else if (action instanceof MapSourceAction) {
-				selectedItem = settings.MAP_ONLINE_DATA.get()
-						? settings.MAP_TILE_SOURCES.get()
-						: MapSourceAction.LAYER_OSM_VECTOR;
-			} else if (action instanceof MapUnderlayAction) {
-				selectedItem = settings.MAP_UNDERLAY.get();
-			} else if (action instanceof MapOverlayAction) {
-				selectedItem = settings.MAP_OVERLAY.get();
-			}
+			selectedItem  = ((SwitchableAction<?>) action).getSelectedItem(app);
 		}
 		rbColorList = AndroidUtils.createCheckedColorStateList(app, R.color.icon_color_default_light, getActiveColorId());
 

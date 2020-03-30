@@ -798,7 +798,7 @@
     <string name="search_map_hint">Şəhər və ya ölkə axtarın</string>
     <string name="upload_poi">POI yüklə</string>
     <string name="route_calculation">Marşrut hesablanması</string>
-    <string name="gpx_appearance">Görünüş</string>
+    <string name="shared_string_appearance">Görünüş</string>
     <string name="shared_string_paused">Fasilə verildi</string>
     <string name="shared_string_trip">Səyahət</string>
     <string name="rendering_attr_contourColorScheme_description">Kontur xətlərinin rəng sxemi</string>

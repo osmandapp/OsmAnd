@@ -140,6 +140,8 @@ public class IndexItem implements Comparable<IndexItem> {
 		String basename;
 		if (type == DownloadActivityType.HILLSHADE_FILE) {
 			basename = (FileNameTranslationHelper.HILL_SHADE + getBasename()).replace("_", " ");
+		} else if (type == DownloadActivityType.SLOPE_FILE) {
+			basename = (FileNameTranslationHelper.SLOPE + getBasename()).replace('_', ' ');
 		} else {
 			basename = getBasename();
 		}
@@ -181,7 +183,9 @@ public class IndexItem implements Comparable<IndexItem> {
 	}
 	
 	public boolean isOutdated() {
-		return outdated && getType() != DownloadActivityType.HILLSHADE_FILE ;
+		return outdated
+				&& getType() != DownloadActivityType.HILLSHADE_FILE
+				&& getType() != DownloadActivityType.SLOPE_FILE;
 	}
 	
 	public void setOutdated(boolean outdated) {

@@ -16,7 +16,6 @@
 		android:focusable="false"
 		android:groupIndicator="@android:color/transparent"
 		android:listSelector="@android:color/transparent"
-		android:paddingBottom="@dimen/dialog_button_ex_height"
 		osmand:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 	<LinearLayout
@@ -127,6 +126,18 @@
 			</androidx.appcompat.widget.Toolbar>
 
 		</com.google.android.material.appbar.CollapsingToolbarLayout>
+
+		<me.zhanghai.android.materialprogressbar.MaterialProgressBar
+			android:id="@+id/progress_bar"
+			style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="5dp"
+			android:visibility="gone"
+			android:indeterminate="true"
+			osmand:mpb_progressStyle="horizontal"
+			osmand:mpb_setBothDrawables="true"
+			osmand:mpb_useIntrinsicPadding="false"
+			tools:visibility="visible" />
 
 	</com.google.android.material.appbar.AppBarLayout>
 

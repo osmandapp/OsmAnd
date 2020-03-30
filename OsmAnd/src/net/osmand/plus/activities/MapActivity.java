@@ -136,6 +136,7 @@ import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.settings.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.settings.ConfigureProfileFragment;
 import net.osmand.plus.settings.DataStorageFragment;
+import net.osmand.plus.settings.ImportCompleteFragment;
 import net.osmand.plus.settings.ImportSettingsFragment;
 import net.osmand.plus.settings.ProfileAppearanceFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
@@ -734,6 +735,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			importSettingsFragment.showExitDialog();
 			return;
 		}
+		ImportCompleteFragment importCompleteFragment = getImportCompleteFragment();
+		if (importCompleteFragment != null) {
+			importCompleteFragment.dismissFragment();
+			return;
+		}
 
 		super.onBackPressed();
 	}
@@ -792,8 +798,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		// for voice navigation
 		ApplicationMode routingAppMode = getRoutingHelper().getAppMode();
-		if (routingAppMode != null && settings.AUDIO_STREAM_GUIDANCE.getModeValue(routingAppMode) != null) {
-			setVolumeControlStream(settings.AUDIO_STREAM_GUIDANCE.getModeValue(routingAppMode));
+		if (routingAppMode != null && settings.AUDIO_MANAGER_STREAM.getModeValue(routingAppMode) != null) {
+			setVolumeControlStream(settings.AUDIO_MANAGER_STREAM.getModeValue(routingAppMode));
 		} else {
 			setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		}
@@ -903,7 +909,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 
 		app.getDownloadThread().setUiActivity(this);
-		app.getSettingsHelper().setActivity(this);
 
 		boolean routeWasFinished = routingHelper.isRouteWasFinished();
 		if (routeWasFinished && !DestinationReachedMenu.wasShown()) {
@@ -1128,10 +1133,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void dismissCardDialog() {
-		try {
-			getSupportFragmentManager().popBackStack(ContextMenuCardDialogFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-		} catch (Exception e) {
-			e.printStackTrace();
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		if (!fragmentManager.isStateSaved()) {
+			fragmentManager.popBackStack(ContextMenuCardDialogFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
 	}
 
@@ -1504,7 +1508,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app.getMapMarkersHelper().removeListener(this);
 		app.getRoutingHelper().removeListener(this);
 		app.getDownloadThread().resetUiActivity(this);
-		app.getSettingsHelper().resetActivity(this);
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnPause();
 		}
@@ -2166,10 +2169,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void dismissSettingsScreens() {
-		try {
-			getSupportFragmentManager().popBackStack(DRAWER_SETTINGS_ID + ".new", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-		} catch (Exception e) {
-			e.printStackTrace();
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		if (!fragmentManager.isStateSaved()) {
+			fragmentManager.popBackStack(DRAWER_SETTINGS_ID + ".new", FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
 	}
 
@@ -2453,10 +2455,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return getFragment(ImportSettingsFragment.TAG);
 	}
 
+	public ImportCompleteFragment getImportCompleteFragment() {
+		return getFragment(ImportCompleteFragment.TAG);
+	}
+
 	public void backToConfigureProfileFragment() {
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		int backStackEntryCount = fragmentManager.getBackStackEntryCount();
-		if (backStackEntryCount > 0) {
+		if (backStackEntryCount > 0 && !fragmentManager.isStateSaved()) {
 			BackStackEntry entry = fragmentManager.getBackStackEntryAt(backStackEntryCount - 1);
 			if (ConfigureProfileFragment.TAG.equals(entry.getName())) {
 				fragmentManager.popBackStack();

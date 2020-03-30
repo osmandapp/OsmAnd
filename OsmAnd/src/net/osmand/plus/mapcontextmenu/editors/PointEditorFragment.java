@@ -64,7 +64,8 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 		toolbar.setTitle(getToolbarTitle());
 
 		OsmandApplication app = requireMyApplication();
-		Drawable icBack = app.getUIUtilities().getIcon(R.drawable.ic_arrow_back, !editor.isLight() ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light);
+		Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app),
+				!editor.isLight() ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light);
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setTitleTextColor(getResources().getColor(getResIdFromAttribute(getMapActivity(), R.attr.pstsTextColor)));

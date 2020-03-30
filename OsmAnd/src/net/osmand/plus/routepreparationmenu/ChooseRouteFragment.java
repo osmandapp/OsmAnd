@@ -25,6 +25,8 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -482,8 +484,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	}
 
 	private void buildMenuButtons(@NonNull View view) {
-		View backButton = view.findViewById(R.id.back_button);
-		View backButtonFlow = view.findViewById(R.id.back_button_flow);
+		AppCompatImageView backButton = (AppCompatImageView) view.findViewById(R.id.back_button);
+		AppCompatImageButton backButtonFlow = (AppCompatImageButton) view.findViewById(R.id.back_button_flow);
 		OnClickListener backOnClick = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -492,6 +494,9 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		};
 		backButton.setOnClickListener(backOnClick);
 		backButtonFlow.setOnClickListener(backOnClick);
+		int navigationIconResId = AndroidUtils.getNavigationIconResId(getContext());
+		backButton.setImageResource(navigationIconResId);
+		backButtonFlow.setImageResource(navigationIconResId);
 
 		OnClickListener printOnClick = new OnClickListener() {
 			@Override

@@ -10,9 +10,14 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionType;
 
 public class TakePhotoNoteAction extends QuickAction {
-	public static final int TYPE = 10;
+
+	public static final QuickActionType TYPE = new QuickActionType(10,
+			"photo.note", TakePhotoNoteAction .class).
+			nameRes(R.string.quick_action_take_photo_note).iconRes(R.drawable.ic_action_photo_dark).nonEditable().
+			category(QuickActionType.CREATE_CATEGORY);
 
 	public TakePhotoNoteAction() {
 		super(TYPE);

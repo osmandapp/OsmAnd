@@ -170,9 +170,9 @@
                     android:paddingBottom="3dp"
                     android:paddingLeft="@dimen/context_menu_padding_margin_default"
                     android:paddingRight="@dimen/context_menu_padding_margin_default"
-                    android:paddingTop="3dp"
-	                android:paddingStart="@dimen/context_menu_padding_margin_default"
-	                android:paddingEnd="@dimen/context_menu_padding_margin_default">
+                    android:paddingStart="@dimen/context_menu_padding_margin_default"
+                    android:paddingEnd="@dimen/context_menu_padding_margin_default"
+                    android:paddingTop="3dp">
 
                     <LinearLayout
                         android:id="@+id/additional_info_row"
@@ -197,10 +197,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="top"
-                            android:paddingRight="@dimen/context_menu_padding_margin_small"
+                            android:layout_marginEnd="@dimen/context_menu_padding_margin_small"
+                            android:layout_marginRight="@dimen/context_menu_padding_margin_small"
                             android:paddingTop="1dp"
-                            tools:src="@drawable/ic_action_opening_hour_16"
-	                        android:paddingEnd="@dimen/context_menu_padding_margin_small" />
+                            tools:src="@drawable/ic_action_opening_hour_16" />
 
                         <TextView
                             android:id="@+id/additional_info_text_view"
@@ -263,10 +263,10 @@
                 android:paddingBottom="@dimen/context_menu_padding_margin_small"
 				android:paddingLeft="@dimen/content_padding_half"
 				android:paddingRight="@dimen/content_padding_half"
+                android:paddingStart="@dimen/content_padding_half"
+                android:paddingEnd="@dimen/content_padding_half"
                 android:visibility="gone"
-                tools:visibility="visible"
-	            android:paddingStart="@dimen/content_padding_half"
-	            android:paddingEnd="@dimen/content_padding_half">
+                tools:visibility="visible">
 
 				<include
 					android:id="@+id/title_button_view"
@@ -293,10 +293,10 @@
                 android:paddingBottom="@dimen/context_menu_padding_margin_small"
 				android:paddingLeft="@dimen/content_padding_half"
 				android:paddingRight="@dimen/content_padding_half"
+                android:paddingStart="@dimen/content_padding_half"
+                android:paddingEnd="@dimen/content_padding_half"
                 android:visibility="gone"
-                tools:visibility="visible"
-	            android:paddingStart="@dimen/content_padding_half"
-	            android:paddingEnd="@dimen/content_padding_half">
+                tools:visibility="visible">
 
 				<include
 					android:id="@+id/download_button_left_view"
@@ -323,10 +323,10 @@
                 android:paddingBottom="@dimen/context_menu_padding_margin_small"
 				android:paddingLeft="@dimen/content_padding_half"
 				android:paddingRight="@dimen/content_padding_half"
+                android:paddingStart="@dimen/content_padding_half"
+                android:paddingEnd="@dimen/content_padding_half"
                 android:visibility="gone"
-                tools:visibility="visible"
-	            android:paddingStart="@dimen/content_padding_half"
-	            android:paddingEnd="@dimen/content_padding_half">
+                tools:visibility="visible">
 
 				<include
 					android:id="@+id/title_button_bottom_view"
@@ -368,9 +368,9 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="@dimen/content_padding_small"
+                        android:layout_marginEnd="@dimen/content_padding_small"
                         android:layout_weight="1"
-                        android:orientation="vertical"
-	                    android:layout_marginEnd="@dimen/content_padding_small">
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/progressTitle"
@@ -573,13 +573,13 @@
                     android:gravity="start|center_vertical"
                     android:paddingLeft="@dimen/context_menu_padding_margin_default"
                     android:paddingRight="@dimen/context_menu_padding_margin_default"
+                    android:paddingStart="@dimen/context_menu_padding_margin_default"
+                    android:paddingEnd="@dimen/context_menu_padding_margin_default"
                     android:text="@string/rendering_category_details"
                     android:textAllCaps="true"
                     android:textSize="@dimen/default_desc_text_size"
                     osmand:typeface="@string/font_roboto_medium"
-                    tools:textColor="?attr/contextMenuButtonColor"
-	                android:paddingStart="@dimen/context_menu_padding_margin_default"
-	                android:paddingEnd="@dimen/context_menu_padding_margin_default" />
+                    tools:textColor="?attr/contextMenuButtonColor" />
 
                 <net.osmand.plus.widgets.TextViewEx
                     android:id="@+id/context_menu_directions_button"
@@ -590,13 +590,13 @@
                     android:gravity="end|center_vertical"
                     android:paddingLeft="@dimen/context_menu_padding_margin_default"
                     android:paddingRight="@dimen/context_menu_padding_margin_default"
+                    android:paddingEnd="@dimen/context_menu_padding_margin_default"
+                    android:paddingStart="@dimen/context_menu_padding_margin_default"
                     android:text="@string/get_directions"
                     android:textAllCaps="true"
                     android:textSize="@dimen/default_desc_text_size"
                     osmand:typeface="@string/font_roboto_medium"
-                    tools:textColor="?attr/contextMenuButtonColor"
-	                android:paddingEnd="@dimen/context_menu_padding_margin_default"
-	                android:paddingStart="@dimen/context_menu_padding_margin_default" />
+                    tools:textColor="?attr/contextMenuButtonColor" />
 
             </LinearLayout>
 
@@ -679,31 +679,37 @@
             app:contentInsetLeft="4dp"
             app:contentInsetStart="4dp">
 
-            <ImageView
-                android:id="@+id/context_menu_toolbar_back"
-                android:layout_width="@dimen/list_item_height"
-                android:layout_height="match_parent"
-                android:layout_gravity="start"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/shared_string_collapse"
-                android:scaleType="center"
-                android:src="@drawable/ic_arrow_back"
-                tools:visibility="visible"/>
-
-            <TextView
-                android:id="@+id/context_menu_toolbar_text"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:ellipsize="end"
-                android:lines="1"
-                android:maxLines="1"
-                android:scaleType="center"
-                android:singleLine="true"
-                android:textColor="@color/abc_primary_text_material_dark"
-                android:textSize="@dimen/abc_text_size_large_material"
-                tools:text="Toolbar"
-                tools:visibility="visible"/>
+                android:gravity="center_vertical|start"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/context_menu_toolbar_back"
+                    android:layout_width="@dimen/list_item_height"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/shared_string_collapse"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_arrow_back"
+                    tools:visibility="visible"/>
+
+                <TextView
+                    android:id="@+id/context_menu_toolbar_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:scaleType="center"
+                    android:singleLine="true"
+                    android:textColor="@color/abc_primary_text_material_dark"
+                    android:textSize="@dimen/abc_text_size_large_material"
+                    tools:text="Toolbar"
+                    tools:visibility="visible"/>
+
+            </LinearLayout>
 
         </androidx.appcompat.widget.Toolbar>
 

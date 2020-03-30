@@ -35,13 +35,13 @@
 			android:id="@+id/back_button_flow"
 			android:layout_width="@dimen/route_info_toolbar_button_size"
 			android:layout_height="@dimen/route_info_toolbar_button_size"
-			android:layout_marginLeft="8dp"
-			android:layout_marginTop="8dp"
+			android:layout_marginLeft="@dimen/content_padding_half"
+			android:layout_marginTop="@dimen/content_padding_half"
+			android:layout_marginStart="@dimen/content_padding_half"
 			android:background="@drawable/btn_circle_transparent_full"
 			android:contentDescription="@string/shared_string_back"
 			android:src="@drawable/ic_arrow_back"
-			android:tint="?attr/text_color_tab_active_white"
-			android:layout_marginStart="8dp" />
+			android:tint="?attr/text_color_tab_active_white" />
 
 		<LinearLayout
 			android:id="@+id/toolbar_options_flow_bg"

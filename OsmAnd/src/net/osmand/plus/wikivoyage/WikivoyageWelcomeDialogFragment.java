@@ -1,6 +1,7 @@
 package net.osmand.plus.wikivoyage;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
@@ -28,8 +30,9 @@ public class WikivoyageWelcomeDialogFragment extends WikiBaseDialogFragment {
 
 		View mainView = inflate(R.layout.fragment_wikivoyage_welcome_dialog, container);
 
+		Drawable icBack = getContentIcon(AndroidUtils.getNavigationIconResId(getContext()));
 		ImageView backBtn = (ImageView) mainView.findViewById(R.id.back_button);
-		backBtn.setImageDrawable(getContentIcon(R.drawable.ic_arrow_back));
+		backBtn.setImageDrawable(icBack);
 		backBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

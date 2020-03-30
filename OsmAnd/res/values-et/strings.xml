@@ -2481,7 +2481,7 @@
     <string name="gpx_no_tracks_title">Sul pole veel ühtegi GPX faili</string>
     <string name="gpx_no_tracks_title_folder">Võid lisada kausta ka GPX faile</string>
     <string name="gpx_add_track">Lisa veel…</string>
-    <string name="gpx_appearance">Välimus</string>
+    <string name="shared_string_appearance">Välimus</string>
     <string name="rendering_value_fine_name">Peen</string>
     <string name="upload_poi">Lae üles huvipunkt</string>
     <string name="search_map_hint">Linn või piirkond</string>

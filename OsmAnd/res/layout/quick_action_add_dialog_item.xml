@@ -8,10 +8,10 @@
     android:minHeight="48dp"
     android:paddingRight="24dp"
     android:paddingLeft="24dp"
-    android:background="?attr/selectableItemBackground"
-    android:orientation="horizontal"
 	android:paddingStart="24dp"
-	android:paddingEnd="24dp">
+	android:paddingEnd="24dp"
+    android:background="?attr/selectableItemBackground"
+    android:orientation="horizontal">
 
 
     <ImageView

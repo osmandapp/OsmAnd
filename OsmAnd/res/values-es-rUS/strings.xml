@@ -2085,7 +2085,7 @@ Lon %2$s</string>
     <string name="gpx_no_tracks_title">Sin archivos GPX aún</string>
     <string name="gpx_no_tracks_title_folder">También puedes añadir archivos GPX a la carpeta</string>
     <string name="gpx_add_track">Añadir GPX</string>
-    <string name="gpx_appearance">Aspecto</string>
+    <string name="shared_string_appearance">Aspecto</string>
     <string name="rendering_value_fine_name">Muy fino</string>
     <string name="route_calculation">Cálculo de la ruta</string>
     <string name="upload_poi">Subir PDI</string>
@@ -3481,7 +3481,7 @@ Lon %2$s</string>
     <string name="multimedia_photo_play_sound">Reproducir sonido al fotografiar</string>
     <string name="osm_authorization_success">Autorización exitosa</string>
     <string name="rearrange_categories">Reordenar categorías</string>
-    <string name="create_custom_categories_list_promo">Puedes añadir categorías personalizadas, ocultar las categorías que no parezcan necesarias y cambiar el orden de clasificación de la lista. La lista puede ser importada y exportada con perfiles.</string>
+    <string name="create_custom_categories_list_promo">Cambia el orden de clasificación de la lista u oculta las categorías innecesarias. Puedes importar o exportar todos los cambios con los perfiles.</string>
     <string name="add_new_custom_category_button_promo">Puedes añadir una nueva categoría personalizada marcando una o varias categorías necesarias.</string>
     <string name="reset_to_default_category_button_promo">Restablecer al valor predefinido, restablecerá el orden de clasificación al estado predefinido después de la instalación.</string>
     <string name="shared_string_available">Disponible</string>
@@ -3569,4 +3569,13 @@ Lon %2$s</string>
     <string name="restore_all_profile_settings">¿Restaurar todos los ajustes del perfil\?</string>
     <string name="saving_new_profile">Guardando el nuevo perfil</string>
     <string name="profile_backup_failed">No se pudo respaldar el perfil.</string>
+    <string name="clear_recorded_data_warning">¿Borrar los datos registrados\?</string>
+    <string name="importing_from">Importación de datos de %1$s</string>
+    <string name="shared_string_importing">Importación</string>
+    <string name="checking_for_duplicate_description">OsmAnd comprueba %1$s para ver si hay duplicados con los elementos existentes en la aplicación.
+\n
+\nPuede llevar algún tiempo.</string>
+    <string name="items_added">Elementos añadidos</string>
+    <string name="shared_string_import_complete">Importación completa</string>
+    <string name="import_complete_description">Todos los datos de %1$s son importados, puedes usar los botones de abajo para abrir la parte necesaria de la aplicación para manejarla.</string>
 </resources>

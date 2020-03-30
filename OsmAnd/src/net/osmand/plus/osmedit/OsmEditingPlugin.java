@@ -41,6 +41,7 @@ import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.osmedit.OsmPoint.Action;
+import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
@@ -136,6 +137,13 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	private OsmBugsLayer osmBugsLayer;
 	private OsmEditsLayer osmEditsLayer;
 //	private EditingPOIDialogProvider poiActions;
+
+	@Override
+	protected void registerQuickActionTypes(List<QuickActionType> quickActionTypes) {
+		quickActionTypes.add(AddPOIAction.TYPE);
+		quickActionTypes.add(AddOSMBugAction.TYPE);
+		quickActionTypes.add(ShowHideOSMBugAction.TYPE);
+	}
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {

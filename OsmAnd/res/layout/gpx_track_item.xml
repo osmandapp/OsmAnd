@@ -20,8 +20,10 @@
         android:orientation="horizontal"
         android:minHeight="@dimen/list_item_height"
         android:paddingLeft="@dimen/dialog_content_margin"
-        android:gravity="center_vertical"
-	    android:paddingStart="@dimen/dialog_content_margin">
+        android:paddingStart="@dimen/dialog_content_margin"
+        android:paddingRight="0dp"
+        android:paddingEnd="0dp"
+        android:gravity="center_vertical">
 
         <CheckBox
             android:id="@+id/check_local_index"
@@ -32,9 +34,11 @@
             android:paddingTop="4dp"
             android:paddingBottom="4dp"
             android:paddingRight="@dimen/dialog_content_margin"
+            android:paddingEnd="@dimen/dialog_content_margin"
+            android:paddingLeft="0dp"
+            android:paddingStart="0dp"
             android:clickable="false"
-            android:focusableInTouchMode="false"
-	        android:paddingEnd="@dimen/dialog_content_margin" />
+            android:focusableInTouchMode="false" />
 
         <ImageView
             android:id="@+id/icon"
@@ -51,23 +55,25 @@
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/gpx_text_top_margin"
             android:paddingBottom="@dimen/gpx_text_top_margin"
-            android:paddingRight="@dimen/showAllButtonMarginRight"
+            android:layout_marginRight="@dimen/showAllButtonMarginRight"
+            android:layout_marginEnd="@dimen/showAllButtonMarginRight"
             android:layout_weight="1"
-            android:orientation="vertical"
-	        android:paddingEnd="@dimen/showAllButtonMarginRight">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="start"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/default_list_text_size"
                 tools:text="@string/current_track"/>
 
             <LinearLayout
                 android:id="@+id/read_section"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="start"
                 android:orientation="horizontal"
                 android:visibility="visible"
                 android:gravity="center_vertical">
@@ -77,8 +83,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/gpx_small_icon_margin"
-                    android:src="@drawable/ic_small_distance"
-	                android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
+                    android:layout_marginEnd="@dimen/gpx_small_icon_margin"
+                    android:src="@drawable/ic_small_distance" />
 
                 <TextView
                     android:id="@+id/distance"
@@ -95,8 +101,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/gpx_small_icon_margin"
-                    android:src="@drawable/ic_small_point"
-	                android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
+                    android:layout_marginEnd="@dimen/gpx_small_icon_margin"
+                    android:src="@drawable/ic_small_point" />
 
                 <TextView
                     android:id="@+id/points_count"
@@ -113,8 +119,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/gpx_small_icon_margin"
-                    android:src="@drawable/ic_small_time"
-	                android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
+                    android:layout_marginEnd="@dimen/gpx_small_icon_margin"
+                    android:src="@drawable/ic_small_time" />
 
                 <TextView
                     android:id="@+id/time"
@@ -159,10 +165,10 @@
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"
             android:layout_marginLeft="@dimen/favorites_icon_right_margin"
+            android:layout_marginStart="@dimen/favorites_icon_right_margin"
             android:background="?attr/dashboard_button"
             android:src="@drawable/ic_action_gsave_dark"
-            android:visibility="gone"
-	        android:layout_marginStart="@dimen/favorites_icon_right_margin" />
+            android:visibility="gone" />
 
         <ImageButton
             android:id="@+id/stop"
@@ -198,9 +204,9 @@
                 android:clickable="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:paddingRight="@dimen/list_content_padding"
-                android:gravity="center_vertical"
-	            android:paddingEnd="@dimen/list_content_padding" />
+                android:layout_marginRight="@dimen/list_content_padding"
+                android:layout_marginEnd="@dimen/list_content_padding"
+                android:gravity="center_vertical" />
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/toggle_checkbox_item"
@@ -208,12 +214,12 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="4dp"
                 android:paddingBottom="4dp"
-                android:paddingRight="@dimen/dialog_content_margin"
+                android:layout_marginRight="@dimen/dialog_content_margin"
+                android:layout_marginEnd="@dimen/dialog_content_margin"
                 android:clickable="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:visibility="gone"
-	            android:paddingEnd="@dimen/dialog_content_margin" />
+                android:visibility="gone" />
 
         </LinearLayout>
 

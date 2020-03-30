@@ -2,13 +2,18 @@ package net.osmand.plus.quickaction.actions;
 
 import android.view.ViewGroup;
 
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.AddQuickActionDialog;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionType;
 
 public class NewAction extends QuickAction {
 
-	public static final int TYPE = 1;
+	public static final QuickActionType TYPE = new QuickActionType(1, "new",
+			NewAction.class).
+			nonEditable().iconRes(R.drawable.ic_action_plus).nameRes(R.string.quick_action_new_action);
+
 
 	public NewAction() {
 		super(TYPE);

@@ -556,7 +556,7 @@
     <string name="shared_string_visible">Visible</string>
     <string name="rendering_attr_hideWaterPolygons_description">Agua</string>
     <string name="gpx_add_track">Amestar más…</string>
-    <string name="gpx_appearance">Aspeutu</string>
+    <string name="shared_string_appearance">Aspeutu</string>
     <string name="shared_string_notifications">Avisos</string>
     <string name="shared_string_continue">Siguir</string>
     <string name="shared_string_pause">Posar</string>

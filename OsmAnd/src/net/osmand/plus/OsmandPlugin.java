@@ -36,6 +36,7 @@ import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
+import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
@@ -237,6 +238,7 @@ public abstract class OsmandPlugin {
 				initPlugin(app, plugin);
 			}
 		}
+		app.getQuickActionRegistry().updateActionTypes();
 	}
 
 	private static void initPlugin(OsmandApplication app, OsmandPlugin plugin) {
@@ -292,6 +294,7 @@ public abstract class OsmandPlugin {
 			}
 			updateMarketPlugin(app, enabledPlugins, plugin);
 		}
+		app.getQuickActionRegistry().updateActionTypes();
 	}
 
 	protected boolean pluginAvailable(OsmandApplication app) {
@@ -315,6 +318,7 @@ public abstract class OsmandPlugin {
 			plugin.setActive(false);
 		}
 		app.getSettings().enablePlugin(plugin.getId(), enable);
+		app.getQuickActionRegistry().updateActionTypes();
 		if (activity != null) {
 			if (activity instanceof MapActivity) {
 				final MapActivity mapActivity = (MapActivity) activity;
@@ -386,14 +390,16 @@ public abstract class OsmandPlugin {
 		return true;
 	}
 
-
-	public void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter, MapActivity mapActivity) {
+	protected void registerQuickActionTypes(List<QuickActionType> quickActionTypes) {
 	}
 
-	public void registerMapContextMenuActions(MapActivity mapActivity, double latitude, double longitude, ContextMenuAdapter adapter, Object selectedObj) {
+	protected void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter, MapActivity mapActivity) {
 	}
 
-	public void registerOptionsMenuItems(MapActivity mapActivity, ContextMenuAdapter helper) {
+	protected void registerMapContextMenuActions(MapActivity mapActivity, double latitude, double longitude, ContextMenuAdapter adapter, Object selectedObj) {
+	}
+
+	protected void registerOptionsMenuItems(MapActivity mapActivity, ContextMenuAdapter helper) {
 	}
 
 	public DashFragmentData getCardFragment() {
@@ -403,13 +409,13 @@ public abstract class OsmandPlugin {
 	public void updateLocation(Location location) {
 	}
 
-	public void addMyPlacesTab(FavoritesActivity favoritesActivity, List<TabItem> mTabs, Intent intent) {
+	protected void addMyPlacesTab(FavoritesActivity favoritesActivity, List<TabItem> mTabs, Intent intent) {
 	}
 
-	public void contextMenuFragment(Activity activity, Fragment fragment, Object info, ContextMenuAdapter adapter) {
+	protected void contextMenuFragment(Activity activity, Fragment fragment, Object info, ContextMenuAdapter adapter) {
 	}
 
-	public void optionsMenuFragment(Activity activity, Fragment fragment, ContextMenuAdapter optionsMenuAdapter) {
+	protected void optionsMenuFragment(Activity activity, Fragment fragment, ContextMenuAdapter optionsMenuAdapter) {
 	}
 
 	public List<String> indexingFiles(IProgress progress) {
@@ -639,6 +645,8 @@ public abstract class OsmandPlugin {
 		return installed;
 	}
 
+
+
 	public static boolean onMapActivityKeyUp(MapActivity mapActivity, int keyCode) {
 		for (OsmandPlugin p : getEnabledPlugins()) {
 			if (p.mapActivityKeyUp(mapActivity, keyCode))
@@ -646,6 +654,14 @@ public abstract class OsmandPlugin {
 		}
 		return false;
 	}
+
+	public static void registerQuickActionTypesPlugins(List<QuickActionType> quickActionTypes) {
+		for (OsmandPlugin p : getEnabledPlugins()) {
+			p.registerQuickActionTypes(quickActionTypes);
+		}
+	}
+
+
 
 	public static void updateLocationPlugins(net.osmand.Location location) {
 		for (OsmandPlugin p : getEnabledPlugins()) {

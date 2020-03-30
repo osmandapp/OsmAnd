@@ -188,8 +188,8 @@
     <string name="preferred_locale">Langue de l\'application</string>
     <string name="shared_string_next">Suivant</string>
     <string name="shared_string_previous">Précédent</string>
-    <string name="unit_of_length_descr">Modifier les unités de mesure de distance.</string>
-    <string name="unit_of_length">Unités de distance</string>
+    <string name="unit_of_length_descr">Modifier l\'unité de mesure de distance.</string>
+    <string name="unit_of_length">Unités de longueur</string>
     <string name="si_mi_feet">Miles/pieds</string>
     <string name="si_mi_yard">Miles/yards</string>
     <string name="si_km_m">Kilomètres/mètres</string>
@@ -399,7 +399,7 @@
     <string name="transport_stops_to_pass">nombre d\'arrêts :</string>
     <string name="transport_route_distance">Distance de l\'itinéraire :</string>
     <string name="transport">Transport</string>
-    <string name="shared_string_ok">Ok</string>
+    <string name="shared_string_ok">OK</string>
     <string name="show_transport_over_map_description">Afficher les arrêts de transport publics sur la carte</string>
     <string name="show_transport_over_map">Afficher les arrêts de transports publics</string>
     <string name="hello">Application de navigation OsmAnd</string>
@@ -1744,7 +1744,7 @@
     <string name="osm_edit_created_poi">Point d\'intérêt créé sur OSM</string>
     <string name="map_legend">Légende</string>
     <string name="shared_string_upload">Téléversement</string>
-    <string name="shared_string_update">Mise à jour</string>
+    <string name="shared_string_update">Mettre à jour</string>
     <string name="read_more">En savoir +</string>
     <string name="whats_new">Nouveautés de la version</string>
     <string name="rendering_attr_hideProposed_name">Objets proposés</string>
@@ -2071,7 +2071,7 @@
     <string name="gpx_no_tracks_title">Vous n\'avez pas encore de fichier GPX</string>
     <string name="gpx_no_tracks_title_folder">Vous pouvez aussi ajouter des fichiers GPX dans le dossier</string>
     <string name="gpx_add_track">Autre trace GPX …</string>
-    <string name="gpx_appearance">Apparence</string>
+    <string name="shared_string_appearance">Apparence</string>
     <string name="rendering_value_fine_name">Bien</string>
     <string name="translit_name_if_miss">Translittérer si le nom %1$s est absent</string>
     <string name="route_calculation">Calcul de l\'itinéraire</string>
@@ -2547,7 +2547,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="wrong_format">Format incorrect</string>
     <string name="wrong_input">Saisie erronée</string>
     <string name="enter_new_name">Saisissez un nouveau nom</string>
-    <string name="shared_string_back">Précédent</string>
+    <string name="shared_string_back">Retour</string>
     <string name="shared_string_view">Afficher</string>
     <string name="waypoints_added_to_map_markers">Étapes ajoutées comme marques</string>
     <string name="import_gpx_file_description">peut être importé comme Favoris ou Fichier GPX.</string>
@@ -2698,7 +2698,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="images_cache">Cache d\'images</string>
     <string name="delete_search_history">Supprimer l\'historique de recherche</string>
     <string name="show_images">Afficher les images</string>
-    <string name="online_webpage_warning">Page accessible uniquement en ligne, souhaitez-vous l’ouvrir dans un navigateur web ?</string>
+    <string name="online_webpage_warning">Page accessible uniquement en ligne. Souhaitez-vous l’ouvrir dans un navigateur web \?</string>
     <string name="shared_string_dont">Ne pas faire</string>
     <string name="shared_string_do">Faire</string>
     <string name="shared_string_only_with_wifi">Seulement en Wifi</string>
@@ -3210,7 +3210,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="apply_to_current_profile">Appliquer uniquement à \"%1$s\"</string>
     <string name="apply_to_all_profiles">Appliquer à tous les profils</string>
     <string name="start_up_message_pref">Message au démarrage</string>
-    <string name="units_and_formats">Unités et Formats</string>
+    <string name="units_and_formats">Unités et formats</string>
     <string name="appearance">Apparence</string>
     <string name="list_of_installed_plugins">Greffons installés</string>
     <string name="configure_navigation">Paramétrer la navigation</string>
@@ -3397,7 +3397,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="reset_all_profile_settings">Ré-initialiser tous les paramètres de profil \?</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s : %2$s</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
-    <string name="button_rate">Taux</string>
+    <string name="button_rate">Évaluer</string>
     <string name="file_does_not_contain_routing_rules">Aucune règle de routage n\'est présente dans le fichier \'%1$s\', veuillez sélectionner un autre fichier.</string>
     <string name="not_support_file_type_with_ext">Fichier non pris en charge. Merci de sélectionner un fichier conforme ayant l\'extension %1$s.</string>
     <string name="import_from_file">Importer depuis un fichier</string>
@@ -3459,7 +3459,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="sunset_at">Coucher de soleil à %1$s</string>
     <string name="sunrise_at">Lever de soleil à %1$s</string>
     <string name="rearrange_categories">Réorganiser les catégories</string>
-    <string name="create_custom_categories_list_promo">Vous pouvez ajouter des catégories personnelles, masquer les catégories que vous ne souhaitez pas utiliser et les trier. La liste des catégories peut être importée et exportée grâce aux profils.</string>
+    <string name="create_custom_categories_list_promo">Modifiez l\'ordre de tri de la liste, masquez des catégories. Vous pouvez importer et exporter toutes vos modifications via les profils.</string>
     <string name="reset_to_default_category_button_promo">Restaurer les valeurs par défaut réinitialisera l\'ordre de tri.</string>
     <string name="accessibility_mode_disabled">Le mode d\'accessibilité est désactivé dans votre système.</string>
     <string name="add_new_custom_category_button_promo">Vous pouvez ajouter une catégorie personnelle en sélectionnant la ou les catégories souhaitées.</string>
@@ -3539,4 +3539,42 @@ représentant la zone : %1$s x %2$s</string>
     <string name="restore_all_profile_settings">Restaurer tous les paramètres du profil \?</string>
     <string name="saving_new_profile">Enregistrement du nouveau profil</string>
     <string name="profile_backup_failed">Impossible de sauvegarder le profil.</string>
+    <string name="clear_recorded_data_warning">Êtes-vous certain de vouloir supprimer les données enregistrées \?</string>
+    <string name="importing_from">Import de données à partir de %1$s</string>
+    <string name="shared_string_importing">Import en cours</string>
+    <string name="items_added">Éléments ajoutés</string>
+    <string name="shared_string_import_complete">Import terminé</string>
+    <string name="checking_for_duplicate_description">OsmAnd vérifie que l\'élément %1$s n\'existe pas déjà dans l\'application. 
+\n 
+\nCela peut prendre un certain temps.</string>
+    <string name="import_complete_description">Les données de %1$s ont été importées, vous pouvez utiliser les boutons ci-dessous pour ouvrir la partie adéquate de l\'application pour les gérer.</string>
+    <string name="recalculate_route_distance_promo">L\'itinéraire sera recalculé lorsque la distance entre l\'itinéraire et votre position est supérieure à la valeur indiquée.</string>
+    <string name="select_distance_route_will_recalc">Sélectionnez la distance au-delà de laquelle l’itinéraire sera recalculé.</string>
+    <string name="recalculate_route_in_deviation">Recalculer l\'itinéraire en cas d\'écart de route</string>
+    <string name="shared_string_min">Min</string>
+    <string name="n_items_of_z">%1$s de %2$s</string>
+    <string name="shared_string_terrain">Terrain</string>
+    <string name="hillshade_description">Carte ombrée utilisant des nuances sombres pour visualiser les pistes, les sommets et les plaines.</string>
+    <string name="slope_description">La piste est visualisée en couleurs sur le terrain.</string>
+    <string name="terrain_slider_description">Définissez les niveaux de zoom minimum et maximum pour lesquels la couche sera affichée.</string>
+    <string name="hillshade_download_description">Des cartes supplémentaires sont nécessaires pour afficher l\'ombrage du relief sur la carte.</string>
+    <string name="slope_download_description">Des cartes supplémentaires sont nécessaires pour afficher les pistes sur la carte.</string>
+    <string name="slope_read_more">Vous pouvez en apprendre plus sur les pistes dans %1$s.</string>
+    <string name="shared_string_transparency">Transparence</string>
+    <string name="shared_string_zoom_levels">Niveaux de zoom</string>
+    <string name="shared_string_legend">Légende</string>
+    <string name="terrain_empty_state_text">Permet d\'afficher l\'ombrage du relief ou les pistes. Vous pouvez en apprendre plus sur ces types de cartes sur notre site.</string>
+    <string name="shared_string_hillshade">Ombrage du relief</string>
+    <string name="download_slope_maps">Pistes</string>
+    <string name="quick_action_show_hide_terrain">Afficher/masquer le terrain</string>
+    <string name="quick_action_terrain_hide">Masquer le terrain</string>
+    <string name="quick_action_terrain_show">Afficher le terrain</string>
+    <string name="quick_action_terrain_descr">Un bouton pour afficher ou masquer la couche terrain sur la carte.</string>
+    <string name="delete_description">Supprimer la description</string>
+    <string name="add_description">Ajouter une description</string>
+    <string name="select_group">Sélectionnez un groupe</string>
+    <string name="select_shape">Sélectionnez une forme</string>
+    <string name="shared_string_circle">Cercle</string>
+    <string name="shared_string_rhomb">Losange</string>
+    <string name="shared_string_square">Carré</string>
 </resources>

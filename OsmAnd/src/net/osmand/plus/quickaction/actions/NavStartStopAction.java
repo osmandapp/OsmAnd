@@ -12,12 +12,18 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.routing.RoutingHelper;
 
 public class NavStartStopAction extends QuickAction {
 
-	public static final int TYPE = 25;
 	private static final String KEY_DIALOG = "dialog";
+	public static final QuickActionType TYPE = new QuickActionType(25,
+			"nav.startstop", NavStartStopAction .class).
+			nameRes(R.string.quick_action_start_stop_navigation).iconRes(R.drawable.ic_action_start_navigation).nonEditable().
+			category(QuickActionType.NAVIGATION);
+
+
 
 	public NavStartStopAction() {
 		super(TYPE);

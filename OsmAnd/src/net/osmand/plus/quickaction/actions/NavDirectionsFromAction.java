@@ -9,10 +9,14 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionType;
 
 public class NavDirectionsFromAction extends QuickAction {
 
-	public static final int TYPE = 19;
+	public static final QuickActionType TYPE = new QuickActionType(19,
+			"nav.directions", NavDirectionsFromAction.class).
+			nameRes(R.string.context_menu_item_directions_from).iconRes(R.drawable.ic_action_route_direction_from_here).nonEditable().
+			category(QuickActionType.NAVIGATION);
 
 	public NavDirectionsFromAction() {
 		super(TYPE);

@@ -134,11 +134,9 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 	public void dismiss() {
 		MapActivity activity = dialog.getMapActivity();
 		if (activity != null) {
-			try {
-				activity.getSupportFragmentManager().popBackStack(TAG,
-						FragmentManager.POP_BACK_STACK_INCLUSIVE);
-			} catch (Exception e) {
-				e.printStackTrace();
+			FragmentManager fragmentManager = activity.getSupportFragmentManager();
+			if (!fragmentManager.isStateSaved()) {
+				fragmentManager.popBackStack(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			}
 		}
 	}
