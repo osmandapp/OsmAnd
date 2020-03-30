@@ -1,6 +1,8 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
@@ -22,6 +24,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
@@ -61,6 +64,8 @@ import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.isPersonalCategor
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
+
+	public static final String TAG = "PointEditorFragmentNew";
 
 	private View view;
 	private EditText nameEdit;
@@ -112,7 +117,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismiss();
+				showExitDialog();
 			}
 		});
 
@@ -165,8 +170,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		cancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				cancelled = true;
-				dismiss();
+				showExitDialog();
 			}
 		});
 
@@ -732,6 +736,34 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 
 	protected Drawable getPaintedIcon(int iconId, int color) {
 		return getPaintedContentIcon(iconId, color);
+	}
+
+	private void showExitDialog() {
+		hideKeyboard();
+		if (!wasSaved()) {
+			AlertDialog.Builder dismissDialog = createWarningDialog(getActivity(),
+					R.string.shared_string_dismiss, R.string.exit_without_saving, R.string.shared_string_cancel);
+			dismissDialog.setPositiveButton(R.string.shared_string_exit, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					cancelled = true;
+					dismiss();
+				}
+			});
+			dismissDialog.show();
+		} else {
+			cancelled = true;
+			dismiss();
+		}
+	}
+
+	private AlertDialog.Builder createWarningDialog(Activity activity, int title, int message, int negButton) {
+		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
+		AlertDialog.Builder warningDialog = new AlertDialog.Builder(themedContext);
+		warningDialog.setTitle(getString(title));
+		warningDialog.setMessage(getString(message));
+		warningDialog.setNegativeButton(negButton, null);
+		return warningDialog;
 	}
 
 	class GroupAdapter extends RecyclerView.Adapter<GroupsViewHolder> {
