@@ -13,7 +13,7 @@
 -->
     <string name="shared_string_min">Min</string>
     <string name="shared_string_square">Square</string>
-    <string name="shared_string_rhomb">Rhomb</string>
+    <string name="shared_string_octagon">Octagon</string>
     <string name="shared_string_circle">Circle</string>
     <string name="select_shape">Select shape</string>
     <string name="select_group">Select group</string>

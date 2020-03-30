@@ -1,6 +1,8 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
@@ -22,6 +24,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
@@ -61,6 +64,8 @@ import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.isPersonalCategor
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
+
+	public static final String TAG = "PointEditorFragmentNew";
 
 	private View view;
 	private EditText nameEdit;
@@ -112,7 +117,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismiss();
+				showExitDialog();
 			}
 		});
 
@@ -147,7 +152,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			public void onClick(View v) {
 				DialogFragment dialogFragment = createSelectCategoryDialog();
 				if (dialogFragment != null) {
-
 					dialogFragment.show(getChildFragmentManager(), SelectCategoryDialogFragment.TAG);
 				}
 			}
@@ -166,8 +170,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		cancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				cancelled = true;
-				dismiss();
+				showExitDialog();
 			}
 		});
 
@@ -735,6 +738,34 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		return getPaintedContentIcon(iconId, color);
 	}
 
+	public void showExitDialog() {
+		hideKeyboard();
+		if (!wasSaved()) {
+			AlertDialog.Builder dismissDialog = createWarningDialog(getActivity(),
+					R.string.shared_string_dismiss, R.string.exit_without_saving, R.string.shared_string_cancel);
+			dismissDialog.setPositiveButton(R.string.shared_string_exit, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					cancelled = true;
+					dismiss();
+				}
+			});
+			dismissDialog.show();
+		} else {
+			cancelled = true;
+			dismiss();
+		}
+	}
+
+	private AlertDialog.Builder createWarningDialog(Activity activity, int title, int message, int negButton) {
+		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
+		AlertDialog.Builder warningDialog = new AlertDialog.Builder(themedContext);
+		warningDialog.setTitle(getString(title));
+		warningDialog.setMessage(getString(message));
+		warningDialog.setNegativeButton(negButton, null);
+		return warningDialog;
+	}
+
 	class GroupAdapter extends RecyclerView.Adapter<GroupsViewHolder> {
 
 		private static final int VIEW_TYPE_FOOTER = 1;
@@ -788,7 +819,8 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 						PointEditor editor = getEditor();
 						if (editor != null) {
 							EditCategoryDialogFragment dialogFragment =
-									EditCategoryDialogFragment.createInstance(editor.getFragmentTag(), getCategories(), false);
+									EditCategoryDialogFragment.createInstance(editor.getFragmentTag(), getCategories(),
+											!editor.getFragmentTag().equals(FavoritePointEditor.TAG));
 							dialogFragment.show(requireActivity().getSupportFragmentManager(), EditCategoryDialogFragment.TAG);
 						}
 					}
