@@ -13,7 +13,7 @@ public class City extends MapObject {
 	public enum CityType {
 		// that's tricky way to play with that numbers (to avoid including suburbs in city & vice verse)
 		// district special type and it is not registered as a city
-		CITY(10000), TOWN(4000), VILLAGE(1300), HAMLET(1000), SUBURB(400), DISTRICT(400), NEIGHBOURHOOD(300);
+		CITY(10000), TOWN(4000), VILLAGE(1300), HAMLET(1000), SUBURB(400), BOROUGH(400), DISTRICT(400), NEIGHBOURHOOD(300);
 
 		private double radius;
 
@@ -35,9 +35,6 @@ public class City extends MapObject {
 			}
 			if ("township".equals(place)) {
 				return CityType.TOWN;
-			}
-			if ("borough".equals(place)) {
-				return CityType.SUBURB;
 			}
 			for (CityType t : CityType.values()) {
 				if (t.name().equalsIgnoreCase(place)) {

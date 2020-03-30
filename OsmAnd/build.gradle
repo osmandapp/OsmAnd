@@ -323,7 +323,6 @@ task cleanNoTranslate(type: Delete) {
      delete('res/values/no_translate.xml')
 }
 
-
 task collectFonts(type: Copy) {
 	from "../../resources/fonts"
 	from "../../resources/rendering_styles/fonts"
@@ -339,7 +338,6 @@ task collectHelpContentsStyle(type: Copy) {
 	into "assets"
 }
 
-
 task collectHelpContentsAssets(type: Copy) {
 	from("../../help/website/help") {
 		include "about.html"
@@ -351,11 +349,15 @@ task collectHelpContentsAssets(type: Copy) {
 	from("../../help/website/feature_articles") {
 		include "*.html"
 	}
-
 	into "assets/feature_articles"
 }
 
-
+task copyPoiCategiry(type: Copy) {
+	from("../../resources/poi") {
+		include "poi_categories.json"
+	}
+	into "assets"
+}
 
 task copyStyleIcons(type: Copy) {
 	from "../../resources/rendering_styles/style-icons/"
@@ -378,6 +380,7 @@ task collectExternalResources {
 			updateNoTranslate,
 			validateTranslate,
 			copyWidgetIcons,
+			copyPoiCategiry,
 			downloadWorldMiniBasemap
 
 	Gradle gradle = getGradle()

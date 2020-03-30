@@ -47,14 +47,14 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 	private BackgroundType backgroundType = BackgroundType.CIRCLE;
 
 	@Nullable
-	FavouritesDbHelper helper;
+	private FavouritesDbHelper helper;
 
 	private boolean autoFill;
 	private boolean saved;
 	private int defaultColor;
 
 	@Override
-	public void onAttach(Context context) {
+	public void onAttach(@NonNull Context context) {
 		super.onAttach(context);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
@@ -129,7 +129,7 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 		return editor;
 	}
 
-	public FavoritePointEditor getFavoritePointEditor() {
+	private FavoritePointEditor getFavoritePointEditor() {
 		return editor;
 	}
 
@@ -422,17 +422,23 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 	@Override
 	public Set<String> getCategories() {
 		Set<String> categories = new LinkedHashSet<>();
-		for (FavouritesDbHelper.FavoriteGroup fg : getHelper().getFavoriteGroups()) {
-			categories.add(fg.getDisplayName(getMyApplication()));
+		FavouritesDbHelper helper = getHelper();
+		if (helper != null) {
+			for (FavouritesDbHelper.FavoriteGroup fg : getHelper().getFavoriteGroups()) {
+				categories.add(fg.getDisplayName(getMyApplication()));
+			}
 		}
 		return categories;
 	}
 
 	@Override
-	public int getCategoryPoints(String category) {
-		for (FavouritesDbHelper.FavoriteGroup fg : getHelper().getFavoriteGroups()) {
-			if (fg.getDisplayName(getMyApplication()).equals(category)) {
-				return fg.getPoints().size();
+	public int getCategoryPointsCount(String category) {
+		FavouritesDbHelper helper = getHelper();
+		if (helper != null) {
+			for (FavouritesDbHelper.FavoriteGroup fg : getHelper().getFavoriteGroups()) {
+				if (fg.getDisplayName(getMyApplication()).equals(category)) {
+					return fg.getPoints().size();
+				}
 			}
 		}
 		return 0;
@@ -440,9 +446,12 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 
 	@Override
 	public int getCategoryColor(String category) {
-		for (FavouritesDbHelper.FavoriteGroup fg : getHelper().getFavoriteGroups()) {
-			if (fg.getDisplayName(getMyApplication()).equals(category)) {
-				return fg.getColor();
+		FavouritesDbHelper helper = getHelper();
+		if (helper != null) {
+			for (FavouritesDbHelper.FavoriteGroup fg : getHelper().getFavoriteGroups()) {
+				if (fg.getDisplayName(getMyApplication()).equals(category)) {
+					return fg.getColor();
+				}
 			}
 		}
 		return defaultColor;

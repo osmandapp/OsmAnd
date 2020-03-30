@@ -157,7 +157,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 	}
 
-	override fun onAttachFragment(fragment: androidx.fragment.app.Fragment?) {
+	override fun onAttachFragment(fragment: androidx.fragment.app.Fragment) {
 		if (fragment is TelegramListener) {
 			listeners.add(WeakReference(fragment))
 		}
