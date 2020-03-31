@@ -223,6 +223,16 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 
 	@Override
 	protected boolean wasSaved() {
+		final FavouritePoint favorite = getFavorite();
+		if (favorite != null) {
+			final FavouritePoint point = new FavouritePoint(favorite.getLatitude(), favorite.getLongitude(),
+					getNameTextValue(), getCategoryTextValue());
+			point.setDescription(getDescriptionTextValue());
+			point.setColor(color);
+			point.setBackgroundType(backgroundType);
+			point.setIconId(iconId);
+			return isChanged(favorite, point);
+		}
 		return saved;
 	}
 
