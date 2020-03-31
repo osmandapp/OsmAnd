@@ -3577,4 +3577,5 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_circle">Cercle</string>
     <string name="shared_string_rhomb">Losange</string>
     <string name="shared_string_square">Carré</string>
+    <string name="shared_string_octagon">Octogone</string>
 </resources>

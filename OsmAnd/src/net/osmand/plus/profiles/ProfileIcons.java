@@ -34,7 +34,9 @@ public enum ProfileIcons {
 	CAMPER(R.drawable.ic_action_camper, R.string.app_mode_camper, "ic_action_camper"),
 	PICKUP_TRUCK(R.drawable.ic_action_pickup_truck, R.string.app_mode_pickup_truck, "ic_action_pickup_truck"),
 	WAGON(R.drawable.ic_action_wagon, R.string.app_mode_wagon, "ic_action_wagon"),
-	UTV(R.drawable.ic_action_utv, R.string.app_mode_utv, "ic_action_utv"),
+	UTV(R.drawable.ic_action_ski_touring, R.string.app_mode_utv, "ic_action_ski_touring"),
+	SKI_TOURING(R.drawable.ic_action_utv, R.string.app_mode_ski_touring, "ic_action_utv"),
+	SNOWMOBILE(R.drawable.ic_action_snowmobile, R.string.app_mode_ski_snowmobile, "ic_action_snowmobile"),
 	OSM(R.drawable.ic_action_openstreetmap_logo, R.string.app_mode_osm, "ic_action_openstreetmap_logo");
 
 	@DrawableRes
