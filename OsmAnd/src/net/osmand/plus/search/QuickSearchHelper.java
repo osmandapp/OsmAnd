@@ -27,6 +27,7 @@ import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.poi.NominatimPoiFilter;
 import net.osmand.plus.poi.PoiFiltersHelper;
+import net.osmand.plus.poi.PoiTemplateList;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.resources.ResourceManager.ResourceListener;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
@@ -502,8 +503,8 @@ public class QuickSearchHelper implements ResourceListener {
 		});
 		controller.setTitle(filter.getName());
 		PoiFiltersHelper helper = mapActivity.getMyApplication().getPoiFilters();
-		helper.clearSelectedPoiFilters();
-		helper.addSelectedPoiFilter(filter);
+		helper.clearSelectedPoiFilters(PoiTemplateList.POI);
+		helper.addSelectedPoiFilter(PoiTemplateList.POI, filter);
 		mapActivity.showTopToolbar(controller);
 		mapActivity.refreshMap();
 	}
@@ -512,7 +513,7 @@ public class QuickSearchHelper implements ResourceListener {
 										   @NonNull TopToolbarController controller,
 										   @Nullable Runnable action) {
 		mapActivity.hideTopToolbar(controller);
-		mapActivity.getMyApplication().getPoiFilters().clearSelectedPoiFilters();
+		mapActivity.getMyApplication().getPoiFilters().clearSelectedPoiFilters(PoiTemplateList.POI);
 		mapActivity.refreshMap();
 		if (action != null) {
 			action.run();

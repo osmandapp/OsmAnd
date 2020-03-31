@@ -36,6 +36,7 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SimpleDividerItem;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.poi.PoiTemplateList;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.IRoutingDataUpdateListener;
@@ -433,7 +434,8 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 			View v;
 			if (type == WaypointHelper.POI) {
 				v = themedInflater.inflate(R.layout.along_the_route_radius_poi, null);
-				String descEx = !app.getPoiFilters().isShowingAnyPoi() ? getString(R.string.poi) : app.getPoiFilters().getSelectedPoiFiltersName();
+				String descEx = !app.getPoiFilters().isShowingAnyPoi(PoiTemplateList.POI) ?
+						getString(R.string.poi) : app.getPoiFilters().getSelectedPoiFiltersName(PoiTemplateList.POI);
 				((TextView) v.findViewById(R.id.title)).setText(getString(R.string.search_radius_proximity) + ":");
 				((TextView) v.findViewById(R.id.titleEx)).setText(getString(R.string.shared_string_type) + ":");
 				final TextView radiusEx = (TextView) v.findViewById(R.id.descriptionEx);
@@ -483,7 +485,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 					new MapActivityLayers.DismissListener() {
 						@Override
 						public void dismiss() {
-							if (app.getPoiFilters().isShowingAnyPoi()) {
+							if (app.getPoiFilters().isShowingAnyPoi(PoiTemplateList.POI)) {
 								enableType(type, enable);
 							}
 						}

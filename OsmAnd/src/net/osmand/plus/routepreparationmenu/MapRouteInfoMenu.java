@@ -70,6 +70,7 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenuFragment;
 import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
+import net.osmand.plus.poi.PoiTemplateList;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.AppModesBottomSheetDialogFragment;
 import net.osmand.plus.profiles.ConfigureAppModesBottomSheetDialogFragment;
@@ -1149,7 +1150,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private void createShowAlongTheRouteItems(MapActivity mapActivity, LinearLayout optionsContainer) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		final ApplicationMode applicationMode = app.getRoutingHelper().getAppMode();
-		final Set<PoiUIFilter> poiFilters = app.getPoiFilters().getSelectedPoiFilters();
+		final Set<PoiUIFilter> poiFilters = app.getPoiFilters().getSelectedPoiFilters(PoiTemplateList.POI);
 		final boolean traffic = app.getSettings().SHOW_TRAFFIC_WARNINGS.getModeValue(applicationMode);
 		final boolean fav = app.getSettings().SHOW_NEARBY_FAVORITES.getModeValue(applicationMode);
 		if (!poiFilters.isEmpty()) {
@@ -1175,7 +1176,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					public void onClick(View v) {
 						MapActivity mapActivity = getMapActivity();
 						if (mapActivity != null) {
-							mapActivity.getMyApplication().getPoiFilters().removeSelectedPoiFilter(poiUIFilter);
+							mapActivity.getMyApplication().getPoiFilters().removeSelectedPoiFilter(PoiTemplateList.POI, poiUIFilter);
 							mapActivity.getMapView().refreshMap();
 							updateOptionsButtons();
 						}

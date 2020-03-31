@@ -79,6 +79,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.poi.PoiTemplateList;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.poi.RearrangePoiFiltersFragment;
 import net.osmand.plus.resources.RegionAddressRepository;
@@ -383,8 +384,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							} else {
 								filter = (PoiUIFilter) searchPhrase.getLastSelectedWord().getResult().object;
 							}
-							app.getPoiFilters().clearSelectedPoiFilters();
-							app.getPoiFilters().addSelectedPoiFilter(filter);
+							app.getPoiFilters().clearSelectedPoiFilters(PoiTemplateList.POI);
+							app.getPoiFilters().addSelectedPoiFilter(PoiTemplateList.POI, filter);
 
 							mapActivity.getContextMenu().closeActiveToolbar();
 							showToolbar();
@@ -861,7 +862,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void closeSearch() {
-		app.getPoiFilters().clearSelectedPoiFilters();
+		app.getPoiFilters().clearSelectedPoiFilters(PoiTemplateList.POI);
 		dismiss();
 	}
 

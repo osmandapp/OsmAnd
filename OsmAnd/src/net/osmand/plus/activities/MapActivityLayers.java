@@ -35,6 +35,7 @@ import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 import net.osmand.plus.poi.PoiFiltersHelper;
+import net.osmand.plus.poi.PoiTemplateList;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.MapVectorLayer;
@@ -304,9 +305,9 @@ public class MapActivityLayers {
 								if (filter.isStandardFilter()) {
 									filter.removeUnsavedFilterByName();
 								}
-								getApplication().getPoiFilters().addSelectedPoiFilter(filter);
+								poiFilters.addSelectedPoiFilter(PoiTemplateList.POI, filter);
 							} else {
-								getApplication().getPoiFilters().removeSelectedPoiFilter(filter);
+								poiFilters.removeSelectedPoiFilter(PoiTemplateList.POI, filter);
 							}
 						}
 						mapView.refreshMap();
@@ -368,8 +369,8 @@ public class MapActivityLayers {
 					if (pf.isStandardFilter()) {
 						pf.removeUnsavedFilterByName();
 					}
-					getApplication().getPoiFilters().clearSelectedPoiFilters();
-					getApplication().getPoiFilters().addSelectedPoiFilter(pf);
+					poiFilters.clearSelectedPoiFilters(PoiTemplateList.POI);
+					poiFilters.addSelectedPoiFilter(PoiTemplateList.POI, pf);
 					mapView.refreshMap();
 				}
 			}

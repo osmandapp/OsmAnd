@@ -404,7 +404,7 @@ public class ContextMenuAdapter {
 						}
 					};
 					ch.setOnCheckedChangeListener(listener);
-					ch.setVisibility(View.VISIBLE);
+					ch.setVisibility(item.shouldHideCompoundButton() ? View.GONE : View.VISIBLE);
 				} else if (ch != null) {
 					ch.setVisibility(View.GONE);
 				}

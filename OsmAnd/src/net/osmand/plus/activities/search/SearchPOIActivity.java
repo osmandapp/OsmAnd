@@ -58,6 +58,7 @@ import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandListActivity;
 import net.osmand.plus.poi.NominatimPoiFilter;
+import net.osmand.plus.poi.PoiTemplateList;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.poi.PoiUIFilter.AmenityNameFilter;
 import net.osmand.plus.render.RenderingIcons;
@@ -164,7 +165,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			public boolean onMenuItemClick(MenuItem item) {
 				OsmandSettings settings = app.getSettings();
 				filter.setFilterByName(searchFilter.getText().toString().trim());
-				app.getPoiFilters().addSelectedPoiFilter(filter);
+				app.getPoiFilters().addSelectedPoiFilter(PoiTemplateList.POI, filter);
 				if (location != null) {
 					settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(), 15);
 				}

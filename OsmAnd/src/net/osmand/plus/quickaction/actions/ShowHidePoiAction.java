@@ -23,6 +23,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.poi.PoiFiltersHelper;
+import net.osmand.plus.poi.PoiTemplateList;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
@@ -112,18 +113,18 @@ public class ShowHidePoiAction extends QuickAction {
 		PoiFiltersHelper pf = activity.getMyApplication().getPoiFilters();
 		List<PoiUIFilter> poiFilters = loadPoiFilters(activity.getMyApplication().getPoiFilters());
 
-		if (!isCurrentFilters(pf.getSelectedPoiFilters(), poiFilters)) {
+		if (!isCurrentFilters(pf.getSelectedPoiFilters(PoiTemplateList.POI), poiFilters)) {
 
-			pf.clearSelectedPoiFilters();
+			pf.clearSelectedPoiFilters(PoiTemplateList.POI);
 
 			for (PoiUIFilter filter : poiFilters) {
 				if (filter.isStandardFilter()) {
 					filter.removeUnsavedFilterByName();
 				}
-				pf.addSelectedPoiFilter(filter);
+				pf.addSelectedPoiFilter(PoiTemplateList.POI, filter);
 			}
 
-		} else pf.clearSelectedPoiFilters();
+		} else pf.clearSelectedPoiFilters(PoiTemplateList.POI);
 
 		activity.getMapLayers().updateLayers(activity.getMapView());
 	}
@@ -133,7 +134,7 @@ public class ShowHidePoiAction extends QuickAction {
 		PoiFiltersHelper pf = application.getPoiFilters();
 		List<PoiUIFilter> poiFilters = loadPoiFilters(application.getPoiFilters());
 
-		return isCurrentFilters(pf.getSelectedPoiFilters(), poiFilters);
+		return isCurrentFilters(pf.getSelectedPoiFilters(PoiTemplateList.POI), poiFilters);
 	}
 
 	private boolean isCurrentFilters(Set<PoiUIFilter> currentPoiFilters, List<PoiUIFilter> poiFilters) {

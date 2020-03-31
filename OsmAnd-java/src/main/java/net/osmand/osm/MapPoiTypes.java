@@ -36,6 +36,7 @@ public class MapPoiTypes {
 	private PoiCategory otherCategory;
 	private PoiCategory otherMapCategory;
 
+	public static final String WIKI_LANG_KEY_PREFFIX = "wiki_lang:";
 	static final String OSM_WIKI_CATEGORY = "osmwiki";
 	private PoiTranslator poiTranslator = null;
 	private boolean init;
@@ -125,6 +126,15 @@ public class MapPoiTypes {
 		}
 		sortList(lf);
 		return lf;
+	}
+
+	public PoiCategory getOsmwiki() {
+		for (PoiCategory category : categories) {
+			if (category.isWiki()) {
+				return category;
+			}
+		}
+		return null;
 	}
 
 	private void sortList(List<? extends AbstractPoiType> lf) {

@@ -252,6 +252,18 @@ public class AndroidUtils {
 		return "";
 	}
 
+	public static String makeStringFromList(@NonNull List<String> strings, @NonNull String divider) {
+		if (strings.size() == 0) {
+			return "";
+		}
+		StringBuilder result = new StringBuilder(strings.get(0));
+		for (int i = 1; i < strings.size(); i++) {
+			result.append(divider);
+			result.append(strings.get(i));
+		}
+		return result.toString();
+	}
+
 	public static View findParentViewById(View view, int id) {
 		ViewParent viewParent = view.getParent();
 

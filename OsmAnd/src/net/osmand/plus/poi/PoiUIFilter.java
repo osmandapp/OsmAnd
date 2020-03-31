@@ -146,6 +146,10 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		this.deleted = deleted;
 	}
 
+	public boolean isWikiFilter() {
+		return filterId.startsWith(STD_PREFIX + "wiki_place") || filterId.equals(STD_PREFIX + "osmwiki");
+	}
+
 	public String getFilterByName() {
 		return filterByName;
 	}
