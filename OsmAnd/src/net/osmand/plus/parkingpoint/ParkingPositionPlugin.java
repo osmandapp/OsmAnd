@@ -4,6 +4,7 @@ package net.osmand.plus.parkingpoint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.text.format.Time;
@@ -55,29 +56,28 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 
 	public static final String ID = "osmand.parking.position";
 	public static final String PARKING_PLUGIN_COMPONENT = "net.osmand.parkingPlugin"; //$NON-NLS-1$
-	public final static String PARKING_POINT_LAT = "parking_point_lat"; //$NON-NLS-1$
-	public final static String PARKING_POINT_LON = "parking_point_lon"; //$NON-NLS-1$
-	public final static String PARKING_TYPE = "parking_type"; //$NON-NLS-1$
-	public final static String PARKING_TIME = "parking_limit_time"; //$//$NON-NLS-1$
-	public final static String PARKING_START_TIME = "parking_time"; //$//$NON-NLS-1$
-	public final static String PARKING_EVENT_ADDED = "parking_event_added"; //$//$NON-NLS-1$
+	public static final String PARKING_POINT_LAT = "parking_point_lat"; //$NON-NLS-1$
+	public static final String PARKING_POINT_LON = "parking_point_lon"; //$NON-NLS-1$
+	public static final String PARKING_TYPE = "parking_type"; //$NON-NLS-1$
+	public static final String PARKING_TIME = "parking_limit_time"; //$//$NON-NLS-1$
+	public static final String PARKING_START_TIME = "parking_time"; //$//$NON-NLS-1$
+	public static final String PARKING_EVENT_ADDED = "parking_event_added"; //$//$NON-NLS-1$
 
 	// Constants for determining the order of items in the additional actions context menu
 	private static final int MARK_AS_PARKING_POS_ITEM_ORDER = 10500;
 
 	private LatLon parkingPosition;
-	private OsmandApplication app;
-
 	private TextInfoWidget parkingPlaceControl;
+
 	private final CommonPreference<Float> parkingLat;
 	private final CommonPreference<Float> parkingLon;
-	private CommonPreference<Boolean> parkingType;
-	private CommonPreference<Boolean> parkingEvent;
-	private CommonPreference<Long> parkingTime;
-	private CommonPreference<Long> parkingStartTime;
+	private final CommonPreference<Boolean> parkingType;
+	private final CommonPreference<Boolean> parkingEvent;
+	private final CommonPreference<Long> parkingTime;
+	private final CommonPreference<Long> parkingStartTime;
 
 	public ParkingPositionPlugin(OsmandApplication app) {
-		this.app = app;
+		super(app);
 		OsmandSettings set = app.getSettings();
 		ApplicationMode.regWidgetVisibility("parking", (ApplicationMode[]) null);
 		parkingLat = set.registerFloatPreference(PARKING_POINT_LAT, 0f).makeGlobal();
@@ -506,8 +506,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public int getAssetResourceName() {
-		return R.drawable.parking_position;
+	public Drawable getAssetResourceImage() {
+		return app.getUIUtilities().getIcon(R.drawable.parking_position);
 	}
 	
 	@Override

@@ -23,12 +23,12 @@ public class AccessibilityPlugin extends OsmandPlugin {
 	public static final int INCLINATION_RIGHT = 3;
 
 	private static final String ID = "osmand.accessibility";
-	private OsmandApplication app;
+
 	private SoundPool sounds;
 	private Map<Integer, Integer> soundIcons = new HashMap<Integer, Integer>();
 
 	public AccessibilityPlugin(OsmandApplication app) {
-		this.app = app;
+		super(app);
 		OsmandSettings settings = app.getSettings();
 		pluginPreferences.add(settings.ACCESSIBILITY_MODE);
 		pluginPreferences.add(settings.SPEECH_RATE);
@@ -86,11 +86,6 @@ public class AccessibilityPlugin extends OsmandPlugin {
 			sounds.release();
 			sounds = null;
 		}
-	}
-
-	@Override
-	public int getAssetResourceName() {
-		return 0;
 	}
 
 	@Override

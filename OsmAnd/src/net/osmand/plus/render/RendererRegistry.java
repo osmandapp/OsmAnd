@@ -260,9 +260,9 @@ public class RendererRegistry {
 			if (lf != null) {
 				for (File f : lf) {
 					if (f != null && f.getName().endsWith(IndexConstants.ROUTING_AND_RENDERING_FILE_EXT)) {
-						if(!internalRenderers.containsValue(f.getName())) {
-							String name = f.getName().substring(0, f.getName().length() - IndexConstants.ROUTING_AND_RENDERING_FILE_EXT.length());
-							externalRenderers.put(name.replace('_', ' ').replace('-', ' '), f);
+						if (!internalRenderers.containsValue(f.getName())) {
+							String name = formatRendererFileName(f.getName());
+							externalRenderers.put(name, f);
 						}
 					}
 				}
@@ -270,7 +270,12 @@ public class RendererRegistry {
 		}
 		this.externalRenderers = externalRenderers;
 	}
-	
+
+	public static String formatRendererFileName(String fileName) {
+		String name = fileName.substring(0, fileName.length() - IndexConstants.ROUTING_AND_RENDERING_FILE_EXT.length());
+		return name.replace('_', ' ').replace('-', ' ');
+	}
+
 	public Collection<String> getRendererNames(){
 		LinkedHashSet<String> names = new LinkedHashSet<String>();
 		names.add(DEFAULT_RENDER);

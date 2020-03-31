@@ -13,6 +13,7 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.google.gson.reflect.TypeToken;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -130,6 +131,17 @@ public class QuickActionRegistry {
 	public QuickAction getQuickAction(long id) {
 		for (QuickAction action : quickActions) {
 			if (action.id == id) {
+				return action;
+			}
+		}
+		return null;
+	}
+
+	public QuickAction getQuickAction(OsmandApplication app, int type, String name, Map<String, String> params) {
+		for (QuickAction action : quickActions) {
+			if (action.getType() == type
+					&& (action.hasCustomName(app) && action.getName(app).equals(name) || !action.hasCustomName(app))
+					&& action.getParams().equals(params)) {
 				return action;
 			}
 		}
