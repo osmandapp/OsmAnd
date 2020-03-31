@@ -3067,7 +3067,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="app_mode_scooter">Scooter</string>
     <string name="precision_hdop_and_vdop">Précision horizontale : %1$s, Précision verticale : %2$s</string>
     <string name="precision_hdop">Précision horizontale : %s</string>
-    <string name="app_mode_offroad">Hors route</string>
+    <string name="app_mode_offroad">Tout terrain</string>
     <string name="routing_attr_max_num_changes_name">Nombre de correspondances</string>
     <string name="turn_screen_on_sensor">Utiliser le capteur de proximité</string>
     <string name="sett_no_ext_input">Aucun</string>
@@ -3578,4 +3578,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_rhomb">Losange</string>
     <string name="shared_string_square">Carré</string>
     <string name="shared_string_octagon">Octogone</string>
+    <string name="app_mode_ski_touring">Ski de randonnée</string>
+    <string name="app_mode_ski_snowmobile">Motoneige</string>
+    <string name="custom_osmand_plugin">Greffon OsmAnd personnalisé</string>
 </resources>
