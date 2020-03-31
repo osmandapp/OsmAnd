@@ -24,7 +24,6 @@ import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
-import net.osmand.plus.render.RendererRegistry;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -356,12 +355,13 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	}
 
 	public void addRouter(String fileName) {
-		routerNames.add(fileName);
+		String routerName = Algorithms.getFileWithoutDirs(fileName);
+		routerNames.add(routerName);
 	}
 
 	public void addRenderer(String fileName) {
-		String renderer = RendererRegistry.formatRendererFileName(fileName);
-		rendererNames.add(renderer.replace('_', ' ').replace('-', ' '));
+		String rendererName = Algorithms.getFileWithoutDirs(fileName);
+		rendererNames.add(rendererName);
 	}
 
 	public void loadResources() {

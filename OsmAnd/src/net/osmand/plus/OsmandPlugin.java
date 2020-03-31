@@ -631,6 +631,22 @@ public abstract class OsmandPlugin {
 		return null;
 	}
 
+	public static List<String> getDisabledRendererNames() {
+		List<String> l = new ArrayList<String>();
+		for (OsmandPlugin plugin : getNotEnabledPlugins()) {
+			l.addAll(plugin.getRendererNames());
+		}
+		return l;
+	}
+
+	public static List<String> getDisabledRouterNames() {
+		List<String> l = new ArrayList<String>();
+		for (OsmandPlugin plugin : getNotEnabledPlugins()) {
+			l.addAll(plugin.getRouterNames());
+		}
+		return l;
+	}
+
 	public static List<String> onIndexingFiles(IProgress progress) {
 		List<String> l = new ArrayList<String>();
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
