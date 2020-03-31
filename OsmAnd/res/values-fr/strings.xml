@@ -526,10 +526,10 @@
     <string name="choose_available_region">Sélectionnez une région dans la liste</string>
     <string name="choose_intersected_street">Sélectionnez une intersection</string>
     <string name="Closest_Amenities">Équipements à proximité</string>
-    <string name="app_mode_default">Carte</string>
-    <string name="app_mode_car">Voiture</string>
-    <string name="app_mode_bicycle">Vélo</string>
-    <string name="app_mode_pedestrian">Piéton</string>
+    <string name="app_mode_default">Parcourir la carte</string>
+    <string name="app_mode_car">En voiture</string>
+    <string name="app_mode_bicycle">À vélo</string>
+    <string name="app_mode_pedestrian">À pied</string>
     <string name="position_on_map_center">Centre</string>
     <string name="position_on_map_bottom">Bas</string>
     <string name="navigate_point_top_text">Entrez la latitude et la longitude au format sélectionné (D - degrés, M - minutes, S - secondes)</string>
@@ -3024,7 +3024,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="app_mode_horse">À cheval</string>
     <string name="app_mode_helicopter">Hélicoptère</string>
     <string name="osmand_routing_promo">"Vous pouvez ajouter votre propre version du fichier routing.xml dans  ..osmand/routing"</string>
-    <string name="app_mode_skiing">Ski</string>
+    <string name="app_mode_skiing">À ski</string>
     <string name="settings_routing_mode_string">Mode : %s</string>
     <string name="routing_profile_ski">Ski</string>
     <string name="profile_type_descr_string">Type : %s</string>
