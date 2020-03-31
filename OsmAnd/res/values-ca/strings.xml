@@ -419,7 +419,7 @@
     <string name="search_address_street">Carrer</string>
     <string name="app_mode_car">Cotxe</string>
     <string name="app_mode_bicycle">Bicicleta</string>
-    <string name="app_mode_pedestrian">Vianant</string>
+    <string name="app_mode_pedestrian">A peu</string>
     <string name="search_button">Cerca</string>
     <string name="search_activity">Cerca</string>
     <string name="shared_string_exit">Surt</string>
@@ -514,7 +514,7 @@
     <string name="map_view_3d_descr">Activeu la visualització en 3D del mapa.</string>
     <string name="show_gps_coordinates_text">Mostra les coordenades de GPS al mapa</string>
     <string name="position_on_map_center">Centre</string>
-    <string name="app_mode_default">Per defecte</string>
+    <string name="app_mode_default">Mapa esquemàtic</string>
     <string name="navigate_point_latitude">Latitud</string>
     <string name="navigate_point_longitude">Longitud</string>
     <string name="search_address_region">Regió</string>
@@ -1115,7 +1115,7 @@
     <string name="off_router_service_no_gps_available">El servei de navegació en segon pla necessita tenir un sistema d\'ubicació activat.</string>
     <string name="background_service_provider_descr">Trieu el sistema d\'ubicació que utilitzarà el servei en segon pla.</string>
     <string name="select_gpx">Selecciona una traça GPX…</string>
-    <string name="route_descr_select_destination">Selecciona un destí</string>
+    <string name="route_descr_select_destination">Establiu un destí</string>
     <string name="shared_string_select_on_map">Selecciona al mapa</string>
     <string name="shared_string_favorite">Preferida</string>
     <string name="route_preferences">Preferències de ruta</string>
@@ -1234,14 +1234,14 @@
     <string name="gpx_selection_points">%1$s \nPunts</string>
     <string name="gpx_selection_track">%1$s \nTraça %2$s</string>
     <string name="save_as_favorites_points">Guarda com un grup de Preferits</string>
-    <string name="select_destination_and_intermediate_points">Seleccioneu destinacions</string>
+    <string name="select_destination_and_intermediate_points">Establiu destinacions</string>
     <string name="layer_amenity_label">Etiquetes superposades de PDIs</string>
     <string name="show_zoom_buttons_navigation_descr">Mostra els botons de zoom durant la navegació.</string>
     <string name="show_zoom_buttons_navigation">Mostra els botons de zoom</string>
     <string name="sort_by_distance">Ordena per distància</string>
     <string name="sort_by_name">Ordena per nom</string>
-    <string name="none_selected_gpx">Cap fitxer GPX seleccionat. Seleccioneu-ne un prement-lo contínuament.</string>
-    <string name="local_index_select_gpx_file">Selecciona per mostrar</string>
+    <string name="none_selected_gpx">Seleccioneu un fitxer GPX prement-lo prolongadament.</string>
+    <string name="local_index_select_gpx_file">Seleccioneu una traça</string>
     <string name="no_index_file_to_download">No s\'ha trobat cap baixada, verifiqueu la vostra connexió a Internet.</string>
     <string name="rendering_attr_hideBuildings_name">Edificis</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Vies sense circulació de vehicles</string>
@@ -1262,7 +1262,7 @@
     <string name="lang_he">Hebreu</string>
     <string name="forward">Endavant</string>
     <string name="home">Tauler</string>
-    <string name="live_monitoring_m_descr">Envia el registre de la traça a un servei web específic si s\'ha activat la gravació en un GPX.</string>
+    <string name="live_monitoring_m_descr">Envia les dades de la traça a un servei web específic si està activat l\'enregistrament de GPX.</string>
     <string name="live_monitoring_m">Registre de traça en línia (cal GPX)</string>
     <string name="live_monitoring_start">Inicia un registre de traça en línia</string>
     <string name="live_monitoring_stop">Atura el registre de traça en línia</string>
@@ -1331,9 +1331,9 @@
     <string name="local_index_description">Premeu qualsevol indicació existent per veure més detalls, premeu contínuament per desactivar o esborrar. Dades actuals al dispositiu (%1$s lliure):</string>
     <string name="text_size_descr">Definiu la mida del text en el mapa.</string>
     <string name="text_size">Mida del text</string>
-    <string name="fav_point_dublicate">Nom de punt preferit duplicat</string>
-    <string name="fav_point_dublicate_message">El nom indicat del Preferit ja es fa servir, s\'ha canviat a %1$s per evitar duplicitats.</string>
-    <string name="fav_point_emoticons_message">El nom del Preferit s\'ha canviat a %1$s per facilitar el desar bé la cadena amb emoticones en un fitxer.</string>
+    <string name="fav_point_dublicate">S\'ha indicat un nom de Preferit duplicat</string>
+    <string name="fav_point_dublicate_message">El nom del Preferit s\'ha canviat a %1$s per evitar duplicitats.</string>
+    <string name="fav_point_emoticons_message">El nom del Preferit s\'ha canviat a \'%1$s\' per desar el text que inclou emoticones en un fitxer.</string>
     <string name="print_route">Imprimeix la ruta</string>
     <string name="speed_limit_exceed">Tolerància sobre el límit de velocitat</string>
     <string name="speed_limit_exceed_message">Trieu el marge de tolerància al límit de velocitat per sobre del que rebreu un avís de veu.</string>
@@ -1428,8 +1428,8 @@
     <string name="plugin_install_needs_network">Per instal·lar aquest connector us cal una connexió a internet.</string>
     <string name="plugin_ski_name">Vista mapa d\'esquí</string>
     <string name="plugin_nautical_name">Vista cartes marines</string>
-    <string name="world_ski_missing">Per veure les pistes d\'esquí cal que baixeu un mapa específic</string>
-    <string name="nautical_maps_missing">Per accedir a cartes marines cal que baixeu un mapa específic</string>
+    <string name="world_ski_missing">Baixeu el mapa local específic per veure les instal·lacions d\'esquí.</string>
+    <string name="nautical_maps_missing">Baixeu un mapa local específic per veure les dades nàutiques.</string>
     <string name="shared_string_enable">Activa</string>
     <string name="shared_string_disable">Desactiva</string>
     <string name="rendering_attr_pisteGrooming_name">Pista condicionada</string>
@@ -3571,4 +3571,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Recomanació: no és fàcil preveure què s\'enregistrarà i què no; podria ser millor desactivar aquest filtre.</string>
     <string name="terrain_slider_description">Definiu els nivells de zoom mínim i màxim entre els quals es visualitzarà la capa.</string>
     <string name="shared_string_terrain">Terreny</string>
+    <string name="shared_string_octagon">Octàgon</string>
+    <string name="shared_string_min">Mín.</string>
+    <string name="sort_by_category">Ordena per categoria</string>
 </resources>
