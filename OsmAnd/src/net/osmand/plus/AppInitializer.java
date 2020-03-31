@@ -618,7 +618,7 @@ public class AppInitializer implements IProgress {
 					File[] fl = routingFolder.listFiles();
 					if (fl != null && fl.length > 0) {
 						for (File f : fl) {
-							if (f.isFile() && f.getName().endsWith(IndexConstants.ROUTING_AND_RENDERING_FILE_EXT) && f.canRead()) {
+							if (f.isFile() && f.getName().endsWith(IndexConstants.ROUTING_FILE_EXT) && f.canRead()) {
 								try {
 									String fileName = f.getName();
 									RoutingConfiguration.Builder builder = new RoutingConfiguration.Builder(defaultAttributes);

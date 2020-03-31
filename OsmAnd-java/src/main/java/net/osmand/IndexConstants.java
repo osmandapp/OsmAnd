@@ -42,7 +42,7 @@ public class IndexConstants {
 
 	public static final String OSMAND_SETTINGS_FILE_EXT = ".osf";
 	
-	public static final String ROUTING_AND_RENDERING_FILE_EXT = ".xml";
+	public static final String ROUTING_FILE_EXT = ".xml";
 
 	public static final String RENDERER_INDEX_EXT = ".render.xml"; //$NON-NLS-1$
 	

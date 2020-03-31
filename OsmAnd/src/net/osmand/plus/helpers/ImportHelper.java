@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -14,13 +13,7 @@ import android.os.ParcelFileDescriptor;
 import android.provider.OpenableColumns;
 import android.provider.Settings;
 import android.text.style.ForegroundColorSpan;
-import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -53,7 +46,6 @@ import net.osmand.plus.SettingsHelper.PluginSettingsItem;
 import net.osmand.plus.SettingsHelper.SettingsCollectListener;
 import net.osmand.plus.SettingsHelper.SettingsImportListener;
 import net.osmand.plus.SettingsHelper.SettingsItem;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
@@ -89,7 +81,8 @@ import java.util.zip.ZipInputStream;
 
 import static android.app.Activity.RESULT_OK;
 import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
-import static net.osmand.IndexConstants.ROUTING_AND_RENDERING_FILE_EXT;
+import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
+import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
 import static net.osmand.plus.AppInitializer.loadRoutingFiles;
 import static net.osmand.plus.myplaces.FavoritesActivity.FAV_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
@@ -111,8 +104,8 @@ public class ImportHelper {
 	public final static int IMPORT_FILE_REQUEST = 1006;
 	
 	public enum ImportType {
-		SETTINGS(IndexConstants.OSMAND_SETTINGS_FILE_EXT),
-		ROUTING(ROUTING_AND_RENDERING_FILE_EXT);
+		SETTINGS(OSMAND_SETTINGS_FILE_EXT),
+		ROUTING(ROUTING_FILE_EXT);
 
 		ImportType(String extension) {
 			this.extension = extension;
@@ -197,8 +190,10 @@ public class ImportHelper {
 			handleSqliteTileImport(intentUri, fileName);
 		} else if (fileName != null && fileName.endsWith(OSMAND_SETTINGS_FILE_EXT)) {
 			handleOsmAndSettingsImport(intentUri, fileName, extras, null);
-		} else if (fileName != null && fileName.endsWith(ROUTING_AND_RENDERING_FILE_EXT)) {
-			handleXmlFileImport(intentUri, fileName);
+		} else if (fileName != null && fileName.endsWith(RENDERER_INDEX_EXT)) {
+			handleRenderingFileImport(intentUri, fileName);
+		} else if (fileName != null && fileName.endsWith(ROUTING_FILE_EXT)) {
+			handleRoutingFileImport(intentUri, fileName, null);
 		} else {
 			handleFavouritesImport(intentUri, fileName, saveFile, useImportDir, false);
 		}
@@ -869,66 +864,6 @@ public class ImportHelper {
 		});
 	}
 
-	private void handleXmlFileImport(final Uri intentUri, final String fileName) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-
-		final boolean nightMode;
-		if (activity instanceof MapActivity) {
-			nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		} else {
-			nightMode = !app.getSettings().isLightContent();
-		}
-		final LayoutInflater themedInflater = UiUtilities.getInflater(activity, nightMode);
-
-		View dialogTitle = themedInflater.inflate(R.layout.bottom_sheet_item_simple, null);
-		dialogTitle.findViewById(R.id.icon).setVisibility(View.GONE);
-		TextView tvTitle = dialogTitle.findViewById(R.id.title);
-		tvTitle.setText(R.string.import_from_file);
-		int textSize = (int) app.getResources().getDimension(R.dimen.dialog_header_text_size);
-		tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-		builder.setCustomTitle(dialogTitle);
-
-		String[] strings = new String[2];
-		strings[0] = app.getString(R.string.import_routing_file);
-		strings[1] = app.getString(R.string.import_rendering_file);
-
-		final int[] icons = new int[2];
-		icons[0] = R.drawable.ic_action_gdirections_dark;
-		icons[1] = R.drawable.ic_map;
-
-		ArrayAdapter<String> singleChoiceAdapter = new ArrayAdapter<String>(activity, R.layout.bottom_sheet_item_simple, R.id.title, strings) {
-			@NonNull
-			@Override
-			public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-				View v = convertView;
-				if (v == null) {
-					v = themedInflater.inflate(R.layout.bottom_sheet_item_simple, parent, false);
-				}
-				int activeColor = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
-				Drawable icon = app.getUIUtilities().getIcon(icons[position], activeColor);
-				((TextView) v.findViewById(R.id.title)).setText(getItem(position));
-				((ImageView) v.findViewById(R.id.icon)).setImageDrawable(icon);
-				return v;
-			}
-		};
-
-		builder.setAdapter(singleChoiceAdapter, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				if (which == 0) {
-					handleRoutingFileImport(intentUri, fileName, null);
-				} else {
-					handleRenderingFileImport(intentUri, fileName);
-				}
-			}
-		});
-
-		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		AlertDialog dialog = builder.create();
-		dialog.getListView().setDividerHeight(0);
-		dialog.show();
-	}
-
 	@SuppressLint("StaticFieldLeak")
 	private void handleRenderingFileImport(final Uri intentUri, final String fileName) {
 		final AsyncTask<Void, Void, String> renderingImportTask = new AsyncTask<Void, Void, String>() {
@@ -964,6 +899,7 @@ public class ImportHelper {
 				File file = new File(renderingDir, mFileName);
 				if (error == null && file.exists()) {
 					app.getRendererRegistry().updateExternalRenderers();
+					app.showShortToastMessage(app.getString(R.string.file_imported_successfully, mFileName));
 				} else {
 					app.showShortToastMessage(app.getString(R.string.file_import_error, mFileName, error));
 				}

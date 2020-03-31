@@ -32,9 +32,11 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -175,13 +177,21 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 				return collator.compare(string1, string2);
 			}
 		});
+		Map<String, String> renderers = getMyApplication().getRendererRegistry().getRenderers();
+		List<String> disabledRendererNames = OsmandPlugin.getDisabledRendererNames();
 
-		List<String> names = new ArrayList<>(getMyApplication().getRendererRegistry().getRendererNames());
-		for (OsmandPlugin plugin : OsmandPlugin.getNotEnabledPlugins()) {
-			for (String name : plugin.getRendererNames()) {
-				names.remove(name);
+		if (!Algorithms.isEmpty(disabledRendererNames)) {
+			Iterator<Map.Entry<String, String>> iterator = renderers.entrySet().iterator();
+			while (iterator.hasNext()) {
+				String rendererVal = iterator.next().getValue();
+				String rendererFileName = Algorithms.getFileWithoutDirs(rendererVal);
+				if (disabledRendererNames.contains(rendererFileName)) {
+					iterator.remove();
+				}
 			}
 		}
+
+		List<String> names = new ArrayList<>(renderers.keySet());
 		for (String name : names) {
 			String translation = RendererRegistry.getTranslatedRendererName(context, name);
 			if (translation == null) {

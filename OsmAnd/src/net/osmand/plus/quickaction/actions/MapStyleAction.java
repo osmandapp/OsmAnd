@@ -27,7 +27,9 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class MapStyleAction extends SwitchableAction<String> {
 
@@ -157,15 +159,22 @@ public class MapStyleAction extends SwitchableAction<String> {
 				AlertDialog.Builder bld = new AlertDialog.Builder(themedContext);
 				bld.setTitle(R.string.renderers);
 
-				final List<String> visibleNamesList = new ArrayList<>();
-				final ArrayList<String> items = new ArrayList<>(app.getRendererRegistry().getRendererNames());
+				Map<String, String> renderers = app.getRendererRegistry().getRenderers();
+				List<String> disabledRendererNames = OsmandPlugin.getDisabledRendererNames();
 
-				for (OsmandPlugin plugin : OsmandPlugin.getNotEnabledPlugins()) {
-					for (String name : plugin.getRendererNames()) {
-						items.remove(name);
+				if (!Algorithms.isEmpty(disabledRendererNames)) {
+					Iterator<Map.Entry<String, String>> iterator = renderers.entrySet().iterator();
+					while (iterator.hasNext()) {
+						String rendererVal = iterator.next().getValue();
+						String rendererFileName = Algorithms.getFileWithoutDirs(rendererVal);
+						if (disabledRendererNames.contains(rendererFileName)) {
+							iterator.remove();
+						}
 					}
 				}
 
+				List<String> visibleNamesList = new ArrayList<>();
+				final List<String> items = new ArrayList<>(renderers.keySet());
 				for (String item : items) {
 					String translation = RendererRegistry.getTranslatedRendererName(activity, item);
 					visibleNamesList.add(translation != null ? translation

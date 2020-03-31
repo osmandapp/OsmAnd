@@ -283,6 +283,21 @@ public abstract class OsmandPlugin {
 		saveCustomPlugins(app);
 	}
 
+	public static void removeCustomPlugin(@NonNull OsmandApplication app, @NonNull final CustomOsmandPlugin plugin) {
+		allPlugins.remove(plugin);
+		if (plugin.isActive()) {
+			plugin.removePluginItems(new CustomOsmandPlugin.PluginItemsListener() {
+				@Override
+				public void onItemsRemoved() {
+					Algorithms.removeAllFiles(plugin.getPluginDir());
+				}
+			});
+		} else {
+			Algorithms.removeAllFiles(plugin.getPluginDir());
+		}
+		saveCustomPlugins(app);
+	}
+
 	private static void loadCustomPlugins(@NonNull OsmandApplication app) {
 		SettingsAPI settingsAPI = app.getSettings().getSettingsAPI();
 		Object pluginPrefs = settingsAPI.getPreferenceObject(PLUGINS_PREFERENCES_NAME);
@@ -303,25 +318,23 @@ public abstract class OsmandPlugin {
 
 	private static void saveCustomPlugins(OsmandApplication app) {
 		List<CustomOsmandPlugin> customOsmandPlugins = getCustomPlugins();
-		if (!customOsmandPlugins.isEmpty()) {
-			SettingsAPI settingsAPI = app.getSettings().getSettingsAPI();
-			Object pluginPrefs = settingsAPI.getPreferenceObject(PLUGINS_PREFERENCES_NAME);
-			JSONArray itemsJson = new JSONArray();
-			for (CustomOsmandPlugin plugin : customOsmandPlugins) {
-				try {
-					JSONObject json = new JSONObject();
-					json.put("pluginId", plugin.getId());
-					plugin.writeAdditionalDataToJson(json);
-					plugin.writeDependentFilesJson(json);
-					itemsJson.put(json);
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
+		SettingsAPI settingsAPI = app.getSettings().getSettingsAPI();
+		Object pluginPrefs = settingsAPI.getPreferenceObject(PLUGINS_PREFERENCES_NAME);
+		JSONArray itemsJson = new JSONArray();
+		for (CustomOsmandPlugin plugin : customOsmandPlugins) {
+			try {
+				JSONObject json = new JSONObject();
+				json.put("pluginId", plugin.getId());
+				plugin.writeAdditionalDataToJson(json);
+				plugin.writeDependentFilesJson(json);
+				itemsJson.put(json);
+			} catch (JSONException e) {
+				e.printStackTrace();
 			}
-			String jsonStr = itemsJson.toString();
-			if (!jsonStr.equals(settingsAPI.getString(pluginPrefs, CUSTOM_PLUGINS_KEY, ""))) {
-				settingsAPI.edit(pluginPrefs).putString(CUSTOM_PLUGINS_KEY, jsonStr).commit();
-			}
+		}
+		String jsonStr = itemsJson.toString();
+		if (!jsonStr.equals(settingsAPI.getString(pluginPrefs, CUSTOM_PLUGINS_KEY, ""))) {
+			settingsAPI.edit(pluginPrefs).putString(CUSTOM_PLUGINS_KEY, jsonStr).commit();
 		}
 	}
 
@@ -629,6 +642,22 @@ public abstract class OsmandPlugin {
 			}
 		}
 		return null;
+	}
+
+	public static List<String> getDisabledRendererNames() {
+		List<String> l = new ArrayList<String>();
+		for (OsmandPlugin plugin : getNotEnabledPlugins()) {
+			l.addAll(plugin.getRendererNames());
+		}
+		return l;
+	}
+
+	public static List<String> getDisabledRouterNames() {
+		List<String> l = new ArrayList<String>();
+		for (OsmandPlugin plugin : getNotEnabledPlugins()) {
+			l.addAll(plugin.getRouterNames());
+		}
+		return l;
 	}
 
 	public static List<String> onIndexingFiles(IProgress progress) {

@@ -1,6 +1,7 @@
 package net.osmand.plus.activities;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -14,11 +15,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.AndroidUtils;
 import net.osmand.aidl.ConnectedApp;
+import net.osmand.plus.CustomOsmandPlugin;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -251,6 +254,34 @@ public class PluginsActivity extends OsmandListActivity implements DownloadIndex
 			});
 		}
 
+		if (plugin instanceof CustomOsmandPlugin) {
+			MenuItem settingsItem = optionsMenu.getMenu().add(R.string.shared_string_delete);
+			settingsItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					showDeletePluginDialog((CustomOsmandPlugin) plugin);
+					optionsMenu.dismiss();
+					return true;
+				}
+			});
+		}
+
 		optionsMenu.show();
+	}
+
+	private void showDeletePluginDialog(final CustomOsmandPlugin plugin) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(PluginsActivity.this);
+		builder.setTitle(getString(R.string.delete_confirmation_msg, plugin.getName()));
+		builder.setMessage(R.string.are_you_sure);
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				OsmandApplication app = getMyApplication();
+				OsmandPlugin.removeCustomPlugin(app, plugin);
+				getListAdapter().remove(plugin);
+			}
+		});
+		builder.show();
 	}
 }
