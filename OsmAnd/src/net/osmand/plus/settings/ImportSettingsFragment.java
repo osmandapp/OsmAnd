@@ -174,7 +174,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		adapter = new ExportImportSettingsAdapter(app, nightMode, true);
 		Map<Type, List<?>> itemsMap = new HashMap<>();
 		if (settingsItems != null) {
-			itemsMap = getSettingsToOperate(settingsItems, true);
+			itemsMap = getSettingsToOperate(settingsItems, false);
 			adapter.updateSettingsList(itemsMap);
 		}
 		expandableList.setAdapter(adapter);
@@ -355,7 +355,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		return settingsItems;
 	}
 
-	public static Map<Type, List<?>> getSettingsToOperate(List<SettingsItem> settingsItems, boolean collectedItems) {
+	public static Map<Type, List<?>> getSettingsToOperate(List<SettingsItem> settingsItems, boolean importComplete) {
 		Map<Type, List<?>> settingsToOperate = new HashMap<>();
 		List<ApplicationMode.ApplicationModeBean> profiles = new ArrayList<>();
 		List<QuickAction> quickActions = new ArrayList<>();
@@ -370,24 +370,24 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 				profiles.add(((ProfileSettingsItem) item).getModeBean());
 			} else if (item.getType().equals(SettingsItemType.QUICK_ACTIONS)) {
 				QuickActionsSettingsItem quickActionsItem = (QuickActionsSettingsItem) item;
-				if (collectedItems) {
-					quickActions.addAll(quickActionsItem.getItems());
+				if (importComplete) {
+					quickActions.addAll(quickActionsItem.getAppliedItems());
 				} else {
-					quickActions.addAll(quickActionsItem.getImportItems());
+					quickActions.addAll(quickActionsItem.getItems());
 				}
 			} else if (item.getType().equals(SettingsItemType.POI_UI_FILTERS)) {
 				PoiUiFilterSettingsItem poiUiFilterItem = (PoiUiFilterSettingsItem) item;
-				if (collectedItems) {
-					poiUIFilters.addAll(poiUiFilterItem.getItems());
+				if (importComplete) {
+					poiUIFilters.addAll(poiUiFilterItem.getAppliedItems());
 				} else {
-					poiUIFilters.addAll(poiUiFilterItem.getImportItems());
+					poiUIFilters.addAll(poiUiFilterItem.getItems());
 				}
 			} else if (item.getType().equals(SettingsItemType.MAP_SOURCES)) {
 				MapSourcesSettingsItem mapSourcesItem = (MapSourcesSettingsItem) item;
-				if (collectedItems) {
-					tileSourceTemplates.addAll(mapSourcesItem.getItems());
+				if (importComplete) {
+					tileSourceTemplates.addAll(mapSourcesItem.getAppliedItems());
 				} else {
-					tileSourceTemplates.addAll(mapSourcesItem.getImportItems());
+					tileSourceTemplates.addAll(mapSourcesItem.getItems());
 				}
 			} else if (item.getType().equals(SettingsItemType.FILE)) {
 				FileSettingsItem fileItem = (FileSettingsItem) item;
@@ -398,10 +398,10 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 				}
 			} else if (item.getType().equals(SettingsItemType.AVOID_ROADS)) {
 				AvoidRoadsSettingsItem avoidRoadsItem = (AvoidRoadsSettingsItem) item;
-				if (collectedItems) {
-					avoidRoads.addAll(avoidRoadsItem.getItems());
+				if (importComplete) {
+					avoidRoads.addAll(avoidRoadsItem.getAppliedItems());
 				} else {
-					avoidRoads.addAll(avoidRoadsItem.getImportItems());
+					avoidRoads.addAll(avoidRoadsItem.getItems());
 				}
 			}
 		}
