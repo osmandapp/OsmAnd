@@ -1,14 +1,12 @@
 package net.osmand.plus.skimapsplugin;
 
-import android.app.Activity;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import android.graphics.drawable.Drawable;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.render.RendererRegistry;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,10 +16,8 @@ public class SkiMapsPlugin extends OsmandPlugin {
 	public static final String ID = "skimaps.plugin";
 	public static final String COMPONENT = "net.osmand.skimapsPlugin";
 
-	private OsmandApplication app;
-
 	public SkiMapsPlugin(OsmandApplication app) {
-		this.app = app;
+		super(app);
 	}
 
 	@Override
@@ -40,8 +36,8 @@ public class SkiMapsPlugin extends OsmandPlugin {
 	}
 	
 	@Override
-	public int getAssetResourceName() {
-		return R.drawable.ski_map;
+	public Drawable getAssetResourceImage() {
+		return app.getUIUtilities().getIcon(R.drawable.ski_map);
 	}
 
 	@Override
@@ -60,29 +56,18 @@ public class SkiMapsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public boolean init(@NonNull final OsmandApplication app, final Activity activity) {
-		if (activity != null) {
-			// called from UI
-			ApplicationMode.changeProfileAvailability(ApplicationMode.SKI, true, app);
-		}
-		return true;
-	}
-
-	@Override
-	public void onInstall(@NonNull OsmandApplication app, @Nullable Activity activity) {
-		ApplicationMode.changeProfileAvailability(ApplicationMode.SKI, true, app);
-		super.onInstall(app, activity);
-	}
-
-	@Override
 	public List<ApplicationMode> getAddedAppModes() {
 		return Collections.singletonList(ApplicationMode.SKI);
 	}
 
 	@Override
-	public void disable(OsmandApplication app) {
-		super.disable(app);
-		ApplicationMode.changeProfileAvailability(ApplicationMode.SKI, false, app);
+	public List<String> getRendererNames() {
+		return Collections.singletonList(RendererRegistry.WINTER_SKI_RENDER);
+	}
+
+	@Override
+	public List<String> getRouterNames() {
+		return Collections.singletonList("ski");
 	}
 
 	@Override

@@ -3823,4 +3823,7 @@
     <string name="poi_seamark_water_level_above_mwl">Vandniveau: over gennemsnitlige vandstand</string>
     <string name="poi_seamark_water_level_below_mwl">Vandniveau: under gennemsnitlig vandstand</string>
     <string name="poi_seamark_obstruction">Obstruktion</string>
+    <string name="poi_drinking_water_refill_network">Netværk til påfyldning af drikkevand</string>
+    <string name="poi_drinking_water_refill_no">Påfyldning af drikkevand: nej</string>
+    <string name="poi_drinking_water_refill_yes">Påfyldning af drikkevand: ja</string>
 </resources>

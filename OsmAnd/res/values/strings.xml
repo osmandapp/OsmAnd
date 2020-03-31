@@ -11,6 +11,9 @@
 	Thx - Hardy
 
 -->
+    <string name="custom_osmand_plugin">Custom OsmAnd plugin</string>
+    <string name="app_mode_ski_snowmobile">Snowmobile</string>
+    <string name="app_mode_ski_touring">Ski touring</string>
     <string name="divider_descr">Elements below this point separated by a divider.</string>
     <string name="shared_string_divider">Divider</string>
     <string name="reorder_or_hide_from">Reorder or hide items from the %1$s.</string>
@@ -20,7 +23,7 @@
     <string name="ui_customization_description">Customize the quantity of items in Drawer, Configure map and context menu.\n\nYou can disable unused plugins, to hide all its controls from the application.</string>
     <string name="shared_string_min">Min</string>
     <string name="shared_string_square">Square</string>
-    <string name="shared_string_rhomb">Rhomb</string>
+    <string name="shared_string_octagon">Octagon</string>
     <string name="shared_string_circle">Circle</string>
     <string name="select_shape">Select shape</string>
     <string name="select_group">Select group</string>

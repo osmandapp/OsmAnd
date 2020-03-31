@@ -22,6 +22,7 @@ import net.osmand.aidl.ConnectedApp;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.dialogs.PluginInstalledBottomSheetDialog;
 import net.osmand.plus.download.DownloadIndexesThread;
 
@@ -180,7 +181,7 @@ public class PluginsActivity extends OsmandListActivity implements DownloadIndex
 
 				OsmandApplication app = getMyApplication();
 				int color = AndroidUtils.getColorFromAttr(app, R.attr.list_background_color);
-				pluginLogo.setImageDrawable(app.getUIUtilities().getPaintedIcon(plugin.getLogoResourceId(), color));
+				pluginLogo.setImageDrawable(UiUtilities.tintDrawable(plugin.getLogoResource(), color));
 				pluginLogo.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {

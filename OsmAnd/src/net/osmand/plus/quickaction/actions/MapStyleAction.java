@@ -27,7 +27,6 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 public class MapStyleAction extends SwitchableAction<String> {
@@ -160,18 +159,17 @@ public class MapStyleAction extends SwitchableAction<String> {
 
 				final List<String> visibleNamesList = new ArrayList<>();
 				final ArrayList<String> items = new ArrayList<>(app.getRendererRegistry().getRendererNames());
-				final boolean nauticalPluginDisabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null;
 
-				Iterator<String> iterator = items.iterator();
-				while (iterator.hasNext()) {
-					String item = iterator.next();
-					if (nauticalPluginDisabled && item.equals(RendererRegistry.NAUTICAL_RENDER)) {
-						iterator.remove();
-					} else {
-						String translation = RendererRegistry.getTranslatedRendererName(activity, item);
-						visibleNamesList.add(translation != null ? translation
-								: item.replace('_', ' ').replace('-', ' '));
+				for (OsmandPlugin plugin : OsmandPlugin.getNotEnabledPlugins()) {
+					for (String name : plugin.getRendererNames()) {
+						items.remove(name);
 					}
+				}
+
+				for (String item : items) {
+					String translation = RendererRegistry.getTranslatedRendererName(activity, item);
+					visibleNamesList.add(translation != null ? translation
+							: item.replace('_', ' ').replace('-', ' '));
 				}
 
 				final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(themedContext, R.layout.dialog_text_item);

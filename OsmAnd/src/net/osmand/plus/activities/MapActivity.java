@@ -112,6 +112,9 @@ import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
+import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
+import net.osmand.plus.mapcontextmenu.editors.PointEditorFragmentNew;
+import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
@@ -701,6 +704,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				return;
 			}
 		}
+
+		PointEditorFragmentNew pointEditorFragmentNew = getPointEditorFragmentNew();
+		if (pointEditorFragmentNew != null) {
+			pointEditorFragmentNew.showExitDialog();
+			return;
+		}
+
 		if (mapContextMenu.isVisible() && mapContextMenu.isClosable()) {
 			if (mapContextMenu.getCurrentMenuState() != MenuState.HEADER_ONLY && !isLandscapeLayout()) {
 				mapContextMenu.openMenuHeaderOnly();
@@ -2465,8 +2475,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return getFragment(ImportCompleteFragment.TAG);
 	}
 
-	public UiCustomizationFragment getUiCustomizationFragment() {
-		return getFragment(UiCustomizationFragment.TAG);
+	public PointEditorFragmentNew getPointEditorFragmentNew() {
+		PointEditorFragmentNew pointEditorFragmentNew;
+		pointEditorFragmentNew = getFragment(FavoritePointEditor.TAG);
+		if (pointEditorFragmentNew == null) {
+			pointEditorFragmentNew = getFragment(WptPtEditor.TAG);
+		}
+		return pointEditorFragmentNew;
 	}
 
 	public void backToConfigureProfileFragment() {

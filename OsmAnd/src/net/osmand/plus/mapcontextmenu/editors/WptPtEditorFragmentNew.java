@@ -347,7 +347,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 		if (categoriesMap != null) {
 			categoriesMap.put(name, color);
 		}
-		this.color = color;
+		this.color = this.color == 0 ? color : this.color;
 		super.setCategory(name, color);
 	}
 
@@ -411,12 +411,16 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 
 	@Override
 	public int getDefaultColor() {
-		return 0;
+		return defaultColor;
 	}
 
 	@Override
 	public int getPointColor() {
-		return color == 0 ? defaultColor : color;
+		if (color != 0) {
+			return color;
+		} else {
+			return getCategoryColor(getCategoryTextValue());
+		}
 	}
 
 	@Override

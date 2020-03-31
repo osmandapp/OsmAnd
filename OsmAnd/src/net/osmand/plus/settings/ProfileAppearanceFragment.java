@@ -770,7 +770,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				tempDir.mkdirs();
 			}
 			app.getSettingsHelper().exportSettings(tempDir, mode.getStringKey(),
-					getSettingsExportListener(), new SettingsHelper.ProfileSettingsItem(app, mode));
+					getSettingsExportListener(), true, new SettingsHelper.ProfileSettingsItem(app, mode));
 		}
 	}
 

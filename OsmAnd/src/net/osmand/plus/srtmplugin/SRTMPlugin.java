@@ -3,6 +3,7 @@ package net.osmand.plus.srtmplugin;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -62,19 +63,17 @@ public class SRTMPlugin extends OsmandPlugin {
 	public static final int TERRAIN_MIN_ZOOM = 3;
 	public static final int TERRAIN_MAX_ZOOM = 19;
 
-	private OsmandApplication app;
 	private OsmandSettings settings;
 
-	private boolean paid;
 	private TerrainLayer terrainLayer;
 
 	@Override
 	public String getId() {
-		return paid ? ID : FREE_ID;
+		return FREE_ID;
 	}
 
 	public SRTMPlugin(OsmandApplication app) {
-		this.app = app;
+		super(app);
 		settings = app.getSettings();
 	}
 
@@ -84,8 +83,8 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public int getAssetResourceName() {
-		return R.drawable.contour_lines;
+	public Drawable getAssetResourceImage() {
+		return app.getUIUtilities().getIcon(R.drawable.contour_lines);
 	}
 
 	@Override

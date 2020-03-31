@@ -78,6 +78,7 @@ public class FavoriteDialogs {
 				}
 				FavouritePoint point = (FavouritePoint) args.getSerializable(KEY_FAVORITE);
 				if (helper.editFavourite(fp, point.getLatitude(), point.getLongitude())) {
+					helper.deleteFavourite(point);
 					if (activity instanceof MapActivity) {
 						((MapActivity) activity).getContextMenu()
 								.show(new LatLon(point.getLatitude(), point.getLongitude()), fp.getPointDescription(activity), fp);

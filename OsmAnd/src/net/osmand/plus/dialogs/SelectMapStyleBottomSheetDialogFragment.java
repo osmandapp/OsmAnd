@@ -29,7 +29,6 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTitleWithDescrAndButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRulesStorage;
@@ -178,8 +177,10 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 		});
 
 		List<String> names = new ArrayList<>(getMyApplication().getRendererRegistry().getRendererNames());
-		if (OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null) {
-			names.remove(RendererRegistry.NAUTICAL_RENDER);
+		for (OsmandPlugin plugin : OsmandPlugin.getNotEnabledPlugins()) {
+			for (String name : plugin.getRendererNames()) {
+				names.remove(name);
+			}
 		}
 		for (String name : names) {
 			String translation = RendererRegistry.getTranslatedRendererName(context, name);

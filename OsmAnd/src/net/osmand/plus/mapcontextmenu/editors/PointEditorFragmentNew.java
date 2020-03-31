@@ -1,6 +1,8 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
@@ -22,6 +24,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
@@ -61,6 +64,8 @@ import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.isPersonalCategor
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
+
+	public static final String TAG = "PointEditorFragmentNew";
 
 	private View view;
 	private EditText nameEdit;
@@ -105,14 +110,14 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		toolbar.setBackgroundColor(ContextCompat.getColor(requireContext(),
 				nightMode ? R.color.app_bar_color_dark : R.color.list_background_color_light));
 		toolbar.setTitle(getToolbarTitle());
-		Drawable icBack = app.getUIUtilities().getIcon(R.drawable.ic_arrow_back,
+		Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app),
 				nightMode ? R.color.active_buttons_and_links_text_dark : R.color.description_font_and_bottom_sheet_icons);
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismiss();
+				showExitDialog();
 			}
 		});
 
@@ -147,7 +152,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			public void onClick(View v) {
 				DialogFragment dialogFragment = createSelectCategoryDialog();
 				if (dialogFragment != null) {
-
 					dialogFragment.show(getChildFragmentManager(), SelectCategoryDialogFragment.TAG);
 				}
 			}
@@ -166,8 +170,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		cancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				cancelled = true;
-				dismiss();
+				showExitDialog();
 			}
 		});
 
@@ -471,9 +474,15 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			oldIcon.findViewById(R.id.outline).setVisibility(View.INVISIBLE);
 			ImageView background = oldIcon.findViewById(R.id.background);
 			setIconSelectorBackground(background);
+			ImageView iconView = oldIcon.findViewById(R.id.icon);
+			iconView.setImageDrawable(UiUtilities.tintDrawable(ContextCompat.getDrawable(app, selectedIcon),
+					ContextCompat.getColor(app, R.color.icon_color_default_light)));
 		}
 		View icon = rootView.findViewWithTag(iconRes);
 		if (icon != null) {
+			ImageView iconView = icon.findViewById(R.id.icon);
+			iconView.setImageDrawable(UiUtilities.tintDrawable(ContextCompat.getDrawable(app, iconRes),
+					ContextCompat.getColor(app, R.color.color_white)));
 			icon.findViewById(R.id.outline).setVisibility(View.VISIBLE);
 			ImageView backgroundCircle = icon.findViewById(R.id.background);
 			AndroidUtils.setBackground(backgroundCircle,
@@ -729,6 +738,34 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		return getPaintedContentIcon(iconId, color);
 	}
 
+	public void showExitDialog() {
+		hideKeyboard();
+		if (!wasSaved()) {
+			AlertDialog.Builder dismissDialog = createWarningDialog(getActivity(),
+					R.string.shared_string_dismiss, R.string.exit_without_saving, R.string.shared_string_cancel);
+			dismissDialog.setPositiveButton(R.string.shared_string_exit, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					cancelled = true;
+					dismiss();
+				}
+			});
+			dismissDialog.show();
+		} else {
+			cancelled = true;
+			dismiss();
+		}
+	}
+
+	private AlertDialog.Builder createWarningDialog(Activity activity, int title, int message, int negButton) {
+		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
+		AlertDialog.Builder warningDialog = new AlertDialog.Builder(themedContext);
+		warningDialog.setTitle(getString(title));
+		warningDialog.setMessage(getString(message));
+		warningDialog.setNegativeButton(negButton, null);
+		return warningDialog;
+	}
+
 	class GroupAdapter extends RecyclerView.Adapter<GroupsViewHolder> {
 
 		private static final int VIEW_TYPE_FOOTER = 1;
@@ -760,6 +797,14 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 				Drawable iconAdd = app.getUIUtilities().getIcon(R.drawable.ic_action_add, activeColorResId);
 				((ImageView) view.findViewById(R.id.groupIcon)).setImageDrawable(iconAdd);
 				((TextView) view.findViewById(R.id.groupName)).setText(requireMyApplication().getString(R.string.add_group));
+				GradientDrawable rectContourDrawable = (GradientDrawable) ContextCompat.getDrawable(app,
+						R.drawable.bg_select_group_button_outline);
+				if (rectContourDrawable != null) {
+					int strokeColor = ContextCompat.getColor(app, nightMode ? R.color.stroked_buttons_and_links_outline_dark
+							: R.color.stroked_buttons_and_links_outline_light);
+					rectContourDrawable.setStroke(AndroidUtils.dpToPx(app, 1), strokeColor);
+					((ImageView) view.findViewById(R.id.outlineRect)).setImageDrawable(rectContourDrawable);
+				}
 			}
 			((TextView) view.findViewById(R.id.groupName)).setTextColor(getResources().getColor(activeColorResId));
 			return new GroupsViewHolder(view);
@@ -774,7 +819,8 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 						PointEditor editor = getEditor();
 						if (editor != null) {
 							EditCategoryDialogFragment dialogFragment =
-									EditCategoryDialogFragment.createInstance(editor.getFragmentTag(), getCategories(), false);
+									EditCategoryDialogFragment.createInstance(editor.getFragmentTag(), getCategories(),
+											!editor.getFragmentTag().equals(FavoritePointEditor.TAG));
 							dialogFragment.show(requireActivity().getSupportFragmentManager(), EditCategoryDialogFragment.TAG);
 						}
 					}
