@@ -3527,4 +3527,5 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="shared_string_octagon">Nyolcszög</string>
     <string name="shared_string_square">Négyzet</string>
     <string name="shared_string_min">Min</string>
+    <string name="clear_recorded_data">Rögzített adatok törlése</string>
 </resources>
