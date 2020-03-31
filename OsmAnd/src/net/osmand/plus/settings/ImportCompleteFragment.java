@@ -112,7 +112,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		if (settingsItems != null) {
 			ImportedSettingsItemsAdapter adapter = new ImportedSettingsItemsAdapter(
 					app,
-					getSettingsToOperate(settingsItems),
+					getSettingsToOperate(settingsItems, false),
 					nightMode,
 					new ImportedSettingsItemsAdapter.OnItemClickListener() {
 						@Override

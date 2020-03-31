@@ -174,7 +174,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		adapter = new ExportImportSettingsAdapter(app, nightMode, true);
 		Map<Type, List<?>> itemsMap = new HashMap<>();
 		if (settingsItems != null) {
-			itemsMap = getSettingsToOperate(settingsItems);
+			itemsMap = getSettingsToOperate(settingsItems, true);
 			adapter.updateSettingsList(itemsMap);
 		}
 		expandableList.setAdapter(adapter);
@@ -355,7 +355,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		return settingsItems;
 	}
 
-	public static Map<Type, List<?>> getSettingsToOperate(List<SettingsItem> settingsItems) {
+	public static Map<Type, List<?>> getSettingsToOperate(List<SettingsItem> settingsItems, boolean collectedItems) {
 		Map<Type, List<?>> settingsToOperate = new HashMap<>();
 		List<ApplicationMode.ApplicationModeBean> profiles = new ArrayList<>();
 		List<QuickAction> quickActions = new ArrayList<>();
@@ -370,16 +370,25 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 				profiles.add(((ProfileSettingsItem) item).getModeBean());
 			} else if (item.getType().equals(SettingsItemType.QUICK_ACTIONS)) {
 				QuickActionsSettingsItem quickActionsItem = (QuickActionsSettingsItem) item;
-				quickActions.addAll(quickActionsItem.getItems());
-				quickActions.addAll(quickActionsItem.getDuplicateItems());
+				if (collectedItems) {
+					quickActions.addAll(quickActionsItem.getItems());
+				} else {
+					quickActions.addAll(quickActionsItem.getImportItems());
+				}
 			} else if (item.getType().equals(SettingsItemType.POI_UI_FILTERS)) {
 				PoiUiFilterSettingsItem poiUiFilterItem = (PoiUiFilterSettingsItem) item;
-				poiUIFilters.addAll(poiUiFilterItem.getItems());
-				poiUIFilters.addAll(poiUiFilterItem.getDuplicateItems());
+				if (collectedItems) {
+					poiUIFilters.addAll(poiUiFilterItem.getItems());
+				} else {
+					poiUIFilters.addAll(poiUiFilterItem.getImportItems());
+				}
 			} else if (item.getType().equals(SettingsItemType.MAP_SOURCES)) {
 				MapSourcesSettingsItem mapSourcesItem = (MapSourcesSettingsItem) item;
-				tileSourceTemplates.addAll(mapSourcesItem.getItems());
-				tileSourceTemplates.addAll(mapSourcesItem.getDuplicateItems());
+				if (collectedItems) {
+					tileSourceTemplates.addAll(mapSourcesItem.getItems());
+				} else {
+					tileSourceTemplates.addAll(mapSourcesItem.getImportItems());
+				}
 			} else if (item.getType().equals(SettingsItemType.FILE)) {
 				FileSettingsItem fileItem = (FileSettingsItem) item;
 				if (fileItem.getSubtype() == FileSubtype.RENDERING_STYLE) {
@@ -389,8 +398,11 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 				}
 			} else if (item.getType().equals(SettingsItemType.AVOID_ROADS)) {
 				AvoidRoadsSettingsItem avoidRoadsItem = (AvoidRoadsSettingsItem) item;
-				avoidRoads.addAll(avoidRoadsItem.getItems());
-				avoidRoads.addAll(avoidRoadsItem.getDuplicateItems());
+				if (collectedItems) {
+					avoidRoads.addAll(avoidRoadsItem.getItems());
+				} else {
+					avoidRoads.addAll(avoidRoadsItem.getImportItems());
+				}
 			}
 		}
 

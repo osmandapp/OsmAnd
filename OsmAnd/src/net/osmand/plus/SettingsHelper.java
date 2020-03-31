@@ -436,12 +436,14 @@ public class SettingsHelper {
 	public abstract static class CollectionSettingsItem<T> extends SettingsItem {
 
 		protected List<T> items;
+		protected List<T> importItems;
 		protected List<T> duplicateItems;
 		protected List<T> existingItems;
 
 		@Override
 		protected void init() {
 			items = new ArrayList<>();
+			importItems = new ArrayList<>();
 			duplicateItems = new ArrayList<>();
 		}
 
@@ -460,6 +462,11 @@ public class SettingsHelper {
 		}
 
 		@NonNull
+		public List<T> getImportItems() {
+			return importItems;
+		}
+
+		@NonNull
 		public List<T> getDuplicateItems() {
 			return duplicateItems;
 		}
@@ -475,6 +482,8 @@ public class SettingsHelper {
 			}
 			return duplicateItems;
 		}
+
+		public abstract void processImportItems();
 
 		public abstract boolean isDuplicate(@NonNull T item);
 
@@ -1316,10 +1325,15 @@ public class SettingsHelper {
 		}
 
 		@Override
+		public void processImportItems() {
+			importItems.addAll(items);
+			importItems.removeAll(duplicateItems);
+		}
+
+		@Override
 		public void apply() {
 			if (!items.isEmpty() || !duplicateItems.isEmpty()) {
-				List<QuickAction> actions = new ArrayList<>(items);
-				actions.removeAll(duplicateItems);
+				processImportItems();
 				List<QuickAction> newActions = new ArrayList<>(existingItems);
 				if (!duplicateItems.isEmpty()) {
 					if (shouldReplace) {
@@ -1335,9 +1349,9 @@ public class SettingsHelper {
 							renameItem(duplicateItem);
 						}
 					}
-					newActions.addAll(duplicateItems);
+					importItems.addAll(duplicateItems);
 				}
-				newActions.addAll(actions);
+				newActions.addAll(importItems);
 				actionRegistry.updateQuickActions(newActions);
 			}
 		}
@@ -1450,15 +1464,20 @@ public class SettingsHelper {
 		}
 
 		@Override
+		public void processImportItems() {
+			importItems.addAll(items);
+			importItems.removeAll(duplicateItems);
+
+			for (PoiUIFilter duplicate : duplicateItems) {
+				importItems.add(shouldReplace ? duplicate : renameItem(duplicate));
+			}
+		}
+
+		@Override
 		public void apply() {
 			if (!items.isEmpty() || !duplicateItems.isEmpty()) {
-				List<PoiUIFilter> poiUIFilters = new ArrayList<>(items);
-				poiUIFilters.removeAll(duplicateItems);
-
-				for (PoiUIFilter duplicate : duplicateItems) {
-					poiUIFilters.add(shouldReplace ? duplicate : renameItem(duplicate));
-				}
-				for (PoiUIFilter filter : poiUIFilters) {
+				processImportItems();
+				for (PoiUIFilter filter : importItems) {
 					app.getPoiFilters().createPoiFilter(filter, false);
 				}
 				app.getSearchUICore().refreshCustomPoiFilters();
@@ -1597,34 +1616,35 @@ public class SettingsHelper {
 		}
 
 		@Override
-		public void apply() {
-			if (!items.isEmpty() || !duplicateItems.isEmpty()) {
-				List<ITileSource> tileSources = new ArrayList<>(items);
-				tileSources.removeAll(duplicateItems);
-				if (shouldReplace) {
-					for (ITileSource tileSource : duplicateItems) {
-						if (tileSource instanceof SQLiteTileSource) {
-							File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + tileSource.getName() + IndexConstants.SQLITE_EXT);
-							if (f != null && f.exists()) {
-								if (f.delete()) {
-									tileSources.add(tileSource);
-								}
-							}
-						} else if (tileSource instanceof TileSourceManager.TileSourceTemplate) {
-							File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + tileSource.getName());
-							if (f != null && f.exists() && f.isDirectory()) {
-								if (f.delete()) {
-									tileSources.add(tileSource);
-								}
-							}
+		public void processImportItems() {
+			importItems.addAll(items);
+			importItems.removeAll(duplicateItems);
+			if (shouldReplace) {
+				for (ITileSource tileSource : duplicateItems) {
+					if (tileSource instanceof SQLiteTileSource) {
+						File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + tileSource.getName() + IndexConstants.SQLITE_EXT);
+						if (f != null && f.exists() && Algorithms.removeAllFiles(f)) {
+							importItems.add(tileSource);
+						}
+					} else if (tileSource instanceof TileSourceManager.TileSourceTemplate) {
+						File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + tileSource.getName());
+						if (f != null && f.exists() && f.isDirectory() && Algorithms.removeAllFiles(f)) {
+							importItems.add(tileSource);
 						}
 					}
-				} else {
-					for (ITileSource tileSource : duplicateItems) {
-						tileSources.add(renameItem(tileSource));
-					}
 				}
-				for (ITileSource tileSource : tileSources) {
+			} else {
+				for (ITileSource tileSource : duplicateItems) {
+					importItems.add(renameItem(tileSource));
+				}
+			}
+		}
+
+		@Override
+		public void apply() {
+			if (!items.isEmpty() || !duplicateItems.isEmpty()) {
+				processImportItems();
+				for (ITileSource tileSource : importItems) {
 					if (tileSource instanceof TileSourceManager.TileSourceTemplate) {
 						app.getSettings().installTileSource((TileSourceManager.TileSourceTemplate) tileSource);
 					} else if (tileSource instanceof SQLiteTileSource) {
@@ -1815,10 +1835,15 @@ public class SettingsHelper {
 		}
 
 		@Override
+		public void processImportItems() {
+			importItems.addAll(items);
+			importItems.removeAll(duplicateItems);
+		}
+
+		@Override
 		public void apply() {
 			if (!items.isEmpty() || !duplicateItems.isEmpty()) {
-				List<AvoidRoadInfo> avoidRoadInfos = new ArrayList<>(items);
-				avoidRoadInfos.removeAll(duplicateItems);
+				processImportItems();
 				for (AvoidRoadInfo duplicate : duplicateItems) {
 					if (shouldReplace) {
 						LatLon latLon = new LatLon(duplicate.latitude, duplicate.longitude);
@@ -1829,7 +1854,7 @@ public class SettingsHelper {
 						settings.addImpassableRoad(renameItem(duplicate));
 					}
 				}
-				for (AvoidRoadInfo avoidRoad : avoidRoadInfos) {
+				for (AvoidRoadInfo avoidRoad : importItems) {
 					settings.addImpassableRoad(avoidRoad);
 				}
 				specificRoads.loadImpassableRoads();
