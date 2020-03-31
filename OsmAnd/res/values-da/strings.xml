@@ -3569,7 +3569,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="import_duplicates_description">OsmAnd allerede har elementer med de samme navne, som dem, der importeres.
 \n
 \nVælg en aktion.</string>
-    <string name="listed_exist">Det angivne %1$ s findes allerede.</string>
+    <string name="listed_exist">Det angivne %1$s findes allerede.</string>
     <string name="recalc_angle_dialog_title">Mindste vinkel mellem min placering og rute</string>
     <string name="recalc_angle_dialog_descr">Ekstra lige segment mellem min placering og den beregnede rute vises, indtil ruten genberegnes</string>
     <string name="shared_string_terrain">Terræn</string>
