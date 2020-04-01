@@ -2169,7 +2169,8 @@ public class SettingsHelper {
 			try {
 				ZipEntry entry;
 				while ((entry = zis.getNextEntry()) != null) {
-					if (entry.getName().equals("items.json")) {
+					String fileName = checkEntryName(entry.getName());
+					if (fileName.equals("items.json")) {
 						String itemsJson = null;
 						try {
 							itemsJson = Algorithms.readFromInputStream(ois).toString();
@@ -2215,7 +2216,7 @@ public class SettingsHelper {
 			try {
 				ZipEntry entry;
 				while ((entry = zis.getNextEntry()) != null) {
-					String fileName = entry.getName();
+					String fileName = checkEntryName(entry.getName());
 					SettingsItem item = null;
 					for (SettingsItem settingsItem : items) {
 						if (settingsItem != null && settingsItem.applyFileName(fileName)) {
@@ -2246,6 +2247,15 @@ public class SettingsHelper {
 				Algorithms.closeStream(zis);
 			}
 			return items;
+		}
+
+		private String checkEntryName(String entryName) {
+			String fileExt = OSMAND_SETTINGS_FILE_EXT + "/";
+			int index = entryName.indexOf(fileExt);
+			if (index != -1) {
+				entryName = entryName.substring(index + fileExt.length());
+			}
+			return entryName;
 		}
 	}
 
