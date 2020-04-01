@@ -31,6 +31,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.PluginsActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 
 import org.apache.commons.logging.Log;
@@ -47,6 +49,7 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 	private OsmandApplication app;
 	private LayoutInflater mInflater;
 	private boolean nightMode;
+	private MenuItemsManager menuItemsManager;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -54,9 +57,7 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 		app = requireMyApplication();
 		nightMode = !app.getSettings().isLightContent();
 		mInflater = UiUtilities.getInflater(app, nightMode);
-//		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//			getActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-//		}
+		menuItemsManager = new MenuItemsManager(app);
 	}
 
 	@Nullable
@@ -77,6 +78,15 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 				: getResources().getColor(R.color.list_background_color_dark));
 		toolbarSubTitle.setTextColor(getResources().getColor(R.color.text_color_secondary_light));
 		toolbarButton.setImageDrawable(getPaintedContentIcon(R.drawable.ic_arrow_back, getResources().getColor(R.color.text_color_secondary_light)));
+		toolbarButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				FragmentManager fm = getFragmentManager();
+				if (fm != null) {
+					fm.popBackStack();
+				}
+			}
+		});
 		toolbarTitle.setText(R.string.ui_customization);
 		toolbarSubTitle.setText(profile.toHumanString());
 		toolbarSubTitle.setVisibility(View.VISIBLE);
@@ -102,7 +112,7 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 
 	@Override
 	public int getStatusBarColorId() {
-		return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
+		return nightMode ? R.color.activity_background_dark : R.color.activity_background_light;
 	}
 
 
@@ -156,6 +166,7 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 				ItemHolder itemHolder = (ItemHolder) holder;
 				itemHolder.icon.setImageResource(item.iconRes);
 				itemHolder.title.setText(item.titleRes);
+				itemHolder.subTitle.setText(getSubTitleText(item));
 				itemHolder.itemView.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
@@ -180,6 +191,7 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 			};
 			try {
 				int startIndex = text.indexOf(clickableText);
+				spannableString.setSpan(new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), startIndex, startIndex + clickableText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 				spannableString.setSpan(clickableSpan, startIndex, startIndex + clickableText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 				textView.setText(spannableString);
 				textView.setMovementMethod(LinkMovementMethod.getInstance());
@@ -189,6 +201,23 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 			} catch (RuntimeException e) {
 				LOG.error("Error trying to find index of " + clickableText + " " + e);
 			}
+		}
+
+		private String getSubTitleText(ScreenType type) {
+			int allCount = 0;
+			int hiddenCount = 0;
+			switch (type) {
+				case DRAWER:
+					allCount = menuItemsManager.getDrawerIdsDefaultOrder().size();
+					hiddenCount = menuItemsManager.getHiddenItemsIds(type).size();
+					break;
+				case CONFIGURE_MAP:
+					break;
+				case CONTEXT_MENU_ACTIONS:
+					break;
+			}
+			String amount = getString(R.string.n_items_of_z, String.valueOf(allCount - hiddenCount), String.valueOf(allCount));
+			return getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.shared_string_items), amount);
 		}
 
 		class DescriptionHolder extends RecyclerView.ViewHolder {
@@ -217,9 +246,9 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 	}
 
 	public enum ScreenType {
-		DRAWER(R.string.shared_string_drawer, R.drawable.ic_action_layers, R.drawable.img_settings_customize_drawer_day, R.drawable.img_settings_customize_drawer_night),
+		DRAWER(R.string.shared_string_drawer, R.drawable.ic_action_drawer, R.drawable.img_settings_customize_drawer_day, R.drawable.img_settings_customize_drawer_night),
 		CONFIGURE_MAP(R.string.configure_map, R.drawable.ic_action_layers, R.drawable.img_settings_customize_configure_map_day, R.drawable.img_settings_customize_configure_map_night),
-		CONTEXT_MENU_ACTIONS(R.string.context_menu_actions, R.drawable.ic_action_layers, R.drawable.img_settings_customize_context_menu_day, R.drawable.img_settings_customize_context_menu_night);
+		CONTEXT_MENU_ACTIONS(R.string.context_menu_actions, R.drawable.ic_action_context_menu, R.drawable.img_settings_customize_context_menu_day, R.drawable.img_settings_customize_context_menu_night);
 
 		@StringRes
 		public int titleRes;

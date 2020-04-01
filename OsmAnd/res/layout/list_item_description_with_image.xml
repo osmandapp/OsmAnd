@@ -17,6 +17,8 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_margin="@dimen/content_padding"
+		android:letterSpacing="0.02"
+		android:lineSpacingExtra="@dimen/line_spacing_extra_description"
 		android:textColor="?android:textColorSecondary"
 		android:textSize="@dimen/default_desc_text_size"
 		tools:text="@string/ui_customization_description" />

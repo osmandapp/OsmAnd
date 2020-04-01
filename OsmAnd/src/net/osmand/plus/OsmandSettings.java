@@ -3385,7 +3385,14 @@ public class OsmandSettings {
 	public void setSelectedPoiFilters(final Set<String> poiFilters) {
 		SELECTED_POI_FILTER_FOR_MAP.set(android.text.TextUtils.join(",", poiFilters));
 	}
-	
+
+	public final ListStringPreference HIDDEN_CONTEXT_MENU_ACTIONS_ITEMS = (ListStringPreference)
+			new ListStringPreference("hidden_context_menu_actions_items", null, ",,").makeProfile().cache();
+
+	public final ListStringPreference HIDDEN_CONFIGURE_MAP_ITEMS = (ListStringPreference)
+			new ListStringPreference("hidden_configure_map_items", null, ",,").makeProfile().cache();
+
+
 	public final ListStringPreference DRAWER_ITEMS_ORDER = (ListStringPreference)
 			new ListStringPreference("drawer_items_order", null, ",,").makeProfile().cache();
 

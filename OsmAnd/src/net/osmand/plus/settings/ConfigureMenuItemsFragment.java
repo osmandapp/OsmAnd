@@ -26,6 +26,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.settings.ConfigureMenuRootFragment.ScreenType;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
@@ -60,8 +61,9 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment {
 	private ScreenType type;
 	private LayoutInflater mInflater;
 	private MenuItemsManager menuItemsManager;
-	private HashMap<String, Integer> menuItemsOrder = new LinkedHashMap<>();
-	private List<String> hiddenMenuItems = new ArrayList<>();
+	private HashMap<String, Integer> menuItemsOrder;
+	private List<String> hiddenMenuItems;
+	private MenuItemsAdapter adapter;
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
@@ -84,6 +86,12 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		app = requireMyApplication();
+		nightMode = !app.getSettings().isLightContent();
+		mInflater = UiUtilities.getInflater(app, nightMode);
+		menuItemsManager = new MenuItemsManager(app);
+//		MapActivityActions mapActivityActions = new MapActivityActions(getActivity())
+
 		if (savedInstanceState != null
 				&& savedInstanceState.containsKey(ITEM_TYPE_KEY)
 				&& savedInstanceState.containsKey(HIDDEN_ITEMS_KEY)
@@ -91,18 +99,11 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment {
 			type = (ScreenType) savedInstanceState.getSerializable(ITEM_TYPE_KEY);
 			hiddenMenuItems = savedInstanceState.getStringArrayList(HIDDEN_ITEMS_KEY);
 			menuItemsOrder = (HashMap<String,Integer>) savedInstanceState.getSerializable(ITEMS_ORDER_KEY);
+		} else {
+			hiddenMenuItems = menuItemsManager.getHiddenItemsIds(type);
+//			TODO
+			menuItemsOrder = menuItemsManager.getDrawerItemsSavedOrder();
 		}
-		app = requireMyApplication();
-		nightMode = !app.getSettings().isLightContent();
-		mInflater = UiUtilities.getInflater(app, nightMode);
-		menuItemsManager = new MenuItemsManager(app);
-
-		List<String> ids = app.getSettings().HIDDEN_DRAWER_ITEMS.getStringsList();
-		hiddenMenuItems = new ArrayList<>();
-		if (ids != null) {
-			hiddenMenuItems.addAll(ids);
-		}
-		menuItemsOrder = menuItemsManager.getDrawerItemsSavedOrder();
 	}
 
 	@Nullable
@@ -127,10 +128,8 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment {
 				showExitDialog();
 			}
 		});
-
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
-
-		final MenuItemsAdapter adapter = new MenuItemsAdapter(app, getAdapterItems());
+		adapter = new MenuItemsAdapter(app, getAdapterItems());
 		final ItemTouchHelper touchHelper = new ItemTouchHelper(new ReorderItemTouchHelperCallback(adapter));
 		touchHelper.attachToRecyclerView(recyclerView);
 		MenuItemsAdapterListener listener = new MenuItemsAdapterListener() {
@@ -173,7 +172,6 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment {
 		};
 		adapter.setListener(listener);
 		recyclerView.setAdapter(adapter);
-
 		View cancelButton = root.findViewById(R.id.dismiss_button);
 		UiUtilities.setupDialogButton(nightMode, cancelButton, UiUtilities.DialogButtonType.SECONDARY, R.string.shared_string_cancel);
 		cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -185,52 +183,25 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment {
 				}
 			}
 		});
-
 		root.findViewById(R.id.buttons_divider).setVisibility(View.VISIBLE);
-
 		View applyButton = root.findViewById(R.id.right_bottom_button);
 		UiUtilities.setupDialogButton(nightMode, applyButton, UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_apply);
 		applyButton.setVisibility(View.VISIBLE);
 		applyButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				MapActivity mapActivity = (MapActivity) getActivity();
-				if (mapActivity != null) {
-					OsmandApplication app = mapActivity.getMyApplication();
-					app.getSettings().HIDDEN_DRAWER_ITEMS.setStringsList(hiddenMenuItems);
-
-
-					List<MenuItemBase> drawerItems = menuItemsManager.getDrawerItemsDefault();
-
-					for (MenuItemBase menuItemBase : drawerItems) {
-						Integer order = menuItemsOrder.get(menuItemBase.getId());
-						if (order == null) {
-							order = menuItemBase.getOrder();
-						}
-						menuItemBase.setOrder(order);
-
-					}
-
-					Collections.sort(drawerItems, new Comparator<MenuItemBase>() {
-						@Override
-						public int compare(MenuItemBase item1, MenuItemBase item2) {
-							int order1 = item1.getOrder();
-							int order2 = item2.getOrder();
-							return (order1 < order2) ? -1 : ((order1 == order2) ? 0 : 1);
-						}
-					});
-
-					List<String> ids = new ArrayList<>();
-					for (MenuItemBase menuItemBase : drawerItems) {
-						ids.add(menuItemBase.getId());
-					}
-					app.getSettings().DRAWER_ITEMS_ORDER.setStringsList(ids);
-
-					dismissFragment();
+				menuItemsManager.saveHiddenItemsIds(type, hiddenMenuItems);
+				List<MenuItemBase> defaultItems;
+				defaultItems = menuItemsManager.getDrawerItemsDefault();
+				menuItemsManager.reorderMenuItems(defaultItems, menuItemsOrder);
+				List<String> ids = new ArrayList<>();
+				for (MenuItemBase item : defaultItems) {
+					ids.add(item.getId());
 				}
+				menuItemsManager.saveItemsIdsOrder(type, ids);
+				dismissFragment();
 			}
 		});
-
 		if (Build.VERSION.SDK_INT >= 21) {
 			AndroidUtils.addStatusBarPadding21v(app, root);
 		}
@@ -289,17 +260,10 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment {
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						switch (type) {
-							case DRAWER:
-								app.getSettings().DRAWER_ITEMS_ORDER.setStringsList(null);
-								app.getSettings().HIDDEN_DRAWER_ITEMS.setStringsList(null);
-
-								break;
-							case CONFIGURE_MAP:
-								break;
-							case CONTEXT_MENU_ACTIONS:
-								break;
-						}
+						hiddenMenuItems.clear();
+						menuItemsOrder.clear();
+						menuItemsManager.resetMenuItems(type);
+						adapter.updateItems(getAdapterItems());
 					}
 				})));
 		items.add(new AdapterItem(BUTTON, new ButtonItem(
@@ -308,7 +272,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment {
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-
+						//TODO
 					}
 				})));
 		return items;
