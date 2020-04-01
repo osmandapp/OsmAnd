@@ -392,7 +392,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		Preference uiCustomization = findPreference(UI_CUSTOMIZATION);
 //		TODO change icon
 		uiCustomization.setIcon(getContentIcon(getSelectedAppMode().getIconRes()));
-		uiCustomization.setFragment(UiCustomizationRootFragment.TAG);
+		uiCustomization.setFragment(ConfigureMenuRootFragment.TAG);
 	}
 
 	@Override

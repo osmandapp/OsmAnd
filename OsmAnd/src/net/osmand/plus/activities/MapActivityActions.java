@@ -65,6 +65,7 @@ import net.osmand.plus.routepreparationmenu.WaypointsFragment;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.BaseSettingsFragment;
+import net.osmand.plus.settings.MenuItemsManager;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapTileLayer;
@@ -81,6 +82,7 @@ import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_MAP_ID;
@@ -986,6 +988,33 @@ public class MapActivityActions implements DialogProvider {
 		divider.setPosition(dividerItemIndex >= 0 ? dividerItemIndex : 8);
 		optionsMenuHelper.addItem(divider.createItem());
 
+		List<ContextMenuItem> items = optionsMenuHelper.getItems();
+		List<ContextMenuItem> newItems = new ArrayList<>();
+		List<String> hiddenIds = app.getSettings().HIDDEN_DRAWER_ITEMS.getStringsList();
+
+		MenuItemsManager manager = new MenuItemsManager(app);
+		LinkedHashMap<String, Integer> order = manager.getDrawerItemsSavedOrder();
+
+		if (hiddenIds != null){
+			for (ContextMenuItem item: items){
+				if (!hiddenIds.contains(item.getId())){
+					newItems.add(item);
+				}
+			}
+		} else {
+			newItems.addAll(items);
+		}
+
+		for (ContextMenuItem item: newItems){
+			Integer o = order.get(item.getId());
+			if (o == null){
+				o = item.getOrder();
+			}
+			item.setOrder(o);
+		}
+
+		optionsMenuHelper.updateItems(newItems);
+		optionsMenuHelper.sortItemsByOrder();
 		return optionsMenuHelper;
 	}
 

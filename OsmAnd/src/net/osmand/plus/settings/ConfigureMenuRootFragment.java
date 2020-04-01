@@ -39,9 +39,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class UiCustomizationRootFragment extends BaseOsmAndFragment {
+public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 
-	public static final String TAG = UiCustomizationRootFragment.class.getName();
+	public static final String TAG = ConfigureMenuRootFragment.class.getName();
 	private static final Log LOG = PlatformUtil.getLog(TAG);
 
 	private OsmandApplication app;
@@ -88,7 +88,7 @@ public class UiCustomizationRootFragment extends BaseOsmAndFragment {
 			public void onItemClick(ScreenType type) {
 				FragmentManager fm = getFragmentManager();
 				if (fm != null) {
-					UiCustomizationFragment.showInstance(fm, type);
+					ConfigureMenuItemsFragment.showInstance(fm, type);
 				}
 			}
 		});

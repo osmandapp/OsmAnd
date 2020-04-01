@@ -31,7 +31,7 @@ public class ContextMenuItem {
 	private final boolean clickable;
 	private final boolean skipPaintingWithoutColor;
 	private final int pos;
-	private final int order;
+	private int order;
 	private String description;
 	private final ContextMenuAdapter.ItemClickListener itemClickListener;
 	private final ContextMenuAdapter.OnIntegerValueChangedListener integerListener;
@@ -204,6 +204,10 @@ public class ContextMenuItem {
 
 	public void setProgress(int progress) {
 		this.progress = progress;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
 	}
 
 	public void setLoading(boolean loading) {

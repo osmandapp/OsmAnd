@@ -137,12 +137,12 @@ import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.settings.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.settings.ConfigureMenuItemsFragment;
 import net.osmand.plus.settings.ConfigureProfileFragment;
 import net.osmand.plus.settings.DataStorageFragment;
 import net.osmand.plus.settings.ImportCompleteFragment;
 import net.osmand.plus.settings.ImportSettingsFragment;
 import net.osmand.plus.settings.ProfileAppearanceFragment;
-import net.osmand.plus.settings.UiCustomizationFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapControlsLayer;
@@ -751,9 +751,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			importCompleteFragment.dismissFragment();
 			return;
 		}
-		UiCustomizationFragment uiCustomizationFragment = getUiCustomizationFragment();
-		if (uiCustomizationFragment != null) {
-			uiCustomizationFragment.showExitDialog();
+		ConfigureMenuItemsFragment configureMenuItemsFragment = getConfigureMenuItemsFragment();
+		if (configureMenuItemsFragment != null) {
+			configureMenuItemsFragment.showExitDialog();
 			return;
 		}
 
@@ -2473,6 +2473,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public ImportCompleteFragment getImportCompleteFragment() {
 		return getFragment(ImportCompleteFragment.TAG);
+	}
+
+	public ConfigureMenuItemsFragment getConfigureMenuItemsFragment(){
+		return getFragment(ConfigureMenuItemsFragment.TAG);
 	}
 
 	public PointEditorFragmentNew getPointEditorFragmentNew() {
