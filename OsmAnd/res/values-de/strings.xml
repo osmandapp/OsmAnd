@@ -3053,7 +3053,7 @@ Lon %2$s</string>
     <string name="choose_data_to_share">Wählen Sie, welche Art Daten Sie freigeben möchten:</string>
     <string name="downloaded_maps">Heruntergeladene Karten</string>
     <string name="visited_screens">Besuchte Bildschirme</string>
-    <string name="collected_data_descr">Bestimmen Sie, welche Daten Sie für OsmAnd freigeben.</string>
+    <string name="collected_data_descr">Festlegen, welche Daten OsmAnd weitergeben darf.</string>
     <string name="downloaded_maps_collect_descr">Helfen Sie uns, die Beliebtheit von Karten für Länder und Regionen herauszufinden.</string>
     <string name="visited_screens_collect_descr">Helfen Sie uns, die Beliebtheit von OsmAnd-Funktionen zu verstehen.</string>
     <string name="privacy_and_security_change_descr">Auf „Erlauben“ tippen, wenn Sie mit unserer %1$s einverstanden sind</string>
@@ -3602,11 +3602,11 @@ Lon %2$s</string>
     <string name="shared_string_transparency">Transparenz</string>
     <string name="terrain_slider_description">Stellen Sie die minimale und maximale Zoomstufe ein, bei der die Ebene angezeigt wird.</string>
     <string name="shared_string_terrain">Gelände</string>
-    <string name="download_slope_maps">Hänge</string>
+    <string name="download_slope_maps">Pisten</string>
     <string name="terrain_empty_state_text">Aktivieren Sie diese Option, um die Schatten- oder Hangkarte anzuzeigen. Weitere Informationen zu diesen Kartentypen finden Sie auf unserer Website</string>
     <string name="shared_string_legend">Legende</string>
-    <string name="slope_read_more">Lesen Sie mehr über Hänge in %1$s.</string>
-    <string name="slope_download_description">Zusätzliche Karten sind erforderlich, um Hänge auf der Karte anzuzeigen.</string>
+    <string name="slope_read_more">Lesen Sie mehr über Pisten in %1$s.</string>
+    <string name="slope_download_description">Zusätzliche Karten sind erforderlich, um Pisten auf der Karte anzuzeigen.</string>
     <string name="hillshade_download_description">Für die Darstellung der Schummerung werden zusätzliche Karten benötigt.</string>
     <string name="shared_string_min">Min</string>
     <string name="hillshade_description">Schummerungs-Karte mit dunklen Schattierungen zur Darstellung von Hängen, Gipfeln und Niederungen.</string>
@@ -3615,4 +3615,5 @@ Lon %2$s</string>
     <string name="app_mode_ski_touring">Skitouren</string>
     <string name="app_mode_ski_snowmobile">Schneemobil</string>
     <string name="custom_osmand_plugin">Benutzerdefiniertes OsmAnd-Plugin</string>
+    <string name="slope_description">Farbliche Kennzeichnung von Pisten im Gelände.</string>
 </resources>
