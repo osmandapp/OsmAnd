@@ -102,7 +102,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		editor.updateLandscapePortrait(requireActivity());
 		editor.updateNightMode();
 
-		selectedColor = 0xb4FFFFFF & getPointColor();
+		selectedColor = getPointColor();
 		selectedShape = getBackgroundType();
 		selectedIcon = getIconId();
 
@@ -619,18 +619,20 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		groupListAdapter.setSelectedItemName(name);
 		groupListAdapter.notifyDataSetChanged();
 		int position;
-		if (getEditor().isNew()) {
-			String lastCategory = app.getSettings().LAST_FAV_CATEGORY_ENTERED.get();
-			if (!Algorithms.isEmpty(lastCategory) && !app.getFavorites().groupExists(lastCategory)) {
-				lastCategory = "";
-			}
-			position = groupListAdapter.getItemPosition(lastCategory);
+		PointEditor editor = getEditor();
+		if (editor != null && editor.isNew()) {
+			String lastUsedGroup = getLastUsedGroup();
+			position = groupListAdapter.getItemPosition(lastUsedGroup);
 		} else {
 			position = groupListAdapter.items.size() == groupListAdapter.getItemPosition(name) + 1
 					? groupListAdapter.getItemPosition(name) + 1
 					: groupListAdapter.getItemPosition(name);
 		}
 		groupRecyclerView.scrollToPosition(position);
+	}
+
+	protected String getLastUsedGroup() {
+		return "";
 	}
 
 	protected String getDefaultCategoryName() {
@@ -640,15 +642,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	@Nullable
 	protected MapActivity getMapActivity() {
 		return (MapActivity) getActivity();
-	}
-
-	@Nullable
-	@Override
-	protected OsmandApplication getMyApplication() {
-		if (getActivity() == null) {
-			return null;
-		}
-		return (OsmandApplication) getActivity().getApplication();
 	}
 
 	public void dismiss() {
