@@ -3596,4 +3596,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="shared_string_square">Štvorec</string>
     <string name="shared_string_min">Min</string>
     <string name="shared_string_octagon">Osemholník</string>
+    <string name="app_mode_ski_touring">Lyžiarske okruhy</string>
+    <string name="app_mode_ski_snowmobile">Snežný skúter</string>
+    <string name="custom_osmand_plugin">Vlastný modul pre OsmAnd</string>
 </resources>

@@ -3791,4 +3791,7 @@
     <string name="poi_water_place_durability_durable">水場の耐久性: 永続使用可</string>
     <string name="poi_water_place_durability_emergency">水場の耐久性: 緊急時用</string>
     <string name="poi_video_telephone">ビデオ通話</string>
+    <string name="poi_tactile_paving_incorrect">正しく設置されていない点字ブロック</string>
+    <string name="poi_tactile_paving_primitive">非点字ブロックだが凹凸で判断可</string>
+    <string name="poi_tactile_paving_contrasted">一般的な点字ブロック</string>
 </resources>

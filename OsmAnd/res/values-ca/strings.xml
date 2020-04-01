@@ -18,7 +18,7 @@
     <string name="starting_point_too_far">El punt de sortida massa lluny de la carretera més propera.</string>
     <string name="osmand_parking_time_limit_title">Indica el temps límit d\'aparcament</string>
     <string name="osmand_parking_choose_type">Trieu el tipus de pàrquing</string>
-    <string name="avoid_unpaved">Evita les carreteres no pavimentades</string>
+    <string name="avoid_unpaved">Només vies pavimentades</string>
     <string name="avoid_in_routing_title">Evita…</string>
     <string name="int_continuosly">Sense interrupció</string>
     <string name="map_widget_config">Configura la pantalla</string>
@@ -188,7 +188,7 @@
     <string name="local_openstreetmap_settings_descr">Mostra i gestiona els PDI/notes d\'OSM anotats a la base de dades del dispositiu.</string>
     <string name="day_night_info">Informació de dia/nit</string>
     <string name="show_lanes">Carrils</string>
-    <string name="avoid_ferries">Evita els ferris</string>
+    <string name="avoid_ferries">Sense ferris</string>
     <string name="osmand_parking_warning_text">S\'ha afegit una notificació a la vostra agenda perquè traieu el vostre cotxe que es pot editar o treure allà mateix.</string>
     <string name="route_kl">Mantingueu-vos a l\'esquerra i continueu</string>
     <string name="route_kr">Mantingueu-vos a la dreta i continueu</string>
@@ -627,7 +627,7 @@
     <string name="poi_remove_title">Elimina el PDI</string>
     <string name="poi_create_title">Crea un PDI</string>
     <string name="first_time_msg">"Gràcies per utilitzar l\'OsmAnd. Baixeu informació regional fora de línia a través de \'Configuració\' → \'Gestió de fitxers de mapes\' per veure mapes, situar adreces, buscar els PDIs,  trobar transports públics i més."</string>
-    <string name="basemap_was_selected_to_download">El mapa base està seleccionat per baixar-se per les funcions de l\'aplicació.</string>
+    <string name="basemap_was_selected_to_download">El mapa mundial de fons necessari per les funcionalitats bàsiques està a la cua de baixades.</string>
     <string name="osmand_background_plugin_description">Mostra paràmetres per activar el seguiment i la navegació en procés de fons mitjançant l\'activació periòdica del dispositiu GPS (amb la pantalla apagada).</string>
     <string name="accessibility_preferences_descr">Preferències relatives a l\'accessibilitat.</string>
     <string name="trace_rendering_descr">Mostra el rendiment de la renderització.</string>
@@ -700,11 +700,11 @@
     <string name="opening_hours_not_supported">El format d\'horaris d\'obertura no es pot modificar</string>
     <string name="transport_to_go_after">prioritza distancia</string>
     <string name="hello">Aplicació de navegació OsmAnd</string>
-    <string name="osmand_rastermaps_plugin_description">"Access a diferents tipus de mapa (anomenats de tessel·les o de bits), des de les tessel·les predefinides d\'OSM (com Mapnik) a imatges de satèl·lit i capes específiques com mapes meteorològics, climàtics, geològics, de relleu, etc. 
+    <string name="osmand_rastermaps_plugin_description">Accediu a diferents tipus de mapa (anomenats de tessel·les o de bits), des de les tessel·les predefinides d\'OSM (com Mapnik) a imatges de satèl·lit i capes específiques com mapes meteorològics, climàtics, geològics, de relleu, etc.
 \n
-\nQualsevol d\'aquests mapes es pot utilitzar sigui per veure\'s com principal (base) o com una superposició o sots-posició d\'un altre mapa base (com els mapes  d\'OsmAnd habituals en local). Es pot amagar determinats elements dels mapes vectorials de l\'OsmAnd via el menú «Configuració del mapa» per fer més visible el mapa de fons. 
+\nQualsevol d\'aquests mapes es pot utilitzar, sigui per veure\'s com principal (base) o com una superposició o sots-posició d\'un altre mapa base (com els mapes d\'OsmAnd habituals en local). Es pot amagar determinats elements dels mapes vectorials de l\'OsmAnd via el menú «Configuració del mapa» per fer més visible el mapa de fons.
 \n
-\nBaixeu mapes de tessel·les directament de proveïdors en línia, o  de preparats per un ús en local (copiats manualment al directori de l\'OsmAnd) així com una base de dades SQLite construïda per diferents eines de tercers de preparació de mapes."</string>
+\nBaixeu mapes de tessel·les directament de proveïdors en línia o ja preparats per un ús local (copiats manualment al directori de l\'OsmAnd) així com una base de dades SQLite construïda per diferents eines de preparació de mapes de tercers.</string>
     <string name="choose_audio_stream_descr">Escolliu la sortida d\'àudio pel guiat per veu.</string>
     <string name="renderers">Renderització vectorial</string>
     <string name="add_tag">Afegeix una etiqueta</string>
@@ -1457,7 +1457,7 @@
 \nNo cal baixar un mapa específic, aquesta vista es crea amb els nostres mapes estàndards. 
 \n 
 \nAquesta vista es pot desfer tornant a fer la mateixa selecció, o en canviar l\'«Estil del mapa» de «Configuració del mapa» a la vista que es desitgi.</string>
-    <string name="local_osm_changes_upload_all_confirm">"Esteu segur que voleu pujar %1$d canvi(s)  a OSM\?"</string>
+    <string name="local_osm_changes_upload_all_confirm">Esteu segur que voleu pujar %1$d canvi(s) a OSM\?</string>
     <string name="confirmation_to_clear_history">Voleu esborrar l\'historial?</string>
     <string name="delay_to_start_navigation_descr">Indiqueu el temps màxim d\'espera en la pantalla de planificació de la ruta.</string>
     <string name="delay_to_start_navigation">Inicia el guiatge gir a gir després de…</string>
@@ -3574,4 +3574,10 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_octagon">Octàgon</string>
     <string name="shared_string_min">Mín.</string>
     <string name="sort_by_category">Ordena per categoria</string>
+    <string name="hillshade_description">Mapa d\'ombrejat de relleu que representa amb ombres els pendents, cims i planícies.</string>
+    <string name="slope_download_description">Calen mapes addicionals per veure les pistes en el mapa.</string>
+    <string name="slope_read_more">Teniu més informació sobre les pistes a %1$s.</string>
+    <string name="terrain_empty_state_text">Activeu la visió de l\'ombrejat de relleu o del mapa de pistes. Us podeu informar d\'aquests tipus de mapa a la nostra web</string>
+    <string name="app_mode_ski_touring">Esquí de ruta</string>
+    <string name="app_mode_ski_snowmobile">Moto de neu</string>
 </resources>
