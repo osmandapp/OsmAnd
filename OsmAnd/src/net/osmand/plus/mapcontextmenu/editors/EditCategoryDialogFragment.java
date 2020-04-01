@@ -15,6 +15,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
@@ -75,7 +76,8 @@ public class EditCategoryDialogFragment extends DialogFragment {
 
 		nameEdit = (EditText)v.findViewById(R.id.edit_name);
 		nameEdit.setText(name);
-
+		nameEdit.requestFocus();
+		AndroidUtils.softKeyboardDelayed(nameEdit);
 		colorSpinner = (Spinner)v.findViewById(R.id.edit_color);
 		final TIntArrayList colors = new TIntArrayList();
 		final int intColor = color;
@@ -151,7 +153,19 @@ public class EditCategoryDialogFragment extends DialogFragment {
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onStop() {
+		Dialog dialog = getDialog();
+		if (dialog != null) {
+			MapActivity mapActivity = (MapActivity) getDialog().getOwnerActivity();
+			if (mapActivity != null) {
+				AndroidUtils.hideSoftKeyboard(mapActivity, mapActivity.getCurrentFocus());
+			}
+		}
+		super.onStop();
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		saveState(outState);
 		super.onSaveInstanceState(outState);
 	}

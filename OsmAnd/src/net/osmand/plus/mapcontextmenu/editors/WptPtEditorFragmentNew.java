@@ -359,7 +359,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 
 	@Override
 	public void setBackgroundType(BackgroundType backgroundType) {
-		this.backgroundTypeName = backgroundType.name();
+		this.backgroundTypeName = backgroundType.getTypeName();
 	}
 
 	@Override

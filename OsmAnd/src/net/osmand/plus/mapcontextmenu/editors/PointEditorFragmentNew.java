@@ -102,7 +102,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		editor.updateLandscapePortrait(requireActivity());
 		editor.updateNightMode();
 
-		selectedColor = 0xb4FFFFFF & getPointColor();
+		selectedColor = getPointColor();
 		selectedShape = getBackgroundType();
 		selectedIcon = getIconId();
 
@@ -128,10 +128,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			public void onScrollChanged() {
 				if (scrollViewY != scrollView.getScrollY()) {
 					scrollViewY = scrollView.getScrollY();
-					Activity activity = getActivity();
-					if (activity != null) {
-						AndroidUtils.hideSoftKeyboard(activity, view);
-					}
+					hideKeyboard();
 				}
 			}
 		});
@@ -140,12 +137,12 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		ImageView toolbarAction = (ImageView) view.findViewById(R.id.toolbar_action);
 		view.findViewById(R.id.background_layout).setBackgroundResource(nightMode
 				? R.color.app_bar_color_dark : R.color.list_background_color_light);
-		ImageView groupListIcon = (ImageView) view.findViewById(R.id.group_list_button_icon);
-		groupListIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_group_select_all, activeColorResId));
 		ImageView replaceIcon = (ImageView) view.findViewById(R.id.replace_action_icon);
 		replaceIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_replace, activeColorResId));
 		ImageView deleteIcon = (ImageView) view.findViewById(R.id.delete_action_icon);
 		deleteIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_delete_dark, activeColorResId));
+		ImageView groupListIcon = (ImageView) view.findViewById(R.id.group_list_button_icon);
+		groupListIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_group_select_all, activeColorResId));
 		View groupList = view.findViewById(R.id.group_list_button);
 		groupList.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -236,6 +233,9 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			deleteButton.setVisibility(View.GONE);
 			descriptionCaption.setVisibility(View.GONE);
 			deleteIcon.setVisibility(View.GONE);
+			nameEdit.selectAll();
+			nameEdit.requestFocus();
+			AndroidUtils.softKeyboardDelayed(nameEdit);
 		} else {
 			toolbarAction.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_delete_dark, activeColorResId));
 			deleteButton.setVisibility(View.VISIBLE);
@@ -543,17 +543,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
-		PointEditor editor = getEditor();
-		if (editor != null && editor.isNew()) {
-			nameEdit.selectAll();
-			nameEdit.requestFocus();
-			AndroidUtils.softKeyboardDelayed(nameEdit);
-		}
-	}
-
-	@Override
 	public void onStop() {
 		super.onStop();
 		hideKeyboard();
@@ -618,19 +607,18 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		groupListAdapter.fillGroups();
 		groupListAdapter.setSelectedItemName(name);
 		groupListAdapter.notifyDataSetChanged();
-		int position;
-		if (getEditor().isNew()) {
-			String lastCategory = app.getSettings().LAST_FAV_CATEGORY_ENTERED.get();
-			if (!Algorithms.isEmpty(lastCategory) && !app.getFavorites().groupExists(lastCategory)) {
-				lastCategory = "";
-			}
-			position = groupListAdapter.getItemPosition(lastCategory);
-		} else {
+		int position = 0;
+		PointEditor editor = getEditor();
+		if (editor != null) {
 			position = groupListAdapter.items.size() == groupListAdapter.getItemPosition(name) + 1
 					? groupListAdapter.getItemPosition(name) + 1
 					: groupListAdapter.getItemPosition(name);
 		}
 		groupRecyclerView.scrollToPosition(position);
+	}
+
+	protected String getLastUsedGroup() {
+		return "";
 	}
 
 	protected String getDefaultCategoryName() {
@@ -640,15 +628,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	@Nullable
 	protected MapActivity getMapActivity() {
 		return (MapActivity) getActivity();
-	}
-
-	@Nullable
-	@Override
-	protected OsmandApplication getMyApplication() {
-		if (getActivity() == null) {
-			return null;
-		}
-		return (OsmandApplication) getActivity().getApplication();
 	}
 
 	public void dismiss() {
