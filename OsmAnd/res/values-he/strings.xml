@@ -180,7 +180,7 @@
 \nמפות אריחים ניתן להוריד ישירות ממקורות מקוונים או שניתן להכין אותן לשימוש בלתי מקוון (ולהעתיק אותן לתיקיית הנתונים של OsmAnd) כמסד נתונים מסוג SQLite אותו ניתן לייצר על ידי מגוון כלי צד־שלישי להכנת מפות.</string>
     <string name="osmand_background_plugin_description">הצגת הגדרות להפעלת מעקב וניווט במצב רקע על ידי השכמת התקן ה־GPS מדי פעם בפעם (בזמן שהמסך כבוי).</string>
     <string name="osmand_accessibility_description">תוסף זה הופך את תכונות הנגישות של ההתקן לזמינות ישירות ב־OsmAnd. התוסף מאפשר להגדיר את מהירות הדיבור של מנגנון הטקסט לדיבור, להגדיר ניווט בעזרת חצים על המסך, להשתמש בכדור מעקב לשליטה בתקריב או משוב של טקסט לדיבור, למשל לצורך הכרזה על המיקום שלך אוטומטית.</string>
-    <string name="osmand_development_plugin_description">תוסף זה מציג הגדרות פיתוח וניפוי שגיאות כגון בדיקה או הדמיה של ניתוב, ביצועי עיבוד התמונה או התרעות קוליות. הגדרות אלו מיועדות למפתחים ואינן נחוצות למשתמשים על פי רוב.</string>
+    <string name="osmand_development_plugin_description">הגדרות לתכונות פיתוח וניפוי שגיאות, הדמיית ניתוב, ביצועי עיבוד התמונה או התרעות קוליות. מיועד למפתחים ולא נחוץ לשימוש רגיל ביישומון.</string>
     <string name="plugins_screen">מנהל התוספים</string>
     <string name="prefs_plugins_descr">התוספים מאפשרים הגדרות במצב מומחה ומספקים תכונות נוספות.</string>
     <string name="prefs_plugins">מנהל התוספים</string>
@@ -897,7 +897,7 @@
     <string name="download_srtm_maps">מפות SRTM</string>
     <string name="audionotes_location_not_defined">יש לגעת ב‚שימוש במיקום…’ כדי להוסיף הערה למיקום.</string>
     <string name="map_widget_audionotes">הערות קוליות</string>
-    <string name="audionotes_plugin_description">תוסף ההערות הקוליות/בווידאו מספק תכונה להקליט שמע או לצלם תמונות/סרטונים במהלך טיול, או באמצעות כפתור על המפה או ישירות מתפריט ההקשר של כל מיקום במפה.</string>
+    <string name="audionotes_plugin_description">יצירת הערות קוליות/תמונה/וידאו במהלך טיול, או באמצעות כפתור על המפה או ישירות מתפריט ההקשר של המיקום.</string>
     <string name="audionotes_plugin_name">תוסף הערות קוליות</string>
     <string name="osmand_srtm_short_description_80_chars">תוסף ל־OsmAnd לקווי מתאר בלתי מקוונים</string>
     <string name="map_widget_distancemeasurement">מדידת מרחק</string>
@@ -1835,7 +1835,7 @@
     <string name="make_active">הגדרה כפעיל</string>
     <string name="today">היום</string>
     <string name="yesterday">אתמול</string>
-    <string name="quick_action_auto_zoom_desc">בורר לכיבוי/הפעלה של התקריב האוטומטי במפה בהתאם למהירות שלך.</string>
+    <string name="quick_action_auto_zoom_desc">כפתור להפעלה ולכיבוי של תקריב אוטומטי תלוי מהירות.</string>
     <string name="quick_action_add_destination_desc">כפתור למירכוז המפה סביב יעד המסלול, יעד שנבחר קודם לכן יהפוך להיות נקודת הביניים האחרונה.</string>
     <string name="quick_action_replace_destination_desc">כפתור להפיכת מרכז המסך ליעד המסלול החדש תוך החלפת כל יעד קודם (אם היה כזה).</string>
     <string name="quick_action_add_first_intermediate_desc">כפתור זה מכוון את מרכז המסך ליעד הביניים הראשון.</string>
@@ -3133,7 +3133,7 @@
     <string name="base_profile_descr_car">מכונית, משאית, אופנוע</string>
     <string name="base_profile_descr_bicycle">אופני הרים, טוסטוס, סוס</string>
     <string name="base_profile_descr_pedestrian">הליכה, טיול הרים, ריצה</string>
-    <string name="base_profile_descr_public_transport">כל סוגי התחב״צ</string>
+    <string name="base_profile_descr_public_transport">סוגי תחב״צ</string>
     <string name="base_profile_descr_boat">ספינה, חתירה, שיט</string>
     <string name="base_profile_descr_aircraft">טיסה, דאייה</string>
     <string name="shared_string_default">בררת מחדל</string>
@@ -3276,8 +3276,8 @@
     <string name="paste_Osmand_data_folder_path">נא להדביק את הנתיב לתיקייה עם הנתונים של OsmAnd</string>
     <string name="change_osmand_data_folder_question">להחליף את תיקיית הנתונים של OsmAnd\?</string>
     <string name="move_maps_to_new_destination">העברה ליעד החדש</string>
-    <string name="internal_app_storage_description">אחסון פנימי, נסתר מהמשתמש ומיישומונים אחרים, נגיש ל־OsmAnd בלבד</string>
-    <string name="change_data_storage_folder">החלפת תיקיית אחסון הנתונים</string>
+    <string name="internal_app_storage_description">אחסון פנימי עבור OsmAnd (נסתר מהמשתמשים ומיישומונים אחרים).</string>
+    <string name="change_data_storage_folder">החלפת תיקיית אחסון</string>
     <string name="rendering_attr_piste_type_snow_park_name">פארק גלישה על שלג</string>
     <string name="rendering_attr_piste_type_sleigh_name">מזחלת נגררת</string>
     <string name="rendering_attr_piste_type_sled_name">מזחלת עצמאית</string>
@@ -3316,7 +3316,7 @@
     <string name="shared_string_memory_used_mb_desc">%1$s מ״ב בשימוש</string>
     <string name="shared_string_memory_used_kb_desc">%1$s ק״ב בשימוש</string>
     <string name="contour_lines_and_hillshade">קווי מתאר והצללות תוואי שטח</string>
-    <string name="routing_attr_prefer_unpaved_name">להעדיף דרכים בלתי סלולות</string>
+    <string name="routing_attr_prefer_unpaved_name">להעדיף דרכים לא סלולות</string>
     <string name="routing_attr_prefer_unpaved_description">להעדיף דרכים בלתי סלולות.</string>
     <string name="update_all_maps">עדכון כל המפות</string>
     <string name="update_all_maps_q">לעדכן את כל (%1$d) המפות\?</string>
@@ -3330,7 +3330,7 @@
 \n 
 \n • חלונית הורדת מפה חדשה שמציעה להוריד מפה בזמן עיון 
 \n 
-\n • תיקונים לערכת העיצוב הלילית 
+\n • תיקונים לערכת העיצוב הכהה 
 \n 
 \n • תוקנו בעיות ניווט ברחבי העולם 
 \n 
@@ -3343,16 +3343,16 @@
 \n • תיקוני תקלות נוספים
 \n
 \n</string>
-    <string name="apply_preference_to_all_profiles">ניתן להחיל את השינוי הזה לכל הפרופילים או רק לזה שנבחר.</string>
+    <string name="apply_preference_to_all_profiles">ניתן להחיל את השינוי הזה לכל הפרופילים או רק לנבחר.</string>
     <string name="shared_preference">משותף</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">להעדיף דרכים לא סלולות</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_description">להעדיף דרכים לא סלולות.</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">להעדיף דרכים לא סלולות על פני סלולות בבחירת מסלול.</string>
     <string name="layer_osm_edits">עריכות OSM</string>
-    <string name="quick_action_contour_lines_descr">בורר להצגה או להסתרה של קווי מתאר במפה.</string>
+    <string name="quick_action_contour_lines_descr">כפתור להצגה או להסתרה של קווי מתאר במפה.</string>
     <string name="quick_action_contour_lines_show">הצגת קווי מתאר</string>
     <string name="quick_action_contour_lines_hide">הסתרת קווי מתאר</string>
     <string name="quick_action_show_hide_contour_lines">הצגה/הסתרה של קווי מתאר</string>
-    <string name="quick_action_hillshade_descr">בורר להצגה או הסתרה של הצללה במפה.</string>
+    <string name="quick_action_hillshade_descr">כפתור להצגה או הסתרה של הצללות במפה.</string>
     <string name="quick_action_hillshade_show">הצגת הצללה</string>
     <string name="quick_action_hillshade_hide">הסתרת הצללה</string>
     <string name="quick_action_show_hide_hillshade">הצגה/הסתרה של הצללה</string>
@@ -3360,12 +3360,12 @@
     <string name="simulate_your_location_gpx_descr">הדמיית המיקום שלך באמצעות מסלול GPX שהוקלט מראש.</string>
     <string name="export_profile">ייצוא פרופיל</string>
     <string name="exported_osmand_profile">פרופיל OsmAnd:‏ %1$s</string>
-    <string name="overwrite_profile_q">פרופיל בשם ‚%1$s’ כבר קיים. לדרוס\?</string>
+    <string name="overwrite_profile_q">‚%1$s’ כבר קיים. לדרוס\?</string>
     <string name="export_profile_failed">לא ניתן לייצא פרופיל.</string>
     <string name="profile_import">ייבוא פרופיל</string>
-    <string name="profile_import_descr">כדי לייבא פרופיל, יש לבחור את הקובץ שלו ולפתוח אותו עם OsmAnd.</string>
+    <string name="profile_import_descr">ניתן להוסיף פרופיל על ידי פתיחת הקובץ שלו עם OsmAnd.</string>
     <string name="file_import_error">שגיאת ייבוא %1$s:‏ %2$s</string>
-    <string name="file_imported_successfully">הייבוא של %1$s הצליח.</string>
+    <string name="file_imported_successfully">הייבוא של %1$s הושלם.</string>
     <string name="rendering_value_white_name">לבן</string>
     <string name="swap_two_places">החלפה בין %1$s לבין %2$s</string>
     <string name="route_start_point">נקודת התחלה</string>
@@ -3581,4 +3581,6 @@
     <string name="shared_string_octagon">מתומן</string>
     <string name="multimedia_notes_view_descr">הערות ה־OSM שלך הן תחת %1$s.</string>
     <string name="tracks_view_descr">המסלולים המוקלטים שלך נמצאים תחת %1$s, או בתיקייה של OsmAnd.</string>
+    <string name="app_mode_ski_snowmobile">אופנוע שלג</string>
+    <string name="custom_osmand_plugin">תוסף OsmAnd מותאם אישית</string>
 </resources>
