@@ -3611,4 +3611,8 @@ Lon %2$s</string>
     <string name="shared_string_min">Min</string>
     <string name="hillshade_description">Schummerungs-Karte mit dunklen Schattierungen zur Darstellung von Hängen, Gipfeln und Niederungen.</string>
     <string name="n_items_of_z">%1$s von %2$s</string>
+    <string name="shared_string_octagon">Achteck</string>
+    <string name="app_mode_ski_touring">Skitouren</string>
+    <string name="app_mode_ski_snowmobile">Schneemobil</string>
+    <string name="custom_osmand_plugin">Benutzerdefiniertes OsmAnd-Plugin</string>
 </resources>
