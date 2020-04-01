@@ -691,6 +691,7 @@ public class SettingsHelper {
 		private ApplicationModeBuilder builder;
 		private ApplicationModeBean modeBean;
 		private Set<String> appModeBeanPrefsIds;
+		private Map<String, String> drawerLogoParams;
 
 		public ProfileSettingsItem(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode) {
 			super(app.getSettings());
@@ -709,6 +710,11 @@ public class SettingsHelper {
 		public ProfileSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			super(SettingsItemType.PROFILE, app.getSettings(), json);
 			appModeBeanPrefsIds = new HashSet<>(Arrays.asList(app.getSettings().appModeBeanPrefsIds));
+		}
+
+		@Override
+		protected void init() {
+			drawerLogoParams = new HashMap<>();
 		}
 
 		@NonNull
@@ -760,6 +766,27 @@ public class SettingsHelper {
 				appMode = ApplicationMode.valueOfStringKey(appMode.getStringKey(), appMode);
 			}
 			this.appMode = appMode;
+		}
+
+		@Override
+		void readItemsFromJson(@NonNull JSONObject json) throws IllegalArgumentException {
+			try {
+				JSONObject drawerLogoJson = json.has("drawerLogo") ? json.getJSONObject("drawerLogo") : null;
+				if (drawerLogoJson != null) {
+					for (Iterator<String> it = drawerLogoJson.keys(); it.hasNext(); ) {
+						String localeKey = it.next();
+						String name = drawerLogoJson.getString(localeKey);
+						drawerLogoParams.put(localeKey, name);
+					}
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+
+		@NonNull
+		public Map<String, String> getDrawerLogoParams() {
+			return drawerLogoParams;
 		}
 
 		@Override

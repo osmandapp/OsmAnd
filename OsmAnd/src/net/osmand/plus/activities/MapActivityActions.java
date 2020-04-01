@@ -1143,18 +1143,19 @@ public class MapActivityActions implements DialogProvider {
 				mapActivity.dismissCardDialog();
 				boolean hasHeader = menuItemsListView.getHeaderViewsCount() > 0;
 				boolean hasFooter = menuItemsListView.getFooterViewsCount() > 0;
-				if (hasHeader && position ==0 || (hasFooter && position== menuItemsListView.getCount() - 1)) {
-						if(navDrawerLogoParams!=null) executeHeadersIntent(navDrawerLogoParams.get(0));
-						else restoreOsmand();
-					} else {
-						position -= menuItemsListView.getHeaderViewsCount();
-						ContextMenuItem item = contextMenuAdapter.getItem(position);
-						ItemClickListener click = item.getItemClickListener();
-						if (click != null && click.onContextMenuClick(simpleListAdapter, item.getTitleId(),
-								position, false, AndroidUtils.getCenterViewCoordinates(view))) {
-							mapActivity.closeDrawer();
-						}
-			        }
+				if (hasHeader && position == 0 || (hasFooter && position == menuItemsListView.getCount() - 1)) {
+					if (navDrawerLogoParams != null) {
+						executeHeadersIntent(navDrawerLogoParams.get(0));
+					}
+				} else {
+					position -= menuItemsListView.getHeaderViewsCount();
+					ContextMenuItem item = contextMenuAdapter.getItem(position);
+					ItemClickListener click = item.getItemClickListener();
+					if (click != null && click.onContextMenuClick(simpleListAdapter, item.getTitleId(),
+							position, false, AndroidUtils.getCenterViewCoordinates(view))) {
+						mapActivity.closeDrawer();
+					}
+				}
 			}
 
 		});

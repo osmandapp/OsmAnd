@@ -24,10 +24,12 @@ import net.osmand.plus.activities.PluginsActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.helpers.ImportHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.Algorithms;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,11 +37,14 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -56,7 +61,8 @@ public class OsmAndAppCustomization {
 	protected OsmandApplication app;
 	protected OsmandSettings osmandSettings;
 
-	private Bitmap navDrawerLogo;
+	private Map<String, Bitmap> navDrawerLogos = new HashMap<>();
+
 	private ArrayList<String> navDrawerParams;
 
 	private String navDrawerFooterIntent;
@@ -134,7 +140,6 @@ public class OsmAndAppCustomization {
 	}
 
 	public boolean restoreOsmand() {
-		navDrawerLogo = null;
 		featuresCustomized = false;
 		widgetsCustomized = false;
 		customOsmandSettings = null;
@@ -218,7 +223,30 @@ public class OsmAndAppCustomization {
 
 	@Nullable
 	public Bitmap getNavDrawerLogo() {
-		return navDrawerLogo;
+		ApplicationMode mode = app.getSettings().APPLICATION_MODE.get();
+		Bitmap drawerLogo = navDrawerLogos.get(mode.getStringKey());
+		if (drawerLogo == null) {
+			String logoFileName = app.getSettings().NAV_DRAWER_LOGO.get();
+			if (!Algorithms.isEmpty(logoFileName)) {
+				try {
+					JSONObject json = new JSONObject(logoFileName);
+					for (Iterator<String> it = json.keys(); it.hasNext(); ) {
+						String iconPath = json.getString(it.next());
+
+						File iconFile = app.getAppPath(iconPath);
+						if (iconFile.exists()) {
+							drawerLogo = BitmapFactory.decodeFile(iconFile.getAbsolutePath());
+							navDrawerLogos.put(mode.getStringKey(), drawerLogo);
+							break;
+						}
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return drawerLogo;
 	}
 
 	@Nullable
@@ -227,18 +255,43 @@ public class OsmAndAppCustomization {
 	}
 
 	public boolean setNavDrawerLogo(String uri, @Nullable String packageName, @Nullable String intent) {
+		String connectedAppDirPath = IndexConstants.PLUGINS_DIR + packageName;
+		File connectedAppDir = app.getAppPath(connectedAppDirPath);
 		if (TextUtils.isEmpty(uri)) {
-			navDrawerLogo = null;
+			app.getSettings().NAV_DRAWER_LOGO.resetToDefault();
+			Algorithms.removeAllFiles(connectedAppDir);
 		} else {
 			try {
-				InputStream is = app.getContentResolver().openInputStream(Uri.parse(uri));
+				Uri fileUri = Uri.parse(uri);
+				InputStream is = app.getContentResolver().openInputStream(fileUri);
 				if (is != null) {
-					navDrawerLogo = BitmapFactory.decodeStream(is);
-					is.close();
-
+					String iconName = ImportHelper.getNameFromContentUri(app, fileUri);
+					if (!connectedAppDir.exists()) {
+						connectedAppDir.mkdirs();
+					}
+					OutputStream fout = new FileOutputStream(new File(connectedAppDir, iconName));
+					try {
+						Algorithms.streamCopy(is, fout);
+					} finally {
+						try {
+							is.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						try {
+							fout.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+					JSONObject json = new JSONObject();
+					json.put("", connectedAppDirPath + "/" + iconName);
+					app.getSettings().NAV_DRAWER_LOGO.set(json.toString());
 				}
 			} catch (FileNotFoundException e) {
 				return false;
+			} catch (JSONException e) {
+				// ignore
 			} catch (IOException e) {
 				// ignore
 			}
