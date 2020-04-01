@@ -3018,7 +3018,7 @@
     <string name="change_osmand_data_folder_question">تغيير مجلد البيانات ؟</string>
     <string name="move_maps_to_new_destination">نقل للموقع الجديد</string>
     <string name="avoid_in_routing_descr_">تجنب بعض الطرق، أو بعض أنواع الطرق</string>
-    <string name="app_mode_utv">جنباً إلى جنب</string>
+    <string name="app_mode_utv">جنبًا إلى جنب</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">طريق تلفريك</string>
     <string name="rendering_attr_piste_difficulty_connection_name">اتصال</string>
     <string name="shared_string_calculate">حساب</string>
@@ -3103,14 +3103,14 @@
     <string name="shared_string_open_track">مسار مفتوح</string>
     <string name="shared_string_track_is_saved">المسار %s تم حفظ</string>
     <string name="gpx_join_gaps">ربط الأجزاء</string>
-    <string name="app_mode_camper">العربة</string>
+    <string name="app_mode_camper">العربه</string>
     <string name="app_mode_campervan">عربة التخييم</string>
     <string name="rendering_attr_showLez_description">إظهار مناطق الانبعاثات المنخفضة علي الخريطة. لا يؤثر علي التوجيه.</string>
     <string name="rendering_attr_showLez_name">إظهار مناطق الانبعاثات المنخفضة</string>
     <string name="temporary_conditional_routing">النظر في القيود المؤقتة</string>
     <string name="shared_string_default">افتراضي</string>
-    <string name="app_mode_wagon">عربة</string>
-    <string name="app_mode_pickup_truck">شاحنة بيك أب</string>
+    <string name="app_mode_wagon">عربه</string>
+    <string name="app_mode_pickup_truck">شاحنه</string>
     <string name="cancel_subscription">إلغاء الاشتراك</string>
     <string name="configure_profile_info">إعدادات الوضع :</string>
     <string name="utm_format_descr">يستخدم أوسماند تنسيق UTM وهو مشابه ولكن غير مطابق لتنسيق UTM الناتو.</string>
@@ -3214,12 +3214,12 @@
 \n• إصلاحات أخرى في الأخطاء
 \n
 \n</string>
-    <string name="app_mode_personal_transporter">الناقل الشخصي</string>
+    <string name="app_mode_personal_transporter">ناقل شخصي</string>
     <string name="app_mode_monowheel">عجلة آحادية</string>
     <string name="app_mode_scooter">سكوتر</string>
     <string name="precision_hdop_and_vdop">الدقة الأفقية: %1$s, عمودي: %2$s</string>
     <string name="precision_hdop">الدقة الأفقية: %s</string>
-    <string name="app_mode_offroad">خارج المسار</string>
+    <string name="app_mode_offroad">الطرق الوعره</string>
     <string name="edit_profile_setup_title">إعداد الوضع</string>
     <string name="edit_profile_setup_subtitle">يحتفظ الوضع بإعداداتك</string>
     <string name="edit_profile_setup_map_subtitle">حدد خيارات الخريطة للملف الشخصي</string>
@@ -3273,7 +3273,7 @@
     <string name="nav_type_hint">نوع الملاحة</string>
     <string name="app_mode_taxi">سيارة أجرة</string>
     <string name="app_mode_shuttle_bus">نقل داخلي</string>
-    <string name="app_mode_subway">مترو الأنفاق</string>
+    <string name="app_mode_subway">مترو انفاق</string>
     <string name="app_mode_horse">حصان</string>
     <string name="app_mode_helicopter">هليكوبتر</string>
     <string name="osmand_routing_promo">يمكنك إضافة نسختك المعدلة من الملف routing.xml في ..أوسماند/routing</string>
@@ -3404,7 +3404,7 @@
     <string name="login_and_pass">اسم المستخدم و كلمة السر</string>
     <string name="plugin_global_prefs_info">إعدادات المكون الإضافي هذه شاملة، وتنطبق على جميع الأوضاع.</string>
     <string name="osm_editing">تعديل OpenStreetMap</string>
-    <string name="app_mode_osm">OSM</string>
+    <string name="app_mode_osm">Osm</string>
     <string name="select_nav_icon_descr">سترى الأيقونة فقط أثناء الملاحة أو أثناء التحرك.</string>
     <string name="button_rate">قيم</string>
     <string name="select_map_icon_descr">تظهر أيقونة الخريطة فقط على الخريطة ، وتتغير أثناء التنقل إلى أيقونة التنقل.</string>
@@ -3568,4 +3568,9 @@
     <string name="hillshade_description">خريطة التضاريس تستخدم ظلال داكنة لإظهار المنحدرات والقمم والأراضي المنخفضة.</string>
     <string name="shared_string_terrain">التضاريس</string>
     <string name="n_items_of_z">%1$s من %2$s</string>
+    <string name="shared_string_octagon">مثمن</string>
+    <string name="shared_string_min">الحد الأدنى</string>
+    <string name="app_mode_ski_touring">جولة التزلج</string>
+    <string name="app_mode_ski_snowmobile">الثلج</string>
+    <string name="custom_osmand_plugin">مخصص البرنامج المساعد أوسماند</string>
 </resources>
