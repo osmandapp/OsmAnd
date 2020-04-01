@@ -222,11 +222,7 @@ public class NavigationFragment extends BaseSettingsFragment {
 					false, null));
 		}
 
-		List<String> disabledRouterNames = new ArrayList<>();
-		for (OsmandPlugin plugin : OsmandPlugin.getNotEnabledPlugins()) {
-			disabledRouterNames.addAll(plugin.getRouterNames());
-		}
-
+		List<String> disabledRouterNames = OsmandPlugin.getDisabledRouterNames();
 		for (RoutingConfiguration.Builder builder : context.getAllRoutingConfigs()) {
 			collectRoutingProfilesFromConfig(context, builder, profilesObjects, disabledRouterNames);
 		}

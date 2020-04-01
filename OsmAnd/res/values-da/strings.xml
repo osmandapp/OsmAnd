@@ -3547,4 +3547,43 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_rhomb">Rhombe</string>
     <string name="shared_string_square">Firkant</string>
     <string name="shared_string_min">Min</string>
+    <string name="use_system_screen_timeout_promo">Deaktiveret som standard, hvis programmet kører i forgrunden, slukkes skærmen ikke.
+\n 
+\nAktivér for at bruge systemopsætning til at slukke for skærmen.</string>
+    <string name="shared_string_octagon">Oktagon</string>
+    <string name="multimedia_photo_play_sound">Kameraets lukkelyd</string>
+    <string name="live_monitoring_adress_descr">Angiv webadressen med parametersyntaks: lat={0}, lon={1}, tidspunkt={2}, hdop={3}, højde={4}, hastighed={5}, kurs={6}.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Anbefaling: En indstilling på 5-meter kan fungere godt, hvis der ikke er behov for at opfange finere detaljer, og der ikke ønskes eksplicit at optage data mens i hvile.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Bivirkninger: Perioder i hvile registreres slet ikke eller kun ved et punkt hver. Små (virkelige) bevægelser (f.eks. sidelæns for at markere en mulig afkørsel på turen) kan blive filtreret ud. Filen indeholder mindre information til efterbehandling og har dårligere statistik ved at frafiltrere åbenlyse overflødige punkter på optagelsestidspunktet, mens potentielt beholder artefakter forårsaget af dårlig modtagelse eller GPS-chipset-effekter.</string>
+    <string name="monitoring_min_distance_descr">Filteret forhindrer, at der registreres dobbeltpunkter, hvor der muligvis er for lidt faktisk bevægelse. Det giver et pænere rumligt udseende af spor, der ikke efterbehandles senere.</string>
+    <string name="monitoring_min_accuracy_descr_remark">Bemærk: Hvis GPS\'en har været slukket umiddelbart før en optagelse, kan det første målte punkt have en reduceret nøjagtighed, så i koden skal der måske ventes et sekund, inden der optages et punkt (eller det bedste af 3 på hinanden følgende punkter osv.). Men det er endnu ikke implementeret.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Anbefaling: Det er svært at forudsige, hvad der vil blive optaget og hvad ikke, det kan derfor være bedst at slå filteret fra.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Bivirkning: Som et resultat af filtrering efter nøjagtighed kan der muligvis helt mangle punkter f.eks. under broer, under træer, mellem høje bygninger eller under visse vejrforhold.</string>
+    <string name="monitoring_min_accuracy_descr">Kun punkter, der måles i henhold til minimum nøjagtighedsspecifikationerne (i meter/fod som leveret af Android, afhængigt af chipset), registreres. Nøjagtighed henviser til spredningen af gentagne målinger og er ikke direkte relateret til den nøjagtighed, der bestemmer, hvor tæt målinger og ægte position er til hinanden.</string>
+    <string name="monitoring_min_speed_descr_remark">Bemærk: Hastighed &gt; 0 kontrol: De fleste GPS-chipsæt giver kun en hastighedsværdi, hvis algoritmen bestemmer, at der er bevægelse, og ingen, hvis der ikke er bevægelse. Brug af indstillingen &gt; 0 i dette filter bruger derfor en vis grad bevægelsesdetektering fra GPS-chipset. Men selvom de ikke filtreres på optagelsestidspunktet, bruges denne funktion i GPX-analysen til at bestemme den korrigerede afstand, det vil sige, at værdien, der vises i feltet, er afstanden, der er registreret under bevægelsen.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Anbefaling: Forsøg først at bruge bevægelsesdetektering via filteret til minimum afstandsmåling (B). Dette kan føre til bedre resultater, og der vil mistes færre data. Hvis sporene forbliver unøjagtige ved lave hastigheder, så prøv værdier, der ikke er nul her. Bemærk, at nogle målinger (nogle netværksbaserede metoder) muligvis ikke viser nogen hastighedsværdier overhovedet. I dette tilfælde registreres intet.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Bivirkning: Spor vil mangle alle sektioner, hvor minimumshastighedskriteriet ikke var opfyldt (f.eks. hvor cyklen skubbes op ad en stejl bakke). Der vil heller ikke være nogen oplysninger om hvileperioder, som pauser. Har indvirkning på alle analyser eller efterbehandlinger, som når det forsøges at bestemme den samlede længde af rejsen, tid i bevægelse, eller den gennemsnitlige hastighed.</string>
+    <string name="import_profile_dialog_description">Den importerede profil indeholder yderligere data. Klik på Importer for kun at importere profildata, eller vælg yderligere data, der skal importeres.</string>
+    <string name="route_recalculation_dist_descr">Ruten vil blive genberegnet, hvis afstanden til ruten er længere end angivet parameter</string>
+    <string name="route_recalculation_dist_title">Mindste afstand for at genberegne ruten</string>
+    <string name="import_duplicates_description">OsmAnd allerede har elementer med de samme navne, som dem, der importeres.
+\n
+\nVælg en aktion.</string>
+    <string name="listed_exist">Det angivne %1$s findes allerede.</string>
+    <string name="recalc_angle_dialog_title">Mindste vinkel mellem min placering og rute</string>
+    <string name="recalc_angle_dialog_descr">Ekstra lige segment mellem min placering og den beregnede rute vises, indtil ruten genberegnes</string>
+    <string name="shared_string_terrain">Terræn</string>
+    <string name="hillshade_description">Reliefskyggekort viser hjælp af mørke nuancer skråninger, toppe og lavland.</string>
+    <string name="slope_description">Hældning er farvelagte visualiseringer på terræn.</string>
+    <string name="terrain_slider_description">Angiv de min. og max. zoomniveauer, som laget vil blive vist på.</string>
+    <string name="hillshade_download_description">Yderligere kort er nødvendige for at se reliefskygger på kortet.</string>
+    <string name="slope_download_description">Yderligere kort er nødvendige for at se hældninger på kortet.</string>
+    <string name="slope_read_more">Læs mere om hældninger på %1$s.</string>
+    <string name="shared_string_transparency">Gennemsigtighed</string>
+    <string name="shared_string_zoom_levels">Zoomniveauer</string>
+    <string name="shared_string_legend">Tegnforklaring</string>
+    <string name="terrain_empty_state_text">Gøre det muligt at få vist relief- eller hældningskort. Læs mere om kort-typerne på vores hjemmeside</string>
+    <string name="shared_string_hillshade">Reliefskygge</string>
+    <string name="import_complete_description">Alle data fra %1$s er importeret, brug knapperne nedenfor til at åbne den nødvendige del af programmet til at håndtere det.</string>
+    <string name="items_added">Poster tilføjet</string>
 </resources>

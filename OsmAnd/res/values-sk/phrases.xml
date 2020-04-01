@@ -345,8 +345,8 @@
     <string name="poi_internet_access_service">Internetové pripojenie: služba</string>
     <string name="poi_monastery">Kláštor</string>
     <string name="poi_historic_monastery">Historický kláštor</string>
-    <string name="poi_wayside_cross">Božie muky</string>
-    <string name="poi_wayside_shrine">Malá kaplnka pri ceste</string>
+    <string name="poi_wayside_cross">Božie muky/Náboženský prícestný kríž</string>
+    <string name="poi_wayside_shrine">Náboženská prícestná schránka</string>
     <string name="poi_information">Informácie</string>
     <string name="poi_clock">Hodiny</string>
     <string name="poi_travel_agent">Cestovná kancelária</string>

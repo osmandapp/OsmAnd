@@ -317,8 +317,8 @@
     <string name="search_button">搜索</string>
     <string name="search_activity">搜索</string>
     <string name="app_mode_default">浏览地图</string>
-    <string name="app_mode_car">开车</string>
-    <string name="app_mode_bicycle">坐自行车</string>
+    <string name="app_mode_car">驾驶</string>
+    <string name="app_mode_bicycle">自行车出行</string>
     <string name="app_mode_pedestrian">走路</string>
     <string name="position_on_map_center">中心</string>
     <string name="position_on_map_bottom">底部</string>
@@ -1199,7 +1199,7 @@
     <string name="quick_action_map_source_action">添加地图来源</string>
     <string name="map_mode">地图模式</string>
     <string name="map_magnifier">地图缩放</string>
-    <string name="rendering_attr_showSurfaceGrade_name"/>
+    <string name="rendering_attr_showSurfaceGrade_name">显示道路质量</string>
     <string name="rendering_attr_showSurfaces_name"/>
     <string name="map_widget_left">左边栏</string>
     <string name="map_widget_right">右边栏</string>
@@ -2719,7 +2719,7 @@
     <string name="rendering_value_black_name">黑色</string>
     <string name="rendering_attr_surface_wood_name">木</string>
     <string name="app_mode_subway">地铁</string>
-    <string name="app_mode_horse">马</string>
+    <string name="app_mode_horse">骑马</string>
     <string name="shared_string_color_magenta">品红色</string>
     <string name="go_to_next_field">下个栏位</string>
     <string name="shared_string_dont">别</string>
@@ -2827,4 +2827,6 @@
     <string name="shared_string_angle">角度</string>
     <string name="select_data_to_import">选择要导入的数据。</string>
     <string name="import_rendering_file">导入渲染文件</string>
+    <string name="app_mode_shuttle_bus">班车</string>
+    <string name="app_mode_pickup_truck">皮卡</string>
 </resources>

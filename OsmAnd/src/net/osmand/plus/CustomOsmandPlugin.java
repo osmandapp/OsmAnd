@@ -24,7 +24,6 @@ import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
-import net.osmand.plus.render.RendererRegistry;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -106,7 +105,14 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		});
 	}
 
-	private void removePluginItemsFromFile(final File file) {
+	public void removePluginItems(PluginItemsListener itemsListener) {
+		File pluginItemsFile = getPluginItemsFile();
+		if (pluginItemsFile.exists()) {
+			removePluginItemsFromFile(pluginItemsFile, itemsListener);
+		}
+	}
+
+	private void removePluginItemsFromFile(final File file, final PluginItemsListener itemsListener) {
 		app.getSettingsHelper().collectSettings(file, "", 1, new SettingsCollectListener() {
 			@Override
 			public void onSettingsCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
@@ -166,6 +172,9 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 						}
 					}
 				}
+				if (itemsListener != null) {
+					itemsListener.onItemsRemoved();
+				}
 			}
 		});
 	}
@@ -173,15 +182,15 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	@Override
 	public void disable(OsmandApplication app) {
 		super.disable(app);
-		File pluginItemsFile = getPluginItemsFile();
-		if (pluginItemsFile.exists()) {
-			removePluginItemsFromFile(pluginItemsFile);
-		}
+		removePluginItems(null);
 	}
 
-	private File getPluginItemsFile() {
-		File pluginDir = new File(app.getAppPath(null), IndexConstants.PLUGINS_DIR + pluginId);
-		return new File(pluginDir, "items" + IndexConstants.OSMAND_SETTINGS_FILE_EXT);
+	public File getPluginDir() {
+		return new File(app.getAppPath(null), IndexConstants.PLUGINS_DIR + pluginId);
+	}
+
+	public File getPluginItemsFile() {
+		return new File(getPluginDir(), "items" + IndexConstants.OSMAND_SETTINGS_FILE_EXT);
 	}
 
 	@Override
@@ -356,12 +365,13 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	}
 
 	public void addRouter(String fileName) {
-		routerNames.add(fileName);
+		String routerName = Algorithms.getFileWithoutDirs(fileName);
+		routerNames.add(routerName);
 	}
 
 	public void addRenderer(String fileName) {
-		String renderer = RendererRegistry.formatRendererFileName(fileName);
-		rendererNames.add(renderer.replace('_', ' ').replace('-', ' '));
+		String rendererName = Algorithms.getFileWithoutDirs(fileName);
+		rendererNames.add(rendererName);
 	}
 
 	public void loadResources() {
@@ -405,5 +415,11 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	@Override
 	public Drawable getAssetResourceImage() {
 		return image;
+	}
+
+	public interface PluginItemsListener {
+
+		void onItemsRemoved();
+
 	}
 }
