@@ -50,7 +50,6 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
-import net.osmand.plus.activities.actions.OsmandRestoreOrExitDialog;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.download.IndexItem;
@@ -144,22 +143,18 @@ public class MapActivityActions implements DialogProvider {
 
 	private final MapActivity mapActivity;
 	private OsmandSettings settings;
-	private RoutingHelper routingHelper;
 
 	@NonNull
 	private ImageView drawerLogoHeader;
-	private View drawerOsmAndFooter;
-	
+
 	private int drawerMode = DRAWER_MODE_NORMAL;
 
 	public MapActivityActions(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		settings = mapActivity.getMyApplication().getSettings();
-		routingHelper = mapActivity.getMyApplication().getRoutingHelper();
 		drawerLogoHeader = new ImageView(mapActivity);
-		drawerLogoHeader.setPadding(-AndroidUtils.dpToPx(mapActivity, 8f), AndroidUtils.dpToPx(mapActivity, 16f), 0,
-				0);
-		drawerOsmAndFooter = mapActivity.getLayoutInflater().inflate(R.layout.powered_by_osmand_item, null);
+		drawerLogoHeader.setPadding(-AndroidUtils.dpToPx(mapActivity, 8f),
+				AndroidUtils.dpToPx(mapActivity, 16f), 0, 0);
 	}
 
 	public void addAsTarget(double latitude, double longitude, PointDescription pd) {
@@ -1121,13 +1116,10 @@ public class MapActivityActions implements DialogProvider {
 			menuItemsListView.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.list_background_color_light));
 		}
 		menuItemsListView.removeHeaderView(drawerLogoHeader);
-		menuItemsListView.removeFooterView(drawerOsmAndFooter);
 		Bitmap navDrawerLogo = getMyApplication().getAppCustomization().getNavDrawerLogo();
 		final ArrayList<String> navDrawerLogoParams = getMyApplication().getAppCustomization().getNavDrawerLogoParams();
 
-		boolean customHeader = false;
 		if (navDrawerLogo != null) {
-			customHeader = true;
 			drawerLogoHeader.setImageBitmap(navDrawerLogo);
 			menuItemsListView.addHeaderView(drawerLogoHeader);
 		}
@@ -1159,44 +1151,6 @@ public class MapActivityActions implements DialogProvider {
 			}
 
 		});
-		if (customHeader) {
-			menuItemsListView.post(new Runnable() {
-				public void run() {
-					View footerLayout = mapActivity.findViewById(R.id.drawer_footer_layout);
-					boolean showFooterLayout = false;
-					if (menuItemsListView.getChildCount() > 0) {
-						int numItemsVisible = menuItemsListView.getLastVisiblePosition() -
-								menuItemsListView.getFirstVisiblePosition();
-						View lastView = menuItemsListView.getChildAt(menuItemsListView.getLastVisiblePosition());
-						boolean overlapped = lastView != null && lastView.getY() + lastView.getHeight() * 2 > menuItemsListView.getHeight();
-						if (simpleListAdapter.getCount() - 1 > numItemsVisible || overlapped) {
-							menuItemsListView.addFooterView(drawerOsmAndFooter);
-						} else {
-							showFooterLayout = true;
-						}
-					} else {
-						showFooterLayout = true;
-					}
-					if (showFooterLayout) {
-						footerLayout.setVisibility(View.VISIBLE);
-						footerLayout.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								if (navDrawerLogoParams != null) {
-									mapActivity.closeDrawer();
-								}
-								new OsmandRestoreOrExitDialog()
-										.show(mapActivity.getSupportFragmentManager(), "dialog");
-								//showReturnConfirmationDialog(navDrawerLogoParams.get(0));
-
-							}
-						});
-					} else {
-						footerLayout.setVisibility(View.GONE);
-					}
-				}
-			});
-		}
 	}
 
 	private void executeHeadersIntent(String packageName) {
