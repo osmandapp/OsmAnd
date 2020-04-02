@@ -2815,4 +2815,5 @@
     <string name="poi_support_wall_mounted">Supporto: muro</string>
     <string name="poi_generator_output_electricity_no">Uscita (elettricità): no</string>
     <string name="poi_greenhouse_horticulture">Orticoltura in serra</string>
+    <string name="poi_branch">filiale</string>
 </resources>
