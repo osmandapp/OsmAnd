@@ -1341,7 +1341,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="rendering_value_americanRoadAtlas_name">Atlante strade americane</string>
     <string name="routing_attr_no_new_routing_name">Ignora le regole di calcolo del percorso v1.9</string>
     <string name="routing_attr_no_new_routing_description">Non usare le regole di calcolo del percorso introdotte nella v1.9.</string>
-    <string name="traffic_warning_railways">Passaggio a livello</string>
+    <string name="traffic_warning_railways">Attraversamento ferroviario</string>
     <string name="traffic_warning_pedestrian">Attraversamento pedonale</string>
     <string name="show_railway_warnings">Passaggi a livello</string>
     <string name="show_pedestrian_warnings">Attraversamenti pedonali</string>
