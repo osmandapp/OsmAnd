@@ -8,6 +8,7 @@ import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.profiles.ProfileDataObject;
@@ -221,17 +222,19 @@ public class NavigationFragment extends BaseSettingsFragment {
 					false, null));
 		}
 
+		List<String> disabledRouterNames = OsmandPlugin.getDisabledRouterNames();
 		for (RoutingConfiguration.Builder builder : context.getAllRoutingConfigs()) {
-			collectRoutingProfilesFromConfig(context, builder, profilesObjects);
+			collectRoutingProfilesFromConfig(context, builder, profilesObjects, disabledRouterNames);
 		}
 		return profilesObjects;
 	}
 
-	private static void collectRoutingProfilesFromConfig(OsmandApplication app, RoutingConfiguration.Builder builder, Map<String, RoutingProfileDataObject> profilesObjects) {
+	private static void collectRoutingProfilesFromConfig(OsmandApplication app, RoutingConfiguration.Builder builder,
+	                                                     Map<String, RoutingProfileDataObject> profilesObjects, List<String> disabledRouterNames) {
 		for (Map.Entry<String, GeneralRouter> entry : builder.getAllRouters().entrySet()) {
 			String routerKey = entry.getKey();
 			GeneralRouter router = entry.getValue();
-			if (!routerKey.equals("geocoding")) {
+			if (!routerKey.equals("geocoding") && !disabledRouterNames.contains(router.getFilename())) {
 				int iconRes = R.drawable.ic_action_gdirections_dark;
 				String name = router.getProfileName();
 				String description = app.getString(R.string.osmand_default_routing);

@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
 
@@ -22,6 +23,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity.TabItem;
+import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
@@ -42,8 +44,12 @@ import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -56,13 +62,23 @@ public abstract class OsmandPlugin {
 
 	public static final String PLUGIN_ID_KEY = "plugin_id";
 
-	private static List<OsmandPlugin> allPlugins = new ArrayList<OsmandPlugin>();
+	private static final String PLUGINS_PREFERENCES_NAME = "net.osmand.plugins";
+	private static final String CUSTOM_PLUGINS_KEY = "custom_plugins";
+
 	private static final Log LOG = PlatformUtil.getLog(OsmandPlugin.class);
+
+	private static List<OsmandPlugin> allPlugins = new ArrayList<OsmandPlugin>();
+
+	protected OsmandApplication app;
 
 	protected List<OsmandSettings.OsmandPreference> pluginPreferences = new ArrayList<>();
 
 	private boolean active;
 	private String installURL = null;
+
+	public OsmandPlugin(OsmandApplication app) {
+		this.app = app;
+	}
 
 	public abstract String getId();
 
@@ -70,11 +86,19 @@ public abstract class OsmandPlugin {
 
 	public abstract String getDescription();
 
-	public abstract int getAssetResourceName();
+	@Nullable
+	public Drawable getAssetResourceImage() {
+		return null;
+	}
 
 	@DrawableRes
 	public int getLogoResourceId() {
 		return R.drawable.ic_extension_dark;
+	}
+
+	@NonNull
+	public Drawable getLogoResource() {
+		return app.getUIUtilities().getIcon(getLogoResourceId());
 	}
 
 	public Class<? extends Activity> getSettingsActivity() {
@@ -101,6 +125,12 @@ public abstract class OsmandPlugin {
 	 * Initialize plugin runs just after creation
 	 */
 	public boolean init(@NonNull OsmandApplication app, @Nullable Activity activity) {
+		if (activity != null) {
+			// called from UI
+			for (ApplicationMode appMode: getAddedAppModes()) {
+				ApplicationMode.changeProfileAvailability(appMode, true, app);
+			}
+		}
 		return true;
 	}
 
@@ -152,32 +182,42 @@ public abstract class OsmandPlugin {
 		return Collections.emptyList();
 	}
 
+	public List<String> getRendererNames() {
+		return Collections.emptyList();
+	}
+
+	public List<String> getRouterNames() {
+		return Collections.emptyList();
+	}
+
 	/**
 	 * Plugin was installed
 	 */
 	public void onInstall(@NonNull OsmandApplication app, @Nullable Activity activity) {
+		for (ApplicationMode appMode : getAddedAppModes()) {
+			ApplicationMode.changeProfileAvailability(appMode, true, app);
+		}
 		showInstallDialog(activity);
 	}
 
 	public void showInstallDialog(@Nullable Activity activity) {
 		if (activity instanceof FragmentActivity) {
 			FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
-			if (fragmentManager != null) {
-				PluginInstalledBottomSheetDialog.showInstance(fragmentManager, getId(), activity instanceof MapActivity);
-			}
+			PluginInstalledBottomSheetDialog.showInstance(fragmentManager, getId(), activity instanceof MapActivity);
 		}
 	}
 
 	public void showDisableDialog(@Nullable Activity activity) {
 		if (activity instanceof FragmentActivity) {
 			FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
-			if (fragmentManager != null) {
-				PluginDisabledBottomSheet.showInstance(fragmentManager, getId(), activity instanceof MapActivity);
-			}
+			PluginDisabledBottomSheet.showInstance(fragmentManager, getId(), activity instanceof MapActivity);
 		}
 	}
 
 	public void disable(OsmandApplication app) {
+		for (ApplicationMode appMode : getAddedAppModes()) {
+			ApplicationMode.changeProfileAvailability(appMode, false, app);
+		}
 	}
 
 	public String getHelpFileName() {
@@ -229,7 +269,73 @@ public abstract class OsmandPlugin {
 		allPlugins.add(new OsmEditingPlugin(app));
 		allPlugins.add(new OsmandDevelopmentPlugin(app));
 
+		loadCustomPlugins(app);
 		activatePlugins(app, enabledPlugins);
+	}
+
+	public static void addCustomPlugin(@NonNull OsmandApplication app, @NonNull CustomOsmandPlugin plugin) {
+		OsmandPlugin oldPlugin = OsmandPlugin.getPlugin(plugin.getId());
+		if (oldPlugin != null) {
+			allPlugins.remove(oldPlugin);
+		}
+		allPlugins.add(plugin);
+		enablePlugin(null, app, plugin, true);
+		saveCustomPlugins(app);
+	}
+
+	public static void removeCustomPlugin(@NonNull OsmandApplication app, @NonNull final CustomOsmandPlugin plugin) {
+		allPlugins.remove(plugin);
+		if (plugin.isActive()) {
+			plugin.removePluginItems(new CustomOsmandPlugin.PluginItemsListener() {
+				@Override
+				public void onItemsRemoved() {
+					Algorithms.removeAllFiles(plugin.getPluginDir());
+				}
+			});
+		} else {
+			Algorithms.removeAllFiles(plugin.getPluginDir());
+		}
+		saveCustomPlugins(app);
+	}
+
+	private static void loadCustomPlugins(@NonNull OsmandApplication app) {
+		SettingsAPI settingsAPI = app.getSettings().getSettingsAPI();
+		Object pluginPrefs = settingsAPI.getPreferenceObject(PLUGINS_PREFERENCES_NAME);
+		String customPluginsJson = settingsAPI.getString(pluginPrefs, CUSTOM_PLUGINS_KEY, "");
+		if (!Algorithms.isEmpty(customPluginsJson)) {
+			try {
+				JSONArray jArray = new JSONArray(customPluginsJson);
+				for (int i = 0; i < jArray.length(); i++) {
+					JSONObject json = jArray.getJSONObject(i);
+					CustomOsmandPlugin plugin = new CustomOsmandPlugin(app, json);
+					allPlugins.add(plugin);
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private static void saveCustomPlugins(OsmandApplication app) {
+		List<CustomOsmandPlugin> customOsmandPlugins = getCustomPlugins();
+		SettingsAPI settingsAPI = app.getSettings().getSettingsAPI();
+		Object pluginPrefs = settingsAPI.getPreferenceObject(PLUGINS_PREFERENCES_NAME);
+		JSONArray itemsJson = new JSONArray();
+		for (CustomOsmandPlugin plugin : customOsmandPlugins) {
+			try {
+				JSONObject json = new JSONObject();
+				json.put("pluginId", plugin.getId());
+				plugin.writeAdditionalDataToJson(json);
+				plugin.writeDependentFilesJson(json);
+				itemsJson.put(json);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+		String jsonStr = itemsJson.toString();
+		if (!jsonStr.equals(settingsAPI.getString(pluginPrefs, CUSTOM_PLUGINS_KEY, ""))) {
+			settingsAPI.edit(pluginPrefs).putString(CUSTOM_PLUGINS_KEY, jsonStr).commit();
+		}
 	}
 
 	private static void activatePlugins(OsmandApplication app, Set<String> enabledPlugins) {
@@ -499,6 +605,16 @@ public abstract class OsmandPlugin {
 		return lst;
 	}
 
+	public static List<CustomOsmandPlugin> getCustomPlugins() {
+		ArrayList<CustomOsmandPlugin> lst = new ArrayList<CustomOsmandPlugin>(allPlugins.size());
+		for (OsmandPlugin plugin : allPlugins) {
+			if (plugin instanceof CustomOsmandPlugin) {
+				lst.add((CustomOsmandPlugin) plugin);
+			}
+		}
+		return lst;
+	}
+
 	@SuppressWarnings("unchecked")
 	public static <T extends OsmandPlugin> T getEnabledPlugin(Class<T> clz) {
 		for (OsmandPlugin lr : getEnabledPlugins()) {
@@ -526,6 +642,22 @@ public abstract class OsmandPlugin {
 			}
 		}
 		return null;
+	}
+
+	public static List<String> getDisabledRendererNames() {
+		List<String> l = new ArrayList<String>();
+		for (OsmandPlugin plugin : getNotEnabledPlugins()) {
+			l.addAll(plugin.getRendererNames());
+		}
+		return l;
+	}
+
+	public static List<String> getDisabledRouterNames() {
+		List<String> l = new ArrayList<String>();
+		for (OsmandPlugin plugin : getNotEnabledPlugins()) {
+			l.addAll(plugin.getRouterNames());
+		}
+		return l;
 	}
 
 	public static List<String> onIndexingFiles(IProgress progress) {

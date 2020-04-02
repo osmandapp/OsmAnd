@@ -3588,4 +3588,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_rhomb">Rombo</string>
     <string name="shared_string_square">Kvadrato</string>
     <string name="shared_string_min">Min.</string>
+    <string name="shared_string_octagon">Okangulo</string>
+    <string name="app_mode_ski_touring">Ski‑ekskursado</string>
+    <string name="app_mode_ski_snowmobile">Motorsledo</string>
+    <string name="custom_osmand_plugin">Propra OsmAnd-kromprogramo</string>
 </resources>

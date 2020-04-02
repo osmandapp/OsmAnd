@@ -650,7 +650,7 @@
     <string name="choose_available_region">Vybrať oblasť zo zoznamu</string>
     <string name="choose_intersected_street">Vybrať pretínajúcu ulicu</string>
     <string name="Closest_Amenities">Najbližšie body záujmu</string>
-    <string name="app_mode_default">Štandardný</string>
+    <string name="app_mode_default">Prehliadať mapu</string>
     <string name="app_mode_car">Riadenie vozidla</string>
     <string name="app_mode_bicycle">Jazda na bicykli</string>
     <string name="app_mode_pedestrian">Chôdza</string>
@@ -3595,4 +3595,8 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="shared_string_rhomb">Kosoštvorec</string>
     <string name="shared_string_square">Štvorec</string>
     <string name="shared_string_min">Min</string>
+    <string name="shared_string_octagon">Osemholník</string>
+    <string name="app_mode_ski_touring">Lyžiarske okruhy</string>
+    <string name="app_mode_ski_snowmobile">Snežný skúter</string>
+    <string name="custom_osmand_plugin">Vlastný modul pre OsmAnd</string>
 </resources>

@@ -2,6 +2,7 @@ package net.osmand.plus.development;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.widget.ArrayAdapter;
 
 import net.osmand.plus.ContextMenuAdapter;
@@ -22,11 +23,11 @@ import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
+
 	private static final String ID = "osmand.development";
-	private OsmandApplication app;
 
 	public OsmandDevelopmentPlugin(OsmandApplication app) {
-		this.app = app;
+		super(app);
 		//ApplicationMode.regWidgetVisibility("fps", new ApplicationMode[0]);
 	}
 
@@ -136,8 +137,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public int getAssetResourceName() {
-		return R.drawable.osmand_development;
+	public Drawable getAssetResourceImage() {
+		return app.getUIUtilities().getIcon(R.drawable.osmand_development);
 	}
 
 	@Override

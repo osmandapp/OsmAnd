@@ -65,12 +65,13 @@ public class PluginActivity extends OsmandActionBarActivity  implements Download
 		setContentView(R.layout.plugin);
 		//noinspection ConstantConditions
 		getSupportActionBar().setTitle(plugin.getName());
-		if(plugin.getAssetResourceName() != 0 && Build.VERSION.SDK_INT >= 14) {
+		Drawable pluginImage = plugin.getAssetResourceImage();
+		if (pluginImage != null) {
 			ImageView img = (ImageView) findViewById(R.id.plugin_image);
-			img.setImageResource(plugin.getAssetResourceName());
+			img.setImageDrawable(pluginImage);
 		}
 
-		TextView descriptionView = (TextView)findViewById(R.id.plugin_description);
+		TextView descriptionView = (TextView) findViewById(R.id.plugin_description);
 		descriptionView.setText(plugin.getDescription());
 
 		Button settingsButton = (Button)findViewById(R.id.plugin_settings);

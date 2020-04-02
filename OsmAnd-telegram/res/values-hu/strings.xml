@@ -246,7 +246,7 @@
     <string name="timeline_no_data">Nincs adat</string>
     <string name="shared_string_end">Vég</string>
     <string name="shared_string_start">Kezdet</string>
-    <string name="shared_string_apply">Alkalmazás</string>
+    <string name="shared_string_apply">Alkalmaz</string>
     <string name="set_time_timeline_descr">Megjelenítendő időszak kijelölése</string>
     <string name="start_end_date">Kezdő és záró dátum</string>
     <string name="saved_messages">Mentett üzenetek</string>

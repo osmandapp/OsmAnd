@@ -3150,9 +3150,9 @@
 \n • 其他臭蟲修復
 \n
 \n</string>
-    <string name="app_mode_personal_transporter">個人運輸</string>
+    <string name="app_mode_personal_transporter">個人運輸工具</string>
     <string name="app_mode_monowheel">單輪</string>
-    <string name="app_mode_scooter">摩托車</string>
+    <string name="app_mode_scooter">速克達</string>
     <string name="precision_hdop_and_vdop">水平精度：%1$s，垂直：%2$s</string>
     <string name="precision_hdop">水平精度：%s</string>
     <string name="app_mode_offroad">越野</string>
@@ -3201,7 +3201,7 @@
     <string name="new_route_calculated_dist_dbg">路徑：距離 %s，路徑時間 %s
 \n計算：%.1f 秒，%d 路，%d 圖磚)</string>
     <string name="lang_oc">Occitan</string>
-    <string name="app_mode_wagon">休旅車</string>
+    <string name="app_mode_wagon">旅行車</string>
     <string name="app_mode_pickup_truck">皮卡車</string>
     <string name="day">天</string>
     <string name="days_2_4">天</string>
@@ -3597,4 +3597,8 @@
     <string name="shared_string_circle">圓形</string>
     <string name="shared_string_rhomb">菱形</string>
     <string name="shared_string_square">方形</string>
+    <string name="shared_string_octagon">八邊形</string>
+    <string name="app_mode_ski_touring">滑雪旅遊</string>
+    <string name="app_mode_ski_snowmobile">雪地摩托車</string>
+    <string name="custom_osmand_plugin">自訂 OsmAnd 外掛程式</string>
 </resources>

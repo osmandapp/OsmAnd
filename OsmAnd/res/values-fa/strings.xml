@@ -3635,4 +3635,8 @@
     <string name="add_description">افزودن توضیحات</string>
     <string name="select_group">انتخاب گروه</string>
     <string name="select_shape">انتخاب شکل</string>
+    <string name="shared_string_octagon">هشت‌ضلعی</string>
+    <string name="app_mode_ski_touring">تور اسکی</string>
+    <string name="app_mode_ski_snowmobile">برف‌رو</string>
+    <string name="custom_osmand_plugin">افزونهٔ سفارشی OsmAnd</string>
 </resources>
