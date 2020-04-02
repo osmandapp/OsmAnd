@@ -144,4 +144,9 @@
     <string name="si_km_m">Kilomètres/mètres</string>
     <string name="si_nm">Miles nautiques</string>
     <string name="si_mi_meters">Miles / Mètres</string>
+    <string name="nm_h">nœuds</string>
+    <string name="shared_string_later">Plus tard</string>
+    <string name="shared_string_password">Mot de passe</string>
+    <string name="shared_string_distance">Distance</string>
+    <string name="si_nm_h">Miles nautiques par heure (nœuds)</string>
 </resources>
