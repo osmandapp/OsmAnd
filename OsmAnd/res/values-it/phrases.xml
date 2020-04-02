@@ -953,7 +953,7 @@
     <string name="poi_access_no">Nessun accesso</string>
     <string name="poi_access_permissive">Accesso permissivo</string>
     <string name="poi_access_customers">Accesso cliente</string>
-    <string name="poi_access_delivery">Accesso di consegna</string>
+    <string name="poi_access_delivery">Accesso alla consegna</string>
     <string name="poi_access_agricultural">Accesso agricolo</string>
     <string name="poi_content_silage">Contenuto: insilato</string>
     <string name="poi_content_water">Contenuto: acqua</string>
@@ -2400,7 +2400,7 @@
     <string name="poi_climbing_crag">si</string>
     <string name="poi_distance_mark">Segno di distanza</string>
     <string name="poi_piste_skitour">Pista Skitour</string>
-    <string name="poi_denomination_united_reformed">Chiesa Riformata Unita</string>
+    <string name="poi_denomination_united_reformed">Riformata Unita</string>
     <string name="poi_denomination_iglesia_ni_cristo">Iglesia ni cristo</string>
     <string name="poi_denomination_unitarian">Unitaria</string>
     <string name="poi_government_archive">Archivio</string>
