@@ -2817,4 +2817,5 @@
     <string name="poi_greenhouse_horticulture">Orticoltura in serra</string>
     <string name="poi_branch">Filiale</string>
     <string name="poi_resource_aggregate">Aggregato</string>
+    <string name="poi_resource_beryl">berillio</string>
 </resources>
