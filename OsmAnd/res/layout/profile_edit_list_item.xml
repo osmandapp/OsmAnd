@@ -4,8 +4,17 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:orientation="vertical"
 	android:background="?attr/list_background_color"
 	android:gravity="center_vertical">
+
+	<View
+		android:id="@+id/divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/dashboard_divider"
+		android:visibility="gone"
+		tools:visibility="visible" />
 
 	<LinearLayout
 		android:id="@+id/selectable_list_item"

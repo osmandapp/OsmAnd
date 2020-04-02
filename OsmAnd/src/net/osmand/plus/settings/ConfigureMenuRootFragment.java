@@ -49,7 +49,6 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 	private OsmandApplication app;
 	private LayoutInflater mInflater;
 	private boolean nightMode;
-	private MenuItemsManager menuItemsManager;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -57,7 +56,6 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 		app = requireMyApplication();
 		nightMode = !app.getSettings().isLightContent();
 		mInflater = UiUtilities.getInflater(app, nightMode);
-		menuItemsManager = new MenuItemsManager(app);
 	}
 
 	@Nullable
@@ -204,18 +202,20 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 		}
 
 		private String getSubTitleText(ScreenType type) {
-			int allCount = 0;
-			int hiddenCount = 0;
+			List<String> hiddenItems = null;
 			switch (type) {
 				case DRAWER:
-					allCount = menuItemsManager.getDrawerIdsDefaultOrder().size();
-					hiddenCount = menuItemsManager.getHiddenItemsIds(type).size();
+					hiddenItems = app.getSettings().HIDDEN_DRAWER_ITEMS.getStringsList();
 					break;
 				case CONFIGURE_MAP:
+					hiddenItems = app.getSettings().HIDDEN_CONFIGURE_MAP_ITEMS.getStringsList();
 					break;
 				case CONTEXT_MENU_ACTIONS:
+					hiddenItems = app.getSettings().HIDDEN_CONTEXT_MENU_ACTIONS_ITEMS.getStringsList();
 					break;
 			}
+			int hiddenCount = hiddenItems != null ? hiddenItems.size() : 0;
+			int allCount = 0;
 			String amount = getString(R.string.n_items_of_z, String.valueOf(allCount - hiddenCount), String.valueOf(allCount));
 			return getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.shared_string_items), amount);
 		}

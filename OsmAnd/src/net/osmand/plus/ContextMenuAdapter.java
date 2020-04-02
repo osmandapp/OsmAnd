@@ -23,6 +23,8 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -33,6 +35,8 @@ import net.osmand.plus.activities.HelpActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
+import net.osmand.plus.settings.ConfigureMenuRootFragment.ScreenType;
+import net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItem;
 
 import org.apache.commons.logging.Log;
 
@@ -40,10 +44,18 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
+import static net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItemType.MENU_ITEM;
 
 public class ContextMenuAdapter {
 	private static final Log LOG = PlatformUtil.getLog(ContextMenuAdapter.class);
@@ -113,7 +125,6 @@ public class ContextMenuAdapter {
 	public void setDefaultLayoutId(int defaultLayoutId) {
 		this.DEFAULT_LAYOUT_ID = defaultLayoutId;
 	}
-
 
 	public void setChangeAppModeListener(ConfigureMapMenu.OnClickListener changeAppModeListener) {
 		this.changeAppModeListener = changeAppModeListener;
@@ -536,4 +547,94 @@ public class ContextMenuAdapter {
 			}
 		}
 	}
+
+	public void initDefaultOrders(@NonNull List<ContextMenuItem> items) {
+		for (int i = 0; i < items.size(); i++) {
+			items.get(i).setOrder(i);
+		}
+	}
+
+	public List<AdapterItem> getItemsForRearrangeAdapter(@NonNull ScreenType screenType, @Nullable List<String> hiddenItemsIds, @Nullable HashMap<String, Integer> itemsOrderIds, boolean hidden) {
+		String idScheme = "";
+		switch (screenType) {
+			case DRAWER:
+				idScheme = DRAWER_ITEM_ID_SCHEME;
+				break;
+			case CONFIGURE_MAP:
+				idScheme = CONFIGURE_MAP_ITEM_ID_SCHEME;
+				break;
+			case CONTEXT_MENU_ACTIONS:
+				idScheme = MAP_CONTEXT_MENU_ACTIONS;
+				break;
+		}
+		if (itemsOrderIds == null || itemsOrderIds.isEmpty()) {
+			initDefaultOrders(items);
+		} else {
+			reorderMenuItems(items, itemsOrderIds);
+		}
+		List<AdapterItem> visibleItems = new ArrayList<>();
+		List<AdapterItem> hiddenItems = new ArrayList<>();
+		for (ContextMenuItem item : items) {
+			String id = item.getId();
+			if (id != null && id.startsWith(idScheme) && !APP_PROFILES_ID.equals(id)) {
+				if (hiddenItemsIds != null && hiddenItemsIds.contains(id)) {
+					item.setHidden(true);
+					hiddenItems.add(new AdapterItem(MENU_ITEM, item));
+				} else {
+					item.setHidden(false);
+					visibleItems.add(new AdapterItem(MENU_ITEM, item));
+				}
+			}
+		}
+		return hidden ? hiddenItems : visibleItems;
+	}
+
+	public List<ContextMenuItem> getDefaultItems(ScreenType screenType) {
+		String idScheme = "";
+		switch (screenType) {
+			case DRAWER:
+				idScheme = DRAWER_ITEM_ID_SCHEME;
+				break;
+			case CONFIGURE_MAP:
+				idScheme = CONFIGURE_MAP_ITEM_ID_SCHEME;
+				break;
+			case CONTEXT_MENU_ACTIONS:
+				idScheme = MAP_CONTEXT_MENU_ACTIONS;
+				break;
+		}
+		List<ContextMenuItem> items = new ArrayList<>();
+		for (ContextMenuItem item : this.items) {
+			String id = item.getId();
+			if (id != null && id.startsWith(idScheme) && !APP_PROFILES_ID.equals(id)) {
+				items.add(item);
+			}
+		}
+		return items;
+	}
+
+	public void reorderMenuItems(@NonNull List<ContextMenuItem> defaultItems, @NonNull HashMap<String, Integer> itemsOrder) {
+		for (ContextMenuItem item : defaultItems) {
+			Integer order = itemsOrder.get(item.getId());
+			if (order != null) {
+				item.setOrder(order);
+			}
+		}
+		Collections.sort(defaultItems, new Comparator<ContextMenuItem>() {
+			@Override
+			public int compare(ContextMenuItem item1, ContextMenuItem item2) {
+				int order1 = item1.getOrder();
+				int order2 = item2.getOrder();
+				return (order1 < order2) ? -1 : ((order1 == order2) ? 0 : 1);
+			}
+		});
+	}
+
+	public HashMap<String, Integer> getMenuItemsOrder(@NonNull List<String> ids) {
+		HashMap<String, Integer> result = new HashMap<>();
+		for (int i = 0; i < ids.size(); i++) {
+			result.put(ids.get(i), i);
+		}
+		return result;
+	}
+
 }

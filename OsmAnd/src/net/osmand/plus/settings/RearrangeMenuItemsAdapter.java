@@ -17,6 +17,7 @@ import androidx.core.view.MotionEventCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -28,8 +29,12 @@ import java.util.Collections;
 import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_RENDERING_CATEGORY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.RENDERING_ITEMS_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_ITEMS_ID_SCHEME;
 
-public class MenuItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 		implements ReorderItemTouchHelperCallback.OnItemMoveCallback {
 
 	private OsmandApplication app;
@@ -40,8 +45,8 @@ public class MenuItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 	private int activeColorRes;
 
 
-	MenuItemsAdapter(OsmandApplication app,
-	                 List<AdapterItem> items) {
+	public RearrangeMenuItemsAdapter(OsmandApplication app,
+	                                 List<AdapterItem> items) {
 		this.app = app;
 		this.items = items;
 		uiUtilities = app.getUIUtilities();
@@ -95,16 +100,34 @@ public class MenuItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 			h.image.setImageResource(nightMode ? screenType.imageNightRes : screenType.imageDayRes);
 		} else if (holder instanceof ItemHolder) {
 			final ItemHolder h = (ItemHolder) holder;
-			MenuItemBase menuItem = (MenuItemBase) item.value;
-			h.title.setText(menuItem.titleRes);
-			h.description.setText(String.valueOf(menuItem.order));
-			if (DRAWER_DIVIDER_ID.equals(menuItem.id)) {
+			ContextMenuItem menuItem = (ContextMenuItem) item.value;
+			String id = menuItem.getId();
+			if (DRAWER_DIVIDER_ID.equals(menuItem.getId())) {
+				h.title.setText(R.string.shared_string_divider);
+				h.description.setText(R.string.divider_descr);
 				h.icon.setVisibility(View.GONE);
 				h.actionIcon.setVisibility(View.GONE);
+				h.moveIcon.setVisibility(View.VISIBLE);
+				h.divider.setVisibility(View.VISIBLE);
+			} else if (SHOW_CATEGORY_ID.equals(id)
+					|| MAP_RENDERING_CATEGORY_ID.equals(id)) {
+				h.title.setText(menuItem.getTitle());
+				h.description.setText(R.string.move_inside_category);
+				h.icon.setVisibility(View.GONE);
+				h.actionIcon.setVisibility(View.GONE);
+				h.moveIcon.setVisibility(View.GONE);
+				h.divider.setVisibility(View.VISIBLE);
+				h.movable = false;
 			} else {
-				h.icon.setImageDrawable(uiUtilities.getIcon(menuItem.iconRes, nightMode));
-				h.icon.setVisibility(View.VISIBLE);
-				h.actionIcon.setVisibility(View.VISIBLE);
+				if (menuItem.getIcon() != -1) {
+					h.icon.setImageDrawable(uiUtilities.getIcon(menuItem.getIcon(), nightMode));
+					h.icon.setVisibility(View.VISIBLE);
+					h.actionIcon.setVisibility(View.VISIBLE);
+				}
+				h.title.setText(menuItem.getTitle());
+				h.description.setText(String.valueOf(menuItem.getOrder()));
+				h.divider.setVisibility(View.GONE);
+				h.moveIcon.setVisibility(View.VISIBLE);
 			}
 			h.actionIcon.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -124,7 +147,7 @@ public class MenuItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 					return false;
 				}
 			});
-			if (menuItem.hidden) {
+			if (menuItem.isHidden()) {
 				h.moveIcon.setVisibility(View.GONE);
 				h.actionIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_undo, R.color.color_osm_edit_create));
 			} else {
@@ -137,22 +160,7 @@ public class MenuItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 			HeaderItem header = (HeaderItem) item.value;
 			h.title.setText(header.titleRes);
 			h.description.setText(header.descrRes);
-			h.movable = header.movable;
-			if (header.movable) {
-				h.moveIcon.setVisibility(View.VISIBLE);
-				h.moveIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_item_move, activeColorRes));
-				h.moveIcon.setOnTouchListener(new View.OnTouchListener() {
-					@Override
-					public boolean onTouch(View view, MotionEvent event) {
-						if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
-							listener.onDragStarted(holder);
-						}
-						return false;
-					}
-				});
-			} else {
-				h.moveIcon.setVisibility(View.GONE);
-			}
+			h.moveIcon.setVisibility(View.GONE);
 		} else if (holder instanceof ButtonHolder) {
 			ButtonHolder h = (ButtonHolder) holder;
 			ButtonItem button = (ButtonItem) item.value;
@@ -173,19 +181,25 @@ public class MenuItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 	public boolean onItemMove(int from, int to) {
 		Object itemFrom = items.get(from).value;
 		Object itemTo = items.get(to).value;
-		if (itemFrom instanceof MenuItemBase
-				&& itemTo instanceof MenuItemBase) {
-			MenuItemBase menuItemFrom = (MenuItemBase) itemFrom;
-			MenuItemBase menuItemTo = (MenuItemBase) itemTo;
+		if (itemFrom instanceof ContextMenuItem
+				&& itemTo instanceof ContextMenuItem) {
+			ContextMenuItem menuItemFrom = (ContextMenuItem) itemFrom;
+			ContextMenuItem menuItemTo = (ContextMenuItem) itemTo;
 
-			int orderFrom = menuItemFrom.order;
-			int orderTo = menuItemTo.order;
+			int orderFrom = menuItemFrom.getOrder();
+			int orderTo = menuItemTo.getOrder();
 
-			menuItemFrom.order = orderTo;
-			menuItemTo.order = orderFrom;
+			if (menuItemFrom.getId().startsWith(SHOW_ITEMS_ID_SCHEME) && menuItemTo.getId().startsWith(RENDERING_ITEMS_ID_SCHEME)
+					|| menuItemFrom.getId().startsWith(RENDERING_ITEMS_ID_SCHEME) && menuItemTo.getId().startsWith(SHOW_ITEMS_ID_SCHEME)
+					|| menuItemTo.isHidden()) {
+				return false;
+			}
 
-			listener.onItemMoved(menuItemFrom.id, orderTo);
-			listener.onItemMoved(menuItemTo.id, orderFrom);
+			menuItemFrom.setOrder(orderTo);
+			menuItemTo.setOrder(orderFrom);
+
+			listener.onItemMoved(menuItemFrom.getId(), orderTo);
+			listener.onItemMoved(menuItemTo.getId(), orderFrom);
 
 			Collections.swap(items, from, to);
 			notifyItemMoved(from, to);
@@ -224,6 +238,8 @@ public class MenuItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 		private ImageView icon;
 		private ImageView actionIcon;
 		private ImageView moveIcon;
+		private View divider;
+		private boolean movable = true;
 
 		ItemHolder(@NonNull View itemView) {
 			super(itemView);
@@ -232,11 +248,12 @@ public class MenuItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 			actionIcon = itemView.findViewById(R.id.action_icon);
 			icon = itemView.findViewById(R.id.icon);
 			moveIcon = itemView.findViewById(R.id.move_icon);
+			divider = itemView.findViewById(R.id.divider);
 		}
 
 		@Override
 		public boolean isMovingDisabled() {
-			return false;
+			return !movable;
 		}
 	}
 
@@ -260,7 +277,6 @@ public class MenuItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 		private ImageView moveIcon;
 		private TextView title;
 		private TextView description;
-		private boolean movable;
 
 		HeaderHolder(@NonNull View itemView) {
 			super(itemView);
@@ -271,7 +287,7 @@ public class MenuItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 		@Override
 		public boolean isMovingDisabled() {
-			return !movable;
+			return true;
 		}
 	}
 
@@ -294,11 +310,11 @@ public class MenuItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 		}
 	}
 
-	static class AdapterItem {
+	public static class AdapterItem {
 		private AdapterItemType type;
 		private Object value;
 
-		AdapterItem(AdapterItemType type, Object value) {
+		public AdapterItem(AdapterItemType type, Object value) {
 			this.type = type;
 			this.value = value;
 		}
@@ -312,78 +328,30 @@ public class MenuItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 		}
 	}
 
-	public static class MenuItemBase {
-		private String id;
-		@StringRes
-		private int titleRes;
-		@StringRes
-		private int descrRes;
-		@DrawableRes
-		private int iconRes;
 
-		public void setOrder(int order) {
-			this.order = order;
-		}
-
-		public int getOrder() {
-			return order;
-		}
-
-		private int order;
-
-		public void setHidden(boolean hidden) {
-			this.hidden = hidden;
-		}
-
-		private boolean hidden;
-
-		public MenuItemBase(String id, int titleRes, int descrRes, int iconRes, int order, boolean hidden) {
-			this.id = id;
-			this.titleRes = titleRes;
-			this.descrRes = descrRes;
-			this.iconRes = iconRes;
-			this.order = order;
-			this.hidden = hidden;
-		}
-
-		public void toggleHidden() {
-			hidden = !hidden;
-		}
-
-		public String getId() {
-			return id;
-		}
-
-		public boolean isHidden() {
-			return hidden;
-		}
-	}
-
-	static class ButtonItem {
+	public static class ButtonItem {
 		@StringRes
 		private int titleRes;
 		@DrawableRes
 		private int iconRes;
 		private View.OnClickListener listener;
 
-		ButtonItem(int titleRes, int iconRes, View.OnClickListener listener) {
+		public ButtonItem(int titleRes, int iconRes, View.OnClickListener listener) {
 			this.titleRes = titleRes;
 			this.iconRes = iconRes;
 			this.listener = listener;
 		}
 	}
 
-	static class HeaderItem {
+	public static class HeaderItem {
 		@StringRes
 		private int titleRes;
 		@StringRes
 		private int descrRes;
-		boolean movable;
 
-		HeaderItem(int titleRes, int descrRes, boolean movable) {
+		public HeaderItem(int titleRes, int descrRes) {
 			this.titleRes = titleRes;
 			this.descrRes = descrRes;
-			this.movable = movable;
 		}
 	}
 

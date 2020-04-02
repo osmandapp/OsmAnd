@@ -3389,9 +3389,14 @@ public class OsmandSettings {
 	public final ListStringPreference HIDDEN_CONTEXT_MENU_ACTIONS_ITEMS = (ListStringPreference)
 			new ListStringPreference("hidden_context_menu_actions_items", null, ",,").makeProfile().cache();
 
+	public final ListStringPreference CONTEXT_MENU_ACTIONS_ITEMS_ORDER = (ListStringPreference)
+			new ListStringPreference("context_menu_actions_items_order", null, ",,").makeProfile().cache();
+
 	public final ListStringPreference HIDDEN_CONFIGURE_MAP_ITEMS = (ListStringPreference)
 			new ListStringPreference("hidden_configure_map_items", null, ",,").makeProfile().cache();
 
+	public final ListStringPreference CONFIGURE_MAP_ITEMS_ORDER = (ListStringPreference)
+			new ListStringPreference("configure_map_items_order", null, ",,").makeProfile().cache();
 
 	public final ListStringPreference DRAWER_ITEMS_ORDER = (ListStringPreference)
 			new ListStringPreference("drawer_items_order", null, ",,").makeProfile().cache();

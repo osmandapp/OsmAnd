@@ -30,6 +30,7 @@ public class ContextMenuItem {
 	private final boolean category;
 	private final boolean clickable;
 	private final boolean skipPaintingWithoutColor;
+	private boolean hidden;
 	private final int pos;
 	private int order;
 	private String description;
@@ -150,6 +151,10 @@ public class ContextMenuItem {
 		return clickable;
 	}
 
+	public boolean isHidden() {
+		return hidden;
+	}
+
 	public int getPos() {
 		return pos;
 	}
@@ -180,6 +185,10 @@ public class ContextMenuItem {
 
 	public boolean shouldHideDivider() {
 		return hideDivider;
+	}
+
+	public void setHidden(boolean hidden) {
+		this.hidden = hidden;
 	}
 
 	public void setTitle(String title) {
