@@ -449,9 +449,9 @@
 							android:layout_height="wrap_content"
 							android:ellipsize="end"
 							android:lines="1"
-							android:text="@string/update_existing"
+							android:text="@string/replace_point_descr"
 							android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
-							tools:text="@string/update_existing" />
+							tools:text="@string/replace_point_descr" />
 
 					</LinearLayout>
 

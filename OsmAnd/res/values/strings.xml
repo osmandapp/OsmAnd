@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="replace_point_descr">Replace another point with this</string>
     <string name="shared_string_min">Min</string>
     <string name="shared_string_square">Square</string>
     <string name="shared_string_octagon">Octagon</string>
