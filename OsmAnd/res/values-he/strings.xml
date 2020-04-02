@@ -998,7 +998,7 @@
     <string name="plugin_distance_point">נקודה</string>
     <string name="gpx_file_name">קובץ שם ה־GPX</string>
     <string name="gpx_saved_sucessfully">קובץ ה־GPX נשמר אל {0}</string>
-    <string name="osmand_distance_planning_plugin_description">תוסף זה מספק וידג׳ט על המפה שמאפשר ליצור נתיבים על ידי לחיצה על המפה או להשתמש או לשנות קובץ GPX קיים, לטובת תכנון טיול ומדידת מרחק בין נקודות. ניתן לשמור את התוצאות בקובץ GPX, בו ניתן להשתמש לאחר מכן להנחיה.</string>
+    <string name="osmand_distance_planning_plugin_description">ניתן ליצור נתיבים על ידי לחיצה על המפה או על ידי עריכת קובץ GPX קיים, לטובת תכנון טיול ומדידת מרחק בין נקודות. ניתן לשמור את התוצאות בקובץ GPX, בו ניתן להשתמש לאחר מכן להנחיה.</string>
     <string name="osmand_distance_planning_plugin_name">מחשבון מרחק וכלי תכנון</string>
     <string name="shared_string_do_not_show_again">לא להציג שוב</string>
     <string name="distance_measurement_start_editing">להתחיל בעריכה</string>
@@ -3382,12 +3382,12 @@
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">הצגת מסלולי אופניים של רשת מפרקים</string>
     <string name="download_map_dialog">דו־שיח הורדת מפה</string>
     <string name="dialogs_and_notifications_title">תיבות דו־שיח והתראות</string>
-    <string name="dialogs_and_notifications_descr">שליטה בחלוניות הקופצות, בתיבות הדו־שיח ובהתראות שמוצגות במהלך השימוש ב־OsmAnd.</string>
+    <string name="dialogs_and_notifications_descr">שליטה בחלוניות הקופצות, בתיבות הדו־שיח ובהתראות.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">רשתות מפרקים</string>
     <string name="suggested_maps">מפות מוצעות</string>
-    <string name="suggested_maps_descr">המפות האלו נחוצות לטובת שימוש עם תוסף</string>
+    <string name="suggested_maps_descr">המפות האלו נחוצות לתוסף.</string>
     <string name="added_profiles">הוספת פרופילים</string>
-    <string name="added_profiles_descr">התוסף מוסיף פרופיל חדש ל־OsmAnd</string>
+    <string name="added_profiles_descr">פרופילים שנוספו על ידי תוסף</string>
     <string name="shared_string_turn_off">כיבוי</string>
     <string name="new_plugin_added">נוסף תוסף חדש</string>
     <string name="join_segments">חיבור מקטעים</string>
@@ -3408,11 +3408,11 @@
     <string name="delete_profiles_descr">נגיעה ב־‚החלה’ תמחק את הפרופילים שהוסרו לצמיתות.</string>
     <string name="master_profile">פרופיל ראשי</string>
     <string name="select_color">בחירת צבע</string>
-    <string name="edit_profiles_descr">לא ניתן למחוק את פרופילי בררת המחדל של OsmAnd, אך ניתן להשבית אותם במסך הקודם או להעביר אותם לתחתית.</string>
+    <string name="edit_profiles_descr">לא ניתן למחוק את פרופילי בררת המחדל של OsmAnd, אך ניתן להשבית אותם (במסך הקודם) או להוריד אותם לתחתית.</string>
     <string name="edit_profiles">עריכת פרופילים</string>
-    <string name="select_nav_profile_dialog_message">סוג הניווט משפיע על כללי חישוב המסלול.</string>
+    <string name="select_nav_profile_dialog_message">‚סוג הניווט’ מגבש את אופן חישוב המסלול.</string>
     <string name="profile_appearance">הופעת פרופיל</string>
-    <string name="choose_icon_color_name">נא לבחור סמל, צבע ושם</string>
+    <string name="choose_icon_color_name">סמל, צבע ושם</string>
     <string name="reorder_profiles">עריכת רשימת הפרופילים</string>
     <string name="selected_profile">פרופיל נבחר</string>
     <string name="reset_confirmation_descr">נגיעה ב־%1$s תוביל לאבדן כל השינויים שערכת.</string>
@@ -3583,4 +3583,13 @@
     <string name="tracks_view_descr">המסלולים המוקלטים שלך נמצאים תחת %1$s, או בתיקייה של OsmAnd.</string>
     <string name="app_mode_ski_snowmobile">אופנוע שלג</string>
     <string name="custom_osmand_plugin">תוסף OsmAnd מותאם אישית</string>
+    <string name="live_monitoring_adress">כתובת</string>
+    <string name="live_monitoring_time_buffer">מאגר זמן</string>
+    <string name="monitoring_notification">התראה</string>
+    <string name="live_monitoring_adress_descr">נא לציין את הכתובת עם תחביר משתנים: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
+    <string name="monitoring_min_speed">מהירות מזערית</string>
+    <string name="monitoring_min_accuracy">דיוק מזערי</string>
+    <string name="monitoring_min_distance">תזוזה מזערית</string>
+    <string name="multimedia_rec_split_title">פיצול מקליט</string>
+    <string name="reset_plugin_to_default">איפוס הגדרות התוסף לבררת המחדל</string>
 </resources>
