@@ -306,7 +306,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 				return false;
 			}
 		}
-		return true;
+		return super.onPreferenceChange(preference, newValue);
 	}
 
 	@Override

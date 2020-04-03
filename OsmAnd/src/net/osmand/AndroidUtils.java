@@ -784,4 +784,18 @@ public class AndroidUtils {
 
 		return newName;
 	}
+
+	public static StringBuilder formatWarnings(List<String> warnings) {
+		StringBuilder builder = new StringBuilder();
+		boolean f = true;
+		for (String w : warnings) {
+			if (f) {
+				f = false;
+			} else {
+				builder.append('\n');
+			}
+			builder.append(w);
+		}
+		return builder;
+	}
 }

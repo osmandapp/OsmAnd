@@ -34,6 +34,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
 import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
 
+import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.data.PointDescription;
@@ -682,21 +683,11 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 
 	protected void showWarnings(List<String> warnings) {
 		if (!warnings.isEmpty()) {
-			final StringBuilder b = new StringBuilder();
-			boolean f = true;
-			for (String w : warnings) {
-				if (f) {
-					f = false;
-				} else {
-					b.append('\n');
-				}
-				b.append(w);
-			}
+			final StringBuilder b = AndroidUtils.formatWarnings(warnings);
 			runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
 					Toast.makeText(SettingsGeneralActivity.this, b.toString(), Toast.LENGTH_LONG).show();
-
 				}
 			});
 		}

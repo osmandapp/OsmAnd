@@ -12,9 +12,14 @@
 
 -->
     <string name="select_track_file">Select track file</string>
+    <string name="settings_item_import_error">Could not import %1$s.</string>
+    <string name="settings_item_write_error">Could not write %1$s.</string>
+    <string name="settings_item_read_error">Could not read %1$s.</string>
+    <string name="changes_applied_to_profile">Changes applied to %1$s profile.</string>
     <string name="custom_osmand_plugin">Custom OsmAnd plugin</string>
     <string name="app_mode_ski_snowmobile">Snowmobile</string>
     <string name="app_mode_ski_touring">Ski touring</string>
+    <string name="replace_point_descr">Replace another point with this</string>
     <string name="shared_string_min">Min</string>
     <string name="shared_string_square">Square</string>
     <string name="shared_string_octagon">Octagon</string>

@@ -84,6 +84,8 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	private String selectedIconCategory;
 	private LinkedHashMap<String, JSONArray> iconCategories;
 	private OsmandApplication app;
+	private View descriptionCaption;
+	private EditText descriptionEdit;
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -186,14 +188,14 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			categoryEdit.setText(getCategoryInitValue());
 		}
 
-		final EditText descriptionEdit = (EditText) view.findViewById(R.id.description_edit);
+		descriptionEdit = (EditText) view.findViewById(R.id.description_edit);
 		AndroidUtils.setTextPrimaryColor(view.getContext(), descriptionEdit, nightMode);
 		AndroidUtils.setHintTextSecondaryColor(view.getContext(), descriptionEdit, nightMode);
 		if (getDescriptionInitValue() != null) {
 			descriptionEdit.setText(getDescriptionInitValue());
 		}
 
-		final View descriptionCaption = view.findViewById(R.id.description);
+		descriptionCaption = view.findViewById(R.id.description);
 		addDelDescription = (TextView) view.findViewById(R.id.description_button);
 		addDelDescription.setTextColor(getResources().getColor(activeColorResId));
 		addDelDescription.setOnClickListener(new View.OnClickListener() {
@@ -209,6 +211,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 					descriptionCaption.setVisibility(View.GONE);
 					addDelDescription.setText(view.getResources().getString(R.string.add_description));
 					AndroidUtils.hideSoftKeyboard(requireActivity(), descriptionEdit);
+					descriptionEdit.clearFocus();
 				}
 			}
 		});
@@ -240,13 +243,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			toolbarAction.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_delete_dark, activeColorResId));
 			deleteButton.setVisibility(View.VISIBLE);
 			deleteIcon.setVisibility(View.VISIBLE);
-			if (!descriptionEdit.getText().toString().isEmpty() || descriptionCaption.getVisibility() != View.VISIBLE) {
-				descriptionCaption.setVisibility(View.VISIBLE);
-				addDelDescription.setText(app.getString(R.string.delete_description));
-			} else {
-				descriptionCaption.setVisibility(View.GONE);
-				addDelDescription.setText(app.getString(R.string.add_description));
-			}
 		}
 
 		toolbarAction.setOnClickListener(new View.OnClickListener() {
@@ -265,6 +261,19 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		updateShapeSelector(selectedShape, view);
 
 		return view;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (!descriptionEdit.getText().toString().isEmpty() || descriptionCaption.getVisibility() != View.VISIBLE
+				|| descriptionEdit.hasFocus()) {
+			descriptionCaption.setVisibility(View.VISIBLE);
+			addDelDescription.setText(app.getString(R.string.delete_description));
+		} else {
+			descriptionCaption.setVisibility(View.GONE);
+			addDelDescription.setText(app.getString(R.string.add_description));
+		}
 	}
 
 	private void createGroupSelector() {
@@ -530,25 +539,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			return SelectCategoryDialogFragment.createInstance(editor.getFragmentTag());
 		} else {
 			return null;
-		}
-	}
-
-	@Override
-	public void onStart() {
-		super.onStart();
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.getContextMenu().setBaseFragmentVisibility(false);
-		}
-	}
-
-	@Override
-	public void onStop() {
-		super.onStop();
-		hideKeyboard();
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.getContextMenu().setBaseFragmentVisibility(true);
 		}
 	}
 

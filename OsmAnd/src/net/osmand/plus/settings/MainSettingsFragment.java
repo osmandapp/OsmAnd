@@ -184,13 +184,14 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 			SwitchPreferenceEx pref = new SwitchPreferenceEx(app);
 			pref.setPersistent(false);
 			pref.setKey(applicationMode.getStringKey());
+			preferenceCategory.addPreference(pref);
+
 			pref.setIcon(getAppProfilesIcon(applicationMode, isAppProfileEnabled));
 			pref.setTitle(applicationMode.toHumanString());
 			pref.setSummary(getAppModeDescription(getContext(), applicationMode));
 			pref.setChecked(isAppProfileEnabled);
 			pref.setLayoutResource(R.layout.preference_with_descr_dialog_and_switch);
 			pref.setFragment(ConfigureProfileFragment.class.getName());
-			preferenceCategory.addPreference(pref);
 		}
 	}
 

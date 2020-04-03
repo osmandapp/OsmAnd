@@ -1190,8 +1190,8 @@
     <string name="poi_payment_paypal_no">Non si accetta PayPal</string>
     <string name="poi_payment_gift_card_yes">Carte regalo</string>
     <string name="poi_description_payment">Descrizione del pagamento</string>
-    <string name="poi_internet_access_fee_yes">Accesso a Internet - a pagamento</string>
-    <string name="poi_internet_access_fee_no">Accesso a Internet - senza pagamento</string>
+    <string name="poi_internet_access_fee_yes">Accesso a Internet: a pagamento</string>
+    <string name="poi_internet_access_fee_no">Accesso a Internet: senza pagamento</string>
     <string name="poi_diet_vegetarian_yes">Vegetariana</string>
     <string name="poi_diet_vegan_only">Solo Vegana</string>
     <string name="poi_diet_vegan_yes">Vegana</string>
@@ -2285,7 +2285,7 @@
     <string name="poi_payment_union_card_no">Union Card non accettata</string>
     <string name="poi_payment_mtsmoney_yes">MTS-Money</string>
     <string name="poi_payment_mtsmoney_no">MTS-Money non accettato</string>
-    <string name="poi_brewery_additional">Birre</string>
+    <string name="poi_brewery_additional">Nome della birreria</string>
     <string name="poi_fire_hydrant_style_water_source_main">Principale</string>
     <string name="poi_fire_hydrant_style_water_source_pond">Stagno</string>
     <string name="poi_fire_hydrant_style_water_source_stream">Ruscello</string>
@@ -2519,7 +2519,7 @@
     <string name="poi_group_only_yes">Solo gruppi: sì</string>
     <string name="poi_group_only_no">Solo gruppi: no</string>
     <string name="poi_shower_indoor">Doccia: interno</string>
-    <string name="poi_social_facility_group_home">Casa famiglia</string>
+    <string name="poi_social_facility_group_home">Casa di gruppo</string>
     <string name="poi_social_facility_food_bank">Banco alimentare</string>
     <string name="poi_social_facility_shelter">Riparo</string>
     <string name="poi_social_facility_for_drug_addicted">Tossicodipendenti</string>
@@ -2553,7 +2553,7 @@
     <string name="poi_health_specialty_osteopathy_yes">Osteopatia</string>
     <string name="poi_health_specialty_anaesthetics_yes">Anestesiologia</string>
     <string name="poi_health_specialty_pulmonology_yes">Pneumologia</string>
-    <string name="poi_bicycle_repair_station">Stazione fai-da-te riparazione bici</string>
+    <string name="poi_bicycle_repair_station">Stazione di riparazione biciclette;Stazione fai-da-te riparazione bici</string>
     <string name="poi_counselling_type_family_yes">Consultorio (familiare): si</string>
     <string name="poi_counselling_type_family_no">Consultorio (familiare): no</string>
     <string name="poi_pump_status_broken">Stato della pompa: rotta</string>
@@ -2565,7 +2565,7 @@
     <string name="poi_water_purification_chlorine">Cloro</string>
     <string name="poi_water_purification_reverse_osmosis">Osmosi inversa</string>
     <string name="poi_water_purification_aquatabs">Aquatabs</string>
-    <string name="poi_water_supply_pipeline">Acquedotto</string>
+    <string name="poi_water_supply_pipeline">Conduttura</string>
     <string name="poi_water_supply_running_water">Acqua corrente</string>
     <string name="poi_water_supply_borehole">Pozzo</string>
     <string name="poi_water_supply_bottled_water">Acqua imbottigliata</string>
@@ -2817,5 +2817,5 @@
     <string name="poi_greenhouse_horticulture">Orticoltura in serra</string>
     <string name="poi_branch">Filiale</string>
     <string name="poi_resource_aggregate">Aggregato</string>
-    <string name="poi_resource_beryl">berillio</string>
+    <string name="poi_resource_beryl">Berillio</string>
 </resources>
