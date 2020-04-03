@@ -521,7 +521,7 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	@Override
 	protected List<QuickActionType> getQuickActionTypes() {
-		ArrayList<QuickActionType> quickActionTypes = new ArrayList<>();
+		List<QuickActionType> quickActionTypes = new ArrayList<>();
 		quickActionTypes.add(ContourLinesAction.TYPE);
 		quickActionTypes.add(TerrainAction.TYPE);
 		return quickActionTypes;

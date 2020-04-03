@@ -684,7 +684,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 	@Override
 	protected List<QuickActionType> getQuickActionTypes() {
-		ArrayList<QuickActionType> quickActionTypes = new ArrayList<>();
+		List<QuickActionType> quickActionTypes = new ArrayList<>();
 		quickActionTypes.add(MapSourceAction.TYPE);
 		quickActionTypes.add(MapOverlayAction.TYPE);
 		quickActionTypes.add(MapUnderlayAction.TYPE);
