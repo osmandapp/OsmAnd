@@ -3047,7 +3047,7 @@
     <string name="files_moved">%1$d فایل منتقل شد (%2$s).</string>
     <string name="files_copied">%1$d فایل کپی شد (%2$s).</string>
     <string name="files_failed">نمی‌توان %1$d فایل (%2$s) را کپی کرد.</string>
-    <string name="files_present">%1$d فایل (%2$s) در مکان قبلی وجود دارد.
+    <string name="files_present">%1$d فایل (%2$s) در مکان قبلی وجود دارد:
 \n\'%3$s\'</string>
     <string name="move_maps">نقشه‌ها را منتقل کن</string>
     <string name="dont_move_maps">منتقل نکن</string>
@@ -3639,4 +3639,9 @@
     <string name="app_mode_ski_touring">تور اسکی</string>
     <string name="app_mode_ski_snowmobile">برف‌رو</string>
     <string name="custom_osmand_plugin">افزونهٔ سفارشی OsmAnd</string>
+    <string name="replace_point_descr">نقطهٔ دیگری را جانشین این کنید</string>
+    <string name="changes_applied_to_profile">تغییرات روی پروفایل %1$s به کار رفت.</string>
+    <string name="settings_item_read_error">خواندن %1$s ناموفق بود.</string>
+    <string name="settings_item_write_error">نوشتن %1$s ناموفق بود.</string>
+    <string name="settings_item_import_error">درون‌برد %1$s ناموفق بود.</string>
 </resources>
