@@ -872,10 +872,12 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected void registerQuickActionTypes(List<QuickActionType> quickActionTypes) {
+	protected List<QuickActionType> getQuickActionTypes() {
+		ArrayList<QuickActionType> quickActionTypes = new ArrayList<>();
 		quickActionTypes.add(TakeAudioNoteAction.TYPE);
 		quickActionTypes.add(TakePhotoNoteAction.TYPE);
 		quickActionTypes.add(TakeVideoNoteAction.TYPE);
+		return quickActionTypes;
 	}
 
 	@Override

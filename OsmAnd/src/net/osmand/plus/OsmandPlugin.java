@@ -190,6 +190,10 @@ public abstract class OsmandPlugin {
 		return Collections.emptyList();
 	}
 
+	protected List<QuickActionType> getQuickActionTypes() {
+		return Collections.emptyList();
+	}
+
 	/**
 	 * Plugin was installed
 	 */
@@ -496,9 +500,6 @@ public abstract class OsmandPlugin {
 		return true;
 	}
 
-	protected void registerQuickActionTypes(List<QuickActionType> quickActionTypes) {
-	}
-
 	protected void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter, MapActivity mapActivity) {
 	}
 
@@ -789,11 +790,9 @@ public abstract class OsmandPlugin {
 
 	public static void registerQuickActionTypesPlugins(List<QuickActionType> quickActionTypes) {
 		for (OsmandPlugin p : getEnabledPlugins()) {
-			p.registerQuickActionTypes(quickActionTypes);
+			quickActionTypes.addAll(p.getQuickActionTypes());
 		}
 	}
-
-
 
 	public static void updateLocationPlugins(net.osmand.Location location) {
 		for (OsmandPlugin p : getEnabledPlugins()) {

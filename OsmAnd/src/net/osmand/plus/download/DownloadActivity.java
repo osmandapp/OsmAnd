@@ -584,17 +584,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			protected void onPostExecute(List<String> warnings) {
 				setSupportProgressBarIndeterminateVisibility(false);
 				if (!warnings.isEmpty()) {
-					final StringBuilder b = new StringBuilder();
-					boolean f = true;
-					for (String w : warnings) {
-						if (f) {
-							f = false;
-						} else {
-							b.append('\n');
-						}
-						b.append(w);
-					}
-					Toast.makeText(DownloadActivity.this, b.toString(), Toast.LENGTH_LONG).show();
+					Toast.makeText(DownloadActivity.this, AndroidUtils.formatWarnings(warnings).toString(), Toast.LENGTH_LONG).show();
 				}
 				newDownloadIndexes();
 			}

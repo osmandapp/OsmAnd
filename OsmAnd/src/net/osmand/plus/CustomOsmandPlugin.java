@@ -186,11 +186,19 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	}
 
 	public File getPluginDir() {
-		return new File(app.getAppPath(null), IndexConstants.PLUGINS_DIR + pluginId);
+		return app.getAppPath(IndexConstants.PLUGINS_DIR + pluginId);
 	}
 
 	public File getPluginItemsFile() {
 		return new File(getPluginDir(), "items" + IndexConstants.OSMAND_SETTINGS_FILE_EXT);
+	}
+
+	public File getPluginResDir() {
+		File pluginDir = getPluginDir();
+		if (!Algorithms.isEmpty(resourceDirName)) {
+			return new File(pluginDir, resourceDirName);
+		}
+		return pluginDir;
 	}
 
 	@Override
@@ -375,19 +383,16 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	}
 
 	public void loadResources() {
-		if (!Algorithms.isEmpty(resourceDirName)) {
-			File pluginDir = new File(app.getAppPath(null), IndexConstants.PLUGINS_DIR + pluginId);
-			File pluginResDir = new File(pluginDir, resourceDirName);
-			if (pluginResDir.exists() && pluginResDir.isDirectory()) {
-				File[] files = pluginResDir.listFiles();
-				for (File resFile : files) {
-					String path = resFile.getAbsolutePath();
-					if (icon == null) {
-						icon = getIconForFile(path, iconNames);
-					}
-					if (image == null) {
-						image = getIconForFile(path, imageNames);
-					}
+		File pluginResDir = getPluginResDir();
+		if (pluginResDir.exists() && pluginResDir.isDirectory()) {
+			File[] files = pluginResDir.listFiles();
+			for (File resFile : files) {
+				String path = resFile.getAbsolutePath();
+				if (icon == null) {
+					icon = getIconForFile(path, iconNames);
+				}
+				if (image == null) {
+					image = getIconForFile(path, imageNames);
 				}
 			}
 		}
