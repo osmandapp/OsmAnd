@@ -293,6 +293,7 @@ public class OsmAndAppCustomization {
 					app.getSettings().NAV_DRAWER_LOGO.set(json.toString());
 				}
 			} catch (FileNotFoundException e) {
+				LOG.error(e);
 				return false;
 			} catch (JSONException e) {
 				LOG.error("Failed to read json", e);
