@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
 import net.osmand.aidl.ConnectedApp;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.activities.MapActivity;
@@ -31,6 +32,7 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -57,6 +59,8 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCH
 public class OsmAndAppCustomization {
 
 	private static final int MAX_NAV_DRAWER_ITEMS_PER_APP = 3;
+
+	private static final Log LOG = PlatformUtil.getLog(OsmAndAppCustomization.class);
 
 	protected OsmandApplication app;
 	protected OsmandSettings osmandSettings;
@@ -241,7 +245,7 @@ public class OsmAndAppCustomization {
 						}
 					}
 				} catch (JSONException e) {
-					e.printStackTrace();
+					LOG.error("Failed to read json", e);
 				}
 			}
 		}
@@ -276,12 +280,12 @@ public class OsmAndAppCustomization {
 						try {
 							is.close();
 						} catch (IOException e) {
-							e.printStackTrace();
+							LOG.error(e);
 						}
 						try {
 							fout.close();
 						} catch (IOException e) {
-							e.printStackTrace();
+							LOG.error(e);
 						}
 					}
 					JSONObject json = new JSONObject();
@@ -291,9 +295,9 @@ public class OsmAndAppCustomization {
 			} catch (FileNotFoundException e) {
 				return false;
 			} catch (JSONException e) {
-				// ignore
+				LOG.error("Failed to read json", e);
 			} catch (IOException e) {
-				// ignore
+				LOG.error("Failed to write file", e);
 			}
 			if (packageName != null && intent != null) {
 				navDrawerParams = new ArrayList<>();
