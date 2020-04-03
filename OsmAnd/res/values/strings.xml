@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="changes_applied_to_profile">Changes applied to %1$s profile.</string>
     <string name="custom_osmand_plugin">Custom OsmAnd plugin</string>
     <string name="app_mode_ski_snowmobile">Snowmobile</string>
     <string name="app_mode_ski_touring">Ski touring</string>
