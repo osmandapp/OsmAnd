@@ -1152,8 +1152,8 @@
     <string name="poi_paediatrics">Pediatri</string>
     <string name="poi_internet_access_yes">İnternet erişimi: evet</string>
     <string name="poi_internet_access_no">İnternet erişimi: hayır</string>
-    <string name="poi_internet_access_fee_yes">İnternet erişimi - ücretli</string>
-    <string name="poi_internet_access_fee_no">İnternet erişimi - ücretsiz</string>
+    <string name="poi_internet_access_fee_yes">İnternet erişimi: ücretli</string>
+    <string name="poi_internet_access_fee_no">İnternet erişimi: ücretsiz</string>
     <string name="poi_aeroway_fuel">Uçak yakıtı istasyonu</string>
     <string name="poi_historic_aircraft">Tarihi uçak</string>
     <string name="poi_honey">Bal dükkanı</string>
