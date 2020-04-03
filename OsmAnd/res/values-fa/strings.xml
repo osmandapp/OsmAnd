@@ -3273,7 +3273,7 @@
     <string name="routing_attr_piste_type_sled_name">سورتمه</string>
     <string name="routing_attr_piste_type_sled_description">سراشیبی برای سورتمه‌سواری.</string>
     <string name="routing_attr_allow_skating_only_description">مسیرهای آماده‌شده برای سبک آزاد یا فقط-اسکیت. بدون مسیرهای کلاسیک.</string>
-    <string name="routing_attr_allow_classic_only_description">"مسیرهایی که فقط برای سبک کلاسیک آماده شده  و مسیر اسکیت ندارند. مسیرهای سُست‌تر و آماده‌شده با برف‌روهای کوچک‌تر و مسیرهای دست‌ساز اسکی‌بازان را نیز شامل می‌شود."</string>
+    <string name="routing_attr_allow_classic_only_description">مسیرهایی که فقط برای سبک کلاسیک آماده شده و مسیر اسکیت ندارند. مسیرهای سُست‌تر و آماده‌شده با برف‌روهای کوچک‌تر و مسیرهای دست‌ساز اسکی‌بازان را نیز شامل می‌شود.</string>
     <string name="external_input_device_descr">یک دستگاه کنترل خارجی، مانند صفحه‌کلید یا WunderLINQ را انتخاب کنید.</string>
     <string name="utm_format_descr">‏OsmAnd از قالب UTM Standard استفاده می‌کند که مشابه (اما نه یکسان) با UTM Nato است.</string>
     <string name="apply_to_current_profile">به‌کارگیری فقط برای «%1$s»</string>
