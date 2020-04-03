@@ -56,7 +56,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public abstract class OsmandPlugin {
@@ -789,11 +788,9 @@ public abstract class OsmandPlugin {
 		return false;
 	}
 
-	public static void registerQuickActionTypesPlugins(Map<QuickActionType, Boolean> availableQuickActionTypes) {
+	public static void registerQuickActionTypesPlugins(List<QuickActionType> quickActionTypes) {
 		for (OsmandPlugin p : getAvailablePlugins()) {
-			for (QuickActionType actionType : p.getQuickActionTypes()) {
-				availableQuickActionTypes.put(actionType, p.isActive());
-			}
+			quickActionTypes.addAll(p.getQuickActionTypes());
 		}
 	}
 

@@ -2,8 +2,6 @@ package net.osmand.plus.quickaction;
 
 import android.content.Context;
 
-import androidx.core.util.Pair;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
@@ -72,8 +70,8 @@ public class QuickActionRegistry {
 	private final Map<String, Boolean> fabStateMap;
 	private final Gson gson;
 	private List<QuickActionType> quickActionTypes = new ArrayList<>();
-	private Map<Integer, Pair<QuickActionType, Boolean>> quickActionTypesInt = new TreeMap<>();
-	private Map<String, Pair<QuickActionType, Boolean>> quickActionTypesStr = new TreeMap<>();
+	private Map<Integer, QuickActionType> quickActionTypesInt = new TreeMap<>();
+	private Map<String, QuickActionType> quickActionTypesStr = new TreeMap<>();
 
 	private QuickActionUpdatesListener updatesListener;
 
@@ -234,23 +232,14 @@ public class QuickActionRegistry {
 		quickActionTypes.add(NavAutoZoomMapAction.TYPE);
 		quickActionTypes.add(NavStartStopAction.TYPE);
 		quickActionTypes.add(NavResumePauseAction.TYPE);
+		OsmandPlugin.registerQuickActionTypesPlugins(quickActionTypes);
 
-		Map<Integer, Pair<QuickActionType, Boolean>> quickActionTypesInt = new TreeMap<>();
-		Map<String, Pair<QuickActionType, Boolean>> quickActionTypesStr = new TreeMap<>();
+		Map<Integer, QuickActionType> quickActionTypesInt = new TreeMap<>();
+		Map<String, QuickActionType> quickActionTypesStr = new TreeMap<>();
 		for (QuickActionType qt : quickActionTypes) {
-			quickActionTypesInt.put(qt.getId(), new Pair<>(qt, true));
-			quickActionTypesStr.put(qt.getStringId(), new Pair<>(qt, true));
+			quickActionTypesInt.put(qt.getId(), qt);
+			quickActionTypesStr.put(qt.getStringId(), qt);
 		}
-
-		Map<QuickActionType, Boolean> pluginActions = new HashMap<>();
-		OsmandPlugin.registerQuickActionTypesPlugins(pluginActions);
-		for (Map.Entry<QuickActionType, Boolean> entry : pluginActions.entrySet()) {
-			QuickActionType qt = entry.getKey();
-			boolean available = entry.getValue();
-			quickActionTypesInt.put(qt.getId(), new Pair<>(qt, available));
-			quickActionTypesStr.put(qt.getStringId(), new Pair<>(qt, available));
-		}
-
 		this.quickActionTypes = quickActionTypes;
 		this.quickActionTypesInt = quickActionTypesInt;
 		this.quickActionTypesStr = quickActionTypesStr;
@@ -287,22 +276,18 @@ public class QuickActionRegistry {
 		}
 	}
 
-	public QuickAction newActionByStringType(String actionType, boolean onlyAvailable) {
-		Pair<QuickActionType, Boolean> quickActionTypeState = quickActionTypesStr.get(actionType);
-		if (quickActionTypeState != null && quickActionTypeState.first != null) {
-			if (!onlyAvailable || quickActionTypeState.second != null && quickActionTypeState.second) {
-				return quickActionTypeState.first.createNew();
-			}
+	public QuickAction newActionByStringType(String actionType) {
+		QuickActionType quickActionType = quickActionTypesStr.get(actionType);
+		if (quickActionType != null) {
+			return quickActionType.createNew();
 		}
 		return null;
 	}
 
-	public QuickAction newActionByType(int type, boolean onlyAvailable) {
-		Pair<QuickActionType, Boolean> quickActionTypeState = quickActionTypesInt.get(type);
-		if (quickActionTypeState != null && quickActionTypeState.first != null) {
-			if (!onlyAvailable || quickActionTypeState.second != null && quickActionTypeState.second) {
-				return quickActionTypeState.first.createNew();
-			}
+	public QuickAction newActionByType(int type) {
+		QuickActionType quickActionType = quickActionTypesInt.get(type);
+		if (quickActionType != null) {
+			return quickActionType.createNew();
 		}
 		return null;
 	}
@@ -318,16 +303,12 @@ public class QuickActionRegistry {
 		public QuickAction deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 			JsonObject obj = json.getAsJsonObject();
 			QuickActionType found = null;
-			Pair<QuickActionType, Boolean> quickActionTypeState = null;
 			if (obj.has("actionType")) {
 				String actionType = obj.get("actionType").getAsString();
-				quickActionTypeState = quickActionTypesStr.get(actionType);
+				found = quickActionTypesStr.get(actionType);
 			} else if (obj.has("type")) {
 				int type = obj.get("type").getAsInt();
-				quickActionTypeState = quickActionTypesInt.get(type);
-			}
-			if (quickActionTypeState != null && quickActionTypeState.second != null && quickActionTypeState.second) {
-				found = quickActionTypeState.first;
+				found = quickActionTypesInt.get(type);
 			}
 			if (found != null) {
 				QuickAction qa = found.createNew();
