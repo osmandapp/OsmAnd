@@ -51,6 +51,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 				ApplicationMode selectedMode = getSelectedAppMode();
 				boolean checked = !settings.VOICE_MUTE.getModeValue(selectedMode);
 				settings.VOICE_MUTE.setModeValue(selectedMode, checked);
+				applyChangeAndSuggestApplyToAllProfiles(settings.VOICE_MUTE.getId(), checked);
 				updateToolbarSwitch();
 				enableDisablePreferences(!checked);
 				updateMenu();

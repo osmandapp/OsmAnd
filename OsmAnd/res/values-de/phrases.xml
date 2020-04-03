@@ -63,7 +63,7 @@
     <string name="poi_bedding">Bettwarengeschäft</string>
     <string name="poi_craft_beekeeper">Bienenzüchter</string>
     <string name="poi_beverages">Getränkegeschäft</string>
-    <string name="poi_bicycle_parking">Fahrradständer</string>
+    <string name="poi_bicycle_parking">Fahrradabstellplatz</string>
     <string name="poi_bicycle_rental">Fahrradvermietung</string>
     <string name="poi_bicycle">Fahrradgeschäft</string>
     <string name="poi_bicycle_track">Radweg </string>
@@ -1811,7 +1811,7 @@
     <string name="poi_diaper_no">Kein Wickeltisch</string>
     <string name="poi_diaper_room">Wickelraum</string>
     <string name="poi_maxstay">Höchstparkdauer</string>
-    <string name="poi_vending_parking_tickets">Parkschein</string>
+    <string name="poi_vending_parking_tickets">Parkscheine</string>
     <string name="poi_vending_cigarettes">Zigaretten</string>
     <string name="poi_vending_excrement_bags">Fäkalienbeutel</string>
     <string name="poi_vending_public_transport_tickets">Fahrscheine</string>
@@ -1830,7 +1830,7 @@
     <string name="poi_vending_elongated_coin">Souvenir-Münze</string>
     <string name="poi_vending_bread">Brot</string>
     <string name="poi_vending_chewing_gums">Kaugummis</string>
-    <string name="poi_vending_parking_tickets_public_transport_tickets">Parkschein; Fahrschein</string>
+    <string name="poi_vending_parking_tickets_public_transport_tickets">Parkscheine; Fahrscheine</string>
     <string name="poi_vending_coffee">Kaffee</string>
     <string name="poi_vending_toll">Mautverkauf</string>
     <string name="poi_vending_tickets">Fahrscheinverkauf</string>
@@ -2352,7 +2352,7 @@
     <string name="poi_water_heater_no">Wasserkocher: nein</string>
     <string name="poi_parking_surface">Oberfläche</string>
     <string name="poi_parking_garage_boxes">Garagen</string>
-    <string name="poi_parking_carports">Carport</string>
+    <string name="poi_parking_carports">Carports</string>
     <string name="poi_dojo">Dojo</string>
     <string name="poi_running">Laufen</string>
     <string name="poi_badminton">Federball</string>
@@ -3770,7 +3770,7 @@
     <string name="poi_community_gender_male">Geschlecht der Gemeinschaft: männlich</string>
     <string name="poi_community_gender_mixed">Geschlecht der Gemeinschaft: gemischt</string>
     <string name="poi_grave">Grab</string>
-    <string name="poi_parking_space">Parkplatz</string>
+    <string name="poi_parking_space">Parkbucht</string>
     <string name="poi_url">URL</string>
     <string name="poi_volcano_type">Vulkanart</string>
     <string name="poi_volcano_status">Vulkanstatus</string>

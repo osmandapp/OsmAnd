@@ -3607,4 +3607,8 @@ Lon %2$s</string>
     <string name="recalculate_route_in_deviation">Recalcular ruta en caso de desviación</string>
     <string name="select_distance_route_will_recalc">Elige la distancia después de la cual la ruta será recalculada.</string>
     <string name="recalculate_route_distance_promo">La ruta será recalculada si la distancia a la ubicación actual es mayor que el valor elegido.</string>
+    <string name="shared_string_octagon">Octágono</string>
+    <string name="app_mode_ski_touring">Esquí de travesía</string>
+    <string name="app_mode_ski_snowmobile">Motonieve</string>
+    <string name="custom_osmand_plugin">Complemento personalizado de OsmAnd</string>
 </resources>
