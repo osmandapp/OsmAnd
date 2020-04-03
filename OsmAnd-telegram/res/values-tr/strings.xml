@@ -93,7 +93,7 @@
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram (mesajlaşma uygulaması) insanlarla bağlantı ve iletişim kurmak için kullanılmaktadır.</string>
     <string name="privacy_policy_telegram_client">OsmAnd Tracker, Telegram açık platformunu kullanan istemcilerden biridir. Kişileriniz başka herhangi bir Telegram istemcisini kullanabilir.</string>
-    <string name="privacy_policy_agree">\"Devam et\" butonuna tıklayarak, Telegram ve OsmAnd Gizlilik Politikası koşullarını kabul etmiş olursunuz.</string>
+    <string name="privacy_policy_agree">\"Devam et\" düğmesine tıklayarak, Telegram ve OsmAnd Gizlilik Politikası koşullarını kabul etmiş olursunuz.</string>
     <string name="shared_string_accept">Kabul et</string>
     <string name="telegram_privacy_policy">Telegram Gizlilik Politikası</string>
     <string name="osmand_privacy_policy">OsmAnd Gizlilik Politikası</string>
