@@ -4,10 +4,13 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +47,7 @@ import androidx.preference.TwoStatePreference;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -51,6 +55,7 @@ import net.osmand.access.AccessibilitySettingsFragment;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -63,14 +68,18 @@ import net.osmand.plus.osmedit.OsmEditingFragment;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment.AppModeChangedListener;
 import net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet;
+import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
 import net.osmand.plus.settings.bottomsheets.EditTextPreferenceBottomSheet;
 import net.osmand.plus.settings.bottomsheets.MultiSelectPreferencesBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SingleSelectPreferenceBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.plus.widgets.SnackbarEx;
 
 import org.apache.commons.logging.Log;
+
+import java.io.Serializable;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 
@@ -101,40 +110,46 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	public enum SettingsScreenType {
 
-		MAIN_SETTINGS(MainSettingsFragment.TAG, false, R.xml.settings_main_screen, R.layout.global_preference_toolbar),
-		GLOBAL_SETTINGS(GlobalSettingsFragment.class.getName(), false, R.xml.global_settings, R.layout.global_preference_toolbar),
-		CONFIGURE_PROFILE(ConfigureProfileFragment.class.getName(), true, R.xml.configure_profile, R.layout.profile_preference_toolbar_with_switch),
-		PROXY_SETTINGS(ProxySettingsFragment.class.getName(), false, R.xml.proxy_preferences, R.layout.global_preferences_toolbar_with_switch),
-		GENERAL_PROFILE(GeneralProfileSettingsFragment.class.getName(), true, R.xml.general_profile_settings, R.layout.profile_preference_toolbar),
-		NAVIGATION(NavigationFragment.class.getName(), true, R.xml.navigation_settings_new, R.layout.profile_preference_toolbar),
-		COORDINATES_FORMAT(CoordinatesFormatFragment.class.getName(), true, R.xml.coordinates_format, R.layout.profile_preference_toolbar),
-		ROUTE_PARAMETERS(RouteParametersFragment.class.getName(), true, R.xml.route_parameters, R.layout.profile_preference_toolbar),
-		SCREEN_ALERTS(ScreenAlertsFragment.class.getName(), true, R.xml.screen_alerts, R.layout.profile_preference_toolbar_with_switch),
-		VOICE_ANNOUNCES(VoiceAnnouncesFragment.class.getName(), true, R.xml.voice_announces, R.layout.profile_preference_toolbar_with_switch),
-		VEHICLE_PARAMETERS(VehicleParametersFragment.class.getName(), true, R.xml.vehicle_parameters, R.layout.profile_preference_toolbar),
-		MAP_DURING_NAVIGATION(MapDuringNavigationFragment.class.getName(), true, R.xml.map_during_navigation, R.layout.profile_preference_toolbar),
-		TURN_SCREEN_ON(TurnScreenOnFragment.class.getName(), true, R.xml.turn_screen_on, R.layout.profile_preference_toolbar_with_switch),
-		DATA_STORAGE(DataStorageFragment.class.getName(), false, R.xml.data_storage, R.layout.global_preference_toolbar),
-		DIALOGS_AND_NOTIFICATIONS_SETTINGS(DialogsAndNotificationsSettingsFragment.class.getName(), false, R.xml.dialogs_and_notifications_preferences, R.layout.global_preferences_toolbar_with_switch),
-		PROFILE_APPEARANCE(ProfileAppearanceFragment.TAG, true, R.xml.profile_appearance, R.layout.profile_preference_toolbar),
-		OPEN_STREET_MAP_EDITING(OsmEditingFragment.class.getName(), false, R.xml.osm_editing, R.layout.global_preference_toolbar),
-		MULTIMEDIA_NOTES(MultimediaNotesFragment.class.getName(), true, R.xml.multimedia_notes, R.layout.profile_preference_toolbar),
-		MONITORING_SETTINGS(MonitoringSettingsFragment.class.getName(), true, R.xml.monitoring_settings, R.layout.profile_preference_toolbar),
-		LIVE_MONITORING(LiveMonitoringFragment.class.getName(), false, R.xml.live_monitoring, R.layout.global_preferences_toolbar_with_switch),
-		ACCESSIBILITY_SETTINGS(AccessibilitySettingsFragment.class.getName(), true, R.xml.accessibility_settings, R.layout.profile_preference_toolbar),
-		DEVELOPMENT_SETTINGS(DevelopmentSettingsFragment.class.getName(), false, R.xml.development_settings, R.layout.global_preference_toolbar);
+		MAIN_SETTINGS(MainSettingsFragment.TAG, false, null, R.xml.settings_main_screen, R.layout.global_preference_toolbar),
+		GLOBAL_SETTINGS(GlobalSettingsFragment.class.getName(), false, null, R.xml.global_settings, R.layout.global_preference_toolbar),
+		CONFIGURE_PROFILE(ConfigureProfileFragment.class.getName(), true, null, R.xml.configure_profile, R.layout.profile_preference_toolbar_with_switch),
+		PROXY_SETTINGS(ProxySettingsFragment.class.getName(), false, null, R.xml.proxy_preferences, R.layout.global_preferences_toolbar_with_switch),
+		GENERAL_PROFILE(GeneralProfileSettingsFragment.class.getName(), true, MessageType.BOTTOM_SHEET, R.xml.general_profile_settings, R.layout.profile_preference_toolbar),
+		NAVIGATION(NavigationFragment.class.getName(), true, MessageType.SNACK_BAR, R.xml.navigation_settings_new, R.layout.profile_preference_toolbar),
+		COORDINATES_FORMAT(CoordinatesFormatFragment.class.getName(), true, MessageType.BOTTOM_SHEET, R.xml.coordinates_format, R.layout.profile_preference_toolbar),
+		ROUTE_PARAMETERS(RouteParametersFragment.class.getName(), true, MessageType.SNACK_BAR, R.xml.route_parameters, R.layout.profile_preference_toolbar),
+		SCREEN_ALERTS(ScreenAlertsFragment.class.getName(), true, MessageType.SNACK_BAR, R.xml.screen_alerts, R.layout.profile_preference_toolbar_with_switch),
+		VOICE_ANNOUNCES(VoiceAnnouncesFragment.class.getName(), true, MessageType.SNACK_BAR, R.xml.voice_announces, R.layout.profile_preference_toolbar_with_switch),
+		VEHICLE_PARAMETERS(VehicleParametersFragment.class.getName(), true, MessageType.SNACK_BAR, R.xml.vehicle_parameters, R.layout.profile_preference_toolbar),
+		MAP_DURING_NAVIGATION(MapDuringNavigationFragment.class.getName(), true, MessageType.SNACK_BAR, R.xml.map_during_navigation, R.layout.profile_preference_toolbar),
+		TURN_SCREEN_ON(TurnScreenOnFragment.class.getName(), true, MessageType.SNACK_BAR, R.xml.turn_screen_on, R.layout.profile_preference_toolbar_with_switch),
+		DATA_STORAGE(DataStorageFragment.class.getName(), false, null, R.xml.data_storage, R.layout.global_preference_toolbar),
+		DIALOGS_AND_NOTIFICATIONS_SETTINGS(DialogsAndNotificationsSettingsFragment.class.getName(), false, null, R.xml.dialogs_and_notifications_preferences, R.layout.global_preferences_toolbar_with_switch),
+		PROFILE_APPEARANCE(ProfileAppearanceFragment.TAG, true, null, R.xml.profile_appearance, R.layout.profile_preference_toolbar),
+		OPEN_STREET_MAP_EDITING(OsmEditingFragment.class.getName(), false, null, R.xml.osm_editing, R.layout.global_preference_toolbar),
+		MULTIMEDIA_NOTES(MultimediaNotesFragment.class.getName(), true, MessageType.SNACK_BAR, R.xml.multimedia_notes, R.layout.profile_preference_toolbar),
+		MONITORING_SETTINGS(MonitoringSettingsFragment.class.getName(), true, MessageType.SNACK_BAR, R.xml.monitoring_settings, R.layout.profile_preference_toolbar),
+		LIVE_MONITORING(LiveMonitoringFragment.class.getName(), false, null, R.xml.live_monitoring, R.layout.global_preferences_toolbar_with_switch),
+		ACCESSIBILITY_SETTINGS(AccessibilitySettingsFragment.class.getName(), true, MessageType.SNACK_BAR, R.xml.accessibility_settings, R.layout.profile_preference_toolbar),
+		DEVELOPMENT_SETTINGS(DevelopmentSettingsFragment.class.getName(), false, null, R.xml.development_settings, R.layout.global_preference_toolbar);
 
 		public final String fragmentName;
 		public final boolean profileDependent;
+		public final MessageType onChangeMessageType;
 		public final int preferencesResId;
 		public final int toolbarResId;
 
-		SettingsScreenType(String fragmentName, boolean profileDependent, int preferencesResId, int toolbarResId) {
+		SettingsScreenType(String fragmentName, boolean profileDependent, MessageType onChangeMessageType, int preferencesResId, int toolbarResId) {
 			this.fragmentName = fragmentName;
 			this.profileDependent = profileDependent;
+			this.onChangeMessageType = onChangeMessageType;
 			this.preferencesResId = preferencesResId;
 			this.toolbarResId = toolbarResId;
 		}
+	}
+
+	private enum MessageType {
+		SNACK_BAR, BOTTOM_SHEET
 	}
 
 	@Override
@@ -304,6 +319,23 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
+		MessageType messageType = getMessageType();
+		if (messageType != null) {
+			String prefId = preference.getKey();
+			OsmandSettings.OsmandPreference pref = settings.getPreference(prefId);
+			if (pref instanceof CommonPreference && !((CommonPreference) pref).hasDefaultValueForMode(getSelectedAppMode())) {
+				FragmentManager fragmentManager = getFragmentManager();
+				if (newValue instanceof Serializable) {
+					if (messageType == MessageType.SNACK_BAR) {
+						applyChangeAndSuggestApplyToAllProfiles(prefId, (Serializable) newValue);
+					} else if (messageType == MessageType.BOTTOM_SHEET && fragmentManager != null) {
+						ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager, prefId,
+								(Serializable) newValue, this, false, getSelectedAppMode());
+					}
+				}
+				return false;
+			}
+		}
 		return true;
 	}
 
@@ -314,6 +346,10 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	public boolean isProfileDependent() {
 		return currentScreenType != null && currentScreenType.profileDependent;
+	}
+
+	public MessageType getMessageType() {
+		return currentScreenType != null ? currentScreenType.onChangeMessageType : null;
 	}
 
 	@Override
@@ -857,6 +893,27 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getMapRouteInfoMenu().updateMenu();
+		}
+	}
+
+	protected void applyChangeAndSuggestApplyToAllProfiles(final String prefId, final Serializable newValue) {
+		app.getSettings().setPreference(prefId, newValue, getSelectedAppMode());
+		onSettingApplied(prefId, false);
+		updateSetting(prefId);
+		View containerView = getView();
+		if (containerView != null) {
+			String modeName = appMode.toHumanString();
+			String text = app.getString(R.string.changes_applied_to_profile, modeName);
+			SpannableString message = UiUtilities.createSpannableString(text, modeName, new StyleSpan(Typeface.BOLD));
+			SnackbarEx snackbarEx = SnackbarEx.make(containerView, message, Snackbar.LENGTH_LONG, false)
+					.setAction(R.string.apply_to_all_profiles, new View.OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							app.getSettings().setPreferenceForAllModes(prefId, newValue);
+							onSettingApplied(prefId, true);
+						}
+					});
+			snackbarEx.show();
 		}
 	}
 }

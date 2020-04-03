@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:layout_gravity="bottom"
+    android:paddingBottom="@dimen/content_padding"
+    android:paddingTop="@dimen/content_padding">
+
+    <TextView
+        android:id="@+id/snackbar_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:paddingLeft="@dimen/content_padding"
+        android:paddingStart="@dimen/content_padding"
+        android:paddingRight="@dimen/content_padding"
+        android:paddingEnd="@dimen/content_padding"
+        android:paddingTop="@dimen/content_padding_half"
+        android:paddingBottom="@dimen/content_padding_half"
+        android:textAppearance="@style/TextAppearance.Design.Snackbar.Message"
+        android:textColor="?android:textColorPrimary"
+        tools:text="Message text"/>
+
+    <Button
+        android:id="@+id/snackbar_btn"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dialog_content_margin"
+        android:layout_marginLeft="@dimen/dialog_content_margin"
+        android:layout_marginRight="@dimen/dialog_content_margin"
+        android:layout_marginStart="@dimen/dialog_content_margin"
+        android:textColor="?attr/active_color_basic"
+        tools:text="Action"/>
+
+</LinearLayout>

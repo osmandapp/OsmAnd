@@ -18,9 +18,11 @@ import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -37,6 +39,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.widget.TintableCompoundButton;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.snackbar.SnackbarContentLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
@@ -366,28 +369,29 @@ public class UiUtilities {
 	
 	public static void setupSnackbar(Snackbar snackbar, boolean nightMode, @ColorRes Integer backgroundColor,
 	                                 @ColorRes Integer messageColor, @ColorRes Integer actionColor, Integer maxLines) {
-		if (snackbar == null) {
-			return;
-		}
-		View view = snackbar.getView();
-		Context ctx = view.getContext();
-		TextView tvMessage = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_text);
-		TextView tvAction = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_action);
-		if (messageColor == null) {
-			messageColor = nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
-		}
-		tvMessage.setTextColor(ContextCompat.getColor(ctx, messageColor));
-		if (actionColor == null) {
-			actionColor = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
-		}
-		tvAction.setTextColor(ContextCompat.getColor(ctx, actionColor));
-		if (maxLines != null) {
-			tvMessage.setMaxLines(maxLines);
-		}
-		if (backgroundColor == null) {
-			backgroundColor = nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
-		}
-		view.setBackgroundColor(ContextCompat.getColor(ctx, backgroundColor));
+//		if (snackbar == null) {
+//			return;
+//		}
+//		View view = snackbar.getView();
+//		Context ctx = view.getContext();
+//		TextView tvMessage = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_text);
+//		TextView tvAction = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_action);
+//		ViewParent parent = tvAction.getParent();
+//		if (messageColor == null) {
+//			messageColor = nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
+//		}
+//		tvMessage.setTextColor(ContextCompat.getColor(ctx, messageColor));
+//		if (actionColor == null) {
+//			actionColor = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+//		}
+//		tvAction.setTextColor(ContextCompat.getColor(ctx, actionColor));
+//		if (maxLines != null) {
+//			tvMessage.setMaxLines(maxLines);
+//		}
+//		if (backgroundColor == null) {
+//			backgroundColor = nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
+//		}
+//		view.setBackgroundColor(ContextCompat.getColor(ctx, backgroundColor));
 	}
 
 	public static void rotateImageByLayoutDirection(ImageView image, int layoutDirection) {
