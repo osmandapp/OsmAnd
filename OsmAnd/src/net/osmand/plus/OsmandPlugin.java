@@ -56,6 +56,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public abstract class OsmandPlugin {
@@ -187,6 +188,10 @@ public abstract class OsmandPlugin {
 	}
 
 	public List<String> getRouterNames() {
+		return Collections.emptyList();
+	}
+
+	protected List<QuickActionType> getQuickActionTypes() {
 		return Collections.emptyList();
 	}
 
@@ -496,9 +501,6 @@ public abstract class OsmandPlugin {
 		return true;
 	}
 
-	protected void registerQuickActionTypes(List<QuickActionType> quickActionTypes) {
-	}
-
 	protected void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter, MapActivity mapActivity) {
 	}
 
@@ -787,13 +789,13 @@ public abstract class OsmandPlugin {
 		return false;
 	}
 
-	public static void registerQuickActionTypesPlugins(List<QuickActionType> quickActionTypes) {
-		for (OsmandPlugin p : getEnabledPlugins()) {
-			p.registerQuickActionTypes(quickActionTypes);
+	public static void registerQuickActionTypesPlugins(Map<QuickActionType, Boolean> availableQuickActionTypes) {
+		for (OsmandPlugin p : getAvailablePlugins()) {
+			for (QuickActionType actionType : p.getQuickActionTypes()) {
+				availableQuickActionTypes.put(actionType, p.isActive());
+			}
 		}
 	}
-
-
 
 	public static void updateLocationPlugins(net.osmand.Location location) {
 		for (OsmandPlugin p : getEnabledPlugins()) {

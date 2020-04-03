@@ -41,6 +41,7 @@ import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -632,7 +633,9 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 
 
 	@Override
-	protected void registerQuickActionTypes(List<QuickActionType> quickActionTypes) {
+	protected List<QuickActionType> getQuickActionTypes() {
+		ArrayList<QuickActionType> quickActionTypes = new ArrayList<>();
 		quickActionTypes.add(ParkingAction.TYPE);
+		return quickActionTypes;
 	}
 }

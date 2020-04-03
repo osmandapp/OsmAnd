@@ -1379,6 +1379,7 @@ public class SettingsHelper {
 				}
 				newActions.addAll(appliedItems);
 				actionRegistry.updateQuickActions(newActions);
+				actionRegistry.updateActionTypes();
 			}
 		}
 
@@ -1415,9 +1416,9 @@ public class SettingsHelper {
 					String name = object.getString("name");
 					QuickAction quickAction = null;
 					if (object.has("actionType")) {
-						quickAction = quickActionRegistry.newActionByStringType(object.getString("actionType"));
+						quickAction = quickActionRegistry.newActionByStringType(object.getString("actionType"), false);
 					} else if (object.has("type")) {
-						quickAction = quickActionRegistry.newActionByType(object.getInt("type"));
+						quickAction = quickActionRegistry.newActionByType(object.getInt("type"), false);
 					}
 					if (quickAction != null) {
 						String paramsString = object.getString("params");
