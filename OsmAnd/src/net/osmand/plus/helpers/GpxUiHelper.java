@@ -15,7 +15,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
-import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.View;
@@ -38,6 +37,8 @@ import androidx.appcompat.widget.ListPopupWindow;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
@@ -355,60 +356,19 @@ public class GpxUiHelper {
 											final List<GPXInfo> list,
 											final ContextMenuAdapter adapter) {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
-		final UiUtilities iconsCache = app.getUIUtilities();
-		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-		final int layout = R.layout.list_menu_item_native_singlechoice;
-
-		final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(activity, layout, R.id.text1,
-				adapter.getItemNames()) {
-			@Override
-			public View getView(final int position, View convertView, ViewGroup parent) {
-				// User super class to create the View
-				View v = convertView;
-				if (v == null) {
-					v = activity.getLayoutInflater().inflate(layout, null);
-				}
-				final ContextMenuItem item = adapter.getItem(position);
-				TextView tv = (TextView) v.findViewById(R.id.text1);
-				Drawable icon;
-				if (showCurrentGpx && position == 0) {
-					icon = null;
-				} else {
-					icon = iconsCache.getThemedIcon(item.getIcon());
-				}
-				tv.setCompoundDrawablePadding(AndroidUtils.dpToPx(activity, 10f));
-				tv.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
-				tv.setText(item.getTitle());
-				tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-
-				return v;
-			}
-		};
-
-		int selectedIndex = 0;
-		String prevSelectedGpx = app.getSettings().LAST_SELECTED_GPX_TRACK_FOR_NEW_POINT.get();
-		if (prevSelectedGpx != null) {
-			selectedIndex = list.indexOf(prevSelectedGpx);
-		}
-		if (selectedIndex == -1) {
-			selectedIndex = 0;
-		}
-
-		final int[] selectedPosition = {selectedIndex};
-		builder.setSingleChoiceItems(listAdapter, selectedIndex, new OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int position) {
-				selectedPosition[0] = position;
-			}
-		});
-		builder.setTitle(R.string.select_gpx)
-				.setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
-
+		boolean nightMode = !app.getSettings().isLightContent();
+		final View customLayout = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.gpx_track_select_dialog, null);
+		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
+		builder.setView(customLayout);
+		final AlertDialog dlg = builder.create();
+		View cancelButton = customLayout.findViewById(R.id.dismiss_button);
+		UiUtilities.setupDialogButton(nightMode, cancelButton, UiUtilities.DialogButtonType.SECONDARY, R.string.shared_string_cancel);
+		TextView gpxCounter = customLayout.findViewById(R.id.counter);
+		gpxCounter.setText(String.valueOf(adapter.length()));
+		GpxTrackAdapter gpxTrackAdapter = new GpxTrackAdapter(activity, list, showCurrentGpx,
+				new GpxTrackAdapter.OnItemClickListener() {
 					@Override
-					public void onClick(DialogInterface dialog, int which) {
-
-						int position = selectedPosition[0];
+					public void onItemClick(int position) {
 						if (position != -1 && position < list.size()) {
 							if (showCurrentGpx && position == 0) {
 								callbackWithObject.processResult(null);
@@ -419,19 +379,27 @@ public class GpxUiHelper {
 								SelectedGpxFile selectedGpxFile =
 										app.getSelectedGpxHelper().getSelectedFileByName(fileName);
 								if (selectedGpxFile != null) {
-									callbackWithObject.processResult(new GPXFile[]{selectedGpxFile.getGpxFile()});
+									callbackWithObject.processResult(new GPXUtilities.GPXFile[]{selectedGpxFile.getGpxFile()});
 								} else {
-									loadGPXFileInDifferentThread(activity, callbackWithObject, dir, null, fileName);
+									File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+									GpxUiHelper.loadGPXFileInDifferentThread(activity, callbackWithObject, dir, null, fileName);
 								}
 							}
 						}
+						dlg.dismiss();
 					}
-				})
-				.setNegativeButton(R.string.shared_string_cancel, null);
-
-		final AlertDialog dlg = builder.create();
+				});
+		RecyclerView recyclerView = customLayout.findViewById(R.id.gpx_track_list);
+		recyclerView.setAdapter(gpxTrackAdapter);
+		recyclerView.setLayoutManager(new LinearLayoutManager(app, LinearLayoutManager.VERTICAL, false));
 		dlg.setCanceledOnTouchOutside(false);
 		dlg.show();
+		cancelButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				dlg.dismiss();
+			}
+		});
 		try {
 			dlg.getListView().setFastScrollEnabled(true);
 		} catch (Exception e) {
@@ -1007,8 +975,8 @@ public class GpxUiHelper {
 	}
 
 
-	private static void loadGPXFileInDifferentThread(final Activity activity, final CallbackWithObject<GPXFile[]> callbackWithObject,
-													 final File dir, final GPXFile currentFile, final String... filename) {
+	static void loadGPXFileInDifferentThread(final Activity activity, final CallbackWithObject<GPXFile[]> callbackWithObject,
+	                                         final File dir, final GPXFile currentFile, final String... filename) {
 		final ProgressDialog dlg = ProgressDialog.show(activity, activity.getString(R.string.loading_smth, ""),
 				activity.getString(R.string.loading_data));
 		new Thread(new Runnable() {

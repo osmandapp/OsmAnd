@@ -78,6 +78,8 @@
 	<dimen name="dialog_content_bottom_margin">16dp</dimen>
 	<dimen name="local_size_height">34dp</dimen>
 	<dimen name="standard_icon_size">24dp</dimen>
+	<dimen name="gpx_select_small_icon_end_margin">8dp</dimen>
+	<dimen name="gpx_select_small_text_end_margin">16dp</dimen>
 	<dimen name="gpx_small_icon_margin">3dp</dimen>
 	<dimen name="gpx_small_text_margin">14dp</dimen>
 	<dimen name="gpx_text_top_margin">6dp</dimen>
