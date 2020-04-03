@@ -789,7 +789,7 @@ public abstract class OsmandPlugin {
 	}
 
 	public static void registerQuickActionTypesPlugins(List<QuickActionType> quickActionTypes) {
-		for (OsmandPlugin p : getAvailablePlugins()) {
+		for (OsmandPlugin p : getEnabledPlugins()) {
 			quickActionTypes.addAll(p.getQuickActionTypes());
 		}
 	}

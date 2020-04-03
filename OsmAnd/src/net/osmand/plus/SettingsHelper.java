@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -142,6 +143,8 @@ public class SettingsHelper {
 
 		boolean shouldReplace = false;
 
+		protected List<String> warnings;
+
 		SettingsItem(OsmandApplication app) {
 			this.app = app;
 			init();
@@ -149,12 +152,17 @@ public class SettingsHelper {
 
 		SettingsItem(OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			this.app = app;
+			warnings = new ArrayList<>();
 			init();
 			readFromJson(json);
 		}
 
 		protected void init() {
 			// override
+		}
+
+		public List<String> getWarnings() {
+			return warnings;
 		}
 
 		@NonNull
@@ -1256,6 +1264,7 @@ public class SettingsHelper {
 			try {
 				setInputStream(new FileInputStream(file));
 			} catch (FileNotFoundException e) {
+				warnings.add(app.getString(R.string.settings_item_read_error, file.getName()));
 				LOG.error("Failed to set input stream from file: " + file.getName(), e);
 			}
 			return super.getWriter();
@@ -1428,9 +1437,12 @@ public class SettingsHelper {
 						}
 						quickAction.setParams(params);
 						items.add(quickAction);
+					} else {
+						warnings.add(app.getString(R.string.settings_item_read_error, name));
 					}
 				}
 			} catch (JSONException e) {
+				warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
 				throw new IllegalArgumentException("Json parse error", e);
 			}
 		}
@@ -1453,6 +1465,7 @@ public class SettingsHelper {
 					}
 					json.put("items", jsonArray);
 				} catch (JSONException e) {
+					warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
 					LOG.error("Failed write to json", e);
 				}
 			}
@@ -1574,6 +1587,7 @@ public class SettingsHelper {
 					items.add(filter);
 				}
 			} catch (JSONException e) {
+				warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
 				throw new IllegalArgumentException("Json parse error", e);
 			}
 		}
@@ -1595,6 +1609,7 @@ public class SettingsHelper {
 					}
 					json.put("items", jsonArray);
 				} catch (JSONException e) {
+					warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
 					LOG.error("Failed write to json", e);
 				}
 			}
@@ -1758,6 +1773,7 @@ public class SettingsHelper {
 					items.add(template);
 				}
 			} catch (JSONException e) {
+				warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
 				throw new IllegalArgumentException("Json parse error", e);
 			}
 		}
@@ -1792,6 +1808,7 @@ public class SettingsHelper {
 					json.put("items", jsonArray);
 
 				} catch (JSONException e) {
+					warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
 					LOG.error("Failed write to json", e);
 				}
 			}
@@ -1927,6 +1944,7 @@ public class SettingsHelper {
 					items.add(roadInfo);
 				}
 			} catch (JSONException e) {
+				warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
 				throw new IllegalArgumentException("Json parse error", e);
 			}
 		}
@@ -1946,6 +1964,7 @@ public class SettingsHelper {
 					}
 					json.put("items", jsonArray);
 				} catch (JSONException e) {
+					warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
 					LOG.error("Failed write to json", e);
 				}
 			}
@@ -2232,8 +2251,10 @@ public class SettingsHelper {
 								reader.readFromStream(ois);
 							}
 						} catch (IllegalArgumentException e) {
+							item.warnings.add(app.getString(R.string.settings_item_read_error, item.getName()));
 							LOG.error("Error reading item data: " + item.getName(), e);
 						} catch (IOException e) {
+							item.warnings.add(app.getString(R.string.settings_item_read_error, item.getName()));
 							LOG.error("Error reading item data: " + item.getName(), e);
 						} finally {
 							zis.closeEntry();
@@ -2484,6 +2505,13 @@ public class SettingsHelper {
 
 	private void finishImport(@Nullable SettingsImportListener listener, boolean success, @NonNull List<SettingsItem> items) {
 		importTask = null;
+		List<String> warnings = new ArrayList<>();
+		for (SettingsItem item : items) {
+			warnings.addAll(item.getWarnings());
+		}
+		if (!warnings.isEmpty()) {
+			app.showToastMessage(AndroidUtils.formatWarnings(warnings).toString());
+		}
 		if (listener != null) {
 			listener.onSettingsImportFinished(success, items);
 		}

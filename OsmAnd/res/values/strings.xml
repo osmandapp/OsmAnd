@@ -11,6 +11,9 @@
 	Thx - Hardy
 
 -->
+    <string name="settings_item_import_error">Could not import %1$s.</string>
+    <string name="settings_item_write_error">Could not write %1$s.</string>
+    <string name="settings_item_read_error">Could not read %1$s.</string>
     <string name="custom_osmand_plugin">Custom OsmAnd plugin</string>
     <string name="app_mode_ski_snowmobile">Snowmobile</string>
     <string name="app_mode_ski_touring">Ski touring</string>
