@@ -176,8 +176,8 @@
     <string name="user_name">El vostre nom d\'usuari d\'OSM</string>
     <string name="user_password">La vostra contrasenya a OSM</string>
     <string name="download_files_not_enough_space">No hi ha prou espai lliure per baixar %1$s MB (lliure: %2$s).</string>
-    <string name="download_files_question_space">"Voleu baixar {0} fitxer(s)\? 
-\nS\'ocuparà  {1} MB (de {2} MB)."</string>
+    <string name="download_files_question_space">Voleu baixar {0} fitxer(s)\? 
+\nS\'ocuparà {1} MB (de {2} MB).</string>
     <string name="use_transparent_map_theme">Tema transparent</string>
     <string name="osmand_parking_event">Traieu el cotxe de l\'aparcament</string>
     <string name="rendering_attr_appMode_description">Optimitza el mapa per</string>
@@ -351,28 +351,45 @@
     <string name="reading_cached_tiles">Llegint les tessel·les emmagatzemades…</string>
     <string name="specified_dir_doesnt_exist">No s\'ha pogut trobar la carpeta especificada.</string>
     <string name="application_dir">Carpeta d\'emmagatzematge de dades</string>
-    <string name="osmand_long_description_1000_chars">"OsmAnd (OSM Automated Navigation Directions)  
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
 \n
-\nOsmAnd és una aplicació de navegació feta amb programari de codi obert amb accés a una gran varietat de dades globals d\'OSM. Totes les dades dels mapes (siguin mapes vectorials o de tessel·les), es poden desar a la targeta de memòria del telèfon pel seu en desconnexió. També calcula rutes, amb connexió o sense, incloent l\'orientació per veu.  
+\n 
+\nOsmAnd és una aplicació de navegació feta amb programari de codi obert amb accés a una gran varietat de dades globals d\'OSM. Totes les dades dels mapes (siguin mapes vectorials o de tessel·les), es poden desar a la targeta de memòria del telèfon pel seu en desconnexió. També calcula rutes, amb connexió o sense, incloent l\'orientació per veu.
 \n
+\n 
 \nAlgunes de les característiques principals: 
+\n
 \n- Funcionament complet en desconnexió (desa localment els mapes vectorials i de tessel·les baixats) 
+\n
 \n- Mapes vectorials compactes de tot el món per usar en desconnexió 
+\n
 \n- Baixada de mapes nacionals o regionals directament des de l\'aplicació 
+\n
 \n- Diverses capes de mapes alhora, com traces GPX o de navegació, punts d\'interès, Preferits, parades de transport públic, etc. amb nivell d\'opacitat personalitzada 
+\n
 \n- Cerca, fora de línia, d\'adreces i llocs 
-\n- Càlcul de rutes fora de línia fins per distàncies d\'abast mitjà.  
+\n
+\n- Càlcul de rutes fora de línia fins per distàncies d\'abast mitjà.
+\n
 \n- Modalitats opcionals de cotxe, bicicleta i vianant 
+\n
 \n- Canvi automàtic de vista diürna a nocturna 
+\n
 \n- Escala del mapa en funció de la velocitat 
+\n
 \n- Orientació del mapa segons la brúixola o la direcció del moviment 
+\n
 \n- Indicació de carril, velocitat màxima permesa, veus enregistrades i/o sintetitzades 
 \n
+\n 
 \nLimitacions d\'aquesta versió gratuïta de OsmAnd: 
+\n
 \n- Limitació en el nombre de mapes baixats 
+\n
 \n- No hi ha accés als PDIs de la Viquipèdia sense connexió 
 \n
-\nOsmAnd es desenvolupa activament i el nostre projecte i el seu progrés continu depenen de donacions pel desenvolupament i proves de noves funcions. Si us plau, considereu la compra d\'OsmAnd+ o patrocinar una nova característica concreta, o fer una donació genèrica a la pàgina https\\\\osmand.net."</string>
+\n 
+\nOsmAnd es desenvolupa activament i el nostre projecte i el seu progrés continu depenen de donacions pel desenvolupament i proves de noves funcions. Si us plau, considereu la compra d\'OsmAnd+ o patrocinar una nova característica concreta, o fer una donació genèrica a la pàgina https\\\\osmand.net.</string>
     <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions) 
 \n 
 \nL\'OsmAnd+ és un programari de navegació de codi obert amb accés a una gran varietat de dades globals de OpenStreetMap. Totes les dades de mapes (mapes de tessel·les o vectorials) poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús sense connexió. També proporciona la funcionalitat de càlcul de rutes sigui amb connexió o sense, incloent orientació per veu. 
@@ -1079,7 +1096,7 @@
     <string name="edit_tilesource_choose_existing">Tria existent…</string>
     <string name="map_widget_fps_info">Info depuració FPS</string>
     <string name="intermediate_items_sort_return">Ordre optimitzat de les fites de la ruta fins a la destinació.</string>
-    <string name="osmand_distance_planning_plugin_description">"Creació d\'itineraris prement el mapa o utilitzant  o modificant fitxers GPX existents, per planificar un trajecte i mesurar la distància entre punts. El resultat es pot desar com un fitxer GPX que podreu usar més endavant com una referència."</string>
+    <string name="osmand_distance_planning_plugin_description">Creació d\'itineraris prement el mapa o utilitzant o modificant fitxers GPX existents, per planificar un trajecte i mesurar la distància entre punts. El resultat es pot desar com un fitxer GPX que podreu usar més endavant com una referència.</string>
     <string name="android_19_location_disabled">"Des de la versió 4.4 d\'Android (KitKat) no podeu baixar i actualitzar els mapes en l\'antiga carpeta (%s). Voleu copiar tots els fitxers de l\'OsmAnd a la nova destinació? 
 \n Nota 1: Els vostres fitxers obsolets  quedaran intactes (els podeu esborrar manualment). 
 \n Nota 2: En el nou lloc d\'emmagatzemament no serà possible compartir fitxers entre l\'OsmAnd i l\'OsmAnd+."</string>
@@ -1308,9 +1325,10 @@
     <string name="speak_poi">PDI propers</string>
     <string name="index_tours">Itineraris</string>
     <string name="shared_string_all">Tot</string>
-    <string name="record_plugin_description">"Aquest connector activa la funcionalitat d\'enregistrar i desar els vostres trajectes, sigui prement sobre el mapa el giny de gravació GPX, o sigui desant-los tots en un fitxer GPX automàticament.  
+    <string name="record_plugin_description">Aquest connector activa la funcionalitat d\'enregistrar i desar els vostres trajectes, sigui prement sobre el mapa el giny de gravació GPX, o sigui desant-los tots en un fitxer GPX automàticament.
 \n
-\nLes rutes enregistrades es poden compartir amb els vostres amics o aportar-les per ser utilitzades a OSM. Els atletes poden utilitzar els seus registres per monitoritzar els seus entrenaments. Es pot fer una anàlisi bàsica de les rutes directament a OsmAnd com la durada de cada volta, velocitat mitjana, etc.,  i, per descomptat, es poden analitzar amb eines especialitzades de tercers."</string>
+\n
+\nLes rutes enregistrades es poden compartir amb els vostres amics o aportar-les per ser utilitzades a OSM. Els atletes poden utilitzar els seus registres per monitoritzar els seus entrenaments. Es pot fer una anàlisi bàsica de les rutes directament a OsmAnd com la durada de cada volta, velocitat mitjana, etc., i, per descomptat, es poden analitzar amb eines especialitzades de tercers.</string>
     <string name="record_plugin_name">Enregistrament de trajectes</string>
     <string name="int_hour">h</string>
     <string name="duration">Durada</string>
@@ -1926,9 +1944,10 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="map_marker">Marcador de mapa</string>
     <string name="file_name_containes_illegal_char">El nom de fitxer inclou un caràcter il·legal</string>
     <string name="no_map_markers_found">Afegiu els marcadors de mapa amb el mapa</string>
-    <string name="osm_live_header">"Aquesta subscripció permet actualitzacions horàries de tots els mapes del món.
-\nPart dels ingressos es retornen a la comunitat OSM en retribuir cada contribució OSM. 
-\nSi aprecieu OsmAnd  i OSM i els voleu recolzar mentre l\'utilitzeu, aquesta és la via perfecta per fer-ho."</string>
+    <string name="osm_live_header">Aquesta subscripció permet actualitzacions horàries de tots els mapes del món.
+\nPart dels ingressos es retornen a la comunitat OSM en retribuir cada contribució OSM.
+\n
+\nSi aprecieu OsmAnd i OSM i els voleu recolzar mentre l\'utilitzeu, aquesta és la via perfecta per fer-ho.</string>
     <string name="upload_osm_note_description">Pugeu la vostra nota OSM anònimament o utilitzant el vostre perfil OpenStreetMap.org.</string>
     <string name="add_time_span">Afegeix un lapse de temps</string>
     <string name="rec_split">Divisió d\'enregistrament</string>
@@ -2187,7 +2206,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="rendering_attr_depthContours_description">Mostra isòbates i fondàries puntuals.</string>
     <string name="rendering_attr_depthContours_name">Isòbates</string>
     <string name="routing_attr_height_obstacles_name">Utilitza les cotes d\'elevació</string>
-    <string name="routing_attr_height_obstacles_description">"Revisa l\'elevació del terreny (mitjançant dades  SRTM, ASTER i EU-DEM)."</string>
+    <string name="routing_attr_height_obstacles_description">Revisa l\'elevació del terreny (mitjançant dades SRTM, ASTER i EU-DEM).</string>
     <string name="route_altitude">Alçat de la ruta</string>
     <string name="altitude_descent">Descens</string>
     <string name="altitude_ascent">Ascens</string>
@@ -2705,7 +2724,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_wifi_only">Només per wi-fi</string>
     <string name="select_travel_book">Seleccioneu una guia de viatges</string>
     <string name="shared_string_travel_book">Guia de viatges</string>
-    <string name="online_webpage_warning">"La pàgina només es pot consultar en línia.  La voleu obrir en un navegador?"</string>
+    <string name="online_webpage_warning">La pàgina només es pot consultar en línia. La voleu obrir en un navegador\?</string>
     <string name="images_cache">Memòria cau d\'imatges</string>
     <string name="delete_search_history">Esborra l\'historial de cerca</string>
     <string name="download_images">Baixa imatges</string>
