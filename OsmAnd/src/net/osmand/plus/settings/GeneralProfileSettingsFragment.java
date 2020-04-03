@@ -354,18 +354,11 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String prefId = preference.getKey();
-
-		OsmandSettings.OsmandPreference pref = settings.getPreference(prefId);
-		if (pref instanceof CommonPreference && !((CommonPreference) pref).hasDefaultValueForMode(getSelectedAppMode())) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null && newValue instanceof Serializable) {
-				ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager, prefId,
-						(Serializable) newValue, this, false, getSelectedAppMode());
-			}
+		if (prefId.equals(settings.ROTATE_MAP.getId()) && newValue instanceof Serializable) {
+			applyChangeAndSuggestApplyToAllProfiles(prefId, (Serializable) newValue);
 			return false;
 		}
-
-		return true;
+		return super.onPreferenceChange(preference, newValue);
 	}
 
 	@Override
