@@ -3616,4 +3616,9 @@ Lon %2$s</string>
     <string name="app_mode_ski_snowmobile">Schneemobil</string>
     <string name="custom_osmand_plugin">Benutzerdefiniertes OsmAnd-Plugin</string>
     <string name="slope_description">Farbliche Kennzeichnung von Pisten im Gelände.</string>
+    <string name="replace_point_descr">Einen anderen Punkt durch diesen ersetzen</string>
+    <string name="changes_applied_to_profile">Die Änderungen wurden auf das %1$s Profil angewendet.</string>
+    <string name="settings_item_read_error">Konnte %1$s nicht lesen.</string>
+    <string name="settings_item_write_error">Konnte %1$s nicht schreiben.</string>
+    <string name="settings_item_import_error">Konnte %1$s nicht importieren.</string>
 </resources>
