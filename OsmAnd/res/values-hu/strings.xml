@@ -1691,7 +1691,7 @@ Hosszúság: %2$s</string>
     <string name="poi_deleted_localy">A POI törölve lesz, amint feltöltöd a változtatásokat</string>
     <string name="show_gpx">GPX adat megjelenítése</string>
     <string name="count_of_lines">Sorok száma</string>
-    <string name="are_you_sure">Biztos vagy benne?</string>
+    <string name="are_you_sure">Biztos benne\?</string>
     <string name="unsaved_changes_will_be_lost">A nem mentett változtatások el fognak veszni. Folytatod?</string>
     <string name="downloads_left_template">%1$s letöltés maradt</string>
     <string name="roads">Utak</string>
@@ -3532,4 +3532,7 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="app_mode_ski_touring">Túrasízés</string>
     <string name="app_mode_ski_snowmobile">Motoros hószán</string>
     <string name="custom_osmand_plugin">Egyéni OsmAnd bővítmény</string>
+    <string name="settings_item_read_error">%1$s olvasása sikertelen.</string>
+    <string name="settings_item_write_error">%1$s írása sikertelen.</string>
+    <string name="settings_item_import_error">%1$s importálása sikertelen.</string>
 </resources>
