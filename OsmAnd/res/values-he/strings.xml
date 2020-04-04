@@ -173,13 +173,13 @@
     <string name="map_online_data_descr">שימוש במפות מקוונות (הורדה ואחסון אריחי המפה בכרטיס הזיכרון).</string>
     <string name="shared_string_online_maps">מפות מקוונות</string>
     <string name="online_map_settings_descr">בחירת מקורות אריחי מפה מקוונים או שמורים.</string>
-    <string name="osmand_rastermaps_plugin_description">עם התוסף הזה ניתן לגשת למגוון סוגים של מפות מקוונות (נקראות גם אריחים או מעובדות), מאריחים מוגדרים מראש של OpenStreetMap (כמו למשל Mapnik) עד תמונות לוויין ושכבות מיוחדות כגון מפות מזג אוויר, מפות אקלים, מפות גאולוגיות, מפות הצללה ועוד. 
+    <string name="osmand_rastermaps_plugin_description">גישה למגוון סוגים של מפות מקוונות (נקראות גם אריחים או מעובדות), מאריחים מוגדרים מראש של OSM (כמו למשל Mapnik) עד תמונות לוויין ושכבות מיוחדות כגון מפות מזג אוויר, מפות אקלים, מפות גאולוגיות, שכבות הצללה ועוד.
 \n 
-\nכל אחת מהמפות האלה יכולה לשמש בתור המפה הראשית (בסיס) שתוצג במפה של OsmAnd או כשכבה מעל או מתחת למפת בסיס אחרת (כמו המפות התקניות הבלתי מקוונות של OsmAnd). כדי שניתן היה לראות את המפות שמתחת, ניתן להסתיר פריטים מסוימים במפות הווקטורים של OsmAnd דרך התפריט ‚הגדרת מפה’ לפי דרישתך. 
+\nכל אחת מהמפות האלה יכולה לשמש בתור המפה הראשית (בסיס) שתוצג או כשכבה מעל או מתחת למפת בסיס אחרת (כמו המפות התקניות הבלתי מקוונות של OsmAnd). ניתן להסתיר פריטים מסוימים במפות הווקטורים של OsmAnd דרך התפריט ‚הגדרת מפה’ כדי להפוך מפות רקע לגלויות יותר. 
 \n 
-\nמפות אריחים ניתן להוריד ישירות ממקורות מקוונים או שניתן להכין אותן לשימוש בלתי מקוון (ולהעתיק אותן לתיקיית הנתונים של OsmAnd) כמסד נתונים מסוג SQLite אותו ניתן לייצר על ידי מגוון כלי צד־שלישי להכנת מפות.</string>
+\n ניתן להוריד מפות אריחים ישירות באופן מקוון או שנערכו לשימוש בלתי מקוון (הועתקו ידנית לתיקיית הנתונים של OsmAnd) כמסד נתונים מסוג SQLite אותו ניתן לייצר על ידי מגוון כלי צד־שלישי להכנת מפות.</string>
     <string name="osmand_background_plugin_description">הצגת הגדרות להפעלת מעקב וניווט במצב רקע על ידי השכמת התקן ה־GPS מדי פעם בפעם (בזמן שהמסך כבוי).</string>
-    <string name="osmand_accessibility_description">תוסף זה הופך את תכונות הנגישות של ההתקן לזמינות ישירות ב־OsmAnd. התוסף מאפשר להגדיר את מהירות הדיבור של מנגנון הטקסט לדיבור, להגדיר ניווט בעזרת חצים על המסך, להשתמש בכדור מעקב לשליטה בתקריב או משוב של טקסט לדיבור, למשל לצורך הכרזה על המיקום שלך אוטומטית.</string>
+    <string name="osmand_accessibility_description">הופך את תכונות הנגישות של ההתקן לזמינות ישירות ב־OsmAnd. התוסף מאפשר להגדיר את מהירות הדיבור של מנגנון הטקסט לדיבור, להגדיר ניווט בעזרת חצים על המסך, להשתמש בכדור מעקב לשליטה בתקריב או משוב של טקסט לדיבור, למשל לצורך הכרזה על המיקום שלך אוטומטית.</string>
     <string name="osmand_development_plugin_description">הגדרות לתכונות פיתוח וניפוי שגיאות, הדמיית ניתוב, ביצועי עיבוד התמונה או התרעות קוליות. מיועד למפתחים ולא נחוץ לשימוש רגיל ביישומון.</string>
     <string name="plugins_screen">מנהל התוספים</string>
     <string name="prefs_plugins_descr">התוספים מאפשרים הגדרות במצב מומחה ומספקים תכונות נוספות.</string>
@@ -3078,7 +3078,7 @@
     <string name="select_base_profile_dialog_title">בחירת פרופיל להתחלה</string>
     <string name="process_downloading_service">שירות ההורדות של OsmAnd</string>
     <string name="press_again_to_change_the_map_orientation">יש לגעת שוב כדי לשנות את כיוון המפה</string>
-    <string name="default_speed_dialog_msg">משמש להערכת מועד ההגעה הצפוי בסוגי דרכים בלתי מוכרים ולמגבלות מהירות לכל הדרכים (עשוי להשפיע על המסלול)</string>
+    <string name="default_speed_dialog_msg">מעריך את מועד ההגעה בסוגי דרכים בלתי מוכרים ומגביל מהירות לכל הדרכים (עשוי להשפיע על המסלול)</string>
     <string name="new_profile">פרופיל חדש</string>
     <string name="shared_string_crash">קריסה</string>
     <string name="last_launch_crashed">הטעינה האחרונה של OsmAnd קרסה. נא לסייע לנו לשפר את OsmAnd על ידי שיתוף הודעת השגיאה.</string>
@@ -3377,7 +3377,7 @@
     <string name="track_saved">המסלול נשמר</string>
     <string name="empty_filename">שם הקובץ ריק</string>
     <string name="shared_string_revert">החזרה</string>
-    <string name="quick_action_directions_from_desc">כפתור למרכוז נקודת היציאה במסך וחישוב המסלול ליעד או לפתוח תיבת דו־שיח לבחירת היעד אם סמן היעד לא במפה.</string>
+    <string name="quick_action_directions_from_desc">כפתור להגדרת נקודת היציאה ממרכז המסך. לאחר מכן תופיע שאלה לבחור יעד או לחשב מסלול.</string>
     <string name="clear_confirmation_msg">למחוק %1$s\?</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">הצגת מסלולי אופניים של רשת מפרקים</string>
     <string name="download_map_dialog">דו־שיח הורדת מפה</string>
@@ -3400,7 +3400,7 @@
     <string name="shared_string_downloading_formatted">%s בהורדה</string>
     <string name="routing_attr_allow_classic_only_description">מסלולים שעבור גרומינג לסגנון קלסי רק ללא מסלולי ההחלקה. לרבות מסלולים שעברו גרומינג על ידי אופנוע שלג עם תוואי רופף ומסלולים שנסללו ידנית על ידי גולשי סקי.</string>
     <string name="routing_attr_difficulty_preference_description">להעדיף מסלולים ברמת הקושי הזו, למרות שניתוב דרך מסלולים קשים או קלים יותר עדיין אפשרי אם מדובר במסלולים יותר קצרים.</string>
-    <string name="routing_attr_freeride_policy_description">מסלולי גלישה חופשית ומחוץ לסימון הם מסלולים ומעברים בלתי רשמיים. בדרך כלל לא עברו גרומינג, אינם מתוחזקים באופן רשמי ואינם מפוקחים בשעות הערב. הכניסה על אחריותך בלבד.</string>
+    <string name="routing_attr_freeride_policy_description">מסלולי ‚גלישה חופשית’ ו‚מחוץ לסימון’ הם מסלולים ומעברים בלתי רשמיים. בדרך כלל לא עברו גרומינג, אינם מתוחזקים ואינם מפוקחים בשעות הערב. הכניסה על אחריותך בלבד.</string>
     <string name="rendering_value_thick_name">עבה</string>
     <string name="desert_render_descr">למדבריות ואזורים נוספים עם אוכלוסיה דלילה. פירוט מורחב.</string>
     <string name="select_navigation_icon">סמל מיקום בזמן תזוזה</string>
@@ -3592,4 +3592,11 @@
     <string name="monitoring_min_distance">תזוזה מזערית</string>
     <string name="multimedia_rec_split_title">פיצול מקליט</string>
     <string name="reset_plugin_to_default">איפוס הגדרות התוסף לבררת המחדל</string>
+    <string name="live_monitoring_tracking_interval">מרווח מעקב</string>
+    <string name="monitoring_min_distance_descr">מסנן זה מונע תיעוד כפילות של נקודות כשלא הייתה מספיק תנועה, יוצר תצוגה מרחבית נאה יותר של מסלולים שלא עוברים עיבוד לאחר מכן.</string>
+    <string name="replace_point_descr">החלפת נקודה אחרת בזו</string>
+    <string name="changes_applied_to_profile">השינויים על הפרופיל %1$s חלו.</string>
+    <string name="settings_item_read_error">לא ניתן לקרוא את %1$s.</string>
+    <string name="settings_item_write_error">לא ניתן לכתוב את %1$s.</string>
+    <string name="settings_item_import_error">לא ניתן לייבא את %1$s.</string>
 </resources>
