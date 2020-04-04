@@ -3786,4 +3786,5 @@
     <string name="poi_drinking_water_refill_yes">Áfylling drykkjarvatns: já</string>
     <string name="poi_drinking_water_refill_no">Áfylling drykkjarvatns: nei</string>
     <string name="poi_drinking_water_refill_network">Kerfi fyrir áfyllingu drykkjarvatns</string>
+    <string name="poi_tactile_paving_contrasted">Mislitt</string>
 </resources>
