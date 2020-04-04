@@ -3597,4 +3597,9 @@ Pôr do Sol: %2$s</string>
     <string name="app_mode_ski_touring">Passeio de esqui</string>
     <string name="app_mode_ski_snowmobile">Moto de neve</string>
     <string name="custom_osmand_plugin">Plug-in OsmAnd personalizado</string>
+    <string name="replace_point_descr">Substitua outro ponto por este</string>
+    <string name="changes_applied_to_profile">Alterações aplicadas ao perfil %1$s.</string>
+    <string name="settings_item_read_error">Não foi possível ler %1$s.</string>
+    <string name="settings_item_write_error">Não foi possível escrever %1$s.</string>
+    <string name="settings_item_import_error">Não foi possível importar %1$s.</string>
 </resources>
