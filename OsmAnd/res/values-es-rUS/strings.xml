@@ -3610,4 +3610,9 @@ Lon %2$s</string>
     <string name="app_mode_ski_touring">Esquí de travesía</string>
     <string name="app_mode_ski_snowmobile">Motonieve</string>
     <string name="custom_osmand_plugin">Complemento personalizado de OsmAnd</string>
+    <string name="replace_point_descr">Reemplaza otro punto con esto</string>
+    <string name="changes_applied_to_profile">Cambios aplicados al perfil «%1$s».</string>
+    <string name="settings_item_read_error">No se pudo leer «%1$s».</string>
+    <string name="settings_item_write_error">No se pudo escribir «%1$s».</string>
+    <string name="settings_item_import_error">No se pudo importar «%1$s».</string>
 </resources>
