@@ -149,4 +149,5 @@
     <string name="shared_string_password">Mot de passe</string>
     <string name="shared_string_distance">Distance</string>
     <string name="si_nm_h">Miles nautiques par heure (nœuds)</string>
+    <string name="by_name">Par nom</string>
 </resources>
