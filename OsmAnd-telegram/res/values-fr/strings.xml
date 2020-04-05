@@ -153,4 +153,5 @@
     <string name="send_location_as_descr">Sélectionnez l\'apparence des messages contenant votre position.</string>
     <string name="send_location_as">Envoyer la position</string>
     <string name="open_in_osmand">Afficher dans OsmAnd</string>
+    <string name="last_update_from_telegram">Dernière mise à jour depuis Telegram</string>
 </resources>
