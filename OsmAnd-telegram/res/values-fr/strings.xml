@@ -150,4 +150,7 @@
     <string name="shared_string_distance">Distance</string>
     <string name="si_nm_h">Miles nautiques par heure (nœuds)</string>
     <string name="by_name">Par nom</string>
+    <string name="send_location_as_descr">Sélectionnez l\'apparence des messages contenant votre position.</string>
+    <string name="send_location_as">Envoyer la position</string>
+    <string name="open_in_osmand">Afficher dans OsmAnd</string>
 </resources>
