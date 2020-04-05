@@ -3381,10 +3381,10 @@
     <string name="personal_category_name">Pessoal</string>
     <string name="shared_string_downloading_formatted">Descarregando %s</string>
     <string name="rendering_value_thick_name">Grosso</string>
-    <string name="desert_render_descr">Para desertos e outras áreas pouco povoadas. Exibe mais detalhes numa escala de visualização.</string>
+    <string name="desert_render_descr">Para desertos e outras áreas pouco povoadas. Mais detalhado.</string>
     <string name="select_navigation_icon">Ícone de posição durante a movimentação</string>
     <string name="select_map_icon">Ícone de posição em repouso</string>
-    <string name="delete_profiles_descr">Depois de tocar em Aplicar, os perfis eliminados serão completamente perdidos.</string>
+    <string name="delete_profiles_descr">Tocar em \'Aplicar\' apagará os perfis removidos permanentemente.</string>
     <string name="master_profile">Perfil principal</string>
     <string name="select_color">Selecione a cor</string>
     <string name="edit_profiles_descr">Não pode excluir perfis OsmAnd padrão, mas pode desativá-los no ecrã anterior, ou movê-los para o fundo.</string>
