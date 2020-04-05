@@ -3611,4 +3611,10 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_octagon">Ośmiokąt</string>
     <string name="app_mode_ski_touring">Turystyka narciarska</string>
     <string name="app_mode_ski_snowmobile">Skuter śnieżny</string>
+    <string name="replace_point_descr">Zastąp tym inny punkt</string>
+    <string name="custom_osmand_plugin">Niestandardowa wtyczka OsmAnd</string>
+    <string name="changes_applied_to_profile">Zmiany zastosowano do profilu %1$s.</string>
+    <string name="settings_item_read_error">Nie udało się przeczytać %1$s.</string>
+    <string name="settings_item_write_error">Nie udało się napisać %1$s.</string>
+    <string name="settings_item_import_error">Nie udało się zaimportować %1$s.</string>
 </resources>
