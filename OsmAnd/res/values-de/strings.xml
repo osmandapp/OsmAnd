@@ -1435,7 +1435,7 @@
     <string name="routing_attr_no_new_routing_name">Routing-Regeln v1.9 nicht verwenden</string>
     <string name="routing_attr_no_new_routing_description">Neuen Routenalgorithmus aus v1.9 nicht verwenden.</string>
     <string name="speak_pedestrian">Fußgängerübergänge</string>
-    <string name="parking_place">Parkplatz</string>
+    <string name="parking_place">Parkbucht</string>
     <string name="remove_the_tag">TAG ENTFERNEN</string>
     <string name="gps_status">GPS-Status</string>
     <string name="version_settings_descr">Nightly-Builds herunterladen.</string>
