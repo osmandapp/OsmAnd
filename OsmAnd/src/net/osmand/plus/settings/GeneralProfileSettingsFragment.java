@@ -354,8 +354,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String prefId = preference.getKey();
-		if (prefId.equals(settings.ROTATE_MAP.getId()) && newValue instanceof Serializable) {
-			applyChangeAndSuggestApplyToAllProfiles(prefId, (Serializable) newValue);
+		if (settings.ROTATE_MAP.getId().equals(prefId)) {
+			onApplyPreference(prefId, newValue, ApplyQueryType.SNACK_BAR);
 			return false;
 		}
 		return super.onPreferenceChange(preference, newValue);

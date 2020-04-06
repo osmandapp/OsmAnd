@@ -26,6 +26,8 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitmeListDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.ApplyQueryType;
+import net.osmand.plus.settings.OnApplyPreference;
 import net.osmand.plus.settings.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
@@ -109,19 +111,21 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 					@Override
 					public void onClick(View v) {
 						enabled = !enabled;
-						if (switchPref.callChangeListener(enabled)) {
-							sliderPositionChanged = false;
-							switchPref.setChecked(enabled);
-							preferenceBtn[0].setTitle(enabled ? on : off);
-							preferenceBtn[0].setTitleColorId(enabled ? activeColor : disabledColor);
-							preferenceBtn[0].setChecked(enabled);
-							getDefaultValue();
-							updateSliderView();
-							updateCustomButtonView(v, enabled);
-							Fragment target = getTargetFragment();
-							if (target instanceof OnPreferenceChanged) {
-								((OnPreferenceChanged) target).onPreferenceChanged(switchPref.getKey());
-							}
+						sliderPositionChanged = false;
+						switchPref.setChecked(enabled);
+						preferenceBtn[0].setTitle(enabled ? on : off);
+						preferenceBtn[0].setTitleColorId(enabled ? activeColor : disabledColor);
+						preferenceBtn[0].setChecked(enabled);
+						getDefaultValue();
+						updateSliderView();
+						updateCustomButtonView(v, enabled);
+						Fragment target = getTargetFragment();
+						float newValue = enabled ? DEFAULT_MODE : DISABLE_MODE;
+						if (target instanceof OnApplyPreference) {
+							((OnApplyPreference) target).onApplyPreference(switchPref.getKey(), newValue, ApplyQueryType.NONE);
+						}
+						if (target instanceof OnPreferenceChanged) {
+							((OnPreferenceChanged) target).onPreferenceChanged(switchPref.getKey());
 						}
 					}
 				})
@@ -152,11 +156,13 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 	@Override
 	protected void onRightBottomButtonClick() {
 		if (enabled && sliderPositionChanged) {
-			preference.setModeValue(getAppMode(), currentValue);
-		}
-		Fragment target = getTargetFragment();
-		if (target instanceof OnPreferenceChanged) {
-			((OnPreferenceChanged) target).onPreferenceChanged(preference.getId());
+			Fragment target = getTargetFragment();
+			if (target instanceof OnApplyPreference) {
+				((OnApplyPreference) target).onApplyPreference(preference.getId(), currentValue, ApplyQueryType.SNACK_BAR);
+			}
+			if (target instanceof OnPreferenceChanged) {
+				((OnPreferenceChanged) target).onPreferenceChanged(preference.getId());
+			}
 		}
 		dismiss();
 	}

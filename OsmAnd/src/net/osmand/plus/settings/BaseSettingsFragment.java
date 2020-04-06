@@ -83,7 +83,7 @@ import java.io.Serializable;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements OnPreferenceChangeListener,
-		OnPreferenceClickListener, AppModeChangedListener {
+		OnPreferenceClickListener, AppModeChangedListener, OnApplyPreference {
 
 	private static final Log LOG = PlatformUtil.getLog(BaseSettingsFragment.class);
 
@@ -113,42 +113,38 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		GLOBAL_SETTINGS(GlobalSettingsFragment.class.getName(), false, null, R.xml.global_settings, R.layout.global_preference_toolbar),
 		CONFIGURE_PROFILE(ConfigureProfileFragment.class.getName(), true, null, R.xml.configure_profile, R.layout.profile_preference_toolbar_with_switch),
 		PROXY_SETTINGS(ProxySettingsFragment.class.getName(), false, null, R.xml.proxy_preferences, R.layout.global_preferences_toolbar_with_switch),
-		GENERAL_PROFILE(GeneralProfileSettingsFragment.class.getName(), true, MessageType.BOTTOM_SHEET, R.xml.general_profile_settings, R.layout.profile_preference_toolbar),
-		NAVIGATION(NavigationFragment.class.getName(), true, MessageType.SNACK_BAR, R.xml.navigation_settings_new, R.layout.profile_preference_toolbar),
-		COORDINATES_FORMAT(CoordinatesFormatFragment.class.getName(), true, MessageType.BOTTOM_SHEET, R.xml.coordinates_format, R.layout.profile_preference_toolbar),
-		ROUTE_PARAMETERS(RouteParametersFragment.class.getName(), true, MessageType.SNACK_BAR, R.xml.route_parameters, R.layout.profile_preference_toolbar),
-		SCREEN_ALERTS(ScreenAlertsFragment.class.getName(), true, MessageType.SNACK_BAR, R.xml.screen_alerts, R.layout.profile_preference_toolbar_with_switch),
-		VOICE_ANNOUNCES(VoiceAnnouncesFragment.class.getName(), true, MessageType.SNACK_BAR, R.xml.voice_announces, R.layout.profile_preference_toolbar_with_switch),
-		VEHICLE_PARAMETERS(VehicleParametersFragment.class.getName(), true, MessageType.SNACK_BAR, R.xml.vehicle_parameters, R.layout.profile_preference_toolbar),
-		MAP_DURING_NAVIGATION(MapDuringNavigationFragment.class.getName(), true, MessageType.SNACK_BAR, R.xml.map_during_navigation, R.layout.profile_preference_toolbar),
-		TURN_SCREEN_ON(TurnScreenOnFragment.class.getName(), true, MessageType.SNACK_BAR, R.xml.turn_screen_on, R.layout.profile_preference_toolbar_with_switch),
+		GENERAL_PROFILE(GeneralProfileSettingsFragment.class.getName(), true, ApplyQueryType.BOTTOM_SHEET, R.xml.general_profile_settings, R.layout.profile_preference_toolbar),
+		NAVIGATION(NavigationFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.navigation_settings_new, R.layout.profile_preference_toolbar),
+		COORDINATES_FORMAT(CoordinatesFormatFragment.class.getName(), true, ApplyQueryType.BOTTOM_SHEET, R.xml.coordinates_format, R.layout.profile_preference_toolbar),
+		ROUTE_PARAMETERS(RouteParametersFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.route_parameters, R.layout.profile_preference_toolbar),
+		SCREEN_ALERTS(ScreenAlertsFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.screen_alerts, R.layout.profile_preference_toolbar_with_switch),
+		VOICE_ANNOUNCES(VoiceAnnouncesFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.voice_announces, R.layout.profile_preference_toolbar_with_switch),
+		VEHICLE_PARAMETERS(VehicleParametersFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.vehicle_parameters, R.layout.profile_preference_toolbar),
+		MAP_DURING_NAVIGATION(MapDuringNavigationFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.map_during_navigation, R.layout.profile_preference_toolbar),
+		TURN_SCREEN_ON(TurnScreenOnFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.turn_screen_on, R.layout.profile_preference_toolbar_with_switch),
 		DATA_STORAGE(DataStorageFragment.class.getName(), false, null, R.xml.data_storage, R.layout.global_preference_toolbar),
 		DIALOGS_AND_NOTIFICATIONS_SETTINGS(DialogsAndNotificationsSettingsFragment.class.getName(), false, null, R.xml.dialogs_and_notifications_preferences, R.layout.global_preferences_toolbar_with_switch),
 		PROFILE_APPEARANCE(ProfileAppearanceFragment.TAG, true, null, R.xml.profile_appearance, R.layout.profile_preference_toolbar),
 		OPEN_STREET_MAP_EDITING(OsmEditingFragment.class.getName(), false, null, R.xml.osm_editing, R.layout.global_preference_toolbar),
-		MULTIMEDIA_NOTES(MultimediaNotesFragment.class.getName(), true, MessageType.SNACK_BAR, R.xml.multimedia_notes, R.layout.profile_preference_toolbar),
-		MONITORING_SETTINGS(MonitoringSettingsFragment.class.getName(), true, MessageType.SNACK_BAR, R.xml.monitoring_settings, R.layout.profile_preference_toolbar),
+		MULTIMEDIA_NOTES(MultimediaNotesFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.multimedia_notes, R.layout.profile_preference_toolbar),
+		MONITORING_SETTINGS(MonitoringSettingsFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.monitoring_settings, R.layout.profile_preference_toolbar),
 		LIVE_MONITORING(LiveMonitoringFragment.class.getName(), false, null, R.xml.live_monitoring, R.layout.global_preferences_toolbar_with_switch),
-		ACCESSIBILITY_SETTINGS(AccessibilitySettingsFragment.class.getName(), true, MessageType.SNACK_BAR, R.xml.accessibility_settings, R.layout.profile_preference_toolbar),
+		ACCESSIBILITY_SETTINGS(AccessibilitySettingsFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.accessibility_settings, R.layout.profile_preference_toolbar),
 		DEVELOPMENT_SETTINGS(DevelopmentSettingsFragment.class.getName(), false, null, R.xml.development_settings, R.layout.global_preference_toolbar);
 
 		public final String fragmentName;
 		public final boolean profileDependent;
-		public final MessageType onChangeMessageType;
+		public final ApplyQueryType applyQueryType;
 		public final int preferencesResId;
 		public final int toolbarResId;
 
-		SettingsScreenType(String fragmentName, boolean profileDependent, MessageType onChangeMessageType, int preferencesResId, int toolbarResId) {
+		SettingsScreenType(String fragmentName, boolean profileDependent, ApplyQueryType applyQueryType, int preferencesResId, int toolbarResId) {
 			this.fragmentName = fragmentName;
 			this.profileDependent = profileDependent;
-			this.onChangeMessageType = onChangeMessageType;
+			this.applyQueryType = applyQueryType;
 			this.preferencesResId = preferencesResId;
 			this.toolbarResId = toolbarResId;
 		}
-	}
-
-	private enum MessageType {
-		SNACK_BAR, BOTTOM_SHEET
 	}
 
 	@Override
@@ -318,21 +314,26 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		MessageType messageType = getMessageType();
-		if (messageType != null) {
-			String prefId = preference.getKey();
+		return onApplyPreference(preference.getKey(), newValue, getApplyQueryType());
+	}
+
+	@Override
+	public boolean onApplyPreference(String prefId, Object newValue, ApplyQueryType applyQueryType) {
+		if (applyQueryType != null && newValue instanceof Serializable) {
 			OsmandSettings.OsmandPreference pref = settings.getPreference(prefId);
-			if (pref instanceof CommonPreference && !((CommonPreference) pref).hasDefaultValueForMode(getSelectedAppMode())) {
-				FragmentManager fragmentManager = getFragmentManager();
-				if (newValue instanceof Serializable) {
-					if (messageType == MessageType.SNACK_BAR) {
-						applyChangeAndSuggestApplyToAllProfiles(prefId, (Serializable) newValue);
-					} else if (messageType == MessageType.BOTTOM_SHEET && fragmentManager != null) {
+			if (pref instanceof CommonPreference) {
+				if (applyQueryType == ApplyQueryType.SNACK_BAR) {
+					applySettingWithSnackBar(prefId, (Serializable) newValue);
+				} else if (applyQueryType == ApplyQueryType.BOTTOM_SHEET) {
+					FragmentManager fragmentManager = getFragmentManager();
+					if (fragmentManager != null) {
 						ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager, prefId,
 								(Serializable) newValue, this, false, getSelectedAppMode());
 					}
+				} else if (applyQueryType == ApplyQueryType.NONE) {
+					onSettingApplied(prefId, newValue, false);
 				}
-				return false;
+				return true;
 			}
 		}
 		return true;
@@ -347,8 +348,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		return currentScreenType != null && currentScreenType.profileDependent;
 	}
 
-	public MessageType getMessageType() {
-		return currentScreenType != null ? currentScreenType.onChangeMessageType : null;
+	public ApplyQueryType getApplyQueryType() {
+		return currentScreenType != null ? currentScreenType.applyQueryType : null;
 	}
 
 	@Override
@@ -603,6 +604,14 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	public void onSettingApplied(String prefId, boolean appliedToAllProfiles) {
+	}
+
+	public void onSettingApplied(String prefId, Object newValue, boolean appliedToAllProfiles) {
+		if (appliedToAllProfiles) {
+			app.getSettings().setPreferenceForAllModes(prefId, newValue);
+		} else {
+			app.getSettings().setPreference(prefId, newValue, getSelectedAppMode());
+		}
 	}
 
 	public void updateAllSettings() {
@@ -895,9 +904,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 	}
 
-	protected void applyChangeAndSuggestApplyToAllProfiles(final String prefId, final Serializable newValue) {
-		app.getSettings().setPreference(prefId, newValue, getSelectedAppMode());
-		onSettingApplied(prefId, false);
+	protected void applySettingWithSnackBar(final String prefId, final Serializable newValue) {
+		onSettingApplied(prefId, newValue, false);
 		updateSetting(prefId);
 		View containerView = getView();
 		if (containerView != null) {
@@ -908,8 +916,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 					.setAction(R.string.apply_to_all_profiles, new View.OnClickListener() {
 						@Override
 						public void onClick(View view) {
-							app.getSettings().setPreferenceForAllModes(prefId, newValue);
-							onSettingApplied(prefId, true);
+							onSettingApplied(prefId, newValue, true);
 						}
 					});
 			snackbar.show();

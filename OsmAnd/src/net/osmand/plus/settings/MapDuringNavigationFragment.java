@@ -102,18 +102,38 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		if (preference.getKey().equals(settings.AUTO_ZOOM_MAP.getId())) {
+			onApplyPreference(settings.AUTO_ZOOM_MAP.getId(), newValue, ApplyQueryType.SNACK_BAR);
+			return true;
+		}
+		return super.onPreferenceChange(preference, newValue);
+	}
+
+	@Override
+	public void onSettingApplied(String prefId, Object newValue, boolean appliedToAllProfiles) {
+		if (settings.AUTO_ZOOM_MAP.getId().equals(prefId)) {
 			if (newValue instanceof Integer) {
 				ApplicationMode selectedMode = getSelectedAppMode();
 				int position = (int) newValue;
-				if (position == 0) {
-					settings.AUTO_ZOOM_MAP.setModeValue(selectedMode, false);
+				if (appliedToAllProfiles) {
+					if (position == 0) {
+						settings.setPreferenceForAllModes(settings.AUTO_ZOOM_MAP.getId(), false);
+					} else {
+						settings.setPreferenceForAllModes(settings.AUTO_ZOOM_MAP.getId(), true);
+						settings.setPreferenceForAllModes(settings.AUTO_ZOOM_MAP_SCALE.getId(),
+								OsmandSettings.AutoZoomMap.values()[position - 1]);
+					}
 				} else {
-					settings.AUTO_ZOOM_MAP.setModeValue(selectedMode, true);
-					settings.AUTO_ZOOM_MAP_SCALE.setModeValue(selectedMode, OsmandSettings.AutoZoomMap.values()[position - 1]);
+					if (position == 0) {
+						settings.AUTO_ZOOM_MAP.setModeValue(selectedMode, false);
+					} else {
+						settings.AUTO_ZOOM_MAP.setModeValue(selectedMode, true);
+						settings.AUTO_ZOOM_MAP_SCALE.setModeValue(selectedMode,
+								OsmandSettings.AutoZoomMap.values()[position - 1]);
+					}
 				}
-				return true;
+				return;
 			}
 		}
-		return super.onPreferenceChange(preference, newValue);
+		super.onSettingApplied(prefId, newValue, appliedToAllProfiles);
 	}
 }

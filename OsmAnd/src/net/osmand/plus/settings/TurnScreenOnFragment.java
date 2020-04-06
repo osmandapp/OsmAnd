@@ -43,8 +43,7 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 			public void onClick(View view) {
 				ApplicationMode selectedMode = getSelectedAppMode();
 				boolean checked = !settings.TURN_SCREEN_ON_ENABLED.getModeValue(selectedMode);
-				settings.TURN_SCREEN_ON_ENABLED.setModeValue(selectedMode, checked);
-				applyChangeAndSuggestApplyToAllProfiles(settings.TURN_SCREEN_ON_ENABLED.getId(), checked);
+				onApplyPreference(settings.TURN_SCREEN_ON_ENABLED.getId(), checked, ApplyQueryType.SNACK_BAR);
 				updateToolbarSwitch();
 				enableDisablePreferences(checked);
 			}

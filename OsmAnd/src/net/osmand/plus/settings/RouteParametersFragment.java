@@ -57,6 +57,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	private static final String ROUTE_PARAMETERS_INFO = "route_parameters_info";
 	private static final String ROUTE_PARAMETERS_IMAGE = "route_parameters_image";
 	private static final String RELIEF_SMOOTHNESS_FACTOR = "relief_smoothness_factor";
+	private static final String ROUTING_SHORT_WAY = "prouting_short_way";
 	private static final String ROUTING_RECALC_DISTANCE= "routing_recalc_distance";
 
 	public static final float DISABLE_MODE = -1.0f;
@@ -410,30 +411,45 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	}
 
 	@Override
-	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		String key = preference.getKey();
-
-		if ((RELIEF_SMOOTHNESS_FACTOR.equals(key) || DRIVING_STYLE.equals(key)) && newValue instanceof String) {
+	public void onSettingApplied(String prefId, Object newValue, boolean appliedToAllProfiles) {
+		if ((RELIEF_SMOOTHNESS_FACTOR.equals(prefId) || DRIVING_STYLE.equals(prefId)) && newValue instanceof String) {
 			ApplicationMode appMode = getSelectedAppMode();
 			String selectedParameterId = (String) newValue;
-			List<RoutingParameter> routingParameters = DRIVING_STYLE.equals(key) ? drivingStyleParameters : reliefFactorParameters;
+			List<RoutingParameter> routingParameters = DRIVING_STYLE.equals(prefId) ? drivingStyleParameters : reliefFactorParameters;
 			for (RoutingParameter p : routingParameters) {
 				String parameterId = p.getId();
 				SettingsNavigationActivity.setRoutingParameterSelected(settings, appMode, parameterId, p.getDefaultBoolean(), parameterId.equals(selectedParameterId));
 			}
 			recalculateRoute();
-			return true;
-		} else if ("prouting_short_way".equals(key) && newValue instanceof Boolean) {
-			return app.getSettings().FAST_ROUTE_MODE.setModeValue(getSelectedAppMode(), !(Boolean) newValue);
-		} else if (ROUTING_RECALC_DISTANCE.equals(key) && newValue instanceof Boolean) {
-			boolean enabled = (Boolean) newValue;
-			settings.ROUTE_RECALCULATION_DISTANCE.setModeValue(getSelectedAppMode(),
-					enabled ? DEFAULT_MODE : DISABLE_MODE);
-			settings.DISABLE_OFFROUTE_RECALC.setModeValue(getSelectedAppMode(), !enabled);
+			return;
+		} else if (ROUTING_SHORT_WAY.equals(prefId) && newValue instanceof Boolean) {
+			if (appliedToAllProfiles) {
+				settings.setPreferenceForAllModes(settings.FAST_ROUTE_MODE.getId(), !(Boolean) newValue);
+			} else {
+				settings.setPreference(settings.FAST_ROUTE_MODE.getId(), !(Boolean) newValue, getSelectedAppMode());
+			}
+			return;
+		} else if (ROUTING_RECALC_DISTANCE.equals(prefId)) {
+			boolean enabled = false;
+			float valueToSave = DISABLE_MODE;
+			if (newValue instanceof Boolean) {
+				enabled = (boolean) newValue;
+				valueToSave = enabled ? DEFAULT_MODE : DISABLE_MODE;
+			} else if (newValue instanceof Float) {
+				valueToSave = (float) newValue;
+				enabled = valueToSave != DISABLE_MODE;
+			}
+			if (appliedToAllProfiles) {
+				settings.setPreferenceForAllModes(prefId, valueToSave);
+				settings.setPreferenceForAllModes(settings.DISABLE_OFFROUTE_RECALC.getId(), !enabled);
+			} else {
+				settings.setPreference(prefId, valueToSave, getSelectedAppMode());
+				settings.setPreference(settings.DISABLE_OFFROUTE_RECALC.getId(), !enabled, getSelectedAppMode());
+			}
 			updateRouteRecalcDistancePref();
+			return;
 		}
-
-		return super.onPreferenceChange(preference, newValue);
+		super.onSettingApplied(prefId, newValue, appliedToAllProfiles);
 	}
 
 	@Override

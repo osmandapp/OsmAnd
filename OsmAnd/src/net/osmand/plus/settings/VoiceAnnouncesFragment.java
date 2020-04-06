@@ -50,8 +50,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 			public void onClick(View view) {
 				ApplicationMode selectedMode = getSelectedAppMode();
 				boolean checked = !settings.VOICE_MUTE.getModeValue(selectedMode);
-				settings.VOICE_MUTE.setModeValue(selectedMode, checked);
-				applyChangeAndSuggestApplyToAllProfiles(settings.VOICE_MUTE.getId(), checked);
+				onApplyPreference(settings.VOICE_MUTE.getId(), checked, ApplyQueryType.SNACK_BAR);
 				updateToolbarSwitch();
 				enableDisablePreferences(!checked);
 				updateMenu();
@@ -220,7 +219,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				settings.SPEAK_SPEED_CAMERA.setModeValue(getSelectedAppMode(), true);
+				onApplyPreference(settings.SPEAK_SPEED_CAMERA.getId(), true, ApplyQueryType.SNACK_BAR);
 				SwitchPreferenceCompat speakSpeedCamera = (SwitchPreferenceCompat) findPreference(settings.SPEAK_SPEED_CAMERA.getId());
 				if (speakSpeedCamera != null) {
 					speakSpeedCamera.setChecked(true);
@@ -269,11 +268,11 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 				return false;
 			} else if (newValue instanceof String) {
 				if (VOICE_PROVIDER_NOT_USE.equals(newValue)) {
-					settings.VOICE_MUTE.setModeValue(selectedMode, true);
+					onApplyPreference(settings.VOICE_MUTE.getId(), true, ApplyQueryType.SNACK_BAR);
 					updateToolbar();
-					setupPreferences();
+//					setupPreferences(); //TODO doesn't need anymore
 				}
-				settings.VOICE_PROVIDER.setModeValue(selectedMode, (String) newValue);
+				onApplyPreference(settings.VOICE_PROVIDER.getId(), newValue, ApplyQueryType.SNACK_BAR);
 				app.initVoiceCommandPlayer(getActivity(), selectedMode, false, null, true, false, false);
 			}
 			return true;
@@ -283,7 +282,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 				confirmSpeedCamerasDlg();
 				return false;
 			} else {
-				return true;
+				return onApplyPreference(settings.SPEAK_SPEED_CAMERA.getId(), false, ApplyQueryType.SNACK_BAR);
 			}
 		}
 		if (prefId.equals(settings.AUDIO_MANAGER_STREAM.getId())) {
