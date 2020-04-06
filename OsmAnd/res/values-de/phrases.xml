@@ -462,7 +462,7 @@
     <string name="poi_seamark_light_minor">Nebenleuchtfeuer</string>
     <string name="poi_seamark_light_vessel">Feuerschiff</string>
     <string name="poi_mooring">Liegeplatz</string>
-    <string name="poi_notice">Hinweis</string>
+    <string name="poi_notice">Schifffahrtszeichen</string>
     <string name="poi_pile">Pfahl</string>
     <string name="poi_radar_transponder">Radarsender</string>
     <string name="poi_radio_station">Funkstation</string>
