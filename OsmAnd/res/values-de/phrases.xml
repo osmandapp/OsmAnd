@@ -604,7 +604,7 @@
     <string name="poi_attraction_roller_coaster">Achterbahn</string>
     <string name="poi_attraction_slide">Rutschbahn</string>
     <string name="poi_attraction_summer_toboggan">Sommerrodelbahn</string>
-    <string name="poi_attraction_swing_carousel">Schaukel-Karussell</string>
+    <string name="poi_attraction_swing_carousel">Kettenkarussell</string>
     <string name="poi_attraction_train">Eisenbahn (Attraktion)</string>
     <string name="poi_attraction_water_slide">Wasserrutsche</string>
     <string name="poi_tower">Turm</string>
@@ -895,7 +895,7 @@
     <string name="poi_recycling_waste">Restmüll</string>
     <string name="poi_recycling_plastic_packaging">Kunststoffverpackungen</string>
     <string name="poi_recycling_newspaper">Zeitungen</string>
-    <string name="poi_recycling_cartons">Kartons</string>
+    <string name="poi_recycling_cartons">Kartonagen</string>
     <string name="poi_recycling_cardboard">Pappe</string>
     <string name="poi_recycling_magazines">Zeitschriften</string>
     <string name="poi_recycling_paper_packaging">Papierverpackungen</string>
@@ -957,10 +957,10 @@
     <string name="poi_recycling_cds">CDs</string>
     <string name="poi_recycling_waste_oil">Altöl</string>
     <string name="poi_recycling_sheet_metal">Blech</string>
-    <string name="poi_recycling_foil">Folie</string>
+    <string name="poi_recycling_foil">Folien</string>
     <string name="poi_recycling_drugs">Medikamente</string>
-    <string name="poi_recycling_chipboard">Spanplatte</string>
-    <string name="poi_recycling_plasterboard">Gipskartonplatte</string>
+    <string name="poi_recycling_chipboard">Spanplatten</string>
+    <string name="poi_recycling_plasterboard">Gipskartonplatten</string>
     <string name="poi_recycling_animal_waste">Tierischer Abfall</string>
     <string name="poi_monitoring_station">Überwachungsstation</string>
     <string name="poi_seasonal_yes">ja</string>
@@ -1276,7 +1276,7 @@
     <string name="poi_religion_spiritualist">Spiritualismus</string>
     <string name="poi_denomination_evangelical">Evangelikal</string>
     <string name="poi_denomination_mormon">Mormonen</string>
-    <string name="poi_denomination_jehovahs_witness">Jehovas Zeugen</string>
+    <string name="poi_denomination_jehovahs_witness">Zeugen Jehovas</string>
     <string name="poi_denomination_greek_catholic">Griechisch-katholisch</string>
     <string name="poi_denomination_bulgarian_orthodox">Bulgarisch-orthodox</string>
     <string name="poi_denomination_adventist">Adventisten</string>
