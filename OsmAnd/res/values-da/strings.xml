@@ -3593,4 +3593,5 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="settings_item_read_error">Kunne ikke læse %1$s.</string>
     <string name="settings_item_write_error">Kunne ikke skrive til %1$s.</string>
     <string name="settings_item_import_error">Kunne ikke importere %1$s.</string>
+    <string name="replace_point_descr">Erstat et andet punkt med dette</string>
 </resources>

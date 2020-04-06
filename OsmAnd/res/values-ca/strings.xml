@@ -144,7 +144,7 @@
     <string name="shared_string_accessibility">Accessibilitat</string>
     <string name="use_fluorescent_overlays_descr">Utilitza colors fluorescents per mostrar traces i rutes.</string>
     <string name="local_openstreetmap_uploading">S\'està pujant…</string>
-    <string name="show_warnings_descr">Configureu els advertiments de trànsit (límits de velocitat, cues, bandes rugoses, túnels), avisos de radars i informació dels carrils.</string>
+    <string name="show_warnings_descr">Configureu els avisos de trànsit (límits de velocitat, cues, bandes rugoses, túnels), avisos de radars i informació dels carrils.</string>
     <string name="osmand_parking_add_event">Afegeix un avís a Calendari</string>
     <string name="rendering_attr_noPolygons_description">Fes transparents totes les característiques d\'àrees de sòl al mapa.</string>
     <string name="edit_filter_create_message">S\'ha creat el filtre \'%1$s\'</string>
@@ -874,7 +874,7 @@
     <string name="shared_string_control_start">Comença</string>
     <string name="osmand_srtm_short_description_80_chars">Connector de l\'OsmAnd per a corbes de nivell fora de línia</string>
     <string name="map_widget_distancemeasurement">Mesura de distàncies</string>
-    <string name="audionotes_location_not_defined">Encara no teniu definida la localització de la nota. «Usa localització…» per assignar una nota a la localització especificada.</string>
+    <string name="audionotes_location_not_defined">Premeu «Usa localització…» per afegir una nota a la localització.</string>
     <string name="audionotes_plugin_description">Feu notes d\'àudio/fotografies/vídeo durant un trajecte, mitjançant un botó a la pantalla o directament al menú de localització contextual.</string>
     <string name="audionotes_plugin_name">Connector de notes d\'àudio</string>
     <string name="index_srtm_parts">peces</string>
@@ -915,7 +915,7 @@
     <string name="srtm_plugin_description">Aquest connector proporciona tant corbes de nivell superposades com una capa d\'ombres amb efecte relleu per superposar als mapes de OsmAnd. Corredors, ciclistes, excursionistes i qualsevol interessat en el perfil de relleu del terreny ho agrairan força. (Fixeu-vos que les corbes de nivell i/o els efectes de relleu són baixades independents i complementàries, disponibles un cop s\'hagi activat el connector). 
 \n 
 \nLes dades globals (entre 70 ° nord i 70 ° sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems).</string>
-    <string name="rendering_attr_showRoadMaps_description">Indiqueu quan mostrar mapes de només carreteres:</string>
+    <string name="rendering_attr_showRoadMaps_description">Trieu quan mostrar mapes de carreteres i prou:</string>
     <string name="auto_announce_on">Inicia els anuncis automàtics</string>
     <string name="send_location_email_pattern">Per a veure la localització seguiu l\'enllaç web %1$s o l\'enllaç Android %2$s</string>
     <string name="loading_builds_failed">L\'obtenció del llistat de versions de l\'OsmAnd ha fallat</string>
@@ -2152,12 +2152,12 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="quick_action_add_poi_descr">Un botó per afegir un PDI al centre de la pantalla.</string>
     <string name="quick_action_navigation_voice_descr">Un botó per activar o desactivar la orientació de veu durant la navegació.</string>
     <string name="quick_action_add_parking_descr">Un botó per afegir una posició d\'aparcament al centre de la pantalla.</string>
-    <string name="favorite_autofill_toast_text">" s\'ha desat a "</string>
+    <string name="favorite_autofill_toast_text">" desat a "</string>
     <string name="favorite_empty_place_name">Lloc</string>
-    <string name="quick_action_duplicates">El nom d\'acció directa indicat ja s\'està utilitzant, s\'ha canviat pel de %1$s per evitar duplicats.</string>
+    <string name="quick_action_duplicates">S\'ha canviat el nom d\'acció directa pel de %1$s per evitar duplicats.</string>
     <string name="quick_action_duplicate">El nom de l\'acció directa està duplicat</string>
-    <string name="quick_action_showhide_favorites_descr">Prement aquest botó d\'acció es mostra o s\'amaga els punts Preferits en el mapa.</string>
-    <string name="quick_action_showhide_poi_descr">Prement aquest botó d\'acció mostreu o amagueu els PDIs en el mapa.</string>
+    <string name="quick_action_showhide_favorites_descr">Un commutador per mostrar o amagar els punts Preferits en el mapa.</string>
+    <string name="quick_action_showhide_poi_descr">Un commutador per mostrar o amagar els PDIs en el mapa.</string>
     <string name="quick_action_showhide_favorites_title">Mostra/amaga Preferits</string>
     <string name="quick_action_favorites_show">Mostra Preferits</string>
     <string name="quick_action_favorites_hide">Amaga Preferits</string>
@@ -2171,8 +2171,8 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="quick_action_fav_name_descr">Deixeu-lo buit per utilitzar l\'adreça o el nom d\'un lloc.</string>
     <string name="quick_action_bug_descr">Aquest missatge s\'inclou en el camp de comentaris.</string>
     <string name="quick_action_bug_message">Missatge</string>
-    <string name="quick_action_category_descr">Seleccioneu la categoria on desar-hi el Preferit.</string>
-    <string name="quick_action_gpx_category_descr">Seleccioneu una categoria opcional.</string>
+    <string name="quick_action_category_descr">Categoria on desar-hi el Preferit:</string>
+    <string name="quick_action_gpx_category_descr">Trieu una categoria opcional.</string>
     <string name="quick_action_poi_list">Llista de PDI</string>
     <string name="quick_action_map_style_action">Afegiu un estil de mapa</string>
     <string name="quick_action_empty_param_error">Ompliu tots els paràmetres</string>
@@ -2192,8 +2192,8 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="quick_action_interim_dialog">Mostra un diàleg provisional</string>
     <string name="quick_action_sh_poi_descr">Afegiu una o més categories de PDI per mostrar-les al mapa.</string>
     <string name="shared_string_action_name">Nom de l\'acció</string>
-    <string name="quick_action_map_overlay_switch">La superposició del mapa s\'ha canviat a \"%s\".</string>
-    <string name="quick_action_map_underlay_switch">El fons del mapa s\'ha canviat a \"%s\".</string>
+    <string name="quick_action_map_overlay_switch">S\'ha canviat el mapa superposat a \"%s\".</string>
+    <string name="quick_action_map_underlay_switch">S\'ha canviat el mapa de fons a \"%s\".</string>
     <string name="navigate_point_olc">Codi de localització obert</string>
     <string name="navigate_point_olc_info_invalid">OLC no vàlid
 </string>
@@ -2201,7 +2201,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 Proporcioneu el codi complet</string>
     <string name="navigate_point_olc_info_area">OLC complet vàlid 
 Abasta l\'àrea: %1$s x %2$s</string>
-    <string name="quick_action_page_list_descr">Prement aquest botó d\'acció pagineu per la llista que segueix.</string>
+    <string name="quick_action_page_list_descr">Un botó per paginar la llista que segueix.</string>
     <string name="auto_split_recording_title">Divisió automàtica de les gravacions un cop aturades</string>
     <string name="auto_split_recording_descr">Comença un nou segment desprès de 6 min d\'interrupció, una traça nova si es superen les 2 hores o un nou fitxer si encara dura més i ha canviat la data.</string>
     <string name="rendering_attr_depthContours_description">Mostra isòbates i fondàries puntuals.</string>
@@ -2890,9 +2890,9 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="run_full_osmand_header">Voleu iniciar OsmAnd\?</string>
     <string name="lang_gn_py">Guaraní</string>
     <string name="quick_action_switch_day_night_descr">Un botó per canviar entre els modes diürn i nocturn d\'OsmAnd.</string>
-    <string name="quick_action_switch_day_mode">Mode Diürn</string>
-    <string name="quick_action_switch_night_mode">Mode Nocturn</string>
-    <string name="quick_action_day_night_switch_mode">Canvia mode Diürn/Nocturn</string>
+    <string name="quick_action_switch_day_mode">Mode diürn</string>
+    <string name="quick_action_switch_night_mode">Mode nocturn</string>
+    <string name="quick_action_day_night_switch_mode">Canvia mode diürn/nocturn</string>
     <string name="add_destination_point">Establiu destinació</string>
     <string name="add_intermediate_point">Afegeix punt intermedi</string>
     <string name="add_start_point">Establiu el punt inicial</string>
@@ -3416,7 +3416,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="added_profiles_descr">El connector ha afegit els perfils</string>
     <string name="shared_string_turn_off">Desactiva</string>
     <string name="new_plugin_added">S\'ha afegit un nou connector</string>
-    <string name="desert_render_descr">A deserts i altre àrees poc poblades. Mostra més detalls en una escala de visualització.</string>
+    <string name="desert_render_descr">Per deserts i altre àrees poc poblades. Més detallat.</string>
     <string name="routing_attr_width_name">Límit d\'amplada</string>
     <string name="routing_attr_width_description">Indica el límit d\'amplada de vehicle permesa en les rutes.</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Via aèria</string>
@@ -3610,4 +3610,9 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="slope_description">Les pistes es mostren sobre el terreny i amb colors.</string>
     <string name="download_slope_maps">Pistes</string>
     <string name="custom_osmand_plugin">Connector d\'OsmAnd adaptat</string>
+    <string name="replace_point_descr">Substitueix un altre punt per aquest</string>
+    <string name="changes_applied_to_profile">S\'han fet els canvis al perfil %1$s.</string>
+    <string name="settings_item_read_error">No s\'ha pogut llegir %1$s.</string>
+    <string name="settings_item_write_error">No s\'ha pogut escriure % 1$s.</string>
+    <string name="settings_item_import_error">No s\'ha pogut importar %1$s.</string>
 </resources>
