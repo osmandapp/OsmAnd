@@ -635,6 +635,4 @@ public class BinaryMapTransportReaderAdapter {
 			}
 		}
 	}
-
-
 }

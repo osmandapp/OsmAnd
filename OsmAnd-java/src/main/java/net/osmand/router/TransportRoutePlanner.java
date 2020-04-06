@@ -43,7 +43,7 @@ public class TransportRoutePlanner {
 		ctx.startCalcTime = System.currentTimeMillis();
 		List<TransportRouteSegment> startStops = ctx.getTransportStops(start);
 		List<TransportRouteSegment> endStops = ctx.getTransportStops(end);
-		
+		/** delete */System.out.println(String.format("startStops/endStops: %d / %d", startStops.size(), endStops.size()));
 		TLongObjectHashMap<TransportRouteSegment> endSegments = new TLongObjectHashMap<TransportRouteSegment>();
 		for(TransportRouteSegment s : endStops) {
 			endSegments.put(s.getId(), s);
@@ -57,8 +57,11 @@ public class TransportRoutePlanner {
 			r.distFromStart = r.walkDist / ctx.cfg.walkSpeed;
 			queue.add(r);
 		}
+		
+		/** delete */System.out.println(String.format("queue size: %d", queue.size()));
 		double finishTime = ctx.cfg.maxRouteTime;
 		double maxTravelTimeCmpToWalk = MapUtils.getDistance(start, end) / ctx.cfg.walkSpeed - ctx.cfg.changeTime / 2;
+		/** delete */System.out.println(String.format("queue size: %d", queue.size()));
 		List<TransportRouteSegment> results = new ArrayList<TransportRouteSegment>();
 		initProgressBar(ctx, start, end);
 		while (!queue.isEmpty()) {

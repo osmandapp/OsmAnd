@@ -130,9 +130,8 @@ public class NativeLibrary {
 		return closeBinaryMapFile(filePath);
 	}
 
-//todo
 	public NativeTransportRoutingResult[] runNativePTRouting(int sx31, int sy31, int ex31, int ey31,
-															 TransportRoutingConfiguration cfg, RouteCalculationProgress progress) {
+		TransportRoutingConfiguration cfg, RouteCalculationProgress progress) {
 		return nativeTransportRouting(new int[] { sx31, sy31, ex31, ey31 }, cfg, progress);
 	}
 
