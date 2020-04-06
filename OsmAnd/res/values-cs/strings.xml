@@ -3288,4 +3288,10 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="add_new_profile_q">Přidat nový profil „%1$s“\?</string>
     <string name="routing_attr_allow_classic_only_description">Trasy upravené pro klasické lyžování bez bruslení. Zahrnuje trasy upravené menšími sněžnými vozidly a stopy vytvořené samotnými lyžaři.</string>
     <string name="routing_attr_allow_skating_only_name">Povolit pouze trasy pro bruslení na lyžích</string>
+    <string name="app_mode_ski_snowmobile">Sněžný skútr</string>
+    <string name="custom_osmand_plugin">Vlastní modul pro OsmAnd</string>
+    <string name="changes_applied_to_profile">Změny aplikovány na profil %1$s.</string>
+    <string name="settings_item_read_error">Nelze přečíst %1$s.</string>
+    <string name="settings_item_write_error">Nelze zapsat %1$s.</string>
+    <string name="settings_item_import_error">Nelze importovat %1$s.</string>
 </resources>

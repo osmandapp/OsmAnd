@@ -21,6 +21,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AlertDialog.Builder;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -599,16 +600,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 
 	public static void showWarnings(final OsmandApplication app, List<String> warnings) {
 		if (!warnings.isEmpty()) {
-			final StringBuilder b = new StringBuilder();
-			boolean f = true;
-			for (String w : warnings) {
-				if (f) {
-					f = false;
-				} else {
-					b.append('\n');
-				}
-				b.append(w);
-			}
+			final StringBuilder b = AndroidUtils.formatWarnings(warnings);
 			app.runInUIThread(new Runnable() {
 				@Override
 				public void run() {

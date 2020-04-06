@@ -3791,4 +3791,20 @@
     <string name="poi_water_place_durability_durable">水場の耐久性: 永続使用可</string>
     <string name="poi_water_place_durability_emergency">水場の耐久性: 緊急時用</string>
     <string name="poi_video_telephone">ビデオ通話</string>
+    <string name="poi_tactile_paving_incorrect">正しく設置されていない点字ブロック</string>
+    <string name="poi_tactile_paving_primitive">非点字ブロックだが凹凸で判断可</string>
+    <string name="poi_tactile_paving_contrasted">一般的な点字ブロック</string>
+    <string name="poi_seamark_water_level_floods">水位:湿っている</string>
+    <string name="poi_seamark_water_level_dry">水位:常時乾燥</string>
+    <string name="poi_seamark_water_level_submerged">水位:常時水没</string>
+    <string name="poi_seamark_water_level_awash">水位:干潮時などは冠水</string>
+    <string name="poi_seamark_water_level_covers">水位:覆われること有り</string>
+    <string name="poi_seamark_water_level_part_submerged">水位:部分的に水没</string>
+    <string name="poi_seamark_obstruction">障害物</string>
+    <string name="poi_seamark_water_level_below_mwl">水位:平均水位より低め</string>
+    <string name="poi_seamark_water_level_above_mwl">水位:平均水位より高め</string>
+    <string name="poi_seamark_water_level_floating">水位:浮遊物</string>
+    <string name="poi_drinking_water_refill_network">飲料水補充ネットワーク(所属)</string>
+    <string name="poi_drinking_water_refill_no">飲料水の補充:不可</string>
+    <string name="poi_drinking_water_refill_yes">飲料水の補充:可</string>
 </resources>

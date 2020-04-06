@@ -1341,7 +1341,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="rendering_value_americanRoadAtlas_name">Atlante strade americane</string>
     <string name="routing_attr_no_new_routing_name">Ignora le regole di calcolo del percorso v1.9</string>
     <string name="routing_attr_no_new_routing_description">Non usare le regole di calcolo del percorso introdotte nella v1.9.</string>
-    <string name="traffic_warning_railways">Passaggio a livello</string>
+    <string name="traffic_warning_railways">Attraversamento ferroviario</string>
     <string name="traffic_warning_pedestrian">Attraversamento pedonale</string>
     <string name="show_railway_warnings">Passaggi a livello</string>
     <string name="show_pedestrian_warnings">Attraversamenti pedonali</string>
@@ -3589,5 +3589,31 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="quick_action_terrain_hide">Nascondi rilievo</string>
     <string name="quick_action_show_hide_terrain">Mostra/nascondi rilievo</string>
     <string name="download_slope_maps">Pendenze</string>
-    <string name="shared_string_hillshade">Rilievi ombra</string>
+    <string name="shared_string_hillshade">Ombreggiatura rilievi</string>
+    <string name="slope_read_more">Puoi avere maggiori informazioni sui Rilievi in %1$s.</string>
+    <string name="shared_string_min">Min</string>
+    <string name="replace_point_descr">Sostituisci un altro punto con questo</string>
+    <string name="app_mode_ski_touring">Sci alpino</string>
+    <string name="shared_string_rendering_style">Stile di rappresentazione</string>
+    <string name="shared_string_terrain">Terreno</string>
+    <string name="hillshade_description">La mappa Ombreggiamento dei rilievi utilizza le ombre per visualizzare le pendenze, i picchi e i bassipiani.</string>
+    <string name="slope_description">La pendenza è visualizzata sul terreno tramite colorazione.</string>
+    <string name="terrain_slider_description">Imposta lo zoom minimo e massimo a cui lo strato sarà visualizzato.</string>
+    <string name="hillshade_download_description">Sono necessarie mappe addizionali per visualizzare l\'Ombreggiatura dei rilievi sulla mappa.</string>
+    <string name="slope_download_description">Mappe addizionali sono necessarie per visualizzare i rilievi sulla mappa.</string>
+    <string name="shared_string_transparency">Trasparenza</string>
+    <string name="shared_string_zoom_levels">Livello di zoom</string>
+    <string name="shared_string_legend">Legenda</string>
+    <string name="terrain_empty_state_text">Abilitalo per vedere le mappe delle ombreggiature o dei rilievi. Maggiori informazioni su questi tipi di mappe nel nostro sito</string>
+    <string name="checking_for_duplicate_description">OsmAnd ricerca in %1$s oggetti esistenti duplicati nell\'applicazione.
+\n
+\nPuò richiedere del tempo.</string>
+    <string name="n_items_of_z">%1$s di %2$s</string>
+    <string name="shared_string_octagon">Ottagono</string>
+    <string name="app_mode_ski_snowmobile">Motoslitta</string>
+    <string name="custom_osmand_plugin">Componente aggiuntivo OsmAnd personalizzato</string>
+    <string name="changes_applied_to_profile">Modifiche applicate al profilo %1$s.</string>
+    <string name="settings_item_read_error">Non posso leggere %1$s.</string>
+    <string name="settings_item_write_error">Non posso scrivere %1$s.</string>
+    <string name="settings_item_import_error">Non posso importare %1$s.</string>
 </resources>

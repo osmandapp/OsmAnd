@@ -35,6 +35,7 @@ import net.osmand.plus.activities.HelpActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.ConfigureMenuRootFragment.ScreenType;
 import net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItem;
 
@@ -277,6 +278,9 @@ public class ContextMenuAdapter {
 					icon.setVisibility(View.INVISIBLE);
 					desc.setVisibility(View.GONE);
 				} else {
+					AndroidUiHelper.updateVisibility(icon, true);
+					AndroidUiHelper.updateVisibility(desc, true);
+					AndroidUtils.setTextPrimaryColor(app, title, nightMode);
 					icon.setImageDrawable(mIconsCache.getIcon(item.getIcon(), colorResId));
 					desc.setText(item.getDescription());
 					boolean selectedMode = tag == PROFILES_CHOSEN_PROFILE_TAG;

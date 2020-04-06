@@ -172,6 +172,16 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 	}
 
 	@Override
+	protected String getLastUsedGroup() {
+		OsmandApplication app = requireMyApplication();
+		String lastCategory = app.getSettings().LAST_FAV_CATEGORY_ENTERED.get();
+		if (!Algorithms.isEmpty(lastCategory) && !app.getFavorites().groupExists(lastCategory)) {
+			lastCategory = "";
+		}
+		return lastCategory;
+	}
+
+	@Override
 	public void setColor(int color) {
 		this.color = color;
 	}
@@ -290,10 +300,7 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 			if (editor.isNew()) {
 				doAddFavorite(name, category, description, color, backgroundType, iconId);
 			} else {
-				favorite.setColor(color);
-				favorite.setBackgroundType(backgroundType);
-				favorite.setIconId(iconId);
-				helper.editFavouriteName(favorite, name, category, description);
+				doEditFavorite(favorite, name, category, description, color, backgroundType, iconId, helper);
 			}
 		}
 		MapActivity mapActivity = getMapActivity();
@@ -310,6 +317,16 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 		if (menu.getLatLon() != null && menu.getLatLon().equals(latLon)) {
 			menu.update(latLon, favorite.getPointDescription(mapActivity), favorite);
 		}
+	}
+
+	private void doEditFavorite(FavouritePoint favorite, String name, String category, String description,
+	                            @ColorInt int color, BackgroundType backgroundType, @DrawableRes int iconId,
+	                            FavouritesDbHelper helper) {
+		requireMyApplication().getSettings().LAST_FAV_CATEGORY_ENTERED.set(category);
+		favorite.setColor(color);
+		favorite.setBackgroundType(backgroundType);
+		favorite.setIconId(iconId);
+		helper.editFavouriteName(favorite, name, category, description);
 	}
 
 	private void doAddFavorite(String name, String category, String description, @ColorInt int color,
@@ -433,9 +450,22 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 	public Set<String> getCategories() {
 		Set<String> categories = new LinkedHashSet<>();
 		FavouritesDbHelper helper = getHelper();
-		if (helper != null) {
-			for (FavouritesDbHelper.FavoriteGroup fg : getHelper().getFavoriteGroups()) {
-				categories.add(fg.getDisplayName(getMyApplication()));
+		if (helper != null && editor != null) {
+			OsmandApplication app = getMyApplication();
+			if (editor.isNew()) {
+				FavoriteGroup lastUsedGroup = helper.getGroup(getLastUsedGroup());
+				if (lastUsedGroup != null) {
+					categories.add(lastUsedGroup.getDisplayName(app));
+				}
+				for (FavouritesDbHelper.FavoriteGroup fg : getHelper().getFavoriteGroups()) {
+					if (lastUsedGroup != null && !fg.equals(lastUsedGroup)) {
+						categories.add(fg.getDisplayName(app));
+					}
+				}
+			} else {
+				for (FavoriteGroup fg : helper.getFavoriteGroups()) {
+					categories.add(fg.getDisplayName(app));
+				}
 			}
 		}
 		return categories;

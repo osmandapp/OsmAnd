@@ -507,45 +507,66 @@
     <string name="interrupt_music">Deter a música</string>
     <string name="osmand_play_title_30_chars">Mapas e navegación OsmAnd</string>
     <string name="osmand_short_description_80_chars">Visualización e navegación móbil de mapas globais do OSM con e sen conexión</string>
-    <string name="osmand_long_description_1000_chars">"OsmAnd (Indicacións de navegación automatizadas do OSM) 
+    <string name="osmand_long_description_1000_chars">"OsmAnd (Indicacións de navegación automatizadas do OSM)
 \n
-\n 
-\n  O OsmAnd é unha aplicación de navegación de código aberto con acceso a unha ampla variedade de datos globais do OSM. Tódolos mapas dos datos (mapas vectoriais ou teselas) poden seren almacenados no cartón de memoria do teléfono móbil para empregalos sen conexión. O OsmAnd tamen fornece a funcionalidade de cálculo de rotas sen conexión, incluíndo a guía por voz paso a paso. 
 \n
-\n 
-\n  Algunhas das funcións principais: 
 \n
-\n  - Funcionalidade completa sen conexión (os mapas vectoriais ou de teselas baixados almacénanse no cartafol que se escolla) 
 \n
-\n  - Mapas vectoriais compactos sen conexión para todo o mundo 
+\n O OsmAnd é unha aplicación de navegación de código aberto con acceso a unha ampla variedade de datos globais do OSM. Tódolos mapas dos datos (mapas vectoriais ou teselas) poden seren almacenados no cartón de memoria do teléfono móbil para empregalos sen conexión. O OsmAnd tamen fornece a funcionalidade de cálculo de rotas sen conexión, incluíndo a guía por voz paso a paso.
 \n
-\n  - Pódense baixar mapas de países ou rexións de xeito directo dende a aplicación 
 \n
-\n  - É posíbel sobrepór varias capas de mapas, coma pistas de GPX ou de navegación, puntos de interese (PDI), favoritos, curvas do nivel, paraxes de transporte público ou mapas adicionais con transparencia regulábel. 
 \n
-\n  - Procura sen conexión dos enderezos e lugares (PDI) 
 \n
-\n  - Cálculo de rotas sen conexión para distancias curtas (experimental) 
+\n Algunhas das funcións principais:
 \n
-\n  - Modos para automóbil, bicicleta e peóns, con: 
 \n
-\n  - Vistas de día e noite automatizadas opcionais 
+\n  - Funcionalidade completa sen conexión (os mapas vectoriais ou de teselas baixados almacénanse no cartafol que se escolla)
 \n
-\n  - Achegamento opcional do mapa dependendo da velocidade 
 \n
-\n  - Aliñamento opcional do mapa dependendo do compás ou da dirección do movemento 
+\n  - Mapas vectoriais compactos sen conexión para todo o mundo
 \n
-\n  - Guía opcional de faixas ou carrís da estrada, límites de velocidade, voces gravadas e TTS 
 \n
-\n 
-\n  Limitacións desta versión de balde do OsmAnd: 
+\n  - Pódense baixar mapas de países ou rexións de xeito directo dende a aplicación
 \n
-\n  - O número de mapas a baixar está limitado 
 \n
-\n  - Non hai acceso ós puntos de interese (PDI) da Wikipedia sen conexión 
+\n  - É posíbel sobrepór varias capas de mapas, coma pistas de GPX ou de navegación, puntos de interese (PDI), favoritos, curvas do nivel, paraxes de transporte público ou mapas adicionais con transparencia regulábel.
 \n
-\n 
-\n  O OsmAnd está a ser desenvolvido activamente e o noso proxecto e o seu progreso futuro depende da contribución financeira para financia-lo desenvolvemento e as probas das funcionalidades novas. Coida a posibilidade de merca-lo OsmAnd+ ou de financiar funcións novas específicas ou de facer unha doazón xeral no osmand.net."</string>
+\n
+\n  - Procura sen conexión dos enderezos e lugares (PDI)
+\n
+\n
+\n  - Cálculo de rotas sen conexión para distancias curtas (experimental)
+\n
+\n
+\n  - Modos para automóbil, bicicleta e peóns, con:
+\n
+\n
+\n  - Vistas de día e noite automatizadas opcionais
+\n
+\n
+\n  - Achegamento opcional do mapa dependendo da velocidade
+\n
+\n
+\n  - Aliñamento opcional do mapa dependendo do compás ou da dirección do movemento
+\n
+\n
+\n  - Guía opcional de faixas ou carrís da estrada, límites de velocidade, voces gravadas e TTS
+\n
+\n
+\n
+\n
+\n Limitacións desta versión de balde do OsmAnd:
+\n
+\n
+\n  - O número de mapas a baixar está limitado
+\n
+\n
+\n  - Non hai acceso ós puntos de interese (PDI) da Wikipedia sen conexión
+\n
+\n
+\n
+\n
+\n O OsmAnd está a ser desenvolvido activamente e o noso proxecto e o seu progreso futuro depende da contribución financeira para financia-lo desenvolvemento e as probas das funcionalidades novas. Coida a posibilidade de merca-lo OsmAnd+ ou de financiar funcións novas específicas ou de facer unha doazón xeral no osmand.net."</string>
     <string name="osmand_plus_play_title_30_chars">Mapas e navegación de OsmAnd+</string>
     <string name="osmand_plus_short_description_80_chars">Visualización e navegación móbil de mapas globais para mapas de OSM con e sen conexión</string>
     <string name="osmand_plus_long_description_1000_chars">O OsmAnd+ (Indicacións da navegación automatizadas do OSM) é un aplicativo de navegación de código aberto con acceso a unha ampla variedade de datos globais do OSM. Tódolos mapas dos datos (mapas vectoriais ou teselas) poden seren almacenados no cartón de memoria do teléfono para empregalos sen conexión. O OsmAnd tamén fornece funcionalidade de cálculo de rotas sen conexión, incluíndo a guía por voz paso a paso. 

@@ -178,7 +178,7 @@
 	<color name="row_selection_color">#CC33BBE0</color>
 
 	<!-- GPX analysis colors -->
-	<color name="gpx_color_point">#d00d0d</color>
+	<color name="gpx_color_point">#b4d00d0d</color>
 	<color name="gpx_speed">#c79c00</color>
 	<color name="gpx_altitude_desc">#32CD32</color>
 	<color name="gpx_altitude_asc">#EE3232</color>

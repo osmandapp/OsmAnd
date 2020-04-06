@@ -3348,7 +3348,7 @@ POIの更新は利用できません</string>
     <string name="app_mode_pickup_truck">ピックアップトラック</string>
     <string name="years_5">年</string>
     <string name="cancel_subscription">サブスクリプションの解除</string>
-    <string name="apply_preference_to_all_profiles">ここでの変更は選択したものはもちろん、すべてのプロファイルにも適用できます。</string>
+    <string name="apply_preference_to_all_profiles">ここで変更した設定は選択中のプロファイル・すべてのプロファイル、どちらにも適用可能です。</string>
     <string name="shared_preference">現在の設定</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">未舗装道路を優先</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">ルート検索時に、舗装道路よりも未舗装道路を優先します。</string>
@@ -3536,7 +3536,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_menu">メニュー</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">ルート検索</string>
-    <string name="shared_string_include_data">追加データを内包</string>
+    <string name="shared_string_include_data">追加データも含める</string>
     <string name="import_profile_dialog_description">インポートされたプロファイルには追加データが含まれています。 [インポート]をタップしてプロファイルデータのみをインポートするか、インポートする追加データを選択してください。</string>
     <string name="export_profile_dialog_description">プロファイルとともにエクスポートする追加データを選択できます。</string>
     <string name="index_name_antarctica">南極大陸</string>

@@ -11,10 +11,15 @@
 	Thx - Hardy
 
 -->
+    <string name="settings_item_import_error">Could not import %1$s.</string>
+    <string name="settings_item_write_error">Could not write %1$s.</string>
+    <string name="settings_item_read_error">Could not read %1$s.</string>
+    <string name="changes_applied_to_profile">Changes applied to %1$s profile.</string>
     <string name="shared_string_items">Items</string>
     <string name="custom_osmand_plugin">Custom OsmAnd plugin</string>
     <string name="app_mode_ski_snowmobile">Snowmobile</string>
     <string name="app_mode_ski_touring">Ski touring</string>
+    <string name="replace_point_descr">Replace another point with this</string>
     <string name="developer_plugin">Developer Plugin</string>
 	<string name="move_inside_category">You can move items only inside this category.</string>
 	<string name="additional_actions_descr">You can acsess this actions by taping “Actions” button.</string>

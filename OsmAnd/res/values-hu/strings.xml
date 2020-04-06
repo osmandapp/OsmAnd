@@ -1691,7 +1691,7 @@ Hosszúság: %2$s</string>
     <string name="poi_deleted_localy">A POI törölve lesz, amint feltöltöd a változtatásokat</string>
     <string name="show_gpx">GPX adat megjelenítése</string>
     <string name="count_of_lines">Sorok száma</string>
-    <string name="are_you_sure">Biztos vagy benne?</string>
+    <string name="are_you_sure">Biztos benne\?</string>
     <string name="unsaved_changes_will_be_lost">A nem mentett változtatások el fognak veszni. Folytatod?</string>
     <string name="downloads_left_template">%1$s letöltés maradt</string>
     <string name="roads">Utak</string>
@@ -3482,9 +3482,9 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="shared_string_rendering_style">Megjelenítés stílusa</string>
     <string name="shared_string_routing">Útvonaltervezés</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
-    <string name="use_system_screen_timeout_promo">Alapértelmezésben le van tiltva, amennyiben az OsmAnd az előtérben fut, a kijelző nem kapcsol ki.
-\n
-\nAmennyiben engedélyezve van, az OsmAnd az időtúllépésre voinatkozó rendszerbeállítást használja.</string>
+    <string name="use_system_screen_timeout_promo">Alapértelmezésben le van tiltva, így amennyiben az OsmAnd az előtérben fut, a kijelző nem kapcsol ki. 
+\n 
+\nAmennyiben engedélyezve van, az OsmAnd az időtúllépésre vonatkozó rendszerbeállítást használja.</string>
     <string name="use_system_screen_timeout">Kijelző időtűllépés rendszerbeállítás használata</string>
     <string name="copy_coordinates">Koordináták másolása</string>
     <string name="route_recalculation_dist_descr">Az útvonal újraszámításra kerül, amennyiben az útvonaltól való távolság több, mint a megadott paraméter</string>
@@ -3528,4 +3528,11 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="shared_string_square">Négyzet</string>
     <string name="shared_string_min">Min</string>
     <string name="clear_recorded_data">Rögzített adatok törlése</string>
+    <string name="terrain_empty_state_text">Engedélyezésével domborzatárnyékolás vagy lejtőtérkép jeleníthető meg. Ezekről a térképfajtákról többet olvashat a honlapunkon:</string>
+    <string name="app_mode_ski_touring">Túrasízés</string>
+    <string name="app_mode_ski_snowmobile">Motoros hószán</string>
+    <string name="custom_osmand_plugin">Egyéni OsmAnd bővítmény</string>
+    <string name="settings_item_read_error">%1$s olvasása sikertelen.</string>
+    <string name="settings_item_write_error">%1$s írása sikertelen.</string>
+    <string name="settings_item_import_error">%1$s importálása sikertelen.</string>
 </resources>

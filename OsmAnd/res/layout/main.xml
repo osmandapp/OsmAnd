@@ -107,18 +107,6 @@
             android:drawSelectorOnTop="false"
             android:layout_gravity="start"/>
 
-        <RelativeLayout
-            android:id="@+id/drawer_footer_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="start"
-            android:visibility="gone">
-
-            <include layout="@layout/powered_by_osmand_item"/>
-
-        </RelativeLayout>
     </RelativeLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

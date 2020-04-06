@@ -266,4 +266,5 @@
     <string name="last_update_from_telegram_duration">Viimane Telegram uuendus: %1$s tagasi</string>
     <string name="last_response_duration">Viimane vastus: %1$s tagasi</string>
     <string name="duration_ago">%1$s tagasi</string>
+    <string name="shared_string_error_short">ERR</string>
 </resources>

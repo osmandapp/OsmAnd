@@ -2252,7 +2252,7 @@
     <string name="search_street">Căutați strada</string>
     <string name="start_search_from_city">Selectați mai întâi orașul</string>
     <string name="shared_string_restore">Restaurați</string>
-    <string name="ask_for_location_permission">"Acordați OsmAnd acces la locație  pentru a continua."</string>
+    <string name="ask_for_location_permission">Acordați OsmAnd acces la locație pentru a continua.</string>
     <string name="thank_you_for_feedback">Mulțumim pentru părerea dvs</string>
     <string name="increase_search_radius_to">Creșteți raza de căutare la %1$s</string>
     <string name="shared_string_world">Lume</string>
@@ -2341,7 +2341,7 @@
     <string name="profile_alert_duplicate_name_msg">Există deja un profil cu un astfel de nume</string>
     <string name="profile_alert_cant_delete_base">Nu puteți șterge profile de bază OsmAnd</string>
     <string name="profile_alert_need_save_title">Salvați modificările</string>
-    <string name="profile_alert_need_save_msg">"Trebuie să salvați modificările  profilului înainte de a continua"</string>
+    <string name="profile_alert_need_save_msg">Trebuie să salvați modificările profilului înainte de a continua</string>
     <string name="profile_alert_delete_title">Ștergeți profilul</string>
     <string name="profile_alert_delete_msg">Sigur doriți să ștergeți profilul %s</string>
     <string name="select_base_profile_dialog_title">Selectați profilul cu care să începeți</string>
@@ -2400,7 +2400,7 @@
     <string name="rendering_value_white_name">Alb</string>
     <string name="route_start_point">Punct de plecare</string>
     <string name="unirs_render_descr">Modifica stilul implicit pentru a crește contrastul dintre drumurile pietonale și biciclete. Utilizează culori Mapnik.</string>
-    <string name="error_notification_desc">"Trimite o copie a  ecranului al acestei notificări către suport@osmand.net"</string>
+    <string name="error_notification_desc">Trimite o copie a ecranului al acestei notificări către suport@osmand.net</string>
     <string name="coord_input_save_as_track_descr">Ai adăugat puncte%1$s. Scrie un nume de fișier și apăsați \"Salvează\".</string>
     <string name="send_search_query_description">Cererea de căutare va fi trimisă la: \"%1$s\", împreună cu locația dumneavoastră.
 \nInformaţiile personale nu sunt colectate, doar datele de căutare necesare pentru a îmbunătăţi căutarea.</string>
@@ -2542,15 +2542,15 @@
     <string name="shared_string_crash">Blocat</string>
     <string name="last_launch_crashed">Ultima data OsnAnd s-a blocat. Varog săAjutati OsmAnd prin a trimite eroarea.</string>
     <string name="app_mode_ufo">OZN</string>
-    <string name="release_3_4">"• Creaza profile: creează un profil personalizat pentru nevoile tale, cu o pictogramă și o culoare personalizate
+    <string name="release_3_4">• Creaza profile: creează un profil personalizat pentru nevoile tale, cu o pictogramă și o culoare personalizate
 \n
 \n • Personalizați acum orice profil implicit și viteze min / max
 \n
 \n • A fost adăugat un widget pentru coordonatele actuale
 \n
-\n • Opțiuni adăugate pentru a afișa busola și o riglă  pe hartă
+\n • Opțiuni adăugate pentru a afișa busola și o riglă pe hartă
 \n
-\n • Remediat jurnalul de cale in  fundal
+\n • Remediat jurnalul de cale in fundal
 \n
 \n • Descărcări de hărți de fundal îmbunătățite
 \n
@@ -2562,7 +2562,7 @@
 \n
 \n • Alte bug-uri
 \n
-\n"</string>
+\n</string>
     <string name="app_mode_personal_transporter">Transportator personal</string>
     <string name="app_mode_monowheel">Monoroată</string>
     <string name="app_mode_scooter">Scuter</string>

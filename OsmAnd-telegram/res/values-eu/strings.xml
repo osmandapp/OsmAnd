@@ -202,7 +202,7 @@
     <string name="status_widget_title">OsmAnd Tracker-en egoera</string>
     <string name="back_to_osmand">Atzera OsmAnd-era</string>
     <string name="last_response_date">Azken erantzuna: %1$s</string>
-    <string name="last_update_from_telegram_duration">"Telegram-en azken eguneraketa duela  %1$s"</string>
+    <string name="last_update_from_telegram_duration">Telegram-en azken eguneraketa duela %1$s</string>
     <string name="last_response_duration">Azken erantzuna duela %1$s</string>
     <string name="duration_ago">duela %1$s</string>
 </resources>

@@ -49,6 +49,7 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CREATE_POI;
@@ -139,10 +140,12 @@ public class OsmEditingPlugin extends OsmandPlugin {
 //	private EditingPOIDialogProvider poiActions;
 
 	@Override
-	protected void registerQuickActionTypes(List<QuickActionType> quickActionTypes) {
+	protected List<QuickActionType> getQuickActionTypes() {
+		List<QuickActionType> quickActionTypes = new ArrayList<>();
 		quickActionTypes.add(AddPOIAction.TYPE);
 		quickActionTypes.add(AddOSMBugAction.TYPE);
 		quickActionTypes.add(ShowHideOSMBugAction.TYPE);
+		return quickActionTypes;
 	}
 
 	@Override
