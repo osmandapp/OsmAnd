@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
@@ -28,6 +26,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -35,6 +34,7 @@ import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.settings.ConfigureMenuRootFragment.ScreenType;
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
@@ -43,9 +43,7 @@ import net.osmand.plus.settings.RearrangeMenuItemsAdapter.MenuItemsAdapterListen
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
@@ -54,7 +52,8 @@ import static net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItemType
 import static net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItemType.DIVIDER;
 import static net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItemType.HEADER;
 
-public class ConfigureMenuItemsFragment extends BaseOsmAndFragment {
+public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
+		implements SelectCopyAppModeBottomSheet.CopyAppModePrefsListener {
 
 	public static final String TAG = ConfigureMenuItemsFragment.class.getName();
 	private static final String ITEM_TYPE_KEY = "item_type_key";
@@ -65,6 +64,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment {
 	private HashMap<String, Integer> menuItemsOrder;
 	private ContextMenuAdapter contextMenuAdapter;
 	private List<String> hiddenMenuItems;
+	private ApplicationMode appMode;
 	private LayoutInflater mInflater;
 	private OsmandApplication app;
 	private ScreenType screenType;
@@ -94,6 +94,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment {
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
+		appMode = app.getSettings().getApplicationMode();
 		nightMode = !app.getSettings().isLightContent();
 		mInflater = UiUtilities.getInflater(app, nightMode);
 		Activity activity = getActivity();
@@ -217,13 +218,8 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment {
 		applyButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-//				if (wasReset) {
-//					contextMenuAdapter.resetMenuItems(app, screenType);
-//				} else {
 					HashMap<String, Serializable> prefsMap = new HashMap<>();
 					prefsMap.put(contextMenuAdapter.getPrefIdHidden(app, screenType), (Serializable) hiddenMenuItems);
-//					contextMenuAdapter.saveHiddenItemsIds(app, screenType, hiddenMenuItems);
-
 					List<ContextMenuItem> defItems = contextMenuAdapter.getDefaultItems(screenType);
 					contextMenuAdapter.reorderMenuItems(defItems, menuItemsOrder);
 					List<String> ids = new ArrayList<>();
@@ -231,9 +227,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment {
 						ids.add(item.getId());
 					}
 					prefsMap.put(contextMenuAdapter.getPrefIdOrder(app, screenType), (Serializable) ids);
-
 					FragmentManager fm = getFragmentManager();
-					ApplicationMode appMode = app.getSettings().getApplicationMode();
 					if (fm != null) {
 						ChangeGeneralProfilesPrefBottomSheet.showInstance(
 								fm,
@@ -253,9 +247,6 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment {
 									}
 								});
 					}
-//					contextMenuAdapter.saveItemsIdsOrder(app, screenType, ids);
-//				}
-//				dismissFragment();
 			}
 		});
 		if (Build.VERSION.SDK_INT >= 21) {
@@ -317,7 +308,15 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment {
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-
+						FragmentManager fm = getFragmentManager();
+						if (fm != null) {
+							SelectCopyAppModeBottomSheet.showInstance(
+									fm,
+									ConfigureMenuItemsFragment.this,
+									false,
+									appMode
+							);
+						}
 					}
 				})));
 		return items;
@@ -355,5 +354,28 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment {
 
 	private void setScreenType(@NonNull ScreenType screenType) {
 		this.screenType = screenType;
+	}
+
+	@Override
+	public void copyAppModePrefs(ApplicationMode appMode) {
+		if (appMode != null) {
+			List<OsmandSettings.OsmandPreference> prefs = new ArrayList<>();
+			switch (screenType) {
+				case DRAWER:
+					prefs.add(app.getSettings().DRAWER_ITEMS_ORDER);
+					prefs.add(app.getSettings().HIDDEN_DRAWER_ITEMS);
+					break;
+				case CONFIGURE_MAP:
+					prefs.add(app.getSettings().CONFIGURE_MAP_ITEMS_ORDER);
+					prefs.add(app.getSettings().HIDDEN_CONFIGURE_MAP_ITEMS);
+					break;
+				case CONTEXT_MENU_ACTIONS:
+					prefs.add(app.getSettings().CONTEXT_MENU_ACTIONS_ITEMS_ORDER);
+					prefs.add(app.getSettings().HIDDEN_CONTEXT_MENU_ACTIONS_ITEMS);
+					break;
+			}
+			app.getSettings().copyProfilePreferences(appMode, this.appMode, prefs);
+			dismissFragment();
+		}
 	}
 }

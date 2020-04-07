@@ -414,7 +414,7 @@ public class OsmandSettings {
 				}
 			} else if (preference instanceof ListStringPreference) {
 				if (value instanceof List) {
-					((ListStringPreference) preference).setModeValue(mode, (List<String>) value);
+					((ListStringPreference) preference).setModeValues(mode, (List<String>) value);
 					return true;
 				}
 			} else if (preference instanceof StringPreference) {
@@ -1084,9 +1084,9 @@ public class OsmandSettings {
 			}
 		}
 
-		public boolean setModeValue(ApplicationMode mode, List<String> values) {
+		public boolean setModeValues(ApplicationMode mode, List<String> values) {
 			if (values == null || values.size() == 0) {
-				set(null);
+				setModeValue(mode,null);
 				return false;
 			}
 			clearAll();
