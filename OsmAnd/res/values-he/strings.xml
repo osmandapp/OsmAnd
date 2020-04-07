@@ -3599,4 +3599,6 @@
     <string name="settings_item_read_error">לא ניתן לקרוא את %1$s.</string>
     <string name="settings_item_write_error">לא ניתן לכתוב את %1$s.</string>
     <string name="settings_item_import_error">לא ניתן לייבא את %1$s.</string>
+    <string name="monitoring_min_speed_descr">זה מסנן שחותך מהירויות נמוכות כדי לא להקליט נקודות מתחת למהירות מסוימת. הפעלת המסנן תגרום לכך שהמסלולים ייראו חלקים יותר כשמסתכלים על המפה.</string>
+    <string name="app_mode_ski_touring">טיולי סקי</string>
 </resources>
