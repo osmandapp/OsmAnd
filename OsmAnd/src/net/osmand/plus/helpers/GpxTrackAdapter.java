@@ -29,21 +29,21 @@ import java.util.List;
 public class GpxTrackAdapter extends RecyclerView.Adapter<GpxTrackAdapter.TrackViewHolder> {
 
 	private LayoutInflater themedInflater;
-	private List<GpxUiHelper.GPXInfo> myImageNameList;
+	private List<GpxUiHelper.GPXInfo> gpxInfoList;
 	private OsmandApplication app;
 	private boolean showCurrentGpx;
 	private OnItemClickListener onItemClickListener;
 	private UiUtilities iconsCache;
 
 
-	GpxTrackAdapter(Activity activity, List<GpxUiHelper.GPXInfo> myImageNameList, boolean showCurrentGpx,
+	GpxTrackAdapter(Activity activity, List<GpxUiHelper.GPXInfo> gpxInfoList, boolean showCurrentGpx,
 	                OnItemClickListener onItemClickListener) {
 		this.showCurrentGpx = showCurrentGpx;
 		this.onItemClickListener = onItemClickListener;
 		app = (OsmandApplication) activity.getApplication();
-		boolean nightMode = !app.getSettings().isLightContent();
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		themedInflater = UiUtilities.getInflater(activity, nightMode);
-		this.myImageNameList = myImageNameList;
+		this.gpxInfoList = gpxInfoList;
 		iconsCache = app.getUIUtilities();
 	}
 
@@ -61,23 +61,29 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<GpxTrackAdapter.TrackV
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull GpxTrackAdapter.TrackViewHolder holder, final int position) {
+	public void onBindViewHolder(@NonNull final GpxTrackAdapter.TrackViewHolder holder, final int position) {
 		boolean currentlyRecordingTrack = (showCurrentGpx && position == 0);
 		if (currentlyRecordingTrack) {
 			holder.icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_track_recordable));
 		} else {
 			holder.icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_polygom_dark));
 		}
-		GpxUiHelper.GPXInfo info = myImageNameList.get(position);
+		final int adapterPosition = holder.getAdapterPosition();
+		GpxUiHelper.GPXInfo info = gpxInfoList.get(adapterPosition);
 		GPXDatabase.GpxDataItem dataItem = getDataItem(info);
 		String itemTitle = GpxUiHelper.getGpxTitle(info.getFileName());
 		updateGpxInfoView(holder, itemTitle, info, dataItem, currentlyRecordingTrack, app);
-		holder.bind(position, onItemClickListener);
+		holder.itemView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				onItemClickListener.onItemClick(adapterPosition);
+			}
+		});
 	}
 
 	@Override
 	public int getItemCount() {
-		return myImageNameList.size();
+		return gpxInfoList.size();
 	}
 
 	private void updateGpxInfoView(TrackViewHolder holder, String itemTitle, GpxUiHelper.GPXInfo info,
@@ -142,15 +148,6 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<GpxTrackAdapter.TrackV
 			readSection = itemView.findViewById(R.id.read_section);
 			unknownSection = itemView.findViewById(R.id.unknown_section);
 			dateAndSize = itemView.findViewById(R.id.date_and_size_details);
-		}
-
-		void bind(final int position, final OnItemClickListener onItemClickListener) {
-			itemView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					onItemClickListener.onItemClick(position);
-				}
-			});
 		}
 	}
 

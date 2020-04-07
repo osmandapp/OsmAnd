@@ -28,8 +28,8 @@
 		android:layout_marginRight="@dimen/list_content_padding"
 		android:layout_weight="1"
 		android:orientation="vertical"
-		android:paddingTop="12dp"
-		android:paddingBottom="12dp">
+		android:paddingTop="@dimen/content_padding_small"
+		android:paddingBottom="@dimen/content_padding_small">
 
 		<TextView
 			android:id="@+id/name"
@@ -44,8 +44,8 @@
 			android:id="@+id/read_section"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:paddingTop="2dp"
-			android:paddingBottom="2dp"
+			android:paddingTop="@dimen/subHeaderPadding"
+			android:paddingBottom="@dimen/subHeaderPadding"
 			android:gravity="center_vertical"
 			android:orientation="horizontal"
 			android:visibility="visible">
@@ -54,8 +54,8 @@
 				android:id="@+id/distance_icon"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginEnd="@dimen/gpx_select_small_icon_end_margin"
-				android:layout_marginRight="@dimen/gpx_select_small_icon_end_margin"
+				android:layout_marginEnd="@dimen/content_padding_half"
+				android:layout_marginRight="@dimen/content_padding_half"
 				android:src="@drawable/ic_action_distance_16"
 				android:contentDescription="@string/distance" />
 
@@ -63,8 +63,8 @@
 				android:id="@+id/distance"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginEnd="@dimen/gpx_select_small_text_end_margin"
-				android:layout_marginRight="@dimen/gpx_select_small_text_end_margin"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:layout_marginRight="@dimen/content_padding"
 				android:textColor="?android:textColorSecondary"
 				android:textSize="@dimen/default_desc_text_size" />
 
@@ -72,8 +72,8 @@
 				android:id="@+id/points_icon"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginEnd="@dimen/gpx_select_small_icon_end_margin"
-				android:layout_marginRight="@dimen/gpx_select_small_icon_end_margin"
+				android:layout_marginEnd="@dimen/content_padding_half"
+				android:layout_marginRight="@dimen/content_padding_half"
 				android:src="@drawable/ic_action_waypoint_16"
 				android:contentDescription="@string/track_points" />
 
@@ -81,8 +81,8 @@
 				android:id="@+id/points_count"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginEnd="@dimen/gpx_select_small_text_end_margin"
-				android:layout_marginRight="@dimen/gpx_select_small_text_end_margin"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:layout_marginRight="@dimen/content_padding"
 				android:textColor="?android:textColorSecondary"
 				android:textSize="@dimen/default_desc_text_size"
 				tools:text="0" />
@@ -91,8 +91,8 @@
 				android:id="@+id/time_icon"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginEnd="@dimen/gpx_select_small_icon_end_margin"
-				android:layout_marginRight="@dimen/gpx_select_small_icon_end_margin"
+				android:layout_marginEnd="@dimen/content_padding_half"
+				android:layout_marginRight="@dimen/content_padding_half"
 				android:src="@drawable/ic_action_time_16"
 				android:contentDescription="@string/shared_string_time_moving" />
 
@@ -100,8 +100,8 @@
 				android:id="@+id/time"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginEnd="@dimen/gpx_select_small_text_end_margin"
-				android:layout_marginRight="@dimen/gpx_select_small_text_end_margin"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:layout_marginRight="@dimen/content_padding"
 				android:textColor="?android:textColorSecondary"
 				android:textSize="@dimen/default_desc_text_size" />
 

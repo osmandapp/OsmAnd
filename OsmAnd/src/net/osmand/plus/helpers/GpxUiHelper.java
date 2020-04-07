@@ -356,7 +356,7 @@ public class GpxUiHelper {
 											final List<GPXInfo> list,
 											final ContextMenuAdapter adapter) {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
-		boolean nightMode = !app.getSettings().isLightContent();
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		final View customLayout = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.gpx_track_select_dialog, null);
 		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
 		builder.setView(customLayout);
