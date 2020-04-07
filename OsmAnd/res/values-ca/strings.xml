@@ -3613,6 +3613,6 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="replace_point_descr">Substitueix un altre punt per aquest</string>
     <string name="changes_applied_to_profile">S\'han fet els canvis al perfil %1$s.</string>
     <string name="settings_item_read_error">No s\'ha pogut llegir %1$s.</string>
-    <string name="settings_item_write_error">No s\'ha pogut escriure % 1$s.</string>
+    <string name="settings_item_write_error">No s\'ha pogut escriure %1$s.</string>
     <string name="settings_item_import_error">No s\'ha pogut importar %1$s.</string>
 </resources>
