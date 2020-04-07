@@ -21,10 +21,8 @@ import net.osmand.plus.activities.SettingsBaseActivity;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.AUDIO_BITRATE_DEFAULT;
 import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_AUTO;
@@ -78,105 +76,8 @@ public class SettingsAudioVideoActivity extends SettingsBaseActivity {
 						R.string.av_use_external_camera_descr));
 
 				Parameters parameters = cam.getParameters();
-
-				// Photo picture size
-				// get supported sizes
-				List<Camera.Size> psps = parameters.getSupportedPictureSizes();
-				// list of megapixels of each resolution
-				List<Integer> mpix = new ArrayList<Integer>();
-				// list of index each resolution in list, returned by getSupportedPictureSizes()
-				List<Integer> picSizesValues = new ArrayList<Integer>();
-				// fill lists for sort
-				for (int index = 0; index < psps.size(); index++) {
-					mpix.add((psps.get(index)).width * (psps.get(index)).height);
-					picSizesValues.add(index);
-				}
-				// sort list for max resolution in begining of list
-				for (int i = 0; i < mpix.size(); i++) {
-					for (int j = 0; j < mpix.size() - i - 1; j++) {
-						if (mpix.get(j) < mpix.get(j + 1)) {
-							// change elements
-							int tmp = mpix.get(j + 1);
-							mpix.set(j + 1, mpix.get(j));
-							mpix.set(j, tmp);
-
-							tmp = picSizesValues.get(j + 1);
-							picSizesValues.set(j + 1, picSizesValues.get(j));
-							picSizesValues.set(j, tmp);
-						}
-					}
-				}
-				// set default photo size to max resolution (set index of element with max resolution in List, returned by getSupportedPictureSizes() )
-				cameraPictureSizeDefault = picSizesValues.get(0);
-				log.debug("onCreate() set cameraPictureSizeDefault=" + cameraPictureSizeDefault);
-
-				List<String> itemsPicSizes = new ArrayList<String>();
-				String prefix;
-				for (int index = 0; index < psps.size(); index++) {
-					float px = (float) ((psps.get(picSizesValues.get(index))).width * (psps.get(picSizesValues.get(index))).height);
-					if (px > 102400) // 100 K
-					{
-						px = px / 1048576;
-						prefix = "Mpx";
-					} else {
-						px = px / 1024;
-						prefix = "Kpx";
-					}
-
-					itemsPicSizes.add((psps.get(picSizesValues.get(index))).width +
-							"x" +
-							(psps.get(picSizesValues.get(index))).height +
-							" ( " +
-							String.format("%.2f", px) +
-							" " +
-							prefix +
-							" )");
-				}
-				log.debug("onCreate() set default size: width=" + psps.get(cameraPictureSizeDefault).width + " height="
-						+ psps.get(cameraPictureSizeDefault).height + " index in ps=" + cameraPictureSizeDefault);
-
-				entries = itemsPicSizes.toArray(new String[itemsPicSizes.size()]);
-				intValues = picSizesValues.toArray(new Integer[picSizesValues.size()]);
-				if (entries.length > 0) {
-					ListPreference camSizes = createListPreference(p.AV_CAMERA_PICTURE_SIZE, entries, intValues, R.string.av_camera_pic_size,
-							R.string.av_camera_pic_size_descr);
-					photo.addPreference(camSizes);
-				}
-
-				// focus mode settings
-				// show in menu only suppoted modes
-				List<String> sfm = parameters.getSupportedFocusModes();
-				List<String> items = new ArrayList<String>();
-				List<Integer> itemsValues = new ArrayList<Integer>();
-				// filtering known types for translate and set index
-				for (int index = 0; index < sfm.size(); index++) {
-					if (sfm.get(index).equals("auto")) {
-						items.add(getString(R.string.av_camera_focus_auto));
-						itemsValues.add(AV_CAMERA_FOCUS_AUTO);
-					} else if (sfm.get(index).equals("fixed")) {
-						items.add(getString(R.string.av_camera_focus_hiperfocal));
-						itemsValues.add(AV_CAMERA_FOCUS_HIPERFOCAL);
-					} else if (sfm.get(index).equals("edof")) {
-						items.add(getString(R.string.av_camera_focus_edof));
-						itemsValues.add(AV_CAMERA_FOCUS_EDOF);
-					} else if (sfm.get(index).equals("infinity")) {
-						items.add(getString(R.string.av_camera_focus_infinity));
-						itemsValues.add(AV_CAMERA_FOCUS_INFINITY);
-					} else if (sfm.get(index).equals("macro")) {
-						items.add(getString(R.string.av_camera_focus_macro));
-						itemsValues.add(AV_CAMERA_FOCUS_MACRO);
-					} else if (sfm.get(index).equals("continuous-picture")) {
-						items.add(getString(R.string.av_camera_focus_continuous));
-						itemsValues.add(AV_CAMERA_FOCUS_CONTINUOUS);
-					}
-				}
-				entries = items.toArray(new String[items.size()]);
-				intValues = itemsValues.toArray(new Integer[itemsValues.size()]);
-				if (entries.length > 0) {
-					ListPreference camFocus = createListPreference(p.AV_CAMERA_FOCUS_TYPE, entries, intValues, R.string.av_camera_focus,
-							R.string.av_camera_focus_descr);
-					photo.addPreference(camFocus);
-				}
+				createCameraPictureSizesPref(p, photo, parameters);
+				createCameraFocusModesPref(p, photo, parameters);
 
 				// play sound on success photo
 				photo.addPreference(createCheckBoxPreference(p.AV_PHOTO_PLAY_SOUND, R.string.av_photo_play_sound,
@@ -306,6 +207,119 @@ public class SettingsAudioVideoActivity extends SettingsBaseActivity {
 					R.string.av_audio_bitrate,
 					R.string.av_audio_bitrate_descr);
 			audio.addPreference(lp);
+		}
+	}
+
+	private void createCameraPictureSizesPref(AudioVideoNotesPlugin p, PreferenceCategory photo, Parameters parameters) {
+		String[] entries;
+		Integer[] intValues;
+		// Photo picture size
+		// get supported sizes
+		List<Camera.Size> psps = parameters.getSupportedPictureSizes();
+		if (psps == null) {
+			return;
+		}
+		// list of megapixels of each resolution
+		List<Integer> mpix = new ArrayList<Integer>();
+		// list of index each resolution in list, returned by getSupportedPictureSizes()
+		List<Integer> picSizesValues = new ArrayList<Integer>();
+		// fill lists for sort
+		for (int index = 0; index < psps.size(); index++) {
+			mpix.add((psps.get(index)).width * (psps.get(index)).height);
+			picSizesValues.add(index);
+		}
+		// sort list for max resolution in begining of list
+		for (int i = 0; i < mpix.size(); i++) {
+			for (int j = 0; j < mpix.size() - i - 1; j++) {
+				if (mpix.get(j) < mpix.get(j + 1)) {
+					// change elements
+					int tmp = mpix.get(j + 1);
+					mpix.set(j + 1, mpix.get(j));
+					mpix.set(j, tmp);
+
+					tmp = picSizesValues.get(j + 1);
+					picSizesValues.set(j + 1, picSizesValues.get(j));
+					picSizesValues.set(j, tmp);
+				}
+			}
+		}
+		// set default photo size to max resolution (set index of element with max resolution in List, returned by getSupportedPictureSizes() )
+		cameraPictureSizeDefault = picSizesValues.get(0);
+		log.debug("onCreate() set cameraPictureSizeDefault=" + cameraPictureSizeDefault);
+
+		List<String> itemsPicSizes = new ArrayList<String>();
+		String prefix;
+		for (int index = 0; index < psps.size(); index++) {
+			float px = (float) ((psps.get(picSizesValues.get(index))).width * (psps.get(picSizesValues.get(index))).height);
+			if (px > 102400) // 100 K
+			{
+				px = px / 1048576;
+				prefix = "Mpx";
+			} else {
+				px = px / 1024;
+				prefix = "Kpx";
+			}
+
+			itemsPicSizes.add((psps.get(picSizesValues.get(index))).width +
+					"x" +
+					(psps.get(picSizesValues.get(index))).height +
+					" ( " +
+					String.format("%.2f", px) +
+					" " +
+					prefix +
+					" )");
+		}
+		log.debug("onCreate() set default size: width=" + psps.get(cameraPictureSizeDefault).width + " height="
+				+ psps.get(cameraPictureSizeDefault).height + " index in ps=" + cameraPictureSizeDefault);
+
+		entries = itemsPicSizes.toArray(new String[itemsPicSizes.size()]);
+		intValues = picSizesValues.toArray(new Integer[picSizesValues.size()]);
+		if (entries.length > 0) {
+			ListPreference camSizes = createListPreference(p.AV_CAMERA_PICTURE_SIZE, entries, intValues, R.string.av_camera_pic_size,
+					R.string.av_camera_pic_size_descr);
+			photo.addPreference(camSizes);
+		}
+	}
+
+	private void createCameraFocusModesPref(AudioVideoNotesPlugin p, PreferenceCategory photo, Parameters parameters) {
+		String[] entries;
+		Integer[] intValues;
+		// focus mode settings
+		// show in menu only suppoted modes
+		List<String> sfm = parameters.getSupportedFocusModes();
+		if (sfm == null) {
+			return;
+		}
+		List<String> items = new ArrayList<String>();
+		List<Integer> itemsValues = new ArrayList<Integer>();
+		// filtering known types for translate and set index
+		for (int index = 0; index < sfm.size(); index++) {
+			if (sfm.get(index).equals("auto")) {
+				items.add(getString(R.string.av_camera_focus_auto));
+				itemsValues.add(AV_CAMERA_FOCUS_AUTO);
+			} else if (sfm.get(index).equals("fixed")) {
+				items.add(getString(R.string.av_camera_focus_hiperfocal));
+				itemsValues.add(AV_CAMERA_FOCUS_HIPERFOCAL);
+			} else if (sfm.get(index).equals("edof")) {
+				items.add(getString(R.string.av_camera_focus_edof));
+				itemsValues.add(AV_CAMERA_FOCUS_EDOF);
+			} else if (sfm.get(index).equals("infinity")) {
+				items.add(getString(R.string.av_camera_focus_infinity));
+				itemsValues.add(AV_CAMERA_FOCUS_INFINITY);
+			} else if (sfm.get(index).equals("macro")) {
+				items.add(getString(R.string.av_camera_focus_macro));
+				itemsValues.add(AV_CAMERA_FOCUS_MACRO);
+			} else if (sfm.get(index).equals("continuous-picture")) {
+				items.add(getString(R.string.av_camera_focus_continuous));
+				itemsValues.add(AV_CAMERA_FOCUS_CONTINUOUS);
+			}
+		}
+		entries = items.toArray(new String[items.size()]);
+		intValues = itemsValues.toArray(new Integer[itemsValues.size()]);
+		if (entries.length > 0) {
+			ListPreference camFocus = createListPreference(p.AV_CAMERA_FOCUS_TYPE, entries, intValues, R.string.av_camera_focus,
+					R.string.av_camera_focus_descr);
+			photo.addPreference(camFocus);
 		}
 	}
 
