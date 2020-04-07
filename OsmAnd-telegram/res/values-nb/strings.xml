@@ -268,4 +268,5 @@
     <string name="last_update_from_telegram_duration">Siste oppdatering fra Telegram: %1$s siden</string>
     <string name="last_response_duration">Siste respons: %1$s siden</string>
     <string name="duration_ago">%1$s siden</string>
+    <string name="shared_string_error_short">ERR</string>
 </resources>
