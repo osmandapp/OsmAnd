@@ -740,7 +740,7 @@
     <string name="poi_maxweight">Höchstgewicht</string>
     <string name="poi_operator">Betreiber</string>
     <string name="poi_disused">Eingestellt</string>
-    <string name="poi_abandoned">Aufgelassen</string>
+    <string name="poi_abandoned">Aufgegeben</string>
     <string name="poi_maxheight">Maximale Höhe</string>
     <string name="poi_phone">Telefon</string>
     <string name="poi_website">Internetseite</string>
@@ -848,7 +848,7 @@
     <string name="poi_bump_gate">Schwingtor</string>
     <string name="poi_general_barrier">Barriere</string>
     <string name="poi_height_restrictor">Höhendurchfahrtbegrenzung</string>
-    <string name="poi_sally_port">Ausfalltor</string>
+    <string name="poi_sally_port">Ausfallstor</string>
     <string name="poi_turnstile">Drehkreuz</string>
     <string name="poi_kent_carriage_gap">Kutschendurchlass</string>
     <string name="poi_highway_crossing">Fußgängerübergang</string>
