@@ -462,7 +462,7 @@
     <string name="poi_seamark_light_minor">Nebenleuchtfeuer</string>
     <string name="poi_seamark_light_vessel">Feuerschiff</string>
     <string name="poi_mooring">Liegeplatz</string>
-    <string name="poi_notice">Schifffahrtszeichen</string>
+    <string name="poi_notice">Hinweis</string>
     <string name="poi_pile">Pfahl</string>
     <string name="poi_radar_transponder">Radarsender</string>
     <string name="poi_radio_station">Funkstation</string>
@@ -740,7 +740,7 @@
     <string name="poi_maxweight">Höchstgewicht</string>
     <string name="poi_operator">Betreiber</string>
     <string name="poi_disused">Eingestellt</string>
-    <string name="poi_abandoned">Aufgelassen</string>
+    <string name="poi_abandoned">Aufgegeben</string>
     <string name="poi_maxheight">Maximale Höhe</string>
     <string name="poi_phone">Telefon</string>
     <string name="poi_website">Internetseite</string>
@@ -848,7 +848,7 @@
     <string name="poi_bump_gate">Schwingtor</string>
     <string name="poi_general_barrier">Barriere</string>
     <string name="poi_height_restrictor">Höhendurchfahrtbegrenzung</string>
-    <string name="poi_sally_port">Ausfalltor</string>
+    <string name="poi_sally_port">Ausfallstor</string>
     <string name="poi_turnstile">Drehkreuz</string>
     <string name="poi_kent_carriage_gap">Kutschendurchlass</string>
     <string name="poi_highway_crossing">Fußgängerübergang</string>
@@ -3778,8 +3778,8 @@
     <string name="poi_volcano_type_stratovolcano">Schichtvulkan</string>
     <string name="poi_volcano_type_shield">Schild</string>
     <string name="poi_volcano_type_maar">Maar</string>
-    <string name="poi_volcano_type_caldera">Caldera</string>
-    <string name="poi_volcano_type_lava_dome">Lavadom</string>
+    <string name="poi_volcano_type_caldera">Kessel</string>
+    <string name="poi_volcano_type_lava_dome">Lavakuppel</string>
     <string name="poi_volcano_type_mud">Erde</string>
     <string name="poi_volcano_last_eruption">Letzter Ausbruch</string>
     <string name="poi_volcano_status_extinct">Erloschen</string>
@@ -3787,7 +3787,7 @@
     <string name="poi_volcano_status_active">Aktiv</string>
     <string name="poi_volcano_status_inactive">Inaktiv</string>
     <string name="poi_volcano_number_of_eruptions">Anzahl der Ausbrüche</string>
-    <string name="poi_memorial_ghost_bike">Gedenk-Geisterfahrrad</string>
+    <string name="poi_memorial_ghost_bike">Geisterfahrrad</string>
     <string name="poi_paintball">Paintball</string>
     <string name="poi_mountain_rescue">Bergrettung</string>
     <string name="poi_shop_security">Sicherheitsgeschäft</string>
@@ -3797,12 +3797,12 @@
     <string name="poi_dive_centre">Tauchzentrum</string>
     <string name="poi_sms">SMS</string>
     <string name="poi_video_telephone">Video</string>
-    <string name="poi_sms_yes">Ja</string>
-    <string name="poi_sms_no">Nein</string>
-    <string name="poi_video_yes">Ja</string>
-    <string name="poi_video_no">Nein</string>
+    <string name="poi_sms_yes">ja</string>
+    <string name="poi_sms_no">nein</string>
+    <string name="poi_video_yes">ja</string>
+    <string name="poi_video_no">nein</string>
     <string name="poi_traffic_signals_sound_locate">Nur wenn Gehen erlaubt ist</string>
-    <string name="poi_tactile_paving_contrasted">Kontrastiert</string>
+    <string name="poi_tactile_paving_contrasted">Kontrastreich</string>
     <string name="poi_tactile_paving_incorrect">Falsch</string>
     <string name="poi_covered_booth">Unterstand</string>
     <string name="poi_booth">Unterstand-Art</string>
@@ -3819,6 +3819,6 @@
     <string name="poi_seamark_obstruction">Behinderung</string>
     <string name="poi_drinking_water_refill_yes">Trinkwassernachfüllung: ja</string>
     <string name="poi_drinking_water_refill_no">Trinkwassernachfüllung: nein</string>
-    <string name="poi_drinking_water_refill_network">Trinkwassernachfüllnetz</string>
+    <string name="poi_drinking_water_refill_network">Trinkwasser-Nachfüllnetzwerk</string>
     <string name="poi_internet_access_fee_customers">Internetzugangsgebühr für Kunden</string>
 </resources>
