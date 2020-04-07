@@ -52,14 +52,13 @@
 		android:title="@string/profile_appearance"
 		tools:icon="@drawable/ic_action_offroad" />
 
-	<!--	TODO: change description-->
 	<Preference
 		android:key="ui_customization"
 		android:layout="@layout/preference_with_descr"
 		android:persistent="false"
-		android:summary="TODO: change description"
+		android:summary="@string/ui_customization_short_descr"
 		android:title="@string/ui_customization"
-		tools:icon="@drawable/ic_action_offroad" />
+		tools:icon="@drawable/ic_action_ui_customization" />
 
 	<Preference
 		android:layout="@layout/simple_divider_item"

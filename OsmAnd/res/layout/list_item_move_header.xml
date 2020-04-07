@@ -53,7 +53,7 @@
 				android:letterSpacing="@dimen/description_letter_spacing"
 				android:paddingTop="@dimen/list_header_settings_top_margin"
 				android:singleLine="true"
-				android:textColor="@color/preference_category_title"
+				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_desc_text_size"
 				osmand:typeface="@string/font_roboto_medium"
 				tools:text="@string/plugin_settings" />
@@ -64,6 +64,7 @@
 				android:layout_height="wrap_content"
 				android:letterSpacing="@dimen/description_letter_spacing"
 				android:paddingBottom="@dimen/list_header_settings_top_margin"
+				android:lineSpacingExtra="@dimen/line_spacing_extra_description"
 				android:textColor="?android:textColorSecondary"
 				android:textSize="@dimen/default_desc_text_size"
 				osmand:typeface="@string/font_roboto_regular"

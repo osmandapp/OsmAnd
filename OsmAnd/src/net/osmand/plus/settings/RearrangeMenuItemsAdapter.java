@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.settings.ConfigureMenuRootFragment.ScreenType;
 
@@ -29,6 +31,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_RENDERING_CATEGORY_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.RENDERING_ITEMS_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
@@ -96,14 +99,30 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 		if (holder instanceof DescriptionHolder) {
 			DescriptionHolder h = (DescriptionHolder) holder;
 			ScreenType screenType = (ScreenType) item.value;
+			int paddingStart = AndroidUtils.dpToPx(app, 56);
+			int paddingTop = AndroidUtils.dpToPx(app, 16);
 			h.description.setText(String.format(app.getString(R.string.reorder_or_hide_from), app.getString(screenType.titleRes)));
 			h.image.setImageResource(nightMode ? screenType.imageNightRes : screenType.imageDayRes);
+			if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
+				h.deviceImage.setImageResource(nightMode
+						? R.drawable.img_settings_device_bottom_dark
+						: R.drawable.img_settings_device_bottom_light);
+				h.imageContainer.setPadding(paddingStart, 0, paddingStart, paddingTop);
+			} else {
+				h.deviceImage.setImageResource(nightMode
+						? R.drawable.img_settings_device_top_dark
+						: R.drawable.img_settings_device_top_light);
+				h.imageContainer.setPadding(paddingStart, paddingTop, paddingStart, 0);
+			}
 		} else if (holder instanceof ItemHolder) {
 			final ItemHolder h = (ItemHolder) holder;
 			ContextMenuItem menuItem = (ContextMenuItem) item.value;
 			String id = menuItem.getId();
 			if (DRAWER_DIVIDER_ID.equals(menuItem.getId())) {
 				h.title.setText(R.string.shared_string_divider);
+				h.title.setTypeface(FontCache.getFont(app, app.getString(R.string.font_roboto_medium)));
+				h.title.setTextColor(app.getResources().getColor(activeColorRes));
+				h.title.setTextSize(15);
 				h.description.setText(R.string.divider_descr);
 				h.icon.setVisibility(View.GONE);
 				h.actionIcon.setVisibility(View.GONE);
@@ -112,6 +131,8 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 			} else if (SHOW_CATEGORY_ID.equals(id)
 					|| MAP_RENDERING_CATEGORY_ID.equals(id)) {
 				h.title.setText(menuItem.getTitle());
+				h.title.setTypeface(FontCache.getFont(app, app.getString(R.string.font_roboto_medium)));
+				h.title.setTextSize(15);
 				h.description.setText(R.string.move_inside_category);
 				h.icon.setVisibility(View.GONE);
 				h.actionIcon.setVisibility(View.GONE);
@@ -147,13 +168,20 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 					return false;
 				}
 			});
-			if (menuItem.isHidden()) {
-				h.moveIcon.setVisibility(View.GONE);
-				h.actionIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_undo, R.color.color_osm_edit_create));
-			} else {
+			if (!menuItem.isHidden()
+					&& !id.equals(SHOW_CATEGORY_ID)
+					&& !id.equals(MAP_RENDERING_CATEGORY_ID)) {
 				h.moveIcon.setVisibility(View.VISIBLE);
 				h.moveIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_item_move, nightMode));
 				h.actionIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_remove, R.color.color_osm_edit_delete));
+			} else {
+				h.moveIcon.setVisibility(View.GONE);
+				h.actionIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_undo, R.color.color_osm_edit_create));
+			}
+			if (id.equals(MAP_CONTEXT_MENU_MORE_ID)) {
+				h.moveIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_item_move, nightMode));
+				h.actionIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_remove, nightMode));
+				h.actionIcon.setOnClickListener(null);
 			}
 		} else if (holder instanceof HeaderHolder) {
 			HeaderHolder h = (HeaderHolder) holder;
@@ -216,12 +244,16 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 	private static class DescriptionHolder extends RecyclerView.ViewHolder
 			implements ReorderItemTouchHelperCallback.UnmovableItem {
 		private ImageView image;
+		private ImageView deviceImage;
 		private TextView description;
+		private FrameLayout imageContainer;
 
 		DescriptionHolder(@NonNull View itemView) {
 			super(itemView);
 			image = itemView.findViewById(R.id.image);
+			deviceImage = itemView.findViewById(R.id.device_image);
 			description = itemView.findViewById(R.id.description);
+			imageContainer = itemView.findViewById(R.id.image_container);
 		}
 
 		@Override

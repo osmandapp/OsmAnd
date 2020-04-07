@@ -64,6 +64,7 @@ import net.osmand.plus.routepreparationmenu.WaypointsFragment;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.BaseSettingsFragment;
+import net.osmand.plus.settings.ConfigureMenuRootFragment.ScreenType;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapTileLayer;
@@ -98,11 +99,15 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SEARCH_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRAVEL_GUIDES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_GPX_WAYPOINT;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_AVOID_ROAD;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DIRECTIONS_FROM_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_EDIT_GPX_WP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MARKER_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MEASURE_DISTANCE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_SEARCH_NEARBY;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_SHARE_ID;
 import static net.osmand.plus.ContextMenuAdapter.PROFILES_CHOSEN_PROFILE_TAG;
 import static net.osmand.plus.ContextMenuAdapter.PROFILES_CONTROL_BUTTON_TAG;
 import static net.osmand.plus.ContextMenuAdapter.PROFILES_NORMAL_PROFILE_TAG;
@@ -332,9 +337,102 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public void contextMenuPoint(final double latitude, final double longitude, final ContextMenuAdapter iadapter, Object selectedObj) {
-		final ContextMenuAdapter adapter = iadapter == null ? new ContextMenuAdapter() : iadapter;
+		final ContextMenuAdapter adapter = getContextMenuAdapter(iadapter, selectedObj);
+		final ArrayAdapter<ContextMenuItem> listAdapter =
+				adapter.createListAdapter(mapActivity, getMyApplication().getSettings().isLightContent());
+
+		AdditionalActionsBottomSheetDialogFragment actionsBottomSheetDialogFragment = new AdditionalActionsBottomSheetDialogFragment();
+		actionsBottomSheetDialogFragment.setAdapter(adapter, new AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener() {
+			@Override
+			public void onItemClick(int position) {
+				ContextMenuItem item = adapter.getItem(position);
+				int standardId = item.getTitleId();
+				ItemClickListener click = item.getItemClickListener();
+				if (click != null) {
+					click.onContextMenuClick(listAdapter, standardId, position, false, null);
+				} else if (standardId == R.string.context_menu_item_search) {
+					mapActivity.showQuickSearch(latitude, longitude);
+				} else if (standardId == R.string.context_menu_item_directions_from) {
+					if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
+						enterDirectionsFromPoint(latitude, longitude);
+					} else if (!ActivityCompat.shouldShowRequestPermissionRationale(mapActivity, Manifest.permission.ACCESS_FINE_LOCATION)) {
+						mapActivity.getMyApplication().showToastMessage(R.string.ask_for_location_permission);
+					} else {
+						ActivityCompat.requestPermissions(mapActivity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_FOR_DIRECTIONS_NAVIGATION_PERMISSION);
+					}
+				} else if (standardId == R.string.measurement_tool) {
+					mapActivity.getContextMenu().close();
+					MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), new LatLon(latitude, longitude));
+				} else if (standardId == R.string.avoid_road) {
+					getMyApplication().getAvoidSpecificRoads().addImpassableRoad(mapActivity, new LatLon(latitude, longitude), true, false, null);
+				}
+			}
+		});
+		actionsBottomSheetDialogFragment.show(mapActivity.getSupportFragmentManager(), AdditionalActionsBottomSheetDialogFragment.TAG);
+	}
+
+	public void showActionsBottomSheet(final double latitude, final double longitude, final ContextMenuAdapter adapter) {
+		final ArrayAdapter<ContextMenuItem> listAdapter =
+				adapter.createListAdapter(mapActivity, getMyApplication().getSettings().isLightContent());
+
+		AdditionalActionsBottomSheetDialogFragment actionsBottomSheetDialogFragment = new AdditionalActionsBottomSheetDialogFragment();
+		actionsBottomSheetDialogFragment.setAdapter(adapter, new AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener() {
+			@Override
+			public void onItemClick(int position) {
+				ContextMenuItem item = adapter.getItem(position);
+				int standardId = item.getTitleId();
+				ItemClickListener click = item.getItemClickListener();
+				if (click != null) {
+					click.onContextMenuClick(listAdapter, standardId, position, false, null);
+				} else if (standardId == R.string.context_menu_item_search) {
+					mapActivity.showQuickSearch(latitude, longitude);
+				} else if (standardId == R.string.context_menu_item_directions_from) {
+					if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
+						enterDirectionsFromPoint(latitude, longitude);
+					} else if (!ActivityCompat.shouldShowRequestPermissionRationale(mapActivity, Manifest.permission.ACCESS_FINE_LOCATION)) {
+						mapActivity.getMyApplication().showToastMessage(R.string.ask_for_location_permission);
+					} else {
+						ActivityCompat.requestPermissions(mapActivity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_FOR_DIRECTIONS_NAVIGATION_PERMISSION);
+					}
+				} else if (standardId == R.string.measurement_tool) {
+					mapActivity.getContextMenu().close();
+					MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), new LatLon(latitude, longitude));
+				} else if (standardId == R.string.avoid_road) {
+					getMyApplication().getAvoidSpecificRoads().addImpassableRoad(mapActivity, new LatLon(latitude, longitude), true, false, null);
+				}
+			}
+		});
+		actionsBottomSheetDialogFragment.show(mapActivity.getSupportFragmentManager(), AdditionalActionsBottomSheetDialogFragment.TAG);
+	}
+
+	public ContextMenuAdapter getContextMenuAdapter(final ContextMenuAdapter iadapter, Object selectedObj) {
+		ContextMenuAdapter adapter = iadapter == null ? new ContextMenuAdapter() : iadapter;
 		ItemBuilder itemBuilder = new ItemBuilder();
 
+		adapter.addItem(itemBuilder
+				.setTitleId(R.string.shared_string_add, mapActivity)
+				.setId(MAP_CONTEXT_MENU_ADD_ID)
+				.setIcon(R.drawable.map_action_fav_dark)
+				.setOrder(0)
+				.createItem());
+		adapter.addItem(itemBuilder
+				.setTitleId(R.string.shared_string_marker, mapActivity)
+				.setId(MAP_CONTEXT_MENU_MARKER_ID)
+				.setIcon(R.drawable.map_action_flag_dark)
+				.setOrder(1)
+				.createItem());
+		adapter.addItem(itemBuilder
+				.setTitleId(R.string.shared_string_share, mapActivity)
+				.setId(MAP_CONTEXT_MENU_SHARE_ID)
+				.setIcon(R.drawable.map_action_gshare_dark)
+				.setOrder(2)
+				.createItem());
+		adapter.addItem(itemBuilder
+				.setTitleId(R.string.shared_string_actions, mapActivity)
+				.setId(MAP_CONTEXT_MENU_MORE_ID)
+				.setIcon(R.drawable.map_overflow_menu_white)
+				.setOrder(3)
+				.createItem());
 		adapter.addItem(itemBuilder
 				.setTitleId(R.string.context_menu_item_directions_from, mapActivity)
 				.setId(MAP_CONTEXT_MENU_DIRECTIONS_FROM_ID)
@@ -348,7 +446,9 @@ public class MapActivityActions implements DialogProvider {
 				.setOrder(SEARCH_NEAR_ITEM_ORDER)
 				.createItem());
 
-		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
+//		if (register){
+//			OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
+//		}
 
 		ItemClickListener listener = new ItemClickListener() {
 			@Override
@@ -395,38 +495,7 @@ public class MapActivityActions implements DialogProvider {
 				.createItem());
 
 		adapter.sortItemsByOrder();
-
-		final ArrayAdapter<ContextMenuItem> listAdapter =
-				adapter.createListAdapter(mapActivity, getMyApplication().getSettings().isLightContent());
-
-		AdditionalActionsBottomSheetDialogFragment actionsBottomSheetDialogFragment = new AdditionalActionsBottomSheetDialogFragment();
-		actionsBottomSheetDialogFragment.setAdapter(adapter, new AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener() {
-			@Override
-			public void onItemClick(int position) {
-				ContextMenuItem item = adapter.getItem(position);
-				int standardId = item.getTitleId();
-				ItemClickListener click = item.getItemClickListener();
-				if (click != null) {
-					click.onContextMenuClick(listAdapter, standardId, position, false, null);
-				} else if (standardId == R.string.context_menu_item_search) {
-					mapActivity.showQuickSearch(latitude, longitude);
-				} else if (standardId == R.string.context_menu_item_directions_from) {
-					if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
-						enterDirectionsFromPoint(latitude, longitude);
-					} else if (!ActivityCompat.shouldShowRequestPermissionRationale(mapActivity, Manifest.permission.ACCESS_FINE_LOCATION)) {
-						mapActivity.getMyApplication().showToastMessage(R.string.ask_for_location_permission);
-					} else {
-						ActivityCompat.requestPermissions(mapActivity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_FOR_DIRECTIONS_NAVIGATION_PERMISSION);
-					}
-				} else if (standardId == R.string.measurement_tool) {
-					mapActivity.getContextMenu().close();
-					MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), new LatLon(latitude, longitude));
-				} else if (standardId == R.string.avoid_road) {
-					getMyApplication().getAvoidSpecificRoads().addImpassableRoad(mapActivity, new LatLon(latitude, longitude), true, false, null);
-				}
-			}
-		});
-		actionsBottomSheetDialogFragment.show(mapActivity.getSupportFragmentManager(), AdditionalActionsBottomSheetDialogFragment.TAG);
+		return adapter;
 	}
 
 	public void enterDirectionsFromPoint(final double latitude, final double longitude) {
@@ -1125,6 +1194,7 @@ public class MapActivityActions implements DialogProvider {
 		}
 		menuItemsListView.setDivider(null);
 		final ContextMenuAdapter contextMenuAdapter = createMainOptionsMenu();
+		contextMenuAdapter.initItemsCustomOrder(getMyApplication(), ScreenType.DRAWER);
 		contextMenuAdapter.setDefaultLayoutId(R.layout.simple_list_menu_item);
 		final ArrayAdapter<ContextMenuItem> simpleListAdapter = contextMenuAdapter.createListAdapter(mapActivity,
 				!nightMode);

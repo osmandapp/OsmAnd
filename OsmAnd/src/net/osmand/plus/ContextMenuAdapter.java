@@ -641,4 +641,113 @@ public class ContextMenuAdapter {
 		return result;
 	}
 
+	public void resetMenuItems(@NonNull OsmandApplication app, @NonNull ScreenType screenType) {
+		saveHiddenItemsIds(app, screenType, null);
+		saveItemsIdsOrder(app, screenType, null);
+	}
+
+	@NonNull
+	public List<String> getHiddenItemsIds(@NonNull OsmandApplication app, @NonNull ScreenType type) {
+		List<String> hiddenItemsIds = null;
+		switch (type) {
+			case DRAWER:
+				hiddenItemsIds = app.getSettings().HIDDEN_DRAWER_ITEMS.getStringsList();
+				break;
+			case CONFIGURE_MAP:
+				hiddenItemsIds = app.getSettings().HIDDEN_CONFIGURE_MAP_ITEMS.getStringsList();
+				break;
+			case CONTEXT_MENU_ACTIONS:
+				hiddenItemsIds = app.getSettings().HIDDEN_CONTEXT_MENU_ACTIONS_ITEMS.getStringsList();
+				break;
+		}
+		return hiddenItemsIds != null ? new ArrayList<>(hiddenItemsIds) : new ArrayList<String>();
+	}
+
+	@NonNull
+	public List<String> getItemsIdsOrder(@NonNull OsmandApplication app, @NonNull ScreenType type) {
+		List<String> hiddenItemsIds = null;
+		switch (type) {
+			case DRAWER:
+				hiddenItemsIds = app.getSettings().DRAWER_ITEMS_ORDER.getStringsList();
+				break;
+			case CONFIGURE_MAP:
+				hiddenItemsIds = app.getSettings().CONFIGURE_MAP_ITEMS_ORDER.getStringsList();
+				break;
+			case CONTEXT_MENU_ACTIONS:
+				hiddenItemsIds = app.getSettings().CONTEXT_MENU_ACTIONS_ITEMS_ORDER.getStringsList();
+				break;
+		}
+		return hiddenItemsIds != null ? new ArrayList<>(hiddenItemsIds) : new ArrayList<String>();
+	}
+
+	public void saveHiddenItemsIds(@NonNull OsmandApplication app, @NonNull ScreenType type, @Nullable List<String> hiddenItemsIds) {
+		switch (type) {
+			case DRAWER:
+				app.getSettings().HIDDEN_DRAWER_ITEMS.setStringsList(hiddenItemsIds);
+				break;
+			case CONFIGURE_MAP:
+				app.getSettings().HIDDEN_CONFIGURE_MAP_ITEMS.setStringsList(hiddenItemsIds);
+				break;
+			case CONTEXT_MENU_ACTIONS:
+				app.getSettings().HIDDEN_CONTEXT_MENU_ACTIONS_ITEMS.setStringsList(hiddenItemsIds);
+				break;
+		}
+	}
+
+	public void saveItemsIdsOrder(@NonNull OsmandApplication app, @NonNull ScreenType type, @Nullable List<String> itemsIdsOrder) {
+		switch (type) {
+			case DRAWER:
+				app.getSettings().DRAWER_ITEMS_ORDER.setStringsList(itemsIdsOrder);
+				break;
+			case CONFIGURE_MAP:
+				app.getSettings().CONFIGURE_MAP_ITEMS_ORDER.setStringsList(itemsIdsOrder);
+				break;
+			case CONTEXT_MENU_ACTIONS:
+				app.getSettings().CONTEXT_MENU_ACTIONS_ITEMS_ORDER.setStringsList(itemsIdsOrder);
+				break;
+		}
+	}
+
+	public String getPrefIdOrder(@NonNull OsmandApplication app, @NonNull ScreenType type) {
+		switch (type) {
+			case DRAWER:
+				return app.getSettings().DRAWER_ITEMS_ORDER.getId();
+			case CONFIGURE_MAP:
+				return app.getSettings().CONFIGURE_MAP_ITEMS_ORDER.getId();
+			case CONTEXT_MENU_ACTIONS:
+				return app.getSettings().CONTEXT_MENU_ACTIONS_ITEMS_ORDER.get();
+		}
+		return "";
+	}
+
+	public String getPrefIdHidden(@NonNull OsmandApplication app, @NonNull ScreenType type) {
+		switch (type) {
+			case DRAWER:
+				return app.getSettings().HIDDEN_DRAWER_ITEMS.getId();
+			case CONFIGURE_MAP:
+				return app.getSettings().HIDDEN_CONFIGURE_MAP_ITEMS.getId();
+			case CONTEXT_MENU_ACTIONS:
+				return app.getSettings().HIDDEN_CONTEXT_MENU_ACTIONS_ITEMS.get();
+		}
+		return "";
+	}
+
+	public void initItemsCustomOrder(@NonNull OsmandApplication app, @NonNull ScreenType type) {
+		List<String> savedOrder = getItemsIdsOrder(app, type);
+		List<String> hiddenItems = getHiddenItemsIds(app, type);
+
+		if (!savedOrder.isEmpty()) {
+			reorderMenuItems(items, getMenuItemsOrder(savedOrder));
+		}
+
+		if (!hiddenItems.isEmpty()) {
+			List<ContextMenuItem> filtered = new ArrayList<>();
+			for (ContextMenuItem item : items) {
+				if (!hiddenItems.contains(item.getId())) {
+					filtered.add(item);
+				}
+			}
+			items = filtered;
+		}
+	}
 }

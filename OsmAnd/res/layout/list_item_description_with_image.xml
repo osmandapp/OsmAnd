@@ -5,12 +5,30 @@
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
 
-	<ImageView
-		android:id="@+id/image"
+	<FrameLayout
+		android:id="@+id/image_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:adjustViewBounds="true"
-		tools:src="@drawable/img_settings_customize_configure_map_night" />
+		android:background="?attr/activity_background_basic"
+		tools:paddingEnd="56dp"
+		tools:paddingStart="56dp"
+		tools:paddingTop="16dp">
+
+		<ImageView
+			android:id="@+id/device_image"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:adjustViewBounds="true"
+			tools:src="@drawable/img_settings_device_top_dark" />
+
+		<ImageView
+			android:id="@+id/image"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:adjustViewBounds="true"
+			tools:src="@drawable/img_settings_customize_configure_map_night" />
+
+	</FrameLayout>
 
 	<TextView
 		android:id="@+id/description"

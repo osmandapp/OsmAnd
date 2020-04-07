@@ -412,6 +412,11 @@ public class OsmandSettings {
 					((BooleanPreference) preference).setModeValue(mode, (Boolean) value);
 					return true;
 				}
+			} else if (preference instanceof ListStringPreference) {
+				if (value instanceof List) {
+					((ListStringPreference) preference).setModeValue(mode, (List<String>) value);
+					return true;
+				}
 			} else if (preference instanceof StringPreference) {
 				if (value instanceof String) {
 					((StringPreference) preference).setModeValue(mode, (String) value);
@@ -1077,6 +1082,24 @@ public class OsmandSettings {
 			for (String value : values) {
 				addValue(value);
 			}
+		}
+
+		public boolean setModeValue(ApplicationMode mode, List<String> values) {
+			if (values == null || values.size() == 0) {
+				set(null);
+				return false;
+			}
+			clearAll();
+			String vl = get();
+			for (String value : values) {
+				addValue(value);
+				if (vl == null || vl.isEmpty()) {
+					vl = value + delimiter;
+				} else {
+					vl = vl + value + delimiter;
+				}
+			}
+			return setModeValue(mode, vl);
 		}
 	}
 

@@ -753,7 +753,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		ConfigureMenuItemsFragment configureMenuItemsFragment = getConfigureMenuItemsFragment();
 		if (configureMenuItemsFragment != null) {
-			configureMenuItemsFragment.showExitDialog();
+			configureMenuItemsFragment.exitFragment();
 			return;
 		}
 

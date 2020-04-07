@@ -51,6 +51,7 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.settings.ConfigureMenuRootFragment.ScreenType;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -151,7 +152,6 @@ public class ConfigureMapMenu {
 		adapter.setNightMode(nightMode);
 		createLayersItems(customRules, adapter, ma, themeRes, nightMode);
 		createRenderingAttributeItems(customRules, adapter, ma, themeRes, nightMode);
-
 		return adapter;
 	}
 

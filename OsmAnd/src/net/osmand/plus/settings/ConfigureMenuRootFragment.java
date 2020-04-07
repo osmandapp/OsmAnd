@@ -1,5 +1,6 @@
 package net.osmand.plus.settings;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,11 +27,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.PluginsActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
@@ -40,6 +45,8 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static net.osmand.plus.settings.ConfigureMenuRootFragment.ScreenType.CONFIGURE_MAP;
 
 public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 
@@ -202,22 +209,29 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 		}
 
 		private String getSubTitleText(ScreenType type) {
-			List<String> hiddenItems = null;
-			switch (type) {
-				case DRAWER:
-					hiddenItems = app.getSettings().HIDDEN_DRAWER_ITEMS.getStringsList();
-					break;
-				case CONFIGURE_MAP:
-					hiddenItems = app.getSettings().HIDDEN_CONFIGURE_MAP_ITEMS.getStringsList();
-					break;
-				case CONTEXT_MENU_ACTIONS:
-					hiddenItems = app.getSettings().HIDDEN_CONTEXT_MENU_ACTIONS_ITEMS.getStringsList();
-					break;
+			ContextMenuAdapter contextMenuAdapter = null;
+			Activity activity = getActivity();
+			if (activity instanceof MapActivity) {
+				switch (type) {
+					case DRAWER:
+						MapActivityActions mapActivityActions = new MapActivityActions((MapActivity) activity);
+						contextMenuAdapter = mapActivityActions.createMainOptionsMenu();
+						break;
+					case CONFIGURE_MAP:
+						ConfigureMapMenu configureMapMenu = new ConfigureMapMenu();
+						contextMenuAdapter = configureMapMenu.createListAdapter((MapActivity) activity);
+						break;
+					case CONTEXT_MENU_ACTIONS:
+						ConfigureMapMenu configureaMapMenu = new ConfigureMapMenu();
+						contextMenuAdapter = configureaMapMenu.createListAdapter((MapActivity) activity);
+						break;
+				}
+				int hiddenCount = contextMenuAdapter.getHiddenItemsIds(app, type).size();
+				int allCount = contextMenuAdapter.getDefaultItems(type).size();
+				String amount = getString(R.string.n_items_of_z, String.valueOf(allCount - hiddenCount), String.valueOf(allCount));
+				return getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.shared_string_items), amount);
 			}
-			int hiddenCount = hiddenItems != null ? hiddenItems.size() : 0;
-			int allCount = 0;
-			String amount = getString(R.string.n_items_of_z, String.valueOf(allCount - hiddenCount), String.valueOf(allCount));
-			return getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.shared_string_items), amount);
+			return "";
 		}
 
 		class DescriptionHolder extends RecyclerView.ViewHolder {

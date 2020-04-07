@@ -390,9 +390,10 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			return;
 		}
 		Preference uiCustomization = findPreference(UI_CUSTOMIZATION);
-//		TODO change icon
-		uiCustomization.setIcon(getContentIcon(getSelectedAppMode().getIconRes()));
-		uiCustomization.setFragment(ConfigureMenuRootFragment.TAG);
+		if (uiCustomization != null) {
+			uiCustomization.setIcon(getContentIcon(R.drawable.ic_action_ui_customization));
+			uiCustomization.setFragment(ConfigureMenuRootFragment.TAG);
+		}
 	}
 
 	@Override
