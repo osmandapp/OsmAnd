@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="select_track_file">Select track file</string>
     <string name="settings_item_import_error">Could not import %1$s.</string>
     <string name="settings_item_write_error">Could not write %1$s.</string>
     <string name="settings_item_read_error">Could not read %1$s.</string>

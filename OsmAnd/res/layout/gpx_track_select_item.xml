@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="@dimen/settings_divider_margin_start"
+	android:background="?attr/selectableItemBackground"
+	android:orientation="horizontal">
+
+	<ImageView
+		android:id="@+id/icon"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/list_content_padding"
+		android:layout_marginLeft="@dimen/list_content_padding"
+		android:layout_marginEnd="@dimen/list_content_padding"
+		android:layout_marginRight="@dimen/list_content_padding"
+		android:layout_gravity="center_vertical"
+		android:src="@drawable/ic_action_polygom_dark"
+		android:visibility="visible"
+		android:contentDescription="@string/shared_string_icon" />
+
+	<LinearLayout
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_marginStart="@dimen/list_content_padding"
+		android:layout_marginLeft="@dimen/list_content_padding"
+		android:layout_marginEnd="@dimen/list_content_padding"
+		android:layout_marginRight="@dimen/list_content_padding"
+		android:layout_weight="1"
+		android:orientation="vertical"
+		android:paddingTop="@dimen/content_padding_small"
+		android:paddingBottom="@dimen/content_padding_small">
+
+		<TextView
+			android:id="@+id/name"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="start"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size"
+			tools:text="@string/current_track" />
+
+		<LinearLayout
+			android:id="@+id/read_section"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingTop="@dimen/subHeaderPadding"
+			android:paddingBottom="@dimen/subHeaderPadding"
+			android:gravity="center_vertical"
+			android:orientation="horizontal"
+			android:visibility="visible">
+
+			<ImageView
+				android:id="@+id/distance_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/content_padding_half"
+				android:layout_marginRight="@dimen/content_padding_half"
+				android:src="@drawable/ic_action_distance_16"
+				android:contentDescription="@string/distance" />
+
+			<TextView
+				android:id="@+id/distance"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:layout_marginRight="@dimen/content_padding"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_desc_text_size" />
+
+			<ImageView
+				android:id="@+id/points_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/content_padding_half"
+				android:layout_marginRight="@dimen/content_padding_half"
+				android:src="@drawable/ic_action_waypoint_16"
+				android:contentDescription="@string/track_points" />
+
+			<TextView
+				android:id="@+id/points_count"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:layout_marginRight="@dimen/content_padding"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_desc_text_size"
+				tools:text="0" />
+
+			<ImageView
+				android:id="@+id/time_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/content_padding_half"
+				android:layout_marginRight="@dimen/content_padding_half"
+				android:src="@drawable/ic_action_time_16"
+				android:contentDescription="@string/shared_string_time_moving" />
+
+			<TextView
+				android:id="@+id/time"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:layout_marginRight="@dimen/content_padding"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_desc_text_size" />
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/unknown_section"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:visibility="gone">
+
+			<TextView
+				android:id="@+id/date_and_size_details"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_desc_text_size" />
+
+		</LinearLayout>
+	</LinearLayout>
+</LinearLayout>
