@@ -1582,7 +1582,7 @@
     <string name="record_plugin_description">Плагин активирует функции для записи и сохранения ваших треков вручную нажатием на виджет записи GPX на карте, или также автоматически записывает все ваши маршруты навигации в файл GPX.
 \n 
 \nЗаписанными треками можно поделиться с вашими друзьями или использовать их для вклада в OSM. Спортсмены могут использовать записанные треки для контроля за тренировками. Некоторый базовый анализ треков может быть выполнен непосредственно в OsmAnd, например, время прохождения круга, средняя скорость и т.д., треки, конечно, позднее также могут быть проанализированы в специальных инструментах анализа сторонних производителей.</string>
-    <string name="create_poi_link_to_osm_doc"> string name=\"lat_lon_pattern\"&gt;Широта: %1$.5f Долгота: %2$.5f&lt;/string </string>
+    <string name="create_poi_link_to_osm_doc"><u>Онлайн OSM</u> классификация карт с изображениями.</string>
     <string name="confirm_every_run">Всегда спрашивать</string>
     <string name="save_global_track_interval_descr">Укажите интервал регистрации во время записи трека (включается через виджет записи GPX на карте).</string>
     <string name="save_global_track_interval">Общий интервал записи трека</string>
@@ -3607,4 +3607,11 @@
     <string name="settings_item_read_error">Невозможно прочитать %1$s.</string>
     <string name="settings_item_write_error">Невозможно записать %1$s.</string>
     <string name="settings_item_import_error">Невозможно импортировать %1$s.</string>
+    <string name="select_track_file">Выберите файл трека</string>
+    <string name="wikipedia_poi_languages_promo">Некоторые статьи Википедии могут быть недоступны на вашем родном языке, выберите языки, на которых такие статьи будут отображаться на карте.
+\nВы сможете переключаться между всеми доступными языками во время чтения статьи.</string>
+    <string name="shared_string_languages">Языки</string>
+    <string name="shared_string_language">Язык</string>
+    <string name="shared_string_all_languages">Все языки</string>
+    <string name="wiki_menu_download_descr">Для просмотра POI Википедии на карте необходимы дополнительные карты.</string>
 </resources>
