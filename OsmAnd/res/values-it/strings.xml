@@ -1902,7 +1902,9 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="osm_live_region_desc">Parte della tua donazione sarà inviata agli utenti OSM che sottopongono modifiche alla mappa in quella regione.</string>
     <string name="osm_live_subscription_settings">Impostazioni della sottoscrizione</string>
     <string name="osm_live_ask_for_purchase">Per favore acquista prima la sottoscrizione a OsmAnd Live</string>
-    <string name="osm_live_header">La sottoscrizione abilita gli aggiornamenti orari per tutte le mappe del mondo. Parte degli incassi ritornano alla comunità OSM e sono corrisposti per ogni contributo a OSM. Se ti piacciono OsmAnd e OSM e vuoi sostenerli ed essere sostenuto da questi, questo è il miglior modo per farlo.</string>
+    <string name="osm_live_header">La sottoscrizione abilita gli aggiornamenti orari per tutte le mappe del mondo.
+\nParte degli incassi ritornano alla comunità OSM e sono corrisposti per ogni contributo a OSM.
+\nSe ti piacciono OsmAnd e OSM e vuoi sostenerli ed essere sostenuto da questi, questo è il miglior modo per farlo.</string>
     <string name="upload_anonymously">Carica anonimamente</string>
     <string name="show_transparency_seekbar">Mostra la barra di ricerca trasparente</string>
     <string name="shared_string_topbar">Barra superiore</string>
@@ -2313,13 +2315,13 @@ Rappresenta l\'area: %1$s x %2$s</string>
 \n
 \n Dall\'Afghanistan al Zimbabwe, dall\'Australia agli USA. Argentina, Brasile, Canada, Francia, Germania, Messico, Gran Bretagna, Spagna, …
 \n</string>
-    <string name="osmand_plus_extended_description_part7">"Contribuisci direttamente a OSM 
+    <string name="osmand_plus_extended_description_part7">Contribuisci direttamente a OSM 
 \n • Segnala errori nei dati 
 \n • Contribuisci tracce GPX a OSM direttamente dall\'app 
 \n • Aggiungi PDI e caricali direttamente in OSM (o successivamente se sei offline) 
 \n • Registrazione opzionale del viaggio anche in modalità background (mentre il dispositivo è in modalità sleep) 
-\n OsmAnd è software open-source attivamente in fase di sviluppo. Chiunque può contribuire all\'applicazione riportando degli errori, migliorando la traduzione o programmando nuove funzionalità. Inoltre il progetto si basa sui contributi finanziari per finanziare la programmazione e il test di nuove funzionalità. 
-\n "</string>
+\n OsmAnd è software open-source attivamente in fase di sviluppo. Chiunque può contribuire all\'applicazione riportando degli errori, migliorando la traduzione o programmando nuove funzionalità. Inoltre il progetto si basa sui contributi finanziari per finanziare la programmazione e il test di nuove funzionalità.
+\n</string>
     <string name="osmand_extended_description_part8">OsmAnd è un software open-source attivamente sviluppato. Chiunque può contribuire all\'app segnalando degli errori, migliorando la traduzione o programmando nuove funzionalità. Inoltre il progetto si basa anche sui contributi finanziari per finanziare la programmazione e il test di nuove funzionalità. 
 \n Copertura e qualità della mappa approssimativa: 
 \n • Ovest Europa: **** 
@@ -3564,10 +3566,10 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="import_duplicates_title">Alcuni oggetti esistono già</string>
     <string name="select_data_to_import">Seleziona i dati da importare.</string>
     <string name="import_rendering_file">Importa il file di rappresentazione</string>
-    <string name="restore_all_profile_settings_descr">Tutti le impostazioni del profilo saranno ripristinate ai valori iniziali dopo l\'importazione/creazione di questo profilo.</string>
+    <string name="restore_all_profile_settings_descr">Tutti le impostazioni del profilo saranno ripristinate ai valori iniziali dopo la creazione/importazione di questo profilo.</string>
     <string name="restore_all_profile_settings">Ripristinare tutte le impostazioni del profilo\?</string>
     <string name="saving_new_profile">Salvataggio del nuovo profilo</string>
-    <string name="profile_backup_failed">Impossibile fare una copia di salvataggio del profilo.</string>
+    <string name="profile_backup_failed">Impossibile creare un backup del profilo.</string>
     <string name="clear_recorded_data_warning">Sei sicuro di voler eliminare i dati registrati\?</string>
     <string name="importing_from">Importazione dei dati da %1$s</string>
     <string name="shared_string_importing">Importazione in corso</string>
@@ -3575,7 +3577,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_import_complete">Importazione completata</string>
     <string name="import_complete_description">Tutti i dati sono stati importati da %1$s, puoi utilizzare i bottoni sottostanti per aprire e gestire le parti dell\' applicazione di cui necessiti.</string>
     <string name="recalculate_route_distance_promo">Il percorso verrà ricalcolato quando la distanza tra il percorso e la propria posizione è maggiore del valore selezionato.</string>
-    <string name="select_distance_route_will_recalc">Seleziona dopo che distanza effettuare il ricalcolo del percorso.</string>
+    <string name="select_distance_route_will_recalc">Seleziona le distanza dopo la quale il percorso verrà ricalcolato.</string>
     <string name="recalculate_route_in_deviation">Ricalcola il percorso in caso di deviazione</string>
     <string name="shared_string_square">Quadrato</string>
     <string name="shared_string_rhomb">Rombo</string>

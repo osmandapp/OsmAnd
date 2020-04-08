@@ -564,7 +564,7 @@
         <item name="android:textColor">@color/active_color_primary_dark</item>
     </style>
 
-    <style name="OsmandPreferenceTheme" parent="@style/PreferenceThemeOverlay.v14.Material">
+    <style name="OsmandPreferenceTheme" parent="@style/PreferenceThemeOverlay">
         <item name="android:layout">@layout/preferences_screen</item>
         <item name="iconSpaceReserved">true</item>
     </style>
@@ -767,5 +767,9 @@
     <style name="AppBarTitle" parent="TextAppearance.AppCompat.Title">
         <item name="android:textColor">?attr/app_bar_primary_item_color</item>
         <item name="android:textSize">@dimen/dialog_header_text_size</item>
+    </style>
+
+    <style name="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:padding">0dp</item>
     </style>
 </resources>

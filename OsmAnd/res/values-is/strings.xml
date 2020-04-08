@@ -3624,4 +3624,5 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="app_mode_ski_snowmobile">Vélsleðar</string>
     <string name="custom_osmand_plugin">Sérsniðin OsmAnd-viðbót</string>
     <string name="shared_string_octagon">Átthyrningur</string>
+    <string name="shared_string_min">Lágm</string>
 </resources>
