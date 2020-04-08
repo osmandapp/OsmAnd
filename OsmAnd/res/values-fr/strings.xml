@@ -3172,7 +3172,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="select_base_profile_dialog_message">Basez votre profil personnel sur l\'un des profils par défaut pour définir les unités de vitesse, de distance ou la visibilité des widgets. Voici les profils par défaut de l\'application ainsi que des exemples de profils personnalisés :</string>
     <string name="temporary_conditional_routing">Prendre en compte les limitations temporaires</string>
     <string name="shared_string_default">Par défaut</string>
-    <string name="gpx_join_gaps">Relier les trous</string>
+    <string name="gpx_join_gaps">Fusionner pour éviter les interruptions</string>
     <string name="app_mode_camper">Campeur</string>
     <string name="app_mode_campervan">Camping-car</string>
     <string name="rendering_attr_showLez_description">Afficher les zones à faible émission sur la carte (n\'influe pas sur le calcul d\'itinéraire).</string>
@@ -3348,7 +3348,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="export_profile_failed">Impossible d\'exporter le profil.</string>
     <string name="profile_import">Importer le profil</string>
     <string name="profile_import_descr">Ajouter un profil en ouvrant son fichier avec OsmAnd.</string>
-    <string name="file_import_error">%1$s Erreur d\'importation : %2$s</string>
+    <string name="file_import_error">Erreur d\'import %1$s : %2$s</string>
     <string name="file_imported_successfully">%1$s importé avec succès.</string>
     <string name="rendering_value_white_name">Blanc</string>
     <string name="swap_two_places">Inverser %1$s et %2$s</string>

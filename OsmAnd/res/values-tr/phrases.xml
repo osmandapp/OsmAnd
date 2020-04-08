@@ -2311,4 +2311,13 @@
     <string name="poi_historic_civilization_minoan">Uygarlık: minos</string>
     <string name="poi_historic_civilization_tiahuanacota">Uygarlık: tiahuanaco</string>
     <string name="poi_language_school">Dil okulu</string>
+    <string name="poi_animal_no">Hayvanlara izin verilmez</string>
+    <string name="poi_animal_yes">Hayvanlara izin verilir</string>
+    <string name="poi_animal_training_horse">At</string>
+    <string name="poi_animal_training_dog">Köpek</string>
+    <string name="poi_animal_training">Hayvan eğitimi</string>
+    <string name="poi_video_telephone">Video</string>
+    <string name="poi_sms">SMS</string>
+    <string name="poi_volcano_status">Durum</string>
+    <string name="poi_volcano_type">Tür</string>
 </resources>

@@ -2839,7 +2839,7 @@ POIの更新は利用できません</string>
     <string name="open_in_browser_wiki">記事をオンラインで開く</string>
     <string name="open_in_browser_wiki_description">ウェブブラウザで記事を閲覧します。</string>
     <string name="download_wiki_region_placeholder">当該地域</string>
-    <string name="markers_remove_dialog_msg">マップマーカー「%s」を削除しますか？</string>
+    <string name="markers_remove_dialog_msg">マップマーカー\'%s\'を削除しますか？</string>
     <string name="edit_map_marker">マップマーカーの編集</string>
     <string name="third_party_application">サードパーティーアプリ</string>
     <string name="search_street">道路検索エリア</string>
@@ -2971,7 +2971,7 @@ POIの更新は利用できません</string>
     <string name="avoid_pt_types_descr">ナビゲーション時に使用したくない公共交通機関を指定します:</string>
     <string name="quick_action_day_night_mode">%sモード</string>
     <string name="avoid_pt_types">避けたい移動手段の種類…</string>
-    <string name="save_poi_value_exceed_length">『%s』タグの長さは255文字未満にしてください。</string>
+    <string name="save_poi_value_exceed_length">\"%s\"タグの長さは255文字未満にしてください。</string>
     <string name="save_poi_value_exceed_length_title">\"%s\"値の長さ</string>
     <string name="public_transport_warning_descr_blog">OsmAndのルーティング詳細については、公式ブログをご参照ください。</string>
     <string name="public_transport_warning_title">公共交通機関のナビゲーションは現在ベータテスト中で、エラーや不正確さを含む恐れがあります。</string>
@@ -3066,7 +3066,7 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_tracktype_grade4_name">やや軟らか</string>
     <string name="rendering_attr_tracktype_grade5_name">軟らかい</string>
     <string name="routeInfo_tracktype_name">表面硬度</string>
-    <string name="shared_string_file_is_saved">%s は保存されました</string>
+    <string name="shared_string_file_is_saved">%sを保存しました</string>
     <string name="app_mode_camper">キャンパー</string>
     <string name="app_mode_campervan">キャンピングカー</string>
     <string name="rendering_attr_showLez_description">マップ上に低排出ゾーン(CO2排出量の多い車両に課税するエリア)を表示します。ルーティングには影響しません。</string>
@@ -3126,7 +3126,7 @@ POIの更新は利用できません</string>
     <string name="profile_alert_need_save_title">変更の保存</string>
     <string name="profile_alert_need_save_msg">一旦プロファイルへ変更を保存する必要があります</string>
     <string name="profile_alert_delete_title">プロファイルの削除</string>
-    <string name="profile_alert_delete_msg">プロファイル 『%s』 を削除してよろしいですか？</string>
+    <string name="profile_alert_delete_msg">プロファイル \"%s\"を削除してよろしいですか？</string>
     <string name="select_base_profile_dialog_title">開始時に表示するプロファイルの選択</string>
     <string name="select_base_profile_dialog_message">カスタムプロファイルは標準のアプリケーションプロファイルを元に作成します。ウィジェットなどの表示設定や速度と距離の単位などの標準設定をプロファイルごとに定義可能です。これらは標準のアプリプロファイルを基本としており、今後それらと共に拡張される可能性があります:</string>
     <string name="select_nav_profile_dialog_title">ナビゲーションタイプの選択</string>
@@ -3182,7 +3182,7 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_highway_class_track_grade4_name">グレード4</string>
     <string name="rendering_attr_highway_class_track_grade5_name">グレード5</string>
     <string name="shared_string_open_track">経路を開く</string>
-    <string name="shared_string_track_is_saved">経路%sは保存されました</string>
+    <string name="shared_string_track_is_saved">経路%sを保存しました</string>
     <string name="temporary_conditional_routing">一時的な制限の検討</string>
     <string name="quick_action_need_to_add_item_to_list">『クイックアクション』のリストに最低ひとつは項目を設定する必要があります</string>
     <string name="routing_attr_piste_type_downhill_name">アルペン/ダウンヒルスキー</string>
@@ -3405,7 +3405,7 @@ POIの更新は利用できません</string>
     <string name="save_heading">見出しを含める</string>
     <string name="save_heading_descr">記録中の各トラックポイントに見出しも保存します。</string>
     <string name="personal_category_name">パーソナル</string>
-    <string name="shared_string_downloading_formatted">をダウンロード中</string>
+    <string name="shared_string_downloading_formatted">%sをダウンロード中</string>
     <string name="rendering_value_thick_name">濃い</string>
     <string name="desert_render_descr">砂漠などの過疎地に向いたマップスタイルです。各情報の詳細も表示されます。</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
