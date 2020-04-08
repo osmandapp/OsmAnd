@@ -15,8 +15,8 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginLeft="@dimen/content_padding"
+        android:layout_marginStart="@dimen/content_padding"
         tools:src="@drawable/ic_action_gabout_dark"/>
 
     <LinearLayout
@@ -25,8 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginLeft="@dimen/content_padding"
+        android:layout_marginStart="@dimen/content_padding"
         android:layout_toEndOf="@+id/icon"
         android:layout_toLeftOf="@+id/secondary_icon"
         android:layout_toRightOf="@+id/icon"
@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/content_padding"
         android:layout_toLeftOf="@+id/toggle_item"
         android:layout_toStartOf="@+id/toggle_item"
         tools:src="@drawable/ic_action_gabout_dark"/>
@@ -81,8 +81,8 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="@dimen/content_padding"
+        android:layout_marginRight="@dimen/content_padding"
         android:focusable="false"/>
 
     <View

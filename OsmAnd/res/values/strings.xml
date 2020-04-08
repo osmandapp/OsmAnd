@@ -11,6 +11,11 @@
 	Thx - Hardy
 
 -->
+    <string name="wiki_menu_download_descr">Additional maps are needed to view Wikipedia POIs on the map.</string>
+    <string name="wikipedia_poi_languages_promo">Some Wikipedia articles may not be available in your name, select the languages in which Wikipedia articles will appear on the map.\nYou will be able to switch between all available languages while reading the article.</string>
+    <string name="shared_string_all_languages">All languages</string>
+    <string name="shared_string_language">Language</string>
+    <string name="shared_string_languages">Languages</string>
     <string name="select_track_file">Select track file</string>
     <string name="settings_item_import_error">Could not import %1$s.</string>
     <string name="settings_item_write_error">Could not write %1$s.</string>

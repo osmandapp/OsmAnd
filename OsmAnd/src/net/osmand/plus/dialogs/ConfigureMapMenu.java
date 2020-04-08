@@ -27,6 +27,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
+import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererContext;
@@ -47,6 +48,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
@@ -55,6 +57,7 @@ import net.osmand.plus.settings.ConfigureMenuRootFragment.ScreenType;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.plus.wikipedia.WikipediaPoiMenu;
 import net.osmand.render.RenderingRule;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleStorageProperties;
@@ -99,6 +102,8 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_RENDERING_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.WIKIPEDIA_ID;
+import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_DENSITY_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
@@ -195,6 +200,10 @@ public class ConfigureMapMenu {
 			} else if (itemId == R.string.layer_gpx_layer && cm.getItem(pos).getSelected()) {
 				showGpxSelectionDialog(adapter, adapter.getItem(pos));
 				return false;
+			} else if (itemId == R.string.shared_string_wikipedia) {
+				ma.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.WIKIPEDIA,
+						AndroidUtils.getCenterViewCoordinates(view));
+				return false;
 			} else {
 				CompoundButton btn = (CompoundButton) view.findViewById(R.id.toggle_item);
 				if (btn != null && btn.getVisibility() == View.VISIBLE) {
@@ -217,11 +226,12 @@ public class ConfigureMapMenu {
 				item.setColorRes(isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 			}
 			if (itemId == R.string.layer_poi) {
-				poiFiltersHelper.clearSelectedPoiFilters();
+				poiFiltersHelper.clearSelectedPoiFilters(PoiTemplateList.POI);
 				if (isChecked) {
 					showPoiFilterDialog(adapter, adapter.getItem(pos));
 				} else {
-					adapter.getItem(pos).setDescription(poiFiltersHelper.getSelectedPoiFiltersName());
+					adapter.getItem(pos).setDescription(
+							poiFiltersHelper.getSelectedPoiFiltersName(PoiTemplateList.POI));
 				}
 			} else if (itemId == R.string.layer_amenity_label) {
 				settings.SHOW_POI_LABEL.set(isChecked);
@@ -235,6 +245,17 @@ public class ConfigureMapMenu {
 				} else {
 					showGpxSelectionDialog(adapter, adapter.getItem(pos));
 				}
+			} else if (itemId == R.string.shared_string_wikipedia) {
+				WikipediaPoiMenu.toggleWikipediaPoi(ma, isChecked, true,
+						new CallbackWithObject<Boolean>() {
+							@Override
+							public boolean processResult(Boolean result) {
+								item.setSelected(result);
+								item.setColorRes(result ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+								adapter.notifyDataSetChanged();
+								return true;
+							}
+						});
 			} else if (itemId == R.string.map_markers) {
 				settings.SHOW_MAP_MARKERS.set(isChecked);
 			} else if (itemId == R.string.layer_map) {
@@ -278,14 +299,14 @@ public class ConfigureMapMenu {
 						@Override
 						public void dismiss() {
 							PoiFiltersHelper pf = ma.getMyApplication().getPoiFilters();
-							boolean selected = pf.isShowingAnyPoi();
+							boolean selected = pf.isShowingAnyPoi(PoiTemplateList.POI);
 							item.setSelected(selected);
-							item.setDescription(pf.getSelectedPoiFiltersName());
+							item.setDescription(pf.getSelectedPoiFiltersName(PoiTemplateList.POI));
 							item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 							adapter.notifyDataSetChanged();
 						}
 					};
-			if (poiFiltersHelper.getSelectedPoiFilters().size() > 1) {
+			if (poiFiltersHelper.isShowingAnyPoi(PoiTemplateList.POI)) {
 				ma.getMapLayers().showMultichoicePoiFilterDialog(ma.getMapView(),
 						dismissListener);
 			} else {
@@ -295,7 +316,7 @@ public class ConfigureMapMenu {
 		}
 	}
 
-	private void createLayersItems(List<RenderingRuleProperty> customRules, ContextMenuAdapter adapter, 
+	private void createLayersItems(List<RenderingRuleProperty> customRules, ContextMenuAdapter adapter,
 	                               final MapActivity activity, final int themeRes, final boolean nightMode) {
 		final OsmandApplication app = activity.getMyApplication();
 		final OsmandSettings settings = app.getSettings();
@@ -315,12 +336,12 @@ public class ConfigureMapMenu {
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_fav_dark)
 				.setListener(l).createItem());
-		selected = app.getPoiFilters().isShowingAnyPoi();
+		selected = app.getPoiFilters().isShowingAnyPoi(PoiTemplateList.POI);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(POI_OVERLAY_ID)
 				.setTitleId(R.string.layer_poi, activity)
 				.setSelected(selected)
-				.setDescription(app.getPoiFilters().getSelectedPoiFiltersName())
+				.setDescription(app.getPoiFilters().getSelectedPoiFiltersName(PoiTemplateList.POI))
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_info_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
@@ -526,6 +547,16 @@ public class ConfigureMapMenu {
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(l).createItem());
 
+		selected = app.getPoiFilters().isShowingAnyPoi(PoiTemplateList.WIKI);
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setId(WIKIPEDIA_ID)
+				.setTitleId(R.string.shared_string_wikipedia, activity)
+				.setSelected(selected)
+				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setIcon(R.drawable.ic_plugin_wikipedia)
+				.setSecondaryIcon(R.drawable.ic_action_additional_option)
+				.setListener(l).createItem());
+
 		selected = settings.SHOW_MAP_MARKERS.get();
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(MAP_MARKERS_ID)
@@ -567,7 +598,7 @@ public class ConfigureMapMenu {
 		final OsmandSettings settings = app.getSettings();
 		final int selectedProfileColorRes = settings.APPLICATION_MODE.get().getIconColorInfo().getColor(nightMode);
 		final int selectedProfileColor = ContextCompat.getColor(app, selectedProfileColorRes);
-		
+
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_map_rendering, activity)
 				.setId(MAP_RENDERING_CATEGORY_ID)
 				.setCategory(true).setLayout(R.layout.list_group_title_with_switch).createItem());
@@ -1151,7 +1182,7 @@ public class ConfigureMapMenu {
 		final AlertDialog dialog = bld.create();
 
 		dialogAdapter.setDialog(dialog);
-		
+
 		if (customRulesIncluded != null) {
 			for (RenderingRuleProperty p : customRulesIncluded) {
 				if (!p.isBoolean()) {

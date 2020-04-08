@@ -85,6 +85,7 @@ import net.osmand.plus.views.DownloadedRegionsLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.wikipedia.WikipediaPoiMenu;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -175,6 +176,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		MAPILLARY,
 		CONTOUR_LINES,
 		OSM_NOTES,
+		WIKIPEDIA,
 		TERRAIN
 	}
 
@@ -322,6 +324,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			tv.setText(R.string.osm_notes);
 		} else if (visibleType == DashboardType.TERRAIN) {
 			tv.setText(R.string.shared_string_terrain);
+		} else if (visibleType == DashboardType.WIKIPEDIA) {
+			tv.setText(R.string.shared_string_wikipedia);
 		}
 		ImageView edit = (ImageView) dashboardView.findViewById(R.id.toolbar_edit);
 		edit.setVisibility(View.GONE);
@@ -677,7 +681,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				&& visibleType != DashboardType.CONFIGURE_MAP
 				&& visibleType != DashboardType.CONTOUR_LINES
 				&& visibleType != DashboardType.TERRAIN
-				&& visibleType != DashboardType.OSM_NOTES) {
+				&& visibleType != DashboardType.OSM_NOTES
+				&& visibleType != DashboardType.WIKIPEDIA) {
 			listView.setDivider(dividerDrawable);
 			listView.setDividerHeight(AndroidUtils.dpToPx(mapActivity, 1f));
 		} else {
@@ -714,6 +719,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			cm = ContourLinesMenu.createListAdapter(mapActivity);
 		} else if (visibleType == DashboardType.OSM_NOTES) {
 			cm = OsmNotesMenu.createListAdapter(mapActivity);
+		} else if (visibleType == DashboardType.WIKIPEDIA) {
+			cm = WikipediaPoiMenu.createListAdapter(mapActivity);
 		}
 		if (cm != null) {
 			updateListAdapter(cm);
@@ -732,14 +739,17 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	public void onNewDownloadIndexes() {
-		if (visibleType == DashboardType.CONTOUR_LINES || visibleType == DashboardType.TERRAIN) {
+		if (visibleType == DashboardType.CONTOUR_LINES
+				|| visibleType == DashboardType.TERRAIN
+				|| visibleType == DashboardType.WIKIPEDIA) {
 			refreshContent(true);
 		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public void onDownloadInProgress() {
-		if (visibleType == DashboardType.CONTOUR_LINES || visibleType == DashboardType.TERRAIN) {
+		if (visibleType == DashboardType.CONTOUR_LINES || visibleType == DashboardType.TERRAIN
+				|| visibleType == DashboardType.WIKIPEDIA) {
 			DownloadIndexesThread downloadThread = getMyApplication().getDownloadThread();
 			IndexItem downloadIndexItem = downloadThread.getCurrentDownloadingItem();
 			if (downloadIndexItem != null) {
@@ -766,6 +776,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				}
 			}
 			SRTMPlugin.refreshMapComplete(mapActivity);
+		} else if (visibleType == DashboardType.WIKIPEDIA) {
+			refreshContent(true);
 		}
 	}
 
