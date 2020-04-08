@@ -698,7 +698,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			cm = mapActivity.getMapLayers().getMapWidgetRegistry().getViewConfigureMenuAdapter(mapActivity);
 		} else if (visibleType == DashboardType.CONFIGURE_MAP) {
 			cm = new ConfigureMapMenu().createListAdapter(mapActivity);
-			cm.initItemsCustomOrder(getMyApplication(), ScreenType.CONFIGURE_MAP);
+			cm.initItemsCustomOrder(getMyApplication());
 		} else if (visibleType == DashboardType.LIST_MENU) {
 			cm = mapActivity.getMapActions().createMainOptionsMenu();
 		} else if (visibleType == DashboardType.ROUTE_PREFERENCES) {

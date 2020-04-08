@@ -46,6 +46,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 	private List<AdapterItem> items;
 	private MenuItemsAdapterListener listener;
 	private int activeColorRes;
+	private int textColorRes;
 
 
 	public RearrangeMenuItemsAdapter(OsmandApplication app,
@@ -57,6 +58,9 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 		activeColorRes = nightMode
 				? R.color.active_color_primary_dark
 				: R.color.active_color_primary_light;
+		textColorRes = nightMode
+				? R.color.text_color_primary_dark
+				: R.color.text_color_primary_light;
 	}
 
 	@Override
@@ -146,6 +150,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 					h.actionIcon.setVisibility(View.VISIBLE);
 				}
 				h.title.setText(menuItem.getTitle());
+				h.title.setTextColor(app.getResources().getColor(textColorRes));
 				h.description.setText(String.valueOf(menuItem.getOrder()));
 				h.divider.setVisibility(View.GONE);
 				h.moveIcon.setVisibility(View.VISIBLE);

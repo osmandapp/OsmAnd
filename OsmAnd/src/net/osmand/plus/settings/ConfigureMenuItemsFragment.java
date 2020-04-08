@@ -122,8 +122,8 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 			hiddenMenuItems = savedInstanceState.getStringArrayList(HIDDEN_ITEMS_KEY);
 			menuItemsOrder = (HashMap<String, Integer>) savedInstanceState.getSerializable(ITEMS_ORDER_KEY);
 		} else {
-			hiddenMenuItems = contextMenuAdapter.getHiddenItemsIds(app, screenType);
-			menuItemsOrder = contextMenuAdapter.getMenuItemsOrder(contextMenuAdapter.getItemsIdsOrder(app, screenType));
+			hiddenMenuItems = getSettingForScreen(app, screenType).getHiddenIds();
+			menuItemsOrder = contextMenuAdapter.getMenuItemsOrder(getSettingForScreen(app, screenType).getOrderIds());
 		}
 	}
 
@@ -218,34 +218,32 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		applyButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-					HashMap<String, Serializable> prefsMap = new HashMap<>();
-					prefsMap.put(contextMenuAdapter.getPrefIdHidden(app, screenType), (Serializable) hiddenMenuItems);
-					List<ContextMenuItem> defItems = contextMenuAdapter.getDefaultItems(screenType);
-					contextMenuAdapter.reorderMenuItems(defItems, menuItemsOrder);
-					List<String> ids = new ArrayList<>();
-					for (ContextMenuItem item : defItems) {
-						ids.add(item.getId());
-					}
-					prefsMap.put(contextMenuAdapter.getPrefIdOrder(app, screenType), (Serializable) ids);
-					FragmentManager fm = getFragmentManager();
-					if (fm != null) {
-						ChangeGeneralProfilesPrefBottomSheet.showInstance(
-								fm,
-								prefsMap,
-								getTargetFragment(),
-								false,
-								appMode,
-								new ChangeGeneralProfilesPrefBottomSheet.OnChangeSettingListener() {
-									@Override
-									public void onApplied() {
-										dismissFragment();
-									}
+				List<ContextMenuItem> defItems = contextMenuAdapter.getDefaultItems();
+				contextMenuAdapter.reorderMenuItems(defItems, menuItemsOrder);
+				List<String> ids = new ArrayList<>();
+				for (ContextMenuItem item : defItems) {
+					ids.add(item.getId());
+				}
+				FragmentManager fm = getFragmentManager();
+				String stringToSave = getSettingForScreen(app, screenType).convertToJsonString(hiddenMenuItems, ids);
+				if (fm != null) {
+					ChangeGeneralProfilesPrefBottomSheet.showInstance(fm,
+							getSettingForScreen(app, screenType).getId(),
+							stringToSave,
+							getTargetFragment(),
+							false,
+							appMode,
+							new ChangeGeneralProfilesPrefBottomSheet.OnChangeSettingListener() {
+								@Override
+								public void onApplied() {
+									dismissFragment();
+								}
 
-									@Override
-									public void onDiscard() {
+								@Override
+								public void onDiscard() {
 
-									}
-								});
+								}
+							});
 					}
 			}
 		});
@@ -259,8 +257,8 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		List<AdapterItem> items = new ArrayList<>();
 		items.add(new AdapterItem(DESCRIPTION, screenType));
 
-		List<AdapterItem> visible = contextMenuAdapter.getItemsForRearrangeAdapter(screenType, hiddenMenuItems, wasReset ? null : menuItemsOrder, false);
-		List<AdapterItem> hiddenItems = contextMenuAdapter.getItemsForRearrangeAdapter(screenType, hiddenMenuItems, wasReset ? null : menuItemsOrder, true);
+		List<AdapterItem> visible = contextMenuAdapter.getItemsForRearrangeAdapter(hiddenMenuItems, wasReset ? null : menuItemsOrder, false);
+		List<AdapterItem> hiddenItems = contextMenuAdapter.getItemsForRearrangeAdapter(hiddenMenuItems, wasReset ? null : menuItemsOrder, true);
 		if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
 			List<AdapterItem> main = new ArrayList<>();
 			int actionsIndex = 3;
@@ -360,22 +358,22 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	public void copyAppModePrefs(ApplicationMode appMode) {
 		if (appMode != null) {
 			List<OsmandSettings.OsmandPreference> prefs = new ArrayList<>();
-			switch (screenType) {
-				case DRAWER:
-					prefs.add(app.getSettings().DRAWER_ITEMS_ORDER);
-					prefs.add(app.getSettings().HIDDEN_DRAWER_ITEMS);
-					break;
-				case CONFIGURE_MAP:
-					prefs.add(app.getSettings().CONFIGURE_MAP_ITEMS_ORDER);
-					prefs.add(app.getSettings().HIDDEN_CONFIGURE_MAP_ITEMS);
-					break;
-				case CONTEXT_MENU_ACTIONS:
-					prefs.add(app.getSettings().CONTEXT_MENU_ACTIONS_ITEMS_ORDER);
-					prefs.add(app.getSettings().HIDDEN_CONTEXT_MENU_ACTIONS_ITEMS);
-					break;
-			}
+			prefs.add(getSettingForScreen(app, screenType));
 			app.getSettings().copyProfilePreferences(appMode, this.appMode, prefs);
 			dismissFragment();
+		}
+	}
+
+	public static OsmandSettings.MenuItemConfigPreference getSettingForScreen(OsmandApplication app, ScreenType screenType) {
+		switch (screenType) {
+			case DRAWER:
+				return app.getSettings().DRAWER_ITEMS;
+			case CONFIGURE_MAP:
+				return app.getSettings().CONFIGURE_MAP_ITEMS;
+			case CONTEXT_MENU_ACTIONS:
+				return app.getSettings().CONTEXT_MENU_ACTIONS_ITEMS;
+			default:
+				throw new IllegalArgumentException("Unsupported screen type");
 		}
 	}
 }

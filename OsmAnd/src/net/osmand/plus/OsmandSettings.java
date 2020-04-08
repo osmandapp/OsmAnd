@@ -25,6 +25,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
 import net.osmand.aidl.OsmandAidlApi;
@@ -56,6 +57,8 @@ import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -78,6 +81,8 @@ import java.util.Set;
 import java.util.StringTokenizer;
 
 public class OsmandSettings {
+
+	private static final Log LOG = PlatformUtil.getLog(OsmandSettings.class.getName());
 
 	public static final int VERSION = 1;
 
@@ -410,11 +415,6 @@ public class OsmandSettings {
 			} else if (preference instanceof BooleanPreference) {
 				if (value instanceof Boolean) {
 					((BooleanPreference) preference).setModeValue(mode, (Boolean) value);
-					return true;
-				}
-			} else if (preference instanceof ListStringPreference) {
-				if (value instanceof List) {
-					((ListStringPreference) preference).setModeValues(mode, (List<String>) value);
 					return true;
 				}
 			} else if (preference instanceof StringPreference) {
@@ -1100,6 +1100,75 @@ public class OsmandSettings {
 				}
 			}
 			return setModeValue(mode, vl);
+		}
+	}
+
+	public class MenuItemConfigPreference extends StringPreference {
+		private static final String HIDDEN = "hidden";
+		private static final String ORDER = "order";
+
+		private MenuItemConfigPreference(String id, String defaultValue) {
+			super(id, defaultValue);
+		}
+
+		private void addIdsToJsonArray(@NonNull JSONArray jsonArray, List<String> ids) {
+			if (ids != null && !ids.isEmpty()) {
+				for (String id : ids) {
+					jsonArray.put(id);
+				}
+			}
+		}
+
+		private List<String> getIdValues(String itemName) {
+			List<String> ids = new ArrayList<>();
+			String itemsString = get();
+			if (itemsString == null) {
+				return ids;
+			}
+			try {
+				JSONObject json = new JSONObject(itemsString);
+				JSONObject items = json.optJSONObject(getId());
+				JSONArray idsArray = items.optJSONArray(itemName);
+				if (idsArray != null) {
+					for (int i = 0; i < idsArray.length(); i++) {
+						String id = idsArray.optString(i);
+						ids.add(id);
+					}
+				}
+			} catch (JSONException e) {
+				LOG.error("Error converting to json string: " + e);
+			}
+			return ids;
+		}
+
+		public String convertToJsonString(List<String> hidden, List<String> order) {
+			try {
+				JSONObject json = new JSONObject();
+				JSONObject items = new JSONObject();
+				JSONArray hiddenItems = new JSONArray();
+				JSONArray orderItems = new JSONArray();
+				addIdsToJsonArray(hiddenItems, hidden);
+				addIdsToJsonArray(orderItems, order);
+				items.put(HIDDEN, hiddenItems);
+				items.put(ORDER, orderItems);
+				json.put(getId(), items);
+				return json.toString();
+			} catch (JSONException e) {
+				LOG.error("Error converting to json string: " + e);
+			}
+			return "";
+		}
+
+		public boolean setIdValues(List<String> hidden, List<String> order) {
+			return set(convertToJsonString(hidden, order));
+		}
+
+		public List<String> getHiddenIds() {
+			return getIdValues(HIDDEN);
+		}
+
+		public List<String> getOrderIds() {
+			return getIdValues(ORDER);
 		}
 	}
 
@@ -3410,29 +3479,20 @@ public class OsmandSettings {
 		SELECTED_POI_FILTER_FOR_MAP.set(android.text.TextUtils.join(",", poiFilters));
 	}
 
-	public final ListStringPreference HIDDEN_CONTEXT_MENU_ACTIONS_ITEMS = (ListStringPreference)
-			new ListStringPreference("hidden_context_menu_actions_items", null, ",,").makeProfile().cache();
-
-	public final ListStringPreference CONTEXT_MENU_ACTIONS_ITEMS_ORDER = (ListStringPreference)
-			new ListStringPreference("context_menu_actions_items_order", null, ",,").makeProfile().cache();
-
-	public final ListStringPreference HIDDEN_CONFIGURE_MAP_ITEMS = (ListStringPreference)
-			new ListStringPreference("hidden_configure_map_items", null, ",,").makeProfile().cache();
-
-	public final ListStringPreference CONFIGURE_MAP_ITEMS_ORDER = (ListStringPreference)
-			new ListStringPreference("configure_map_items_order", null, ",,").makeProfile().cache();
-
-	public final ListStringPreference DRAWER_ITEMS_ORDER = (ListStringPreference)
-			new ListStringPreference("drawer_items_order", null, ",,").makeProfile().cache();
-
-	public final ListStringPreference HIDDEN_DRAWER_ITEMS = (ListStringPreference)
-			new ListStringPreference("hidden_drawer_items", null, ",,").makeProfile().cache();
-
 	public final ListStringPreference POI_FILTERS_ORDER = (ListStringPreference)
 			new ListStringPreference("poi_filters_order", null, ",,").makeProfile().cache();
 	
 	public final ListStringPreference INACTIVE_POI_FILTERS = (ListStringPreference)
 			new ListStringPreference("inactive_poi_filters", null, ",,").makeProfile().cache();
+
+	public final MenuItemConfigPreference DRAWER_ITEMS =
+			(MenuItemConfigPreference) new MenuItemConfigPreference("drawer_items", null).makeProfile().cache();
+
+	public final MenuItemConfigPreference CONFIGURE_MAP_ITEMS =
+			(MenuItemConfigPreference) new MenuItemConfigPreference("configure_map_items", null).makeProfile().cache();
+
+	public final MenuItemConfigPreference CONTEXT_MENU_ACTIONS_ITEMS =
+			(MenuItemConfigPreference) new MenuItemConfigPreference("context_menu_actions_items", null).makeProfile().cache();
 
 	public static final String VOICE_PROVIDER_NOT_USE = "VOICE_PROVIDER_NOT_USE";
 

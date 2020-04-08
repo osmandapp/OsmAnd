@@ -33,16 +33,8 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 
 	private static final String NEW_VALUE_KEY = "new_value_key";
 
-	private static final String PREFS_MAP_KEY = "prefs_map_key";
-
 	@Nullable
 	private Serializable newValue;
-
-	@Nullable
-	private String prefId;
-
-	@Nullable
-	private HashMap<String, Serializable> prefsMap;
 
 	@Nullable
 	private OnChangeSettingListener listener;
@@ -58,12 +50,11 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 		if (app == null || args == null) {
 			return;
 		}
-		prefId = args.getString(PREFERENCE_ID);
+		final String prefId = args.getString(PREFERENCE_ID);
 		newValue = args.getSerializable(NEW_VALUE_KEY);
-		prefsMap = (HashMap<String, Serializable>) args.getSerializable(PREFS_MAP_KEY);
-//		if (newValue == null || prefId == null) {
-//			return;
-//		}
+		if (newValue == null || prefId == null) {
+			return;
+		}
 
 		items.add(new TitleItem(getString(R.string.change_default_settings)));
 		items.add(new LongDescriptionItem(getString(R.string.apply_preference_to_all_profiles)));
@@ -75,11 +66,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						if (prefsMap != null) {
-							savePrefs(app, prefsMap, true);
-						} else if (newValue != null || prefId != null) {
-							app.getSettings().setPreferenceForAllModes(prefId, newValue);
-						}
+						app.getSettings().setPreferenceForAllModes(prefId, newValue);
 						updateTargetSettings(false, true);
 						if (listener != null) {
 							listener.onApplied();
@@ -99,11 +86,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						if (prefsMap != null) {
-							savePrefs(app, prefsMap, false);
-						} else if (newValue != null || prefId != null) {
-							app.getSettings().setPreference(prefId, newValue, getAppMode());
-						}
+						app.getSettings().setPreference(prefId, newValue, getAppMode());
 						updateTargetSettings(false, false);
 						if (listener != null) {
 							listener.onApplied();
@@ -143,18 +126,6 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 		outState.putSerializable(NEW_VALUE_KEY, newValue);
 	}
 
-	private void savePrefs(@NonNull OsmandApplication app,
-	                       @NonNull HashMap<String, Serializable> prefsMap, boolean toAllProfiles) {
-		List<String> ids = new ArrayList<>(prefsMap.keySet());
-		for (String id : ids) {
-			if (toAllProfiles) {
-				app.getSettings().setPreferenceForAllModes(id, prefsMap.get(id));
-			} else {
-				app.getSettings().setPreference(id, prefsMap.get(id), getAppMode());
-			}
-		}
-	}
-
 	private void updateTargetSettings(boolean discard, boolean appliedToAllProfiles) {
 		BaseSettingsFragment target = (BaseSettingsFragment) getTargetFragment();
 		if (target != null) {
@@ -184,22 +155,22 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 	                                Fragment target,
 	                                boolean usedOnMap,
 	                                @Nullable ApplicationMode appMode) {
-		showFragmentInstance(fm, prefId, newValue, null, target, usedOnMap, appMode, null);
+		showFragmentInstance(fm, prefId, newValue, target, usedOnMap, appMode, null);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm,
-	                                @Nullable HashMap<String, Serializable> prefs,
+	                                @Nullable String prefId,
+	                                @Nullable Serializable newValue,
 	                                Fragment target,
 	                                boolean usedOnMap,
 	                                @Nullable ApplicationMode appMode,
 	                                @Nullable OnChangeSettingListener listener) {
-		showFragmentInstance(fm, null, null, prefs, target, usedOnMap, appMode, listener);
+		showFragmentInstance(fm, prefId, newValue, target, usedOnMap, appMode, listener);
 	}
 
 	private static void showFragmentInstance(@NonNull FragmentManager fm,
 	                                         @Nullable String prefId,
 	                                         @Nullable Serializable newValue,
-	                                         @Nullable HashMap<String, Serializable> prefs,
 	                                         Fragment target,
 	                                         boolean usedOnMap,
 	                                         @Nullable ApplicationMode appMode,
@@ -207,15 +178,8 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 		try {
 			if (fm.findFragmentByTag(ChangeGeneralProfilesPrefBottomSheet.TAG) == null) {
 				Bundle args = new Bundle();
-				if (prefId != null) {
-					args.putString(PREFERENCE_ID, prefId);
-				}
-				if (newValue != null) {
-					args.putSerializable(NEW_VALUE_KEY, newValue);
-				}
-				if (prefs != null) {
-					args.putSerializable(PREFS_MAP_KEY, prefs);
-				}
+				args.putString(PREFERENCE_ID, prefId);
+				args.putSerializable(NEW_VALUE_KEY, newValue);
 
 				ChangeGeneralProfilesPrefBottomSheet fragment = new ChangeGeneralProfilesPrefBottomSheet();
 				fragment.setArguments(args);

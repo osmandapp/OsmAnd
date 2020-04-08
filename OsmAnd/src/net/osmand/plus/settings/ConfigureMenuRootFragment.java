@@ -37,6 +37,7 @@ import net.osmand.plus.activities.PluginsActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 
@@ -222,12 +223,12 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 						contextMenuAdapter = configureMapMenu.createListAdapter((MapActivity) activity);
 						break;
 					case CONTEXT_MENU_ACTIONS:
-						ConfigureMapMenu configureaMapMenu = new ConfigureMapMenu();
-						contextMenuAdapter = configureaMapMenu.createListAdapter((MapActivity) activity);
+						MapContextMenu menu = ((MapActivity) activity).getContextMenu();
+						contextMenuAdapter = menu.getAdapter();
 						break;
 				}
-				int hiddenCount = contextMenuAdapter.getHiddenItemsIds(app, type).size();
-				int allCount = contextMenuAdapter.getDefaultItems(type).size();
+				int hiddenCount = ConfigureMenuItemsFragment.getSettingForScreen(app, type).getHiddenIds().size();
+				int allCount = contextMenuAdapter.getDefaultItems().size();
 				String amount = getString(R.string.n_items_of_z, String.valueOf(allCount - hiddenCount), String.valueOf(allCount));
 				return getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.shared_string_items), amount);
 			}
