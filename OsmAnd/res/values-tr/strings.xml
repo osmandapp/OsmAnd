@@ -3570,4 +3570,11 @@
     <string name="settings_item_read_error">%1$s okunamadı.</string>
     <string name="settings_item_write_error">%1$s yazılamadı.</string>
     <string name="settings_item_import_error">%1$s içe aktarılamadı.</string>
+    <string name="select_track_file">İzlenen yol dosyasını seç</string>
+    <string name="shared_string_languages">Diller</string>
+    <string name="shared_string_language">Dil</string>
+    <string name="shared_string_all_languages">Tüm diller</string>
+    <string name="wikipedia_poi_languages_promo">Bazı Wikipedia makaleleri adınızda bulunmayabilir, Wikipedia makalelerinin haritada görüneceği dilleri seçin.
+\nMakaleyi okurken mevcut tüm diller arasında geçiş yapabileceksiniz.</string>
+    <string name="wiki_menu_download_descr">Wikipedia POI\'lerini haritada görüntülemek için ek haritalara ihtiyaç vardır.</string>
 </resources>
