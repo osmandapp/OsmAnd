@@ -65,6 +65,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
+import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
+
 /**
  * Object is responsible to maintain layers using by map activity
  */
@@ -304,9 +306,9 @@ public class MapActivityLayers {
 								if (filter.isStandardFilter()) {
 									filter.removeUnsavedFilterByName();
 								}
-								getApplication().getPoiFilters().addSelectedPoiFilter(filter);
+								poiFilters.addSelectedPoiFilter(PoiTemplateList.POI, filter);
 							} else {
-								getApplication().getPoiFilters().removeSelectedPoiFilter(filter);
+								poiFilters.removeSelectedPoiFilter(PoiTemplateList.POI, filter);
 							}
 						}
 						mapView.refreshMap();
@@ -368,8 +370,8 @@ public class MapActivityLayers {
 					if (pf.isStandardFilter()) {
 						pf.removeUnsavedFilterByName();
 					}
-					getApplication().getPoiFilters().clearSelectedPoiFilters();
-					getApplication().getPoiFilters().addSelectedPoiFilter(pf);
+					poiFilters.clearSelectedPoiFilters(PoiTemplateList.POI);
+					poiFilters.addSelectedPoiFilter(PoiTemplateList.POI, pf);
 					mapView.refreshMap();
 				}
 			}

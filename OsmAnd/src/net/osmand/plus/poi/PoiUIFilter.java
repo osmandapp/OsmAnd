@@ -39,6 +39,9 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
+import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
+import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
+
 public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>, CustomSearchPoiFilter {
 
 	public final static String STD_PREFIX = "std_"; //$NON-NLS-1$
@@ -144,6 +147,11 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 
 	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
+	}
+
+	public boolean isWikiFilter() {
+		return filterId.startsWith(STD_PREFIX + WIKI_PLACE)
+				|| filterId.equals(STD_PREFIX + OSM_WIKI_CATEGORY);
 	}
 
 	public String getFilterByName() {

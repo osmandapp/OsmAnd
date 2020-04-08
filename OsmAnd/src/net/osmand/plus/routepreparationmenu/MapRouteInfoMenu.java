@@ -119,6 +119,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
+import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
+
 public class MapRouteInfoMenu implements IRouteInformationListener, CardListener, FavoritesListener {
 
 	private static final Log LOG = PlatformUtil.getLog(MapRouteInfoMenu.class);
@@ -1149,7 +1151,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private void createShowAlongTheRouteItems(MapActivity mapActivity, LinearLayout optionsContainer) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		final ApplicationMode applicationMode = app.getRoutingHelper().getAppMode();
-		final Set<PoiUIFilter> poiFilters = app.getPoiFilters().getSelectedPoiFilters();
+		final Set<PoiUIFilter> poiFilters = app.getPoiFilters().getSelectedPoiFilters(PoiTemplateList.POI);
 		final boolean traffic = app.getSettings().SHOW_TRAFFIC_WARNINGS.getModeValue(applicationMode);
 		final boolean fav = app.getSettings().SHOW_NEARBY_FAVORITES.getModeValue(applicationMode);
 		if (!poiFilters.isEmpty()) {
@@ -1175,7 +1177,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					public void onClick(View v) {
 						MapActivity mapActivity = getMapActivity();
 						if (mapActivity != null) {
-							mapActivity.getMyApplication().getPoiFilters().removeSelectedPoiFilter(poiUIFilter);
+							mapActivity.getMyApplication().getPoiFilters().removeSelectedPoiFilter(PoiTemplateList.POI, poiUIFilter);
 							mapActivity.getMapView().refreshMap();
 							updateOptionsButtons();
 						}

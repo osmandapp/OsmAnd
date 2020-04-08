@@ -1,5 +1,7 @@
 package net.osmand.plus.poi;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 
 import net.osmand.osm.AbstractPoiType;
@@ -7,10 +9,12 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.api.SQLiteAPI.SQLiteStatement;
+import net.osmand.plus.wikipedia.WikipediaPoiMenu;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -22,9 +26,13 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
+
+import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 
 public class PoiFiltersHelper {
 
@@ -37,8 +45,10 @@ public class PoiFiltersHelper {
 	private PoiUIFilter customPOIFilter;
 	private PoiUIFilter showAllPOIFilter;
 	private PoiUIFilter localWikiPoiFilter;
+	private PoiUIFilter globalWikiPoiFilter;
 	private List<PoiUIFilter> cacheTopStandardFilters;
-	private Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>();
+	private List<PoiUIFilter> cacheWikipediaFilters;
+	private Map<PoiTemplateList, Set<PoiUIFilter>> selectedPoiFilters = new TreeMap<>();
 
 	private static final String UDF_CAR_AID = "car_aid";
 	private static final String UDF_FOR_TOURISTS = "for_tourists";
@@ -55,6 +65,10 @@ public class PoiFiltersHelper {
 			UDF_CAR_AID, UDF_FOR_TOURISTS, UDF_FOOD_SHOP, UDF_FUEL, UDF_SIGHTSEEING, UDF_EMERGENCY,
 			UDF_PUBLIC_TRANSPORT, UDF_ACCOMMODATION, UDF_RESTAURANTS, UDF_PARKING
 	};
+
+	public enum PoiTemplateList {
+		POI, WIKI
+	}
 	
 	public PoiFiltersHelper(OsmandApplication application) {
 		this.application = application;
@@ -103,7 +117,7 @@ public class PoiFiltersHelper {
 
 	public PoiUIFilter getLocalWikiPOIFilter() {
 		if (localWikiPoiFilter == null) {
-			PoiType place = application.getPoiTypes().getPoiTypeByKey("wiki_place");
+			PoiType place = application.getPoiTypes().getPoiTypeByKey(WIKI_PLACE);
 			if (place != null && !Algorithms.isEmpty(application.getLanguage())) {
 				PoiUIFilter filter = new PoiUIFilter(place, application, " " +
 						application.getLangTranslation(application.getLanguage()));
@@ -113,6 +127,57 @@ public class PoiFiltersHelper {
 			}
 		}
 		return localWikiPoiFilter;
+	}
+
+	public PoiUIFilter getGlobalWikiPoiFilter() {
+		if (globalWikiPoiFilter == null) {
+			String wikiFilterId = PoiUIFilter.STD_PREFIX + "osmwiki";
+			for (PoiUIFilter filter : getTopDefinedPoiFilters()) {
+				if (wikiFilterId.equals(filter.getFilterId())) {
+					globalWikiPoiFilter = filter;
+					break;
+				}
+			}
+		}
+		return globalWikiPoiFilter;
+	}
+
+	public List<PoiUIFilter> getLocalWikipediaPoiFilters(boolean onlyActiveLocales) {
+		String wikiLang = "wiki:lang:";
+		if (cacheWikipediaFilters == null) {
+			cacheWikipediaFilters = new ArrayList<>();
+			PoiType place = application.getPoiTypes().getPoiTypeByKey(WIKI_PLACE);
+			if (place != null) {
+				for (String locale : application.getPoiTypes().getAllAvailableWikiLocales()) {
+					PoiUIFilter filter = new PoiUIFilter(place, application, " " +
+							WikipediaPoiMenu.getTranslation(application, locale));
+					filter.setSavedFilterByName(wikiLang + locale);
+					filter.setStandardFilter(true);
+					cacheWikipediaFilters.add(filter);
+				}
+			}
+		}
+		if (onlyActiveLocales && cacheWikipediaFilters.size() > 0) {
+			List<PoiUIFilter> onlyActiveLocalFilters = new ArrayList<>();
+			Bundle wikiPoiSettings = WikipediaPoiMenu.getWikiPoiSettings(application);
+			if (wikiPoiSettings != null) {
+				List<String> enabledWikipediaPoiLocales =
+						wikiPoiSettings.getStringArrayList(WikipediaPoiMenu.ENABLED_WIKI_POI_LANGUAGES_KEY);
+				if (enabledWikipediaPoiLocales != null) {
+					for (PoiUIFilter filter : cacheWikipediaFilters) {
+						for (String locale : enabledWikipediaPoiLocales) {
+							String filterId = filter.getSavedFilterByName();
+							String filterLocale = filterId.substring(wikiLang.length());
+							if (locale.equalsIgnoreCase(filterLocale)) {
+								onlyActiveLocalFilters.add(filter);
+							}
+						}
+					}
+				}
+			}
+			return onlyActiveLocalFilters;
+		}
+		return cacheWikipediaFilters;
 	}
 
 	public PoiUIFilter getShowAllPOIFilter() {
@@ -159,8 +224,13 @@ public class PoiFiltersHelper {
 				return f;
 			}
 		}
+		for (PoiUIFilter f : getLocalWikipediaPoiFilters(true)) {
+			if (f.getFilterId().equals(filterId)) {
+				return f;
+			}
+		}
 		PoiUIFilter ff = getFilterById(filterId, getCustomPOIFilter(), getSearchByNamePOIFilter(),
-				getLocalWikiPOIFilter(), getShowAllPOIFilter(), getNominatimPOIFilter(), getNominatimAddressFilter());
+				getGlobalWikiPoiFilter(), getShowAllPOIFilter(), getNominatimPOIFilter(), getNominatimAddressFilter());
 		if (ff != null) {
 			return ff;
 		}
@@ -225,9 +295,6 @@ public class PoiFiltersHelper {
 			List<PoiUIFilter> top = new ArrayList<>();
 			// user defined
 			top.addAll(getUserDefinedPoiFilters(true));
-			if (getLocalWikiPOIFilter() != null) {
-				top.add(getLocalWikiPOIFilter());
-			}
 			// default
 			MapPoiTypes poiTypes = application.getPoiTypes();
 			for (AbstractPoiType t : poiTypes.getTopVisibleFilters()) {
@@ -258,7 +325,11 @@ public class PoiFiltersHelper {
 	public List<PoiUIFilter> getSortedPoiFilters(boolean onlyActive) {
 		initPoiUIFiltersState();
 		List<PoiUIFilter> allFilters = new ArrayList<>();
-		allFilters.addAll(getTopDefinedPoiFilters());
+		for (PoiUIFilter filter : getTopDefinedPoiFilters()) {
+			if (!filter.isWikiFilter()) {
+				allFilters.add(filter);
+			}
+		}
 		allFilters.addAll(getSearchPoiFilters());
 		Collections.sort(allFilters);
 		if (onlyActive) {
@@ -421,28 +492,70 @@ public class PoiFiltersHelper {
 		return false;
 	}
 
-	@NonNull
 	public Set<PoiUIFilter> getSelectedPoiFilters() {
-		return selectedPoiFilters;
+		Set<PoiUIFilter> result = new TreeSet<>();
+		for (Set<PoiUIFilter> template : selectedPoiFilters.values()) {
+			if (template != null) {
+				result.addAll(template);
+			}
+		}
+		return result;
 	}
 
-	public void addSelectedPoiFilter(PoiUIFilter filter) {
-		selectedPoiFilters.add(filter);
+	@NonNull
+	public Set<PoiUIFilter> getSelectedPoiFilters(PoiTemplateList type) {
+		Set<PoiUIFilter> result = selectedPoiFilters.get(type);
+		if (result == null) {
+			return new TreeSet<>();
+		}
+		return result;
+	}
+
+	public void addSelectedPoiFilter(PoiTemplateList type, PoiUIFilter filter) {
+		if (!selectedPoiFilters.containsKey(type)) {
+			selectedPoiFilters.put(type, new TreeSet<PoiUIFilter>());
+		}
+		Set<PoiUIFilter> templateFilters = selectedPoiFilters.get(type);
+		if (templateFilters != null) {
+			templateFilters.add(filter);
+		}
 		saveSelectedPoiFilters();
 	}
 
-	public void removeSelectedPoiFilter(PoiUIFilter filter) {
-		selectedPoiFilters.remove(filter);
+	public void removeSelectedPoiFilter(PoiTemplateList type, PoiUIFilter filter) {
+		if (selectedPoiFilters.containsKey(type)) {
+			Set<PoiUIFilter> templateFilters = selectedPoiFilters.get(type);
+			if (templateFilters != null) {
+				templateFilters.remove(filter);
+			}
+		}
 		saveSelectedPoiFilters();
 	}
 
 	public boolean isShowingAnyPoi() {
-		return !selectedPoiFilters.isEmpty();
+		for (PoiTemplateList type : selectedPoiFilters.keySet()) {
+			if (isShowingAnyPoi(type)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean isShowingAnyPoi(PoiTemplateList type) {
+		return !getSelectedPoiFilters(type).isEmpty();
 	}
 
 	public void clearSelectedPoiFilters() {
-		selectedPoiFilters.clear();
-		saveSelectedPoiFilters();
+		for (PoiTemplateList t : selectedPoiFilters.keySet()) {
+			clearSelectedPoiFilters(t);
+		}
+	}
+
+	public void clearSelectedPoiFilters(PoiTemplateList type) {
+		Set<PoiUIFilter> templateFilters = selectedPoiFilters.get(type);
+		if (templateFilters != null) {
+			templateFilters.clear();
+		}
 	}
 
 	public void hidePoiFilters() {
@@ -461,18 +574,23 @@ public class PoiFiltersHelper {
 		}
 	}
 
-	public String getSelectedPoiFiltersName() {
-		return getFiltersName(selectedPoiFilters);
+	public String getSelectedPoiFiltersName(PoiTemplateList type) {
+		return getFiltersName(getSelectedPoiFilters(type));
 	}
 
 	public boolean isPoiFilterSelected(PoiUIFilter filter) {
-		return selectedPoiFilters.contains(filter);
+		for (Set<PoiUIFilter> template : selectedPoiFilters.values()) {
+			return template.contains(filter);
+		}
+		return false;
 	}
 
 	public boolean isPoiFilterSelected(String filterId) {
-		for (PoiUIFilter filter : selectedPoiFilters) {
-			if (filter.filterId.equals(filterId)) {
-				return true;
+		for (Set<PoiUIFilter> template : selectedPoiFilters.values()) {
+			for (PoiUIFilter filter : template) {
+				if (filter.filterId.equals(filterId)) {
+					return true;
+				}
 			}
 		}
 		return false;
@@ -480,19 +598,29 @@ public class PoiFiltersHelper {
 
 	public void loadSelectedPoiFilters() {
 		selectedPoiFilters.clear();
-		Set<String> filters = application.getSettings().getSelectedPoiFilters();
+		OsmandSettings settings = application.getSettings();
+		Set<String> filters = settings.getSelectedPoiFilters();
+		boolean shouldShowWikiPoi = WikipediaPoiMenu.isWikiPoiEnabled(application);
 		for (String f : filters) {
 			PoiUIFilter filter = getFilterById(f);
 			if (filter != null) {
-				selectedPoiFilters.add(filter);
+				if (filter.isWikiFilter()) {
+					if (shouldShowWikiPoi) {
+						addSelectedPoiFilter(PoiTemplateList.WIKI, filter);
+					}
+				} else {
+					addSelectedPoiFilter(PoiTemplateList.POI, filter);
+				}
 			}
 		}
 	}
 
 	private void saveSelectedPoiFilters() {
 		Set<String> filters = new HashSet<>();
-		for (PoiUIFilter f : selectedPoiFilters) {
-			filters.add(f.filterId);
+		for (Set<PoiUIFilter> template : selectedPoiFilters.values()) {
+			for (PoiUIFilter filter : template) {
+				filters.add(filter.filterId);
+			}
 		}
 		application.getSettings().setSelectedPoiFilters(filters);
 	}

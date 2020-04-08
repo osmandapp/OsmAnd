@@ -1012,42 +1012,58 @@ public class OsmandSettings {
 			super(id, defaultValue);
 			this.delimiter = delimiter;
 		}
-		
+
 		public boolean addValue(String res) {
-			String vl = get();
+			return addModeValue(getApplicationMode(), res);
+		}
+
+		public boolean addModeValue(ApplicationMode appMode, String res) {
+			String vl = getModeValue(appMode);
 			if (vl == null || vl.isEmpty()) {
 				vl = res + delimiter;
 			} else {
 				vl = vl + res + delimiter;
 			}
-			set(vl);
+			setModeValue(appMode, vl);
 			return true;
 		}
-		
+
 		public void clearAll() {
-			set("");
+			clearAllForProfile(getApplicationMode());
+		}
+
+		public void clearAllForProfile(ApplicationMode appMode) {
+			setModeValue(appMode, "");
 		}
 		
 		public boolean containsValue(String res) {
-			String vl = get();
+			return containsValue(getApplicationMode(), res);
+		}
+
+		public boolean containsValue(ApplicationMode appMode, String res) {
+			String vl = getModeValue(appMode);
 			String r = res + delimiter;
-			return vl.startsWith(r) || vl.indexOf(delimiter + r) >= 0;
+			return vl.startsWith(r) || vl.contains(delimiter + r);
 		}
 		
 		public boolean removeValue(String res) {
-			String vl = get();
+			return removeValueForProfile(getApplicationMode(), res);
+		}
+
+		public boolean removeValueForProfile(ApplicationMode appMode, String res) {
+			String vl = getModeValue(appMode);
 			String r = res + delimiter;
 			if(vl != null) {
 				if(vl.startsWith(r)) {
 					vl = vl.substring(r.length());
-					set(vl);
+					setModeValue(appMode, vl);
 					return true;
 				} else {
 					int it = vl.indexOf(delimiter + r);
 					if(it >= 0) {
 						vl = vl.substring(0, it + delimiter.length()) + vl.substring(it + delimiter.length() + r.length());
 					}
-					set(vl);
+					setModeValue(appMode, vl);
 					return true;
 				}
 			}
@@ -1055,7 +1071,11 @@ public class OsmandSettings {
 		}
 
 		public List<String> getStringsList() {
-			final String listAsString = get();
+			return getStringsListForProfile(getApplicationMode());
+		}
+
+		public List<String> getStringsListForProfile(ApplicationMode appMode) {
+			final String listAsString = getModeValue(appMode);
 			if (listAsString != null) {
 				if (listAsString.contains(delimiter)) {
 					return Arrays.asList(listAsString.split(delimiter));
@@ -1069,13 +1089,17 @@ public class OsmandSettings {
 		}
 
 		public void setStringsList(List<String> values) {
+			setStringsListForProfile(getApplicationMode(), values);
+		}
+
+		public void setStringsListForProfile(ApplicationMode appMode, List<String> values) {
 			if (values == null || values.size() == 0) {
-				set(null);
+				setModeValue(appMode, null);
 				return;
 			}
-			clearAll();
+			clearAllForProfile(appMode);
 			for (String value : values) {
-				addValue(value);
+				addModeValue(appMode, value);
 			}
 		}
 	}
@@ -1261,6 +1285,9 @@ public class OsmandSettings {
 
 	public final CommonPreference<Boolean> WIKI_ARTICLE_SHOW_IMAGES_ASKED = new BooleanPreference("wikivoyage_show_images_asked", false).makeGlobal();
 	public final CommonPreference<WikiArticleShowImages> WIKI_ARTICLE_SHOW_IMAGES = new EnumIntPreference<>("wikivoyage_show_imgs", WikiArticleShowImages.OFF, WikiArticleShowImages.values()).makeGlobal();
+	public final CommonPreference<Boolean> SHOW_WIKIPEDIA_POI = new BooleanPreference("show_wikipedia_poi", false).makeProfile();
+	public final CommonPreference<Boolean> GLOBAL_WIKIPEDIA_POI_ENABLED = new BooleanPreference("global_wikipedia_poi_enabled", false).makeProfile();
+	public final ListStringPreference WIKIPEDIA_POI_ENABLED_LANGUAGES = (ListStringPreference) new ListStringPreference("wikipedia_poi_enabled_languages", null, ",").makeProfile().cache();
 
 	public final CommonPreference<Boolean> SELECT_MARKER_ON_SINGLE_TAP = new BooleanPreference("select_marker_on_single_tap", false).makeProfile();
 	public final CommonPreference<Boolean> KEEP_PASSED_MARKERS_ON_MAP = new BooleanPreference("keep_passed_markers_on_map", true).makeProfile();
