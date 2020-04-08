@@ -1167,7 +1167,7 @@
     <string name="poi_clothes_costumes">Kostüme</string>
     <string name="poi_clothes_traditional">Traditionell</string>
     <string name="poi_clothes_suits">Anzüge</string>
-    <string name="poi_clothes_oversize">Übergröße</string>
+    <string name="poi_clothes_oversize">Übergrößen</string>
     <string name="poi_clothes_schoolwear">Schule</string>
     <string name="poi_clothes_swimwear">Bademode</string>
     <string name="poi_clothes_socks">Socken</string>
@@ -2038,7 +2038,7 @@
     <string name="poi_industrial_timber">Art: Bauholz</string>
     <string name="poi_industrial_refinery">Art: Raffinerie</string>
     <string name="poi_industrial_warehouse">Art: Warenhaus</string>
-    <string name="poi_industrial_auto_wrecker">Art: KFZ Schrotthändler</string>
+    <string name="poi_industrial_auto_wrecker">Art: KFZ-Schrotthändler</string>
     <string name="poi_industrial_agriculture">Art: Landwirtschaft</string>
     <string name="poi_industrial_brewery">Art: Brauerei</string>
     <string name="poi_industrial_brickyard">Art: Ziegelei</string>
@@ -2087,7 +2087,7 @@
     <string name="poi_crop_strawberry">Anbauprodukt: Erdbeere</string>
     <string name="poi_crop_vegetables_flowers">Anbauprodukt: Gemüse, Blumen</string>
     <string name="poi_crop_cassava">Anbauprodukt: Maniok</string>
-    <string name="poi_crop_cranberry">Anbauprodukt: Preiselbeere</string>
+    <string name="poi_crop_cranberry">Anbauprodukt: Moosbeere</string>
     <string name="poi_crop_asparagus">Anbauprodukt: Spargel</string>
     <string name="poi_crop_flowers">Anbauprodukt: Blumen</string>
     <string name="poi_surveillance_indoor">Überwachung: innen</string>
@@ -2237,7 +2237,7 @@
     <string name="poi_stone_type_conciliation_cross">Art: Steinkreuz</string>
     <string name="poi_site_type_hut_circle">Hüttenkreis</string>
     <string name="poi_site_type_petroglyph">Felsbild</string>
-    <string name="poi_megalith_type_nuraghe">Grabtyp: prähistorische Turmbauten</string>
+    <string name="poi_megalith_type_nuraghe">Grabtyp: Nuraghe</string>
     <string name="poi_megalith_type_stone_circle">Grabtyp: Steinkreis</string>
     <string name="poi_megalith_type_passage_grave">Grabtyp: Ganggrab</string>
     <string name="poi_summit_cross">Gipfelkreuz: ja</string>
@@ -2918,7 +2918,7 @@
     <string name="poi_cuisine_bubble_tea">Bubble Tea</string>
     <string name="poi_cuisine_meat">Fleisch</string>
     <string name="poi_cuisine_wings">Flügel</string>
-    <string name="poi_cuisine_waffle">Waffel</string>
+    <string name="poi_cuisine_waffle">Waffeln</string>
     <string name="poi_cuisine_chocolate">Schokolade</string>
     <string name="poi_cuisine_wine">Wein</string>
     <string name="poi_health_specialty">Medizinisches Fachgebiet</string>
