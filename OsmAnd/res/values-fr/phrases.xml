@@ -3817,4 +3817,6 @@
     <string name="poi_drinking_water_refill_yes">Remplissage d\'eau potable : oui</string>
     <string name="poi_drinking_water_refill_no">Remplissage d\'eau potable : non</string>
     <string name="poi_drinking_water_refill_network">Réseau de remplissage d\'eau potable</string>
+    <string name="poi_traffic_signals_sound_locate">Uniquement si la marche est autorisée</string>
+    <string name="poi_internet_access_fee_customers">Signal pour trouver le pôle</string>
 </resources>

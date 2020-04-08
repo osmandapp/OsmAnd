@@ -16,7 +16,7 @@
     <string name="osmand_privacy_policy">Política de privacidade do OsmAnd</string>
     <string name="minutes_format">%1$d m</string>
     <string name="last_available_location">Última localização disponível</string>
-    <string name="app_name_short">OsmAnd Tracker</string>
+    <string name="app_name_short">Rastreador OsmAnd</string>
     <string name="privacy_policy_telegram_client">OsmAnd tracker é um dos clientes que usam a Plataforma aberta do Telegram . Seus contatos podem usar qualquer outro cliente Telegram.</string>
     <string name="si_km_m">Quilômetros/metros</string>
     <string name="in_time">no %1$s</string>
@@ -73,7 +73,7 @@
     <string name="si_kmh">Quilômetros por hora</string>
     <string name="shared_string_password">Senha</string>
     <string name="min_logging_distance">Distância mínima de registro</string>
-    <string name="shared_string_save">Salvar</string>
+    <string name="shared_string_save">Gravar</string>
     <string name="shared_string_start">Iniciar</string>
     <string name="add_device">Adicionar aparelho</string>
     <string name="error_adding_new_device">Não foi possível adicionar novo aparelho</string>
@@ -188,7 +188,7 @@
     <string name="share_location">Compartilhar localização</string>
     <string name="shared_string_hour_short">h</string>
     <string name="disconnect_from_telegram">Como desativar o OsmAnd Tracker para Telegram</string>
-    <string name="timeline_no_data_descr">Nós não coletamos dados para o dia selecionado</string>
+    <string name="timeline_no_data_descr">Não coletamos dados para o dia selecionado</string>
     <string name="sharing_time">Tempo de compartilhamento</string>
     <string name="not_logged_in">você não está logado no</string>
     <string name="gps_network_not_enabled">Ativar \"Localização\"\?</string>
@@ -234,7 +234,7 @@
     <string name="open_in_osmand">Mostrar no OsmAnd</string>
     <string name="logging_out">Saindo</string>
     <string name="shared_string_logout">Sair</string>
-    <string name="shared_string_disable">Desabilitar</string>
+    <string name="shared_string_disable">Desativar</string>
     <string name="enter_phone_number">Digite o número de telefone</string>
     <string name="min_logging_speed">Velocidade mínima de registro</string>
     <string name="proxy_disconnected">Desconectado</string>
@@ -261,4 +261,10 @@
     <string name="shared_string_suggested">Sugerido</string>
     <string name="status_widget_title">Estado do Rastreador de OsmAnd</string>
     <string name="back_to_osmand">Voltar para OsmAnd</string>
+    <string name="duration_ago">%1$s atrás</string>
+    <string name="last_response_duration">Última resposta: %1$s atrás</string>
+    <string name="last_update_from_telegram_duration">Última atualização do Telegram: 1$s atrás</string>
+    <string name="last_response_date">Última resposta: %1$s</string>
+    <string name="last_update_from_telegram_date">Última atualização do Telegram: %1$s</string>
+    <string name="shared_string_error_short">ERR</string>
 </resources>

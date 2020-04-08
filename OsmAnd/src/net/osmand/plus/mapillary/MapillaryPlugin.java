@@ -3,6 +3,7 @@ package net.osmand.plus.mapillary;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -44,10 +45,11 @@ import static android.content.Intent.ACTION_VIEW;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAPILLARY;
 
 public class MapillaryPlugin extends OsmandPlugin {
+
 	public static final String ID = "osmand.mapillary";
 	private static final String MAPILLARY_PACKAGE_ID = "app.mapillary";
+
 	private OsmandSettings settings;
-	private OsmandApplication app;
 
 	private MapillaryRasterLayer rasterLayer;
 	private MapillaryVectorLayer vectorLayer;
@@ -55,7 +57,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	private MapWidgetRegInfo mapillaryWidgetRegInfo;
 
 	public MapillaryPlugin(OsmandApplication app) {
-		this.app = app;
+		super(app);
 		settings = app.getSettings();
 	}
 
@@ -70,8 +72,8 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public int getAssetResourceName() {
-		return R.drawable.mapillary;
+	public Drawable getAssetResourceImage() {
+		return app.getUIUtilities().getIcon(R.drawable.mapillary);
 	}
 
 	@Override

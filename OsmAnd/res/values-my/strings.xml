@@ -37,7 +37,7 @@
     <string name="rendering_attr_piste_type_snow_park_name">နှင်းပန်းခြံ</string>
     <string name="rendering_attr_piste_type_hike_name">ခရီးဝေးလမ်းရှောက်</string>
     <string name="rendering_attr_piste_type_downhill_name">တောင်ဂုံးဆင်း</string>
-    <string name="routeInfo_piste_type_name">"နှင်းတောင်ပေါ်  ski စီးလမ်းအမြိုး"</string>
+    <string name="routeInfo_piste_type_name">နှင်းတောင်ပေါ် ski စီးလမ်းအမြိုး</string>
     <string name="rendering_attr_piste_difficulty_easy_name">လွယ်တယ်</string>
     <string name="map_orientation_change_in_accordance_with_speed">မြေပုံ orientation ကန့်သတ်နေရာ</string>
     <string name="today">ဒီနေ့</string>

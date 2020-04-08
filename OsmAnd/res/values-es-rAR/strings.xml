@@ -536,7 +536,7 @@ Lon %2$s</string>
     <string name="local_index_tile_data_maxzoom">Zoom máximo: %1$s</string>
     <string name="local_index_tile_data_minzoom">Zoom mínimo: %1$s</string>
     <string name="local_index_tile_data_name">Datos de teselas: %1$s</string>
-    <string name="edit_tilesource_successfully">Fuente de teselas «%1$s» guardada</string>
+    <string name="edit_tilesource_successfully">Repositorio de teselas «%1$s» guardada</string>
     <string name="edit_tilesource_elliptic_tile">Mercator elíptica</string>
     <string name="edit_tilesource_maxzoom">Zoom máximo</string>
     <string name="edit_tilesource_expiration_time">Expira (minutos)</string>
@@ -914,10 +914,10 @@ Lon %2$s</string>
     <string name="local_indexes_cat_tile">Mapas de teselas en línea y en caché</string>
     <string name="local_indexes_cat_map">Mapas descargados (vectores)</string>
     <string name="index_settings_descr">Descarga y gestiona mapas sin conexión almacenados en el dispositivo.</string>
-    <string name="map_online_plugin_is_not_installed">Activa el complemento «Mapas en línea», para elegir diferentes fuentes de mapas</string>
+    <string name="map_online_plugin_is_not_installed">Activa el complemento «Mapas en línea», para elegir diferentes repositorios de mapas</string>
     <string name="map_online_data">Mapas en línea y teselas</string>
     <string name="map_online_data_descr">Usa mapas en línea (descarga y guarda teselas en la tarjeta de memoria).</string>
-    <string name="online_map_settings_descr">Elige las fuentes de teselas de mapas en línea o en caché.</string>
+    <string name="online_map_settings_descr">Elige los repositorios de teselas de mapas en línea o en caché.</string>
     <string name="plugins_screen">Complementos</string>
     <string name="prefs_plugins_descr">Los complementos activan ajustes avanzados y funcionalidades adicionales.</string>
     <string name="prefs_plugins">Complementos</string>
@@ -1060,7 +1060,7 @@ Lon %2$s</string>
     <string name="auto_follow_location_enabled">Centrado automático del mapa activado.</string>
     <string name="pref_vector_rendering">Opciones específicas de dibujo vectorial</string>
     <string name="pref_overlay">Superpuesta / subyacente</string>
-    <string name="pref_raster_map">Ajustes de la fuente del mapa</string>
+    <string name="pref_raster_map">Ajustes del repositorio de mapas</string>
     <string name="pref_vector_map">Ajustes del mapa vectorial</string>
     <string name="delete_confirmation_msg">¿Borrar «%1$s»?</string>
     <string name="city_type_suburb">Suburbio</string>
@@ -1143,7 +1143,7 @@ Lon %2$s</string>
     <string name="gpx_option_from_start_point">Pasar a lo largo de la traza completa</string>
     <string name="switch_to_vector_map_to_see">Mapa vectorial presente para esta ubicación. 
 \n\t 
-\n\tPara usarlo activa «Menú» → «Configurar mapa» → «Fuente del mapa…» → «Mapas vectoriales sin conexión».</string>
+\n\tPara usarlo activa «Menú» → «Configurar mapa» → «Repositorio de mapas…» → «Mapas vectoriales sin conexión».</string>
     <string name="choose_audio_stream">Salida de indicaciones por voz</string>
     <string name="choose_audio_stream_descr">Elige que altavoz reproducirá indicaciones por voz.</string>
     <string name="voice_stream_voice_call">Audio de llamada telefónica (para altavoces estéreos con Bluetooth)</string>
@@ -1307,7 +1307,7 @@ Lon %2$s</string>
     <string name="layer_route">Ruta</string>
     <string name="layer_osm_bugs">Notas de OSM (en línea)</string>
     <string name="layer_poi">Superposición de PDI…</string>
-    <string name="layer_map">Fuente del mapa…</string>
+    <string name="layer_map">Repositorio de mapas…</string>
     <string name="menu_layers">Capas de mapas</string>
     <string name="context_menu_item_search_poi">Buscar PDI</string>
     <string name="use_trackball_descr">Usa un dispositivo con rueda de desplazamiento para mover el mapa.</string>
@@ -1462,9 +1462,9 @@ Lon %2$s</string>
     <string name="map_view_3d">Visión 3D del mapa</string>
     <string name="show_poi_over_map_description">Muestra la última superposición de PDI usada.</string>
     <string name="show_poi_over_map">Mostrar superposición de PDI</string>
-    <string name="map_tile_source_descr">Elige el origen de los mapas en línea o teselas en caché.</string>
-    <string name="map_tile_source">Fuente de teselas del mapa</string>
-    <string name="map_source">Fuente del mapa</string>
+    <string name="map_tile_source_descr">Elige el repositorio de los mapas en línea o teselas en caché.</string>
+    <string name="map_tile_source">Repositorio de teselas del mapa</string>
+    <string name="map_source">Repositorio del mapa</string>
     <string name="use_internet">Usar Internet</string>
     <string name="show_location">Mostrar tu ubicación</string>
     <string name="show_gps_coordinates_text">Mostrar coordenadas GPS en el mapa</string>
@@ -2174,10 +2174,10 @@ Lon %2$s</string>
     <string name="quick_action_map_underlay">Cambiar mapa subyacente</string>
     <string name="quick_action_map_underlay_title">Mapas subyacentes</string>
     <string name="quick_action_map_underlay_action">Añadir subyacencia</string>
-    <string name="quick_action_map_source">Cambiar fuente del mapa</string>
-    <string name="quick_action_map_source_title">Fuentes del mapa</string>
-    <string name="quick_action_map_source_action">Añadir fuente del mapa</string>
-    <string name="quick_action_map_source_switch">Fuente del mapa cambiada a «%s».</string>
+    <string name="quick_action_map_source">Cambiar repositorio del mapa</string>
+    <string name="quick_action_map_source_title">Repositorio de mapas</string>
+    <string name="quick_action_map_source_action">Añadir repositorio del mapa</string>
+    <string name="quick_action_map_source_switch">Repositorio del mapa cambiada a «%s».</string>
     <string name="quick_action_btn_tutorial_title">Cambiar ubicación del botón</string>
     <string name="quick_action_btn_tutorial_descr">Mantener pulsado y arrastrar el botón para cambiar su ubicación en la pantalla.</string>
     <string name="quick_action_interim_dialog">Mostrar un diálogo temporal</string>
@@ -3607,4 +3607,13 @@ Lon %2$s</string>
     <string name="recalculate_route_in_deviation">Recalcular ruta en caso de desviación</string>
     <string name="select_distance_route_will_recalc">Elige la distancia después de la cual la ruta será recalculada.</string>
     <string name="recalculate_route_distance_promo">La ruta será recalculada si la distancia a la ubicación actual es mayor que el valor elegido.</string>
+    <string name="shared_string_octagon">Octágono</string>
+    <string name="app_mode_ski_touring">Esquí de travesía</string>
+    <string name="app_mode_ski_snowmobile">Motonieve</string>
+    <string name="custom_osmand_plugin">Complemento personalizado de OsmAnd</string>
+    <string name="replace_point_descr">Reemplaza otro punto con esto</string>
+    <string name="settings_item_read_error">No se pudo leer «%1$s».</string>
+    <string name="settings_item_write_error">No se pudo escribir «%1$s».</string>
+    <string name="settings_item_import_error">No se pudo importar «%1$s».</string>
+    <string name="changes_applied_to_profile">Cambios aplicados al perfil «%1$s».</string>
 </resources>

@@ -31,6 +31,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.SettingsHelper;
+import net.osmand.plus.SettingsHelper.FileSettingsItem;
+import net.osmand.plus.SettingsHelper.SettingsItem;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -40,8 +42,8 @@ import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
-import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.plus.settings.ExportImportSettingsAdapter.Type;
+import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 
 import org.apache.commons.logging.Log;
 
@@ -241,7 +243,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 				} else {
 					template = TileSourceManager.createTileSourceTemplate(f);
 				}
-				if (template != null && template.getUrlTemplate() != null) {
+				if (template.getUrlTemplate() != null) {
 					iTileSources.add(template);
 				}
 			}
@@ -270,8 +272,8 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 		return dataList;
 	}
 
-	private List<SettingsHelper.SettingsItem> prepareSettingsItemsForExport() {
-		List<SettingsHelper.SettingsItem> settingsItems = new ArrayList<>();
+	private List<SettingsItem> prepareSettingsItemsForExport() {
+		List<SettingsItem> settingsItems = new ArrayList<>();
 		settingsItems.add(new SettingsHelper.ProfileSettingsItem(app, profile));
 		if (includeAdditionalData) {
 			settingsItems.addAll(prepareAdditionalSettingsItems());
@@ -279,8 +281,8 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 		return settingsItems;
 	}
 
-	private List<SettingsHelper.SettingsItem> prepareAdditionalSettingsItems() {
-		List<SettingsHelper.SettingsItem> settingsItems = new ArrayList<>();
+	private List<SettingsItem> prepareAdditionalSettingsItems() {
+		List<SettingsItem> settingsItems = new ArrayList<>();
 		List<QuickAction> quickActions = new ArrayList<>();
 		List<PoiUIFilter> poiUIFilters = new ArrayList<>();
 		List<ITileSource> tileSourceTemplates = new ArrayList<>();
@@ -294,13 +296,17 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 					|| object instanceof SQLiteTileSource) {
 				tileSourceTemplates.add((ITileSource) object);
 			} else if (object instanceof File) {
-				settingsItems.add(new SettingsHelper.FileSettingsItem(app, (File) object));
+				try {
+					settingsItems.add(new FileSettingsItem(app, (File) object));
+				} catch (IllegalArgumentException e) {
+					LOG.warn("Trying to export unsuported file type", e);
+				}
 			} else if (object instanceof AvoidRoadInfo) {
 				avoidRoads.add((AvoidRoadInfo) object);
 			}
 		}
 		if (!quickActions.isEmpty()) {
-			settingsItems.add(new SettingsHelper.QuickActionSettingsItem(app, quickActions));
+			settingsItems.add(new SettingsHelper.QuickActionsSettingsItem(app, quickActions));
 		}
 		if (!poiUIFilters.isEmpty()) {
 			settingsItems.add(new SettingsHelper.PoiUiFilterSettingsItem(app, poiUIFilters));
@@ -320,7 +326,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 			showExportProgressDialog();
 			File tempDir = getTempDir();
 			String fileName = profile.toHumanString();
-			app.getSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), prepareSettingsItemsForExport());
+			app.getSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), prepareSettingsItemsForExport(), true);
 		}
 	}
 

@@ -1435,7 +1435,7 @@
     <string name="routing_attr_no_new_routing_name">Routing-Regeln v1.9 nicht verwenden</string>
     <string name="routing_attr_no_new_routing_description">Neuen Routenalgorithmus aus v1.9 nicht verwenden.</string>
     <string name="speak_pedestrian">Fußgängerübergänge</string>
-    <string name="parking_place">Parkplatz</string>
+    <string name="parking_place">Parkbucht</string>
     <string name="remove_the_tag">TAG ENTFERNEN</string>
     <string name="gps_status">GPS-Status</string>
     <string name="version_settings_descr">Nightly-Builds herunterladen.</string>
@@ -3053,7 +3053,7 @@ Lon %2$s</string>
     <string name="choose_data_to_share">Wählen Sie, welche Art Daten Sie freigeben möchten:</string>
     <string name="downloaded_maps">Heruntergeladene Karten</string>
     <string name="visited_screens">Besuchte Bildschirme</string>
-    <string name="collected_data_descr">Bestimmen Sie, welche Daten Sie für OsmAnd freigeben.</string>
+    <string name="collected_data_descr">Festlegen, welche Daten OsmAnd weitergeben darf.</string>
     <string name="downloaded_maps_collect_descr">Helfen Sie uns, die Beliebtheit von Karten für Länder und Regionen herauszufinden.</string>
     <string name="visited_screens_collect_descr">Helfen Sie uns, die Beliebtheit von OsmAnd-Funktionen zu verstehen.</string>
     <string name="privacy_and_security_change_descr">Auf „Erlauben“ tippen, wenn Sie mit unserer %1$s einverstanden sind</string>
@@ -3399,7 +3399,7 @@ Lon %2$s</string>
     <string name="shared_string_turn_off">Ausschalten</string>
     <string name="new_plugin_added">Neues Plugin hinzugefügt</string>
     <string name="quick_action_directions_from_desc">Eine Schaltfläche, um die Bildschirmmitte zum Ausgangspunkt zu machen. Sie werden dann aufgefordert, ein Ziel festzulegen oder die Routenberechnung auszulösen.</string>
-    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Radroutennetzknoten anzeigen</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Knotenpunktsystem von Radrouten anzeigen</string>
     <string name="download_map_dialog">Dialog zum Herunterladen der Karte</string>
     <string name="dialogs_and_notifications_title">Dialoge und Benachrichtigungen</string>
     <string name="dialogs_and_notifications_descr">Steuern Sie Popups, Dialoge und Benachrichtigungen.</string>
@@ -3563,9 +3563,9 @@ Lon %2$s</string>
     <string name="replace_all">Alle ersetzen</string>
     <string name="keep_both">Beide behalten</string>
     <string name="keep_both_desc">Importierte Elemente werden mit Präfix hinzugefügt</string>
-    <string name="import_duplicates_description">OsmAnd verfügt bereits über Elemente mit denselben Namen wie die importierten.
+    <string name="import_duplicates_description">OsmAnd enthält bereits Elemente gleichen Namens wie die importierten.
 \n
-\nWählen Sie eine Aktion aus.</string>
+\nWählen Sie eine Maßnahme.</string>
     <string name="import_duplicates_title">Einige Elemente sind bereits vorhanden</string>
     <string name="select_data_to_import">Wählen Sie die zu importierenden Daten.</string>
     <string name="shared_string_rendering_style">Darstellungsstil</string>
@@ -3602,13 +3602,23 @@ Lon %2$s</string>
     <string name="shared_string_transparency">Transparenz</string>
     <string name="terrain_slider_description">Stellen Sie die minimale und maximale Zoomstufe ein, bei der die Ebene angezeigt wird.</string>
     <string name="shared_string_terrain">Gelände</string>
-    <string name="download_slope_maps">Hänge</string>
+    <string name="download_slope_maps">Pisten</string>
     <string name="terrain_empty_state_text">Aktivieren Sie diese Option, um die Schatten- oder Hangkarte anzuzeigen. Weitere Informationen zu diesen Kartentypen finden Sie auf unserer Website</string>
     <string name="shared_string_legend">Legende</string>
-    <string name="slope_read_more">Lesen Sie mehr über Hänge in %1$s.</string>
-    <string name="slope_download_description">Zusätzliche Karten sind erforderlich, um Hänge auf der Karte anzuzeigen.</string>
+    <string name="slope_read_more">Lesen Sie mehr über Pisten in %1$s.</string>
+    <string name="slope_download_description">Zusätzliche Karten sind erforderlich, um Pisten auf der Karte anzuzeigen.</string>
     <string name="hillshade_download_description">Für die Darstellung der Schummerung werden zusätzliche Karten benötigt.</string>
     <string name="shared_string_min">Min</string>
     <string name="hillshade_description">Schummerungs-Karte mit dunklen Schattierungen zur Darstellung von Hängen, Gipfeln und Niederungen.</string>
     <string name="n_items_of_z">%1$s von %2$s</string>
+    <string name="shared_string_octagon">Achteck</string>
+    <string name="app_mode_ski_touring">Skitouren</string>
+    <string name="app_mode_ski_snowmobile">Schneemobil</string>
+    <string name="custom_osmand_plugin">Benutzerdefiniertes OsmAnd-Plugin</string>
+    <string name="slope_description">Farbliche Kennzeichnung von Pisten im Gelände.</string>
+    <string name="replace_point_descr">Einen anderen Punkt durch diesen ersetzen</string>
+    <string name="changes_applied_to_profile">Die Änderungen wurden auf das %1$s Profil angewendet.</string>
+    <string name="settings_item_read_error">Konnte %1$s nicht lesen.</string>
+    <string name="settings_item_write_error">Konnte %1$s nicht schreiben.</string>
+    <string name="settings_item_import_error">Konnte %1$s nicht importieren.</string>
 </resources>

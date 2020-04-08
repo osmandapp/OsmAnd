@@ -91,7 +91,7 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 		BaseBottomSheetItem pluginTitle = new SimpleBottomSheetItem.Builder()
 				.setTitle(pluginTitleSpan)
 				.setTitleColorId(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light)
-				.setIcon(getContentIcon(R.drawable.ic_extension_dark))
+				.setIcon(plugin.getLogoResource())
 				.setLayoutId(R.layout.bottom_sheet_item_simple_56dp)
 				.create();
 		items.add(pluginTitle);

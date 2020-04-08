@@ -26,7 +26,6 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.AndroidUtils;
-import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
@@ -36,16 +35,25 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.SettingsHelper;
-import net.osmand.plus.SettingsHelper.*;
+import net.osmand.plus.SettingsHelper.AvoidRoadsSettingsItem;
+import net.osmand.plus.SettingsHelper.FileSettingsItem;
+import net.osmand.plus.SettingsHelper.FileSettingsItem.FileSubtype;
+import net.osmand.plus.SettingsHelper.ImportAsyncTask;
+import net.osmand.plus.SettingsHelper.ImportType;
+import net.osmand.plus.SettingsHelper.MapSourcesSettingsItem;
+import net.osmand.plus.SettingsHelper.PoiUiFilterSettingsItem;
+import net.osmand.plus.SettingsHelper.ProfileSettingsItem;
+import net.osmand.plus.SettingsHelper.QuickActionsSettingsItem;
+import net.osmand.plus.SettingsHelper.SettingsItem;
+import net.osmand.plus.SettingsHelper.SettingsItemType;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.settings.ExportImportSettingsAdapter.Type;
-
+import net.osmand.plus.widgets.TextViewEx;
 
 import org.apache.commons.logging.Log;
 
@@ -166,7 +174,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		adapter = new ExportImportSettingsAdapter(app, nightMode, true);
 		Map<Type, List<?>> itemsMap = new HashMap<>();
 		if (settingsItems != null) {
-			itemsMap = getSettingsToOperate(settingsItems);
+			itemsMap = getSettingsToOperate(settingsItems, false);
 			adapter.updateSettingsList(itemsMap);
 		}
 		expandableList.setAdapter(adapter);
@@ -327,13 +335,13 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 					|| object instanceof SQLiteTileSource) {
 				tileSourceTemplates.add((ITileSource) object);
 			} else if (object instanceof File) {
-				settingsItems.add(new SettingsHelper.FileSettingsItem(app, (File) object));
+				settingsItems.add(new FileSettingsItem(app, (File) object));
 			} else if (object instanceof AvoidRoadInfo) {
 				avoidRoads.add((AvoidRoadInfo) object);
 			}
 		}
 		if (!quickActions.isEmpty()) {
-			settingsItems.add(new SettingsHelper.QuickActionSettingsItem(app, quickActions));
+			settingsItems.add(new QuickActionsSettingsItem(app, quickActions));
 		}
 		if (!poiUIFilters.isEmpty()) {
 			settingsItems.add(new SettingsHelper.PoiUiFilterSettingsItem(app, poiUIFilters));
@@ -347,7 +355,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		return settingsItems;
 	}
 
-	public static Map<Type, List<?>> getSettingsToOperate(List<SettingsItem> settingsItems) {
+	public static Map<Type, List<?>> getSettingsToOperate(List<SettingsItem> settingsItems, boolean importComplete) {
 		Map<Type, List<?>> settingsToOperate = new HashMap<>();
 		List<ApplicationMode.ApplicationModeBean> profiles = new ArrayList<>();
 		List<QuickAction> quickActions = new ArrayList<>();
@@ -360,24 +368,41 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		for (SettingsItem item : settingsItems) {
 			if (item.getType().equals(SettingsItemType.PROFILE)) {
 				profiles.add(((ProfileSettingsItem) item).getModeBean());
-			} else if (item.getType().equals(SettingsItemType.QUICK_ACTION)) {
-				quickActions.addAll(((QuickActionSettingsItem) item).getItems());
-				quickActions.addAll(((QuickActionSettingsItem) item).getDuplicateItems());
+			} else if (item.getType().equals(SettingsItemType.QUICK_ACTIONS)) {
+				QuickActionsSettingsItem quickActionsItem = (QuickActionsSettingsItem) item;
+				if (importComplete) {
+					quickActions.addAll(quickActionsItem.getAppliedItems());
+				} else {
+					quickActions.addAll(quickActionsItem.getItems());
+				}
 			} else if (item.getType().equals(SettingsItemType.POI_UI_FILTERS)) {
-				poiUIFilters.addAll(((PoiUiFilterSettingsItem) item).getItems());
-				poiUIFilters.addAll(((PoiUiFilterSettingsItem) item).getDuplicateItems());
+				PoiUiFilterSettingsItem poiUiFilterItem = (PoiUiFilterSettingsItem) item;
+				if (importComplete) {
+					poiUIFilters.addAll(poiUiFilterItem.getAppliedItems());
+				} else {
+					poiUIFilters.addAll(poiUiFilterItem.getItems());
+				}
 			} else if (item.getType().equals(SettingsItemType.MAP_SOURCES)) {
-				tileSourceTemplates.addAll(((MapSourcesSettingsItem) item).getItems());
-				tileSourceTemplates.addAll(((MapSourcesSettingsItem) item).getDuplicateItems());
+				MapSourcesSettingsItem mapSourcesItem = (MapSourcesSettingsItem) item;
+				if (importComplete) {
+					tileSourceTemplates.addAll(mapSourcesItem.getAppliedItems());
+				} else {
+					tileSourceTemplates.addAll(mapSourcesItem.getItems());
+				}
 			} else if (item.getType().equals(SettingsItemType.FILE)) {
-				if (item.getName().contains(IndexConstants.RENDERERS_DIR)) {
-					renderFilesList.add(((FileSettingsItem) item).getFile());
-				} else if (item.getName().contains(IndexConstants.ROUTING_PROFILES_DIR)) {
-					routingFilesList.add(((FileSettingsItem) item).getFile());
+				FileSettingsItem fileItem = (FileSettingsItem) item;
+				if (fileItem.getSubtype() == FileSubtype.RENDERING_STYLE) {
+					renderFilesList.add(fileItem.getFile());
+				} else if (fileItem.getSubtype() == FileSubtype.ROUTING_CONFIG) {
+					routingFilesList.add(fileItem.getFile());
 				}
 			} else if (item.getType().equals(SettingsItemType.AVOID_ROADS)) {
-				avoidRoads.addAll(((AvoidRoadsSettingsItem) item).getItems());
-				avoidRoads.addAll(((AvoidRoadsSettingsItem) item).getDuplicateItems());
+				AvoidRoadsSettingsItem avoidRoadsItem = (AvoidRoadsSettingsItem) item;
+				if (importComplete) {
+					avoidRoads.addAll(avoidRoadsItem.getAppliedItems());
+				} else {
+					avoidRoads.addAll(avoidRoadsItem.getItems());
+				}
 			}
 		}
 

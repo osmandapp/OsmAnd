@@ -158,7 +158,7 @@
     <string name="telegram_privacy_policy">Политика конфиденциальности Telegram</string>
     <string name="osmand_privacy_policy">Политика конфиденциальности OsmAnd</string>
     <string name="received_gps_points">Получено точек GPX: %1$s</string>
-    <string name="shared_string_appearance">Внешний вид</string>
+    <string name="shared_string_appearance">Вид</string>
     <string name="show_gps_points_descr">Показать количество собранных и отправленных точек GPS.</string>
     <string name="please_update_osmand">Обновите OsmAnd для просмотра данных на карте</string>
     <string name="shared_string_update">Обновить</string>

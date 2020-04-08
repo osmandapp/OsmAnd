@@ -1,14 +1,12 @@
 package net.osmand.plus.openseamapsplugin;
 
-import android.app.Activity;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import android.graphics.drawable.Drawable;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.render.RendererRegistry;
 
 import java.util.Collections;
 import java.util.List;
@@ -19,20 +17,18 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	public static final String ID = "nauticalPlugin.plugin";
 	public static final String COMPONENT = "net.osmand.nauticalPlugin";
 
-	private OsmandApplication app;
-
 	public NauticalMapsPlugin(OsmandApplication app) {
-		this.app = app;
+		super(app);
 	}
-	
+
 	@Override
 	public int getLogoResourceId() {
 		return R.drawable.ic_plugin_nautical_map;
 	}
-	
+
 	@Override
-	public int getAssetResourceName() {
-		return R.drawable.nautical_map;
+	public Drawable getAssetResourceImage() {
+		return app.getUIUtilities().getIcon(R.drawable.nautical_map);
 	}
 
 	@Override
@@ -61,29 +57,18 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public boolean init(@NonNull final OsmandApplication app, final Activity activity) {
-		if (activity != null) {
-			// called from UI
-			ApplicationMode.changeProfileAvailability(ApplicationMode.BOAT, true, app);
-		}
-		return true;
-	}
-
-	@Override
-	public void onInstall(@NonNull OsmandApplication app, @Nullable Activity activity) {
-		ApplicationMode.changeProfileAvailability(ApplicationMode.BOAT, true, app);
-		super.onInstall(app, activity);
-	}
-
-	@Override
 	public List<ApplicationMode> getAddedAppModes() {
 		return Collections.singletonList(ApplicationMode.BOAT);
 	}
-	
+
 	@Override
-	public void disable(OsmandApplication app) {
-		super.disable(app);
-		ApplicationMode.changeProfileAvailability(ApplicationMode.BOAT, false, app);
+	public List<String> getRendererNames() {
+		return Collections.singletonList(RendererRegistry.NAUTICAL_RENDER);
+	}
+
+	@Override
+	public List<String> getRouterNames() {
+		return Collections.singletonList("boat");
 	}
 
 	@Override

@@ -357,6 +357,8 @@
 	<dimen name="settings_divider_margin_start">72dp</dimen>
 	<dimen name="setting_list_item_large_height">72dp</dimen>
 	<dimen name="setting_list_item_small_height">42dp</dimen>
+	<dimen name="setting_select_icon_button_height">128dp</dimen>
+	<dimen name="setting_select_icon_button_width">164dp</dimen>
 
 	<dimen name="slider_thumb_size">8dp</dimen>
 	<dimen name="slider_thumb_halo_size">12dp</dimen>
