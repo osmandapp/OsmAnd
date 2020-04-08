@@ -32,6 +32,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
+
 public class PoiFiltersHelper {
 
 	private final OsmandApplication application;
@@ -45,6 +47,7 @@ public class PoiFiltersHelper {
 	private PoiUIFilter localWikiPoiFilter;
 	private PoiUIFilter globalWikiPoiFilter;
 	private List<PoiUIFilter> cacheTopStandardFilters;
+	private List<PoiUIFilter> cacheWikipediaFilters;
 	private Map<PoiTemplateList, Set<PoiUIFilter>> selectedPoiFilters = new TreeMap<>();
 
 	private static final String UDF_CAR_AID = "car_aid";
@@ -62,6 +65,10 @@ public class PoiFiltersHelper {
 			UDF_CAR_AID, UDF_FOR_TOURISTS, UDF_FOOD_SHOP, UDF_FUEL, UDF_SIGHTSEEING, UDF_EMERGENCY,
 			UDF_PUBLIC_TRANSPORT, UDF_ACCOMMODATION, UDF_RESTAURANTS, UDF_PARKING
 	};
+
+	public enum PoiTemplateList {
+		POI, WIKI
+	}
 	
 	public PoiFiltersHelper(OsmandApplication application) {
 		this.application = application;
@@ -110,7 +117,7 @@ public class PoiFiltersHelper {
 
 	public PoiUIFilter getLocalWikiPOIFilter() {
 		if (localWikiPoiFilter == null) {
-			PoiType place = application.getPoiTypes().getPoiTypeByKey("wiki_place");
+			PoiType place = application.getPoiTypes().getPoiTypeByKey(WIKI_PLACE);
 			if (place != null && !Algorithms.isEmpty(application.getLanguage())) {
 				PoiUIFilter filter = new PoiUIFilter(place, application, " " +
 						application.getLangTranslation(application.getLanguage()));
@@ -135,25 +142,40 @@ public class PoiFiltersHelper {
 		return globalWikiPoiFilter;
 	}
 
-	public List<PoiUIFilter> getWikiPOIFilters() {
-		List<PoiUIFilter> cacheWikipediaFilters = new ArrayList<>();
-		List<String> enabledLanguages = null;
-		Bundle wikiPoiSettings = WikipediaPoiMenu.getWikiPoiSettings(application);
-		if (wikiPoiSettings != null) {
-			enabledLanguages = wikiPoiSettings.getStringArrayList(WikipediaPoiMenu.ENABLED_WIKI_POI_LANGUAGES_KEY);
-		}
-		if (enabledLanguages != null) {
-			for (String language : enabledLanguages) {
-				PoiType place = application.getPoiTypes().getPoiTypeByKey("wiki_place");
-				if (place != null) {
-					String locale = new Locale(language).getLanguage();
+	public List<PoiUIFilter> getLocalWikipediaPoiFilters(boolean onlyActiveLocales) {
+		String wikiLang = "wiki:lang:";
+		if (cacheWikipediaFilters == null) {
+			cacheWikipediaFilters = new ArrayList<>();
+			PoiType place = application.getPoiTypes().getPoiTypeByKey(WIKI_PLACE);
+			if (place != null) {
+				for (String locale : application.getPoiTypes().getAllAvailableWikiLocales()) {
 					PoiUIFilter filter = new PoiUIFilter(place, application, " " +
-							application.getLangTranslation(locale));
-					filter.setSavedFilterByName("wiki:lang:" + locale);
+							WikipediaPoiMenu.getTranslation(application, locale));
+					filter.setSavedFilterByName(wikiLang + locale);
 					filter.setStandardFilter(true);
 					cacheWikipediaFilters.add(filter);
 				}
 			}
+		}
+		if (onlyActiveLocales && cacheWikipediaFilters.size() > 0) {
+			List<PoiUIFilter> onlyActiveLocalFilters = new ArrayList<>();
+			Bundle wikiPoiSettings = WikipediaPoiMenu.getWikiPoiSettings(application);
+			if (wikiPoiSettings != null) {
+				List<String> enabledWikipediaPoiLocales =
+						wikiPoiSettings.getStringArrayList(WikipediaPoiMenu.ENABLED_WIKI_POI_LANGUAGES_KEY);
+				if (enabledWikipediaPoiLocales != null) {
+					for (PoiUIFilter filter : cacheWikipediaFilters) {
+						for (String locale : enabledWikipediaPoiLocales) {
+							String filterId = filter.getSavedFilterByName();
+							String filterLocale = filterId.substring(wikiLang.length());
+							if (locale.equalsIgnoreCase(filterLocale)) {
+								onlyActiveLocalFilters.add(filter);
+							}
+						}
+					}
+				}
+			}
+			return onlyActiveLocalFilters;
 		}
 		return cacheWikipediaFilters;
 	}
@@ -202,7 +224,7 @@ public class PoiFiltersHelper {
 				return f;
 			}
 		}
-		for (PoiUIFilter f : getWikiPOIFilters()) {
+		for (PoiUIFilter f : getLocalWikipediaPoiFilters(true)) {
 			if (f.getFilterId().equals(filterId)) {
 				return f;
 			}

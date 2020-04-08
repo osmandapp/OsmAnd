@@ -27,7 +27,6 @@ import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.poi.NominatimPoiFilter;
 import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.poi.PoiTemplateList;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.resources.ResourceManager.ResourceListener;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
@@ -46,6 +45,8 @@ import net.osmand.util.MapUtils;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+
+import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
 
 public class QuickSearchHelper implements ResourceListener {
 

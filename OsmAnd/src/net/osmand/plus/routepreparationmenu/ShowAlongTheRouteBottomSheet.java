@@ -36,7 +36,6 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SimpleDividerItem;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
-import net.osmand.plus.poi.PoiTemplateList;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.IRoutingDataUpdateListener;
@@ -44,6 +43,8 @@ import net.osmand.plus.routing.IRoutingDataUpdateListener;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
 
 public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment implements IRouteInformationListener, IRoutingDataUpdateListener {
 

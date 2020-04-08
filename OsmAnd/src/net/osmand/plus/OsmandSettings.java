@@ -1287,7 +1287,7 @@ public class OsmandSettings {
 	public final CommonPreference<WikiArticleShowImages> WIKI_ARTICLE_SHOW_IMAGES = new EnumIntPreference<>("wikivoyage_show_imgs", WikiArticleShowImages.OFF, WikiArticleShowImages.values()).makeGlobal();
 	public final CommonPreference<Boolean> SHOW_WIKIPEDIA_POI = new BooleanPreference("show_wikipedia_poi", false).makeProfile();
 	public final CommonPreference<Boolean> GLOBAL_WIKIPEDIA_POI_ENABLED = new BooleanPreference("global_wikipedia_poi_enabled", false).makeProfile();
-	public final ListStringPreference WIKIPEDIA_POI_ENABLED_LANGUAGES = (ListStringPreference) new ListStringPreference("wikipedia_poi_enabled_languages", null, ",,").makeProfile().cache();
+	public final ListStringPreference WIKIPEDIA_POI_ENABLED_LANGUAGES = (ListStringPreference) new ListStringPreference("wikipedia_poi_enabled_languages", null, ",").makeProfile().cache();
 
 	public final CommonPreference<Boolean> SELECT_MARKER_ON_SINGLE_TAP = new BooleanPreference("select_marker_on_single_tap", false).makeProfile();
 	public final CommonPreference<Boolean> KEEP_PASSED_MARKERS_ON_MAP = new BooleanPreference("keep_passed_markers_on_map", true).makeProfile();

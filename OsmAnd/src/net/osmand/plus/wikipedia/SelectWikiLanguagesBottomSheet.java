@@ -11,9 +11,6 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiType;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -53,6 +50,9 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 		app = requiredMyApplication();
 		settings = app.getSettings();
 		initLanguagesData();
+		if (savedInstanceState != null) {
+			dismiss();
+		}
 	}
 
 	@Override
@@ -105,18 +105,12 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 						@Override
 						public void onClick(View v) {
 							boolean newValue = !languageItem[0].isChecked();
+							languageItem[0].setChecked(newValue);
 							language.setChecked(newValue);
 						}
 					})
 					.create();
 			languageItems.add(languageItem[0]);
-			language.setOnCheckLanguageCallback(new CallbackWithObject<Boolean>() {
-				@Override
-				public boolean processResult(Boolean result) {
-					languageItem[0].setChecked(result);
-					return true;
-				}
-			});
 		}
 		items.addAll(languageItems);
 	}
@@ -125,29 +119,19 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 		languages = new ArrayList<>();
 
 		Bundle wikiPoiSettings = WikipediaPoiMenu.getWikiPoiSettings(app);
-		List<String> activatedLocales = null;
+		List<String> enabledWikiPoiLocales = null;
 		if (wikiPoiSettings != null) {
 			isGlobalWikiPoiEnabled = wikiPoiSettings.getBoolean(GLOBAL_WIKI_POI_ENABLED_KEY);
-			activatedLocales = wikiPoiSettings.getStringArrayList(ENABLED_WIKI_POI_LANGUAGES_KEY);
+			enabledWikiPoiLocales = wikiPoiSettings.getStringArrayList(ENABLED_WIKI_POI_LANGUAGES_KEY);
 		}
-
-		PoiCategory osmwiki = app.getPoiTypes().getOsmwiki();
-		if (activatedLocales != null) {
-			for (PoiType type : osmwiki.getPoiTypeByKeyName("wiki_place").getPoiAdditionals()) {
-				String name = type.getKeyName();
-				if (name != null && name.startsWith(MapPoiTypes.WIKI_LANG_KEY_PREFFIX)) {
-					String locale = name.substring(MapPoiTypes.WIKI_LANG_KEY_PREFFIX.length());
-					boolean checked = activatedLocales.contains(locale);
-					languages.add(new WikiLanguageItem(locale, app.getLangTranslation(locale), checked));
-				}
+		if (enabledWikiPoiLocales != null) {
+			for (String locale : app.getPoiTypes().getAllAvailableWikiLocales()) {
+				boolean checked = enabledWikiPoiLocales.contains(locale);
+				languages.add(new WikiLanguageItem(locale, WikipediaPoiMenu.getTranslation(app, locale), checked));
 			}
 		} else {
-			for (PoiType type : osmwiki.getPoiTypeByKeyName("wiki_place").getPoiAdditionals()) {
-				String name = type.getKeyName();
-				if (name != null && name.startsWith(MapPoiTypes.WIKI_LANG_KEY_PREFFIX)) {
-					String locale = name.substring(MapPoiTypes.WIKI_LANG_KEY_PREFFIX.length());
-					languages.add(new WikiLanguageItem(locale, app.getLangTranslation(locale), false));
-				}
+			for (String locale : app.getPoiTypes().getAllAvailableWikiLocales()) {
+				languages.add(new WikiLanguageItem(locale, WikipediaPoiMenu.getTranslation(app, locale), false));
 			}
 		}
 
@@ -224,7 +208,6 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 		private String locale;
 		private String title;
 		private boolean checked;
-		private CallbackWithObject<Boolean> onCheckLanguageCallback;
 
 		public WikiLanguageItem(String locale, String title, boolean checked) {
 			this.locale = locale;
@@ -242,19 +225,11 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 
 		public void setChecked(boolean checked) {
 			this.checked = checked;
-			if (onCheckLanguageCallback != null) {
-				onCheckLanguageCallback.processResult(checked);
-			}
-		}
-
-		public void setOnCheckLanguageCallback(CallbackWithObject<Boolean> onCheckLanguageCallback) {
-			this.onCheckLanguageCallback = onCheckLanguageCallback;
 		}
 
 		public String getTitle() {
 			return title;
 		}
-
 
 		@Override
 		public int compareTo(WikiLanguageItem other) {

@@ -35,7 +35,6 @@ import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.poi.PoiTemplateList;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.MapVectorLayer;
@@ -65,6 +64,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
+
+import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
 
 /**
  * Object is responsible to maintain layers using by map activity

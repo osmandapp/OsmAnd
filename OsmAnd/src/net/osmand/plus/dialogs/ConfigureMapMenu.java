@@ -50,7 +50,6 @@ import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.poi.PoiTemplateList;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
@@ -102,6 +101,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_RENDERING_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.WIKIPEDIA_ID;
+import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_DENSITY_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
@@ -306,7 +306,7 @@ public class ConfigureMapMenu {
 		}
 	}
 
-	private void createLayersItems(List<RenderingRuleProperty> customRules, ContextMenuAdapter adapter, 
+	private void createLayersItems(List<RenderingRuleProperty> customRules, ContextMenuAdapter adapter,
 	                               final MapActivity activity, final int themeRes, final boolean nightMode) {
 		final OsmandApplication app = activity.getMyApplication();
 		final OsmandSettings settings = app.getSettings();
@@ -537,7 +537,7 @@ public class ConfigureMapMenu {
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(l).createItem());
 
-		selected = settings.SHOW_WIKIPEDIA_POI.get();
+		selected = app.getPoiFilters().isShowingAnyPoi(PoiTemplateList.WIKI);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(WIKIPEDIA_ID)
 				.setTitleId(R.string.shared_string_wikipedia, activity)
@@ -588,7 +588,7 @@ public class ConfigureMapMenu {
 		final OsmandSettings settings = app.getSettings();
 		final int selectedProfileColorRes = settings.APPLICATION_MODE.get().getIconColorInfo().getColor(nightMode);
 		final int selectedProfileColor = ContextCompat.getColor(app, selectedProfileColorRes);
-		
+
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_map_rendering, activity)
 				.setId(MAP_RENDERING_CATEGORY_ID)
 				.setCategory(true).setLayout(R.layout.list_group_title_with_switch).createItem());
@@ -1172,7 +1172,7 @@ public class ConfigureMapMenu {
 		final AlertDialog dialog = bld.create();
 
 		dialogAdapter.setDialog(dialog);
-		
+
 		if (customRulesIncluded != null) {
 			for (RenderingRuleProperty p : customRulesIncluded) {
 				if (!p.isBoolean()) {

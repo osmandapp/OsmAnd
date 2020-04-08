@@ -58,7 +58,6 @@ import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandListActivity;
 import net.osmand.plus.poi.NominatimPoiFilter;
-import net.osmand.plus.poi.PoiTemplateList;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.poi.PoiUIFilter.AmenityNameFilter;
 import net.osmand.plus.render.RenderingIcons;
@@ -78,6 +77,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import gnu.trove.set.hash.TLongHashSet;
+
+import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
 
 /**
  * Search poi activity

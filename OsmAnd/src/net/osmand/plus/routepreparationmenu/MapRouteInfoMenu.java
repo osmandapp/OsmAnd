@@ -70,7 +70,6 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenuFragment;
 import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
-import net.osmand.plus.poi.PoiTemplateList;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.AppModesBottomSheetDialogFragment;
 import net.osmand.plus.profiles.ConfigureAppModesBottomSheetDialogFragment;
@@ -119,6 +118,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
+
+import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
 
 public class MapRouteInfoMenu implements IRouteInformationListener, CardListener, FavoritesListener {
 

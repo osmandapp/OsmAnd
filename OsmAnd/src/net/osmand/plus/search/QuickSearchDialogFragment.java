@@ -79,7 +79,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.poi.PoiTemplateList;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.poi.RearrangePoiFiltersFragment;
 import net.osmand.plus.resources.RegionAddressRepository;
@@ -108,6 +107,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
 import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_LOCATION_KEY;
 import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_QUERY_KEY;
 import static net.osmand.search.core.ObjectType.POI_TYPE;
