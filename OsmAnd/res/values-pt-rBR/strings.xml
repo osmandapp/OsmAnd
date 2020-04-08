@@ -3602,4 +3602,11 @@ Pôr do Sol: %2$s</string>
     <string name="settings_item_read_error">Não foi possível ler %1$s.</string>
     <string name="settings_item_write_error">Não foi possível escrever %1$s.</string>
     <string name="settings_item_import_error">Não foi possível importar %1$s.</string>
+    <string name="select_track_file">Selecionar arquivo de faixa</string>
+    <string name="shared_string_languages">Idiomas</string>
+    <string name="shared_string_language">Idioma</string>
+    <string name="shared_string_all_languages">Todos os idiomas</string>
+    <string name="wikipedia_poi_languages_promo">Alguns artigos da Wikipédia podem não estar disponíveis em seu nome. Selecione os idiomas nos quais os artigos da Wikipédia aparecerão no mapa.
+\nVocê poderá alternar entre todos os idiomas disponíveis enquanto lê o artigo.</string>
+    <string name="wiki_menu_download_descr">Mapas adicionais são necessários para visualizar os POIs da Wikipédia no mapa.</string>
 </resources>
