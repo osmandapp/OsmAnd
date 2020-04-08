@@ -58,10 +58,8 @@ public class TransportRoutePlanner {
 			queue.add(r);
 		}
 		
-		/** delete */System.out.println(String.format("queue size: %d", queue.size()));
 		double finishTime = ctx.cfg.maxRouteTime;
 		double maxTravelTimeCmpToWalk = MapUtils.getDistance(start, end) / ctx.cfg.walkSpeed - ctx.cfg.changeTime / 2;
-		/** delete */System.out.println(String.format("queue size: %d", queue.size()));
 		List<TransportRouteSegment> results = new ArrayList<TransportRouteSegment>();
 		initProgressBar(ctx, start, end);
 		while (!queue.isEmpty()) {
@@ -1024,7 +1022,7 @@ public class TransportRoutePlanner {
 		r.setDist(nr.dist);
 		r.setColor(nr.color);
 
-		if (nr.intervals.length > 0 || nr.avgStopIntervals.length > 0 || nr.avgWaitIntervals.length > 0) {
+		if (nr.intervals != null && nr.intervals.length > 0 && nr.avgStopIntervals !=null &&  nr.avgStopIntervals.length > 0 && nr.avgWaitIntervals != null && nr.avgWaitIntervals.length > 0) {
 			r.setSchedule(new TransportSchedule(new TIntArrayList(nr.intervals), new TIntArrayList(nr.avgStopIntervals), new TIntArrayList(nr.avgWaitIntervals)));
 		}
 
@@ -1080,14 +1078,14 @@ public class TransportRoutePlanner {
 				}
 			}
 
-			if (ns.pTStopExit_refs.length > 0) {
+			if (ns.pTStopExit_refs != null && ns.pTStopExit_refs.length > 0) {
 				for (int i = 0; i < ns.pTStopExit_refs.length; i++) {
 					s.addExit(new TransportStopExit(ns.pTStopExit_x31s[i],
 							ns.pTStopExit_y31s[i], ns.pTStopExit_refs[i]));
 				}
 			}
 
-			if (ns.referenceToRoutesKeys.length > 0) {
+			if (ns.referenceToRoutesKeys != null && ns.referenceToRoutesKeys.length > 0) {
 				for (int i = 0; i < ns.referenceToRoutesKeys.length; i++) {
 					s.putReferencesToRoutes(ns.referenceToRoutesKeys[i], ns.referenceToRoutesVals[i]);
 				}
