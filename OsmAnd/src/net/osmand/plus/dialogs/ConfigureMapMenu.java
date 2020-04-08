@@ -27,6 +27,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
+import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererContext;
@@ -245,7 +246,16 @@ public class ConfigureMapMenu {
 					showGpxSelectionDialog(adapter, adapter.getItem(pos));
 				}
 			} else if (itemId == R.string.shared_string_wikipedia) {
-				WikipediaPoiMenu.toggleWikipediaPoi(ma, isChecked, true);
+				WikipediaPoiMenu.toggleWikipediaPoi(ma, isChecked, true,
+						new CallbackWithObject<Boolean>() {
+							@Override
+							public boolean processResult(Boolean result) {
+								item.setSelected(result);
+								item.setColorRes(result ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+								adapter.notifyDataSetChanged();
+								return true;
+							}
+						});
 			} else if (itemId == R.string.map_markers) {
 				settings.SHOW_MAP_MARKERS.set(isChecked);
 			} else if (itemId == R.string.layer_map) {
