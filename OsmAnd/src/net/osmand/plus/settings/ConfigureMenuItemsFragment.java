@@ -106,6 +106,21 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		appMode = app.getSettings().getApplicationMode();
 		nightMode = !app.getSettings().isLightContent();
 		mInflater = UiUtilities.getInflater(app, nightMode);
+		instantiateContextMenuAdapter();
+		if (savedInstanceState != null
+				&& savedInstanceState.containsKey(ITEM_TYPE_KEY)
+				&& savedInstanceState.containsKey(HIDDEN_ITEMS_KEY)
+				&& savedInstanceState.containsKey(ITEMS_ORDER_KEY)) {
+			screenType = (ScreenType) savedInstanceState.getSerializable(ITEM_TYPE_KEY);
+			hiddenMenuItems = savedInstanceState.getStringArrayList(HIDDEN_ITEMS_KEY);
+			menuItemsOrder = (HashMap<String, Integer>) savedInstanceState.getSerializable(ITEMS_ORDER_KEY);
+		} else {
+			hiddenMenuItems = getSettingForScreen(app, screenType).getHiddenIds();
+			menuItemsOrder = contextMenuAdapter.getMenuItemsOrder(getSettingForScreen(app, screenType).getOrderIds());
+		}
+	}
+
+	private void instantiateContextMenuAdapter() {
 		Activity activity = getActivity();
 		if (activity instanceof MapActivity) {
 			switch (screenType) {
@@ -122,17 +137,6 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 					contextMenuAdapter = menu.getActionsContextMenuAdapter(true);
 					break;
 			}
-		}
-		if (savedInstanceState != null
-				&& savedInstanceState.containsKey(ITEM_TYPE_KEY)
-				&& savedInstanceState.containsKey(HIDDEN_ITEMS_KEY)
-				&& savedInstanceState.containsKey(ITEMS_ORDER_KEY)) {
-			screenType = (ScreenType) savedInstanceState.getSerializable(ITEM_TYPE_KEY);
-			hiddenMenuItems = savedInstanceState.getStringArrayList(HIDDEN_ITEMS_KEY);
-			menuItemsOrder = (HashMap<String, Integer>) savedInstanceState.getSerializable(ITEMS_ORDER_KEY);
-		} else {
-			hiddenMenuItems = getSettingForScreen(app, screenType).getHiddenIds();
-			menuItemsOrder = contextMenuAdapter.getMenuItemsOrder(getSettingForScreen(app, screenType).getOrderIds());
 		}
 	}
 
@@ -312,6 +316,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 						menuItemsOrder.clear();
 						wasReset = true;
 						isChanged = true;
+						instantiateContextMenuAdapter();
 						rearrangeAdapter.updateItems(getAdapterItems());
 					}
 				})));
