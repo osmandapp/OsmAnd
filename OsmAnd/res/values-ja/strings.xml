@@ -1305,7 +1305,7 @@ POIの更新は利用できません</string>
     <string name="arrival_distance_factor_late">遅め</string>
     <string name="arrival_distance_factor_at_last">最後の数メートル</string>
     <string name="keep_informing_never">手動のみ(矢印をタップ)</string>
-    <string name="create_poi_link_to_osm_doc">" string name=\"lat_lon_pattern\"&gt;\"緯度:%1$.5f  経度:%2$.5f\"&lt;/string "</string>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u>マップを画像で分類します。</string>
     <string name="import_file_favourites">経由地点をGPXファイルとして保存、またはお気に入りにインポートしますか？</string>
     <string name="shared_string_share">共有</string>
     <string name="share_fav_subject">OsmAndを介してお気に入りを共有</string>
