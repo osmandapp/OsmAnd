@@ -2509,7 +2509,7 @@
     <string name="index_name_netherlands">Ευρώπη - Κάτω Χώρες</string>
     <string name="shared_string_others">Άλλα</string>
     <string name="shared_string_release">Εκδόθηκε</string>
-    <string name="create_poi_link_to_osm_doc"> string name=\"lat_lon_pattern\"&gt;Γ. Πλ:%1$.5f Γ. Μηκ: %2$.5f&lt;/string </string>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u>κατηγοριοποίηση χάρτη με εικόνες.</string>
     <string name="share_fav_subject">Αγαπημένα που μοιράστηκαν μέσω του OsmAnd</string>
     <string name="favourites_context_menu_add">Προσθήκη αγαπημένου</string>
     <string name="poi_action_delete">διαγραφή</string>
