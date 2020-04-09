@@ -30,6 +30,7 @@ import net.osmand.plus.settings.ConfigureMenuRootFragment.ScreenType;
 import java.util.Collections;
 import java.util.List;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_RENDERING_CATEGORY_ID;
@@ -151,7 +152,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 				}
 				h.title.setText(menuItem.getTitle());
 				h.title.setTextColor(app.getResources().getColor(textColorRes));
-				h.description.setText(String.valueOf(menuItem.getOrder()));
+				h.description.setText(getDescription(menuItem.getId()));
 				h.divider.setVisibility(View.GONE);
 				h.moveIcon.setVisibility(View.VISIBLE);
 			}
@@ -226,6 +227,16 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 					|| menuItemFrom.getId().startsWith(RENDERING_ITEMS_ID_SCHEME) && menuItemTo.getId().startsWith(SHOW_ITEMS_ID_SCHEME)
 					|| menuItemTo.isHidden()) {
 				return false;
+			}
+
+			if (menuItemFrom.getId().equals(MAP_CONTEXT_MENU_MORE_ID)) {
+				if (to > 5) {
+					return false;
+				}
+			} else if (menuItemTo.getId().equals(MAP_CONTEXT_MENU_MORE_ID)) {
+				if (from > 5) {
+					return false;
+				}
 			}
 
 			menuItemFrom.setOrder(orderTo);
@@ -422,5 +433,13 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 	public void updateItems(List<AdapterItem> items) {
 		this.items = items;
 		notifyDataSetChanged();
+	}
+
+	private int getDescription(String id) {
+		if (id.equals(DRAWER_BUILDS_ID)) {
+			return R.string.developer_plugin;
+		} else {
+			return R.string.app_name_osmand;
+		}
 	}
 }

@@ -47,8 +47,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static net.osmand.plus.settings.ConfigureMenuRootFragment.ScreenType.CONFIGURE_MAP;
-
 public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = ConfigureMenuRootFragment.class.getName();
@@ -118,7 +116,11 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 
 	@Override
 	public int getStatusBarColorId() {
-		return nightMode ? R.color.activity_background_dark : R.color.activity_background_light;
+			View view = getView();
+			if (view != null && Build.VERSION.SDK_INT >= 23 && !nightMode) {
+				view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+			}
+			return nightMode ? R.color.activity_background_dark : R.color.activity_background_light;
 	}
 
 
@@ -224,7 +226,7 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 						break;
 					case CONTEXT_MENU_ACTIONS:
 						MapContextMenu menu = ((MapActivity) activity).getContextMenu();
-						contextMenuAdapter = menu.getAdapter();
+						contextMenuAdapter = menu.getActionsContextMenuAdapter(true);
 						break;
 				}
 				int hiddenCount = ConfigureMenuItemsFragment.getSettingForScreen(app, type).getHiddenIds().size();

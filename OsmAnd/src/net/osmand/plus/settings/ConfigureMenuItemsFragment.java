@@ -41,7 +41,6 @@ import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItem;
 import net.osmand.plus.settings.RearrangeMenuItemsAdapter.MenuItemsAdapterListener;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -90,6 +89,16 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		return fragment;
 	}
 
+
+	@Override
+	public int getStatusBarColorId() {
+		View view = getView();
+		if (view != null && Build.VERSION.SDK_INT >= 23 && !nightMode) {
+			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+		}
+		return nightMode ? R.color.activity_background_dark : R.color.activity_background_light;
+	}
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -110,7 +119,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 					break;
 				case CONTEXT_MENU_ACTIONS:
 					MapContextMenu menu = ((MapActivity) activity).getContextMenu();
-					contextMenuAdapter = menu.getAdapter();
+					contextMenuAdapter = menu.getActionsContextMenuAdapter(true);
 					break;
 			}
 		}
@@ -260,15 +269,21 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		List<AdapterItem> visible = contextMenuAdapter.getItemsForRearrangeAdapter(hiddenMenuItems, wasReset ? null : menuItemsOrder, false);
 		List<AdapterItem> hiddenItems = contextMenuAdapter.getItemsForRearrangeAdapter(hiddenMenuItems, wasReset ? null : menuItemsOrder, true);
 		if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
-			List<AdapterItem> main = new ArrayList<>();
-			int actionsIndex = 3;
-			for (int i = 0; i < visible.size(); i++) {
-				if (((ContextMenuItem) visible.get(i).getValue()).getId().equals(MAP_CONTEXT_MENU_MORE_ID)) {
-					actionsIndex = i;
-					break;
+			for (int i =0; i<visible.size(); i++){
+				ContextMenuItem value = (ContextMenuItem) visible.get(i).getValue();
+				if (value.getId() != null && value.getId().equals(MAP_CONTEXT_MENU_MORE_ID)){
+					if (i >3){
+						AdapterItem third = visible.get(3);
+						visible.set(3,visible.get(i));
+						menuItemsOrder.put(((ContextMenuItem) third.getValue()).getId(),i);
+						menuItemsOrder.put(((ContextMenuItem) visible.get(i).getValue()).getId(),3);
+					}
 				}
 			}
-			for (int i = 0; i < actionsIndex + 1; i++) {
+
+			List<AdapterItem> main = new ArrayList<>();
+			int actionsIndex = Math.min(4, visible.size());
+			for (int i = 0; i < actionsIndex; i++) {
 				main.add(visible.get(i));
 			}
 			items.add(new AdapterItem(HEADER, new RearrangeMenuItemsAdapter.HeaderItem(R.string.main_actions, R.string.main_actions_descr)));

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
-	android:id="@+id/menu_item"
-	android:layout_width="0dp"
+	android:id="@+id/item"
+	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
-	android:layout_weight="1"
 	android:background="?selectableItemBackground"
 	android:gravity="center"
 	android:orientation="vertical"
@@ -12,14 +11,14 @@
 	android:paddingBottom="@dimen/context_menu_main_actions_padding_bottom">
 
 	<ImageView
-		android:id="@+id/item_icon"
+		android:id="@+id/icon"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginBottom="@dimen/context_menu_main_actions_icon_margin"
 		android:scaleType="center" />
 
 	<net.osmand.plus.widgets.TextViewEx
-		android:id="@+id/item_text"
+		android:id="@+id/text"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:ellipsize="end"
