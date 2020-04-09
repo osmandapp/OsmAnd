@@ -402,26 +402,21 @@ public class SettingsHelper {
 		@Override
 		public void apply() {
 			if (shouldReplace || !exists()) {
-				OsmandPlugin.addCustomPlugin(app, plugin);
-			}
-			CustomOsmandPlugin customPlugin = (CustomOsmandPlugin) OsmandPlugin.getPlugin(getPluginId());
-			updatePluginItems(customPlugin);
-		}
-
-		private void updatePluginItems(CustomOsmandPlugin customPlugin) {
-			for (SettingsHelper.SettingsItem item : pluginDependentItems) {
-				if (item instanceof SettingsHelper.FileSettingsItem) {
-					FileSettingsItem fileItem = (FileSettingsItem) item;
-					if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.RENDERING_STYLE) {
-						customPlugin.addRenderer(fileItem.getName());
-					} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.ROUTING_CONFIG) {
-						customPlugin.addRouter(fileItem.getName());
-					} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.OTHER) {
-						customPlugin.setResourceDirName(item.getFileName());
+				for (SettingsHelper.SettingsItem item : pluginDependentItems) {
+					if (item instanceof SettingsHelper.FileSettingsItem) {
+						FileSettingsItem fileItem = (FileSettingsItem) item;
+						if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.RENDERING_STYLE) {
+							plugin.addRenderer(fileItem.getName());
+						} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.ROUTING_CONFIG) {
+							plugin.addRouter(fileItem.getName());
+						} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.OTHER) {
+							plugin.setResourceDirName(item.getFileName());
+						}
+					} else if (item instanceof SuggestedDownloadsItem) {
+						plugin.updateSuggestedDownloads(((SuggestedDownloadsItem) item).getItems());
 					}
-				} else if (item instanceof SuggestedDownloadsItem) {
-					customPlugin.updateSuggestedDownloads(((SuggestedDownloadsItem) item).items);
 				}
+				OsmandPlugin.addCustomPlugin(app, plugin);
 			}
 		}
 
