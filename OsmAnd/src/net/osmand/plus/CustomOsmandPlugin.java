@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.SettingsHelper.AvoidRoadsSettingsItem;
@@ -36,7 +37,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -436,7 +439,51 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	@Override
 	public List<IndexItem> getSuggestedMaps() {
 		List<IndexItem> suggestedMaps = new ArrayList<>();
+
+		DownloadIndexesThread downloadThread = app.getDownloadThread();
+		if (!downloadThread.getIndexes().isDownloadedFromInternet && app.getSettings().isInternetConnectionAvailable()) {
+			downloadThread.runReloadIndexFiles();
+		}
+
+		boolean downloadIndexes = app.getSettings().isInternetConnectionAvailable()
+				&& !downloadThread.getIndexes().isDownloadedFromInternet
+				&& !downloadThread.getIndexes().downloadFromInternetFailed;
+
+		if (!downloadIndexes) {
+			for (SuggestedDownloadItem item : suggestedDownloadItems) {
+				DownloadActivityType type = DownloadActivityType.getIndexType(item.scopeId);
+				if (type != null) {
+					List<IndexItem> foundMaps = new ArrayList<>();
+					String searchType = item.getSearchType();
+					if ("latlon".equalsIgnoreCase(searchType)) {
+						LatLon latLon = app.getMapViewTrackingUtilities().getMapLocation();
+						foundMaps.addAll(getMapsForType(latLon, type));
+					} else if ("worldregion".equalsIgnoreCase(searchType)) {
+						LatLon latLon = app.getMapViewTrackingUtilities().getMapLocation();
+						foundMaps.addAll(getMapsForType(latLon, type));
+					}
+					if (!Algorithms.isEmpty(item.getNames())) {
+						foundMaps.addAll(getMapsForType(item.getNames(), type, item.getLimit()));
+					}
+					suggestedMaps.addAll(foundMaps);
+				}
+			}
+		}
+
 		return suggestedMaps;
+	}
+
+	private List<IndexItem> getMapsForType(LatLon latLon, DownloadActivityType type) {
+		try {
+			return DownloadResources.findIndexItemsAt(app, latLon, type);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return Collections.emptyList();
+	}
+
+	private List<IndexItem> getMapsForType(List<String> names, DownloadActivityType type, int limit) {
+		return DownloadResources.findIndexItemsAt(app, names, type, false, limit);
 	}
 
 	public interface PluginItemsListener {

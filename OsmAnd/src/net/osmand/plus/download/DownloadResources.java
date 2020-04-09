@@ -465,6 +465,10 @@ public class DownloadResources extends DownloadResourceGroup {
 	}
 
 	public static List<IndexItem> findIndexItemsAt(OsmandApplication app, LatLon latLon, DownloadActivityType type, boolean includeDownloaded) throws IOException {
+		return findIndexItemsAt(app, latLon, type, includeDownloaded, -1);
+	}
+
+	public static List<IndexItem> findIndexItemsAt(OsmandApplication app, LatLon latLon, DownloadActivityType type, boolean includeDownloaded, int limit) throws IOException {
 		List<IndexItem> res = new ArrayList<>();
 		OsmandRegions regions = app.getRegions();
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
@@ -472,6 +476,25 @@ public class DownloadResources extends DownloadResourceGroup {
 		for (WorldRegion downloadRegion : downloadRegions) {
 			if (includeDownloaded || !isIndexItemDownloaded(downloadThread, type, downloadRegion, res)) {
 				addIndexItem(downloadThread, type, downloadRegion, res);
+			}
+			if (limit != -1 && res.size() == limit) {
+				break;
+			}
+		}
+		return res;
+	}
+
+	public static List<IndexItem> findIndexItemsAt(OsmandApplication app, List<String> names, DownloadActivityType type, boolean includeDownloaded, int limit) {
+		List<IndexItem> res = new ArrayList<>();
+		OsmandRegions regions = app.getRegions();
+		DownloadIndexesThread downloadThread = app.getDownloadThread();
+		for (String name : names) {
+			WorldRegion downloadRegion = regions.getRegionDataByDownloadName(name);
+			if (downloadRegion != null && (includeDownloaded || !isIndexItemDownloaded(downloadThread, type, downloadRegion, res))) {
+				addIndexItem(downloadThread, type, downloadRegion, res);
+			}
+			if (limit != -1 && res.size() == limit) {
+				break;
 			}
 		}
 		return res;
