@@ -1280,7 +1280,7 @@
     <string name="keep_informing_never">Тільки вручну (натискати на стрілку)</string>
     <string name="keep_informing_descr">Повторювати навігаційні вказівки через регулярні проміжки часу.</string>
     <string name="keep_informing">Повторювати навігаційні вказівки</string>
-    <string name="create_poi_link_to_osm_doc"> string name=\"lat_lon_pattern\"&gt;Шир: %1$.5f Дов: %2$.5f&lt;/string </string>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> класифікація карт із зображенням.</string>
     <string name="import_file_favourites">Зберегти дані як GPX-файл чи імпортувати маршрутні точки в \'Закладки\'?</string>
     <string name="shared_string_share">Поділитися</string>
     <string name="share_fav_subject">Закладки, якими поділились через OsmAnd</string>
