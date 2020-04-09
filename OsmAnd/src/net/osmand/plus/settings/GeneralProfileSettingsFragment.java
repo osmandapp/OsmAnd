@@ -319,23 +319,38 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		b.setAdapter(singleChoiceAdapter, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				ApplicationMode selectedMode = getSelectedAppMode();
-				if (drs.get(which) == null) {
-					settings.DRIVING_REGION_AUTOMATIC.setModeValue(selectedMode, true);
-					MapViewTrackingUtilities mapViewTrackingUtilities = getMyApplication().getMapViewTrackingUtilities();
-					if (mapViewTrackingUtilities != null) {
-						mapViewTrackingUtilities.resetDrivingRegionUpdate();
-					}
-				} else {
-					settings.DRIVING_REGION_AUTOMATIC.setModeValue(selectedMode, false);
-					settings.DRIVING_REGION.setModeValue(selectedMode, drs.get(which));
-				}
-				updateAllSettings();
+				onConfirmPreferenceChange(settings.DRIVING_REGION.getId(), drs.get(which), ApplyQueryType.BOTTOM_SHEET);
 			}
 		});
 
 		b.setNegativeButton(R.string.shared_string_cancel, null);
 		b.show();
+	}
+
+	@Override
+	public void onApplyPreferenceChange(String prefId, boolean appliedToAllProfiles, Object newValue) {
+		if (settings.DRIVING_REGION.getId().equals(prefId)) {
+			ApplicationMode selectedMode = getSelectedAppMode();
+			if (newValue == null) {
+				super.onApplyPreferenceChange(settings.DRIVING_REGION_AUTOMATIC.getId(), appliedToAllProfiles, true);
+				MapViewTrackingUtilities mapViewTrackingUtilities = getMyApplication().getMapViewTrackingUtilities();
+				if (mapViewTrackingUtilities != null) {
+					mapViewTrackingUtilities.resetDrivingRegionUpdate();
+				}
+			} else if (newValue instanceof OsmandSettings.DrivingRegion) {
+				super.onApplyPreferenceChange(settings.DRIVING_REGION_AUTOMATIC.getId(), appliedToAllProfiles, false);
+				if (appliedToAllProfiles) {
+					for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+						settings.DRIVING_REGION.setModeValue(appMode, (OsmandSettings.DrivingRegion) newValue);
+					}
+				} else {
+					settings.DRIVING_REGION.setModeValue(selectedMode, (OsmandSettings.DrivingRegion) newValue);
+				}
+			}
+			updateAllSettings();
+		} else {
+			super.onApplyPreferenceChange(prefId, appliedToAllProfiles, newValue);
+		}
 	}
 
 	@Override

@@ -111,6 +111,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 		if (target != null) {
 			if (!discard) {
 				target.onSettingApplied(getPrefId(), appliedToAllProfiles);
+				target.onApplyPreferenceChange(getPrefId(), appliedToAllProfiles, newValue);
 			}
 			target.updateSetting(getPrefId());
 			if (!discard) {
