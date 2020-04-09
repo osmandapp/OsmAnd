@@ -4,7 +4,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	xmlns:tools="http://schemas.android.com/tools"
-	android:background="?attr/activity_background_basic">
+	android:background="?attr/activity_background_color">
 
 	<androidx.core.widget.NestedScrollView
 		android:id="@+id/nested_scroll"
@@ -112,7 +112,7 @@
 			android:id="@+id/toolbar_layout"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/toolbar_height_expanded"
-			android:background="?attr/colorPrimary"
+			android:background="?attr/actionModeBackground"
 			osmand:expandedTitleMarginBottom="@dimen/content_padding_small"
 			osmand:expandedTitleMarginEnd="@dimen/content_padding"
 			osmand:expandedTitleMarginStart="@dimen/content_padding"
