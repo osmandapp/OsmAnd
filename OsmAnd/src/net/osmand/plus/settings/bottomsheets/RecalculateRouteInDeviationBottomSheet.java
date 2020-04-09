@@ -27,8 +27,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitmeListDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.ApplyQueryType;
-import net.osmand.plus.settings.OnApplyPreference;
-import net.osmand.plus.settings.OnPreferenceChanged;
+import net.osmand.plus.settings.OnConfirmPreferenceChange;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 import static net.osmand.plus.settings.RouteParametersFragment.DEFAULT_MODE;
@@ -121,11 +120,8 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 						updateCustomButtonView(v, enabled);
 						Fragment target = getTargetFragment();
 						float newValue = enabled ? DEFAULT_MODE : DISABLE_MODE;
-						if (target instanceof OnApplyPreference) {
-							((OnApplyPreference) target).onApplyPreference(switchPref.getKey(), newValue, ApplyQueryType.NONE);
-						}
-						if (target instanceof OnPreferenceChanged) {
-							((OnPreferenceChanged) target).onPreferenceChanged(switchPref.getKey());
+						if (target instanceof OnConfirmPreferenceChange) {
+							((OnConfirmPreferenceChange) target).onConfirmPreferenceChange(switchPref.getKey(), newValue, ApplyQueryType.NONE);
 						}
 					}
 				})
@@ -157,11 +153,9 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 	protected void onRightBottomButtonClick() {
 		if (enabled && sliderPositionChanged) {
 			Fragment target = getTargetFragment();
-			if (target instanceof OnApplyPreference) {
-				((OnApplyPreference) target).onApplyPreference(preference.getId(), currentValue, ApplyQueryType.SNACK_BAR);
-			}
-			if (target instanceof OnPreferenceChanged) {
-				((OnPreferenceChanged) target).onPreferenceChanged(preference.getId());
+			if (target instanceof OnConfirmPreferenceChange) {
+				((OnConfirmPreferenceChange) target).onConfirmPreferenceChange(
+						preference.getId(), currentValue, ApplyQueryType.SNACK_BAR);
 			}
 		}
 		dismiss();

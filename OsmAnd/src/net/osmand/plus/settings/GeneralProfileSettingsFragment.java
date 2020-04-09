@@ -17,7 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
@@ -25,16 +24,13 @@ import androidx.preference.SwitchPreferenceCompat;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -355,7 +351,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String prefId = preference.getKey();
 		if (settings.ROTATE_MAP.getId().equals(prefId)) {
-			onApplyPreference(prefId, newValue, ApplyQueryType.SNACK_BAR);
+			onConfirmPreferenceChange(prefId, newValue, ApplyQueryType.SNACK_BAR);
 			return false;
 		}
 		return super.onPreferenceChange(preference, newValue);

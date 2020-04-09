@@ -2,7 +2,6 @@ package net.osmand.plus.settings;
 
 import androidx.preference.Preference;
 
-import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.AutoZoomMap;
 import net.osmand.plus.R;
@@ -102,38 +101,27 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		if (preference.getKey().equals(settings.AUTO_ZOOM_MAP.getId())) {
-			onApplyPreference(settings.AUTO_ZOOM_MAP.getId(), newValue, ApplyQueryType.SNACK_BAR);
+			onConfirmPreferenceChange(settings.AUTO_ZOOM_MAP.getId(), newValue, ApplyQueryType.SNACK_BAR);
 			return true;
 		}
 		return super.onPreferenceChange(preference, newValue);
 	}
 
 	@Override
-	public void onSettingApplied(String prefId, Object newValue, boolean appliedToAllProfiles) {
+	public void onApplyPreferenceChange(String prefId, boolean appliedToAllProfiles, Object newValue) {
 		if (settings.AUTO_ZOOM_MAP.getId().equals(prefId)) {
 			if (newValue instanceof Integer) {
-				ApplicationMode selectedMode = getSelectedAppMode();
 				int position = (int) newValue;
-				if (appliedToAllProfiles) {
-					if (position == 0) {
-						settings.setPreferenceForAllModes(settings.AUTO_ZOOM_MAP.getId(), false);
-					} else {
-						settings.setPreferenceForAllModes(settings.AUTO_ZOOM_MAP.getId(), true);
-						settings.setPreferenceForAllModes(settings.AUTO_ZOOM_MAP_SCALE.getId(),
-								OsmandSettings.AutoZoomMap.values()[position - 1]);
-					}
+				if (position == 0) {
+					super.onApplyPreferenceChange(settings.AUTO_ZOOM_MAP.getId(), appliedToAllProfiles, false);
 				} else {
-					if (position == 0) {
-						settings.AUTO_ZOOM_MAP.setModeValue(selectedMode, false);
-					} else {
-						settings.AUTO_ZOOM_MAP.setModeValue(selectedMode, true);
-						settings.AUTO_ZOOM_MAP_SCALE.setModeValue(selectedMode,
-								OsmandSettings.AutoZoomMap.values()[position - 1]);
-					}
+					super.onApplyPreferenceChange(settings.AUTO_ZOOM_MAP.getId(), appliedToAllProfiles, true);
+					super.onApplyPreferenceChange(settings.AUTO_ZOOM_MAP_SCALE.getId(),
+							appliedToAllProfiles, OsmandSettings.AutoZoomMap.values()[position - 1]);
 				}
-				return;
 			}
+		} else {
+			super.onApplyPreferenceChange(prefId, appliedToAllProfiles, newValue);
 		}
-		super.onSettingApplied(prefId, newValue, appliedToAllProfiles);
 	}
 }

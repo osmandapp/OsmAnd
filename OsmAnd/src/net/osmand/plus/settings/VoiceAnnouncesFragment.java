@@ -50,7 +50,8 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 			public void onClick(View view) {
 				ApplicationMode selectedMode = getSelectedAppMode();
 				boolean checked = !settings.VOICE_MUTE.getModeValue(selectedMode);
-				onApplyPreference(settings.VOICE_MUTE.getId(), checked, ApplyQueryType.SNACK_BAR);
+				onConfirmPreferenceChange(
+						settings.VOICE_MUTE.getId(), checked, ApplyQueryType.SNACK_BAR);
 				updateToolbarSwitch();
 				enableDisablePreferences(!checked);
 				updateMenu();
@@ -219,7 +220,8 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				onApplyPreference(settings.SPEAK_SPEED_CAMERA.getId(), true, ApplyQueryType.SNACK_BAR);
+				onConfirmPreferenceChange(
+						settings.SPEAK_SPEED_CAMERA.getId(), true, ApplyQueryType.SNACK_BAR);
 				SwitchPreferenceCompat speakSpeedCamera = (SwitchPreferenceCompat) findPreference(settings.SPEAK_SPEED_CAMERA.getId());
 				if (speakSpeedCamera != null) {
 					speakSpeedCamera.setChecked(true);
@@ -267,13 +269,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 				startActivity(intent);
 				return false;
 			} else if (newValue instanceof String) {
-				if (VOICE_PROVIDER_NOT_USE.equals(newValue)) {
-					onApplyPreference(settings.VOICE_MUTE.getId(), true, ApplyQueryType.SNACK_BAR);
-					updateToolbar();
-//					setupPreferences(); //TODO doesn't need anymore
-				}
-				onApplyPreference(settings.VOICE_PROVIDER.getId(), newValue, ApplyQueryType.SNACK_BAR);
-				app.initVoiceCommandPlayer(getActivity(), selectedMode, false, null, true, false, false);
+				onConfirmPreferenceChange(settings.VOICE_PROVIDER.getId(), newValue, ApplyQueryType.SNACK_BAR);
 			}
 			return true;
 		}
@@ -282,10 +278,29 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 				confirmSpeedCamerasDlg();
 				return false;
 			} else {
-				return onApplyPreference(settings.SPEAK_SPEED_CAMERA.getId(), false, ApplyQueryType.SNACK_BAR);
+				return onConfirmPreferenceChange(
+						settings.SPEAK_SPEED_CAMERA.getId(), false, ApplyQueryType.SNACK_BAR);
 			}
 		}
 		if (prefId.equals(settings.AUDIO_MANAGER_STREAM.getId())) {
+			return onConfirmPreferenceChange(
+					settings.AUDIO_MANAGER_STREAM.getId(), newValue, ApplyQueryType.SNACK_BAR);
+		}
+
+		return super.onPreferenceChange(preference, newValue);
+	}
+
+	@Override
+	public void onApplyPreferenceChange(String prefId, boolean appliedToAllProfiles, Object newValue) {
+		if (prefId.equals(settings.VOICE_PROVIDER.getId()) && newValue instanceof String) {
+			if (VOICE_PROVIDER_NOT_USE.equals(newValue)) {
+				super.onApplyPreferenceChange(settings.VOICE_MUTE.getId(), appliedToAllProfiles, true);
+				updateToolbar();
+			}
+			super.onApplyPreferenceChange(settings.VOICE_PROVIDER.getId(), appliedToAllProfiles, newValue);
+			app.initVoiceCommandPlayer(getActivity(), getSelectedAppMode(),
+					false, null, true, false, appliedToAllProfiles);
+		} else if (prefId.equals(settings.AUDIO_MANAGER_STREAM.getId())) {
 			// Sync DEFAULT value with CAR value, as we have other way to set it for now
 
 			if (getSelectedAppMode().equals(ApplicationMode.CAR) && newValue instanceof Integer) {
@@ -294,10 +309,8 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 				settings.AUDIO_MANAGER_STREAM.setModeValue(ApplicationMode.DEFAULT, settings.AUDIO_MANAGER_STREAM.getModeValue(ApplicationMode.CAR));
 			}
 			settings.AUDIO_USAGE.setModeValue(ApplicationMode.DEFAULT, settings.AUDIO_USAGE.getModeValue(ApplicationMode.CAR));
-
-			return true;
+		} else {
+			super.onApplyPreferenceChange(prefId, appliedToAllProfiles, newValue);
 		}
-
-		return super.onPreferenceChange(preference, newValue);
 	}
 }

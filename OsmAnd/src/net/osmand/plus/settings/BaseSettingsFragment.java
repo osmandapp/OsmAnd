@@ -83,7 +83,7 @@ import java.io.Serializable;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements OnPreferenceChangeListener,
-		OnPreferenceClickListener, AppModeChangedListener, OnApplyPreference {
+		OnPreferenceClickListener, AppModeChangedListener, OnConfirmPreferenceChange {
 
 	private static final Log LOG = PlatformUtil.getLog(BaseSettingsFragment.class);
 
@@ -314,26 +314,28 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		return onApplyPreference(preference.getKey(), newValue, getApplyQueryType());
+		return onConfirmPreferenceChange(preference.getKey(), newValue, getApplyQueryType());
 	}
 
 	@Override
-	public boolean onApplyPreference(String prefId, Object newValue, ApplyQueryType applyQueryType) {
+	public boolean onConfirmPreferenceChange(String prefId, Object newValue, ApplyQueryType applyQueryType) {
 		if (applyQueryType != null && newValue instanceof Serializable) {
 			OsmandSettings.OsmandPreference pref = settings.getPreference(prefId);
 			if (pref instanceof CommonPreference) {
 				if (applyQueryType == ApplyQueryType.SNACK_BAR) {
-					applySettingWithSnackBar(prefId, (Serializable) newValue);
+					applyPreferenceWithSnackBar(prefId, (Serializable) newValue);
+					return true;
 				} else if (applyQueryType == ApplyQueryType.BOTTOM_SHEET) {
 					FragmentManager fragmentManager = getFragmentManager();
 					if (fragmentManager != null) {
 						ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager, prefId,
 								(Serializable) newValue, this, false, getSelectedAppMode());
 					}
+					return false;
 				} else if (applyQueryType == ApplyQueryType.NONE) {
-					onSettingApplied(prefId, newValue, false);
+					onApplyPreferenceChange(prefId, false, newValue);
+					return true;
 				}
-				return true;
 			}
 		}
 		return true;
@@ -363,7 +365,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		if (preference instanceof ListPreferenceEx) {
 			SingleSelectPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode, isProfileDependent(), false);
 		} else if (preference instanceof SwitchPreferenceEx) {
-			BooleanPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode, isProfileDependent());
+			BooleanPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode, getApplyQueryType(), isProfileDependent());
 		} else if (preference instanceof EditTextPreference) {
 			EditTextPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode);
 		} else if (preference instanceof MultiSelectBooleanPreference) {
@@ -606,7 +608,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public void onSettingApplied(String prefId, boolean appliedToAllProfiles) {
 	}
 
-	public void onSettingApplied(String prefId, Object newValue, boolean appliedToAllProfiles) {
+	public void onApplyPreferenceChange(String prefId, boolean appliedToAllProfiles, Object newValue) {
 		if (appliedToAllProfiles) {
 			app.getSettings().setPreferenceForAllModes(prefId, newValue);
 		} else {
@@ -904,8 +906,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 	}
 
-	protected void applySettingWithSnackBar(final String prefId, final Serializable newValue) {
-		onSettingApplied(prefId, newValue, false);
+	protected void applyPreferenceWithSnackBar(final String prefId, final Serializable newValue) {
+		onApplyPreferenceChange(prefId, false, newValue);
 		updateSetting(prefId);
 		View containerView = getView();
 		if (containerView != null) {
@@ -916,9 +918,10 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 					.setAction(R.string.apply_to_all_profiles, new View.OnClickListener() {
 						@Override
 						public void onClick(View view) {
-							onSettingApplied(prefId, newValue, true);
+							onApplyPreferenceChange(prefId, true, newValue);
 						}
 					});
+			UiUtilities.setupSnackbarVerticalLayout(snackbar);
 			snackbar.show();
 		}
 	}

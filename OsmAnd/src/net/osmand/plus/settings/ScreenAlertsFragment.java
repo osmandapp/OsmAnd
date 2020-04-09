@@ -55,7 +55,8 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 			public void onClick(View view) {
 				ApplicationMode selectedMode = getSelectedAppMode();
 				boolean checked = !settings.SHOW_ROUTING_ALARMS.getModeValue(selectedMode);
-				onApplyPreference(settings.SHOW_ROUTING_ALARMS.getId(), checked, ApplyQueryType.SNACK_BAR);
+				onConfirmPreferenceChange(
+						settings.SHOW_ROUTING_ALARMS.getId(), checked, ApplyQueryType.SNACK_BAR);
 				updateToolbarSwitch();
 				enableDisablePreferences(checked);
 			}

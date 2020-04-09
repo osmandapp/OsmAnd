@@ -24,6 +24,8 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.settings.ApplyQueryType;
+import net.osmand.plus.settings.OnConfirmPreferenceChange;
 import net.osmand.plus.settings.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
@@ -74,16 +76,25 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 					@Override
 					public void onClick(View v) {
 						boolean newValue = !pref.getModeValue(getAppMode());
-						if (switchPreference.callChangeListener(newValue)) {
-							switchPreference.setChecked(newValue);
-							preferenceBtn[0].setTitle(newValue ? on : off);
-							preferenceBtn[0].setChecked(newValue);
-							preferenceBtn[0].setTitleColorId(newValue ? activeColor : disabledColor);
-							updateCustomButtonView(v, newValue);
+						Fragment targetFragment = getTargetFragment();
+						if (targetFragment instanceof OnConfirmPreferenceChange) {
+							ApplyQueryType applyQueryType = getApplyQueryType();
+							if (applyQueryType == ApplyQueryType.SNACK_BAR) {
+								applyQueryType = ApplyQueryType.NONE;
+							}
+							OnConfirmPreferenceChange confirmationInterface =
+									(OnConfirmPreferenceChange) targetFragment;
+							if (confirmationInterface.onConfirmPreferenceChange(
+									switchPreference.getKey(), newValue, applyQueryType)) {
+								switchPreference.setChecked(newValue);
+								preferenceBtn[0].setTitle(newValue ? on : off);
+								preferenceBtn[0].setChecked(newValue);
+								preferenceBtn[0].setTitleColorId(newValue ? activeColor : disabledColor);
+								updateCustomButtonView(v, newValue);
 
-							Fragment target = getTargetFragment();
-							if (target instanceof OnPreferenceChanged) {
-								((OnPreferenceChanged) target).onPreferenceChanged(switchPreference.getKey());
+								if (targetFragment instanceof OnPreferenceChanged) {
+									((OnPreferenceChanged) targetFragment).onPreferenceChanged(switchPreference.getKey());
+								}
 							}
 						}
 					}
@@ -145,7 +156,8 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, String prefId, Fragment target, boolean usedOnMap,
-									@Nullable ApplicationMode appMode, boolean profileDependent) {
+	                                @Nullable ApplicationMode appMode, ApplyQueryType applyQueryType,
+	                                boolean profileDependent) {
 		try {
 			if (fm.findFragmentByTag(BooleanPreferenceBottomSheet.TAG) == null) {
 				Bundle args = new Bundle();
@@ -155,6 +167,7 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 				fragment.setArguments(args);
 				fragment.setUsedOnMap(usedOnMap);
 				fragment.setAppMode(appMode);
+				fragment.setApplyQueryType(applyQueryType);
 				fragment.setTargetFragment(target, 0);
 				fragment.setProfileDependent(profileDependent);
 				fragment.show(fm, BooleanPreferenceBottomSheet.TAG);
