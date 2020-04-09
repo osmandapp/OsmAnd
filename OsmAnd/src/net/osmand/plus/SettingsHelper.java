@@ -20,6 +20,7 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.ApplicationMode.ApplicationModeBuilder;
+import net.osmand.plus.CustomOsmandPlugin.SuggestedDownloadItem;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
@@ -131,7 +132,8 @@ public class SettingsHelper {
 		QUICK_ACTIONS,
 		POI_UI_FILTERS,
 		MAP_SOURCES,
-		AVOID_ROADS
+		AVOID_ROADS,
+		SUGGESTED_DOWNLOADS
 	}
 
 	public abstract static class SettingsItem {
@@ -400,19 +402,26 @@ public class SettingsHelper {
 		@Override
 		public void apply() {
 			if (shouldReplace || !exists()) {
-				for (SettingsHelper.SettingsItem item : pluginDependentItems) {
-					if (item instanceof SettingsHelper.FileSettingsItem) {
-						FileSettingsItem fileItem = (FileSettingsItem) item;
-						if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.RENDERING_STYLE) {
-							plugin.addRenderer(fileItem.getName());
-						} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.ROUTING_CONFIG) {
-							plugin.addRouter(fileItem.getName());
-						} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.OTHER) {
-							plugin.setResourceDirName(item.getFileName());
-						}
-					}
-				}
 				OsmandPlugin.addCustomPlugin(app, plugin);
+			}
+			CustomOsmandPlugin customPlugin = (CustomOsmandPlugin) OsmandPlugin.getPlugin(getPluginId());
+			updatePluginItems(customPlugin);
+		}
+
+		private void updatePluginItems(CustomOsmandPlugin customPlugin) {
+			for (SettingsHelper.SettingsItem item : pluginDependentItems) {
+				if (item instanceof SettingsHelper.FileSettingsItem) {
+					FileSettingsItem fileItem = (FileSettingsItem) item;
+					if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.RENDERING_STYLE) {
+						customPlugin.addRenderer(fileItem.getName());
+					} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.ROUTING_CONFIG) {
+						customPlugin.addRouter(fileItem.getName());
+					} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.OTHER) {
+						customPlugin.setResourceDirName(item.getFileName());
+					}
+				} else if (item instanceof SuggestedDownloadsItem) {
+					customPlugin.updateSuggestedDownloads(((SuggestedDownloadsItem) item).items);
+				}
 			}
 		}
 
@@ -426,6 +435,115 @@ public class SettingsHelper {
 		void writeToJson(@NonNull JSONObject json) throws JSONException {
 			super.writeToJson(json);
 			plugin.writeAdditionalDataToJson(json);
+		}
+
+		@Nullable
+		@Override
+		SettingsItemReader getReader() {
+			return null;
+		}
+
+		@Nullable
+		@Override
+		SettingsItemWriter getWriter() {
+			return null;
+		}
+	}
+
+	public static class SuggestedDownloadsItem extends SettingsItem {
+
+		private List<SuggestedDownloadItem> items;
+
+		SuggestedDownloadsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+			super(app, json);
+		}
+
+		@Override
+		protected void init() {
+			items = new ArrayList<>();
+		}
+
+		@NonNull
+		@Override
+		public SettingsItemType getType() {
+			return SettingsItemType.SUGGESTED_DOWNLOADS;
+
+		}
+
+		@NonNull
+		@Override
+		public String getName() {
+			return "suggested_downloads";
+		}
+
+		@NonNull
+		@Override
+		public String getPublicName(@NonNull Context ctx) {
+			return "suggested_downloads";
+		}
+
+		public List<SuggestedDownloadItem> getItems() {
+			return items;
+		}
+
+		@Override
+		void readItemsFromJson(@NonNull JSONObject json) throws IllegalArgumentException {
+			try {
+				if (!json.has("items")) {
+					return;
+				}
+				JSONArray jsonArray = json.getJSONArray("items");
+				for (int i = 0; i < jsonArray.length(); i++) {
+					JSONObject object = jsonArray.getJSONObject(i);
+					String scopeId = object.optString("scope-id");
+					String searchType = object.optString("search-type");
+					int limit = object.optInt("limit", -1);
+
+					List<String> names = new ArrayList<>();
+					if (object.has("names")) {
+						JSONArray namesArray = object.getJSONArray("names");
+						for (int j = 0; j < namesArray.length(); j++) {
+							names.add(namesArray.getString(j));
+						}
+					}
+					SuggestedDownloadItem suggestedDownload = new SuggestedDownloadItem(scopeId, searchType, names, limit);
+					items.add(suggestedDownload);
+				}
+			} catch (JSONException e) {
+				warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
+				throw new IllegalArgumentException("Json parse error", e);
+			}
+		}
+
+		@Override
+		void writeItemsToJson(@NonNull JSONObject json) {
+			JSONArray jsonArray = new JSONArray();
+			if (!items.isEmpty()) {
+				try {
+					for (SuggestedDownloadItem downloadItem : items) {
+						JSONObject jsonObject = new JSONObject();
+						jsonObject.put("scope-id", downloadItem.getScopeId());
+						if (downloadItem.getLimit() != -1) {
+							jsonObject.put("limit", downloadItem.getLimit());
+						}
+						if (!Algorithms.isEmpty(downloadItem.getSearchType())) {
+							jsonObject.put("search-type", downloadItem.getSearchType());
+						}
+						if (!Algorithms.isEmpty(downloadItem.getNames())) {
+							JSONArray namesArray = new JSONArray();
+							for (String downloadName : downloadItem.getNames()) {
+								namesArray.put(downloadName);
+							}
+							jsonObject.put("names", namesArray);
+						}
+						jsonArray.put(jsonObject);
+					}
+					json.put("items", jsonArray);
+				} catch (JSONException e) {
+					warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
+					LOG.error("Failed write to json", e);
+				}
+			}
 		}
 
 		@Nullable
@@ -2085,6 +2203,9 @@ public class SettingsHelper {
 					break;
 				case AVOID_ROADS:
 					item = new AvoidRoadsSettingsItem(app, json);
+					break;
+				case SUGGESTED_DOWNLOADS:
+					item = new SuggestedDownloadsItem(app, json);
 					break;
 			}
 			return item;

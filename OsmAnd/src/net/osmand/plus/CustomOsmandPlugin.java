@@ -20,6 +20,10 @@ import net.osmand.plus.SettingsHelper.ProfileSettingsItem;
 import net.osmand.plus.SettingsHelper.QuickActionsSettingsItem;
 import net.osmand.plus.SettingsHelper.SettingsCollectListener;
 import net.osmand.plus.SettingsHelper.SettingsItem;
+import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.DownloadResources;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
@@ -56,6 +60,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 
 	private List<String> rendererNames = new ArrayList<>();
 	private List<String> routerNames = new ArrayList<>();
+	private List<SuggestedDownloadItem> suggestedDownloadItems = new ArrayList<>();
 
 	public CustomOsmandPlugin(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		super(app);
@@ -93,9 +98,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 								ApplicationMode.changeProfileAvailability(savedMode, true, app);
 							}
 							iterator.remove();
-						} else if (item instanceof PluginSettingsItem) {
-							iterator.remove();
-						} else {
+						} else if (!(item instanceof PluginSettingsItem)) {
 							item.setShouldReplace(true);
 						}
 					}
@@ -374,12 +377,16 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 
 	public void addRouter(String fileName) {
 		String routerName = Algorithms.getFileWithoutDirs(fileName);
-		routerNames.add(routerName);
+		if (!routerNames.contains(routerName)) {
+			routerNames.add(routerName);
+		}
 	}
 
 	public void addRenderer(String fileName) {
 		String rendererName = Algorithms.getFileWithoutDirs(fileName);
-		rendererNames.add(rendererName);
+		if (!rendererNames.contains(rendererName)) {
+			rendererNames.add(rendererName);
+		}
 	}
 
 	public void loadResources() {
@@ -422,9 +429,50 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		return image;
 	}
 
+	public void updateSuggestedDownloads(List<SuggestedDownloadItem> items) {
+		suggestedDownloadItems = new ArrayList<>(items);
+	}
+
+	@Override
+	public List<IndexItem> getSuggestedMaps() {
+		List<IndexItem> suggestedMaps = new ArrayList<>();
+		return suggestedMaps;
+	}
+
 	public interface PluginItemsListener {
 
 		void onItemsRemoved();
 
+	}
+
+	public static class SuggestedDownloadItem {
+
+		private String scopeId;
+		private String searchType;
+		private List<String> names;
+		private int limit;
+
+		public SuggestedDownloadItem(String scopeId, String searchType, List<String> names, int limit) {
+			this.scopeId = scopeId;
+			this.limit = limit;
+			this.searchType = searchType;
+			this.names = names;
+		}
+
+		public String getScopeId() {
+			return scopeId;
+		}
+
+		public String getSearchType() {
+			return searchType;
+		}
+
+		public List<String> getNames() {
+			return names;
+		}
+
+		public int getLimit() {
+			return limit;
+		}
 	}
 }
