@@ -3621,4 +3621,11 @@ Lon %2$s</string>
     <string name="settings_item_read_error">Konnte %1$s nicht lesen.</string>
     <string name="settings_item_write_error">Konnte %1$s nicht schreiben.</string>
     <string name="settings_item_import_error">Konnte %1$s nicht importieren.</string>
+    <string name="select_track_file">Wählen Sie eine Pfad-Datei</string>
+    <string name="shared_string_languages">Sprachen</string>
+    <string name="shared_string_language">Sprache</string>
+    <string name="shared_string_all_languages">Alle Sprachen</string>
+    <string name="wikipedia_poi_languages_promo">Einige Wikipedia-Artikel könnten nicht in Ihrer Sprache verfügbar. Wählen Sie die Sprachen aus, in der Wikipedia-Artikel auf der Karte erscheinen sollen.
+\nSie können beim Lesen des Artikels zwischen allen verfügbaren Sprachen wechseln.</string>
+    <string name="wiki_menu_download_descr">Zusätzliche Karten werden benötigt um Wikipedia-POIs auf der Karte anzuzeigen.</string>
 </resources>

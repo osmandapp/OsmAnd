@@ -147,6 +147,7 @@ public class SettingsHelper {
 
 		SettingsItem(OsmandApplication app) {
 			this.app = app;
+			warnings = new ArrayList<>();
 			init();
 		}
 
