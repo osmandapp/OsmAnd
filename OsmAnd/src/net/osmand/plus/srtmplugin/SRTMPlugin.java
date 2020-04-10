@@ -352,9 +352,13 @@ public class SRTMPlugin extends OsmandPlugin {
 					.setListener(listener).createItem());
 		}
 		boolean terrainEnabled = settings.TERRAIN.get();
+		TerrainMode terrainMode = settings.TERRAIN_MODE.get();
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(TERRAIN)
 				.setTitleId(R.string.shared_string_terrain, mapActivity)
+				.setDescription(app.getString(terrainMode == TerrainMode.HILLSHADE
+						? R.string.shared_string_hillshade
+						: R.string.shared_string_slope))
 				.setSelected(terrainEnabled)
 				.setColor(terrainEnabled ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_hillshade_dark)
