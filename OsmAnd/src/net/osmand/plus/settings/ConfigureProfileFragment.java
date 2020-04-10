@@ -392,7 +392,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		Preference uiCustomization = findPreference(UI_CUSTOMIZATION);
 		if (uiCustomization != null) {
 			uiCustomization.setIcon(getContentIcon(R.drawable.ic_action_ui_customization));
-			uiCustomization.setFragment(ConfigureMenuRootFragment.TAG);
 		}
 	}
 
@@ -440,6 +439,14 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			}
 		} else if (DELETE_PROFILE.equals(prefId)) {
 			onDeleteProfileClick();
+		} else if (UI_CUSTOMIZATION.equals(prefId)) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				ConfigureMenuRootFragment.showInstance(
+						fragmentManager,
+						this,
+						getSelectedAppMode());
+			}
 		}
 		return super.onPreferenceClick(preference);
 	}

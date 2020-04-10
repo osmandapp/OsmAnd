@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,15 +51,37 @@ import java.util.List;
 public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = ConfigureMenuRootFragment.class.getName();
+	private static final String APP_MODE_KEY = "app_mode_key";
 	private static final Log LOG = PlatformUtil.getLog(TAG);
 
 	private OsmandApplication app;
 	private LayoutInflater mInflater;
 	private boolean nightMode;
+	private ApplicationMode appMode;
+
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
+	                                   Fragment target,
+	                                   @NonNull ApplicationMode appMode) {
+		try {
+			ConfigureMenuRootFragment fragment = new ConfigureMenuRootFragment();
+			fragment.setAppMode(appMode);
+			fragment.setTargetFragment(target, 0);
+			fragmentManager.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(null)
+					.commitAllowingStateLoss();
+			return true;
+		} catch (RuntimeException e) {
+			return false;
+		}
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		if (savedInstanceState != null) {
+			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
+		}
 		app = requireMyApplication();
 		nightMode = !app.getSettings().isLightContent();
 		mInflater = UiUtilities.getInflater(app, nightMode);
@@ -67,7 +90,6 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		ApplicationMode profile = app.getSettings().getApplicationMode();
 		View root = mInflater.inflate(R.layout.fragment_ui_customization, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
 		TextView toolbarTitle = root.findViewById(R.id.toolbar_title);
@@ -92,7 +114,7 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 			}
 		});
 		toolbarTitle.setText(R.string.ui_customization);
-		toolbarSubTitle.setText(profile.toHumanString());
+		toolbarSubTitle.setText(appMode.toHumanString());
 		toolbarSubTitle.setVisibility(View.VISIBLE);
 		List<Object> items = new ArrayList<>();
 		items.add(getString(R.string.ui_customization_description));
@@ -102,7 +124,7 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 			public void onItemClick(ScreenType type) {
 				FragmentManager fm = getFragmentManager();
 				if (fm != null) {
-					ConfigureMenuItemsFragment.showInstance(fm, type);
+					ConfigureMenuItemsFragment.showInstance(fm, appMode, type);
 				}
 			}
 		});
@@ -123,6 +145,19 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 			return nightMode ? R.color.activity_background_dark : R.color.activity_background_light;
 	}
 
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putString(APP_MODE_KEY, getAppMode().getStringKey());
+	}
+
+	public void setAppMode(ApplicationMode appMode) {
+		this.appMode = appMode;
+	}
+
+	public ApplicationMode getAppMode() {
+		return appMode != null ? appMode : app.getSettings().getApplicationMode();
+	}
 
 	private class CustomizationItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

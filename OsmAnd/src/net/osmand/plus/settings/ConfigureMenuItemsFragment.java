@@ -67,6 +67,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 
 	public static final String TAG = ConfigureMenuItemsFragment.class.getName();
 	private static final Log LOG = PlatformUtil.getLog(ConfigureMenuItemsFragment.class.getName());
+	private static final String APP_MODE_KEY = "app_mode_key";
 	private static final String ITEM_TYPE_KEY = "item_type_key";
 	private static final String ITEMS_ORDER_KEY = "items_order_key";
 	private static final String HIDDEN_ITEMS_KEY = "hidden_items_key";
@@ -89,11 +90,16 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		outState.putStringArrayList(HIDDEN_ITEMS_KEY, new ArrayList<>(hiddenMenuItems));
 		outState.putSerializable(ITEMS_ORDER_KEY, menuItemsOrder);
 		outState.putSerializable(ITEM_TYPE_KEY, screenType);
+		outState.putString(APP_MODE_KEY, appMode.getStringKey());
 	}
 
-	public static ConfigureMenuItemsFragment showInstance(@NonNull FragmentManager fm, @NonNull ScreenType type) {
+	public static ConfigureMenuItemsFragment showInstance(
+			@NonNull FragmentManager fm,
+			@NonNull ApplicationMode appMode,
+			@NonNull ScreenType type) {
 		ConfigureMenuItemsFragment fragment = new ConfigureMenuItemsFragment();
 		fragment.setScreenType(type);
+		fragment.setAppMode(appMode);
 		fm.beginTransaction()
 				.replace(R.id.fragmentContainer, fragment, TAG)
 				.addToBackStack(CONFIGURE_MENU_ITEMS_TAG)
@@ -101,6 +107,13 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		return fragment;
 	}
 
+	public void setAppMode(ApplicationMode appMode) {
+		this.appMode = appMode;
+	}
+
+	public ApplicationMode getAppMode() {
+		return appMode != null ? appMode : app.getSettings().getApplicationMode();
+	}
 
 	@Override
 	public int getStatusBarColorId() {
@@ -115,7 +128,6 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
-		appMode = app.getSettings().getApplicationMode();
 		nightMode = !app.getSettings().isLightContent();
 		mInflater = UiUtilities.getInflater(app, nightMode);
 		instantiateContextMenuAdapter();
@@ -123,6 +135,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 				&& savedInstanceState.containsKey(ITEM_TYPE_KEY)
 				&& savedInstanceState.containsKey(HIDDEN_ITEMS_KEY)
 				&& savedInstanceState.containsKey(ITEMS_ORDER_KEY)) {
+			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
 			screenType = (ScreenType) savedInstanceState.getSerializable(ITEM_TYPE_KEY);
 			hiddenMenuItems = savedInstanceState.getStringArrayList(HIDDEN_ITEMS_KEY);
 			menuItemsOrder = (HashMap<String, Integer>) savedInstanceState.getSerializable(ITEMS_ORDER_KEY);
