@@ -564,6 +564,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 
 		// Action buttons
+//		TODO refactor section
 		ContextMenuAdapter adapter = menu.getActionsContextMenuAdapter(false);
 		adapter.initItemsCustomOrder(requireMyApplication());
 		List<ContextMenuItem> items = adapter.getItems();
@@ -581,8 +582,15 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				1f
 		);
 		buttons.removeAllViews();
+		ContextMenuAdapter mainAdapter = new ContextMenuAdapter();
+		mainAdapter.updateItems(main);
+		ContextMenuItemClickListener mainListener = menu.getContextMenuItemClickListener(mainAdapter);
+		ContextMenuAdapter additionalAdapter = new ContextMenuAdapter();
+		additionalAdapter.updateItems(additional);
+		ContextMenuItemClickListener additionalListener = menu.getContextMenuItemClickListener(additionalAdapter);
+
 		for (int i = 0; i < main.size(); i++) {
-			buttons.addView(getActionView(main.get(i), i, adapter, additional,main), params);
+			buttons.addView(getActionView(main.get(i), i, mainAdapter, additionalAdapter, mainListener, additionalListener), params);
 		}
 		buttons.setGravity(Gravity.CENTER);
 
@@ -645,9 +653,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private View getActionView(ContextMenuItem contextMenuItem,
 	                           final int position,
-	                           final ContextMenuAdapter adapter,
-	                           List<ContextMenuItem> additional,
-	                           List<ContextMenuItem> main) {
+	                           final ContextMenuAdapter mainAdapter,
+	                           final ContextMenuAdapter additionalAdapter,
+	                           final ContextMenuItemClickListener mainListener,
+	                           final ContextMenuItemClickListener additionalListener) {
 		UiUtilities uiUtilities = requireMyApplication().getUIUtilities();
 		LayoutInflater inflater = UiUtilities.getInflater(getMyApplication(), nightMode);
 		View view = inflater.inflate(R.layout.context_menu_action_item, null);
@@ -656,23 +665,18 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		TextView title = view.findViewById(R.id.text);
 		icon.setImageDrawable(uiUtilities.getIcon(contextMenuItem.getIcon(), nightMode));
 		title.setText(contextMenuItem.getTitle());
-		adapter.updateItems(main);
-		final ContextMenuItemClickListener l = menu.getContextMenuItemClickListener(adapter);
 		if (contextMenuItem.getId().equals(MAP_CONTEXT_MENU_MORE_ID)) {
-			final ContextMenuAdapter aditionalAdapter = adapter;
-			aditionalAdapter.updateItems(additional);
-			final ContextMenuItemClickListener listener = menu.getContextMenuItemClickListener(aditionalAdapter);
 			item.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					menu.showAdditionalActionsFragment(aditionalAdapter, listener);
+					menu.showAdditionalActionsFragment(additionalAdapter, additionalListener);
 				}
 			});
 		} else {
 			item.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					l.onItemClick(position);
+					mainListener.onItemClick(position);
 				}
 			});
 		}

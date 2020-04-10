@@ -1062,19 +1062,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-//	public void buttonMorePressed() {
-//		MapActivity mapActivity = getMapActivity();
-//		if (mapActivity != null) {
-//			final ContextMenuAdapter menuAdapter = new ContextMenuAdapter();
-//			LatLon latLon = getLatLon();
-//			for (OsmandMapLayer layer : mapActivity.getMapView().getLayers()) {
-//				layer.populateObjectContextMenu(latLon, getObject(), menuAdapter, mapActivity);
-//			}
-//
-//			mapActivity.getMapActions().contextMenuPoint(latLon.getLatitude(), latLon.getLongitude(), menuAdapter, getObject());
-//		}
-//	}
-
 	public ContextMenuAdapter getActionsContextMenuAdapter(boolean all) {
 		MapActivity mapActivity = getMapActivity();
 		final ContextMenuAdapter menuAdapter = new ContextMenuAdapter();
