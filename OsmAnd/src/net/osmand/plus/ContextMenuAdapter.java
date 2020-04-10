@@ -36,7 +36,6 @@ import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.ConfigureMenuRootFragment.ScreenType;
 import net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItem;
 
 import org.apache.commons.logging.Log;
@@ -53,7 +52,6 @@ import java.util.Set;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
 import static net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItemType.MENU_ITEM;
@@ -87,8 +85,12 @@ public class ContextMenuAdapter {
 
 	public void addItem(ContextMenuItem item) {
 		try {
-//			TODO
-			items.add(item.getPos(), item);
+
+
+			if (!item.isHidden()){
+				items.add(item.getPos(), item);
+			}
+
 		} catch (IndexOutOfBoundsException ex) {
 			items.add(item);
 		}
@@ -641,7 +643,7 @@ public class ContextMenuAdapter {
 	}
 
 	public void initItemsCustomOrder(@NonNull OsmandApplication app) {
-		OsmandSettings.MenuItemConfigPreference preference = null;
+		OsmandSettings.ContextMenuItemsPreference preference = null;
 		for (ContextMenuItem item : items) {
 			String id = item.getId();
 			if (id != null) {
