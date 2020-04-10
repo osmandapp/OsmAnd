@@ -277,6 +277,7 @@
         <item name="colorBackgroundFloating">@color/list_background_color_light</item>
         <item name="android:colorBackgroundFloating">@color/list_background_color_light</item>
         <item name="preferenceTheme">@style/OsmandPreferenceTheme</item>
+        <item name="stroked_buttons_and_links_outline">@color/stroked_buttons_and_links_outline_light</item>
     </style>
 
     <style name="OverflowMenuButton" parent="@style/Widget.AppCompat.ActionButton.Overflow">
@@ -542,6 +543,7 @@
         <item name="colorBackgroundFloating">@color/list_background_color_dark</item>
         <item name="android:colorBackgroundFloating">@color/list_background_color_dark</item>
         <item name="preferenceTheme">@style/OsmandPreferenceTheme</item>
+        <item name="stroked_buttons_and_links_outline">@color/stroked_buttons_and_links_outline_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">
