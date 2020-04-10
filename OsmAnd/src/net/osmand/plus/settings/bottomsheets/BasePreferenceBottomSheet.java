@@ -11,6 +11,7 @@ import androidx.preference.Preference;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.settings.ApplyQueryType;
 
 import java.util.List;
 
@@ -18,12 +19,14 @@ public abstract class BasePreferenceBottomSheet extends MenuBottomSheetDialogFra
 
 	public static final String PREFERENCE_ID = "preference_id";
 	private static final String APP_MODE_KEY = "app_mode_key";
+	private static final String APPLY_QUERY_TYPE = "apply_query_type";
 	private static final String PROFILE_DEPENDENT = "profile_dependent";
 
 	private String prefId;
 	private Preference preference;
 	private ApplicationMode appMode;
 	private boolean profileDependent;
+	private ApplyQueryType applyQueryType;
 
 	public void setAppMode(ApplicationMode appMode) {
 		this.appMode = appMode;
@@ -38,6 +41,7 @@ public abstract class BasePreferenceBottomSheet extends MenuBottomSheetDialogFra
 		super.onCreate(savedInstanceState);
 		if (savedInstanceState != null) {
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
+			applyQueryType = ApplyQueryType.valueOf(savedInstanceState.getString(APPLY_QUERY_TYPE));
 			profileDependent = savedInstanceState.getBoolean(PROFILE_DEPENDENT, false);
 		}
 	}
@@ -49,6 +53,8 @@ public abstract class BasePreferenceBottomSheet extends MenuBottomSheetDialogFra
 		if (appMode != null) {
 			outState.putString(APP_MODE_KEY, appMode.getStringKey());
 		}
+		outState.putString(APPLY_QUERY_TYPE, applyQueryType != null ?
+				applyQueryType.name() : ApplyQueryType.NONE.name());
 	}
 
 	@Override
@@ -106,5 +112,13 @@ public abstract class BasePreferenceBottomSheet extends MenuBottomSheetDialogFra
 
 	public boolean isProfileDependent() {
 		return profileDependent;
+	}
+
+	public void setApplyQueryType(ApplyQueryType applyQueryType) {
+		this.applyQueryType = applyQueryType;
+	}
+
+	public ApplyQueryType getApplyQueryType() {
+		return applyQueryType != null ? applyQueryType : ApplyQueryType.NONE;
 	}
 }

@@ -17,7 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
@@ -25,16 +24,13 @@ import androidx.preference.SwitchPreferenceCompat;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -323,23 +319,38 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		b.setAdapter(singleChoiceAdapter, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				ApplicationMode selectedMode = getSelectedAppMode();
-				if (drs.get(which) == null) {
-					settings.DRIVING_REGION_AUTOMATIC.setModeValue(selectedMode, true);
-					MapViewTrackingUtilities mapViewTrackingUtilities = getMyApplication().getMapViewTrackingUtilities();
-					if (mapViewTrackingUtilities != null) {
-						mapViewTrackingUtilities.resetDrivingRegionUpdate();
-					}
-				} else {
-					settings.DRIVING_REGION_AUTOMATIC.setModeValue(selectedMode, false);
-					settings.DRIVING_REGION.setModeValue(selectedMode, drs.get(which));
-				}
-				updateAllSettings();
+				onConfirmPreferenceChange(settings.DRIVING_REGION.getId(), drs.get(which), ApplyQueryType.BOTTOM_SHEET);
 			}
 		});
 
 		b.setNegativeButton(R.string.shared_string_cancel, null);
 		b.show();
+	}
+
+	@Override
+	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
+		if (settings.DRIVING_REGION.getId().equals(prefId)) {
+			ApplicationMode selectedMode = getSelectedAppMode();
+			if (newValue == null) {
+				applyPreference(settings.DRIVING_REGION_AUTOMATIC.getId(), applyToAllProfiles, true);
+				MapViewTrackingUtilities mapViewTrackingUtilities = requireMyApplication().getMapViewTrackingUtilities();
+				if (mapViewTrackingUtilities != null) {
+					mapViewTrackingUtilities.resetDrivingRegionUpdate();
+				}
+			} else if (newValue instanceof OsmandSettings.DrivingRegion) {
+				applyPreference(settings.DRIVING_REGION_AUTOMATIC.getId(), applyToAllProfiles, false);
+				if (applyToAllProfiles) {
+					for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+						settings.DRIVING_REGION.setModeValue(appMode, (OsmandSettings.DrivingRegion) newValue);
+					}
+				} else {
+					settings.DRIVING_REGION.setModeValue(selectedMode, (OsmandSettings.DrivingRegion) newValue);
+				}
+			}
+			updateAllSettings();
+		} else {
+			applyPreference(prefId, applyToAllProfiles, newValue);
+		}
 	}
 
 	@Override
@@ -354,8 +365,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String prefId = preference.getKey();
-		if (prefId.equals(settings.ROTATE_MAP.getId()) && newValue instanceof Serializable) {
-			applyChangeAndSuggestApplyToAllProfiles(prefId, (Serializable) newValue);
+		if (settings.ROTATE_MAP.getId().equals(prefId)) {
+			onConfirmPreferenceChange(prefId, newValue, ApplyQueryType.SNACK_BAR);
 			return false;
 		}
 		return super.onPreferenceChange(preference, newValue);

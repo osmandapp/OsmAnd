@@ -55,7 +55,6 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						app.getSettings().setPreferenceForAllModes(prefId, newValue);
 						updateTargetSettings(false, true);
 						dismiss();
 					}
@@ -72,7 +71,6 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						app.getSettings().setPreference(prefId, newValue, getAppMode());
 						updateTargetSettings(false, false);
 						dismiss();
 					}
@@ -106,11 +104,11 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 		outState.putSerializable(NEW_VALUE_KEY, newValue);
 	}
 
-	private void updateTargetSettings(boolean discard, boolean appliedToAllProfiles) {
+	private void updateTargetSettings(boolean discard, boolean applyToAllProfiles) {
 		BaseSettingsFragment target = (BaseSettingsFragment) getTargetFragment();
 		if (target != null) {
 			if (!discard) {
-				target.onSettingApplied(getPrefId(), appliedToAllProfiles);
+				target.onApplyPreferenceChange(getPrefId(), applyToAllProfiles, newValue);
 			}
 			target.updateSetting(getPrefId());
 			if (!discard) {
