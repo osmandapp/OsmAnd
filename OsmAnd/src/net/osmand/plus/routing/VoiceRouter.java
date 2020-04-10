@@ -204,8 +204,10 @@ public class VoiceRouter {
 
 		// Trigger close prompts earlier to allow BT SCO link being established, or when VOICE_PROMPT_DELAY is set >0 for the other stream types
 		int ams = settings.AUDIO_MANAGER_STREAM.getModeValue(router.getAppMode());
-		if (((ams == 0) && !AbstractPrologCommandPlayer.btScoStatus) || (ams > 0)) {
-			voicePromptDelayDistance = currentSpeed * (double) settings.VOICE_PROMPT_DELAY[ams].get() / 1000;
+		if ((ams == 0 && !AbstractPrologCommandPlayer.btScoStatus) || ams > 0) {
+			if (settings.VOICE_PROMPT_DELAY[ams] != null) {
+				voicePromptDelayDistance = currentSpeed * (double) settings.VOICE_PROMPT_DELAY[ams].get() / 1000;
+			}
 		}
 
 		if ((dist < etalon + voicePromptDelayDistance) || ((dist - voicePromptDelayDistance) / currentSpeed) < (etalon / defSpeed)) {

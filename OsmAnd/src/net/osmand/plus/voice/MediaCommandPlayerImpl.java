@@ -8,6 +8,7 @@ import android.os.Build;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.routing.VoiceRouter;
 
 import org.apache.commons.logging.Log;
@@ -89,10 +90,11 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 			requestAudioFocus();
 			// Delay first prompt of each batch to allow BT SCO link being established, or when VOICE_PROMPT_DELAY is set >0 for the other stream types
 			if (ctx != null) {
-				int vpd = ctx.getSettings().VOICE_PROMPT_DELAY[ctx.getSettings().AUDIO_MANAGER_STREAM.getModeValue(getApplicationMode())].get();
-				if (vpd > 0) {
+				Integer stream = ctx.getSettings().AUDIO_MANAGER_STREAM.getModeValue(getApplicationMode());
+				OsmandSettings.OsmandPreference<Integer> pref = ctx.getSettings().VOICE_PROMPT_DELAY[stream];
+				if (pref.getModeValue(getApplicationMode()) > 0) {
 					try {
-						Thread.sleep(vpd);
+						Thread.sleep(pref.getModeValue(getApplicationMode()));
 					} catch (InterruptedException e) {
 					}
 				}
