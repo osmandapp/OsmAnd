@@ -55,6 +55,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	private boolean nightMode;
 	private boolean importState;
 	private int activeColorRes;
+	private int secondaryColorRes;
 
 	ExportImportSettingsAdapter(OsmandApplication app, boolean nightMode, boolean importState) {
 		this.app = app;
@@ -68,6 +69,9 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		activeColorRes = nightMode
 				? R.color.icon_color_active_dark
 				: R.color.icon_color_active_light;
+		secondaryColorRes = nightMode
+				? R.color.icon_color_secondary_dark
+				: R.color.icon_color_secondary_light;
 	}
 
 	@Override
@@ -94,7 +98,6 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		lineDivider.setVisibility(importState || isExpanded || isLastGroup ? View.GONE : View.VISIBLE);
 		cardTopDivider.setVisibility(importState ? View.VISIBLE : View.GONE);
 		cardBottomDivider.setVisibility(importState && !isExpanded ? View.VISIBLE : View.GONE);
-		CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, activeColorRes)));
 
 		final List<?> listItems = itemsMap.get(type);
 		subTextTv.setText(getSelectedItemsAmount(listItems));
@@ -111,6 +114,8 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 			}
 			checkBox.setState(contains ? MISC : UNCHECKED);
 		}
+		int checkBoxColor = checkBox.getState() == UNCHECKED ? secondaryColorRes : activeColorRes;
+		CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, checkBoxColor)));
 		checkBoxContainer.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -153,7 +158,8 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
 		lineDivider.setVisibility(!importState && isLastChild && !isLastGroup ? View.VISIBLE : View.GONE);
 		cardBottomDivider.setVisibility(importState && isLastChild ? View.VISIBLE : View.GONE);
-		CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, activeColorRes)));
+		int checkBoxColor = itemSelected ? activeColorRes : secondaryColorRes;
+		CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, checkBoxColor)));
 
 		checkBox.setChecked(itemSelected);
 		checkBox.setClickable(false);
