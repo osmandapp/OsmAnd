@@ -40,9 +40,11 @@ public class TransportRoutePlanner {
 	public static final long STOPS_WAY_ID = -2;
 
 	public List<TransportRouteResult> buildRoute(TransportRoutingContext ctx, LatLon start, LatLon end) throws IOException, InterruptedException {
+		/**delete*/ int cnt = 0;
 		ctx.startCalcTime = System.currentTimeMillis();
 		List<TransportRouteSegment> startStops = ctx.getTransportStops(start);
 		List<TransportRouteSegment> endStops = ctx.getTransportStops(end);
+		/** delete */ cnt = 2;
 		/** delete */System.out.println(String.format("startStops/endStops: %d / %d", startStops.size(), endStops.size()));
 		TLongObjectHashMap<TransportRouteSegment> endSegments = new TLongObjectHashMap<TransportRouteSegment>();
 		for(TransportRouteSegment s : endStops) {
@@ -118,6 +120,7 @@ public class TransportRoutePlanner {
 				}
 				sgms.clear();
 				sgms = ctx.getTransportStops(stop.x31, stop.y31, true, sgms);
+				/**delete*/cnt++;
 				ctx.visitedStops++;
 				for (TransportRouteSegment sgm : sgms) {
 					if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
@@ -187,7 +190,7 @@ public class TransportRoutePlanner {
 			updateCalculationProgress(ctx, queue);
 			
 		}
-		
+		System.out.println(String.format("Count calls getTransportStop %d", cnt));
 		return prepareResults(ctx, results);
 	}
 	
@@ -1067,7 +1070,7 @@ public class TransportRoutePlanner {
 			s.distance = ns.distance;
 			s.x31 = ns.x31;
 			s.y31 = ns.y31;
-			List<TransportRoute> routes1 = new ArrayList<>();
+//			List<TransportRoute> routes1 = new ArrayList<>();
 			//cache routes to avoid circular conversion and just search them by id
 			for (int i = 0; i < ns.routes.length; i++) {
 				if (s.getRoutesIds().length == ns.routes.length && convertedRoutesCache != null

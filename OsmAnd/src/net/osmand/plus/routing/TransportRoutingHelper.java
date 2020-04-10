@@ -32,6 +32,7 @@ import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.router.TransportRoutePlanner.TransportRoutingContext;
 import net.osmand.router.TransportRoutingConfiguration;
 import net.osmand.router.ptresult.NativeTransportRoutingResult;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.IOException;
@@ -500,8 +501,14 @@ public class TransportRoutingHelper {
 						MapUtils.get31TileNumberX(params.end.getLongitude()),
 						MapUtils.get31TileNumberY(params.end.getLatitude()),
 						cfg, ctx.calculationProgress);
+				List<TransportRouteResult> res = TransportRoutePlanner.convertToTransportRoutingResult(nativeRes, cfg);
+				if (!Algorithms.isEmpty(res)) {
+					return res;
+				} else {
+					app.showToastMessage("Can't find route with NativeLib, switching to Java");
+					return planner.buildRoute(ctx, params.start, params.end);
+				}
 
-				return TransportRoutePlanner.convertToTransportRoutingResult(nativeRes, cfg);
 			} else {
 				return planner.buildRoute(ctx, params.start, params.end);
 			}
