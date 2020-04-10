@@ -1182,7 +1182,7 @@ public class MapActivityActions implements DialogProvider {
 		}
 		menuItemsListView.setDivider(null);
 		final ContextMenuAdapter contextMenuAdapter = createMainOptionsMenu();
-		contextMenuAdapter.initItemsCustomOrder(getMyApplication());
+		contextMenuAdapter.sortItemsByCustomOrder(getMyApplication());
 		contextMenuAdapter.setDefaultLayoutId(R.layout.simple_list_menu_item);
 		final ArrayAdapter<ContextMenuItem> simpleListAdapter = contextMenuAdapter.createListAdapter(mapActivity,
 				!nightMode);

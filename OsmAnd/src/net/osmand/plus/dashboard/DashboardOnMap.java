@@ -77,7 +77,6 @@ import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.settings.ConfigureMenuRootFragment.ScreenType;
 import net.osmand.plus.srtmplugin.ContourLinesMenu;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.srtmplugin.TerrainFragment;
@@ -703,7 +702,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			cm = mapActivity.getMapLayers().getMapWidgetRegistry().getViewConfigureMenuAdapter(mapActivity);
 		} else if (visibleType == DashboardType.CONFIGURE_MAP) {
 			cm = new ConfigureMapMenu().createListAdapter(mapActivity);
-			cm.initItemsCustomOrder(getMyApplication());
+			cm.sortItemsByCustomOrder(getMyApplication());
 		} else if (visibleType == DashboardType.LIST_MENU) {
 			cm = mapActivity.getMapActions().createMainOptionsMenu();
 		} else if (visibleType == DashboardType.ROUTE_PREFERENCES) {

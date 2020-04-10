@@ -48,6 +48,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -58,6 +60,7 @@ import static net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItemType
 import static net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItemType.DESCRIPTION;
 import static net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItemType.DIVIDER;
 import static net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItemType.HEADER;
+import static net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItemType.MENU_ITEM;
 
 public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		implements SelectCopyAppModeBottomSheet.CopyAppModePrefsListener {
@@ -125,7 +128,11 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 			menuItemsOrder = (HashMap<String, Integer>) savedInstanceState.getSerializable(ITEMS_ORDER_KEY);
 		} else {
 			hiddenMenuItems = getSettingForScreen(app, screenType).getHiddenIds();
-			menuItemsOrder = contextMenuAdapter.getMenuItemsOrder(getSettingForScreen(app, screenType).getOrderIds());
+			menuItemsOrder = new HashMap<>();
+			List<String> orderIds = getSettingForScreen(app, screenType).getOrderIds();
+			for (int i = 0; i < orderIds.size(); i++) {
+				menuItemsOrder.put(orderIds.get(i), i);
+			}
 		}
 	}
 
@@ -241,7 +248,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 			@Override
 			public void onClick(View v) {
 				List<ContextMenuItem> defItems = contextMenuAdapter.getDefaultItems();
-				contextMenuAdapter.reorderMenuItems(defItems, menuItemsOrder);
+				sortByCustomOrder(defItems, menuItemsOrder);
 				List<String> ids = new ArrayList<>();
 				for (ContextMenuItem item : defItems) {
 					ids.add(item.getId());
@@ -305,8 +312,8 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		List<AdapterItem> items = new ArrayList<>();
 		items.add(new AdapterItem(DESCRIPTION, screenType));
 
-		List<AdapterItem> visible = contextMenuAdapter.getItemsForRearrangeAdapter(hiddenMenuItems, wasReset ? null : menuItemsOrder, false);
-		List<AdapterItem> hiddenItems = contextMenuAdapter.getItemsForRearrangeAdapter(hiddenMenuItems, wasReset ? null : menuItemsOrder, true);
+		List<AdapterItem> visible = getItemsForRearrangeAdapter(hiddenMenuItems, wasReset ? null : menuItemsOrder, false);
+		List<AdapterItem> hiddenItems = getItemsForRearrangeAdapter(hiddenMenuItems, wasReset ? null : menuItemsOrder, true);
 		if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
 			for (int i =0; i<visible.size(); i++){
 				ContextMenuItem value = (ContextMenuItem) visible.get(i).getValue();
@@ -430,5 +437,50 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 			default:
 				throw new IllegalArgumentException("Unsupported screen type");
 		}
+	}
+
+	private void initDefaultOrders(@NonNull List<ContextMenuItem> items) {
+		for (int i = 0; i < items.size(); i++) {
+			items.get(i).setOrder(i);
+		}
+	}
+
+	public List<AdapterItem> getItemsForRearrangeAdapter(@Nullable List<String> hiddenItemsIds, @Nullable HashMap<String, Integer> itemsOrderIds, boolean hidden) {
+		List<ContextMenuItem> defItems = contextMenuAdapter.getDefaultItems();
+		if (itemsOrderIds == null || itemsOrderIds.isEmpty()) {
+			initDefaultOrders(defItems);
+		} else {
+			sortByCustomOrder(defItems, itemsOrderIds);
+		}
+		List<AdapterItem> visibleItems = new ArrayList<>();
+		List<AdapterItem> hiddenItems = new ArrayList<>();
+		for (ContextMenuItem item : defItems) {
+			String id = item.getId();
+			if (hiddenItemsIds != null && hiddenItemsIds.contains(id)) {
+				item.setHidden(true);
+				hiddenItems.add(new AdapterItem(MENU_ITEM, item));
+			} else {
+				item.setHidden(false);
+				visibleItems.add(new AdapterItem(MENU_ITEM, item));
+			}
+		}
+		return hidden ? hiddenItems : visibleItems;
+	}
+
+	private void sortByCustomOrder(List<ContextMenuItem> defItems, HashMap<String, Integer> itemsOrderIds) {
+		for (ContextMenuItem item : defItems) {
+			Integer order = itemsOrderIds.get(item.getId());
+			if (order != null) {
+				item.setOrder(order);
+			}
+		}
+		Collections.sort(defItems, new Comparator<ContextMenuItem>() {
+			@Override
+			public int compare(ContextMenuItem item1, ContextMenuItem item2) {
+				int order1 = item1.getOrder();
+				int order2 = item2.getOrder();
+				return (order1 < order2) ? -1 : ((order1 == order2) ? 0 : 1);
+			}
+		});
 	}
 }

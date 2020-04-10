@@ -566,7 +566,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		// Action buttons
 //		TODO refactor section
 		ContextMenuAdapter adapter = menu.getActionsContextMenuAdapter(false);
-		adapter.initItemsCustomOrder(requireMyApplication());
+		adapter.sortItemsByCustomOrder(requireMyApplication());
 		List<ContextMenuItem> items = adapter.getItems();
 		List<ContextMenuItem> main = new ArrayList<>();
 		List<ContextMenuItem> additional = new ArrayList<>();

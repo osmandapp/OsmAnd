@@ -37,6 +37,8 @@ import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItem;
+import net.osmand.plus.OsmandSettings.ContextMenuItemsPreference;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -149,6 +151,43 @@ public class ContextMenuAdapter {
 			}
 		});
 	}
+
+	public void sortItemsByCustomOrder(OsmandApplication app) {
+		ContextMenuItemsPreference pref = getPreference(app);
+		if (pref == null) {
+			sortItemsByOrder();
+			return;
+		}
+
+		List<String> hiddenIds = pref.getHiddenIds();
+		List<String> orderIds = pref.getOrderIds();
+
+		if (!Algorithms.isEmpty(orderIds)) {
+			HashMap<String, Integer> ordersMap = new HashMap<>();
+			for (int i = 0; i < orderIds.size(); i++) {
+				ordersMap.put(orderIds.get(i), i);
+			}
+
+			for (ContextMenuItem item : items) {
+				Integer order = ordersMap.get(item.getId());
+				if (order != null) {
+					item.setOrder(order);
+				}
+			}
+			sortItemsByOrder();
+		}
+
+		if (!Algorithms.isEmpty(hiddenIds)) {
+			List<ContextMenuItem> filtered = new ArrayList<>();
+			for (ContextMenuItem item : items) {
+				if (!hiddenIds.contains(item.getId())) {
+					filtered.add(item);
+				}
+			}
+			items = filtered;
+		}
+	}
+
 
 	public ArrayAdapter<ContextMenuItem> createListAdapter(final Activity activity, final boolean lightTheme) {
 		final int layoutId = DEFAULT_LAYOUT_ID;
@@ -555,36 +594,6 @@ public class ContextMenuAdapter {
 		}
 	}
 
-	private void initDefaultOrders(@NonNull List<ContextMenuItem> items) {
-		for (int i = 0; i < items.size(); i++) {
-			items.get(i).setOrder(i);
-		}
-	}
-
-	public List<AdapterItem> getItemsForRearrangeAdapter(@Nullable List<String> hiddenItemsIds, @Nullable HashMap<String, Integer> itemsOrderIds, boolean hidden) {
-		String idScheme = getIdScheme();
-		if (itemsOrderIds == null || itemsOrderIds.isEmpty()) {
-			initDefaultOrders(items);
-		} else {
-			reorderMenuItems(items, itemsOrderIds);
-		}
-		List<AdapterItem> visibleItems = new ArrayList<>();
-		List<AdapterItem> hiddenItems = new ArrayList<>();
-		for (ContextMenuItem item : items) {
-			String id = item.getId();
-			if (id != null && id.startsWith(idScheme) && !APP_PROFILES_ID.equals(id)) {
-				if (hiddenItemsIds != null && hiddenItemsIds.contains(id)) {
-					item.setHidden(true);
-					hiddenItems.add(new AdapterItem(MENU_ITEM, item));
-				} else {
-					item.setHidden(false);
-					visibleItems.add(new AdapterItem(MENU_ITEM, item));
-				}
-			}
-		}
-		return hidden ? hiddenItems : visibleItems;
-	}
-
 	public List<ContextMenuItem> getDefaultItems() {
 		String idScheme = getIdScheme();
 		List<ContextMenuItem> items = new ArrayList<>();
@@ -617,66 +626,19 @@ public class ContextMenuAdapter {
 		return idScheme;
 	}
 
-	public void reorderMenuItems(@NonNull List<ContextMenuItem> defaultItems, @NonNull HashMap<String, Integer> itemsOrder) {
-		for (ContextMenuItem item : defaultItems) {
-			Integer order = itemsOrder.get(item.getId());
-			if (order != null) {
-				item.setOrder(order);
-			}
-		}
-		Collections.sort(defaultItems, new Comparator<ContextMenuItem>() {
-			@Override
-			public int compare(ContextMenuItem item1, ContextMenuItem item2) {
-				int order1 = item1.getOrder();
-				int order2 = item2.getOrder();
-				return (order1 < order2) ? -1 : ((order1 == order2) ? 0 : 1);
-			}
-		});
-	}
-
-	public HashMap<String, Integer> getMenuItemsOrder(@NonNull List<String> ids) {
-		HashMap<String, Integer> result = new HashMap<>();
-		for (int i = 0; i < ids.size(); i++) {
-			result.put(ids.get(i), i);
-		}
-		return result;
-	}
-
-	public void initItemsCustomOrder(@NonNull OsmandApplication app) {
-		OsmandSettings.ContextMenuItemsPreference preference = null;
+	private ContextMenuItemsPreference getPreference(OsmandApplication app) {
 		for (ContextMenuItem item : items) {
 			String id = item.getId();
 			if (id != null) {
 				if (id.startsWith(DRAWER_ITEM_ID_SCHEME)) {
-					preference = app.getSettings().DRAWER_ITEMS;
-					break;
+					return app.getSettings().DRAWER_ITEMS;
 				} else if (id.startsWith(CONFIGURE_MAP_ITEM_ID_SCHEME)) {
-					preference = app.getSettings().CONFIGURE_MAP_ITEMS;
-					break;
+					return app.getSettings().CONFIGURE_MAP_ITEMS;
 				} else if (id.startsWith(MAP_CONTEXT_MENU_ACTIONS)) {
-					preference = app.getSettings().CONTEXT_MENU_ACTIONS_ITEMS;
-					break;
+					return app.getSettings().CONTEXT_MENU_ACTIONS_ITEMS;
 				}
 			}
 		}
-		if (preference == null) {
-			return;
-		}
-		List<String> savedOrder = preference.getOrderIds();
-		List<String> hiddenItems = preference.getHiddenIds();
-
-		if (!savedOrder.isEmpty()) {
-			reorderMenuItems(items, getMenuItemsOrder(savedOrder));
-		}
-
-		if (!hiddenItems.isEmpty()) {
-			List<ContextMenuItem> filtered = new ArrayList<>();
-			for (ContextMenuItem item : items) {
-				if (!hiddenItems.contains(item.getId())) {
-					filtered.add(item);
-				}
-			}
-			items = filtered;
-		}
+		return null;
 	}
 }
