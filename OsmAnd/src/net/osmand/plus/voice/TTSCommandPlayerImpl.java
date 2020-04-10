@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.routing.VoiceRouter;
@@ -123,14 +124,19 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 							.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
 							.build());
 				}
-				// Delay first prompt of each batch to allow BT SCO connection being established
-				if (ctx.getSettings().AUDIO_MANAGER_STREAM.getModeValue(getApplicationMode()) == 0) {
-					ttsRequests++;
-					if (android.os.Build.VERSION.SDK_INT < 21) {
-						params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,""+System.currentTimeMillis());
-						mTts.playSilence(ctx.getSettings().BT_SCO_DELAY.get(), TextToSpeech.QUEUE_ADD, params);
-					} else {
-						mTts.playSilentUtterance(ctx.getSettings().BT_SCO_DELAY.get(), TextToSpeech.QUEUE_ADD, ""+System.currentTimeMillis());
+				// Delay first prompt of each batch to allow BT SCO link being established, or when VOICE_PROMPT_DELAY is set >0 for the other stream types
+				if (ctx != null) {
+					Integer streamModeValue = ctx.getSettings().AUDIO_MANAGER_STREAM.getModeValue(getApplicationMode());
+					OsmandSettings.OsmandPreference<Integer> pref = ctx.getSettings().VOICE_PROMPT_DELAY[streamModeValue];
+					int vpd = pref == null ? 0 : pref.getModeValue(getApplicationMode());
+					if (vpd > 0) {
+						ttsRequests++;
+						if (android.os.Build.VERSION.SDK_INT < 21) {
+							params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "" + System.currentTimeMillis());
+							mTts.playSilence(vpd, TextToSpeech.QUEUE_ADD, params);
+						} else {
+							mTts.playSilentUtterance(vpd, TextToSpeech.QUEUE_ADD, "" + System.currentTimeMillis());
+						}
 					}
 				}
 			}

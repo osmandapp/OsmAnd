@@ -192,7 +192,7 @@ public class VoiceRouter {
 		}
 	}
 
-	private double btScoDelayDistance = 0;
+	private double voicePromptDelayDistance = 0;
 
 	public boolean isDistanceLess(float currentSpeed, double dist, double etalon, float defSpeed) {
 		if (defSpeed <= 0) {
@@ -202,12 +202,15 @@ public class VoiceRouter {
 			currentSpeed = DEFAULT_SPEED;
 		}
 
-		// Trigger close prompts earlier if delayed for BT SCO connection establishment
-		if ((settings.AUDIO_MANAGER_STREAM.getModeValue(router.getAppMode()) == 0) && !AbstractPrologCommandPlayer.btScoStatus) {
-			btScoDelayDistance = currentSpeed * (double) settings.BT_SCO_DELAY.get() / 1000;
+		// Trigger close prompts earlier to allow BT SCO link being established, or when VOICE_PROMPT_DELAY is set >0 for the other stream types
+		int ams = settings.AUDIO_MANAGER_STREAM.getModeValue(router.getAppMode());
+		if ((ams == 0 && !AbstractPrologCommandPlayer.btScoStatus) || ams > 0) {
+			if (settings.VOICE_PROMPT_DELAY[ams] != null) {
+				voicePromptDelayDistance = currentSpeed * (double) settings.VOICE_PROMPT_DELAY[ams].get() / 1000;
+			}
 		}
 
-		if ((dist < etalon + btScoDelayDistance) || ((dist - btScoDelayDistance) / currentSpeed) < (etalon / defSpeed)) {
+		if ((dist < etalon + voicePromptDelayDistance) || ((dist - voicePromptDelayDistance) / currentSpeed) < (etalon / defSpeed)) {
 			return true;
 		}
 		return false;
@@ -520,9 +523,9 @@ public class VoiceRouter {
 			if (repeat || dist >= TURN_IN_DISTANCE_END) {
 				if ((isDistanceLess(speed, nextNextInfo.distanceTo, TURN_DISTANCE, 0f) || nextNextInfo.distanceTo < TURN_IN_DISTANCE_END) &&
 						nextNextInfo != null) {
-					playMakeTurnIn(currentSegment, next, dist - (int) btScoDelayDistance, nextNextInfo.directionInfo);
+					playMakeTurnIn(currentSegment, next, dist - (int) voicePromptDelayDistance, nextNextInfo.directionInfo);
 				} else {
-					playMakeTurnIn(currentSegment, next, dist - (int) btScoDelayDistance, null);
+					playMakeTurnIn(currentSegment, next, dist - (int) voicePromptDelayDistance, null);
 				}
 				playGoAndArriveAtDestination(repeat, nextInfo, currentSegment);
 			}
