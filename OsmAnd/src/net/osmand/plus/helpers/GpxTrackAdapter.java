@@ -15,6 +15,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
 import net.osmand.plus.GPXDatabase;
+import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -35,11 +36,8 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<GpxTrackAdapter.TrackV
 	private OnItemClickListener onItemClickListener;
 	private UiUtilities iconsCache;
 
-
-	GpxTrackAdapter(Activity activity, List<GpxUiHelper.GPXInfo> gpxInfoList, boolean showCurrentGpx,
-	                OnItemClickListener onItemClickListener) {
+	GpxTrackAdapter(Activity activity, List<GpxUiHelper.GPXInfo> gpxInfoList, boolean showCurrentGpx) {
 		this.showCurrentGpx = showCurrentGpx;
-		this.onItemClickListener = onItemClickListener;
 		app = (OsmandApplication) activity.getApplication();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		themedInflater = UiUtilities.getInflater(activity, nightMode);
@@ -123,8 +121,26 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<GpxTrackAdapter.TrackV
 		}
 	}
 
-	private GPXDatabase.GpxDataItem getDataItem(GpxUiHelper.GPXInfo info) {
-		return app.getGpxDbHelper().getItem(new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), info.getFileName()));
+	private GPXDatabase.GpxDataItem getDataItem(final GpxUiHelper.GPXInfo info) {
+		GpxDbHelper.GpxDataItemCallback gpxDataItemCallback = new GpxDbHelper.GpxDataItemCallback() {
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+
+			@Override
+			public void onGpxDataItemReady(GPXDatabase.GpxDataItem item) {
+				if (item != null && gpxInfoList != null && info != null) {
+					notifyItemChanged(gpxInfoList.indexOf(info));
+				}
+			}
+		};
+		return app.getGpxDbHelper().getItem(new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), info.getFileName())
+				, gpxDataItemCallback);
+	}
+
+	void setAdapterListener(OnItemClickListener onItemClickListener) {
+		this.onItemClickListener = onItemClickListener;
 	}
 
 	static class TrackViewHolder extends RecyclerView.ViewHolder {
