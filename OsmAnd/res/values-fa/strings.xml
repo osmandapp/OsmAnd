@@ -2352,7 +2352,7 @@
     <string name="find_parking">پیداکردن پارکینگ</string>
     <string name="add_time_span">افزودن بازهٔ زمانی</string>
     <string name="shared_string_undo_all">خنثی‌کردن همه</string>
-    <string name="auto_split_recording_title">بخش‌بندی خودکار مسیر پس از وقفه</string>
+    <string name="auto_split_recording_title">بخش‌بندی خودکار ضبط پس از وقفه</string>
     <string name="save_track_min_distance">کمترین جابه‌جایی برای ثبت</string>
     <string name="translit_names">نویسه‌گردانی نام‌ها</string>
     <string name="rec_split_clip_length">مدت کلیپ</string>
@@ -3644,4 +3644,10 @@
     <string name="settings_item_read_error">خواندن %1$s ناموفق بود.</string>
     <string name="settings_item_write_error">نوشتن %1$s ناموفق بود.</string>
     <string name="settings_item_import_error">درون‌برد %1$s ناموفق بود.</string>
+    <string name="wiki_menu_download_descr">برای مشاهدهٔ نقاط ویکی‌پدیا روی نقشه باید نقشهٔ دیگری را نیز دانلود کنید.</string>
+    <string name="multimedia_rec_split_title">تقسیمگر ضبط‌کننده</string>
+    <string name="select_track_file">انتخاب فایل رد</string>
+    <string name="shared_string_languages">زبان‌ها</string>
+    <string name="shared_string_language">زبان</string>
+    <string name="shared_string_all_languages">همهٔ زبان‌ها</string>
 </resources>
