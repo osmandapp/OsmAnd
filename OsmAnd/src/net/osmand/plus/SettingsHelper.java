@@ -133,7 +133,8 @@ public class SettingsHelper {
 		POI_UI_FILTERS,
 		MAP_SOURCES,
 		AVOID_ROADS,
-		SUGGESTED_DOWNLOADS
+		SUGGESTED_DOWNLOADS,
+		DOWNLOADS
 	}
 
 	public abstract static class SettingsItem {
@@ -414,6 +415,8 @@ public class SettingsHelper {
 						}
 					} else if (item instanceof SuggestedDownloadsItem) {
 						plugin.updateSuggestedDownloads(((SuggestedDownloadsItem) item).getItems());
+					} else if (item instanceof DownloadsItem) {
+						plugin.updateDownloadItems(((DownloadsItem) item).getItems());
 					}
 				}
 				OsmandPlugin.addCustomPlugin(app, plugin);
@@ -554,6 +557,211 @@ public class SettingsHelper {
 		}
 	}
 
+	public static class DownloadsItem extends SettingsItem {
+
+		private List<DownloadDataContainer> items;
+
+		DownloadsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+			super(app, json);
+		}
+
+		@Override
+		protected void init() {
+			items = new ArrayList<>();
+		}
+
+		@NonNull
+		@Override
+		public SettingsItemType getType() {
+			return SettingsItemType.DOWNLOADS;
+
+		}
+
+		@NonNull
+		@Override
+		public String getName() {
+			return "downloads";
+		}
+
+		@NonNull
+		@Override
+		public String getPublicName(@NonNull Context ctx) {
+			return "downloads";
+		}
+
+		@Override
+		public void apply() {
+			super.apply();
+		}
+
+		public List<DownloadDataContainer> getItems() {
+			return items;
+		}
+
+		@Override
+		void readItemsFromJson(@NonNull JSONObject json) throws IllegalArgumentException {
+			try {
+				if (!json.has("items")) {
+					return;
+				}
+				JSONArray jsonArray = json.getJSONArray("items");
+				for (int i = 0; i < jsonArray.length(); i++) {
+					JSONObject object = jsonArray.getJSONObject(i);
+					String scopeId = object.optString("scope-id", null);
+					String path = object.optString("path", null);
+					String type = object.optString("type", null);
+					String folder = object.optString("folder", null);
+
+					JSONObject namesJson = object.optJSONObject("name");
+					Map<String, String> names = new HashMap<>();
+					if (namesJson != null) {
+						for (Iterator<String> it = namesJson.keys(); it.hasNext(); ) {
+							String localeKey = it.next();
+							String name = namesJson.getString(localeKey);
+							names.put(localeKey, name);
+						}
+					}
+
+					JSONObject iconJson = object.optJSONObject("icon");
+					Map<String, String> icons = new HashMap<>();
+					if (iconJson != null) {
+						for (Iterator<String> it = iconJson.keys(); it.hasNext(); ) {
+							String localeKey = it.next();
+							String name = iconJson.getString(localeKey);
+							icons.put(localeKey, name);
+						}
+					}
+
+					JSONObject headerJson = object.optJSONObject("header");
+					Map<String, String> headers = new HashMap<>();
+					if (headerJson != null) {
+						for (Iterator<String> it = headerJson.keys(); it.hasNext(); ) {
+							String localeKey = it.next();
+							String name = headerJson.getString(localeKey);
+							headers.put(localeKey, name);
+						}
+					}
+
+					String headerButton = object.optString("header-button", null);
+
+					JSONArray downloadItemsArray = object.optJSONArray("items");
+
+					DownloadDataContainer dataContainer = new DownloadDataContainer(scopeId, path, type, folder, downloadItemsArray, names, icons, headers, headerButton);
+
+					items.add(dataContainer);
+				}
+			} catch (JSONException e) {
+				warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
+				throw new IllegalArgumentException("Json parse error", e);
+			}
+		}
+
+		@Override
+		void writeItemsToJson(@NonNull JSONObject json) {
+			JSONArray jsonArray = new JSONArray();
+			if (!items.isEmpty()) {
+				try {
+					for (DownloadDataContainer downloadItem : items) {
+						JSONObject jsonObject = new JSONObject();
+
+						if (!Algorithms.isEmpty(downloadItem.scopeId)) {
+							jsonObject.put("scope-id", downloadItem.scopeId);
+						}
+						if (!Algorithms.isEmpty(downloadItem.path)) {
+							jsonObject.put("path", downloadItem.path);
+						}
+						if (!Algorithms.isEmpty(downloadItem.type)) {
+							jsonObject.put("type", downloadItem.type);
+						}
+						if (!Algorithms.isEmpty(downloadItem.folder)) {
+							jsonObject.put("folder", downloadItem.folder);
+						}
+						if (!Algorithms.isEmpty(downloadItem.headerButton)) {
+							jsonObject.put("header-button", downloadItem.headerButton);
+						}
+
+						if (!Algorithms.isEmpty(downloadItem.names)) {
+							JSONObject namesJson = new JSONObject();
+							for (Map.Entry<String, String> entry : downloadItem.names.entrySet()) {
+								namesJson.put(entry.getKey(), entry.getValue());
+							}
+							jsonObject.put("name", namesJson);
+						}
+
+						if (!Algorithms.isEmpty(downloadItem.icons)) {
+							JSONObject iconsJson = new JSONObject();
+							for (Map.Entry<String, String> entry : downloadItem.icons.entrySet()) {
+								iconsJson.put(entry.getKey(), entry.getValue());
+							}
+							jsonObject.put("icon", iconsJson);
+						}
+
+						if (!Algorithms.isEmpty(downloadItem.headers)) {
+							JSONObject headerJson = new JSONObject();
+							for (Map.Entry<String, String> entry : downloadItem.headers.entrySet()) {
+								headerJson.put(entry.getKey(), entry.getValue());
+							}
+							jsonObject.put("header", headerJson);
+						}
+
+						if (downloadItem.downloadItemsArray != null) {
+							jsonObject.put("items", downloadItem.downloadItemsArray);
+						}
+
+						jsonArray.put(jsonObject);
+					}
+					json.put("items", jsonArray);
+				} catch (JSONException e) {
+					warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
+					LOG.error("Failed write to json", e);
+				}
+			}
+		}
+
+
+		@Nullable
+		@Override
+		SettingsItemReader getReader() {
+			return null;
+		}
+
+		@Nullable
+		@Override
+		SettingsItemWriter getWriter() {
+			return null;
+		}
+	}
+
+	public static class DownloadDataContainer {
+
+		String scopeId;
+		String path;
+		String type;
+		String folder;
+		String headerButton;
+		JSONArray downloadItemsArray;
+		Map<String, String> names;
+		Map<String, String> icons;
+		Map<String, String> headers;
+
+		public DownloadDataContainer(String scopeId, String path, String type, String folder,
+		                             JSONArray downloadItemsArray,
+		                             Map<String, String> names,
+		                             Map<String, String> icons,
+		                             Map<String, String> headers,
+		                             String headerButton) {
+			this.scopeId = scopeId;
+			this.path = path;
+			this.type = type;
+			this.folder = folder;
+			this.downloadItemsArray = downloadItemsArray;
+			this.names = names;
+			this.icons = icons;
+			this.headers = headers;
+			this.headerButton = headerButton;
+		}
+	}
+	
 	public abstract static class CollectionSettingsItem<T> extends SettingsItem {
 
 		protected List<T> items;
@@ -2201,6 +2409,9 @@ public class SettingsHelper {
 					break;
 				case SUGGESTED_DOWNLOADS:
 					item = new SuggestedDownloadsItem(app, json);
+					break;
+				case DOWNLOADS:
+					item = new DownloadsItem(app, json);
 					break;
 			}
 			return item;

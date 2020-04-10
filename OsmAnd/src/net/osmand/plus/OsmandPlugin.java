@@ -44,6 +44,7 @@ import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.SettingsHelper.DownloadDataContainer;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -179,6 +180,10 @@ public abstract class OsmandPlugin {
 	}
 
 	public List<IndexItem> getSuggestedMaps() {
+		return Collections.emptyList();
+	}
+
+	public List<DownloadDataContainer> getDownloadMaps() {
 		return Collections.emptyList();
 	}
 

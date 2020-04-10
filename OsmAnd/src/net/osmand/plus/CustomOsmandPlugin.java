@@ -14,6 +14,7 @@ import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.SettingsHelper.AvoidRoadsSettingsItem;
+import net.osmand.plus.SettingsHelper.DownloadDataContainer;
 import net.osmand.plus.SettingsHelper.MapSourcesSettingsItem;
 import net.osmand.plus.SettingsHelper.PluginSettingsItem;
 import net.osmand.plus.SettingsHelper.PoiUiFilterSettingsItem;
@@ -64,6 +65,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	private List<String> rendererNames = new ArrayList<>();
 	private List<String> routerNames = new ArrayList<>();
 	private List<SuggestedDownloadItem> suggestedDownloadItems = new ArrayList<>();
+	private List<DownloadDataContainer> downloadDataContainers = new ArrayList<>();
 
 	public CustomOsmandPlugin(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		super(app);
@@ -434,6 +436,15 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 
 	public void updateSuggestedDownloads(List<SuggestedDownloadItem> items) {
 		suggestedDownloadItems = new ArrayList<>(items);
+	}
+
+	public void updateDownloadItems(List<DownloadDataContainer> items) {
+		downloadDataContainers = new ArrayList<>(items);
+	}
+
+	@Override
+	public List<DownloadDataContainer> getDownloadMaps() {
+		return downloadDataContainers;
 	}
 
 	@Override
