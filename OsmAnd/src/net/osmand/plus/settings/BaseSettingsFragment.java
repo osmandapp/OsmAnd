@@ -80,6 +80,7 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import org.apache.commons.logging.Log;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 
@@ -129,7 +130,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		OPEN_STREET_MAP_EDITING(OsmEditingFragment.class.getName(), false, null, R.xml.osm_editing, R.layout.global_preference_toolbar),
 		MULTIMEDIA_NOTES(MultimediaNotesFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.multimedia_notes, R.layout.profile_preference_toolbar),
 		MONITORING_SETTINGS(MonitoringSettingsFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.monitoring_settings, R.layout.profile_preference_toolbar),
-		LIVE_MONITORING(LiveMonitoringFragment.class.getName(), false, null, R.xml.live_monitoring, R.layout.global_preferences_toolbar_with_switch),
+		LIVE_MONITORING(LiveMonitoringFragment.class.getName(), false, ApplyQueryType.SNACK_BAR, R.xml.live_monitoring, R.layout.global_preferences_toolbar_with_switch),
 		ACCESSIBILITY_SETTINGS(AccessibilitySettingsFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.accessibility_settings, R.layout.profile_preference_toolbar),
 		DEVELOPMENT_SETTINGS(DevelopmentSettingsFragment.class.getName(), false, null, R.xml.development_settings, R.layout.global_preference_toolbar);
 
@@ -321,22 +322,19 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	@Override
 	public final boolean onConfirmPreferenceChange(String prefId, Object newValue, ApplyQueryType applyQueryType) {
 		if (applyQueryType != null && newValue instanceof Serializable) {
-			OsmandSettings.OsmandPreference pref = settings.getPreference(prefId);
-			if (pref instanceof CommonPreference) {
-				if (applyQueryType == ApplyQueryType.SNACK_BAR) {
-					applyPreferenceWithSnackBar(prefId, (Serializable) newValue);
-					return true;
-				} else if (applyQueryType == ApplyQueryType.BOTTOM_SHEET) {
-					FragmentManager fragmentManager = getFragmentManager();
-					if (fragmentManager != null) {
-						ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager, prefId,
-								(Serializable) newValue, this, false, getSelectedAppMode());
-					}
-					return false;
-				} else if (applyQueryType == ApplyQueryType.NONE) {
-					onApplyPreferenceChange(prefId, false, newValue);
-					return true;
+			if (applyQueryType == ApplyQueryType.SNACK_BAR) {
+				applyPreferenceWithSnackBar(prefId, (Serializable) newValue);
+				return true;
+			} else if (applyQueryType == ApplyQueryType.BOTTOM_SHEET) {
+				FragmentManager fragmentManager = getFragmentManager();
+				if (fragmentManager != null) {
+					ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager, prefId,
+							(Serializable) newValue, this, false, getSelectedAppMode());
 				}
+				return false;
+			} else if (applyQueryType == ApplyQueryType.NONE) {
+				onApplyPreferenceChange(prefId, false, newValue);
+				return true;
 			}
 		}
 		return true;
@@ -607,7 +605,14 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
-		applyPreference(prefId, applyToAllProfiles, newValue);
+		if (settings.getPreference(prefId) instanceof CommonPreference) {
+			applyPreference(prefId, applyToAllProfiles, newValue);
+		} else {
+			Preference pref = findPreference(prefId);
+			if (pref != null) {
+				applyPreference(pref, applyToAllProfiles, newValue);
+			}
+		}
 	}
 
 	protected final void applyPreference(String prefId, boolean applyToAllProfiles, Object newValue) {
@@ -615,6 +620,17 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			app.getSettings().setPreferenceForAllModes(prefId, newValue);
 		} else {
 			app.getSettings().setPreference(prefId, newValue, getSelectedAppMode());
+		}
+	}
+
+	protected final void applyPreference(Preference pref, boolean applyToAllProfiles, Object newValue) {
+		if (pref instanceof MultiSelectBooleanPreference) {
+			MultiSelectBooleanPreference msp = (MultiSelectBooleanPreference) pref;
+			Set<String> values = (Set<String>) newValue;
+			String[] ids = msp.getPrefsIds();
+			for (int i = 0; i < ids.length; i++) {
+				applyPreference(ids[i], applyToAllProfiles, values.contains(ids[i]));
+			}
 		}
 	}
 
@@ -926,9 +942,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			UiUtilities.setupSnackbarVerticalLayout(snackbar);
 			try {
 				snackbar.setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_FADE);
-			} catch (Throwable e) {
-
-			}
+			} catch (Throwable e) { }
 			snackbar.show();
 		}
 	}

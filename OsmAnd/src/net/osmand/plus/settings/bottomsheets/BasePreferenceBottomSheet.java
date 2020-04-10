@@ -53,9 +53,8 @@ public abstract class BasePreferenceBottomSheet extends MenuBottomSheetDialogFra
 		if (appMode != null) {
 			outState.putString(APP_MODE_KEY, appMode.getStringKey());
 		}
-		if (applyQueryType != null) {
-			outState.putString(APPLY_QUERY_TYPE, applyQueryType.name());
-		}
+		outState.putString(APPLY_QUERY_TYPE, applyQueryType != null ?
+				applyQueryType.name() : ApplyQueryType.NONE.name());
 	}
 
 	@Override
