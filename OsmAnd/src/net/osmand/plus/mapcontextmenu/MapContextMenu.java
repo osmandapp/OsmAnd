@@ -1092,7 +1092,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			LatLon latLon = getLatLon();
-			return mapActivity.getMapActions().getListener(latLon.getLatitude(), latLon.getLatitude(), menuAdapter);
+			return mapActivity.getMapActions().getContextMenuItemClickListener(latLon.getLatitude(), latLon.getLatitude(), menuAdapter);
 		}
 		return null;
 	}

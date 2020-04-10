@@ -64,7 +64,7 @@ import net.osmand.plus.routepreparationmenu.WaypointsFragment;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.BaseSettingsFragment;
-import net.osmand.plus.settings.ConfigureMenuRootFragment.ScreenType;
+import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapTileLayer;
@@ -434,18 +434,12 @@ public class MapActivityActions implements DialogProvider {
 				.createItem());
 
 		adapter.sortItemsByOrder();
-
-
 	}
 
 	public void contextMenuPoint(final double latitude, final double longitude, final ContextMenuAdapter iadapter, Object selectedObj) {
 		final ContextMenuAdapter adapter = iadapter == null ? new ContextMenuAdapter() : iadapter;
 		addActionsToAdapter(latitude, longitude, adapter, selectedObj, false);
-
-
-		AdditionalActionsBottomSheetDialogFragment actionsBottomSheetDialogFragment = new AdditionalActionsBottomSheetDialogFragment();
-		actionsBottomSheetDialogFragment.setAdapter(adapter, getListener(latitude, longitude, adapter));
-		actionsBottomSheetDialogFragment.show(mapActivity.getSupportFragmentManager(), AdditionalActionsBottomSheetDialogFragment.TAG);
+		showAdditionalActionsFragment(adapter, getContextMenuItemClickListener(latitude, longitude, adapter));
 	}
 
 	public void showAdditionalActionsFragment(final ContextMenuAdapter adapter, AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener listener) {
@@ -454,7 +448,7 @@ public class MapActivityActions implements DialogProvider {
 		actionsBottomSheetDialogFragment.show(mapActivity.getSupportFragmentManager(), AdditionalActionsBottomSheetDialogFragment.TAG);
 	}
 
-	public AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener getListener(final double latitude, final double longitude, final ContextMenuAdapter adapter) {
+	public ContextMenuItemClickListener getContextMenuItemClickListener(final double latitude, final double longitude, final ContextMenuAdapter adapter) {
 		final ArrayAdapter<ContextMenuItem> listAdapter =
 				adapter.createListAdapter(mapActivity, getMyApplication().getSettings().isLightContent());
 
