@@ -411,7 +411,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	}
 
 	@Override
-	public void onApplyPreferenceChange(String prefId, boolean appliedToAllProfiles, Object newValue) {
+	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
 		if ((RELIEF_SMOOTHNESS_FACTOR.equals(prefId) || DRIVING_STYLE.equals(prefId)) && newValue instanceof String) {
 			ApplicationMode appMode = getSelectedAppMode();
 			String selectedParameterId = (String) newValue;
@@ -422,11 +422,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			}
 			recalculateRoute();
 		} else if (ROUTING_SHORT_WAY.equals(prefId) && newValue instanceof Boolean) {
-			if (appliedToAllProfiles) {
-				settings.setPreferenceForAllModes(settings.FAST_ROUTE_MODE.getId(), !(Boolean) newValue);
-			} else {
-				settings.setPreference(settings.FAST_ROUTE_MODE.getId(), !(Boolean) newValue, getSelectedAppMode());
-			}
+			applyPreference(settings.FAST_ROUTE_MODE.getId(), applyToAllProfiles, !(Boolean) newValue);
 		} else if (ROUTING_RECALC_DISTANCE.equals(prefId)) {
 			boolean enabled = false;
 			float valueToSave = DISABLE_MODE;
@@ -437,11 +433,11 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 				valueToSave = (float) newValue;
 				enabled = valueToSave != DISABLE_MODE;
 			}
-			super.onApplyPreferenceChange(ROUTING_RECALC_DISTANCE, appliedToAllProfiles, valueToSave);
-			super.onApplyPreferenceChange(settings.DISABLE_OFFROUTE_RECALC.getId(), appliedToAllProfiles, !enabled);
+			applyPreference(ROUTING_RECALC_DISTANCE, applyToAllProfiles, valueToSave);
+			applyPreference(settings.DISABLE_OFFROUTE_RECALC.getId(), applyToAllProfiles, !enabled);
 			updateRouteRecalcDistancePref();
 		} else {
-			super.onApplyPreferenceChange(prefId, appliedToAllProfiles, newValue);
+			super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);
 		}
 	}
 

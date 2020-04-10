@@ -108,20 +108,20 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	public void onApplyPreferenceChange(String prefId, boolean appliedToAllProfiles, Object newValue) {
+	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
 		if (settings.AUTO_ZOOM_MAP.getId().equals(prefId)) {
 			if (newValue instanceof Integer) {
 				int position = (int) newValue;
 				if (position == 0) {
-					super.onApplyPreferenceChange(settings.AUTO_ZOOM_MAP.getId(), appliedToAllProfiles, false);
+					applyPreference(settings.AUTO_ZOOM_MAP.getId(), applyToAllProfiles, false);
 				} else {
-					super.onApplyPreferenceChange(settings.AUTO_ZOOM_MAP.getId(), appliedToAllProfiles, true);
-					super.onApplyPreferenceChange(settings.AUTO_ZOOM_MAP_SCALE.getId(),
-							appliedToAllProfiles, OsmandSettings.AutoZoomMap.values()[position - 1]);
+					applyPreference(settings.AUTO_ZOOM_MAP.getId(), applyToAllProfiles, true);
+					applyPreference(settings.AUTO_ZOOM_MAP_SCALE.getId(),
+							applyToAllProfiles, OsmandSettings.AutoZoomMap.values()[position - 1]);
 				}
 			}
 		} else {
-			super.onApplyPreferenceChange(prefId, appliedToAllProfiles, newValue);
+			super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);
 		}
 	}
 }

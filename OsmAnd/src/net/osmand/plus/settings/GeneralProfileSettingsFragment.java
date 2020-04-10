@@ -328,18 +328,18 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	}
 
 	@Override
-	public void onApplyPreferenceChange(String prefId, boolean appliedToAllProfiles, Object newValue) {
+	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
 		if (settings.DRIVING_REGION.getId().equals(prefId)) {
 			ApplicationMode selectedMode = getSelectedAppMode();
 			if (newValue == null) {
-				super.onApplyPreferenceChange(settings.DRIVING_REGION_AUTOMATIC.getId(), appliedToAllProfiles, true);
-				MapViewTrackingUtilities mapViewTrackingUtilities = getMyApplication().getMapViewTrackingUtilities();
+				applyPreference(settings.DRIVING_REGION_AUTOMATIC.getId(), applyToAllProfiles, true);
+				MapViewTrackingUtilities mapViewTrackingUtilities = requireMyApplication().getMapViewTrackingUtilities();
 				if (mapViewTrackingUtilities != null) {
 					mapViewTrackingUtilities.resetDrivingRegionUpdate();
 				}
 			} else if (newValue instanceof OsmandSettings.DrivingRegion) {
-				super.onApplyPreferenceChange(settings.DRIVING_REGION_AUTOMATIC.getId(), appliedToAllProfiles, false);
-				if (appliedToAllProfiles) {
+				applyPreference(settings.DRIVING_REGION_AUTOMATIC.getId(), applyToAllProfiles, false);
+				if (applyToAllProfiles) {
 					for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
 						settings.DRIVING_REGION.setModeValue(appMode, (OsmandSettings.DrivingRegion) newValue);
 					}
@@ -349,7 +349,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 			}
 			updateAllSettings();
 		} else {
-			super.onApplyPreferenceChange(prefId, appliedToAllProfiles, newValue);
+			applyPreference(prefId, applyToAllProfiles, newValue);
 		}
 	}
 

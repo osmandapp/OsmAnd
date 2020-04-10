@@ -47,6 +47,7 @@ import androidx.preference.TwoStatePreference;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.AndroidUtils;
@@ -318,7 +319,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	@Override
-	public boolean onConfirmPreferenceChange(String prefId, Object newValue, ApplyQueryType applyQueryType) {
+	public final boolean onConfirmPreferenceChange(String prefId, Object newValue, ApplyQueryType applyQueryType) {
 		if (applyQueryType != null && newValue instanceof Serializable) {
 			OsmandSettings.OsmandPreference pref = settings.getPreference(prefId);
 			if (pref instanceof CommonPreference) {
@@ -605,11 +606,12 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		updateAllSettings();
 	}
 
-	public void onSettingApplied(String prefId, boolean appliedToAllProfiles) {
+	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
+		applyPreference(prefId, applyToAllProfiles, newValue);
 	}
 
-	public void onApplyPreferenceChange(String prefId, boolean appliedToAllProfiles, Object newValue) {
-		if (appliedToAllProfiles) {
+	protected final void applyPreference(String prefId, boolean applyToAllProfiles, Object newValue) {
+		if (applyToAllProfiles) {
 			app.getSettings().setPreferenceForAllModes(prefId, newValue);
 		} else {
 			app.getSettings().setPreference(prefId, newValue, getSelectedAppMode());
@@ -922,6 +924,11 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 						}
 					});
 			UiUtilities.setupSnackbarVerticalLayout(snackbar);
+			try {
+				snackbar.setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_FADE);
+			} catch (Throwable e) {
+
+			}
 			snackbar.show();
 		}
 	}

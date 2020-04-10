@@ -92,12 +92,12 @@ public class NavigationFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	public void onApplyPreferenceChange(String prefId, boolean appliedToAllProfiles, Object newValue) {
+	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
 		if (settings.VOICE_MUTE.getId().equals(prefId) && newValue instanceof Boolean) {
-			super.onApplyPreferenceChange(prefId, appliedToAllProfiles, !(Boolean) newValue);
+			applyPreference(prefId, applyToAllProfiles, !(Boolean) newValue);
 			updateMenu();
 		} else {
-			super.onApplyPreferenceChange(prefId, appliedToAllProfiles, newValue);
+			applyPreference(prefId, applyToAllProfiles, newValue);
 		}
 	}
 

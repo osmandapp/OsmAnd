@@ -291,15 +291,15 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	public void onApplyPreferenceChange(String prefId, boolean appliedToAllProfiles, Object newValue) {
+	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
 		if (prefId.equals(settings.VOICE_PROVIDER.getId()) && newValue instanceof String) {
 			if (VOICE_PROVIDER_NOT_USE.equals(newValue)) {
-				super.onApplyPreferenceChange(settings.VOICE_MUTE.getId(), appliedToAllProfiles, true);
+				applyPreference(settings.VOICE_MUTE.getId(), applyToAllProfiles, true);
 				updateToolbar();
 			}
-			super.onApplyPreferenceChange(settings.VOICE_PROVIDER.getId(), appliedToAllProfiles, newValue);
+			applyPreference(settings.VOICE_PROVIDER.getId(), applyToAllProfiles, newValue);
 			app.initVoiceCommandPlayer(getActivity(), getSelectedAppMode(),
-					false, null, true, false, appliedToAllProfiles);
+					false, null, true, false, applyToAllProfiles);
 		} else if (prefId.equals(settings.AUDIO_MANAGER_STREAM.getId())) {
 			// Sync DEFAULT value with CAR value, as we have other way to set it for now
 
@@ -310,7 +310,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 			}
 			settings.AUDIO_USAGE.setModeValue(ApplicationMode.DEFAULT, settings.AUDIO_USAGE.getModeValue(ApplicationMode.CAR));
 		} else {
-			super.onApplyPreferenceChange(prefId, appliedToAllProfiles, newValue);
+			super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);
 		}
 	}
 }
