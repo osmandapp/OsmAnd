@@ -564,7 +564,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 
 		// Action buttons
-
 		ContextMenuAdapter adapter = menu.getActionsContextMenuAdapter(false);
 		adapter.initItemsCustomOrder(requireMyApplication());
 		List<ContextMenuItem> items = adapter.getItems();
@@ -576,7 +575,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		for (int i = 4; i < items.size(); i++) {
 			additional.add(items.get(i));
 		}
-
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
 				ViewGroup.LayoutParams.MATCH_PARENT,
 				ViewGroup.LayoutParams.MATCH_PARENT,
@@ -587,60 +585,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			buttons.addView(getActionView(main.get(i), i, adapter, additional,main), params);
 		}
 		buttons.setGravity(Gravity.CENTER);
-
-//		final ImageView imageFavorite = (ImageView) view.findViewById(R.id.context_menu_fav_image_view);
-//		imageFavorite.setImageDrawable(getIcon(menu.getFavActionIconId(),
-//				R.color.ctx_menu_buttons_icon_color));
-//		((TextView) view.findViewById(R.id.context_menu_fav_text_view)).setText(menu.getFavActionStringId());
-//		View favView = view.findViewById(R.id.context_menu_fav_view);
-//		if (menu.isFavButtonEnabled()) {
-//			favView.setOnClickListener(new View.OnClickListener() {
-//				@Override
-//				public void onClick(View v) {
-//					menu.buttonFavoritePressed();
-//				}
-//			});
-//		} else {
-//			deactivate(favView);
-//		}
-
-//		final ImageView imageWaypoint = (ImageView) view.findViewById(R.id.context_menu_route_image_view);
-//		imageWaypoint.setImageDrawable(getIcon(menu.getWaypointActionIconId(),
-//				R.color.ctx_menu_buttons_icon_color));
-//		((TextView) view.findViewById(R.id.context_menu_route_text_view)).setText(menu.getWaypointActionStringId());
-//		View waypointView = view.findViewById(R.id.context_menu_route_view);
-//		if (menu.isButtonWaypointEnabled()) {
-//			waypointView.setOnClickListener(new View.OnClickListener() {
-//				@Override
-//				public void onClick(View v) {
-//					menu.buttonWaypointPressed();
-//				}
-//			});
-//		} else {
-//			deactivate(waypointView);
-//		}
-
-//		final ImageView imageShare = (ImageView) view.findViewById(R.id.context_menu_share_image_view);
-//		imageShare.setImageDrawable(getIcon(R.drawable.map_action_gshare_dark,
-//				R.color.ctx_menu_buttons_icon_color));
-//		View shareView = view.findViewById(R.id.context_menu_share_view);
-//		shareView.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				menu.buttonSharePressed();
-//			}
-//		});
-
-//		final ImageView imageMore = (ImageView) view.findViewById(R.id.context_menu_more_image_view);
-//		imageMore.setImageDrawable(getIcon(R.drawable.map_overflow_menu_white,
-//				R.color.ctx_menu_buttons_icon_color));
-//		View moreView = view.findViewById(R.id.context_menu_more_view);
-//		moreView.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				menu.buttonMorePressed();
-//			}
-//		});
 
 		//Bottom buttons
 		int bottomButtonsColor = nightMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n;
