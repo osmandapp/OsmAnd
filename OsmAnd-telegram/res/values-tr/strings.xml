@@ -160,8 +160,8 @@
     <string name="by_name">Ada göre</string>
     <string name="by_group">Gruba göre</string>
     <string name="shared_string_sort_by">Sıralama kriteri</string>
-    <string name="choose_osmand_desc">Kişilerin haritada görüntüleneceği OsmAnd versiyonunu seçin.</string>
-    <string name="choose_osmand">Kullanılacak OsmAnd versiyonunu seçin</string>
+    <string name="choose_osmand_desc">Kişilerin haritada görüntüleneceği OsmAnd sürümünü seçin.</string>
+    <string name="choose_osmand">Kullanılacak OsmAnd sürümünü seçin</string>
     <string name="disable_all_sharing_desc">Konum paylaşımını tüm seçili sohbetlere kapatır (%1$d).</string>
     <string name="disable_all_sharing">Tüm paylaşımı devre dışı bırak</string>
     <string name="turn_off_all">Hepsini kapat</string>
@@ -176,7 +176,7 @@
     <string name="connected_account">Bağlı hesap</string>
     <string name="shared_string_account">Hesap</string>
     <string name="in_time">%1$s içinde</string>
-    <string name="osmand_connect_desc">Konumları görüntülemek için OsmAnd Tracker\'ın kullandığı OsmAnd versiyonunu seçin.</string>
+    <string name="osmand_connect_desc">Konumları görüntülemek için OsmAnd Tracker\'ın kullandığı OsmAnd sürümünü seçin.</string>
     <string name="osmand_connect">OsmAnd bağlan</string>
     <string name="location_history_desc">Belirli bir süre içinde hareket etmemiş kişileri gizle.</string>
     <string name="location_history">Konum geçmişi</string>
@@ -213,7 +213,7 @@
     <string name="show_on_map">Haritada göster</string>
     <string name="app_name">OsmAnd Çevrim İçi GPS İzleyici</string>
     <string name="phone_number_title">Telefon numarası</string>
-    <string name="phone_number_descr">Uluslararası formatta telefon numarası</string>
+    <string name="phone_number_descr">Uluslararası biçimde telefon numarası</string>
     <string name="shared_string_password">Parola</string>
     <string name="enter_code">Kodu girin</string>
     <string name="authentication_code">Kimlik doğrulama kodu</string>
@@ -240,8 +240,8 @@
     <string name="show_users_on_map">Kullanıcıları haritada göster</string>
     <string name="active_chats">Aktif sohbetler</string>
     <string name="shared_string_authorization">Yetkilendirme</string>
-    <string name="shared_string_authorization_descr">Lütfen Telegram telefon numaranızı uluslararası formatta girin</string>
-    <string name="shared_string_welcome">Hoşgeldiniz</string>
+    <string name="shared_string_authorization_descr">Lütfen Telegram telefon numaranızı uluslararası biçimde girin</string>
+    <string name="shared_string_welcome">Hoş geldiniz</string>
     <string name="shared_string_hour_short">sa</string>
     <string name="shared_string_minute_short">dk</string>
     <string name="shared_string_second_short">sn</string>
@@ -251,7 +251,7 @@
     <string name="timeline">Zaman çizelgesi</string>
     <string name="time_zone_descr">Konum mesajlarınızda gösterilecek saat dilimini seçin.</string>
     <string name="time_zone">Saat dilimi</string>
-    <string name="units_and_formats">Birimler ve formatlar</string>
+    <string name="units_and_formats">Birimler ve biçimler</string>
     <string name="unit_of_length_descr">Mesafe ölçüm birimini değiştir.</string>
     <string name="unit_of_length">Uzunluk birimleri</string>
     <string name="unit_of_speed_system_descr">Hız birimini tanımlayın.</string>
