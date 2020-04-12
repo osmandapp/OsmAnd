@@ -57,7 +57,7 @@
     <string name="map_widget_back_to_loc">Neredeyim</string>
     <string name="map_widget_lock_screen">Kilitle</string>
     <string name="map_widget_compass">Pusula</string>
-    <string name="map_widget_reset">Varsayılanlara geri dön</string>
+    <string name="map_widget_reset">Ön tanımlılara sıfırla</string>
     <string name="map_widget_monitoring">GPX günlüğü</string>
     <string name="map_widget_speed">Hız</string>
     <string name="map_widget_distance">Varış Noktası</string>
@@ -95,8 +95,8 @@
     <string name="srtm_paid_version_title">Eş yükselti eğrileri eklentisi</string>
     <string name="av_def_action_video">Video çek</string>
     <string name="av_def_action_audio">Ses kaydet</string>
-    <string name="av_widget_action_descr">Varsayılan widget eylemi:</string>
-    <string name="av_widget_action">Varsayılan eklenti eylemi</string>
+    <string name="av_widget_action_descr">Ön tanımlı widget eylemi:</string>
+    <string name="av_widget_action">Ön tanımlı widget eylemi</string>
     <string name="av_video_format_descr">Video çıkış formatı:</string>
     <string name="av_video_format">Video formatı</string>
     <string name="av_use_external_recorder_descr">Video için sistem kayıt cihazını kullanın.</string>
@@ -261,7 +261,7 @@
     <string name="index_name_tts_voice">Sesli uyarılar (TTS, tercih edilen)</string>
     <string name="amenity_type_osmwiki">Wikipedia (çevrim dışı)</string>
     <string name="amenity_type_user_defined">Kullanıcı tanımlı</string>
-    <string name="settings_preset">Varsayılan profil</string>
+    <string name="settings_preset">Ön tanımlı profil</string>
     <string name="user_password">OSM şifreniz</string>
     <string name="download_files_not_enough_space">İndirme için yeterli yer yok: %1$s MB (free: %2$s).</string>
     <string name="animate_route_off">Animasyonu durdur</string>
@@ -463,11 +463,11 @@
     <string name="map_online_data">Çevrim içi ve döşeme haritalar</string>
     <string name="map_online_data_descr">Çevrim içi haritalar kullanın (döşemeleri bellek kartına indir ve önbelleğe al).</string>
     <string name="online_map_settings_descr">Çevrim içi veya önbelleğe alınmış döşeme harita kaynaklarını seçin.</string>
-    <string name="osmand_rastermaps_plugin_description">Önceden tanımlanmış OSM döşemelerinden (Mapnik gibi) uydu görüntülerine ve hava durumu haritaları, iklim haritaları, jeolojik haritalar, yamaç katmanları vb. gibi özel amaçlı katmanlara kadar birçok çevrim içi (döşeme veya raster) haritaya erişin.
-\n
-\n Bu haritalardan herhangi biri, görüntülenecek ana (temel) harita olarak veya başka bir temel haritaya (OsmAnd\'ın standart çevrim dışı haritaları gibi) üst veya alt katman olarak kullanılabilir. OsmAnd vektör haritalarının belirli ögeleri, herhangi bir alt haritayı daha görünür hale getirmek için \'Haritayı yapılandır\' menüsü aracılığıyla gizlenebilir.
-\n
-\n Döşeme haritalarını doğrudan çevrim içi olarak indirin veya çeşitli üçüncü taraf harita hazırlama araçları tarafından üretilebilen bir SQLite veri tabanı olarak çevrim dışı kullanım için (OsmAnd\'ın veri klasörüne manuel olarak kopyalayarak) hazırlayın.</string>
+    <string name="osmand_rastermaps_plugin_description">Önceden tanımlanmış OSM döşemelerinden (Mapnik gibi) uydu görüntülerine ve hava durumu haritaları, iklim haritaları, jeolojik haritalar, yamaç katmanları vb. gibi özel amaçlı katmanlara kadar birçok çevrim içi (döşeme veya raster) haritaya erişin. 
+\n 
+\n Bu haritalardan herhangi biri, görüntülenecek ana (temel) harita olarak veya başka bir temel haritaya (OsmAnd\'ın standart çevrim dışı haritaları gibi) üst veya alt katman olarak kullanılabilir. OsmAnd vektör haritalarının belirli ögeleri, herhangi bir alt haritayı daha görünür hale getirmek için \'Haritayı yapılandır\' menüsü aracılığıyla gizlenebilir. 
+\n 
+\n Döşeme haritalarını doğrudan çevrim içi olarak indirin veya çeşitli üçüncü taraf harita hazırlama araçları tarafından üretilebilen bir SQLite veri tabanı olarak çevrim dışı kullanım için (OsmAnd\'ın veri klasörüne elle kopyalayarak) hazırlayın.</string>
     <string name="osmand_accessibility_description">Cihazın erişilebilirlik özelliklerini doğrudan OsmAnd\'da kullanılabilir hale getirir. Örneğin; metinden konuşmaya sesleri için konuşma hızını ayarlama, D-pad navigasyonunu yapılandırma, yakınlaştırma kontrolü için bir izleme topu kullanma veya örneğin konumunuzu otomatik olarak duyurmak için metinden konuşmaya geri bildirimi.</string>
     <string name="osmand_development_plugin_description">Navigasyon simülasyonu, görselleştirme performansı veya sesli komutlar gibi geliştirme ve hata ayıklama özellikleri için ayarlar. Geliştiriciler için tasarlanmıştır, normal uygulama kullanımı için gerekli değildir.</string>
     <string name="plugins_screen">Eklentiler</string>
@@ -564,7 +564,7 @@
     <string name="index_name_wiki">Dünya Wikipedia POIleri</string>
     <string name="fav_export_confirmation">Daha önce dışa aktarılan Sık Kullanılanları içeren dosya zaten var. Değiştir\?</string>
     <string name="profile_settings">Profile Özel Ayarlar</string>
-    <string name="settings_preset_descr">Harita görünümü ve navigasyon ayarları kullanılan profile göre hatırlanır. Varsayılan profilinizi burada ayarlayın.</string>
+    <string name="settings_preset_descr">Harita görünümü ve navigasyon ayarları kullanılan profile göre hatırlanır. Ön tanımlı profilinizi burada ayarlayın.</string>
     <string name="routing_settings">Navigasyon</string>
     <string name="routing_settings_descr">Navigasyon seçeneklerini belirtin.</string>
     <string name="global_settings">Genel ayarlar</string>
@@ -1035,8 +1035,8 @@
     <string name="confirmation_to_clear_history">Geçmişi temizle\?</string>
     <string name="no_updates_available">Kullanılabilir güncelleme yok</string>
     <string name="download_live_updates">Canlı güncelleştirmeler</string>
-    <string name="rendering_value_default13_name">Varsayılan (13)</string>
-    <string name="rendering_value_defaultTranslucentCyan_name">Varsayılan (yarı saydam camgöbeği)</string>
+    <string name="rendering_value_default13_name">Ön tanımlı (13)</string>
+    <string name="rendering_value_defaultTranslucentCyan_name">Ön tanımlı (yarı saydam camgöbeği)</string>
     <string name="rendering_attr_currentTrackColor_name">GPX rengi</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX genişliği</string>
     <string name="rendering_value_red_name">Kırmızı</string>
@@ -1121,7 +1121,7 @@
     <string name="gps_status">GPS durumu</string>
     <string name="shared_string_gpx_points">Noktalar</string>
     <string name="rendering_attr_roadStyle_name">Yol tarzı</string>
-    <string name="rendering_value__name">Varsayılan</string>
+    <string name="rendering_value__name">Ön tanımlı</string>
     <string name="rendering_value_default_name">Standart</string>
     <string name="traffic_warning_pedestrian">Yaya geçidi</string>
     <string name="show_pedestrian_warnings">Yaya geçitleri</string>
@@ -1248,7 +1248,7 @@
     <string name="track_segments">İz bölümü</string>
     <string name="track_points">İz noktası</string>
     <string name="record_plugin_name">Seyahat kaydetme</string>
-    <string name="record_plugin_description">Bu eklenti, harita üzerindeki GPX kayıt widget\'ına manuel olarak dokunarak gezinme rotalarınızı kaydetme işlevini, ya da tüm navigasyon rotalarınızı bir GPX dosyasına otomatik olarak kaydetme özelliğini etkinleştirir. 
+    <string name="record_plugin_description">Bu eklenti, harita üzerindeki GPX kayıt widget\'ına elle dokunarak gezinme rotalarınızı kaydetme işlevini, ya da tüm navigasyon rotalarınızı bir GPX dosyasına otomatik olarak kaydetme özelliğini etkinleştirir. 
 \n 
 \nKaydedilen yollar arkadaşlarınızla paylaşılabilir veya OSM\'ye katkıda bulunmak için kullanılabilir. Atletler antremanlarını izlemek için kayıtlı yolları kullanabilir. Tur zamanı, ortalama hız vs. gibi bazı basit yol analizi doğrudan OsmAnd içinde yapılabilir, ve tabii ki daha sonra özel üçüncü parti araçlarla da analiz edilebilir.</string>
     <string name="plugin_touringview_name">Harita gezinti görünümü</string>
@@ -1649,7 +1649,7 @@
     <string name="show_zoom_buttons_navigation">Yakınlaştırma düğmelerini göster</string>
     <string name="save_as_favorites_points">Sık Kullanılanlar grubu olarak kaydet</string>
     <string name="android_19_location_disabled">Android 4.4\'ten (KitKat) sonra, eski depolama klasörü (%s) kullanımdan kaldırıldı. Tüm OsmAnd dosyaları yeni depolama konumuna kopyalansın mı\? 
-\n Not 1: Eski dosyalarınız dokunulmadan kalacaktır (ancak manuel olarak silinebilir). 
+\n Not 1: Eski dosyalarınız dokunulmadan kalacaktır (ancak elle silinebilir). 
 \n Not 2: Yeni depolama konumunda OsmAnd ve OsmAnd+ arasında dosya paylaşımı mümkün olmayacaktır.</string>
     <string name="share_geo">Yer:</string>
     <string name="region_maps">Bölge çapında haritalar</string>
@@ -1935,7 +1935,7 @@
     <string name="access_disable_offroute_recalc_descr">Rotadan çıkıldıktan sonra rota yeniden hesaplanmaz.</string>
     <string name="access_disable_wrong_direction_recalc">Aksi yönde iken rota yeniden-hesaplanmasın</string>
     <string name="access_disable_wrong_direction_recalc_descr">Sadece ters yönde hareket ederken rota yeniden hesaplanmaz.</string>
-    <string name="access_default_color">Varsayılan renk</string>
+    <string name="access_default_color">Ön tanımlı renk</string>
     <string name="access_category_choice">Kategori seç</string>
     <string name="access_hint_enter_name">Ad gir</string>
     <string name="access_hint_enter_category">Kategori gir</string>
@@ -2577,8 +2577,8 @@
     <string name="press_again_to_change_the_map_orientation">Harita yönünü değiştirmek için tekrar dokunun</string>
     <string name="shared_string_min_speed">En düşük hız</string>
     <string name="shared_string_max_speed">En yüksek hız</string>
-    <string name="default_speed_setting_title">Öntanımlı hız</string>
-    <string name="default_speed_setting_descr">Öntanımlı hız ayarlarını değiştir</string>
+    <string name="default_speed_setting_title">Ön tanımlı hız</string>
+    <string name="default_speed_setting_descr">Ön tanımlı hız ayarlarını değiştir</string>
     <string name="minmax_speed_dialog_title">En düşük/en yüksek hız ayarı</string>
     <string name="new_profile">Yeni profil</string>
     <string name="shared_string_crash">Çökme</string>
@@ -2595,7 +2595,7 @@
     <string name="navigate_point_format_utm">UTM Standart</string>
     <string name="navigate_point_format_olc">Konum Kodunu Aç</string>
     <string name="coordinates_format_info">Seçilen format uygulama boyunca uygulanacaktır.</string>
-    <string name="pref_selected_by_default_for_profiles">Bu ayar profiller için varsayılan olarak seçilidir: %s</string>
+    <string name="pref_selected_by_default_for_profiles">Bu ayar profiller için ön tanımlı olarak seçilidir: %s</string>
     <string name="change_default_settings">Ayarı değiştir</string>
     <string name="discard_changes">Değişikliği iptal et</string>
     <string name="apply_to_current_profile">Sadece \"%1$s\"e uygula</string>
@@ -2616,7 +2616,7 @@
     <string name="screen_alerts_descr">Navigasyon sırasında sol altta gösterilen uyarılar.</string>
     <string name="switch_profile">Profil değiştir</string>
     <string name="language_and_output">Dil ve çıkış</string>
-    <string name="reset_to_default">Varsayılanlara geri dön</string>
+    <string name="reset_to_default">Ön tanımlılara sıfırla</string>
     <string name="manage_profiles_descr">Profil oluşturma, içe aktarma, düzenleme</string>
     <string name="manage_profiles">Uygulama profillerini yönet…</string>
     <string name="application_profile_changed">Uygulama profili \"%s\" olarak değiştirildi</string>
@@ -2643,7 +2643,7 @@
     <string name="app_mode_ufo">UFO</string>
     <string name="release_3_4">• Uygulama profilleri: Özel bir simge ve renk ile kendi ihtiyaçlarınız için özel bir profil oluşturun 
 \n 
-\n • Şimdi herhangi bir profilin varsayılan ve minimum/maksimum hızlarını özelleştirin 
+\n • Şimdi herhangi bir profilin ön tanımlı ve minimum/maksimum hızlarını özelleştirin 
 \n 
 \n • Mevcut koordinatlar için bir widget eklendi 
 \n 
@@ -2696,7 +2696,7 @@
     <string name="rendering_attr_showLez_description">Haritada Düşük Emisyon Bölgelerini göster. Yönlendirmeyi etkilemez.</string>
     <string name="rendering_attr_showLez_name">Düşük Emisyon Bölgelerini göster</string>
     <string name="temporary_conditional_routing">Geçici sınırlamaları göz önünde bulundurun</string>
-    <string name="shared_string_default">Varsayılan</string>
+    <string name="shared_string_default">Ön tanımlı</string>
     <string name="app_mode_wagon">Vagon</string>
     <string name="app_mode_pickup_truck">Kamyonet</string>
     <string name="weeks_5">Hafta</string>
@@ -2729,7 +2729,7 @@
     <string name="screen_alerts">Ekran uyarıları</string>
     <string name="route_parameters_descr">Rota parametrelerini yapılandır</string>
     <string name="route_parameters">Rota parametreleri</string>
-    <string name="shared_string_by_default">Varsayılan olarak</string>
+    <string name="shared_string_by_default">Ön tanımlı olarak</string>
     <string name="download_detailed_map">Bu alanı görüntülemek için detaylı %s haritasını indirin.</string>
     <string name="access_shared_string_navigate_up">Yukarı git</string>
     <string name="access_smart_autoannounce">Akıllı otomatik duyuru</string>
@@ -2884,11 +2884,11 @@
     <string name="ski_map_render_descr">Kayak yapmak için. Pistler, telesiyejler, kros kayak yolları vb. içermektedir. İkincil harita nesnelerini karartır.</string>
     <string name="light_rs_render_descr">Basit sürüş tarzı. Yumuşak gece modu, eş yükselti eğrileri, turuncu tarzdaki zıtlaştırılmış yollar, ikincil harita nesnelerini karartma.</string>
     <string name="topo_render_descr">Yürüyüş, doğa yürüyüşü ve doğa bisikleti için. Dış mekanda okunabilir. Zıtlaştırılmış yollar ve doğal nesneler, farklı rota tipleri, gelişmiş eş yükselti eğrisi seçenekleri, ekstra detaylar. Yüzey bütünlüğünün ayarlanması yol kalitesini ayırt eder. Gece modu yok.</string>
-    <string name="mapnik_render_descr">Eski varsayılan \'Mapnik\' tarzı. \'Mapnik\' ile benzer renkler.</string>
+    <string name="mapnik_render_descr">Eski ön tanımlı \'Mapnik\' tarzı. \'Mapnik\' ile benzer renkler.</string>
     <string name="default_render_descr">Genel amaçlı stil. Yoğun şehirler temiz bir şekilde gösterilmiştir. Eş yükselti eğrileri, rotalar, yüzey kalitesi, erişim kısıtlamaları, yol kalkanları, SAC ölçeğine göre yol görselleştirme, akarsu sporları öğeleri içermektedir.</string>
-    <string name="touring_view_render_descr">Yüksek zıtlık ve maksimum ayrıntı ile turne tarzı. OsmAnd varsayılan stilinin tüm seçenekleri ile birlikte, mümkün olduğu kadar çok ayrıntıyı, özellikle de yolları, patikaları ve seyahat etmenin diğer yollarını gösterir. Yol tipleri arasındaki \"touring atlas\" ayrımını temizleyin. Gündüz, gece ve dış mekan kullanımı için uygundur.</string>
+    <string name="touring_view_render_descr">Yüksek zıtlık ve maksimum ayrıntı ile gezi tarzı. OsmAnd ön tanımlı stilinin tüm seçenekleri ile birlikte, mümkün olduğu kadar çok ayrıntıyı, özellikle de yolları, patikaları ve seyahat etmenin diğer yollarını gösterir. Yol tipleri arasındaki \"touring atlas\" ayrımını kaldırın. Gündüz, gece ve dış mekan kullanımı için uygundur.</string>
     <string name="off_road_render_descr">\'Topo\' stiline dayalı arazi sürüşleri ve yeşil uydu görüntüleriyle alt tabaka olarak kullanım için. Ana yol kalınlığı azaltılmış, izlenen yollar, patikalar, bisiklet ve diğer rotaların kalınlığı arttırılmıştır.</string>
-    <string name="unirs_render_descr">Yaya ve bisiklet yollarının kontrastını artırmak için varsayılan stilin değiştirilmesi. Eski Mapnik renklerini kullanır.</string>
+    <string name="unirs_render_descr">Yaya ve bisiklet yollarının kontrastını artırmak için ön tanımlı stilin değiştirilmesi. Eski Mapnik renklerini kullanır.</string>
     <string name="shared_string_gpx_file">GPX dosyası</string>
     <string name="shared_string_gpx_waypoints">İzlenen yol ara noktaları</string>
     <string name="wikivoyage_travel_guide">Seyahat Rehberleri</string>
@@ -2983,7 +2983,7 @@
     <string name="public_transport_no_route_title">Ne yazık ki, OsmAnd ayarlarınıza uygun bir rota bulamadı.</string>
     <string name="searching_gps">GPS aranıyor</string>
     <string name="coordinates_widget">Koordinatlar widget\'ı</string>
-    <string name="select_base_profile_dialog_message">Özel profilinizi varsayılan uygulama profillerinden birine dayandırın, bu widget\'ların varsayılan görünürlüğü ile hız ve mesafe birimleri gibi temel ayarları tanımlar. Bunlar, genişletilebilecekleri özel profillerin örnekleri ile birlikte varsayılan uygulama profilleridir:</string>
+    <string name="select_base_profile_dialog_message">Özel profilinizi ön tanımlı uygulama profillerinden birine dayandırın, bu widget\'ların ön tanımlı görünürlüğü ile hız ve mesafe birimleri gibi temel ayarları tanımlar. Bunlar, genişletilebilecekleri özel profillerin örnekleri ile birlikte ön tanımlı uygulama profilleridir:</string>
     <string name="base_profile_descr_public_transport">Toplu taşıma türleri</string>
     <string name="routing_profile_broutrer">BRouter (çevrim dışı)</string>
     <string name="osmand_default_routing">OsmAnd yönlendirme</string>
@@ -3221,7 +3221,7 @@
     <string name="routing_attr_allow_skating_only_name">Sadece-paten rotalarına izin ver</string>
     <string name="routing_attr_allow_skating_only_description">Klasik yollar olmadan serbest stil ya da sadece paten için düzenlenmiş rotalar.</string>
     <string name="routing_attr_allow_classic_only_name">Sadece-klasik rotalarına izin ver</string>
-    <string name="routing_attr_allow_classic_only_description">Paten yolları olmadan sadece klasik stil için düzenlenmiş rotalar. Buna daha gevşek bir palete sahip daha küçük bir kar arabasıyla düzenlenen rotalar ve kayakçılar tarafından manuel olarak yapılan pistler dahildir.</string>
+    <string name="routing_attr_allow_classic_only_description">Paten yolları olmadan sadece klasik stil için düzenlenmiş rotalar. Buna daha gevşek bir palete sahip daha küçük bir kar arabasıyla düzenlenen rotalar ve kayakçılar tarafından elle yapılan pistler dahildir.</string>
     <string name="routing_attr_difficulty_preference_name">Tercih edilen zorluk</string>
     <string name="routing_attr_difficulty_preference_description">Bu zorluktaki rotaları tercih et, ancak eğer daha kısa ise daha zor veya daha kolay pistler üzerinden yönlendirmek yine de mümkündür.</string>
     <string name="routing_attr_freeride_policy_name">Pist dışı</string>
@@ -3370,7 +3370,7 @@
     <string name="delete_profiles_descr">\'Uygula\'ya dokunmak, kaldırılan profilleri kalıcı olarak siler.</string>
     <string name="master_profile">Ana profil</string>
     <string name="select_color">Renk seç</string>
-    <string name="edit_profiles_descr">OsmAnd varsayılan profilleri silinemez, ancak (önceki ekranda) devre dışı bırakılabilir veya en altta sıralanabilir.</string>
+    <string name="edit_profiles_descr">OsmAnd ön tanımlı profilleri silinemez, ancak (önceki ekranda) devre dışı bırakılabilir veya en altta sıralanabilir.</string>
     <string name="edit_profiles">Profilleri düzenle</string>
     <string name="select_nav_profile_dialog_message">\'Navigasyon türü\' rotaların nasıl hesaplandığını yönetir.</string>
     <string name="profile_appearance">Profil görünümü</string>
@@ -3378,7 +3378,7 @@
     <string name="reorder_profiles">Profil listesini düzenle</string>
     <string name="selected_profile">Seçilen profil</string>
     <string name="reset_confirmation_descr">%1$s\'e dokunmak tüm değişikliklerinizi atacaktır.</string>
-    <string name="reset_all_profile_settings_descr">Tüm profil ayarları kurulum anındaki varsayılanlarına sıfırlayın.</string>
+    <string name="reset_all_profile_settings_descr">Tüm profil ayarlarını kurulum anındaki ön tanımlılarına sıfırlayın.</string>
     <string name="reset_all_profile_settings">Tüm profil ayarları sıfırlansın mı\?</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
@@ -3430,7 +3430,7 @@
     <string name="monitoring_min_speed">Minimum hız</string>
     <string name="monitoring_min_accuracy">Minimum doğruluk</string>
     <string name="monitoring_min_distance">Minimum yer değiştirme</string>
-    <string name="reset_plugin_to_default">Eklenti ayarlarını varsayılana sıfırla</string>
+    <string name="reset_plugin_to_default">Eklenti ayarlarını ön tanımlılara sıfırla</string>
     <string name="multimedia_rec_split_title">Kaydedici bölmesi</string>
     <string name="multimedia_use_system_camera">Sistem uygulamasını kullan</string>
     <string name="multimedia_photo_play_sound">Kamera deklanşör sesi</string>
@@ -3441,40 +3441,40 @@
     <string name="shared_string_available">Mevcut</string>
     <string name="add_custom_category">Özel kategori ekle</string>
     <string name="rendering_attr_streetLightingNight_name">Sadece geceleri göster</string>
-    <string name="plugin_prefs_reset_successful">Tüm eklenti ayarları varsayılan durumuna geri yüklendi.</string>
-    <string name="profile_prefs_reset_successful">Tüm profil ayarları varsayılan durumuna geri yüklendi.</string>
+    <string name="plugin_prefs_reset_successful">Tüm eklenti ayarları ön tanımlı durumuna geri yüklendi.</string>
+    <string name="profile_prefs_reset_successful">Tüm profil ayarları ön tanımlı durumuna geri yüklendi.</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">%1$s\'de gün batımı</string>
     <string name="sunrise_at">%1$s\'de gün doğumu</string>
     <string name="accessibility_mode_disabled">Sisteminizde erişilebilirlik modu devre dışı.</string>
-    <string name="reset_to_default_category_button_promo">Varsayılana sıfırla, sıralama düzenini kurulumdan sonraki varsayılan duruma sıfırlayacaktır.</string>
+    <string name="reset_to_default_category_button_promo">Ön tanımlılara sıfırla, sıralama düzenini kurulumdan sonraki ön tanımlı duruma sıfırlayacaktır.</string>
     <string name="use_system_screen_timeout">Sistem ekran zaman aşımını kullan</string>
-    <string name="use_system_screen_timeout_promo">Varsayılan olarak devre dışıdır, OsmAnd ön planda çalışıyorsa ekran zaman aşımına uğramaz.
-\n
+    <string name="use_system_screen_timeout_promo">Ön tanımlı olarak devre dışıdır, OsmAnd ön planda çalışıyorsa ekran zaman aşımına uğramaz. 
+\n 
 \nEtkinleştirilirse OsmAnd sistem zaman aşımı ayarlarını kullanacaktır.</string>
     <string name="clear_recorded_data">Kaydedilen verileri temizle</string>
-    <string name="release_3_6">• Profiller: artık sırayı değiştirebilir, harita simgesini ayarlayabilir, temel profiller için tüm ayarları değiştirebilir ve bunları varsayılanlara geri yükleyebilirsiniz
-\n
-\n • Navigasyona çıkış numarası eklendi
-\n
-\n • Eklenti ayarları yenilendi
-\n
-\n • Tüm profillere hızlı erişim için Ayarlar ekranı yenilendi
-\n
-\n • Ayarları başka bir profilden kopyalama seçeneği eklendi
-\n
-\n • Arama\'da sıralamayı değiştirme veya POI kategorilerini gizleme özelliği eklendi
-\n
-\n • POI simgeleri haritada doğru şekilde hizalandı
-\n
-\n • Harita Yapılandırmaya Gün Batımı / Gün Doğumu verileri eklendi
-\n
-\n • Haritaya Ev / İş simgeleri eklendi
-\n
-\n • Ayarlarda çok satırlı açıklama desteği eklendi
-\n
-\n • Japonya haritasına doğru harf çevirisi eklendi
-\n
+    <string name="release_3_6">• Profiller: artık sırayı değiştirebilir, harita simgesini ayarlayabilir, temel profiller için tüm ayarları değiştirebilir ve bunları ön tanımlılara geri yükleyebilirsiniz 
+\n 
+\n • Navigasyona çıkış numarası eklendi 
+\n 
+\n • Eklenti ayarları yenilendi 
+\n 
+\n • Tüm profillere hızlı erişim için Ayarlar ekranı yenilendi 
+\n 
+\n • Ayarları başka bir profilden kopyalama seçeneği eklendi 
+\n 
+\n • Arama\'da sıralamayı değiştirme veya POI kategorilerini gizleme özelliği eklendi 
+\n 
+\n • POI simgeleri haritada doğru şekilde hizalandı 
+\n 
+\n • Harita Yapılandırmaya Gün Batımı / Gün Doğumu verileri eklendi 
+\n 
+\n • Haritaya Ev / İş simgeleri eklendi 
+\n 
+\n • Ayarlarda çok satırlı açıklama desteği eklendi 
+\n 
+\n • Japonya haritasına doğru harf çevirisi eklendi 
+\n 
 \n • Antarktika haritası eklendi
 \n
 \n</string>
@@ -3494,7 +3494,7 @@
     <string name="import_profile_dialog_description">İçe aktarılan profil ilave veriler içermektedir. Yalnızca profil verilerini içe aktarmak için İçe Aktar\'ı tıklayın veya içe aktarılacak ilave verileri seçin.</string>
     <string name="export_profile_dialog_description">Profil ile birlikte dışa aktarılacak ilave veriler seçebilirsiniz.</string>
     <string name="index_name_antarctica">Antarktika</string>
-    <string name="shared_string_app_default_w_val">Uygulama Varsayılanı (%s)</string>
+    <string name="shared_string_app_default_w_val">Uygulama Ön Tanımlı Değeri (%s)</string>
     <string name="no_recalculation_setting">Yeniden hesaplamayı devre dışı bırak</string>
     <string name="route_recalculation_dist_title">Rotayı yeniden hesaplamak için minimum mesafe</string>
     <string name="route_recalculation_dist_descr">Rotaya olan mesafe belirtilen parametreden daha uzunsa rota yeniden hesaplanacak</string>

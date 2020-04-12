@@ -446,7 +446,7 @@
     <string name="install_more">Weitere installieren…</string>
     <string name="level_to_switch_vector_raster_descr">Verwenden Sie Rasterkarten für alles, was über diese Ebene hinausgeht.</string>
     <string name="level_to_switch_vector_raster">Minimale Vektor-Zoomstufe</string>
-    <string name="create_poi_link_to_osm_doc"> string name=\"route_descr_current_location\"&gt;Aktueller Standort&lt;/string </string>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> Kartenklassifizierung mit Bildern.</string>
     <string name="error_doing_search">Offline-Suche konnte nicht durchgeführt werden.</string>
     <string name="search_osm_offline">Suche nach Standort</string>
     <string name="system_locale">Systemeinstellung</string>

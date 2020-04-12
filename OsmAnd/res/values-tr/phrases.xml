@@ -1400,7 +1400,7 @@
     <string name="poi_loc_name">Yerel isim</string>
     <string name="poi_old_name">Eski isim</string>
     <string name="poi_alt_name">Alternatif isim</string>
-    <string name="poi_pump_manual">Manuel</string>
+    <string name="poi_pump_manual">Elle</string>
     <string name="poi_pump_powered">Enerjili</string>
     <string name="poi_pump_no">Pompa yok</string>
     <string name="poi_water_characteristic_mineral">Mineral</string>
@@ -2324,7 +2324,7 @@
     <string name="poi_historic_era_neolithic">Tarihi çağ: neolitik</string>
     <string name="poi_historic_era_mesolithic">Tarihi çağ: mezolitik</string>
     <string name="poi_historic_era_paleolithic">Tarihi çağ: paleolitik (günümüzden 2,6 milyon yıl önce – 10000 yıl önce)</string>
-    <string name="poi_historic_period_imperial">Tarihi dönem: imparatorluk (dönem V, MS 900 – MS 1200)</string>
+    <string name="poi_historic_period_imperial">Tarihi dönem: imparatorluk (dönem V, MS 900 – MS 1200</string>
     <string name="poi_historic_period_classical">Tarihi dönem: klasik (dönem IV, MS 374 – MS 900)</string>
     <string name="poi_historic_period_urban">Tarihi dönem: kentsel (dönem III, MS 133 – MS 374)</string>
     <string name="poi_historic_period_villager">Tarihi dönem: kırsal (dönem I, II, MÖ 1580 – MS 133)</string>
