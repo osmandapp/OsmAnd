@@ -2061,8 +2061,10 @@ public class GPXUtilities {
 							} else if (tag.equals("speed")) {
 								try {
 									String value = readText(parser, "speed");
-									((WptPt) parse).speed = Float.parseFloat(value);
-									parse.getExtensionsToWrite().put("speed", value);
+									if (!Algorithms.isEmpty(value)) {
+										((WptPt) parse).speed = Float.parseFloat(value);
+										parse.getExtensionsToWrite().put("speed", value);
+									}
 								} catch (NumberFormatException e) {
 								}
 							} else if (tag.equals("link")) {

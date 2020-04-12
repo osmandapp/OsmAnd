@@ -484,6 +484,7 @@ public class Algorithms {
 			ByteArrayOutputStream bous = new ByteArrayOutputStream();
 			GZIPOutputStream gzout = new GZIPOutputStream(bous);
 			gzout.write(str.getBytes());
+			gzout.close();
 			return bous.toByteArray();
 		} catch (IOException e) {
 			throw new IllegalStateException(e);
