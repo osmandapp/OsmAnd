@@ -362,7 +362,39 @@ public class RouteCalculationResult {
 					i--;
 				}
 			}
+
+			String streetName = null;
 			TurnType turn = s.getTurnType();
+
+			// Try to detect the case when a street changes is name to another (typically after road crossing)
+			// Then add RouteDirectionInfo of TurnType.straight()
+			if (turn == null && routeInd + 1 < list.size()) {
+				String curStreetName = s.getObject().getName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
+						ctx.getSettings().MAP_TRANSLITERATE_NAMES.get());
+				String curIntRef = s.getObject().getValue("int_ref");
+				String curRoadRef2 = s.getObject().getValue("road_ref_2");
+				// Ignore the segments when has no street name or road is a highway (has ref like 'E 101')
+				if (!Algorithms.isEmpty(curStreetName) && Algorithms.isEmpty(curIntRef) && Algorithms.isEmpty(curRoadRef2)) {
+					int routeIndNext = routeInd + 1;
+					do {
+						RouteSegmentResult nextSegment = list.get(routeIndNext);
+						if (nextSegment.getTurnType() != null)
+							break; // in case instant turn is encountered then stop detection
+						String nextStreetName = nextSegment.getObject().getName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
+								ctx.getSettings().MAP_TRANSLITERATE_NAMES.get());
+						if (!Algorithms.isEmpty(nextStreetName)) {
+							if (!Algorithms.stringsEqual(curStreetName, nextStreetName)) {
+								// If road changes street name, save valid data for RouteDirectionInfo
+								turn = TurnType.straight();
+								streetName = nextStreetName;
+							}
+							// If next segment has the same street name then stop detection
+							break;
+						}
+						routeIndNext++;
+					} while (routeIndNext < routeInd + 5 && routeIndNext < list.size());
+				}
+			}
 
 			if(turn != null) {
 				RouteDirectionInfo info = new RouteDirectionInfo(s.getSegmentSpeed(), turn);
@@ -383,8 +415,10 @@ public class RouteCalculationResult {
 					String ref = next.getObject().getRef(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
 							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), next.isForwardDirection());
 					info.setRef(ref);
-					String streetName = next.getObject().getName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
-							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get());
+					if(streetName==null) {
+						streetName = next.getObject().getName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
+								ctx.getSettings().MAP_TRANSLITERATE_NAMES.get());
+					}
 					if (Algorithms.isEmpty(streetName)) {
 						// try to get street names from following segments
 						float distanceFromTurn = next.getDistance();
