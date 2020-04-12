@@ -9,6 +9,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
 import java.io.EOFException;
 import java.io.File;
@@ -30,6 +31,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
 
 /**
@@ -475,6 +477,17 @@ public class Algorithms {
 	public static String gzipToString(byte[] gzip) throws IOException {
 		GZIPInputStream gzipIs = new GZIPInputStream(new ByteArrayInputStream(gzip));
 		return readFromInputStream(gzipIs).toString();
+	}
+	
+	public static byte[] stringToGzip(String str) {
+		try {
+			ByteArrayOutputStream bous = new ByteArrayOutputStream();
+			GZIPOutputStream gzout = new GZIPOutputStream(bous);
+			gzout.write(str.getBytes());
+			return bous.toByteArray();
+		} catch (IOException e) {
+			throw new IllegalStateException(e);
+		}
 	}
 
 	public static boolean removeAllFiles(File f) {
