@@ -57,7 +57,7 @@
     <string name="map_widget_back_to_loc">Neredeyim</string>
     <string name="map_widget_lock_screen">Kilitle</string>
     <string name="map_widget_compass">Pusula</string>
-    <string name="map_widget_reset">Ön tanımlılara sıfırla</string>
+    <string name="map_widget_reset">Öntanımlılara sıfırla</string>
     <string name="map_widget_monitoring">GPX günlüğü</string>
     <string name="map_widget_speed">Hız</string>
     <string name="map_widget_distance">Varış Noktası</string>
@@ -95,8 +95,8 @@
     <string name="srtm_paid_version_title">Eş yükselti eğrileri eklentisi</string>
     <string name="av_def_action_video">Video çek</string>
     <string name="av_def_action_audio">Ses kaydet</string>
-    <string name="av_widget_action_descr">Ön tanımlı widget eylemi:</string>
-    <string name="av_widget_action">Ön tanımlı widget eylemi</string>
+    <string name="av_widget_action_descr">Öntanımlı widget eylemi:</string>
+    <string name="av_widget_action">Öntanımlı widget eylemi</string>
     <string name="av_video_format_descr">Video çıkış formatı:</string>
     <string name="av_video_format">Video formatı</string>
     <string name="av_use_external_recorder_descr">Video için sistem kayıt cihazını kullanın.</string>
@@ -261,7 +261,7 @@
     <string name="index_name_tts_voice">Sesli uyarılar (TTS, tercih edilen)</string>
     <string name="amenity_type_osmwiki">Wikipedia (çevrim dışı)</string>
     <string name="amenity_type_user_defined">Kullanıcı tanımlı</string>
-    <string name="settings_preset">Ön tanımlı profil</string>
+    <string name="settings_preset">Öntanımlı profil</string>
     <string name="user_password">OSM şifreniz</string>
     <string name="download_files_not_enough_space">İndirme için yeterli yer yok: %1$s MB (free: %2$s).</string>
     <string name="animate_route_off">Animasyonu durdur</string>
@@ -564,7 +564,7 @@
     <string name="index_name_wiki">Dünya Wikipedia POIleri</string>
     <string name="fav_export_confirmation">Daha önce dışa aktarılan Sık Kullanılanları içeren dosya zaten var. Değiştir\?</string>
     <string name="profile_settings">Profile Özel Ayarlar</string>
-    <string name="settings_preset_descr">Harita görünümü ve navigasyon ayarları kullanılan profile göre hatırlanır. Ön tanımlı profilinizi burada ayarlayın.</string>
+    <string name="settings_preset_descr">Harita görünümü ve navigasyon ayarları kullanılan profile göre hatırlanır. Öntanımlı profilinizi burada ayarlayın.</string>
     <string name="routing_settings">Navigasyon</string>
     <string name="routing_settings_descr">Navigasyon seçeneklerini belirtin.</string>
     <string name="global_settings">Genel ayarlar</string>
@@ -1035,8 +1035,8 @@
     <string name="confirmation_to_clear_history">Geçmişi temizle\?</string>
     <string name="no_updates_available">Kullanılabilir güncelleme yok</string>
     <string name="download_live_updates">Canlı güncelleştirmeler</string>
-    <string name="rendering_value_default13_name">Ön tanımlı (13)</string>
-    <string name="rendering_value_defaultTranslucentCyan_name">Ön tanımlı (yarı saydam camgöbeği)</string>
+    <string name="rendering_value_default13_name">Öntanımlı (13)</string>
+    <string name="rendering_value_defaultTranslucentCyan_name">Öntanımlı (yarı saydam camgöbeği)</string>
     <string name="rendering_attr_currentTrackColor_name">GPX rengi</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX genişliği</string>
     <string name="rendering_value_red_name">Kırmızı</string>
@@ -1121,7 +1121,7 @@
     <string name="gps_status">GPS durumu</string>
     <string name="shared_string_gpx_points">Noktalar</string>
     <string name="rendering_attr_roadStyle_name">Yol tarzı</string>
-    <string name="rendering_value__name">Ön tanımlı</string>
+    <string name="rendering_value__name">Öntanımlı</string>
     <string name="rendering_value_default_name">Standart</string>
     <string name="traffic_warning_pedestrian">Yaya geçidi</string>
     <string name="show_pedestrian_warnings">Yaya geçitleri</string>
@@ -2884,11 +2884,11 @@
     <string name="ski_map_render_descr">Kayak yapmak için. Pistler, telesiyejler, kros kayak yolları vb. içermektedir. İkincil harita nesnelerini karartır.</string>
     <string name="light_rs_render_descr">Basit sürüş tarzı. Yumuşak gece modu, eş yükselti eğrileri, turuncu tarzdaki zıtlaştırılmış yollar, ikincil harita nesnelerini karartma.</string>
     <string name="topo_render_descr">Yürüyüş, doğa yürüyüşü ve doğa bisikleti için. Dış mekanda okunabilir. Zıtlaştırılmış yollar ve doğal nesneler, farklı rota tipleri, gelişmiş eş yükselti eğrisi seçenekleri, ekstra detaylar. Yüzey bütünlüğünün ayarlanması yol kalitesini ayırt eder. Gece modu yok.</string>
-    <string name="mapnik_render_descr">Eski ön tanımlı \'Mapnik\' tarzı. \'Mapnik\' ile benzer renkler.</string>
+    <string name="mapnik_render_descr">Eski öntanımlı \'Mapnik\' tarzı. \'Mapnik\' ile benzer renkler.</string>
     <string name="default_render_descr">Genel amaçlı stil. Yoğun şehirler temiz bir şekilde gösterilmiştir. Eş yükselti eğrileri, rotalar, yüzey kalitesi, erişim kısıtlamaları, yol kalkanları, SAC ölçeğine göre yol görselleştirme, akarsu sporları öğeleri içermektedir.</string>
-    <string name="touring_view_render_descr">Yüksek zıtlık ve maksimum ayrıntı ile gezi tarzı. OsmAnd ön tanımlı stilinin tüm seçenekleri ile birlikte, mümkün olduğu kadar çok ayrıntıyı, özellikle de yolları, patikaları ve seyahat etmenin diğer yollarını gösterir. Yol tipleri arasındaki \"touring atlas\" ayrımını kaldırın. Gündüz, gece ve dış mekan kullanımı için uygundur.</string>
+    <string name="touring_view_render_descr">Yüksek zıtlık ve maksimum ayrıntı ile gezi tarzı. OsmAnd öntanımlı stilinin tüm seçenekleri ile birlikte, mümkün olduğu kadar çok ayrıntıyı, özellikle de yolları, patikaları ve seyahat etmenin diğer yollarını gösterir. Yol tipleri arasındaki \"touring atlas\" ayrımını kaldırın. Gündüz, gece ve dış mekan kullanımı için uygundur.</string>
     <string name="off_road_render_descr">\'Topo\' stiline dayalı arazi sürüşleri ve yeşil uydu görüntüleriyle alt tabaka olarak kullanım için. Ana yol kalınlığı azaltılmış, izlenen yollar, patikalar, bisiklet ve diğer rotaların kalınlığı arttırılmıştır.</string>
-    <string name="unirs_render_descr">Yaya ve bisiklet yollarının kontrastını artırmak için ön tanımlı stilin değiştirilmesi. Eski Mapnik renklerini kullanır.</string>
+    <string name="unirs_render_descr">Yaya ve bisiklet yollarının kontrastını artırmak için öntanımlı stilin değiştirilmesi. Eski Mapnik renklerini kullanır.</string>
     <string name="shared_string_gpx_file">GPX dosyası</string>
     <string name="shared_string_gpx_waypoints">İzlenen yol ara noktaları</string>
     <string name="wikivoyage_travel_guide">Seyahat Rehberleri</string>
@@ -2983,7 +2983,7 @@
     <string name="public_transport_no_route_title">Ne yazık ki, OsmAnd ayarlarınıza uygun bir rota bulamadı.</string>
     <string name="searching_gps">GPS aranıyor</string>
     <string name="coordinates_widget">Koordinatlar widget\'ı</string>
-    <string name="select_base_profile_dialog_message">Özel profilinizi ön tanımlı uygulama profillerinden birine dayandırın, bu widget\'ların ön tanımlı görünürlüğü ile hız ve mesafe birimleri gibi temel ayarları tanımlar. Bunlar, genişletilebilecekleri özel profillerin örnekleri ile birlikte ön tanımlı uygulama profilleridir:</string>
+    <string name="select_base_profile_dialog_message">Özel profilinizi öntanımlı uygulama profillerinden birine dayandırın, bu widget\'ların öntanımlı görünürlüğü ile hız ve mesafe birimleri gibi temel ayarları tanımlar. Bunlar, genişletilebilecekleri özel profillerin örnekleri ile birlikte öntanımlı uygulama profilleridir:</string>
     <string name="base_profile_descr_public_transport">Toplu taşıma türleri</string>
     <string name="routing_profile_broutrer">BRouter (çevrim dışı)</string>
     <string name="osmand_default_routing">OsmAnd yönlendirme</string>
