@@ -3573,16 +3573,16 @@
     <string name="app_mode_ski_touring">جولة التزلج</string>
     <string name="app_mode_ski_snowmobile">الثلج</string>
     <string name="custom_osmand_plugin">مخصص البرنامج المساعد أوسماند</string>
-    <string name="replace_point_descr">استبدال نقطة أخرى بهذا</string>
-    <string name="changes_applied_to_profile">تم تطبيق التغييرات على ملف تعريف %1$s.</string>
-    <string name="settings_item_read_error">تعذر قراءة %1$s.</string>
-    <string name="settings_item_write_error">تعذر كتابة %1$s.</string>
+    <string name="replace_point_descr">استبدل نقطة أخرى بالحالية</string>
+    <string name="changes_applied_to_profile">تم تطبيق التغييرات على %1$s ملف تعريف.</string>
+    <string name="settings_item_read_error">لايمكن قراءة %1$s.</string>
+    <string name="settings_item_write_error">لايمكن كتابة %1$s.</string>
     <string name="settings_item_import_error">تعذر استيراد %1$s.</string>
-    <string name="select_track_file">حدد ملف المسار</string>
+    <string name="select_track_file">اختيار ملف المسار</string>
     <string name="shared_string_languages">اللغات</string>
     <string name="shared_string_language">اللغة</string>
-    <string name="shared_string_all_languages">كل اللغات</string>
+    <string name="shared_string_all_languages">جميع اللغات</string>
     <string name="wikipedia_poi_languages_promo">قد لا تكون بعض مقالات ويكيبيديا متاحة باسمك ، حدد اللغات التي ستظهر بها مقالات ويكيبيديا على الخريطة.
 \nستتمكن من التبديل بين جميع اللغات المتاحة أثناء قراءة المقالة.</string>
-    <string name="wiki_menu_download_descr">هناك حاجة إلى خرائط إضافية لعرض النقاط المهمة لويكيبيديا على الخريطة.</string>
+    <string name="wiki_menu_download_descr">هناك حاجة إلى خرائط إضافية لعرض النقاط المهمة من ويكيبيديا على الخريطة.</string>
 </resources>
