@@ -1388,11 +1388,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	public void rebuildMenu(boolean centered) {
 		OsmandApplication app = getMyApplication();
 		if (app != null && view != null) {
-//			final ImageView buttonFavorite = (ImageView) view.findViewById(R.id.context_menu_fav_image_view);
-//			buttonFavorite.setImageDrawable(getIcon(menu.getFavActionIconId(), R.color.ctx_menu_buttons_icon_color));
-//			String favActionString = getString(menu.getFavActionStringId());
-//			((TextView) view.findViewById(R.id.context_menu_fav_text_view)).setText(favActionString);
-
 			buildHeader();
 
 			LinearLayout bottomLayout = (LinearLayout) view.findViewById(R.id.context_menu_bottom_view);
