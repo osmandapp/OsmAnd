@@ -15,12 +15,15 @@ import android.os.Build;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.StyleSpan;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -37,6 +40,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.widget.TintableCompoundButton;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.snackbar.SnackbarContentLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
@@ -388,6 +392,28 @@ public class UiUtilities {
 			backgroundColor = nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
 		}
 		view.setBackgroundColor(ContextCompat.getColor(ctx, backgroundColor));
+	}
+
+	public static void setupSnackbarVerticalLayout(Snackbar snackbar) {
+		View view = snackbar.getView();
+		Context ctx = view.getContext();
+		TextView messageView = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_text);
+		TextView actionView = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_action);
+		ViewParent parent = actionView.getParent();
+		if (parent instanceof SnackbarContentLayout) {
+			((SnackbarContentLayout) parent).removeView(actionView);
+			((SnackbarContentLayout) parent).removeView(messageView);
+			LinearLayout container = new LinearLayout(ctx);
+			container.setOrientation(LinearLayout.VERTICAL);
+			container.addView(messageView);
+			container.addView(actionView);
+			((SnackbarContentLayout) parent).addView(container);
+			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+					ViewGroup.LayoutParams.MATCH_PARENT,
+					ViewGroup.LayoutParams.WRAP_CONTENT);
+			actionView.setGravity(Gravity.CENTER_VERTICAL | Gravity.END);
+			container.setLayoutParams(params);
+		}
 	}
 
 	public static void rotateImageByLayoutDirection(ImageView image, int layoutDirection) {

@@ -3211,7 +3211,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="analytics_pref_title">Analytika</string>
     <string name="turn_screen_on_info">Zobrazit mapu na uzamčené obrazovce během navigace.</string>
     <string name="route_parameters_info">Nastavení navádění pro zvolený profil „%1$s“.</string>
-    <string name="units_and_formats">Jednotky a formát</string>
+    <string name="units_and_formats">Jednotky a formáty</string>
     <string name="appearance">Vzhled</string>
     <string name="map_look_descr">Vzhled mapy</string>
     <string name="configure_profile">Upravit profil</string>
@@ -3338,4 +3338,10 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="shared_string_min">Min</string>
     <string name="replace_point_descr">Nahradit jiný bod tímto</string>
     <string name="app_mode_ski_touring">Lyžařské okruhy</string>
+    <string name="shared_string_angle">Úhel</string>
+    <string name="shared_string_angle_param">Úhel: %s°</string>
+    <string name="shared_string_languages">Jazyky</string>
+    <string name="shared_string_language">Jazyk</string>
+    <string name="shared_string_all_languages">Všechny jazyky</string>
+    <string name="index_name_antarctica">Antarktida</string>
 </resources>

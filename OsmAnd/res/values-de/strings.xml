@@ -446,7 +446,7 @@
     <string name="install_more">Weitere installieren…</string>
     <string name="level_to_switch_vector_raster_descr">Verwenden Sie Rasterkarten für alles, was über diese Ebene hinausgeht.</string>
     <string name="level_to_switch_vector_raster">Minimale Vektor-Zoomstufe</string>
-    <string name="create_poi_link_to_osm_doc"> string name=\"route_descr_current_location\"&gt;Aktueller Standort&lt;/string </string>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> Kartenklassifizierung mit Bildern.</string>
     <string name="error_doing_search">Offline-Suche konnte nicht durchgeführt werden.</string>
     <string name="search_osm_offline">Suche nach Standort</string>
     <string name="system_locale">Systemeinstellung</string>
@@ -3625,7 +3625,7 @@ Lon %2$s</string>
     <string name="shared_string_languages">Sprachen</string>
     <string name="shared_string_language">Sprache</string>
     <string name="shared_string_all_languages">Alle Sprachen</string>
-    <string name="wikipedia_poi_languages_promo">Einige Wikipedia-Artikel könnten nicht in Ihrer Sprache verfügbar. Wählen Sie die Sprachen aus, in der Wikipedia-Artikel auf der Karte erscheinen sollen.
+    <string name="wikipedia_poi_languages_promo">Manche Wikipedia-Artikel liegen unter Umständen nicht in Ihrer Sprache vor. Wählen Sie die Sprachen aus, in denen Wikipedia-Artikel auf der Karte erscheinen sollen.
 \nSie können beim Lesen des Artikels zwischen allen verfügbaren Sprachen wechseln.</string>
     <string name="wiki_menu_download_descr">Zusätzliche Karten werden benötigt um Wikipedia-POIs auf der Karte anzuzeigen.</string>
 </resources>
