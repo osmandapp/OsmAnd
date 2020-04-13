@@ -3790,4 +3790,14 @@
     <string name="poi_paintball">Värvisõda</string>
     <string name="poi_video_telephone">Video</string>
     <string name="poi_sms">SMS</string>
+    <string name="poi_drinking_water_refill_network">Joogivee täitmise võrgustik</string>
+    <string name="poi_drinking_water_refill_no">Joogivee täitmine: ei</string>
+    <string name="poi_drinking_water_refill_yes">Joogivee täitmine: jah</string>
+    <string name="poi_seamark_obstruction">Takistus</string>
+    <string name="poi_seamark_water_level_below_mwl">Veetase: alla keskmise veetaseme</string>
+    <string name="poi_seamark_water_level_above_mwl">Veetase: üle keskmise veetaseme</string>
+    <string name="poi_seamark_water_level_floating">Veetase: ujutab</string>
+    <string name="poi_seamark_water_level_floods">Veetase: üleujutatud</string>
+    <string name="poi_seamark_water_level_covers">Veetase: kaetud</string>
+    <string name="poi_seamark_water_level_awash">Veetase: veega kaetud</string>
 </resources>

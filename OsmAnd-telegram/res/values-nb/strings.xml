@@ -12,11 +12,11 @@
     <string name="last_available_location">Sist tilgjengelige posisjon</string>
     <string name="sharing_status">Delingsstatus</string>
     <string name="location_sharing_status">Deling: %1$s</string>
-    <string name="shared_string_enabled">Påslått</string>
+    <string name="shared_string_enabled">Aktivert</string>
     <string name="shared_string_status">Status</string>
     <string name="no_gps_connection">Ingen GPS-tilkobling</string>
     <string name="no_internet_connection">Ingen internettilknytning</string>
-    <string name="shared_string_disable">Skru av</string>
+    <string name="shared_string_disable">Deaktiver</string>
     <string name="add_device">Legg til enhet</string>
     <string name="share_location_as">Del posisjon som</string>
     <string name="live_now_description">Kontakter og grupper som deler sin posisjon med deg.</string>
@@ -24,7 +24,7 @@
     <string name="logout_from_osmand_telegram">Logg ut av OsmAnd-sporeren\?</string>
     <string name="shared_string_name">Navn</string>
     <string name="by_distance">Etter distanse</string>
-    <string name="by_name">Etter navn</string>
+    <string name="by_name">Ved navn</string>
     <string name="by_group">Etter gruppe</string>
     <string name="shared_string_sort">Sorter</string>
     <string name="shared_string_sort_by">Sorter etter</string>
@@ -104,7 +104,7 @@
     <string name="location_service_no_gps_available">Velg en av posisjonstilbyderne for å dele din posisjon.</string>
     <string name="osmand_service">Bakgrunnsmodus</string>
     <string name="osmand_service_descr">OsmAnd-sporeren kjører som nisse med skjermen av.</string>
-    <string name="shared_string_distance">Distanse</string>
+    <string name="shared_string_distance">Avstand</string>
     <string name="share_location">Del posisjon</string>
     <string name="sharing_location">Deler posisjon</string>
     <string name="process_service">OsmAnd-sporertjeneste</string>
@@ -119,15 +119,13 @@
     <string name="km">km</string>
     <string name="m">m</string>
     <string name="si_kmh">Kilometer i timen</string>
-    <string name="si_m_s">Meter i sekunder</string>
+    <string name="si_m_s">Meter per sekund</string>
     <string name="si_min_km">Minutter per kilometer</string>
     <string name="si_nm_h">Nautiske mil i timen (knop)</string>
     <string name="shared_string_hour_short">t</string>
     <string name="shared_string_minute_short">min</string>
     <string name="shared_string_second_short">sek</string>
-    <string name="welcome_descr">
-        <b>OsmAnd-sporeren</b> lar deg dele din posisjon og se andres i OsmAnd.<br/>
-        <br/>Programmet belager seg på Telegram-API-et, så du må ha en Telegram-konto.</string>
+    <string name="welcome_descr"><b>OsmAnd-sporeren</b> lar deg dele din posisjon og se andres i OsmAnd.<br/> <br/>Programmet belager seg på Telegram-API-et, så du må ha en Telegram-konto.</string>
     <string name="my_location">Min posisjon</string>
     <string name="last_updated_location">Sist oppdaterte posisjon:</string>
     <string name="successfully_sent_and_updated">Sendt og oppdatert</string>
@@ -138,8 +136,8 @@
     <string name="searching_for_gps">Posisjonerer…</string>
     <string name="connecting_to_the_internet">Kobler til Internett</string>
     <string name="yard">yd</string>
-    <string name="foot">fot</string>
-    <string name="mile">mil</string>
+    <string name="foot">ft</string>
+    <string name="mile">mi</string>
     <string name="nm">nmi</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
@@ -147,10 +145,10 @@
     <string name="m_s">m/s</string>
     <string name="km_h">km/t</string>
     <string name="mile_per_hour">mph</string>
-    <string name="si_mph">Engelske mil i timen</string>
-    <string name="si_min_m">Minutter per engelske mil</string>
-    <string name="si_mi_feet">Engelske mil/fot</string>
-    <string name="si_mi_yard">Engelske mil/yard</string>
+    <string name="si_mph">Engelsk mil i timen</string>
+    <string name="si_min_m">Minutter per engelsk mil</string>
+    <string name="si_mi_feet">Eng. mil/fot</string>
+    <string name="si_mi_yard">Eng. mil/yard</string>
     <string name="si_km_m">Kilometer/meter</string>
     <string name="si_nm">Nautiske mil</string>
     <string name="si_mi_meters">Engelske mil/meter</string>
@@ -179,7 +177,7 @@
     <string name="shared_string_text">Tekst</string>
     <string name="map_and_text">Kart og tekst</string>
     <string name="monitoring_is_enabled">Oppsyn er påskrudd</string>
-    <string name="monitoring_is_disabled">Oppsyn er avskrudd</string>
+    <string name="monitoring_is_disabled">Oppsyn er ikke aktivert</string>
     <string name="time_on_the_move">Tid i bevegelse</string>
     <string name="average_altitude">Gjennomsnittlig høyde</string>
     <string name="average_speed">Gjennomsnittsfart</string>
@@ -189,7 +187,7 @@
     <string name="timeline">Tidslinje</string>
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_telegram_client">OsmAnd-sporeren er én av klientene som bruker Telegram. Dine kontakter kan bruke enhver annen Telegram-klient.</string>
-    <string name="privacy_policy_agree">Ved å klikke \"Fortsett\" samtykker du til vilkårene i Telegram-personvernspraksisen, og OsmAnd-personvernspraksisen.</string>
+    <string name="privacy_policy_agree">Du samtykker til vilkårene i personvernreglene til Telegram og OsmAnd ved å klikke «Fortsett».</string>
     <string name="shared_string_accept">Godta</string>
     <string name="telegram_privacy_policy">Telegram-personvernspraksis</string>
     <string name="how_it_works">Hvordan det virker</string>
@@ -212,7 +210,7 @@
     <string name="privacy_policy_use_telegram">Telegram (meldingsprogrammet) brukes til å komme i kontakt og snakke med folk.</string>
     <string name="osmand_privacy_policy">OsmAnd-personvernspraksis</string>
     <string name="please_update_osmand">Oppdater OsmAnd for å vise data på kartet</string>
-    <string name="timeline_description">Skru på oppsyn for å samle bevegelsesdata i historikk.</string>
+    <string name="timeline_description">Aktiver oppsyn for å samle bevegelsesdata i historikk.</string>
     <string name="search_contacts">Søk i kontaktliste</string>
     <string name="search_contacts_descr">Søk gjennom alle dine grupper og kontakter.</string>
     <string name="type_contact_or_group_name">Skriv kontakt- eller gruppenavn</string>
@@ -228,7 +226,7 @@
     <string name="proxy_port">Port</string>
     <string name="proxy_server">Tjener</string>
     <string name="shared_string_connection">Forbindelse</string>
-    <string name="shared_string_enable">Skru på</string>
+    <string name="shared_string_enable">Aktiver</string>
     <string name="proxy_type">Mellomtjenertype</string>
     <string name="proxy_connected">Tilkoblet</string>
     <string name="proxy_disconnected">Frakoblet</string>
@@ -240,10 +238,10 @@
     <string name="min_logging_distance_descr">Filter: Minimumsavstand for logging av nytt punkt</string>
     <string name="min_logging_accuracy">Minimumsnøyaktighet for logging</string>
     <string name="min_logging_accuracy_descr">Filter: Ingen logging med mindre nøyaktigheten nås</string>
-    <string name="min_logging_speed">Minimumshastighet ved logging</string>
+    <string name="min_logging_speed">Minimumshastighet for logging</string>
     <string name="min_logging_speed_descr">Filter: Ingen logging under valgt hastighet</string>
     <string name="gpx_settings">GPX-innstillinger</string>
-    <string name="timeline_no_data_descr">Data for valgt dato mangler</string>
+    <string name="timeline_no_data_descr">Det er ikke samlet inn data for valgt dato</string>
     <string name="timeline_no_data">Ingen data</string>
     <string name="shared_string_end">Slutt</string>
     <string name="shared_string_start">Start</string>
@@ -256,7 +254,7 @@
     <string name="units_and_formats">Enheter og formater</string>
     <string name="unit_of_length_descr">Endre hva lengde måles i.</string>
     <string name="unit_of_length">Lengdeenhet</string>
-    <string name="unit_of_speed_system_descr">Definer en fartsenhet</string>
+    <string name="unit_of_speed_system_descr">Definer en fartsenhet.</string>
     <string name="unit_of_speed_system">Fartsenhet</string>
     <string name="buffer_time_descr">Maksimal tid å lagre punkter i mellomlageret</string>
     <string name="buffer_time">Utløpstid for mellomlager</string>
@@ -268,5 +266,5 @@
     <string name="last_update_from_telegram_duration">Siste oppdatering fra Telegram: %1$s siden</string>
     <string name="last_response_duration">Siste respons: %1$s siden</string>
     <string name="duration_ago">%1$s siden</string>
-    <string name="shared_string_error_short">ERR</string>
+    <string name="shared_string_error_short">FEIL</string>
 </resources>

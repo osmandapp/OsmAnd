@@ -3448,7 +3448,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="logcat_buffer_descr">Controlla e condividi i log dettagliati dell\'applicazione</string>
     <string name="permission_is_required">Un permesso è richiesto per usare questa opzione.</string>
     <string name="rearrange_categories">Sistema categorie</string>
-    <string name="create_custom_categories_list_promo">Puoi aggiungere categorie personalizzate, nascondere quelle che non trovi necessarie e cambiarne l\'ordine nell\'elenco. La lista può essere importata ed esportata con i profili.</string>
+    <string name="create_custom_categories_list_promo">Cambia l\'ordinamento della lista, nasconde le categoria non necessarie. Puoi importare o esportare tutti i cambiamenti con i profili.</string>
     <string name="add_new_custom_category_button_promo">Puoi aggiugere una nuova categoria personalizzata selezionandone una o alcune altre.</string>
     <string name="shared_string_available">Disponibile</string>
     <string name="add_custom_category">Aggiungi categoria personalizzata</string>
@@ -3490,11 +3490,11 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="multimedia_use_system_camera">Usa l\'app di sistema</string>
     <string name="multimedia_photo_play_sound">Sono otturatore fotocamera</string>
     <string name="osm_authorization_success">L\'autorizzazione è andata a buon fine</string>
-    <string name="reset_to_default_category_button_promo">Il ripristino dei valori preimpostati ripristinerà all\'ordine preimpostato dopo l\'installazione l\'ordine di visualizzazione.</string>
-    <string name="accessibility_mode_disabled">La modalità accessibile è disabilitato nel tuo sistema.</string>
+    <string name="reset_to_default_category_button_promo">Il ripristino dei valori preimpostati ripristinerà l\'ordine di visualizzazione preimpostato dopo l\'installazione.</string>
+    <string name="accessibility_mode_disabled">La modalità accessibile è disabilitata nel tuo sistema.</string>
     <string name="use_system_screen_timeout">Utilizza il salvaschermo di sistema</string>
-    <string name="use_system_screen_timeout_promo">Disabilitato per preimpostazione, se OsmAnd è eseguito in background, lo schermo non andrà in sospensione.
-\n
+    <string name="use_system_screen_timeout_promo">Disabilitato per preimpostazione, se OsmAnd è eseguito in primo piano, lo schermo non andrà in sospensione. 
+\n 
 \nSe abilitato OsmAnd userà le impostazioni di sospensione del sistema.</string>
     <string name="clear_recorded_data">Elimina i dati registrati</string>
     <string name="release_3_6">• Profili: ora puoi cambiare l\'ordine, impostare l\'icona per le mappe, cambiare tutte le impostazioni dei profili di base e reimpostarle a quelle preimpostate 
@@ -3549,7 +3549,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_angle_param">Angolo: %s°</string>
     <string name="shared_string_angle">Angolo</string>
     <string name="recalc_angle_dialog_descr">Una linea retta sarà visualizzata fra la mia localizzazione e la destinazione finché il percorso viene elaborato</string>
-    <string name="recalc_angle_dialog_title">Angolo minimo tra la mia localizzazione e la destinazione</string>
+    <string name="recalc_angle_dialog_title">Angolo minimo tra la mia localizzazione e il percorso</string>
     <string name="shared_string_preparing">Preparando</string>
     <string name="shared_string_poi_types">Tipi di PDI</string>
     <string name="shared_string_nothing_selected">Nessuna selezione</string>
@@ -3592,21 +3592,21 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="quick_action_show_hide_terrain">Mostra/nascondi rilievo</string>
     <string name="download_slope_maps">Pendenze</string>
     <string name="shared_string_hillshade">Ombreggiatura rilievi</string>
-    <string name="slope_read_more">Puoi avere maggiori informazioni sui Rilievi in %1$s.</string>
+    <string name="slope_read_more">Puoi avere maggiori informazioni sulle Pendenze in %1$s.</string>
     <string name="shared_string_min">Min</string>
     <string name="replace_point_descr">Sostituisci un altro punto con questo</string>
     <string name="app_mode_ski_touring">Sci alpino</string>
     <string name="shared_string_rendering_style">Stile di rappresentazione</string>
     <string name="shared_string_terrain">Terreno</string>
     <string name="hillshade_description">La mappa Ombreggiamento dei rilievi utilizza le ombre per visualizzare le pendenze, i picchi e i bassipiani.</string>
-    <string name="slope_description">La pendenza è visualizzata sul terreno tramite colorazione.</string>
+    <string name="slope_description">La Pendenza è visualizzata sul terreno tramite colorazione.</string>
     <string name="terrain_slider_description">Imposta lo zoom minimo e massimo a cui lo strato sarà visualizzato.</string>
     <string name="hillshade_download_description">Sono necessarie mappe addizionali per visualizzare l\'Ombreggiatura dei rilievi sulla mappa.</string>
-    <string name="slope_download_description">Mappe addizionali sono necessarie per visualizzare i rilievi sulla mappa.</string>
+    <string name="slope_download_description">Mappe addizionali sono necessarie per visualizzare le Pendenze sulla mappa.</string>
     <string name="shared_string_transparency">Trasparenza</string>
     <string name="shared_string_zoom_levels">Livello di zoom</string>
     <string name="shared_string_legend">Legenda</string>
-    <string name="terrain_empty_state_text">Abilitalo per vedere le mappe delle ombreggiature o dei rilievi. Maggiori informazioni su questi tipi di mappe nel nostro sito</string>
+    <string name="terrain_empty_state_text">Abilitalo per vedere le mappe delle ombreggiature o della pendenza dei rilievi. Maggiori informazioni su questi tipi di mappe nel nostro sito</string>
     <string name="checking_for_duplicate_description">OsmAnd ricerca in %1$s oggetti esistenti duplicati nell\'applicazione.
 \n
 \nPuò richiedere del tempo.</string>
@@ -3618,4 +3618,11 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="settings_item_read_error">Non posso leggere %1$s.</string>
     <string name="settings_item_write_error">Non posso scrivere %1$s.</string>
     <string name="settings_item_import_error">Non posso importare %1$s.</string>
+    <string name="wiki_menu_download_descr">Mappe aggiuntive sono necessarie per visualizzare i PDI Wikipedia sulla mappa.</string>
+    <string name="select_track_file">Scegli il file della traccia</string>
+    <string name="shared_string_languages">Lingue</string>
+    <string name="shared_string_language">Lingua</string>
+    <string name="shared_string_all_languages">Tutti i linguaggi</string>
+    <string name="wikipedia_poi_languages_promo">Scegli la lingua in cui gli articoli Wikipedia appariranno nella mappa, alcuni potrebbero non essere disponibili nella tua lingua.
+\nPuoi cambiare fra i linguaggi disponibili durante la lettura degli articoli.</string>
 </resources>
