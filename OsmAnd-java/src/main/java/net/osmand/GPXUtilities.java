@@ -2015,14 +2015,21 @@ public class GPXUtilities {
 						} else if (parse instanceof Track) {
 							if (tag.equals("name")) {
 								((Track) parse).name = readText(parser, "name");
-							}
-							if (tag.equals("desc")) {
+							} else if (tag.equals("desc")) {
 								((Track) parse).desc = readText(parser, "desc");
-							}
-							if (tag.equals("trkseg")) {
+							} else if (tag.equals("trkseg")) {
 								TrkSegment trkSeg = new TrkSegment();
 								((Track) parse).segments.add(trkSeg);
 								parserState.push(trkSeg);
+							} else if (tag.equals("trkpt") || tag.equals("rpt")) {
+								WptPt wptPt = parseWptAttributes(parser);
+								int size = ((Track) parse).segments.size();
+								if (size == 0) {
+									((Track) parse).segments.add(new TrkSegment());
+									size++;
+								}
+								((Track) parse).segments.get(size - 1).points.add(wptPt);
+								parserState.push(wptPt);
 							}
 						} else if (parse instanceof TrkSegment) {
 							if (tag.equals("trkpt") || tag.equals("rpt")) {
@@ -2226,7 +2233,7 @@ public class GPXUtilities {
 		}
 		return bounds;
 	}
-
+	
 	public static void mergeGPXFileInto(GPXFile to, GPXFile from) {
 		if (from == null) {
 			return;

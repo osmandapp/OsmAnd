@@ -474,9 +474,13 @@ public class Algorithms {
 		return responseBody;
 	}
 
-	public static String gzipToString(byte[] gzip) throws IOException {
-		GZIPInputStream gzipIs = new GZIPInputStream(new ByteArrayInputStream(gzip));
-		return readFromInputStream(gzipIs).toString();
+	public static String gzipToString(byte[] gzip) {
+		try {
+			GZIPInputStream gzipIs = new GZIPInputStream(new ByteArrayInputStream(gzip));
+			return readFromInputStream(gzipIs).toString();
+		} catch (IOException e) {
+			throw new IllegalStateException(e);
+		}
 	}
 	
 	public static byte[] stringToGzip(String str) {
