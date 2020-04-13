@@ -69,9 +69,17 @@ public class ContextMenuAdapter {
 	@LayoutRes
 	private int DEFAULT_LAYOUT_ID = R.layout.list_menu_item_native;
 	List<ContextMenuItem> items = new ArrayList<>();
+	List<ContextMenuItem> hiddenItems = new ArrayList<>();
 	private boolean profileDependent = false;
 	private boolean nightMode;
 	private ConfigureMapMenu.OnClickListener changeAppModeListener = null;
+	private OsmandApplication app;
+	private HashMap<String, Integer> ordersMap;
+	private ContextMenuItemsPreference contextMenuItemsPreference;
+
+	public ContextMenuAdapter(OsmandApplication app) {
+		this.app = app;
+	}
 
 	public int length() {
 		return items.size();
@@ -87,12 +95,17 @@ public class ContextMenuAdapter {
 
 	public void addItem(ContextMenuItem item) {
 		try {
-
-
-			if (!item.isHidden()){
+			String id = item.getId();
+			if (id != null) {
+				item.setHidden(isItemHidden(id));
+				item.setOrder(getItemCustomOrder(id, item.getOrder()));
+			}
+			if (item.isHidden()) {
+				hiddenItems.add(item);
+			} else {
 				items.add(item.getPos(), item);
 			}
-
+			sortItemsByOrder();
 		} catch (IndexOutOfBoundsException ex) {
 			items.add(item);
 		}
@@ -152,42 +165,42 @@ public class ContextMenuAdapter {
 		});
 	}
 
-	public void sortItemsByCustomOrder(OsmandApplication app) {
-		ContextMenuItemsPreference pref = getPreference(app);
-		if (pref == null) {
-			sortItemsByOrder();
-			return;
-		}
-
-		List<String> hiddenIds = pref.getHiddenIds();
-		List<String> orderIds = pref.getOrderIds();
-
-		if (!Algorithms.isEmpty(orderIds)) {
-			HashMap<String, Integer> ordersMap = new HashMap<>();
-			for (int i = 0; i < orderIds.size(); i++) {
-				ordersMap.put(orderIds.get(i), i);
+	private boolean isItemHidden(@NonNull String id) {
+		if (contextMenuItemsPreference == null) {
+			contextMenuItemsPreference = getPreference(id);
+			if (contextMenuItemsPreference == null) {
+				return false;
 			}
-
-			for (ContextMenuItem item : items) {
-				Integer order = ordersMap.get(item.getId());
-				if (order != null) {
-					item.setOrder(order);
-				}
-			}
-			sortItemsByOrder();
 		}
-
+		List<String> hiddenIds = contextMenuItemsPreference.getHiddenIds();
 		if (!Algorithms.isEmpty(hiddenIds)) {
-			List<ContextMenuItem> filtered = new ArrayList<>();
-			for (ContextMenuItem item : items) {
-				if (!hiddenIds.contains(item.getId())) {
-					filtered.add(item);
-				}
-			}
-			items = filtered;
+			return hiddenIds.contains(id);
 		}
+		return false;
 	}
 
+	private int getItemCustomOrder(@NonNull String id, int defaultOrder) {
+		if (contextMenuItemsPreference == null) {
+			contextMenuItemsPreference = getPreference(id);
+			if (contextMenuItemsPreference == null) {
+				return defaultOrder;
+			}
+		}
+		List<String> orderIds = contextMenuItemsPreference.getOrderIds();
+		if (!Algorithms.isEmpty(orderIds)) {
+			if (ordersMap == null) {
+				ordersMap = new HashMap<>();
+				for (int i = 0; i < orderIds.size(); i++) {
+					ordersMap.put(orderIds.get(i), i);
+				}
+			}
+			Integer order = ordersMap.get(id);
+			if (order != null) {
+				return order;
+			}
+		}
+		return defaultOrder;
+	}
 
 	public ArrayAdapter<ContextMenuItem> createListAdapter(final Activity activity, final boolean lightTheme) {
 		final int layoutId = DEFAULT_LAYOUT_ID;
@@ -606,6 +619,10 @@ public class ContextMenuAdapter {
 		return items;
 	}
 
+	public List<ContextMenuItem> getHiddenItems() {
+		return hiddenItems;
+	}
+
 	private String getIdScheme() {
 		String idScheme = "";
 		for (ContextMenuItem item : items) {
@@ -626,17 +643,14 @@ public class ContextMenuAdapter {
 		return idScheme;
 	}
 
-	private ContextMenuItemsPreference getPreference(OsmandApplication app) {
-		for (ContextMenuItem item : items) {
-			String id = item.getId();
-			if (id != null) {
-				if (id.startsWith(DRAWER_ITEM_ID_SCHEME)) {
-					return app.getSettings().DRAWER_ITEMS;
-				} else if (id.startsWith(CONFIGURE_MAP_ITEM_ID_SCHEME)) {
-					return app.getSettings().CONFIGURE_MAP_ITEMS;
-				} else if (id.startsWith(MAP_CONTEXT_MENU_ACTIONS)) {
-					return app.getSettings().CONTEXT_MENU_ACTIONS_ITEMS;
-				}
+	private ContextMenuItemsPreference getPreference(@NonNull String id) {
+		if (app != null) {
+			if (id.startsWith(DRAWER_ITEM_ID_SCHEME)) {
+				return app.getSettings().DRAWER_ITEMS;
+			} else if (id.startsWith(CONFIGURE_MAP_ITEM_ID_SCHEME)) {
+				return app.getSettings().CONFIGURE_MAP_ITEMS;
+			} else if (id.startsWith(MAP_CONTEXT_MENU_ACTIONS)) {
+				return app.getSettings().CONTEXT_MENU_ACTIONS_ITEMS;
 			}
 		}
 		return null;

@@ -261,6 +261,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 			@Override
 			public void onClick(View v) {
 				List<ContextMenuItem> defItems = contextMenuAdapter.getDefaultItems();
+				defItems.addAll(contextMenuAdapter.getHiddenItems());
 				sortByCustomOrder(defItems, menuItemsOrder);
 				List<String> ids = new ArrayList<>();
 				for (ContextMenuItem item : defItems) {
@@ -435,6 +436,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 
 	public List<AdapterItem> getItemsForRearrangeAdapter(@Nullable List<String> hiddenItemsIds, @Nullable HashMap<String, Integer> itemsOrderIds, boolean hidden) {
 		List<ContextMenuItem> defItems = contextMenuAdapter.getDefaultItems();
+		defItems.addAll(contextMenuAdapter.getHiddenItems());
 		if (itemsOrderIds == null || itemsOrderIds.isEmpty()) {
 			initDefaultOrders(defItems);
 		} else {

@@ -437,7 +437,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public void contextMenuPoint(final double latitude, final double longitude, final ContextMenuAdapter iadapter, Object selectedObj) {
-		final ContextMenuAdapter adapter = iadapter == null ? new ContextMenuAdapter() : iadapter;
+		final ContextMenuAdapter adapter = iadapter == null ? new ContextMenuAdapter(getMyApplication()) : iadapter;
 		addActionsToAdapter(latitude, longitude, adapter, selectedObj, false);
 		showAdditionalActionsFragment(adapter, getContextMenuItemClickListener(latitude, longitude, adapter));
 	}
@@ -705,7 +705,7 @@ public class MapActivityActions implements DialogProvider {
 	public ContextMenuAdapter createMainOptionsMenu() {
 		final OsmandMapTileView mapView = mapActivity.getMapView();
 		final OsmandApplication app = mapActivity.getMyApplication();
-		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter();
+		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter(app);
 		boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		
 		if (drawerMode == DRAWER_MODE_SWITCH_PROFILE) {
@@ -1182,7 +1182,6 @@ public class MapActivityActions implements DialogProvider {
 		}
 		menuItemsListView.setDivider(null);
 		final ContextMenuAdapter contextMenuAdapter = createMainOptionsMenu();
-		contextMenuAdapter.sortItemsByCustomOrder(getMyApplication());
 		contextMenuAdapter.setDefaultLayoutId(R.layout.simple_list_menu_item);
 		final ArrayAdapter<ContextMenuItem> simpleListAdapter = contextMenuAdapter.createListAdapter(mapActivity,
 				!nightMode);

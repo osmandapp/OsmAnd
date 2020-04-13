@@ -566,7 +566,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		// Action buttons
 //		TODO refactor section
 		ContextMenuAdapter adapter = menu.getActionsContextMenuAdapter(false);
-		adapter.sortItemsByCustomOrder(requireMyApplication());
 		List<ContextMenuItem> items = adapter.getItems();
 		List<ContextMenuItem> main = new ArrayList<>();
 		List<ContextMenuItem> additional = new ArrayList<>();
@@ -582,10 +581,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				1f
 		);
 		buttons.removeAllViews();
-		ContextMenuAdapter mainAdapter = new ContextMenuAdapter();
+		ContextMenuAdapter mainAdapter = new ContextMenuAdapter(requireMyApplication());
 		mainAdapter.updateItems(main);
 		ContextMenuItemClickListener mainListener = menu.getContextMenuItemClickListener(mainAdapter);
-		ContextMenuAdapter additionalAdapter = new ContextMenuAdapter();
+		ContextMenuAdapter additionalAdapter = new ContextMenuAdapter(requireMyApplication());
 		additionalAdapter.updateItems(additional);
 		ContextMenuItemClickListener additionalListener = menu.getContextMenuItemClickListener(additionalAdapter);
 

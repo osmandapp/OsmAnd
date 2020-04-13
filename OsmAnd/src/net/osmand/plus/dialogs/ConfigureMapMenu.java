@@ -129,7 +129,7 @@ public class ConfigureMapMenu {
 		OsmandApplication app = ma.getMyApplication();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		ContextMenuAdapter adapter = new ContextMenuAdapter();
+		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(APP_PROFILES_ID)
