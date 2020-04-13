@@ -267,7 +267,8 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 					ids.add(item.getId());
 				}
 				FragmentManager fm = getFragmentManager();
-				String stringToSave = convertToJsonString(hiddenMenuItems, ids, getSettingForScreen(app, screenType).getId());
+				OsmandSettings.ContextMenuItemsPreference preference = getSettingForScreen(app, screenType);
+				String stringToSave = preference.convertToJsonString(hiddenMenuItems, ids, preference.getId());
 				if (fm != null) {
 					ChangeGeneralProfilesPrefBottomSheet.showInstance(fm,
 							getSettingForScreen(app, screenType).getId(),
@@ -293,32 +294,6 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 			AndroidUtils.addStatusBarPadding21v(app, root);
 		}
 		return root;
-	}
-
-	private String convertToJsonString(List<String> hidden, List<String> order, String id) {
-		try {
-			JSONObject json = new JSONObject();
-			JSONObject items = new JSONObject();
-			JSONArray hiddenItems = new JSONArray();
-			JSONArray orderItems = new JSONArray();
-			addIdsToJsonArray(hiddenItems, hidden);
-			addIdsToJsonArray(orderItems, order);
-			items.put(HIDDEN, hiddenItems);
-			items.put(ORDER, orderItems);
-			json.put(id, items);
-			return json.toString();
-		} catch (JSONException e) {
-			LOG.error("Error converting to json string: " + e);
-		}
-		return "";
-	}
-
-	private void addIdsToJsonArray(@NonNull JSONArray jsonArray, List<String> ids) {
-		if (ids != null && !ids.isEmpty()) {
-			for (String id : ids) {
-				jsonArray.put(id);
-			}
-		}
 	}
 
 	private List<AdapterItem> getAdapterItems() {

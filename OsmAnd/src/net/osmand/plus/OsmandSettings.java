@@ -80,6 +80,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
+
 public class OsmandSettings {
 
 	private static final Log LOG = PlatformUtil.getLog(OsmandSettings.class.getName());
@@ -1128,17 +1132,24 @@ public class OsmandSettings {
 	}
 
 	public class ContextMenuItemsPreference extends StringPreference {
+		public static final String DRAWER_ITEMS_KEY = "drawer_items";
+		public static final String CONTEXT_MENU_ITEMS_KEY = "context_menu_items";
+		public static final String CONFIGURE_MAP_ITEMS_KEY = "configure_map_items";
 		public static final String HIDDEN = "hidden";
 		public static final String ORDER = "order";
 		private List<String> hiddenIds;
 		private List<String> orderIds;
 		private Object cachedPreference;
+		private String idScheme;
 
 		private ContextMenuItemsPreference(String id, String defaultValue) {
 			super(id, defaultValue);
+			idScheme = getIdScheme(id);
 		}
 
 		private void readValues() {
+			hiddenIds = new ArrayList<>();
+			orderIds = new ArrayList<>();
 			cachedPreference = getPreferences();
 			String jsonString = get();
 			if (Algorithms.isEmpty(jsonString)) {
@@ -1147,8 +1158,6 @@ public class OsmandSettings {
 			try {
 				JSONObject json = new JSONObject(jsonString);
 				JSONObject items = json.optJSONObject(getId());
-				hiddenIds = new ArrayList<>();
-				orderIds = new ArrayList<>();
 				populateIdsList(items.optJSONArray(HIDDEN), hiddenIds);
 				populateIdsList(items.optJSONArray(ORDER), orderIds);
 			} catch (JSONException e) {
@@ -1160,7 +1169,49 @@ public class OsmandSettings {
 			if (jsonArray != null) {
 				for (int i = 0; i < jsonArray.length(); i++) {
 					String id = jsonArray.optString(i);
-					list.add(id);
+					list.add(idScheme + id);
+				}
+			}
+		}
+
+		private String getIdScheme(String id) {
+			String idScheme = "";
+			switch (id) {
+				case DRAWER_ITEMS_KEY:
+					idScheme = DRAWER_ITEM_ID_SCHEME;
+					break;
+				case CONFIGURE_MAP_ITEMS_KEY:
+					idScheme = CONFIGURE_MAP_ITEM_ID_SCHEME;
+					break;
+				case CONTEXT_MENU_ITEMS_KEY:
+					idScheme = MAP_CONTEXT_MENU_ACTIONS;
+					break;
+			}
+			return idScheme;
+		}
+
+		public String convertToJsonString(List<String> hidden, List<String> order, String id) {
+			try {
+				JSONObject json = new JSONObject();
+				JSONObject items = new JSONObject();
+				JSONArray hiddenItems = new JSONArray();
+				JSONArray orderItems = new JSONArray();
+				addIdsToJsonArray(hiddenItems, hidden);
+				addIdsToJsonArray(orderItems, order);
+				items.put(HIDDEN, hiddenItems);
+				items.put(ORDER, orderItems);
+				json.put(id, items);
+				return json.toString();
+			} catch (JSONException e) {
+				LOG.error("Error converting to json string: " + e);
+			}
+			return "";
+		}
+
+		private void addIdsToJsonArray(@NonNull JSONArray jsonArray, List<String> ids) {
+			if (ids != null && !ids.isEmpty()) {
+				for (String id : ids) {
+					jsonArray.put(id.replace(idScheme, ""));
 				}
 			}
 		}
@@ -3505,13 +3556,13 @@ public class OsmandSettings {
 			new ListStringPreference("inactive_poi_filters", null, ",,").makeProfile().cache();
 
 	public final ContextMenuItemsPreference DRAWER_ITEMS =
-			(ContextMenuItemsPreference) new ContextMenuItemsPreference("drawer_items", null).makeProfile().cache();
+			(ContextMenuItemsPreference) new ContextMenuItemsPreference(ContextMenuItemsPreference.DRAWER_ITEMS_KEY, null).makeProfile().cache();
 
 	public final ContextMenuItemsPreference CONFIGURE_MAP_ITEMS =
-			(ContextMenuItemsPreference) new ContextMenuItemsPreference("configure_map_items", null).makeProfile().cache();
+			(ContextMenuItemsPreference) new ContextMenuItemsPreference(ContextMenuItemsPreference.CONFIGURE_MAP_ITEMS_KEY, null).makeProfile().cache();
 
 	public final ContextMenuItemsPreference CONTEXT_MENU_ACTIONS_ITEMS =
-			(ContextMenuItemsPreference) new ContextMenuItemsPreference("context_menu_actions_items", null).makeProfile().cache();
+			(ContextMenuItemsPreference) new ContextMenuItemsPreference(ContextMenuItemsPreference.CONTEXT_MENU_ITEMS_KEY, null).makeProfile().cache();
 
 	public static final String VOICE_PROVIDER_NOT_USE = "VOICE_PROVIDER_NOT_USE";
 
