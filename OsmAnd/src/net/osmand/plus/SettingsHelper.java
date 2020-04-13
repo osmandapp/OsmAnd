@@ -147,19 +147,17 @@ public class SettingsHelper {
 
 		SettingsItem(OsmandApplication app) {
 			this.app = app;
-			warnings = new ArrayList<>();
 			init();
 		}
 
 		SettingsItem(OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			this.app = app;
-			warnings = new ArrayList<>();
 			init();
 			readFromJson(json);
 		}
 
 		protected void init() {
-			// override
+			warnings = new ArrayList<>();
 		}
 
 		public List<String> getWarnings() {
@@ -358,6 +356,7 @@ public class SettingsHelper {
 
 		@Override
 		protected void init() {
+			super.init();
 			pluginDependentItems = new ArrayList<>();
 		}
 
@@ -451,6 +450,7 @@ public class SettingsHelper {
 
 		@Override
 		protected void init() {
+			super.init();
 			items = new ArrayList<>();
 			appliedItems = new ArrayList<>();
 			duplicateItems = new ArrayList<>();
@@ -723,6 +723,7 @@ public class SettingsHelper {
 
 		@Override
 		protected void init() {
+			super.init();
 			drawerLogoParams = new HashMap<>();
 		}
 
