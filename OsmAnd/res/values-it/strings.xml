@@ -58,9 +58,9 @@
     <string name="pref_vector_map">Impostazioni della mappa vettoriale</string>
     <string name="delete_confirmation_msg">Eliminare %1$s?</string>
     <string name="city_type_suburb">Frazione</string>
-    <string name="city_type_hamlet">Borgata</string>
-    <string name="city_type_village">Villaggio</string>
-    <string name="city_type_town">Città</string>
+    <string name="city_type_hamlet">Piccolo borgo</string>
+    <string name="city_type_village">Paese</string>
+    <string name="city_type_town">Cittadina</string>
     <string name="city_type_city">Città</string>
     <string name="animate_route_off">Ferma animazione</string>
     <string name="animate_route">Avvia animazione</string>
