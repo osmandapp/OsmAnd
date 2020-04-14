@@ -1,4 +1,4 @@
-package net.osmand.router.ptresult;
+package net.osmand.router;
 
 public class NativeTransportRouteResultSegment {
 	public NativeTransportRoute route;

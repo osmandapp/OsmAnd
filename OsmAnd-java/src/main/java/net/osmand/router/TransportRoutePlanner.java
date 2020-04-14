@@ -27,10 +27,6 @@ import net.osmand.data.TransportStop;
 import net.osmand.data.TransportStopExit;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
-import net.osmand.router.ptresult.NativeTransportRoute;
-import net.osmand.router.ptresult.NativeTransportRouteResultSegment;
-import net.osmand.router.ptresult.NativeTransportRoutingResult;
-import net.osmand.router.ptresult.NativeTransportStop;
 import net.osmand.util.MapUtils;
 
 public class TransportRoutePlanner {
@@ -40,12 +36,10 @@ public class TransportRoutePlanner {
 	public static final long STOPS_WAY_ID = -2;
 
 	public List<TransportRouteResult> buildRoute(TransportRoutingContext ctx, LatLon start, LatLon end) throws IOException, InterruptedException {
-		/**delete*/ int cnt = 0;
 		ctx.startCalcTime = System.currentTimeMillis();
 		List<TransportRouteSegment> startStops = ctx.getTransportStops(start);
 		List<TransportRouteSegment> endStops = ctx.getTransportStops(end);
-		/** delete */ cnt = 2;
-		/** delete */System.out.println(String.format("startStops/endStops: %d / %d", startStops.size(), endStops.size()));
+
 		TLongObjectHashMap<TransportRouteSegment> endSegments = new TLongObjectHashMap<TransportRouteSegment>();
 		for(TransportRouteSegment s : endStops) {
 			endSegments.put(s.getId(), s);
@@ -120,7 +114,6 @@ public class TransportRoutePlanner {
 				}
 				sgms.clear();
 				sgms = ctx.getTransportStops(stop.x31, stop.y31, true, sgms);
-				/**delete*/cnt++;
 				ctx.visitedStops++;
 				for (TransportRouteSegment sgm : sgms) {
 					if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
@@ -190,7 +183,6 @@ public class TransportRoutePlanner {
 			updateCalculationProgress(ctx, queue);
 			
 		}
-		System.out.println(String.format("Count calls getTransportStop %d", cnt));
 		return prepareResults(ctx, results);
 	}
 	
@@ -981,7 +973,7 @@ public class TransportRoutePlanner {
 	public static List<TransportRouteResult> convertToTransportRoutingResult(NativeTransportRoutingResult[] res,
 	                                                                         TransportRoutingConfiguration cfg) {
 		List<TransportRouteResult> convertedRes = new ArrayList<TransportRouteResult>();
-		for (net.osmand.router.ptresult.NativeTransportRoutingResult ntrr : res) {
+		for (NativeTransportRoutingResult ntrr : res) {
 			TransportRouteResult trr = new TransportRouteResult(cfg);
 			trr.setFinishWalkDist(ntrr.finishWalkDist);
 			trr.setRouteTime(ntrr.routeTime);
