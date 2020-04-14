@@ -24,7 +24,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -36,7 +35,6 @@ import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItem;
 import net.osmand.plus.OsmandSettings.ContextMenuItemsPreference;
 import net.osmand.util.Algorithms;
 
@@ -46,7 +44,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -56,7 +53,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
-import static net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItemType.MENU_ITEM;
 
 public class ContextMenuAdapter {
 	private static final Log LOG = PlatformUtil.getLog(ContextMenuAdapter.class);
@@ -74,8 +70,6 @@ public class ContextMenuAdapter {
 	private boolean nightMode;
 	private ConfigureMapMenu.OnClickListener changeAppModeListener = null;
 	private OsmandApplication app;
-	private HashMap<String, Integer> ordersMap;
-	private ContextMenuItemsPreference contextMenuItemsPreference;
 
 	public ContextMenuAdapter(OsmandApplication app) {
 		this.app = app;
@@ -98,7 +92,7 @@ public class ContextMenuAdapter {
 			String id = item.getId();
 			if (id != null) {
 				item.setHidden(isItemHidden(id));
-				item.setOrder(getItemCustomOrder(id, item.getOrder()));
+				item.setOrder(getItemOrder(id, item.getOrder()));
 			}
 			if (item.isHidden()) {
 				hiddenItems.add(item);
@@ -166,12 +160,10 @@ public class ContextMenuAdapter {
 	}
 
 	private boolean isItemHidden(@NonNull String id) {
-		if (contextMenuItemsPreference == null) {
-			contextMenuItemsPreference = getPreference(id);
+		ContextMenuItemsPreference contextMenuItemsPreference = app.getSettings().getContextMenuItemsPreference(id);
 			if (contextMenuItemsPreference == null) {
 				return false;
 			}
-		}
 		List<String> hiddenIds = contextMenuItemsPreference.getHiddenIds();
 		if (!Algorithms.isEmpty(hiddenIds)) {
 			return hiddenIds.contains(id);
@@ -179,23 +171,15 @@ public class ContextMenuAdapter {
 		return false;
 	}
 
-	private int getItemCustomOrder(@NonNull String id, int defaultOrder) {
-		if (contextMenuItemsPreference == null) {
-			contextMenuItemsPreference = getPreference(id);
+	private int getItemOrder(@NonNull String id, int defaultOrder) {
+		ContextMenuItemsPreference contextMenuItemsPreference = app.getSettings().getContextMenuItemsPreference(id);
 			if (contextMenuItemsPreference == null) {
 				return defaultOrder;
 			}
-		}
 		List<String> orderIds = contextMenuItemsPreference.getOrderIds();
 		if (!Algorithms.isEmpty(orderIds)) {
-			if (ordersMap == null) {
-				ordersMap = new HashMap<>();
-				for (int i = 0; i < orderIds.size(); i++) {
-					ordersMap.put(orderIds.get(i), i);
-				}
-			}
-			Integer order = ordersMap.get(id);
-			if (order != null) {
+			int order = orderIds.indexOf(id);
+			if (order != -1) {
 				return order;
 			}
 		}
@@ -641,18 +625,5 @@ public class ContextMenuAdapter {
 			}
 		}
 		return idScheme;
-	}
-
-	private ContextMenuItemsPreference getPreference(@NonNull String id) {
-		if (app != null) {
-			if (id.startsWith(DRAWER_ITEM_ID_SCHEME)) {
-				return app.getSettings().DRAWER_ITEMS;
-			} else if (id.startsWith(CONFIGURE_MAP_ITEM_ID_SCHEME)) {
-				return app.getSettings().CONFIGURE_MAP_ITEMS;
-			} else if (id.startsWith(MAP_CONTEXT_MENU_ACTIONS)) {
-				return app.getSettings().CONTEXT_MENU_ACTIONS_ITEMS;
-			}
-		}
-		return null;
 	}
 }

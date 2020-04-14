@@ -1132,9 +1132,6 @@ public class OsmandSettings {
 	}
 
 	public class ContextMenuItemsPreference extends StringPreference {
-		public static final String DRAWER_ITEMS_KEY = "drawer_items";
-		public static final String CONTEXT_MENU_ITEMS_KEY = "context_menu_items";
-		public static final String CONFIGURE_MAP_ITEMS_KEY = "configure_map_items";
 		public static final String HIDDEN = "hidden";
 		public static final String ORDER = "order";
 		private List<String> hiddenIds;
@@ -1142,9 +1139,9 @@ public class OsmandSettings {
 		private Object cachedPreference;
 		private String idScheme;
 
-		private ContextMenuItemsPreference(String id, String defaultValue) {
-			super(id, defaultValue);
-			idScheme = getIdScheme(id);
+		private ContextMenuItemsPreference(String id, String idScheme) {
+			super(id, "");
+			this.idScheme = idScheme;
 		}
 
 		private void readValues() {
@@ -1172,22 +1169,6 @@ public class OsmandSettings {
 					list.add(idScheme + id);
 				}
 			}
-		}
-
-		private String getIdScheme(String id) {
-			String idScheme = "";
-			switch (id) {
-				case DRAWER_ITEMS_KEY:
-					idScheme = DRAWER_ITEM_ID_SCHEME;
-					break;
-				case CONFIGURE_MAP_ITEMS_KEY:
-					idScheme = CONFIGURE_MAP_ITEM_ID_SCHEME;
-					break;
-				case CONTEXT_MENU_ITEMS_KEY:
-					idScheme = MAP_CONTEXT_MENU_ACTIONS;
-					break;
-			}
-			return idScheme;
 		}
 
 		public String convertToJsonString(List<String> hidden, List<String> order, String id) {
@@ -3556,13 +3537,25 @@ public class OsmandSettings {
 			new ListStringPreference("inactive_poi_filters", null, ",,").makeProfile().cache();
 
 	public final ContextMenuItemsPreference DRAWER_ITEMS =
-			(ContextMenuItemsPreference) new ContextMenuItemsPreference(ContextMenuItemsPreference.DRAWER_ITEMS_KEY, null).makeProfile().cache();
+			(ContextMenuItemsPreference) new ContextMenuItemsPreference("drawer_items", DRAWER_ITEM_ID_SCHEME).makeProfile().cache();
 
 	public final ContextMenuItemsPreference CONFIGURE_MAP_ITEMS =
-			(ContextMenuItemsPreference) new ContextMenuItemsPreference(ContextMenuItemsPreference.CONFIGURE_MAP_ITEMS_KEY, null).makeProfile().cache();
+			(ContextMenuItemsPreference) new ContextMenuItemsPreference("context_menu_items", CONFIGURE_MAP_ITEM_ID_SCHEME).makeProfile().cache();
 
 	public final ContextMenuItemsPreference CONTEXT_MENU_ACTIONS_ITEMS =
-			(ContextMenuItemsPreference) new ContextMenuItemsPreference(ContextMenuItemsPreference.CONTEXT_MENU_ITEMS_KEY, null).makeProfile().cache();
+			(ContextMenuItemsPreference) new ContextMenuItemsPreference("configure_map_items", MAP_CONTEXT_MENU_ACTIONS).makeProfile().cache();
+
+	public final List<ContextMenuItemsPreference> contextMenuItemsPreferences = Arrays.asList(DRAWER_ITEMS, CONFIGURE_MAP_ITEMS, CONTEXT_MENU_ACTIONS_ITEMS);
+
+	@Nullable
+	public ContextMenuItemsPreference getContextMenuItemsPreference(@NonNull String id) {
+		for (ContextMenuItemsPreference preference : contextMenuItemsPreferences) {
+			if (id.startsWith(preference.idScheme)) {
+				return preference;
+			}
+		}
+		return null;
+	}
 
 	public static final String VOICE_PROVIDER_NOT_USE = "VOICE_PROVIDER_NOT_USE";
 
