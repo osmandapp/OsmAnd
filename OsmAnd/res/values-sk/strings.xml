@@ -3604,4 +3604,11 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="settings_item_read_error">Nepodarilo sa prečítať %1$s.</string>
     <string name="settings_item_write_error">Nepodarilo sa zapísať %1$s.</string>
     <string name="settings_item_import_error">Nepodarilo sa importovať %1$s.</string>
+    <string name="select_track_file">Zvoľte súbor stopy</string>
+    <string name="shared_string_languages">Jazyky</string>
+    <string name="shared_string_language">Jazyk</string>
+    <string name="shared_string_all_languages">Všetky jazyky</string>
+    <string name="wikipedia_poi_languages_promo">Niektoré články Wikipedia nemusia byť dostupné vo vašom jazyku. Zvoľte jazyky, v ktorých sa články Wikipedia budú zobrazovať na mape.
+\nPri čítaní článku budete môcť prepínať medzi všetkými dostupnými jazykmi.</string>
+    <string name="wiki_menu_download_descr">Pre zobrazenie bodov Wikipedie na mape sú potrebné ďalšie mapy.</string>
 </resources>

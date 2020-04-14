@@ -58,9 +58,9 @@
     <string name="pref_vector_map">Impostazioni della mappa vettoriale</string>
     <string name="delete_confirmation_msg">Eliminare %1$s?</string>
     <string name="city_type_suburb">Frazione</string>
-    <string name="city_type_hamlet">Borgata</string>
-    <string name="city_type_village">Villaggio</string>
-    <string name="city_type_town">Città</string>
+    <string name="city_type_hamlet">Piccolo borgo</string>
+    <string name="city_type_village">Paese</string>
+    <string name="city_type_town">Cittadina</string>
     <string name="city_type_city">Città</string>
     <string name="animate_route_off">Ferma animazione</string>
     <string name="animate_route">Avvia animazione</string>
@@ -3464,7 +3464,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="select_map_icon_descr">Icona visualizzata da fermi.</string>
     <string name="search_offline_geo_error">Impossibile analizzare il dato geo \'%s\'.</string>
     <string name="monitoring_min_speed_descr">Questo è un filtro delle basse velocità per non registrare i punti inferiori a una data velocità. Questo può permettere di registrare tracce dall\'aspetto più pulito quando visualizzate sulla mappa.</string>
-    <string name="monitoring_min_speed_descr_side_effect">Effetto collaterale: alle tue tracce mancheranno tutte le sezioni in cui il criterio della velocità non sarà soddisfatto (es. quando spingi la tua bici in una elevata pendenza). Altrettanto non ci saranno informazioni nei periodi di riposo o ristoro. Questo ha effetto su tutte le analisi ed elaborazione dei dati, come quando si prova a determinare la lunghezza totale del tuo percorso, il tempo in movimento, o la velocità media.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Effetto collaterale: alle tue tracce mancheranno tutte le sezioni in cui il criterio della velocità non sarà soddisfatto (es. quando spingi la tua bici in un\'elevata pendenza). Altrettanto non ci saranno informazioni nei periodi di riposo o ristoro. Questo ha effetto su tutte le analisi ed elaborazione dei dati, come quando si prova a determinare la lunghezza totale del tuo percorso, il tempo in movimento, o la velocità media.</string>
     <string name="monitoring_min_speed_descr_recommendation">Raccomandazione: prova prima a utilizzare il sensore del movimento attraverso la registrazione del filtro del minimo dislocamento (B), potrebbe produrre migliori risultati, e perderai meno dati. Se le tue tracce continuano a essere sporche a basse velocità, prova con valori maggiori di zero. Si prega di notare che alcune misurazioni possono non riportare nessuna velocità (alcuni metodi basti sulle reti), in questi casi non registrerai alcun dato.</string>
     <string name="monitoring_min_speed_descr_remark">Osservazione: controllo velocità &gt; 0 : molti chip GPS riportano un valore di velocità solo se l\'algoritmo determina che tu sei in movimento, e nessuno invece se non lo sei. Quindi utilizzando l\'impostazione &gt; 0 nel filtro, in un certo senso utilizza il sensore di movimento del chip GPS. Ma anche se non filtrati qui nel momento della registrazione, comunque utilizziamo questa caratteristica nell\'analisi dei nostri file GPX per determinare al distanza corretta, es. il valore visualizzato in questo campo è la distanza registrata finché si è in movimento.</string>
     <string name="monitoring_min_accuracy_descr">Questo registrerà solo punti misurati con un\'accuratezza minima (in metri/piedi, come riportati da Android per il tuo chipset). L\'accuratezza si riferisce alla variabilità di misure ripetute, e non è direttamente correlato alla precisione, che definisce quanto la tua misurazione è vicina alla vera posizione.</string>
@@ -3540,7 +3540,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_custom_rendering_style">Stile di rappresentazione personalizzato</string>
     <string name="shared_string_include_data">Include dati addizionali</string>
     <string name="import_profile_dialog_description">Il profilo importato contiene datti aggiuntivi. Clicca Importa per importare solo i dati del profilo o scegli i dati aggiuntivi da importare.</string>
-    <string name="export_profile_dialog_description">Puoi selezionare dati aggiuntivi da esportare unitamente al profilo.</string>
+    <string name="export_profile_dialog_description">Puoi selezionare dati aggiuntivi da esportare assieme al profilo.</string>
     <string name="index_name_antarctica">Antartide</string>
     <string name="navigation_notification_desc">Mostra le notifiche di sistema con le istruzioni di navigazione durante la navigazione.</string>
     <string name="navigation_notification">Notifiche di navigazione</string>
@@ -3618,11 +3618,11 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="settings_item_read_error">Non posso leggere %1$s.</string>
     <string name="settings_item_write_error">Non posso scrivere %1$s.</string>
     <string name="settings_item_import_error">Non posso importare %1$s.</string>
-    <string name="wiki_menu_download_descr">Mappe aggiuntive sono necessarie per visualizzare i PDI Wikipedia sulla mappa.</string>
+    <string name="wiki_menu_download_descr">Sono necessarie mappe aggiuntive per visualizzare sulla mappa i PDI Wikipedia.</string>
     <string name="select_track_file">Scegli il file della traccia</string>
     <string name="shared_string_languages">Lingue</string>
     <string name="shared_string_language">Lingua</string>
-    <string name="shared_string_all_languages">Tutti i linguaggi</string>
-    <string name="wikipedia_poi_languages_promo">Scegli la lingua in cui gli articoli Wikipedia appariranno nella mappa, alcuni potrebbero non essere disponibili nella tua lingua.
-\nPuoi cambiare fra i linguaggi disponibili durante la lettura degli articoli.</string>
+    <string name="shared_string_all_languages">Tutte le lingue</string>
+    <string name="wikipedia_poi_languages_promo">Alcuni articoli Wikipedia potrebbero non essere disponibili nella tua lingua, scegli il linguaggio con cui appariranno sulla mappa.
+\nDurante la lettura potrai cambiare fra tutte le lingue disponibili.</string>
 </resources>
