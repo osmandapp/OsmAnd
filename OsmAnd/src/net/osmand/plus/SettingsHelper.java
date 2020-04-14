@@ -16,12 +16,16 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
+import net.osmand.map.WorldRegion;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.plus.CustomOsmandPlugin.SuggestedDownloadItem;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadResourceGroup;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -559,7 +563,7 @@ public class SettingsHelper {
 
 	public static class DownloadsItem extends SettingsItem {
 
-		private List<DownloadDataContainer> items;
+		private List<CustomRegion> items;
 
 		DownloadsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			super(app, json);
@@ -594,7 +598,7 @@ public class SettingsHelper {
 			super.apply();
 		}
 
-		public List<DownloadDataContainer> getItems() {
+		public List<CustomRegion> getItems() {
 			return items;
 		}
 
@@ -604,51 +608,22 @@ public class SettingsHelper {
 				if (!json.has("items")) {
 					return;
 				}
+				Map<String, CustomRegion> customRegions = new HashMap<>();
 				JSONArray jsonArray = json.getJSONArray("items");
 				for (int i = 0; i < jsonArray.length(); i++) {
 					JSONObject object = jsonArray.getJSONObject(i);
-					String scopeId = object.optString("scope-id", null);
-					String path = object.optString("path", null);
-					String type = object.optString("type", null);
-					String folder = object.optString("folder", null);
-
-					JSONObject namesJson = object.optJSONObject("name");
-					Map<String, String> names = new HashMap<>();
-					if (namesJson != null) {
-						for (Iterator<String> it = namesJson.keys(); it.hasNext(); ) {
-							String localeKey = it.next();
-							String name = namesJson.getString(localeKey);
-							names.put(localeKey, name);
+					CustomRegion region = CustomRegion.createCustomRegionFromJson(app, object);
+					customRegions.put(region.path, region);
+				}
+				for (CustomRegion region : customRegions.values()) {
+					if (!Algorithms.isEmpty(region.parentPath)) {
+						CustomRegion parentReg = customRegions.get(region.parentPath);
+						if (parentReg != null) {
+							parentReg.addSubregion(region);
 						}
+					} else {
+						items.add(region);
 					}
-
-					JSONObject iconJson = object.optJSONObject("icon");
-					Map<String, String> icons = new HashMap<>();
-					if (iconJson != null) {
-						for (Iterator<String> it = iconJson.keys(); it.hasNext(); ) {
-							String localeKey = it.next();
-							String name = iconJson.getString(localeKey);
-							icons.put(localeKey, name);
-						}
-					}
-
-					JSONObject headerJson = object.optJSONObject("header");
-					Map<String, String> headers = new HashMap<>();
-					if (headerJson != null) {
-						for (Iterator<String> it = headerJson.keys(); it.hasNext(); ) {
-							String localeKey = it.next();
-							String name = headerJson.getString(localeKey);
-							headers.put(localeKey, name);
-						}
-					}
-
-					String headerButton = object.optString("header-button", null);
-
-					JSONArray downloadItemsArray = object.optJSONArray("items");
-
-					DownloadDataContainer dataContainer = new DownloadDataContainer(scopeId, path, type, folder, downloadItemsArray, names, icons, headers, headerButton);
-
-					items.add(dataContainer);
 				}
 			} catch (JSONException e) {
 				warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
@@ -661,7 +636,7 @@ public class SettingsHelper {
 			JSONArray jsonArray = new JSONArray();
 			if (!items.isEmpty()) {
 				try {
-					for (DownloadDataContainer downloadItem : items) {
+					for (CustomRegion downloadItem : items) {
 						JSONObject jsonObject = new JSONObject();
 
 						if (!Algorithms.isEmpty(downloadItem.scopeId)) {
@@ -704,8 +679,8 @@ public class SettingsHelper {
 							jsonObject.put("header", headerJson);
 						}
 
-						if (downloadItem.downloadItemsArray != null) {
-							jsonObject.put("items", downloadItem.downloadItemsArray);
+						if (downloadItem.downloadItems != null) {
+//							jsonObject.put("items", downloadItem.downloadItems);
 						}
 
 						jsonArray.put(jsonObject);
@@ -732,33 +707,112 @@ public class SettingsHelper {
 		}
 	}
 
-	public static class DownloadDataContainer {
+	public static class CustomRegion extends WorldRegion {
 
-		String scopeId;
-		String path;
-		String type;
-		String folder;
-		String headerButton;
-		JSONArray downloadItemsArray;
-		Map<String, String> names;
-		Map<String, String> icons;
-		Map<String, String> headers;
+		public String scopeId;
+		public String path;
+		public String parentPath;
+		public String type;
+		public String folder;
+		public String headerButton;
+		public List<IndexItem> downloadItems = new ArrayList<>();
+		public Map<String, String> names;
+		public Map<String, String> icons;
+		public Map<String, String> headers;
 
-		public DownloadDataContainer(String scopeId, String path, String type, String folder,
-		                             JSONArray downloadItemsArray,
-		                             Map<String, String> names,
-		                             Map<String, String> icons,
-		                             Map<String, String> headers,
-		                             String headerButton) {
+		private CustomRegion(String scopeId, String path, String type) {
+			super(path, null);
 			this.scopeId = scopeId;
 			this.path = path;
 			this.type = type;
-			this.folder = folder;
-			this.downloadItemsArray = downloadItemsArray;
-			this.names = names;
-			this.icons = icons;
-			this.headers = headers;
-			this.headerButton = headerButton;
+		}
+
+		public static CustomRegion createCustomRegionFromJson(OsmandApplication app, JSONObject object) throws JSONException {
+			String scopeId = object.optString("scope-id", null);
+			String path = object.optString("path", null);
+			String type = object.optString("type", null);
+			String folder = object.optString("folder", null);
+
+			CustomRegion region = new CustomRegion(scopeId, path, type);
+
+			int index = path.lastIndexOf(File.separator);
+			if (index != -1) {
+				region.parentPath = path.substring(0, index);
+			}
+
+			JSONObject namesJson = object.optJSONObject("name");
+			Map<String, String> names = new HashMap<>();
+			if (namesJson != null) {
+				for (Iterator<String> it = namesJson.keys(); it.hasNext(); ) {
+					String localeKey = it.next();
+					String name = namesJson.getString(localeKey);
+					names.put(localeKey, name);
+				}
+
+				region.regionName = names.get("");
+				region.regionNameEn = names.get("");
+				region.regionFullName = names.get("");
+				region.regionNameLocale = names.get("");
+				if (Algorithms.isEmpty(region.regionName)) {
+					region.regionName = names.get("");
+				}
+				if (Algorithms.isEmpty(region.regionName)) {
+					region.regionName = DownloadResourceGroup.DownloadResourceGroupType.REGION.getDefaultId();
+				}
+			}
+
+			JSONObject iconJson = object.optJSONObject("icon");
+			Map<String, String> icons = new HashMap<>();
+			if (iconJson != null) {
+				for (Iterator<String> it = iconJson.keys(); it.hasNext(); ) {
+					String localeKey = it.next();
+					String name = iconJson.getString(localeKey);
+					icons.put(localeKey, name);
+				}
+			}
+
+			JSONObject headerJson = object.optJSONObject("header");
+			Map<String, String> headers = new HashMap<>();
+			if (headerJson != null) {
+				for (Iterator<String> it = headerJson.keys(); it.hasNext(); ) {
+					String localeKey = it.next();
+					String name = headerJson.getString(localeKey);
+					headers.put(localeKey, name);
+				}
+			}
+
+			String headerButton = object.optString("header-button", null);
+
+			JSONArray downloadItemsArray = object.optJSONArray("items");
+			if (downloadItemsArray != null) {
+				for (int i = 0; i < downloadItemsArray.length(); i++) {
+					JSONObject indexItemJson = downloadItemsArray.getJSONObject(i);
+
+					JSONObject indexNamesJson = indexItemJson.optJSONObject("name");
+					Map<String, String> indexNames = new HashMap<>();
+					if (namesJson != null) {
+						for (Iterator<String> it = namesJson.keys(); it.hasNext(); ) {
+							String localeKey = it.next();
+							String name = namesJson.getString(localeKey);
+							names.put(localeKey, name);
+						}
+					}
+					String fileName = indexItemJson.optString("filename");
+					String description = indexItemJson.optString("description");
+					long timestamp = indexItemJson.optLong("timestamp") * 1000;
+					String size = indexItemJson.optString("contentSize");
+					long contentSize = indexItemJson.optLong("contentSize");
+					long containerSize = indexItemJson.optLong("containerSize");
+					String indexType = indexItemJson.optString("type", null);
+
+					@NonNull DownloadActivityType tp = DownloadActivityType.getIndexType(indexType);
+					if (tp != null) {
+						IndexItem indexItem = new IndexItem(fileName, description, timestamp, size, contentSize, containerSize, tp);
+						region.downloadItems.add(indexItem);
+					}
+				}
+			}
+			return region;
 		}
 	}
 	

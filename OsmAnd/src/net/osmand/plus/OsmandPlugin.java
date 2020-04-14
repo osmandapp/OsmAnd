@@ -44,7 +44,7 @@ import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.SettingsHelper.DownloadDataContainer;
+import net.osmand.plus.SettingsHelper.CustomRegion;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -183,7 +183,7 @@ public abstract class OsmandPlugin {
 		return Collections.emptyList();
 	}
 
-	public List<DownloadDataContainer> getDownloadMaps() {
+	public List<CustomRegion> getDownloadMaps() {
 		return Collections.emptyList();
 	}
 
@@ -648,6 +648,14 @@ public abstract class OsmandPlugin {
 			}
 		}
 		return null;
+	}
+
+	public static List<CustomRegion> getCustomDownloadRegions() {
+		List<CustomRegion> l = new ArrayList<CustomRegion>();
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			l.addAll(plugin.getDownloadMaps());
+		}
+		return l;
 	}
 
 	public static List<String> getDisabledRendererNames() {

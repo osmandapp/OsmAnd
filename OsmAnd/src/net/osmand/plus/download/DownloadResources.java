@@ -9,8 +9,11 @@ import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.SettingsHelper.CustomRegion;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -363,6 +366,15 @@ public class DownloadResources extends DownloadResourceGroup {
 		}
 		this.groupByRegion = groupByRegion;
 
+		List<CustomRegion> customRegions = OsmandPlugin.getCustomDownloadRegions();
+		if (!Algorithms.isEmpty(customRegions)) {
+			DownloadResourceGroup downloadResourceGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.EXTRA_MAPS);
+			addGroup(downloadResourceGroup);
+			for (CustomRegion region : customRegions) {
+				buildRegionsGroups(region, downloadResourceGroup);
+			}
+		}
+
 		LinkedList<WorldRegion> queue = new LinkedList<WorldRegion>();
 		LinkedList<DownloadResourceGroup> parent = new LinkedList<DownloadResourceGroup>();
 		DownloadResourceGroup worldSubregions = new DownloadResourceGroup(this, DownloadResourceGroupType.SUBREGIONS);
@@ -431,6 +443,37 @@ public class DownloadResources extends DownloadResourceGroup {
 		trimEmptyGroups();
 		updateLoadedFiles();
 		return true;
+	}
+
+	private void buildRegionsGroups(WorldRegion region, DownloadResourceGroup group) {
+		LinkedList<WorldRegion> queue = new LinkedList<WorldRegion>();
+		LinkedList<DownloadResourceGroup> parent = new LinkedList<DownloadResourceGroup>();
+		queue.add(region);
+		parent.add(group);
+		while (!queue.isEmpty()) {
+			WorldRegion reg = queue.pollFirst();
+			DownloadResourceGroup parentGroup = parent.pollFirst();
+			List<WorldRegion> subregions = reg.getSubregions();
+			DownloadResourceGroup mainGrp = new DownloadResourceGroup(parentGroup, DownloadResourceGroupType.REGION, reg.getRegionId());
+			mainGrp.region = reg;
+			parentGroup.addGroup(mainGrp);
+
+//			List<IndexItem> list = groupByRegion.get(reg);
+			if (reg instanceof CustomRegion && ((CustomRegion) reg).downloadItems != null) {
+				DownloadResourceGroup flatFiles = new DownloadResourceGroup(mainGrp, DownloadResourceGroupType.REGION_MAPS);
+				for (IndexItem ii : ((CustomRegion) reg).downloadItems) {
+					flatFiles.addItem(ii);
+				}
+				mainGrp.addGroup(flatFiles);
+			}
+			DownloadResourceGroup subRegions = new DownloadResourceGroup(mainGrp, DownloadResourceGroupType.SUBREGIONS);
+			mainGrp.addGroup(subRegions);
+			// add to processing queue
+			for (WorldRegion rg : subregions) {
+				queue.add(rg);
+				parent.add(subRegions);
+			}
+		}
 	}
 
 	/**
