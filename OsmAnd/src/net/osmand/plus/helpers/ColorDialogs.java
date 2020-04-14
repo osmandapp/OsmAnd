@@ -1,6 +1,5 @@
 package net.osmand.plus.helpers;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -171,8 +170,8 @@ public class ColorDialogs {
 		colorSpinner.setSelection(selection);
 	}
 
-	public static void setupColorSpinnerEx(final Activity ctx, int selectedColor, final Spinner colorSpinner,
-										   final TIntArrayList colors, OnItemSelectedListener listener) {
+	public static void setupColorSpinnerEx(final Context ctx, int selectedColor, final Spinner colorSpinner,
+	                                       final TIntArrayList colors, OnItemSelectedListener listener) {
 		colors.add(pallette);
 		List<String> colorNames = new ArrayList<String>();
 		int selection = -1;
@@ -237,9 +236,8 @@ public class ColorDialogs {
 		return "#" + c; //$NON-NLS-1$
 	}
 
-	private static Drawable getIcon(final Activity activity, int resId, int color) {
-		OsmandApplication app = (OsmandApplication)activity.getApplication();
-		Drawable d = app.getResources().getDrawable(resId).mutate();
+	private static Drawable getIcon(final Context ctx, int resId, int color) {
+		Drawable d = ctx.getResources().getDrawable(resId).mutate();
 		d.clearColorFilter();
 		d.setColorFilter(color, PorterDuff.Mode.SRC_IN);
 		return d;
@@ -256,7 +254,7 @@ public class ColorDialogs {
 		return colorName;
 	}
 
-	private static int dpToPx(final Activity activity, float dp) {
+	private static int dpToPx(final Context activity, float dp) {
 		Resources r = activity.getResources();
 		return (int) TypedValue.applyDimension(
 				COMPLEX_UNIT_DIP,
