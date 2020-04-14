@@ -29,6 +29,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:orientation="horizontal"
+        android:paddingRight="@dimen/list_header_padding"
+        android:paddingEnd="@dimen/list_header_padding"
         android:paddingLeft="@dimen/list_header_padding"
         android:paddingStart="@dimen/list_header_padding">
 
@@ -41,10 +43,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="@dimen/list_content_padding"
                 android:focusable="false"
                 android:visibility="gone"
                 tools:visibility="visible"
+                android:layout_marginLeft="@dimen/list_header_padding"
+                android:layout_marginStart="@dimen/list_header_padding"
+                android:layout_marginRight="@dimen/list_content_padding"
                 android:layout_marginEnd="@dimen/list_content_padding" />
 
             <ImageView
@@ -53,8 +57,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:scaleType="center"
-                android:layout_marginRight="@dimen/list_header_settings_top_margin"
-                android:layout_marginEnd="@dimen/list_header_settings_top_margin" />
+                android:layout_marginRight="@dimen/list_header_text_left_margin"
+                android:layout_marginEnd="@dimen/list_header_text_left_margin"
+                android:contentDescription="@string/favorite" />
         </FrameLayout>
 
         <LinearLayout
@@ -63,10 +68,8 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:paddingTop="6dp"
-            android:paddingRight="@dimen/list_content_padding"
-            android:paddingBottom="6dp"
-            android:paddingEnd="@dimen/list_content_padding">
+            android:paddingTop="@dimen/context_menu_padding_margin_tiny"
+            android:paddingBottom="@dimen/context_menu_padding_margin_tiny">
 
             <TextView
                 android:id="@+id/favourite_label"
@@ -86,37 +89,39 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top"
-                    android:layout_marginTop="2dp"
-                    android:src="@drawable/ic_direction_arrow" />
+                    android:layout_marginTop="@dimen/subHeaderPadding"
+                    android:src="@drawable/ic_direction_arrow"
+                    android:contentDescription="@string/show_view_angle" />
 
                 <TextView
                     android:id="@+id/distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
+                    android:layout_marginLeft="@dimen/subHeaderPadding"
                     android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/default_sub_text_size"
                     tools:text="100500 km"
-                    android:layout_marginStart="2dp" />
+                    android:layout_marginStart="@dimen/subHeaderPadding" />
 
                 <ImageView
                     android:id="@+id/group_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="4dp"
+                    android:layout_marginLeft="@dimen/list_item_button_padding"
                     android:src="@drawable/ic_small_group"
-                    android:layout_marginStart="4dp" />
+                    android:layout_marginStart="@dimen/list_item_button_padding"
+                    android:contentDescription="@string/favorite_category_name" />
 
                 <TextView
                     android:id="@+id/group_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="2dp"
+                    android:layout_marginLeft="@dimen/subHeaderPadding"
                     android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/default_sub_text_size"
-                    android:layout_marginStart="2dp" />
+                    android:layout_marginStart="@dimen/subHeaderPadding" />
             </LinearLayout>
         </LinearLayout>
 

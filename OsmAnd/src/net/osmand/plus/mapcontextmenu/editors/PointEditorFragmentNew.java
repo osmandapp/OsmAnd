@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -65,7 +67,7 @@ import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 
-	public static final String TAG = "PointEditorFragmentNew";
+	public static final String TAG = PointEditorFragmentNew.class.getSimpleName();
 
 	private View view;
 	private EditText nameEdit;
@@ -87,6 +89,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	private View descriptionCaption;
 	private EditText descriptionEdit;
 
+	@SuppressLint("ClickableViewAccessibility")
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
@@ -95,6 +98,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		view = UiUtilities.getMaterialInflater(getContext(), nightMode)
 				.inflate(R.layout.point_editor_fragment_new, container, false);
+		AndroidUtils.addStatusBarPadding21v(getActivity(), view);
 
 		final PointEditor editor = getEditor();
 		if (editor == null) {
@@ -131,6 +135,8 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 				if (scrollViewY != scrollView.getScrollY()) {
 					scrollViewY = scrollView.getScrollY();
 					hideKeyboard();
+					descriptionEdit.clearFocus();
+					nameEdit.clearFocus();
 				}
 			}
 		});
@@ -259,6 +265,23 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		createShapeSelector();
 		updateColorSelector(selectedColor, view);
 		updateShapeSelector(selectedShape, view);
+		scrollView.setOnTouchListener(new View.OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				descriptionEdit.getParent().requestDisallowInterceptTouchEvent(false);
+				return false;
+			}
+		});
+
+		descriptionEdit.setOnTouchListener(new View.OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				descriptionEdit.getParent().requestDisallowInterceptTouchEvent(true);
+				return false;
+			}
+		});
 
 		return view;
 	}
@@ -442,10 +465,11 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			}
 			IconCategoriesAdapter iconCategoriesAdapter = new IconCategoriesAdapter();
 			iconCategoriesAdapter.setItems(new ArrayList<>(iconCategories.keySet()));
-			RecyclerView groupNameRecyclerView = view.findViewById(R.id.group_name_recycler_view);
-			groupNameRecyclerView.setAdapter(iconCategoriesAdapter);
-			groupNameRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
+			RecyclerView iconCategoriesRecyclerView = view.findViewById(R.id.group_name_recycler_view);
+			iconCategoriesRecyclerView.setAdapter(iconCategoriesAdapter);
+			iconCategoriesRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
 			iconCategoriesAdapter.notifyDataSetChanged();
+			iconCategoriesRecyclerView.scrollToPosition(iconCategoriesAdapter.getItemPosition(selectedIconCategory));
 			for (String name : iconNameList) {
 				selectIcon.addView(createIconItemView(name, selectIcon), new FlowLayout.LayoutParams(0, 0));
 			}
@@ -562,7 +586,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 
 	@Override
 	protected boolean isFullScreenAllowed() {
-		return false;
+		return true;
 	}
 
 	private void hideKeyboard() {
@@ -919,6 +943,10 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		@Override
 		public int getItemCount() {
 			return items.size();
+		}
+
+		int getItemPosition(String name) {
+			return items.indexOf(name);
 		}
 	}
 
