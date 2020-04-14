@@ -23,6 +23,7 @@ import net.osmand.plus.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.plus.CustomOsmandPlugin.SuggestedDownloadItem;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.download.CustomIndexItem;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.IndexItem;
@@ -52,6 +53,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -731,7 +733,10 @@ public class SettingsHelper {
 			String scopeId = object.optString("scope-id", null);
 			String path = object.optString("path", null);
 			String type = object.optString("type", null);
-			String folder = object.optString("folder", null);
+			String subfolder = null;
+			if ("gpx".equals(type)) {
+				subfolder = object.optString("subfolder", null);
+			}
 
 			CustomRegion region = new CustomRegion(scopeId, path, type);
 
@@ -797,17 +802,20 @@ public class SettingsHelper {
 							names.put(localeKey, name);
 						}
 					}
-					String fileName = indexItemJson.optString("filename");
-					String description = indexItemJson.optString("description");
 					long timestamp = indexItemJson.optLong("timestamp") * 1000;
-					String size = indexItemJson.optString("contentSize");
 					long contentSize = indexItemJson.optLong("contentSize");
 					long containerSize = indexItemJson.optLong("containerSize");
-					String indexType = indexItemJson.optString("type", null);
+
+					String fileName = indexItemJson.optString("filename");
+					String description = indexItemJson.optString("description");
+					String downloadurl = indexItemJson.optString("downloadurl");
+					String size = new DecimalFormat("#.#").format(containerSize / (1024f * 1024f));
+
+					String indexType = indexItemJson.optString("type", type);
 
 					@NonNull DownloadActivityType tp = DownloadActivityType.getIndexType(indexType);
 					if (tp != null) {
-						IndexItem indexItem = new IndexItem(fileName, description, timestamp, size, contentSize, containerSize, tp);
+						IndexItem indexItem = new CustomIndexItem(fileName, description, downloadurl, timestamp, size, contentSize, containerSize, tp);
 						region.downloadItems.add(indexItem);
 					}
 				}
