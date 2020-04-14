@@ -3608,8 +3608,6 @@
     <string name="settings_item_write_error">Невозможно записать %1$s.</string>
     <string name="settings_item_import_error">Невозможно импортировать %1$s.</string>
     <string name="select_track_file">Выберите файл трека</string>
-    <string name="wikipedia_poi_languages_promo">Некоторые статьи Википедии могут быть недоступны на вашем родном языке, выберите языки, на которых такие статьи будут отображаться на карте.
-\nВы сможете переключаться между всеми доступными языками во время чтения статьи.</string>
     <string name="shared_string_languages">Языки</string>
     <string name="shared_string_language">Язык</string>
     <string name="shared_string_all_languages">Все языки</string>

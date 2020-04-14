@@ -3623,6 +3623,4 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_languages">Lingue</string>
     <string name="shared_string_language">Lingua</string>
     <string name="shared_string_all_languages">Tutti i linguaggi</string>
-    <string name="wikipedia_poi_languages_promo">Scegli la lingua in cui gli articoli Wikipedia appariranno nella mappa, alcuni potrebbero non essere disponibili nella tua lingua.
-\nPuoi cambiare fra i linguaggi disponibili durante la lettura degli articoli.</string>
 </resources>

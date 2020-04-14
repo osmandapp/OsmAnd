@@ -3601,7 +3601,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_languages">Lingvoj</string>
     <string name="shared_string_language">Lingvo</string>
     <string name="shared_string_all_languages">Ĉiuj lingvoj</string>
-    <string name="wikipedia_poi_languages_promo">Iuj artikoloj de Vikipedio povas ne esti disponeblaj en via(j) lingvo(j), elektu lingvojn en kiuj artikoloj de Vikipedio estos montrataj sur la mapo.
-\nVi povas baskuli inter ĉiuj disponeblaj lingvoj dum legi artikolon.</string>
     <string name="wiki_menu_download_descr">Kromaj mapoj estas necesaj por vidigi punktojn de Vikipedio sur la mapo.</string>
 </resources>

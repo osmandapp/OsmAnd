@@ -3610,7 +3610,5 @@
     <string name="shared_string_languages">語言</string>
     <string name="shared_string_language">語言</string>
     <string name="shared_string_all_languages">所有語言</string>
-    <string name="wikipedia_poi_languages_promo">某些維基百科文章可能無法以您的名稱提供，選取維基百科文章要在地圖上顯示何種語言。
-\n您可以在閱讀文章時切換到所有可用的語言。</string>
-    <string name="wiki_menu_download_descr">需要額外的地圖才能在地圖上檢視維基百科的 POI。</string>
+    <string name="wiki_menu_download_descr">需要其他地圖才能在地圖上檢視維基百科的 POI。</string>
 </resources>

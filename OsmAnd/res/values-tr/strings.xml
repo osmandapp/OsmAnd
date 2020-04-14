@@ -3574,7 +3574,5 @@
     <string name="shared_string_languages">Diller</string>
     <string name="shared_string_language">Dil</string>
     <string name="shared_string_all_languages">Tüm diller</string>
-    <string name="wikipedia_poi_languages_promo">Bazı Wikipedia makaleleri adınızda bulunmayabilir, Wikipedia makalelerinin haritada görüneceği dilleri seçin.
-\nMakaleyi okurken mevcut tüm diller arasında geçiş yapabileceksiniz.</string>
     <string name="wiki_menu_download_descr">Wikipedia POI\'lerini haritada görüntülemek için ek haritalara ihtiyaç vardır.</string>
 </resources>

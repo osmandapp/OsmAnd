@@ -218,6 +218,18 @@ public class Amenity extends MapObject {
 		return lng;
 	}
 
+	public List<String> getSupportedLocales(List<String> locales) {
+		List<String> supported = new ArrayList<>();
+		if (locales != null) {
+			for (String locale : locales) {
+				if (!Algorithms.isEmpty(getAdditionalInfo("content:" + locale))) {
+					supported.add(locale);
+				}
+			}
+		}
+		return supported;
+	}
+
 	public List<String> getNames(String tag, String defTag) {
 		List<String> l = new ArrayList<String>();
 		for (String nm : getAdditionalInfo().keySet()) {

@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter;
 import androidx.annotation.NonNull;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.data.Amenity;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -354,7 +355,7 @@ public class WikipediaPoiMenu {
 		ph.clearSelectedPoiFilters(PoiTemplateList.WIKI);
 	}
 
-	private static String getLanguagesSummary(OsmandApplication app) {
+	public static String getLanguagesSummary(OsmandApplication app) {
 		Bundle wikiLanguagesSetting = getWikiPoiSettings(app);
 		if (wikiLanguagesSetting != null) {
 			boolean globalWikiEnabled = wikiLanguagesSetting.getBoolean(GLOBAL_WIKI_POI_ENABLED_KEY);
@@ -378,5 +379,22 @@ public class WikipediaPoiMenu {
 
 	public static ContextMenuAdapter createListAdapter(final MapActivity mapActivity) {
 		return new WikipediaPoiMenu(mapActivity).createLayersItems();
+	}
+
+	public static String getWikiArticleLocale(OsmandApplication app, String preferredLocale, Amenity amenity) {
+		Bundle wikiPoiSettings = getWikiPoiSettings(app);
+		if (wikiPoiSettings != null) {
+			boolean globalWikiPoiEnabled = wikiPoiSettings.getBoolean(GLOBAL_WIKI_POI_ENABLED_KEY);
+			List<String> enabledWikiPoiLocales = wikiPoiSettings.getStringArrayList(ENABLED_WIKI_POI_LANGUAGES_KEY);
+			if (!globalWikiPoiEnabled && enabledWikiPoiLocales != null) {
+				if (!enabledWikiPoiLocales.contains(preferredLocale) && amenity.getType().isWiki()) {
+					List<String> supportedLanguages = amenity.getSupportedLocales(enabledWikiPoiLocales);
+					if (supportedLanguages != null && supportedLanguages.size() > 0) {
+						preferredLocale = supportedLanguages.get(0);
+					}
+				}
+			}
+		}
+		return preferredLocale;
 	}
 }

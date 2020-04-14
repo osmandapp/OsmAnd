@@ -13,6 +13,7 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -21,6 +22,7 @@ import net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
+import net.osmand.plus.wikipedia.WikipediaPoiMenu;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
@@ -72,7 +74,10 @@ public class AmenityMenuController extends MenuController {
 				public void buttonPressed() {
 					MapActivity activity = getMapActivity();
 					if (activity != null) {
-						WikipediaDialogFragment.showInstance(activity, amenity);
+						OsmandApplication app = activity.getMyApplication();
+						String preferredLocale = app.getSettings().MAP_PREFERRED_LOCALE.get();
+						WikipediaDialogFragment.showInstance(activity, amenity,
+								WikipediaPoiMenu.getWikiArticleLocale(app, preferredLocale, amenity));
 					}
 				}
 			};

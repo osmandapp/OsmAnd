@@ -3619,7 +3619,5 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_languages">Idiomes</string>
     <string name="shared_string_language">Llengua</string>
     <string name="shared_string_all_languages">Tots els idiomes</string>
-    <string name="wikipedia_poi_languages_promo">Alguns articles de la Viquipèdia podrien no estar disponibles en la vostra llengua, seleccioneu els idiomes de la Viquipèdia amb els que es localitzaran articles en el mapa.
-\nPodreu anar canviant entre els idiomes disponibles mentre llegiu l\'article.</string>
     <string name="wiki_menu_download_descr">Es necessiten mapes addicionals per veure els PDIs de la Viquipèdia al mapa.</string>
 </resources>
