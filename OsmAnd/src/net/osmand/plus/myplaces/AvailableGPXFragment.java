@@ -475,7 +475,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		((FavoritesActivity) getActivity()).updateListViewFooter(footerView);
 
 		// TODO Rewrite without ContextMenuAdapter
-		optionsMenuAdapter = new ContextMenuAdapter();
+		optionsMenuAdapter = new ContextMenuAdapter(app);
 		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, final int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
@@ -760,7 +760,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 	private void moveGpx(final GpxInfo info) {
 
-		final ContextMenuAdapter menuAdapter = new ContextMenuAdapter();
+		final ContextMenuAdapter menuAdapter = new ContextMenuAdapter(app);
 		ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder();
 
 		final List<File> dirs = new ArrayList<>();
