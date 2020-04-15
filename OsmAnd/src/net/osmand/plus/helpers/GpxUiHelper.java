@@ -37,6 +37,7 @@ import androidx.appcompat.widget.ListPopupWindow;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
@@ -257,7 +258,7 @@ public class GpxUiHelper {
 		return null;
 	}
 
-	public static void selectSingleGPXFile(final MapActivity activity, boolean showCurrentGpx,
+	public static void selectSingleGPXFile(final FragmentActivity activity, boolean showCurrentGpx,
 	                                       final CallbackWithObject<GPXFile[]> callbackWithObject) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		int gpxDirLength = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath().length();
@@ -277,7 +278,7 @@ public class GpxUiHelper {
 					list.add(new GPXInfo(gpxFile.path.substring(gpxDirLength + 1), gpxFile.modifiedTime, 0));
 				}
 			}
-			SelectGpxTrackBottomSheet.showInstance(activity, showCurrentGpx, callbackWithObject, list);
+			SelectGpxTrackBottomSheet.showInstance(activity.getSupportFragmentManager(), showCurrentGpx, callbackWithObject, list);
 		}
 	}
 

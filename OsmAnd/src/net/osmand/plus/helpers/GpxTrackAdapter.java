@@ -1,6 +1,6 @@
 package net.osmand.plus.helpers;
 
-import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,11 +36,11 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<GpxTrackAdapter.TrackV
 	private OnItemClickListener onItemClickListener;
 	private UiUtilities iconsCache;
 
-	GpxTrackAdapter(Activity activity, List<GpxUiHelper.GPXInfo> gpxInfoList, boolean showCurrentGpx) {
+	GpxTrackAdapter(Context ctx, List<GpxUiHelper.GPXInfo> gpxInfoList, boolean showCurrentGpx) {
 		this.showCurrentGpx = showCurrentGpx;
-		app = (OsmandApplication) activity.getApplication();
+		app = (OsmandApplication) ctx.getApplicationContext();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		themedInflater = UiUtilities.getInflater(activity, nightMode);
+		themedInflater = UiUtilities.getInflater(ctx, nightMode);
 		this.gpxInfoList = gpxInfoList;
 		iconsCache = app.getUIUtilities();
 	}
