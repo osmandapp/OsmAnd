@@ -2352,7 +2352,7 @@
     <string name="find_parking">پیداکردن پارکینگ</string>
     <string name="add_time_span">افزودن بازهٔ زمانی</string>
     <string name="shared_string_undo_all">خنثی‌کردن همه</string>
-    <string name="auto_split_recording_title">بخش‌بندی خودکار مسیر پس از وقفه</string>
+    <string name="auto_split_recording_title">بخش‌بندی خودکار ضبط پس از وقفه</string>
     <string name="save_track_min_distance">کمترین جابه‌جایی برای ثبت</string>
     <string name="translit_names">نویسه‌گردانی نام‌ها</string>
     <string name="rec_split_clip_length">مدت کلیپ</string>
@@ -3047,7 +3047,7 @@
     <string name="files_moved">%1$d فایل منتقل شد (%2$s).</string>
     <string name="files_copied">%1$d فایل کپی شد (%2$s).</string>
     <string name="files_failed">نمی‌توان %1$d فایل (%2$s) را کپی کرد.</string>
-    <string name="files_present">%1$d فایل (%2$s) در مکان قبلی وجود دارد.
+    <string name="files_present">%1$d فایل (%2$s) در مکان قبلی وجود دارد:
 \n\'%3$s\'</string>
     <string name="move_maps">نقشه‌ها را منتقل کن</string>
     <string name="dont_move_maps">منتقل نکن</string>
@@ -3273,7 +3273,7 @@
     <string name="routing_attr_piste_type_sled_name">سورتمه</string>
     <string name="routing_attr_piste_type_sled_description">سراشیبی برای سورتمه‌سواری.</string>
     <string name="routing_attr_allow_skating_only_description">مسیرهای آماده‌شده برای سبک آزاد یا فقط-اسکیت. بدون مسیرهای کلاسیک.</string>
-    <string name="routing_attr_allow_classic_only_description">"مسیرهایی که فقط برای سبک کلاسیک آماده شده  و مسیر اسکیت ندارند. مسیرهای سُست‌تر و آماده‌شده با برف‌روهای کوچک‌تر و مسیرهای دست‌ساز اسکی‌بازان را نیز شامل می‌شود."</string>
+    <string name="routing_attr_allow_classic_only_description">مسیرهایی که فقط برای سبک کلاسیک آماده شده و مسیر اسکیت ندارند. مسیرهای سُست‌تر و آماده‌شده با برف‌روهای کوچک‌تر و مسیرهای دست‌ساز اسکی‌بازان را نیز شامل می‌شود.</string>
     <string name="external_input_device_descr">یک دستگاه کنترل خارجی، مانند صفحه‌کلید یا WunderLINQ را انتخاب کنید.</string>
     <string name="utm_format_descr">‏OsmAnd از قالب UTM Standard استفاده می‌کند که مشابه (اما نه یکسان) با UTM Nato است.</string>
     <string name="apply_to_current_profile">به‌کارگیری فقط برای «%1$s»</string>
@@ -3424,7 +3424,7 @@
     <string name="added_profiles_descr">پروفایل‌هایی که افزونه افزوده</string>
     <string name="new_plugin_added">افزونهٔ تازه اضافه شد</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">نمایش مسیرهای دوچرخهٔ شبکه‌های گره</string>
-    <string name="clear_confirmation_msg">%1$s پاک‌سازی شود؟</string>
+    <string name="clear_confirmation_msg">‏%1$s پاک‌سازی شود؟</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">شبکه‌های گره</string>
     <string name="shared_string_turn_off">خاموش</string>
     <string name="join_segments">پیوند پاره‌ها</string>
@@ -3519,10 +3519,10 @@
     <string name="sunset_at">غروب خورشید در %1$s</string>
     <string name="sunrise_at">طلوع خورشید در %1$s</string>
     <string name="accessibility_mode_disabled">حالت دسترسی آسان در دستگاه شما غیرفعال است.</string>
-    <string name="use_system_screen_timeout">استفاده از زمان خاموش‌شدن صفحهٔ دستگاه</string>
-    <string name="use_system_screen_timeout_promo">پیشفرض غیرفعال است، اگر OsmAnd در پیش‌زمینه اجرا باشد صفحه خاموش نمی‌شود.
-\n
-\nاگر فعال باشد، OsmAnd از تنظیمات دستگاه برای زمان خاموش‌شدن صفحه استفاده می‌کند.</string>
+    <string name="use_system_screen_timeout">استفاده از زمان خاموشی صفحهٔ دستگاه</string>
+    <string name="use_system_screen_timeout_promo">پیشفرض غیرفعال است، اگر OsmAnd در پیش‌زمینه اجرا باشد صفحه خاموش نمی‌شود. 
+\n 
+\nاگر فعال باشد، OsmAnd از تنظیمات دستگاه برای زمان خاموشی صفحه استفاده می‌کند.</string>
     <string name="clear_recorded_data">پاک‌سازی دادهٔ ضبط‌شده</string>
     <string name="release_3_6">• پروفایل‌ها: اکنون می‌توانید ترتیب پروفایل‌ها و نماد آن‌ها را تنظیم کنید. تنظیمات پروفایل‌های پایه را تغییر دهید یا آن‌ها را به پیشفرض بازنشانی کنید. 
 \n 
@@ -3639,4 +3639,15 @@
     <string name="app_mode_ski_touring">تور اسکی</string>
     <string name="app_mode_ski_snowmobile">برف‌رو</string>
     <string name="custom_osmand_plugin">افزونهٔ سفارشی OsmAnd</string>
+    <string name="replace_point_descr">نقطهٔ دیگری را جانشین این کنید</string>
+    <string name="changes_applied_to_profile">تغییرات روی پروفایل %1$s به کار رفت.</string>
+    <string name="settings_item_read_error">خواندن %1$s ناموفق بود.</string>
+    <string name="settings_item_write_error">نوشتن %1$s ناموفق بود.</string>
+    <string name="settings_item_import_error">درون‌برد %1$s ناموفق بود.</string>
+    <string name="wiki_menu_download_descr">برای مشاهدهٔ نقاط ویکی‌پدیا روی نقشه باید نقشهٔ دیگری را نیز دانلود کنید.</string>
+    <string name="multimedia_rec_split_title">تقسیمگر ضبط‌کننده</string>
+    <string name="select_track_file">انتخاب فایل رد</string>
+    <string name="shared_string_languages">زبان‌ها</string>
+    <string name="shared_string_language">زبان</string>
+    <string name="shared_string_all_languages">همهٔ زبان‌ها</string>
 </resources>

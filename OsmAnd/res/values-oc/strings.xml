@@ -508,7 +508,7 @@
     <string name="file_import_error">Error d\'importacion de %1$s: %2$s</string>
     <string name="file_imported_successfully">%1$s es estat importat correctament.</string>
     <string name="rendering_value_white_name">Blanc</string>
-    <string name="swap_two_places">"Inversar  %1$s e %2$s"</string>
+    <string name="swap_two_places">Inversar %1$s e %2$s</string>
     <string name="route_start_point">Ponch de partença</string>
     <string name="track_saved">Traça enregistrada</string>
     <string name="empty_filename">Lo fichier es pas nommat</string>

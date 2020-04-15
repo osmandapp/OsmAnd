@@ -56,7 +56,7 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 	@NonNull
 	@Override
 	public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		LayoutInflater inflater = LayoutInflater.from(app);
+		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 		if (viewType == HEADER_TYPE) {
 			View view = inflater.inflate(R.layout.list_item_header_import, parent, false);
 			return new HeaderViewHolder(view);

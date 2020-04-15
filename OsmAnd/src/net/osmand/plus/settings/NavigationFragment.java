@@ -21,7 +21,6 @@ import net.osmand.router.GeneralRouter;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -93,14 +92,13 @@ public class NavigationFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		String key = preference.getKey();
-		if (settings.VOICE_MUTE.getId().equals(key) && newValue instanceof Boolean) {
-			settings.VOICE_MUTE.setModeValue(getSelectedAppMode(), !(Boolean) newValue);
+	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
+		if (settings.VOICE_MUTE.getId().equals(prefId) && newValue instanceof Boolean) {
+			applyPreference(prefId, applyToAllProfiles, !(Boolean) newValue);
 			updateMenu();
-			return true;
+		} else {
+			applyPreference(prefId, applyToAllProfiles, newValue);
 		}
-		return super.onPreferenceChange(preference, newValue);
 	}
 
 	@Override

@@ -34,6 +34,7 @@
         <attr name="ctx_menu_divider" format="reference" />
         <attr name="bottom_menu_view_bg" format="reference" />
         <attr name="left_menu_view_bg" format="reference" />
+        <attr name="stroked_buttons_and_links_outline" format="color" />
 
         <attr name="dashboard_divider" format="reference" />
 		<attr name="dashboard_button" format="reference" />

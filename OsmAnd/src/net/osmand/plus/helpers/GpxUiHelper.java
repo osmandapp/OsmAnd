@@ -37,6 +37,8 @@ import androidx.appcompat.widget.ListPopupWindow;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.fragment.app.FragmentActivity;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
@@ -233,7 +235,7 @@ public class GpxUiHelper {
 		}
 		allGpxList.add(0, new GPXInfo(activity.getString(R.string.show_current_gpx_title), 0, 0));
 
-		final ContextMenuAdapter adapter = createGpxContextMenuAdapter(allGpxList, selectedGpxList, true);
+		final ContextMenuAdapter adapter = createGpxContextMenuAdapter(allGpxList, selectedGpxList, true, app);
 		return createDialog(activity, true, true, true, callbackWithObject, allGpxList, adapter, dialogThemeRes, nightMode);
 	}
 
@@ -252,7 +254,7 @@ public class GpxUiHelper {
 				list.add(0, new GPXInfo(activity.getString(R.string.show_current_gpx_title), 0, 0));
 			}
 
-			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(list, null, showCurrentGpx);
+			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(list, null, showCurrentGpx, app);
 			return createDialog(activity, showCurrentGpx, multipleChoice, false, callbackWithObject, list, adapter, dialogThemeRes, nightMode);
 		}
 		return null;
@@ -283,9 +285,10 @@ public class GpxUiHelper {
 	}
 
 	private static ContextMenuAdapter createGpxContextMenuAdapter(List<GPXInfo> allGpxList,
-																  List<String> selectedGpxList,
-																  boolean showCurrentTrack) {
-		final ContextMenuAdapter adapter = new ContextMenuAdapter();
+	                                                              List<String> selectedGpxList,
+	                                                              boolean showCurrentTrack,
+	                                                              OsmandApplication app) {
+		final ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 		//element position in adapter
 		int i = 0;
 		for (GPXInfo gpxInfo : allGpxList) {

@@ -152,13 +152,12 @@ public class SettingsHelper {
 
 		SettingsItem(OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			this.app = app;
-			warnings = new ArrayList<>();
 			init();
 			readFromJson(json);
 		}
 
 		protected void init() {
-			// override
+			warnings = new ArrayList<>();
 		}
 
 		public List<String> getWarnings() {
@@ -357,6 +356,7 @@ public class SettingsHelper {
 
 		@Override
 		protected void init() {
+			super.init();
 			pluginDependentItems = new ArrayList<>();
 		}
 
@@ -450,6 +450,7 @@ public class SettingsHelper {
 
 		@Override
 		protected void init() {
+			super.init();
 			items = new ArrayList<>();
 			appliedItems = new ArrayList<>();
 			duplicateItems = new ArrayList<>();
@@ -722,6 +723,7 @@ public class SettingsHelper {
 
 		@Override
 		protected void init() {
+			super.init();
 			drawerLogoParams = new HashMap<>();
 		}
 
@@ -1337,12 +1339,15 @@ public class SettingsHelper {
 
 		public QuickActionsSettingsItem(@NonNull OsmandApplication app, @NonNull List<QuickAction> items) {
 			super(app, items);
-			actionRegistry = app.getQuickActionRegistry();
-			existingItems = actionRegistry.getQuickActions();
 		}
 
 		QuickActionsSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			super(app, json);
+		}
+
+		@Override
+		protected void init() {
+			super.init();
 			actionRegistry = app.getQuickActionRegistry();
 			existingItems = actionRegistry.getQuickActions();
 		}
@@ -1488,11 +1493,15 @@ public class SettingsHelper {
 
 		public PoiUiFilterSettingsItem(@NonNull OsmandApplication app, @NonNull List<PoiUIFilter> items) {
 			super(app, items);
-			existingItems = app.getPoiFilters().getUserDefinedPoiFilters(false);
 		}
 
 		PoiUiFilterSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			super(app, json);
+		}
+
+		@Override
+		protected void init() {
+			super.init();
 			existingItems = app.getPoiFilters().getUserDefinedPoiFilters(false);
 		}
 
@@ -1630,18 +1639,19 @@ public class SettingsHelper {
 
 	public static class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> {
 
-		private OsmandApplication app;
 		private List<String> existingItemsNames;
 
 		public MapSourcesSettingsItem(@NonNull OsmandApplication app, @NonNull List<ITileSource> items) {
 			super(app, items);
-			this.app = app;
-			existingItemsNames = new ArrayList<>(app.getSettings().getTileSourceEntries().values());
 		}
 
 		MapSourcesSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			super(app, json);
-			this.app = app;
+		}
+
+		@Override
+		protected void init() {
+			super.init();
 			existingItemsNames = new ArrayList<>(app.getSettings().getTileSourceEntries().values());
 		}
 
@@ -1829,21 +1839,20 @@ public class SettingsHelper {
 
 	public static class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo> {
 
-		private OsmandApplication app;
 		private OsmandSettings settings;
 		private AvoidSpecificRoads specificRoads;
 
 		public AvoidRoadsSettingsItem(@NonNull OsmandApplication app, @NonNull List<AvoidRoadInfo> items) {
 			super(app, items);
-			this.app = app;
-			settings = app.getSettings();
-			specificRoads = app.getAvoidSpecificRoads();
-			existingItems = new ArrayList<>(specificRoads.getImpassableRoads().values());
 		}
 
 		AvoidRoadsSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			super(app, json);
-			this.app = app;
+		}
+
+		@Override
+		protected void init() {
+			super.init();
 			settings = app.getSettings();
 			specificRoads = app.getAvoidSpecificRoads();
 			existingItems = new ArrayList<>(specificRoads.getImpassableRoads().values());

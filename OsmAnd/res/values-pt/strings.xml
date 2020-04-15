@@ -689,7 +689,7 @@
     <string name="rendering_attr_noPolygons_name">Polígonos</string>
     <string name="rendering_attr_appMode_name">Modo de Visualização</string>
     <string name="rendering_attr_appMode_description">Otimizar mapa para</string>
-    <string name="rendering_attr_contourLines_description">"Mostrar desde o nível de ampliação  (requer dados de contorno):"</string>
+    <string name="rendering_attr_contourLines_description">Mostrar desde o nível de ampliação (requer dados de contorno):</string>
     <string name="rendering_attr_contourLines_name">Mostrar curvas de nível</string>
     <string name="rendering_attr_hmRendered_description">Aumentar a quantidade de detalhe no mapa.</string>
     <string name="rendering_attr_hmRendered_name">Ver mais detalhes no mapa</string>
@@ -3381,10 +3381,10 @@
     <string name="personal_category_name">Pessoal</string>
     <string name="shared_string_downloading_formatted">Descarregando %s</string>
     <string name="rendering_value_thick_name">Grosso</string>
-    <string name="desert_render_descr">Para desertos e outras áreas pouco povoadas. Exibe mais detalhes numa escala de visualização.</string>
+    <string name="desert_render_descr">Para desertos e outras áreas pouco povoadas. Mais detalhado.</string>
     <string name="select_navigation_icon">Ícone de posição durante a movimentação</string>
     <string name="select_map_icon">Ícone de posição em repouso</string>
-    <string name="delete_profiles_descr">Depois de tocar em Aplicar, os perfis eliminados serão completamente perdidos.</string>
+    <string name="delete_profiles_descr">Tocar em \'Aplicar\' apagará os perfis removidos permanentemente.</string>
     <string name="master_profile">Perfil principal</string>
     <string name="select_color">Selecione a cor</string>
     <string name="edit_profiles_descr">Não pode excluir perfis OsmAnd padrão, mas pode desativá-los no ecrã anterior, ou movê-los para o fundo.</string>
@@ -3617,4 +3617,13 @@
     <string name="import_from_file">Importar do ficheiro</string>
     <string name="not_support_file_type_with_ext">Selecione um ficheiro de extensão %1$s suportado.</string>
     <string name="file_does_not_contain_routing_rules">Nenhuma regra de roteamento em \'%1$s\'. Por favor, escolha outro ficheiro.</string>
+    <string name="shared_string_octagon">Octógono</string>
+    <string name="replace_point_descr">Substitua outro ponto por este</string>
+    <string name="app_mode_ski_touring">Passeios de esqui</string>
+    <string name="app_mode_ski_snowmobile">Moto de neve</string>
+    <string name="custom_osmand_plugin">Plug-in OsmAnd personalizado</string>
+    <string name="changes_applied_to_profile">Alterações aplicadas ao perfil %1$s.</string>
+    <string name="settings_item_read_error">Não foi possível ler %1$s.</string>
+    <string name="settings_item_write_error">Não foi possível escrever %1$s.</string>
+    <string name="settings_item_import_error">Não foi possível importar %1$s.</string>
 </resources>

@@ -3211,7 +3211,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="analytics_pref_title">Analytika</string>
     <string name="turn_screen_on_info">Zobrazit mapu na uzamčené obrazovce během navigace.</string>
     <string name="route_parameters_info">Nastavení navádění pro zvolený profil „%1$s“.</string>
-    <string name="units_and_formats">Jednotky a formát</string>
+    <string name="units_and_formats">Jednotky a formáty</string>
     <string name="appearance">Vzhled</string>
     <string name="map_look_descr">Vzhled mapy</string>
     <string name="configure_profile">Upravit profil</string>
@@ -3288,4 +3288,95 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="add_new_profile_q">Přidat nový profil „%1$s“\?</string>
     <string name="routing_attr_allow_classic_only_description">Trasy upravené pro klasické lyžování bez bruslení. Zahrnuje trasy upravené menšími sněžnými vozidly a stopy vytvořené samotnými lyžaři.</string>
     <string name="routing_attr_allow_skating_only_name">Povolit pouze trasy pro bruslení na lyžích</string>
+    <string name="app_mode_ski_snowmobile">Sněžný skútr</string>
+    <string name="custom_osmand_plugin">Vlastní modul pro OsmAnd</string>
+    <string name="changes_applied_to_profile">Změny aplikovány na profil %1$s.</string>
+    <string name="settings_item_read_error">Nelze přečíst %1$s.</string>
+    <string name="settings_item_write_error">Nelze zapsat %1$s.</string>
+    <string name="settings_item_import_error">Nelze importovat %1$s.</string>
+    <string name="shared_string_hillshade">Stínování svahů</string>
+    <string name="shared_string_terrain">Terén</string>
+    <string name="hillshade_description">Stínované svahy používají tmavé odstíny pro vyjádření svahů, vrcholů a nížin.</string>
+    <string name="slope_description">Svahy jsou barevné vizualizace terénu.</string>
+    <string name="terrain_slider_description">Nastavte minimální a maximální úroveň přiblížení, při které bude vrstva zobrazená.</string>
+    <string name="hillshade_download_description">Pro zobrazení stínování kopců jsou potřeba další mapy.</string>
+    <string name="slope_download_description">Pro zobrazení svahů jsou potřeba další mapy.</string>
+    <string name="slope_read_more">O svazích si můžete přečíst více na %1$s.</string>
+    <string name="shared_string_transparency">Průhlednost</string>
+    <string name="shared_string_zoom_levels">Úrovně přiblížení</string>
+    <string name="shared_string_legend">Legenda</string>
+    <string name="terrain_empty_state_text">Zapněte pro zobrazení stínovaných svahů. O tomto typu map se dozvíte více na našich stránkách</string>
+    <string name="import_complete_description">Všechna data z %1$s jsou naimportovaná, můžete použít tlačítka níže k otevření části aplikace pro jejich správu.</string>
+    <string name="shared_string_import_complete">Import dokončen</string>
+    <string name="items_added">Položky přidány</string>
+    <string name="checking_for_duplicate_description">OsmAnd kontroluje %1$s na duplicity s existujícími položkami v aplikaci.
+\n
+\nMůže to chvíli trvat.</string>
+    <string name="shared_string_importing">Importování</string>
+    <string name="importing_from">Importování dat z %1$s</string>
+    <string name="profile_backup_failed">Nepodařilo se zálohovat profil.</string>
+    <string name="saving_new_profile">Ukládání nového profilu</string>
+    <string name="restore_all_profile_settings">Obnovit všechna nastavení profilu\?</string>
+    <string name="restore_all_profile_settings_descr">Po vytvoření/importování tohoto profilu budou všechna nastavení profilu resetována do původního stavu.</string>
+    <string name="clear_recorded_data_warning">Opravdu chcete vymazat zaznamenané údaje\?</string>
+    <string name="recalculate_route_in_deviation">Přepočítat trasu v případě odchýlení</string>
+    <string name="select_distance_route_will_recalc">Zvolte vzdálenost, při které bude trasa přepočítána.</string>
+    <string name="recalculate_route_distance_promo">Trasa bude přepočítaná pokud vzdálenost od trasy k aktuální poloze je větší než zvolená hodnota.</string>
+    <string name="n_items_of_z">%1$s z %2$s</string>
+    <string name="download_slope_maps">Svahy</string>
+    <string name="quick_action_show_hide_terrain">Zobrazit/skrýt terén</string>
+    <string name="quick_action_terrain_hide">Skrýt terén</string>
+    <string name="quick_action_terrain_show">Zobrazit terén</string>
+    <string name="quick_action_terrain_descr">Tlačítko pro zobrazení nebo skrytí vrstvy terénu na mapě.</string>
+    <string name="delete_description">Smazat popis</string>
+    <string name="add_description">Přidat popis</string>
+    <string name="select_group">Vyberte skupinu</string>
+    <string name="select_shape">Vyberte tvar</string>
+    <string name="shared_string_circle">Kruh</string>
+    <string name="shared_string_octagon">Osmiúhelník</string>
+    <string name="shared_string_square">Čtverec</string>
+    <string name="shared_string_min">Min</string>
+    <string name="replace_point_descr">Nahradit jiný bod tímto</string>
+    <string name="app_mode_ski_touring">Lyžařské okruhy</string>
+    <string name="shared_string_angle">Úhel</string>
+    <string name="shared_string_angle_param">Úhel: %s°</string>
+    <string name="shared_string_languages">Jazyky</string>
+    <string name="shared_string_language">Jazyk</string>
+    <string name="shared_string_all_languages">Všechny jazyky</string>
+    <string name="index_name_antarctica">Antarktida</string>
+    <string name="route_recalculation_dist_descr">Trasa bude přepočítána, pokud vzdálenost od trasy bude větší než uvedený parametr</string>
+    <string name="route_recalculation_dist_title">Minimální vzdálenost pro přepočítání trasy</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_menu">Menu</string>
+    <string name="plugin_disabled_descr">Tento modul je samostatnou aplikací. Pokud ho nadále nehodláte používat, budete ho muset odstranit samostatně.
+\n
+\nModul zůstane v zařízení i po odstranění aplikace OsmAnd.</string>
+    <string name="plugin_disabled">Modul vypnutý</string>
+    <string name="open_settings">Otevřít nastavení</string>
+    <string name="no_recalculation_setting">Vypnout přepočítávání</string>
+    <string name="please_provide_profile_name_message">Zadejte prosím název profilu</string>
+    <string name="select_data_to_import">Vyberte data k importu.</string>
+    <string name="import_duplicates_title">Některé položky již existují</string>
+    <string name="import_duplicates_description">OsmAnd již má položky se stejnými názvy jako ty importované.
+\n
+\nZvolte akci.</string>
+    <string name="keep_both_desc">Importované položky budou přidány s prefixem</string>
+    <string name="keep_both">Ponechat obě</string>
+    <string name="replace_all">Nahradit vše</string>
+    <string name="replace_all_desc">Aktuální položky budou nahrazeny položkami ze souboru</string>
+    <string name="listed_exist">Zobrazený %1$s již existuje v OsmAnd.</string>
+    <string name="shared_string_profiles">Profily</string>
+    <string name="shared_string_quick_actions">Rychlé akce</string>
+    <string name="shared_string_nothing_selected">Nic není vybráno</string>
+    <string name="shared_string_poi_types">Typy POI</string>
+    <string name="shared_string_preparing">Připravuji</string>
+    <string name="shared_string_app_default_w_val">Výchozí hodnota (%s)</string>
+    <string name="recalc_angle_dialog_title">Minimální úhel mezi mojí polohou a trasou</string>
+    <string name="recalc_angle_dialog_descr">Dokud nebude trasa přepočítána, zobrazí se navíc rovný úsek mezi aktuální polohou a vypočítanou trasou</string>
+    <string name="profile_type_custom_string">Vlastní profil</string>
+    <string name="import_rendering_file">Importovat soubor vykreslování</string>
+    <string name="select_track_file">Vyberte soubor stopy</string>
+    <string name="wikipedia_poi_languages_promo">Některé články Wikipedie nemusí být dostupné ve vašem jazyce. Zvolte jazyky, v nichž se články Wikipedie objeví na mapě.
+\nBěhem čtení článku budete moci přepínat mezi všemi dostupnými jazyky.</string>
+    <string name="wiki_menu_download_descr">Pro zobrazení bodů zájmu Wikipedie jsou potřeba další mapy.</string>
 </resources>

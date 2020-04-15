@@ -29,7 +29,8 @@
 		<net.osmand.plus.widgets.OsmandTextFieldBoxes
 			android:id="@+id/master_profile_otfb"
 			android:layout_width="match_parent"
-			android:layout_height="60dp"
+			android:layout_height="wrap_content"
+			android:minHeight="60dp"
 			app:labelText="@string/profile_type_base_string"
 			app:primaryColor="@color/active_color_primary_dark"
 			app:secondaryColor="?android:textColorSecondary">
@@ -40,6 +41,7 @@
 				android:layout_height="wrap_content"
 				android:focusable="false"
 				android:maxLines="1"
+				android:scrollbars="none"
 				tools:text="Car" />
 
 		</net.osmand.plus.widgets.OsmandTextFieldBoxes>

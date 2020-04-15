@@ -37,7 +37,7 @@
     <string name="shared_string_apply">Aplicar</string>
     <string name="set_time_timeline_descr">Selecionar a hora para exibir</string>
     <string name="start_end_date">Data de início - fim</string>
-    <string name="timeline_no_data_descr">Nós não coletamos dados para o dia selecionado</string>
+    <string name="timeline_no_data_descr">Não coletamos dados para o dia selecionado</string>
     <string name="gpx_settings">Configurações de GPX</string>
     <string name="proxy_key">Chave</string>
     <string name="proxy_credentials">Credenciais</string>
@@ -262,4 +262,10 @@
     <string name="shared_string_suggested">Sugerido</string>
     <string name="status_widget_title">Estado do Rastreador de OsmAnd</string>
     <string name="back_to_osmand">Voltar para OsmAnd</string>
+    <string name="duration_ago">%1$s atrás</string>
+    <string name="last_response_duration">Última resposta: %1$s atrás</string>
+    <string name="last_update_from_telegram_duration">Última atualização do Telegram: 1$s atrás</string>
+    <string name="last_response_date">Última resposta: %1$s</string>
+    <string name="last_update_from_telegram_date">Última atualização do Telegram: %1$s</string>
+    <string name="shared_string_error_short">ERR</string>
 </resources>

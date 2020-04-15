@@ -78,6 +78,10 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 		this.compoundButtonColorId = compoundButtonColorId;
 	}
 
+	public CompoundButton getCompoundButton() {
+		return compoundButton;
+	}
+
 	@Override
 	public void inflate(Context context, ViewGroup container, boolean nightMode) {
 		super.inflate(context, container, nightMode);

@@ -3,31 +3,36 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
-	android:padding="6dp">
+	android:padding="@dimen/map_button_margin">
 
-	<ImageView
-		android:id="@+id/outlineRect"
-		android:layout_width="164dp"
-		android:layout_height="128dp"
-		app:srcCompat="@drawable/bg_select_icon_button_outline" />
+	<FrameLayout
+		android:layout_width="@dimen/setting_select_icon_button_width"
+		android:layout_height="@dimen/setting_select_icon_button_height">
 
-	<ImageView
-		android:id="@+id/backgroundRect"
-		android:layout_width="156dp"
-		android:layout_height="120dp"
-		android:layout_margin="4dp"
-		android:background="@drawable/bg_select_icon_button" />
+		<ImageView
+			android:id="@+id/outlineRect"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			app:srcCompat="@drawable/bg_select_icon_button_outline" />
 
-	<ImageView
-		android:id="@+id/headingIcon"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center_horizontal|center_vertical" />
+		<ImageView
+			android:id="@+id/backgroundRect"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_margin="@dimen/list_item_button_padding"
+			android:background="@drawable/bg_select_icon_button" />
 
-	<ImageView
-		android:id="@+id/icon"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center_horizontal|center_vertical" />
+		<ImageView
+			android:id="@+id/headingIcon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center" />
+
+		<ImageView
+			android:id="@+id/icon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center" />
+	</FrameLayout>
 
 </FrameLayout>

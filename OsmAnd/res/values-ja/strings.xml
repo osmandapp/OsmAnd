@@ -449,7 +449,7 @@ POIの更新は利用できません</string>
  \'\'{0}\'\' が追加されました。</string>
     <string name="favourites_context_menu_edit">お気に入りを編集</string>
     <string name="favourites_context_menu_delete">お気に入りを削除</string>
-    <string name="favourites_remove_dialog_msg">お気に入り地点を削除しますか？ \'%s\'</string>
+    <string name="favourites_remove_dialog_msg">お気に入り地点\'%s\'を削除しますか？</string>
     <string name="favourites_remove_dialog_success">お気に入り地点 {0}
 は削除されました。</string>
     <string name="osb_comment_dialog_message">メッセージ</string>
@@ -1305,7 +1305,7 @@ POIの更新は利用できません</string>
     <string name="arrival_distance_factor_late">遅め</string>
     <string name="arrival_distance_factor_at_last">最後の数メートル</string>
     <string name="keep_informing_never">手動のみ(矢印をタップ)</string>
-    <string name="create_poi_link_to_osm_doc">" string name=\"lat_lon_pattern\"&gt;\"緯度:%1$.5f  経度:%2$.5f\"&lt;/string "</string>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u>マップを画像で分類します。</string>
     <string name="import_file_favourites">経由地点をGPXファイルとして保存、またはお気に入りにインポートしますか？</string>
     <string name="shared_string_share">共有</string>
     <string name="share_fav_subject">OsmAndを介してお気に入りを共有</string>
@@ -1923,7 +1923,7 @@ POIの更新は利用できません</string>
     <string name="last_update">最後の更新: %s</string>
     <string name="update_time">更新時間</string>
     <string name="updates_size">更新ファイルのサイズ</string>
-    <string name="last_map_change">最後のマップ更新: %s</string>
+    <string name="last_map_change">最終マップ更新: %s</string>
     <string name="hourly">毎時間</string>
     <string name="daily">毎日</string>
     <string name="weekly">毎週</string>
@@ -2051,7 +2051,7 @@ POIの更新は利用できません</string>
     <string name="get_it">入手する</string>
     <string name="si_mi_meters">マイル/メートル</string>
     <string name="skip_map_downloading">マップのダウンロードをスキップ</string>
-    <string name="skip_map_downloading_desc">オフライン用マップがインストールされていません。マップはこの画面にてリスト内から選択、あるいは後から\'メニューの%1$s\'にてダウンロードすることができます。</string>
+    <string name="skip_map_downloading_desc">オフライン用マップがインストールされていません。マップはこのリスト内から選択、あるいは後からでもメニューの\'%1$s\'からダウンロードすることができます。</string>
     <string name="search_another_country">別の地域を選択</string>
     <string name="search_map">マップを検索しています…</string>
     <string name="no_inet_connection">インターネット接続なし</string>
@@ -2573,7 +2573,7 @@ POIの更新は利用できません</string>
     <string name="show_passed">通過済みも表示</string>
     <string name="hide_passed">通過済みは非表示</string>
     <string name="import_track_desc">ファイル %1$s は経由地点を含んでいません、それでも経路としてインポートしますか？</string>
-    <string name="marker_activated">マーカー[%s]がアクティブ化されました。</string>
+    <string name="marker_activated">マーカー%sがアクティブ化されました。</string>
     <string name="one_tap_active_descr">コンテキストメニューを開かずにマップ上のマーカーをタップするだけで1番目のマーカーとしてアクティブ化させます。</string>
     <string name="one_tap_active">ワンタップアクティブ</string>
     <string name="empty_state_av_notes">場所に関するメモをつけよう！</string>
@@ -2655,7 +2655,7 @@ POIの更新は利用できません</string>
     <string name="read_wikipedia_offline">オフラインでWikipedia記事を読む</string>
     <string name="maps_you_need_descr">ブックマークした記事より、次のマップをダウンロードすることをお勧めします:</string>
     <string name="popular_destinations">人気の目的地</string>
-    <string name="travel_card_download_descr">Wikivoyageの旅行ガイドを事前にダウンロードすれば、インターネット接続なしで世界各地の観光場所を知ることができます。</string>
+    <string name="travel_card_download_descr">Wikivoyageの旅行ガイドをダウンロードしておけば、オフライン環境でも世界各地の観光名所を知ることができます。</string>
     <string name="start_editing_card_image_text">誰でも自由に編集できる世界規模の旅行ガイドです。</string>
     <string name="welcome_to_open_beta_description">『旅行ガイド』はWikivoyageをベースとした機能です。オープンβ時に限り無料で全ての機能を利用できます。旅行ガイドは将来的にOsmAndのサブスクリプション登録者や、OsmAnd+の利用者に提供される予定です。</string>
     <string name="start_editing_card_description">あなたもWikivoyageの記事を編集できます。場所に関する知識、旅先での経験、魅力あるスポットはもちろん注意事項なども共有できます。</string>
@@ -2839,7 +2839,7 @@ POIの更新は利用できません</string>
     <string name="open_in_browser_wiki">記事をオンラインで開く</string>
     <string name="open_in_browser_wiki_description">ウェブブラウザで記事を閲覧します。</string>
     <string name="download_wiki_region_placeholder">当該地域</string>
-    <string name="markers_remove_dialog_msg">マップマーカー「%s」を削除しますか？</string>
+    <string name="markers_remove_dialog_msg">マップマーカー\'%s\'を削除しますか？</string>
     <string name="edit_map_marker">マップマーカーの編集</string>
     <string name="third_party_application">サードパーティーアプリ</string>
     <string name="search_street">道路検索エリア</string>
@@ -2971,7 +2971,7 @@ POIの更新は利用できません</string>
     <string name="avoid_pt_types_descr">ナビゲーション時に使用したくない公共交通機関を指定します:</string>
     <string name="quick_action_day_night_mode">%sモード</string>
     <string name="avoid_pt_types">避けたい移動手段の種類…</string>
-    <string name="save_poi_value_exceed_length">『%s』タグの長さは255文字未満にしてください。</string>
+    <string name="save_poi_value_exceed_length">\"%s\"タグの長さは255文字未満にしてください。</string>
     <string name="save_poi_value_exceed_length_title">\"%s\"値の長さ</string>
     <string name="public_transport_warning_descr_blog">OsmAndのルーティング詳細については、公式ブログをご参照ください。</string>
     <string name="public_transport_warning_title">公共交通機関のナビゲーションは現在ベータテスト中で、エラーや不正確さを含む恐れがあります。</string>
@@ -3066,7 +3066,7 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_tracktype_grade4_name">やや軟らか</string>
     <string name="rendering_attr_tracktype_grade5_name">軟らかい</string>
     <string name="routeInfo_tracktype_name">表面硬度</string>
-    <string name="shared_string_file_is_saved">%s は保存されました</string>
+    <string name="shared_string_file_is_saved">%sを保存しました</string>
     <string name="app_mode_camper">キャンパー</string>
     <string name="app_mode_campervan">キャンピングカー</string>
     <string name="rendering_attr_showLez_description">マップ上に低排出ゾーン(CO2排出量の多い車両に課税するエリア)を表示します。ルーティングには影響しません。</string>
@@ -3126,7 +3126,7 @@ POIの更新は利用できません</string>
     <string name="profile_alert_need_save_title">変更の保存</string>
     <string name="profile_alert_need_save_msg">一旦プロファイルへ変更を保存する必要があります</string>
     <string name="profile_alert_delete_title">プロファイルの削除</string>
-    <string name="profile_alert_delete_msg">プロファイル 『%s』 を削除してよろしいですか？</string>
+    <string name="profile_alert_delete_msg">プロファイル \"%s\"を削除してよろしいですか？</string>
     <string name="select_base_profile_dialog_title">開始時に表示するプロファイルの選択</string>
     <string name="select_base_profile_dialog_message">カスタムプロファイルは標準のアプリケーションプロファイルを元に作成します。ウィジェットなどの表示設定や速度と距離の単位などの標準設定をプロファイルごとに定義可能です。これらは標準のアプリプロファイルを基本としており、今後それらと共に拡張される可能性があります:</string>
     <string name="select_nav_profile_dialog_title">ナビゲーションタイプの選択</string>
@@ -3182,7 +3182,7 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_highway_class_track_grade4_name">グレード4</string>
     <string name="rendering_attr_highway_class_track_grade5_name">グレード5</string>
     <string name="shared_string_open_track">経路を開く</string>
-    <string name="shared_string_track_is_saved">経路%sは保存されました</string>
+    <string name="shared_string_track_is_saved">経路%sを保存しました</string>
     <string name="temporary_conditional_routing">一時的な制限の検討</string>
     <string name="quick_action_need_to_add_item_to_list">『クイックアクション』のリストに最低ひとつは項目を設定する必要があります</string>
     <string name="routing_attr_piste_type_downhill_name">アルペン/ダウンヒルスキー</string>
@@ -3348,7 +3348,7 @@ POIの更新は利用できません</string>
     <string name="app_mode_pickup_truck">ピックアップトラック</string>
     <string name="years_5">年</string>
     <string name="cancel_subscription">サブスクリプションの解除</string>
-    <string name="apply_preference_to_all_profiles">ここでの変更は選択したものはもちろん、すべてのプロファイルにも適用できます。</string>
+    <string name="apply_preference_to_all_profiles">ここで変更した設定は選択中のプロファイル・すべてのプロファイル、どちらにも適用可能です。</string>
     <string name="shared_preference">現在の設定</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">未舗装道路を優先</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">ルート検索時に、舗装道路よりも未舗装道路を優先します。</string>
@@ -3405,7 +3405,7 @@ POIの更新は利用できません</string>
     <string name="save_heading">見出しを含める</string>
     <string name="save_heading_descr">記録中の各トラックポイントに見出しも保存します。</string>
     <string name="personal_category_name">パーソナル</string>
-    <string name="shared_string_downloading_formatted">をダウンロード中</string>
+    <string name="shared_string_downloading_formatted">%sをダウンロード中</string>
     <string name="rendering_value_thick_name">濃い</string>
     <string name="desert_render_descr">砂漠などの過疎地に向いたマップスタイルです。各情報の詳細も表示されます。</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
@@ -3536,7 +3536,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_menu">メニュー</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">ルート検索</string>
-    <string name="shared_string_include_data">追加データを内包</string>
+    <string name="shared_string_include_data">追加データも含める</string>
     <string name="import_profile_dialog_description">インポートされたプロファイルには追加データが含まれています。 [インポート]をタップしてプロファイルデータのみをインポートするか、インポートする追加データを選択してください。</string>
     <string name="export_profile_dialog_description">プロファイルとともにエクスポートする追加データを選択できます。</string>
     <string name="index_name_antarctica">南極大陸</string>

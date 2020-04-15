@@ -446,7 +446,7 @@
     <string name="install_more">Weitere installieren…</string>
     <string name="level_to_switch_vector_raster_descr">Verwenden Sie Rasterkarten für alles, was über diese Ebene hinausgeht.</string>
     <string name="level_to_switch_vector_raster">Minimale Vektor-Zoomstufe</string>
-    <string name="create_poi_link_to_osm_doc"> string name=\"route_descr_current_location\"&gt;Aktueller Standort&lt;/string </string>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> Kartenklassifizierung mit Bildern.</string>
     <string name="error_doing_search">Offline-Suche konnte nicht durchgeführt werden.</string>
     <string name="search_osm_offline">Suche nach Standort</string>
     <string name="system_locale">Systemeinstellung</string>
@@ -1435,7 +1435,7 @@
     <string name="routing_attr_no_new_routing_name">Routing-Regeln v1.9 nicht verwenden</string>
     <string name="routing_attr_no_new_routing_description">Neuen Routenalgorithmus aus v1.9 nicht verwenden.</string>
     <string name="speak_pedestrian">Fußgängerübergänge</string>
-    <string name="parking_place">Parkplatz</string>
+    <string name="parking_place">Parkbucht</string>
     <string name="remove_the_tag">TAG ENTFERNEN</string>
     <string name="gps_status">GPS-Status</string>
     <string name="version_settings_descr">Nightly-Builds herunterladen.</string>
@@ -3616,4 +3616,16 @@ Lon %2$s</string>
     <string name="app_mode_ski_snowmobile">Schneemobil</string>
     <string name="custom_osmand_plugin">Benutzerdefiniertes OsmAnd-Plugin</string>
     <string name="slope_description">Farbliche Kennzeichnung von Pisten im Gelände.</string>
+    <string name="replace_point_descr">Einen anderen Punkt durch diesen ersetzen</string>
+    <string name="changes_applied_to_profile">Die Änderungen wurden auf das %1$s Profil angewendet.</string>
+    <string name="settings_item_read_error">Konnte %1$s nicht lesen.</string>
+    <string name="settings_item_write_error">Konnte %1$s nicht schreiben.</string>
+    <string name="settings_item_import_error">Konnte %1$s nicht importieren.</string>
+    <string name="select_track_file">Wählen Sie eine Pfad-Datei</string>
+    <string name="shared_string_languages">Sprachen</string>
+    <string name="shared_string_language">Sprache</string>
+    <string name="shared_string_all_languages">Alle Sprachen</string>
+    <string name="wikipedia_poi_languages_promo">Manche Wikipedia-Artikel liegen unter Umständen nicht in Ihrer Sprache vor. Wählen Sie die Sprachen aus, in denen Wikipedia-Artikel auf der Karte erscheinen sollen.
+\nSie können beim Lesen des Artikels zwischen allen verfügbaren Sprachen wechseln.</string>
+    <string name="wiki_menu_download_descr">Zusätzliche Karten werden benötigt um Wikipedia-POIs auf der Karte anzuzeigen.</string>
 </resources>

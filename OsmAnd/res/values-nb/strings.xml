@@ -1041,7 +1041,7 @@
     <string name="osm_settings_descr">Spesifiser innstillinger for OpenStreetMap.org (OSM) som er nødvendige for bidrag til OSM.</string>
     <string name="shared_string_disabled">Deaktivert</string>
     <string name="shared_string_enabled">Aktivert</string>
-    <string name="shared_string_enable">Skru på</string>
+    <string name="shared_string_enable">Aktiver</string>
     <string name="shared_string_disable">Deaktiver</string>
     <string name="plugin_install_needs_network">Du må være på Internett for å installere dette programtillegget.</string>
     <string name="shared_string_never">Aldri</string>
@@ -2474,7 +2474,7 @@
     <string name="enable_plugin_monitoring_services">Aktiver tillegget \"Turopptak\" for å bruke posisjonloggingstjenester (GPX-logging, nettbasert sporing)</string>
     <string name="non_optimal_route_calculation">Beregn mulig ikke-optimal rute over lange avstander</string>
     <string name="vector_data_missing">Last ned (\'nettfrakoblede\') data for å kunne bruke kart nettfrakoblet.</string>
-    <string name="create_poi_link_to_osm_doc"> string name=\"lat_lon_pattern\"&gt;Br: %1$.5f Le: %2$.5f&lt;/string </string>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> – kartklassifisering med bilder.</string>
     <string name="quick_action_duplicates">Hurtighandlingsnavn endret til %1$s for å unngå duplisering.</string>
     <string name="quick_action_duplicate">Navneduplisering for hurtighandling</string>
     <string name="osm_recipients_label">OSM-mottakere</string>
@@ -3475,4 +3475,28 @@
     <string name="importing_from">Importerer data fra %1$s</string>
     <string name="shared_string_importing">Importerer</string>
     <string name="select_shape">Velg form</string>
+    <string name="monitoring_min_speed">Minimumshastighet</string>
+    <string name="monitoring_min_accuracy">Min. nøyaktighet</string>
+    <string name="monitoring_notification">Merknad</string>
+    <string name="live_monitoring_adress">Nettadresse</string>
+    <string name="shared_string_rendering_style">Opptegningsstil</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="rendering_attr_streetLightingNight_name">Kun vis om natten</string>
+    <string name="add_custom_category">Legg til egendefinert kategori</string>
+    <string name="shared_string_menu">Meny</string>
+    <string name="open_settings">Åpne innstillinger</string>
+    <string name="shared_string_terrain">Terreng</string>
+    <string name="n_items_of_z">%1$s av %2$s</string>
+    <string name="quick_action_show_hide_terrain">Vis/skjul terreng</string>
+    <string name="quick_action_terrain_hide">Skjul terreng</string>
+    <string name="quick_action_terrain_show">Vis terreng</string>
+    <string name="delete_description">Slett beskrivelse</string>
+    <string name="add_description">Legg til beskrivelse</string>
+    <string name="select_group">Velg gruppe</string>
+    <string name="shared_string_circle">Sirkel</string>
+    <string name="shared_string_octagon">Oktogon</string>
+    <string name="shared_string_square">Firkant</string>
+    <string name="settings_item_read_error">Kunne ikke lese %1$s.</string>
+    <string name="settings_item_import_error">Kunne ikke importere %1$s.</string>
+    <string name="settings_item_write_error">Kunne ikke skrive %1$s.</string>
 </resources>

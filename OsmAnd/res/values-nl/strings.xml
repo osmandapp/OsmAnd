@@ -248,7 +248,7 @@
     <string name="install_more">Installeer meer…</string>
     <string name="level_to_switch_vector_raster_descr">Minimum zoomniveau om vectorkaarten in plaats van (raster)kaartsegmenten te gebruiken.</string>
     <string name="level_to_switch_vector_raster">Min. vector zoomniveau</string>
-    <string name="create_poi_link_to_osm_doc"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> kaart classificatie met afbeeldingen.</string>
     <string name="error_doing_search">Fout bij offline zoeken.</string>
     <string name="search_osm_offline">Zoek adres in de offline kaarten</string>
     <string name="system_locale">Systeem</string>
@@ -633,7 +633,7 @@
     <string name="left_side_navigation_descr">Activeer in een land waar men links rijdt.</string>
     <string name="unknown_from_location">Vertrekpunt is nog niet bepaald.</string>
     <string name="confirm_interrupt_download">Downloaden afbreken?</string>
-    <string name="basemap_was_selected_to_download">"De basiskaart,  nodig voor de goede werking van OsmAnd, is al geselecteerd om te downloaden."</string>
+    <string name="basemap_was_selected_to_download">De basiskaart, nodig voor de goede werking van OsmAnd, is al geselecteerd om te downloaden.</string>
     <string name="map_online_plugin_is_not_installed">Activeer de \'Online Kaarten\' plug-in om andere kaartbronnen te kunnen selecteren</string>
     <string name="map_online_data">Online (raster-) kaarten</string>
     <string name="map_online_data_descr">Gebruik online kaarten (download en bewaar deze op SD-kaart).</string>

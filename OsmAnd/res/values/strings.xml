@@ -11,15 +11,37 @@
 	Thx - Hardy
 
 -->
+    <string name="wiki_menu_download_descr">Additional maps are needed to view Wikipedia POIs on the map.</string>
+    <string name="wikipedia_poi_languages_promo">Some Wikipedia articles may not be available in your name, select the languages in which Wikipedia articles will appear on the map.\nYou will be able to switch between all available languages while reading the article.</string>
+    <string name="shared_string_all_languages">All languages</string>
+    <string name="shared_string_language">Language</string>
+    <string name="shared_string_languages">Languages</string>
     <string name="select_track_file">Select track file</string>
     <string name="settings_item_import_error">Could not import %1$s.</string>
     <string name="settings_item_write_error">Could not write %1$s.</string>
     <string name="settings_item_read_error">Could not read %1$s.</string>
     <string name="changes_applied_to_profile">Changes applied to %1$s profile.</string>
+    <string name="shared_string_items">Items</string>
     <string name="custom_osmand_plugin">Custom OsmAnd plugin</string>
     <string name="app_mode_ski_snowmobile">Snowmobile</string>
     <string name="app_mode_ski_touring">Ski touring</string>
     <string name="replace_point_descr">Replace another point with this</string>
+    <string name="developer_plugin">Developer Plugin</string>
+    <string name="move_inside_category">You can move items only inside this category.</string>
+    <string name="additional_actions_descr">You can acsess this actions by taping “Actions” button.</string>
+    <string name="main_actions">Main actions</string>
+    <string name="main_actions_descr">Main actions containt only 4 buttons.</string>
+    <string name="reset_items_descr">Settings will be reset to the original state after hiding.</string>
+    <string name="hidden_items_descr">These items are hidden from the menu, but the represented options or plugins still be working.</string>
+    <string name="shared_string_hidden">Hidden</string>
+    <string name="divider_descr">Elements below this point separated by a divider.</string>
+    <string name="shared_string_divider">Divider</string>
+    <string name="reorder_or_hide_from">Reorder or hide items from the %1$s.</string>
+    <string name="context_menu_actions">Context menu actions</string>
+    <string name="shared_string_drawer">Drawer</string>
+    <string name="ui_customization">UI Customization</string>
+    <string name="ui_customization_short_descr">Drawer items, context menu</string>
+    <string name="ui_customization_description">Customize the quantity of items in Drawer, Configure map and context menu.\n\nYou can disable unused plugins, to hide all its controls from the application %1$s.</string>
     <string name="shared_string_min">Min</string>
     <string name="shared_string_square">Square</string>
     <string name="shared_string_octagon">Octagon</string>
