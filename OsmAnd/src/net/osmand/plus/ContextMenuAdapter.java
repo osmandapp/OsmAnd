@@ -104,10 +104,6 @@ public class ContextMenuAdapter {
 		return items;
 	}
 
-	public void updateItems(List<ContextMenuItem> items) {
-		this.items = items;
-	}
-
 	public void removeItem(int position) {
 		items.remove(position);
 	}

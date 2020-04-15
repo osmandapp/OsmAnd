@@ -567,13 +567,14 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 //		TODO refactor section
 		ContextMenuAdapter adapter = menu.getActionsContextMenuAdapter(false);
 		List<ContextMenuItem> items = adapter.getItems();
-		List<ContextMenuItem> main = new ArrayList<>();
-		List<ContextMenuItem> additional = new ArrayList<>();
-		for (int i = 0; i < 4; i++) {
-			main.add(items.get(i));
-		}
-		for (int i = 4; i < items.size(); i++) {
-			additional.add(items.get(i));
+		ContextMenuAdapter mainAdapter = new ContextMenuAdapter(requireMyApplication());
+		ContextMenuAdapter additionalAdapter = new ContextMenuAdapter(requireMyApplication());
+		for (int i = 0; i < items.size(); i++) {
+			if (i < 4) {
+				mainAdapter.addItem(items.get(i));
+			} else {
+				additionalAdapter.addItem(items.get(i));
+			}
 		}
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
 				ViewGroup.LayoutParams.MATCH_PARENT,
@@ -581,15 +582,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				1f
 		);
 		buttons.removeAllViews();
-		ContextMenuAdapter mainAdapter = new ContextMenuAdapter(requireMyApplication());
-		mainAdapter.updateItems(main);
 		ContextMenuItemClickListener mainListener = menu.getContextMenuItemClickListener(mainAdapter);
-		ContextMenuAdapter additionalAdapter = new ContextMenuAdapter(requireMyApplication());
-		additionalAdapter.updateItems(additional);
 		ContextMenuItemClickListener additionalListener = menu.getContextMenuItemClickListener(additionalAdapter);
 
-		for (int i = 0; i < main.size(); i++) {
-			buttons.addView(getActionView(main.get(i), i, mainAdapter, additionalAdapter, mainListener, additionalListener), params);
+		for (int i = 0; i < 4; i++) {
+			buttons.addView(getActionView(items.get(i), i, mainAdapter, additionalAdapter, mainListener, additionalListener), params);
 		}
 		buttons.setGravity(Gravity.CENTER);
 
