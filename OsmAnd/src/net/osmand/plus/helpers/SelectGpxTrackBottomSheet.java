@@ -1,5 +1,6 @@
 package net.osmand.plus.helpers;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -81,7 +82,10 @@ public class SelectGpxTrackBottomSheet extends MenuBottomSheetDialogFragment {
 					callbackWithObject.processResult(new GPXUtilities.GPXFile[]{selectedGpxFile.getGpxFile()});
 				} else {
 					File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-					GpxUiHelper.loadGPXFileInDifferentThread(requireActivity(), callbackWithObject, dir, null, fileName);
+					Activity activity = getActivity();
+					if (activity != null) {
+						GpxUiHelper.loadGPXFileInDifferentThread(activity, callbackWithObject, dir, null, fileName);
+					}
 				}
 			}
 		}
@@ -90,13 +94,13 @@ public class SelectGpxTrackBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static void showInstance(FragmentManager fragmentManager, boolean showCurrentGpx,
 	                                CallbackWithObject<GPXUtilities.GPXFile[]> callbackWithObject, List<GpxUiHelper.GPXInfo> gpxInfoList) {
-		SelectGpxTrackBottomSheet fragment = new SelectGpxTrackBottomSheet();
-		fragment.setUsedOnMap(true);
-		fragment.setRetainInstance(true);
-		fragment.setShowCurrentGpx(showCurrentGpx);
-		fragment.setCallbackWithObject(callbackWithObject);
-		fragment.setGpxInfoList(gpxInfoList);
 		if (!fragmentManager.isStateSaved()) {
+			SelectGpxTrackBottomSheet fragment = new SelectGpxTrackBottomSheet();
+			fragment.setUsedOnMap(true);
+			fragment.setRetainInstance(true);
+			fragment.setShowCurrentGpx(showCurrentGpx);
+			fragment.setCallbackWithObject(callbackWithObject);
+			fragment.setGpxInfoList(gpxInfoList);
 			fragment.show(fragmentManager, SelectGpxTrackBottomSheet.TAG);
 		}
 	}
