@@ -64,6 +64,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -450,6 +451,10 @@ public class OsmandSettings {
 						return enumPref.setModeValue(mode, enumValue);
 					}
 					return false;
+				}
+			} else if (preference instanceof ContextMenuItemsPreference) {
+				if (value instanceof ContextMenuItemsSettings) {
+					((ContextMenuItemsPreference) preference).setModeValue(mode, (ContextMenuItemsSettings) value);
 				}
 			}
 		}
@@ -1131,57 +1136,87 @@ public class OsmandSettings {
 		}
 	}
 
-	public class ContextMenuItemsPreference extends StringPreference {
-		public static final String HIDDEN = "hidden";
-		public static final String ORDER = "order";
-		private List<String> hiddenIds;
-		private List<String> orderIds;
-		private Object cachedPreference;
+	public class ContextMenuItemsPreference extends CommonPreference<ContextMenuItemsSettings> {
+		@NonNull
 		private String idScheme;
 
-		private ContextMenuItemsPreference(String id, String idScheme) {
-			super(id, "");
+		private ContextMenuItemsPreference(String id, @NonNull String idScheme) {
+			super(id, new ContextMenuItemsSettings());
 			this.idScheme = idScheme;
 		}
 
-		private void readValues() {
-			hiddenIds = new ArrayList<>();
-			orderIds = new ArrayList<>();
-			cachedPreference = getPreferences();
-			String jsonString = get();
+		@Override
+		protected ContextMenuItemsSettings getValue(Object prefs, ContextMenuItemsSettings defaultValue) {
+			String s = settingsAPI.getString(prefs, getId(), "");
+			return readValue(s);
+		}
+
+		@Override
+		protected boolean setValue(Object prefs, ContextMenuItemsSettings val) {
+			return settingsAPI.edit(prefs).putString(getId(), val.writeToJsonString(idScheme)).commit();
+		}
+
+		@Override
+		public ContextMenuItemsSettings parseString(String s) {
+			return readValue(s);
+		}
+
+		private ContextMenuItemsSettings readValue(String s) {
+			ContextMenuItemsSettings value = new ContextMenuItemsSettings();
+			value.readFromJsonString(s, idScheme);
+			return value;
+		}
+
+		@NonNull
+		public String getIdScheme() {
+			return idScheme;
+		}
+	}
+
+	public static class ContextMenuItemsSettings implements Serializable {
+		public static final String HIDDEN = "hidden";
+		public static final String ORDER = "order";
+		private List<String> hiddenIds = new ArrayList<>();
+		private List<String> orderIds = new ArrayList<>();
+
+		public ContextMenuItemsSettings() {
+
+		}
+
+		public ContextMenuItemsSettings(@NonNull List<String> hiddenIds, @NonNull List<String> orderIds) {
+			this.hiddenIds = hiddenIds;
+			this.orderIds = orderIds;
+		}
+
+		public void readFromJsonString(String jsonString, @NonNull String idScheme) {
 			if (Algorithms.isEmpty(jsonString)) {
 				return;
 			}
 			try {
 				JSONObject json = new JSONObject(jsonString);
-				JSONObject items = json.optJSONObject(getId());
-				populateIdsList(items.optJSONArray(HIDDEN), hiddenIds);
-				populateIdsList(items.optJSONArray(ORDER), orderIds);
+				hiddenIds = readIdsList(json.optJSONArray(HIDDEN), idScheme);
+				orderIds = readIdsList(json.optJSONArray(ORDER), idScheme);
 			} catch (JSONException e) {
 				LOG.error("Error converting to json string: " + e);
 			}
 		}
 
-		private void populateIdsList(JSONArray jsonArray, @NonNull List<String> list) {
+		private List<String> readIdsList(JSONArray jsonArray, @NonNull String idScheme) {
+			List<String> list = new ArrayList<>();
 			if (jsonArray != null) {
 				for (int i = 0; i < jsonArray.length(); i++) {
 					String id = jsonArray.optString(i);
 					list.add(idScheme + id);
 				}
 			}
+			return list;
 		}
 
-		public String convertToJsonString(List<String> hidden, List<String> order, String id) {
+		public String writeToJsonString(@NonNull String idScheme) {
 			try {
 				JSONObject json = new JSONObject();
-				JSONObject items = new JSONObject();
-				JSONArray hiddenItems = new JSONArray();
-				JSONArray orderItems = new JSONArray();
-				addIdsToJsonArray(hiddenItems, hidden);
-				addIdsToJsonArray(orderItems, order);
-				items.put(HIDDEN, hiddenItems);
-				items.put(ORDER, orderItems);
-				json.put(id, items);
+				json.put(HIDDEN, getJsonArray(hiddenIds, idScheme));
+				json.put(ORDER, getJsonArray(orderIds, idScheme));
 				return json.toString();
 			} catch (JSONException e) {
 				LOG.error("Error converting to json string: " + e);
@@ -1189,26 +1224,22 @@ public class OsmandSettings {
 			return "";
 		}
 
-		private void addIdsToJsonArray(@NonNull JSONArray jsonArray, List<String> ids) {
+		private JSONArray getJsonArray(List<String> ids, @NonNull String idScheme) {
+			JSONArray jsonArray = new JSONArray();
 			if (ids != null && !ids.isEmpty()) {
 				for (String id : ids) {
 					jsonArray.put(id.replace(idScheme, ""));
 				}
 			}
+			return jsonArray;
 		}
 
 		public List<String> getHiddenIds() {
-			if (cachedPreference != getPreferences() || hiddenIds == null) {
-				readValues();
-			}
-			return hiddenIds;
+			return Collections.unmodifiableList(hiddenIds);
 		}
 
 		public List<String> getOrderIds() {
-			if (cachedPreference != getPreferences() || orderIds == null) {
-				readValues();
-			}
-			return orderIds;
+			return Collections.unmodifiableList(orderIds);
 		}
 	}
 
@@ -3545,11 +3576,11 @@ public class OsmandSettings {
 	public final ContextMenuItemsPreference CONTEXT_MENU_ACTIONS_ITEMS =
 			(ContextMenuItemsPreference) new ContextMenuItemsPreference("configure_map_items", MAP_CONTEXT_MENU_ACTIONS).makeProfile().cache();
 
-	public final List<ContextMenuItemsPreference> contextMenuItemsPreferences = Arrays.asList(DRAWER_ITEMS, CONFIGURE_MAP_ITEMS, CONTEXT_MENU_ACTIONS_ITEMS);
+	public final List<ContextMenuItemsPreference> CONTEXT_MENU_ITEMS_PREFERENCES = Arrays.asList(DRAWER_ITEMS, CONFIGURE_MAP_ITEMS, CONTEXT_MENU_ACTIONS_ITEMS);
 
 	@Nullable
 	public ContextMenuItemsPreference getContextMenuItemsPreference(@NonNull String id) {
-		for (ContextMenuItemsPreference preference : contextMenuItemsPreferences) {
+		for (ContextMenuItemsPreference preference : CONTEXT_MENU_ITEMS_PREFERENCES) {
 			if (id.startsWith(preference.idScheme)) {
 				return preference;
 			}

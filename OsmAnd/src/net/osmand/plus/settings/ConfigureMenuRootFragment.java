@@ -264,8 +264,8 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 						contextMenuAdapter = menu.getActionsContextMenuAdapter(true);
 						break;
 				}
-				int hiddenCount = contextMenuAdapter.getHiddenItems().size();
-				int allCount = contextMenuAdapter.getDefaultItems().size() + contextMenuAdapter.getHiddenItems().size();
+				int hiddenCount = ConfigureMenuItemsFragment.getSettingForScreen(app, type).getModeValue(appMode).getHiddenIds().size();
+				int allCount = contextMenuAdapter.getDefaultItems().size();
 				String amount = getString(R.string.n_items_of_z, String.valueOf(allCount - hiddenCount), String.valueOf(allCount));
 				return getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.shared_string_items), amount);
 			}

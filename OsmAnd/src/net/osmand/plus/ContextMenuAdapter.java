@@ -44,15 +44,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
 
 public class ContextMenuAdapter {
 	private static final Log LOG = PlatformUtil.getLog(ContextMenuAdapter.class);
@@ -65,7 +61,6 @@ public class ContextMenuAdapter {
 	@LayoutRes
 	private int DEFAULT_LAYOUT_ID = R.layout.list_menu_item_native;
 	List<ContextMenuItem> items = new ArrayList<>();
-	List<ContextMenuItem> hiddenItems = new ArrayList<>();
 	private boolean profileDependent = false;
 	private boolean nightMode;
 	private ConfigureMapMenu.OnClickListener changeAppModeListener = null;
@@ -94,11 +89,7 @@ public class ContextMenuAdapter {
 				item.setHidden(isItemHidden(id));
 				item.setOrder(getItemOrder(id, item.getOrder()));
 			}
-			if (item.isHidden()) {
-				hiddenItems.add(item);
-			} else {
-				items.add(item.getPos(), item);
-			}
+			items.add(item.getPos(), item);
 			sortItemsByOrder();
 		} catch (IndexOutOfBoundsException ex) {
 			items.add(item);
@@ -164,7 +155,7 @@ public class ContextMenuAdapter {
 			if (contextMenuItemsPreference == null) {
 				return false;
 			}
-		List<String> hiddenIds = contextMenuItemsPreference.getHiddenIds();
+		List<String> hiddenIds = contextMenuItemsPreference.get().getHiddenIds();
 		if (!Algorithms.isEmpty(hiddenIds)) {
 			return hiddenIds.contains(id);
 		}
@@ -176,7 +167,7 @@ public class ContextMenuAdapter {
 			if (contextMenuItemsPreference == null) {
 				return defaultOrder;
 			}
-		List<String> orderIds = contextMenuItemsPreference.getOrderIds();
+		List<String> orderIds = contextMenuItemsPreference.get().getOrderIds();
 		if (!Algorithms.isEmpty(orderIds)) {
 			int order = orderIds.indexOf(id);
 			if (order != -1) {
@@ -190,12 +181,14 @@ public class ContextMenuAdapter {
 		final int layoutId = DEFAULT_LAYOUT_ID;
 		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
 		final OsmAndAppCustomization customization = app.getAppCustomization();
-		for (Iterator<ContextMenuItem> iterator = items.iterator(); iterator.hasNext(); ) {
-			String id = iterator.next().getId();
-			if (!TextUtils.isEmpty(id) && !customization.isFeatureEnabled(id)) {
-				iterator.remove();
+		List<ContextMenuItem> itemsToRemove = new ArrayList<>();
+		for (ContextMenuItem item : items) {
+			String id = item.getId();
+			if (item.isHidden() || !TextUtils.isEmpty(id) && !customization.isFeatureEnabled(id)) {
+				itemsToRemove.add(item);
 			}
 		}
+		items.removeAll(itemsToRemove);
 		return new ContextMenuArrayAdapter(activity, layoutId, R.id.title,
 				items.toArray(new ContextMenuItem[items.size()]), app, lightTheme, changeAppModeListener);
 	}
@@ -603,24 +596,14 @@ public class ContextMenuAdapter {
 		return items;
 	}
 
-	public List<ContextMenuItem> getHiddenItems() {
-		return hiddenItems;
-	}
-
 	private String getIdScheme() {
 		String idScheme = "";
 		for (ContextMenuItem item : items) {
 			String id = item.getId();
 			if (id != null) {
-				if (id.startsWith(DRAWER_ITEM_ID_SCHEME)) {
-					idScheme = DRAWER_ITEM_ID_SCHEME;
-					break;
-				} else if (id.startsWith(CONFIGURE_MAP_ITEM_ID_SCHEME)) {
-					idScheme = CONFIGURE_MAP_ITEM_ID_SCHEME;
-					break;
-				} else if (id.startsWith(MAP_CONTEXT_MENU_ACTIONS)) {
-					idScheme = MAP_CONTEXT_MENU_ACTIONS;
-					break;
+				ContextMenuItemsPreference pref = app.getSettings().getContextMenuItemsPreference(id);
+				if (pref != null) {
+					return pref.getIdScheme();
 				}
 			}
 		}

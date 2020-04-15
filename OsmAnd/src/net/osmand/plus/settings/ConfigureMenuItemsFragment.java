@@ -43,9 +43,6 @@ import net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItem;
 import net.osmand.plus.settings.RearrangeMenuItemsAdapter.MenuItemsAdapterListener;
 
 import org.apache.commons.logging.Log;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -54,8 +51,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
-import static net.osmand.plus.OsmandSettings.ContextMenuItemsPreference.HIDDEN;
-import static net.osmand.plus.OsmandSettings.ContextMenuItemsPreference.ORDER;
 import static net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItemType.BUTTON;
 import static net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItemType.DESCRIPTION;
 import static net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItemType.DIVIDER;
@@ -140,9 +135,9 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 			hiddenMenuItems = savedInstanceState.getStringArrayList(HIDDEN_ITEMS_KEY);
 			menuItemsOrder = (HashMap<String, Integer>) savedInstanceState.getSerializable(ITEMS_ORDER_KEY);
 		} else {
-			hiddenMenuItems = getSettingForScreen(app, screenType).getHiddenIds();
+			hiddenMenuItems = new ArrayList<>(getSettingForScreen(app, screenType).getModeValue(appMode).getHiddenIds());
 			menuItemsOrder = new HashMap<>();
-			List<String> orderIds = getSettingForScreen(app, screenType).getOrderIds();
+			List<String> orderIds = getSettingForScreen(app, screenType).getModeValue(appMode).getOrderIds();
 			for (int i = 0; i < orderIds.size(); i++) {
 				menuItemsOrder.put(orderIds.get(i), i);
 			}
@@ -261,19 +256,19 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 			@Override
 			public void onClick(View v) {
 				List<ContextMenuItem> defItems = contextMenuAdapter.getDefaultItems();
-				defItems.addAll(contextMenuAdapter.getHiddenItems());
-				sortByCustomOrder(defItems, menuItemsOrder);
 				List<String> ids = new ArrayList<>();
-				for (ContextMenuItem item : defItems) {
-					ids.add(item.getId());
+				if (!menuItemsOrder.isEmpty()) {
+					sortByCustomOrder(defItems, menuItemsOrder);
+					for (ContextMenuItem item : defItems) {
+						ids.add(item.getId());
+					}
 				}
 				FragmentManager fm = getFragmentManager();
-				OsmandSettings.ContextMenuItemsPreference preference = getSettingForScreen(app, screenType);
-				String stringToSave = preference.convertToJsonString(hiddenMenuItems, ids, preference.getId());
+				OsmandSettings.ContextMenuItemsSettings prefToSave = new OsmandSettings.ContextMenuItemsSettings(hiddenMenuItems, ids);
 				if (fm != null) {
 					ChangeGeneralProfilesPrefBottomSheet.showInstance(fm,
 							getSettingForScreen(app, screenType).getId(),
-							stringToSave,
+							prefToSave,
 							getTargetFragment(),
 							false,
 							appMode,
@@ -347,6 +342,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 						menuItemsOrder.clear();
 						wasReset = true;
 						isChanged = true;
+						getSettingForScreen(app, screenType).resetModeToDefault(appMode);
 						instantiateContextMenuAdapter();
 						rearrangeAdapter.updateItems(getAdapterItems());
 					}
@@ -436,7 +432,6 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 
 	public List<AdapterItem> getItemsForRearrangeAdapter(@Nullable List<String> hiddenItemsIds, @Nullable HashMap<String, Integer> itemsOrderIds, boolean hidden) {
 		List<ContextMenuItem> defItems = contextMenuAdapter.getDefaultItems();
-		defItems.addAll(contextMenuAdapter.getHiddenItems());
 		if (itemsOrderIds == null || itemsOrderIds.isEmpty()) {
 			initDefaultOrders(defItems);
 		} else {
