@@ -2,6 +2,7 @@ package net.osmand.plus.settings;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -37,6 +38,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_RENDERING_CATE
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.RENDERING_ITEMS_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_ITEMS_ID_SCHEME;
+import static net.osmand.plus.settings.ConfigureMenuItemsFragment.MAIN_BUTTONS_QUANTITY;
 
 public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 		implements ReorderItemTouchHelperCallback.OnItemMoveCallback {
@@ -44,14 +46,14 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 	private OsmandApplication app;
 	private UiUtilities uiUtilities;
 	private boolean nightMode;
-	private List<AdapterItem> items;
+	private List<RearrangeMenuAdapterItem> items;
 	private MenuItemsAdapterListener listener;
 	private int activeColorRes;
 	private int textColorRes;
 
 
 	public RearrangeMenuItemsAdapter(OsmandApplication app,
-	                                 List<AdapterItem> items) {
+									 List<RearrangeMenuAdapterItem> items) {
 		this.app = app;
 		this.items = items;
 		uiUtilities = app.getUIUtilities();
@@ -66,7 +68,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 
 	@Override
 	public int getItemViewType(int position) {
-		AdapterItem item = items.get(position);
+		RearrangeMenuAdapterItem item = items.get(position);
 		return item.type.ordinal();
 	}
 
@@ -100,12 +102,12 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 	@SuppressLint("ClickableViewAccessibility")
 	@Override
 	public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
-		AdapterItem item = items.get(position);
+		RearrangeMenuAdapterItem item = items.get(position);
 		if (holder instanceof DescriptionHolder) {
 			DescriptionHolder h = (DescriptionHolder) holder;
 			ScreenType screenType = (ScreenType) item.value;
-			int paddingStart = AndroidUtils.dpToPx(app, 56);
-			int paddingTop = AndroidUtils.dpToPx(app, 16);
+			int paddingStart = (int) app.getResources().getDimension(R.dimen.toolbar_height);
+			int paddingTop = (int) app.getResources().getDimension(R.dimen.content_padding);
 			h.description.setText(String.format(app.getString(R.string.reorder_or_hide_from), app.getString(screenType.titleRes)));
 			h.image.setImageResource(nightMode ? screenType.imageNightRes : screenType.imageDayRes);
 			if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
@@ -127,7 +129,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 				h.title.setText(R.string.shared_string_divider);
 				h.title.setTypeface(FontCache.getFont(app, app.getString(R.string.font_roboto_medium)));
 				h.title.setTextColor(app.getResources().getColor(activeColorRes));
-				h.title.setTextSize(15);
+				h.title.setTextSize(TypedValue.COMPLEX_UNIT_PX, app.getResources().getDimension(R.dimen.default_list_text_size));
 				h.description.setText(R.string.divider_descr);
 				h.icon.setVisibility(View.GONE);
 				h.actionIcon.setVisibility(View.GONE);
@@ -137,7 +139,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 					|| MAP_RENDERING_CATEGORY_ID.equals(id)) {
 				h.title.setText(menuItem.getTitle());
 				h.title.setTypeface(FontCache.getFont(app, app.getString(R.string.font_roboto_medium)));
-				h.title.setTextSize(15);
+				h.title.setTextSize(TypedValue.COMPLEX_UNIT_PX, app.getResources().getDimension(R.dimen.default_list_text_size));
 				h.description.setText(R.string.move_inside_category);
 				h.icon.setVisibility(View.GONE);
 				h.actionIcon.setVisibility(View.GONE);
@@ -193,6 +195,8 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 		} else if (holder instanceof HeaderHolder) {
 			HeaderHolder h = (HeaderHolder) holder;
 			HeaderItem header = (HeaderItem) item.value;
+			h.title.setTypeface(FontCache.getFont(app, app.getString(R.string.font_roboto_medium)));
+			h.title.setTextSize(TypedValue.COMPLEX_UNIT_PX, app.getResources().getDimension(R.dimen.default_list_text_size));
 			h.title.setText(header.titleRes);
 			h.description.setText(header.descrRes);
 			h.moveIcon.setVisibility(View.GONE);
@@ -230,12 +234,13 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 				return false;
 			}
 
+			int buttonMoreIndex = MAIN_BUTTONS_QUANTITY + 1;
 			if (menuItemFrom.getId().equals(MAP_CONTEXT_MENU_MORE_ID)) {
-				if (to > 5) {
+				if (to > buttonMoreIndex) {
 					return false;
 				}
 			} else if (menuItemTo.getId().equals(MAP_CONTEXT_MENU_MORE_ID)) {
-				if (from > 5) {
+				if (from > buttonMoreIndex) {
 					return false;
 				}
 			}
@@ -359,11 +364,11 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 		}
 	}
 
-	public static class AdapterItem {
+	public static class RearrangeMenuAdapterItem {
 		private AdapterItemType type;
 		private Object value;
 
-		public AdapterItem(AdapterItemType type, Object value) {
+		public RearrangeMenuAdapterItem(AdapterItemType type, Object value) {
 			this.type = type;
 			this.value = value;
 		}
@@ -427,11 +432,11 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 		this.listener = listener;
 	}
 
-	public AdapterItem getItem(int position) {
+	public RearrangeMenuAdapterItem getItem(int position) {
 		return items.get(position);
 	}
 
-	public void updateItems(List<AdapterItem> items) {
+	public void updateItems(List<RearrangeMenuAdapterItem> items) {
 		this.items = items;
 		notifyDataSetChanged();
 	}

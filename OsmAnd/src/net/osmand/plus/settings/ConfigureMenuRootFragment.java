@@ -117,7 +117,9 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 		toolbarSubTitle.setText(appMode.toHumanString());
 		toolbarSubTitle.setVisibility(View.VISIBLE);
 		List<Object> items = new ArrayList<>();
-		items.add(getString(R.string.ui_customization_description));
+        String plugins = getString(R.string.prefs_plugins);
+        String description = String.format(getString(R.string.ui_customization_description), plugins);
+        items.add(description);
 		items.addAll(Arrays.asList(ScreenType.values()));
 		CustomizationItemsAdapter adapter = new CustomizationItemsAdapter(items, new OnCustomizationItemClickListener() {
 			@Override
@@ -199,10 +201,9 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 			final Object currentItem = items.get(position);
 			if (holder instanceof DescriptionHolder) {
 				DescriptionHolder descriptionHolder = (DescriptionHolder) holder;
-				String plugins = getString(R.string.prefs_plugins) + '.';
-				String description = String.format(getString(R.string.ltr_or_rtl_combine_via_space), (String) currentItem, plugins);
+                String plugins = getString(R.string.prefs_plugins);
 				setupClickableText(
-						descriptionHolder.description, description, plugins, new Intent(app, PluginsActivity.class));
+                        descriptionHolder.description, (String) currentItem, plugins, new Intent(app, PluginsActivity.class));
 				descriptionHolder.image.setVisibility(View.GONE);
 			} else {
 				final ScreenType item = (ScreenType) currentItem;
