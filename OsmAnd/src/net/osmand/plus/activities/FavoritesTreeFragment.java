@@ -840,7 +840,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			int color = model.getColor() == 0 || model.getColor() == Color.BLACK ? getResources().getColor(R.color.color_favorite) : model.getColor();
 			if (!model.isPersonal()) {
 				setCategoryIcon(app, app.getUIUtilities().getPaintedIcon(
-						R.drawable.ic_action_fav_dark, visible ? (color | 0xff000000) : getResources().getColor(disabledColor)),
+						R.drawable.ic_action_folder, visible ? (color | 0xff000000) : getResources().getColor(disabledColor)),
 						groupPosition, isExpanded, row, light);
 			}
 			adjustIndicator(app, groupPosition, isExpanded, row, light);
@@ -955,7 +955,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			name.setTextColor(getResources().getColor(visible ? enabledColor : disabledColor));
 			distanceText.setText(distance);
 			if (model.isAddressSpecified()) {
-				distanceText.setText(String.format(getString(R.string.ltr_or_rtl_combine_via_bold_point), distance.trim(), model.getAddress()));
+				distanceText.setText(String.format(getString(R.string.ltr_or_rtl_combine_via_comma), distance.trim(), model.getAddress()));
 			}
 			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),
 					visible ? model.getColor() : getResources().getColor(disabledIconColor), false, model));

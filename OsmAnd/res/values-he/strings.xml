@@ -3395,7 +3395,7 @@
     <string name="save_heading">כולל הכותרת</string>
     <string name="save_heading_descr">לשמור את הכותרת של כל נקודת דרך בזמן ההקלטה.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
-    <string name="street_city">%1$s, %2$s</string>
+    <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="personal_category_name">אישי</string>
     <string name="shared_string_downloading_formatted">%s בהורדה</string>
     <string name="routing_attr_allow_classic_only_description">מסלולים שעבור גרומינג לסגנון קלסי רק ללא מסלולי ההחלקה. לרבות מסלולים שעברו גרומינג על ידי אופנוע שלג עם תוואי רופף ומסלולים שנסללו ידנית על ידי גולשי סקי.</string>

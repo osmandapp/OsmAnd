@@ -3354,7 +3354,7 @@
     <string name="suggested_maps">Предлагаемые карты</string>
     <string name="join_segments">Объединить сегменты</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
-    <string name="street_city">%1$s, %2$s</string>
+    <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="desert_render_descr">Для пустынь и других малонаселенных районов. Более детально.</string>
     <string name="select_navigation_icon">Положение значка при движении</string>
     <string name="select_map_icon">Положение значка в состоянии покоя</string>

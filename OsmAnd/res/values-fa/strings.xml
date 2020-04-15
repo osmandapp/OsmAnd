@@ -3431,7 +3431,7 @@
     <string name="save_heading">ثبت جهت</string>
     <string name="save_heading_descr">هنگام ضبط، جهت (heading) را برای هر یک از نقطه‌های رد ثبت می‌کند.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
-    <string name="street_city">%1$s،‏ %2$s</string>
+    <string name="ltr_or_rtl_combine_via_comma">%1$s،‏ %2$s</string>
     <string name="personal_category_name">شخصی</string>
     <string name="shared_string_downloading_formatted">در حال بارگیری %s</string>
     <string name="rendering_value_thick_name">ضخیم</string>
