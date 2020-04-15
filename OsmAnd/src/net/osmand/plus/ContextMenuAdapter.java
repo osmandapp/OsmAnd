@@ -146,32 +146,32 @@ public class ContextMenuAdapter {
 		});
 	}
 
-	private boolean isItemHidden(@NonNull String id) {
-		ContextMenuItemsPreference contextMenuItemsPreference = app.getSettings().getContextMenuItemsPreference(id);
-			if (contextMenuItemsPreference == null) {
-				return false;
-			}
-		List<String> hiddenIds = contextMenuItemsPreference.get().getHiddenIds();
-		if (!Algorithms.isEmpty(hiddenIds)) {
-			return hiddenIds.contains(id);
-		}
-		return false;
-	}
+    private boolean isItemHidden(@NonNull String id) {
+        ContextMenuItemsPreference contextMenuItemsPreference = app.getSettings().getContextMenuItemsPreference(id);
+        if (contextMenuItemsPreference == null) {
+            return false;
+        }
+        List<String> hiddenIds = contextMenuItemsPreference.get().getHiddenIds();
+        if (!Algorithms.isEmpty(hiddenIds)) {
+            return hiddenIds.contains(id);
+        }
+        return false;
+    }
 
-	private int getItemOrder(@NonNull String id, int defaultOrder) {
-		ContextMenuItemsPreference contextMenuItemsPreference = app.getSettings().getContextMenuItemsPreference(id);
-			if (contextMenuItemsPreference == null) {
-				return defaultOrder;
-			}
-		List<String> orderIds = contextMenuItemsPreference.get().getOrderIds();
-		if (!Algorithms.isEmpty(orderIds)) {
-			int order = orderIds.indexOf(id);
-			if (order != -1) {
-				return order;
-			}
-		}
-		return defaultOrder;
-	}
+    private int getItemOrder(@NonNull String id, int defaultOrder) {
+        ContextMenuItemsPreference contextMenuItemsPreference = app.getSettings().getContextMenuItemsPreference(id);
+        if (contextMenuItemsPreference == null) {
+            return defaultOrder;
+        }
+        List<String> orderIds = contextMenuItemsPreference.get().getOrderIds();
+        if (!Algorithms.isEmpty(orderIds)) {
+            int order = orderIds.indexOf(id);
+            if (order != -1) {
+                return order;
+            }
+        }
+        return defaultOrder;
+    }
 
 	public ArrayAdapter<ContextMenuItem> createListAdapter(final Activity activity, final boolean lightTheme) {
 		final int layoutId = DEFAULT_LAYOUT_ID;
