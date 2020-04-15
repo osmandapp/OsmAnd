@@ -3577,4 +3577,23 @@
     <string name="wikipedia_poi_languages_promo">Bazı Wikipedia makaleleri adınızda bulunmayabilir, Wikipedia makalelerinin haritada görüneceği dilleri seçin.
 \nMakaleyi okurken mevcut tüm diller arasında geçiş yapabileceksiniz.</string>
     <string name="wiki_menu_download_descr">Wikipedia POI\'lerini haritada görüntülemek için ek haritalara ihtiyaç vardır.</string>
+    <string name="ui_customization_short_descr">Çekmece ögeleri, içerik menüsü</string>
+    <string name="shared_string_drawer">Çekmece</string>
+    <string name="reset_items_descr">Gizlendikten sonra ayarlar orijinal durumuna sıfırlanacaktır.</string>
+    <string name="shared_string_items">Ögeler</string>
+    <string name="ui_customization_description">Çekmecedeki ögelerin sayısını özelleştirin, haritayı ve içerik menüsünü yapılandırın.
+\n
+\n%1$s uygulamasından tüm denetimlerini gizlemek için kullanılmayan eklentileri devre dışı bırakabilirsiniz.</string>
+    <string name="ui_customization">Kullanıcı Arayüzü Özelleştirme</string>
+    <string name="context_menu_actions">İçerik menüsü eylemleri</string>
+    <string name="reorder_or_hide_from">%1$s\'den ögeleri yeniden sırala veya gizle.</string>
+    <string name="shared_string_divider">Bölücü</string>
+    <string name="divider_descr">Bu noktanın altındaki ögeler bir bölücü ile ayrılır.</string>
+    <string name="shared_string_hidden">Gizli</string>
+    <string name="hidden_items_descr">Bu ögeler menüden gizlenir, ancak temsil edilen seçenekler veya eklentiler hala çalışır.</string>
+    <string name="main_actions_descr">Ana eylemler sadece 4 düğme içerir.</string>
+    <string name="main_actions">Ana eylemler</string>
+    <string name="additional_actions_descr">Bu eylemlere “Eylemler” düğmesine dokunarak erişebilirsiniz.</string>
+    <string name="move_inside_category">Ögeleri yalnızca bu kategorinin içine taşıyabilirsiniz.</string>
+    <string name="developer_plugin">Geliştirici Eklentisi</string>
 </resources>
