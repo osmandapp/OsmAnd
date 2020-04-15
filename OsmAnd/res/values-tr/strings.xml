@@ -1889,7 +1889,7 @@
     <string name="donations">Bağışlar</string>
     <string name="number_of_recipients">Alıcıların sayısı</string>
     <string name="osm_user_stat">%1$s , rütbe %2$s , toplam düzenlemeleri %3$s düzenler</string>
-    <string name="osm_editors_ranking">OSM Editör sıralaması</string>
+    <string name="osm_editors_ranking">OSM Düzenleyici sıralaması</string>
     <string name="osm_live_subscription">OsmAnd Live aboneliği</string>
     <string name="osm_live_subscribe_btn">Abone ol</string>
     <string name="osm_live_email_desc">Yaptığınız katkılar hakkında size bilgi vermek için gerekli.</string>
@@ -2820,7 +2820,7 @@
     <string name="will_open_tomorrow_at">Yarın şu saatte açılıyor</string>
     <string name="show_closed_notes">Kapalı notları göster</string>
     <string name="switch_osm_notes_visibility_desc">Haritada OSM notlarını göster/gizle.</string>
-    <string name="gpx_file_desc">GPX - JOSM veya diğer OSM editörlerine aktarmak için uygundur.</string>
+    <string name="gpx_file_desc">GPX - JOSM veya diğer OSM düzenleyicilerine aktarmak için uygundur.</string>
     <string name="osc_file_desc">OSC - OSM\'ye aktarmak için uygundur.</string>
     <string name="osc_file">OSC dosyası</string>
     <string name="choose_file_type">Dosya türünü seçin</string>

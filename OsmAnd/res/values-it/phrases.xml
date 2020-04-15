@@ -699,7 +699,7 @@
     <string name="poi_club">Club</string>
     <string name="poi_pasta">Pasta</string>
     <string name="poi_fuel_type">Tipo di carburante</string>
-    <string name="poi_fuel_avia_type">Tipo di carburante (avia)</string>
+    <string name="poi_fuel_avia_type">Tipo di carburante (aeroplani)</string>
     <string name="poi_payment_type">Tipo di pagamento</string>
     <string name="poi_payment_fuel_type">Carte carburante</string>
     <string name="poi_additional_type">Ulteriori</string>
