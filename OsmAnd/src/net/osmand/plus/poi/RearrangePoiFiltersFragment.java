@@ -261,7 +261,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 		if (profileButton != null) {
 			int iconColor = getSelectedAppMode().getIconColorInfo().getColor(nightMode);
 			int bgColor = ContextCompat.getColor(app, nightMode ?
-					R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light);
+					R.color.divider_color_dark : R.color.active_buttons_and_links_text_light);
 			int selectedColor = UiUtilities.getColorWithAlpha(iconColor, 0.3f);
 
 			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
