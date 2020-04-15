@@ -815,7 +815,7 @@ public class SettingsHelper {
 
 					@NonNull DownloadActivityType tp = DownloadActivityType.getIndexType(indexType);
 					if (tp != null) {
-						IndexItem indexItem = new CustomIndexItem(fileName, description, downloadurl, timestamp, size, contentSize, containerSize, tp);
+						IndexItem indexItem = new CustomIndexItem(fileName, subfolder, description, downloadurl, timestamp, size, contentSize, containerSize, tp);
 						region.downloadItems.add(indexItem);
 					}
 				}
