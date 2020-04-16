@@ -3585,4 +3585,23 @@
     <string name="wikipedia_poi_languages_promo">قد لا تكون بعض مقالات ويكيبيديا متاحة باسمك ، حدد اللغات التي ستظهر بها مقالات ويكيبيديا على الخريطة.
 \nستتمكن من التبديل بين جميع اللغات المتاحة أثناء قراءة المقالة.</string>
     <string name="wiki_menu_download_descr">هناك حاجة إلى خرائط إضافية لعرض النقاط المهمة من ويكيبيديا على الخريطة.</string>
+    <string name="ui_customization_description">تخصيص كمية العناصر في درج تكوين خريطة قائمة السياق.
+\n
+\nيمكنك تعطيل الإضافات غير المستخدمة لإخفاء جميع الضوابط من الطلب %1$s.</string>
+    <string name="ui_customization_short_descr">عناصر الدرج، قائمة السياق</string>
+    <string name="ui_customization">تخصيص واجهة المستخدم</string>
+    <string name="shared_string_drawer">درج</string>
+    <string name="context_menu_actions">إجراءات قائمة السياق</string>
+    <string name="reorder_or_hide_from">إعادة ترتيب العناصر أو إخفائها من %1$s.</string>
+    <string name="shared_string_divider">مفصول</string>
+    <string name="divider_descr">عناصر أسفل هذه النقطة مفصولة بفاصل.</string>
+    <string name="shared_string_hidden">المخفيه</string>
+    <string name="hidden_items_descr">هذه العناصر مخفية من القائمة ، ولكن الخيارات أو المكونات الإضافية لاتزال تعمل.</string>
+    <string name="reset_items_descr">ستتم إعادة تعيين الإعدادات إلى الحالة الأصلية بعد الاختفاء.</string>
+    <string name="main_actions_descr">الإجراءات الرئيسية تحتوي على 4 أزرار فقط.</string>
+    <string name="main_actions">الإجراءات الرئيسية</string>
+    <string name="additional_actions_descr">يمكنك الوصول إلى هذه الإجراءات بالضغط على زر \"الإجراءات\".</string>
+    <string name="move_inside_category">يمكنك نقل العناصر داخل هذه الفئة فقط.</string>
+    <string name="developer_plugin">الإضافات المطورة</string>
+    <string name="shared_string_items">العناصر</string>
 </resources>
