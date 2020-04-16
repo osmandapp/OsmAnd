@@ -184,7 +184,7 @@
     <string name="plugins_screen">מנהל התוספים</string>
     <string name="prefs_plugins_descr">התוספים מאפשרים הגדרות במצב מומחה ומספקים תכונות נוספות.</string>
     <string name="prefs_plugins">מנהל התוספים</string>
-    <string name="osm_editing_plugin_description">הצגת ההגדרות שנדרשות לטובת משוב ל־OSM כמו איסוף / שינוי פריטי נ״ע של OSM, פתיחה של / תגובה על הערות ב־OSM ותרומה של קובצי GPX מוקלטים (נדרשים פרטי גישה ל־OSM).</string>
+    <string name="osm_editing_plugin_description">ניתן לתרום ל־OSM למשל על ידי שינוי פריטי נקודות עניין ב־OSM או ליצור הערות OSM ולתרום קובצי הקלטות GPX ל־OsmAnd על ידי ציון שם המשתמש והססמה שלך. OpenStreetMap.org הוא מיזם מיפוי גלובלי, בהנהגה קהילתית לרווחת הציבור.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">יתכן שמפות וקטוריות יוצגו מהר יותר. עם זאת לא בטוח שיעבדו כראוי על חלק מההתקנים.</string>
     <string name="play_commands_of_currently_selected_voice">נא לבחור בקריינות ולבדוק על ידי השמעת ההנחיות הקוליות:</string>
     <string name="debugging_and_development">פיתוח OsmAnd</string>
