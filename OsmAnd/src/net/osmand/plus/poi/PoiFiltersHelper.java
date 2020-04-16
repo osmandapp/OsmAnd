@@ -27,7 +27,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -314,12 +313,10 @@ public class PoiFiltersHelper {
 		return result;
 	}
 
-	public Map<String, Integer> getPoiFilterOrders(boolean onlyActive) {
-		Map<String, Integer> filterOrders = new HashMap<>();
-		List<PoiUIFilter> sortedFilters = getSortedPoiFilters(onlyActive);
-		int order = 0;
-		for (PoiUIFilter filter : sortedFilters) {
-			filterOrders.put(filter.getFilterId(), order++);
+	public List<String> getPoiFilterOrders(boolean onlyActive) {
+		List<String> filterOrders = new ArrayList<>();
+		for (PoiUIFilter filter : getSortedPoiFilters(onlyActive)) {
+			filterOrders.add(filter.getFilterId());
 		}
 		return filterOrders;
 	}

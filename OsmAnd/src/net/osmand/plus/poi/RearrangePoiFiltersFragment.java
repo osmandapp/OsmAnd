@@ -165,15 +165,16 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 		applyButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				ApplicationMode selectedAppMode = getSelectedAppMode();
 				if (isChanged) {
 					if (activationModified) {
-						app.getPoiFilters().saveInactiveFilters(appMode, availableFiltersKeys);
+						app.getPoiFilters().saveInactiveFilters(selectedAppMode, availableFiltersKeys);
 					} else if (wasReset) {
-						app.getPoiFilters().saveInactiveFilters(appMode, null);
+						app.getPoiFilters().saveInactiveFilters(selectedAppMode, null);
 					}
 					if (orderModified) {
 						List<PoiUIFilter> dataToSave = new ArrayList<>();
-						for (PoiUIFilter filter : getSortedPoiUiFilters(appMode, app)) {
+						for (PoiUIFilter filter : getSortedPoiUiFilters(selectedAppMode, app)) {
 							String filterId = filter.getFilterId();
 							Integer order = poiFiltersOrders.get(filterId);
 							if (order == null) {
@@ -191,13 +192,13 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 						for (PoiUIFilter filter : dataToSave) {
 							filterIds.add(filter.getFilterId());
 						}
-						app.getPoiFilters().saveFiltersOrder(appMode, filterIds);
+						app.getPoiFilters().saveFiltersOrder(selectedAppMode, filterIds);
 					} else if (wasReset) {
-						app.getPoiFilters().saveFiltersOrder(appMode,null);
+						app.getPoiFilters().saveFiltersOrder(selectedAppMode,null);
 					}
 				}
 				if (resultCallback != null) {
-					resultCallback.onApplyPoiFiltersState(getSelectedAppMode(), isChanged);
+					resultCallback.onApplyPoiFiltersState(selectedAppMode, isChanged);
 				}
 				dismiss();
 			}
@@ -282,7 +283,8 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 	private void initFiltersOrders(OsmandApplication app, boolean arrangementByDefault) {
 		poiFiltersOrders.clear();
 		availableFiltersKeys.clear();
-		List<PoiUIFilter> filters = getSortedPoiUiFilters(appMode, app);
+		ApplicationMode selectedAppMode = getSelectedAppMode();
+		List<PoiUIFilter> filters = getSortedPoiUiFilters(selectedAppMode, app);
 		if (arrangementByDefault) {
 			Collections.sort(filters, new Comparator<PoiUIFilter>() {
 				@Override
@@ -365,6 +367,9 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 	}
 
 	public ApplicationMode getSelectedAppMode() {
+		if (appMode == null) {
+			appMode = requireMyApplication().getSettings().getApplicationMode();
+		}
 		return appMode;
 	}
 
@@ -374,8 +379,9 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 
 	public List<ListItem> getPoiFilters(boolean isActive) {
 		OsmandApplication app = requireMyApplication();
+		ApplicationMode selectedAppMode = getSelectedAppMode();
 		List<ListItem> result = new ArrayList<>();
-		for (PoiUIFilter f : getSortedPoiUiFilters(appMode, app)) {
+		for (PoiUIFilter f : getSortedPoiUiFilters(selectedAppMode, app)) {
 			addFilterToList(result, f, isActive);
 		}
 		Collections.sort(result, new Comparator<ListItem>() {
