@@ -840,7 +840,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			int color = model.getColor() == 0 || model.getColor() == Color.BLACK ? getResources().getColor(R.color.color_favorite) : model.getColor();
 			if (!model.isPersonal()) {
 				setCategoryIcon(app, app.getUIUtilities().getPaintedIcon(
-						R.drawable.ic_action_folder, visible ? (color | 0xff000000) : getResources().getColor(disabledColor)),
+						R.drawable.ic_action_folder, visible ? color : getResources().getColor(disabledColor)),
 						groupPosition, isExpanded, row, light);
 			}
 			adjustIndicator(app, groupPosition, isExpanded, row, light);

@@ -24,7 +24,6 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
@@ -312,9 +311,13 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		for (int color : ColorDialogs.pallette) {
 			selectColor.addView(createColorItemView(color, selectColor), new FlowLayout.LayoutParams(0, 0));
 		}
+		int customColor = getPointColor();
+		if (!ColorDialogs.isPaletteColor(customColor)) {
+			selectColor.addView(createColorItemView(customColor, selectColor), new FlowLayout.LayoutParams(0, 0));
+		}
 	}
 
-	private View createColorItemView(@ColorRes final int color, final FlowLayout rootView) {
+	private View createColorItemView(@ColorInt final int color, final FlowLayout rootView) {
 		FrameLayout colorItemView = (FrameLayout) UiUtilities.getInflater(getContext(), nightMode)
 				.inflate(R.layout.point_editor_button, rootView, false);
 		ImageView outline = colorItemView.findViewById(R.id.outline);

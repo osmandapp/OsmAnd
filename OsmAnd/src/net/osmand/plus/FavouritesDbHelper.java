@@ -101,7 +101,11 @@ public class FavouritesDbHelper {
 		}
 
 		public int getColor() {
-			return color;
+			if ((color & 0xFF000000) != 0) {
+				return color;
+			} else {
+				return color | 0xFF000000;
+			}
 		}
 
 		public boolean isVisible() {

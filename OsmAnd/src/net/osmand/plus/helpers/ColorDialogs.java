@@ -14,7 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.annotation.ColorRes;
+import androidx.annotation.ColorInt;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -44,17 +44,17 @@ public class ColorDialogs {
 	};
 
 	public static int[] pallette = new int[] {
-			0xb4eecc22,
-			0xb4d00d0d,
-			0xb4ff5020,
-			0xb4eeee10,
-			0xb488e030,
-			0xb400842b,
-			0xb410c0f0,
-			0xb41010a0,
-			0xb4a71de1,
-			0xb4e044bb,
-			0xb48e2512,
+			0xffeecc22,
+			0xffd00d0d,
+			0xffff5020,
+			0xffeeee10,
+			0xff88e030,
+			0xff00842b,
+			0xff10c0f0,
+			0xff1010a0,
+			0xffa71de1,
+			0xffe044bb,
+			0xff8e2512,
 			0xff000001
 	};
 
@@ -243,8 +243,8 @@ public class ColorDialogs {
 		return d;
 	}
 
-	public static int getColorName(@ColorRes int color) {
-		int colorName = R.string.rendering_value_darkyellow_name;
+	public static int getColorName(@ColorInt int color) {
+		int colorName = R.string.custom_color;
 		for (int i = 0; i < ColorDialogs.pallette.length; i++) {
 			if (ColorDialogs.pallette[i] == color) {
 				colorName = ColorDialogs.paletteColors[i];
@@ -261,5 +261,16 @@ public class ColorDialogs {
 				dp,
 				r.getDisplayMetrics()
 		);
+	}
+
+	public static boolean isPaletteColor(@ColorInt int color) {
+		boolean isPaletteColor = false;
+		for (int i = 0; i < ColorDialogs.pallette.length; i++) {
+			if (ColorDialogs.pallette[i] == color) {
+				isPaletteColor = true;
+				break;
+			}
+		}
+		return isPaletteColor;
 	}
 }
