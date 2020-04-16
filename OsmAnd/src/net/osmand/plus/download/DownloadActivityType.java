@@ -53,6 +53,8 @@ public class DownloadActivityType {
 			new DownloadActivityType(R.string.download_live_updates, "live_updates", 70);
 	public static final DownloadActivityType GPX_FILE =
 			new DownloadActivityType(R.string.shared_string_gpx_tracks, R.drawable.ic_action_polygom_dark, "gpx", 75);
+	public static final DownloadActivityType SQLITE_FILE =
+			new DownloadActivityType(R.string.shared_string_online_maps, "sqlite", 80);
 
 	private final int stringResource;
 	private final int iconResource;
@@ -141,6 +143,8 @@ public class DownloadActivityType {
 			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP, IndexConstants.BINARY_MAP_VERSION));
 		} else if (GPX_FILE == this) {
 			return fileName.endsWith(IndexConstants.GPX_FILE_EXT);
+		} else if (SQLITE_FILE == this) {
+			return fileName.endsWith(IndexConstants.GPX_FILE_EXT);
 		}
 		return false;
 	}
@@ -173,12 +177,14 @@ public class DownloadActivityType {
 			return ctx.getAppPath(IndexConstants.MAPS_PATH);
 		} else if (GPX_FILE == this) {
 			return ctx.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		} else if (SQLITE_FILE == this) {
+			return ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
 		}
 		throw new UnsupportedOperationException();
 	}
 
 	public boolean isZipStream(OsmandApplication ctx, IndexItem indexItem) {
-		return HILLSHADE_FILE != this && SLOPE_FILE != this && WIKIVOYAGE_FILE != this && GPX_FILE != this;
+		return HILLSHADE_FILE != this && SLOPE_FILE != this  && SQLITE_FILE != this && WIKIVOYAGE_FILE != this && GPX_FILE != this;
 	}
 
 	public boolean isZipFolder(OsmandApplication ctx, IndexItem indexItem) {
@@ -219,6 +225,8 @@ public class DownloadActivityType {
 		} else if (HILLSHADE_FILE == this) {
 			return IndexConstants.SQLITE_EXT;
 		} else if (SLOPE_FILE == this) {
+			return IndexConstants.SQLITE_EXT;
+		} else if (SQLITE_FILE == this) {
 			return IndexConstants.SQLITE_EXT;
 		} else if (DEPTH_CONTOUR_FILE == this) {
 			return BINARY_MAP_INDEX_EXT;
@@ -382,6 +390,8 @@ public class DownloadActivityType {
 		} else if (this == HILLSHADE_FILE) {
 			return fileName.replace('_', ' ');
 		} else if (this == SLOPE_FILE) {
+			return fileName.replace('_', ' ');
+		} else if (this == SQLITE_FILE) {
 			return fileName.replace('_', ' ');
 		} else if (this == LIVE_UPDATES_FILE) {
 			int l = fileName.lastIndexOf('.');

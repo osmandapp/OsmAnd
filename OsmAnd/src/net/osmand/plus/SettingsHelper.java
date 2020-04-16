@@ -464,6 +464,7 @@ public class SettingsHelper {
 
 		@Override
 		protected void init() {
+			super.init();
 			items = new ArrayList<>();
 		}
 
@@ -573,6 +574,7 @@ public class SettingsHelper {
 
 		@Override
 		protected void init() {
+			super.init();
 			items = new ArrayList<>();
 		}
 
@@ -785,8 +787,8 @@ public class SettingsHelper {
 					headers.put(localeKey, name);
 				}
 			}
-
 			String headerButton = object.optString("header-button", null);
+			String headerСolor = object.optString("header-color", null);
 
 			JSONArray downloadItemsArray = object.optJSONArray("items");
 			if (downloadItemsArray != null) {
