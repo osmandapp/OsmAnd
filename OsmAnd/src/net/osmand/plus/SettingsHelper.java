@@ -801,7 +801,7 @@ public class SettingsHelper {
 						for (Iterator<String> it = indexNamesJson.keys(); it.hasNext(); ) {
 							String localeKey = it.next();
 							String name = indexNamesJson.getString(localeKey);
-							names.put(localeKey, name);
+							indexNames.put(localeKey, name);
 						}
 					}
 					long timestamp = indexItemJson.optLong("timestamp") * 1000;

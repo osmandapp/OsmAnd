@@ -14,12 +14,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -37,10 +38,10 @@ import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.settings.ConfigureMenuRootFragment.ScreenType;
+import net.osmand.plus.settings.RearrangeMenuItemsAdapter.MenuItemsAdapterListener;
+import net.osmand.plus.settings.RearrangeMenuItemsAdapter.RearrangeMenuAdapterItem;
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
-import net.osmand.plus.settings.RearrangeMenuItemsAdapter.RearrangeMenuAdapterItem;
-import net.osmand.plus.settings.RearrangeMenuItemsAdapter.MenuItemsAdapterListener;
 
 import org.apache.commons.logging.Log;
 
@@ -169,7 +170,11 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View root = mInflater.inflate(R.layout.edit_arrangement_list_fragment, container, false);
-		Toolbar toolbar = root.findViewById(R.id.toolbar);
+
+		AppBarLayout appbar = root.findViewById(R.id.appbar);
+		View toolbar = mInflater.inflate(R.layout.global_preference_toolbar, container, false);
+		appbar.addView(toolbar);
+
 		TextView toolbarTitle = root.findViewById(R.id.toolbar_title);
 		ImageButton toolbarButton = root.findViewById(R.id.close_button);
 		RecyclerView recyclerView = root.findViewById(R.id.profiles_list);
