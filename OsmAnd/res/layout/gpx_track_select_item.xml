@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
-	android:layout_height="@dimen/settings_divider_margin_start"
+	android:layout_height="wrap_content"
+	android:minHeight="@dimen/settings_divider_margin_start"
 	android:background="?attr/selectableItemBackground"
 	android:orientation="horizontal">
 
@@ -21,7 +22,7 @@
 
 	<LinearLayout
 		android:layout_width="0dp"
-		android:layout_height="match_parent"
+		android:layout_height="wrap_content"
 		android:layout_marginStart="@dimen/list_content_padding"
 		android:layout_marginLeft="@dimen/list_content_padding"
 		android:layout_marginEnd="@dimen/list_content_padding"

@@ -364,4 +364,5 @@
 	<dimen name="slider_thumb_halo_size">12dp</dimen>
 	<dimen name="slider_track_height">2dp</dimen>
 
+	<dimen name="list_item_move_header_min_height">65dp</dimen>
 </resources>

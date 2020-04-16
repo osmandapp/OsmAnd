@@ -449,7 +449,7 @@ POIの更新は利用できません</string>
  \'\'{0}\'\' が追加されました。</string>
     <string name="favourites_context_menu_edit">お気に入りを編集</string>
     <string name="favourites_context_menu_delete">お気に入りを削除</string>
-    <string name="favourites_remove_dialog_msg">お気に入り地点を削除しますか？ \'%s\'</string>
+    <string name="favourites_remove_dialog_msg">お気に入り地点\'%s\'を削除しますか？</string>
     <string name="favourites_remove_dialog_success">お気に入り地点 {0}
 は削除されました。</string>
     <string name="osb_comment_dialog_message">メッセージ</string>
@@ -1923,7 +1923,7 @@ POIの更新は利用できません</string>
     <string name="last_update">最後の更新: %s</string>
     <string name="update_time">更新時間</string>
     <string name="updates_size">更新ファイルのサイズ</string>
-    <string name="last_map_change">最後のマップ更新: %s</string>
+    <string name="last_map_change">最終マップ更新: %s</string>
     <string name="hourly">毎時間</string>
     <string name="daily">毎日</string>
     <string name="weekly">毎週</string>
@@ -2051,7 +2051,7 @@ POIの更新は利用できません</string>
     <string name="get_it">入手する</string>
     <string name="si_mi_meters">マイル/メートル</string>
     <string name="skip_map_downloading">マップのダウンロードをスキップ</string>
-    <string name="skip_map_downloading_desc">オフライン用マップがインストールされていません。マップはこの画面にてリスト内から選択、あるいは後から\'メニューの%1$s\'にてダウンロードすることができます。</string>
+    <string name="skip_map_downloading_desc">オフライン用マップがインストールされていません。マップはこのリスト内から選択、あるいは後からでもメニューの\'%1$s\'からダウンロードすることができます。</string>
     <string name="search_another_country">別の地域を選択</string>
     <string name="search_map">マップを検索しています…</string>
     <string name="no_inet_connection">インターネット接続なし</string>
@@ -2573,7 +2573,7 @@ POIの更新は利用できません</string>
     <string name="show_passed">通過済みも表示</string>
     <string name="hide_passed">通過済みは非表示</string>
     <string name="import_track_desc">ファイル %1$s は経由地点を含んでいません、それでも経路としてインポートしますか？</string>
-    <string name="marker_activated">マーカー[%s]がアクティブ化されました。</string>
+    <string name="marker_activated">マーカー%sがアクティブ化されました。</string>
     <string name="one_tap_active_descr">コンテキストメニューを開かずにマップ上のマーカーをタップするだけで1番目のマーカーとしてアクティブ化させます。</string>
     <string name="one_tap_active">ワンタップアクティブ</string>
     <string name="empty_state_av_notes">場所に関するメモをつけよう！</string>
@@ -2655,7 +2655,7 @@ POIの更新は利用できません</string>
     <string name="read_wikipedia_offline">オフラインでWikipedia記事を読む</string>
     <string name="maps_you_need_descr">ブックマークした記事より、次のマップをダウンロードすることをお勧めします:</string>
     <string name="popular_destinations">人気の目的地</string>
-    <string name="travel_card_download_descr">Wikivoyageの旅行ガイドを事前にダウンロードすれば、インターネット接続なしで世界各地の観光場所を知ることができます。</string>
+    <string name="travel_card_download_descr">Wikivoyageの旅行ガイドをダウンロードしておけば、オフライン環境でも世界各地の観光名所を知ることができます。</string>
     <string name="start_editing_card_image_text">誰でも自由に編集できる世界規模の旅行ガイドです。</string>
     <string name="welcome_to_open_beta_description">『旅行ガイド』はWikivoyageをベースとした機能です。オープンβ時に限り無料で全ての機能を利用できます。旅行ガイドは将来的にOsmAndのサブスクリプション登録者や、OsmAnd+の利用者に提供される予定です。</string>
     <string name="start_editing_card_description">あなたもWikivoyageの記事を編集できます。場所に関する知識、旅先での経験、魅力あるスポットはもちろん注意事項なども共有できます。</string>

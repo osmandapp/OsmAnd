@@ -3620,4 +3620,18 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_language">Llengua</string>
     <string name="shared_string_all_languages">Tots els idiomes</string>
     <string name="wiki_menu_download_descr">Es necessiten mapes addicionals per veure els PDIs de la Viquipèdia al mapa.</string>
+    <string name="ui_customization">Personalització de la IU</string>
+    <string name="context_menu_actions">Accions del menú contextual</string>
+    <string name="reorder_or_hide_from">Reordena o amaga els elements des del %1$s.</string>
+    <string name="shared_string_divider">Divisor</string>
+    <string name="divider_descr">Elements per sota d’aquest punt separats per un divisor.</string>
+    <string name="shared_string_hidden">Amagat</string>
+    <string name="hidden_items_descr">Aquests elements no es mostren al menú, però les opcions o els connectors que representen continuen funcionant.</string>
+    <string name="reset_items_descr">La configuració es restablirà a l\'estat original després d\'amagar-se.</string>
+    <string name="main_actions_descr">Les accions principals només contenen 4 botons.</string>
+    <string name="main_actions">Accions principals</string>
+    <string name="additional_actions_descr">Podeu accedir a aquesta acció prement el botó \"Accions\".</string>
+    <string name="move_inside_category">Només podeu moure els elements dins d\'aquesta categoria.</string>
+    <string name="developer_plugin">Connector per a desenvolupadors</string>
+    <string name="shared_string_items">Elements</string>
 </resources>

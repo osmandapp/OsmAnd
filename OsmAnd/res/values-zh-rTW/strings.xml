@@ -3610,5 +3610,24 @@
     <string name="shared_string_languages">語言</string>
     <string name="shared_string_language">語言</string>
     <string name="shared_string_all_languages">所有語言</string>
-    <string name="wiki_menu_download_descr">需要其他地圖才能在地圖上檢視維基百科的 POI。</string>
+    <string name="wiki_menu_download_descr">需要額外的地圖才能在地圖上檢視維基百科的 POI。</string>
+    <string name="ui_customization_description">在「抽屜」、「設定地圖」與情境選單中自訂項目數量。
+\n
+\n您可以停用未使用的外掛程式，以從應用程式 %1$s 中隱藏其控制元件。</string>
+    <string name="ui_customization_short_descr">抽屜項目，情境選單</string>
+    <string name="ui_customization">自訂使用者介面</string>
+    <string name="shared_string_drawer">抽屜</string>
+    <string name="context_menu_actions">情境選單動作</string>
+    <string name="reorder_or_hide_from">重新排列或從 %1$s 隱藏項目。</string>
+    <string name="shared_string_divider">分隔符</string>
+    <string name="divider_descr">低於此點的元素將由分隔符分離。</string>
+    <string name="shared_string_hidden">已隱藏</string>
+    <string name="hidden_items_descr">這些項目已從選單隱藏，但對應的選項或外掛程式仍在運作中。</string>
+    <string name="reset_items_descr">隱藏後，設定將會重設回原始狀態。</string>
+    <string name="main_actions_descr">主要動作僅包含 4 個按鈕。</string>
+    <string name="main_actions">主要動作</string>
+    <string name="additional_actions_descr">您可以透過輕點「動作」按鈕來存取此動作。</string>
+    <string name="move_inside_category">您只能在此分類中移動項目。</string>
+    <string name="developer_plugin">開發者外掛程式</string>
+    <string name="shared_string_items">項目</string>
 </resources>

@@ -53,6 +53,7 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.settings.ConfigureMenuRootFragment.ScreenType;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -128,7 +129,7 @@ public class ConfigureMapMenu {
 		OsmandApplication app = ma.getMyApplication();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		ContextMenuAdapter adapter = new ContextMenuAdapter();
+		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(APP_PROFILES_ID)
@@ -156,7 +157,6 @@ public class ConfigureMapMenu {
 		adapter.setNightMode(nightMode);
 		createLayersItems(customRules, adapter, ma, themeRes, nightMode);
 		createRenderingAttributeItems(customRules, adapter, ma, themeRes, nightMode);
-
 		return adapter;
 	}
 

@@ -56,7 +56,7 @@ public class WikipediaPoiMenu {
 		final int languageActionStringId = R.string.shared_string_language;
 		final int spaceHeight = app.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_big_item_height);
 		final boolean enabled = app.getPoiFilters().isShowingAnyPoi(PoiTemplateList.WIKI);
-		ContextMenuAdapter adapter = new ContextMenuAdapter();
+		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 		adapter.setDefaultLayoutId(R.layout.dash_item_with_description_72dp);
 		adapter.setProfileDependent(true);
 		adapter.setNightMode(nightMode);

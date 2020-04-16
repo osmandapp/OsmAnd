@@ -842,7 +842,7 @@
     <string name="edit_filter_save_as_menu_item">Speichern als</string>
     <string name="edit_filter_delete_dialog_title">Diesen Filter löschen\?</string>
     <string name="edit_filter_delete_message">Filter %1$s gelöscht</string>
-    <string name="edit_filter_create_message">Filter %1$s erstellt</string>
+    <string name="edit_filter_create_message">Filter \'%1$s\' erstellt</string>
     <string name="offline_navigation_not_available">OsmAnd-Offline-Navigation steht zur Zeit nicht zur Verfügung.</string>
     <string name="left_side_navigation">Linksverkehr</string>
     <string name="left_side_navigation_descr">Für Länder, in denen man auf der linken Straßenseite fährt.</string>
@@ -3626,4 +3626,5 @@ Lon %2$s</string>
     <string name="shared_string_language">Sprache</string>
     <string name="shared_string_all_languages">Alle Sprachen</string>
     <string name="wiki_menu_download_descr">Zusätzliche Karten werden benötigt um Wikipedia-POIs auf der Karte anzuzeigen.</string>
+    <string name="developer_plugin">Entwickler-Plugin</string>
 </resources>
