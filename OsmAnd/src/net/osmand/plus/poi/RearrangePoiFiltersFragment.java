@@ -74,12 +74,17 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if (savedInstanceState != null) {
-			dismiss();
-		}
 		boolean nightMode = isNightMode(requireMyApplication(), usedOnMap);
 		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		if (requireActivity().isChangingConfigurations()) {
+			dismiss();
+		}
 	}
 
 	@Override
