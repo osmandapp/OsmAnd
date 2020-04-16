@@ -394,7 +394,7 @@ public class WikipediaPoiMenu {
 			// global Wikipedia POI filter enabled
 			return preferredLanguage;
 		}
-		if (TextUtils.isEmpty(preferredLanguage)) {
+		if (Algorithms.isEmpty(preferredLanguage)) {
 			preferredLanguage = app.getLanguage();
 		}
 		List<String> wikiLangs = wikiPoiSettings.getStringArrayList(ENABLED_WIKI_POI_LANGUAGES_KEY);

@@ -220,7 +220,7 @@ public class Amenity extends MapObject {
 		return lng;
 	}
 
-	public Set<String> getSupportedLocales() {
+	public Set<String> getSupportedContentLocales() {
 		Set<String> supported = new TreeSet<>();
 		supported.addAll(getNames("content", "en"));
 		supported.addAll(getNames("description", "en"));

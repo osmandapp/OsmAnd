@@ -266,7 +266,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					WikipediaDialogFragment.showInstance(mapActivity, amenity, null);
+					WikipediaDialogFragment.showInstance(mapActivity, amenity);
 				}
 			});
 			button.setAllCaps(true);
@@ -405,7 +405,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 			if (amenity.getType().isWiki()) {
 				if (!hasWiki) {
-					String articleLang = WikipediaPoiMenu.getWikiArticleLanguage(app, amenity.getSupportedLocales(), preferredLang);
+					String articleLang = WikipediaPoiMenu.getWikiArticleLanguage(app, amenity.getSupportedContentLocales(), preferredLang);
 					String lng = amenity.getContentLanguage("content", articleLang, "en");
 					if (Algorithms.isEmpty(lng)) {
 						lng = "en";

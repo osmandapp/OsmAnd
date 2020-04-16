@@ -230,7 +230,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		Context context = getContext();
 		if (context != null) {
 			final PopupMenu optionsMenu = new PopupMenu(context, view, Gravity.RIGHT);
-			Set<String> namesSet = amenity.getSupportedLocales();
+			Set<String> namesSet = amenity.getSupportedContentLocales();
 
 			Map<String, String> names = new HashMap<>();
 			for (String n : namesSet) {
@@ -283,7 +283,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 			WikipediaDialogFragment wikipediaDialogFragment = new WikipediaDialogFragment();
 			wikipediaDialogFragment.setAmenity(amenity);
 			lang = lang != null ? lang : WikipediaPoiMenu.getWikiArticleLanguage(app,
-					amenity.getSupportedLocales(), app.getSettings().MAP_PREFERRED_LOCALE.get());
+					amenity.getSupportedContentLocales(), app.getSettings().MAP_PREFERRED_LOCALE.get());
 			wikipediaDialogFragment.setLanguage(lang);
 			wikipediaDialogFragment.setRetainInstance(true);
 			wikipediaDialogFragment.show(activity.getSupportFragmentManager(), TAG);

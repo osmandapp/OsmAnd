@@ -57,9 +57,6 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 		app = requiredMyApplication();
 		settings = app.getSettings();
 		initLanguagesData();
-		if (savedInstanceState != null) {
-			dismiss();
-		}
 	}
 
 	@Override
@@ -70,8 +67,6 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-
-		boolean nightMode = isNightMode(app);
 		final int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		final int profileColorResId = appMode.getIconColorInfo().getColor(nightMode);
 
@@ -203,7 +198,6 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 	}
 
 	private View getCustomButtonView() {
-		boolean nightMode = isNightMode(app);
 		OsmandApplication app = getMyApplication();
 		if (app == null) {
 			return null;
@@ -222,6 +216,14 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 		UiUtilities.setupCompoundButton(nightMode, selectedModeColorId, cb);
 
 		return buttonView;
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		if (requireActivity().isChangingConfigurations()) {
+			dismiss();
+		}
 	}
 
 	public void setAppMode(ApplicationMode appMode) {
