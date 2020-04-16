@@ -3593,4 +3593,23 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_language">Langue</string>
     <string name="shared_string_all_languages">Toutes les langues</string>
     <string name="wiki_menu_download_descr">D’autres cartes sont nécessaires pour afficher les POI Wikipédia sur la carte.</string>
+    <string name="divider_descr">Éléments sous ce point isolés par un séparateur.</string>
+    <string name="ui_customization_description">Personnalisez le nombre d’éléments dans le panneau déroulant, paramétrez la carte et le menu contextuel.
+\n
+\nVous pouvez désactiver les greffons inutilisés, pour masquer tous leurs contrôles dans l’application %1$s.</string>
+    <string name="hidden_items_descr">Ces éléments sont masqués dans le menu mais les options présentes ou les greffons fonctionneront toujours.</string>
+    <string name="reset_items_descr">Les paramètres seront réinitialisés à leurs valeurs par défaut après avoir été masqués.</string>
+    <string name="additional_actions_descr">Vous pouvez accéder à ces actions en appuyant sur le bouton \"Actions\".</string>
+    <string name="ui_customization_short_descr">Éléments du panneau déroulant, menu contextuel</string>
+    <string name="shared_string_drawer">Panneau déroulant</string>
+    <string name="reorder_or_hide_from">Réorganisez ou masquez les éléments à partir de %1$s.</string>
+    <string name="move_inside_category">Vous ne pouvez déplacer les éléments qu’à l’intérieur de cette catégorie.</string>
+    <string name="ui_customization">Personnalisation de l\'interface utilisateur</string>
+    <string name="context_menu_actions">Actions du menu contextuel</string>
+    <string name="shared_string_divider">Séparateur</string>
+    <string name="shared_string_hidden">Masqué</string>
+    <string name="main_actions_descr">Les actions principales contiennent seulement 4 boutons.</string>
+    <string name="main_actions">Actions principales</string>
+    <string name="developer_plugin">Greffon de développement</string>
+    <string name="shared_string_items">Éléments</string>
 </resources>
