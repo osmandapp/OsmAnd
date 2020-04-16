@@ -3629,4 +3629,11 @@ Lon %2$s</string>
 \nSie können beim Lesen des Artikels zwischen allen verfügbaren Sprachen wechseln.</string>
     <string name="wiki_menu_download_descr">Zusätzliche Karten werden benötigt um Wikipedia-POIs auf der Karte anzuzeigen.</string>
     <string name="developer_plugin">Entwickler-Plugin</string>
+    <string name="ui_customization">Anpassung der Benutzeroberfläche</string>
+    <string name="context_menu_actions">Aktionen im Kontextmenü</string>
+    <string name="shared_string_hidden">Ausgeblendet</string>
+    <string name="reset_items_descr">Die Einstellungen werden nach dem Ausblenden auf den ursprünglichen Zustand zurückgesetzt.</string>
+    <string name="main_actions">Hauptaktionen</string>
+    <string name="move_inside_category">Sie können Elemente nur innerhalb dieser Kategorie verschieben.</string>
+    <string name="shared_string_items">Elemente</string>
 </resources>
