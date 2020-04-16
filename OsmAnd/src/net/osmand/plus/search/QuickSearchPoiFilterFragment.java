@@ -374,14 +374,15 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		builder.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				PoiUIFilter nFilter = new PoiUIFilter(editText.getText().toString(), null, filter.getAcceptedTypes(), app);
+				String filterName = editText.getText().toString();
+				PoiUIFilter nFilter = new PoiUIFilter(filterName, null, filter.getAcceptedTypes(), app);
 				applyFilterFields();
 				if (!Algorithms.isEmpty(filter.getFilterByName())) {
 					nFilter.setSavedFilterByName(filter.getFilterByName());
 				}
 				if (app.getPoiFilters().createPoiFilter(nFilter, false)) {
 					Toast.makeText(getContext(), 
-						       getContext().getText(R.string.edit_filter_create_message, editText.getText().toString()),
+						       getContext().getString(R.string.edit_filter_create_message, filterName),
 						       Toast.LENGTH_SHORT).show();
 					app.getSearchUICore().refreshCustomPoiFilters();
 					((QuickSearchDialogFragment) getParentFragment()).replaceQueryWithUiFilter(nFilter, "");
