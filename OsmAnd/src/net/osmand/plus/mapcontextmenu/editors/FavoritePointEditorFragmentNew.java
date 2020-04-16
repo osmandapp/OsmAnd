@@ -24,6 +24,7 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dialogs.FavoriteDialogs;
@@ -351,7 +352,9 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 		FragmentActivity activity = getActivity();
 		final FavouritePoint favorite = getFavorite();
 		if (activity != null && favorite != null) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+			final OsmandApplication app = (OsmandApplication) activity.getApplication();
+			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+			AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
 			builder.setMessage(getString(R.string.favourites_remove_dialog_msg, favorite.getName()));
 			builder.setNegativeButton(R.string.shared_string_no, null);
 			builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {

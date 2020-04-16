@@ -2654,7 +2654,7 @@
     <string name="save_heading">Includeți titlu</string>
     <string name="save_heading_descr">Salvați poziția fiecarui punct al traseului în timpul înregistrării.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
-    <string name="street_city">%1$s, %2$s</string>
+    <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="personal_category_name">Personal</string>
     <string name="shared_string_downloading_formatted">Descarcarea %s</string>
     <string name="rendering_value_thick_name">Gros</string>

@@ -20,6 +20,7 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.util.Algorithms;
@@ -69,10 +70,10 @@ public class EditCategoryDialogFragment extends DialogFragment {
 		} else if (getArguments() != null) {
 			restoreState(getArguments());
 		}
-
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
 		builder.setTitle(R.string.favorite_category_add_new_title);
-		final View v = activity.getLayoutInflater().inflate(R.layout.favorite_category_edit_dialog, null, false);
+		final View v = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.favorite_category_edit_dialog, null, false);
 
 		nameEdit = (EditText)v.findViewById(R.id.edit_name);
 		nameEdit.setText(name);
@@ -81,7 +82,7 @@ public class EditCategoryDialogFragment extends DialogFragment {
 		colorSpinner = (Spinner)v.findViewById(R.id.edit_color);
 		final TIntArrayList colors = new TIntArrayList();
 		final int intColor = color;
-		ColorDialogs.setupColorSpinnerEx(activity, intColor, colorSpinner, colors, new AdapterView.OnItemSelectedListener() {
+		ColorDialogs.setupColorSpinnerEx(v.getContext(), intColor, colorSpinner, colors, new AdapterView.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				color = colors.get(position);
