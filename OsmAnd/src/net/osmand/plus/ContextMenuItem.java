@@ -30,8 +30,9 @@ public class ContextMenuItem {
 	private final boolean category;
 	private final boolean clickable;
 	private final boolean skipPaintingWithoutColor;
+	private boolean hidden;
 	private final int pos;
-	private final int order;
+	private int order;
 	private String description;
 	private final ContextMenuAdapter.ItemClickListener itemClickListener;
 	private final ContextMenuAdapter.OnIntegerValueChangedListener integerListener;
@@ -153,6 +154,10 @@ public class ContextMenuItem {
 		return clickable;
 	}
 
+	public boolean isHidden() {
+		return hidden;
+	}
+
 	public int getPos() {
 		return pos;
 	}
@@ -185,6 +190,10 @@ public class ContextMenuItem {
 		return hideDivider;
 	}
 
+	public void setHidden(boolean hidden) {
+		this.hidden = hidden;
+	}
+
 	public boolean shouldHideCompoundButton() {
 		return hideCompoundButton;
 	}
@@ -211,6 +220,10 @@ public class ContextMenuItem {
 
 	public void setProgress(int progress) {
 		this.progress = progress;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
 	}
 
 	public void setLoading(boolean loading) {

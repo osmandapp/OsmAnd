@@ -71,6 +71,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	private static final String EXPORT_PROFILE = "export_profile";
 	private static final String DELETE_PROFILE = "delete_profile";
 	private static final String PROFILE_APPEARANCE = "profile_appearance";
+	private static final String UI_CUSTOMIZATION = "ui_customization";
 
 	@ColorRes
 	protected int getBackgroundColorRes() {
@@ -273,6 +274,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		setupConfigureMapPref();
 		setupConfigureScreenPref();
 		setupProfileAppearancePref();
+		setupUiCustomizationPref();
 
 		PreferenceCategory pluginSettings = (PreferenceCategory) findPreference(PLUGIN_SETTINGS);
 		setupOsmandPluginsPref(pluginSettings);
@@ -382,6 +384,17 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		}
 	}
 
+	private void setupUiCustomizationPref() {
+		Context ctx = getContext();
+		if (ctx == null) {
+			return;
+		}
+		Preference uiCustomization = findPreference(UI_CUSTOMIZATION);
+		if (uiCustomization != null) {
+			uiCustomization.setIcon(getContentIcon(R.drawable.ic_action_ui_customization));
+		}
+	}
+
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
@@ -426,6 +439,14 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			}
 		} else if (DELETE_PROFILE.equals(prefId)) {
 			onDeleteProfileClick();
+		} else if (UI_CUSTOMIZATION.equals(prefId)) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				ConfigureMenuRootFragment.showInstance(
+						fragmentManager,
+						this,
+						getSelectedAppMode());
+			}
 		}
 		return super.onPreferenceClick(preference);
 	}

@@ -1041,7 +1041,7 @@
     <string name="osm_settings_descr">Spesifiser innstillinger for OpenStreetMap.org (OSM) som er nødvendige for bidrag til OSM.</string>
     <string name="shared_string_disabled">Deaktivert</string>
     <string name="shared_string_enabled">Aktivert</string>
-    <string name="shared_string_enable">Skru på</string>
+    <string name="shared_string_enable">Aktiver</string>
     <string name="shared_string_disable">Deaktiver</string>
     <string name="plugin_install_needs_network">Du må være på Internett for å installere dette programtillegget.</string>
     <string name="shared_string_never">Aldri</string>
@@ -3499,4 +3499,7 @@
     <string name="settings_item_read_error">Kunne ikke lese %1$s.</string>
     <string name="settings_item_import_error">Kunne ikke importere %1$s.</string>
     <string name="settings_item_write_error">Kunne ikke skrive %1$s.</string>
+    <string name="shared_string_languages">Språk</string>
+    <string name="shared_string_language">Språk</string>
+    <string name="shared_string_all_languages">Alle språk</string>
 </resources>

@@ -1604,7 +1604,7 @@
     <string name="poi_denomination_wesleyan">Wesleyaner</string>
     <string name="poi_denomination_shingon_shu">Shingon-shū</string>
     <string name="poi_denomination_mahayana">Mahayana-Buddhisten</string>
-    <string name="poi_jersey_barrier">Jersey-Barriere</string>
+    <string name="poi_jersey_barrier">Betonschutzwand</string>
     <string name="poi_leaf_type_needleleaved">Nadeln</string>
     <string name="poi_cuisine">Küche</string>
     <string name="poi_information_guidepost">Wegweiser</string>
@@ -2772,7 +2772,7 @@
     <string name="poi_service_bicycle_charging_yes">Ladestation: ja</string>
     <string name="poi_service_bicycle_charging_no">Ladestation: nein</string>
     <string name="poi_shop_craft">Geschäft für Kunsthandwerksbedarf</string>
-    <string name="poi_fuel_avia_type">Kraftstoffart (avia)</string>
+    <string name="poi_fuel_avia_type">Kraftstoffart (Flugzeuge)</string>
     <string name="poi_payment_fuel_type">Tankkarten</string>
     <string name="poi_internet_access_type">Internet-Zugangsart</string>
     <string name="poi_clothes_type">Art</string>
@@ -3014,7 +3014,7 @@
     <string name="poi_cuisine_diner">Esslokal</string>
     <string name="poi_cuisine_yakiniku">Yakiniku</string>
     <string name="poi_cuisine_udon">Udon</string>
-    <string name="poi_cuisine_brasserie">Brauhaus</string>
+    <string name="poi_cuisine_brasserie">Brasserie</string>
     <string name="poi_cuisine_yakitori">Yakitori</string>
     <string name="poi_cuisine_teriyaki">Teriyaki</string>
     <string name="poi_payment_transport_type">Zahlungsart (Transport)</string>
@@ -3073,7 +3073,7 @@
     <string name="poi_tower_construction_dish">Bauart: Plattform</string>
     <string name="poi_tower_construction_concealed">Anlage: verdeckt</string>
     <string name="poi_railway_yard">Güterbahnhof</string>
-    <string name="poi_coworking_space">Coworking Space</string>
+    <string name="poi_coworking_space">Coworking</string>
     <string name="poi_cafeteria">Cafeteria</string>
     <string name="poi_fast_food_cafeteria">ja</string>
     <string name="poi_drink_wine_yes">Wein: ja</string>
@@ -3115,7 +3115,7 @@
     <string name="poi_motorcycle_clothes_yes">Motorradbekleidung</string>
     <string name="poi_motorcycle_clothes_no">Motorradbekleidung: nein</string>
     <string name="poi_motorcycle_type_scooter">Motorroller</string>
-    <string name="poi_motorcycle_type_sportbike">Sport-Motorrad</string>
+    <string name="poi_motorcycle_type_sportbike">Supersportler</string>
     <string name="poi_motorcycle_type_chopper">Chopper</string>
     <string name="poi_motorcycle_type_offroad">Gelände</string>
     <string name="poi_motorcycle_type_dualsport">Reiseenduro</string>
@@ -3454,7 +3454,7 @@
     <string name="poi_service_vehicle_used_car_sales_yes">Gebrauchtwagenverkauf</string>
     <string name="poi_service_vehicle_brakes_yes">Bremsen</string>
     <string name="poi_service_vehicle_new_car_sales_yes">Neuwagenverkauf</string>
-    <string name="poi_service_vehicle_diagnostics_yes">Diagnosen</string>
+    <string name="poi_service_vehicle_diagnostics_yes">Fehlerdiagnose</string>
     <string name="poi_service_vehicle_car_parts_yes">Autoteile</string>
     <string name="poi_service_vehicle_batteries_yes">Batterien</string>
     <string name="poi_service_vehicle_air_conditioning_yes">Klimatisierung</string>
@@ -3508,7 +3508,7 @@
     <string name="poi_hazard_nuclear">Nukleare Gefahr</string>
     <string name="poi_hazard_erosion">Erosionsgefahr</string>
     <string name="poi_hazard_avalanche">Lawinengefahr</string>
-    <string name="poi_hazard_slippery_road">Rutschige Straße</string>
+    <string name="poi_hazard_slippery_road">Schleudergefahr</string>
     <string name="poi_hazard_flood">Überschwemmungsgefahr</string>
     <string name="poi_hazard_minefield">Minenfeld</string>
     <string name="poi_car_pooling">Fahrgemeinschaftsplatz</string>
@@ -3727,7 +3727,7 @@
     <string name="poi_craft_joiner">Tischler</string>
     <string name="poi_craft_floorer">Bodenleger</string>
     <string name="poi_craft_bakery">Backstube</string>
-    <string name="poi_craft_cabinet_maker">Möbeltischler</string>
+    <string name="poi_craft_cabinet_maker">Möbelbauer</string>
     <string name="poi_charge">Gebühr</string>
     <string name="poi_pet_grooming">Haustierpflege</string>
     <string name="poi_atm_yes">Geldausgabeautomat: ja</string>
@@ -3774,13 +3774,13 @@
     <string name="poi_url">URL</string>
     <string name="poi_volcano_type">Art</string>
     <string name="poi_volcano_status">Vulkanstatus</string>
-    <string name="poi_volcano_type_scoria">Schlacke</string>
+    <string name="poi_volcano_type_scoria">Schlackenkegel</string>
     <string name="poi_volcano_type_stratovolcano">Schichtvulkan</string>
-    <string name="poi_volcano_type_shield">Schild</string>
+    <string name="poi_volcano_type_shield">Schildvulkan</string>
     <string name="poi_volcano_type_maar">Maar</string>
     <string name="poi_volcano_type_caldera">Kessel</string>
     <string name="poi_volcano_type_lava_dome">Lavakuppel</string>
-    <string name="poi_volcano_type_mud">Erde</string>
+    <string name="poi_volcano_type_mud">Schlammvulkan</string>
     <string name="poi_volcano_last_eruption">Letzter Ausbruch</string>
     <string name="poi_volcano_status_extinct">Erloschen</string>
     <string name="poi_volcano_status_dormant">Ruhend</string>
@@ -3802,10 +3802,10 @@
     <string name="poi_video_yes">ja</string>
     <string name="poi_video_no">nein</string>
     <string name="poi_traffic_signals_sound_locate">Nur wenn Gehen erlaubt ist</string>
-    <string name="poi_tactile_paving_contrasted">Kontrastreich</string>
-    <string name="poi_tactile_paving_incorrect">Falsch</string>
+    <string name="poi_tactile_paving_contrasted">Farblich abgestochen</string>
+    <string name="poi_tactile_paving_incorrect">Irreführend</string>
     <string name="poi_covered_booth">Unterstand</string>
-    <string name="poi_booth">Unterstand-Art</string>
+    <string name="poi_booth">Unterstandsart</string>
     <string name="poi_tactile_paving_primitive">Primitiv</string>
     <string name="poi_seamark_water_level_part_submerged">Wasserstand: teilweise überflutet</string>
     <string name="poi_seamark_water_level_submerged">Wasserstand: überflutet</string>
@@ -3816,7 +3816,7 @@
     <string name="poi_seamark_water_level_floating">Wasserstand: fließend</string>
     <string name="poi_seamark_water_level_above_mwl">Wasserstand: über dem mittleren Wasserstand</string>
     <string name="poi_seamark_water_level_below_mwl">Wasserstand: unter dem mittleren Wasserstand</string>
-    <string name="poi_seamark_obstruction">Behinderung</string>
+    <string name="poi_seamark_obstruction">Hindernis</string>
     <string name="poi_drinking_water_refill_yes">Trinkwassernachfüllung: ja</string>
     <string name="poi_drinking_water_refill_no">Trinkwassernachfüllung: nein</string>
     <string name="poi_drinking_water_refill_network">Trinkwasser-Nachfüllnetz</string>

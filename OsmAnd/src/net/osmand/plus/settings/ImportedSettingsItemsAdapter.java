@@ -60,7 +60,6 @@ public class ImportedSettingsItemsAdapter extends
 				? R.color.active_color_primary_dark
 				: R.color.active_color_primary_light;
 
-		holder.icon.setPadding(0, 0, AndroidUtils.dpToPx(app, 16), 0);
 		holder.title.setTextColor(app.getResources().getColor(activeColorRes));
 		Typeface typeface = FontCache.getFont(app, app.getString(R.string.font_roboto_medium));
 		if (typeface != null) {

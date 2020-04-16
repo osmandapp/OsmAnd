@@ -51,6 +51,8 @@ import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportRoute;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -68,6 +70,7 @@ import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
+import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.transport.TransportStopRoute;
@@ -83,6 +86,7 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
 import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
 
 
@@ -547,7 +551,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		View buttonsTopBorder = view.findViewById(R.id.buttons_top_border);
 		buttonsBottomBorder.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.ctx_menu_buttons_divider_dark : R.color.ctx_menu_buttons_divider_light));
 		buttonsTopBorder.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.ctx_menu_buttons_divider_dark : R.color.ctx_menu_buttons_divider_light));
-		View buttons = view.findViewById(R.id.context_menu_buttons);
+		LinearLayout buttons = view.findViewById(R.id.context_menu_buttons);
 		buttons.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light));
 		if (!menu.buttonsVisible()) {
 			buttonsTopBorder.setVisibility(View.GONE);
@@ -560,59 +564,31 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 
 		// Action buttons
-		final ImageView imageFavorite = (ImageView) view.findViewById(R.id.context_menu_fav_image_view);
-		imageFavorite.setImageDrawable(getIcon(menu.getFavActionIconId(),
-				R.color.ctx_menu_buttons_icon_color));
-		((TextView) view.findViewById(R.id.context_menu_fav_text_view)).setText(menu.getFavActionStringId());
-		View favView = view.findViewById(R.id.context_menu_fav_view);
-		if (menu.isFavButtonEnabled()) {
-			favView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					menu.buttonFavoritePressed();
-				}
-			});
-		} else {
-			deactivate(favView);
-		}
-
-		final ImageView imageWaypoint = (ImageView) view.findViewById(R.id.context_menu_route_image_view);
-		imageWaypoint.setImageDrawable(getIcon(menu.getWaypointActionIconId(),
-				R.color.ctx_menu_buttons_icon_color));
-		((TextView) view.findViewById(R.id.context_menu_route_text_view)).setText(menu.getWaypointActionStringId());
-		View waypointView = view.findViewById(R.id.context_menu_route_view);
-		if (menu.isButtonWaypointEnabled()) {
-			waypointView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					menu.buttonWaypointPressed();
-				}
-			});
-		} else {
-			deactivate(waypointView);
-		}
-
-		final ImageView imageShare = (ImageView) view.findViewById(R.id.context_menu_share_image_view);
-		imageShare.setImageDrawable(getIcon(R.drawable.map_action_gshare_dark,
-				R.color.ctx_menu_buttons_icon_color));
-		View shareView = view.findViewById(R.id.context_menu_share_view);
-		shareView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				menu.buttonSharePressed();
+//		TODO refactor section
+		ContextMenuAdapter adapter = menu.getActionsContextMenuAdapter(false);
+		List<ContextMenuItem> items = adapter.getItems();
+		ContextMenuAdapter mainAdapter = new ContextMenuAdapter(requireMyApplication());
+		ContextMenuAdapter additionalAdapter = new ContextMenuAdapter(requireMyApplication());
+		for (int i = 0; i < items.size(); i++) {
+			if (i < 4) {
+				mainAdapter.addItem(items.get(i));
+			} else {
+				additionalAdapter.addItem(items.get(i));
 			}
-		});
+		}
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+				ViewGroup.LayoutParams.MATCH_PARENT,
+				ViewGroup.LayoutParams.MATCH_PARENT,
+				1f
+		);
+		buttons.removeAllViews();
+		ContextMenuItemClickListener mainListener = menu.getContextMenuItemClickListener(mainAdapter);
+		ContextMenuItemClickListener additionalListener = menu.getContextMenuItemClickListener(additionalAdapter);
 
-		final ImageView imageMore = (ImageView) view.findViewById(R.id.context_menu_more_image_view);
-		imageMore.setImageDrawable(getIcon(R.drawable.map_overflow_menu_white,
-				R.color.ctx_menu_buttons_icon_color));
-		View moreView = view.findViewById(R.id.context_menu_more_view);
-		moreView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				menu.buttonMorePressed();
-			}
-		});
+		for (int i = 0; i < 4; i++) {
+			buttons.addView(getActionView(items.get(i), i, mainAdapter, additionalAdapter, mainListener, additionalListener), params);
+		}
+		buttons.setGravity(Gravity.CENTER);
 
 		//Bottom buttons
 		int bottomButtonsColor = nightMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n;
@@ -668,6 +644,38 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		};
 
 		created = true;
+		return view;
+	}
+
+	private View getActionView(ContextMenuItem contextMenuItem,
+	                           final int position,
+	                           final ContextMenuAdapter mainAdapter,
+	                           final ContextMenuAdapter additionalAdapter,
+	                           final ContextMenuItemClickListener mainListener,
+	                           final ContextMenuItemClickListener additionalListener) {
+		UiUtilities uiUtilities = requireMyApplication().getUIUtilities();
+		LayoutInflater inflater = UiUtilities.getInflater(getMyApplication(), nightMode);
+		View view = inflater.inflate(R.layout.context_menu_action_item, null);
+		LinearLayout item = view.findViewById(R.id.item);
+		ImageView icon = view.findViewById(R.id.icon);
+		TextView title = view.findViewById(R.id.text);
+		icon.setImageDrawable(uiUtilities.getIcon(contextMenuItem.getIcon(), nightMode));
+		title.setText(contextMenuItem.getTitle());
+		if (contextMenuItem.getId().equals(MAP_CONTEXT_MENU_MORE_ID)) {
+			item.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					menu.showAdditionalActionsFragment(additionalAdapter, additionalListener);
+				}
+			});
+		} else {
+			item.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					mainListener.onItemClick(position);
+				}
+			});
+		}
 		return view;
 	}
 
@@ -1377,11 +1385,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	public void rebuildMenu(boolean centered) {
 		OsmandApplication app = getMyApplication();
 		if (app != null && view != null) {
-			final ImageView buttonFavorite = (ImageView) view.findViewById(R.id.context_menu_fav_image_view);
-			buttonFavorite.setImageDrawable(getIcon(menu.getFavActionIconId(), R.color.ctx_menu_buttons_icon_color));
-			String favActionString = getString(menu.getFavActionStringId());
-			((TextView) view.findViewById(R.id.context_menu_fav_text_view)).setText(favActionString);
-
 			buildHeader();
 
 			LinearLayout bottomLayout = (LinearLayout) view.findViewById(R.id.context_menu_bottom_view);

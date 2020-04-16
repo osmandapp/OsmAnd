@@ -1851,8 +1851,7 @@
     <string name="install_more">Տեղադրել ավելին…</string>
     <string name="level_to_switch_vector_raster_descr">Առավելագույն սանդղակը(մասշտաբ) վեկտորային քարտեզների օգտագործման համար ուղղորդված քարտեզների փոխարեն։</string>
     <string name="level_to_switch_vector_raster">Սանդղակը(մասշտաբ) վեկտորային քարտեզների օգտագործման համար</string>
-    <string name="create_poi_link_to_osm_doc">
-        <u>1Online OSM</u>2 քարտեզ նկրաներով։</string>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> քարտեզ նկրաներով:</string>
     <string name="error_doing_search">Հնարավոր չէ կատարել անցանց(offline) որոնում:</string>
     <string name="search_osm_offline">Որոնում ըստ աշխարհագրական դիրքի</string>
     <string name="system_locale">Համակարգային</string>

@@ -270,7 +270,7 @@ public class MapActivityLayers {
 	public void showMultichoicePoiFilterDialog(final OsmandMapTileView mapView, final DismissListener listener) {
 		final OsmandApplication app = getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
-		final ContextMenuAdapter adapter = new ContextMenuAdapter();
+		final ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 		final List<PoiUIFilter> list = new ArrayList<>();
 		for (PoiUIFilter f : poiFilters.getSortedPoiFilters(true)) {
 			addFilterToList(adapter, list, f, true);
@@ -344,7 +344,7 @@ public class MapActivityLayers {
 	public void showSingleChoicePoiFilterDialog(final OsmandMapTileView mapView, final DismissListener listener) {
 		final OsmandApplication app = getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
-		final ContextMenuAdapter adapter = new ContextMenuAdapter();
+		final ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.shared_string_search, app)
 				.setIcon(R.drawable.ic_action_search_dark).createItem());

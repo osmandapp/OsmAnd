@@ -475,7 +475,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			return true;
 		} else if (preference == autoZoom) {
 			final ApplicationMode am = settings.getApplicationMode();
-			final ContextMenuAdapter adapter = new ContextMenuAdapter();
+			final ContextMenuAdapter adapter = new ContextMenuAdapter(getMyApplication());
 			int i = 0;
 			int selectedIndex = -1;
 			adapter.addItem(ContextMenuItem.createBuilder(getString(R.string.auto_zoom_none))
@@ -546,7 +546,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			return true;
 		} else if (preference == reliefFactorRouting) {
 			final ApplicationMode am = settings.getApplicationMode();
-			final ContextMenuAdapter adapter = new ContextMenuAdapter();
+			final ContextMenuAdapter adapter = new ContextMenuAdapter(getMyApplication());
 			int i = 0;
 			int selectedIndex = -1;
 			for (RoutingParameter p : reliefFactorParameters) {

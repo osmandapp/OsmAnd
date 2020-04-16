@@ -4,7 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="?attr/activity_background_basic">
+	android:background="?attr/activity_background_color">
 
 	<ExpandableListView
 		android:id="@+id/list"
@@ -103,7 +103,7 @@
 			android:id="@+id/toolbar_layout"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/toolbar_height_expanded"
-			android:background="?attr/colorPrimary"
+			android:background="?attr/actionModeBackground"
 			osmand:expandedTitleMarginBottom="@dimen/content_padding_small"
 			osmand:expandedTitleMarginEnd="@dimen/content_padding"
 			osmand:expandedTitleMarginStart="@dimen/content_padding"

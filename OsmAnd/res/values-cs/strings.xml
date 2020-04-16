@@ -3211,7 +3211,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="analytics_pref_title">Analytika</string>
     <string name="turn_screen_on_info">Zobrazit mapu na uzamčené obrazovce během navigace.</string>
     <string name="route_parameters_info">Nastavení navádění pro zvolený profil „%1$s“.</string>
-    <string name="units_and_formats">Jednotky a formát</string>
+    <string name="units_and_formats">Jednotky a formáty</string>
     <string name="appearance">Vzhled</string>
     <string name="map_look_descr">Vzhled mapy</string>
     <string name="configure_profile">Upravit profil</string>
@@ -3338,4 +3338,45 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="shared_string_min">Min</string>
     <string name="replace_point_descr">Nahradit jiný bod tímto</string>
     <string name="app_mode_ski_touring">Lyžařské okruhy</string>
+    <string name="shared_string_angle">Úhel</string>
+    <string name="shared_string_angle_param">Úhel: %s°</string>
+    <string name="shared_string_languages">Jazyky</string>
+    <string name="shared_string_language">Jazyk</string>
+    <string name="shared_string_all_languages">Všechny jazyky</string>
+    <string name="index_name_antarctica">Antarktida</string>
+    <string name="route_recalculation_dist_descr">Trasa bude přepočítána, pokud vzdálenost od trasy bude větší než uvedený parametr</string>
+    <string name="route_recalculation_dist_title">Minimální vzdálenost pro přepočítání trasy</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_menu">Menu</string>
+    <string name="plugin_disabled_descr">Tento modul je samostatnou aplikací. Pokud ho nadále nehodláte používat, budete ho muset odstranit samostatně.
+\n
+\nModul zůstane v zařízení i po odstranění aplikace OsmAnd.</string>
+    <string name="plugin_disabled">Modul vypnutý</string>
+    <string name="open_settings">Otevřít nastavení</string>
+    <string name="no_recalculation_setting">Vypnout přepočítávání</string>
+    <string name="please_provide_profile_name_message">Zadejte prosím název profilu</string>
+    <string name="select_data_to_import">Vyberte data k importu.</string>
+    <string name="import_duplicates_title">Některé položky již existují</string>
+    <string name="import_duplicates_description">OsmAnd již má položky se stejnými názvy jako ty importované.
+\n
+\nZvolte akci.</string>
+    <string name="keep_both_desc">Importované položky budou přidány s prefixem</string>
+    <string name="keep_both">Ponechat obě</string>
+    <string name="replace_all">Nahradit vše</string>
+    <string name="replace_all_desc">Aktuální položky budou nahrazeny položkami ze souboru</string>
+    <string name="listed_exist">Zobrazený %1$s již existuje v OsmAnd.</string>
+    <string name="shared_string_profiles">Profily</string>
+    <string name="shared_string_quick_actions">Rychlé akce</string>
+    <string name="shared_string_nothing_selected">Nic není vybráno</string>
+    <string name="shared_string_poi_types">Typy POI</string>
+    <string name="shared_string_preparing">Připravuji</string>
+    <string name="shared_string_app_default_w_val">Výchozí hodnota (%s)</string>
+    <string name="recalc_angle_dialog_title">Minimální úhel mezi mojí polohou a trasou</string>
+    <string name="recalc_angle_dialog_descr">Dokud nebude trasa přepočítána, zobrazí se navíc rovný úsek mezi aktuální polohou a vypočítanou trasou</string>
+    <string name="profile_type_custom_string">Vlastní profil</string>
+    <string name="import_rendering_file">Importovat soubor vykreslování</string>
+    <string name="select_track_file">Vyberte soubor stopy</string>
+    <string name="wikipedia_poi_languages_promo">Některé články Wikipedie nemusí být dostupné ve vašem jazyce. Zvolte jazyky, v nichž se články Wikipedie objeví na mapě.
+\nBěhem čtení článku budete moci přepínat mezi všemi dostupnými jazyky.</string>
+    <string name="wiki_menu_download_descr">Pro zobrazení bodů zájmu Wikipedie jsou potřeba další mapy.</string>
 </resources>

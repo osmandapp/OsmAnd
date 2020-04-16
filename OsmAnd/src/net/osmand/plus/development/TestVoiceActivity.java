@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.routing.data.StreetName;
@@ -125,14 +126,15 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		String v ="";
 		v += " \u25CF App profile: " + ((OsmandApplication) getApplication()).getSettings().APPLICATION_MODE.get().getStringKey();
 
-		if (((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get() == 3) {
+		int stream = ((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get();
+		if (stream == 3) {
 			v += "\n \u25CF Voice guidance output: Media/music audio";
-		} else if (((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get() == 5) {
+		} else if (stream == 5) {
 			v += "\n \u25CF Voice guidance output: Notification audio";
-		} else if (((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get() == 0) {
+		} else if (stream == 0) {
 			v += "\n \u25CF Voice guidance output: Phone call audio";
 		} else {
-			v += "\n \u25CF Voice guidance output: " + ((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get();
+			v += "\n \u25CF Voice guidance output: " + stream;
 		}
 
 		v += "\n \u25CF OsmAnd voice: " + osmandVoice;
@@ -141,13 +143,16 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		v += "\n \u25CF TTS voice language availability: " + TTSCommandPlayerImpl.getTtsVoiceStatus();
 		v += "\n \u25CF TTS voice actually used: " + TTSCommandPlayerImpl.getTtsVoiceUsed();
 
-		if (((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get() == 0) {
+		if (stream == 0) {
 			v += "\n \u25CF BT SCO: " + AbstractPrologCommandPlayer.btScoInit;
 		} else {
 			v += "\n \u25CF BT SCO: The current app profile is not set to use 'Phone call audio'.";
 		}
 
-		v += "\n \u25CF Phone call audio delay: " + ((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() + "\u00A0ms";
+		OsmandSettings.OsmandPreference<Integer> pref = ((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[stream];
+		if(pref != null) {
+			v += "\n \u25CF Voice prompt delay for selected output: " + pref.get() + "\u00A0ms";
+		}
 		return v;
 	}
 
@@ -230,7 +235,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 
 		addButton(ll, "Voice system info:", builder(p));
 		addButton(ll, "\u25BA (11.1) (Tap to refresh)\n" + getVoiceSystemInfo(), builder(p).attention(""));
-		addButton(ll, "\u25BA (11.2) Tap to change Phone call audio delay (if car stereo cuts off prompts). Default is 1500\u00A0ms.", builder(p).attention(""));
+		addButton(ll, "\u25BA (11.2) Tap to change voice prompt delay (if car stereo cuts off prompts). Default is 1500\u00A0ms for Phone call audio, or else 0\u00A0ms.", builder(p).attention(""));
 		ll.forceLayout();
 	}
 
@@ -282,23 +287,18 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 					Toast.makeText(TestVoiceActivity.this, "Info refreshed.", Toast.LENGTH_LONG).show();
 				}
 				if (description.startsWith("\u25BA (11.2)")) {
-					if (((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get() == 0) {
-						if (((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() == 1000) {
-							((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(1500);
-						} else if (((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() == 1500) {
-							((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(2000);
-						} else if (((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() == 2000) {
-							((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(2500);
-						} else if (((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() == 2500) {
-							((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(3000);
+					int ams = ((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get();
+					OsmandSettings.OsmandPreference<Integer> pref = ((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams];
+					if (pref != null) {
+						if (pref.get() >= 3000) {
+							pref.set(0);
 						} else {
-							((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(1000);
+							pref.set(pref.get() + 500);
 						}
-						infoButton.setText("\u25BA (11.1) (Tap to refresh)\n" + getVoiceSystemInfo());
-						Toast.makeText(TestVoiceActivity.this, "BT SCO init delay changed to " + ((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() + "\u00A0ms.", Toast.LENGTH_LONG).show();
-					} else {
-						Toast.makeText(TestVoiceActivity.this, "Setting only available when using 'Phone call audio'.", Toast.LENGTH_LONG).show();
+						Toast.makeText(TestVoiceActivity.this, "Voice prompt delay changed to " + pref.get() + "\u00A0ms.", Toast.LENGTH_LONG).show();
 					}
+					infoButton.setText("\u25BA (11.1) (Tap to refresh)\n" + getVoiceSystemInfo());
+
 				}
 			}
 		});

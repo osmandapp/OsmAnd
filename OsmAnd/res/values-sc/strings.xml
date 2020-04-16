@@ -3614,4 +3614,9 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="settings_item_read_error">Leghidura de %1$s fallida.</string>
     <string name="settings_item_write_error">Iscritura de %1$s fallida.</string>
     <string name="settings_item_import_error">Importatzione de %1$s fallida.</string>
+    <string name="select_track_file">Ischerta su documentu de sa rasta</string>
+    <string name="shared_string_languages">Limbas</string>
+    <string name="shared_string_language">Limba</string>
+    <string name="shared_string_all_languages">Totu sas limbas</string>
+    <string name="wiki_menu_download_descr">Pro bìdere sos PDI de Wikipedia in sa mapa b\'at bisòngiu de mapas agiuntivas.</string>
 </resources>

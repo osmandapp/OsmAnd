@@ -53,6 +53,14 @@
 		tools:icon="@drawable/ic_action_offroad" />
 
 	<Preference
+		android:key="ui_customization"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:summary="@string/ui_customization_short_descr"
+		android:title="@string/ui_customization"
+		tools:icon="@drawable/ic_action_ui_customization" />
+
+	<Preference
 		android:layout="@layout/simple_divider_item"
 		android:selectable="false" />
 

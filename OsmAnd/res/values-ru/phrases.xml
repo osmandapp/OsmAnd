@@ -3718,8 +3718,8 @@
     <string name="poi_glacier_type_tidewater">Ледник, спускающийся в море</string>
     <string name="poi_glacier_type_outlet">Выводной ледник</string>
     <string name="poi_location_kiosk">Местонахождение: в киоске</string>
-    <string name="poi_drink_wine_retail">Вино: розничная торговля</string>
-    <string name="poi_dive_centre">Центр подводного плавания</string>
+    <string name="poi_drink_wine_retail">Вино: розничная продажа</string>
+    <string name="poi_dive_centre">Центр подводного плавания с аквалангом</string>
     <string name="poi_resort_hunting">Охотничья база</string>
     <string name="poi_piste_ref">Номер ссылки на трассу</string>
     <string name="poi_bowling_alley">Боулинг-центр</string>
@@ -3728,7 +3728,7 @@
     <string name="poi_sms_no">Нет</string>
     <string name="poi_sms_yes">Да</string>
     <string name="poi_traffic_signals_sound_locate">Только если разрешена ходьба</string>
-    <string name="poi_drinking_water_refill_network">Сеть заправки питьевой водой</string>
+    <string name="poi_drinking_water_refill_network">Сеть заправки питьевой воды</string>
     <string name="poi_drinking_water_refill_no">Заправка питьевой водой: нет</string>
     <string name="poi_drinking_water_refill_yes">Заправка питьевой водой: да</string>
     <string name="poi_socket_type3_yes">Тип 3</string>
