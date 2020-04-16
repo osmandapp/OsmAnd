@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="search_poi_types_descr">Combine POI types from different categories. Tap switch to select all, tap left side to category selection.</string>
+    <string name="search_poi_types">Search poi types</string>
     <string name="wiki_menu_download_descr">Additional maps are needed to view Wikipedia POIs on the map.</string>
     <string name="wikipedia_poi_languages_promo">Some Wikipedia articles may not be available in your name, select the languages in which Wikipedia articles will appear on the map.\nYou will be able to switch between all available languages while reading the article.</string>
     <string name="shared_string_all_languages">All languages</string>

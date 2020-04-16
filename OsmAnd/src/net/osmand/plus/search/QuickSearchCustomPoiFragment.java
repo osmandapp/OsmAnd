@@ -24,6 +24,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
@@ -50,6 +51,8 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 	public static final String TAG = "QuickSearchCustomPoiFragment";
 	private static final String QUICK_SEARCH_CUSTOM_POI_FILTER_ID_KEY = "quick_search_custom_poi_filter_id_key";
 
+	private OsmandApplication app;
+	private UiUtilities uiUtilities;
 	private View view;
 	private ListView listView;
 	private CategoryListAdapter listAdapter;
@@ -73,7 +76,9 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.nightMode = getMyApplication().getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_DARK_THEME;
+		app = getMyApplication();
+		uiUtilities = app.getUIUtilities();
+		this.nightMode = app.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_DARK_THEME;
 		setStyle(STYLE_NO_FRAME, nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
 	}
 
@@ -131,8 +136,24 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				PoiCategory category = listAdapter.getItem(position - listView.getHeaderViewsCount());
-				showDialog(category, false);
+				final PoiCategory category = listAdapter.getItem(position - listView.getHeaderViewsCount());
+				FragmentManager fm = getFragmentManager();
+				if (fm != null) {
+					QuickSearchSubCategoriesFragment.showInstance(fm, category, false, new QuickSearchSubCategoriesFragment.OnFiltersSelectedListener() {
+						@Override
+						public void onFiltersSelected(LinkedHashSet<String> filters) {
+							if (filter.getAcceptedSubtypes(category).size() == filters.size()) {
+								filter.selectSubTypesToAccept(category, null);
+							} else if (filters.size() == 0) {
+								filter.setTypeToAccept(category, false);
+							} else {
+								filter.selectSubTypesToAccept(category, filters);
+							}
+							saveFilter();
+							listAdapter.notifyDataSetChanged();
+						}
+					});
+				}
 			}
 		});
 
