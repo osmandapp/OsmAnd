@@ -797,10 +797,10 @@ public class SettingsHelper {
 
 					JSONObject indexNamesJson = indexItemJson.optJSONObject("name");
 					Map<String, String> indexNames = new HashMap<>();
-					if (namesJson != null) {
-						for (Iterator<String> it = namesJson.keys(); it.hasNext(); ) {
+					if (indexNamesJson != null) {
+						for (Iterator<String> it = indexNamesJson.keys(); it.hasNext(); ) {
 							String localeKey = it.next();
-							String name = namesJson.getString(localeKey);
+							String name = indexNamesJson.getString(localeKey);
 							names.put(localeKey, name);
 						}
 					}
@@ -817,7 +817,7 @@ public class SettingsHelper {
 
 					@NonNull DownloadActivityType tp = DownloadActivityType.getIndexType(indexType);
 					if (tp != null) {
-						IndexItem indexItem = new CustomIndexItem(fileName, subfolder, description, downloadurl, timestamp, size, contentSize, containerSize, tp);
+						IndexItem indexItem = new CustomIndexItem(fileName, subfolder, description, downloadurl, indexNames, timestamp, size, contentSize, containerSize, tp);
 						region.downloadItems.add(indexItem);
 					}
 				}
