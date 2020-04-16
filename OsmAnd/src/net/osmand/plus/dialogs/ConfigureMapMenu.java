@@ -249,9 +249,10 @@ public class ConfigureMapMenu {
 				WikipediaPoiMenu.toggleWikipediaPoi(ma, isChecked, true,
 						new CallbackWithObject<Boolean>() {
 							@Override
-							public boolean processResult(Boolean result) {
-								item.setSelected(result);
-								item.setColorRes(result ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+							public boolean processResult(Boolean selected) {
+								item.setSelected(selected);
+								item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+								item.setDescription(selected ? WikipediaPoiMenu.getLanguagesSummary(ma.getMyApplication()) : null);
 								adapter.notifyDataSetChanged();
 								return true;
 							}
@@ -551,6 +552,7 @@ public class ConfigureMapMenu {
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(WIKIPEDIA_ID)
 				.setTitleId(R.string.shared_string_wikipedia, activity)
+				.setDescription(selected ? WikipediaPoiMenu.getLanguagesSummary(app) : null)
 				.setSelected(selected)
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_plugin_wikipedia)

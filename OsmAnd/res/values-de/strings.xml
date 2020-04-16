@@ -3625,8 +3625,6 @@ Lon %2$s</string>
     <string name="shared_string_languages">Sprachen</string>
     <string name="shared_string_language">Sprache</string>
     <string name="shared_string_all_languages">Alle Sprachen</string>
-    <string name="wikipedia_poi_languages_promo">Manche Wikipedia-Artikel liegen unter Umständen nicht in Ihrer Sprache vor. Wählen Sie die Sprachen aus, in denen Wikipedia-Artikel auf der Karte erscheinen sollen.
-\nSie können beim Lesen des Artikels zwischen allen verfügbaren Sprachen wechseln.</string>
     <string name="wiki_menu_download_descr">Zusätzliche Karten werden benötigt um Wikipedia-POIs auf der Karte anzuzeigen.</string>
     <string name="developer_plugin">Entwickler-Plugin</string>
 </resources>
