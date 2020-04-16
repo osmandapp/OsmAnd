@@ -27,7 +27,6 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
@@ -267,9 +266,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					String preferredLocale = app.getSettings().MAP_PREFERRED_LOCALE.get();
-					WikipediaDialogFragment.showInstance(mapActivity, amenity,
-							WikipediaPoiMenu.getWikiArticleLocale(app, preferredLocale, amenity));
+					WikipediaDialogFragment.showInstance(mapActivity, amenity, null);
 				}
 			});
 			button.setAllCaps(true);
@@ -408,7 +405,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 			if (amenity.getType().isWiki()) {
 				if (!hasWiki) {
-					String lng = amenity.getContentLanguage("content", preferredLang, "en");
+					String articleLang = WikipediaPoiMenu.getWikiArticleLanguage(app, amenity.getSupportedLocales(), preferredLang);
+					String lng = amenity.getContentLanguage("content", articleLang, "en");
 					if (Algorithms.isEmpty(lng)) {
 						lng = "en";
 					}

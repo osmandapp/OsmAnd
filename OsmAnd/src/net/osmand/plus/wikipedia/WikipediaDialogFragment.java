@@ -44,7 +44,6 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 
 
 public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
@@ -231,9 +230,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		Context context = getContext();
 		if (context != null) {
 			final PopupMenu optionsMenu = new PopupMenu(context, view, Gravity.RIGHT);
-			Set<String> namesSet = new TreeSet<>();
-			namesSet.addAll(amenity.getNames("content", "en"));
-			namesSet.addAll(amenity.getNames("description", "en"));
+			Set<String> namesSet = amenity.getSupportedLocales();
 
 			Map<String, String> names = new HashMap<>();
 			for (String n : namesSet) {
@@ -285,8 +282,9 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 
 			WikipediaDialogFragment wikipediaDialogFragment = new WikipediaDialogFragment();
 			wikipediaDialogFragment.setAmenity(amenity);
-			wikipediaDialogFragment.setLanguage(lang == null ?
-					app.getSettings().MAP_PREFERRED_LOCALE.get() : lang);
+			lang = lang != null ? lang : WikipediaPoiMenu.getWikiArticleLanguage(app,
+					amenity.getSupportedLocales(), app.getSettings().MAP_PREFERRED_LOCALE.get());
+			wikipediaDialogFragment.setLanguage(lang);
 			wikipediaDialogFragment.setRetainInstance(true);
 			wikipediaDialogFragment.show(activity.getSupportFragmentManager(), TAG);
 			return true;

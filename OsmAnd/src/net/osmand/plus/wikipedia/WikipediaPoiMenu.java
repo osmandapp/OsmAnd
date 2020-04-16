@@ -1,12 +1,12 @@
 package net.osmand.plus.wikipedia;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.data.Amenity;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
 import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
@@ -381,20 +382,30 @@ public class WikipediaPoiMenu {
 		return new WikipediaPoiMenu(mapActivity).createLayersItems();
 	}
 
-	public static String getWikiArticleLocale(OsmandApplication app, String preferredLocale, Amenity amenity) {
+	public static String getWikiArticleLanguage(@NonNull OsmandApplication app,
+	                                            @NonNull Set<String> availableArticleLangs,
+	                                            String preferredLanguage) {
 		Bundle wikiPoiSettings = getWikiPoiSettings(app);
-		if (wikiPoiSettings != null) {
-			boolean globalWikiPoiEnabled = wikiPoiSettings.getBoolean(GLOBAL_WIKI_POI_ENABLED_KEY);
-			List<String> enabledWikiPoiLocales = wikiPoiSettings.getStringArrayList(ENABLED_WIKI_POI_LANGUAGES_KEY);
-			if (!globalWikiPoiEnabled && enabledWikiPoiLocales != null) {
-				if (!enabledWikiPoiLocales.contains(preferredLocale) && amenity.getType().isWiki()) {
-					List<String> supportedLanguages = amenity.getSupportedLocales(enabledWikiPoiLocales);
-					if (supportedLanguages != null && supportedLanguages.size() > 0) {
-						preferredLocale = supportedLanguages.get(0);
-					}
+		if (!app.getSettings().SHOW_WIKIPEDIA_POI.get() || wikiPoiSettings == null) {
+			// Wikipedia POI setting disabled
+			return preferredLanguage;
+		}
+		if (wikiPoiSettings.getBoolean(GLOBAL_WIKI_POI_ENABLED_KEY)) {
+			// global Wikipedia POI filter enabled
+			return preferredLanguage;
+		}
+		if (TextUtils.isEmpty(preferredLanguage)) {
+			preferredLanguage = app.getLanguage();
+		}
+		List<String> wikiLangs = wikiPoiSettings.getStringArrayList(ENABLED_WIKI_POI_LANGUAGES_KEY);
+		if (wikiLangs != null && !wikiLangs.contains(preferredLanguage)) {
+			// return first matched language from enabled Wikipedia languages
+			for (String language : wikiLangs) {
+				if (availableArticleLangs.contains(language)) {
+					return language;
 				}
 			}
 		}
-		return preferredLocale;
+		return preferredLanguage;
 	}
 }
