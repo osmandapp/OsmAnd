@@ -3610,4 +3610,17 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="move_inside_category">Vi povas movi elementojn nur ene tiu ĉi kategorio.</string>
     <string name="developer_plugin">Programista kromprogramo</string>
     <string name="shared_string_items">Elementoj</string>
+    <string name="ui_customization_description">Alĝustigi kaj kaŝi elementojn en la (maldekstra) tirmenuo, menuo “agordi mapon” kaj kunteksta menuo de mapo.
+\n
+\nVi povas malaktivigi neuzatajn kromprogramojn por kaŝi ĉiujn iliajn rilatajn butonojn: %1$s.</string>
+    <string name="ui_customization_short_descr">Elementoj de tirmenuo, kunteksta menuo, ktp.</string>
+    <string name="ui_customization">Alĝustigi interfacon</string>
+    <string name="shared_string_drawer">Tirmenuo</string>
+    <string name="context_menu_actions">Kunteksta menuo</string>
+    <string name="reorder_or_hide_from">Reordigi kaj kaŝi elementojn: %1$s.</string>
+    <string name="shared_string_divider">Disigilo</string>
+    <string name="divider_descr">La jenaj elementoj troviĝos en la menuo sub la horizontala linio.</string>
+    <string name="hidden_items_descr">La jenaj elementoj estas kaŝitaj el la menuo, sed la rilataj eblaĵoj kaj kromprogramoj plue funkcios.</string>
+    <string name="shared_string_hidden">Kaŝitaj</string>
+    <string name="reset_items_descr">Agordoj restarigos al la implicitaj valoroj post kaŝiĝo.</string>
 </resources>
