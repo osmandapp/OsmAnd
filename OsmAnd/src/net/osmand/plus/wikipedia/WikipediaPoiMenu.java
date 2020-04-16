@@ -1,6 +1,7 @@
 package net.osmand.plus.wikipedia;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
 import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
@@ -54,7 +56,7 @@ public class WikipediaPoiMenu {
 		final int languageActionStringId = R.string.shared_string_language;
 		final int spaceHeight = app.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_big_item_height);
 		final boolean enabled = app.getPoiFilters().isShowingAnyPoi(PoiTemplateList.WIKI);
-		ContextMenuAdapter adapter = new ContextMenuAdapter();
+		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 		adapter.setDefaultLayoutId(R.layout.dash_item_with_description_72dp);
 		adapter.setProfileDependent(true);
 		adapter.setNightMode(nightMode);
@@ -354,7 +356,7 @@ public class WikipediaPoiMenu {
 		ph.clearSelectedPoiFilters(PoiTemplateList.WIKI);
 	}
 
-	private static String getLanguagesSummary(OsmandApplication app) {
+	public static String getLanguagesSummary(OsmandApplication app) {
 		Bundle wikiLanguagesSetting = getWikiPoiSettings(app);
 		if (wikiLanguagesSetting != null) {
 			boolean globalWikiEnabled = wikiLanguagesSetting.getBoolean(GLOBAL_WIKI_POI_ENABLED_KEY);
@@ -378,5 +380,32 @@ public class WikipediaPoiMenu {
 
 	public static ContextMenuAdapter createListAdapter(final MapActivity mapActivity) {
 		return new WikipediaPoiMenu(mapActivity).createLayersItems();
+	}
+
+	public static String getWikiArticleLanguage(@NonNull OsmandApplication app,
+	                                            @NonNull Set<String> availableArticleLangs,
+	                                            String preferredLanguage) {
+		Bundle wikiPoiSettings = getWikiPoiSettings(app);
+		if (!app.getSettings().SHOW_WIKIPEDIA_POI.get() || wikiPoiSettings == null) {
+			// Wikipedia POI setting disabled
+			return preferredLanguage;
+		}
+		if (wikiPoiSettings.getBoolean(GLOBAL_WIKI_POI_ENABLED_KEY)) {
+			// global Wikipedia POI filter enabled
+			return preferredLanguage;
+		}
+		if (Algorithms.isEmpty(preferredLanguage)) {
+			preferredLanguage = app.getLanguage();
+		}
+		List<String> wikiLangs = wikiPoiSettings.getStringArrayList(ENABLED_WIKI_POI_LANGUAGES_KEY);
+		if (wikiLangs != null && !wikiLangs.contains(preferredLanguage)) {
+			// return first matched language from enabled Wikipedia languages
+			for (String language : wikiLangs) {
+				if (availableArticleLangs.contains(language)) {
+					return language;
+				}
+			}
+		}
+		return preferredLanguage;
 	}
 }

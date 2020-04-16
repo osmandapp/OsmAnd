@@ -137,6 +137,7 @@ import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.settings.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.settings.ConfigureMenuItemsFragment;
 import net.osmand.plus.settings.ConfigureProfileFragment;
 import net.osmand.plus.settings.DataStorageFragment;
 import net.osmand.plus.settings.ImportCompleteFragment;
@@ -748,6 +749,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		ImportCompleteFragment importCompleteFragment = getImportCompleteFragment();
 		if (importCompleteFragment != null) {
 			importCompleteFragment.dismissFragment();
+			return;
+		}
+		ConfigureMenuItemsFragment configureMenuItemsFragment = getConfigureMenuItemsFragment();
+		if (configureMenuItemsFragment != null) {
+			configureMenuItemsFragment.exitFragment();
 			return;
 		}
 
@@ -2467,6 +2473,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public ImportCompleteFragment getImportCompleteFragment() {
 		return getFragment(ImportCompleteFragment.TAG);
+	}
+
+	public ConfigureMenuItemsFragment getConfigureMenuItemsFragment(){
+		return getFragment(ConfigureMenuItemsFragment.TAG);
 	}
 
 	public PointEditorFragmentNew getPointEditorFragmentNew() {

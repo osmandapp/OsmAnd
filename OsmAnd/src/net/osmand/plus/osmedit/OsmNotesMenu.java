@@ -26,7 +26,7 @@ public class OsmNotesMenu {
 	private static Integer[] zoomIntValues = {8, 9, 10, 11, 12, 13, 14, 15, 16};
 
 	public static ContextMenuAdapter createListAdapter(final MapActivity mapActivity) {
-		ContextMenuAdapter adapter = new ContextMenuAdapter();
+		ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity.getMyApplication());
 		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
 		adapter.setProfileDependent(true);

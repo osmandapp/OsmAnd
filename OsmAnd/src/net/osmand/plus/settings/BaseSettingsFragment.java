@@ -940,9 +940,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 						}
 					});
 			UiUtilities.setupSnackbarVerticalLayout(snackbar);
-			try {
-				snackbar.setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_FADE);
-			} catch (Throwable e) { }
 			snackbar.show();
 		}
 	}

@@ -84,7 +84,7 @@ public class RoutePreferencesMenu {
 				Object obj = listAdapter.getItem(item);
 				if (obj instanceof LocalRoutingParameterGroup) {
 					final LocalRoutingParameterGroup group = (LocalRoutingParameterGroup) obj;
-					final ContextMenuAdapter adapter = new ContextMenuAdapter();
+					final ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 					int i = 0;
 					int selectedIndex = -1;
 					for (LocalRoutingParameter p : group.getRoutingParameters()) {

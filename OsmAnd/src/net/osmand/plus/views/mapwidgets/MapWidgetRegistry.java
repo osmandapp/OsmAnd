@@ -798,7 +798,7 @@ public class MapWidgetRegistry {
 	}
 
 	public ContextMenuAdapter getViewConfigureMenuAdapter(final MapActivity map) {
-		final ContextMenuAdapter cm = new ContextMenuAdapter();
+		final ContextMenuAdapter cm = new ContextMenuAdapter(app);
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		cm.setProfileDependent(true);
 		cm.setNightMode(nightMode);

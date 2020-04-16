@@ -171,14 +171,14 @@
     <string name="poi_migration">Ufficio migrazione</string>
     <string name="poi_tax_inspection">Guardia di finanza</string>
     <string name="poi_office_administrative">Ufficio amministrativo</string>
-    <string name="poi_city">Città capoluogo di provincia</string>
-    <string name="poi_town">Città</string>
+    <string name="poi_city">Città</string>
+    <string name="poi_town">Cittadina</string>
     <string name="poi_village">Paese</string>
-    <string name="poi_hamlet">Borgo-contrada</string>
-    <string name="poi_isolated_dwelling">Insediamento rurale isolato</string>
+    <string name="poi_hamlet">Piccolo borgo</string>
+    <string name="poi_isolated_dwelling">Abitazione isolata</string>
     <string name="poi_suburb">Grande quartiere</string>
     <string name="poi_neighbourhood">Quartiere</string>
-    <string name="poi_locality">Località</string>
+    <string name="poi_locality">Località non popolata</string>
     <string name="poi_pharmacy">Farmacia</string>
     <string name="poi_hospital">Ospedale</string>
     <string name="poi_doctors">Medico</string>
@@ -481,7 +481,7 @@
     <string name="poi_islet">Isoletta</string>
     <string name="poi_observatory">Osservatorio</string>
     <string name="poi_astronomical_observatory">Osservatorio astronomico</string>
-    <string name="poi_place_farm">Fattoria</string>
+    <string name="poi_place_farm">Fattoria o cascina</string>
     <string name="poi_occupational_therapist">Terapista occupazionale</string>
     <string name="poi_office_telecommunication">Ufficio telecomunicazioni</string>
     <string name="poi_american_football">Football americano</string>
@@ -699,7 +699,7 @@
     <string name="poi_club">Club</string>
     <string name="poi_pasta">Pasta</string>
     <string name="poi_fuel_type">Tipo di carburante</string>
-    <string name="poi_fuel_avia_type">Tipo di carburante (avia)</string>
+    <string name="poi_fuel_avia_type">Tipo di carburante (aeroplani)</string>
     <string name="poi_payment_type">Tipo di pagamento</string>
     <string name="poi_payment_fuel_type">Carte carburante</string>
     <string name="poi_additional_type">Ulteriori</string>

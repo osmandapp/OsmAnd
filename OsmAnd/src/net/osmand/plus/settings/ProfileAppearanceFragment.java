@@ -268,6 +268,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 					super.onScrollStateChanged(recyclerView, newState);
 					if (newState != RecyclerView.SCROLL_STATE_IDLE) {
 						hideKeyboard();
+						if (profileName != null) {
+							profileName.clearFocus();
+						}
 					}
 				}
 			});
@@ -359,13 +362,21 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 					}
 				}
 			});
+			profileName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+				@Override
+				public void onFocusChange(View v, boolean hasFocus) {
+					if(hasFocus){
+						profileName.setSelection(profileName.getText().length());
+						AndroidUtils.showSoftKeyboard(profileName);
+					}
+				}
+			});
 			if (getSelectedAppMode().equals(ApplicationMode.DEFAULT) && !isNewProfile) {
 				profileName.setFocusableInTouchMode(false);
 				profileName.setFocusable(false);
-			} else {
-				profileName.requestFocus();
 			}
 			profileNameOtfb = (OsmandTextFieldBoxes) holder.findViewById(R.id.profile_name_otfb);
+			updateProfileNameAppearance();
 		} else if (MASTER_PROFILE.equals(preference.getKey())) {
 			baseProfileName = (EditText) holder.findViewById(R.id.master_profile_et);
 			baseProfileName.setFocusable(false);

@@ -288,7 +288,7 @@ public class ShowHidePoiAction extends QuickAction {
 	private void showSingleChoicePoiFilterDialog(final OsmandApplication app, final MapActivity activity, final Adapter filtersAdapter) {
 
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
-		final ContextMenuAdapter adapter = new ContextMenuAdapter();
+		final ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 
 		final List<PoiUIFilter> list = new ArrayList<>();
 

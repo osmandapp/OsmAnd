@@ -42,7 +42,7 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_help_screen);
 
-		ContextMenuAdapter contextMenuAdapter = new ContextMenuAdapter();
+		ContextMenuAdapter contextMenuAdapter = new ContextMenuAdapter(getMyApplication());
 		contextMenuAdapter.setDefaultLayoutId(R.layout.two_line_with_images_list_item);
 
 		createBeginWithOsmandItems(contextMenuAdapter);

@@ -38,7 +38,7 @@ public class ContourLinesMenu {
 			OsmandPlugin.enablePlugin(mapActivity, mapActivity.getMyApplication(), plugin, true);
 		}
 		boolean nightMode = isNightMode(mapActivity.getMyApplication());
-		ContextMenuAdapter adapter = new ContextMenuAdapter();
+		ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity.getMyApplication());
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
 		adapter.setProfileDependent(true);
 		adapter.setNightMode(nightMode);

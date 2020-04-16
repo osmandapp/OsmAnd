@@ -652,6 +652,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	}
 
 	public void dismiss(boolean includingMenu) {
+		hideKeyboard();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			if (includingMenu) {

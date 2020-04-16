@@ -3582,7 +3582,5 @@
     <string name="shared_string_languages">اللغات</string>
     <string name="shared_string_language">اللغة</string>
     <string name="shared_string_all_languages">جميع اللغات</string>
-    <string name="wikipedia_poi_languages_promo">قد لا تكون بعض مقالات ويكيبيديا متاحة باسمك ، حدد اللغات التي ستظهر بها مقالات ويكيبيديا على الخريطة.
-\nستتمكن من التبديل بين جميع اللغات المتاحة أثناء قراءة المقالة.</string>
     <string name="wiki_menu_download_descr">هناك حاجة إلى خرائط إضافية لعرض النقاط المهمة من ويكيبيديا على الخريطة.</string>
 </resources>

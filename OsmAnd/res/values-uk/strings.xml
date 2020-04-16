@@ -3610,7 +3610,5 @@
     <string name="shared_string_languages">Мови</string>
     <string name="shared_string_language">Мова</string>
     <string name="shared_string_all_languages">Усі мови</string>
-    <string name="wikipedia_poi_languages_promo">Деякі статті у Вікіпедії можуть бути недоступними для Вашої мови, виберіть мови, якими статті на Вікіпедії будуть відображатися на мапі.
-\nВи зможете перемикатися між усіма доступними мовами під час читання статті.</string>
     <string name="wiki_menu_download_descr">Для перегляду POI Вікіпедії на мапі потрібні додаткові мапи.</string>
 </resources>
