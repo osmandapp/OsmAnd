@@ -3609,4 +3609,23 @@ Pôr do Sol: %2$s</string>
     <string name="wikipedia_poi_languages_promo">Alguns artigos da Wikipédia podem não estar disponíveis em seu nome. Selecione os idiomas nos quais os artigos da Wikipédia aparecerão no mapa.
 \nVocê poderá alternar entre todos os idiomas disponíveis enquanto lê o artigo.</string>
     <string name="wiki_menu_download_descr">Mapas adicionais são necessários para visualizar os POIs da Wikipédia no mapa.</string>
+    <string name="ui_customization_description">Personalize a quantidade de itens na Gaveta, Configurar mapa e menu de contexto.
+\n
+\nVocê pode desativar plugins não utilizados para ocultar todos os seus controles do aplicativo %1$s.</string>
+    <string name="ui_customization_short_descr">Itens da gaveta, menu de contexto</string>
+    <string name="ui_customization">Personalização da interface do usuário</string>
+    <string name="shared_string_drawer">Gaveta</string>
+    <string name="context_menu_actions">Ações do menu de contexto</string>
+    <string name="reorder_or_hide_from">Reordene ou oculte itens do %1$s.</string>
+    <string name="shared_string_divider">Divisor</string>
+    <string name="divider_descr">Elementos abaixo deste ponto separados por um divisor.</string>
+    <string name="shared_string_hidden">Escondido</string>
+    <string name="hidden_items_descr">Esses itens estão ocultos no menu, mas as opções ou plug-ins representados ainda estão funcionando.</string>
+    <string name="reset_items_descr">As configurações serão redefinidas para o estado original após ocultar.</string>
+    <string name="main_actions_descr">As ações principais contêm apenas 4 botões.</string>
+    <string name="main_actions">Principais ações</string>
+    <string name="additional_actions_descr">Você pode acessar essas ações tocando no botão \"Ações\".</string>
+    <string name="move_inside_category">Você pode mover itens somente dentro desta categoria.</string>
+    <string name="developer_plugin">Plugin do desenvolvedor</string>
+    <string name="shared_string_items">Itens</string>
 </resources>
