@@ -8,6 +8,7 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -26,7 +27,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -313,17 +313,21 @@ public class PoiFiltersHelper {
 		return result;
 	}
 
-	public Map<String, Integer> getPoiFilterOrders(boolean onlyActive) {
-		Map<String, Integer> filterOrders = new HashMap<>();
-		List<PoiUIFilter> sortedFilters = getSortedPoiFilters(onlyActive);
-		for (PoiUIFilter filter : sortedFilters) {
-			filterOrders.put(filter.getFilterId(), filter.getOrder());
+	public List<String> getPoiFilterOrders(boolean onlyActive) {
+		List<String> filterOrders = new ArrayList<>();
+		for (PoiUIFilter filter : getSortedPoiFilters(onlyActive)) {
+			filterOrders.add(filter.getFilterId());
 		}
 		return filterOrders;
 	}
 
 	public List<PoiUIFilter> getSortedPoiFilters(boolean onlyActive) {
-		initPoiUIFiltersState();
+		ApplicationMode selectedAppMode = application.getSettings().getApplicationMode();
+		return getSortedPoiFilters(selectedAppMode, onlyActive);
+	}
+
+	public List<PoiUIFilter> getSortedPoiFilters(@NonNull ApplicationMode appMode, boolean onlyActive) {
+		initPoiUIFiltersState(appMode);
 		List<PoiUIFilter> allFilters = new ArrayList<>();
 		for (PoiUIFilter filter : getTopDefinedPoiFilters()) {
 			if (!filter.isWikiFilter()) {
@@ -345,13 +349,13 @@ public class PoiFiltersHelper {
 		}
 	}
 	
-	private void initPoiUIFiltersState() {
+	private void initPoiUIFiltersState(@NonNull ApplicationMode appMode) {
 		List<PoiUIFilter> allFilters = new ArrayList<>();
 		allFilters.addAll(getTopDefinedPoiFilters());
 		allFilters.addAll(getSearchPoiFilters());
 
-		refreshPoiFiltersActivation(allFilters);
-		refreshPoiFiltersOrder(allFilters);
+		refreshPoiFiltersActivation(appMode, allFilters);
+		refreshPoiFiltersOrder(appMode, allFilters);
 		
 		//set up the biggest order to custom filter
 		PoiUIFilter customFilter = getCustomPOIFilter();
@@ -359,8 +363,9 @@ public class PoiFiltersHelper {
 		customFilter.setOrder(allFilters.size());
 	}
 	
-	private void refreshPoiFiltersOrder(List<PoiUIFilter> filters) {
-		Map<String, Integer> orders = getPoiFiltersOrder();
+	private void refreshPoiFiltersOrder(@NonNull ApplicationMode appMode,
+	                                    List<PoiUIFilter> filters) {
+		Map<String, Integer> orders = getPoiFiltersOrder(appMode);
 		List<PoiUIFilter> existedFilters = new ArrayList<>();
 		List<PoiUIFilter> newFilters = new ArrayList<>();
 		if (orders != null) {
@@ -392,8 +397,9 @@ public class PoiFiltersHelper {
 		}
 	}
 	
-	private void refreshPoiFiltersActivation(List<PoiUIFilter> filters) {
-		List<String> inactiveFiltersIds = getInactivePoiFiltersIds();
+	private void refreshPoiFiltersActivation(@NonNull ApplicationMode appMode,
+	                                         List<PoiUIFilter> filters) {
+		List<String> inactiveFiltersIds = getInactivePoiFiltersIds(appMode);
 		if (inactiveFiltersIds != null) {
 			for (PoiUIFilter filter : filters) {
 				filter.setActive(!inactiveFiltersIds.contains(filter.getFilterId()));
@@ -405,16 +411,16 @@ public class PoiFiltersHelper {
 		}
 	}
 
-	public void saveFiltersOrder(List<String> filterIds) {
-		application.getSettings().POI_FILTERS_ORDER.setStringsList(filterIds);
+	public void saveFiltersOrder(ApplicationMode appMode, List<String> filterIds) {
+		application.getSettings().POI_FILTERS_ORDER.setStringsListForProfile(appMode, filterIds);
 	}
 
-	public void saveInactiveFilters(List<String> filterIds) {
-		application.getSettings().INACTIVE_POI_FILTERS.setStringsList(filterIds);
+	public void saveInactiveFilters(ApplicationMode appMode, List<String> filterIds) {
+		application.getSettings().INACTIVE_POI_FILTERS.setStringsListForProfile(appMode, filterIds);
 	}
 
-	public Map<String, Integer> getPoiFiltersOrder() {
-		List<String> ids = application.getSettings().POI_FILTERS_ORDER.getStringsList();
+	public Map<String, Integer> getPoiFiltersOrder(@NonNull ApplicationMode appMode) {
+		List<String> ids = application.getSettings().POI_FILTERS_ORDER.getStringsListForProfile(appMode);
 		if (ids == null) {
 			return null;
 		}
@@ -425,8 +431,8 @@ public class PoiFiltersHelper {
 		return result;
 	}
 	
-	public List<String> getInactivePoiFiltersIds() {
-		return application.getSettings().INACTIVE_POI_FILTERS.getStringsList();
+	public List<String> getInactivePoiFiltersIds(@NonNull ApplicationMode appMode) {
+		return application.getSettings().INACTIVE_POI_FILTERS.getStringsListForProfile(appMode);
 	}
 
 	private PoiFilterDbHelper openDbHelperNoPois() {

@@ -3,6 +3,8 @@ package net.osmand.plus.poi;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -19,16 +21,20 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.MotionEventCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.appbar.AppBarLayout;
+
 import net.osmand.AndroidUtils;
-import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 
@@ -45,14 +51,14 @@ import static net.osmand.plus.poi.RearrangePoiFiltersFragment.ItemType.DESCRIPTI
 import static net.osmand.plus.poi.RearrangePoiFiltersFragment.ItemType.POI;
 import static net.osmand.plus.poi.RearrangePoiFiltersFragment.ItemType.SPACE;
 
-public class RearrangePoiFiltersFragment extends DialogFragment {
+public class RearrangePoiFiltersFragment extends DialogFragment implements SelectAppModesBottomSheetDialogFragment.AppModeChangedListener {
 
 	public static final String TAG = "RearrangePoiFiltersFragment";
 
 	private static final Log LOG = PlatformUtil.getLog(RearrangePoiFiltersFragment.class);
 
 	private boolean usedOnMap;
-	private CallbackWithObject<Boolean> resultCallback;
+	private OnApplyPoiFiltersState resultCallback;
 
 	private List<ListItem> items = new ArrayList<>();
 	private EditPoiFiltersAdapter adapter;
@@ -60,6 +66,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 	private boolean activationModified;
 	private boolean wasReset = false;
 	private boolean isChanged = false;
+	private ApplicationMode appMode;
 
 	private HashMap<String, Integer> poiFiltersOrders = new HashMap<>();
 	private List<String> availableFiltersKeys = new ArrayList<>();
@@ -72,6 +79,20 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 		setStyle(STYLE_NO_FRAME, themeId);
 	}
 
+	@Override
+	public void onPause() {
+		super.onPause();
+		if (requireActivity().isChangingConfigurations()) {
+			dismiss();
+		}
+	}
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		updateProfileButton();
+	}
+
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -80,17 +101,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 		boolean nightMode = isNightMode(app, usedOnMap);
 
 		View mainView = UiUtilities.getInflater(app, nightMode).inflate(R.layout.edit_arrangement_list_fragment, container, false);
-		ImageButton closeButton = mainView.findViewById(R.id.close_button);
-		closeButton.setImageResource(R.drawable.ic_action_remove_dark);
-		closeButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
-
-		TextView toolbarTitle = mainView.findViewById(R.id.toolbar_title);
-		toolbarTitle.setText(R.string.rearrange_categories);
+		createToolbar(mainView, nightMode);
 
 		RecyclerView recyclerView = mainView.findViewById(R.id.profiles_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
@@ -159,15 +170,16 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 		applyButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				ApplicationMode selectedAppMode = getSelectedAppMode();
 				if (isChanged) {
 					if (activationModified) {
-						app.getPoiFilters().saveInactiveFilters(availableFiltersKeys);
+						app.getPoiFilters().saveInactiveFilters(selectedAppMode, availableFiltersKeys);
 					} else if (wasReset) {
-						app.getPoiFilters().saveInactiveFilters(null);
+						app.getPoiFilters().saveInactiveFilters(selectedAppMode, null);
 					}
 					if (orderModified) {
 						List<PoiUIFilter> dataToSave = new ArrayList<>();
-						for (PoiUIFilter filter : getSortedPoiUiFilters(app)) {
+						for (PoiUIFilter filter : getSortedPoiUiFilters(selectedAppMode, app)) {
 							String filterId = filter.getFilterId();
 							Integer order = poiFiltersOrders.get(filterId);
 							if (order == null) {
@@ -185,13 +197,13 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 						for (PoiUIFilter filter : dataToSave) {
 							filterIds.add(filter.getFilterId());
 						}
-						app.getPoiFilters().saveFiltersOrder(filterIds);
+						app.getPoiFilters().saveFiltersOrder(selectedAppMode, filterIds);
 					} else if (wasReset) {
-						app.getPoiFilters().saveFiltersOrder(null);
+						app.getPoiFilters().saveFiltersOrder(selectedAppMode,null);
 					}
 				}
 				if (resultCallback != null) {
-					resultCallback.processResult(isChanged);
+					resultCallback.onApplyPoiFiltersState(selectedAppMode, isChanged);
 				}
 				dismiss();
 			}
@@ -200,10 +212,84 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 		return mainView;
 	}
 
+	private void createToolbar(View mainView, boolean nightMode) {
+		AppBarLayout appbar = mainView.findViewById(R.id.appbar);
+		View toolbar = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.profile_preference_toolbar_with_icon, appbar, false);
+
+		ImageButton closeButton = toolbar.findViewById(R.id.close_button);
+		closeButton.setImageResource(R.drawable.ic_action_remove_dark);
+		closeButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dismiss();
+			}
+		});
+
+		TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
+		toolbarTitle.setText(R.string.rearrange_categories);
+
+		View switchProfile = toolbar.findViewById(R.id.profile_button);
+		if (switchProfile != null) {
+			switchProfile.setContentDescription(getString(R.string.switch_profile));
+			switchProfile.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					FragmentManager fragmentManager = getFragmentManager();
+					if (fragmentManager != null) {
+						SelectAppModesBottomSheetDialogFragment.showInstance(fragmentManager,
+								RearrangePoiFiltersFragment.this, false, getSelectedAppMode(), false);
+					}
+				}
+			});
+		}
+		appbar.addView(toolbar);
+	}
+
+	protected void updateProfileButton() {
+		View view = getView();
+		if (view == null) {
+			return;
+		}
+
+		OsmandApplication app = requireMyApplication();
+		UiUtilities uiUtilities = app.getUIUtilities();
+		ApplicationMode selectedAppMode = getSelectedAppMode();
+		boolean nightMode = isNightMode(app, usedOnMap);
+
+		ImageView profileIcon = (ImageView) view.findViewById(R.id.profile_icon);
+		if (profileIcon != null) {
+			int iconRes = selectedAppMode.getIconRes();
+			int iconColor = selectedAppMode.getIconColorInfo().getColor(nightMode);
+			profileIcon.setImageDrawable(uiUtilities.getPaintedIcon(iconRes, iconColor));
+		}
+
+		View profileButton = view.findViewById(R.id.profile_button);
+		if (profileButton != null) {
+			int iconColor = getSelectedAppMode().getIconColorInfo().getColor(nightMode);
+			int bgColor = ContextCompat.getColor(app, nightMode ?
+					R.color.divider_color_dark : R.color.active_buttons_and_links_text_light);
+			int selectedColor = UiUtilities.getColorWithAlpha(iconColor, 0.3f);
+
+			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+				int bgResId = R.drawable.circle_background_light;
+				int selectableResId = R.drawable.ripple_circle;
+				Drawable bgDrawable = uiUtilities.getPaintedIcon(bgResId, bgColor);
+				Drawable selectable = uiUtilities.getPaintedIcon(selectableResId, selectedColor);
+				Drawable[] layers = {bgDrawable, selectable};
+				AndroidUtils.setBackground(profileButton, new LayerDrawable(layers));
+			} else {
+				int bgResId = R.drawable.circle_background_light;
+				Drawable bgDrawable = uiUtilities.getPaintedIcon(bgResId, bgColor);
+				AndroidUtils.setBackground(profileButton, bgDrawable);
+			}
+		}
+	}
+
 	private void initFiltersOrders(OsmandApplication app, boolean arrangementByDefault) {
 		poiFiltersOrders.clear();
 		availableFiltersKeys.clear();
-		List<PoiUIFilter> filters = getSortedPoiUiFilters(app);
+		ApplicationMode selectedAppMode = getSelectedAppMode();
+		List<PoiUIFilter> filters = getSortedPoiUiFilters(selectedAppMode, app);
 		if (arrangementByDefault) {
 			Collections.sort(filters, new Comparator<PoiUIFilter>() {
 				@Override
@@ -272,21 +358,35 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 		adapter.setItems(items);
 	}
 
-	public static void showInstance(@NonNull DialogFragment parentFragment, boolean usedOnMap, CallbackWithObject<Boolean> callback) {
+	public static void showInstance(@NonNull ApplicationMode appMode, @NonNull DialogFragment parentFragment,
+	                                boolean usedOnMap, OnApplyPoiFiltersState callback) {
 		try {
 			RearrangePoiFiltersFragment fragment = new RearrangePoiFiltersFragment();
 			fragment.setUsedOnMap(usedOnMap);
 			fragment.setResultCallback(callback);
+			fragment.setSelectedAppMode(appMode);
 			fragment.show(parentFragment.getChildFragmentManager(), RearrangePoiFiltersFragment.TAG);
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);
 		}
 	}
 
+	public ApplicationMode getSelectedAppMode() {
+		if (appMode == null) {
+			appMode = requireMyApplication().getSettings().getApplicationMode();
+		}
+		return appMode;
+	}
+
+	public void setSelectedAppMode(ApplicationMode appMode) {
+		this.appMode = appMode;
+	}
+
 	public List<ListItem> getPoiFilters(boolean isActive) {
 		OsmandApplication app = requireMyApplication();
+		ApplicationMode selectedAppMode = getSelectedAppMode();
 		List<ListItem> result = new ArrayList<>();
-		for (PoiUIFilter f : getSortedPoiUiFilters(app)) {
+		for (PoiUIFilter f : getSortedPoiUiFilters(selectedAppMode, app)) {
 			addFilterToList(result, f, isActive);
 		}
 		Collections.sort(result, new Comparator<ListItem>() {
@@ -322,8 +422,9 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 		}
 	}
 
-	private static List<PoiUIFilter> getSortedPoiUiFilters(@NonNull OsmandApplication app) {
-		List<PoiUIFilter> filters = app.getPoiFilters().getSortedPoiFilters(false);
+	private static List<PoiUIFilter> getSortedPoiUiFilters(@NonNull ApplicationMode appMode,
+	                                                       @NonNull OsmandApplication app) {
+		List<PoiUIFilter> filters = app.getPoiFilters().getSortedPoiFilters(appMode, false);
 		//remove custom filter
 		for (int i = filters.size() - 1; i >= 0; i--) {
 			PoiUIFilter filter = filters.get(i);
@@ -339,7 +440,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 		this.usedOnMap = usedOnMap;
 	}
 
-	public void setResultCallback(CallbackWithObject<Boolean> resultCallback) {
+	public void setResultCallback(OnApplyPoiFiltersState resultCallback) {
 		this.resultCallback = resultCallback;
 	}
 
@@ -354,6 +455,13 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 			return usedOnMap ? app.getDaynightHelper().isNightModeForMapControls() : !app.getSettings().isLightContent();
 		}
 		return false;
+	}
+
+	@Override
+	public void onAppModeChanged(ApplicationMode appMode) {
+		this.appMode = appMode;
+		updateProfileButton();
+		initFiltersOrders(requireMyApplication(), false);
 	}
 
 	public class PoiUIFilterDataObject {
@@ -692,5 +800,9 @@ public class RearrangePoiFiltersFragment extends DialogFragment {
 		void onDragOrSwipeEnded(RecyclerView.ViewHolder holder);
 
 		void onButtonClicked(int view);
+	}
+
+	public interface OnApplyPoiFiltersState {
+		void onApplyPoiFiltersState(ApplicationMode mode, boolean stateChanged);
 	}
 }

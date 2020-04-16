@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -39,6 +38,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.widget.TintableCompoundButton;
 
+import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.snackbar.SnackbarContentLayout;
 
@@ -50,8 +50,6 @@ import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.widgets.TextViewEx;
 
 import org.apache.commons.logging.Log;
-
-import java.util.Locale;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
 
@@ -414,6 +412,9 @@ public class UiUtilities {
 			actionView.setGravity(Gravity.CENTER_VERTICAL | Gravity.END);
 			container.setLayoutParams(params);
 		}
+		try {
+			snackbar.setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_FADE);
+		} catch (Throwable e) { }
 	}
 
 	public static void rotateImageByLayoutDirection(ImageView image, int layoutDirection) {
