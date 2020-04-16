@@ -2,7 +2,6 @@ package net.osmand.plus.views;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -53,7 +52,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static net.osmand.AndroidUtils.dpToPx;
 
 public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
 		MapTextProvider<Amenity>, IRouteInformationListener {
@@ -446,15 +445,4 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	@Override
 	public void routeWasFinished() {
 	}
-
-	public static int dpToPx(Context ctx, float dp) {
-		Resources r = ctx.getResources();
-		return (int) TypedValue.applyDimension(
-				COMPLEX_UNIT_DIP,
-				dp,
-				r.getDisplayMetrics()
-		);
-	}
-
-
 }

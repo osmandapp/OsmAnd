@@ -1,11 +1,9 @@
 package net.osmand.plus.helpers;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -25,7 +23,7 @@ import java.util.Random;
 
 import gnu.trove.list.array.TIntArrayList;
 
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static net.osmand.AndroidUtils.dpToPx;
 
 public class ColorDialogs {
 	public static int[] paletteColors = new int[] {
@@ -252,15 +250,6 @@ public class ColorDialogs {
 			}
 		}
 		return colorName;
-	}
-
-	private static int dpToPx(final Context activity, float dp) {
-		Resources r = activity.getResources();
-		return (int) TypedValue.applyDimension(
-				COMPLEX_UNIT_DIP,
-				dp,
-				r.getDisplayMetrics()
-		);
 	}
 
 	public static boolean isPaletteColor(@ColorInt int color) {
