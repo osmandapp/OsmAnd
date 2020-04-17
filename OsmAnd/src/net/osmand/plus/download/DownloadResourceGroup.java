@@ -276,7 +276,7 @@ public class DownloadResourceGroup {
 	}
 	
 	public IndexItem getItemByIndex(int ind) {
-		if(individualResources != null && ind < individualResources.size()) {
+		if (individualResources != null && ind >= 0 && ind < individualResources.size()) {
 			return individualResources.get(ind);
 		}
 		return null;

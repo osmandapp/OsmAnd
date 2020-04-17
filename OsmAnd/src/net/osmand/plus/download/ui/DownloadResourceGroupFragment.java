@@ -61,8 +61,10 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		InAppPurchaseListener, OnChildClickListener {
 	public static final int RELOAD_ID = 0;
 	public static final int SEARCH_ID = 1;
+
 	public static final String TAG = "RegionDialogFragment";
-	private static final String REGION_ID_DLG_KEY = "world_region_dialog_key";
+	public static final String REGION_ID_DLG_KEY = "world_region_dialog_key";
+
 	private String groupId;
 	private View view;
 	private BannerAndDownloadFreeVersion banner;
@@ -452,6 +454,11 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 					.createInstance(uniqueId);
 			((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
 			return true;
+		} else if (child instanceof CustomIndexItem) {
+			String regionId = group.getGroupByIndex(groupPosition).getUniqueId();
+
+			DownloadItemFragment downloadItemFragment = DownloadItemFragment.createInstance(regionId, childPosition);
+			((DownloadActivity) getActivity()).showDialog(getActivity(), downloadItemFragment);
 		} else if (child instanceof IndexItem) {
 			IndexItem indexItem = (IndexItem) child;
 			ItemViewHolder vh = (ItemViewHolder) v.getTag();

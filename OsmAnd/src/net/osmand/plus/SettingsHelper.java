@@ -760,15 +760,32 @@ public class SettingsHelper {
 						long containerSize = indexItemJson.optLong("containerSize");
 
 						String fileName = indexItemJson.optString("filename");
-						String description = indexItemJson.optString("description");
 						String downloadUrl = indexItemJson.optString("downloadurl");
 						String size = new DecimalFormat("#.#").format(containerSize / (1024f * 1024f));
 
+						JSONObject descriptionJson = indexItemJson.optJSONObject("description");
+						Map<String, String> descriptions = new HashMap<>();
+						if (descriptionJson != null) {
+							for (Iterator<String> it = descriptionJson.keys(); it.hasNext(); ) {
+								String localeKey = it.next();
+								String name = descriptionJson.getString(localeKey);
+								descriptions.put(localeKey, name);
+							}
+						}
+
+						List<String> descrImageUrl = new ArrayList<>();
+						JSONArray imageDescriptionUrlJson = indexItemJson.optJSONArray("image-description-url");
+						if (imageDescriptionUrlJson != null) {
+							for (int j = 0; j < imageDescriptionUrlJson.length(); j++) {
+								String renderer = imageDescriptionUrlJson.getString(i);
+								descrImageUrl.add(renderer);
+							}
+						}
 						String indexType = indexItemJson.optString("type", type);
 
 						@NonNull DownloadActivityType tp = DownloadActivityType.getIndexType(indexType);
 						if (tp != null) {
-							IndexItem indexItem = new CustomIndexItem(fileName, subfolder, description, downloadUrl, indexNames, timestamp, size, contentSize, containerSize, tp);
+							IndexItem indexItem = new CustomIndexItem(fileName, subfolder, downloadUrl, indexNames,descriptions, descrImageUrl, timestamp, size, contentSize, containerSize, tp);
 							items.add(indexItem);
 						}
 					}
