@@ -3277,7 +3277,7 @@ Lon %2$s</string>
     <string name="vehicle_parameters_descr">Gewicht, Höhe, Geschwindigkeit</string>
     <string name="vehicle_parameters">Fahrzeugparameter</string>
     <string name="route_parameters">Routenparameter</string>
-    <string name="navigate_point_format_olc">Standortkodierung öffnen</string>
+    <string name="navigate_point_format_olc">Offener Standortcode (OLC)</string>
     <string name="start_up_message_pref">Begrüßungsnachricht</string>
     <string name="screen_alerts_descr">Warnungen werden während der Navigation unten links angezeigt.</string>
     <string name="map_during_navigation">Karte während Navigation</string>
