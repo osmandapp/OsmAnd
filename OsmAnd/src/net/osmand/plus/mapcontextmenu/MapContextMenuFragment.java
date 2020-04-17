@@ -88,6 +88,7 @@ import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
 import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
+import static net.osmand.plus.settings.ConfigureMenuItemsFragment.MAIN_BUTTONS_QUANTITY;
 
 
 public class MapContextMenuFragment extends BaseOsmAndFragment implements DownloadEvents {
@@ -566,11 +567,16 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		// Action buttons
 //		TODO refactor section
 		ContextMenuAdapter adapter = menu.getActionsContextMenuAdapter(false);
-		List<ContextMenuItem> items = adapter.getItems();
+		List<ContextMenuItem> items = new ArrayList<>();
+		for (ContextMenuItem item : adapter.getItems()) {
+			if (!item.isHidden()) {
+				items.add(item);
+			}
+		}
 		ContextMenuAdapter mainAdapter = new ContextMenuAdapter(requireMyApplication());
 		ContextMenuAdapter additionalAdapter = new ContextMenuAdapter(requireMyApplication());
 		for (int i = 0; i < items.size(); i++) {
-			if (i < 4) {
+			if (i < MAIN_BUTTONS_QUANTITY) {
 				mainAdapter.addItem(items.get(i));
 			} else {
 				additionalAdapter.addItem(items.get(i));
@@ -585,7 +591,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		ContextMenuItemClickListener mainListener = menu.getContextMenuItemClickListener(mainAdapter);
 		ContextMenuItemClickListener additionalListener = menu.getContextMenuItemClickListener(additionalAdapter);
 
-		for (int i = 0; i < 4; i++) {
+		int mainButtonsQuantity = Math.min(MAIN_BUTTONS_QUANTITY, items.size());
+		for (int i = 0; i < mainButtonsQuantity; i++) {
 			buttons.addView(getActionView(items.get(i), i, mainAdapter, additionalAdapter, mainListener, additionalListener), params);
 		}
 		buttons.setGravity(Gravity.CENTER);
@@ -648,11 +655,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private View getActionView(ContextMenuItem contextMenuItem,
-	                           final int position,
-	                           final ContextMenuAdapter mainAdapter,
-	                           final ContextMenuAdapter additionalAdapter,
-	                           final ContextMenuItemClickListener mainListener,
-	                           final ContextMenuItemClickListener additionalListener) {
+							   final int position,
+							   final ContextMenuAdapter mainAdapter,
+							   final ContextMenuAdapter additionalAdapter,
+							   final ContextMenuItemClickListener mainListener,
+							   final ContextMenuItemClickListener additionalListener) {
 		UiUtilities uiUtilities = requireMyApplication().getUIUtilities();
 		LayoutInflater inflater = UiUtilities.getInflater(getMyApplication(), nightMode);
 		View view = inflater.inflate(R.layout.context_menu_action_item, null);
