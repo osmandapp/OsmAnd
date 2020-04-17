@@ -308,18 +308,18 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		List<RearrangeMenuAdapterItem> visible = getItemsForRearrangeAdapter(hiddenMenuItems, wasReset ? null : menuItemsOrder, false);
 		List<RearrangeMenuAdapterItem> hiddenItems = getItemsForRearrangeAdapter(hiddenMenuItems, wasReset ? null : menuItemsOrder, true);
 		if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
+            int buttonMoreIndex = MAIN_BUTTONS_QUANTITY - 1;
 			for (int i = 0; i < visible.size(); i++) {
-				ContextMenuItem value = (ContextMenuItem) visible.get(i).getValue();
-				if (value.getId() != null && value.getId().equals(MAP_CONTEXT_MENU_MORE_ID)) {
-					int buttonMoreIndex = MAIN_BUTTONS_QUANTITY - 1;
-					if (i > buttonMoreIndex) {
-						RearrangeMenuAdapterItem third = visible.get(buttonMoreIndex);
-						visible.set(buttonMoreIndex, visible.get(i));
-						menuItemsOrder.put(((ContextMenuItem) third.getValue()).getId(), i);
-						menuItemsOrder.put(((ContextMenuItem) visible.get(i).getValue()).getId(), buttonMoreIndex);
-					}
-				}
-			}
+                ContextMenuItem value = (ContextMenuItem) visible.get(i).getValue();
+                if (value.getId() != null && value.getId().equals(MAP_CONTEXT_MENU_MORE_ID) && i > buttonMoreIndex) {
+                    RearrangeMenuAdapterItem third = visible.get(buttonMoreIndex);
+                    visible.set(buttonMoreIndex, visible.get(i));
+                    visible.set(i, third);
+                    value.setOrder(buttonMoreIndex);
+                    ((ContextMenuItem) third.getValue()).setOrder(i);
+                    break;
+                }
+            }
 
 			List<RearrangeMenuAdapterItem> main = new ArrayList<>();
 			int actionsIndex = Math.min(MAIN_BUTTONS_QUANTITY, visible.size());
