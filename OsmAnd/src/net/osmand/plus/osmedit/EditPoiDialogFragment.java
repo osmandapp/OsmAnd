@@ -68,6 +68,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.osmedit.OsmPoint.Action;
@@ -88,7 +89,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
-	public static final String TAG = "EditPoiDialogFragment";
+	public static final String TAG = EditPoiDialogFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(EditPoiDialogFragment.class);
 
 	private static final String KEY_AMENITY_ENTITY = "key_amenity_entity";
@@ -159,7 +160,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		viewPager = (EditPoiViewPager) view.findViewById(R.id.viewpager);
 		String basicTitle = getResources().getString(R.string.tab_title_basic);
 		String extendedTitle = getResources().getString(R.string.tab_title_advanced);
-		final MyAdapter pagerAdapter = new MyAdapter(getChildFragmentManager(), basicTitle, extendedTitle);
+		final poiInfoPagerAdapter pagerAdapter = new poiInfoPagerAdapter(getChildFragmentManager(), basicTitle, extendedTitle);
 		viewPager.setAdapter(pagerAdapter);
 		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 			@Override
@@ -743,12 +744,12 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public static class MyAdapter extends FragmentPagerAdapter {
+	public static class poiInfoPagerAdapter extends FragmentPagerAdapter {
 		private final Fragment[] fragments = new Fragment[]{new BasicEditPoiFragment(),
 				new AdvancedEditPoiFragment()};
 		private final String[] titles;
 
-		public MyAdapter(FragmentManager fm, String basicTitle, String extendedTitle) {
+		poiInfoPagerAdapter(FragmentManager fm, String basicTitle, String extendedTitle) {
 			super(fm);
 			titles = new String[]{basicTitle, extendedTitle};
 		}
@@ -778,7 +779,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			this.callback = callback;
 		}
 
-		public DeletePoiHelper(AppCompatActivity activity) {
+		DeletePoiHelper(AppCompatActivity activity) {
 			this.activity = activity;
 			OsmandSettings settings = ((OsmandApplication) activity.getApplication()).getSettings();
 			OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
@@ -804,12 +805,14 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, amenity);
 		}
 
-		public void deletePoiWithDialog(final Entity entity) {
+		void deletePoiWithDialog(final Entity entity) {
+			boolean nightMode = ((OsmandApplication) activity.getApplication()).getDaynightHelper().isNightModeForMapControls();
+			Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 			if (entity == null) {
-				Toast.makeText(activity, activity.getResources().getString(R.string.poi_cannot_be_found), Toast.LENGTH_LONG).show();
+				Toast.makeText(themedContext, activity.getResources().getString(R.string.poi_cannot_be_found), Toast.LENGTH_LONG).show();
 				return;
 			}
-			AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+			AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 			builder.setTitle(R.string.poi_remove_title);
 			final EditText comment;
 			final CheckBox closeChangesetCheckBox;
@@ -818,13 +821,13 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 				closeChangesetCheckBox = null;
 				comment = null;
 			} else {
-				LinearLayout ll = new LinearLayout(activity);
+				LinearLayout ll = new LinearLayout(themedContext);
 				ll.setPadding(16, 2, 16, 0);
 				ll.setOrientation(LinearLayout.VERTICAL);
-				closeChangesetCheckBox = new CheckBox(activity);
+				closeChangesetCheckBox = new CheckBox(themedContext);
 				closeChangesetCheckBox.setText(R.string.close_changeset);
 				ll.addView(closeChangesetCheckBox);
-				comment = new EditText(activity);
+				comment = new EditText(themedContext);
 				comment.setText(R.string.poi_remove_title);
 				ll.addView(comment);
 				builder.setView(ll);
@@ -852,18 +855,25 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 						@Override
 						public boolean processResult(Entity result) {
 							if (result != null) {
-								if (callback != null) {
-									callback.poiDeleted();
-								}
-								if (isLocalEdit) {
-									Toast.makeText(activity, R.string.osm_changes_added_to_local_edits,
-											Toast.LENGTH_LONG).show();
+								OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+								if (plugin != null && isLocalEdit) {
+									List<OpenstreetmapPoint> points = plugin.getDBPOI().getOpenstreetmapPoints();
+									if (activity instanceof MapActivity && points.size() > 0) {
+										OsmPoint point = points.get(points.size() - 1);
+										MapActivity mapActivity = (MapActivity) activity;
+										mapActivity.getContextMenu().showOrUpdate(
+												new LatLon(point.getLatitude(), point.getLongitude()),
+												plugin.getOsmEditsLayer(mapActivity).getObjectName(point), point);
+									}
 								} else {
 									Toast.makeText(activity, R.string.poi_remove_success, Toast.LENGTH_LONG)
 											.show();
 								}
 								if (activity instanceof MapActivity) {
 									((MapActivity) activity).getMapView().refreshMap(true);
+								}
+								if (callback != null) {
+									callback.poiDeleted();
 								}
 							}
 							return false;
@@ -880,7 +890,12 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		@NonNull
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			Context themedContext = getActivity();
+			if (getParentFragment() != null) {
+				themedContext = UiUtilities.getThemedContext(getActivity(),
+						((EditPoiDialogFragment) getParentFragment()).isNightMode(true));
+			}
+			AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 			String msg = getString(R.string.save_poi_without_poi_type_message);
 			int i = getArguments().getInt("message", 0);
 			if(i != 0) {
@@ -903,7 +918,12 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		@NonNull
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			Context themedContext = getActivity();
+			if (getParentFragment() != null) {
+				themedContext = UiUtilities.getThemedContext(getActivity(),
+						((EditPoiDialogFragment) getParentFragment()).isNightMode(true));
+			}
+			AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 			builder.setTitle(getResources().getString(R.string.are_you_sure))
 					.setMessage(getString(R.string.unsaved_changes_will_be_lost))
 					.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
@@ -921,7 +941,12 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		@NonNull
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			Context themedContext = getActivity();
+			if (getParentFragment() != null) {
+				themedContext = UiUtilities.getThemedContext(getActivity(),
+						((EditPoiDialogFragment) getParentFragment()).isNightMode(true));
+			}
+			AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 			String msg = getString(R.string.save_poi_value_exceed_length);
 			String fieldTag = getArguments().getString("tag", "");
 			if(!Algorithms.isEmpty(fieldTag)) {
