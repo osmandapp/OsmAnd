@@ -14,7 +14,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -70,6 +69,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	private static final String ITEMS_ORDER_KEY = "items_order_key";
 	private static final String HIDDEN_ITEMS_KEY = "hidden_items_key";
 	private static final String CONFIGURE_MENU_ITEMS_TAG = "configure_menu_items_tag";
+    private static final String IS_CHANGED_KEY = "is_changed_key";
 	private RearrangeMenuItemsAdapter rearrangeAdapter;
 	private HashMap<String, Integer> menuItemsOrder;
 	private ContextMenuAdapter contextMenuAdapter;
@@ -89,6 +89,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		outState.putSerializable(ITEMS_ORDER_KEY, menuItemsOrder);
 		outState.putSerializable(ITEM_TYPE_KEY, screenType);
 		outState.putString(APP_MODE_KEY, appMode.getStringKey());
+        outState.putBoolean(IS_CHANGED_KEY, isChanged);
 	}
 
 	public static ConfigureMenuItemsFragment showInstance(
@@ -128,15 +129,12 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		app = requireMyApplication();
 		nightMode = !app.getSettings().isLightContent();
 		mInflater = UiUtilities.getInflater(app, nightMode);
-		instantiateContextMenuAdapter();
-		if (savedInstanceState != null
-				&& savedInstanceState.containsKey(ITEM_TYPE_KEY)
-				&& savedInstanceState.containsKey(HIDDEN_ITEMS_KEY)
-				&& savedInstanceState.containsKey(ITEMS_ORDER_KEY)) {
+        if (savedInstanceState != null) {
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
 			screenType = (ScreenType) savedInstanceState.getSerializable(ITEM_TYPE_KEY);
 			hiddenMenuItems = savedInstanceState.getStringArrayList(HIDDEN_ITEMS_KEY);
-			menuItemsOrder = (HashMap<String, Integer>) savedInstanceState.getSerializable(ITEMS_ORDER_KEY);
+            menuItemsOrder = (HashMap<String, Integer>) savedInstanceState.getSerializable(ITEMS_ORDER_KEY);
+            isChanged = savedInstanceState.getBoolean(IS_CHANGED_KEY);
 		} else {
 			hiddenMenuItems = new ArrayList<>(getSettingForScreen(app, screenType).getModeValue(appMode).getHiddenIds());
 			menuItemsOrder = new HashMap<>();
@@ -144,7 +142,15 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 			for (int i = 0; i < orderIds.size(); i++) {
 				menuItemsOrder.put(orderIds.get(i), i);
 			}
-		}
+        }
+        instantiateContextMenuAdapter();
+        if (menuItemsOrder.isEmpty()) {
+            List<ContextMenuItem> defItems = contextMenuAdapter.getDefaultItems();
+            initDefaultOrders(defItems);
+            for (int i = 0; i < defItems.size(); i++) {
+                menuItemsOrder.put(defItems.get(i).getId(), i);
+            }
+        }
 	}
 
 	private void instantiateContextMenuAdapter() {
