@@ -1064,14 +1064,14 @@ public class TransportRoutePlanner {
 			s.y31 = ns.y31;
 //			List<TransportRoute> routes1 = new ArrayList<>();
 			//cache routes to avoid circular conversion and just search them by id
-			for (int i = 0; i < ns.routes.length; i++) {
-				if (s.getRoutesIds().length == ns.routes.length && convertedRoutesCache != null
-						&& convertedRoutesCache.get(ns.routesIds[i]) != null) {
-					s.addRoute(convertedRoutesCache.get(ns.routesIds[i]));
-				} else {
-					s.addRoute(convertTransportRoute(ns.routes[i]));
-				}
-			}
+//			for (int i = 0; i < ns.routes.length; i++) {
+//				if (s.getRoutesIds().length == ns.routes.length && convertedRoutesCache != null
+//						&& convertedRoutesCache.get(ns.routesIds[i]) != null) {
+//					s.addRoute(convertedRoutesCache.get(ns.routesIds[i]));
+//				} else {
+//					s.addRoute(convertTransportRoute(ns.routes[i]));
+//				}
+//			}
 
 			if (ns.pTStopExit_refs != null && ns.pTStopExit_refs.length > 0) {
 				for (int i = 0; i < ns.pTStopExit_refs.length; i++) {
