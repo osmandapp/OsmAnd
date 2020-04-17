@@ -160,7 +160,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		viewPager = (EditPoiViewPager) view.findViewById(R.id.viewpager);
 		String basicTitle = getResources().getString(R.string.tab_title_basic);
 		String extendedTitle = getResources().getString(R.string.tab_title_advanced);
-		final poiInfoPagerAdapter pagerAdapter = new poiInfoPagerAdapter(getChildFragmentManager(), basicTitle, extendedTitle);
+		final PoiInfoPagerAdapter pagerAdapter = new PoiInfoPagerAdapter(getChildFragmentManager(), basicTitle, extendedTitle);
 		viewPager.setAdapter(pagerAdapter);
 		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 			@Override
@@ -744,12 +744,12 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public static class poiInfoPagerAdapter extends FragmentPagerAdapter {
+	public static class PoiInfoPagerAdapter extends FragmentPagerAdapter {
 		private final Fragment[] fragments = new Fragment[]{new BasicEditPoiFragment(),
 				new AdvancedEditPoiFragment()};
 		private final String[] titles;
 
-		poiInfoPagerAdapter(FragmentManager fm, String basicTitle, String extendedTitle) {
+		PoiInfoPagerAdapter(FragmentManager fm, String basicTitle, String extendedTitle) {
 			super(fm);
 			titles = new String[]{basicTitle, extendedTitle};
 		}
@@ -891,7 +891,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			Context themedContext = getActivity();
-			if (getParentFragment() != null) {
+			if (getParentFragment() instanceof EditPoiDialogFragment) {
 				themedContext = UiUtilities.getThemedContext(getActivity(),
 						((EditPoiDialogFragment) getParentFragment()).isNightMode(true));
 			}
@@ -919,7 +919,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			Context themedContext = getActivity();
-			if (getParentFragment() != null) {
+			if (getParentFragment() instanceof EditPoiDialogFragment) {
 				themedContext = UiUtilities.getThemedContext(getActivity(),
 						((EditPoiDialogFragment) getParentFragment()).isNightMode(true));
 			}
@@ -942,7 +942,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			Context themedContext = getActivity();
-			if (getParentFragment() != null) {
+			if (getParentFragment() instanceof EditPoiDialogFragment) {
 				themedContext = UiUtilities.getThemedContext(getActivity(),
 						((EditPoiDialogFragment) getParentFragment()).isNightMode(true));
 			}
