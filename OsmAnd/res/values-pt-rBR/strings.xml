@@ -3392,7 +3392,7 @@ Pôr do Sol: %2$s</string>
     <string name="save_heading">Incluir direção</string>
     <string name="save_heading_descr">Salve o cabeçalho em cada ponto da trilha durante a gravação.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
-    <string name="street_city">%1$s, %2$s</string>
+    <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="personal_category_name">Pessoal</string>
     <string name="shared_string_downloading_formatted">Baixando %s</string>
     <string name="rendering_value_thick_name">Grosso</string>
@@ -3606,7 +3606,5 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_languages">Idiomas</string>
     <string name="shared_string_language">Idioma</string>
     <string name="shared_string_all_languages">Todos os idiomas</string>
-    <string name="wikipedia_poi_languages_promo">Alguns artigos da Wikipédia podem não estar disponíveis em seu nome. Selecione os idiomas nos quais os artigos da Wikipédia aparecerão no mapa.
-\nVocê poderá alternar entre todos os idiomas disponíveis enquanto lê o artigo.</string>
     <string name="wiki_menu_download_descr">Mapas adicionais são necessários para visualizar os POIs da Wikipédia no mapa.</string>
 </resources>

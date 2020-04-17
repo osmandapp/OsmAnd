@@ -639,7 +639,7 @@ public class SearchCoreFactory {
 		private List<CustomSearchPoiFilter> customPoiFilters = new ArrayList<>();
 		private TIntArrayList customPoiFiltersPriorites = new TIntArrayList();
 		private MapPoiTypes types;
-		private Map<String, Integer> filterOrders = new HashMap<>();
+		private List<String> filterOrders = new ArrayList<>();
 
 		public SearchAmenityTypesAPI(MapPoiTypes types) {
 			super(ObjectType.POI_TYPE);
@@ -656,7 +656,7 @@ public class SearchCoreFactory {
 			this.customPoiFiltersPriorites.add(priority);
 		}
 
-		public void setFilterOrders(Map<String, Integer> filterOrders) {
+		public void setFilterOrders(List<String> filterOrders) {
 			this.filterOrders = filterOrders;
 		}
 
@@ -737,8 +737,8 @@ public class SearchCoreFactory {
 					res.firstUnknownWordMatches = startMatch.matches(res.localeName);
 					if (showTopFiltersOnly) {
 						String stdFilterId = getStandardFilterId(pt);
-						if (filterOrders.containsKey(stdFilterId)) {
-							res.priority = SEARCH_AMENITY_TYPE_PRIORITY + filterOrders.get(stdFilterId);
+						if (filterOrders.contains(stdFilterId)) {
+							res.priority = SEARCH_AMENITY_TYPE_PRIORITY + filterOrders.indexOf(stdFilterId);
 							resultMatcher.publish(res);
 						}
 					} else {
@@ -754,8 +754,8 @@ public class SearchCoreFactory {
 						res.object = csf;
 						res.objectType = ObjectType.POI_TYPE;
 						if (showTopFiltersOnly) {
-							if (filterOrders.containsKey(csf.getFilterId())) {
-								res.priority = SEARCH_AMENITY_TYPE_PRIORITY + filterOrders.get(csf.getFilterId());
+							if (filterOrders.contains(csf.getFilterId())) {
+								res.priority = SEARCH_AMENITY_TYPE_PRIORITY + filterOrders.indexOf(csf.getFilterId());
 								resultMatcher.publish(res);
 							}
 						} else {

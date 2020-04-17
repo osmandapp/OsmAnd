@@ -47,7 +47,7 @@
 			android:layout_gravity="center_vertical"
 			android:layout_weight="1"
 			android:ellipsize="marquee"
-			android:paddingLeft="@dimen/content_padding"
+			android:paddingLeft="0dp"
 			android:paddingRight="@dimen/content_padding"
 			android:paddingTop="@dimen/content_padding_half"
 			android:paddingBottom="@dimen/content_padding_half"
@@ -56,7 +56,7 @@
 			osmand:typeface="@string/font_roboto_regular"
 			tools:text="@string/poi_aerialway_transport"
 			android:paddingEnd="@dimen/content_padding"
-			android:paddingStart="@dimen/content_padding" />
+			android:paddingStart="0dp" />
 
 		<ImageView
 			android:id="@+id/move_icon"

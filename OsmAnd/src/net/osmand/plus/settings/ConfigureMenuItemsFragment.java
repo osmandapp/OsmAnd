@@ -14,12 +14,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -68,6 +69,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	private static final String ITEMS_ORDER_KEY = "items_order_key";
 	private static final String HIDDEN_ITEMS_KEY = "hidden_items_key";
 	private static final String CONFIGURE_MENU_ITEMS_TAG = "configure_menu_items_tag";
+	private static final String IS_CHANGED_KEY = "is_changed_key";
 	private RearrangeMenuItemsAdapter rearrangeAdapter;
 	private HashMap<String, Integer> menuItemsOrder;
 	private ContextMenuAdapter contextMenuAdapter;
@@ -87,6 +89,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		outState.putSerializable(ITEMS_ORDER_KEY, menuItemsOrder);
 		outState.putSerializable(ITEM_TYPE_KEY, screenType);
 		outState.putString(APP_MODE_KEY, appMode.getStringKey());
+		outState.putBoolean(IS_CHANGED_KEY, isChanged);
 	}
 
 	public static ConfigureMenuItemsFragment showInstance(
@@ -126,21 +129,26 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		app = requireMyApplication();
 		nightMode = !app.getSettings().isLightContent();
 		mInflater = UiUtilities.getInflater(app, nightMode);
-		instantiateContextMenuAdapter();
-		if (savedInstanceState != null
-				&& savedInstanceState.containsKey(ITEM_TYPE_KEY)
-				&& savedInstanceState.containsKey(HIDDEN_ITEMS_KEY)
-				&& savedInstanceState.containsKey(ITEMS_ORDER_KEY)) {
+		if (savedInstanceState != null) {
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
 			screenType = (ScreenType) savedInstanceState.getSerializable(ITEM_TYPE_KEY);
 			hiddenMenuItems = savedInstanceState.getStringArrayList(HIDDEN_ITEMS_KEY);
 			menuItemsOrder = (HashMap<String, Integer>) savedInstanceState.getSerializable(ITEMS_ORDER_KEY);
+			isChanged = savedInstanceState.getBoolean(IS_CHANGED_KEY);
 		} else {
 			hiddenMenuItems = new ArrayList<>(getSettingForScreen(app, screenType).getModeValue(appMode).getHiddenIds());
 			menuItemsOrder = new HashMap<>();
 			List<String> orderIds = getSettingForScreen(app, screenType).getModeValue(appMode).getOrderIds();
 			for (int i = 0; i < orderIds.size(); i++) {
 				menuItemsOrder.put(orderIds.get(i), i);
+			}
+		}
+		instantiateContextMenuAdapter();
+		if (menuItemsOrder.isEmpty()) {
+			List<ContextMenuItem> defItems = contextMenuAdapter.getDefaultItems();
+			initDefaultOrders(defItems);
+			for (int i = 0; i < defItems.size(); i++) {
+				menuItemsOrder.put(defItems.get(i).getId(), i);
 			}
 		}
 	}
@@ -169,11 +177,10 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View root = mInflater.inflate(R.layout.edit_arrangement_list_fragment, container, false);
-		Toolbar toolbar = root.findViewById(R.id.toolbar);
-		TextView toolbarTitle = root.findViewById(R.id.toolbar_title);
-		ImageButton toolbarButton = root.findViewById(R.id.close_button);
-		RecyclerView recyclerView = root.findViewById(R.id.profiles_list);
-		recyclerView.setPadding(0, 0, 0, (int) app.getResources().getDimension(R.dimen.dialog_button_ex_min_width));
+		AppBarLayout appbar = root.findViewById(R.id.appbar);
+		View toolbar = mInflater.inflate(R.layout.global_preference_toolbar, container, false);
+		TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
+		ImageButton toolbarButton = toolbar.findViewById(R.id.close_button);
 		toolbar.setBackgroundColor(nightMode
 				? getResources().getColor(R.color.list_background_color_dark)
 				: getResources().getColor(R.color.list_background_color_light));
@@ -188,8 +195,9 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 				exitFragment();
 			}
 		});
-
-
+		appbar.addView(toolbar);
+		RecyclerView recyclerView = root.findViewById(R.id.profiles_list);
+		recyclerView.setPadding(0, 0, 0, (int) app.getResources().getDimension(R.dimen.dialog_button_ex_min_width));
 		rearrangeAdapter = new RearrangeMenuItemsAdapter(app, getAdapterItems());
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
 		final ItemTouchHelper touchHelper = new ItemTouchHelper(new ReorderItemTouchHelperCallback(rearrangeAdapter));
@@ -300,16 +308,16 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		List<RearrangeMenuAdapterItem> visible = getItemsForRearrangeAdapter(hiddenMenuItems, wasReset ? null : menuItemsOrder, false);
 		List<RearrangeMenuAdapterItem> hiddenItems = getItemsForRearrangeAdapter(hiddenMenuItems, wasReset ? null : menuItemsOrder, true);
 		if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
+			int buttonMoreIndex = MAIN_BUTTONS_QUANTITY - 1;
 			for (int i = 0; i < visible.size(); i++) {
 				ContextMenuItem value = (ContextMenuItem) visible.get(i).getValue();
-				if (value.getId() != null && value.getId().equals(MAP_CONTEXT_MENU_MORE_ID)) {
-					int buttonMoreIndex = MAIN_BUTTONS_QUANTITY - 1;
-					if (i > buttonMoreIndex) {
-						RearrangeMenuAdapterItem third = visible.get(buttonMoreIndex);
-						visible.set(buttonMoreIndex, visible.get(i));
-						menuItemsOrder.put(((ContextMenuItem) third.getValue()).getId(), i);
-						menuItemsOrder.put(((ContextMenuItem) visible.get(i).getValue()).getId(), buttonMoreIndex);
-					}
+				if (value.getId() != null && value.getId().equals(MAP_CONTEXT_MENU_MORE_ID) && i > buttonMoreIndex) {
+					RearrangeMenuAdapterItem third = visible.get(buttonMoreIndex);
+					visible.set(buttonMoreIndex, visible.get(i));
+					visible.set(i, third);
+					value.setOrder(buttonMoreIndex);
+					((ContextMenuItem) third.getValue()).setOrder(i);
+					break;
 				}
 			}
 

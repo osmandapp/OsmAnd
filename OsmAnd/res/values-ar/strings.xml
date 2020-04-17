@@ -3363,7 +3363,7 @@
     <string name="simulate_your_location_gpx_descr">محاكاة موقعك باستخدام مسار GPX مسجل.</string>
     <string name="quick_action_directions_from_desc">زر لجعل مركز الشاشة نقطة الانطلاق. سيطلب بعد ذلك تعيين الوجهة أو تشغيل حساب المسار.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
-    <string name="street_city">%1$s, %2$s</string>
+    <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="personal_category_name">شخصي</string>
     <string name="shared_string_downloading_formatted">تنزيل %s</string>
     <string name="rendering_value_thick_name">سميك</string>
@@ -3582,7 +3582,5 @@
     <string name="shared_string_languages">اللغات</string>
     <string name="shared_string_language">اللغة</string>
     <string name="shared_string_all_languages">جميع اللغات</string>
-    <string name="wikipedia_poi_languages_promo">قد لا تكون بعض مقالات ويكيبيديا متاحة باسمك ، حدد اللغات التي ستظهر بها مقالات ويكيبيديا على الخريطة.
-\nستتمكن من التبديل بين جميع اللغات المتاحة أثناء قراءة المقالة.</string>
     <string name="wiki_menu_download_descr">هناك حاجة إلى خرائط إضافية لعرض النقاط المهمة من ويكيبيديا على الخريطة.</string>
 </resources>

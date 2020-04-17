@@ -31,6 +31,7 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
@@ -1181,6 +1182,7 @@ public class ImportHelper {
 				}
 				fp.setColor(p.getColor(0));
 				fp.setIconIdFromName(app, p.getIconName());
+				fp.setBackgroundType(BackgroundType.getByTypeName(p.getBackgroundType(), BackgroundType.CIRCLE));
 				favourites.add(fp);
 			}
 		}

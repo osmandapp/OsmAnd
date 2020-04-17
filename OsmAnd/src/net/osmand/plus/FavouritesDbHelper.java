@@ -1,5 +1,6 @@
 package net.osmand.plus;
 
+import android.app.Activity;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -101,7 +102,11 @@ public class FavouritesDbHelper {
 		}
 
 		public int getColor() {
-			return color;
+			if ((color & 0xFF000000) != 0) {
+				return color;
+			} else {
+				return color | 0xFF000000;
+			}
 		}
 
 		public boolean isVisible() {
@@ -354,7 +359,7 @@ public class FavouritesDbHelper {
 		}
 	}
 
-	public static AlertDialog.Builder checkDuplicates(FavouritePoint p, FavouritesDbHelper fdb, Context uiContext) {
+	public static AlertDialog.Builder checkDuplicates(FavouritePoint p, FavouritesDbHelper fdb, Activity activity) {
 		boolean emoticons = false;
 		String index = "";
 		int number = 0;
@@ -383,12 +388,15 @@ public class FavouritesDbHelper {
 			}
 		}
 		if ((index.length() > 0 || emoticons)) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(uiContext);
+			OsmandApplication app = (OsmandApplication) activity.getApplication();
+			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+			Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
+			AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 			builder.setTitle(R.string.fav_point_dublicate);
 			if (emoticons) {
-				builder.setMessage(uiContext.getString(R.string.fav_point_emoticons_message, name));
+				builder.setMessage(activity.getString(R.string.fav_point_emoticons_message, name));
 			} else {
-				builder.setMessage(uiContext.getString(R.string.fav_point_dublicate_message, name));
+				builder.setMessage(activity.getString(R.string.fav_point_dublicate_message, name));
 			}
 			p.setName(name);
 			return builder;

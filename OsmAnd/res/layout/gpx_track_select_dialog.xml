@@ -47,23 +47,4 @@
 		tools:listitem="@layout/gpx_track_select_item">
 
 	</androidx.recyclerview.widget.RecyclerView>
-
-	<LinearLayout
-		android:id="@+id/buttons_container"
-		android:layout_width="match_parent"
-		android:layout_height="60dp"
-		android:orientation="vertical"
-		android:paddingStart="@dimen/content_padding"
-		android:paddingLeft="@dimen/content_padding"
-		android:paddingTop="@dimen/content_padding_small"
-		android:paddingEnd="@dimen/content_padding"
-		android:paddingRight="@dimen/content_padding"
-		android:paddingBottom="@dimen/content_padding_small">
-
-		<include
-			android:id="@+id/dismiss_button"
-			layout="@layout/bottom_sheet_dialog_button"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent" />
-	</LinearLayout>
 </LinearLayout>

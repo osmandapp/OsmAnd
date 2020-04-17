@@ -3406,7 +3406,7 @@
     <string name="shared_string_turn_off">Skru av</string>
     <string name="new_plugin_added">Nytt programtillegg lagt til</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
-    <string name="street_city">%1$s, %2$s</string>
+    <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="personal_category_name">Personlig</string>
     <string name="shared_string_downloading_formatted">Laster ned %s</string>
     <string name="rendering_value_thick_name">Tykk</string>
@@ -3499,4 +3499,7 @@
     <string name="settings_item_read_error">Kunne ikke lese %1$s.</string>
     <string name="settings_item_import_error">Kunne ikke importere %1$s.</string>
     <string name="settings_item_write_error">Kunne ikke skrive %1$s.</string>
+    <string name="shared_string_languages">Språk</string>
+    <string name="shared_string_language">Språk</string>
+    <string name="shared_string_all_languages">Alle språk</string>
 </resources>

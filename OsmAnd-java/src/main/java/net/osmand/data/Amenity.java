@@ -19,6 +19,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.zip.GZIPInputStream;
 
 import gnu.trove.list.array.TIntArrayList;
@@ -216,6 +218,13 @@ public class Amenity extends MapObject {
 			}
 		}
 		return lng;
+	}
+
+	public Set<String> getSupportedContentLocales() {
+		Set<String> supported = new TreeSet<>();
+		supported.addAll(getNames("content", "en"));
+		supported.addAll(getNames("description", "en"));
+		return supported;
 	}
 
 	public List<String> getNames(String tag, String defTag) {

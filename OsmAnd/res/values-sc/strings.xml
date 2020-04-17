@@ -3404,7 +3404,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="save_heading">Inclue sa diretzione</string>
     <string name="save_heading_descr">Sarva sa diretzione pro cada puntu cando ses registrende.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
-    <string name="street_city">%1$s, %2$s</string>
+    <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="personal_category_name">Personale</string>
     <string name="shared_string_downloading_formatted">Iscarrighende %s</string>
     <string name="rendering_value_thick_name">Grussa</string>
@@ -3618,7 +3618,5 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_languages">Limbas</string>
     <string name="shared_string_language">Limba</string>
     <string name="shared_string_all_languages">Totu sas limbas</string>
-    <string name="wikipedia_poi_languages_promo">Unos cantos artìculos de Wikipedia diant pòdere no èssere disponìbiles in sa limba tua. Issèbera sas limbas de sos artìculos de Wikipedia chi ant a apàrrere in sa mapa.
-\nAs a pòdere colare dae una limba a s\'àtera in su mentres chi ses leghende un\'artìculu.</string>
     <string name="wiki_menu_download_descr">Pro bìdere sos PDI de Wikipedia in sa mapa b\'at bisòngiu de mapas agiuntivas.</string>
 </resources>
