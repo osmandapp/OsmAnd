@@ -293,6 +293,8 @@ public class DownloadResources extends DownloadResourceGroup {
 	protected boolean prepareData(List<IndexItem> resources) {
 		this.rawResources = resources;
 
+		DownloadResourceGroup extraMapsGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.EXTRA_MAPS);
+
 		DownloadResourceGroup otherMapsGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.OTHER_MAPS_GROUP);
 		DownloadResourceGroup otherMapsScreen = new DownloadResourceGroup(otherMapsGroup, DownloadResourceGroupType.OTHER_MAPS);
 		DownloadResourceGroup otherMaps = new DownloadResourceGroup(otherMapsGroup, DownloadResourceGroupType.OTHER_MAPS_HEADER);
@@ -368,10 +370,9 @@ public class DownloadResources extends DownloadResourceGroup {
 
 		List<CustomRegion> customRegions = OsmandPlugin.getCustomDownloadRegions();
 		if (!Algorithms.isEmpty(customRegions)) {
-			DownloadResourceGroup downloadResourceGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.EXTRA_MAPS);
-			addGroup(downloadResourceGroup);
+			addGroup(extraMapsGroup);
 			for (CustomRegion region : customRegions) {
-				buildRegionsGroups(region, downloadResourceGroup);
+				buildRegionsGroups(region, extraMapsGroup);
 			}
 		}
 
@@ -458,13 +459,16 @@ public class DownloadResources extends DownloadResourceGroup {
 			mainGrp.region = reg;
 			parentGroup.addGroup(mainGrp);
 
-//			List<IndexItem> list = groupByRegion.get(reg);
-			if (reg instanceof CustomRegion && ((CustomRegion) reg).downloadItems != null) {
-				DownloadResourceGroup flatFiles = new DownloadResourceGroup(mainGrp, DownloadResourceGroupType.REGION_MAPS);
-				for (IndexItem ii : ((CustomRegion) reg).downloadItems) {
-					flatFiles.addItem(ii);
+			if (reg instanceof CustomRegion) {
+				CustomRegion customRegion = (CustomRegion) reg;
+				List<IndexItem> indexItems = customRegion.loadIndexItems();
+				if (!Algorithms.isEmpty(indexItems)) {
+					DownloadResourceGroup flatFiles = new DownloadResourceGroup(mainGrp, DownloadResourceGroupType.REGION_MAPS);
+					for (IndexItem ii : indexItems) {
+						flatFiles.addItem(ii);
+					}
+					mainGrp.addGroup(flatFiles);
 				}
-				mainGrp.addGroup(flatFiles);
 			}
 			DownloadResourceGroup subRegions = new DownloadResourceGroup(mainGrp, DownloadResourceGroupType.SUBREGIONS);
 			mainGrp.addGroup(subRegions);

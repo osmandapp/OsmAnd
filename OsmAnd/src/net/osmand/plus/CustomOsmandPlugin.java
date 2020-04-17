@@ -13,6 +13,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.SettingsHelper.AvoidRoadsSettingsItem;
 import net.osmand.plus.SettingsHelper.CustomRegion;
 import net.osmand.plus.SettingsHelper.MapSourcesSettingsItem;
@@ -280,6 +281,10 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 				descriptions.put(localeKey, name);
 			}
 		}
+		JSONArray regionsJson = json.has("regionsJson") ? json.getJSONArray("regionsJson") : null;
+		if (regionsJson != null) {
+			customRegions.addAll(collectRegionsFromJson(regionsJson));
+		}
 	}
 
 	public void writeAdditionalDataToJson(JSONObject json) throws JSONException {
@@ -306,6 +311,32 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 			descriptionJson.put(entry.getKey(), entry.getValue());
 		}
 		json.put("description", descriptionJson);
+
+		JSONArray regionsJson = new JSONArray();
+		for (WorldRegion region : getFlatCustomRegions()) {
+			if (region instanceof CustomRegion) {
+				regionsJson.put(((CustomRegion) region).toJson());
+			}
+		}
+		json.put("regionsJson", regionsJson);
+	}
+
+	private List<WorldRegion> getFlatCustomRegions() {
+		List<WorldRegion> l = new ArrayList<>();
+		for (WorldRegion region : customRegions) {
+			l.add(region);
+			collectCustomSubregionsFromRegion(region, l);
+		}
+		return l;
+	}
+
+	private void collectCustomSubregionsFromRegion(WorldRegion region, List<WorldRegion> items) {
+		items.addAll(region.getSubregions());
+		for (WorldRegion subregion : region.getSubregions()) {
+			if (subregion instanceof CustomRegion) {
+				collectCustomSubregionsFromRegion(subregion, items);
+			}
+		}
 	}
 
 	public void readDependentFilesFromJson(JSONObject json) throws JSONException {
@@ -368,6 +399,27 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		json.put("imageNames", imageNamesJson);
 
 		json.put("pluginResDir", resourceDirName);
+	}
+
+	public static List<CustomRegion> collectRegionsFromJson(JSONArray jsonArray) throws JSONException {
+		List<CustomRegion> customRegions = new ArrayList<>();
+		Map<String, CustomRegion> flatRegions = new HashMap<>();
+		for (int i = 0; i < jsonArray.length(); i++) {
+			JSONObject regionJson = jsonArray.getJSONObject(i);
+			CustomRegion region = CustomRegion.fromJson(regionJson);
+			flatRegions.put(region.path, region);
+		}
+		for (CustomRegion region : flatRegions.values()) {
+			if (!Algorithms.isEmpty(region.parentPath)) {
+				CustomRegion parentReg = flatRegions.get(region.parentPath);
+				if (parentReg != null) {
+					parentReg.addSubregion(region);
+				}
+			} else {
+				customRegions.add(region);
+			}
+		}
+		return customRegions;
 	}
 
 	@Override

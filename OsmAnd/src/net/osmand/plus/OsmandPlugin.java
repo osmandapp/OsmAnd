@@ -21,6 +21,8 @@ import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
+import net.osmand.map.WorldRegion;
+import net.osmand.plus.SettingsHelper.CustomRegion;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.api.SettingsAPI;
@@ -44,7 +46,6 @@ import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.SettingsHelper.CustomRegion;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -651,11 +652,28 @@ public abstract class OsmandPlugin {
 	}
 
 	public static List<CustomRegion> getCustomDownloadRegions() {
-		List<CustomRegion> l = new ArrayList<CustomRegion>();
+		List<CustomRegion> l = new ArrayList<>();
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			l.addAll(plugin.getDownloadMaps());
 		}
 		return l;
+	}
+
+	public static List<IndexItem> getCustomDownloadItems() {
+		List<IndexItem> l = new ArrayList<>();
+		for (CustomRegion region : getCustomDownloadRegions()) {
+			collectIndexItemsFromSubregion(region, l);
+		}
+		return l;
+	}
+
+	public static void collectIndexItemsFromSubregion(CustomRegion region, List<IndexItem> items) {
+		items.addAll(region.loadIndexItems());
+		for (WorldRegion subregion : region.getSubregions()) {
+			if (subregion instanceof CustomRegion) {
+				collectIndexItemsFromSubregion((CustomRegion) subregion, items);
+			}
+		}
 	}
 
 	public static List<String> getDisabledRendererNames() {
