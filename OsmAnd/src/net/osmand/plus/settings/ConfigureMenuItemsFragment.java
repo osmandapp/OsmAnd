@@ -69,7 +69,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	private static final String ITEMS_ORDER_KEY = "items_order_key";
 	private static final String HIDDEN_ITEMS_KEY = "hidden_items_key";
 	private static final String CONFIGURE_MENU_ITEMS_TAG = "configure_menu_items_tag";
-    private static final String IS_CHANGED_KEY = "is_changed_key";
+	private static final String IS_CHANGED_KEY = "is_changed_key";
 	private RearrangeMenuItemsAdapter rearrangeAdapter;
 	private HashMap<String, Integer> menuItemsOrder;
 	private ContextMenuAdapter contextMenuAdapter;
