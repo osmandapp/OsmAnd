@@ -21,6 +21,8 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.appbar.AppBarLayout;
+
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
@@ -169,27 +171,27 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View root = mInflater.inflate(R.layout.edit_arrangement_list_fragment, container, false);
-		Toolbar toolbar = root.findViewById(R.id.toolbar);
-		TextView toolbarTitle = root.findViewById(R.id.toolbar_title);
-		ImageButton toolbarButton = root.findViewById(R.id.close_button);
-		RecyclerView recyclerView = root.findViewById(R.id.profiles_list);
+        AppBarLayout appbar = root.findViewById(R.id.appbar);
+        View toolbar = mInflater.inflate(R.layout.global_preference_toolbar, container, false);
+        TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
+        ImageButton toolbarButton = toolbar.findViewById(R.id.close_button);
+        toolbar.setBackgroundColor(nightMode
+                ? getResources().getColor(R.color.list_background_color_dark)
+                : getResources().getColor(R.color.list_background_color_light));
+        toolbarTitle.setTextColor(nightMode
+                ? getResources().getColor(R.color.text_color_primary_dark)
+                : getResources().getColor(R.color.list_background_color_dark));
+        toolbarButton.setImageDrawable(getPaintedContentIcon(R.drawable.ic_arrow_back, getResources().getColor(R.color.text_color_secondary_light)));
+        toolbarTitle.setText(screenType.titleRes);
+        toolbarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                exitFragment();
+            }
+        });
+        appbar.addView(toolbar);
+        RecyclerView recyclerView = root.findViewById(R.id.profiles_list);
 		recyclerView.setPadding(0, 0, 0, (int) app.getResources().getDimension(R.dimen.dialog_button_ex_min_width));
-		toolbar.setBackgroundColor(nightMode
-				? getResources().getColor(R.color.list_background_color_dark)
-				: getResources().getColor(R.color.list_background_color_light));
-		toolbarTitle.setTextColor(nightMode
-				? getResources().getColor(R.color.text_color_primary_dark)
-				: getResources().getColor(R.color.list_background_color_dark));
-		toolbarButton.setImageDrawable(getPaintedContentIcon(R.drawable.ic_arrow_back, getResources().getColor(R.color.text_color_secondary_light)));
-		toolbarTitle.setText(screenType.titleRes);
-		toolbarButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				exitFragment();
-			}
-		});
-
-
 		rearrangeAdapter = new RearrangeMenuItemsAdapter(app, getAdapterItems());
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
 		final ItemTouchHelper touchHelper = new ItemTouchHelper(new ReorderItemTouchHelperCallback(rearrangeAdapter));
