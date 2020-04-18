@@ -3390,10 +3390,10 @@
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Nodenettverk</string>
     <string name="join_segments">Bind sammen segmenter</string>
     <string name="add_new_profile_q">Legg til ny profil «%1$s»\?</string>
-    <string name="save_heading">Ta med overskrift</string>
-    <string name="save_heading_descr">Lagre overskrift på hvert veipunkt under opptak.</string>
+    <string name="save_heading">Inkluder retning</string>
+    <string name="save_heading_descr">Lagre retning til hvert sporpunkt under opptak.</string>
     <string name="shared_string_revert">Tilbakestill</string>
-    <string name="quick_action_directions_from_desc">En knapp for å enten gjøre midten av skjermen til startpunkt og rute til målet, eller åpne en dialog for valg av mål hvis målmarkøren ikke er på kartet.</string>
+    <string name="quick_action_directions_from_desc">En knapp for å gjøre midten av skjermen til avreisepunktet. Vil deretter be om å angi reisemål eller utløse ruteberegningen.</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Vis nettverksnoder for sykkelruter</string>
     <string name="clear_confirmation_msg">Tøm %1$s\?</string>
     <string name="download_map_dialog">Kartnedlastingsdialog</string>
@@ -3411,7 +3411,7 @@
     <string name="shared_string_downloading_formatted">Laster ned %s</string>
     <string name="rendering_value_thick_name">Tykk</string>
     <string name="desert_render_descr">For ørkener og andre tynt befolkede områder. Høyere detaljnivå.</string>
-    <string name="select_navigation_icon">Velg navigasjonsikon</string>
+    <string name="select_navigation_icon">Posisjonsikon under bevegelse</string>
     <string name="select_map_icon">Velg kartikon</string>
     <string name="delete_profiles_descr">Etter å ha trykket «Bruk», går slettede profiler tapt for godt.</string>
     <string name="master_profile">Hovedprofil</string>
@@ -3425,7 +3425,7 @@
     <string name="selected_profile">Valgt profil</string>
     <string name="reset_confirmation_descr">Ved å klikke %1$s vil alle endringene dine gå tapt.</string>
     <string name="reset_all_profile_settings_descr">Alle profilinnstillinger må tilbakestilles til forvalg.</string>
-    <string name="reset_all_profile_settings">Tilbakestill alle innstillinger til forvalg\?</string>
+    <string name="reset_all_profile_settings">Tilbakestille alle profilinnstillinger\?</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
     <string name="import_profile">Importer profil</string>
@@ -3455,7 +3455,7 @@
     <string name="select_map_icon_descr">Kartikon vises kun på kartet, og endrer seg under navigasjon til navigasjonsikonet.</string>
     <string name="multimedia_use_system_camera">Bruk systemprogram</string>
     <string name="shared_string_available">Tilgjengelig</string>
-    <string name="sunrise_at">Soloppgang klokken %1$s</string>
+    <string name="sunrise_at">Soloppgang kl. %1$s</string>
     <string name="copy_coordinates">Kopier koordinater</string>
     <string name="sort_by_category">Sorter etter kategori</string>
     <string name="index_name_antarctica">Antarktis</string>
@@ -3464,7 +3464,7 @@
     <string name="shared_string_angle_param">Vinkel: %s°</string>
     <string name="shared_string_angle">Vinkel</string>
     <string name="shared_string_preparing">Forbereder</string>
-    <string name="shared_string_poi_types">POI-typer</string>
+    <string name="shared_string_poi_types">Interessepunkttyper</string>
     <string name="shared_string_nothing_selected">Ingenting valgt</string>
     <string name="shared_string_quick_actions">Hurtighandlinger</string>
     <string name="shared_string_profiles">Profiler</string>
@@ -3476,7 +3476,7 @@
     <string name="shared_string_importing">Importerer</string>
     <string name="select_shape">Velg form</string>
     <string name="monitoring_min_speed">Minimumshastighet</string>
-    <string name="monitoring_min_accuracy">Min. nøyaktighet</string>
+    <string name="monitoring_min_accuracy">Minimumsnøyaktighet</string>
     <string name="monitoring_notification">Merknad</string>
     <string name="live_monitoring_adress">Nettadresse</string>
     <string name="shared_string_rendering_style">Opptegningsstil</string>
@@ -3495,7 +3495,7 @@
     <string name="select_group">Velg gruppe</string>
     <string name="shared_string_circle">Sirkel</string>
     <string name="shared_string_octagon">Oktogon</string>
-    <string name="shared_string_square">Firkant</string>
+    <string name="shared_string_square">Kvadrat</string>
     <string name="settings_item_read_error">Kunne ikke lese %1$s.</string>
     <string name="settings_item_import_error">Kunne ikke importere %1$s.</string>
     <string name="settings_item_write_error">Kunne ikke skrive %1$s.</string>
@@ -3525,4 +3525,10 @@
     <string name="select_track_file">Velg sporfil</string>
     <string name="terrain_slider_description">Angi minimum og maksimum zoomnivå som laget skal vises på.</string>
     <string name="shared_string_min">Min</string>
+    <string name="import_duplicates_title">Noen elementer finnes allerede</string>
+    <string name="permission_is_required">Tillatelse kreves for å bruke dette alternativet.</string>
+    <string name="sunset_at">Solnedgang kl. %1$s</string>
+    <string name="profile_prefs_reset_successful">Alle profilinnstillinger gjenopprettet til standardtilstand.</string>
+    <string name="shared_string_transparency">Gjennomsiktighet</string>
+    <string name="shared_string_legend">Tegnforklaring</string>
 </resources>
