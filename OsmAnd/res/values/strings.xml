@@ -57,11 +57,11 @@
     <string name="replace_point_descr">Replace another point with this</string>
     <string name="developer_plugin">Developer Plugin</string>
     <string name="move_inside_category">You can move items only inside this category.</string>
-    <string name="additional_actions_descr">You can access these actions by taping “Actions” button.</string>
+    <string name="additional_actions_descr">You can access these actions by tapping the “Actions” button.</string>
     <string name="main_actions">Main actions</string>
     <string name="main_actions_descr">Main actions containt only 4 buttons.</string>
     <string name="reset_items_descr">Settings will be reset to the original state after hiding.</string>
-    <string name="hidden_items_descr">These items are hidden from the menu, but the represented options or plugins will still be working.</string>
+    <string name="hidden_items_descr">These items are hidden from the menu, but the represented options or plugins will remain working.</string>
     <string name="shared_string_hidden">Hidden</string>
     <string name="divider_descr">Elements below this point separated by a divider.</string>
     <string name="shared_string_divider">Divider</string>
