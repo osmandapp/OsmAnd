@@ -3409,7 +3409,7 @@
     <string name="profile_import">Importar perfil</string>
     <string name="profile_import_descr">Adicione um perfil abrindo o seu ficheiro com OsmAnd.</string>
     <string name="file_import_error">%1$s erro de importação: %2$s</string>
-    <string name="file_imported_successfully">%1$s importados com sucesso.</string>
+    <string name="file_imported_successfully">%1$s importado(s).</string>
     <string name="swap_two_places">Trocar %1$s com %2$s</string>
     <string name="route_start_point">Ponto de partida</string>
     <string name="track_saved">Caminho gravado</string>
