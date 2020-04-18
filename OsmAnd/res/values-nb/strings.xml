@@ -3523,7 +3523,7 @@
     <string name="shared_string_items">Elementer</string>
     <string name="changes_applied_to_profile">Endringer brukt på profil %1$s.</string>
     <string name="select_track_file">Velg sporfil</string>
-    <string name="terrain_slider_description">Angi minimum og maksimum zoomnivå som laget skal vises på.</string>
+    <string name="terrain_slider_description">Angi minste og største forstørrelsesnivå laget skal vises på.</string>
     <string name="shared_string_min">Min</string>
     <string name="import_duplicates_title">Noen elementer finnes allerede</string>
     <string name="permission_is_required">Tillatelse kreves for å bruke dette alternativet.</string>
