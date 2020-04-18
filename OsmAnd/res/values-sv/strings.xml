@@ -2920,4 +2920,19 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="app_mode_utv">Sida vid sida</string>
     <string name="files_copied">%1$d filer kopierades (%2$s).</string>
     <string name="swap_start_and_destination">Växla start och mål</string>
+    <string name="move_inside_category">Du kan bara flytta objekt inom den här kategorin.</string>
+    <string name="developer_plugin">Utvecklar-plugin</string>
+    <string name="replace_point_descr">Ersätt en annan punkt med den här</string>
+    <string name="app_mode_ski_touring">Skid-touring</string>
+    <string name="app_mode_ski_snowmobile">Snöskoter</string>
+    <string name="custom_osmand_plugin">Anpassad OsmAnd-plugin</string>
+    <string name="shared_string_items">Objekt</string>
+    <string name="changes_applied_to_profile">Ändringar tillämpas på %1$s profil.</string>
+    <string name="settings_item_read_error">Kunde inte läsa %1$s.</string>
+    <string name="settings_item_write_error">Kunde inte skriva till %1$s.</string>
+    <string name="settings_item_import_error">Kunde inte importera %1$s.</string>
+    <string name="select_track_file">Välj spårfil</string>
+    <string name="shared_string_languages">Språk</string>
+    <string name="shared_string_language">Språk</string>
+    <string name="shared_string_all_languages">Alla språk</string>
 </resources>
