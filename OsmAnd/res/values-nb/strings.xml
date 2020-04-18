@@ -1812,7 +1812,7 @@
     <string name="int_days">dager</string>
     <string name="osmo_connect_menu">Koble til</string>
     <string name="routing_attr_avoid_stairs_name">Ingen trapper</string>
-    <string name="routing_attr_avoid_stairs_description">Unngår trapper.</string>
+    <string name="routing_attr_avoid_stairs_description">Unngår trapper</string>
     <string name="speech_rate_descr">Angi talehastigheten for TTS.</string>
     <string name="speech_rate">Talehastighet</string>
     <string name="complex_route_calculation_failed">Rask ruteberegning mislyktes (%s), faller tilbake på treg beregning.</string>
@@ -2289,8 +2289,8 @@
     <string name="quick_action_fav_name_descr">La stå tomt for å bruke adressen eller stedsnavnet.</string>
     <string name="quick_action_bug_descr">Denne meldingen inkluderes i kommentarfeltet.</string>
     <string name="mappilary_no_internet_desc">Du må være koblet til Internett for å vise bilder fra Mapillary.</string>
-    <string name="hillshade_menu_download_descr">Last ned \"Relieffskyggeoverlegg\"-kart for å se loddrett skyggelegging.</string>
-    <string name="hillshade_purchase_header">Installer programtillegget for koter for å se relieffskygger på kartet.</string>
+    <string name="hillshade_menu_download_descr">Last ned kart for \'Relieffskyggeoverlegg\' for å vise vertikal skyggelegging.</string>
+    <string name="hillshade_purchase_header">Installer programtillegget \'Koter\' for å vise graderte vertikale områder.</string>
     <string name="enter_new_name">Oppfør nytt navn</string>
     <string name="shared_string_back">Tilbake</string>
     <string name="waypoints_added_to_map_markers">Rutepunkter lagt til kartmarkører</string>
@@ -3165,7 +3165,7 @@
 \n</string>
     <string name="app_mode_personal_transporter">Persontransportør</string>
     <string name="app_mode_monowheel">Monohjul</string>
-    <string name="app_mode_scooter">Sparkesykkel</string>
+    <string name="app_mode_scooter">Scooter</string>
     <string name="precision_hdop_and_vdop">Vannrett nøyaktighet: %1$s, loddrett: %2$s</string>
     <string name="precision_hdop">Vannrett nøyaktighet: %s</string>
     <string name="edit_profile_setup_subtitle">Profil beholder sine egne innstillinger</string>
@@ -3259,7 +3259,7 @@
     <string name="quick_action_contour_lines_show">Vis koter</string>
     <string name="quick_action_contour_lines_hide">Skjul koter</string>
     <string name="quick_action_show_hide_contour_lines">Vis/skjul koter</string>
-    <string name="quick_action_hillshade_descr">Å trykke på denne handlingsknappen viser eller skjuler relieffskygge på kartet</string>
+    <string name="quick_action_hillshade_descr">En knapp for å vise eller skjule relieffskygger på kartet.</string>
     <string name="quick_action_hillshade_show">Vis relieffskygge</string>
     <string name="quick_action_hillshade_hide">Skjul relieffskygge</string>
     <string name="quick_action_show_hide_hillshade">Vis/skjul relieffskygge</string>
@@ -3502,4 +3502,27 @@
     <string name="shared_string_languages">Språk</string>
     <string name="shared_string_language">Språk</string>
     <string name="shared_string_all_languages">Alle språk</string>
+    <string name="shared_string_import_complete">Import fullført</string>
+    <string name="wiki_menu_download_descr">Ekstra kart er nødvendige for å vise Wikipedia-interessepunkter på kartet.</string>
+    <string name="hillshade_download_description">Ekstra kart er nødvendige for å vise relieffskygge på kartet.</string>
+    <string name="shared_string_zoom_levels">Zoom-nivåer</string>
+    <string name="shared_string_hillshade">Relieffskygge</string>
+    <string name="items_added">Elementer lagt til</string>
+    <string name="restore_all_profile_settings">Gjenopprette alle profilinnstillinger\?</string>
+    <string name="quick_action_terrain_descr">En knapp for å vise eller skjule terrenglag på kartet.</string>
+    <string name="context_menu_actions">Handlinger i kontekstmeny</string>
+    <string name="shared_string_hidden">Skjult</string>
+    <string name="main_actions_descr">Hovedhandlinger inneholder bare 4 knapper.</string>
+    <string name="main_actions">Hovedhandlinger</string>
+    <string name="additional_actions_descr">Du får tilgang til disse handlingene ved å trykke på knappen “Handlinger”.</string>
+    <string name="move_inside_category">Du kan bare flytte elementer innenfor denne kategorien.</string>
+    <string name="developer_plugin">Utvikler-tillegg</string>
+    <string name="replace_point_descr">Erstatt et annet punkt med dette</string>
+    <string name="app_mode_ski_snowmobile">Snøscooter</string>
+    <string name="custom_osmand_plugin">Egendefinert OsmAnd-tillegg</string>
+    <string name="shared_string_items">Elementer</string>
+    <string name="changes_applied_to_profile">Endringer brukt på profil %1$s.</string>
+    <string name="select_track_file">Velg sporfil</string>
+    <string name="terrain_slider_description">Angi minimum og maksimum zoomnivå som laget skal vises på.</string>
+    <string name="shared_string_min">Min</string>
 </resources>
