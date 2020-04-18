@@ -958,7 +958,7 @@
     <string name="cancel_route">Descartar rota</string>
     <string name="cancel_navigation">Parar navegação</string>
     <string name="local_osm_changes_backup_successful">Ficheiro de alterações OSM gerado %1$s</string>
-    <string name="local_osm_changes_backup_failed">Não foi possível fazer backup de alterações OSM</string>
+    <string name="local_osm_changes_backup_failed">Não foi possível fazer backup das alterações do OSM.</string>
     <string name="local_osm_changes_backup">Fazer backup como mudança de OSM</string>
     <string name="delete_point">Eliminar ponto</string>
     <string name="plugin_distance_point_time">tempo</string>
@@ -969,7 +969,7 @@
     <string name="gpx_file_name">Nome do ficheiro GPX</string>
     <string name="gpx_saved_sucessfully">Ficheiro GPX guardado em {0}</string>
     <string name="osmand_distance_planning_plugin_name">Calculadora de distância e ferramenta de planeamento</string>
-    <string name="osmand_distance_planning_plugin_description">Este complemento fornece um widget no ecrã do mapa que permite criar caminhos ao tocar no mapa, ou usar/alterar ficheiros GPX existentes, para planear uma viagem e medir a distância entre os pontos. Os resultados podem ser guardados como um ficheiro GPX, que pode ser usado posteriormente para orientação.</string>
+    <string name="osmand_distance_planning_plugin_description">Crie caminhos tocando no mapa ou usando ou modificando os ficheiros GPX existentes para planejar uma viagem e medir a distância entre pontos. O resultado pode ser salvo como um ficheiro GPX para uso posterior para orientação.</string>
     <string name="driving_region_descr">Selecione a região de condução: EUA, Europa, Reino Unido, Ásia e outros.</string>
     <string name="driving_region">Região de condução</string>
     <string name="driving_region_japan">Japão</string>
@@ -977,7 +977,7 @@
     <string name="driving_region_europe_asia">Europa, Ásia, América Latina e similares</string>
     <string name="driving_region_uk">Reino Unido, Índia e similares</string>
     <string name="speak_title">Anunciar…</string>
-    <string name="speak_descr">Configurar anúncio de nomes de ruas, avisos de trânsito (paragens forçadas, lombadas de velocidade), avisos de radares de trânsito, limites de velocidade.</string>
+    <string name="speak_descr">Configurar anúncio de nomes de ruas, avisos de trânsito (paragens forçadas, lombos de velocidade), avisos de radares de trânsito, limites de velocidade.</string>
     <string name="speak_street_names">Nomes das ruas (TTS)</string>
     <string name="speak_speed_limit">Limite de velocidade</string>
     <string name="speak_cameras">Radares de velocidade</string>
@@ -3371,9 +3371,9 @@
     <string name="shared_preference">Partilhado</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Preferir estradas não pavimentadas</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferir estradas não pavimentadas.</string>
-    <string name="default_speed_dialog_msg">Usado para calcular o tempo de chegada previsto durante o roteiro</string>
+    <string name="default_speed_dialog_msg">Estima a hora de chegada de categorias de estradas desconhecidas e limita a velocidade para todas as estradas (pode afetar o roteamento)</string>
     <string name="rendering_value_white_name">Branco</string>
-    <string name="add_new_profile_q">Adicionar novo perfil \'%1$s\'\?</string>
+    <string name="add_new_profile_q">Adicionar o novo perfil \'%1$s\'\?</string>
     <string name="save_heading">Incluir a direção</string>
     <string name="save_heading_descr">Gravar direção para cada ponto de pista durante a gravação.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
@@ -3387,9 +3387,9 @@
     <string name="delete_profiles_descr">Tocar em \'Aplicar\' apagará os perfis removidos permanentemente.</string>
     <string name="master_profile">Perfil principal</string>
     <string name="select_color">Selecione a cor</string>
-    <string name="edit_profiles_descr">Não pode excluir perfis OsmAnd padrão, mas pode desativá-los no ecrã anterior, ou movê-los para o fundo.</string>
+    <string name="edit_profiles_descr">Perfis padrão do OsmAnd não podem ser apagados, mas desativados (na tela anterior) ou classificados na parte inferior.</string>
     <string name="edit_profiles">Editar perfis</string>
-    <string name="select_nav_profile_dialog_message">O tipo de navegação afeta as regras para cálculos de rotas.</string>
+    <string name="select_nav_profile_dialog_message">O \'Tipo de navegação\' controla como as rotas são calculadas.</string>
     <string name="profile_appearance">Aspecto do perfil</string>
     <string name="layer_osm_edits">Edições OSM</string>
     <string name="quick_action_contour_lines_descr">Uma alternância para mostrar ou esconder curvas de nível no mapa.</string>
@@ -3406,8 +3406,8 @@
     <string name="exported_osmand_profile">Perfil OsmAnd: %1$s</string>
     <string name="overwrite_profile_q">O perfil \'%1$s\' já existe. Sobregravar\?</string>
     <string name="export_profile_failed">Não podia exportar o perfil.</string>
-    <string name="profile_import">Importação de perfis</string>
-    <string name="profile_import_descr">Para importar um perfil, selecione o seu ficheiro no aparelho e abra-o com OsmAnd.</string>
+    <string name="profile_import">Importar perfil</string>
+    <string name="profile_import_descr">Adicione um perfil abrindo o seu ficheiro com OsmAnd.</string>
     <string name="file_import_error">%1$s erro de importação: %2$s</string>
     <string name="file_imported_successfully">%1$s importados com sucesso.</string>
     <string name="swap_two_places">Trocar %1$s com %2$s</string>
@@ -3420,16 +3420,16 @@
     <string name="clear_confirmation_msg">Limpar %1$s\?</string>
     <string name="download_map_dialog">Diálogo de descarregar mapas</string>
     <string name="dialogs_and_notifications_title">Diálogos e notificações</string>
-    <string name="dialogs_and_notifications_descr">Controlar popups, diálogos e notificações que o OsmAnd mostra durante a utilização.</string>
+    <string name="dialogs_and_notifications_descr">Controlar popups, diálogos e notificações.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Redes de nós</string>
     <string name="suggested_maps">Mapas sugeridos</string>
-    <string name="suggested_maps_descr">Esses mapas são necessários para usar com o plugin</string>
+    <string name="suggested_maps_descr">Esses mapas são necessários para o plugin.</string>
     <string name="added_profiles">Perfis adicionados</string>
-    <string name="added_profiles_descr">O plugin adiciona um perfil novo ao OsmAnd</string>
+    <string name="added_profiles_descr">Perfis adicionados pelo plugin</string>
     <string name="shared_string_turn_off">Desligar</string>
     <string name="new_plugin_added">Novo plugin adicionado</string>
     <string name="join_segments">Juntar segmentos</string>
-    <string name="choose_icon_color_name">Escolha o ícone, cor e nome</string>
+    <string name="choose_icon_color_name">Ícone, cor e nome</string>
     <string name="reorder_profiles">Editar lista de perfis</string>
     <string name="selected_profile">Perfil selecionado</string>
     <string name="reset_confirmation_descr">Tocar em %1$s descartará todas as suas alterações.</string>
@@ -3626,4 +3626,30 @@
     <string name="settings_item_read_error">Não foi possível ler %1$s.</string>
     <string name="settings_item_write_error">Não foi possível escrever %1$s.</string>
     <string name="settings_item_import_error">Não foi possível importar %1$s.</string>
+    <string name="ui_customization_description">Personalize a quantidade de itens na Gaveta, Configurar mapa e menu de contexto.
+\n
+\nPode desativar plugins não utilizados para ocultar todos os seus controles da aplicação %1$s.</string>
+    <string name="ui_customization_short_descr">Itens da gaveta, menu de contexto</string>
+    <string name="ui_customization">Personalização da interface do utilizador</string>
+    <string name="shared_string_drawer">Gaveta</string>
+    <string name="context_menu_actions">Ações do menu de contexto</string>
+    <string name="reorder_or_hide_from">Reordene ou oculte itens do %1$s.</string>
+    <string name="shared_string_divider">Divisor</string>
+    <string name="divider_descr">Elementos abaixo deste ponto separados por um divisor.</string>
+    <string name="shared_string_hidden">Ocultado</string>
+    <string name="hidden_items_descr">Esses itens estão ocultos no menu, mas as opções ou plug-ins representados ainda estão funcionando.</string>
+    <string name="reset_items_descr">As configurações serão redefinidas para o estado original após ocultar.</string>
+    <string name="main_actions_descr">As ações principais contêm apenas 4 botões.</string>
+    <string name="main_actions">Principais ações</string>
+    <string name="additional_actions_descr">Pode acessar essas ações tocando no botão \"Ações\".</string>
+    <string name="move_inside_category">Pode mover itens somente dentro desta categoria.</string>
+    <string name="developer_plugin">Plugin do programador</string>
+    <string name="shared_string_items">Itens</string>
+    <string name="select_track_file">Selecionar ficheiro de faixa</string>
+    <string name="shared_string_languages">Idiomas</string>
+    <string name="shared_string_language">Idioma</string>
+    <string name="shared_string_all_languages">Todos os idiomas</string>
+    <string name="wikipedia_poi_languages_promo">Alguns artigos da Wikipédia podem não estar disponíveis em seu nome. Selecione os idiomas nos quais os artigos da Wikipédia aparecerão no mapa. 
+\nPoderá alternar entre todos os idiomas disponíveis enquanto lê o artigo.</string>
+    <string name="wiki_menu_download_descr">Mapas adicionais são necessários para visualizar os POIs da Wikipédia no mapa.</string>
 </resources>
