@@ -3615,4 +3615,23 @@
     <string name="monitoring_min_speed_descr_recommendation">המלצה: כדאי לנסות להשתמש בזיהוי תנועה דרך המסנן לסף תנועה תחתון (B) קודם לכן, הוא עשוי להביא לתוצאות טובות יותר ופחות מידע ילך לאיבוד. אם המסלולים שלך עדיין רועשים במהירויות נמוכות, כדי לנסות כאן ערכים שונים מאפס. נא לשים לב שחלק מהמדידות לא תדווחנה נתוני מהירות כלל (שיטות מבוססות רשת), שבמקרים כאלה לא יוקלט שום דבר.</string>
     <string name="wikipedia_poi_languages_promo">חלק מהערכים בוויקיפדיה לא יהיו זמינים בשם שצוין, יש לבחור את השפות בהן יופיעו הערכים של ויקיפדיה במפה.
 \nניתן יהיה להחליף בין כל השפות הזמינות בזמן קריאת הערך.</string>
+    <string name="shared_string_items">פריטים</string>
+    <string name="developer_plugin">תוסף מפתח</string>
+    <string name="ui_customization_description">התאמת כמות הפריטים במגירה, הגדרת מפה ותפריט הקשר.
+\n
+\nניתן להשבית את התוספים שאינם בשימוש כדי להסתיר את כל הפקדים שלהם מהיישומון %1$s.</string>
+    <string name="ui_customization_short_descr">פריטי מגירה, תפריט הקשר</string>
+    <string name="ui_customization">התאמות מנשק משתמש</string>
+    <string name="shared_string_drawer">מגירה</string>
+    <string name="context_menu_actions">פעולות תפריט הקשר</string>
+    <string name="reorder_or_hide_from">סידור מחדש או הסתרת פריטים מ%1$s.</string>
+    <string name="shared_string_divider">קו הפרדה</string>
+    <string name="divider_descr">הפריטים מתחת לנקודה זו מופרדים בקו הפרדה.</string>
+    <string name="shared_string_hidden">מוסתר</string>
+    <string name="hidden_items_descr">הפריטים האלו מוסתרים מהתפריט אבל האפשרויות המיוצגות או התוספים עדיין עובדים.</string>
+    <string name="reset_items_descr">ההגדרות יאופסו למצב המקורי לאחר ההסתרה.</string>
+    <string name="main_actions_descr">פעולות ראשיות מכילות 4 כפתורים בלבד.</string>
+    <string name="main_actions">פעולות ראשית</string>
+    <string name="additional_actions_descr">ניתן לגשת לפעולות האלה על ידי לחיצה על הכפתור „פעולות”.</string>
+    <string name="move_inside_category">ניתן להעביר פריטים בתוך קטגוריה זו בלבד.</string>
 </resources>
