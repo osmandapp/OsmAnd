@@ -90,8 +90,8 @@
     <string name="do_not_have_telegram">Non ho un account di Telegram</string>
     <string name="enter_phone_number">Inserisci un numero di telefono</string>
     <string name="enter_authentication_code">Inserisci il codice di autenticazione</string>
-    <string name="hours_and_minutes_format">%1$d h %2$d m</string>
-    <string name="minutes_format">%1$d m</string>
+    <string name="hours_and_minutes_format">%1$d h %2$d min</string>
+    <string name="minutes_format">%1$d min</string>
     <string name="hours_format">%1$d h</string>
     <string name="shared_string_install">Installa</string>
     <string name="shared_string_share">Condividi</string>
@@ -157,7 +157,7 @@
     <string name="si_nm">Miglia nautiche</string>
     <string name="si_mi_meters">Miglia/metri</string>
     <string name="shared_string_hour_short">h</string>
-    <string name="shared_string_minute_short">m</string>
+    <string name="shared_string_minute_short">min</string>
     <string name="shared_string_second_short">s</string>
     <string name="welcome_descr">
         <b>OsmAnd tracker</b> ti permette di condividere la tua posizione e di vedere quella di altri su OsmAnd.<br/>
