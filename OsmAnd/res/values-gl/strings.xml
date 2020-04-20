@@ -3476,7 +3476,7 @@ Lon %2$s</string>
     <string name="save_heading">Incluír encabezamento</string>
     <string name="save_heading_descr">Gardar encabezamento en cada punto da pista (trackpoint) mentres se grava.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
-    <string name="street_city">%1$s, %2$s</string>
+    <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="personal_category_name">Persoal</string>
     <string name="shared_string_downloading_formatted">Baixando %s</string>
     <string name="rendering_value_thick_name">Groso</string>

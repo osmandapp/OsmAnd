@@ -12,6 +12,7 @@
 
 -->
     <string name="extra_maps_menu_group">Extra maps</string>
+    <string name="custom_color">Custom color</string>
     <string name="lang_lmo">Lombard</string>
     <string name="lang_an">Aragonese</string>
     <string name="lang_ba">Bashkir</string>
@@ -57,11 +58,11 @@
     <string name="replace_point_descr">Replace another point with this</string>
     <string name="developer_plugin">Developer Plugin</string>
     <string name="move_inside_category">You can move items only inside this category.</string>
-    <string name="additional_actions_descr">You can acsess this actions by taping “Actions” button.</string>
+    <string name="additional_actions_descr">You can access these actions by tapping the “Actions” button.</string>
     <string name="main_actions">Main actions</string>
     <string name="main_actions_descr">Main actions containt only 4 buttons.</string>
     <string name="reset_items_descr">Settings will be reset to the original state after hiding.</string>
-    <string name="hidden_items_descr">These items are hidden from the menu, but the represented options or plugins still be working.</string>
+    <string name="hidden_items_descr">These items are hidden from the menu, but the represented options or plugins will remain working.</string>
     <string name="shared_string_hidden">Hidden</string>
     <string name="divider_descr">Elements below this point separated by a divider.</string>
     <string name="shared_string_divider">Divider</string>
@@ -245,7 +246,7 @@
     <string name="edit_profiles">Edit profiles</string>
     <string name="select_nav_profile_dialog_message">The \'Navigation type\' governs how routes are calculated.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
-    <string name="street_city">%1$s, %2$s</string>
+    <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="personal_category_name">Personal</string>
     <string name="add_new_profile_q">Add the new profile \'%1$s\'?</string>
     <string name="save_heading">Include heading</string>

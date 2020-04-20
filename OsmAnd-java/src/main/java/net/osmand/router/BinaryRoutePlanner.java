@@ -119,7 +119,7 @@ public class BinaryRoutePlanner {
 				printMemoryConsumption("Memory occupied before exception : ");
 			}
 			if (ctx.memoryOverhead > ctx.config.memoryLimitation * 0.95) {
-				throw new IllegalStateException("There is no enough memory " + ctx.config.memoryLimitation / (1 << 20) + " Mb");
+				throw new IllegalStateException("There is not enough memory " + ctx.config.memoryLimitation / (1 << 20) + " Mb");
 			}
 			ctx.visitedSegments ++;
 			if (forwardSearch) {
