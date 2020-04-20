@@ -296,7 +296,7 @@
     <string name="overlay_transparency_descr">Upraviť priehľadnosť prekrývacej mapy.</string>
     <string name="overlay_transparency">Priehľadnosť prekrývacej mapy</string>
     <string name="map_transparency_descr">Upraviť priehľadnosť základnej mapy.</string>
-    <string name="map_transparency">Priehľadnosť mapy</string>
+    <string name="map_transparency">Priehľadnosť základnej mapy</string>
     <string name="modify_transparency">Zadajte priehľadnosť (0 - priehľadný, 255 - nepriehľadný)</string>
     <string name="layer_underlay">Podkladová mapa…</string>
     <string name="map_underlay">Podkladová mapa</string>
