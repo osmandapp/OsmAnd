@@ -29,7 +29,7 @@ public class RoutingConfiguration {
 	
 	// 1.1 tile load parameters (should not affect routing)
 	public int ZOOM_TO_LOAD_TILES = 16;
-	public int memoryLimitation;
+	public long memoryLimitation;
 
 	// 1.2 Build A* graph in backward/forward direction (can affect results)
 	// 0 - 2 ways, 1 - direct way, -1 - reverse way
@@ -98,12 +98,12 @@ public class RoutingConfiguration {
 			i.ZOOM_TO_LOAD_TILES = parseSilentInt(getAttribute(i.router, "zoomToLoadTiles"), i.ZOOM_TO_LOAD_TILES);
 			int desirable = parseSilentInt(getAttribute(i.router, "memoryLimitInMB"), 0);
 			if(desirable != 0) {
-				i.memoryLimitation = desirable * (1 << 20); 
+				i.memoryLimitation = desirable * (1l << 20);
 			} else {
 				if(memoryLimitMB == 0) {
 					memoryLimitMB = DEFAULT_MEMORY_LIMIT;
 				}
-				i.memoryLimitation = memoryLimitMB * (1 << 20);
+				i.memoryLimitation = memoryLimitMB * (1l << 20);
 			}
 			i.planRoadDirection = parseSilentInt(getAttribute(i.router, "planRoadDirection"), i.planRoadDirection);
 //			i.planRoadDirection = 1;
