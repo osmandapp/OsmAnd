@@ -22,7 +22,6 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
 import net.osmand.map.WorldRegion;
-import net.osmand.plus.SettingsHelper.CustomRegion;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.api.SettingsAPI;
@@ -184,7 +183,7 @@ public abstract class OsmandPlugin {
 		return Collections.emptyList();
 	}
 
-	public List<CustomRegion> getDownloadMaps() {
+	public List<WorldRegion> getDownloadMaps() {
 		return Collections.emptyList();
 	}
 
@@ -651,8 +650,8 @@ public abstract class OsmandPlugin {
 		return null;
 	}
 
-	public static List<CustomRegion> getCustomDownloadRegions() {
-		List<CustomRegion> l = new ArrayList<>();
+	public static List<WorldRegion> getCustomDownloadRegions() {
+		List<WorldRegion> l = new ArrayList<>();
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			l.addAll(plugin.getDownloadMaps());
 		}
@@ -661,18 +660,18 @@ public abstract class OsmandPlugin {
 
 	public static List<IndexItem> getCustomDownloadItems() {
 		List<IndexItem> l = new ArrayList<>();
-		for (CustomRegion region : getCustomDownloadRegions()) {
+		for (WorldRegion region : getCustomDownloadRegions()) {
 			collectIndexItemsFromSubregion(region, l);
 		}
 		return l;
 	}
 
-	public static void collectIndexItemsFromSubregion(CustomRegion region, List<IndexItem> items) {
-		items.addAll(region.loadIndexItems());
+	public static void collectIndexItemsFromSubregion(WorldRegion region, List<IndexItem> items) {
+		if (region instanceof CustomRegion) {
+			items.addAll(((CustomRegion) region).loadIndexItems());
+		}
 		for (WorldRegion subregion : region.getSubregions()) {
-			if (subregion instanceof CustomRegion) {
-				collectIndexItemsFromSubregion((CustomRegion) subregion, items);
-			}
+			collectIndexItemsFromSubregion(subregion, items);
 		}
 	}
 

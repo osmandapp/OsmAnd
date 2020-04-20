@@ -1,6 +1,7 @@
 package net.osmand.plus.download.ui;
 
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,18 +18,21 @@ import com.squareup.picasso.RequestCreator;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PicassoUtils;
+import net.osmand.map.WorldRegion;
+import net.osmand.plus.CustomRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.download.CustomIndexItem;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResources;
+import net.osmand.plus.wikipedia.WikipediaDialogFragment;
+import net.osmand.util.Algorithms;
 
 import static net.osmand.plus.download.ui.DownloadResourceGroupFragment.REGION_ID_DLG_KEY;
 
-public class DownloadItemFragment extends DialogFragment implements DownloadIndexesThread.DownloadEvents {
+public class DownloadItemFragment extends DialogFragment {
 
 	public static final String ITEM_ID_DLG_KEY = "index_item_dialog_key";
 
@@ -41,11 +45,12 @@ public class DownloadItemFragment extends DialogFragment implements DownloadInde
 	private CustomIndexItem indexItem;
 
 	private View view;
-	private TextView description;
-	private ImageView image;
 	private Toolbar toolbar;
+	private ImageView image;
+	private TextView description;
+	private TextView buttonTextView;
 
-	boolean nightMode;
+	private boolean nightMode;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -84,7 +89,16 @@ public class DownloadItemFragment extends DialogFragment implements DownloadInde
 		image = view.findViewById(R.id.item_image);
 
 		View dismissButton = view.findViewById(R.id.dismiss_button);
-		UiUtilities.setupDialogButton(nightMode, dismissButton, UiUtilities.DialogButtonType.PRIMARY, "Test");
+		dismissButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (indexItem != null && !Algorithms.isEmpty(indexItem.getWebUrl())) {
+					WikipediaDialogFragment.showFullArticle(v.getContext(), Uri.parse(indexItem.getWebUrl()), nightMode);
+				}
+			}
+		});
+		UiUtilities.setupDialogButton(nightMode, dismissButton, UiUtilities.DialogButtonType.PRIMARY, "");
+		buttonTextView = (TextView) dismissButton.findViewById(R.id.button_text);
 
 		return view;
 	}
@@ -93,20 +107,6 @@ public class DownloadItemFragment extends DialogFragment implements DownloadInde
 	public void onResume() {
 		super.onResume();
 		reloadData();
-	}
-
-	@Override
-	public void newDownloadIndexes() {
-		reloadData();
-	}
-
-	@Override
-	public void downloadHasFinished() {
-
-	}
-
-	@Override
-	public void downloadInProgress() {
 	}
 
 	@Override
@@ -125,7 +125,17 @@ public class DownloadItemFragment extends DialogFragment implements DownloadInde
 			indexItem = (CustomIndexItem) group.getItemByIndex(itemIndex);
 			if (indexItem != null) {
 				toolbar.setTitle(indexItem.getVisibleName(app, app.getRegions()));
+				WorldRegion region = group.getRegion();
+				if (region instanceof CustomRegion) {
+					CustomRegion customRegion = (CustomRegion) region;
+					int color = customRegion.getHeaderColor();
+					if (color != -1) {
+						toolbar.setBackgroundColor(color);
+					}
+				}
+
 				description.setText(indexItem.getLocalizedDescription(app));
+				buttonTextView.setText(indexItem.getWebButtonText(app));
 
 				final PicassoUtils picassoUtils = PicassoUtils.getPicasso(app);
 				Picasso picasso = Picasso.get();

@@ -10,7 +10,7 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.SettingsHelper.CustomRegion;
+import net.osmand.plus.CustomRegion;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.util.Algorithms;
@@ -368,10 +368,10 @@ public class DownloadResources extends DownloadResourceGroup {
 		}
 		this.groupByRegion = groupByRegion;
 
-		List<CustomRegion> customRegions = OsmandPlugin.getCustomDownloadRegions();
+		List<WorldRegion> customRegions = OsmandPlugin.getCustomDownloadRegions();
 		if (!Algorithms.isEmpty(customRegions)) {
 			addGroup(extraMapsGroup);
-			for (CustomRegion region : customRegions) {
+			for (WorldRegion region : customRegions) {
 				buildRegionsGroups(region, extraMapsGroup);
 			}
 		}
