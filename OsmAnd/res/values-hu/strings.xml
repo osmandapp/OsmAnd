@@ -3513,7 +3513,7 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="recalculate_route_in_deviation">Útvonal újraszámítása letérés esetén</string>
     <string name="select_distance_route_will_recalc">Jelöld ki a távolságot, amely fölött az útvonal újraszámításra kerül.</string>
     <string name="recalculate_route_distance_promo">Az útvonal újraszámításra kerül, amennyiben az útvonal és a jelenlegi helyzet közötti távolság nagyobb, mint a kiválasztott érték.</string>
-    <string name="n_items_of_z">%1$s ennyiből: %2$s</string>
+    <string name="n_items_of_z">%1$s a %2$s-ból</string>
     <string name="download_slope_maps">Lejtők</string>
     <string name="quick_action_show_hide_terrain">Domborzat megjelenítése/elrejtése</string>
     <string name="quick_action_terrain_hide">Domborzat elrejtése</string>
@@ -3536,12 +3536,12 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="settings_item_write_error">%1$s írása sikertelen.</string>
     <string name="settings_item_import_error">%1$s importálása sikertelen.</string>
     <string name="ui_customization">Felhasználói felület testreszabása</string>
-    <string name="shared_string_drawer">Fiók</string>
+    <string name="shared_string_drawer">Menü</string>
     <string name="reorder_or_hide_from">%1$s: elemek átrendezése vagy elrejtése.</string>
     <string name="shared_string_divider">Elválasztó</string>
     <string name="divider_descr">Az ez alatti elemek elválasztásra kerülnek egy elválasztóval.</string>
     <string name="hidden_items_descr">Ezek az elemek a menüből elrejtésre kerültek, azonban az általuk képviselt beállítások vagy bővítmények továbbra is érvényben maradnak.</string>
-    <string name="main_actions_descr">Fő műveletek csak 4 gombot tartalmaz.</string>
+    <string name="main_actions_descr">A fő műveletekhez csak 4 elem tartozhat.</string>
     <string name="multimedia_use_system_camera">Rendszeralkalmazás használata</string>
     <string name="multimedia_photo_play_sound">Fényképező zárhang</string>
     <string name="osm_authorization_success">Hitelesítés sikeres</string>
@@ -3550,7 +3550,7 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="shared_string_hidden">Rejtett</string>
     <string name="reset_items_descr">A beállítások az eredeti állapotba fognak visszaállni elrejtés után.</string>
     <string name="main_actions">Fő műveletek</string>
-    <string name="additional_actions_descr">Ehhez a művelethez a \"Műveletek\" gombra koppintva férhet hozzá.</string>
+    <string name="additional_actions_descr">Ezekhez a műveletekhez a \"Műveletek\" gombra koppintva férhet hozzá.</string>
     <string name="move_inside_category">Csak ezen a kategórián belül lehetséges az elemek áthelyezése.</string>
     <string name="developer_plugin">Fejlesztő bővítmény</string>
     <string name="replace_point_descr">Másik pont lecserélése erre</string>
@@ -3560,4 +3560,40 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="shared_string_language">Nyelv</string>
     <string name="shared_string_all_languages">Összes nyelv</string>
     <string name="wiki_menu_download_descr">További térképek szükségesek a Wikipédia POI-k térképen való megjelenítéséhez.</string>
+    <string name="context_menu_actions">Opciók menü elemei</string>
+    <string name="ui_customization_description">Személyre szabhatja az elemek számát a Menü-ben, a Térkép beállítása-ban és az Opciókban.
+\n
+\nA használaton kívüli bővítmények letiltásával elrejtheti őket a %1$s menüből.</string>
+    <string name="ui_customization_short_descr">Menü elemek, Opciók</string>
+    <string name="select_wikipedia_article_langs">Jelölje ki a térképen megjelenő Wikipédia szócikkek nyelvét. A szócikk olvasása közben válthat valamennyi elérhető nyelv között.</string>
+    <string name="some_articles_may_not_available_in_lang">Előfordulhat, hogy néhány Wikipédia szócikk nem érhető el az ön nyelvén.</string>
+    <string name="select_track_file">Nyomvonalfájl kijelölése</string>
+    <string name="lang_zhyue">kantoni</string>
+    <string name="lang_zhminnan">déli min</string>
+    <string name="lang_yo">joruba</string>
+    <string name="lang_war">waray</string>
+    <string name="lang_uz">üzbég</string>
+    <string name="lang_ur">urdu</string>
+    <string name="lang_tt">tatár</string>
+    <string name="lang_tg">tádzsik</string>
+    <string name="lang_sco">scots</string>
+    <string name="lang_scn">szicíliai</string>
+    <string name="lang_pnb">pandzsábi</string>
+    <string name="lang_ne">nepáli</string>
+    <string name="lang_nap">nápolyi</string>
+    <string name="lang_my">burmai</string>
+    <string name="lang_mn">mongol</string>
+    <string name="lang_min">minangkabau</string>
+    <string name="lang_mg">malgas</string>
+    <string name="lang_ky">kirgiz</string>
+    <string name="lang_kk">kazak</string>
+    <string name="lang_jv">jávai</string>
+    <string name="lang_gu">gudzsaráti</string>
+    <string name="lang_cv">csuvas</string>
+    <string name="lang_ce">csecsen</string>
+    <string name="lang_bar">bajor</string>
+    <string name="lang_ba">baskír</string>
+    <string name="lang_an">aragóniai</string>
+    <string name="lang_lmo">lombard</string>
+    <string name="custom_color">Egyéni szín</string>
 </resources>
