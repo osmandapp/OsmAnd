@@ -98,15 +98,13 @@
             android:layout_marginBottom="@dimen/map_button_size"
             android:orientation="horizontal">
 
-            <SeekBar
-                android:id="@+id/map_transparency_seekbar"
+            <com.google.android.material.slider.Slider
+                android:id="@+id/map_transparency_slider"
+                style="@style/Widget.Styled.Slider"
                 android:layout_width="@dimen/map_trans_seek_size"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:paddingLeft="6dp"
-                android:paddingRight="6dp"
-	            android:paddingStart="6dp"
-	            android:paddingEnd="6dp" />
+                android:layout_margin="@dimen/dashPadding" />
 
         </LinearLayout>
 

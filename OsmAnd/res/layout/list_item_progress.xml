@@ -33,14 +33,16 @@
             android:layout_height="wrap_content"
             tools:src="@drawable/ic_action_opacity"/>
 
-        <SeekBar
-            android:id="@+id/seekbar"
-            style="?android:attr/progressBarStyleHorizontal"
+        <com.google.android.material.slider.Slider
+            android:id="@+id/slider"
+            style="@style/Widget.Styled.Slider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:valueFrom="0"
+            android:valueTo="255"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/content_padding_half"
             android:layout_marginRight="@dimen/content_padding"
-            android:max="255"
 	        android:layout_marginStart="@dimen/content_padding_half"
 	        android:layout_marginEnd="@dimen/content_padding" />
     </LinearLayout>
