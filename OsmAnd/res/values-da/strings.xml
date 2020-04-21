@@ -3598,7 +3598,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_language">Sprog</string>
     <string name="shared_string_all_languages">Alle sprog</string>
     <string name="wiki_menu_download_descr">Yderligere kort er nødvendige for at se Wikipedia Interessepunkter på kortet.</string>
-    <string name="wikipedia_poi_languages_promo">Nogle Wikipedia-artikler er muligvis ikke tilgængelige på nogle sprog. Vælg de sprog, som Wikipedia-artikler skal vises på kortet. 
+    <string name="wikipedia_poi_languages_promo">Nogle Wikipedia-artikler er muligvis ikke tilgængelige på nogle sprog. Vælg de sprog, som Wikipedia-artikler skal vises på kortet.
 \nSkift mellem alle tilgængelige sprog, mens artiklen læses.</string>
     <string name="ui_customization_short_descr">Skuffeelementer, genvejsmenu</string>
     <string name="shared_string_drawer">Skuffe</string>
