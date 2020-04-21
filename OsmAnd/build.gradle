@@ -362,13 +362,25 @@ task copyPoiCategiry(type: Copy) {
 task copyStyleIcons(type: Copy) {
 	from "../../resources/rendering_styles/style-icons/"
 	into "res/"
-	include "**/*.png"
+	includes ["**/*.png",  "**/*.xml"]
 }
 
-task copyWidgetIcons(type: Exec) {
-	if (!Os.isFamily(Os.FAMILY_WINDOWS)) {
-		commandLine 'sh', file("./copy_widget_icons.sh").getAbsolutePath()
-	}
+task copyWidgetIconsXhdpi(type: Copy) {
+	from "res/drawable-xxhdpi/"
+	into "res/drawable-large-hxdpi/"
+	includes ["**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"]
+}
+
+task copyWidgetIconsHdpi(type: Copy) {
+	from "res/drawable-xhdpi/"
+	into "res/drawable-large-hdpi/"
+	includes ["**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"]
+}
+
+task copyWidgetIcons(type: Copy) {
+	from "res/drawable-hdpi/"
+	into "res/drawable-large/"
+	includes ["**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"]
 }
 
 task collectExternalResources {
@@ -380,6 +392,8 @@ task collectExternalResources {
 			updateNoTranslate,
 			validateTranslate,
 			copyWidgetIcons,
+			copyWidgetIconsHdpi,
+			copyWidgetIconsXhdpi,
 			copyPoiCategiry,
 			downloadWorldMiniBasemap
 
