@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="extra_maps_menu_group">Extra maps</string>
     <string name="custom_color">Custom color</string>
     <string name="lang_lmo">Lombard</string>
     <string name="lang_an">Aragonese</string>

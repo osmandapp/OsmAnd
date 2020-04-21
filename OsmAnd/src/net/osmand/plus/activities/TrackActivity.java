@@ -23,6 +23,7 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -92,7 +93,7 @@ public class TrackActivity extends TabActivity {
 		ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
 			if (file != null) {
-				String fn = file.getName().replace(".gpx", "").replace("/", " ").replace("_", " ");
+				String fn = file.getName().replace(IndexConstants.GPX_FILE_EXT, "").replace("/", " ").replace("_", " ");
 				actionBar.setTitle(fn);
 			} else {
 				actionBar.setTitle(getString(R.string.shared_string_currently_recording_track));

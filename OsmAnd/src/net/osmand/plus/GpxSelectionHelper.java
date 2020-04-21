@@ -17,6 +17,7 @@ import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IProgress;
+import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
@@ -241,7 +242,7 @@ public class GpxSelectionHelper {
 			if (i >= 0) {
 				name = name.substring(i + 1);
 			}
-			if (name.toLowerCase().endsWith(".gpx")) {
+			if (name.toLowerCase().endsWith(IndexConstants.GPX_FILE_EXT)) {
 				name = name.substring(0, name.length() - 4);
 			}
 			name = name.replace('_', ' ');

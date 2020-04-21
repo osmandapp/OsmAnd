@@ -1,7 +1,6 @@
 package net.osmand.plus;
 
 import android.app.Activity;
-import android.content.res.Configuration;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
@@ -9,9 +8,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
+import net.osmand.JsonUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.SettingsHelper.AvoidRoadsSettingsItem;
 import net.osmand.plus.SettingsHelper.MapSourcesSettingsItem;
 import net.osmand.plus.SettingsHelper.PluginSettingsItem;
@@ -20,6 +22,10 @@ import net.osmand.plus.SettingsHelper.ProfileSettingsItem;
 import net.osmand.plus.SettingsHelper.QuickActionsSettingsItem;
 import net.osmand.plus.SettingsHelper.SettingsCollectListener;
 import net.osmand.plus.SettingsHelper.SettingsItem;
+import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.DownloadResources;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
@@ -32,7 +38,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -56,6 +64,8 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 
 	private List<String> rendererNames = new ArrayList<>();
 	private List<String> routerNames = new ArrayList<>();
+	private List<SuggestedDownloadItem> suggestedDownloadItems = new ArrayList<>();
+	private List<WorldRegion> customRegions = new ArrayList<>();
 
 	public CustomOsmandPlugin(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		super(app);
@@ -63,6 +73,25 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		readAdditionalDataFromJson(json);
 		readDependentFilesFromJson(json);
 		loadResources();
+	}
+
+	@Override
+	public String getId() {
+		return pluginId;
+	}
+
+	@Override
+	public String getName() {
+		return JsonUtils.getLocalizedResFromMap(app, names, app.getString(R.string.custom_osmand_plugin));
+	}
+
+	@Override
+	public String getDescription() {
+		return JsonUtils.getLocalizedResFromMap(app, descriptions, null);
+	}
+
+	public String getResourceDirName() {
+		return resourceDirName;
 	}
 
 	@Override
@@ -76,6 +105,108 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public void disable(OsmandApplication app) {
+		super.disable(app);
+		removePluginItems(null);
+	}
+
+	public File getPluginDir() {
+		return app.getAppPath(IndexConstants.PLUGINS_DIR + pluginId);
+	}
+
+	public File getPluginItemsFile() {
+		return new File(getPluginDir(), "items" + IndexConstants.OSMAND_SETTINGS_FILE_EXT);
+	}
+
+	public File getPluginResDir() {
+		File pluginDir = getPluginDir();
+		if (!Algorithms.isEmpty(resourceDirName)) {
+			return new File(pluginDir, resourceDirName);
+		}
+		return pluginDir;
+	}
+
+	@Override
+	public List<String> getRendererNames() {
+		return rendererNames;
+	}
+
+	@Override
+	public List<String> getRouterNames() {
+		return routerNames;
+	}
+
+	private Drawable getIconForFile(String path, Map<String, String> fileNames) {
+		for (Map.Entry<String, String> entry : fileNames.entrySet()) {
+			String value = entry.getValue();
+			if (value.startsWith("@")) {
+				value = value.substring(1);
+			}
+			if (path.endsWith(value)) {
+				return BitmapDrawable.createFromPath(path);
+			}
+		}
+		return null;
+	}
+
+	@NonNull
+	@Override
+	public Drawable getLogoResource() {
+		return icon != null ? icon : super.getLogoResource();
+	}
+
+	@Override
+	public Drawable getAssetResourceImage() {
+		return image;
+	}
+
+	@Override
+	public List<WorldRegion> getDownloadMaps() {
+		return customRegions;
+	}
+
+	@Override
+	public List<IndexItem> getSuggestedMaps() {
+		List<IndexItem> suggestedMaps = new ArrayList<>();
+
+		DownloadIndexesThread downloadThread = app.getDownloadThread();
+		if (!downloadThread.getIndexes().isDownloadedFromInternet && app.getSettings().isInternetConnectionAvailable()) {
+			downloadThread.runReloadIndexFiles();
+		}
+
+		boolean downloadIndexes = app.getSettings().isInternetConnectionAvailable()
+				&& !downloadThread.getIndexes().isDownloadedFromInternet
+				&& !downloadThread.getIndexes().downloadFromInternetFailed;
+
+		if (!downloadIndexes) {
+			for (SuggestedDownloadItem item : suggestedDownloadItems) {
+				DownloadActivityType type = DownloadActivityType.getIndexType(item.scopeId);
+				if (type != null) {
+					List<IndexItem> foundMaps = new ArrayList<>();
+					String searchType = item.getSearchType();
+					if ("latlon".equalsIgnoreCase(searchType)) {
+						LatLon latLon = app.getMapViewTrackingUtilities().getMapLocation();
+						foundMaps.addAll(getMapsForType(latLon, type));
+					} else if ("worldregion".equalsIgnoreCase(searchType)) {
+						LatLon latLon = app.getMapViewTrackingUtilities().getMapLocation();
+						foundMaps.addAll(getMapsForType(latLon, type));
+					}
+					if (!Algorithms.isEmpty(item.getNames())) {
+						foundMaps.addAll(getMapsForType(item.getNames(), type, item.getLimit()));
+					}
+					suggestedMaps.addAll(foundMaps);
+				}
+			}
+		}
+
+		return suggestedMaps;
+	}
+
+	public void setResourceDirName(String resourceDirName) {
+		this.resourceDirName = resourceDirName;
 	}
 
 	private void addPluginItemsFromFile(final File file) {
@@ -93,9 +224,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 								ApplicationMode.changeProfileAvailability(savedMode, true, app);
 							}
 							iterator.remove();
-						} else if (item instanceof PluginSettingsItem) {
-							iterator.remove();
-						} else {
+						} else if (!(item instanceof PluginSettingsItem)) {
 							item.setShouldReplace(true);
 						}
 					}
@@ -179,207 +308,94 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		});
 	}
 
-	@Override
-	public void disable(OsmandApplication app) {
-		super.disable(app);
-		removePluginItems(null);
-	}
-
-	public File getPluginDir() {
-		return app.getAppPath(IndexConstants.PLUGINS_DIR + pluginId);
-	}
-
-	public File getPluginItemsFile() {
-		return new File(getPluginDir(), "items" + IndexConstants.OSMAND_SETTINGS_FILE_EXT);
-	}
-
-	public File getPluginResDir() {
-		File pluginDir = getPluginDir();
-		if (!Algorithms.isEmpty(resourceDirName)) {
-			return new File(pluginDir, resourceDirName);
-		}
-		return pluginDir;
-	}
-
-	@Override
-	public String getId() {
-		return pluginId;
-	}
-
-	@Override
-	public String getName() {
-		Configuration config = app.getResources().getConfiguration();
-		String lang = config.locale.getLanguage();
-		String name = names.get(lang);
-		if (Algorithms.isEmpty(name)) {
-			name = names.get("");
-		}
-		if (Algorithms.isEmpty(name)) {
-			name = app.getString(R.string.custom_osmand_plugin);
-		}
-		return name;
-	}
-
-	@Override
-	public String getDescription() {
-		Configuration config = app.getResources().getConfiguration();
-		String lang = config.locale.getLanguage();
-		String description = descriptions.get(lang);
-		if (Algorithms.isEmpty(description)) {
-			description = descriptions.get("");
-		}
-		return description;
-	}
-
-	public String getResourceDirName() {
-		return resourceDirName;
-	}
-
-	public void setResourceDirName(String resourceDirName) {
-		this.resourceDirName = resourceDirName;
-	}
-
 	public void readAdditionalDataFromJson(JSONObject json) throws JSONException {
-		JSONObject iconJson = json.has("icon") ? json.getJSONObject("icon") : null;
-		if (iconJson != null) {
-			for (Iterator<String> it = iconJson.keys(); it.hasNext(); ) {
-				String iconKey = it.next();
-				String name = iconJson.getString(iconKey);
-				iconNames.put(iconKey, name);
-			}
-		}
-		JSONObject imageJson = json.has("image") ? json.getJSONObject("image") : null;
-		if (imageJson != null) {
-			for (Iterator<String> it = imageJson.keys(); it.hasNext(); ) {
-				String imageKey = it.next();
-				String name = imageJson.getString(imageKey);
-				imageNames.put(imageKey, name);
-			}
-		}
-		JSONObject nameJson = json.has("name") ? json.getJSONObject("name") : null;
-		if (nameJson != null) {
-			for (Iterator<String> it = nameJson.keys(); it.hasNext(); ) {
-				String localeKey = it.next();
-				String name = nameJson.getString(localeKey);
-				names.put(localeKey, name);
-			}
-		}
-		JSONObject descriptionJson = json.has("description") ? json.getJSONObject("description") : null;
-		if (descriptionJson != null) {
-			for (Iterator<String> it = descriptionJson.keys(); it.hasNext(); ) {
-				String localeKey = it.next();
-				String name = descriptionJson.getString(localeKey);
-				descriptions.put(localeKey, name);
-			}
+		iconNames = JsonUtils.getLocalizedMapFromJson("icon", json);
+		imageNames = JsonUtils.getLocalizedMapFromJson("image", json);
+		names = JsonUtils.getLocalizedMapFromJson("name", json);
+		descriptions = JsonUtils.getLocalizedMapFromJson("description", json);
+
+		JSONArray regionsJson = json.optJSONArray("regionsJson");
+		if (regionsJson != null) {
+			customRegions.addAll(collectRegionsFromJson(regionsJson));
 		}
 	}
 
 	public void writeAdditionalDataToJson(JSONObject json) throws JSONException {
-		JSONObject iconJson = new JSONObject();
-		for (Map.Entry<String, String> entry : iconNames.entrySet()) {
-			iconJson.put(entry.getKey(), entry.getValue());
-		}
-		json.put("icon", iconJson);
+		JsonUtils.writeLocalizedMapToJson("icon", json, iconNames);
+		JsonUtils.writeLocalizedMapToJson("image", json, imageNames);
+		JsonUtils.writeLocalizedMapToJson("name", json, names);
+		JsonUtils.writeLocalizedMapToJson("description", json, descriptions);
 
-		JSONObject imageJson = new JSONObject();
-		for (Map.Entry<String, String> entry : imageNames.entrySet()) {
-			imageJson.put(entry.getKey(), entry.getValue());
+		JSONArray regionsJson = new JSONArray();
+		for (WorldRegion region : getFlatCustomRegions()) {
+			if (region instanceof CustomRegion) {
+				regionsJson.put(((CustomRegion) region).toJson());
+			}
 		}
-		json.put("image", imageJson);
+		json.put("regionsJson", regionsJson);
+	}
 
-		JSONObject nameJson = new JSONObject();
-		for (Map.Entry<String, String> entry : names.entrySet()) {
-			nameJson.put(entry.getKey(), entry.getValue());
+	private List<WorldRegion> getFlatCustomRegions() {
+		List<WorldRegion> l = new ArrayList<>(customRegions);
+		for (WorldRegion region : customRegions) {
+			collectCustomSubregionsFromRegion(region, l);
 		}
-		json.put("name", nameJson);
+		return l;
+	}
 
-		JSONObject descriptionJson = new JSONObject();
-		for (Map.Entry<String, String> entry : descriptions.entrySet()) {
-			descriptionJson.put(entry.getKey(), entry.getValue());
+	private void collectCustomSubregionsFromRegion(WorldRegion region, List<WorldRegion> items) {
+		items.addAll(region.getSubregions());
+		for (WorldRegion subregion : region.getSubregions()) {
+			collectCustomSubregionsFromRegion(subregion, items);
 		}
-		json.put("description", descriptionJson);
 	}
 
 	public void readDependentFilesFromJson(JSONObject json) throws JSONException {
-		JSONArray rendererNamesJson = json.has("rendererNames") ? json.getJSONArray("rendererNames") : null;
-		if (rendererNamesJson != null) {
-			for (int i = 0; i < rendererNamesJson.length(); i++) {
-				String renderer = rendererNamesJson.getString(i);
-				rendererNames.add(renderer);
-			}
-		}
-		JSONArray routerNamesJson = json.has("routerNames") ? json.getJSONArray("routerNames") : null;
-		if (routerNamesJson != null) {
-			for (int i = 0; i < routerNamesJson.length(); i++) {
-				String renderer = routerNamesJson.getString(i);
-				routerNames.add(renderer);
-			}
-		}
-		JSONObject iconNamesJson = json.has("iconNames") ? json.getJSONObject("iconNames") : null;
-		if (iconNamesJson != null) {
-			for (Iterator<String> it = iconNamesJson.keys(); it.hasNext(); ) {
-				String localeKey = it.next();
-				String name = iconNamesJson.getString(localeKey);
-				iconNames.put(localeKey, name);
-			}
-		}
-		JSONObject imageNamesJson = json.has("imageNames") ? json.getJSONObject("imageNames") : null;
-		if (imageNamesJson != null) {
-			for (Iterator<String> it = imageNamesJson.keys(); it.hasNext(); ) {
-				String localeKey = it.next();
-				String name = imageNamesJson.getString(localeKey);
-				imageNames.put(localeKey, name);
-			}
-		}
-		resourceDirName = json.has("pluginResDir") ? json.getString("pluginResDir") : null;
+		rendererNames = JsonUtils.jsonArrayToList("rendererNames", json);
+		routerNames = JsonUtils.jsonArrayToList("routerNames", json);
+		resourceDirName = json.optString("pluginResDir");
 	}
 
 	public void writeDependentFilesJson(JSONObject json) throws JSONException {
-		JSONArray rendererNamesJson = new JSONArray();
-		for (String render : rendererNames) {
-			rendererNamesJson.put(render);
-		}
-		json.put("rendererNames", rendererNamesJson);
-
-		JSONArray routerNamesJson = new JSONArray();
-		for (String render : routerNames) {
-			routerNamesJson.put(render);
-		}
-		json.put("routerNames", routerNamesJson);
-
-		JSONObject iconNamesJson = new JSONObject();
-		for (Map.Entry<String, String> entry : iconNames.entrySet()) {
-			iconNamesJson.put(entry.getKey(), entry.getValue());
-		}
-		json.put("iconNames", iconNamesJson);
-
-		JSONObject imageNamesJson = new JSONObject();
-		for (Map.Entry<String, String> entry : imageNames.entrySet()) {
-			imageNamesJson.put(entry.getKey(), entry.getValue());
-		}
-		json.put("imageNames", imageNamesJson);
+		JsonUtils.writeStringListToJson("rendererNames", json, rendererNames);
+		JsonUtils.writeStringListToJson("routerNames", json, routerNames);
 
 		json.put("pluginResDir", resourceDirName);
 	}
 
-	@Override
-	public List<String> getRendererNames() {
-		return rendererNames;
-	}
-
-	@Override
-	public List<String> getRouterNames() {
-		return routerNames;
+	public static List<CustomRegion> collectRegionsFromJson(JSONArray jsonArray) throws JSONException {
+		List<CustomRegion> customRegions = new ArrayList<>();
+		Map<String, CustomRegion> flatRegions = new HashMap<>();
+		for (int i = 0; i < jsonArray.length(); i++) {
+			JSONObject regionJson = jsonArray.getJSONObject(i);
+			CustomRegion region = CustomRegion.fromJson(regionJson);
+			flatRegions.put(region.getPath(), region);
+		}
+		for (CustomRegion region : flatRegions.values()) {
+			if (!Algorithms.isEmpty(region.getParentPath())) {
+				CustomRegion parentReg = flatRegions.get(region.getParentPath());
+				if (parentReg != null) {
+					parentReg.addSubregion(region);
+				}
+			} else {
+				customRegions.add(region);
+			}
+		}
+		return customRegions;
 	}
 
 	public void addRouter(String fileName) {
 		String routerName = Algorithms.getFileWithoutDirs(fileName);
-		routerNames.add(routerName);
+		if (!routerNames.contains(routerName)) {
+			routerNames.add(routerName);
+		}
 	}
 
 	public void addRenderer(String fileName) {
 		String rendererName = Algorithms.getFileWithoutDirs(fileName);
-		rendererNames.add(rendererName);
+		if (!rendererNames.contains(rendererName)) {
+			rendererNames.add(rendererName);
+		}
 	}
 
 	public void loadResources() {
@@ -398,33 +414,61 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		}
 	}
 
-	private Drawable getIconForFile(String path, Map<String, String> fileNames) {
-		for (Map.Entry<String, String> entry : fileNames.entrySet()) {
-			String value = entry.getValue();
-			if (value.startsWith("@")) {
-				value = value.substring(1);
-			}
-			if (path.endsWith(value)) {
-				return BitmapDrawable.createFromPath(path);
-			}
+	public void updateSuggestedDownloads(List<SuggestedDownloadItem> items) {
+		suggestedDownloadItems = new ArrayList<>(items);
+	}
+
+	public void updateDownloadItems(List<WorldRegion> items) {
+		customRegions = new ArrayList<>(items);
+	}
+
+	private List<IndexItem> getMapsForType(LatLon latLon, DownloadActivityType type) {
+		try {
+			return DownloadResources.findIndexItemsAt(app, latLon, type);
+		} catch (IOException e) {
+			LOG.error(e);
 		}
-		return null;
+		return Collections.emptyList();
 	}
 
-	@NonNull
-	@Override
-	public Drawable getLogoResource() {
-		return icon != null ? icon : super.getLogoResource();
-	}
-
-	@Override
-	public Drawable getAssetResourceImage() {
-		return image;
+	private List<IndexItem> getMapsForType(List<String> names, DownloadActivityType type, int limit) {
+		return DownloadResources.findIndexItemsAt(app, names, type, false, limit);
 	}
 
 	public interface PluginItemsListener {
 
 		void onItemsRemoved();
 
+	}
+
+	public static class SuggestedDownloadItem {
+
+		private String scopeId;
+		private String searchType;
+		private List<String> names;
+		private int limit;
+
+		public SuggestedDownloadItem(String scopeId, String searchType, List<String> names, int limit) {
+			this.scopeId = scopeId;
+			this.limit = limit;
+			this.searchType = searchType;
+			this.names = names;
+		}
+
+		public String getScopeId() {
+			return scopeId;
+		}
+
+		public String getSearchType() {
+			return searchType;
+		}
+
+		public List<String> getNames() {
+			return names;
+		}
+
+		public int getLimit() {
+			return limit;
+		}
 	}
 }

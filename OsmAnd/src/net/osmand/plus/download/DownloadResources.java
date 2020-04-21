@@ -9,8 +9,11 @@ import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.CustomRegion;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -290,6 +293,8 @@ public class DownloadResources extends DownloadResourceGroup {
 	protected boolean prepareData(List<IndexItem> resources) {
 		this.rawResources = resources;
 
+		DownloadResourceGroup extraMapsGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.EXTRA_MAPS);
+
 		DownloadResourceGroup otherMapsGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.OTHER_MAPS_GROUP);
 		DownloadResourceGroup otherMapsScreen = new DownloadResourceGroup(otherMapsGroup, DownloadResourceGroupType.OTHER_MAPS);
 		DownloadResourceGroup otherMaps = new DownloadResourceGroup(otherMapsGroup, DownloadResourceGroupType.OTHER_MAPS_HEADER);
@@ -363,6 +368,14 @@ public class DownloadResources extends DownloadResourceGroup {
 		}
 		this.groupByRegion = groupByRegion;
 
+		List<WorldRegion> customRegions = OsmandPlugin.getCustomDownloadRegions();
+		if (!Algorithms.isEmpty(customRegions)) {
+			addGroup(extraMapsGroup);
+			for (WorldRegion region : customRegions) {
+				buildRegionsGroups(region, extraMapsGroup);
+			}
+		}
+
 		LinkedList<WorldRegion> queue = new LinkedList<WorldRegion>();
 		LinkedList<DownloadResourceGroup> parent = new LinkedList<DownloadResourceGroup>();
 		DownloadResourceGroup worldSubregions = new DownloadResourceGroup(this, DownloadResourceGroupType.SUBREGIONS);
@@ -433,6 +446,40 @@ public class DownloadResources extends DownloadResourceGroup {
 		return true;
 	}
 
+	private void buildRegionsGroups(WorldRegion region, DownloadResourceGroup group) {
+		LinkedList<WorldRegion> queue = new LinkedList<WorldRegion>();
+		LinkedList<DownloadResourceGroup> parent = new LinkedList<DownloadResourceGroup>();
+		queue.add(region);
+		parent.add(group);
+		while (!queue.isEmpty()) {
+			WorldRegion reg = queue.pollFirst();
+			DownloadResourceGroup parentGroup = parent.pollFirst();
+			List<WorldRegion> subregions = reg.getSubregions();
+			DownloadResourceGroup mainGrp = new DownloadResourceGroup(parentGroup, DownloadResourceGroupType.REGION, reg.getRegionId());
+			mainGrp.region = reg;
+			parentGroup.addGroup(mainGrp);
+
+			if (reg instanceof CustomRegion) {
+				CustomRegion customRegion = (CustomRegion) reg;
+				List<IndexItem> indexItems = customRegion.loadIndexItems();
+				if (!Algorithms.isEmpty(indexItems)) {
+					DownloadResourceGroup flatFiles = new DownloadResourceGroup(mainGrp, DownloadResourceGroupType.REGION_MAPS);
+					for (IndexItem ii : indexItems) {
+						flatFiles.addItem(ii);
+					}
+					mainGrp.addGroup(flatFiles);
+				}
+			}
+			DownloadResourceGroup subRegions = new DownloadResourceGroup(mainGrp, DownloadResourceGroupType.SUBREGIONS);
+			mainGrp.addGroup(subRegions);
+			// add to processing queue
+			for (WorldRegion rg : subregions) {
+				queue.add(rg);
+				parent.add(subRegions);
+			}
+		}
+	}
+
 	/**
 	 * @return smallest index item, if there are no downloaded index items; Downloaded item otherwise.
 	 */
@@ -465,6 +512,10 @@ public class DownloadResources extends DownloadResourceGroup {
 	}
 
 	public static List<IndexItem> findIndexItemsAt(OsmandApplication app, LatLon latLon, DownloadActivityType type, boolean includeDownloaded) throws IOException {
+		return findIndexItemsAt(app, latLon, type, includeDownloaded, -1);
+	}
+
+	public static List<IndexItem> findIndexItemsAt(OsmandApplication app, LatLon latLon, DownloadActivityType type, boolean includeDownloaded, int limit) throws IOException {
 		List<IndexItem> res = new ArrayList<>();
 		OsmandRegions regions = app.getRegions();
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
@@ -472,6 +523,25 @@ public class DownloadResources extends DownloadResourceGroup {
 		for (WorldRegion downloadRegion : downloadRegions) {
 			if (includeDownloaded || !isIndexItemDownloaded(downloadThread, type, downloadRegion, res)) {
 				addIndexItem(downloadThread, type, downloadRegion, res);
+			}
+			if (limit != -1 && res.size() == limit) {
+				break;
+			}
+		}
+		return res;
+	}
+
+	public static List<IndexItem> findIndexItemsAt(OsmandApplication app, List<String> names, DownloadActivityType type, boolean includeDownloaded, int limit) {
+		List<IndexItem> res = new ArrayList<>();
+		OsmandRegions regions = app.getRegions();
+		DownloadIndexesThread downloadThread = app.getDownloadThread();
+		for (String name : names) {
+			WorldRegion downloadRegion = regions.getRegionDataByDownloadName(name);
+			if (downloadRegion != null && (includeDownloaded || !isIndexItemDownloaded(downloadThread, type, downloadRegion, res))) {
+				addIndexItem(downloadThread, type, downloadRegion, res);
+			}
+			if (limit != -1 && res.size() == limit) {
+				break;
 			}
 		}
 		return res;
