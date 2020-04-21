@@ -51,7 +51,6 @@ android {
 		versionName "3.7.0"
 		versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
 		versionName System.getenv("APK_VERSION_SUFFIX")? versionName + System.getenv("APK_VERSION_SUFFIX").toString(): versionName
-		 defaultConfig {
 		// Stops the Gradle plugin’s automatic rasterization of vectors
 		generatedDensities = []
 	}
