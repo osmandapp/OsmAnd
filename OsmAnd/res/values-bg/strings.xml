@@ -2037,7 +2037,7 @@
     <string name="app_mode_ski_snowmobile">Моторни шейни</string>
     <string name="custom_osmand_plugin">Персонализиран плъгин OsmAnd</string>
     <string name="shared_string_items">Елементи</string>
-    <string name="changes_applied_to_profile">Промените са приложени към% 1 $ s профил.</string>
+    <string name="changes_applied_to_profile">Промените са приложени към %1$s профил.</string>
     <string name="settings_item_read_error">%1$s не може да прочете.</string>
     <string name="settings_item_write_error">%1$s не може да се запише.</string>
     <string name="settings_item_import_error">%1$s не можа да се импортира.</string>
