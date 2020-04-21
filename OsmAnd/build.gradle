@@ -367,9 +367,20 @@ task copyStyleIcons(type: Sync) {
 	include "**/*.png",  "**/*.xml"
 	preserve {
 		include '**/*'
-		exclude "**/mx_*",  "**/mm_*", "**/h_*"
+		exclude  "**/mm_*", "**/h_*"
 	}
 }
+
+task copyStyleIcons(type: Sync) {
+	from "../../resources/rendering_styles/drawable-mx/"
+	into "res/drawable/"
+	include "**/*.png",  "**/*.xml"
+	preserve {
+		include '**/*'
+		exclude "**/mx_*"
+	}
+}
+
 
 
 task copyWidgetIconsXhdpi(type: Sync) {
