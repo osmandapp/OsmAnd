@@ -70,7 +70,7 @@
     <string name="poi_public_transport_station">Stazione trasporto pubblico</string>
     <string name="poi_bus_station">Stazione autobus</string>
     <string name="poi_subway_entrance">Entrata metropolitana</string>
-    <string name="poi_subway_station">sì</string>
+    <string name="poi_subway_station">Sì</string>
     <string name="poi_aerodrome">Aeroporto</string>
     <string name="poi_helipad">Eliporto</string>
     <string name="poi_bicycle_rental">Noleggio bici</string>
@@ -931,12 +931,12 @@
     <string name="poi_disused">In disuso</string>
     <string name="poi_operator">Operatore</string>
     <string name="poi_brand">Marchio</string>
-    <string name="poi_fee_yes">sì</string>
-    <string name="poi_fee_no">no</string>
-    <string name="poi_drinking_water_yes">sì</string>
-    <string name="poi_drinking_water_no">no</string>
-    <string name="poi_seasonal_yes">sì</string>
-    <string name="poi_seasonal_no">no</string>
+    <string name="poi_fee_yes">Sì</string>
+    <string name="poi_fee_no">No</string>
+    <string name="poi_drinking_water_yes">Sì</string>
+    <string name="poi_drinking_water_no">No</string>
+    <string name="poi_seasonal_yes">Sì</string>
+    <string name="poi_seasonal_no">No</string>
     <string name="poi_seasonal_dry_season">Stagione secca</string>
     <string name="poi_seasonal_wet_season">Stagione umida</string>
     <string name="poi_seasonal_spring">Primavera</string>
@@ -2130,7 +2130,7 @@
     <string name="poi_retail">Area commerciale</string>
     <string name="poi_allotments">Orti urbani</string>
     <string name="poi_basin">Bacino</string>
-    <string name="poi_capital">sì</string>
+    <string name="poi_capital">Sì</string>
     <string name="poi_place_allotments">Orti di città</string>
     <string name="poi_ice_hockey">Hockey su ghiaccio</string>
     <string name="poi_denomination_lutheran">Luterana</string>
@@ -2397,7 +2397,7 @@
     <string name="poi_inscription_nw">Inscrizione:NO</string>
     <string name="poi_climbing_orientation_sw">Orientamento del muro:SO</string>
     <string name="poi_climbing_orientation_nw">Orientamento del muro: NO</string>
-    <string name="poi_climbing_crag">si</string>
+    <string name="poi_climbing_crag">Sì</string>
     <string name="poi_distance_mark">Segno di distanza</string>
     <string name="poi_piste_skitour">Pista Skitour</string>
     <string name="poi_denomination_united_reformed">Riformata Unita</string>
@@ -2818,4 +2818,5 @@
     <string name="poi_branch">Filiale</string>
     <string name="poi_resource_aggregate">Aggregato</string>
     <string name="poi_resource_beryl">Berillio</string>
+    <string name="poi_shop_wholesale">Negozio all\'ingrosso</string>
 </resources>

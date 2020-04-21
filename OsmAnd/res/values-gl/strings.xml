@@ -3642,4 +3642,19 @@ Lon %2$s</string>
     <string name="restore_all_profile_settings">Restabelecer todos os axustes de perfil\?</string>
     <string name="saving_new_profile">Gardando novo perfil</string>
     <string name="profile_backup_failed">Non foi posíbel facer unha copia de seguranza do perfil.</string>
+    <string name="developer_plugin">Engadido do desenvolvedor</string>
+    <string name="replace_point_descr">Substitúe outro punto por este</string>
+    <string name="app_mode_ski_touring">Esquí de ruta</string>
+    <string name="app_mode_ski_snowmobile">Moto de neve</string>
+    <string name="custom_osmand_plugin">Engadido personalizado do OsmAnd</string>
+    <string name="shared_string_items">Elementos</string>
+    <string name="changes_applied_to_profile">Modificacións aplicadas ó perfil %1$s.</string>
+    <string name="settings_item_read_error">Non foi posíbel ler %1$s.</string>
+    <string name="settings_item_write_error">Non foi posíbel escribir %1$s.</string>
+    <string name="settings_item_import_error">Non foi posíbel importar %1$s.</string>
+    <string name="select_track_file">Escoller ficheiro da pista</string>
+    <string name="shared_string_languages">Linguas</string>
+    <string name="shared_string_language">Lingua</string>
+    <string name="shared_string_all_languages">Todas as linguas</string>
+    <string name="wiki_menu_download_descr">Precísanse mapas adicionais para ollar os PDI da Wikipedia no mapa.</string>
 </resources>

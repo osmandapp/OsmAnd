@@ -169,8 +169,8 @@
     <string name="stop_sharing_all">Die Freigabe ist eingeschaltet (ausschalten)</string>
     <string name="initialization">Startet</string>
     <string name="logging_out">Abmeldevorgang</string>
-    <string name="closing">Schliesst</string>
-    <string name="gps_network_not_enabled">\"Standort\" einschalten\?</string>
+    <string name="closing">Schließt</string>
+    <string name="gps_network_not_enabled">„Standort“ einschalten\?</string>
     <string name="live_now">Jetzt live</string>
     <string name="last_update_from_telegram">Letzte Aktualisierung von Telegram</string>
     <string name="send_location_as">Senden Standort als</string>

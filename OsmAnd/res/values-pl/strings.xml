@@ -3617,4 +3617,27 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="settings_item_read_error">Nie udało się przeczytać %1$s.</string>
     <string name="settings_item_write_error">Nie udało się napisać %1$s.</string>
     <string name="settings_item_import_error">Nie udało się zaimportować %1$s.</string>
+    <string name="ui_customization_short_descr">Elementy szuflady, menu kontekstowe</string>
+    <string name="ui_customization">Ustawienia interfejsu użytkownika</string>
+    <string name="shared_string_drawer">Szuflada</string>
+    <string name="context_menu_actions">Menu kontekstowe działań</string>
+    <string name="reorder_or_hide_from">Przeorganizuj lub ukryj elementy z %1$s.</string>
+    <string name="shared_string_divider">Dzielnik</string>
+    <string name="divider_descr">Elementy poniżej tego punktu są oddzielone dzielnikiem.</string>
+    <string name="shared_string_hidden">Ukryte</string>
+    <string name="hidden_items_descr">Te elementy są ukryte w menu, jednak reprezentowane opcje i wtyczki będą wciąż działać.</string>
+    <string name="reset_items_descr">Ustawienia zostaną zrestetowane po schowaniu.</string>
+    <string name="main_actions_descr">Główne działania zajmują tylko 4 przyciski.</string>
+    <string name="main_actions">Główne działania</string>
+    <string name="additional_actions_descr">Możesz uzyskać te akcje przez naciśnięcie przycisku \"Działania\".</string>
+    <string name="move_inside_category">Możesz przemieszczać elementy tylko wewnątrz tej kategorii.</string>
+    <string name="developer_plugin">Wtyczka deweloperska</string>
+    <string name="shared_string_items">Elementy</string>
+    <string name="select_track_file">Wybierz plik ścieżki</string>
+    <string name="shared_string_languages">Języki</string>
+    <string name="shared_string_language">Język</string>
+    <string name="shared_string_all_languages">Wszystkie języki</string>
+    <string name="wikipedia_poi_languages_promo">Niektóre artykuły Wikipiedii mogą nie być dostępne w twoim języku, wybierz w których językach artykuły Wikipedii mogą pojawiać się na mapie.
+\nBędziesz mógł zmieniać pomiędzy wszystkimi możliwymi językami podczas czytania artykułu.</string>
+    <string name="wiki_menu_download_descr">Potrzebne są dodatkowe mapy, żeby przeglądać UM Wikipedii na mapie.</string>
 </resources>

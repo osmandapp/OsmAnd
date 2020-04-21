@@ -130,7 +130,7 @@
     <string name="settings_direction_style">Suunnan tyyli</string>
     <string name="i_am_here">Olen täällä</string>
     <string name="shared_string_accessibility">Esteettömyys</string>
-    <string name="accessibility_preferences_descr">Esteettömyyteen liittyvät asetukset</string>
+    <string name="accessibility_preferences_descr">Esteettömyyteen liittyvät asetukset.</string>
     <string name="offline_edition">Yhteydetön editointi</string>
     <string name="local_openstreetmap_uploading">Lähetetään…</string>
     <string name="local_openstreetmap_were_uploaded">{0} KP/Huomautusta lähetettiin</string>
@@ -315,7 +315,7 @@
     <string name="error_occurred_saving_gpx">Virhe tallennettaessa GPX tiedostoa</string>
     <string name="error_calculating_route">Virhe reitin laskennassa</string>
     <string name="new_route_calculated_dist">Uusi reitti laskettu, etäisyys</string>
-    <string name="arrived_at_destination">Olet saapunut päämäärään</string>
+    <string name="arrived_at_destination">Olet saapunut perille.</string>
     <string name="invalid_locations">Koordinaatit ovat virheelliset!</string>
     <string name="shared_string_close">Sulje</string>
     <string name="loading_data">Ladataan tietoja…</string>
@@ -576,7 +576,7 @@
     <string name="shared_string_map">Kartta</string>
     <string name="prefer_motorways">Suosi moottoriteitä</string>
     <string name="prefer_in_routing_title">Suosi…</string>
-    <string name="prefer_in_routing_descr">Suosi moottoriteitä</string>
+    <string name="prefer_in_routing_descr">Suosi moottoriteitä.</string>
     <string name="intermediate_points_change_order">Vaihda järjestystä</string>
     <string name="recording_unavailable">ei saatavilla</string>
     <string name="recording_context_menu_play">Toista</string>
@@ -640,7 +640,7 @@
     <string name="shared_string_select_on_map">Valitse kartalta</string>
     <string name="shared_string_deselect">Poista valinta</string>
     <string name="shared_string_deselect_all">Poista kaikki valinnat</string>
-    <string name="shared_string_save_as_gpx">Tallena uutena GPX-tiedostona</string>
+    <string name="shared_string_save_as_gpx">Tallenna uutena GPX-tiedostona</string>
     <string name="shared_string_delete_all">Poista kaikki</string>
     <string name="shared_string_share">Jaa</string>
     <string name="shared_string_export">Vie</string>
@@ -2529,4 +2529,12 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="replace_all">Korvaa kaikki</string>
     <string name="keep_both">Pidä molemmat</string>
     <string name="clear_recorded_data_warning">Haluatko varmasti tyhjentää tallennetun datan\?</string>
+    <string name="avoid_roads_descr">Valitse tie, jonka haluat välttää navigoinnin aikana, joko kartalta tai alla olevasta luettelosta:</string>
+    <string name="routing_attr_driving_style_balance_name">Tasapainoinen</string>
+    <string name="routing_attr_driving_style_speed_name">Lyhyemmät reitit</string>
+    <string name="routing_attr_driving_style_safety_name">Suosi sivuteitä</string>
+    <string name="routing_attr_prefer_unpaved_description">Suosi päällystämättömiä teitä.</string>
+    <string name="routing_attr_prefer_unpaved_name">Suosi päällystämättömiä teitä</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Suosi päällystämättömiä teitä</string>
+    <string name="arrive_at_time">Perillä %1$s</string>
 </resources>

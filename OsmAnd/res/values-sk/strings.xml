@@ -296,7 +296,7 @@
     <string name="overlay_transparency_descr">Upraviť priehľadnosť prekrývacej mapy.</string>
     <string name="overlay_transparency">Priehľadnosť prekrývacej mapy</string>
     <string name="map_transparency_descr">Upraviť priehľadnosť základnej mapy.</string>
-    <string name="map_transparency">Priehľadnosť mapy</string>
+    <string name="map_transparency">Priehľadnosť základnej mapy</string>
     <string name="modify_transparency">Zadajte priehľadnosť (0 - priehľadný, 255 - nepriehľadný)</string>
     <string name="layer_underlay">Podkladová mapa…</string>
     <string name="map_underlay">Podkladová mapa</string>
@@ -3611,4 +3611,23 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="wikipedia_poi_languages_promo">Niektoré články Wikipedia nemusia byť dostupné vo vašom jazyku. Zvoľte jazyky, v ktorých sa články Wikipedia budú zobrazovať na mape.
 \nPri čítaní článku budete môcť prepínať medzi všetkými dostupnými jazykmi.</string>
     <string name="wiki_menu_download_descr">Pre zobrazenie bodov Wikipedie na mape sú potrebné ďalšie mapy.</string>
+    <string name="ui_customization_description">Upraviť počet položiek v úvodnom paneli, nastaviť mapu a kontextové menu.
+\n
+\nMôžete vypnúť nepoužívané moduly, aby sa skryli ich ovládacie prvky z aplikácie %1$s.</string>
+    <string name="ui_customization_short_descr">Položky v úvodnom paneli a kontextovom menu</string>
+    <string name="ui_customization">Prispôsobenie používateľského rozhrania</string>
+    <string name="shared_string_drawer">Úvodný panel</string>
+    <string name="context_menu_actions">Akcie kontextového menu</string>
+    <string name="reorder_or_hide_from">Preusporiadajte alebo skryte položky z %1$s.</string>
+    <string name="shared_string_divider">Rozdeľovač</string>
+    <string name="divider_descr">Položky pod týmto bodom sú oddelené rozdeľovačom.</string>
+    <string name="shared_string_hidden">Skryté</string>
+    <string name="hidden_items_descr">Tieto položky sú skryté z menu, ale ich možnosti a moduly sú stále funkčné.</string>
+    <string name="reset_items_descr">Po skrytí sa nastavenia resetujú do pôvodného stavu.</string>
+    <string name="main_actions_descr">Hlavné akcie sú obmedzené na 4 tlačidlá.</string>
+    <string name="main_actions">Hlavné akcie</string>
+    <string name="additional_actions_descr">K akciám sa môžete pristúpiť stlačením tlačidla \"Akcie\".</string>
+    <string name="move_inside_category">Môžete presúvať položky len v rámci tejto kategórie.</string>
+    <string name="developer_plugin">Doplnok pre vývojárov</string>
+    <string name="shared_string_items">Položky</string>
 </resources>

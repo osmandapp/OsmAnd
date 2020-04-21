@@ -3619,4 +3619,23 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_language">Limba</string>
     <string name="shared_string_all_languages">Totu sas limbas</string>
     <string name="wiki_menu_download_descr">Pro bìdere sos PDI de Wikipedia in sa mapa b\'at bisòngiu de mapas agiuntivas.</string>
+    <string name="ui_customization_description">Personaliza sa cantidade de elementos in su Calàssiu, cunfigura sa mapa e su menù de cuntestu.
+\n
+\nPodes disabilitare sas estensiones chi no impreas, pro cuare totu sos controllos issoro dae s\'aplicatzione %1$s.</string>
+    <string name="ui_customization_short_descr">Elementos de su calàssiu, menù de cuntestu</string>
+    <string name="ui_customization">Personalizatzione de s\'interfache de s\'impreadore</string>
+    <string name="shared_string_drawer">Calàssiu</string>
+    <string name="context_menu_actions">Atziones de su menù de cuntestu</string>
+    <string name="reorder_or_hide_from">Torra a ordinare o cua elementos dae su %1$s.</string>
+    <string name="shared_string_divider">Separadore</string>
+    <string name="divider_descr">Elementos in suta de custu puntu iscrobados dae unu separadore.</string>
+    <string name="shared_string_hidden">Cuadu</string>
+    <string name="hidden_items_descr">Custos elementos sunt cuados dae su menù, ma sas optziones o sas estensiones rapresentadas ant a sighire a funtzionare.</string>
+    <string name="reset_items_descr">Sas impostatziones ant a torrare a sos valores predefinidos a pustis de sa cuadura.</string>
+    <string name="main_actions_descr">Sas atziones printzipales cuntenent 4 butones ebbia.</string>
+    <string name="main_actions">Atziones printzipales</string>
+    <string name="additional_actions_descr">Podes atzèdere a custas atziones incarchende su butone \"Atziones\".</string>
+    <string name="move_inside_category">Podes mòere elementos in intro de custa categoria ebbia.</string>
+    <string name="developer_plugin">Estensione pro sos isvilupadores</string>
+    <string name="shared_string_items">Elementos</string>
 </resources>
