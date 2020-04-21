@@ -354,7 +354,7 @@ task collectHelpContentsAssets(type: Copy) {
 	into "assets/feature_articles"
 }
 
-task copyPoiCategiry(type: Copy) {
+task copyPoiCategories(type: Copy) {
 	from("../../resources/poi") {
 		include "poi_categories.json"
 	}
@@ -371,7 +371,7 @@ task copyStyleIcons(type: Sync) {
 	}
 }
 
-task copyStyleIcons(type: Sync) {
+task copyPOIIcons(type: Sync) {
 	from "../../resources/rendering_styles/drawable-mx/"
 	into "res/drawable/"
 	include "**/*.png",  "**/*.xml"
@@ -419,12 +419,13 @@ task collectExternalResources {
 			collectHelpContentsAssets,
 			collectHelpContentsStyle,
 			copyStyleIcons,
+			copyPOIIcons,
 			updateNoTranslate,
 			validateTranslate,
 			copyWidgetIcons,
 			copyWidgetIconsHdpi,
 			copyWidgetIconsXhdpi,
-			copyPoiCategiry,
+			copyPoiCategories,
 			downloadWorldMiniBasemap
 
 	Gradle gradle = getGradle()
