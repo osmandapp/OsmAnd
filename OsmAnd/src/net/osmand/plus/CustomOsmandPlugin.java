@@ -354,17 +354,12 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	public void readDependentFilesFromJson(JSONObject json) throws JSONException {
 		rendererNames = jsonArrayToList("rendererNames", json);
 		routerNames = jsonArrayToList("routerNames", json);
-		iconNames = getLocalizedMapFromJson("iconNames", json);
-		imageNames = getLocalizedMapFromJson("imageNames", json);
 		resourceDirName = json.optString("pluginResDir");
 	}
 
 	public void writeDependentFilesJson(JSONObject json) throws JSONException {
 		writeStringListToJson("rendererNames", json, rendererNames);
 		writeStringListToJson("routerNames", json, routerNames);
-
-		writeLocalizedMapToJson("iconNames", json, iconNames);
-		writeLocalizedMapToJson("imageNames", json, imageNames);
 
 		json.put("pluginResDir", resourceDirName);
 	}
