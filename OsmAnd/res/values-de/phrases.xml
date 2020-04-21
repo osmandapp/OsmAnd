@@ -616,7 +616,7 @@
     <string name="poi_shop_food">Lebensmittelgeschäft und Supermarkt</string>
     <string name="poi_emergency">Notfall</string>
     <string name="poi_road_obstacle">Straßenhindernis</string>
-    <string name="poi_filling_station">Tankstelle</string>
+    <string name="poi_filling_station">Tankstelle (alle Fzg.)</string>
     <string name="poi_public_transport">ÖPNV</string>
     <string name="poi_man_made">von Menschenhand</string>
     <string name="poi_water_supply">Wasserversorgung</string>

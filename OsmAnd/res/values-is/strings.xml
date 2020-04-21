@@ -3629,4 +3629,26 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="shared_string_languages">Tungumál</string>
     <string name="shared_string_language">Tungumál</string>
     <string name="shared_string_all_languages">Öll tungumál</string>
+    <string name="move_inside_category">Þú getur aðeins fært atriði innan þessa flokks.</string>
+    <string name="hidden_items_descr">Þessi atriði eru falin á valmyndinni, en valkostirnir eða viðbæturnar sem þau standa fyrir munu virka áfram.</string>
+    <string name="wikipedia_poi_languages_promo">Sumar Wikipedia-greinar gætu verið ekki tiltækar í þínu nafni, veldu það tungumál sem Wikipedia-greinarnar ættu að birtast á á kortinu.
+\nÞú munt geta skipt á milli allra tiltækra tungumála á meðan þú lest greinar.</string>
+    <string name="ui_customization_description">Sérsníddu fjölda atriða í sleðanum, í uppsetningu landakorts og í samhengisvalmynd.
+\n
+\nÞú getur gert ónotaðar forritsviðbætur óvirkar til að fela stýringar þeirra í %1$s forritinu.</string>
+    <string name="ui_customization_short_descr">Atriði á sleða, samhengisvalmynd</string>
+    <string name="ui_customization">Sérsnið viðmóts</string>
+    <string name="shared_string_drawer">Sleði</string>
+    <string name="context_menu_actions">Aðgerðir samhengisvalmyndar</string>
+    <string name="reorder_or_hide_from">Endurraða eða fela atriði frá %1$s.</string>
+    <string name="shared_string_divider">Aðgreinir</string>
+    <string name="divider_descr">Einindi fyrir neðan þessa staðsetningu aðskilin með aðgreini.</string>
+    <string name="shared_string_hidden">Falið</string>
+    <string name="reset_items_descr">Stillingar verða settar á upphaflega stöðu eftir að hafa verið faldar.</string>
+    <string name="main_actions_descr">Aðalaðgerðir innifela aðeins 4 hnappa.</string>
+    <string name="main_actions">Aðalaðgerðir</string>
+    <string name="additional_actions_descr">Þú getur komist í þessar aðgerðir með því að ýta á \"Aðgerðir\"-hnappinn.</string>
+    <string name="developer_plugin">Forritsviðbót fyrir forritun</string>
+    <string name="shared_string_items">Atriði</string>
+    <string name="wiki_menu_download_descr">Viðbótarkort þarf til að skoða Wikipedia-merkisstaði á kortinu.</string>
 </resources>

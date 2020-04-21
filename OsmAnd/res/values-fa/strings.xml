@@ -3206,8 +3206,8 @@
     <string name="routing_attr_max_num_changes_description">حداکثر چند بار شیوهٔ حمل‌ونقل تغییر کند؟</string>
     <string name="routing_attr_max_num_changes_name">تعداد تغییرات</string>
     <string name="gpx_join_gaps">حذف وقفه‌ها</string>
-    <string name="rendering_attr_showLez_description">محدوده‌های کم‌آلاینده (LEZ) را روی نقشه نشان بده. روی مسیریابی اثر نمی‌گذارد.</string>
-    <string name="rendering_attr_showLez_name">محدوده‌های کم‌آلاینده</string>
+    <string name="rendering_attr_showLez_description">محدوده‌های کاهش آلودگی هوای شهر را روی نقشه نشان بده. روی مسیریابی اثر نمی‌گذارد.</string>
+    <string name="rendering_attr_showLez_name">محدوده‌های کاهش</string>
     <string name="temporary_conditional_routing">در نظر گرفتن محدودیت‌های موقت در مسیریابی</string>
     <string name="routing_attr_piste_type_downhill_name">اسکی آلپاین/دان‌هیل</string>
     <string name="routing_attr_piste_type_downhill_description">سراشیبی‌های اسکی آلپاین یا دان‌هیل و دسترسی به بالابرهای اسکی.</string>
@@ -3465,7 +3465,7 @@
     <string name="monitoring_min_speed_descr_side_effect">اثر جانبی: همهٔ قطعه‌هایی که در آن‌ها به حداقل سرعت معیار نرسید از رد حذف خواهد شد (مثلاً هنگامی که دوچرخه‌تان را بالای یک تپه با شیب تند می‌برید). همچنین هیچ اطلاعاتی دربارهٔ بازه‌های توقف، مانند استراحت‌ها، ضبط نمی‌شود. این مسئله بر همهٔ تحلیل‌ها یا پس‌پردازش‌ها تأثیر می‌گذارد، مانند زمانی که بخواهید مسافت کلی سفر، مدت حرکت یا سرعت متوسط خود را بدانید.</string>
     <string name="monitoring_min_speed_descr_recommendation">توصیه: ابتدا از پالایهٔ «کمترین جابه‌جایی» به‌منظور تشخیص حرکت استفاده کنید (B). این‌گونه شاید نتایج بهتری بگیرید و همچنین دادهٔ کمتری از دست می‌دهید. اگر ردها در سرعت‌های پایین نویز دارد، برای اینجا از مقدارهای غیرصفر استفاده کنید. لطفاً توجه نمایید که برخی اندازه‌گیری‌ها ممکن است اصلاً هیچ سرعتی را گزارش نکنند (برخی روش‌های مبتنی بر شبکه)، که در این صورت هیچ چیزی ضبط نخواهد شد.</string>
     <string name="monitoring_min_speed_descr_remark">توجه: بیشتر چیپست‌های GPS فقط در صورتی مقدار سرعت را گزارش می‌کنند که الگوریتم، شما را در حال حرکت تشخیص دهد و اگر در حال حرکت نباشید چیزی گزارش نمی‌کنند. بنابراین استفاده از گزینهٔ «&gt;۰» در این پالایه، به تشخیص حرکت توسط چیپست GPS وابسته است. البته حتی اگر این پالایش در زمان ضبط انجام نشود، ما از این ویژگی در تحلیل‌های GPX خود استفاده می‌کنیم تا مسافت اصلاح‌شده را محاسبه کنیم؛ یعنی مقداری که برای «مسافت اصلاح‌شده» گزارش می‌کنیم میزان مسافتی است که در هنگام حرکت ضبط شده.</string>
-    <string name="monitoring_min_accuracy_descr">این مورد فقط نقاطی را ضبط می‌کند که با شاخص کمترین صحت (به متر/فوت، مطابق گزارش اندروید از چیپست) اندازه‌گیری شده‌اند. منظور از صحت، نمودار نقطه‌ای اندازه‌گیری‌های تکراری است و مستقیماً مربوط به دقت نمی‌شود (دقت: میزان نزدیکی اندازه‌گیری‌ها به موقعیت واقعی).</string>
+    <string name="monitoring_min_accuracy_descr">این مورد فقط نقاطی را ضبط می‌کند که با شاخص کمترین صحت (به متر/فوت، مطابق گزارش اندروید از چیپست) اندازه‌گیری شده‌اند. منظور از صحت، پراکندگی اندازه‌گیری‌های تکراری است و مستقیماً مربوط به دقت نمی‌شود (دقت: میزان نزدیکی اندازه‌گیری‌ها به موقعیت واقعی).</string>
     <string name="monitoring_min_accuracy_descr_side_effect">اثر جانبی: درنتیجهٔ پالایش بر اساس صحت، ممکن است مثلاً زیر پل‌ها، زیر درختان، میان ساختمان‌های بلند یا در شرایط جوّی بخصوص، نقاط تماماً از دست بروند.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">توصیه: سخت است آنچه ثبت می‌شود یا آنچه ثبت نمی‌شود را پیشبینی کنیم. شاید بهتر باشد این پالایه را خاموش کنید.</string>
     <string name="monitoring_min_accuracy_descr_remark">توجه: اگر بلافاصله پیش از ضبط، GPS خاموش بوده، ممکن است نخستین نقطه صحت کمتری داشته باشد؛ بنابراین ممکن است بخواهیم طوری کدنویسی کنیم که یک نقطه با یک یا چند ثانیه تأخیر ضبط شود (یا از سه نقطهٔ پی‌درپی بهترینشان را ضبط کنیم و...)، البته این هنوز پیاده نشده.</string>
@@ -3650,4 +3650,20 @@
     <string name="shared_string_languages">زبان‌ها</string>
     <string name="shared_string_language">زبان</string>
     <string name="shared_string_all_languages">همهٔ زبان‌ها</string>
+    <string name="ui_customization_description">تعداد اقلام کشو را به‌دلخواه تنظیم کنید، نقشه و منوی زمینه را پیکربندی نمایید.
+\n
+\nمی‌توانید افزونه‌های بی‌استفاده را غیرفعال کنید تا همهٔ کنترل‌های آن‌ها از %1$s برنامه پنهان شود.</string>
+    <string name="reset_items_descr">تنظیمات پس از پنهان‌سازی به حالت اولیه بازنشانی می‌شود.</string>
+    <string name="hidden_items_descr"></string>
+    <string name="shared_string_hidden">پنهان</string>
+    <string name="shared_string_divider">جداکننده</string>
+    <string name="reorder_or_hide_from">مرتب‌سازی یا پنهان‌سازی اقلام %1$s.</string>
+    <string name="shared_string_drawer">کشو</string>
+    <string name="ui_customization_short_descr">اقلام کشو، منوی زمینه</string>
+    <string name="ui_customization">سفارشی‌سازی واسط کاربری</string>
+    <string name="context_menu_actions">کنش‌های منوی زمینه</string>
+    <string name="main_actions_descr">کنش‌های اصلی فقط ۴ دکمه دارند.</string>
+    <string name="main_actions">کنش‌های اصلی</string>
+    <string name="additional_actions_descr">با زدن روی دکمهٔ «کنش‌ها» می‌توانید به این کنش‌ها دسترسی پیدا کنید.</string>
+    <string name="developer_plugin">افزونهٔ توسعه‌دهنده</string>
 </resources>
