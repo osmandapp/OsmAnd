@@ -359,29 +359,45 @@ task copyPoiCategiry(type: Copy) {
 	into "assets"
 }
 
-task copyStyleIcons(type: Copy) {
+task copyStyleIcons(type: Sync) {
 	from "../../resources/rendering_styles/style-icons/"
 	into "res/"
 	include "**/*.png",  "**/*.xml"
+	preserve {
+		include '**/*'
+		exclude "**/mx_*",  "**/mm_*", "**/h_*"
+	}
 }
 
 
-task copyWidgetIconsXhdpi(type: Copy) {
+task copyWidgetIconsXhdpi(type: Sync) {
 	from "res/drawable-xxhdpi/"
 	into "res/drawable-large-xhdpi/"
 	include "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
+	preserve {
+		include '*'
+		exclude "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
+	}
 }
 
-task copyWidgetIconsHdpi(type: Copy) {
+task copyWidgetIconsHdpi(type: Sync) {
 	from "res/drawable-xhdpi/"
 	into "res/drawable-large-hdpi/"
 	include "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
+	preserve {
+		include '*'
+		exclude "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
+	}
 }
 
-task copyWidgetIcons(type: Copy) {
+task copyWidgetIcons(type: Sync) {
 	from "res/drawable-hdpi/"
 	into "res/drawable-large/"
 	include "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
+	preserve {
+		include '*'
+		exclude "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
+	}
 }
 
 task collectExternalResources {

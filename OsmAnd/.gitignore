@@ -28,11 +28,10 @@ res/drawable-large-hdpi/widget_*
 res/drawable-large-xhdpi/widget_* 
 
 # rendering-styles/style-icons/
-res/drawable/mx_*
-res/drawable-hdpi/mx_*
-res/drawable-mdpi/mx_*
-res/drawable-xhdpi/mx_*
-res/drawable-xxhdpi/mx_*
+h_*
+g_*
+mm_*
+mx_*
 
 valgrind/
 bin/
