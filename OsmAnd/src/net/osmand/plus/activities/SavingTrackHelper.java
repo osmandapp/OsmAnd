@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.format.DateFormat;
 
+import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
@@ -209,7 +210,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				// save file
 				for (final String f : data.keySet()) {
 					log.debug("Filename: " + f);
-					File fout = new File(dir, f + ".gpx"); //$NON-NLS-1$
+					File fout = new File(dir, f + IndexConstants.GPX_FILE_EXT);
 					if (!data.get(f).isEmpty()) {
 						WptPt pt = data.get(f).findPointToShow();
 						String fileName = f + "_" + new SimpleDateFormat("HH-mm_EEE", Locale.US).format(new Date(pt.time)); //$NON-NLS-1$
@@ -227,10 +228,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 							}
 						}
 						filenames.add(fileName);
-						fout = new File(dir, fileName + ".gpx"); //$NON-NLS-1$
+						fout = new File(dir, fileName + IndexConstants.GPX_FILE_EXT);
 						int ind = 1;
 						while (fout.exists()) {
-							fout = new File(dir, fileName + "_" + (++ind) + ".gpx"); //$NON-NLS-1$ //$NON-NLS-2$
+							fout = new File(dir, fileName + "_" + (++ind) + IndexConstants.GPX_FILE_EXT); //$NON-NLS-1$
 						}
 					}
 

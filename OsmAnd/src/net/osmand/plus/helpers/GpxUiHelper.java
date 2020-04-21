@@ -115,6 +115,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 import static net.osmand.plus.OsmAndFormatter.FEET_IN_ONE_METER;
 import static net.osmand.plus.OsmAndFormatter.METERS_IN_KILOMETER;
@@ -307,8 +308,8 @@ public class GpxUiHelper {
 
 	public static String getGpxTitle(String fileName) {
 		String s = fileName;
-		if (s.toLowerCase().endsWith(".gpx")) {
-			s = s.substring(0, s.length() - ".gpx".length());
+		if (s.toLowerCase().endsWith(GPX_FILE_EXT)) {
+			s = s.substring(0, s.length() - GPX_FILE_EXT.length());
 		}
 		s = s.replace('_', ' ');
 		return s;
@@ -901,7 +902,7 @@ public class GpxUiHelper {
 			File[] files = dir.listFiles();
 			if (files != null) {
 				for (File f : files) {
-					if (f.getName().toLowerCase().endsWith(".gpx")) { //$NON-NLS-1$
+					if (f.getName().toLowerCase().endsWith(GPX_FILE_EXT)) {
 						list.add(new GPXInfo(absolutePath ? f.getAbsolutePath() :
 								parent + f.getName(), f.lastModified(), f.length()));
 					} else if (f.isDirectory()) {

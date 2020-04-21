@@ -633,7 +633,8 @@ public class TravelDbHelper {
 	}
 
 	public String getGPXName(TravelArticle article) {
-		return article.getTitle().replace('/', '_').replace('\'', '_').replace('\"', '_') + ".gpx";
+		return article.getTitle().replace('/', '_').replace('\'', '_')
+				.replace('\"', '_') + IndexConstants.GPX_FILE_EXT;
 	}
 
 	public File createGpxFile(TravelArticle article) {

@@ -144,7 +144,7 @@ public class DownloadActivityType {
 		} else if (GPX_FILE == this) {
 			return fileName.endsWith(IndexConstants.GPX_FILE_EXT);
 		} else if (SQLITE_FILE == this) {
-			return fileName.endsWith(IndexConstants.GPX_FILE_EXT);
+			return fileName.endsWith(IndexConstants.SQLITE_EXT);
 		}
 		return false;
 	}

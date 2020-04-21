@@ -4,8 +4,8 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.JsonUtils;
 import net.osmand.map.OsmandRegions;
-import net.osmand.plus.CustomOsmandPlugin;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
 
@@ -73,7 +73,7 @@ public class CustomIndexItem extends IndexItem {
 	@Override
 	public String getVisibleName(Context ctx, OsmandRegions osmandRegions, boolean includingParent) {
 		String name = super.getVisibleName(ctx, osmandRegions, includingParent);
-		return CustomOsmandPlugin.getLocalizedResFromMap(ctx, names, name);
+		return JsonUtils.getLocalizedResFromMap(ctx, names, name);
 	}
 
 	public List<String> getDescriptionImageUrl() {
@@ -82,7 +82,7 @@ public class CustomIndexItem extends IndexItem {
 
 	public String getLocalizedDescription(Context ctx) {
 		String description = super.getDescription();
-		return CustomOsmandPlugin.getLocalizedResFromMap(ctx, descriptions, description);
+		return JsonUtils.getLocalizedResFromMap(ctx, descriptions, description);
 	}
 
 	public String getWebUrl() {
@@ -90,7 +90,7 @@ public class CustomIndexItem extends IndexItem {
 	}
 
 	public String getWebButtonText(Context ctx) {
-		return CustomOsmandPlugin.getLocalizedResFromMap(ctx, webButtonTexts, null);
+		return JsonUtils.getLocalizedResFromMap(ctx, webButtonTexts, null);
 	}
 
 	public static class CustomIndexItemBuilder {

@@ -1,8 +1,6 @@
 package net.osmand.plus;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.res.Configuration;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
@@ -10,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
+import net.osmand.JsonUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
@@ -83,12 +82,12 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 
 	@Override
 	public String getName() {
-		return getLocalizedResFromMap(app, names, app.getString(R.string.custom_osmand_plugin));
+		return JsonUtils.getLocalizedResFromMap(app, names, app.getString(R.string.custom_osmand_plugin));
 	}
 
 	@Override
 	public String getDescription() {
-		return getLocalizedResFromMap(app, descriptions, null);
+		return JsonUtils.getLocalizedResFromMap(app, descriptions, null);
 	}
 
 	public String getResourceDirName() {
@@ -310,10 +309,10 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	}
 
 	public void readAdditionalDataFromJson(JSONObject json) throws JSONException {
-		iconNames = getLocalizedMapFromJson("icon", json);
-		imageNames = getLocalizedMapFromJson("image", json);
-		names = getLocalizedMapFromJson("name", json);
-		descriptions = getLocalizedMapFromJson("description", json);
+		iconNames = JsonUtils.getLocalizedMapFromJson("icon", json);
+		imageNames = JsonUtils.getLocalizedMapFromJson("image", json);
+		names = JsonUtils.getLocalizedMapFromJson("name", json);
+		descriptions = JsonUtils.getLocalizedMapFromJson("description", json);
 
 		JSONArray regionsJson = json.optJSONArray("regionsJson");
 		if (regionsJson != null) {
@@ -322,10 +321,10 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	}
 
 	public void writeAdditionalDataToJson(JSONObject json) throws JSONException {
-		writeLocalizedMapToJson("icon", json, iconNames);
-		writeLocalizedMapToJson("image", json, imageNames);
-		writeLocalizedMapToJson("name", json, names);
-		writeLocalizedMapToJson("description", json, descriptions);
+		JsonUtils.writeLocalizedMapToJson("icon", json, iconNames);
+		JsonUtils.writeLocalizedMapToJson("image", json, imageNames);
+		JsonUtils.writeLocalizedMapToJson("name", json, names);
+		JsonUtils.writeLocalizedMapToJson("description", json, descriptions);
 
 		JSONArray regionsJson = new JSONArray();
 		for (WorldRegion region : getFlatCustomRegions()) {
@@ -352,14 +351,14 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	}
 
 	public void readDependentFilesFromJson(JSONObject json) throws JSONException {
-		rendererNames = jsonArrayToList("rendererNames", json);
-		routerNames = jsonArrayToList("routerNames", json);
+		rendererNames = JsonUtils.jsonArrayToList("rendererNames", json);
+		routerNames = JsonUtils.jsonArrayToList("routerNames", json);
 		resourceDirName = json.optString("pluginResDir");
 	}
 
 	public void writeDependentFilesJson(JSONObject json) throws JSONException {
-		writeStringListToJson("rendererNames", json, rendererNames);
-		writeStringListToJson("routerNames", json, routerNames);
+		JsonUtils.writeStringListToJson("rendererNames", json, rendererNames);
+		JsonUtils.writeStringListToJson("routerNames", json, routerNames);
 
 		json.put("pluginResDir", resourceDirName);
 	}
@@ -427,72 +426,13 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		try {
 			return DownloadResources.findIndexItemsAt(app, latLon, type);
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 		return Collections.emptyList();
 	}
 
 	private List<IndexItem> getMapsForType(List<String> names, DownloadActivityType type, int limit) {
 		return DownloadResources.findIndexItemsAt(app, names, type, false, limit);
-	}
-
-	public static String getLocalizedResFromMap(Context ctx, Map<String, String> localizedMap, String defVal) {
-		if (!Algorithms.isEmpty(localizedMap)) {
-			Configuration config = ctx.getResources().getConfiguration();
-			String lang = config.locale.getLanguage();
-			String name = localizedMap.get(lang);
-			if (Algorithms.isEmpty(name)) {
-				name = localizedMap.get("");
-			}
-			if (!Algorithms.isEmpty(name)) {
-				return name;
-			}
-		}
-		return defVal;
-	}
-
-	public static List<String> jsonArrayToList(String key, JSONObject json) throws JSONException {
-		List<String> items = new ArrayList<>();
-		JSONArray jsonArray = json.optJSONArray(key);
-		if (jsonArray != null) {
-			for (int i = 0; i < jsonArray.length(); i++) {
-				items.add(jsonArray.getString(i));
-			}
-		}
-		return items;
-	}
-
-	public static Map<String, String> getLocalizedMapFromJson(String key, JSONObject json) throws JSONException {
-		Map<String, String> localizedMap = new HashMap<>();
-		JSONObject jsonObject = json.optJSONObject(key);
-		if (jsonObject != null) {
-			for (Iterator<String> it = jsonObject.keys(); it.hasNext(); ) {
-				String localeKey = it.next();
-				String name = jsonObject.getString(localeKey);
-				localizedMap.put(localeKey, name);
-			}
-		}
-		return localizedMap;
-	}
-
-	public static void writeStringListToJson(String key, JSONObject json, List<String> items) throws JSONException {
-		if (!Algorithms.isEmpty(items)) {
-			JSONArray jsonArray = new JSONArray();
-			for (String render : items) {
-				jsonArray.put(render);
-			}
-			json.put(key, jsonArray);
-		}
-	}
-
-	public static void writeLocalizedMapToJson(String jsonKey, JSONObject json, Map<String, String> map) throws JSONException {
-		if (!Algorithms.isEmpty(map)) {
-			JSONObject jsonObject = new JSONObject();
-			for (Map.Entry<String, String> entry : map.entrySet()) {
-				jsonObject.put(entry.getKey(), entry.getValue());
-			}
-			json.put(jsonKey, jsonObject);
-		}
 	}
 
 	public interface PluginItemsListener {

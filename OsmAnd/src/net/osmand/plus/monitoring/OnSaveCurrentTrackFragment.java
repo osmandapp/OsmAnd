@@ -25,6 +25,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -74,7 +75,7 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 		}
 
 		Context ctx = requireContext();
-		file = new File(app.getAppCustomization().getTracksDir(), savedGpxName + ".gpx");
+		file = new File(app.getAppCustomization().getTracksDir(), savedGpxName + IndexConstants.GPX_FILE_EXT);
 		final boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		final int textPrimaryColor = nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
 		View mainView = UiUtilities.getInflater(ctx, nightMode).inflate(R.layout.fragment_on_save_current_track, container);
@@ -175,7 +176,7 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 			return null;
 		}
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
-		File savedFile = new File(app.getAppCustomization().getTracksDir(), new File(savedGpxDir, savedGpxName + ".gpx").getPath());
+		File savedFile = new File(app.getAppCustomization().getTracksDir(), new File(savedGpxDir, savedGpxName + IndexConstants.GPX_FILE_EXT).getPath());
 		if (savedGpxName.equalsIgnoreCase(newGpxName)) {
 			return savedFile;
 		}
@@ -183,7 +184,7 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 			Toast.makeText(app, R.string.empty_filename, Toast.LENGTH_LONG).show();
 			return null;
 		}
-		return LocalIndexesFragment.renameGpxFile(app, savedFile, newGpxName + ".gpx", true, null);
+		return LocalIndexesFragment.renameGpxFile(app, savedFile, newGpxName + IndexConstants.GPX_FILE_EXT, true, null);
 	}
 
 	private void showOnMap(File f, boolean animated) {

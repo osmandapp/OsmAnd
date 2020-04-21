@@ -83,6 +83,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_MAP_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_SCREEN_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DASHBOARD_ID;
@@ -111,7 +112,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_S
 import static net.osmand.plus.ContextMenuAdapter.PROFILES_CHOSEN_PROFILE_TAG;
 import static net.osmand.plus.ContextMenuAdapter.PROFILES_CONTROL_BUTTON_TAG;
 import static net.osmand.plus.ContextMenuAdapter.PROFILES_NORMAL_PROFILE_TAG;
-import static net.osmand.plus.helpers.ImportHelper.GPX_SUFFIX;
 
 
 public class MapActivityActions implements DialogProvider {
@@ -282,8 +282,8 @@ public class MapActivityActions implements DialogProvider {
 				fileDir.mkdirs();
 				File toSave = fileDir;
 				if (name.length() > 0) {
-					if (!name.endsWith(GPX_SUFFIX)) {
-						name += GPX_SUFFIX;
+					if (!name.endsWith(GPX_FILE_EXT)) {
+						name += GPX_FILE_EXT;
 					}
 					toSave = new File(fileDir, name);
 				}
@@ -320,7 +320,7 @@ public class MapActivityActions implements DialogProvider {
 			if (params.length > 0) {
 				File file = params[0];
 				String fileName = file.getName();
-				GPXFile gpx = app.getRoutingHelper().generateGPXFileWithRoute(fileName.substring(0,fileName.length()-GPX_SUFFIX.length()));
+				GPXFile gpx = app.getRoutingHelper().generateGPXFileWithRoute(fileName.substring(0,fileName.length()-GPX_FILE_EXT.length()));
 				GPXUtilities.writeGpxFile(file, gpx);
 				return app.getString(R.string.route_successfully_saved_at, file.getName());
 			}

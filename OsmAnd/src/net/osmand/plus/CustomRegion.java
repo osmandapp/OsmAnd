@@ -2,6 +2,7 @@ package net.osmand.plus;
 
 import androidx.annotation.ColorInt;
 
+import net.osmand.JsonUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.download.CustomIndexItem;
@@ -78,7 +79,7 @@ public class CustomRegion extends WorldRegion {
 			region.parentPath = path.substring(0, index);
 		}
 
-		region.names = CustomOsmandPlugin.getLocalizedMapFromJson("name", object);
+		region.names = JsonUtils.getLocalizedMapFromJson("name", object);
 		if (!Algorithms.isEmpty(region.names)) {
 			region.regionName = region.names.get("");
 			region.regionNameEn = region.names.get("");
@@ -86,8 +87,8 @@ public class CustomRegion extends WorldRegion {
 			region.regionNameLocale = region.names.get("");
 		}
 
-		region.icons = CustomOsmandPlugin.getLocalizedMapFromJson("icon", object);
-		region.headers = CustomOsmandPlugin.getLocalizedMapFromJson("header", object);
+		region.icons = JsonUtils.getLocalizedMapFromJson("icon", object);
+		region.headers = JsonUtils.getLocalizedMapFromJson("header", object);
 
 		region.headerButton = object.optString("header-button", null);
 		region.downloadItemsJson = object.optJSONArray("items");
@@ -119,10 +120,10 @@ public class CustomRegion extends WorldRegion {
 					String downloadUrl = itemJson.optString("downloadurl");
 					String size = new DecimalFormat("#.#").format(containerSize / (1024f * 1024f));
 
-					List<String> descrImageUrl = CustomOsmandPlugin.jsonArrayToList("image-description-url", itemJson);
-					Map<String, String> indexNames = CustomOsmandPlugin.getLocalizedMapFromJson("name", itemJson);
-					Map<String, String> descriptions = CustomOsmandPlugin.getLocalizedMapFromJson("description", itemJson);
-					Map<String, String> webButtonText = CustomOsmandPlugin.getLocalizedMapFromJson("web-button-text", itemJson);
+					List<String> descrImageUrl = JsonUtils.jsonArrayToList("image-description-url", itemJson);
+					Map<String, String> indexNames = JsonUtils.getLocalizedMapFromJson("name", itemJson);
+					Map<String, String> descriptions = JsonUtils.getLocalizedMapFromJson("description", itemJson);
+					Map<String, String> webButtonText = JsonUtils.getLocalizedMapFromJson("web-button-text", itemJson);
 
 					DownloadActivityType type = DownloadActivityType.getIndexType(indexType);
 					if (type != null) {
@@ -161,9 +162,9 @@ public class CustomRegion extends WorldRegion {
 		jsonObject.putOpt("subfolder", subfolder);
 		jsonObject.putOpt("header-button", headerButton);
 
-		CustomOsmandPlugin.writeLocalizedMapToJson("name", jsonObject, names);
-		CustomOsmandPlugin.writeLocalizedMapToJson("icon", jsonObject, icons);
-		CustomOsmandPlugin.writeLocalizedMapToJson("header", jsonObject, headers);
+		JsonUtils.writeLocalizedMapToJson("name", jsonObject, names);
+		JsonUtils.writeLocalizedMapToJson("icon", jsonObject, icons);
+		JsonUtils.writeLocalizedMapToJson("header", jsonObject, headers);
 
 		jsonObject.putOpt("items", downloadItemsJson);
 
