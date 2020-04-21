@@ -133,7 +133,7 @@
     <string name="poi_atv">Cuatriciclos;Concesionaria de cuatriciclos</string>
     <string name="poi_cosmetics">Cosméticos</string>
     <string name="poi_marketplace">Mercado</string>
-    <string name="poi_sewing">Artículos de costura;Telas;Mercería</string>
+    <string name="poi_sewing">Mercería;Artículos de costura;Telas</string>
     <string name="poi_police">Policía</string>
     <string name="poi_fire_station">Cuartel de bomberos</string>
     <string name="poi_emergency_phone">Teléfono de emergencia</string>

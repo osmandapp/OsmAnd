@@ -65,6 +65,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
+import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
+
 /**
  * Object is responsible to maintain layers using by map activity
  */
@@ -268,7 +270,7 @@ public class MapActivityLayers {
 	public void showMultichoicePoiFilterDialog(final OsmandMapTileView mapView, final DismissListener listener) {
 		final OsmandApplication app = getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
-		final ContextMenuAdapter adapter = new ContextMenuAdapter();
+		final ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 		final List<PoiUIFilter> list = new ArrayList<>();
 		for (PoiUIFilter f : poiFilters.getSortedPoiFilters(true)) {
 			addFilterToList(adapter, list, f, true);
@@ -304,9 +306,9 @@ public class MapActivityLayers {
 								if (filter.isStandardFilter()) {
 									filter.removeUnsavedFilterByName();
 								}
-								getApplication().getPoiFilters().addSelectedPoiFilter(filter);
+								poiFilters.addSelectedPoiFilter(PoiTemplateList.POI, filter);
 							} else {
-								getApplication().getPoiFilters().removeSelectedPoiFilter(filter);
+								poiFilters.removeSelectedPoiFilter(PoiTemplateList.POI, filter);
 							}
 						}
 						mapView.refreshMap();
@@ -342,7 +344,7 @@ public class MapActivityLayers {
 	public void showSingleChoicePoiFilterDialog(final OsmandMapTileView mapView, final DismissListener listener) {
 		final OsmandApplication app = getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
-		final ContextMenuAdapter adapter = new ContextMenuAdapter();
+		final ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.shared_string_search, app)
 				.setIcon(R.drawable.ic_action_search_dark).createItem());
@@ -368,8 +370,8 @@ public class MapActivityLayers {
 					if (pf.isStandardFilter()) {
 						pf.removeUnsavedFilterByName();
 					}
-					getApplication().getPoiFilters().clearSelectedPoiFilters();
-					getApplication().getPoiFilters().addSelectedPoiFilter(pf);
+					poiFilters.clearSelectedPoiFilters(PoiTemplateList.POI);
+					poiFilters.addSelectedPoiFilter(PoiTemplateList.POI, pf);
 					mapView.refreshMap();
 				}
 			}

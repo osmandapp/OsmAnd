@@ -345,8 +345,8 @@
     <string name="poi_internet_access_service">Internetové pripojenie: služba</string>
     <string name="poi_monastery">Kláštor</string>
     <string name="poi_historic_monastery">Historický kláštor</string>
-    <string name="poi_wayside_cross">Božie muky</string>
-    <string name="poi_wayside_shrine">Malá kaplnka pri ceste</string>
+    <string name="poi_wayside_cross">Božie muky/Náboženský prícestný kríž</string>
+    <string name="poi_wayside_shrine">Náboženská prícestná schránka</string>
     <string name="poi_information">Informácie</string>
     <string name="poi_clock">Hodiny</string>
     <string name="poi_travel_agent">Cestovná kancelária</string>
@@ -2898,7 +2898,7 @@
     <string name="poi_animal_shelter_horse">Kone</string>
     <string name="poi_animal_shelter_mammal">Cicavce</string>
     <string name="poi_animal_shelter_fish">Ryby</string>
-    <string name="poi_information_route_marker">Značenie trasy</string>
+    <string name="poi_information_route_marker">Turistická/trasová značka</string>
     <string name="poi_bridge_movable_swing">Typ pohyblivého mostu: otočný</string>
     <string name="poi_bridge_movable_lift">Typ pohyblivého mostu: zdvíhací</string>
     <string name="poi_bridge_movable_drawbridge">Typ pohyblivého mostu: padací</string>
@@ -3273,7 +3273,7 @@
     <string name="poi_denomination_maronite">Maronitský</string>
     <string name="poi_denomination_mahayana">Mahájana</string>
     <string name="poi_deadlock">Zamrznutí</string>
-    <string name="poi_information_trail_blaze">Turistická značka</string>
+    <string name="poi_information_trail_blaze">Turistická/trasová značka</string>
     <string name="poi_memorial_koshinto"/>
     <string name="poi_memorial_jizo"/>
     <string name="poi_memorial_prasat"/>
@@ -3552,4 +3552,6 @@
     <string name="poi_bath_open_air_no">Nie</string>
     <string name="poi_resort_hunting">Poľovnícka základňa</string>
     <string name="poi_dive_centre">Potápačské centrum</string>
+    <string name="poi_video_telephone">Video</string>
+    <string name="poi_sms">SMS</string>
 </resources>

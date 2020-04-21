@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,10 +46,10 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import net.osmand.AndroidUtils;
-import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
@@ -66,6 +68,7 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndFormatter;
@@ -74,6 +77,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
@@ -107,6 +111,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
 import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_LOCATION_KEY;
 import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_QUERY_KEY;
 import static net.osmand.search.core.ObjectType.POI_TYPE;
@@ -383,8 +388,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							} else {
 								filter = (PoiUIFilter) searchPhrase.getLastSelectedWord().getResult().object;
 							}
-							app.getPoiFilters().clearSelectedPoiFilters();
-							app.getPoiFilters().addSelectedPoiFilter(filter);
+							app.getPoiFilters().clearSelectedPoiFilters(PoiTemplateList.POI);
+							app.getPoiFilters().addSelectedPoiFilter(PoiTemplateList.POI, filter);
 
 							mapActivity.getContextMenu().closeActiveToolbar();
 							showToolbar();
@@ -861,7 +866,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void closeSearch() {
-		app.getPoiFilters().clearSelectedPoiFilters();
+		app.getPoiFilters().clearSelectedPoiFilters(PoiTemplateList.POI);
 		dismiss();
 	}
 
@@ -1237,15 +1242,40 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						app.getString(R.string.rearrange_categories), new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						RearrangePoiFiltersFragment.showInstance(QuickSearchDialogFragment.this, false, new CallbackWithObject<Boolean>() {
+						ApplicationMode appMode = app.getSettings().getApplicationMode();
+						RearrangePoiFiltersFragment.showInstance(appMode, QuickSearchDialogFragment.this, false,
+								new RearrangePoiFiltersFragment.OnApplyPoiFiltersState() {
 
-							@Override
-							public boolean processResult(Boolean changed) {
-								if (changed) {
-									searchHelper.refreshFilterOrders();
-									reloadCategoriesInternal();
-								}
-								return false;
+									@Override
+									public void onApplyPoiFiltersState(final ApplicationMode appMode, boolean stateChanged) {
+										if (stateChanged) {
+											searchHelper.refreshFilterOrders();
+											reloadCategoriesInternal();
+										}
+										View containerView = getView();
+										if (containerView != null) {
+											//show "Apply to all profiles" SnackBar
+											String modeName = appMode.toHumanString();
+											String text = app.getString(R.string.changes_applied_to_profile, modeName);
+											SpannableString message = UiUtilities.createSpannableString(text, modeName, new StyleSpan(Typeface.BOLD));
+											Snackbar snackbar = Snackbar.make(containerView, message, Snackbar.LENGTH_LONG)
+													.setAction(R.string.apply_to_all_profiles, new View.OnClickListener() {
+														@Override
+														public void onClick(View view) {
+															OsmandSettings settings = app.getSettings();
+															String orders = settings.POI_FILTERS_ORDER.getModeValue(appMode);
+															String inactive = settings.INACTIVE_POI_FILTERS.getModeValue(appMode);
+															for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+																settings.POI_FILTERS_ORDER.setModeValue(mode, orders);
+																settings.INACTIVE_POI_FILTERS.setModeValue(mode, inactive);
+															}
+															searchHelper.refreshFilterOrders();
+															reloadCategoriesInternal();
+														}
+													});
+											UiUtilities.setupSnackbarVerticalLayout(snackbar);
+											snackbar.show();
+									}
 							}
 						});
 					}

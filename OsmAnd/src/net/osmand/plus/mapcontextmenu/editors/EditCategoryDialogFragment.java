@@ -15,10 +15,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.util.Algorithms;
@@ -68,18 +70,19 @@ public class EditCategoryDialogFragment extends DialogFragment {
 		} else if (getArguments() != null) {
 			restoreState(getArguments());
 		}
-
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
 		builder.setTitle(R.string.favorite_category_add_new_title);
-		final View v = activity.getLayoutInflater().inflate(R.layout.favorite_category_edit_dialog, null, false);
+		final View v = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.favorite_category_edit_dialog, null, false);
 
 		nameEdit = (EditText)v.findViewById(R.id.edit_name);
 		nameEdit.setText(name);
-
+		nameEdit.requestFocus();
+		AndroidUtils.softKeyboardDelayed(nameEdit);
 		colorSpinner = (Spinner)v.findViewById(R.id.edit_color);
 		final TIntArrayList colors = new TIntArrayList();
 		final int intColor = color;
-		ColorDialogs.setupColorSpinnerEx(activity, intColor, colorSpinner, colors, new AdapterView.OnItemSelectedListener() {
+		ColorDialogs.setupColorSpinnerEx(v.getContext(), intColor, colorSpinner, colors, new AdapterView.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				color = colors.get(position);
@@ -151,7 +154,19 @@ public class EditCategoryDialogFragment extends DialogFragment {
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onStop() {
+		Dialog dialog = getDialog();
+		if (dialog != null) {
+			MapActivity mapActivity = (MapActivity) getDialog().getOwnerActivity();
+			if (mapActivity != null) {
+				AndroidUtils.hideSoftKeyboard(mapActivity, mapActivity.getCurrentFocus());
+			}
+		}
+		super.onStop();
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		saveState(outState);
 		super.onSaveInstanceState(outState);
 	}

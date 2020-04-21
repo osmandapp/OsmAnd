@@ -83,10 +83,10 @@
 								android:layout_height="wrap_content"
 								android:drawableEnd="@drawable/btn_circle_transparent_full"
 								android:drawableRight="@drawable/btn_circle_transparent_full"
-								android:drawablePadding="50dp"
+								android:drawablePadding="60dp"
 								android:inputType="textMultiLine"
 								android:maxLines="4"
-								android:minHeight="50dp"
+								android:minHeight="60dp"
 								android:paddingStart="12dp"
 								android:paddingLeft="12dp"
 								android:paddingRight="12dp"
@@ -103,7 +103,8 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_gravity="end"
-						android:layout_margin="10dp"
+						android:layout_margin="12dp"
+						android:scaleType="center"
 						android:contentDescription="@string/icon"
 						android:src="@drawable/ic_action_home_dark" />
 
@@ -134,11 +135,10 @@
 							android:layout_height="wrap_content"
 							android:inputType="textMultiLine"
 							android:maxLines="4"
-							android:minHeight="50dp"
+							android:minHeight="60dp"
 							android:paddingStart="12dp"
 							android:paddingLeft="12dp"
 							android:paddingRight="12dp"
-							android:scrollHorizontally="false"
 							android:textSize="16sp"
 							tools:text="@string/lorem_ipsum" />
 
@@ -448,9 +448,9 @@
 							android:layout_height="wrap_content"
 							android:ellipsize="end"
 							android:lines="1"
-							android:text="@string/update_existing"
+							android:text="@string/replace_point_descr"
 							android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
-							tools:text="@string/update_existing" />
+							tools:text="@string/replace_point_descr" />
 
 					</LinearLayout>
 

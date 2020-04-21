@@ -55,12 +55,14 @@ public class JSMediaCommandPlayerImpl extends MediaCommandPlayerImpl {
         // If we have not already started to play audio, start.
         if (mediaPlayer == null) {
             requestAudioFocus();
-            // Delay first prompt of each batch to allow BT SCO connection being established
-            if (ctx != null && ctx.getSettings().AUDIO_MANAGER_STREAM.getModeValue(getApplicationMode()) == 0) {
-                try {
-                    log.debug("Delaying MediaCommandPlayer for BT SCO");
-                    Thread.sleep(ctx.getSettings().BT_SCO_DELAY.get());
-                } catch (InterruptedException e) {
+            // Delay first prompt of each batch to allow BT SCO link being established, or when VOICE_PROMPT_DELAY is set >0 for the other stream types
+            if (ctx != null) {
+                int vpd = ctx.getSettings().VOICE_PROMPT_DELAY[ctx.getSettings().AUDIO_MANAGER_STREAM.getModeValue(getApplicationMode())].get();
+                if (vpd > 0) {
+                    try {
+                        Thread.sleep(vpd);
+                    } catch (InterruptedException e) {
+                    }
                 }
             }
         }

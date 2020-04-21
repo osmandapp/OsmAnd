@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="?attr/expandable_list_item_background"
-    android:minHeight="@dimen/list_item_height"
+    android:minHeight="@dimen/favorites_list_item_height"
     android:orientation="vertical">
 
     <View
@@ -20,40 +20,45 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="?attr/dashboard_divider"
-        android:layout_marginLeft="54dp"
         android:visibility="gone"
-        android:layout_marginStart="54dp" />
+        android:layout_marginLeft="@dimen/settings_divider_margin_start"
+        android:layout_marginStart="@dimen/settings_divider_margin_start" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="@dimen/favorites_list_item_height"
         android:layout_gravity="center_vertical"
         android:orientation="horizontal"
+        android:paddingStart="@dimen/list_header_padding"
         android:paddingLeft="@dimen/list_header_padding"
-        android:paddingStart="@dimen/list_header_padding">
+        android:paddingEnd="@dimen/list_header_padding"
+        android:paddingRight="@dimen/list_header_padding">
 
         <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_width="@dimen/favorites_icon_size"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical">
 
             <CheckBox
                 android:id="@+id/toggle_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="@dimen/list_content_padding"
+                android:layout_marginStart="@dimen/list_header_padding"
+                android:layout_marginLeft="@dimen/list_header_padding"
                 android:focusable="false"
                 android:visibility="gone"
-                tools:visibility="visible"
-                android:layout_marginEnd="@dimen/list_content_padding" />
+                tools:visibility="visible" />
 
             <ImageView
                 android:id="@+id/favourite_icon"
-                android:layout_width="@dimen/favorites_icon_size"
-                android:layout_height="@dimen/favorites_icon_size"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="@dimen/list_header_padding"
-	            android:layout_marginEnd="@dimen/list_header_padding" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/favorite"
+                android:scaleType="center"
+                tools:src="@drawable/bg_point_circle"/>
         </FrameLayout>
 
         <LinearLayout
@@ -62,18 +67,23 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:paddingTop="6dp"
-            android:paddingRight="@dimen/list_content_padding"
-            android:paddingBottom="6dp"
-	        android:paddingEnd="@dimen/list_content_padding">
+            android:layout_marginStart="@dimen/favorites_icon_right_margin"
+            android:layout_marginLeft="@dimen/favorites_icon_right_margin"
+            android:layout_marginEnd="@dimen/favorites_icon_right_margin"
+            android:layout_marginRight="@dimen/favorites_icon_right_margin"
+            android:paddingTop="@dimen/context_menu_padding_margin_small"
+            android:paddingBottom="@dimen/context_menu_padding_margin_small">
 
             <TextView
                 android:id="@+id/favourite_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:scrollbars="none"
                 android:textColor="?android:textColorPrimary"
+                android:layout_marginBottom="@dimen/subHeaderPadding"
                 android:textSize="@dimen/default_list_text_size"
-                tools:text="@string/lorem_ipsum"/>
+                tools:text="@string/lorem_ipsum" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -84,62 +94,65 @@
                     android:id="@+id/direction"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:layout_marginTop="2dp"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="@string/show_view_angle"
                     android:src="@drawable/ic_direction_arrow" />
 
                 <TextView
                     android:id="@+id/distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
+                    android:layout_marginStart="@dimen/gpx_small_icon_margin"
+                    android:layout_marginLeft="@dimen/gpx_small_icon_margin"
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:textColor="?android:textColorSecondary"
-                    android:textSize="@dimen/default_sub_text_size"
-                    tools:text="100500 km"
-	                android:layout_marginStart="2dp" />
+                    android:textSize="@dimen/default_desc_text_size"
+                    tools:text="100500 km" />
 
                 <ImageView
                     android:id="@+id/group_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="4dp"
-                    android:src="@drawable/ic_small_group"
-	                android:layout_marginStart="4dp" />
+                    android:layout_marginStart="@dimen/list_item_button_padding"
+                    android:layout_marginLeft="@dimen/list_item_button_padding"
+                    android:contentDescription="@string/favorite_category_name"
+                    android:src="@drawable/ic_small_group" />
 
                 <TextView
                     android:id="@+id/group_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="2dp"
+                    android:layout_marginStart="@dimen/gpx_small_icon_margin"
+                    android:layout_marginLeft="@dimen/gpx_small_icon_margin"
                     android:textColor="?android:textColorSecondary"
-                    android:textSize="@dimen/default_sub_text_size"
-	                android:layout_marginStart="2dp" />
+                    android:textSize="@dimen/default_desc_text_size" />
             </LinearLayout>
         </LinearLayout>
 
         <ImageButton
             android:id="@+id/navigate_to"
-            android:contentDescription="@string/context_menu_item_directions_to"
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"
             android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/dashFavIconMargin"
             android:layout_marginLeft="@dimen/dashFavIconMargin"
             android:background="?attr/dashboard_button"
+            android:contentDescription="@string/context_menu_item_directions_to"
             android:src="@drawable/ic_action_test_light"
-            android:visibility="gone"
-	        android:layout_marginStart="@dimen/dashFavIconMargin" />
+            android:visibility="gone" />
 
         <ImageButton
             android:id="@+id/options"
-            android:contentDescription="@string/shared_string_more"
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"
             android:layout_gravity="center_vertical"
             android:background="?attr/dashboard_button"
+            android:contentDescription="@string/shared_string_more"
             android:src="@drawable/ic_overflow_menu_white"
-            android:visibility="gone"/>
+            android:visibility="gone" />
     </LinearLayout>
 
 </LinearLayout>

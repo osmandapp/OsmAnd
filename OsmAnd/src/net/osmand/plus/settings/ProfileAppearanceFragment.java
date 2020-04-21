@@ -33,6 +33,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
@@ -261,6 +262,18 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 					}
 				}
 			});
+			getListView().addOnScrollListener(new RecyclerView.OnScrollListener() {
+				@Override
+				public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+					super.onScrollStateChanged(recyclerView, newState);
+					if (newState != RecyclerView.SCROLL_STATE_IDLE) {
+						hideKeyboard();
+						if (profileName != null) {
+							profileName.clearFocus();
+						}
+					}
+				}
+			});
 		}
 		return view;
 	}
@@ -349,13 +362,21 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 					}
 				}
 			});
+			profileName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+				@Override
+				public void onFocusChange(View v, boolean hasFocus) {
+					if(hasFocus){
+						profileName.setSelection(profileName.getText().length());
+						AndroidUtils.showSoftKeyboard(profileName);
+					}
+				}
+			});
 			if (getSelectedAppMode().equals(ApplicationMode.DEFAULT) && !isNewProfile) {
 				profileName.setFocusableInTouchMode(false);
 				profileName.setFocusable(false);
-			} else {
-				profileName.requestFocus();
 			}
 			profileNameOtfb = (OsmandTextFieldBoxes) holder.findViewById(R.id.profile_name_otfb);
+			updateProfileNameAppearance();
 		} else if (MASTER_PROFILE.equals(preference.getKey())) {
 			baseProfileName = (EditText) holder.findViewById(R.id.master_profile_et);
 			baseProfileName.setFocusable(false);
@@ -402,7 +423,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				View iconItem = createIconItemView(iconRes, iconItems);
 				iconItems.addView(iconItem, new FlowLayout.LayoutParams(0, 0));
 			}
-			setIconNewColor(changedProfile.iconRes);
+			setIconColor(changedProfile.iconRes);
 		} else if (LOCATION_ICON_ITEMS.equals(preference.getKey())) {
 			locationIconItems = (FlowLayout) holder.findViewById(R.id.color_items);
 			locationIconItems.removeAllViews();
@@ -452,9 +473,11 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			public void onClick(View v) {
 				if (colorRes != changedProfile.color) {
 					updateColorSelector(colorRes);
+					setVerticalScrollBarEnabled(false);
 					updatePreference(findPreference(MASTER_PROFILE));
 					updatePreference(findPreference(LOCATION_ICON_ITEMS));
 					updatePreference(findPreference(NAV_ICON_ITEMS));
+					setVerticalScrollBarEnabled(true);
 				}
 			}
 		});
@@ -482,7 +505,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		colorItem.findViewById(R.id.checkMark).setVisibility(View.VISIBLE);
 		changedProfile.color = color;
 		if (iconItems != null) {
-			setIconNewColor(changedProfile.iconRes);
+			updateIconColor(changedProfile.iconRes);
 		}
 		updateProfileNameAppearance();
 		updateProfileButton();
@@ -521,7 +544,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	}
 
 	private void updateIconSelector(int iconRes) {
-		setIconNewColor(iconRes);
+		updateIconColor(iconRes);
 		View iconItem = iconItems.findViewWithTag(changedProfile.iconRes);
 		iconItem.findViewById(R.id.outline).setVisibility(View.GONE);
 		ImageView checkMark = iconItem.findViewById(R.id.checkMark);
@@ -552,7 +575,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			@Override
 			public void onClick(View v) {
 				if (locationIcon != changedProfile.locationIcon) {
+					setVerticalScrollBarEnabled(false);
 					updateLocationIconSelector(locationIcon);
+					setVerticalScrollBarEnabled(true);
 				}
 			}
 		});
@@ -596,7 +621,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			@Override
 			public void onClick(View v) {
 				if (navigationIcon != changedProfile.navigationIcon) {
+					setVerticalScrollBarEnabled(false);
 					updateNavigationIconSelector(navigationIcon);
+					setVerticalScrollBarEnabled(true);
 				}
 			}
 		});
@@ -621,7 +648,13 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		changedProfile.navigationIcon = navigationIcon;
 	}
 
-	private void setIconNewColor(int iconRes) {
+	private void updateIconColor(int iconRes) {
+		setVerticalScrollBarEnabled(false);
+		setIconColor(iconRes);
+		setVerticalScrollBarEnabled(true);
+	}
+
+	private void setIconColor(int iconRes) {
 		int changedProfileColor = ContextCompat.getColor(app, changedProfile.color.getColor(
 				app.getDaynightHelper().isNightModeForMapControls()));
 		View iconItem = iconItems.findViewWithTag(iconRes);
@@ -638,6 +671,20 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			outlineCircle.setVisibility(View.VISIBLE);
 			ImageView checkMark = iconItem.findViewById(R.id.checkMark);
 			checkMark.setImageDrawable(app.getUIUtilities().getPaintedIcon(iconRes, changedProfileColor));
+		}
+	}
+
+	private void setVerticalScrollBarEnabled(boolean enabled) {
+		final RecyclerView preferenceListView = getListView();
+		if (enabled) {
+			preferenceListView.post(new Runnable() {
+				@Override
+				public void run() {
+					preferenceListView.setVerticalScrollBarEnabled(true);
+				}
+			});
+		} else {
+			preferenceListView.setVerticalScrollBarEnabled(false);
 		}
 	}
 
@@ -770,7 +817,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				tempDir.mkdirs();
 			}
 			app.getSettingsHelper().exportSettings(tempDir, mode.getStringKey(),
-					getSettingsExportListener(), new SettingsHelper.ProfileSettingsItem(app, mode));
+					getSettingsExportListener(), true, new SettingsHelper.ProfileSettingsItem(app, mode));
 		}
 	}
 

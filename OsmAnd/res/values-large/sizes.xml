@@ -160,6 +160,7 @@
 	<dimen name="bottom_sheet_divider_margin_start">84dp</dimen>
 	<dimen name="bottom_sheet_image_text_margin_start">15dp</dimen>
 	<dimen name="bottom_sheet_selected_item_title_height">84dp</dimen>
+	<dimen name="bottom_sheet_big_item_height">192dp</dimen>
 
 	<dimen name="action_bar_image_width_land">354dp</dimen>
 	<dimen name="action_bar_image_top_margin_land">102dp</dimen>

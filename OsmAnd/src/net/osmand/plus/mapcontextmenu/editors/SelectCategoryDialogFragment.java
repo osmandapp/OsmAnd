@@ -70,26 +70,29 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 		}
 
 		final FragmentActivity activity = requireActivity();
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		final OsmandApplication app = (OsmandApplication) activity.getApplication();
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
 		builder.setTitle(R.string.favorite_category_select);
-		final View v = activity.getLayoutInflater().inflate(R.layout.favorite_categories_dialog, null, false);
+		final View v = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.favorite_categories_dialog, null, false);
 		LinearLayout ll = (LinearLayout) v.findViewById(R.id.list_container);
 
-		final FavouritesDbHelper helper = ((OsmandApplication) activity.getApplication()).getFavorites();
+		final FavouritesDbHelper helper = app.getFavorites();
 		if (gpxFile != null) {
 			if (gpxCategories != null) {
 				for (Map.Entry<String, Integer> e : gpxCategories.entrySet()) {
 					String categoryName = e.getKey();
-					addCategory(activity, ll, categoryName, e.getValue());
+					ll.addView(createCategoryItem(activity, nightMode, categoryName, e.getValue()));
 				}
 			}
 		} else {
 			List<FavouritesDbHelper.FavoriteGroup> gs = helper.getFavoriteGroups();
 			for (final FavouritesDbHelper.FavoriteGroup category : gs) {
-				addCategory(activity, ll, category.getDisplayName(getContext()), category.getColor());
+				ll.addView(createCategoryItem(activity, nightMode, category.getDisplayName(getContext()),
+						category.getColor()));
 			}
 		}
-		View itemView = activity.getLayoutInflater().inflate(R.layout.favorite_category_dialog_item, null);
+		View itemView = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.favorite_category_dialog_item, null);
 		Button button = (Button)itemView.findViewById(R.id.button);
 		button.setCompoundDrawablesWithIntrinsicBounds(getIcon(activity, R.drawable.map_zoom_in), null, null, null);
 		button.setCompoundDrawablePadding(AndroidUtils.dpToPx(activity,15f));
@@ -113,8 +116,8 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 		return builder.create();
 	}
 
-	private void addCategory(@NonNull final Activity activity, @NonNull LinearLayout ll, final String categoryName, final int categoryColor) {
-		View itemView = activity.getLayoutInflater().inflate(R.layout.favorite_category_dialog_item, null);
+	private View createCategoryItem(@NonNull final Activity activity, boolean nightMode, final String categoryName, final int categoryColor) {
+		View itemView = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.favorite_category_dialog_item, null);
 		Button button = (Button)itemView.findViewById(R.id.button);
 		if (categoryColor != 0) {
 			button.setCompoundDrawablesWithIntrinsicBounds(
@@ -143,7 +146,7 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 				dismiss();
 			}
 		});
-		ll.addView(itemView);
+		return itemView;
 	}
 
 	public static SelectCategoryDialogFragment createInstance(String editorTag) {

@@ -21,6 +21,9 @@ import net.osmand.plus.settings.BaseSettingsFragment;
 import org.apache.commons.logging.Log;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSheet {
 
@@ -30,7 +33,15 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 
 	private static final String NEW_VALUE_KEY = "new_value_key";
 
+	@Nullable
 	private Serializable newValue;
+
+	@Nullable
+	private OnChangeSettingListener listener;
+
+	public void setListener(@Nullable OnChangeSettingListener listener) {
+		this.listener = listener;
+	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -57,6 +68,9 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 					public void onClick(View v) {
 						app.getSettings().setPreferenceForAllModes(prefId, newValue);
 						updateTargetSettings(false, true);
+						if (listener != null) {
+							listener.onApplied();
+						}
 						dismiss();
 					}
 				})
@@ -74,6 +88,9 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 					public void onClick(View v) {
 						app.getSettings().setPreference(prefId, newValue, getAppMode());
 						updateTargetSettings(false, false);
+						if (listener != null) {
+							listener.onApplied();
+						}
 						dismiss();
 					}
 				})
@@ -88,6 +105,9 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 					@Override
 					public void onClick(View v) {
 						updateTargetSettings(true, false);
+						if (listener != null) {
+							listener.onDiscard();
+						}
 						dismiss();
 					}
 				})
@@ -106,11 +126,11 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 		outState.putSerializable(NEW_VALUE_KEY, newValue);
 	}
 
-	private void updateTargetSettings(boolean discard, boolean appliedToAllProfiles) {
+	private void updateTargetSettings(boolean discard, boolean applyToAllProfiles) {
 		BaseSettingsFragment target = (BaseSettingsFragment) getTargetFragment();
 		if (target != null) {
 			if (!discard) {
-				target.onSettingApplied(getPrefId(), appliedToAllProfiles);
+				target.onApplyPreferenceChange(getPrefId(), applyToAllProfiles, newValue);
 			}
 			target.updateSetting(getPrefId());
 			if (!discard) {
@@ -129,8 +149,32 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, String prefId, Serializable newValue, Fragment target,
-									boolean usedOnMap, @Nullable ApplicationMode appMode) {
+	public static void showInstance(@NonNull FragmentManager fm,
+	                                @Nullable String prefId,
+	                                @Nullable Serializable newValue,
+	                                Fragment target,
+	                                boolean usedOnMap,
+	                                @Nullable ApplicationMode appMode) {
+		showFragmentInstance(fm, prefId, newValue, target, usedOnMap, appMode, null);
+	}
+
+	public static void showInstance(@NonNull FragmentManager fm,
+	                                @Nullable String prefId,
+	                                @Nullable Serializable newValue,
+	                                Fragment target,
+	                                boolean usedOnMap,
+	                                @Nullable ApplicationMode appMode,
+	                                @Nullable OnChangeSettingListener listener) {
+		showFragmentInstance(fm, prefId, newValue, target, usedOnMap, appMode, listener);
+	}
+
+	private static void showFragmentInstance(@NonNull FragmentManager fm,
+	                                         @Nullable String prefId,
+	                                         @Nullable Serializable newValue,
+	                                         Fragment target,
+	                                         boolean usedOnMap,
+	                                         @Nullable ApplicationMode appMode,
+	                                         @Nullable OnChangeSettingListener listener) {
 		try {
 			if (fm.findFragmentByTag(ChangeGeneralProfilesPrefBottomSheet.TAG) == null) {
 				Bundle args = new Bundle();
@@ -142,10 +186,17 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 				fragment.setUsedOnMap(usedOnMap);
 				fragment.setAppMode(appMode);
 				fragment.setTargetFragment(target, 0);
+				fragment.setListener(listener);
 				fragment.show(fm, ChangeGeneralProfilesPrefBottomSheet.TAG);
 			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);
 		}
+	}
+
+	public interface OnChangeSettingListener {
+		void onApplied();
+
+		void onDiscard();
 	}
 }

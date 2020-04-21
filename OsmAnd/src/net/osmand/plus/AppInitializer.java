@@ -16,6 +16,7 @@ import android.os.Build;
 
 import androidx.appcompat.app.AlertDialog;
 
+import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -618,7 +619,7 @@ public class AppInitializer implements IProgress {
 					File[] fl = routingFolder.listFiles();
 					if (fl != null && fl.length > 0) {
 						for (File f : fl) {
-							if (f.isFile() && f.getName().endsWith(IndexConstants.ROUTING_AND_RENDERING_FILE_EXT) && f.canRead()) {
+							if (f.isFile() && f.getName().endsWith(IndexConstants.ROUTING_FILE_EXT) && f.canRead()) {
 								try {
 									String fileName = f.getName();
 									RoutingConfiguration.Builder builder = new RoutingConfiguration.Builder(defaultAttributes);
@@ -761,7 +762,7 @@ public class AppInitializer implements IProgress {
 			appInitializing = false;
 			notifyFinish();
 			if (warnings != null && !warnings.isEmpty()) {
-				app.showToastMessage(formatWarnings(warnings).toString());
+				app.showToastMessage(AndroidUtils.formatWarnings(warnings).toString());
 			}
 		}
 	}
@@ -879,22 +880,6 @@ public class AppInitializer implements IProgress {
 			app.getResourceManager().initMapBoundariesCacheNative();
 		}
 	}
-
-
-	private StringBuilder formatWarnings(List<String> warnings) {
-		final StringBuilder b = new StringBuilder();
-		boolean f = true;
-		for (String w : warnings) {
-			if (f) {
-				f = false;
-			} else {
-				b.append('\n');
-			}
-			b.append(w);
-		}
-		return b;
-	}
-
 
 	public void notifyFinish() {
 		app.uiHandler.post(new Runnable() {

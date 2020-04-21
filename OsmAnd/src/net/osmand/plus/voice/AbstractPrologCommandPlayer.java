@@ -322,9 +322,6 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 
 	public static boolean btScoStatus = false;
 
-	// BT_SCO_DELAY now in Settings. 1500 ms works for most configurations.
-	//public static final int BT_SCO_DELAY = 1500;
-
 	// This only needed for init debugging in TestVoiceActivity:
 	public static String btScoInit = "-";
 

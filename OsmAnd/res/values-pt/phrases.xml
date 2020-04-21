@@ -1991,7 +1991,7 @@
     <string name="poi_route_monorail_ref">Monotrilho</string>
     <string name="poi_route_funicular_ref">Funicular</string>
     <string name="poi_route_ferry_ref">Balsa</string>
-    <string name="poi_route_subway_ref">Metrô</string>
+    <string name="poi_route_subway_ref">Metropolitano</string>
     <string name="poi_route_railway_ref">Rota ferroviária</string>
     <string name="poi_historic_yes">Objeto histórico</string>
     <string name="poi_surveillance_yes">Vigilância: sim</string>
@@ -3543,7 +3543,7 @@
     <string name="poi_park_ride_yes">Sim</string>
     <string name="poi_park_ride_train">Trem</string>
     <string name="poi_park_ride_bus">Ônibus</string>
-    <string name="poi_park_ride_metro">Metrô</string>
+    <string name="poi_park_ride_metro">Metropolitano</string>
     <string name="poi_park_ride_hov">Via para veículos com alta ocupação</string>
     <string name="poi_park_ride_tram">Bonde</string>
     <string name="poi_park_ride_ferry">Balsa</string>

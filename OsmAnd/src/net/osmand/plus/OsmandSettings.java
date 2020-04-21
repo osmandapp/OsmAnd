@@ -25,6 +25,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
 import net.osmand.aidl.OsmandAidlApi;
@@ -56,11 +57,14 @@ import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -77,7 +81,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
+
 public class OsmandSettings {
+
+	private static final Log LOG = PlatformUtil.getLog(OsmandSettings.class.getName());
 
 	public static final int VERSION = 1;
 
@@ -441,6 +451,10 @@ public class OsmandSettings {
 						return enumPref.setModeValue(mode, enumValue);
 					}
 					return false;
+				}
+			} else if (preference instanceof ContextMenuItemsPreference) {
+				if (value instanceof ContextMenuItemsSettings) {
+					((ContextMenuItemsPreference) preference).setModeValue(mode, (ContextMenuItemsSettings) value);
 				}
 			}
 		}
@@ -1012,42 +1026,58 @@ public class OsmandSettings {
 			super(id, defaultValue);
 			this.delimiter = delimiter;
 		}
-		
+
 		public boolean addValue(String res) {
-			String vl = get();
+			return addModeValue(getApplicationMode(), res);
+		}
+
+		public boolean addModeValue(ApplicationMode appMode, String res) {
+			String vl = getModeValue(appMode);
 			if (vl == null || vl.isEmpty()) {
 				vl = res + delimiter;
 			} else {
 				vl = vl + res + delimiter;
 			}
-			set(vl);
+			setModeValue(appMode, vl);
 			return true;
 		}
-		
+
 		public void clearAll() {
-			set("");
+			clearAllForProfile(getApplicationMode());
+		}
+
+		public void clearAllForProfile(ApplicationMode appMode) {
+			setModeValue(appMode, "");
 		}
 		
 		public boolean containsValue(String res) {
-			String vl = get();
+			return containsValue(getApplicationMode(), res);
+		}
+
+		public boolean containsValue(ApplicationMode appMode, String res) {
+			String vl = getModeValue(appMode);
 			String r = res + delimiter;
-			return vl.startsWith(r) || vl.indexOf(delimiter + r) >= 0;
+			return vl.startsWith(r) || vl.contains(delimiter + r);
 		}
 		
 		public boolean removeValue(String res) {
-			String vl = get();
+			return removeValueForProfile(getApplicationMode(), res);
+		}
+
+		public boolean removeValueForProfile(ApplicationMode appMode, String res) {
+			String vl = getModeValue(appMode);
 			String r = res + delimiter;
 			if(vl != null) {
 				if(vl.startsWith(r)) {
 					vl = vl.substring(r.length());
-					set(vl);
+					setModeValue(appMode, vl);
 					return true;
 				} else {
 					int it = vl.indexOf(delimiter + r);
 					if(it >= 0) {
 						vl = vl.substring(0, it + delimiter.length()) + vl.substring(it + delimiter.length() + r.length());
 					}
-					set(vl);
+					setModeValue(appMode, vl);
 					return true;
 				}
 			}
@@ -1055,7 +1085,11 @@ public class OsmandSettings {
 		}
 
 		public List<String> getStringsList() {
-			final String listAsString = get();
+			return getStringsListForProfile(getApplicationMode());
+		}
+
+		public List<String> getStringsListForProfile(ApplicationMode appMode) {
+			final String listAsString = getModeValue(appMode);
 			if (listAsString != null) {
 				if (listAsString.contains(delimiter)) {
 					return Arrays.asList(listAsString.split(delimiter));
@@ -1069,14 +1103,143 @@ public class OsmandSettings {
 		}
 
 		public void setStringsList(List<String> values) {
+			setStringsListForProfile(getApplicationMode(), values);
+		}
+
+		public void setStringsListForProfile(ApplicationMode appMode, List<String> values) {
 			if (values == null || values.size() == 0) {
-				set(null);
+				setModeValue(appMode, null);
 				return;
 			}
+			clearAllForProfile(appMode);
+			for (String value : values) {
+				addModeValue(appMode, value);
+			}
+		}
+
+		public boolean setModeValues(ApplicationMode mode, List<String> values) {
+			if (values == null || values.size() == 0) {
+				setModeValue(mode,null);
+				return false;
+			}
 			clearAll();
+			String vl = get();
 			for (String value : values) {
 				addValue(value);
+				if (vl == null || vl.isEmpty()) {
+					vl = value + delimiter;
+				} else {
+					vl = vl + value + delimiter;
+				}
 			}
+			return setModeValue(mode, vl);
+		}
+	}
+
+	public class ContextMenuItemsPreference extends CommonPreference<ContextMenuItemsSettings> {
+		@NonNull
+		private String idScheme;
+
+		private ContextMenuItemsPreference(String id, @NonNull String idScheme) {
+			super(id, new ContextMenuItemsSettings());
+			this.idScheme = idScheme;
+		}
+
+		@Override
+		protected ContextMenuItemsSettings getValue(Object prefs, ContextMenuItemsSettings defaultValue) {
+			String s = settingsAPI.getString(prefs, getId(), "");
+			return readValue(s);
+		}
+
+		@Override
+		protected boolean setValue(Object prefs, ContextMenuItemsSettings val) {
+			return settingsAPI.edit(prefs).putString(getId(), val.writeToJsonString(idScheme)).commit();
+		}
+
+		@Override
+		public ContextMenuItemsSettings parseString(String s) {
+			return readValue(s);
+		}
+
+		private ContextMenuItemsSettings readValue(String s) {
+			ContextMenuItemsSettings value = new ContextMenuItemsSettings();
+			value.readFromJsonString(s, idScheme);
+			return value;
+		}
+
+		@NonNull
+		public String getIdScheme() {
+			return idScheme;
+		}
+	}
+
+	public static class ContextMenuItemsSettings implements Serializable {
+		public static final String HIDDEN = "hidden";
+		public static final String ORDER = "order";
+		private List<String> hiddenIds = new ArrayList<>();
+		private List<String> orderIds = new ArrayList<>();
+
+		public ContextMenuItemsSettings() {
+
+		}
+
+		public ContextMenuItemsSettings(@NonNull List<String> hiddenIds, @NonNull List<String> orderIds) {
+			this.hiddenIds = hiddenIds;
+			this.orderIds = orderIds;
+		}
+
+		public void readFromJsonString(String jsonString, @NonNull String idScheme) {
+			if (Algorithms.isEmpty(jsonString)) {
+				return;
+			}
+			try {
+				JSONObject json = new JSONObject(jsonString);
+				hiddenIds = readIdsList(json.optJSONArray(HIDDEN), idScheme);
+				orderIds = readIdsList(json.optJSONArray(ORDER), idScheme);
+			} catch (JSONException e) {
+				LOG.error("Error converting to json string: " + e);
+			}
+		}
+
+		private List<String> readIdsList(JSONArray jsonArray, @NonNull String idScheme) {
+			List<String> list = new ArrayList<>();
+			if (jsonArray != null) {
+				for (int i = 0; i < jsonArray.length(); i++) {
+					String id = jsonArray.optString(i);
+					list.add(idScheme + id);
+				}
+			}
+			return list;
+		}
+
+		public String writeToJsonString(@NonNull String idScheme) {
+			try {
+				JSONObject json = new JSONObject();
+				json.put(HIDDEN, getJsonArray(hiddenIds, idScheme));
+				json.put(ORDER, getJsonArray(orderIds, idScheme));
+				return json.toString();
+			} catch (JSONException e) {
+				LOG.error("Error converting to json string: " + e);
+			}
+			return "";
+		}
+
+		private JSONArray getJsonArray(List<String> ids, @NonNull String idScheme) {
+			JSONArray jsonArray = new JSONArray();
+			if (ids != null && !ids.isEmpty()) {
+				for (String id : ids) {
+					jsonArray.put(id.replace(idScheme, ""));
+				}
+			}
+			return jsonArray;
+		}
+
+		public List<String> getHiddenIds() {
+			return Collections.unmodifiableList(hiddenIds);
+		}
+
+		public List<String> getOrderIds() {
+			return Collections.unmodifiableList(orderIds);
 		}
 	}
 
@@ -1261,6 +1424,9 @@ public class OsmandSettings {
 
 	public final CommonPreference<Boolean> WIKI_ARTICLE_SHOW_IMAGES_ASKED = new BooleanPreference("wikivoyage_show_images_asked", false).makeGlobal();
 	public final CommonPreference<WikiArticleShowImages> WIKI_ARTICLE_SHOW_IMAGES = new EnumIntPreference<>("wikivoyage_show_imgs", WikiArticleShowImages.OFF, WikiArticleShowImages.values()).makeGlobal();
+	public final CommonPreference<Boolean> SHOW_WIKIPEDIA_POI = new BooleanPreference("show_wikipedia_poi", false).makeProfile();
+	public final CommonPreference<Boolean> GLOBAL_WIKIPEDIA_POI_ENABLED = new BooleanPreference("global_wikipedia_poi_enabled", false).makeProfile();
+	public final ListStringPreference WIKIPEDIA_POI_ENABLED_LANGUAGES = (ListStringPreference) new ListStringPreference("wikipedia_poi_enabled_languages", null, ",").makeProfile().cache();
 
 	public final CommonPreference<Boolean> SELECT_MARKER_ON_SINGLE_TAP = new BooleanPreference("select_marker_on_single_tap", false).makeProfile();
 	public final CommonPreference<Boolean> KEEP_PASSED_MARKERS_ON_MAP = new BooleanPreference("keep_passed_markers_on_map", true).makeProfile();
@@ -1287,6 +1453,7 @@ public class OsmandSettings {
 
 	public final CommonPreference<String> API_NAV_DRAWER_ITEMS_JSON = new StringPreference("api_nav_drawer_items_json", "{}").makeGlobal();
 	public final CommonPreference<String> API_CONNECTED_APPS_JSON = new StringPreference("api_connected_apps_json", "[]").makeGlobal();
+	public final CommonPreference<String> NAV_DRAWER_LOGO = new StringPreference("nav_drawer_logo", "").makeProfile();
 
 	public final CommonPreference<Integer> NUMBER_OF_STARTS_FIRST_XMAS_SHOWN = new IntPreference("number_of_starts_first_xmas_shown", 0).makeGlobal();
 
@@ -2090,7 +2257,15 @@ public class OsmandSettings {
 			12/*AudioAttributes.USAGE_ASSISTANCE_NAVIGATION_GUIDANCE*/).makeProfile();
 
 	// For now this can be changed only in TestVoiceActivity
-	public final OsmandPreference<Integer> BT_SCO_DELAY = new IntPreference("bt_sco_delay",	1500).makeGlobal().cache();
+	public final OsmandPreference<Integer>[] VOICE_PROMPT_DELAY = new IntPreference[10];
+
+	{
+		// 1500 ms delay works for most configurations to establish a BT SCO link
+		VOICE_PROMPT_DELAY[0] = new IntPreference("voice_prompt_delay_0", 1500).makeGlobal().cache(); /*AudioManager.STREAM_VOICE_CALL*/
+		// On most devices sound output works pomptly so usually no voice prompt delay needed
+		VOICE_PROMPT_DELAY[3] = new IntPreference("voice_prompt_delay_3", 0).makeGlobal().cache();    /*AudioManager.STREAM_MUSIC*/
+		VOICE_PROMPT_DELAY[5] = new IntPreference("voice_prompt_delay_5", 0).makeGlobal().cache();    /*AudioManager.STREAM_NOTIFICATION*/
+	}
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> MAP_ONLINE_DATA = new BooleanPreference("map_online_data", false).makeProfile();
@@ -3385,12 +3560,33 @@ public class OsmandSettings {
 	public void setSelectedPoiFilters(final Set<String> poiFilters) {
 		SELECTED_POI_FILTER_FOR_MAP.set(android.text.TextUtils.join(",", poiFilters));
 	}
-	
+
 	public final ListStringPreference POI_FILTERS_ORDER = (ListStringPreference)
 			new ListStringPreference("poi_filters_order", null, ",,").makeProfile().cache();
 	
 	public final ListStringPreference INACTIVE_POI_FILTERS = (ListStringPreference)
 			new ListStringPreference("inactive_poi_filters", null, ",,").makeProfile().cache();
+
+	public final ContextMenuItemsPreference DRAWER_ITEMS =
+			(ContextMenuItemsPreference) new ContextMenuItemsPreference("drawer_items", DRAWER_ITEM_ID_SCHEME).makeProfile().cache();
+
+	public final ContextMenuItemsPreference CONFIGURE_MAP_ITEMS =
+			(ContextMenuItemsPreference) new ContextMenuItemsPreference("context_menu_items", CONFIGURE_MAP_ITEM_ID_SCHEME).makeProfile().cache();
+
+	public final ContextMenuItemsPreference CONTEXT_MENU_ACTIONS_ITEMS =
+			(ContextMenuItemsPreference) new ContextMenuItemsPreference("configure_map_items", MAP_CONTEXT_MENU_ACTIONS).makeProfile().cache();
+
+	public final List<ContextMenuItemsPreference> CONTEXT_MENU_ITEMS_PREFERENCES = Arrays.asList(DRAWER_ITEMS, CONFIGURE_MAP_ITEMS, CONTEXT_MENU_ACTIONS_ITEMS);
+
+	@Nullable
+	public ContextMenuItemsPreference getContextMenuItemsPreference(@NonNull String id) {
+		for (ContextMenuItemsPreference preference : CONTEXT_MENU_ITEMS_PREFERENCES) {
+			if (id.startsWith(preference.idScheme)) {
+				return preference;
+			}
+		}
+		return null;
+	}
 
 	public static final String VOICE_PROVIDER_NOT_USE = "VOICE_PROVIDER_NOT_USE";
 

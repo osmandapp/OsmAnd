@@ -21,7 +21,7 @@
     <string name="poi_art">Kunsthandler</string>
     <string name="poi_shoes">Skobutikk</string>
     <string name="poi_musical_instrument">Musikkinstrumenter</string>
-    <string name="poi_organic">Økologisk mat</string>
+    <string name="poi_organic">Økologiske produkter</string>
     <string name="poi_second_hand">Bruktbutikk</string>
     <string name="poi_marketplace">Markedsplass</string>
     <string name="poi_police">Politi</string>
@@ -36,7 +36,7 @@
     <string name="poi_bus_station">Busstasjon</string>
     <string name="poi_railway_station">Jernbanestasjon</string>
     <string name="poi_railway_platform">Jernbaneperrong</string>
-    <string name="poi_subway_station">T-banestasjon</string>
+    <string name="poi_subway_station">Ja</string>
     <string name="poi_taxi">Taxiholdeplass</string>
     <string name="poi_aerodrome">Flyplass</string>
     <string name="poi_ferry_terminal">Fergeterminal</string>
@@ -190,7 +190,7 @@
     <string name="poi_embassy">Ambassade</string>
     <string name="poi_prison">Fengsel</string>
     <string name="poi_customs">Toll</string>
-    <string name="poi_capital">Hovedstad</string>
+    <string name="poi_capital">Ja</string>
     <string name="poi_residential">Boligområde</string>
     <string name="poi_historic_farm">Historisk gårdsbruk</string>
     <string name="poi_historic_railway_station">Historisk jernbanestasjon</string>
@@ -473,7 +473,7 @@
     <string name="poi_diet_pescetarian_yes">Pesco-vegetarisk</string>
     <string name="poi_drive_in_yes">Ja</string>
     <string name="poi_drive_through_yes">Ja</string>
-    <string name="poi_microbrewery_yes">Mikrobryggeri</string>
+    <string name="poi_microbrewery_yes">Ja</string>
     <string name="poi_takeaway_filter_yes">Ja</string>
     <string name="poi_delivery_filter_yes">Ja</string>
     <string name="poi_outdoor_seating_filter_yes">Ja</string>
@@ -753,7 +753,7 @@
     <string name="poi_power_plant">Kraftverk</string>
     <string name="poi_cooling_tower">Kjøletårn</string>
     <string name="poi_recycling">Gjenbruk</string>
-    <string name="poi_recycling_container">Container</string>
+    <string name="poi_recycling_container">Beholder</string>
     <string name="poi_recycling_glass">Glass</string>
     <string name="poi_recycling_clothes">Klær</string>
     <string name="poi_recycling_aluminium">Aluminium</string>
@@ -1284,7 +1284,7 @@
     <string name="poi_religion_pagan">Paganisme</string>
     <string name="poi_denomination_jehovahs_witness">Jehovas vitner</string>
     <string name="poi_cocktails">Drinker</string>
-    <string name="poi_beauty_salon_service">Verksted</string>
+    <string name="poi_beauty_salon_service">Tjenesteytelse</string>
     <string name="poi_service_car">Bilverksted</string>
     <string name="poi_bulk_purchase">Storkjøp</string>
     <string name="poi_park_ride">Innfartsparkering</string>
@@ -1330,10 +1330,10 @@
     <string name="poi_beauty_salon_nails">Manikyr</string>
     <string name="poi_atm">Minibank</string>
     <string name="poi_rapids">Stryk</string>
-    <string name="poi_tableware">Bestikkbutikk</string>
+    <string name="poi_tableware">Servisebutikk</string>
     <string name="poi_recycling_animal_waste">Animalsk avfall</string>
     <string name="poi_waste_basket">Søppelkurv</string>
-    <string name="poi_orchard">Nyttevekstbeplantning</string>
+    <string name="poi_orchard">Frukthage</string>
     <string name="poi_reservoir">Reservoar</string>
     <string name="poi_college">Høyskole</string>
     <string name="poi_bailiff">Fogd</string>
@@ -1354,4 +1354,8 @@
     <string name="poi_access_disabled">Handicapadkomst</string>
     <string name="poi_health_food">Helsekost</string>
     <string name="reddit">Reddit</string>
+    <string name="poi_frozen_food">Frossenmat</string>
+    <string name="poi_vending_animal_food">Dyrefor</string>
+    <string name="poi_vending_drinks_food">Drikkevarer og mat</string>
+    <string name="poi_vending_food">Mat</string>
 </resources>

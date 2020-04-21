@@ -1,12 +1,11 @@
 package net.osmand.plus.quickaction;
 
+import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -41,7 +40,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static net.osmand.AndroidUtils.dpToPx;
 
 /**
  * Created by okorsun on 20.12.16.
@@ -224,11 +223,10 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
             if (viewType == SCREEN_ITEM_TYPE) {
                 final QuickActionItemVH itemVH = (QuickActionItemVH) holder;
-
-                itemVH.title.setText(item.getName(getContext()));
+                Context ctx = getContext();
+                itemVH.title.setText(item.getName(ctx));
                 itemVH.subTitle.setText(getResources().getString(R.string.quick_action_item_action, getActionPosition(position)));
-
-                itemVH.icon.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(item.getIconRes(getContext())));
+                itemVH.icon.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(item.getIconRes(ctx)));
                 itemVH.handleView.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
@@ -256,7 +254,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
                 LinearLayout.LayoutParams dividerParams = (LinearLayout.LayoutParams) itemVH.divider.getLayoutParams();
                 //noinspection ResourceType
-                dividerParams.setMargins(!isLongDivider(position) ? dpToPx(56f) : 0, 0, 0, 0);
+                dividerParams.setMargins(!isLongDivider(position) ? dpToPx(ctx, 56f) : 0, 0, 0, 0);
                 itemVH.divider.setLayoutParams(dividerParams);
             } else {
                 QuickActionHeaderVH headerVH = (QuickActionHeaderVH) holder;
@@ -359,15 +357,6 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
         private boolean isLongDivider(int globalPosition) {
             return getActionPosition(globalPosition) == ITEMS_IN_GROUP || globalPosition == getItemCount() - 1;
-        }
-
-        private int dpToPx(float dp) {
-            Resources r = getActivity().getResources();
-            return (int) TypedValue.applyDimension(
-                    COMPLEX_UNIT_DIP,
-                    dp,
-                    r.getDisplayMetrics()
-            );
         }
 
         @Override

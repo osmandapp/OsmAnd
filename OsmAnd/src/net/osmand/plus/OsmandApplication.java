@@ -91,7 +91,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
 
-import static net.osmand.IndexConstants.ROUTING_AND_RENDERING_FILE_EXT;
+import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
 
 public class OsmandApplication extends MultiDexApplication {
 	public static final String EXCEPTION_PATH = "exception.log";
@@ -844,9 +844,9 @@ public class OsmandApplication extends MultiDexApplication {
 		RoutingConfiguration.Builder builder = null;
 		String routingProfileKey = mode.getRoutingProfile();
 		if (!Algorithms.isEmpty(routingProfileKey)) {
-			int index = routingProfileKey.indexOf(ROUTING_AND_RENDERING_FILE_EXT);
+			int index = routingProfileKey.indexOf(ROUTING_FILE_EXT);
 			if (index != -1) {
-				String configKey = routingProfileKey.substring(0, index + ROUTING_AND_RENDERING_FILE_EXT.length());
+				String configKey = routingProfileKey.substring(0, index + ROUTING_FILE_EXT.length());
 				builder = customRoutingConfigs.get(configKey);
 			}
 		}

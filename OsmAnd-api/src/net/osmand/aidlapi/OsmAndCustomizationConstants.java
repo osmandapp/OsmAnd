@@ -35,6 +35,7 @@ public interface OsmAndCustomizationConstants {
 	String POI_OVERLAY_LABELS_ID = SHOW_ITEMS_ID_SCHEME + "poi_overlay_labels";
 	String TRANSPORT_ID = SHOW_ITEMS_ID_SCHEME + "transport";
 	String GPX_FILES_ID = SHOW_ITEMS_ID_SCHEME + "gpx_files";
+	String WIKIPEDIA_ID = SHOW_ITEMS_ID_SCHEME + "wikipedia";
 	String MAP_MARKERS_ID = SHOW_ITEMS_ID_SCHEME + "map_markers";
 	String MAP_SOURCE_ID = SHOW_ITEMS_ID_SCHEME + "map_source";
 	String RECORDING_LAYER = SHOW_ITEMS_ID_SCHEME + "recording_layer";
@@ -71,6 +72,10 @@ public interface OsmAndCustomizationConstants {
 
 	//Map Context Menu Actions:
 	String MAP_CONTEXT_MENU_ACTIONS = "point.actions.";
+	String MAP_CONTEXT_MENU_ADD_ID = MAP_CONTEXT_MENU_ACTIONS + "add";
+	String MAP_CONTEXT_MENU_MARKER_ID = MAP_CONTEXT_MENU_ACTIONS + "marker";
+	String MAP_CONTEXT_MENU_SHARE_ID = MAP_CONTEXT_MENU_ACTIONS + "share";
+	String MAP_CONTEXT_MENU_MORE_ID = MAP_CONTEXT_MENU_ACTIONS + "more";
 	String MAP_CONTEXT_MENU_DIRECTIONS_FROM_ID = MAP_CONTEXT_MENU_ACTIONS + "directions_from";
 	String MAP_CONTEXT_MENU_SEARCH_NEARBY = MAP_CONTEXT_MENU_ACTIONS + "search_nearby";
 	String MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION = MAP_CONTEXT_MENU_ACTIONS + "change_m_position";

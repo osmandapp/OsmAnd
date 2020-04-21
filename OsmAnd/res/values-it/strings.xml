@@ -58,9 +58,9 @@
     <string name="pref_vector_map">Impostazioni della mappa vettoriale</string>
     <string name="delete_confirmation_msg">Eliminare %1$s?</string>
     <string name="city_type_suburb">Frazione</string>
-    <string name="city_type_hamlet">Borgata</string>
-    <string name="city_type_village">Villaggio</string>
-    <string name="city_type_town">Città</string>
+    <string name="city_type_hamlet">Piccolo borgo</string>
+    <string name="city_type_village">Paese</string>
+    <string name="city_type_town">Cittadina</string>
     <string name="city_type_city">Città</string>
     <string name="animate_route_off">Ferma animazione</string>
     <string name="animate_route">Avvia animazione</string>
@@ -1341,7 +1341,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="rendering_value_americanRoadAtlas_name">Atlante strade americane</string>
     <string name="routing_attr_no_new_routing_name">Ignora le regole di calcolo del percorso v1.9</string>
     <string name="routing_attr_no_new_routing_description">Non usare le regole di calcolo del percorso introdotte nella v1.9.</string>
-    <string name="traffic_warning_railways">Passaggio a livello</string>
+    <string name="traffic_warning_railways">Attraversamento ferroviario</string>
     <string name="traffic_warning_pedestrian">Attraversamento pedonale</string>
     <string name="show_railway_warnings">Passaggi a livello</string>
     <string name="show_pedestrian_warnings">Attraversamenti pedonali</string>
@@ -1902,7 +1902,9 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="osm_live_region_desc">Parte della tua donazione sarà inviata agli utenti OSM che sottopongono modifiche alla mappa in quella regione.</string>
     <string name="osm_live_subscription_settings">Impostazioni della sottoscrizione</string>
     <string name="osm_live_ask_for_purchase">Per favore acquista prima la sottoscrizione a OsmAnd Live</string>
-    <string name="osm_live_header">La sottoscrizione abilita gli aggiornamenti orari per tutte le mappe del mondo. Parte degli incassi ritornano alla comunità OSM e sono corrisposti per ogni contributo a OSM. Se ti piacciono OsmAnd e OSM e vuoi sostenerli ed essere sostenuto da questi, questo è il miglior modo per farlo.</string>
+    <string name="osm_live_header">La sottoscrizione abilita gli aggiornamenti orari per tutte le mappe del mondo.
+\nParte degli incassi ritornano alla comunità OSM e sono corrisposti per ogni contributo a OSM.
+\nSe ti piacciono OsmAnd e OSM e vuoi sostenerli ed essere sostenuto da questi, questo è il miglior modo per farlo.</string>
     <string name="upload_anonymously">Carica anonimamente</string>
     <string name="show_transparency_seekbar">Mostra la barra di ricerca trasparente</string>
     <string name="shared_string_topbar">Barra superiore</string>
@@ -2313,13 +2315,13 @@ Rappresenta l\'area: %1$s x %2$s</string>
 \n
 \n Dall\'Afghanistan al Zimbabwe, dall\'Australia agli USA. Argentina, Brasile, Canada, Francia, Germania, Messico, Gran Bretagna, Spagna, …
 \n</string>
-    <string name="osmand_plus_extended_description_part7">"Contribuisci direttamente a OSM 
+    <string name="osmand_plus_extended_description_part7">Contribuisci direttamente a OSM 
 \n • Segnala errori nei dati 
 \n • Contribuisci tracce GPX a OSM direttamente dall\'app 
 \n • Aggiungi PDI e caricali direttamente in OSM (o successivamente se sei offline) 
 \n • Registrazione opzionale del viaggio anche in modalità background (mentre il dispositivo è in modalità sleep) 
-\n OsmAnd è software open-source attivamente in fase di sviluppo. Chiunque può contribuire all\'applicazione riportando degli errori, migliorando la traduzione o programmando nuove funzionalità. Inoltre il progetto si basa sui contributi finanziari per finanziare la programmazione e il test di nuove funzionalità. 
-\n "</string>
+\n OsmAnd è software open-source attivamente in fase di sviluppo. Chiunque può contribuire all\'applicazione riportando degli errori, migliorando la traduzione o programmando nuove funzionalità. Inoltre il progetto si basa sui contributi finanziari per finanziare la programmazione e il test di nuove funzionalità.
+\n</string>
     <string name="osmand_extended_description_part8">OsmAnd è un software open-source attivamente sviluppato. Chiunque può contribuire all\'app segnalando degli errori, migliorando la traduzione o programmando nuove funzionalità. Inoltre il progetto si basa anche sui contributi finanziari per finanziare la programmazione e il test di nuove funzionalità. 
 \n Copertura e qualità della mappa approssimativa: 
 \n • Ovest Europa: **** 
@@ -3395,7 +3397,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="save_heading">Salva orientamento</string>
     <string name="save_heading_descr">Durante la registrazione salva l\'orientamento per ogni punto della traccia</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
-    <string name="street_city">%1$s, %2$s</string>
+    <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="personal_category_name">Personale</string>
     <string name="shared_string_downloading_formatted">Scaricamento %s</string>
     <string name="rendering_attr_piste_type_snow_park_name">Parco innevato</string>
@@ -3446,7 +3448,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="logcat_buffer_descr">Controlla e condividi i log dettagliati dell\'applicazione</string>
     <string name="permission_is_required">Un permesso è richiesto per usare questa opzione.</string>
     <string name="rearrange_categories">Sistema categorie</string>
-    <string name="create_custom_categories_list_promo">Puoi aggiungere categorie personalizzate, nascondere quelle che non trovi necessarie e cambiarne l\'ordine nell\'elenco. La lista può essere importata ed esportata con i profili.</string>
+    <string name="create_custom_categories_list_promo">Cambia l\'ordinamento della lista, nasconde le categoria non necessarie. Puoi importare o esportare tutti i cambiamenti con i profili.</string>
     <string name="add_new_custom_category_button_promo">Puoi aggiugere una nuova categoria personalizzata selezionandone una o alcune altre.</string>
     <string name="shared_string_available">Disponibile</string>
     <string name="add_custom_category">Aggiungi categoria personalizzata</string>
@@ -3462,7 +3464,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="select_map_icon_descr">Icona visualizzata da fermi.</string>
     <string name="search_offline_geo_error">Impossibile analizzare il dato geo \'%s\'.</string>
     <string name="monitoring_min_speed_descr">Questo è un filtro delle basse velocità per non registrare i punti inferiori a una data velocità. Questo può permettere di registrare tracce dall\'aspetto più pulito quando visualizzate sulla mappa.</string>
-    <string name="monitoring_min_speed_descr_side_effect">Effetto collaterale: alle tue tracce mancheranno tutte le sezioni in cui il criterio della velocità non sarà soddisfatto (es. quando spingi la tua bici in una elevata pendenza). Altrettanto non ci saranno informazioni nei periodi di riposo o ristoro. Questo ha effetto su tutte le analisi ed elaborazione dei dati, come quando si prova a determinare la lunghezza totale del tuo percorso, il tempo in movimento, o la velocità media.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Effetto collaterale: alle tue tracce mancheranno tutte le sezioni in cui il criterio della velocità non sarà soddisfatto (es. quando spingi la tua bici in un\'elevata pendenza). Altrettanto non ci saranno informazioni nei periodi di riposo o ristoro. Questo ha effetto su tutte le analisi ed elaborazione dei dati, come quando si prova a determinare la lunghezza totale del tuo percorso, il tempo in movimento, o la velocità media.</string>
     <string name="monitoring_min_speed_descr_recommendation">Raccomandazione: prova prima a utilizzare il sensore del movimento attraverso la registrazione del filtro del minimo dislocamento (B), potrebbe produrre migliori risultati, e perderai meno dati. Se le tue tracce continuano a essere sporche a basse velocità, prova con valori maggiori di zero. Si prega di notare che alcune misurazioni possono non riportare nessuna velocità (alcuni metodi basti sulle reti), in questi casi non registrerai alcun dato.</string>
     <string name="monitoring_min_speed_descr_remark">Osservazione: controllo velocità &gt; 0 : molti chip GPS riportano un valore di velocità solo se l\'algoritmo determina che tu sei in movimento, e nessuno invece se non lo sei. Quindi utilizzando l\'impostazione &gt; 0 nel filtro, in un certo senso utilizza il sensore di movimento del chip GPS. Ma anche se non filtrati qui nel momento della registrazione, comunque utilizziamo questa caratteristica nell\'analisi dei nostri file GPX per determinare al distanza corretta, es. il valore visualizzato in questo campo è la distanza registrata finché si è in movimento.</string>
     <string name="monitoring_min_accuracy_descr">Questo registrerà solo punti misurati con un\'accuratezza minima (in metri/piedi, come riportati da Android per il tuo chipset). L\'accuratezza si riferisce alla variabilità di misure ripetute, e non è direttamente correlato alla precisione, che definisce quanto la tua misurazione è vicina alla vera posizione.</string>
@@ -3488,11 +3490,11 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="multimedia_use_system_camera">Usa l\'app di sistema</string>
     <string name="multimedia_photo_play_sound">Sono otturatore fotocamera</string>
     <string name="osm_authorization_success">L\'autorizzazione è andata a buon fine</string>
-    <string name="reset_to_default_category_button_promo">Il ripristino dei valori preimpostati ripristinerà all\'ordine preimpostato dopo l\'installazione l\'ordine di visualizzazione.</string>
-    <string name="accessibility_mode_disabled">La modalità accessibile è disabilitato nel tuo sistema.</string>
+    <string name="reset_to_default_category_button_promo">Il ripristino dei valori preimpostati ripristinerà l\'ordine di visualizzazione preimpostato dopo l\'installazione.</string>
+    <string name="accessibility_mode_disabled">La modalità accessibile è disabilitata nel tuo sistema.</string>
     <string name="use_system_screen_timeout">Utilizza il salvaschermo di sistema</string>
-    <string name="use_system_screen_timeout_promo">Disabilitato per preimpostazione, se OsmAnd è eseguito in background, lo schermo non andrà in sospensione.
-\n
+    <string name="use_system_screen_timeout_promo">Disabilitato per preimpostazione, se OsmAnd è eseguito in primo piano, lo schermo non andrà in sospensione. 
+\n 
 \nSe abilitato OsmAnd userà le impostazioni di sospensione del sistema.</string>
     <string name="clear_recorded_data">Elimina i dati registrati</string>
     <string name="release_3_6">• Profili: ora puoi cambiare l\'ordine, impostare l\'icona per le mappe, cambiare tutte le impostazioni dei profili di base e reimpostarle a quelle preimpostate 
@@ -3538,7 +3540,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_custom_rendering_style">Stile di rappresentazione personalizzato</string>
     <string name="shared_string_include_data">Include dati addizionali</string>
     <string name="import_profile_dialog_description">Il profilo importato contiene datti aggiuntivi. Clicca Importa per importare solo i dati del profilo o scegli i dati aggiuntivi da importare.</string>
-    <string name="export_profile_dialog_description">Puoi selezionare dati aggiuntivi da esportare unitamente al profilo.</string>
+    <string name="export_profile_dialog_description">Puoi selezionare dati aggiuntivi da esportare assieme al profilo.</string>
     <string name="index_name_antarctica">Antartide</string>
     <string name="navigation_notification_desc">Mostra le notifiche di sistema con le istruzioni di navigazione durante la navigazione.</string>
     <string name="navigation_notification">Notifiche di navigazione</string>
@@ -3547,7 +3549,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_angle_param">Angolo: %s°</string>
     <string name="shared_string_angle">Angolo</string>
     <string name="recalc_angle_dialog_descr">Una linea retta sarà visualizzata fra la mia localizzazione e la destinazione finché il percorso viene elaborato</string>
-    <string name="recalc_angle_dialog_title">Angolo minimo tra la mia localizzazione e la destinazione</string>
+    <string name="recalc_angle_dialog_title">Angolo minimo tra la mia localizzazione e il percorso</string>
     <string name="shared_string_preparing">Preparando</string>
     <string name="shared_string_poi_types">Tipi di PDI</string>
     <string name="shared_string_nothing_selected">Nessuna selezione</string>
@@ -3564,10 +3566,10 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="import_duplicates_title">Alcuni oggetti esistono già</string>
     <string name="select_data_to_import">Seleziona i dati da importare.</string>
     <string name="import_rendering_file">Importa il file di rappresentazione</string>
-    <string name="restore_all_profile_settings_descr">Tutti le impostazioni del profilo saranno ripristinate ai valori iniziali dopo l\'importazione/creazione di questo profilo.</string>
+    <string name="restore_all_profile_settings_descr">Tutti le impostazioni del profilo saranno ripristinate ai valori iniziali dopo la creazione/importazione di questo profilo.</string>
     <string name="restore_all_profile_settings">Ripristinare tutte le impostazioni del profilo\?</string>
     <string name="saving_new_profile">Salvataggio del nuovo profilo</string>
-    <string name="profile_backup_failed">Impossibile fare una copia di salvataggio del profilo.</string>
+    <string name="profile_backup_failed">Impossibile creare un backup del profilo.</string>
     <string name="clear_recorded_data_warning">Sei sicuro di voler eliminare i dati registrati\?</string>
     <string name="importing_from">Importazione dei dati da %1$s</string>
     <string name="shared_string_importing">Importazione in corso</string>
@@ -3575,7 +3577,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_import_complete">Importazione completata</string>
     <string name="import_complete_description">Tutti i dati sono stati importati da %1$s, puoi utilizzare i bottoni sottostanti per aprire e gestire le parti dell\' applicazione di cui necessiti.</string>
     <string name="recalculate_route_distance_promo">Il percorso verrà ricalcolato quando la distanza tra il percorso e la propria posizione è maggiore del valore selezionato.</string>
-    <string name="select_distance_route_will_recalc">Seleziona dopo che distanza effettuare il ricalcolo del percorso.</string>
+    <string name="select_distance_route_will_recalc">Seleziona le distanza dopo la quale il percorso verrà ricalcolato.</string>
     <string name="recalculate_route_in_deviation">Ricalcola il percorso in caso di deviazione</string>
     <string name="shared_string_square">Quadrato</string>
     <string name="shared_string_rhomb">Rombo</string>
@@ -3589,5 +3591,40 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="quick_action_terrain_hide">Nascondi rilievo</string>
     <string name="quick_action_show_hide_terrain">Mostra/nascondi rilievo</string>
     <string name="download_slope_maps">Pendenze</string>
-    <string name="shared_string_hillshade">Rilievi ombra</string>
+    <string name="shared_string_hillshade">Ombreggiatura rilievi</string>
+    <string name="slope_read_more">Puoi avere maggiori informazioni sulle Pendenze in %1$s.</string>
+    <string name="shared_string_min">Min</string>
+    <string name="replace_point_descr">Sostituisci un altro punto con questo</string>
+    <string name="app_mode_ski_touring">Sci alpino</string>
+    <string name="shared_string_rendering_style">Stile di rappresentazione</string>
+    <string name="shared_string_terrain">Terreno</string>
+    <string name="hillshade_description">La mappa Ombreggiamento dei rilievi utilizza le ombre per visualizzare le pendenze, i picchi e i bassipiani.</string>
+    <string name="slope_description">La Pendenza è visualizzata sul terreno tramite colorazione.</string>
+    <string name="terrain_slider_description">Imposta lo zoom minimo e massimo a cui lo strato sarà visualizzato.</string>
+    <string name="hillshade_download_description">Sono necessarie mappe addizionali per visualizzare l\'Ombreggiatura dei rilievi sulla mappa.</string>
+    <string name="slope_download_description">Mappe addizionali sono necessarie per visualizzare le Pendenze sulla mappa.</string>
+    <string name="shared_string_transparency">Trasparenza</string>
+    <string name="shared_string_zoom_levels">Livello di zoom</string>
+    <string name="shared_string_legend">Legenda</string>
+    <string name="terrain_empty_state_text">Abilitalo per vedere le mappe delle ombreggiature o della pendenza dei rilievi. Maggiori informazioni su questi tipi di mappe nel nostro sito</string>
+    <string name="checking_for_duplicate_description">OsmAnd ricerca in %1$s oggetti esistenti duplicati nell\'applicazione.
+\n
+\nPuò richiedere del tempo.</string>
+    <string name="n_items_of_z">%1$s di %2$s</string>
+    <string name="shared_string_octagon">Ottagono</string>
+    <string name="app_mode_ski_snowmobile">Motoslitta</string>
+    <string name="custom_osmand_plugin">Componente aggiuntivo OsmAnd personalizzato</string>
+    <string name="changes_applied_to_profile">Modifiche applicate al profilo %1$s.</string>
+    <string name="settings_item_read_error">Non posso leggere %1$s.</string>
+    <string name="settings_item_write_error">Non posso scrivere %1$s.</string>
+    <string name="settings_item_import_error">Non posso importare %1$s.</string>
+    <string name="wiki_menu_download_descr">Sono necessarie mappe aggiuntive per visualizzare sulla mappa i PDI Wikipedia.</string>
+    <string name="select_track_file">Scegli il file della traccia</string>
+    <string name="shared_string_languages">Lingue</string>
+    <string name="shared_string_language">Lingua</string>
+    <string name="shared_string_all_languages">Tutte le lingue</string>
+    <string name="wikipedia_poi_languages_promo">Alcuni articoli Wikipedia potrebbero non essere disponibili nella tua lingua, scegli il linguaggio con cui appariranno sulla mappa.
+\nDurante la lettura potrai cambiare fra tutte le lingue disponibili.</string>
+    <string name="developer_plugin">Plugin sviluppatore</string>
+    <string name="shared_string_items">Oggetti</string>
 </resources>

@@ -39,7 +39,7 @@
     <string name="app_mode_campervan">తాత్కాలిక హడ్డులు ఎంచుకో</string>
     <string name="temporary_conditional_routing">తాత్కాలిక హద్దులు ఎన్నుకో</string>
     <string name="import_from_file">ఫైల్ నుండి దిగుమతి చేయండి</string>
-    <string name="import_routing_file">"రూటింగ్ ఫైలు దిగుమతి  చేయండి"</string>
+    <string name="import_routing_file">రూటింగ్ ఫైలు దిగుమతి చేయండి</string>
     <string name="import_profile">ప్రొఫైల్ ను దిగుమతి చేయండి</string>
     <string name="multimedia_notes_prefs_descr">చిత్ర పరిమాణం, ఆడియో మరియు వీడియో నాణ్యత</string>
     <string name="osm_editing_prefs_descr">లాగిన్, పాస్‌వర్డ్, ఆఫ్‌లైన్ ఎడిటింగ్</string>

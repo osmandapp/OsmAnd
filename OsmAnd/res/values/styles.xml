@@ -101,11 +101,13 @@
     </style>
 
     <style name="OsmandMaterialLightTheme" parent="Theme.MaterialComponents.Light">
+        <item name="colorPrimary">@color/active_color_primary_light</item>
         <item name="dashboard_divider">@color/divider_color_light</item>
         <item name="divider_color">@color/divider_color</item>
     </style>
 
     <style name="OsmandMaterialDarkTheme" parent="Theme.MaterialComponents">
+        <item name="colorPrimary">@color/active_color_primary_dark</item>
         <item name="dashboard_divider">@color/divider_color_dark</item>
         <item name="divider_color">@color/divider_color_dark</item>
     </style>
@@ -275,6 +277,7 @@
         <item name="colorBackgroundFloating">@color/list_background_color_light</item>
         <item name="android:colorBackgroundFloating">@color/list_background_color_light</item>
         <item name="preferenceTheme">@style/OsmandPreferenceTheme</item>
+        <item name="stroked_buttons_and_links_outline">@color/stroked_buttons_and_links_outline_light</item>
     </style>
 
     <style name="OverflowMenuButton" parent="@style/Widget.AppCompat.ActionButton.Overflow">
@@ -540,6 +543,7 @@
         <item name="colorBackgroundFloating">@color/list_background_color_dark</item>
         <item name="android:colorBackgroundFloating">@color/list_background_color_dark</item>
         <item name="preferenceTheme">@style/OsmandPreferenceTheme</item>
+        <item name="stroked_buttons_and_links_outline">@color/stroked_buttons_and_links_outline_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">
@@ -562,7 +566,7 @@
         <item name="android:textColor">@color/active_color_primary_dark</item>
     </style>
 
-    <style name="OsmandPreferenceTheme" parent="@style/PreferenceThemeOverlay.v14.Material">
+    <style name="OsmandPreferenceTheme" parent="@style/PreferenceThemeOverlay">
         <item name="android:layout">@layout/preferences_screen</item>
         <item name="iconSpaceReserved">true</item>
     </style>
@@ -765,5 +769,9 @@
     <style name="AppBarTitle" parent="TextAppearance.AppCompat.Title">
         <item name="android:textColor">?attr/app_bar_primary_item_color</item>
         <item name="android:textSize">@dimen/dialog_header_text_size</item>
+    </style>
+
+    <style name="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:padding">0dp</item>
     </style>
 </resources>

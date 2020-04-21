@@ -24,6 +24,7 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dialogs.FavoriteDialogs;
@@ -172,6 +173,16 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 	}
 
 	@Override
+	protected String getLastUsedGroup() {
+		OsmandApplication app = requireMyApplication();
+		String lastCategory = app.getSettings().LAST_FAV_CATEGORY_ENTERED.get();
+		if (!Algorithms.isEmpty(lastCategory) && !app.getFavorites().groupExists(lastCategory)) {
+			lastCategory = "";
+		}
+		return lastCategory;
+	}
+
+	@Override
 	public void setColor(int color) {
 		this.color = color;
 	}
@@ -223,6 +234,16 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 
 	@Override
 	protected boolean wasSaved() {
+		final FavouritePoint favorite = getFavorite();
+		if (favorite != null) {
+			final FavouritePoint point = new FavouritePoint(favorite.getLatitude(), favorite.getLongitude(),
+					getNameTextValue(), getCategoryTextValue());
+			point.setDescription(getDescriptionTextValue());
+			point.setColor(color);
+			point.setBackgroundType(backgroundType);
+			point.setIconId(iconId);
+			return isChanged(favorite, point);
+		}
 		return saved;
 	}
 
@@ -280,10 +301,7 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 			if (editor.isNew()) {
 				doAddFavorite(name, category, description, color, backgroundType, iconId);
 			} else {
-				favorite.setColor(color);
-				favorite.setBackgroundType(backgroundType);
-				favorite.setIconId(iconId);
-				helper.editFavouriteName(favorite, name, category, description);
+				doEditFavorite(favorite, name, category, description, color, backgroundType, iconId, helper);
 			}
 		}
 		MapActivity mapActivity = getMapActivity();
@@ -300,6 +318,16 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 		if (menu.getLatLon() != null && menu.getLatLon().equals(latLon)) {
 			menu.update(latLon, favorite.getPointDescription(mapActivity), favorite);
 		}
+	}
+
+	private void doEditFavorite(FavouritePoint favorite, String name, String category, String description,
+	                            @ColorInt int color, BackgroundType backgroundType, @DrawableRes int iconId,
+	                            FavouritesDbHelper helper) {
+		requireMyApplication().getSettings().LAST_FAV_CATEGORY_ENTERED.set(category);
+		favorite.setColor(color);
+		favorite.setBackgroundType(backgroundType);
+		favorite.setIconId(iconId);
+		helper.editFavouriteName(favorite, name, category, description);
 	}
 
 	private void doAddFavorite(String name, String category, String description, @ColorInt int color,
@@ -324,7 +352,9 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 		FragmentActivity activity = getActivity();
 		final FavouritePoint favorite = getFavorite();
 		if (activity != null && favorite != null) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+			final OsmandApplication app = (OsmandApplication) activity.getApplication();
+			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+			AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
 			builder.setMessage(getString(R.string.favourites_remove_dialog_msg, favorite.getName()));
 			builder.setNegativeButton(R.string.shared_string_no, null);
 			builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
@@ -423,9 +453,22 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 	public Set<String> getCategories() {
 		Set<String> categories = new LinkedHashSet<>();
 		FavouritesDbHelper helper = getHelper();
-		if (helper != null) {
-			for (FavouritesDbHelper.FavoriteGroup fg : getHelper().getFavoriteGroups()) {
-				categories.add(fg.getDisplayName(getMyApplication()));
+		if (helper != null && editor != null) {
+			OsmandApplication app = getMyApplication();
+			if (editor.isNew()) {
+				FavoriteGroup lastUsedGroup = helper.getGroup(getLastUsedGroup());
+				if (lastUsedGroup != null) {
+					categories.add(lastUsedGroup.getDisplayName(app));
+				}
+				for (FavouritesDbHelper.FavoriteGroup fg : getHelper().getFavoriteGroups()) {
+					if (lastUsedGroup != null && !fg.equals(lastUsedGroup)) {
+						categories.add(fg.getDisplayName(app));
+					}
+				}
+			} else {
+				for (FavoriteGroup fg : helper.getFavoriteGroups()) {
+					categories.add(fg.getDisplayName(app));
+				}
 			}
 		}
 		return categories;

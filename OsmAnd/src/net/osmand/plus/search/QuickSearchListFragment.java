@@ -275,7 +275,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 				if (pointDescription != null) {
 					String typeName = pointDescription.getTypeName();
 					if (!Algorithms.isEmpty(typeName)) {
-						name = mapActivity.getString(R.string.street_city, pointDescription.getName(), typeName);
+						name = mapActivity.getString(R.string.ltr_or_rtl_combine_via_comma, pointDescription.getName(), typeName);
 					} else {
 						name = pointDescription.getName();
 					}

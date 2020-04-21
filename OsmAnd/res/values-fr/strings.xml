@@ -52,7 +52,7 @@
     <string name="user_name">Votre identifiant OSM</string>
     <string name="open_street_map_login_descr">Nécessaire pour les contributions à openstreetmap.org.</string>
     <string name="user_password">Votre mot de passe OSM</string>
-    <string name="osmand_service">Mode tâche de fond</string>
+    <string name="osmand_service">Mode arrière-plan</string>
     <string name="osmand_service_descr">OsmAnd s\'exécute en tâche de fond, écran éteint.</string>
     <string name="switch_to_raster_map_to_see">Téléchargez une carte vectorielle hors-ligne pour ce lieu (depuis \'Paramètres\' &gt; \'Gérer les cartes\') ou utilisez le greffon \"cartes en ligne\".</string>
     <string name="download_files_not_enough_space">Il n\'y a pas suffisamment d\'espace pour télécharger %1$s MB (disponible : %2$s).</string>
@@ -65,7 +65,7 @@
     <string name="choose_auto_follow_route_descr">Délai avant de centrer la carte sur la position actuelle.</string>
     <string name="auto_follow_route_navigation">Recentrage automatique navigation</string>
     <string name="auto_follow_route_navigation_descr">Recentrage automatique uniquement pendant la navigation.</string>
-    <string name="auto_follow_location_enabled">Recentrage automatique activé.</string>
+    <string name="auto_follow_location_enabled">Recentrage automatique de la carte activé.</string>
     <string name="pref_vector_rendering">Options pour l\'affichage vectoriel</string>
     <string name="pref_overlay">Sur-couche / Sous-couche</string>
     <string name="pref_raster_map">Options pour la source des cartes</string>
@@ -263,7 +263,7 @@
     <string name="voice_is_not_available_title">Sélectionnez les données d\'annonces vocales</string>
     <string name="daynight_mode_day">Jour</string>
     <string name="daynight_mode_night">Nuit</string>
-    <string name="daynight_mode_auto">Lever / coucher du soleil</string>
+    <string name="daynight_mode_auto">Lever/coucher du soleil</string>
     <string name="daynight_mode_sensor">Détecter la luminosité</string>
     <string name="daynight_descr">Sélectionnez les règles de bascule pour les modes jour / nuit.</string>
     <string name="daynight">Mode jour / nuit</string>
@@ -459,7 +459,7 @@
     <string name="loading_postcodes">Chargement des codes postaux…</string>
     <string name="loading_streets">Chargement des rues…</string>
     <string name="loading_cities">Chargement des villes…</string>
-    <string name="poi">PI</string>
+    <string name="poi">POI</string>
     <string name="error_occurred_saving_gpx">Impossible d\'enregistrer le fichier GPX.</string>
     <string name="error_calculating_route">Impossible de calculer l\'itinéraire.</string>
     <string name="error_calculating_route_occured">Impossible de calculer l\'itinéraire.</string>
@@ -526,10 +526,10 @@
     <string name="choose_available_region">Sélectionnez une région dans la liste</string>
     <string name="choose_intersected_street">Sélectionnez une intersection</string>
     <string name="Closest_Amenities">Équipements à proximité</string>
-    <string name="app_mode_default">Carte</string>
-    <string name="app_mode_car">Voiture</string>
-    <string name="app_mode_bicycle">Vélo</string>
-    <string name="app_mode_pedestrian">Piéton</string>
+    <string name="app_mode_default">Parcourir la carte</string>
+    <string name="app_mode_car">En voiture</string>
+    <string name="app_mode_bicycle">À vélo</string>
+    <string name="app_mode_pedestrian">À pied</string>
     <string name="position_on_map_center">Centre</string>
     <string name="position_on_map_bottom">Bas</string>
     <string name="navigate_point_top_text">Entrez la latitude et la longitude au format sélectionné (D - degrés, M - minutes, S - secondes)</string>
@@ -659,7 +659,7 @@
     <string name="front_left">devant à gauche</string>
     <string name="oclock">heure</string>
     <string name="towards">vers</string>
-    <string name="accuracy">Précision</string>
+    <string name="accuracy">Fiabilité</string>
     <string name="altitude">Altitude</string>
     <string name="no_info">Pas d\'info</string>
     <string name="direction_style_sidewise">Latéral (8 secteurs)</string>
@@ -777,12 +777,12 @@
     <string name="map_widget_show_ruler">Échelle</string>
     <string name="map_widget_view_direction">Orientation</string>
     <string name="map_widget_transparent">Gadgets transparents</string>
-    <string name="email">e-mail</string>
+    <string name="email">courriel</string>
     <string name="map_widget_vector_attributes">Attributs de rendu</string>
     <string name="select_navigation_mode">Mode de transport :</string>
     <string name="day_night_info_description">Lever : %1$s
 \nCoucher : %2$s</string>
-    <string name="day_night_info">Information jour / nuit</string>
+    <string name="day_night_info">Information jour/nuit</string>
     <string name="filterpoi_activity">Créer un filtre de points d\'intérêt</string>
     <string name="map_widget_renderer">Style de la carte</string>
     <string name="int_continuosly">En continu</string>
@@ -834,7 +834,7 @@
     <string name="context_menu_item_first_intermediate_point">Ajouter comme première étape</string>
     <string name="add_as_last_destination_point">Ajouter comme dernière étape</string>
     <string name="add_as_first_destination_point">Ajouter comme première étape</string>
-    <string name="replace_destination_point">Remplacer l\'arrivée</string>
+    <string name="replace_destination_point">Remplacer la destination</string>
     <string name="new_destination_point_dialog">Vous avez déjà indiqué une arrivée :</string>
     <string name="target_point">Étape %1$s</string>
     <string name="shared_string_target_points">Étapes</string>
@@ -987,7 +987,7 @@
     <string name="distance_measurement_load_gpx">Ouvrir un fichier de trace GPX existant</string>
     <string name="wait_current_task_finished">Veuillez attendre que la tâche en cours soit terminée</string>
     <string name="plugin_distance_point_time">temps</string>
-    <string name="plugin_distance_point_hdop">précision</string>
+    <string name="plugin_distance_point_hdop">fiabilité</string>
     <string name="plugin_distance_point_speed">vitesse</string>
     <string name="plugin_distance_point_ele">altitude</string>
     <string name="gpx_file_name">Nom du fichier GPX</string>
@@ -1009,7 +1009,7 @@
     <string name="shared_string_downloading">Téléchargement en cours…</string>
     <string name="search_street_in_neighborhood_cities">Recherche des rues dans les villes à proximité</string>
     <string name="intermediate_items_sort_return">Ordonne automatiquement les étapes pour l\'itinéraire le plus court.</string>
-    <string name="intermediate_items_sort_by_distance">Optimiser</string>
+    <string name="intermediate_items_sort_by_distance">Trier par distance</string>
     <string name="please_select_address">Définissez d\'abord une ville ou une rue</string>
     <string name="context_menu_item_destination_point">Définir comme arrivée</string>
     <string name="speak_street_names">Nom des rues (TTS)</string>
@@ -1074,7 +1074,7 @@
     <string name="auto_zoom_far">Modéré</string>
     <string name="auto_zoom_farthest">Éloigné</string>
     <string name="shared_string_remember_my_choice">Mémoriser ce choix</string>
-    <string name="animate_routing_route_not_calculated">Veuillez d\'abord calculer un itinéraire</string>
+    <string name="animate_routing_route_not_calculated">Veuillez d\'abord calculer l\'itinéraire</string>
     <string name="animate_routing_route">Simulation de l\'itinéraire calculé </string>
     <string name="animate_routing_gpx">Simulation suivant une trace GPX</string>
     <string name="local_osm_changes_delete_all_confirm">Êtes-vous certain de vouloir supprimer %1$d modifications OSM \?</string>
@@ -1120,7 +1120,7 @@
     <string name="shared_string_favorite">Favori</string>
     <string name="route_preferences">Préférences d\'itinéraire</string>
     <string name="route_info">Informations sur l\'itinéraire</string>
-    <string name="keep_and_add_destination_point">Ajouter comme étape suivante</string>
+    <string name="keep_and_add_destination_point">Ajouter comme destination suivante</string>
     <string name="use_displayed_track_for_navigation">Souhaitez-vous suivre la trace affichée à l\'écran ?</string>
     <string name="gpx_option_calculate_first_last_segment">Calculer un itinéraire OsmAnd pour le début et la fin de l\'itinéraire</string>
     <string name="calculate_osmand_route_without_internet">Calcul de l\'itinéraire hors-ligne</string>
@@ -1368,7 +1368,7 @@
     <string name="shared_string_show_all">AFFICHER TOUT</string>
     <string name="coordinates">Coordonnées</string>
     <string name="map_update">Mise à jour disponible pour %1$s carte(s)</string>
-    <string name="error_avoid_specific_road">Aucun itinéraire de contournement</string>
+    <string name="error_avoid_specific_road">Aucune déviation trouvée</string>
     <string name="use_opengl_render">Utiliser le rendu OpenGL</string>
     <string name="use_opengl_render_descr">Utiliser le rendu matériel accéléré OpenGL (peut consommer plus de batterie et ne pas fonctionner sur les anciens appareils).</string>
     <string name="everything_up_to_date">Tous les fichiers sont à jour</string>
@@ -1843,7 +1843,7 @@
     <string name="rec_split_storage_size">Taille de l\'espace de stockage</string>
     <string name="rec_split_storage_size_desc">Espace maximum autorisé pour tous les enregistrements.</string>
     <string name="shared_string_type">Type</string>
-    <string name="switch_start_finish">Inverser Départ et Arrivée</string>
+    <string name="switch_start_finish">Inverser départ &amp; arrivée</string>
     <string name="rendering_attr_hideIcons_name">Icônes des points d\'intérêt</string>
     <string name="number_of_contributors">Nombre de contributeurs</string>
     <string name="number_of_edits">Nombre de modifications</string>
@@ -1856,7 +1856,7 @@
     <string name="data_is_not_available">Donnée indisponible</string>
     <string name="rendering_attr_hideUnderground_name">Objets souterrains</string>
     <string name="shared_string_read_more">En savoir plus</string>
-    <string name="shared_string_email_address">Adresse email</string>
+    <string name="shared_string_email_address">Adresse courriel</string>
     <string name="shared_string_status">Statut</string>
     <string name="shared_string_save_changes">Enregistrer les modifications</string>
     <string name="show_polygons">Afficher les polygones</string>
@@ -1881,7 +1881,7 @@
     <string name="osm_live_month_cost_desc">Règlement mensuel</string>
     <string name="osm_live_active">Actif</string>
     <string name="osm_live_not_active">Inactif</string>
-    <string name="osm_live_enter_email">Veuillez saisir une adresse email valide</string>
+    <string name="osm_live_enter_email">Veuillez saisir une adresse courriel valide</string>
     <string name="osm_live_thanks">Merci pour votre soutien à OsmAnd !
 \nPour activer toutes les nouvelles fonctionnalités, merci de redémarrer OsmAnd.</string>
     <string name="osm_live_subscription_settings">Paramétrage de l\'abonnement</string>
@@ -2057,8 +2057,8 @@
     <string name="save_track_min_speed_descr">Filtre : Aucun enregistrement de points en-dessous de cette vitesse.</string>
     <string name="save_track_min_distance">Déplacement minimal pour enregistrer</string>
     <string name="save_track_min_distance_descr">Filtre : Définir une distance minimale entre points pour déclencher l\'enregistrement.</string>
-    <string name="save_track_precision">Précision minimale pour l\'enregistrement</string>
-    <string name="save_track_precision_descr">Filtre : Aucun enregistrement avant qu\'une précision ne soit atteinte.</string>
+    <string name="save_track_precision">Fiabilité minimale pour l\'enregistrement</string>
+    <string name="save_track_precision_descr">Filtre : Aucun enregistrement avant que cette fiabilité ne soit atteinte.</string>
     <string name="shared_string_continue">Continuer</string>
     <string name="shared_string_pause">Pause</string>
     <string name="shared_string_trip">Itinéraire</string>
@@ -2621,7 +2621,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="context_menu_read_full_article">Lire l\'article complet</string>
     <string name="context_menu_read_article">Lire l\'article</string>
     <string name="context_menu_points_of_group">Tous les points du groupe</string>
-    <string name="open_from">Ouvre à</string>
+    <string name="open_from">Ouvert du</string>
     <string name="open_till">Ouvert jusqu\'à</string>
     <string name="will_close_at">Ferme à</string>
     <string name="will_open_at">Ouvre à</string>
@@ -3024,7 +3024,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="app_mode_horse">À cheval</string>
     <string name="app_mode_helicopter">Hélicoptère</string>
     <string name="osmand_routing_promo">"Vous pouvez ajouter votre propre version du fichier routing.xml dans  ..osmand/routing"</string>
-    <string name="app_mode_skiing">Ski</string>
+    <string name="app_mode_skiing">À ski</string>
     <string name="settings_routing_mode_string">Mode : %s</string>
     <string name="routing_profile_ski">Ski</string>
     <string name="profile_type_descr_string">Type : %s</string>
@@ -3067,7 +3067,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="app_mode_scooter">Scooter</string>
     <string name="precision_hdop_and_vdop">Précision horizontale : %1$s, Précision verticale : %2$s</string>
     <string name="precision_hdop">Précision horizontale : %s</string>
-    <string name="app_mode_offroad">Hors route</string>
+    <string name="app_mode_offroad">Tout terrain</string>
     <string name="routing_attr_max_num_changes_name">Nombre de correspondances</string>
     <string name="turn_screen_on_sensor">Utiliser le capteur de proximité</string>
     <string name="sett_no_ext_input">Aucun</string>
@@ -3172,7 +3172,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="select_base_profile_dialog_message">Basez votre profil personnel sur l\'un des profils par défaut pour définir les unités de vitesse, de distance ou la visibilité des widgets. Voici les profils par défaut de l\'application ainsi que des exemples de profils personnalisés :</string>
     <string name="temporary_conditional_routing">Prendre en compte les limitations temporaires</string>
     <string name="shared_string_default">Par défaut</string>
-    <string name="gpx_join_gaps">Relier les trous</string>
+    <string name="gpx_join_gaps">Fusionner pour éviter les interruptions</string>
     <string name="app_mode_camper">Campeur</string>
     <string name="app_mode_campervan">Camping-car</string>
     <string name="rendering_attr_showLez_description">Afficher les zones à faible émission sur la carte (n\'influe pas sur le calcul d\'itinéraire).</string>
@@ -3348,7 +3348,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="export_profile_failed">Impossible d\'exporter le profil.</string>
     <string name="profile_import">Importer le profil</string>
     <string name="profile_import_descr">Ajouter un profil en ouvrant son fichier avec OsmAnd.</string>
-    <string name="file_import_error">%1$s Erreur d\'importation : %2$s</string>
+    <string name="file_import_error">Erreur d\'import %1$s : %2$s</string>
     <string name="file_imported_successfully">%1$s importé avec succès.</string>
     <string name="rendering_value_white_name">Blanc</string>
     <string name="swap_two_places">Inverser %1$s et %2$s</string>
@@ -3376,7 +3376,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Réseaux</string>
     <string name="personal_category_name">Personnel</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
-    <string name="street_city">%1$s, %2$s</string>
+    <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="shared_string_downloading_formatted">Téléchargement %s</string>
     <string name="rendering_value_thick_name">Épais</string>
     <string name="desert_render_descr">Pour les déserts et autres zones faiblement peuplées, affiche plus de détails.</string>
@@ -3403,13 +3403,13 @@ représentant la zone : %1$s x %2$s</string>
     <string name="import_from_file">Importer depuis un fichier</string>
     <string name="import_routing_file">Importer un fichier d\'itinéraire</string>
     <string name="import_profile">Importer un profil</string>
-    <string name="monitoring_prefs_descr">Navigation, précision d\'enregistrement</string>
+    <string name="monitoring_prefs_descr">Navigation, fiabilité d\'enregistrement</string>
     <string name="multimedia_notes_prefs_descr">Taille de l\'image, qualité audio et vidéo</string>
     <string name="osm_editing_prefs_descr">Login, mot de passe, édition hors-ligne</string>
     <string name="accessibility_prefs_descr">Choisissez l\'icône, la couleur et le nom</string>
     <string name="live_monitoring_descr">Permet le partage de votre position grâce à l\'enregistrement du trajet.</string>
     <string name="live_monitoring">Suivi en ligne</string>
-    <string name="save_track_logging_accuracy">Précision de l\'enregistrement</string>
+    <string name="save_track_logging_accuracy">Fiabilité de l\'enregistrement</string>
     <string name="tracks_view_descr">Vos traces enregistrées se trouvent dans %1$s ou dans le dossier OsmAnd.</string>
     <string name="multimedia_notes_view_descr">Vos notes OSM se trouvent dans %1$s.</string>
     <string name="video_notes">Notes vidéo</string>
@@ -3429,7 +3429,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="live_monitoring_adress">Adresse web</string>
     <string name="monitoring_notification">Notification</string>
     <string name="monitoring_min_speed">Vitesse minimale</string>
-    <string name="monitoring_min_accuracy">Précision minimale</string>
+    <string name="monitoring_min_accuracy">Fiabilité minimale</string>
     <string name="monitoring_min_distance">Déplacement minimum</string>
     <string name="reset_plugin_to_default">Restaurer les paramètres par défaut du greffon</string>
     <string name="multimedia_rec_split_title">Fractionner l\'enregistrement</string>
@@ -3445,8 +3445,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="monitoring_min_distance_descr_recommendation">Recommandation : un paramètre de 5 mètres est adapté si vous n\'avez pas besoin de détails et ne souhaitez pas enregistrer des points au repos.</string>
     <string name="monitoring_min_speed_descr_side_effect">Effet secondaire : votre trace ne contiendra pas les parties où la vitesse minimale n\'a pas été atteinte (par exemple lorsque vous poussez votre vélo en montée ou pendant une pause). De ce fait certaines informations de votre trace seront faussées comme la durée de déplacement ou la vitesse moyenne.</string>
     <string name="monitoring_min_speed_descr_recommendation">Recommandation : commencez par utiliser la détection de mouvement via le filtre de déplacement minimum (B) vous pourriez obtenir de meilleurs résultats en perdant moins de données. Si vos traces restent bruyantes à basse vitesse, essayez ici des valeurs non nulles. Veuillez noter que certaines mesures peuvent retourner une vitesse nulle (en raison de méthodes basées sur le réseau), dans ce cas rien ne sera enregistré.</string>
-    <string name="monitoring_min_accuracy_descr">Seuls les points mesurés avec un minimum de précision en mètres/pieds (information communiquée par votre puce GPS) seront enregistrés. La précision fait référence à la dispersion de plusieurs mesures successives et n\'est pas directement liée à la distance entre ces mesures et votre position réelle.</string>
-    <string name="monitoring_min_accuracy_descr_side_effect">Effet secondaire : avec le filtrage par précision certains points peuvent manquer ; par exemple : sous un pont, en forêt, entre de hauts bâtiments ou dans certaines conditions météorologiques.</string>
+    <string name="monitoring_min_accuracy_descr">Seuls les points mesurés avec un minimum de fiabilité en mètres/pieds (information communiquée par votre puce GPS) seront enregistrés. La fiabilité fait référence à la dispersion de plusieurs mesures successives et n\'est pas directement liée à la précision qui est la distance entre la position donnée par le GPS et votre position réelle.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Effet secondaire : avec le filtrage de fiabilité certains points peuvent manquer ; par exemple : sous un pont, en forêt, entre de hauts bâtiments ou dans certaines conditions météorologiques.</string>
     <string name="monitoring_min_accuracy_descr_remark">Remarque : si la localisation GPS est activée juste avant le début d\'enregistrement, la première position peut être imprécise. L\'application pourrait attendre quelques secondes avant d\'enregistrer un point (ou enregistrer le meilleur de 3 points successifs, etc), mais ces évolutions ne sont pas encore disponibles.</string>
     <string name="monitoring_min_speed_descr_remark">Remarque : vérification de vitesse &gt; 0. La plupart des puces GPS fournissent une vitesse uniquement lorsque vous êtes en mouvement. Par conséquent, l\'indication du paramètre &gt; 0 pour ce filtre utilise la détection de mouvement par la puce GPS. Mais même s\'il n\'est pas filtré ici au moment de l\'enregistrement, nous utilisons toujours cette fonctionnalité dans notre analyse des traces GPX pour déterminer la distance corrigée, c\'est-à-dire que la valeur affichée dans ce champ est la distance enregistrée en déplacement.</string>
     <string name="monitoring_min_distance_descr_side_effect">Effet secondaire : les périodes de repos ne seront pas enregistrées ou seulement par un point. De petits mouvements, comme des pas sur le côté, pourront être ignorés. Votre fichier contiendra moins d\'informations exploitables en post-traitement et aura des statistiques moins exactes (éliminant les points redondants mais conservant les erreurs de position dues à une mauvaise réception ou aux artefacts de la puce GPS).</string>
@@ -3577,4 +3577,37 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_circle">Cercle</string>
     <string name="shared_string_rhomb">Losange</string>
     <string name="shared_string_square">Carré</string>
+    <string name="shared_string_octagon">Octogone</string>
+    <string name="app_mode_ski_touring">Ski de randonnée</string>
+    <string name="app_mode_ski_snowmobile">Motoneige</string>
+    <string name="custom_osmand_plugin">Greffon OsmAnd personnalisé</string>
+    <string name="replace_point_descr">Remplacer un point par celui-ci</string>
+    <string name="changes_applied_to_profile">Modifications appliquées au profil %1$s.</string>
+    <string name="settings_item_read_error">Impossible de lire %1$s.</string>
+    <string name="settings_item_write_error">Impossible d\'écrire %1$s.</string>
+    <string name="settings_item_import_error">Impossible d\'importer %1$s.</string>
+    <string name="select_track_file">Sélectionnez le fichier de trace</string>
+    <string name="shared_string_languages">Langues</string>
+    <string name="shared_string_language">Langue</string>
+    <string name="shared_string_all_languages">Toutes les langues</string>
+    <string name="wiki_menu_download_descr">D’autres cartes sont nécessaires pour afficher les POI Wikipédia sur la carte.</string>
+    <string name="divider_descr">Éléments sous ce point isolés par un séparateur.</string>
+    <string name="ui_customization_description">Personnalisez le nombre d’éléments dans le panneau déroulant, paramétrez la carte et le menu contextuel.
+\n
+\nVous pouvez désactiver les greffons inutilisés, pour masquer tous leurs contrôles dans l’application %1$s.</string>
+    <string name="hidden_items_descr">Ces éléments sont masqués dans le menu mais les options présentes ou les greffons fonctionneront toujours.</string>
+    <string name="reset_items_descr">Les paramètres seront réinitialisés à leurs valeurs par défaut après avoir été masqués.</string>
+    <string name="additional_actions_descr">Vous pouvez accéder à ces actions en appuyant sur le bouton \"Actions\".</string>
+    <string name="ui_customization_short_descr">Éléments du panneau déroulant, menu contextuel</string>
+    <string name="shared_string_drawer">Panneau déroulant</string>
+    <string name="reorder_or_hide_from">Réorganisez ou masquez les éléments à partir de %1$s.</string>
+    <string name="move_inside_category">Vous ne pouvez déplacer les éléments qu’à l’intérieur de cette catégorie.</string>
+    <string name="ui_customization">Personnalisation de l\'interface utilisateur</string>
+    <string name="context_menu_actions">Actions du menu contextuel</string>
+    <string name="shared_string_divider">Séparateur</string>
+    <string name="shared_string_hidden">Masqué</string>
+    <string name="main_actions_descr">Les actions principales contiennent seulement 4 boutons.</string>
+    <string name="main_actions">Actions principales</string>
+    <string name="developer_plugin">Greffon de développement</string>
+    <string name="shared_string_items">Éléments</string>
 </resources>

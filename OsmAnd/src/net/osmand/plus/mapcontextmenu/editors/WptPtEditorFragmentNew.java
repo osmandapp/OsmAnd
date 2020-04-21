@@ -11,6 +11,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
@@ -23,6 +24,7 @@ import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.base.FavoriteImageDrawable;
@@ -306,40 +308,45 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 
 	@Override
 	protected void delete(final boolean needDismiss) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setMessage(getString(R.string.context_menu_item_delete_waypoint));
-		builder.setNegativeButton(R.string.shared_string_no, null);
-		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				WptPt wpt = getWpt();
-				WptPtEditor editor = getWptPtEditor();
-				SavingTrackHelper savingTrackHelper = getSavingTrackHelper();
-				if (wpt != null && editor != null && savingTrackHelper != null) {
-					GPXFile gpx = editor.getGpxFile();
-					if (gpx != null) {
-						if (gpx.showCurrentTrack) {
-							savingTrackHelper.deletePointData(wpt);
-						} else {
-							gpx.deleteWptPt(wpt);
-							new SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			final OsmandApplication app = (OsmandApplication) activity.getApplication();
+			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+			AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
+			builder.setMessage(getString(R.string.context_menu_item_delete_waypoint));
+			builder.setNegativeButton(R.string.shared_string_no, null);
+			builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					WptPt wpt = getWpt();
+					WptPtEditor editor = getWptPtEditor();
+					SavingTrackHelper savingTrackHelper = getSavingTrackHelper();
+					if (wpt != null && editor != null && savingTrackHelper != null) {
+						GPXFile gpx = editor.getGpxFile();
+						if (gpx != null) {
+							if (gpx.showCurrentTrack) {
+								savingTrackHelper.deletePointData(wpt);
+							} else {
+								gpx.deleteWptPt(wpt);
+								new SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+							}
+							syncGpx(gpx);
 						}
-						syncGpx(gpx);
+						saved = true;
 					}
-					saved = true;
-				}
 
-				if (needDismiss) {
-					dismiss(true);
-				} else {
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null) {
-						mapActivity.refreshMap();
+					if (needDismiss) {
+						dismiss(true);
+					} else {
+						MapActivity mapActivity = getMapActivity();
+						if (mapActivity != null) {
+							mapActivity.refreshMap();
+						}
 					}
 				}
-			}
-		});
-		builder.create().show();
+			});
+			builder.create().show();
+		}
 	}
 
 	@Override
@@ -347,7 +354,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 		if (categoriesMap != null) {
 			categoriesMap.put(name, color);
 		}
-		this.color = color;
+		this.color = this.color == 0 ? color : this.color;
 		super.setCategory(name, color);
 	}
 
@@ -359,7 +366,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 
 	@Override
 	public void setBackgroundType(BackgroundType backgroundType) {
-		this.backgroundTypeName = backgroundType.name();
+		this.backgroundTypeName = backgroundType.getTypeName();
 	}
 
 	@Override
@@ -411,12 +418,16 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 
 	@Override
 	public int getDefaultColor() {
-		return 0;
+		return defaultColor;
 	}
 
 	@Override
 	public int getPointColor() {
-		return color == 0 ? defaultColor : color;
+		if (color != 0) {
+			return color;
+		} else {
+			return getCategoryColor(getCategoryTextValue());
+		}
 	}
 
 	@Override

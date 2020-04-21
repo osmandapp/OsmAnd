@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:minHeight="48dp"
+        android:minHeight="@dimen/setting_list_item_large_height"
         android:background="?attr/bg_color"
         android:gravity="center"
         android:orientation="vertical"
@@ -34,9 +34,9 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="@dimen/default_sub_text_size"
+            android:paddingTop="@dimen/content_padding_small"
+            android:textColor="@color/preference_category_title"
+            android:textSize="@dimen/default_desc_text_size"
             osmand:typeface="@string/font_roboto_medium"
             tools:text="Download map"/>
 
@@ -44,18 +44,13 @@
             android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="4dp"
+            android:paddingTop="@dimen/content_padding_half"
+            android:paddingBottom="@dimen/content_padding"
             android:textColor="?android:textColorSecondary"
-            android:textSize="@dimen/default_sub_text_size"
-            android:paddingBottom="10dp"
+            android:textSize="@dimen/default_desc_text_size"
+            osmand:typeface="@string/font_roboto_regular"
             tools:text="For view contour lines on the map, you need to download contour line map of this region."/>
 
     </LinearLayout>
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?attr/dashboard_divider"/>
 
 </LinearLayout>

@@ -3,6 +3,7 @@ package net.osmand.plus.srtmplugin;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -62,19 +63,17 @@ public class SRTMPlugin extends OsmandPlugin {
 	public static final int TERRAIN_MIN_ZOOM = 3;
 	public static final int TERRAIN_MAX_ZOOM = 19;
 
-	private OsmandApplication app;
 	private OsmandSettings settings;
 
-	private boolean paid;
 	private TerrainLayer terrainLayer;
 
 	@Override
 	public String getId() {
-		return paid ? ID : FREE_ID;
+		return FREE_ID;
 	}
 
 	public SRTMPlugin(OsmandApplication app) {
-		this.app = app;
+		super(app);
 		settings = app.getSettings();
 	}
 
@@ -84,8 +83,8 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public int getAssetResourceName() {
-		return R.drawable.contour_lines;
+	public Drawable getAssetResourceImage() {
+		return app.getUIUtilities().getIcon(R.drawable.contour_lines);
 	}
 
 	@Override
@@ -353,9 +352,13 @@ public class SRTMPlugin extends OsmandPlugin {
 					.setListener(listener).createItem());
 		}
 		boolean terrainEnabled = settings.TERRAIN.get();
+		TerrainMode terrainMode = settings.TERRAIN_MODE.get();
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(TERRAIN)
 				.setTitleId(R.string.shared_string_terrain, mapActivity)
+				.setDescription(app.getString(terrainMode == TerrainMode.HILLSHADE
+						? R.string.shared_string_hillshade
+						: R.string.shared_string_slope))
 				.setSelected(terrainEnabled)
 				.setColor(terrainEnabled ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_hillshade_dark)
@@ -521,8 +524,10 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected void registerQuickActionTypes(List<QuickActionType> quickActionTypes) {
+	protected List<QuickActionType> getQuickActionTypes() {
+		List<QuickActionType> quickActionTypes = new ArrayList<>();
 		quickActionTypes.add(ContourLinesAction.TYPE);
 		quickActionTypes.add(TerrainAction.TYPE);
+		return quickActionTypes;
 	}
 }

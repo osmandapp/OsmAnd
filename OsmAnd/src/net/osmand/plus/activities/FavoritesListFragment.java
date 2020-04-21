@@ -5,7 +5,6 @@ package net.osmand.plus.activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -29,6 +28,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
@@ -200,8 +200,8 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View row = convertView;
 			if (row == null) {
-				LayoutInflater inflater = activity.getLayoutInflater(); 
-				row = inflater.inflate(R.layout.favorites_list_item, parent, false);
+				boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+				row = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.favorites_list_item, parent, false);
 			}
 
 			TextView name = (TextView) row.findViewById(R.id.favourite_label);

@@ -1727,7 +1727,7 @@
     <string name="poi_rescue_station">Björgunarstöð</string>
     <string name="poi_piste_difficulty_easy">Auðvelt</string>
     <string name="poi_vending_type">Gerð sjálfsala</string>
-    <string name="poi_tactile_paving">Snertimerking yfirborðs</string>
+    <string name="poi_tactile_paving">Upphleypt yfirborð</string>
     <string name="poi_brushless">Burstalaust</string>
     <string name="poi_traffic_enforcement">Umferðareftirlit</string>
     <string name="poi_seamark">Sjótengt</string>
@@ -2159,7 +2159,7 @@
     <string name="poi_board_type_notice">Upplýsingatafla</string>
     <string name="poi_covered_no">Ekki undir þaki</string>
     <string name="poi_smoking_isolated">Í aðskildu herbergi</string>
-    <string name="poi_tactile_paving_no">Án snertimerkingar yfirborðs</string>
+    <string name="poi_tactile_paving_no">Án upphleypts yfirborðs</string>
     <string name="poi_mini_roundabout">Lítið hringtorg</string>
     <string name="poi_leisure_common">Sameiginlegt afþreyingarsvæði</string>
     <string name="poi_windfall">Vindfellt</string>
@@ -3786,4 +3786,21 @@
     <string name="poi_drinking_water_refill_yes">Áfylling drykkjarvatns: já</string>
     <string name="poi_drinking_water_refill_no">Áfylling drykkjarvatns: nei</string>
     <string name="poi_drinking_water_refill_network">Kerfi fyrir áfyllingu drykkjarvatns</string>
+    <string name="poi_tactile_paving_contrasted">Mislitt</string>
+    <string name="poi_monastery_type_clerks_regular">Klausturgerð: dómkirkjuprestar</string>
+    <string name="poi_monastery_type_hermitage">Klausturgerð: einsetulíf</string>
+    <string name="poi_monastery_type_canonry">Klausturgerð: kanokasetur</string>
+    <string name="poi_monastery_type_convent">Klausturgerð: nunnuklaustur</string>
+    <string name="poi_monastery_type_monastics">Klausturgerð: munkaklaustur</string>
+    <string name="poi_seamark_water_level_below_mwl">Vatnsyfirborð: undir meðalvatnshæð</string>
+    <string name="poi_seamark_water_level_above_mwl">Vatnsyfirborð: ofan meðalvatnshæðar</string>
+    <string name="poi_seamark_water_level_floating">Vatnsyfirborð: fljótandi</string>
+    <string name="poi_seamark_water_level_floods">Vatnsyfirborð: flæðir yfir</string>
+    <string name="poi_seamark_water_level_awash">Vatnsyfirborð: seytlar yfir</string>
+    <string name="poi_seamark_water_level_covers">Vatnsyfirborð: hulið</string>
+    <string name="poi_seamark_water_level_dry">Vatnsyfirborð: á þurru</string>
+    <string name="poi_seamark_water_level_submerged">Vatnsyfirborð: í kafi</string>
+    <string name="poi_seamark_water_level_part_submerged">Vatnsyfirborð: að hluta í kafi</string>
+    <string name="poi_tactile_paving_primitive">Gróft</string>
+    <string name="poi_internet_access_fee_customers">Merki til að finna staurinn</string>
 </resources>

@@ -47,6 +47,7 @@ import net.osmand.plus.mapcontextmenu.editors.RtePtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
+import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.transport.TransportStopRoute;
@@ -1061,16 +1062,32 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public void buttonMorePressed() {
+	public ContextMenuAdapter getActionsContextMenuAdapter(boolean all) {
 		MapActivity mapActivity = getMapActivity();
+		final ContextMenuAdapter menuAdapter = new ContextMenuAdapter(getMyApplication());
 		if (mapActivity != null) {
-			final ContextMenuAdapter menuAdapter = new ContextMenuAdapter();
 			LatLon latLon = getLatLon();
 			for (OsmandMapLayer layer : mapActivity.getMapView().getLayers()) {
 				layer.populateObjectContextMenu(latLon, getObject(), menuAdapter, mapActivity);
 			}
+			mapActivity.getMapActions().addActionsToAdapter(all ? 0 : latLon.getLatitude(), all ? 0 : latLon.getLatitude(), menuAdapter, getObject(), all);
+		}
+		return menuAdapter;
+	}
 
-			mapActivity.getMapActions().contextMenuPoint(latLon.getLatitude(), latLon.getLongitude(), menuAdapter, getObject());
+	public ContextMenuItemClickListener getContextMenuItemClickListener(ContextMenuAdapter menuAdapter) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			LatLon latLon = getLatLon();
+			return mapActivity.getMapActions().getContextMenuItemClickListener(latLon.getLatitude(), latLon.getLatitude(), menuAdapter);
+		}
+		return null;
+	}
+
+	public void showAdditionalActionsFragment(final ContextMenuAdapter adapter, ContextMenuItemClickListener listener) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapActions().showAdditionalActionsFragment(adapter, listener);
 		}
 	}
 

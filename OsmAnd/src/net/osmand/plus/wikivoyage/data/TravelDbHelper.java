@@ -602,7 +602,7 @@ public class TravelDbHelper {
 		res.title = cursor.getString(0);
 		try {
 			res.content = Algorithms.gzipToString(cursor.getBlob(1)).trim();
-		} catch (IOException e) {
+		} catch (IllegalStateException e) {
 			LOG.error(e.getMessage(), e);
 		}
 		res.isPartOf = cursor.getString(2);

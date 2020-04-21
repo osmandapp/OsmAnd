@@ -446,7 +446,7 @@
     <string name="install_more">Weitere installieren…</string>
     <string name="level_to_switch_vector_raster_descr">Verwenden Sie Rasterkarten für alles, was über diese Ebene hinausgeht.</string>
     <string name="level_to_switch_vector_raster">Minimale Vektor-Zoomstufe</string>
-    <string name="create_poi_link_to_osm_doc"> string name=\"route_descr_current_location\"&gt;Aktueller Standort&lt;/string </string>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> Kartenklassifizierung mit Bildern.</string>
     <string name="error_doing_search">Offline-Suche konnte nicht durchgeführt werden.</string>
     <string name="search_osm_offline">Suche nach Standort</string>
     <string name="system_locale">Systemeinstellung</string>
@@ -842,7 +842,7 @@
     <string name="edit_filter_save_as_menu_item">Speichern als</string>
     <string name="edit_filter_delete_dialog_title">Diesen Filter löschen\?</string>
     <string name="edit_filter_delete_message">Filter %1$s gelöscht</string>
-    <string name="edit_filter_create_message">Filter %1$s erstellt</string>
+    <string name="edit_filter_create_message">Filter \'%1$s\' erstellt</string>
     <string name="offline_navigation_not_available">OsmAnd-Offline-Navigation steht zur Zeit nicht zur Verfügung.</string>
     <string name="left_side_navigation">Linksverkehr</string>
     <string name="left_side_navigation_descr">Für Länder, in denen man auf der linken Straßenseite fährt.</string>
@@ -1435,7 +1435,7 @@
     <string name="routing_attr_no_new_routing_name">Routing-Regeln v1.9 nicht verwenden</string>
     <string name="routing_attr_no_new_routing_description">Neuen Routenalgorithmus aus v1.9 nicht verwenden.</string>
     <string name="speak_pedestrian">Fußgängerübergänge</string>
-    <string name="parking_place">Parkplatz</string>
+    <string name="parking_place">Parkbucht</string>
     <string name="remove_the_tag">TAG ENTFERNEN</string>
     <string name="gps_status">GPS-Status</string>
     <string name="version_settings_descr">Nightly-Builds herunterladen.</string>
@@ -3053,7 +3053,7 @@ Lon %2$s</string>
     <string name="choose_data_to_share">Wählen Sie, welche Art Daten Sie freigeben möchten:</string>
     <string name="downloaded_maps">Heruntergeladene Karten</string>
     <string name="visited_screens">Besuchte Bildschirme</string>
-    <string name="collected_data_descr">Bestimmen Sie, welche Daten Sie für OsmAnd freigeben.</string>
+    <string name="collected_data_descr">Festlegen, welche Daten OsmAnd weitergeben darf.</string>
     <string name="downloaded_maps_collect_descr">Helfen Sie uns, die Beliebtheit von Karten für Länder und Regionen herauszufinden.</string>
     <string name="visited_screens_collect_descr">Helfen Sie uns, die Beliebtheit von OsmAnd-Funktionen zu verstehen.</string>
     <string name="privacy_and_security_change_descr">Auf „Erlauben“ tippen, wenn Sie mit unserer %1$s einverstanden sind</string>
@@ -3277,7 +3277,7 @@ Lon %2$s</string>
     <string name="vehicle_parameters_descr">Gewicht, Höhe, Geschwindigkeit</string>
     <string name="vehicle_parameters">Fahrzeugparameter</string>
     <string name="route_parameters">Routenparameter</string>
-    <string name="navigate_point_format_olc">Standortkodierung öffnen</string>
+    <string name="navigate_point_format_olc">Offener Standortcode (OLC)</string>
     <string name="start_up_message_pref">Begrüßungsnachricht</string>
     <string name="screen_alerts_descr">Warnungen werden während der Navigation unten links angezeigt.</string>
     <string name="map_during_navigation">Karte während Navigation</string>
@@ -3399,7 +3399,7 @@ Lon %2$s</string>
     <string name="shared_string_turn_off">Ausschalten</string>
     <string name="new_plugin_added">Neues Plugin hinzugefügt</string>
     <string name="quick_action_directions_from_desc">Eine Schaltfläche, um die Bildschirmmitte zum Ausgangspunkt zu machen. Sie werden dann aufgefordert, ein Ziel festzulegen oder die Routenberechnung auszulösen.</string>
-    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Radroutennetzknoten anzeigen</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Knotenpunktsystem von Radrouten anzeigen</string>
     <string name="download_map_dialog">Dialog zum Herunterladen der Karte</string>
     <string name="dialogs_and_notifications_title">Dialoge und Benachrichtigungen</string>
     <string name="dialogs_and_notifications_descr">Steuern Sie Popups, Dialoge und Benachrichtigungen.</string>
@@ -3410,7 +3410,7 @@ Lon %2$s</string>
     <string name="save_heading">Richtung einbeziehen</string>
     <string name="save_heading_descr">Richtung zu jedem Trackpunkt während der Aufnahme speichern.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
-    <string name="street_city">%1$s, %2$s</string>
+    <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="personal_category_name">Persönlich</string>
     <string name="shared_string_downloading_formatted">%s herunterladen</string>
     <string name="rendering_value_thick_name">Fett</string>
@@ -3563,9 +3563,9 @@ Lon %2$s</string>
     <string name="replace_all">Alle ersetzen</string>
     <string name="keep_both">Beide behalten</string>
     <string name="keep_both_desc">Importierte Elemente werden mit Präfix hinzugefügt</string>
-    <string name="import_duplicates_description">OsmAnd verfügt bereits über Elemente mit denselben Namen wie die importierten.
+    <string name="import_duplicates_description">OsmAnd enthält bereits Elemente gleichen Namens wie die importierten.
 \n
-\nWählen Sie eine Aktion aus.</string>
+\nWählen Sie eine Maßnahme.</string>
     <string name="import_duplicates_title">Einige Elemente sind bereits vorhanden</string>
     <string name="select_data_to_import">Wählen Sie die zu importierenden Daten.</string>
     <string name="shared_string_rendering_style">Darstellungsstil</string>
@@ -3602,13 +3602,36 @@ Lon %2$s</string>
     <string name="shared_string_transparency">Transparenz</string>
     <string name="terrain_slider_description">Stellen Sie die minimale und maximale Zoomstufe ein, bei der die Ebene angezeigt wird.</string>
     <string name="shared_string_terrain">Gelände</string>
-    <string name="download_slope_maps">Hänge</string>
+    <string name="download_slope_maps">Pisten</string>
     <string name="terrain_empty_state_text">Aktivieren Sie diese Option, um die Schatten- oder Hangkarte anzuzeigen. Weitere Informationen zu diesen Kartentypen finden Sie auf unserer Website</string>
     <string name="shared_string_legend">Legende</string>
-    <string name="slope_read_more">Lesen Sie mehr über Hänge in %1$s.</string>
-    <string name="slope_download_description">Zusätzliche Karten sind erforderlich, um Hänge auf der Karte anzuzeigen.</string>
+    <string name="slope_read_more">Lesen Sie mehr über Pisten in %1$s.</string>
+    <string name="slope_download_description">Zusätzliche Karten sind erforderlich, um Pisten auf der Karte anzuzeigen.</string>
     <string name="hillshade_download_description">Für die Darstellung der Schummerung werden zusätzliche Karten benötigt.</string>
     <string name="shared_string_min">Min</string>
     <string name="hillshade_description">Schummerungs-Karte mit dunklen Schattierungen zur Darstellung von Hängen, Gipfeln und Niederungen.</string>
     <string name="n_items_of_z">%1$s von %2$s</string>
+    <string name="shared_string_octagon">Achteck</string>
+    <string name="app_mode_ski_touring">Skitouren</string>
+    <string name="app_mode_ski_snowmobile">Schneemobil</string>
+    <string name="custom_osmand_plugin">Benutzerdefiniertes OsmAnd-Plugin</string>
+    <string name="slope_description">Farbliche Kennzeichnung von Pisten im Gelände.</string>
+    <string name="replace_point_descr">Einen anderen Punkt durch diesen ersetzen</string>
+    <string name="changes_applied_to_profile">Die Änderungen wurden auf das %1$s Profil angewendet.</string>
+    <string name="settings_item_read_error">Konnte %1$s nicht lesen.</string>
+    <string name="settings_item_write_error">Konnte %1$s nicht schreiben.</string>
+    <string name="settings_item_import_error">Konnte %1$s nicht importieren.</string>
+    <string name="select_track_file">Wählen Sie eine Pfad-Datei</string>
+    <string name="shared_string_languages">Sprachen</string>
+    <string name="shared_string_language">Sprache</string>
+    <string name="shared_string_all_languages">Alle Sprachen</string>
+    <string name="wiki_menu_download_descr">Zusätzliche Karten werden benötigt um Wikipedia-POIs auf der Karte anzuzeigen.</string>
+    <string name="developer_plugin">Entwickler-Plugin</string>
+    <string name="ui_customization">Anpassung der Benutzeroberfläche</string>
+    <string name="context_menu_actions">Aktionen im Kontextmenü</string>
+    <string name="shared_string_hidden">Ausgeblendet</string>
+    <string name="reset_items_descr">Die Einstellungen werden nach dem Ausblenden auf den ursprünglichen Zustand zurückgesetzt.</string>
+    <string name="main_actions">Hauptaktionen</string>
+    <string name="move_inside_category">Sie können Elemente nur innerhalb dieser Kategorie verschieben.</string>
+    <string name="shared_string_items">Elemente</string>
 </resources>

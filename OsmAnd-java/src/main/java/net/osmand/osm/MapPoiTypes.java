@@ -36,7 +36,10 @@ public class MapPoiTypes {
 	private PoiCategory otherCategory;
 	private PoiCategory otherMapCategory;
 
-	static final String OSM_WIKI_CATEGORY = "osmwiki";
+	public static final String WIKI_LANG = "wiki_lang";
+	public static final String WIKI_PLACE = "wiki_place";
+	public static final String OSM_WIKI_CATEGORY = "osmwiki";
+
 	private PoiTranslator poiTranslator = null;
 	private boolean init;
 	Map<String, PoiType> poiTypesByTag = new LinkedHashMap<String, PoiType>();
@@ -125,6 +128,28 @@ public class MapPoiTypes {
 		}
 		sortList(lf);
 		return lf;
+	}
+
+	public PoiCategory getOsmwiki() {
+		for (PoiCategory category : categories) {
+			if (category.isWiki()) {
+				return category;
+			}
+		}
+		return null;
+	}
+
+	public List<String> getAllAvailableWikiLocales() {
+		List<String> availableWikiLocales = new ArrayList<>();
+		for (PoiType type : getOsmwiki().getPoiTypeByKeyName(WIKI_PLACE).getPoiAdditionals()) {
+			String name = type.getKeyName();
+			String wikiLang = WIKI_LANG + ":";
+			if (name != null && name.startsWith(wikiLang)) {
+				String locale = name.substring(wikiLang.length());
+				availableWikiLocales.add(locale);
+			}
+		}
+		return availableWikiLocales;
 	}
 
 	private void sortList(List<? extends AbstractPoiType> lf) {
@@ -401,7 +426,7 @@ public class MapPoiTypes {
 					} else if (name.equals("poi_type")) {
 						if (lastCategory == null) {
 							lastCategory = getOtherMapCategory();
-						} 
+						}
 						if(!Algorithms.isEmpty(parser.getAttributeValue("", "deprecated_of"))){
 							String vl = parser.getAttributeValue("", "name");
 							String target = parser.getAttributeValue("", "deprecated_of");
@@ -595,7 +620,7 @@ public class MapPoiTypes {
 		tp.setOsmValue(parser.getAttributeValue("", "value"));
 		tp.setOsmEditTagValue(parser.getAttributeValue("", "edit_tag"),
 				parser.getAttributeValue("", "edit_value"));
-		
+
 		tp.setOsmTag2(parser.getAttributeValue("", "tag2"));
 		tp.setOsmValue2(parser.getAttributeValue("", "value2"));
 		tp.setText("text".equals(parser.getAttributeValue("", "type")));
@@ -806,7 +831,7 @@ public class MapPoiTypes {
 			poiTypesByTag.put(key, p);
 		}
 	}
-	
+
 	public String replaceDeprecatedSubtype(PoiCategory type, String subtype) {
 		if(deprecatedTags.containsKey(subtype)) {
 			return deprecatedTags.get(subtype);
@@ -892,9 +917,9 @@ public class MapPoiTypes {
 	}
 
 
-	
 
 
-	
+
+
 
 }

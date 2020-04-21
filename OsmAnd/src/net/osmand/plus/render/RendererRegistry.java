@@ -25,10 +25,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -259,10 +257,10 @@ public class RendererRegistry {
 			File[] lf = file.listFiles();
 			if (lf != null) {
 				for (File f : lf) {
-					if (f != null && f.getName().endsWith(IndexConstants.ROUTING_AND_RENDERING_FILE_EXT)) {
-						if(!internalRenderers.containsValue(f.getName())) {
-							String name = f.getName().substring(0, f.getName().length() - IndexConstants.ROUTING_AND_RENDERING_FILE_EXT.length());
-							externalRenderers.put(name.replace('_', ' ').replace('-', ' '), f);
+					if (f != null && f.getName().endsWith(IndexConstants.RENDERER_INDEX_EXT)) {
+						if (!internalRenderers.containsValue(f.getName())) {
+							String name = formatRendererFileName(f.getName());
+							externalRenderers.put(name, f);
 						}
 					}
 				}
@@ -270,13 +268,23 @@ public class RendererRegistry {
 		}
 		this.externalRenderers = externalRenderers;
 	}
-	
-	public Collection<String> getRendererNames(){
-		LinkedHashSet<String> names = new LinkedHashSet<String>();
-		names.add(DEFAULT_RENDER);
-		names.addAll(internalRenderers.keySet());
-		names.addAll(externalRenderers.keySet());
-		return names;
+
+	public static String formatRendererFileName(String fileName) {
+		String name = fileName.substring(0, fileName.length() - IndexConstants.RENDERER_INDEX_EXT.length());
+		name = name.replace('_', ' ').replace('-', ' ');
+		return Algorithms.capitalizeFirstLetter(name);
+	}
+
+	@NonNull
+	public Map<String, String> getRenderers() {
+		Map<String, String> renderers = new LinkedHashMap<String, String>();
+		renderers.put(DEFAULT_RENDER, DEFAULT_RENDER_FILE_PATH);
+		renderers.putAll(internalRenderers);
+
+		for (Map.Entry<String, File> entry : externalRenderers.entrySet()) {
+			renderers.put(entry.getKey(), entry.getValue().getName());
+		}
+		return renderers;
 	}
 
 	@Nullable

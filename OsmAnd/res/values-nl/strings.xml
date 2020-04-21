@@ -87,7 +87,7 @@
     <string name="local_openstreetmap_delete">Wis de bewerking</string>
     <string name="local_openstreetmap_descr_title">OpenStreetMap asynchroon wijzigen:</string>
     <string name="local_openstreetmap_settings">Lokaal opgeslagen OSM-Interessepunten/Opmerkingen</string>
-    <string name="local_openstreetmap_settings_descr">Beheer OSM-Interessepunten/Opmerkingen die lokaal zijn bewaard.</string>
+    <string name="local_openstreetmap_settings_descr">Toon en beheer OSM-Interessepunten/Opmerkingen die lokaal zijn bewaard.</string>
     <string name="live_monitoring_interval_descr">Specificeer interval voor online tracking.</string>
     <string name="live_monitoring_interval">Interval voor online tracking</string>
     <string name="live_monitoring_url_descr">Specificeer het webadres met parameters: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
@@ -248,7 +248,7 @@
     <string name="install_more">Installeer meer…</string>
     <string name="level_to_switch_vector_raster_descr">Minimum zoomniveau om vectorkaarten in plaats van (raster)kaartsegmenten te gebruiken.</string>
     <string name="level_to_switch_vector_raster">Min. vector zoomniveau</string>
-    <string name="create_poi_link_to_osm_doc"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> kaart classificatie met afbeeldingen.</string>
     <string name="error_doing_search">Fout bij offline zoeken.</string>
     <string name="search_osm_offline">Zoek adres in de offline kaarten</string>
     <string name="system_locale">Systeem</string>
@@ -633,7 +633,7 @@
     <string name="left_side_navigation_descr">Activeer in een land waar men links rijdt.</string>
     <string name="unknown_from_location">Vertrekpunt is nog niet bepaald.</string>
     <string name="confirm_interrupt_download">Downloaden afbreken?</string>
-    <string name="basemap_was_selected_to_download">De basiskaart is nodig voor de goede werking van OsmAnd en is al geselecteerd om te downloaden.</string>
+    <string name="basemap_was_selected_to_download">De basiskaart, nodig voor de goede werking van OsmAnd, is al geselecteerd om te downloaden.</string>
     <string name="map_online_plugin_is_not_installed">Activeer de \'Online Kaarten\' plug-in om andere kaartbronnen te kunnen selecteren</string>
     <string name="map_online_data">Online (raster-) kaarten</string>
     <string name="map_online_data_descr">Gebruik online kaarten (download en bewaar deze op SD-kaart).</string>
@@ -887,10 +887,10 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="av_settings">Audio/video-instellingen </string>
     <string name="recording_error">Fout opgetreden bij opnemen </string>
     <string name="recording_camera_not_available">Camera is niet beschikbaar</string>
-    <string name="srtm_paid_version_msg">Overweeg om de plug-in \"Hoogtelijnen\" te kopen in de Play-store om verdere ontwikkeling te ondersteunen.</string>
+    <string name="srtm_paid_version_msg">Overweeg om de plug-in \"Hoogtelijnen\" te kopen, in de Play-store, om verdere ontwikkeling te ondersteunen.</string>
     <string name="srtm_paid_version_title">Hoogtelijnen-Plugin</string>
     <string name="intermediate_points_change_order">Volgorde wijzigen</string>
-    <string name="dropbox_plugin_description">De Dropbox plug-in kan tracks en audio-/videonotities synchroniseren met je Dropbox-account.</string>
+    <string name="dropbox_plugin_description">Synchroniseren tracks en audio-/videonotities met je Dropbox-account.</string>
     <string name="dropbox_plugin_name">Dropbox plug-in</string>
     <string name="recording_context_menu_show">Toon</string>
     <string name="recording_photo_description">Foto %1$s %2$s</string>
@@ -2151,7 +2151,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="quick_action_gpx_category_descr">Kies een categorie (optie).</string>
     <string name="quick_action_poi_list">POI-lijst</string>
     <string name="quick_action_sh_poi_descr">Je kunt één of meerdere POI-categorieën kiezen om weer te geven.</string>
-    <string name="quick_action_page_list_descr">Druk knop om door de onderstaande lijst te bladeren.</string>
+    <string name="quick_action_page_list_descr">Een knop om door de onderstaande lijst te bladeren.</string>
     <string name="quick_action_map_style_action">Kaartstijl toevoegen</string>
     <string name="quick_action_empty_param_error">Alle parameters invullen</string>
     <string name="quick_action_map_styles">Kaartstijlen</string>
@@ -3281,7 +3281,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="save_heading">Richting toevoegen</string>
     <string name="personal_category_name">Persoonlijk</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
-    <string name="street_city">%1$s, %2$s</string>
+    <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="shared_string_downloading_formatted">Downloaden %s</string>
     <string name="desert_render_descr">Voor woestijnen en andere dunbevolkte gebieden. Meer gedetailleerd.</string>
     <string name="rendering_value_thick_name">Dik</string>
@@ -3316,7 +3316,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="live_monitoring">Online volgen</string>
     <string name="save_track_logging_accuracy">Opnamenauwkeurigheid</string>
     <string name="tracks_view_descr">U kan al uw opgenomen tracks terugvinden bij %1$s of in OsmAnd-map met een bestand verkenner.</string>
-    <string name="multimedia_notes_view_descr">U kan al uw notities terugvinden bij %1$s</string>
+    <string name="multimedia_notes_view_descr">U kan al uw notities terugvinden in %1$s</string>
     <string name="video_notes">Videonotities</string>
     <string name="photo_notes">Fotonotities</string>
     <string name="route_recalculation">Route herberekening</string>
@@ -3349,7 +3349,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="multimedia_photo_play_sound">Camera sluiter geluid</string>
     <string name="osm_authorization_success">Toestemming is gelukt</string>
     <string name="rearrange_categories">Herschik categorieën</string>
-    <string name="create_custom_categories_list_promo">Je kan eigen categorieën toevoegen, categorieën die niet nuttig zijn verbergen en de sorteervolgorde van de lijst wijzigen. De lijst kan met profielen geïmporteerd en geëxporteerd worden.</string>
+    <string name="create_custom_categories_list_promo">Wijzig de sorteervolgorde van een lijst, verberg onnodige categorieën. U kunt alle wijzigingen in profielen, exporteren of importeren.</string>
     <string name="add_new_custom_category_button_promo">Je kan een nieuwe eigen categorie toevoegen door een of meerdere benodigde categorieën te kiezen.</string>
     <string name="reset_to_default_category_button_promo">Herstel naar standaard zal de sorteervolgorde terugzetten zoals die was bij installatie.</string>
     <string name="shared_string_available">Beschikbaar</string>
@@ -3410,4 +3410,17 @@ voor Gebied: %1$s x %2$s</string>
     <string name="restore_all_profile_settings">Alle profielinstellingen herstellen\?</string>
     <string name="saving_new_profile">Slaat nieuw profiel op</string>
     <string name="profile_backup_failed">Kan profiel niet back-uppen.</string>
+    <string name="n_items_of_z">%1$s of %2$s</string>
+    <string name="download_slope_maps">Hellingen</string>
+    <string name="quick_action_show_hide_terrain">Toon/Verberg de omgeving</string>
+    <string name="quick_action_terrain_hide">Verberg de omgeving</string>
+    <string name="quick_action_terrain_show">Toon de omgeving</string>
+    <string name="quick_action_terrain_descr">Een knop om een laag op de kaart weer te geven of te verbergen.</string>
+    <string name="delete_description">Verwijder een beschrijving</string>
+    <string name="add_description">Voeg een beschrijving toe</string>
+    <string name="select_group">Selecteer groep</string>
+    <string name="select_shape">Selecteer vorm</string>
+    <string name="shared_string_circle">cirkel</string>
+    <string name="shared_string_rhomb">Ruit</string>
+    <string name="shared_string_min">Min</string>
 </resources>

@@ -2352,7 +2352,7 @@
     <string name="find_parking">پیداکردن پارکینگ</string>
     <string name="add_time_span">افزودن بازهٔ زمانی</string>
     <string name="shared_string_undo_all">خنثی‌کردن همه</string>
-    <string name="auto_split_recording_title">بخش‌بندی خودکار مسیر پس از وقفه</string>
+    <string name="auto_split_recording_title">بخش‌بندی خودکار ضبط پس از وقفه</string>
     <string name="save_track_min_distance">کمترین جابه‌جایی برای ثبت</string>
     <string name="translit_names">نویسه‌گردانی نام‌ها</string>
     <string name="rec_split_clip_length">مدت کلیپ</string>
@@ -3047,7 +3047,7 @@
     <string name="files_moved">%1$d فایل منتقل شد (%2$s).</string>
     <string name="files_copied">%1$d فایل کپی شد (%2$s).</string>
     <string name="files_failed">نمی‌توان %1$d فایل (%2$s) را کپی کرد.</string>
-    <string name="files_present">%1$d فایل (%2$s) در مکان قبلی وجود دارد.
+    <string name="files_present">%1$d فایل (%2$s) در مکان قبلی وجود دارد:
 \n\'%3$s\'</string>
     <string name="move_maps">نقشه‌ها را منتقل کن</string>
     <string name="dont_move_maps">منتقل نکن</string>
@@ -3206,8 +3206,8 @@
     <string name="routing_attr_max_num_changes_description">حداکثر چند بار شیوهٔ حمل‌ونقل تغییر کند؟</string>
     <string name="routing_attr_max_num_changes_name">تعداد تغییرات</string>
     <string name="gpx_join_gaps">حذف وقفه‌ها</string>
-    <string name="rendering_attr_showLez_description">محدوده‌های کم‌آلاینده (LEZ) را روی نقشه نشان بده. روی مسیریابی اثر نمی‌گذارد.</string>
-    <string name="rendering_attr_showLez_name">محدوده‌های کم‌آلاینده</string>
+    <string name="rendering_attr_showLez_description">محدوده‌های کاهش آلودگی هوای شهر را روی نقشه نشان بده. روی مسیریابی اثر نمی‌گذارد.</string>
+    <string name="rendering_attr_showLez_name">محدوده‌های کاهش</string>
     <string name="temporary_conditional_routing">در نظر گرفتن محدودیت‌های موقت در مسیریابی</string>
     <string name="routing_attr_piste_type_downhill_name">اسکی آلپاین/دان‌هیل</string>
     <string name="routing_attr_piste_type_downhill_description">سراشیبی‌های اسکی آلپاین یا دان‌هیل و دسترسی به بالابرهای اسکی.</string>
@@ -3273,7 +3273,7 @@
     <string name="routing_attr_piste_type_sled_name">سورتمه</string>
     <string name="routing_attr_piste_type_sled_description">سراشیبی برای سورتمه‌سواری.</string>
     <string name="routing_attr_allow_skating_only_description">مسیرهای آماده‌شده برای سبک آزاد یا فقط-اسکیت. بدون مسیرهای کلاسیک.</string>
-    <string name="routing_attr_allow_classic_only_description">"مسیرهایی که فقط برای سبک کلاسیک آماده شده  و مسیر اسکیت ندارند. مسیرهای سُست‌تر و آماده‌شده با برف‌روهای کوچک‌تر و مسیرهای دست‌ساز اسکی‌بازان را نیز شامل می‌شود."</string>
+    <string name="routing_attr_allow_classic_only_description">مسیرهایی که فقط برای سبک کلاسیک آماده شده و مسیر اسکیت ندارند. مسیرهای سُست‌تر و آماده‌شده با برف‌روهای کوچک‌تر و مسیرهای دست‌ساز اسکی‌بازان را نیز شامل می‌شود.</string>
     <string name="external_input_device_descr">یک دستگاه کنترل خارجی، مانند صفحه‌کلید یا WunderLINQ را انتخاب کنید.</string>
     <string name="utm_format_descr">‏OsmAnd از قالب UTM Standard استفاده می‌کند که مشابه (اما نه یکسان) با UTM Nato است.</string>
     <string name="apply_to_current_profile">به‌کارگیری فقط برای «%1$s»</string>
@@ -3424,14 +3424,14 @@
     <string name="added_profiles_descr">پروفایل‌هایی که افزونه افزوده</string>
     <string name="new_plugin_added">افزونهٔ تازه اضافه شد</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">نمایش مسیرهای دوچرخهٔ شبکه‌های گره</string>
-    <string name="clear_confirmation_msg">%1$s پاک‌سازی شود؟</string>
+    <string name="clear_confirmation_msg">‏%1$s پاک‌سازی شود؟</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">شبکه‌های گره</string>
     <string name="shared_string_turn_off">خاموش</string>
     <string name="join_segments">پیوند پاره‌ها</string>
     <string name="save_heading">ثبت جهت</string>
     <string name="save_heading_descr">هنگام ضبط، جهت (heading) را برای هر یک از نقطه‌های رد ثبت می‌کند.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
-    <string name="street_city">%1$s،‏ %2$s</string>
+    <string name="ltr_or_rtl_combine_via_comma">%1$s،‏ %2$s</string>
     <string name="personal_category_name">شخصی</string>
     <string name="shared_string_downloading_formatted">در حال بارگیری %s</string>
     <string name="rendering_value_thick_name">ضخیم</string>
@@ -3465,7 +3465,7 @@
     <string name="monitoring_min_speed_descr_side_effect">اثر جانبی: همهٔ قطعه‌هایی که در آن‌ها به حداقل سرعت معیار نرسید از رد حذف خواهد شد (مثلاً هنگامی که دوچرخه‌تان را بالای یک تپه با شیب تند می‌برید). همچنین هیچ اطلاعاتی دربارهٔ بازه‌های توقف، مانند استراحت‌ها، ضبط نمی‌شود. این مسئله بر همهٔ تحلیل‌ها یا پس‌پردازش‌ها تأثیر می‌گذارد، مانند زمانی که بخواهید مسافت کلی سفر، مدت حرکت یا سرعت متوسط خود را بدانید.</string>
     <string name="monitoring_min_speed_descr_recommendation">توصیه: ابتدا از پالایهٔ «کمترین جابه‌جایی» به‌منظور تشخیص حرکت استفاده کنید (B). این‌گونه شاید نتایج بهتری بگیرید و همچنین دادهٔ کمتری از دست می‌دهید. اگر ردها در سرعت‌های پایین نویز دارد، برای اینجا از مقدارهای غیرصفر استفاده کنید. لطفاً توجه نمایید که برخی اندازه‌گیری‌ها ممکن است اصلاً هیچ سرعتی را گزارش نکنند (برخی روش‌های مبتنی بر شبکه)، که در این صورت هیچ چیزی ضبط نخواهد شد.</string>
     <string name="monitoring_min_speed_descr_remark">توجه: بیشتر چیپست‌های GPS فقط در صورتی مقدار سرعت را گزارش می‌کنند که الگوریتم، شما را در حال حرکت تشخیص دهد و اگر در حال حرکت نباشید چیزی گزارش نمی‌کنند. بنابراین استفاده از گزینهٔ «&gt;۰» در این پالایه، به تشخیص حرکت توسط چیپست GPS وابسته است. البته حتی اگر این پالایش در زمان ضبط انجام نشود، ما از این ویژگی در تحلیل‌های GPX خود استفاده می‌کنیم تا مسافت اصلاح‌شده را محاسبه کنیم؛ یعنی مقداری که برای «مسافت اصلاح‌شده» گزارش می‌کنیم میزان مسافتی است که در هنگام حرکت ضبط شده.</string>
-    <string name="monitoring_min_accuracy_descr">این مورد فقط نقاطی را ضبط می‌کند که با شاخص کمترین صحت (به متر/فوت، مطابق گزارش اندروید از چیپست) اندازه‌گیری شده‌اند. منظور از صحت، نمودار نقطه‌ای اندازه‌گیری‌های تکراری است و مستقیماً مربوط به دقت نمی‌شود (دقت: میزان نزدیکی اندازه‌گیری‌ها به موقعیت واقعی).</string>
+    <string name="monitoring_min_accuracy_descr">این مورد فقط نقاطی را ضبط می‌کند که با شاخص کمترین صحت (به متر/فوت، مطابق گزارش اندروید از چیپست) اندازه‌گیری شده‌اند. منظور از صحت، پراکندگی اندازه‌گیری‌های تکراری است و مستقیماً مربوط به دقت نمی‌شود (دقت: میزان نزدیکی اندازه‌گیری‌ها به موقعیت واقعی).</string>
     <string name="monitoring_min_accuracy_descr_side_effect">اثر جانبی: درنتیجهٔ پالایش بر اساس صحت، ممکن است مثلاً زیر پل‌ها، زیر درختان، میان ساختمان‌های بلند یا در شرایط جوّی بخصوص، نقاط تماماً از دست بروند.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">توصیه: سخت است آنچه ثبت می‌شود یا آنچه ثبت نمی‌شود را پیشبینی کنیم. شاید بهتر باشد این پالایه را خاموش کنید.</string>
     <string name="monitoring_min_accuracy_descr_remark">توجه: اگر بلافاصله پیش از ضبط، GPS خاموش بوده، ممکن است نخستین نقطه صحت کمتری داشته باشد؛ بنابراین ممکن است بخواهیم طوری کدنویسی کنیم که یک نقطه با یک یا چند ثانیه تأخیر ضبط شود (یا از سه نقطهٔ پی‌درپی بهترینشان را ضبط کنیم و...)، البته این هنوز پیاده نشده.</string>
@@ -3519,10 +3519,10 @@
     <string name="sunset_at">غروب خورشید در %1$s</string>
     <string name="sunrise_at">طلوع خورشید در %1$s</string>
     <string name="accessibility_mode_disabled">حالت دسترسی آسان در دستگاه شما غیرفعال است.</string>
-    <string name="use_system_screen_timeout">استفاده از زمان خاموش‌شدن صفحهٔ دستگاه</string>
-    <string name="use_system_screen_timeout_promo">پیشفرض غیرفعال است، اگر OsmAnd در پیش‌زمینه اجرا باشد صفحه خاموش نمی‌شود.
-\n
-\nاگر فعال باشد، OsmAnd از تنظیمات دستگاه برای زمان خاموش‌شدن صفحه استفاده می‌کند.</string>
+    <string name="use_system_screen_timeout">استفاده از زمان خاموشی صفحهٔ دستگاه</string>
+    <string name="use_system_screen_timeout_promo">پیشفرض غیرفعال است، اگر OsmAnd در پیش‌زمینه اجرا باشد صفحه خاموش نمی‌شود. 
+\n 
+\nاگر فعال باشد، OsmAnd از تنظیمات دستگاه برای زمان خاموشی صفحه استفاده می‌کند.</string>
     <string name="clear_recorded_data">پاک‌سازی دادهٔ ضبط‌شده</string>
     <string name="release_3_6">• پروفایل‌ها: اکنون می‌توانید ترتیب پروفایل‌ها و نماد آن‌ها را تنظیم کنید. تنظیمات پروفایل‌های پایه را تغییر دهید یا آن‌ها را به پیشفرض بازنشانی کنید. 
 \n 
@@ -3635,4 +3635,35 @@
     <string name="add_description">افزودن توضیحات</string>
     <string name="select_group">انتخاب گروه</string>
     <string name="select_shape">انتخاب شکل</string>
+    <string name="shared_string_octagon">هشت‌ضلعی</string>
+    <string name="app_mode_ski_touring">تور اسکی</string>
+    <string name="app_mode_ski_snowmobile">برف‌رو</string>
+    <string name="custom_osmand_plugin">افزونهٔ سفارشی OsmAnd</string>
+    <string name="replace_point_descr">نقطهٔ دیگری را جانشین این کنید</string>
+    <string name="changes_applied_to_profile">تغییرات روی پروفایل %1$s به کار رفت.</string>
+    <string name="settings_item_read_error">خواندن %1$s ناموفق بود.</string>
+    <string name="settings_item_write_error">نوشتن %1$s ناموفق بود.</string>
+    <string name="settings_item_import_error">درون‌برد %1$s ناموفق بود.</string>
+    <string name="wiki_menu_download_descr">برای مشاهدهٔ نقاط ویکی‌پدیا روی نقشه باید نقشهٔ دیگری را نیز دانلود کنید.</string>
+    <string name="multimedia_rec_split_title">تقسیمگر ضبط‌کننده</string>
+    <string name="select_track_file">انتخاب فایل رد</string>
+    <string name="shared_string_languages">زبان‌ها</string>
+    <string name="shared_string_language">زبان</string>
+    <string name="shared_string_all_languages">همهٔ زبان‌ها</string>
+    <string name="ui_customization_description">تعداد اقلام کشو را به‌دلخواه تنظیم کنید، نقشه و منوی زمینه را پیکربندی نمایید.
+\n
+\nمی‌توانید افزونه‌های بی‌استفاده را غیرفعال کنید تا همهٔ کنترل‌های آن‌ها از %1$s برنامه پنهان شود.</string>
+    <string name="reset_items_descr">تنظیمات پس از پنهان‌سازی به حالت اولیه بازنشانی می‌شود.</string>
+    <string name="hidden_items_descr"></string>
+    <string name="shared_string_hidden">پنهان</string>
+    <string name="shared_string_divider">جداکننده</string>
+    <string name="reorder_or_hide_from">مرتب‌سازی یا پنهان‌سازی اقلام %1$s.</string>
+    <string name="shared_string_drawer">کشو</string>
+    <string name="ui_customization_short_descr">اقلام کشو، منوی زمینه</string>
+    <string name="ui_customization">سفارشی‌سازی واسط کاربری</string>
+    <string name="context_menu_actions">کنش‌های منوی زمینه</string>
+    <string name="main_actions_descr">کنش‌های اصلی فقط ۴ دکمه دارند.</string>
+    <string name="main_actions">کنش‌های اصلی</string>
+    <string name="additional_actions_descr">با زدن روی دکمهٔ «کنش‌ها» می‌توانید به این کنش‌ها دسترسی پیدا کنید.</string>
+    <string name="developer_plugin">افزونهٔ توسعه‌دهنده</string>
 </resources>
