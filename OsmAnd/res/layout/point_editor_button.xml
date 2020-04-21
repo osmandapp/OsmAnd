@@ -34,6 +34,7 @@
 			android:layout_gravity="center"
 			android:clickable="false"
 			android:visibility="gone"
-			app:srcCompat="@drawable/mx_special_star_stroked" />
+		/>
+		<!-- TODO revert                         app:srcCompat="@drawable/mx_special_star_stroked" -->
 	</FrameLayout>
 </FrameLayout>
