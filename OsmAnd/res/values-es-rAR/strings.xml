@@ -1153,7 +1153,7 @@ Lon %2$s</string>
     <string name="overlay_transparency_descr">Ajustar transparencia de la capa superpuesta.</string>
     <string name="overlay_transparency">Transparencia de superposición</string>
     <string name="map_transparency_descr">Ajustar transparencia del mapa base.</string>
-    <string name="map_transparency">Transparencia de mapa base</string>
+    <string name="map_transparency">Transparencia del mapa base</string>
     <string name="layer_underlay">Mapa subyacente…</string>
     <string name="map_underlay">Mapa subyacente</string>
     <string name="map_underlay_descr">Elegir mapa subyacente</string>
@@ -2979,7 +2979,7 @@ Lon %2$s</string>
     <string name="rendering_attr_highway_class_road_name">Carretera principal</string>
     <string name="rendering_attr_highway_class_street_name">Calle residencial</string>
     <string name="rendering_attr_highway_class_service_name">Vía de servicio</string>
-    <string name="rendering_attr_highway_class_footway_name">Vereda</string>
+    <string name="rendering_attr_highway_class_footway_name">Vereda/Acera</string>
     <string name="rendering_attr_highway_class_track_name">Camino rural</string>
     <string name="rendering_attr_highway_class_bridleway_name">Camino ecuestre</string>
     <string name="rendering_attr_highway_class_steps_name">Escalera</string>
@@ -3616,4 +3616,30 @@ Lon %2$s</string>
     <string name="settings_item_write_error">No se pudo escribir «%1$s».</string>
     <string name="settings_item_import_error">No se pudo importar «%1$s».</string>
     <string name="changes_applied_to_profile">Cambios aplicados al perfil «%1$s».</string>
+    <string name="ui_customization_description">Personaliza la cantidad de elementos en el cajón, el la configuración del mapa y el menú contextual.
+\n
+\nPuedes desactivar los complementos no utilizados, para ocultar todos sus controles de la aplicación «%1$s».</string>
+    <string name="ui_customization_short_descr">Elementos del cajón, menú contextual</string>
+    <string name="ui_customization">Personalización de la interfaz de usuario</string>
+    <string name="shared_string_drawer">Cajón</string>
+    <string name="context_menu_actions">Acciones del menú contextual</string>
+    <string name="reorder_or_hide_from">Reordenar u ocultar elementos de «%1$s».</string>
+    <string name="shared_string_divider">Divisor</string>
+    <string name="divider_descr">Elementos debajo de este punto separados por un divisor.</string>
+    <string name="shared_string_hidden">Oculto</string>
+    <string name="hidden_items_descr">Estos elementos están ocultos en el menú, pero las opciones o complementos representados siguen funcionando.</string>
+    <string name="reset_items_descr">Los ajustes se restablecerán al estado original después de ocultarse.</string>
+    <string name="main_actions_descr">Las acciones principales contienen sólo 4 botones.</string>
+    <string name="main_actions">Acciones principales</string>
+    <string name="additional_actions_descr">Puedes acceder a estas acciones, pulsando el botón «Acciones».</string>
+    <string name="move_inside_category">Sólo puedes mover objetos dentro de esta categoría.</string>
+    <string name="developer_plugin">Complemento de desarrollador</string>
+    <string name="shared_string_items">Elementos</string>
+    <string name="select_track_file">Marca el archivo de la traza</string>
+    <string name="shared_string_languages">Idiomas</string>
+    <string name="shared_string_language">Idioma</string>
+    <string name="shared_string_all_languages">Todos los idiomas</string>
+    <string name="wikipedia_poi_languages_promo">Algunos artículos de Wikipedia pueden no estar disponibles en tu idioma, elige los idiomas en los que los artículos de Wikipedia aparecerán en el mapa.
+\nPodrás cambiar entre todos los idiomas disponibles mientras lees el artículo.</string>
+    <string name="wiki_menu_download_descr">Se necesitan mapas adicionales para ver los puntos de interés de Wikipedia en el mapa.</string>
 </resources>

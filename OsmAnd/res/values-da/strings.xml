@@ -3598,4 +3598,21 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_language">Sprog</string>
     <string name="shared_string_all_languages">Alle sprog</string>
     <string name="wiki_menu_download_descr">Yderligere kort er nødvendige for at se Wikipedia Interessepunkter på kortet.</string>
+    <string name="wikipedia_poi_languages_promo">Nogle Wikipedia-artikler er muligvis ikke tilgængelige på nogle sprog. Vælg de sprog, som Wikipedia-artikler skal vises på kortet.
+\nSkift mellem alle tilgængelige sprog, mens artiklen læses.</string>
+    <string name="ui_customization_short_descr">Skuffeelementer, genvejsmenu</string>
+    <string name="shared_string_drawer">Skuffe</string>
+    <string name="ui_customization">Tilpasning af brugergrænseflade</string>
+    <string name="context_menu_actions">Handlinger i kontekstmenuen</string>
+    <string name="reorder_or_hide_from">Omarranger eller skjul elementer fra %1$s.</string>
+    <string name="shared_string_divider">Skillelinje</string>
+    <string name="divider_descr">Elementer under dette punkt adskilt af en skillelinje.</string>
+    <string name="shared_string_hidden">Skjult</string>
+    <string name="hidden_items_descr">Disse elementer er skjult fra menuen, men de funktioner eller udvidelser, de repræsenterer, fungerer fortsat.</string>
+    <string name="reset_items_descr">Indstillingerne nulstilles til den oprindelige tilstand, efter at de er skjult.</string>
+    <string name="main_actions_descr">Vigtigste handlinger indeholder kun 4 knapper.</string>
+    <string name="main_actions">Vigtigste handlinger</string>
+    <string name="move_inside_category">Elementer kan kun flyttes inden for kategorien.</string>
+    <string name="developer_plugin">Udvikler udvidelse</string>
+    <string name="shared_string_items">Elementer</string>
 </resources>

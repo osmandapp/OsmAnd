@@ -659,7 +659,7 @@
     <string name="front_left">devant à gauche</string>
     <string name="oclock">heure</string>
     <string name="towards">vers</string>
-    <string name="accuracy">Précision</string>
+    <string name="accuracy">Fiabilité</string>
     <string name="altitude">Altitude</string>
     <string name="no_info">Pas d\'info</string>
     <string name="direction_style_sidewise">Latéral (8 secteurs)</string>
@@ -987,7 +987,7 @@
     <string name="distance_measurement_load_gpx">Ouvrir un fichier de trace GPX existant</string>
     <string name="wait_current_task_finished">Veuillez attendre que la tâche en cours soit terminée</string>
     <string name="plugin_distance_point_time">temps</string>
-    <string name="plugin_distance_point_hdop">précision</string>
+    <string name="plugin_distance_point_hdop">fiabilité</string>
     <string name="plugin_distance_point_speed">vitesse</string>
     <string name="plugin_distance_point_ele">altitude</string>
     <string name="gpx_file_name">Nom du fichier GPX</string>
@@ -2057,8 +2057,8 @@
     <string name="save_track_min_speed_descr">Filtre : Aucun enregistrement de points en-dessous de cette vitesse.</string>
     <string name="save_track_min_distance">Déplacement minimal pour enregistrer</string>
     <string name="save_track_min_distance_descr">Filtre : Définir une distance minimale entre points pour déclencher l\'enregistrement.</string>
-    <string name="save_track_precision">Précision minimale pour l\'enregistrement</string>
-    <string name="save_track_precision_descr">Filtre : Aucun enregistrement avant qu\'une précision ne soit atteinte.</string>
+    <string name="save_track_precision">Fiabilité minimale pour l\'enregistrement</string>
+    <string name="save_track_precision_descr">Filtre : Aucun enregistrement avant que cette fiabilité ne soit atteinte.</string>
     <string name="shared_string_continue">Continuer</string>
     <string name="shared_string_pause">Pause</string>
     <string name="shared_string_trip">Itinéraire</string>
@@ -3403,13 +3403,13 @@ représentant la zone : %1$s x %2$s</string>
     <string name="import_from_file">Importer depuis un fichier</string>
     <string name="import_routing_file">Importer un fichier d\'itinéraire</string>
     <string name="import_profile">Importer un profil</string>
-    <string name="monitoring_prefs_descr">Navigation, précision d\'enregistrement</string>
+    <string name="monitoring_prefs_descr">Navigation, fiabilité d\'enregistrement</string>
     <string name="multimedia_notes_prefs_descr">Taille de l\'image, qualité audio et vidéo</string>
     <string name="osm_editing_prefs_descr">Login, mot de passe, édition hors-ligne</string>
     <string name="accessibility_prefs_descr">Choisissez l\'icône, la couleur et le nom</string>
     <string name="live_monitoring_descr">Permet le partage de votre position grâce à l\'enregistrement du trajet.</string>
     <string name="live_monitoring">Suivi en ligne</string>
-    <string name="save_track_logging_accuracy">Précision de l\'enregistrement</string>
+    <string name="save_track_logging_accuracy">Fiabilité de l\'enregistrement</string>
     <string name="tracks_view_descr">Vos traces enregistrées se trouvent dans %1$s ou dans le dossier OsmAnd.</string>
     <string name="multimedia_notes_view_descr">Vos notes OSM se trouvent dans %1$s.</string>
     <string name="video_notes">Notes vidéo</string>
@@ -3429,7 +3429,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="live_monitoring_adress">Adresse web</string>
     <string name="monitoring_notification">Notification</string>
     <string name="monitoring_min_speed">Vitesse minimale</string>
-    <string name="monitoring_min_accuracy">Précision minimale</string>
+    <string name="monitoring_min_accuracy">Fiabilité minimale</string>
     <string name="monitoring_min_distance">Déplacement minimum</string>
     <string name="reset_plugin_to_default">Restaurer les paramètres par défaut du greffon</string>
     <string name="multimedia_rec_split_title">Fractionner l\'enregistrement</string>
@@ -3445,8 +3445,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="monitoring_min_distance_descr_recommendation">Recommandation : un paramètre de 5 mètres est adapté si vous n\'avez pas besoin de détails et ne souhaitez pas enregistrer des points au repos.</string>
     <string name="monitoring_min_speed_descr_side_effect">Effet secondaire : votre trace ne contiendra pas les parties où la vitesse minimale n\'a pas été atteinte (par exemple lorsque vous poussez votre vélo en montée ou pendant une pause). De ce fait certaines informations de votre trace seront faussées comme la durée de déplacement ou la vitesse moyenne.</string>
     <string name="monitoring_min_speed_descr_recommendation">Recommandation : commencez par utiliser la détection de mouvement via le filtre de déplacement minimum (B) vous pourriez obtenir de meilleurs résultats en perdant moins de données. Si vos traces restent bruyantes à basse vitesse, essayez ici des valeurs non nulles. Veuillez noter que certaines mesures peuvent retourner une vitesse nulle (en raison de méthodes basées sur le réseau), dans ce cas rien ne sera enregistré.</string>
-    <string name="monitoring_min_accuracy_descr">Seuls les points mesurés avec un minimum de précision en mètres/pieds (information communiquée par votre puce GPS) seront enregistrés. La précision fait référence à la dispersion de plusieurs mesures successives et n\'est pas directement liée à la distance entre ces mesures et votre position réelle.</string>
-    <string name="monitoring_min_accuracy_descr_side_effect">Effet secondaire : avec le filtrage par précision certains points peuvent manquer ; par exemple : sous un pont, en forêt, entre de hauts bâtiments ou dans certaines conditions météorologiques.</string>
+    <string name="monitoring_min_accuracy_descr">Seuls les points mesurés avec un minimum de fiabilité en mètres/pieds (information communiquée par votre puce GPS) seront enregistrés. La fiabilité fait référence à la dispersion de plusieurs mesures successives et n\'est pas directement liée à la précision qui est la distance entre la position donnée par le GPS et votre position réelle.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Effet secondaire : avec le filtrage de fiabilité certains points peuvent manquer ; par exemple : sous un pont, en forêt, entre de hauts bâtiments ou dans certaines conditions météorologiques.</string>
     <string name="monitoring_min_accuracy_descr_remark">Remarque : si la localisation GPS est activée juste avant le début d\'enregistrement, la première position peut être imprécise. L\'application pourrait attendre quelques secondes avant d\'enregistrer un point (ou enregistrer le meilleur de 3 points successifs, etc), mais ces évolutions ne sont pas encore disponibles.</string>
     <string name="monitoring_min_speed_descr_remark">Remarque : vérification de vitesse &gt; 0. La plupart des puces GPS fournissent une vitesse uniquement lorsque vous êtes en mouvement. Par conséquent, l\'indication du paramètre &gt; 0 pour ce filtre utilise la détection de mouvement par la puce GPS. Mais même s\'il n\'est pas filtré ici au moment de l\'enregistrement, nous utilisons toujours cette fonctionnalité dans notre analyse des traces GPX pour déterminer la distance corrigée, c\'est-à-dire que la valeur affichée dans ce champ est la distance enregistrée en déplacement.</string>
     <string name="monitoring_min_distance_descr_side_effect">Effet secondaire : les périodes de repos ne seront pas enregistrées ou seulement par un point. De petits mouvements, comme des pas sur le côté, pourront être ignorés. Votre fichier contiendra moins d\'informations exploitables en post-traitement et aura des statistiques moins exactes (éliminant les points redondants mais conservant les erreurs de position dues à une mauvaise réception ou aux artefacts de la puce GPS).</string>
@@ -3591,4 +3591,23 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_language">Langue</string>
     <string name="shared_string_all_languages">Toutes les langues</string>
     <string name="wiki_menu_download_descr">D’autres cartes sont nécessaires pour afficher les POI Wikipédia sur la carte.</string>
+    <string name="divider_descr">Éléments sous ce point isolés par un séparateur.</string>
+    <string name="ui_customization_description">Personnalisez le nombre d’éléments dans le panneau déroulant, paramétrez la carte et le menu contextuel.
+\n
+\nVous pouvez désactiver les greffons inutilisés, pour masquer tous leurs contrôles dans l’application %1$s.</string>
+    <string name="hidden_items_descr">Ces éléments sont masqués dans le menu mais les options présentes ou les greffons fonctionneront toujours.</string>
+    <string name="reset_items_descr">Les paramètres seront réinitialisés à leurs valeurs par défaut après avoir été masqués.</string>
+    <string name="additional_actions_descr">Vous pouvez accéder à ces actions en appuyant sur le bouton \"Actions\".</string>
+    <string name="ui_customization_short_descr">Éléments du panneau déroulant, menu contextuel</string>
+    <string name="shared_string_drawer">Panneau déroulant</string>
+    <string name="reorder_or_hide_from">Réorganisez ou masquez les éléments à partir de %1$s.</string>
+    <string name="move_inside_category">Vous ne pouvez déplacer les éléments qu’à l’intérieur de cette catégorie.</string>
+    <string name="ui_customization">Personnalisation de l\'interface utilisateur</string>
+    <string name="context_menu_actions">Actions du menu contextuel</string>
+    <string name="shared_string_divider">Séparateur</string>
+    <string name="shared_string_hidden">Masqué</string>
+    <string name="main_actions_descr">Les actions principales contiennent seulement 4 boutons.</string>
+    <string name="main_actions">Actions principales</string>
+    <string name="developer_plugin">Greffon de développement</string>
+    <string name="shared_string_items">Éléments</string>
 </resources>

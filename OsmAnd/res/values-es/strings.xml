@@ -3572,5 +3572,5 @@
     <string name="shared_string_languages">Idiomas</string>
     <string name="shared_string_language">Idioma</string>
     <string name="shared_string_all_languages">Todos los idiomas</string>
-    <string name="wiki_menu_download_descr">Se necesitan más mapas para ver los POI de Wikipedia en el mapa.</string>
+    <string name="wiki_menu_download_descr">Se necesitan mapas adicionales para ver los puntos de interés de Wikipedia en el mapa.</string>
 </resources>

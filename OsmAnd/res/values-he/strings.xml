@@ -184,7 +184,7 @@
     <string name="plugins_screen">מנהל התוספים</string>
     <string name="prefs_plugins_descr">התוספים מאפשרים הגדרות במצב מומחה ומספקים תכונות נוספות.</string>
     <string name="prefs_plugins">מנהל התוספים</string>
-    <string name="osm_editing_plugin_description">הצגת ההגדרות שנדרשות לטובת משוב ל־OSM כמו איסוף / שינוי פריטי נ״ע של OSM, פתיחה של / תגובה על הערות ב־OSM ותרומה של קובצי GPX מוקלטים (נדרשים פרטי גישה ל־OSM).</string>
+    <string name="osm_editing_plugin_description">ניתן לתרום ל־OSM למשל על ידי שינוי פריטי נקודות עניין ב־OSM או ליצור הערות OSM ולתרום קובצי הקלטות GPX ל־OsmAnd על ידי ציון שם המשתמש והססמה שלך. OpenStreetMap.org הוא מיזם מיפוי גלובלי, בהנהגה קהילתית לרווחת הציבור.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">יתכן שמפות וקטוריות יוצגו מהר יותר. עם זאת לא בטוח שיעבדו כראוי על חלק מההתקנים.</string>
     <string name="play_commands_of_currently_selected_voice">נא לבחור בקריינות ולבדוק על ידי השמעת ההנחיות הקוליות:</string>
     <string name="debugging_and_development">פיתוח OsmAnd</string>
@@ -3613,4 +3613,25 @@
     <string name="monitoring_min_accuracy_descr_side_effect">תופעת לוואי: כתוצאה מסינון לפי דיוק, ייתכן שכמה נקודות תיעלמנה עבור למשל מתחת לגשרים, מתחת לעצים, בין בניינים גבוהים או בתנאי מזג אוויר מסוימים.</string>
     <string name="monitoring_min_accuracy_descr">פעולה זו תקליט רק נקודות שנמדדו עם חיווי של דיוק מזערי (במטרים/רגל כפי שדווח על ידי Android עבור ערכת השבבים שלך). דיוק מתייחס לפיזור המדידות המחזוריות ואינו קשור לדיוק, שמגדיר כמה קרובות המדידות שלך למיקום האמתי שלך.</string>
     <string name="monitoring_min_speed_descr_recommendation">המלצה: כדאי לנסות להשתמש בזיהוי תנועה דרך המסנן לסף תנועה תחתון (B) קודם לכן, הוא עשוי להביא לתוצאות טובות יותר ופחות מידע ילך לאיבוד. אם המסלולים שלך עדיין רועשים במהירויות נמוכות, כדי לנסות כאן ערכים שונים מאפס. נא לשים לב שחלק מהמדידות לא תדווחנה נתוני מהירות כלל (שיטות מבוססות רשת), שבמקרים כאלה לא יוקלט שום דבר.</string>
+    <string name="wikipedia_poi_languages_promo">חלק מהערכים בוויקיפדיה לא יהיו זמינים בשם שצוין, יש לבחור את השפות בהן יופיעו הערכים של ויקיפדיה במפה.
+\nניתן יהיה להחליף בין כל השפות הזמינות בזמן קריאת הערך.</string>
+    <string name="shared_string_items">פריטים</string>
+    <string name="developer_plugin">תוסף מפתח</string>
+    <string name="ui_customization_description">התאמת כמות הפריטים במגירה, הגדרת מפה ותפריט הקשר.
+\n
+\nניתן להשבית את התוספים שאינם בשימוש כדי להסתיר את כל הפקדים שלהם מהיישומון %1$s.</string>
+    <string name="ui_customization_short_descr">פריטי מגירה, תפריט הקשר</string>
+    <string name="ui_customization">התאמות מנשק משתמש</string>
+    <string name="shared_string_drawer">מגירה</string>
+    <string name="context_menu_actions">פעולות תפריט הקשר</string>
+    <string name="reorder_or_hide_from">סידור מחדש או הסתרת פריטים מ%1$s.</string>
+    <string name="shared_string_divider">קו הפרדה</string>
+    <string name="divider_descr">הפריטים מתחת לנקודה זו מופרדים בקו הפרדה.</string>
+    <string name="shared_string_hidden">מוסתר</string>
+    <string name="hidden_items_descr">הפריטים האלו מוסתרים מהתפריט אבל האפשרויות המיוצגות או התוספים עדיין עובדים.</string>
+    <string name="reset_items_descr">ההגדרות יאופסו למצב המקורי לאחר ההסתרה.</string>
+    <string name="main_actions_descr">פעולות ראשיות מכילות 4 כפתורים בלבד.</string>
+    <string name="main_actions">פעולות ראשית</string>
+    <string name="additional_actions_descr">ניתן לגשת לפעולות האלה על ידי לחיצה על הכפתור „פעולות”.</string>
+    <string name="move_inside_category">ניתן להעביר פריטים בתוך קטגוריה זו בלבד.</string>
 </resources>
