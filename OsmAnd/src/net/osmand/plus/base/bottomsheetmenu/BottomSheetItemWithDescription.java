@@ -110,8 +110,9 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 			return this;
 		}
 
-		public void setDescriptionLinksClickable(boolean descriptionLinksClickable) {
+		public Builder setDescriptionLinksClickable(boolean descriptionLinksClickable) {
 			this.descriptionLinksClickable = descriptionLinksClickable;
+			return this;
 		}
 
 		public BottomSheetItemWithDescription create() {
