@@ -362,25 +362,26 @@ task copyPoiCategiry(type: Copy) {
 task copyStyleIcons(type: Copy) {
 	from "../../resources/rendering_styles/style-icons/"
 	into "res/"
-	includes ["**/*.png",  "**/*.xml"]
+	include "**/*.png",  "**/*.xml"
 }
+
 
 task copyWidgetIconsXhdpi(type: Copy) {
 	from "res/drawable-xxhdpi/"
-	into "res/drawable-large-hxdpi/"
-	includes ["**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"]
+	into "res/drawable-large-xhdpi/"
+	include "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
 }
 
 task copyWidgetIconsHdpi(type: Copy) {
 	from "res/drawable-xhdpi/"
 	into "res/drawable-large-hdpi/"
-	includes ["**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"]
+	include "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
 }
 
 task copyWidgetIcons(type: Copy) {
 	from "res/drawable-hdpi/"
 	into "res/drawable-large/"
-	includes ["**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"]
+	include "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
 }
 
 task collectExternalResources {
