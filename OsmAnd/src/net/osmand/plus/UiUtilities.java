@@ -39,6 +39,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.widget.TintableCompoundButton;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.slider.Slider;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.snackbar.SnackbarContentLayout;
 
@@ -495,32 +496,57 @@ public class UiUtilities {
 		}
 		compoundButton.setBackgroundColor(Color.TRANSPARENT);
 	}
-	
-	public static void setupSeekBar(@NonNull OsmandApplication app, @NonNull SeekBar seekBar, 
-	                                boolean nightMode, boolean profileDependent) {
-		int activeColor = ContextCompat.getColor(app, profileDependent ?
-				app.getSettings().APPLICATION_MODE.get().getIconColorInfo().getColor(nightMode) :
-				nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
-		setupSeekBar(seekBar, activeColor, nightMode);
+
+	public static ViewGroup createSliderView(@NonNull Context ctx, boolean nightMode) {
+		return (ViewGroup) getInflater(ctx, nightMode).inflate(R.layout.slider, null, false);
 	}
 
-	public static void setupSeekBar(@NonNull SeekBar seekBar, @ColorInt int activeColor, boolean nightMode) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-			int backgroundColor = ContextCompat.getColor(seekBar.getContext(), nightMode
-					? R.color.icon_color_secondary_dark : R.color.icon_color_default_light);
-			if (seekBar.getProgressDrawable() instanceof LayerDrawable) {
-				LayerDrawable progressDrawable = (LayerDrawable) seekBar.getProgressDrawable();
-				Drawable background = progressDrawable.findDrawableByLayerId(android.R.id.background);
-				if (background != null) {
-					background.setColorFilter(backgroundColor, PorterDuff.Mode.SRC_IN);
-				}
-				Drawable progress = progressDrawable.findDrawableByLayerId(android.R.id.progress);
-				if (progress != null) {
-					progress.setColorFilter(activeColor, PorterDuff.Mode.SRC_IN);
-				}
-			}
-			seekBar.getThumb().setColorFilter(activeColor, PorterDuff.Mode.SRC_IN);
+	public static void setupSlider(Slider slider, boolean nightMode, @ColorInt Integer activeColor) {
+		setupSlider(slider, nightMode, activeColor, false);
+	}
+
+	public static void setupSlider(Slider slider, boolean nightMode,
+	                               @ColorInt Integer activeColor, boolean showTicks) {
+		Context ctx = slider.getContext();
+		if (ctx == null) {
+			return;
 		}
+		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		ctx = new ContextThemeWrapper(ctx, themeId);
+
+		// colors
+		int[][] states = new int[][] {
+				new int[] {android.R.attr.state_enabled},
+				new int[] {-android.R.attr.state_enabled}
+		};
+		if (activeColor == null) {
+			activeColor = AndroidUtils.getColorFromAttr(ctx, R.attr.active_color_basic);
+		}
+		int activeDisableColor = getColorWithAlpha(activeColor, 0.25f);
+		ColorStateList activeCsl = new ColorStateList(states,
+				new int[] {activeColor, activeDisableColor});
+		int inactiveColor = AndroidUtils.getColorFromAttr(ctx, R.attr.default_icon_color);
+		ColorStateList inactiveCsl = new ColorStateList(states,
+				new int[] {inactiveColor, inactiveColor});
+		slider.setTrackColorActive(activeCsl);
+		slider.setTrackColorInactive(inactiveCsl);
+		slider.setHaloColor(activeCsl);
+		slider.setThumbColor(activeCsl);
+		int ticksColor = showTicks ? ContextCompat.getColor(ctx,
+				nightMode ? R.color.color_black : R.color.color_white) :
+				Color.TRANSPARENT;
+		slider.setTickColor(new ColorStateList(states, new int[] {ticksColor, ticksColor}));
+
+		// sizes
+		int thumbRadius = ctx.getResources().getDimensionPixelSize(R.dimen.slider_thumb_size);
+		int haloRadius = ctx.getResources().getDimensionPixelSize(R.dimen.slider_thumb_halo_size);
+		int trackHeight = ctx.getResources().getDimensionPixelSize(R.dimen.slider_track_height);
+		slider.setThumbRadius(thumbRadius);
+		slider.setHaloRadius(haloRadius);
+		slider.setTrackHeight(trackHeight);
+
+		// label behavior
+		slider.setLabelBehavior(Slider.LABEL_GONE);
 	}
 	
 	public static void setupDialogButton(boolean nightMode, View buttonView, DialogButtonType buttonType, @StringRes int buttonTextId) {

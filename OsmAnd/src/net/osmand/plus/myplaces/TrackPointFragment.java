@@ -46,6 +46,7 @@ import net.osmand.Collator;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -1269,7 +1270,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 				dir.mkdir();
 			}
 			for (final String f : files.keySet()) {
-				File fout = new File(dir, f + ".gpx");
+				File fout = new File(dir, f + IndexConstants.GPX_FILE_EXT);
 				GPXUtilities.writeGpxFile(fout, gpx);
 			}
 			return shouldClearPath;

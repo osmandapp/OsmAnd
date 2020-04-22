@@ -21,6 +21,7 @@ import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.api.SettingsAPI;
@@ -179,6 +180,10 @@ public abstract class OsmandPlugin {
 	}
 
 	public List<IndexItem> getSuggestedMaps() {
+		return Collections.emptyList();
+	}
+
+	public List<WorldRegion> getDownloadMaps() {
 		return Collections.emptyList();
 	}
 
@@ -643,6 +648,31 @@ public abstract class OsmandPlugin {
 			}
 		}
 		return null;
+	}
+
+	public static List<WorldRegion> getCustomDownloadRegions() {
+		List<WorldRegion> l = new ArrayList<>();
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			l.addAll(plugin.getDownloadMaps());
+		}
+		return l;
+	}
+
+	public static List<IndexItem> getCustomDownloadItems() {
+		List<IndexItem> l = new ArrayList<>();
+		for (WorldRegion region : getCustomDownloadRegions()) {
+			collectIndexItemsFromSubregion(region, l);
+		}
+		return l;
+	}
+
+	public static void collectIndexItemsFromSubregion(WorldRegion region, List<IndexItem> items) {
+		if (region instanceof CustomRegion) {
+			items.addAll(((CustomRegion) region).loadIndexItems());
+		}
+		for (WorldRegion subregion : region.getSubregions()) {
+			collectIndexItemsFromSubregion(subregion, items);
+		}
 	}
 
 	public static List<String> getDisabledRendererNames() {

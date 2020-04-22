@@ -34,9 +34,10 @@
 			android:layout_marginEnd="@dimen/content_padding"
 			android:layout_marginStart="@dimen/dialog_content_margin" />
 
-		<SeekBar
+		<com.google.android.material.slider.Slider
 			android:id="@+id/Speedup"
-			android:layout_width="fill_parent"
+			style="@style/Widget.Styled.Slider"
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginLeft="@dimen/dialog_content_margin"
 			android:layout_marginTop="@dimen/map_small_button_margin"

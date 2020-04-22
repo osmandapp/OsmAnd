@@ -349,6 +349,7 @@ public class DownloadIndexesThread {
 					app.getSettings().LAST_CHECKED_UPDATES.set(System.currentTimeMillis());
 					result.prepareData(indexFileList.getIndexFiles());
 				} catch (Exception e) {
+					LOG.error(e);
 				}
 			}
 			return result == null ? new DownloadResources(app) : result;

@@ -84,6 +84,7 @@ import java.util.Map;
 import java.util.zip.ZipInputStream;
 
 import static android.app.Activity.RESULT_OK;
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
 import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
@@ -99,7 +100,7 @@ public class ImportHelper {
 	public final static Log log = PlatformUtil.getLog(ImportHelper.class);
 	public static final String KML_SUFFIX = ".kml";
 	public static final String KMZ_SUFFIX = ".kmz";
-	public static final String GPX_SUFFIX = ".gpx";
+
 	private final AppCompatActivity activity;
 	private final OsmandApplication app;
 	private final OsmandMapTileView mapView;
@@ -146,8 +147,8 @@ public class ImportHelper {
 		boolean isOsmandSubdir = isSubDirectory(app.getAppPath(IndexConstants.GPX_INDEX_DIR), new File(contentUri.getPath()));
 		if (!isOsmandSubdir && name != null) {
 			String nameLC = name.toLowerCase();
-			if (nameLC.endsWith(GPX_SUFFIX)) {
-				name = name.substring(0, name.length() - 4) + GPX_SUFFIX;
+			if (nameLC.endsWith(GPX_FILE_EXT)) {
+				name = name.substring(0, name.length() - 4) + GPX_FILE_EXT;
 				handleGpxImport(contentUri, name, true, useImportDir);
 				return true;
 			} else if (nameLC.endsWith(KML_SUFFIX)) {
@@ -1046,14 +1047,14 @@ public class ImportHelper {
 	private File getFileToSave(final String fileName, final File importDir, final WptPt pt) {
 		final StringBuilder builder = new StringBuilder(fileName);
 		if ("".equals(fileName)) {
-			builder.append("import_").append(new SimpleDateFormat("HH-mm_EEE", Locale.US).format(new Date(pt.time))).append(GPX_SUFFIX); //$NON-NLS-1$
+			builder.append("import_").append(new SimpleDateFormat("HH-mm_EEE", Locale.US).format(new Date(pt.time))).append(GPX_FILE_EXT); //$NON-NLS-1$
 		}
 		if (fileName.endsWith(KML_SUFFIX)) {
-			builder.replace(builder.length() - KML_SUFFIX.length(), builder.length(), GPX_SUFFIX);
+			builder.replace(builder.length() - KML_SUFFIX.length(), builder.length(), GPX_FILE_EXT);
 		} else if (fileName.endsWith(KMZ_SUFFIX)) {
-			builder.replace(builder.length() - KMZ_SUFFIX.length(), builder.length(), GPX_SUFFIX);
-		} else if (!fileName.endsWith(GPX_SUFFIX)) {
-			builder.append(GPX_SUFFIX);
+			builder.replace(builder.length() - KMZ_SUFFIX.length(), builder.length(), GPX_FILE_EXT);
+		} else if (!fileName.endsWith(GPX_FILE_EXT)) {
+			builder.append(GPX_FILE_EXT);
 		}
 		return new File(importDir, builder.toString());
 	}

@@ -978,7 +978,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 					String sub = gpxSubfolder.length() == 0 ? gpxFile.getName() : gpxSubfolder + "/"
 							+ gpxFile.getName();
 					loadGPXFolder(gpxFile, result, loadTask, progress, sub);
-				} else if (gpxFile.isFile() && gpxFile.getName().toLowerCase().endsWith(".gpx")) {
+				} else if (gpxFile.isFile() && gpxFile.getName().toLowerCase().endsWith(IndexConstants.GPX_FILE_EXT)) {
 					GpxInfo info = new GpxInfo();
 					info.subfolder = gpxSubfolder;
 					info.file = gpxFile;
@@ -1233,7 +1233,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			v.findViewById(R.id.group_divider).setVisibility(View.VISIBLE);
 
 			StringBuilder t = new StringBuilder();
-			String groupName = group.replaceAll("_", " ").replace(".gpx", "");
+			String groupName = group.replaceAll("_", " ").replace(IndexConstants.GPX_FILE_EXT, "");
 			if (groupName.length() == 0) {
 				groupName = getString(R.string.shared_string_tracks);
 			}

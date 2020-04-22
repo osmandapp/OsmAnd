@@ -27,6 +27,12 @@ res/drawable-large/widget_*
 res/drawable-large-hdpi/widget_*
 res/drawable-large-xhdpi/widget_* 
 
+# rendering-styles/style-icons/
+h_*
+g_*
+mm_*
+mx_*
+
 valgrind/
 bin/
 dist/

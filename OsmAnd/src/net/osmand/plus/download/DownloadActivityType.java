@@ -51,6 +51,11 @@ public class DownloadActivityType {
 			new DownloadActivityType(R.string.shared_string_wikivoyage, R.drawable.ic_plugin_wikipedia, "wikivoyage", 65);
 	public static final DownloadActivityType LIVE_UPDATES_FILE =
 			new DownloadActivityType(R.string.download_live_updates, "live_updates", 70);
+	public static final DownloadActivityType GPX_FILE =
+			new DownloadActivityType(R.string.shared_string_gpx_tracks, R.drawable.ic_action_polygom_dark, "gpx", 75);
+	public static final DownloadActivityType SQLITE_FILE =
+			new DownloadActivityType(R.string.shared_string_online_maps, "sqlite", 80);
+
 	private final int stringResource;
 	private final int iconResource;
 
@@ -136,6 +141,10 @@ public class DownloadActivityType {
 			return fileName.endsWith(IndexConstants.SQLITE_EXT);
 		} else if (DEPTH_CONTOUR_FILE == this) {
 			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP, IndexConstants.BINARY_MAP_VERSION));
+		} else if (GPX_FILE == this) {
+			return fileName.endsWith(IndexConstants.GPX_FILE_EXT);
+		} else if (SQLITE_FILE == this) {
+			return fileName.endsWith(IndexConstants.SQLITE_EXT);
 		}
 		return false;
 	}
@@ -166,14 +175,18 @@ public class DownloadActivityType {
 			return ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
 		} else if (DEPTH_CONTOUR_FILE == this) {
 			return ctx.getAppPath(IndexConstants.MAPS_PATH);
+		} else if (GPX_FILE == this) {
+			return ctx.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		} else if (SQLITE_FILE == this) {
+			return ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
 		}
 		throw new UnsupportedOperationException();
 	}
-	
+
 	public boolean isZipStream(OsmandApplication ctx, IndexItem indexItem) {
-		return HILLSHADE_FILE != this && SLOPE_FILE != this && WIKIVOYAGE_FILE != this;
+		return HILLSHADE_FILE != this && SLOPE_FILE != this  && SQLITE_FILE != this && WIKIVOYAGE_FILE != this && GPX_FILE != this;
 	}
-	
+
 	public boolean isZipFolder(OsmandApplication ctx, IndexItem indexItem) {
 		return this == VOICE_FILE;
 	}
@@ -213,8 +226,12 @@ public class DownloadActivityType {
 			return IndexConstants.SQLITE_EXT;
 		} else if (SLOPE_FILE == this) {
 			return IndexConstants.SQLITE_EXT;
+		} else if (SQLITE_FILE == this) {
+			return IndexConstants.SQLITE_EXT;
 		} else if (DEPTH_CONTOUR_FILE == this) {
 			return BINARY_MAP_INDEX_EXT;
+		} else if (GPX_FILE == this) {
+			return IndexConstants.GPX_FILE_EXT;
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -238,6 +255,8 @@ public class DownloadActivityType {
 			return "&fonts=yes";
 		} else if (this == DEPTH_CONTOUR_FILE) {
 			return "&inapp=depth";
+		} else if (this == GPX_FILE) {
+			return "&gpx=yes";
 		}
 		return "";
 	}
@@ -303,6 +322,8 @@ public class DownloadActivityType {
 			return ctx.getString(R.string.download_depth_countours);
 		} else if (this == FONT_FILE) {
 			return ctx.getString(R.string.fonts_header);
+		} else if (this == GPX_FILE) {
+			return ctx.getString(R.string.shared_string_gpx_tracks);
 		}
 		return "";
 	}
@@ -369,6 +390,8 @@ public class DownloadActivityType {
 		} else if (this == HILLSHADE_FILE) {
 			return fileName.replace('_', ' ');
 		} else if (this == SLOPE_FILE) {
+			return fileName.replace('_', ' ');
+		} else if (this == SQLITE_FILE) {
 			return fileName.replace('_', ' ');
 		} else if (this == LIVE_UPDATES_FILE) {
 			int l = fileName.lastIndexOf('.');

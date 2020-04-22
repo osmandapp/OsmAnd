@@ -135,17 +135,20 @@ public class IndexItem implements Comparable<IndexItem> {
 	public String getBasename() {
 		return type.getBasename(this);
 	}
-	
+
 	public File getTargetFile(OsmandApplication ctx) {
-		String basename;
-		if (type == DownloadActivityType.HILLSHADE_FILE) {
-			basename = (FileNameTranslationHelper.HILL_SHADE + getBasename()).replace("_", " ");
-		} else if (type == DownloadActivityType.SLOPE_FILE) {
-			basename = (FileNameTranslationHelper.SLOPE + getBasename()).replace('_', ' ');
-		} else {
-			basename = getBasename();
-		}
+		String basename = getTranslatedBasename();
 		return new File(type.getDownloadFolder(ctx, this), basename + type.getUnzipExtension(ctx, this));
+	}
+
+	public String getTranslatedBasename() {
+		if (type == DownloadActivityType.HILLSHADE_FILE) {
+			return (FileNameTranslationHelper.HILL_SHADE + getBasename()).replace("_", " ");
+		} else if (type == DownloadActivityType.SLOPE_FILE) {
+			return (FileNameTranslationHelper.SLOPE + getBasename()).replace('_', ' ');
+		} else {
+			return getBasename();
+		}
 	}
 
 	public File getBackupFile(OsmandApplication ctx) {

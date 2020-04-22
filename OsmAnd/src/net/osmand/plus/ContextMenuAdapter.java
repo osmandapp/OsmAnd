@@ -16,7 +16,6 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
@@ -27,6 +26,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+
+import com.google.android.material.slider.Slider;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -464,33 +465,26 @@ public class ContextMenuAdapter {
 				}
 			}
 
-			if (convertView.findViewById(R.id.seekbar) != null) {
-				SeekBar seekBar = (SeekBar) convertView.findViewById(R.id.seekbar);
+			Slider slider = (Slider) convertView.findViewById(R.id.slider);
+			if (slider != null) {
 				if (item.getProgress() != ContextMenuItem.INVALID_ID) {
-					seekBar.setProgress(item.getProgress());
-					seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+					slider.setValue(item.getProgress());
+					slider.addOnChangeListener(new Slider.OnChangeListener() {
 						@Override
-						public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+						public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
 							OnIntegerValueChangedListener listener = item.getIntegerListener();
+							int progress = (int) value;
 							item.setProgress(progress);
 							if (listener != null && fromUser) {
 								listener.onIntegerValueChangedListener(progress);
 							}
 						}
-
-						@Override
-						public void onStartTrackingTouch(SeekBar seekBar) {
-						}
-
-						@Override
-						public void onStopTrackingTouch(SeekBar seekBar) {
-						}
 					});
-					seekBar.setVisibility(View.VISIBLE);
-				} else if (seekBar != null) {
-					seekBar.setVisibility(View.GONE);
+					slider.setVisibility(View.VISIBLE);
+				} else {
+					slider.setVisibility(View.GONE);
 				}
-				UiUtilities.setupSeekBar(app, seekBar, nightMode, profileDependent);
+				UiUtilities.setupSlider(slider, nightMode, currentModeColor);
 			}
 
 			View progressBar = convertView.findViewById(R.id.ProgressBar);
