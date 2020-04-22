@@ -1262,4 +1262,40 @@
     <string name="access_default_color">Fren ini n lexṣas</string>
     <string name="storage_directory_card">Takatut</string>
     <string name="custom_color">Ini udmawan</string>
+    <string name="months_3">Kraḍ n wayyuren</string>
+    <string name="recalculate_route_in_deviation">Ales asiḍen n ubrid ma yella ibeddel ubrid</string>
+    <string name="select_distance_route_will_recalc">Fren ameccaq ugar n wanida ara d-yettwasiden ubrid.</string>
+    <string name="recalculate_route_distance_promo">Abrid ad yettwasiḍen ticki ameccaq gar ubrid akked wadig-ik yugar azal i d-yettwammlen.</string>
+    <string name="download_slope_maps">Iberdan isnawanen</string>
+    <string name="quick_action_show_hide_terrain">Sken/ffer akal</string>
+    <string name="quick_action_terrain_hide">Ffer akal</string>
+    <string name="quick_action_terrain_show">Sken akal</string>
+    <string name="quick_action_terrain_descr">Taqeffalt i uskan neɣ tuffra n tissi n wakal n tkarḍa.</string>
+    <string name="delete_description">Kkes aglam</string>
+    <string name="select_group">Fren agraw</string>
+    <string name="select_shape">Fren talɣa</string>
+    <string name="ui_customization_description">Sbadu amḍan n yiferdisen deg ugalis adruram, sbadu takarḍa akked wumuɣ n usatal.
+\n
+\nTzemreḍ ad tsenseḍ izegrar ur nettwaseqdac ara, akken ad teffreḍ meṛṛa imsefraken deg usnas %1$s.</string>
+    <string name="ui_customization_short_descr">Iferdisen n ugalis adruram, umuɣ n usatal</string>
+    <string name="ui_customization">Amuddu n udem i ugrudem n useqdac</string>
+    <string name="shared_string_drawer">Agalis adruram</string>
+    <string name="context_menu_actions">Tigawin n wumuɣ n usatal</string>
+    <string name="reorder_or_hide_from">Ales tuddsa neɣ ffer iferdisen seg %1$s.</string>
+    <string name="divider_descr">Iferdisen ddaw n wagaz-a ɛezlen s unabraz.</string>
+    <string name="hidden_items_descr">Iferdisen-a ffren deg umuɣ maca isenfran-a neɣ izegrar ur teddun ara akken iwata.</string>
+    <string name="reset_items_descr">Iɣewwaṛen ad alsen awennez ɣer wazalen-nsen imezwura deffir n tuffra-nsen.</string>
+    <string name="main_actions_descr">Tigawin tigejdanin gebrent kan 4 n tqeffalin.</string>
+    <string name="additional_actions_descr">Tzemreḍ dad tkecmeḍ ɣer tigawin-a s utekki ɣef tqeffalt \"Tigawin\".</string>
+    <string name="move_inside_category">Tzemreḍ kan ad tawiḍ iferdisen daxel n taggayt-a.</string>
+    <string name="app_mode_ski_touring">Uccuḍ deg udfel</string>
+    <string name="extra_maps_menu_group">Tikarḍiwin-nniḍen</string>
+    <string name="si_mi_meters">Amayel / Amitr</string>
+    <string name="si_km_m">Ikilumitren/imitren</string>
+    <string name="si_mi_yard">Miles/yards</string>
+    <string name="si_mi_feet">Amayel/aḍar</string>
+    <string name="si_min_m">Tisdatin deg umayl</string>
+    <string name="si_min_km">Tisdatin deg ukilumitr</string>
+    <string name="nm">nmi</string>
+    <string name="foot">ft</string>
 </resources>
