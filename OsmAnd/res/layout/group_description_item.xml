@@ -13,12 +13,18 @@
 		android:orientation="vertical"
 		android:paddingBottom="@dimen/list_header_settings_top_margin">
 
-		<LinearLayout
-			android:id="@+id/images_container"
+		<HorizontalScrollView
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:maxHeight="132dp"
-			android:orientation="horizontal" />
+			android:layout_height="wrap_content">
+
+			<LinearLayout
+				android:id="@+id/images_container"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:maxHeight="132dp"
+				android:orientation="horizontal" />
+
+		</HorizontalScrollView>
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/description"
