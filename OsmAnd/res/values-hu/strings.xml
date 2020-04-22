@@ -3561,8 +3561,8 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="shared_string_all_languages">Összes nyelv</string>
     <string name="wiki_menu_download_descr">További térképek szükségesek a Wikipédia POI-k térképen való megjelenítéséhez.</string>
     <string name="context_menu_actions">Opciók menü elemei</string>
-    <string name="ui_customization_description">Személyre szabhatja az elemek számát a Menü-ben, a Térkép beállítása-ban és az Opciókban.
-\n
+    <string name="ui_customization_description">Személyre szabhatja az elemek számát a Menüben, a Térkép beállításában és az Opciókban. 
+\n 
 \nA használaton kívüli bővítmények letiltásával elrejtheti őket a %1$s menüből.</string>
     <string name="ui_customization_short_descr">Menü elemek, Opciók</string>
     <string name="select_wikipedia_article_langs">Jelölje ki a térképen megjelenő Wikipédia szócikkek nyelvét. A szócikk olvasása közben válthat valamennyi elérhető nyelv között.</string>
@@ -3596,4 +3596,5 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="lang_an">aragóniai</string>
     <string name="lang_lmo">lombard</string>
     <string name="custom_color">Egyéni szín</string>
+    <string name="extra_maps_menu_group">Egyéb térképek</string>
 </resources>
