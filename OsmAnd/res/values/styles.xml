@@ -246,6 +246,7 @@
         <item name="wikivoyage_primary_btn_bg">@drawable/wikivoyage_primary_btn_bg_light</item>
         <item name="purchase_dialog_active_card_bg">@drawable/dialog_active_card_bg_light</item>
         <item name="purchase_dialog_shadow_btn_bg">@drawable/purchase_dialog_shadow_btn_bg_light</item>
+        <item name="purchase_dialog_outline_btn_bg">@drawable/purchase_dialog_outline_btn_bg_light</item>
 
         <item name="bottom_nav_shadow">@drawable/bg_bottom_bar_shadow_with_line_day</item>
 
@@ -512,6 +513,7 @@
         <item name="wikivoyage_primary_btn_bg">@drawable/wikivoyage_primary_btn_bg_dark</item>
         <item name="purchase_dialog_active_card_bg">@drawable/dialog_active_card_bg_dark</item>
         <item name="purchase_dialog_shadow_btn_bg">@drawable/purchase_dialog_shadow_btn_bg_dark</item>
+        <item name="purchase_dialog_outline_btn_bg">@drawable/purchase_dialog_outline_btn_bg_dark</item>
 
         <item name="bottom_nav_shadow">@drawable/bg_bottom_bar_shadow_with_line_night</item>
 

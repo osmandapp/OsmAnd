@@ -713,7 +713,7 @@
     <string name="osm_live_payment_renews_monthly">Perpanjang tiap bulan</string>
     <string name="osm_live_payment_renews_quarterly">Perpanjang tiap 4 bulan</string>
     <string name="osm_live_payment_renews_annually">Perpanjang tiap tahun</string>
-    <string name="default_price_currency_format"/>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Pilih periode pembayaran yang anda inginkan:</string>
     <string name="osm_live_payment_contribute_descr">Sebagian pendapatan diberikan untuk kontributor OpenStreetMap.</string>
     <string name="powered_by_osmand">Oleh OsmAnd</string>

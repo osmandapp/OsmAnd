@@ -258,6 +258,20 @@ public class InAppPurchases {
 			}
 			return null;
 		}
+
+		@Nullable
+		public InAppSubscription getSubscriptionWithMaxDiscount(@Nullable InAppSubscription monthlyLiveUpdates) {
+			double maxDiscount = 0;
+			InAppSubscription subscriptionWithMaxDiscount = null;
+			for (InAppSubscription s : getAllSubscriptions()) {
+				double discount = s.getDiscountPercent(monthlyLiveUpdates);
+				if (discount > maxDiscount) {
+					subscriptionWithMaxDiscount = s;
+					maxDiscount = discount;
+				}
+			}
+			return subscriptionWithMaxDiscount;
+		}
 	}
 
 	public static class LiveUpdatesInAppPurchasesFree extends InAppSubscriptionList {
@@ -677,6 +691,10 @@ public class InAppPurchases {
 			return s;
 		}
 
+		public boolean isUpgrade() {
+			return upgrade;
+		}
+
 		public boolean isAnyPurchased() {
 			if (isPurchased()) {
 				return true;
@@ -728,6 +746,9 @@ public class InAppPurchases {
 
 		@Override
 		public CharSequence getDescription(@NonNull Context ctx) {
+			if (getMonthlyPriceValue() == getPriceValue()) {
+				return "";
+			}
 			if (getMonthlyPriceValue() == 0) {
 				return ctx.getString(R.string.osm_live_payment_month_cost_descr, getDefaultMonthlyPrice(ctx));
 			} else {
@@ -740,12 +761,6 @@ public class InAppPurchases {
 			}
 		}
 
-		public CharSequence getDescription(@NonNull Context ctx, @Nullable InAppSubscription monthlyLiveUpdates) {
-			CharSequence descr = getDescription(ctx);
-			int discountPercent = getDiscountPercent(monthlyLiveUpdates);
-			return discountPercent > 0 ? ctx.getString(R.string.price_and_discount, descr, discountPercent + "%") : descr;
-		}
-
 		public CharSequence getRenewDescription(@NonNull Context ctx) {
 			return "";
 		}
@@ -753,7 +768,12 @@ public class InAppPurchases {
 		@Nullable
 		protected abstract InAppSubscription newInstance(@NonNull String sku);
 
-		public int getDiscountPercent(@Nullable InAppSubscription monthlyLiveUpdates) {
+		public String getDiscountTitle(@NonNull Context ctx, @Nullable InAppSubscription monthlyLiveUpdates) {
+			int discountPercent = getDiscountPercent(monthlyLiveUpdates);
+			return discountPercent > 0 ? ctx.getString(R.string.osm_live_payment_discount_descr, discountPercent + "%") : "";
+		}
+
+		int getDiscountPercent(@Nullable InAppSubscription monthlyLiveUpdates) {
 			double monthlyPriceValue = getMonthlyPriceValue();
 			if (monthlyLiveUpdates != null) {
 				double regularMonthlyPrice = monthlyLiveUpdates.getPriceValue();
@@ -767,6 +787,10 @@ public class InAppPurchases {
 				}
 			}
 			return 0;
+		}
+
+		public String getPriceWithPeriod(Context ctx) {
+			return getPrice(ctx);
 		}
 	}
 
@@ -882,6 +906,12 @@ public class InAppPurchases {
 		}
 
 		@Override
+		public String getPriceWithPeriod(Context ctx) {
+			return ctx.getString(R.string.ltr_or_rtl_combine_via_slash_with_space, getPrice(ctx),
+					ctx.getString(R.string.month).toLowerCase());
+		}
+
+		@Override
 		public CharSequence getRenewDescription(@NonNull Context ctx) {
 			return ctx.getString(R.string.osm_live_payment_renews_monthly);
 		}
@@ -957,6 +987,12 @@ public class InAppPurchases {
 		}
 
 		@Override
+		public String getPriceWithPeriod(Context ctx) {
+			return ctx.getString(R.string.ltr_or_rtl_combine_via_slash_with_space, getPrice(ctx),
+					ctx.getString(R.string.months_3).toLowerCase());
+		}
+
+		@Override
 		public CharSequence getRenewDescription(@NonNull Context ctx) {
 			return ctx.getString(R.string.osm_live_payment_renews_quarterly);
 		}
@@ -1029,6 +1065,12 @@ public class InAppPurchases {
 		@Override
 		public CharSequence getTitle(Context ctx) {
 			return ctx.getString(R.string.osm_live_payment_annual_title);
+		}
+
+		@Override
+		public String getPriceWithPeriod(Context ctx) {
+			return ctx.getString(R.string.ltr_or_rtl_combine_via_slash_with_space, getPrice(ctx),
+					ctx.getString(R.string.year).toLowerCase());
 		}
 
 		@Override

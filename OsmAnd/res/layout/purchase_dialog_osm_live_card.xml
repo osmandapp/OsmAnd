@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:layout_marginLeft="@dimen/card_padding"
@@ -49,7 +48,7 @@
 		android:layout_marginRight="@dimen/card_padding"
 		android:layout_marginBottom="@dimen/list_header_padding"
 		android:text="@string/osm_live_payment_header"
-		android:textColor="?attr/dialog_text_description_color"
+		android:textColor="@color/preference_category_title"
 		android:textSize="@dimen/default_desc_text_size"
 		osmand:typeface="@string/font_roboto_regular"
 		android:layout_marginEnd="@dimen/card_padding"
@@ -74,7 +73,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginBottom="2dp"
-		android:paddingBottom="@dimen/content_padding_small"
+		android:paddingBottom="@dimen/content_padding"
 		android:orientation="vertical"
 		android:visibility="gone" />
 
