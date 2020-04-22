@@ -263,4 +263,10 @@
     <string name="shared_string_suggested">Предложено</string>
     <string name="status_widget_title">Статус OsmAnd Tracker</string>
     <string name="back_to_osmand">Вернуться к OsmAnd</string>
+    <string name="shared_string_error_short">ОШИБКА</string>
+    <string name="duration_ago">%1$s назад</string>
+    <string name="last_response_duration">Последний ответ: %1$s назад</string>
+    <string name="last_update_from_telegram_duration">Последнее обновление от Telegram: %1$s назад</string>
+    <string name="last_response_date">Последний ответ: %1$s</string>
+    <string name="last_update_from_telegram_date">Последнее обновление от Telegram: %1$s</string>
 </resources>
