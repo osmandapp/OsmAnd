@@ -104,7 +104,8 @@
                 android:layout_width="@dimen/map_trans_seek_size"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="@dimen/dashPadding" />
+                android:layout_marginLeft="@dimen/dashPadding"
+                android:layout_marginRight="@dimen/dashPadding"/>
 
         </LinearLayout>
 
