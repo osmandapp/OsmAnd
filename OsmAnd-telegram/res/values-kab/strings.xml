@@ -187,4 +187,24 @@
     <string name="shared_string_apply">Snes</string>
     <string name="shared_string_start">Tazwara</string>
     <string name="shared_string_end">Tagara</string>
+    <string name="choose_osmand_desc">Fren lqem OsmAnd anida inermisen ad ttwaseknen deg tkarda.</string>
+    <string name="logout_from_osmand_telegram">Ffeɣ seg uneḍfar OsmAnd\?</string>
+    <string name="logout_from_osmand_telegram_descr">Tebɣiḍ ad teffɣeḍ seg uneḍfar OsmAnd; ur tettizmired ara ad tebḍuḍ adig-ik neɣ adig n wiyaḍ\?</string>
+    <string name="live_now_description">Inermisen akked yigrawen beṭṭun adig-nsen yid-neɣ.</string>
+    <string name="no_gps_connection">Ulac tuqqna GPS</string>
+    <string name="location_sharing_status">Beṭṭu: %1$s</string>
+    <string name="sharing_status">Bdu addad</string>
+    <string name="last_available_location">Adig aneggaru yellan</string>
+    <string name="re_send_location">Ales tuzna n wadig</string>
+    <string name="not_sent_yet">Ur yettwazen ara yakan</string>
+    <string name="sharing_in_background">Bḍu agilal</string>
+    <string name="battery_optimization_description">Sens aṣeggem n uẓru i uneḍfaṛ OsmAnd akken ur yettnusu ara weḥd-s ticki yella deg ugilal.</string>
+    <string name="background_work_description">Beddel iɣewwaṛen n uṣeggem n uẓru i userked n beṭṭu n wadig.</string>
+    <string name="connecting_to_the_internet">Tuqqna ɣer Internet</string>
+    <string name="sending_location_messages">Tuzna n wadig</string>
+    <string name="waiting_for_response_from_telegram">Yettraǧu tiririt n Telegram</string>
+    <string name="not_possible_to_send_to_telegram_chats">Ur izmir ara ad yazen ɣer usqerdec Telegram:</string>
+    <string name="successfully_sent_and_updated">Yettwazen akken iwata</string>
+    <string name="last_updated_location">Adig aneggaru yettwaleqmen:</string>
+    <string name="share_location_as_description">Ma tebɣiḍ ad teqqneḍ ddeqs n yibenkan ɣer yiwet n umiḍan Telegram, ilaq ad tesqedceḍ ibenk-nniḍen i beṭṭu n wadig-ik.</string>
 </resources>
