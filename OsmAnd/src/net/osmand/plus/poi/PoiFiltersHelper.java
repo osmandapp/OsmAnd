@@ -145,7 +145,7 @@ public class PoiFiltersHelper {
 	public List<PoiUIFilter> getLocalWikipediaPoiFilters(boolean onlyActiveLocales) {
 		String wikiLang = "wiki:lang:";
 		if (cacheWikipediaFilters == null) {
-			cacheWikipediaFilters = new ArrayList<>();
+			List<PoiUIFilter> wikipediaFilters = new ArrayList<>();
 			PoiType place = application.getPoiTypes().getPoiTypeByKey(WIKI_PLACE);
 			if (place != null) {
 				for (String locale : application.getPoiTypes().getAllAvailableWikiLocales()) {
@@ -153,9 +153,10 @@ public class PoiFiltersHelper {
 							WikipediaPoiMenu.getTranslation(application, locale));
 					filter.setSavedFilterByName(wikiLang + locale);
 					filter.setStandardFilter(true);
-					cacheWikipediaFilters.add(filter);
+					wikipediaFilters.add(filter);
 				}
 			}
+			cacheWikipediaFilters = wikipediaFilters;
 		}
 		if (onlyActiveLocales && cacheWikipediaFilters.size() > 0) {
 			List<PoiUIFilter> onlyActiveLocalFilters = new ArrayList<>();
