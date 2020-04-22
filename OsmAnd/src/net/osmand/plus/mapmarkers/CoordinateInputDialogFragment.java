@@ -1494,10 +1494,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					if (!dir.exists()) {
 						dir.mkdirs();
 					}
-					File fout = new File(dir, fileName + ".gpx");
+					File fout = new File(dir, fileName + IndexConstants.GPX_FILE_EXT);
 					int ind = 1;
 					while (fout.exists()) {
-						fout = new File(dir, fileName + "_" + (++ind) + ".gpx");
+						fout = new File(dir, fileName + "_" + (++ind) + IndexConstants.GPX_FILE_EXT);
 					}
 					GPXUtilities.writeGpxFile(fout, gpx);
 				}

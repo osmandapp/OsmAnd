@@ -172,7 +172,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 					String sub = gpxSubfolder.length() == 0 ?
 							gpxFile.getName() : gpxSubfolder + "/" + gpxFile.getName();
 					processGPXFolder(gpxFile, sub);
-				} else if (gpxFile.isFile() && gpxFile.getName().toLowerCase().endsWith(".gpx")) {
+				} else if (gpxFile.isFile() && gpxFile.getName().toLowerCase().endsWith(IndexConstants.GPX_FILE_EXT)) {
 					GpxDataItem item = dbHelper.getItem(gpxFile, gpxDataItemCallback);
 					publishProgress(item);
 				}

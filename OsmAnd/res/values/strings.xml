@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="extra_maps_menu_group">Extra maps</string>
     <string name="search_poi_types_descr">Combine POI types from different categories. Tap switch to select all, tap left side to category selection.</string>
     <string name="search_poi_types">Search poi types</string>
     <string name="custom_color">Custom color</string>

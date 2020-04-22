@@ -55,6 +55,7 @@ public class DownloadResourceGroup {
 		FONTS(R.string.fonts_header),
 		VOICE_REC(R.string.index_name_voice),
 		OTHER_MAPS(R.string.download_select_map_types),
+		EXTRA_MAPS(R.string.extra_maps_menu_group),
 		WORLD(-1),
 		REGION(-1);
 
@@ -79,7 +80,7 @@ public class DownloadResourceGroup {
 
 		public boolean containsIndexItem() {
 			return isHeader() && this != SUBREGIONS && this != OTHER_GROUP && this != OTHER_MAPS_GROUP
-					&& this != NAUTICAL_MAPS_GROUP && this != TRAVEL_GROUP;
+					&& this != NAUTICAL_MAPS_GROUP && this != TRAVEL_GROUP && this != EXTRA_MAPS;
 		}
 
 		public boolean isHeader() {
@@ -90,7 +91,8 @@ public class DownloadResourceGroup {
 					|| this == OTHER_MAPS_HEADER || this == OTHER_MAPS_GROUP
 					|| this == FONTS_HEADER 
 					|| this == NAUTICAL_MAPS_HEADER || this == NAUTICAL_MAPS_GROUP
-					|| this == WIKIVOYAGE_HEADER || this == TRAVEL_GROUP;
+					|| this == WIKIVOYAGE_HEADER || this == TRAVEL_GROUP
+					|| this == EXTRA_MAPS;
 		}
 
 		public static String getVoiceTTSId() {
@@ -274,7 +276,7 @@ public class DownloadResourceGroup {
 	}
 	
 	public IndexItem getItemByIndex(int ind) {
-		if(individualResources != null && ind < individualResources.size()) {
+		if (individualResources != null && ind >= 0 && ind < individualResources.size()) {
 			return individualResources.get(ind);
 		}
 		return null;

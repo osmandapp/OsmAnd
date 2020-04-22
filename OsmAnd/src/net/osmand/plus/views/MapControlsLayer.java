@@ -18,15 +18,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.ViewPropertyAnimatorCompat;
 import androidx.core.view.ViewPropertyAnimatorListener;
+
+import com.google.android.material.slider.Slider;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
@@ -34,6 +36,7 @@ import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationSimulation;
@@ -97,7 +100,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	// private RulerControl rulerControl;
 	// private List<MapControls> allControls = new ArrayList<MapControls>();
 
-	private SeekBar transparencyBar;
+	private Slider transparencySlider;
 	private LinearLayout transparencyBarLayout;
 	private static CommonPreference<Integer> transparencySetting;
 	private boolean isTransparencyBarEnabled;
@@ -921,28 +924,19 @@ public class MapControlsLayer extends OsmandMapLayer {
 	// /////////////// Transparency bar /////////////////////////
 	private void initTransparencyBar() {
 		transparencyBarLayout = (LinearLayout) mapActivity.findViewById(R.id.map_transparency_layout);
-		transparencyBar = (SeekBar) mapActivity.findViewById(R.id.map_transparency_seekbar);
-		transparencyBar.setMax(255);
+		transparencySlider = (Slider) mapActivity.findViewById(R.id.map_transparency_slider);
+		transparencySlider.setValueTo(255);
 		if (transparencySetting != null) {
-			transparencyBar.setProgress(transparencySetting.get());
+			transparencySlider.setValue(transparencySetting.get());
 			transparencyBarLayout.setVisibility(View.VISIBLE);
 		} else {
 			transparencyBarLayout.setVisibility(View.GONE);
 		}
-		transparencyBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-
+		transparencySlider.addOnChangeListener(new Slider.OnChangeListener() {
 			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {
-			}
-
-			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {
-			}
-
-			@Override
-			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+			public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
 				if (transparencySetting != null) {
-					transparencySetting.set(progress);
+					transparencySetting.set((int) value);
 					mapActivity.getMapView().refreshMap();
 				}
 			}
@@ -961,18 +955,21 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void showTransparencyBar(CommonPreference<Integer> transparenPreference,
 									boolean isTransparencyBarEnabled) {
 		this.isTransparencyBarEnabled = isTransparencyBarEnabled;
+		ApplicationMode appMode = app.getSettings().getApplicationMode();
 		if (MapControlsLayer.transparencySetting != transparenPreference) {
 			MapControlsLayer.transparencySetting = transparenPreference;
 
 		}
 		if (transparenPreference != null && isTransparencyBarEnabled) {
 			transparencyBarLayout.setVisibility(View.VISIBLE);
-			transparencyBar.setProgress(transparenPreference.get());
+			transparencySlider.setValue(transparenPreference.get());
 		} else {
 			transparencyBarLayout.setVisibility(View.GONE);
 		}
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		UiUtilities.setupSeekBar(app, transparencyBar, nightMode, true);
+		int selectedModeColor = ContextCompat.getColor(app,
+				appMode.getIconColorInfo().getColor(nightMode));
+		UiUtilities.setupSlider(transparencySlider, nightMode, selectedModeColor);
 	}
 
 	public void hideTransparencyBar() {
