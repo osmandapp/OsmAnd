@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.AndroidUtils;
@@ -181,6 +183,14 @@ public class PluginsActivity extends OsmandListActivity implements DownloadIndex
 				}
 				name = plugin.getName();
 				pluginDescription.setText(plugin.getDescription());
+
+				boolean light = getMyApplication().getSettings().isLightContent();
+				int linkTextColor = ContextCompat.getColor(PluginsActivity.this,
+						light ? R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);
+
+				pluginDescription.setLinkTextColor(linkTextColor);
+				pluginDescription.setMovementMethod(LinkMovementMethod.getInstance());
+				AndroidUtils.removeLinkUnderline(pluginDescription);
 
 				OsmandApplication app = getMyApplication();
 				int color = AndroidUtils.getColorFromAttr(app, R.attr.list_background_color);

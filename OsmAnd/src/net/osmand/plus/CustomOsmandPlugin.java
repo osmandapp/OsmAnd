@@ -3,6 +3,7 @@ package net.osmand.plus;
 import android.app.Activity;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.text.Html;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -86,8 +87,9 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public String getDescription() {
-		return JsonUtils.getLocalizedResFromMap(app, descriptions, null);
+	public CharSequence getDescription() {
+		String description = JsonUtils.getLocalizedResFromMap(app, descriptions, null);
+		return description != null ? Html.fromHtml(description) : null;
 	}
 
 	public String getResourceDirName() {

@@ -1453,7 +1453,8 @@ public class OsmandSettings {
 
 	public final CommonPreference<String> API_NAV_DRAWER_ITEMS_JSON = new StringPreference("api_nav_drawer_items_json", "{}").makeGlobal();
 	public final CommonPreference<String> API_CONNECTED_APPS_JSON = new StringPreference("api_connected_apps_json", "[]").makeGlobal();
-	public final CommonPreference<String> NAV_DRAWER_LOGO = new StringPreference("nav_drawer_logo", "").makeProfile();
+	public final CommonPreference<String> NAV_DRAWER_LOGO = new StringPreference("drawer_logo", "").makeProfile();
+	public final CommonPreference<String> NAV_DRAWER_URL = new StringPreference("drawer_url", "").makeProfile();
 
 	public final CommonPreference<Integer> NUMBER_OF_STARTS_FIRST_XMAS_SHOWN = new IntPreference("number_of_starts_first_xmas_shown", 0).makeGlobal();
 

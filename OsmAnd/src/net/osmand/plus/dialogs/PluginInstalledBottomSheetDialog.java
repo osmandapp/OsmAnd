@@ -109,6 +109,7 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 						setupHeightAndBackground(getView());
 					}
 				})
+				.setDescriptionLinksClickable(true)
 				.setDescription(plugin.getDescription())
 				.setDescriptionMaxLines(COLLAPSED_DESCRIPTION_LINES)
 				.setLayoutId(R.layout.bottom_sheet_item_with_expandable_descr)
