@@ -9,7 +9,7 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.download.CustomIndexItem;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.download.ui.DescriptionInfo;
+import net.osmand.plus.download.ui.DownloadDescriptionInfo;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -36,7 +36,7 @@ public class CustomRegion extends WorldRegion {
 
 	private JSONArray downloadItemsJson;
 
-	private DescriptionInfo descriptionInfo;
+	private DownloadDescriptionInfo descriptionInfo;
 
 	private Map<String, String> names = new HashMap<>();
 	private Map<String, String> icons = new HashMap<>();
@@ -70,7 +70,7 @@ public class CustomRegion extends WorldRegion {
 	}
 
 	@Nullable
-	public DescriptionInfo getDescriptionInfo() {
+	public DownloadDescriptionInfo getDescriptionInfo() {
 		return descriptionInfo;
 	}
 
@@ -106,7 +106,7 @@ public class CustomRegion extends WorldRegion {
 		} catch (IllegalArgumentException e) {
 			region.headerColor = 0;
 		}
-		region.descriptionInfo = DescriptionInfo.fromJson(object.optJSONObject("description"));
+		region.descriptionInfo = DownloadDescriptionInfo.fromJson(object.optJSONObject("description"));
 
 		return region;
 	}

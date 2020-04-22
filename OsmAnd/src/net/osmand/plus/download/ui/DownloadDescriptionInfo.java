@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class DescriptionInfo {
+public class DownloadDescriptionInfo {
 
-	private static final Log LOG = PlatformUtil.getLog(DescriptionInfo.class);
+	private static final Log LOG = PlatformUtil.getLog(DownloadDescriptionInfo.class);
 
 	private JSONArray buttonsJson;
 	private List<String> imageUrls;
@@ -32,49 +32,44 @@ public class DescriptionInfo {
 		return description != null ? Html.fromHtml(description) : null;
 	}
 
-	public List<DownloadActionButton> getDownloadActionButtons(Context ctx) {
-		List<DownloadActionButton> downloadActionButtons = new ArrayList<>();
+	public List<ActionButton> getActionButtons(Context ctx) {
+		List<ActionButton> actionButtons = new ArrayList<>();
 		if (buttonsJson != null) {
 			try {
 				for (int i = 0; i < buttonsJson.length(); i++) {
-					DescriptionActionButtonType type = null;
 					String url = null;
+					String actionType = null;
 
 					JSONObject object = buttonsJson.getJSONObject(i);
 					if (object.has("url")) {
 						url = object.optString("url");
 					} else if (object.has("action")) {
-						String action = object.optString("action");
-						for (DescriptionActionButtonType buttonType : DescriptionActionButtonType.values()) {
-							if (buttonType.name().equalsIgnoreCase(action)) {
-								type = buttonType;
-							}
-						}
+						actionType = object.optString("action");
 					}
 					Map<String, String> localizedMap = JsonUtils.getLocalizedMapFromJson(object);
 					String name = JsonUtils.getLocalizedResFromMap(ctx, localizedMap, null);
 
-					DownloadActionButton actionButton = new DownloadActionButton(type, name, url);
-					downloadActionButtons.add(actionButton);
+					ActionButton actionButton = new ActionButton(actionType, name, url);
+					actionButtons.add(actionButton);
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
 		}
-		return downloadActionButtons;
+		return actionButtons;
 	}
 
-	public static DescriptionInfo fromJson(JSONObject json) {
+	public static DownloadDescriptionInfo fromJson(JSONObject json) {
 		if (json != null) {
-			DescriptionInfo descriptionInfo = new DescriptionInfo();
+			DownloadDescriptionInfo downloadDescriptionInfo = new DownloadDescriptionInfo();
 			try {
-				descriptionInfo.texts = JsonUtils.getLocalizedMapFromJson("text", json);
-				descriptionInfo.imageUrls = JsonUtils.jsonArrayToList("image", json);
-				descriptionInfo.buttonsJson = json.optJSONArray("button");
+				downloadDescriptionInfo.texts = JsonUtils.getLocalizedMapFromJson("text", json);
+				downloadDescriptionInfo.imageUrls = JsonUtils.jsonArrayToList("image", json);
+				downloadDescriptionInfo.buttonsJson = json.optJSONArray("button");
 			} catch (JSONException e) {
 				LOG.error(e);
 			}
-			return descriptionInfo;
+			return downloadDescriptionInfo;
 		}
 		return null;
 	}
@@ -90,25 +85,20 @@ public class DescriptionInfo {
 		return descrJson;
 	}
 
-	public enum DescriptionActionButtonType {
-		DOWNLOAD,
-		URL
-	}
+	public static class ActionButton {
 
-	public static class DownloadActionButton {
-
-		private DescriptionInfo.DescriptionActionButtonType type;
+		private String actionType;
 		private String name;
 		private String url;
 
-		public DownloadActionButton(DescriptionInfo.DescriptionActionButtonType type, String name, String url) {
-			this.type = type;
+		public ActionButton(String actionType, String name, String url) {
+			this.actionType = actionType;
 			this.name = name;
 			this.url = url;
 		}
 
-		public DescriptionInfo.DescriptionActionButtonType getType() {
-			return type;
+		public String getActionType() {
+			return actionType;
 		}
 
 		public String getName() {
