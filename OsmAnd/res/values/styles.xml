@@ -112,6 +112,11 @@
         <item name="divider_color">@color/divider_color_dark</item>
     </style>
 
+    <!-- MaterialComponents Widgets override -->
+    <style name="Widget.Styled.Slider" parent="Widget.MaterialComponents.Slider">
+        <item name="android:theme">@style/Theme.MaterialComponents</item>
+    </style>
+
     <!-- Osmand themes styles -->
     <style name="OsmandLightTheme" parent="Theme.AppCompat.Light">
         <item name="android:textDirection">locale</item>
