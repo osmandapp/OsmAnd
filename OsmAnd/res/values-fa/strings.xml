@@ -3468,7 +3468,7 @@
     <string name="monitoring_min_accuracy_descr">این مورد فقط نقاطی را ضبط می‌کند که با شاخص کمترین صحت (به متر/فوت، مطابق گزارش اندروید از چیپست) اندازه‌گیری شده‌اند. منظور از صحت، پراکندگی اندازه‌گیری‌های تکراری است و مستقیماً مربوط به دقت نمی‌شود (دقت: میزان نزدیکی اندازه‌گیری‌ها به موقعیت واقعی).</string>
     <string name="monitoring_min_accuracy_descr_side_effect">اثر جانبی: درنتیجهٔ پالایش بر اساس صحت، ممکن است مثلاً زیر پل‌ها، زیر درختان، میان ساختمان‌های بلند یا در شرایط جوّی بخصوص، نقاط تماماً از دست بروند.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">توصیه: سخت است آنچه ثبت می‌شود یا آنچه ثبت نمی‌شود را پیشبینی کنیم. شاید بهتر باشد این پالایه را خاموش کنید.</string>
-    <string name="monitoring_min_accuracy_descr_remark">توجه: اگر بلافاصله پیش از ضبط، GPS خاموش بوده، ممکن است نخستین نقطه صحت کمتری داشته باشد؛ بنابراین ممکن است بخواهیم طوری کدنویسی کنیم که یک نقطه با یک یا چند ثانیه تأخیر ضبط شود (یا از سه نقطهٔ پی‌درپی بهترینشان را ضبط کنیم و...)، البته این هنوز پیاده نشده.</string>
+    <string name="monitoring_min_accuracy_descr_remark">توجه: اگر بلافاصله پیش از ضبط، GPS خاموش بوده، ممکن است نخستین نقطه صحت کمتری داشته باشد؛ بنابراین ممکن است بخواهیم طوری کدنویسی کنیم که یک نقطه با یک یا چند ثانیه تأخیر ضبط شود یا از سه نقطهٔ پی‌درپی بهترینشان را ضبط کنیم و... . البته این هنوز پیاده‌سازی نشده است.</string>
     <string name="monitoring_notification">اعلان</string>
     <string name="monitoring_min_speed">کمترین سرعت</string>
     <string name="monitoring_min_accuracy">کمترین صحت</string>
@@ -3650,9 +3650,9 @@
     <string name="shared_string_languages">زبان‌ها</string>
     <string name="shared_string_language">زبان</string>
     <string name="shared_string_all_languages">همهٔ زبان‌ها</string>
-    <string name="ui_customization_description">تعداد اقلام کشو را به‌دلخواه تنظیم کنید، نقشه و منوی زمینه را پیکربندی نمایید.
-\n
-\nمی‌توانید افزونه‌های بی‌استفاده را غیرفعال کنید تا همهٔ کنترل‌های آن‌ها از %1$s برنامه پنهان شود.</string>
+    <string name="ui_customization_description">تعداد اقلام کشو را به‌دلخواه تنظیم کنید، نقشه و منوی زمینه را پیکربندی نمایید. 
+\n 
+\nمی‌توانید افزونهٔ بی‌استفاده را غیرفعال کنید تا همهٔ کنترل‌های آن از برنامه پنهان شود.</string>
     <string name="reset_items_descr">تنظیمات پس از پنهان‌سازی به حالت اولیه بازنشانی می‌شود.</string>
     <string name="hidden_items_descr">این اقلام در منو پنهان می‌شوند، اما گزینه‌ها یا افزونه‌های متناظر همچنان کار می‌کنند.</string>
     <string name="shared_string_hidden">پنهان</string>
@@ -3673,4 +3673,7 @@
     <string name="some_articles_may_not_available_in_lang">ممکن است برخی مقاله‌های ویکی‌پدیا به زبان شما در دسترس نباشد.</string>
     <string name="lang_lmo">لومبارد</string>
     <string name="custom_color">رنگ دلخواه</string>
+    <string name="lang_ur">اردو</string>
+    <string name="lang_tg">تاجیکی</string>
+    <string name="extra_maps_menu_group">نقشه‌های بیشتر</string>
 </resources>
