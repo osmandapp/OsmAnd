@@ -1,6 +1,7 @@
 package net.osmand.plus;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.Nullable;
 
 import net.osmand.JsonUtils;
 import net.osmand.PlatformUtil;
@@ -8,6 +9,7 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.download.CustomIndexItem;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.ui.DescriptionInfo;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -31,9 +33,10 @@ public class CustomRegion extends WorldRegion {
 	private String parentPath;
 	private String type;
 	private String subfolder;
-	private String headerButton;
 
 	private JSONArray downloadItemsJson;
+
+	private DescriptionInfo descriptionInfo;
 
 	private Map<String, String> names = new HashMap<>();
 	private Map<String, String> icons = new HashMap<>();
@@ -66,6 +69,11 @@ public class CustomRegion extends WorldRegion {
 		return headerColor;
 	}
 
+	@Nullable
+	public DescriptionInfo getDescriptionInfo() {
+		return descriptionInfo;
+	}
+
 	public static CustomRegion fromJson(JSONObject object) throws JSONException {
 		String scopeId = object.optString("scope-id", null);
 		String path = object.optString("path", null);
@@ -90,7 +98,6 @@ public class CustomRegion extends WorldRegion {
 		region.icons = JsonUtils.getLocalizedMapFromJson("icon", object);
 		region.headers = JsonUtils.getLocalizedMapFromJson("header", object);
 
-		region.headerButton = object.optString("header-button", null);
 		region.downloadItemsJson = object.optJSONArray("items");
 
 		String headerColor = object.optString("header-color", null);
@@ -99,8 +106,29 @@ public class CustomRegion extends WorldRegion {
 		} catch (IllegalArgumentException e) {
 			region.headerColor = 0;
 		}
+		region.descriptionInfo = DescriptionInfo.fromJson(object.optJSONObject("description"));
 
 		return region;
+	}
+
+	public JSONObject toJson() throws JSONException {
+		JSONObject jsonObject = new JSONObject();
+
+		jsonObject.putOpt("scope-id", scopeId);
+		jsonObject.putOpt("path", path);
+		jsonObject.putOpt("type", type);
+		jsonObject.putOpt("subfolder", subfolder);
+
+		JsonUtils.writeLocalizedMapToJson("name", jsonObject, names);
+		JsonUtils.writeLocalizedMapToJson("icon", jsonObject, icons);
+		JsonUtils.writeLocalizedMapToJson("header", jsonObject, headers);
+
+		if (descriptionInfo != null) {
+			jsonObject.putOpt("description", descriptionInfo.toJson());
+		}
+		jsonObject.putOpt("items", downloadItemsJson);
+
+		return jsonObject;
 	}
 
 	public List<IndexItem> loadIndexItems() {
@@ -151,23 +179,5 @@ public class CustomRegion extends WorldRegion {
 			}
 		}
 		return items;
-	}
-
-	public JSONObject toJson() throws JSONException {
-		JSONObject jsonObject = new JSONObject();
-
-		jsonObject.putOpt("scope-id", scopeId);
-		jsonObject.putOpt("path", path);
-		jsonObject.putOpt("type", type);
-		jsonObject.putOpt("subfolder", subfolder);
-		jsonObject.putOpt("header-button", headerButton);
-
-		JsonUtils.writeLocalizedMapToJson("name", jsonObject, names);
-		JsonUtils.writeLocalizedMapToJson("icon", jsonObject, icons);
-		JsonUtils.writeLocalizedMapToJson("header", jsonObject, headers);
-
-		jsonObject.putOpt("items", downloadItemsJson);
-
-		return jsonObject;
 	}
 }

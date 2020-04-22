@@ -44,12 +44,16 @@ public class JsonUtils {
 	}
 
 	public static Map<String, String> getLocalizedMapFromJson(String key, JSONObject json) throws JSONException {
-		Map<String, String> localizedMap = new HashMap<>();
 		JSONObject jsonObject = json.optJSONObject(key);
-		if (jsonObject != null) {
-			for (Iterator<String> it = jsonObject.keys(); it.hasNext(); ) {
+		return getLocalizedMapFromJson(jsonObject);
+	}
+
+	public static Map<String, String> getLocalizedMapFromJson(JSONObject json) throws JSONException {
+		Map<String, String> localizedMap = new HashMap<>();
+		if (json != null) {
+			for (Iterator<String> it = json.keys(); it.hasNext(); ) {
 				String localeKey = it.next();
-				String name = jsonObject.getString(localeKey);
+				String name = json.getString(localeKey);
 				localizedMap.put(localeKey, name);
 			}
 		}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/card_and_list_background_basic">
+
+	<LinearLayout
+		android:id="@+id/container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:paddingBottom="@dimen/list_header_settings_top_margin">
+
+		<LinearLayout
+			android:id="@+id/images_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:maxHeight="132dp"
+			android:orientation="horizontal" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/description"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			android:paddingLeft="@dimen/content_padding"
+			android:paddingTop="@dimen/list_header_settings_top_margin"
+			android:paddingRight="@dimen/content_padding"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size"
+			app:typeface="@string/font_roboto_regular"
+			tools:text="@string/plugin_disabled_descr" />
+
+		<LinearLayout
+			android:id="@+id/buttons_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="@dimen/content_padding_half"
+			android:layout_marginTop="@dimen/list_header_settings_top_margin"
+			android:layout_marginRight="@dimen/content_padding_half"
+			android:orientation="vertical" />
+
+	</LinearLayout>
+
+</LinearLayout>

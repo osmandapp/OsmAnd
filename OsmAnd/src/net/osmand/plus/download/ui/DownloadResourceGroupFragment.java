@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -26,10 +27,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.DialogFragment;
 
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
+
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
+import net.osmand.PicassoUtils;
+import net.osmand.plus.CustomRegion;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
@@ -43,9 +49,11 @@ import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
+import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -77,13 +85,15 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	private View searchView;
 	private View restorePurchasesView;
 	private View subscribeEmailView;
+	private View descriptionView;
+	private boolean nightMode;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		purchaseHelper = getDownloadActivity().getPurchaseHelper();
-		boolean isLightTheme = getMyApplication().getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
-		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
+		nightMode = !getMyApplication().getSettings().isLightContent();
+		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 		setHasOptionsMenu(true);
 	}
@@ -133,6 +143,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		addSubscribeEmailRow();
 		addSearchRow();
 		addRestorePurchasesRow();
+		addDescriptionRow();
 		listView.setOnChildClickListener(this);
 		listAdapter = new DownloadResourceGroupAdapter(activity);
 		listView.setAdapter(listAdapter);
@@ -178,6 +189,11 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 				restorePurchasesView.findViewById(R.id.container).setVisibility(View.GONE);
 			}
 		}
+	}
+
+	private void addDescriptionRow() {
+		descriptionView = activity.getLayoutInflater().inflate(R.layout.group_description_item, listView, false);
+		listView.addHeaderView(descriptionView);
 	}
 
 	private void addSearchRow() {
@@ -228,6 +244,68 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			if (worldBaseMapItem != null && worldBaseMapItem.isDownloaded()) {
 				subscribeEmailView.findViewById(R.id.container).setVisibility(View.VISIBLE);
 			}
+		}
+	}
+
+	private void updateDescriptionView() {
+		if (descriptionView != null) {
+			if (group != null && group.getRegion() instanceof CustomRegion) {
+				CustomRegion customRegion = (CustomRegion) group.getRegion();
+				net.osmand.plus.download.ui.DescriptionInfo descriptionInfo = customRegion.getDescriptionInfo();
+				if (descriptionInfo != null) {
+					TextView description = descriptionView.findViewById(R.id.description);
+					CharSequence descr = descriptionInfo.getLocalizedDescription(activity);
+					description.setText(descr);
+					AndroidUiHelper.updateVisibility(description, !Algorithms.isEmpty(descr));
+
+					ViewGroup buttonsContainer = descriptionView.findViewById(R.id.buttons_container);
+					buttonsContainer.removeAllViews();
+					for (final DescriptionInfo.DownloadActionButton actionButton : descriptionInfo.getDownloadActionButtons(activity)) {
+						String name = actionButton.getName();
+						if (!Algorithms.isEmpty(name)) {
+							TextView buttonText = (TextView) activity.getLayoutInflater().inflate(R.layout.download_description_button, buttonsContainer, false);
+							buttonText.setText(name);
+							buttonText.setOnClickListener(new OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									if (actionButton.getUrl() != null) {
+										WikipediaDialogFragment.showFullArticle(activity, Uri.parse(actionButton.getUrl()), nightMode);
+									}
+								}
+							});
+							buttonsContainer.addView(buttonText);
+						}
+					}
+
+					ViewGroup imagesContainer = descriptionView.findViewById(R.id.images_container);
+					imagesContainer.removeAllViews();
+
+					final PicassoUtils picassoUtils = PicassoUtils.getPicasso(getMyApplication());
+					Picasso picasso = Picasso.get();
+					for (final String imageUrl : descriptionInfo.getImageUrls()) {
+						final ImageView image = new ImageView(getContext());
+						imagesContainer.addView(image);
+
+						RequestCreator rc = picasso.load(imageUrl);
+						rc.into(image, new Callback() {
+							@Override
+							public void onSuccess() {
+								image.setVisibility(View.VISIBLE);
+								picassoUtils.setResultLoaded(imageUrl, true);
+							}
+
+							@Override
+							public void onError(Exception e) {
+								image.setVisibility(View.GONE);
+								picassoUtils.setResultLoaded(imageUrl, false);
+							}
+						});
+					}
+					descriptionView.findViewById(R.id.container).setVisibility(View.VISIBLE);
+					return;
+				}
+			}
+			descriptionView.findViewById(R.id.container).setVisibility(View.GONE);
 		}
 	}
 
@@ -389,12 +467,15 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	}
 
 	private void reloadData() {
+		DownloadResources indexes = activity.getDownloadThread().getIndexes();
+		group = indexes.getGroupById(groupId);
+
 		if (!openAsDialog()) {
 			updateSearchView();
 		}
 		updateSubscribeEmailView();
-		DownloadResources indexes = activity.getDownloadThread().getIndexes();
-		group = indexes.getGroupById(groupId);
+		updateDescriptionView();
+
 		if (group != null) {
 			listAdapter.update(group);
 			toolbar.setTitle(group.getName(activity));
