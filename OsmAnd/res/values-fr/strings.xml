@@ -3620,4 +3620,26 @@ représentant la zone : %1$s x %2$s</string>
     <string name="some_articles_may_not_available_in_lang">Certains articles Wikipédia peuvent ne pas être disponibles dans votre langue.</string>
     <string name="custom_color">Couleur personnalisée</string>
     <string name="extra_maps_menu_group">Cartes supplémentaires</string>
+    <string name="lang_tg">Tadjik</string>
+    <string name="lang_pnb">Punjabi</string>
+    <string name="lang_ne">Népalais</string>
+    <string name="lang_nap">Napolitain</string>
+    <string name="lang_my">Birman</string>
+    <string name="lang_min">Minangkabau</string>
+    <string name="lang_ba">Bashkir</string>
+    <string name="lang_lmo">Lombard</string>
+    <string name="lang_zhyue">Cantonais</string>
+    <string name="lang_zhminnan">Min du Sud</string>
+    <string name="lang_yo">Yoruba</string>
+    <string name="lang_war">Waray</string>
+    <string name="lang_uz">Ouzbek</string>
+    <string name="lang_ur">Ourdou</string>
+    <string name="lang_tt">Tatar</string>
+    <string name="lang_sco">Écossais</string>
+    <string name="lang_mg">Malgache</string>
+    <string name="lang_kk">Kazakh</string>
+    <string name="lang_cv">Tchouvache</string>
+    <string name="lang_ce">Tchétchène</string>
+    <string name="lang_an">Aragonais</string>
+    <string name="download_unsupported_action">Action %1$s non prise en charge</string>
 </resources>
