@@ -331,7 +331,7 @@ public class QuickSearchListItem {
 				} else if (searchResult.object instanceof CustomSearchPoiFilter) {
 					CustomSearchPoiFilter searchPoiFilter = (CustomSearchPoiFilter) searchResult.object;
 					PoiUIFilter filter = app.getPoiFilters().getFilterById(searchPoiFilter.getFilterId());
-					iconId = R.drawable.mx_user_defined;
+					iconId = R.drawable.mx_special_custom_category;
 					if (filter != null) {
 						Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = filter.getAcceptedTypes();
 						List<PoiCategory> categories = new ArrayList<>(acceptedTypes.keySet());

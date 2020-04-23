@@ -298,7 +298,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 				UiUtilities ic = app.getUIUtilities();
 				int iconId = getIconId(category);
 				if (iconId == 0) {
-					iconId = R.drawable.mx_user_defined;
+					iconId = R.drawable.mx_special_custom_category;
 				}
 				if (categorySelected) {
 					iconView.setImageDrawable(ic.getIcon(iconId, R.color.osmand_orange));
