@@ -3632,4 +3632,5 @@
     <string name="lang_an">ارجواني</string>
     <string name="lang_lmo">لومبارد</string>
     <string name="custom_color">لون مخصص</string>
+    <string name="extra_maps_menu_group">خرائط إضافية</string>
 </resources>
