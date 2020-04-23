@@ -355,15 +355,19 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 			osmLiveCardButtonsContainer.removeAllViews();
 			View lastBtn = null;
 			List<InAppSubscription> visibleSubscriptions = purchaseHelper.getLiveUpdates().getVisibleSubscriptions();
+			InAppSubscription subscriptionMaxDiscount = null;
+			double maxDiscount = 0;
 			boolean anyPurchased = false;
 			for (final InAppSubscription s : visibleSubscriptions) {
 				if (s.isPurchased()) {
 					anyPurchased = true;
-					break;
+				}
+				double discount = s.getDiscountPercent(purchaseHelper.getMonthlyLiveUpdates());
+				if (discount > maxDiscount) {
+					subscriptionMaxDiscount = s;
+					maxDiscount = discount;
 				}
 			}
-			InAppSubscription subscriptionMaxDiscount = purchaseHelper.getLiveUpdates()
-					.getSubscriptionWithMaxDiscount(purchaseHelper.getMonthlyLiveUpdates());
 			boolean maxDiscountAction = subscriptionMaxDiscount != null
 					&& (subscriptionMaxDiscount.getIntroductoryInfo() != null || subscriptionMaxDiscount.isUpgrade());
 			for (final InAppSubscription s : visibleSubscriptions) {

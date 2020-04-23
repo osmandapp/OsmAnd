@@ -2914,7 +2914,7 @@ Lon %2$s</string>
     <string name="osm_live_payment_annual_title">Anual</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / mes</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mes</string>
-    <string name="osm_live_payment_discount_descr">Aforra un %1$s.</string>
+    <string name="osm_live_payment_discount_descr">Aforra un %1$s</string>
     <string name="osm_live_payment_current_subscription">Subscrición actual</string>
     <string name="osm_live_payment_renews_monthly">Renovación mensual</string>
     <string name="osm_live_payment_renews_quarterly">Renovación trimestral</string>

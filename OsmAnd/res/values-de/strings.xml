@@ -2864,7 +2864,7 @@ Lon %2$s</string>
     <string name="osm_live_payment_annual_title">Jährlich</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / Monat</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / Monat</string>
-    <string name="osm_live_payment_discount_descr">Sparen Sie %1$s.</string>
+    <string name="osm_live_payment_discount_descr">Sparen Sie %1$s</string>
     <string name="osm_live_payment_current_subscription">Aktuelles Abonnement</string>
     <string name="osm_live_payment_renews_monthly">Verlängert sich monatlich</string>
     <string name="osm_live_payment_renews_quarterly">Verlängert sich vierteljährlich</string>

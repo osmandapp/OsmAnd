@@ -2910,7 +2910,7 @@
     <string name="markers_remove_dialog_msg">\'%s\' harita işaretleyicisini sil\?</string>
     <string name="edit_map_marker">Harita işaretleyicisini düzenle</string>
     <string name="osm_live_plan_pricing">Plan ve Fiyatlandırma</string>
-    <string name="osm_live_payment_discount_descr">%1$s tasarruf edin.</string>
+    <string name="osm_live_payment_discount_descr">%1$s tasarruf edin</string>
     <string name="osm_live_payment_current_subscription">Mevcut abonelik</string>
     <string name="osm_live_payment_renews_quarterly">Üç ayda bir yeniler</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>

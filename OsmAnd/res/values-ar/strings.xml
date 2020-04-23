@@ -2699,7 +2699,7 @@
     <string name="osm_live_payment_annual_title">سنوي</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / شهر</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / شهر</string>
-    <string name="osm_live_payment_discount_descr">وفر %1$s.</string>
+    <string name="osm_live_payment_discount_descr">وفر %1$s</string>
     <string name="osm_live_payment_current_subscription">الاشتراك الحالي</string>
     <string name="osm_live_payment_renews_monthly">يجدد شهريا</string>
     <string name="osm_live_payment_renews_quarterly">تجديد فصلي</string>

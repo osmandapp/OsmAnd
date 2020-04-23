@@ -2528,7 +2528,7 @@
     <string name="osm_live_payment_annual_title">年度</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / 每月</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / 每月</string>
-    <string name="osm_live_payment_discount_descr">省下 %1$s。</string>
+    <string name="osm_live_payment_discount_descr">省下 %1$s</string>
     <string name="osm_live_payment_current_subscription">当前订阅</string>
     <string name="open_in_browser_wiki_description">在网页浏览器中查看条目。</string>
     <string name="osm_live_subscriptions">订阅</string>

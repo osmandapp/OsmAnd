@@ -258,20 +258,6 @@ public class InAppPurchases {
 			}
 			return null;
 		}
-
-		@Nullable
-		public InAppSubscription getSubscriptionWithMaxDiscount(@Nullable InAppSubscription monthlyLiveUpdates) {
-			double maxDiscount = 0;
-			InAppSubscription subscriptionWithMaxDiscount = null;
-			for (InAppSubscription s : getAllSubscriptions()) {
-				double discount = s.getDiscountPercent(monthlyLiveUpdates);
-				if (discount > maxDiscount) {
-					subscriptionWithMaxDiscount = s;
-					maxDiscount = discount;
-				}
-			}
-			return subscriptionWithMaxDiscount;
-		}
 	}
 
 	public static class LiveUpdatesInAppPurchasesFree extends InAppSubscriptionList {
@@ -773,7 +759,7 @@ public class InAppPurchases {
 			return discountPercent > 0 ? ctx.getString(R.string.osm_live_payment_discount_descr, discountPercent + "%") : "";
 		}
 
-		int getDiscountPercent(@Nullable InAppSubscription monthlyLiveUpdates) {
+		public int getDiscountPercent(@Nullable InAppSubscription monthlyLiveUpdates) {
 			double monthlyPriceValue = getMonthlyPriceValue();
 			if (monthlyLiveUpdates != null) {
 				double regularMonthlyPrice = monthlyLiveUpdates.getPriceValue();
