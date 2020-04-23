@@ -3655,4 +3655,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="lang_lmo">Lombarda</string>
     <string name="custom_color">Propra koloro</string>
     <string name="extra_maps_menu_group">Kromaj mapoj</string>
+    <string name="download_unsupported_action">Nesubtenata ago %1$s</string>
 </resources>
