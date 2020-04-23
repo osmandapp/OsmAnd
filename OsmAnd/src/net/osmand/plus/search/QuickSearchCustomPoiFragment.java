@@ -288,8 +288,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 			PoiCategory category = getItem(position);
 			if (category != null) {
 				AppCompatImageView iconView = (AppCompatImageView) row.findViewById(R.id.icon);
-				AppCompatImageView secondaryIconView = (AppCompatImageView) row
-						.findViewById(R.id.secondary_icon);
+				row.findViewById(R.id.secondary_icon).setVisibility(View.GONE);
 				AppCompatTextView titleView = (AppCompatTextView) row.findViewById(R.id.title);
 				AppCompatTextView descView = (AppCompatTextView) row.findViewById(R.id.description);
 				SwitchCompat check = (SwitchCompat) row.findViewById(R.id.toggle_item);
@@ -298,18 +297,14 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 				boolean categorySelected = filter.isTypeAccepted(category);
 				UiUtilities ic = app.getUIUtilities();
 				int iconId = getIconId(category);
-				if (iconId != 0) {
-					if (categorySelected) {
-						iconView.setImageDrawable(ic.getIcon(iconId, R.color.osmand_orange));
-					} else {
-						iconView.setImageDrawable(ic.getThemedIcon(iconId));
-					}
-				} else {
-					iconView.setImageDrawable(null);
+				if (iconId == 0) {
+					iconId = R.drawable.ic_action_categories_search;
 				}
-				secondaryIconView.setImageDrawable(
-						ic.getIcon(R.drawable.ic_action_additional_option, nightMode 
-								? R.color.icon_color_default_dark : R.color.icon_color_default_light));
+				if (categorySelected) {
+					iconView.setImageDrawable(ic.getIcon(iconId, R.color.osmand_orange));
+				} else {
+					iconView.setImageDrawable(ic.getThemedIcon(iconId));
+				}
 				check.setOnCheckedChangeListener(null);
 				check.setChecked(filter.isTypeAccepted(category));
 				String textString = category.getTranslation();
@@ -332,8 +327,8 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 				} else {
 					descView.setVisibility(View.GONE);
 				}
-				row.findViewById(R.id.divider)
-						.setVisibility(position == getCount() - 1 ? View.GONE : View.VISIBLE);
+				row.findViewById(R.id.divider).setVisibility(View.GONE);
+				row.findViewById(R.id.divider_vertical).setVisibility(View.VISIBLE);
 				addRowListener(category, check);
 			}
 			return (row);
@@ -411,7 +406,6 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 				subCategoriesAdapter.notifyDataSetChanged();
 				removeAllHeaders();
 				listView.addHeaderView(headerShadow, null, false);
-				setupAddButton();
 			}
 		} else {
 			for (PoiCategory category : poiCategoryList) {
@@ -427,8 +421,8 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 			subCategoriesAdapter.notifyDataSetChanged();
 			removeAllHeaders();
 			listView.addHeaderView(headerShadow, null, false);
-			setupAddButton();
 		}
+		setupAddButton();
 	}
 
 	private void removeAllHeaders() {

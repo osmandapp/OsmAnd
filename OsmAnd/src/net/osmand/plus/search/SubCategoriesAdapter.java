@@ -32,6 +32,7 @@ public class SubCategoriesAdapter extends ArrayAdapter<PoiType> {
 	private boolean showCategory;
 	private int activeColorRes;
 	private int secondaryColorRes;
+	private int activeIconColorRes;
 	private List<PoiType> selectedItems;
 	private List<PoiType> items;
 
@@ -47,6 +48,9 @@ public class SubCategoriesAdapter extends ArrayAdapter<PoiType> {
 		selectedItems = new ArrayList<>();
 		uiUtilities = app.getUIUtilities();
 		nightMode = !app.getSettings().isLightContent();
+		activeIconColorRes = nightMode
+				? R.color.icon_color_osmand_dark
+				: R.color.icon_color_osmand_light;
 		activeColorRes = nightMode
 				? R.color.icon_color_active_dark
 				: R.color.icon_color_active_light;
@@ -65,6 +69,7 @@ public class SubCategoriesAdapter extends ArrayAdapter<PoiType> {
 		final PoiType poiType = getItem(position);
 		final boolean selected = selectedItems.contains(poiType);
 		int tintColorRes = selected ? activeColorRes : secondaryColorRes;
+		int tintIconColorRes = selected ? activeIconColorRes : secondaryColorRes;
 		if (poiType != null) {
 			TextView title = convertView.findViewById(R.id.title_tv);
 			title.setText(poiType.getTranslation());
@@ -101,7 +106,7 @@ public class SubCategoriesAdapter extends ArrayAdapter<PoiType> {
 					iconRes = R.drawable.ic_action_categories_search;
 				}
 			}
-			icon.setImageDrawable(uiUtilities.getIcon(iconRes, tintColorRes));
+			icon.setImageDrawable(uiUtilities.getIcon(iconRes, tintIconColorRes));
 		}
 		return convertView;
 	}
