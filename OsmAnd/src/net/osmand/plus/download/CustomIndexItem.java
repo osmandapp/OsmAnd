@@ -19,6 +19,8 @@ public class CustomIndexItem extends IndexItem {
 	private String downloadUrl;
 
 	private Map<String, String> names;
+	private Map<String, String> firstSubNames;
+	private Map<String, String> secondSubNames;
 
 	private DownloadDescriptionInfo descriptionInfo;
 
@@ -30,10 +32,14 @@ public class CustomIndexItem extends IndexItem {
 	                       long contentSize,
 	                       long containerSize,
 	                       Map<String, String> names,
+	                       Map<String, String> firstSubNames,
+	                       Map<String, String> secondSubNames,
 	                       @NonNull DownloadActivityType type,
 	                       DownloadDescriptionInfo descriptionInfo) {
 		super(fileName, null, timestamp, size, contentSize, containerSize, type);
 		this.names = names;
+		this.firstSubNames = firstSubNames;
+		this.secondSubNames = secondSubNames;
 		this.subfolder = subfolder;
 		this.downloadUrl = downloadUrl;
 		this.descriptionInfo = descriptionInfo;
@@ -68,6 +74,24 @@ public class CustomIndexItem extends IndexItem {
 		return JsonUtils.getLocalizedResFromMap(ctx, names, name);
 	}
 
+	public String getSubName(Context ctx) {
+		String subName = getFirstSubName(ctx);
+
+		String secondSubName = getSecondSubName(ctx);
+		if (secondSubName != null) {
+			subName = subName == null ? secondSubName : subName + " • " + secondSubName;
+		}
+		return subName;
+	}
+
+	public String getFirstSubName(Context ctx) {
+		return JsonUtils.getLocalizedResFromMap(ctx, firstSubNames, null);
+	}
+
+	public String getSecondSubName(Context ctx) {
+		return JsonUtils.getLocalizedResFromMap(ctx, secondSubNames, null);
+	}
+
 	public DownloadDescriptionInfo getDescriptionInfo() {
 		return descriptionInfo;
 	}
@@ -84,6 +108,8 @@ public class CustomIndexItem extends IndexItem {
 		private long containerSize;
 
 		private Map<String, String> names;
+		private Map<String, String> firstSubNames;
+		private Map<String, String> secondSubNames;
 		private DownloadActivityType type;
 
 		private DownloadDescriptionInfo descriptionInfo;
@@ -128,6 +154,16 @@ public class CustomIndexItem extends IndexItem {
 			return this;
 		}
 
+		public CustomIndexItemBuilder setFirstSubNames(Map<String, String> firstSubNames) {
+			this.firstSubNames = firstSubNames;
+			return this;
+		}
+
+		public CustomIndexItemBuilder setSecondSubNames(Map<String, String> secondSubNames) {
+			this.secondSubNames = secondSubNames;
+			return this;
+		}
+
 		public CustomIndexItemBuilder setDescriptionInfo(DownloadDescriptionInfo descriptionInfo) {
 			this.descriptionInfo = descriptionInfo;
 			return this;
@@ -139,7 +175,18 @@ public class CustomIndexItem extends IndexItem {
 		}
 
 		public CustomIndexItem create() {
-			return new CustomIndexItem(fileName, subfolder, downloadUrl, size, timestamp, contentSize, containerSize, names, type, descriptionInfo);
+			return new CustomIndexItem(fileName,
+					subfolder,
+					downloadUrl,
+					size,
+					timestamp,
+					contentSize,
+					containerSize,
+					names,
+					firstSubNames,
+					secondSubNames,
+					type,
+					descriptionInfo);
 		}
 	}
 }

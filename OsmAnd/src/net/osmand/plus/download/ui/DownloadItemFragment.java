@@ -135,6 +135,7 @@ public class DownloadItemFragment extends DialogFragment implements DownloadEven
 		if (banner != null) {
 			banner.updateBannerInProgress();
 		}
+		reloadData();
 	}
 
 	@Override

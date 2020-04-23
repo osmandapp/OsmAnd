@@ -27,6 +27,7 @@ import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.download.CityItem;
+import net.osmand.plus.download.CustomIndexItem;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadResourceGroup;
@@ -179,22 +180,24 @@ public class ItemViewHolder {
 		if (!isDownloading) {
 			progressBar.setVisibility(View.GONE);
 			descrTextView.setVisibility(View.VISIBLE);
-			if (indexItem.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE && !depthContoursPurchased) {
+			if (indexItem instanceof CustomIndexItem && (((CustomIndexItem) indexItem).getSubName(context) != null)) {
+				descrTextView.setText(((CustomIndexItem) indexItem).getSubName(context));
+			} else if (indexItem.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE && !depthContoursPurchased) {
 				descrTextView.setText(context.getString(R.string.depth_contour_descr));
 			} else if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
 					|| indexItem.getType() == DownloadActivityType.HILLSHADE_FILE
 					|| indexItem.getType() == DownloadActivityType.SLOPE_FILE) && srtmDisabled) {
-				if(showTypeInName) {
+				if (showTypeInName) {
 					descrTextView.setText("");
 				} else {
 					descrTextView.setText(indexItem.getType().getString(context));
 				}
 			} else if (showTypeInDesc) {
-				descrTextView.setText(indexItem.getType().getString(context) + 
+				descrTextView.setText(indexItem.getType().getString(context) +
 						" • " + indexItem.getSizeDescription(context) +
 						" • " + (showRemoteDate ? indexItem.getRemoteDate(dateFormat) : indexItem.getLocalDate(dateFormat)));
 			} else {
-				descrTextView.setText(indexItem.getSizeDescription(context) + " • " + 
+				descrTextView.setText(indexItem.getSizeDescription(context) + " • " +
 						(showRemoteDate ? indexItem.getRemoteDate(dateFormat) : indexItem.getLocalDate(dateFormat)));
 			}
 

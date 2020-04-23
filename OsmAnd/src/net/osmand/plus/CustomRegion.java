@@ -148,6 +148,9 @@ public class CustomRegion extends WorldRegion {
 					String size = new DecimalFormat("#.#").format(containerSize / (1024f * 1024f));
 
 					Map<String, String> indexNames = JsonUtils.getLocalizedMapFromJson("name", itemJson);
+					Map<String, String> firstSubNames = JsonUtils.getLocalizedMapFromJson("firstsubname", itemJson);
+					Map<String, String> secondSubNames = JsonUtils.getLocalizedMapFromJson("secondsubname", itemJson);
+
 					DownloadDescriptionInfo descriptionInfo = DownloadDescriptionInfo.fromJson(itemJson.optJSONObject("description"));
 
 					DownloadActivityType type = DownloadActivityType.getIndexType(indexType);
@@ -157,6 +160,8 @@ public class CustomRegion extends WorldRegion {
 								.setSubfolder(subfolder)
 								.setDownloadUrl(downloadUrl)
 								.setNames(indexNames)
+								.setFirstSubNames(firstSubNames)
+								.setSecondSubNames(secondSubNames)
 								.setDescriptionInfo(descriptionInfo)
 								.setTimestamp(timestamp)
 								.setSize(size)
