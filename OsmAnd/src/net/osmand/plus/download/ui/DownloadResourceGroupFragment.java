@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -22,19 +21,13 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.DialogFragment;
-import androidx.viewpager.widget.PagerAdapter;
-
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
-import net.osmand.PicassoUtils;
 import net.osmand.plus.CustomRegion;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmandApplication;
@@ -51,12 +44,9 @@ import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.download.ui.DownloadDescriptionInfo.ActionButton;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -67,6 +57,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static net.osmand.plus.download.ui.DownloadItemFragment.updateActionButtons;
+import static net.osmand.plus.download.ui.DownloadItemFragment.updateDescription;
+import static net.osmand.plus.download.ui.DownloadItemFragment.updateImagesPager;
 
 public class DownloadResourceGroupFragment extends DialogFragment implements DownloadEvents,
 		InAppPurchaseListener, OnChildClickListener {
@@ -254,40 +248,17 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		if (descriptionView != null) {
 			if (group != null && group.getRegion() instanceof CustomRegion) {
 				CustomRegion customRegion = (CustomRegion) group.getRegion();
-				DownloadDescriptionInfo downloadDescriptionInfo = customRegion.getDescriptionInfo();
-				if (downloadDescriptionInfo != null) {
+				DownloadDescriptionInfo descriptionInfo = customRegion.getDescriptionInfo();
+				if (descriptionInfo != null) {
+					OsmandApplication app = activity.getMyApplication();
 					TextView description = descriptionView.findViewById(R.id.description);
-					CharSequence descr = downloadDescriptionInfo.getLocalizedDescription(activity);
-					description.setText(descr);
-					AndroidUiHelper.updateVisibility(description, !Algorithms.isEmpty(descr));
+					updateDescription(app, descriptionInfo, description);
 
 					ViewGroup buttonsContainer = descriptionView.findViewById(R.id.buttons_container);
-					buttonsContainer.removeAllViews();
-					for (final ActionButton actionButton : downloadDescriptionInfo.getActionButtons(activity)) {
-						String name = actionButton.getName();
-						if (!Algorithms.isEmpty(name)) {
-							TextView buttonText = (TextView) activity.getLayoutInflater().inflate(R.layout.download_description_button, buttonsContainer, false);
-							buttonText.setText(name);
-							buttonText.setOnClickListener(new OnClickListener() {
-								@Override
-								public void onClick(View v) {
-									if (actionButton.getUrl() != null) {
-										WikipediaDialogFragment.showFullArticle(activity, Uri.parse(actionButton.getUrl()), nightMode);
-									} else {
-										activity.getMyApplication().showShortToastMessage(R.string.download_unsupported_action, actionButton.getActionType());
-									}
-								}
-							});
-							buttonsContainer.addView(buttonText);
-						}
-					}
+					updateActionButtons(activity, descriptionInfo, null, buttonsContainer, R.layout.download_description_button, nightMode);
+
 					LockableViewPager viewPager = descriptionView.findViewById(R.id.images_pager);
-					if (!Algorithms.isEmpty(downloadDescriptionInfo.getImageUrls())) {
-						ImagesPagerAdapter adapter = new ImagesPagerAdapter(downloadDescriptionInfo.getImageUrls());
-						viewPager.setAdapter(adapter);
-					} else {
-						viewPager.setVisibility(View.GONE);
-					}
+					updateImagesPager(app, descriptionInfo, viewPager);
 
 					descriptionView.findViewById(R.id.container).setVisibility(View.VISIBLE);
 					return;
@@ -796,62 +767,6 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		@Override
 		public boolean isChildSelectable(int groupPosition, int childPosition) {
 			return true;
-		}
-	}
-
-	private class ImagesPagerAdapter extends PagerAdapter {
-
-		private PicassoUtils picassoUtils;
-
-		private List<String> imageUrls;
-
-		public ImagesPagerAdapter(List<String> imageUrls) {
-			this.imageUrls = imageUrls;
-			picassoUtils = PicassoUtils.getPicasso(getMyApplication());
-		}
-
-		@Override
-		public int getCount() {
-			return imageUrls.size();
-		}
-
-		@Override
-		public Object instantiateItem(ViewGroup container, int position) {
-			View view = createImageView(position);
-			container.addView(view, 0);
-
-			return view;
-		}
-
-		@Override
-		public void destroyItem(ViewGroup collection, int position, @NonNull Object view) {
-			collection.removeView((View) view);
-		}
-
-		@Override
-		public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-			return view == object;
-		}
-
-		private View createImageView(int position) {
-			final ImageView imageView = new ImageView(getContext());
-			imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-
-			final String imageUrl = imageUrls.get(position);
-			Picasso.get().load(imageUrl).into(imageView, new Callback() {
-				@Override
-				public void onSuccess() {
-					imageView.setVisibility(View.VISIBLE);
-					picassoUtils.setResultLoaded(imageUrl, true);
-				}
-
-				@Override
-				public void onError(Exception e) {
-					imageView.setVisibility(View.INVISIBLE);
-					picassoUtils.setResultLoaded(imageUrl, false);
-				}
-			});
-			return imageView;
 		}
 	}
 }

@@ -143,15 +143,12 @@ public class CustomRegion extends WorldRegion {
 					long containerSize = itemJson.optLong("containerSize");
 
 					String indexType = itemJson.optString("type", type);
-					String webUrl = itemJson.optString("weburl");
 					String fileName = itemJson.optString("filename");
 					String downloadUrl = itemJson.optString("downloadurl");
 					String size = new DecimalFormat("#.#").format(containerSize / (1024f * 1024f));
 
-					List<String> descrImageUrl = JsonUtils.jsonArrayToList("image-description-url", itemJson);
 					Map<String, String> indexNames = JsonUtils.getLocalizedMapFromJson("name", itemJson);
-					Map<String, String> descriptions = JsonUtils.getLocalizedMapFromJson("description", itemJson);
-					Map<String, String> webButtonText = JsonUtils.getLocalizedMapFromJson("web-button-text", itemJson);
+					DownloadDescriptionInfo descriptionInfo = DownloadDescriptionInfo.fromJson(itemJson.optJSONObject("description"));
 
 					DownloadActivityType type = DownloadActivityType.getIndexType(indexType);
 					if (type != null) {
@@ -160,10 +157,7 @@ public class CustomRegion extends WorldRegion {
 								.setSubfolder(subfolder)
 								.setDownloadUrl(downloadUrl)
 								.setNames(indexNames)
-								.setDescriptions(descriptions)
-								.setImageDescrUrl(descrImageUrl)
-								.setWebUrl(webUrl)
-								.setWebButtonText(webButtonText)
+								.setDescriptionInfo(descriptionInfo)
 								.setTimestamp(timestamp)
 								.setSize(size)
 								.setContentSize(contentSize)

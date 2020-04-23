@@ -7,44 +7,36 @@ import androidx.annotation.NonNull;
 import net.osmand.JsonUtils;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.download.ui.DownloadDescriptionInfo;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-import java.util.List;
 import java.util.Map;
 
 public class CustomIndexItem extends IndexItem {
 
 	private String subfolder;
 	private String downloadUrl;
-	private String webUrl;
 
-	private List<String> imageDescrUrl;
 	private Map<String, String> names;
-	private Map<String, String> descriptions;
-	private Map<String, String> webButtonTexts;
+
+	private DownloadDescriptionInfo descriptionInfo;
 
 	public CustomIndexItem(String fileName,
 	                       String subfolder,
 	                       String downloadUrl,
-	                       String webUrl,
 	                       String size,
 	                       long timestamp,
 	                       long contentSize,
 	                       long containerSize,
-	                       List<String> imageDescrUrl,
 	                       Map<String, String> names,
-	                       Map<String, String> descriptions,
-	                       Map<String, String> webButtonTexts,
-	                       @NonNull DownloadActivityType type) {
+	                       @NonNull DownloadActivityType type,
+	                       DownloadDescriptionInfo descriptionInfo) {
 		super(fileName, null, timestamp, size, contentSize, containerSize, type);
+		this.names = names;
 		this.subfolder = subfolder;
 		this.downloadUrl = downloadUrl;
-		this.webUrl = webUrl;
-		this.imageDescrUrl = imageDescrUrl;
-		this.names = names;
-		this.descriptions = descriptions;
-		this.webButtonTexts = webButtonTexts;
+		this.descriptionInfo = descriptionInfo;
 	}
 
 	@Override
@@ -76,21 +68,8 @@ public class CustomIndexItem extends IndexItem {
 		return JsonUtils.getLocalizedResFromMap(ctx, names, name);
 	}
 
-	public List<String> getDescriptionImageUrl() {
-		return imageDescrUrl;
-	}
-
-	public String getLocalizedDescription(Context ctx) {
-		String description = super.getDescription();
-		return JsonUtils.getLocalizedResFromMap(ctx, descriptions, description);
-	}
-
-	public String getWebUrl() {
-		return webUrl;
-	}
-
-	public String getWebButtonText(Context ctx) {
-		return JsonUtils.getLocalizedResFromMap(ctx, webButtonTexts, null);
+	public DownloadDescriptionInfo getDescriptionInfo() {
+		return descriptionInfo;
 	}
 
 	public static class CustomIndexItemBuilder {
@@ -98,19 +77,16 @@ public class CustomIndexItem extends IndexItem {
 		private String fileName;
 		private String subfolder;
 		private String downloadUrl;
-		private String webUrl;
 		private String size;
 
 		private long timestamp;
 		private long contentSize;
 		private long containerSize;
 
-		private List<String> imageDescrUrl;
 		private Map<String, String> names;
-		private Map<String, String> descriptions;
-		private Map<String, String> webButtonText;
 		private DownloadActivityType type;
 
+		private DownloadDescriptionInfo descriptionInfo;
 
 		public CustomIndexItemBuilder setFileName(String fileName) {
 			this.fileName = fileName;
@@ -124,11 +100,6 @@ public class CustomIndexItem extends IndexItem {
 
 		public CustomIndexItemBuilder setDownloadUrl(String downloadUrl) {
 			this.downloadUrl = downloadUrl;
-			return this;
-		}
-
-		public CustomIndexItemBuilder setWebUrl(String webUrl) {
-			this.webUrl = webUrl;
 			return this;
 		}
 
@@ -152,23 +123,13 @@ public class CustomIndexItem extends IndexItem {
 			return this;
 		}
 
-		public CustomIndexItemBuilder setImageDescrUrl(List<String> imageDescrUrl) {
-			this.imageDescrUrl = imageDescrUrl;
-			return this;
-		}
-
 		public CustomIndexItemBuilder setNames(Map<String, String> names) {
 			this.names = names;
 			return this;
 		}
 
-		public CustomIndexItemBuilder setDescriptions(Map<String, String> descriptions) {
-			this.descriptions = descriptions;
-			return this;
-		}
-
-		public CustomIndexItemBuilder setWebButtonText(Map<String, String> webButtonText) {
-			this.webButtonText = webButtonText;
+		public CustomIndexItemBuilder setDescriptionInfo(DownloadDescriptionInfo descriptionInfo) {
+			this.descriptionInfo = descriptionInfo;
 			return this;
 		}
 
@@ -178,19 +139,7 @@ public class CustomIndexItem extends IndexItem {
 		}
 
 		public CustomIndexItem create() {
-			return new CustomIndexItem(fileName,
-					subfolder,
-					downloadUrl,
-					webUrl,
-					size,
-					timestamp,
-					contentSize,
-					containerSize,
-					imageDescrUrl,
-					names,
-					descriptions,
-					webButtonText,
-					type);
+			return new CustomIndexItem(fileName, subfolder, downloadUrl, size, timestamp, contentSize, containerSize, names, type, descriptionInfo);
 		}
 	}
 }

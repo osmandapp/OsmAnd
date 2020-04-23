@@ -367,4 +367,6 @@
 	<dimen name="mtrl_slider_track_side_padding">@dimen/slider_thumb_size</dimen>
 
 	<dimen name="list_item_move_header_min_height">65dp</dimen>
+
+	<dimen name="download_description_images_height">132dp</dimen>
 </resources>
