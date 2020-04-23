@@ -24,6 +24,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.download.CustomIndexItem;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadActivity.BannerAndDownloadFreeVersion;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
@@ -36,7 +38,7 @@ import java.util.List;
 
 import static net.osmand.plus.download.ui.DownloadResourceGroupFragment.REGION_ID_DLG_KEY;
 
-public class DownloadItemFragment extends DialogFragment {
+public class DownloadItemFragment extends DialogFragment implements DownloadEvents {
 
 	public static final String ITEM_ID_DLG_KEY = "index_item_dialog_key";
 
@@ -45,6 +47,7 @@ public class DownloadItemFragment extends DialogFragment {
 	private String regionId = "";
 	private int itemIndex = -1;
 
+	private BannerAndDownloadFreeVersion banner;
 	private DownloadResourceGroup group;
 
 	private Toolbar toolbar;
@@ -87,6 +90,8 @@ public class DownloadItemFragment extends DialogFragment {
 			}
 		});
 
+		banner = new BannerAndDownloadFreeVersion(view, (DownloadActivity) getActivity(), false);
+
 		description = view.findViewById(R.id.description);
 		imagesPager = view.findViewById(R.id.images_pager);
 		buttonsContainer = view.findViewById(R.id.buttons_container);
@@ -115,6 +120,28 @@ public class DownloadItemFragment extends DialogFragment {
 		super.onSaveInstanceState(outState);
 		outState.putString(REGION_ID_DLG_KEY, regionId);
 		outState.putInt(ITEM_ID_DLG_KEY, itemIndex);
+	}
+
+	@Override
+	public void newDownloadIndexes() {
+		if (banner != null) {
+			banner.updateBannerInProgress();
+		}
+		reloadData();
+	}
+
+	@Override
+	public void downloadHasFinished() {
+		if (banner != null) {
+			banner.updateBannerInProgress();
+		}
+	}
+
+	@Override
+	public void downloadInProgress() {
+		if (banner != null) {
+			banner.updateBannerInProgress();
+		}
 	}
 
 	private void reloadData() {

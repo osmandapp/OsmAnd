@@ -4,7 +4,6 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="?attr/activity_background_basic"
 	android:orientation="vertical">
 
 	<com.google.android.material.appbar.AppBarLayout
@@ -23,9 +22,16 @@
 
 	</com.google.android.material.appbar.AppBarLayout>
 
+	<include
+		layout="@layout/free_version_banner"
+		android:background="#F00" />
+
+	<include layout="@layout/progress_with_two_texts" />
+
 	<FrameLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent">
+		android:layout_height="match_parent"
+		android:background="?attr/activity_background_basic">
 
 		<ScrollView
 			android:layout_width="match_parent"
