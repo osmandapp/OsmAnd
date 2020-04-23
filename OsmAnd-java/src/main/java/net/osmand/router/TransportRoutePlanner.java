@@ -1023,8 +1023,8 @@ public class TransportRoutePlanner {
 
 		for (int i = 0; i < nr.waysIds.length; i++) {
 			List<Node> wnodes = new ArrayList<>();
-			for (int j = 0; j < nr.waysNodesIds[i].length; j++) {
-				wnodes.add(new Node(nr.waysNodesLats[i][j], nr.waysNodesLons[i][j], nr.waysNodesIds[i][j]));
+			for (int j = 0; j < nr.waysNodesLats[i].length; j++) {
+				wnodes.add(new Node(nr.waysNodesLats[i][j], nr.waysNodesLons[i][j], -1));
 			}
 			r.addWay(new Way(nr.waysIds[i], wnodes));
 		}
