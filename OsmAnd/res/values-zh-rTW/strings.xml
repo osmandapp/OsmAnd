@@ -3660,4 +3660,5 @@
     <string name="lang_an">亞拉岡語</string>
     <string name="lang_lmo">倫巴底語</string>
     <string name="custom_color">自訂顏色</string>
+    <string name="extra_maps_menu_group">額外地圖</string>
 </resources>
