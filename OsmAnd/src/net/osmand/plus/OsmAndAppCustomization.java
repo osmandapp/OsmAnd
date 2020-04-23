@@ -67,8 +67,6 @@ public class OsmAndAppCustomization {
 
 	private Map<String, Bitmap> navDrawerLogos = new HashMap<>();
 
-	private ArrayList<String> navDrawerParams;
-
 	private String navDrawerFooterIntent;
 	private String navDrawerFooterAppName;
 	private String navDrawerFooterPackageName;
@@ -254,8 +252,8 @@ public class OsmAndAppCustomization {
 	}
 
 	@Nullable
-	public ArrayList<String> getNavDrawerLogoParams() {
-		return navDrawerParams;
+	public String getNavDrawerLogoUrl() {
+		return app.getSettings().NAV_DRAWER_URL.get();
 	}
 
 	public boolean setNavDrawerLogo(String uri, @Nullable String packageName, @Nullable String intent) {
@@ -300,10 +298,8 @@ public class OsmAndAppCustomization {
 			} catch (IOException e) {
 				LOG.error("Failed to write file", e);
 			}
-			if (packageName != null && intent != null) {
-				navDrawerParams = new ArrayList<>();
-				navDrawerParams.add(packageName);
-				navDrawerParams.add(intent);
+			if (!Algorithms.isEmpty(intent)) {
+				app.getSettings().NAV_DRAWER_LOGO.set(intent);
 			}
 		}
 		return true;

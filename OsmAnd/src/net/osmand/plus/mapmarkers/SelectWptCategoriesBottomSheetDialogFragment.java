@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.IndexConstants;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper;
@@ -161,7 +162,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 
 	private String getGpxName(GPXFile gpxFile) {
 		return new File(gpxFile.path).getName()
-				.replace(".gpx", "")
+				.replace(IndexConstants.GPX_FILE_EXT, "")
 				.replace("/", " ")
 				.replace("_", " ");
 	}

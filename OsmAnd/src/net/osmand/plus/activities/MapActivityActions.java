@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -55,6 +56,7 @@ import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.liveupdates.OsmLiveActivity;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
+import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
@@ -64,11 +66,11 @@ import net.osmand.plus.routepreparationmenu.WaypointsFragment;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.BaseSettingsFragment;
-import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageWelcomeDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
@@ -83,6 +85,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_MAP_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_SCREEN_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DASHBOARD_ID;
@@ -111,7 +114,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_S
 import static net.osmand.plus.ContextMenuAdapter.PROFILES_CHOSEN_PROFILE_TAG;
 import static net.osmand.plus.ContextMenuAdapter.PROFILES_CONTROL_BUTTON_TAG;
 import static net.osmand.plus.ContextMenuAdapter.PROFILES_NORMAL_PROFILE_TAG;
-import static net.osmand.plus.helpers.ImportHelper.GPX_SUFFIX;
 
 
 public class MapActivityActions implements DialogProvider {
@@ -282,8 +284,8 @@ public class MapActivityActions implements DialogProvider {
 				fileDir.mkdirs();
 				File toSave = fileDir;
 				if (name.length() > 0) {
-					if (!name.endsWith(GPX_SUFFIX)) {
-						name += GPX_SUFFIX;
+					if (!name.endsWith(GPX_FILE_EXT)) {
+						name += GPX_FILE_EXT;
 					}
 					toSave = new File(fileDir, name);
 				}
@@ -320,7 +322,7 @@ public class MapActivityActions implements DialogProvider {
 			if (params.length > 0) {
 				File file = params[0];
 				String fileName = file.getName();
-				GPXFile gpx = app.getRoutingHelper().generateGPXFileWithRoute(fileName.substring(0,fileName.length()-GPX_SUFFIX.length()));
+				GPXFile gpx = app.getRoutingHelper().generateGPXFileWithRoute(fileName.substring(0,fileName.length()-GPX_FILE_EXT.length()));
 				GPXUtilities.writeGpxFile(file, gpx);
 				return app.getString(R.string.route_successfully_saved_at, file.getName());
 			}
@@ -1144,28 +1146,8 @@ public class MapActivityActions implements DialogProvider {
 		menu.show();
 	}
 
-	public void restoreOrReturnDialog(final String packageName) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
-        builder.setTitle("Restore OsmAnd");
-        builder.setMessage("Do you want to Restore OsmAnd or get back to the Client App?");
-        builder.setPositiveButton("Restore", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                restoreOsmand();
-            }
-        });
-        builder.setNeutralButton("Return", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                executeHeadersIntent(packageName);
-            }
-        });
-        builder.setNegativeButton("Cancel", null);
-        builder.show();
-    }
-
 	protected void updateDrawerMenu() {
-		boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		final boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final ListView menuItemsListView = (ListView) mapActivity.findViewById(R.id.menuItems);
 		if (nightMode) {
 			menuItemsListView.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.list_background_color_dark));
@@ -1174,7 +1156,6 @@ public class MapActivityActions implements DialogProvider {
 		}
 		menuItemsListView.removeHeaderView(drawerLogoHeader);
 		Bitmap navDrawerLogo = getMyApplication().getAppCustomization().getNavDrawerLogo();
-		final ArrayList<String> navDrawerLogoParams = getMyApplication().getAppCustomization().getNavDrawerLogoParams();
 
 		if (navDrawerLogo != null) {
 			drawerLogoHeader.setImageBitmap(navDrawerLogo);
@@ -1193,8 +1174,9 @@ public class MapActivityActions implements DialogProvider {
 				boolean hasHeader = menuItemsListView.getHeaderViewsCount() > 0;
 				boolean hasFooter = menuItemsListView.getFooterViewsCount() > 0;
 				if (hasHeader && position == 0 || (hasFooter && position == menuItemsListView.getCount() - 1)) {
-					if (navDrawerLogoParams != null) {
-						executeHeadersIntent(navDrawerLogoParams.get(0));
+					String drawerLogoParams = getMyApplication().getAppCustomization().getNavDrawerLogoUrl();
+					if (!Algorithms.isEmpty(drawerLogoParams)) {
+						WikipediaDialogFragment.showFullArticle(mapActivity, Uri.parse(drawerLogoParams), nightMode);
 					}
 				} else {
 					position -= menuItemsListView.getHeaderViewsCount();
@@ -1208,21 +1190,5 @@ public class MapActivityActions implements DialogProvider {
 			}
 
 		});
-	}
-
-	private void executeHeadersIntent(String packageName) {
-		Intent launchIntent = mapActivity.getPackageManager().getLaunchIntentForPackage(packageName);
-		if(launchIntent!=null) mapActivity.startActivity(launchIntent);
-		mapActivity.closeDrawer();
-	}
-
-	private void showReturnConfirmationDialog(String packageName) {
-		restoreOrReturnDialog(packageName);
-	    mapActivity.closeDrawer();
-	}
-
-	private void restoreOsmand(){
-		getMyApplication().getAppCustomization().restoreOsmand();
-		mapActivity.closeDrawer();
 	}
 }

@@ -32,7 +32,6 @@ import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import java.io.File;
 import java.util.Date;
 
-import static net.osmand.plus.helpers.ImportHelper.GPX_SUFFIX;
 import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.ADDED_POINTS_NUMBER_KEY;
 
 public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragment {
@@ -98,11 +97,11 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 		Date date = new Date();
 		final String suggestedName = app.getString(R.string.markers) + "_" + DateFormat.format("yyyy-MM-dd", date).toString();
 		String displayedName = suggestedName;
-		File fout = new File(dir, suggestedName + GPX_SUFFIX);
+		File fout = new File(dir, suggestedName + IndexConstants.GPX_FILE_EXT);
 		int ind = 1;
 		while (fout.exists()) {
 			displayedName = suggestedName + "_" + (++ind);
-			fout = new File(dir, displayedName + GPX_SUFFIX);
+			fout = new File(dir, displayedName + IndexConstants.GPX_FILE_EXT);
 		}
 		final EditText nameEditText = (EditText) mainView.findViewById(R.id.name_edit_text);
 		nameEditText.setText(displayedName);

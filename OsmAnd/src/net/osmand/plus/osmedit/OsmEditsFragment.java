@@ -34,6 +34,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.IndexConstants;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
@@ -800,7 +801,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 			} else {
 				sb.append("osm_modification");
 			}
-			sb.append(oscFile ? ".osc" : ".gpx");
+			sb.append(oscFile ? ".osc" : IndexConstants.GPX_FILE_EXT);
 			return sb.toString();
 		}
 

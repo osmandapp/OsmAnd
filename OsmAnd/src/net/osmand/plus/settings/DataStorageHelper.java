@@ -193,7 +193,7 @@ public class DataStorageHelper {
 
 		tracksMemory = DataStorageMemoryItem.builder()
 				.setKey(TRACKS_MEMORY)
-//				.setExtensions(".gpx", ".gpx.bz2")
+//				.setExtensions(IndexConstants.GPX_FILE_EXT, ".gpx.bz2")
 				.setDirectories(
 						new Directory(app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath(), true, EXTENSIONS, false))
 				.createItem();

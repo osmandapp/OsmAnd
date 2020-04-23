@@ -71,7 +71,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 		}
 
 		int contentPaddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
-		int dialogContentMargin = app.getResources().getDimensionPixelSize(R.dimen.dialog_content_margin);
+		int contentPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
 
 		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		if (mc == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
@@ -80,14 +80,16 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 			entryValues = new Float[]{9.1f, 18.3f, 30.5f, 45.7f, 91.5f, 183.0f, 482.0f, 965.0f, 1609.0f};
 		}
 
-		final int appModeColor = appMode.getIconColorInfo().getColor(nightMode);
+		final int appModeColorId = appMode.getIconColorInfo().getColor(nightMode);
+		final int appModeColor = ContextCompat.getColor(app, appModeColorId);
 		final int activeColor = AndroidUtils.resolveAttribute(app, R.attr.active_color_basic);
 		final int disabledColor = AndroidUtils.resolveAttribute(app, android.R.attr.textColorSecondary);
 
 		String title = getString(R.string.recalculate_route_in_deviation);
 		items.add(new TitleItem(title));
 
-		final View sliderView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.bottom_sheet_item_slider_with_two_text, null);
+		final View sliderView = UiUtilities.getInflater(getContext(), nightMode)
+				.inflate(R.layout.bottom_sheet_item_slider_with_two_text, null);
 		slider = sliderView.findViewById(R.id.slider);
 		tvSliderTitle = sliderView.findViewById(android.R.id.title);
 		tvSliderTitle.setText(getString(R.string.distance));
@@ -102,7 +104,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 		final BottomSheetItemWithCompoundButton[] preferenceBtn = new BottomSheetItemWithCompoundButton[1];
 		preferenceBtn[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(enabled)
-				.setCompoundButtonColorId(appModeColor)
+				.setCompoundButtonColorId(appModeColorId)
 				.setTitle(enabled ? on : off)
 				.setTitleColorId(enabled ? activeColor : disabledColor)
 				.setCustomView(getCustomButtonView(enabled))
@@ -129,7 +131,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 		items.add(preferenceBtn[0]);
 		items.add(new DividerSpaceItem(app, contentPaddingSmall));
 		items.add(new LongDescriptionItem(getString(R.string.select_distance_route_will_recalc)));
-		items.add(new DividerSpaceItem(app, dialogContentMargin));
+		items.add(new DividerSpaceItem(app, contentPadding));
 
 		slider.addOnChangeListener(new Slider.OnChangeListener() {
 			@Override
@@ -141,6 +143,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 				}
 			}
 		});
+		UiUtilities.setupSlider(slider, nightMode, appModeColor, true);
 		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(sliderView)
 				.create());

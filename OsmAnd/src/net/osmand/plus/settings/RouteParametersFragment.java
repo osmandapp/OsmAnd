@@ -9,15 +9,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
+
+import com.google.android.material.slider.Slider;
 
 import net.osmand.StateChangedListener;
 import net.osmand.plus.ApplicationMode;
@@ -287,8 +289,9 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		boolean nightMode = !app.getSettings().isLightContentForMode(mode);
 		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
-		View seekbarView = LayoutInflater.from(themedContext).inflate(R.layout.recalculation_angle_dialog, null, false);
-		builder.setView(seekbarView);
+		View sliderView = LayoutInflater.from(themedContext).inflate(
+				R.layout.recalculation_angle_dialog, null, false);
+		builder.setView(sliderView);
 		builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -303,36 +306,28 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 
 		int selectedModeColor = ContextCompat.getColor(app, mode.getIconColorInfo().getColor(nightMode));
-		setupAngleSlider(angleValue, seekbarView, nightMode, selectedModeColor);
+		setupAngleSlider(angleValue, sliderView, nightMode, selectedModeColor);
 		builder.show();
 	}
 
 	private static void setupAngleSlider(final float[] angleValue,
-	                                     View seekbarView,
+	                                     View sliderView,
 	                                     final boolean nightMode,
 	                                     final int activeColor) {
 
-		final SeekBar angleBar = seekbarView.findViewById(R.id.angle_seekbar);
-		final TextView angleTv = seekbarView.findViewById(R.id.angle_text);
+		final Slider angleBar = sliderView.findViewById(R.id.angle_slider);
+		final TextView angleTv = sliderView.findViewById(R.id.angle_text);
 
 		angleTv.setText(String.valueOf(angleValue[0]));
-		angleBar.setProgress((int) angleValue[0]);
-		angleBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-
+		angleBar.setValue((int) angleValue[0]);
+		angleBar.addOnChangeListener(new Slider.OnChangeListener() {
 			@Override
-			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-				int value = progress - (progress % 5);
+			public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
 				angleValue[0] = value;
 				angleTv.setText(String.valueOf(value));
 			}
-
-			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {}
-
-			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {}
 		});
-		UiUtilities.setupSeekBar(angleBar, activeColor, nightMode);
+		UiUtilities.setupSlider(angleBar, nightMode, activeColor, true);
 	}
 
 	private void setupSelectRouteRecalcDistance(PreferenceScreen screen) {

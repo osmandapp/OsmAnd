@@ -35,6 +35,7 @@ import net.osmand.access.AccessibilityPlugin;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
+import net.osmand.map.TileSourceManager;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.io.NetworkUtils;
@@ -187,7 +188,15 @@ public class OsmandApplication extends MultiDexApplication {
 			externalStorageDirectory = osmandSettings.getInternalAppPath();
 		}
 
-		Algorithms.removeAllFiles(this.getAppPath(IndexConstants.TEMP_DIR));
+		Algorithms.removeAllFiles(getAppPath(IndexConstants.TEMP_DIR));
+		if (appInitializer.isAppVersionChanged()) {
+			// Reset mapillary tile sources
+			File tilesPath = getAppPath(IndexConstants.TILES_INDEX_DIR);
+			File mapillaryRasterTilesPath = new File(tilesPath, TileSourceManager.getMapillaryRasterSource().getName());
+			File mapillaryVectorTilesPath = new File(tilesPath, TileSourceManager.getMapillaryVectorSource().getName());
+			Algorithms.removeAllFiles(mapillaryRasterTilesPath);
+			Algorithms.removeAllFiles(mapillaryVectorTilesPath);
+		}
 
 		checkPreferredLocale();
 		appInitializer.onCreateApplication();

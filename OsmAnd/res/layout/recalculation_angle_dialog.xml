@@ -118,11 +118,15 @@
 
             </LinearLayout>
 
-            <SeekBar
-                android:id="@+id/angle_seekbar"
+            <com.google.android.material.slider.Slider
+                android:id="@+id/angle_slider"
+                style="@style/Widget.Styled.Slider"
+                android:valueTo="90"
+                android:stepSize="5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:max="90"
+                android:layout_marginLeft="@dimen/content_padding_small"
+                android:layout_marginRight="@dimen/content_padding_small"
                 android:paddingBottom="@dimen/content_padding" />
 
         </LinearLayout>

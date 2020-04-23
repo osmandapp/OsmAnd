@@ -4,12 +4,14 @@ package net.osmand.plus;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.view.View;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.core.content.ContextCompat;
+
+import com.google.android.material.slider.Slider;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
@@ -55,15 +57,17 @@ public class OsmAndLocationSimulation {
 			if (useGpx) {
 				boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 				int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+				ApplicationMode appMode = app.getSettings().getApplicationMode();
+				int selectedModeColor = ContextCompat.getColor(app, appMode.getIconColorInfo().getColor(nightMode));
 				AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(ma, themeRes));
 				builder.setTitle(R.string.animate_route);
 
 				final View view = ma.getLayoutInflater().inflate(R.layout.animate_route, null);
 				((TextView) view.findViewById(R.id.MinSpeedup)).setText("1"); //$NON-NLS-1$
 				((TextView) view.findViewById(R.id.MaxSpeedup)).setText("4"); //$NON-NLS-1$
-				final SeekBar speedup = (SeekBar) view.findViewById(R.id.Speedup);
-				speedup.setMax(3);
-				UiUtilities.setupSeekBar(app, speedup, nightMode, true);
+				final Slider speedup = (Slider) view.findViewById(R.id.Speedup);
+				speedup.setValueTo(3);
+				UiUtilities.setupSlider(speedup, nightMode, selectedModeColor, true);
 				builder.setView(view);
 				builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 
@@ -74,7 +78,7 @@ public class OsmAndLocationSimulation {
 							@Override
 							public boolean processResult(GPXUtilities.GPXFile[] result) {
 								GPXRouteParamsBuilder builder = new GPXRouteParamsBuilder(result[0], app.getSettings());
-								startAnimationThread(app, builder.getPoints(), true, speedup.getProgress() + 1);
+								startAnimationThread(app, builder.getPoints(), true, speedup.getValue() + 1);
 								if (runnable != null) {
 									runnable.run();
 								}

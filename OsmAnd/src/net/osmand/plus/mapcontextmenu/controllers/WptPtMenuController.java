@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GpxSelectionHelper;
@@ -115,7 +116,7 @@ public class WptPtMenuController extends MenuController {
 			sb.append(", ");
 			if (selectedGpxFile != null) {
 				File file = new File(selectedGpxFile.getGpxFile().path);
-				String gpxName = file.getName().replace(".gpx", "").replace("/", " ").replace("_", " ");
+				String gpxName = file.getName().replace(IndexConstants.GPX_FILE_EXT, "").replace("/", " ").replace("_", " ");
 				sb.append(gpxName);
 			}
 			return sb.toString();

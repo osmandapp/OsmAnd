@@ -51,8 +51,8 @@ android {
 		versionName "3.7.0"
 		versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
 		versionName System.getenv("APK_VERSION_SUFFIX")? versionName + System.getenv("APK_VERSION_SUFFIX").toString(): versionName
-		
-
+		// Stops the Gradle plugin’s automatic rasterization of vectors
+		// generatedDensities = []
 	}
 
 	lintOptions {
@@ -83,6 +83,8 @@ android {
 		// Don't compress any embedded resources
 		noCompress "qz"
 		cruncherEnabled = false
+		// Flag notifies aapt to keep the attribute IDs around
+		// additionalParameters "--no-version-vectors"
 	}
 
 	dexOptions {
@@ -352,22 +354,62 @@ task collectHelpContentsAssets(type: Copy) {
 	into "assets/feature_articles"
 }
 
-task copyPoiCategiry(type: Copy) {
+task copyPoiCategories(type: Copy) {
 	from("../../resources/poi") {
 		include "poi_categories.json"
 	}
 	into "assets"
 }
 
-task copyStyleIcons(type: Copy) {
+task copyStyleIcons(type: Sync) {
 	from "../../resources/rendering_styles/style-icons/"
 	into "res/"
-	include "**/*.png"
+	include "**/*.png",  "**/*.xml"
+	preserve {
+		include '**/*'
+		exclude  "**/mm_*", "**/h_*"
+	}
 }
 
-task copyWidgetIcons(type: Exec) {
-	if (!Os.isFamily(Os.FAMILY_WINDOWS)) {
-		commandLine 'sh', file("./copy_widget_icons.sh").getAbsolutePath()
+task copyPOIIcons(type: Sync) {
+	from "../../resources/rendering_styles/drawable-mx/"
+	into "res/drawable/"
+	include "**/*.png",  "**/*.xml"
+	preserve {
+		include '**/*'
+		exclude "**/mx_*"
+	}
+}
+
+
+
+task copyWidgetIconsXhdpi(type: Sync) {
+	from "res/drawable-xxhdpi/"
+	into "res/drawable-large-xhdpi/"
+	include "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
+	preserve {
+		include '*'
+		exclude "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
+	}
+}
+
+task copyWidgetIconsHdpi(type: Sync) {
+	from "res/drawable-xhdpi/"
+	into "res/drawable-large-hdpi/"
+	include "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
+	preserve {
+		include '*'
+		exclude "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
+	}
+}
+
+task copyWidgetIcons(type: Sync) {
+	from "res/drawable-hdpi/"
+	into "res/drawable-large/"
+	include "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
+	preserve {
+		include '*'
+		exclude "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
 	}
 }
 
@@ -377,10 +419,13 @@ task collectExternalResources {
 			collectHelpContentsAssets,
 			collectHelpContentsStyle,
 			copyStyleIcons,
+			copyPOIIcons,
 			updateNoTranslate,
 			validateTranslate,
 			copyWidgetIcons,
-			copyPoiCategiry,
+			copyWidgetIconsHdpi,
+			copyWidgetIconsXhdpi,
+			copyPoiCategories,
 			downloadWorldMiniBasemap
 
 	Gradle gradle = getGradle()

@@ -6,19 +6,21 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+
+import com.google.android.material.slider.Slider;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
@@ -506,8 +508,10 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 														  final int[] minutes, final ValueHolder<Boolean> choice,
 														  final ValueHolder<Integer> v,
 														  final boolean showTrackSelection, boolean nightMode) {
+		ApplicationMode appMode = app.getSettings().getApplicationMode();
 		int textColorPrimary = ContextCompat.getColor(app, nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
 		int textColorSecondary = ContextCompat.getColor(app, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light);
+		int selectedModeColor = ContextCompat.getColor(uiCtx, appMode.getIconColorInfo().getColor(nightMode));
 		LinearLayout ll = new LinearLayout(uiCtx);
 		final int dp24 = AndroidUtils.dpToPx(uiCtx, 24f);
 		final int dp8 = AndroidUtils.dpToPx(uiCtx, 8f);
@@ -516,22 +520,20 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		tv.setText(String.format(patternMsg, uiCtx.getString(R.string.int_continuosly)));
 		tv.setTextColor(textColorSecondary);
 
-		SeekBar sp = new SeekBar(uiCtx);
-		sp.setPadding(dp24 + dp8, dp8, dp24 + dp8, dp8);
 		final int secondsLength = seconds.length;
-    	final int minutesLength = minutes.length;
-    	sp.setMax(secondsLength + minutesLength - 1);
-		sp.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+		final int minutesLength = minutes.length;
+		ViewGroup sliderContainer = UiUtilities.createSliderView(uiCtx, nightMode);
+		sliderContainer.setPadding(dp24, dp8, dp24, dp8);
+		Slider sp = sliderContainer.findViewById(R.id.slider);
+		UiUtilities.setupSlider(sp, nightMode, selectedModeColor, true);
+		sp.setValueTo(secondsLength + minutesLength - 1);
+		sp.setStepSize(1);
+		sp.addOnChangeListener(new Slider.OnChangeListener() {
+
 			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {
-			}
-			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {
-			}
-			
-			@Override
-			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+			public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
 				String s;
+				int progress = (int) value;
 				if(progress == 0) {
 					s = uiCtx.getString(R.string.int_continuosly);
 					v.value = 0;
@@ -545,20 +547,18 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 					}
 				}
 				tv.setText(String.format(patternMsg, s));
-				
 			}
 		});
-		UiUtilities.setupSeekBar(app, sp, nightMode, true);
 		
 		for (int i = 0; i < secondsLength + minutesLength - 1; i++) {
 			if (i < secondsLength) {
 				if (v.value <= seconds[i] * 1000) {
-					sp.setProgress(i);
+					sp.setValue(i);
 					break;
 				}
 			} else {
 				if (v.value <= minutes[i - secondsLength] * 1000 * 60) {
-					sp.setProgress(i);
+					sp.setValue(i);
 					break;
 				}
 			}
@@ -566,7 +566,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		
 		ll.setOrientation(LinearLayout.VERTICAL);
 		ll.addView(tv);
-		ll.addView(sp);
+		ll.addView(sliderContainer);
 		if (choice != null) {
 			final AppCompatCheckBox cb = new AppCompatCheckBox(uiCtx);
 			cb.setText(R.string.confirm_every_run);

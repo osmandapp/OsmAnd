@@ -5,11 +5,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+
+import com.google.android.material.slider.Slider;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
@@ -71,37 +73,28 @@ public class DownloadTilesDialog {
 		
 		((TextView)view.findViewById(R.id.MinZoom)).setText(zoom+""); //$NON-NLS-1$
 		((TextView)view.findViewById(R.id.MaxZoom)).setText(max+""); //$NON-NLS-1$
-		final SeekBar seekBar = (SeekBar) view.findViewById(R.id.ZoomToDownload);
-		seekBar.setMax(max - zoom);
-		seekBar.setProgress((max - zoom) / 2);
+		final Slider slider = (Slider) view.findViewById(R.id.ZoomToDownload);
+		slider.setValueTo(max - zoom);
+		int progress = (max - zoom) / 2;
+		slider.setValue(progress);
 		
 		final TextView downloadText = ((TextView) view.findViewById(R.id.DownloadDescription));
 		final String template = ctx.getString(R.string.tiles_to_download_estimated_size);
 		
 		
-		updateLabel(zoom, rb.getLatLonBounds(), downloadText, template, seekBar.getProgress());
-		seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
-
+		updateLabel(zoom, rb.getLatLonBounds(), downloadText, template, (int) slider.getValue());
+		slider.addOnChangeListener(new Slider.OnChangeListener() {
 			@Override
-			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-				updateLabel(zoom, rb.getLatLonBounds(), downloadText, template, progress);
+			public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
+				updateLabel(zoom, rb.getLatLonBounds(), downloadText, template, (int) value);
 			}
-
-			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {
-			}
-
-			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {
-			}
-			
 		});
 		
 		builder.setPositiveButton(R.string.shared_string_download, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
-				run(zoom, seekBar.getProgress(), rb.getLatLonBounds(), mapSource);
+				run(zoom, (int) slider.getValue(), rb.getLatLonBounds(), mapSource);
 			}
 		});
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
