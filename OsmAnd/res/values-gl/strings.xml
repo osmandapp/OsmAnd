@@ -38,7 +38,7 @@
     <string name="rendering_attr_publicTransportMode_name">Liñas de bus, trolebus e transbordos</string>
     <string name="monitoring_settings">Gravación de viaxes</string>
     <string name="monitoring_settings_descr">Configurar de que xeito gravar as túas viaxes.</string>
-    <string name="record_plugin_description">Este engadido activa a funcionalidade para rexistrar e gardar as túas pistas de xeito manual premendo no trebello de gravación GPX no mapa, ou automáticamente rexistrando todas as túas rutas percorridas nun ficheiro GPX. 
+    <string name="record_plugin_description">Este plugin activa a funcionalidade para rexistrar e gardar as túas pistas de xeito manual premendo no trebello de gravación GPX no mapa, ou automáticamente rexistrando todas as túas rutas percorridas nun ficheiro GPX. 
 \n 
 \nAs pistas gravadas poden ser compartidas coas túas amizades ou ser empregadas para contribuír ó OSM. Os atletas poden empregar as pistas gravadas para seguir os seus adestramentos. Algunhas análises básicas de pistas pódense facer directamente no OsmAnd, coma tempos por volta, velocidade media, etc., e por suposto as pistas poden analizarse de xeito posterior con ferramentas de análise de terceiros.</string>
     <string name="record_plugin_name">Gravación de viaxes</string>
@@ -352,7 +352,7 @@
     <string name="hno">Número do edificio</string>
     <string name="website">Sitio web</string>
     <string name="phone">Teléfono</string>
-    <string name="osmand_background_plugin_description">Amosa-las opcións para permitir o seguemento e a navegación no modo de segundo plano (pantalla apagada) espertando periodicamente o dispositivo do GPS.</string>
+    <string name="osmand_background_plugin_description">Amosar as opcións para permitir o seguemento e a navegación no modo de segundo plano (pantalla apagada) espertando periodicamente o dispositivo do GPS.</string>
     <string name="contribution_activity">Install version</string>
     <string name="choose_osmand_theme_descr">Personalizar a aparencia da aplicación.</string>
     <string name="choose_osmand_theme">Tema da aplicación</string>
@@ -384,10 +384,10 @@
     <string name="av_def_action_picture">Fotografar</string>
     <string name="recording_context_menu_precord">Fotografar</string>
     <string name="dropbox_plugin_description">Sincroniza pistas e notas multimedia coa túa conta do Dropbox.</string>
-    <string name="dropbox_plugin_name">Engadido do Dropbox</string>
+    <string name="dropbox_plugin_name">Plugin do Dropbox</string>
     <string name="intermediate_points_change_order">Muda-la orde</string>
-    <string name="srtm_paid_version_msg">Coida a posibilidade de mercar o engadido de \'Curvas de nivel\' para así apoiar o seu desenvolvemento.</string>
-    <string name="srtm_paid_version_title">Engadido das curvas do nivel</string>
+    <string name="srtm_paid_version_msg">Coida a posibilidade de mercar o plugin de \'Curvas de nivel\' para así apoiar o seu desenvolvemento.</string>
+    <string name="srtm_paid_version_title">Plugin de curvas de nivel</string>
     <string name="av_def_action_choose">Baixo demanda\?</string>
     <string name="av_def_action_video">Gravar vídeo</string>
     <string name="av_def_action_audio">Gravar son</string>
@@ -419,10 +419,10 @@
     <string name="shared_string_control_stop">Deter</string>
     <string name="shared_string_control_start">Comezar</string>
     <string name="map_widget_av_notes">Notas de son/vídeo</string>
-    <string name="osmand_srtm_short_description_80_chars">Engadido do OsmAnd para curvas do nivel sen conexión</string>
-    <string name="osmand_srtm_long_description_1000_chars">Este engadido fornece unha capa de sobreposición de curvas do nivel e unha capa de sombras da altitude (relevo) que poden ser amosadas nos mapas sen conexión do OsmAnd. Esta funcionalidade pode ser moi apreciada por atletas, camiñantes, sendeiristas e calquera que teña interese pola estrutura do relevo da paisaxe.
-\n
-\n
+    <string name="osmand_srtm_short_description_80_chars">Plugin do OsmAnd para curvas de nivel sen conexión</string>
+    <string name="osmand_srtm_long_description_1000_chars">Este plugin fornece unha capa de sobreposición de curvas do nivel e unha capa de sombras da altitude (relevo) que poden ser amosadas nos mapas sen conexión do OsmAnd. Esta funcionalidade pode ser moi apreciada por atletas, camiñantes, sendeiristas e calquera que teña interese pola estrutura do relevo da paisaxe. 
+\n 
+\n 
 \nOs datos globais (entre os 70 graos norte e os 70 graos sul) están baseados nas medicións do SRTM (Misión Topográfica con Radar da Lanzadeira Espacial) e ASTER (Radiómetro Espacial Avanzado de Emisión Térmica e Reflexión) e instrumentos de imaxes a bordo do Terra, o satélite máis importante do Sistema de Observación Terrestre da NASA. ASTER é un esforzo cooperativo entre a NASA, o Ministerio de Economía do Xapón, Comercio e Industria (METI) e Sistemas Espaciais Xaponeses (J-spaceystems).</string>
     <string name="map_widget_distancemeasurement">Medición de distancias</string>
     <string name="audionotes_location_not_defined">Preme \'Empregar localización…\' para engadir unha nota á localización.</string>
@@ -431,7 +431,7 @@
     <string name="audionotes_plugin_name">Notas de son/vídeo</string>
     <string name="index_srtm_parts">partes</string>
     <string name="index_srtm_ele">Curvas de nivel</string>
-    <string name="srtm_plugin_description">Este engadido fornece unha capa de sobreposición das curvas do nivel e unha capa de sombras da altitude (relevo) que poden ser amosadas nos mapas sen conexión do OsmAnd. Esta funcionalidade pode ser moi apreciada por atletas, camiñantes, sendeiristas e calquera que teña interese pola estrutura de relevo da paisaxe. (Ten en conta que as curvas do nivel e/ou os datos do relevo están dispoñíbeis en baixadas adicionais separadas logo de activares o engadido.) 
+    <string name="srtm_plugin_description">Este plugin fornece unha capa de sobreposición das curvas do nivel e unha capa de sombras da altitude (relevo) que poden ser amosadas nos mapas sen conexión do OsmAnd. Esta funcionalidade pode ser moi apreciada por atletas, camiñantes, sendeiristas e calquera que teña interese pola estrutura de relevo da paisaxe. (Ten en conta que as curvas do nivel e/ou os datos do relevo están dispoñíbeis en descargas adicionais separadas logo de activares o plugin) 
 \n 
 \nOs datos globais (entre os 70 graos norte e os 70 graos sul) están baseados nas medicións do SRTM (Misión Topográfica con Radar da Lanzadeira Espacial) e o ASTER (Radiómetro Espacial Avanzado de Emisión Térmica e Reflexión) e instrumentos de imaxes a bordo do Terra, o satélite máis importante do Sistema de Observación Terrestre da NASA. O ASTER é un esforzo cooperativo entre a NASA, o Ministerio de Economía do Xapón, Comercio e Industria (METI) e Sistemas Espaciais Xaponeses (J-spaceystems).</string>
     <string name="srtm_plugin_name">Curvas de nivel</string>
@@ -461,7 +461,7 @@
     <string name="rendering_attr_roadColors_description">Escoller un esquema de cores das estradas:</string>
     <string name="rendering_attr_roadColors_name">Esquema de cores de estrada</string>
     <string name="map_widget_show_destination_arrow">Amosar en que dirección está o destino</string>
-    <string name="enable_plugin_monitoring_services">Permitir que o engadido da \"Gravación de viaxes\" empregue os servizos de rexistro da posición (rexistro do GPX, seguemento na rede)</string>
+    <string name="enable_plugin_monitoring_services">Permitir que o plugin da \"Gravación de viaxes\" empregue os servizos de rexistro da posición (rexistro do GPX, seguimento na rede)</string>
     <string name="non_optimal_route_calculation">Calcular rota posíbelmente non óptima nas distancias longas</string>
     <string name="gps_not_available">Activa o GPS nos axustes</string>
     <string name="map_widget_monitoring_services">Servizos de rexistro</string>
@@ -706,7 +706,7 @@
     <string name="local_indexes_cat_tile">Mapas con conexión e en teselas baixadas</string>
     <string name="local_indexes_cat_map">Mapas normais (vectoriais)</string>
     <string name="index_settings_descr">Baixar e xestionar mapas sen conexión almacenados no dispositivo.</string>
-    <string name="map_online_plugin_is_not_installed">Activa-lo engadido dos mapas con conexión para escolleres fontes de mapas diferentes</string>
+    <string name="map_online_plugin_is_not_installed">Activar o plugin dos mapas con conexión para escolleres fontes de mapas diferentes</string>
     <string name="map_online_data">Mapas con conexión e en teselas</string>
     <string name="map_online_data_descr">Empregar mapas con conexión (baixar e garda-las teselas no cartón SD).</string>
     <string name="shared_string_online_maps">Mapas con conexión</string>
@@ -718,16 +718,16 @@
 \nBaixa as teselas dos mapas directamente en liña, ou prepárao para o seu emprego sen conexión (copiar de xeito manual no cartagol de datos OsmAnd) coma unha base de datos SQLite que pode ser producida por unha variedade de ferramentas de preparación de mapas de terceiros.</string>
     <string name="osmand_accessibility_description">Activa as funcións de accesibilidade do dispositivo de xeito directo no OsmAnd. Fai máis doado por exemplo, o axuste da velocidade da voz para sintetizadores de voz, os axustes de navegación D-pad, empregando a roda de desprazamento para o control do achegamento (zoom), ou a retroalimentación de texto a voz, por exemplo, para anunciar a túa posición de xeito automático.</string>
     <string name="osmand_development_plugin_description">Axusta as funcións de desenvolvemento e depuración, como a simulación de navegación, o rendemento do renderizado ou as indicacións por voz. Destinado para desenvolvedores, non é necesario para o normal uso da aplicación.</string>
-    <string name="plugins_screen">Engadidos</string>
-    <string name="prefs_plugins_descr">Os engadidos activan opcións avanzadas e funcionalidades adicionais.</string>
-    <string name="prefs_plugins">Engadidos</string>
+    <string name="plugins_screen">Plugins</string>
+    <string name="prefs_plugins_descr">Os plugins activan opcións avanzadas e funcións adicionais.</string>
+    <string name="prefs_plugins">Plugins</string>
     <string name="osm_editing_plugin_description">Fai contribucións no OSM, como o crear ou modificar obxectos PDI, abrir ou comentar notas do OSM e contribuír con ficheiros de pistas GPX gravados no OsmAnd, fornecendo o teu nome de usuario e contrasinal. O OpenStreetMap.org é un proxecto de cartografado de dominio público, global, ceibe e impulsado pola comunidade.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Os mapas vectoriais seguramente amósanse máis axiña. Poden non funcionar ben nalgúns dispositivos.</string>
     <string name="play_commands_of_currently_selected_voice">Escolle unha voz e reproduce probas dos avisos:</string>
     <string name="debugging_and_development">Desenvolvemento do OsmAnd</string>
     <string name="native_rendering">Renderizado nativo</string>
     <string name="test_voice_prompts">Probar indicacións por voz</string>
-    <string name="switch_to_raster_map_to_see">Baixar un mapa vectorial sen conexión desta localización en \'Axustes\' (\'Xestionar ficheiros de mapas\'), ou mudar ó engadido de \'Mapas en liña\'.</string>
+    <string name="switch_to_raster_map_to_see">Baixar un mapa vectorial sen conexión desta localización en \'Axustes\' (\'Xestionar ficheiros de mapas\'), ou mudar ó plugin de \'Mapas en liña\'.</string>
     <string name="send_files_to_osm">Enviar ficheiros GPX a OSM?</string>
     <string name="gpx_visibility_txt">Visibilidade</string>
     <string name="gpx_tags_txt">Etiquetas</string>
@@ -1441,7 +1441,7 @@
     <string name="rendering_value_americanRoadAtlas_name">Atlas de estradas norteamericanas</string>
     <string name="routing_attr_no_new_routing_name">Non seguir as regras de v1.9</string>
     <string name="routing_attr_no_new_routing_description">Non empregar regras de navegación engadidas na versión 1.9.</string>
-    <string name="plugin_settings">Engadidos</string>
+    <string name="plugin_settings">Plugins</string>
     <string name="no_updates_available">Non hai actualizacións dispoñíbeis</string>
     <string name="download_live_updates">Actualizacións ao vivo</string>
     <string name="rendering_value_default13_name">Predeterminado (13)</string>
@@ -1602,7 +1602,7 @@ Lon %2$s</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="index_name_netherlands">Europa - Países Baixos</string>
     <string name="shared_string_release">Publicado</string>
-    <string name="plugin_install_needs_network">Precisas estar conectado para instalar este engadido.</string>
+    <string name="plugin_install_needs_network">Precisas estar conectado para instalar este plugin.</string>
     <string name="get_plugin">Obter</string>
     <string name="use_fast_recalculation_desc">Nas viaxes longas, recalcula só o anaco inicial da rota.</string>
     <string name="do_you_like_osmand">Gosta do OsmAnd?</string>
@@ -1728,7 +1728,7 @@ Lon %2$s</string>
     <string name="roads">Estradas</string>
     <string name="downloading_number_of_files">Estase a baixar - ficheiro %1$d</string>
     <string name="buy">Mercar</string>
-    <string name="activate_srtm_plugin">Activa o engadido das \"Curvas do nivel\"</string>
+    <string name="activate_srtm_plugin">Activa o plugin das \"Curvas de nivel\"</string>
     <string name="later">Noutro intre</string>
     <string name="get_full_version">Versión completa</string>
     <string name="downloads">Baixadas</string>
@@ -1743,7 +1743,7 @@ Lon %2$s</string>
     <string name="begin_with_osmand_menu_group">Primeiros pasos co OsmAnd</string>
     <string name="features_menu_group">Funcionalidades</string>
     <string name="help_us_to_improve_menu_group">Axudar a mellora-lo OsmAnd</string>
-    <string name="plugins_menu_group">Engadidos</string>
+    <string name="plugins_menu_group">Plugins</string>
     <string name="first_usage_item">Primeiro emprego</string>
     <string name="first_usage_item_description">De que xeito baixar mapas e axusta-las opcións básicas.</string>
     <string name="navigation_item_description">Axustes da navegación.</string>
@@ -1771,12 +1771,12 @@ Lon %2$s</string>
 \n 
 \nNon se precisa baixar ningún mapa especial, xa que a vista se xera a partir dos mapas normais. 
 \n 
-\nPódese pechar esta vista desactivándoa eiquí ou mudando o «Estilo do mapa» en «Configura-lo mapa» coma se desexe.</string>
-    <string name="plugin_nautical_descr">Este engadido enriquece a aplicación de mapas de navegación OsmAnd para que amose tamén mapas náuticos para viaxes en barco e outros tipos de deportes acuáticos. 
+\nPódese pechar esta vista desactivándoa eiquí ou mudando o «Estilo do mapa» en «Configurar o mapa» coma se desexe.</string>
+    <string name="plugin_nautical_descr">Este plugin enriquece a aplicación de mapas de navegación OsmAnd para que amose tamén mapas náuticos para viaxes en barco e outros tipos de deportes acuáticos. 
 \n 
 \nUnha extensión dos mapas especial para o OsmAnd fornece tódalas marcaxes náuticas e símbolos das cartas para a navegación en augas interiores e de cabotaxe. A descrición de cada marcaxe da navegación fornece os detalles precisos para identificala, así coma o seu significado (categoría, forma, cor, secuencia, referencia, etc.). 
 \n 
-\nPara voltar a un dos estilos do mapa convencionais do OsmAnd, sinxelamente hai que desactivar este engadido de novo ou muda-lo «Estilo do mapa» en «Configura-lo mapa» coma se desexe.</string>
+\nPara voltar a un dos estilos do mapa convencionais do OsmAnd, sinxelamente hai que desactivar este plugin de novo ou mudar o «Estilo do mapa» en «Configurar o mapa» coma se desexe.</string>
     <string name="impassable_road_desc">Escolle as estradas que desexes evitar durante a navegación.</string>
     <string name="shared_string_sound">Son</string>
     <string name="no_location_permission">Outorgar acceso ós datos de localización.</string>
@@ -2035,7 +2035,7 @@ Lon %2$s</string>
     <string name="access_empty_list">Listaxe baleira</string>
     <string name="access_tree_list">Listaxe en árbore</string>
     <string name="number_of_gpx_files_selected_pattern">%s ficheiros GPX seleccionados</string>
-    <string name="osmand_plus_banner_desc">Baixadas ilimitadas dos mapas, actualizacións e engadido da Wikipedia.</string>
+    <string name="osmand_plus_banner_desc">Descargas ilimitadas dos mapas, actualizacións e plugin da Wikipedia.</string>
     <string name="routing_attr_short_way_name">Camiño con aforro no combustíbel</string>
     <string name="routing_attr_short_way_description">Emprega-lo camiño con aforro no combustíbel (normalmente máis curto).</string>
     <string name="shared_string_change">Mudar</string>
@@ -2112,7 +2112,7 @@ Lon %2$s</string>
     <string name="driving_region_australia">Australia</string>
     <string name="show_free_version_banner">Amosar publicidade na versión de balde</string>
     <string name="show_free_version_banner_description">Amosa o anuncio da versión de balde, mesmo na versión de pago.</string>
-    <string name="activate_seamarks_plugin">Activa o engadido da \"Vista náutica\"</string>
+    <string name="activate_seamarks_plugin">Activa o plugin da \"Vista náutica\"</string>
     <string name="other_menu_group">Outros</string>
     <string name="poi_context_menu_modify_osm_change">Modificar mudanza do OSM</string>
     <string name="number_of_contributors">Número de colaboradores</string>
@@ -2247,8 +2247,8 @@ Lon %2$s</string>
     <string name="shared_string_time">Tempo</string>
     <string name="total_distance">Distancia total</string>
     <string name="routing_attr_height_obstacles_name">Empregar datos de elevación</string>
-    <string name="shared_string_plugin">Engadido</string>
-    <string name="srtm_purchase_header">Merca e instala o engadido de \'Curvas de nivel\' para amosar áreas verticais graduadas.</string>
+    <string name="shared_string_plugin">Plugin</string>
+    <string name="srtm_purchase_header">Merca e instala o plugin de \'Curvas de nivel\' para amosar áreas verticais graduadas.</string>
     <string name="srtm_color_scheme">Esquema de cores</string>
     <string name="routing_attr_allow_private_name">Permiti-lo acceso privado</string>
     <string name="routing_attr_allow_private_description">Permitir acceso ás zonas privadas.</string>
@@ -2495,7 +2495,7 @@ Lon %2$s</string>
     <string name="shared_string_world">Mundo</string>
     <string name="coord_input_save_as_track">Gardar coma pista</string>
     <string name="coord_input_save_as_track_descr">Engadiches %1$s puntos. Insire un nome do ficheiro e preme en \"Gardar\".</string>
-    <string name="get_osmand_live">Obter OsmAnd ao Vivo para desbloqueares tódalas funcionalidades: actualizacións dos mapas diarias cas baixadas ilimitadas, tódolos engadidos de pagamento e de balde, Wikipedia, Wikiviaxes e moito máis.</string>
+    <string name="get_osmand_live">Obter OsmAnd ao Vivo para desbloqueares tódalas funcionalidades: actualizacións dos mapas diarias coas descargas ilimitadas, tódolos plugins de pagamento e de balde, Wikipedia, Wikiviaxes e moito máis.</string>
     <string name="read_wikipedia_offline_description">Obteña unha subscrición do OsmAnd ao Vivo para ler artigos da Wikipedia e Wikiviaxes, sen conexión.</string>
     <string name="purchase_cancelled_dialog_title">Cancelaches a subscrición do OsmAnd ao Vivo</string>
     <string name="osmand_team">Equipa do OsmAnd</string>
@@ -2586,7 +2586,7 @@ Lon %2$s</string>
     <string name="maps_you_need">Mapas que ti precisas</string>
     <string name="popular_destinations">Destinos populares</string>
     <string name="paid_app">Aplicación de pagamento</string>
-    <string name="paid_plugin">Engadido de pagamento</string>
+    <string name="paid_plugin">Plugin de pagamento</string>
     <string name="travel_card_update_descr">Novos datos dispoñíbeis do Wikiviaxes, actualiza para desfrutalos.</string>
     <string name="travel_card_download_descr">Baixa os guieiros de viaxes do Wikiviaxes para ollar artigos sobre os lugares darredor do mundo, sen unha conexión á Internet.</string>
     <string name="update_is_available">Actualización dispoñíbel</string>
@@ -2651,7 +2651,7 @@ Lon %2$s</string>
     <string name="nothing_found_descr">Mudar a procura ou aumentar o seu raio.</string>
     <string name="quick_action_showhide_osmbugs_descr">Un botón que amosa ou agocha as notas do OSM no mapa.</string>
     <string name="hillshade_menu_download_descr">Baixar o mapa de \'Sobreposición de asombreado\' para amosar o asombreado vertical.</string>
-    <string name="hillshade_purchase_header">Instalar o engadido de \'Curvas de nivel\' para amosar as áreas verticais graduadas.</string>
+    <string name="hillshade_purchase_header">Instalar o plugin de \'Curvas de nivel\' para amosar as áreas verticais graduadas.</string>
     <string name="hide_from_zoom_level">Agochar a partir do nivel de achegamento</string>
     <string name="srtm_menu_download_descr">Baixar o mapa de \'Curvas de nivel\' para empregalas nesta rexión.</string>
     <string name="show_from_zoom_level">Amosar dende o nivel de achegamento</string>
@@ -2695,7 +2695,7 @@ Lon %2$s</string>
     <string name="lang_lo">Laosiano</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Cor por símbolo do sendeirismo OSMC</string>
     <string name="shared_string_gpx_files">Ficheiros GPX</string>
-    <string name="plugin_ski_descr">Este engadido para o OsmAnd pon ó teu acade detalles sobre pistas do esquí de baixada, de travesía, roteiros do esquí alpino, teleféricos e refachos a nivel mundial. As rotas e pistas amósanse polo código de cor en función da súa dificuldade e representados cun estilo do mapa especial «Inverno» que o asemella a unha paisaxe invernal nevada. 
+    <string name="plugin_ski_descr">Este plugin para o OsmAnd pon ó teu acade detalles sobre pistas do esquí de baixada, de travesía, roteiros do esquí alpino, teleféricos e refachos a nivel mundial. As rotas e pistas amósanse polo código de cor en función da súa dificuldade e representados cun estilo do mapa especial «Inverno» que o asemella a unha paisaxe invernal nevada. 
 \n 
 \nActivando esta vista, muda o estilo do mapa a «Inverno e esquí», amosando as características do terreo en condicións invernais. Esta vista pódese revertir desactivando de novo eiquí ou mudando o «Estilo do mapa» en «Configurar mapa» cando o desexes.</string>
     <string name="navigate_point_olc">Código de Localización Aberto (OLC)</string>
@@ -2712,9 +2712,9 @@ Lon %2$s</string>
     <string name="route_is_too_long_v2">Para longas distancias: Engade destinos intermedios se non se atopan camiños dentro dos 10 minutos.</string>
     <string name="osmand_extended_description_part1">O OsmAnd (OSM Automated Navigation Directions, e no galego, Guía da Navegación Automatizada do OSM) é unha aplicación de mapa e navegación co acceso ós datos ceibes ou libres do OSM, en todo o mundo e de alta calidade. 
 \n 
-\n Desfruta do navegador por voz e óptico, a visualización dos PDI (puntos de interese), a creación e xestión das pistas GPX, emprega a información de visualización e a altitude das curvas do nivel (mediante un engadido), escolle entre modos de automóbil, bicicleta ou peón, edita no OSM e moito máis.</string>
-    <string name="osmand_extended_description_part4">Esquí
-\nO engadido do OsmAnd para o estilo do mapa de inverno, amosa pistas co nivel de complexidade e algunha información adicional, coma a localización dos elevadoiros e outras instalacións invernais.</string>
+\n Desfruta do navegador por voz e óptico, a visualización dos PDI (puntos de interese), a creación e xestión das pistas GPX, emprega a información de visualización e a altitude das curvas do nivel (mediante un plugin), escolle entre modos de automóbil, bicicleta ou peón, edita no OSM e moito máis.</string>
+    <string name="osmand_extended_description_part4">Esquí 
+\nO plugin do OsmAnd para o estilo do mapa de inverno, amosa pistas co nivel de complexidade e algunha información adicional, coma a localización dos elevadoiros e outras instalacións invernais.</string>
     <string name="osmand_extended_description_part8">O OsmAnd é activamente software de código aberto desenvolvido. Todo o mundo pode contribuír á aplicación ó informar de erros, mellorando traducións ou desenvolvendo funcións novas. Ademais o proxecto confía en contribucións financeiras para financia-lo desenvolvemento e probando de funcións novas. 
 \n Cobertura do mapa e calidade: 
 \n • Europa Occidental: **** 
@@ -2813,10 +2813,10 @@ Lon %2$s</string>
 \n</string>
     <string name="osmand_extended_description_part5">Ciclismo 
 \n• Atopa roteiros ciclistas no mapa 
-\n• A navegación GPS no modo bicicleta, constrúe a rota empregando roteiros ciclistas 
-\n• Olle a velocidade e altitude 
-\n• A opción da gravación GPX, permite grava-lo viaxe e partillalo ou compartilo 
-\n• Mediante un engadido adicional, podes activa-las curvas do nivel e o asombreado dos outeiros ou colinas</string>
+\n• A navegación GPS no modo bicicleta, constrúe a ruta empregando roteiros ciclistas 
+\n• Olla a velocidade e altitude 
+\n• A opción da gravación GPX, permite gravar o viaxe e partillalo ou compartilo 
+\n• Mediante un plugin adicional, podes activar as curvas de nivel e o asombreado dos outeiros ou colinas</string>
     <string name="osmand_extended_description_part6">Camiñar, sendeirismo, turismo de cidade 
 \n • O mapa amosa as rotas para camiñar e de sendeirismo 
 \n • Wikipedia na lingua de preferencia, pode dicir moito durante unha visita turística 
@@ -2869,7 +2869,7 @@ Lon %2$s</string>
 \n • (Opcional) Paraxes do transporte público (autobús, tranvía, tren) incluíndo nomes de liñas 
 \n • (Opcional) Grava a viaxe de xeito local nun ficheiro GPX ou con un servizo en liña 
 \n • (Opcional) Amosa a velocidade e altitude 
-\n • Activa a visualización das curvas do nivel e o asombreado dos outeiros ou colinas (mediante un engadido adicional)</string>
+\n • Activa a visualización das curvas do nivel e o asombreado dos outeiros ou colinas (mediante un plugin adicional)</string>
     <string name="osmand_plus_extended_description_part7">"Contribúe de xeito directo co OSM 
 \n
 \n • Informa sobre problemas dos datos no mapa 
@@ -3322,7 +3322,7 @@ Lon %2$s</string>
     <string name="appearance">Aparencia</string>
     <string name="map_look_descr">Aparencia do mapa</string>
     <string name="map_look">Aparencia do mapa</string>
-    <string name="list_of_installed_plugins">Engadidos instalados</string>
+    <string name="list_of_installed_plugins">Plugins instalados</string>
     <string name="configure_navigation">Configurar a navegación</string>
     <string name="general_settings_profile_descr">Tema da aplicación, unidades, rexión</string>
     <string name="configure_profile">Configurar o perfil</string>
@@ -3350,7 +3350,7 @@ Lon %2$s</string>
     <string name="application_profile_changed">Perfil da aplicación mudado a \"%s\"</string>
     <string name="logcat_buffer">Búfer de Logcat</string>
     <string name="shared_string_by_default">Predefinido</string>
-    <string name="plugins_settings">Axustes do engadido</string>
+    <string name="plugins_settings">Axustes do plugin</string>
     <string name="download_detaile_map">Baixa o mapa detallado de %s, para poder ollar esta área.</string>
     <string name="download_detailed_map">Baixa o mapa detallado de %s para ollar esta área.</string>
     <string name="change_data_storage_full_description">Mover os ficheiros de datos do OsmAnd ó novo destino\? 
@@ -3466,11 +3466,11 @@ Lon %2$s</string>
     <string name="dialogs_and_notifications_descr">Controla as xanelas emerxentes, diálogos e notificacións.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Redes de nós</string>
     <string name="suggested_maps">Mapas suxeridos</string>
-    <string name="suggested_maps_descr">Estes mapas son requiridos para o engadido.</string>
+    <string name="suggested_maps_descr">Estes mapas son requiridos para o plugin.</string>
     <string name="added_profiles">Perfís engadidos</string>
-    <string name="added_profiles_descr">Perfís engadidos polo complemento</string>
+    <string name="added_profiles_descr">Perfís engadidos polo plugin</string>
     <string name="shared_string_turn_off">Apagar</string>
-    <string name="new_plugin_added">Novo engadido agregado</string>
+    <string name="new_plugin_added">Novo plugin engadido</string>
     <string name="join_segments">Unir segmentos</string>
     <string name="add_new_profile_q">Engadir o novo perfil \'%1$s\'\?</string>
     <string name="save_heading">Incluír encabezamento</string>
@@ -3558,7 +3558,7 @@ Lon %2$s</string>
     <string name="shared_string_available">Dispoñíbel</string>
     <string name="add_custom_category">Engadir categoría personalizada</string>
     <string name="rendering_attr_streetLightingNight_name">Amosar só á noite</string>
-    <string name="plugin_prefs_reset_successful">Todos os axustes do engadido restabelecéronse ó estado por defecto.</string>
+    <string name="plugin_prefs_reset_successful">Todos os axustes do plugin restabelecéronse ó estado por defecto.</string>
     <string name="profile_prefs_reset_successful">Todos os axustes do perfil restabelecéronse ó estado por defecto.</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Solpor ás %1$s</string>
@@ -3573,7 +3573,7 @@ Lon %2$s</string>
 \n 
 \n • Engadíronse os números de saída na navegación 
 \n 
-\n • Redeseñáronse os axustes dos engadidos 
+\n • Redeseñáronse os axustes dos plugins 
 \n 
 \n • Redeseñouse a lapela de axustes, para un acceso rápido a todos os perfís 
 \n 
@@ -3599,10 +3599,10 @@ Lon %2$s</string>
     <string name="sort_by_category">Ordenar por categoría</string>
     <string name="please_provide_profile_name_message">Fornece un nome para o perfil</string>
     <string name="open_settings">Abrir os axustes</string>
-    <string name="plugin_disabled">Engadido desactivado</string>
-    <string name="plugin_disabled_descr">Este engadido é unha aplicación independente, terás que eliminalo por separado se non pensas seguir empregándoo.
-\n
-\nO engadido ficará no dispositivo após desinstalar o OsmAnd.</string>
+    <string name="plugin_disabled">Plugin desactivado</string>
+    <string name="plugin_disabled_descr">Este plugin é unha aplicación independente, terás que eliminalo por separado se non pensas seguir empregándoo. 
+\n 
+\nO plugin ficará no dispositivo após desinstalar o OsmAnd.</string>
     <string name="shared_string_menu">Menú</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Enrutamento</string>
@@ -3642,11 +3642,11 @@ Lon %2$s</string>
     <string name="restore_all_profile_settings">Restabelecer todos os axustes de perfil\?</string>
     <string name="saving_new_profile">Gardando novo perfil</string>
     <string name="profile_backup_failed">Non foi posíbel facer unha copia de seguranza do perfil.</string>
-    <string name="developer_plugin">Engadido do desenvolvedor</string>
+    <string name="developer_plugin">Plugin do desenvolvedor</string>
     <string name="replace_point_descr">Substitúe outro punto por este</string>
     <string name="app_mode_ski_touring">Esquí de ruta</string>
     <string name="app_mode_ski_snowmobile">Moto de neve</string>
-    <string name="custom_osmand_plugin">Engadido personalizado do OsmAnd</string>
+    <string name="custom_osmand_plugin">Plugin personalizado do OsmAnd</string>
     <string name="shared_string_items">Elementos</string>
     <string name="changes_applied_to_profile">Modificacións aplicadas ó perfil %1$s.</string>
     <string name="settings_item_read_error">Non foi posíbel ler %1$s.</string>
@@ -3657,4 +3657,39 @@ Lon %2$s</string>
     <string name="shared_string_language">Lingua</string>
     <string name="shared_string_all_languages">Todas as linguas</string>
     <string name="wiki_menu_download_descr">Precísanse mapas adicionais para ollar os PDI da Wikipedia no mapa.</string>
+    <string name="main_actions_descr">As accións principais conteñen só 4 botóns.</string>
+    <string name="main_actions">Accións principais</string>
+    <string name="additional_actions_descr">Podes acceder a esas accións premendo no botón de \"Accións\".</string>
+    <string name="move_inside_category">Só podes mover obxectos dentro desta categoría.</string>
+    <string name="select_wikipedia_article_langs">Escolle as linguas nas que os artigos da Wikipedia aparecerán no mapa. Podes trocar entre todos as linguas dispoñíbeis en canto leas o artigo.</string>
+    <string name="some_articles_may_not_available_in_lang">Algúns artigos da Wikipedia poden non estar dispoñíbeis na túa lingua.</string>
+    <string name="lang_zhyue">Cantonés</string>
+    <string name="lang_zhminnan">Min do sur</string>
+    <string name="lang_yo">Ioruba</string>
+    <string name="lang_war">Samareño</string>
+    <string name="lang_uz">Uzbeco</string>
+    <string name="lang_ur">Urdú</string>
+    <string name="lang_tt">Tátaro</string>
+    <string name="lang_tg">Taxico</string>
+    <string name="lang_sco">Escocés</string>
+    <string name="lang_scn">Siciliano</string>
+    <string name="lang_pnb">Punjabi</string>
+    <string name="lang_ne">Nepalés</string>
+    <string name="lang_nap">Napolitano</string>
+    <string name="lang_my">Birmano</string>
+    <string name="lang_mn">Mongol</string>
+    <string name="lang_min">Minangkabau</string>
+    <string name="lang_mg">Malgaxe</string>
+    <string name="lang_ky">Quirguiz</string>
+    <string name="lang_kk">Casaco</string>
+    <string name="lang_jv">Xavanés</string>
+    <string name="lang_gu">Guxarati</string>
+    <string name="lang_cv">Chuvaxo</string>
+    <string name="lang_ce">Checheno</string>
+    <string name="lang_bar">Bávaro</string>
+    <string name="lang_ba">Basquir</string>
+    <string name="lang_an">Aragonés</string>
+    <string name="lang_lmo">Lombardo</string>
+    <string name="custom_color">Cor personalizada</string>
+    <string name="extra_maps_menu_group">Mapas adicionais</string>
 </resources>

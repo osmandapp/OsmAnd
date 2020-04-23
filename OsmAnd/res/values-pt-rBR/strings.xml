@@ -3656,4 +3656,5 @@ Pôr do Sol: %2$s</string>
     <string name="lang_an">Aragonês</string>
     <string name="lang_lmo">Lombardo</string>
     <string name="custom_color">Cor customizada</string>
+    <string name="extra_maps_menu_group">Mapas extras</string>
 </resources>
