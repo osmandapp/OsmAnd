@@ -470,7 +470,7 @@ public class DownloadResources extends DownloadResourceGroup {
 					mainGrp.addGroup(flatFiles);
 				}
 			}
-			DownloadResourceGroup subRegions = new DownloadResourceGroup(mainGrp, DownloadResourceGroupType.SUBREGIONS);
+			DownloadResourceGroup subRegions = new DownloadResourceGroup(mainGrp, DownloadResourceGroupType.EXTRA_MAPS);
 			mainGrp.addGroup(subRegions);
 			// add to processing queue
 			for (WorldRegion rg : subregions) {

@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,9 +16,11 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -74,7 +77,15 @@ public class PluginActivity extends OsmandActionBarActivity  implements Download
 		TextView descriptionView = (TextView) findViewById(R.id.plugin_description);
 		descriptionView.setText(plugin.getDescription());
 
-		Button settingsButton = (Button)findViewById(R.id.plugin_settings);
+		boolean light = getMyApplication().getSettings().isLightContent();
+		int linkTextColor = ContextCompat.getColor(this,
+				light ? R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);
+
+		descriptionView.setLinkTextColor(linkTextColor);
+		descriptionView.setMovementMethod(LinkMovementMethod.getInstance());
+		AndroidUtils.removeLinkUnderline(descriptionView);
+
+		Button settingsButton = (Button) findViewById(R.id.plugin_settings);
 		settingsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

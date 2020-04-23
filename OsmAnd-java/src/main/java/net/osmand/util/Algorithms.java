@@ -49,7 +49,7 @@ public class Algorithms {
 		return map == null || map.size() == 0;
 	}
 
-	public static boolean isEmpty(String s) {
+	public static boolean isEmpty(CharSequence s) {
 		return s == null || s.length() == 0;
 	}
 

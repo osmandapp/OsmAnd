@@ -981,8 +981,9 @@ public class SettingsHelper {
 
 		@Override
 		void readItemsFromJson(@NonNull JSONObject json) throws IllegalArgumentException {
+			JSONObject prefsJson = json.optJSONObject("prefs");
 			try {
-				JSONObject drawerLogoJson = json.has("drawerLogo") ? json.getJSONObject("drawerLogo") : null;
+				JSONObject drawerLogoJson = prefsJson.optJSONObject("drawer_logo");
 				if (drawerLogoJson != null) {
 					for (Iterator<String> it = drawerLogoJson.keys(); it.hasNext(); ) {
 						String localeKey = it.next();

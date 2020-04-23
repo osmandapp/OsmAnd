@@ -3619,4 +3619,5 @@ représentant la zone : %1$s x %2$s</string>
     <string name="lang_scn">Sicilien</string>
     <string name="some_articles_may_not_available_in_lang">Certains articles Wikipédia peuvent ne pas être disponibles dans votre langue.</string>
     <string name="custom_color">Couleur personnalisée</string>
+    <string name="extra_maps_menu_group">Cartes supplémentaires</string>
 </resources>
