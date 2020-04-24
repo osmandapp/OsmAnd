@@ -8,7 +8,16 @@ public class TransportSchedule {
 	public TIntArrayList tripIntervals = new TIntArrayList();
 	public TIntArrayList avgStopIntervals = new TIntArrayList();
 	public TIntArrayList avgWaitIntervals = new TIntArrayList();
-	
+
+	public TransportSchedule() {
+	}
+
+	public TransportSchedule(TIntArrayList tripIntervals, TIntArrayList avgStopIntervals, TIntArrayList avgWaitIntervals) {
+		this.tripIntervals = tripIntervals;
+		this.avgStopIntervals = avgStopIntervals;
+		this.avgWaitIntervals = avgWaitIntervals;
+	}
+
 	public int[] getTripIntervals() {
 		return tripIntervals.toArray();
 	}

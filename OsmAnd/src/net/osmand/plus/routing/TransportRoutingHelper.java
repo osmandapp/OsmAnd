@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Location;
+import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
 import net.osmand.ValueHolder;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -17,10 +18,12 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routing.RouteCalculationParams.RouteCalculationResultListener;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
 import net.osmand.router.GeneralRouter;
+
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.TransportRoutePlanner;
@@ -28,6 +31,8 @@ import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.router.TransportRoutePlanner.TransportRoutingContext;
 import net.osmand.router.TransportRoutingConfiguration;
+import net.osmand.router.NativeTransportRoutingResult;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.IOException;
@@ -211,7 +216,8 @@ public class TransportRoutingHelper {
 			final Thread prevRunningJob = currentRunningJob;
 			app.getSettings().LAST_ROUTE_APPLICATION_MODE.set(routingHelper.getAppMode());
 			RouteRecalculationThread newThread =
-					new RouteRecalculationThread("Calculating public transport route", params);
+					new RouteRecalculationThread("Calculating public transport route", params,
+							app.getSettings().SAFE_MODE.get() ? null : NativeOsmandLibrary.getLoadedLibrary());
 			currentRunningJob = newThread;
 			startProgress(params);
 			updateProgress(params);
@@ -439,10 +445,12 @@ public class TransportRoutingHelper {
 		private final Queue<WalkingRouteSegment> walkingSegmentsToCalculate = new ConcurrentLinkedQueue<>();
 		private Map<Pair<TransportRouteResultSegment, TransportRouteResultSegment>, RouteCalculationResult> walkingRouteSegments = new HashMap<>();
 		private boolean walkingSegmentsCalculated;
+		private NativeLibrary lib;
 
-		public RouteRecalculationThread(String name, TransportRouteCalculationParams params) {
+		public RouteRecalculationThread(String name, TransportRouteCalculationParams params, NativeLibrary library) {
 			super(name);
 			this.params = params;
+			this.lib = library;
 			if (params.calculationProgress == null) {
 				params.calculationProgress = new RouteCalculationProgress();
 			}
@@ -452,7 +460,16 @@ public class TransportRoutingHelper {
 			params.calculationProgress.isCancelled = true;
 		}
 
-		private List<TransportRouteResult> calculateRouteImpl(TransportRouteCalculationParams params) throws IOException, InterruptedException {
+
+		/**
+		 * TODO Check if native lib available and calculate route there.
+		 * @param params
+		 * @return
+		 * @throws IOException
+		 * @throws InterruptedException
+		 */
+		private List<TransportRouteResult> calculateRouteImpl(TransportRouteCalculationParams params, NativeLibrary library)
+				throws IOException, InterruptedException {
 			RoutingConfiguration.Builder config = params.ctx.getRoutingConfigForMode(params.mode);
 			BinaryMapIndexReader[] files = params.ctx.getResourceManager().getTransportRoutingMapFiles();
 			params.params.clear();
@@ -475,9 +492,20 @@ public class TransportRoutingHelper {
 			GeneralRouter prouter = config.getRouter(params.mode.getRoutingProfile());
 			TransportRoutingConfiguration cfg = new TransportRoutingConfiguration(prouter, params.params);
 			TransportRoutePlanner planner = new TransportRoutePlanner();
-			TransportRoutingContext ctx = new TransportRoutingContext(cfg, files);
+			TransportRoutingContext ctx = new TransportRoutingContext(cfg, library, files);
 			ctx.calculationProgress =  params.calculationProgress;
-			return planner.buildRoute(ctx, params.start, params.end);
+			if (ctx.library != null) {
+				NativeTransportRoutingResult[] nativeRes = library.runNativePTRouting(
+						MapUtils.get31TileNumberX(params.start.getLongitude()),
+						MapUtils.get31TileNumberY(params.start.getLatitude()),
+						MapUtils.get31TileNumberX(params.end.getLongitude()),
+						MapUtils.get31TileNumberY(params.end.getLatitude()),
+						cfg, ctx.calculationProgress);
+				List<TransportRouteResult> res = TransportRoutePlanner.convertToTransportRoutingResult(nativeRes, cfg);
+				return res;
+			} else {
+				return planner.buildRoute(ctx, params.start, params.end);
+			}
 		}
 
 		@Nullable
@@ -615,7 +643,7 @@ public class TransportRoutingHelper {
 			List<TransportRouteResult> res = null;
 			String error = null;
 			try {
-				res = calculateRouteImpl(params);
+				res = calculateRouteImpl(params, lib);
 				if (res != null && !params.calculationProgress.isCancelled) {
 					calculateWalkingRoutes(res);
 				}

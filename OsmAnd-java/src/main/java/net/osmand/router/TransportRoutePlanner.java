@@ -15,6 +15,8 @@ import gnu.trove.iterator.TIntIterator;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
+
+import net.osmand.NativeLibrary;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.LatLon;
@@ -22,6 +24,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportSchedule;
 import net.osmand.data.TransportStop;
+import net.osmand.data.TransportStopExit;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
 import net.osmand.util.MapUtils;
@@ -36,7 +39,7 @@ public class TransportRoutePlanner {
 		ctx.startCalcTime = System.currentTimeMillis();
 		List<TransportRouteSegment> startStops = ctx.getTransportStops(start);
 		List<TransportRouteSegment> endStops = ctx.getTransportStops(end);
-		
+
 		TLongObjectHashMap<TransportRouteSegment> endSegments = new TLongObjectHashMap<TransportRouteSegment>();
 		for(TransportRouteSegment s : endStops) {
 			endSegments.put(s.getId(), s);
@@ -50,6 +53,7 @@ public class TransportRoutePlanner {
 			r.distFromStart = r.walkDist / ctx.cfg.walkSpeed;
 			queue.add(r);
 		}
+		
 		double finishTime = ctx.cfg.maxRouteTime;
 		double maxTravelTimeCmpToWalk = MapUtils.getDistance(start, end) / ctx.cfg.walkSpeed - ctx.cfg.changeTime / 2;
 		List<TransportRouteSegment> results = new ArrayList<TransportRouteSegment>();
@@ -179,7 +183,6 @@ public class TransportRoutePlanner {
 			updateCalculationProgress(ctx, queue);
 			
 		}
-		
 		return prepareResults(ctx, results);
 	}
 	
@@ -447,9 +450,25 @@ public class TransportRoutePlanner {
 		public TransportRouteResult(TransportRoutingContext ctx) {
 			cfg = ctx.cfg;
 		}
-		
+
+		public TransportRouteResult(TransportRoutingConfiguration cfg) {
+			this.cfg = cfg;
+		}
+
 		public List<TransportRouteResultSegment> getSegments() {
 			return segments;
+		}
+
+		public void setFinishWalkDist(double finishWalkDist) {
+			this.finishWalkDist = finishWalkDist;
+		}
+
+		public void setRouteTime(double routeTime) {
+			this.routeTime = routeTime;
+		}
+
+		public void addSegment(TransportRouteResultSegment seg) {
+			segments.add(seg);
 		}
 
 		public double getWalkDist() {
@@ -678,7 +697,7 @@ public class TransportRoutePlanner {
 	}
 	
 	public static class TransportRoutingContext {
-		
+		public NativeLibrary library;
 		public RouteCalculationProgress calculationProgress;
 		public TLongObjectHashMap<TransportRouteSegment> visitedSegments = new TLongObjectHashMap<TransportRouteSegment>();
 		public TransportRoutingConfiguration cfg;
@@ -705,11 +724,12 @@ public class TransportRoutePlanner {
 		
 		
 		
-		public TransportRoutingContext(TransportRoutingConfiguration cfg, BinaryMapIndexReader... readers) {
+		public TransportRoutingContext(TransportRoutingConfiguration cfg, NativeLibrary library, BinaryMapIndexReader... readers) {
 			this.cfg = cfg;
 			walkRadiusIn31 = (int) (cfg.walkRadius / MapUtils.getTileDistanceWidth(31));
 			walkChangeRadiusIn31 = (int) (cfg.walkChangeRadius / MapUtils.getTileDistanceWidth(31));
 			quadTree = new TLongObjectHashMap<List<TransportRouteSegment>>();
+			this.library = library;
 			for (BinaryMapIndexReader r : readers) {
 				routeMap.put(r, new TIntObjectHashMap<TransportRoute>());
 			}
@@ -943,9 +963,137 @@ public class TransportRoutePlanner {
 				}
 			}
 		}
+	}
 
 
+	//cache for converted TransportRoutes:
+	private static TLongObjectHashMap<TransportRoute> convertedRoutesCache;
+	private static TLongObjectHashMap<TransportStop> convertedStopsCache;
 
+	public static List<TransportRouteResult> convertToTransportRoutingResult(NativeTransportRoutingResult[] res,
+	                                                                         TransportRoutingConfiguration cfg) {
+		List<TransportRouteResult> convertedRes = new ArrayList<TransportRouteResult>();
+		for (NativeTransportRoutingResult ntrr : res) {
+			TransportRouteResult trr = new TransportRouteResult(cfg);
+			trr.setFinishWalkDist(ntrr.finishWalkDist);
+			trr.setRouteTime(ntrr.routeTime);
+
+			for (NativeTransportRouteResultSegment ntrs : ntrr.segments) {
+				TransportRouteResultSegment trs = new TransportRouteResultSegment();
+				trs.route = convertTransportRoute(ntrs.route);
+				trs.walkTime = ntrs.walkTime;
+				trs.travelDistApproximate = ntrs.travelDistApproximate;
+				trs.travelTime = ntrs.travelTime;
+				trs.start = ntrs.start;
+				trs.end = ntrs.end;
+				trs.walkDist = ntrs.walkDist;
+				trs.depTime = ntrs.depTime;
+
+				trr.addSegment(trs);
+			}
+			convertedRes.add(trr);
+		}
+		convertedStopsCache.clear();
+		convertedRoutesCache.clear();
+		return convertedRes;
+	}
+
+	private static TransportRoute convertTransportRoute(NativeTransportRoute nr) {
+		TransportRoute r = new TransportRoute();
+		r.setId(nr.id);
+		r.setLocation(nr.routeLat, nr.routeLon);
+		r.setName(nr.name);
+		r.setEnName(nr.enName);
+		if (nr.namesLng.length > 0 && nr.namesLng.length == nr.namesNames.length) {
+			for (int i = 0; i < nr.namesLng.length; i++) {
+				r.setName(nr.namesLng[i], nr.namesNames[i]);
+			}
+		}
+		r.setFileOffset(nr.fileOffset);
+		r.setForwardStops(convertTransportStops(nr.forwardStops));
+		r.setRef(nr.ref);
+		r.setOperator(nr.routeOperator);
+		r.setType(nr.type);
+		r.setDist(nr.dist);
+		r.setColor(nr.color);
+
+		if (nr.intervals != null && nr.intervals.length > 0 && nr.avgStopIntervals !=null &&  nr.avgStopIntervals.length > 0 && nr.avgWaitIntervals != null && nr.avgWaitIntervals.length > 0) {
+			r.setSchedule(new TransportSchedule(new TIntArrayList(nr.intervals), new TIntArrayList(nr.avgStopIntervals), new TIntArrayList(nr.avgWaitIntervals)));
+		}
+
+		for (int i = 0; i < nr.waysIds.length; i++) {
+			List<Node> wnodes = new ArrayList<>();
+			for (int j = 0; j < nr.waysNodesLats[i].length; j++) {
+				wnodes.add(new Node(nr.waysNodesLats[i][j], nr.waysNodesLons[i][j], -1));
+			}
+			r.addWay(new Way(nr.waysIds[i], wnodes));
+		}
+
+		if (convertedRoutesCache == null) {
+			convertedRoutesCache = new TLongObjectHashMap<>();
+		}
+		if (convertedRoutesCache.get(r.getId()) == null) {
+			convertedRoutesCache.put(r.getId(), r);
+		}
+		return r;
+	}
+
+	private static List<TransportStop> convertTransportStops(NativeTransportStop[] nstops) {
+		List<TransportStop> stops = new ArrayList<>();
+		for (NativeTransportStop ns : nstops) {
+			if (convertedStopsCache != null && convertedStopsCache.get(ns.id) != null) {
+				stops.add(convertedStopsCache.get(ns.id));
+				continue;
+			}
+			TransportStop s = new TransportStop();
+			s.setId(ns.id);
+			s.setLocation(ns.stopLat, ns.stopLon);
+			s.setName(ns.name);
+			s.setEnName(ns.enName);
+			if (ns.namesLng.length > 0 && ns.namesLng.length == ns.namesNames.length) {
+				for (int i = 0; i < ns.namesLng.length; i++) {
+					s.setName(ns.namesLng[i], ns.namesNames[i]);
+				}
+			}
+			s.setFileOffset(ns.fileOffset);
+			s.setReferencesToRoutes(ns.referencesToRoutes);
+			s.setDeletedRoutesIds(ns.deletedRoutesIds);
+			s.setRoutesIds(ns.routesIds);
+			s.distance = ns.distance;
+			s.x31 = ns.x31;
+			s.y31 = ns.y31;
+//			List<TransportRoute> routes1 = new ArrayList<>();
+			//cache routes to avoid circular conversion and just search them by id
+//			for (int i = 0; i < ns.routes.length; i++) {
+//				if (s.getRoutesIds().length == ns.routes.length && convertedRoutesCache != null
+//						&& convertedRoutesCache.get(ns.routesIds[i]) != null) {
+//					s.addRoute(convertedRoutesCache.get(ns.routesIds[i]));
+//				} else {
+//					s.addRoute(convertTransportRoute(ns.routes[i]));
+//				}
+//			}
+
+			if (ns.pTStopExit_refs != null && ns.pTStopExit_refs.length > 0) {
+				for (int i = 0; i < ns.pTStopExit_refs.length; i++) {
+					s.addExit(new TransportStopExit(ns.pTStopExit_x31s[i],
+							ns.pTStopExit_y31s[i], ns.pTStopExit_refs[i]));
+				}
+			}
+
+			if (ns.referenceToRoutesKeys != null && ns.referenceToRoutesKeys.length > 0) {
+				for (int i = 0; i < ns.referenceToRoutesKeys.length; i++) {
+					s.putReferencesToRoutes(ns.referenceToRoutesKeys[i], ns.referenceToRoutesVals[i]);
+				}
+			}
+			if (convertedStopsCache == null) {
+				convertedStopsCache = new TLongObjectHashMap<>();
+			}
+			if (convertedStopsCache.get(s.getId()) == null) {
+				convertedStopsCache.put(s.getId(), s);
+			}
+			stops.add(s);
+		}
+		return stops;
 	}
 
 }

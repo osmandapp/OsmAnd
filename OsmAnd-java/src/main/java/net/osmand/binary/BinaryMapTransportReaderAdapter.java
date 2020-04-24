@@ -465,8 +465,6 @@ public class BinaryMapTransportReaderAdapter {
 			s.setName(stringTable.get(e.getKey().charAt(0)), stringTable.get(e.getValue().charAt(0)));
 		}
 	}
-
-	
 	
 	private TransportStop readTransportRouteStop(int[] dx, int[] dy, long did, TIntObjectHashMap<String> stringTable, 
 			int filePointer) throws IOException {
@@ -637,6 +635,4 @@ public class BinaryMapTransportReaderAdapter {
 			}
 		}
 	}
-
-
 }
