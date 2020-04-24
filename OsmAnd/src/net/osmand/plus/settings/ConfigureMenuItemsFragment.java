@@ -127,7 +127,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
-		nightMode = !app.getSettings().isLightContent();
+		nightMode = app.getSettings().OSMAND_THEME.getModeValue(appMode) == OsmandSettings.OSMAND_DARK_THEME;
 		mInflater = UiUtilities.getInflater(app, nightMode);
 		if (savedInstanceState != null) {
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
@@ -198,7 +198,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		appbar.addView(toolbar);
 		RecyclerView recyclerView = root.findViewById(R.id.profiles_list);
 		recyclerView.setPadding(0, 0, 0, (int) app.getResources().getDimension(R.dimen.dialog_button_ex_min_width));
-		rearrangeAdapter = new RearrangeMenuItemsAdapter(app, getAdapterItems());
+		rearrangeAdapter = new RearrangeMenuItemsAdapter(app, getAdapterItems(), nightMode);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
 		final ItemTouchHelper touchHelper = new ItemTouchHelper(new ReorderItemTouchHelperCallback(rearrangeAdapter));
 		touchHelper.attachToRecyclerView(recyclerView);

@@ -53,11 +53,11 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 
 
 	public RearrangeMenuItemsAdapter(OsmandApplication app,
-									 List<RearrangeMenuAdapterItem> items) {
+									 List<RearrangeMenuAdapterItem> items, boolean nightMode) {
 		this.app = app;
 		this.items = items;
 		uiUtilities = app.getUIUtilities();
-		nightMode = !app.getSettings().isLightContent();
+		this.nightMode = nightMode;
 		activeColorRes = nightMode
 				? R.color.active_color_primary_dark
 				: R.color.active_color_primary_light;

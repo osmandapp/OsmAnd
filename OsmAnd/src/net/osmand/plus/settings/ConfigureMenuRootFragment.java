@@ -30,6 +30,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -83,7 +84,7 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
 		}
 		app = requireMyApplication();
-		nightMode = !app.getSettings().isLightContent();
+		nightMode = app.getSettings().OSMAND_THEME.getModeValue(appMode) == OsmandSettings.OSMAND_DARK_THEME;
 		mInflater = UiUtilities.getInflater(app, nightMode);
 	}
 
