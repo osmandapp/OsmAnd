@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
+import net.osmand.JsonUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.ConnectedApp;
 import net.osmand.data.LocationPoint;
@@ -253,7 +254,15 @@ public class OsmAndAppCustomization {
 
 	@Nullable
 	public String getNavDrawerLogoUrl() {
-		return app.getSettings().NAV_DRAWER_URL.get();
+		String url = app.getSettings().NAV_DRAWER_URL.get();
+		try {
+			JSONObject json = new JSONObject(url);
+			Map<String, String> localizedMap = JsonUtils.getLocalizedMapFromJson(json);
+			url = JsonUtils.getLocalizedResFromMap(app, localizedMap, url);
+		} catch (JSONException e) {
+			LOG.error(e);
+		}
+		return url;
 	}
 
 	public boolean setNavDrawerLogo(String uri, @Nullable String packageName, @Nullable String intent) {

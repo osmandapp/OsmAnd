@@ -64,7 +64,6 @@ import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
-import org.json.JSONObject;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -80,7 +79,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.zip.ZipInputStream;
 
 import static android.app.Activity.RESULT_OK;
@@ -850,20 +848,7 @@ public class ImportHelper {
 
 				for (SettingsItem item : items) {
 					if (item instanceof ProfileSettingsItem) {
-						ProfileSettingsItem profileItem = (ProfileSettingsItem) item;
-						Map<String, String> drawerLogoNames = profileItem.getDrawerLogoParams();
-						if (!Algorithms.isEmpty(drawerLogoNames)) {
-							String pluginResDir = IndexConstants.PLUGINS_DIR + plugin.getId() + "/" + plugin.getPluginResDir().getName();
-							for (Map.Entry<String, String> entry : drawerLogoNames.entrySet()) {
-								String value = entry.getValue();
-								if (value.startsWith("@") || value.startsWith("/")) {
-									value = value.substring(1);
-								}
-								entry.setValue(pluginResDir + "/" + value);
-							}
-							String json = new JSONObject(drawerLogoNames).toString();
-							app.getSettings().NAV_DRAWER_LOGO.setModeValue(profileItem.getAppMode(), json);
-						}
+						((ProfileSettingsItem) item).applyAdditionalPrefs();
 					}
 				}
 				if (activity != null) {

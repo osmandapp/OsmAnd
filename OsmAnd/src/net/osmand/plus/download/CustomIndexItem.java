@@ -50,6 +50,7 @@ public class CustomIndexItem extends IndexItem {
 		DownloadEntry entry = super.createDownloadEntry(ctx);
 		if (entry != null) {
 			entry.urlToDownload = downloadUrl;
+			entry.zipStream = fileName.endsWith(".zip");
 		}
 		return entry;
 	}
