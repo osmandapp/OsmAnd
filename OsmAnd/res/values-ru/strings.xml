@@ -3662,4 +3662,5 @@
     <string name="lang_an">Арагонский</string>
     <string name="lang_lmo">Ломбардский</string>
     <string name="extra_maps_menu_group">Дополнительные карты</string>
+    <string name="download_unsupported_action">Неподдерживаемое действие %1$s</string>
 </resources>
