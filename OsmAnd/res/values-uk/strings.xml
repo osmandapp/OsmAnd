@@ -579,7 +579,7 @@
     <string name="shared_string_close">Закрити</string>
     <string name="loading_data">Дані завантажуються…</string>
     <string name="reading_indexes">Зчитування даних…</string>
-    <string name="previous_run_crashed">Помилка у роботі застосунку. Файл часопису знаходиться тут {0}. Будь ласка, напишіть розробнику про помилку (з вкладеним часописним файлом).</string>
+    <string name="previous_run_crashed">Помилка у роботі застосунку. Файл журналу знаходиться тут {0}. Будь ласка, напишіть розробнику про помилку (з вкладеним журнальним файлом).</string>
     <string name="saving_gpx_tracks">Збереження GPX-файлу…</string>
     <string name="finished_task">Закінчено</string>
     <string name="use_online_routing_descr">Використовувати Інтернет для прокладання маршруту.</string>
@@ -1091,7 +1091,7 @@
     <string name="lang_he">Іврит</string>
     <string name="forward">Вперед</string>
     <string name="home">Домівка</string>
-    <string name="live_monitoring_m_descr">Надішліть дані відстеження до вказаної веб-служби, якщо ввімкнено часопис GPX.</string>
+    <string name="live_monitoring_m_descr">Надішліть дані відстеження до вказаної мережевої служби, якщо ввімкнено записування GPX.</string>
     <string name="live_monitoring_m">Мережеве відслідковування (потрібен GPX)</string>
     <string name="live_monitoring_start">Розпочати моніторинг</string>
     <string name="live_monitoring_stop">Зупинити моніторинг</string>
@@ -1305,11 +1305,11 @@
     <string name="rendering_value_car_name">Автівка</string>
     <string name="rendering_value_bicycle_name">Велосипед</string>
     <string name="rendering_value_pedestrian_name">Пішки</string>
-    <string name="record_plugin_description">Цей втулок задіює можливість записувати та зберігати Ваші треки вручну, торкаючись віджету часопису GPX на екрані мапи, або автоматично записувати всі Ваші подорожі у файл GPX. 
+    <string name="record_plugin_description">Цей втулок задіює можливість записувати та зберігати Ваші треки вручну, торкаючись віджету записування GPX на екрані мапи, або автоматично записувати всі Ваші подорожі у файл GPX. 
 \n 
 \nЗаписаними треками можна поділитись з Вашими друзями або іншими учасниками спільноти OSM. Атлети можуть використовувати записані треки для відстежування власних тренувань. Основний розбір треків наявний безпосередньо в OsmAnd, наприклад: час проходження кола, середня швидкість й т.п., звісно, записані треки можна також проаналізувати за допомогою іншого програмного забезпечення.</string>
     <string name="save_track_to_gpx_globally">Писати трек у файл GPX</string>
-    <string name="save_track_to_gpx_globally_descr">Загальний запис розташування до файлу GPX можна ввімкнути або вимкнути кнопкою часопису GPX на екрані з мапою.</string>
+    <string name="save_track_to_gpx_globally_descr">Загальний запис розташування до файлу GPX можна ввімкнути або вимкнути кнопкою запис GPX на екрані з мапою.</string>
     <string name="save_track_interval_globally">Інтервал записування</string>
     <string name="rendering_attr_publicTransportMode_name">Маршрути автобусів, тролейбусів та шатлів</string>
     <string name="record_plugin_name">Запис подорожі</string>
@@ -2019,7 +2019,7 @@
     <string name="save_track_min_distance">Мінімальне зміщення для запису</string>
     <string name="save_track_min_distance_descr">Фільтр: налаштуйте найменшу відстань від точки, коли її можна записувати як нову.</string>
     <string name="save_track_precision">Мінімальна точність запису</string>
-    <string name="save_track_precision_descr">Фільтр: не часописати, якщо ця точність не досягнута.</string>
+    <string name="save_track_precision_descr">Фільтр: не журналювати, якщо ця точність не досягнута.</string>
     <string name="christmas_poi">Різдвяні POI</string>
     <string name="christmas_desc">Напередодні різдвяних і новорічних свят, Ви можете вибрати для відображення POI, пов\'язані з Різдвом: ялинки, ярмарки і т.п.</string>
     <string name="christmas_desc_q">Показати різдвяні POI?</string>
@@ -3014,7 +3014,7 @@
     <string name="run_full_osmand_msg">Ви використовуєте {0} мапу, надану OsmAnd. Хочете запустити повну версію OsmAnd\?</string>
     <string name="routing_attr_avoid_sett_name">Без мостових та бруківки</string>
     <string name="routing_attr_avoid_sett_description">Уникати мостові та бруківку</string>
-    <string name="send_log">Надіслати часопис</string>
+    <string name="send_log">Надіслати журнал</string>
     <string name="files_moved">Переміщено %1$d файлів (%2$s).</string>
     <string name="files_copied">Скопійовано %1$d файлів (%2$s).</string>
     <string name="files_failed">Невдача при копіюванні %1$d файлів (%2$s).</string>
@@ -3423,13 +3423,13 @@
     <string name="import_from_file">Імпорт з файлу</string>
     <string name="import_routing_file">Імпортувати файл маршрутизації</string>
     <string name="import_profile">Імпорт профілю</string>
-    <string name="monitoring_prefs_descr">Навігація, точність часопису</string>
+    <string name="monitoring_prefs_descr">Навігація, точність журналювання</string>
     <string name="multimedia_notes_prefs_descr">Розмір зображення, якість звуку та відео</string>
     <string name="osm_editing_prefs_descr">Логін, пароль, редагування в безмережному режимі</string>
     <string name="accessibility_prefs_descr">Оберіть значок, колір та назву</string>
     <string name="live_monitoring_descr">Дозволяє ділитися поточним місцезнаходженням, використовуючи запис поїздки.</string>
     <string name="live_monitoring">Мережеве відстеження</string>
-    <string name="save_track_logging_accuracy">Точність часопису</string>
+    <string name="save_track_logging_accuracy">Точність журналювання</string>
     <string name="tracks_view_descr">Ви можете знайти всі записи в %1$s або в теці OsmAnd за допомогою файлового провідника.</string>
     <string name="multimedia_notes_view_descr">Ваші нотатки OSM знаходяться в %1$s.</string>
     <string name="video_notes">Відеонотатки</string>
@@ -3443,7 +3443,7 @@
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Значок відображається під час навігації чи переміщення.</string>
     <string name="select_map_icon_descr">Значок показано в спокої.</string>
-    <string name="logcat_buffer_descr">Перевіряти та обмінюватися докладними часописами застосунку</string>
+    <string name="logcat_buffer_descr">Перевіряти та обмінюватися докладними журналами застосунку</string>
     <string name="search_offline_geo_error">Не вдалося розібрати метод \'%s\'.</string>
     <string name="permission_is_required">Для використання цього параметра потрібен дозвіл.</string>
     <string name="monitoring_min_speed_descr">Це низькошвидкісний відсічний фільтр, щоб не записувати точки нижче певної швидкості. Це може призвести до плавнішого вигляду записаних треків при перегляді на мапі.</string>
@@ -3661,4 +3661,5 @@
     <string name="lang_lmo">Ломбардська</string>
     <string name="custom_color">Користувацький колір</string>
     <string name="extra_maps_menu_group">Додаткові мапи</string>
+    <string name="download_unsupported_action">Непідтримувана дія %1$s</string>
 </resources>
