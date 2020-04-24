@@ -2954,8 +2954,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="public_transport_warning_title">Les itinéraires en transports publics sont actuellement en phase de test. Des erreurs ou des imprécisions peuvent avoir lieu.</string>
     <string name="add_intermediate">Ajouter un point intermédiaire</string>
     <string name="shared_string_walk">Marche</string>
-    <string name="save_poi_value_exceed_length">Merci de réduire la taille de l\'étiquette \"%s\" à moins de 255 caractères.</string>
-    <string name="save_poi_value_exceed_length_title">Taille de \"%s\"</string>
+    <string name="save_poi_value_exceed_length">Merci de réduire la taille de l\'étiquette « %s » à moins de 255 caractères.</string>
+    <string name="save_poi_value_exceed_length_title">Taille de « %s »</string>
     <string name="avoid_pt_types_descr">Sélectionnez les types de transports publics à éviter lors de la navigation :</string>
     <string name="avoid_pt_types">Éviter des types de transports …</string>
     <string name="quick_action_day_night_mode">Mode %s</string>
@@ -3037,7 +3037,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="profile_alert_need_save_title">Enregistrer les modifications</string>
     <string name="profile_alert_need_save_msg">Enregistrez d\'abord les modifications apportées au profil</string>
     <string name="profile_alert_delete_title">Supprimer le profil</string>
-    <string name="profile_alert_delete_msg">Êtes-vous certain de vouloir supprimer le profil \"%s\" \?</string>
+    <string name="profile_alert_delete_msg">Êtes-vous certain·e de vouloir supprimer le profil « %s » \?</string>
     <string name="select_base_profile_dialog_title">Sélectionnez un profil avec lequel démarrer</string>
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">icône</string>
@@ -3108,7 +3108,7 @@ représentant la zone : %1$s x %2$s</string>
 \n
 \nVous pouvez changer d\'avis à tout moment dans Paramètres &gt; Vie privée et Sécurité.</string>
     <string name="downloaded_maps_collect_descr">Aidez nous à connaître les pays et régions les plus populaires.</string>
-    <string name="privacy_and_security_change_descr">Appuyez sur \"Autoriser\" pour accepter nos %1$s</string>
+    <string name="privacy_and_security_change_descr">Appuyez sur « Autoriser » pour accepter nos %1$s</string>
     <string name="settings_derived_routing_mode_string">Mode utilisateur, dérive de : %s</string>
     <string name="profile_alert_need_routing_type_msg">Merci de sélectionner un type de navigation pour le nouveau profil</string>
     <string name="turn_on_profile_desc">Merci d\'activer au moins un profil pour utiliser cette option.</string>
@@ -3152,7 +3152,7 @@ représentant la zone : %1$s x %2$s</string>
 \n 
 \n• Téléchargements de cartes en arrière-plan améliorés 
 \n 
-\n• Retour de l\'option \"Allumer l\'écran\" 
+\n• Retour de l\'option « Allumer l\'écran »
 \n 
 \n• Correction de la sélection de la langue Wikipédia 
 \n 
@@ -3209,7 +3209,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="pref_selected_by_default_for_profiles">Ce paramètre est sélectionné par défaut dans les profils : %s</string>
     <string name="change_default_settings">Modifier le paramètre</string>
     <string name="discard_changes">Ignorer la modification</string>
-    <string name="apply_to_current_profile">Appliquer uniquement à \"%1$s\"</string>
+    <string name="apply_to_current_profile">Appliquer uniquement à « %1$s »</string>
     <string name="apply_to_all_profiles">Appliquer à tous les profils</string>
     <string name="start_up_message_pref">Message au démarrage</string>
     <string name="units_and_formats">Unités et formats</string>
@@ -3239,7 +3239,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="navigate_point_format_olc">Code Open Location</string>
     <string name="analytics_pref_title">Analyses</string>
     <string name="turn_screen_on_info">Afficher la carte sur l\'écran de verrouillage pendant la navigation.</string>
-    <string name="route_parameters_info">Paramètres de calcul d\'itinéraire pour le profil sélectionné : \"%1$s\".</string>
+    <string name="route_parameters_info">Paramètres de calcul d\'itinéraire pour le profil sélectionné : « %1$s ».</string>
     <string name="wake_time">Heure de réveil</string>
     <string name="map_look_descr">Apparence de la carte</string>
     <string name="map_look">Apparence de la carte</string>
@@ -3248,7 +3248,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="screen_alerts">Alertes visuelles</string>
     <string name="route_parameters_descr">Définir les paramètres de l\'itinéraire</string>
     <string name="route_parameters">Paramètres de l\'itinéraire</string>
-    <string name="application_profile_changed">Profil de l\'appli basculé à \"%s\"</string>
+    <string name="application_profile_changed">Profil de l\'appli basculé à « %s »</string>
     <string name="logcat_buffer">Buffer Logcat</string>
     <string name="plugins_settings">Paramètres du greffon</string>
     <string name="get_discount_title">Payez %1$d %2$s et gagnez %3$s.</string>
@@ -3599,7 +3599,7 @@ représentant la zone : %1$s x %2$s</string>
 \nVous pouvez désactiver les greffons inutilisés, pour masquer tous leurs contrôles dans l’application %1$s.</string>
     <string name="hidden_items_descr">Ces éléments sont masqués dans le menu mais les options présentes ou les greffons fonctionneront toujours.</string>
     <string name="reset_items_descr">Les paramètres seront réinitialisés à leurs valeurs par défaut après avoir été masqués.</string>
-    <string name="additional_actions_descr">Vous pouvez accéder à ces actions en appuyant sur le bouton \"Actions\".</string>
+    <string name="additional_actions_descr">Vous pouvez accéder à ces actions en appuyant sur le bouton « Actions ».</string>
     <string name="ui_customization_short_descr">Éléments du panneau déroulant, menu contextuel</string>
     <string name="shared_string_drawer">Panneau déroulant</string>
     <string name="reorder_or_hide_from">Réorganisez ou masquez les éléments à partir de %1$s.</string>
