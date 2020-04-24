@@ -31,6 +31,7 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -346,7 +347,7 @@ public class MapActivityActions implements DialogProvider {
 		ItemBuilder itemBuilder = new ItemBuilder();
 
 		adapter.addItem(itemBuilder
-				.setTitleId(R.string.shared_string_add, mapActivity)
+				.setTitleId(selectedObj instanceof FavouritePoint ? R.string.favourites_context_menu_edit : R.string.shared_string_add, mapActivity)
 				.setId(MAP_CONTEXT_MENU_ADD_ID)
 				.setIcon(R.drawable.map_action_fav_dark)
 				.setOrder(0)
@@ -477,7 +478,7 @@ public class MapActivityActions implements DialogProvider {
 					MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), new LatLon(latitude, longitude));
 				} else if (standardId == R.string.avoid_road) {
 					getMyApplication().getAvoidSpecificRoads().addImpassableRoad(mapActivity, new LatLon(latitude, longitude), true, false, null);
-				} else if (standardId == R.string.shared_string_add) {
+				} else if (standardId == R.string.shared_string_add || standardId == R.string.favourites_context_menu_edit) {
 					mapActivity.getContextMenu().buttonFavoritePressed();
 				} else if (standardId == R.string.shared_string_marker) {
 					mapActivity.getContextMenu().buttonWaypointPressed();

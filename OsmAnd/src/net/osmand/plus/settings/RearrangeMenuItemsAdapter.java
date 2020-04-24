@@ -31,13 +31,27 @@ import net.osmand.plus.settings.ConfigureMenuRootFragment.ScreenType;
 import java.util.Collections;
 import java.util.List;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.GPX_FILES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_GPX_WAYPOINT;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CREATE_POI;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_EDIT_GPX_WP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MODIFY_OSM_NOTE;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_RENDERING_CATEGORY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_SOURCE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.RECORDING_LAYER;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.RENDERING_ITEMS_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_ITEMS_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
 import static net.osmand.plus.settings.ConfigureMenuItemsFragment.MAIN_BUTTONS_QUANTITY;
 
 public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
@@ -191,6 +205,9 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 				h.moveIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_item_move, nightMode));
 				h.actionIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_remove, nightMode));
 				h.actionIcon.setOnClickListener(null);
+			}
+			if (id.equals(MAP_CONTEXT_MENU_CREATE_POI)) {
+				h.title.setText(R.string.create_edit_poi);
 			}
 		} else if (holder instanceof HeaderHolder) {
 			HeaderHolder h = (HeaderHolder) holder;
@@ -442,10 +459,30 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 	}
 
 	private int getDescription(String id) {
-		if (id.equals(DRAWER_BUILDS_ID)) {
-			return R.string.developer_plugin;
-		} else {
-			return R.string.app_name_osmand;
+		switch (id) {
+			case DRAWER_BUILDS_ID:
+				return R.string.developer_plugin;
+			case GPX_FILES_ID:
+			case MAP_CONTEXT_MENU_EDIT_GPX_WP:
+			case MAP_CONTEXT_MENU_ADD_GPX_WAYPOINT:
+				return R.string.shared_string_trip_recording;
+			case MAP_SOURCE_ID:
+			case OVERLAY_MAP:
+			case UNDERLAY_MAP:
+				return R.string.shared_string_online_maps;
+			case RECORDING_LAYER:
+				return R.string.audionotes_plugin_name;
+			case CONTOUR_LINES:
+			case TERRAIN:
+				return R.string.srtm_plugin_name;
+			case OSM_NOTES:
+			case OSM_EDITS:
+			case MAP_CONTEXT_MENU_CREATE_POI:
+			case MAP_CONTEXT_MENU_MODIFY_OSM_NOTE:
+			case MAP_CONTEXT_MENU_OPEN_OSM_NOTE:
+				return R.string.osm_settings;
+			default:
+				return R.string.app_name_osmand;
 		}
 	}
 }

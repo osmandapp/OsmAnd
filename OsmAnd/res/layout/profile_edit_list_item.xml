@@ -27,17 +27,15 @@
 		<ImageButton
 			android:id="@+id/action_icon"
 			style="@style/Widget.AppCompat.ActionButton"
-			android:layout_width="@dimen/standard_icon_size"
-			android:layout_height="@dimen/standard_icon_size"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
 			android:layout_gravity="center"
-			android:layout_marginLeft="@dimen/content_padding"
-			android:layout_marginTop="@dimen/bottom_sheet_icon_margin"
-			android:layout_marginRight="@dimen/content_padding"
-			android:layout_marginBottom="@dimen/bottom_sheet_icon_margin"
+			android:layout_marginStart="@dimen/content_padding_half"
+			android:layout_marginLeft="@dimen/content_padding_half"
 			tools:src="@drawable/ic_action_remove"
 			tools:tint="@color/icon_color_default_light"
-			android:layout_marginEnd="@dimen/content_padding"
-			android:layout_marginStart="@dimen/content_padding" />
+			android:layout_marginEnd="@dimen/content_padding_half"
+			android:layout_marginRight="@dimen/content_padding_half" />
 
 		<ImageView
 			android:id="@+id/icon"
@@ -46,11 +44,9 @@
 			android:layout_gravity="center"
 			android:layout_marginLeft="@dimen/content_padding"
 			android:layout_marginTop="@dimen/bottom_sheet_icon_margin"
-			android:layout_marginRight="@dimen/content_padding"
 			android:layout_marginBottom="@dimen/bottom_sheet_icon_margin"
 			tools:src="@drawable/ic_action_car_dark"
 			tools:tint="@color/profile_icon_color_blue_light_default"
-			android:layout_marginEnd="@dimen/content_padding"
 			android:layout_marginStart="@dimen/content_padding" />
 
 		<LinearLayout
