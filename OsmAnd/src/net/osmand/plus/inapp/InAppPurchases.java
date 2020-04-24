@@ -732,9 +732,6 @@ public class InAppPurchases {
 
 		@Override
 		public CharSequence getDescription(@NonNull Context ctx) {
-			if (getMonthlyPriceValue() == getPriceValue()) {
-				return "";
-			}
 			if (getMonthlyPriceValue() == 0) {
 				return ctx.getString(R.string.osm_live_payment_month_cost_descr, getDefaultMonthlyPrice(ctx));
 			} else {
@@ -900,6 +897,11 @@ public class InAppPurchases {
 		@Override
 		public CharSequence getRenewDescription(@NonNull Context ctx) {
 			return ctx.getString(R.string.osm_live_payment_renews_monthly);
+		}
+
+		@Override
+		public CharSequence getDescription(@NonNull Context ctx) {
+			return "";
 		}
 	}
 
