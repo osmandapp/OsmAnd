@@ -21,14 +21,14 @@ public class DownloadDescriptionInfo {
 
 	private JSONArray buttonsJson;
 	private List<String> imageUrls;
-	private Map<String, String> texts;
+	private Map<String, String> localizedDescription;
 
 	public List<String> getImageUrls() {
 		return imageUrls;
 	}
 
 	public CharSequence getLocalizedDescription(Context ctx) {
-		String description = JsonUtils.getLocalizedResFromMap(ctx, texts, null);
+		String description = JsonUtils.getLocalizedResFromMap(ctx, localizedDescription, null);
 		return description != null ? Html.fromHtml(description) : null;
 	}
 
@@ -63,7 +63,7 @@ public class DownloadDescriptionInfo {
 		if (json != null) {
 			DownloadDescriptionInfo downloadDescriptionInfo = new DownloadDescriptionInfo();
 			try {
-				downloadDescriptionInfo.texts = JsonUtils.getLocalizedMapFromJson("text", json);
+				downloadDescriptionInfo.localizedDescription = JsonUtils.getLocalizedMapFromJson("text", json);
 				downloadDescriptionInfo.imageUrls = JsonUtils.jsonArrayToList("image", json);
 				downloadDescriptionInfo.buttonsJson = json.optJSONArray("button");
 			} catch (JSONException e) {
@@ -77,7 +77,7 @@ public class DownloadDescriptionInfo {
 	public JSONObject toJson() throws JSONException {
 		JSONObject descrJson = new JSONObject();
 
-		JsonUtils.writeLocalizedMapToJson("text", descrJson, texts);
+		JsonUtils.writeLocalizedMapToJson("text", descrJson, localizedDescription);
 		JsonUtils.writeStringListToJson("image", descrJson, imageUrls);
 
 		descrJson.putOpt("button", buttonsJson);
@@ -86,6 +86,8 @@ public class DownloadDescriptionInfo {
 	}
 
 	public static class ActionButton {
+
+		public static final String DOWNLOAD_ACTION = "download";
 
 		private String actionType;
 		private String name;

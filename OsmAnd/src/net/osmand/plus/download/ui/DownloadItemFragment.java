@@ -2,37 +2,43 @@ package net.osmand.plus.download.ui;
 
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.view.ViewTreeObserver;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
-
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.RequestCreator;
+import androidx.viewpager.widget.ViewPager;
 
 import net.osmand.AndroidUtils;
-import net.osmand.PicassoUtils;
-import net.osmand.map.WorldRegion;
-import net.osmand.plus.CustomRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.download.CustomIndexItem;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadActivity.BannerAndDownloadFreeVersion;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResources;
+import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.ui.DownloadDescriptionInfo.ActionButton;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
+import java.util.List;
+
 import static net.osmand.plus.download.ui.DownloadResourceGroupFragment.REGION_ID_DLG_KEY;
 
-public class DownloadItemFragment extends DialogFragment {
+public class DownloadItemFragment extends DialogFragment implements DownloadEvents {
 
 	public static final String ITEM_ID_DLG_KEY = "index_item_dialog_key";
 
@@ -41,14 +47,14 @@ public class DownloadItemFragment extends DialogFragment {
 	private String regionId = "";
 	private int itemIndex = -1;
 
+	private BannerAndDownloadFreeVersion banner;
 	private DownloadResourceGroup group;
-	private CustomIndexItem indexItem;
 
-	private View view;
 	private Toolbar toolbar;
-	private ImageView image;
 	private TextView description;
-	private TextView buttonTextView;
+	private ViewPager imagesPager;
+	private View descriptionContainer;
+	private ViewGroup buttonsContainer;
 
 	private boolean nightMode;
 
@@ -58,12 +64,11 @@ public class DownloadItemFragment extends DialogFragment {
 		nightMode = !getMyApplication().getSettings().isLightContent();
 		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
-
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.item_info_fragment, container, false);
+		final View view = inflater.inflate(R.layout.item_info_fragment, container, false);
 
 		if (savedInstanceState != null) {
 			regionId = savedInstanceState.getString(REGION_ID_DLG_KEY);
@@ -85,77 +90,131 @@ public class DownloadItemFragment extends DialogFragment {
 			}
 		});
 
-		description = view.findViewById(R.id.item_description);
-		image = view.findViewById(R.id.item_image);
+		banner = new BannerAndDownloadFreeVersion(view, (DownloadActivity) getActivity(), false);
 
-		View dismissButton = view.findViewById(R.id.dismiss_button);
-		dismissButton.setOnClickListener(new View.OnClickListener() {
+		description = view.findViewById(R.id.description);
+		imagesPager = view.findViewById(R.id.images_pager);
+		buttonsContainer = view.findViewById(R.id.buttons_container);
+		descriptionContainer = view.findViewById(R.id.description_container);
+
+		reloadData();
+
+		view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
-			public void onClick(View v) {
-				if (indexItem != null && !Algorithms.isEmpty(indexItem.getWebUrl())) {
-					WikipediaDialogFragment.showFullArticle(v.getContext(), Uri.parse(indexItem.getWebUrl()), nightMode);
+			public void onGlobalLayout() {
+				ViewTreeObserver obs = view.getViewTreeObserver();
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+					obs.removeOnGlobalLayoutListener(this);
+				} else {
+					obs.removeGlobalOnLayoutListener(this);
 				}
+				descriptionContainer.setPadding(0, 0, 0, buttonsContainer.getHeight());
 			}
 		});
-		UiUtilities.setupDialogButton(nightMode, dismissButton, UiUtilities.DialogButtonType.PRIMARY, "");
-		buttonTextView = (TextView) dismissButton.findViewById(R.id.button_text);
 
 		return view;
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
-		reloadData();
-	}
-
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(REGION_ID_DLG_KEY, regionId);
 		outState.putInt(ITEM_ID_DLG_KEY, itemIndex);
 	}
 
+	@Override
+	public void newDownloadIndexes() {
+		if (banner != null) {
+			banner.updateBannerInProgress();
+		}
+		reloadData();
+	}
+
+	@Override
+	public void downloadHasFinished() {
+		if (banner != null) {
+			banner.updateBannerInProgress();
+		}
+		reloadData();
+	}
+
+	@Override
+	public void downloadInProgress() {
+		if (banner != null) {
+			banner.updateBannerInProgress();
+		}
+	}
+
 	private void reloadData() {
-		DownloadActivity downloadActivity = getDownloadActivity();
-		if (downloadActivity != null) {
-			OsmandApplication app = downloadActivity.getMyApplication();
-			DownloadResources indexes = getDownloadActivity().getDownloadThread().getIndexes();
-			group = indexes.getGroupById(regionId);
-			indexItem = (CustomIndexItem) group.getItemByIndex(itemIndex);
-			if (indexItem != null) {
-				toolbar.setTitle(indexItem.getVisibleName(app, app.getRegions()));
-				WorldRegion region = group.getRegion();
-				if (region instanceof CustomRegion) {
-					CustomRegion customRegion = (CustomRegion) region;
-					int color = customRegion.getHeaderColor();
-					if (color != -1) {
-						toolbar.setBackgroundColor(color);
+		DownloadActivity activity = getDownloadActivity();
+		OsmandApplication app = activity.getMyApplication();
+		DownloadResources indexes = activity.getDownloadThread().getIndexes();
+		group = indexes.getGroupById(regionId);
+		CustomIndexItem indexItem = (CustomIndexItem) group.getItemByIndex(itemIndex);
+		if (indexItem != null) {
+			toolbar.setTitle(indexItem.getVisibleName(app, app.getRegions()));
+
+			DownloadDescriptionInfo descriptionInfo = indexItem.getDescriptionInfo();
+			if (descriptionInfo != null) {
+				updateDescription(app, descriptionInfo, description);
+				updateImagesPager(app, descriptionInfo, imagesPager);
+				updateActionButtons(activity, descriptionInfo, indexItem, buttonsContainer, R.layout.bottom_buttons, nightMode);
+			}
+		}
+	}
+
+	static void updateActionButtons(final DownloadActivity ctx, DownloadDescriptionInfo descriptionInfo,
+	                                @Nullable final IndexItem indexItem, ViewGroup buttonsContainer,
+	                                @LayoutRes int layoutId, final boolean nightMode) {
+		buttonsContainer.removeAllViews();
+
+		List<ActionButton> actionButtons = descriptionInfo.getActionButtons(ctx);
+		if (Algorithms.isEmpty(actionButtons) && indexItem != null && !indexItem.isDownloaded()) {
+			actionButtons.add(new ActionButton(ActionButton.DOWNLOAD_ACTION, ctx.getString(R.string.shared_string_download), null));
+		}
+
+		for (final ActionButton actionButton : actionButtons) {
+			View buttonView = UiUtilities.getInflater(ctx, nightMode).inflate(layoutId, buttonsContainer, false);
+			View button = buttonView.findViewById(R.id.dismiss_button);
+			if (button != null) {
+				UiUtilities.setupDialogButton(nightMode, button, UiUtilities.DialogButtonType.PRIMARY, actionButton.getName());
+			} else {
+				TextView buttonText = buttonView.findViewById(R.id.button_text);
+				buttonText.setText(actionButton.getName());
+			}
+			buttonView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (actionButton.getUrl() != null) {
+						WikipediaDialogFragment.showFullArticle(ctx, Uri.parse(actionButton.getUrl()), nightMode);
+					} else if (ActionButton.DOWNLOAD_ACTION.equalsIgnoreCase(actionButton.getActionType()) && indexItem != null) {
+						boolean isDownloading = ctx.getDownloadThread().isDownloading(indexItem);
+						if (!isDownloading) {
+							ctx.startDownload(indexItem);
+						}
+					} else {
+						String text = ctx.getString(R.string.download_unsupported_action, actionButton.getActionType());
+						Toast.makeText(ctx, text, Toast.LENGTH_SHORT).show();
 					}
 				}
+			});
+			buttonsContainer.addView(buttonView);
+		}
+	}
 
-				description.setText(indexItem.getLocalizedDescription(app));
-				buttonTextView.setText(indexItem.getWebButtonText(app));
+	static void updateDescription(OsmandApplication app, DownloadDescriptionInfo descriptionInfo, TextView descriptionView) {
+		CharSequence descr = descriptionInfo.getLocalizedDescription(app);
+		descriptionView.setText(descr);
+		AndroidUiHelper.updateVisibility(descriptionView, !Algorithms.isEmpty(descr));
+	}
 
-				final PicassoUtils picassoUtils = PicassoUtils.getPicasso(app);
-				Picasso picasso = Picasso.get();
-				for (final String imageUrl : indexItem.getDescriptionImageUrl()) {
-					RequestCreator rc = picasso.load(imageUrl);
-					rc.into(image, new Callback() {
-						@Override
-						public void onSuccess() {
-							image.setVisibility(View.VISIBLE);
-							picassoUtils.setResultLoaded(imageUrl, true);
-						}
-
-						@Override
-						public void onError(Exception e) {
-							image.setVisibility(View.GONE);
-							picassoUtils.setResultLoaded(imageUrl, false);
-						}
-					});
-				}
-			}
+	static void updateImagesPager(OsmandApplication app, DownloadDescriptionInfo descriptionInfo, ViewPager viewPager) {
+		if (!Algorithms.isEmpty(descriptionInfo.getImageUrls())) {
+			ImagesPagerAdapter adapter = new ImagesPagerAdapter(app, descriptionInfo.getImageUrls());
+			viewPager.setAdapter(adapter);
+			viewPager.setVisibility(View.VISIBLE);
+		} else {
+			viewPager.setVisibility(View.GONE);
 		}
 	}
 
