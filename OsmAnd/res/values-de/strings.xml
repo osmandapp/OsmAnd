@@ -1793,7 +1793,7 @@ Lon %2$s</string>
     <string name="activate_srtm_plugin">Bitte die Erweiterung \'Höhenlinien\' aktivieren</string>
     <string name="get_full_version">Vollversion</string>
     <string name="confirm_download_roadmaps">Die reine Straßenkarte wird nicht benötigt, da Sie die Standardkarte haben. Trotzdem herunterladen?</string>
-    <string name="value_downloaded_of_max">%1$.1f von %2$.1f MB</string>
+    <string name="value_downloaded_of_max">%1$,1f von %2$,1f MB</string>
     <string name="update_all">Alles aktualisieren (%1$s MB)</string>
     <string name="free_downloads_used">Verbrauchte freie Downloads</string>
     <string name="enter_country_name">Ländernamen eingeben</string>
@@ -1806,7 +1806,7 @@ Lon %2$s</string>
     <string name="access_from_map">Aufruf von der Karte aus</string>
     <string name="favorite_category_add_new">Neue Katagorie erstellen</string>
     <string name="next_proceed">Weiter</string>
-    <string name="file_size_in_mb">%.1f MB</string>
+    <string name="file_size_in_mb">%,1f MB</string>
     <string name="please_specify_poi_type_only_from_list">Bitte einen gültigen POI-Typ angeben oder überspringen.</string>
     <string name="share_osm_edits_subject">OSM-Bearbeitung mit OsmAnd geteilt</string>
     <string name="av_locations_descr">GPX-Datei mit Standorten.</string>
@@ -2855,7 +2855,7 @@ Lon %2$s</string>
     <string name="keep_passed_markers_descr">Markierungen, die als Gruppe von Favoriten oder GPX-Wegpunkten hinzugefügt wurden, die als \'Passiert\' markiert sind, bleiben auf der Karte erhalten. Wenn die Gruppe nicht aktiv ist, verschwinden die Marker von der Karte.</string>
     <string name="keep_passed_markers">Passierte Markierungen auf der Karte behalten</string>
     <string name="more_transport_on_stop_hint">An dieser Haltestelle gibt es mehrere Verbindungen.</string>
-    <string name="markers_remove_dialog_msg">Kartenmarkierung \'%s\' löschen\?</string>
+    <string name="markers_remove_dialog_msg">Kartenmarkierung „%s“ löschen\?</string>
     <string name="edit_map_marker">Kartenmarkierung bearbeiten</string>
     <string name="third_party_application">Drittanbieter-App</string>
     <string name="osm_live_plan_pricing">Plan und Preisgestaltung</string>
@@ -3037,7 +3037,7 @@ Lon %2$s</string>
     <string name="public_transport_calc_pedestrian">Fußgängerroute berechnen</string>
     <string name="public_transport_type">Transportart</string>
     <string name="files_moved">%1$d Dateien verschoben (%2$s).</string>
-    <string name="files_present">%1$d Dateien (%2$s) sind am vorherigen Ort \'%3$s\' vorhanden.</string>
+    <string name="files_present">%1$d Dateien (%2$s) sind am vorherigen Ort „%3$s“ vorhanden.</string>
     <string name="move_maps">Karten verschieben</string>
     <string name="dont_move_maps">Nicht verschieben</string>
     <string name="public_transport_ped_route_title">Die Route zu Fuß beträgt ca. %1$s und könnte schneller sein als mit öffentlichen Verkehrsmitteln</string>
@@ -3417,7 +3417,7 @@ Lon %2$s</string>
     <string name="desert_render_descr">Für Wüsten und andere dünn besiedelte Gebiete. Umfangreicher.</string>
     <string name="select_navigation_icon">Positionssymbol in Bewegung</string>
     <string name="select_map_icon">Positionssymbol im Ruhezustand</string>
-    <string name="delete_profiles_descr">Durch Tippen auf \'Anwenden\' werden entfernte Profile dauerhaft gelöscht.</string>
+    <string name="delete_profiles_descr">Durch Tippen auf „Anwenden“ werden entfernte Profile dauerhaft gelöscht.</string>
     <string name="master_profile">Hauptprofil</string>
     <string name="select_color">Farbe wählen</string>
     <string name="edit_profiles_descr">OsmAnd-Standardprofile können nicht gelöscht, aber (auf dem vorherigen Bildschirm) deaktiviert oder nach unten verschoben werden.</string>
