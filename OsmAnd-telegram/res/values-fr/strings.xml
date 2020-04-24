@@ -242,4 +242,6 @@
     <string name="enter_device_name_description">Nommez votre nouveau périphérique en max 200 symboles.</string>
     <string name="enter_another_device_name">Choisissez un nom que vous n\'avez pas encore utilisé</string>
     <string name="monitoring_is_disabled">La surveillance est désactivée</string>
+    <string name="osmand_connect_desc">Choisissez la version d\'OsmAnd qu\'OsmAnd Tracker utilise pour afficher les positions.</string>
+    <string name="disconnect_from_telegram_desc">Pour révoquer l\'accès au partage de localisation. Ouvrez Telegram, allez dans Paramètres → Vie privée et sécurité → Sessions, et terminez la session OsmAnd Tracker.</string>
 </resources>
