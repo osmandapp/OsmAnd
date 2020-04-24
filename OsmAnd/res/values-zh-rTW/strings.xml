@@ -3661,4 +3661,5 @@
     <string name="lang_lmo">倫巴底語</string>
     <string name="custom_color">自訂顏色</string>
     <string name="extra_maps_menu_group">額外地圖</string>
+    <string name="download_unsupported_action">不支援的動作 %1$s</string>
 </resources>
