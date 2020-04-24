@@ -10,7 +10,7 @@
       android:fillType="evenOdd"/>
   <path
       android:pathData="M12,13m-5,0a5,5 0,1 1,10 0a5,5 0,1 1,-10 0"
-      android:fillColor="#ffffff"
+      android:fillColor="#000000"
       android:fillAlpha="0.3"/>
   <path
       android:pathData="M12,12m-5,0a5,5 0,1 1,10 0a5,5 0,1 1,-10 0"
