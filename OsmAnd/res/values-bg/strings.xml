@@ -131,11 +131,13 @@
     <string name="shared_string_control_start">Старт</string>
     <string name="map_widget_av_notes">Аудио/видео бележки</string>
     <string name="osmand_srtm_short_description_80_chars">Добавка на OsmAnd за офлайн контурни линии</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Тази добавка изчертава линии на релефа върху основните карти на OsmAnd. Това е особено полезно за туристи и хора интересуващи се от релефа на местността.\n\nГлобалната карта (между 70 градуса северна ширина и 70 градуса южна ширина) се базира на измервания от SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), устройство за изображения на борда на Terra, най-добрият спътник на програмата на NASA Earth Observing System. ASTER е съвместен проект на NASA, Японското правителсто и японската компания Japan Space Systems (J-spacesystems). "</string>
+    <string name="osmand_srtm_long_description_1000_chars">Тази добавка изчертава линии на релефа върху основните карти на OsmAnd. Това е особено полезно за туристи и хора интересуващи се от релефа на местността.
+\n
+\nГлобалната карта (между 70° северна ширина и 70° южна ширина) се базира на измервания от SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), устройство за изображения на борда на Terra, най-добрият спътник на програмата на NASA Earth Observing System. ASTER е съвместен проект на NASA, Японското правителство и японската компания Japan Space Systems (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Измерване на дистанции</string>
     <string name="audionotes_location_not_defined">Няма определена позиция за тази бележка. Използвайте контекстното меню за да изберете място и да направите бележка</string>
     <string name="map_widget_audionotes">Аудио бележки</string>
-    <string name="audionotes_plugin_description">С добавката можете да правите бележки (глас, снимка или видео) по време на пътуване, ползвайки специалния бутон или контекстното меню.</string>
+    <string name="audionotes_plugin_description">С добавката можете да правите бележки (гласови, снимка или видео) по време на пътуване, ползвайки специалния бутон или контекстното меню.</string>
     <string name="audionotes_plugin_name">Аудио/видео бележки</string>
     <string name="index_srtm_parts">части</string>
     <string name="index_srtm_ele">Контури</string>
@@ -332,9 +334,11 @@
     <string name="map_online_data_descr">Използване на онлайн карти (сваляне на карти в SD картата)</string>
     <string name="shared_string_online_maps">Онлайн карти</string>
     <string name="online_map_settings_descr">Настройване на източниците за онлайн карти</string>
-    <string name="osmand_rastermaps_plugin_description">"С този плъгин можете да получите достъп до много типове онлайн (или растерни) карти, достъп до предварително създадени Openstreetmap растерни изображения (като Mapnik), до сателитни снимки и до слоеве със специално предназначение, като карти за времето, карти на климата, геоложки карти, географски терен и др.
-\n\nНякои от тези карти могат да бъдат използвани като основна (базова) карта на екрана на OsmAnd или като подложка на друга базова карта (като на OsmAnd стандартната офлайн карта). За да се направи всяка подложка по-видима, някои елементи на OsmAnd картата могат лесно да бъдат скрити чрез менюто \"Настройки на  картата\".
-\n\nРастерните карти могат да бъдат получени директно чрез онлайн източници, или могат да бъдат подготвени за офлайн употреба (и ръчно копирани в папката за данни OsmAnd) под формата на sqlite база данни от друго приложение. "</string>
+    <string name="osmand_rastermaps_plugin_description">"Можете да ползвате много видове онлайн (растерни) карти: OSM растерни изображения (като Mapnik), сателитни снимки, слоеве със специално предназначение - прогнози за времето, климатични карти, географски терени и др.
+\n
+\nНякои от тези карти могат да бъдат използвани като основна (базова) карта на екрана на OsmAnd или като подложка на друга базова карта (като на OsmAnd стандартната офлайн карта). За да се направи всяка подложка по-видима, някои елементи на OsmAnd картата могат лесно да бъдат скрити чрез менюто \"Настройки на  картата\".
+\n
+\nРастерните карти могат да бъдат получени директно чрез онлайн източници, или могат да бъдат подготвени за офлайн употреба (и ръчно копирани в папката за данни OsmAnd) под формата на sqlite база данни от друго приложение."</string>
     <string name="osmand_accessibility_description">Настройки на специалните функции за достъпност. Настройване скоростта на гласовите напътствия и допълнителни настройки за хора със специални потребности.</string>
     <string name="osmand_development_plugin_description">Добавката показва настройки за отстраняване на неизправности по програмата - тестване или симулиране на маршрут, честота на опресняване на екрана, работата на гласовите напътствия. Тези настройки са предназначени за разработчици и не са необходими на обикновения потребител.</string>
     <string name="plugins_screen">Добавки</string>
@@ -1178,7 +1182,7 @@
     <string name="shared_string_selected">Избрани</string>
     <string name="shared_string_selected_lowercase">избрани</string>
     <string name="none_selected_gpx">Няма избрани GPX файлове. За да изберете натиснете и задръжте на някой от маршрутите.</string>
-    <string name="avoid_roads_msg">Можете да активирате алтернативен маршрут, като изберете кои пътища да бъдат избегнати</string>
+    <string name="avoid_roads_msg">Можете да зададете алтернативен маршрут, като изберете кои пътища да бъдат избегнати</string>
     <string name="storage_directory_manual">Ръчно задаване</string>
     <string name="storage_directory_default">Вътрешна памет</string>
     <string name="storage_directory">Съхраняване на карти</string>
@@ -1209,8 +1213,8 @@
 \n\nAnd it provides special touring options like showing bicycle routes or Alpine mountain routes.
 \n\nНе се изисква специална карта, изгледът се създава от стандартните карти на приложението.
 \n\nThis view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \"Настройка на картата\" as desired. "</string>
-    <string name="show_railway_warnings">Покажи ЖП прелези</string>
-    <string name="show_pedestrian_warnings">Покажи пешеходни пътеки</string>
+    <string name="show_railway_warnings">ЖП прелези</string>
+    <string name="show_pedestrian_warnings">Пешеходни пътеки</string>
     <string name="rendering_attr_streetLighting_name">Улично осветление</string>
     <string name="rendering_attr_roadStyle_name">Оцветяване на пътищата</string>
     <string name="rendering_value_germanRoadAtlas_name">Германски стил</string>
@@ -1287,19 +1291,19 @@
     <string name="share_note">Сподели бележката</string>
     <string name="location_on_map">Позиция:\n шир: %1$s\n дълж: %2$s</string>
     <string name="watch">Виж</string>
-    <string name="notes">Бележки</string>
+    <string name="notes">A/V бележки</string>
     <string name="online_map">Онлайн карта</string>
     <string name="roads_only">Само пътища</string>
     <string name="rendering_attr_pisteRoutes_name">Ски писти</string>
-    <string name="free">"Свободни %1$s "</string>
+    <string name="free">Свободни %1$s</string>
     <string name="device_memory">Памет на устройството</string>
     <string name="parking_place">Паркинг място</string>
     <string name="remove_the_tag">ПРЕМАХНИ ЕТИКЕТА</string>
     <string name="gps_status">GPS статус</string>
-    <string name="version_settings_descr">Сваляне на бета версии</string>
+    <string name="version_settings_descr">Изтегляне на бета версии.</string>
     <string name="version_settings">Версии</string>
     <string name="proxy_pref_title">Прокси</string>
-    <string name="proxy_pref_descr">Настройка на прокси интернет комуникация</string>
+    <string name="proxy_pref_descr">Настройка на прокси сървър.</string>
     <string name="settings_privacy">Поверителност</string>
     <string name="shared_string_gpx_points">Точки</string>
     <string name="record_plugin_description">"Тази добавка позволява записване на изминатия път в GPX файл. Записът може да се активира чрез докосване на бутон на главния екран или автоматично при стартиране на навигацията.\n\nЗаписаните следи могат да бъдат споделяни или да се изпращат към OSM. Спортистите могат да използват записаните следи за да проследят своя напредък. Основните данни на следата можете да видите директно в OsmAnd, като междинни времена, средната скорост и т.н. По-късно можете да анализирате следите в специални приложения за целта. "</string>
@@ -1314,7 +1318,7 @@
     <string name="map_update">%1$s карти са обновени</string>
     <string name="rendering_attr_pisteGrooming_name">Обработена ски писта</string>
     <string name="world_ski_missing">Трябва да изтеглите специалната карта за скиори за правилното изобразяване на ски писти и други подробности</string>
-    <string name="nautical_maps_missing">За правилното изобразяване на морските навигационни ориентири трябва да изтеглите специална карта за тях</string>
+    <string name="nautical_maps_missing">Изтеглете специалната карта за морска навигация.</string>
     <string name="edit_group">Редактиране на група</string>
     <string name="speak_pedestrian">Пешеходни пътеки</string>
     <string name="rendering_value__name">По подразбиране</string>
@@ -1322,7 +1326,7 @@
     <string name="rendering_value_highContrastRoads_name">Контрастни пътища</string>
     <string name="traffic_warning_railways">ЖП прелези</string>
     <string name="traffic_warning_pedestrian">Пешеходна пътека</string>
-    <string name="dash_download_msg_none">Искате ли да свалите карти?</string>
+    <string name="dash_download_msg_none">Сваляне на офлайн карти\?</string>
     <string name="dash_download_msg">Свалихте %1$s карти</string>
     <string name="dash_download_new_one">Свалете нова карта</string>
     <string name="dash_download_manage">Управление</string>
@@ -1332,7 +1336,7 @@
     <string name="no_internet_connection">Свалянето не е възможно, моля проверете Вашата интернет връзка.</string>
     <string name="everything_up_to_date">Всички файлове са актуални</string>
     <string name="use_opengl_render">OpenGL изчертаване</string>
-    <string name="use_opengl_render_descr">Използване на хардуерно ускорено OpenGL изчертаване (възможно е да не работи на някои устройства)</string>
+    <string name="use_opengl_render_descr">Използване на хардуерно ускорено OpenGL изчертаване (възможно е да има повишена консумация и да не работи на някои по-стари устройства).</string>
     <string name="error_avoid_specific_road">Няма намерен заобиколен път</string>
     <string name="home_button">Начало</string>
     <string name="coordinates">Координати</string>
@@ -1510,7 +1514,7 @@
     <string name="shared_string_update">Актуализация</string>
     <string name="shared_string_upload">Качване</string>
     <string name="osm_edit_created_poi">Създаден OSM POI</string>
-    <string name="world_map_download_descr">Световната базова карта (покриваща целия свят в при малък мащаб) липсва или е остаряла. Моля, помислите за изтеглянето й .</string>
+    <string name="world_map_download_descr">Световната базова карта (покриваща целия свят в при малък мащаб) липсва или е остаряла. Изтеглете я за показване на този мащаб.</string>
     <string name="shared_string_qr_code">QR код</string>
     <string name="map_downloaded">Картата е изтеглена</string>
     <string name="map_downloaded_descr">Картата на %1$s е готова за ползване.</string>
@@ -1532,7 +1536,7 @@
     <string name="favorite_category_select">Изберете категория</string>
     <string name="default_speed_system_descr">Дефиниране на единица за скорост.</string>
     <string name="default_speed_system">Единица за скорост</string>
-    <string name="nm">nm</string>
+    <string name="nm">мор. мили</string>
     <string name="si_nm">Морски мили</string>
     <string name="si_kmh">Км в час</string>
     <string name="si_mph">Мили в час</string>
@@ -2153,4 +2157,32 @@
     <string name="lang_an">Арагонски</string>
     <string name="lang_lmo">Ломбардия</string>
     <string name="custom_color">Друг цвят</string>
+    <string name="wiki_menu_download_descr">Необходими са допълнителни карти, за да видите обектите на Уикипедия на картата.</string>
+    <string name="download_unsupported_action">Неподдържано действие %1$s</string>
+    <string name="select_navigation_icon">Икона на позицията по време на движение</string>
+    <string name="reset_all_profile_settings">Нулиране на всички настройки на профила\?</string>
+    <string name="reset_all_profile_settings_descr">Нулирайте всички настройки на профила до настройките по подразбиране.</string>
+    <string name="reset_confirmation_descr">Докосването на %1$s ще отхвърли всичките ви промени.</string>
+    <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
+    <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
+    <string name="select_map_icon_descr">Икона показвана в покой.</string>
+    <string name="select_nav_icon_descr">Икона, показана по време на навигация или движение.</string>
+    <string name="app_mode_osm">OSM</string>
+    <string name="osm_editing">Редактиране на OSM</string>
+    <string name="plugin_global_prefs_info">Тези настройки се отнасят за всички профили.</string>
+    <string name="login_and_pass">Потребителско име и парола</string>
+    <string name="accessibility_announce">Обявяване</string>
+    <string name="route_recalculation">Преизчисляване на маршрута</string>
+    <string name="photo_notes">Фото бележки</string>
+    <string name="video_notes">Видео бележки</string>
+    <string name="multimedia_notes_view_descr">Вашите OSM бележки са в %1$s.</string>
+    <string name="save_track_logging_accuracy">Точност на регистриране</string>
+    <string name="osm_editing_prefs_descr">Вход, парола, редактиране офлайн</string>
+    <string name="reset_plugin_to_default">Възстановяване на настройките на добавката към фабричните</string>
+    <string name="routing_profile_direct_to">Директно към точката</string>
+    <string name="import_rendering_file">Импортиране на файл за изобразяване</string>
+    <string name="terrain_slider_description">Задайте минималните и максималните нива на мащабиране, при които ще се показва слоят.</string>
+    <string name="restore_all_profile_settings">Възстановяване на всички настройки на профила\?</string>
+    <string name="clear_recorded_data_warning">Наистина ли искате да изчистите записаните данни\?</string>
+    <string name="recalculate_route_in_deviation">Преизчисляване на маршрута в случай на отклонение</string>
 </resources>
