@@ -247,7 +247,7 @@
     <string name="app_mode_motorcycle">Moto</string>
     <string name="app_mode_boat">Embarcación</string>
     <string name="app_mode_aircraft">Aeronave</string>
-    <string name="local_osm_changes_delete_all_confirm">Eliminar %1$d mudanza(s) no OSM\?</string>
+    <string name="local_osm_changes_delete_all_confirm">Eliminar %1$d modificación(s) no OSM\?</string>
     <string name="shared_string_delete_all">Eliminar todo</string>
     <string name="animate_routing_route_not_calculated">Calcula-la rota primeiro</string>
     <string name="animate_routing_route">"Simular empregando a rota calculada "</string>
@@ -312,9 +312,9 @@
     <string name="search_street_in_neighborhood_cities">Procura das rúas nas poboacións viciñas</string>
     <string name="intermediate_items_sort_return">Orde optimizada dos destinos intermedios no itinerario cara o destino.</string>
     <string name="intermediate_items_sort_by_distance">Ordenar porta a porta</string>
-    <string name="local_osm_changes_backup_successful">O ficheiro das mudanzas do OSM \"%1$s\" foi xerado</string>
-    <string name="local_osm_changes_backup_failed">Non foi posíbel facer copia de seguranza (backup) das mudanzas do OSM.</string>
-    <string name="local_osm_changes_backup">Copia de seguranza coma mudanza do OSM</string>
+    <string name="local_osm_changes_backup_successful">O ficheiro das modificacións do OSM \"%1$s\" foi xerado</string>
+    <string name="local_osm_changes_backup_failed">Non foi posíbel facer copia de seguranza (backup) das modificacións do OSM.</string>
+    <string name="local_osm_changes_backup">Copia de seguranza coma modificación do OSM</string>
     <string name="delete_point">Eliminar o punto</string>
     <string name="plugin_distance_point_time">hora</string>
     <string name="plugin_distance_point_hdop">precisión</string>
@@ -800,7 +800,7 @@
     <string name="use_fluorescent_overlays_descr">Empregar cores fluorescentes para amosa-las pistas e rotas.</string>
     <string name="offline_edition">Edición sen conexión</string>
     <string name="offline_edition_descr">Empregar sempre a edición sen conexión.</string>
-    <string name="update_poi_does_not_change_indexes">As mudanzas nos puntos de interese (PDI) dentro da aplicación non afectan ós ficheiros dos mapas baixados, pois esas mudanzas gárdanse coma un ficheiro no teu dispositivo.</string>
+    <string name="update_poi_does_not_change_indexes">As modificacións nos puntos de interese (PDI) dentro da aplicación non afectan ós ficheiros dos mapas baixados, pois esas modificacións gárdanse coma un ficheiro no teu dispositivo.</string>
     <string name="local_openstreetmap_uploading">Estase a subir…</string>
     <string name="local_openstreetmap_were_uploaded">{0} PDI/notas subidos</string>
     <string name="local_openstreetmap_uploadall">Actualizar todo</string>
@@ -882,7 +882,7 @@
     <string name="data_to_search_poi_not_available">Baixar datos sen conexión para procurar PDI.</string>
     <string name="poi_filter_by_name">Procurar polo nome</string>
     <string name="old_poi_file_should_be_deleted">O ficheiro de datos do PDI «%1$s» é redundante e pode ser eliminado.</string>
-    <string name="update_poi_file_not_found">Non foi posíbel atopar un ficheiro local para mante-las mudanzas nos PDI e tampouco foi posíbel crealo.</string>
+    <string name="update_poi_file_not_found">Non foi posíbel atopar un ficheiro local para manter as modificacións nos PDI e tampouco foi posíbel crealo.</string>
     <string name="button_upgrade_osmandplus">Actualizar OsmAnd+</string>
     <string name="map_version_changed_info">Baixa a nova versión da aplicación, para poder emprega-los novos ficheiros dos mapas.</string>
     <string name="shared_string_rename">Mudar o nome</string>
@@ -1356,7 +1356,7 @@
     <string name="poi_error_info_not_loaded">A información sobre o nó non foi cargada</string>
     <string name="poi_dialog_opening_hours">Aberto</string>
     <string name="poi_dialog_comment">Comentario</string>
-    <string name="poi_dialog_comment_default">Mudanza do PDI</string>
+    <string name="poi_dialog_comment_default">Modificación do PDI</string>
     <string name="poi_dialog_other_tags_message">O resto das etiquetas consérvase</string>
     <string name="default_buttons_commit">Enviar</string>
     <string name="shared_string_clear">Limpar</string>
@@ -1463,7 +1463,7 @@
     <string name="rendering_value_translucent_blue_name">Azul translúcido</string>
     <string name="rendering_value_purple_name">Violeta</string>
     <string name="rendering_value_translucent_purple_name">Violeta translúcido</string>
-    <string name="restart_is_required">Requírese un reinicio para aplicar as mudanzas.</string>
+    <string name="restart_is_required">Requírese un reinicio para aplicar as modificacións.</string>
     <string name="light_theme">Claro</string>
     <string name="dark_theme">Escuro</string>
     <string name="lang_pms">Piamontés</string>
@@ -1532,7 +1532,7 @@
     <string name="current_route">Rota actual</string>
     <string name="mark_to_delete">Marcar para eliminar</string>
     <string name="local_recordings_delete_all_confirm">Eliminar %1$d notas\?</string>
-    <string name="local_osm_changes_upload_all_confirm">Subir %1$d mudanza(s) ó OSM\?</string>
+    <string name="local_osm_changes_upload_all_confirm">Subir %1$d modificación(s) ó OSM\?</string>
     <string name="confirmation_to_clear_history">Limpa-lo historial\?</string>
     <string name="shared_string_go">Ir</string>
     <string name="osm_edits">Edicións do OSM</string>
@@ -1546,7 +1546,7 @@
     <string name="drawer">Listaxe sinxela</string>
     <string name="short_location_on_map">Lat %1$s
 Lon %2$s</string>
-    <string name="tips_and_tricks_descr">Cuestións frecuentes, mudanzas recentes e outros.</string>
+    <string name="tips_and_tricks_descr">Cuestións frecuentes, modificacións recentes e outros.</string>
     <string name="routing_settings_2">Axustes da navegación</string>
     <string name="general_settings_2">Axustes xerais</string>
     <string name="shared_string_ellipsis">…</string>
@@ -1611,7 +1611,7 @@ Lon %2$s</string>
     <string name="rate_this_app_long">Dálle unha valoración ó OsmAnd na Google Play</string>
     <string name="user_hates_app_get_feedback">Díganos o porque.</string>
     <string name="user_hates_app_get_feedback_long">Por favor, fáganos saber calquera suxestión.</string>
-    <string name="delete_change">Elimina-la mudanza</string>
+    <string name="delete_change">Eliminar modificación</string>
     <string name="successfully_uploaded_pattern">Subido {0}/{1}</string>
     <string name="try_again">Tentar de novo</string>
     <string name="error_message_pattern">Erro: {0}</string>
@@ -1630,7 +1630,7 @@ Lon %2$s</string>
     <string name="shared_string_deselect_all">Desbota-la selección toda</string>
     <string name="osm_edit_context_menu_delete">Eliminar edición do OSM</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Axudante cartográfico do OSM</string>
-    <string name="osm_changes_added_to_local_edits">As mudanzas no OSM foron engadidas ó conxunto das mudanzas locais</string>
+    <string name="osm_changes_added_to_local_edits">As modificacións no OSM foron engadidas ó conxunto de modificacións local</string>
     <string name="osmand_parking_overdue">vencido</string>
     <string name="action_create">Creacción de acción</string>
     <string name="action_modify">Modificación de acción</string>
@@ -1719,11 +1719,11 @@ Lon %2$s</string>
     <string name="show_on_start">Amosar no inicio</string>
     <string name="commit_poi">Enviar o PDI</string>
     <string name="saved_at_time">Gardado agora coma: %1$s</string>
-    <string name="poi_deleted_localy">O punto de interese (PDI) será eliminado unha vez enviadas as mudanzas</string>
+    <string name="poi_deleted_localy">O punto de interese (PDI) será eliminado unha vez enviadas as modificacións</string>
     <string name="show_gpx">Amosar datos GPX</string>
     <string name="count_of_lines">Número de liñas</string>
     <string name="are_you_sure">Tes a certeza de querer facelo\?</string>
-    <string name="unsaved_changes_will_be_lost">Vanse perde-las mudanzas non gardadas. Proseguer\?</string>
+    <string name="unsaved_changes_will_be_lost">Vanse perder as modificacións non gardadas. Proseguer\?</string>
     <string name="downloads_left_template">Faltan %1$s baixadas</string>
     <string name="roads">Estradas</string>
     <string name="downloading_number_of_files">Estase a baixar - ficheiro %1$d</string>
@@ -1855,7 +1855,7 @@ Lon %2$s</string>
     <string name="last_update">Última actualización: %s</string>
     <string name="update_time">Hora da actualización</string>
     <string name="updates_size">Tamaño da actualización</string>
-    <string name="last_map_change">Última mudanza do mapa: %s</string>
+    <string name="last_map_change">Última modificación do mapa: %s</string>
     <string name="hourly">Cada hora</string>
     <string name="daily">Cada día</string>
     <string name="weekly">Cada semana</string>
@@ -1901,7 +1901,7 @@ Lon %2$s</string>
     <string name="show_polygons">Amosar polígonos</string>
     <string name="find_parking">Atopar aparcamento</string>
     <string name="shared_string_status">Estado</string>
-    <string name="shared_string_save_changes">Garda-las mudanzas</string>
+    <string name="shared_string_save_changes">Gardar modificacións</string>
     <string name="shared_string_email_address">Enderezo de correo</string>
     <string name="rendering_attr_hideUnderground_name">Obxectos subterráneos</string>
     <string name="data_is_not_available">Datos non dispoñíbeis</string>
@@ -2042,7 +2042,7 @@ Lon %2$s</string>
     <string name="get_started">Comezar</string>
     <string name="route_stops_before">%1$s paraxes antes</string>
     <string name="access_direction_haptic_feedback_descr">Inseri-lo enderezo do destino mediante vibración.</string>
-    <string name="use_osm_live_routing_description">Activa-la navegación por mudanzas do OsmAnd ao Vivo.</string>
+    <string name="use_osm_live_routing_description">Activar a navegación por modificacións do OsmAnd ao Vivo.</string>
     <string name="access_disable_offroute_recalc">Non recalcular a ruta ó saírme da mesma</string>
     <string name="access_disable_offroute_recalc_descr">Non recalcula a rota, ó afastarss da mesma.</string>
     <string name="access_disable_wrong_direction_recalc">Non recalculares a rota cando se estea na dirección contraria</string>
@@ -2083,7 +2083,7 @@ Lon %2$s</string>
     <string name="osm_live_thanks">Grazas por apoiar ó OsmAnd! 
 \n 
 \nPara activares tódalas funcións novas, tes que reinicia-lo OsmAnd.</string>
-    <string name="osm_live_region_desc">Parte da súa doazón será enviada ós usuarios do OSM que fagan mudanzas do mapa desa rexión.</string>
+    <string name="osm_live_region_desc">Parte da túa doazón será enviada ós usuarios do OSM que fagan modificacións do mapa desa rexión.</string>
     <string name="osm_live_ask_for_purchase">Merca primeiro unha subscrición ó OsmAnd ao Vivo</string>
     <string name="osm_live_header">Esta subscrición permite actualizacións cada hora para tódolos mapas do mundo.
 \n Un anaco dos ingresos voltan á comunidade do OSM e págase por cada contribución ó OSM.
@@ -2114,7 +2114,7 @@ Lon %2$s</string>
     <string name="show_free_version_banner_description">Amosa o anuncio da versión de balde, mesmo na versión de pago.</string>
     <string name="activate_seamarks_plugin">Activa o plugin da \"Vista náutica\"</string>
     <string name="other_menu_group">Outros</string>
-    <string name="poi_context_menu_modify_osm_change">Modificar mudanza do OSM</string>
+    <string name="poi_context_menu_modify_osm_change">Modificar modificación do OSM</string>
     <string name="number_of_contributors">Número de colaboradores</string>
     <string name="number_of_edits">Número de edicións</string>
     <string name="reports_for">Informe para</string>
@@ -2688,7 +2688,7 @@ Lon %2$s</string>
     <string name="osm_save_offline">Gardar sen conexión</string>
     <string name="context_menu_item_delete_waypoint">Eliminar punto de pasaxe do GPX\?</string>
     <string name="context_menu_item_edit_waypoint">Editar punto de pasaxe GPX</string>
-    <string name="simulate_initial_startup_descr">Amosa a pantalla do primeiro arrinque e mantén os demais axustes sen mudanzas.</string>
+    <string name="simulate_initial_startup_descr">Amosa a pantalla do primeiro arrinque e mantén os demais axustes sen modificacións.</string>
     <string name="rendering_value_darkyellow_name">Amarelo escuro</string>
     <string name="rendering_value_translucent_pink_name">Rosa translúcido</string>
     <string name="rendering_value_black_name">Negro</string>
@@ -3054,7 +3054,7 @@ Lon %2$s</string>
 \n • Eliminada a análise do Facebook e Firebase da versión de balde (o OsmAnd+ non o inclúe)
 \n
 \n</string>
-    <string name="use_osm_live_public_transport_description">Activar o transporte público para as mudanzas do OsmAnd Live.</string>
+    <string name="use_osm_live_public_transport_description">Activar o transporte público para as modificacións do OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Transporte público no OsmAnd Live</string>
     <string name="shared_string_walk">A pé</string>
     <string name="save_poi_value_exceed_length">Acurta a lonxitude da etiqueta \"%s\" polo menos a 255 caracteres.</string>
@@ -3149,8 +3149,8 @@ Lon %2$s</string>
     <string name="profile_alert_duplicate_name_title">Nome duplicado</string>
     <string name="profile_alert_duplicate_name_msg">Xa existe un perfil con ese nome</string>
     <string name="profile_alert_cant_delete_base">Non se poden eliminar os perfís de base do OsmAnd</string>
-    <string name="profile_alert_need_save_title">Gardar mudanzas</string>
-    <string name="profile_alert_need_save_msg">Primeiro garda as mudanzas no perfil</string>
+    <string name="profile_alert_need_save_title">Gardar modificacións</string>
+    <string name="profile_alert_need_save_msg">Primeiro garda as modificacións no perfil</string>
     <string name="profile_alert_delete_title">Eliminar perfil</string>
     <string name="profile_alert_delete_msg">Tes a certeza de que desexas eliminar o perfil \"%s\"</string>
     <string name="select_base_profile_dialog_title">Escoller o perfil para comezar</string>
@@ -3310,7 +3310,7 @@ Lon %2$s</string>
     <string name="coordinates_format_info">O formato escollido será aplicado en toda a aplicación.</string>
     <string name="pref_selected_by_default_for_profiles">Esta opción está escollida por defecto para os perfís: %s</string>
     <string name="change_default_settings">Mudar os axustes</string>
-    <string name="discard_changes">Rexeitar mudanza</string>
+    <string name="discard_changes">Rexeitar modificación</string>
     <string name="apply_to_current_profile">Aplicar só a \"%1$s\"</string>
     <string name="apply_to_all_profiles">Aplicar a tódolos perfís</string>
     <string name="start_up_message_pref">Mensaxe de inicio</string>
@@ -3427,7 +3427,7 @@ Lon %2$s</string>
 \n • Outras correccións de erros
 \n
 \n</string>
-    <string name="apply_preference_to_all_profiles">Podes aplicar esta mudanza a todos ou só ós perfís seleccionados.</string>
+    <string name="apply_preference_to_all_profiles">Podes aplicar esta modificación a todos ou só ós perfís seleccionados.</string>
     <string name="shared_preference">Compartillado</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Preferir estradas sen pavimentar</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferir as estradas sen pavimentar aos pavimentados para o trazado de rutas.</string>
@@ -3494,7 +3494,7 @@ Lon %2$s</string>
     <string name="choose_icon_color_name">Icona, cor e nome</string>
     <string name="reorder_profiles">Editar a listaxe de perfís</string>
     <string name="selected_profile">Perfil seleccionado</string>
-    <string name="reset_confirmation_descr">Ó premer en %1$s, serán desbotadas todas as túas mudanzas.</string>
+    <string name="reset_confirmation_descr">Ó premer en %1$s, serán desbotadas todas as túas modificacións.</string>
     <string name="reset_all_profile_settings_descr">Restabelecer todos os axustes do perfil ós valores por defecto da instalación.</string>
     <string name="reset_all_profile_settings">Restabelecer todos os axustes do perfil\?</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
@@ -3552,7 +3552,7 @@ Lon %2$s</string>
     <string name="multimedia_photo_play_sound">Son do obturador da cámara</string>
     <string name="osm_authorization_success">A autorización foi correcta</string>
     <string name="rearrange_categories">Reorganizar categorías</string>
-    <string name="create_custom_categories_list_promo">Podes engadir categorías personalizadas, agochar as categorías que non semellen necesarias e mudar a orde de clasificación da listaxe. A listaxe pode ser importada e exportada con perfís.</string>
+    <string name="create_custom_categories_list_promo">Muda a orde de clasificación da listaxe ou agocha as categorías innecesarias. Podes importar ou exportar todos as modificacións cos perfís.</string>
     <string name="add_new_custom_category_button_promo">Podes engadir unha nova categoría personalizada marcando unha ou varias categorías necesarias.</string>
     <string name="reset_to_default_category_button_promo">Restabelecer ó valor por defecto, restabelecerá a orde de clasificación ó estado por defecto após a instalación.</string>
     <string name="shared_string_available">Dispoñíbel</string>
@@ -3692,4 +3692,55 @@ Lon %2$s</string>
     <string name="lang_lmo">Lombardo</string>
     <string name="custom_color">Cor personalizada</string>
     <string name="extra_maps_menu_group">Mapas adicionais</string>
+    <string name="shared_string_terrain">Terreo</string>
+    <string name="hillshade_description">Mapa de asombreado empregando sombras escuras para amosar as pendentes, cumios e terras baixas.</string>
+    <string name="slope_description">A pendente visualízase en cores sobre o terreo.</string>
+    <string name="terrain_slider_description">Define os niveis de achegamento mínimo e máximo nos que se amosará a capa.</string>
+    <string name="hillshade_download_description">Precísanse mapas adicionais para ollar o asombreado no mapa.</string>
+    <string name="slope_download_description">Precísanse mapas adicionais para ollar as pendentes no mapa.</string>
+    <string name="slope_read_more">Podes ler máis sobre as pendentes en %1$s.</string>
+    <string name="shared_string_transparency">Transparencia</string>
+    <string name="shared_string_zoom_levels">Niveis de achegamento</string>
+    <string name="shared_string_legend">Lenda</string>
+    <string name="terrain_empty_state_text">Permite ollar o asombreado ou o mapa de pendentes. Podes ler máis sobre estes tipos de mapas no noso sitio</string>
+    <string name="shared_string_hillshade">Sombras do relevo</string>
+    <string name="import_complete_description">Todos os datos de %1$s son importados, podes empregar os botóns de abaixo para abrir a parte necesaria da aplicación para xestionala.</string>
+    <string name="shared_string_import_complete">Importación completada</string>
+    <string name="items_added">Elementos engadidos</string>
+    <string name="checking_for_duplicate_description">OsmAnd comproba %1$s para ver se hai duplicados cos elementos existentes na aplicación. 
+\n 
+\nPode levar algún tempo.</string>
+    <string name="shared_string_importing">Estase a importar</string>
+    <string name="importing_from">Estanse a importar datos de %1$s</string>
+    <string name="clear_recorded_data_warning">Eliminar os datos gravados\?</string>
+    <string name="recalculate_route_in_deviation">Recalcular ruta en caso de desvío</string>
+    <string name="select_distance_route_will_recalc">Escolle a distancia após a cal a ruta será recalculada.</string>
+    <string name="recalculate_route_distance_promo">A ruta será recalculada se a distancia á localización actual é maior que o valor escollido.</string>
+    <string name="n_items_of_z">%1$s de %2$s</string>
+    <string name="download_slope_maps">Pendentes</string>
+    <string name="quick_action_show_hide_terrain">Amosar/agochar terreo</string>
+    <string name="quick_action_terrain_hide">Agochar terreo</string>
+    <string name="quick_action_terrain_show">Amosar terreo</string>
+    <string name="quick_action_terrain_descr">Un botón que amosa ou agocha a capa do terreo no mapa.</string>
+    <string name="delete_description">Eliminar descrición</string>
+    <string name="add_description">Engadir descrición</string>
+    <string name="select_group">Escoller grupo</string>
+    <string name="select_shape">Escoller forma</string>
+    <string name="shared_string_circle">Círculo</string>
+    <string name="shared_string_octagon">Octógono</string>
+    <string name="shared_string_square">Cadrado</string>
+    <string name="shared_string_min">Mín</string>
+    <string name="ui_customization_description">Personaliza a morea de elementos na gabeta, na configuración do mapa e o menú contextual. 
+\n 
+\nPodes desactivar os plugins non enpregados, para agochar todos os seus controis da aplicación %1$s.</string>
+    <string name="ui_customization_short_descr">Elementos da gabeta, menú contextual</string>
+    <string name="ui_customization">Personalización da interface de usuario</string>
+    <string name="shared_string_drawer">Gabeta</string>
+    <string name="context_menu_actions">Accións do menú contextual</string>
+    <string name="reorder_or_hide_from">Reordenar ou agochar elementos de %1$s.</string>
+    <string name="shared_string_divider">Divisor</string>
+    <string name="divider_descr">Elementos abaixo deste punto separados por un divisor.</string>
+    <string name="shared_string_hidden">Agochado</string>
+    <string name="hidden_items_descr">Estes elementos non se amosan no menú, mais as opcións ou plugins que representan seguirán a funcionar.</string>
+    <string name="reset_items_descr">Os axustes restabeleceranse ó estado orixinal após agocharse.</string>
 </resources>
