@@ -338,18 +338,14 @@ public class QuickSearchListItem {
 						if (categories.size() == 1) {
 							String res = "";
 							PoiCategory category = categories.get(0);
-							LinkedHashSet<String> f = acceptedTypes.get(category);
-							List<String> filters;
-							if (f != null) {
-								filters = new ArrayList<>(f);
-								if (filters.size() == 1) {
-									res = getPoiTypeIconName(category.getPoiTypeByKeyName(filters.get(0)));
-								} else {
-									res = category.getIconKeyName();
-								}
-								if (res != null && RenderingIcons.containsBigIcon(res)) {
-									iconId = RenderingIcons.getBigIconResourceId(res);
-								}
+							LinkedHashSet<String> filters = acceptedTypes.get(category);
+							if (filters == null || filters.size() > 1) {
+								res = category.getIconKeyName();
+							} else {
+								res = getPoiTypeIconName(category.getPoiTypeByKeyName(filters.iterator().next()));
+							}
+							if (res != null && RenderingIcons.containsBigIcon(res)) {
+								iconId = RenderingIcons.getBigIconResourceId(res);
 							}
 						}
 					}
