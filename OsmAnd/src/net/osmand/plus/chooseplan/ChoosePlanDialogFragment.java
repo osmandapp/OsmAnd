@@ -471,15 +471,15 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 					if (!Algorithms.isEmpty(discountTitle)) {
 						buttonDiscountTitle.setText(discountTitle);
 						buttonDiscountView.setVisibility(View.VISIBLE);
-					}
-					if (s.equals(maxDiscountSubscription) || maxDiscountSubscription != null && maxDiscountSubscription.isUpgrade()) {
-						int saveTextColor = R.color.color_osm_edit_delete;
-						if (hasIntroductoryInfo) {
-							saveTextColor = R.color.active_buttons_and_links_text_light;
-							AndroidUtils.setBackground(buttonDiscountView, UiUtilities.tintDrawable(buttonDiscountView.getBackground(),
-									ContextCompat.getColor(ctx, R.color.color_osm_edit_delete)));
+						if (s.equals(maxDiscountSubscription)) {
+							int saveTextColor = R.color.color_osm_edit_delete;
+							if (hasIntroductoryInfo || maxDiscountSubscription.isUpgrade()) {
+								saveTextColor = R.color.active_buttons_and_links_text_light;
+								AndroidUtils.setBackground(buttonDiscountView, UiUtilities.tintDrawable(buttonDiscountView.getBackground(),
+										ContextCompat.getColor(ctx, R.color.color_osm_edit_delete)));
+							}
+							buttonDiscountTitle.setTextColor(ContextCompat.getColor(ctx, saveTextColor));
 						}
-						buttonDiscountTitle.setTextColor(ContextCompat.getColor(ctx, saveTextColor));
 					}
 					if (!showSolidButton) {
 						buttonView.setOnClickListener(new OnClickListener() {

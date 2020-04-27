@@ -575,13 +575,6 @@ public class InAppPurchases {
 			}
 		}
 
-		public CharSequence getDescriptionTitle(@NonNull Context ctx) {
-			long totalPeriods = getTotalPeriods();
-			String unitStr = getTotalUnitsString(ctx, false).toLowerCase();
-			int discountPercent = subscription.getDiscountPercent(null);
-			return ctx.getString(R.string.get_discount_title, totalPeriods, unitStr, discountPercent + "%");
-		}
-
 		public CharSequence getFormattedDescription(@NonNull Context ctx, @ColorInt int textColor) {
 			long totalPeriods = getTotalPeriods();
 			String singleUnitStr = getUnitString(ctx).toLowerCase();
@@ -732,14 +725,17 @@ public class InAppPurchases {
 
 		@Override
 		public CharSequence getDescription(@NonNull Context ctx) {
-			if (getMonthlyPriceValue() == 0) {
+			double monthlyPriceValue = getMonthlyPriceValue();
+			if (monthlyPriceValue == 0) {
 				return ctx.getString(R.string.osm_live_payment_month_cost_descr, getDefaultMonthlyPrice(ctx));
 			} else {
 				NumberFormat currencyFormatter = getCurrencyFormatter();
+				if (getIntroductoryInfo() != null)
+					monthlyPriceValue = getIntroductoryInfo().getIntroductoryMonthlyPriceValue();
 				if (currencyFormatter != null) {
-					return ctx.getString(R.string.osm_live_payment_month_cost_descr, currencyFormatter.format(getMonthlyPriceValue()));
+					return ctx.getString(R.string.osm_live_payment_month_cost_descr, currencyFormatter.format(monthlyPriceValue));
 				} else {
-					return ctx.getString(R.string.osm_live_payment_month_cost_descr_ex, getMonthlyPriceValue(), getPriceCurrencyCode());
+					return ctx.getString(R.string.osm_live_payment_month_cost_descr_ex, monthlyPriceValue, getPriceCurrencyCode());
 				}
 			}
 		}
@@ -751,22 +747,22 @@ public class InAppPurchases {
 		@Nullable
 		protected abstract InAppSubscription newInstance(@NonNull String sku);
 
-		public String getDiscountTitle(@NonNull Context ctx, @Nullable InAppSubscription monthlyLiveUpdates) {
+		public String getDiscountTitle(@NonNull Context ctx, @NonNull InAppSubscription monthlyLiveUpdates) {
 			int discountPercent = getDiscountPercent(monthlyLiveUpdates);
 			return discountPercent > 0 ? ctx.getString(R.string.osm_live_payment_discount_descr, discountPercent + "%") : "";
 		}
 
-		public int getDiscountPercent(@Nullable InAppSubscription monthlyLiveUpdates) {
-			double monthlyPriceValue = getMonthlyPriceValue();
-			if (monthlyLiveUpdates != null) {
-				double regularMonthlyPrice = monthlyLiveUpdates.getPriceValue();
-				if (regularMonthlyPrice > 0 && monthlyPriceValue > 0 && monthlyPriceValue < regularMonthlyPrice) {
-					return (int) ((1 - monthlyPriceValue / regularMonthlyPrice) * 100d);
-				}
-			} else if (introductoryInfo != null) {
+		public int getDiscountPercent(@NonNull InAppSubscription monthlyLiveUpdates) {
+			double regularMonthlyPrice = monthlyLiveUpdates.getPriceValue();
+			if (introductoryInfo != null) {
 				double introductoryMonthlyPrice = introductoryInfo.getIntroductoryMonthlyPriceValue();
-				if (introductoryMonthlyPrice > 0 && monthlyPriceValue > 0 && monthlyPriceValue > introductoryMonthlyPrice) {
-					return (int) ((1 - introductoryMonthlyPrice / monthlyPriceValue) * 100d);
+				if (introductoryMonthlyPrice >= 0 && regularMonthlyPrice > 0 && introductoryMonthlyPrice < regularMonthlyPrice) {
+					return (int) ((1 - introductoryMonthlyPrice / regularMonthlyPrice) * 100d);
+				}
+			} else {
+				double monthlyPriceValue = getMonthlyPriceValue();
+				if (regularMonthlyPrice >= 0 && monthlyPriceValue > 0 && monthlyPriceValue < regularMonthlyPrice) {
+					return (int) ((1 - monthlyPriceValue / regularMonthlyPrice) * 100d);
 				}
 			}
 			return 0;
