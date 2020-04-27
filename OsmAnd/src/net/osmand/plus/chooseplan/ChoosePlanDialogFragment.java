@@ -366,8 +366,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 					maxDiscount = discount;
 				}
 			}
-			boolean maxDiscountAction = maxDiscountSubscription != null
-					&& (maxDiscountSubscription.getIntroductoryInfo() != null || maxDiscountSubscription.isUpgrade());
+			boolean maxDiscountAction = maxDiscountSubscription != null && maxDiscountSubscription.hasDiscountOffer();
 			for (final InAppSubscription s : visibleSubscriptions) {
 				InAppSubscriptionIntroductoryInfo introductoryInfo = s.getIntroductoryInfo();
 				boolean hasIntroductoryInfo = introductoryInfo != null;
@@ -447,15 +446,13 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 
 					boolean showSolidButton = !anyPurchased
 							&& (!maxDiscountAction || hasIntroductoryInfo || maxDiscountSubscription.isUpgrade());
-					if (!showSolidButton && hasIntroductoryInfo) {
-						buttonExTitle.setTextColor(buttonTitle.getCurrentTextColor());
-					}
+					int descriptionColor = showSolidButton ? buttonExTitle.getCurrentTextColor() : buttonTitle.getCurrentTextColor();
 					buttonView.setVisibility(!showSolidButton ? View.VISIBLE : View.GONE);
 					buttonExView.setVisibility(showSolidButton ? View.VISIBLE : View.GONE);
 					View div = button.findViewById(R.id.div);
 
 					CharSequence priceTitle = hasIntroductoryInfo ?
-							introductoryInfo.getFormattedDescription(ctx, buttonExTitle.getCurrentTextColor()) : s.getPriceWithPeriod(ctx);
+							introductoryInfo.getFormattedDescription(ctx, descriptionColor) : s.getPriceWithPeriod(ctx);
 					title.setText(s.getTitle(ctx));
 					if (Algorithms.isEmpty(descriptionText.toString())) {
 						description.setVisibility(View.GONE);

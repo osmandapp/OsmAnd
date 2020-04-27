@@ -771,6 +771,10 @@ public class InAppPurchases {
 		public String getPriceWithPeriod(Context ctx) {
 			return getPrice(ctx);
 		}
+
+		public boolean hasDiscountOffer() {
+			return getIntroductoryInfo() != null || isUpgrade();
+		}
 	}
 
 	public static class InAppPurchaseFullVersion extends InAppPurchase {
