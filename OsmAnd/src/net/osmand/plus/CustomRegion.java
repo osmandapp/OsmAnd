@@ -1,6 +1,9 @@
 package net.osmand.plus;
 
+import android.content.Context;
+
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.JsonUtils;
@@ -74,7 +77,7 @@ public class CustomRegion extends WorldRegion {
 		return descriptionInfo;
 	}
 
-	public static CustomRegion fromJson(JSONObject object) throws JSONException {
+	public static CustomRegion fromJson(@NonNull Context ctx, JSONObject object) throws JSONException {
 		String scopeId = object.optString("scope-id", null);
 		String path = object.optString("path", null);
 		String type = object.optString("type", null);
@@ -90,9 +93,9 @@ public class CustomRegion extends WorldRegion {
 		region.names = JsonUtils.getLocalizedMapFromJson("name", object);
 		if (!Algorithms.isEmpty(region.names)) {
 			region.regionName = region.names.get("");
-			region.regionNameEn = region.names.get("");
+			region.regionNameEn = region.names.get("en");
 			region.regionFullName = region.names.get("");
-			region.regionNameLocale = region.names.get("");
+			region.regionNameLocale = JsonUtils.getLocalizedResFromMap(ctx, region.names, region.regionName);
 		}
 
 		region.icons = JsonUtils.getLocalizedMapFromJson("icon", object);

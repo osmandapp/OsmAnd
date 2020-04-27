@@ -8,6 +8,14 @@ public class TransportStopExit extends MapObject {
 	public int y31;
 	public String ref = null;
 
+	public TransportStopExit() {}
+
+	public TransportStopExit(int x31, int y31, String ref) {
+		this.x31 = x31;
+		this.y31 = y31;
+		this.ref = ref;
+	}
+
 	@Override
 	public void setLocation(double latitude, double longitude) {
 		super.setLocation(latitude, longitude);

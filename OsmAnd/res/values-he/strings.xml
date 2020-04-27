@@ -3664,4 +3664,6 @@
     <string name="lang_lmo">לומברדית</string>
     <string name="custom_color">צבע בהתאמה אישית</string>
     <string name="extra_maps_menu_group">מפות נוספות</string>
+    <string name="lang_war">וראי</string>
+    <string name="download_unsupported_action">הפעולה %1$s אינה נתמכת</string>
 </resources>

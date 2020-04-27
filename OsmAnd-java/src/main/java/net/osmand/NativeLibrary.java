@@ -25,10 +25,12 @@ import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.router.NativeTransportRoutingResult;
 import net.osmand.router.PrecalculatedRouteDirection;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
+import net.osmand.router.TransportRoutingConfiguration;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -128,6 +130,11 @@ public class NativeLibrary {
 		return closeBinaryMapFile(filePath);
 	}
 
+	public NativeTransportRoutingResult[] runNativePTRouting(int sx31, int sy31, int ex31, int ey31,
+		TransportRoutingConfiguration cfg, RouteCalculationProgress progress) {
+		return nativeTransportRouting(new int[] { sx31, sy31, ex31, ey31 }, cfg, progress);
+	}
+
 	public RouteSegmentResult[] runNativeRouting(int sx31, int sy31, int ex31, int ey31, RoutingConfiguration config,
 			RouteRegion[] regions, RouteCalculationProgress progress, PrecalculatedRouteDirection precalculatedRouteDirection, 
 			boolean basemap, boolean publicTransport, boolean startTransportStop, boolean targetTransportStop) {
@@ -159,6 +166,9 @@ public class NativeLibrary {
 															   float initDirection, RouteRegion[] regions, RouteCalculationProgress progress,
 															   PrecalculatedRouteDirection precalculatedRouteDirection, boolean basemap,
 															   boolean publicTransport, boolean startTransportStop, boolean targetTransportStop);
+
+	protected static native NativeTransportRoutingResult[] nativeTransportRouting(int[] coordinates, TransportRoutingConfiguration cfg,
+																				  RouteCalculationProgress progress);
 
 	protected static native void deleteSearchResult(long searchResultHandle);
 

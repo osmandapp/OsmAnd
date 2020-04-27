@@ -1,6 +1,7 @@
 package net.osmand.plus;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.Html;
@@ -318,7 +319,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 
 		JSONArray regionsJson = json.optJSONArray("regionsJson");
 		if (regionsJson != null) {
-			customRegions.addAll(collectRegionsFromJson(regionsJson));
+			customRegions.addAll(collectRegionsFromJson(app, regionsJson));
 		}
 	}
 
@@ -365,12 +366,12 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		json.put("pluginResDir", resourceDirName);
 	}
 
-	public static List<CustomRegion> collectRegionsFromJson(JSONArray jsonArray) throws JSONException {
+	public static List<CustomRegion> collectRegionsFromJson(@NonNull Context ctx, JSONArray jsonArray) throws JSONException {
 		List<CustomRegion> customRegions = new ArrayList<>();
 		Map<String, CustomRegion> flatRegions = new HashMap<>();
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject regionJson = jsonArray.getJSONObject(i);
-			CustomRegion region = CustomRegion.fromJson(regionJson);
+			CustomRegion region = CustomRegion.fromJson(ctx, regionJson);
 			flatRegions.put(region.getPath(), region);
 		}
 		for (CustomRegion region : flatRegions.values()) {
