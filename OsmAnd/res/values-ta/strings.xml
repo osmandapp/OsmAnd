@@ -266,7 +266,7 @@
     <string name="record_plugin_name">பயண பதிவுகள்</string>
     <string name="srtm_paid_version_title">எல்லைகொடு வரிகளின் செருகி</string>
     <string name="srtm_plugin_name">"எல்லைகோடு  "</string>
-    <string name="osm_live_payment_discount_descr">சேமிக்க %1$s!</string>
+    <string name="osm_live_payment_discount_descr">சேமிக்க %1$s</string>
     <string name="markers_remove_dialog_msg">\'%s\' வரைப்படப் புள்ளியை அழிக்க\?</string>
     <string name="unirs_render_descr">பாதசாரி மற்றும் மிதிவண்டி சாலைகள் வேறுபடுவதை இயல்புநிலை பாணியின் மாற்றல். மரபுவழி Mapnik வண்ணங்களைப் பயன்படுத்துகிறது.</string>
     <string name="shared_string_bookmark">அடையாளக்குறி</string>

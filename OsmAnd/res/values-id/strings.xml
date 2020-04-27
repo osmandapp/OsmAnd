@@ -708,12 +708,12 @@
     <string name="osm_live_payment_annual_title">Tahunan</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / bulan</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / bulan</string>
-    <string name="osm_live_payment_discount_descr">Hemat %1$s.</string>
+    <string name="osm_live_payment_discount_descr">Hemat %1$s</string>
     <string name="osm_live_payment_current_subscription">Langganan saat ini</string>
     <string name="osm_live_payment_renews_monthly">Perpanjang tiap bulan</string>
     <string name="osm_live_payment_renews_quarterly">Perpanjang tiap 4 bulan</string>
     <string name="osm_live_payment_renews_annually">Perpanjang tiap tahun</string>
-    <string name="default_price_currency_format"/>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Pilih periode pembayaran yang anda inginkan:</string>
     <string name="osm_live_payment_contribute_descr">Sebagian pendapatan diberikan untuk kontributor OpenStreetMap.</string>
     <string name="powered_by_osmand">Oleh OsmAnd</string>

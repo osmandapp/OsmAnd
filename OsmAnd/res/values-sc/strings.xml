@@ -2856,7 +2856,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="osm_live_payment_annual_title">Una borta a s\'annu</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / mese</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mese</string>
-    <string name="osm_live_payment_discount_descr">Rispàrmia %1$s.</string>
+    <string name="osm_live_payment_discount_descr">Rispàrmia %1$s</string>
     <string name="osm_live_payment_current_subscription">Abbonamentu atuale</string>
     <string name="osm_live_payment_renews_monthly">Si rinnovat cada mese</string>
     <string name="osm_live_payment_renews_quarterly">Si rinnovat cada tres meses</string>

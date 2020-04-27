@@ -2238,7 +2238,7 @@
     <string name="osm_live_payment_annual_title">Anual</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / lună</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / lună</string>
-    <string name="osm_live_payment_discount_descr">Salvați %1$s.</string>
+    <string name="osm_live_payment_discount_descr">Salvați %1$s</string>
     <string name="osm_live_payment_current_subscription">Abonament curent</string>
     <string name="osm_live_payment_renews_monthly">Reînnoire lunară</string>
     <string name="osm_live_payment_renews_quarterly">Se reînnoiește trimestrial</string>
