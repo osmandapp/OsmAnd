@@ -3622,4 +3622,8 @@
     <string name="lang_ba">Başkurtça</string>
     <string name="lang_an">Aragonca</string>
     <string name="lang_lmo">Lombardca</string>
+    <string name="lang_mn">Moğolca</string>
+    <string name="custom_color">Özel renk</string>
+    <string name="extra_maps_menu_group">Ekstra haritalar</string>
+    <string name="download_unsupported_action">Desteklenmeyen eylem %1$s</string>
 </resources>
