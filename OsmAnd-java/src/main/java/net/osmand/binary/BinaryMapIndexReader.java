@@ -1307,6 +1307,12 @@ public class BinaryMapIndexReader {
 		poiAdapter.initCategories(poiIndex);
 	}
 
+	public void initCategories() throws IOException {
+		for (PoiRegion poiIndex : poiIndexes) {
+			poiAdapter.initCategories(poiIndex);
+		}
+	}
+
 	public List<Amenity> searchPoiByName(SearchRequest<Amenity> req) throws IOException {
 		if (req.nameQuery == null || req.nameQuery.length() == 0) {
 			throw new IllegalArgumentException();

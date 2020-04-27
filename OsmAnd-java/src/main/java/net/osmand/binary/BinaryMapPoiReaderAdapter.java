@@ -26,6 +26,7 @@ import net.osmand.data.Amenity.AmenityRoutePoint;
 import net.osmand.data.LatLon;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -224,11 +225,21 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndCategoryTable.CATEGORY_FIELD_NUMBER:
 				String cat = codedIS.readString().intern();
 				region.categories.add(cat);
-				region.categoriesType.add(poiTypes.getPoiCategoryByName(cat.toLowerCase()));
+				region.categoriesType.add(poiTypes.getPoiCategoryByName(cat.toLowerCase(), true));
 				region.subcategories.add(new ArrayList<String>());
 				break;
 			case OsmandOdb.OsmAndCategoryTable.SUBCATEGORIES_FIELD_NUMBER:
-				region.subcategories.get(region.subcategories.size() - 1).add(codedIS.readString().intern());
+				String subCat = codedIS.readString().intern();
+				PoiCategory lastCat = poiTypes.getPoiCategoryByName(region.categories.get(region.categories.size() - 1));
+				PoiType poiType = new PoiType(MapPoiTypes.getDefault(), lastCat, null, subCat);
+				List<String> filters = new ArrayList<>();
+				for (PoiType poi : lastCat.getPoiTypes()) {
+					filters.add(poi.getKeyName());
+				}
+				if (!filters.contains(subCat)) {
+					lastCat.getPoiTypes().add(poiType);
+				}
+				region.subcategories.get(region.subcategories.size() - 1).add(subCat);
 				break;
 			default:
 				skipUnknownField(t);

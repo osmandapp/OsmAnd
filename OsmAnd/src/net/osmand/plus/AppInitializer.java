@@ -21,6 +21,7 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.OsmandRegions.RegionTranslation;
 import net.osmand.map.WorldRegion;
@@ -481,6 +482,16 @@ public class AppInitializer implements IProgress {
 		});
 	}
 
+	private void readPoiTypesFromMap() {
+		final BinaryMapIndexReader[] currentFile = app.resourceManager.getPoiSearchFiles();
+		for (BinaryMapIndexReader r : currentFile) {
+			try {
+				r.initCategories();
+			} catch (IOException e) {
+				LOG.error("Error while read poi types from map " + e);
+			}
+		}
+	}
 
 	public void onCreateApplication() {
 		// always update application mode to default
@@ -730,6 +741,7 @@ public class AppInitializer implements IProgress {
 			initPoiTypes();
 			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);
 			app.resourceManager.reloadIndexesOnStart(this, warnings);
+			readPoiTypesFromMap();
 
 			// native depends on renderers
 			initNativeCore();
