@@ -778,7 +778,7 @@
     <string name="show_warnings_title">Wyświetlanie ostrzeżeń…</string>
     <string name="show_warnings_descr">Konfiguruje ostrzeżenia ruchu drogowego (ograniczenia prędkości, znaki \"stop\", progi zwalniające, tunele), ostrzeżenia o fotoradarach i informacje o pasach ruchu.</string>
     <string name="osmand_short_description_80_chars">Mapy dla całego świata i nawigacja działająca w oparciu o stacjonarne jak i sieciowe mapy OSM</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automatyczne Nawigowanie Do celu) 
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automatyczna nawigacja do celu) 
 \n 
 \nOsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej gamy globalnych map (OSM). Wszystkie dane map (wektorowe lub kafelkowe) mogą być przechowywane na karcie pamięci telefonu do użytku offline. OsmAnd oferuje również nawigację w trybie offline i online zawierającą zapowiedzi głosowe. 
 \n 
@@ -797,7 +797,7 @@
 \n 
 \n Ograniczenia w tej bezpłatnej wersji OsmAnd: 
 \n - Limitowana liczba pobrań mapy 
-\n - Brak dostępu do Użytecznych Miejsc z Wikipedii w trybie offline 
+\n - Brak dostępu do Użytecznych miejsc z Wikipedii w trybie offline 
 \n 
 \nOsmAnd jest aktywnie rozwijany i dalszy rozwój jest uzależniony od wkładu pieniężnego na finansowanie rozwoju i testowania nowych funkcjonalności. Proszę rozważyć zakup OsmAnd+, lub finansowanie konkretnych nowych funkcji lub dokonania ogólnej darowizny na https://osmand.net.</string>
     <string name="osmand_plus_short_description_80_chars">OsmAnd to aplikacja open source do nawigacji obsługująca mapy offline i online</string>
@@ -836,7 +836,7 @@
     <string name="poi_filter_sightseeing">Zwiedzanie</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) 
 \n 
-\nOsmAnd+ jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej gamy globalnych map OSM. Wszystkie dane map (wektorowe lub kafelkowe) mogą być przechowywane na karcie pamięci telefonu do użycia bez połączenia z siecią. OsmAnd umożliwia również wyznaczanie tras oraz nawigowanie zarówno w trybie stacjonarnym jak i sieciowym z komunikatami głosowymi. 
+\nOsmAnd+ jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej gamy globalnych map OSM. Wszystkie dane map (wektorowe lub kafelkowe) mogą być przechowywane na karcie pamięci telefonu do użycia bez połączenia z siecią. OsmAnd umożliwia również wyznaczanie tras oraz nawigacja zarówno w trybie stacjonarnym jak i sieciowym z komunikatami głosowymi. 
 \n 
 \nOsmAnd + to płatna wersja aplikacji, kupując ją wspierasz projekt, finansujesz rozwój nowych funkcji i otrzymujesz najnowsze aktualizacje. 
 \n 
@@ -1129,7 +1129,7 @@
     <string name="keep_and_add_destination_point">Dodaj kolejny cel</string>
     <string name="use_displayed_track_for_navigation">Użyć wyświetlanego śladu do nawigacji\?</string>
     <string name="calculate_osmand_route_without_internet">Wyznaczanie segmentów trasy offline</string>
-    <string name="gpx_option_calculate_first_last_segment">Wyznacza trasę usługi OsmAnd dla pierwszego i ostatniego segmentu</string>
+    <string name="gpx_option_calculate_first_last_segment">Niech OsmAnd ułoży trasę od pierwszego do ostatniego segmentu</string>
     <string name="lang_en">Angielski</string>
     <string name="lang_af">Afrykański</string>
     <string name="lang_hy">Armeński</string>
@@ -2009,7 +2009,7 @@ Długość %2$s</string>
     <string name="shared_string_change">Zmień</string>
     <string name="get_started">Rozpocznij</string>
     <string name="routing_attr_short_way_name">Ekonomiczna trasa</string>
-    <string name="routing_attr_short_way_description">Wyznacza ekonomiczną trasę (zwykle najkrótszą).</string>
+    <string name="routing_attr_short_way_description">Użyj trasy oszczędzającej paliwo (zwykle najkrótszej).</string>
     <string name="replace_favorite_confirmation">Zastąpić ulubiony punkt %1$s?</string>
     <string name="skip_map_downloading">Pomiń pobieranie map</string>
     <string name="first_usage_greeting">Otrzymuj wskazówki dojazdu i odkrywaj nowe miejsca bez połączenia z Internetem</string>
@@ -2918,7 +2918,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="quick_action_gpx_tracks_show">Wyświetl ślady GPX</string>
     <string name="add_destination_query">Proszę najpierw ustalić cel</string>
     <string name="previous_route">Poprzednia trasa</string>
-    <string name="public_transport_warning_descr_blog">Dowiedz się więcej z wpisu na naszym blogu jak OsmAnd wyznacza trasy.</string>
+    <string name="public_transport_warning_descr_blog">Dowiedz się więcej na naszym blogu, jak OsmAnd wyznacza trasy.</string>
     <string name="route_add_start_point">Dodawanie punktu początkowego</string>
     <string name="route_descr_select_start_point">Wybierz punkt początkowy</string>
     <string name="rendering_attr_surface_unpaved_name">Nieutwardzona</string>
@@ -3392,7 +3392,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="download_map_dialog">Dialog pobierania map</string>
     <string name="dialogs_and_notifications_title">Dialogi i powiadomienia</string>
     <string name="suggested_maps">Sugerowane mapy</string>
-    <string name="suggested_maps_descr">Te mapy są wymagane do użycia z wtyczką.</string>
+    <string name="suggested_maps_descr">Wtyczka wymaga wymienionych map.</string>
     <string name="added_profiles">Dodano profile</string>
     <string name="added_profiles_descr">Profile dodane przez wtyczkę</string>
     <string name="shared_string_turn_off">Wyłącz</string>
@@ -3618,9 +3618,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="settings_item_read_error">Nie udało się odczytać %1$s.</string>
     <string name="settings_item_write_error">Nie udało się napisać %1$s.</string>
     <string name="settings_item_import_error">Nie udało się zaimportować %1$s.</string>
-    <string name="ui_customization_short_descr">Elementy szuflady, menu podręczne</string>
+    <string name="ui_customization_short_descr">Elementy menu bocznego, menu podręczne</string>
     <string name="ui_customization">Ustawienia interfejsu użytkownika</string>
-    <string name="shared_string_drawer">Szuflada</string>
+    <string name="shared_string_drawer">Menu boczne</string>
     <string name="context_menu_actions">Menu kontekstowe działań</string>
     <string name="reorder_or_hide_from">Przeorganizuj lub ukryj elementy z %1$s.</string>
     <string name="shared_string_divider">Dzielnik</string>
@@ -3659,4 +3659,21 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="lang_bar">Bawarski</string>
     <string name="lang_lmo">Lombard</string>
     <string name="extra_maps_menu_group">Dodatkowe mapy</string>
+    <string name="lang_scn"></string>
+    <string name="lang_cv"></string>
+    <string name="lang_my"></string>
+    <string name="lang_zhminnan"></string>
+    <string name="lang_min"></string>
+    <string name="lang_mg"></string>
+    <string name="lang_pnb"></string>
+    <string name="download_unsupported_action"></string>
+    <string name="lang_ba"></string>
+    <string name="lang_war"></string>
+    <string name="lang_sco"></string>
+    <string name="lang_an"></string>
+    <string name="lang_gu"></string>
+    <string name="lang_yo"></string>
+    <string name="ui_customization_description">Dostosuj liczbę elementów w menu bocznym, wyglądzie mapy i menu kontekstowym.
+\n
+\nMożesz wyłączyć nieużywane wtyczki, aby ukryć ich elementy z aplikacji %1$s.</string>
 </resources>
