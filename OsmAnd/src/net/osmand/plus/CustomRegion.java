@@ -237,11 +237,10 @@ public class CustomRegion extends WorldRegion {
 
 					itemsJson.put(itemJson);
 				}
-				LOG.debug(itemsJson);
 				return itemsJson;
 			}
 		} catch (JSONException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 		return null;
 	}
