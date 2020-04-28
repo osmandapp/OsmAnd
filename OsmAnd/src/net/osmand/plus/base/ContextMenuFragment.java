@@ -287,7 +287,8 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 			currentMenuState = MenuState.FULL_SCREEN;
 			if (isSingleFragment()) {
 				final TypedValue typedValueAttr = new TypedValue();
-				mapActivity.getTheme().resolveAttribute(R.attr.left_menu_view_bg, typedValueAttr, true);
+				int bgAttrId = AndroidUtils.isLayoutRtl(app) ? R.attr.right_menu_view_bg : R.attr.left_menu_view_bg;
+				mapActivity.getTheme().resolveAttribute(bgAttrId, typedValueAttr, true);
 				mainView.setBackgroundResource(typedValueAttr.resourceId);
 				mainView.setLayoutParams(new FrameLayout.LayoutParams(getLandscapeWidth(), ViewGroup.LayoutParams.MATCH_PARENT));
 			} else {

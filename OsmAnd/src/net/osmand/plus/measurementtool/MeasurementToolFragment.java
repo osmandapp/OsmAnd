@@ -296,7 +296,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		undoBtn = ((ImageButton) mainView.findViewById(R.id.undo_point_button));
 		redoBtn = ((ImageButton) mainView.findViewById(R.id.redo_point_button));
 
-		undoBtn.setImageDrawable(getContentIcon(R.drawable.ic_action_undo_dark));
+		Drawable undoDrawable = getContentIcon(R.drawable.ic_action_undo_dark);
+		undoBtn.setImageDrawable(AndroidUtils.getDrawableForDirection(mapActivity, undoDrawable));
 		undoBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -316,7 +317,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			}
 		});
 
-		redoBtn.setImageDrawable(getContentIcon(R.drawable.ic_action_redo_dark));
+		Drawable redoDrawable = getContentIcon(R.drawable.ic_action_redo_dark);
+		redoBtn.setImageDrawable(AndroidUtils.getDrawableForDirection(mapActivity, redoDrawable));
 		redoBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

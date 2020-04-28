@@ -168,7 +168,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			int width = getResources().getDimensionPixelSize(R.dimen.dashboard_land_width) - getResources().getDimensionPixelSize(R.dimen.dashboard_land_shadow_width);
 			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-			params.gravity = Gravity.BOTTOM;
+			params.gravity = Gravity.BOTTOM|Gravity.START;
 			view.findViewById(R.id.control_buttons).setLayoutParams(params);
 		}
 

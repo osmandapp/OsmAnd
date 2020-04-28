@@ -28,6 +28,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityActionsProvider;
 import net.osmand.core.android.MapRendererView;
@@ -632,7 +633,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		} else if (mapPosition == OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT) {
 			ratiox = 0.7f;
 		} else {
-			ratiox = mapPositionX == 0 ? 0.5f : 0.75f;
+			boolean isLayoutRtl = AndroidUtils.isLayoutRtl(application);
+			ratiox = mapPositionX == 0 ? 0.5f : (isLayoutRtl ? 0.25f : 0.75f);
 		}
 		final int cy = (int) (ratioy * view.getHeight());
 		final int cx = (int) (ratiox * view.getWidth());

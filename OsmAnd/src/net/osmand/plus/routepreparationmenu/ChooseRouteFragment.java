@@ -327,11 +327,11 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 							active ? R.drawable.pages_active_light : R.drawable.pages_inactive_light,
 							active ? R.drawable.pages_active_dark : R.drawable.pages_inactive_dark);
 					if (i == 0) {
-						layoutParams.setMargins(itemMargin, 0, itemPadding, 0);
+						AndroidUtils.setMargins(layoutParams, itemMargin, 0, itemPadding, 0);
 					} else if (i == routesCount - 1) {
-						layoutParams.setMargins(0, 0, itemMargin, 0);
+						AndroidUtils.setMargins(layoutParams, 0, 0, itemMargin, 0);
 					} else {
-						layoutParams.setMargins(0, 0, itemPadding, 0);
+						AndroidUtils.setMargins(layoutParams, 0, 0, itemPadding, 0);
 					}
 					itemView.setLayoutParams(layoutParams);
 					pagesView.addView(itemView);

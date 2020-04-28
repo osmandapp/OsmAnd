@@ -23,7 +23,6 @@ import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
@@ -619,10 +618,10 @@ public class UiUtilities {
 		return new ContextThemeWrapper(context, nightMode ? darkStyle : lightStyle);
 	}
 
-	public static void setMargins(View v, int l, int t, int r, int b) {
+	public static void setMargins(View v, int s, int t, int e, int b) {
 		if (v.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
 			ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
-			p.setMargins(l, t, r, b);
+			AndroidUtils.setMargins(p, s, t, e, b);
 			v.requestLayout();
 		}
 	}
