@@ -2846,7 +2846,7 @@
     <string name="osm_live_payment_annual_title">每年</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / 月</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / 月</string>
-    <string name="osm_live_payment_discount_descr">節省 %1$s。</string>
+    <string name="osm_live_payment_discount_descr">節省 %1$s</string>
     <string name="osm_live_payment_current_subscription">目前的訂閱</string>
     <string name="osm_live_payment_renews_monthly">每月續訂</string>
     <string name="osm_live_payment_renews_quarterly">每季續訂</string>
@@ -3660,4 +3660,6 @@
     <string name="lang_an">亞拉岡語</string>
     <string name="lang_lmo">倫巴底語</string>
     <string name="custom_color">自訂顏色</string>
+    <string name="extra_maps_menu_group">額外地圖</string>
+    <string name="download_unsupported_action">不支援的動作 %1$s</string>
 </resources>

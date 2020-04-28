@@ -2831,7 +2831,7 @@
     <string name="osm_live_payment_annual_title">Ετήσια</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / μήνα</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / μήνα</string>
-    <string name="osm_live_payment_discount_descr">Εξοικονομήστε %1$s.</string>
+    <string name="osm_live_payment_discount_descr">Εξοικονομήστε %1$s</string>
     <string name="osm_live_payment_current_subscription">Η τρέχουσα εγγραφή</string>
     <string name="osm_live_payment_renews_monthly">Μηνιαίες ανανεώσεις</string>
     <string name="osm_live_payment_renews_quarterly">Τριμηνιαίες ανανεώσεις</string>

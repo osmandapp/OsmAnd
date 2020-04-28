@@ -2699,7 +2699,7 @@
     <string name="osm_live_payment_annual_title">سنوي</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / شهر</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / شهر</string>
-    <string name="osm_live_payment_discount_descr">وفر %1$s.</string>
+    <string name="osm_live_payment_discount_descr">وفر %1$s</string>
     <string name="osm_live_payment_current_subscription">الاشتراك الحالي</string>
     <string name="osm_live_payment_renews_monthly">يجدد شهريا</string>
     <string name="osm_live_payment_renews_quarterly">تجديد فصلي</string>
@@ -3605,7 +3605,7 @@
     <string name="select_wikipedia_article_langs">حدد اللغات التي ستظهر بها مقالات ويكيبيديا على الخريطة. يمكنك التبديل بين جميع اللغات المتاحة أثناء قراءة المقالة.</string>
     <string name="some_articles_may_not_available_in_lang">قد لا تتوفر بعض مقالات ويكيبيديا بلغتك.</string>
     <string name="lang_zhyue">الكانتونية</string>
-    <string name="lang_zhminnan">جنوب دقيقة</string>
+    <string name="lang_zhminnan">مين نان</string>
     <string name="lang_yo">اليوروبية</string>
     <string name="lang_war">واراي</string>
     <string name="lang_uz">الأوزبكية</string>
@@ -3632,4 +3632,5 @@
     <string name="lang_an">ارجواني</string>
     <string name="lang_lmo">لومبارد</string>
     <string name="custom_color">لون مخصص</string>
+    <string name="extra_maps_menu_group">خرائط إضافية</string>
 </resources>

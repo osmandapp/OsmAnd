@@ -1,6 +1,9 @@
 package net.osmand.plus;
 
+import android.content.Context;
+
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.JsonUtils;
@@ -74,7 +77,7 @@ public class CustomRegion extends WorldRegion {
 		return descriptionInfo;
 	}
 
-	public static CustomRegion fromJson(JSONObject object) throws JSONException {
+	public static CustomRegion fromJson(@NonNull Context ctx, JSONObject object) throws JSONException {
 		String scopeId = object.optString("scope-id", null);
 		String path = object.optString("path", null);
 		String type = object.optString("type", null);
@@ -90,9 +93,9 @@ public class CustomRegion extends WorldRegion {
 		region.names = JsonUtils.getLocalizedMapFromJson("name", object);
 		if (!Algorithms.isEmpty(region.names)) {
 			region.regionName = region.names.get("");
-			region.regionNameEn = region.names.get("");
+			region.regionNameEn = region.names.get("en");
 			region.regionFullName = region.names.get("");
-			region.regionNameLocale = region.names.get("");
+			region.regionNameLocale = JsonUtils.getLocalizedResFromMap(ctx, region.names, region.regionName);
 		}
 
 		region.icons = JsonUtils.getLocalizedMapFromJson("icon", object);
@@ -143,15 +146,15 @@ public class CustomRegion extends WorldRegion {
 					long containerSize = itemJson.optLong("containerSize");
 
 					String indexType = itemJson.optString("type", type);
-					String webUrl = itemJson.optString("weburl");
 					String fileName = itemJson.optString("filename");
 					String downloadUrl = itemJson.optString("downloadurl");
 					String size = new DecimalFormat("#.#").format(containerSize / (1024f * 1024f));
 
-					List<String> descrImageUrl = JsonUtils.jsonArrayToList("image-description-url", itemJson);
 					Map<String, String> indexNames = JsonUtils.getLocalizedMapFromJson("name", itemJson);
-					Map<String, String> descriptions = JsonUtils.getLocalizedMapFromJson("description", itemJson);
-					Map<String, String> webButtonText = JsonUtils.getLocalizedMapFromJson("web-button-text", itemJson);
+					Map<String, String> firstSubNames = JsonUtils.getLocalizedMapFromJson("firstsubname", itemJson);
+					Map<String, String> secondSubNames = JsonUtils.getLocalizedMapFromJson("secondsubname", itemJson);
+
+					DownloadDescriptionInfo descriptionInfo = DownloadDescriptionInfo.fromJson(itemJson.optJSONObject("description"));
 
 					DownloadActivityType type = DownloadActivityType.getIndexType(indexType);
 					if (type != null) {
@@ -160,10 +163,9 @@ public class CustomRegion extends WorldRegion {
 								.setSubfolder(subfolder)
 								.setDownloadUrl(downloadUrl)
 								.setNames(indexNames)
-								.setDescriptions(descriptions)
-								.setImageDescrUrl(descrImageUrl)
-								.setWebUrl(webUrl)
-								.setWebButtonText(webButtonText)
+								.setFirstSubNames(firstSubNames)
+								.setSecondSubNames(secondSubNames)
+								.setDescriptionInfo(descriptionInfo)
 								.setTimestamp(timestamp)
 								.setSize(size)
 								.setContentSize(contentSize)

@@ -161,4 +161,13 @@
     <string name="temporary_conditional_routing">अस्थायी सीमाओं पर विचार करें</string>
     <string name="shared_string_default">चूक</string>
     <string name="price_free">मुफ़्त</string>
+    <string name="default_speed_dialog_msg">"अज्ञात मार्ग द्वारा  आने जाने  का  समय  निर्णय करना और सभी  पटरी  पर वेग नियंत्रित करना (routing पर स्वाधीन हो जायेगा )"</string>
+    <string name="lang_pnb">पंजाबी</string>
+    <string name="lang_ne">नेपाल के नागरिक</string>
+    <string name="lang_my">"बर्मा  के नागरिक"</string>
+    <string name="lang_mn">मंगोलिया के नागरिक</string>
+    <string name="lang_kk">कज़ाकिस्तान के नागरिक</string>
+    <string name="lang_gu">गुजराती</string>
+    <string name="custom_color">असामान्य रंग</string>
+    <string name="extra_maps_menu_group">ज़्यादा मापें</string>
 </resources>

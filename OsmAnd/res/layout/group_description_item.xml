@@ -16,7 +16,8 @@
 		<net.osmand.plus.LockableViewPager
 			android:id="@+id/images_pager"
 			android:layout_width="match_parent"
-			android:layout_height="132dp" />
+			android:layout_height="@dimen/download_description_images_height"
+			tools:visibility="gone" />
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/description"

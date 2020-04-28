@@ -241,4 +241,5 @@
 	<dimen name="settings_divider_margin_start">108dp</dimen>
 	<dimen name="setting_list_item_large_height">108dp</dimen>
 
+	<dimen name="download_description_images_height">198dp</dimen>
 </resources>

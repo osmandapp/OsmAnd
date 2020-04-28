@@ -2829,7 +2829,7 @@ Pôr do Sol: %2$s</string>
     <string name="osm_live_payment_annual_title">Anualmente</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / mês</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mês</string>
-    <string name="osm_live_payment_discount_descr">Menos %1$s.</string>
+    <string name="osm_live_payment_discount_descr">Menos %1$s</string>
     <string name="osm_live_payment_current_subscription">Assinatura atual</string>
     <string name="osm_live_payment_renews_monthly">Renova mensalmente</string>
     <string name="osm_live_payment_renews_annually">Renova anualmente</string>
@@ -3656,4 +3656,6 @@ Pôr do Sol: %2$s</string>
     <string name="lang_an">Aragonês</string>
     <string name="lang_lmo">Lombardo</string>
     <string name="custom_color">Cor customizada</string>
+    <string name="extra_maps_menu_group">Mapas extras</string>
+    <string name="download_unsupported_action">Ação não suportada %1$s</string>
 </resources>

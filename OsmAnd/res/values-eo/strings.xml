@@ -2844,7 +2844,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="osm_live_payment_annual_title">Ĉiujare</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / monato</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$,2f %2$s / monato</string>
-    <string name="osm_live_payment_discount_descr">Ŝparu %1$s.</string>
+    <string name="osm_live_payment_discount_descr">Ŝparu %1$s</string>
     <string name="osm_live_payment_current_subscription">Nuna kotizo</string>
     <string name="osm_live_payment_renews_monthly">Reaboni ĉiumonate</string>
     <string name="osm_live_payment_renews_quarterly">Reaboni ĉiukvaronjare</string>
@@ -3655,4 +3655,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="lang_lmo">Lombarda</string>
     <string name="custom_color">Propra koloro</string>
     <string name="extra_maps_menu_group">Kromaj mapoj</string>
+    <string name="download_unsupported_action">Nesubtenata ago %1$s</string>
 </resources>

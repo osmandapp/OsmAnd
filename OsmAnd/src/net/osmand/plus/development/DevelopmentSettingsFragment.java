@@ -35,6 +35,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 
 		setupOpenglRenderPref();
 		setupSafeModePref();
+		setupPTSafeMode();
 
 		setupDisableComplexRoutingPref();
 		setupFastRecalculationPref();
@@ -78,6 +79,16 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 			}
 		} else {
 			safeMode.setVisible(false);
+		}
+	}
+
+	private void setupPTSafeMode() {
+		SwitchPreferenceEx ptSafeMode = (SwitchPreferenceEx) findPreference(settings.PT_SAFE_MODE.getId());
+		if (!Version.isBlackberry(app)) {
+			ptSafeMode.setDescription("Switch to Java (safe) Public Transport routing calculation");
+			ptSafeMode.setIconSpaceReserved(false);
+		} else {
+			ptSafeMode.setVisible(false);
 		}
 	}
 

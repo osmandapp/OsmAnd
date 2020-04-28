@@ -71,7 +71,7 @@
 
 	<dimen name="favorites_icon_right_margin">24dp</dimen>
 	<dimen name="favorites_icon_size">40dp</dimen>
-	<dimen name="favorites_list_item_height">66dp</dimen>
+	<dimen name="favorites_list_item_height">60dp</dimen>
 	<dimen name="local_index_check_right_margin">10dp</dimen>
 	<dimen name="favorites_icon_top_margin">13dp</dimen>
 	<dimen name="dialog_elements_vertical_margin">16dp</dimen>
@@ -367,4 +367,6 @@
 	<dimen name="mtrl_slider_track_side_padding">@dimen/slider_thumb_size</dimen>
 
 	<dimen name="list_item_move_header_min_height">65dp</dimen>
+
+	<dimen name="download_description_images_height">132dp</dimen>
 </resources>

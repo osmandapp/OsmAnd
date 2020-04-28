@@ -2858,7 +2858,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="osm_live_payment_annual_title">Årligt</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / måned</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / måned</string>
-    <string name="osm_live_payment_discount_descr">Spar %1$s.</string>
+    <string name="osm_live_payment_discount_descr">Spar %1$s</string>
     <string name="osm_live_payment_current_subscription">Nuværende abonnement</string>
     <string name="osm_live_payment_renews_monthly">Fornyes månedligt</string>
     <string name="osm_live_payment_renews_quarterly">Fornyes kvartalsvis</string>
