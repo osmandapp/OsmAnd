@@ -972,6 +972,9 @@ public class TransportRoutePlanner {
 
 	public static List<TransportRouteResult> convertToTransportRoutingResult(NativeTransportRoutingResult[] res,
 	                                                                         TransportRoutingConfiguration cfg) {
+		if (res.length == 0) {
+			return new ArrayList<TransportRouteResult>();
+		}
 		List<TransportRouteResult> convertedRes = new ArrayList<TransportRouteResult>();
 		for (NativeTransportRoutingResult ntrr : res) {
 			TransportRouteResult trr = new TransportRouteResult(cfg);
