@@ -3658,4 +3658,10 @@ Pôr do Sol: %2$s</string>
     <string name="custom_color">Cor customizada</string>
     <string name="extra_maps_menu_group">Mapas extras</string>
     <string name="download_unsupported_action">Ação não suportada %1$s</string>
+    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
+    <string name="osm_live_payment_subscription_management">O pagamento será cobrado na sua conta do Google Play na confirmação da compra.
+\n
+\nA assinatura é renovada automaticamente, a menos que seja cancelada antes da data de renovação. Sua conta será cobrada pelo período de renovação (mês/três meses/ano) somente na data de renovação.
+\n
+\nVocê pode gerenciar e cancelar suas assinaturas acessando as configurações do Google Play.</string>
 </resources>
