@@ -851,6 +851,9 @@ public class ImportHelper {
 						((ProfileSettingsItem) item).applyAdditionalPrefs();
 					}
 				}
+				if (!Algorithms.isEmpty(plugin.getDownloadMaps())) {
+					app.getDownloadThread().runReloadIndexFilesSilent();
+				}
 				if (activity != null) {
 					plugin.onInstall(app, activity);
 				}
