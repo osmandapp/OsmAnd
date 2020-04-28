@@ -791,7 +791,7 @@ Lon: %2$s</string>
     <string name="index_item_world_ski">Tutmondaj skivojoj</string>
     <string name="calculate_osmand_route_without_internet">Loke kalkuli segmenton de kurso</string>
     <string name="use_displayed_track_for_navigation">Ĉu uzi la montratan kurson por navigado?</string>
-    <string name="gpx_option_calculate_first_last_segment">Kalkuli OsmAnd-an kurson por unua kaj fina segmentoj de kurso</string>
+    <string name="gpx_option_calculate_first_last_segment">Kalkuli kurson inter la unua kaj la fina segmentoj de spuro</string>
     <string name="keep_and_add_destination_point">Aldoni kiel sekvan celon</string>
     <string name="select_gpx">Elekti GPX-on…</string>
     <string name="route_descr_select_destination">Elekti celon</string>
@@ -1070,8 +1070,8 @@ Lon: %2$s</string>
     <string name="snap_to_road">Proksimumigi al vojo</string>
     <string name="interrupt_music">Paŭzigi muzikon</string>
     <string name="interrupt_music_descr">Voĉaj anoncoj paǔzigas ludadon de muziko.</string>
-    <string name="osmand_short_description_80_chars">Tuttera map-foliumilo kaj navigilo uzanta vektorajn aŭ enretajn mapojn OSM</string>
-    <string name="osmand_plus_short_description_80_chars">Tuttera map‑foliumilo kaj navigilo uzanta OSM‑mapojn (vektorajn aŭ enretajn)</string>
+    <string name="osmand_short_description_80_chars">Tuttera mapfoliumilo kaj navigilo uzanta OSM‑mapojn (vektorajn aŭ enretajn)</string>
+    <string name="osmand_plus_short_description_80_chars">Tuttera mapfoliumilo kaj navigilo uzanta OSM‑mapojn (vektorajn aŭ enretajn)</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Aŭtomata Navigado Direkte al la celo) 
 \n 
 \nOsmAnd estas malfermkoda navigada aplikaĵo kun aliro al diversaj mondaj datumoj de OSM. Ĉiuj mapoj (vektoraj kaj kahelaj) povas esti konservitaj en la poŝtelefona konservejo por malkonekta uzado. La aplikaĵo ankaŭ ebligas uzi lokan aŭ enretan navigadon kun voĉaj anoncoj turno‑post‑turno. 
@@ -3656,4 +3656,10 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="custom_color">Propra koloro</string>
     <string name="extra_maps_menu_group">Kromaj mapoj</string>
     <string name="download_unsupported_action">Nesubtenata ago %1$s</string>
+    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
+    <string name="osm_live_payment_subscription_management">Pago estos prenita per via konto Google Play post konfirmi aĉeton.
+\n
+\nLa abono aŭtomate renoviĝos escepte se ĝi estos nuligita antaŭ la dato de renoviĝo. La abonpago estos prenita por la specifa periodo (monato/tri monatoj/jaro) nur je la dato de renoviĝo.
+\n
+\nVi povas administri kaj rezigni la abonon en agordoj de Google Play.</string>
 </resources>
