@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="pt_native_development">Native PT routing development</string>
+    <string name="pt_native_development_descr">Switch to Java (safe) Public Transport routing calculation</string>
     <string name="download_unsupported_action">Unsupported action %1$s</string>
     <string name="extra_maps_menu_group">Extra maps</string>
     <string name="osm_live_payment_subscription_management">Payment will be charged to your Google Play account at the confirmation of purchase.\n\nSubscription automatically renews unless it is canceled before the renewal date. Your account will be charged for renewal period(month/three month/year) only on the renewal date.\n\nYou can manage and cancel your subscriptions by going to your Google Play settings.</string>

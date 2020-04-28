@@ -494,7 +494,7 @@ public class TransportRoutingHelper {
 			TransportRoutePlanner planner = new TransportRoutePlanner();
 			TransportRoutingContext ctx = new TransportRoutingContext(cfg, library, files);
 			ctx.calculationProgress =  params.calculationProgress;
-			if (ctx.library != null) {
+			if (ctx.library != null && !settings.PT_SAFE_MODE.get()) {
 				NativeTransportRoutingResult[] nativeRes = library.runNativePTRouting(
 						MapUtils.get31TileNumberX(params.start.getLongitude()),
 						MapUtils.get31TileNumberY(params.start.getLatitude()),

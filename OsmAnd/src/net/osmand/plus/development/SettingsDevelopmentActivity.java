@@ -42,12 +42,16 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 
 		if (!Version.isBlackberry(app)) {
 			CheckBoxPreference nativeCheckbox = createCheckBoxPreference(settings.SAFE_MODE, R.string.safe_mode, R.string.safe_mode_description);
+			CheckBoxPreference nativePTCheckbox = createCheckBoxPreference(settings.PT_SAFE_MODE, R.string.pt_native_development, R.string.pt_native_development_descr);
 			// disable the checkbox if the library cannot be used
 			if ((NativeOsmandLibrary.isLoaded() && !NativeOsmandLibrary.isSupported()) || settings.NATIVE_RENDERING_FAILED.get()) {
 				nativeCheckbox.setEnabled(false);
 				nativeCheckbox.setChecked(true);
+				nativePTCheckbox.setEnabled(false);
+				nativePTCheckbox.setChecked(true);
 			}
 			cat.addPreference(nativeCheckbox);
+			cat.addPreference(nativePTCheckbox);
 		}
 
 		PreferenceCategory navigation = new PreferenceCategory(this);
