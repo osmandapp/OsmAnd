@@ -39,6 +39,8 @@ public class CustomRegion extends WorldRegion {
 
 	private JSONArray downloadItemsJson;
 
+	private DynamicDownloadItems dynamicDownloadItems;
+
 	private DownloadDescriptionInfo descriptionInfo;
 
 	private Map<String, String> names = new HashMap<>();
@@ -103,6 +105,11 @@ public class CustomRegion extends WorldRegion {
 
 		region.downloadItemsJson = object.optJSONArray("items");
 
+		JSONObject urlItemsJson = object.optJSONObject("items-url");
+		if (urlItemsJson != null) {
+			region.dynamicDownloadItems = DynamicDownloadItems.fromJson(urlItemsJson);
+		}
+
 		String headerColor = object.optString("header-color", null);
 		try {
 			region.headerColor = Algorithms.isEmpty(headerColor) ? 0 : Algorithms.parseColor(headerColor);
@@ -130,7 +137,9 @@ public class CustomRegion extends WorldRegion {
 			jsonObject.putOpt("description", descriptionInfo.toJson());
 		}
 		jsonObject.putOpt("items", downloadItemsJson);
-
+		if (dynamicDownloadItems != null) {
+			jsonObject.putOpt("items-url", dynamicDownloadItems.toJson());
+		}
 		return jsonObject;
 	}
 
@@ -181,5 +190,51 @@ public class CustomRegion extends WorldRegion {
 			}
 		}
 		return items;
+	}
+
+	public static class DynamicDownloadItems {
+
+		private String url;
+		private String format;
+		private String itemsPath;
+		private JSONObject mapping;
+
+		public String getUrl() {
+			return url;
+		}
+
+		public String getFormat() {
+			return format;
+		}
+
+		public String getItemsPath() {
+			return itemsPath;
+		}
+
+		public JSONObject getMapping() {
+			return mapping;
+		}
+
+		public static DynamicDownloadItems fromJson(JSONObject object) {
+			DynamicDownloadItems dynamicDownloadItems = new DynamicDownloadItems();
+
+			dynamicDownloadItems.url = object.optString("url", null);
+			dynamicDownloadItems.format = object.optString("format", null);
+			dynamicDownloadItems.itemsPath = object.optString("items-path", null);
+			dynamicDownloadItems.mapping = object.optJSONObject("mapping");
+
+			return dynamicDownloadItems;
+		}
+
+		public JSONObject toJson() throws JSONException {
+			JSONObject jsonObject = new JSONObject();
+
+			jsonObject.putOpt("url", url);
+			jsonObject.putOpt("format", format);
+			jsonObject.putOpt("items-path", itemsPath);
+			jsonObject.putOpt("mapping", mapping);
+
+			return jsonObject;
+		}
 	}
 }
