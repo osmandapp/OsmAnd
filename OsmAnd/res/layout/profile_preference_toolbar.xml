@@ -7,6 +7,8 @@
 	android:minHeight="@dimen/dashboard_map_toolbar"
 	osmand:contentInsetLeft="0dp"
 	osmand:contentInsetStart="0dp"
+	osmand:contentInsetRight="0dp"
+	osmand:contentInsetEnd="0dp"
 	osmand:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
 	<LinearLayout

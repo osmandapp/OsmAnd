@@ -17,7 +17,9 @@
         android:minHeight="@dimen/dashboard_map_toolbar"
         android:theme="?attr/toolbar_theme"
         app:contentInsetLeft="@dimen/settings_divider_margin_start"
-        app:contentInsetStart="@dimen/settings_divider_margin_start"/>
+        app:contentInsetStart="@dimen/settings_divider_margin_start"
+        app:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp"/>
 
     <ScrollView
         android:layout_width="fill_parent"

@@ -6,6 +6,8 @@
 	android:layout_height="wrap_content"
 	osmand:contentInsetLeft="0dp"
 	osmand:contentInsetStart="0dp"
+	osmand:contentInsetRight="0dp"
+	osmand:contentInsetEnd="0dp"
 	osmand:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
 	<LinearLayout

@@ -16,7 +16,9 @@
         android:background="?attr/actionModeBackground"
         android:minHeight="@dimen/dashboard_map_toolbar"
         app:contentInsetLeft="54dp"
-        app:contentInsetStart="54dp">
+        app:contentInsetStart="54dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"

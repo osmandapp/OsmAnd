@@ -7,7 +7,9 @@
 	android:layout_height="wrap_content"
 	android:background="?attr/actionModeBackground"
 	app:contentInsetLeft="0dp"
-	app:contentInsetStart="0dp">
+	app:contentInsetStart="0dp"
+	app:contentInsetRight="0dp"
+	app:contentInsetEnd="0dp">
 
 	<LinearLayout
 		android:layout_width="match_parent"

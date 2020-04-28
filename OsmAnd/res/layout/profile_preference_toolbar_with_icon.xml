@@ -7,7 +7,9 @@
     android:background="?attr/actionModeBackground"
     android:minHeight="@dimen/toolbar_height"
     osmand:contentInsetLeft="0dp"
-    osmand:contentInsetStart="0dp">
+    osmand:contentInsetStart="0dp"
+    osmand:contentInsetRight="0dp"
+    osmand:contentInsetEnd="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
