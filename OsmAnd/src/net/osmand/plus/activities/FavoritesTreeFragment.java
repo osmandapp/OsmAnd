@@ -44,6 +44,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -957,8 +958,14 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			if (model.isAddressSpecified()) {
 				distanceText.setText(String.format(getString(R.string.ltr_or_rtl_combine_via_comma), distance.trim(), model.getAddress()));
 			}
-			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),
-					visible ? model.getColor() : getResources().getColor(disabledIconColor), false, model));
+			if(model.getBackgroundType().equals(FavouritePoint.BackgroundType.CIRCLE)){
+				int color = visible ? model.getColor() : getResources().getColor(disabledIconColor);
+				int col = color == 0 || color == Color.BLACK ? getResources().getColor(R.color.color_favorite) : color;
+				icon.setImageDrawable(UiUtilities.createTintedDrawable(getActivity(),model.getIconId(),col));
+			}else {
+				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),
+						visible ? model.getColor() : getResources().getColor(disabledIconColor), false, model));
+			}
 			if (visible) {
 				distanceText.setTextColor(getResources().getColor(R.color.color_distance));
 			} else {
