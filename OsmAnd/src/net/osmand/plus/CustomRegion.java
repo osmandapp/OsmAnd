@@ -6,6 +6,8 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.AndroidNetworkUtils;
+import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
 import net.osmand.JsonUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.map.WorldRegion;
@@ -24,6 +26,7 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -38,6 +41,7 @@ public class CustomRegion extends WorldRegion {
 	private String subfolder;
 
 	private JSONArray downloadItemsJson;
+	private JSONArray dynamicItemsJson;
 
 	private DynamicDownloadItems dynamicDownloadItems;
 
@@ -104,6 +108,7 @@ public class CustomRegion extends WorldRegion {
 		region.headers = JsonUtils.getLocalizedMapFromJson("header", object);
 
 		region.downloadItemsJson = object.optJSONArray("items");
+		region.dynamicItemsJson = object.optJSONArray("dynamic-items");
 
 		JSONObject urlItemsJson = object.optJSONObject("items-url");
 		if (urlItemsJson != null) {
@@ -137,6 +142,7 @@ public class CustomRegion extends WorldRegion {
 			jsonObject.putOpt("description", descriptionInfo.toJson());
 		}
 		jsonObject.putOpt("items", downloadItemsJson);
+		jsonObject.putOpt("dynamic-items", dynamicItemsJson);
 		if (dynamicDownloadItems != null) {
 			jsonObject.putOpt("items-url", dynamicDownloadItems.toJson());
 		}
@@ -145,10 +151,17 @@ public class CustomRegion extends WorldRegion {
 
 	public List<IndexItem> loadIndexItems() {
 		List<IndexItem> items = new ArrayList<>();
-		if (downloadItemsJson != null) {
+		items.addAll(loadIndexItems(downloadItemsJson));
+		items.addAll(loadIndexItems(dynamicItemsJson));
+		return items;
+	}
+
+	private List<IndexItem> loadIndexItems(JSONArray itemsJson) {
+		List<IndexItem> items = new ArrayList<>();
+		if (itemsJson != null) {
 			try {
-				for (int i = 0; i < downloadItemsJson.length(); i++) {
-					JSONObject itemJson = downloadItemsJson.getJSONObject(i);
+				for (int i = 0; i < itemsJson.length(); i++) {
+					JSONObject itemJson = itemsJson.getJSONObject(i);
 
 					long timestamp = itemJson.optLong("timestamp") * 1000;
 					long contentSize = itemJson.optLong("contentSize");
@@ -190,6 +203,88 @@ public class CustomRegion extends WorldRegion {
 			}
 		}
 		return items;
+	}
+
+	void loadDynamicIndexItems(final OsmandApplication app) {
+		if (dynamicItemsJson == null && dynamicDownloadItems != null
+				&& !Algorithms.isEmpty(dynamicDownloadItems.url)
+				&& app.getSettings().isInternetConnectionAvailable()) {
+			OnRequestResultListener resultListener = new OnRequestResultListener() {
+				@Override
+				public void onResult(String result) {
+					if (!Algorithms.isEmpty(result)) {
+						if ("json".equalsIgnoreCase(dynamicDownloadItems.format)) {
+							dynamicItemsJson = mapJsonItems(result);
+						}
+					}
+				}
+			};
+
+			AndroidNetworkUtils.sendRequestAsync(app, dynamicDownloadItems.getUrl(), null,
+					null, false, false, resultListener);
+		}
+	}
+
+	private JSONArray mapJsonItems(String jsonStr) {
+		try {
+			JSONObject json = new JSONObject(jsonStr);
+			JSONArray jsonArray = json.optJSONArray(dynamicDownloadItems.itemsPath);
+			if (jsonArray != null) {
+				JSONArray itemsJson = new JSONArray();
+				for (int i = 0; i < jsonArray.length(); i++) {
+					JSONObject jsonObject = jsonArray.getJSONObject(i);
+					JSONObject itemJson = mapDynamicJsonItem(jsonObject, dynamicDownloadItems.mapping);
+
+					itemsJson.put(itemJson);
+				}
+				LOG.debug(itemsJson);
+				return itemsJson;
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private JSONObject mapDynamicJsonItem(JSONObject jsonObject, JSONObject mapping) throws JSONException {
+		JSONObject itemJson = new JSONObject();
+		for (Iterator<String> it = mapping.keys(); it.hasNext(); ) {
+			String key = it.next();
+			Object value = checkMappingValue(mapping.opt(key), jsonObject);
+			itemJson.put(key, value);
+		}
+		return itemJson;
+	}
+
+	private Object checkMappingValue(Object value, JSONObject json) throws JSONException {
+		if (value instanceof String) {
+			String key = (String) value;
+			int index = key.indexOf("@");
+			if (index != -1) {
+				key = key.substring(index + 1);
+			}
+			return json.opt(key);
+		} else if (value instanceof JSONObject) {
+			JSONObject checkedJsonObject = (JSONObject) value;
+			JSONObject objectJson = new JSONObject();
+
+			for (Iterator<String> iterator = checkedJsonObject.keys(); iterator.hasNext(); ) {
+				String key = iterator.next();
+				Object checkedValue = checkMappingValue(checkedJsonObject.opt(key), json);
+				objectJson.put(key, checkedValue);
+			}
+			return objectJson;
+		} else if (value instanceof JSONArray) {
+			JSONArray checkedJsonArray = new JSONArray();
+			JSONArray jsonArray = (JSONArray) value;
+
+			for (int i = 0; i < jsonArray.length(); i++) {
+				Object checkedValue = checkMappingValue(jsonArray.opt(i), json);
+				checkedJsonArray.put(i, checkedValue);
+			}
+			return checkedJsonArray;
+		}
+		return value;
 	}
 
 	public static class DynamicDownloadItems {

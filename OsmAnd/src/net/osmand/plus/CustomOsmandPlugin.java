@@ -415,6 +415,18 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 				}
 			}
 		}
+		for (WorldRegion region : customRegions) {
+			loadSubregionIndexItems(region);
+		}
+	}
+
+	private void loadSubregionIndexItems(WorldRegion region) {
+		if (region instanceof CustomRegion) {
+			((CustomRegion) region).loadDynamicIndexItems(app);
+		}
+		for (WorldRegion subregion : region.getSubregions()) {
+			loadSubregionIndexItems(subregion);
+		}
 	}
 
 	public void updateSuggestedDownloads(List<SuggestedDownloadItem> items) {
