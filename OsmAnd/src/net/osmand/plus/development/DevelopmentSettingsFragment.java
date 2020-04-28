@@ -85,12 +85,10 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 	private void setupPTSafeMode() {
 		SwitchPreferenceEx ptSafeMode = (SwitchPreferenceEx) findPreference(settings.PT_SAFE_MODE.getId());
 		if (!Version.isBlackberry(app)) {
-			ptSafeMode.setDescription(getString(R.string.pt_native_development_descr));
+			ptSafeMode.setDescription("Switch to Java (safe) Public Transport routing calculation");
 			ptSafeMode.setIconSpaceReserved(false);
-			if ((NativeOsmandLibrary.isLoaded() && !NativeOsmandLibrary.isSupported()) || settings.NATIVE_RENDERING_FAILED.get()) {
-				ptSafeMode.setEnabled(false);
-				ptSafeMode.setChecked(true);
-			}
+		} else {
+			ptSafeMode.setVisible(false);
 		}
 	}
 

@@ -859,7 +859,6 @@ public class AppInitializer implements IProgress {
 			OsmandSettings osmandSettings = app.getSettings();
 			if (osmandSettings.NATIVE_RENDERING_FAILED.get()) {
 				osmandSettings.SAFE_MODE.set(true);
-				osmandSettings.PT_SAFE_MODE.set(true);
 				osmandSettings.NATIVE_RENDERING_FAILED.set(false);
 				warnings.add(app.getString(R.string.native_library_not_supported));
 			} else {
