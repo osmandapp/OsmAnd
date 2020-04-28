@@ -1793,7 +1793,7 @@ Lon %2$s</string>
     <string name="activate_srtm_plugin">Bitte die Erweiterung \'Höhenlinien\' aktivieren</string>
     <string name="get_full_version">Vollversion</string>
     <string name="confirm_download_roadmaps">Die reine Straßenkarte wird nicht benötigt, da Sie die Standardkarte haben. Trotzdem herunterladen?</string>
-    <string name="value_downloaded_of_max">%1$,1f von %2$,1f MB</string>
+    <string name="value_downloaded_of_max">%1$.1f von %2$.1f MB</string>
     <string name="update_all">Alles aktualisieren (%1$s MB)</string>
     <string name="free_downloads_used">Verbrauchte freie Downloads</string>
     <string name="enter_country_name">Ländernamen eingeben</string>
@@ -1806,7 +1806,7 @@ Lon %2$s</string>
     <string name="access_from_map">Aufruf von der Karte aus</string>
     <string name="favorite_category_add_new">Neue Katagorie erstellen</string>
     <string name="next_proceed">Weiter</string>
-    <string name="file_size_in_mb">%,1f MB</string>
+    <string name="file_size_in_mb">%.1f MB</string>
     <string name="please_specify_poi_type_only_from_list">Bitte einen gültigen POI-Typ angeben oder überspringen.</string>
     <string name="share_osm_edits_subject">OSM-Bearbeitung mit OsmAnd geteilt</string>
     <string name="av_locations_descr">GPX-Datei mit Standorten.</string>
@@ -3665,7 +3665,8 @@ Lon %2$s</string>
     <string name="lang_ce">Tschetschenisch</string>
     <string name="lang_bar">Bairisch</string>
     <string name="lang_ba">Baschkirisch</string>
-    <string name="main_actions_descr">Die Hauptaktionen enthalten nur 4 Schaltflächen.</string>
+    <string name="main_actions_descr">Hauptaktionen enthalten nur 4 Schaltflächen.</string>
     <string name="additional_actions_descr">Sie können auf diese Aktionen zugreifen, indem Sie auf die Schaltfläche „Aktionen“ tippen.</string>
     <string name="select_wikipedia_article_langs">Wählen Sie die Sprachen aus, in denen Wikipedia-Artikel auf der Karte erscheinen sollen. Sie können zwischen allen verfügbaren Sprachen wechseln, während Sie den Artikel lesen.</string>
+    <string name="hidden_items_descr">Diese Elemente werden aus dem Menü ausgeblendet, aber die dargestellten Optionen oder Plugins funktionieren weiterhin.</string>
 </resources>
