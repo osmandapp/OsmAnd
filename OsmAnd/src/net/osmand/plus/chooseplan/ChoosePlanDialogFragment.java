@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -187,7 +188,9 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		}
 		View view = inflate(R.layout.purchase_dialog_fragment, container);
 
-		view.findViewById(R.id.button_back).setOnClickListener(new OnClickListener() {
+		ImageView buttonBack = view.findViewById(R.id.button_back);
+		buttonBack.setImageResource(AndroidUtils.getNavigationIconResId(ctx));
+		buttonBack.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				dismiss();
