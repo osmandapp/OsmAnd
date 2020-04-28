@@ -1121,7 +1121,21 @@ public class ResourceManager {
 		}
 		return readers.toArray(new BinaryMapIndexReader[readers.size()]);
 	}
-	
+
+	public BinaryMapIndexReader[] getPoiSearchFiles() {
+		Collection<BinaryMapReaderResource> fileReaders = getFileReaders();
+		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
+		for (BinaryMapReaderResource r : fileReaders) {
+			BinaryMapIndexReader shallowReader = r.getShallowReader();
+			if (shallowReader != null && shallowReader.containsPoiData()) {
+				BinaryMapIndexReader reader = r.getReader(BinaryMapReaderResourceType.POI);
+				if (reader != null) {
+					readers.add(reader);
+				}
+			}
+		}
+		return readers.toArray(new BinaryMapIndexReader[readers.size()]);
+	}
 
 	public Map<String, String> getIndexFileNames() {
 		return new LinkedHashMap<String, String>(indexFileNames);

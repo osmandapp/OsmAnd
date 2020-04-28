@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <include layout="@layout/list_shadow_header" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/context_menu_action_buttons_h"
+        android:background="?attr/bg_color">
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/select_all"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="@dimen/line_spacing_extra_description"
+            android:padding="@dimen/content_padding"
+            android:text="@string/shared_string_select_all"
+            android:textSize="@dimen/default_list_text_size" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="@dimen/content_padding"
+            android:layout_marginLeft="@dimen/content_padding"
+            android:background="?attr/dashboard_divider" />
+
+    </FrameLayout>
+
+</LinearLayout>

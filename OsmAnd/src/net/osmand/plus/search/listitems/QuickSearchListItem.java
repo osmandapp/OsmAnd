@@ -26,12 +26,17 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchHistoryFragment;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
 
 public class QuickSearchListItem {
 
@@ -324,11 +329,25 @@ public class QuickSearchListItem {
 						iconId = RenderingIcons.getBigIconResourceId(iconName);
 					}
 				} else if (searchResult.object instanceof CustomSearchPoiFilter) {
-					Object res = ((CustomSearchPoiFilter) searchResult.object).getIconResource();
-					if (res instanceof String && RenderingIcons.containsBigIcon(res.toString())) {
-						iconId = RenderingIcons.getBigIconResourceId(res.toString());
-					} else {
-						iconId = R.drawable.mx_user_defined;
+					CustomSearchPoiFilter searchPoiFilter = (CustomSearchPoiFilter) searchResult.object;
+					PoiUIFilter filter = app.getPoiFilters().getFilterById(searchPoiFilter.getFilterId());
+					iconId = R.drawable.mx_special_custom_category;
+					if (filter != null) {
+						Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = filter.getAcceptedTypes();
+						List<PoiCategory> categories = new ArrayList<>(acceptedTypes.keySet());
+						if (categories.size() == 1) {
+							String res = "";
+							PoiCategory category = categories.get(0);
+							LinkedHashSet<String> filters = acceptedTypes.get(category);
+							if (filters == null || filters.size() > 1) {
+								res = category.getIconKeyName();
+							} else {
+								res = getPoiTypeIconName(category.getPoiTypeByKeyName(filters.iterator().next()));
+							}
+							if (res != null && RenderingIcons.containsBigIcon(res)) {
+								iconId = RenderingIcons.getBigIconResourceId(res);
+							}
+						}
 					}
 				}
 				if (iconId > 0) {
