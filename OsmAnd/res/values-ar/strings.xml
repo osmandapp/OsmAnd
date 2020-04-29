@@ -3633,7 +3633,7 @@
     <string name="lang_lmo">لومبارد</string>
     <string name="custom_color">لون مخصص</string>
     <string name="extra_maps_menu_group">خرائط إضافية</string>
-    <string name="download_unsupported_action">إجراء غير معتمد٪ 1 $ s</string>
+    <string name="download_unsupported_action">%1$s إجراء غير معتمد</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="osm_live_payment_subscription_management">سيتم احتساب الدفع لحساب Google Play الخاص بك في تأكيد الشراء.
 \n
