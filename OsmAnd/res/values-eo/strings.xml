@@ -3662,4 +3662,6 @@ Indikas lokon:  %1$s x %2$s"</string>
 \nLa abono aŭtomate renoviĝos escepte se ĝi estos nuligita antaŭ la dato de renoviĝo. La abonpago estos prenita por la specifa periodo (monato/tri monatoj/jaro) nur je la dato de renoviĝo.
 \n
 \nVi povas administri kaj rezigni la abonon en agordoj de Google Play.</string>
+    <string name="search_poi_types_descr">Miksi specojn de interesejoj el diversaj kategorioj. Frapetu “ŝaltilon” por elekti ĉiujn, frapetu ĉe maldekstre por elekti el la kategorio.</string>
+    <string name="search_poi_types">Serĉi specojn de interesejoj</string>
 </resources>
