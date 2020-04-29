@@ -4,6 +4,8 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
+
 import net.osmand.AndroidUtils;
 import net.osmand.plus.CustomRegion;
 import net.osmand.plus.OsmandApplication;
@@ -45,33 +47,41 @@ public class DownloadGroupViewHolder {
 				String iconName = ((CustomRegion) group.getRegion()).getIconName(ctx);
 				int iconId = AndroidUtils.getDrawableId(app, iconName);
 				if (iconId != 0) {
-					return cache.getThemedIcon(iconId);
+					iconStart = getIconForDownloadedItems(group, iconId);
+					return iconStart != null ? iconStart : cache.getThemedIcon(iconId);
 				}
 			}
 			if (isParentWorld(group) || isParentWorld(group.getParentGroup())) {
 				iconStart = cache.getThemedIcon(R.drawable.ic_world_globe_dark);
 			} else {
-				DownloadResourceGroup ggr = group.getSubGroupById(DownloadResourceGroupType.REGION_MAPS.getDefaultId());
-				iconStart = cache.getThemedIcon(R.drawable.ic_map);
-				if (ggr != null && ggr.getIndividualResources() != null) {
-					IndexItem item = null;
-					for (IndexItem ii : ggr.getIndividualResources()) {
-						if (ii.getType() == DownloadActivityType.NORMAL_FILE
-								|| ii.getType() == DownloadActivityType.ROADS_FILE) {
-							if (ii.isDownloaded() || ii.isOutdated()) {
-								item = ii;
-								break;
-							}
-						}
-					}
-					if (item != null) {
-						int color = item.isOutdated() ? R.color.color_distance : R.color.color_ok;
-						iconStart = cache.getIcon(R.drawable.ic_map, color);
-					}
+				iconStart = getIconForDownloadedItems(group, R.drawable.ic_map);
+				if (iconStart == null) {
+					iconStart = cache.getThemedIcon(R.drawable.ic_map);
 				}
 			}
 		}
 		return iconStart;
+	}
+
+	private Drawable getIconForDownloadedItems(DownloadResourceGroup group, @DrawableRes int iconId) {
+		DownloadResourceGroup ggr = group.getSubGroupById(DownloadResourceGroupType.REGION_MAPS.getDefaultId());
+		if (ggr != null && ggr.getIndividualResources() != null) {
+			IndexItem item = null;
+			for (IndexItem ii : ggr.getIndividualResources()) {
+				if (ii.getType() == DownloadActivityType.NORMAL_FILE
+						|| ii.getType() == DownloadActivityType.ROADS_FILE) {
+					if (ii.isDownloaded() || ii.isOutdated()) {
+						item = ii;
+						break;
+					}
+				}
+			}
+			if (item != null) {
+				int color = item.isOutdated() ? R.color.color_distance : R.color.color_ok;
+				return ctx.getMyApplication().getUIUtilities().getIcon(iconId, color);
+			}
+		}
+		return null;
 	}
 
 	public void bindItem(DownloadResourceGroup group) {
