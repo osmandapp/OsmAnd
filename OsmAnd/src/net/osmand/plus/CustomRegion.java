@@ -32,6 +32,8 @@ import java.util.Map;
 
 public class CustomRegion extends WorldRegion {
 
+	public static final int INVALID_ID = -1;
+
 	private static final Log LOG = PlatformUtil.getLog(CustomRegion.class);
 
 	private String scopeId;
@@ -51,7 +53,7 @@ public class CustomRegion extends WorldRegion {
 	private Map<String, String> icons = new HashMap<>();
 	private Map<String, String> headers = new HashMap<>();
 
-	private int headerColor = -1;
+	private int headerColor = INVALID_ID;
 
 
 	private CustomRegion(String scopeId, String path, String type) {
@@ -75,6 +77,11 @@ public class CustomRegion extends WorldRegion {
 
 	@ColorInt
 	public int getHeaderColor() {
+		if (headerColor != INVALID_ID) {
+			return headerColor;
+		} else if (superregion instanceof CustomRegion) {
+			return ((CustomRegion) superregion).getHeaderColor();
+		}
 		return headerColor;
 	}
 
@@ -121,9 +128,9 @@ public class CustomRegion extends WorldRegion {
 
 		String headerColor = object.optString("header-color", null);
 		try {
-			region.headerColor = Algorithms.isEmpty(headerColor) ? 0 : Algorithms.parseColor(headerColor);
+			region.headerColor = Algorithms.isEmpty(headerColor) ? INVALID_ID : Algorithms.parseColor(headerColor);
 		} catch (IllegalArgumentException e) {
-			region.headerColor = 0;
+			region.headerColor = INVALID_ID;
 		}
 		region.descriptionInfo = DownloadDescriptionInfo.fromJson(object.optJSONObject("description"));
 
@@ -142,6 +149,9 @@ public class CustomRegion extends WorldRegion {
 		JsonUtils.writeLocalizedMapToJson("icon", jsonObject, icons);
 		JsonUtils.writeLocalizedMapToJson("header", jsonObject, headers);
 
+		if (headerColor != INVALID_ID) {
+			jsonObject.putOpt("header-color", Algorithms.colorToString(headerColor));
+		}
 		if (descriptionInfo != null) {
 			jsonObject.putOpt("description", descriptionInfo.toJson());
 		}
@@ -264,7 +274,7 @@ public class CustomRegion extends WorldRegion {
 		if (value instanceof String) {
 			String key = (String) value;
 			int index = key.indexOf("@");
-			if (index != -1) {
+			if (index != INVALID_ID) {
 				key = key.substring(index + 1);
 			}
 			return json.opt(key);

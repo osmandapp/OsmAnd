@@ -26,6 +26,7 @@ import androidx.fragment.app.DialogFragment;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.CustomRegion;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmandApplication;
@@ -431,6 +432,13 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		if (group != null) {
 			listAdapter.update(group);
 			toolbar.setTitle(group.getName(activity));
+			WorldRegion region = group.getRegion();
+			if (region instanceof CustomRegion) {
+				int headerColor = ((CustomRegion) region).getHeaderColor();
+				if (headerColor != CustomRegion.INVALID_ID) {
+					toolbar.setBackgroundColor(headerColor);
+				}
+			}
 		}
 		expandAllGroups();
 	}

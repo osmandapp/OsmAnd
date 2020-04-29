@@ -19,6 +19,8 @@ import androidx.fragment.app.DialogFragment;
 import androidx.viewpager.widget.ViewPager;
 
 import net.osmand.AndroidUtils;
+import net.osmand.map.WorldRegion;
+import net.osmand.plus.CustomRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -159,6 +161,13 @@ public class DownloadItemFragment extends DialogFragment implements DownloadEven
 				updateDescription(app, descriptionInfo, description);
 				updateImagesPager(app, descriptionInfo, imagesPager);
 				updateActionButtons(activity, descriptionInfo, indexItem, buttonsContainer, R.layout.bottom_buttons, nightMode);
+			}
+		}
+		WorldRegion region = group.getParentGroup().getRegion();
+		if (region instanceof CustomRegion) {
+			int headerColor = ((CustomRegion) region).getHeaderColor();
+			if (headerColor != CustomRegion.INVALID_ID) {
+				toolbar.setBackgroundColor(headerColor);
 			}
 		}
 	}
