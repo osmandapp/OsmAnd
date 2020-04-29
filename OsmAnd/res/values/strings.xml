@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="shared_string_add_edit">Add / Edit</string>
+    <string name="parking_positions">Parking positions</string>
     <string name="create_edit_poi">Create/Edit POI</string>
     <string name="download_unsupported_action">Unsupported action %1$s</string>
     <string name="extra_maps_menu_group">Extra maps</string>

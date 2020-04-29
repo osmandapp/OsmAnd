@@ -96,6 +96,9 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_AUDIO_NOTE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_PHOTO_NOTE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_VIDEO_NOTE;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.RECORDING_LAYER;
 
 
@@ -660,6 +663,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			return;
 		}
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.recording_context_menu_arecord, app)
+				.setId(MAP_CONTEXT_MENU_AUDIO_NOTE)
 				.setIcon(R.drawable.ic_action_micro_dark)
 				.setOrder(TAKE_AUDIO_NOTE_ITEM_ORDER)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
@@ -672,6 +676,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				})
 				.createItem());
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.recording_context_menu_vrecord, app)
+				.setId(MAP_CONTEXT_MENU_VIDEO_NOTE)
 				.setIcon(R.drawable.ic_action_video_dark)
 				.setOrder(TAKE_VIDEO_NOTE_ITEM_ORDER)
 				.setListener(new ItemClickListener() {
@@ -684,6 +689,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				})
 				.createItem());
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.recording_context_menu_precord, app)
+				.setId(MAP_CONTEXT_MENU_PHOTO_NOTE)
 				.setIcon(R.drawable.ic_action_photo_dark)
 				.setOrder(TAKE_PHOTO_NOTE_ITEM_ORDER)
 				.setListener(new ItemClickListener() {

@@ -568,6 +568,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 //		TODO refactor section
 		ContextMenuAdapter adapter = menu.getActionsContextMenuAdapter(false);
 		List<ContextMenuItem> items = new ArrayList<>();
+		List<String> mainIds = app.getSettings().CONTEXT_MENU_ACTIONS_ITEMS.get().getMainActionIds();
 		for (ContextMenuItem item : adapter.getItems()) {
 			if (!item.isHidden()) {
 				items.add(item);
@@ -575,11 +576,22 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 		ContextMenuAdapter mainAdapter = new ContextMenuAdapter(requireMyApplication());
 		ContextMenuAdapter additionalAdapter = new ContextMenuAdapter(requireMyApplication());
-		for (int i = 0; i < items.size(); i++) {
-			if (i < MAIN_BUTTONS_QUANTITY) {
-				mainAdapter.addItem(items.get(i));
-			} else {
-				additionalAdapter.addItem(items.get(i));
+
+		if (!mainIds.isEmpty()){
+			for (ContextMenuItem item : items) {
+				if (mainIds.contains(item.getId())) {
+					mainAdapter.addItem(item);
+				} else {
+					additionalAdapter.addItem(item);
+				}
+			}
+		} else {
+			for (int i = 0; i < items.size(); i++) {
+				if (i < MAIN_BUTTONS_QUANTITY) {
+					mainAdapter.addItem(items.get(i));
+				} else {
+					additionalAdapter.addItem(items.get(i));
+				}
 			}
 		}
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -591,9 +603,15 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		ContextMenuItemClickListener mainListener = menu.getContextMenuItemClickListener(mainAdapter);
 		ContextMenuItemClickListener additionalListener = menu.getContextMenuItemClickListener(additionalAdapter);
 
-		int mainButtonsQuantity = Math.min(MAIN_BUTTONS_QUANTITY, items.size());
-		for (int i = 0; i < mainButtonsQuantity; i++) {
-			buttons.addView(getActionView(items.get(i), i, mainAdapter, additionalAdapter, mainListener, additionalListener), params);
+		if (!mainIds.isEmpty()){
+			for (ContextMenuItem item: mainAdapter.getItems()) {
+				buttons.addView(getActionView(item, mainAdapter.getItems().indexOf(item), mainAdapter, additionalAdapter, mainListener, additionalListener), params);
+			}
+		} else {
+			int mainButtonsQuantity = Math.min(MAIN_BUTTONS_QUANTITY, items.size());
+			for (int i = 0; i < mainButtonsQuantity; i++) {
+				buttons.addView(getActionView(items.get(i), i, mainAdapter, additionalAdapter, mainListener, additionalListener), params);
+			}
 		}
 		buttons.setGravity(Gravity.CENTER);
 

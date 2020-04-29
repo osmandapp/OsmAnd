@@ -1038,7 +1038,9 @@ public class MapActivityActions implements DialogProvider {
 
 		ItemBuilder divider = new ItemBuilder().setLayout(R.layout.drawer_divider);
 		divider.setId(DRAWER_DIVIDER_ID);
-		divider.setPosition(dividerItemIndex >= 0 ? dividerItemIndex : 8);
+		int position = dividerItemIndex >= 0 ? dividerItemIndex : 8;
+		divider.setPosition(position);
+		divider.setOrder(position);
 		optionsMenuHelper.addItem(divider.createItem());
 
 		return optionsMenuHelper;

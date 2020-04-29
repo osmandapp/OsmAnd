@@ -28,19 +28,27 @@ import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.settings.ConfigureMenuRootFragment.ScreenType;
 
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static net.osmand.aidl.ConnectedApp.AIDL_LAYERS_PREFIX;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.GPX_FILES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_GPX_WAYPOINT;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_AUDIO_NOTE;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CREATE_POI;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_EDIT_GPX_WP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MODIFY_OSM_NOTE;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_PHOTO_NOTE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_VIDEO_NOTE;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_RENDERING_CATEGORY_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_SOURCE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
@@ -209,6 +217,9 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 			if (id.equals(MAP_CONTEXT_MENU_CREATE_POI)) {
 				h.title.setText(R.string.create_edit_poi);
 			}
+			if (id.equals(MAP_CONTEXT_MENU_ADD_ID)) {
+				h.title.setText(R.string.shared_string_add_edit);
+			}
 		} else if (holder instanceof HeaderHolder) {
 			HeaderHolder h = (HeaderHolder) holder;
 			HeaderItem header = (HeaderItem) item.value;
@@ -217,6 +228,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 			h.title.setText(header.titleRes);
 			h.description.setText(header.descrRes);
 			h.moveIcon.setVisibility(View.GONE);
+			h.movable = header.titleRes == R.string.additional_actions;
 		} else if (holder instanceof ButtonHolder) {
 			ButtonHolder h = (ButtonHolder) holder;
 			ButtonItem button = (ButtonItem) item.value;
@@ -237,6 +249,21 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 	public boolean onItemMove(int from, int to) {
 		Object itemFrom = items.get(from).value;
 		Object itemTo = items.get(to).value;
+
+		if (itemFrom instanceof ContextMenuItem
+				&& ((ContextMenuItem) itemFrom).getId().startsWith(MAP_CONTEXT_MENU_ACTIONS)
+				&& itemTo instanceof HeaderItem
+				&& ((HeaderItem) itemTo).titleRes == R.string.additional_actions) {
+			ContextMenuItem menuItemFrom = (ContextMenuItem) itemFrom;
+			int headerMaxIndex = MAIN_BUTTONS_QUANTITY + 2;
+			if (to >= headerMaxIndex || menuItemFrom.getId().equals(MAP_CONTEXT_MENU_MORE_ID)) {
+				return false;
+			}
+			Collections.swap(items, from, to);
+			notifyItemMoved(from, to);
+			return true;
+		}
+
 		if (itemFrom instanceof ContextMenuItem
 				&& itemTo instanceof ContextMenuItem) {
 			ContextMenuItem menuItemFrom = (ContextMenuItem) itemFrom;
@@ -247,17 +274,23 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 
 			if (menuItemFrom.getId().startsWith(SHOW_ITEMS_ID_SCHEME) && menuItemTo.getId().startsWith(RENDERING_ITEMS_ID_SCHEME)
 					|| menuItemFrom.getId().startsWith(RENDERING_ITEMS_ID_SCHEME) && menuItemTo.getId().startsWith(SHOW_ITEMS_ID_SCHEME)
+					|| menuItemFrom.getId().startsWith(RENDERING_ITEMS_ID_SCHEME) && menuItemTo.getId().startsWith(AIDL_LAYERS_PREFIX)
+					|| menuItemFrom.getId().startsWith(AIDL_LAYERS_PREFIX) && menuItemTo.getId().startsWith(RENDERING_ITEMS_ID_SCHEME)
 					|| menuItemTo.isHidden()) {
 				return false;
 			}
 
-			int buttonMoreIndex = MAIN_BUTTONS_QUANTITY + 1;
-			if (menuItemFrom.getId().equals(MAP_CONTEXT_MENU_MORE_ID)) {
-				if (to > buttonMoreIndex) {
-					return false;
+//			item "Actions" should not left "Main actions" section
+			if (menuItemFrom.getId().equals(MAP_CONTEXT_MENU_MORE_ID) || menuItemTo.getId().equals(MAP_CONTEXT_MENU_MORE_ID)) {
+				int additionalHeaderIndex = 0;
+				for (int i = 0; i < items.size(); i++) {
+					Object value = items.get(i).getValue();
+					if (value instanceof HeaderItem && ((HeaderItem) value).titleRes == R.string.additional_actions) {
+						additionalHeaderIndex = i;
+						break;
+					}
 				}
-			} else if (menuItemTo.getId().equals(MAP_CONTEXT_MENU_MORE_ID)) {
-				if (from > buttonMoreIndex) {
+				if (to >= additionalHeaderIndex || from > additionalHeaderIndex) {
 					return false;
 				}
 			}
@@ -348,6 +381,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 		private ImageView moveIcon;
 		private TextView title;
 		private TextView description;
+		private boolean movable = true;
 
 		HeaderHolder(@NonNull View itemView) {
 			super(itemView);
@@ -358,7 +392,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 
 		@Override
 		public boolean isMovingDisabled() {
-			return true;
+			return !movable;
 		}
 	}
 
@@ -471,6 +505,9 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 			case UNDERLAY_MAP:
 				return R.string.shared_string_online_maps;
 			case RECORDING_LAYER:
+			case MAP_CONTEXT_MENU_AUDIO_NOTE:
+			case MAP_CONTEXT_MENU_VIDEO_NOTE:
+			case MAP_CONTEXT_MENU_PHOTO_NOTE:
 				return R.string.audionotes_plugin_name;
 			case CONTOUR_LINES:
 			case TERRAIN:
@@ -481,8 +518,25 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 			case MAP_CONTEXT_MENU_MODIFY_OSM_NOTE:
 			case MAP_CONTEXT_MENU_OPEN_OSM_NOTE:
 				return R.string.osm_settings;
+			case MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC:
+				return R.string.parking_positions;
 			default:
 				return R.string.app_name_osmand;
 		}
+	}
+
+	public List<String> getMainActionsIds() {
+		List<String> ids = new ArrayList<>();
+		for (RearrangeMenuAdapterItem adapterItem : items) {
+			Object value = adapterItem.getValue();
+			if (value instanceof ContextMenuItem) {
+				ids.add(((ContextMenuItem) value).getId());
+			} else if (value instanceof HeaderItem
+					&& (((HeaderItem) value).titleRes == R.string.additional_actions
+					|| ((HeaderItem) value).titleRes == R.string.shared_string_hidden)) {
+				break;
+			}
+		}
+		return ids;
 	}
 }

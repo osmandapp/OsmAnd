@@ -68,12 +68,14 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	private static final String ITEM_TYPE_KEY = "item_type_key";
 	private static final String ITEMS_ORDER_KEY = "items_order_key";
 	private static final String HIDDEN_ITEMS_KEY = "hidden_items_key";
+	private static final String MAIN_ACTIONS_ITEMS_KEY = "main_actions_items_key";
 	private static final String CONFIGURE_MENU_ITEMS_TAG = "configure_menu_items_tag";
 	private static final String IS_CHANGED_KEY = "is_changed_key";
 	private RearrangeMenuItemsAdapter rearrangeAdapter;
 	private HashMap<String, Integer> menuItemsOrder;
 	private ContextMenuAdapter contextMenuAdapter;
 	private List<String> hiddenMenuItems;
+	private List<String> mainActionItems;
 	private ApplicationMode appMode;
 	private LayoutInflater mInflater;
 	private OsmandApplication app;
@@ -81,6 +83,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	private boolean nightMode;
 	private boolean wasReset = false;
 	private boolean isChanged = false;
+	private Activity activity;
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
@@ -90,6 +93,9 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		outState.putSerializable(ITEM_TYPE_KEY, screenType);
 		outState.putString(APP_MODE_KEY, appMode.getStringKey());
 		outState.putBoolean(IS_CHANGED_KEY, isChanged);
+		if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
+			outState.putStringArrayList(MAIN_ACTIONS_ITEMS_KEY, new ArrayList<>(mainActionItems));
+		}
 	}
 
 	public static ConfigureMenuItemsFragment showInstance(
@@ -127,14 +133,15 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
-		nightMode = app.getSettings().OSMAND_THEME.getModeValue(appMode) == OsmandSettings.OSMAND_DARK_THEME;
-		mInflater = UiUtilities.getInflater(app, nightMode);
 		if (savedInstanceState != null) {
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
 			screenType = (ScreenType) savedInstanceState.getSerializable(ITEM_TYPE_KEY);
 			hiddenMenuItems = savedInstanceState.getStringArrayList(HIDDEN_ITEMS_KEY);
 			menuItemsOrder = (HashMap<String, Integer>) savedInstanceState.getSerializable(ITEMS_ORDER_KEY);
 			isChanged = savedInstanceState.getBoolean(IS_CHANGED_KEY);
+			if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
+				mainActionItems = savedInstanceState.getStringArrayList(MAIN_ACTIONS_ITEMS_KEY);
+			}
 		} else {
 			hiddenMenuItems = new ArrayList<>(getSettingForScreen(app, screenType).getModeValue(appMode).getHiddenIds());
 			menuItemsOrder = new HashMap<>();
@@ -143,6 +150,10 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 				menuItemsOrder.put(orderIds.get(i), i);
 			}
 		}
+		nightMode = app.getSettings().OSMAND_THEME.getModeValue(appMode) == OsmandSettings.OSMAND_DARK_THEME;
+		mInflater = UiUtilities.getInflater(app, nightMode);
+		mainActionItems = new ArrayList<>();
+		activity = getActivity();
 		instantiateContextMenuAdapter();
 		if (menuItemsOrder.isEmpty()) {
 			List<ContextMenuItem> defItems = contextMenuAdapter.getDefaultItems();
@@ -151,10 +162,23 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 				menuItemsOrder.put(defItems.get(i).getId(), i);
 			}
 		}
+		if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
+			initDefaultMainActions();
+		}
+	}
+
+	private void initDefaultMainActions() {
+		List<ContextMenuItem> defItems = contextMenuAdapter.getDefaultItems();
+		initDefaultOrders(defItems);
+		mainActionItems = new ArrayList<>(getSettingForScreen(app, screenType).getModeValue(appMode).getMainActionIds());
+		if (mainActionItems.isEmpty()) {
+			for (int i = 0; i < MAIN_BUTTONS_QUANTITY; i++) {
+				mainActionItems.add(defItems.get(i).getId());
+			}
+		}
 	}
 
 	private void instantiateContextMenuAdapter() {
-		Activity activity = getActivity();
 		if (activity instanceof MapActivity) {
 			switch (screenType) {
 				case DRAWER:
@@ -214,6 +238,9 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 
 			@Override
 			public void onDragOrSwipeEnded(RecyclerView.ViewHolder holder) {
+				if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
+					mainActionItems = rearrangeAdapter.getMainActionsIds();
+				}
 				toPosition = holder.getAdapterPosition();
 				if (toPosition >= 0 && fromPosition >= 0 && toPosition != fromPosition) {
 					rearrangeAdapter.notifyDataSetChanged();
@@ -226,10 +253,14 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 				if (rearrangeMenuAdapterItem.getValue() instanceof ContextMenuItem) {
 					ContextMenuItem menuItemBase = (ContextMenuItem) rearrangeMenuAdapterItem.getValue();
 					menuItemBase.setHidden(!menuItemBase.isHidden());
+					String id = menuItemBase.getId();
 					if (menuItemBase.isHidden()) {
-						hiddenMenuItems.add(menuItemBase.getId());
+						hiddenMenuItems.add(id);
+						if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
+							mainActionItems.remove(id);
+						}
 					} else {
-						hiddenMenuItems.remove(menuItemBase.getId());
+						hiddenMenuItems.remove(id);
 					}
 					wasReset = false;
 					isChanged = true;
@@ -273,7 +304,12 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 					}
 				}
 				FragmentManager fm = getFragmentManager();
-				OsmandSettings.ContextMenuItemsSettings prefToSave = new OsmandSettings.ContextMenuItemsSettings(hiddenMenuItems, ids);
+				OsmandSettings.ContextMenuItemsSettings prefToSave;
+				if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
+					prefToSave = new OsmandSettings.ContextMenuItemsSettings(mainActionItems, hiddenMenuItems, ids);
+				} else {
+					prefToSave = new OsmandSettings.ContextMenuItemsSettings(hiddenMenuItems, ids);
+				}
 				if (fm != null) {
 					ChangeGeneralProfilesPrefBottomSheet.showInstance(fm,
 							getSettingForScreen(app, screenType).getId(),
@@ -301,6 +337,22 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		return root;
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (activity instanceof MapActivity) {
+			((MapActivity) activity).disableDrawer();
+		}
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		if (activity instanceof MapActivity) {
+			((MapActivity) activity).enableDrawer();
+		}
+	}
+
 	private List<RearrangeMenuAdapterItem> getAdapterItems() {
 		List<RearrangeMenuAdapterItem> items = new ArrayList<>();
 		items.add(new RearrangeMenuAdapterItem(DESCRIPTION, screenType));
@@ -322,18 +374,20 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 			}
 
 			List<RearrangeMenuAdapterItem> main = new ArrayList<>();
-			int actionsIndex = Math.min(MAIN_BUTTONS_QUANTITY, visible.size());
-			for (int i = 0; i < actionsIndex; i++) {
-				main.add(visible.get(i));
+			List<RearrangeMenuAdapterItem> additional = new ArrayList<>();
+			for (RearrangeMenuAdapterItem adapterItem : visible) {
+				if (mainActionItems.contains(((ContextMenuItem) adapterItem.getValue()).getId())) {
+					main.add(adapterItem);
+				} else {
+					additional.add(adapterItem);
+				}
 			}
 			items.add(new RearrangeMenuAdapterItem(HEADER, new RearrangeMenuItemsAdapter.HeaderItem(R.string.main_actions, R.string.main_actions_descr)));
 			items.addAll(main);
-			items.add(new RearrangeMenuAdapterItem(HEADER, new RearrangeMenuItemsAdapter.HeaderItem(R.string.additional_actions, R.string.additional_actions_descr)));
-			List<RearrangeMenuAdapterItem> additional = new ArrayList<>();
-			for (int i = MAIN_BUTTONS_QUANTITY; i < visible.size(); i++) {
-				additional.add(visible.get(i));
+			if (!additional.isEmpty()) {
+				items.add(new RearrangeMenuAdapterItem(HEADER, new RearrangeMenuItemsAdapter.HeaderItem(R.string.additional_actions, R.string.additional_actions_descr)));
+				items.addAll(additional);
 			}
-			items.addAll(additional);
 		} else {
 			items.addAll(visible);
 		}
@@ -354,6 +408,10 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 						isChanged = true;
 						getSettingForScreen(app, screenType).resetModeToDefault(appMode);
 						instantiateContextMenuAdapter();
+						if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
+							mainActionItems.clear();
+							initDefaultMainActions();
+						}
 						rearrangeAdapter.updateItems(getAdapterItems());
 					}
 				})));

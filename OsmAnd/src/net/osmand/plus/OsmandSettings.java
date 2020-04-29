@@ -81,6 +81,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import static net.osmand.aidl.ConnectedApp.AIDL_LAYERS_PREFIX;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
@@ -1176,14 +1177,22 @@ public class OsmandSettings {
 	public static class ContextMenuItemsSettings implements Serializable {
 		public static final String HIDDEN = "hidden";
 		public static final String ORDER = "order";
+		public static final String MAIN_ACTIONS = "main_actions";
 		private List<String> hiddenIds = new ArrayList<>();
 		private List<String> orderIds = new ArrayList<>();
+		private List<String> mainActionIds = new ArrayList<>();
 
 		public ContextMenuItemsSettings() {
 
 		}
 
 		public ContextMenuItemsSettings(@NonNull List<String> hiddenIds, @NonNull List<String> orderIds) {
+			this.hiddenIds = hiddenIds;
+			this.orderIds = orderIds;
+		}
+
+		public ContextMenuItemsSettings(@NonNull List<String> mainActionIds, @NonNull List<String> hiddenIds, @NonNull List<String> orderIds) {
+			this.mainActionIds = mainActionIds;
 			this.hiddenIds = hiddenIds;
 			this.orderIds = orderIds;
 		}
@@ -1196,6 +1205,9 @@ public class OsmandSettings {
 				JSONObject json = new JSONObject(jsonString);
 				hiddenIds = readIdsList(json.optJSONArray(HIDDEN), idScheme);
 				orderIds = readIdsList(json.optJSONArray(ORDER), idScheme);
+				if (idScheme.equals(MAP_CONTEXT_MENU_ACTIONS)) {
+					mainActionIds = readIdsList(json.optJSONArray(MAIN_ACTIONS), idScheme);
+				}
 			} catch (JSONException e) {
 				LOG.error("Error converting to json string: " + e);
 			}
@@ -1206,7 +1218,11 @@ public class OsmandSettings {
 			if (jsonArray != null) {
 				for (int i = 0; i < jsonArray.length(); i++) {
 					String id = jsonArray.optString(i);
-					list.add(idScheme + id);
+					if (id.startsWith(AIDL_LAYERS_PREFIX)) {
+						list.add(id);
+					} else {
+						list.add(idScheme + id);
+					}
 				}
 			}
 			return list;
@@ -1217,6 +1233,9 @@ public class OsmandSettings {
 				JSONObject json = new JSONObject();
 				json.put(HIDDEN, getJsonArray(hiddenIds, idScheme));
 				json.put(ORDER, getJsonArray(orderIds, idScheme));
+				if (idScheme.equals(MAP_CONTEXT_MENU_ACTIONS)) {
+					json.put(MAIN_ACTIONS, getJsonArray(mainActionIds, idScheme));
+				}
 				return json.toString();
 			} catch (JSONException e) {
 				LOG.error("Error converting to json string: " + e);
@@ -1240,6 +1259,10 @@ public class OsmandSettings {
 
 		public List<String> getOrderIds() {
 			return Collections.unmodifiableList(orderIds);
+		}
+
+		public List<String> getMainActionIds() {
+			return Collections.unmodifiableList(mainActionIds);
 		}
 	}
 
@@ -3581,6 +3604,9 @@ public class OsmandSettings {
 
 	@Nullable
 	public ContextMenuItemsPreference getContextMenuItemsPreference(@NonNull String id) {
+		if (id.startsWith(AIDL_LAYERS_PREFIX)) {
+			return CONFIGURE_MAP_ITEMS;
+		}
 		for (ContextMenuItemsPreference preference : CONTEXT_MENU_ITEMS_PREFERENCES) {
 			if (id.startsWith(preference.idScheme)) {
 				return preference;

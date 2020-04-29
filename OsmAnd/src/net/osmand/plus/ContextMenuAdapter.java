@@ -49,6 +49,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import static net.osmand.aidl.ConnectedApp.AIDL_LAYERS_PREFIX;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
 
 public class ContextMenuAdapter {
@@ -171,7 +172,7 @@ public class ContextMenuAdapter {
                 return order;
             }
         }
-        return defaultOrder;
+		return defaultOrder == -1 ? items.size() - 1 : defaultOrder;
     }
 
 	public ArrayAdapter<ContextMenuItem> createListAdapter(final Activity activity, final boolean lightTheme) {
@@ -579,7 +580,7 @@ public class ContextMenuAdapter {
 		List<ContextMenuItem> items = new ArrayList<>();
 		for (ContextMenuItem item : this.items) {
 			String id = item.getId();
-			if (id != null && id.startsWith(idScheme) && !APP_PROFILES_ID.equals(id)) {
+			if (id != null && id.startsWith(idScheme) && !APP_PROFILES_ID.equals(id) || id != null && id.startsWith(AIDL_LAYERS_PREFIX)) {
 				items.add(item);
 			}
 		}
