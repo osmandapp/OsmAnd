@@ -362,7 +362,9 @@ task copyPoiCategories(type: Copy) {
 }
 
 task copyMapShaderIcons(type: Sync) {
-	from "../../resources/rendering_styles/style-icons/map-shaders-png"
+	// from "../../resources/rendering_styles/style-icons/map-shaders-png"
+	// into "res/"
+	from "../../resources/rendering_styles/style-icons/map-shaders-vector"
 	into "res/"
 	include "**/*.png",  "**/*.xml"
 	preserve {
