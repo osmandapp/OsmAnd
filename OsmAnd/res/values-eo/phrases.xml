@@ -892,7 +892,7 @@
     <string name="poi_dock">Doko</string>
     <string name="poi_cutline">Senarba strio</string>
     <string name="poi_shower">Duŝejo</string>
-    <string name="poi_brothel">Putinejo</string>
+    <string name="poi_brothel">Bordelo</string>
     <string name="poi_smoking_area">Fumejo</string>
     <string name="poi_mortuary">Kadavrejo</string>
     <string name="poi_crematorium">Kadavr-bruligejo</string>
@@ -1993,7 +1993,7 @@
     <string name="poi_summit_cross">Kruco sur la montopinto: jes</string>
     <string name="poi_temperature">Temperaturo</string>
     <string name="poi_fitness_station">Ekzerc-parko</string>
-    <string name="poi_hackerspace">Kodumulejo</string>
+    <string name="poi_hackerspace">Kodumulspaco</string>
     <string name="poi_wiki_lang_af">Vikipedio Afrikansa</string>
     <string name="poi_wiki_lang_eu">Vikipedio Eŭska</string>
     <string name="poi_fireworks">Artfajraĵ-vendejo</string>

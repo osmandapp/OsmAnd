@@ -99,7 +99,7 @@
     <string name="select_search_position">Autour de :</string>
     <string name="context_menu_item_search">Rechercher à proximité</string>
     <string name="shared_string_save_as_gpx">Enregistrer comme nouveau fichier GPX</string>
-    <string name="route_successfully_saved_at">Itinéraire enregistré sous \'%1$s\'.</string>
+    <string name="route_successfully_saved_at">Itinéraire enregistré sous « %1$s ».</string>
     <string name="filename_input">Nom du fichier : </string>
     <string name="file_with_name_already_exist">Le même nom existe déjà.</string>
     <string name="shared_string_save">Enregistrer</string>
@@ -109,7 +109,7 @@
     <string name="show_more_map_detail">Afficher plus de détails</string>
     <string name="show_more_map_detail_descr">Afficher certains détails des cartes vectorielles (routes, etc.) y compris aux niveaux de zooms inférieurs.</string>
     <string name="favourites_delete_multiple_succesful">Favori(s) supprimé(s).</string>
-    <string name="favorite_delete_multiple">Êtes-vous certain de vouloir supprimer %1$d favoris et %2$d groupes de favoris \?</string>
+    <string name="favorite_delete_multiple">Êtes-vous certain(e) de vouloir supprimer %1$d favoris et %2$d groupes de favoris \?</string>
     <string name="favorite_home_category">Domicile</string>
     <string name="favorite_friends_category">Amis</string>
     <string name="favorite_places_category">Lieux</string>
@@ -583,8 +583,8 @@
     <string name="filter_current_poiButton">Filtre</string>
     <string name="edit_filter_save_as_menu_item">Enregistrer sous</string>
     <string name="edit_filter_delete_dialog_title">Supprimer ce filtre \?</string>
-    <string name="edit_filter_delete_message">Le filtre \'%1$s\' a été supprimé</string>
-    <string name="edit_filter_create_message">Le filtre \'%1$s\' a été créé</string>
+    <string name="edit_filter_delete_message">Le filtre « %1$s » a été supprimé</string>
+    <string name="edit_filter_create_message">Le filtre « %1$s » a été créé</string>
     <string name="offline_navigation_not_available">Navigation hors-ligne temporairement indisponible.</string>
     <string name="left_side_navigation">Conduite à gauche</string>
     <string name="left_side_navigation_descr">Pour les pays où la circulation s\'effectue sur la partie gauche de la route.</string>
@@ -728,7 +728,7 @@
     <string name="starting_point_too_far">Point de départ trop éloigné de la route la plus proche.</string>
     <string name="shared_location">Lieu partagé</string>
     <string name="select_animate_speedup">Vitesse de simulation de l\'itinéraire :</string>
-    <string name="global_app_allocated_memory_descr">Mémoire allouée %1$s Mo (limite Android %2$s MB, Dalvik %3$s Mo).</string>
+    <string name="global_app_allocated_memory_descr">Mémoire allouée %1$s Mo (limite Android %2$s Mo, Dalvik %3$s Mo).</string>
     <string name="global_app_allocated_memory">Mémoire allouée</string>
     <string name="native_app_allocated_memory_descr">Mémoire totale utilisée par l\'application %1$s Mo (Dalvik %2$s Mo, divers %3$s Mo).
 \nMémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</string>
@@ -1079,7 +1079,7 @@
     <string name="animate_routing_route_not_calculated">Veuillez d\'abord calculer l\'itinéraire</string>
     <string name="animate_routing_route">Simulation de l\'itinéraire calculé </string>
     <string name="animate_routing_gpx">Simulation suivant une trace GPX</string>
-    <string name="local_osm_changes_delete_all_confirm">Êtes-vous certain de vouloir supprimer %1$d modifications OSM \?</string>
+    <string name="local_osm_changes_delete_all_confirm">Êtes-vous certain(e) de vouloir supprimer %1$d modifications OSM \?</string>
     <string name="shared_string_delete_all">Tout supprimer</string>
     <string name="app_mode_hiking">Randonnée</string>
     <string name="app_mode_motorcycle">Moto</string>
@@ -1333,7 +1333,7 @@
     <string name="fav_point_dublicate_message">Favori renommé en %1$s pour éviter un doublon.</string>
     <string name="text_size_descr">Sélectionnez la taille du texte sur la carte.</string>
     <string name="print_route">Exporter l\'itinéraire</string>
-    <string name="fav_point_emoticons_message">Favori renommé en \'%1$s\' (les émoticônes ne sont pas autorisés).</string>
+    <string name="fav_point_emoticons_message">Favori renommé en « %1$s » (les émoticônes ne sont pas autorisés).</string>
     <string name="speed_limit_exceed">Marge de tolérance aux limites de vitesse</string>
     <string name="speed_limit_exceed_message">Indiquez la marge de tolérance à ajouter à la limitation de vitesse et au-dessus de laquelle vous recevrez une alerte vocale.</string>
     <string name="anonymous_user_hint">Un utilisateur anonyme ne peut pas :
@@ -1502,7 +1502,7 @@
     <string name="delay_to_start_navigation_descr">Indiquez le délai d\'affichage de l\'itinéraire détaillé, avant de démarrer la navigation.</string>
     <string name="shared_string_go">Aller</string>
     <string name="confirmation_to_clear_history">Effacer l\'historique ?</string>
-    <string name="local_osm_changes_upload_all_confirm">Êtes-vous certain·e de vouloir téléverser %1$d modification(s) à OSM \?</string>
+    <string name="local_osm_changes_upload_all_confirm">Êtes-vous certain(e) de vouloir téléverser %1$d modification(s) à OSM \?</string>
     <string name="delay_to_start_navigation">Lancer la navigation pas à pas après …</string>
     <string name="osm_changes_added_to_local_edits">Modifications OSM mémorisées localement</string>
     <string name="mark_to_delete">Marquer pour suppression</string>
@@ -1556,7 +1556,7 @@
     <string name="local_indexes_cat_wiki">Wikipédia</string>
     <string name="download_wikipedia_maps">Wikipédia</string>
     <string name="shared_string_import2osmand">Importer dans OsmAnd</string>
-    <string name="local_recordings_delete_all_confirm">Êtes-vous certain de vouloir supprimer %1$d notes \?</string>
+    <string name="local_recordings_delete_all_confirm">Êtes-vous certain(e) de vouloir supprimer %1$d notes \?</string>
     <string name="gps_network_not_enabled">Le service de localisation est arrêté. Souhaitez-vous l’activer ?</string>
     <string name="disable_recording_once_app_killed_descrp">Met en pause l\'enregistrement de la trace GPX lors de l\'arrêt d\'OsmAnd (via les applications récentes) et supprime l\'icône OsmAnd de la barre de notification Android.</string>
     <string name="disable_recording_once_app_killed">Interdire la journalisation autonome</string>
@@ -1706,8 +1706,8 @@
     <string name="favorite_category_add_new_title">Ajouter une catégorie</string>
     <string name="favorite_category_dublicate_message">Cette catégorie existe déjà. Merci d\'utiliser un autre nom.</string>
     <string name="confirm_download_roadmaps">Êtes-vous certain de vouloir télécharger la carte des routes alors que vous disposez déjà d\'une carte complète ?</string>
-    <string name="value_downloaded_of_max">%1$,1f de %2$,1f Mo</string>
-    <string name="file_size_in_mb">%,1f Mo</string>
+    <string name="value_downloaded_of_max">%1$.1f de %2$.1f Mo</string>
+    <string name="file_size_in_mb">%.1f Mo</string>
     <string name="update_all">Tout mettre à jour (%1$s Mo)</string>
     <string name="free_downloads_used">Téléchargements gratuits effectués</string>
     <string name="free_downloads_used_description">Affiche le nombre de téléchargements gratuits restants.</string>
@@ -2007,7 +2007,7 @@
     <string name="no_update_info_desc">Ne pas vérifier les mises à jour ni les offres promotionnelles OsmAnd.</string>
     <string name="no_update_info">Ne pas afficher les nouvelles versions</string>
     <string name="skip_map_downloading">Ignorer le téléchargement des cartes</string>
-    <string name="skip_map_downloading_desc">Aucune carte hors-ligne n\'est installée. Vous pouvez sélectionner une carte dans la liste ou télécharger une carte plus tard depuis le menu \'%1$s\'.</string>
+    <string name="skip_map_downloading_desc">Aucune carte hors ligne n\'est installée. Vous pouvez sélectionner une carte dans la liste ou télécharger une carte plus tard depuis le menu « %1$s ».</string>
     <string name="search_another_country">Sélectionner une autre région</string>
     <string name="search_map">Recherche des cartes …</string>
     <string name="first_usage_wizard_desc">Autoriser OsmAnd à vous localiser et à vous suggérer le téléchargement des cartes de la région.</string>
@@ -2131,7 +2131,7 @@
     <string name="quick_action_favorites_hide">Masquer les favoris</string>
     <string name="quick_action_showhide_poi_title">Afficher / Masquer les points d\'intérêt</string>
     <string name="quick_action_poi_show">Afficher %1$s</string>
-    <string name="quick_action_poi_hide">"Masquer  %1$s"</string>
+    <string name="quick_action_poi_hide">Masquer %1$s</string>
     <string name="quick_action_add_category">Ajouter une catégorie</string>
     <string name="quick_action_add_configure_map">Paramétrer la carte</string>
     <string name="quick_action_add_navigation">Navigation</string>
@@ -2208,7 +2208,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_time_span">Amplitude horaire</string>
     <string name="shared_string_gpx_track">Trace</string>
     <string name="points_delete_multiple_succesful">Point(s) supprimé(s) avec succès.</string>
-    <string name="points_delete_multiple">Êtes-vous certain de vouloir supprimer %1$d point(s) \?</string>
+    <string name="points_delete_multiple">Êtes-vous certain(e) de vouloir supprimer %1$d point(s) \?</string>
     <string name="add_new_folder">Créer un dossier</string>
     <string name="route_points_category_name">Itinéraire pour emprunter cette route</string>
     <string name="track_points_category_name">Points de passage, points d’intérêt, points remarquables</string>
@@ -2740,7 +2740,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="get_unlimited_access">Obtenir un accès illimité</string>
     <string name="welcome_to_open_beta">Bienvenue dans cette bêta ouverte !</string>
     <string name="contour_lines_hillshade_maps">Cartes avec courbes de niveaux et ombrage du relief</string>
-    <string name="download_wikipedia_description">Téléchargez les articles Wikipedia pour %1$s afin de pouvoir les lire hors-ligne.</string>
+    <string name="download_wikipedia_description">Téléchargez les articles Wikipédia pour %1$s afin de pouvoir les lire hors ligne.</string>
     <string name="download_wikipedia_label">Télécharger les données Wikipedia</string>
     <string name="open_in_browser_wiki">Ouvrir l\'article en ligne</string>
     <string name="open_in_browser_wiki_description">Afficher l\'article dans un navigateur.</string>
@@ -2844,7 +2844,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mois</string>
     <string name="osm_live_payment_discount_descr">Économisez %1$s</string>
     <string name="osm_live_payment_current_subscription">Abonnement en cours</string>
-    <string name="default_price_currency_format">%1$,2f %2$s</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Fréquence de règlement :</string>
     <string name="osm_live_payment_contribute_descr">Les dons financent la cartographie OSM / OpenStreetMap.</string>
     <string name="osm_live_plan_pricing">Abonnements &amp; tarifs</string>
@@ -3649,4 +3649,10 @@ représentant la zone : %1$s x %2$s</string>
     <string name="download_unsupported_action">Action %1$s non prise en charge</string>
     <string name="lang_ky">Kirghize</string>
     <string name="lang_gu">Gujarati</string>
+    <string name="osm_live_payment_subscription_management">Le paiement sera débité de votre compte Google Play dès confirmation de l\'achat.
+\n
+\nL\'abonnement sera reconduit automatiquement à moins qu\'il ne soit annulé avant sa date de renouvellement. Votre compte ne sera débité pour une nouvelle durée (mensuelle / trimestrielle / annuelle) qu\'à la date de renouvellement.
+\n
+\nVous pouvez gérer et annuler vos abonnements depuis vos paramètres Google Play.</string>
+    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
 </resources>

@@ -141,7 +141,7 @@
     <string name="si_mi_meters">Millas/metros</string>
     <string name="shared_string_hour_short">h</string>
     <string name="shared_string_minute_short">min</string>
-    <string name="shared_string_second_short">seg</string>
+    <string name="shared_string_second_short">s</string>
     <string name="welcome_descr">El <b>rastreador de OsmAnd</b> (en inglés como «OsmAnd Tracker»), permite compartir tu ubicación y ver la de otros en OsmAnd.<br/>
         <br/>La aplicación utiliza la API de Telegram, por lo que necesita una cuenta de Telegram.</string>
     <string name="my_location">Mi ubicación</string>

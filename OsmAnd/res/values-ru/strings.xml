@@ -3663,4 +3663,10 @@
     <string name="lang_lmo">Ломбардский</string>
     <string name="extra_maps_menu_group">Дополнительные карты</string>
     <string name="download_unsupported_action">Неподдерживаемое действие %1$s</string>
+    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
+    <string name="osm_live_payment_subscription_management">Оплата будет списана со счета, привязанного к вашему аккаунту Google Play при подтверждении покупки.
+\n
+\nПодписка продлевается автоматически, если вы не отмените ее до даты продления. С вашего счета будет взиматься плата за период продления (месяц/три месяца/год) разово в день продления.
+\n
+\nВы можете управлять подписками и отменять их в настройках Google Play.</string>
 </resources>

@@ -2879,7 +2879,7 @@
     <string name="osm_live_payment_annual_title">سالانه</string>
     <string name="osm_live_payment_month_cost_descr">%1$s در ماه</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s در ماه</string>
-    <string name="osm_live_payment_discount_descr">%1$s ارزان‌تر.</string>
+    <string name="osm_live_payment_discount_descr">%1$s ارزان‌تر</string>
     <string name="osm_live_payment_current_subscription">اشتراک کنونی</string>
     <string name="osm_live_payment_renews_monthly">هر ماه تمدید می‌شود</string>
     <string name="osm_live_payment_renews_quarterly">هر سه ماه تمدید می‌شود</string>
@@ -3676,4 +3676,5 @@
     <string name="lang_ur">اردو</string>
     <string name="lang_tg">تاجیکی</string>
     <string name="extra_maps_menu_group">نقشه‌های بیشتر</string>
+    <string name="download_unsupported_action">کنش پشتیبانی‌نشده %1$s</string>
 </resources>
