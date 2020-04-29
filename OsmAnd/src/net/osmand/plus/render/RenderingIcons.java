@@ -16,6 +16,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 
@@ -52,6 +53,7 @@ public class RenderingIcons {
 			cacheBmp = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
 					drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
 		}
+		cacheBmp.eraseColor(Color.TRANSPARENT);
 		Canvas canvas = new Canvas(cacheBmp);
 		drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
 		drawable.draw(canvas);
