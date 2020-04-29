@@ -69,4 +69,7 @@
     <string name="timeline_no_data">Žádná data</string>
     <string name="unit_of_length_descr">Zvolte, v čem se měří vzdálenost.</string>
     <string name="units_and_formats">Jednotky a formáty</string>
+    <string name="shared_string_enabled">Povolen</string>
+    <string name="unit_of_length">Jednotky vzdálenosti</string>
+    <string name="shared_string_appearance">Vzhled</string>
 </resources>
