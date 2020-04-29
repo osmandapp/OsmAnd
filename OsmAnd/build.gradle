@@ -361,18 +361,28 @@ task copyPoiCategories(type: Copy) {
 	into "assets"
 }
 
-task copyStyleIcons(type: Sync) {
-	from "../../resources/rendering_styles/style-icons/"
+task copyMapShaderIcons(type: Sync) {
+	from "../../resources/rendering_styles/style-icons/map-shaders-png"
 	into "res/"
 	include "**/*.png",  "**/*.xml"
 	preserve {
 		include '**/*'
-		exclude  "**/mm_*", "**/h_*"
+		exclude  "**/h_*"
 	}
 }
 
-task copyPOIIcons(type: Sync) {
-	from "../../resources/rendering_styles/drawable-mx/"
+task copyMapPOIIcons(type: Sync) {
+	from "../../resources/rendering_styles/style-icons/map-icons-png"
+	into "res/"
+	include "**/*.png",  "**/*.xml"
+	preserve {
+		include '**/*'
+		exclude "**/mm_*"
+	}
+}
+
+task copyLargePOIIcons(type: Sync) {
+	from "../../resources/rendering_styles/style-icons/poi-icons-vector"
 	into "res/drawable/"
 	include "**/*.png",  "**/*.xml"
 	preserve {
