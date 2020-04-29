@@ -365,7 +365,7 @@ task copyMapShaderIcons(type: Sync) {
 	// from "../../resources/rendering_styles/style-icons/map-shaders-png"
 	// into "res/"
 	from "../../resources/rendering_styles/style-icons/map-shaders-vector"
-	into "res/"
+	into "res/drawable"
 	include "**/*.png",  "**/*.xml"
 	preserve {
 		include '**/*'
