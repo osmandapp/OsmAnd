@@ -15,7 +15,12 @@ import org.apache.commons.logging.Log;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 public class RenderingIcons {
 	private static final Log log = PlatformUtil.getLog(RenderingIcons.class);
@@ -25,6 +30,8 @@ public class RenderingIcons {
 	private static Map<String, Integer> bigIcons = new LinkedHashMap<String, Integer>();
 	private static Map<String, Bitmap> iconsBmp = new LinkedHashMap<String, Bitmap>();
 //	private static DisplayMetrics dm;
+
+	private static Bitmap cacheBmp = null;
 	
 	public static boolean containsSmallIcon(String s){
 		return smallIcons.containsKey(s);
@@ -32,6 +39,26 @@ public class RenderingIcons {
 	
 	public static boolean containsBigIcon(String s){
 		return bigIcons.containsKey(s);
+	}
+
+
+	public static synchronized byte[] getBitmapFromVectorDrawable(Context context, int drawableId) {
+		Drawable drawable = ContextCompat.getDrawable(context, drawableId);
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+			drawable = (DrawableCompat.wrap(drawable)).mutate();
+		}
+		if(cacheBmp == null || cacheBmp.getWidth() != drawable.getIntrinsicWidth() ||
+				cacheBmp.getHeight() != drawable.getIntrinsicHeight()) {
+			cacheBmp = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
+					drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+		}
+		Canvas canvas = new Canvas(cacheBmp);
+		drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+		drawable.draw(canvas);
+
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		cacheBmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
+		return baos.toByteArray();
 	}
 	
 	public static byte[] getIconRawData(Context ctx, String s) {
@@ -52,7 +79,10 @@ public class RenderingIcons {
 			}
 			inputStream.close();
 			final byte[] bitmapData = proxyOutputStream.toByteArray();
-			log.info("Icon data length is " + bitmapData.length); //$NON-NLS-1$
+			if (isVectorData(bitmapData)) {
+				return getBitmapFromVectorDrawable(ctx, resId.intValue());
+			}
+//			log.info("Icon data length is " + bitmapData.length); //$NON-NLS-1$
 //			Bitmap dm = android.graphics.BitmapFactory.decodeByteArray(bitmapData, 0, bitmapData.length) ;
 //			if(dm != null){
 //				System.out.println("IC " + s +" " + dm.getHeight() + "x" + dm.getWidth());
@@ -65,7 +95,22 @@ public class RenderingIcons {
 			return null;
 		}
 	}
-	
+
+	private static boolean isVectorData(byte[] bitmapData) {
+		for (int i = 0; i < bitmapData.length - 8 && i < 32; i++) {
+			int ind = 0;
+			if (bitmapData[i] == 'P' && bitmapData[i + 1] == 'N' &&
+					bitmapData[i + 2] == 'G') {
+				return false;
+			}
+		}
+		if (bitmapData.length > 4 && bitmapData[0] == 3 && bitmapData[1] == 0 &&
+				bitmapData[2] == 8 && bitmapData[3] == 0) {
+			return true;
+		}
+		return false;
+	}
+
 	public static int getBigIconResourceId(String s) {
 		Integer i = bigIcons.get(s);
 		if (i == null) {

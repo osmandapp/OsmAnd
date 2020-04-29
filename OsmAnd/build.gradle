@@ -84,7 +84,7 @@ android {
 		noCompress "qz"
 		cruncherEnabled = false
 		// Flag notifies aapt to keep the attribute IDs around
-		// additionalParameters "--no-version-vectors"
+		additionalParameters "--no-version-vectors"
 	}
 
 	dexOptions {
@@ -372,8 +372,11 @@ task copyMapShaderIcons(type: Sync) {
 }
 
 task copyMapPOIIcons(type: Sync) {
-	from "../../resources/rendering_styles/style-icons/map-icons-png"
-	into "res/"
+	from "../../resources/rendering_styles/style-icons/map-icons-vector"
+	into "res/drawable/"
+	// from "../../resources/rendering_styles/style-icons/map-icons-png"
+	// into "res/"
+
 	include "**/*.png",  "**/*.xml"
 	preserve {
 		include '**/*'
