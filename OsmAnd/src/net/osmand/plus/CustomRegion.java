@@ -83,6 +83,10 @@ public class CustomRegion extends WorldRegion {
 		return descriptionInfo;
 	}
 
+	public String getIconName(Context ctx) {
+		return JsonUtils.getLocalizedResFromMap(ctx, icons, null);
+	}
+
 	public static CustomRegion fromJson(@NonNull Context ctx, JSONObject object) throws JSONException {
 		String scopeId = object.optString("scope-id", null);
 		String path = object.optString("path", null);
@@ -216,6 +220,7 @@ public class CustomRegion extends WorldRegion {
 						if ("json".equalsIgnoreCase(dynamicDownloadItems.format)) {
 							dynamicItemsJson = mapJsonItems(result);
 						}
+						app.getDownloadThread().runReloadIndexFilesSilent();
 					}
 				}
 			};

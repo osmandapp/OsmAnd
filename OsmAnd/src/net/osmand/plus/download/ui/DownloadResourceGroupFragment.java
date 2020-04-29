@@ -3,11 +3,9 @@ package net.osmand.plus.download.ui;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,15 +30,12 @@ import net.osmand.plus.CustomRegion;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.download.CustomIndexItem;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivity.BannerAndDownloadFreeVersion;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResourceGroup;
-import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
@@ -53,9 +48,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static net.osmand.plus.download.ui.DownloadItemFragment.updateActionButtons;
@@ -564,209 +557,5 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		DownloadResourceGroupFragment fragment = new DownloadResourceGroupFragment();
 		fragment.setArguments(bundle);
 		return fragment;
-	}
-
-	
-	
-	private static class DownloadGroupViewHolder {
-		TextView textView;
-		private DownloadActivity ctx;
-
-		public DownloadGroupViewHolder(DownloadActivity ctx, View v) {
-			this.ctx = ctx;
-			textView = (TextView) v.findViewById(R.id.title);
-		}
-		
-		private boolean isParentWorld(DownloadResourceGroup group) {
-			return group.getParentGroup() == null
-					|| group.getParentGroup().getType() == DownloadResourceGroupType.WORLD;
-		}
-
-		private Drawable getIconForGroup(DownloadResourceGroup group) {
-			Drawable iconStart;
-			if (group.getType() == DownloadResourceGroupType.VOICE_REC
-					|| group.getType() == DownloadResourceGroupType.VOICE_TTS) {
-				iconStart = ctx.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_volume_up);
-			} else if (group.getType() == DownloadResourceGroupType.FONTS) {
-				iconStart = ctx.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_map_language);
-			} else {
-				UiUtilities cache = ctx.getMyApplication().getUIUtilities();
-				if (isParentWorld(group) || isParentWorld(group.getParentGroup())) {
-					iconStart = cache.getThemedIcon(R.drawable.ic_world_globe_dark);
-				} else {
-					DownloadResourceGroup ggr = group
-							.getSubGroupById(DownloadResourceGroupType.REGION_MAPS.getDefaultId());
-					iconStart = cache.getThemedIcon(R.drawable.ic_map);
-					if (ggr != null && ggr.getIndividualResources() != null) {
-						IndexItem item = null;
-						for (IndexItem ii : ggr.getIndividualResources()) {
-							if (ii.getType() == DownloadActivityType.NORMAL_FILE
-									|| ii.getType() == DownloadActivityType.ROADS_FILE) {
-								if (ii.isDownloaded() || ii.isOutdated()) {
-									item = ii;
-									break;
-								}
-							}
-						}
-						if (item != null) {
-							if (item.isOutdated()) {
-								iconStart = cache.getIcon(R.drawable.ic_map, R.color.color_distance);
-							} else {
-								iconStart = cache.getIcon(R.drawable.ic_map, R.color.color_ok);
-							}
-						}
-					}
-				}
-			}
-			return iconStart;
-		}
-
-		public void bindItem(DownloadResourceGroup group) {
-			String name = group.getName(ctx);
-			textView.setText(name);
-			Drawable iconStart = getIconForGroup(group);
-			AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(textView, iconStart, null, null, null);
-		}
-	}
-
-	public static class DownloadResourceGroupAdapter extends OsmandBaseExpandableListAdapter {
-
-		private List<DownloadResourceGroup> data = new ArrayList<DownloadResourceGroup>();
-		private DownloadActivity ctx;
-		private DownloadResourceGroup mainGroup;
-
-		
-
-		public DownloadResourceGroupAdapter(DownloadActivity ctx) {
-			this.ctx = ctx;
-		}
-
-		public void update(DownloadResourceGroup mainGroup) {
-			this.mainGroup = mainGroup;
-			data = mainGroup.getGroups();
-			notifyDataSetChanged();
-		}
-
-		@Override
-		public Object getChild(int groupPosition, int childPosition) {
-			DownloadResourceGroup drg = data.get(groupPosition);
-			if (drg.getType().containsIndexItem()) {
-				return drg.getItemByIndex(childPosition);
-			}
-			return drg.getGroupByIndex(childPosition);
-		}
-
-		@Override
-		public long getChildId(int groupPosition, int childPosition) {
-			return groupPosition * 10000 + childPosition;
-		}
-
-		@Override
-		public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild,
-				View convertView, ViewGroup parent) {
-			final Object child = getChild(groupPosition, childPosition);
-			if (child instanceof IndexItem) {
-				
-				IndexItem item = (IndexItem) child;
-				DownloadResourceGroup group = getGroupObj(groupPosition);
-				ItemViewHolder viewHolder;
-				if (convertView != null && convertView.getTag() instanceof ItemViewHolder) {
-					viewHolder = (ItemViewHolder) convertView.getTag();
-				}  else {
-					convertView = LayoutInflater.from(parent.getContext()).inflate(
-							R.layout.two_line_with_images_list_item, parent, false);
-					viewHolder = new ItemViewHolder(convertView, ctx);
-					viewHolder.setShowRemoteDate(true);
-					convertView.setTag(viewHolder);
-				}
-				if (mainGroup.getType() == DownloadResourceGroupType.REGION &&
-						group != null && group.getType() == DownloadResourceGroupType.REGION_MAPS
-						&& !(item instanceof CustomIndexItem)) {
-					viewHolder.setShowTypeInName(true);
-					viewHolder.setShowTypeInDesc(false);
-				} else if (group != null && (group.getType() == DownloadResourceGroupType.SRTM_HEADER
-						|| group.getType() == DownloadResourceGroupType.HILLSHADE_HEADER)) {
-					viewHolder.setShowTypeInName(false);
-					viewHolder.setShowTypeInDesc(false);
-				} else {
-					viewHolder.setShowTypeInDesc(true);
-				}
-				viewHolder.bindIndexItem(item);
-			} else {
-				DownloadResourceGroup group = (DownloadResourceGroup) child;
-				DownloadGroupViewHolder viewHolder;
-				if (convertView != null && convertView.getTag() instanceof DownloadGroupViewHolder) {
-					viewHolder = (DownloadGroupViewHolder) convertView.getTag();
-				}  else {
-					convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.simple_list_menu_item,
-								parent, false);
-					viewHolder = new DownloadGroupViewHolder(ctx, convertView);
-					convertView.setTag(viewHolder);
-				}
-				viewHolder.bindItem(group);
-			}
-
-			return convertView;
-		}
-
-		
-
-		@Override
-		public View getGroupView(int groupPosition, boolean isExpanded, final View convertView, final ViewGroup parent) {
-			View v = convertView;
-			String section = getGroup(groupPosition);
-			if (v == null) {
-				LayoutInflater inflater = LayoutInflater.from(ctx);
-				v = inflater.inflate(R.layout.download_item_list_section, parent, false);
-			}
-			TextView nameView = ((TextView) v.findViewById(R.id.title));
-			nameView.setText(section);
-			v.setOnClickListener(null);
-			TypedValue typedValue = new TypedValue();
-			Resources.Theme theme = ctx.getTheme();
-			theme.resolveAttribute(R.attr.activity_background_color, typedValue, true);
-			v.setBackgroundColor(typedValue.data);
-
-			return v;
-		}
-
-		@Override
-		public int getChildrenCount(int groupPosition) {
-			return data.get(groupPosition).size();
-		}
-		
-		public DownloadResourceGroup getGroupObj(int groupPosition) {
-			return data.get(groupPosition);
-		}
-
-		@Override
-		public String getGroup(int groupPosition) {
-			DownloadResourceGroup drg = data.get(groupPosition);
-			int rid = drg.getType().getResourceId();
-			if (rid != -1) {
-				return ctx.getString(rid);
-			}
-			return "";
-		}
-
-		@Override
-		public int getGroupCount() {
-			return data.size();
-		}
-
-		@Override
-		public long getGroupId(int groupPosition) {
-			return groupPosition;
-		}
-
-		@Override
-		public boolean hasStableIds() {
-			return false;
-		}
-
-		@Override
-		public boolean isChildSelectable(int groupPosition, int childPosition) {
-			return true;
-		}
 	}
 }
