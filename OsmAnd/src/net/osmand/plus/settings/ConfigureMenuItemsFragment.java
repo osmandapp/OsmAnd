@@ -84,6 +84,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	private boolean wasReset = false;
 	private boolean isChanged = false;
 	private Activity activity;
+	private RecyclerView recyclerView;
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
@@ -154,17 +155,6 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		mInflater = UiUtilities.getInflater(app, nightMode);
 		mainActionItems = new ArrayList<>();
 		activity = getActivity();
-		instantiateContextMenuAdapter();
-		if (menuItemsOrder.isEmpty()) {
-			List<ContextMenuItem> defItems = contextMenuAdapter.getDefaultItems();
-			initDefaultOrders(defItems);
-			for (int i = 0; i < defItems.size(); i++) {
-				menuItemsOrder.put(defItems.get(i).getId(), i);
-			}
-		}
-		if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
-			initDefaultMainActions();
-		}
 	}
 
 	private void initDefaultMainActions() {
@@ -220,7 +210,81 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 			}
 		});
 		appbar.addView(toolbar);
-		RecyclerView recyclerView = root.findViewById(R.id.profiles_list);
+		recyclerView = root.findViewById(R.id.profiles_list);
+		View cancelButton = root.findViewById(R.id.dismiss_button);
+		root.findViewById(R.id.buttons_divider).setVisibility(View.VISIBLE);
+		UiUtilities.setupDialogButton(nightMode, cancelButton, UiUtilities.DialogButtonType.SECONDARY, R.string.shared_string_cancel);
+		View applyButton = root.findViewById(R.id.right_bottom_button);
+		cancelButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentActivity fragmentActivity = getActivity();
+				if (fragmentActivity != null) {
+					fragmentActivity.onBackPressed();
+				}
+			}
+		});
+		UiUtilities.setupDialogButton(nightMode, applyButton, UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_apply);
+		applyButton.setVisibility(View.VISIBLE);
+		applyButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				List<ContextMenuItem> defItems = contextMenuAdapter.getDefaultItems();
+				List<String> ids = new ArrayList<>();
+				if (!menuItemsOrder.isEmpty()) {
+					sortByCustomOrder(defItems, menuItemsOrder);
+					for (ContextMenuItem item : defItems) {
+						ids.add(item.getId());
+					}
+				}
+				FragmentManager fm = getFragmentManager();
+				OsmandSettings.ContextMenuItemsSettings prefToSave;
+				if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
+					prefToSave = new OsmandSettings.ContextMenuItemsSettings(mainActionItems, hiddenMenuItems, ids);
+				} else {
+					prefToSave = new OsmandSettings.ContextMenuItemsSettings(hiddenMenuItems, ids);
+				}
+				if (fm != null) {
+					ChangeGeneralProfilesPrefBottomSheet.showInstance(fm,
+							getSettingForScreen(app, screenType).getId(),
+							prefToSave,
+							getTargetFragment(),
+							false,
+							appMode,
+							new ChangeGeneralProfilesPrefBottomSheet.OnChangeSettingListener() {
+								@Override
+								public void onApplied() {
+									dismissFragment();
+								}
+
+								@Override
+								public void onDiscard() {
+
+								}
+							});
+				}
+			}
+		});
+		if (Build.VERSION.SDK_INT >= 21) {
+			AndroidUtils.addStatusBarPadding21v(app, root);
+		}
+		return root;
+	}
+
+	@Override
+	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		instantiateContextMenuAdapter();
+		if (menuItemsOrder.isEmpty()) {
+			List<ContextMenuItem> defItems = contextMenuAdapter.getDefaultItems();
+			initDefaultOrders(defItems);
+			for (int i = 0; i < defItems.size(); i++) {
+				menuItemsOrder.put(defItems.get(i).getId(), i);
+			}
+		}
+		if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
+			initDefaultMainActions();
+		}
 		recyclerView.setPadding(0, 0, 0, (int) app.getResources().getDimension(R.dimen.dialog_button_ex_min_width));
 		rearrangeAdapter = new RearrangeMenuItemsAdapter(app, getAdapterItems(), nightMode);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
@@ -277,64 +341,6 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		};
 		rearrangeAdapter.setListener(listener);
 		recyclerView.setAdapter(rearrangeAdapter);
-		View cancelButton = root.findViewById(R.id.dismiss_button);
-		UiUtilities.setupDialogButton(nightMode, cancelButton, UiUtilities.DialogButtonType.SECONDARY, R.string.shared_string_cancel);
-		cancelButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentActivity fragmentActivity = getActivity();
-				if (fragmentActivity != null) {
-					fragmentActivity.onBackPressed();
-				}
-			}
-		});
-		root.findViewById(R.id.buttons_divider).setVisibility(View.VISIBLE);
-		View applyButton = root.findViewById(R.id.right_bottom_button);
-		UiUtilities.setupDialogButton(nightMode, applyButton, UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_apply);
-		applyButton.setVisibility(View.VISIBLE);
-		applyButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				List<ContextMenuItem> defItems = contextMenuAdapter.getDefaultItems();
-				List<String> ids = new ArrayList<>();
-				if (!menuItemsOrder.isEmpty()) {
-					sortByCustomOrder(defItems, menuItemsOrder);
-					for (ContextMenuItem item : defItems) {
-						ids.add(item.getId());
-					}
-				}
-				FragmentManager fm = getFragmentManager();
-				OsmandSettings.ContextMenuItemsSettings prefToSave;
-				if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
-					prefToSave = new OsmandSettings.ContextMenuItemsSettings(mainActionItems, hiddenMenuItems, ids);
-				} else {
-					prefToSave = new OsmandSettings.ContextMenuItemsSettings(hiddenMenuItems, ids);
-				}
-				if (fm != null) {
-					ChangeGeneralProfilesPrefBottomSheet.showInstance(fm,
-							getSettingForScreen(app, screenType).getId(),
-							prefToSave,
-							getTargetFragment(),
-							false,
-							appMode,
-							new ChangeGeneralProfilesPrefBottomSheet.OnChangeSettingListener() {
-								@Override
-								public void onApplied() {
-									dismissFragment();
-								}
-
-								@Override
-								public void onDiscard() {
-
-								}
-							});
-					}
-			}
-		});
-		if (Build.VERSION.SDK_INT >= 21) {
-			AndroidUtils.addStatusBarPadding21v(app, root);
-		}
-		return root;
 	}
 
 	@Override
