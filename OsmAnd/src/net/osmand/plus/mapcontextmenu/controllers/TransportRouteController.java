@@ -6,6 +6,7 @@ import android.view.View.OnClickListener;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.AndroidUtils;
 import net.osmand.binary.OsmandOdb.TransportRouteStop;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -29,8 +30,10 @@ public class TransportRouteController extends MenuController {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.transportRoute = transportRoute;
 		builder.setShowOnlinePhotos(false);
+		int navigationIconResId = AndroidUtils.getNavigationIconResId(mapActivity);
 		toolbarController = new ContextMenuToolbarController(this);
 		toolbarController.setTitle(getNameStr());
+		toolbarController.setBackBtnIconIds(navigationIconResId, navigationIconResId);
 		toolbarController.setOnBackButtonClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -66,7 +69,6 @@ public class TransportRouteController extends MenuController {
 			}
 		};
 		leftTitleButtonController.caption = mapActivity.getString(R.string.shared_string_previous);
-		leftTitleButtonController.leftIconId = R.drawable.ic_arrow_back;
 
 		rightTitleButtonController = new TitleButtonController() {
 			@Override
@@ -78,7 +80,14 @@ public class TransportRouteController extends MenuController {
 			}
 		};
 		rightTitleButtonController.caption = mapActivity.getString(R.string.shared_string_next);
-		rightTitleButtonController.rightIconId = R.drawable.ic_arrow_forward;
+
+		if (AndroidUtils.isLayoutRtl(mapActivity)) {
+			leftTitleButtonController.rightIconId = R.drawable.ic_arrow_forward;
+			rightTitleButtonController.leftIconId = R.drawable.ic_arrow_back;
+		} else {
+			leftTitleButtonController.leftIconId = R.drawable.ic_arrow_back;
+			rightTitleButtonController.rightIconId = R.drawable.ic_arrow_forward;
+		}
 	}
 
 	@NonNull

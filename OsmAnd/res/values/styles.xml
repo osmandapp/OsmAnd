@@ -164,7 +164,7 @@
         <item name="ctx_menu_controller_text_color">@drawable/context_menu_controller_text_color_light</item>
         <item name="ctx_menu_divider">@color/ctx_menu_buttons_divider_light</item>
         <item name="search_background">@color/activity_background_color_dark</item>
-        <item name="actionModeCloseDrawable">@drawable/ic_action_mode_back</item>
+        <item name="actionModeCloseDrawable">@drawable/ic_arrow_back</item>
         <item name="actionModeStyle">@style/WhiteActionMode</item>
         <item name="actionMenuTextColor">@color/color_white</item>
         <item name="switch_ex_background">@drawable/switch_ex_background_light</item>
@@ -196,7 +196,7 @@
 
         <item name="android:actionModeBackground">@color/app_bar_color_light</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
-        <item name="android:actionModeCloseDrawable">@drawable/ic_action_mode_back</item>
+        <item name="android:actionModeCloseDrawable">@drawable/ic_arrow_back</item>
         <item name="android:actionModeStyle">@style/WhiteActionMode</item>
         <item name="android:actionMenuTextColor">@color/color_white</item>
         <item name="actionOverflowButtonStyle">@style/OverflowMenuButton</item>

@@ -29,7 +29,7 @@
 				android:layout_width="@dimen/toolbar_height"
 				android:layout_height="@dimen/toolbar_height"
 				android:contentDescription="@string/access_shared_string_navigate_up"
-				android:src="@drawable/ic_action_mode_back"
+				android:src="@drawable/ic_arrow_back"
 				android:tint="?attr/default_icon_color" />
 
 			<net.osmand.plus.widgets.TextViewEx

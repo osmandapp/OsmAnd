@@ -396,7 +396,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 
 		toolBarController = new MeasurementToolBarController(newGpxData);
 		if (editingCtx.getSelectedPointPosition() != -1) {
-			toolBarController.setBackBtnIconIds(R.drawable.ic_action_mode_back, R.drawable.ic_action_mode_back);
+			int navigationIconResId = AndroidUtils.getNavigationIconResId(mapActivity);
+			toolBarController.setBackBtnIconIds(navigationIconResId, navigationIconResId);
 		} else {
 			toolBarController.setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
 		}
@@ -973,7 +974,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 
 	private void switchMovePointMode(boolean enable) {
 		if (enable) {
-			toolBarController.setBackBtnIconIds(R.drawable.ic_action_mode_back, R.drawable.ic_action_mode_back);
+			int navigationIconResId = AndroidUtils.getNavigationIconResId(getMapActivity());
+			toolBarController.setBackBtnIconIds(navigationIconResId, navigationIconResId);
 		} else {
 			toolBarController.setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
 		}
@@ -992,7 +994,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 
 	private void switchAddPointBeforeAfterMode(boolean enable) {
 		if (enable) {
-			toolBarController.setBackBtnIconIds(R.drawable.ic_action_mode_back, R.drawable.ic_action_mode_back);
+			int navigationIconResId = AndroidUtils.getNavigationIconResId(getMapActivity());
+			toolBarController.setBackBtnIconIds(navigationIconResId, navigationIconResId);
 		} else {
 			toolBarController.setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
 		}
