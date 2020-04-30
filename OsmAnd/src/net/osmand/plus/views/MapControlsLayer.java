@@ -817,7 +817,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		compassHud.updateVisibility(!forceHideCompass && shouldShowCompass());
 
 		ApplicationMode appMode = settings.getApplicationMode();
-		if (layersHud.setIconResId(appMode.getIconRes())) {
+		if (layersHud.setIconResId(appMode.getMapIconRes())) {
 			layersHud.update(app, isNight);
 		}
 		layersHud.setIconColorId(appMode.getIconColorInfo().getColor(isNight));
