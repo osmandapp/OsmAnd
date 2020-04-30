@@ -12,7 +12,7 @@
 
 -->
     <string name="navigation_profiles_item">Navigation profiles</string>
-    <string name="legend_item_description">The guide to a map's symbology</string>
+    <string name="legend_item_description">The guide to a map\'s symbology</string>
     <string name="osmand_purchases_item">OsmAnd purchases</string>
     <string name="subscription_osmandlive_item">Subscription - OsmAnd Live</string>
     <string name="favorites_item">Favorites</string>
