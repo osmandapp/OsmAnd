@@ -160,9 +160,12 @@ public class AmenityMenuController extends MenuController {
 	public String getNameStr() {
 		String preferredLang = getPreferredMapLang();
 		if (amenity.getType().isWiki()) {
-			OsmandApplication app = getMapActivity().getMyApplication();
-			preferredLang = WikipediaPoiMenu.getWikiArticleLanguage(app,
-					amenity.getSupportedContentLocales(), getPreferredMapAppLang());
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				OsmandApplication app = mapActivity.getMyApplication();
+				preferredLang = WikipediaPoiMenu.getWikiArticleLanguage(app,
+						amenity.getSupportedContentLocales(), getPreferredMapAppLang());
+			}
 		}
 		String name = amenity.getName(preferredLang, isTransliterateNames());
 		Map<String, String> additionalInfo = amenity.getAdditionalInfo();
