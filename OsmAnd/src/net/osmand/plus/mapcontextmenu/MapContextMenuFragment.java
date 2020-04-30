@@ -687,7 +687,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		icon.setImageDrawable(uiUtilities.getIcon(contextMenuItem.getIcon(), nightMode));
 		title.setText(contextMenuItem.getTitle());
 		String id = contextMenuItem.getId();
-		if (Algorithms.stringsEqual(id, MAP_CONTEXT_MENU_MORE_ID)) {
+		if (MAP_CONTEXT_MENU_MORE_ID.equals(id)) {
 			item.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {

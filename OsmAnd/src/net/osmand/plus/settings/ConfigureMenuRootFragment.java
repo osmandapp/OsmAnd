@@ -85,7 +85,7 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
 		}
 		app = requireMyApplication();
-		nightMode = app.getSettings().OSMAND_THEME.getModeValue(appMode) == OsmandSettings.OSMAND_DARK_THEME;
+		nightMode = !app.getSettings().isLightContentForMode(appMode);
 		mInflater = UiUtilities.getInflater(app, nightMode);
 		activity = getActivity();
 	}

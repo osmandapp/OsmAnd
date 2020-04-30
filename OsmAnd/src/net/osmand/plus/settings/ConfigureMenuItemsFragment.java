@@ -151,7 +151,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 				menuItemsOrder.put(orderIds.get(i), i);
 			}
 		}
-		nightMode = app.getSettings().OSMAND_THEME.getModeValue(appMode) == OsmandSettings.OSMAND_DARK_THEME;
+		nightMode = !app.getSettings().isLightContentForMode(appMode);
 		mInflater = UiUtilities.getInflater(app, nightMode);
 		mainActionItems = new ArrayList<>();
 		activity = getActivity();

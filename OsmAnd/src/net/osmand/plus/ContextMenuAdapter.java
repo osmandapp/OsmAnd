@@ -92,10 +92,10 @@ public class ContextMenuAdapter {
 				item.setOrder(getItemOrder(id, item.getOrder()));
 			}
 			items.add(item.getPos(), item);
-			sortItemsByOrder();
 		} catch (IndexOutOfBoundsException ex) {
 			items.add(item);
 		}
+		sortItemsByOrder();
 	}
 
 	public ContextMenuItem getItem(int position) {
@@ -580,7 +580,7 @@ public class ContextMenuAdapter {
 		List<ContextMenuItem> items = new ArrayList<>();
 		for (ContextMenuItem item : this.items) {
 			String id = item.getId();
-			if (id != null && id.startsWith(idScheme) && !APP_PROFILES_ID.equals(id) || id != null && id.startsWith(AIDL_LAYERS_PREFIX)) {
+			if (id != null && (id.startsWith(idScheme) && !APP_PROFILES_ID.equals(id) || id.startsWith(AIDL_LAYERS_PREFIX))) {
 				items.add(item);
 			}
 		}
