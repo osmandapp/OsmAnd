@@ -147,7 +147,27 @@ public class RenderingIcons {
 		}
 		return iconsBmp.get(s);
 	}
-	
+
+	public static Drawable getDrawableIcon(Context ctx, String s, boolean includeShader) {
+		if (s == null) {
+			return null;
+		}
+		if (includeShader && shaderIcons.containsKey(s)) {
+			s = "h_" + s;
+		}
+		Integer drawableId = s.startsWith("h_") ? shaderIcons.get(s.substring(2)) : smallIcons.get(s);
+		if (drawableId != null) {
+			Drawable drawable = ContextCompat.getDrawable(ctx, drawableId);
+			if (drawable != null) {
+				if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+					drawable = (DrawableCompat.wrap(drawable)).mutate();
+				}
+			}
+			return drawable;
+		}
+		return null;
+	}
+
 	public static Integer getResId(String id) {
 		return id.startsWith("h_") ? shaderIcons.get(id.substring(2)) : smallIcons.get(id);
 	}
