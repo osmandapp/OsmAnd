@@ -3664,4 +3664,6 @@ Pôr do Sol: %2$s</string>
 \nA assinatura é renovada automaticamente, a menos que seja cancelada antes da data de renovação. Sua conta será cobrada pelo período de renovação (mês/três meses/ano) somente na data de renovação.
 \n
 \nVocê pode gerenciar e cancelar suas assinaturas acessando as configurações do Google Play.</string>
+    <string name="search_poi_types">Pesquisar tipos de poi</string>
+    <string name="search_poi_types_descr">Combine tipos de PIs de diferentes categorias. Toque em para selecionar tudo, toque em lado esquerdo para selecionar a categoria.</string>
 </resources>
