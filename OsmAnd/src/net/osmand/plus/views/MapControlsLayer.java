@@ -816,9 +816,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 		compassHud.forceHideCompass = forceHideCompass;
 		compassHud.updateVisibility(!forceHideCompass && shouldShowCompass());
 
-		if (layersHud.setIconResId(settings.getApplicationMode().getMapIconRes())) {
+		ApplicationMode appMode = settings.getApplicationMode();
+		if (layersHud.setIconResId(appMode.getIconRes())) {
 			layersHud.update(app, isNight);
 		}
+		layersHud.setIconColorId(appMode.getIconColorInfo().getColor(isNight));
 		layersHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && !isInMeasurementToolMode() && !isInPlanRouteMode()
 				&& !contextMenuOpened && !isInChoosingRoutesMode() && !isInWaypointsChoosingMode());
 		quickSearchHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && !isInMeasurementToolMode() && !isInPlanRouteMode()
