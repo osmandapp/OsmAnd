@@ -147,7 +147,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			solidToolbarView.setLayoutParams(new FrameLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT));
 			solidToolbarView.setVisibility(View.VISIBLE);
 			final TypedValue typedValueAttr = new TypedValue();
-			mapActivity.getTheme().resolveAttribute(R.attr.left_menu_view_bg, typedValueAttr, true);
+			int bgAttrId = AndroidUtils.isLayoutRtl(mapActivity) ? R.attr.right_menu_view_bg : R.attr.left_menu_view_bg;
+			mapActivity.getTheme().resolveAttribute(bgAttrId, typedValueAttr, true);
 			view.findViewById(R.id.pager_container).setBackgroundResource(typedValueAttr.resourceId);
 			view.setLayoutParams(new FrameLayout.LayoutParams(getResources().getDimensionPixelSize(R.dimen.dashboard_land_width), ViewGroup.LayoutParams.MATCH_PARENT));
 		}
