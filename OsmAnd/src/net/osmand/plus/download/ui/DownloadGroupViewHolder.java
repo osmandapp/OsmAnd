@@ -4,17 +4,24 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
+
 import net.osmand.AndroidUtils;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.CustomRegion;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadResourceGroup;
+import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
 import net.osmand.plus.download.IndexItem;
 
 public class DownloadGroupViewHolder {
-	TextView textView;
+
 	private DownloadActivity ctx;
+
+	private TextView textView;
 
 	public DownloadGroupViewHolder(DownloadActivity ctx, View v) {
 		this.ctx = ctx;
@@ -23,46 +30,58 @@ public class DownloadGroupViewHolder {
 
 	private boolean isParentWorld(DownloadResourceGroup group) {
 		return group.getParentGroup() == null
-				|| group.getParentGroup().getType() == DownloadResourceGroup.DownloadResourceGroupType.WORLD;
+				|| group.getParentGroup().getType() == DownloadResourceGroupType.WORLD;
 	}
 
 	private Drawable getIconForGroup(DownloadResourceGroup group) {
 		Drawable iconStart;
-		if (group.getType() == DownloadResourceGroup.DownloadResourceGroupType.VOICE_REC
-				|| group.getType() == DownloadResourceGroup.DownloadResourceGroupType.VOICE_TTS) {
-			iconStart = ctx.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_volume_up);
-		} else if (group.getType() == DownloadResourceGroup.DownloadResourceGroupType.FONTS) {
-			iconStart = ctx.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_map_language);
+		OsmandApplication app = ctx.getMyApplication();
+		UiUtilities cache = app.getUIUtilities();
+		if (group.getType() == DownloadResourceGroupType.VOICE_REC
+				|| group.getType() == DownloadResourceGroupType.VOICE_TTS) {
+			iconStart = cache.getThemedIcon(R.drawable.ic_action_volume_up);
+		} else if (group.getType() == DownloadResourceGroupType.FONTS) {
+			iconStart = cache.getThemedIcon(R.drawable.ic_action_map_language);
 		} else {
-			UiUtilities cache = ctx.getMyApplication().getUIUtilities();
+			if (group.getRegion() instanceof CustomRegion) {
+				String iconName = ((CustomRegion) group.getRegion()).getIconName(ctx);
+				int iconId = AndroidUtils.getDrawableId(app, iconName);
+				if (iconId != 0) {
+					iconStart = getIconForDownloadedItems(group, iconId);
+					return iconStart != null ? iconStart : cache.getThemedIcon(iconId);
+				}
+			}
 			if (isParentWorld(group) || isParentWorld(group.getParentGroup())) {
 				iconStart = cache.getThemedIcon(R.drawable.ic_world_globe_dark);
 			} else {
-				DownloadResourceGroup ggr = group
-						.getSubGroupById(DownloadResourceGroup.DownloadResourceGroupType.REGION_MAPS.getDefaultId());
-				iconStart = cache.getThemedIcon(R.drawable.ic_map);
-				if (ggr != null && ggr.getIndividualResources() != null) {
-					IndexItem item = null;
-					for (IndexItem ii : ggr.getIndividualResources()) {
-						if (ii.getType() == DownloadActivityType.NORMAL_FILE
-								|| ii.getType() == DownloadActivityType.ROADS_FILE) {
-							if (ii.isDownloaded() || ii.isOutdated()) {
-								item = ii;
-								break;
-							}
-						}
-					}
-					if (item != null) {
-						if (item.isOutdated()) {
-							iconStart = cache.getIcon(R.drawable.ic_map, R.color.color_distance);
-						} else {
-							iconStart = cache.getIcon(R.drawable.ic_map, R.color.color_ok);
-						}
-					}
+				iconStart = getIconForDownloadedItems(group, R.drawable.ic_map);
+				if (iconStart == null) {
+					iconStart = cache.getThemedIcon(R.drawable.ic_map);
 				}
 			}
 		}
 		return iconStart;
+	}
+
+	private Drawable getIconForDownloadedItems(DownloadResourceGroup group, @DrawableRes int iconId) {
+		DownloadResourceGroup ggr = group.getSubGroupById(DownloadResourceGroupType.REGION_MAPS.getDefaultId());
+		if (ggr != null && ggr.getIndividualResources() != null) {
+			IndexItem item = null;
+			for (IndexItem ii : ggr.getIndividualResources()) {
+				if (ii.getType() == DownloadActivityType.NORMAL_FILE
+						|| ii.getType() == DownloadActivityType.ROADS_FILE) {
+					if (ii.isDownloaded() || ii.isOutdated()) {
+						item = ii;
+						break;
+					}
+				}
+			}
+			if (item != null) {
+				int color = item.isOutdated() ? R.color.color_distance : R.color.color_ok;
+				return ctx.getMyApplication().getUIUtilities().getIcon(iconId, color);
+			}
+		}
+		return null;
 	}
 
 	public void bindItem(DownloadResourceGroup group) {
