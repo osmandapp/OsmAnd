@@ -15,7 +15,6 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
@@ -547,15 +546,12 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 	}
 
 	private static class LocalFullMapsViewHolder {
-		public static final int UPDATES_ENABLED_ITEM_HEIGHT = 72;
-		public static final int UPDATES_DISABLED_ITEM_HEIGHT = 50;
 		private final ImageView icon;
 		private final TextView nameTextView;
 		private final TextView subheaderTextView;
 		private final TextView descriptionTextView;
 		private final ImageButton options;
 		private final LiveUpdatesFragment fragment;
-		private final View view;
 		private final int secondaryColor;
 		private final View divider;
 
@@ -565,7 +561,6 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 			subheaderTextView = (TextView) view.findViewById(R.id.subheaderTextView);
 			descriptionTextView = (TextView) view.findViewById(R.id.descriptionTextView);
 			options = (ImageButton) view.findViewById(R.id.options);
-			this.view = view;
 			this.fragment = context;
 
 			TypedValue typedValue = new TypedValue();
@@ -582,7 +577,6 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 			IncrementalChangesManager changesManager = context.getResourceManager().getChangesManager();
 
 			nameTextView.setText(getNameToDisplay(item, fragment.getMyActivity()));
-			AbsListView.LayoutParams layoutParams = (AbsListView.LayoutParams) view.getLayoutParams();
 			if (shouldUpdatePreference.get()) {
 				final Integer frequencyId = preferenceUpdateFrequency(item, fragment.getSettings()).get();
 				final Integer timeOfDateToUpdateId = preferenceTimeOfDayToUpdate(item, fragment.getSettings()).get();
@@ -598,14 +592,11 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 						.getColor(R.color.osmand_orange));
 				icon.setImageDrawable(fragment.getIcon(R.drawable.ic_map, R.color.osmand_orange));
 				options.setImageDrawable(getSecondaryColorPaintedIcon(R.drawable.ic_overflow_menu_white));
-				layoutParams.height = (int) dpToPx(view.getContext(), UPDATES_ENABLED_ITEM_HEIGHT);
 			} else {
 				subheaderTextView.setVisibility(View.GONE);
 				icon.setImageDrawable(getSecondaryColorPaintedIcon(R.drawable.ic_map));
 				options.setImageDrawable(getSecondaryColorPaintedIcon(R.drawable.ic_action_plus));
-				layoutParams.height = (int) dpToPx(view.getContext(), UPDATES_DISABLED_ITEM_HEIGHT);
 			}
-			view.setLayoutParams(layoutParams);
 
 			final String fileNameWithoutExtension =
 					Algorithms.getFileNameWithoutExtension(new File(item));
