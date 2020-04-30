@@ -11,6 +11,17 @@
 	Thx - Hardy
 
 -->
+    <string name="navigation_profiles_item">Navigation profiles</string>
+    <string name="osmand_purchases_item">OsmAnd purchases</string>
+    <string name="subscription_osmandlive_item">Subscription - OsmAnd Live</string>
+    <string name="favorites_item">Favorites</string>
+    <string name="map_markers_item">Map markers</string>
+    <string name="travel_item">Travel (Wikivoyage and Wikipedia)</string>
+    <string name="measure_distance_item">Measure distance</string>
+    <string name="radius_ruler_item">Radius ruler</string>
+    <string name="quick_action_item">Quick action</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="tracker_item">OsmAnd tracker</string>
     <string name="download_unsupported_action">Unsupported action %1$s</string>
     <string name="extra_maps_menu_group">Extra maps</string>
     <string name="search_poi_types_descr">Combine POI types from different categories. Tap switch to select all, tap left side to category selection.</string>
