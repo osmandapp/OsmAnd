@@ -226,7 +226,11 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 			h.title.setTypeface(FontCache.getFont(app, app.getString(R.string.font_roboto_medium)));
 			h.title.setTextSize(TypedValue.COMPLEX_UNIT_PX, app.getResources().getDimension(R.dimen.default_list_text_size));
 			h.title.setText(header.titleRes);
-			h.description.setText(header.descrRes);
+			if (header.descrRes == R.string.additional_actions_descr) {
+				h.description.setText(String.format(app.getString(header.descrRes), app.getString(R.string.shared_string_actions)));
+			} else {
+				h.description.setText(header.descrRes);
+			}
 			h.moveIcon.setVisibility(View.GONE);
 			h.movable = header.titleRes == R.string.additional_actions;
 		} else if (holder instanceof ButtonHolder) {
