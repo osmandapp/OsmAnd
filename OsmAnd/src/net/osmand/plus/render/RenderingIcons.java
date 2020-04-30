@@ -30,6 +30,7 @@ public class RenderingIcons {
 	private static Map<String, Integer> smallIcons = new LinkedHashMap<String, Integer>();
 	private static Map<String, Integer> bigIcons = new LinkedHashMap<String, Integer>();
 	private static Map<String, Bitmap> iconsBmp = new LinkedHashMap<String, Bitmap>();
+	private static Map<String, Drawable> iconsDrawable = new LinkedHashMap<String, Drawable>();
 //	private static DisplayMetrics dm;
 
 	private static Bitmap cacheBmp = null;
@@ -155,17 +156,19 @@ public class RenderingIcons {
 		if (includeShader && shaderIcons.containsKey(s)) {
 			s = "h_" + s;
 		}
-		Integer drawableId = s.startsWith("h_") ? shaderIcons.get(s.substring(2)) : smallIcons.get(s);
-		if (drawableId != null) {
-			Drawable drawable = ContextCompat.getDrawable(ctx, drawableId);
-			if (drawable != null) {
-				if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-					drawable = (DrawableCompat.wrap(drawable)).mutate();
+		Drawable d = iconsDrawable.get(s);
+		if (d == null) {
+			Integer drawableId = s.startsWith("h_") ? shaderIcons.get(s.substring(2)) : smallIcons.get(s);
+			if (drawableId != null) {
+				d = ContextCompat.getDrawable(ctx, drawableId);
+				if (d != null) {
+					d = DrawableCompat.wrap(d);
+					d.mutate();
+					iconsDrawable.put(s, d);
 				}
 			}
-			return drawable;
 		}
-		return null;
+		return d;
 	}
 
 	public static Integer getResId(String id) {
