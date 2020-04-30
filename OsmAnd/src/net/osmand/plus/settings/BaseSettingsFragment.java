@@ -940,6 +940,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 						}
 					});
 			UiUtilities.setupSnackbarVerticalLayout(snackbar);
+			UiUtilities.setupSnackbar(snackbar, nightMode);
 			snackbar.show();
 		}
 	}
