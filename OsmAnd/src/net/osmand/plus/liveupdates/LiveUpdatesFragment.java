@@ -701,10 +701,6 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 		adapter.notifyDataSetChanged();
 	}
 
-	public static float dpToPx(final Context context, final float dp) {
-		return dp * context.getResources().getDisplayMetrics().density;
-	}
-
 	@Override
 	public void onError(InAppPurchaseTaskType taskType, String error) {
 		disableProgress();
