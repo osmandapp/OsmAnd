@@ -408,17 +408,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						hiddenMenuItems.clear();
-						menuItemsOrder.clear();
-						wasReset = true;
-						isChanged = true;
-						getSettingForScreen(app, screenType).resetModeToDefault(appMode);
-						instantiateContextMenuAdapter();
-						if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
-							mainActionItems.clear();
-							initDefaultMainActions();
-						}
-						rearrangeAdapter.updateItems(getAdapterItems());
+						showResetDialog();
 					}
 				})));
 		items.add(new RearrangeMenuAdapterItem(BUTTON, new RearrangeMenuItemsAdapter.ButtonItem(
@@ -459,6 +449,31 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dismissFragment();
+			}
+		});
+		dismissDialog.show();
+	}
+
+	public void showResetDialog() {
+		Context themedContext = UiUtilities.getThemedContext(getActivity(), nightMode);
+		AlertDialog.Builder dismissDialog = new AlertDialog.Builder(themedContext);
+		dismissDialog.setTitle(getString(R.string.shared_string_reset));
+		dismissDialog.setMessage(getString(R.string.reset_to_default));
+		dismissDialog.setNegativeButton(R.string.shared_string_cancel, null);
+		dismissDialog.setPositiveButton(R.string.shared_string_reset, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				hiddenMenuItems.clear();
+				menuItemsOrder.clear();
+				wasReset = true;
+				isChanged = true;
+				getSettingForScreen(app, screenType).resetModeToDefault(appMode);
+				instantiateContextMenuAdapter();
+				if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
+					mainActionItems.clear();
+					initDefaultMainActions();
+				}
+				rearrangeAdapter.updateItems(getAdapterItems());
 			}
 		});
 		dismissDialog.show();
