@@ -3412,7 +3412,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="import_profile">Importer un profil</string>
     <string name="monitoring_prefs_descr">Navigation, fiabilité d\'enregistrement</string>
     <string name="multimedia_notes_prefs_descr">Taille de l\'image, qualité audio et vidéo</string>
-    <string name="osm_editing_prefs_descr">Login, mot de passe, édition hors-ligne</string>
+    <string name="osm_editing_prefs_descr">Connexion, mot de passe, édition hors-ligne</string>
     <string name="accessibility_prefs_descr">Choisissez l\'icône, la couleur et le nom</string>
     <string name="live_monitoring_descr">Permet le partage de votre position grâce à l\'enregistrement du trajet.</string>
     <string name="live_monitoring">Suivi en ligne</string>
