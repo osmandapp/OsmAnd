@@ -491,7 +491,7 @@ public class TransportRoutingHelper {
 			}
 			GeneralRouter prouter = config.getRouter(params.mode.getRoutingProfile());
 			TransportRoutingConfiguration cfg = new TransportRoutingConfiguration(prouter, params.params);
-			TransportRoutePlanner planner = new TransportRoutePlanner();
+
 			TransportRoutingContext ctx = new TransportRoutingContext(cfg, library, files);
 			ctx.calculationProgress =  params.calculationProgress;
 			if (ctx.library != null && !settings.PT_SAFE_MODE.get()) {
@@ -501,9 +501,9 @@ public class TransportRoutingHelper {
 						MapUtils.get31TileNumberX(params.end.getLongitude()),
 						MapUtils.get31TileNumberY(params.end.getLatitude()),
 						cfg, ctx.calculationProgress);
-				List<TransportRouteResult> res = TransportRoutePlanner.convertToTransportRoutingResult(nativeRes, cfg);
-				return res;
+				return TransportRoutePlanner.convertToTransportRoutingResult(nativeRes, cfg);
 			} else {
+				TransportRoutePlanner planner = new TransportRoutePlanner();
 				return planner.buildRoute(ctx, params.start, params.end);
 			}
 		}
