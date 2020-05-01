@@ -3650,4 +3650,13 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="search_poi_types">Søg efter IP-typer</string>
     <string name="search_poi_types_descr">Kombiner IP-typer fra forskellige kategorier. Tryk på knappen for at vælge alt, tryk på venstre side for valg af kategori.</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="quick_action_item">Genveje</string>
+    <string name="radius_ruler_item">Radiusmåler</string>
+    <string name="measure_distance_item">Mål afstand</string>
+    <string name="travel_item">Rejser (Wikivoyage og Wikipedia)</string>
+    <string name="map_markers_item">Kortmarkører</string>
+    <string name="favorites_item">Favoritter</string>
+    <string name="subscription_osmandlive_item">Abonnement - OsmAnd Live</string>
+    <string name="navigation_profiles_item">Navigationsprofiler</string>
 </resources>
