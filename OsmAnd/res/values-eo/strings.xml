@@ -1923,9 +1923,9 @@ Lon: %2$s</string>
     <string name="first_usage_item">Unua uzo</string>
     <string name="first_usage_item_description">Kiel elŝuti mapojn, bazaj agordoj.</string>
     <string name="navigation_item_description">Navigadaj agordoj.</string>
-    <string name="planning_trip_item">Planado de vojaĝo</string>
-    <string name="map_viewing_item">Map-foliumado</string>
-    <string name="search_on_the_map_item">Serĉado en mapo</string>
+    <string name="planning_trip_item">Plani vojaĝon</string>
+    <string name="map_viewing_item">Foliumi mapon</string>
+    <string name="search_on_the_map_item">Serĉi en la mapo</string>
     <string name="instalation_troubleshooting_item">Instalado kaj problemoj</string>
     <string name="techical_articles_item">Teĥnikaj artikoloj</string>
     <string name="versions_item">Versioj</string>
@@ -3664,4 +3664,16 @@ Indikas lokon:  %1$s x %2$s"</string>
 \nVi povas administri kaj rezigni la abonon en agordoj de Google Play.</string>
     <string name="search_poi_types_descr">Miksi specojn de interesejoj el diversaj kategorioj. Frapetu “ŝaltilon” por elekti ĉiujn, frapetu ĉe maldekstre por elekti el la kategorio.</string>
     <string name="search_poi_types">Serĉi specojn de interesejoj</string>
+    <string name="favorites_item">Ŝatataj ejoj</string>
+    <string name="subscription_osmandlive_item">Aboni OsmAnd Live</string>
+    <string name="osmand_purchases_item">Aĉeti OsmAnd</string>
+    <string name="tracker_item">Enreta spurilo</string>
+    <string name="quick_action_item">Butono de rapida ago</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="radius_ruler_item">Radius‑mezurilo</string>
+    <string name="measure_distance_item">Distanc-mezurilo</string>
+    <string name="travel_item">Vojaĝo (Vikivojaĝoj kaj Vikipedio)</string>
+    <string name="map_markers_item">Map‑markoj</string>
+    <string name="legend_item_description">Priskribo al simboloj sur la mapo</string>
+    <string name="navigation_profiles_item">Profiloj de navigo</string>
 </resources>
