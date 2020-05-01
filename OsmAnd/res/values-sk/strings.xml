@@ -3670,4 +3670,16 @@ Zodpovedá oblasti: %1$s x %2$s</string>
 \nSpravovať a zrušiť vaše predplatné môžete v nastaveniach Google Play.</string>
     <string name="search_poi_types">Hľadať typy bodov záujmu</string>
     <string name="search_poi_types_descr">Skombinovať typy bodov záujmov z rôznych kategórií. Stlačte prepínač pre zvolenie všetkých, stlačte ľavú stranu pre výber kategórií.</string>
+    <string name="tracker_item">Stopovanie OsmAnd</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="quick_action_item">Rýchla akcia</string>
+    <string name="radius_ruler_item">Polomerové pravítko</string>
+    <string name="measure_distance_item">Merať vzdialenosť</string>
+    <string name="travel_item">Cestovanie (Wikivoyage a Wikipédia)</string>
+    <string name="map_markers_item">Mapové značky</string>
+    <string name="favorites_item">Obľúbené</string>
+    <string name="subscription_osmandlive_item">Predplatné - OsmAnd Live</string>
+    <string name="osmand_purchases_item">Nákupy v OsmAnd</string>
+    <string name="legend_item_description">Sprievodca symbolmi na mape</string>
+    <string name="navigation_profiles_item">Navigačné profily</string>
 </resources>
