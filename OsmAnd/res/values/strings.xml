@@ -77,7 +77,7 @@
     <string name="move_inside_category">You can move items only inside this category.</string>
     <string name="additional_actions_descr">You can access these actions by tapping the \"Additional actions\" button.</string>
     <string name="main_actions">Main actions</string>
-    <string name="main_actions_descr">\'Main actions'\ only contains 4 buttons.</string>
+    <string name="main_actions_descr">\'Main actions\' only contains 4 buttons.</string>
     <string name="reset_items_descr">Hiding settings resets them to their original state.</string>
     <string name="hidden_items_descr">These items are hidden from the menu, but the represented options or plugins will continue to work.</string>
     <string name="shared_string_hidden">Hidden</string>
