@@ -2011,7 +2011,7 @@
     <string name="versions_item">Версии</string>
     <string name="techical_articles_item">Технические статьи</string>
     <string name="instalation_troubleshooting_item">Установка и решение проблем</string>
-    <string name="search_on_the_map_item">Поиск карты</string>
+    <string name="search_on_the_map_item">Поиск на карте</string>
     <string name="map_viewing_item">Обзор карты</string>
     <string name="faq_item_description">Часто задаваемые вопросы</string>
     <string name="faq_item">Вопросы и ответы</string>
@@ -3671,4 +3671,16 @@
 \nВы можете управлять подписками и отменять их в настройках Google Play.</string>
     <string name="search_poi_types_descr">Можно объединить типы POI из разных категорий. Нажмите переключатель, чтобы выбрать все; нажмите слева, чтобы выбрать категорию.</string>
     <string name="search_poi_types">Типы POI для поиска</string>
+    <string name="mapillary_item">OsmAnd и Mapillary</string>
+    <string name="travel_item">Путешествие (Wikivoyage и Wikipedia)</string>
+    <string name="tracker_item">Трекер OsmAnd</string>
+    <string name="radius_ruler_item">Радиус-линейка</string>
+    <string name="measure_distance_item">Измерение расстояния</string>
+    <string name="quick_action_item">Быстрое действие</string>
+    <string name="map_markers_item">Маркеры</string>
+    <string name="subscription_osmandlive_item">Подписка - OsmAnd Live</string>
+    <string name="osmand_purchases_item">Покупки OsmAnd</string>
+    <string name="legend_item_description">Справка по символике карты</string>
+    <string name="favorites_item">Избранное</string>
+    <string name="navigation_profiles_item">Профили навигации</string>
 </resources>
