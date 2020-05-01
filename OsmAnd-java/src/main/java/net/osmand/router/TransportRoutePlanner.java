@@ -965,13 +965,12 @@ public class TransportRoutePlanner {
 		}
 	}
 
-
-	//cache for converted TransportRoutes:
-	private static TLongObjectHashMap<TransportRoute> convertedRoutesCache;
-	private static TLongObjectHashMap<TransportStop> convertedStopsCache;
-
 	public static List<TransportRouteResult> convertToTransportRoutingResult(NativeTransportRoutingResult[] res,
-	                                                                         TransportRoutingConfiguration cfg) {
+	                                                                             TransportRoutingConfiguration cfg) {
+		//cache for converted TransportRoutes:
+		TLongObjectHashMap<TransportRoute> convertedRoutesCache = new TLongObjectHashMap<>();
+		TLongObjectHashMap<TransportStop> convertedStopsCache = new TLongObjectHashMap<>();
+
 		if (res.length == 0) {
 			return new ArrayList<TransportRouteResult>();
 		}
@@ -983,7 +982,7 @@ public class TransportRoutePlanner {
 
 			for (NativeTransportRouteResultSegment ntrs : ntrr.segments) {
 				TransportRouteResultSegment trs = new TransportRouteResultSegment();
-				trs.route = convertTransportRoute(ntrs.route);
+				trs.route = convertTransportRoute(ntrs.route, convertedRoutesCache, convertedStopsCache);
 				trs.walkTime = ntrs.walkTime;
 				trs.travelDistApproximate = ntrs.travelDistApproximate;
 				trs.travelTime = ntrs.travelTime;
@@ -1001,7 +1000,9 @@ public class TransportRoutePlanner {
 		return convertedRes;
 	}
 
-	private static TransportRoute convertTransportRoute(NativeTransportRoute nr) {
+	private static TransportRoute convertTransportRoute(NativeTransportRoute nr,
+	                                                    TLongObjectHashMap<TransportRoute> convertedRoutesCache,
+	                                                    TLongObjectHashMap<TransportStop> convertedStopsCache) {
 		TransportRoute r = new TransportRoute();
 		r.setId(nr.id);
 		r.setLocation(nr.routeLat, nr.routeLon);
@@ -1013,15 +1014,17 @@ public class TransportRoutePlanner {
 			}
 		}
 		r.setFileOffset(nr.fileOffset);
-		r.setForwardStops(convertTransportStops(nr.forwardStops));
+		r.setForwardStops(convertTransportStops(nr.forwardStops, convertedStopsCache));
 		r.setRef(nr.ref);
 		r.setOperator(nr.routeOperator);
 		r.setType(nr.type);
 		r.setDist(nr.dist);
 		r.setColor(nr.color);
 
-		if (nr.intervals != null && nr.intervals.length > 0 && nr.avgStopIntervals !=null &&  nr.avgStopIntervals.length > 0 && nr.avgWaitIntervals != null && nr.avgWaitIntervals.length > 0) {
-			r.setSchedule(new TransportSchedule(new TIntArrayList(nr.intervals), new TIntArrayList(nr.avgStopIntervals), new TIntArrayList(nr.avgWaitIntervals)));
+		if (nr.intervals != null && nr.intervals.length > 0 && nr.avgStopIntervals !=null
+				&& nr.avgStopIntervals.length > 0 && nr.avgWaitIntervals != null && nr.avgWaitIntervals.length > 0) {
+			r.setSchedule(new TransportSchedule(new TIntArrayList(nr.intervals),
+					new TIntArrayList(nr.avgStopIntervals), new TIntArrayList(nr.avgWaitIntervals)));
 		}
 
 		for (int i = 0; i < nr.waysIds.length; i++) {
@@ -1032,16 +1035,14 @@ public class TransportRoutePlanner {
 			r.addWay(new Way(nr.waysIds[i], wnodes));
 		}
 
-		if (convertedRoutesCache == null) {
-			convertedRoutesCache = new TLongObjectHashMap<>();
-		}
 		if (convertedRoutesCache.get(r.getId()) == null) {
 			convertedRoutesCache.put(r.getId(), r);
 		}
 		return r;
 	}
 
-	private static List<TransportStop> convertTransportStops(NativeTransportStop[] nstops) {
+	private static List<TransportStop> convertTransportStops(NativeTransportStop[] nstops,
+	                                                         TLongObjectHashMap<TransportStop> convertedStopsCache) {
 		List<TransportStop> stops = new ArrayList<>();
 		for (NativeTransportStop ns : nstops) {
 			if (convertedStopsCache != null && convertedStopsCache.get(ns.id) != null) {
@@ -1065,16 +1066,6 @@ public class TransportRoutePlanner {
 			s.distance = ns.distance;
 			s.x31 = ns.x31;
 			s.y31 = ns.y31;
-//			List<TransportRoute> routes1 = new ArrayList<>();
-			//cache routes to avoid circular conversion and just search them by id
-//			for (int i = 0; i < ns.routes.length; i++) {
-//				if (s.getRoutesIds().length == ns.routes.length && convertedRoutesCache != null
-//						&& convertedRoutesCache.get(ns.routesIds[i]) != null) {
-//					s.addRoute(convertedRoutesCache.get(ns.routesIds[i]));
-//				} else {
-//					s.addRoute(convertTransportRoute(ns.routes[i]));
-//				}
-//			}
 
 			if (ns.pTStopExit_refs != null && ns.pTStopExit_refs.length > 0) {
 				for (int i = 0; i < ns.pTStopExit_refs.length; i++) {
