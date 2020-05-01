@@ -3680,4 +3680,18 @@ Lon %2$s</string>
 \nLa suscripción se renueva automáticamente a menos que se cancele antes de la fecha de renovación. La cuenta será cargada por el período de renovación (mes/trimestre/año) sólo en la fecha de renovación.
 \n
 \nPuedes administrar y cancelar las suscripciones accediendo a los ajustes de Google Play.</string>
+    <string name="search_poi_types">Buscar tipos de PDI</string>
+    <string name="search_poi_types_descr">Combina tipos de PDI de diferentes categorías. Pulsa el interruptor para marcar todo o el lado izquierdo para elegir la categoría.</string>
+    <string name="tracker_item">OsmAnd Tracker</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="quick_action_item">Acción rápida</string>
+    <string name="radius_ruler_item">Regla radial</string>
+    <string name="measure_distance_item">Medir distancia</string>
+    <string name="travel_item">Viajes (Wikiviajes y Wikipedia)</string>
+    <string name="map_markers_item">Marcadores del mapa</string>
+    <string name="favorites_item">Favoritos</string>
+    <string name="subscription_osmandlive_item">Suscripción - OsmAnd Live</string>
+    <string name="osmand_purchases_item">Compras de OsmAnd</string>
+    <string name="legend_item_description">La guía para la simbología de un mapa</string>
+    <string name="navigation_profiles_item">Perfiles de navegación</string>
 </resources>
