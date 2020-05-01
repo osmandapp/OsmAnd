@@ -61,11 +61,11 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	public static final org.apache.commons.logging.Log log = PlatformUtil.getLog(POIMapLayer.class);
 
-	private Paint paintIcon;
-
 	private Paint paintIconBackground;
 	private Bitmap poiBackground;
 	private Bitmap poiBackgroundSmall;
+	private PorterDuffColorFilter poiColorFilter;
+	private int poiSize;
 
 	private OsmandMapTileView view;
 
@@ -176,11 +176,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
 
-		paintIcon = new Paint();
-		//paintIcon.setStrokeWidth(1);
-		//paintIcon.setStyle(Style.STROKE);
-		//paintIcon.setColor(Color.BLUE);
-		paintIcon.setColorFilter(new PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN));
+		poiSize = dpToPx(view.getContext(), 16f);
+		poiColorFilter = new PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 		paintIconBackground = new Paint();
 		poiBackground = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_orange_poi_shield);
 		poiBackgroundSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_orange_poi_shield_small);
@@ -263,9 +260,14 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 								}
 							}
 							if (id != null) {
-								Bitmap bmp = RenderingIcons.getIcon(view.getContext(), id, false);
-								if (bmp != null) {
-									canvas.drawBitmap(bmp, x - bmp.getWidth() / 2, y - bmp.getHeight() / 2, paintIcon);
+								Drawable img = RenderingIcons.getDrawableIcon(view.getContext(), id, false);
+								if (img != null) {
+									canvas.save();
+									canvas.translate(x - poiSize / 2f, y - poiSize / 2f);
+									img.setBounds(0, 0, poiSize, poiSize);
+									img.setColorFilter(poiColorFilter);
+									img.draw(canvas);
+									canvas.restore();
 								}
 							}
 						}

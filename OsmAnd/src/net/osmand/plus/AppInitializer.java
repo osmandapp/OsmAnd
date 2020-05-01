@@ -14,6 +14,8 @@ import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Build;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.AndroidUtils;
@@ -617,7 +619,7 @@ public class AppInitializer implements IProgress {
 		});
 	}
 
-	public static void loadRoutingFiles(final OsmandApplication app, final LoadRoutingFilesCallback callback) {
+	public static void loadRoutingFiles(@NonNull final OsmandApplication app, @Nullable final LoadRoutingFilesCallback callback) {
 		new AsyncTask<Void, Void, Map<String, RoutingConfiguration.Builder>>() {
 
 			@Override
@@ -653,7 +655,9 @@ public class AppInitializer implements IProgress {
 					app.getCustomRoutingConfigs().putAll(customConfigs);
 				}
 				app.avoidSpecificRoads.initRouteObjects(false);
-				callback.onRoutingFilesLoaded();
+				if (callback != null) {
+					callback.onRoutingFilesLoaded();
+				}
 			}
 
 			private Map<String, String> getDefaultAttributes() {

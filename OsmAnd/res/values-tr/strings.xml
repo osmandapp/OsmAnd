@@ -3632,4 +3632,6 @@
 \nYenileme tarihinden önce iptal edilmediği sürece abonelik otomatik olarak yenilenir. Hesabınızdan yenileme süresi (ay/üç ay/yıl) için sadece yenileme tarihinde ücret alınacaktır.
 \n
 \nGoogle Play ayarlarınıza giderek aboneliklerinizi yönetebilir ve iptal edebilirsiniz.</string>
+    <string name="search_poi_types">POI türleri ara</string>
+    <string name="search_poi_types_descr">Farklı kategorilerdeki POI türlerini birleştirin. Tümünü seçmek için düğmeye dokunun, kategori seçimi için sol tarafa dokunun.</string>
 </resources>

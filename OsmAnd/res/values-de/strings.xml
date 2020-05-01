@@ -3669,4 +3669,13 @@ Lon %2$s</string>
     <string name="additional_actions_descr">Sie können auf diese Aktionen zugreifen, indem Sie auf die Schaltfläche „Aktionen“ tippen.</string>
     <string name="select_wikipedia_article_langs">Wählen Sie die Sprachen aus, in denen Wikipedia-Artikel auf der Karte erscheinen sollen. Sie können zwischen allen verfügbaren Sprachen wechseln, während Sie den Artikel lesen.</string>
     <string name="hidden_items_descr">Diese Elemente werden aus dem Menü ausgeblendet, aber die dargestellten Optionen oder Plugins funktionieren weiterhin.</string>
+    <string name="reorder_or_hide_from">Ordnen Sie Elemente aus %1$s neu an oder blenden Sie sie aus.</string>
+    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
+    <string name="osm_live_payment_subscription_management">Die Bezahlung wird nach der Bestätigung des Kaufs von ihrem Google Play Account abgebucht. 
+\n
+\nDas Abonnement verlängert sich automatisch, sofern es nicht vor dem Verlängerungsdatum gekündigt wird. Erst nach dem Verlängerungsdatum wird die Bezahlung für die Verlängerungsperiode (1 Monat/ 3 Monate/ 1 Jahr) von ihrem Account abgebucht.
+\n
+\nSie können ihre Abonnements in ihrem Google Play Einstellungen verwalten oder kündigen.</string>
+    <string name="search_poi_types">Poi-Typen suchen</string>
+    <string name="search_poi_types_descr">Kombinieren Sie POI-Typen aus verschiedenen Kategorien. Tippen Sie auf den Schalter, um alle auszuwählen, tippen Sie auf die linke Seite, um die Kategorie auszuwählen.</string>
 </resources>

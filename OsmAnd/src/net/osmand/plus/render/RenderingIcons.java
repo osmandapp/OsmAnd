@@ -30,6 +30,7 @@ public class RenderingIcons {
 	private static Map<String, Integer> smallIcons = new LinkedHashMap<String, Integer>();
 	private static Map<String, Integer> bigIcons = new LinkedHashMap<String, Integer>();
 	private static Map<String, Bitmap> iconsBmp = new LinkedHashMap<String, Bitmap>();
+	private static Map<String, Drawable> iconsDrawable = new LinkedHashMap<String, Drawable>();
 //	private static DisplayMetrics dm;
 
 	private static Bitmap cacheBmp = null;
@@ -147,7 +148,29 @@ public class RenderingIcons {
 		}
 		return iconsBmp.get(s);
 	}
-	
+
+	public static Drawable getDrawableIcon(Context ctx, String s, boolean includeShader) {
+		if (s == null) {
+			return null;
+		}
+		if (includeShader && shaderIcons.containsKey(s)) {
+			s = "h_" + s;
+		}
+		Drawable d = iconsDrawable.get(s);
+		if (d == null) {
+			Integer drawableId = s.startsWith("h_") ? shaderIcons.get(s.substring(2)) : smallIcons.get(s);
+			if (drawableId != null) {
+				d = ContextCompat.getDrawable(ctx, drawableId);
+				if (d != null) {
+					d = DrawableCompat.wrap(d);
+					d.mutate();
+					iconsDrawable.put(s, d);
+				}
+			}
+		}
+		return d;
+	}
+
 	public static Integer getResId(String id) {
 		return id.startsWith("h_") ? shaderIcons.get(id.substring(2)) : smallIcons.get(id);
 	}

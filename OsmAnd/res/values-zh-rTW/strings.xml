@@ -3668,4 +3668,6 @@
 \n除非您在續訂日期前取消，否則將會自動續訂。您的帳號將僅會在續訂日期前收取續訂週期的費用。
 \n
 \n您可以到您的 Google Play 設定管理與取消您的訂閱。</string>
+    <string name="search_poi_types">搜尋 POI 類型</string>
+    <string name="search_poi_types_descr">組合來自不同分類的 POI 類型。點擊開關以全選，點擊左側選取分類。</string>
 </resources>
