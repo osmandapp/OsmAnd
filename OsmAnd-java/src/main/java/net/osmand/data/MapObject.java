@@ -211,6 +211,10 @@ public abstract class MapObject implements Comparable<MapObject> {
 		location = new LatLon(latitude, longitude);
 	}
 
+	public void setLocation(LatLon loc) {
+		location = loc;
+	}
+
 	@Override
 	public int compareTo(MapObject o) {
 		return OsmAndCollator.primaryCollator().compare(getName(), o.getName());
