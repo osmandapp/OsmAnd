@@ -8,8 +8,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
-import androidx.core.content.ContextCompat;
-
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -47,10 +45,10 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 			final ImageView routePointImage = (ImageView) imagesRow.findViewById(R.id.route_point_image);
 			final ImageView lineImage = (ImageView) imagesRow.findViewById(R.id.line_image);
-			Drawable routePointDrawable = ContextCompat.getDrawable(app, nightMode
+			Drawable routePointDrawable = app.getUIUtilities().getIcon(nightMode
 					? R.drawable.img_help_trip_route_points_night
 					: R.drawable.img_help_trip_route_points_day);
-			Drawable lineDrawable = ContextCompat.getDrawable(app, nightMode
+			Drawable lineDrawable = app.getUIUtilities().getIcon(nightMode
 					? R.drawable.img_help_trip_track_night
 					: R.drawable.img_help_trip_track_day);
 			if (routePointDrawable != null && lineDrawable != null) {

@@ -25,8 +25,8 @@
                 android:theme="?attr/toolbar_theme"
                 app:contentInsetLeft="54dp"
                 app:contentInsetStart="54dp"
-				app:contentInsetRight="0dp"
-				app:contentInsetEnd="0dp">
+                app:contentInsetRight="0dp"
+                app:contentInsetEnd="0dp">
 
                 <include layout="@layout/search_text_layout"/>
 
@@ -42,8 +42,8 @@
                 android:visibility="gone"
                 app:contentInsetLeft="54dp"
                 app:contentInsetStart="54dp"
-				app:contentInsetRight="0dp"
-				app:contentInsetEnd="0dp"
+                app:contentInsetRight="0dp"
+                app:contentInsetEnd="0dp"
                 tools:visibility="visible">
 
                 <LinearLayout
