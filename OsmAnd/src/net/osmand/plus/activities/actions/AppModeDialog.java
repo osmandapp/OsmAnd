@@ -1,6 +1,7 @@
 package net.osmand.plus.activities.actions;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
@@ -22,6 +23,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 
 import org.apache.commons.logging.Log;
 
@@ -110,6 +112,7 @@ public class AppModeDialog {
 	public static void updateButtonState(final OsmandApplication ctx, final List<ApplicationMode> visible,
 	                                     final Set<ApplicationMode> selected, final View.OnClickListener onClickListener, final View[] buttons,
 	                                     int i, final boolean singleChoice, final boolean useMapTheme, final boolean nightMode) {
+		Context themedCtx = UiUtilities.getThemedContext(ctx, nightMode);
 		if (buttons[i] != null) {
 			View tb = buttons[i];
 			final ApplicationMode mode = visible.get(i);
@@ -124,7 +127,7 @@ public class AppModeDialog {
 			} else {
 				if (useMapTheme) {
 					iv.setImageDrawable(ctx.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColorInfo().getColor(nightMode)));
-					iv.setBackgroundResource(AndroidUtils.resolveAttribute(ctx, android.R.attr.selectableItemBackground));
+					iv.setBackgroundResource(AndroidUtils.resolveAttribute(themedCtx, android.R.attr.selectableItemBackground));
 				} else {
 					iv.setImageDrawable(ctx.getUIUtilities().getThemedIcon(mode.getIconRes()));
 				}

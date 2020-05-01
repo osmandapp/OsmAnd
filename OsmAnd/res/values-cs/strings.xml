@@ -1548,7 +1548,7 @@ Délka %2$s</string>
     <string name="rendering_value_red_name">Červená</string>
     <string name="rendering_value_default13_name">Výchozí (13)</string>
     <string name="rendering_attr_currentTrackColor_name">GPX barva</string>
-    <string name="rendering_attr_currentTrackWidth_name">GPX šířka</string>
+    <string name="rendering_attr_currentTrackWidth_name">Šířka GPX</string>
     <string name="rendering_value_yellow_name">Žlutá</string>
     <string name="rendering_value_green_name">Zelená</string>
     <string name="rendering_value_lightgreen_name">Světlezelená</string>
@@ -3379,4 +3379,50 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="wikipedia_poi_languages_promo">Některé články Wikipedie nemusí být dostupné ve vašem jazyce. Zvolte jazyky, v nichž se články Wikipedie objeví na mapě.
 \nBěhem čtení článku budete moci přepínat mezi všemi dostupnými jazyky.</string>
     <string name="wiki_menu_download_descr">Pro zobrazení bodů zájmu Wikipedie jsou potřeba další mapy.</string>
+    <string name="main_actions_descr">Hlavní akce mohou obsahovat pouze 4 tlačítka.</string>
+    <string name="main_actions">Hlavní akce</string>
+    <string name="additional_actions_descr">Tyto akce jsou dostupné po stisknutí tlačítka “Akce”.</string>
+    <string name="move_inside_category">Položky můžete přesouvat pouze v rámci této kategorie.</string>
+    <string name="developer_plugin">Modul pro vývojáře</string>
+    <string name="shared_string_items">Položky</string>
+    <string name="select_wikipedia_article_langs">Zvolte jazyky, v nichž se články Wikipedie zobrazí na mapě. Při čtení článku můžete přepínat mezi všemi dostupnými jazyky.</string>
+    <string name="some_articles_may_not_available_in_lang">Některé články Wikipedie nemusí být dostupné ve vašem jazyce.</string>
+    <string name="lang_zhyue">Kantonština</string>
+    <string name="lang_zhminnan">Jižní min</string>
+    <string name="lang_yo">Jorubština</string>
+    <string name="lang_war">Warajština</string>
+    <string name="lang_uz">Uzbečtina</string>
+    <string name="lang_ur">Urdština</string>
+    <string name="lang_tt">Tatarština</string>
+    <string name="lang_tg">Tádžičtina</string>
+    <string name="lang_sco">Skotština</string>
+    <string name="lang_scn">Sicilština</string>
+    <string name="lang_pnb">Pandžábština</string>
+    <string name="lang_ne">Nepálština</string>
+    <string name="lang_nap">Neapolština</string>
+    <string name="lang_my">Barmština</string>
+    <string name="lang_mn">Mongolština</string>
+    <string name="lang_min">Minangkabauština</string>
+    <string name="lang_mg">Malgaština</string>
+    <string name="lang_ky">Kyrgyzština</string>
+    <string name="lang_kk">Kazaština</string>
+    <string name="lang_jv">Jávština</string>
+    <string name="lang_gu">Gudžarátština</string>
+    <string name="lang_cv">Čuvaština</string>
+    <string name="lang_ce">Čečenština</string>
+    <string name="lang_bar">Bavorština</string>
+    <string name="lang_ba">Baškirština</string>
+    <string name="lang_an">Aragonština</string>
+    <string name="lang_lmo">Lombardština</string>
+    <string name="custom_color">Vlastní barva</string>
+    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
+    <string name="osm_live_payment_subscription_management">Platba bude stržena z vašeho účtu Google Play po potvrzení nákupu.
+\n
+\nPředplatné se automaticky prodlužuje, pokud ho před termínem obnovení nezrušíte. Platba za předplatné (měsíc/tři měsíce/rok) bude stržena vždy jen v den obnovení.
+\n
+\nSvé předplatné můžete spravovat nebo zrušit v nastavení Google Play.</string>
+    <string name="search_poi_types">Hledat typy bodů zájmu</string>
+    <string name="search_poi_types_descr">Zkombinujte body zájmu různých kategorií. Klepnutím na přepínač vyberete všechny, klepnutím na levou stranu vyberete kategorie.</string>
+    <string name="extra_maps_menu_group">Další mapy</string>
+    <string name="download_unsupported_action">Nepodporovaná akce %1$s</string>
 </resources>

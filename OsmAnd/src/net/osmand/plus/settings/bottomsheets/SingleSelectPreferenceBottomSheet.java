@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTitleWithDescrAndButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -42,6 +43,7 @@ public class SingleSelectPreferenceBottomSheet extends BasePreferenceBottomSheet
 		if (ctx == null || listPreference == null || listPreference.getEntries() == null || listPreference.getEntryValues() == null) {
 			return;
 		}
+		ctx = UiUtilities.getThemedContext(ctx, nightMode);
 		Bundle args = getArguments();
 		if (args != null && args.containsKey(USE_COLLAPSIBLE_DESCRIPTION)) {
 			collapsibleDescription = args.getBoolean(USE_COLLAPSIBLE_DESCRIPTION);

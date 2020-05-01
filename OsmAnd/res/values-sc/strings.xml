@@ -3670,4 +3670,12 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="custom_color">Colore personalizadu</string>
     <string name="extra_maps_menu_group">Mapas additzionales</string>
     <string name="download_unsupported_action">Atzione %1$s non suportada</string>
+    <string name="osm_live_payment_subscription_management">Su pagamentu at a èssere addebitadu a su contu tuo de Google Play cando sa còmpora at a èssere cunfirmada.
+\n
+\nS\'abbonamentu si rinnovat a sa sola automaticamente, francu chi siat istadu annulladu in antis de sa die de su rinnovu. Su contu tuo at a bènnere addebitadu pro su perìodu de rinnovu (mese/tres meses/annu) in sa die de rinnovu ebbia.
+\n
+\nPodes amministrare e annullare sos abbonamentos tuos intrende in sas impostatziones de Google Play tuas.</string>
+    <string name="search_poi_types">Chirca castas de PDI</string>
+    <string name="search_poi_types_descr">Cumbina castas de PDI de catogorias diferentes. Incarca su buone pro ischertare totu, incarca s\'ala a manca pro sa seletzione de sas categorias.</string>
+    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
 </resources>

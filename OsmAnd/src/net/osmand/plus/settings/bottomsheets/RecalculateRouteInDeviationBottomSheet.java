@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.bottomsheets;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -59,6 +60,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 		settings = app.getSettings();
 		appMode = getAppMode();
 		preference = settings.ROUTE_RECALCULATION_DISTANCE;
+		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
 		getPreferenceStateAndValue();
 
 		final SwitchPreferenceEx switchPref = (SwitchPreferenceEx) getPreference();
@@ -81,9 +83,9 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 		}
 
 		final int appModeColorId = appMode.getIconColorInfo().getColor(nightMode);
-		final int appModeColor = ContextCompat.getColor(app, appModeColorId);
-		final int activeColor = AndroidUtils.resolveAttribute(app, R.attr.active_color_basic);
-		final int disabledColor = AndroidUtils.resolveAttribute(app, android.R.attr.textColorSecondary);
+		final int appModeColor = ContextCompat.getColor(themedCtx, appModeColorId);
+		final int activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
+		final int disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
 
 		String title = getString(R.string.recalculate_route_in_deviation);
 		items.add(new TitleItem(title));
@@ -176,11 +178,12 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 	}
 
 	private void updateSliderView() {
-		int activeColor = AndroidUtils.resolveAttribute(app, R.attr.active_color_basic);
-		int disabledColor = AndroidUtils.resolveAttribute(app, android.R.attr.textColorSecondary);
-		int textColorPrimary = AndroidUtils.resolveAttribute(app, android.R.attr.textColorPrimary);
-		tvSliderTitle.setTextColor(ContextCompat.getColor(app, enabled ? textColorPrimary : disabledColor));
-		tvSliderSummary.setTextColor(ContextCompat.getColor(app, enabled ? activeColor : disabledColor));
+		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
+		int activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
+		int disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
+		int textColorPrimary = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorPrimary);
+		tvSliderTitle.setTextColor(ContextCompat.getColor(themedCtx, enabled ? textColorPrimary : disabledColor));
+		tvSliderSummary.setTextColor(ContextCompat.getColor(themedCtx, enabled ? activeColor : disabledColor));
 		tvSliderSummary.setText(getFormattedDistance(app, currentValue));
 		slider.setValue(findIndexOfValue(currentValue));
 		slider.setEnabled(enabled);

@@ -271,11 +271,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 			public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsItem> items) {
 				if (succeed) {
 					app.getRendererRegistry().updateExternalRenderers();
-					AppInitializer.loadRoutingFiles(app, new AppInitializer.LoadRoutingFilesCallback() {
-						@Override
-						public void onRoutingFilesLoaded() {
-						}
-					});
+					AppInitializer.loadRoutingFiles(app, null);
 					FragmentManager fm = getFragmentManager();
 					if (fm != null && file != null) {
 						ImportCompleteFragment.showInstance(fm, items, file.getName());
