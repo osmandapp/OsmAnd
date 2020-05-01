@@ -99,7 +99,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 						showResult(sr);
 					} else {
-						if (sr.objectType == ObjectType.CITY || sr.objectType == ObjectType.VILLAGE) {
+						if (sr.objectType == ObjectType.CITY || sr.objectType == ObjectType.VILLAGE || sr.objectType == ObjectType.STREET) {
 							showResult = true;
 						}
 						dialogFragment.completeQueryWithObject(sr);
