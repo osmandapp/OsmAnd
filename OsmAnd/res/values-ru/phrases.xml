@@ -3749,4 +3749,8 @@
     <string name="poi_surface_metal_grid">Металлическая сетка</string>
     <string name="poi_surface_decoturf">DecoTurf</string>
     <string name="poi_surface_tartan">Тартан</string>
+    <string name="poi_snowmobile_permissive">С разрешения</string>
+    <string name="poi_motorcycle_permissive">С разрешения</string>
+    <string name="poi_hgv_permissive">С разрешения</string>
+    <string name="poi_seamark_obstruction">Препятствие</string>
 </resources>
