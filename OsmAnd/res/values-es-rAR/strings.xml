@@ -3612,9 +3612,9 @@ Lon %2$s</string>
     <string name="app_mode_ski_snowmobile">Motonieve</string>
     <string name="custom_osmand_plugin">Complemento personalizado de OsmAnd</string>
     <string name="replace_point_descr">Reemplaza otro punto con esto</string>
-    <string name="settings_item_read_error">No se pudo leer «%1$s».</string>
-    <string name="settings_item_write_error">No se pudo escribir «%1$s».</string>
-    <string name="settings_item_import_error">No se pudo importar «%1$s».</string>
+    <string name="settings_item_read_error">No se pudo leer desde «%1$s».</string>
+    <string name="settings_item_write_error">No se pudo escribir en «%1$s».</string>
+    <string name="settings_item_import_error">No se pudo importar desde «%1$s».</string>
     <string name="changes_applied_to_profile">Cambios aplicados al perfil «%1$s».</string>
     <string name="ui_customization_description">Personaliza la cantidad de elementos en el menú lateral, la configuración del mapa y el menú contextual. 
 \n 
@@ -3628,10 +3628,10 @@ Lon %2$s</string>
     <string name="divider_descr">Los elementos debajo de este punto están separados por un divisor.</string>
     <string name="shared_string_hidden">Oculto</string>
     <string name="hidden_items_descr">Estos elementos no se muestran en el menú, pero las opciones o complementos que representan seguirán funcionando.</string>
-    <string name="reset_items_descr">Los ajustes se restablecerán al estado original después de ocultarse.</string>
-    <string name="main_actions_descr">Las acciones principales contienen sólo 4 botones.</string>
+    <string name="reset_items_descr">Ocultar los ajustes, los restablece a su estado original.</string>
+    <string name="main_actions_descr">Las «Acciones principales» sólo contienen 4 botones.</string>
     <string name="main_actions">Acciones principales</string>
-    <string name="additional_actions_descr">Puedes acceder a estas acciones, pulsando el botón «Acciones».</string>
+    <string name="additional_actions_descr">Puedes acceder a estas acciones, pulsando el botón «Acciones adicionales».</string>
     <string name="move_inside_category">Sólo puedes mover objetos dentro de esta categoría.</string>
     <string name="developer_plugin">Complemento de desarrollador</string>
     <string name="shared_string_items">Elementos</string>
@@ -3675,13 +3675,11 @@ Lon %2$s</string>
     <string name="extra_maps_menu_group">Mapas adicionales</string>
     <string name="download_unsupported_action">Acción «%1$s» no admitida</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="osm_live_payment_subscription_management">El pago será cargado a la cuenta de Google Play al confirmar la compra.
-\n
-\nLa suscripción se renueva automáticamente a menos que se cancele antes de la fecha de renovación. La cuenta será cargada por el período de renovación (mes/trimestre/año) sólo en la fecha de renovación.
-\n
-\nPuedes administrar y cancelar las suscripciones accediendo a los ajustes de Google Play.</string>
-    <string name="search_poi_types">Buscar tipos de PDI</string>
-    <string name="search_poi_types_descr">Combina tipos de PDI de diferentes categorías. Pulsa el interruptor para marcar todo o el lado izquierdo para elegir la categoría.</string>
+    <string name="osm_live_payment_subscription_management">La cuenta de Google Play se carga al comprar una suscripción
+\ny al expirar (mes/trimestre/año),
+\nno se renovará si se cancela antes de esa fecha en los ajustes de Google Play.</string>
+    <string name="search_poi_types">Buscar por tipos de PDI</string>
+    <string name="search_poi_types_descr">Combina tipos de PDI de diferentes categorías. Pulsa «Alternar» para marcar todo, pulsa el lado izquierdo para elegir una categoría.</string>
     <string name="tracker_item">OsmAnd Tracker</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">Acción rápida</string>
