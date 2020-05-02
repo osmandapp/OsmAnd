@@ -3640,4 +3640,18 @@
 \nيتم تجديد الاشتراك تلقائيًا ما لم يتم إلغاؤه قبل تاريخ التجديد. سيتم تحميل حسابك لفترة التجديد (شهر / ثلاثة أشهر / سنة) فقط في تاريخ التجديد.
 \n
 \nيمكنك إدارة وإلغاء الاشتراكات الخاصة بك عن طريق الذهاب إلى إعدادات Google Play الخاصة بك.</string>
+    <string name="search_poi_types">البحث عن أنواع poi</string>
+    <string name="search_poi_types_descr">اجمع أنواع النقاط المهمة من فئات مختلفة. اضغط على مفتاح التبديل لتحديد الكل ، ثم انقر على الجانب الأيسر لاختيار الفئة.</string>
+    <string name="tracker_item">متتبع أوسماند</string>
+    <string name="mapillary_item">أوسماند+ مابيلاري</string>
+    <string name="quick_action_item">إجراء سريع</string>
+    <string name="radius_ruler_item">مسطرة البوصلة</string>
+    <string name="measure_distance_item">قياس المسافة</string>
+    <string name="travel_item">السفر (Wikivoyage و Wikipedia)</string>
+    <string name="map_markers_item">علامات الخريطة</string>
+    <string name="favorites_item">المفضلة</string>
+    <string name="subscription_osmandlive_item">اشتراك أوسماند لايف</string>
+    <string name="osmand_purchases_item">مشتريات أوسماند</string>
+    <string name="legend_item_description">دليل رموز الخريطة</string>
+    <string name="navigation_profiles_item">الملفات الشخصية للملاحة</string>
 </resources>

@@ -1784,7 +1784,7 @@ Pôr do Sol: %2$s</string>
     <string name="faq_item">Perguntas frequentes</string>
     <string name="faq_item_description">Respostas às perguntas frequentes</string>
     <string name="map_viewing_item">Visualização de mapa</string>
-    <string name="search_on_the_map_item">Pesquisa no mapa</string>
+    <string name="search_on_the_map_item">Pesquisando no mapa</string>
     <string name="instalation_troubleshooting_item">Instalação e solução de problemas</string>
     <string name="techical_articles_item">Artigos técnicos</string>
     <string name="versions_item">Versões</string>
@@ -3666,4 +3666,16 @@ Pôr do Sol: %2$s</string>
 \nVocê pode gerenciar e cancelar suas assinaturas acessando as configurações do Google Play.</string>
     <string name="search_poi_types">Pesquisar tipos de poi</string>
     <string name="search_poi_types_descr">Combine tipos de PIs de diferentes categorias. Toque em para selecionar tudo, toque em lado esquerdo para selecionar a categoria.</string>
+    <string name="tracker_item">Rastreador do OsmAnd</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="quick_action_item">Ação rápida</string>
+    <string name="radius_ruler_item">Régua de raio</string>
+    <string name="measure_distance_item">Medir distância</string>
+    <string name="travel_item">Viagem (Wikivoyage e Wikipédia)</string>
+    <string name="map_markers_item">Marcadores de mapa</string>
+    <string name="favorites_item">Favoritos</string>
+    <string name="subscription_osmandlive_item">Assinatura - OsmAnd Live</string>
+    <string name="osmand_purchases_item">Compras de OsmAnd</string>
+    <string name="legend_item_description">O guia para a simbologia de um mapa</string>
+    <string name="navigation_profiles_item">Perfis de navegação</string>
 </resources>

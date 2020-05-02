@@ -2229,7 +2229,7 @@
     <string name="postcode">Posta-kodu</string>
     <string name="shared_string_from">-dan</string>
     <string name="map_widget_search">Ara</string>
-    <string name="use_osm_live_routing">OsmAnd Canlı navigasyon</string>
+    <string name="use_osm_live_routing">OsmAnd Live navigasyon</string>
     <string name="access_collapsed_list">Daraltılmış liste</string>
     <string name="access_expanded_list">Genişletilmiş liste</string>
     <string name="no_map_markers_found">Lütfen harita üzerinden harita işaretleyicileri ekleyin</string>
@@ -3634,4 +3634,16 @@
 \nGoogle Play ayarlarınıza giderek aboneliklerinizi yönetebilir ve iptal edebilirsiniz.</string>
     <string name="search_poi_types">POI türleri ara</string>
     <string name="search_poi_types_descr">Farklı kategorilerdeki POI türlerini birleştirin. Tümünü seçmek için düğmeye dokunun, kategori seçimi için sol tarafa dokunun.</string>
+    <string name="radius_ruler_item">Yarıçap cetveli</string>
+    <string name="tracker_item">OsmAnd izleyici</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="quick_action_item">Hızlı eylem</string>
+    <string name="measure_distance_item">Mesafe ölç</string>
+    <string name="travel_item">Seyahat (Wikivoyage ve Wikipedia)</string>
+    <string name="map_markers_item">Harita işaretleyicileri</string>
+    <string name="favorites_item">Sık kullanılanlar</string>
+    <string name="subscription_osmandlive_item">Abonelik - OsmAnd Live</string>
+    <string name="osmand_purchases_item">OsmAnd satın almaları</string>
+    <string name="legend_item_description">Bir haritadaki sembollerin rehberi</string>
+    <string name="navigation_profiles_item">Navigasyon profilleri</string>
 </resources>

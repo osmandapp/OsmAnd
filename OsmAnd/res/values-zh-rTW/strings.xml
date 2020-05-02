@@ -1734,7 +1734,7 @@
     <string name="faq_item">常見問題</string>
     <string name="faq_item_description">常見的問題</string>
     <string name="map_viewing_item">地圖檢視</string>
-    <string name="search_on_the_map_item">查詢地圖</string>
+    <string name="search_on_the_map_item">正在地圖上搜尋</string>
     <string name="planning_trip_item">規劃一次旅程</string>
     <string name="instalation_troubleshooting_item">安裝和疑難排除</string>
     <string name="techical_articles_item">技術文章</string>
@@ -3670,4 +3670,16 @@
 \n您可以到您的 Google Play 設定管理與取消您的訂閱。</string>
     <string name="search_poi_types">搜尋 POI 類型</string>
     <string name="search_poi_types_descr">組合來自不同分類的 POI 類型。點擊開關以全選，點擊左側選取分類。</string>
+    <string name="tracker_item">OsmAnd tracker</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="quick_action_item">快速動作</string>
+    <string name="radius_ruler_item">半徑尺規</string>
+    <string name="measure_distance_item">測量距離</string>
+    <string name="travel_item">旅行（維基導遊與維基百科）</string>
+    <string name="map_markers_item">地圖標記</string>
+    <string name="favorites_item">收藏</string>
+    <string name="subscription_osmandlive_item">訂閱 - OsmAnd Live</string>
+    <string name="osmand_purchases_item">OsmAnd 購買</string>
+    <string name="legend_item_description">地圖符號系統指南</string>
+    <string name="navigation_profiles_item">導航設定檔</string>
 </resources>
