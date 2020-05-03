@@ -4,11 +4,13 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
@@ -48,8 +50,8 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	private OsmandMapTileView view;
 
 	private Paint paintIcon;
-	private Paint paintLightIcon;
-	private Paint paintDarkIcon;
+	private ColorFilter paintLightIconFilter;
+	private ColorFilter paintDarkIconFilter;
 	private Bitmap backgroundIcon;
 	private Bitmap stopBus;
 	private Bitmap stopSmall;
@@ -81,10 +83,8 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
 		wmgr.getDefaultDisplay().getMetrics(dm);
 		paintIcon = new Paint();
-		paintLightIcon = new Paint();
-		paintLightIcon.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(mapActivity, R.color.active_buttons_and_links_text_light), PorterDuff.Mode.SRC_IN));
-		paintDarkIcon = new Paint();
-		paintDarkIcon.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(mapActivity, R.color.active_buttons_and_links_text_dark), PorterDuff.Mode.SRC_IN));
+		paintLightIconFilter = new PorterDuffColorFilter(ContextCompat.getColor(mapActivity, R.color.active_buttons_and_links_text_light), PorterDuff.Mode.SRC_IN);
+		paintDarkIconFilter = new PorterDuffColorFilter(ContextCompat.getColor(mapActivity, R.color.active_buttons_and_links_text_dark), PorterDuff.Mode.SRC_IN);
 		path = new Path();
 		stopBus = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_transport_stop_bus);
 		stopSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_transport_stop_small);
@@ -253,9 +253,14 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 				if (stopRoute != null) {
 					TransportStopType type = TransportStopType.findType(stopRoute.route.getType());
 					if (type != null) {
-						Bitmap foregroundIcon = RenderingIcons.getIcon(mapActivity, type.getResName(), false);
+						Drawable foregroundIcon = RenderingIcons.getDrawableIcon(mapActivity, type.getResName(), false);
 						canvas.drawBitmap(backgroundIcon, x - backgroundIconHalfWidth, y - backgroundIconHalfHeight, paintIcon);
-						canvas.drawBitmap(foregroundIcon, x - foregroundIcon.getWidth() / 2f, y - foregroundIcon.getHeight() / 2f, nightMode ? paintDarkIcon : paintLightIcon);
+						canvas.save();
+						canvas.translate(x - foregroundIcon.getIntrinsicWidth() / 2f, y - foregroundIcon.getIntrinsicHeight() / 2f);
+						foregroundIcon.setBounds(0, 0, foregroundIcon.getIntrinsicWidth(), foregroundIcon.getIntrinsicHeight());
+						foregroundIcon.setColorFilter(nightMode ? paintDarkIconFilter : paintLightIconFilter);
+						foregroundIcon.draw(canvas);
+						canvas.restore();
 					}
 				} else {
 					Bitmap b = stopBus;
