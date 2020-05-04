@@ -1205,9 +1205,11 @@ public class RouteCalculationResult {
 			int dist = listDistance[rp];
 			Location l = locations.get(rp);
 			if(ap != null){
-				dist += fromLoc.distanceTo(ap);
+				if (fromLoc != null) {
+					dist += fromLoc.distanceTo(ap);
+				}
 				dist += ap.distanceTo(l);
-			} else {
+			} else if (fromLoc != null) {
 				dist += fromLoc.distanceTo(l);
 			}
 			return dist;
