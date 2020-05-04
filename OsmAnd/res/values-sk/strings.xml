@@ -3626,7 +3626,6 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="reset_items_descr">Skrytie nastavení ich resetuje do pôvodného stavu.</string>
     <string name="main_actions_descr">\"Hlavné akcie\" obsahujú len 4 tlačidlá.</string>
     <string name="main_actions">Hlavné akcie</string>
-    <string name="additional_actions_descr">K týmto akciám môžete pristúpiť stlačením tlačidla \"Ďalšie akcie\".</string>
     <string name="move_inside_category">Môžete presúvať položky len v rámci tejto kategórie.</string>
     <string name="developer_plugin">Doplnok pre vývojárov</string>
     <string name="shared_string_items">Položky</string>

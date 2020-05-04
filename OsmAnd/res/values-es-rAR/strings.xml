@@ -3631,7 +3631,6 @@ Lon %2$s</string>
     <string name="reset_items_descr">Ocultar los ajustes, los restablece a su estado original.</string>
     <string name="main_actions_descr">Las «Acciones principales» sólo contienen 4 botones.</string>
     <string name="main_actions">Acciones principales</string>
-    <string name="additional_actions_descr">Puedes acceder a estas acciones, pulsando el botón «Acciones adicionales».</string>
     <string name="move_inside_category">Sólo puedes mover objetos dentro de esta categoría.</string>
     <string name="developer_plugin">Complemento de desarrollador</string>
     <string name="shared_string_items">Elementos</string>

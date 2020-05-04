@@ -3626,7 +3626,6 @@
     <string name="reset_items_descr">Після приховування налаштування буде повернено до початкового стану.</string>
     <string name="main_actions_descr">Основні дії містять лише 4 кнопки.</string>
     <string name="main_actions">Основні дії</string>
-    <string name="additional_actions_descr">Ви можете отримати доступ до цих дій, натиснувши кнопку «Дії».</string>
     <string name="move_inside_category">Ви можете переміщувати елементи лише всередині цієї категорії.</string>
     <string name="developer_plugin">Втулок розробника</string>
     <string name="shared_string_items">Елементи</string>

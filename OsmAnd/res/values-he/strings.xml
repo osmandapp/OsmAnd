@@ -3632,7 +3632,6 @@
     <string name="reset_items_descr">הסתרת הגדרות מאפסת אותן למצבן ההתחלתי.</string>
     <string name="main_actions_descr">‚פעולות ראשיות’ מכילות 4 כפתורים בלבד.</string>
     <string name="main_actions">פעולות ראשית</string>
-    <string name="additional_actions_descr">ניתן לגשת לפעולות האלה על ידי לחיצה על הכפתור „פעולות נוספות”.</string>
     <string name="move_inside_category">ניתן להעביר פריטים בתוך קטגוריה זו בלבד.</string>
     <string name="select_wikipedia_article_langs">נא לבחור את השפות בהן יופיעו ערכים של ויקיפדיה במפה. ניתן להחליף בין כל השפות הזמינות בזמן קריאת הערך.</string>
     <string name="some_articles_may_not_available_in_lang">יתכן שחלק מהערכים בוויקיפדיה לא יהיו זמינים בשפה שלך.</string>

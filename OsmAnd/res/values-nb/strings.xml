@@ -3514,7 +3514,6 @@
     <string name="shared_string_hidden">Skjult</string>
     <string name="main_actions_descr">Hovedhandlinger inneholder kun 4 knapper.</string>
     <string name="main_actions">Hovedhandlinger</string>
-    <string name="additional_actions_descr">Du får tilgang til disse handlingene ved å trykke på knappen “Handlinger”.</string>
     <string name="move_inside_category">Du kan kun flytte elementer innenfor denne kategorien.</string>
     <string name="developer_plugin">Utvikler-tillegg</string>
     <string name="replace_point_descr">Erstatt et annet punkt med dette</string>
