@@ -874,11 +874,11 @@
     <string name="index_name_gb">أوروبا - بريطانيا العظمى</string>
     <string name="route_preferences">تفضيلات الطريق</string>
     <string name="route_info">معلومات الطريق</string>
-    <string name="routing_attr_avoid_toll_name">لا توجد طرق رسوم</string>
+    <string name="routing_attr_avoid_toll_name">طرق برسوم</string>
     <string name="routing_attr_avoid_toll_description">تجنب الطرق برسوم</string>
     <string name="routing_attr_avoid_unpaved_name">تجنب الطرق غير المعبّدة</string>
     <string name="routing_attr_avoid_unpaved_description">اجتناب الطرق الترابية والوعرة</string>
-    <string name="routing_attr_avoid_ferries_name">لا العبارات</string>
+    <string name="routing_attr_avoid_ferries_name">تجنب العبارات</string>
     <string name="routing_attr_weight_name">وزن المركبة</string>
     <string name="android_19_location_disabled">منذ نسخة أندرويد كتكات 4.4، لا يمكنك تحميل أو تحديث الخرائط في مكان التخزين السابق (%s). هل تريد التغيير إلى مكان مسموح ونسخ كل الملفات إليه ؟ ملاحظات: 1-الملفات القديمة ستبقى كما هي (يمكن حذفها يدويا). 
 \n
@@ -1241,7 +1241,7 @@
     <string name="routing_attr_prefer_motorway_name">تفضيل طرق الدراجات النارية</string>
     <string name="routing_attr_prefer_motorway_description">تفضيل طرق الدراجات النارية</string>
     <string name="routing_attr_avoid_ferries_description">تجنب العبّارات</string>
-    <string name="routing_attr_avoid_motorway_name">لا طرق السريعة</string>
+    <string name="routing_attr_avoid_motorway_name">الطرق السريعة</string>
     <string name="routing_attr_avoid_motorway_description">تجنب طرق الدراجات النارية</string>
     <string name="routing_attr_weight_description">تحديد الوزن الأعلى المسموح به على الطرق.</string>
     <string name="copying_osmand_files_descr">نسخ ملفات أوسماند إلى المسار الجديد (%s)…</string>
@@ -1616,7 +1616,7 @@
     <string name="search_near_map">البحث قرب مركز الخريطة الحالية</string>
     <string name="active_markers">نشطة</string>
     <string name="map_markers">علامات الخريطة</string>
-    <string name="routing_attr_avoid_borders_name">منع تخطي الحدود</string>
+    <string name="routing_attr_avoid_borders_name">تخطي الحدود</string>
     <string name="impassable_road_desc">حدد الطرق التي تريد تجنبها أثناء التنقل.</string>
     <string name="search_categories">الفئات</string>
     <string name="shared_string_near">بالقرب من</string>
@@ -1855,7 +1855,7 @@
     <string name="nm">ميل بحري</string>
     <string name="nm_h">ميل بحري/س</string>
     <string name="simulate_your_location_descr">إجراء محاكاة تخيلية باستخدام توجيه نشط أو مسار مسجل.</string>
-    <string name="routing_attr_avoid_shuttle_train_name">لا خدمة نقل القطار</string>
+    <string name="routing_attr_avoid_shuttle_train_name">خدمة النقل بالقطار</string>
     <string name="routing_attr_avoid_shuttle_train_description">يتجنب استخدام القطارات المكوكية</string>
     <string name="traffic_warning_hazard">خطر</string>
     <string name="rendering_value_boldOutline_name">مخطط واضح</string>
@@ -2699,7 +2699,7 @@
     <string name="osm_live_payment_annual_title">سنوي</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / شهر</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / شهر</string>
-    <string name="osm_live_payment_discount_descr">وفر %1$s.</string>
+    <string name="osm_live_payment_discount_descr">وفر %1$s</string>
     <string name="osm_live_payment_current_subscription">الاشتراك الحالي</string>
     <string name="osm_live_payment_renews_monthly">يجدد شهريا</string>
     <string name="osm_live_payment_renews_quarterly">تجديد فصلي</string>
@@ -3633,4 +3633,25 @@
     <string name="lang_lmo">لومبارد</string>
     <string name="custom_color">لون مخصص</string>
     <string name="extra_maps_menu_group">خرائط إضافية</string>
+    <string name="download_unsupported_action">%1$s إجراء غير معتمد</string>
+    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
+    <string name="osm_live_payment_subscription_management">سيتم احتساب الدفع لحساب Google Play الخاص بك في تأكيد الشراء.
+\n
+\nيتم تجديد الاشتراك تلقائيًا ما لم يتم إلغاؤه قبل تاريخ التجديد. سيتم تحميل حسابك لفترة التجديد (شهر / ثلاثة أشهر / سنة) فقط في تاريخ التجديد.
+\n
+\nيمكنك إدارة وإلغاء الاشتراكات الخاصة بك عن طريق الذهاب إلى إعدادات Google Play الخاصة بك.</string>
+    <string name="search_poi_types">البحث عن أنواع poi</string>
+    <string name="search_poi_types_descr">اجمع أنواع النقاط المهمة من فئات مختلفة. اضغط على مفتاح التبديل لتحديد الكل ، ثم انقر على الجانب الأيسر لاختيار الفئة.</string>
+    <string name="tracker_item">متتبع أوسماند</string>
+    <string name="mapillary_item">أوسماند+ مابيلاري</string>
+    <string name="quick_action_item">إجراء سريع</string>
+    <string name="radius_ruler_item">مسطرة البوصلة</string>
+    <string name="measure_distance_item">قياس المسافة</string>
+    <string name="travel_item">السفر (Wikivoyage و Wikipedia)</string>
+    <string name="map_markers_item">علامات الخريطة</string>
+    <string name="favorites_item">المفضلة</string>
+    <string name="subscription_osmandlive_item">اشتراك أوسماند لايف</string>
+    <string name="osmand_purchases_item">مشتريات أوسماند</string>
+    <string name="legend_item_description">دليل رموز الخريطة</string>
+    <string name="navigation_profiles_item">الملفات الشخصية للملاحة</string>
 </resources>

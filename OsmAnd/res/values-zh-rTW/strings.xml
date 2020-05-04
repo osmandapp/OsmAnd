@@ -1734,7 +1734,7 @@
     <string name="faq_item">常見問題</string>
     <string name="faq_item_description">常見的問題</string>
     <string name="map_viewing_item">地圖檢視</string>
-    <string name="search_on_the_map_item">查詢地圖</string>
+    <string name="search_on_the_map_item">正在地圖上搜尋</string>
     <string name="planning_trip_item">規劃一次旅程</string>
     <string name="instalation_troubleshooting_item">安裝和疑難排除</string>
     <string name="techical_articles_item">技術文章</string>
@@ -2846,7 +2846,7 @@
     <string name="osm_live_payment_annual_title">每年</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / 月</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / 月</string>
-    <string name="osm_live_payment_discount_descr">節省 %1$s。</string>
+    <string name="osm_live_payment_discount_descr">節省 %1$s</string>
     <string name="osm_live_payment_current_subscription">目前的訂閱</string>
     <string name="osm_live_payment_renews_monthly">每月續訂</string>
     <string name="osm_live_payment_renews_quarterly">每季續訂</string>
@@ -3602,18 +3602,18 @@
     <string name="app_mode_ski_snowmobile">雪地摩托車</string>
     <string name="custom_osmand_plugin">自訂 OsmAnd 外掛程式</string>
     <string name="replace_point_descr">以此取代另一點</string>
-    <string name="changes_applied_to_profile">變更已套用至 %1$s 設定檔。</string>
-    <string name="settings_item_read_error">無法讀取 %1$s。</string>
-    <string name="settings_item_write_error">無法寫入 %1$s。</string>
-    <string name="settings_item_import_error">無法匯入 %1$s。</string>
+    <string name="changes_applied_to_profile">變更已套用至「%1$s」設定檔。</string>
+    <string name="settings_item_read_error">無法從「%1$s」讀取。</string>
+    <string name="settings_item_write_error">無法寫入至「%1$s」。</string>
+    <string name="settings_item_import_error">無法從「%1$s」匯入。</string>
     <string name="select_track_file">選取軌跡檔案</string>
     <string name="shared_string_languages">語言</string>
     <string name="shared_string_language">語言</string>
     <string name="shared_string_all_languages">所有語言</string>
     <string name="wiki_menu_download_descr">需要額外的地圖才能在地圖上檢視維基百科的 POI。</string>
-    <string name="ui_customization_description">在「抽屜」、「設定地圖」與情境選單中自訂項目數量。
-\n
-\n您可以停用未使用的外掛程式，以從應用程式 %1$s 中隱藏其控制元件。</string>
+    <string name="ui_customization_description">在「抽屜」、「設定地圖」與情境選單中自訂項目數量。 
+\n 
+\n您可以關閉未使用的外掛程式，以從應用程式 %1$s 中隱藏它們的控制元件。</string>
     <string name="ui_customization_short_descr">抽屜項目，情境選單</string>
     <string name="ui_customization">自訂使用者介面</string>
     <string name="shared_string_drawer">抽屜</string>
@@ -3623,10 +3623,10 @@
     <string name="divider_descr">低於此點的元素將由分隔符分離。</string>
     <string name="shared_string_hidden">已隱藏</string>
     <string name="hidden_items_descr">這些項目已從選單隱藏，但對應的選項或外掛程式將會繼續運作。</string>
-    <string name="reset_items_descr">隱藏後，設定將會重設回原始狀態。</string>
+    <string name="reset_items_descr">隱藏設定將會把它們重設回原始狀態。</string>
     <string name="main_actions_descr">主要動作僅包含 4 個按鈕。</string>
     <string name="main_actions">主要動作</string>
-    <string name="additional_actions_descr">您可以透過輕點「動作」按鈕來存取這些動作。</string>
+    <string name="additional_actions_descr">您可以透過輕點「額外動作」按鈕來存取這些動作。</string>
     <string name="move_inside_category">您只能在此分類中移動項目。</string>
     <string name="developer_plugin">開發者外掛程式</string>
     <string name="shared_string_items">項目</string>
@@ -3662,4 +3662,22 @@
     <string name="custom_color">自訂顏色</string>
     <string name="extra_maps_menu_group">額外地圖</string>
     <string name="download_unsupported_action">不支援的動作 %1$s</string>
+    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
+    <string name="osm_live_payment_subscription_management">購買訂閱時會從您的 Google Play 帳號扣款，
+\n而過期時（一個月／三個月／一年），
+\n若您在這之前於 Google Play 設定中取消的話就不會續訂。</string>
+    <string name="search_poi_types">搜尋 POI 類型</string>
+    <string name="search_poi_types_descr">組合來自不同分類的 POI 類型。點擊開關以全選，點擊左側選取分類。</string>
+    <string name="tracker_item">OsmAnd tracker</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="quick_action_item">快速動作</string>
+    <string name="radius_ruler_item">半徑尺規</string>
+    <string name="measure_distance_item">測量距離</string>
+    <string name="travel_item">旅行（維基導遊與維基百科）</string>
+    <string name="map_markers_item">地圖標記</string>
+    <string name="favorites_item">收藏</string>
+    <string name="subscription_osmandlive_item">訂閱 - OsmAnd Live</string>
+    <string name="osmand_purchases_item">OsmAnd 購買</string>
+    <string name="legend_item_description">地圖符號系統指南</string>
+    <string name="navigation_profiles_item">導航設定檔</string>
 </resources>

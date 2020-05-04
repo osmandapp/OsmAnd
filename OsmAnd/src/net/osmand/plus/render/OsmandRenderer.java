@@ -162,11 +162,10 @@ public class OsmandRenderer {
 		return dashEffect.get(dashes);
 	}
 
-	public Shader getShader(String resId){
-		
-		if(shaders.get(resId) == null){
+	public Shader getShader(String resId) {
+		if (shaders.get(resId) == null) {
 			Bitmap bmp = RenderingIcons.getIcon(context, resId, true);
-			if(bmp != null){
+			if (bmp != null) {
 				Shader sh = new BitmapShader(bmp, TileMode.REPEAT, TileMode.REPEAT);
 				shaders.put(resId, sh);
 			} else {
@@ -326,17 +325,17 @@ public class OsmandRenderer {
 		bounds.inset(-bounds.width()/4, -bounds.height()/4);
 		QuadTree<RectF> boundIntersections = new QuadTree<RectF>(bounds, 4, 0.6f);
 		List<RectF> result = new ArrayList<RectF>();
-		
+
 		for (IconDrawInfo icon : rc.iconsToDraw) {
 			if (icon.resId != null) {
-				Bitmap ico = RenderingIcons.getIcon(context, icon.resId, true);
+				Drawable ico = RenderingIcons.getDrawableIcon(context, icon.resId, true);
 				if (ico != null) {
 					if (icon.y >= 0 && icon.y < rc.height && icon.x >= 0 && icon.x < rc.width) {
-						int visbleWidth = icon.iconSize >= 0 ? (int) icon.iconSize : ico.getWidth();
-						int visbleHeight = icon.iconSize >= 0 ? (int) icon.iconSize : ico.getHeight();
+						int visbleWidth = icon.iconSize >= 0 ? (int) icon.iconSize : ico.getIntrinsicWidth();
+						int visbleHeight = icon.iconSize >= 0 ? (int) icon.iconSize : ico.getIntrinsicHeight();
 						boolean intersects = false;
 						float coeff = rc.getDensityValue(rc.screenDensityRatio * rc.textScale);
-						RectF rf = calculateRect(rc, icon, ico.getWidth(), ico.getHeight());
+						RectF rf = calculateRect(rc, icon, ico.getIntrinsicWidth(), ico.getIntrinsicHeight());
 						RectF visibleRect = null;
 						if (visbleHeight > 0 && visbleWidth > 0) {
 							visibleRect = calculateRect(rc, icon, visbleWidth, visbleHeight);
@@ -350,37 +349,29 @@ public class OsmandRenderer {
 						}
 						
 						if (!intersects) {
-							Bitmap shield = icon.shieldId == null ? null : RenderingIcons.getIcon(context, icon.shieldId, true);
-							if(shield != null) {
-								RectF shieldRf = calculateRect(rc, icon, shield.getWidth(), shield.getHeight());
-								if (coeff != 1f) {
-									Rect src = new Rect(0, 0, shield.getWidth(), shield.getHeight());
-									drawBitmap(cv, shield, shieldRf, src);
-								} else {
-									drawBitmap(cv, shield, shieldRf);
-								}	
+							Drawable shield = icon.shieldId == null ? null : RenderingIcons.getDrawableIcon(context, icon.shieldId, true);
+							boolean fillRect = coeff != 1f;
+							if (shield != null) {
+								cv.save();
+								RectF shieldRf = calculateRect(rc, icon, shield.getIntrinsicWidth(), shield.getIntrinsicHeight());
+								cv.translate(shieldRf.left, shieldRf.top);
+								draw(cv, shield, shieldRf, fillRect);
+								cv.restore();
 							}
-							if (coeff != 1f) {
-								Rect src = new Rect(0, 0, ico.getWidth(), ico.getHeight());
-								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId_1, true), rf, src);
-								drawBitmap(cv, ico, rf, src);
-								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId2, true), rf, src);
-								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId3, true), rf, src);
-								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId4, true), rf, src);
-								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId5, true), rf, src);
-							} else {
-								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId_1, true), rf);
-								drawBitmap(cv, ico, rf);
-								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId2, true), rf);
-								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId3, true), rf);
-								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId4, true), rf);
-								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId5, true), rf);
-							}
-							if(visibleRect != null) {
+							cv.save();
+							cv.translate(rf.left, rf.top);
+							draw(cv, RenderingIcons.getDrawableIcon(context, icon.resId_1, true), rf, fillRect);
+							draw(cv, ico, rf, fillRect);
+							draw(cv, RenderingIcons.getDrawableIcon(context, icon.resId2, true), rf, fillRect);
+							draw(cv, RenderingIcons.getDrawableIcon(context, icon.resId3, true), rf, fillRect);
+							draw(cv, RenderingIcons.getDrawableIcon(context, icon.resId4, true), rf, fillRect);
+							draw(cv, RenderingIcons.getDrawableIcon(context, icon.resId5, true), rf, fillRect);
+							if (visibleRect != null) {
 								visibleRect.inset(-visibleRect.width() / 4, -visibleRect.height() / 4);
 								boundIntersections.insert(visibleRect, 
 										new QuadRect(visibleRect.left, visibleRect.top, visibleRect.right, visibleRect.bottom));
 							}
+							cv.restore();
 						}
 					}
 				}
@@ -391,23 +382,16 @@ public class OsmandRenderer {
 		}
 	}
 
-	public Drawable getShieldDrawable(String shieldId){
-		Bitmap shield = RenderingIcons.getIcon(context, shieldId, true);
-		return new BitmapDrawable(context.getResources(),shield);
-	}
-
-	protected void drawBitmap(Canvas cv, Bitmap ico, RectF rf) {
-		if(ico == null) {
+	protected void draw(Canvas cv, Drawable ico, RectF rf, boolean fillRect) {
+		if (ico == null) {
 			return;
 		}
-		cv.drawBitmap(ico, rf.left, rf.top, paintIcon);
-	}
-
-	protected void drawBitmap(Canvas cv, Bitmap ico, RectF rf, Rect src) {
-		if(ico == null) {
-			return;
+		if (fillRect) {
+			ico.setBounds(0, 0, (int) rf.width(), (int) rf.height());
+		} else {
+			ico.setBounds(0, 0, ico.getIntrinsicWidth(), ico.getIntrinsicHeight());
 		}
-		cv.drawBitmap(ico, src, rf, paintIcon);
+		ico.draw(cv);
 	}
 
 	private RectF calculateRect(RenderingContext rc, IconDrawInfo icon, int visbleWidth, int visbleHeight) {

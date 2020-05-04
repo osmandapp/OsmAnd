@@ -103,6 +103,7 @@
 		<attr name="wikivoyage_secondary_btn_bg" format="reference"/>
 		<attr name="wikivoyage_primary_btn_bg" format="reference"/>
         <attr name="purchase_dialog_shadow_btn_bg" format="reference"/>
+		<attr name="purchase_dialog_outline_btn_bg" format="reference"/>
 
         <attr name="bottom_nav_shadow" format="reference"/>
 

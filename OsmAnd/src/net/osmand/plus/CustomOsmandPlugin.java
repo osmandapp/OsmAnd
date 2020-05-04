@@ -45,6 +45,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -368,7 +369,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 
 	public static List<CustomRegion> collectRegionsFromJson(@NonNull Context ctx, JSONArray jsonArray) throws JSONException {
 		List<CustomRegion> customRegions = new ArrayList<>();
-		Map<String, CustomRegion> flatRegions = new HashMap<>();
+		Map<String, CustomRegion> flatRegions = new LinkedHashMap<>();
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject regionJson = jsonArray.getJSONObject(i);
 			CustomRegion region = CustomRegion.fromJson(ctx, regionJson);
@@ -414,6 +415,18 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 					image = getIconForFile(path, imageNames);
 				}
 			}
+		}
+		for (WorldRegion region : customRegions) {
+			loadSubregionIndexItems(region);
+		}
+	}
+
+	private void loadSubregionIndexItems(WorldRegion region) {
+		if (region instanceof CustomRegion) {
+			((CustomRegion) region).loadDynamicIndexItems(app);
+		}
+		for (WorldRegion subregion : region.getSubregions()) {
+			loadSubregionIndexItems(subregion);
 		}
 	}
 

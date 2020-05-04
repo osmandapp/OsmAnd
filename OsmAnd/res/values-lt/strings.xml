@@ -2555,7 +2555,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="osm_live_payment_annual_title">Kartą per metus</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / mėnuo</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mėnuo</string>
-    <string name="osm_live_payment_discount_descr">Sutaupyk %1$s!</string>
+    <string name="osm_live_payment_discount_descr">Sutaupyk %1$s</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="start_search_from_city">Pirmiausiai parinkite miestą</string>
     <string name="routing_attr_avoid_tram_name">Vengti tramvajų</string>

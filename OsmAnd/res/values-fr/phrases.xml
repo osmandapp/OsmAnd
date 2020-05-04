@@ -3399,7 +3399,7 @@
     <string name="poi_water_place_durability_emergency">Durabilité des plans d\'eau : urgence</string>
     <string name="poi_water_purification_chlorine">Chlore</string>
     <string name="poi_water_supply_water_well">Puits d’eau</string>
-    <string name="poi_water_supply_pipeline">Pipeline</string>
+    <string name="poi_water_supply_pipeline">Oléoduc</string>
     <string name="poi_water_supply_borehole">Trou de forage</string>
     <string name="poi_socket_cee_blue">Prise de courant : Bleu CEE</string>
     <string name="poi_socket_cee_blue_current">Prise de courant : Bleu CEE : courant</string>

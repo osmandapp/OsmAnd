@@ -851,6 +851,15 @@ public class ImportHelper {
 						((ProfileSettingsItem) item).applyAdditionalPrefs();
 					}
 				}
+				if (!Algorithms.isEmpty(plugin.getDownloadMaps())) {
+					app.getDownloadThread().runReloadIndexFilesSilent();
+				}
+				if (!Algorithms.isEmpty(plugin.getRendererNames())) {
+					app.getRendererRegistry().updateExternalRenderers();
+				}
+				if (!Algorithms.isEmpty(plugin.getRouterNames())) {
+					loadRoutingFiles(app, null);
+				}
 				if (activity != null) {
 					plugin.onInstall(app, activity);
 				}

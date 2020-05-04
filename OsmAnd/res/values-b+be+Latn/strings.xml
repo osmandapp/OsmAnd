@@ -2846,7 +2846,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="osm_live_payment_annual_title">Štohod</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / miesiac</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / miesiac</string>
-    <string name="osm_live_payment_discount_descr">Aščada %1$s.</string>
+    <string name="osm_live_payment_discount_descr">Aščada %1$s</string>
     <string name="osm_live_payment_current_subscription">Dziejnaja padpiska</string>
     <string name="osm_live_payment_renews_monthly">Abnaŭliajecca štomiesiac</string>
     <string name="osm_live_payment_renews_quarterly">Abnaŭliajecca štokvartaĺna</string>

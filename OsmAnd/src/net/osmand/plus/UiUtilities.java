@@ -377,7 +377,8 @@ public class UiUtilities {
 		TextView tvMessage = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_text);
 		TextView tvAction = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_action);
 		if (messageColor == null) {
-			messageColor = nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
+			messageColor = nightMode ? R.color.active_buttons_and_links_text_dark
+					: R.color.active_buttons_and_links_text_light;
 		}
 		tvMessage.setTextColor(ContextCompat.getColor(ctx, messageColor));
 		if (actionColor == null) {
@@ -388,7 +389,7 @@ public class UiUtilities {
 			tvMessage.setMaxLines(maxLines);
 		}
 		if (backgroundColor == null) {
-			backgroundColor = nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
+			backgroundColor = nightMode ? R.color.list_background_color_dark : R.color.color_black;
 		}
 		view.setBackgroundColor(ContextCompat.getColor(ctx, backgroundColor));
 	}

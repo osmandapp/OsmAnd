@@ -30,10 +30,10 @@
         android:minHeight="@dimen/favorites_list_item_height"
         android:layout_gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingStart="@dimen/list_header_padding"
-        android:paddingLeft="@dimen/list_header_padding"
-        android:paddingEnd="@dimen/list_header_padding"
-        android:paddingRight="@dimen/list_header_padding">
+        android:paddingStart="@dimen/list_header_text_left_margin"
+        android:paddingLeft="@dimen/list_header_text_left_margin"
+        android:paddingEnd="@dimen/list_header_text_left_margin"
+        android:paddingRight="@dimen/list_header_text_left_margin">
 
         <FrameLayout
             android:layout_width="@dimen/favorites_icon_size"
@@ -67,10 +67,10 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:layout_marginStart="@dimen/favorites_icon_right_margin"
-            android:layout_marginLeft="@dimen/favorites_icon_right_margin"
-            android:layout_marginEnd="@dimen/favorites_icon_right_margin"
-            android:layout_marginRight="@dimen/favorites_icon_right_margin"
+            android:layout_marginStart="@dimen/context_menu_padding_margin_large"
+            android:layout_marginLeft="@dimen/context_menu_padding_margin_large"
+            android:layout_marginEnd="@dimen/context_menu_padding_margin_large"
+            android:layout_marginRight="@dimen/context_menu_padding_margin_large"
             android:paddingTop="@dimen/context_menu_padding_margin_small"
             android:paddingBottom="@dimen/context_menu_padding_margin_small">
 

@@ -295,6 +295,9 @@ public class MapPoiTypes {
 		}
 		if (create) {
 			PoiCategory lastCategory = new PoiCategory(this, name, categories.size());
+			if (!lastCategory.getKeyName().equals("Other")) {
+				lastCategory.setTopVisible(true);
+			}
 			categories.add(lastCategory);
 			return lastCategory;
 		}

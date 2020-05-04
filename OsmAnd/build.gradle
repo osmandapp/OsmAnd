@@ -52,7 +52,7 @@ android {
 		versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
 		versionName System.getenv("APK_VERSION_SUFFIX")? versionName + System.getenv("APK_VERSION_SUFFIX").toString(): versionName
 		// Stops the Gradle plugin’s automatic rasterization of vectors
-		// generatedDensities = []
+		vectorDrawables.generatedDensities = ['hdpi']
 	}
 
 	lintOptions {
@@ -84,7 +84,7 @@ android {
 		noCompress "qz"
 		cruncherEnabled = false
 		// Flag notifies aapt to keep the attribute IDs around
-		// additionalParameters "--no-version-vectors"
+		additionalParameters "--no-version-vectors"
 	}
 
 	dexOptions {
@@ -361,18 +361,33 @@ task copyPoiCategories(type: Copy) {
 	into "assets"
 }
 
-task copyStyleIcons(type: Sync) {
-	from "../../resources/rendering_styles/style-icons/"
-	into "res/"
+task copyMapShaderIcons(type: Sync) {
+	// from "../../resources/rendering_styles/style-icons/map-shaders-png"
+	// into "res/"
+	from "../../resources/rendering_styles/style-icons/map-shaders-vector"
+	into "res/drawable"
 	include "**/*.png",  "**/*.xml"
 	preserve {
 		include '**/*'
-		exclude  "**/mm_*", "**/h_*"
+		exclude  "**/h_*"
 	}
 }
 
-task copyPOIIcons(type: Sync) {
-	from "../../resources/rendering_styles/drawable-mx/"
+task copyMapPOIIcons(type: Sync) {
+	from "../../resources/rendering_styles/style-icons/map-icons-vector"
+	into "res/drawable/"
+	// from "../../resources/rendering_styles/style-icons/map-icons-png"
+	// into "res/"
+
+	include "**/*.png",  "**/*.xml"
+	preserve {
+		include '**/*'
+		exclude "**/mm_*"
+	}
+}
+
+task copyLargePOIIcons(type: Sync) {
+	from "../../resources/rendering_styles/style-icons/poi-icons-vector"
 	into "res/drawable/"
 	include "**/*.png",  "**/*.xml"
 	preserve {
@@ -418,8 +433,9 @@ task collectExternalResources {
 			collectFonts,
 			collectHelpContentsAssets,
 			collectHelpContentsStyle,
-			copyStyleIcons,
-			copyPOIIcons,
+			copyMapShaderIcons,
+			copyMapPOIIcons,
+			copyLargePOIIcons,
 			updateNoTranslate,
 			validateTranslate,
 			copyWidgetIcons,

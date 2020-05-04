@@ -1797,7 +1797,7 @@
     <string name="osm_live_payment_annual_title">വര്ഷത്തിലൊരിക്കൽ</string>
     <string name="osm_live_payment_month_cost_descr">"പ്റതിമാസം  %1$s"</string>
     <string name="osm_live_payment_month_cost_descr_ex">"പ്റതിമാസം %1$.2f %2$s "</string>
-    <string name="osm_live_payment_discount_descr">%1$s ലാഭിക്കുക .</string>
+    <string name="osm_live_payment_discount_descr">%1$s ലാഭിക്കുക</string>
     <string name="osm_live_payment_current_subscription">നിലവിലെ സബ്സ്ക്രിപ്ഷൻ</string>
     <string name="osm_live_payment_renews_monthly">മാസത്തിലൊരിക്കൽ ആവര്‍ത്തിക്കുക</string>
     <string name="osm_live_payment_renews_quarterly">മൂന്നുമാസത്തിലൊരിക്കൽ ആവര്‍ത്തിക്കുക</string>

@@ -170,6 +170,7 @@ public class ChangeDataStorageBottomSheet extends BasePreferenceBottomSheet {
 				fragment.setNewDirectory(newDirectory);
 				fragment.setTargetFragment(target, 0);
 				fragment.setUsedOnMap(usedOnMap);
+				fragment.setArguments(args);
 				fragment.show(fm, TAG);
 				return true;
 			}

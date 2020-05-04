@@ -55,6 +55,56 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <LinearLayout
+        android:id="@+id/search_container"
+        android:layout_width="match_parent"
+        android:focusableInTouchMode="true"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/card_row_min_height"
+            android:background="?attr/bg_color"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/search_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/content_padding"
+                android:layout_marginLeft="@dimen/content_padding"
+                android:layout_marginEnd="@dimen/list_content_padding_large"
+                android:layout_marginRight="@dimen/list_content_padding_large"
+                tools:src="@drawable/ic_action_search_dark" />
+
+            <EditText
+                android:id="@+id/search"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:hint="@string/search_poi_types"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="@dimen/default_list_text_size" />
+
+            <ImageView
+                android:id="@+id/search_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/list_item_button_padding"
+                android:layout_marginLeft="@dimen/list_item_button_padding"
+                android:layout_marginEnd="@dimen/content_padding"
+                android:layout_marginRight="@dimen/content_padding"
+                tools:src="@drawable/ic_action_cancel" />
+
+        </LinearLayout>
+
+        <include layout="@layout/divider" />
+
+    </LinearLayout>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -83,45 +133,49 @@
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="52dp"
-        android:background="?attr/color_dialog_buttons"
+        android:background="?attr/bg_color"
+        android:minHeight="@dimen/dialog_button_ex_height"
         android:visibility="gone"
         tools:visibility="visible">
 
-        <LinearLayout
+        <FrameLayout
+            android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?attr/selectableItemBackground"
-            android:orientation="horizontal">
+            android:background="?attr/color_dialog_buttons">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/barTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="@color/color_white"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="16dp"
-                android:textSize="@dimen/default_desc_text_size"
-                tools:text="Selected: 3 categories"
-	            android:layout_marginStart="16dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <net.osmand.plus.widgets.TextViewEx
-                android:id="@+id/barButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:textColor="@color/color_white"
-                android:textSize="@dimen/default_sub_text_size"
-                osmand:typeface="@string/font_roboto_medium"
-                osmand:textAllCapsCompat="true"
-                android:text="@string/shared_string_show"
-	            android:layout_marginEnd="20dp"
-	            android:layout_marginStart="20dp" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/barTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/default_list_text_size"
+                    tools:text="Show" />
 
-        </LinearLayout>
+                <net.osmand.plus.widgets.TextViewEx
+                    android:id="@+id/barSubTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:textColor="@color/text_color_primary_dark"
+                    android:textSize="@dimen/default_desc_text_size"
+                    osmand:typeface="@string/font_roboto_medium"
+                    tools:text="Selected categories: 3" />
+
+            </LinearLayout>
+
+        </FrameLayout>
 
     </LinearLayout>
 

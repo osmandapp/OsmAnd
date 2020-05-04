@@ -1784,7 +1784,7 @@ Pôr do Sol: %2$s</string>
     <string name="faq_item">Perguntas frequentes</string>
     <string name="faq_item_description">Respostas às perguntas frequentes</string>
     <string name="map_viewing_item">Visualização de mapa</string>
-    <string name="search_on_the_map_item">Pesquisa no mapa</string>
+    <string name="search_on_the_map_item">Pesquisando no mapa</string>
     <string name="instalation_troubleshooting_item">Instalação e solução de problemas</string>
     <string name="techical_articles_item">Artigos técnicos</string>
     <string name="versions_item">Versões</string>
@@ -2829,7 +2829,7 @@ Pôr do Sol: %2$s</string>
     <string name="osm_live_payment_annual_title">Anualmente</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / mês</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mês</string>
-    <string name="osm_live_payment_discount_descr">Menos %1$s.</string>
+    <string name="osm_live_payment_discount_descr">Menos %1$s</string>
     <string name="osm_live_payment_current_subscription">Assinatura atual</string>
     <string name="osm_live_payment_renews_monthly">Renova mensalmente</string>
     <string name="osm_live_payment_renews_annually">Renova anualmente</string>
@@ -3598,18 +3598,18 @@ Pôr do Sol: %2$s</string>
     <string name="app_mode_ski_snowmobile">Moto de neve</string>
     <string name="custom_osmand_plugin">Plug-in OsmAnd personalizado</string>
     <string name="replace_point_descr">Substitua outro ponto por este</string>
-    <string name="changes_applied_to_profile">Alterações aplicadas ao perfil %1$s.</string>
-    <string name="settings_item_read_error">Não foi possível ler %1$s.</string>
-    <string name="settings_item_write_error">Não foi possível escrever %1$s.</string>
-    <string name="settings_item_import_error">Não foi possível importar %1$s.</string>
+    <string name="changes_applied_to_profile">Alterações aplicadas ao perfil \'%1$s\'.</string>
+    <string name="settings_item_read_error">"Não foi possível ler a partir de  \'%1$s\'."</string>
+    <string name="settings_item_write_error">Não foi possível escrever para \'%1$s\'.</string>
+    <string name="settings_item_import_error">Não foi possível importar de \'%1$s\'.</string>
     <string name="select_track_file">Selecionar arquivo de faixa</string>
     <string name="shared_string_languages">Idiomas</string>
     <string name="shared_string_language">Idioma</string>
     <string name="shared_string_all_languages">Todos os idiomas</string>
     <string name="wiki_menu_download_descr">Mapas adicionais são necessários para visualizar os POIs da Wikipédia no mapa.</string>
-    <string name="ui_customization_description">Personalize a quantidade de itens na Gaveta, Configurar mapa e menu de contexto.
+    <string name="ui_customization_description">Personalize a quantidade de itens na gaveta, configure o mapa e o menu de contexto.
 \n
-\nVocê pode desativar plugins não utilizados para ocultar todos os seus controles do aplicativo %1$s.</string>
+\nVocê pode desativar os plugins não utilizados para ocultar todos os controles do aplicativo %1$s.</string>
     <string name="ui_customization_short_descr">Itens da gaveta, menu de contexto</string>
     <string name="ui_customization">Personalização da interface do usuário</string>
     <string name="shared_string_drawer">Gaveta</string>
@@ -3619,10 +3619,10 @@ Pôr do Sol: %2$s</string>
     <string name="divider_descr">Elementos abaixo deste ponto separados por um divisor.</string>
     <string name="shared_string_hidden">Escondido</string>
     <string name="hidden_items_descr">Esses itens estão ocultos no menu, mas as opções ou plug-ins representados continuarão funcionando.</string>
-    <string name="reset_items_descr">As configurações serão redefinidas para o estado original após ocultar.</string>
-    <string name="main_actions_descr">As ações principais contêm apenas 4 botões.</string>
+    <string name="reset_items_descr">Ocultar configurações redefine-as para o estado original.</string>
+    <string name="main_actions_descr">\'Ações principais\' contém apenas 4 botões.</string>
     <string name="main_actions">Principais ações</string>
-    <string name="additional_actions_descr">Você pode acessar essas ações tocando no botão \"Ações\".</string>
+    <string name="additional_actions_descr">Você pode acessar essas ações tocando no botão \"Ações adicionais\".</string>
     <string name="move_inside_category">Você pode mover itens somente dentro desta categoria.</string>
     <string name="developer_plugin">Plugin do desenvolvedor</string>
     <string name="shared_string_items">Itens</string>
@@ -3658,4 +3658,22 @@ Pôr do Sol: %2$s</string>
     <string name="custom_color">Cor customizada</string>
     <string name="extra_maps_menu_group">Mapas extras</string>
     <string name="download_unsupported_action">Ação não suportada %1$s</string>
+    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
+    <string name="osm_live_payment_subscription_management">Sua conta do Google Play é cobrada mediante a compra de uma assinatura
+\ne quando expirar (mês/três meses/ano),
+\nele não será renovado se for cancelado antes pelas configurações do Google Play.</string>
+    <string name="search_poi_types">Pesquisar tipos de POI</string>
+    <string name="search_poi_types_descr">Combine tipos de PIs de diferentes categorias. Toque em \"Alternar\" para selecionar todos, toque no lado esquerdo para selecionar a categoria.</string>
+    <string name="tracker_item">Rastreador do OsmAnd</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="quick_action_item">Ação rápida</string>
+    <string name="radius_ruler_item">Régua de raio</string>
+    <string name="measure_distance_item">Medir distância</string>
+    <string name="travel_item">Viagem (Wikivoyage e Wikipédia)</string>
+    <string name="map_markers_item">Marcadores de mapa</string>
+    <string name="favorites_item">Favoritos</string>
+    <string name="subscription_osmandlive_item">Assinatura - OsmAnd Live</string>
+    <string name="osmand_purchases_item">Compras de OsmAnd</string>
+    <string name="legend_item_description">O guia para a simbologia de um mapa</string>
+    <string name="navigation_profiles_item">Perfis de navegação</string>
 </resources>

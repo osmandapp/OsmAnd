@@ -43,6 +43,7 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
+import net.osmand.plus.wikipedia.WikipediaPoiMenu;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -60,11 +61,11 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	public static final org.apache.commons.logging.Log log = PlatformUtil.getLog(POIMapLayer.class);
 
-	private Paint paintIcon;
-
 	private Paint paintIconBackground;
 	private Bitmap poiBackground;
 	private Bitmap poiBackgroundSmall;
+	private PorterDuffColorFilter poiColorFilter;
+	private int poiSize;
 
 	private OsmandMapTileView view;
 
@@ -175,11 +176,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
 
-		paintIcon = new Paint();
-		//paintIcon.setStrokeWidth(1);
-		//paintIcon.setStyle(Style.STROKE);
-		//paintIcon.setColor(Color.BLUE);
-		paintIcon.setColorFilter(new PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN));
+		poiSize = dpToPx(view.getContext(), 16f);
+		poiColorFilter = new PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 		paintIconBackground = new Paint();
 		poiBackground = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_orange_poi_shield);
 		poiBackgroundSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_orange_poi_shield_small);
@@ -262,9 +260,14 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 								}
 							}
 							if (id != null) {
-								Bitmap bmp = RenderingIcons.getIcon(view.getContext(), id, false);
-								if (bmp != null) {
-									canvas.drawBitmap(bmp, x - bmp.getWidth() / 2, y - bmp.getHeight() / 2, paintIcon);
+								Drawable img = RenderingIcons.getDrawableIcon(view.getContext(), id, false);
+								if (img != null) {
+									canvas.save();
+									canvas.translate(x - poiSize / 2f, y - poiSize / 2f);
+									img.setBounds(0, 0, poiSize, poiSize);
+									img.setColorFilter(poiColorFilter);
+									img.draw(canvas);
+									canvas.restore();
 								}
 							}
 						}
@@ -354,16 +357,19 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof Amenity) {
 			Amenity a = (Amenity) o;
-			String preferredMapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
-			String preferredMapAppLang = preferredMapLang;
-			if (Algorithms.isEmpty(preferredMapAppLang)) {
-				preferredMapAppLang = app.getLanguage();
-			}
+			String preferredLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 			boolean transliterateNames = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
 
-			return new PointDescription(PointDescription.POINT_TYPE_POI, a.getName(
-					a.getType().isWiki() ? preferredMapAppLang : preferredMapLang,
-					transliterateNames));
+			if (a.getType().isWiki()) {
+				if (Algorithms.isEmpty(preferredLang)) {
+					preferredLang = app.getLanguage();
+				}
+				preferredLang = WikipediaPoiMenu.getWikiArticleLanguage(app,
+						a.getSupportedContentLocales(), preferredLang);
+			}
+
+			return new PointDescription(PointDescription.POINT_TYPE_POI,
+					a.getName(preferredLang, transliterateNames));
 		}
 		return null;
 	}

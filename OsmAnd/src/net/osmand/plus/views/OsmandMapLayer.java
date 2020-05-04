@@ -14,8 +14,8 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
-import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Pair;
 import android.view.MotionEvent;
@@ -170,7 +170,7 @@ public abstract class OsmandMapLayer {
 		private Bitmap arrowBitmap;
 		private Bitmap walkArrowBitmap;
 		private Bitmap anchorBitmap;
-		private Map<Pair<Integer, Bitmap>, Bitmap> stopBitmapsCache = new HashMap<>();
+		private Map<Pair<Integer, Drawable>, Bitmap> stopBitmapsCache = new HashMap<>();
 		private Map<Integer, Bitmap> stopSmallBitmapsCache = new HashMap<>();
 
 		public GeometryWayContext(Context ctx, float density) {
@@ -317,8 +317,8 @@ public abstract class OsmandMapLayer {
 			return anchorBitmap;
 		}
 
-		public Bitmap getStopShieldBitmap(int color, Bitmap stopBitmap) {
-			Bitmap bmp = stopBitmapsCache.get(new Pair<>(color, stopBitmap));
+		public Bitmap getStopShieldBitmap(int color, Drawable stopDrawable) {
+			Bitmap bmp = stopBitmapsCache.get(new Pair<>(color, stopDrawable));
 			if (bmp == null) {
 				int fillColor = UiUtilities.getContrastColor(getApp(), color, true);
 				int strokeColor = getStrokeColor(color);
@@ -344,15 +344,15 @@ public abstract class OsmandMapLayer {
 				paint.setStyle(Paint.Style.STROKE);
 				canvas.drawRoundRect(rect, routeShieldCornerRadius, routeShieldCornerRadius, paint);
 
-				if (stopBitmap != null) {
-					paint.setFilterBitmap(true);
-					paint.setColorFilter(new PorterDuffColorFilter(strokeColor, Mode.SRC_IN));
-					Rect src = new Rect(0, 0, stopBitmap.getWidth(), stopBitmap.getHeight());
+				if (stopDrawable != null) {
+					stopDrawable.setColorFilter(new PorterDuffColorFilter(strokeColor, Mode.SRC_IN));
 					float marginBitmap = 1f * density;
 					rect.inset(marginBitmap, marginBitmap);
-					canvas.drawBitmap(stopBitmap, src, rect, paint);
+					stopDrawable.setBounds(0, 0, (int) rect.width(), (int) rect.height());
+					canvas.translate(rect.left, rect.top);
+					stopDrawable.draw(canvas);
 				}
-				stopBitmapsCache.put(new Pair<>(color, stopBitmap), bmp);
+				stopBitmapsCache.put(new Pair<>(color, stopDrawable), bmp);
 			}
 			return bmp;
 		}
