@@ -12,6 +12,7 @@
 
 -->
     <string name="navigation_profiles_item">Navigation profiles</string>
+    <string name="legend_item_description">The guide to a map\'s symbology</string>
     <string name="osmand_purchases_item">OsmAnd purchases</string>
     <string name="subscription_osmandlive_item">Subscription - OsmAnd Live</string>
     <string name="favorites_item">Favorites</string>
@@ -24,9 +25,9 @@
     <string name="tracker_item">OsmAnd tracker</string>
     <string name="download_unsupported_action">Unsupported action %1$s</string>
     <string name="extra_maps_menu_group">Extra maps</string>
-    <string name="search_poi_types_descr">Combine POI types from different categories. Tap switch to select all, tap left side to category selection.</string>
-    <string name="search_poi_types">Search poi types</string>
-    <string name="osm_live_payment_subscription_management">Payment will be charged to your Google Play account at the confirmation of purchase.\n\nSubscription automatically renews unless it is canceled before the renewal date. Your account will be charged for renewal period(month/three month/year) only on the renewal date.\n\nYou can manage and cancel your subscriptions by going to your Google Play settings.</string>
+    <string name="search_poi_types_descr">Combine POI types from different categories. Tap \"Switch\" to select all, tap the left side for category selection.</string>
+    <string name="search_poi_types">Search for POI types</string>
+    <string name="osm_live_payment_subscription_management">Your Google Play account is charged upon purchase of a subscription\nand when it expires (month/three month/year),\nit will not renew itself if canceled before then from your Google Play settings.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="custom_color">Custom color</string>
     <string name="lang_lmo">Lombard</string>
@@ -57,16 +58,16 @@
     <string name="lang_zhminnan">Southern Min</string>
     <string name="lang_zhyue">Cantonese</string>
     <string name="some_articles_may_not_available_in_lang">Some Wikipedia articles may not be available in your language.</string>
-    <string name="select_wikipedia_article_langs">Select the languages ​​in which Wikipedia articles will appear on the map. You can switch between all available languages ​​while reading the article.</string>
+    <string name="select_wikipedia_article_langs">Select the languages ​​in which Wikipedia articles will appear on the map. You can switch between all available languages​​ while reading the article.</string>
     <string name="wiki_menu_download_descr">Additional maps are needed to view Wikipedia POIs on the map.</string>
     <string name="shared_string_all_languages">All languages</string>
     <string name="shared_string_language">Language</string>
     <string name="shared_string_languages">Languages</string>
     <string name="select_track_file">Select track file</string>
-    <string name="settings_item_import_error">Could not import %1$s.</string>
-    <string name="settings_item_write_error">Could not write %1$s.</string>
-    <string name="settings_item_read_error">Could not read %1$s.</string>
-    <string name="changes_applied_to_profile">Changes applied to %1$s profile.</string>
+    <string name="settings_item_import_error">Could not import from \'%1$s\'.</string>
+    <string name="settings_item_write_error">Could not write to \'%1$s\'.</string>
+    <string name="settings_item_read_error">Could not read from \'%1$s\'.</string>
+    <string name="changes_applied_to_profile">Changes applied to the \'%1$s\' profile.</string>
     <string name="shared_string_items">Items</string>
     <string name="custom_osmand_plugin">Custom OsmAnd plugin</string>
     <string name="app_mode_ski_snowmobile">Snowmobile</string>
@@ -74,11 +75,11 @@
     <string name="replace_point_descr">Replace another point with this</string>
     <string name="developer_plugin">Developer Plugin</string>
     <string name="move_inside_category">You can move items only inside this category.</string>
-    <string name="additional_actions_descr">You can access these actions by tapping the “Actions” button.</string>
+    <string name="additional_actions_descr">You can access these actions by tapping the \"Additional actions\" button.</string>
     <string name="main_actions">Main actions</string>
-    <string name="main_actions_descr">Main actions containt only 4 buttons.</string>
-    <string name="reset_items_descr">Settings will be reset to the original state after hiding.</string>
-    <string name="hidden_items_descr">These items are hidden from the menu, but the represented options or plugins will remain working.</string>
+    <string name="main_actions_descr">\'Main actions\' only contains 4 buttons.</string>
+    <string name="reset_items_descr">Hiding settings resets them to their original state.</string>
+    <string name="hidden_items_descr">These items are hidden from the menu, but the represented options or plugins will continue to work.</string>
     <string name="shared_string_hidden">Hidden</string>
     <string name="divider_descr">Elements below this point separated by a divider.</string>
     <string name="shared_string_divider">Divider</string>
@@ -87,7 +88,7 @@
     <string name="shared_string_drawer">Drawer</string>
     <string name="ui_customization">UI Customization</string>
     <string name="ui_customization_short_descr">Drawer items, context menu</string>
-    <string name="ui_customization_description">Customize the quantity of items in Drawer, Configure map and context menu.\n\nYou can disable unused plugins, to hide all its controls from the application %1$s.</string>
+    <string name="ui_customization_description">Customize the quantity of items in Drawer, configure the map and context menu.\n\nYou can turn off unused plugins, to hide all their controls from the app %1$s.</string>
     <string name="shared_string_min">Min</string>
     <string name="shared_string_square">Square</string>
     <string name="shared_string_octagon">Octagon</string>
@@ -112,10 +113,10 @@
     <string name="profile_backup_failed">Could not back up profile.</string>
     <string name="importing_from">Importing data from %1$s</string>
     <string name="shared_string_importing">Importing</string>
-    <string name="checking_for_duplicate_description">OsmAnd check %1$s for duplicates with existing items in the application.\n\nIt may take some time.</string>
+    <string name="checking_for_duplicate_description">OsmAnd check %1$s for duplicates with existing items in the app.\n\nIt may take some time.</string>
     <string name="items_added">Items added</string>
     <string name="shared_string_import_complete">Import complete</string>
-    <string name="import_complete_description">All data from the %1$s is imported, you can use buttons below to open needed part of the application to manage it.</string>
+    <string name="import_complete_description">All data from the %1$s is imported, you can use buttons below to open needed part of the app to manage it.</string>
     <string name="shared_string_hillshade">Hillshade</string>
     <string name="terrain_empty_state_text">Enable to view hillshade or slope map. You can read more about this map types on our site</string>
     <string name="shared_string_legend">Legend</string>
@@ -152,7 +153,7 @@
     <string name="no_recalculation_setting">Disable recalculation</string>
     <string name="open_settings">Open settings</string>
     <string name="plugin_disabled">Plugin disabled</string>
-    <string name="plugin_disabled_descr">This plugin is a separate application, you will need to remove it separately if you no longer plan to use it.\n\nThe plugin will remain on the device after removing OsmAnd.</string>
+    <string name="plugin_disabled_descr">This plugin is a separate app, you will need to remove it separately if you no longer plan to use it.\n\nThe plugin will remain on the device after removing OsmAnd.</string>
     <string name="shared_string_menu">Menu</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="route_recalculation_dist_title">Minimal distance to recalculate route</string>
@@ -195,7 +196,7 @@
     <string name="import_profile_dialog_description">The imported profile contains additional data. Click Import to import only profile data or select additional data to import.</string>
     <string name="export_profile_dialog_description">You can select additional data to export along with the profile.</string>
     <string name="permission_is_required">Permission is required to use this option.</string>
-    <string name="logcat_buffer_descr">Check and share detailed logs of the application</string>
+    <string name="logcat_buffer_descr">Check and share detailed logs of the app</string>
     <string name="file_does_not_contain_routing_rules">No routing rules in \'%1$s\'. Please choose another file.</string>
     <string name="not_support_file_type_with_ext">Select a supported %1$s extension file instead.</string>
     <string name="monitoring_min_speed_descr">This is a low-speed cut-off filter to not record points below a certain speed. This may make recorded tracks look "smoother" when viewed on the map.</string>

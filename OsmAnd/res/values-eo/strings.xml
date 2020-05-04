@@ -1923,9 +1923,9 @@ Lon: %2$s</string>
     <string name="first_usage_item">Unua uzo</string>
     <string name="first_usage_item_description">Kiel elŝuti mapojn, bazaj agordoj.</string>
     <string name="navigation_item_description">Navigadaj agordoj.</string>
-    <string name="planning_trip_item">Planado de vojaĝo</string>
-    <string name="map_viewing_item">Map-foliumado</string>
-    <string name="search_on_the_map_item">Serĉado en mapo</string>
+    <string name="planning_trip_item">Plani vojaĝon</string>
+    <string name="map_viewing_item">Foliumi mapon</string>
+    <string name="search_on_the_map_item">Serĉi en la mapo</string>
     <string name="instalation_troubleshooting_item">Instalado kaj problemoj</string>
     <string name="techical_articles_item">Teĥnikaj artikoloj</string>
     <string name="versions_item">Versioj</string>
@@ -3596,18 +3596,18 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="app_mode_ski_snowmobile">Motorsledo</string>
     <string name="custom_osmand_plugin">Propra OsmAnd-kromprogramo</string>
     <string name="replace_point_descr">Anstataŭigi alian punkton per tiu ĉi</string>
-    <string name="changes_applied_to_profile">Aplikis ŝanĝojn al la profilo %1$s.</string>
-    <string name="settings_item_read_error">Ne povas legi %1$s.</string>
-    <string name="settings_item_write_error">Ne povas skribi %1$s.</string>
-    <string name="settings_item_import_error">Ne povas enporti %1$s.</string>
+    <string name="changes_applied_to_profile">Aplikis ŝanĝojn al la profilo “%1$s”.</string>
+    <string name="settings_item_read_error">Ne povas legi el “%1$s”.</string>
+    <string name="settings_item_write_error">Ne povas skribi al “%1%s”.</string>
+    <string name="settings_item_import_error">Ne povas enporti el “%1$s”.</string>
     <string name="select_track_file">Elekti dosieron de spuro</string>
     <string name="shared_string_languages">Lingvoj</string>
     <string name="shared_string_language">Lingvo</string>
     <string name="shared_string_all_languages">Ĉiuj lingvoj</string>
     <string name="wiki_menu_download_descr">Kromaj mapoj estas necesaj por vidigi punktojn de Vikipedio sur la mapo.</string>
-    <string name="main_actions_descr">Ĉefaj agoj povas enhavi nur 4 butonojn.</string>
+    <string name="main_actions_descr">La “ĉefaj agoj” povas enhavi nur 4 butonojn.</string>
     <string name="main_actions">Ĉefaj agoj</string>
-    <string name="additional_actions_descr">Vi povas aliri tiujn ĉi agojn per la butono “agoj”.</string>
+    <string name="additional_actions_descr">Vi povas aliri tiujn ĉi agojn per la butono “pliaj agoj”.</string>
     <string name="move_inside_category">Vi povas movi elementojn nur ene tiu ĉi kategorio.</string>
     <string name="developer_plugin">Programista kromprogramo</string>
     <string name="shared_string_items">Elementoj</string>
@@ -3623,7 +3623,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="divider_descr">La jenaj elementoj troviĝos en la menuo sub la horizontala linio.</string>
     <string name="hidden_items_descr">La jenaj elementoj estas kaŝitaj el la menuo, sed la rilataj eblaĵoj kaj kromprogramoj plue funkcios.</string>
     <string name="shared_string_hidden">Kaŝitaj</string>
-    <string name="reset_items_descr">Agordoj restarigos al la implicitaj valoroj post kaŝiĝo.</string>
+    <string name="reset_items_descr">Per kaŝi agordojn, ili revenos al la implicitaj valoroj.</string>
     <string name="select_wikipedia_article_langs">Elektu lingvojn, en kiuj artikoloj de Vikipedio montriĝos sur la mapo. Vi povos baskuli inter ĉiuj disponeblaj lingvoj dum legi artikolon.</string>
     <string name="some_articles_may_not_available_in_lang">Iuj artikoloj de Vikipedio povas ne esti disponeblaj en via lingvo.</string>
     <string name="lang_zhyue">Kantona</string>
@@ -3657,11 +3657,19 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="extra_maps_menu_group">Kromaj mapoj</string>
     <string name="download_unsupported_action">Nesubtenata ago %1$s</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="osm_live_payment_subscription_management">Pago estos prenita per via konto Google Play post konfirmi aĉeton.
-\n
-\nLa abono aŭtomate renoviĝos escepte se ĝi estos nuligita antaŭ la dato de renoviĝo. La abonpago estos prenita por la specifa periodo (monato/tri monatoj/jaro) nur je la dato de renoviĝo.
-\n
-\nVi povas administri kaj rezigni la abonon en agordoj de Google Play.</string>
+    <string name="osm_live_payment_subscription_management">La pago estos prenita el via konto Google Play kiam aĉeti abonon kaj kiam ĝi malvalidiĝos (por monato/tri monatoj/jaro), kaj ne renoviĝos aŭtomate post esti rezignita per agordoj de Google Play.</string>
     <string name="search_poi_types_descr">Miksi specojn de interesejoj el diversaj kategorioj. Frapetu “ŝaltilon” por elekti ĉiujn, frapetu ĉe maldekstre por elekti el la kategorio.</string>
     <string name="search_poi_types">Serĉi specojn de interesejoj</string>
+    <string name="favorites_item">Ŝatataj ejoj</string>
+    <string name="subscription_osmandlive_item">Aboni OsmAnd Live</string>
+    <string name="osmand_purchases_item">Aĉeti OsmAnd</string>
+    <string name="tracker_item">Enreta spurilo</string>
+    <string name="quick_action_item">Butono de rapida ago</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="radius_ruler_item">Radius‑mezurilo</string>
+    <string name="measure_distance_item">Distanc-mezurilo</string>
+    <string name="travel_item">Vojaĝo (Vikivojaĝoj kaj Vikipedio)</string>
+    <string name="map_markers_item">Map‑markoj</string>
+    <string name="legend_item_description">Priskribo al simboloj sur la mapo</string>
+    <string name="navigation_profiles_item">Profiloj de navigo</string>
 </resources>

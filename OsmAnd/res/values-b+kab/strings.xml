@@ -1298,4 +1298,12 @@
     <string name="si_min_km">Tisdatin deg ukilumitr</string>
     <string name="nm">nmi</string>
     <string name="foot">ft</string>
+    <string name="osm_editing_plugin_description">Ttekki deg OpenStreetMap (OSM) srid seg usnas OSMAnd. Amedya: rnu neɣ beddel agazen yelhan n OSM, rnu neɣ beddel tizmilin OSM sakin azen iberdan-ik GPX (aya ilaq umiḍan OSM). OpenStreetMap d tarbaɛt yeldin, tamaḍalant n tkarḍa tazayazt.</string>
+    <string name="osm_settings">Taẓrigt OpenStreetMap</string>
+    <string name="osmand_accessibility_description">Rmed, deg OsmAnd, iɣewwaren n tuffart n yibenk-ik (ṣeggem arured n taɣect-ik n uɛqal n taɣect, seqdec tignit trackball i usemɣer neɣ i urmad n yilɣa s taɣect n wadig-ik).</string>
+    <string name="travel_item">Asikel (Wikivoyage d Wikipedia)</string>
+    <string name="favorites_item">Inurifen</string>
+    <string name="subscription_osmandlive_item">Ajerred - OsmAnd Srid</string>
+    <string name="osmand_purchases_item">Tiɣin deg OsmAnd</string>
+    <string name="navigation_profiles_item">Imuɣna n tunigin</string>
 </resources>

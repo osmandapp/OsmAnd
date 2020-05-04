@@ -100,7 +100,7 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 		contextMenuAdapter.addItem(createItem(R.string.faq_item,
 				R.string.faq_item_description, "feature_articles/faq.html"));
 		contextMenuAdapter.addItem(createItem(R.string.map_legend,
-				R.string.faq_item_description, "feature_articles/map-legend.html"));
+				R.string.legend_item_description, "feature_articles/map-legend.html"));
 	}
 
 	private void createSocialNetworksItems(ContextMenuAdapter contextMenuAdapter) {

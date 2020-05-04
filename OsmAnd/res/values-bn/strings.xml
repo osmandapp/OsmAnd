@@ -21,4 +21,7 @@
     <string name="recalc_angle_dialog_title">আমার অবস্থান ও গন্তব্য এর মধ্যকার সর্বনিম্ন কোন</string>
     <string name="shared_string_preparing">তৈরী করা হচ্ছে</string>
     <string name="shared_string_nothing_selected">কিছু নির্বাচন করা হয়নি</string>
+    <string name="osmand_purchases_item">ওএসএমও কেনাকাটা</string>
+    <string name="legend_item_description">একটি মানচিত্রের প্রতীকের জন্য গাইড</string>
+    <string name="navigation_profiles_item">ন্যাভিগেশন প্রোফাইল</string>
 </resources>

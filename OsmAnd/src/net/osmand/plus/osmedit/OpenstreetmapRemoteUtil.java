@@ -467,6 +467,9 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				if (entity != null) {
 					if (!isWay && entity instanceof Node) {
 						// check whether this is node (because id of node could be the same as relation)
+						if (object instanceof NativeLibrary.RenderedObject && object.getLocation() == null) {
+							object.setLocation(((NativeLibrary.RenderedObject) object).getLabelLatLon());
+						}
 						if (MapUtils.getDistance(entity.getLatLon(), object.getLocation()) < 50) {
 							if (object instanceof Amenity) {
 								return replaceEditOsmTags((Amenity) object, entity);

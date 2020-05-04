@@ -92,7 +92,7 @@ public class SQLiteTileSource implements ITileSource {
 
 	public SQLiteTileSource(OsmandApplication ctx, String name, int minZoom, int maxZoom, String urlTemplate,
 							String randoms, boolean isEllipsoid, boolean invertedY, String referer,
-							boolean timeSupported, long expirationTimeMillis, boolean inversiveZoom) {
+							boolean timeSupported, long expirationTimeMillis, boolean inversiveZoom, String rule) {
 		this.ctx = ctx;
 		this.name = name;
 		this.urlTemplate = urlTemplate;
@@ -102,6 +102,7 @@ public class SQLiteTileSource implements ITileSource {
 		this.expirationTimeMillis = expirationTimeMillis;
 		this.randoms = randoms;
 		this.referer = referer;
+		this.rule = rule;
 		this.invertedY = invertedY;
 		this.timeSupported = timeSupported;
 		this.inversiveZoom = inversiveZoom;

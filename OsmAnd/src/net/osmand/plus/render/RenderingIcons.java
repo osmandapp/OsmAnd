@@ -1,17 +1,5 @@
 package net.osmand.plus.render;
 
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.lang.reflect.Field;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import net.osmand.PlatformUtil;
-import net.osmand.plus.R;
-import net.osmand.plus.R.drawable;
-
-import org.apache.commons.logging.Log;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -23,6 +11,18 @@ import android.os.Build;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
+import net.osmand.PlatformUtil;
+import net.osmand.plus.R;
+import net.osmand.plus.R.drawable;
+
+import org.apache.commons.logging.Log;
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.lang.reflect.Field;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class RenderingIcons {
 	private static final Log log = PlatformUtil.getLog(RenderingIcons.class);
 	
@@ -30,6 +30,7 @@ public class RenderingIcons {
 	private static Map<String, Integer> smallIcons = new LinkedHashMap<String, Integer>();
 	private static Map<String, Integer> bigIcons = new LinkedHashMap<String, Integer>();
 	private static Map<String, Bitmap> iconsBmp = new LinkedHashMap<String, Bitmap>();
+	private static Map<String, Drawable> iconsDrawable = new LinkedHashMap<String, Drawable>();
 //	private static DisplayMetrics dm;
 
 	private static Bitmap cacheBmp = null;
@@ -42,9 +43,11 @@ public class RenderingIcons {
 		return bigIcons.containsKey(s);
 	}
 
-
-	public static synchronized byte[] getBitmapFromVectorDrawable(Context context, int drawableId) {
+	public static synchronized Bitmap getBitmapFromVectorDrawable(Context context, int drawableId) {
 		Drawable drawable = ContextCompat.getDrawable(context, drawableId);
+		if (drawable == null) {
+			return null;
+		}
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
 			drawable = (DrawableCompat.wrap(drawable)).mutate();
 		}
@@ -57,20 +60,27 @@ public class RenderingIcons {
 		Canvas canvas = new Canvas(cacheBmp);
 		drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
 		drawable.draw(canvas);
+		return cacheBmp;
+	}
 
+	private static synchronized byte[] getPngFromVectorDrawable(Context context, int drawableId) {
+		Bitmap bmp = getBitmapFromVectorDrawable(context, drawableId);
+		if (bmp == null) {
+			return null;
+		}
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		cacheBmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
+		bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
 		return baos.toByteArray();
 	}
 	
 	public static byte[] getIconRawData(Context ctx, String s) {
 		Integer resId = shaderIcons.get(s);
-		if(resId == null) {
+		if (resId == null) {
 			 resId = smallIcons.get(s);
 		}
-		if(resId == null)
+		if (resId == null) {
 			return null;
-			
+		}
 		try {
 			final InputStream inputStream = ctx.getResources().openRawResource(resId.intValue());
 			final ByteArrayOutputStream proxyOutputStream = new ByteArrayOutputStream(1024);
@@ -82,7 +92,7 @@ public class RenderingIcons {
 			inputStream.close();
 			final byte[] bitmapData = proxyOutputStream.toByteArray();
 			if (isVectorData(bitmapData)) {
-				return getBitmapFromVectorDrawable(ctx, resId.intValue());
+				return getPngFromVectorDrawable(ctx, resId.intValue());
 			}
 //			log.info("Icon data length is " + bitmapData.length); //$NON-NLS-1$
 //			Bitmap dm = android.graphics.BitmapFactory.decodeByteArray(bitmapData, 0, bitmapData.length) ;
@@ -128,7 +138,13 @@ public class RenderingIcons {
 		}
 		return null;
 	}
-	
+
+	/**
+	 * Return vector icon as bitmap. Used for java rendering only.
+	 *
+	 * @deprecated Use getDrawableIcon instead.
+	 */
+	@Deprecated
 	public static Bitmap getIcon(Context ctx, String s, boolean includeShader) {
 		if(s == null) {
 			return null;
@@ -139,7 +155,7 @@ public class RenderingIcons {
 		if (!iconsBmp.containsKey(s)) {
 			Integer resId = s.startsWith("h_") ? shaderIcons.get(s.substring(2)) : smallIcons.get(s);
 			if (resId != null) {
-				Bitmap bmp = BitmapFactory.decodeResource(ctx.getResources(), resId, null);
+				Bitmap bmp = getBitmapFromVectorDrawable(ctx, resId);
 				iconsBmp.put(s, bmp);
 			} else {
 				iconsBmp.put(s, null);
@@ -147,7 +163,29 @@ public class RenderingIcons {
 		}
 		return iconsBmp.get(s);
 	}
-	
+
+	public static Drawable getDrawableIcon(Context ctx, String s, boolean includeShader) {
+		if (s == null) {
+			return null;
+		}
+		if (includeShader && shaderIcons.containsKey(s)) {
+			s = "h_" + s;
+		}
+		Drawable d = iconsDrawable.get(s);
+		if (d == null) {
+			Integer drawableId = s.startsWith("h_") ? shaderIcons.get(s.substring(2)) : smallIcons.get(s);
+			if (drawableId != null) {
+				d = ContextCompat.getDrawable(ctx, drawableId);
+				if (d != null) {
+					d = DrawableCompat.wrap(d);
+					d.mutate();
+					iconsDrawable.put(s, d);
+				}
+			}
+		}
+		return d;
+	}
+
 	public static Integer getResId(String id) {
 		return id.startsWith("h_") ? shaderIcons.get(id.substring(2)) : smallIcons.get(id);
 	}

@@ -59,6 +59,7 @@ import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.render.OsmandRenderer;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.render.TextRenderer;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.ShowAlongTheRouteBottomSheet;
@@ -1130,7 +1131,6 @@ public class MapInfoWidgetsFactory {
 		}
 
 		private boolean setRoadShield(ImageView view, RouteDataObject object) {
-
 			String nameTag = null;
 			String name = null;
 			StringBuilder additional = new StringBuilder();
@@ -1144,7 +1144,6 @@ public class MapInfoWidgetsFactory {
 					additional.append(key).append("=").append(val).append(";");
 				}
 			}
-//			LOG.debug("Additionals (names): " + additional.toString() );
 
 			Context context = topBar.getContext();
 			int[] tps = object.getTypes();
@@ -1197,13 +1196,13 @@ public class MapInfoWidgetsFactory {
 			}
 
 			if (shieldRes != -1) {
-				float xSize;
-				float ySize;
-				Bitmap shield;
-				shield = BitmapFactory.decodeResource(app.getResources(), shieldRes);
-				ySize = shield.getHeight();
-				xSize = shield.getWidth();
-				float xyRatio = xSize/ySize;
+				Drawable shield = ContextCompat.getDrawable(view.getContext(), shieldRes);
+				if (shield == null) {
+					return false;
+				}
+				float xSize = shield.getIntrinsicWidth();
+				float ySize = shield.getIntrinsicHeight();
+				float xyRatio = xSize / ySize;
 				//setting view propotions (height is fixed by toolbar size - 48dp);
 				int viewHeightPx = AndroidUtils.dpToPx(context, 48);
 				int viewWidthPx = (int) (viewHeightPx * xyRatio);
@@ -1215,9 +1214,9 @@ public class MapInfoWidgetsFactory {
 				//creating bitmap according to size of resource
 				Bitmap bitmap = Bitmap.createBitmap((int) xSize, (int) ySize, Bitmap.Config.ARGB_8888);
 				Canvas canvas = new Canvas(bitmap);
-				text.fillProperties(rc, rreq, xSize/2, ySize/2 - p.getFontMetrics().ascent/2f);
+				text.fillProperties(rc, rreq, xSize / 2f, ySize / 2f - p.getFontMetrics().ascent / 2f);
 				textRenderer.drawShieldIcon(rc, canvas, text, text.getShieldResIcon());
-				textRenderer.drawWrappedText(canvas, text, 20);
+				textRenderer.drawWrappedText(canvas, text, 20f);
 
 				view.setImageBitmap(bitmap);
 				return true;
