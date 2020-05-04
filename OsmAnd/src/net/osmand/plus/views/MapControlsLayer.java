@@ -821,7 +821,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 		ApplicationMode appMode = settings.getApplicationMode();
 		layersHud.setIconColorId(appMode.getIconColorInfo().getColor(isNight));
-		if (layersHud.setIconResId(appMode.getMapIconRes())) {
+		if (layersHud.setIconResId(appMode.getIconRes())) {
 			layersHud.update(app, isNight);
 		}
 		layersHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && !isInMeasurementToolMode() && !isInPlanRouteMode()
@@ -1162,20 +1162,18 @@ public class MapControlsLayer extends OsmandMapLayer {
 			} else if (resId != 0) {
 				d = ctx.getUIUtilities().getIcon(resId, nightMode ? resClrDark : resClrLight);
 			}
-
 			if (iv instanceof ImageView) {
-				int iconSize = (int) ctx.getResources().getDimension(R.dimen.standard_icon_size);
-				Bitmap bitmap = Bitmap.createBitmap(iconSize, iconSize, Bitmap.Config.ARGB_8888);
-				if (d != null) {
-					bitmap = Bitmap.createBitmap(iconSize, iconSize, Bitmap.Config.ARGB_8888);
-					Canvas canvas = new Canvas(bitmap);
-					canvas.drawColor(0, PorterDuff.Mode.CLEAR);
-					d.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-					d.draw(canvas);
-				}
 				if (compass) {
 					((ImageView) iv).setImageDrawable(new CompassDrawable(d));
 				} else {
+					int iconSize = (int) ctx.getResources().getDimension(R.dimen.standard_icon_size);
+					Bitmap bitmap = Bitmap.createBitmap(iconSize, iconSize, Bitmap.Config.ARGB_8888);
+					Canvas canvas = new Canvas(bitmap);
+					canvas.drawColor(0, PorterDuff.Mode.CLEAR);
+					if (d != null) {
+						d.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+						d.draw(canvas);
+					}
 					((ImageView) iv).setImageDrawable(new BitmapDrawable(ctx.getResources(), bitmap));
 				}
 			} else if (iv instanceof TextView) {
@@ -1183,7 +1181,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 						d, null, null, null);
 			}
 		}
-
 	}
 
 	private String getZoomLevel(@NonNull RotatedTileBox tb) {

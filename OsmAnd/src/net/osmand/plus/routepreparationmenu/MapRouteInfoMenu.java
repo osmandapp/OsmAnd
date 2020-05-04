@@ -2292,7 +2292,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				case ROUTE_INFO:
 					return 0;
 				case ROUTE_DETAILS:
-					return app != null ? app.getRoutingHelper().getAppMode().getMapIconRes() : R.drawable.map_directions;
+					return app != null ? app.getRoutingHelper().getAppMode().getIconRes() : R.drawable.map_directions;
 				default:
 					return 0;
 			}
