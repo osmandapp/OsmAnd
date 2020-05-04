@@ -104,6 +104,8 @@ public class AppInitializer implements IProgress {
 	public static final int VERSION_3_5 = 35;
 	// 36 - 3.6
 	public static final int VERSION_3_6 = 36;
+	// 37 - 3.7
+	public static final int VERSION_3_7 = 37;
 
 
 	public static final boolean TIPS_AND_TRICKS = false;
@@ -225,6 +227,10 @@ public class AppInitializer implements IProgress {
 			if (prevAppVersion < VERSION_3_6) {
 				app.getSettings().migratePreferences();
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_6).commit();
+			}
+			if (prevAppVersion < VERSION_3_7) {
+				app.getSettings().migrateEnumPreferences();
+				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_7).commit();
 			}
 			startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
 			appVersionChanged = true;
