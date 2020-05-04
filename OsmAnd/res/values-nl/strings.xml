@@ -2270,10 +2270,9 @@ voor Gebied: %1$s x %2$s</string>
     <string name="routing_attr_allow_private_description">Ga ook over privé-terreinen.</string>
     <string name="display_zoom_level">Zoomniveau weergave: %1$s</string>
     <string name="route_is_too_long_v2">Voor grote afstanden: voeg tussenpunten toe als binnen de 10 minuten geen route berekend is.</string>
-    <string name="osmand_extended_description_part1">OsmAnd (OSM, Automated Navigation Directions) is een kaart- en navigatieprogramma dat de gratis, wereldwijde en gedetailleerde OpenStreetMap (OSM) data gebruikt. 
-\n
-\n
-\nGebruikt visuele en gesproken navigatie, toont POI\'s (point of interest), maakt en volgt GPX-tracks, toont hoogtelijnen en hoogte informatie (via plug-in), kiest tussen auto, fiets, wandelen of andere, je kan de OSM-kaart bewerken en nog veel meer.</string>
+    <string name="osmand_extended_description_part1">"OsmAnd (OSM, Automated Navigation Directions) is een kaart- en navigatieprogramma dat de gratis, wereldwijde en gedetailleerde OpenStreetMap (OSM) data gebruikt. 
+\n  
+\nGebruikt visuele en gesproken navigatie, toont POI\'s (point of interest), maakt en volgt GPX-tracks, toont hoogtelijnen en hoogte informatie (via plug-in), kiest tussen auto, fiets, wandelen of andere, je kan de OSM-kaart bewerken en nog veel meer."</string>
     <string name="osmand_extended_description_part2">"
  GPS-navigatie
 • Offline (geen datakosten) of online (snellere) routeberekening
@@ -2565,7 +2564,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="daily_map_updates">Kaartupdates: Elk uur</string>
     <string name="in_app_purchase">In-app aankoop</string>
     <string name="in_app_purchase_desc">Eenmalige betaling</string>
-    <string name="in_app_purchase_desc_ex">"Eens aangekocht,  kun je het permanent blijven gebruiken."</string>
+    <string name="in_app_purchase_desc_ex">Eens aangekocht, kun je het permanent blijven gebruiken.</string>
     <string name="purchase_unlim_title">%1$s Kopen</string>
     <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Onbeperkte downloads</string>
@@ -3371,9 +3370,9 @@ voor Gebied: %1$s x %2$s</string>
     <string name="please_provide_profile_name_message">Kies een naam voor het profiel</string>
     <string name="open_settings">Open instellingen</string>
     <string name="plugin_disabled">Plugin uitgeschakeld</string>
-    <string name="plugin_disabled_descr">Deze plugin is een afzonderlijke App. Je zal die afzonderlijk dienen te verwijderen als je die niet meer nodig denkt te hebben.
-\n
-\nDe plugin blijft op je toestel bij het verwijderen van OsmAnd.</string>
+    <string name="plugin_disabled_descr">"Deze plug-in is een afzonderlijke App,  je zal die afzonderlijk dienen te verwijderen als je die niet meer nodig denkt te hebben. 
+\n 
+\nDe plug-in blijft op je toestel bij het verwijderen van OsmAnd."</string>
     <string name="shared_string_menu">Menu</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Routering</string>
@@ -3423,4 +3422,19 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_circle">cirkel</string>
     <string name="shared_string_rhomb">Ruit</string>
     <string name="shared_string_min">Min</string>
+    <string name="search_poi_types_descr">Combineer POI-types uit verschillende categorieën. Tik op \"Schakelen\" om alles te selecteren, tik op de linkerkant voor de categoriekeuze.</string>
+    <string name="extra_maps_menu_group">Extra kaarten</string>
+    <string name="download_unsupported_action">Niet ondersteunde actie %1$s</string>
+    <string name="tracker_item">OsmAnd zoeker</string>
+    <string name="mapillary_item">OsmAnd &amp; Mapillary</string>
+    <string name="quick_action_item">Snelle actie</string>
+    <string name="radius_ruler_item">Radius liniaal</string>
+    <string name="measure_distance_item">Afstand meten</string>
+    <string name="travel_item">Reizen (Wikivoyage en Wikipedia)</string>
+    <string name="map_markers_item">Markeervlaggetjes</string>
+    <string name="favorites_item">Favorieten</string>
+    <string name="subscription_osmandlive_item">Abonnement - OsmAnd Live</string>
+    <string name="osmand_purchases_item">OsmAnd aankopen</string>
+    <string name="legend_item_description">De gids voor de kaartsymbolen</string>
+    <string name="navigation_profiles_item">Navigatieprofielen</string>
 </resources>
