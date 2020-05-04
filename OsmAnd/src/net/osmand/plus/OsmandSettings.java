@@ -259,6 +259,7 @@ public class OsmandSettings {
 	}
 
 	public void migratePreferences() {
+		migrateEnumPreferences();
 		SharedPreferences globalSharedPreferences = (SharedPreferences) globalPreferences;
 		Map<String, ?> globalPrefsMap = globalSharedPreferences.getAll();
 		for (String key : globalPrefsMap.keySet()) {
@@ -317,25 +318,24 @@ public class OsmandSettings {
 			if (pref instanceof EnumStringPreference) {
 				EnumStringPreference enumPref = (EnumStringPreference) pref;
 				if (enumPref.isGlobal()) {
-					migrateEnumPref(enumPref, globalPreferences);
+					migrateEnumPref(enumPref, (SharedPreferences) globalPreferences);
 				} else {
 					for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-						migrateEnumPref(enumPref, getProfilePreferences(mode));
+						migrateEnumPref(enumPref, (SharedPreferences) getProfilePreferences(mode));
 					}
 				}
 			}
 		}
 	}
 
-	private void migrateEnumPref(EnumStringPreference enumPref, Object prefs) {
-		try {
-			int enumIndex = settingsAPI.getInt(prefs, enumPref.getId(), -1);
+	private void migrateEnumPref(EnumStringPreference enumPref, SharedPreferences sharedPreferences) {
+		Object value = sharedPreferences.getAll().get(enumPref.getId());
+		if (value instanceof Integer) {
+			int enumIndex = (int) value;
 			if (enumIndex >= 0 && enumIndex < enumPref.values.length) {
 				Enum savedValue = enumPref.values[enumIndex];
-				enumPref.setValue(prefs, savedValue);
+				enumPref.setValue(sharedPreferences, savedValue);
 			}
-		} catch (ClassCastException ex) {
-			LOG.error(ex);
 		}
 	}
 
