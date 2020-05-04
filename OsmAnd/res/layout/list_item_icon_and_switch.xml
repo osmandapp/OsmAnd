@@ -4,20 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/bg_color"
-    android:minHeight="60dp"
+    android:minHeight="@dimen/setting_profile_item_height"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:minHeight="60dp"
+        android:minHeight="@dimen/setting_profile_item_height"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/standard_icon_size"
+            android:layout_height="@dimen/standard_icon_size"
             android:layout_marginStart="@dimen/content_padding"
             android:layout_marginLeft="@dimen/content_padding"
             tools:src="@drawable/ic_action_gabout_dark" />

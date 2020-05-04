@@ -397,7 +397,7 @@
                         android:background="?attr/selectableItemBackground"
                         android:contentDescription="@string/shared_string_close"
                         android:scaleType="center"
-                        tools:src="@drawable/map_action_cancel"/>
+	                    tools:src="@drawable/ic_action_close" />
 
                 </LinearLayout>
 

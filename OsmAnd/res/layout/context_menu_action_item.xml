@@ -12,10 +12,9 @@
 
 	<ImageView
 		android:id="@+id/icon"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginBottom="@dimen/context_menu_main_actions_icon_margin"
-		android:scaleType="center" />
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_marginBottom="@dimen/context_menu_main_actions_icon_margin" />
 
 	<net.osmand.plus.widgets.TextViewEx
 		android:id="@+id/text"

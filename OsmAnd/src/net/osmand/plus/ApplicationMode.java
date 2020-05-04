@@ -64,7 +64,7 @@ public class ApplicationMode {
 
 	private ApplicationMode parentAppMode;
 	private int iconRes = R.drawable.ic_world_globe_dark;
-	private int iconMapRes = R.drawable.map_world_globe_dark;
+	private int iconMapRes = R.drawable.ic_world_globe_dark;
 
 	private int minDistanceForTurn = 50;
 	private int arrivalDistance = 90;
@@ -80,40 +80,40 @@ public class ApplicationMode {
 	 */
 	public static final ApplicationMode DEFAULT = createBase(R.string.app_mode_default, "default")
 			.distanceForTurn(5).arrivalDistance(90)
-			.icon(R.drawable.ic_world_globe_dark, R.drawable.map_world_globe_dark).reg();
+			.icon(R.drawable.ic_world_globe_dark, R.drawable.ic_world_globe_dark).reg();
 
 	public static final ApplicationMode CAR = createBase(R.string.app_mode_car, "car")
 			.distanceForTurn(35)
-			.icon(R.drawable.ic_action_car_dark, R.drawable.map_action_car_dark)
+			.icon(R.drawable.ic_action_car_dark, R.drawable.ic_action_car_dark)
 			.description(R.string.base_profile_descr_car).reg();
 
 	public static final ApplicationMode BICYCLE = createBase(R.string.app_mode_bicycle, "bicycle")
 			.distanceForTurn(15).arrivalDistance(60).offRouteDistance(50)
-			.icon(R.drawable.ic_action_bicycle_dark, R.drawable.map_action_bicycle_dark)
+			.icon(R.drawable.ic_action_bicycle_dark, R.drawable.ic_action_bicycle_dark)
 			.description(R.string.base_profile_descr_bicycle).reg();
 
 	public static final ApplicationMode PEDESTRIAN = createBase(R.string.app_mode_pedestrian, "pedestrian")
 			.distanceForTurn(5).arrivalDistance(45).offRouteDistance(20)
-			.icon(R.drawable.ic_action_pedestrian_dark, R.drawable.map_action_pedestrian_dark)
+			.icon(R.drawable.ic_action_pedestrian_dark, R.drawable.ic_action_pedestrian_dark)
 			.description(R.string.base_profile_descr_pedestrian).reg();
 
 	public static final ApplicationMode PUBLIC_TRANSPORT = createBase(R.string.app_mode_public_transport, "public_transport")
-			.icon(R.drawable.ic_action_bus_dark, R.drawable.map_action_bus_dark)
+			.icon(R.drawable.ic_action_bus_dark, R.drawable.ic_action_bus_dark)
 			.description(R.string.base_profile_descr_public_transport).reg();
 
 	public static final ApplicationMode BOAT = createBase(R.string.app_mode_boat, "boat")
 			.distanceForTurn(20)
-			.icon(R.drawable.ic_action_sail_boat_dark, R.drawable.map_action_sail_boat_dark)
+			.icon(R.drawable.ic_action_sail_boat_dark, R.drawable.ic_action_sail_boat_dark)
 			.description(R.string.base_profile_descr_boat).reg();
 
 	public static final ApplicationMode AIRCRAFT = createBase(R.string.app_mode_aircraft, "aircraft")
 			.distanceForTurn(100)
-			.icon(R.drawable.ic_action_aircraft, R.drawable.map_action_aircraft)
+			.icon(R.drawable.ic_action_aircraft, R.drawable.ic_action_aircraft)
 			.description(R.string.base_profile_descr_aircraft).reg();
 
 	public static final ApplicationMode SKI = createBase(R.string.app_mode_skiing, "ski")
 			.distanceForTurn(15).arrivalDistance(60).offRouteDistance(50)
-			.icon(R.drawable.ic_action_skiing, R.drawable.map_action_skiing)
+			.icon(R.drawable.ic_action_skiing, R.drawable.ic_action_skiing)
 			.description(R.string.base_profile_descr_ski).reg();
 
 	public static List<ApplicationMode> values(OsmandApplication app) {
@@ -362,7 +362,8 @@ public class ApplicationMode {
 		String iconResName = app.getSettings().ICON_RES_NAME.getModeValue(this);
 		try {
 			int iconRes = app.getResources().getIdentifier(iconResName, "drawable", app.getPackageName());
-			int iconMapRes = app.getResources().getIdentifier(iconResName.replace("ic_", "map_"), "drawable", app.getPackageName());
+//			int iconMapRes = app.getResources().getIdentifier(iconResName.replace("ic_", "map_"), "drawable", app.getPackageName());
+			int iconMapRes = iconRes; //app.getResources().getIdentifier(iconResName.replace("ic_", "map_"), "drawable", app.getPackageName());
 			if (iconRes != 0 && iconMapRes != 0) {
 				this.iconRes = iconRes;
 				this.iconMapRes = iconMapRes;

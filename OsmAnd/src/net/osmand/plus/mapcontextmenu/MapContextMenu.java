@@ -908,8 +908,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			favActionIconId = menuController.getFavActionIconId();
 			waypointActionIconId = menuController.getWaypointActionIconId();
 		} else {
-			favActionIconId = R.drawable.map_action_fav_dark;
-			waypointActionIconId = R.drawable.map_action_flag_dark;
+			favActionIconId = R.drawable.ic_action_fav_dark;
+			waypointActionIconId = R.drawable.ic_action_flag_dark;
 		}
 	}
 
@@ -919,7 +919,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (mapActivity != null) {
 			RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
 			if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
-				res = R.drawable.map_action_waypoint;
+				res = R.drawable.ic_action_waypoint;
 			}
 		}
 		return res;
