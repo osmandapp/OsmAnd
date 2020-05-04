@@ -67,6 +67,7 @@ public class TileSourceManager {
 		private String randoms;
 		private String[] randomsArray;
 		private String rule;
+		private String referer;
 		private boolean hidden; // if hidden in configure map settings, for example mapillary sources
 
 		private boolean isRuleAcceptable = true;
@@ -253,7 +254,11 @@ public class TileSourceManager {
 		}
 		
 		public String getReferer() {
-			return null;
+			return referer;
+		}
+
+		public void setReferer(String referer) {
+			this.referer = referer;
 		}
 
 		@Override
@@ -469,11 +474,15 @@ public class TileSourceManager {
 	public static void createMetaInfoFile(File dir, TileSourceTemplate tm, boolean override) throws IOException {
 		File metainfo = new File(dir, ".metainfo"); //$NON-NLS-1$
 		Map<String, String> properties = new LinkedHashMap<String, String>();
-		if (tm.getRule() != null && tm.getRule().length() > 0) {
+
+		if (!Algorithms.isEmpty(tm.getRule())) {
 			properties.put("rule", tm.getRule());
 		}
 		if(tm.getUrlTemplate() != null) {
 			properties.put("url_template", tm.getUrlTemplate());
+		}
+		if (!Algorithms.isEmpty(tm.getReferer())) {
+			properties.put("referer", tm.getReferer());
 		}
 
 		properties.put("ext", tm.getTileFormat());
