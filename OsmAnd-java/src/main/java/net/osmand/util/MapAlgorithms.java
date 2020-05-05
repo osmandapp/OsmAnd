@@ -112,6 +112,14 @@ public class MapAlgorithms {
 		int by = -1;
 		int bx = -1;
 		// firstly try to search if the line goes in
+		if (outy < topY && iny >= topY) {
+			int tx = (int) (outx + ((double) (inx - outx) * (topY - outy)) / (iny - outy));
+			if (leftX <= tx && tx <= rightX) {
+				bx = tx;
+				by = topY;
+				return combine2Points(bx, by);
+			}
+		}
 		if (outy > bottomY && iny <= bottomY) {
 			int tx = (int) (outx + ((double) (inx - outx) * (outy - bottomY)) / (outy - iny));
 			if (leftX <= tx && tx <= rightX) {
