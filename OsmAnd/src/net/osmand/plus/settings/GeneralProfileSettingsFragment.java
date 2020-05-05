@@ -24,6 +24,7 @@ import androidx.preference.SwitchPreferenceCompat;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.DrivingRegion;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
@@ -271,12 +272,12 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 
 		b.setTitle(getString(R.string.driving_region));
 
-		final List<OsmandSettings.DrivingRegion> drs = new ArrayList<>();
-		drs.add(null);
-		drs.addAll(Arrays.asList(OsmandSettings.DrivingRegion.values()));
+		final List<Object> drs = new ArrayList<>();
+		drs.add(getString(R.string.driving_region_automatic));
+		drs.addAll(Arrays.asList(DrivingRegion.values()));
 		int sel = -1;
 		ApplicationMode selectedMode = getSelectedAppMode();
-		OsmandSettings.DrivingRegion selectedDrivingRegion = settings.DRIVING_REGION.getModeValue(selectedMode);
+		DrivingRegion selectedDrivingRegion = settings.DRIVING_REGION.getModeValue(selectedMode);
 		if (settings.DRIVING_REGION_AUTOMATIC.getModeValue(selectedMode)) {
 			sel = 0;
 		}
@@ -288,8 +289,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		}
 
 		final int selected = sel;
-		final ArrayAdapter<OsmandSettings.DrivingRegion> singleChoiceAdapter =
-				new ArrayAdapter<OsmandSettings.DrivingRegion>(themedContext, R.layout.single_choice_description_item, R.id.text1, drs) {
+		final ArrayAdapter<Object> singleChoiceAdapter =
+				new ArrayAdapter<Object>(themedContext, R.layout.single_choice_description_item, R.id.text1, drs) {
 					@NonNull
 					@Override
 					public View getView(int position, View convertView, @NonNull ViewGroup parent) {
@@ -297,15 +298,16 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 						if (v == null) {
 							v = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_choice_description_item, parent, false);
 						}
-						OsmandSettings.DrivingRegion item = getItem(position);
+						Object item = getItem(position);
 						AppCompatCheckedTextView title = (AppCompatCheckedTextView) v.findViewById(R.id.text1);
 						TextView desc = (TextView) v.findViewById(R.id.description);
-						if (item != null) {
-							title.setText(getString(item.name));
+						if (item instanceof DrivingRegion) {
+							DrivingRegion drivingRegion = (DrivingRegion) item;
+							title.setText(getString(drivingRegion.name));
 							desc.setVisibility(View.VISIBLE);
-							desc.setText(item.getDescription(v.getContext()));
-						} else {
-							title.setText(getString(R.string.driving_region_automatic));
+							desc.setText(drivingRegion.getDescription(v.getContext()));
+						} else if (item instanceof String) {
+							title.setText((String) item);
 							desc.setVisibility(View.GONE);
 						}
 						title.setChecked(position == selected);
@@ -331,7 +333,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
 		if (settings.DRIVING_REGION.getId().equals(prefId)) {
 			ApplicationMode selectedMode = getSelectedAppMode();
-			if (newValue == null) {
+			if (newValue instanceof String) {
 				applyPreference(settings.DRIVING_REGION_AUTOMATIC.getId(), applyToAllProfiles, true);
 				MapViewTrackingUtilities mapViewTrackingUtilities = requireMyApplication().getMapViewTrackingUtilities();
 				if (mapViewTrackingUtilities != null) {

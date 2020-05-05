@@ -14,6 +14,16 @@
     <string name="shared_string_add_edit">Add / Edit</string>
     <string name="parking_positions">Parking positions</string>
     <string name="create_edit_poi">Create/Edit POI</string>
+    <string name="release_3_7">
+    • New offline Slope maps\n\n
+    • Full customization of Favorites and GPX Waypoints – custom colors, icons, shapes\n\n
+    • Customize items order in Context Menu, Configure Map, Drawer\n\n
+    • Wikipedia as a separate layer in Configure map, select only needed languages\n\n
+    • Create your own POI filter/maps with total flexibility\n\n
+    • Added options to restore settings for custom profiles\n\n
+    • Full GPX routes from Navigation support traffic lanes and complete turn instructions\n\n
+    • Fix UI sizes on tablets\n\n
+    • Fix bugs with RTL\n\n</string>
     <string name="navigation_profiles_item">Navigation profiles</string>
     <string name="legend_item_description">The guide to a map\'s symbology</string>
     <string name="osmand_purchases_item">OsmAnd purchases</string>

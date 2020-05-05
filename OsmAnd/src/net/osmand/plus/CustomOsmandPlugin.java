@@ -14,7 +14,6 @@ import net.osmand.JsonUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
-import net.osmand.map.TileSourceManager;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.SettingsHelper.AvoidRoadsSettingsItem;
 import net.osmand.plus.SettingsHelper.MapSourcesSettingsItem;
@@ -266,17 +265,20 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 							List<ITileSource> mapSources = mapSourcesSettingsItem.getItems();
 
 							for (ITileSource tileSource : mapSources) {
-								if (tileSource instanceof TileSourceManager.TileSourceTemplate) {
-									TileSourceManager.TileSourceTemplate sourceTemplate = (TileSourceManager.TileSourceTemplate) tileSource;
-									File tPath = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
-									File dir = new File(tPath, sourceTemplate.getName());
-									Algorithms.removeAllFiles(dir);
-								} else if (tileSource instanceof SQLiteTileSource) {
-									SQLiteTileSource sqLiteTileSource = ((SQLiteTileSource) tileSource);
-									sqLiteTileSource.closeDB();
+								String tileSourceName = tileSource.getName();
+								if (tileSource instanceof SQLiteTileSource) {
+									tileSourceName += SQLITE_EXT;
+								}
+
+								ITileSource savedTileSource = app.getSettings().getTileSourceByName(tileSourceName, false);
+								if (savedTileSource != null) {
+									if (savedTileSource instanceof SQLiteTileSource) {
+										SQLiteTileSource sqLiteTileSource = ((SQLiteTileSource) savedTileSource);
+										sqLiteTileSource.closeDB();
+									}
 
 									File tPath = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
-									File dir = new File(tPath, sqLiteTileSource.getName() + SQLITE_EXT);
+									File dir = new File(tPath, tileSourceName);
 									Algorithms.removeAllFiles(dir);
 								}
 							}

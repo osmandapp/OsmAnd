@@ -174,8 +174,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		if (activity instanceof MapActivity) {
 			switch (screenType) {
 				case DRAWER:
-					MapActivityActions mapActivityActions = new MapActivityActions((MapActivity) activity);
-					contextMenuAdapter = mapActivityActions.createMainOptionsMenu();
+					contextMenuAdapter = ((MapActivity) activity).getMapActions().createMainOptionsMenu();
 					break;
 				case CONFIGURE_MAP:
 					ConfigureMapMenu configureMapMenu = new ConfigureMapMenu();
