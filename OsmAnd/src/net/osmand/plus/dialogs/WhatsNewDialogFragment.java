@@ -30,7 +30,7 @@ public class WhatsNewDialogFragment extends DialogFragment {
 		final OsmandApplication osmandApplication = (OsmandApplication) getActivity().getApplication();
 		final String appVersion = Version.getAppVersion(osmandApplication);
 		builder.setTitle(getString(R.string.whats_new) + " " + appVersion)
-				.setMessage(getString(R.string.release_3_6))
+				.setMessage(getString(R.string.release_3_7))
 				.setNegativeButton(R.string.shared_string_close, null);
 		if (AppInitializer.LATEST_CHANGES_URL != null) {
 			builder.setPositiveButton(R.string.read_more, new DialogInterface.OnClickListener() {

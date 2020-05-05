@@ -11,6 +11,7 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.util.Pair;
 
@@ -559,7 +560,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 	private static class GeometryTransportWayStyle extends GeometryWayStyle {
 
 		private TransportRouteResultSegment segment;
-		private Bitmap stopBitmap;
+		private Drawable stopDrawable;
 		protected Integer pointColor;
 
 		GeometryTransportWayStyle(GeometryWayContext context, TransportRouteResultSegment segment) {
@@ -579,7 +580,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 				type = TransportStopType.findType("bus");
 			}
 			if (type != null) {
-				stopBitmap = RenderingIcons.getIcon(getCtx(), type.getResName(), false);
+				stopDrawable = RenderingIcons.getDrawableIcon(getCtx(), type.getResName(), false);
 			}
 		}
 
@@ -607,7 +608,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		}
 
 		public Bitmap getStopBitmap() {
-			return getContext().getStopShieldBitmap(color, stopBitmap);
+			return getContext().getStopShieldBitmap(color, stopDrawable);
 		}
 
 		public Bitmap getStopSmallBitmap() {

@@ -31,6 +31,8 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+
 import org.apache.commons.logging.Log;
 
 public class TextRenderer {
@@ -315,19 +317,20 @@ public class TextRenderer {
 	public void drawShieldIcon(RenderingContext rc, Canvas cv, TextDrawInfo text, String sr) {
 		if (sr != null) {
 			float coef = rc.getDensityValue(rc.screenDensityRatio * rc.textScale);
-			Bitmap ico = RenderingIcons.getIcon(context, sr, true);
+			Drawable ico = RenderingIcons.getDrawableIcon(context, sr, true);
 			if (ico != null) {
-				float left = text.centerX - ico.getWidth() / 2 * coef - 0.5f;
-				float top = text.centerY - ico.getHeight() / 2 * coef -  paintText.descent() * 1.5f;
-				if(rc.screenDensityRatio != 1f){
-					RectF rf = new RectF(left, top, left + ico.getWidth() * coef, 
-							top + ico.getHeight() * coef);
-					Rect src = new Rect(0, 0, ico.getWidth(), ico
-							.getHeight());
-					cv.drawBitmap(ico, src, rf, paintIcon);
+				float left = text.centerX - ico.getIntrinsicWidth() / 2f * coef - 0.5f;
+				float top = text.centerY - ico.getIntrinsicHeight() / 2f * coef -  paintText.descent() * 1.5f;
+				cv.save();
+				cv.translate(left, top);
+				if (rc.screenDensityRatio != 1f) {
+					ico.setBounds(0, 0, (int) (ico.getIntrinsicWidth() * coef), (int) (ico.getIntrinsicHeight() * coef));
+					ico.draw(cv);
 				} else {
-					cv.drawBitmap(ico, left, top, paintIcon);
+					ico.setBounds(0, 0, ico.getIntrinsicWidth(), ico.getIntrinsicHeight());
+					ico.draw(cv);
 				}
+				cv.restore();
 			}
 		}
 	}

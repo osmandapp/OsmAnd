@@ -3595,10 +3595,10 @@
     <string name="live_monitoring_tracking_interval">מרווח מעקב</string>
     <string name="monitoring_min_distance_descr">מסנן זה מונע תיעוד כפילות של נקודות כשלא הייתה מספיק תנועה, יוצר תצוגה מרחבית נאה יותר של מסלולים שלא עוברים עיבוד לאחר מכן.</string>
     <string name="replace_point_descr">החלפת נקודה אחרת בזו</string>
-    <string name="changes_applied_to_profile">השינויים על הפרופיל %1$s חלו.</string>
-    <string name="settings_item_read_error">לא ניתן לקרוא את %1$s.</string>
-    <string name="settings_item_write_error">לא ניתן לכתוב את %1$s.</string>
-    <string name="settings_item_import_error">לא ניתן לייבא את %1$s.</string>
+    <string name="changes_applied_to_profile">השינויים לפרופיל ‚%1$s’ חלו.</string>
+    <string name="settings_item_read_error">לא ניתן לקרוא מתוך ‚%1$s’.</string>
+    <string name="settings_item_write_error">לא ניתן לכתוב אל ‚%1$s’.</string>
+    <string name="settings_item_import_error">לא ניתן לייבא מתוך ‚%1$s’.</string>
     <string name="monitoring_min_speed_descr">זה מסנן שחותך מהירויות נמוכות כדי לא להקליט נקודות מתחת למהירות מסוימת. הפעלת המסנן תגרום לכך שהמסלולים ייראו חלקים יותר כשמסתכלים על המפה.</string>
     <string name="app_mode_ski_touring">טיולי סקי</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
@@ -3617,9 +3617,9 @@
 \nניתן יהיה להחליף בין כל השפות הזמינות בזמן קריאת הערך.</string>
     <string name="shared_string_items">פריטים</string>
     <string name="developer_plugin">תוסף מפתח</string>
-    <string name="ui_customization_description">התאמת כמות הפריטים במגירה, הגדרת מפה ותפריט הקשר.
-\n
-\nניתן להשבית את התוספים שאינם בשימוש כדי להסתיר את כל הפקדים שלהם מהיישומון %1$s.</string>
+    <string name="ui_customization_description">התאמת כמות הפריטים במגירה, הגדרת המפה ותפריט ההקשר. 
+\n 
+\nניתן לכבות את התוספים שאינם בשימוש כדי להסתיר את כל הפקדים שלהם מהיישומון %1$s.</string>
     <string name="ui_customization_short_descr">פריטי מגירה, תפריט הקשר</string>
     <string name="ui_customization">התאמות מנשק משתמש</string>
     <string name="shared_string_drawer">מגירה</string>
@@ -3628,11 +3628,11 @@
     <string name="shared_string_divider">קו הפרדה</string>
     <string name="divider_descr">הפריטים מתחת לנקודה זו מופרדים בקו הפרדה.</string>
     <string name="shared_string_hidden">מוסתר</string>
-    <string name="hidden_items_descr">הפריטים האלו מוסתרים מהתפריט אבל האפשרויות המיוצגות או התוספים יישארו זמינים.</string>
-    <string name="reset_items_descr">ההגדרות יאופסו למצב המקורי לאחר ההסתרה.</string>
-    <string name="main_actions_descr">פעולות ראשיות מכילות 4 כפתורים בלבד.</string>
+    <string name="hidden_items_descr">הפריטים האלו מוסתרים מהתפריט אבל האפשרויות המיוצגות או התוספים ימשיכו לעבוד.</string>
+    <string name="reset_items_descr">הסתרת הגדרות מאפסת אותן למצבן ההתחלתי.</string>
+    <string name="main_actions_descr">‚פעולות ראשיות’ מכילות 4 כפתורים בלבד.</string>
     <string name="main_actions">פעולות ראשית</string>
-    <string name="additional_actions_descr">ניתן לגשת לפעולות האלה על ידי לחיצה על הכפתור „פעולות”.</string>
+    <string name="additional_actions_descr">ניתן לגשת לפעולות האלה על ידי לחיצה על הכפתור „פעולות נוספות”.</string>
     <string name="move_inside_category">ניתן להעביר פריטים בתוך קטגוריה זו בלבד.</string>
     <string name="select_wikipedia_article_langs">נא לבחור את השפות בהן יופיעו ערכים של ויקיפדיה במפה. ניתן להחליף בין כל השפות הזמינות בזמן קריאת הערך.</string>
     <string name="some_articles_may_not_available_in_lang">יתכן שחלק מהערכים בוויקיפדיה לא יהיו זמינים בשפה שלך.</string>
@@ -3667,11 +3667,21 @@
     <string name="lang_war">וראי</string>
     <string name="download_unsupported_action">הפעולה %1$s אינה נתמכת</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="osm_live_payment_subscription_management">התשלום יחוייב דרך חשבון ה־Google Play שלך עם אישור הרכישה.
-\n
-\nהמינוי מתחדש אוטומטית אלמלא בוטל בטרם מועד החידוש. החשבון שלך יחוייב בתקופת החידוש (חודש/שלושה חודשים/שנה) רק במועד החידוש.
-\n
-\nניתן לנהל ולבטל את המינויים שלך על ידי מעבר להגדרות ה־Google Play שלך.</string>
+    <string name="osm_live_payment_subscription_management">חשבון ה־Google Play שלך יחויב בעת רכישת מנוי
+\nועם תפוגתו (חודש/שלושה חודשים/שנה),
+\nהוא לא יחדש את עצמו או יבוטל טרם החידוש מההגדרות שלך ב־Google Play.</string>
     <string name="search_poi_types">חיפוש סוגי נקודות עניין</string>
-    <string name="search_poi_types_descr">שילוב סוגי נקודות עניין מקטגוריות שונות. יש לגעת כדי לבחור את כולן, נגיעה בצד השמאלי לבחירת קטגוריה.</string>
+    <string name="search_poi_types_descr">שילוב סוגי נקודות עניין מקטגוריות שונות. יש לגעת ב„החלפה” כדי לבחור את כולן, נגיעה בצד השמאלי לבחירת קטגוריה.</string>
+    <string name="tracker_item">עוקב OsmAnd</string>
+    <string name="mapillary_item">OsmAnd ו־Mapillary</string>
+    <string name="quick_action_item">פעולה מהירה</string>
+    <string name="radius_ruler_item">סרגל רדיוס</string>
+    <string name="measure_distance_item">מדידת מרחק</string>
+    <string name="travel_item">טיול (ויקימסע וויקיפדיה)</string>
+    <string name="map_markers_item">סמני מפה</string>
+    <string name="favorites_item">מועדפים</string>
+    <string name="subscription_osmandlive_item">מינוי - OsmAnd Live</string>
+    <string name="osmand_purchases_item">רכישות OsmAnd</string>
+    <string name="legend_item_description">המדריך לסמלי מפה</string>
+    <string name="navigation_profiles_item">פרופילי ניווט</string>
 </resources>

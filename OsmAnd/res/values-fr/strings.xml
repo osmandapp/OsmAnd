@@ -3551,8 +3551,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_importing">Import en cours</string>
     <string name="items_added">Éléments ajoutés</string>
     <string name="shared_string_import_complete">Import terminé</string>
-    <string name="checking_for_duplicate_description">OsmAnd vérifie que l\'élément %1$s n\'existe pas déjà dans l\'application. 
-\n 
+    <string name="checking_for_duplicate_description">OsmAnd vérifie que l\'élément %1$s n\'existe pas déjà dans l\'application.
+\n
 \nCela peut prendre un certain temps.</string>
     <string name="import_complete_description">Les données de %1$s ont été importées, vous pouvez utiliser les boutons ci-dessous pour ouvrir la partie adéquate de l\'application pour les gérer.</string>
     <string name="recalculate_route_distance_promo">L\'itinéraire sera recalculé lorsque la distance entre l\'itinéraire et votre position est supérieure à la valeur indiquée.</string>
@@ -3589,10 +3589,10 @@ représentant la zone : %1$s x %2$s</string>
     <string name="app_mode_ski_snowmobile">Motoneige</string>
     <string name="custom_osmand_plugin">Greffon OsmAnd personnalisé</string>
     <string name="replace_point_descr">Remplacer un point par celui-ci</string>
-    <string name="changes_applied_to_profile">Modifications appliquées au profil %1$s.</string>
-    <string name="settings_item_read_error">Impossible de lire %1$s.</string>
-    <string name="settings_item_write_error">Impossible d\'écrire %1$s.</string>
-    <string name="settings_item_import_error">Impossible d\'importer %1$s.</string>
+    <string name="changes_applied_to_profile">Modifications appliquées au profil \'%1$s\'.</string>
+    <string name="settings_item_read_error">Impossible de lire depuis \'%1$s\'.</string>
+    <string name="settings_item_write_error">Impossible d\'écrire dans \'%1$s\'.</string>
+    <string name="settings_item_import_error">Impossible d\'importer depuis \'%1$s\'.</string>
     <string name="select_track_file">Sélectionnez le fichier de trace</string>
     <string name="shared_string_languages">Langues</string>
     <string name="shared_string_language">Langue</string>
@@ -3601,10 +3601,10 @@ représentant la zone : %1$s x %2$s</string>
     <string name="divider_descr">Éléments sous ce point isolés par un séparateur.</string>
     <string name="ui_customization_description">Personnalisez le nombre d’éléments dans le panneau déroulant, paramétrez la carte et le menu contextuel.
 \n
-\nVous pouvez désactiver les greffons inutilisés, pour masquer tous leurs contrôles dans l’application %1$s.</string>
-    <string name="hidden_items_descr">Ces éléments sont masqués dans le menu mais les options présentes ou les greffons fonctionneront toujours.</string>
-    <string name="reset_items_descr">Les paramètres seront réinitialisés à leurs valeurs par défaut après avoir été masqués.</string>
-    <string name="additional_actions_descr">Vous pouvez accéder à ces actions en appuyant sur le bouton « Actions ».</string>
+\nVous pouvez désactiver les greffons inutilisés, pour masquer leurs contrôles dans l’application %1$s.</string>
+    <string name="hidden_items_descr">Ces éléments sont masqués dans le menu mais les options présentes ou les greffons continueront à fonctionner.</string>
+    <string name="reset_items_descr">Masquer les paramètres les réinitialise à leurs valeurs par défaut.</string>
+    <string name="additional_actions_descr">Vous pouvez accéder à ces actions en appuyant sur le bouton « Actions supplémentaires ».</string>
     <string name="ui_customization_short_descr">Éléments du panneau déroulant, menu contextuel</string>
     <string name="shared_string_drawer">Panneau déroulant</string>
     <string name="reorder_or_hide_from">Réorganisez ou masquez les éléments à partir de %1$s.</string>
@@ -3649,12 +3649,22 @@ représentant la zone : %1$s x %2$s</string>
     <string name="download_unsupported_action">Action %1$s non prise en charge</string>
     <string name="lang_ky">Kirghize</string>
     <string name="lang_gu">Gujarati</string>
-    <string name="osm_live_payment_subscription_management">Le paiement sera débité de votre compte Google Play dès confirmation de l\'achat.
-\n
-\nL\'abonnement sera reconduit automatiquement à moins qu\'il ne soit annulé avant sa date de renouvellement. Votre compte ne sera débité pour une nouvelle durée (mensuelle / trimestrielle / annuelle) qu\'à la date de renouvellement.
-\n
-\nVous pouvez gérer et annuler vos abonnements depuis vos paramètres Google Play.</string>
+    <string name="osm_live_payment_subscription_management">Le paiement sera débité de votre compte Google Play dès confirmation de l\'abonnement
+\npuis automatiquement à la fin de chaque échéance (mensuelle / trimestrielle / annuelle).
+\nVous pouvez gérer et annuler ces abonnements depuis vos paramètres Google Play.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="search_poi_types_descr">Combiner des types de PI de différentes catégories. Appuyez pour tout sélectionner, appuyez sur le côté gauche pour sélectionner la catégorie.</string>
-    <string name="search_poi_types">Rechercher des types de points d\'intérêt</string>
+    <string name="search_poi_types_descr">Combinez des PI de différentes catégories. Appuyez pour tout sélectionner, appuyez sur le côté gauche pour sélectionner les catégories.</string>
+    <string name="search_poi_types">Rechercher des types de PI</string>
+    <string name="radius_ruler_item">Règle de mesure par rayon</string>
+    <string name="map_markers_item">Marques</string>
+    <string name="legend_item_description">Le guide des symboles cartographiques</string>
+    <string name="tracker_item">OsmAnd Tracker</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="quick_action_item">Action rapide</string>
+    <string name="measure_distance_item">Mesurer une distance</string>
+    <string name="travel_item">Voyage (Wikivoyage et Wikipédia)</string>
+    <string name="favorites_item">Favoris</string>
+    <string name="subscription_osmandlive_item">Abonnement - OsmAnd Live</string>
+    <string name="osmand_purchases_item">Achats OsmAnd</string>
+    <string name="navigation_profiles_item">Profils de navigation</string>
 </resources>
