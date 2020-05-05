@@ -3444,4 +3444,23 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="osmand_purchases_item">Nákupy v OsmAnd</string>
     <string name="legend_item_description">Průvodce symboly na mapě</string>
     <string name="navigation_profiles_item">Navigační profily</string>
+    <string name="release_3_7">• Nové offline mapy svahů
+\n
+\n• Plné přizpůsobení oblíbených bodů a GPX cílů – vlastní barvy, ikony a tvary
+\n
+\n• Možnost změny pořadí položek v kontextovém menu, nastavení mapy i hlavním menu
+\n
+\n• Wikipedie jako samostatná vrstva v nastavení mapy, lze vybrat pouze potřebné jazyky
+\n
+\n• Vytváření vlastních filtrů a map bodů zájmu s plnou flexibilitou
+\n
+\n• Přidána možnost obnovit nastavení vlastních profilů
+\n
+\n• Plnohodnotné GPX trasy z navigace nyní podporují jízdní pruhy a kompletní navigační pokyny
+\n
+\n• Opravena velikost uživatelského rozhraní na tabletech
+\n
+\n• Opraveny chyby pro jazyky psané zprava doleva
+\n
+\n</string>
 </resources>
