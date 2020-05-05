@@ -477,7 +477,7 @@ public abstract class OsmandMapLayer {
 	public int calculatePath(RotatedTileBox tb, List<Float> xs, List<Float> ys, List<GeometryWayStyle> styles, List<Pair<Path, GeometryWayStyle>> paths) {
 		boolean segmentStarted = false;
 
-		//rotating all way points fist for fitting in RotatedTileBox rect, if map is not in north orientation and later rotating back (maybe there's a better way to do this?)
+		//rotating all waypoints first for fitting in RotatedTileBox rect, if map is not in north orientation and later rotating back (maybe there's a better way to do this?)
 		mtx.setSinCos((float)tb.getRotateSin(), (float)tb.getRotateCos(), tb.getCenterPixelX(), tb.getCenterPixelY());
 		inv_mtx.setRotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 		pointCache = new float[xs.size()+ys.size()];
