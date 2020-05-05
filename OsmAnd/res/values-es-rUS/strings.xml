@@ -3691,4 +3691,23 @@ Lon %2$s</string>
     <string name="extra_maps_menu_group">Mapas adicionales</string>
     <string name="download_unsupported_action">Acción «%1$s» no admitida</string>
     <string name="custom_color">Color personalizado</string>
+    <string name="release_3_7">• Nuevos mapas sin conexión de las pendientes
+\n
+\n • Personalización más completa de los favoritos y puntos de referencia GPX (colores personalizados, iconos, formas)
+\n
+\n • Nueva personalización en el orden de los elementos en Configurar mapa, menú contextual y menú lateral
+\n
+\n • Wikipedia ahora se visualiza como una capa separada en Configurar mapa, elige sólo los idiomas necesarios
+\n
+\n • Crea tu propio filtro/mapas de puntos de interés, con total flexibilidad
+\n
+\n • Se añadieron opciones para restablecer los ajustes de los perfiles personalizados
+\n
+\n • Las rutas GPX para la navegación, ahora admiten los carriles de tráfico y completan las instrucciones de giro
+\n
+\n • Se ha corregido el tamaño de la interfaz en las tabletas
+\n
+\n • Se corrigieron los errores con RTL
+\n
+\n</string>
 </resources>
