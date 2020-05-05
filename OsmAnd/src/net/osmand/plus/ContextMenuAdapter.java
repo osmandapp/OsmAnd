@@ -163,7 +163,7 @@ public class ContextMenuAdapter {
 			if (!Algorithms.isEmpty(orderIds)) {
 				int index = orderIds.indexOf(id);
 				if (index != -1) {
-					return index + ITEMS_ORDER_STEP;
+					return index;
 				}
 			}
 		}
@@ -584,7 +584,7 @@ public class ContextMenuAdapter {
 		List<ContextMenuItem> items = new ArrayList<>();
 		for (ContextMenuItem item : this.items) {
 			String id = item.getId();
-			if (id != null && (id.startsWith(idScheme) && !APP_PROFILES_ID.equals(id))) {
+			if (id != null && (id.startsWith(idScheme))) {
 				items.add(item);
 			}
 		}

@@ -32,7 +32,6 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -51,33 +50,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DETAILS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FAVORITES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.GPX_FILES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.HIDE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAPILLARY;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_LANGUAGE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MAGNIFIER_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MARKERS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MODE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_SOURCE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_LABELS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.RECORDING_LAYER;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROAD_STYLE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_RENDERING_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.WIKIPEDIA_ID;
 import static net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItemType.BUTTON;
 import static net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItemType.DESCRIPTION;
 import static net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItemType.DIVIDER;
@@ -184,7 +158,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	}
 
 	private void initDefaultMainActions() {
-		List<ContextMenuItem> defItems = contextMenuAdapter.getDefaultItems();
+		List<ContextMenuItem> defItems = getCustomizableDefaultItems(contextMenuAdapter.getDefaultItems());
 		OsmandSettings.ContextMenuItemsSettings pref = getSettingForScreen(app, screenType).getModeValue(appMode);
 		if (pref instanceof OsmandSettings.MapContextMenuItemsSettings) {
 			mainActionItems = new ArrayList<>(((OsmandSettings.MapContextMenuItemsSettings) pref).getMainActionIds());
@@ -194,6 +168,16 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 				}
 			}
 		}
+	}
+
+	public static List<ContextMenuItem> getCustomizableDefaultItems(List<ContextMenuItem> defItems) {
+		List<ContextMenuItem> items = new ArrayList<>();
+		for (ContextMenuItem item : defItems) {
+			if (!APP_PROFILES_ID.equals(item.getId())) {
+				items.add(item);
+			}
+		}
+		return items;
 	}
 
 	private void instantiateContextMenuAdapter() {
@@ -256,7 +240,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		applyButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				List<ContextMenuItem> defItems = contextMenuAdapter.getDefaultItems();
+				List<ContextMenuItem> defItems = getCustomizableDefaultItems(contextMenuAdapter.getDefaultItems());
 				List<String> ids = new ArrayList<>();
 				if (!menuItemsOrder.isEmpty()) {
 					sortByCustomOrder(defItems, menuItemsOrder);
@@ -307,7 +291,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		super.onActivityCreated(savedInstanceState);
 		instantiateContextMenuAdapter();
 		if (menuItemsOrder.isEmpty()) {
-			for (ContextMenuItem item : contextMenuAdapter.getDefaultItems()) {
+			for (ContextMenuItem item : getCustomizableDefaultItems(contextMenuAdapter.getDefaultItems())) {
 				menuItemsOrder.put(item.getId(), item.getOrder());
 			}
 		}
@@ -566,7 +550,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	}
 
 	private List<RearrangeMenuAdapterItem> getItemsForRearrangeAdapter(List<String> hiddenItemsIds, HashMap<String, Integer> itemsOrderIds, boolean hidden) {
-		List<ContextMenuItem> defItems = contextMenuAdapter.getDefaultItems();
+		List<ContextMenuItem> defItems = getCustomizableDefaultItems(contextMenuAdapter.getDefaultItems());
 		if (!itemsOrderIds.isEmpty()) {
 			sortByCustomOrder(defItems, itemsOrderIds);
 		}
