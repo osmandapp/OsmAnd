@@ -112,14 +112,6 @@ public class MapAlgorithms {
 		int by = -1;
 		int bx = -1;
 		// firstly try to search if the line goes in
-		if (outy < topY && iny >= topY) {
-			int tx = (int) (outx + ((double) (inx - outx) * (topY - outy)) / (iny - outy));
-			if (leftX <= tx && tx <= rightX) {
-				bx = tx;
-				by = topY;
-				return combine2Points(bx, by);
-			}
-		}
 		if (outy > bottomY && iny <= bottomY) {
 			int tx = (int) (outx + ((double) (inx - outx) * (outy - bottomY)) / (outy - iny));
 			if (leftX <= tx && tx <= rightX) {
@@ -135,7 +127,6 @@ public class MapAlgorithms {
 				bx = leftX;
 				return combine2Points(bx, by);
 			}
-
 		}
 		if (outx > rightX && inx <= rightX) {
 			int ty = (int) (outy + ((double) (iny - outy) * (outx - rightX)) / (outx - inx));
@@ -144,7 +135,6 @@ public class MapAlgorithms {
 				bx = rightX;
 				return combine2Points(bx, by);
 			}
-
 		}
 
 		// try to search if point goes out
@@ -171,7 +161,6 @@ public class MapAlgorithms {
 				bx = leftX;
 				return combine2Points(bx, by);
 			}
-
 		}
 		if (outx < rightX && inx >= rightX) {
 			int ty = (int) (outy + ((double) (iny - outy) * (outx - rightX)) / (outx - inx));
@@ -180,7 +169,6 @@ public class MapAlgorithms {
 				bx = rightX;
 				return combine2Points(bx, by);
 			}
-
 		}
 		if (outx == rightX || outx == leftX) {
 			if (outy >= topY && outy <= bottomY) {
@@ -189,7 +177,6 @@ public class MapAlgorithms {
 				return combine2Points(bx, by);
 			}
 		}
-
 		if (outy == topY || outy == bottomY) {
 			if (leftX <= outx && outx <= rightX) {
 				bx = outx;
@@ -306,7 +293,7 @@ public class MapAlgorithms {
 	
 	/**
 	 * count the intersections when going from lat, lon to outside the ring
-	 * @param polyNodes2 
+	 * @param polyNodes
 	 */
 	public static int countIntersections(Collection<Node> polyNodes, double latitude, double longitude) {
 		int intersections = 0;

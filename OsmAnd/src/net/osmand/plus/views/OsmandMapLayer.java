@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
@@ -14,8 +15,8 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Pair;
 import android.view.MotionEvent;
@@ -170,7 +171,7 @@ public abstract class OsmandMapLayer {
 		private Bitmap arrowBitmap;
 		private Bitmap walkArrowBitmap;
 		private Bitmap anchorBitmap;
-		private Map<Pair<Integer, Drawable>, Bitmap> stopBitmapsCache = new HashMap<>();
+		private Map<Pair<Integer, Bitmap>, Bitmap> stopBitmapsCache = new HashMap<>();
 		private Map<Integer, Bitmap> stopSmallBitmapsCache = new HashMap<>();
 
 		public GeometryWayContext(Context ctx, float density) {
@@ -317,8 +318,8 @@ public abstract class OsmandMapLayer {
 			return anchorBitmap;
 		}
 
-		public Bitmap getStopShieldBitmap(int color, Drawable stopDrawable) {
-			Bitmap bmp = stopBitmapsCache.get(new Pair<>(color, stopDrawable));
+		public Bitmap getStopShieldBitmap(int color, Bitmap stopBitmap) {
+			Bitmap bmp = stopBitmapsCache.get(new Pair<>(color, stopBitmap));
 			if (bmp == null) {
 				int fillColor = UiUtilities.getContrastColor(getApp(), color, true);
 				int strokeColor = getStrokeColor(color);
@@ -344,15 +345,15 @@ public abstract class OsmandMapLayer {
 				paint.setStyle(Paint.Style.STROKE);
 				canvas.drawRoundRect(rect, routeShieldCornerRadius, routeShieldCornerRadius, paint);
 
-				if (stopDrawable != null) {
-					stopDrawable.setColorFilter(new PorterDuffColorFilter(strokeColor, Mode.SRC_IN));
+				if (stopBitmap != null) {
+					paint.setFilterBitmap(true);
+					paint.setColorFilter(new PorterDuffColorFilter(strokeColor, Mode.SRC_IN));
+					Rect src = new Rect(0, 0, stopBitmap.getWidth(), stopBitmap.getHeight());
 					float marginBitmap = 1f * density;
 					rect.inset(marginBitmap, marginBitmap);
-					stopDrawable.setBounds(0, 0, (int) rect.width(), (int) rect.height());
-					canvas.translate(rect.left, rect.top);
-					stopDrawable.draw(canvas);
+					canvas.drawBitmap(stopBitmap, src, rect, paint);
 				}
-				stopBitmapsCache.put(new Pair<>(color, stopDrawable), bmp);
+				stopBitmapsCache.put(new Pair<>(color, stopBitmap), bmp);
 			}
 			return bmp;
 		}
@@ -468,25 +469,43 @@ public abstract class OsmandMapLayer {
 		}
 	}
 
+	private Matrix mtx = new Matrix();
+	private Matrix inv_mtx = new Matrix();
+	private float[] pointCache;
+	private float[] outPutPoints = new float[4];
+
 	public int calculatePath(RotatedTileBox tb, List<Float> xs, List<Float> ys, List<GeometryWayStyle> styles, List<Pair<Path, GeometryWayStyle>> paths) {
 		boolean segmentStarted = false;
-		float prevX = xs.get(0);
-		float prevY = ys.get(0);
+
+		//rotating all way points fist for fitting in RotatedTileBox rect, if map is not in north orientation and later rotating back (maybe there's a better way to do this?)
+		mtx.setSinCos((float)tb.getRotateSin(), (float)tb.getRotateCos(), tb.getCenterPixelX(), tb.getCenterPixelY());
+		inv_mtx.setRotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
+		pointCache = new float[xs.size()+ys.size()];
+		for (int i = 0; i < xs.size(); i++) {
+			pointCache[i * 2] =xs.get(i);
+			pointCache[i * 2 + 1] =ys.get(i);
+		}
+		mtx.mapPoints(pointCache);
+		float prevX = pointCache[0];
+		float prevY = pointCache[1];
 		int height = tb.getPixHeight();
 		int width = tb.getPixWidth();
+
 		int cnt = 0;
 		boolean hasStyles = styles != null && styles.size() == xs.size();
 		GeometryWayStyle style = hasStyles ? styles.get(0) : null;
 		Path path = new Path();
+
 		boolean prevIn = isIn(prevX, prevY, 0, 0, width, height);
 		for (int i = 1; i < xs.size(); i++) {
-			float currX = xs.get(i);
-			float currY = ys.get(i);
+			float currX = pointCache[2*i];
+			float currY = pointCache[2*i+1];
 			boolean currIn = isIn(currX, currY, 0, 0, width, height);
 			boolean draw = false;
 			if (prevIn && currIn) {
 				draw = true;
 			} else {
+
 				long intersection = MapAlgorithms.calculateIntersection((int)currX, (int)currY, (int)prevX, (int)prevY, 0, width, height, 0);
 				if (intersection != -1) {
 					if (prevIn && (i == 1)) {
@@ -506,13 +525,20 @@ public abstract class OsmandMapLayer {
 					}
 				}
 			}
+			if (draw||hasStyles) {
+				outPutPoints[0]=prevX;
+				outPutPoints[1]=prevY;
+				outPutPoints[2]=currX;
+				outPutPoints[3]=currY;
+				inv_mtx.mapPoints(outPutPoints);
+			}
 			if (draw) {
 				if (!segmentStarted) {
 					cnt++;
-					path.moveTo(prevX, prevY);
+					path.moveTo(outPutPoints[0], outPutPoints[1]);
 					segmentStarted = true;
 				}
-				path.lineTo(currX, currY);
+				path.lineTo(outPutPoints[2], outPutPoints[3]);
 			} else {
 				segmentStarted = false;
 			}
@@ -526,7 +552,7 @@ public abstract class OsmandMapLayer {
 					paths.add(new Pair<>(path, style));
 					path = new Path();
 					if (segmentStarted) {
-						path.moveTo(currX, currY);
+						path.moveTo(outPutPoints[2], outPutPoints[3]);
 					}
 					style = newStyle;
 				}
