@@ -196,26 +196,26 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				adapter.addItem(new ContextMenuItem.ItemBuilder()
 						.setTitleId(R.string.local_index_mi_backup, getContext())
 						.setListener(listener)
-						.setPosition(1).createItem());
+						.createItem());
 			}
 		}
 		if (info.isBackupedData()) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.local_index_mi_restore, getContext())
 					.setListener(listener)
-					.setPosition(2).createItem());
+					.createItem());
 		}
 		if (info.getType() != LocalIndexType.TTS_VOICE_DATA && info.getType() != LocalIndexType.VOICE_DATA
 				&& info.getType() != LocalIndexType.FONT_DATA) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.shared_string_rename, getContext())
 					.setListener(listener)
-					.setPosition(3).createItem());
+					.createItem());
 		}
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.shared_string_delete, getContext())
 				.setListener(listener)
-				.setPosition(4).createItem());
+				.createItem());
 	}
 
 	private boolean performBasicOperation(int resId, final LocalIndexInfo info) {

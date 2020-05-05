@@ -186,7 +186,6 @@ public class MapillaryPlugin extends OsmandPlugin {
 				.setIcon(R.drawable.ic_action_mapillary)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener)
-				.setPosition(11)
 				.createItem());
 	}
 

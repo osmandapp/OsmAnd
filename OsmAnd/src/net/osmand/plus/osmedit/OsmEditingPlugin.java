@@ -364,7 +364,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 						return true;
 					}
 				})
-				.setPosition(16)
 				.createItem());
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
@@ -386,7 +385,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 						return true;
 					}
 				})
-				.setPosition(17)
 				.createItem());
 	}
 
@@ -434,7 +432,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 							return true;
 						}
 					})
-					.setPosition(5)
 					.createItem());
 		}
 	}

@@ -358,7 +358,6 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				.setIcon(R.drawable.ic_layer_top)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener)
-				.setPosition(14)
 				.createItem());
 		String underlayMapDescr = settings.MAP_UNDERLAY.get();
 		if (underlayMapDescr!=null && underlayMapDescr.contains(".sqlitedb")) {
@@ -374,7 +373,6 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				.setIcon(R.drawable.ic_layer_bottom)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener)
-				.setPosition(15)
 				.createItem());
 	}
 

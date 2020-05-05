@@ -652,7 +652,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.setSelected(SHOW_RECORDINGS.get())
 				.setIcon(R.drawable.ic_action_micro_dark)
 				.setColor(SHOW_RECORDINGS.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
-				.setPosition(12)
 				.setListener(listener).createItem());
 	}
 

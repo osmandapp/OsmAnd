@@ -90,12 +90,7 @@ public class ContextMenuAdapter {
 			item.setHidden(isItemHidden(id));
 			item.setOrder(getItemOrder(id, item.getOrder()));
 		}
-		int pos = item.getPos();
-		if (pos >= 0 && pos < items.size()) {
-			items.add(item.getPos(), item);
-		} else {
-			items.add(item);
-		}
+		items.add(item);
 		sortItemsByOrder();
 	}
 

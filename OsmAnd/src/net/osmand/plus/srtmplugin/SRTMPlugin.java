@@ -348,7 +348,6 @@ public class SRTMPlugin extends OsmandPlugin {
 					.setDescription(app.getString(R.string.display_zoom_level, descr))
 					.setColor(contourLinesSelected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 					.setSecondaryIcon(R.drawable.ic_action_additional_option)
-					.setPosition(12)
 					.setListener(listener).createItem());
 		}
 		boolean terrainEnabled = settings.TERRAIN.get();
@@ -364,7 +363,6 @@ public class SRTMPlugin extends OsmandPlugin {
 				.setIcon(R.drawable.ic_action_hillshade_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener)
-				.setPosition(13)
 				.createItem()
 		);
 	}
