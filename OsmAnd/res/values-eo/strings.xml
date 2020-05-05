@@ -3672,4 +3672,15 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="map_markers_item">Map‑markoj</string>
     <string name="legend_item_description">Priskribo al simboloj sur la mapo</string>
     <string name="navigation_profiles_item">Profiloj de navigo</string>
+    <string name="release_3_7">• novaj mapoj de dekliveco por malkonekta uzado
+\n • plena alĝustigo de ŝatataj punktoj kaj GPX‑navigadpunktoj: propraj koloroj, emblemoj kaj formoj
+\n • reordigi elementojn de la kunteksta menuo, menuo “konfiguri mapon” kaj tirmenuo
+\n • Vikipedio kiel aparta tavolo vidigebla per la menuo “konfiguri mapon”, eblo elekti nur bezonatajn lingvojn
+\n • krei viajn proprajn filtrilojn/mapojn de interesejoj, tute agordeblaj
+\n • restarigi agordojn por propraj profiloj
+\n • plenaj GPX‑spuroj en navigo, subteno por instrukcioj pri (voj)koridoroj kaj turnoj
+\n • riparita grando de fasado ĉe tabulkomputiloj
+\n • riparitaj eraroj pri lingvoj skribataj dekstre-maldekstren
+\n
+\n</string>
 </resources>
