@@ -278,8 +278,6 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 
 			if (menuItemFrom.getId().startsWith(SHOW_ITEMS_ID_SCHEME) && menuItemTo.getId().startsWith(RENDERING_ITEMS_ID_SCHEME)
 					|| menuItemFrom.getId().startsWith(RENDERING_ITEMS_ID_SCHEME) && menuItemTo.getId().startsWith(SHOW_ITEMS_ID_SCHEME)
-					|| menuItemFrom.getId().startsWith(RENDERING_ITEMS_ID_SCHEME) && menuItemTo.getId().startsWith(AIDL_LAYERS_PREFIX)
-					|| menuItemFrom.getId().startsWith(AIDL_LAYERS_PREFIX) && menuItemTo.getId().startsWith(RENDERING_ITEMS_ID_SCHEME)
 					|| menuItemTo.isHidden()) {
 				return false;
 			}

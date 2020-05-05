@@ -49,7 +49,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import static net.osmand.aidl.ConnectedApp.AIDL_LAYERS_PREFIX;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
 
 public class ContextMenuAdapter {
@@ -59,6 +58,7 @@ public class ContextMenuAdapter {
 	public static final int PROFILES_NORMAL_PROFILE_TAG = 0;
 	public static final int PROFILES_CHOSEN_PROFILE_TAG = 1;
 	public static final int PROFILES_CONTROL_BUTTON_TAG = 2;
+	private static final int ITEMS_ORDER_STEP = 10;
 
 	@LayoutRes
 	private int DEFAULT_LAYOUT_ID = R.layout.list_menu_item_native;
@@ -85,14 +85,15 @@ public class ContextMenuAdapter {
 	}
 
 	public void addItem(ContextMenuItem item) {
-		try {
-			String id = item.getId();
-			if (id != null) {
-				item.setHidden(isItemHidden(id));
-				item.setOrder(getItemOrder(id, item.getOrder()));
-			}
+		String id = item.getId();
+		if (id != null) {
+			item.setHidden(isItemHidden(id));
+			item.setOrder(getItemOrder(id, item.getOrder()));
+		}
+		int pos = item.getPos();
+		if (pos >= 0 && pos < items.size()) {
 			items.add(item.getPos(), item);
-		} catch (IndexOutOfBoundsException ex) {
+		} else {
 			items.add(item);
 		}
 		sortItemsByOrder();
@@ -132,7 +133,7 @@ public class ContextMenuAdapter {
 		this.changeAppModeListener = changeAppModeListener;
 	}
 
-	public void sortItemsByOrder() {
+	private void sortItemsByOrder() {
 		Collections.sort(items, new Comparator<ContextMenuItem>() {
 			@Override
 			public int compare(ContextMenuItem item1, ContextMenuItem item2) {
@@ -162,18 +163,25 @@ public class ContextMenuAdapter {
 
     private int getItemOrder(@NonNull String id, int defaultOrder) {
         ContextMenuItemsPreference contextMenuItemsPreference = app.getSettings().getContextMenuItemsPreference(id);
-        if (contextMenuItemsPreference == null) {
-            return defaultOrder;
-        }
-        List<String> orderIds = contextMenuItemsPreference.get().getOrderIds();
-        if (!Algorithms.isEmpty(orderIds)) {
-            int order = orderIds.indexOf(id);
-            if (order != -1) {
-                return order;
-            }
-        }
-		return defaultOrder == -1 ? items.size() - 1 : defaultOrder;
-    }
+		if (contextMenuItemsPreference != null) {
+			List<String> orderIds = contextMenuItemsPreference.get().getOrderIds();
+			if (!Algorithms.isEmpty(orderIds)) {
+				int index = orderIds.indexOf(id);
+				if (index != -1) {
+					return index + ITEMS_ORDER_STEP;
+				}
+			}
+		}
+		return getDefaultOrder(defaultOrder);
+	}
+
+	private int getDefaultOrder(int defaultOrder) {
+		if (defaultOrder == 0 && !items.isEmpty()) {
+			return items.get(items.size() - 1).getOrder() + ITEMS_ORDER_STEP;
+		} else {
+			return defaultOrder;
+		}
+	}
 
 	public ArrayAdapter<ContextMenuItem> createListAdapter(final Activity activity, final boolean lightTheme) {
 		final int layoutId = DEFAULT_LAYOUT_ID;
@@ -580,7 +588,7 @@ public class ContextMenuAdapter {
 		List<ContextMenuItem> items = new ArrayList<>();
 		for (ContextMenuItem item : this.items) {
 			String id = item.getId();
-			if (id != null && (id.startsWith(idScheme) && !APP_PROFILES_ID.equals(id) || id.startsWith(AIDL_LAYERS_PREFIX))) {
+			if (id != null && (id.startsWith(idScheme) && !APP_PROFILES_ID.equals(id))) {
 				items.add(item);
 			}
 		}
@@ -599,5 +607,15 @@ public class ContextMenuAdapter {
 			}
 		}
 		return idScheme;
+	}
+
+	public List<ContextMenuItem> getVisibleItems() {
+		List<ContextMenuItem> visible = new ArrayList<>();
+		for (ContextMenuItem item : items) {
+			if (!item.isHidden()) {
+				visible.add(item);
+			}
+		}
+		return visible;
 	}
 }

@@ -268,7 +268,7 @@ public class ContextMenuItem {
 		private boolean mIsCategory = false;
 		private boolean mIsClickable = true;
 		private int mPosition = -1;
-		private int mOrder = -1;
+		private int mOrder = 0;
 		private String mDescription = null;
 		private ContextMenuAdapter.ItemClickListener mItemClickListener = null;
 		private ContextMenuAdapter.OnIntegerValueChangedListener mIntegerListener = null;

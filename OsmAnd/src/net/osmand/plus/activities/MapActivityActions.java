@@ -350,25 +350,25 @@ public class MapActivityActions implements DialogProvider {
 				.setTitleId(selectedObj instanceof FavouritePoint ? R.string.favourites_context_menu_edit : R.string.shared_string_add, mapActivity)
 				.setId(MAP_CONTEXT_MENU_ADD_ID)
 				.setIcon(R.drawable.map_action_fav_dark)
-				.setOrder(0)
+				.setOrder(10)
 				.createItem());
 		adapter.addItem(itemBuilder
 				.setTitleId(R.string.shared_string_marker, mapActivity)
 				.setId(MAP_CONTEXT_MENU_MARKER_ID)
 				.setIcon(R.drawable.map_action_flag_dark)
-				.setOrder(1)
+				.setOrder(20)
 				.createItem());
 		adapter.addItem(itemBuilder
 				.setTitleId(R.string.shared_string_share, mapActivity)
 				.setId(MAP_CONTEXT_MENU_SHARE_ID)
 				.setIcon(R.drawable.map_action_gshare_dark)
-				.setOrder(2)
+				.setOrder(30)
 				.createItem());
 		adapter.addItem(itemBuilder
 				.setTitleId(R.string.shared_string_actions, mapActivity)
 				.setId(MAP_CONTEXT_MENU_MORE_ID)
 				.setIcon(R.drawable.map_overflow_menu_white)
-				.setOrder(3)
+				.setOrder(40)
 				.createItem());
 
 		adapter.addItem(itemBuilder
@@ -435,8 +435,6 @@ public class MapActivityActions implements DialogProvider {
 				.setIcon(R.drawable.ic_action_alert)
 				.setOrder(AVOID_ROAD_ITEM_ORDER)
 				.createItem());
-
-		adapter.sortItemsByOrder();
 	}
 
 	public void contextMenuPoint(final double latitude, final double longitude, final ContextMenuAdapter iadapter, Object selectedObj) {
@@ -941,6 +939,10 @@ public class MapActivityActions implements DialogProvider {
 
 		app.getAidlApi().registerNavDrawerItems(mapActivity, optionsMenuHelper);
 
+		optionsMenuHelper.addItem(new ItemBuilder().setLayout(R.layout.drawer_divider)
+				.setId(DRAWER_DIVIDER_ID)
+				.createItem());
+
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.layer_map_appearance, mapActivity)
 				.setId(DRAWER_CONFIGURE_SCREEN_ID)
 				.setIcon(R.drawable.ic_configure_screen_dark)
@@ -1026,22 +1028,6 @@ public class MapActivityActions implements DialogProvider {
 
 		//////////// Others
 		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);
-
-		// Place divider between functionality and configuration related menu items
-		int dividerItemIndex = -1;
-		for (int i = 0; i < optionsMenuHelper.length(); i++) {
-			if (optionsMenuHelper.getItem(i).getTitleId() == R.string.layer_map_appearance) {
-				dividerItemIndex = i;
-				break;
-			}
-		}
-
-		ItemBuilder divider = new ItemBuilder().setLayout(R.layout.drawer_divider);
-		divider.setId(DRAWER_DIVIDER_ID);
-		int position = dividerItemIndex >= 0 ? dividerItemIndex : 8;
-		divider.setPosition(position);
-		divider.setOrder(position);
-		optionsMenuHelper.addItem(divider.createItem());
 
 		return optionsMenuHelper;
 	}

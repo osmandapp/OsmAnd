@@ -159,11 +159,13 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 
 	private void initDefaultMainActions() {
 		List<ContextMenuItem> defItems = contextMenuAdapter.getDefaultItems();
-		initDefaultOrders(defItems);
-		mainActionItems = new ArrayList<>(getSettingForScreen(app, screenType).getModeValue(appMode).getMainActionIds());
-		if (mainActionItems.isEmpty()) {
-			for (int i = 0; i < MAIN_BUTTONS_QUANTITY; i++) {
-				mainActionItems.add(defItems.get(i).getId());
+		OsmandSettings.ContextMenuItemsSettings pref = getSettingForScreen(app, screenType).getModeValue(appMode);
+		if (pref instanceof OsmandSettings.MapContextMenuItemsSettings) {
+			mainActionItems = new ArrayList<>(((OsmandSettings.MapContextMenuItemsSettings) pref).getMainActionIds());
+			if (mainActionItems.isEmpty()) {
+				for (int i = 0; i < MAIN_BUTTONS_QUANTITY; i++) {
+					mainActionItems.add(defItems.get(i).getId());
+				}
 			}
 		}
 	}
@@ -240,7 +242,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 				FragmentManager fm = getFragmentManager();
 				OsmandSettings.ContextMenuItemsSettings prefToSave;
 				if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
-					prefToSave = new OsmandSettings.ContextMenuItemsSettings(mainActionItems, hiddenMenuItems, ids);
+					prefToSave = new OsmandSettings.MapContextMenuItemsSettings(mainActionItems, hiddenMenuItems, ids);
 				} else {
 					prefToSave = new OsmandSettings.ContextMenuItemsSettings(hiddenMenuItems, ids);
 				}
@@ -276,10 +278,8 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		super.onActivityCreated(savedInstanceState);
 		instantiateContextMenuAdapter();
 		if (menuItemsOrder.isEmpty()) {
-			List<ContextMenuItem> defItems = contextMenuAdapter.getDefaultItems();
-			initDefaultOrders(defItems);
-			for (int i = 0; i < defItems.size(); i++) {
-				menuItemsOrder.put(defItems.get(i).getId(), i);
+			for (ContextMenuItem item : contextMenuAdapter.getDefaultItems()) {
+				menuItemsOrder.put(item.getId(), item.getOrder());
 			}
 		}
 		if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
@@ -363,8 +363,8 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		List<RearrangeMenuAdapterItem> items = new ArrayList<>();
 		items.add(new RearrangeMenuAdapterItem(DESCRIPTION, screenType));
 
-		List<RearrangeMenuAdapterItem> visible = getItemsForRearrangeAdapter(hiddenMenuItems, wasReset ? null : menuItemsOrder, false);
-		List<RearrangeMenuAdapterItem> hiddenItems = getItemsForRearrangeAdapter(hiddenMenuItems, wasReset ? null : menuItemsOrder, true);
+		List<RearrangeMenuAdapterItem> visible = getItemsForRearrangeAdapter(hiddenMenuItems, menuItemsOrder, false);
+		List<RearrangeMenuAdapterItem> hiddenItems = getItemsForRearrangeAdapter(hiddenMenuItems, menuItemsOrder, true);
 		if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
 			int buttonMoreIndex = MAIN_BUTTONS_QUANTITY - 1;
 			for (int i = 0; i < visible.size(); i++) {
@@ -468,11 +468,11 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 				wasReset = true;
 				isChanged = true;
 				getSettingForScreen(app, screenType).resetModeToDefault(appMode);
-				instantiateContextMenuAdapter();
 				if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
 					mainActionItems.clear();
-					initDefaultMainActions();
 				}
+				instantiateContextMenuAdapter();
+				initDefaultMainActions();
 				rearrangeAdapter.updateItems(getAdapterItems());
 			}
 		});
@@ -513,17 +513,9 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		}
 	}
 
-	private void initDefaultOrders(@NonNull List<ContextMenuItem> items) {
-		for (int i = 0; i < items.size(); i++) {
-			items.get(i).setOrder(i);
-		}
-	}
-
-	public List<RearrangeMenuAdapterItem> getItemsForRearrangeAdapter(@Nullable List<String> hiddenItemsIds, @Nullable HashMap<String, Integer> itemsOrderIds, boolean hidden) {
+	private List<RearrangeMenuAdapterItem> getItemsForRearrangeAdapter(List<String> hiddenItemsIds, HashMap<String, Integer> itemsOrderIds, boolean hidden) {
 		List<ContextMenuItem> defItems = contextMenuAdapter.getDefaultItems();
-		if (itemsOrderIds == null || itemsOrderIds.isEmpty()) {
-			initDefaultOrders(defItems);
-		} else {
+		if (!itemsOrderIds.isEmpty()) {
 			sortByCustomOrder(defItems, itemsOrderIds);
 		}
 		List<RearrangeMenuAdapterItem> visibleItems = new ArrayList<>();

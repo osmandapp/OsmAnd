@@ -565,15 +565,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 
 		// Action buttons
-//		TODO refactor section
 		ContextMenuAdapter adapter = menu.getActionsContextMenuAdapter(false);
-		List<ContextMenuItem> items = new ArrayList<>();
-		List<String> mainIds = app.getSettings().CONTEXT_MENU_ACTIONS_ITEMS.get().getMainActionIds();
-		for (ContextMenuItem item : adapter.getItems()) {
-			if (!item.isHidden()) {
-				items.add(item);
-			}
-		}
+		List<ContextMenuItem> items = adapter.getVisibleItems();
+		List<String> mainIds = ((OsmandSettings.MapContextMenuItemsSettings) app.getSettings().CONTEXT_MENU_ACTIONS_ITEMS.get()).getMainActionIds();
 		ContextMenuAdapter mainAdapter = new ContextMenuAdapter(requireMyApplication());
 		ContextMenuAdapter additionalAdapter = new ContextMenuAdapter(requireMyApplication());
 

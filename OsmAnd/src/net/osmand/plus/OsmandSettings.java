@@ -1141,8 +1141,8 @@ public class OsmandSettings {
 		@NonNull
 		private String idScheme;
 
-		private ContextMenuItemsPreference(String id, @NonNull String idScheme) {
-			super(id, new ContextMenuItemsSettings());
+		private ContextMenuItemsPreference(String id, @NonNull String idScheme, @NonNull ContextMenuItemsSettings defValue) {
+			super(id, defValue);
 			this.idScheme = idScheme;
 		}
 
@@ -1163,7 +1163,7 @@ public class OsmandSettings {
 		}
 
 		private ContextMenuItemsSettings readValue(String s) {
-			ContextMenuItemsSettings value = new ContextMenuItemsSettings();
+			ContextMenuItemsSettings value = getDefaultValue().newInstance();
 			value.readFromJsonString(s, idScheme);
 			return value;
 		}
@@ -1175,12 +1175,10 @@ public class OsmandSettings {
 	}
 
 	public static class ContextMenuItemsSettings implements Serializable {
-		public static final String HIDDEN = "hidden";
-		public static final String ORDER = "order";
-		public static final String MAIN_ACTIONS = "main_actions";
+		private static final String HIDDEN = "hidden";
+		private static final String ORDER = "order";
 		private List<String> hiddenIds = new ArrayList<>();
 		private List<String> orderIds = new ArrayList<>();
-		private List<String> mainActionIds = new ArrayList<>();
 
 		public ContextMenuItemsSettings() {
 
@@ -1191,10 +1189,8 @@ public class OsmandSettings {
 			this.orderIds = orderIds;
 		}
 
-		public ContextMenuItemsSettings(@NonNull List<String> mainActionIds, @NonNull List<String> hiddenIds, @NonNull List<String> orderIds) {
-			this.mainActionIds = mainActionIds;
-			this.hiddenIds = hiddenIds;
-			this.orderIds = orderIds;
+		public ContextMenuItemsSettings newInstance() {
+			return new ContextMenuItemsSettings();
 		}
 
 		public void readFromJsonString(String jsonString, @NonNull String idScheme) {
@@ -1203,26 +1199,23 @@ public class OsmandSettings {
 			}
 			try {
 				JSONObject json = new JSONObject(jsonString);
-				hiddenIds = readIdsList(json.optJSONArray(HIDDEN), idScheme);
-				orderIds = readIdsList(json.optJSONArray(ORDER), idScheme);
-				if (idScheme.equals(MAP_CONTEXT_MENU_ACTIONS)) {
-					mainActionIds = readIdsList(json.optJSONArray(MAIN_ACTIONS), idScheme);
-				}
+				readFromJson(json, idScheme);
 			} catch (JSONException e) {
 				LOG.error("Error converting to json string: " + e);
 			}
 		}
 
-		private List<String> readIdsList(JSONArray jsonArray, @NonNull String idScheme) {
+		public void readFromJson(JSONObject json, String idScheme) {
+			hiddenIds = readIdsList(json.optJSONArray(HIDDEN), idScheme);
+			orderIds = readIdsList(json.optJSONArray(ORDER), idScheme);
+		}
+
+		protected List<String> readIdsList(JSONArray jsonArray, @NonNull String idScheme) {
 			List<String> list = new ArrayList<>();
 			if (jsonArray != null) {
 				for (int i = 0; i < jsonArray.length(); i++) {
 					String id = jsonArray.optString(i);
-					if (id.startsWith(AIDL_LAYERS_PREFIX)) {
-						list.add(id);
-					} else {
-						list.add(idScheme + id);
-					}
+					list.add(idScheme + id);
 				}
 			}
 			return list;
@@ -1231,11 +1224,7 @@ public class OsmandSettings {
 		public String writeToJsonString(@NonNull String idScheme) {
 			try {
 				JSONObject json = new JSONObject();
-				json.put(HIDDEN, getJsonArray(hiddenIds, idScheme));
-				json.put(ORDER, getJsonArray(orderIds, idScheme));
-				if (idScheme.equals(MAP_CONTEXT_MENU_ACTIONS)) {
-					json.put(MAIN_ACTIONS, getJsonArray(mainActionIds, idScheme));
-				}
+				writeToJson(json, idScheme);
 				return json.toString();
 			} catch (JSONException e) {
 				LOG.error("Error converting to json string: " + e);
@@ -1243,7 +1232,12 @@ public class OsmandSettings {
 			return "";
 		}
 
-		private JSONArray getJsonArray(List<String> ids, @NonNull String idScheme) {
+		public void writeToJson(JSONObject json, String idScheme) throws JSONException {
+			json.put(HIDDEN, getJsonArray(hiddenIds, idScheme));
+			json.put(ORDER, getJsonArray(orderIds, idScheme));
+		}
+
+		protected JSONArray getJsonArray(List<String> ids, @NonNull String idScheme) {
 			JSONArray jsonArray = new JSONArray();
 			if (ids != null && !ids.isEmpty()) {
 				for (String id : ids) {
@@ -1259,6 +1253,37 @@ public class OsmandSettings {
 
 		public List<String> getOrderIds() {
 			return Collections.unmodifiableList(orderIds);
+		}
+	}
+
+	public static class MapContextMenuItemsSettings extends ContextMenuItemsSettings {
+		private static final String MAIN_ACTIONS = "main_actions";
+		private List<String> mainActionIds = new ArrayList<>();
+
+		public MapContextMenuItemsSettings() {
+
+		}
+
+		public MapContextMenuItemsSettings(@NonNull List<String> mainActionIds, @NonNull List<String> hiddenIds, @NonNull List<String> orderIds) {
+			super(hiddenIds, orderIds);
+			this.mainActionIds = mainActionIds;
+		}
+
+		@Override
+		public ContextMenuItemsSettings newInstance() {
+			return new MapContextMenuItemsSettings();
+		}
+
+		@Override
+		public void readFromJson(JSONObject json, String idScheme) {
+			super.readFromJson(json, idScheme);
+			mainActionIds = readIdsList(json.optJSONArray(MAIN_ACTIONS), idScheme);
+		}
+
+		@Override
+		public void writeToJson(JSONObject json, String idScheme) throws JSONException {
+			super.writeToJson(json, idScheme);
+			json.put(MAIN_ACTIONS, getJsonArray(mainActionIds, idScheme));
 		}
 
 		public List<String> getMainActionIds() {
@@ -3592,21 +3617,21 @@ public class OsmandSettings {
 			new ListStringPreference("inactive_poi_filters", null, ",,").makeProfile().cache();
 
 	public final ContextMenuItemsPreference DRAWER_ITEMS =
-			(ContextMenuItemsPreference) new ContextMenuItemsPreference("drawer_items", DRAWER_ITEM_ID_SCHEME).makeProfile().cache();
+			(ContextMenuItemsPreference) new ContextMenuItemsPreference("drawer_items", DRAWER_ITEM_ID_SCHEME, new ContextMenuItemsSettings())
+					.makeProfile().cache();
 
 	public final ContextMenuItemsPreference CONFIGURE_MAP_ITEMS =
-			(ContextMenuItemsPreference) new ContextMenuItemsPreference("context_menu_items", CONFIGURE_MAP_ITEM_ID_SCHEME).makeProfile().cache();
+			(ContextMenuItemsPreference) new ContextMenuItemsPreference("context_menu_items", CONFIGURE_MAP_ITEM_ID_SCHEME, new ContextMenuItemsSettings())
+					.makeProfile().cache();
 
 	public final ContextMenuItemsPreference CONTEXT_MENU_ACTIONS_ITEMS =
-			(ContextMenuItemsPreference) new ContextMenuItemsPreference("configure_map_items", MAP_CONTEXT_MENU_ACTIONS).makeProfile().cache();
+			(ContextMenuItemsPreference) new ContextMenuItemsPreference("configure_map_items", MAP_CONTEXT_MENU_ACTIONS, new MapContextMenuItemsSettings())
+					.makeProfile().cache();
 
 	public final List<ContextMenuItemsPreference> CONTEXT_MENU_ITEMS_PREFERENCES = Arrays.asList(DRAWER_ITEMS, CONFIGURE_MAP_ITEMS, CONTEXT_MENU_ACTIONS_ITEMS);
 
 	@Nullable
 	public ContextMenuItemsPreference getContextMenuItemsPreference(@NonNull String id) {
-		if (id.startsWith(AIDL_LAYERS_PREFIX)) {
-			return CONFIGURE_MAP_ITEMS;
-		}
 		for (ContextMenuItemsPreference preference : CONTEXT_MENU_ITEMS_PREFERENCES) {
 			if (id.startsWith(preference.idScheme)) {
 				return preference;
