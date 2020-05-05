@@ -19,25 +19,26 @@
 		<androidx.appcompat.widget.Toolbar
 			android:id="@+id/toolbar"
 			android:layout_width="fill_parent"
-			android:layout_height="@dimen/dashboard_map_toolbar"
+			android:layout_height="@dimen/toolbar_height"
 			android:background="?attr/card_and_list_background_basic"
-			android:minHeight="@dimen/dashboard_map_toolbar"
+			android:paddingRight="@dimen/content_padding"
+			android:paddingEnd="@dimen/content_padding"
+			android:minHeight="@dimen/toolbar_height"
 			osmand:subtitleTextColor="?android:textColorPrimary"
 			osmand:theme="@style/ThemeOverlay.AppCompat.ActionBar"
 			osmand:titleTextColor="?android:textColorPrimary">
 
 			<ImageView
 				android:id="@+id/toolbar_action"
-				android:layout_width="@dimen/list_item_height"
+				android:layout_width="@dimen/standard_icon_size"
 				android:layout_height="match_parent"
 				android:layout_gravity="end"
 				android:contentDescription="@string/replace_all"
-				android:scaleType="center"
 				android:src="@drawable/ic_action_replace"
 				android:layout_marginRight="@dimen/content_padding_half"
 				android:layout_marginStart="@dimen/content_padding_half"
-				android:layout_marginLeft="@dimen/content_padding_half"
-				android:layout_marginEnd="@dimen/content_padding_half" />
+				android:layout_marginLeft="@dimen/content_padding"
+				android:layout_marginEnd="@dimen/content_padding" />
 
 		</androidx.appcompat.widget.Toolbar>
 
@@ -57,8 +58,8 @@
 				<FrameLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_marginLeft="@dimen/list_content_padding"
-					android:layout_marginRight="@dimen/list_content_padding">
+					android:layout_marginLeft="@dimen/content_padding"
+					android:layout_marginRight="@dimen/content_padding">
 
 
 					<LinearLayout
@@ -83,15 +84,16 @@
 								android:layout_height="wrap_content"
 								android:drawableEnd="@drawable/btn_circle_transparent_full"
 								android:drawableRight="@drawable/btn_circle_transparent_full"
-								android:drawablePadding="60dp"
+								android:drawablePadding="@dimen/favorites_list_item_height"
 								android:inputType="textMultiLine"
 								android:maxLines="4"
-								android:minHeight="60dp"
-								android:paddingStart="12dp"
-								android:paddingLeft="12dp"
-								android:paddingRight="12dp"
+								android:minHeight="@dimen/favorites_list_item_height"
+								android:paddingStart="@dimen/content_padding_small"
+								android:paddingLeft="@dimen/content_padding_small"
+								android:paddingRight="@dimen/content_padding_small"
+								android:paddingEnd="@dimen/content_padding_small"
 								android:scrollHorizontally="false"
-								android:textSize="16sp"
+								android:textSize="@dimen/default_list_text_size"
 								tools:text="@string/lorem_ipsum" />
 
 						</com.google.android.material.textfield.TextInputLayout>
@@ -100,11 +102,11 @@
 
 					<ImageView
 						android:id="@+id/name_icon"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
+						android:layout_width="@dimen/favorites_icon_size"
+						android:layout_height="@dimen/favorites_icon_size"
+						android:padding="@dimen/favorites_icon_padding"
 						android:layout_gravity="end"
-						android:layout_margin="12dp"
-						android:scaleType="center"
+						android:layout_margin="@dimen/content_padding_small"
 						android:contentDescription="@string/icon"
 						android:src="@drawable/ic_action_home_dark" />
 
@@ -114,7 +116,7 @@
 					android:id="@+id/description"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_marginTop="@dimen/card_padding"
+					android:layout_marginTop="@dimen/content_padding_small"
 					android:gravity="center_vertical"
 					android:orientation="horizontal">
 
@@ -123,8 +125,8 @@
 						android:id="@+id/description_caption"
 						android:layout_width="0dp"
 						android:layout_height="wrap_content"
-						android:layout_marginLeft="@dimen/list_content_padding"
-						android:layout_marginRight="@dimen/list_content_padding"
+						android:layout_marginLeft="@dimen/content_padding"
+						android:layout_marginRight="@dimen/content_padding"
 						android:layout_weight="1"
 						android:hint="@string/shared_string_description"
 						app:boxBackgroundColor="#4DCCCCCC">
@@ -135,11 +137,12 @@
 							android:layout_height="wrap_content"
 							android:inputType="textMultiLine"
 							android:maxLines="4"
-							android:minHeight="60dp"
-							android:paddingStart="12dp"
-							android:paddingLeft="12dp"
-							android:paddingRight="12dp"
-							android:textSize="16sp"
+							android:minHeight="@dimen/favorites_list_item_height"
+							android:paddingStart="@dimen/content_padding_small"
+							android:paddingLeft="@dimen/content_padding_small"
+							android:paddingRight="@dimen/content_padding_small"
+							android:paddingEnd="@dimen/content_padding_small"
+							android:textSize="@dimen/default_list_text_size"
 							tools:text="@string/lorem_ipsum" />
 
 					</com.google.android.material.textfield.TextInputLayout>
@@ -148,7 +151,7 @@
 				<net.osmand.plus.widgets.TextViewEx
 					android:id="@+id/description_button"
 					android:layout_width="wrap_content"
-					android:layout_height="48dp"
+					android:layout_height="@dimen/context_menu_buttons_bottom_height"
 					android:layout_marginStart="@dimen/content_padding_half"
 					android:layout_marginLeft="@dimen/content_padding_half"
 					android:paddingLeft="@dimen/content_padding_half"
@@ -171,7 +174,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:gravity="center_vertical"
-					android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
+					android:minHeight="@dimen/toolbar_height"
 					android:orientation="vertical">
 
 					<LinearLayout
@@ -185,9 +188,9 @@
 							android:layout_weight="1"
 							android:letterSpacing="@dimen/description_letter_spacing"
 							android:paddingLeft="@dimen/content_padding"
-							android:paddingTop="14dp"
+							android:paddingTop="@dimen/context_menu_first_line_top_margin"
 							android:paddingRight="@dimen/content_padding"
-							android:paddingBottom="14dp"
+							android:paddingBottom="@dimen/context_menu_first_line_top_margin"
 							android:text="@string/select_group"
 							android:textColor="?android:textColorSecondary"
 							android:textSize="@dimen/default_desc_text_size"
@@ -217,15 +220,14 @@
 
 							<ImageView
 								android:id="@+id/group_list_button_icon"
-								android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
+								android:layout_width="@dimen/standard_icon_size"
+								android:layout_height="@dimen/standard_icon_size"
 								android:layout_gravity="center_vertical"
-								android:paddingStart="@dimen/content_padding_small"
-								android:paddingLeft="@dimen/content_padding_small"
-								android:paddingEnd="@dimen/route_info_buttons_padding_top_bottom"
-								android:paddingRight="@dimen/route_info_buttons_padding_top_bottom"
+								android:layout_marginStart="@dimen/content_padding_small"
+								android:layout_marginLeft="@dimen/content_padding_small"
+								android:layout_marginEnd="@dimen/content_padding"
+								android:layout_marginRight="@dimen/content_padding"
 								android:src="@drawable/ic_action_folder"
-								tools:src="@drawable/ic_action_group_select_all"
 								android:contentDescription="@string/shared_string_list" />
 
 						</LinearLayout>
@@ -235,8 +237,8 @@
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:orientation="horizontal"
-						android:paddingTop="6dp"
-						android:paddingBottom="@dimen/content_padding_half">
+						android:paddingTop="@dimen/context_menu_padding_margin_tiny"
+						android:paddingBottom="@dimen/content_padding">
 
 						<androidx.recyclerview.widget.RecyclerView
 							android:id="@+id/group_recycler_view"
@@ -259,8 +261,6 @@
 				<View
 					android:layout_width="match_parent"
 					android:layout_height="1dp"
-					android:layout_marginTop="@dimen/content_padding_half"
-					android:layout_marginBottom="@dimen/content_padding_half"
 					android:background="?attr/dashboard_divider" />
 
 				<net.osmand.plus.widgets.TextViewEx
@@ -268,9 +268,9 @@
 					android:layout_height="wrap_content"
 					android:letterSpacing="@dimen/description_letter_spacing"
 					android:paddingLeft="@dimen/content_padding"
-					android:paddingTop="@dimen/content_padding_half"
+					android:paddingTop="@dimen/context_menu_first_line_top_margin"
 					android:paddingRight="@dimen/content_padding"
-					android:paddingBottom="14dp"
+					android:paddingBottom="@dimen/context_menu_first_line_top_margin"
 					android:text="@string/select_icon_profile_dialog_title"
 					android:textColor="?android:textColorSecondary"
 					android:textSize="@dimen/default_desc_text_size"
@@ -295,15 +295,14 @@
 					android:id="@+id/select_icon"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginStart="12dp"
-					android:layout_marginLeft="12dp"
-					android:layout_marginTop="6dp" />
+					android:layout_marginStart="@dimen/content_padding_small"
+					android:layout_marginLeft="@dimen/content_padding_small"
+					android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
+					android:layout_marginBottom="@dimen/content_padding_half" />
 
 				<View
 					android:layout_width="match_parent"
 					android:layout_height="1dp"
-					android:layout_marginTop="@dimen/content_padding_half"
-					android:layout_marginBottom="@dimen/content_padding_half"
 					android:background="?attr/dashboard_divider" />
 
 				<LinearLayout
@@ -317,9 +316,9 @@
 						android:layout_weight="1"
 						android:letterSpacing="@dimen/description_letter_spacing"
 						android:paddingLeft="@dimen/content_padding"
-						android:paddingTop="@dimen/content_padding_half"
+						android:paddingTop="@dimen/context_menu_first_line_top_margin"
 						android:paddingRight="@dimen/content_padding"
-						android:paddingBottom="14dp"
+						android:paddingBottom="@dimen/context_menu_first_line_top_margin"
 						android:text="@string/select_color"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
@@ -332,9 +331,9 @@
 						android:gravity="end"
 						android:letterSpacing="@dimen/description_letter_spacing"
 						android:paddingLeft="@dimen/content_padding"
-						android:paddingTop="@dimen/content_padding_half"
+						android:paddingTop="@dimen/context_menu_first_line_top_margin"
 						android:paddingRight="@dimen/content_padding"
-						android:paddingBottom="14dp"
+						android:paddingBottom="@dimen/context_menu_first_line_top_margin"
 						android:text="@string/select_color"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
@@ -345,15 +344,13 @@
 					android:id="@+id/select_color"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginStart="12dp"
-					android:layout_marginLeft="12dp"
-					android:layout_marginTop="6dp" />
-
+					android:layout_marginStart="@dimen/content_padding_small"
+					android:layout_marginLeft="@dimen/content_padding_small"
+					android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
+					android:layout_marginBottom="@dimen/content_padding_half" />
 				<View
 					android:layout_width="match_parent"
 					android:layout_height="1dp"
-					android:layout_marginTop="@dimen/content_padding_half"
-					android:layout_marginBottom="@dimen/content_padding_half"
 					android:background="?attr/dashboard_divider" />
 
 				<LinearLayout
@@ -367,9 +364,9 @@
 						android:layout_weight="1"
 						android:letterSpacing="@dimen/description_letter_spacing"
 						android:paddingLeft="@dimen/content_padding"
-						android:paddingTop="@dimen/content_padding_half"
+						android:paddingTop="@dimen/context_menu_first_line_top_margin"
 						android:paddingRight="@dimen/content_padding"
-						android:paddingBottom="14dp"
+						android:paddingBottom="@dimen/context_menu_first_line_top_margin"
 						android:text="@string/select_shape"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
@@ -382,9 +379,9 @@
 						android:gravity="end"
 						android:letterSpacing="@dimen/description_letter_spacing"
 						android:paddingLeft="@dimen/content_padding"
-						android:paddingTop="@dimen/content_padding_half"
+						android:paddingTop="@dimen/context_menu_first_line_top_margin"
 						android:paddingRight="@dimen/content_padding"
-						android:paddingBottom="14dp"
+						android:paddingBottom="@dimen/context_menu_first_line_top_margin"
 						android:text="@string/select_shape"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
@@ -393,18 +390,17 @@
 
 				<net.osmand.plus.widgets.FlowLayout
 					android:id="@+id/select_shape"
-
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:gravity="start"
-					android:layout_marginStart="12dp"
-					android:layout_marginLeft="12dp"
-					android:layout_marginTop="6dp" />
+					android:layout_marginStart="@dimen/content_padding_small"
+					android:layout_marginLeft="@dimen/content_padding_small"
+					android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
+					android:layout_marginBottom="@dimen/content_padding_half" />
 
 				<View
 					android:layout_width="match_parent"
 					android:layout_height="1dp"
-					android:layout_marginTop="@dimen/content_padding_half"
 					android:background="?attr/dashboard_divider" />
 
 				<LinearLayout
@@ -416,22 +412,24 @@
 
 					<ImageView
 						android:id="@+id/replace_action_icon"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
+						android:layout_width="@dimen/standard_icon_size"
+						android:layout_height="@dimen/standard_icon_size"
+						android:layout_gravity="center_vertical"
+						android:layout_marginStart="@dimen/content_padding"
+						android:layout_marginLeft="@dimen/content_padding"
+						android:layout_marginEnd="@dimen/content_padding"
+						android:layout_marginRight="@dimen/content_padding"
 						android:contentDescription="@string/update_existing"
-						android:paddingStart="@dimen/content_padding"
-						android:paddingLeft="@dimen/content_padding"
-						android:paddingTop="21dp"
-						android:paddingEnd="32dp"
-						android:paddingRight="32dp"
-						android:paddingBottom="21dp"
 						tools:src="@drawable/ic_action_replace" />
 
 					<LinearLayout
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:paddingTop="11dp"
-						android:orientation="vertical">
+						android:layout_marginStart="@dimen/content_padding"
+						android:layout_marginLeft="@dimen/content_padding"
+						android:orientation="vertical"
+						android:paddingTop="@dimen/content_padding_half"
+						android:paddingBottom="@dimen/content_padding_half">
 
 						<TextView
 							android:id="@+id/replace_action_title"
@@ -466,21 +464,24 @@
 
 					<ImageView
 						android:id="@+id/delete_action_icon"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
+						android:layout_width="@dimen/standard_icon_size"
+						android:layout_height="@dimen/standard_icon_size"
+						android:layout_marginStart="@dimen/content_padding"
+						android:layout_marginLeft="@dimen/content_padding"
+						android:layout_marginEnd="@dimen/content_padding"
+						android:layout_marginRight="@dimen/content_padding"
+						android:layout_gravity="center_vertical"
 						android:contentDescription="@string/delete_point"
-						android:paddingStart="@dimen/content_padding"
-						android:paddingLeft="@dimen/content_padding"
-						android:paddingTop="12dp"
-						android:paddingEnd="32dp"
-						android:paddingRight="32dp"
-						android:paddingBottom="12dp"
 						android:src="@drawable/ic_action_delete_dark" />
 
 					<TextView
 						android:id="@+id/delete_action_title"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
+						android:layout_marginStart="@dimen/content_padding"
+						android:layout_marginLeft="@dimen/content_padding"
+						android:layout_marginTop="@dimen/content_padding_small"
+						android:layout_marginBottom="@dimen/content_padding_small"
 						android:maxLines="1"
 						android:text="@string/shared_string_delete"
 						android:textAppearance="@style/TextAppearance.ListItemCategoryTitle"

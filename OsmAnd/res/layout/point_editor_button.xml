@@ -5,9 +5,9 @@
 	android:layout_height="wrap_content"
 	android:paddingStart="0dp"
 	android:paddingLeft="0dp"
-	android:paddingEnd="9dp"
-	android:paddingRight="9dp"
-	android:paddingBottom="4dp">
+	android:paddingEnd="@dimen/favorites_select_icon_button_right_padding"
+	android:paddingRight="@dimen/favorites_select_icon_button_right_padding"
+	android:paddingBottom="@dimen/context_menu_buttons_padding_bottom">
 
 	<FrameLayout
 		android:layout_width="wrap_content"
@@ -15,22 +15,23 @@
 
 		<ImageView
 			android:id="@+id/outline"
-			android:layout_width="48dp"
-			android:layout_height="48dp"
+			android:layout_width="@dimen/context_menu_buttons_bottom_height"
+			android:layout_height="@dimen/context_menu_buttons_bottom_height"
 			android:visibility="invisible"
 			app:srcCompat="@drawable/bg_point_circle_contour" />
 
 		<ImageView
 			android:id="@+id/background"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
+			android:layout_width="@dimen/favorites_icon_size"
+			android:layout_height="@dimen/favorites_icon_size"
+			android:padding="@dimen/favorites_icon_padding"
 			android:layout_gravity="center"
-			android:background="@drawable/bg_point_circle" />
+			app:srcCompat="@drawable/bg_point_circle" />
 
 		<ImageView
 			android:id="@+id/icon"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
 			android:layout_gravity="center"
 			android:clickable="false"
 			android:visibility="gone"

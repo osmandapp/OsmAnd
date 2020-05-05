@@ -425,10 +425,10 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 		FavouritePoint favorite = getFavorite();
 		int color = favorite != null ? getColor() : 0;
 		FavoriteGroup group = getGroup();
-		if (group != null && color == 0) {
+		if (group != null && (color == 0 || color == 0xFF000000)) {
 			color = group.getColor();
 		}
-		if (color == 0) {
+		if (color == 0 || color == 0xFF000000) {
 			color = defaultColor;
 		}
 		return color;
@@ -457,17 +457,19 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 			OsmandApplication app = getMyApplication();
 			if (editor.isNew()) {
 				FavoriteGroup lastUsedGroup = helper.getGroup(getLastUsedGroup());
-				if (lastUsedGroup != null) {
+				if (lastUsedGroup != null && lastUsedGroup.isVisible()) {
 					categories.add(lastUsedGroup.getDisplayName(app));
 				}
 				for (FavouritesDbHelper.FavoriteGroup fg : getHelper().getFavoriteGroups()) {
-					if (lastUsedGroup != null && !fg.equals(lastUsedGroup)) {
+					if (lastUsedGroup != null && !fg.equals(lastUsedGroup) && fg.isVisible()) {
 						categories.add(fg.getDisplayName(app));
 					}
 				}
 			} else {
 				for (FavoriteGroup fg : helper.getFavoriteGroups()) {
-					categories.add(fg.getDisplayName(app));
+					if (fg.isVisible()) {
+						categories.add(fg.getDisplayName(app));
+					}
 				}
 			}
 		}
