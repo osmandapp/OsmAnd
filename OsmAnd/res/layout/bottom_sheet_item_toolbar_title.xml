@@ -7,7 +7,9 @@
 	android:layout_height="@dimen/bottom_sheet_selected_item_title_height"
 	android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
 	osmand:contentInsetLeft="54dp"
-	osmand:contentInsetStart="54dp">
+	osmand:contentInsetStart="54dp"
+	osmand:contentInsetRight="0dp"
+	osmand:contentInsetEnd="0dp">
 
 	<net.osmand.plus.widgets.TextViewEx
 		android:id="@+id/title"

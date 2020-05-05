@@ -145,7 +145,7 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		} else {
 			elementsPaddingLeft = getNavigationBarWidth();
 		}
-		logoLayoutParams.setMargins(0, logoMarginTop, 0, 0);
+		AndroidUtils.setMargins(logoLayoutParams, 0, logoMarginTop, 0, 0);
 		logo.setPadding(elementsPaddingLeft, 0, elementsPaddingRight, 0);
 		logo.setLayoutParams(logoLayoutParams);
 		view.addView(logo);

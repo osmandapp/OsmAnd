@@ -395,9 +395,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private FrameLayout.LayoutParams getActionButtonLayoutParams(int btnSizePx) {
 		int topPadPx = mapActivity.getResources().getDimensionPixelSize(R.dimen.dashboard_map_top_padding);
 		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(btnSizePx, btnSizePx);
-		int marginRight = btnSizePx / 4;
-		params.setMargins(0, landscape ? 0 : topPadPx - 2 * btnSizePx, marginRight, landscape ? marginRight : 0);
-		params.gravity = landscape ? Gravity.BOTTOM | Gravity.RIGHT : Gravity.TOP | Gravity.RIGHT;
+		int marginEnd = btnSizePx / 4;
+		AndroidUtils.setMargins(params, 0, landscape ? 0 : topPadPx - 2 * btnSizePx, marginEnd, landscape ? marginEnd : 0);
+		params.gravity = landscape ? Gravity.BOTTOM | Gravity.END : Gravity.TOP | Gravity.END;
 		return params;
 	}
 

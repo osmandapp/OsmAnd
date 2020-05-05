@@ -1112,7 +1112,7 @@ public class MenuBuilder {
 		} else {
 			button.setTextColor(ContextCompat.getColor(context, light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
 		}
-		button.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+		button.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
 		button.setSingleLine(singleLine);
 		button.setEllipsize(TextUtils.TruncateAt.END);
 

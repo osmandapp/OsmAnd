@@ -37,7 +37,8 @@
 
 		<FrameLayout
 			android:layout_width="0dp"
-			android:layout_height="@dimen/card_row_min_height"
+			android:layout_height="wrap_content"
+			android:minHeight="@dimen/card_row_min_height"
 			android:layout_gravity="center_vertical"
 			android:layout_weight="1">
 

@@ -17,7 +17,9 @@
 			android:gravity="center_vertical"
 			android:minHeight="@dimen/toolbar_height"
 			osmand:contentInsetLeft="54dp"
-			osmand:contentInsetStart="54dp">
+			osmand:contentInsetStart="54dp"
+			osmand:contentInsetRight="0dp"
+			osmand:contentInsetEnd="0dp">
 
 			<LinearLayout
 				android:layout_width="match_parent"

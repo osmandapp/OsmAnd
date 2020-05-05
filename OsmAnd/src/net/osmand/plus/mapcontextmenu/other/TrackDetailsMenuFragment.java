@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu.other;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -195,7 +196,10 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 			if (!landscapeLayout) {
 				AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 			} else {
-				AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.bg_left_menu_light, R.drawable.bg_left_menu_dark);
+				final TypedValue typedValueAttr = new TypedValue();
+				int bgAttrId = AndroidUtils.isLayoutRtl(ctx) ? R.attr.right_menu_view_bg : R.attr.left_menu_view_bg;
+				ctx.getTheme().resolveAttribute(bgAttrId, typedValueAttr, true);
+				mainView.setBackgroundResource(typedValueAttr.resourceId);
 			}
 
 			AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.y_axis_title), nightMode);

@@ -7,6 +7,8 @@
 	android:minHeight="@dimen/dashboard_map_toolbar"
 	osmand:contentInsetLeft="0dp"
 	osmand:contentInsetStart="0dp"
+	osmand:contentInsetRight="0dp"
+	osmand:contentInsetEnd="0dp"
 	osmand:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
 	<LinearLayout
@@ -22,7 +24,7 @@
 			android:layout_width="@dimen/toolbar_height"
 			android:layout_height="@dimen/toolbar_height"
 			android:contentDescription="@string/access_shared_string_navigate_up"
-			android:src="@drawable/ic_action_mode_back"
+			android:src="@drawable/ic_arrow_back"
 			android:tint="?attr/default_icon_color" />
 
 		<LinearLayout

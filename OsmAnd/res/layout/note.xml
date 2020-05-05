@@ -20,7 +20,10 @@
 		android:layout_height="wrap_content"
 		android:minHeight="@dimen/list_item_height"
 		android:paddingLeft="@dimen/list_content_padding"
-		android:paddingStart="@dimen/list_content_padding">
+		android:paddingStart="@dimen/list_content_padding"
+		android:paddingRight="0dp"
+		android:paddingEnd="0dp">
+
 		<CheckBox
 			android:id="@+id/check_local_index"
 			android:layout_width="wrap_content"

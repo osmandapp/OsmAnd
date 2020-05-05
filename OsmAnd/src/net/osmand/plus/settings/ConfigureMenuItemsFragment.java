@@ -158,8 +158,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		if (activity instanceof MapActivity) {
 			switch (screenType) {
 				case DRAWER:
-					MapActivityActions mapActivityActions = new MapActivityActions((MapActivity) activity);
-					contextMenuAdapter = mapActivityActions.createMainOptionsMenu();
+					contextMenuAdapter = ((MapActivity) activity).getMapActions().createMainOptionsMenu();
 					break;
 				case CONFIGURE_MAP:
 					ConfigureMapMenu configureMapMenu = new ConfigureMapMenu();
@@ -187,7 +186,9 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		toolbarTitle.setTextColor(nightMode
 				? getResources().getColor(R.color.text_color_primary_dark)
 				: getResources().getColor(R.color.list_background_color_dark));
-		toolbarButton.setImageDrawable(getPaintedContentIcon(R.drawable.ic_arrow_back, getResources().getColor(R.color.text_color_secondary_light)));
+		toolbarButton.setImageDrawable(getPaintedContentIcon(
+				AndroidUtils.getNavigationIconResId(app),
+				getResources().getColor(R.color.text_color_secondary_light)));
 		toolbarTitle.setText(screenType.titleRes);
 		toolbarButton.setOnClickListener(new View.OnClickListener() {
 			@Override

@@ -29,7 +29,8 @@ public class DashSearchFragment extends DashBaseFragment {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_search_fragment, container, false);
 
 		TextView searchFor = (TextView) view.findViewById(R.id.search_for);
-		searchFor.setCompoundDrawablesWithIntrinsicBounds(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_search_dark), null, null, null);
+		AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(searchFor,
+				getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_search_dark), null, null, null);
 		searchFor.setCompoundDrawablePadding(AndroidUtils.dpToPx(getActivity(), 16f));
 
 		view.findViewById(R.id.search_card).setOnClickListener(new View.OnClickListener() {
