@@ -15,7 +15,6 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -173,7 +172,7 @@ public abstract class OsmandMapLayer {
 		private Bitmap walkArrowBitmap;
 		private Bitmap anchorBitmap;
 		private Map<Pair<Integer, Drawable>, Bitmap> stopBitmapsCache = new HashMap<>();
-		private Map<Integer, Drawable> stopSmallBitmapsCache = new HashMap<>();
+		private Map<Integer, Bitmap> stopSmallBitmapsCache = new HashMap<>();
 
 		public GeometryWayContext(Context ctx, float density) {
 			this.ctx = ctx;
@@ -347,10 +346,10 @@ public abstract class OsmandMapLayer {
 				canvas.drawRoundRect(rect, routeShieldCornerRadius, routeShieldCornerRadius, paint);
 
 				if (stopDrawable != null) {
-					paint.setColorFilter(new PorterDuffColorFilter(strokeColor, Mode.SRC_IN));
+					stopDrawable.setColorFilter(new PorterDuffColorFilter(strokeColor, Mode.SRC_IN));
 					float marginBitmap = 1f * density;
 					rect.inset(marginBitmap, marginBitmap);
-					stopDrawable.setBounds(0,0, (int) rect.width(), (int) rect.height());
+					stopDrawable.setBounds(0, 0, (int) rect.width(), (int) rect.height());
 					canvas.translate(rect.left, rect.top);
 					stopDrawable.draw(canvas);
 				}
