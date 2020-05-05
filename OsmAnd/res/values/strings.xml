@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="reset_hidden_items">Reset hidden items?</string>
     <string name="shared_string_add_edit">Add / Edit</string>
     <string name="parking_positions">Parking positions</string>
     <string name="create_edit_poi">Create/Edit POI</string>

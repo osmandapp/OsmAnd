@@ -27,6 +27,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
@@ -347,6 +348,7 @@ public class SRTMPlugin extends OsmandPlugin {
 					.setIcon(R.drawable.ic_plugin_srtm)
 					.setDescription(app.getString(R.string.display_zoom_level, descr))
 					.setColor(contourLinesSelected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+					.setItemDeleteAction(new ConfigureMapMenu.ItemResetListener(Arrays.<OsmandSettings.OsmandPreference>asList(settings.CONTOUR_LINES_ZOOM)))
 					.setSecondaryIcon(R.drawable.ic_action_additional_option)
 					.setListener(listener).createItem());
 		}
@@ -362,6 +364,7 @@ public class SRTMPlugin extends OsmandPlugin {
 				.setColor(terrainEnabled ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_hillshade_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
+				.setItemDeleteAction(new ConfigureMapMenu.ItemResetListener(Arrays.<OsmandSettings.OsmandPreference>asList(settings.TERRAIN, settings.TERRAIN_MODE)))
 				.setListener(listener)
 				.createItem()
 		);

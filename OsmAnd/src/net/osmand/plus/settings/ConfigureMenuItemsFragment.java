@@ -51,7 +51,33 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DETAILS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FAVORITES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.GPX_FILES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.HIDE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAPILLARY;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_LANGUAGE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MAGNIFIER_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MARKERS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MODE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_SOURCE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_LABELS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.RECORDING_LAYER;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROAD_STYLE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_RENDERING_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.WIKIPEDIA_ID;
 import static net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItemType.BUTTON;
 import static net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItemType.DESCRIPTION;
 import static net.osmand.plus.settings.RearrangeMenuItemsAdapter.AdapterItemType.DIVIDER;
@@ -239,7 +265,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 					}
 				}
 				FragmentManager fm = getFragmentManager();
-				OsmandSettings.ContextMenuItemsSettings prefToSave;
+				final OsmandSettings.ContextMenuItemsSettings prefToSave;
 				if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
 					prefToSave = new OsmandSettings.MapContextMenuItemsSettings(mainActionItems, hiddenMenuItems, ids);
 				} else {
@@ -254,8 +280,12 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 							appMode,
 							new ChangeGeneralProfilesPrefBottomSheet.OnChangeSettingListener() {
 								@Override
-								public void onApplied() {
-									dismissFragment();
+								public void onApplied(boolean profileOnly) {
+									if (screenType == ScreenType.CONFIGURE_MAP && !hiddenMenuItems.isEmpty()) {
+										showResetConfigureMapItemsDialog(profileOnly);
+									} else {
+										dismissFragment();
+									}
 								}
 
 								@Override
@@ -397,7 +427,9 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 			items.addAll(visible);
 		}
 		if (!hiddenItems.isEmpty()) {
-			items.add(new RearrangeMenuAdapterItem(HEADER, new RearrangeMenuItemsAdapter.HeaderItem(R.string.shared_string_hidden, R.string.hidden_items_descr)));
+			items.add(new RearrangeMenuAdapterItem(HEADER,
+					new RearrangeMenuItemsAdapter.HeaderItem(R.string.shared_string_hidden,
+							screenType == ScreenType.CONFIGURE_MAP ? R.string.reset_items_descr : R.string.hidden_items_descr)));
 			items.addAll(hiddenItems);
 		}
 		items.add(new RearrangeMenuAdapterItem(DIVIDER, 1));
@@ -478,6 +510,27 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		dismissDialog.show();
 	}
 
+	public void showResetConfigureMapItemsDialog(final boolean profileOnly) {
+		Context themedContext = UiUtilities.getThemedContext(getActivity(), nightMode);
+		final AlertDialog.Builder dismissDialog = new AlertDialog.Builder(themedContext);
+		dismissDialog.setTitle(getString(R.string.shared_string_reset));
+		dismissDialog.setMessage(getString(R.string.reset_hidden_items));
+		dismissDialog.setNegativeButton(R.string.shared_string_cancel, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialogInterface, int i) {
+				dismissFragment();
+			}
+		});
+		dismissDialog.setPositiveButton(R.string.shared_string_reset, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				resetHiddenItems(profileOnly);
+				dismissFragment();
+			}
+		});
+		dismissDialog.show();
+	}
+
 	private void dismissFragment() {
 		FragmentManager fm = getFragmentManager();
 		if (fm != null && !fm.isStateSaved()) {
@@ -547,5 +600,15 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 				return (order1 < order2) ? -1 : ((order1 == order2) ? 0 : 1);
 			}
 		});
+	}
+
+	private void resetHiddenItems(boolean profileOnly) {
+		for (ContextMenuItem item : contextMenuAdapter.getItems()) {
+			if (hiddenMenuItems.contains(item.getId())) {
+				if (item.getItemDeleteAction() != null) {
+					item.getItemDeleteAction().itemWasDeleted(appMode, profileOnly);
+				}
+			}
+		}
 	}
 }

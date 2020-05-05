@@ -61,6 +61,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
@@ -652,6 +653,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.setSelected(SHOW_RECORDINGS.get())
 				.setIcon(R.drawable.ic_action_micro_dark)
 				.setColor(SHOW_RECORDINGS.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setItemDeleteAction(new ConfigureMapMenu.ItemResetListener(Arrays.<OsmandPreference>asList(SHOW_RECORDINGS)))
 				.setListener(listener).createItem());
 	}
 

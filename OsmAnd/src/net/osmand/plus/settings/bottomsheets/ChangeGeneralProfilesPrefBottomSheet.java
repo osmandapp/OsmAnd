@@ -69,7 +69,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 						app.getSettings().setPreferenceForAllModes(prefId, newValue);
 						updateTargetSettings(false, true);
 						if (listener != null) {
-							listener.onApplied();
+							listener.onApplied(false);
 						}
 						dismiss();
 					}
@@ -89,7 +89,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 						app.getSettings().setPreference(prefId, newValue, getAppMode());
 						updateTargetSettings(false, false);
 						if (listener != null) {
-							listener.onApplied();
+							listener.onApplied(true);
 						}
 						dismiss();
 					}
@@ -195,7 +195,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 	}
 
 	public interface OnChangeSettingListener {
-		void onApplied();
+		void onApplied(boolean profileOnly);
 
 		void onDiscard();
 	}

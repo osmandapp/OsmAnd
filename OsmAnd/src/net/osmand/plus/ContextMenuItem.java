@@ -278,7 +278,7 @@ public class ContextMenuItem {
 		private ContextMenuAdapter.ItemClickListener mItemClickListener = null;
 		private ContextMenuAdapter.OnIntegerValueChangedListener mIntegerListener = null;
 		private ContextMenuAdapter.ProgressListener mProgressListener = null;
-		private OnItemDeleteAction itemDeleteAction;
+		private OnItemDeleteAction mItemDeleteAction = null;
 		private boolean mSkipPaintingWithoutColor;
 		private boolean mHideDivider;
 		private boolean mHideCompoundButton;
@@ -380,8 +380,9 @@ public class ContextMenuItem {
 			return this;
 		}
 
-		public void setItemDeleteAction(OnItemDeleteAction itemDeleteAction) {
-			this.itemDeleteAction = itemDeleteAction;
+		public ItemBuilder setItemDeleteAction(OnItemDeleteAction itemDeleteAction) {
+			this.mItemDeleteAction = itemDeleteAction;
+			return this;
 		}
 
 		public ItemBuilder hideDivider(boolean hideDivider) {
@@ -416,14 +417,13 @@ public class ContextMenuItem {
 		public ContextMenuItem createItem() {
 			return new ContextMenuItem(mTitleId, mTitle, mIcon, mColorRes, mSecondaryIcon,
 					mSelected, mProgress, mLayout, mLoading, mIsCategory, mIsClickable, mSkipPaintingWithoutColor,
-					mPosition, mOrder, mDescription, mItemClickListener, mIntegerListener, mProgressListener, itemDeleteAction,
+					mPosition, mOrder, mDescription, mItemClickListener, mIntegerListener, mProgressListener, mItemDeleteAction,
 					mHideDivider, mHideCompoundButton, mMinHeight, mTag, mId);
 		}
 	}
 
-
 	// when action is deleted or reset
 	public interface OnItemDeleteAction {
-		boolean itemWasDeleted(boolean profileOnly);
+		void itemWasDeleted(ApplicationMode appMode, boolean profileOnly);
 	}
 }
