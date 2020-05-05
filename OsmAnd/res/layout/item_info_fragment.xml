@@ -18,7 +18,9 @@
 			android:minHeight="@dimen/dashboard_map_toolbar"
 			android:theme="?attr/toolbar_theme"
 			app:contentInsetLeft="72dp"
-			app:contentInsetStart="72dp" />
+			app:contentInsetStart="72dp"
+			app:contentInsetRight="0dp"
+			app:contentInsetEnd="0dp" />
 
 	</com.google.android.material.appbar.AppBarLayout>
 

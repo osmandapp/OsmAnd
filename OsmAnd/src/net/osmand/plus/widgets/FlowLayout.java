@@ -6,10 +6,11 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
+import net.osmand.AndroidUtils;
+
 public class FlowLayout extends ViewGroup {
 
 	private int line_height;
-	private boolean rtl = false;
 
 	public static class LayoutParams extends ViewGroup.LayoutParams {
 
@@ -91,12 +92,10 @@ public class FlowLayout extends ViewGroup {
 
 	@Override
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-			rtl = getLayoutDirection() == LAYOUT_DIRECTION_RTL;
-		}
 		final int count = getChildCount();
 		final int width = r - l;
-		int xpos = rtl ? width - getPaddingRight() : getPaddingLeft();
+		boolean isLayoutRtl = AndroidUtils.isLayoutRtl(getContext());
+		int xpos = isLayoutRtl ? width - getPaddingRight() : getPaddingLeft();
 		int ypos = getPaddingTop();
 		for (int i = 0; i < count; i++) {
 			final View child = getChildAt(i);
@@ -104,13 +103,13 @@ public class FlowLayout extends ViewGroup {
 				final int childw = child.getMeasuredWidth();
 				final int childh = child.getMeasuredHeight();
 				final LayoutParams lp = (LayoutParams) child.getLayoutParams();
-				if (rtl) {
+				if (isLayoutRtl) {
 					if (xpos - childw < l) {
 						xpos = width - getPaddingRight();
 						ypos += line_height;
 					}
 					child.layout(xpos - childw, ypos, xpos, ypos + childh);
-					xpos -= childw - lp.horizontal_spacing;
+					xpos -= childw + lp.horizontal_spacing;
 				} else {
 					if (xpos + childw > width) {
 						xpos = getPaddingLeft();

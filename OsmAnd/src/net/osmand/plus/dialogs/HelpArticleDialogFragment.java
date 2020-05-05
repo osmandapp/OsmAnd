@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -58,6 +59,7 @@ public class HelpArticleDialogFragment extends DialogFragment {
 		final View view = inflater.inflate(R.layout.fragment_help_article, container, false);
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+		toolbar.setNavigationIcon(AndroidUtils.getNavigationIconResId(getContext()));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override

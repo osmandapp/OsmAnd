@@ -283,7 +283,8 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 
 	private void setupToolbar(Toolbar toolbar) {
 		toolbar.setTitle(R.string.import_duplicates_title);
-		toolbar.setNavigationIcon(getPaintedContentIcon(R.drawable.ic_arrow_back,
+		toolbar.setNavigationIcon(getPaintedContentIcon(
+				AndroidUtils.getNavigationIconResId(app),
 				nightMode
 						? getResources().getColor(R.color.active_buttons_and_links_text_dark)
 						: getResources().getColor(R.color.active_buttons_and_links_text_light)));
