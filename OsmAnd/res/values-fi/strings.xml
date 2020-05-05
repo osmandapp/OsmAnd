@@ -2537,4 +2537,11 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="routing_attr_prefer_unpaved_name">Suosi päällystämättömiä teitä</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Suosi päällystämättömiä teitä</string>
     <string name="arrive_at_time">Perillä %1$s</string>
+    <string name="measure_distance_item">Mittaa etäisyys</string>
+    <string name="map_markers_item">Karttamarkkerit</string>
+    <string name="favorites_item">Suosikit</string>
+    <string name="subscription_osmandlive_item">Tilaus - OsmAnd Live</string>
+    <string name="osmand_purchases_item">OsmAnd ostot</string>
+    <string name="legend_item_description">Kartan symboliikkaopas</string>
+    <string name="navigation_profiles_item">Navigointiprofiilit</string>
 </resources>
