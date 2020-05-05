@@ -472,7 +472,7 @@ public abstract class OsmandMapLayer {
 	private Matrix mtx = new Matrix();
 	private Matrix inv_mtx = new Matrix();
 	private float[] pointCache;
-	private float[] outPutPoints = new float[4];
+	private float[] outputPoints = new float[4];
 
 	public int calculatePath(RotatedTileBox tb, List<Float> xs, List<Float> ys, List<GeometryWayStyle> styles, List<Pair<Path, GeometryWayStyle>> paths) {
 		boolean segmentStarted = false;
@@ -526,19 +526,19 @@ public abstract class OsmandMapLayer {
 				}
 			}
 			if (draw||hasStyles) {
-				outPutPoints[0]=prevX;
-				outPutPoints[1]=prevY;
-				outPutPoints[2]=currX;
-				outPutPoints[3]=currY;
-				inv_mtx.mapPoints(outPutPoints);
+				outputPoints[0]=prevX;
+				outputPoints[1]=prevY;
+				outputPoints[2]=currX;
+				outputPoints[3]=currY;
+				inv_mtx.mapPoints(outputPoints);
 			}
 			if (draw) {
 				if (!segmentStarted) {
 					cnt++;
-					path.moveTo(outPutPoints[0], outPutPoints[1]);
+					path.moveTo(outputPoints[0], outputPoints[1]);
 					segmentStarted = true;
 				}
-				path.lineTo(outPutPoints[2], outPutPoints[3]);
+				path.lineTo(outputPoints[2], outputPoints[3]);
 			} else {
 				segmentStarted = false;
 			}
@@ -552,7 +552,7 @@ public abstract class OsmandMapLayer {
 					paths.add(new Pair<>(path, style));
 					path = new Path();
 					if (segmentStarted) {
-						path.moveTo(outPutPoints[2], outPutPoints[3]);
+						path.moveTo(outputPoints[2], outputPoints[3]);
 					}
 					style = newStyle;
 				}
