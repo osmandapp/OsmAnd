@@ -160,8 +160,8 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	private void initDefaultMainActions() {
 		List<ContextMenuItem> defItems = getCustomizableDefaultItems(contextMenuAdapter.getDefaultItems());
 		OsmandSettings.ContextMenuItemsSettings pref = getSettingForScreen(app, screenType).getModeValue(appMode);
-		if (pref instanceof OsmandSettings.MapContextMenuItemsSettings) {
-			mainActionItems = new ArrayList<>(((OsmandSettings.MapContextMenuItemsSettings) pref).getMainActionIds());
+		if (pref instanceof OsmandSettings.MainContextMenuItemsSettings) {
+			mainActionItems = new ArrayList<>(((OsmandSettings.MainContextMenuItemsSettings) pref).getMainIds());
 			if (mainActionItems.isEmpty()) {
 				for (int i = 0; i < MAIN_BUTTONS_QUANTITY; i++) {
 					mainActionItems.add(defItems.get(i).getId());
@@ -253,7 +253,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 				FragmentManager fm = getFragmentManager();
 				final OsmandSettings.ContextMenuItemsSettings prefToSave;
 				if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
-					prefToSave = new OsmandSettings.MapContextMenuItemsSettings(mainActionItems, hiddenMenuItems, ids);
+					prefToSave = new OsmandSettings.MainContextMenuItemsSettings(mainActionItems, hiddenMenuItems, ids);
 				} else {
 					prefToSave = new OsmandSettings.ContextMenuItemsSettings(hiddenMenuItems, ids);
 				}

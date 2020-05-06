@@ -81,7 +81,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-import static net.osmand.aidl.ConnectedApp.AIDL_LAYERS_PREFIX;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
@@ -1288,38 +1287,38 @@ public class OsmandSettings {
 		}
 	}
 
-	public static class MapContextMenuItemsSettings extends ContextMenuItemsSettings {
-		private static final String MAIN_ACTIONS = "main_actions";
-		private List<String> mainActionIds = new ArrayList<>();
+	public static class MainContextMenuItemsSettings extends ContextMenuItemsSettings {
+		private static final String MAIN = "main";
+		private List<String> mainIds = new ArrayList<>();
 
-		public MapContextMenuItemsSettings() {
+		public MainContextMenuItemsSettings() {
 
 		}
 
-		public MapContextMenuItemsSettings(@NonNull List<String> mainActionIds, @NonNull List<String> hiddenIds, @NonNull List<String> orderIds) {
+		public MainContextMenuItemsSettings(@NonNull List<String> mainIds, @NonNull List<String> hiddenIds, @NonNull List<String> orderIds) {
 			super(hiddenIds, orderIds);
-			this.mainActionIds = mainActionIds;
+			this.mainIds = mainIds;
 		}
 
 		@Override
 		public ContextMenuItemsSettings newInstance() {
-			return new MapContextMenuItemsSettings();
+			return new MainContextMenuItemsSettings();
 		}
 
 		@Override
 		public void readFromJson(JSONObject json, String idScheme) {
 			super.readFromJson(json, idScheme);
-			mainActionIds = readIdsList(json.optJSONArray(MAIN_ACTIONS), idScheme);
+			mainIds = readIdsList(json.optJSONArray(MAIN), idScheme);
 		}
 
 		@Override
 		public void writeToJson(JSONObject json, String idScheme) throws JSONException {
 			super.writeToJson(json, idScheme);
-			json.put(MAIN_ACTIONS, getJsonArray(mainActionIds, idScheme));
+			json.put(MAIN, getJsonArray(mainIds, idScheme));
 		}
 
-		public List<String> getMainActionIds() {
-			return Collections.unmodifiableList(mainActionIds);
+		public List<String> getMainIds() {
+			return Collections.unmodifiableList(mainIds);
 		}
 	}
 
@@ -3655,7 +3654,7 @@ public class OsmandSettings {
 					.makeProfile().cache();
 
 	public final ContextMenuItemsPreference CONTEXT_MENU_ACTIONS_ITEMS =
-			(ContextMenuItemsPreference) new ContextMenuItemsPreference("configure_map_items", MAP_CONTEXT_MENU_ACTIONS, new MapContextMenuItemsSettings())
+			(ContextMenuItemsPreference) new ContextMenuItemsPreference("configure_map_items", MAP_CONTEXT_MENU_ACTIONS, new MainContextMenuItemsSettings())
 					.makeProfile().cache();
 
 	public final List<ContextMenuItemsPreference> CONTEXT_MENU_ITEMS_PREFERENCES = Arrays.asList(DRAWER_ITEMS, CONFIGURE_MAP_ITEMS, CONTEXT_MENU_ACTIONS_ITEMS);
