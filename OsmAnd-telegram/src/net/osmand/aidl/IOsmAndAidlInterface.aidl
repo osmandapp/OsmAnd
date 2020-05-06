@@ -73,6 +73,7 @@ import net.osmand.aidl.customization.SetWidgetsParams;
 import net.osmand.aidl.customization.OsmandSettingsParams;
 import net.osmand.aidl.customization.OsmandSettingsInfoParams;
 import net.osmand.aidl.customization.CustomizationInfoParams;
+import net.osmand.aidl.customization.ProfileSettingsParams;
 
 import net.osmand.aidl.gpx.AGpxFile;
 import net.osmand.aidl.gpx.AGpxFileDetails;
@@ -306,6 +307,13 @@ interface IOsmAndAidlInterface {
     boolean addFavoriteGroup(in AddFavoriteGroupParams params);
 
     	/**
+    	 * Remove favorite group with given name.
+    	 *
+    	 * @param name (String) - name of favorite group.
+    	 */
+    boolean removeFavoriteGroup(in RemoveFavoriteGroupParams params);
+
+    	/**
     	 * Update favorite group with given params.
     	 *
     	 * @param namePrev (String) - group name (current).
@@ -314,13 +322,6 @@ interface IOsmAndAidlInterface {
     	 * @param nameNew (String)  - group name (new).
     	 * @param colorNew (String)  - group color (new).
     	 * @param visibleNew (boolean) - group visibility (new).
-    	 */
-    boolean removeFavoriteGroup(in RemoveFavoriteGroupParams params);
-
-    	/**
-    	 * Remove favorite group with given name.
-    	 *
-    	 * @param name (String) - name of favorite group.
     	 */
     boolean updateFavoriteGroup(in UpdateFavoriteGroupParams params);
 
@@ -337,6 +338,16 @@ interface IOsmAndAidlInterface {
     	 * @param visible (boolean) - should favorite item be visible after creation.
     	 */
     boolean addFavorite(in AddFavoriteParams params);
+
+      /**
+       * Remove favorite at given location with given params.
+       *
+       * @param lat (double)  - latitude.
+       * @param lon (double) - longitude.
+       * @param name (String) - name of favorite item.
+       * @param category (String) - category of favorite item.
+       */
+    boolean removeFavorite(in RemoveFavoriteParams params);
 
     	/**
     	 * Update favorite at given location with given params.
@@ -356,16 +367,6 @@ interface IOsmAndAidlInterface {
     	 *                       "lightgreen", "green", "lightblue", "blue", "purple", "pink", "brown".
     	 * @param visibleNew (boolean) - should new category be visible after creation.
     	 */
-    boolean removeFavorite(in RemoveFavoriteParams params);
-
-      /**
-       * Remove favorite at given location with given params.
-       *
-       * @param lat (double)  - latitude.
-       * @param lon (double) - longitude.
-       * @param name (String) - name of favorite item.
-       * @param category (String) - category of favorite item.
-       */
     boolean updateFavorite(in UpdateFavoriteParams params);
 
     /**
@@ -846,4 +847,6 @@ interface IOsmAndAidlInterface {
     *
     */
     boolean getGpxColor(inout GpxColorParams params);
+
+    boolean importProfile(in ProfileSettingsParams params);
 }
