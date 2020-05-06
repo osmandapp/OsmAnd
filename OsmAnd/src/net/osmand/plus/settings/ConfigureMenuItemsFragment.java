@@ -471,7 +471,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		Context themedContext = UiUtilities.getThemedContext(getActivity(), nightMode);
 		AlertDialog.Builder dismissDialog = new AlertDialog.Builder(themedContext);
 		dismissDialog.setTitle(getString(R.string.shared_string_reset));
-		dismissDialog.setMessage(getString(R.string.reset_to_default));
+		dismissDialog.setMessage(getString(R.string.reset_deafult_order));
 		dismissDialog.setNegativeButton(R.string.shared_string_cancel, null);
 		dismissDialog.setPositiveButton(R.string.shared_string_reset, new DialogInterface.OnClickListener() {
 			@Override
