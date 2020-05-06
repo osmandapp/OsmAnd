@@ -34,6 +34,7 @@ import net.osmand.plus.quickaction.actions.NewAction;
 import net.osmand.plus.quickaction.actions.ShowHideFavoritesAction;
 import net.osmand.plus.quickaction.actions.ShowHideGpxTracksAction;
 import net.osmand.plus.quickaction.actions.ShowHidePoiAction;
+import net.osmand.plus.quickaction.actions.ShowHideTransportLinesAction;
 import net.osmand.util.Algorithms;
 
 import java.lang.reflect.Type;
@@ -223,6 +224,7 @@ public class QuickActionRegistry {
 		quickActionTypes.add(ShowHidePoiAction.TYPE);
 		quickActionTypes.add(MapStyleAction.TYPE);
 		quickActionTypes.add(DayNightModeAction.TYPE);
+		quickActionTypes.add(ShowHideTransportLinesAction.TYPE);
 		// navigation
 		quickActionTypes.add(NavVoiceAction.TYPE);
 		quickActionTypes.add(NavDirectionsFromAction.TYPE);
