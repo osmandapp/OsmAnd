@@ -11,8 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -53,8 +51,8 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.RendererRegistry;
-import net.osmand.plus.settings.ConfigureMenuRootFragment.ScreenType;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
+import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.wikipedia.WikipediaPoiMenu;
@@ -141,10 +139,20 @@ public class ConfigureMapMenu {
 				ma.getDashboard().updateListAdapter(createListAdapter(ma));
 			}
 		});
+		List<RenderingRuleProperty> customRules = getCustomRules(app);
+		adapter.setProfileDependent(true);
+		adapter.setNightMode(nightMode);
+		createLayersItems(customRules, adapter, ma, themeRes, nightMode);
+		createRenderingAttributeItems(customRules, adapter, ma, themeRes, nightMode);
+		return adapter;
+	}
+
+	public static List<RenderingRuleProperty> getCustomRules(OsmandApplication app) {
 		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
 		List<RenderingRuleProperty> customRules = new ArrayList<>();
 		boolean useDepthContours = app.getResourceManager().hasDepthContours()
-				&& (InAppPurchaseHelper.isSubscribedToLiveUpdates(app) || InAppPurchaseHelper.isDepthContoursPurchased(app));
+				&& (InAppPurchaseHelper.isSubscribedToLiveUpdates(app)
+				|| InAppPurchaseHelper.isDepthContoursPurchased(app));
 		if (renderer != null) {
 			for (RenderingRuleProperty p : renderer.PROPS.getCustomRules()) {
 				if (!RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN.equals(p.getCategory())
@@ -153,11 +161,7 @@ public class ConfigureMapMenu {
 				}
 			}
 		}
-		adapter.setProfileDependent(true);
-		adapter.setNightMode(nightMode);
-		createLayersItems(customRules, adapter, ma, themeRes, nightMode);
-		createRenderingAttributeItems(customRules, adapter, ma, themeRes, nightMode);
-		return adapter;
+		return customRules;
 	}
 
 	private final class LayerMenuListener extends OnRowItemClick {
@@ -193,7 +197,7 @@ public class ConfigureMapMenu {
 		}
 
 		@Override
-		public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int pos) {
+		public boolean onRowItemClick(final ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int pos) {
 			if (itemId == R.string.layer_poi) {
 				showPoiFilterDialog(adapter, adapter.getItem(pos));
 				return false;
@@ -203,6 +207,26 @@ public class ConfigureMapMenu {
 			} else if (itemId == R.string.shared_string_wikipedia) {
 				ma.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.WIKIPEDIA,
 						AndroidUtils.getCenterViewCoordinates(view));
+				return false;
+			} else if (itemId == R.string.rendering_category_transport) {
+				final ContextMenuItem item = adapter.getItem(pos);
+				TransportLinesMenu.showTransportsDialog(ma, new CallbackWithObject<Boolean>() {
+					@Override
+					public boolean processResult(Boolean result) {
+						if (item != null) {
+							item.setSelected(result);
+							item.setColorRes(result ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+							adapter.notifyDataSetChanged();
+						}
+						return true;
+					}
+				});
+				boolean selected = TransportLinesMenu.isShowLines(ma.getMyApplication());
+				if (!selected && item != null) {
+					item.setSelected(true);
+					item.setColorRes(R.color.osmand_orange);
+					adapter.notifyDataSetChanged();
+				}
 				return false;
 			} else {
 				CompoundButton btn = (CompoundButton) view.findViewById(R.id.toggle_item);
@@ -257,6 +281,17 @@ public class ConfigureMapMenu {
 								return true;
 							}
 						});
+			} else if (itemId == R.string.rendering_category_transport) {
+				boolean selected = TransportLinesMenu.isShowLines(ma.getMyApplication());
+				TransportLinesMenu.toggleTransportLines(ma, !selected, new CallbackWithObject<Boolean>() {
+					@Override
+					public boolean processResult(Boolean result) {
+						item.setSelected(result);
+						item.setColorRes(result ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+						adapter.notifyDataSetChanged();
+						return true;
+					}
+				});
 			} else if (itemId == R.string.map_markers) {
 				settings.SHOW_MAP_MARKERS.set(isChecked);
 			} else if (itemId == R.string.layer_map) {
@@ -364,179 +399,16 @@ public class ConfigureMapMenu {
 		}
 		*/
 
-		final List<RenderingRuleProperty> transportRules = new ArrayList<>();
-		final List<OsmandSettings.CommonPreference<Boolean>> transportPrefs = new ArrayList<>();
-		Iterator<RenderingRuleProperty> it = customRules.iterator();
-		while (it.hasNext()) {
-			RenderingRuleProperty p = it.next();
-			if ("transport".equals(p.getCategory()) && p.isBoolean()) {
-				transportRules.add(p);
-				final OsmandSettings.CommonPreference<Boolean> pref = activity.getMyApplication().getSettings()
-						.getCustomRenderBooleanProperty(p.getAttrName());
-				transportPrefs.add(pref);
-				it.remove();
-			}
-		}
-		selected = false;
-		for (OsmandSettings.CommonPreference<Boolean> p : transportPrefs) {
-			if (p.get()) {
-				selected = true;
-				break;
-			}
-		}
-		final boolean transportSelected = selected;
+		selected = TransportLinesMenu.isShowLines(app);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(TRANSPORT_ID)
 				.setTitleId(R.string.rendering_category_transport, activity)
 				.setIcon(R.drawable.ic_action_transport_bus)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
-				.setSelected(transportSelected)
-				.setColor(transportSelected ? selectedProfileColorRes : ContextMenuItem.INVALID_ID)
-				.setListener(new ContextMenuAdapter.OnRowItemClick() {
-					ArrayAdapter<CharSequence> adapter;
-					boolean transportSelectedInner = transportSelected;
+				.setSelected(selected)
+				.setColor(selected ? selectedProfileColorRes : ContextMenuItem.INVALID_ID)
+				.setListener(l).createItem());
 
-					@Override
-					public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
-						if (transportSelectedInner) {
-							showTransportDialog(adapter, position);
-							return false;
-						} else {
-							CompoundButton btn = (CompoundButton) view.findViewById(R.id.toggle_item);
-							if (btn != null && btn.getVisibility() == View.VISIBLE) {
-								btn.setChecked(!btn.isChecked());
-								adapter.getItem(position).setColorRes(btn.isChecked() ? selectedProfileColorRes : ContextMenuItem.INVALID_ID);
-								adapter.notifyDataSetChanged();
-								return false;
-							} else {
-								return onContextMenuClick(adapter, itemId, position, false, null);
-							}
-						}
-					}
-
-					@Override
-					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
-													  final int pos, boolean isChecked, int[] viewCoordinates) {
-						if (transportSelectedInner) {
-							for (int i = 0; i < transportPrefs.size(); i++) {
-								transportPrefs.get(i).set(false);
-							}
-							transportSelectedInner = false;
-							ad.getItem(pos).setColorRes(ContextMenuItem.INVALID_ID);
-							refreshMapComplete(activity);
-							activity.getMapLayers().updateLayers(activity.getMapView());
-						} else {
-							ad.getItem(pos).setColorRes(selectedProfileColorRes);
-							showTransportDialog(ad, pos);
-						}
-						ad.notifyDataSetChanged();
-						return false;
-					}
-
-					private void showTransportDialog(final ArrayAdapter<ContextMenuItem> ad, final int pos) {
-						final AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
-						b.setTitle(activity.getString(R.string.rendering_category_transport));
-
-						final int[] iconIds = new int[transportPrefs.size()];
-						final boolean[] checkedItems = new boolean[transportPrefs.size()];
-						for (int i = 0; i < transportPrefs.size(); i++) {
-							checkedItems[i] = transportPrefs.get(i).get();
-						}
-						final String[] vals = new String[transportRules.size()];
-						for (int i = 0; i < transportRules.size(); i++) {
-							RenderingRuleProperty p = transportRules.get(i);
-							String propertyName = SettingsActivity.getStringPropertyName(activity, p.getAttrName(),
-									p.getName());
-							vals[i] = propertyName;
-							if ("transportStops".equals(p.getAttrName())) {
-								iconIds[i] = R.drawable.ic_action_transport_stop;
-							} else if ("publicTransportMode".equals(p.getAttrName())) {
-								iconIds[i] = R.drawable.ic_action_transport_bus;
-							} else if ("tramTrainRoutes".equals(p.getAttrName())) {
-								iconIds[i] = R.drawable.ic_action_transport_tram;
-							} else if ("subwayMode".equals(p.getAttrName())) {
-								iconIds[i] = R.drawable.ic_action_transport_subway;
-							} else {
-								iconIds[i] = R.drawable.ic_action_transport_bus;
-							}
-						}
-
-						adapter = new ArrayAdapter<CharSequence>(new ContextThemeWrapper(activity, themeRes), R.layout.popup_list_item_icon24_and_menu, R.id.title, vals) {
-							@NonNull
-							@Override
-							public View getView(final int position, View convertView, ViewGroup parent) {
-								View v = super.getView(position, convertView, parent);
-								final ImageView icon = (ImageView) v.findViewById(R.id.icon);
-								if (checkedItems[position]) {
-									icon.setImageDrawable(app.getUIUtilities().getIcon(iconIds[position], selectedProfileColorRes));
-								} else {
-									icon.setImageDrawable(app.getUIUtilities().getThemedIcon(iconIds[position]));
-								}
-								v.findViewById(R.id.divider).setVisibility(View.GONE);
-								v.findViewById(R.id.description).setVisibility(View.GONE);
-								v.findViewById(R.id.secondary_icon).setVisibility(View.GONE);
-								final SwitchCompat check = (SwitchCompat) v.findViewById(R.id.toggle_item);
-								check.setOnCheckedChangeListener(null);
-								check.setChecked(checkedItems[position]);
-								check.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-									@Override
-									public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-										checkedItems[position] = isChecked;
-										if (checkedItems[position]) {
-											icon.setImageDrawable(app.getUIUtilities().getIcon(iconIds[position], selectedProfileColorRes));
-										} else {
-											icon.setImageDrawable(app.getUIUtilities().getThemedIcon(iconIds[position]));
-										}
-									}
-								});
-								UiUtilities.setupCompoundButton(nightMode, selectedProfileColor, check);
-								return v;
-							}
-						};
-
-						final ListView listView = new ListView(activity);
-						listView.setDivider(null);
-						listView.setClickable(true);
-						listView.setAdapter(adapter);
-						listView.setOnItemClickListener(new ListView.OnItemClickListener() {
-							@Override
-							public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-								checkedItems[position] = !checkedItems[position];
-								adapter.notifyDataSetChanged();
-							}
-						});
-						b.setView(listView);
-
-						b.setOnDismissListener(new DialogInterface.OnDismissListener() {
-							@Override
-							public void onDismiss(DialogInterface dialog) {
-								ContextMenuItem item = ad.getItem(pos);
-								if (item != null) {
-									item.setSelected(transportSelectedInner);
-									item.setColorRes(transportSelectedInner ? selectedProfileColorRes : ContextMenuItem.INVALID_ID);
-									ad.notifyDataSetChanged();
-								}
-
-							}
-						});
-						b.setNegativeButton(R.string.shared_string_cancel, null);
-						b.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								transportSelectedInner = false;
-								for (int i = 0; i < transportPrefs.size(); i++) {
-									transportPrefs.get(i).set(checkedItems[i]);
-									if (!transportSelectedInner && checkedItems[i]) {
-										transportSelectedInner = true;
-									}
-								}
-								refreshMapComplete(activity);
-								activity.getMapLayers().updateLayers(activity.getMapView());
-							}
-						});
-						b.show();
-					}
-				}).createItem());
 		selected = app.getSelectedGpxHelper().isShowingAnyGpxFiles();
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(GPX_FILES_ID)

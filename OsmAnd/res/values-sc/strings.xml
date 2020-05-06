@@ -1144,8 +1144,8 @@
     <string name="searching_address">Chirca indiritzu…</string>
     <string name="search_osm_nominatim">Chirca indiritzu cun OSM Nominatim</string>
     <string name="hint_search_online">Chirca in lìnia: nùmeru tzìvicu, carrera, tzitade</string>
-    <string name="search_offline_address">Chene lìnia</string>
-    <string name="search_online_address">Ìnternet</string>
+    <string name="search_offline_address">Chirca chene lìnia</string>
+    <string name="search_online_address">Chirca in lìnia</string>
     <string name="max_level_download_tile">Max ismanniamentu in lìnia</string>
     <string name="max_level_download_tile_descr">Non chircare mapas a tasseddos pro ismanniamentos prus mannos de custu.</string>
     <string name="route_general_information">Distàntzia totale %1$s, longària de su biàgiu %2$d h %3$d min.</string>
@@ -1744,7 +1744,7 @@ Lon %2$s</string>
     <string name="faq_item">Preguntas fitianas (FAQ)</string>
     <string name="faq_item_description">Dimandas fitianas</string>
     <string name="map_viewing_item">Visione de sa mapa</string>
-    <string name="search_on_the_map_item">Chircare in sa mapa</string>
+    <string name="search_on_the_map_item">Chirchende in sa mapa</string>
     <string name="planning_trip_item">Pranificare unu biàgiu</string>
     <string name="instalation_troubleshooting_item">Installatzione e solutziones a sos problemas</string>
     <string name="techical_articles_item">Artìculos tècnicos</string>
@@ -3610,10 +3610,10 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="app_mode_ski_touring">Iscì-alpinismu</string>
     <string name="app_mode_ski_snowmobile">Motoislita</string>
     <string name="custom_osmand_plugin">Estensione de OsmAnd personalizada</string>
-    <string name="changes_applied_to_profile">Modìficas aplicadas a su profilu %1$s.</string>
-    <string name="settings_item_read_error">Leghidura de %1$s fallida.</string>
-    <string name="settings_item_write_error">Iscritura de %1$s fallida.</string>
-    <string name="settings_item_import_error">Importatzione de %1$s fallida.</string>
+    <string name="changes_applied_to_profile">Modìficas aplicadas a su profilu \'%1$s\'.</string>
+    <string name="settings_item_read_error">Leghidura dae \'%1$s\' fallida.</string>
+    <string name="settings_item_write_error">Iscritura in \'%1$s\' fallida.</string>
+    <string name="settings_item_import_error">Importatzione dae \'%1$s\' fallida.</string>
     <string name="select_track_file">Ischerta su documentu de sa rasta</string>
     <string name="shared_string_languages">Limbas</string>
     <string name="shared_string_language">Limba</string>
@@ -3631,10 +3631,10 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="divider_descr">Elementos in suta de custu puntu iscrobados dae unu separadore.</string>
     <string name="shared_string_hidden">Cuadu</string>
     <string name="hidden_items_descr">Custos elementos sunt cuados dae su menù, ma sas optziones o sas estensiones rapresentadas ant a sighire a funtzionare.</string>
-    <string name="reset_items_descr">Sas impostatziones ant a torrare a sos valores predefinidos a pustis de sa cuadura.</string>
-    <string name="main_actions_descr">Sas atziones printzipales cuntenent 4 butones ebbia.</string>
+    <string name="reset_items_descr">Cuende sas impostatziones las as a torrare a sos istados predefinidos issoro.</string>
+    <string name="main_actions_descr">Sas \'atziones printzipales\' cuntenent 4 butones ebbia.</string>
     <string name="main_actions">Atziones printzipales</string>
-    <string name="additional_actions_descr">Podes atzèdere a custas atziones incarchende su butone \"Atziones\".</string>
+    <string name="additional_actions_descr">Podes atzèdere a custas atziones incarchende su butone \"Atziones additzionales\".</string>
     <string name="move_inside_category">Podes mòere elementos in intro de custa categoria ebbia.</string>
     <string name="developer_plugin">Estensione pro sos isvilupadores</string>
     <string name="shared_string_items">Elementos</string>
@@ -3670,12 +3670,22 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="custom_color">Colore personalizadu</string>
     <string name="extra_maps_menu_group">Mapas additzionales</string>
     <string name="download_unsupported_action">Atzione %1$s non suportada</string>
-    <string name="osm_live_payment_subscription_management">Su pagamentu at a èssere addebitadu a su contu tuo de Google Play cando sa còmpora at a èssere cunfirmada.
-\n
-\nS\'abbonamentu si rinnovat a sa sola automaticamente, francu chi siat istadu annulladu in antis de sa die de su rinnovu. Su contu tuo at a bènnere addebitadu pro su perìodu de rinnovu (mese/tres meses/annu) in sa die de rinnovu ebbia.
-\n
-\nPodes amministrare e annullare sos abbonamentos tuos intrende in sas impostatziones de Google Play tuas.</string>
+    <string name="osm_live_payment_subscription_management">Su pagamentu at a èssere addebitadu a su contu tuo de Google Play cando as a comporare un\'abbonamentu
+\ne cando at a iscadire su tempus (unu mese/tres meses/un\'annu),
+\nno at a èssere rinnovadu si l\'as a àere annulladu, in antis de cussu momentu, dae sas impostatziones de Google Play tuas.</string>
     <string name="search_poi_types">Chirca castas de PDI</string>
-    <string name="search_poi_types_descr">Cumbina castas de PDI de catogorias diferentes. Incarca su buone pro ischertare totu, incarca s\'ala a manca pro sa seletzione de sas categorias.</string>
+    <string name="search_poi_types_descr">Cumbina castas de PDI de catogorias diferentes. Incarca su butone pro ischertare totu, incarca s\'ala a manca pro sa seletzione de sas categorias.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
+    <string name="tracker_item">Arrastadore de OsmAnd</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="quick_action_item">Atzione lestra</string>
+    <string name="radius_ruler_item">Medidura cun su raju</string>
+    <string name="measure_distance_item">Medi una distàntzia</string>
+    <string name="travel_item">Biàgiu (Wikivoyage e Wikipedia)</string>
+    <string name="map_markers_item">Marcadores mapa</string>
+    <string name="favorites_item">Preferidos</string>
+    <string name="subscription_osmandlive_item">Abbonamentos - OsmAnd Live</string>
+    <string name="osmand_purchases_item">Còmporas de OsmAnd</string>
+    <string name="legend_item_description">Sa ghia pro sa simbologia de sa mapa</string>
+    <string name="navigation_profiles_item">Profilos de navigatzione</string>
 </resources>

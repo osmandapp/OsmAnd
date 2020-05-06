@@ -973,9 +973,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		LinearLayout optionsButton = (LinearLayout) mainView.findViewById(R.id.map_options_route_button);
 		TextView optionsTitle = (TextView) mainView.findViewById(R.id.map_options_route_button_title);
 		ImageView optionsIcon = (ImageView) mainView.findViewById(R.id.map_options_route_button_icon);
-		Drawable drawable = app.getUIUtilities().getIcon(R.drawable.map_action_settings, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
+		Drawable drawable = app.getUIUtilities().getIcon(R.drawable.ic_action_settings, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
 		if (Build.VERSION.SDK_INT >= 21) {
-			Drawable active = app.getUIUtilities().getIcon(R.drawable.map_action_settings, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+			Drawable active = app.getUIUtilities().getIcon(R.drawable.ic_action_settings, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 			drawable = AndroidUtils.createPressedStateListDrawable(drawable, active);
 		}
 		optionsIcon.setImageDrawable(drawable);
@@ -2292,7 +2292,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				case ROUTE_INFO:
 					return 0;
 				case ROUTE_DETAILS:
-					return app != null ? app.getRoutingHelper().getAppMode().getMapIconRes() : R.drawable.map_directions;
+					return app != null ? app.getRoutingHelper().getAppMode().getIconRes() : R.drawable.map_directions;
 				default:
 					return 0;
 			}
