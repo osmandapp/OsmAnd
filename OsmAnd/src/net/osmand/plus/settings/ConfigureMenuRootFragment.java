@@ -30,6 +30,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -58,10 +59,11 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 	private LayoutInflater mInflater;
 	private boolean nightMode;
 	private ApplicationMode appMode;
+	private Activity activity;
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
-	                                   Fragment target,
-	                                   @NonNull ApplicationMode appMode) {
+									   Fragment target,
+									   @NonNull ApplicationMode appMode) {
 		try {
 			ConfigureMenuRootFragment fragment = new ConfigureMenuRootFragment();
 			fragment.setAppMode(appMode);
@@ -83,8 +85,9 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
 		}
 		app = requireMyApplication();
-		nightMode = !app.getSettings().isLightContent();
+		nightMode = !app.getSettings().isLightContentForMode(appMode);
 		mInflater = UiUtilities.getInflater(app, nightMode);
+		activity = getActivity();
 	}
 
 	@Nullable
@@ -119,9 +122,9 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 		toolbarSubTitle.setText(appMode.toHumanString());
 		toolbarSubTitle.setVisibility(View.VISIBLE);
 		List<Object> items = new ArrayList<>();
-        String plugins = getString(R.string.prefs_plugins);
-        String description = String.format(getString(R.string.ui_customization_description), plugins);
-        items.add(description);
+		String plugins = getString(R.string.prefs_plugins);
+		String description = String.format(getString(R.string.ui_customization_description), plugins);
+		items.add(description);
 		items.addAll(Arrays.asList(ScreenType.values()));
 		CustomizationItemsAdapter adapter = new CustomizationItemsAdapter(items, new OnCustomizationItemClickListener() {
 			@Override
@@ -142,17 +145,33 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 
 	@Override
 	public int getStatusBarColorId() {
-			View view = getView();
-			if (view != null && Build.VERSION.SDK_INT >= 23 && !nightMode) {
-				view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-			}
-			return nightMode ? R.color.activity_background_dark : R.color.activity_background_light;
+		View view = getView();
+		if (view != null && Build.VERSION.SDK_INT >= 23 && !nightMode) {
+			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+		}
+		return nightMode ? R.color.activity_background_dark : R.color.activity_background_light;
 	}
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(APP_MODE_KEY, getAppMode().getStringKey());
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (activity instanceof MapActivity) {
+			((MapActivity) activity).disableDrawer();
+		}
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		if (activity instanceof MapActivity) {
+			((MapActivity) activity).enableDrawer();
+		}
 	}
 
 	public void setAppMode(ApplicationMode appMode) {
@@ -203,9 +222,9 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 			final Object currentItem = items.get(position);
 			if (holder instanceof DescriptionHolder) {
 				DescriptionHolder descriptionHolder = (DescriptionHolder) holder;
-                String plugins = getString(R.string.prefs_plugins);
+				String plugins = getString(R.string.prefs_plugins);
 				setupClickableText(
-                        descriptionHolder.description, (String) currentItem, plugins, new Intent(app, PluginsActivity.class));
+						descriptionHolder.description, (String) currentItem, plugins, new Intent(app, PluginsActivity.class));
 				descriptionHolder.image.setVisibility(View.GONE);
 			} else {
 				final ScreenType item = (ScreenType) currentItem;
@@ -268,7 +287,7 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 						break;
 				}
 				int hiddenCount = ConfigureMenuItemsFragment.getSettingForScreen(app, type).getModeValue(appMode).getHiddenIds().size();
-				int allCount = contextMenuAdapter.getDefaultItems().size();
+				int allCount = ConfigureMenuItemsFragment.getCustomizableDefaultItems(contextMenuAdapter.getDefaultItems()).size();
 				String amount = getString(R.string.n_items_of_z, String.valueOf(allCount - hiddenCount), String.valueOf(allCount));
 				return getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.shared_string_items), amount);
 			}

@@ -11,6 +11,11 @@
 	Thx - Hardy
 
 -->
+    <string name="back_to_editing">Back to editing</string>
+    <string name="reset_deafult_order">Restore default items order</string>
+    <string name="shared_string_add_edit">Add / Edit Favorite</string>
+    <string name="parking_positions">Parking positions</string>
+    <string name="create_edit_poi">Create/Edit POI</string>
     <string name="quick_action_transport_descr">A button to show or hide public transport on the map.</string>
     <string name="quick_action_show_hide_transport">Show/hide public transport</string>
     <string name="quick_action_transport_show">Show public transport</string>
@@ -89,7 +94,7 @@
     <string name="replace_point_descr">Replace another point with this</string>
     <string name="developer_plugin">Developer Plugin</string>
     <string name="move_inside_category">You can move items only inside this category.</string>
-    <string name="additional_actions_descr">You can access these actions by tapping the \"Additional actions\" button.</string>
+    <string name="additional_actions_descr">You can access these actions by tapping the “%1$s” button.</string>
     <string name="main_actions">Main actions</string>
     <string name="main_actions_descr">\'Main actions\' only contains 4 buttons.</string>
     <string name="reset_items_descr">Hiding settings resets them to their original state.</string>

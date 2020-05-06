@@ -3598,7 +3598,6 @@
     <string name="reset_items_descr">ستتم إعادة تعيين الإعدادات إلى الحالة الأصلية بعد الاختفاء.</string>
     <string name="main_actions_descr">الإجراءات الرئيسية تحتوي على 4 أزرار فقط.</string>
     <string name="main_actions">الإجراءات الرئيسية</string>
-    <string name="additional_actions_descr">يمكنك الوصول إلى هذه الإجراءات بالضغط على زر \"الإجراءات\".</string>
     <string name="move_inside_category">يمكنك نقل العناصر داخل هذه الفئة فقط.</string>
     <string name="developer_plugin">الإضافات المطورة</string>
     <string name="shared_string_items">العناصر</string>

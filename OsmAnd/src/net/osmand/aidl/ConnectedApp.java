@@ -27,6 +27,7 @@ import net.osmand.util.Algorithms;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
 
 public class ConnectedApp implements Comparable<ConnectedApp> {
 
@@ -156,7 +157,7 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 		};
 		boolean layersEnabled = layersPref.get();
 		menuAdapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setId(AIDL_LAYERS_PREFIX + pack)
+				.setId(CONFIGURE_MAP_ITEM_ID_SCHEME + AIDL_LAYERS_PREFIX + pack)
 				.setTitle(name)
 				.setListener(listener)
 				.setSelected(layersEnabled)

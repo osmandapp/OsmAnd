@@ -5,6 +5,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -21,9 +22,6 @@ import net.osmand.plus.settings.BaseSettingsFragment;
 import org.apache.commons.logging.Log;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSheet {
 
@@ -32,6 +30,8 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 	private static final Log LOG = PlatformUtil.getLog(ChangeGeneralProfilesPrefBottomSheet.class);
 
 	private static final String NEW_VALUE_KEY = "new_value_key";
+
+	private static final String CANCEL_TITLE_RES_KEY = "cancel_title_res_key";
 
 	@Nullable
 	private Serializable newValue;
@@ -50,6 +50,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 		if (app == null || args == null) {
 			return;
 		}
+		int cancelTitleRes = args.getInt(CANCEL_TITLE_RES_KEY);
 		final String prefId = args.getString(PREFERENCE_ID);
 		newValue = args.getSerializable(NEW_VALUE_KEY);
 		if (newValue == null || prefId == null) {
@@ -69,7 +70,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 						app.getSettings().setPreferenceForAllModes(prefId, newValue);
 						updateTargetSettings(false, true);
 						if (listener != null) {
-							listener.onApplied();
+							listener.onApplied(false);
 						}
 						dismiss();
 					}
@@ -89,7 +90,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 						app.getSettings().setPreference(prefId, newValue, getAppMode());
 						updateTargetSettings(false, false);
 						if (listener != null) {
-							listener.onApplied();
+							listener.onApplied(true);
 						}
 						dismiss();
 					}
@@ -98,7 +99,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 		items.add(applyToCurrentProfile);
 
 		BaseBottomSheetItem discardChanges = new SimpleBottomSheetItem.Builder()
-				.setTitle(getString(R.string.discard_changes))
+				.setTitle(cancelTitleRes == 0 ? getString(R.string.discard_changes) : getString(cancelTitleRes))
 				.setIcon(getActiveIcon(R.drawable.ic_action_undo_dark))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
 				.setOnClickListener(new View.OnClickListener() {
@@ -150,36 +151,39 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm,
-	                                @Nullable String prefId,
-	                                @Nullable Serializable newValue,
-	                                Fragment target,
-	                                boolean usedOnMap,
-	                                @Nullable ApplicationMode appMode) {
-		showFragmentInstance(fm, prefId, newValue, target, usedOnMap, appMode, null);
+									@Nullable String prefId,
+									@Nullable Serializable newValue,
+									Fragment target,
+									boolean usedOnMap,
+									@Nullable ApplicationMode appMode) {
+		showFragmentInstance(fm, prefId, newValue, target, usedOnMap, 0, appMode, null);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm,
-	                                @Nullable String prefId,
-	                                @Nullable Serializable newValue,
-	                                Fragment target,
-	                                boolean usedOnMap,
-	                                @Nullable ApplicationMode appMode,
-	                                @Nullable OnChangeSettingListener listener) {
-		showFragmentInstance(fm, prefId, newValue, target, usedOnMap, appMode, listener);
+									@Nullable String prefId,
+									@Nullable Serializable newValue,
+									Fragment target,
+									boolean usedOnMap,
+									@StringRes int cancelTitleRes,
+									@Nullable ApplicationMode appMode,
+									@Nullable OnChangeSettingListener listener) {
+		showFragmentInstance(fm, prefId, newValue, target, usedOnMap, cancelTitleRes, appMode, listener);
 	}
 
 	private static void showFragmentInstance(@NonNull FragmentManager fm,
-	                                         @Nullable String prefId,
-	                                         @Nullable Serializable newValue,
-	                                         Fragment target,
-	                                         boolean usedOnMap,
-	                                         @Nullable ApplicationMode appMode,
-	                                         @Nullable OnChangeSettingListener listener) {
+											 @Nullable String prefId,
+											 @Nullable Serializable newValue,
+											 Fragment target,
+											 boolean usedOnMap,
+											 @StringRes int cancelTitleRes,
+											 @Nullable ApplicationMode appMode,
+											 @Nullable OnChangeSettingListener listener) {
 		try {
 			if (fm.findFragmentByTag(ChangeGeneralProfilesPrefBottomSheet.TAG) == null) {
 				Bundle args = new Bundle();
 				args.putString(PREFERENCE_ID, prefId);
 				args.putSerializable(NEW_VALUE_KEY, newValue);
+				args.putInt(CANCEL_TITLE_RES_KEY, cancelTitleRes);
 
 				ChangeGeneralProfilesPrefBottomSheet fragment = new ChangeGeneralProfilesPrefBottomSheet();
 				fragment.setArguments(args);
@@ -195,7 +199,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 	}
 
 	public interface OnChangeSettingListener {
-		void onApplied();
+		void onApplied(boolean profileOnly);
 
 		void onDiscard();
 	}

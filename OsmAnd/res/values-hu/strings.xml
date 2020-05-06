@@ -3550,7 +3550,6 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="shared_string_hidden">Rejtett</string>
     <string name="reset_items_descr">A beállítások elrejtése visszaállítja őket az eredeti állapotukba.</string>
     <string name="main_actions">Fő műveletek</string>
-    <string name="additional_actions_descr">Ezekhez a műveletekhez a \"További műveletek\" gombra koppintva férhet hozzá.</string>
     <string name="move_inside_category">Csak ezen a kategórián belül lehetséges az elemek áthelyezése.</string>
     <string name="developer_plugin">Fejlesztő bővítmény</string>
     <string name="replace_point_descr">Másik pont lecserélése erre</string>

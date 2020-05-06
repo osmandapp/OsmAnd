@@ -3626,7 +3626,6 @@
     <string name="reset_items_descr">隱藏設定將會把它們重設回原始狀態。</string>
     <string name="main_actions_descr">主要動作僅包含 4 個按鈕。</string>
     <string name="main_actions">主要動作</string>
-    <string name="additional_actions_descr">您可以透過輕點「額外動作」按鈕來存取這些動作。</string>
     <string name="move_inside_category">您只能在此分類中移動項目。</string>
     <string name="developer_plugin">開發者外掛程式</string>
     <string name="shared_string_items">項目</string>

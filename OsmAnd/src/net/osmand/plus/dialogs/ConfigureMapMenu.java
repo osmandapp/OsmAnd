@@ -38,6 +38,7 @@ import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.ListStringPreference;
 import net.osmand.plus.R;
@@ -101,6 +102,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_RENDERING_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.WIKIPEDIA_ID;
+import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_DENSITY_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_ATTR;
@@ -371,7 +373,9 @@ public class ConfigureMapMenu {
 				.setSelected(settings.SHOW_FAVORITES.get())
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_fav_dark)
-				.setListener(l).createItem());
+				.setItemDeleteAction(makeDeleteAction(settings.SHOW_FAVORITES))
+				.setListener(l)
+				.createItem());
 		selected = app.getPoiFilters().isShowingAnyPoi(PoiTemplateList.POI);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(POI_OVERLAY_ID)
@@ -389,6 +393,7 @@ public class ConfigureMapMenu {
 				.setSelected(settings.SHOW_POI_LABEL.get())
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_text_dark)
+				.setItemDeleteAction(makeDeleteAction(settings.SHOW_POI_LABEL))
 				.setListener(l).createItem());
 
 		/*
@@ -429,6 +434,7 @@ public class ConfigureMapMenu {
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_plugin_wikipedia)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
+				.setItemDeleteAction(makeDeleteAction(settings.SHOW_WIKIPEDIA_POI))
 				.setListener(l).createItem());
 
 		selected = settings.SHOW_MAP_MARKERS.get();
@@ -438,6 +444,7 @@ public class ConfigureMapMenu {
 				.setSelected(selected)
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_flag_dark)
+				.setItemDeleteAction(makeDeleteAction(settings.SHOW_MAP_MARKERS))
 				.setListener(l).createItem());
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
@@ -445,6 +452,7 @@ public class ConfigureMapMenu {
 				.setTitleId(R.string.layer_map, activity)
 				.setIcon(R.drawable.ic_world_globe_dark)
 				.setDescription(settings.MAP_ONLINE_DATA.get() ? settings.MAP_TILE_SOURCES.get() : null)
+				.setItemDeleteAction(makeDeleteAction(settings.MAP_ONLINE_DATA, settings.MAP_TILE_SOURCES))
 				.setListener(l).createItem());
 
 		OsmandPlugin.registerLayerContextMenu(activity.getMapView(), adapter, activity);
@@ -487,7 +495,9 @@ public class ConfigureMapMenu {
 								SelectMapStyleBottomSheetDialogFragment.TAG);
 						return false;
 					}
-				}).createItem());
+				})
+				.setItemDeleteAction(makeDeleteAction(settings.RENDERER))
+				.createItem());
 
 		String description = "";
 		SunriseSunset sunriseSunset = activity.getMyApplication().getDaynightHelper().getSunriseSunset();
@@ -542,7 +552,9 @@ public class ConfigureMapMenu {
 						dialogAdapter.setDialog(bld.show());
 						return false;
 					}
-				}).createItem());
+				})
+				.setItemDeleteAction(makeDeleteAction(settings.DAYNIGHT_MODE))
+				.createItem());
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(MAP_MAGNIFIER_ID)
@@ -606,7 +618,9 @@ public class ConfigureMapMenu {
 						dialogAdapter.setDialog(bld.show());
 						return false;
 					}
-				}).createItem());
+				})
+				.setItemDeleteAction(makeDeleteAction(settings.MAP_DENSITY))
+				.createItem());
 
 		ContextMenuItem props;
 		props = createRenderingProperty(customRules, adapter, activity, R.drawable.ic_action_intersection, ROAD_STYLE_ATTR, ROAD_STYLE_ID, app, selectedProfileColor, nightMode, themeRes);
@@ -650,7 +664,9 @@ public class ConfigureMapMenu {
 						dialogAdapter.setDialog(b.show());
 						return false;
 					}
-				}).createItem());
+				})
+				.setItemDeleteAction(makeDeleteAction(settings.TEXT_SCALE))
+				.createItem());
 
 		String localeDescr = activity.getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get();
 		localeDescr = localeDescr == null || localeDescr.equals("") ? activity.getString(R.string.local_map_names)
@@ -748,7 +764,9 @@ public class ConfigureMapMenu {
 						b.show();
 						return false;
 					}
-				}).createItem());
+				})
+				.setItemDeleteAction(makeDeleteAction(settings.MAP_PREFERRED_LOCALE))
+				.createItem());
 
 		props = createProperties(customRules, null, R.string.rendering_category_transport, R.drawable.ic_action_transport_bus,
 				"transport", null, adapter, activity, true, TRANSPORT_RENDERING_ID, themeRes, nightMode, selectedProfileColor);
@@ -935,6 +953,7 @@ public class ConfigureMapMenu {
 				builder.setSecondaryIcon(R.drawable.ic_action_additional_option);
 				builder.setSelected(selected);
 			}
+			builder.setItemDeleteAction(makeDeleteAction(prefs));
 			return builder.createItem();
 //			createCustomRenderingProperties(adapter, activity, ps);
 		}
@@ -1271,6 +1290,7 @@ public class ConfigureMapMenu {
 						}
 					})
 					.setDescription(descr)
+					.setItemDeleteAction(makeDeleteAction(pref))
 					.setLayout(R.layout.list_item_single_line_descrition_narrow);
 			if (icon != 0) {
 				builder.setIcon(icon);

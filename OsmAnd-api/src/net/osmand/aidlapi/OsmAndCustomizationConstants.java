@@ -91,6 +91,9 @@ public interface OsmAndCustomizationConstants {
 	String MAP_CONTEXT_MENU_CREATE_POI = MAP_CONTEXT_MENU_ACTIONS + "create_poi";
 	String MAP_CONTEXT_MENU_MODIFY_OSM_NOTE = MAP_CONTEXT_MENU_ACTIONS + "modify_osm_note";
 	String MAP_CONTEXT_MENU_OPEN_OSM_NOTE = MAP_CONTEXT_MENU_ACTIONS + "open_osm_note";
+	String MAP_CONTEXT_MENU_AUDIO_NOTE = MAP_CONTEXT_MENU_ACTIONS + "audio_note";
+	String MAP_CONTEXT_MENU_VIDEO_NOTE = MAP_CONTEXT_MENU_ACTIONS + "video_note";
+	String MAP_CONTEXT_MENU_PHOTO_NOTE = MAP_CONTEXT_MENU_ACTIONS + "photo_note";
 
 	//Plug-in's IDs:
 	String PLUGIN_OSMAND_MONITOR = "osmand.monitoring";

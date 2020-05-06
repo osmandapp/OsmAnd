@@ -3381,7 +3381,6 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="wiki_menu_download_descr">Pro zobrazení bodů zájmu Wikipedie jsou potřeba další mapy.</string>
     <string name="main_actions_descr">Hlavní akce mohou obsahovat pouze 4 tlačítka.</string>
     <string name="main_actions">Hlavní akce</string>
-    <string name="additional_actions_descr">Tyto akce jsou dostupné po stisknutí tlačítka “Akce”.</string>
     <string name="move_inside_category">Položky můžete přesouvat pouze v rámci této kategorie.</string>
     <string name="developer_plugin">Modul pro vývojáře</string>
     <string name="shared_string_items">Položky</string>

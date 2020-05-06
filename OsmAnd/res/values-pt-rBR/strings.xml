@@ -3622,7 +3622,6 @@ Pôr do Sol: %2$s</string>
     <string name="reset_items_descr">Ocultar configurações redefine-as para o estado original.</string>
     <string name="main_actions_descr">\'Ações principais\' contém apenas 4 botões.</string>
     <string name="main_actions">Principais ações</string>
-    <string name="additional_actions_descr">Você pode acessar essas ações tocando no botão \"Ações adicionais\".</string>
     <string name="move_inside_category">Você pode mover itens somente dentro desta categoria.</string>
     <string name="developer_plugin">Plugin do desenvolvedor</string>
     <string name="shared_string_items">Itens</string>

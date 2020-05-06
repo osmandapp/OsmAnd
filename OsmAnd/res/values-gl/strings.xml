@@ -3659,7 +3659,6 @@ Lon %2$s</string>
     <string name="wiki_menu_download_descr">Precísanse mapas adicionais para ollar os PDI da Wikipedia no mapa.</string>
     <string name="main_actions_descr">As accións principais conteñen só 4 botóns.</string>
     <string name="main_actions">Accións principais</string>
-    <string name="additional_actions_descr">Podes acceder a esas accións premendo no botón de \"Accións\".</string>
     <string name="move_inside_category">Só podes mover obxectos dentro desta categoría.</string>
     <string name="select_wikipedia_article_langs">Escolle as linguas nas que os artigos da Wikipedia aparecerán no mapa. Podes trocar entre todos as linguas dispoñíbeis en canto leas o artigo.</string>
     <string name="some_articles_may_not_available_in_lang">Algúns artigos da Wikipedia poden non estar dispoñíbeis na túa lingua.</string>

@@ -3647,7 +3647,6 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="reset_items_descr">Stillingar verða settar á upphaflega stöðu eftir að hafa verið faldar.</string>
     <string name="main_actions_descr">Aðalaðgerðir innifela aðeins 4 hnappa.</string>
     <string name="main_actions">Aðalaðgerðir</string>
-    <string name="additional_actions_descr">Þú getur komist í þessar aðgerðir með því að ýta á \"Aðgerðir\"-hnappinn.</string>
     <string name="developer_plugin">Forritsviðbót fyrir forritun</string>
     <string name="shared_string_items">Atriði</string>
     <string name="wiki_menu_download_descr">Viðbótarkort þarf til að skoða Wikipedia-merkisstaði á kortinu.</string>
