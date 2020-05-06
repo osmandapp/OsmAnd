@@ -63,6 +63,8 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.IContextMenuButtonListener;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.TrackBitmapDrawer;
+import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.IRoutingDataUpdateListener;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
@@ -167,6 +169,9 @@ public class OsmandAidlApi {
 	private static final String AIDL_HIDE_SQLITEDB_FILE = "aidl_hide_sqlitedb_file";
 	private static final String AIDL_FILE_NAME = "aidl_file_name";
 
+	private static final String AIDL_EXECUTE_QUICK_ACTION = "aidl_execute_quick_action";
+	private static final String AIDL_QUICK_ACTION_NUMBER = "aidl_quick_action_number";
+
 
 	private static final ApplicationMode DEFAULT_PROFILE = ApplicationMode.CAR;
 
@@ -216,6 +221,7 @@ public class OsmandAidlApi {
 		registerUnmuteNavigationReceiver(mapActivity);
 		registerShowSqliteDbFileReceiver(mapActivity);
 		registerHideSqliteDbFileReceiver(mapActivity);
+		registerExecuteQuickActionReceiver(mapActivity);
 		initOsmandTelegram();
 		app.getAppCustomization().addListener(mapActivity);
 		aMapPointUpdateListener = mapActivity;
@@ -822,6 +828,24 @@ public class OsmandAidlApi {
 			}
 		};
 		registerReceiver(hideSqliteDbFileReceiver, mapActivity, AIDL_HIDE_SQLITEDB_FILE);
+	}
+
+	private void registerExecuteQuickActionReceiver(MapActivity mapActivity) {
+		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		BroadcastReceiver executeQuickActionReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				int actionNumber = intent.getIntExtra(AIDL_QUICK_ACTION_NUMBER, -1);
+				MapActivity mapActivity = mapActivityRef.get();
+				if (actionNumber != -1 && mapActivity != null) {
+					List<QuickAction> actionsList = app.getQuickActionRegistry().getFilteredQuickActions();
+					if (actionNumber < actionsList.size()) {
+						QuickActionRegistry.produceAction(actionsList.get(actionNumber)).execute(mapActivity);
+					}
+				}
+			}
+		};
+		registerReceiver(executeQuickActionReceiver, mapActivity, AIDL_EXECUTE_QUICK_ACTION);
 	}
 
 	public void registerMapLayers(@NonNull MapActivity mapActivity) {
@@ -2108,6 +2132,14 @@ public class OsmandAidlApi {
 				connectedApp.registerLayerContextMenu(adapter, mapActivity);
 			}
 		}
+	}
+
+	public boolean executeQuickAction(int actionNumber) {
+		Intent intent = new Intent();
+		intent.setAction(AIDL_EXECUTE_QUICK_ACTION);
+		intent.putExtra(AIDL_QUICK_ACTION_NUMBER, actionNumber);
+		app.sendBroadcast(intent);
+		return true;
 	}
 
 	private class FileCopyInfo {

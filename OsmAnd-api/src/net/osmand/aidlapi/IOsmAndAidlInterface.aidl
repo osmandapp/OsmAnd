@@ -93,6 +93,8 @@ import net.osmand.aidlapi.contextmenu.RemoveContextMenuButtonsParams;
 
 import net.osmand.aidlapi.mapmarker.RemoveMapMarkersParams;
 
+import net.osmand.aidlapi.quickaction.QuickActionParams;
+
 // NOTE: Add new methods at the end of file!!!
 
 interface IOsmAndAidlInterface {
@@ -834,4 +836,6 @@ interface IOsmAndAidlInterface {
     boolean removeAllActiveMapMarkers(in RemoveMapMarkersParams params);
 
     boolean importProfile(in ProfileSettingsParams params);
+
+    boolean executeQuickAction(in QuickActionParams params);
 }
