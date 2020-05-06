@@ -8,7 +8,9 @@
     android:layout_height="@dimen/dashboard_map_toolbar"
     android:background="@color/app_bar_color_light"
     app:contentInsetLeft="4dp"
-    app:contentInsetStart="4dp">
+    app:contentInsetStart="4dp"
+    app:contentInsetRight="0dp"
+    app:contentInsetEnd="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"

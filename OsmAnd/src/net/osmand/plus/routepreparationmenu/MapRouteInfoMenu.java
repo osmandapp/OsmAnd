@@ -1004,7 +1004,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			optionsTitle.setVisibility(View.VISIBLE);
 			endPadding += AndroidUtils.getTextWidth(app.getResources().getDimensionPixelSize(R.dimen.text_button_text_size), app.getString(R.string.shared_string_options));
 		}
-		if (AndroidUtils.getLayoutDirection(app) == View.LAYOUT_DIRECTION_RTL) {
+		if (AndroidUtils.isLayoutRtl(app)) {
 			optionsContainer.setPadding(endPadding, optionsContainer.getPaddingTop(), optionsContainer.getPaddingRight(), optionsContainer.getPaddingBottom());
 		} else { // LTR
 			optionsContainer.setPadding(optionsContainer.getPaddingLeft(), optionsContainer.getPaddingTop(), endPadding, optionsContainer.getPaddingBottom());

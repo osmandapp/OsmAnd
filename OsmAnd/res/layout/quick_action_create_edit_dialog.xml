@@ -31,6 +31,8 @@
         android:contentInsetLeft="72dp"
         app:contentInsetLeft="72dp"
         app:contentInsetStart="72dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp"
         android:background="?attr/actionModeBackground"/>
 
     <RelativeLayout

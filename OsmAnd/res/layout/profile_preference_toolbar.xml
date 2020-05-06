@@ -6,6 +6,8 @@
 	android:layout_height="wrap_content"
 	osmand:contentInsetLeft="0dp"
 	osmand:contentInsetStart="0dp"
+	osmand:contentInsetRight="0dp"
+	osmand:contentInsetEnd="0dp"
 	osmand:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
 	<LinearLayout
@@ -27,7 +29,7 @@
 			android:layout_marginEnd="@dimen/content_padding"
 			android:contentDescription="@string/access_shared_string_navigate_up"
 			android:scaleType="fitCenter"
-			android:src="@drawable/ic_action_mode_back"
+			android:src="@drawable/ic_arrow_back"
 			android:tint="?attr/default_icon_color" />
 
 		<LinearLayout

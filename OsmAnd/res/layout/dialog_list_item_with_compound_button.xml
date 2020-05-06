@@ -14,7 +14,8 @@
 	<LinearLayout
 		android:id="@+id/button"
 		android:layout_width="match_parent"
-		android:layout_height="?android:attr/listPreferredItemHeightSmall"
+		android:layout_height="wrap_content"
+		android:minHeight="?android:attr/listPreferredItemHeightSmall"
 		android:background="?attr/selectableItemBackground"
 		android:orientation="horizontal">
 		

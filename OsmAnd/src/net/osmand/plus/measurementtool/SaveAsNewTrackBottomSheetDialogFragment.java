@@ -1,5 +1,6 @@
 package net.osmand.plus.measurementtool;
 
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
@@ -7,6 +8,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
+import net.osmand.AndroidUtils;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -26,6 +29,11 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
+		OsmandApplication app = getMyApplication();
+		if (app == null) {
+			return;
+		}
+
 		items.add(new TitleItem(getString(R.string.shared_string_save_as_gpx)));
 
 		items.add(new ShortDescriptionItem(getString(R.string.measurement_tool_save_as_new_track_descr)));
@@ -37,12 +45,16 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 			final ImageView routePointImage = (ImageView) imagesRow.findViewById(R.id.route_point_image);
 			final ImageView lineImage = (ImageView) imagesRow.findViewById(R.id.line_image);
-			routePointImage.setImageResource(nightMode
+			Drawable routePointDrawable = app.getUIUtilities().getIcon(nightMode
 					? R.drawable.img_help_trip_route_points_night
 					: R.drawable.img_help_trip_route_points_day);
-			lineImage.setImageResource(nightMode
+			Drawable lineDrawable = app.getUIUtilities().getIcon(nightMode
 					? R.drawable.img_help_trip_track_night
 					: R.drawable.img_help_trip_track_day);
+			if (routePointDrawable != null && lineDrawable != null) {
+				routePointImage.setImageDrawable(AndroidUtils.getDrawableForDirection(app, routePointDrawable));
+				lineImage.setImageDrawable(AndroidUtils.getDrawableForDirection(app, lineDrawable));
+			}
 			routePointImage.setOnClickListener(saveAsRoutePointOnClickListener);
 			lineImage.setOnClickListener(saveAsLineOnClickListener);
 

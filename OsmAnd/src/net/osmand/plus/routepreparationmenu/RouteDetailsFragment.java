@@ -186,7 +186,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 				view.findViewById(getBottomScrollViewId()).setBackgroundDrawable(null);
 				LinearLayout cardsContainer = getCardsContainer();
 				FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) cardsContainer.getLayoutParams();
-				layoutParams.setMargins(pageMarginPx, 0, pageMarginPx, 0);
+				AndroidUtils.setMargins(layoutParams, pageMarginPx, 0, pageMarginPx, 0);
 				cardsContainer.setLayoutParams(layoutParams);
 				updateCardsLayout();
 			}
@@ -459,7 +459,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		ImageView routeLine = new ImageView(view.getContext());
 		FrameLayout.LayoutParams routeLineParams = new FrameLayout.LayoutParams(dpToPx(8f), ViewGroup.LayoutParams.MATCH_PARENT);
 		routeLineParams.gravity = Gravity.START;
-		routeLineParams.setMargins(dpToPx(24), dpToPx(14), dpToPx(22), dpToPx(36));
+		AndroidUtils.setMargins(routeLineParams, dpToPx(24), dpToPx(14), dpToPx(22), dpToPx(36));
 		routeLine.setLayoutParams(routeLineParams);
 		int bgColor = transportStopRoute.getColor(app, isNightMode());
 		routeLine.setBackgroundColor(bgColor);
@@ -595,7 +595,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	private View createImagesContainer(@NonNull Context context) {
 		LinearLayout imagesContainer = new LinearLayout(context);
 		FrameLayout.LayoutParams imagesContainerParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
-		imagesContainer.setPadding(dpToPx(16), dpToPx(12), dpToPx(24), 0);
+		AndroidUtils.setPadding(imagesContainer, dpToPx(16), dpToPx(12), dpToPx(24), 0);
 		imagesContainer.setOrientation(LinearLayout.VERTICAL);
 		imagesContainer.setLayoutParams(imagesContainerParams);
 		return imagesContainer;
@@ -745,7 +745,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		ImageView walkLineImage = new ImageView(container.getContext());
 		walkLineImage.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.walk_route_item_light));
 		LinearLayout.LayoutParams walkImageLayoutParams = new LinearLayout.LayoutParams(dpToPx(10), dpToPx(14));
-		walkImageLayoutParams.setMargins(dpToPx(7), dpToPx(6), 0, dpToPx(6));
+		AndroidUtils.setMargins(walkImageLayoutParams, dpToPx(7), dpToPx(6), 0, dpToPx(6));
 		walkLineImage.setLayoutParams(walkImageLayoutParams);
 		container.addView(walkLineImage);
 	}
@@ -862,12 +862,12 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			LinearLayout llIconCollapse = new LinearLayout(view.getContext());
 			llIconCollapse.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dpToPx(48f)));
 			llIconCollapse.setOrientation(LinearLayout.HORIZONTAL);
-			llIconCollapse.setGravity(Gravity.CENTER_VERTICAL);
+			llIconCollapse.setGravity(Gravity.CENTER_VERTICAL|Gravity.START);
 			ll.addView(llIconCollapse);
 
 			LinearLayout.LayoutParams llIconCollapseParams = new LinearLayout.LayoutParams(dpToPx(24f), dpToPx(24f));
-			llIconCollapseParams.setMargins(0, dpToPx(12f), 0, dpToPx(12f));
-			llIconCollapseParams.gravity = Gravity.CENTER_VERTICAL;
+			AndroidUtils.setMargins(llIconCollapseParams,0, dpToPx(12f), 0, dpToPx(12f));
+			llIconCollapseParams.gravity = Gravity.CENTER_VERTICAL|Gravity.START;
 			iconViewCollapse.setLayoutParams(llIconCollapseParams);
 			iconViewCollapse.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 			iconViewCollapse.setImageDrawable(getCollapseIcon(collapsableView.getContenView().getVisibility() == View.GONE));
@@ -934,13 +934,13 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			ImageView iconView = new ImageView(view.getContext());
 			iconView.setImageDrawable(icon);
 			FrameLayout.LayoutParams imageViewLayoutParams = new FrameLayout.LayoutParams(dpToPx(28), dpToPx(28));
-			imageViewLayoutParams.gravity = Gravity.TOP;
+			imageViewLayoutParams.gravity = Gravity.TOP|Gravity.START;
 			iconView.setLayoutParams(imageViewLayoutParams);
 			iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
-			imageViewLayoutParams.setMargins(dpToPx(14), dpToPx(8), dpToPx(22), 0);
+			AndroidUtils.setMargins(imageViewLayoutParams, dpToPx(14), dpToPx(8), dpToPx(22), 0);
 			iconView.setBackgroundResource(R.drawable.border_round_solid_light);
-			iconView.setPadding(dpToPx(2), dpToPx(2), dpToPx(2), dpToPx(2));
+			AndroidUtils.setPadding(iconView, dpToPx(2), dpToPx(2), dpToPx(2), dpToPx(2));
 			baseItemView.addView(iconView);
 		}
 
@@ -957,9 +957,9 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			TextView timeView = new TextView(view.getContext());
 			FrameLayout.LayoutParams timeViewParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 			timeViewParams.gravity = Gravity.END | Gravity.TOP;
-			timeViewParams.setMargins(0, dpToPx(8), 0, 0);
+			AndroidUtils.setMargins(timeViewParams,0, dpToPx(8), 0, 0);
 			timeView.setLayoutParams(timeViewParams);
-			timeView.setPadding(0, 0, dpToPx(16), 0);
+			AndroidUtils.setPadding(timeView,0, 0, dpToPx(16), 0);
 			timeView.setTextSize(16);
 			timeView.setTextColor(getMainFontColor());
 
@@ -1008,7 +1008,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 
 		View routeBadge = createRouteBadge(mapActivity, transportStopRoute);
 		LinearLayout.LayoutParams routeBadgeParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		routeBadgeParams.setMargins(0, dpToPx(6), 0, dpToPx(8));
+		AndroidUtils.setMargins(routeBadgeParams, 0, dpToPx(6), 0, dpToPx(8));
 		routeBadge.setLayoutParams(routeBadgeParams);
 		llText.addView(routeBadge);
 
@@ -1045,13 +1045,13 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			ImageView iconView = new ImageView(view.getContext());
 			iconView.setImageDrawable(icon);
 			FrameLayout.LayoutParams imageViewLayoutParams = new FrameLayout.LayoutParams(dpToPx(28), dpToPx(28));
-			imageViewLayoutParams.gravity = Gravity.TOP;
+			imageViewLayoutParams.gravity = Gravity.TOP|Gravity.START;
 			iconView.setLayoutParams(imageViewLayoutParams);
 			iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
-			imageViewLayoutParams.setMargins(dpToPx(14), dpToPx(8), dpToPx(22), 0);
+			AndroidUtils.setMargins(imageViewLayoutParams, dpToPx(14), dpToPx(8), dpToPx(22), 0);
 			iconView.setBackgroundResource(R.drawable.border_round_solid_light);
-			iconView.setPadding(dpToPx(2), dpToPx(2), dpToPx(2), dpToPx(2));
+			AndroidUtils.setPadding(iconView, dpToPx(2), dpToPx(2), dpToPx(2), dpToPx(2));
 			baseItemView.addView(iconView);
 		}
 
@@ -1068,9 +1068,9 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			TextView timeView = new TextView(view.getContext());
 			FrameLayout.LayoutParams timeViewParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 			timeViewParams.gravity = Gravity.END | Gravity.TOP;
-			timeViewParams.setMargins(0, dpToPx(8), 0, 0);
+			AndroidUtils.setMargins(timeViewParams, 0, dpToPx(8), 0, 0);
 			timeView.setLayoutParams(timeViewParams);
-			timeView.setPadding(0, 0, dpToPx(16), 0);
+			AndroidUtils.setPadding(timeView, 0, 0, dpToPx(16), 0);
 			timeView.setTextSize(16);
 			timeView.setTextColor(getMainFontColor());
 
@@ -1127,16 +1127,16 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 
 		Drawable icon = getPaintedContentIcon(R.drawable.ic_action_pedestrian_dark, getActiveColor());
 		ImageView iconView = new ImageView(view.getContext());
-		iconView.setImageDrawable(icon);
+		iconView.setImageDrawable(AndroidUtils.getDrawableForDirection(view.getContext(), icon));
 		FrameLayout.LayoutParams imageViewLayoutParams = new FrameLayout.LayoutParams(dpToPx(24), dpToPx(24));
-		imageViewLayoutParams.gravity = imagesContainer != null ? Gravity.TOP : Gravity.CENTER_VERTICAL;
+		imageViewLayoutParams.gravity = Gravity.START| (imagesContainer != null ? Gravity.TOP : Gravity.CENTER_VERTICAL);
 		iconView.setLayoutParams(imageViewLayoutParams);
 		iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
 		if (imagesContainer != null) {
 			imagesContainer.addView(iconView);
 		} else {
-			imageViewLayoutParams.setMargins(dpToPx(16), 0, dpToPx(24), 0);
+			AndroidUtils.setMargins(imageViewLayoutParams, dpToPx(16), 0, dpToPx(24), 0);
 			baseItemView.addView(iconView);
 		}
 
@@ -1183,7 +1183,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			if (imagesContainer != null) {
 				imagesContainer.addView(iconView);
 			} else {
-				imageViewLayoutParams.setMargins(dpToPx(16), 0, dpToPx(24), 0);
+				AndroidUtils.setMargins(imageViewLayoutParams, dpToPx(16), 0, dpToPx(24), 0);
 				baseItemView.addView(iconView);
 			}
 		}
@@ -1197,9 +1197,9 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			TextView timeView = new TextView(view.getContext());
 			FrameLayout.LayoutParams timeViewParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 			timeViewParams.gravity = Gravity.END | Gravity.TOP;
-			timeViewParams.setMargins(0, dpToPx(8), 0, 0);
+			AndroidUtils.setMargins(timeViewParams, 0, dpToPx(8), 0, 0);
 			timeView.setLayoutParams(timeViewParams);
-			timeView.setPadding(0, 0, dpToPx(16), 0);
+			AndroidUtils.setPadding(timeView, 0, 0, dpToPx(16), 0);
 			timeView.setTextSize(16);
 			timeView.setTextColor(getMainFontColor());
 
@@ -1247,7 +1247,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		if (imagesContainer != null) {
 			imagesContainer.addView(iconView);
 		} else {
-			imageViewLayoutParams.setMargins(dpToPx(16), 0, dpToPx(24), 0);
+			AndroidUtils.setMargins(imageViewLayoutParams, dpToPx(16), 0, dpToPx(24), 0);
 			baseItemView.addView(iconView);
 		}
 
@@ -1271,9 +1271,9 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			TextView timeView = new TextView(view.getContext());
 			FrameLayout.LayoutParams timeViewParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 			timeViewParams.gravity = Gravity.END | Gravity.TOP;
-			timeViewParams.setMargins(0, dpToPx(8), 0, 0);
+			AndroidUtils.setMargins(timeViewParams, 0, dpToPx(8), 0, 0);
 			timeView.setLayoutParams(timeViewParams);
-			timeView.setPadding(0, 0, dpToPx(16), 0);
+			AndroidUtils.setPadding(timeView, 0, 0, dpToPx(16), 0);
 			timeView.setTextSize(16);
 			timeView.setTextColor(getMainFontColor());
 
@@ -1315,13 +1315,13 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			ImageView iconView = new ImageView(view.getContext());
 			iconView.setImageDrawable(icon);
 			FrameLayout.LayoutParams imageViewLayoutParams = new FrameLayout.LayoutParams(dpToPx(22), dpToPx(22));
-			imageViewLayoutParams.gravity = Gravity.CENTER_VERTICAL;
+			imageViewLayoutParams.gravity = Gravity.CENTER_VERTICAL | Gravity.START;
 			iconView.setLayoutParams(imageViewLayoutParams);
 			iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
-			imageViewLayoutParams.setMargins(dpToPx(17), 0, dpToPx(25), 0);
+			AndroidUtils.setMargins(imageViewLayoutParams, dpToPx(17), 0, dpToPx(25), 0);
 			iconView.setBackgroundResource(R.drawable.border_round_solid_light_small);
-			iconView.setPadding(dpToPx(2), dpToPx(2), dpToPx(2), dpToPx(2));
+			AndroidUtils.setPadding(iconView, dpToPx(2), dpToPx(2), dpToPx(2), dpToPx(2));
 			baseItemView.addView(iconView);
 		}
 
@@ -1366,7 +1366,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		OsmandApplication app = requireMyApplication();
 		TextViewEx titleView = new TextViewEx(container.getContext());
 		FrameLayout.LayoutParams titleParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		titleParams.gravity = Gravity.CENTER_VERTICAL;
+		titleParams.gravity = Gravity.CENTER_VERTICAL | Gravity.START;
 		titleView.setTypeface(FontCache.getRobotoRegular(container.getContext()));
 		titleView.setLayoutParams(titleParams);
 		titleView.setTextSize(16);
@@ -1380,7 +1380,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		OsmandApplication app = requireMyApplication();
 		TextViewEx textViewDescription = new TextViewEx(container.getContext());
 		LinearLayout.LayoutParams descriptionParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		descriptionParams.setMargins(0, dpToPx(paddingTop), 0, dpToPx(paddingBottom));
+		AndroidUtils.setMargins(descriptionParams, 0, dpToPx(paddingTop), 0, dpToPx(paddingBottom));
 		textViewDescription.setLayoutParams(descriptionParams);
 		textViewDescription.setTypeface(FontCache.getRobotoRegular(container.getContext()));
 		textViewDescription.setTextSize(14);
@@ -1394,7 +1394,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		llText.setOrientation(LinearLayout.VERTICAL);
 		LinearLayout.LayoutParams llTextViewParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
 		llTextViewParams.weight = 1f;
-		llTextViewParams.gravity = Gravity.CENTER_VERTICAL;
+		llTextViewParams.gravity = Gravity.CENTER_VERTICAL | Gravity.START;
 		llText.setLayoutParams(llTextViewParams);
 		return llText;
 	}
@@ -1406,7 +1406,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		ll.setMinimumHeight(dpToPx(minHeight));
 		ll.setLayoutParams(llParams);
 		ll.setBackgroundResource(AndroidUtils.resolveAttribute(context, android.R.attr.selectableItemBackground));
-		ll.setPadding(dpToPx(64f), 0, dpToPx(16f), 0);
+		AndroidUtils.setPadding(ll, dpToPx(64f), 0, dpToPx(16f), 0);
 		ll.setOnLongClickListener(onLongClickListener);
 		return ll;
 	}
@@ -1471,9 +1471,9 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		OsmandApplication app = requireMyApplication();
 		View horizontalLine = new View(view.getContext());
 		LinearLayout.LayoutParams llHorLineParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(1f));
-		llHorLineParams.gravity = Gravity.BOTTOM;
+		llHorLineParams.gravity = Gravity.BOTTOM | Gravity.START;
 		if (needMargin) {
-			llHorLineParams.setMargins(dpToPx(64), 0, 0, 0);
+			AndroidUtils.setMargins(llHorLineParams, dpToPx(64), 0, 0, 0);
 		}
 		horizontalLine.setLayoutParams(llHorLineParams);
 		horizontalLine.setBackgroundColor(ContextCompat.getColor(app, isNightMode() ? R.color.divider_color_dark : R.color.divider_color_light));

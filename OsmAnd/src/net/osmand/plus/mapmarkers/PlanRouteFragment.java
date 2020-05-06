@@ -200,8 +200,9 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 				}
 			});
 
+			int navigationIconResId = AndroidUtils.getNavigationIconResId(mapActivity);
 			toolbarController = new PlanRouteToolbarController();
-			toolbarController.setBackBtnIconIds(R.drawable.ic_action_mode_back, R.drawable.ic_action_mode_back);
+			toolbarController.setBackBtnIconIds(navigationIconResId, navigationIconResId);
 			toolbarController.setTitle(getString(R.string.plan_route));
 			toolbarController.setOnBackButtonClickListener(new View.OnClickListener() {
 				@Override

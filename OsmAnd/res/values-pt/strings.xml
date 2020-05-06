@@ -3653,11 +3653,9 @@
     <string name="navigation_profiles_item">Perfis de navegação</string>
     <string name="search_poi_types">Pesquisar tipos de poi</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="osm_live_payment_subscription_management">O pagamento será cobrado na sua conta do Google Play na confirmação da compra. 
-\n 
-\nA assinatura é renovada automaticamente, a menos que seja cancelada antes da data de renovação. Sua conta será cobrada pelo período de renovação (mensal/trimestrial/anual) somente na data de renovação. 
-\n 
-\nPode gerir e cancelar suas assinaturas acessando as configurações do Google Play.</string>
+    <string name="osm_live_payment_subscription_management">A sua conta Google Play é cobrada no momento da compra de uma assinatura
+\ne quando expirar (mês/três mês/ano),
+\nnão se renovará se cancelado antes disso a partir das suas configurações do Google Play.</string>
     <string name="download_unsupported_action">Ação %1$s não suportada</string>
     <string name="extra_maps_menu_group">Mapas adicionais</string>
     <string name="some_articles_may_not_available_in_lang">Alguns artigos da Wikipédia podem não estar disponíveis no seu idioma.</string>
@@ -3689,4 +3687,5 @@
     <string name="lang_an">Aragonês</string>
     <string name="lang_lmo">Lombardo</string>
     <string name="custom_color">Cor customizada</string>
+    <string name="search_poi_types_descr">Combinar tipos de POI de diferentes categorias. Toque em \"Trocar\" para selecionar tudo, toque no lado esquerdo para seleção da categoria.</string>
 </resources>

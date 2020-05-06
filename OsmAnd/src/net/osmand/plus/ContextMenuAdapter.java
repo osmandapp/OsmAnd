@@ -559,6 +559,7 @@ public class ContextMenuAdapter {
 		boolean onIntegerValueChangedListener(int newValue);
 	}
 
+
 	public static abstract class OnRowItemClick implements ItemClickListener {
 
 		//boolean return type needed to describe if drawer needed to be close or not
