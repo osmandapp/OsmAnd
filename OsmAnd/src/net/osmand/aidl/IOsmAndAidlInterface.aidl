@@ -94,6 +94,9 @@ import net.osmand.aidl.contextmenu.RemoveContextMenuButtonsParams;
 
 import net.osmand.aidl.mapmarker.RemoveMapMarkersParams;
 
+import net.osmand.aidl.quickaction.QuickActionParams;
+import net.osmand.aidl.quickaction.QuickActionInfoParams;
+
 // NOTE: Add new methods at the end of file!!!
 
 interface IOsmAndAidlInterface {
@@ -849,4 +852,8 @@ interface IOsmAndAidlInterface {
     boolean getGpxColor(inout GpxColorParams params);
 
     boolean importProfile(in ProfileSettingsParams params);
+
+    boolean executeQuickAction(in QuickActionParams params);
+
+    boolean getQuickActionsInfo(out List<QuickActionInfoParams> quickActions);
 }

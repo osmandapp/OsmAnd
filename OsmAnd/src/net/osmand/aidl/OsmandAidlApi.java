@@ -20,6 +20,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
@@ -32,6 +35,7 @@ import net.osmand.aidl.gpx.AGpxFileDetails;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
 import net.osmand.aidl.navigation.ADirectionInfo;
 import net.osmand.aidl.navigation.OnVoiceNavigationParams;
+import net.osmand.aidl.quickaction.QuickActionInfoParams;
 import net.osmand.aidl.tiles.ASqliteDbFile;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -63,6 +67,8 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.IContextMenuButtonListener;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.TrackBitmapDrawer;
+import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.IRoutingDataUpdateListener;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
@@ -90,9 +96,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -167,6 +175,9 @@ public class OsmandAidlApi {
 	private static final String AIDL_HIDE_SQLITEDB_FILE = "aidl_hide_sqlitedb_file";
 	private static final String AIDL_FILE_NAME = "aidl_file_name";
 
+	private static final String AIDL_EXECUTE_QUICK_ACTION = "aidl_execute_quick_action";
+	private static final String AIDL_QUICK_ACTION_NUMBER = "aidl_quick_action_number";
+
 
 	private static final ApplicationMode DEFAULT_PROFILE = ApplicationMode.CAR;
 
@@ -216,6 +227,7 @@ public class OsmandAidlApi {
 		registerUnmuteNavigationReceiver(mapActivity);
 		registerShowSqliteDbFileReceiver(mapActivity);
 		registerHideSqliteDbFileReceiver(mapActivity);
+		registerExecuteQuickActionReceiver(mapActivity);
 		initOsmandTelegram();
 		app.getAppCustomization().addListener(mapActivity);
 		aMapPointUpdateListener = mapActivity;
@@ -822,6 +834,24 @@ public class OsmandAidlApi {
 			}
 		};
 		registerReceiver(hideSqliteDbFileReceiver, mapActivity, AIDL_HIDE_SQLITEDB_FILE);
+	}
+
+	private void registerExecuteQuickActionReceiver(MapActivity mapActivity) {
+		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		BroadcastReceiver executeQuickActionReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				int actionNumber = intent.getIntExtra(AIDL_QUICK_ACTION_NUMBER, -1);
+				MapActivity mapActivity = mapActivityRef.get();
+				if (actionNumber != -1 && mapActivity != null) {
+					List<QuickAction> actionsList = app.getQuickActionRegistry().getFilteredQuickActions();
+					if (actionNumber < actionsList.size()) {
+						QuickActionRegistry.produceAction(actionsList.get(actionNumber)).execute(mapActivity);
+					}
+				}
+			}
+		};
+		registerReceiver(executeQuickActionReceiver, mapActivity, AIDL_EXECUTE_QUICK_ACTION);
 	}
 
 	public void registerMapLayers(@NonNull MapActivity mapActivity) {
@@ -2108,6 +2138,48 @@ public class OsmandAidlApi {
 				connectedApp.registerLayerContextMenu(adapter, mapActivity);
 			}
 		}
+	}
+
+	public boolean executeQuickAction(int actionNumber) {
+		Intent intent = new Intent();
+		intent.setAction(AIDL_EXECUTE_QUICK_ACTION);
+		intent.putExtra(AIDL_QUICK_ACTION_NUMBER, actionNumber);
+		app.sendBroadcast(intent);
+		return true;
+	}
+
+	public boolean getQuickActionsInfo(List<QuickActionInfoParams> quickActions) {
+		Gson gson = new Gson();
+		Type type = new TypeToken<HashMap<String, String>>() {
+		}.getType();
+
+		List<QuickAction> actionsList = app.getQuickActionRegistry().getFilteredQuickActions();
+		for (int i = 0; i < actionsList.size(); i++) {
+			QuickAction action = actionsList.get(i);
+			String name = action.getName(app);
+			String actionType = action.getActionType().getStringId();
+			String params = gson.toJson(action.getParams(), type);
+
+			quickActions.add(new QuickActionInfoParams(i, name, actionType, params));
+		}
+		return true;
+	}
+
+	public boolean getQuickActionsInfoV2(List<net.osmand.aidlapi.quickaction.QuickActionInfoParams> quickActions) {
+		Gson gson = new Gson();
+		Type type = new TypeToken<HashMap<String, String>>() {
+		}.getType();
+
+		List<QuickAction> actionsList = app.getQuickActionRegistry().getFilteredQuickActions();
+		for (int i = 0; i < actionsList.size(); i++) {
+			QuickAction action = actionsList.get(i);
+			String name = action.getName(app);
+			String actionType = action.getActionType().getStringId();
+			String params = gson.toJson(action.getParams(), type);
+
+			quickActions.add(new net.osmand.aidlapi.quickaction.QuickActionInfoParams(i, name, actionType, params));
+		}
+		return true;
 	}
 
 	private class FileCopyInfo {
