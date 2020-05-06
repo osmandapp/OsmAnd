@@ -267,11 +267,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 							new ChangeGeneralProfilesPrefBottomSheet.OnChangeSettingListener() {
 								@Override
 								public void onApplied(boolean profileOnly) {
-									if (screenType == ScreenType.CONFIGURE_MAP && !hiddenMenuItems.isEmpty()) {
-										showResetConfigureMapItemsDialog(profileOnly);
-									} else {
-										dismissFragment();
-									}
+									dismissFragment();
 								}
 
 								@Override
@@ -491,27 +487,6 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 				instantiateContextMenuAdapter();
 				initDefaultMainActions();
 				rearrangeAdapter.updateItems(getAdapterItems());
-			}
-		});
-		dismissDialog.show();
-	}
-
-	public void showResetConfigureMapItemsDialog(final boolean profileOnly) {
-		Context themedContext = UiUtilities.getThemedContext(getActivity(), nightMode);
-		final AlertDialog.Builder dismissDialog = new AlertDialog.Builder(themedContext);
-		dismissDialog.setTitle(getString(R.string.shared_string_reset));
-		dismissDialog.setMessage(getString(R.string.reset_hidden_items));
-		dismissDialog.setNegativeButton(R.string.shared_string_cancel, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialogInterface, int i) {
-				dismissFragment();
-			}
-		});
-		dismissDialog.setPositiveButton(R.string.shared_string_reset, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				resetHiddenItems(profileOnly);
-				dismissFragment();
 			}
 		});
 		dismissDialog.show();
