@@ -1,7 +1,6 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -93,7 +92,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		FavoriteGroup favoriteGroup = app.getFavorites().getGroup(fav);
 		List<FavouritePoint> groupFavourites = favoriteGroup.getPoints();
 		if (groupFavourites.size() > 0) {
-			int color = favoriteGroup.getColor() == 0 || favoriteGroup.getColor() == Color.BLACK ? view.getResources().getColor(R.color.color_favorite) : favoriteGroup.getColor();
+			int color = favoriteGroup.getColor() == 0 ? view.getResources().getColor(R.color.color_favorite) : favoriteGroup.getColor();
 			int disabledColor = light ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark;
 			color = favoriteGroup.isVisible() ? (color | 0xff000000) : view.getResources().getColor(disabledColor);
 			String name = view.getContext().getString(R.string.context_menu_points_of_group);

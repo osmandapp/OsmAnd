@@ -1,9 +1,10 @@
 package net.osmand.plus.search.listitems;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
+
+import androidx.core.content.ContextCompat;
 
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
@@ -374,10 +375,11 @@ public class QuickSearchListItem {
 				return getIcon(app, R.drawable.ic_action_world_globe);
 			case FAVORITE:
 				FavouritePoint fav = (FavouritePoint) searchResult.object;
-				return FavoriteImageDrawable.getOrCreate(app, fav.getColor(), false, fav);
+				return FavoriteImageDrawable.getOrCreate(app,
+						app.getFavorites().getColorWithCategory(fav, app.getResources().getColor(R.color.color_favorite)), false, fav);
 			case FAVORITE_GROUP:
 				FavoriteGroup group = (FavoriteGroup) searchResult.object;
-				int color = group.getColor() == 0 || group.getColor() == Color.BLACK ? app.getResources().getColor(R.color.color_favorite) : group.getColor();
+				int color = group.getColor() == 0 ? ContextCompat.getColor(app, R.color.color_favorite) : group.getColor();
 				return app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_fav_dark, color | 0xff000000);
 			case REGION:
 				return getIcon(app, R.drawable.ic_world_globe_dark);

@@ -2,6 +2,7 @@ package net.osmand.plus.mapcontextmenu.editors;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -88,8 +89,10 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 		} else {
 			List<FavouritesDbHelper.FavoriteGroup> gs = helper.getFavoriteGroups();
 			for (final FavouritesDbHelper.FavoriteGroup category : gs) {
-				ll.addView(createCategoryItem(activity, nightMode, category.getDisplayName(getContext()),
-						category.getColor()));
+				if (category.isVisible()) {
+					ll.addView(createCategoryItem(activity, nightMode, category.getDisplayName(getContext()),
+							category.getColor()));
+				}
 			}
 		}
 		View itemView = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.favorite_category_dialog_item, null);

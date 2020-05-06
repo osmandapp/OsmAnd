@@ -93,15 +93,23 @@
 	<dimen name="fab_margin_bottom_big">108dp</dimen>
 
 	<!-- General -->
-	
+	<dimen name="dialog_button_height">54dp</dimen>
+	<dimen name="dialog_button_ex_height">90dp</dimen>
+
 	<dimen name="list_item_height">65dp</dimen>
 	<dimen name="list_header_height">60dp</dimen>
-	<dimen name="favorites_icon_size">60dp</dimen>
 	<dimen name="dashboard_map_top_padding">480dp</dimen>
 	<dimen name="dashboard_land_width">480dp</dimen>
 	<dimen name="dashboard_map_toolbar">84dp</dimen>
+
 	<dimen name="favorites_icon_top_margin">13dp</dimen>
-	<!-- TextSizes -->
+	<dimen name="favorites_icon_size">60dp</dimen>
+	<dimen name="favorites_icon_padding">3dp</dimen>
+	<dimen name="favorites_list_item_height">90dp</dimen>
+	<dimen name="favorites_select_group_button_height">114dp</dimen>
+	<dimen name="favorites_select_group_button_width">213dp</dimen>
+	<dimen name="favorites_select_icon_button_right_padding">14dp</dimen>
+	    <!-- TextSizes -->
     <dimen name="default_list_text_size_large">22sp</dimen>
     <dimen name="default_list_text_size">18sp</dimen>
     <dimen name="default_desc_text_size">16sp</dimen>

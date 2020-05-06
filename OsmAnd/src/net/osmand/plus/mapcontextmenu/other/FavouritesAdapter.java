@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.data.FavouritePoint;
@@ -46,7 +47,9 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 			favouritesViewHolder.title.setText(favouritePoint.getDisplayName(app));
 			favouritesViewHolder.description.setText(favouritePoint.getCategoryDisplayName(app));
 			favouritesViewHolder.favouriteImage.setImageDrawable(
-					FavoriteImageDrawable.getOrCreate(app, favouritePoint.getColor(), false, favouritePoint));
+					FavoriteImageDrawable.getOrCreate(app,
+							app.getFavorites().getColorWithCategory(favouritePoint,
+									ContextCompat.getColor(app, R.color.color_favorite)), false, favouritePoint));
 			app.getUIUtilities().updateLocationView(cache, favouritesViewHolder.arrowImage, favouritesViewHolder.distance,
 					favouritePoint.getLatitude(), favouritePoint.getLongitude());
 		}

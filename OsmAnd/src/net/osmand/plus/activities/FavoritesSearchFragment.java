@@ -462,7 +462,9 @@ public class FavoritesSearchFragment extends DialogFragment {
 					TextView title = (TextView) view.findViewById(R.id.title);
 					TextView subtitle = (TextView) view.findViewById(R.id.subtitle);
 
-					imageView.setImageDrawable(FavoriteImageDrawable.getOrCreate(activity, point.getColor(), false, point));
+					imageView.setImageDrawable(FavoriteImageDrawable.getOrCreate(activity,
+							helper.getColorWithCategory(point, getResources().getColor(R.color.color_favorite)),
+							false, point));
 					title.setText(point.getDisplayName(app));
 
 					int dist = (int) (MapUtils.getDistance(point.getLatitude(), point.getLongitude(),

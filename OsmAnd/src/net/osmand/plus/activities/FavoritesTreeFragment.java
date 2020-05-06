@@ -3,7 +3,6 @@ package net.osmand.plus.activities;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -840,7 +839,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			int enabledColor = light ? R.color.text_color_primary_light : R.color.text_color_primary_dark;
 			int disabledColor = light ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark;
 			row.findViewById(R.id.group_divider).setVisibility(groupPosition == 0 ? View.GONE : View.VISIBLE);
-			int color = model.getColor() == 0 || model.getColor() == Color.BLACK ? getResources().getColor(R.color.color_favorite) : model.getColor();
+			int color = model.getColor() == 0 ? getResources().getColor(R.color.color_favorite) : model.getColor();
 			if (!model.isPersonal()) {
 				setCategoryIcon(app, app.getUIUtilities().getPaintedIcon(
 						R.drawable.ic_action_folder, visible ? color : getResources().getColor(disabledColor)),
@@ -960,15 +959,15 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			if (model.isAddressSpecified()) {
 				distanceText.setText(String.format(getString(R.string.ltr_or_rtl_combine_via_comma), distance.trim(), model.getAddress()));
 			}
+			int color = visible
+					? app.getFavorites().getColorWithCategory(model, getResources().getColor(R.color.color_favorite))
+					: ContextCompat.getColor(app, disabledIconColor);
 			int iconSize = (int) getResources().getDimension(R.dimen.favorites_icon_size);
 			if(model.getBackgroundType().equals(FavouritePoint.BackgroundType.CIRCLE)){
-				int color = visible ? model.getColor() : getResources().getColor(disabledIconColor);
-				int col = color == 0 || color == Color.BLACK ? getResources().getColor(R.color.color_favorite) : color;
-				icon.setImageDrawable(UiUtilities.createTintedDrawable(getActivity(),model.getIconId(),col));
+				icon.setImageDrawable(UiUtilities.createTintedDrawable(getActivity(), model.getIconId(), color));
 				iconSize = (int) getResources().getDimension(R.dimen.standard_icon_size);
 			}else {
-				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),
-						visible ? model.getColor() : getResources().getColor(disabledIconColor), false, model));
+				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(), color, false, model));
 			}
 			FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(iconSize, iconSize, CENTER);
 			icon.setLayoutParams(lp);
