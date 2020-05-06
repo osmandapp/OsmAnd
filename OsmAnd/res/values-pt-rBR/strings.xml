@@ -3676,4 +3676,23 @@ Pôr do Sol: %2$s</string>
     <string name="osmand_purchases_item">Compras de OsmAnd</string>
     <string name="legend_item_description">O guia para a simbologia de um mapa</string>
     <string name="navigation_profiles_item">Perfis de navegação</string>
+    <string name="release_3_7">• Novos mapas de inclinação offline
+\n
+\n  • Personalização completa de Favoritos e Waypoints GPX - cores, ícones e formas personalizados
+\n
+\n  • Personalize a ordem dos itens no menu de contexto, configurar mapa, gaveta
+\n
+\n  • Wikipédia como uma camada separada no mapa Configurar, selecione apenas os idiomas necessários
+\n
+\n  • Crie seu próprio filtro / mapa de POI com total flexibilidade
+\n
+\n  • Adicionadas opções para restaurar configurações de perfis personalizados
+\n
+\n  • Rotas GPX completas das faixas de tráfego da Navigation Support e instruções completas de curva
+\n
+\n  • Corrigir tamanhos de interface do usuário em tablets
+\n
+\n  • Corrija bugs com RTL
+\n
+\n</string>
 </resources>
