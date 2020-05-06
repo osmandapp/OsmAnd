@@ -2781,7 +2781,7 @@
     <string name="shared_string_gpx_files">GPX-filer</string>
     <string name="get_osmand_live">Skaff deg OsmAnd Live for å låse opp alle funksjoner: Daglige kartoppdateringer med ubegrensede nedlastinger, alle programtilleggene, Wikipedia, Wikivoyage og mye mer.</string>
     <string name="quick_action_edit_actions">Rediger handlinger</string>
-    <string name="error_notification_desc">Send en skjeravbildning av dette varselet til support@osmand.net</string>
+    <string name="error_notification_desc">Send en skjermavbildning av denne merknaden til support@osmand.net</string>
     <string name="coord_input_edit_point">Rediger punkt</string>
     <string name="coord_input_add_point">Legg til punkt</string>
     <string name="coord_input_save_as_track">Lagre som spor</string>
