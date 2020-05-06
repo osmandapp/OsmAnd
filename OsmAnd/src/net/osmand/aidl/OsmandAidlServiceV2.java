@@ -81,6 +81,7 @@ import net.osmand.aidlapi.note.StartVideoRecordingParams;
 import net.osmand.aidlapi.note.StopRecordingParams;
 import net.osmand.aidlapi.note.TakePhotoNoteParams;
 import net.osmand.aidlapi.plugins.PluginParams;
+import net.osmand.aidlapi.quickaction.QuickActionInfoParams;
 import net.osmand.aidlapi.quickaction.QuickActionParams;
 import net.osmand.aidlapi.search.SearchParams;
 import net.osmand.aidlapi.search.SearchResult;
@@ -1242,6 +1243,17 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 			try {
 				OsmandAidlApi api = getApi("executeQuickAction");
 				return api != null && api.executeQuickAction(params.getActionNumber());
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean getQuickActionsInfo(List<QuickActionInfoParams> quickActions) {
+			try {
+				OsmandAidlApi api = getApi("getQuickActionsInfo");
+				return api != null && api.getQuickActionsInfoV2(quickActions);
 			} catch (Exception e) {
 				handleException(e);
 				return false;

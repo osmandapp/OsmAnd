@@ -20,6 +20,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
@@ -32,6 +35,7 @@ import net.osmand.aidl.gpx.AGpxFileDetails;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
 import net.osmand.aidl.navigation.ADirectionInfo;
 import net.osmand.aidl.navigation.OnVoiceNavigationParams;
+import net.osmand.aidl.quickaction.QuickActionInfoParams;
 import net.osmand.aidl.tiles.ASqliteDbFile;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -92,9 +96,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -2139,6 +2145,40 @@ public class OsmandAidlApi {
 		intent.setAction(AIDL_EXECUTE_QUICK_ACTION);
 		intent.putExtra(AIDL_QUICK_ACTION_NUMBER, actionNumber);
 		app.sendBroadcast(intent);
+		return true;
+	}
+
+	public boolean getQuickActionsInfo(List<QuickActionInfoParams> quickActions) {
+		Gson gson = new Gson();
+		Type type = new TypeToken<HashMap<String, String>>() {
+		}.getType();
+
+		List<QuickAction> actionsList = app.getQuickActionRegistry().getFilteredQuickActions();
+		for (int i = 0; i < actionsList.size(); i++) {
+			QuickAction action = actionsList.get(i);
+			String name = action.getName(app);
+			String actionType = action.getActionType().getStringId();
+			String params = gson.toJson(action.getParams(), type);
+
+			quickActions.add(new QuickActionInfoParams(i, name, actionType, params));
+		}
+		return true;
+	}
+
+	public boolean getQuickActionsInfoV2(List<net.osmand.aidlapi.quickaction.QuickActionInfoParams> quickActions) {
+		Gson gson = new Gson();
+		Type type = new TypeToken<HashMap<String, String>>() {
+		}.getType();
+
+		List<QuickAction> actionsList = app.getQuickActionRegistry().getFilteredQuickActions();
+		for (int i = 0; i < actionsList.size(); i++) {
+			QuickAction action = actionsList.get(i);
+			String name = action.getName(app);
+			String actionType = action.getActionType().getStringId();
+			String params = gson.toJson(action.getParams(), type);
+
+			quickActions.add(new net.osmand.aidlapi.quickaction.QuickActionInfoParams(i, name, actionType, params));
+		}
 		return true;
 	}
 
