@@ -105,6 +105,8 @@ public class ExternalApiHelper {
 	public static final String PARAM_CATEGORY = "category";
 	public static final String PARAM_LAT = "lat";
 	public static final String PARAM_LON = "lon";
+	public static final String PARAM_MAP_LAT = "map_lat";
+	public static final String PARAM_MAP_LON = "map_lon";
 	public static final String PARAM_COLOR = "color";
 	public static final String PARAM_VISIBLE = "visible";
 
@@ -443,6 +445,12 @@ public class ExternalApiHelper {
 				if (location != null) {
 					result.putExtra(PARAM_LAT, location.getLatitude());
 					result.putExtra(PARAM_LON, location.getLongitude());
+				}
+
+				LatLon mapLocation = mapActivity.getMapLocation();
+				if (location != null) {
+					result.putExtra(PARAM_MAP_LAT, mapLocation.getLatitude());
+					result.putExtra(PARAM_MAP_LON, mapLocation.getLongitude());
 				}
 
 				final RoutingHelper routingHelper = app.getRoutingHelper();

@@ -43,8 +43,8 @@
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/home_img"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="@dimen/standard_icon_size"
 				android:layout_marginStart="@dimen/list_content_padding"
 				android:layout_marginLeft="@dimen/list_content_padding"
 				android:layout_marginEnd="@dimen/favorites_icon_right_margin"
@@ -92,8 +92,8 @@
 			android:id="@+id/buttons_divider"
 			android:layout_width="1dp"
 			android:layout_height="match_parent"
-			android:layout_marginTop="12dp"
-			android:layout_marginBottom="12dp"
+			android:layout_marginTop="@dimen/content_padding_small"
+			android:layout_marginBottom="@dimen/content_padding_small"
 			android:background="?attr/divider_color_basic" />
 
 		<LinearLayout
@@ -109,8 +109,8 @@
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/work_img"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="@dimen/standard_icon_size"
 				android:layout_marginStart="@dimen/list_content_padding"
 				android:layout_marginLeft="@dimen/list_content_padding"
 				android:layout_marginEnd="@dimen/favorites_icon_right_margin"

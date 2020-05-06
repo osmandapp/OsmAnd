@@ -623,7 +623,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		TextView directionsButton = (TextView) view.findViewById(R.id.context_menu_directions_button);
 		int iconResId = R.drawable.map_directions;
 		if (menu.navigateInPedestrianMode()) {
-			iconResId = R.drawable.map_action_pedestrian_dark;
+			iconResId = R.drawable.ic_action_pedestrian_dark;
 		}
 		Drawable drawable = getIcon(iconResId, bottomButtonsColor);
 		directionsButton.setTextColor(ContextCompat.getColor(mapActivity, bottomButtonsColor));

@@ -349,20 +349,20 @@ public class MapActivityActions implements DialogProvider {
 		adapter.addItem(itemBuilder
 				.setTitleId(selectedObj instanceof FavouritePoint ? R.string.favourites_context_menu_edit : R.string.shared_string_add, mapActivity)
 				.setId(MAP_CONTEXT_MENU_ADD_ID)
-				.setIcon(R.drawable.map_action_fav_dark)
+				.setIcon(R.drawable.ic_action_fav_dark)
 				.setOrder(10)
 				.createItem());
 		adapter.addItem(itemBuilder
 				.setTitleId(R.string.shared_string_marker, mapActivity)
 				.setId(MAP_CONTEXT_MENU_MARKER_ID)
-				.setIcon(R.drawable.map_action_flag_dark)
 				.setOrder(20)
+				.setIcon(R.drawable.ic_action_flag_dark)
 				.createItem());
 		adapter.addItem(itemBuilder
 				.setTitleId(R.string.shared_string_share, mapActivity)
 				.setId(MAP_CONTEXT_MENU_SHARE_ID)
-				.setIcon(R.drawable.map_action_gshare_dark)
 				.setOrder(30)
+				.setIcon(R.drawable.ic_action_gshare_dark)
 				.createItem());
 		adapter.addItem(itemBuilder
 				.setTitleId(R.string.shared_string_actions, mapActivity)

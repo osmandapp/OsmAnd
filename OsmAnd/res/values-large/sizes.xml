@@ -31,7 +31,7 @@
 	<dimen name="map_alarm_bottom_margin">140dp</dimen>
 	<dimen name="map_alarm_bottom_margin_land">81dp</dimen>
 	
-	<dimen name="map_widget_icon">32dp</dimen>
+	<dimen name="map_widget_icon">36dp</dimen>
 	<dimen name="map_widget_height">48dp</dimen>
 	<dimen name="map_widget_image">120dp</dimen>
 	<dimen name="map_button_spacing">17dp</dimen>
@@ -96,9 +96,12 @@
 	
 	<dimen name="list_item_height">65dp</dimen>
 	<dimen name="list_header_height">60dp</dimen>
+	<dimen name="favorites_icon_size">60dp</dimen>
 	<dimen name="dashboard_map_top_padding">480dp</dimen>
 	<dimen name="dashboard_land_width">480dp</dimen>
-	    <!-- TextSizes -->
+	<dimen name="dashboard_map_toolbar">84dp</dimen>
+	<dimen name="favorites_icon_top_margin">13dp</dimen>
+	<!-- TextSizes -->
     <dimen name="default_list_text_size_large">22sp</dimen>
     <dimen name="default_list_text_size">18sp</dimen>
     <dimen name="default_desc_text_size">16sp</dimen>
@@ -154,6 +157,7 @@
 	<dimen name="bottom_sheet_title_height">78dp</dimen>
 	<dimen name="bottom_sheet_descr_height">66dp</dimen>
 	<dimen name="bottom_sheet_list_item_height">72dp</dimen>
+	<dimen name="bottom_sheet_large_list_item_height">96dp</dimen>
 	<dimen name="bottom_sheet_icon_margin">36dp</dimen>
 	<dimen name="bottom_sheet_divider_margin_top">11dp</dimen>
 	<dimen name="bottom_sheet_divider_margin_bottom">12dp</dimen>
@@ -238,6 +242,7 @@
 
 	<dimen name="wikilink_bottom_sheet_padding">21dp</dimen>
 
+	<dimen name="setting_profile_item_height">96dp</dimen>
 	<dimen name="settings_divider_margin_start">108dp</dimen>
 	<dimen name="setting_list_item_large_height">108dp</dimen>
 

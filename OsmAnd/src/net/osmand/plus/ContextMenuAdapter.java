@@ -389,9 +389,8 @@ public class ContextMenuAdapter {
 				Drawable drawable = item.getIcon() != ContextMenuItem.INVALID_ID
 						? mIconsCache.getIcon(item.getIcon(), color) : null;
 				if (drawable != null && tv != null) {
-					float density = getContext().getResources().getDisplayMetrics().density;
-					int paddingInPixels = (int) (24 * density);
-					int drawableSizeInPixels = (int) (24 * density); // 32
+					int paddingInPixels = (int) getContext().getResources().getDimension(R.dimen.bottom_sheet_icon_margin);
+					int drawableSizeInPixels = (int) getContext().getResources().getDimension(R.dimen.standard_icon_size);
 					drawable.setBounds(0, 0, drawableSizeInPixels, drawableSizeInPixels);
 					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
 						tv.setCompoundDrawablesRelative(drawable, null, null, null);
