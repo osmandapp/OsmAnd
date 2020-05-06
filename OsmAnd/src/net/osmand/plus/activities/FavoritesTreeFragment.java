@@ -22,6 +22,7 @@ import android.widget.CheckBox;
 import android.widget.ExpandableListView;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,6 +67,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static android.view.Gravity.CENTER;
 import static net.osmand.plus.myplaces.FavoritesActivity.FAV_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
@@ -958,14 +960,18 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			if (model.isAddressSpecified()) {
 				distanceText.setText(String.format(getString(R.string.ltr_or_rtl_combine_via_comma), distance.trim(), model.getAddress()));
 			}
+			int iconSize = (int) getResources().getDimension(R.dimen.favorites_icon_size);
 			if(model.getBackgroundType().equals(FavouritePoint.BackgroundType.CIRCLE)){
 				int color = visible ? model.getColor() : getResources().getColor(disabledIconColor);
 				int col = color == 0 || color == Color.BLACK ? getResources().getColor(R.color.color_favorite) : color;
 				icon.setImageDrawable(UiUtilities.createTintedDrawable(getActivity(),model.getIconId(),col));
+				iconSize = (int) getResources().getDimension(R.dimen.standard_icon_size);
 			}else {
 				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),
 						visible ? model.getColor() : getResources().getColor(disabledIconColor), false, model));
 			}
+			FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(iconSize, iconSize, CENTER);
+			icon.setLayoutParams(lp);
 			if (visible) {
 				distanceText.setTextColor(getResources().getColor(R.color.color_distance));
 			} else {

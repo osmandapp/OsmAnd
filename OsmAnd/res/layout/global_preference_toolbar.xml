@@ -6,23 +6,30 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/actionModeBackground"
-	android:minHeight="@dimen/toolbar_height"
 	app:contentInsetLeft="0dp"
 	app:contentInsetStart="0dp"
 	app:contentInsetRight="0dp"
 	app:contentInsetEnd="0dp">
+	app:contentInsetStart="0dp"
+	app:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:minHeight="@dimen/toolbar_height"
 		android:gravity="center_vertical">
 
 		<ImageButton
 			android:id="@+id/close_button"
 			style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
-			android:layout_width="@dimen/toolbar_height"
-			android:layout_height="@dimen/toolbar_height"
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginRight="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding"
 			android:contentDescription="@string/access_shared_string_navigate_up"
+			android:scaleType="fitCenter"
 			android:src="@drawable/ic_arrow_back" />
 
 		<LinearLayout

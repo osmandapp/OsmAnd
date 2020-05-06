@@ -504,7 +504,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	}
 
 	public int getFavActionIconId() {
-		return R.drawable.map_action_fav_dark;
+		return R.drawable.ic_action_fav_dark;
 	}
 
 	public int getFavActionStringId() {
@@ -516,7 +516,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	}
 
 	public int getWaypointActionIconId() {
-		return R.drawable.map_action_flag_dark;
+		return R.drawable.ic_action_flag_dark;
 	}
 
 	public int getWaypointActionStringId() {
