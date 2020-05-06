@@ -9,6 +9,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
+import net.osmand.plus.ContextMenuAdapter.OnItemDeleteAction;
 
 public class ContextMenuItem {
 	public static final int INVALID_ID = -1;
@@ -407,10 +408,5 @@ public class ContextMenuItem {
 					mOrder, mDescription, mItemClickListener, mIntegerListener, mProgressListener, mItemDeleteAction,
 					mHideDivider, mHideCompoundButton, mMinHeight, mTag, mId);
 		}
-	}
-
-	// when action is deleted or reset
-	public interface OnItemDeleteAction {
-		void itemWasDeleted(ApplicationMode appMode, boolean profileOnly);
 	}
 }

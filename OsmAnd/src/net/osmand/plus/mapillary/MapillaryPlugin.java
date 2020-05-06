@@ -31,7 +31,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -40,11 +39,11 @@ import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
 import java.text.MessageFormat;
-import java.util.Arrays;
 import java.util.List;
 
 import static android.content.Intent.ACTION_VIEW;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAPILLARY;
+import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 
 public class MapillaryPlugin extends OsmandPlugin {
 
@@ -187,7 +186,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 				.setColor(settings.SHOW_MAPILLARY.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_mapillary)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
-				.setItemDeleteAction(new ConfigureMapMenu.ItemResetListener(Arrays.<OsmandSettings.OsmandPreference>asList(settings.SHOW_MAPILLARY)))
+				.setItemDeleteAction(makeDeleteAction(settings.SHOW_MAPILLARY))
 				.setListener(listener)
 				.createItem());
 	}

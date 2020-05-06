@@ -38,7 +38,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.myplaces.FavoritesActivity;
@@ -51,7 +50,6 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CREATE_POI;
@@ -61,6 +59,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_M
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
+import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 
 
 public class OsmEditingPlugin extends OsmandPlugin {
@@ -366,7 +365,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 						return true;
 					}
 				})
-				.setItemDeleteAction(new ConfigureMapMenu.ItemResetListener(Arrays.<OsmandSettings.OsmandPreference>asList(settings.SHOW_OSM_BUGS)))
+				.setItemDeleteAction(makeDeleteAction(settings.SHOW_OSM_BUGS))
 				.createItem());
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
@@ -388,7 +387,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 						return true;
 					}
 				})
-				.setItemDeleteAction(new ConfigureMapMenu.ItemResetListener(Arrays.<OsmandSettings.OsmandPreference>asList(settings.SHOW_OSM_EDITS)))
+				.setItemDeleteAction(makeDeleteAction(settings.SHOW_OSM_EDITS))
 				.createItem());
 	}
 

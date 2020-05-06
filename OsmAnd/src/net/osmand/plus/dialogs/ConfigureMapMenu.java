@@ -31,7 +31,6 @@ import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererContext;
-import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
@@ -104,6 +103,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_RENDERING_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.WIKIPEDIA_ID;
+import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_DENSITY_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_ATTR;
@@ -318,32 +318,6 @@ public class ConfigureMapMenu {
 		}
 	}
 
-	public static final class ItemResetListener implements ContextMenuItem.OnItemDeleteAction {
-
-		private List<OsmandPreference> prefs;
-
-		public ItemResetListener(@NonNull List<OsmandPreference> prefs) {
-			this.prefs = prefs;
-		}
-
-		@Override
-		public void itemWasDeleted(@NonNull ApplicationMode appMode, boolean profileOnly) {
-			for (OsmandSettings.OsmandPreference pref : prefs) {
-				resetSetting(appMode, pref, profileOnly);
-			}
-		}
-
-		private void resetSetting(ApplicationMode appMode, OsmandPreference preference, boolean profileOnly) {
-			if (profileOnly) {
-				preference.resetModeToDefault(appMode);
-			} else {
-				for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-					preference.resetModeToDefault(mode);
-				}
-			}
-		}
-	}
-
 	private void createLayersItems(List<RenderingRuleProperty> customRules, ContextMenuAdapter adapter,
 	                               final MapActivity activity, final int themeRes, final boolean nightMode) {
 		final OsmandApplication app = activity.getMyApplication();
@@ -363,7 +337,7 @@ public class ConfigureMapMenu {
 				.setSelected(settings.SHOW_FAVORITES.get())
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_fav_dark)
-				.setItemDeleteAction(new ItemResetListener(Arrays.<OsmandPreference>asList(settings.SHOW_FAVORITES)))
+				.setItemDeleteAction(makeDeleteAction(settings.SHOW_FAVORITES))
 				.setListener(l)
 				.createItem());
 		selected = app.getPoiFilters().isShowingAnyPoi(PoiTemplateList.POI);
@@ -383,7 +357,7 @@ public class ConfigureMapMenu {
 				.setSelected(settings.SHOW_POI_LABEL.get())
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_text_dark)
-				.setItemDeleteAction(new ItemResetListener(Arrays.<OsmandPreference>asList(settings.SHOW_POI_LABEL)))
+				.setItemDeleteAction(makeDeleteAction(settings.SHOW_POI_LABEL))
 				.setListener(l).createItem());
 
 		/*
@@ -422,7 +396,7 @@ public class ConfigureMapMenu {
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setSelected(transportSelected)
 				.setColor(transportSelected ? selectedProfileColorRes : ContextMenuItem.INVALID_ID)
-				.setItemDeleteAction(new ItemResetListener(new ArrayList<OsmandPreference>(transportPrefs)))
+				.setItemDeleteAction(makeDeleteAction(new ArrayList<OsmandPreference>(transportPrefs)))
 				.setListener(new ContextMenuAdapter.OnRowItemClick() {
 					ArrayAdapter<CharSequence> adapter;
 					boolean transportSelectedInner = transportSelected;
@@ -588,7 +562,7 @@ public class ConfigureMapMenu {
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_plugin_wikipedia)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
-				.setItemDeleteAction(new ItemResetListener(Arrays.<OsmandPreference>asList(settings.SHOW_WIKIPEDIA_POI)))
+				.setItemDeleteAction(makeDeleteAction(settings.SHOW_WIKIPEDIA_POI))
 				.setListener(l).createItem());
 
 		selected = settings.SHOW_MAP_MARKERS.get();
@@ -598,7 +572,7 @@ public class ConfigureMapMenu {
 				.setSelected(selected)
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_flag_dark)
-				.setItemDeleteAction(new ItemResetListener(Arrays.<OsmandPreference>asList(settings.SHOW_MAP_MARKERS)))
+				.setItemDeleteAction(makeDeleteAction(settings.SHOW_MAP_MARKERS))
 				.setListener(l).createItem());
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
@@ -606,7 +580,7 @@ public class ConfigureMapMenu {
 				.setTitleId(R.string.layer_map, activity)
 				.setIcon(R.drawable.ic_world_globe_dark)
 				.setDescription(settings.MAP_ONLINE_DATA.get() ? settings.MAP_TILE_SOURCES.get() : null)
-				.setItemDeleteAction(new ItemResetListener(Arrays.<OsmandPreference>asList(settings.MAP_ONLINE_DATA, settings.MAP_TILE_SOURCES)))
+				.setItemDeleteAction(makeDeleteAction(settings.MAP_ONLINE_DATA, settings.MAP_TILE_SOURCES))
 				.setListener(l).createItem());
 
 		OsmandPlugin.registerLayerContextMenu(activity.getMapView(), adapter, activity);
@@ -650,7 +624,7 @@ public class ConfigureMapMenu {
 						return false;
 					}
 				})
-				.setItemDeleteAction(new ConfigureMapMenu.ItemResetListener(Arrays.<OsmandSettings.OsmandPreference>asList(settings.RENDERER)))
+				.setItemDeleteAction(makeDeleteAction(settings.RENDERER))
 				.createItem());
 
 		String description = "";
@@ -707,7 +681,7 @@ public class ConfigureMapMenu {
 						return false;
 					}
 				})
-				.setItemDeleteAction(new ConfigureMapMenu.ItemResetListener(Arrays.<OsmandSettings.OsmandPreference>asList(settings.DAYNIGHT_MODE)))
+				.setItemDeleteAction(makeDeleteAction(settings.DAYNIGHT_MODE))
 				.createItem());
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
@@ -773,7 +747,7 @@ public class ConfigureMapMenu {
 						return false;
 					}
 				})
-				.setItemDeleteAction(new ConfigureMapMenu.ItemResetListener(Arrays.<OsmandSettings.OsmandPreference>asList(settings.MAP_DENSITY)))
+				.setItemDeleteAction(makeDeleteAction(settings.MAP_DENSITY))
 				.createItem());
 
 		ContextMenuItem props;
@@ -819,7 +793,7 @@ public class ConfigureMapMenu {
 						return false;
 					}
 				})
-				.setItemDeleteAction(new ConfigureMapMenu.ItemResetListener(Arrays.<OsmandSettings.OsmandPreference>asList(settings.TEXT_SCALE)))
+				.setItemDeleteAction(makeDeleteAction(settings.TEXT_SCALE))
 				.createItem());
 
 		String localeDescr = activity.getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get();
@@ -919,7 +893,7 @@ public class ConfigureMapMenu {
 						return false;
 					}
 				})
-				.setItemDeleteAction(new ConfigureMapMenu.ItemResetListener(Arrays.<OsmandSettings.OsmandPreference>asList(settings.MAP_PREFERRED_LOCALE)))
+				.setItemDeleteAction(makeDeleteAction(settings.MAP_PREFERRED_LOCALE))
 				.createItem());
 
 		props = createProperties(customRules, null, R.string.rendering_category_transport, R.drawable.ic_action_transport_bus,
@@ -1107,7 +1081,7 @@ public class ConfigureMapMenu {
 				builder.setSecondaryIcon(R.drawable.ic_action_additional_option);
 				builder.setSelected(selected);
 			}
-			builder.setItemDeleteAction(new ConfigureMapMenu.ItemResetListener(new ArrayList<OsmandPreference>(prefs)));
+			builder.setItemDeleteAction(makeDeleteAction(new ArrayList<OsmandPreference>(prefs)));
 			return builder.createItem();
 //			createCustomRenderingProperties(adapter, activity, ps);
 		}
@@ -1444,7 +1418,7 @@ public class ConfigureMapMenu {
 						}
 					})
 					.setDescription(descr)
-					.setItemDeleteAction(new ConfigureMapMenu.ItemResetListener(Arrays.<OsmandSettings.OsmandPreference>asList(pref)))
+					.setItemDeleteAction(makeDeleteAction(pref))
 					.setLayout(R.layout.list_item_single_line_descrition_narrow);
 			if (icon != 0) {
 				builder.setIcon(icon);

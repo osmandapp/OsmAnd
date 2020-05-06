@@ -37,6 +37,7 @@ import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.OsmandSettings.ContextMenuItemsPreference;
+import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -48,8 +49,6 @@ import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
 
 public class ContextMenuAdapter {
 	private static final Log LOG = PlatformUtil.getLog(ContextMenuAdapter.class);
@@ -613,5 +612,35 @@ public class ContextMenuAdapter {
 			}
 		}
 		return visible;
+	}
+
+	public static OnItemDeleteAction makeDeleteAction(final OsmandPreference... prefs) {
+		return new OnItemDeleteAction() {
+			@Override
+			public void itemWasDeleted(ApplicationMode appMode, boolean profileOnly) {
+				for (OsmandPreference pref : prefs) {
+					resetSetting(appMode, pref, profileOnly);
+				}
+			}
+		};
+	}
+
+	public static OnItemDeleteAction makeDeleteAction(final List<OsmandPreference> prefs) {
+		return makeDeleteAction(prefs.toArray(new OsmandPreference[prefs.size()]));
+	}
+
+	private static void resetSetting(ApplicationMode appMode, OsmandSettings.OsmandPreference preference, boolean profileOnly) {
+		if (profileOnly) {
+			preference.resetModeToDefault(appMode);
+		} else {
+			for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+				preference.resetModeToDefault(mode);
+			}
+		}
+	}
+
+	// when action is deleted or reset
+	public interface OnItemDeleteAction {
+		void itemWasDeleted(ApplicationMode appMode, boolean profileOnly);
 	}
 }

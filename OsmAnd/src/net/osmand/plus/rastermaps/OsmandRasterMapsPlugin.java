@@ -45,7 +45,6 @@ import net.osmand.plus.activities.DownloadTilesDialog;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.RasterMapMenu;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.views.MapTileLayer;
@@ -54,7 +53,6 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -62,6 +60,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_D
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_UPDATE_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
+import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
@@ -360,7 +359,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				.setIcon(R.drawable.ic_layer_top)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener)
-				.setItemDeleteAction(new ConfigureMapMenu.ItemResetListener(Arrays.<OsmandSettings.OsmandPreference>asList(settings.MAP_OVERLAY, settings.MAP_OVERLAY_PREVIOUS, settings.MAP_OVERLAY_TRANSPARENCY)))
+				.setItemDeleteAction(makeDeleteAction(settings.MAP_OVERLAY, settings.MAP_OVERLAY_PREVIOUS, settings.MAP_OVERLAY_TRANSPARENCY))
 				.createItem());
 		String underlayMapDescr = settings.MAP_UNDERLAY.get();
 		if (underlayMapDescr!=null && underlayMapDescr.contains(".sqlitedb")) {
@@ -376,7 +375,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				.setIcon(R.drawable.ic_layer_bottom)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener)
-				.setItemDeleteAction(new ConfigureMapMenu.ItemResetListener(Arrays.<OsmandSettings.OsmandPreference>asList(settings.MAP_UNDERLAY, settings.MAP_UNDERLAY_PREVIOUS)))
+				.setItemDeleteAction(makeDeleteAction(settings.MAP_UNDERLAY, settings.MAP_UNDERLAY_PREVIOUS))
 				.createItem());
 	}
 
