@@ -144,12 +144,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 				mainActionItems = savedInstanceState.getStringArrayList(MAIN_ACTIONS_ITEMS_KEY);
 			}
 		} else {
-			hiddenMenuItems = new ArrayList<>(getSettingForScreen(app, screenType).getModeValue(appMode).getHiddenIds());
-			menuItemsOrder = new HashMap<>();
-			List<String> orderIds = getSettingForScreen(app, screenType).getModeValue(appMode).getOrderIds();
-			for (int i = 0; i < orderIds.size(); i++) {
-				menuItemsOrder.put(orderIds.get(i), i);
-			}
+			initSavedIds(appMode);
 		}
 		nightMode = !app.getSettings().isLightContentForMode(appMode);
 		mInflater = UiUtilities.getInflater(app, nightMode);
@@ -157,7 +152,16 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		activity = getActivity();
 	}
 
-	private void initDefaultMainActions() {
+	private void initSavedIds(ApplicationMode appMode) {
+		hiddenMenuItems = new ArrayList<>(getSettingForScreen(app, screenType).getModeValue(appMode).getHiddenIds());
+		menuItemsOrder = new HashMap<>();
+		List<String> orderIds = getSettingForScreen(app, screenType).getModeValue(appMode).getOrderIds();
+		for (int i = 0; i < orderIds.size(); i++) {
+			menuItemsOrder.put(orderIds.get(i), i);
+		}
+	}
+
+	private void initMainActionsIds(ApplicationMode appMode) {
 		List<ContextMenuItem> defItems = getCustomizableDefaultItems(contextMenuAdapter.getDefaultItems());
 		OsmandSettings.ContextMenuItemsSettings pref = getSettingForScreen(app, screenType).getModeValue(appMode);
 		if (pref instanceof OsmandSettings.MainContextMenuItemsSettings) {
@@ -295,7 +299,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 			}
 		}
 		if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
-			initDefaultMainActions();
+			initMainActionsIds(appMode);
 		}
 		recyclerView.setPadding(0, 0, 0, (int) app.getResources().getDimension(R.dimen.dialog_button_ex_min_width));
 		rearrangeAdapter = new RearrangeMenuItemsAdapter(app, getAdapterItems(), nightMode);
@@ -486,7 +490,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 					mainActionItems.clear();
 				}
 				instantiateContextMenuAdapter();
-				initDefaultMainActions();
+				initMainActionsIds(appMode);
 				rearrangeAdapter.updateItems(getAdapterItems());
 			}
 		});
@@ -507,10 +511,12 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	@Override
 	public void copyAppModePrefs(ApplicationMode appMode) {
 		if (appMode != null) {
-			List<OsmandSettings.OsmandPreference> prefs = new ArrayList<>();
-			prefs.add(getSettingForScreen(app, screenType));
-			app.getSettings().copyProfilePreferences(appMode, this.appMode, prefs);
-			dismissFragment();
+			isChanged = true;
+			initSavedIds(appMode);
+			if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
+				initMainActionsIds(appMode);
+			}
+			rearrangeAdapter.updateItems(getAdapterItems());
 		}
 	}
 
