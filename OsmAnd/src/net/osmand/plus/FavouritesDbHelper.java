@@ -102,11 +102,7 @@ public class FavouritesDbHelper {
 		}
 
 		public int getColor() {
-			if ((color & 0xFF000000) != 0) {
 				return color;
-			} else {
-				return color | 0xFF000000;
-			}
 		}
 
 		public boolean isVisible() {
@@ -130,6 +126,22 @@ public class FavouritesDbHelper {
 			}
 			return name;
 		}
+	}
+
+	public int getColorWithCategory(FavouritePoint point, int defaultColor) {
+		int color = 0;
+		if (point.getColor() != 0) {
+			color = point.getColor();
+		} else {
+			FavoriteGroup favoriteGroup = getGroup(point);
+			if (favoriteGroup != null) {
+				color = favoriteGroup.getColor();
+			}
+			if (color == 0) {
+				color = defaultColor;
+			}
+		}
+		return color;
 	}
 
 	public void loadFavorites() {

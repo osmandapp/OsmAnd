@@ -122,7 +122,7 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 	private View createCategoryItem(@NonNull final Activity activity, boolean nightMode, final String categoryName, final int categoryColor) {
 		View itemView = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.favorite_category_dialog_item, null);
 		Button button = (Button)itemView.findViewById(R.id.button);
-		if (categoryColor != 0 & categoryColor != Color.BLACK) {
+		if (categoryColor != 0) {
 			button.setCompoundDrawablesWithIntrinsicBounds(
 					getIcon(activity, R.drawable.ic_action_folder, categoryColor), null, null, null);
 		} else {

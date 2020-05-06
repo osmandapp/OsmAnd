@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
@@ -832,7 +831,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 				final String group = items.get(position);
 				holder.groupName.setText(group);
 				int categoryColor = getCategoryColor(group);
-				int color = categoryColor == 0 || categoryColor == Color.BLACK ? getDefaultColor() : categoryColor;
+				int color = categoryColor == 0 ? getDefaultColor() : categoryColor;
 				holder.groupIcon.setImageDrawable(UiUtilities.tintDrawable(
 						ContextCompat.getDrawable(app, R.drawable.ic_action_folder), color));
 				holder.pointsCounter.setText(String.valueOf(getCategoryPointsCount(group)));

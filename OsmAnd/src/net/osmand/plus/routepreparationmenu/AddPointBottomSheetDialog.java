@@ -3,7 +3,6 @@ package net.osmand.plus.routepreparationmenu;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -656,8 +655,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 							} else {
 								favoriteViewHolder.description.setText(point.getCategory());
 							}
-							int pointColor = point.getColor();
-							int color = pointColor == 0 || pointColor == Color.BLACK ? ContextCompat.getColor(app, R.color.color_favorite) : pointColor;
+							int color = app.getFavorites().getColorWithCategory(point, ContextCompat.getColor(app, R.color.color_favorite));
 							favoriteViewHolder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_fav_dark, color));
 						}
 						favoriteViewHolder.description.setVisibility(View.VISIBLE);

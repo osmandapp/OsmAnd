@@ -425,10 +425,10 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 		FavouritePoint favorite = getFavorite();
 		int color = favorite != null ? getColor() : 0;
 		FavoriteGroup group = getGroup();
-		if (group != null && (color == 0 || color == 0xFF000000)) {
+		if (group != null && (color == 0)) {
 			color = group.getColor();
 		}
-		if (color == 0 || color == 0xFF000000) {
+		if (color == 0) {
 			color = defaultColor;
 		}
 		return color;

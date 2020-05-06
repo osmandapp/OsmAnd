@@ -77,11 +77,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	public int getColor() {
-		if ((color & 0xFF000000) != 0) {
 			return color;
-		} else {
-			return color | 0xFF000000;
-		}
 	}
 
 	public String getAddress() {

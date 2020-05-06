@@ -160,7 +160,7 @@ public class GPXUtilities {
 			if (!Algorithms.isEmpty(colorString)) {
 				if (colorString.charAt(0) == '#') {
 					long color = Long.parseLong(colorString.substring(1), 16);
-					if (colorString.length() == 7) {
+					if (colorString.length() <= 7) {
 						color |= 0x00000000ff000000;
 					} else if (colorString.length() != 9) {
 						return defColor;

@@ -147,7 +147,8 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 								if (marker != null && marker.history) {
 									color = grayColor;
 								} else {
-									color = o.getColor() == 0 || o.getColor() == Color.BLACK ? defaultColor : o.getColor();
+									color = favorites.getColorWithCategory(o,defaultColor);
+//									color = o.getColor() == 0  ? defaultColor : o.getColor();
 								}
 								paintIcon.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
 								Bitmap pointSmallTop = getBitmap(o, "top");
@@ -194,10 +195,10 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 		FavoriteImageDrawable fid;
 		boolean history = false;
 		if (marker != null) {
-			fid = FavoriteImageDrawable.getOrCreateSyncedIcon(view.getContext(), o.getColor(), o);
+			fid = FavoriteImageDrawable.getOrCreateSyncedIcon(view.getContext(), favorites.getColorWithCategory(o,defaultColor), o);
 			history = marker.history;
 		} else {
-			fid = FavoriteImageDrawable.getOrCreate(view.getContext(), o.getColor(), true, o);
+			fid = FavoriteImageDrawable.getOrCreate(view.getContext(), favorites.getColorWithCategory(o,defaultColor), true, o);
 		}
 		fid.drawBitmapInCenter(canvas, x, y, history);
 	}
