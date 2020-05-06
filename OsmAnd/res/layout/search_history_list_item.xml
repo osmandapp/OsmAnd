@@ -21,7 +21,9 @@
         android:descendantFocusability="blocksDescendants"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/list_content_padding"
-	    android:paddingStart="@dimen/list_content_padding">
+	    android:paddingStart="@dimen/list_content_padding"
+        android:paddingRight="0dp"
+        android:paddingEnd="0dp">
 
         <ImageView
             android:id="@+id/icon"

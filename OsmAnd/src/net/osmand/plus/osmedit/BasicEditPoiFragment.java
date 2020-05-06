@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.R;
@@ -104,6 +106,11 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment
 		phoneEditText.setFilters(lengthLimit);
 		webSiteEditText.setFilters(lengthLimit);
 		descriptionEditText.setFilters(lengthLimit);
+		AndroidUtils.setTextHorizontalGravity(streetEditText, Gravity.START);
+		AndroidUtils.setTextHorizontalGravity(houseNumberEditText, Gravity.START);
+		AndroidUtils.setTextHorizontalGravity(phoneEditText, Gravity.START);
+		AndroidUtils.setTextHorizontalGravity(webSiteEditText, Gravity.START);
+		AndroidUtils.setTextHorizontalGravity(descriptionEditText, Gravity.START);
 		Button addOpeningHoursButton = (Button) view.findViewById(R.id.addOpeningHoursButton);
 		addOpeningHoursButton.setOnClickListener(new View.OnClickListener() {
 			@Override

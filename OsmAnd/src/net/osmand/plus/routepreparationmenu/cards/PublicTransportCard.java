@@ -1,6 +1,7 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.text.SpannableString;
@@ -389,7 +390,8 @@ public class PublicTransportCard extends BaseCard {
 		TextView transportStopRouteTextView = (TextView) bageView.findViewById(R.id.transport_stop_route_text);
 		ImageView transportStopRouteImageView = (ImageView) bageView.findViewById(R.id.transport_stop_route_icon);
 
-		transportStopRouteImageView.setImageDrawable(getActiveIcon(R.drawable.ic_action_pedestrian_dark));
+		Drawable icPedestrian = getActiveIcon(R.drawable.ic_action_pedestrian_dark);
+		transportStopRouteImageView.setImageDrawable(AndroidUtils.getDrawableForDirection(app, icPedestrian));
 		transportStopRouteTextView.setText(OsmAndFormatter.getFormattedDuration((int) walkTime, app));
 		GradientDrawable gradientDrawableBg = (GradientDrawable) bageView.getBackground();
 		gradientDrawableBg.setColor(activeColor);
@@ -413,7 +415,8 @@ public class PublicTransportCard extends BaseCard {
 	private View createArrow() {
 		LinearLayout container = new LinearLayout(app);
 		ImageView arrow = new ImageView(app);
-		arrow.setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_forward_16));
+		Drawable icArrow = getContentIcon(R.drawable.ic_action_arrow_forward_16);
+		arrow.setImageDrawable(AndroidUtils.getDrawableForDirection(app, icArrow));
 		container.addView(arrow, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, AndroidUtils.dpToPx(app, 28)));
 		return container;
 	}

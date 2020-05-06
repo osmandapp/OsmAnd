@@ -16,6 +16,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -247,6 +248,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		});
 
 		EditText poiNameEditText = (EditText) view.findViewById(R.id.poiNameEditText);
+		AndroidUtils.setTextHorizontalGravity(poiNameEditText, Gravity.START);
 		poiNameEditText.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -273,6 +275,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		AndroidUtils.showSoftKeyboard(poiNameEditText);
 		poiTypeTextInputLayout = (TextInputLayout) view.findViewById(R.id.poiTypeTextInputLayout);
 		poiTypeEditText = (AutoCompleteTextView) view.findViewById(R.id.poiTypeEditText);
+		AndroidUtils.setTextHorizontalGravity(poiTypeEditText, Gravity.START);
 		poiTypeEditText.setText(editPoiData.getPoiTypeString());
 		poiTypeEditText.addTextChangedListener(new TextWatcher() {
 			@Override
@@ -301,12 +304,26 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		poiTypeEditText.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(final View v, MotionEvent event) {
+				Context ctx = getContext();
+				if (ctx == null) {
+					return false;
+				}
+				boolean isLayoutRtl = AndroidUtils.isLayoutRtl(getContext());
 				final EditText editText = (EditText) v;
-				final int DRAWABLE_RIGHT = 2;
 				if (event.getAction() == MotionEvent.ACTION_UP) {
-					if (event.getX() >= (editText.getRight()
-							- editText.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()
-							- editText.getPaddingRight())) {
+					final int DRAWABLE_END = 2;
+					int expandBtnWidth = AndroidUtils.getCompoundDrawables(editText)[DRAWABLE_END].getBounds().width();
+
+					boolean expandButtonPressed = false;
+					if (isLayoutRtl) {
+						expandButtonPressed = event.getX() <= (editText.getLeft() + expandBtnWidth
+								+ editText.getPaddingLeft());
+					} else {
+						expandButtonPressed = event.getX() >= (editText.getRight() - expandBtnWidth
+								- editText.getPaddingRight());
+					}
+
+					if (expandButtonPressed) {
 						PoiCategory category = editPoiData.getPoiCategory();
 						if (category != null) {
 							PoiSubTypeDialogFragment dialogFragment =
@@ -319,7 +336,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 							});
 							dialogFragment.show(getChildFragmentManager(), "PoiSubTypeDialogFragment");
 						}
-
 						return true;
 					}
 				}

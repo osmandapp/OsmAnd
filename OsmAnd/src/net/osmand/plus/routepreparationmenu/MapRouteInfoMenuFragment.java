@@ -128,10 +128,10 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 				int widthNoShadow = getLandscapeNoShadowWidth();
 				modesLayoutToolbar.setLayoutParams(new FrameLayout.LayoutParams(widthNoShadow, ViewGroup.LayoutParams.WRAP_CONTENT));
 				FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(widthNoShadow, ViewGroup.LayoutParams.WRAP_CONTENT);
-				params.gravity = Gravity.BOTTOM;
+				params.gravity = Gravity.BOTTOM|Gravity.START;
 				view.findViewById(R.id.control_buttons).setLayoutParams(params);
 				View appModesView = view.findViewById(R.id.app_modes);
-				appModesView.setPadding(0, 0, appModesView.getPaddingRight(), 0);
+				AndroidUtils.setPadding(appModesView, 0, 0, appModesView.getPaddingRight(), 0);
 			}
 		}
 		return view;

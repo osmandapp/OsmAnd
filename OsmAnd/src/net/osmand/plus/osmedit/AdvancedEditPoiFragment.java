@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.ContextThemeWrapper;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -202,6 +204,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 					.inflate(R.layout.poi_tag_list_item, null, false);
 			final AutoCompleteTextView tagEditText =
 					(AutoCompleteTextView) convertView.findViewById(R.id.tagEditText);
+			AndroidUtils.setTextHorizontalGravity(tagEditText, Gravity.START);
 			ImageButton deleteItemImageButton =
 					(ImageButton) convertView.findViewById(R.id.deleteItemImageButton);
 			deleteItemImageButton.setImageDrawable(deleteDrawable);
@@ -215,6 +218,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 			});
 			final AutoCompleteTextView valueEditText =
 					(AutoCompleteTextView) convertView.findViewById(R.id.valueEditText);
+			AndroidUtils.setTextHorizontalGravity(valueEditText, Gravity.START);
 			valueEditText.setFilters(new InputFilter[] {
 				new InputFilter.LengthFilter(AMENITY_TEXT_LENGTH)
 			});

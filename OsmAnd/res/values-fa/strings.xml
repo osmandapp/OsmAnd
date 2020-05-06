@@ -3713,4 +3713,7 @@
     <string name="favorites_item">برگزیده‌ها</string>
     <string name="subscription_osmandlive_item">اشتراک - OsmAnd Live</string>
     <string name="osmand_purchases_item">خریدهای OsmAnd</string>
+    <string name="lang_scn">سیسیلی</string>
+    <string name="lang_kk">قزاقی</string>
+    <string name="lang_pnb">پنجابی</string>
 </resources>

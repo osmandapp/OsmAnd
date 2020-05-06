@@ -3534,4 +3534,14 @@
     <string name="reset_plugin_to_default">Tilbakestill programtilleggsinnstillinger til forvalg</string>
     <string name="download_unsupported_action">Ustøttet handling %1$s</string>
     <string name="extra_maps_menu_group">Ekstra kart</string>
+    <string name="shared_string_divider">Inndeler</string>
+    <string name="some_articles_may_not_available_in_lang">Det kan hende noen Wikipedia-artikler ikke finnes på norsk.</string>
+    <string name="custom_color">Egendefinert farge</string>
+    <string name="search_poi_types">Søk etter interessepunkttyper</string>
+    <string name="quick_action_item">Hurtighandling</string>
+    <string name="osmand_purchases_item">OsmAnd-kjøp</string>
+    <string name="favorites_item">Favoritter</string>
+    <string name="map_markers_item">Kartmarkører</string>
+    <string name="measure_distance_item">Mål avstand</string>
+    <string name="travel_item">Reising (Wikivoyage og Wikipedia)</string>
 </resources>

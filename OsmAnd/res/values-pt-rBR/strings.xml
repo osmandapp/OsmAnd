@@ -2976,7 +2976,7 @@ Pôr do Sol: %2$s</string>
     <string name="public_transport_warning_descr_blog">Leia mais sobre o roteamento OsmAnd em nosso blog.</string>
     <string name="public_transport_warning_title">A navegação de transporte público está atualmente em teste beta, espere erros e imprecisões.</string>
     <string name="add_intermediate">Adicionar ponto intermediário</string>
-    <string name="shared_string_walk">Ande</string>
+    <string name="shared_string_walk">A pé</string>
     <string name="save_poi_value_exceed_length">Reduza o comprimento da tag \"%s\" para menos de 255 caracteres.</string>
     <string name="save_poi_value_exceed_length_title">Comprimento do valor \"%s\"</string>
     <string name="avoid_pt_types_descr">Selecione os tipos de transporte público a evitar para navegação:</string>

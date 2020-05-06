@@ -3532,9 +3532,9 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="app_mode_ski_touring">Túrasízés</string>
     <string name="app_mode_ski_snowmobile">Motoros hószán</string>
     <string name="custom_osmand_plugin">Egyéni OsmAnd bővítmény</string>
-    <string name="settings_item_read_error">%1$s olvasása sikertelen.</string>
-    <string name="settings_item_write_error">%1$s írása sikertelen.</string>
-    <string name="settings_item_import_error">%1$s importálása sikertelen.</string>
+    <string name="settings_item_read_error">Sikertelen olvasás innen: \'%1$s\'.</string>
+    <string name="settings_item_write_error">Sikertelen írás ide: \'%1$s\'.</string>
+    <string name="settings_item_import_error">Sikertelen importálás innen: \'%1$s\'.</string>
     <string name="ui_customization">Felhasználói felület testreszabása</string>
     <string name="shared_string_drawer">Menü</string>
     <string name="reorder_or_hide_from">%1$s: elemek átrendezése vagy elrejtése.</string>
@@ -3548,7 +3548,7 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="sort_by_category">Rendezés kategória szerint</string>
     <string name="index_name_antarctica">Antarktika</string>
     <string name="shared_string_hidden">Rejtett</string>
-    <string name="reset_items_descr">A beállítások az eredeti állapotba fognak visszaállni elrejtés után.</string>
+    <string name="reset_items_descr">A beállítások elrejtése visszaállítja őket az eredeti állapotukba.</string>
     <string name="main_actions">Fő műveletek</string>
     <string name="move_inside_category">Csak ezen a kategórián belül lehetséges az elemek áthelyezése.</string>
     <string name="developer_plugin">Fejlesztő bővítmény</string>
@@ -3562,7 +3562,7 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="context_menu_actions">Opciók menü elemei</string>
     <string name="ui_customization_description">Személyre szabhatja az elemek számát a Menüben, a Térkép beállításában és az Opciókban. 
 \n 
-\nA használaton kívüli bővítmények letiltásával elrejtheti őket a %1$s menüből.</string>
+\nA használaton kívüli bővítmények kikapcsolásával elrejtheti őket a %1$s menüből.</string>
     <string name="ui_customization_short_descr">Menü elemek, Opciók</string>
     <string name="select_wikipedia_article_langs">Jelölje ki a térképen megjelenő Wikipédia szócikkek nyelvét. A szócikk olvasása közben válthat valamennyi elérhető nyelv között.</string>
     <string name="some_articles_may_not_available_in_lang">Előfordulhat, hogy néhány Wikipédia szócikk nem érhető el az ön nyelvén.</string>
@@ -3596,4 +3596,16 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="lang_lmo">lombard</string>
     <string name="custom_color">Egyéni szín</string>
     <string name="extra_maps_menu_group">Egyéb térképek</string>
+    <string name="tracker_item">OsmAnd helymegosztás</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="quick_action_item">Gyorsművelet</string>
+    <string name="radius_ruler_item">Sugaras vonalzó</string>
+    <string name="measure_distance_item">Távolságmérés</string>
+    <string name="travel_item">Utazás (Wikivoyage és Wikipédia)</string>
+    <string name="map_markers_item">Térképjelölők</string>
+    <string name="favorites_item">Kedvencek</string>
+    <string name="subscription_osmandlive_item">Előfizetés - OsmAnd Live</string>
+    <string name="osmand_purchases_item">OsmAnd vásárlások</string>
+    <string name="legend_item_description">Útmutató a térkép szimbolikájához</string>
+    <string name="navigation_profiles_item">Navigációs profilok</string>
 </resources>

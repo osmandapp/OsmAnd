@@ -3424,4 +3424,23 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="search_poi_types_descr">Zkombinujte body zájmu různých kategorií. Klepnutím na přepínač vyberete všechny, klepnutím na levou stranu vyberete kategorie.</string>
     <string name="extra_maps_menu_group">Další mapy</string>
     <string name="download_unsupported_action">Nepodporovaná akce %1$s</string>
+    <string name="context_menu_actions">Akce kontextového menu</string>
+    <string name="reorder_or_hide_from">Seřaďte nebo skryjte položky z %1$s.</string>
+    <string name="shared_string_divider">Oddělovač</string>
+    <string name="divider_descr">Na této pozici bude umístěn oddělovač.</string>
+    <string name="shared_string_hidden">Skryté</string>
+    <string name="hidden_items_descr">Tyto položky jsou skryté z menu, ale příslušná nastavení a moduly zůstanou funkční.</string>
+    <string name="reset_items_descr">Skrytá nastavení se resetují do svého původního stavu.</string>
+    <string name="tracker_item">Stopování OsmAnd</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="quick_action_item">Rychlá akce</string>
+    <string name="radius_ruler_item">Kruhové pravítko</string>
+    <string name="measure_distance_item">Měřit vzdálenost</string>
+    <string name="travel_item">Cestování (Wikivoyage a Wikipedie)</string>
+    <string name="map_markers_item">Mapové značky</string>
+    <string name="favorites_item">Oblíbené</string>
+    <string name="subscription_osmandlive_item">Předplatné - OsmAnd Live</string>
+    <string name="osmand_purchases_item">Nákupy v OsmAnd</string>
+    <string name="legend_item_description">Průvodce symboly na mapě</string>
+    <string name="navigation_profiles_item">Navigační profily</string>
 </resources>
