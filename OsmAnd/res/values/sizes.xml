@@ -32,7 +32,9 @@
 	<dimen name="undo_bottom_offset">15dp</dimen>
 	<dimen name="touch_slop">32dp</dimen>
 
-    <dimen name="list_item_height">50dp</dimen>
+	<dimen name="list_item_height">50dp</dimen>
+	<dimen name="list_item_description_width">150dp</dimen>
+
 	<dimen name="list_header_height">40dp</dimen>
 	<dimen name="dashboard_map_top_padding">240dp</dimen>
 	<dimen name="dashboard_land_width">360dp</dimen>

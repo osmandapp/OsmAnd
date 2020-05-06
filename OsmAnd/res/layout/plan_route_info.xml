@@ -503,14 +503,14 @@
 
 					<ImageView
 						android:id="@+id/map_options_route_button_icon"
-						android:layout_width="wrap_content"
-						android:layout_height="match_parent"
-						android:paddingStart="@dimen/content_padding_small"
-						android:paddingLeft="@dimen/content_padding_small"
-						android:paddingEnd="@dimen/route_info_buttons_padding_top_bottom"
-						android:paddingRight="@dimen/route_info_buttons_padding_top_bottom"
-						tools:src="@drawable/ic_action_edit_dark"
-						tools:tint="@color/recording_color" />
+						android:layout_width="@dimen/standard_icon_size"
+						android:layout_height="@dimen/standard_icon_size"
+						android:layout_gravity="center"
+						android:layout_marginStart="@dimen/content_padding_small"
+						android:layout_marginLeft="@dimen/content_padding_small"
+						android:layout_marginEnd="@dimen/route_info_buttons_padding_top_bottom"
+						android:layout_marginRight="@dimen/route_info_buttons_padding_top_bottom"
+						tools:src="@drawable/ic_action_settings" />
 
 				</LinearLayout>
 

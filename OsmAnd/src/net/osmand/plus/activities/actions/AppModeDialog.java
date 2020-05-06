@@ -170,13 +170,13 @@ public class AppModeDialog {
 			final ApplicationMode mode = visible.get(i);
 			final boolean checked = selected.contains(mode);
 			ImageView iv = (ImageView) tb.findViewById(R.id.app_mode_icon);
-			View selection = tb.findViewById(R.id.selection);
+			ImageView selection = tb.findViewById(R.id.selection);
 			Drawable drawable = ctx.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColorInfo().getColor(nightMode));
 			if (checked) {
 				iv.setImageDrawable(drawable);
 				iv.setContentDescription(String.format("%s %s", mode.toHumanString(), ctx.getString(R.string.item_checked)));
 				if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-					AndroidUtils.setBackground(ctx, iv, nightMode, R.drawable.btn_checked_border_light, R.drawable.btn_checked_border_light);
+					selection.setImageDrawable(ctx.getDrawable(R.drawable.btn_checked_border_light));
 					AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.ripple_light, R.drawable.ripple_light);
 				} else {
 					AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_light);
@@ -189,7 +189,7 @@ public class AppModeDialog {
 					}
 					iv.setImageDrawable(drawable);
 					if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-						AndroidUtils.setBackground(ctx, iv, nightMode, R.drawable.btn_border_pressed_light, R.drawable.btn_border_pressed_light);
+						selection.setImageDrawable(ctx.getDrawable(R.drawable.btn_border_pressed_light));
 						AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.ripple_light, R.drawable.ripple_light);
 					} else {
 						AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.btn_border_pressed_trans_light, R.drawable.btn_border_pressed_trans_light);

@@ -30,10 +30,10 @@
         android:minHeight="@dimen/favorites_list_item_height"
         android:layout_gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingStart="@dimen/list_header_text_left_margin"
-        android:paddingLeft="@dimen/list_header_text_left_margin"
-        android:paddingEnd="@dimen/list_header_text_left_margin"
-        android:paddingRight="@dimen/list_header_text_left_margin">
+        android:paddingStart="@dimen/content_padding_small"
+        android:paddingLeft="@dimen/content_padding_small"
+        android:paddingEnd="@dimen/content_padding_small"
+        android:paddingRight="@dimen/content_padding_small">
 
         <FrameLayout
             android:layout_width="@dimen/favorites_icon_size"
@@ -45,8 +45,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="@dimen/list_header_padding"
-                android:layout_marginLeft="@dimen/list_header_padding"
+                android:layout_marginStart="@dimen/content_padding_half"
+                android:layout_marginLeft="@dimen/content_padding_half"
                 android:focusable="false"
                 android:visibility="gone"
                 tools:visibility="visible" />
@@ -57,7 +57,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:contentDescription="@string/favorite"
-                android:scaleType="center"
                 tools:src="@drawable/bg_point_circle"/>
         </FrameLayout>
 

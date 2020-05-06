@@ -8,9 +8,12 @@ import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.PointF;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.MotionEvent;
@@ -259,7 +262,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void initTopControls() {
 		View configureMap = mapActivity.findViewById(R.id.map_layers_button);
-		layersHud = createHudButton(configureMap, R.drawable.map_world_globe_dark, LAYERS_HUD_ID)
+		layersHud = createHudButton(configureMap, R.drawable.ic_world_globe_dark, LAYERS_HUD_ID)
 				.setIconColorId(R.color.on_map_icon_color, 0)
 				.setBg(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
 		controls.add(layersHud);
@@ -818,7 +821,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 		ApplicationMode appMode = settings.getApplicationMode();
 		layersHud.setIconColorId(appMode.getIconColorInfo().getColor(isNight));
-		if (layersHud.setIconResId(appMode.getMapIconRes())) {
+		if (layersHud.setIconResId(appMode.getIconRes())) {
 			layersHud.update(app, isNight);
 		}
 		layersHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && !isInMeasurementToolMode() && !isInPlanRouteMode()
@@ -1159,19 +1162,25 @@ public class MapControlsLayer extends OsmandMapLayer {
 			} else if (resId != 0) {
 				d = ctx.getUIUtilities().getIcon(resId, nightMode ? resClrDark : resClrLight);
 			}
-
 			if (iv instanceof ImageView) {
 				if (compass) {
 					((ImageView) iv).setImageDrawable(new CompassDrawable(d));
 				} else {
-					((ImageView) iv).setImageDrawable(d);
+					int iconSize = (int) ctx.getResources().getDimension(R.dimen.standard_icon_size);
+					Bitmap bitmap = Bitmap.createBitmap(iconSize, iconSize, Bitmap.Config.ARGB_8888);
+					Canvas canvas = new Canvas(bitmap);
+					canvas.drawColor(0, PorterDuff.Mode.CLEAR);
+					if (d != null) {
+						d.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+						d.draw(canvas);
+					}
+					((ImageView) iv).setImageDrawable(new BitmapDrawable(ctx.getResources(), bitmap));
 				}
 			} else if (iv instanceof TextView) {
 				((TextView) iv).setCompoundDrawablesWithIntrinsicBounds(
 						d, null, null, null);
 			}
 		}
-
 	}
 
 	private String getZoomLevel(@NonNull RotatedTileBox tb) {

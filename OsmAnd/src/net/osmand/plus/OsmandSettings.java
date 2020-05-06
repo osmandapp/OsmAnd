@@ -3747,6 +3747,9 @@ public class OsmandSettings {
 
 	public final ListStringPreference TRANSPORT_DEFAULT_SETTINGS =
 			(ListStringPreference) new ListStringPreference("transport_default_settings", "transportStops", ",").makeProfile();
+
+	public final ListStringPreference DISPLAYED_TRANSPORT_SETTINGS = (ListStringPreference)
+			new ListStringPreference("displayed_transport_settings", null, ",").makeProfile();
 	
 	public final OsmandPreference<Boolean> SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME =
 			new BooleanPreference("show_arrival_time", true).makeProfile();
