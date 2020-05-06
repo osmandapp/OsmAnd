@@ -263,6 +263,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 							prefToSave,
 							getTargetFragment(),
 							false,
+							R.string.back_to_editing,
 							appMode,
 							new ChangeGeneralProfilesPrefBottomSheet.OnChangeSettingListener() {
 								@Override

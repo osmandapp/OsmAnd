@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="back_to_editing">Back to editing</string>
     <string name="reset_deafult_order">Restore default items order</string>
     <string name="shared_string_add_edit">Add / Edit Favorite</string>
     <string name="parking_positions">Parking positions</string>
