@@ -4,7 +4,6 @@
 	android:id="@+id/toolbar"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:minHeight="@dimen/dashboard_map_toolbar"
 	osmand:contentInsetLeft="0dp"
 	osmand:contentInsetStart="0dp"
 	osmand:contentInsetRight="0dp"
@@ -14,6 +13,7 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
+		android:minHeight="@dimen/toolbar_height"
 		android:background="?attr/card_and_list_background_basic"
 		android:gravity="center_vertical"
 		android:orientation="horizontal">
@@ -21,9 +21,14 @@
 		<ImageButton
 			android:id="@+id/close_button"
 			style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
-			android:layout_width="@dimen/toolbar_height"
-			android:layout_height="@dimen/toolbar_height"
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginRight="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding"
 			android:contentDescription="@string/access_shared_string_navigate_up"
+			android:scaleType="fitCenter"
 			android:src="@drawable/ic_arrow_back"
 			android:tint="?attr/default_icon_color" />
 

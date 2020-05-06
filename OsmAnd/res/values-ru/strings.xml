@@ -3632,7 +3632,6 @@
     <string name="reset_items_descr">Скрытие настроек сбрасывает их в исходное состояние.</string>
     <string name="main_actions_descr">«Основные действия» содержат только 4 кнопки.</string>
     <string name="main_actions">Основные действия</string>
-    <string name="additional_actions_descr">Доступ к этим действиям происходит нажатием кнопки «Дополнительные действия».</string>
     <string name="move_inside_category">Перемещать элементы можно только внутри данной категории.</string>
     <string name="developer_plugin">Плагин для разработчиков</string>
     <string name="select_wikipedia_article_langs">Выберите языки, на которых статьи Википедии будут отображаться на карте. Вы сможете переключаться между всеми доступными языками при чтении статьи.</string>

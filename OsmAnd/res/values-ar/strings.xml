@@ -2926,7 +2926,7 @@
     <string name="angular_measeurement_descr">تغيير قياس زاوية الازيموث.</string>
     <string name="save_poi_value_exceed_length_title">طول \"%s\" قيمة</string>
     <string name="public_transport_warning_descr_blog">تعرف على المزيد حول كيفية حساب أوسماند للطرق في مدونتنا.</string>
-    <string name="public_transport_warning_title">يخضع التنقل في وسائل النقل العام حالياً للاختبار التجريبي ، ويتوقع الأخطاء .</string>
+    <string name="public_transport_warning_title">يخضع التنقل في وسائل النقل العام حاليًا للاختبار التجريبي ، ويتوقع أن يكون فيه أخطاء .</string>
     <string name="add_intermediate">إضافة نقطة وسيطة</string>
     <string name="transfers_size">%1$d تحويلات</string>
     <string name="rendering_attr_surface_sett_name">ضبط</string>
@@ -3598,7 +3598,6 @@
     <string name="reset_items_descr">ستتم إعادة تعيين الإعدادات إلى الحالة الأصلية بعد الاختفاء.</string>
     <string name="main_actions_descr">الإجراءات الرئيسية تحتوي على 4 أزرار فقط.</string>
     <string name="main_actions">الإجراءات الرئيسية</string>
-    <string name="additional_actions_descr">يمكنك الوصول إلى هذه الإجراءات بالضغط على زر \"الإجراءات\".</string>
     <string name="move_inside_category">يمكنك نقل العناصر داخل هذه الفئة فقط.</string>
     <string name="developer_plugin">الإضافات المطورة</string>
     <string name="shared_string_items">العناصر</string>

@@ -37,6 +37,7 @@ import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.OsmandSettings.ContextMenuItemsPreference;
+import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -49,8 +50,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
-
 public class ContextMenuAdapter {
 	private static final Log LOG = PlatformUtil.getLog(ContextMenuAdapter.class);
 
@@ -58,6 +57,7 @@ public class ContextMenuAdapter {
 	public static final int PROFILES_NORMAL_PROFILE_TAG = 0;
 	public static final int PROFILES_CHOSEN_PROFILE_TAG = 1;
 	public static final int PROFILES_CONTROL_BUTTON_TAG = 2;
+	private static final int ITEMS_ORDER_STEP = 10;
 
 	@LayoutRes
 	private int DEFAULT_LAYOUT_ID = R.layout.list_menu_item_native;
@@ -84,17 +84,13 @@ public class ContextMenuAdapter {
 	}
 
 	public void addItem(ContextMenuItem item) {
-		try {
-			String id = item.getId();
-			if (id != null) {
-				item.setHidden(isItemHidden(id));
-				item.setOrder(getItemOrder(id, item.getOrder()));
-			}
-			items.add(item.getPos(), item);
-			sortItemsByOrder();
-		} catch (IndexOutOfBoundsException ex) {
-			items.add(item);
+		String id = item.getId();
+		if (id != null) {
+			item.setHidden(isItemHidden(id));
+			item.setOrder(getItemOrder(id, item.getOrder()));
 		}
+		items.add(item);
+		sortItemsByOrder();
 	}
 
 	public ContextMenuItem getItem(int position) {
@@ -131,7 +127,7 @@ public class ContextMenuAdapter {
 		this.changeAppModeListener = changeAppModeListener;
 	}
 
-	public void sortItemsByOrder() {
+	private void sortItemsByOrder() {
 		Collections.sort(items, new Comparator<ContextMenuItem>() {
 			@Override
 			public int compare(ContextMenuItem item1, ContextMenuItem item2) {
@@ -161,18 +157,25 @@ public class ContextMenuAdapter {
 
     private int getItemOrder(@NonNull String id, int defaultOrder) {
         ContextMenuItemsPreference contextMenuItemsPreference = app.getSettings().getContextMenuItemsPreference(id);
-        if (contextMenuItemsPreference == null) {
-            return defaultOrder;
-        }
-        List<String> orderIds = contextMenuItemsPreference.get().getOrderIds();
-        if (!Algorithms.isEmpty(orderIds)) {
-            int order = orderIds.indexOf(id);
-            if (order != -1) {
-                return order;
-            }
-        }
-        return defaultOrder;
-    }
+		if (contextMenuItemsPreference != null) {
+			List<String> orderIds = contextMenuItemsPreference.get().getOrderIds();
+			if (!Algorithms.isEmpty(orderIds)) {
+				int index = orderIds.indexOf(id);
+				if (index != -1) {
+					return index;
+				}
+			}
+		}
+		return getDefaultOrder(defaultOrder);
+	}
+
+	private int getDefaultOrder(int defaultOrder) {
+		if (defaultOrder == 0 && !items.isEmpty()) {
+			return items.get(items.size() - 1).getOrder() + ITEMS_ORDER_STEP;
+		} else {
+			return defaultOrder;
+		}
+	}
 
 	public ArrayAdapter<ContextMenuItem> createListAdapter(final Activity activity, final boolean lightTheme) {
 		final int layoutId = DEFAULT_LAYOUT_ID;
@@ -386,9 +389,8 @@ public class ContextMenuAdapter {
 				Drawable drawable = item.getIcon() != ContextMenuItem.INVALID_ID
 						? mIconsCache.getIcon(item.getIcon(), color) : null;
 				if (drawable != null && tv != null) {
-					float density = getContext().getResources().getDisplayMetrics().density;
-					int paddingInPixels = (int) (24 * density);
-					int drawableSizeInPixels = (int) (24 * density); // 32
+					int paddingInPixels = (int) getContext().getResources().getDimension(R.dimen.bottom_sheet_icon_margin);
+					int drawableSizeInPixels = (int) getContext().getResources().getDimension(R.dimen.standard_icon_size);
 					drawable.setBounds(0, 0, drawableSizeInPixels, drawableSizeInPixels);
 					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
 						tv.setCompoundDrawablesRelative(drawable, null, null, null);
@@ -580,7 +582,7 @@ public class ContextMenuAdapter {
 		List<ContextMenuItem> items = new ArrayList<>();
 		for (ContextMenuItem item : this.items) {
 			String id = item.getId();
-			if (id != null && id.startsWith(idScheme) && !APP_PROFILES_ID.equals(id)) {
+			if (id != null && (id.startsWith(idScheme))) {
 				items.add(item);
 			}
 		}
@@ -599,5 +601,45 @@ public class ContextMenuAdapter {
 			}
 		}
 		return idScheme;
+	}
+
+	public List<ContextMenuItem> getVisibleItems() {
+		List<ContextMenuItem> visible = new ArrayList<>();
+		for (ContextMenuItem item : items) {
+			if (!item.isHidden()) {
+				visible.add(item);
+			}
+		}
+		return visible;
+	}
+
+	public static OnItemDeleteAction makeDeleteAction(final OsmandPreference... prefs) {
+		return new OnItemDeleteAction() {
+			@Override
+			public void itemWasDeleted(ApplicationMode appMode, boolean profileOnly) {
+				for (OsmandPreference pref : prefs) {
+					resetSetting(appMode, pref, profileOnly);
+				}
+			}
+		};
+	}
+
+	public static OnItemDeleteAction makeDeleteAction(final List<? extends OsmandPreference> prefs) {
+		return makeDeleteAction(prefs.toArray(new OsmandPreference[prefs.size()]));
+	}
+
+	private static void resetSetting(ApplicationMode appMode, OsmandSettings.OsmandPreference preference, boolean profileOnly) {
+		if (profileOnly) {
+			preference.resetModeToDefault(appMode);
+		} else {
+			for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+				preference.resetModeToDefault(mode);
+			}
+		}
+	}
+
+	// when action is deleted or reset
+	public interface OnItemDeleteAction {
+		void itemWasDeleted(ApplicationMode appMode, boolean profileOnly);
 	}
 }

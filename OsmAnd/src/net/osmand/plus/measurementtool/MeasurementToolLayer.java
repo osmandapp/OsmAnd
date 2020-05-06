@@ -199,7 +199,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			lineAttrs.updatePaints(view.getApplication(), settings, tb);
 
 			if (editingCtx.getSelectedPointPosition() == -1) {
-				drawCenterIcon(canvas, tb, tb.getCenterPixelPoint(), settings.isNightMode());
+				drawCenterIcon(canvas, tb, settings.isNightMode());
 				if (measureDistanceToCenterListener != null) {
 					float distance = 0;
 					float bearing = 0;
@@ -218,6 +218,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			TrkSegment before = editingCtx.getBeforeTrkSegmentLine();
 			TrkSegment after = editingCtx.getAfterTrkSegmentLine();
 
+			canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
+
 			if (before.points.size() > 0 || after.points.size() > 0) {
 				path.reset();
 				tx.clear();
@@ -225,8 +227,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 				if (before.points.size() > 0) {
 					WptPt pt = before.points.get(before.points.size() - 1);
-					float locX = tb.getPixXFromLonNoRot(pt.lon);
-					float locY = tb.getPixYFromLatNoRot(pt.lat);
+					float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
+					float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
 					tx.add(locX);
 					ty.add(locY);
 					tx.add((float)tb.getCenterPixelX());
@@ -238,8 +240,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 						ty.add((float)tb.getCenterPixelY());
 					}
 					WptPt pt = after.points.get(0);
-					float locX = tb.getPixXFromLonNoRot(pt.lon);
-					float locY = tb.getPixYFromLatNoRot(pt.lat);
+					float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
+					float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
 					tx.add(locX);
 					ty.add(locY);
 				}
@@ -255,8 +257,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			int drawn = 0;
 			for (int i = 0; i < points.size(); i++) {
 				WptPt pt = points.get(i);
-				int locX = tb.getPixXFromLonNoRot(pt.lon);
-				int locY = tb.getPixYFromLatNoRot(pt.lat);
+				float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
+				float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
 				if (locX >= 0 && locX <= tb.getPixWidth() && locY >= 0 && locY <= tb.getPixHeight()) {
 					drawn++;
 					if (drawn > POINTS_TO_DRAW) {
@@ -267,14 +269,14 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			}
 			if (overlapped) {
 				WptPt pt = points.get(0);
-				int locX = tb.getPixXFromLonNoRot(pt.lon);
-				int locY = tb.getPixYFromLatNoRot(pt.lat);
+				float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
+				float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
 				if (locX >= 0 && locX <= tb.getPixWidth() && locY >= 0 && locY <= tb.getPixHeight()) {
 					canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
 				}
 				pt = points.get(points.size() - 1);
-				locX = tb.getPixXFromLonNoRot(pt.lon);
-				locY = tb.getPixYFromLatNoRot(pt.lat);
+				locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
+				locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
 				if (locX >= 0 && locX <= tb.getPixWidth() && locY >= 0 && locY <= tb.getPixHeight()) {
 					canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
 
@@ -282,8 +284,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			} else {
 				for (int i = 0; i < points.size(); i++) {
 					WptPt pt = points.get(i);
-					int locX = tb.getPixXFromLonNoRot(pt.lon);
-					int locY = tb.getPixYFromLatNoRot(pt.lat);
+					float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
+					float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
 					if (locX >= 0 && locX <= tb.getPixWidth() && locY >= 0 && locY <= tb.getPixHeight()) {
 						canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
 					}
@@ -295,24 +297,26 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				int locY = tb.getCenterPixelY();
 				canvas.drawBitmap(applyingPointIcon, locX - marginApplyingPointIconX, locY - marginApplyingPointIconY, bitmapPaint);
 			}
+
+			canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 		}
 	}
 
-	private void drawCenterIcon(Canvas canvas, RotatedTileBox tb, QuadPoint center, boolean nightMode) {
-		canvas.rotate(-tb.getRotate(), center.x, center.y);
+	private void drawCenterIcon(Canvas canvas, RotatedTileBox tb, boolean nightMode) {
+		canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 		if (nightMode) {
-			canvas.drawBitmap(centerIconNight, center.x - centerIconNight.getWidth() / 2,
-					center.y - centerIconNight.getHeight() / 2, bitmapPaint);
+			canvas.drawBitmap(centerIconNight, tb.getCenterPixelX() - centerIconNight.getWidth() / 2f,
+					tb.getCenterPixelY() - centerIconNight.getHeight() / 2f, bitmapPaint);
 		} else {
-			canvas.drawBitmap(centerIconDay, center.x - centerIconDay.getWidth() / 2,
-					center.y - centerIconDay.getHeight() / 2, bitmapPaint);
+			canvas.drawBitmap(centerIconDay, tb.getCenterPixelX() - centerIconDay.getWidth() / 2f,
+					tb.getCenterPixelY() - centerIconDay.getHeight() / 2f, bitmapPaint);
 		}
-		canvas.rotate(tb.getRotate(), center.x, center.y);
+		canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 	}
 
 	public WptPt addCenterPoint() {
 		RotatedTileBox tb = view.getCurrentRotatedTileBox();
-		LatLon l = tb.getLatLonFromPixel(tb.getCenterPixelX(), tb.getCenterPixelY());
+		LatLon l = tb.getCenterLatLon();
 		WptPt pt = new WptPt();
 		pt.lat = l.getLatitude();
 		pt.lon = l.getLongitude();

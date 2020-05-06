@@ -45,6 +45,7 @@ import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN;
+import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 
 public class SRTMPlugin extends OsmandPlugin {
 
@@ -347,8 +348,8 @@ public class SRTMPlugin extends OsmandPlugin {
 					.setIcon(R.drawable.ic_plugin_srtm)
 					.setDescription(app.getString(R.string.display_zoom_level, descr))
 					.setColor(contourLinesSelected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+					.setItemDeleteAction(makeDeleteAction(settings.CONTOUR_LINES_ZOOM))
 					.setSecondaryIcon(R.drawable.ic_action_additional_option)
-					.setPosition(12)
 					.setListener(listener).createItem());
 		}
 		boolean terrainEnabled = settings.TERRAIN.get();
@@ -363,8 +364,8 @@ public class SRTMPlugin extends OsmandPlugin {
 				.setColor(terrainEnabled ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_hillshade_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
+				.setItemDeleteAction(makeDeleteAction(settings.TERRAIN, settings.TERRAIN_MODE))
 				.setListener(listener)
-				.setPosition(13)
 				.createItem()
 		);
 	}

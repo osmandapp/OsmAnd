@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -80,7 +79,7 @@ public class ImportedSettingsItemsAdapter extends
 
 		switch (currentItemType) {
 			case PROFILE:
-				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.map_action_settings, activeColorRes));
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_settings, activeColorRes));
 				holder.title.setText(R.string.shared_string_settings);
 				break;
 			case QUICK_ACTIONS:

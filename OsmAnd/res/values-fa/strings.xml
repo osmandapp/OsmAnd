@@ -3664,7 +3664,6 @@
     <string name="context_menu_actions">کنش‌های منوی زمینه</string>
     <string name="main_actions_descr">کنش‌های اصلی فقط ۴ دکمه است.</string>
     <string name="main_actions">کنش‌های اصلی</string>
-    <string name="additional_actions_descr">با زدن روی دکمهٔ «کنش‌های بیشتر» می‌توانید به این کنش‌ها دسترسی پیدا کنید.</string>
     <string name="developer_plugin">افزونهٔ توسعه‌دهنده</string>
     <string name="divider_descr">چیزهایی که از این نقطه به پایین قرار می‌گیرند، با جداکننده جدا می‌شوند.</string>
     <string name="move_inside_category">اقلام را فقط درون این دسته می‌توانید جابه‌جا کنید.</string>
@@ -3714,4 +3713,7 @@
     <string name="favorites_item">برگزیده‌ها</string>
     <string name="subscription_osmandlive_item">اشتراک - OsmAnd Live</string>
     <string name="osmand_purchases_item">خریدهای OsmAnd</string>
+    <string name="lang_scn">سیسیلی</string>
+    <string name="lang_kk">قزاقی</string>
+    <string name="lang_pnb">پنجابی</string>
 </resources>

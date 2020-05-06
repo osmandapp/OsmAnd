@@ -60,6 +60,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_D
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_UPDATE_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
+import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
@@ -358,7 +359,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				.setIcon(R.drawable.ic_layer_top)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener)
-				.setPosition(14)
+				.setItemDeleteAction(makeDeleteAction(settings.MAP_OVERLAY, settings.MAP_OVERLAY_PREVIOUS, settings.MAP_OVERLAY_TRANSPARENCY))
 				.createItem());
 		String underlayMapDescr = settings.MAP_UNDERLAY.get();
 		if (underlayMapDescr!=null && underlayMapDescr.contains(".sqlitedb")) {
@@ -374,7 +375,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				.setIcon(R.drawable.ic_layer_bottom)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener)
-				.setPosition(15)
+				.setItemDeleteAction(makeDeleteAction(settings.MAP_UNDERLAY, settings.MAP_UNDERLAY_PREVIOUS))
 				.createItem());
 	}
 

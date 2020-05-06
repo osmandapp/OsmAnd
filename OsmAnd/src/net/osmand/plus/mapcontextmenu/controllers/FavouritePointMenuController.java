@@ -157,7 +157,7 @@ public class FavouritePointMenuController extends MenuController {
 
 	@Override
 	public int getFavActionIconId() {
-		return R.drawable.map_action_edit_dark;
+		return R.drawable.ic_action_edit_dark;
 	}
 
 	@Override

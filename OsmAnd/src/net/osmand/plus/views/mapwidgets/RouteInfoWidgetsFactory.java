@@ -29,6 +29,7 @@ import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -1268,8 +1269,9 @@ public class RouteInfoWidgetsFactory {
 			boolean cams = settings.SHOW_CAMERAS.get();
 			boolean peds = settings.SHOW_PEDESTRIAN.get();
 			boolean tunnels = settings.SHOW_TUNNELS.get();
+			boolean browseMap = settings.APPLICATION_MODE.get() == ApplicationMode.DEFAULT;
 			boolean visible = false;
-			if ((rh.isFollowingMode() || trackingUtilities.isMapLinkedToLocation())
+			if ((rh.isFollowingMode() || trackingUtilities.isMapLinkedToLocation() && !browseMap)
 					&& showRoutingAlarms && (trafficWarnings || cams)) {
 				AlarmInfo alarm;
 				if(rh.isFollowingMode() && !rh.isDeviatedFromRoute() && (rh.getCurrentGPXRoute() == null || rh.isCurrentGPXRouteV2())) {

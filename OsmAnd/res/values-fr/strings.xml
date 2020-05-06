@@ -3604,7 +3604,6 @@ représentant la zone : %1$s x %2$s</string>
 \nVous pouvez désactiver les greffons inutilisés, pour masquer leurs contrôles dans l’application %1$s.</string>
     <string name="hidden_items_descr">Ces éléments sont masqués dans le menu mais les options présentes ou les greffons continueront à fonctionner.</string>
     <string name="reset_items_descr">Masquer les paramètres les réinitialise à leurs valeurs par défaut.</string>
-    <string name="additional_actions_descr">Vous pouvez accéder à ces actions en appuyant sur le bouton « Actions supplémentaires ».</string>
     <string name="ui_customization_short_descr">Éléments du panneau déroulant, menu contextuel</string>
     <string name="shared_string_drawer">Panneau déroulant</string>
     <string name="reorder_or_hide_from">Réorganisez ou masquez les éléments à partir de %1$s.</string>

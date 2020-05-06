@@ -43,6 +43,7 @@ import java.util.List;
 
 import static android.content.Intent.ACTION_VIEW;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAPILLARY;
+import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 
 public class MapillaryPlugin extends OsmandPlugin {
 
@@ -185,8 +186,8 @@ public class MapillaryPlugin extends OsmandPlugin {
 				.setColor(settings.SHOW_MAPILLARY.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_mapillary)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
+				.setItemDeleteAction(makeDeleteAction(settings.SHOW_MAPILLARY))
 				.setListener(listener)
-				.setPosition(11)
 				.createItem());
 	}
 

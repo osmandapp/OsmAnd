@@ -2915,7 +2915,7 @@ Lon %2$s</string>
     <string name="by_transport_type">En %1$s</string>
     <string name="step_by_step">Giro a giro</string>
     <string name="routeInfo_road_types_name">Tipos de caminos</string>
-    <string name="exit_at">Bajarse en</string>
+    <string name="exit_at">Bajar en</string>
     <string name="sit_on_the_stop">Esperar en la parada</string>
     <string name="quick_action_show_hide_gpx_tracks">Mostrar/ocultar trazas GPX</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Un botón que muestra u oculta las trazas GPX elegidas en el mapa.</string>
@@ -2989,7 +2989,7 @@ Lon %2$s</string>
     <string name="public_transport_warning_descr_blog">Lea más sobre el cálculo de las rutas de OsmAnd en nuestro blog.</string>
     <string name="public_transport_warning_title">La navegación en transporte público se encuentra actualmente en fase de pruebas beta, se esperan errores e imprecisiones.</string>
     <string name="add_intermediate">Añadir punto intermedio</string>
-    <string name="shared_string_walk">A pie</string>
+    <string name="shared_string_walk">Caminar</string>
     <string name="save_poi_value_exceed_length">Acorte la longitud de la etiqueta «%s» a menos de 255 caracteres.</string>
     <string name="save_poi_value_exceed_length_title">Longitud del valor de «%s»</string>
     <string name="avoid_pt_types_descr">Marca los tipos de transporte público a evitar para la navegación:</string>
@@ -3631,7 +3631,6 @@ Lon %2$s</string>
     <string name="reset_items_descr">Ocultar los ajustes, los restablece a su estado original.</string>
     <string name="main_actions_descr">Las «Acciones principales» sólo contienen 4 botones.</string>
     <string name="main_actions">Acciones principales</string>
-    <string name="additional_actions_descr">Puedes acceder a estas acciones, pulsando el botón «Acciones adicionales».</string>
     <string name="move_inside_category">Sólo puedes mover objetos dentro de esta categoría.</string>
     <string name="developer_plugin">Complemento de desarrollador</string>
     <string name="shared_string_items">Elementos</string>

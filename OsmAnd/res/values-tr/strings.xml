@@ -2420,7 +2420,7 @@
     <string name="quick_action_day_night_mode">%s modu</string>
     <string name="avoid_pt_types">Kaçınılacak taşıma türleri…</string>
     <string name="shared_string_walk">Yürü</string>
-    <string name="public_transport_warning_title">Toplu taşıma rotaları beta aşamasındadır.</string>
+    <string name="public_transport_warning_title">Toplu taşıma navigasyonu şu anda beta testindedir, hatalar ve yanlışlıklar olabilir.</string>
     <string name="add_intermediate">Ara nokta ekle</string>
     <string name="add_start_and_end_points">Kalkış ve varış noktası ekle</string>
     <string name="route_add_start_point">Kalkış noktası ekle</string>
@@ -2695,7 +2695,7 @@
     <string name="app_mode_campervan">Kamp aracı (RV)</string>
     <string name="rendering_attr_showLez_description">Haritada Düşük Emisyon Bölgelerini göster. Yönlendirmeyi etkilemez.</string>
     <string name="rendering_attr_showLez_name">Düşük Emisyon Bölgelerini göster</string>
-    <string name="temporary_conditional_routing">Geçici sınırlamaları göz önünde bulundurun</string>
+    <string name="temporary_conditional_routing">Geçici sınırlamaları göz önünde bulundur</string>
     <string name="shared_string_default">Öntanımlı</string>
     <string name="app_mode_wagon">Vagon</string>
     <string name="app_mode_pickup_truck">Kamyonet</string>
@@ -3591,7 +3591,6 @@
     <string name="hidden_items_descr">Bu ögeler menüden gizlenir, ancak temsil edilen seçenekler veya eklentiler çalışmaya devam eder.</string>
     <string name="main_actions_descr">\'Ana eylemler\' sadece 4 düğme içerir.</string>
     <string name="main_actions">Ana eylemler</string>
-    <string name="additional_actions_descr">Bu eylemlere “Ek eylemler” düğmesine dokunarak erişebilirsiniz.</string>
     <string name="move_inside_category">Ögeleri yalnızca bu kategorinin içine taşıyabilirsiniz.</string>
     <string name="developer_plugin">Geliştirici Eklentisi</string>
     <string name="select_wikipedia_article_langs">Wikipedia makalelerinin haritada görüneceği dilleri seçin. Makaleyi okurken kullanılabilir bütün diller arasında geçiş yapabilirsiniz.</string>

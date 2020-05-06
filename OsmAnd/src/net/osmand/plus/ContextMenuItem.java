@@ -9,6 +9,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
+import net.osmand.plus.ContextMenuAdapter.OnItemDeleteAction;
 
 public class ContextMenuItem {
 	public static final int INVALID_ID = -1;
@@ -31,7 +32,6 @@ public class ContextMenuItem {
 	private final boolean clickable;
 	private final boolean skipPaintingWithoutColor;
 	private boolean hidden;
-	private final int pos;
 	private int order;
 	private String description;
 	private final ContextMenuAdapter.ItemClickListener itemClickListener;
@@ -56,7 +56,6 @@ public class ContextMenuItem {
 							boolean category,
 							boolean clickable,
 							boolean skipPaintingWithoutColor,
-							int pos,
 							int order,
 							String description,
 							ContextMenuAdapter.ItemClickListener itemClickListener,
@@ -80,7 +79,6 @@ public class ContextMenuItem {
 		this.category = category;
 		this.clickable = clickable;
 		this.skipPaintingWithoutColor = skipPaintingWithoutColor;
-		this.pos = pos;
 		this.order = order;
 		this.description = description;
 		this.itemClickListener = itemClickListener;
@@ -159,10 +157,6 @@ public class ContextMenuItem {
 
 	public boolean isHidden() {
 		return hidden;
-	}
-
-	public int getPos() {
-		return pos;
 	}
 
 	public int getOrder() {
@@ -272,13 +266,12 @@ public class ContextMenuItem {
 		private boolean mLoading = false;
 		private boolean mIsCategory = false;
 		private boolean mIsClickable = true;
-		private int mPosition = -1;
-		private int mOrder = -1;
+		private int mOrder = 0;
 		private String mDescription = null;
 		private ContextMenuAdapter.ItemClickListener mItemClickListener = null;
 		private ContextMenuAdapter.OnIntegerValueChangedListener mIntegerListener = null;
 		private ContextMenuAdapter.ProgressListener mProgressListener = null;
-		private OnItemDeleteAction itemDeleteAction;
+		private OnItemDeleteAction mItemDeleteAction = null;
 		private boolean mSkipPaintingWithoutColor;
 		private boolean mHideDivider;
 		private boolean mHideCompoundButton;
@@ -345,11 +338,6 @@ public class ContextMenuItem {
 			return this;
 		}
 
-		public ItemBuilder setPosition(int position) {
-			mPosition = position;
-			return this;
-		}
-
 		public ItemBuilder setOrder(int order) {
 			mOrder = order;
 			return this;
@@ -380,8 +368,9 @@ public class ContextMenuItem {
 			return this;
 		}
 
-		public void setItemDeleteAction(OnItemDeleteAction itemDeleteAction) {
-			this.itemDeleteAction = itemDeleteAction;
+		public ItemBuilder setItemDeleteAction(OnItemDeleteAction itemDeleteAction) {
+			this.mItemDeleteAction = itemDeleteAction;
+			return this;
 		}
 
 		public ItemBuilder hideDivider(boolean hideDivider) {
@@ -416,14 +405,8 @@ public class ContextMenuItem {
 		public ContextMenuItem createItem() {
 			return new ContextMenuItem(mTitleId, mTitle, mIcon, mColorRes, mSecondaryIcon,
 					mSelected, mProgress, mLayout, mLoading, mIsCategory, mIsClickable, mSkipPaintingWithoutColor,
-					mPosition, mOrder, mDescription, mItemClickListener, mIntegerListener, mProgressListener, itemDeleteAction,
+					mOrder, mDescription, mItemClickListener, mIntegerListener, mProgressListener, mItemDeleteAction,
 					mHideDivider, mHideCompoundButton, mMinHeight, mTag, mId);
 		}
-	}
-
-
-	// when action is deleted or reset
-	public interface OnItemDeleteAction {
-		boolean itemWasDeleted(boolean profileOnly);
 	}
 }

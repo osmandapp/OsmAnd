@@ -2033,7 +2033,6 @@
     <string name="reset_items_descr">Настройките ще бъдат върнати в първоначалното състояние след скриване.</string>
     <string name="main_actions_descr">Основните действия съдържат само 4 бутона.</string>
     <string name="main_actions">Основни действия</string>
-    <string name="additional_actions_descr">Можете да получите достъп до тези действия, като докоснете бутона „Действия“.</string>
     <string name="move_inside_category">Можете да премествате елементи само в тази категория.</string>
     <string name="developer_plugin">Добавка за разработчици</string>
     <string name="app_mode_ski_touring">Ски разходки</string>
