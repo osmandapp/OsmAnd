@@ -624,7 +624,7 @@ public class ContextMenuAdapter {
 		};
 	}
 
-	public static OnItemDeleteAction makeDeleteAction(final List<OsmandPreference> prefs) {
+	public static OnItemDeleteAction makeDeleteAction(final List<? extends OsmandPreference> prefs) {
 		return makeDeleteAction(prefs.toArray(new OsmandPreference[prefs.size()]));
 	}
 

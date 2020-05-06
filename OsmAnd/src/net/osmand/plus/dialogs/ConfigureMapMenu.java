@@ -953,7 +953,7 @@ public class ConfigureMapMenu {
 				builder.setSecondaryIcon(R.drawable.ic_action_additional_option);
 				builder.setSelected(selected);
 			}
-			builder.setItemDeleteAction(makeDeleteAction(new ArrayList<OsmandPreference>(prefs)));
+			builder.setItemDeleteAction(makeDeleteAction(prefs));
 			return builder.createItem();
 //			createCustomRenderingProperties(adapter, activity, ps);
 		}
