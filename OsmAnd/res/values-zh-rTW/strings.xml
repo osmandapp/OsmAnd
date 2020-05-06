@@ -2903,7 +2903,7 @@
     <string name="by_transport_type">由 %1$s</string>
     <string name="step_by_step">按步驟</string>
     <string name="routeInfo_road_types_name">道路類型</string>
-    <string name="exit_at">出口於</string>
+    <string name="exit_at">離開於</string>
     <string name="sit_on_the_stop">站點的座位</string>
     <string name="quick_action_show_hide_gpx_tracks">顯示／隱藏 GPX 軌跡</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">在地圖上顯示或隱藏所選 GPX 軌跡的按鈕。</string>
@@ -3680,4 +3680,23 @@
     <string name="osmand_purchases_item">OsmAnd 購買</string>
     <string name="legend_item_description">地圖符號系統指南</string>
     <string name="navigation_profiles_item">導航設定檔</string>
+    <string name="release_3_7">• 新的離線坡度圖
+\n
+\n • 對收藏與 GPX 路徑點的完整自訂能力 — 自訂顏色、圖示、形狀
+\n
+\n • 自訂情境選單、設定地圖、抽屜中的項目順序
+\n
+\n • 設定地圖中可將維基百科選取為單獨的圖層，並僅選取需要的語言
+\n
+\n • 在超強的彈性下建立您自己的 POI 過濾器／地圖
+\n
+\n • 新增選項以恢復自訂設定檔中的選項
+\n
+\n • 對 GPX 路徑導航完整支援車道與轉彎提示
+\n
+\n • 修復平板電腦上的使用者介面大小
+\n
+\n • 修復 RTL 的臭蟲
+\n
+\n</string>
 </resources>
