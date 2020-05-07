@@ -477,7 +477,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 			TextView title;
 			TextView description;
 			ImageView icon;
-			ImageView actionIcon;
+			ImageButton actionIcon;
 			ImageView moveIcon;
 			View itemsContainer;
 			FrameLayout moveButton;
