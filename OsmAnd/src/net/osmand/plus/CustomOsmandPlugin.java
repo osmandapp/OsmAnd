@@ -1,6 +1,7 @@
 package net.osmand.plus;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -9,6 +10,7 @@ import android.text.Html;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.JsonUtils;
 import net.osmand.PlatformUtil;
@@ -104,7 +106,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 			// called from UI
 			File pluginItemsFile = getPluginItemsFile();
 			if (pluginItemsFile.exists()) {
-				addPluginItemsFromFile(pluginItemsFile);
+				addPluginItemsFromFile(pluginItemsFile, activity);
 			}
 		}
 		return true;
@@ -212,7 +214,26 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		this.resourceDirName = resourceDirName;
 	}
 
-	private void addPluginItemsFromFile(final File file) {
+	private void addPluginItemsFromFile(final File file, final Activity activity) {
+		final ProgressDialog progress = new ProgressDialog(activity);
+		progress.setTitle(app.getString(R.string.loading_smth, ""));
+		progress.setMessage(app.getString(R.string.loading_data));
+		progress.setIndeterminate(true);
+		progress.setCancelable(false);
+
+		if (AndroidUtils.isActivityNotDestroyed(activity)) {
+			progress.show();
+		}
+
+		final SettingsHelper.SettingsImportListener importListener = new SettingsHelper.SettingsImportListener() {
+			@Override
+			public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsItem> items) {
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
+					progress.dismiss();
+				}
+			}
+		};
+
 		app.getSettingsHelper().collectSettings(file, "", 1, new SettingsCollectListener() {
 			@Override
 			public void onSettingsCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
@@ -231,7 +252,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 							item.setShouldReplace(true);
 						}
 					}
-					app.getSettingsHelper().importSettings(file, items, "", 1, null);
+					app.getSettingsHelper().importSettings(file, items, "", 1, importListener);
 				}
 			}
 		});
