@@ -27,7 +27,7 @@ public class SelectionMarkersGroupBottomSheetDialogFragment extends MenuBottomSh
 		items.add(new ShortDescriptionItem(getString(R.string.add_group_descr)));
 
 		BaseBottomSheetItem favoritesItem = new SimpleBottomSheetItem.Builder()
-				.setIcon(getContentIcon(R.drawable.ic_action_fav_dark))
+				.setIcon(getContentIcon(R.drawable.ic_action_favorite))
 				.setTitle(getString(R.string.favourites_group))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
 				.setOnClickListener(new View.OnClickListener() {

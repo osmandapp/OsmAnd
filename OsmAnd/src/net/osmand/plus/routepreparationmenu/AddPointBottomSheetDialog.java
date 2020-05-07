@@ -637,7 +637,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 				ItemViewHolder favoriteViewHolder = (ItemViewHolder) holder;
 				if (item.equals(FAVORITES)) {
 					favoriteViewHolder.title.setText(R.string.shared_string_favorites);
-					favoriteViewHolder.icon.setImageDrawable(getContentIcon(R.drawable.ic_action_fav_dark));
+					favoriteViewHolder.icon.setImageDrawable(getContentIcon(R.drawable.ic_action_favorite));
 					favoriteViewHolder.description.setVisibility(View.GONE);
 				} else {
 					if (item instanceof FavouritePoint) {
@@ -656,7 +656,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 								favoriteViewHolder.description.setText(point.getCategory());
 							}
 							int color = app.getFavorites().getColorWithCategory(point, ContextCompat.getColor(app, R.color.color_favorite));
-							favoriteViewHolder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_fav_dark, color));
+							favoriteViewHolder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_favorite, color));
 						}
 						favoriteViewHolder.description.setVisibility(View.VISIBLE);
 					}
@@ -679,7 +679,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 				ItemViewHolder markerViewHolder = (ItemViewHolder) holder;
 				if (item.equals(MARKERS)) {
 					markerViewHolder.title.setText(R.string.shared_string_markers);
-					markerViewHolder.icon.setImageDrawable(getContentIcon(R.drawable.ic_action_flag_dark));
+					markerViewHolder.icon.setImageDrawable(getContentIcon(R.drawable.ic_action_flag));
 				} else {
 					MapMarker marker = (MapMarker) getItem(position);
 					markerViewHolder.title.setText(marker.getName(getContext()));

@@ -78,7 +78,7 @@
                     android:layout_marginTop="2dp"
                     android:scaleType="centerInside"
                     android:tint="?attr/default_icon_color"
-                    android:src="@drawable/ic_action_fav_dark"/>
+                    android:src="@drawable/ic_action_favorite"/>
 
             </LinearLayout>
 

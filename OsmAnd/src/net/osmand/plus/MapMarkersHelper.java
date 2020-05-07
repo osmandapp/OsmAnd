@@ -478,7 +478,7 @@ public class MapMarkersHelper {
 		int type = group.getType();
 		if (type != -1) {
 			header.iconRes = type == MapMarkersGroup.FAVORITES_TYPE
-					? R.drawable.ic_action_fav_dark : R.drawable.ic_action_polygom_dark;
+					? R.drawable.ic_action_favorite : R.drawable.ic_action_polygom_dark;
 			categoriesSubHeader.iconRes = R.drawable.ic_action_filter;
 		}
 		header.group = group;

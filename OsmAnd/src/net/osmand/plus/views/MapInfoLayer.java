@@ -203,11 +203,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 
 		TextInfoWidget marker = mwf.createMapMarkerControl(map, true);
-		registerSideWidget(marker, R.drawable.ic_action_flag_dark, R.string.map_marker_1st, WIDGET_MARKER_1, false, 17);
+		registerSideWidget(marker, R.drawable.ic_action_flag, R.string.map_marker_1st, WIDGET_MARKER_1, false, 17);
 		TextInfoWidget bearing = ric.createBearingControl(map);
 		registerSideWidget(bearing, new BearingWidgetState(app), WIDGET_BEARING, false, 18);
 		TextInfoWidget marker2nd = mwf.createMapMarkerControl(map, false);
-		registerSideWidget(marker2nd, R.drawable.ic_action_flag_dark, R.string.map_marker_2nd, WIDGET_MARKER_2, false, 19);
+		registerSideWidget(marker2nd, R.drawable.ic_action_flag, R.string.map_marker_2nd, WIDGET_MARKER_2, false, 19);
 
 		TextInfoWidget speed = ric.createSpeedControl(map);
 		registerSideWidget(speed, R.drawable.ic_action_speed, R.string.map_widget_speed, WIDGET_SPEED, false, 20);

@@ -20,7 +20,7 @@
             android:scaleType="centerInside"
             android:layout_width="@dimen/map_button_shadow_width"
             android:layout_height="match_parent"
-            tools:src="@drawable/ic_action_fav_dark"
+            tools:src="@drawable/ic_action_favorite"
             tools:visibility="visible"
             android:visibility="gone"/>
 

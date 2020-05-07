@@ -908,8 +908,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			favActionIconId = menuController.getFavActionIconId();
 			waypointActionIconId = menuController.getWaypointActionIconId();
 		} else {
-			favActionIconId = R.drawable.ic_action_fav_dark;
-			waypointActionIconId = R.drawable.ic_action_flag_dark;
+			favActionIconId = R.drawable.ic_action_favorite_stroke;
+			waypointActionIconId = R.drawable.ic_action_flag_stroke;
 		}
 	}
 

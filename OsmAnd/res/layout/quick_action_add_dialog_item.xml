@@ -22,7 +22,7 @@
         android:layout_marginRight="16dp"
         android:scaleType="centerInside"
         android:tint="?attr/default_icon_color"
-        android:src="@drawable/ic_action_flag_dark"
+        android:src="@drawable/ic_action_flag"
 	    android:layout_marginEnd="16dp" />
 
     <TextView

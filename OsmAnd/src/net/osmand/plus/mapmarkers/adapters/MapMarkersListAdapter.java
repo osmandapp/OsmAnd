@@ -157,7 +157,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		if (location != null) {
 			holder.icon.setImageDrawable(ContextCompat.getDrawable(mapActivity, R.drawable.ic_action_location_color));
 		} else {
-			int res = start ? R.drawable.ic_action_point_start : (finish ? R.drawable.ic_action_point_destination : R.drawable.ic_action_flag_dark);
+			int res = start ? R.drawable.ic_action_point_start : (finish ? R.drawable.ic_action_point_destination : R.drawable.ic_action_flag);
 			holder.icon.setImageDrawable(iconsCache.getIcon(res, MapMarker.getColorId(marker.colorIndex)));
 		}
 

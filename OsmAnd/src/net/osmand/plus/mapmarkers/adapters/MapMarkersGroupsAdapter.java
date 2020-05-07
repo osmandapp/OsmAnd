@@ -291,7 +291,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			} else {
 				itemViewHolder.iconDirection.setVisibility(View.VISIBLE);
 
-				itemViewHolder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, color));
+				itemViewHolder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag, color));
 				itemViewHolder.mainLayout.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.list_background_color_dark : R.color.list_background_color_light));
 				itemViewHolder.title.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.text_color_primary_dark : R.color.text_color_primary_light));
 				itemViewHolder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.app_bar_color_dark : R.color.divider_color_light));
