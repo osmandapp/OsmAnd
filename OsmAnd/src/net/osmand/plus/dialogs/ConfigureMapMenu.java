@@ -38,7 +38,6 @@ import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.ListStringPreference;
 import net.osmand.plus.R;
@@ -107,6 +106,7 @@ import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_DENSITY_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_WIDTH_ATTR;
+import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
 
 public class ConfigureMapMenu {
 	private static final Log LOG = PlatformUtil.getLog(ConfigureMapMenu.class);
@@ -140,7 +140,8 @@ public class ConfigureMapMenu {
 				ma.getDashboard().updateListAdapter(createListAdapter(ma));
 			}
 		});
-		List<RenderingRuleProperty> customRules = getCustomRules(app);
+		List<RenderingRuleProperty> customRules = getCustomRules(app,
+				RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN, RENDERING_CATEGORY_TRANSPORT);
 		adapter.setProfileDependent(true);
 		adapter.setNightMode(nightMode);
 		createLayersItems(customRules, adapter, ma, themeRes, nightMode);
@@ -148,16 +149,27 @@ public class ConfigureMapMenu {
 		return adapter;
 	}
 
-	public static List<RenderingRuleProperty> getCustomRules(OsmandApplication app) {
+	public static List<RenderingRuleProperty> getCustomRules(OsmandApplication app, String... skipCategories) {
 		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+		if (renderer == null) {
+			return new ArrayList<>();
+		}
 		List<RenderingRuleProperty> customRules = new ArrayList<>();
 		boolean useDepthContours = app.getResourceManager().hasDepthContours()
 				&& (InAppPurchaseHelper.isSubscribedToLiveUpdates(app)
 				|| InAppPurchaseHelper.isDepthContoursPurchased(app));
-		if (renderer != null) {
-			for (RenderingRuleProperty p : renderer.PROPS.getCustomRules()) {
-				if (!RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN.equals(p.getCategory())
-						&& (useDepthContours || !p.getAttrName().equals("depthContours"))) {
+		for (RenderingRuleProperty p : renderer.PROPS.getCustomRules()) {
+			if (useDepthContours || !"depthContours".equals(p.getAttrName())) {
+				boolean skip = false;
+				if (skipCategories != null) {
+					for (String category : skipCategories) {
+						if (category.equals(p.getCategory())) {
+							skip = true;
+							break;
+						}
+					}
+				}
+				if (!skip) {
 					customRules.add(p);
 				}
 			}
@@ -767,9 +779,6 @@ public class ConfigureMapMenu {
 				.setItemDeleteAction(makeDeleteAction(settings.MAP_PREFERRED_LOCALE))
 				.createItem());
 
-		if (props != null) {
-			adapter.addItem(props);
-		}
 		props = createProperties(customRules, null, R.string.rendering_category_details, R.drawable.ic_action_layers,
 				"details", null, adapter, activity, true, DETAILS_ID, themeRes, nightMode, selectedProfileColor);
 		if (props != null) {
