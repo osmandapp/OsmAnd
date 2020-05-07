@@ -6,35 +6,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/bg_color"
-        android:minHeight="56dp"
-        android:orientation="horizontal">
+        android:background="?attr/bg_color">
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/saveButtonContainer"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:padding="@dimen/content_padding"
-            android:text="@string/quick_action_interim_dialog"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="@dimen/default_list_text_size" />
+            android:background="?android:selectableItemBackground"
+            android:minHeight="56dp"
+            android:orientation="horizontal">
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/saveButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/content_padding"
-            android:layout_marginRight="@dimen/content_padding"
-	        android:layout_marginStart="@dimen/content_padding"
-	        android:layout_marginEnd="@dimen/content_padding" />
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:padding="@dimen/content_padding"
+                android:text="@string/quick_action_interim_dialog"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/default_list_text_size" />
 
-    </LinearLayout>
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/saveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/content_padding"
+                android:layout_marginLeft="@dimen/content_padding"
+                android:layout_marginEnd="@dimen/content_padding"
+                android:layout_marginRight="@dimen/content_padding" />
+
+        </LinearLayout>
+
+    </FrameLayout>
 
     <ImageView
         android:layout_width="match_parent"

@@ -1,6 +1,7 @@
 package net.osmand.plus.quickaction;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -11,6 +12,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.view.MotionEventCompat;
@@ -27,6 +30,9 @@ import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static net.osmand.plus.dialogs.SelectMapViewQuickActionsBottomSheet.DIALOG_TYPE_KEY;
+import static net.osmand.plus.dialogs.SelectMapViewQuickActionsBottomSheet.MAP_DIALOG_TYPE;
 
 public abstract class SwitchableAction<T> extends QuickAction {
 
@@ -56,11 +62,18 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_switchable_action, parent, false);
-		
-		SwitchCompat showDialog = (SwitchCompat) view.findViewById(R.id.saveButton);
+
+		final SwitchCompat showDialog = (SwitchCompat) view.findViewById(R.id.saveButton);
 		if (!getParams().isEmpty()) {
 			showDialog.setChecked(Boolean.valueOf(getParams().get(KEY_DIALOG)));
 		}
+		view.findViewById(R.id.saveButtonContainer).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				boolean selected = showDialog.isChecked();
+				showDialog.setChecked(!selected);
+			}
+		});
 
 		RecyclerView list = (RecyclerView) view.findViewById(R.id.list);
 		Adapter adapter = new Adapter(activity, new QuickActionListFragment.OnStartDragListener() {
@@ -110,11 +123,16 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	public abstract void executeWithParams(MapActivity activity, String params);
 	
 	public abstract String getTranslatedItemName(Context context, String item);
-	
+
 	protected void showChooseDialog(FragmentManager fm) {
+		showChooseDialog(fm, MAP_DIALOG_TYPE);
+	}
+
+	protected void showChooseDialog(FragmentManager fm, String dialogType) {
 		SelectMapViewQuickActionsBottomSheet fragment = new SelectMapViewQuickActionsBottomSheet();
 		Bundle args = new Bundle();
 		args.putLong(KEY_ID, id);
+		args.putString(DIALOG_TYPE_KEY, dialogType);
 		fragment.setArguments(args);
 		fragment.show(fm, SelectMapViewQuickActionsBottomSheet.TAG);
 	}
@@ -144,6 +162,12 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		@Override
 		public void onBindViewHolder(final Adapter.ItemHolder holder, final int position) {
 			final T item = itemsList.get(position);
+
+			OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+
+			Drawable icon = app.getUIUtilities().getIcon(
+					getItemIconRes(app, item), getItemIconColorRes(app, item));
+			holder.icon.setImageDrawable(icon);
 
 			holder.title.setText(getItemName(context, item));
 
@@ -179,6 +203,10 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		@Override
 		public int getItemCount() {
 			return itemsList.size();
+		}
+
+		public List<T> getItemsList() {
+			return itemsList;
 		}
 
 		public void deleteItem(int position) {
@@ -262,6 +290,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 			public TextView title;
 			public ImageView handleView;
 			public ImageView closeBtn;
+			public ImageView icon;
 
 			public ItemHolder(View itemView) {
 				super(itemView);
@@ -269,6 +298,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 				title = (TextView) itemView.findViewById(R.id.title);
 				handleView = (ImageView) itemView.findViewById(R.id.handle_view);
 				closeBtn = (ImageView) itemView.findViewById(R.id.closeImageButton);
+				icon = (ImageView) itemView.findViewById(R.id.imageView);
 			}
 		}
 	}
@@ -278,6 +308,17 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	protected abstract void saveListToParams(List<T> list);
 
 	protected abstract String getItemName(Context context, T item);
+
+	@DrawableRes
+	protected int getItemIconRes(Context context, T item) {
+		return R.drawable.ic_map;
+	}
+
+	@ColorRes
+	protected int getItemIconColorRes(OsmandApplication app, T item) {
+		boolean nightMode = !app.getSettings().isLightContent();
+		return nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
+	}
 
 	protected abstract
 	@StringRes

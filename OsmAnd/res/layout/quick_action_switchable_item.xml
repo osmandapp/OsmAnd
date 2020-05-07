@@ -35,7 +35,6 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:scaleType="centerInside"
-            android:tint="?attr/default_icon_color"
             android:src="@drawable/ic_map"
 	        android:layout_marginStart="16dp"
 	        android:layout_marginEnd="16dp" />

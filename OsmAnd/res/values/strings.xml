@@ -11,6 +11,10 @@
 	Thx - Hardy
 
 -->
+    <string name="profiles_for_action_not_found">Profiles selected for this action not found.</string>
+    <string name="change_application_profile">Change application profile</string>
+    <string name="shared_string_add_profile">Add profile</string>
+    <string name="quick_action_switch_profile_descr">Taping action button will switch between selected profiles.</string>
     <string name="back_to_editing">Back to editing</string>
     <string name="reset_deafult_order">Restore default items order</string>
     <string name="shared_string_add_edit">Add / Edit Favorite</string>

@@ -4,6 +4,7 @@ package net.osmand.plus.dialogs;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -34,8 +36,6 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.quickaction.actions.MapStyleAction;
-import net.osmand.plus.render.RendererRegistry;
-import net.osmand.render.RenderingRulesStorage;
 
 import java.util.List;
 
@@ -45,12 +45,17 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 
 	private static final String SELECTED_ITEM_KEY = "selected_item";
 
+	public static final String DIALOG_TYPE_KEY = "dialog_type";
+	public static final String PROFILE_DIALOG_TYPE = "profile_dialog_type";
+	public static final String MAP_DIALOG_TYPE = "map_dialog_type";
+
 	private LinearLayout itemsContainer;
 	private View.OnClickListener onClickListener;
 	private ColorStateList rbColorList;
 
 	private String selectedItem;
 	private QuickAction action;
+	private String dialogType;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -63,6 +68,7 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 			return;
 		}
 		long id = args.getLong(SwitchableAction.KEY_ID);
+		dialogType = args.getString(DIALOG_TYPE_KEY, MAP_DIALOG_TYPE);
 		OsmandApplication app = mapActivity.getMyApplication();
 
 		QuickActionRegistry quickActionRegistry = app.getQuickActionRegistry();
@@ -189,7 +195,19 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 		rb.setChecked(selected);
 		CompoundButtonCompat.setButtonTintList(rb, rbColorList);
 		ImageView imageView = (ImageView) view.findViewById(R.id.icon);
-		imageView.setImageDrawable(getContentIcon(action.getIconRes()));
+		imageView.setImageDrawable(getItemIcon(tag));
+	}
+
+	private Drawable getItemIcon(String tag) {
+		if (PROFILE_DIALOG_TYPE.equals(dialogType)) {
+			ApplicationMode appMode = ApplicationMode.valueOfStringKey(tag, null);
+			if (appMode != null) {
+				int iconId = appMode.getIconRes();
+				int colorId = appMode.getIconColorInfo().getColor(nightMode);
+				return getIcon(iconId, colorId);
+			}
+		}
+		return getContentIcon(action.getIconRes());
 	}
 
 	@ColorInt
