@@ -100,7 +100,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_RENDERING_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.WIKIPEDIA_ID;
 import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
@@ -158,7 +157,6 @@ public class ConfigureMapMenu {
 		if (renderer != null) {
 			for (RenderingRuleProperty p : renderer.PROPS.getCustomRules()) {
 				if (!RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN.equals(p.getCategory())
-						&& !TransportLinesMenu.TRANSPORT_RENDERING_CATEGORY.equals(p.getCategory())
 						&& (useDepthContours || !p.getAttrName().equals("depthContours"))) {
 					customRules.add(p);
 				}
@@ -769,8 +767,6 @@ public class ConfigureMapMenu {
 				.setItemDeleteAction(makeDeleteAction(settings.MAP_PREFERRED_LOCALE))
 				.createItem());
 
-		props = createProperties(customRules, null, R.string.rendering_category_transport, R.drawable.ic_action_transport_bus,
-				"transport", null, adapter, activity, true, TRANSPORT_RENDERING_ID, themeRes, nightMode, selectedProfileColor);
 		if (props != null) {
 			adapter.addItem(props);
 		}
