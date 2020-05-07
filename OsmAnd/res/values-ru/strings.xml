@@ -3276,7 +3276,7 @@
     <string name="shared_string_memory_used_tb_desc">Использовано %1$s ТБ</string>
     <string name="shared_string_memory_used_gb_desc">Использовано %1$s ГБ</string>
     <string name="shared_string_memory_used_mb_desc">Использовано %1$s МБ</string>
-    <string name="shared_string_memory_used_kb_desc">Использовано %1$s кБ</string>
+    <string name="shared_string_memory_used_kb_desc">Использовано %1$s КБ</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Предпочитать грунтовые дороги</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Предпочитать дороги без покрытия.</string>
     <string name="shared_string_other">Прочее</string>
@@ -3294,7 +3294,7 @@
     <string name="shared_string_memory_tb_desc">%1$s ТБ</string>
     <string name="shared_string_memory_gb_desc">%1$s ГБ</string>
     <string name="shared_string_memory_mb_desc">%1$s МБ</string>
-    <string name="shared_string_memory_kb_desc">%1$s кБ</string>
+    <string name="shared_string_memory_kb_desc">%1$s КБ</string>
     <string name="track_storage_directory">Папка для хранения треков</string>
     <string name="track_storage_directory_descrp">Треки могут храниться в папке «rec», или в ежемесячных, или ежедневных папках.</string>
     <string name="store_tracks_in_rec_directory">Записывать треки в папку «rec»</string>
