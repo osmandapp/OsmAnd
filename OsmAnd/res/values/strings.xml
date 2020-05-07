@@ -137,7 +137,7 @@
     <string name="shared_string_import_complete">Import complete</string>
     <string name="import_complete_description">All data from the %1$s is imported, you can use buttons below to open needed part of the app to manage it.</string>
     <string name="shared_string_hillshade">Hillshade</string>
-    <string name="terrain_empty_state_text">Enable to view hillshade or slope map. You can read more about this map types on our site</string>
+    <string name="terrain_empty_state_text">Enable to view hillshade or slope map. You can read more about these map types on our site.</string>
     <string name="shared_string_legend">Legend</string>
     <string name="shared_string_zoom_levels">Zoom levels</string>
     <string name="shared_string_transparency">Transparency</string>
@@ -145,7 +145,7 @@
     <string name="slope_download_description">Additional maps are needed to view Slopes on the map.</string>
     <string name="hillshade_download_description">Additional maps are needed to view Hillshade on the map.</string>
     <string name="terrain_slider_description">Set the minimum and maximum zoom levels at which the layer will be displayed.</string>
-    <string name="slope_description">Slope is colorized visualisations on terrain.</string>
+    <string name="slope_description">Slope uses colors to visualize terrain steepness.</string>
     <string name="hillshade_description">Hillshade map using dark shades to show slopes, peaks and lowlands.</string>
     <string name="shared_string_terrain">Terrain</string>
     <string name="import_rendering_file">Import rendering file</string>
@@ -724,7 +724,7 @@
     <string name="work_button">Work</string>
     <string name="cubic_m">m³</string>
     <string name="metric_ton">t</string>
-    <string name="shared_string_capacity">Сapacity</string>
+    <string name="shared_string_capacity">Capacity</string>
     <string name="shared_string_width">Width</string>
     <string name="shared_string_height">Height</string>
     <string name="add_destination_point">Set destination</string>
@@ -1045,7 +1045,7 @@
     <string name="order_by">Order by:</string>
     <string name="marker_show_distance_descr">Select how to indicate distance and direction to map markers on the map:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Map orientation threshold</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Select speed of switching orientation from \'Movement direction\' to \'Compass directon\' below.</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Select speed of switching orientation from \'Movement direction\' to \'Compass direction\' below.</string>
     <string name="all_markers_moved_to_history">All map markers moved to history</string>
     <string name="marker_moved_to_history">Map marker moved to history</string>
     <string name="marker_moved_to_active">Map marker moved to active</string>
