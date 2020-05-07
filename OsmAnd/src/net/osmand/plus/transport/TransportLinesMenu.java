@@ -35,7 +35,7 @@ import java.util.Map;
 
 public class TransportLinesMenu {
 
-	public static final String TRANSPORT_RENDERING_CATEGORY = "transport";
+	public static final String RENDERING_CATEGORY_TRANSPORT = "transport";
 
 	public static final String PT_TRANSPORT_STOPS = "transportStops";
 	public static final String PT_PUBLIC_TRANSPORT_MODE = "publicTransportMode";
@@ -199,7 +199,7 @@ public class TransportLinesMenu {
 	public static List<RenderingRuleProperty> getTransportRules(OsmandApplication app) {
 		List<RenderingRuleProperty> transportRules = new ArrayList<>();
 		for (RenderingRuleProperty property : ConfigureMapMenu.getCustomRules(app)) {
-			if (TRANSPORT_RENDERING_CATEGORY.equals(property.getCategory()) && property.isBoolean()) {
+			if (RENDERING_CATEGORY_TRANSPORT.equals(property.getCategory()) && property.isBoolean()) {
 				transportRules.add(property);
 			}
 		}
