@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginRight="@dimen/list_content_padding"
-        android:src="@drawable/ic_action_gabout_dark"
+        android:src="@drawable/ic_action_info_dark"
 	    android:layout_marginEnd="@dimen/list_content_padding" />
 
     <LinearLayout

@@ -62,7 +62,7 @@ import static net.osmand.plus.osmedit.EditPoiData.POI_TYPE_TAG;
 public class AddPOIAction extends QuickAction {
 	public static final QuickActionType TYPE = new QuickActionType(13,
 			"osmpoi.add", AddPOIAction.class).
-			nameRes(R.string.quick_action_add_poi).iconRes(R.drawable.ic_action_gabout_dark).
+			nameRes(R.string.quick_action_add_poi).iconRes(R.drawable.ic_action_info_dark).
 			category(QuickActionType.CREATE_CATEGORY);
 	public static final String KEY_TAG = "key_tag";
 	public static final String KEY_DIALOG = "dialog";
