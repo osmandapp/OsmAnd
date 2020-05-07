@@ -158,6 +158,7 @@ public class ConfigureMapMenu {
 		if (renderer != null) {
 			for (RenderingRuleProperty p : renderer.PROPS.getCustomRules()) {
 				if (!RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN.equals(p.getCategory())
+						&& !TransportLinesMenu.TRANSPORT_RENDERING_CATEGORY.equals(p.getCategory())
 						&& (useDepthContours || !p.getAttrName().equals("depthContours"))) {
 					customRules.add(p);
 				}
