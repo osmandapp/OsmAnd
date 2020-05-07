@@ -261,7 +261,7 @@
                                     android:layout_width="56dp"
                                     android:layout_height="48dp"
                                     android:scaleType="center"
-                                    android:src="@drawable/ic_person"/>
+                                    android:src="@drawable/ic_action_user"/>
 
                                 <EditText
                                     android:id="@+id/userNameEdit"
