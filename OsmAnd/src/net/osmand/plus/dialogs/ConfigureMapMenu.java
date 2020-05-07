@@ -407,14 +407,6 @@ public class ConfigureMapMenu {
 				.setItemDeleteAction(makeDeleteAction(settings.SHOW_POI_LABEL))
 				.setListener(l).createItem());
 
-		/*
-		ContextMenuItem item = createProperties(customRules, null, R.string.rendering_category_transport, R.drawable.ic_action_bus_dark,
-				"transport", settings.TRANSPORT_DEFAULT_SETTINGS, adapter, activity, false);
-		if (item != null) {
-			adapter.addItem(item);
-		}
-		*/
-
 		selected = TransportLinesMenu.isShowLines(app);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(TRANSPORT_ID)
