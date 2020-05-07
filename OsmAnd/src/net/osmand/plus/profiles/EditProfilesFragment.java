@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -384,11 +385,11 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 						}
 					}
 				});
-				profileViewHolder.moveIcon.setVisibility(mode.isDeleted() ? View.GONE : View.VISIBLE);
+				profileViewHolder.moveButton.setVisibility(mode.isDeleted() ? View.GONE : View.VISIBLE);
 				if (!mode.isDeleted()) {
 					int removeIconColor = mode.isCustomProfile() ? R.color.color_osm_edit_delete : R.color.icon_color_default_light;
 					profileViewHolder.actionIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_remove, removeIconColor));
-					profileViewHolder.moveIcon.setOnTouchListener(new View.OnTouchListener() {
+					profileViewHolder.moveButton.setOnTouchListener(new View.OnTouchListener() {
 						@Override
 						public boolean onTouch(View view, MotionEvent event) {
 							if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
@@ -476,9 +477,10 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 			TextView title;
 			TextView description;
 			ImageView icon;
-			ImageButton actionIcon;
+			ImageView actionIcon;
 			ImageView moveIcon;
 			View itemsContainer;
+			FrameLayout moveButton;
 
 			ProfileViewHolder(View itemView) {
 				super(itemView);
@@ -487,6 +489,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 				actionIcon = itemView.findViewById(R.id.action_icon);
 				icon = itemView.findViewById(R.id.icon);
 				moveIcon = itemView.findViewById(R.id.move_icon);
+				moveButton = itemView.findViewById(R.id.move_button);
 				itemsContainer = itemView.findViewById(R.id.selectable_list_item);
 			}
 
