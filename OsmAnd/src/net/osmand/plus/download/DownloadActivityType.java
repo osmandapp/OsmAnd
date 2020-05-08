@@ -199,7 +199,7 @@ public class DownloadActivityType {
 		if (NORMAL_FILE == this) {
 			if (indexItem.fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
 				return BINARY_MAP_INDEX_EXT;
-			} else if (indexItem.fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
+			} else if (indexItem.fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
 				return BINARY_MAP_INDEX_EXT;
 			} else if (indexItem.fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)) {
 				return IndexConstants.EXTRA_EXT;
