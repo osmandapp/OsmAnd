@@ -68,6 +68,8 @@
                         android:layout_height="wrap_content"
                         android:textColor="?attr/dialog_description_color"
                         android:textSize="@dimen/default_list_text_size"
+                        android:letterSpacing="@dimen/text_button_letter_spacing"
+                        android:lineSpacingMultiplier="@dimen/info_description_line_spacing_multiplier"
                         osmand:typeface="@string/font_roboto_regular"
                         tools:text="@string/purchase_dialog_travel_description" />
 
@@ -97,6 +99,8 @@
                     android:layout_height="wrap_content"
                     android:textColor="?attr/dialog_description_color"
                     android:textSize="@dimen/default_desc_text_size"
+                    android:letterSpacing="@dimen/description_letter_spacing"
+                    android:lineSpacingMultiplier="@dimen/info_description_line_spacing_multiplier"
                     osmand:typeface="@string/font_roboto_regular"
                     android:text="@string/osm_live_payment_subscription_management" />
 
