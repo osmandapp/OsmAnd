@@ -218,7 +218,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 				h.title.setText(R.string.create_edit_poi);
 			}
 			if (id.equals(MAP_CONTEXT_MENU_ADD_ID)) {
-				h.title.setText(R.string.shared_string_add_edit);
+				h.title.setText(R.string.add_edit_favorite);
 			}
 		} else if (holder instanceof HeaderHolder) {
 			HeaderHolder h = (HeaderHolder) holder;

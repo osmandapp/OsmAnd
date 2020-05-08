@@ -4,7 +4,7 @@
 		Our app defaults to American English with default strings in res/values
 		This file is manually maintained in res/values-en-rGB and should ONLY contain strings where a different spelling should be used for English as used in the United Kingdom
 	-->
-    <string name="shared_string_add_edit">Add / Edit Favourite</string>
+    <string name="add_edit_favorite">Add / Edit Favourite</string>
     <string name="favorites_item">Favourites</string>
     <string name="slope_description">Slope uses colours to visualise terrain steepness.</string>
     <string name="search_street_in_neighborhood_cities">Search for street in neighbourhood cities</string>

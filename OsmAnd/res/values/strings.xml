@@ -13,7 +13,7 @@
 -->
     <string name="back_to_editing">Back to editing</string>
     <string name="reset_deafult_order">Restore default items order</string>
-    <string name="shared_string_add_edit">Add / Edit Favorite</string>
+    <string name="add_edit_favorite">Add / Edit Favorite</string>
     <string name="parking_positions">Parking positions</string>
     <string name="create_edit_poi">Create/Edit POI</string>
     <string name="quick_action_transport_descr">A button to show or hide public transport on the map.</string>
