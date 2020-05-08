@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.audionotes.NotesFragment;
 
@@ -66,6 +67,8 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 	@NonNull
 	@Override
 	public View getView(final int position, View row, @NonNull ViewGroup parent) {
+		boolean nightMode = !app.getSettings().isLightContent();
+		Context themedCtx = UiUtilities.getThemedContext(getContext(), nightMode);
 		if (portrait) {
 			final int type = getItemViewType(position);
 			boolean header = type == TYPE_DATE_HEADER
@@ -74,7 +77,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 					|| type == TYPE_VIDEO_HEADER;
 
 			if (row == null) {
-				LayoutInflater inflater = (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 				if (header) {
 					row = inflater.inflate(R.layout.list_item_header, parent, false);
 					HeaderViewHolder hHolder = new HeaderViewHolder(row);
@@ -97,16 +100,16 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 
 			return row;
 		} else {
-			LayoutInflater inflater = (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 			boolean lastCard = getCardsCount() == position + 1;
 			int margin = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
 			int sideMargin = app.getResources().getDisplayMetrics().widthPixels / 10;
 
-			FrameLayout fl = new FrameLayout(getContext());
-			LinearLayout ll = new LinearLayout(getContext());
+			FrameLayout fl = new FrameLayout(themedCtx);
+			LinearLayout ll = new LinearLayout(themedCtx);
 			fl.addView(ll);
 			ll.setOrientation(LinearLayout.VERTICAL);
-			ll.setBackgroundResource(app.getSettings().isLightContent() ? R.drawable.bg_card_light : R.drawable.bg_card_dark);
+			ll.setBackgroundResource(nightMode ? R.drawable.bg_card_dark : R.drawable.bg_card_light);
 			((FrameLayout.LayoutParams) ll.getLayoutParams()).setMargins(sideMargin, margin, sideMargin, lastCard ? margin : 0);
 
 			if (position == 0 && hasShareLocationItem()) {
