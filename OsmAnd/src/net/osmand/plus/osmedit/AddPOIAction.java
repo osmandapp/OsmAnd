@@ -293,33 +293,35 @@ public class AddPOIAction extends QuickAction {
 			@Override
 			public boolean onTouch(final View v, MotionEvent event) {
 				final EditText editText = (EditText) v;
-				final int DRAWABLE_END = 2;
-				int expandBtnWidth = AndroidUtils.getCompoundDrawables(editText)[DRAWABLE_END].getBounds().width();
+				if (event.getAction() == MotionEvent.ACTION_UP) {
+					final int DRAWABLE_END = 2;
+					int expandBtnWidth = AndroidUtils.getCompoundDrawables(editText)[DRAWABLE_END].getBounds().width();
 
-				boolean expandButtonPressed;
-				if (isLayoutRtl) {
-					expandButtonPressed = event.getX() <= (editText.getLeft() + expandBtnWidth
-							+ editText.getPaddingLeft());
-				} else {
-					expandButtonPressed = event.getX() >= (editText.getRight() - expandBtnWidth
-							- editText.getPaddingRight());
-				}
+					boolean expandButtonPressed;
+					if (isLayoutRtl) {
+						expandButtonPressed = event.getX() <= (editText.getLeft() + expandBtnWidth
+								+ editText.getPaddingLeft());
+					} else {
+						expandButtonPressed = event.getX() >= (editText.getRight() - expandBtnWidth
+								- editText.getPaddingRight());
+					}
 
-				if (expandButtonPressed) {
-					PoiCategory category = getCategory(getAllTranslatedNames(activity));
-					PoiCategory tempPoiCategory = (category != null) ? category : getPoiTypes(activity).getOtherPoiCategory();
-					PoiSubTypeDialogFragment f =
-							PoiSubTypeDialogFragment.createInstance(tempPoiCategory);
-					f.setOnItemSelectListener(new PoiSubTypeDialogFragment.OnItemSelectListener() {
-						@Override
-						public void select(String category) {
-							poiTypeEditText.setText(category);
-						}
-					});
+					if (expandButtonPressed) {
+						PoiCategory category = getCategory(getAllTranslatedNames(activity));
+						PoiCategory tempPoiCategory = (category != null) ? category : getPoiTypes(activity).getOtherPoiCategory();
+						PoiSubTypeDialogFragment f =
+								PoiSubTypeDialogFragment.createInstance(tempPoiCategory);
+						f.setOnItemSelectListener(new PoiSubTypeDialogFragment.OnItemSelectListener() {
+							@Override
+							public void select(String category) {
+								poiTypeEditText.setText(category);
+							}
+						});
 
-					CreateEditActionDialog parentFragment = (CreateEditActionDialog) activity.getSupportFragmentManager().findFragmentByTag(CreateEditActionDialog.TAG);
-					f.show(activity.getSupportFragmentManager(), "PoiSubTypeDialogFragment");
-					return true;
+						CreateEditActionDialog parentFragment = (CreateEditActionDialog) activity.getSupportFragmentManager().findFragmentByTag(CreateEditActionDialog.TAG);
+						f.show(activity.getSupportFragmentManager(), "PoiSubTypeDialogFragment");
+						return true;
+					}
 				}
 				return false;
 			}
