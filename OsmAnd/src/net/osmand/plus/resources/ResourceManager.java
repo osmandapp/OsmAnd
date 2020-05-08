@@ -757,6 +757,7 @@ public class ResourceManager {
 		for (ResourceListener l : resourceListeners) {
 			l.onMapsIndexed();
 		}
+		context.getPoiHelper().readPoiTypesFromMap();
 		return warnings;
 	}
 

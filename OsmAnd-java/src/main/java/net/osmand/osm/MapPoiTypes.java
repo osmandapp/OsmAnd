@@ -33,6 +33,7 @@ public class MapPoiTypes {
 	private static final Log log = PlatformUtil.getLog(MapRenderingTypes.class);
 	private String resourceName;
 	private List<PoiCategory> categories = new ArrayList<PoiCategory>();
+	private List<PoiCategory> createdCategories = new ArrayList<PoiCategory>();
 	private PoiCategory otherCategory;
 	private PoiCategory otherMapCategory;
 
@@ -299,6 +300,7 @@ public class MapPoiTypes {
 				lastCategory.setTopVisible(true);
 			}
 			categories.add(lastCategory);
+			createdCategories.add(lastCategory);
 			return lastCategory;
 		}
 		return otherCategory;
@@ -919,10 +921,11 @@ public class MapPoiTypes {
 		}
 	}
 
+	public List<PoiCategory> getCreatedCategories() {
+		return createdCategories;
+	}
 
-
-
-
-
-
+	public void clearCreatedCategories(){
+		createdCategories.clear();
+	}
 }

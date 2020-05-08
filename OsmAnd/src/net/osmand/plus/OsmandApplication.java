@@ -61,6 +61,7 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
+import net.osmand.plus.poi.PoiHelper;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
@@ -146,6 +147,7 @@ public class OsmandApplication extends MultiDexApplication {
 	SettingsHelper settingsHelper;
 	GpxDbHelper gpxDbHelper;
 	QuickActionRegistry quickActionRegistry;
+	PoiHelper poiHelper;
 
 	private Resources localizedResources;
 
@@ -331,6 +333,9 @@ public class OsmandApplication extends MultiDexApplication {
 		return poiFilters;
 	}
 
+	public PoiHelper getPoiHelper() {
+		return poiHelper;
+	}
 
 	public GpxSelectionHelper getSelectedGpxHelper() {
 		return selectedGpxHelper;

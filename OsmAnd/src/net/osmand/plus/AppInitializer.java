@@ -21,7 +21,6 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
-import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.OsmandRegions.RegionTranslation;
 import net.osmand.map.WorldRegion;
@@ -43,6 +42,7 @@ import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
+import net.osmand.plus.poi.PoiHelper;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
@@ -482,17 +482,6 @@ public class AppInitializer implements IProgress {
 		});
 	}
 
-	private void readPoiTypesFromMap() {
-		final BinaryMapIndexReader[] currentFile = app.resourceManager.getPoiSearchFiles();
-		for (BinaryMapIndexReader r : currentFile) {
-			try {
-				r.initCategories();
-			} catch (IOException e) {
-				LOG.error("Error while read poi types from map " + e);
-			}
-		}
-	}
-
 	public void onCreateApplication() {
 		// always update application mode to default
 		OsmandSettings osmandSettings = app.getSettings();
@@ -550,6 +539,7 @@ public class AppInitializer implements IProgress {
 		app.lockHelper = startupInit(new LockHelper(app), LockHelper.class);
 		app.settingsHelper = startupInit(new SettingsHelper(app), SettingsHelper.class);
 		app.quickActionRegistry = startupInit(new QuickActionRegistry(app.getSettings()), QuickActionRegistry.class);
+		app.poiHelper = startupInit(new PoiHelper(app), PoiHelper.class);
 
 
 		initOpeningHoursParser();
@@ -741,7 +731,6 @@ public class AppInitializer implements IProgress {
 			initPoiTypes();
 			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);
 			app.resourceManager.reloadIndexesOnStart(this, warnings);
-			readPoiTypesFromMap();
 
 			// native depends on renderers
 			initNativeCore();

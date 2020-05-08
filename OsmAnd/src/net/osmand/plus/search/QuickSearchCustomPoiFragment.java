@@ -43,6 +43,8 @@ import net.osmand.plus.render.RenderingIcons;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -90,6 +92,12 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		this.nightMode = app.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_DARK_THEME;
 		setStyle(STYLE_NO_FRAME, nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
 		poiCategoryList = app.getPoiTypes().getCategories(false);
+		Collections.sort(poiCategoryList, new Comparator<PoiCategory>() {
+			@Override
+			public int compare(PoiCategory poiCategory, PoiCategory t1) {
+				return poiCategory.getTranslation().compareTo(t1.getTranslation());
+			}
+		});
 	}
 
 	@Override

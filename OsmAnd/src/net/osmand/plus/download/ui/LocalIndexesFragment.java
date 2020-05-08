@@ -632,6 +632,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			} else {
 				a.newDownloadIndexes();
 			}
+			getMyApplication().getPoiHelper().readPoiTypesFromMapAsync();
 		}
 	}
 
