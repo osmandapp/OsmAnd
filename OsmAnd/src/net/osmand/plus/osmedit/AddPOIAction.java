@@ -28,6 +28,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
@@ -206,6 +207,7 @@ public class AddPOIAction extends QuickAction {
 
 		final OsmandApplication application = activity.getMyApplication();
 		boolean isLightTheme = application.getSettings().isLightContent();
+		final boolean isLayoutRtl = AndroidUtils.isLayoutRtl(activity);
 		Drawable deleteDrawable = application.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark, isLightTheme);
 
 		final LinearLayout editTagsLineaLayout =
@@ -291,27 +293,33 @@ public class AddPOIAction extends QuickAction {
 			@Override
 			public boolean onTouch(final View v, MotionEvent event) {
 				final EditText editText = (EditText) v;
-				final int DRAWABLE_RIGHT = 2;
-				if (event.getAction() == MotionEvent.ACTION_UP) {
-					if (event.getX() >= (editText.getRight()
-							- editText.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()
-							- editText.getPaddingRight())) {
-						PoiCategory category = getCategory(getAllTranslatedNames(activity));
-						PoiCategory tempPoiCategory = (category != null) ? category : getPoiTypes(activity).getOtherPoiCategory();
-						PoiSubTypeDialogFragment f =
-								PoiSubTypeDialogFragment.createInstance(tempPoiCategory);
-						f.setOnItemSelectListener(new PoiSubTypeDialogFragment.OnItemSelectListener() {
-							@Override
-							public void select(String category) {
-								poiTypeEditText.setText(category);
-							}
-						});
+				final int DRAWABLE_END = 2;
+				int expandBtnWidth = AndroidUtils.getCompoundDrawables(editText)[DRAWABLE_END].getBounds().width();
 
-						CreateEditActionDialog parentFragment = (CreateEditActionDialog) activity.getSupportFragmentManager().findFragmentByTag(CreateEditActionDialog.TAG);
-						f.show(activity.getSupportFragmentManager(), "PoiSubTypeDialogFragment");
+				boolean expandButtonPressed;
+				if (isLayoutRtl) {
+					expandButtonPressed = event.getX() <= (editText.getLeft() + expandBtnWidth
+							+ editText.getPaddingLeft());
+				} else {
+					expandButtonPressed = event.getX() >= (editText.getRight() - expandBtnWidth
+							- editText.getPaddingRight());
+				}
 
-						return true;
-					}
+				if (expandButtonPressed) {
+					PoiCategory category = getCategory(getAllTranslatedNames(activity));
+					PoiCategory tempPoiCategory = (category != null) ? category : getPoiTypes(activity).getOtherPoiCategory();
+					PoiSubTypeDialogFragment f =
+							PoiSubTypeDialogFragment.createInstance(tempPoiCategory);
+					f.setOnItemSelectListener(new PoiSubTypeDialogFragment.OnItemSelectListener() {
+						@Override
+						public void select(String category) {
+							poiTypeEditText.setText(category);
+						}
+					});
+
+					CreateEditActionDialog parentFragment = (CreateEditActionDialog) activity.getSupportFragmentManager().findFragmentByTag(CreateEditActionDialog.TAG);
+					f.show(activity.getSupportFragmentManager(), "PoiSubTypeDialogFragment");
+					return true;
 				}
 				return false;
 			}
