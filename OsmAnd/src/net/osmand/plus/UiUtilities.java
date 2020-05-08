@@ -525,15 +525,17 @@ public class UiUtilities {
 		int activeDisableColor = getColorWithAlpha(activeColor, 0.25f);
 		ColorStateList activeCsl = new ColorStateList(states,
 				new int[] {activeColor, activeDisableColor});
-		int inactiveColor = AndroidUtils.getColorFromAttr(ctx, R.attr.default_icon_color);
+		int inactiveColor = ContextCompat.getColor(ctx,
+				nightMode ? R.color.icon_color_default_dark : R.color.icon_color_secondary_light);
 		ColorStateList inactiveCsl = new ColorStateList(states,
 				new int[] {inactiveColor, inactiveColor});
 		slider.setTrackColorActive(activeCsl);
 		slider.setTrackColorInactive(inactiveCsl);
 		slider.setHaloColor(activeCsl);
 		slider.setThumbColor(activeCsl);
-		int ticksColor = showTicks ? ContextCompat.getColor(ctx,
-				nightMode ? R.color.color_black : R.color.color_white) :
+		int colorBlack = ContextCompat.getColor(ctx, R.color.color_black);
+		int ticksColor = showTicks ?
+				(nightMode ? colorBlack : getColorWithAlpha(colorBlack, 0.5f)) :
 				Color.TRANSPARENT;
 		slider.setTickColor(new ColorStateList(states, new int[] {ticksColor, ticksColor}));
 
