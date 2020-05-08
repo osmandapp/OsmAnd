@@ -140,7 +140,7 @@
             android:layout_marginLeft="@dimen/dashFavIconMargin"
             android:background="?attr/dashboard_button"
             android:contentDescription="@string/context_menu_item_directions_to"
-            android:src="@drawable/ic_action_test_light"
+            android:src="@drawable/ic_action_remove_dark"
             android:visibility="gone" />
 
         <ImageButton

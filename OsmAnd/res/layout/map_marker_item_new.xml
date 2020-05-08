@@ -46,7 +46,7 @@
                 android:layout_gravity="center_vertical"
                 android:scaleType="centerInside"
                 android:tint="?attr/secondary_icon_color"
-                tools:src="@drawable/ic_action_reorder"/>
+                tools:src="@drawable/ic_action_item_move"/>
 
             <View
                 android:id="@+id/flag_icon_left_space"
