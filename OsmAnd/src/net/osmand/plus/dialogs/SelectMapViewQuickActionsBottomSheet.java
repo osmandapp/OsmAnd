@@ -36,6 +36,7 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.quickaction.actions.MapStyleAction;
+import net.osmand.plus.quickaction.actions.SwitchProfileAction;
 
 import java.util.List;
 
@@ -45,17 +46,12 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 
 	private static final String SELECTED_ITEM_KEY = "selected_item";
 
-	public static final String DIALOG_TYPE_KEY = "dialog_type";
-	public static final String PROFILE_DIALOG_TYPE = "profile_dialog_type";
-	public static final String MAP_DIALOG_TYPE = "map_dialog_type";
-
 	private LinearLayout itemsContainer;
 	private View.OnClickListener onClickListener;
 	private ColorStateList rbColorList;
 
 	private String selectedItem;
 	private QuickAction action;
-	private String dialogType;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -68,7 +64,6 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 			return;
 		}
 		long id = args.getLong(SwitchableAction.KEY_ID);
-		dialogType = args.getString(DIALOG_TYPE_KEY, MAP_DIALOG_TYPE);
 		OsmandApplication app = mapActivity.getMyApplication();
 
 		QuickActionRegistry quickActionRegistry = app.getQuickActionRegistry();
@@ -167,8 +162,24 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 			List<String> stylesList = mapStyleAction.getFilteredStyles();
 			for (String entry : stylesList) {
 				boolean selected = entry.equals(selectedItem);
-				createItemRow(selected, counter, mapStyleAction.getTranslatedItemName(context, entry), entry);
+				createItemRow(selected, counter, null,
+						mapStyleAction.getTranslatedItemName(context, entry), entry);
 				counter++;
+			}
+		} else if (action instanceof SwitchProfileAction) {
+			SwitchProfileAction switchProfileAction = (SwitchProfileAction) action;
+			List<String> profilesKeys = (List<String>) switchProfileAction.loadListFromParams();
+			for (String key : profilesKeys) {
+				ApplicationMode appMode = ApplicationMode.valueOfStringKey(key, null);
+				if (appMode != null) {
+					boolean selected = key.equals(selectedItem);
+					int iconId = appMode.getIconRes();
+					int colorId = appMode.getIconColorInfo().getColor(nightMode);
+					Drawable icon = getIcon(iconId, colorId);
+					String translatedName = appMode.toHumanString();
+					createItemRow(selected, counter, icon, translatedName, key);
+					counter++;
+				}
 			}
 		} else if (action instanceof SwitchableAction) {
 			SwitchableAction switchableAction = (SwitchableAction) action;
@@ -176,13 +187,13 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 			for (Pair<String, String> entry : sources) {
 				String tag = entry.first;
 				boolean selected = tag.equals(selectedItem);
-				createItemRow(selected, counter, entry.second, tag);
+				createItemRow(selected, counter, null, entry.second, tag);
 				counter++;
 			}
 		}
 	}
 
-	private void createItemRow(boolean selected, int counter, String text, String tag) {
+	private void createItemRow(boolean selected, int counter, Drawable icon, String text, String tag) {
 		View view = itemsContainer.getChildAt(counter);
 		view.setTag(tag);
 		view.setOnClickListener(getOnClickListener());
@@ -194,20 +205,11 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 		RadioButton rb = (RadioButton) view.findViewById(R.id.compound_button);
 		rb.setChecked(selected);
 		CompoundButtonCompat.setButtonTintList(rb, rbColorList);
-		ImageView imageView = (ImageView) view.findViewById(R.id.icon);
-		imageView.setImageDrawable(getItemIcon(tag));
-	}
-
-	private Drawable getItemIcon(String tag) {
-		if (PROFILE_DIALOG_TYPE.equals(dialogType)) {
-			ApplicationMode appMode = ApplicationMode.valueOfStringKey(tag, null);
-			if (appMode != null) {
-				int iconId = appMode.getIconRes();
-				int colorId = appMode.getIconColorInfo().getColor(nightMode);
-				return getIcon(iconId, colorId);
-			}
+		if (icon == null) {
+			icon = getContentIcon(action.getIconRes());
 		}
-		return getContentIcon(action.getIconRes());
+		ImageView imageView = (ImageView) view.findViewById(R.id.icon);
+		imageView.setImageDrawable(icon);
 	}
 
 	@ColorInt

@@ -31,9 +31,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static net.osmand.plus.dialogs.SelectMapViewQuickActionsBottomSheet.DIALOG_TYPE_KEY;
-import static net.osmand.plus.dialogs.SelectMapViewQuickActionsBottomSheet.MAP_DIALOG_TYPE;
-
 public abstract class SwitchableAction<T> extends QuickAction {
 
 	public static final String KEY_ID = "id";
@@ -125,14 +122,9 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	public abstract String getTranslatedItemName(Context context, String item);
 
 	protected void showChooseDialog(FragmentManager fm) {
-		showChooseDialog(fm, MAP_DIALOG_TYPE);
-	}
-
-	protected void showChooseDialog(FragmentManager fm, String dialogType) {
 		SelectMapViewQuickActionsBottomSheet fragment = new SelectMapViewQuickActionsBottomSheet();
 		Bundle args = new Bundle();
 		args.putLong(KEY_ID, id);
-		args.putString(DIALOG_TYPE_KEY, dialogType);
 		fragment.setArguments(args);
 		fragment.show(fm, SelectMapViewQuickActionsBottomSheet.TAG);
 	}
