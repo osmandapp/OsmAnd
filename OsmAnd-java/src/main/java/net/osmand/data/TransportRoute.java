@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import gnu.trove.map.hash.TLongObjectHashMap;
+
 public class TransportRoute extends MapObject {
 	private List<TransportStop> forwardStops = new ArrayList<TransportStop>();
 	private String ref;
@@ -22,8 +24,28 @@ public class TransportRoute extends MapObject {
 	private List<Way> forwardWays;
 	private TransportSchedule schedule;
 	public static final double SAME_STOP = 40;
+	private boolean combined = false;
+	private List<TransportRoute> routeParts = new ArrayList<TransportRoute>();
 	
 	public TransportRoute() {
+	}
+	
+	public TransportRoute(TransportRoute r, boolean combined) {
+		this.name = r.name;
+		this.enName = r.enName;
+		this.names = r.names;
+		this.id = r.id; 		//TODO check if need ways and id here
+		this.operator = r.operator;
+		this.ref = r.ref;
+		this.type = r.type;
+		this.dist = r.dist;
+		this.color = r.color;
+		this.schedule = r.schedule;
+		this.combined = combined;
+
+		if (combined) {
+			this.addRoutePart(r, true);
+		}
 	}
 	
 	public TransportSchedule getSchedule() {
@@ -38,6 +60,42 @@ public class TransportRoute extends MapObject {
 	}
 	
 	
+	
+	public boolean isCombined() {
+		return combined;
+	}
+
+	public void setCombined(boolean combined) {
+		this.combined = combined;
+	}
+	
+	public void addRoutePart(TransportRoute part,  boolean forward) {	
+		if (forward) {				
+			routeParts.add(part);
+			for (int i = 0; i < part.getForwardStops().size(); i++) {
+				if (!part.getForwardStops().get(i).isMissingStop() && !forwardStops.contains(part.getForwardStops().get(i))) {
+					forwardStops.add(part.getForwardStops().get(i));
+				}
+			}
+		} else {
+			routeParts.add(0, part);
+			for (int i = part.getForwardStops().size() - 1; i >= 0 ; i--) {
+				if (!part.getForwardStops().get(i).isMissingStop() && !forwardStops.contains(part.getForwardStops().get(i))) {
+					forwardStops.add(part.getForwardStops().get(i));
+				}
+			}
+		}
+	}
+	
+	
+	public List<TransportRoute> getRouteParts() {
+		return routeParts;
+	}
+
+	public void setRouteParts(List<TransportRoute> routeParts) {
+		this.routeParts = routeParts;
+	}
+
 	public List<TransportStop> getForwardStops() {
 		return forwardStops;
 	}

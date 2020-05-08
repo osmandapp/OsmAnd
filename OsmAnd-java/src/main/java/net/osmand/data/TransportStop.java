@@ -22,7 +22,8 @@ public class TransportStop extends MapObject {
 	private List<TransportStopExit> exits;
 	private List<TransportRoute> routes = null;
 	private LinkedHashMap<String, int[]> referencesToRoutesMap;
-
+	private boolean missingStop = false;
+	
 	private TransportStopAggregated transportStopAggregated;
 
 	public TransportStop() {}
@@ -30,7 +31,19 @@ public class TransportStop extends MapObject {
 	public List<TransportRoute> getRoutes() {
 		return routes;
 	}
+	
+	@Override
+	public void setName(String name) {
+		super.setName(name);
+		if (name != null && name.equals("#Missing Stop")) {
+			missingStop = true;
+		}
+	}
 
+	public boolean isMissingStop() {
+		return missingStop;
+	}
+	
 	public LinkedHashMap<String, int[]> getReferencesToRoutesMap() {
 		return referencesToRoutesMap;
 	}
