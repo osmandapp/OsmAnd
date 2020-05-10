@@ -155,7 +155,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 				h.description.setText(R.string.divider_descr);
 				h.icon.setVisibility(View.GONE);
 				h.actionIcon.setVisibility(View.GONE);
-				h.moveIcon.setVisibility(View.VISIBLE);
+				h.moveButton.setVisibility(View.VISIBLE);
 				h.divider.setVisibility(View.VISIBLE);
 			} else if (SHOW_CATEGORY_ID.equals(id)
 					|| MAP_RENDERING_CATEGORY_ID.equals(id)) {
@@ -165,7 +165,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 				h.description.setText(R.string.move_inside_category);
 				h.icon.setVisibility(View.GONE);
 				h.actionIcon.setVisibility(View.GONE);
-				h.moveIcon.setVisibility(View.GONE);
+				h.moveButton.setVisibility(View.GONE);
 				h.divider.setVisibility(View.VISIBLE);
 				h.movable = false;
 			} else {
@@ -179,7 +179,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 				h.title.setTextColor(app.getResources().getColor(textColorRes));
 				h.description.setText(getDescription(menuItem.getId()));
 				h.divider.setVisibility(View.GONE);
-				h.moveIcon.setVisibility(View.VISIBLE);
+				h.moveButton.setVisibility(View.VISIBLE);
 			}
 			h.actionIcon.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -190,7 +190,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 					}
 				}
 			});
-			h.moveIcon.setOnTouchListener(new View.OnTouchListener() {
+			h.moveButton.setOnTouchListener(new View.OnTouchListener() {
 				@Override
 				public boolean onTouch(View view, MotionEvent event) {
 					if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
@@ -202,11 +202,11 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 			if (!menuItem.isHidden()
 					&& !id.equals(SHOW_CATEGORY_ID)
 					&& !id.equals(MAP_RENDERING_CATEGORY_ID)) {
-				h.moveIcon.setVisibility(View.VISIBLE);
+				h.moveButton.setVisibility(View.VISIBLE);
 				h.moveIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_item_move, nightMode));
 				h.actionIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_remove, R.color.color_osm_edit_delete));
 			} else {
-				h.moveIcon.setVisibility(View.GONE);
+				h.moveButton.setVisibility(View.GONE);
 				h.actionIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_undo, R.color.color_osm_edit_create));
 			}
 			if (id.equals(MAP_CONTEXT_MENU_MORE_ID)) {
@@ -344,6 +344,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 		private ImageView icon;
 		private ImageView actionIcon;
 		private ImageView moveIcon;
+		private FrameLayout moveButton;
 		private View divider;
 		private boolean movable = true;
 
@@ -354,6 +355,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 			actionIcon = itemView.findViewById(R.id.action_icon);
 			icon = itemView.findViewById(R.id.icon);
 			moveIcon = itemView.findViewById(R.id.move_icon);
+			moveButton = itemView.findViewById(R.id.move_button);
 			divider = itemView.findViewById(R.id.divider);
 		}
 
