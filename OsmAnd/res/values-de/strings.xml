@@ -1749,7 +1749,7 @@ Lon %2$s</string>
     <string name="faq_item">FAQ</string>
     <string name="faq_item_description">Häufige Fragen</string>
     <string name="map_viewing_item">Kartenansicht</string>
-    <string name="search_on_the_map_item">Suche in der Karte</string>
+    <string name="search_on_the_map_item">Suche auf der Karte</string>
     <string name="instalation_troubleshooting_item">Installation und Problembehebung</string>
     <string name="techical_articles_item">Technische Themen</string>
     <string name="versions_item">Versionen</string>
@@ -3585,7 +3585,7 @@ Lon %2$s</string>
     <string name="select_distance_route_will_recalc">Wählen Sie die Entfernung, nach der die Route neu berechnet wird.</string>
     <string name="recalculate_route_in_deviation">Neuberechnung der Route im Falle einer Abweichung</string>
     <string name="recalculate_route_distance_promo">Die Route wird neu berechnet, wenn die Entfernung von der Route zur aktuellen Position größer als der ausgewählte Wert ist.</string>
-    <string name="import_complete_description">Alle Daten aus %1$s werden importiert. Sie können die Schaltflächen unten verwenden, um den benötigten Teil der Anwendung zu öffnen, um sie zu verwalten.</string>
+    <string name="import_complete_description">Alle Daten aus %1$s werden importiert. Sie können die Schaltflächen unten verwenden, um den benötigten Teil der Anwendung zu öffnen und sie zu verwalten.</string>
     <string name="shared_string_square">Quadrat</string>
     <string name="shared_string_rhomb">Raute</string>
     <string name="shared_string_circle">Kreis</string>
@@ -3617,10 +3617,10 @@ Lon %2$s</string>
     <string name="custom_osmand_plugin">Benutzerdefiniertes OsmAnd-Plugin</string>
     <string name="slope_description">Farbliche Kennzeichnung von Pisten im Gelände.</string>
     <string name="replace_point_descr">Einen anderen Punkt durch diesen ersetzen</string>
-    <string name="changes_applied_to_profile">Die Änderungen wurden auf das %1$s Profil angewendet.</string>
-    <string name="settings_item_read_error">Konnte %1$s nicht lesen.</string>
-    <string name="settings_item_write_error">Konnte %1$s nicht schreiben.</string>
-    <string name="settings_item_import_error">Konnte %1$s nicht importieren.</string>
+    <string name="changes_applied_to_profile">Die Änderungen wurden auf das \'%1$s\' Profil angewendet.</string>
+    <string name="settings_item_read_error">Konnte nicht von \'%1$s\' lesen.</string>
+    <string name="settings_item_write_error">Konnte nicht nach \'%1$s\' schreiben.</string>
+    <string name="settings_item_import_error">Konnte nicht von \'%1$s\' importieren.</string>
     <string name="select_track_file">Wählen Sie eine Pfad-Datei</string>
     <string name="shared_string_languages">Sprachen</string>
     <string name="shared_string_language">Sprache</string>
@@ -3630,7 +3630,7 @@ Lon %2$s</string>
     <string name="ui_customization">Anpassung der Benutzeroberfläche</string>
     <string name="context_menu_actions">Aktionen im Kontextmenü</string>
     <string name="shared_string_hidden">Ausgeblendet</string>
-    <string name="reset_items_descr">Die Einstellungen werden nach dem Ausblenden auf den ursprünglichen Zustand zurückgesetzt.</string>
+    <string name="reset_items_descr">Das Ausblenden von Einstellungen setzt sie auf ihren ursprünglichen Zustand zurück.</string>
     <string name="main_actions">Hauptaktionen</string>
     <string name="move_inside_category">Sie können Elemente nur innerhalb dieser Kategorie verschieben.</string>
     <string name="shared_string_items">Elemente</string>
@@ -3665,23 +3665,48 @@ Lon %2$s</string>
     <string name="lang_ce">Tschetschenisch</string>
     <string name="lang_bar">Bairisch</string>
     <string name="lang_ba">Baschkirisch</string>
-    <string name="main_actions_descr">Hauptaktionen enthalten nur 4 Schaltflächen.</string>
-    <string name="additional_actions_descr">Sie können auf diese Aktionen zugreifen, indem Sie auf die Schaltfläche „Aktionen“ tippen.</string>
+    <string name="main_actions_descr">\'Hauptaktionen\' enthält nur 4 Schaltflächen.</string>
+    <string name="additional_actions_descr">Sie können auf diese Aktionen zugreifen, indem Sie auf die Schaltfläche „Zusätzliche Aktionen“ tippen.</string>
     <string name="select_wikipedia_article_langs">Wählen Sie die Sprachen aus, in denen Wikipedia-Artikel auf der Karte erscheinen sollen. Sie können zwischen allen verfügbaren Sprachen wechseln, während Sie den Artikel lesen.</string>
-    <string name="hidden_items_descr">Diese Elemente werden aus dem Menü ausgeblendet, aber die dargestellten Optionen oder Plugins funktionieren weiterhin.</string>
+    <string name="hidden_items_descr">Diese Elemente werden aus dem Menü ausgeblendet, aber die entsprechenden Optionen oder Plugins funktionieren weiterhin.</string>
     <string name="reorder_or_hide_from">Ordnen Sie Elemente aus %1$s neu an oder blenden Sie sie aus.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="osm_live_payment_subscription_management">Die Bezahlung wird nach der Bestätigung des Kaufs von ihrem Google Play Account abgebucht. 
-\n
-\nDas Abonnement verlängert sich automatisch, sofern es nicht vor dem Verlängerungsdatum gekündigt wird. Erst nach dem Verlängerungsdatum wird die Bezahlung für die Verlängerungsperiode (1 Monat/ 3 Monate/ 1 Jahr) von ihrem Account abgebucht.
-\n
-\nSie können ihre Abonnements in ihrem Google Play Einstellungen verwalten oder kündigen.</string>
+    <string name="osm_live_payment_subscription_management">Ihr Google Play-Konto wird beim Kauf eines Abonnements belastet,
+\nund wenn es abläuft (nach einem Monat, drei Monaten oder einem Jahr)
+\nverlängert es sich nicht von selbst, wenn es vorher in Ihren Google Play-Einstellungen gekündigt wurde.</string>
     <string name="search_poi_types">Suche nach POI-Typen</string>
-    <string name="search_poi_types_descr">Kombinieren Sie POI-Typen aus verschiedenen Kategorien. Tippen Sie auf den Schalter, um alle auszuwählen, tippen Sie auf die linke Seite, um die Kategorie auszuwählen.</string>
-    <string name="shared_string_divider"/>
+    <string name="search_poi_types_descr">Kombinieren Sie POI-Typen aus verschiedenen Kategorien. Tippen Sie auf \"Wechseln\", um alle auszuwählen, tippen Sie auf die linke Seite für die Kategorieauswahl.</string>
+    <string name="shared_string_divider">Trenner</string>
     <string name="quick_action_item">Schnellaktion</string>
     <string name="radius_ruler_item">Zirkel</string>
     <string name="measure_distance_item">Entfernungsmesser</string>
     <string name="map_markers_item">Kartenmarkierungen</string>
     <string name="favorites_item">Favoriten</string>
+    <string name="divider_descr">Elemente unterhalb dieses Punktes werden durch einen Trenner getrennt.</string>
+    <string name="tracker_item">OsmAnd Tracker</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="travel_item">Reisen (Wikivoyage und Wikipedia)</string>
+    <string name="subscription_osmandlive_item">Abonnement - OsmAnd Live</string>
+    <string name="osmand_purchases_item">OsmAnd Einkäufe</string>
+    <string name="legend_item_description">Der Leitfaden zur Symbolik einer Karte</string>
+    <string name="navigation_profiles_item">Navigationsprofile</string>
+    <string name="release_3_7">• Neue Offline-Steigungskarten
+\n
+\n• Vollständige Anpassung von Favoriten und GPX-Wegpunkten - benutzerdefinierte Farben, Symbole, Formen
+\n
+\n• Anpassen der Reihenfolge der Elemente im Kontextmenü, Karte konfigurieren, Schublade
+\n
+\n• Wikipedia als separate Ebene in Karte konfigurieren, nur benötigte Sprachen auswählen
+\n
+\n• Erstellen Sie Ihre eigenen POI-Filter/Karten mit absoluter Flexibilität
+\n
+\n• Optionen zur Wiederherstellung von Einstellungen für benutzerdefinierte Profile hinzugefügt
+\n
+\n• Vollständige GPX-Routen aus der Navigation unterstützen Verkehrsspuren und vollständige Abbiegeanweisungen
+\n
+\n• Größe der Bedienoberfläche auf Tablets verbessert
+\n
+\n• Fehler mit RTL behoben
+\n
+\n</string>
 </resources>
