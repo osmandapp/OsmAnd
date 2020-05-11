@@ -154,12 +154,12 @@ public class VoiceRouter {
 //		} else if (router.getAppMode().isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
 //			DEFAULT_SPEED = 2.77f;   //   10 km/h
 //		} else if (router.getAppMode().isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
-//			DEFAULT_SPEED = 2f;     // 7,2 km/h
+//			DEFAULT_SPEED = 1.11f; //4 km/h 2f;     // 7,2 km/h
 		} else {
 			// minimal is 1 meter for turn now
 			DEFAULT_SPEED = (float) Math.max(0.3, router.getAppMode().getDefaultSpeed());
 		}
-		TURN_NOW_SPEED = DEFAULT_SPEED / 2;
+
 
 		// Do not play [issue 1411]: prepare_long_distance warning not needed, used only for goAhead prompt
 		// 300 sec: 4 200 - 3 500 m - car [ 115 - 95 sec @ 120 km/h]
@@ -172,7 +172,7 @@ public class VoiceRouter {
 			PREPARE_DISTANCE_END = PREPARE_DISTANCE * 2;
 		}
 
-		// TODO: Here the change for bicycle: 40-30 sec, 200-150 m -> 115-90 sec, 320-250m [ need to be tested ]
+		// *#8749: Here the change for bicycle: 40-30 sec, 200-150 m -> 115-90 sec, 320-250m [ need to be tested ]
 		// 115 sec: 1 500 m - car [45 sec @ 120 km/h], 320 m - bicycle [45 sec @ 25 km/h], 230 m - pedestrian
 		PREPARE_DISTANCE = (int) (DEFAULT_SPEED * 115);
 		// 90  sec: 1 200 m - car, 250 m - bicycle [36 sec @ 25 km/h],
@@ -191,7 +191,15 @@ public class VoiceRouter {
 
 		// Turn now: 3.5 sec normal speed, 7 second halfspeed
 		// 7 sec   : 50 m - car, 10 m - bicycle, 7 m - pedestrian
+		TURN_NOW_SPEED = DEFAULT_SPEED / 2;
 		TURN_NOW_DISTANCE = (int) (TURN_NOW_SPEED * 7);
+
+		// ** #8749 to keep 1m / 1 sec precision
+		// 1 kmh - 1 m, 4 kmh - 4 m (pedestrian), 10 kmh - 10 m (bicycle), 50 kmh - 50 m (car)
+		TURN_NOW_DISTANCE = (int) (DEFAULT_SPEED * 3.6); // 3.6 sec
+		// 1 kmh - 1 sec, 4 kmh - 2 sec (pedestrian), 10 kmh - 3 sec (*bicycle), 50 kmh - 7 sec (car)
+		float TURN_NOW_TIME = (float) Math.min(Math.sqrt(DEFAULT_SPEED * 3.6), 8);
+		TURN_NOW_SPEED = TURN_NOW_DISTANCE / TURN_NOW_TIME;
 	}
 
 	private double voicePromptDelayDistance = 0;
