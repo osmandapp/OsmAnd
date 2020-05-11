@@ -2559,4 +2559,5 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="mapillary_item">OsmAnd + mapillary</string>
     <string name="quick_action_item">Pikatoiminto</string>
     <string name="radius_ruler_item">Sädeviivain</string>
+    <string name="download_unsupported_action">Toimintoa ei tuettu %1$s</string>
 </resources>
