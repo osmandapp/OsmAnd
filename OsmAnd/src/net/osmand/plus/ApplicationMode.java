@@ -701,7 +701,6 @@ public class ApplicationMode {
 
 			ApplicationMode parent = applicationMode.parentAppMode;
 			applicationMode.minDistanceForTurn = parent.minDistanceForTurn;
-			applicationMode.arrivalDistance = parent.arrivalDistance;
 			applicationMode.offRouteDistance = parent.offRouteDistance;
 
 			applicationMode.setParentAppMode(parent);
