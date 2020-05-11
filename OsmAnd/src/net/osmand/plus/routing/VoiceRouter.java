@@ -191,14 +191,13 @@ public class VoiceRouter {
 
 		// Turn now: 3.5 sec normal speed, 7 second for halfspeed (default)
 		float TURN_NOW_TIME = 7;
-		// This should be correlated with RoutingHelper.updateCurrentRouteStatus ( when processed turn now is not announced)
-		int GPS_TOLERANCE = 12;
 
-		// ** #8749 to keep 1m / 1 sec precision
+		// ** #8749 to keep 1m / 1 sec precision (GPS_TOLERANCE - 12 m)
 		// 1 kmh - 1 m, 4 kmh - 4 m (pedestrian), 10 kmh - 10 m (bicycle), 50 kmh - 50 m (car)
 		// TURN_NOW_DISTANCE = (int) (DEFAULT_SPEED * 3.6); // 3.6 sec
 		// 50 kmh - 48 m (car), 10 kmh - 20 m, 4 kmh - 15 m, 1 kmh - 12 m
-		TURN_NOW_DISTANCE = (int) (GPS_TOLERANCE + DEFAULT_SPEED * 2.5); // 3.6 sec
+		float factor = settings.ARRIVAL_DISTANCE_FACTOR.getModeValue(appMode);
+		TURN_NOW_DISTANCE = (int) ((RoutingHelper.GPS_TOLERANCE + DEFAULT_SPEED * 2.5) * factor); // 3.6 sec
 		// 1 kmh - 1 sec, 4 kmh - 2 sec (pedestrian), 10 kmh - 3 sec (*bicycle), 50 kmh - 7 sec (car)
 		TURN_NOW_TIME = (float) Math.min(Math.sqrt(DEFAULT_SPEED * 3.6), 8);
 

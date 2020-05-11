@@ -45,6 +45,9 @@ public class RoutingHelper {
 	private static final int CACHE_RADIUS = 100000;
 	public static final float ALLOWED_DEVIATION = 2;
 
+	// This should be correlated with RoutingHelper.updateCurrentRouteStatus ( when processed turn now is not announced)
+	public static int GPS_TOLERANCE = 12;
+
 	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
 	private List<WeakReference<IRoutingDataUpdateListener>> updateListeners = new LinkedList<>();
 	private OsmandApplication app;
@@ -729,7 +732,14 @@ public class RoutingHelper {
 	}
 
 	private float getArrivalDistance() {
-		return ((float)settings.getApplicationMode().getArrivalDistance()) * settings.ARRIVAL_DISTANCE_FACTOR.get();
+		ApplicationMode m = mode == null ? settings.getApplicationMode() : mode;
+		float defaultSpeed = Math.max(0.3f, m.getDefaultSpeed());
+
+		/// Used to be: car - 90 m, bicycle - 50 m, pedestrian - 20 m
+		// return ((float)settings.getApplicationMode().getArrivalDistance()) * settings.ARRIVAL_DISTANCE_FACTOR.getModeValue(m);
+		// GPS_TOLERANCE - 12 m
+		// 5 seconds: car - 80 m @ 50 kmh, bicyle - 45 m @ 25 km/h, bicyle - 25 m @ 10 km/h, pedestrian - 18 m @ 4 km/h,
+		return (float) (GPS_TOLERANCE + defaultSpeed * 5) * settings.ARRIVAL_DISTANCE_FACTOR.getModeValue(m);
 	}
 
 
