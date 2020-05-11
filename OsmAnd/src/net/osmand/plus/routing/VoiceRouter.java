@@ -146,8 +146,8 @@ public class VoiceRouter {
 
 
 	public void updateAppMode() {
-
-		if (router.getAppMode().isDerivedRoutingFrom(ApplicationMode.CAR)) {
+		ApplicationMode appMode = router.getAppMode() == null ? settings.getApplicationMode() : router.getAppMode();
+		if (appMode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 			// could be changed in future as others by default in settings is 45 kmh
 			DEFAULT_SPEED = 14;                       //   ~50 km/h
 			//DEFAULT speed is configurable
@@ -157,7 +157,7 @@ public class VoiceRouter {
 //			DEFAULT_SPEED = 1.11f; //4 km/h 2f;     // 7,2 km/h
 		} else {
 			// minimal is 1 meter for turn now
-			DEFAULT_SPEED = (float) Math.max(0.3, router.getAppMode().getDefaultSpeed());
+			DEFAULT_SPEED = (float) Math.max(0.3, appMode.getDefaultSpeed());
 		}
 
 
