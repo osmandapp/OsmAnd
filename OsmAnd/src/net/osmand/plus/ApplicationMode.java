@@ -314,7 +314,6 @@ public class ApplicationMode {
 		if (isCustomProfile()) {
 			this.parentAppMode = parentAppMode;
 			minDistanceForTurn = parentAppMode.minDistanceForTurn;
-			arrivalDistance = parentAppMode.arrivalDistance;
 			offRouteDistance = parentAppMode.offRouteDistance;
 			app.getSettings().PARENT_APP_MODE.setModeValue(this, parentAppMode.getStringKey());
 		}
