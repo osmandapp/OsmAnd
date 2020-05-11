@@ -65,9 +65,6 @@ public class ApplicationMode {
 	private ApplicationMode parentAppMode;
 	private int iconRes = R.drawable.ic_world_globe_dark;
 
-	private int minDistanceForTurn = 50;
-	private int offRouteDistance = 350;
-
 	private ApplicationMode(int key, String stringKey) {
 		this.keyName = key;
 		this.stringKey = stringKey;
@@ -77,21 +74,18 @@ public class ApplicationMode {
 	 * DEFAULT("Browse map"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian"); NAUTICAL("boat"); PUBLIC_TRANSPORT("Public transport"); AIRCRAFT("Aircraft")
 	 */
 	public static final ApplicationMode DEFAULT = createBase(R.string.app_mode_default, "default")
-			.distanceForTurn(5).offRouteDistance(350)
 			.icon(R.drawable.ic_world_globe_dark).reg();
 
+
 	public static final ApplicationMode CAR = createBase(R.string.app_mode_car, "car")
-			.distanceForTurn(35).offRouteDistance(350)
 			.icon(R.drawable.ic_action_car_dark)
 			.description(R.string.base_profile_descr_car).reg();
 
 	public static final ApplicationMode BICYCLE = createBase(R.string.app_mode_bicycle, "bicycle")
-			.distanceForTurn(15).offRouteDistance(50)
 			.icon(R.drawable.ic_action_bicycle_dark)
 			.description(R.string.base_profile_descr_bicycle).reg();
 
 	public static final ApplicationMode PEDESTRIAN = createBase(R.string.app_mode_pedestrian, "pedestrian")
-			.distanceForTurn(5).offRouteDistance(20)
 			.icon(R.drawable.ic_action_pedestrian_dark)
 			.description(R.string.base_profile_descr_pedestrian).reg();
 
@@ -100,17 +94,14 @@ public class ApplicationMode {
 			.description(R.string.base_profile_descr_public_transport).reg();
 
 	public static final ApplicationMode BOAT = createBase(R.string.app_mode_boat, "boat")
-			.distanceForTurn(20)
 			.icon(R.drawable.ic_action_sail_boat_dark)
 			.description(R.string.base_profile_descr_boat).reg();
 
 	public static final ApplicationMode AIRCRAFT = createBase(R.string.app_mode_aircraft, "aircraft")
-			.distanceForTurn(100)
 			.icon(R.drawable.ic_action_aircraft)
 			.description(R.string.base_profile_descr_aircraft).reg();
 
 	public static final ApplicationMode SKI = createBase(R.string.app_mode_skiing, "ski")
-			.distanceForTurn(15).offRouteDistance(50)
 			.icon(R.drawable.ic_action_skiing)
 			.description(R.string.base_profile_descr_ski).reg();
 
@@ -313,8 +304,6 @@ public class ApplicationMode {
 	public void setParentAppMode(ApplicationMode parentAppMode) {
 		if (isCustomProfile()) {
 			this.parentAppMode = parentAppMode;
-			minDistanceForTurn = parentAppMode.minDistanceForTurn;
-			offRouteDistance = parentAppMode.offRouteDistance;
 			app.getSettings().PARENT_APP_MODE.setModeValue(this, parentAppMode.getStringKey());
 		}
 	}
@@ -367,12 +356,18 @@ public class ApplicationMode {
 	}
 
 	public int getMinDistanceForTurn() {
-		return minDistanceForTurn;
+		// used to be: 50 kmh - 35 m, 10 kmh - 15 m, 4 kmh - 5 m, 10 kmh - 20 m, 400 kmh - 100 m,
+		float speed = Math.max(getDefaultSpeed(), 0.3f);
+		// 2 sec + 7 m: 50 kmh - 35 m, 10 kmh - 12 m, 4 kmh - 9 m, 400 kmh - 230 m
+		return (int) (7 + speed * 2);
 	}
 
 
 	public int getOffRouteDistance() {
-		return offRouteDistance;
+		// used to be: 50/14 - 350 m, 10/2.7 - 50 m, 4/1.11 - 20 m
+		float speed = Math.max(getDefaultSpeed(), 0.3f);
+		// become: 50 kmh - 280 m, 10 kmh - 55 m, 4 kmh - 22 m
+		return (int) (speed * 20);
 	}
 
 	public boolean hasFastSpeed() {
@@ -699,9 +694,6 @@ public class ApplicationMode {
 			values.add(applicationMode);
 
 			ApplicationMode parent = applicationMode.parentAppMode;
-			applicationMode.minDistanceForTurn = parent.minDistanceForTurn;
-			applicationMode.offRouteDistance = parent.offRouteDistance;
-
 			applicationMode.setParentAppMode(parent);
 			applicationMode.setUserProfileName(userProfileName);
 			applicationMode.setRouteService(routeService);
@@ -727,16 +719,6 @@ public class ApplicationMode {
 
 		public ApplicationModeBuilder parent(ApplicationMode parent) {
 			applicationMode.parentAppMode = parent;
-			return this;
-		}
-
-		public ApplicationModeBuilder distanceForTurn(int distForTurn) {
-			applicationMode.minDistanceForTurn = distForTurn;
-			return this;
-		}
-
-		public ApplicationModeBuilder offRouteDistance(int offRouteDistance) {
-			applicationMode.offRouteDistance = offRouteDistance;
 			return this;
 		}
 

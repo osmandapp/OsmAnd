@@ -46,7 +46,9 @@ public class RoutingHelper {
 	public static final float ALLOWED_DEVIATION = 2;
 
 	// This should be correlated with RoutingHelper.updateCurrentRouteStatus ( when processed turn now is not announced)
-	public static int GPS_TOLERANCE = 12;
+	private static int DEFAULT_GPS_TOLERANCE = 12;
+	public static int GPS_TOLERANCE = DEFAULT_GPS_TOLERANCE;
+	public static float ARRIVAL_DISTANCE_FACTOR = 1;
 
 	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
 	private List<WeakReference<IRoutingDataUpdateListener>> updateListeners = new LinkedList<>();
@@ -263,6 +265,8 @@ public class RoutingHelper {
 
 	public void setAppMode(ApplicationMode mode){
 		this.mode = mode;
+		ARRIVAL_DISTANCE_FACTOR = Math.max(settings.ARRIVAL_DISTANCE_FACTOR.getModeValue(mode), 0.1f);
+		GPS_TOLERANCE = (int) (DEFAULT_GPS_TOLERANCE * ARRIVAL_DISTANCE_FACTOR);
 		voiceRouter.updateAppMode();
 	}
 
@@ -485,7 +489,7 @@ public class RoutingHelper {
 						voiceRouter.interruptRouteCommands();
 						voiceRouterStopped = true; // Prevents excessive execution of stop() code
 					}
-					if (distOrth > mode.getOffRouteDistance() && !settings.DISABLE_OFFROUTE_RECALC.get()) {
+					if (distOrth > mode.getOffRouteDistance() * ARRIVAL_DISTANCE_FACTOR && !settings.DISABLE_OFFROUTE_RECALC.get()) {
 						voiceRouter.announceOffRoute(distOrth);
 					}
 				}
@@ -583,8 +587,8 @@ public class RoutingHelper {
 					}
 					processed = true;
 				}
-			} else if (newDist < dist || newDist < 10) {
-				// newDist < 10 (avoid distance 0 till next turn)
+			} else if (newDist < dist || newDist < GPS_TOLERANCE / 2) {
+				// newDist < GPS_TOLERANCE (avoid distance 0 till next turn)
 				if (dist > posTolerance) {
 					processed = true;
 					if (log.isDebugEnabled()) {
@@ -739,7 +743,7 @@ public class RoutingHelper {
 		// return ((float)settings.getApplicationMode().getArrivalDistance()) * settings.ARRIVAL_DISTANCE_FACTOR.getModeValue(m);
 		// GPS_TOLERANCE - 12 m
 		// 5 seconds: car - 80 m @ 50 kmh, bicyle - 45 m @ 25 km/h, bicyle - 25 m @ 10 km/h, pedestrian - 18 m @ 4 km/h,
-		return (float) (GPS_TOLERANCE + defaultSpeed * 5) * settings.ARRIVAL_DISTANCE_FACTOR.getModeValue(m);
+		return GPS_TOLERANCE + defaultSpeed * 5 * ARRIVAL_DISTANCE_FACTOR;
 	}
 
 

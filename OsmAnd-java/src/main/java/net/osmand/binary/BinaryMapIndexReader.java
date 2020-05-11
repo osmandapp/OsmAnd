@@ -505,7 +505,7 @@ public class BinaryMapIndexReader {
 				finishInit.add(transportRoute);	
 			}
 			TIntObjectHashMap<String> indexedStringTable = transportAdapter.initializeStringTable(ind, stringTable);
-			for(TransportRoute transportRoute : finishInit ) {
+			for (TransportRoute transportRoute : finishInit) {
 				transportAdapter.initializeNames(false, transportRoute, indexedStringTable);
 			}
 			
