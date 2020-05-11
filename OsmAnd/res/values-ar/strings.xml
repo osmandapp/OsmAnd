@@ -1849,7 +1849,7 @@
     <string name="coords_search">بحث عن إحداثيات</string>
     <string name="advanced_coords_search">بحث متقدم عن الإحداثيات</string>
     <string name="simulate_initial_startup_descr">وضع علامة تشير إلى بدء تشغيل التطبيق الأولي، أبق جميع الإعدادات الأخرى دون تغيير.</string>
-    <string name="region_maps">خرائط التوجيه (الفكتورية) والإقليمية</string>
+    <string name="region_maps">خرائط على مستوى المنطقة</string>
     <string name="hillshade_layer_disabled">طبقة التضاريس غير مفعلة</string>
     <string name="srtm_plugin_disabled">الخطوط الكنتورية معطلة</string>
     <string name="nm">ميل بحري</string>
@@ -3001,7 +3001,7 @@
     <string name="suggested_maps_descr">هذه الخرائط مطلوبة لاستخدامها مع البرنامج المساعد.</string>
     <string name="added_profiles">إضافة أوضاع</string>
     <string name="added_profiles_descr">الأوضاع المضافة بواسطة البرنامج المساعد</string>
-    <string name="shared_string_turn_off">إطفاء</string>
+    <string name="shared_string_turn_off">إيقاف</string>
     <string name="new_plugin_added">تمت تركيب إضافة جديدة</string>
     <string name="join_segments">ربط الأجزاء</string>
     <string name="add_new_profile_q">إضافة وضع جديد \'%1$s\'؟</string>
