@@ -3276,7 +3276,7 @@
     <string name="shared_string_memory_used_tb_desc">Использовано %1$s ТБ</string>
     <string name="shared_string_memory_used_gb_desc">Использовано %1$s ГБ</string>
     <string name="shared_string_memory_used_mb_desc">Использовано %1$s МБ</string>
-    <string name="shared_string_memory_used_kb_desc">Использовано %1$s кБ</string>
+    <string name="shared_string_memory_used_kb_desc">Использовано %1$s КБ</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Предпочитать грунтовые дороги</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Предпочитать дороги без покрытия.</string>
     <string name="shared_string_other">Прочее</string>
@@ -3294,7 +3294,7 @@
     <string name="shared_string_memory_tb_desc">%1$s ТБ</string>
     <string name="shared_string_memory_gb_desc">%1$s ГБ</string>
     <string name="shared_string_memory_mb_desc">%1$s МБ</string>
-    <string name="shared_string_memory_kb_desc">%1$s кБ</string>
+    <string name="shared_string_memory_kb_desc">%1$s КБ</string>
     <string name="track_storage_directory">Папка для хранения треков</string>
     <string name="track_storage_directory_descrp">Треки могут храниться в папке «rec», или в ежемесячных, или ежедневных папках.</string>
     <string name="store_tracks_in_rec_directory">Записывать треки в папку «rec»</string>
@@ -3447,7 +3447,7 @@
 \n 
 \n• Добавлен номер съезда в навигации 
 \n 
-\n• Переработаны настройки плагина 
+\n• Переработаны настройки плагинов 
 \n 
 \n• Переработан экран настроек для быстрого доступа ко всем профилям 
 \n 
@@ -3455,7 +3455,7 @@
 \n 
 \n• Добавлена возможность изменить порядок или скрыть категории POI в поиске 
 \n 
-\n• Правильно выровненные значки POI на карте 
+\n• Правильно выровнены значки POI на карте 
 \n 
 \n• Добавлены данные захода/восхода солнца для настройки карты 
 \n 
@@ -3465,8 +3465,8 @@
 \n 
 \n• Добавлена корректная транслитерация на карте Японии 
 \n 
-\n• Добавлена карта Антарктиды 
-\n 
+\n• Добавлена карта Антарктиды
+\n
 \n</string>
     <string name="copy_coordinates">Копировать координаты</string>
     <string name="please_provide_profile_name_message">Укажите имя профиля</string>
@@ -3684,4 +3684,23 @@
     <string name="legend_item_description">Справка по символике карты</string>
     <string name="favorites_item">Избранное</string>
     <string name="navigation_profiles_item">Профили навигации</string>
+    <string name="release_3_7">• Новые автономные карты склонов
+\n
+\n • Полная настройка избранных и путевых точек GPX: пользовательские цвета, значки, формы
+\n
+\n • Изменение порядка элементов в контекстном меню, настройках карты, панели
+\n
+\n • Википедия как отдельный слой в настройках карты, можно выбрать только нужные языки
+\n
+\n • Можно создать собственный очень гибкий фильтр POI/карты
+\n
+\n • Добавлены параметры для восстановления настроек пользовательских профилей
+\n
+\n • Полные GPX-маршруты в «Навигации» с поддержкой полос движения и подробными инструкциями поворотов
+\n
+\n • Исправлены размеры интерфейса на планшетах
+\n
+\n • Исправлены ошибки для языков, пишущихся справа налево
+\n
+\n</string>
 </resources>

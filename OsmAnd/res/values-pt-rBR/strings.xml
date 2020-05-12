@@ -3599,7 +3599,7 @@ Pôr do Sol: %2$s</string>
     <string name="custom_osmand_plugin">Plug-in OsmAnd personalizado</string>
     <string name="replace_point_descr">Substitua outro ponto por este</string>
     <string name="changes_applied_to_profile">Alterações aplicadas ao perfil \'%1$s\'.</string>
-    <string name="settings_item_read_error">"Não foi possível ler a partir de  \'%1$s\'."</string>
+    <string name="settings_item_read_error">Não foi possível ler a partir de \'%1$s\'.</string>
     <string name="settings_item_write_error">Não foi possível escrever para \'%1$s\'.</string>
     <string name="settings_item_import_error">Não foi possível importar de \'%1$s\'.</string>
     <string name="select_track_file">Selecionar arquivo de faixa</string>
@@ -3675,4 +3675,23 @@ Pôr do Sol: %2$s</string>
     <string name="osmand_purchases_item">Compras de OsmAnd</string>
     <string name="legend_item_description">O guia para a simbologia de um mapa</string>
     <string name="navigation_profiles_item">Perfis de navegação</string>
+    <string name="release_3_7">• Novos mapas de inclinação offline
+\n
+\n  • Personalização completa de Favoritos e Waypoints GPX - cores, ícones e formas personalizados
+\n
+\n  • Personalize a ordem dos itens no menu de contexto, configurar mapa, gaveta
+\n
+\n  • Wikipédia como uma camada separada no mapa Configurar, selecione apenas os idiomas necessários
+\n
+\n  • Crie seu próprio filtro / mapa de POI com total flexibilidade
+\n
+\n  • Adicionadas opções para restaurar configurações de perfis personalizados
+\n
+\n  • Rotas GPX completas das faixas de tráfego da Navigation Support e instruções completas de curva
+\n
+\n  • Corrigir tamanhos de interface do usuário em tablets
+\n
+\n  • Corrija bugs com RTL
+\n
+\n</string>
 </resources>

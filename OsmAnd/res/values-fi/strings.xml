@@ -2544,4 +2544,19 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="osmand_purchases_item">OsmAnd ostot</string>
     <string name="legend_item_description">Kartan symboliikkaopas</string>
     <string name="navigation_profiles_item">Navigointiprofiilit</string>
+    <string name="lang_ba">baškiiri</string>
+    <string name="move_inside_category">Voit siirtää kohteita vain tämän kategorian sisällä.</string>
+    <string name="app_mode_ski_snowmobile">Moottorikelkka</string>
+    <string name="shared_string_languages">Kielet</string>
+    <string name="shared_string_language">Kieli</string>
+    <string name="shared_string_all_languages">Kaikki kielet</string>
+    <string name="lang_mn">mongoli</string>
+    <string name="lang_ky">kirgiisi</string>
+    <string name="lang_ce">tšetšeeni</string>
+    <string name="custom_color">Mukautettu väri</string>
+    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
+    <string name="extra_maps_menu_group">Lisäkartat</string>
+    <string name="mapillary_item">OsmAnd + mapillary</string>
+    <string name="quick_action_item">Pikatoiminto</string>
+    <string name="radius_ruler_item">Sädeviivain</string>
 </resources>
