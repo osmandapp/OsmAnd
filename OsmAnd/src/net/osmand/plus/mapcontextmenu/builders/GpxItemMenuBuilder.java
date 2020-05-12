@@ -54,12 +54,12 @@ public class GpxItemMenuBuilder extends MenuBuilder {
 
 		int textColor = ContextCompat.getColor(ll.getContext(), light ? R.color.text_color_primary_light : R.color.text_color_primary_dark);
 
-		buildIcon(ll, gpxSmallIconMargin, R.drawable.ic_small_point);
+		buildIcon(ll, gpxSmallIconMargin, R.drawable.ic_action_waypoint_16);
 		buildTextView(ll, gpxSmallTextMargin, gpxTextSize, textColor, "" + item.analysis.wptPoints);
-		buildIcon(ll, gpxSmallIconMargin, R.drawable.ic_small_distance);
+		buildIcon(ll, gpxSmallIconMargin, R.drawable.ic_action_distance_16);
 		buildTextView(ll, gpxSmallTextMargin, gpxTextSize, textColor,
 				OsmAndFormatter.getFormattedDistance(item.analysis.totalDistance, app));
-		buildIcon(ll, gpxSmallIconMargin, R.drawable.ic_small_time);
+		buildIcon(ll, gpxSmallIconMargin, R.drawable.ic_action_time_16);
 		buildTextView(ll, gpxSmallTextMargin, gpxTextSize, textColor, Algorithms.formatDuration((int) (item.analysis.timeSpan / 1000), app.accessibilityEnabled()) + "");
 	}
 

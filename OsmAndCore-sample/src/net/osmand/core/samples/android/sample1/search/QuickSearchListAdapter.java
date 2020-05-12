@@ -209,7 +209,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 					timeIcon.setVisibility(View.VISIBLE);
 					timeText.setVisibility(View.VISIBLE);
-					timeIcon.setImageDrawable(app.getIconsCache().getIcon("ic_small_time", colorId));
+					timeIcon.setImageDrawable(app.getIconsCache().getIcon("ic_action_time_16", colorId));
 					timeText.setTextColor(app.getResources().getColor(colorId));
 					String rt = rs.getCurrentRuleTime(inst);
 					timeText.setText(rt == null ? "" : rt);

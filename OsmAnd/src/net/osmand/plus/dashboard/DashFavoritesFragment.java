@@ -137,7 +137,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 			ImageView groupImage = (ImageView)view.findViewById(R.id.group_image);
 			if (point.getCategory().length() > 0) {
 				((TextView) view.findViewById(R.id.group_name)).setText(point.getCategoryDisplayName(getMyApplication()));
-				groupImage.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_small_group));
+				groupImage.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_group_name_16));
 			} else {
 				groupImage.setVisibility(View.GONE);
 			}

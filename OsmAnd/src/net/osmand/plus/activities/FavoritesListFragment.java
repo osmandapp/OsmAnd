@@ -226,7 +226,7 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 			}
 			if (!favorite.getCategory().isEmpty()) {
 				giImage.setVisibility(View.VISIBLE);
-				giImage.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_small_group));
+				giImage.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_group_name_16));
 			} else {
 				giImage.setVisibility(View.GONE);
 			}

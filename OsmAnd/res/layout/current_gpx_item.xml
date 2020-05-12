@@ -98,7 +98,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/gpx_small_icon_margin"
-                        android:src="@drawable/ic_small_distance"
+                        android:src="@drawable/ic_action_distance_16"
 	                    android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
 
                     <TextView
@@ -115,7 +115,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/gpx_small_icon_margin"
-                        android:src="@drawable/ic_small_point"
+                        android:src="@drawable/ic_action_waypoint_16"
 	                    android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
 
                     <TextView

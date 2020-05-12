@@ -279,7 +279,7 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 		if (typeName != null && !typeName.isEmpty()) {
 			ImageView group = (ImageView) row.findViewById(R.id.type_name_icon);
 			group.setVisibility(View.VISIBLE);
-			group.setImageDrawable(ic.getThemedIcon(R.drawable.ic_small_group));
+			group.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_group_name_16));
 			((TextView) row.findViewById(R.id.type_name)).setText(typeName);
 		} else {
 			row.findViewById(R.id.type_name_icon).setVisibility(View.GONE);
@@ -290,15 +290,15 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 	public static int getItemIcon(PointDescription pd) {
 		int iconId;
 		if (pd.isAddress()) {
-			iconId = R.drawable.ic_type_address;
+			iconId = R.drawable.ic_action_street_name;
 		} else if (pd.isFavorite()) {
 			iconId = R.drawable.ic_type_favorites;
 		} else if (pd.isLocation()) {
-			iconId = R.drawable.ic_type_coordinates;
+			iconId = R.drawable.ic_action_marker_dark;
 		} else if (pd.isPoi()) {
-			iconId = R.drawable.ic_type_info;
+			iconId = R.drawable.ic_action_info_dark;
 		} else if (pd.isWpt()) {
-			iconId = R.drawable.ic_type_waypoint;
+			iconId = R.drawable.ic_action_flag_stroke;
 		} else if (pd.isAudioNote()) {
 			iconId = R.drawable.ic_type_audio;
 		} else if (pd.isVideoNote()) {
@@ -306,7 +306,7 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 		}else if (pd.isPhotoNote()) {
 			iconId = R.drawable.ic_type_img;
 		}  else {
-			iconId = R.drawable.ic_type_address;
+			iconId = R.drawable.ic_action_street_name;
 		}
 		return iconId;
 	}

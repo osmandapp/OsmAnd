@@ -359,15 +359,15 @@ public class PointDescription {
 	public int getIconId() {
 		int iconId;
 		if (isAddress()) {
-			iconId = OsmandResources.getDrawableId("ic_type_address");
+			iconId = OsmandResources.getDrawableId("ic_action_street_name");
 		} else if (isFavorite()) {
 			iconId = OsmandResources.getDrawableId("ic_type_favorites");
 		} else if (isLocation()) {
-			iconId = OsmandResources.getDrawableId("ic_type_coordinates");
+			iconId = OsmandResources.getDrawableId("ic_action_marker_dark");
 		} else if (isPoi()) {
-			iconId = OsmandResources.getDrawableId("ic_type_info");
+			iconId = OsmandResources.getDrawableId("ic_action_info_dark");
 		} else if (isWpt()) {
-			iconId = OsmandResources.getDrawableId("ic_type_waypoint");
+			iconId = OsmandResources.getDrawableId("ic_action_flag_stroke");
 		} else if (isAudioNote()) {
 			iconId = OsmandResources.getDrawableId("ic_type_audio");
 		} else if (isVideoNote()) {
@@ -375,7 +375,7 @@ public class PointDescription {
 		}else if (isPhotoNote()) {
 			iconId = OsmandResources.getDrawableId("ic_type_img");
 		}  else {
-			iconId = OsmandResources.getDrawableId("ic_type_address");
+			iconId = OsmandResources.getDrawableId("ic_action_street_name");
 		}
 		return iconId;
 	}
