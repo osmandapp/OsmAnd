@@ -112,11 +112,14 @@ public class PoiHelper {
 	}
 
 	private void replaceSavedFiles(List<LocalIndexInfo> localMapsIndexes) {
-		helper.deleteFilesTable(helper.getWritableDatabase());
+		files.clear();
+		helper.deleteFilesTable();
 		for (LocalIndexInfo info : localMapsIndexes) {
 			File f = new File(info.getPathToData());
-			helper.addFile(f, helper.getWritableDatabase());
+			helper.addFile(f);
+			files.put(f.getName(), f.lastModified());
 		}
+		helper.close();
 	}
 
 	private void initCategoriesFromFiles() {
@@ -133,10 +136,21 @@ public class PoiHelper {
 	}
 
 	private void replaceSavedCategories(List<PoiCategory> poiCategories) {
-		helper.deletePoiTypesTable(helper.getWritableDatabase());
+		categories.clear();
+		helper.deletePoiTypesTable();
 		for (PoiCategory category : poiCategories) {
-			helper.addCategory(category, helper.getWritableDatabase());
+			helper.addCategory(category);
+			categories.put(category.getKeyName(), getSubCategoriesFilters(category.getPoiTypes()));
 		}
+		helper.close();
+	}
+
+	private List<String> getSubCategoriesFilters(List<PoiType> poiTypeList) {
+		List<String> filters = new ArrayList<>();
+		for (PoiType poiType : poiTypeList) {
+			filters.add(poiType.getKeyName());
+		}
+		return filters;
 	}
 
 	public class PoiDbHelper {
@@ -205,26 +219,30 @@ public class PoiHelper {
 			conn.execSQL(POI_TYPES_TABLE_CREATE);
 		}
 
-		protected void addFile(File f, SQLiteAPI.SQLiteConnection db) {
+		protected void addFile(File f) {
+			SQLiteAPI.SQLiteConnection db = getReadableDatabase();
 			if (db != null) {
 				db.execSQL("INSERT INTO " + FILES_TABLE_NAME + " VALUES (?, ?)",
 						new Object[]{f.getName(), f.lastModified()});
 			}
 		}
 
-		protected void deleteFilesTable(SQLiteAPI.SQLiteConnection db) {
+		protected void deleteFilesTable() {
+			SQLiteAPI.SQLiteConnection db = getReadableDatabase();
 			if (db != null) {
 				db.execSQL("DELETE FROM " + FILES_TABLE_NAME);
 			}
 		}
 
-		protected void deletePoiTypesTable(SQLiteAPI.SQLiteConnection db) {
+		protected void deletePoiTypesTable() {
+			SQLiteAPI.SQLiteConnection db = getReadableDatabase();
 			if (db != null) {
 				db.execSQL("DELETE FROM " + POI_TYPES_TABLE_NAME);
 			}
 		}
 
-		protected void addCategory(PoiCategory poiCategory, SQLiteAPI.SQLiteConnection db) {
+		protected void addCategory(PoiCategory poiCategory) {
+			SQLiteAPI.SQLiteConnection db = getReadableDatabase();
 			if (db != null) {
 				db.execSQL("INSERT INTO " + POI_TYPES_TABLE_NAME + " VALUES (?, ?)",
 						new Object[]{poiCategory.getKeyName(), getSubCategoriesJson(poiCategory.getPoiTypes())});
