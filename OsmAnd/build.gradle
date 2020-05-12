@@ -84,7 +84,7 @@ android {
 		noCompress "qz"
 		cruncherEnabled = false
 		// Flag notifies aapt to keep the attribute IDs around
-		additionalParameters "--no-version-vectors"
+		// additionalParameters "--no-version-vectors"
 	}
 
 	dexOptions {
