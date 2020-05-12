@@ -2571,7 +2571,7 @@
     <string name="sort_by">Сартаваць па</string>
     <string name="marker_show_distance_descr">Абярыце, як паказваць адлегласць і напрамак да адзнак на мапе:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Парог арыентацыі мапы</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Абярыце хуткасць, на якой арыентацыя мапы пераключаецца з «Напрамку руху» на «Па компасе».</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Абярыце хуткасць, на якой арыентацыя мапы пераключаецца з \"Напрамку руху\" на \"Па компасе\".</string>
     <string name="all_markers_moved_to_history">Усе адзнакі перамешчаныя ў гісторыю</string>
     <string name="marker_moved_to_history">Адзнака мапы перамешчаная ў гісторыю</string>
     <string name="marker_moved_to_active">Адзнака мапы стала актыўнай</string>
@@ -3519,4 +3519,23 @@
     <string name="listed_exist">Дадзеныя %1$s ужо ёсць у OsmAnd.</string>
     <string name="replace_all_desc">Бягучыя элементы заменяцца элементамі з файла</string>
     <string name="replace_all">Замяніць усе</string>
+    <string name="extra_maps_menu_group">Дадатковыя мапы</string>
+    <string name="download_unsupported_action">Непадтрымліваемае дзеянне %1$s</string>
+    <string name="tracker_item">Трэкер OsmAnd</string>
+    <string name="mapillary_item">OsmAnd і Mapillary</string>
+    <string name="quick_action_item">Хуткае дзеянне</string>
+    <string name="radius_ruler_item">Радыусная лінейка</string>
+    <string name="measure_distance_item">Вымярэнне адлегласці</string>
+    <string name="travel_item">Падарожжа (Віківаяж і Вікіпедыя)</string>
+    <string name="map_markers_item">Адзнакі мапы</string>
+    <string name="favorites_item">Улюбёнае</string>
+    <string name="subscription_osmandlive_item">Падпіска - OsmAnd Live</string>
+    <string name="osmand_purchases_item">Пакупкі OsmAnd</string>
+    <string name="legend_item_description">Даведка па знаках мапы</string>
+    <string name="navigation_profiles_item">Профілі навігацыі</string>
+    <string name="create_edit_poi">Стварыць/Рэдагаваць POI</string>
+    <string name="parking_positions">Месца паркоўкі</string>
+    <string name="add_edit_favorite">Дадаць / рэдагаваць улюбёнае</string>
+    <string name="reset_deafult_order">Аднавіць прадвызначаны парадак элементаў</string>
+    <string name="back_to_editing">Вярнуцца да рэдагавання</string>
 </resources>
