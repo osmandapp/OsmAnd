@@ -43,18 +43,14 @@ public class PoiHelper {
 
 	public Map<String, Long> getFiles() {
 		if (files == null) {
-			files = new HashMap<>();
-			files = helper.getFiles(helper.getReadableDatabase());
-			helper.close();
+			files = helper.getFiles();
 		}
 		return files;
 	}
 
 	public Map<String, List<String>> getCategories() {
 		if (categories == null) {
-			categories = new HashMap<>();
-			categories = helper.getCategories(helper.getReadableDatabase());
-			helper.close();
+			categories = helper.getCategories();
 		}
 		return categories;
 	}
@@ -235,8 +231,9 @@ public class PoiHelper {
 			}
 		}
 
-		protected Map<String, Long> getFiles(SQLiteAPI.SQLiteConnection conn) {
+		protected Map<String, Long> getFiles() {
 			Map<String, Long> files = new HashMap<>();
+			SQLiteAPI.SQLiteConnection conn = getReadableDatabase();
 			if (conn != null) {
 				SQLiteAPI.SQLiteCursor query = conn.rawQuery("SELECT " +
 						FILE_NAME + ", " +
@@ -254,11 +251,13 @@ public class PoiHelper {
 					query.close();
 				}
 			}
+			close();
 			return files;
 		}
 
-		protected Map<String, List<String>> getCategories(SQLiteAPI.SQLiteConnection conn) {
+		protected Map<String, List<String>> getCategories() {
 			Map<String, List<String>> categories = new HashMap<>();
+			SQLiteAPI.SQLiteConnection conn = getReadableDatabase();
 			if (conn != null) {
 				SQLiteAPI.SQLiteCursor query = conn.rawQuery("SELECT " +
 						POI_CATEGORY + ", " +
@@ -276,6 +275,7 @@ public class PoiHelper {
 					query.close();
 				}
 			}
+			close();
 			return categories;
 		}
 
