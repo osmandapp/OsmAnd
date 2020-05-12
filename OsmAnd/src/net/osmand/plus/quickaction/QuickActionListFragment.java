@@ -403,7 +403,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
                 closeBtn = (ImageView) itemView.findViewById(R.id.closeImageButton);
                 container = itemView.findViewById(R.id.searchListItemLayout);
 
-                handleView.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_reorder));
+                handleView.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_item_move));
                 closeBtn.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_remove_dark));
             }
         }

@@ -24,7 +24,7 @@
             android:focusable="false"
             android:tint="?attr/secondary_icon_color"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_action_reorder"
+            android:src="@drawable/ic_action_item_move"
 	        android:layout_marginEnd="4dp" />
 
         <TextView

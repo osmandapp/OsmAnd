@@ -210,7 +210,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/map_button_margin"
                     android:layout_marginRight="@dimen/map_button_margin"
-                    tools:src="@drawable/ic_action_test_light"
+                    tools:src="@drawable/ic_action_remove_dark"
 	                android:layout_marginStart="@dimen/map_button_margin"
 	                android:layout_marginEnd="@dimen/map_button_margin" />
 
@@ -286,7 +286,7 @@
                     android:layout_height="@dimen/map_address_height"
                     android:background="@drawable/btn_circle_transparent"
                     android:layout_gravity="center_vertical"
-                    tools:src="@drawable/ic_action_test_light"/>
+                    tools:src="@drawable/ic_action_remove_dark"/>
 
                 <ImageButton
                     android:id="@+id/waypoint_close"
@@ -295,7 +295,7 @@
                     android:layout_height="@dimen/map_address_height"
                     android:background="@drawable/bottom_shadow"
                     android:layout_gravity="center_vertical"
-                    tools:src="@drawable/ic_action_test_light"/>
+                    tools:src="@drawable/ic_action_remove_dark"/>
             </LinearLayout>
         </FrameLayout>
 
@@ -678,7 +678,7 @@
                             android:layout_height="@dimen/map_small_button_size"
                             android:background="@drawable/btn_inset_circle_trans"
                             android:contentDescription="@string/configure_map"
-                            tools:src="@drawable/ic_action_test_light"/>
+                            tools:src="@drawable/ic_action_remove_dark"/>
 
                         <ImageButton
                             android:id="@+id/map_compass_button"
@@ -687,7 +687,7 @@
                             android:layout_marginTop="@dimen/map_small_button_margin"
                             android:background="@drawable/btn_inset_circle_trans"
                             android:contentDescription="@string/map_widget_compass"
-                            tools:src="@drawable/ic_action_test_light"/>
+                            tools:src="@drawable/ic_action_remove_dark"/>
 
                     </LinearLayout>
 
@@ -699,7 +699,7 @@
                         android:layout_marginLeft="@dimen/map_small_button_margin"
                         android:layout_marginStart="@dimen/map_small_button_margin"
                         android:background="@drawable/btn_inset_circle_trans"
-                        tools:src="@drawable/ic_action_test_light"/>
+                        tools:src="@drawable/ic_action_remove_dark"/>
                 </LinearLayout>
             </LinearLayout>
             <!-- empty block to not let widgets grow more than 45% -->
@@ -758,7 +758,7 @@
                         android:layout_height="@dimen/map_small_button_size"
                         android:layout_gravity="top|center_horizontal"
                         android:background="@drawable/btn_inset_circle_trans"
-                        tools:src="@drawable/ic_action_test_light"/>
+                        tools:src="@drawable/ic_action_remove_dark"/>
                 </LinearLayout>
             </FrameLayout>
         </LinearLayout>

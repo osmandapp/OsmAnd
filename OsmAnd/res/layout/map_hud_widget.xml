@@ -32,7 +32,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="2dp"
             android:gravity="center"
-            android:src="@drawable/ic_action_test_light"
+            android:src="@drawable/ic_action_remove_dark"
             android:visibility="gone"/>
     </FrameLayout>
 
@@ -51,7 +51,7 @@
             android:layout_marginLeft="@dimen/map_widget_icon_margin"
             android:layout_marginRight="@dimen/map_widget_icon_margin"
             android:gravity="center"
-            android:src="@drawable/ic_action_test_light"
+            android:src="@drawable/ic_action_remove_dark"
 	        android:layout_marginEnd="@dimen/map_widget_icon_margin"
 	        android:layout_marginStart="@dimen/map_widget_icon_margin" />
 

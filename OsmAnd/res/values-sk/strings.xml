@@ -3679,4 +3679,23 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="osmand_purchases_item">Nákupy v OsmAnd</string>
     <string name="legend_item_description">Sprievodca symbolmi na mape</string>
     <string name="navigation_profiles_item">Navigačné profily</string>
+    <string name="release_3_7">• Nové offline mapy svahov
+\n
+\n • Plné prispôsobenie Obľúbených a bodov GPX – vlastné farby, ikony a tvary
+\n
+\n • Možnosť prispôsobenia poradia položiek v kontextovom menu, nastavení mapy a úvodnom paneli
+\n
+\n • Wikipédia ako samostatná vrstva v nastavení mapy, možnosť vybrať iba potrebné jazyky
+\n
+\n • Vytvorte vlastné filtre bodov záujmu s veľkou flexibilitou
+\n
+\n • Pridané možnosti na obnovenie nastavení pre vlastné profily
+\n
+\n • Plné trasy GPX z navigácie podporujú jazdné pruhy a navigačné pokyny
+\n
+\n • Oprava veľkostí používateľského rozhrania na tabletoch
+\n
+\n • Opravy chýb pre jazyky písané sprava doľava
+\n
+\n</string>
 </resources>

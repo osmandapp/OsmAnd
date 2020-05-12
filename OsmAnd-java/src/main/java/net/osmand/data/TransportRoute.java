@@ -180,8 +180,10 @@ public class TransportRoute extends MapObject {
 					if(reverseSecond) {
 						second.reverseNodes();
 					}
-					for (int i = 1; i < second.getNodes().size(); i++) {
-						first.addNode(second.getNodes().get(i));
+					if (first != second && (first.getId() < 0 || first.getId() != second.getId())) {
+						for (int i = 1; i < second.getNodes().size(); i++) {
+							first.addNode(second.getNodes().get(i));
+						}
 					}
 					changed = true;
 				} else {
