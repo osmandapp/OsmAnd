@@ -3,7 +3,6 @@ package net.osmand.plus.activities;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -42,7 +41,6 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.FavouritesDbHelper.FavoritesListener;
 import net.osmand.plus.MapMarkersHelper;
-import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -69,12 +67,13 @@ import java.util.Map;
 import java.util.Set;
 
 import static android.view.Gravity.CENTER;
+import static net.osmand.plus.OsmAndLocationProvider.*;
 import static net.osmand.plus.myplaces.FavoritesActivity.FAV_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
 
 public class FavoritesTreeFragment extends OsmandExpandableListFragment implements FavoritesFragmentStateHolder,
-		OsmAndLocationProvider.OsmAndCompassListener, OsmAndLocationProvider.OsmAndLocationListener {
+		OsmAndCompassListener, OsmAndLocationListener {
 
 	public static final int SEARCH_ID = -1;
 	//	public static final int EXPORT_ID = 0;
@@ -133,11 +132,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		}
 		setAdapter(favouritesAdapter);
 
-
-		arrowImageDisabled = ContextCompat.getDrawable(context, R.drawable.ic_direction_arrow);
-		if (arrowImageDisabled != null) {
-			arrowImageDisabled.setColorFilter(ContextCompat.getColor(context, R.color.icon_color_default_light), PorterDuff.Mode.MULTIPLY);
-		}
+		arrowImageDisabled = app.getUIUtilities().getIcon(R.drawable.ic_direction_arrow,
+				app.getSettings().isLightContent() ? R.color.icon_color_default_light : R.color.icon_color_default_dark);
 	}
 
 	private void deleteFavorites() {
@@ -185,7 +181,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				}
 			});
 			listView.addHeaderView(searchView);
-			listView.addHeaderView(inflater.inflate(R.layout.list_item_divider, null, false));
+			View dividerView = inflater.inflate(R.layout.list_item_divider, null, false);
+			listView.addHeaderView(dividerView, null, false);
 			footerView = inflater.inflate(R.layout.list_shadow_footer, null, false);
 			listView.addFooterView(footerView);
 		}
@@ -221,11 +218,19 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				getGroupExpandedPreference(groupName).set(true);
 			}
 		});
-		
+		listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(AbsListView view, int newState) {
+				compassUpdateAllowed = newState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE;
+			}
+
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+			}
+		});
 		if (getArguments() != null) {
 			groupNameToShow = getArguments().getString(GROUP_NAME_TO_SHOW);
 		}
-		
 		if (groupNameToShow != null) {
 			int groupPos = favouritesAdapter.getGroupPosition(groupNameToShow);
 			if (groupPos != -1) {
@@ -249,16 +254,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		listView.setBackgroundColor(getResources().getColor(
 				getMyApplication().getSettings().isLightContent() ? R.color.activity_background_color_light
 						: R.color.activity_background_color_dark));
-		getExpandableListView().setOnScrollListener(new AbsListView.OnScrollListener() {
-			@Override
-			public void onScrollStateChanged(AbsListView view, int newState) {
-				compassUpdateAllowed = newState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE;
-			}
-
-			@Override
-			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-			}
-		});
 	}
 
 	@Override
@@ -1022,9 +1017,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 					}
 				});
 			}
-			LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
-			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(),
-					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
 			name.setText(model.getDisplayName(app), TextView.BufferType.SPANNABLE);
 			name.setTypeface(Typeface.DEFAULT, visible ? Typeface.NORMAL : Typeface.ITALIC);
 			name.setTextColor(getResources().getColor(visible ? enabledColor : disabledColor));
