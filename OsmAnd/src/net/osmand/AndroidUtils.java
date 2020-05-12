@@ -703,6 +703,10 @@ public class AndroidUtils {
 
 	public static Drawable getMirroredDrawable(@NonNull Context ctx,
 	                                           @NonNull Drawable drawable) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			drawable.setAutoMirrored(true);
+			return drawable;
+		}
 		Bitmap bitmap = drawableToBitmap(drawable);
 		return new BitmapDrawable(ctx.getResources(), flipBitmapHorizontally(bitmap));
 	}
