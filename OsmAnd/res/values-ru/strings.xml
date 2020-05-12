@@ -3703,4 +3703,10 @@
 \n • Исправлены ошибки для языков, пишущихся справа налево
 \n
 \n</string>
+    <string name="additional_actions_descr">Доступ к этим действиям можно получить, нажав кнопку «%1$s».</string>
+    <string name="quick_action_transport_hide">Скрыть общественный транспорт</string>
+    <string name="quick_action_transport_show">Показать общественный транспорт</string>
+    <string name="quick_action_show_hide_transport">Показать/скрыть общественный транспорт</string>
+    <string name="add_edit_favorite">Добавить/редактировать избранные</string>
+    <string name="create_edit_poi">Создать/редактировать POI</string>
 </resources>

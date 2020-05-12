@@ -255,7 +255,7 @@
     <string name="time_zone">Часавы пояс</string>
     <string name="units_and_formats">Адзінкі вымярэння і фарматы</string>
     <string name="unit_of_length_descr">Змяніць адзінкі вымярэння адлегласці.</string>
-    <string name="unit_of_length">Адзінкі даўжыні</string>
+    <string name="unit_of_length">Адзінкі вымярэння адлегласці</string>
     <string name="unit_of_speed_system_descr">Вызначце адзінку вымярэння хуткасці.</string>
     <string name="unit_of_speed_system">Адзінка вымярэння хуткасці</string>
     <string name="buffer_time_descr">Максімальны час захоўвання пунктаў у буферы</string>
