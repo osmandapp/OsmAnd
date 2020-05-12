@@ -695,7 +695,7 @@
     <string name="preferred_locale">Мова інтэрфейсу</string>
     <string name="incomplete_locale">няпоўны</string>
     <string name="unit_of_length_descr">Змяніць адзінкі вымярэння адлегласці.</string>
-    <string name="unit_of_length">Адзінкі даўжыні</string>
+    <string name="unit_of_length">Адзінкі вымярэння адлегласці</string>
     <string name="si_mi_feet">Мілі/футы</string>
     <string name="si_mi_yard">Мілі/ярды</string>
     <string name="si_km_m">Кіламетры/метры</string>
@@ -764,7 +764,7 @@
     <string name="voice_is_not_available_title">Абярыце пакунак галасавых падказак</string>
     <string name="daynight_mode_day">Дзень</string>
     <string name="daynight_mode_night">Ноч</string>
-    <string name="daynight_mode_auto">Усход/Захад</string>
+    <string name="daynight_mode_auto">Усход/Заход</string>
     <string name="daynight_mode_sensor">Датчык святла</string>
     <string name="daynight_descr">Наладзьце пераключэнне паміж дзённым і начным рэжымамі.</string>
     <string name="daynight">Рэжым дзень/ноч</string>
@@ -2027,7 +2027,7 @@
     <string name="app_mode_bus">Аўтобус</string>
     <string name="app_mode_train">Цягнік</string>
     <string name="storage_directory_card">Картка памяці</string>
-    <string name="coords_format">Фармат каардынатаў</string>
+    <string name="coords_format">Фармат каардынат</string>
     <string name="coords_format_descr">Фармат для геаграфічных каардынат.</string>
     <string name="shared_string_is_open_24_7">Адчынена 24/7</string>
     <string name="map_widget_search">Шукаць</string>
@@ -2705,7 +2705,7 @@
     <string name="will_open_tomorrow_at">Адчыніцца заўтра а</string>
     <string name="copy_location_name">Скапіяваць назву мясціны/POI</string>
     <string name="toast_empty_name_error">Месца без назвы</string>
-    <string name="shared_string_current">Цяперашні</string>
+    <string name="shared_string_current">Быгучы</string>
     <string name="last_intermediate_dest_description">Дадае прамежкавы прыпынак</string>
     <string name="first_intermediate_dest_description">Дадае першы прыпынак</string>
     <string name="subsequent_dest_description">Перамясціць прызначэнне далей і стварыць яго</string>
