@@ -19,8 +19,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -34,6 +36,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 
 	private OsmandApplication app;
 	private List<Object> items = new ArrayList<>();
+	private Map<Integer, List<MapMarker>> markerGroups = new HashMap<>();
 	private MapMarkersHistoryAdapterListener listener;
 	private Snackbar snackbar;
 	private boolean night;
@@ -46,6 +49,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 
 	public void createHeaders() {
 		items = new ArrayList<>();
+		markerGroups = new HashMap<>();
 		List<MapMarker> markersHistory = app.getMapMarkersHelper().getMapMarkersHistory();
 		int previousHeader = -1;
 		int monthsDisplayed = 0;
@@ -84,7 +88,19 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 				items.add(markerYear);
 				previousHeader = markerYear;
 			}
+			addMarkerToGroup(previousHeader, marker);
 			items.add(marker);
+		}
+	}
+
+	private void addMarkerToGroup(Integer groupHeader, MapMarker marker) {
+		List<MapMarker> group = markerGroups.get(groupHeader);
+		if (group != null) {
+			group.add(marker);
+		} else {
+			group = new ArrayList<>();
+			group.add(marker);
+			markerGroups.put(groupHeader, group);
 		}
 	}
 
@@ -112,7 +128,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 	}
 
 	@Override
-	public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+	public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
 		UiUtilities iconsCache = app.getUIUtilities();
 		if (holder instanceof MapMarkerItemViewHolder) {
 			final MapMarkerItemViewHolder itemViewHolder = (MapMarkerItemViewHolder) holder;
@@ -188,7 +204,32 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 			}
 			dateViewHolder.disableGroupSwitch.setVisibility(View.GONE);
 			dateViewHolder.title.setText(dateString);
+			dateViewHolder.clearButton.setVisibility(View.VISIBLE);
 			dateViewHolder.articleDescription.setVisibility(View.GONE);
+
+			dateViewHolder.clearButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					final List<MapMarker> group = markerGroups.get(dateHeader);
+					if (group == null) {
+						return;
+					}
+					for (MapMarker marker : group) {
+						app.getMapMarkersHelper().removeMarker((MapMarker) marker);
+					}
+					snackbar = Snackbar.make(holder.itemView, app.getString(R.string.n_items_removed), Snackbar.LENGTH_LONG)
+							.setAction(R.string.shared_string_undo, new View.OnClickListener() {
+								@Override
+								public void onClick(View view) {
+									for (MapMarker marker : group) {
+										app.getMapMarkersHelper().addMarker(marker);
+									}
+								}
+							});
+					UiUtilities.setupSnackbar(snackbar, night);
+					snackbar.show();
+				}
+			});
 		}
 	}
 

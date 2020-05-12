@@ -38,6 +38,18 @@
 	        android:textColor="?android:textColorPrimary"
             tools:text="Today"/>
 
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/clear_button"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="@dimen/default_desc_text_size"
+			android:text="@string/shared_string_clear"
+			osmand:typeface="@string/font_roboto_medium"
+			android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
+			android:layout_marginRight="@dimen/bottom_sheet_content_margin"
+			android:visibility="gone"
+			android:textColor="?attr/active_color_basic" />
+
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/disable_group_switch"
             android:layout_width="wrap_content"

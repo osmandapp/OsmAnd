@@ -1,7 +1,6 @@
 package net.osmand.plus.mapmarkers;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
@@ -24,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.data.Amenity;
@@ -106,8 +106,8 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 
 		ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 			private float marginSides = getResources().getDimension(R.dimen.list_content_padding);
-			private Bitmap deleteBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_delete_dark);
-			private Bitmap historyBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_history);
+			private Bitmap deleteBitmap = AndroidUtils.bitmapFromDrawableRes(mapActivity, R.drawable.ic_action_delete_dark);
+			private Bitmap historyBitmap = AndroidUtils.bitmapFromDrawableRes(mapActivity, R.drawable.ic_action_history);
 			private boolean iconHidden;
 
 			@Override

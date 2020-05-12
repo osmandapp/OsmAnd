@@ -322,7 +322,7 @@ public class MapMarkersDbHelper {
 		marker.creationDate = currentTime;
 		String descr = PointDescription.serializeToString(marker.getOriginalPointDescription());
 		int active = marker.history ? 0 : 1;
-		long visited = saveExisting ? currentTime : 0;
+		long visited = saveExisting ? currentTime : marker.visitedDate;
 
 		PointDescription pointDescription = marker.getOriginalPointDescription();
 		if (pointDescription != null && !pointDescription.isSearchingAddress(context)) {

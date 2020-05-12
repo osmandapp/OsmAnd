@@ -1,7 +1,6 @@
 package net.osmand.plus.mapmarkers.adapters;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
@@ -13,6 +12,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 
@@ -47,8 +47,8 @@ public class MapMarkersItemTouchHelperCallback extends ItemTouchHelper.Callback 
 		this.mapActivity = mapActivity;
 		this.adapter = adapter;
 		marginSides = mapActivity.getResources().getDimension(R.dimen.list_content_padding);
-		deleteBitmap = BitmapFactory.decodeResource(mapActivity.getResources(), R.drawable.ic_action_delete_dark);
-		historyBitmap = BitmapFactory.decodeResource(mapActivity.getResources(), R.drawable.ic_action_history);
+		deleteBitmap = AndroidUtils.bitmapFromDrawableRes(mapActivity, R.drawable.ic_action_delete_dark);
+		historyBitmap = AndroidUtils.bitmapFromDrawableRes(mapActivity, R.drawable.ic_action_history);
 		night = !mapActivity.getMyApplication().getSettings().isLightContent();
 
 		backgroundPaint.setColor(ContextCompat.getColor(mapActivity, night ? R.color.divider_color_dark : R.color.divider_color_light));

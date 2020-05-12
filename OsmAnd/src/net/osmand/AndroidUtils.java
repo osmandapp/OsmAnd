@@ -51,6 +51,7 @@ import android.widget.TextView;
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -704,6 +705,11 @@ public class AndroidUtils {
 	                                           @NonNull Drawable drawable) {
 		Bitmap bitmap = drawableToBitmap(drawable);
 		return new BitmapDrawable(ctx.getResources(), flipBitmapHorizontally(bitmap));
+	}
+
+	public static Bitmap bitmapFromDrawableRes(@NonNull Context ctx, @DrawableRes int drawableResId) {
+		Drawable drawable = ContextCompat.getDrawable(ctx, drawableResId);
+		return drawableToBitmap(drawable);
 	}
 
 	public static Bitmap drawableToBitmap(Drawable drawable) {
