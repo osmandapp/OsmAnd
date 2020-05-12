@@ -109,8 +109,6 @@ import net.osmand.util.MapUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
@@ -1509,18 +1507,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private void reloadHistoryInternal() {
 		if (historySearchFragment != null) {
 			try {
-				SearchResultCollection res = searchUICore.shallowSearch(SearchHistoryAPI.class, "", null);
+				SearchResultCollection res = searchUICore.shallowSearch(SearchHistoryAPI.class, "", null, false, false);
 				List<QuickSearchListItem> rows = new ArrayList<>();
 				if (res != null) {
 					for (SearchResult sr : res.getCurrentSearchResults()) {
 						rows.add(new QuickSearchListItem(app, sr));
 					}
-					Collections.sort(rows, new Comparator<QuickSearchListItem>() {
-						@Override
-						public int compare(QuickSearchListItem o1, QuickSearchListItem o2) {
-							return Double.compare(o1.getSearchResult().priority, o2.getSearchResult().priority);
-						}
-					});
 				}
 				historySearchFragment.updateListAdapter(rows, false);
 			} catch (Exception e) {
