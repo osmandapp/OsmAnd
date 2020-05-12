@@ -34,7 +34,7 @@ public class TransportRoute extends MapObject {
 		this.name = r.name;
 		this.enName = r.enName;
 		this.names = r.names;
-		this.id = r.id; 		//TODO check if need ways and id here
+		this.id = r.id;
 		this.operator = r.operator;
 		this.ref = r.ref;
 		this.type = r.type;
@@ -58,8 +58,6 @@ public class TransportRoute extends MapObject {
 		}
 		return schedule;
 	}
-	
-	
 	
 	public boolean isCombined() {
 		return combined;

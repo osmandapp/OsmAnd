@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -19,6 +20,7 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 
 import net.osmand.NativeLibrary;
+import net.osmand.binary.BinaryIndexPart;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.LatLon;
@@ -382,7 +384,7 @@ public class TransportRoutePlanner {
 
 		public List<Way> getGeometry() {
 			List<Way> list = new ArrayList<>();
-			route.mergeForwardWays();
+			route.mergeForwardWays(); //TODO merge ways of all Route parts
 			if (DISPLAY_FULL_SEGMENT_ROUTE) {
 				System.out.println("TOTAL SEGMENTS: " + route.getForwardWays().size());
 				if (route.getForwardWays().size() > DISPLAY_SEGMENT_IND) {
@@ -706,10 +708,12 @@ public class TransportRoutePlanner {
 		public TLongObjectHashMap<TransportRouteSegment> visitedSegments = new TLongObjectHashMap<TransportRouteSegment>();
 		public TransportRoutingConfiguration cfg;
 		public TLongObjectHashMap<TransportRoute> combinedRoutes = new TLongObjectHashMap<TransportRoute>();
+		public Map<TransportStop, List<TransportRoute>> missingStopsCache = new HashMap<TransportStop, List<TransportRoute>>();
 		
 		public TLongObjectHashMap<List<TransportRouteSegment>> quadTree;
 		public final Map<BinaryMapIndexReader, TIntObjectHashMap<TransportRoute>> routeMap = 
 				new LinkedHashMap<BinaryMapIndexReader, TIntObjectHashMap<TransportRoute>>();
+		
 		
 		// stats
 		public long startCalcTime;
@@ -770,9 +774,7 @@ public class TransportRoutePlanner {
 					}
 					for(TransportRouteSegment r : list) {
 						TransportStop st = r.getStop(r.segStart);
-//						if (missingStop && st.isMissingStop()) {
-//							
-//						}
+
 						if (Math.abs(st.x31 - sx) > walkRadiusIn31 || Math.abs(st.y31 - sy) > walkRadiusIn31) {
 							wrongLoadedWays++;
 						} else {
@@ -796,7 +798,7 @@ public class TransportRoutePlanner {
 			
 			// could be global ?
 			TLongObjectHashMap<TransportStop> loadedTransportStops = new TLongObjectHashMap<TransportStop>();
-			TIntObjectHashMap<TransportRoute> localFileRoutes = new TIntObjectHashMap<>();
+			TIntObjectHashMap<TransportRoute> localFileRoutes = new TIntObjectHashMap<>(); //reference, route
 			for (BinaryMapIndexReader r : routeMap.keySet()) {
 				sr.clearSearchResults();
 				List<TransportStop> stops = r.searchTransportIndex(sr);
@@ -818,17 +820,16 @@ public class TransportRoutePlanner {
 					}
 					if (rrs != null && !multifileStop.isDeleted()) {
 						for (int rr : rrs) {
-							TransportRoute route = localFileRoutes.get(rr);
-							TransportRoute combinedRoute = getCombinedRoute(route);
-							if (route == null) {
+							//TODO here we should assign only complete routes:
+							TransportRoute combinedRoute = getCombinedRoute(localFileRoutes.get(rr), r.getFile().getName());
+							if (combinedRoute == null) {
 								System.err.println(String.format("Something went wrong by loading route %d for stop %s", rr, stop));
 							} else if (multifileStop == stop ||
-									(!multifileStop.hasRoute(route.getId()) &&
-											!multifileStop.isRouteDeleted(route.getId()))) {
+									(!multifileStop.hasRoute(combinedRoute.getId()) &&
+											!multifileStop.isRouteDeleted(combinedRoute.getId()))) {
 								// duplicates won't be added
-								multifileStop.addRouteId(route.getId());
-//								multifileStop.addRoute(route);
-								multifileStop.addRoute(combinedRoute); //TODO how to add id? 
+								multifileStop.addRouteId(combinedRoute.getId());
+								multifileStop.addRoute(combinedRoute); 
 							}
 						}
 					}
@@ -841,16 +842,22 @@ public class TransportRoutePlanner {
 			return lst;
 		}
 
+		
 		public static List<TransportStop> mergeTransportStops(BinaryMapIndexReader reader,
 															  TLongObjectHashMap<TransportStop> loadedTransportStops,
 															  List<TransportStop> stops,
 															  TIntObjectHashMap<TransportRoute> localFileRoutes,
-															  TIntObjectHashMap<TransportRoute> loadedRoutes) throws IOException {
+															  TIntObjectHashMap<TransportRoute> loadedRoutes 
+//															  boolean processMissingStop
+															  ) throws IOException {
 			TIntArrayList routesToLoad = new TIntArrayList();
 			TIntArrayList localRoutesToLoad = new TIntArrayList();
 			Iterator<TransportStop> it = stops.iterator();
 			while (it.hasNext()) {
 				TransportStop stop = it.next();
+//				if (stop.isMissingStop() && !processMissingStop) {
+//					continue;
+//				}
 				long stopId = stop.getId();
 				localRoutesToLoad.clear();
 				TransportStop multifileStop = loadedTransportStops.get(stopId);
@@ -890,10 +897,10 @@ public class TransportRoutePlanner {
 					}
 				}
 				routesToLoad.addAll(localRoutesToLoad);
-				multifileStop.putReferencesToRoutes(reader.getFile().getName(), localRoutesToLoad.toArray());
+				multifileStop.putReferencesToRoutes(reader.getFile().getName(), localRoutesToLoad.toArray()); //add valid stop and references to routes 
 			}
 
-			// load routes
+			// load/combine routes
 			if (routesToLoad.size() > 0) {
 				routesToLoad.sort();
 				TIntArrayList referencesToLoad = new TIntArrayList();
@@ -902,7 +909,7 @@ public class TransportRoutePlanner {
 				while (itr.hasNext()) {
 					int nxt = itr.next();
 					if (p != nxt) {
-						if (localFileRoutes != null && loadedRoutes != null && loadedRoutes.contains(nxt)) {
+						if (localFileRoutes != null && loadedRoutes != null && loadedRoutes.contains(nxt)) { //check if 
 							localFileRoutes.put(nxt, loadedRoutes.get(nxt));
 						} else {
 							referencesToLoad.add(nxt);
@@ -918,38 +925,77 @@ public class TransportRoutePlanner {
 			return stops;
 		}
 		
-		private TransportRoute getCombinedRoute(TransportRoute route) throws IOException {
+		private TransportRoute getCombinedRoute(TransportRoute route, String fileName) throws IOException {
+			if (!route.getForwardStops().get(0).isMissingStop() && !route.getForwardStops().get(route.getForwardStops().size()-1).isMissingStop()) {
+				return route;
+			}
+
 			TransportRoute c = combinedRoutes.get(route.getId());
+
 			if (c == null) {
-				c = combineRoute(route);
+				c = combineRoute(route, fileName);
 				combinedRoutes.put(route.getId(), c);
 			}
 			
 			return c;
 		} 
 		
-		private TransportRoute combineRoute(TransportRoute route) throws IOException {
+		private TIntObjectHashMap<TransportRoute> findIncompleteRouteParts(TransportRoute baseRoute, String fileName) throws IOException {
+			int ptrs[];
+			TIntObjectHashMap<TransportRoute> res = new TIntObjectHashMap<TransportRoute>();
+			TIntObjectHashMap<TransportRoute> localRes = new TIntObjectHashMap<TransportRoute>();
+//			TODO check if valid comparsion by filename
+			for (BinaryMapIndexReader bmir: routeMap.keySet()) {
+				if (!bmir.getFile().getName().equals(fileName)) {
+					/**
+					 *  What about situation when one route has several parts in map? 
+					 *  MB check all readers and then sort it out?
+					 * 
+					 *  Should I check if those routes already loaded? But they shouldn't, 
+					 *  else we will already had a combined route and never get there!				
+					 */
+					localRes.clear();
+					ptrs = bmir.getIncompleteRoutesPointers(baseRoute.getId());
+					if (ptrs != null && ptrs.length > 0) {
+						localRes = bmir.getTransportRoutes(ptrs);
+						
+						res.putAll(localRes);
+					}
+				}	
+			}
+			return res;
+		}
+		 
+		
+		private TransportRoute combineRoute(TransportRoute route, String fileName) throws IOException {
 			TransportRoute cr = new TransportRoute(route, true);
-			TransportRoute missingPart;
-
-			if (route.getForwardStops().get(0).isMissingStop()) {
-				missingPart = loadMissingTransportRoute(
-						route.getForwardStops().get(0).x31, route.getForwardStops().get(0).y31, route);
-				if (missingPart != null) {					
-					cr.addRoutePart(missingPart, false);
-				}
-			}
-			if (route.getForwardStops().get(route.getForwardStops().size()-1).isMissingStop()) {
-				missingPart = loadMissingTransportRoute(
-						route.getForwardStops().get(route.getForwardStops().size()-1).x31, 
-						route.getForwardStops().get(route.getForwardStops().size()-1).y31, route);
-				if (missingPart != null) {					
-					cr.addRoutePart(missingPart, true);
-				}
-			}
+			TIntObjectHashMap<TransportRoute> res = findIncompleteRouteParts(route, fileName);
+//			for () {
+				//TODO check for duplicates and subsets
+				//TODO connect in right order
+				
+//			}
+//			TransportRoute missingPart;
+//			if (route.getForwardStops().get(0).isMissingStop()) {
+//				missingPart = loadMissingTransportRoute(
+//						route.getForwardStops().get(0).x31, route.getForwardStops().get(0).y31, route);
+//				if (missingPart != null) {					
+//					cr.addRoutePart(missingPart, false);
+//				}
+//			}
+//			if (route.getForwardStops().get(route.getForwardStops().size()-1).isMissingStop()) {
+//				missingPart = loadMissingTransportRoute(
+//						route.getForwardStops().get(route.getForwardStops().size()-1).x31, 
+//						route.getForwardStops().get(route.getForwardStops().size()-1).y31, route);
+//				if (missingPart != null) {					
+//					cr.addRoutePart(missingPart, true);
+//				}
+//			}
 			
 			return cr;
 		}
+		
+
 		
 		private TransportRoute loadMissingTransportRoute(int sx, int sy, TransportRoute route) throws IOException {
 			long nanoTime = System.nanoTime();

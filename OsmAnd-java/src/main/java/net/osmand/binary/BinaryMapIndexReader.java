@@ -109,7 +109,9 @@ public class BinaryMapIndexReader {
 	/*private*/ List<TransportIndex> transportIndexes = new ArrayList<TransportIndex>();
 	/*private*/ List<RouteRegion> routingIndexes = new ArrayList<RouteRegion>();
 	/*private*/ List<BinaryIndexPart> indexes = new ArrayList<BinaryIndexPart>();
-
+	
+	private final TLongObjectHashMap<int[]> incompleteRoutes = new TLongObjectHashMap<int[]>();
+	
 	protected CodedInputStream codedIS;
 
 	private final BinaryMapTransportReaderAdapter transportAdapter;
@@ -2629,6 +2631,10 @@ public class BinaryMapIndexReader {
 		if (routeAdapter != null) {
 			routeAdapter.initRouteRegion(routeReg);
 		}
+	}
+
+	public int[] getIncompleteRoutesPointers(long id) {
+		return incompleteRoutes.get(id);
 	}
 
 
