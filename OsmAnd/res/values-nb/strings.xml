@@ -1013,7 +1013,7 @@
 \n 
 \nDe globale dataene (mellom 70° nord og 70° sør) er basert på målinger av SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et bildeinstrument ombord på Terra, flaggskipsatellitten til NASA\'s Earth Observing System. ASTER er et samarbeid mellom NASA, Japans finansdepartement, Trade and Industry (METI), og Japan Space Systems (J-spacesystems).</string>
     <string name="plugin_ski_name">Skikartvisning</string>
-    <string name="osmand_accessibility_description">Dette programtillegget gjør enhetens tilgjengelighetsfunksjoner tilgjengelige direkte i OsmAnd. Det muliggjør f.eks justering av talehastigheten for tekst-til-tale -stemmer, innstilling av styrekors-skjermnavigering ved hjelp av en styrekule for forstørrelseskontroll, eller tekst-til-tale-tilbakemelding, f.eks auto-annonsering av din posisjon.</string>
+    <string name="osmand_accessibility_description">Gjør enhetens tilgjengelighetsfunksjoner tilgjengelige direkte i OsmAnd. Det muliggjør f.eks. justering av talehastigheten for tekst-til-tale -stemmer, innstilling av styrekors-skjermnavigering ved hjelp av en styrekule for forstørrelseskontroll, eller tekst-til-tale-tilbakemelding, f.eks. auto-annonsering av din posisjon.</string>
     <string name="rename_failed">Navneendring feilet.</string>
     <string name="anonymous_user">Anonym bruker</string>
     <string name="open_street_map_login_descr">Trengs for bidrag til openstreetmap.org.</string>

@@ -3318,7 +3318,7 @@ Lon %2$s</string>
 \n%1$s &gt; %2$s</string>
     <string name="enter_path_to_folder">Insire a ruta do cartafol</string>
     <string name="shared_string_select_folder">Cartafol…</string>
-    <string name="paste_Osmand_data_folder_path">Colar ou pegar a ruta do cartafol cos datos do OsmAnd</string>
+    <string name="paste_Osmand_data_folder_path">Pegar a ruta do cartafol cos datos do OsmAnd</string>
     <string name="change_osmand_data_folder_question">Mudar o cartafol de datos do OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Mover ó novo destino</string>
     <string name="internal_app_storage_description">Almacenamento interno para o OsmAnd, (agochado ós usuarios e outras aplicacións).</string>
