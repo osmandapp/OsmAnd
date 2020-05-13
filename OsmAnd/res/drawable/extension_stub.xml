@@ -8,7 +8,8 @@
 			<solid android:color="#ff8f00"/>
 		</shape>
 	</item>
-	<item>
-		<bitmap android:src="@drawable/ic_extension_dark" android:gravity="center" />
+	<item
+		android:drawable="@drawable/ic_extension_dark"
+		android:gravity="center">
 	</item>
 </layer-list>
