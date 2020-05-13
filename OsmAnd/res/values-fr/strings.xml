@@ -1258,8 +1258,8 @@
     <string name="live_monitoring_m">Suivi en ligne (GPX requis)</string>
     <string name="live_monitoring_start">Démarrer le suivi en ligne</string>
     <string name="live_monitoring_stop">Arrêter le suivi en ligne</string>
-    <string name="gpx_monitoring_start">Démarrer l\'enregistrement GPX</string>
-    <string name="gpx_monitoring_stop">Arrêter l\'enregistrement GPX</string>
+    <string name="gpx_monitoring_start">Continuer l\'enregistrement GPX</string>
+    <string name="gpx_monitoring_stop">Interrompre l\'enregistrement GPX</string>
     <string name="gpx_start_new_segment">Débuter un nouveau segment</string>
     <string name="rendering_attr_hideBuildings_name">Bâtiments</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Voies non adaptées aux véhicules</string>

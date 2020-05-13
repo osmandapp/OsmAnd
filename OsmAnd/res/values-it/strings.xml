@@ -1213,8 +1213,8 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="live_monitoring_m">Tracciamento online (GPX richiesto)</string>
     <string name="live_monitoring_start">Avvia il tracciamento online</string>
     <string name="live_monitoring_stop">Ferma il tracciamento online</string>
-    <string name="gpx_monitoring_start">Avvia la registrazione GPX</string>
-    <string name="gpx_monitoring_stop">Ferma la registrazione GPX</string>
+    <string name="gpx_monitoring_start">Riprendi la registrazione GPX</string>
+    <string name="gpx_monitoring_stop">Metti in pausa la registrazione GPX</string>
     <string name="gpx_start_new_segment">Inizia un nuovo segmento</string>
     <string name="lang_fa">Persiano</string>
     <string name="lang_he">Ebraico</string>

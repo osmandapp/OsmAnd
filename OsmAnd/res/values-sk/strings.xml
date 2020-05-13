@@ -1208,8 +1208,8 @@
     <string name="live_monitoring_m">Online stopovanie (potrebné GPX)</string>
     <string name="live_monitoring_start">Zapnúť online stopovanie</string>
     <string name="live_monitoring_stop">Zastaviť online stopovanie</string>
-    <string name="gpx_monitoring_start">Zapnúť zaznamenávanie GPX</string>
-    <string name="gpx_monitoring_stop">Zastaviť zaznamenávanie GPX</string>
+    <string name="gpx_monitoring_start">Pokračovať v zaznamenávaní GPX</string>
+    <string name="gpx_monitoring_stop">Pozastaviť zaznamenávanie GPX</string>
     <string name="gpx_start_new_segment">Začať nový segment</string>
     <string name="rendering_attr_hideBuildings_name">Budovy</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Cesty, ktoré nie sú pre vozidlá</string>
