@@ -1011,6 +1011,17 @@ public class RouteDataObject {
 				rf == null ? "" : rf);
 	}
 
+	public boolean hasNameTagStartsWith(String tagStartsWith) {
+		int[] nextSegmentNameIds = nameIds;
+		for (int nm = 0; nm < nameIds.length; nm++) {
+			RouteTypeRule rtr = region.quickGetEncodingRule(nameIds[nm]);
+			if (rtr != null && rtr.getTag().startsWith(tagStartsWith)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public static class RestrictionInfo {
 		public int type;
 		public long toWay;

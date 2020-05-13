@@ -1144,6 +1144,9 @@ public class MapInfoWidgetsFactory {
 					additional.append(key).append("=").append(val).append(";");
 				}
 			}
+			if(name == null || nameTag == null) {
+				return false;
+			}
 
 			Context context = topBar.getContext();
 			int[] tps = object.getTypes();
