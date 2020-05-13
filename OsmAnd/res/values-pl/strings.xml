@@ -1262,8 +1262,8 @@
     <string name="live_monitoring_m">Śledzenie online (wymagane GPX)</string>
     <string name="live_monitoring_start">Rozpocznij śledzenie online</string>
     <string name="live_monitoring_stop">Zakończ śledzenie online</string>
-    <string name="gpx_monitoring_start">Rozpocznij rejestrowanie śladu</string>
-    <string name="gpx_monitoring_stop">Zakończ rejestrowanie śladu</string>
+    <string name="gpx_monitoring_start">Kontynuuj rejestrowanie śladu</string>
+    <string name="gpx_monitoring_stop">Wstrzymaj rejestrowanie śladu</string>
     <string name="gpx_start_new_segment">Rozpocznij nowy segment</string>
     <string name="rendering_attr_hideBuildings_name">Budynki</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Trasy niedostępne dla aut</string>

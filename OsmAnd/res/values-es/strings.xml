@@ -1276,8 +1276,8 @@
     <string name="live_monitoring_m">Seguimiento en línea (requiere GPX)</string>
     <string name="live_monitoring_start">Iniciar seguimiento en línea</string>
     <string name="live_monitoring_stop">Parar seguimiento en línea</string>
-    <string name="gpx_monitoring_start">Iniciar grabación GPX</string>
-    <string name="gpx_monitoring_stop">Parar grabación GPX</string>
+    <string name="gpx_monitoring_start">Continuar grabación GPX</string>
+    <string name="gpx_monitoring_stop">Detener grabación GPX</string>
     <string name="gpx_start_new_segment">Iniciar nuevo segmento</string>
     <string name="lang_fa">Persa</string>
     <string name="lang_al">Albanés</string>

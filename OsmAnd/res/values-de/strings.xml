@@ -1327,8 +1327,8 @@
 \nTrack %2$s</string>
     <string name="gpx_split_interval">Trennungsintervall</string>
     <string name="gpx_info_subtracks">Track-Segmente: %1$s</string>
-    <string name="gpx_monitoring_start">GPX-Aufzeichnung starten</string>
-    <string name="gpx_monitoring_stop">GPX-Aufzeichnung beenden</string>
+    <string name="gpx_monitoring_start">GPX-Aufzeichnung fortsetzen</string>
+    <string name="gpx_monitoring_stop">GPX-Aufzeichnung anhalten</string>
     <string name="gpx_start_new_segment">Neues Segment starten</string>
     <string name="shared_string_waypoint">Wegpunkt</string>
     <string name="gpx_visibility_txt">Sichtbarkeit</string>

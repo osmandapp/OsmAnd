@@ -1247,8 +1247,8 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="live_monitoring_m">On-line sledování (vyžaduje GPX)</string>
     <string name="live_monitoring_start">Spustit on-line sledování</string>
     <string name="live_monitoring_stop">Zastavit on-line sledování</string>
-    <string name="gpx_monitoring_start">Zapnout GPX logování</string>
-    <string name="gpx_monitoring_stop">Zastavit GPX logování</string>
+    <string name="gpx_monitoring_start">Pokračovat v GPX logování</string>
+    <string name="gpx_monitoring_stop">Pozastavit GPX logování</string>
     <string name="gpx_start_new_segment">Začít nový segment</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Cesty, které nejsou pro vozidla</string>
     <string name="rendering_attr_buildings15zoom_name">Budovy při přiblížení 15</string>
