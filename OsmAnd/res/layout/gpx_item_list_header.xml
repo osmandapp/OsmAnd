@@ -39,7 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="fitXY"
-                android:src="@drawable/bg_shadow_list_top"/>
+                osmand:srcCompat="@drawable/bg_shadow_list_top"/>
 
         </LinearLayout>
 
@@ -154,7 +154,7 @@
                     android:id="@+id/split_interval_arrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_action_arrow_drop_down"/>
+                    osmand:srcCompat="@drawable/ic_action_arrow_drop_down"/>
 
             </LinearLayout>
 
@@ -187,7 +187,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/content_padding"
-                    android:src="@drawable/ic_action_circle"
+                    osmand:srcCompat="@drawable/ic_action_circle"
 	                android:paddingStart="@dimen/content_padding" />
 
             </LinearLayout>

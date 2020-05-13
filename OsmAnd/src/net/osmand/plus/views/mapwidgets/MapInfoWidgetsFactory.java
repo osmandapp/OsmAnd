@@ -27,6 +27,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
@@ -1144,6 +1145,9 @@ public class MapInfoWidgetsFactory {
 					additional.append(key).append("=").append(val).append(";");
 				}
 			}
+			if(name == null || nameTag == null) {
+				return false;
+			}
 
 			Context context = topBar.getContext();
 			int[] tps = object.getTypes();
@@ -1196,7 +1200,7 @@ public class MapInfoWidgetsFactory {
 			}
 
 			if (shieldRes != -1) {
-				Drawable shield = ContextCompat.getDrawable(view.getContext(), shieldRes);
+				Drawable shield = AppCompatResources.getDrawable(view.getContext(), shieldRes);
 				if (shield == null) {
 					return false;
 				}

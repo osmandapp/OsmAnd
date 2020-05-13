@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:osmand="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
@@ -24,7 +25,7 @@
             android:focusable="false"
             android:scaleType="centerInside"
             android:tint="?attr/secondary_icon_color"
-            android:src="@drawable/ic_action_item_move"
+            osmand:srcCompat="@drawable/ic_action_item_move"
 	        android:layout_marginEnd="4dp" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -35,7 +36,7 @@
             android:layout_marginRight="8dp"
             android:scaleType="centerInside"
             android:tint="?attr/default_icon_color"
-            android:src="@drawable/ic_action_flag_dark"
+            osmand:srcCompat="@drawable/ic_action_flag_dark"
 	        android:layout_marginEnd="8dp" />
 
         <LinearLayout
@@ -78,7 +79,7 @@
             android:scaleType="centerInside"
             android:tint="?attr/secondary_icon_color"
             android:contentDescription="@string/action_delete"
-            android:src="@drawable/ic_action_remove_dark"/>
+            osmand:srcCompat="@drawable/ic_action_remove_dark"/>
 
     </LinearLayout>
 

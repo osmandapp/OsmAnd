@@ -12,7 +12,9 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
@@ -182,9 +184,12 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 
 	private static Drawable getIcon(final Activity activity, int resId, int color) {
 		OsmandApplication app = (OsmandApplication)activity.getApplication();
-		Drawable d = app.getResources().getDrawable(resId).mutate();
-		d.clearColorFilter();
-		d.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+		Drawable d = AppCompatResources.getDrawable(activity, resId);
+		if (d != null) {
+			d = DrawableCompat.wrap(d).mutate();
+			d.clearColorFilter();
+			d.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+		}
 		return d;
 	}
 }

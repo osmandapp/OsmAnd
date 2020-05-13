@@ -98,7 +98,7 @@
 				android:id="@+id/move_icon"
 				android:layout_width="@dimen/standard_icon_size"
 				android:layout_height="@dimen/standard_icon_size"
-				android:src="@drawable/ic_action_item_move"
+				osmand:srcCompat="@drawable/ic_action_item_move"
 				android:tint="?attr/secondary_icon_color" />
 
 		</FrameLayout>

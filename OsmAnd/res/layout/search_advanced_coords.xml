@@ -88,7 +88,7 @@
                         android:id="@+id/latitudeImage"
                         android:layout_width="54dp"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_action_coordinates_latitude"/>
+                        app:srcCompat="@drawable/ic_action_coordinates_latitude"/>
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -118,7 +118,7 @@
                             android:layout_gravity="end"
                             android:layout_marginRight="4dp"
                             android:contentDescription="@string/shared_string_clear"
-                            android:src="@drawable/ic_action_remove_dark"
+                            app:srcCompat="@drawable/ic_action_remove_dark"
 	                        android:layout_marginEnd="4dp" />
 
                     </FrameLayout>
@@ -136,7 +136,7 @@
                         android:id="@+id/longitudeImage"
                         android:layout_width="54dp"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_action_coordinates_longitude"/>
+                        app:srcCompat="@drawable/ic_action_coordinates_longitude"/>
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -166,7 +166,7 @@
                             android:layout_gravity="end"
                             android:layout_marginRight="4dp"
                             android:contentDescription="@string/shared_string_clear"
-                            android:src="@drawable/ic_action_remove_dark"
+                            app:srcCompat="@drawable/ic_action_remove_dark"
 	                        android:layout_marginEnd="4dp" />
 
                     </FrameLayout>
@@ -185,7 +185,7 @@
                         android:id="@+id/northingImage"
                         android:layout_width="54dp"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_action_coordinates_latitude"/>
+                        app:srcCompat="@drawable/ic_action_coordinates_latitude"/>
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -216,7 +216,7 @@
                             android:layout_gravity="end"
                             android:layout_marginRight="4dp"
                             android:contentDescription="@string/shared_string_clear"
-                            android:src="@drawable/ic_action_remove_dark"
+                            app:srcCompat="@drawable/ic_action_remove_dark"
 	                        android:layout_marginEnd="4dp" />
 
                     </FrameLayout>
@@ -235,7 +235,7 @@
                         android:id="@+id/eastingImage"
                         android:layout_width="54dp"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_action_coordinates_longitude"/>
+                        app:srcCompat="@drawable/ic_action_coordinates_longitude"/>
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -266,7 +266,7 @@
                             android:layout_gravity="end"
                             android:layout_marginRight="4dp"
                             android:contentDescription="@string/shared_string_clear"
-                            android:src="@drawable/ic_action_remove_dark"
+                            app:srcCompat="@drawable/ic_action_remove_dark"
 	                        android:layout_marginEnd="4dp" />
 
                     </FrameLayout>
@@ -312,7 +312,7 @@
                             android:layout_gravity="end"
                             android:layout_marginRight="4dp"
                             android:contentDescription="@string/shared_string_clear"
-                            android:src="@drawable/ic_action_remove_dark"
+                            app:srcCompat="@drawable/ic_action_remove_dark"
 	                        android:layout_marginEnd="4dp" />
 
                     </FrameLayout>
@@ -358,7 +358,7 @@
                             android:layout_gravity="end"
                             android:layout_marginRight="4dp"
                             android:contentDescription="@string/shared_string_clear"
-                            android:src="@drawable/ic_action_remove_dark"
+                            app:srcCompat="@drawable/ic_action_remove_dark"
 	                        android:layout_marginEnd="4dp" />
 
                     </FrameLayout>
@@ -431,7 +431,7 @@
                             android:layout_gravity="end"
                             android:layout_marginRight="4dp"
                             android:contentDescription="@string/coords_format"
-                            android:src="@drawable/ic_action_arrow_drop_down"
+                            app:srcCompat="@drawable/ic_action_arrow_drop_down"
 	                        android:layout_marginEnd="4dp" />
 
                     </FrameLayout>

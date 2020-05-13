@@ -361,7 +361,7 @@ public class PointDescription {
 		if (isAddress()) {
 			iconId = OsmandResources.getDrawableId("ic_action_street_name");
 		} else if (isFavorite()) {
-			iconId = OsmandResources.getDrawableId("ic_type_favorites");
+			iconId = OsmandResources.getDrawableId("ic_action_favorite");
 		} else if (isLocation()) {
 			iconId = OsmandResources.getDrawableId("ic_action_marker_dark");
 		} else if (isPoi()) {

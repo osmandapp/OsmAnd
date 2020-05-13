@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/searchListItemLayout"
     android:layout_width="match_parent"
@@ -22,7 +23,7 @@
         android:layout_marginRight="16dp"
         android:scaleType="centerInside"
         android:tint="?attr/default_icon_color"
-        android:src="@drawable/ic_action_flag_dark"
+        osmand:srcCompat="@drawable/ic_action_flag_dark"
 	    android:layout_marginEnd="16dp" />
 
     <TextView

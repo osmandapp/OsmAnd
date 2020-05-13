@@ -32,7 +32,7 @@
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:scaleType="center"
-                    android:src="@drawable/ic_action_data"/>
+                    osmand:srcCompat="@drawable/ic_action_data"/>
 
                 <Spinner
                     android:id="@+id/monthReportsSpinner"
@@ -51,7 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="16dp"
-                    android:src="@drawable/ic_action_arrow_drop_down"
+                    osmand:srcCompat="@drawable/ic_action_arrow_drop_down"
 	                android:layout_marginEnd="16dp" />
 
             </LinearLayout>
@@ -78,7 +78,7 @@
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:scaleType="center"
-                    android:src="@drawable/ic_world_globe_dark"/>
+                    osmand:srcCompat="@drawable/ic_world_globe_dark"/>
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -110,7 +110,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="16dp"
-                    android:src="@drawable/ic_action_arrow_drop_down"
+                    osmand:srcCompat="@drawable/ic_action_arrow_drop_down"
 	                android:layout_marginEnd="16dp" />
 
             </LinearLayout>
@@ -152,7 +152,7 @@
                         android:layout_width="56dp"
                         android:layout_height="56dp"
                         android:scaleType="center"
-                        android:src="@drawable/ic_group"/>
+                        osmand:srcCompat="@drawable/ic_group"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -203,7 +203,7 @@
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:scaleType="center"
-                    android:src="@drawable/ic_map"/>
+                    osmand:srcCompat="@drawable/ic_map"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -250,7 +250,7 @@
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:scaleType="center"
-                    android:src="@drawable/ic_action_bitcoin"/>
+                    osmand:srcCompat="@drawable/ic_action_bitcoin"/>
 
                 <LinearLayout
                     android:id="@+id/donationsLayout"
@@ -306,7 +306,7 @@
                         android:layout_width="56dp"
                         android:layout_height="56dp"
                         android:scaleType="center"
-                        android:src="@drawable/ic_action_bitcoin"/>
+                        osmand:srcCompat="@drawable/ic_action_bitcoin"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -358,7 +358,7 @@
                     android:layout_width="56dp"
                     android:layout_height="60dp"
                     android:scaleType="center"
-                    android:src="@drawable/ic_group"/>
+                    osmand:srcCompat="@drawable/ic_group"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"

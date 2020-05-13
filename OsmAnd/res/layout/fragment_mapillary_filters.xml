@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
-        android:src="@drawable/bg_shadow_onmap" />
+        osmand:srcCompat="@drawable/bg_shadow_onmap" />
 
     <LinearLayout
         android:id="@+id/mapillary_filters_linear_layout"

@@ -65,7 +65,7 @@
 			android:layout_gravity="center"
 			android:paddingLeft="@dimen/content_padding"
 			android:paddingRight="@dimen/content_padding"
-			android:src="@drawable/ic_action_item_move"
+			osmand:srcCompat="@drawable/ic_action_item_move"
 			android:tint="?attr/secondary_icon_color"
 			android:paddingStart="@dimen/content_padding"
 			android:paddingEnd="@dimen/content_padding" />

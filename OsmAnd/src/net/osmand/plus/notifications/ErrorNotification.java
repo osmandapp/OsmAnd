@@ -53,7 +53,7 @@ public class ErrorNotification extends OsmandNotification {
 	public NotificationCompat.Builder buildNotification(boolean wearable) {
 		String notificationTitle;
 		String notificationText;
-		icon = R.drawable.ic_action_bug_dark;
+		icon = R.drawable.ic_notification_bug;
 		notificationTitle = app.getString(R.string.shared_string_unexpected_error);
 
 		NavigationService service = app.getNavigationService();

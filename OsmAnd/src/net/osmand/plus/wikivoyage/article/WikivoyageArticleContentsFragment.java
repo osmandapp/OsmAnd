@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -56,7 +57,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 
 		items.add(new TitleItem(getString(R.string.shared_string_contents)));
 
-		Drawable transparent = ContextCompat.getDrawable(ctx, R.color.color_transparent);
+		Drawable transparent = AppCompatResources.getDrawable(ctx, R.color.color_transparent);
 		expListView = new ExpandableListView(ctx);
 		expListView.setAdapter(new ExpandableListAdapter(ctx, contentItem));
 		expListView.setDivider(transparent);

@@ -126,7 +126,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:scaleType="fitXY"
-            android:src="@drawable/bg_shadow_onmap"
+            app:srcCompat="@drawable/bg_shadow_onmap"
             android:visibility="gone"/>
 
     </FrameLayout>

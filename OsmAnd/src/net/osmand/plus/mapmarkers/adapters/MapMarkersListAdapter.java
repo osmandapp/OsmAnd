@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.MotionEventCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -155,7 +156,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		}
 
 		if (location != null) {
-			holder.icon.setImageDrawable(ContextCompat.getDrawable(mapActivity, R.drawable.ic_action_location_color));
+			holder.icon.setImageDrawable(AppCompatResources.getDrawable(mapActivity, R.drawable.ic_action_location_color));
 		} else {
 			int res = start ? R.drawable.ic_action_point_start : (finish ? R.drawable.ic_action_point_destination : R.drawable.ic_action_flag_dark);
 			holder.icon.setImageDrawable(iconsCache.getIcon(res, MapMarker.getColorId(marker.colorIndex)));

@@ -11,7 +11,7 @@
 		android:layout_height="wrap_content"
 		android:layout_marginTop="26dp"
 		android:layout_marginBottom="26dp"
-		android:src="@drawable/img_feedback" />
+		osmand:srcCompat="@drawable/img_feedback" />
 
 	<net.osmand.plus.widgets.TextViewEx
 		android:layout_width="match_parent"

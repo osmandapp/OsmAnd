@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:osmand="http://schemas.android.com/apk/res-auto"
 			  xmlns:tools="http://schemas.android.com/tools"
 			  android:layout_width="match_parent"
 			  android:layout_height="wrap_content"
@@ -42,7 +43,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginLeft="@dimen/list_content_padding"
-			android:src="@drawable/ic_action_polygom_dark"
+			osmand:srcCompat="@drawable/ic_action_polygom_dark"
 			android:visibility="visible"
 			android:layout_marginStart="@dimen/list_content_padding" />
 
@@ -80,7 +81,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginRight="@dimen/gpx_small_icon_margin"
-					android:src="@drawable/ic_action_distance_16"
+					osmand:srcCompat="@drawable/ic_action_distance_16"
 					android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
 
 				<TextView
@@ -98,7 +99,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginRight="@dimen/gpx_small_icon_margin"
-					android:src="@drawable/ic_action_waypoint_16"
+					osmand:srcCompat="@drawable/ic_action_waypoint_16"
 					android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
 
 				<TextView
@@ -116,7 +117,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginRight="@dimen/gpx_small_icon_margin"
-					android:src="@drawable/ic_action_time_16"
+					osmand:srcCompat="@drawable/ic_action_time_16"
 					android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
 
 				<TextView
@@ -163,7 +164,7 @@
 			android:layout_height="@dimen/list_item_height"
 			android:layout_marginLeft="@dimen/favorites_icon_right_margin"
 			android:background="?attr/dashboard_button"
-			android:src="@drawable/ic_action_gsave_dark"
+			osmand:srcCompat="@drawable/ic_action_gsave_dark"
 			android:visibility="gone"
 			android:layout_marginStart="@dimen/favorites_icon_right_margin" />
 
@@ -172,7 +173,7 @@
 			android:layout_width="@dimen/list_item_height"
 			android:layout_height="@dimen/list_item_height"
 			android:background="?attr/dashboard_button"
-			android:src="@drawable/ic_action_rec_stop"
+			osmand:srcCompat="@drawable/ic_action_rec_stop"
 			android:visibility="gone"/>
 
 		<ImageButton
@@ -182,7 +183,7 @@
 			android:layout_height="@dimen/list_item_height"
 			android:background="?attr/dashboard_button"
 			android:focusable="false"
-			android:src="@drawable/ic_overflow_menu_white"
+			osmand:srcCompat="@drawable/ic_overflow_menu_white"
 			android:visibility="gone"/>
 
 		<LinearLayout

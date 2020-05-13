@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
 	android:descendantFocusability="blocksDescendants"
@@ -24,7 +25,7 @@
             android:layout_marginRight="@dimen/favorites_icon_right_margin"
             android:paddingTop="6dp"
             android:tint="@color/map_widget_blue"
-            android:src="@drawable/ic_action_osm_live"
+            osmand:srcCompat="@drawable/ic_action_osm_live"
 	        android:layout_marginEnd="@dimen/favorites_icon_right_margin" />
 
         <LinearLayout

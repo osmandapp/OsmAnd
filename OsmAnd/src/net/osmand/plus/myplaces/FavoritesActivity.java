@@ -16,6 +16,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -245,14 +246,16 @@ public class FavoritesActivity extends TabActivity {
 			SearchView.SearchAutoComplete searchEdit = (SearchView.SearchAutoComplete) searchView.findViewById(R.id.search_src_text);
 			searchEdit.setTextColor(activity.getResources().getColor(R.color.color_white));
 			SpannableStringBuilder stopHint = new SpannableStringBuilder("   ");
-			Float rawTextSize = searchEdit.getTextSize();
+			float rawTextSize = searchEdit.getTextSize();
 			int textSize = (int) (rawTextSize * 1.25);
 
 			//setting icon as spannable
-			Drawable searchIcon = activity.getResources().getDrawable(R.drawable.ic_action_search_dark);
-			searchIcon.setBounds(0,0, textSize, textSize);
-			stopHint.setSpan(new ImageSpan(searchIcon), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			searchEdit.setHint(stopHint);
+			Drawable searchIcon = AppCompatResources.getDrawable(activity, R.drawable.ic_action_search_dark);
+			if (searchIcon != null) {
+				searchIcon.setBounds(0, 0, textSize, textSize);
+				stopHint.setSpan(new ImageSpan(searchIcon), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				searchEdit.setHint(stopHint);
+			}
 		} catch (Exception e) {
 			// ignore
 		}

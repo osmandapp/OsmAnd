@@ -17,6 +17,7 @@ import android.util.Pair;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
@@ -146,7 +147,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		wayContext = new GeometryWayContext(view.getContext(), density);
 
 		paintIconSelected = new Paint();
-		selectedPoint = (LayerDrawable) view.getResources().getDrawable(R.drawable.map_location_default);
+		selectedPoint = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), R.drawable.map_location_default);
 
 		paintGridCircle = new Paint();
 		paintGridCircle.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -323,7 +324,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 	private void drawProjectionPoint(Canvas canvas, double[] projectionXY) {
 		if (projectionIcon == null) {
 			helper.getSettings().getApplicationMode().getLocationIcon();
-			projectionIcon = (LayerDrawable) view.getResources().getDrawable(LocationIcon.DEFAULT.getIconId());
+			projectionIcon = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), LocationIcon.DEFAULT.getIconId());
 		}
 		int locationX = (int) projectionXY[0];
 		int locationY = (int) projectionXY[1];

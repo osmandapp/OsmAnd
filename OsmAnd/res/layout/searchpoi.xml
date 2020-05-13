@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -21,7 +22,7 @@
             android:layout_height="@dimen/standard_icon_size"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="8dp"
-            android:src="@android:drawable/ic_search_category_default"
+            osmand:srcCompat="@android:drawable/ic_search_category_default"
 	        android:layout_marginEnd="8dp" />
 
         <!-- to not gain focus everytime  -->
@@ -57,7 +58,7 @@
             android:layout_gravity="center_vertical"
             android:background="?attr/dashboard_button"
             android:scaleType="center"
-            android:src="@drawable/ic_overflow_menu_white" />
+            osmand:srcCompat="@drawable/ic_overflow_menu_white" />
     </LinearLayout>
 
     <ListView

@@ -11,10 +11,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
@@ -82,9 +82,8 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		OsmandApplication app = getMyApplication();
-		OsmandSettings settings = app.getSettings();
-		FragmentActivity activity = getActivity();
+		OsmandApplication app = requireMyApplication();
+		FragmentActivity activity = requireActivity();
 
 		RelativeLayout view = new RelativeLayout(activity);
 		view.setOnClickListener(null);
@@ -93,9 +92,9 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		ImageView logo = new ImageView(getContext());
 		logo.setId(LOGO_ID);
 		if (Version.isFreeVersion(app)) {
-			logo.setImageDrawable(getResources().getDrawable(R.drawable.ic_logo_splash_osmand));
+			logo.setImageDrawable(AppCompatResources.getDrawable(activity, R.drawable.ic_logo_splash_osmand));
 		} else if (Version.isPaidVersion(app) || Version.isDeveloperVersion(app)) {
-			logo.setImageDrawable(getResources().getDrawable(R.drawable.ic_logo_splash_osmand_plus));
+			logo.setImageDrawable(AppCompatResources.getDrawable(activity, R.drawable.ic_logo_splash_osmand_plus));
 		}
 		RelativeLayout.LayoutParams logoLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 		logoLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
@@ -105,17 +104,17 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		text.setId(TEXT_ID);
 		if (Version.isFreeVersion(app)) {
 			if (InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
-				text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand_osmlive));
+				text.setImageDrawable(AppCompatResources.getDrawable(activity, R.drawable.image_text_osmand_osmlive));
 			} else if (InAppPurchaseHelper.isFullVersionPurchased(app)) {
-				text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand_inapp));
+				text.setImageDrawable(AppCompatResources.getDrawable(activity, R.drawable.image_text_osmand_inapp));
 			} else {
-				text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand));
+				text.setImageDrawable(AppCompatResources.getDrawable(activity, R.drawable.image_text_osmand));
 			}
 		} else if (Version.isPaidVersion(app) || Version.isDeveloperVersion(app)) {
 			if (InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
-				text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand_plus_osmlive));
+				text.setImageDrawable(AppCompatResources.getDrawable(activity, R.drawable.image_text_osmand_plus_osmlive));
 			} else {
-				text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand_plus));
+				text.setImageDrawable(AppCompatResources.getDrawable(activity, R.drawable.image_text_osmand_plus));
 			}
 		}
 		RelativeLayout.LayoutParams textLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -124,7 +123,7 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		
 		ImageView osmText = new ImageView(activity);
 		osmText.setId(OSM_TEXT_ID);
-		osmText.setImageDrawable(getResources().getDrawable(R.drawable.image_text_openstreetmap));
+		osmText.setImageDrawable(AppCompatResources.getDrawable(activity, R.drawable.image_text_openstreetmap));
 		RelativeLayout.LayoutParams osmTextLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 		osmTextLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 		osmTextLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);

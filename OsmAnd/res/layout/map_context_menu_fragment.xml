@@ -70,7 +70,7 @@
                     android:layout_width="@dimen/map_widget_icon"
                     android:layout_height="@dimen/map_widget_icon"
                     android:layout_marginTop="@dimen/context_menu_padding_margin_default"
-                    android:src="@drawable/ic_action_building_number"/>
+                    osmand:srcCompat="@drawable/ic_action_building_number"/>
 
             </LinearLayout>
 
@@ -528,7 +528,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/shared_string_collapse"
             android:scaleType="center"
-            android:src="@drawable/ic_arrow_back"
+            osmand:srcCompat="@drawable/ic_arrow_back"
             tools:visibility="visible"/>
 
     </FrameLayout>
@@ -565,7 +565,7 @@
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/shared_string_collapse"
                     android:scaleType="center"
-                    android:src="@drawable/ic_arrow_back"
+                    osmand:srcCompat="@drawable/ic_arrow_back"
                     tools:visibility="visible"/>
 
                 <TextView

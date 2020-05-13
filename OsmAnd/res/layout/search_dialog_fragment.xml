@@ -72,7 +72,7 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:contentDescription="@string/shared_string_share"
-                        android:src="@drawable/ic_action_gshare_dark"/>
+                        app:srcCompat="@drawable/ic_action_gshare_dark"/>
 
                     <ImageButton
                         android:id="@+id/deleteButton"
@@ -80,7 +80,7 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:contentDescription="@string/shared_string_delete"
-                        android:src="@drawable/ic_action_delete_dark"/>
+                        app:srcCompat="@drawable/ic_action_delete_dark"/>
 
                 </LinearLayout>
 
@@ -137,7 +137,7 @@
                         android:layout_width="54dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_action_marker_dark"/>
+                        app:srcCompat="@drawable/ic_action_marker_dark"/>
 
                     <TextView
                         android:id="@+id/buttonToolbarTitle"
@@ -159,7 +159,7 @@
                         android:layout_width="48dp"
                         android:layout_height="match_parent"
                         android:contentDescription="@string/poi_filter_custom_filter"
-                        android:src="@drawable/ic_action_filter"
+                        app:srcCompat="@drawable/ic_action_filter"
                         android:visibility="gone"/>
 
                 </LinearLayout>
@@ -285,7 +285,7 @@
 		android:clickable="true"
 		android:contentDescription="@string/save_filter"
 		android:scaleType="center"
-		android:src="@drawable/ic_action_save"
+		app:srcCompat="@drawable/ic_action_save"
 		tools:layout_marginBottom="@dimen/action_bar_image_top_margin_land"
 		android:layout_marginEnd="@dimen/fab_margin_right" />
 

@@ -65,6 +65,6 @@
         android:layout_height="@dimen/list_item_height"
         android:layout_gravity="center"
         android:background="?attr/dashboard_button"
-        android:src="@drawable/ic_overflow_menu_white"/>
+        osmand:srcCompat="@drawable/ic_overflow_menu_white"/>
 
 </LinearLayout>

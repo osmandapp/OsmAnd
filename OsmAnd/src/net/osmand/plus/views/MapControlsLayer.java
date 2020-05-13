@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
@@ -1148,10 +1149,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 			nightMode = night;
 			if (bgDark != 0 && bgLight != 0) {
 				if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-					iv.setBackground(ctx.getResources().getDrawable(night ? bgDark : bgLight,
-							mapActivity.getTheme()));
+					iv.setBackground(AppCompatResources.getDrawable(mapActivity, night ? bgDark : bgLight));
 				} else {
-					iv.setBackgroundDrawable(ctx.getResources().getDrawable(night ? bgDark : bgLight));
+					iv.setBackgroundDrawable(AppCompatResources.getDrawable(mapActivity, night ? bgDark : bgLight));
 				}
 			}
 			Drawable d = null;

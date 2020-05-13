@@ -30,6 +30,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
@@ -85,7 +86,7 @@ public class UiUtilities {
 		long hash = ((long) resId << 31l) + clrId;
 		Drawable d = drawableCache.get(hash);
 		if (d == null) {
-			d = ContextCompat.getDrawable(app, resId);
+			d = AppCompatResources.getDrawable(app, resId);
 			d = DrawableCompat.wrap(d);
 			d.mutate();
 			if (clrId != 0) {
@@ -100,7 +101,7 @@ public class UiUtilities {
 		long hash = ((long) resId << 31l) + color;
 		Drawable d = drawableCache.get(hash);
 		if (d == null) {
-			d = ContextCompat.getDrawable(app, resId);
+			d = AppCompatResources.getDrawable(app, resId);
 			d = tintDrawable(d, color);
 
 			drawableCache.put(hash, d);
@@ -149,7 +150,7 @@ public class UiUtilities {
 	public static Drawable getSelectableDrawable(Context ctx) {
 		int bgResId = AndroidUtils.resolveAttribute(ctx, R.attr.selectableItemBackground);
 		if (bgResId != 0) {
-			return ContextCompat.getDrawable(ctx, bgResId);
+			return AppCompatResources.getDrawable(ctx, bgResId);
 		}
 		return null;
 	}
@@ -168,7 +169,7 @@ public class UiUtilities {
 	}
 
 	public static Drawable createTintedDrawable(Context context, @DrawableRes int resId, int color) {
-		return tintDrawable(ContextCompat.getDrawable(context, resId), color);
+		return tintDrawable(AppCompatResources.getDrawable(context, resId), color);
 	}
 
 	public static Drawable tintDrawable(Drawable drawable, int color) {
@@ -594,7 +595,7 @@ public class UiUtilities {
 			buttonTextView.setTextColor(colorStateList);
 			buttonTextView.setEnabled(buttonView.isEnabled());
 			if (iconResId != INVALID_ID) {
-				Drawable icon = tintDrawable(ContextCompat.getDrawable(ctx, iconResId), ContextCompat.getColor(ctx, textAndIconColorResId));
+				Drawable icon = tintDrawable(AppCompatResources.getDrawable(ctx, iconResId), ContextCompat.getColor(ctx, textAndIconColorResId));
 				buttonTextView.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
 				buttonTextView.setCompoundDrawablePadding(AndroidUtils.dpToPx(ctx, ctx.getResources().getDimension(R.dimen.content_padding_half)));
 			}

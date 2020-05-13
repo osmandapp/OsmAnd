@@ -68,7 +68,7 @@
                                 android:layout_marginLeft="12dp"
                                 android:layout_marginStart="12dp"
                                 android:scaleType="centerInside"
-                                android:src="@drawable/ic_action_building_number"/>
+                                app:srcCompat="@drawable/ic_action_building_number"/>
 
                         </LinearLayout>
 
@@ -130,7 +130,7 @@
                                 android:layout_marginLeft="@dimen/content_padding_small"
                                 android:layout_marginStart="@dimen/content_padding_small"
                                 android:scaleType="centerInside"
-                                android:src="@drawable/ic_action_building_number"/>
+                                app:srcCompat="@drawable/ic_action_building_number"/>
 
                         </LinearLayout>
 
@@ -196,7 +196,7 @@
                                 android:layout_marginStart="@dimen/content_padding_small"
                                 android:layout_marginTop="10dp"
                                 android:scaleType="center"
-                                android:src="@drawable/ic_action_note_dark"/>
+                                app:srcCompat="@drawable/ic_action_note_dark"/>
 
                         </LinearLayout>
 

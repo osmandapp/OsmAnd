@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -118,7 +119,7 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 
 	private Drawable getIcon() {
 		int id = download ? R.drawable.travel_card_download_icon : R.drawable.travel_card_update_icon;
-		return ContextCompat.getDrawable(app, id);
+		return AppCompatResources.getDrawable(app, id);
 	}
 
 	@NonNull

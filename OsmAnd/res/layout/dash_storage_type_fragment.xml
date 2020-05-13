@@ -69,7 +69,7 @@
                 android:layout_gravity="center_vertical"
                 android:background="?attr/dashboard_button"
                 android:scaleType="center"
-                android:src="@drawable/ic_action_edit_dark"/>
+                osmand:srcCompat="@drawable/ic_action_edit_dark"/>
         </LinearLayout>
     </LinearLayout>
 
