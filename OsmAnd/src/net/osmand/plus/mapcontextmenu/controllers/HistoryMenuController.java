@@ -60,7 +60,7 @@ public class HistoryMenuController extends MenuController {
 	@Override
 	public Drawable getSecondLineTypeIcon() {
 		if (hasTypeInDescription) {
-			return getIcon(R.drawable.ic_small_group);
+			return getIcon(R.drawable.ic_action_group_name_16);
 		} else {
 			return null;
 		}

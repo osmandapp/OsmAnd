@@ -111,7 +111,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="4dp"
                         android:layout_marginTop="4.5dp"
-                        android:src="@drawable/ic_small_group"
+                        android:src="@drawable/ic_action_group_name_16"
 	                    android:layout_marginEnd="4dp" />
 
                     <TextView
@@ -137,7 +137,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="@dimen/gpx_small_icon_margin"
-                        android:src="@drawable/ic_small_time"
+                        android:src="@drawable/ic_action_time_16"
 	                    android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
 
                     <TextView

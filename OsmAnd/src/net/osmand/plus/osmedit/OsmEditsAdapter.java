@@ -273,7 +273,7 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 				}
 			}
 			if (iconResId == 0) {
-				iconResId = R.drawable.ic_type_info;
+				iconResId = R.drawable.ic_action_info_dark;
 			}
 			int colorResId = R.color.color_distance;
 			if (point.getAction() == OsmPoint.Action.CREATE) {
@@ -287,7 +287,7 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 			}
 			return app.getUIUtilities().getIcon(iconResId, colorResId);
 		} else if (point.getGroup() == OsmPoint.Group.BUG) {
-			return app.getUIUtilities().getIcon(R.drawable.ic_type_bug, R.color.color_distance);
+			return app.getUIUtilities().getIcon(R.drawable.ic_action_bug_dark, R.color.color_distance);
 		}
 		return null;
 	}

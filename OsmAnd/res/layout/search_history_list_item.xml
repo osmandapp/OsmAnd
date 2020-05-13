@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_small_group"
+                    android:src="@drawable/ic_action_group_name_16"
 	                android:layout_marginStart="4dp" />
 
                 <TextView
