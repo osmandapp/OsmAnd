@@ -242,7 +242,7 @@ public class NavigationNotification extends OsmandNotification {
 			PendingIntent resumePendingIntent = PendingIntent.getBroadcast(app, 0, resumeIntent,
 					PendingIntent.FLAG_UPDATE_CURRENT);
 			notificationBuilder.addAction(R.drawable.ic_notification_play,
-					app.getString(R.string.shared_string_continue), resumePendingIntent);
+					app.getString(R.string.shared_string_resume), resumePendingIntent);
 		}
 
 		return notificationBuilder;

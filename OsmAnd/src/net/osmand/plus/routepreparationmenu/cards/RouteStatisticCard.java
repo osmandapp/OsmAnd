@@ -164,7 +164,7 @@ public class RouteStatisticCard extends BaseCard {
 		});
 		RoutingHelper helper = app.getRoutingHelper();
 		if (helper.isFollowingMode() || helper.isPauseNavigation()) {
-			startButtonDescr.setText(R.string.shared_string_continue);
+			startButtonDescr.setText(R.string.shared_string_resume);
 		} else {
 			startButtonDescr.setText(R.string.shared_string_control_start);
 		}

@@ -1052,7 +1052,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (publicTransportMode) {
 			startButtonText.setText(R.string.shared_string_show_on_map);
 		} else if (helper.isFollowingMode() || helper.isPauseNavigation()) {
-			startButtonText.setText(R.string.shared_string_continue);
+			startButtonText.setText(R.string.shared_string_resume);
 		} else {
 			startButtonText.setText(R.string.shared_string_control_start);
 		}
