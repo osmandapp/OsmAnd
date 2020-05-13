@@ -292,7 +292,7 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 		if (pd.isAddress()) {
 			iconId = R.drawable.ic_action_street_name;
 		} else if (pd.isFavorite()) {
-			iconId = R.drawable.ic_type_favorites;
+			iconId = R.drawable.ic_action_favorite;
 		} else if (pd.isLocation()) {
 			iconId = R.drawable.ic_action_marker_dark;
 		} else if (pd.isPoi()) {

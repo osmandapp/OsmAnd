@@ -26,7 +26,7 @@ public class SortByMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		items.add(new TitleItem(getString(R.string.shared_string_sort)));
 
 		BaseBottomSheetItem byTypeItem = new SimpleBottomSheetItem.Builder()
-				.setIcon(getContentIcon(R.drawable.ic_groped_by_type))
+				.setIcon(getContentIcon(R.drawable.ic_grouped_by_type))
 				.setTitle(getString(R.string.by_type))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
 				.setOnClickListener(new View.OnClickListener() {
