@@ -66,6 +66,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:scaleType="fitXY"
-        android:src="@drawable/bg_shadow_list_bottom" />
+        app:srcCompat="@drawable/bg_shadow_list_bottom" />
 
 </LinearLayout>

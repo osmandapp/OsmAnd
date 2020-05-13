@@ -67,7 +67,7 @@
                     android:layout_height="48dp"
                     android:layout_marginTop="4dp"
                     android:contentDescription="@string/shared_string_more_actions"
-                    android:src="@drawable/ic_overflow_menu_white"/>
+                    app:srcCompat="@drawable/ic_overflow_menu_white"/>
 
             </LinearLayout>
 
@@ -94,7 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:scaleType="fitXY"
-            android:src="@drawable/bg_shadow_onmap"
+            app:srcCompat="@drawable/bg_shadow_onmap"
             android:visibility="gone"/>
 
     </FrameLayout>

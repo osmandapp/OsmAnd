@@ -26,7 +26,7 @@
 				android:layout_marginLeft="@dimen/content_padding"
 				android:layout_marginRight="@dimen/content_padding"
 				android:layout_gravity="center"
-				android:src="@drawable/mm_storage_tank"
+				osmand:srcCompat="@drawable/mm_storage_tank"
 				tools:tint="?attr/default_icon_color"
 				android:layout_marginEnd="@dimen/content_padding"
 				android:layout_marginStart="@dimen/content_padding" />
@@ -86,7 +86,7 @@
 				android:layout_marginRight="@dimen/content_padding"
 				android:layout_gravity="center"
 				android:visibility="invisible"
-				android:src="@drawable/mm_storage_tank"
+				osmand:srcCompat="@drawable/mm_storage_tank"
 				android:layout_marginEnd="@dimen/content_padding"
 				android:layout_marginStart="@dimen/content_padding" />
 

@@ -21,6 +21,7 @@ import android.util.Pair;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.GPXUtilities;
@@ -178,7 +179,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 		paintIcon = new Paint();
 		pointSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_shield_small);
-		selectedPoint = (LayerDrawable) view.getResources().getDrawable(R.drawable.map_location_default);
+		selectedPoint = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), R.drawable.map_location_default);
 
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 

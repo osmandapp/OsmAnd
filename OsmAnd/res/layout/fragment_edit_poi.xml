@@ -78,7 +78,7 @@
                     android:layout_height="@dimen/context_menu_buttons_bottom_height"
                     android:layout_gravity="bottom"
                     android:background="@null"
-                    android:src="@drawable/ic_action_label"/>
+                    app:srcCompat="@drawable/ic_action_label"/>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/poiTypeTextInputLayout"

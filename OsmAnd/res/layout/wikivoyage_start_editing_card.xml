@@ -44,7 +44,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="@dimen/wikivoyage_explore_card_image_height"
 				android:contentDescription="@string/welcome_to_open_beta"
-				android:src="@drawable/img_help_wikivoyage_contribute" />
+				osmand:srcCompat="@drawable/img_help_wikivoyage_contribute" />
 
 		</LinearLayout>
 

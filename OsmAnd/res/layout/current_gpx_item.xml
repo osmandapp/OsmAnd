@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/list_content_padding"
                 android:layout_marginTop="@dimen/content_padding_small"
-                android:src="@drawable/monitoring_rec_big"
+                osmand:srcCompat="@drawable/monitoring_rec_big"
                 android:visibility="visible"
 	            android:layout_marginStart="@dimen/list_content_padding" />
 
@@ -98,7 +98,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/gpx_small_icon_margin"
-                        android:src="@drawable/ic_small_distance"
+                        osmand:srcCompat="@drawable/ic_small_distance"
 	                    android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
 
                     <TextView
@@ -115,7 +115,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/gpx_small_icon_margin"
-                        android:src="@drawable/ic_small_point"
+                        osmand:srcCompat="@drawable/ic_small_point"
 	                    android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
 
                     <TextView

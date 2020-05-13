@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/warnings_limit"/>
+                osmand:srcCompat="@drawable/warnings_limit"/>
 
             <TextView
                 android:id="@+id/map_alarm_warning_text"

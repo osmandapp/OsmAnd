@@ -130,6 +130,7 @@
 		<attr name="dlg_btn_stroked" format="reference" />
 		<attr name="profile_save_btn" format="reference"/>
 		<attr name="profile_cancel_btn" format="reference"/>
+		<attr name="btn_bg_border_inactive" format="reference"/>
 	</declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">

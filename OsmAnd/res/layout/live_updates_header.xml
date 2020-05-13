@@ -32,7 +32,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_action_osm_live"/>
+                app:srcCompat="@drawable/ic_action_osm_live"/>
 
             <net.osmand.plus.widgets.TextViewEx
                 android:layout_width="wrap_content"
@@ -151,7 +151,7 @@
                     android:id="@+id/statusIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_action_done"/>
+                    app:srcCompat="@drawable/ic_action_done"/>
 
             </LinearLayout>
 

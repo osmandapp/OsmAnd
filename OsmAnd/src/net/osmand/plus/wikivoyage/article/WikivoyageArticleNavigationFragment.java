@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -86,7 +87,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 		final ExpandableListAdapter listAdapter = new ExpandableListAdapter(ctx, navigationMap);
 
 		expListView.setAdapter(listAdapter);
-		Drawable transparent = ContextCompat.getDrawable(ctx, R.color.color_transparent);
+		Drawable transparent = AppCompatResources.getDrawable(ctx, R.color.color_transparent);
 		expListView.setDivider(transparent);
 		expListView.setGroupIndicator(transparent);
 		expListView.setSelector(transparent);

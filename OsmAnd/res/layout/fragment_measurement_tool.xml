@@ -155,7 +155,7 @@
                 android:layout_gravity="bottom"
                 android:alpha="0.5"
                 android:scaleType="fitXY"
-                android:src="@drawable/bg_shadow_onmap"/>
+                osmand:srcCompat="@drawable/bg_shadow_onmap"/>
         </FrameLayout>
 
         <LinearLayout

@@ -52,7 +52,7 @@
 						android:layout_marginLeft="@dimen/list_content_padding"
 						android:layout_marginRight="@dimen/list_content_padding"
 						android:contentDescription="@string/info_button"
-						android:src="@drawable/ic_action_info_dark"
+						osmand:srcCompat="@drawable/ic_action_info_dark"
 						android:layout_marginEnd="@dimen/list_content_padding"
 						android:layout_marginStart="@dimen/list_content_padding" />
 
@@ -108,7 +108,7 @@
 						android:layout_marginLeft="@dimen/list_content_padding"
 						android:layout_marginRight="@dimen/list_content_padding"
 						android:contentDescription="@string/info_button"
-						android:src="@drawable/ic_action_time"
+						osmand:srcCompat="@drawable/ic_action_time"
 						android:layout_marginEnd="@dimen/list_content_padding"
 						android:layout_marginStart="@dimen/list_content_padding" />
 

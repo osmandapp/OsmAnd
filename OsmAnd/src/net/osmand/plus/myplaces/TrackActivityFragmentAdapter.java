@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.ListPopupWindow;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
@@ -894,7 +895,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 	}
 
 	public void openFabMenu(@NonNull Context context) {
-		menuFab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_action_remove_dark));
+		menuFab.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.ic_action_remove_dark));
 		waypointFab.setVisibility(View.VISIBLE);
 		waypointTextLayout.setVisibility(View.VISIBLE);
 		routePointFab.setVisibility(View.VISIBLE);
@@ -905,7 +906,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 	}
 
 	public void closeFabMenu(@NonNull Context context) {
-		menuFab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_action_plus));
+		menuFab.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.ic_action_plus));
 		waypointFab.setVisibility(View.GONE);
 		waypointTextLayout.setVisibility(View.GONE);
 		routePointFab.setVisibility(View.GONE);

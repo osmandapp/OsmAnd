@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
@@ -139,7 +140,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		Context context = view.getContext();
 		contextMarker = new ImageView(context);
 		contextMarker.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-		contextMarker.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.map_pin_context_menu));
+		contextMarker.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.map_pin_context_menu));
 		contextMarker.setClickable(true);
 		int minw = contextMarker.getDrawable().getMinimumWidth();
 		int minh = contextMarker.getDrawable().getMinimumHeight();

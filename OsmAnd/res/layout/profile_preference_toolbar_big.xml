@@ -29,7 +29,7 @@
 				android:layout_width="@dimen/toolbar_height"
 				android:layout_height="@dimen/toolbar_height"
 				android:contentDescription="@string/access_shared_string_navigate_up"
-				android:src="@drawable/ic_arrow_back"
+				osmand:srcCompat="@drawable/ic_arrow_back"
 				android:tint="?attr/default_icon_color" />
 
 			<net.osmand.plus.widgets.TextViewEx
@@ -123,7 +123,7 @@
 				android:layout_gravity="center_vertical"
 				android:layout_marginLeft="@dimen/bottom_sheet_image_text_margin_start"
 				android:layout_marginRight="@dimen/bottom_sheet_image_text_margin_start"
-				android:src="@drawable/ic_action_arrow_down"
+				osmand:srcCompat="@drawable/ic_action_arrow_down"
 				android:tint="?attr/default_icon_color"
 				android:layout_marginStart="@dimen/bottom_sheet_image_text_margin_start"
 				android:layout_marginEnd="@dimen/bottom_sheet_image_text_margin_start" />

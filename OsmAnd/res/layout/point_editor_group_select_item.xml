@@ -26,7 +26,7 @@
 			android:layout_marginStart="@dimen/context_menu_padding_margin_tiny"
 			android:layout_marginEnd="@dimen/context_menu_padding_margin_tiny"
 			android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
-			android:src="@drawable/ic_action_folder" />
+			app:srcCompat="@drawable/ic_action_folder" />
 
 		<TextView
 			android:id="@+id/counter"

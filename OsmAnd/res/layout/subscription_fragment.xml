@@ -19,7 +19,7 @@
             android:layout_width="52dp"
             android:layout_height="52dp"
             android:contentDescription="@string/shared_string_close"
-            android:src="@drawable/ic_action_remove_dark"/>
+            app:srcCompat="@drawable/ic_action_remove_dark"/>
 
         <net.osmand.plus.widgets.TextViewEx
             android:id="@+id/titleTextView"
@@ -76,7 +76,7 @@
                                 android:layout_width="56dp"
                                 android:layout_height="48dp"
                                 android:scaleType="center"
-                                android:src="@drawable/ic_action_osm_live"
+                                app:srcCompat="@drawable/ic_action_osm_live"
                                 android:tint="@color/osmand_orange"/>
 
                             <TextView
@@ -155,7 +155,7 @@
                                 android:layout_width="56dp"
                                 android:layout_height="48dp"
                                 android:scaleType="center"
-                                android:src="@drawable/ic_world_globe_dark"/>
+                                app:srcCompat="@drawable/ic_world_globe_dark"/>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -213,7 +213,7 @@
                                 android:layout_width="56dp"
                                 android:layout_height="48dp"
                                 android:scaleType="center"
-                                android:src="@drawable/ic_action_message"/>
+                                app:srcCompat="@drawable/ic_action_message"/>
 
                             <EditText
                                 android:id="@+id/emailEdit"
@@ -261,7 +261,7 @@
                                     android:layout_width="56dp"
                                     android:layout_height="48dp"
                                     android:scaleType="center"
-                                    android:src="@drawable/ic_action_user"/>
+                                    app:srcCompat="@drawable/ic_action_user"/>
 
                                 <EditText
                                     android:id="@+id/userNameEdit"
