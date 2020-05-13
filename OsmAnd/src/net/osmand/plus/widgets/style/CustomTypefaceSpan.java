@@ -24,8 +24,7 @@ public class CustomTypefaceSpan extends MetricAffectingSpan {
 
 	private void update(TextPaint tp) {
 		Typeface old = tp.getTypeface();
-		int oldStyle = old.getStyle();
-		Typeface font = Typeface.create(typeface, oldStyle);
+		Typeface font = Typeface.create(typeface, old != null ? old.getStyle() : Typeface.NORMAL);
 		tp.setTypeface(font);
 	}
 }

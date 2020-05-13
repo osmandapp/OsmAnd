@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu.controllers;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
@@ -52,7 +53,7 @@ public class MyLocationMenuController  extends MenuController {
 	public Drawable getRightIcon() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			return mapActivity.getResources().getDrawable(R.drawable.ic_action_location_color);
+			return AppCompatResources.getDrawable(mapActivity, R.drawable.ic_action_location_color);
 		} else {
 			return null;
 		}

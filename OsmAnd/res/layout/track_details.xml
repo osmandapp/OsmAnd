@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
     android:id="@+id/plan_route_info"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -43,7 +44,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/list_content_padding"
                         android:layout_marginRight="@dimen/list_content_padding"
-                        android:src="@drawable/ic_action_altitude_average"
+                        osmand:srcCompat="@drawable/ic_action_altitude_average"
 	                    android:layout_marginEnd="@dimen/list_content_padding"
 	                    android:layout_marginStart="@dimen/list_content_padding" />
 
@@ -63,7 +64,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginRight="8dp"
-                        android:src="@drawable/ic_action_arrow_drop_down"
+                        osmand:srcCompat="@drawable/ic_action_arrow_drop_down"
 	                    android:layout_marginEnd="8dp" />
 
                 </LinearLayout>
@@ -91,7 +92,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/list_content_padding"
                         android:layout_marginRight="@dimen/list_content_padding"
-                        android:src="@drawable/ic_action_marker_dark"
+                        osmand:srcCompat="@drawable/ic_action_marker_dark"
 	                    android:layout_marginStart="@dimen/list_content_padding"
 	                    android:layout_marginEnd="@dimen/list_content_padding" />
 
@@ -111,7 +112,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginRight="8dp"
-                        android:src="@drawable/ic_action_arrow_drop_down"
+                        osmand:srcCompat="@drawable/ic_action_arrow_drop_down"
 	                    android:layout_marginEnd="8dp" />
 
                 </LinearLayout>

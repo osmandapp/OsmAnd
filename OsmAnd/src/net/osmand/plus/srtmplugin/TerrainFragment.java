@@ -112,7 +112,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		app = requireMyApplication();
 		settings = app.getSettings();
 		uiUtilities = app.getUIUtilities();
-		nightMode = !settings.isLightContent();
+		nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		srtmPlugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
 		colorProfileRes = settings.getApplicationMode().getIconColorInfo().getColor(nightMode);
 		colorProfile = ContextCompat.getColor(app, colorProfileRes);
@@ -123,8 +123,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		inflater = UiUtilities.getInflater(app, nightMode);
-		View root = inflater.inflate(R.layout.fragment_terrain, container, false);
+		View root = UiUtilities.getInflater(inflater.getContext(), nightMode).inflate(R.layout.fragment_terrain, container, false);
 		TextView emptyStateDescriptionTv = root.findViewById(R.id.empty_state_description);
 		TextView slopeReadMoreTv = root.findViewById(R.id.slope_read_more_tv);
 		TextView titleTv = root.findViewById(R.id.title_tv);

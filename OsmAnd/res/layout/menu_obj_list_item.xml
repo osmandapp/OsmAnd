@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:osmand="http://schemas.android.com/apk/res-auto"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               xmlns:tools="http://schemas.android.com/tools"
@@ -55,7 +56,7 @@
                 android:id="@+id/context_menu_icon_view"
                 android:layout_width="@dimen/standard_icon_size"
                 android:layout_height="@dimen/standard_icon_size"
-                android:src="@drawable/ic_action_building_number"/>
+                osmand:srcCompat="@drawable/ic_action_building_number"/>
 
         </LinearLayout>
 

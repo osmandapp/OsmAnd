@@ -204,16 +204,16 @@
                         android:layout_marginRight="@dimen/measurement_tool_button_margin"
                         android:layout_marginTop="@dimen/measurement_tool_button_margin"
                         android:background="?attr/btn_round"
-                        android:drawableLeft="@drawable/ic_action_plus"
-                        android:maxLines="1"
+						osmand:drawableLeftCompat="@drawable/ic_action_plus"
+						osmand:drawableStartCompat="@drawable/ic_action_plus"
+						android:maxLines="1"
                         android:minHeight="@dimen/measurement_tool_button_height"
                         android:paddingLeft="@dimen/measurement_tool_button_padding"
                         android:paddingRight="@dimen/measurement_tool_button_padding"
                         android:text="@string/shared_string_add"
                         android:textColor="@color/color_white"
 	                    android:paddingEnd="@dimen/measurement_tool_button_padding"
-	                    android:paddingStart="@dimen/measurement_tool_button_padding"
-	                    android:drawableStart="@drawable/ic_action_plus" />
+	                    android:paddingStart="@dimen/measurement_tool_button_padding" />
                 </FrameLayout>
 
             </LinearLayout>
@@ -316,15 +316,15 @@
                     android:layout_marginRight="@dimen/measurement_tool_button_margin"
                     android:layout_marginTop="@dimen/measurement_tool_button_margin"
                     android:background="?attr/btn_round"
-                    android:drawableLeft="@drawable/ic_action_plus"
+					osmand:drawableLeftCompat="@drawable/ic_action_plus"
+					osmand:drawableStartCompat="@drawable/ic_action_plus"
                     android:minHeight="@dimen/measurement_tool_button_height"
                     android:paddingLeft="@dimen/measurement_tool_button_padding"
                     android:paddingRight="@dimen/measurement_tool_button_padding"
                     android:text="@string/shared_string_add"
                     android:textColor="@color/color_white"
 	                android:paddingStart="@dimen/measurement_tool_button_padding"
-	                android:paddingEnd="@dimen/measurement_tool_button_padding"
-	                android:drawableStart="@drawable/ic_action_plus" />
+	                android:paddingEnd="@dimen/measurement_tool_button_padding" />
             </LinearLayout>
 
         </LinearLayout>

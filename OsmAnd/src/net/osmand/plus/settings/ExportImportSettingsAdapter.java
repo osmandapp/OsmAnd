@@ -216,7 +216,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 			case POI_TYPES:
 				title.setText(((PoiUIFilter) currentItem).getName());
 				int iconRes = RenderingIcons.getBigIconResourceId(((PoiUIFilter) currentItem).getIconId());
-				setupIcon(icon, iconRes != 0 ? iconRes : R.drawable.ic_person, itemSelected);
+				setupIcon(icon, iconRes != 0 ? iconRes : R.drawable.ic_action_user, itemSelected);
 				subText.setVisibility(View.GONE);
 				break;
 			case MAP_SOURCES:

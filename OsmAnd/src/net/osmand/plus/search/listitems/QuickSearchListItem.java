@@ -262,12 +262,12 @@ public class QuickSearchListItem {
 		switch (searchResult.objectType) {
 			case FAVORITE:
 			case FAVORITE_GROUP:
-				return app.getUIUtilities().getThemedIcon(R.drawable.ic_small_group);
+				return app.getUIUtilities().getThemedIcon(R.drawable.ic_action_group_name_16);
 			case RECENT_OBJ:
 				HistoryEntry historyEntry = (HistoryEntry) searchResult.object;
 				String typeName = historyEntry.getName().getTypeName();
 				if (typeName != null && !typeName.isEmpty()) {
-					return app.getUIUtilities().getThemedIcon(R.drawable.ic_small_group);
+					return app.getUIUtilities().getThemedIcon(R.drawable.ic_action_group_name_16);
 				} else {
 					return null;
 				}

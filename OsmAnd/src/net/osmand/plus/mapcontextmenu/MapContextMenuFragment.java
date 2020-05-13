@@ -39,6 +39,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -869,10 +870,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		if (mapActivity != null) {
 			button.setImageDrawable(mapActivity.getMyApplication().getUIUtilities().getIcon(night ? iconDarkId : iconLightId));
 			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-				button.setBackground(mapActivity.getResources().getDrawable(night ? bgDarkId : bgLightId,
-						mapActivity.getTheme()));
+				button.setBackground(AppCompatResources.getDrawable(mapActivity, night ? bgDarkId : bgLightId));
 			} else {
-				button.setBackgroundDrawable(mapActivity.getResources().getDrawable(night ? bgDarkId : bgLightId));
+				button.setBackgroundDrawable(AppCompatResources.getDrawable(mapActivity, night ? bgDarkId : bgLightId));
 			}
 		}
 	}

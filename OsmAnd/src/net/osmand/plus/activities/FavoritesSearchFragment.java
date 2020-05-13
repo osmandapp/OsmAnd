@@ -28,6 +28,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
@@ -319,7 +320,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 			this.activity = activity;
 			this.helper = app.getFavorites();
 			location = app.getSettings().getLastKnownMapLocation();
-			arrowImage = ContextCompat.getDrawable(activity, R.drawable.ic_direction_arrow);
+			arrowImage = AppCompatResources.getDrawable(activity, R.drawable.ic_direction_arrow);
 			arrowImage.mutate();
 			arrowImage.setColorFilter(ContextCompat.getColor(activity, R.color.color_distance), PorterDuff.Mode.MULTIPLY);
 		}

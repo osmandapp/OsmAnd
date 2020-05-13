@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:osmand="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
@@ -53,7 +54,7 @@
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="44dp"
                 android:layout_height="44dp"
-                android:src="@drawable/ic_action_remove_dark"
+                osmand:srcCompat="@drawable/ic_action_remove_dark"
                 tools:background="@color/color_warning"/>
 
         </LinearLayout>
@@ -91,7 +92,7 @@
                         android:layout_height="56dp"
                         android:paddingRight="@dimen/content_padding"
                         android:scaleType="center"
-                        android:src="@drawable/ic_action_phone"
+                        osmand:srcCompat="@drawable/ic_action_phone"
                         tools:background="@color/color_warning"
 	                    android:paddingEnd="@dimen/content_padding" />
 
@@ -143,7 +144,7 @@
                         android:layout_height="56dp"
                         android:paddingRight="@dimen/content_padding"
                         android:scaleType="center"
-                        android:src="@drawable/ic_action_phone"
+                        osmand:srcCompat="@drawable/ic_action_phone"
                         tools:background="@color/color_warning"
 	                    android:paddingEnd="@dimen/content_padding" />
 
@@ -192,7 +193,7 @@
                         android:layout_height="56dp"
                         android:paddingRight="@dimen/content_padding"
                         android:scaleType="center"
-                        android:src="@drawable/ic_sdcard"
+                        osmand:srcCompat="@drawable/ic_sdcard"
                         tools:background="@color/color_warning"
 	                    android:paddingEnd="@dimen/content_padding" />
 

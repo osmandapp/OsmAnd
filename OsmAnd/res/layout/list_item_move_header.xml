@@ -32,7 +32,7 @@
 			android:paddingBottom="@dimen/bottom_sheet_icon_margin"
 			android:visibility="gone"
 			tools:visibility="visible"
-			android:src="@drawable/ic_action_item_move"
+			osmand:srcCompat="@drawable/ic_action_item_move"
 			android:tint="?attr/secondary_icon_color" />
 
 		<LinearLayout
@@ -85,7 +85,7 @@
 			tools:visibility="visible"
 			android:paddingRight="@dimen/content_padding"
 			android:paddingBottom="@dimen/bottom_sheet_icon_margin"
-			android:src="@drawable/ic_action_item_move"
+			osmand:srcCompat="@drawable/ic_action_item_move"
 			android:tint="?attr/secondary_icon_color" />
 
 	</LinearLayout>

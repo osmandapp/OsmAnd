@@ -2222,7 +2222,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="routing_attr_driving_style_balance_name">Ekvilibra</string>
     <string name="routing_attr_driving_style_safety_name">Preferi flankajn vojojn</string>
     <string name="routing_attr_relief_smoothness_factor_name">Elekti variecon de altitudo</string>
-    <string name="full_version_thanks">Dankon al ci por aĉeti la pagan version de OsmAnd!</string>
+    <string name="full_version_thanks">Dankon al vi por aĉeti la pagan version de OsmAnd!</string>
     <string name="parking_options">Parkumadaj agordoj</string>
     <string name="do_not_send_anonymous_app_usage">Ne sendi anoniman statistikon pri uzado</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd kolektas informojn pri uzataj partoj de la aplikaĵo. Via pozicio neniam estas sendata, nek ion ajn, kion vi entajpas en la aplikaĵo nek detaloj pri ejoj foliumataj, serĉataj aŭ elŝutataj.</string>
@@ -2350,7 +2350,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="restore_purchases">Restarigi aĉetaĵojn</string>
     <string name="shared_string_visible">Videbla</string>
     <string name="analyze_on_map">Analizi sur mapo</string>
-    <string name="sea_depth_thanks">Dankon al ci por aĉeti marajn profundec-kurbojn!</string>
+    <string name="sea_depth_thanks">Dankon al vi por aĉeti marajn profundec-kurbojn!</string>
     <string name="index_item_depth_contours_osmand_ext">Maraj profundec-kurboj</string>
     <string name="index_item_depth_points_southern_hemisphere">Maraj profundec-kurboj de suda duonsfero</string>
     <string name="index_item_depth_points_northern_hemisphere">Maraj profundec-kurboj de norda duonsfero</string>
@@ -3568,10 +3568,10 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_terrain">Tereno</string>
     <string name="slope_download_description">Kromaj mapoj estas necesaj por vidigi deklivecon sur la mapo.</string>
     <string name="slope_read_more">Pliaj informoj pri dekliveco en %1$s.</string>
-    <string name="terrain_empty_state_text">Aktivigu por vidigi nivelombrumon (reliefon) aŭ deklivecon. Pliaj informoj pri tiuj ĉi tipoj de mapoj troviĝas ĉe nia retpaĝo</string>
+    <string name="terrain_empty_state_text">Aktivigu por vidigi nivelombrumon (reliefon) aŭ deklivecon. Pliaj informoj pri tiuj ĉi tipoj de mapoj troviĝas sur nia retpaĝo.</string>
     <string name="download_slope_maps">Dekliveco</string>
     <string name="hillshade_description">Uzas tonojn de grizo por vidigi altaĵojn, montpintojn kaj malaltaĵojn.</string>
-    <string name="slope_description">Kolorigas mapon laŭ angulo de dekliveco.</string>
+    <string name="slope_description">Uzas kolorojn por vidigi angulon de dekliveco.</string>
     <string name="terrain_slider_description">Agordi minimuman kaj maksimuman pligrandigojn inter kiuj la tavolo estos montrata.</string>
     <string name="hillshade_download_description">Kromaj mapoj estas necesaj por vidigi tavolon de nivelombrumo.</string>
     <string name="shared_string_transparency">Travideblo</string>
@@ -3656,7 +3656,11 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="extra_maps_menu_group">Kromaj mapoj</string>
     <string name="download_unsupported_action">Nesubtenata ago %1$s</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="osm_live_payment_subscription_management">La pago estos prenita el via konto Google Play kiam aĉeti abonon kaj kiam ĝi malvalidiĝos (por monato/tri monatoj/jaro), kaj ne renoviĝos aŭtomate post esti rezignita per agordoj de Google Play.</string>
+    <string name="osm_live_payment_subscription_management">La pago estos prenita el via konto Google Play post konfirmi aĉeton.
+\n
+\n La abono aŭtomate renoviĝos escepte se ĝi estos nuligita antaŭ la dato de renoviĝo. La pago estos prenita por la renoviĝa periodo (monato/tri monatoj/jaro) nur je la data de renoviĝo.
+\n
+\n Vi povas administri kaj rezigni viajn abonojn per agordoj de Google Play.</string>
     <string name="search_poi_types_descr">Miksi specojn de interesejoj el diversaj kategorioj. Frapetu “ŝaltilon” por elekti ĉiujn, frapetu ĉe maldekstre por elekti el la kategorio.</string>
     <string name="search_poi_types">Serĉi specojn de interesejoj</string>
     <string name="favorites_item">Ŝatataj ejoj</string>
@@ -3671,4 +3675,33 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="map_markers_item">Map‑markoj</string>
     <string name="legend_item_description">Priskribo al simboloj sur la mapo</string>
     <string name="navigation_profiles_item">Profiloj de navigo</string>
+    <string name="release_3_7">• novaj mapoj de dekliveco por malkonekta uzado
+\n 
+\n • plena alĝustigo de ŝatataj punktoj kaj GPX‑navigadpunktoj: propraj koloroj, emblemoj kaj formoj
+\n 
+\n • reordigi elementojn de la kunteksta menuo, menuo “konfiguri mapon” kaj tirmenuo
+\n 
+\n • Vikipedio kiel aparta tavolo vidigebla per la menuo “konfiguri mapon”, eblo elekti nur bezonatajn lingvojn
+\n 
+\n • krei viajn proprajn filtrilojn/mapojn de interesejoj, tute agordeblaj
+\n 
+\n • restarigi agordojn por propraj profiloj
+\n 
+\n • plenaj GPX‑spuroj en navigo, subteno por instrukcioj pri (voj)koridoroj kaj turnoj
+\n 
+\n • riparita grando de fasado ĉe tabulkomputiloj
+\n 
+\n • riparitaj eraroj pri lingvoj skribataj dekstre-maldekstren
+\n
+\n</string>
+    <string name="additional_actions_descr">Vi povas ekigi tiujn agojn per frapeti la butonon “%1$s”.</string>
+    <string name="quick_action_transport_hide">Kaŝi publikan transporton</string>
+    <string name="quick_action_transport_show">Montri publikan transporton</string>
+    <string name="quick_action_show_hide_transport">Montri/kaŝi publikan transporton</string>
+    <string name="quick_action_transport_descr">Butono por montri/kaŝi publikan transporton sur la mapo.</string>
+    <string name="create_edit_poi">Krei/redakti interesejon</string>
+    <string name="add_edit_favorite">Aldoni/forigi ŝatatan ejojn</string>
+    <string name="parking_positions">Pozicioj de parkumado</string>
+    <string name="reset_deafult_order">Restarigi implicitan ordigon de elementoj</string>
+    <string name="back_to_editing">Reen al redaktado</string>
 </resources>

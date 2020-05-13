@@ -35,7 +35,7 @@
 				android:layout_marginEnd="@dimen/content_padding"
 				android:contentDescription="@string/access_shared_string_navigate_up"
 				android:scaleType="fitCenter"
-				android:src="@drawable/ic_arrow_back" />
+				app:srcCompat="@drawable/ic_arrow_back" />
 
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/toolbar_title"

@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
@@ -793,7 +794,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		updateMyLocation(rh, routeDialogOpened || trackDialogOpened || contextMenuOpened);
 		boolean showButtons = (showRouteCalculationControls || !routeFollowingMode)
 				&& !isInMovingMarkerMode() && !isInGpxDetailsMode() && !isInMeasurementToolMode() && !isInPlanRouteMode() && !contextMenuOpened && !isInChoosingRoutesMode() && !isInWaypointsChoosingMode();
-		//routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_gabout_dark : R.drawable.map_directions);
+		//routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_info_dark : R.drawable.map_directions);
 		int routePlanningBtnImage = mapRouteInfoMenu.getRoutePlanningBtnImage();
 		if (routePlanningBtnImage != 0) {
 			routePlanningBtn.setIconResId(routePlanningBtnImage);
@@ -1148,10 +1149,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 			nightMode = night;
 			if (bgDark != 0 && bgLight != 0) {
 				if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-					iv.setBackground(ctx.getResources().getDrawable(night ? bgDark : bgLight,
-							mapActivity.getTheme()));
+					iv.setBackground(AppCompatResources.getDrawable(mapActivity, night ? bgDark : bgLight));
 				} else {
-					iv.setBackgroundDrawable(ctx.getResources().getDrawable(night ? bgDark : bgLight));
+					iv.setBackgroundDrawable(AppCompatResources.getDrawable(mapActivity, night ? bgDark : bgLight));
 				}
 			}
 			Drawable d = null;

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -34,7 +35,7 @@
 				android:layout_marginEnd="@dimen/list_content_padding_large"
 				android:layout_marginRight="@dimen/list_content_padding_large"
 				android:layout_marginBottom="@dimen/content_padding"
-				android:src="@drawable/ic_action_arrow_down" />
+				osmand:srcCompat="@drawable/ic_action_arrow_down" />
 
 			<LinearLayout
 				android:layout_width="0dp"

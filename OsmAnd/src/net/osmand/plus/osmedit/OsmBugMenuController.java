@@ -79,9 +79,9 @@ public class OsmBugMenuController extends MenuController {
 	@Override
 	public Drawable getRightIcon() {
 		if (bug.isOpened()) {
-			return getIcon(R.drawable.ic_action_gabout_dark, R.color.osm_bug_unresolved_icon_color);
+			return getIcon(R.drawable.ic_action_info_dark, R.color.osm_bug_unresolved_icon_color);
 		} else {
-			return getIcon(R.drawable.ic_action_gabout_dark, R.color.osm_bug_resolved_icon_color);
+			return getIcon(R.drawable.ic_action_info_dark, R.color.osm_bug_resolved_icon_color);
 		}
 	}
 

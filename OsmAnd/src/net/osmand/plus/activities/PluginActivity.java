@@ -16,9 +16,11 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
@@ -72,6 +74,8 @@ public class PluginActivity extends OsmandActionBarActivity  implements Download
 		if (pluginImage != null) {
 			ImageView img = (ImageView) findViewById(R.id.plugin_image);
 			img.setImageDrawable(pluginImage);
+		} else {
+			findViewById(R.id.plugin_image_placeholder).setVisibility(View.VISIBLE);
 		}
 
 		TextView descriptionView = (TextView) findViewById(R.id.plugin_description);

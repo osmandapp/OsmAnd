@@ -87,7 +87,7 @@ public class UsersReportFragment extends BaseOsmAndDialogFragment {
 
 	@DrawableRes
 	protected int getListItemIcon() {
-		return R.drawable.ic_person;
+		return R.drawable.ic_action_user;
 	}
 
 	@Override

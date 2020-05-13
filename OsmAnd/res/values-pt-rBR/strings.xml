@@ -1996,7 +1996,7 @@ Pôr do Sol: %2$s</string>
     <string name="date_added">Adicionado</string>
     <string name="order_by">Ordenar por:</string>
     <string name="marker_show_distance_descr">Selecionar como indicar distância e orientação para marcadores de mapa no mapa:</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Selecione a velocidade em que a orientação muda de \'Na direção do movimento\' para \'Na direção da bússola\'.</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Selecione a velocidade em que a orientação muda de \'Na direção do movimento\' para \'direção da bússola\'.</string>
     <string name="all_markers_moved_to_history">Todos os marcadores de mapa foram movidas para o histórico</string>
     <string name="marker_moved_to_history">O marcador de mapa foi movido para o histórico</string>
     <string name="marker_moved_to_active">O marcador de mapa foi movido para ativo</string>
@@ -3570,7 +3570,7 @@ Pôr do Sol: %2$s</string>
     <string name="recalculate_route_in_deviation">Recalcular rota em caso de desvio</string>
     <string name="shared_string_terrain">Terreno</string>
     <string name="hillshade_description">Mapa de sombras de relevo usando tons escuros para mostrar encostas, picos e planícies.</string>
-    <string name="slope_description">A inclinação é visualizações coloridas no terreno.</string>
+    <string name="slope_description">A inclinação usa cores para visualizar a inclinação do terreno.</string>
     <string name="terrain_slider_description">Defina os níveis mínimo e máximo de zoom nos quais a camada será exibida.</string>
     <string name="hillshade_download_description">Mapas adicionais são necessários para visualizar sombras de relevo no mapa.</string>
     <string name="slope_download_description">Mapas adicionais são necessários para visualizar as Inclinações no mapa.</string>
@@ -3578,7 +3578,7 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_transparency">Transparência</string>
     <string name="shared_string_zoom_levels">Níveis de zoom</string>
     <string name="shared_string_legend">Legenda</string>
-    <string name="terrain_empty_state_text">Ative para visualizar mapa de colinas ou declives. Você pode ler mais sobre esses tipos de mapa em nosso site</string>
+    <string name="terrain_empty_state_text">Ativar para visualizar mapa de colinas ou declives. Você pode ler mais sobre esses tipos de mapa em nosso site.</string>
     <string name="shared_string_hillshade">Sombras de relevo</string>
     <string name="n_items_of_z">%1$s de %2$s</string>
     <string name="download_slope_maps">Encostas</string>
@@ -3599,7 +3599,7 @@ Pôr do Sol: %2$s</string>
     <string name="custom_osmand_plugin">Plug-in OsmAnd personalizado</string>
     <string name="replace_point_descr">Substitua outro ponto por este</string>
     <string name="changes_applied_to_profile">Alterações aplicadas ao perfil \'%1$s\'.</string>
-    <string name="settings_item_read_error">"Não foi possível ler a partir de  \'%1$s\'."</string>
+    <string name="settings_item_read_error">Não foi possível ler a partir de \'%1$s\'.</string>
     <string name="settings_item_write_error">Não foi possível escrever para \'%1$s\'.</string>
     <string name="settings_item_import_error">Não foi possível importar de \'%1$s\'.</string>
     <string name="select_track_file">Selecionar arquivo de faixa</string>
@@ -3658,9 +3658,11 @@ Pôr do Sol: %2$s</string>
     <string name="extra_maps_menu_group">Mapas extras</string>
     <string name="download_unsupported_action">Ação não suportada %1$s</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="osm_live_payment_subscription_management">Sua conta do Google Play é cobrada mediante a compra de uma assinatura
-\ne quando expirar (mês/três meses/ano),
-\nele não será renovado se for cancelado antes pelas configurações do Google Play.</string>
+    <string name="osm_live_payment_subscription_management">O pagamento será cobrado na sua conta do Google Play na confirmação da compra.
+\n
+\n  A assinatura é renovada automaticamente, a menos que seja cancelada antes da data de renovação. Sua conta será cobrada pelo período de renovação (mês/três meses/ano) somente na data de renovação.
+\n
+\n  Você pode gerenciar e cancelar suas assinaturas acessando as configurações do Google Play.</string>
     <string name="search_poi_types">Pesquisar tipos de POI</string>
     <string name="search_poi_types_descr">Combine tipos de PIs de diferentes categorias. Toque em \"Alternar\" para selecionar todos, toque no lado esquerdo para selecionar a categoria.</string>
     <string name="tracker_item">Rastreador do OsmAnd</string>
@@ -3675,4 +3677,33 @@ Pôr do Sol: %2$s</string>
     <string name="osmand_purchases_item">Compras de OsmAnd</string>
     <string name="legend_item_description">O guia para a simbologia de um mapa</string>
     <string name="navigation_profiles_item">Perfis de navegação</string>
+    <string name="release_3_7">• Novos mapas de inclinação offline
+\n
+\n  • Personalização completa de Favoritos e Waypoints GPX - cores, ícones e formas personalizados
+\n
+\n  • Personalize a ordem dos itens no menu de contexto, configurar mapa, gaveta
+\n
+\n  • Wikipédia como uma camada separada no mapa Configurar, selecione apenas os idiomas necessários
+\n
+\n  • Crie seu próprio filtro / mapa de POI com total flexibilidade
+\n
+\n  • Adicionadas opções para restaurar configurações de perfis personalizados
+\n
+\n  • Rotas GPX completas das faixas de tráfego da Navigation Support e instruções completas de curva
+\n
+\n  • Corrigir tamanhos de interface do usuário em tablets
+\n
+\n  • Corrija bugs com RTL
+\n
+\n</string>
+    <string name="additional_actions_descr">Você pode acessar essas ações tocando no botão “%1$s”.</string>
+    <string name="quick_action_transport_hide">Ocultar transporte público</string>
+    <string name="quick_action_transport_show">Mostrar transporte público</string>
+    <string name="quick_action_show_hide_transport">Mostrar/ocultar transporte público</string>
+    <string name="quick_action_transport_descr">Um botão para mostrar ou ocultar o transporte público no mapa.</string>
+    <string name="create_edit_poi">Criar/Editar POI</string>
+    <string name="parking_positions">Posições de estacionamento</string>
+    <string name="add_edit_favorite">Adicionar / Editar favorito</string>
+    <string name="reset_deafult_order">Restaurar ordem de itens padrão</string>
+    <string name="back_to_editing">Voltar à edição</string>
 </resources>

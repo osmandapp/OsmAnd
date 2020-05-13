@@ -58,7 +58,7 @@ public class RenderedObjectMenuController extends MenuController {
 		if (renderedObject.getIconRes() != null && RenderingIcons.containsBigIcon(renderedObject.getIconRes())) {
 			return RenderingIcons.getBigIconResourceId(renderedObject.getIconRes());
 		} else {
-			return R.drawable.ic_type_address;
+			return R.drawable.ic_action_street_name;
 		}
 	}
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -23,7 +24,7 @@
             android:layout_marginRight="4dp"
             android:focusable="false"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_action_reorder"
+            osmand:srcCompat="@drawable/ic_action_item_move"
             android:tint="?attr/secondary_icon_color"
 	        android:layout_marginEnd="4dp" />
 
@@ -35,7 +36,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_map"
+            osmand:srcCompat="@drawable/ic_map"
 	        android:layout_marginStart="16dp"
 	        android:layout_marginEnd="16dp" />
 
@@ -58,7 +59,7 @@
             android:layout_gravity="center_vertical"
             android:background="?attr/selectableItemBackground"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_action_remove_dark"
+            osmand:srcCompat="@drawable/ic_action_remove_dark"
             android:contentDescription="@string/action_delete"
             android:tint="?attr/secondary_icon_color" />
 

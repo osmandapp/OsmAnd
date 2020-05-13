@@ -706,9 +706,10 @@ public class MapActivityActions implements DialogProvider {
 	public ContextMenuAdapter createMainOptionsMenu() {
 		final OsmandMapTileView mapView = mapActivity.getMapView();
 		final OsmandApplication app = mapActivity.getMyApplication();
-		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter(app);
 		boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		
+		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter(app);
+		optionsMenuHelper.setNightMode(nightMode);
+
 		if (drawerMode == DRAWER_MODE_SWITCH_PROFILE) {
 			return createSwitchProfileOptionsMenu(app, optionsMenuHelper, nightMode);
 		}
@@ -764,7 +765,7 @@ public class MapActivityActions implements DialogProvider {
 					}
 				})
 				.createItem());
-		
+
 		return optionsMenuHelper;
 	}
 

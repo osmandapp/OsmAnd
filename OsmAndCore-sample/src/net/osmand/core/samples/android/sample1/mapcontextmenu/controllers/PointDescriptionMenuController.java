@@ -51,7 +51,7 @@ public class PointDescriptionMenuController extends MenuController {
 	@Override
 	public Drawable getSecondLineTypeIcon() {
 		if (hasTypeInDescription) {
-			return getIcon(OsmandResources.getDrawableId("ic_small_group"));
+			return getIcon(OsmandResources.getDrawableId("ic_action_group_name_16"));
 		} else {
 			return null;
 		}
