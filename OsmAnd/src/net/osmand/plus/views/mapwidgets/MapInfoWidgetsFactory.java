@@ -1132,8 +1132,6 @@ public class MapInfoWidgetsFactory {
 		}
 
 		private boolean setRoadShield(ImageView view, RouteDataObject object) {
-			String nameTag = null;
-			String name = null;
 			StringBuilder additional = new StringBuilder();
 			for (int i = 0; i < object.nameIds.length; i++) {
 				String key = object.region.routeEncodingRules.get(object.nameIds[i]).getTag();
