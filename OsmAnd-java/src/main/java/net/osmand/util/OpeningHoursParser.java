@@ -1024,10 +1024,14 @@ public class OpeningHoursParser {
 
 		@Override
 		public String toRuleString() {
-			return toRuleString(daysStr, monthsStr);
+			return toRuleString(false);
 		}
 
-		private String toRuleString(String[] dayNames, String[] monthNames) {
+		private String toRuleString(boolean useLocalization) {
+			String[] dayNames = useLocalization ? localDaysStr : daysStr;
+			String[] monthNames = useLocalization ? localMothsStr : monthsStr;
+			String offStr = useLocalization ? additionalStrings.get("off") : "off";
+
 			StringBuilder b = new StringBuilder(25);
 			boolean allMonths = true;
 			for (int i = 0; i < months.length; i++) {
@@ -1160,7 +1164,7 @@ public class OpeningHoursParser {
 					b.append("24/7 ");
 				}
 				if (off) {
-					b.append(additionalStrings.get("off"));
+					b.append(offStr);
 				}
 			} else {
 				if (isOpened24_7()) {
@@ -1182,7 +1186,7 @@ public class OpeningHoursParser {
 						formatTime(enHour, enTime, b);
 					}
 					if (off) {
-						b.append(" ").append(additionalStrings.get("off"));
+						b.append(" ").append(offStr);
 					}
 				}
 			}
@@ -1238,7 +1242,7 @@ public class OpeningHoursParser {
 
 		@Override
 		public String toLocalRuleString() {
-			return toRuleString(localDaysStr, localMothsStr);
+			return toRuleString(true);
 		}
 
 		@Override
