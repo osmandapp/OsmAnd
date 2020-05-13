@@ -3817,4 +3817,9 @@
     <string name="poi_drinking_water_refill_yes">飲用水填充：是</string>
     <string name="poi_drinking_water_refill_no">飲用水填充：否</string>
     <string name="poi_drinking_water_refill_network">飲用水填充網路</string>
+    <string name="poi_osmand_fire_hydrant_pressure_suction">吸力</string>
+    <string name="poi_osmand_fire_hydrant_pressure_pressurized">加壓</string>
+    <string name="poi_fire_hydrant_style_water_source_groundwater">地下水</string>
+    <string name="poi_fire_hydrant_type_pipe">管線</string>
+    <string name="poi_fire_hydrant_pressure_filter">壓力</string>
 </resources>

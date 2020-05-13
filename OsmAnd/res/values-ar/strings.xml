@@ -194,7 +194,7 @@
     <string name="route_to">إلى :</string>
     <string name="route_via">بواسطة:</string>
     <string name="route_from">من :</string>
-    <string name="app_mode_default">استعراض الخريطة</string>
+    <string name="app_mode_default">استعراض</string>
     <string name="settings_preset">الوضع الافتراضي</string>
     <string name="context_menu_item_destination_point">تعيينه وجهة</string>
     <string name="please_select_address">اختر المدينة أو الشارع الأول</string>
