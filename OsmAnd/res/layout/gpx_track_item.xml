@@ -92,6 +92,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/gpx_small_text_margin"
+                    android:maxLines="1"
                     android:includeFontPadding="false"
                     android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/default_sub_text_size"
@@ -111,6 +112,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/gpx_small_text_margin"
                     android:includeFontPadding="false"
+                    android:maxLines="1"
                     android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/default_sub_text_size"
 	                android:layout_marginEnd="@dimen/gpx_small_text_margin" />
@@ -128,6 +130,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/gpx_small_text_margin"
+                    android:maxLines="1"
                     android:textColor="?android:textColorSecondary"
                     android:includeFontPadding="false"
                     android:textSize="@dimen/default_sub_text_size"
@@ -147,7 +150,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="?android:textColorSecondary"
-                    android:textSize="@dimen/default_sub_text_size"/>
+                    android:maxLines="1"
+                    android:textSize="@dimen/default_sub_text_size" />
 
             </LinearLayout>
 
