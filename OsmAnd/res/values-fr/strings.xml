@@ -3697,4 +3697,9 @@ représentant la zone : %1$s x %2$s</string>
     <string name="add_edit_favorite">Ajouter / Modifier un favori</string>
     <string name="reset_deafult_order">Rétablir l\'ordre par défaut des éléments</string>
     <string name="back_to_editing">Retour en modification</string>
+    <string name="quick_action_switch_profile_descr">Appuyer sur le bouton d’action basculera entre les profils sélectionnés.</string>
+    <string name="profiles_for_action_not_found">Les profils sélectionnés pour cette action sont introuvables.</string>
+    <string name="shared_string_resume">Reprendre</string>
+    <string name="shared_string_add_profile">Ajouter un profil</string>
+    <string name="change_application_profile">Modifier le profil d\'application</string>
 </resources>
