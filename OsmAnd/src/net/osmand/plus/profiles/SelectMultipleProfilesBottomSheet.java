@@ -34,14 +34,12 @@ public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet
 	public static final String DISABLED_KEYS = "disabled_keys";
 
 	private List<ProfileDataObject> profiles = new ArrayList<>();
-	private Map<String, CompoundButton> compoundButtons = new HashMap<>();
 	private List<String> selectedProfiles;
 	private List<String> disabledProfiles;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		compoundButtons.clear();
 		Bundle args = getArguments();
 		if (savedInstanceState != null) {
 			readBundle(savedInstanceState);
@@ -63,19 +61,6 @@ public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet
 			String key = profile.getStringKey();
 			profile.setSelected(selectedProfiles.contains(key));
 			profile.setEnabled(!disabledProfiles.contains(key));
-		}
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		for (ProfileDataObject profile : profiles) {
-			String key = profile.getStringKey();
-			boolean selected = selectedProfiles.contains(key);
-			CompoundButton cb = compoundButtons.get(key);
-			if (cb != null) {
-				cb.setChecked(selected);
-			}
 		}
 	}
 
@@ -118,7 +103,8 @@ public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet
 		ivIcon.setImageDrawable(drawableIcon);
 		UiUtilities.setupCompoundButton(nightMode, ContextCompat.getColor(app,
 				enable ? activeColorId : disableColorId), compoundButton);
-		compoundButtons.put(profile.getStringKey(), compoundButton);
+		compoundButton.setSaveEnabled(false);
+		compoundButton.setChecked(profile.isSelected());
 
 		View.OnClickListener l = !enable ? null : new View.OnClickListener() {
 			@Override
