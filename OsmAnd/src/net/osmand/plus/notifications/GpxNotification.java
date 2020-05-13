@@ -173,7 +173,7 @@ public class GpxNotification extends OsmandNotification {
 			Intent startIntent = new Intent(OSMAND_START_GPX_SERVICE_ACTION);
 			PendingIntent startPendingIntent = PendingIntent.getBroadcast(app, 0, startIntent,
 					PendingIntent.FLAG_UPDATE_CURRENT);
-			if (recordedDistance > 0) {
+			if (app.getSavingTrackHelper().getTrkPoints() > 0) {
 				notificationBuilder.addAction(R.drawable.ic_notification_rec_start,
 						app.getString(R.string.shared_string_resume), startPendingIntent);
 				notificationBuilder.addAction(R.drawable.ic_notification_save,
