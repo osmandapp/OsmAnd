@@ -2,17 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="?attr/selectableItemBackground"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:orientation="vertical">
 
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="?attr/dashboard_divider"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/container"
@@ -68,7 +68,7 @@
                 android:layout_gravity="start"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/default_list_text_size"
-                tools:text="@string/current_track"/>
+                tools:text="@string/current_track" />
 
             <LinearLayout
                 android:id="@+id/read_section"
@@ -151,7 +151,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="?android:textColorSecondary"
                     android:maxLines="1"
-                    android:textSize="@dimen/default_sub_text_size"/>
+                    android:textSize="@dimen/default_sub_text_size" />
 
             </LinearLayout>
 
@@ -161,7 +161,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/default_sub_text_size"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -181,7 +181,7 @@
             android:layout_height="@dimen/list_item_height"
             android:background="?attr/dashboard_button"
             app:srcCompat="@drawable/ic_action_rec_stop"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <ImageButton
             android:id="@+id/options"
@@ -191,7 +191,7 @@
             android:background="?attr/dashboard_button"
             android:focusable="false"
             app:srcCompat="@drawable/ic_overflow_menu_white"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/check_item"
