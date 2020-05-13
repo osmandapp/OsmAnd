@@ -67,7 +67,7 @@
 					android:layout_marginTop="1dp"
 					android:layout_marginEnd="4dp"
 					android:layout_marginRight="4dp"
-					osmand:srcCompat="@drawable/ic_small_group" />
+					osmand:srcCompat="@drawable/ic_action_group_name_16" />
 
 				<TextView
 					android:id="@+id/subtitle"

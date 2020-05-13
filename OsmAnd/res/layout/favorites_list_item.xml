@@ -118,7 +118,7 @@
                     android:layout_marginStart="@dimen/list_item_button_padding"
                     android:layout_marginLeft="@dimen/list_item_button_padding"
                     android:contentDescription="@string/favorite_category_name"
-                    osmand:srcCompat="@drawable/ic_small_group" />
+                    osmand:srcCompat="@drawable/ic_action_group_name_16" />
 
                 <TextView
                     android:id="@+id/group_name"

@@ -3544,4 +3544,8 @@
     <string name="map_markers_item">Kartmarkører</string>
     <string name="measure_distance_item">Mål avstand</string>
     <string name="travel_item">Reising (Wikivoyage og Wikipedia)</string>
+    <string name="navigation_profiles_item">Navigasjonsprofiler</string>
+    <string name="quick_action_transport_hide">Skjul offentlig transport</string>
+    <string name="quick_action_transport_show">Vis offentlig transport</string>
+    <string name="back_to_editing">Tilbake til redigering</string>
 </resources>

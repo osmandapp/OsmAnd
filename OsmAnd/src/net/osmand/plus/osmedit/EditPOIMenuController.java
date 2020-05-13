@@ -178,11 +178,11 @@ public class EditPOIMenuController extends MenuController {
 				}
 			}
 			if (iconResId == 0) {
-				iconResId = R.drawable.ic_type_info;
+				iconResId = R.drawable.ic_action_info_dark;
 			}
 			return iconResId;
 		} else if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
-			return R.drawable.ic_type_bug;
+			return R.drawable.ic_action_bug_dark;
 		} else {
 			return 0;
 		}

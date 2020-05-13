@@ -3580,7 +3580,7 @@
     <string name="n_items_of_z">%1$s из %2$s</string>
     <string name="terrain_slider_description">Настройка минимального и максимального уровней масштабирования, при которых слой будет отображаться.</string>
     <string name="quick_action_show_hide_terrain">Показать/скрыть рельеф</string>
-    <string name="quick_action_terrain_descr">Кнопка для отображения или скрытия слоя рельефа местности на карте.</string>
+    <string name="quick_action_terrain_descr">Переключатель, чтобы отобразить или скрыть слой рельефа местности на карте.</string>
     <string name="quick_action_terrain_show">Показать рельеф</string>
     <string name="quick_action_terrain_hide">Скрыть рельеф</string>
     <string name="shared_string_terrain">Рельеф</string>
@@ -3600,7 +3600,7 @@
     <string name="live_monitoring_adress_descr">Укажите веб-адрес со следующими параметрами: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_min_accuracy_descr">В этом случае будут записываться только точки, измеренные с минимальной точностью (в метрах/футах согласно настройкам устройства). Точность относится к разбросу повторяющихся измерений и не связана непосредственно с точностью, которая определяет, насколько ваши измерения близки к вашему истинному положению.</string>
     <string name="monitoring_min_speed_descr_recommendation">Рекомендация: попробуйте сначала воспользоваться детектором движения через фильтр минимального смещения (B), что может дать лучшие результаты и вы потеряете меньше данных. Если треки остаются шумными на низких скоростях, попробуйте использовать ненулевые значения. Обратите внимание, что некоторые измерения могут вообще не указывать значения скорости (некоторые сетевые методы), и в этом случае ничего не будет записываться.</string>
-    <string name="slope_description">Склон выделяется цветовой визуализацией на рельефе местности.</string>
+    <string name="slope_description">Склон использует цвета для визуализации крутизны.</string>
     <string name="slope_read_more">Подробнее о склонах можно прочитать в %1$s.</string>
     <string name="shared_string_hillshade">Затенение рельефа</string>
     <string name="hillshade_description">Затенение рельефа использует тёмные оттенки для отображения склонов, вершин и низменностей.</string>
@@ -3668,7 +3668,9 @@
     <string name="download_unsupported_action">Неподдерживаемое действие %1$s</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="osm_live_payment_subscription_management">Оплата будет списана со счёта, привязанного к вашему аккаунту Google Play, при подтверждении покупки. 
+\n
 \nПодписка продлевается автоматически, если вы не отмените её до даты продления. С вашего счёта будет взиматься плата за период продления (месяц/три месяца/год) разово в день продления. 
+\n
 \nВы можете управлять подписками и отменять их в настройках Google Play.</string>
     <string name="search_poi_types_descr">Можно объединить типы POI из разных категорий. Нажмите «Переключить», чтобы выбрать все; нажмите слева, чтобы выбрать категорию.</string>
     <string name="search_poi_types">Поиск типов POI</string>
@@ -3703,4 +3705,14 @@
 \n • Исправлены ошибки для языков, пишущихся справа налево
 \n
 \n</string>
+    <string name="additional_actions_descr">Доступ к этим действиям можно получить, нажав кнопку «%1$s».</string>
+    <string name="quick_action_transport_hide">Скрыть общественный транспорт</string>
+    <string name="quick_action_transport_show">Показать общественный транспорт</string>
+    <string name="quick_action_show_hide_transport">Показать/скрыть общественный транспорт</string>
+    <string name="add_edit_favorite">Добавить/редактировать избранные</string>
+    <string name="create_edit_poi">Создать/редактировать POI</string>
+    <string name="back_to_editing">Возврат к редактированию</string>
+    <string name="parking_positions">Место стоянки</string>
+    <string name="quick_action_transport_descr">Переключатель, чтобы отобразить или скрыть общественный транспорт на карте.</string>
+    <string name="reset_deafult_order">Восстановить исходный порядок</string>
 </resources>

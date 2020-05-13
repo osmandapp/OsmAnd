@@ -3582,7 +3582,7 @@ Lon %2$s</string>
     <string name="n_items_of_z">%1$s de %2$s</string>
     <string name="shared_string_terrain">Terreno</string>
     <string name="hillshade_description">Mapa de sombreado usando sombras oscuras para mostrar las laderas, picos y tierras bajas.</string>
-    <string name="slope_description">La pendiente se visualiza en colores sobre el terreno.</string>
+    <string name="slope_description">La pendiente utiliza colores para visualizar la inclinación del terreno.</string>
     <string name="terrain_slider_description">Define los niveles de zoom mínimo y máximo en los que se mostrará la capa.</string>
     <string name="hillshade_download_description">Se necesitan mapas adicionales para ver el sombreado en el mapa.</string>
     <string name="slope_download_description">Se necesitan mapas adicionales para ver las pendientes en el mapa.</string>
@@ -3590,7 +3590,7 @@ Lon %2$s</string>
     <string name="shared_string_transparency">Transparencia</string>
     <string name="shared_string_zoom_levels">Niveles de zoom</string>
     <string name="shared_string_legend">Leyenda</string>
-    <string name="terrain_empty_state_text">Permite ver el sombreado o el mapa de pendientes. Puedes leer más sobre estos tipos de mapas en nuestro sitio</string>
+    <string name="terrain_empty_state_text">Permite ver el sombreado o el mapa de pendientes. Puedes leer más sobre estos tipos de mapas en nuestro sitio.</string>
     <string name="shared_string_hillshade">Sombreado</string>
     <string name="download_slope_maps">Pendientes</string>
     <string name="quick_action_show_hide_terrain">Mostrar/ocultar terreno</string>
@@ -3674,9 +3674,11 @@ Lon %2$s</string>
     <string name="extra_maps_menu_group">Mapas adicionales</string>
     <string name="download_unsupported_action">Acción «%1$s» no admitida</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="osm_live_payment_subscription_management">La cuenta de Google Play se carga al comprar una suscripción
-\ny al expirar (mes/trimestre/año),
-\nno se renovará si se cancela antes de esa fecha en los ajustes de Google Play.</string>
+    <string name="osm_live_payment_subscription_management">El pago será cargado a la cuenta de Google Play al confirmar la compra.
+\n
+\nLa suscripción se renueva automáticamente a menos que se cancele antes de la fecha de renovación. La cuenta será cargada por el período de renovación (mes/trimestre/año) sólo en la fecha de renovación.
+\n
+\nPuedes administrar y cancelar las suscripciones accediendo a los ajustes de Google Play.</string>
     <string name="search_poi_types">Buscar por tipos de PDI</string>
     <string name="search_poi_types_descr">Combina tipos de PDI de diferentes categorías. Pulsa «Alternar» para marcar todo, pulsa el lado izquierdo para elegir una categoría.</string>
     <string name="tracker_item">OsmAnd Tracker</string>
@@ -3710,4 +3712,14 @@ Lon %2$s</string>
 \n • Se corrigieron los errores con RTL
 \n
 \n</string>
+    <string name="additional_actions_descr">Puedes acceder a estas acciones pulsando el botón «%1$s».</string>
+    <string name="quick_action_transport_hide">Ocultar transporte público</string>
+    <string name="quick_action_transport_show">Mostrar transporte público</string>
+    <string name="quick_action_show_hide_transport">Mostrar/ocultar transporte público</string>
+    <string name="quick_action_transport_descr">Un botón que muestra u oculta el transporte público en el mapa.</string>
+    <string name="create_edit_poi">Crear/Editar PDI</string>
+    <string name="parking_positions">Puestos de estacionamiento</string>
+    <string name="add_edit_favorite">Añadir / Editar favorito</string>
+    <string name="reset_deafult_order">Restaurar el orden de los elementos predefinidos</string>
+    <string name="back_to_editing">Volver a la edición</string>
 </resources>

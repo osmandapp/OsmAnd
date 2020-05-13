@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/list_content_padding"
             android:layout_marginTop="@dimen/favorites_icon_top_margin"
-            osmand:srcCompat="@drawable/ic_gpx_track"
+            osmand:srcCompat="@drawable/ic_action_polygom_dark"
             android:visibility="gone"
 	        android:layout_marginStart="@dimen/list_content_padding" />
 

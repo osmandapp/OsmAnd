@@ -31,7 +31,7 @@
         android:layout_marginEnd="@dimen/favorites_icon_right_margin"
         android:layout_marginRight="@dimen/favorites_icon_right_margin"
         android:focusable="false"
-        osmand:srcCompat="@drawable/ic_gpx_track" />
+        osmand:srcCompat="@drawable/ic_action_polygom_dark" />
 
     <LinearLayout
         android:layout_width="0dp"

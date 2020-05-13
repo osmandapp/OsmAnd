@@ -290,7 +290,7 @@
     </style>
 
     <style name="OverflowMenuButton" parent="@style/Widget.AppCompat.ActionButton.Overflow">
-        <item name="android:src">@drawable/ic_overflow_menu_white</item>
+        <item name="srcCompat">@drawable/ic_overflow_menu_white</item>
     </style>
 
     <style name="PopupMenuLight" parent="@style/Widget.AppCompat.Light.PopupMenu">
