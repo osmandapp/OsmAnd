@@ -19,6 +19,7 @@ import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
+import net.osmand.binary.OsmandOdb.IncompleteTransportRoute;
 import net.osmand.binary.OsmandOdb.MapDataBlock;
 import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapDataBox;
 import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapEncodingRule;
@@ -54,6 +55,7 @@ import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -110,7 +112,8 @@ public class BinaryMapIndexReader {
 	/*private*/ List<RouteRegion> routingIndexes = new ArrayList<RouteRegion>();
 	/*private*/ List<BinaryIndexPart> indexes = new ArrayList<BinaryIndexPart>();
 	
-	private final TLongObjectHashMap<int[]> incompleteRoutes = new TLongObjectHashMap<int[]>();
+	private final TLongObjectHashMap<net.osmand.data.IncompleteTransportRoute> incompleteRoutes = 
+			new TLongObjectHashMap<net.osmand.data.IncompleteTransportRoute>();
 	
 	protected CodedInputStream codedIS;
 
@@ -225,7 +228,7 @@ public class BinaryMapIndexReader {
 				ind.filePointer = codedIS.getTotalBytesRead();
 				if (transportAdapter != null) {
 					oldLimit = codedIS.pushLimit(ind.length);
-					transportAdapter.readTransportIndex(ind);
+					transportAdapter.readTransportIndex(ind, incompleteRoutes);
 					codedIS.popLimit(oldLimit);
 					transportIndexes.add(ind);
 					indexes.add(ind);
@@ -2633,8 +2636,11 @@ public class BinaryMapIndexReader {
 		}
 	}
 
-	public int[] getIncompleteRoutesPointers(long id) {
+	public net.osmand.data.IncompleteTransportRoute getIncompleteRoutePointers(long id) {
 		return incompleteRoutes.get(id);
+	}
+	public Collection<net.osmand.data.IncompleteTransportRoute> getIncompleteRoutes() {
+		return incompleteRoutes.valueCollection();
 	}
 
 

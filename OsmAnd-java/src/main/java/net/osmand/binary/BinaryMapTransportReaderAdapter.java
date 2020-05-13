@@ -1,15 +1,20 @@
 package net.osmand.binary;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.WireFormat;
 
+import gnu.trove.list.array.TLongArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
+import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.binary.OsmandOdb.IncompleteTransportRoute;
 import net.osmand.data.TransportSchedule;
 import net.osmand.data.TransportStop;
 import net.osmand.data.TransportStopExit;
@@ -43,6 +48,8 @@ public class BinaryMapTransportReaderAdapter {
 
 		int stopsFileOffset = 0;
 		int stopsFileLength = 0;
+		int incompleteRoutesOffset = 0;
+		int incompleteRoutesLength = 0;
 		
 		public String getPartName() {
 			return "Transport";
@@ -67,7 +74,8 @@ public class BinaryMapTransportReaderAdapter {
 		public int getBottom() {
 			return bottom;
 		}
-
+		
+		
 		IndexStringTable stringTable = null;
 	}
 
@@ -79,7 +87,7 @@ public class BinaryMapTransportReaderAdapter {
 	}
 	
 	
-	protected void readTransportIndex(TransportIndex ind) throws IOException {
+	protected void readTransportIndex(TransportIndex ind, TLongObjectHashMap<net.osmand.data.IncompleteTransportRoute> incompleteRoutes) throws IOException {
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -108,6 +116,16 @@ public class BinaryMapTransportReaderAdapter {
 				ind.stringTable = st;
 				codedIS.seek(st.length + st.fileOffset);
 				break;
+			case OsmandOdb.OsmAndTransportIndex.INCOMPLETEROUTES_FIELD_NUMBER :
+				TIntObjectHashMap<String> stab = new TIntObjectHashMap<String>();
+				ind.incompleteRoutesLength = codedIS.readRawVarint32();
+				ind.incompleteRoutesOffset = codedIS.getTotalBytesRead();
+				int oldl = codedIS.pushLimit(ind.incompleteRoutesLength);
+				//may be we should start caching stringTable in advance?
+				readIncompleteRoutesList(incompleteRoutes, ind.incompleteRoutesLength, ind.incompleteRoutesOffset, stab);
+				codedIS.popLimit(oldl);
+				break;
+				
 			default:
 				skipUnknownField(t);
 				break;
@@ -238,6 +256,73 @@ public class BinaryMapTransportReaderAdapter {
 	private String regStr(TIntObjectHashMap<String> stringTable, int i) throws IOException{
 		stringTable.putIfAbsent(i, "");
 		return ((char) i)+"";
+	}
+	
+	private void readIncompleteRoutesList(TLongObjectHashMap<net.osmand.data.IncompleteTransportRoute> incompleteRoutes,
+			int length, int offset,  TIntObjectHashMap<String> stringTable) throws IOException {
+		codedIS.seek(offset);
+		
+		List<net.osmand.data.IncompleteTransportRoute> irs = new ArrayList<>();
+		boolean end = false;
+		while (!end) {
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				end = true;
+				break;
+			case OsmandOdb.IncompleteTransportRoutes.ROUTES_FIELD_NUMBER:
+				int l = codedIS.readRawVarint32();
+				int olds = codedIS.pushLimit(l);
+				net.osmand.data.IncompleteTransportRoute ir = readIncompleteRoute(stringTable);
+				incompleteRoutes.put(ir.getRouteId(), ir);
+				codedIS.popLimit(olds);
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+			
+		}
+		
+	}
+	
+	public net.osmand.data.IncompleteTransportRoute readIncompleteRoute(TIntObjectHashMap<String> stringTable) throws IOException {
+		net.osmand.data.IncompleteTransportRoute dataObject = new net.osmand.data.IncompleteTransportRoute();
+		boolean end = false;
+		while(!end){
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				end = true;
+				break;
+			case OsmandOdb.IncompleteTransportRoute.ID_FIELD_NUMBER :
+				dataObject.setRouteId(codedIS.readUInt64());
+				break;
+			case OsmandOdb.IncompleteTransportRoute.ROUTEREF_FIELD_NUMBER :
+				dataObject.setRouteOffset(codedIS.readRawVarint32());
+				break;
+			case OsmandOdb.IncompleteTransportRoute.OPERATOR_FIELD_NUMBER :
+				dataObject.setOperator(regStr(stringTable));
+				break;
+			case OsmandOdb.IncompleteTransportRoute.REF_FIELD_NUMBER :
+				dataObject.setRef(regStr(stringTable));
+				break;
+			case OsmandOdb.IncompleteTransportRoute.TYPE_FIELD_NUMBER :
+				dataObject.setType(regStr(stringTable));
+				break;
+			case OsmandOdb.IncompleteTransportRoute.MISSINGSTOPS_FIELD_NUMBER :
+////				dataObject.getMissingStops().add(codedIS.readSInt32()); //skip for now
+				skipUnknownField(t);
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+		
+		return dataObject;
 	}
 	
 	public net.osmand.data.TransportRoute getTransportRoute(int filePointer, TIntObjectHashMap<String> stringTable,

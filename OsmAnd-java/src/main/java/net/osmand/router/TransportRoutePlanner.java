@@ -23,6 +23,7 @@ import net.osmand.NativeLibrary;
 import net.osmand.binary.BinaryIndexPart;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.data.IncompleteTransportRoute;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.TransportRoute;
@@ -707,7 +708,7 @@ public class TransportRoutePlanner {
 		public RouteCalculationProgress calculationProgress;
 		public TLongObjectHashMap<TransportRouteSegment> visitedSegments = new TLongObjectHashMap<TransportRouteSegment>();
 		public TransportRoutingConfiguration cfg;
-		public TLongObjectHashMap<TransportRoute> combinedRoutes = new TLongObjectHashMap<TransportRoute>();
+		public TLongObjectHashMap<TransportRoute> combinedRoutesCache = new TLongObjectHashMap<TransportRoute>();
 		public Map<TransportStop, List<TransportRoute>> missingStopsCache = new HashMap<TransportStop, List<TransportRoute>>();
 		
 		public TLongObjectHashMap<List<TransportRouteSegment>> quadTree;
@@ -926,55 +927,31 @@ public class TransportRoutePlanner {
 		}
 		
 		private TransportRoute getCombinedRoute(TransportRoute route, String fileName) throws IOException {
-			if (!route.getForwardStops().get(0).isMissingStop() && !route.getForwardStops().get(route.getForwardStops().size()-1).isMissingStop()) {
+			if (!route.isIncomplete()) {
 				return route;
 			}
 
-			TransportRoute c = combinedRoutes.get(route.getId());
+			TransportRoute c = combinedRoutesCache.get(route.getId());
 
 			if (c == null) {
 				c = combineRoute(route, fileName);
-				combinedRoutes.put(route.getId(), c);
+				combinedRoutesCache.put(route.getId(), c);
 			}
 			
 			return c;
 		} 
 		
-		private TIntObjectHashMap<TransportRoute> findIncompleteRouteParts(TransportRoute baseRoute, String fileName) throws IOException {
-			int ptrs[];
-			TIntObjectHashMap<TransportRoute> res = new TIntObjectHashMap<TransportRoute>();
-			TIntObjectHashMap<TransportRoute> localRes = new TIntObjectHashMap<TransportRoute>();
-//			TODO check if valid comparsion by filename
-			for (BinaryMapIndexReader bmir: routeMap.keySet()) {
-				if (!bmir.getFile().getName().equals(fileName)) {
-					/**
-					 *  What about situation when one route has several parts in map? 
-					 *  MB check all readers and then sort it out?
-					 * 
-					 *  Should I check if those routes already loaded? But they shouldn't, 
-					 *  else we will already had a combined route and never get there!				
-					 */
-					localRes.clear();
-					ptrs = bmir.getIncompleteRoutesPointers(baseRoute.getId());
-					if (ptrs != null && ptrs.length > 0) {
-						localRes = bmir.getTransportRoutes(ptrs);
-						
-						res.putAll(localRes);
-					}
-				}	
-			}
-			return res;
-		}
-		 
-		
 		private TransportRoute combineRoute(TransportRoute route, String fileName) throws IOException {
 			TransportRoute cr = new TransportRoute(route, true);
-			TIntObjectHashMap<TransportRoute> res = findIncompleteRouteParts(route, fileName);
-//			for () {
-				//TODO check for duplicates and subsets
-				//TODO connect in right order
+			Collection<TransportRoute> res = findIncompleteRouteParts(route, fileName);
+			List<TransportStop> stops = route.getForwardStops();
+ 			List<Way> ways = route.getForwardWays();
+			for (TransportRoute tr : res.valueCollection()) {
 				
-//			}
+				//TODO check for duplicates and subsets
+				//TODO connect routes in right order (stops/ways)
+				
+			}
 //			TransportRoute missingPart;
 //			if (route.getForwardStops().get(0).isMissingStop()) {
 //				missingPart = loadMissingTransportRoute(
@@ -994,6 +971,35 @@ public class TransportRoutePlanner {
 			
 			return cr;
 		}
+		
+		private Collection<TransportRoute> findIncompleteRouteParts(TransportRoute baseRoute, String fileName) throws IOException {
+			IncompleteTransportRoute ptr;
+			TIntObjectHashMap<TransportRoute> res = new TIntObjectHashMap<TransportRoute>();
+			TIntObjectHashMap<TransportRoute> localRes = new TIntObjectHashMap<TransportRoute>();
+//			TODO check if valid comparison by filename
+			for (BinaryMapIndexReader bmir: routeMap.keySet()) {
+				if (!bmir.getFile().getName().equals(fileName)) {
+					/**
+					 *  What about situation when one route has several parts in map? 
+					 *  MB check all readers and then sort it out?
+					 * 
+					 *  Should I check if those routes already loaded? But they shouldn't, 
+					 *  else we will already had a combined route and never get there!				
+					 */
+					localRes.clear();
+					ptr = bmir.getIncompleteRoutePointers(baseRoute.getId());
+					if (ptr!= null && ptr.getRouteOffset() != -1) {
+						localRes = bmir.getTransportRoutes(new int[] {ptr.getRouteOffset()});
+						
+						res.putAll(localRes);
+					}
+				}	
+			}
+			return res.valueCollection();
+		}
+		 
+		
+
 		
 
 		
@@ -1239,5 +1245,4 @@ public class TransportRoutePlanner {
 		}
 		return stops;
 	}
-
 }

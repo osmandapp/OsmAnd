@@ -63,6 +63,10 @@ public class TransportRoute extends MapObject {
 		return combined;
 	}
 
+	public boolean isIncomplete() {
+		return forwardStops.get(0).isMissingStop() || forwardStops.get(forwardStops.size()-1).isMissingStop(); 
+	}
+	
 	public void setCombined(boolean combined) {
 		this.combined = combined;
 	}
