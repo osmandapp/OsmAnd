@@ -39,6 +39,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	private transient EditText title;
 
+	private transient Adapter adapter;
 	private transient ItemTouchHelper touchHelper;
 
 	protected SwitchableAction(QuickActionType type) {
@@ -73,7 +74,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		});
 
 		RecyclerView list = (RecyclerView) view.findViewById(R.id.list);
-		Adapter adapter = new Adapter(activity, new QuickActionListFragment.OnStartDragListener() {
+		adapter = new Adapter(activity, new QuickActionListFragment.OnStartDragListener() {
 			@Override
 			public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
 				touchHelper.startDrag(viewHolder);
@@ -113,6 +114,10 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		if (hasParams) saveListToParams(adapter.itemsList);
 
 		return hasParams;
+	}
+
+	protected Adapter getAdapter() {
+		return adapter;
 	}
 
 	public abstract List<T> loadListFromParams();
@@ -327,4 +332,8 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	protected abstract String getListKey();
 
 	protected abstract View.OnClickListener getOnAddBtnClickListener(MapActivity activity, final Adapter adapter);
+
+	protected void onItemsSelected(Context ctx, List<T> selectedItems) {
+
+	}
 }

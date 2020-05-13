@@ -23,16 +23,19 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
 import net.osmand.AndroidUtils;
+import net.osmand.CallbackWithObject;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 
+import java.util.List;
+
 /**
  * Created by rosty on 12/27/16.
  */
 
-public class CreateEditActionDialog extends DialogFragment {
+public class CreateEditActionDialog extends DialogFragment implements CallbackWithObject<Object> {
 
     public static final String TAG = CreateEditActionDialog.class.getSimpleName();
 
@@ -253,5 +256,13 @@ public class CreateEditActionDialog extends DialogFragment {
 
     private UiUtilities getIconsCache(){
         return getApplication().getUIUtilities();
+    }
+
+    @Override
+    public boolean processResult(Object result) {
+        if (action instanceof SwitchableAction) {
+            ((SwitchableAction) action).onItemsSelected(getContext(), (List) result);
+        }
+        return false;
     }
 }

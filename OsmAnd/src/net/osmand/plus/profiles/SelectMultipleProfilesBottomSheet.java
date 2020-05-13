@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.OsmandApplication;
@@ -22,7 +23,9 @@ import net.osmand.plus.settings.NavigationFragment;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet {
 
@@ -31,19 +34,26 @@ public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet
 	public static final String DISABLED_KEYS = "disabled_keys";
 
 	private List<ProfileDataObject> profiles = new ArrayList<>();
-	private CallbackWithObject<List<String>> callback;
+	private Map<String, CompoundButton> compoundButtons = new HashMap<>();
 	private List<String> selectedProfiles;
 	private List<String> disabledProfiles;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		compoundButtons.clear();
 		Bundle args = getArguments();
-		if (args != null) {
-			selectedProfiles = args.getStringArrayList(SELECTED_KEYS);
-			disabledProfiles = args.getStringArrayList(DISABLED_KEYS);
-			refreshProfiles(getMyApplication());
+		if (savedInstanceState != null) {
+			readBundle(savedInstanceState);
+		} else if (args != null) {
+			readBundle(args);
 		}
+	}
+
+	private void readBundle(Bundle bundle) {
+		selectedProfiles = bundle.getStringArrayList(SELECTED_KEYS);
+		disabledProfiles = bundle.getStringArrayList(DISABLED_KEYS);
+		refreshProfiles(getMyApplication());
 	}
 
 	private void refreshProfiles(OsmandApplication app) {
@@ -53,6 +63,19 @@ public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet
 			String key = profile.getStringKey();
 			profile.setSelected(selectedProfiles.contains(key));
 			profile.setEnabled(!disabledProfiles.contains(key));
+		}
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		for (ProfileDataObject profile : profiles) {
+			String key = profile.getStringKey();
+			boolean selected = selectedProfiles.contains(key);
+			CompoundButton cb = compoundButtons.get(key);
+			if (cb != null) {
+				cb.setChecked(selected);
+			}
 		}
 	}
 
@@ -95,12 +118,18 @@ public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet
 		ivIcon.setImageDrawable(drawableIcon);
 		UiUtilities.setupCompoundButton(nightMode, ContextCompat.getColor(app,
 				enable ? activeColorId : disableColorId), compoundButton);
-		compoundButton.setChecked(profile.isSelected());
+		compoundButtons.put(profile.getStringKey(), compoundButton);
 
 		View.OnClickListener l = !enable ? null : new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				String key = profile.getStringKey();
 				boolean selected = !profile.isSelected();
+				if (selected) {
+					selectedProfiles.add(key);
+				} else {
+					selectedProfiles.remove(key);
+				}
 				profile.setSelected(selected);
 				compoundButton.setChecked(selected);
 			}
@@ -110,6 +139,13 @@ public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet
 				.setCustomView(itemView)
 				.setOnClickListener(l)
 				.create());
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putStringArrayList(SELECTED_KEYS, new ArrayList<>(selectedProfiles));
+		outState.putStringArrayList(DISABLED_KEYS, new ArrayList<>(disabledProfiles));
 	}
 
 	@Override
@@ -125,27 +161,23 @@ public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		if (callback != null) {
-			List<String> selectedProfileKeys = new ArrayList<>();
-			for (ProfileDataObject profile : profiles) {
-				if (profile.isSelected() && profile.isEnabled()) {
-					selectedProfileKeys.add(profile.getStringKey());
+		Fragment targetFragment = getTargetFragment();
+		if (targetFragment instanceof CallbackWithObject) {
+			List<String> newSelected = new ArrayList<>();
+			for (String profile : selectedProfiles) {
+				if (!disabledProfiles.contains(profile)) {
+					newSelected.add(profile);
 				}
 			}
-			callback.processResult(selectedProfileKeys);
+			((CallbackWithObject) targetFragment).processResult(newSelected);
 		}
 		dismiss();
 	}
 
-	public void setCallback(CallbackWithObject<List<String>> callback) {
-		this.callback = callback;
-	}
-
-	public static void showInstance(@NonNull MapActivity mapActivity,
+	public static void showInstance(@NonNull MapActivity mapActivity, Fragment targetFragment,
 	                                @Nullable List<String> selectedProfiles,
 	                                @Nullable List<String> disabledProfiles,
-	                                boolean usedOnMap,
-	                                CallbackWithObject<List<String>> callback) {
+	                                boolean usedOnMap) {
 		SelectMultipleProfilesBottomSheet fragment = new SelectMultipleProfilesBottomSheet();
 		Bundle args = new Bundle();
 		args.putStringArrayList(SELECTED_KEYS, selectedProfiles != null ?
@@ -153,8 +185,8 @@ public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet
 		args.putStringArrayList(DISABLED_KEYS, disabledProfiles != null ?
 				new ArrayList<>(disabledProfiles) : new ArrayList<String>());
 		fragment.setArguments(args);
+		fragment.setTargetFragment(targetFragment, 0);
 		fragment.setUsedOnMap(usedOnMap);
-		fragment.setCallback(callback);
 		fragment.show(mapActivity.getSupportFragmentManager(), SelectMultipleProfilesBottomSheet.TAG);
 	}
 

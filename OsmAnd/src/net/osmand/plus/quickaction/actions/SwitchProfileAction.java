@@ -10,13 +10,13 @@ import androidx.appcompat.widget.SwitchCompat;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import net.osmand.CallbackWithObject;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.profiles.SelectMultipleProfilesBottomSheet;
+import net.osmand.plus.quickaction.CreateEditActionDialog;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
@@ -207,24 +207,11 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 		return new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				CreateEditActionDialog targetFragment = (CreateEditActionDialog) activity
+						.getSupportFragmentManager().findFragmentByTag(CreateEditActionDialog.TAG);
 				List<String> selectedProfilesKeys = new ArrayList<>(adapter.getItemsList());
-				SelectMultipleProfilesBottomSheet.showInstance(activity, selectedProfilesKeys,
-						selectedProfilesKeys, false, new CallbackWithObject<List<String>>() {
-							@Override
-							public boolean processResult(List<String> result) {
-								if (result == null || result.size() == 0) {
-									return false;
-								}
-								for (String item : result) {
-									ApplicationMode appMode = getModeForKey(item);
-									if (appMode != null) {
-										String profile = appMode.getStringKey();
-										adapter.addItem(profile, activity);
-									}
-								}
-								return true;
-							}
-						});
+				SelectMultipleProfilesBottomSheet.showInstance(activity, targetFragment,
+						selectedProfilesKeys, selectedProfilesKeys, false);
 			}
 		};
 	}
@@ -239,4 +226,17 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 		return super.fillParams(root, activity);
 	}
 
+	@Override
+	protected void onItemsSelected(Context ctx, List<String> selectedItems) {
+		Adapter adapter = getAdapter();
+		if (adapter == null) {
+			return;
+		}
+		for (String key : selectedItems) {
+			ApplicationMode appMode = getModeForKey(key);
+			if (appMode != null) {
+				adapter.addItem(key, ctx);
+			}
+		}
+	}
 }
