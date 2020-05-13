@@ -131,7 +131,7 @@ public class GpxNotification extends OsmandNotification {
 			notificationText = app.getString(R.string.shared_string_recorded)
 					+ ": " + OsmAndFormatter.getFormattedDistance(recordedDistance, app);
 		} else {
-			if (recordedDistance > 0) {
+			if (app.getSavingTrackHelper().getTrkPoints() > 0) {
 				notificationTitle = app.getString(R.string.shared_string_paused) + " • "
 						+ Algorithms.formatDuration((int) (app.getSavingTrackHelper().getDuration() / 1000), true);
 				notificationText = app.getString(R.string.shared_string_recorded)
