@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<dimen name="card_content_padding_large">42dp</dimen>
     <dimen name="map_trans_seek_size">120dp</dimen>
 	<dimen name="map_widget_text_size">35sp</dimen>
 	<dimen name="map_top_widget_text_size">33sp</dimen>
@@ -48,7 +47,6 @@
 
 	<dimen name="map_widget_icon_margin">3dp</dimen>
 
-	<dimen name="standard_icon_size">36dp</dimen>
 
 	<!-- ContextMenu -->
 	<dimen name="context_menu_top_shadow_h">30dp</dimen>
@@ -93,63 +91,11 @@
 	<dimen name="fab_margin_bottom_big">108dp</dimen>
 
 	<!-- General -->
-	<dimen name="dialog_button_height">54dp</dimen>
-	<dimen name="dialog_button_ex_height">90dp</dimen>
 
-	<dimen name="list_item_height">65dp</dimen>
-	<dimen name="list_header_height">60dp</dimen>
-	<dimen name="dashboard_map_top_padding">480dp</dimen>
-	<dimen name="dashboard_land_width">480dp</dimen>
-	<dimen name="dashboard_map_toolbar">84dp</dimen>
-
-	<dimen name="favorites_icon_top_margin">13dp</dimen>
-	<dimen name="favorites_icon_size">60dp</dimen>
-	<dimen name="favorites_icon_padding">3dp</dimen>
-	<dimen name="favorites_list_item_height">90dp</dimen>
-	<dimen name="favorites_select_group_button_height">114dp</dimen>
-	<dimen name="favorites_select_group_button_width">213dp</dimen>
-	<dimen name="favorites_select_icon_button_right_padding">14dp</dimen>
-	    <!-- TextSizes -->
-    <dimen name="default_list_text_size_large">22sp</dimen>
-    <dimen name="default_list_text_size">18sp</dimen>
-    <dimen name="default_desc_text_size">16sp</dimen>
-    <dimen name="default_sub_text_size">14sp</dimen>
-	<dimen name="default_sub_text_size_small">12sp</dimen>
-	<dimen name="welcome_header_text_size">27sp</dimen>
-	<dimen name="text_button_text_size">22sp</dimen>
-	<dimen name="travel_card_primary_text_size">22sp</dimen>
-
-	<dimen name="dialog_header_text_size">24sp</dimen>
-
-	<dimen name="default_split_segments_overview">15sp</dimen>
-	<dimen name="default_split_segments_data">15sp</dimen>
-	<dimen name="default_split_segments_sub">12sp</dimen>
-
-	<dimen name="empty_state_image_margin_top">63dp</dimen>
-	<dimen name="empty_state_image_margin_bottom">45dp</dimen>
-	<dimen name="empty_state_text_interval">12dp</dimen>
-	<dimen name="empty_state_button_margin_top">30dp</dimen>
-	<dimen name="empty_state_text_size">20sp</dimen>
-	<dimen name="empty_state_text_desc_size">18sp</dimen>
-	<dimen name="empty_state_text_desc_margin">68dp</dimen>
-	<dimen name="empty_state_image_margin_left">138dp</dimen>
-	<dimen name="empty_state_text_button_padding_left">72dp</dimen>
-	<dimen name="empty_state_text_button_padding_right">90dp</dimen>
-	<dimen name="empty_state_text_button_padding_top">96dp</dimen>
-
-	<dimen name="bottom_sheet_cancel_button_height">72dp</dimen>
-	<dimen name="landscape_bottom_sheet_dialog_fragment_width">540dp</dimen>
 
 	<dimen name="measurement_tool_select_radius">30dp</dimen>
-	<dimen name="bottom_sheet_content_margin">24dp</dimen>
-	<dimen name="bottom_sheet_content_margin_small">12dp</dimen>
-	<dimen name="content_padding">24dp</dimen>
-	<dimen name="content_padding_small">18dp</dimen>
-	<dimen name="content_padding_half">12dp</dimen>
-	<dimen name="bottom_sheet_content_padding_small">12dp</dimen>
 	<dimen name="measurement_tool_divider_margin">12dp</dimen>
 	<dimen name="measurement_tool_content_padding_medium">18dp</dimen>
-	<dimen name="text_margin_small">6dp</dimen>
 	<dimen name="measurement_tool_text_margin">12dp</dimen>
 	<dimen name="measurement_tool_points_list_container_height">330dp</dimen>
 	<dimen name="measurement_tool_up_down_row_height">48dp</dimen>
@@ -162,26 +108,10 @@
 	<dimen name="measurement_tool_button_margin">12dp</dimen>
 	<dimen name="measurement_tool_button_padding">12dp</dimen>
 	<dimen name="measurement_tool_button_height">54dp</dimen>
-	<dimen name="bottom_sheet_title_height">78dp</dimen>
-	<dimen name="bottom_sheet_descr_height">66dp</dimen>
-	<dimen name="bottom_sheet_list_item_height">72dp</dimen>
-	<dimen name="bottom_sheet_large_list_item_height">96dp</dimen>
-	<dimen name="bottom_sheet_icon_margin">36dp</dimen>
-	<dimen name="bottom_sheet_divider_margin_top">11dp</dimen>
-	<dimen name="bottom_sheet_divider_margin_bottom">12dp</dimen>
-	<dimen name="bottom_sheet_divider_margin_start">84dp</dimen>
-	<dimen name="bottom_sheet_image_text_margin_start">15dp</dimen>
-	<dimen name="bottom_sheet_selected_item_title_height">84dp</dimen>
-	<dimen name="bottom_sheet_big_item_height">192dp</dimen>
 
-	<dimen name="action_bar_image_width_land">354dp</dimen>
-	<dimen name="action_bar_image_top_margin_land">102dp</dimen>
-	<dimen name="action_bar_image_height">330dp</dimen>
-	<dimen name="action_bar_image_side_margin">105dp</dimen>
 
 	<dimen name="map_markers_recycler_view_padding_bottom">78dp</dimen>
 	<dimen name="map_markers_recycler_view_padding_top">15dp</dimen>
-
 	<dimen name="shadow_height">8dp</dimen>
 	<dimen name="map_marker_title_height">42dp</dimen>
 
@@ -225,34 +155,6 @@
     <dimen name="grid_menu_item_sides_margin">60dp</dimen>
 
 	<dimen name="bottom_sheet_menu_peek_height">450dp</dimen>
-
 	<dimen name="side_of_the_world_button_size">54dp</dimen>
 
-	<dimen name="coords_input_show_hide_keyboard_btn_padding">19dp</dimen>
-
-	<dimen name="toolbar_height">84dp</dimen>
-
-	<dimen name="wikivoyage_search_list_header_height">54dp</dimen>
-	<dimen name="wikivoyage_article_card_icon_size">120dp</dimen>
-	<dimen name="wikivoyage_article_card_alternative_icon_height">60dp</dimen>
-	<dimen name="wikivoyage_welcome_image_top_margin">42dp</dimen>
-	<dimen name="wikivoyage_welcome_title_top_margin">30dp</dimen>
-	<dimen name="wikivoyage_welcome_title_bottom_margin">23dp</dimen>
-	<dimen name="wikivoyage_welcome_content_margin">48dp</dimen>
-	<dimen name="wikivoyage_card_button_height">54dp</dimen>
-	<dimen name="wikivoyage_search_icon_margin_left">21dp</dimen>
-	<dimen name="wikivoyage_search_icon_margin_right">33dp</dimen>
-	<dimen name="wikivoyage_search_divider_margin_start">82dp</dimen>
-	<dimen name="wikivoyage_explore_card_image_height">216dp</dimen>
-	<dimen name="wikivoyage_travel_card_button_padding">24dp</dimen>
-	<dimen name="wikivoyage_start_editing_card_text_image_padding">60dp</dimen>
-	<dimen name="wikivoyage_show_images_dialog_buttons_height">66dp</dimen>
-
-	<dimen name="wikilink_bottom_sheet_padding">21dp</dimen>
-
-	<dimen name="setting_profile_item_height">96dp</dimen>
-	<dimen name="settings_divider_margin_start">108dp</dimen>
-	<dimen name="setting_list_item_large_height">108dp</dimen>
-
-	<dimen name="download_description_images_height">198dp</dimen>
 </resources>
