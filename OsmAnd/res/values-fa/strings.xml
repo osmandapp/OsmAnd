@@ -340,7 +340,7 @@
     <string name="search_position_current_location_search">در حال جست‌وجوی موقعیت…</string>
     <string name="search_position_current_location_found">موقعیت من (پیدا‌شده)</string>
     <string name="search_position_address">نشانی…</string>
-    <string name="search_position_favorites">"نقاط  موردعلاقه…"</string>
+    <string name="search_position_favorites">علاقه‌مندی‌ها…</string>
     <string name="search_position_undefined">نامشخص</string>
     <string name="delete_confirmation_msg">‏%1$s حذف شود؟</string>
     <string name="city_type_suburb">حومه</string>
@@ -1305,8 +1305,8 @@
     <string name="live_monitoring_m">ردیابی آنلاین (GPX لازم است)</string>
     <string name="live_monitoring_start">شروع ردیابی آنلاین</string>
     <string name="live_monitoring_stop">توقف ردیابی آنلاین</string>
-    <string name="gpx_monitoring_start">شروع ضبط GPX</string>
-    <string name="gpx_monitoring_stop">توقف ضبط GPX</string>
+    <string name="gpx_monitoring_start">ازسرگیری ضبط GPX</string>
+    <string name="gpx_monitoring_stop">نگه‌داشتن ضبط GPX</string>
     <string name="rendering_attr_hideBuildings_name">ساختمان‌ها</string>
     <string name="gpx_start_new_segment">شروع بخش جدید</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">راه‌های غیرموتوری</string>
@@ -3621,7 +3621,7 @@
     <string name="shared_string_transparency">شفافیت</string>
     <string name="shared_string_zoom_levels">زوم نمایش</string>
     <string name="shared_string_legend">کلید</string>
-    <string name="terrain_empty_state_text">فعال کنید تا نقشهٔ سایه‌روشن یا شیب را ببینید. در وبسایت ما دربارهٔ این نقشه‌ها بخوانید</string>
+    <string name="terrain_empty_state_text">فعال کنید تا نقشهٔ سایه‌روشن یا شیب را ببینید. در وبسایت ما دربارهٔ این نقشه‌ها بخوانید.</string>
     <string name="shared_string_hillshade">سایه‌روشن</string>
     <string name="n_items_of_z">%1$s از %2$s</string>
     <string name="download_slope_maps">شیب‌ها</string>
@@ -3740,4 +3740,13 @@
     <string name="back_to_editing">بازگشت به ویرایش</string>
     <string name="create_edit_poi">ایجاد / ویرایش POI</string>
     <string name="add_edit_favorite">افزودن / ویرایش نقطهٔ موردعلاقه</string>
+    <string name="additional_actions_descr">برای دسترسی به این کنش‌ها می‌توانید روی دکمهٔ «%1$s» بزنید.</string>
+    <string name="quick_action_transport_hide">مخفی‌کردن حمل‌ونقل عمومی</string>
+    <string name="quick_action_transport_show">نمایش حمل‌ونقل عمومی</string>
+    <string name="quick_action_show_hide_transport">آشکار/پنهان کردن حمل‌ونقل عمومی</string>
+    <string name="quick_action_transport_descr">دکمه‌ای برای آشکار یا پنهان کردن حمل‌ونقل عمومی روی نقشه.</string>
+    <string name="quick_action_switch_profile_descr">با لمس دکمهٔ عملیاتی بین پروفایل‌های انتخاب‌شده جابه‌جا شوید.</string>
+    <string name="shared_string_add_profile">افزودن پروفایل</string>
+    <string name="change_application_profile">تغییر پروفایل برنامه</string>
+    <string name="profiles_for_action_not_found">پروفایل‌های انتخاب‌شده برای این کنش، پیدا نشدند.</string>
 </resources>
