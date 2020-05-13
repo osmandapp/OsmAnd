@@ -230,6 +230,7 @@ public class RouteCalculationResult {
 						RouteDirectionInfo info = new RouteDirectionInfo(localDirections.get(currentDirection).getAverageSpeed(), TurnType.straight());
 						info.setRef(toSplit.getRef());
 						info.setStreetName(toSplit.getStreetName());
+						info.setRouteDataObject(toSplit.getRouteDataObject());
 						info.setDestinationName(toSplit.getDestinationName());
 						info.routePointOffset = interLocations[currentIntermediate];
 						info.setDescriptionRoute(ctx.getString(R.string.route_head));//; //$NON-NLS-1$
@@ -412,32 +413,17 @@ public class RouteCalculationResult {
 
 					if (ref != null) {
 						RouteDataObject nextRoad = next.getObject();
-						boolean isNextShieldFound = false;
-						int[] nextSegmentNameIds = nextRoad.nameIds;
-						for (int nm = 0; nm < nextSegmentNameIds.length; nm++) {
-							if (nextRoad.region.quickGetEncodingRule(nextSegmentNameIds[nm]).getTag().startsWith("road_ref")) {
-								info.setRouteDataObject(nextRoad);
-								isNextShieldFound = true;
-							}
-						}
+						info.setRouteDataObject(nextRoad);
 
-						if (!isNextShieldFound) {
-							for (int ind = lind; ind < list.size(); ind++) {
-								if (list.get(ind).getTurnType() != null) {
-									info.setRouteDataObject(null);
-									break;
-								} else {
-									RouteDataObject obj = list.get(ind).getObject();
-									int[] nameIds = obj.nameIds;
-									for (int idx = 0; idx < nameIds.length; idx ++) {
-										if (obj.region.routeEncodingRules.get(obj.nameIds[idx]).getTag().startsWith("road_ref")) {
-											info.setRouteDataObject(obj);
-											break;
-										}
-									}
-									if (info.getRouteDataObject() != null) {
-										break;
-									}
+						boolean isNextShieldFound = nextRoad.hasNameTagStartsWith("road_ref");
+						for (int ind = lind; ind < list.size() && !isNextShieldFound; ind++) {
+							if (list.get(ind).getTurnType() != null) {
+								isNextShieldFound = true;
+							} else {
+								RouteDataObject obj = list.get(ind).getObject();
+								if (obj.hasNameTagStartsWith("road_ref")) {
+									info.setRouteDataObject(obj);
+									isNextShieldFound = true;
 								}
 							}
 						}
@@ -787,6 +773,7 @@ public class RouteCalculationResult {
 			if (segs != null) {
 				RouteSegmentResult lastSegmentResult = segs.get(segs.size() - 1);
 				RouteDataObject routeDataObject = lastSegmentResult.getObject();
+				info.setRouteDataObject(routeDataObject);
 				info.setRef(routeDataObject.getRef(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
 						ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), lastSegmentResult.isForwardDirection()));
 				info.setStreetName(routeDataObject.getName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
@@ -1143,6 +1130,7 @@ public class RouteCalculationResult {
 						p = new RouteDirectionInfo(i.getAverageSpeed(), i.getTurnType());
 						p.routePointOffset = i.routePointOffset;
 						p.routeEndPointOffset = i.routeEndPointOffset;
+						p.setRouteDataObject(i.getRouteDataObject());
 						p.setDestinationName(i.getDestinationName());
 						p.setRef(i.getRef());
 						p.setStreetName(i.getStreetName());

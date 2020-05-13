@@ -1294,6 +1294,7 @@
     <string name="trip_rec_notification_settings">Turn on quick recording</string>
     <string name="trip_rec_notification_settings_desc">Display a system notification allowing trip recording.</string>
     <string name="shared_string_notifications">Notifications</string>
+    <string name="shared_string_resume">Resume</string>
     <string name="shared_string_continue">Continue</string>
     <string name="shared_string_pause">Pause</string>
     <string name="shared_string_paused">Paused</string>
@@ -2112,8 +2113,8 @@
     <string name="live_monitoring_m">Online tracking (GPX required)</string>
     <string name="live_monitoring_start">Start online tracking</string>
     <string name="live_monitoring_stop">Stop online tracking</string>
-    <string name="gpx_monitoring_start">Start GPX logging</string>
-    <string name="gpx_monitoring_stop">Stop GPX logging</string>
+    <string name="gpx_monitoring_start">Resume GPX logging</string>
+    <string name="gpx_monitoring_stop">Pause GPX logging</string>
     <string name="gpx_start_new_segment">Start new segment</string>
     <string name="rendering_attr_hideBuildings_name">Buildings</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Non-vehicle highways</string>

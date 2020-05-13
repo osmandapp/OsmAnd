@@ -175,7 +175,7 @@ public class GpxNotification extends OsmandNotification {
 					PendingIntent.FLAG_UPDATE_CURRENT);
 			if (recordedDistance > 0) {
 				notificationBuilder.addAction(R.drawable.ic_notification_rec_start,
-						app.getString(R.string.shared_string_continue), startPendingIntent);
+						app.getString(R.string.shared_string_resume), startPendingIntent);
 				notificationBuilder.addAction(R.drawable.ic_notification_save,
 						app.getString(R.string.shared_string_save), savePendingIntent);
 			} else {
