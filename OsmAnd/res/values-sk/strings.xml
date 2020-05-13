@@ -2072,6 +2072,7 @@ Dĺžka %2$s</string>
     <string name="trip_rec_notification_settings">Zapnúť rýchly záznam</string>
     <string name="trip_rec_notification_settings_desc">Zobraziť systémové oznámenie, ktoré umožňuje nahrávanie.</string>
     <string name="shared_string_notifications">Oznámenia</string>
+    <string name="shared_string_resume">Pokračovať</string>
     <string name="gpx_no_tracks_title">Nemáte zatiaľ žiadne súbory GPX</string>
     <string name="gpx_no_tracks_title_folder">Do priečinka môžete pridať aj súbory GPX</string>
     <string name="gpx_add_track">Pridať viac…</string>

@@ -2027,6 +2027,7 @@ Délka %2$s</string>
     <string name="trip_rec_notification_settings">Povolit rychlé spuštění záznamu</string>
     <string name="trip_rec_notification_settings_desc">Zobrazit systémové oznámení, které umožňuje spustit nahrávání.</string>
     <string name="shared_string_notifications">Oznámení</string>
+    <string name="shared_string_resume">Pokračovat</string>
     <string name="shared_string_continue">Pokračovat</string>
     <string name="shared_string_pause">Pozastavit</string>
     <string name="shared_string_trip">Cesta</string>

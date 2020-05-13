@@ -2078,6 +2078,7 @@ Długość %2$s</string>
     <string name="trip_rec_notification_settings">Szybkie rozpoczęcie rejestrowania</string>
     <string name="trip_rec_notification_settings_desc">Wyświetla powiadomienie systemowe umożliwiające rejestrowanie podróży.</string>
     <string name="shared_string_notifications">Powiadomienia</string>
+    <string name="shared_string_resume">Kontynuuj</string>
     <string name="gpx_no_tracks_title">Nie ma na razie żadnych plików GPX</string>
     <string name="gpx_no_tracks_title_folder">Można także dodać pliki GPX do katalogu</string>
     <string name="gpx_add_track">Dodaj więcej…</string>

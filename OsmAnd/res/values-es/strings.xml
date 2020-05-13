@@ -2046,6 +2046,7 @@
     <string name="gpx_add_track">Añadir más…</string>
     <string name="shared_string_appearance">Aspecto</string>
     <string name="shared_string_notifications">Notificaciones</string>
+    <string name="shared_string_resume">Continuar</string>
     <string name="shared_string_continue">Continuar</string>
     <string name="shared_string_pause">Pausar</string>
     <string name="gpx_logging_no_data">Sin datos</string>
