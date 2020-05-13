@@ -160,7 +160,7 @@ public class GpxNotification extends OsmandNotification {
 			Intent stopIntent = new Intent(OSMAND_STOP_GPX_SERVICE_ACTION);
 			PendingIntent stopPendingIntent = PendingIntent.getBroadcast(app, 0, stopIntent,
 					PendingIntent.FLAG_UPDATE_CURRENT);
-			if (app.getSavingTrackHelper().getDistance() > 0) {
+			if (app.getSavingTrackHelper().getTrkPoints() > 0) {
 				notificationBuilder.addAction(R.drawable.ic_notification_pause,
 						app.getString(R.string.shared_string_pause), stopPendingIntent);
 				notificationBuilder.addAction(R.drawable.ic_notification_save,
