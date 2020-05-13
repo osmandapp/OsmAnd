@@ -2554,7 +2554,7 @@ Lon %2$s</string>
     <string name="hide_passed">Passierte ausblenden</string>
     <string name="marker_show_distance_descr">Auswahl der Entfernungs- und Richtungsangabe für Kartenmarkierungen in der Karte:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Kartenausrichtungsgrenzwert</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Auswählen, bei welcher Geschwindigkeit die Kartenausrichtung von \'Nach Bewegungsrichtung\' auf \'Nach Kompass\' umschaltet.</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Auswählen, bei welcher Geschwindigkeit die Kartenausrichtung von \'Nach Bewegungsrichtung\' auf \'Nach Kompass\' umschaltet</string>
     <string name="marker_moved_to_history">Kartenmarkierung in den Verlauf verschoben</string>
     <string name="osn_modify_dialog_error">Notiz konnte nicht geändert werden.</string>
     <string name="osn_modify_dialog_title">Notiz ändern</string>
@@ -3708,4 +3708,19 @@ Lon %2$s</string>
 \n• Fehler mit RTL behoben
 \n
 \n</string>
+    <string name="shared_string_resume">Fortfahren</string>
+    <string name="additional_actions_descr">Sie können auf diese Aktionen zugreifen, indem Sie auf die Schaltfläche \"%1$s\" tippen.</string>
+    <string name="quick_action_transport_hide">Öffentliche Verkehrsmittel ausblenden</string>
+    <string name="quick_action_transport_show">Öffentliche Verkehrsmittel anzeigen</string>
+    <string name="quick_action_show_hide_transport">Öffentliche Verkehrsmittel anzeigen/ausblenden</string>
+    <string name="quick_action_transport_descr">Eine Schaltfläche zum Ein- oder Ausblenden der öffentlichen Verkehrsmittel auf der Karte.</string>
+    <string name="create_edit_poi">POI erstellen/bearbeiten</string>
+    <string name="parking_positions">Parkpositionen</string>
+    <string name="add_edit_favorite">Favorit hinzufügen / bearbeiten</string>
+    <string name="reset_deafult_order">Standard-Reihenfolge der Elemente wiederherstellen</string>
+    <string name="back_to_editing">Zurück zur Bearbeitung</string>
+    <string name="quick_action_switch_profile_descr">Durch Antippen der Aktionsschaltfläche können Sie zwischen den ausgewählten Profilen wechseln.</string>
+    <string name="shared_string_add_profile">Profil hinzufügen</string>
+    <string name="change_application_profile">Anwendungsprofil ändern</string>
+    <string name="profiles_for_action_not_found">Für diese Aktion ausgewählte Profile nicht gefunden.</string>
 </resources>
