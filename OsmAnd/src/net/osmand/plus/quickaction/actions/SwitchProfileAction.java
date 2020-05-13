@@ -16,7 +16,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.profiles.SelectMultipleProfileBottomSheet;
+import net.osmand.plus.profiles.SelectMultipleProfilesBottomSheet;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
@@ -208,7 +208,7 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 			@Override
 			public void onClick(View v) {
 				List<String> selectedProfilesKeys = new ArrayList<>(adapter.getItemsList());
-				SelectMultipleProfileBottomSheet.showInstance(activity, selectedProfilesKeys,
+				SelectMultipleProfilesBottomSheet.showInstance(activity, selectedProfilesKeys,
 						selectedProfilesKeys, false, new CallbackWithObject<List<String>>() {
 							@Override
 							public boolean processResult(List<String> result) {

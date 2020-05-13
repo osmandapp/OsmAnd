@@ -24,9 +24,9 @@ import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectMultipleProfileBottomSheet extends BasePreferenceBottomSheet {
+public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet {
 
-	public static final String TAG = SelectMultipleProfileBottomSheet.class.getSimpleName();
+	public static final String TAG = SelectMultipleProfilesBottomSheet.class.getSimpleName();
 	public static final String SELECTED_KEYS = "selected_keys";
 	public static final String DISABLED_KEYS = "disabled_keys";
 
@@ -146,7 +146,7 @@ public class SelectMultipleProfileBottomSheet extends BasePreferenceBottomSheet 
 	                                @Nullable List<String> disabledProfiles,
 	                                boolean usedOnMap,
 	                                CallbackWithObject<List<String>> callback) {
-		SelectMultipleProfileBottomSheet fragment = new SelectMultipleProfileBottomSheet();
+		SelectMultipleProfilesBottomSheet fragment = new SelectMultipleProfilesBottomSheet();
 		Bundle args = new Bundle();
 		args.putStringArrayList(SELECTED_KEYS, selectedProfiles != null ?
 				new ArrayList<>(selectedProfiles) : new ArrayList<String>());
@@ -155,7 +155,7 @@ public class SelectMultipleProfileBottomSheet extends BasePreferenceBottomSheet 
 		fragment.setArguments(args);
 		fragment.setUsedOnMap(usedOnMap);
 		fragment.setCallback(callback);
-		fragment.show(mapActivity.getSupportFragmentManager(), SelectMultipleProfileBottomSheet.TAG);
+		fragment.show(mapActivity.getSupportFragmentManager(), SelectMultipleProfilesBottomSheet.TAG);
 	}
 
 }

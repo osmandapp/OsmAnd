@@ -162,7 +162,7 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 			List<String> stylesList = mapStyleAction.getFilteredStyles();
 			for (String entry : stylesList) {
 				boolean selected = entry.equals(selectedItem);
-				createItemRow(selected, counter, null,
+				createItemRow(selected, counter, getContentIcon(action.getIconRes()),
 						mapStyleAction.getTranslatedItemName(context, entry), entry);
 				counter++;
 			}
@@ -187,7 +187,7 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 			for (Pair<String, String> entry : sources) {
 				String tag = entry.first;
 				boolean selected = tag.equals(selectedItem);
-				createItemRow(selected, counter, null, entry.second, tag);
+				createItemRow(selected, counter, getContentIcon(action.getIconRes()), entry.second, tag);
 				counter++;
 			}
 		}
@@ -205,9 +205,6 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 		RadioButton rb = (RadioButton) view.findViewById(R.id.compound_button);
 		rb.setChecked(selected);
 		CompoundButtonCompat.setButtonTintList(rb, rbColorList);
-		if (icon == null) {
-			icon = getContentIcon(action.getIconRes());
-		}
 		ImageView imageView = (ImageView) view.findViewById(R.id.icon);
 		imageView.setImageDrawable(icon);
 	}
