@@ -1138,16 +1138,23 @@ public class MapInfoWidgetsFactory {
 			for (int i = 0; i < object.nameIds.length; i++) {
 				String key = object.region.routeEncodingRules.get(object.nameIds[i]).getTag();
 				String val = object.names.get(object.nameIds[i]);
-				if (key.startsWith("road_ref")) {
-					nameTag = key;
-					name = val;
-				} else {
+				if (!key.startsWith("road_ref")) {
 					additional.append(key).append("=").append(val).append(";");
 				}
 			}
-			if(name == null || nameTag == null) {
-				return false;
+			for (int i = 0; i < object.nameIds.length; i++) {
+				String key = object.region.routeEncodingRules.get(object.nameIds[i]).getTag();
+				String val = object.names.get(object.nameIds[i]);
+				if (key.startsWith("road_ref")) {
+					boolean visible = setRoadShield(view, object, key, val, additional);
+					if(visible) {
+						return true;
+					}
+				}
 			}
+			return false;
+		}
+		private boolean setRoadShield(ImageView view, RouteDataObject object, String nameTag, String name, StringBuilder additional ) {
 
 			Context context = topBar.getContext();
 			int[] tps = object.getTypes();
