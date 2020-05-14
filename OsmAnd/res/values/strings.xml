@@ -111,7 +111,7 @@
     <string name="shared_string_drawer">Drawer</string>
     <string name="ui_customization">UI Customization</string>
     <string name="ui_customization_short_descr">Drawer items, context menu</string>
-    <string name="ui_customization_description">Customize the quantity of items in Drawer, configure the map and context menu.\n\nYou can turn off unused plugins, to hide all their controls from the app %1$s.</string>
+    <string name="ui_customization_description">Customize the quantity of items in Drawer, Configure Map and Context Menu.\n\nYou can turn off unused plugins, to hide all their controls from the application. %1$s.</string>
     <string name="shared_string_min">Min</string>
     <string name="shared_string_square">Square</string>
     <string name="shared_string_octagon">Octagon</string>
