@@ -3548,7 +3548,7 @@
     <string name="quick_action_transport_hide">Skjul offentlig transport</string>
     <string name="quick_action_transport_show">Vis offentlig transport</string>
     <string name="back_to_editing">Tilbake til redigering</string>
-    <string name="create_edit_poi">Legg til/Rediger POI</string>
-    <string name="quick_action_show_hide_transport">Vis/Skjul offentlig transport</string>
+    <string name="create_edit_poi">Legg til/rediger POI</string>
+    <string name="quick_action_show_hide_transport">Vis/skjul offentlig transport</string>
     <string name="shared_string_add_profile">Legg til profil</string>
 </resources>
