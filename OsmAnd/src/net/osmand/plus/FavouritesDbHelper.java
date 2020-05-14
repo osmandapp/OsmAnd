@@ -183,6 +183,28 @@ public class FavouritesDbHelper {
 		});
 	}
 
+	void fixBlackBackground() {
+		flatGroups.clear();
+		favoriteGroups.clear();
+		for (FavouritePoint fp : cachedFavoritePoints) {
+			if (fp.getColor() == 0xFF000000) {
+				fp.setColor(0);
+			}
+			FavoriteGroup group = getOrCreateGroup(fp, 0);
+			group.points.add(fp);
+		}
+		sortAll();
+		saveCurrentPointsIntoFile();
+		context.runInUIThread(new Runnable() {
+			@Override
+			public void run() {
+				for (FavoritesListener listener : listeners) {
+					listener.onFavoritesLoaded();
+				}
+			}
+		});
+	}
+
 	public FavouritePoint getSpecialPoint(FavouritePoint.SpecialPointType pointType) {
 		for (FavouritePoint fp : cachedFavoritePoints) {
 			if (fp.getSpecialPointType() == pointType) {

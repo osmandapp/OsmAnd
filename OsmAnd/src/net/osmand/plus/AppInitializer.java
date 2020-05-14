@@ -228,8 +228,20 @@ public class AppInitializer implements IProgress {
 				app.getSettings().migratePreferences();
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_6).commit();
 			}
-			if (prevAppVersion < VERSION_3_7) {
+			if (prevAppVersion < VERSION_3_7 || Version.getAppVersion(app).equals("3.7.1")) {
 				app.getSettings().migrateEnumPreferences();
+				addListener(new AppInitializeListener() {
+					@Override
+					public void onProgress(AppInitializer init, InitEvents event) {
+						if (event.equals(InitEvents.FAVORITES_INITIALIZED)) {
+							app.getFavorites().fixBlackBackground();
+						}
+					}
+
+					@Override
+					public void onFinish(AppInitializer init) {
+					}
+				});
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_7).commit();
 			}
 			startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();

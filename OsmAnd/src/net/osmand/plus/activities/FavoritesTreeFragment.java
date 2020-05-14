@@ -68,6 +68,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static android.view.Gravity.CENTER;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.plus.myplaces.FavoritesActivity.FAV_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
@@ -964,7 +965,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 					? app.getFavorites().getColorWithCategory(model, getResources().getColor(R.color.color_favorite))
 					: ContextCompat.getColor(app, disabledIconColor);
 			int iconSize = (int) getResources().getDimension(R.dimen.favorites_icon_size);
-			if(model.getBackgroundType().equals(FavouritePoint.BackgroundType.CIRCLE)){
+			if (model.getBackgroundType().equals(DEFAULT_BACKGROUND_TYPE)) {
 				icon.setImageDrawable(UiUtilities.createTintedDrawable(getActivity(), model.getIconId(), color));
 				iconSize = (int) getResources().getDimension(R.dimen.standard_icon_size);
 			}else {

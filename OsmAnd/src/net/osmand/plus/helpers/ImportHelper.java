@@ -86,6 +86,7 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
 import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.plus.AppInitializer.loadRoutingFiles;
 import static net.osmand.plus.myplaces.FavoritesActivity.FAV_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
@@ -1190,7 +1191,7 @@ public class ImportHelper {
 				}
 				fp.setColor(p.getColor(0));
 				fp.setIconIdFromName(app, p.getIconName());
-				fp.setBackgroundType(BackgroundType.getByTypeName(p.getBackgroundType(), BackgroundType.CIRCLE));
+				fp.setBackgroundType(BackgroundType.getByTypeName(p.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
 				favourites.add(fp);
 			}
 		}

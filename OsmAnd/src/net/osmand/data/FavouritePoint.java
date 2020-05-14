@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.FavouritesDbHelper;
@@ -19,6 +20,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 
 	private static final String HIDDEN = "hidden";
 	private static final String ADDRESS_EXTENSION = "address";
+	public static final BackgroundType DEFAULT_BACKGROUND_TYPE = BackgroundType.CIRCLE;
+	public static final int DEFAULT_UI_ICON_ID = R.drawable.mx_special_star;
 
 	protected String name = "";
 	protected String description;
@@ -93,7 +96,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	public int getIconId() {
-		return iconId == 0 ? R.drawable.mx_special_star : iconId;
+		return iconId == 0 ? DEFAULT_UI_ICON_ID : iconId;
 	}
 
 	public String getIconEntryName(Context ctx) {
@@ -198,7 +201,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	public BackgroundType getBackgroundType() {
-		return backgroundType == null ? BackgroundType.CIRCLE : backgroundType;
+		return backgroundType == null ? DEFAULT_BACKGROUND_TYPE : backgroundType;
 	}
 
 	public void setBackgroundType(BackgroundType backgroundType) {
@@ -351,7 +354,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		if (iconName != null) {
 			fp.setIconIdFromName(ctx, iconName);
 		}
-		BackgroundType backgroundType = BackgroundType.getByTypeName(pt.getBackgroundType(), BackgroundType.CIRCLE);
+		BackgroundType backgroundType = BackgroundType.getByTypeName(pt.getBackgroundType(), DEFAULT_BACKGROUND_TYPE);
 		fp.setBackgroundType(backgroundType);
 		return fp;
 	}
@@ -366,13 +369,13 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		if (isAddressSpecified()) {
 			pt.getExtensionsToWrite().put(ADDRESS_EXTENSION, getAddress());
 		}
-		if (iconId != 0) {
+		if (iconId != 0 && iconId != DEFAULT_UI_ICON_ID) {
 			pt.setIconName(getIconEntryName(ctx).substring(3));
 		}
-		if(backgroundType != null) {
+		if (backgroundType != null && backgroundType != DEFAULT_BACKGROUND_TYPE) {
 			pt.setBackgroundType(backgroundType.typeName);
 		}
-		if (getColor() != 0) {
+		if (getColor() != 0 && getColor() != ContextCompat.getColor(ctx, R.color.color_favorite)) {
 			pt.setColor(getColor());
 		}
 		pt.name = getName();

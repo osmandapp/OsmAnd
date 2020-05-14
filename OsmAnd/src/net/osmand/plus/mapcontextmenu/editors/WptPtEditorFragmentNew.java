@@ -37,6 +37,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+
 public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 
 	@Nullable
@@ -54,7 +56,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	protected boolean skipDialog;
 	private String iconName;
 	@NonNull
-	private String backgroundTypeName = BackgroundType.CIRCLE.getTypeName();
+	private String backgroundTypeName = DEFAULT_BACKGROUND_TYPE.getTypeName();
 
 	private Map<String, Integer> categoriesMap;
 	private OsmandApplication app;
@@ -432,7 +434,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 
 	@Override
 	public BackgroundType getBackgroundType() {
-		return BackgroundType.getByTypeName(backgroundTypeName, BackgroundType.CIRCLE);
+		return BackgroundType.getByTypeName(backgroundTypeName, DEFAULT_BACKGROUND_TYPE);
 	}
 
 	@Override

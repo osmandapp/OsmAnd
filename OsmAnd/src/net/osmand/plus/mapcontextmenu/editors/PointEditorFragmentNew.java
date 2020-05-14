@@ -78,7 +78,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	private int selectedIcon;
 	@ColorInt
 	private int selectedColor;
-	private BackgroundType selectedShape = BackgroundType.CIRCLE;
+	private BackgroundType selectedShape = DEFAULT_BACKGROUND_TYPE;
 	private ImageView nameIcon;
 	private GroupAdapter groupListAdapter;
 	private int scrollViewY;
