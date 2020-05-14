@@ -633,9 +633,9 @@ Lon: %2$s</string>
     <string name="live_monitoring_m">Enreta spur-registrado (GPX bezonata)</string>
     <string name="live_monitoring_m_descr">Sendi datumojn de spuroj al difinita retservo, se GPX-registrado estas aktiva.</string>
     <string name="live_monitoring_start">Ekigi enretan kurs-registradon</string>
-    <string name="gpx_monitoring_start">Ekigi GPX-registradon</string>
+    <string name="gpx_monitoring_start">Pluigi GPX-registradon</string>
     <string name="live_monitoring_stop">Ĉesigi enretan kurs-registradon</string>
-    <string name="gpx_monitoring_stop">Ĉesigi GPX-registradon</string>
+    <string name="gpx_monitoring_stop">Paŭzigi GPX-registradon</string>
     <string name="gpx_start_new_segment">Ekigi novan segmenton</string>
     <string name="rendering_attr_hideBuildings_name">Konstruaĵoj</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Vojoj ne por aŭtoj</string>
@@ -3704,4 +3704,9 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="parking_positions">Pozicioj de parkumado</string>
     <string name="reset_deafult_order">Restarigi implicitan ordigon de elementoj</string>
     <string name="back_to_editing">Reen al redaktado</string>
+    <string name="shared_string_resume">Pluigi</string>
+    <string name="quick_action_switch_profile_descr">Butono por baskuli inter elektitaj profiloj.</string>
+    <string name="shared_string_add_profile">Aldoni profilon</string>
+    <string name="change_application_profile">Ŝanĝi aplikaĵan profilon</string>
+    <string name="profiles_for_action_not_found">Ne trovis profilojn elektitajn por tiu ĉi ago.</string>
 </resources>

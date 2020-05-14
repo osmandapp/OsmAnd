@@ -1225,8 +1225,8 @@
     <string name="live_monitoring_m">線上即時追蹤 (需要 GPX)</string>
     <string name="live_monitoring_start">開始線上即時追蹤</string>
     <string name="live_monitoring_stop">停止線上即時追蹤</string>
-    <string name="gpx_monitoring_start">開始 GPX 記錄</string>
-    <string name="gpx_monitoring_stop">停止 GPX 記錄</string>
+    <string name="gpx_monitoring_start">恢復 GPX 記錄</string>
+    <string name="gpx_monitoring_stop">暫停 GPX 記錄</string>
     <string name="gpx_start_new_segment">開始新區段</string>
     <string name="lang_fa">波斯</string>
     <string name="map_preferred_locale_descr">在地圖上對標簽偏好的語言(如果無法使用，將使用英文或當地名稱)。</string>
@@ -3710,4 +3710,9 @@
     <string name="add_edit_favorite">新增／編輯收藏</string>
     <string name="reset_deafult_order">恢復預設項目排序</string>
     <string name="back_to_editing">返回編輯</string>
+    <string name="shared_string_resume">恢復</string>
+    <string name="quick_action_switch_profile_descr">點擊動作按鈕將會在選取的設定檔間切換。</string>
+    <string name="shared_string_add_profile">新增設定檔</string>
+    <string name="change_application_profile">變更應用程式設定檔</string>
+    <string name="profiles_for_action_not_found">找不到為此動作選取的設定檔。</string>
 </resources>
