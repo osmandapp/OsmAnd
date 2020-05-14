@@ -251,9 +251,13 @@ public class NavigationFragment extends BaseSettingsFragment {
 	}
 
 	public static List<ProfileDataObject> getBaseProfiles(OsmandApplication app) {
+		return getBaseProfiles(app, false);
+	}
+
+	public static List<ProfileDataObject> getBaseProfiles(OsmandApplication app, boolean includeBrowseMap) {
 		List<ProfileDataObject> profiles = new ArrayList<>();
 		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-			if (mode != ApplicationMode.DEFAULT) {
+			if (mode != ApplicationMode.DEFAULT || includeBrowseMap) {
 				String description = mode.getDescription();
 				if (Algorithms.isEmpty(description)) {
 					description = getAppModeDescription(app, mode);
