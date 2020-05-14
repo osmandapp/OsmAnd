@@ -2642,7 +2642,7 @@
     <string name="one_tap_active">Активация одним нажатием</string>
     <string name="empty_state_av_notes">Делайте заметки!</string>
     <string name="empty_state_av_notes_desc">Добавьте аудио-, видео- или фотозаметку в любую точку на карте, используя виджет или контекстное меню.</string>
-    <string name="notes_by_date">Заметки OSM по дате</string>
+    <string name="notes_by_date">Заметки по дате</string>
     <string name="by_date">По дате</string>
     <string name="by_type">По типу</string>
     <string name="modify_the_search_query">Измените ваш запрос.</string>
@@ -3719,4 +3719,5 @@
     <string name="shared_string_add_profile">Добавить профиль</string>
     <string name="change_application_profile">Изменить профиль приложения</string>
     <string name="profiles_for_action_not_found">Профили, выбранные для данного действия, не найдены.</string>
+    <string name="shared_string_resume">Продолжить</string>
 </resources>
