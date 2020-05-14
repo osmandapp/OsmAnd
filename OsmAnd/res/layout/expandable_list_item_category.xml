@@ -9,7 +9,8 @@
     <LinearLayout
         android:id="@+id/group_divider"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?attr/activity_background_color">
 
         <include layout="@layout/list_item_divider"/>
 
