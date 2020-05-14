@@ -1849,7 +1849,7 @@
     <string name="coords_search">بحث عن إحداثيات</string>
     <string name="advanced_coords_search">بحث متقدم عن الإحداثيات</string>
     <string name="simulate_initial_startup_descr">وضع علامة تشير إلى بدء تشغيل التطبيق الأولي، أبق جميع الإعدادات الأخرى دون تغيير.</string>
-    <string name="region_maps">خرائط التوجيه (الفكتورية) والإقليمية</string>
+    <string name="region_maps">خرائط على مستوى المنطقة</string>
     <string name="hillshade_layer_disabled">طبقة التضاريس غير مفعلة</string>
     <string name="srtm_plugin_disabled">الخطوط الكنتورية معطلة</string>
     <string name="nm">ميل بحري</string>
@@ -3001,7 +3001,7 @@
     <string name="suggested_maps_descr">هذه الخرائط مطلوبة لاستخدامها مع البرنامج المساعد.</string>
     <string name="added_profiles">إضافة أوضاع</string>
     <string name="added_profiles_descr">الأوضاع المضافة بواسطة البرنامج المساعد</string>
-    <string name="shared_string_turn_off">إطفاء</string>
+    <string name="shared_string_turn_off">إيقاف</string>
     <string name="new_plugin_added">تمت تركيب إضافة جديدة</string>
     <string name="join_segments">ربط الأجزاء</string>
     <string name="add_new_profile_q">إضافة وضع جديد \'%1$s\'؟</string>
@@ -3653,4 +3653,23 @@
     <string name="osmand_purchases_item">مشتريات أوسماند</string>
     <string name="legend_item_description">دليل رموز الخريطة</string>
     <string name="navigation_profiles_item">الملفات الشخصية للملاحة</string>
+    <string name="release_3_7">• خرائط جديدة للمنحدرات غير المتصلة بالإنترنت
+\n
+\n • التخصيص الكامل للمفضلات ونقاط الطرق GPX - الألوان المخصصة والأيقونات والأشكال
+\n
+\n • تخصيص ترتيب العناصر في قائمة السياق ، تكوين الخريطة ، درج
+\n
+\n • ويكيبيديا كطبقة منفصلة في تكوين الخريطة ، حدد اللغات المطلوبة فقط
+\n
+\n • إنشاء مرشح / خرائط POI الخاصة بك مع مرونة تامة
+\n
+\n • تمت إضافة خيارات لاستعادة إعدادات ملفات التعريف المخصصة
+\n
+\n • مسارات GPX كاملة من الممرات دعم حركة المرور وتعليمات كاملة 
+\n
+\n • إصلاح أحجام واجهة المستخدم على الأجهزة اللوحية
+\n
+\n • إصلاح الخلل مع RTL
+\n
+\n</string>
 </resources>

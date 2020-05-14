@@ -35,6 +35,7 @@ import net.osmand.plus.quickaction.actions.ShowHideFavoritesAction;
 import net.osmand.plus.quickaction.actions.ShowHideGpxTracksAction;
 import net.osmand.plus.quickaction.actions.ShowHidePoiAction;
 import net.osmand.plus.quickaction.actions.ShowHideTransportLinesAction;
+import net.osmand.plus.quickaction.actions.SwitchProfileAction;
 import net.osmand.util.Algorithms;
 
 import java.lang.reflect.Type;
@@ -234,6 +235,7 @@ public class QuickActionRegistry {
 		quickActionTypes.add(NavAutoZoomMapAction.TYPE);
 		quickActionTypes.add(NavStartStopAction.TYPE);
 		quickActionTypes.add(NavResumePauseAction.TYPE);
+		quickActionTypes.add(SwitchProfileAction.TYPE);
 		OsmandPlugin.registerQuickActionTypesPlugins(quickActionTypes);
 
 		Map<Integer, QuickActionType> quickActionTypesInt = new TreeMap<>();

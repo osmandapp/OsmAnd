@@ -17,7 +17,7 @@
 		android:layout_marginRight="@dimen/content_padding"
 		android:tint="?attr/active_color_basic"
 		tools:visibility="visible"
-		android:src="@drawable/ic_action_plus"
+		osmand:srcCompat="@drawable/ic_action_plus"
 		android:layout_marginEnd="@dimen/content_padding"
 		android:layout_marginStart="@dimen/content_padding" />
 

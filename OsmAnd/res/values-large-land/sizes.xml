@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="empty_state_image_margin_top">59dp</dimen>
-    <dimen name="empty_state_image_margin_bottom">59dp</dimen>
+
 
     <dimen name="measurement_tool_content_padding_medium">21dp</dimen>
 </resources>

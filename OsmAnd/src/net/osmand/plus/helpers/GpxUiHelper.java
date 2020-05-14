@@ -734,13 +734,13 @@ public class GpxUiHelper {
 			v.findViewById(R.id.unknown_section).setVisibility(View.GONE);
 			ImageView distanceI = (ImageView) v.findViewById(R.id.distance_icon);
 			distanceI.setVisibility(View.VISIBLE);
-			distanceI.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_small_distance));
+			distanceI.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_distance_16));
 			ImageView pointsI = (ImageView) v.findViewById(R.id.points_icon);
 			pointsI.setVisibility(View.VISIBLE);
-			pointsI.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_small_point));
+			pointsI.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_waypoint_16));
 			ImageView timeI = (ImageView) v.findViewById(R.id.time_icon);
 			timeI.setVisibility(View.VISIBLE);
-			timeI.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_small_time));
+			timeI.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_time_16));
 			TextView time = (TextView) v.findViewById(R.id.time);
 			TextView distance = (TextView) v.findViewById(R.id.distance);
 			TextView pointsCount = (TextView) v.findViewById(R.id.points_count);

@@ -1258,8 +1258,8 @@
     <string name="live_monitoring_m">Suivi en ligne (GPX requis)</string>
     <string name="live_monitoring_start">Démarrer le suivi en ligne</string>
     <string name="live_monitoring_stop">Arrêter le suivi en ligne</string>
-    <string name="gpx_monitoring_start">Démarrer l\'enregistrement GPX</string>
-    <string name="gpx_monitoring_stop">Arrêter l\'enregistrement GPX</string>
+    <string name="gpx_monitoring_start">Continuer l\'enregistrement GPX</string>
+    <string name="gpx_monitoring_stop">Interrompre l\'enregistrement GPX</string>
     <string name="gpx_start_new_segment">Débuter un nouveau segment</string>
     <string name="rendering_attr_hideBuildings_name">Bâtiments</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Voies non adaptées aux véhicules</string>
@@ -2514,7 +2514,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="date_added">Ajouté</string>
     <string name="order_by">Trier par :</string>
     <string name="marker_show_distance_descr">Sélectionnez comment indiquer sur la carte la distance et la direction des marques :</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Indiquez ci-dessous à quelle vitesse l\'orientation doit basculer de \'Sens du déplacement\' à \'Boussole\'.</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Indiquez ci-dessous la vitesse à laquelle l\'orientation doit basculer de \'Sens du déplacement\' à \'Boussole\'.</string>
     <string name="passed">Dernière utilisation : %1$s</string>
     <string name="show_guide_line">Afficher les indications de direction</string>
     <string name="show_arrows_on_the_map">Afficher les flèches sur la carte</string>
@@ -2881,7 +2881,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="arrive_at_time">Arrivée à %1$s</string>
     <string name="cubic_m">m³</string>
     <string name="metric_ton">t</string>
-    <string name="shared_string_capacity">Сapacité</string>
+    <string name="shared_string_capacity">Capacité</string>
     <string name="shared_string_width">Largeur</string>
     <string name="shared_string_height">Hauteur</string>
     <string name="routeInfo_roadClass_name">Type de route</string>
@@ -3562,7 +3562,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="n_items_of_z">%1$s de %2$s</string>
     <string name="shared_string_terrain">Terrain</string>
     <string name="hillshade_description">Carte ombrée utilisant des nuances sombres pour visualiser les pistes, les sommets et les plaines.</string>
-    <string name="slope_description">La piste est visualisée en couleurs sur le terrain.</string>
+    <string name="slope_description">La piste est colorée selon sa pente.</string>
     <string name="terrain_slider_description">Définissez les niveaux de zoom minimum et maximum pour lesquels la couche sera affichée.</string>
     <string name="hillshade_download_description">Des cartes supplémentaires sont nécessaires pour afficher l\'ombrage du relief sur la carte.</string>
     <string name="slope_download_description">Des cartes supplémentaires sont nécessaires pour afficher les pistes sur la carte.</string>
@@ -3648,9 +3648,11 @@ représentant la zone : %1$s x %2$s</string>
     <string name="download_unsupported_action">Action %1$s non prise en charge</string>
     <string name="lang_ky">Kirghize</string>
     <string name="lang_gu">Gujarati</string>
-    <string name="osm_live_payment_subscription_management">Le paiement sera débité de votre compte Google Play dès confirmation de l\'abonnement
-\npuis automatiquement à la fin de chaque échéance (mensuelle / trimestrielle / annuelle).
-\nVous pouvez gérer et annuler ces abonnements depuis vos paramètres Google Play.</string>
+    <string name="osm_live_payment_subscription_management">Le paiement sera débité de votre compte Google Play dès confirmation de l\'achat.
+\n
+\nA moins qu\'il ne soit annulé avant sa date de renouvellement, l\'abonnement sera automatiquement débité à chaque échéance (mensuelle / trimestrielle / annuelle). 
+\n
+\nVous pouvez gérer et annuler vos abonnements dans vos paramètres Google Play.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="search_poi_types_descr">Combinez des PI de différentes catégories. Appuyez pour tout sélectionner, appuyez sur le côté gauche pour sélectionner les catégories.</string>
     <string name="search_poi_types">Rechercher des types de PI</string>
@@ -3666,4 +3668,33 @@ représentant la zone : %1$s x %2$s</string>
     <string name="subscription_osmandlive_item">Abonnement - OsmAnd Live</string>
     <string name="osmand_purchases_item">Achats OsmAnd</string>
     <string name="navigation_profiles_item">Profils de navigation</string>
+    <string name="release_3_7">- Nouvelles cartes des pistes hors ligne
+\n
+\n - Personnalisation complète des favoris et des points de passage GPX - couleurs, icônes et formes personnalisées
+\n
+\n - Personnaliser l\'ordre des éléments dans le menu contextuel, la configuration de la carte, le tiroir
+\n
+\n - Wikipédia comme couche séparée dans Paramétrer la carte, sélectionnez uniquement les langues nécessaires
+\n
+\n - Créez vos propres filtres de PI avec une flexibilité totale
+\n
+\n - Ajout d\'options permettant de restaurer les paramètres des profils personnalisés
+\n
+\n - Les routes GPX utilisées en navigation prennent en charge les voies de circulation et les instructions de virage complètes
+\n
+\n - Correction des tailles sur les tablettes
+\n
+\n - Correction de bugs avec RTL
+\n
+\n</string>
+    <string name="additional_actions_descr">Vous pouvez accéder à ces actions en appuyant sur le bouton \"%1$s\".</string>
+    <string name="quick_action_transport_hide">Masquer les transports publics</string>
+    <string name="quick_action_transport_show">Afficher les transports publics</string>
+    <string name="quick_action_show_hide_transport">Afficher / masquer les transports publics</string>
+    <string name="quick_action_transport_descr">Bouton pour afficher ou masquer les transports publics sur la carte.</string>
+    <string name="create_edit_poi">Créer / Modifier un PI</string>
+    <string name="parking_positions">Emplacements de stationnement</string>
+    <string name="add_edit_favorite">Ajouter / Modifier un favori</string>
+    <string name="reset_deafult_order">Rétablir l\'ordre par défaut des éléments</string>
+    <string name="back_to_editing">Retour en modification</string>
 </resources>

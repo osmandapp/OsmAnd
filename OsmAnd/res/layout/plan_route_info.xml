@@ -62,7 +62,7 @@
 							android:background="?attr/selectableItemBackgroundBorderless"
 							android:paddingLeft="@dimen/route_info_icon_padding_right"
 							android:paddingRight="@dimen/route_info_icon_padding_right"
-							android:src="@drawable/ic_action_arrow_down"
+							osmand:srcCompat="@drawable/ic_action_arrow_down"
 							android:tint="@color/description_font_and_bottom_sheet_icons"
 							android:paddingStart="@dimen/route_info_icon_padding_right"
 							android:paddingEnd="@dimen/route_info_icon_padding_right" />
@@ -83,7 +83,7 @@
 							android:background="?attr/selectableItemBackgroundBorderless"
 							android:paddingLeft="@dimen/route_info_icon_padding_right"
 							android:paddingRight="@dimen/route_info_icon_padding_right"
-							android:src="@drawable/ic_overflow_menu_dark"
+							osmand:srcCompat="@drawable/ic_overflow_menu_dark"
 							android:paddingStart="@dimen/route_info_icon_padding_right"
 							android:paddingEnd="@dimen/route_info_icon_padding_right" />
 
@@ -116,7 +116,7 @@
 						android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 						android:layout_marginRight="@dimen/favorites_icon_right_margin"
 						android:layout_marginBottom="@dimen/list_header_text_left_margin"
-						android:src="@drawable/ic_action_location_color" />
+						osmand:srcCompat="@drawable/ic_action_location_color" />
 
 					<LinearLayout
 						android:layout_width="0dp"
@@ -197,7 +197,7 @@
 								android:layout_marginTop="@dimen/route_info_icon_vertical_padding"
 								android:layout_marginRight="@dimen/route_info_icon_vertical_padding"
 								android:layout_marginBottom="@dimen/route_info_icon_vertical_padding"
-								tools:src="@drawable/ic_action_test_light"
+								tools:src="@drawable/ic_action_remove_dark"
 								android:layout_marginEnd="@dimen/route_info_icon_vertical_padding"
 								android:layout_marginStart="@dimen/route_info_icon_vertical_padding" />
 
@@ -236,7 +236,7 @@
 						android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 						android:layout_marginRight="@dimen/favorites_icon_right_margin"
 						android:layout_marginBottom="@dimen/list_header_text_left_margin"
-						android:src="@drawable/ic_action_location_color" />
+						osmand:srcCompat="@drawable/ic_action_location_color" />
 
 					<LinearLayout
 						android:layout_width="0dp"
@@ -356,7 +356,7 @@
 						android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 						android:layout_marginRight="@dimen/favorites_icon_right_margin"
 						android:layout_marginBottom="@dimen/list_header_text_left_margin"
-						android:src="@drawable/ic_action_location_color" />
+						osmand:srcCompat="@drawable/ic_action_location_color" />
 
 					<LinearLayout
 						android:layout_width="0dp"
@@ -577,7 +577,7 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="top"
 			android:scaleType="fitXY"
-			android:src="@drawable/bg_contextmenu_shadow" />
+			osmand:srcCompat="@drawable/bg_contextmenu_shadow" />
 
 	</LinearLayout>
 

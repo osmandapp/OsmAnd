@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -117,7 +118,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 
 		items.add(new SimpleDividerItem(app));
 
-		Drawable transparent = ContextCompat.getDrawable(ctx, R.color.color_transparent);
+		Drawable transparent = AppCompatResources.getDrawable(ctx, R.color.color_transparent);
 		adapter = new ExpandableListAdapter(ctx, contentItem);
 		expListView = new ExpandableListView(ctx);
 		expListView.setAdapter(adapter);

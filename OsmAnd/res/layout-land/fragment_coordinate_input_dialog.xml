@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
-                    android:src="@drawable/ic_arrow_back"/>
+                    osmand:srcCompat="@drawable/ic_arrow_back"/>
 
                 <net.osmand.plus.widgets.TextViewEx
                     android:id="@+id/toolbar_text"
@@ -92,7 +92,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="end"
                 android:scaleType="fitXY"
-                android:src="@drawable/bg_shadow_quick_input_left"/>
+                osmand:srcCompat="@drawable/bg_shadow_quick_input_left"/>
 
         </FrameLayout>
 
@@ -108,7 +108,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
                 android:scaleType="fitXY"
-                android:src="@drawable/bg_shadow_quick_input_right"/>
+                osmand:srcCompat="@drawable/bg_shadow_quick_input_right"/>
 
         </FrameLayout>
 

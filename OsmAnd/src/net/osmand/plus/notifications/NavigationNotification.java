@@ -129,7 +129,7 @@ public class NavigationNotification extends OsmandNotification {
 		String notificationTitle;
 		StringBuilder notificationText = new StringBuilder();
 		color = 0;
-		icon = R.drawable.ic_action_start_navigation;
+		icon = R.drawable.ic_notification_start_navigation;
 		turnBitmap = null;
 		ongoing = true;
 		RoutingHelper routingHelper = app.getRoutingHelper();
@@ -228,20 +228,20 @@ public class NavigationNotification extends OsmandNotification {
 		Intent stopIntent = new Intent(OSMAND_STOP_NAVIGATION_SERVICE_ACTION);
 		PendingIntent stopPendingIntent = PendingIntent.getBroadcast(app, 0, stopIntent,
 				PendingIntent.FLAG_UPDATE_CURRENT);
-		notificationBuilder.addAction(R.drawable.ic_action_remove_dark,
+		notificationBuilder.addAction(R.drawable.ic_notification_remove,
 				app.getString(R.string.shared_string_control_stop), stopPendingIntent);
 
 		if (routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()) {
 			Intent pauseIntent = new Intent(OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION);
 			PendingIntent pausePendingIntent = PendingIntent.getBroadcast(app, 0, pauseIntent,
 					PendingIntent.FLAG_UPDATE_CURRENT);
-			notificationBuilder.addAction(R.drawable.ic_pause,
+			notificationBuilder.addAction(R.drawable.ic_notification_pause,
 					app.getString(R.string.shared_string_pause), pausePendingIntent);
 		} else if (routingHelper.isRouteCalculated() && routingHelper.isPauseNavigation()) {
 			Intent resumeIntent = new Intent(OSMAND_RESUME_NAVIGATION_SERVICE_ACTION);
 			PendingIntent resumePendingIntent = PendingIntent.getBroadcast(app, 0, resumeIntent,
 					PendingIntent.FLAG_UPDATE_CURRENT);
-			notificationBuilder.addAction(R.drawable.ic_play_dark,
+			notificationBuilder.addAction(R.drawable.ic_notification_play,
 					app.getString(R.string.shared_string_continue), resumePendingIntent);
 		}
 

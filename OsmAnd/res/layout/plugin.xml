@@ -13,16 +13,31 @@
         android:orientation="vertical"
         tools:context=".activities.PluginActivity">
 
-        <ImageView
-            android:id="@+id/plugin_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:adjustViewBounds="true"
-            android:maxHeight="200dp"
-            android:maxWidth="360dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/extension_stub"/>
+		<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<ImageView
+				android:id="@+id/plugin_image_placeholder"
+				android:layout_width="360dp"
+				android:layout_height="144dp"
+				android:layout_gravity="center"
+				android:scaleType="center"
+				android:background="@color/osmand_orange"
+				osmand:srcCompat="@drawable/ic_extension_dark"
+				android:visibility="gone"/>
+
+			<ImageView
+				android:id="@+id/plugin_image"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal"
+				android:adjustViewBounds="true"
+				android:maxWidth="360dp"
+				android:maxHeight="200dp"
+				android:scaleType="fitCenter" />
+
+		</FrameLayout>
 
         <FrameLayout
             android:id="@+id/plugin_header"

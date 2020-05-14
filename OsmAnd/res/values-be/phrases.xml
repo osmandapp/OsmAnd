@@ -1569,8 +1569,8 @@
     <string name="poi_payment_yandexmoney_yes">Яндэкс.Грошы</string>
     <string name="poi_payment_yandexmoney_no">Аплата праз Яндэкс.Грошы не прымаецца</string>
     <string name="poi_description_payment">Апісанне спосабу аплаты</string>
-    <string name="poi_internet_access_fee_yes">Доступ у Інтэрнэт - спаганяецца плата</string>
-    <string name="poi_internet_access_fee_no">Доступ у Інтэрнэт - бясплатны</string>
+    <string name="poi_internet_access_fee_yes">Доступ у інтэрнэт: спаганяецца плата</string>
+    <string name="poi_internet_access_fee_no">Доступ у інтэрнэт: бясплатны</string>
     <string name="poi_events_venue">Месца правядзення мерапрыемстваў</string>
     <string name="poi_diet_vegetarian_only">Толькі вегетарыянскае харчаванне</string>
     <string name="poi_diet_vegetarian_yes">Вегетарыянскае</string>

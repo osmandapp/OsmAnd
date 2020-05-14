@@ -3540,7 +3540,7 @@
     <string name="shared_string_routing">ניתוב</string>
     <string name="listed_exist">%1$s מוצג, כבר קיים ב־OsmAnd.</string>
     <string name="clear_recorded_data_warning">למחוק את הנתונים שהוקלטו\?</string>
-    <string name="importing_from">מיובאים נתונים מתוך %1</string>
+    <string name="importing_from">מיובאים נתונים מתוך %1$s</string>
     <string name="shared_string_importing">מתבצע ייבוא</string>
     <string name="checking_for_duplicate_description">OsmAnd יחפש כפילויות של %1$s עם פריטים קיימים ביישומון.
 \n

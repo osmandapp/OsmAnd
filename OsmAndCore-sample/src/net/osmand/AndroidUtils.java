@@ -18,6 +18,8 @@ import android.view.ViewParent;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
+import androidx.appcompat.content.res.AppCompatResources;
+
 import net.osmand.core.samples.android.sample1.R;
 
 import java.io.BufferedReader;
@@ -103,10 +105,9 @@ public class AndroidUtils {
 	@SuppressWarnings("deprecation")
 	public static void setBackground(Context ctx, View view, boolean night, int lightResId, int darkResId) {
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			view.setBackground(ctx.getResources().getDrawable(night ? darkResId : lightResId,
-					ctx.getTheme()));
+			view.setBackground(AppCompatResources.getDrawable(ctx, night ? darkResId : lightResId));
 		} else {
-			view.setBackgroundDrawable(ctx.getResources().getDrawable(night ? darkResId : lightResId));
+			view.setBackgroundDrawable(AppCompatResources.getDrawable(ctx, night ? darkResId : lightResId));
 		}
 	}
 

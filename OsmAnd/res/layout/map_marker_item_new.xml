@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
-        android:src="@drawable/bg_shadow_list_top"
+        osmand:srcCompat="@drawable/bg_shadow_list_top"
         android:visibility="gone"
         tools:visibility="visible"/>
 
@@ -46,7 +47,7 @@
                 android:layout_gravity="center_vertical"
                 android:scaleType="centerInside"
                 android:tint="?attr/secondary_icon_color"
-                tools:src="@drawable/ic_action_reorder"/>
+                tools:src="@drawable/ic_action_item_move"/>
 
             <View
                 android:id="@+id/flag_icon_left_space"

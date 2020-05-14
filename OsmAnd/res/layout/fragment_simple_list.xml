@@ -18,7 +18,7 @@
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="52dp"
             android:layout_height="52dp"
-            android:src="@drawable/ic_arrow_back"/>
+            app:srcCompat="@drawable/ic_arrow_back"/>
 
         <net.osmand.plus.widgets.TextViewEx
             android:id="@+id/titleTextView"

@@ -291,8 +291,14 @@ public class SearchUICore {
 		return null;
 	}
 
-	public <T extends SearchCoreAPI> SearchResultCollection shallowSearch(Class<T> cl,
-																		  String text, final ResultMatcher<SearchResult> matcher) throws IOException {
+	public <T extends SearchCoreAPI> SearchResultCollection shallowSearch(Class<T> cl, String text,
+	                                                                      ResultMatcher<SearchResult> matcher) throws IOException {
+		return shallowSearch(cl, text, matcher, true, true);
+	}
+
+	public <T extends SearchCoreAPI> SearchResultCollection shallowSearch(Class<T> cl, String text,
+	                                                                      final ResultMatcher<SearchResult> matcher,
+	                                                                      boolean resortAll, boolean removeDuplicates) throws IOException {
 		T api = getApiByClass(cl);
 		if (api != null) {
 			if (debugMode) {
@@ -306,7 +312,7 @@ public class SearchUICore {
 
 			SearchResultCollection collection = new SearchResultCollection(
 					sphrase);
-			collection.addSearchResults(rm.getRequestResults(), true, true);
+			collection.addSearchResults(rm.getRequestResults(), resortAll, removeDuplicates);
 			if (debugMode) {
 				LOG.info("Finish shallow search <" + sphrase + "> Results=" + rm.getRequestResults().size());
 			}

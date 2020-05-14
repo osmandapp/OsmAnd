@@ -2419,7 +2419,7 @@
     <string name="avoid_pt_types_descr">Kaçınılacak toplu taşıma türlerini seçin:</string>
     <string name="quick_action_day_night_mode">%s modu</string>
     <string name="avoid_pt_types">Kaçınılacak taşıma türleri…</string>
-    <string name="shared_string_walk">Yürü</string>
+    <string name="shared_string_walk">Yürüme</string>
     <string name="public_transport_warning_title">Toplu taşıma navigasyonu şu anda beta testindedir, hatalar ve yanlışlıklar olabilir.</string>
     <string name="add_intermediate">Ara nokta ekle</string>
     <string name="add_start_and_end_points">Kalkış ve varış noktası ekle</string>
@@ -2919,7 +2919,7 @@
     <string name="shared_string_launch">Başlat</string>
     <string name="lang_gn_py">Guaraní dili</string>
     <string name="intermediate_waypoint">Ara nokta</string>
-    <string name="transfers">Transferler</string>
+    <string name="transfers">Aktarmalar</string>
     <string name="on_foot">Yürüyerek</string>
     <string name="route_way">Yol</string>
     <string name="points_of_interests">İlgi çekici noktalar (Points of interest - POI)</string>
@@ -2979,7 +2979,7 @@
 \n
 \n</string>
     <string name="files_present">%1$d dosya (%2$s) önceki \'%3$s\' konumunda mevcut.</string>
-    <string name="public_transport_ped_route_title">Yürüme rotası yaklaşık %1$s\'dir ve toplu taşıma araçlarına göre daha hızlı olabilir</string>
+    <string name="public_transport_ped_route_title">Yürüme rotası yaklaşık %1$s, ve toplu taşıma araçlarına göre daha hızlı olabilir</string>
     <string name="public_transport_no_route_title">Ne yazık ki, OsmAnd ayarlarınıza uygun bir rota bulamadı.</string>
     <string name="searching_gps">GPS aranıyor</string>
     <string name="coordinates_widget">Koordinatlar widget\'ı</string>
@@ -3630,7 +3630,7 @@
 \ndolduğunda (ay/üç ay/yıl) ücretlendirilir,
 \nGoogle Play ayarlarınızdan daha önce iptal edilirse yenilenmeyecektir.</string>
     <string name="search_poi_types">POI türleri ara</string>
-    <string name="search_poi_types_descr">Farklı kategorilerdeki POI türlerini birleştirin. Tümünü seçmek için düğmeye dokunun, kategori seçimi için sol tarafa dokunun.</string>
+    <string name="search_poi_types_descr">Farklı kategorilerdeki POI türlerini birleştirin. Tümünü seçmek için \"Değiştir\" düğmesine, kategori seçimi için sol tarafa dokunun.</string>
     <string name="radius_ruler_item">Yarıçap cetveli</string>
     <string name="tracker_item">OsmAnd izleyici</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
@@ -3643,4 +3643,23 @@
     <string name="osmand_purchases_item">OsmAnd satın almaları</string>
     <string name="legend_item_description">Bir haritadaki sembollerin rehberi</string>
     <string name="navigation_profiles_item">Navigasyon profilleri</string>
+    <string name="release_3_7">• Yeni çevrim dışı Yamaç haritaları
+\n
+\n • Sık Kullanılanlar ve GPX Ara Noktalarını tamamen özelleştirme – özel renkler, simgeler, şekiller
+\n
+\n • İçerik Menüsü, Harita Yapılandırma, Çekmece ögelerinin sırasını özelleştirme
+\n
+\n • Harita yapılandırma bölümünde ayrı bir katman olarak Wikipedia, yalnızca gerekli dilleri seçin
+\n
+\n • Tamamen esnek olarak kendi POI filtrenizi/haritalarınızı oluşturun
+\n
+\n • Özel profiller için ayarları geri yükleme seçenekleri eklendi
+\n
+\n • GPX rota navigasyonu için trafik şeritleri ve dönüş talimatları için tam destek
+\n
+\n • Tabletlerde kullanıcı arayüzü boyutlarını düzeltme
+\n
+\n • RTL hatalarını düzeltme
+\n
+\n</string>
 </resources>

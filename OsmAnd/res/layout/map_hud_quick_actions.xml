@@ -19,7 +19,7 @@
             android:layout_gravity="bottom|end"
             android:visibility="gone"
             tools:visibility="visible"
-            tools:src="@drawable/ic_action_test_light"/>
+            tools:src="@drawable/ic_action_remove_dark"/>
     </FrameLayout>
 
     <net.osmand.plus.quickaction.QuickActionsWidget

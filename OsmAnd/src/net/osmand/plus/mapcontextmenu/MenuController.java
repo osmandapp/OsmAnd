@@ -14,6 +14,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.GPXUtilities.WptPt;
@@ -745,7 +746,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 					return enabled ? getNormalIcon(resId) : getDisabledIcon(resId);
 				}
 				MapActivity mapActivity = getMapActivity();
-				return mapActivity != null ? ContextCompat.getDrawable(mapActivity, resId) : null;
+				return mapActivity != null ? AppCompatResources.getDrawable(mapActivity, resId) : null;
 			}
 			return null;
 		}

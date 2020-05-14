@@ -37,7 +37,7 @@
 					android:paddingRight="@dimen/bottom_sheet_icon_margin"
 					android:paddingStart="@dimen/content_padding"
 					android:scaleType="center"
-					android:src="@drawable/ic_arrow_back"
+					osmand:srcCompat="@drawable/ic_arrow_back"
 					android:visibility="visible" />
 
 				<net.osmand.plus.widgets.TextViewEx

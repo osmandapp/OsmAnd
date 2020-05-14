@@ -32,6 +32,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
@@ -236,7 +237,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		listView.setDrawSelectorOnTop(true);
 		listView.setScrollViewCallbacks(this);
 		listEmptyTextView = (TextView) dashboardView.findViewById(R.id.emptyTextView);
-		gradientToolbar = ContextCompat.getDrawable(mapActivity, R.drawable.gradient_toolbar).mutate();
+		gradientToolbar = AppCompatResources.getDrawable(mapActivity, R.drawable.gradient_toolbar).mutate();
 		if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
 			this.portrait = true;
 			scrollView.setScrollViewCallbacks(this);
@@ -260,7 +261,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			fl.gravity = Gravity.BOTTOM;
 			shadowContainer.setLayoutParams(fl);
 			ImageView shadow = new ImageView(mapActivity);
-			shadow.setImageDrawable(ContextCompat.getDrawable(mapActivity, R.drawable.bg_shadow_onmap));
+			shadow.setImageDrawable(AppCompatResources.getDrawable(mapActivity, R.drawable.bg_shadow_onmap));
 			shadow.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
 					FrameLayout.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM));
 			shadow.setScaleType(ScaleType.FIT_XY);
@@ -413,7 +414,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 
 		DashboardActionButton myLocationButton = new DashboardActionButton();
-		myLocationButton.icon = ContextCompat.getDrawable(mapActivity, R.drawable.map_my_location);
+		myLocationButton.icon = AppCompatResources.getDrawable(mapActivity, R.drawable.map_my_location);
 		myLocationButton.text = mapActivity.getString(R.string.map_widget_back_to_loc);
 		myLocationButton.onClickListener = new View.OnClickListener() {
 			@Override
@@ -428,7 +429,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		};
 
 		DashboardActionButton navigateButton = new DashboardActionButton();
-		navigateButton.icon = ContextCompat.getDrawable(mapActivity, R.drawable.map_start_navigation);
+		navigateButton.icon = AppCompatResources.getDrawable(mapActivity, R.drawable.map_start_navigation);
 		navigateButton.text = mapActivity.getString(R.string.follow);
 		navigateButton.onClickListener = new View.OnClickListener() {
 			@Override
@@ -439,7 +440,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		};
 
 		DashboardActionButton routeButton = new DashboardActionButton();
-		routeButton.icon = ContextCompat.getDrawable(mapActivity, R.drawable.map_directions);
+		routeButton.icon = AppCompatResources.getDrawable(mapActivity, R.drawable.map_directions);
 		routeButton.text = mapActivity.getString(R.string.layer_route);
 		routeButton.onClickListener = new View.OnClickListener() {
 			@Override

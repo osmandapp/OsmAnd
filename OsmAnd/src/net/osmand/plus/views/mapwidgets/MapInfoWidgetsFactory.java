@@ -27,6 +27,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
@@ -1131,19 +1132,27 @@ public class MapInfoWidgetsFactory {
 		}
 
 		private boolean setRoadShield(ImageView view, RouteDataObject object) {
-			String nameTag = null;
-			String name = null;
 			StringBuilder additional = new StringBuilder();
 			for (int i = 0; i < object.nameIds.length; i++) {
 				String key = object.region.routeEncodingRules.get(object.nameIds[i]).getTag();
 				String val = object.names.get(object.nameIds[i]);
-				if (key.startsWith("road_ref")) {
-					nameTag = key;
-					name = val;
-				} else {
+				if (!key.startsWith("road_ref")) {
 					additional.append(key).append("=").append(val).append(";");
 				}
 			}
+			for (int i = 0; i < object.nameIds.length; i++) {
+				String key = object.region.routeEncodingRules.get(object.nameIds[i]).getTag();
+				String val = object.names.get(object.nameIds[i]);
+				if (key.startsWith("road_ref")) {
+					boolean visible = setRoadShield(view, object, key, val, additional);
+					if(visible) {
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+		private boolean setRoadShield(ImageView view, RouteDataObject object, String nameTag, String name, StringBuilder additional ) {
 
 			Context context = topBar.getContext();
 			int[] tps = object.getTypes();
@@ -1196,7 +1205,7 @@ public class MapInfoWidgetsFactory {
 			}
 
 			if (shieldRes != -1) {
-				Drawable shield = ContextCompat.getDrawable(view.getContext(), shieldRes);
+				Drawable shield = AppCompatResources.getDrawable(view.getContext(), shieldRes);
 				if (shield == null) {
 					return false;
 				}

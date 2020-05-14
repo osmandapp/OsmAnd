@@ -480,7 +480,7 @@ public class RouteProvider {
 						ch.routeEndPointOffset = info.routeEndPointOffset - startI[0];
 					}
 					ch.setDescriptionRoute(info.getDescriptionRoutePart());
-
+					ch.setRouteDataObject(info.getRouteDataObject());
 					// Issue #2894
 					if (info.getRef() != null && !"null".equals(info.getRef())) {
 						ch.setRef(info.getRef());

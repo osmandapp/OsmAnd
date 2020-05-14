@@ -17,6 +17,7 @@ import android.view.View;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidNetworkUtils;
@@ -246,7 +247,7 @@ public class DiscountHelper {
 		int iconId = mapActivity.getResources().getIdentifier(data.iconId, "drawable", mapActivity.getMyApplication().getPackageName());
 		final DiscountBarController toolbarController = new DiscountBarController();
 		if (data.bgColor != -1) {
-			LayerDrawable bgLand = (LayerDrawable) ContextCompat.getDrawable(mapActivity, R.drawable.discount_bar_bg_land);
+			LayerDrawable bgLand = (LayerDrawable) AppCompatResources.getDrawable(mapActivity, R.drawable.discount_bar_bg_land);
 			if (bgLand != null) {
 				((GradientDrawable) bgLand.findDrawableByLayerId(R.id.color_bg)).setColor(data.bgColor);
 			}

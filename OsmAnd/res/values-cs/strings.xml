@@ -1247,8 +1247,8 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="live_monitoring_m">On-line sledování (vyžaduje GPX)</string>
     <string name="live_monitoring_start">Spustit on-line sledování</string>
     <string name="live_monitoring_stop">Zastavit on-line sledování</string>
-    <string name="gpx_monitoring_start">Zapnout GPX logování</string>
-    <string name="gpx_monitoring_stop">Zastavit GPX logování</string>
+    <string name="gpx_monitoring_start">Pokračovat v GPX logování</string>
+    <string name="gpx_monitoring_stop">Pozastavit GPX logování</string>
     <string name="gpx_start_new_segment">Začít nový segment</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Cesty, které nejsou pro vozidla</string>
     <string name="rendering_attr_buildings15zoom_name">Budovy při přiblížení 15</string>
@@ -3443,4 +3443,23 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="osmand_purchases_item">Nákupy v OsmAnd</string>
     <string name="legend_item_description">Průvodce symboly na mapě</string>
     <string name="navigation_profiles_item">Navigační profily</string>
+    <string name="release_3_7">• Nové offline mapy svahů
+\n
+\n• Plné přizpůsobení oblíbených bodů a GPX cílů – vlastní barvy, ikony a tvary
+\n
+\n• Možnost změny pořadí položek v kontextovém menu, nastavení mapy i hlavním menu
+\n
+\n• Wikipedie jako samostatná vrstva v nastavení mapy, lze vybrat pouze potřebné jazyky
+\n
+\n• Vytváření vlastních filtrů a map bodů zájmu s plnou flexibilitou
+\n
+\n• Přidána možnost obnovit nastavení vlastních profilů
+\n
+\n• Plnohodnotné GPX trasy z navigace nyní podporují jízdní pruhy a kompletní navigační pokyny
+\n
+\n• Opravena velikost uživatelského rozhraní na tabletech
+\n
+\n• Opraveny chyby pro jazyky psané zprava doleva
+\n
+\n</string>
 </resources>

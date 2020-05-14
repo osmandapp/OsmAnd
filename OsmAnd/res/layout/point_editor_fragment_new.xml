@@ -34,7 +34,7 @@
 				android:layout_height="match_parent"
 				android:layout_gravity="end"
 				android:contentDescription="@string/replace_all"
-				android:src="@drawable/ic_action_replace"
+				app:srcCompat="@drawable/ic_action_replace"
 				android:layout_marginRight="@dimen/content_padding_half"
 				android:layout_marginStart="@dimen/content_padding_half"
 				android:layout_marginLeft="@dimen/content_padding"
@@ -108,7 +108,7 @@
 						android:layout_gravity="end"
 						android:layout_margin="@dimen/content_padding_small"
 						android:contentDescription="@string/icon"
-						android:src="@drawable/ic_action_home_dark" />
+						app:srcCompat="@drawable/ic_action_home_dark" />
 
 				</FrameLayout>
 
@@ -227,7 +227,7 @@
 								android:layout_marginLeft="@dimen/content_padding_small"
 								android:layout_marginEnd="@dimen/content_padding"
 								android:layout_marginRight="@dimen/content_padding"
-								android:src="@drawable/ic_action_folder"
+								app:srcCompat="@drawable/ic_action_folder"
 								android:contentDescription="@string/shared_string_list" />
 
 						</LinearLayout>
@@ -472,7 +472,7 @@
 						android:layout_marginRight="@dimen/content_padding"
 						android:layout_gravity="center_vertical"
 						android:contentDescription="@string/delete_point"
-						android:src="@drawable/ic_action_delete_dark" />
+						app:srcCompat="@drawable/ic_action_delete_dark" />
 
 					<TextView
 						android:id="@+id/delete_action_title"

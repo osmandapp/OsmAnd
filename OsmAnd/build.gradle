@@ -52,7 +52,8 @@ android {
 		versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
 		versionName System.getenv("APK_VERSION_SUFFIX")? versionName + System.getenv("APK_VERSION_SUFFIX").toString(): versionName
 		// Stops the Gradle plugin’s automatic rasterization of vectors
-		vectorDrawables.generatedDensities = ['hdpi']
+		// vectorDrawables.generatedDensities = ['hdpi']
+		vectorDrawables.useSupportLibrary = true
 	}
 
 	lintOptions {
@@ -84,7 +85,7 @@ android {
 		noCompress "qz"
 		cruncherEnabled = false
 		// Flag notifies aapt to keep the attribute IDs around
-		additionalParameters "--no-version-vectors"
+		// additionalParameters "--no-version-vectors"
 	}
 
 	dexOptions {
@@ -523,7 +524,7 @@ dependencies {
 	implementation 'androidx.gridlayout:gridlayout:1.0.0'
 	implementation 'androidx.cardview:cardview:1.0.0'
 	implementation 'androidx.appcompat:appcompat:1.1.0'
-	implementation 'com.google.android.material:material:1.2.0-alpha05'
+	implementation 'com.google.android.material:material:1.2.0-alpha06'
 	implementation 'androidx.browser:browser:1.0.0'
 	implementation 'androidx.preference:preference:1.1.0'
 	implementation fileTree(include:  ['gnu-trove-osmand.jar', 'icu4j-49_1_patched.jar'], dir: 'libs')

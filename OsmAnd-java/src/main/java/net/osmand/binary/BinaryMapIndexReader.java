@@ -428,7 +428,10 @@ public class BinaryMapIndexReader {
 				if (ls.endsWith("_2")) {
 					ls = ls.substring(0, ls.length() - "_2".length());
 				}
-				return ls.substring(0, ls.lastIndexOf('_')).replace('_', ' ');
+				if (ls.lastIndexOf('_') != -1) {
+					ls = ls.substring(0, ls.lastIndexOf('_')).replace('_', ' ');
+				}
+				return ls;
 			}
 
 		}
@@ -505,7 +508,7 @@ public class BinaryMapIndexReader {
 				finishInit.add(transportRoute);	
 			}
 			TIntObjectHashMap<String> indexedStringTable = transportAdapter.initializeStringTable(ind, stringTable);
-			for(TransportRoute transportRoute : finishInit ) {
+			for (TransportRoute transportRoute : finishInit) {
 				transportAdapter.initializeNames(false, transportRoute, indexedStringTable);
 			}
 			

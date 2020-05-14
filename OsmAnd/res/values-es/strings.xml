@@ -1276,8 +1276,8 @@
     <string name="live_monitoring_m">Seguimiento en línea (requiere GPX)</string>
     <string name="live_monitoring_start">Iniciar seguimiento en línea</string>
     <string name="live_monitoring_stop">Parar seguimiento en línea</string>
-    <string name="gpx_monitoring_start">Iniciar grabación GPX</string>
-    <string name="gpx_monitoring_stop">Parar grabación GPX</string>
+    <string name="gpx_monitoring_start">Continuar grabación GPX</string>
+    <string name="gpx_monitoring_stop">Detener grabación GPX</string>
     <string name="gpx_start_new_segment">Iniciar nuevo segmento</string>
     <string name="lang_fa">Persa</string>
     <string name="lang_al">Albanés</string>
@@ -3573,4 +3573,23 @@
     <string name="shared_string_language">Idioma</string>
     <string name="shared_string_all_languages">Todos los idiomas</string>
     <string name="wiki_menu_download_descr">Se necesitan mapas adicionales para ver los puntos de interés de Wikipedia en el mapa.</string>
+    <string name="release_3_7">• Nuevos mapas sin conexión de las pendientes
+\n
+\n • Personalización más completa de los favoritos y puntos de referencia GPX (colores personalizados, iconos, formas)
+\n
+\n • Nueva personalización en el orden de los elementos en Configurar mapa, menú contextual y menú lateral
+\n
+\n • Wikipedia ahora se visualiza como una capa separada en Configurar mapa, elige sólo los idiomas necesarios
+\n
+\n • Crea tu propio filtro/mapas de puntos de interés, con total flexibilidad
+\n
+\n • Se añadieron opciones para restablecer los ajustes de los perfiles personalizados
+\n
+\n • Las rutas GPX para la navegación, ahora admiten los carriles de tráfico y completan las instrucciones de giro
+\n
+\n • Se ha corregido el tamaño de la interfaz en las tabletas
+\n
+\n • Se corrigieron los errores con RTL
+\n
+\n</string>
 </resources>

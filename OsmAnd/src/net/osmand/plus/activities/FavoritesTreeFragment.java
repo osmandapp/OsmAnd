@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ActionMode;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.MenuItemCompat;
@@ -127,14 +128,14 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		setAdapter(favouritesAdapter);
 
 		boolean light = getMyApplication().getSettings().isLightContent();
-		arrowImage = ContextCompat.getDrawable(context, R.drawable.ic_direction_arrow);
+		arrowImage = AppCompatResources.getDrawable(context, R.drawable.ic_direction_arrow);
 		arrowImage.mutate();
 		if (light) {
 			arrowImage.setColorFilter(ContextCompat.getColor(context, R.color.color_distance), PorterDuff.Mode.MULTIPLY);
 		} else {
 			arrowImage.setColorFilter(ContextCompat.getColor(context, R.color.color_distance), PorterDuff.Mode.MULTIPLY);
 		}
-		arrowImageDisabled = ContextCompat.getDrawable(context, R.drawable.ic_direction_arrow);
+		arrowImageDisabled = AppCompatResources.getDrawable(context, R.drawable.ic_direction_arrow);
 		arrowImageDisabled.mutate();
 		arrowImageDisabled.setColorFilter(ContextCompat.getColor(
 				context, light ? R.color.icon_color_default_light : R.color.icon_color_default_dark), PorterDuff.Mode.MULTIPLY);

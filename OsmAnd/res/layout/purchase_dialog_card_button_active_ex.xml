@@ -74,7 +74,7 @@
 				android:layout_gravity="center"
 				android:layout_marginStart="@dimen/list_header_padding"
 				android:layout_marginLeft="@dimen/list_header_padding"
-				android:src="@drawable/img_feature_purchased" />
+				osmand:srcCompat="@drawable/img_feature_purchased" />
 
 		</LinearLayout>
 

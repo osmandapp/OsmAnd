@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -85,7 +86,7 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 			));
 
 			ImageView shadow = new ImageView(context);
-			shadow.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.bg_shadow_onmap));
+			shadow.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.bg_shadow_onmap));
 			shadow.setLayoutParams(new FrameLayout.LayoutParams(
 					FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM
 			));

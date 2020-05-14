@@ -24,6 +24,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -1767,7 +1768,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			int locationIconResByStatus = OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity) && loc != null
 					? R.drawable.ic_action_location_color : R.drawable.ic_action_location_color_lost;
 
-			((ImageView) parentView.findViewById(R.id.fromIcon)).setImageDrawable(ContextCompat.getDrawable(mapActivity,
+			((ImageView) parentView.findViewById(R.id.fromIcon)).setImageDrawable(AppCompatResources.getDrawable(mapActivity,
 					mapActivity.getMyApplication().getTargetPointsHelper().getPointToStart() == null
 						? locationIconResByStatus : R.drawable.list_startpoint));
 		}

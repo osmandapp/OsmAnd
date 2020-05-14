@@ -70,7 +70,7 @@
                     android:layout_width="@dimen/map_widget_icon"
                     android:layout_height="@dimen/map_widget_icon"
                     android:layout_marginTop="@dimen/context_menu_padding_margin_default"
-                    android:src="@drawable/ic_action_building_number"/>
+                    osmand:srcCompat="@drawable/ic_action_building_number"/>
 
             </LinearLayout>
 
@@ -528,7 +528,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/shared_string_collapse"
             android:scaleType="center"
-            android:src="@drawable/ic_arrow_back"
+            osmand:srcCompat="@drawable/ic_arrow_back"
             tools:visibility="visible"/>
 
     </FrameLayout>
@@ -565,7 +565,7 @@
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/shared_string_collapse"
                     android:scaleType="center"
-                    android:src="@drawable/ic_arrow_back"
+                    osmand:srcCompat="@drawable/ic_arrow_back"
                     tools:visibility="visible"/>
 
                 <TextView
@@ -612,7 +612,7 @@
                 android:layout_height="@dimen/map_button_size"
                 android:background="@drawable/btn_circle"
                 android:contentDescription="@string/zoomIn"
-                tools:src="@drawable/ic_action_test_light"/>
+                tools:src="@drawable/ic_action_remove_dark"/>
 
             <ImageButton
                 android:id="@+id/context_menu_zoom_out_button"
@@ -621,7 +621,7 @@
                 android:layout_marginTop="@dimen/map_button_spacing"
                 android:background="@drawable/btn_circle"
                 android:contentDescription="@string/zoomOut"
-                tools:src="@drawable/ic_action_test_light"/>
+                tools:src="@drawable/ic_action_remove_dark"/>
         </LinearLayout>
 
     </FrameLayout>
