@@ -8,7 +8,6 @@ import android.widget.TextView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.audionotes.TakeVideoNoteAction;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 
@@ -16,7 +15,7 @@ public class ShowHideFavoritesAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(4,
 			"favorites.showhide", ShowHideFavoritesAction.class).
-			nameRes(R.string.quick_action_showhide_favorites_title).iconRes(R.drawable.ic_action_fav_dark).nonEditable().
+			nameRes(R.string.quick_action_showhide_favorites_title).iconRes(R.drawable.ic_action_favorite).nonEditable().
 			category(QuickActionType.CONFIGURE_MAP);
 
 

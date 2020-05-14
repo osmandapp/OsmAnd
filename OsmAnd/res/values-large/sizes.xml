@@ -51,7 +51,6 @@
 	<!-- ContextMenu -->
 	<dimen name="context_menu_top_shadow_h">30dp</dimen>
 	<dimen name="context_menu_icon_top_padding">25dp</dimen>
-	<dimen name="context_menu_first_line_top_margin">21dp</dimen>
 	<dimen name="context_menu_first_line_bottom_margin">24dp</dimen>
 	<dimen name="context_menu_second_line_top_margin">6dp</dimen>
 	<dimen name="context_menu_top_right_button_min_width">114dp</dimen>
@@ -110,10 +109,7 @@
 	<dimen name="measurement_tool_button_height">54dp</dimen>
 
 
-	<dimen name="map_markers_recycler_view_padding_bottom">78dp</dimen>
-	<dimen name="map_markers_recycler_view_padding_top">15dp</dimen>
 	<dimen name="shadow_height">8dp</dimen>
-	<dimen name="map_marker_title_height">42dp</dimen>
 
 	<!--Route info-->
 	<dimen name="route_info_buttons_padding_top_bottom">24dp</dimen>

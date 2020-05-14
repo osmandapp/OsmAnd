@@ -383,7 +383,7 @@ public class ConfigureMapMenu {
 				.setTitleId(R.string.shared_string_favorites, activity)
 				.setSelected(settings.SHOW_FAVORITES.get())
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
-				.setIcon(R.drawable.ic_action_fav_dark)
+				.setIcon(R.drawable.ic_action_favorite)
 				.setItemDeleteAction(makeDeleteAction(settings.SHOW_FAVORITES))
 				.setListener(l)
 				.createItem());
@@ -446,7 +446,7 @@ public class ConfigureMapMenu {
 				.setTitleId(R.string.map_markers, activity)
 				.setSelected(selected)
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
-				.setIcon(R.drawable.ic_action_flag_dark)
+				.setIcon(R.drawable.ic_action_flag)
 				.setItemDeleteAction(makeDeleteAction(settings.SHOW_MAP_MARKERS))
 				.setListener(l).createItem());
 

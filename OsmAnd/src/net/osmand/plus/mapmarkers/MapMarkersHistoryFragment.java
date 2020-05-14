@@ -1,12 +1,9 @@
 package net.osmand.plus.mapmarkers;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -39,7 +36,6 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 	private MapMarkersHistoryAdapter adapter;
 	private OsmandApplication app;
 	private Paint backgroundPaint = new Paint();
-	private Paint iconPaint = new Paint();
 	private Paint textPaint = new Paint();
 	private Snackbar snackbar;
 
@@ -58,9 +54,6 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 		backgroundPaint.setColor(ContextCompat.getColor(getActivity(), night ? R.color.divider_color_dark : R.color.divider_color_light));
 		backgroundPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 		backgroundPaint.setAntiAlias(true);
-		iconPaint.setAntiAlias(true);
-		iconPaint.setFilterBitmap(true);
-		iconPaint.setDither(true);
 		textPaint.setTextSize(getResources().getDimension(R.dimen.default_desc_text_size));
 		textPaint.setFakeBoldText(true);
 		textPaint.setAntiAlias(true);
@@ -84,8 +77,6 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 
 		ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 			private float marginSides = getResources().getDimension(R.dimen.list_content_padding);
-			private Bitmap deleteBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_delete_dark);
-			private Bitmap resetBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_reset_to_default_dark);
 			private boolean iconHidden;
 
 			@Override
@@ -118,22 +109,27 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 						colorIcon = night ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
 						colorText = night ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
 					}
-					if (colorIcon != 0) {
-						iconPaint.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(getActivity(), colorIcon), PorterDuff.Mode.SRC_IN));
-					}
-					textPaint.setColor(ContextCompat.getColor(getActivity(), colorText));
+					textPaint.setColor(ContextCompat.getColor(app, colorText));
+					Drawable icon = app.getUIUtilities().getIcon(
+							dX > 0 ? R.drawable.ic_action_delete_dark : R.drawable.ic_action_reset_to_default_dark,
+							colorIcon);
+					int iconWidth = icon.getIntrinsicWidth();
+					int iconHeight = icon.getIntrinsicHeight();
 					float textMarginTop = ((float) itemView.getHeight() - (float) textHeight) / 2;
+					float iconMarginTop = ((float) itemView.getHeight() - (float) iconHeight) / 2;
+					int iconTopY = itemView.getTop() + (int) iconMarginTop;
+					int iconLeftX;
 					if (dX > 0) {
+						iconLeftX = itemView.getLeft() + (int) marginSides;
 						c.drawRect(itemView.getLeft(), itemView.getTop(), dX, itemView.getBottom(), backgroundPaint);
-						float iconMarginTop = ((float) itemView.getHeight() - (float) deleteBitmap.getHeight()) / 2;
-						c.drawBitmap(deleteBitmap, itemView.getLeft() + marginSides, itemView.getTop() + iconMarginTop, iconPaint);
-						c.drawText(delStr, itemView.getLeft() + 2 * marginSides + deleteBitmap.getWidth(), itemView.getTop() + textMarginTop + textHeight, textPaint);
+						c.drawText(delStr, itemView.getLeft() + 2 * marginSides + iconWidth, itemView.getTop() + textMarginTop + textHeight, textPaint);
 					} else {
+						iconLeftX = itemView.getRight() - iconWidth - (int) marginSides;
 						c.drawRect(itemView.getRight() + dX, itemView.getTop(), itemView.getRight(), itemView.getBottom(), backgroundPaint);
-						float iconMarginTop = ((float) itemView.getHeight() - (float) resetBitmap.getHeight()) / 2;
-						c.drawBitmap(resetBitmap, itemView.getRight() - resetBitmap.getWidth() - marginSides, itemView.getTop() + iconMarginTop, iconPaint);
-						c.drawText(activateStr, itemView.getRight() - resetBitmap.getWidth() - 2 * marginSides - activateStrWidth, itemView.getTop() + textMarginTop + textHeight, textPaint);
+						c.drawText(activateStr, itemView.getRight() - iconWidth - 2 * marginSides - activateStrWidth, itemView.getTop() + textMarginTop + textHeight, textPaint);
 					}
+					icon.setBounds(iconLeftX, iconTopY, iconLeftX + iconWidth, iconTopY + iconHeight);
+					icon.draw(c);
 				}
 				super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
 			}

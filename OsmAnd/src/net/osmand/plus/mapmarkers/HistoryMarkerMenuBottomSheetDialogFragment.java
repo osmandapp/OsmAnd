@@ -49,7 +49,7 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends MenuBottomSheetD
 
 			BaseBottomSheetItem markerItem = new BottomSheetItemWithDescription.Builder()
 					.setDescription(getString(R.string.passed, month + " " + day))
-					.setIcon(getIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(markerColorIndex)))
+					.setIcon(getIcon(R.drawable.ic_action_flag, MapMarker.getColorId(markerColorIndex)))
 					.setTitle(markerName)
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
 					.create();
