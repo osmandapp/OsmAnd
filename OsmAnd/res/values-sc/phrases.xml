@@ -3816,4 +3816,9 @@
     <string name="poi_drinking_water_refill_yes">Ricàrica de s\'abba potàbile: eja</string>
     <string name="poi_drinking_water_refill_no">Ricàrica de s\'abba potàbile: nono</string>
     <string name="poi_drinking_water_refill_network">Retza de ricàrica de s\'abba potàbile</string>
+    <string name="poi_osmand_fire_hydrant_pressure_suction">Sutzione</string>
+    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Presurizada</string>
+    <string name="poi_fire_hydrant_style_water_source_groundwater">Abbas suta de terra</string>
+    <string name="poi_fire_hydrant_type_pipe">Pompa</string>
+    <string name="poi_fire_hydrant_pressure_filter">Pressione</string>
 </resources>
