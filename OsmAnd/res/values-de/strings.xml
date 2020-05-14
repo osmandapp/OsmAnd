@@ -2085,6 +2085,7 @@ Lon %2$s</string>
     <string name="trip_rec_notification_settings">Schnellaufzeichnung einschalten</string>
     <string name="trip_rec_notification_settings_desc">Anzeige einer Systembenachrichtigung zum Starten der Streckenaufzeichnung.</string>
     <string name="shared_string_notifications">Benachrichtigungen</string>
+    <string name="shared_string_resume">Fortsetzen</string>
     <string name="shared_string_appearance">Aussehen</string>
     <string name="route_calculation">Routenberechnung</string>
     <string name="gpx_no_tracks_title">Sie haben noch keine GPX-Dateien</string>

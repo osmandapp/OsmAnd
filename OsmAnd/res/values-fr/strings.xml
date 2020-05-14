@@ -2068,6 +2068,7 @@
     <string name="shared_string_record">Enregistrer</string>
     <string name="gpx_logging_no_data">Aucune donnée</string>
     <string name="shared_string_notifications">Notifications</string>
+    <string name="shared_string_resume">Continuer</string>
     <string name="trip_rec_notification_settings">Activer le démarrage rapide d\'enregistrement d\'itinéraire</string>
     <string name="trip_rec_notification_settings_desc">Afficher une notification système permettant d’enregistrer l\'itinéraire.</string>
     <string name="gpx_no_tracks_title">Vous n\'avez pas encore de fichier GPX</string>
