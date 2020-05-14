@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ActionMode;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.MenuItemCompat;
@@ -132,8 +133,19 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		}
 		setAdapter(favouritesAdapter);
 
-		arrowImageDisabled = app.getUIUtilities().getIcon(R.drawable.ic_direction_arrow,
-				app.getSettings().isLightContent() ? R.color.icon_color_default_light : R.color.icon_color_default_dark);
+		boolean light = getMyApplication().getSettings().isLightContent();
+		arrowImage = AppCompatResources.getDrawable(context, R.drawable.ic_direction_arrow);
+		arrowImage.mutate();
+		if (light) {
+			arrowImage.setColorFilter(ContextCompat.getColor(context, R.color.color_distance), PorterDuff.Mode.MULTIPLY);
+		} else {
+			arrowImage.setColorFilter(ContextCompat.getColor(context, R.color.color_distance), PorterDuff.Mode.MULTIPLY);
+		}
+		arrowImageDisabled = AppCompatResources.getDrawable(context, R.drawable.ic_direction_arrow);
+		arrowImageDisabled.mutate();
+		arrowImageDisabled.setColorFilter(ContextCompat.getColor(
+				context, light ? R.color.icon_color_default_light : R.color.icon_color_default_dark), PorterDuff.Mode.MULTIPLY);
+
 	}
 
 	private void deleteFavorites() {
@@ -449,7 +461,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		if (!MenuItemCompat.isActionViewExpanded(mi)) {
 			createMenuItem(menu, IMPORT_FAVOURITES_ID, R.string.shared_string_add_to_favorites, R.drawable.ic_action_plus, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			createMenuItem(menu, SHARE_ID, R.string.shared_string_share, R.drawable.ic_action_gshare_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			createMenuItem(menu, SELECT_MAP_MARKERS_ID, R.string.select_map_markers, R.drawable.ic_action_flag_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+			createMenuItem(menu, SELECT_MAP_MARKERS_ID, R.string.select_map_markers, R.drawable.ic_action_flag, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			createMenuItem(menu, DELETE_ID, R.string.shared_string_delete, R.drawable.ic_action_delete_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		}
 	}
@@ -476,7 +488,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 				enableSelectionMode(true);
 				createMenuItem(menu, SELECT_MAP_MARKERS_ACTION_MODE_ID, R.string.select_map_markers,
-						R.drawable.ic_action_flag_dark,
+						R.drawable.ic_action_flag,
 						MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				favoritesSelected.clear();
 				groupsToDelete.clear();

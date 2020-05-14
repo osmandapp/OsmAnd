@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="horizontal">
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	android:orientation="horizontal">
 
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:drawableLeft="@drawable/ic_action_folder"
-        android:paddingLeft="10dp"
+		osmand:drawableLeftCompat="@drawable/ic_action_folder"
+		osmand:drawableStartCompat="@drawable/ic_action_folder"
+		android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:background="?attr/selectableItemBackground"
         android:text="Restaurant"
@@ -17,7 +19,6 @@
         android:textSize="@dimen/default_list_text_size"
         android:textAllCaps="false"
 	    android:paddingStart="10dp"
-	    android:paddingEnd="10dp"
-	    android:drawableStart="@drawable/ic_action_folder" />
+	    android:paddingEnd="10dp" />
 
 </LinearLayout>

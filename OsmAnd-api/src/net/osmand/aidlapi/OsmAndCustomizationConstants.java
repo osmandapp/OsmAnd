@@ -54,7 +54,6 @@ public interface OsmAndCustomizationConstants {
 	String ROAD_STYLE_ID = RENDERING_ITEMS_ID_SCHEME + "road_style";
 	String TEXT_SIZE_ID = RENDERING_ITEMS_ID_SCHEME + "text_size";
 	String MAP_LANGUAGE_ID = RENDERING_ITEMS_ID_SCHEME + "map_language";
-	String TRANSPORT_RENDERING_ID = RENDERING_ITEMS_ID_SCHEME + "transport";
 	String DETAILS_ID = RENDERING_ITEMS_ID_SCHEME + "details";
 	String HIDE_ID = RENDERING_ITEMS_ID_SCHEME + "hide";
 	String ROUTES_ID = RENDERING_ITEMS_ID_SCHEME + "routes";

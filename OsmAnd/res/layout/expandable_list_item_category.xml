@@ -65,7 +65,7 @@
             android:background="?attr/dashboard_button"
             android:focusable="false"
             android:scaleType="center"
-            android:src="@drawable/ic_overflow_menu_white"
+            osmand:srcCompat="@drawable/ic_overflow_menu_white"
             android:visibility="gone"
             tools:visiblity="visible"
             android:layout_marginEnd="4dp" />

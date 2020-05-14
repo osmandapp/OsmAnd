@@ -349,14 +349,14 @@ public class MapActivityActions implements DialogProvider {
 		adapter.addItem(itemBuilder
 				.setTitleId(selectedObj instanceof FavouritePoint ? R.string.favourites_context_menu_edit : R.string.shared_string_add, mapActivity)
 				.setId(MAP_CONTEXT_MENU_ADD_ID)
-				.setIcon(R.drawable.ic_action_fav_dark)
+				.setIcon(R.drawable.ic_action_favorite_stroke)
 				.setOrder(10)
 				.createItem());
 		adapter.addItem(itemBuilder
 				.setTitleId(R.string.shared_string_marker, mapActivity)
 				.setId(MAP_CONTEXT_MENU_MARKER_ID)
 				.setOrder(20)
-				.setIcon(R.drawable.ic_action_flag_dark)
+				.setIcon(R.drawable.ic_action_flag_stroke)
 				.createItem());
 		adapter.addItem(itemBuilder
 				.setTitleId(R.string.shared_string_share, mapActivity)
@@ -706,9 +706,10 @@ public class MapActivityActions implements DialogProvider {
 	public ContextMenuAdapter createMainOptionsMenu() {
 		final OsmandMapTileView mapView = mapActivity.getMapView();
 		final OsmandApplication app = mapActivity.getMyApplication();
-		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter(app);
 		boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		
+		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter(app);
+		optionsMenuHelper.setNightMode(nightMode);
+
 		if (drawerMode == DRAWER_MODE_SWITCH_PROFILE) {
 			return createSwitchProfileOptionsMenu(app, optionsMenuHelper, nightMode);
 		}
@@ -764,7 +765,7 @@ public class MapActivityActions implements DialogProvider {
 					}
 				})
 				.createItem());
-		
+
 		return optionsMenuHelper;
 	}
 
@@ -788,7 +789,7 @@ public class MapActivityActions implements DialogProvider {
 
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.map_markers, mapActivity)
 				.setId(DRAWER_MAP_MARKERS_ID)
-				.setIcon(R.drawable.ic_action_flag_dark)
+				.setIcon(R.drawable.ic_action_flag)
 				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
@@ -801,7 +802,7 @@ public class MapActivityActions implements DialogProvider {
 
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.shared_string_my_places, mapActivity)
 				.setId(DRAWER_MY_PLACES_ID)
-				.setIcon(R.drawable.ic_action_fav_dark)
+				.setIcon(R.drawable.ic_action_favorite)
 				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {

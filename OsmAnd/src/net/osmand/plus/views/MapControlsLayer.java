@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
@@ -793,7 +794,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		updateMyLocation(rh, routeDialogOpened || trackDialogOpened || contextMenuOpened);
 		boolean showButtons = (showRouteCalculationControls || !routeFollowingMode)
 				&& !isInMovingMarkerMode() && !isInGpxDetailsMode() && !isInMeasurementToolMode() && !isInPlanRouteMode() && !contextMenuOpened && !isInChoosingRoutesMode() && !isInWaypointsChoosingMode();
-		//routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_gabout_dark : R.drawable.map_directions);
+		//routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_info_dark : R.drawable.map_directions);
 		int routePlanningBtnImage = mapRouteInfoMenu.getRoutePlanningBtnImage();
 		if (routePlanningBtnImage != 0) {
 			routePlanningBtn.setIconResId(routePlanningBtnImage);
@@ -1148,10 +1149,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 			nightMode = night;
 			if (bgDark != 0 && bgLight != 0) {
 				if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-					iv.setBackground(ctx.getResources().getDrawable(night ? bgDark : bgLight,
-							mapActivity.getTheme()));
+					iv.setBackground(AppCompatResources.getDrawable(mapActivity, night ? bgDark : bgLight));
 				} else {
-					iv.setBackgroundDrawable(ctx.getResources().getDrawable(night ? bgDark : bgLight));
+					iv.setBackgroundDrawable(AppCompatResources.getDrawable(mapActivity, night ? bgDark : bgLight));
 				}
 			}
 			Drawable d = null;
@@ -1166,15 +1166,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 				if (compass) {
 					((ImageView) iv).setImageDrawable(new CompassDrawable(d));
 				} else {
-					int iconSize = (int) ctx.getResources().getDimension(R.dimen.standard_icon_size);
-					Bitmap bitmap = Bitmap.createBitmap(iconSize, iconSize, Bitmap.Config.ARGB_8888);
-					Canvas canvas = new Canvas(bitmap);
-					canvas.drawColor(0, PorterDuff.Mode.CLEAR);
-					if (d != null) {
-						d.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-						d.draw(canvas);
-					}
-					((ImageView) iv).setImageDrawable(new BitmapDrawable(ctx.getResources(), bitmap));
+					int btnSizePx = (iv).getLayoutParams().height;
+					int iconSizePx = (int) ctx.getResources().getDimension(R.dimen.map_widget_icon);
+					int iconPadding = (btnSizePx - iconSizePx) / 2;
+					iv.setPadding(iconPadding, iconPadding, iconPadding, iconPadding);
+					((ImageView) iv).setScaleType(ImageView.ScaleType.FIT_CENTER);
+					((ImageView) iv).setImageDrawable(d);
 				}
 			} else if (iv instanceof TextView) {
 				((TextView) iv).setCompoundDrawablesWithIntrinsicBounds(

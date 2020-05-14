@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -134,7 +135,7 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 	}
 
 	private LayerDrawable getPlaceholder(boolean history) {
-		LayerDrawable res = (LayerDrawable) ContextCompat.getDrawable(
+		LayerDrawable res = (LayerDrawable) AppCompatResources.getDrawable(
 				app, history
 						? R.drawable.wikivoyage_search_history_placeholder
 						: R.drawable.wikivoyage_search_placeholder

@@ -134,6 +134,7 @@ public class SelectFolderBottomSheet extends BasePreferenceBottomSheet {
 				fragment.setDescription(description);
 				fragment.setBtnTitle(btnTitle);
 				fragment.setUsedOnMap(usedOnMap);
+				fragment.setArguments(args);
 				fragment.show(fm, TAG);
 			}
 			return true;

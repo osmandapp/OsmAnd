@@ -341,6 +341,9 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 						}
 					} else {
 						hiddenMenuItems.remove(id);
+						if (screenType == ScreenType.CONTEXT_MENU_ACTIONS && mainActionItems.size() < MAIN_BUTTONS_QUANTITY) {
+							mainActionItems.add(id);
+						}
 					}
 					wasReset = false;
 					isChanged = true;

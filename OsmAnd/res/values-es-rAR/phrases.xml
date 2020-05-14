@@ -3825,4 +3825,9 @@
     <string name="poi_drinking_water_refill_yes">Recarga de agua potable: sí</string>
     <string name="poi_drinking_water_refill_no">Recarga de agua potable: no</string>
     <string name="poi_drinking_water_refill_network">Red de recarga de agua potable</string>
+    <string name="poi_osmand_fire_hydrant_pressure_suction">Succión</string>
+    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Presurizado</string>
+    <string name="poi_fire_hydrant_style_water_source_groundwater">Agua subterránea</string>
+    <string name="poi_fire_hydrant_type_pipe">Tubería</string>
+    <string name="poi_fire_hydrant_pressure_filter">Presión</string>
 </resources>

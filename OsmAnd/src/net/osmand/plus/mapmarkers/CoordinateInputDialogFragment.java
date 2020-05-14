@@ -43,6 +43,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
@@ -600,9 +601,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		@DrawableRes int itemBg = lightTheme ? R.drawable.keyboard_item_light_bg : R.drawable.keyboard_item_dark_bg;
 		@DrawableRes int controlItemBg = lightTheme ? R.drawable.keyboard_item_control_light_bg : R.drawable.keyboard_item_control_dark_bg;
 
-		ColorStateList clearItemTextColorStateList = AndroidUtils.createPressedColorStateList(getContext(),
+		Context ctx = requireContext();
+		ColorStateList clearItemTextColorStateList = AndroidUtils.createPressedColorStateList(ctx,
 				R.color.keyboard_item_divider_control_color_light, R.color.keyboard_item_divider_control_color_light_pressed);
-		ColorStateList numberColorStateList = AndroidUtils.createPressedColorStateList(getContext(),
+		ColorStateList numberColorStateList = AndroidUtils.createPressedColorStateList(ctx,
 				R.color.keyboard_item_text_color_light, R.color.keyboard_item_text_color_light_pressed);
 
 		@ColorInt int textColorDark = getResolvedColor(R.color.keyboard_item_text_color_dark);
@@ -645,10 +647,13 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				itemTv.setVisibility(View.GONE);
 				itemIv.setVisibility(View.VISIBLE);
 				itemBottomSpace.setVisibility(View.GONE);
-				Drawable icon;
+				Drawable icon = null;
 				if (lightTheme) {
-					icon = DrawableCompat.wrap(getResources().getDrawable((Integer) item));
-					DrawableCompat.setTintList(icon, numberColorStateList);
+					Drawable drawable = AppCompatResources.getDrawable(ctx, (Integer) item);
+					if (drawable != null) {
+						icon = DrawableCompat.wrap(drawable);
+						DrawableCompat.setTintList(icon, numberColorStateList);
+					}
 				} else {
 					icon = getColoredIcon((Integer) item, R.color.keyboard_item_divider_control_color_dark);
 				}

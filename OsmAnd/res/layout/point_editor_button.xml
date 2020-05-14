@@ -15,8 +15,8 @@
 
 		<ImageView
 			android:id="@+id/outline"
-			android:layout_width="@dimen/context_menu_buttons_bottom_height"
-			android:layout_height="@dimen/context_menu_buttons_bottom_height"
+			android:layout_width="@dimen/favorites_icon_outline_size"
+			android:layout_height="@dimen/favorites_icon_outline_size"
 			android:visibility="invisible"
 			app:srcCompat="@drawable/bg_point_circle_contour" />
 

@@ -51,7 +51,9 @@ import android.widget.TextView;
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.text.TextUtilsCompat;
@@ -353,13 +355,7 @@ public class AndroidUtils {
 	}
 
 	public static void setBackground(Context ctx, View view, boolean night, int lightResId, int darkResId) {
-		Drawable drawable;
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			drawable = ctx.getResources().getDrawable(night ? darkResId : lightResId, ctx.getTheme());
-		} else {
-			drawable = ctx.getResources().getDrawable(night ? darkResId : lightResId);
-		}
-		setBackground(view, drawable);
+		setBackground(view, AppCompatResources.getDrawable(ctx, night ? darkResId : lightResId));
 	}
 
 	public static void setBackground(View view, Drawable drawable) {
@@ -372,19 +368,18 @@ public class AndroidUtils {
 
 	public static void setForeground(Context ctx, View view, boolean night, int lightResId, int darkResId) {
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
-			view.setForeground(ctx.getResources().getDrawable(night ? darkResId : lightResId,
-					ctx.getTheme()));
+			view.setForeground(AppCompatResources.getDrawable(ctx, night ? darkResId : lightResId));
 		} else if (view instanceof FrameLayout) {
-			((FrameLayout) view).setForeground(ctx.getResources().getDrawable(night ? darkResId : lightResId));
+			((FrameLayout) view).setForeground(AppCompatResources.getDrawable(ctx, night ? darkResId : lightResId));
 		}
 	}
 
 	public static void updateImageButton(Context ctx, ImageButton button, int iconLightId, int iconDarkId, int bgLightId, int bgDarkId, boolean night) {
-		button.setImageDrawable(ctx.getResources().getDrawable(night ? iconDarkId : iconLightId));
+		button.setImageDrawable(AppCompatResources.getDrawable(ctx, night ? iconDarkId : iconLightId));
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			button.setBackground(ctx.getResources().getDrawable(night ? bgDarkId : bgLightId, ctx.getTheme()));
+			button.setBackground(AppCompatResources.getDrawable(ctx, night ? bgDarkId : bgLightId));
 		} else {
-			button.setBackgroundDrawable(ctx.getResources().getDrawable(night ? bgDarkId : bgLightId));
+			button.setBackgroundDrawable(AppCompatResources.getDrawable(ctx, night ? bgDarkId : bgLightId));
 		}
 	}
 
@@ -702,6 +697,10 @@ public class AndroidUtils {
 
 	public static Drawable getMirroredDrawable(@NonNull Context ctx,
 	                                           @NonNull Drawable drawable) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			drawable.setAutoMirrored(true);
+			return drawable;
+		}
 		Bitmap bitmap = drawableToBitmap(drawable);
 		return new BitmapDrawable(ctx.getResources(), flipBitmapHorizontally(bitmap));
 	}

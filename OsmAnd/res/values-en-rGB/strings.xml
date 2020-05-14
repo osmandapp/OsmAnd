@@ -4,6 +4,17 @@
 		Our app defaults to American English with default strings in res/values
 		This file is manually maintained in res/values-en-rGB and should ONLY contain strings where a different spelling should be used for English as used in the United Kingdom
 	-->
+    <string name="add_edit_favorite">Add / Edit Favourite</string>
+    <string name="favorites_item">Favourites</string>
+    <string name="slope_description">Slope uses colours to visualise terrain steepness.</string>
+    <string name="search_street_in_neighborhood_cities">Search for street in neighbourhood cities</string>
+    <string name="custom_color">Custom colour</string>
+    <string name="keep_passed_markers_descr">Markers added as a group of Favourites or GPX waypoints marked "Passed" will remain on the map. If the group is not active, the markers will disappear from the map.</string>
+    <string name="osmand_net_previously_installed">All offline data in the old installed app will be supported by the new one, but Favourite points must be exported from the old app and then imported in the new one.</string>
+    <string name="import_file_favourites">Save data as GPX file or import waypoints to \'Favourites\'?</string>
+    <string name="fav_file_to_load_not_found">GPX file containing Favourites not found at {0}</string>
+    <string name="quick_favorites_show_favorites_dialog">Show Favourites dialog</string>
+    <string name="base_profile_descr_aircraft">Aeroplane, gliding</string>
     <string name="rendering_attr_currentTrackColor_name">GPX colour</string>
     <string name="rendering_attr_currentTrackColor_description">GPX colour</string>
     <string name="shared_string_color">Colour</string>

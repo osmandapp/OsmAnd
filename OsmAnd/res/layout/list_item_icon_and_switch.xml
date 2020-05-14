@@ -20,7 +20,7 @@
             android:layout_height="@dimen/standard_icon_size"
             android:layout_marginStart="@dimen/content_padding"
             android:layout_marginLeft="@dimen/content_padding"
-            tools:src="@drawable/ic_action_gabout_dark" />
+            tools:src="@drawable/ic_action_info_dark" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"

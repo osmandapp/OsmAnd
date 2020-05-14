@@ -11,6 +11,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.RectF;
 import android.graphics.drawable.LayerDrawable;
 
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
@@ -172,12 +173,16 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 			this.headingIconId = headingIconId;
 			this.navigationIconId = navigationIconId;
 			int color = ContextCompat.getColor(view.getContext(), colorId);
-			navigationIcon = (LayerDrawable) view.getResources().getDrawable(navigationIconId);
-			DrawableCompat.setTint(navigationIcon.getDrawable(1), color);
+			navigationIcon = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), navigationIconId);
+			if (navigationIcon != null) {
+				DrawableCompat.setTint(navigationIcon.getDrawable(1), color);
+			}
 			headingIcon = BitmapFactory.decodeResource(view.getResources(), headingIconId);
 			headingPaint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
-			locationIcon = (LayerDrawable) view.getResources().getDrawable(locationIconId);
-			DrawableCompat.setTint(DrawableCompat.wrap(locationIcon.getDrawable(1)), color);
+			locationIcon = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), locationIconId);
+			if (locationIcon != null) {
+				DrawableCompat.setTint(DrawableCompat.wrap(locationIcon.getDrawable(1)), color);
+			}
 			area.setColor(UiUtilities.getColorWithAlpha(color, 0.16f));
 			aroundArea.setColor(color);
 		}

@@ -17,7 +17,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        tools:src="@drawable/ic_action_gabout_dark"/>
+        tools:src="@drawable/ic_action_info_dark"/>
 
     <LinearLayout
         android:id="@+id/text_wrapper"
@@ -70,7 +70,7 @@
         android:layout_margin="16dp"
         android:layout_toLeftOf="@+id/toggle_item"
         android:layout_toStartOf="@+id/toggle_item"
-        tools:src="@drawable/ic_action_gabout_dark"/>
+        tools:src="@drawable/ic_action_info_dark"/>
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/toggle_item"

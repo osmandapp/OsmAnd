@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/widget_bg"
@@ -32,7 +33,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="2dp"
             android:gravity="center"
-            android:src="@drawable/ic_action_test_light"
+            osmand:srcCompat="@drawable/ic_action_remove_dark"
             android:visibility="gone"/>
     </FrameLayout>
 
@@ -51,7 +52,7 @@
             android:layout_marginLeft="@dimen/map_widget_icon_margin"
             android:layout_marginRight="@dimen/map_widget_icon_margin"
             android:gravity="center"
-            android:src="@drawable/ic_action_test_light"
+            osmand:srcCompat="@drawable/ic_action_remove_dark"
 	        android:layout_marginEnd="@dimen/map_widget_icon_margin"
 	        android:layout_marginStart="@dimen/map_widget_icon_margin" />
 

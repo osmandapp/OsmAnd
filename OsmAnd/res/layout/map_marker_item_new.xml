@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
-        android:src="@drawable/bg_shadow_list_top"
+        osmand:srcCompat="@drawable/bg_shadow_list_top"
         android:visibility="gone"
         tools:visibility="visible"/>
 
@@ -25,7 +26,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/map_button_shadow_width"
+            android:layout_height="@dimen/map_markers_recycler_view_item_height"
             android:background="?attr/selectableItemBackground">
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -33,20 +34,20 @@
                 tools:text="3"
                 android:gravity="center"
                 android:id="@+id/map_marker_number_text_view"
-                android:layout_width="@dimen/map_button_shadow_width"
-                android:layout_height="@dimen/map_button_shadow_width"
+                android:layout_width="@dimen/map_markers_recycler_view_item_height"
+                android:layout_height="@dimen/map_markers_recycler_view_item_height"
                 android:layout_gravity="center_vertical"
                 android:visibility="gone"
                 tools:visibility="visible"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/map_marker_reorder_icon"
-                android:layout_width="@dimen/map_button_shadow_width"
-                android:layout_height="@dimen/map_button_shadow_width"
+                android:layout_width="@dimen/map_markers_recycler_view_item_height"
+                android:layout_height="@dimen/map_markers_recycler_view_item_height"
                 android:layout_gravity="center_vertical"
                 android:scaleType="centerInside"
                 android:tint="?attr/secondary_icon_color"
-                tools:src="@drawable/ic_action_reorder"/>
+                tools:src="@drawable/ic_action_item_move"/>
 
             <View
                 android:id="@+id/flag_icon_left_space"
@@ -62,7 +63,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="@dimen/bottom_sheet_content_margin"
                 android:layout_marginRight="@dimen/bottom_sheet_content_margin"
-                tools:src="@drawable/ic_action_flag_dark"/>
+                tools:src="@drawable/ic_action_flag"/>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -154,8 +155,8 @@
 
             <ImageButton
                 android:id="@+id/map_marker_options_button"
-                android:layout_width="@dimen/map_button_shadow_width"
-                android:layout_height="@dimen/map_button_shadow_width"
+                android:layout_width="@dimen/map_markers_recycler_view_item_height"
+                android:layout_height="@dimen/map_markers_recycler_view_item_height"
                 android:focusableInTouchMode="true"
                 tools:background="@drawable/marker_circle_background_dark_with_inset"
                 tools:src="@drawable/ic_action_marker_passed"/>
@@ -185,8 +186,8 @@
             android:id="@+id/divider"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:layout_marginLeft="@dimen/map_button_shadow_width"
-            android:layout_marginStart="@dimen/map_button_shadow_width"
+            android:layout_marginLeft="@dimen/map_markers_recycler_view_item_height"
+            android:layout_marginStart="@dimen/map_markers_recycler_view_item_height"
             tools:background="?attr/divider_color"/>
     </LinearLayout>
 

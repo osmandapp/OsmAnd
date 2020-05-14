@@ -218,7 +218,7 @@ public class AMapPointMenuController extends MenuController {
 			}
 		}
 		if (!TextUtils.isEmpty(point.getShortName())) {
-			return R.drawable.ic_small_group;
+			return R.drawable.ic_action_group_name_16;
 		}
 		return NO_ICON;
 	}

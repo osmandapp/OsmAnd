@@ -11,6 +11,7 @@ import android.graphics.drawable.LayerDrawable;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
@@ -87,7 +88,7 @@ public class TrackBitmapDrawer {
 		defPointColor = ContextCompat.getColor(app, R.color.gpx_color_point);
 		paintIcon = new Paint();
 		pointSmall = BitmapFactory.decodeResource(app.getResources(), R.drawable.map_white_shield_small);
-		selectedPoint = (LayerDrawable) app.getResources().getDrawable(R.drawable.map_location_default);
+		selectedPoint = (LayerDrawable) AppCompatResources.getDrawable(app, R.drawable.map_location_default);
 	}
 
 	public void addListener(TrackBitmapDrawerListener l) {

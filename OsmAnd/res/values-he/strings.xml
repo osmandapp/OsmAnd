@@ -3540,7 +3540,7 @@
     <string name="shared_string_routing">ניתוב</string>
     <string name="listed_exist">%1$s מוצג, כבר קיים ב־OsmAnd.</string>
     <string name="clear_recorded_data_warning">למחוק את הנתונים שהוקלטו\?</string>
-    <string name="importing_from">מיובאים נתונים מתוך %1</string>
+    <string name="importing_from">מיובאים נתונים מתוך %1$s</string>
     <string name="shared_string_importing">מתבצע ייבוא</string>
     <string name="checking_for_duplicate_description">OsmAnd יחפש כפילויות של %1$s עם פריטים קיימים ביישומון.
 \n
@@ -3552,7 +3552,7 @@
     <string name="select_distance_route_will_recalc">נא לבחור את המרחק שלאחריו המסלול יחושב מחדש.</string>
     <string name="recalculate_route_in_deviation">חישוב המסלול מחדש במקרה של סטייה</string>
     <string name="shared_string_terrain">תוואי שטח</string>
-    <string name="slope_description">מדרונות היא המחשה צבעונית של תוואי שטח.</string>
+    <string name="slope_description">שיפועים משמשים להמחיש בצורה חזותית כמה המדרון תלול.</string>
     <string name="terrain_slider_description">נא לבחור את רמות התקריב המזערית והמרבית שביניהן השכבה תוצג.</string>
     <string name="hillshade_download_description">נדרשות מפות נוספות כדי לצפות בהצללה על המפה.</string>
     <string name="slope_download_description">נדרשות מפות נוספות כדי לצפות במדרונות על המפה.</string>
@@ -3560,7 +3560,7 @@
     <string name="shared_string_transparency">שקיפות</string>
     <string name="shared_string_zoom_levels">רמות תקריב</string>
     <string name="shared_string_legend">מקרא</string>
-    <string name="terrain_empty_state_text">יש להפעיל כדי לצפות במפת הצללה או מדרונות. ניתן לקרוא עוד על סוגי המפות האלו באתר שלנו</string>
+    <string name="terrain_empty_state_text">יש להפעיל כדי לצפות במפת הצללה או מדרונות. ניתן לקרוא עוד על סוגי המפות האלו באתר שלנו.</string>
     <string name="shared_string_hillshade">הצללה</string>
     <string name="n_items_of_z">%1$s מתוך %2$s</string>
     <string name="download_slope_maps">מדרונות</string>
@@ -3683,4 +3683,16 @@
     <string name="osmand_purchases_item">רכישות OsmAnd</string>
     <string name="legend_item_description">המדריך לסמלי מפה</string>
     <string name="navigation_profiles_item">פרופילי ניווט</string>
+    <string name="navigate_point_format_utm">תקן מר״ב</string>
+    <string name="utm_format_descr">ב־OsmAnd נעשה שימוש בתקן מר״ב, שדומה אך לא זהה לתצורת המר״ב של נאט״ו.</string>
+    <string name="additional_actions_descr">ניתן לגשת לפעולות האלו על ידי לחיצה על הכפתור „%1$s”.</string>
+    <string name="quick_action_transport_hide">הסתרת תחבורה ציבורית</string>
+    <string name="quick_action_transport_show">הצגת תחבורה ציבורית</string>
+    <string name="quick_action_show_hide_transport">הצגת/הסתרת תחב״צ</string>
+    <string name="quick_action_transport_descr">כפתור להצגה או הסתרה של תחבורה ציבורית על המפה.</string>
+    <string name="create_edit_poi">יצירה/עריכה של נקודת עניין</string>
+    <string name="parking_positions">מקומות חנייה</string>
+    <string name="add_edit_favorite">הוספה / הסרה של מועדף</string>
+    <string name="reset_deafult_order">שחזור סדר בררת המחדל של הפריטים</string>
+    <string name="back_to_editing">חזרה לעריכה</string>
 </resources>

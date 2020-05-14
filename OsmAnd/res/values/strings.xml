@@ -11,9 +11,13 @@
 	Thx - Hardy
 
 -->
+    <string name="profiles_for_action_not_found">Profiles selected for this action not found.</string>
+    <string name="change_application_profile">Change application profile</string>
+    <string name="shared_string_add_profile">Add profile</string>
+    <string name="quick_action_switch_profile_descr">Taping action button will switch between selected profiles.</string>
     <string name="back_to_editing">Back to editing</string>
     <string name="reset_deafult_order">Restore default items order</string>
-    <string name="shared_string_add_edit">Add / Edit Favorite</string>
+    <string name="add_edit_favorite">Add / Edit Favorite</string>
     <string name="parking_positions">Parking positions</string>
     <string name="create_edit_poi">Create/Edit POI</string>
     <string name="quick_action_transport_descr">A button to show or hide public transport on the map.</string>
@@ -107,7 +111,7 @@
     <string name="shared_string_drawer">Drawer</string>
     <string name="ui_customization">UI Customization</string>
     <string name="ui_customization_short_descr">Drawer items, context menu</string>
-    <string name="ui_customization_description">Customize the quantity of items in Drawer, configure the map and context menu.\n\nYou can turn off unused plugins, to hide all their controls from the app %1$s.</string>
+    <string name="ui_customization_description">Customize the quantity of items in Drawer, Configure Map and Context Menu.\n\nYou can turn off unused plugins, to hide all their controls from the application. %1$s.</string>
     <string name="shared_string_min">Min</string>
     <string name="shared_string_square">Square</string>
     <string name="shared_string_octagon">Octagon</string>
@@ -137,7 +141,7 @@
     <string name="shared_string_import_complete">Import complete</string>
     <string name="import_complete_description">All data from the %1$s is imported, you can use buttons below to open needed part of the app to manage it.</string>
     <string name="shared_string_hillshade">Hillshade</string>
-    <string name="terrain_empty_state_text">Enable to view hillshade or slope map. You can read more about this map types on our site</string>
+    <string name="terrain_empty_state_text">Enable to view hillshade or slope map. You can read more about these map types on our site.</string>
     <string name="shared_string_legend">Legend</string>
     <string name="shared_string_zoom_levels">Zoom levels</string>
     <string name="shared_string_transparency">Transparency</string>
@@ -145,7 +149,7 @@
     <string name="slope_download_description">Additional maps are needed to view Slopes on the map.</string>
     <string name="hillshade_download_description">Additional maps are needed to view Hillshade on the map.</string>
     <string name="terrain_slider_description">Set the minimum and maximum zoom levels at which the layer will be displayed.</string>
-    <string name="slope_description">Slope is colorized visualisations on terrain.</string>
+    <string name="slope_description">Slope uses colors to visualize terrain steepness.</string>
     <string name="hillshade_description">Hillshade map using dark shades to show slopes, peaks and lowlands.</string>
     <string name="shared_string_terrain">Terrain</string>
     <string name="import_rendering_file">Import rendering file</string>
@@ -724,7 +728,7 @@
     <string name="work_button">Work</string>
     <string name="cubic_m">m³</string>
     <string name="metric_ton">t</string>
-    <string name="shared_string_capacity">Сapacity</string>
+    <string name="shared_string_capacity">Capacity</string>
     <string name="shared_string_width">Width</string>
     <string name="shared_string_height">Height</string>
     <string name="add_destination_point">Set destination</string>
@@ -962,7 +966,7 @@
     <string name="one_tap_active">\'One tap\' active</string>
     <string name="empty_state_av_notes">Make notes!</string>
     <string name="empty_state_av_notes_desc">Add audio, video or photo note to every point on the map, using widget or context menu.</string>
-    <string name="notes_by_date">OSM notes by date</string>
+    <string name="notes_by_date">A/V notes by date</string>
     <string name="by_date">By date</string>
     <string name="by_type">By type</string>
     <string name="looking_for_tracks_with_waypoints">Looking for tracks with waypoints</string>
@@ -1045,7 +1049,7 @@
     <string name="order_by">Order by:</string>
     <string name="marker_show_distance_descr">Select how to indicate distance and direction to map markers on the map:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Map orientation threshold</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Select speed of switching orientation from \'Movement direction\' to \'Compass directon\' below.</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Select speed of switching orientation from \'Movement direction\' to \'Compass direction\' below.</string>
     <string name="all_markers_moved_to_history">All map markers moved to history</string>
     <string name="marker_moved_to_history">Map marker moved to history</string>
     <string name="marker_moved_to_active">Map marker moved to active</string>
@@ -1294,6 +1298,7 @@
     <string name="trip_rec_notification_settings">Turn on quick recording</string>
     <string name="trip_rec_notification_settings_desc">Display a system notification allowing trip recording.</string>
     <string name="shared_string_notifications">Notifications</string>
+    <string name="shared_string_resume">Resume</string>
     <string name="shared_string_continue">Continue</string>
     <string name="shared_string_pause">Pause</string>
     <string name="shared_string_paused">Paused</string>
@@ -2112,8 +2117,8 @@
     <string name="live_monitoring_m">Online tracking (GPX required)</string>
     <string name="live_monitoring_start">Start online tracking</string>
     <string name="live_monitoring_stop">Stop online tracking</string>
-    <string name="gpx_monitoring_start">Start GPX logging</string>
-    <string name="gpx_monitoring_stop">Stop GPX logging</string>
+    <string name="gpx_monitoring_start">Resume GPX logging</string>
+    <string name="gpx_monitoring_stop">Pause GPX logging</string>
     <string name="gpx_start_new_segment">Start new segment</string>
     <string name="rendering_attr_hideBuildings_name">Buildings</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Non-vehicle highways</string>

@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
@@ -17,11 +18,22 @@ import net.osmand.plus.R.drawable;
 
 import org.apache.commons.logging.Log;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringWriter;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 public class RenderingIcons {
 	private static final Log log = PlatformUtil.getLog(RenderingIcons.class);
@@ -34,7 +46,7 @@ public class RenderingIcons {
 //	private static DisplayMetrics dm;
 
 	private static Bitmap cacheBmp = null;
-	
+
 	public static boolean containsSmallIcon(String s){
 		return smallIcons.containsKey(s);
 	}
@@ -44,7 +56,7 @@ public class RenderingIcons {
 	}
 
 	public static synchronized Bitmap getBitmapFromVectorDrawable(Context context, int drawableId) {
-		Drawable drawable = ContextCompat.getDrawable(context, drawableId);
+		Drawable drawable = AppCompatResources.getDrawable(context, drawableId);
 		if (drawable == null) {
 			return null;
 		}
@@ -134,7 +146,7 @@ public class RenderingIcons {
 	public static Drawable getBigIcon(Context ctx, String s) {
 		Integer resId = bigIcons.get(s);
 		if (resId != null) {
-			return ctx.getResources().getDrawable(resId);
+			return AppCompatResources.getDrawable(ctx, resId);
 		}
 		return null;
 	}
@@ -175,7 +187,7 @@ public class RenderingIcons {
 		if (d == null) {
 			Integer drawableId = s.startsWith("h_") ? shaderIcons.get(s.substring(2)) : smallIcons.get(s);
 			if (drawableId != null) {
-				d = ContextCompat.getDrawable(ctx, drawableId);
+				d = AppCompatResources.getDrawable(ctx, drawableId);
 				if (d != null) {
 					d = DrawableCompat.wrap(d);
 					d.mutate();

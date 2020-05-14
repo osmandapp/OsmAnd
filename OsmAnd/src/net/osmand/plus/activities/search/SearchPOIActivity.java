@@ -177,7 +177,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		});
 		showOnMapItem.setEnabled(!isNameSearch() || amenityAdapter.getCount() > 0);
 		if (filter != null && !isNameSearch()) {
-			createMenuItem(omenu, SAVE_FILTER, R.string.edit_filter_save_as_menu_item, R.drawable.ic_action_fav_dark,
+			createMenuItem(omenu, SAVE_FILTER, R.string.edit_filter_save_as_menu_item, R.drawable.ic_action_favorite,
 					MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 			if (!filter.isStandardFilter()) {
 				createMenuItem(omenu, DELETE_FILTER, R.string.shared_string_delete, R.drawable.ic_action_delete_dark,
@@ -773,7 +773,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 					timeIcon.setVisibility(View.VISIBLE);
 					timeText.setVisibility(View.VISIBLE);
-					timeIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_small_time, colorId));
+					timeIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_time_16, colorId));
 					timeText.setTextColor(app.getResources().getColor(colorId));
 					String rt = rs.getCurrentRuleTime(inst);
 					timeText.setText(rt == null ? "" : rt);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
     android:id="@+id/recording_note_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -57,7 +58,7 @@
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/circle_outline_background_style"
                     android:scaleType="center"
-                    android:src="@drawable/ic_action_refresh_dark"/>
+                    osmand:srcCompat="@drawable/ic_action_refresh_dark"/>
 
                 <TextView
                     android:id="@+id/leftButtonText"
@@ -100,7 +101,7 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/orange_circle_background_style"
                         android:scaleType="center"
-                        android:src="@drawable/ic_action_done"/>
+                        osmand:srcCompat="@drawable/ic_action_done"/>
 
                     <ProgressBar
                         android:id="@+id/progressBar"
@@ -150,7 +151,7 @@
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/circle_outline_background_style"
                     android:scaleType="center"
-                    android:src="@drawable/ic_action_device_camera"/>
+                    osmand:srcCompat="@drawable/ic_action_device_camera"/>
 
                 <TextView
                     android:id="@+id/rightButtonText"

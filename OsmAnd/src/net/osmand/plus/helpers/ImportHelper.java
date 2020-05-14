@@ -840,9 +840,22 @@ public class ImportHelper {
 	}
 
 	private void handlePluginImport(final PluginSettingsItem pluginItem, final File file) {
+		final ProgressDialog progress = new ProgressDialog(activity);
+		progress.setTitle(app.getString(R.string.loading_smth, ""));
+		progress.setMessage(app.getString(R.string.importing_from, pluginItem.getPublicName(app)));
+		progress.setIndeterminate(true);
+		progress.setCancelable(false);
+
+		if (AndroidUtils.isActivityNotDestroyed(activity)) {
+			progress.show();
+		}
+
 		final SettingsImportListener importListener = new SettingsImportListener() {
 			@Override
 			public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsItem> items) {
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
+					progress.dismiss();
+				}
 				CustomOsmandPlugin plugin = pluginItem.getPlugin();
 				plugin.loadResources();
 
@@ -1257,7 +1270,7 @@ public class ImportHelper {
 			items.add(new ShortDescriptionItem(txt));
 
 			BaseBottomSheetItem asFavoritesItem = new SimpleBottomSheetItem.Builder()
-					.setIcon(getContentIcon(R.drawable.ic_action_fav_dark))
+					.setIcon(getContentIcon(R.drawable.ic_action_favorite))
 					.setTitle(getString(R.string.import_as_favorites))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
 					.setOnClickListener(new View.OnClickListener() {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout android:id="@+id/share_fragment_layout"
+             xmlns:osmand="http://schemas.android.com/apk/res-auto"
              xmlns:android="http://schemas.android.com/apk/res/android"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
@@ -35,7 +36,7 @@
                         android:layout_width="56dp"
                         android:layout_height="56dp"
                         android:scaleType="center"
-                        android:src="@drawable/list_destination"/>
+                        osmand:srcCompat="@drawable/list_destination"/>
 
                 </LinearLayout>
 
@@ -71,7 +72,7 @@
                             android:layout_height="48dp"
                             android:layout_gravity="top"
                             style="@style/Widget.AppCompat.Button.Borderless"
-                            android:src="@drawable/ic_action_remove_dark"/>
+                            osmand:srcCompat="@drawable/ic_action_remove_dark"/>
 
                     </LinearLayout>
 
@@ -84,13 +85,13 @@
                         android:paddingBottom="12dp"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp"
-                        android:drawableLeft="@drawable/ic_action_parking_dark"
+						osmand:drawableLeftCompat="@drawable/ic_action_parking_dark"
+						osmand:drawableStartCompat="@drawable/ic_action_parking_dark"
                         android:drawablePadding="12dp"
                         android:gravity="start|center_vertical"
                         android:textColor="?android:textColorPrimary"
                         style="@style/Widget.AppCompat.Button.Borderless"
                         android:text="@string/find_parking"
-	                    android:drawableStart="@drawable/ic_action_parking_dark"
 	                    android:paddingStart="8dp"
 	                    android:paddingEnd="8dp" />
 
@@ -108,15 +109,15 @@
                         android:paddingBottom="12dp"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp"
-                        android:drawableLeft="@drawable/ic_action_gdirections_dark"
-                        android:drawablePadding="12dp"
+						osmand:drawableLeftCompat="@drawable/ic_action_gdirections_dark"
+						osmand:drawableStartCompat="@drawable/ic_action_gdirections_dark"
+						android:drawablePadding="12dp"
                         android:gravity="start|center_vertical"
                         android:textColor="?android:textColorPrimary"
                         style="@style/Widget.AppCompat.Button.Borderless"
                         android:text="@string/recalculate_route"
 	                    android:paddingStart="8dp"
-	                    android:paddingEnd="8dp"
-	                    android:drawableStart="@drawable/ic_action_gdirections_dark" />
+	                    android:paddingEnd="8dp" />
 
                     <View
                         android:layout_width="match_parent"
@@ -132,15 +133,15 @@
                         android:paddingBottom="12dp"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp"
-                        android:drawableLeft="@drawable/ic_action_done"
+						osmand:drawableLeftCompat="@drawable/ic_action_done"
+						osmand:drawableStartCompat="@drawable/ic_action_done"
                         android:drawablePadding="12dp"
                         android:gravity="start|center_vertical"
                         android:textColor="?android:textColorPrimary"
                         style="@style/Widget.AppCompat.Button.Borderless"
                         android:text="@string/finish_navigation"
 	                    android:paddingEnd="8dp"
-	                    android:paddingStart="8dp"
-	                    android:drawableStart="@drawable/ic_action_done" />
+	                    android:paddingStart="8dp" />
 
                 </LinearLayout>
 

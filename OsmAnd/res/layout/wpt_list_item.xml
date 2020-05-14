@@ -134,7 +134,7 @@
                     android:layout_width="@dimen/acceptable_touch_radius"
                     android:layout_height="@dimen/acceptable_touch_radius"
                     android:scaleType="center"
-                    android:src="@drawable/ic_action_arrow_up"
+                    osmand:srcCompat="@drawable/ic_action_arrow_up"
                     android:visibility="gone"
                     tools:visibility="visible"/>
 
@@ -144,7 +144,7 @@
                     android:layout_height="@dimen/acceptable_touch_radius"
                     android:background="?attr/dashboard_button"
                     android:contentDescription="@string/shared_string_more"
-                    android:src="@drawable/ic_overflow_menu_white"
+                    osmand:srcCompat="@drawable/ic_overflow_menu_white"
                     android:visibility="visible"/>
 
             </LinearLayout>

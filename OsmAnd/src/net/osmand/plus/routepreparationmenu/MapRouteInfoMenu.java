@@ -24,6 +24,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -1017,11 +1018,16 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 		final OsmandApplication app = mapActivity.getMyApplication();
 		final RoutingHelper helper = app.getRoutingHelper();
+		final TargetPointsHelper targetHelper = app.getTargetPointsHelper();
+
 		View startButton = mainView.findViewById(R.id.start_button);
 		TextViewExProgress startButtonText = (TextViewExProgress) mainView.findViewById(R.id.start_button_descr);
 		ProgressBar progressBar = (ProgressBar) mainView.findViewById(R.id.progress_bar_button);
 		boolean publicTransportMode = helper.isPublicTransportMode();
 		boolean routeCalculated = isRouteCalculated();
+		boolean currentLocationNotFound = OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)
+				&& targetHelper.getPointToStart() == null && targetHelper.getPointToNavigate() != null;
+
 		int iconId = publicTransportMode ? R.drawable.ic_map : R.drawable.ic_action_start_navigation;
 		int color1;
 		int color2;
@@ -1037,7 +1043,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			}
 		} else {
 			color1 = nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light;
-			if (routeCalculated) {
+			if (routeCalculated || currentLocationNotFound && !helper.isRouteBeingCalculated()) {
 				AndroidUtils.setBackground(app, startButton, nightMode, R.color.active_color_primary_light, R.color.active_color_primary_dark);
 				color2 = color1;
 			} else {
@@ -1051,7 +1057,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (publicTransportMode) {
 			startButtonText.setText(R.string.shared_string_show_on_map);
 		} else if (helper.isFollowingMode() || helper.isPauseNavigation()) {
-			startButtonText.setText(R.string.shared_string_continue);
+			startButtonText.setText(R.string.shared_string_resume);
 		} else {
 			startButtonText.setText(R.string.shared_string_control_start);
 		}
@@ -1767,7 +1773,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			int locationIconResByStatus = OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity) && loc != null
 					? R.drawable.ic_action_location_color : R.drawable.ic_action_location_color_lost;
 
-			((ImageView) parentView.findViewById(R.id.fromIcon)).setImageDrawable(ContextCompat.getDrawable(mapActivity,
+			((ImageView) parentView.findViewById(R.id.fromIcon)).setImageDrawable(AppCompatResources.getDrawable(mapActivity,
 					mapActivity.getMyApplication().getTargetPointsHelper().getPointToStart() == null
 						? locationIconResByStatus : R.drawable.list_startpoint));
 		}

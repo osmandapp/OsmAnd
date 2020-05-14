@@ -3,6 +3,8 @@ package net.osmand.plus.helpers;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
+import androidx.appcompat.content.res.AppCompatResources;
+
 import net.osmand.GPXUtilities;
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
@@ -383,11 +385,11 @@ public class WaypointHelper {
 									point.getLatitude(), point.getLongitude()) - lwp.getDeviationDistance());
 							Integer state = locationPointsStates.get(point);
 							if (state != null && state == ANNOUNCED_ONCE
-									&& voiceRouter.isDistanceLess(lastKnownLocation.getSpeed(), d1, SHORT_ANNOUNCE_RADIUS, 0f)) {
+									&& voiceRouter.isDistanceLess(lastKnownLocation.getSpeed(), d1, SHORT_ANNOUNCE_RADIUS)) {
 								locationPointsStates.put(point, ANNOUNCED_DONE);
 								announcePoints.add(lwp);
 							} else if (type != ALARMS && (state == null || state == NOT_ANNOUNCED)
-									&& voiceRouter.isDistanceLess(lastKnownLocation.getSpeed(), d1, LONG_ANNOUNCE_RADIUS, 0f)) {
+									&& voiceRouter.isDistanceLess(lastKnownLocation.getSpeed(), d1, LONG_ANNOUNCE_RADIUS)) {
 								locationPointsStates.put(point, ANNOUNCED_ONCE);
 								approachPoints.add(lwp);
 							} else if (type == ALARMS && (state == null || state == NOT_ANNOUNCED)) {
@@ -404,7 +406,7 @@ public class WaypointHelper {
 										announceRadius = ALARMS_ANNOUNCE_RADIUS;
 										break;
 								}
-								boolean proceed = voiceRouter.isDistanceLess(lastKnownLocation.getSpeed(), d1, announceRadius, 0f);
+								boolean proceed = voiceRouter.isDistanceLess(lastKnownLocation.getSpeed(), d1, announceRadius);
 								if (proceed && filter) {
 									AlarmInfo lastAlarm = lastAnnouncedAlarms.get(t);
 									if (lastAlarm != null) {
@@ -749,10 +751,10 @@ public class WaypointHelper {
 				PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 				if (st != null) {
 					if (RenderingIcons.containsBigIcon(st.getIconKeyName())) {
-						return uiCtx.getResources().getDrawable(
+						return AppCompatResources.getDrawable(uiCtx, 
 								RenderingIcons.getBigIconResourceId(st.getIconKeyName()));
 					} else if (RenderingIcons.containsBigIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
-						return uiCtx.getResources().getDrawable(
+						return AppCompatResources.getDrawable(uiCtx, 
 								RenderingIcons.getBigIconResourceId(st.getOsmTag() + "_" + st.getOsmValue()));
 					}
 				}
@@ -788,36 +790,36 @@ public class WaypointHelper {
 				//assign alarm list icons manually for now
 				String typeString = ((AlarmInfo) point).getType().toString();
 				if (typeString.equals("SPEED_CAMERA")) {
-					return uiCtx.getResources().getDrawable(R.drawable.mx_highway_speed_camera);
+					return AppCompatResources.getDrawable(uiCtx, R.drawable.mx_highway_speed_camera);
 				} else if (typeString.equals("BORDER_CONTROL")) {
-					return uiCtx.getResources().getDrawable(R.drawable.mx_barrier_border_control);
+					return AppCompatResources.getDrawable(uiCtx, R.drawable.mx_barrier_border_control);
 				} else if (typeString.equals("RAILWAY")) {
 					if (app.getSettings().DRIVING_REGION.get().americanSigns) {
-						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_railways_us);
+						return AppCompatResources.getDrawable(uiCtx, R.drawable.list_warnings_railways_us);
 					} else {
-						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_railways);
+						return AppCompatResources.getDrawable(uiCtx, R.drawable.list_warnings_railways);
 					}
 				} else if (typeString.equals("TRAFFIC_CALMING")) {
 					if (app.getSettings().DRIVING_REGION.get().americanSigns) {
-						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_traffic_calming_us);
+						return AppCompatResources.getDrawable(uiCtx, R.drawable.list_warnings_traffic_calming_us);
 					} else {
-						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_traffic_calming);
+						return AppCompatResources.getDrawable(uiCtx, R.drawable.list_warnings_traffic_calming);
 					}
 				} else if (typeString.equals("TOLL_BOOTH")) {
-					return uiCtx.getResources().getDrawable(R.drawable.mx_toll_booth);
+					return AppCompatResources.getDrawable(uiCtx, R.drawable.mx_toll_booth);
 				} else if (typeString.equals("STOP")) {
-					return uiCtx.getResources().getDrawable(R.drawable.list_stop);
+					return AppCompatResources.getDrawable(uiCtx, R.drawable.list_stop);
 				} else if (typeString.equals("PEDESTRIAN")) {
 					if (app.getSettings().DRIVING_REGION.get().americanSigns) {
-						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_pedestrian_us);
+						return AppCompatResources.getDrawable(uiCtx, R.drawable.list_warnings_pedestrian_us);
 					} else {
-						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_pedestrian);
+						return AppCompatResources.getDrawable(uiCtx, R.drawable.list_warnings_pedestrian);
 					}
 				} else if (typeString.equals("TUNNEL")) {
 					if (app.getSettings().DRIVING_REGION.get().americanSigns) {
-						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_tunnel_us);
+						return AppCompatResources.getDrawable(uiCtx, R.drawable.list_warnings_tunnel_us);
 					} else {
-						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_tunnel);
+						return AppCompatResources.getDrawable(uiCtx, R.drawable.list_warnings_tunnel);
 					}
 				} else {
 					return null;

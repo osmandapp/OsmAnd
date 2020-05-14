@@ -2512,7 +2512,7 @@
     <string name="last_seven_days">最近 7 天</string>
     <string name="this_year">今年</string>
     <string name="marker_show_distance_descr">選擇如何在地圖上表示距離和方向給地圖標記：</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">從下方選擇「行動方向」切換到「羅盤方向」的切換方向速度。</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">從下方選擇「行進方向」切換到「羅盤方向」的切換方向速度。</string>
     <string name="remove_from_map_markers">從「地圖標記」中移除</string>
     <string name="descendingly">Z-A</string>
     <string name="ascendingly">A-Z</string>
@@ -2903,7 +2903,7 @@
     <string name="by_transport_type">由 %1$s</string>
     <string name="step_by_step">按步驟</string>
     <string name="routeInfo_road_types_name">道路類型</string>
-    <string name="exit_at">出口於</string>
+    <string name="exit_at">離開於</string>
     <string name="sit_on_the_stop">站點的座位</string>
     <string name="quick_action_show_hide_gpx_tracks">顯示／隱藏 GPX 軌跡</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">在地圖上顯示或隱藏所選 GPX 軌跡的按鈕。</string>
@@ -3575,7 +3575,7 @@
     <string name="n_items_of_z">%2$s 的 %1$s</string>
     <string name="shared_string_terrain">地形</string>
     <string name="hillshade_description">地形陰影地圖用黑色的陰影來顯示坡度、山峰與低地。</string>
-    <string name="slope_description">坡度是在地形上的彩色可視化效果。</string>
+    <string name="slope_description">坡度是在地形上的可視化效果。</string>
     <string name="terrain_slider_description">設定顯示圖層的最小與最大縮放等級。</string>
     <string name="hillshade_download_description">需要其他地圖才能在地圖上檢視地形陰影。</string>
     <string name="slope_download_description">需要其他地圖才能在地圖上檢視坡度。</string>
@@ -3583,7 +3583,7 @@
     <string name="shared_string_transparency">透明度</string>
     <string name="shared_string_zoom_levels">縮放等級</string>
     <string name="shared_string_legend">圖例</string>
-    <string name="terrain_empty_state_text">啟用以檢視地形陰影或坡度圖。您可以在我們的網站上閱讀更多關於此地圖類型的資訊</string>
+    <string name="terrain_empty_state_text">啟用以檢視地形陰影或坡度圖。您可以在我們的網站上閱讀更多關於這些地圖類型的資訊。</string>
     <string name="shared_string_hillshade">地形陰影</string>
     <string name="download_slope_maps">坡度</string>
     <string name="quick_action_show_hide_terrain">顯示／隱藏地形</string>
@@ -3662,9 +3662,11 @@
     <string name="extra_maps_menu_group">額外地圖</string>
     <string name="download_unsupported_action">不支援的動作 %1$s</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="osm_live_payment_subscription_management">購買訂閱時會從您的 Google Play 帳號扣款，
-\n而過期時（一個月／三個月／一年），
-\n若您在這之前於 Google Play 設定中取消的話就不會續訂。</string>
+    <string name="osm_live_payment_subscription_management">購買訂閱時會從您的 Google Play 帳號扣款。
+\n
+\n除非您在續訂日期前取消，否則將會自動續訂。您的帳號只會在續訂日期時收取續訂週期的費用（月／三個月／年）。
+\n
+\n您可以透過您的 Google Play 設定管理並取消您的訂閱。</string>
     <string name="search_poi_types">搜尋 POI 類型</string>
     <string name="search_poi_types_descr">組合來自不同分類的 POI 類型。點擊開關以全選，點擊左側選取分類。</string>
     <string name="tracker_item">OsmAnd tracker</string>
@@ -3679,4 +3681,33 @@
     <string name="osmand_purchases_item">OsmAnd 購買</string>
     <string name="legend_item_description">地圖符號系統指南</string>
     <string name="navigation_profiles_item">導航設定檔</string>
+    <string name="release_3_7">• 新的離線坡度圖
+\n
+\n • 對收藏與 GPX 路徑點的完整自訂能力 — 自訂顏色、圖示、形狀
+\n
+\n • 自訂情境選單、設定地圖、抽屜中的項目順序
+\n
+\n • 設定地圖中可將維基百科選取為單獨的圖層，並僅選取需要的語言
+\n
+\n • 在超強的彈性下建立您自己的 POI 過濾器／地圖
+\n
+\n • 新增選項以恢復自訂設定檔中的選項
+\n
+\n • 對 GPX 路徑導航完整支援車道與轉彎提示
+\n
+\n • 修復平板電腦上的使用者介面大小
+\n
+\n • 修復 RTL 的臭蟲
+\n
+\n</string>
+    <string name="quick_action_transport_show">顯示大眾運輸</string>
+    <string name="additional_actions_descr">您可以透過點選「%1$s」按鈕存取這些動作。</string>
+    <string name="quick_action_transport_hide">隱藏大眾運輸</string>
+    <string name="quick_action_transport_descr">在地圖上顯示或隱藏大眾運輸的按鈕。</string>
+    <string name="quick_action_show_hide_transport">顯示／隱藏大眾運輸</string>
+    <string name="create_edit_poi">建立／編輯 POI</string>
+    <string name="parking_positions">停車位置</string>
+    <string name="add_edit_favorite">新增／編輯收藏</string>
+    <string name="reset_deafult_order">恢復預設項目排序</string>
+    <string name="back_to_editing">返回編輯</string>
 </resources>

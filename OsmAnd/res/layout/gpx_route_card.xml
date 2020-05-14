@@ -16,7 +16,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:scaleType="fitXY"
-			android:src="@drawable/bg_shadow_list_top" />
+			osmand:srcCompat="@drawable/bg_shadow_list_top" />
 
 	</LinearLayout>
 
@@ -102,7 +102,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:scaleType="fitXY"
-			android:src="@drawable/bg_shadow_list_bottom" />
+			osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
 
 	</LinearLayout>
 

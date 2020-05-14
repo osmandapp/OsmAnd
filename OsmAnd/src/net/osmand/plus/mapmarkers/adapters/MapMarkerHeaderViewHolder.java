@@ -15,6 +15,7 @@ public class MapMarkerHeaderViewHolder extends RecyclerView.ViewHolder {
 	final View iconSpace;
 	final TextView title;
 	final TextView content;
+	final TextView clearButton;
 	final TextView button;
 	final SwitchCompat disableGroupSwitch;
 	final View bottomShadow;
@@ -28,6 +29,7 @@ public class MapMarkerHeaderViewHolder extends RecyclerView.ViewHolder {
 		disableGroupSwitch = (SwitchCompat) itemView.findViewById(R.id.disable_group_switch);
 		bottomShadow = itemView.findViewById(R.id.bottom_shadow);
 		content = itemView.findViewById(R.id.content);
+		clearButton = itemView.findViewById(R.id.clear_button);
 		button = itemView.findViewById(R.id.text_button);
 		articleDescription = itemView.findViewById(R.id.article_description);
 	}

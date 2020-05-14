@@ -3659,4 +3659,15 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="favorites_item">Favoritter</string>
     <string name="subscription_osmandlive_item">Abonnement - OsmAnd Live</string>
     <string name="navigation_profiles_item">Navigationsprofiler</string>
+    <string name="tracker_item">OsmAnd Tracker</string>
+    <string name="osmand_purchases_item">OsmAnd køb</string>
+    <string name="quick_action_transport_hide">Skjul offentlig transport</string>
+    <string name="quick_action_transport_show">Vis offentlig transport</string>
+    <string name="quick_action_show_hide_transport">Vis/skjul offentlig transport</string>
+    <string name="quick_action_transport_descr">En knap til at vise eller skjule offentlig transport på kortet.</string>
+    <string name="create_edit_poi">Opret/rediger IP</string>
+    <string name="parking_positions">Parkeringsplads</string>
+    <string name="add_edit_favorite">Tilføj / rediger favorit</string>
+    <string name="reset_deafult_order">Gendan standardrækkefølge for elementer</string>
+    <string name="back_to_editing">Tilbage til redigering</string>
 </resources>

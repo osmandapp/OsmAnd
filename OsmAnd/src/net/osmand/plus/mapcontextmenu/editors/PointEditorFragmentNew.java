@@ -26,6 +26,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
@@ -322,12 +323,12 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 				.inflate(R.layout.point_editor_button, rootView, false);
 		ImageView outline = colorItemView.findViewById(R.id.outline);
 		outline.setImageDrawable(
-				UiUtilities.tintDrawable(ContextCompat.getDrawable(app, R.drawable.bg_point_circle_contour),
+				UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.bg_point_circle_contour),
 						ContextCompat.getColor(app,
 								nightMode ? R.color.stroked_buttons_and_links_outline_dark
 										: R.color.stroked_buttons_and_links_outline_light)));
 		ImageView backgroundCircle = colorItemView.findViewById(R.id.background);
-		backgroundCircle.setImageDrawable(UiUtilities.tintDrawable(ContextCompat.getDrawable(app, R.drawable.bg_point_circle), color));
+		backgroundCircle.setImageDrawable(UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.bg_point_circle), color));
 		backgroundCircle.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -399,7 +400,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		newShape.findViewById(R.id.outline).setVisibility(View.VISIBLE);
 		((TextView) rootView.findViewById(R.id.shape_name)).setText(backgroundType.getNameId());
 		ImageView background = newShape.findViewById(R.id.background);
-		background.setImageDrawable(UiUtilities.tintDrawable(ContextCompat.getDrawable(app, backgroundType.getIconId()),
+		background.setImageDrawable(UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, backgroundType.getIconId()),
 						selectedColor));
 		selectedShape = backgroundType;
 		setBackgroundType(backgroundType);
@@ -407,7 +408,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	}
 
 	private void setShapeSelectorBackground(BackgroundType backgroundType, ImageView background) {
-		background.setImageDrawable(UiUtilities.tintDrawable(ContextCompat.getDrawable(app, backgroundType.getIconId()),
+		background.setImageDrawable(UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, backgroundType.getIconId()),
 						ContextCompat.getColor(app,
 								nightMode ? R.color.inactive_buttons_and_links_bg_dark
 										: R.color.inactive_buttons_and_links_bg_light)));
@@ -481,7 +482,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 				.inflate(R.layout.point_editor_button, rootView, false);
 		ImageView outline = iconItemView.findViewById(R.id.outline);
 		outline.setImageDrawable(
-				UiUtilities.tintDrawable(ContextCompat.getDrawable(app, R.drawable.bg_point_circle_contour),
+				UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.bg_point_circle_contour),
 						ContextCompat.getColor(app,
 								nightMode ? R.color.stroked_buttons_and_links_outline_dark
 										: R.color.stroked_buttons_and_links_outline_light)));
@@ -508,18 +509,18 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			ImageView background = oldIcon.findViewById(R.id.background);
 			setIconSelectorBackground(background);
 			ImageView iconView = oldIcon.findViewById(R.id.icon);
-			iconView.setImageDrawable(UiUtilities.tintDrawable(ContextCompat.getDrawable(app, selectedIcon),
+			iconView.setImageDrawable(UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, selectedIcon),
 					ContextCompat.getColor(app, R.color.icon_color_default_light)));
 		}
 		View icon = rootView.findViewWithTag(iconRes);
 		if (icon != null) {
 			ImageView iconView = icon.findViewById(R.id.icon);
-			iconView.setImageDrawable(UiUtilities.tintDrawable(ContextCompat.getDrawable(app, iconRes),
+			iconView.setImageDrawable(UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, iconRes),
 					ContextCompat.getColor(app, R.color.color_white)));
 			icon.findViewById(R.id.outline).setVisibility(View.VISIBLE);
 			ImageView backgroundCircle = icon.findViewById(R.id.background);
 			backgroundCircle.setImageDrawable(
-					UiUtilities.tintDrawable(ContextCompat.getDrawable(view.getContext(), R.drawable.bg_point_circle), selectedColor));
+					UiUtilities.tintDrawable(AppCompatResources.getDrawable(view.getContext(), R.drawable.bg_point_circle), selectedColor));
 		}
 		selectedIcon = iconRes;
 		setIcon(iconRes);
@@ -527,7 +528,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	}
 
 	private void setIconSelectorBackground(ImageView backgroundCircle) {
-		backgroundCircle.setImageDrawable(UiUtilities.tintDrawable(ContextCompat.getDrawable(app, R.drawable.bg_point_circle),
+		backgroundCircle.setImageDrawable(UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.bg_point_circle),
 						ContextCompat.getColor(app, nightMode
 								? R.color.inactive_buttons_and_links_bg_dark
 								: R.color.inactive_buttons_and_links_bg_light)));
@@ -790,7 +791,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 				Drawable iconAdd = app.getUIUtilities().getIcon(R.drawable.ic_action_add, activeColorResId);
 				((ImageView) view.findViewById(R.id.groupIcon)).setImageDrawable(iconAdd);
 				((TextView) view.findViewById(R.id.groupName)).setText(requireMyApplication().getString(R.string.add_group));
-				GradientDrawable rectContourDrawable = (GradientDrawable) ContextCompat.getDrawable(app,
+				GradientDrawable rectContourDrawable = (GradientDrawable) AppCompatResources.getDrawable(app,
 						R.drawable.bg_select_group_button_outline);
 				if (rectContourDrawable != null) {
 					int strokeColor = ContextCompat.getColor(app, nightMode ? R.color.stroked_buttons_and_links_outline_dark
@@ -833,7 +834,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 				int categoryColor = getCategoryColor(group);
 				int color = categoryColor == 0 ? getDefaultColor() : categoryColor;
 				holder.groupIcon.setImageDrawable(UiUtilities.tintDrawable(
-						ContextCompat.getDrawable(app, R.drawable.ic_action_folder), color));
+						AppCompatResources.getDrawable(app, R.drawable.ic_action_folder), color));
 				holder.pointsCounter.setText(String.valueOf(getCategoryPointsCount(group)));
 				int strokeColor;
 				int strokeWidth;
@@ -846,7 +847,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 							: R.color.stroked_buttons_and_links_outline_light);
 					strokeWidth = 1;
 				}
-				GradientDrawable rectContourDrawable = (GradientDrawable) ContextCompat.getDrawable(app,
+				GradientDrawable rectContourDrawable = (GradientDrawable) AppCompatResources.getDrawable(app,
 						R.drawable.bg_select_group_button_outline);
 				if (rectContourDrawable != null) {
 					rectContourDrawable.setStroke(AndroidUtils.dpToPx(app, strokeWidth), strokeColor);
@@ -921,7 +922,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 				textView.setTextColor(ContextCompat.getColor(app, R.color.color_white));
 			} else {
 				textView.setTextColor(ContextCompat.getColor(app, R.color.preference_category_title));
-				GradientDrawable buttonBackground = (GradientDrawable) ContextCompat.getDrawable(app,
+				GradientDrawable buttonBackground = (GradientDrawable) AppCompatResources.getDrawable(app,
 						R.drawable.bg_select_icon_group_button).mutate();
 				buttonBackground.setStroke(AndroidUtils.dpToPx(app, 1), ContextCompat.getColor(app,
 						nightMode ? R.color.stroked_buttons_and_links_outline_dark

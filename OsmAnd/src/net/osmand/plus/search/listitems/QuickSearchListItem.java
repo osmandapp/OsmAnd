@@ -262,12 +262,12 @@ public class QuickSearchListItem {
 		switch (searchResult.objectType) {
 			case FAVORITE:
 			case FAVORITE_GROUP:
-				return app.getUIUtilities().getThemedIcon(R.drawable.ic_small_group);
+				return app.getUIUtilities().getThemedIcon(R.drawable.ic_action_group_name_16);
 			case RECENT_OBJ:
 				HistoryEntry historyEntry = (HistoryEntry) searchResult.object;
 				String typeName = historyEntry.getName().getTypeName();
 				if (typeName != null && !typeName.isEmpty()) {
-					return app.getUIUtilities().getThemedIcon(R.drawable.ic_small_group);
+					return app.getUIUtilities().getThemedIcon(R.drawable.ic_action_group_name_16);
 				} else {
 					return null;
 				}
@@ -380,7 +380,7 @@ public class QuickSearchListItem {
 			case FAVORITE_GROUP:
 				FavoriteGroup group = (FavoriteGroup) searchResult.object;
 				int color = group.getColor() == 0 ? ContextCompat.getColor(app, R.color.color_favorite) : group.getColor();
-				return app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_fav_dark, color | 0xff000000);
+				return app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_favorite, color | 0xff000000);
 			case REGION:
 				return getIcon(app, R.drawable.ic_world_globe_dark);
 			case RECENT_OBJ:

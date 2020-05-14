@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -96,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:contentDescription="@string/show_view_angle"
-                    android:src="@drawable/ic_direction_arrow" />
+                    osmand:srcCompat="@drawable/ic_direction_arrow" />
 
                 <net.osmand.plus.widgets.TextViewEx
                     android:id="@+id/distance"
@@ -118,7 +119,7 @@
                     android:layout_marginStart="@dimen/list_item_button_padding"
                     android:layout_marginLeft="@dimen/list_item_button_padding"
                     android:contentDescription="@string/favorite_category_name"
-                    android:src="@drawable/ic_small_group" />
+                    osmand:srcCompat="@drawable/ic_action_group_name_16" />
 
                 <TextView
                     android:id="@+id/group_name"
@@ -143,7 +144,7 @@
             android:layout_marginLeft="@dimen/dashFavIconMargin"
             android:background="?attr/dashboard_button"
             android:contentDescription="@string/context_menu_item_directions_to"
-            android:src="@drawable/ic_action_test_light"
+            osmand:srcCompat="@drawable/ic_action_remove_dark"
             android:visibility="gone" />
 
         <ImageButton
@@ -153,7 +154,7 @@
             android:layout_gravity="center_vertical"
             android:background="?attr/dashboard_button"
             android:contentDescription="@string/shared_string_more"
-            android:src="@drawable/ic_overflow_menu_white"
+            osmand:srcCompat="@drawable/ic_overflow_menu_white"
             android:visibility="gone" />
     </LinearLayout>
 

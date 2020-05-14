@@ -134,13 +134,15 @@ public class PluginDisabledBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static void showInstance(@NonNull FragmentManager fm, String pluginId, Boolean usedOnMap) {
 		try {
-			Bundle args = new Bundle();
-			args.putString(PLUGIN_ID_KEY, pluginId);
+			if (!fm.isStateSaved()) {
+				Bundle args = new Bundle();
+				args.putString(PLUGIN_ID_KEY, pluginId);
 
-			PluginDisabledBottomSheet dialog = new PluginDisabledBottomSheet();
-			dialog.setArguments(args);
-			dialog.setUsedOnMap(usedOnMap);
-			dialog.show(fm, PluginDisabledBottomSheet.TAG);
+				PluginDisabledBottomSheet dialog = new PluginDisabledBottomSheet();
+				dialog.setArguments(args);
+				dialog.setUsedOnMap(usedOnMap);
+				dialog.show(fm, PluginDisabledBottomSheet.TAG);
+			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);
 		}

@@ -341,6 +341,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
 									app.getSavingTrackHelper().clearRecordedData(true);
+									//TODO check why Notfication content is not updated here, even with: app.getNotificationHelper().refreshNotifications();
 								}
 							});
 					builder.show();
