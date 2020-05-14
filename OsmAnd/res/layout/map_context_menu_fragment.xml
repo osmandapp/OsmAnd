@@ -202,13 +202,14 @@
                             android:paddingTop="1dp"
                             tools:src="@drawable/ic_action_opening_hour_16" />
 
-                        <TextView
-                            android:id="@+id/additional_info_text_view"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/context_menu_padding_margin_small"
-                            android:layout_marginRight="@dimen/context_menu_padding_margin_small"
-                            tools:text="Closed till 10:00"/>
+	                    <TextView
+		                    android:id="@+id/additional_info_text_view"
+		                    android:layout_width="0dp"
+		                    android:layout_height="wrap_content"
+		                    android:layout_marginEnd="@dimen/context_menu_padding_margin_small"
+		                    android:layout_marginRight="@dimen/context_menu_padding_margin_small"
+		                    android:layout_weight="1"
+		                    tools:text="Closed till 10:00" />
 
                         <TextView
                             android:id="@+id/info_compass_separator"
