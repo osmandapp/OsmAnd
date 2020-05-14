@@ -711,11 +711,6 @@ public class AndroidUtils {
 		return new BitmapDrawable(ctx.getResources(), flipBitmapHorizontally(bitmap));
 	}
 
-	public static Bitmap bitmapFromDrawableRes(@NonNull Context ctx, @DrawableRes int drawableResId) {
-		Drawable drawable = ContextCompat.getDrawable(ctx, drawableResId);
-		return drawableToBitmap(drawable);
-	}
-
 	public static Bitmap drawableToBitmap(Drawable drawable) {
 		if (drawable instanceof BitmapDrawable) {
 			BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
