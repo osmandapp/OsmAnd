@@ -471,9 +471,11 @@ public class MapWidgetRegistry {
 						int slideInAnim = R.anim.slide_in_bottom;
 						int slideOutAnim = R.anim.slide_out_bottom;
 
+						QuickActionListFragment fragment = new QuickActionListFragment();
+						fragment.setFromDashboard(true);
 						mapActivity.getSupportFragmentManager().beginTransaction()
 								.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
-								.add(R.id.fragmentContainer, new QuickActionListFragment(), QuickActionListFragment.TAG)
+								.add(R.id.fragmentContainer, fragment, QuickActionListFragment.TAG)
 								.addToBackStack(QuickActionListFragment.TAG).commitAllowingStateLoss();
 
 						return true;

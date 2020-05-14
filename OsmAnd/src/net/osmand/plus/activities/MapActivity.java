@@ -738,7 +738,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			return;
 		}
 		QuickActionListFragment quickActionListFragment = getQuickActionListFragment();
-		if ( quickActionListFragment != null && quickActionListFragment.isVisible()) {
+		if (quickActionListFragment != null && quickActionListFragment.isVisible()
+				&& quickActionListFragment.fromDashboard()) {
 			this.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN, null);
 		}
 		ImportSettingsFragment importSettingsFragment = getImportSettingsFragment();
