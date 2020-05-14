@@ -251,7 +251,7 @@ public class QuickActionsWidget extends LinearLayout {
 						@Override
 						public boolean onLongClick(View v) {
                             FragmentManager fm = ((AppCompatActivity) getContext()).getSupportFragmentManager();
-						    if (action instanceof NewAction) {
+                            if (action instanceof NewAction) {
                                 fm.beginTransaction()
                                         .add(R.id.fragmentContainer, new QuickActionListFragment(), QuickActionListFragment.TAG)
                                         .addToBackStack(QuickActionListFragment.TAG).commitAllowingStateLoss();
