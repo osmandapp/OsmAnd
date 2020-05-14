@@ -18,7 +18,7 @@
         <ImageView
             android:id="@+id/icon"
             android:scaleType="centerInside"
-            android:layout_width="@dimen/map_button_shadow_width"
+            android:layout_width="@dimen/map_markers_recycler_view_item_height"
             android:layout_height="match_parent"
             tools:src="@drawable/ic_action_favorite"
             tools:visibility="visible"

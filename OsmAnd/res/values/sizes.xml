@@ -73,6 +73,7 @@
 
 	<dimen name="favorites_icon_right_margin">24dp</dimen>
 	<dimen name="favorites_icon_size">40dp</dimen>
+	<dimen name="favorites_icon_outline_size">48dp</dimen>
 	<dimen name="favorites_icon_padding">2dp</dimen>
 	<dimen name="favorites_list_item_height">60dp</dimen>
 	<dimen name="favorites_select_group_button_height">76dp</dimen>
@@ -273,6 +274,7 @@
 	<dimen name="action_bar_image_height">220dp</dimen>
 	<dimen name="action_bar_image_side_margin">70dp</dimen>
 
+	<dimen name="map_markers_recycler_view_item_height">56dp</dimen>
 	<dimen name="map_markers_recycler_view_padding_bottom">52dp</dimen>
 	<dimen name="map_markers_recycler_view_padding_top">10dp</dimen>
 

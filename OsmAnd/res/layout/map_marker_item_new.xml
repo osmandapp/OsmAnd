@@ -26,7 +26,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/map_button_shadow_width"
+            android:layout_height="@dimen/map_markers_recycler_view_item_height"
             android:background="?attr/selectableItemBackground">
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -34,16 +34,16 @@
                 tools:text="3"
                 android:gravity="center"
                 android:id="@+id/map_marker_number_text_view"
-                android:layout_width="@dimen/map_button_shadow_width"
-                android:layout_height="@dimen/map_button_shadow_width"
+                android:layout_width="@dimen/map_markers_recycler_view_item_height"
+                android:layout_height="@dimen/map_markers_recycler_view_item_height"
                 android:layout_gravity="center_vertical"
                 android:visibility="gone"
                 tools:visibility="visible"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/map_marker_reorder_icon"
-                android:layout_width="@dimen/map_button_shadow_width"
-                android:layout_height="@dimen/map_button_shadow_width"
+                android:layout_width="@dimen/map_markers_recycler_view_item_height"
+                android:layout_height="@dimen/map_markers_recycler_view_item_height"
                 android:layout_gravity="center_vertical"
                 android:scaleType="centerInside"
                 android:tint="?attr/secondary_icon_color"
@@ -155,8 +155,8 @@
 
             <ImageButton
                 android:id="@+id/map_marker_options_button"
-                android:layout_width="@dimen/map_button_shadow_width"
-                android:layout_height="@dimen/map_button_shadow_width"
+                android:layout_width="@dimen/map_markers_recycler_view_item_height"
+                android:layout_height="@dimen/map_markers_recycler_view_item_height"
                 android:focusableInTouchMode="true"
                 tools:background="@drawable/marker_circle_background_dark_with_inset"
                 tools:src="@drawable/ic_action_marker_passed"/>
@@ -186,8 +186,8 @@
             android:id="@+id/divider"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:layout_marginLeft="@dimen/map_button_shadow_width"
-            android:layout_marginStart="@dimen/map_button_shadow_width"
+            android:layout_marginLeft="@dimen/map_markers_recycler_view_item_height"
+            android:layout_marginStart="@dimen/map_markers_recycler_view_item_height"
             tools:background="?attr/divider_color"/>
     </LinearLayout>
 

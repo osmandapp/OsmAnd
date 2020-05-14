@@ -1167,7 +1167,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 					((ImageView) iv).setImageDrawable(new CompassDrawable(d));
 				} else {
 					int btnSizePx = (iv).getLayoutParams().height;
-					int iconSizePx = (int) ctx.getResources().getDimension(R.dimen.standard_icon_size);
+					int iconSizePx = (int) ctx.getResources().getDimension(R.dimen.map_widget_icon);
 					int iconPadding = (btnSizePx - iconSizePx) / 2;
 					iv.setPadding(iconPadding, iconPadding, iconPadding, iconPadding);
 					((ImageView) iv).setScaleType(ImageView.ScaleType.FIT_CENTER);
