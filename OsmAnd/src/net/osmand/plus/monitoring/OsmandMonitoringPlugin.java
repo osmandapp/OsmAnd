@@ -341,6 +341,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
 									app.getSavingTrackHelper().clearRecordedData(true);
+									app.getNotificationHelper().refreshNotifications();
 								}
 							});
 					builder.show();
