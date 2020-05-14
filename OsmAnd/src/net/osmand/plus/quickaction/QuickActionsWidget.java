@@ -250,15 +250,15 @@ public class QuickActionsWidget extends LinearLayout {
 					view.setOnLongClickListener(new OnLongClickListener() {
 						@Override
 						public boolean onLongClick(View v) {
-                            FragmentManager fm = ((AppCompatActivity) getContext()).getSupportFragmentManager();
-                            if (action instanceof NewAction) {
-                                fm.beginTransaction()
-                                        .add(R.id.fragmentContainer, new QuickActionListFragment(), QuickActionListFragment.TAG)
-                                        .addToBackStack(QuickActionListFragment.TAG).commitAllowingStateLoss();
-                            } else {
-                                CreateEditActionDialog dialog = CreateEditActionDialog.newInstance(action.id);
-                                dialog.show(fm, AddQuickActionDialog.TAG);
-                            }
+							FragmentManager fm = ((AppCompatActivity) getContext()).getSupportFragmentManager();
+							if (action instanceof NewAction) {
+								fm.beginTransaction()
+									.add(R.id.fragmentContainer, new QuickActionListFragment(), QuickActionListFragment.TAG)
+									.addToBackStack(QuickActionListFragment.TAG).commitAllowingStateLoss();
+							} else {
+								CreateEditActionDialog dialog = CreateEditActionDialog.newInstance(action.id);
+								dialog.show(fm, AddQuickActionDialog.TAG);
+							}
 							return true;
 						}
 					});
