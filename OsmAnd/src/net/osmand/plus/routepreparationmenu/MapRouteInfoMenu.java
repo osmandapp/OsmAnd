@@ -1018,11 +1018,16 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 		final OsmandApplication app = mapActivity.getMyApplication();
 		final RoutingHelper helper = app.getRoutingHelper();
+		final TargetPointsHelper targetHelper = app.getTargetPointsHelper();
+
 		View startButton = mainView.findViewById(R.id.start_button);
 		TextViewExProgress startButtonText = (TextViewExProgress) mainView.findViewById(R.id.start_button_descr);
 		ProgressBar progressBar = (ProgressBar) mainView.findViewById(R.id.progress_bar_button);
 		boolean publicTransportMode = helper.isPublicTransportMode();
 		boolean routeCalculated = isRouteCalculated();
+		boolean currentLocationNotFound = OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)
+				&& targetHelper.getPointToStart() == null && targetHelper.getPointToNavigate() != null;
+
 		int iconId = publicTransportMode ? R.drawable.ic_map : R.drawable.ic_action_start_navigation;
 		int color1;
 		int color2;
@@ -1038,7 +1043,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			}
 		} else {
 			color1 = nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light;
-			if (routeCalculated) {
+			if (routeCalculated || currentLocationNotFound && !helper.isRouteBeingCalculated()) {
 				AndroidUtils.setBackground(app, startButton, nightMode, R.color.active_color_primary_light, R.color.active_color_primary_dark);
 				color2 = color1;
 			} else {

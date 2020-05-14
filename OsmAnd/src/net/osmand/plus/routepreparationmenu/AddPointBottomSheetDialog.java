@@ -260,6 +260,8 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 									if (targetPointsHelper.getPointToStart() != null) {
 										targetPointsHelper.clearStartPoint(true);
 										app.getSettings().backupPointToStart();
+									} else {
+										targetPointsHelper.updateRouteAndRefresh(false);
 									}
 								}
 							} else if (activity != null) {
