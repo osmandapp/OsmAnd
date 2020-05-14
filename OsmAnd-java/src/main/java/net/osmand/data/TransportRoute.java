@@ -71,12 +71,23 @@ public class TransportRoute extends MapObject {
 		this.combined = combined;
 	}
 	
-	public void addRoutePart(TransportRoute part,  boolean forward) {	
+	public TransportStop getMissingStartStop() {
+		return forwardStops.get(0).isMissingStop() ? forwardStops.get(0) : null;
+	}
+	
+	public TransportStop getMissingEndStop() {
+		return forwardStops.get(forwardStops.size()-1).isMissingStop() ? forwardStops.get(forwardStops.size()-1) : null;
+	}
+	
+	public boolean addRoutePart(TransportRoute part,  boolean forward) {
+		//TODO chec stop validity and combine ways
+		int addCount = 0;
 		if (forward) {				
 			routeParts.add(part);
 			for (int i = 0; i < part.getForwardStops().size(); i++) {
 				if (!part.getForwardStops().get(i).isMissingStop() && !forwardStops.contains(part.getForwardStops().get(i))) {
 					forwardStops.add(part.getForwardStops().get(i));
+					addCount++;
 				}
 			}
 		} else {
@@ -84,9 +95,11 @@ public class TransportRoute extends MapObject {
 			for (int i = part.getForwardStops().size() - 1; i >= 0 ; i--) {
 				if (!part.getForwardStops().get(i).isMissingStop() && !forwardStops.contains(part.getForwardStops().get(i))) {
 					forwardStops.add(part.getForwardStops().get(i));
+					addCount++;
 				}
 			}
 		}
+		return addCount > 0;
 	}
 	
 	
