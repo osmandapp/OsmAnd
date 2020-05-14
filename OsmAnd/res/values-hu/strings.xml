@@ -132,7 +132,7 @@
     <string name="pref_overlay">Rátétréteg / alátétréteg</string>
     <string name="pref_raster_map">Térképforrás beállítások</string>
     <string name="pref_vector_map">Vektoros térkép beállítások</string>
-    <string name="delete_confirmation_msg">Biztosan törlöd: %1$s?</string>
+    <string name="delete_confirmation_msg">Biztosan törli: %1$s\?</string>
     <string name="city_type_suburb">településrész</string>
     <string name="city_type_hamlet">falucska</string>
     <string name="city_type_village">község</string>
@@ -638,7 +638,7 @@
     <string name="poi_action_add">hozzáadás</string>
     <string name="poi_action_change">módosítás</string>
     <string name="poi_action_succeded_template">{0} művelet befejeződött.</string>
-    <string name="poi_error_unexpected_template">{0} műveletet nem sikerült végrehajtani.</string>
+    <string name="poi_error_unexpected_template">{0} művelet végrehajtása sikertelen.</string>
     <string name="poi_error_io_error_template">{0} művelet közben input/output hiba történt.</string>
     <string name="poi_error_info_not_loaded">Nincs letöltve információ a pontról</string>
     <string name="poi_dialog_opening_hours">Nyitva</string>
@@ -939,7 +939,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="dropbox_plugin_name">Dropbox bővítmény</string>
     <string name="local_indexes_cat_av">Hang- és videofelvétel</string>
     <string name="stop_routing_confirm">Biztosan megszakítja a navigációt\?</string>
-    <string name="clear_dest_confirm">Biztosan törlöd a célpontot (és a köztes célpontokat)?</string>
+    <string name="clear_dest_confirm">Biztosan törölni szeretné a célpontot (és a köztes célpontokat)\?</string>
     <string name="precise_routing_mode_descr">Pontos, hibamentes útvonaltervek készítése. Jelenleg korlátozott távolságra és lassan tervez.</string>
     <string name="precise_routing_mode">Pontos útvonaltervezés (kísérleti)</string>
     <string name="recording_context_menu_show">Mutat</string>
@@ -2099,7 +2099,7 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="rendering_attr_hideWaterPolygons_description">Vízfelületek</string>
     <string name="rendering_attr_hideWaterPolygons_name">Vízfelületek elrejtése</string>
     <string name="configure_screen_quick_action">Gyorsművelet</string>
-    <string name="quick_action_item_action">%d művelet</string>
+    <string name="quick_action_item_action">%d. művelet</string>
     <string name="quick_action_item_screen">%d képernyő</string>
     <string name="quick_action_add_marker">Térképjelölő hozzáadása</string>
     <string name="quick_action_add_poi">Érdekes pont (POI) hozzáadása</string>
@@ -2119,7 +2119,7 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="quick_action_add_favorite">Kedvenc hozzáadása</string>
     <string name="dialog_add_action_title">Művelet hozzáadása</string>
     <string name="quick_actions_delete">Művelet törlése</string>
-    <string name="quick_actions_delete_text">Biztosan törlöd a(z) „%s” műveletet?</string>
+    <string name="quick_actions_delete_text">Biztosan törölni szeretné ezt a műveletet: „%s”\?</string>
     <string name="quick_favorites_show_favorites_dialog">Kedvencek párbeszédablak megjelenítése</string>
     <string name="quick_favorites_name_preset">Előre megadott név</string>
     <string name="quick_action_add_marker_descr">Gomb, amely létrehoz a képernyő közepén egy térképjelölőt.</string>
@@ -3624,4 +3624,6 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="quick_action_switch_profile_descr">A műveletgombra koppintva válthat a kiválasztott profilok között.</string>
     <string name="shared_string_add_profile">Profil hozzáadása</string>
     <string name="change_application_profile">Alkalmazásprofil módosítása</string>
+    <string name="search_poi_types_descr">Kombináljon POI típusokat különböző kategóriákból. Koppintson egy kapcsolóra az összes altípus kiválasztásához, vagy koppintson egy szövegre az egyes altípusok kijelöléséhez.</string>
+    <string name="search_poi_types">POI típusok keresése</string>
 </resources>
