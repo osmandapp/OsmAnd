@@ -3,6 +3,7 @@ package net.osmand.plus.activities;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -134,13 +135,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		setAdapter(favouritesAdapter);
 
 		boolean light = getMyApplication().getSettings().isLightContent();
-		arrowImage = AppCompatResources.getDrawable(context, R.drawable.ic_direction_arrow);
-		arrowImage.mutate();
-		if (light) {
-			arrowImage.setColorFilter(ContextCompat.getColor(context, R.color.color_distance), PorterDuff.Mode.MULTIPLY);
-		} else {
-			arrowImage.setColorFilter(ContextCompat.getColor(context, R.color.color_distance), PorterDuff.Mode.MULTIPLY);
-		}
 		arrowImageDisabled = AppCompatResources.getDrawable(context, R.drawable.ic_direction_arrow);
 		arrowImageDisabled.mutate();
 		arrowImageDisabled.setColorFilter(ContextCompat.getColor(
