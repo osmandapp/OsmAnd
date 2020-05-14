@@ -966,7 +966,7 @@
     <string name="one_tap_active">\'One tap\' active</string>
     <string name="empty_state_av_notes">Make notes!</string>
     <string name="empty_state_av_notes_desc">Add audio, video or photo note to every point on the map, using widget or context menu.</string>
-    <string name="notes_by_date">OSM notes by date</string>
+    <string name="notes_by_date">A/V notes by date</string>
     <string name="by_date">By date</string>
     <string name="by_type">By type</string>
     <string name="looking_for_tracks_with_waypoints">Looking for tracks with waypoints</string>
