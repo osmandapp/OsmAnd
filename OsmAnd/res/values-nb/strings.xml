@@ -2440,7 +2440,7 @@
     <string name="poi_deleted_localy">Interessepunkt blir slettet når du laster opp endringene dine</string>
     <string name="only_download_over_wifi">Kun nedlasting over Wi-Fi</string>
     <string name="map_widget_fps_info">Feilrettingsinfo for bildefrekvens</string>
-    <string name="rendering_attr_hidePOILabels_name">Interessepunktpåskrifter</string>
+    <string name="rendering_attr_hidePOILabels_name">Interessepunktetiketter</string>
     <string name="will_open_tomorrow_at">Åpner i morgen</string>
     <string name="winter_and_ski_renderer">Vinter og ski</string>
     <string name="touring_view_renderer">Turvisning</string>
@@ -3548,7 +3548,8 @@
     <string name="quick_action_transport_hide">Skjul offentlig transport</string>
     <string name="quick_action_transport_show">Vis offentlig transport</string>
     <string name="back_to_editing">Tilbake til redigering</string>
-    <string name="create_edit_poi">Legg til/rediger POI</string>
+    <string name="create_edit_poi">Legg til/rediger interessepunkt</string>
     <string name="quick_action_show_hide_transport">Vis/skjul offentlig transport</string>
     <string name="shared_string_add_profile">Legg til profil</string>
+    <string name="quick_action_transport_descr"></string>
 </resources>
