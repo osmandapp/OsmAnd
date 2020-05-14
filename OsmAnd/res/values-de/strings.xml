@@ -2614,7 +2614,7 @@ Lon %2$s</string>
     <string name="by_type">Nach Typ</string>
     <string name="import_gpx_file_description">kann als Favoriten oder GPX-Datei importiert werden.</string>
     <string name="empty_state_av_notes_desc">Audio-, Video- oder Fotonotizen zu jedem Punkt auf der Karte über Bedienelement oder Kontextmenü hinzufügen.</string>
-    <string name="notes_by_date">OSM-Notizen nach Datum</string>
+    <string name="notes_by_date">Audio-/Video-Notizen nach Datum</string>
     <string name="tap_on_map_to_hide_interface_descr">Ein Tippen auf die Karte schaltet die Steuertasten und Bedienelemente um.</string>
     <string name="release_3_0">• Neu: Unterstützung weltweiter Offline-Reiseführer. Verknüpfung beschriebener Sehenswürdigkeiten zur Landkarte. Die Inhalte basieren derzeit auf Wikivoyage.
 \n
