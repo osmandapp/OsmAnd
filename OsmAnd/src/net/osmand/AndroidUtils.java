@@ -51,6 +51,7 @@ import android.widget.TextView;
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
@@ -696,6 +697,10 @@ public class AndroidUtils {
 
 	public static Drawable getMirroredDrawable(@NonNull Context ctx,
 	                                           @NonNull Drawable drawable) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			drawable.setAutoMirrored(true);
+			return drawable;
+		}
 		Bitmap bitmap = drawableToBitmap(drawable);
 		return new BitmapDrawable(ctx.getResources(), flipBitmapHorizontally(bitmap));
 	}
