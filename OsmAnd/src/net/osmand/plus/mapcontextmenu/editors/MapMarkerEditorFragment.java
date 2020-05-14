@@ -119,7 +119,7 @@ public class MapMarkerEditorFragment extends PointEditorFragment {
 
 	@Override
 	public Drawable getNameIcon() {
-		return requireMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_flag_dark, getPointColor());
+		return requireMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_flag, getPointColor());
 	}
 
 	@Override

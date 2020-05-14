@@ -1270,7 +1270,7 @@ public class ImportHelper {
 			items.add(new ShortDescriptionItem(txt));
 
 			BaseBottomSheetItem asFavoritesItem = new SimpleBottomSheetItem.Builder()
-					.setIcon(getContentIcon(R.drawable.ic_action_fav_dark))
+					.setIcon(getContentIcon(R.drawable.ic_action_favorite))
 					.setTitle(getString(R.string.import_as_favorites))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
 					.setOnClickListener(new View.OnClickListener() {

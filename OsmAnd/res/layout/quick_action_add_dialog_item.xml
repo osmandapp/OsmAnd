@@ -23,7 +23,7 @@
         android:layout_marginRight="16dp"
         android:scaleType="centerInside"
         android:tint="?attr/default_icon_color"
-        osmand:srcCompat="@drawable/ic_action_flag_dark"
+        osmand:srcCompat="@drawable/ic_action_flag"
 	    android:layout_marginEnd="16dp" />
 
     <TextView

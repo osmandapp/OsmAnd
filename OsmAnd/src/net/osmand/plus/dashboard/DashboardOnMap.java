@@ -406,8 +406,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		actionButton = new ImageView(mapActivity);
 		int btnSizePx = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_button_size);
 		actionButton.setLayoutParams(getActionButtonLayoutParams(btnSizePx));
-		actionButton.setScaleType(ScaleType.CENTER);
 		actionButton.setBackgroundResource(R.drawable.btn_circle_blue);
+		int iconSizePx = mapActivity.getResources().getDimensionPixelSize(R.dimen.standard_icon_size);
+		int iconPadding = (btnSizePx - iconSizePx) / 2;
+		actionButton.setPadding(iconPadding, iconPadding, iconPadding, iconPadding);
 		hideActionButton();
 
 

@@ -79,7 +79,7 @@
                     android:layout_marginTop="2dp"
                     android:scaleType="centerInside"
                     android:tint="?attr/default_icon_color"
-                    osmand:srcCompat="@drawable/ic_action_fav_dark"/>
+                    osmand:srcCompat="@drawable/ic_action_favorite"/>
 
             </LinearLayout>
 
