@@ -808,6 +808,10 @@ public class TransportRoutePlanner {
 				mergeTransportStops(r, loadedTransportStops, stops, localFileRoutes, routeMap.get(r));
 					
 				for (TransportStop stop : stops) {
+					//skip missing stops
+					if (stop.isMissingStop()) {
+						continue;
+					}
 					long stopId = stop.getId();
 					TransportStop multifileStop = loadedTransportStops.get(stopId);
 					int[] rrs = stop.getReferencesToRoutes();
@@ -947,8 +951,7 @@ public class TransportRoutePlanner {
 		private TransportRoute combineRoute(TransportRoute route, String fileName) throws IOException {
 			//1.Get all available route parts;
 			List<TransportRoute> result = new ArrayList<>(findIncompleteRouteParts(route));
-//			List<TransportRoute> acceptedCandidates = new ArrayList<TransportRoute>();
-			List<Way> allWays = getAllWays(result);
+			List<Way> allWays = getAllWays(result); //TODO check ways for right order? Artifacts during drawing.
 			
 			//2. Get massive of segments:
 			List<List<TransportStop>> segments = parseRoutePartsToSegments(result);
@@ -958,9 +961,10 @@ public class TransportRoutePlanner {
 			//4. Check for missingStops. If they present in the middle/there more then one segment - we have a hole in the  map data 
 			List<List<TransportStop>> mergedSegments = combineSegments(segments);
 			
+			
 			//5. Create combined TransportRoute and return it
 			if (mergedSegments.size() > 1) {
-				//TODO what will we do with incomplete route? 
+				//TODO sort incomplete routes (and remove missingStops) and merge into one? 
 				return null;
 			} else {				
 				return new TransportRoute(route, mergedSegments.get(0), allWays);

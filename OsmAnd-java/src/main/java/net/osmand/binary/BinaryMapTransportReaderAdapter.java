@@ -304,13 +304,16 @@ public class BinaryMapTransportReaderAdapter {
 				dataObject.setRouteOffset(codedIS.readRawVarint32());
 				break;
 			case OsmandOdb.IncompleteTransportRoute.OPERATOR_FIELD_NUMBER :
-				dataObject.setOperator(regStr(stringTable));
+				skipUnknownField(t);
+//				dataObject.setOperator(regStr(stringTable));
 				break;
 			case OsmandOdb.IncompleteTransportRoute.REF_FIELD_NUMBER :
-				dataObject.setRef(regStr(stringTable));
+				skipUnknownField(t);
+//				dataObject.setRef(regStr(stringTable));
 				break;
 			case OsmandOdb.IncompleteTransportRoute.TYPE_FIELD_NUMBER :
-				dataObject.setType(regStr(stringTable));
+				skipUnknownField(t);
+//				dataObject.setType(regStr(stringTable));
 				break;
 			case OsmandOdb.IncompleteTransportRoute.MISSINGSTOPS_FIELD_NUMBER :
 ////				dataObject.getMissingStops().add(codedIS.readSInt32()); //skip for now
