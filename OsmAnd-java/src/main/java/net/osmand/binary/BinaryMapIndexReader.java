@@ -2639,6 +2639,7 @@ public class BinaryMapIndexReader {
 	public net.osmand.data.IncompleteTransportRoute getIncompleteRoutePointers(long id) {
 		return incompleteRoutes.get(id);
 	}
+	
 	public Collection<net.osmand.data.IncompleteTransportRoute> getIncompleteRoutes() {
 		return incompleteRoutes.valueCollection();
 	}

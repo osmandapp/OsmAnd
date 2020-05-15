@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class TransportRoute extends MapObject {
@@ -30,7 +32,7 @@ public class TransportRoute extends MapObject {
 	public TransportRoute() {
 	}
 	
-	public TransportRoute(TransportRoute r, boolean combined) {
+	public TransportRoute(TransportRoute r, List<TransportStop> mergedSegment, List<Way> ways) {
 		this.name = r.name;
 		this.enName = r.enName;
 		this.names = r.names;
@@ -38,14 +40,12 @@ public class TransportRoute extends MapObject {
 		this.operator = r.operator;
 		this.ref = r.ref;
 		this.type = r.type;
-		this.dist = r.dist;
 		this.color = r.color;
 		this.schedule = r.schedule;
-		this.combined = combined;
-
-		if (combined) {
-			this.addRoutePart(r, true);
-		}
+		this.combined = true;
+		this.forwardStops = mergedSegment;
+		this.dist = calculateDistance();
+		this.forwardWays = ways; //TODO check
 	}
 	
 	public TransportSchedule getSchedule() {
@@ -62,46 +62,19 @@ public class TransportRoute extends MapObject {
 	public boolean isCombined() {
 		return combined;
 	}
-
+	
+	public Integer calculateDistance() {
+		int distance = 0;
+		for (int i = 0; i < forwardStops.size()-1; i++) {
+			if (!forwardStops.get(i).isMissingStop() || !forwardStops.get(i+1).isMissingStop())
+			distance += MapUtils.getDistance(forwardStops.get(i).getLocation(), forwardStops.get(i+1).getLocation());
+		}
+		return distance;
+	}
+	
 	public boolean isIncomplete() {
 		return forwardStops.get(0).isMissingStop() || forwardStops.get(forwardStops.size()-1).isMissingStop(); 
 	}
-	
-	public void setCombined(boolean combined) {
-		this.combined = combined;
-	}
-	
-	public TransportStop getMissingStartStop() {
-		return forwardStops.get(0).isMissingStop() ? forwardStops.get(0) : null;
-	}
-	
-	public TransportStop getMissingEndStop() {
-		return forwardStops.get(forwardStops.size()-1).isMissingStop() ? forwardStops.get(forwardStops.size()-1) : null;
-	}
-	
-	public boolean addRoutePart(TransportRoute part,  boolean forward) {
-		//TODO chec stop validity and combine ways
-		int addCount = 0;
-		if (forward) {				
-			routeParts.add(part);
-			for (int i = 0; i < part.getForwardStops().size(); i++) {
-				if (!part.getForwardStops().get(i).isMissingStop() && !forwardStops.contains(part.getForwardStops().get(i))) {
-					forwardStops.add(part.getForwardStops().get(i));
-					addCount++;
-				}
-			}
-		} else {
-			routeParts.add(0, part);
-			for (int i = part.getForwardStops().size() - 1; i >= 0 ; i--) {
-				if (!part.getForwardStops().get(i).isMissingStop() && !forwardStops.contains(part.getForwardStops().get(i))) {
-					forwardStops.add(part.getForwardStops().get(i));
-					addCount++;
-				}
-			}
-		}
-		return addCount > 0;
-	}
-	
 	
 	public List<TransportRoute> getRouteParts() {
 		return routeParts;
