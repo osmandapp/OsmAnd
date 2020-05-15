@@ -13,7 +13,7 @@
 		android:paddingLeft="@dimen/list_header_padding"
 		android:paddingStart="@dimen/list_header_padding">
 
-		<CheckBox
+		<androidx.appcompat.widget.AppCompatCheckBox
 			android:id="@+id/select_all"
 			android:focusable="false"
 			android:layout_gravity="center_vertical"

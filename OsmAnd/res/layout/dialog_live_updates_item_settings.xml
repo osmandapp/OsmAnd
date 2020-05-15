@@ -107,7 +107,7 @@
                     android:textSize="@dimen/default_list_text_size"
                     tools:text="Only download over WiFi long text like really long"/>
 
-                <CheckBox
+                <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/downloadOverWiFiSwitch"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"

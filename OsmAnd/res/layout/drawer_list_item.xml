@@ -32,7 +32,7 @@
         tools:text="Some title text"
 	    android:layout_marginStart="11dp" />
 
-    <CheckBox
+    <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/toggle_item"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/list_item_height"
