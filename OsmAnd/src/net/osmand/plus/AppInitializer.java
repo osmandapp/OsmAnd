@@ -756,7 +756,6 @@ public class AppInitializer implements IProgress {
 			// native depends on renderers
 			initNativeCore();
 			notifyEvent(InitEvents.NATIVE_INITIALIZED);
-
 			app.favorites.loadFavorites();
 			app.gpxDbHelper.loadGpxItems();
 			notifyEvent(InitEvents.FAVORITES_INITIALIZED);
