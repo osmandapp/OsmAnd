@@ -44,8 +44,8 @@ public class TransportRoutePlanner {
 
 	public List<TransportRouteResult> buildRoute(TransportRoutingContext ctx, LatLon start, LatLon end) throws IOException, InterruptedException {
 		ctx.startCalcTime = System.currentTimeMillis();
-		List<TransportRouteSegment> startStops = ctx.getTransportStops(start, true, false);
-		List<TransportRouteSegment> endStops = ctx.getTransportStops(end, true, false);
+		List<TransportRouteSegment> startStops = ctx.getTransportStops(start);
+		List<TransportRouteSegment> endStops = ctx.getTransportStops(end);
 
 		TLongObjectHashMap<TransportRouteSegment> endSegments = new TLongObjectHashMap<TransportRouteSegment>();
 		for(TransportRouteSegment s : endStops) {
@@ -120,7 +120,7 @@ public class TransportRoutePlanner {
 					break;
 				}
 				sgms.clear();
-				sgms = ctx.getTransportStops(stop.x31, stop.y31, true, sgms, true, stop.isMissingStop());
+				sgms = ctx.getTransportStops(stop.x31, stop.y31, true, sgms);
 				ctx.visitedStops++;
 				for (TransportRouteSegment sgm : sgms) {
 					if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
@@ -745,22 +745,20 @@ public class TransportRoutePlanner {
 			}
 		}
 		
-		public List<TransportRouteSegment> getTransportStops(LatLon loc, boolean completeRoutes, boolean missingStop) throws IOException {
+		public List<TransportRouteSegment> getTransportStops(LatLon loc) throws IOException {
 			int y = MapUtils.get31TileNumberY(loc.getLatitude());
 			int x = MapUtils.get31TileNumberX(loc.getLongitude());
-			return getTransportStops(x, y, false, new ArrayList<TransportRouteSegment>(), completeRoutes, missingStop);
+			return getTransportStops(x, y, false, new ArrayList<TransportRouteSegment>());
 		}
 		
-		public List<TransportRouteSegment> getTransportStops(int x, int y, boolean change, List<TransportRouteSegment> res, boolean completeRoutes, boolean missingStop) throws IOException {
-			return loadNativeTransportStops(x, y, change, res, completeRoutes, missingStop);
+		public List<TransportRouteSegment> getTransportStops(int x, int y, boolean change, List<TransportRouteSegment> res) throws IOException {
+			return loadNativeTransportStops(x, y, change, res);
 		}
 
-		private List<TransportRouteSegment> loadNativeTransportStops(int sx, int sy, boolean change, List<TransportRouteSegment> res, boolean completeRoutes, boolean missingStop) throws IOException {
+		private List<TransportRouteSegment> loadNativeTransportStops(int sx, int sy, boolean change, List<TransportRouteSegment> res) throws IOException {
 			long nanoTime = System.nanoTime();
 			int d = change ? walkChangeRadiusIn31 : walkRadiusIn31;
-			if (missingStop) {
-				d = missingStopRadiusIn31;
-			}
+
 			int lx = (sx - d ) >> (31 - cfg.ZOOM_TO_LOAD_TILES);
 			int rx = (sx + d ) >> (31 - cfg.ZOOM_TO_LOAD_TILES);
 			int ty = (sy - d ) >> (31 - cfg.ZOOM_TO_LOAD_TILES);
@@ -770,7 +768,7 @@ public class TransportRoutePlanner {
 					long tileId = (((long)x) << (cfg.ZOOM_TO_LOAD_TILES + 1)) + y;
 					List<TransportRouteSegment> list = quadTree.get(tileId);
 					if(list == null) {
-						list = loadTile(x, y, completeRoutes);
+						list = loadTile(x, y);
 						quadTree.put(tileId, list);
 					}
 					for(TransportRouteSegment r : list) {
@@ -790,7 +788,7 @@ public class TransportRoutePlanner {
 		}
 
 
-		private List<TransportRouteSegment> loadTile(int x, int y, boolean completeRoutes) throws IOException {
+		private List<TransportRouteSegment> loadTile(int x, int y) throws IOException {
 			long nanoTime = System.nanoTime();
 			List<TransportRouteSegment> lst = new ArrayList<TransportRouteSegment>();
 			int pz = (31 - cfg.ZOOM_TO_LOAD_TILES);
@@ -946,8 +944,7 @@ public class TransportRoutePlanner {
 			}
 			return c;
 		} 
-		
-		
+
 		private TransportRoute combineRoute(TransportRoute route, String fileName) throws IOException {
 			//1.Get all available route parts;
 			List<TransportRoute> result = new ArrayList<>(findIncompleteRouteParts(route));
@@ -955,6 +952,7 @@ public class TransportRoutePlanner {
 			
 			//2. Get massive of segments:
 			List<List<TransportStop>> segments = parseRoutePartsToSegments(result);
+			//TODO check for api? reversed works only from 24th
 			Collections.sort(segments, compareSegsBySize.reversed());
 			
 			//3. Merge segments and remove excess missingStops (when they are closer then MISSING_STOP_SEARCH_RADIUS):
@@ -987,7 +985,6 @@ public class TransportRoutePlanner {
 		
 		private List<List<TransportStop>> combineSegments(List<List<TransportStop>> segments) {
 			List<List<TransportStop>> rawSegments = segments;
-
 
 			List<List<TransportStop>> partsToDelete = new ArrayList<List<TransportStop>>();
 			List<List<TransportStop>> partsToReturn = new ArrayList<List<TransportStop>>();

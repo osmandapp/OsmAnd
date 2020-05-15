@@ -73,15 +73,12 @@ public class TransportRoute extends MapObject {
 	}
 	
 	public boolean isIncomplete() {
-		return forwardStops.get(0).isMissingStop() || forwardStops.get(forwardStops.size()-1).isMissingStop(); 
-	}
-	
-	public List<TransportRoute> getRouteParts() {
-		return routeParts;
-	}
-
-	public void setRouteParts(List<TransportRoute> routeParts) {
-		this.routeParts = routeParts;
+		for (TransportStop s : forwardStops) {
+			if (s.isMissingStop()) {
+				return true;
+			}
+		}
+		return false; 
 	}
 
 	public List<TransportStop> getForwardStops() {
