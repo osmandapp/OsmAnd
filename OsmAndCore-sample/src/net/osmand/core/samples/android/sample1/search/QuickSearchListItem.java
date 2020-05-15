@@ -253,9 +253,9 @@ public class QuickSearchListItem {
 		int iconId;
 		switch (searchResult.objectType) {
 			case CITY:
-				return app.getIconsCache().getIcon("ic_action_building_number", R.color.osmand_orange);
+				return app.getIconsCache().getIcon("ic_action_building2", R.color.osmand_orange);
 			case VILLAGE:
-				return app.getIconsCache().getIcon("ic_action_home_dark", R.color.osmand_orange);
+				return app.getIconsCache().getIcon("ic_action_village", R.color.osmand_orange);
 			case POSTCODE:
 			case STREET:
 				return app.getIconsCache().getIcon("ic_action_street_name", R.color.osmand_orange);
