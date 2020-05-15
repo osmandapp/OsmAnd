@@ -2599,7 +2599,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="one_tap_active_descr">Potlačte značku na mape na jej presunutie na prvé miesto v aktívnych značkách bez otvárania kontextového menu.</string>
     <string name="empty_state_av_notes">Urobte poznámky!</string>
     <string name="empty_state_av_notes_desc">Pridajte zvukové, video alebo fotografické poznámky ku každému bodu na mape, pomocou nástroja alebo kontextového menu.</string>
-    <string name="notes_by_date">OSM poznámky podľa dátumu</string>
+    <string name="notes_by_date">Mediálne poznámky podľa dátumu</string>
     <string name="by_date">Podľa dátumu</string>
     <string name="by_type">Podľa typu</string>
     <string name="one_tap_active">\"Jedno stlačenie\" aktívne</string>
@@ -3612,8 +3612,8 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="wikipedia_poi_languages_promo">Niektoré články Wikipedia nemusia byť dostupné vo vašom jazyku. Zvoľte jazyky, v ktorých sa články Wikipedia budú zobrazovať na mape.
 \nPri čítaní článku budete môcť prepínať medzi všetkými dostupnými jazykmi.</string>
     <string name="wiki_menu_download_descr">Pre zobrazenie bodov Wikipedie na mape sú potrebné ďalšie mapy.</string>
-    <string name="ui_customization_description">Upraviť počet položiek v úvodnom paneli, nastaviť mapu a kontextové menu.
-\n
+    <string name="ui_customization_description">Upraviť počet položiek v Úvodnom paneli, Nastaviť mapu a Kontextovom menu. 
+\n 
 \nMôžete vypnúť nepoužívané moduly, aby sa skryli ich ovládacie prvky z aplikácie %1$s.</string>
     <string name="ui_customization_short_descr">Položky v úvodnom paneli a kontextovom menu</string>
     <string name="ui_customization">Prispôsobenie používateľského rozhrania</string>
@@ -3711,4 +3711,8 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="reset_deafult_order">Obnoviť predvolené poradie položiek</string>
     <string name="back_to_editing">Naspäť k úpravám</string>
     <string name="additional_actions_descr">K týmto akciám sa dostanete stlačením tlačidla “%1$s”.</string>
+    <string name="quick_action_switch_profile_descr">Stlačením tlačidla akcie sa prepne medzi zvolenými profilmi.</string>
+    <string name="shared_string_add_profile">Pridať profil</string>
+    <string name="change_application_profile">Zmeniť aplikačný profil</string>
+    <string name="profiles_for_action_not_found">Nenašli sa profily vybrané pre túto akciu.</string>
 </resources>

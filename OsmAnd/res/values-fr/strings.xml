@@ -2601,7 +2601,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="one_tap_active">Appui court sur une marque</string>
     <string name="empty_state_av_notes">Faites des notes !</string>
     <string name="empty_state_av_notes_desc">Associez des notes sonore, vidéo ou photo à n\'importe quel point de la carte depuis le gadget ou le menu contextuel.</string>
-    <string name="notes_by_date">Notes OSM par date</string>
+    <string name="notes_by_date">Notes Audio / Vidéo par date</string>
     <string name="by_date">Par date</string>
     <string name="by_type">Par type</string>
     <string name="modify_the_search_query">Modifier votre recherche.</string>
@@ -3669,22 +3669,22 @@ représentant la zone : %1$s x %2$s</string>
     <string name="subscription_osmandlive_item">Abonnement - OsmAnd Live</string>
     <string name="osmand_purchases_item">Achats OsmAnd</string>
     <string name="navigation_profiles_item">Profils de navigation</string>
-    <string name="release_3_7">- Nouvelles cartes des pistes hors ligne
-\n
-\n - Personnalisation complète des favoris et des points de passage GPX - couleurs, icônes et formes personnalisées
-\n
-\n - Personnaliser l\'ordre des éléments dans le menu contextuel, la configuration de la carte, le tiroir
-\n
-\n - Wikipédia comme couche séparée dans Paramétrer la carte, sélectionnez uniquement les langues nécessaires
-\n
-\n - Créez vos propres filtres de PI avec une flexibilité totale
-\n
-\n - Ajout d\'options permettant de restaurer les paramètres des profils personnalisés
-\n
-\n - Les routes GPX utilisées en navigation prennent en charge les voies de circulation et les instructions de virage complètes
-\n
-\n - Correction des tailles sur les tablettes
-\n
+    <string name="release_3_7">- Nouvelles cartes des pistes hors ligne 
+\n 
+\n - Personnalisation complète des favoris et des points de passage GPX - couleurs, icônes et formes personnalisées 
+\n 
+\n - Personnalisez l\'ordre des éléments dans le menu contextuel, configurez la carte et le panneau déroulant
+\n 
+\n - Wikipédia comme couche séparée dans Paramétrer la carte, sélectionnez uniquement les langues nécessaires 
+\n 
+\n - Créez vos propres filtres de PI avec une flexibilité totale 
+\n 
+\n - Ajout d\'options permettant de restaurer les paramètres des profils personnalisés 
+\n 
+\n - Les routes GPX utilisées en navigation prennent en charge les voies de circulation et les instructions de virage complètes 
+\n 
+\n - Correction des tailles sur les tablettes 
+\n 
 \n - Correction de bugs avec RTL
 \n
 \n</string>

@@ -1112,7 +1112,7 @@
     <string name="back_to_map">Haritaya dön</string>
     <string name="share_note">Not paylaş</string>
     <string name="watch">İzle</string>
-    <string name="notes">A/V notları</string>
+    <string name="notes">Sesli/Görüntülü notlar</string>
     <string name="online_map">Çevrim içi harita</string>
     <string name="roads_only">Sadece yollar</string>
     <string name="device_memory">Aygıt belleği</string>
@@ -2110,7 +2110,7 @@
     <string name="one_tap_active">\'Tek basış\' aktif</string>
     <string name="empty_state_av_notes">Not alın!</string>
     <string name="empty_state_av_notes_desc">Widget veya içerik menüsünü kullanarak, harita üzerinde her nokta için ses, video veya fotoğraf notları al.</string>
-    <string name="notes_by_date">Tarihe göre OSM notları</string>
+    <string name="notes_by_date">Tarihe göre sesli/görüntülü notlar</string>
     <string name="by_date">Tarihe göre</string>
     <string name="by_type">Türe göre</string>
     <string name="shared_string_more_without_dots">Daha fazla</string>

@@ -2005,7 +2005,7 @@
     <string name="marker_activated">הסמן %s הופעל.</string>
     <string name="empty_state_av_notes">אפשר ליצור הערות!</string>
     <string name="empty_state_av_notes_desc">ניתן להוסיף הערה מסוג שמע, וידאו או תמונה לכל נקודה במפה באמצעות וידג׳ט או תפריט הקשר.</string>
-    <string name="notes_by_date">הערות OSM לפי תאריך</string>
+    <string name="notes_by_date">הערות שמע/וידאו לפי תאריך</string>
     <string name="by_date">לפי תאריך</string>
     <string name="by_type">לפי סוג</string>
     <string name="subscribe_email_desc">ניתן להירשם לרשימת הדיוור שלנו כדי לקבל הנחות על היישומון ולקבל עוד 3 הורדות של מפות בחינם!</string>
