@@ -1318,10 +1318,13 @@ public class RoutingHelper {
 		return route;
 	}
 
-	public GPXFile generateGPXFileWithRoute(String name){
-		return provider.createOsmandRouterGPX(route, app, name);
+	public GPXFile generateGPXFileWithRoute(String name) {
+		return generateGPXFileWithRoute(route, name);
 	}
 
+	public GPXFile generateGPXFileWithRoute(RouteCalculationResult route, String name){
+		return provider.createOsmandRouterGPX(route, app, name);
+	}
 
 	public void notifyIfRouteIsCalculated() {
 		if(route.isCalculated()) {
