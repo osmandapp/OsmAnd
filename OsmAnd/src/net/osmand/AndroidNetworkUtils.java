@@ -20,6 +20,7 @@ import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -127,6 +128,25 @@ public class AndroidNetworkUtils {
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
+	public static void downloadFileAsync(final String url,
+	                                     final File fileToSave,
+	                                     final CallbackWithObject<String> listener) {
+
+		new AsyncTask<Void, Void, String>() {
+
+			@Override
+			protected String doInBackground(Void... params) {
+				return downloadFile(url, fileToSave);
+			}
+
+			@Override
+			protected void onPostExecute(String error) {
+				if (listener != null) {
+					listener.processResult(error);
+				}
+			}
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+	}
 
 	public static String sendRequest(OsmandApplication ctx, String url, Map<String, String> parameters,
 									 String userOperation, boolean toastAllowed, boolean post) {
@@ -245,6 +265,33 @@ public class AndroidNetworkUtils {
 			LOG.error("Cannot download image : " + url, e);
 		}
 		return res;
+	}
+
+	public static String downloadFile(@NonNull String url, @NonNull File fileToSave) {
+		String error = null;
+		try {
+			URLConnection connection = NetworkUtils.getHttpURLConnection(url);
+			connection.setConnectTimeout(CONNECTION_TIMEOUT);
+			connection.setReadTimeout(CONNECTION_TIMEOUT);
+			BufferedInputStream inputStream = new BufferedInputStream(connection.getInputStream(), 8 * 1024);
+			fileToSave.getParentFile().mkdirs();
+			OutputStream stream = null;
+			try {
+				stream = new FileOutputStream(fileToSave);
+				Algorithms.streamCopy(inputStream, stream);
+				stream.flush();
+			} finally {
+				Algorithms.closeStream(inputStream);
+				Algorithms.closeStream(stream);
+			}
+		} catch (UnknownHostException e) {
+			error = e.getMessage();
+			LOG.error("UnknownHostException, cannot download file " + url + " " + error);
+		} catch (Exception e) {
+			error = e.getMessage();
+			LOG.warn("Cannot download file : " + url, e);
+		}
+		return error;
 	}
 
 	private static final String BOUNDARY = "CowMooCowMooCowCowCow";

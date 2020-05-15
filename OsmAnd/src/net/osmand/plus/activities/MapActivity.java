@@ -45,7 +45,10 @@ import androidx.fragment.app.FragmentManager.BackStackEntry;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
+import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
+import net.osmand.CallbackWithObject;
+import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.SecondSplashScreenFragment;
@@ -1751,6 +1754,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (!applied) {
 			applied = parseTileSourceIntent();
 		}
+		if (!applied) {
+			applied = parseOpenGpxIntent();
+		}
 		return applied;
 	}
 
@@ -1813,6 +1819,46 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						LOG.error("parseAddTileSourceIntent error", e);
 					}
 				}
+				setIntent(null);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean parseOpenGpxIntent() {
+		Intent intent = getIntent();
+		if (intent != null && intent.getData() != null) {
+			Uri data = intent.getData();
+			if (("http".equalsIgnoreCase(data.getScheme()) || "https".equalsIgnoreCase(data.getScheme()))
+					&& data.getHost() != null && data.getHost().contains("osmand.net")
+					&& data.getPath() != null && data.getPath().startsWith("/open-gpx")) {
+				String url = data.getQueryParameter("url");
+				if (Algorithms.isEmpty(url)) {
+					return false;
+				}
+				String name = data.getQueryParameter("name");
+				if (Algorithms.isEmpty(name)) {
+					name = Algorithms.getFileWithoutDirs(url);
+				}
+				if (!name.endsWith(IndexConstants.GPX_FILE_EXT)) {
+					name += IndexConstants.GPX_FILE_EXT;
+				}
+				final String fileName = name;
+				AndroidNetworkUtils.downloadFileAsync(url, app.getAppPath(IndexConstants.GPX_IMPORT_DIR + fileName),
+						new CallbackWithObject<String>() {
+							@Override
+							public boolean processResult(String error) {
+								if (error == null) {
+									String downloaded = app.getString(R.string.shared_string_download_successful);
+									app.showShortToastMessage(app.getString(R.string.ltr_or_rtl_combine_via_colon, downloaded, fileName));
+								} else {
+									app.showShortToastMessage(app.getString(R.string.error_occurred_loading_gpx));
+								}
+								return true;
+							}
+						});
+
 				setIntent(null);
 				return true;
 			}
