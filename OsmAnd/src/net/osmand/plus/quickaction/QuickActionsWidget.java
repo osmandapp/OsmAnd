@@ -257,7 +257,7 @@ public class QuickActionsWidget extends LinearLayout {
 									.addToBackStack(QuickActionListFragment.TAG).commitAllowingStateLoss();
 							} else {
 								CreateEditActionDialog dialog = CreateEditActionDialog.newInstance(action.id);
-								dialog.show(fm, AddQuickActionDialog.TAG);
+								dialog.show(fm, CreateEditActionDialog.TAG);
 							}
 							return true;
 						}
