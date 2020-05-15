@@ -13,14 +13,10 @@ import java.util.Map;
 import java.util.PriorityQueue;
 
 import gnu.trove.iterator.TIntIterator;
-import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
-
 import net.osmand.NativeLibrary;
-import net.osmand.binary.BinaryIndexPart;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.IncompleteTransportRoute;
@@ -32,7 +28,6 @@ import net.osmand.data.TransportStop;
 import net.osmand.data.TransportStopExit;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 public class TransportRoutePlanner {
@@ -822,10 +817,11 @@ public class TransportRoutePlanner {
 					}
 					if (rrs != null && !multifileStop.isDeleted()) {
 						for (int rr : rrs) {
-							// here we should assign only complete routes:
 							TransportRoute route = localFileRoutes.get(rr);
 							if (route == null) {
-								System.err.println(String.format("Something went wrong by loading combined route %d for stop %s", route.getId(), stop));
+								System.err.println(
+										String.format("Something went wrong by loading combined route %d for stop %s", 
+												rr, stop));
 							} else {								
 								TransportRoute combinedRoute = getCombinedRoute(route, r.getFile().getName());
 								if (combinedRoute == null) {
@@ -946,25 +942,24 @@ public class TransportRoutePlanner {
 		} 
 
 		private TransportRoute combineRoute(TransportRoute route, String fileName) throws IOException {
-			//1.Get all available route parts;
+			// 1. Get all available route parts;
 			List<TransportRoute> result = new ArrayList<>(findIncompleteRouteParts(route));
 			List<Way> allWays = getAllWays(result); //TODO check ways for right order? Artifacts during drawing.
 			
-			//2. Get massive of segments:
+			// 2. Get array of segments:
 			List<List<TransportStop>> segments = parseRoutePartsToSegments(result);
-			//TODO check for api? reversed works only from 24th
-			Collections.sort(segments, compareSegsBySize.reversed());
+			Collections.sort(segments, compareSegsBySize);
 			
-			//3. Merge segments and remove excess missingStops (when they are closer then MISSING_STOP_SEARCH_RADIUS):
-			//4. Check for missingStops. If they present in the middle/there more then one segment - we have a hole in the  map data 
+			// 3. Merge segments and remove excess missingStops (when they are closer then MISSING_STOP_SEARCH_RADIUS):
+			// 4. Check for missingStops. If they present in the middle/there more then one segment - we have a hole in the  map data 
 			List<List<TransportStop>> mergedSegments = combineSegments(segments);
 			
 			
-			//5. Create combined TransportRoute and return it
-			if (mergedSegments.size() > 1) {
-				//TODO sort incomplete routes (and remove missingStops) and merge into one? 
-				return null;
-			} else {				
+			// 5. Create combined TransportRoute and return it
+			if (mergedSegments.size() > 1 || mergedSegments.size() == 0) {
+				// TODO sort incomplete routes (and remove missingStops) and merge into one?
+				return route;
+			} else {
 				return new TransportRoute(route, mergedSegments.get(0), allWays);
 			}
 		}
@@ -978,8 +973,8 @@ public class TransportRoutePlanner {
 		}
 		
 		Comparator<List<TransportStop>> compareSegsBySize = new Comparator<List<TransportStop>>() {
-			public int compare(List<TransportStop> s1, List<TransportStop> s2) {				
-				return ((Integer)s1.size()).compareTo((Integer)s2.size());
+			public int compare(List<TransportStop> s1, List<TransportStop> s2) {
+				return -Integer.compare(s1.size(), s2.size());
 			}
 		};
 		
