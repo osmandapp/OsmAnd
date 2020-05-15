@@ -8,7 +8,11 @@ import androidx.annotation.StringRes;
 
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings.BooleanPreference;
+import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
+import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.util.Algorithms;
 
 import java.io.Serializable;
@@ -97,7 +101,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	public String getIconEntryName(Context ctx) {
-		return ctx.getResources().getResourceEntryName(getOverlayIconId());
+		return ctx.getResources().getResourceEntryName(getOverlayIconId(ctx));
 	}
 
 	public void setIconId(int iconId) {
@@ -137,9 +141,9 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.originObjectName = originObjectName;
 	}
 
-	public int getOverlayIconId() {
+	public int getOverlayIconId(Context ctx) {
 		if (isSpecialPoint()) {
-			return specialPointType.getIconId();
+			return specialPointType.getIconId(ctx);
 		}
 		return getIconId();
 	}
@@ -284,7 +288,15 @@ public class FavouritePoint implements Serializable, LocationPoint {
 			return typeName;
 		}
 
-		public int getIconId() {
+		public int getIconId(@NonNull Context ctx) {
+			if (this == PARKING) {
+				OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+				OsmandPreference parkingType = app.getSettings().getPreference(ParkingPositionPlugin.PARKING_TYPE);
+				if (parkingType instanceof BooleanPreference && ((BooleanPreference) parkingType).get()) {
+					return R.drawable.mm_special_parking_time_limited;
+				}
+				return iconId;
+			}
 			return iconId;
 		}
 
