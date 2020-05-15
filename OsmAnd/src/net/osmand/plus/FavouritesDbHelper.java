@@ -173,14 +173,7 @@ public class FavouritesDbHelper {
 			saveCurrentPointsIntoFile();
 		}
 		favoritesLoaded = true;
-		context.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				for (FavoritesListener listener : listeners) {
-					listener.onFavoritesLoaded();
-				}
-			}
-		});
+		notifyListeners();
 	}
 
 	void fixBlackBackground() {
@@ -195,6 +188,10 @@ public class FavouritesDbHelper {
 		}
 		sortAll();
 		saveCurrentPointsIntoFile();
+		notifyListeners();
+	}
+
+	private void notifyListeners() {
 		context.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
