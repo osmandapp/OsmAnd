@@ -83,9 +83,7 @@ import java.util.Random;
 
 import btools.routingapp.BRouterServiceConnection;
 
-import static net.osmand.plus.AppVersionUpgradeOnInit.VERSION_3_5;
-import static net.osmand.plus.AppVersionUpgradeOnInit.VERSION_3_7_0_1;
-import static net.osmand.plus.AppVersionUpgradeOnInit.VERSION_INSTALLED;
+import static net.osmand.plus.AppVersionUpgradeOnInit.LAST_APP_VERSION;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLiveUpdatesOn;
@@ -99,10 +97,7 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIn
 public class AppInitializer implements IProgress {
 
 	public static final boolean TIPS_AND_TRICKS = false;
-	public static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN"; //$NON-NLS-1$
-	public static final String VERSION_INSTALLED_NUMBER = "VERSION_INSTALLED_NUMBER"; //$NON-NLS-1$
-	public static final String NUMBER_OF_STARTS = "NUMBER_OF_STARTS"; //$NON-NLS-1$
-	public static final String FIRST_INSTALLED = "FIRST_INSTALLED"; //$NON-NLS-1$
+
 	private static final String VECTOR_INDEXES_CHECK = "VECTOR_INDEXES_CHECK"; //$NON-NLS-1$
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
 
@@ -115,7 +110,6 @@ public class AppInitializer implements IProgress {
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(AppInitializer.class);
 
 	private boolean initSettings = false;
-	private boolean firstTime;
 	private boolean activityChangesShowed = false;
 	private long startTime;
 	private long startBgTime;
@@ -168,52 +162,25 @@ public class AppInitializer implements IProgress {
 		startPrefs = app.getSharedPreferences(
 				getLocalClassName(app.getAppCustomization().getMapActivity().getName()),
 				Context.MODE_PRIVATE);
-		if(!startPrefs.contains(NUMBER_OF_STARTS)) {
-			startPrefs.edit().putInt(NUMBER_OF_STARTS, 1).commit();
-		} else {
-			startPrefs.edit().putInt(NUMBER_OF_STARTS, startPrefs.getInt(NUMBER_OF_STARTS, 0) + 1).commit();
-		}
-		if (!startPrefs.contains(FIRST_INSTALLED)) {
-			startPrefs.edit().putLong(FIRST_INSTALLED, System.currentTimeMillis()).commit();
-		}
-		if (!startPrefs.contains(FIRST_TIME_APP_RUN)) {
-			firstTime = true;
-			startPrefs.edit().putBoolean(FIRST_TIME_APP_RUN, true).commit();
-			startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
-			startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_5).commit();
-		} else {
-			appVersionUpgrade.upgradeVersion(startPrefs, VERSION_3_7_0_1);
-		}
-		app.getSettings().SHOW_TRAVEL_UPDATE_CARD.set(true);
-		app.getSettings().SHOW_TRAVEL_NEEDED_MAPS_CARD.set(true);
+		appVersionUpgrade.upgradeVersion(startPrefs, LAST_APP_VERSION);
 		initSettings = true;
 	}
 
 	public int getNumberOfStarts() {
-		if(startPrefs == null) {
-			return 0;
-		}
-		return startPrefs.getInt(NUMBER_OF_STARTS, 1);
+		return appVersionUpgrade.getNumberOfStarts(startPrefs);
 	}
 
 	public long getFirstInstalledDays() {
-		if(startPrefs == null) {
-			return 0;
-		}
-		long nd = startPrefs.getLong(FIRST_INSTALLED, 0);
-		
-		return (System.currentTimeMillis() - nd) / (1000l * 24l * 60l * 60l);
+		return appVersionUpgrade.getFirstInstalledDays(startPrefs);
 	}
 
 	public void resetFirstTimeRun() {
-		if(startPrefs != null) {
-			startPrefs.edit().remove(FIRST_TIME_APP_RUN).commit();
-		}
+		appVersionUpgrade.resetFirstTimeRun(startPrefs);
 	}
 
 	public boolean isFirstTime() {
 		initVariables();
-		return firstTime;
+		return appVersionUpgrade.isFirstTime();
 	}
 
 	public boolean isAppVersionChanged() {
@@ -226,7 +193,7 @@ public class AppInitializer implements IProgress {
 
 	public boolean checkAppVersionChanged() {
 		initVariables();
-		boolean showRecentChangesDialog = !firstTime && isAppVersionChanged();
+		boolean showRecentChangesDialog = !isFirstTime() && isAppVersionChanged();
 //		showRecentChangesDialog = true;
 		if (showRecentChangesDialog && !activityChangesShowed) {
 			activityChangesShowed = true;
@@ -252,7 +219,7 @@ public class AppInitializer implements IProgress {
 		long size = activity.getPreferences(Context.MODE_PRIVATE).getLong(EXCEPTION_FILE_SIZE, 0);
 		final File file = app.getAppPath(OsmandApplication.EXCEPTION_PATH);
 		if (file.exists() && file.length() > 0) {
-			if (size != file.length() && !firstTime) {
+			if (size != file.length() && !isFirstTime()) {
 				if (writeFileSize) {
 					activity.getPreferences(Context.MODE_PRIVATE).edit().putLong(EXCEPTION_FILE_SIZE, file.length()).commit();
 				}

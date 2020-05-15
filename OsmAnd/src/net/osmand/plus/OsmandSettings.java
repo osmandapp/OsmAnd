@@ -3792,9 +3792,6 @@ public class OsmandSettings {
 	
 	public final OsmandPreference<String> SELECTED_TRAVEL_BOOK = new StringPreference("selected_travel_book", "").makeGlobal();
 
-	public final OsmandPreference<Boolean> SHOW_TRAVEL_UPDATE_CARD = new BooleanPreference("show_travel_update_card", true).makeGlobal();
-	public final OsmandPreference<Boolean> SHOW_TRAVEL_NEEDED_MAPS_CARD = new BooleanPreference("show_travel_needed_maps_card", true).makeGlobal();
-
 	public final ListStringPreference DISPLAYED_TRANSPORT_SETTINGS = (ListStringPreference)
 			new ListStringPreference("displayed_transport_settings", null, ",").makeProfile();
 	
