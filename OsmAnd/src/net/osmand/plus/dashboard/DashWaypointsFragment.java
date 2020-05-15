@@ -180,7 +180,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 		MenuItem item; 
 //		item = optionsMenu.getMenu().add(
 //				R.string.shared_string_add_to_favorites).setIcon(getMyApplication().getIconsCache().
-//						getIcon(R.drawable.ic_action_fav_dark));
+//						getIcon(R.drawable.ic_action_favorite));
 //		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 //			@Override
 //			public boolean onMenuItemClick(MenuItem item) {

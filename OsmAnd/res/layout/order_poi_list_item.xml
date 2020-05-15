@@ -15,7 +15,7 @@
 		android:orientation="horizontal"
 		tools:background="?android:attr/selectableItemBackground">
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/action_icon"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
 			android:paddingEnd="@dimen/content_padding"
 			android:paddingStart="@dimen/content_padding" />
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/icon"
 			android:layout_width="@dimen/standard_icon_size"
 			android:layout_height="@dimen/standard_icon_size"
@@ -58,14 +58,14 @@
 			android:paddingEnd="@dimen/content_padding"
 			android:paddingStart="0dp" />
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/move_icon"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
 			android:layout_gravity="center"
 			android:paddingLeft="@dimen/content_padding"
 			android:paddingRight="@dimen/content_padding"
-			android:src="@drawable/ic_action_item_move"
+			osmand:srcCompat="@drawable/ic_action_item_move"
 			android:tint="?attr/secondary_icon_color"
 			android:paddingStart="@dimen/content_padding"
 			android:paddingEnd="@dimen/content_padding" />

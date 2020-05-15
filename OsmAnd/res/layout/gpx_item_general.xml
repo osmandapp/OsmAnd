@@ -72,12 +72,12 @@
                 android:paddingLeft="16dp"
 	            android:paddingStart="16dp">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/distance_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_action_polygom_dark"/>
+                    osmand:srcCompat="@drawable/ic_action_polygom_dark"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -118,12 +118,12 @@
                 android:paddingLeft="16dp"
 	            android:paddingStart="16dp">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/duration_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_action_time_start"/>
+                    osmand:srcCompat="@drawable/ic_action_time_start"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -216,12 +216,12 @@
                 android:paddingLeft="@dimen/content_padding"
 	            android:paddingStart="@dimen/content_padding">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/start_time_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_action_time_start"/>
+                    osmand:srcCompat="@drawable/ic_action_time_start"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -271,12 +271,12 @@
                 android:paddingLeft="@dimen/content_padding"
 	            android:paddingStart="@dimen/content_padding">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/end_time_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_action_time_start"/>
+                    osmand:srcCompat="@drawable/ic_action_time_start"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"

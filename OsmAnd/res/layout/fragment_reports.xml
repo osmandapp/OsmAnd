@@ -27,12 +27,12 @@
                 android:minHeight="60dp"
                 android:orientation="horizontal">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/calendarImageView"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:scaleType="center"
-                    android:src="@drawable/ic_action_data"/>
+                    osmand:srcCompat="@drawable/ic_action_data"/>
 
                 <Spinner
                     android:id="@+id/monthReportsSpinner"
@@ -46,12 +46,12 @@
 	                android:layout_marginStart="-8dp"
 	                android:layout_marginEnd="16dp" />
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/monthDropDownIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="16dp"
-                    android:src="@drawable/ic_action_arrow_drop_down"
+                    osmand:srcCompat="@drawable/ic_action_arrow_drop_down"
 	                android:layout_marginEnd="16dp" />
 
             </LinearLayout>
@@ -73,12 +73,12 @@
                 android:minHeight="60dp"
                 android:orientation="horizontal">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/regionIconImageView"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:scaleType="center"
-                    android:src="@drawable/ic_world_globe_dark"/>
+                    osmand:srcCompat="@drawable/ic_world_globe_dark"/>
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -105,12 +105,12 @@
                         tools:text="Worldwide"/>
                 </LinearLayout>
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/countryDropDownIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="16dp"
-                    android:src="@drawable/ic_action_arrow_drop_down"
+                    osmand:srcCompat="@drawable/ic_action_arrow_drop_down"
 	                android:layout_marginEnd="16dp" />
 
             </LinearLayout>
@@ -147,12 +147,12 @@
                     android:minHeight="60dp"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/numberOfContributorsIcon"
                         android:layout_width="56dp"
                         android:layout_height="56dp"
                         android:scaleType="center"
-                        android:src="@drawable/ic_group"/>
+                        osmand:srcCompat="@drawable/ic_group"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -198,12 +198,12 @@
                 android:minHeight="60dp"
                 android:orientation="horizontal">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/numberOfEditsIcon"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:scaleType="center"
-                    android:src="@drawable/ic_map"/>
+                    osmand:srcCompat="@drawable/ic_map"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -245,12 +245,12 @@
                 android:minHeight="60dp"
                 android:orientation="horizontal">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/donationsIcon"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:scaleType="center"
-                    android:src="@drawable/ic_action_bitcoin"/>
+                    osmand:srcCompat="@drawable/ic_action_bitcoin"/>
 
                 <LinearLayout
                     android:id="@+id/donationsLayout"
@@ -301,12 +301,12 @@
                     android:minHeight="60dp"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/donationsTotalIcon"
                         android:layout_width="56dp"
                         android:layout_height="56dp"
                         android:scaleType="center"
-                        android:src="@drawable/ic_action_bitcoin"/>
+                        osmand:srcCompat="@drawable/ic_action_bitcoin"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -353,12 +353,12 @@
                 android:minHeight="60dp"
                 android:orientation="horizontal">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/numberOfRecipientsIcon"
                     android:layout_width="56dp"
                     android:layout_height="60dp"
                     android:scaleType="center"
-                    android:src="@drawable/ic_group"/>
+                    osmand:srcCompat="@drawable/ic_group"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"

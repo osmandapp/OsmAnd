@@ -22,7 +22,7 @@
             osmand:typeface="@string/font_roboto_medium"
 	        android:layout_marginStart="@dimen/content_padding" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/streetImageView"
             style="@style/edit_poi_imageview_style"
             android:layout_below="@id/contactInfoTextView"
@@ -36,7 +36,7 @@
             android:inputType="textMultiLine"
             tools:text="testText"/>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/houseNumberImageView"
             style="@style/edit_poi_imageview_style"
             android:layout_below="@id/streetEditText"
@@ -49,7 +49,7 @@
             android:hint="@string/building_number"
             android:inputType="text"/>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/phoneImageView"
             style="@style/edit_poi_imageview_style"
             android:layout_below="@id/houseNumberEditText"
@@ -62,7 +62,7 @@
             android:hint="@string/phone"
             android:inputType="phone"/>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/webSiteImageView"
             style="@style/edit_poi_imageview_style"
             android:layout_below="@id/phoneEditText"
@@ -75,7 +75,7 @@
             android:hint="@string/website"
             android:inputType="textUri"/>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/descriptionImageView"
             style="@style/edit_poi_imageview_style"
             android:layout_below="@id/webSiteEditText"
@@ -110,7 +110,7 @@
             android:orientation="vertical"
             android:layout_marginBottom="4dp"/>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/openingHoursImageView"
             style="@style/edit_poi_imageview_style"
             android:layout_below="@id/openHoursContainer"

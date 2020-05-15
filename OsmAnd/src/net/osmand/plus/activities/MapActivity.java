@@ -738,7 +738,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			return;
 		}
 		QuickActionListFragment quickActionListFragment = getQuickActionListFragment();
-		if ( quickActionListFragment != null && quickActionListFragment.isVisible()) {
+		if (quickActionListFragment != null && quickActionListFragment.isVisible()
+				&& quickActionListFragment.fromDashboard()) {
 			this.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN, null);
 		}
 		ImportSettingsFragment importSettingsFragment = getImportSettingsFragment();
@@ -1951,11 +1952,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (settings.DO_NOT_USE_ANIMATIONS.get()) {
 			if (event.getAction() == MotionEvent.ACTION_DOWN) {
 				if (drawerLayout.isDrawerOpen(Gravity.START)) {
-					int width = AndroidUtils.dpToPx(this, 280);
-					if (event.getRawX() > width) {
+					int drawerWidth = AndroidUtils.dpToPx(this, 280);
+					int screenWidth = AndroidUtils.getScreenWidth(MapActivity.this);
+					boolean isLayoutRtl = AndroidUtils.isLayoutRtl(app);
+					if ((!isLayoutRtl && event.getRawX() > drawerWidth)
+							|| (isLayoutRtl && event.getRawX() <= screenWidth - drawerWidth)) {
 						closeDrawer();
 					}
-
 				}
 			}
 		}

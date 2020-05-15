@@ -19,7 +19,7 @@
             <!--android:scaleType="centerInside"-->
             <!--android:tint="@color/color_white"-->
             <!--android:background="?attr/selectableItemBackground"-->
-            <!--android:src="@drawable/ic_action_flag_dark" />-->
+            <!--app:srcCompat="@drawable/ic_action_flag" />-->
         <!---->
     <!--</LinearLayout>-->
 
@@ -31,6 +31,8 @@
         android:contentInsetLeft="72dp"
         app:contentInsetLeft="72dp"
         app:contentInsetStart="72dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp"
         android:background="?attr/actionModeBackground"/>
 
     <RelativeLayout
@@ -49,7 +51,7 @@
             android:scaleType="centerInside"
             app:tint="?attr/app_bar_primary_item_color"
             android:layout_marginTop="24dp"
-            android:src="@drawable/ic_action_flag_dark"
+            app:srcCompat="@drawable/ic_action_flag"
 	        android:layout_marginStart="16dp" />
 
         <androidx.appcompat.widget.AppCompatEditText
@@ -105,20 +107,20 @@
                 android:id="@+id/container"/>
         </ScrollView>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
             android:layout_gravity="top"
-            android:src="@drawable/bg_shadow_list_bottom"/>
+            app:srcCompat="@drawable/bg_shadow_list_bottom"/>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
             android:layout_gravity="bottom"
             android:layout_marginBottom="56dp"
-            android:src="@drawable/bg_shadow_list_top"/>
+            app:srcCompat="@drawable/bg_shadow_list_top"/>
 
         <Button
             android:id="@+id/btnApply"

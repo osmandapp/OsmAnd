@@ -9,6 +9,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
+import net.osmand.plus.ContextMenuAdapter.OnItemDeleteAction;
 
 public class ContextMenuItem {
 	public static final int INVALID_ID = -1;
@@ -31,12 +32,12 @@ public class ContextMenuItem {
 	private final boolean clickable;
 	private final boolean skipPaintingWithoutColor;
 	private boolean hidden;
-	private final int pos;
 	private int order;
 	private String description;
 	private final ContextMenuAdapter.ItemClickListener itemClickListener;
 	private final ContextMenuAdapter.OnIntegerValueChangedListener integerListener;
 	private final ContextMenuAdapter.ProgressListener progressListener;
+	private final OnItemDeleteAction itemDeleteAction;
 	private final boolean hideDivider;
 	private final boolean hideCompoundButton;
 	private final int minHeight;
@@ -55,12 +56,12 @@ public class ContextMenuItem {
 							boolean category,
 							boolean clickable,
 							boolean skipPaintingWithoutColor,
-							int pos,
 							int order,
 							String description,
 							ContextMenuAdapter.ItemClickListener itemClickListener,
 							ContextMenuAdapter.OnIntegerValueChangedListener integerListener,
 							ContextMenuAdapter.ProgressListener progressListener,
+							OnItemDeleteAction itemDeleteAction,
 							boolean hideDivider,
 							boolean hideCompoundButton,
 							int minHeight,
@@ -78,13 +79,13 @@ public class ContextMenuItem {
 		this.category = category;
 		this.clickable = clickable;
 		this.skipPaintingWithoutColor = skipPaintingWithoutColor;
-		this.pos = pos;
 		this.order = order;
 		this.description = description;
 		this.itemClickListener = itemClickListener;
 		this.integerListener = integerListener;
 		this.progressListener = progressListener;
 		this.hideDivider = hideDivider;
+		this.itemDeleteAction = itemDeleteAction;
 		this.hideCompoundButton = hideCompoundButton;
 		this.minHeight = minHeight;
 		this.tag = tag;
@@ -158,10 +159,6 @@ public class ContextMenuItem {
 		return hidden;
 	}
 
-	public int getPos() {
-		return pos;
-	}
-
 	public int getOrder() {
 		return order;
 	}
@@ -169,6 +166,8 @@ public class ContextMenuItem {
 	public String getDescription() {
 		return description;
 	}
+
+	public OnItemDeleteAction getItemDeleteAction() { return itemDeleteAction; }
 
 	public ContextMenuAdapter.ItemClickListener getItemClickListener() {
 		return itemClickListener;
@@ -267,12 +266,12 @@ public class ContextMenuItem {
 		private boolean mLoading = false;
 		private boolean mIsCategory = false;
 		private boolean mIsClickable = true;
-		private int mPosition = -1;
-		private int mOrder = -1;
+		private int mOrder = 0;
 		private String mDescription = null;
 		private ContextMenuAdapter.ItemClickListener mItemClickListener = null;
 		private ContextMenuAdapter.OnIntegerValueChangedListener mIntegerListener = null;
 		private ContextMenuAdapter.ProgressListener mProgressListener = null;
+		private OnItemDeleteAction mItemDeleteAction = null;
 		private boolean mSkipPaintingWithoutColor;
 		private boolean mHideDivider;
 		private boolean mHideCompoundButton;
@@ -339,11 +338,6 @@ public class ContextMenuItem {
 			return this;
 		}
 
-		public ItemBuilder setPosition(int position) {
-			mPosition = position;
-			return this;
-		}
-
 		public ItemBuilder setOrder(int order) {
 			mOrder = order;
 			return this;
@@ -371,6 +365,11 @@ public class ContextMenuItem {
 
 		public ItemBuilder setSkipPaintingWithoutColor(boolean skipPaintingWithoutColor) {
 			mSkipPaintingWithoutColor = skipPaintingWithoutColor;
+			return this;
+		}
+
+		public ItemBuilder setItemDeleteAction(OnItemDeleteAction itemDeleteAction) {
+			this.mItemDeleteAction = itemDeleteAction;
 			return this;
 		}
 
@@ -406,7 +405,7 @@ public class ContextMenuItem {
 		public ContextMenuItem createItem() {
 			return new ContextMenuItem(mTitleId, mTitle, mIcon, mColorRes, mSecondaryIcon,
 					mSelected, mProgress, mLayout, mLoading, mIsCategory, mIsClickable, mSkipPaintingWithoutColor,
-					mPosition, mOrder, mDescription, mItemClickListener, mIntegerListener, mProgressListener,
+					mOrder, mDescription, mItemClickListener, mIntegerListener, mProgressListener, mItemDeleteAction,
 					mHideDivider, mHideCompoundButton, mMinHeight, mTag, mId);
 		}
 	}

@@ -72,12 +72,12 @@
                 android:paddingLeft="16dp"
 	            android:paddingStart="16dp">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/average_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_action_altitude_average"/>
+                    osmand:srcCompat="@drawable/ic_action_altitude_average"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -118,12 +118,12 @@
                 android:paddingLeft="16dp"
 	            android:paddingStart="16dp">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/range_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_action_altitude_average"/>
+                    osmand:srcCompat="@drawable/ic_action_altitude_average"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -216,12 +216,12 @@
                 android:paddingLeft="16dp"
 	            android:paddingStart="16dp">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ascent_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_action_altitude_ascent"/>
+                    osmand:srcCompat="@drawable/ic_action_altitude_ascent"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -262,12 +262,12 @@
                 android:paddingLeft="16dp"
 	            android:paddingStart="16dp">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/descent_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_action_altitude_descent"/>
+                    osmand:srcCompat="@drawable/ic_action_altitude_descent"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"

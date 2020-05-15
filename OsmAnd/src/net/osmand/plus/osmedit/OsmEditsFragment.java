@@ -120,9 +120,9 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		String name = OsmEditingPlugin.getEditName(child);
 		viewName.setText(name);
 		if (child.getGroup() == Group.POI) {
-			icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_type_info, R.color.color_distance));
+			icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_info_dark, R.color.color_distance));
 		} else if (child.getGroup() == Group.BUG) {
-			icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_type_bug, R.color.color_distance));
+			icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_bug_dark, R.color.color_distance));
 		}
 
 		TextView descr = (TextView) v.findViewById(R.id.description);

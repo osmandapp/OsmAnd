@@ -45,14 +45,14 @@
 					android:paddingEnd="@dimen/route_info_buttons_padding_top_bottom"
 					android:paddingRight="@dimen/route_info_buttons_padding_top_bottom">
 
-					<ImageView
+					<androidx.appcompat.widget.AppCompatImageView
 						android:id="@+id/InfoIcon"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_marginLeft="@dimen/list_content_padding"
 						android:layout_marginRight="@dimen/list_content_padding"
 						android:contentDescription="@string/info_button"
-						android:src="@drawable/ic_action_info_dark"
+						osmand:srcCompat="@drawable/ic_action_info_dark"
 						android:layout_marginEnd="@dimen/list_content_padding"
 						android:layout_marginStart="@dimen/list_content_padding" />
 
@@ -101,14 +101,14 @@
 					android:paddingEnd="@dimen/route_info_buttons_padding_top_bottom"
 					android:paddingRight="@dimen/route_info_buttons_padding_top_bottom">
 
-					<ImageView
+					<androidx.appcompat.widget.AppCompatImageView
 						android:id="@+id/DurationIcon"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_marginLeft="@dimen/list_content_padding"
 						android:layout_marginRight="@dimen/list_content_padding"
 						android:contentDescription="@string/info_button"
-						android:src="@drawable/ic_action_time"
+						osmand:srcCompat="@drawable/ic_action_time"
 						android:layout_marginEnd="@dimen/list_content_padding"
 						android:layout_marginStart="@dimen/list_content_padding" />
 

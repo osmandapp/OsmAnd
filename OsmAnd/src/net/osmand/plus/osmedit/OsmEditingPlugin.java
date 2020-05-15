@@ -59,6 +59,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_M
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
+import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 
 
 public class OsmEditingPlugin extends OsmandPlugin {
@@ -364,7 +365,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 						return true;
 					}
 				})
-				.setPosition(16)
+				.setItemDeleteAction(makeDeleteAction(settings.SHOW_OSM_BUGS))
 				.createItem());
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
@@ -386,7 +387,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 						return true;
 					}
 				})
-				.setPosition(17)
+				.setItemDeleteAction(makeDeleteAction(settings.SHOW_OSM_EDITS))
 				.createItem());
 	}
 
@@ -434,7 +435,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 							return true;
 						}
 					})
-					.setPosition(5)
 					.createItem());
 		}
 	}

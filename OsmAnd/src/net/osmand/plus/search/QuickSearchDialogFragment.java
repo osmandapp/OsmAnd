@@ -1207,6 +1207,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			if (SearchUICore.isDebugMode()) {
 				LOG.info("UI >> Start loading categories");
 			}
+			final boolean nightMode = !app.getSettings().isLightContent();
 			SearchResultCollection res = searchUICore.shallowSearch(SearchAmenityTypesAPI.class, "", null);
 			if (res != null) {
 				List<QuickSearchListItem> rows = new ArrayList<>();
@@ -1274,6 +1275,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 														}
 													});
 											UiUtilities.setupSnackbarVerticalLayout(snackbar);
+											UiUtilities.setupSnackbar(snackbar, nightMode);
 											snackbar.show();
 									}
 							}
@@ -1505,7 +1507,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private void reloadHistoryInternal() {
 		if (historySearchFragment != null) {
 			try {
-				SearchResultCollection res = searchUICore.shallowSearch(SearchHistoryAPI.class, "", null);
+				SearchResultCollection res = searchUICore.shallowSearch(SearchHistoryAPI.class, "", null, false, false);
 				List<QuickSearchListItem> rows = new ArrayList<>();
 				if (res != null) {
 					for (SearchResult sr : res.getCurrentSearchResults()) {

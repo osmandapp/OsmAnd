@@ -63,7 +63,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 	@Override
 	public void onBindViewHolder(@NonNull final MeasureToolItemVH holder, int pos) {
 		UiUtilities iconsCache = mapActivity.getMyApplication().getUIUtilities();
-		holder.iconReorder.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_reorder));
+		holder.iconReorder.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_item_move));
 		holder.iconReorder.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View view, MotionEvent event) {

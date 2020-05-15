@@ -53,7 +53,7 @@
 			android:paddingRight="@dimen/content_padding_small"
 			android:orientation="horizontal">
 
-			<ImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/mode_icon"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -93,13 +93,13 @@
 
 			</LinearLayout>
 
-			<ImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/type_down_arrow"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_weight="0"
 				android:layout_gravity="center_vertical"
-				android:src="@drawable/ic_action_arrow_drop_down"/>
+				app:srcCompat="@drawable/ic_action_arrow_drop_down"/>
 
 		</LinearLayout>
 
@@ -114,19 +114,19 @@
 				android:layout_width="match_parent"
 				android:layout_height="match_parent" />
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/selector_shadow"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/abp__shadow_height"
-			android:src="@drawable/preference_activity_action_bar_shadow"
+			app:srcCompat="@drawable/preference_activity_action_bar_shadow"
 			android:visibility="gone"
 			tools:ignore="ContentDescription"/>
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/shadowView"
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/abp__shadow_height"
-				android:src="@drawable/preference_activity_action_bar_shadow"
+				app:srcCompat="@drawable/preference_activity_action_bar_shadow"
 				tools:ignore="ContentDescription" />
 
 	</FrameLayout>

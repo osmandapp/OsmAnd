@@ -2,6 +2,7 @@ package net.osmand.plus.liveupdates;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -98,7 +99,7 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-
+		OsmandApplication app = getMyApplication();
 		String userName = settings.BILLING_USER_NAME.get();
 		String email = settings.BILLING_USER_EMAIL.get();
 		String countryDownloadName = settings.BILLING_USER_COUNTRY_DOWNLOAD_NAME.get();
@@ -122,7 +123,8 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 
 		View view = inflater.inflate(R.layout.subscription_fragment, container, false);
 		ImageButton closeButton = (ImageButton) view.findViewById(R.id.closeButton);
-		closeButton.setImageDrawable(getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_mode_back));
+		Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app));
+		closeButton.setImageDrawable(icBack);
 		closeButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -248,7 +250,7 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 			}
 		});
 
-		setThemedDrawable((ImageView) view.findViewById(R.id.userNameIcon), R.drawable.ic_person);
+		setThemedDrawable((ImageView) view.findViewById(R.id.userNameIcon), R.drawable.ic_action_user);
 		setThemedDrawable((ImageView) view.findViewById(R.id.emailIcon), R.drawable.ic_action_message);
 		setThemedDrawable((ImageView) view.findViewById(R.id.countryIcon), R.drawable.ic_world_globe_dark);
 		selectCountryEdit.setCompoundDrawablesWithIntrinsicBounds(

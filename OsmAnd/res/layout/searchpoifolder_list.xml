@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:osmand="http://schemas.android.com/apk/res-auto"
 			  xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
@@ -9,7 +10,7 @@
     android:paddingLeft="@dimen/list_content_padding"
 	android:paddingStart="@dimen/list_content_padding">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/folder_icon"
         android:layout_width="@dimen/standard_icon_size"
 		android:layout_gravity="center_vertical"
@@ -31,7 +32,7 @@
     	android:layout_marginRight="@dimen/list_content_padding"
 	    android:layout_marginEnd="@dimen/list_content_padding" />
          
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/options"
         android:contentDescription="@string/search_poi_filter"
         android:layout_width="@dimen/list_item_height"
@@ -40,5 +41,5 @@
         android:scaleType="center"
         android:visibility="gone"
         android:background="?attr/dashboard_button"
-        android:src="@drawable/ic_overflow_menu_white"/>
+        osmand:srcCompat="@drawable/ic_overflow_menu_white"/>
 </LinearLayout>

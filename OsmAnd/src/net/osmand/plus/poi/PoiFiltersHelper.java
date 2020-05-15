@@ -556,6 +556,7 @@ public class PoiFiltersHelper {
 		for (PoiTemplateList t : selectedPoiFilters.keySet()) {
 			clearSelectedPoiFilters(t);
 		}
+		saveSelectedPoiFilters();
 	}
 
 	public void clearSelectedPoiFilters(PoiTemplateList type) {
@@ -563,10 +564,12 @@ public class PoiFiltersHelper {
 		if (templateFilters != null) {
 			templateFilters.clear();
 		}
+		saveSelectedPoiFilters();
 	}
 
 	public void hidePoiFilters() {
 		selectedPoiFilters.clear();
+		saveSelectedPoiFilters();
 	}
 
 	public String getFiltersName(Set<PoiUIFilter> filters) {

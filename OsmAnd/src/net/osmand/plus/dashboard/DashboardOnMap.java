@@ -32,6 +32,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
@@ -236,7 +237,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		listView.setDrawSelectorOnTop(true);
 		listView.setScrollViewCallbacks(this);
 		listEmptyTextView = (TextView) dashboardView.findViewById(R.id.emptyTextView);
-		gradientToolbar = ContextCompat.getDrawable(mapActivity, R.drawable.gradient_toolbar).mutate();
+		gradientToolbar = AppCompatResources.getDrawable(mapActivity, R.drawable.gradient_toolbar).mutate();
 		if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
 			this.portrait = true;
 			scrollView.setScrollViewCallbacks(this);
@@ -260,7 +261,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			fl.gravity = Gravity.BOTTOM;
 			shadowContainer.setLayoutParams(fl);
 			ImageView shadow = new ImageView(mapActivity);
-			shadow.setImageDrawable(ContextCompat.getDrawable(mapActivity, R.drawable.bg_shadow_onmap));
+			shadow.setImageDrawable(AppCompatResources.getDrawable(mapActivity, R.drawable.bg_shadow_onmap));
 			shadow.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
 					FrameLayout.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM));
 			shadow.setScaleType(ScaleType.FIT_XY);
@@ -395,9 +396,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private FrameLayout.LayoutParams getActionButtonLayoutParams(int btnSizePx) {
 		int topPadPx = mapActivity.getResources().getDimensionPixelSize(R.dimen.dashboard_map_top_padding);
 		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(btnSizePx, btnSizePx);
-		int marginRight = btnSizePx / 4;
-		params.setMargins(0, landscape ? 0 : topPadPx - 2 * btnSizePx, marginRight, landscape ? marginRight : 0);
-		params.gravity = landscape ? Gravity.BOTTOM | Gravity.RIGHT : Gravity.TOP | Gravity.RIGHT;
+		int marginEnd = btnSizePx / 4;
+		AndroidUtils.setMargins(params, 0, landscape ? 0 : topPadPx - 2 * btnSizePx, marginEnd, landscape ? marginEnd : 0);
+		params.gravity = landscape ? Gravity.BOTTOM | Gravity.END : Gravity.TOP | Gravity.END;
 		return params;
 	}
 
@@ -405,13 +406,15 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		actionButton = new ImageView(mapActivity);
 		int btnSizePx = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_button_size);
 		actionButton.setLayoutParams(getActionButtonLayoutParams(btnSizePx));
-		actionButton.setScaleType(ScaleType.CENTER);
 		actionButton.setBackgroundResource(R.drawable.btn_circle_blue);
+		int iconSizePx = mapActivity.getResources().getDimensionPixelSize(R.dimen.standard_icon_size);
+		int iconPadding = (btnSizePx - iconSizePx) / 2;
+		actionButton.setPadding(iconPadding, iconPadding, iconPadding, iconPadding);
 		hideActionButton();
 
 
 		DashboardActionButton myLocationButton = new DashboardActionButton();
-		myLocationButton.icon = ContextCompat.getDrawable(mapActivity, R.drawable.map_my_location);
+		myLocationButton.icon = AppCompatResources.getDrawable(mapActivity, R.drawable.map_my_location);
 		myLocationButton.text = mapActivity.getString(R.string.map_widget_back_to_loc);
 		myLocationButton.onClickListener = new View.OnClickListener() {
 			@Override
@@ -426,7 +429,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		};
 
 		DashboardActionButton navigateButton = new DashboardActionButton();
-		navigateButton.icon = ContextCompat.getDrawable(mapActivity, R.drawable.map_start_navigation);
+		navigateButton.icon = AppCompatResources.getDrawable(mapActivity, R.drawable.map_start_navigation);
 		navigateButton.text = mapActivity.getString(R.string.follow);
 		navigateButton.onClickListener = new View.OnClickListener() {
 			@Override
@@ -437,7 +440,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		};
 
 		DashboardActionButton routeButton = new DashboardActionButton();
-		routeButton.icon = ContextCompat.getDrawable(mapActivity, R.drawable.map_directions);
+		routeButton.icon = AppCompatResources.getDrawable(mapActivity, R.drawable.map_directions);
 		routeButton.text = mapActivity.getString(R.string.layer_route);
 		routeButton.onClickListener = new View.OnClickListener() {
 			@Override

@@ -296,7 +296,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		undoBtn = ((ImageButton) mainView.findViewById(R.id.undo_point_button));
 		redoBtn = ((ImageButton) mainView.findViewById(R.id.redo_point_button));
 
-		undoBtn.setImageDrawable(getContentIcon(R.drawable.ic_action_undo_dark));
+		Drawable undoDrawable = getContentIcon(R.drawable.ic_action_undo_dark);
+		undoBtn.setImageDrawable(AndroidUtils.getDrawableForDirection(mapActivity, undoDrawable));
 		undoBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -316,7 +317,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			}
 		});
 
-		redoBtn.setImageDrawable(getContentIcon(R.drawable.ic_action_redo_dark));
+		Drawable redoDrawable = getContentIcon(R.drawable.ic_action_redo_dark);
+		redoBtn.setImageDrawable(AndroidUtils.getDrawableForDirection(mapActivity, redoDrawable));
 		redoBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -394,7 +396,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 
 		toolBarController = new MeasurementToolBarController(newGpxData);
 		if (editingCtx.getSelectedPointPosition() != -1) {
-			toolBarController.setBackBtnIconIds(R.drawable.ic_action_mode_back, R.drawable.ic_action_mode_back);
+			int navigationIconResId = AndroidUtils.getNavigationIconResId(mapActivity);
+			toolBarController.setBackBtnIconIds(navigationIconResId, navigationIconResId);
 		} else {
 			toolBarController.setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
 		}
@@ -805,7 +808,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 
 			ImageButton snapToRoadBtn = (ImageButton) mapActivity.findViewById(R.id.snap_to_road_image_button);
 			snapToRoadBtn.setBackgroundResource(nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle);
-			snapToRoadBtn.setImageDrawable(getIcon(appMode.getMapIconRes(), appMode.getIconColorInfo().getColor(nightMode)));
+			snapToRoadBtn.setImageDrawable(getIcon(appMode.getIconRes(), appMode.getIconColorInfo().getColor(nightMode)));
 			snapToRoadBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
@@ -971,7 +974,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 
 	private void switchMovePointMode(boolean enable) {
 		if (enable) {
-			toolBarController.setBackBtnIconIds(R.drawable.ic_action_mode_back, R.drawable.ic_action_mode_back);
+			int navigationIconResId = AndroidUtils.getNavigationIconResId(getMapActivity());
+			toolBarController.setBackBtnIconIds(navigationIconResId, navigationIconResId);
 		} else {
 			toolBarController.setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
 		}
@@ -990,7 +994,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 
 	private void switchAddPointBeforeAfterMode(boolean enable) {
 		if (enable) {
-			toolBarController.setBackBtnIconIds(R.drawable.ic_action_mode_back, R.drawable.ic_action_mode_back);
+			int navigationIconResId = AndroidUtils.getNavigationIconResId(getMapActivity());
+			toolBarController.setBackBtnIconIds(navigationIconResId, navigationIconResId);
 		} else {
 			toolBarController.setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
 		}

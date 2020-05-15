@@ -2915,7 +2915,7 @@ Lon %2$s</string>
     <string name="by_transport_type">En %1$s</string>
     <string name="step_by_step">Giro a giro</string>
     <string name="routeInfo_road_types_name">Tipos de caminos</string>
-    <string name="exit_at">Bajarse en</string>
+    <string name="exit_at">Bajar en</string>
     <string name="sit_on_the_stop">Esperar en la parada</string>
     <string name="quick_action_show_hide_gpx_tracks">Mostrar/ocultar trazas GPX</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Un botón que muestra u oculta las trazas GPX elegidas en el mapa.</string>
@@ -2989,7 +2989,7 @@ Lon %2$s</string>
     <string name="public_transport_warning_descr_blog">Lea más sobre el cálculo de las rutas de OsmAnd en nuestro blog.</string>
     <string name="public_transport_warning_title">La navegación en transporte público se encuentra actualmente en fase de pruebas beta, se esperan errores e imprecisiones.</string>
     <string name="add_intermediate">Añadir punto intermedio</string>
-    <string name="shared_string_walk">A pie</string>
+    <string name="shared_string_walk">Caminar</string>
     <string name="save_poi_value_exceed_length">Acorte la longitud de la etiqueta «%s» a menos de 255 caracteres.</string>
     <string name="save_poi_value_exceed_length_title">Longitud del valor de «%s»</string>
     <string name="avoid_pt_types_descr">Marca los tipos de transporte público a evitar para la navegación:</string>
@@ -3612,33 +3612,101 @@ Lon %2$s</string>
     <string name="custom_osmand_plugin">Complemento personalizado de OsmAnd</string>
     <string name="replace_point_descr">Reemplaza otro punto con esto</string>
     <string name="changes_applied_to_profile">Cambios aplicados al perfil «%1$s».</string>
-    <string name="settings_item_read_error">No se pudo leer «%1$s».</string>
-    <string name="settings_item_write_error">No se pudo escribir «%1$s».</string>
-    <string name="settings_item_import_error">No se pudo importar «%1$s».</string>
+    <string name="settings_item_read_error">No se pudo leer desde «%1$s».</string>
+    <string name="settings_item_write_error">No se pudo escribir en «%1$s».</string>
+    <string name="settings_item_import_error">No se pudo importar desde «%1$s».</string>
     <string name="wikipedia_poi_languages_promo">Algunos artículos de Wikipedia pueden no estar disponibles en tu idioma, elige los idiomas en los que los artículos de Wikipedia aparecerán en el mapa.
 \nPodrás cambiar entre todos los idiomas disponibles mientras lees el artículo.</string>
     <string name="wiki_menu_download_descr">Se necesitan mapas adicionales para ver los puntos de interés de Wikipedia en el mapa.</string>
-    <string name="ui_customization_short_descr">Elementos del cajón, menú contextual</string>
-    <string name="ui_customization_description">Personaliza la cantidad de elementos en el cajón, el la configuración del mapa y el menú contextual.
-\n
-\nPuedes desactivar los complementos no utilizados, para ocultar todos sus controles de la aplicación «%1$s».</string>
-    <string name="ui_customization">Personalización de la interfaz de usuario</string>
+    <string name="ui_customization_short_descr">Elementos del menú lateral y menú contextual</string>
+    <string name="ui_customization_description">Personaliza la cantidad de elementos en el menú lateral, la configuración del mapa y el menú contextual. 
+\n 
+\nPuedes desactivar los complementos no utilizados, para ocultar todos sus controles desde «%1$s».</string>
+    <string name="ui_customization">Personalizar interfaz de usuario</string>
     <string name="shared_string_languages">Idiomas</string>
     <string name="shared_string_language">Idioma</string>
     <string name="shared_string_items">Elementos</string>
     <string name="shared_string_hidden">Oculto</string>
-    <string name="shared_string_drawer">Cajón</string>
+    <string name="shared_string_drawer">Menú lateral</string>
     <string name="shared_string_divider">Divisor</string>
     <string name="shared_string_all_languages">Todos los idiomas</string>
     <string name="select_track_file">Marca el archivo de la traza</string>
-    <string name="reset_items_descr">Los ajustes se restablecerán al estado original después de ocultarse.</string>
-    <string name="reorder_or_hide_from">Reordenar u ocultar elementos de «%1$s».</string>
+    <string name="reset_items_descr">Ocultar los ajustes, los restablece a su estado original.</string>
+    <string name="reorder_or_hide_from">Reordena u oculta elementos en «%1$s».</string>
     <string name="move_inside_category">Sólo puedes mover objetos dentro de esta categoría.</string>
-    <string name="main_actions_descr">Las acciones principales contienen sólo 4 botones.</string>
+    <string name="main_actions_descr">Las «Acciones principales» sólo contienen 4 botones.</string>
     <string name="main_actions">Acciones principales</string>
-    <string name="hidden_items_descr">Estos elementos están ocultos en el menú, pero las opciones o complementos representados siguen funcionando.</string>
-    <string name="divider_descr">Elementos debajo de este punto separados por un divisor.</string>
+    <string name="hidden_items_descr">Estos elementos no se muestran en el menú, pero las opciones o complementos que representan seguirán funcionando.</string>
+    <string name="divider_descr">Los elementos debajo de este punto están separados por un divisor.</string>
     <string name="developer_plugin">Complemento de desarrollador</string>
     <string name="context_menu_actions">Acciones del menú contextual</string>
-    <string name="additional_actions_descr">Puedes acceder a estas acciones, pulsando el botón «Acciones».</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
+    <string name="travel_item">Viajes (Wikiviajes y Wikipedia)</string>
+    <string name="tracker_item">OsmAnd Tracker</string>
+    <string name="subscription_osmandlive_item">Suscripción - OsmAnd Live</string>
+    <string name="some_articles_may_not_available_in_lang">Es posible que algunos artículos de Wikipedia no estén disponibles en tu idioma.</string>
+    <string name="select_wikipedia_article_langs">Marca los idiomas en los que los artículos de Wikipedia aparecerán en el mapa. Puedes cambiar entre todos los idiomas disponibles mientras lees el artículo.</string>
+    <string name="search_poi_types_descr">Combina tipos de PDI de diferentes categorías. Pulsa «Alternar» para marcar todo, pulsa el lado izquierdo para elegir una categoría.</string>
+    <string name="search_poi_types">Buscar por tipos de PDI</string>
+    <string name="radius_ruler_item">Regla radial</string>
+    <string name="quick_action_item">Acción rápida</string>
+    <string name="osmand_purchases_item">Compras de OsmAnd</string>
+    <string name="osm_live_payment_subscription_management">La cuenta de Google Play se carga al comprar una suscripción
+\ny al expirar (mes/trimestre/año),
+\nno se renovará si se cancela antes de esa fecha en los ajustes de Google Play.</string>
+    <string name="navigation_profiles_item">Perfiles de navegación</string>
+    <string name="measure_distance_item">Medir distancia</string>
+    <string name="map_markers_item">Marcadores del mapa</string>
+    <string name="legend_item_description">La guía para la simbología de un mapa</string>
+    <string name="lang_zhyue">Cantonés</string>
+    <string name="lang_zhminnan">Min del Sur</string>
+    <string name="lang_yo">Yoruba</string>
+    <string name="lang_war">Waray</string>
+    <string name="lang_uz">Uzbeko</string>
+    <string name="lang_ur">Urdu</string>
+    <string name="lang_tt">Tártaro</string>
+    <string name="lang_tg">Tayiko</string>
+    <string name="lang_sco">Escocés</string>
+    <string name="lang_scn">Siciliano</string>
+    <string name="lang_pnb">Punjabi</string>
+    <string name="lang_ne">Nepalí</string>
+    <string name="lang_nap">Napolitano</string>
+    <string name="lang_my">Birmano</string>
+    <string name="lang_mn">Mongol</string>
+    <string name="lang_min">Minangkabau</string>
+    <string name="lang_mg">Malgache</string>
+    <string name="lang_lmo">Lombardo</string>
+    <string name="lang_ky">Kirguís</string>
+    <string name="lang_kk">Kazajo</string>
+    <string name="lang_jv">Javanés</string>
+    <string name="lang_gu">Gujarati</string>
+    <string name="lang_cv">Chuvash</string>
+    <string name="lang_ce">Checheno</string>
+    <string name="lang_bar">Bávaro</string>
+    <string name="lang_ba">Bashkir</string>
+    <string name="lang_an">Aragonés</string>
+    <string name="favorites_item">Favoritos</string>
+    <string name="extra_maps_menu_group">Mapas adicionales</string>
+    <string name="download_unsupported_action">Acción «%1$s» no admitida</string>
+    <string name="custom_color">Color personalizado</string>
+    <string name="release_3_7">• Nuevos mapas sin conexión de las pendientes
+\n
+\n • Personalización más completa de los favoritos y puntos de referencia GPX (colores personalizados, iconos, formas)
+\n
+\n • Nueva personalización en el orden de los elementos en Configurar mapa, menú contextual y menú lateral
+\n
+\n • Wikipedia ahora se visualiza como una capa separada en Configurar mapa, elige sólo los idiomas necesarios
+\n
+\n • Crea tu propio filtro/mapas de puntos de interés, con total flexibilidad
+\n
+\n • Se añadieron opciones para restablecer los ajustes de los perfiles personalizados
+\n
+\n • Las rutas GPX para la navegación, ahora admiten los carriles de tráfico y completan las instrucciones de giro
+\n
+\n • Se ha corregido el tamaño de la interfaz en las tabletas
+\n
+\n • Se corrigieron los errores con RTL
+\n
+\n</string>
 </resources>

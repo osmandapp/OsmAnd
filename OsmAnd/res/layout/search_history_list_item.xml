@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
@@ -21,15 +22,17 @@
         android:descendantFocusability="blocksDescendants"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/list_content_padding"
-	    android:paddingStart="@dimen/list_content_padding">
+	    android:paddingStart="@dimen/list_content_padding"
+        android:paddingRight="0dp"
+        android:paddingEnd="0dp">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/favorites_icon_right_margin"
             android:layout_marginTop="@dimen/favorites_icon_top_margin"
-            android:src="@drawable/ic_sdcard"
+            osmand:srcCompat="@drawable/ic_sdcard"
 	        android:layout_marginEnd="@dimen/favorites_icon_right_margin" />
 
         <LinearLayout
@@ -52,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/direction"
                     android:layout_width="@dimen/directionIconSize"
                     android:layout_height="@dimen/directionIconSize"
@@ -70,13 +73,13 @@
                     tools:text="100500 km"
 	                android:layout_marginStart="2dp" />
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/type_name_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_small_group"
+                    osmand:srcCompat="@drawable/ic_action_group_name_16"
 	                android:layout_marginStart="4dp" />
 
                 <TextView
@@ -99,7 +102,7 @@
             android:layout_gravity="center_vertical"
             android:background="?attr/dashboard_button"
             android:focusable="false"
-            android:src="@drawable/ic_overflow_menu_white"
+            osmand:srcCompat="@drawable/ic_overflow_menu_white"
             android:visibility="gone" />
 
         <ImageButton
@@ -110,7 +113,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/dashFavIconMargin"
             android:background="?attr/dashboard_button"
-            android:src="@drawable/ic_action_test_light"
+            osmand:srcCompat="@drawable/ic_action_remove_dark"
             android:visibility="gone"
 	        android:layout_marginStart="@dimen/dashFavIconMargin" />
     </LinearLayout>

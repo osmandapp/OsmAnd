@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.bottomsheets;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
@@ -51,6 +52,7 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		if (!(preference instanceof BooleanPreference)) {
 			return;
 		}
+		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
 
 		String title = switchPreference.getTitle().toString();
 		items.add(new TitleItem(title));
@@ -62,8 +64,8 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 				? getString(R.string.shared_string_enabled) : summaryOn.toString();
 		final String off = summaryOff == null || summaryOff.toString().equals("")
 				? getString(R.string.shared_string_disabled) : summaryOff.toString();
-		final int activeColor = AndroidUtils.resolveAttribute(app, R.attr.active_color_basic);
-		final int disabledColor = AndroidUtils.resolveAttribute(app, android.R.attr.textColorSecondary);
+		final int activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
+		final int disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
 		boolean checked = pref.getModeValue(getAppMode());
 
 		final BottomSheetItemWithCompoundButton[] preferenceBtn = new BottomSheetItemWithCompoundButton[1];
@@ -129,10 +131,11 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 
 	protected void updateCustomButtonView(View customView, boolean checked) {
 		OsmandApplication app = requiredMyApplication();
+		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
 		View buttonView = customView.findViewById(R.id.button_container);
 
 		int colorRes = getAppMode().getIconColorInfo().getColor(nightMode);
-		int color = checked ? getResolvedColor(colorRes) : AndroidUtils.getColorFromAttr(app, R.attr.divider_color_basic);
+		int color = checked ? getResolvedColor(colorRes) : AndroidUtils.getColorFromAttr(themedCtx, R.attr.divider_color_basic);
 		int bgColor = UiUtilities.getColorWithAlpha(color, checked ? 0.1f : 0.5f);
 		int selectedColor = UiUtilities.getColorWithAlpha(color, checked ? 0.3f : 0.5f);
 

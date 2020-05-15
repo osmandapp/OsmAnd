@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
     android:id="@+id/recording_note_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -21,7 +22,7 @@
 
         </LinearLayout>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -50,14 +51,14 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="end|center_vertical">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/leftButtonIcon"
                     android:layout_width="42dp"
                     android:layout_height="42dp"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/circle_outline_background_style"
                     android:scaleType="center"
-                    android:src="@drawable/ic_action_refresh_dark"/>
+                    osmand:srcCompat="@drawable/ic_action_refresh_dark"/>
 
                 <TextView
                     android:id="@+id/leftButtonText"
@@ -94,13 +95,13 @@
                     android:layout_height="48dp"
                     android:layout_gravity="center_vertical">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/centerButtonIcon"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/orange_circle_background_style"
                         android:scaleType="center"
-                        android:src="@drawable/ic_action_done"/>
+                        osmand:srcCompat="@drawable/ic_action_done"/>
 
                     <ProgressBar
                         android:id="@+id/progressBar"
@@ -143,14 +144,14 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="start|center_vertical">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/rightButtonIcon"
                     android:layout_width="42dp"
                     android:layout_height="42dp"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/circle_outline_background_style"
                     android:scaleType="center"
-                    android:src="@drawable/ic_action_device_camera"/>
+                    osmand:srcCompat="@drawable/ic_action_device_camera"/>
 
                 <TextView
                     android:id="@+id/rightButtonText"

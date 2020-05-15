@@ -2,6 +2,7 @@ package net.osmand.plus.mapcontextmenu.editors;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -11,7 +12,9 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
@@ -88,8 +91,10 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 		} else {
 			List<FavouritesDbHelper.FavoriteGroup> gs = helper.getFavoriteGroups();
 			for (final FavouritesDbHelper.FavoriteGroup category : gs) {
-				ll.addView(createCategoryItem(activity, nightMode, category.getDisplayName(getContext()),
-						category.getColor()));
+				if (category.isVisible()) {
+					ll.addView(createCategoryItem(activity, nightMode, category.getDisplayName(getContext()),
+							category.getColor()));
+				}
 			}
 		}
 		View itemView = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.favorite_category_dialog_item, null);
@@ -179,9 +184,12 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 
 	private static Drawable getIcon(final Activity activity, int resId, int color) {
 		OsmandApplication app = (OsmandApplication)activity.getApplication();
-		Drawable d = app.getResources().getDrawable(resId).mutate();
-		d.clearColorFilter();
-		d.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+		Drawable d = AppCompatResources.getDrawable(activity, resId);
+		if (d != null) {
+			d = DrawableCompat.wrap(d).mutate();
+			d.clearColorFilter();
+			d.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+		}
 		return d;
 	}
 }

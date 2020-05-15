@@ -24,6 +24,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -973,9 +974,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		LinearLayout optionsButton = (LinearLayout) mainView.findViewById(R.id.map_options_route_button);
 		TextView optionsTitle = (TextView) mainView.findViewById(R.id.map_options_route_button_title);
 		ImageView optionsIcon = (ImageView) mainView.findViewById(R.id.map_options_route_button_icon);
-		Drawable drawable = app.getUIUtilities().getIcon(R.drawable.map_action_settings, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
+		Drawable drawable = app.getUIUtilities().getIcon(R.drawable.ic_action_settings, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
 		if (Build.VERSION.SDK_INT >= 21) {
-			Drawable active = app.getUIUtilities().getIcon(R.drawable.map_action_settings, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+			Drawable active = app.getUIUtilities().getIcon(R.drawable.ic_action_settings, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 			drawable = AndroidUtils.createPressedStateListDrawable(drawable, active);
 		}
 		optionsIcon.setImageDrawable(drawable);
@@ -1004,7 +1005,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			optionsTitle.setVisibility(View.VISIBLE);
 			endPadding += AndroidUtils.getTextWidth(app.getResources().getDimensionPixelSize(R.dimen.text_button_text_size), app.getString(R.string.shared_string_options));
 		}
-		if (AndroidUtils.getLayoutDirection(app) == View.LAYOUT_DIRECTION_RTL) {
+		if (AndroidUtils.isLayoutRtl(app)) {
 			optionsContainer.setPadding(endPadding, optionsContainer.getPaddingTop(), optionsContainer.getPaddingRight(), optionsContainer.getPaddingBottom());
 		} else { // LTR
 			optionsContainer.setPadding(optionsContainer.getPaddingLeft(), optionsContainer.getPaddingTop(), endPadding, optionsContainer.getPaddingBottom());
@@ -1017,11 +1018,16 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 		final OsmandApplication app = mapActivity.getMyApplication();
 		final RoutingHelper helper = app.getRoutingHelper();
+		final TargetPointsHelper targetHelper = app.getTargetPointsHelper();
+
 		View startButton = mainView.findViewById(R.id.start_button);
 		TextViewExProgress startButtonText = (TextViewExProgress) mainView.findViewById(R.id.start_button_descr);
 		ProgressBar progressBar = (ProgressBar) mainView.findViewById(R.id.progress_bar_button);
 		boolean publicTransportMode = helper.isPublicTransportMode();
 		boolean routeCalculated = isRouteCalculated();
+		boolean currentLocationNotFound = OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)
+				&& targetHelper.getPointToStart() == null && targetHelper.getPointToNavigate() != null;
+
 		int iconId = publicTransportMode ? R.drawable.ic_map : R.drawable.ic_action_start_navigation;
 		int color1;
 		int color2;
@@ -1037,7 +1043,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			}
 		} else {
 			color1 = nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light;
-			if (routeCalculated) {
+			if (routeCalculated || currentLocationNotFound && !helper.isRouteBeingCalculated()) {
 				AndroidUtils.setBackground(app, startButton, nightMode, R.color.active_color_primary_light, R.color.active_color_primary_dark);
 				color2 = color1;
 			} else {
@@ -1051,7 +1057,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (publicTransportMode) {
 			startButtonText.setText(R.string.shared_string_show_on_map);
 		} else if (helper.isFollowingMode() || helper.isPauseNavigation()) {
-			startButtonText.setText(R.string.shared_string_continue);
+			startButtonText.setText(R.string.shared_string_resume);
 		} else {
 			startButtonText.setText(R.string.shared_string_control_start);
 		}
@@ -1767,7 +1773,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			int locationIconResByStatus = OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity) && loc != null
 					? R.drawable.ic_action_location_color : R.drawable.ic_action_location_color_lost;
 
-			((ImageView) parentView.findViewById(R.id.fromIcon)).setImageDrawable(ContextCompat.getDrawable(mapActivity,
+			((ImageView) parentView.findViewById(R.id.fromIcon)).setImageDrawable(AppCompatResources.getDrawable(mapActivity,
 					mapActivity.getMyApplication().getTargetPointsHelper().getPointToStart() == null
 						? locationIconResByStatus : R.drawable.list_startpoint));
 		}
@@ -2292,7 +2298,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				case ROUTE_INFO:
 					return 0;
 				case ROUTE_DETAILS:
-					return app != null ? app.getRoutingHelper().getAppMode().getMapIconRes() : R.drawable.map_directions;
+					return app != null ? app.getRoutingHelper().getAppMode().getIconRes() : R.drawable.map_directions;
 				default:
 					return 0;
 			}

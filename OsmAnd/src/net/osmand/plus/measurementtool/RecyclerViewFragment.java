@@ -57,7 +57,8 @@ public class RecyclerViewFragment extends Fragment {
 		final int backgroundColor = ContextCompat.getColor(getActivity(),
 				nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
 		final TypedValue typedValueAttr = new TypedValue();
-		getActivity().getTheme().resolveAttribute(R.attr.left_menu_view_bg, typedValueAttr, true);
+		int bgAttrId = AndroidUtils.isLayoutRtl(getActivity()) ? R.attr.right_menu_view_bg : R.attr.left_menu_view_bg;
+		getActivity().getTheme().resolveAttribute(bgAttrId, typedValueAttr, true);
 
 		parent = new FrameLayout(mapActivity);
 		parent.setLayoutParams(new LayoutParams(width + AndroidUtils.dpToPx(getActivity(), 16), height));

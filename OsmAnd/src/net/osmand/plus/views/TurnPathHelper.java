@@ -609,10 +609,10 @@ public class TurnPathHelper {
 			} else if (firstTurnType != TurnType.C && TurnType.isSlightTurn(firstTurnType)
 					&& !TurnType.isSlightTurn(secondTurnType) && !TurnType.isSlightTurn(thirdTurnType)) {
 				if (TurnType.isLeftTurn(firstTurnType) && TurnType.isRightTurn(secondTurnType)
-						&& TurnType.isLeftTurn(thirdTurnType)){
+						&& (thirdTurnType == 0 || TurnType.isLeftTurn(thirdTurnType))) {
 					turnResource = new TurnResource(secondTurnType, true, false, leftSide);
 				} else if (TurnType.isRightTurn(firstTurnType) && TurnType.isLeftTurn(secondTurnType)
-						&& TurnType.isRightTurn(thirdTurnType)) {
+						&& (thirdTurnType == 0 || TurnType.isRightTurn(thirdTurnType))) {
 					turnResource = new TurnResource(secondTurnType, true, false, leftSide);
 				}
 			} else if (firstTurnType == TurnType.C || thirdTurnType == TurnType.C) {

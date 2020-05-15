@@ -39,6 +39,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -320,7 +321,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		if (menu.isLandscapeLayout()) {
 			final TypedValue typedValueAttr = new TypedValue();
-			mapActivity.getTheme().resolveAttribute(R.attr.left_menu_view_bg, typedValueAttr, true);
+			int bgAttrId = AndroidUtils.isLayoutRtl(app) ? R.attr.right_menu_view_bg : R.attr.left_menu_view_bg;
+			mapActivity.getTheme().resolveAttribute(bgAttrId, typedValueAttr, true);
 			mainView.setBackgroundResource(typedValueAttr.resourceId);
 			mainView.setLayoutParams(new FrameLayout.LayoutParams(menu.getLandscapeWidthPx(),
 					ViewGroup.LayoutParams.MATCH_PARENT));
@@ -565,21 +567,27 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 
 		// Action buttons
-//		TODO refactor section
 		ContextMenuAdapter adapter = menu.getActionsContextMenuAdapter(false);
-		List<ContextMenuItem> items = new ArrayList<>();
-		for (ContextMenuItem item : adapter.getItems()) {
-			if (!item.isHidden()) {
-				items.add(item);
-			}
-		}
+		List<ContextMenuItem> items = adapter.getVisibleItems();
+		List<String> mainIds = ((OsmandSettings.MainContextMenuItemsSettings) app.getSettings().CONTEXT_MENU_ACTIONS_ITEMS.get()).getMainIds();
 		ContextMenuAdapter mainAdapter = new ContextMenuAdapter(requireMyApplication());
 		ContextMenuAdapter additionalAdapter = new ContextMenuAdapter(requireMyApplication());
-		for (int i = 0; i < items.size(); i++) {
-			if (i < MAIN_BUTTONS_QUANTITY) {
-				mainAdapter.addItem(items.get(i));
-			} else {
-				additionalAdapter.addItem(items.get(i));
+
+		if (!mainIds.isEmpty()){
+			for (ContextMenuItem item : items) {
+				if (mainIds.contains(item.getId())) {
+					mainAdapter.addItem(item);
+				} else {
+					additionalAdapter.addItem(item);
+				}
+			}
+		} else {
+			for (int i = 0; i < items.size(); i++) {
+				if (i < MAIN_BUTTONS_QUANTITY) {
+					mainAdapter.addItem(items.get(i));
+				} else {
+					additionalAdapter.addItem(items.get(i));
+				}
 			}
 		}
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -591,9 +599,15 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		ContextMenuItemClickListener mainListener = menu.getContextMenuItemClickListener(mainAdapter);
 		ContextMenuItemClickListener additionalListener = menu.getContextMenuItemClickListener(additionalAdapter);
 
-		int mainButtonsQuantity = Math.min(MAIN_BUTTONS_QUANTITY, items.size());
-		for (int i = 0; i < mainButtonsQuantity; i++) {
-			buttons.addView(getActionView(items.get(i), i, mainAdapter, additionalAdapter, mainListener, additionalListener), params);
+		if (!mainIds.isEmpty()){
+			for (ContextMenuItem item: mainAdapter.getItems()) {
+				buttons.addView(getActionView(item, mainAdapter.getItems().indexOf(item), mainAdapter, additionalAdapter, mainListener, additionalListener), params);
+			}
+		} else {
+			int mainButtonsQuantity = Math.min(MAIN_BUTTONS_QUANTITY, items.size());
+			for (int i = 0; i < mainButtonsQuantity; i++) {
+				buttons.addView(getActionView(items.get(i), i, mainAdapter, additionalAdapter, mainListener, additionalListener), params);
+			}
 		}
 		buttons.setGravity(Gravity.CENTER);
 
@@ -610,7 +624,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		TextView directionsButton = (TextView) view.findViewById(R.id.context_menu_directions_button);
 		int iconResId = R.drawable.map_directions;
 		if (menu.navigateInPedestrianMode()) {
-			iconResId = R.drawable.map_action_pedestrian_dark;
+			iconResId = R.drawable.ic_action_pedestrian_dark;
 		}
 		Drawable drawable = getIcon(iconResId, bottomButtonsColor);
 		directionsButton.setTextColor(ContextCompat.getColor(mapActivity, bottomButtonsColor));
@@ -668,7 +682,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		TextView title = view.findViewById(R.id.text);
 		icon.setImageDrawable(uiUtilities.getIcon(contextMenuItem.getIcon(), nightMode));
 		title.setText(contextMenuItem.getTitle());
-		if (contextMenuItem.getId().equals(MAP_CONTEXT_MENU_MORE_ID)) {
+		String id = contextMenuItem.getId();
+		if (MAP_CONTEXT_MENU_MORE_ID.equals(id)) {
 			item.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
@@ -855,10 +870,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		if (mapActivity != null) {
 			button.setImageDrawable(mapActivity.getMyApplication().getUIUtilities().getIcon(night ? iconDarkId : iconLightId));
 			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-				button.setBackground(mapActivity.getResources().getDrawable(night ? bgDarkId : bgLightId,
-						mapActivity.getTheme()));
+				button.setBackground(AppCompatResources.getDrawable(mapActivity, night ? bgDarkId : bgLightId));
 			} else {
-				button.setBackgroundDrawable(mapActivity.getResources().getDrawable(night ? bgDarkId : bgLightId));
+				button.setBackgroundDrawable(AppCompatResources.getDrawable(mapActivity, night ? bgDarkId : bgLightId));
 			}
 		}
 	}

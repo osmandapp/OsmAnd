@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
@@ -19,14 +20,14 @@
         android:layout_height="wrap_content"
         android:minHeight="@dimen/list_item_height">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icon"
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"
             android:layout_gravity="center_vertical"
             android:scaleType="center"
         	android:paddingLeft="@dimen/list_content_padding"
-            android:src="@drawable/ic_action_start_navigation"
+            osmand:srcCompat="@drawable/ic_action_start_navigation"
             android:layout_marginRight="@dimen/favorites_icon_right_margin"
 	        android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 	        android:paddingStart="@dimen/list_content_padding" />
@@ -49,7 +50,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/dashFavIconMargin"
             android:background="?attr/dashboard_button"
-            android:src="@drawable/ic_play_dark"
+            osmand:srcCompat="@drawable/ic_play_dark"
 	        android:layout_marginStart="@dimen/dashFavIconMargin" />
 
         <ImageButton
@@ -60,7 +61,7 @@
             android:layout_gravity="center_vertical"
             android:background="?attr/dashboard_button"
             android:focusable="false"
-            android:src="@drawable/ic_action_remove_dark" />
+            osmand:srcCompat="@drawable/ic_action_remove_dark" />
     </LinearLayout>
 
 </LinearLayout>

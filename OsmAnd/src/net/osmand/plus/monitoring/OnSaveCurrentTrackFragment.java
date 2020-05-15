@@ -50,7 +50,6 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 	public static final String TAG = "OnSaveCurrentTrackBottomSheetFragment";
 	public static final String SAVED_TRACKS_KEY = "saved_track_filename";
 
-	private boolean showOnMap = true;
 	private boolean openTrack = false;
 	private File file;
 	private String savedGpxDir = "";
@@ -121,10 +120,11 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 		});
 
 		SwitchCompat showOnMapButton = (SwitchCompat) mainView.findViewById(R.id.btn_show_on_map);
+		showOnMapButton.setChecked(app.getSettings().SHOW_SAVED_TRACK_REMEMBER.get());
 		showOnMapButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				showOnMap = isChecked;
+				app.getSettings().SHOW_SAVED_TRACK_REMEMBER.set(isChecked);
 			}
 		});
 		View openTrackBtn = mainView.findViewById(R.id.open_track_button);
@@ -160,7 +160,8 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 	public void onDismiss(DialogInterface dialog) {
 		super.onDismiss(dialog);
 		if (file != null) {
-			if (showOnMap) {
+			OsmandApplication app = getMyApplication();
+			if (app != null && app.getSettings().SHOW_SAVED_TRACK_REMEMBER.get()) {
 				showOnMap(file, !openTrack);
 			}
 			FragmentActivity activity = getActivity();

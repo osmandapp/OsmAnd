@@ -147,7 +147,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			solidToolbarView.setLayoutParams(new FrameLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT));
 			solidToolbarView.setVisibility(View.VISIBLE);
 			final TypedValue typedValueAttr = new TypedValue();
-			mapActivity.getTheme().resolveAttribute(R.attr.left_menu_view_bg, typedValueAttr, true);
+			int bgAttrId = AndroidUtils.isLayoutRtl(mapActivity) ? R.attr.right_menu_view_bg : R.attr.left_menu_view_bg;
+			mapActivity.getTheme().resolveAttribute(bgAttrId, typedValueAttr, true);
 			view.findViewById(R.id.pager_container).setBackgroundResource(typedValueAttr.resourceId);
 			view.setLayoutParams(new FrameLayout.LayoutParams(getResources().getDimensionPixelSize(R.dimen.dashboard_land_width), ViewGroup.LayoutParams.MATCH_PARENT));
 		}
@@ -327,11 +328,11 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 							active ? R.drawable.pages_active_light : R.drawable.pages_inactive_light,
 							active ? R.drawable.pages_active_dark : R.drawable.pages_inactive_dark);
 					if (i == 0) {
-						layoutParams.setMargins(itemMargin, 0, itemPadding, 0);
+						AndroidUtils.setMargins(layoutParams, itemMargin, 0, itemPadding, 0);
 					} else if (i == routesCount - 1) {
-						layoutParams.setMargins(0, 0, itemMargin, 0);
+						AndroidUtils.setMargins(layoutParams, 0, 0, itemMargin, 0);
 					} else {
-						layoutParams.setMargins(0, 0, itemPadding, 0);
+						AndroidUtils.setMargins(layoutParams, 0, 0, itemPadding, 0);
 					}
 					itemView.setLayoutParams(layoutParams);
 					pagesView.addView(itemView);

@@ -200,8 +200,9 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 				}
 			});
 
+			int navigationIconResId = AndroidUtils.getNavigationIconResId(mapActivity);
 			toolbarController = new PlanRouteToolbarController();
-			toolbarController.setBackBtnIconIds(R.drawable.ic_action_mode_back, R.drawable.ic_action_mode_back);
+			toolbarController.setBackBtnIconIds(navigationIconResId, navigationIconResId);
 			toolbarController.setTitle(getString(R.string.plan_route));
 			toolbarController.setOnBackButtonClickListener(new View.OnClickListener() {
 				@Override
@@ -664,7 +665,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 		if (mapActivity != null) {
 			final ImageButton appModesBtn = (ImageButton) mapActivity.findViewById(R.id.snap_to_road_image_button);
 			appModesBtn.setBackgroundResource(nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle);
-			appModesBtn.setImageDrawable(getActiveIcon(planRouteContext.getSnappedMode().getMapIconRes()));
+			appModesBtn.setImageDrawable(getActiveIcon(planRouteContext.getSnappedMode().getIconRes()));
 			appModesBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {

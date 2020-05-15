@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_empty_state_search"
+                osmand:srcCompat="@drawable/ic_empty_state_search"
                 android:tint="#ec572e"/>
 
             <LinearLayout
@@ -120,13 +120,13 @@
             android:layout_weight="1"
             android:gravity="center">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/online_search_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:src="@drawable/ic_world_globe_dark"
+                osmand:srcCompat="@drawable/ic_world_globe_dark"
                 android:tint="?attr/color_dialog_buttons"/>
 
             <net.osmand.plus.widgets.TextViewEx

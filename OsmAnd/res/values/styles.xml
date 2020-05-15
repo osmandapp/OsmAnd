@@ -20,17 +20,19 @@
         <item name="typeface">@string/font_roboto_medium</item>
         <item name="android:textColor">?android:textColorSecondary</item>
         <item name="android:layout_marginLeft">@dimen/subHeaderMarginLeft</item>
+        <item name="android:layout_marginStart">@dimen/subHeaderMarginLeft</item>
     </style>
 
     <style name="DashboardGeneralButton">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:gravity">center_vertical|right</item>
+        <item name="android:gravity">center_vertical|end</item>
         <item name="android:layout_height">@dimen/showAllButtonHeight</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:textSize">@dimen/default_sub_text_size</item>
         <item name="typeface">@string/font_roboto_medium</item>
         <item name="android:textColor">?attr/dashboard_general_button_text_color</item>
         <item name="android:layout_marginRight">@dimen/showAllButtonMarginRight</item>
+        <item name="android:layout_marginEnd">@dimen/showAllButtonMarginRight</item>
         <item name="android:background">?attr/dashboard_button</item>
     </style>
 
@@ -162,7 +164,7 @@
         <item name="ctx_menu_controller_text_color">@drawable/context_menu_controller_text_color_light</item>
         <item name="ctx_menu_divider">@color/ctx_menu_buttons_divider_light</item>
         <item name="search_background">@color/activity_background_color_dark</item>
-        <item name="actionModeCloseDrawable">@drawable/ic_action_mode_back</item>
+        <item name="actionModeCloseDrawable">@drawable/ic_arrow_back</item>
         <item name="actionModeStyle">@style/WhiteActionMode</item>
         <item name="actionMenuTextColor">@color/color_white</item>
         <item name="switch_ex_background">@drawable/switch_ex_background_light</item>
@@ -194,7 +196,7 @@
 
         <item name="android:actionModeBackground">@color/app_bar_color_light</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
-        <item name="android:actionModeCloseDrawable">@drawable/ic_action_mode_back</item>
+        <item name="android:actionModeCloseDrawable">@drawable/ic_arrow_back</item>
         <item name="android:actionModeStyle">@style/WhiteActionMode</item>
         <item name="android:actionMenuTextColor">@color/color_white</item>
         <item name="actionOverflowButtonStyle">@style/OverflowMenuButton</item>
@@ -284,10 +286,11 @@
         <item name="android:colorBackgroundFloating">@color/list_background_color_light</item>
         <item name="preferenceTheme">@style/OsmandPreferenceTheme</item>
         <item name="stroked_buttons_and_links_outline">@color/stroked_buttons_and_links_outline_light</item>
+        <item name="btn_bg_border_inactive">@drawable/btn_bg_border_inactive_light</item>
     </style>
 
     <style name="OverflowMenuButton" parent="@style/Widget.AppCompat.ActionButton.Overflow">
-        <item name="android:src">@drawable/ic_overflow_menu_white</item>
+        <item name="srcCompat">@drawable/ic_overflow_menu_white</item>
     </style>
 
     <style name="PopupMenuLight" parent="@style/Widget.AppCompat.Light.PopupMenu">
@@ -430,6 +433,7 @@
         <item name="bg_map_context_menu">@drawable/bg_map_context_menu_dark</item>
         <item name="bottom_menu_view_bg">@drawable/bg_bottom_menu_dark</item>
         <item name="left_menu_view_bg">@drawable/bg_left_menu_dark</item>
+        <item name="right_menu_view_bg">@drawable/bg_right_menu_dark</item>
         <item name="bg_point_editor_view">@drawable/bg_point_editor_view_dark</item>
         <item name="dashboard_divider">@color/divider_color_dark</item>
         <item name="divider_color">@color/divider_color_dark</item>
@@ -551,6 +555,7 @@
         <item name="android:colorBackgroundFloating">@color/list_background_color_dark</item>
         <item name="preferenceTheme">@style/OsmandPreferenceTheme</item>
         <item name="stroked_buttons_and_links_outline">@color/stroked_buttons_and_links_outline_dark</item>
+        <item name="btn_bg_border_inactive">@drawable/btn_bg_border_inactive_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">
@@ -683,7 +688,9 @@
     <style name="create_poi_text_field">
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
         <item name="android:layout_marginLeft">68dp</item>
+        <item name="android:layout_marginStart">68dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
@@ -692,6 +699,7 @@
     <style name="edit_poi_imageview_style">
         <item name="android:layout_marginTop">16dp</item>
         <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginStart">16dp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>

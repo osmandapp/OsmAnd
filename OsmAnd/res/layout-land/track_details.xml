@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
     android:id="@+id/plan_route_info"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/dashboard_land_width"
@@ -30,7 +31,7 @@
                 android:layout_height="56dp"
                 android:layout_gravity="top"
                 android:contentDescription="@string/back_to_search"
-                android:src="@drawable/ic_arrow_back"/>
+                osmand:srcCompat="@drawable/ic_arrow_back"/>
 
             <LinearLayout
                 android:id="@+id/top_bar_title_layout"
@@ -76,7 +77,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="top"
                 android:contentDescription="@string/shared_string_close"
-                android:src="@drawable/ic_action_remove_dark"/>
+                osmand:srcCompat="@drawable/ic_action_remove_dark"/>
 
         </LinearLayout>
 
@@ -108,13 +109,13 @@
                         android:background="?attr/selectableItemBackground"
                         android:gravity="center_vertical">
 
-                        <ImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/y_axis_icon"
                             android:layout_width="@dimen/standard_icon_size"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/list_content_padding"
                             android:layout_marginRight="@dimen/list_content_padding"
-                            android:src="@drawable/ic_action_altitude_average"
+                            osmand:srcCompat="@drawable/ic_action_altitude_average"
 	                        android:layout_marginStart="@dimen/list_content_padding"
 	                        android:layout_marginEnd="@dimen/list_content_padding" />
 
@@ -129,12 +130,12 @@
                             tools:text="@string/altitude"
 	                        android:layout_marginEnd="8dp" />
 
-                        <ImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/y_axis_arrow"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
-                            android:src="@drawable/ic_action_arrow_drop_down"
+                            osmand:srcCompat="@drawable/ic_action_arrow_drop_down"
 	                        android:layout_marginEnd="8dp" />
 
                     </LinearLayout>
@@ -156,13 +157,13 @@
                             android:background="?attr/dashboard_divider"
                             android:focusable="false"/>
 
-                        <ImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/x_axis_icon"
                             android:layout_width="@dimen/standard_icon_size"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/list_content_padding"
                             android:layout_marginRight="@dimen/list_content_padding"
-                            android:src="@drawable/ic_action_speed"
+                            osmand:srcCompat="@drawable/ic_action_speed"
 	                        android:layout_marginStart="@dimen/list_content_padding"
 	                        android:layout_marginEnd="@dimen/list_content_padding" />
 
@@ -177,12 +178,12 @@
                             tools:text="@string/map_widget_speed"
 	                        android:layout_marginEnd="8dp" />
 
-                        <ImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/x_axis_arrow"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
-                            android:src="@drawable/ic_action_arrow_drop_down"
+                            osmand:srcCompat="@drawable/ic_action_arrow_drop_down"
 	                        android:layout_marginEnd="8dp" />
 
                     </LinearLayout>

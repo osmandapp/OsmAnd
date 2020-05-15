@@ -4,6 +4,7 @@ package net.osmand.plus.dialogs;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -34,8 +36,7 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.quickaction.actions.MapStyleAction;
-import net.osmand.plus.render.RendererRegistry;
-import net.osmand.render.RenderingRulesStorage;
+import net.osmand.plus.quickaction.actions.SwitchProfileAction;
 
 import java.util.List;
 
@@ -161,8 +162,24 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 			List<String> stylesList = mapStyleAction.getFilteredStyles();
 			for (String entry : stylesList) {
 				boolean selected = entry.equals(selectedItem);
-				createItemRow(selected, counter, mapStyleAction.getTranslatedItemName(context, entry), entry);
+				createItemRow(selected, counter, getContentIcon(action.getIconRes()),
+						mapStyleAction.getTranslatedItemName(context, entry), entry);
 				counter++;
+			}
+		} else if (action instanceof SwitchProfileAction) {
+			SwitchProfileAction switchProfileAction = (SwitchProfileAction) action;
+			List<String> profilesKeys = (List<String>) switchProfileAction.loadListFromParams();
+			for (String key : profilesKeys) {
+				ApplicationMode appMode = ApplicationMode.valueOfStringKey(key, null);
+				if (appMode != null) {
+					boolean selected = key.equals(selectedItem);
+					int iconId = appMode.getIconRes();
+					int colorId = appMode.getIconColorInfo().getColor(nightMode);
+					Drawable icon = getIcon(iconId, colorId);
+					String translatedName = appMode.toHumanString();
+					createItemRow(selected, counter, icon, translatedName, key);
+					counter++;
+				}
 			}
 		} else if (action instanceof SwitchableAction) {
 			SwitchableAction switchableAction = (SwitchableAction) action;
@@ -170,13 +187,13 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 			for (Pair<String, String> entry : sources) {
 				String tag = entry.first;
 				boolean selected = tag.equals(selectedItem);
-				createItemRow(selected, counter, entry.second, tag);
+				createItemRow(selected, counter, getContentIcon(action.getIconRes()), entry.second, tag);
 				counter++;
 			}
 		}
 	}
 
-	private void createItemRow(boolean selected, int counter, String text, String tag) {
+	private void createItemRow(boolean selected, int counter, Drawable icon, String text, String tag) {
 		View view = itemsContainer.getChildAt(counter);
 		view.setTag(tag);
 		view.setOnClickListener(getOnClickListener());
@@ -189,7 +206,7 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 		rb.setChecked(selected);
 		CompoundButtonCompat.setButtonTintList(rb, rbColorList);
 		ImageView imageView = (ImageView) view.findViewById(R.id.icon);
-		imageView.setImageDrawable(getContentIcon(action.getIconRes()));
+		imageView.setImageDrawable(icon);
 	}
 
 	@ColorInt

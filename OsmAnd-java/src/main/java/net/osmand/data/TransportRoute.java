@@ -65,8 +65,12 @@ public class TransportRoute extends MapObject {
 		return forwardWays;
 	}
 	
-	
 	public void mergeForwardWays() {
+		mergeRouteWays(forwardWays);
+		resortWaysToStopsOrder(forwardWays, forwardStops);
+	}
+	
+	public static void mergeRouteWays(List<Way> forwardWays) {
 		boolean changed = true;
 		// combine as many ways as possible
 		while (changed && forwardWays != null) {
@@ -120,8 +124,10 @@ public class TransportRoute extends MapObject {
 					if(reverseSecond) {
 						second.reverseNodes();
 					}
-					for (int i = 1; i < second.getNodes().size(); i++) {
-						first.addNode(second.getNodes().get(i));
+					if (first != second && (first.getId() < 0 || first.getId() != second.getId())) {
+						for (int i = 1; i < second.getNodes().size(); i++) {
+							first.addNode(second.getNodes().get(i));
+						}
 					}
 					changed = true;
 				} else {
@@ -129,10 +135,13 @@ public class TransportRoute extends MapObject {
 				}
 			}
 		}
-		if (forwardStops.size() > 0) {
+	}
+
+	public static Map<Way, int[]> resortWaysToStopsOrder(List<Way> forwardWays, List<TransportStop> forwardStops) {
+		final Map<Way, int[]> orderWays = new HashMap<Way, int[]>();
+		if (forwardWays != null && forwardStops.size() > 0) {
 			// resort ways to stops order 
-			final Map<Way, int[]> orderWays = new HashMap<Way, int[]>();
-			for (Way w : getForwardWays()) {
+			for (Way w : forwardWays) {
 				int[] pair = new int[] { 0, 0 };
 				Node firstNode = w.getFirstNode();
 				TransportStop st = forwardStops.get(0);
@@ -175,6 +184,7 @@ public class TransportRoute extends MapObject {
 			}
 			
 		}
+		return orderWays;
 	}
 	
 	

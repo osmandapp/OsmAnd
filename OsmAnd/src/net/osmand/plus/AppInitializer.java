@@ -14,6 +14,8 @@ import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Build;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.AndroidUtils;
@@ -102,6 +104,8 @@ public class AppInitializer implements IProgress {
 	public static final int VERSION_3_5 = 35;
 	// 36 - 3.6
 	public static final int VERSION_3_6 = 36;
+	// 37 - 3.7
+	public static final int VERSION_3_7 = 37;
 
 
 	public static final boolean TIPS_AND_TRICKS = false;
@@ -113,7 +117,7 @@ public class AppInitializer implements IProgress {
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED"; //$NON-NLS-1$
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
 
-	public static final String LATEST_CHANGES_URL = "https://osmand.net/blog/osmand-3-6-released";
+	public static final String LATEST_CHANGES_URL = "https://osmand.net/blog/osmand-3-7-released";
 //	public static final String LATEST_CHANGES_URL = null; // not enough to read
 	public static final int APP_EXIT_CODE = 4;
 	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
@@ -223,6 +227,10 @@ public class AppInitializer implements IProgress {
 			if (prevAppVersion < VERSION_3_6) {
 				app.getSettings().migratePreferences();
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_6).commit();
+			}
+			if (prevAppVersion < VERSION_3_7) {
+				app.getSettings().migrateEnumPreferences();
+				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_7).commit();
 			}
 			startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
 			appVersionChanged = true;
@@ -607,7 +615,7 @@ public class AppInitializer implements IProgress {
 		});
 	}
 
-	public static void loadRoutingFiles(final OsmandApplication app, final LoadRoutingFilesCallback callback) {
+	public static void loadRoutingFiles(@NonNull final OsmandApplication app, @Nullable final LoadRoutingFilesCallback callback) {
 		new AsyncTask<Void, Void, Map<String, RoutingConfiguration.Builder>>() {
 
 			@Override
@@ -643,7 +651,9 @@ public class AppInitializer implements IProgress {
 					app.getCustomRoutingConfigs().putAll(customConfigs);
 				}
 				app.avoidSpecificRoads.initRouteObjects(false);
-				callback.onRoutingFilesLoaded();
+				if (callback != null) {
+					callback.onRoutingFilesLoaded();
+				}
 			}
 
 			private Map<String, String> getDefaultAttributes() {

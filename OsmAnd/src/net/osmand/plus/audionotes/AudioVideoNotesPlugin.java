@@ -96,7 +96,11 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_AUDIO_NOTE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_PHOTO_NOTE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_VIDEO_NOTE;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.RECORDING_LAYER;
+import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 
 
 public class AudioVideoNotesPlugin extends OsmandPlugin {
@@ -649,7 +653,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.setSelected(SHOW_RECORDINGS.get())
 				.setIcon(R.drawable.ic_action_micro_dark)
 				.setColor(SHOW_RECORDINGS.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
-				.setPosition(12)
+				.setItemDeleteAction(makeDeleteAction(SHOW_RECORDINGS))
 				.setListener(listener).createItem());
 	}
 
@@ -660,6 +664,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			return;
 		}
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.recording_context_menu_arecord, app)
+				.setId(MAP_CONTEXT_MENU_AUDIO_NOTE)
 				.setIcon(R.drawable.ic_action_micro_dark)
 				.setOrder(TAKE_AUDIO_NOTE_ITEM_ORDER)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
@@ -672,6 +677,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				})
 				.createItem());
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.recording_context_menu_vrecord, app)
+				.setId(MAP_CONTEXT_MENU_VIDEO_NOTE)
 				.setIcon(R.drawable.ic_action_video_dark)
 				.setOrder(TAKE_VIDEO_NOTE_ITEM_ORDER)
 				.setListener(new ItemClickListener() {
@@ -684,6 +690,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				})
 				.createItem());
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.recording_context_menu_precord, app)
+				.setId(MAP_CONTEXT_MENU_PHOTO_NOTE)
 				.setIcon(R.drawable.ic_action_photo_dark)
 				.setOrder(TAKE_PHOTO_NOTE_ITEM_ORDER)
 				.setListener(new ItemClickListener() {

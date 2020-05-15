@@ -3,7 +3,6 @@ package net.osmand.plus.activities;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -17,22 +16,26 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ExpandableListView;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ActionMode;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.MenuItemCompat;
 
 import net.osmand.AndroidUtils;
+import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -40,7 +43,6 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.FavouritesDbHelper.FavoritesListener;
 import net.osmand.plus.MapMarkersHelper;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -66,12 +68,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static android.view.Gravity.CENTER;
+import static net.osmand.plus.OsmAndLocationProvider.*;
 import static net.osmand.plus.myplaces.FavoritesActivity.FAV_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
 
-public class FavoritesTreeFragment extends OsmandExpandableListFragment implements
-	FavoritesFragmentStateHolder {
+public class FavoritesTreeFragment extends OsmandExpandableListFragment implements FavoritesFragmentStateHolder,
+		OsmAndCompassListener, OsmAndLocationListener {
+
 	public static final int SEARCH_ID = -1;
 	//	public static final int EXPORT_ID = 0;
 	// public static final int IMPORT_ID = 1;
@@ -83,7 +88,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	public static final int IMPORT_FAVOURITES_ID = 7;
 	public static final String GROUP_EXPANDED_POSTFIX = "_group_expanded";
 
-	private FavouritesAdapter favouritesAdapter = new FavouritesAdapter();
+	private FavouritesAdapter favouritesAdapter;
 	private FavouritesDbHelper helper;
 
 	private OsmandApplication app;
@@ -91,22 +96,26 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	private LinkedHashMap<String, Set<FavouritePoint>> favoritesSelected = new LinkedHashMap<>();
 	private Set<FavoriteGroup> groupsToDelete = new LinkedHashSet<>();
 	private ActionMode actionMode;
-	Drawable arrowImage;
-	Drawable arrowImageDisabled;
+	private Drawable arrowImageDisabled;
 	private HashMap<String, OsmandSettings.OsmandPreference<Boolean>> preferenceCache = new HashMap<>();
 	private View footerView;
+	private Location lastLocation;
+	private float lastHeading;
 
 	private int selectedGroupPos = -1;
 	private int selectedChildPos = -1;
 
 	private FavoritesListener favoritesListener;
-	
-	String groupNameToShow = null;
-	
+
+	private String groupNameToShow = null;
+	private boolean compassUpdateAllowed = true;
+	private boolean locationUpdateStarted;
+
 	@Override
 	public void onAttach(Context context) {
 		super.onAttach(context);
 		this.app = (OsmandApplication) getActivity().getApplication();
+		favouritesAdapter = new FavouritesAdapter();
 
 		helper = getMyApplication().getFavorites();
 		if (helper.isFavoritesLoaded()) {
@@ -126,17 +135,11 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		setAdapter(favouritesAdapter);
 
 		boolean light = getMyApplication().getSettings().isLightContent();
-		arrowImage = ContextCompat.getDrawable(context, R.drawable.ic_direction_arrow);
-		arrowImage.mutate();
-		if (light) {
-			arrowImage.setColorFilter(ContextCompat.getColor(context, R.color.color_distance), PorterDuff.Mode.MULTIPLY);
-		} else {
-			arrowImage.setColorFilter(ContextCompat.getColor(context, R.color.color_distance), PorterDuff.Mode.MULTIPLY);
-		}
-		arrowImageDisabled = ContextCompat.getDrawable(context, R.drawable.ic_direction_arrow);
+		arrowImageDisabled = AppCompatResources.getDrawable(context, R.drawable.ic_direction_arrow);
 		arrowImageDisabled.mutate();
 		arrowImageDisabled.setColorFilter(ContextCompat.getColor(
 				context, light ? R.color.icon_color_default_light : R.color.icon_color_default_dark), PorterDuff.Mode.MULTIPLY);
+
 	}
 
 	private void deleteFavorites() {
@@ -184,7 +187,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				}
 			});
 			listView.addHeaderView(searchView);
-			listView.addHeaderView(inflater.inflate(R.layout.list_item_divider, null, false));
+			View dividerView = inflater.inflate(R.layout.list_item_divider, null, false);
+			listView.addHeaderView(dividerView, null, false);
 			footerView = inflater.inflate(R.layout.list_shadow_footer, null, false);
 			listView.addFooterView(footerView);
 		}
@@ -220,11 +224,19 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				getGroupExpandedPreference(groupName).set(true);
 			}
 		});
-		
+		listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(AbsListView view, int newState) {
+				compassUpdateAllowed = newState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE;
+			}
+
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+			}
+		});
 		if (getArguments() != null) {
 			groupNameToShow = getArguments().getString(GROUP_NAME_TO_SHOW);
 		}
-		
 		if (groupNameToShow != null) {
 			int groupPos = favouritesAdapter.getGroupPosition(groupNameToShow);
 			if (groupPos != -1) {
@@ -251,6 +263,23 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	}
 
 	@Override
+	public void updateLocation(Location location) {
+		if (!MapUtils.areLatLonEqual(lastLocation, location)) {
+			lastLocation = location;
+			updateLocationUi();
+		}
+	}
+
+	@Override
+	public void updateCompassValue(float heading) {
+		if (Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
+			lastHeading = heading;
+			updateLocationUi();
+		}
+	}
+
+
+	@Override
 	public void onResume() {
 		super.onResume();
 		favouritesAdapter.synchronizeGroups();
@@ -258,11 +287,51 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		if (groupNameToShow == null) {
 			restoreState(getArguments());
 		}
+
+		startLocationUpdate();
+	}
+
+	private void startLocationUpdate() {
+		OsmandApplication app = getMyApplication();
+		if (app != null && !locationUpdateStarted) {
+			locationUpdateStarted = true;
+			app.getLocationProvider().resumeAllUpdates();
+			app.getLocationProvider().removeCompassListener(app.getLocationProvider().getNavigationInfo());
+			app.getLocationProvider().addCompassListener(this);
+			app.getLocationProvider().addLocationListener(this);
+			updateLocationUi();
+		}
+	}
+
+	private void stopLocationUpdate() {
+		OsmandApplication app = getMyApplication();
+		if (app != null && locationUpdateStarted) {
+			locationUpdateStarted = false;
+			app.getLocationProvider().removeLocationListener(this);
+			app.getLocationProvider().removeCompassListener(this);
+			app.getLocationProvider().addCompassListener(app.getLocationProvider().getNavigationInfo());
+			app.getLocationProvider().pauseAllUpdates();
+		}
+	}
+
+	private void updateLocationUi() {
+		if (!compassUpdateAllowed) {
+			return;
+		}
+		if (app != null && favouritesAdapter != null) {
+			app.runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					favouritesAdapter.notifyDataSetChanged();
+				}
+			});
+		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
+		stopLocationUpdate();
 		if (actionMode != null) {
 			actionMode.finish();
 		}
@@ -270,6 +339,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			helper.removeListener(favoritesListener);
 			favoritesListener = null;
 		}
+
 	}
 
 	private int getSelectedFavoritesCount() {
@@ -385,7 +455,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		if (!MenuItemCompat.isActionViewExpanded(mi)) {
 			createMenuItem(menu, IMPORT_FAVOURITES_ID, R.string.shared_string_add_to_favorites, R.drawable.ic_action_plus, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			createMenuItem(menu, SHARE_ID, R.string.shared_string_share, R.drawable.ic_action_gshare_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			createMenuItem(menu, SELECT_MAP_MARKERS_ID, R.string.select_map_markers, R.drawable.ic_action_flag_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+			createMenuItem(menu, SELECT_MAP_MARKERS_ID, R.string.select_map_markers, R.drawable.ic_action_flag, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			createMenuItem(menu, DELETE_ID, R.string.shared_string_delete, R.drawable.ic_action_delete_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		}
 	}
@@ -412,7 +482,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 				enableSelectionMode(true);
 				createMenuItem(menu, SELECT_MAP_MARKERS_ACTION_MODE_ID, R.string.select_map_markers,
-						R.drawable.ic_action_flag_dark,
+						R.drawable.ic_action_flag,
 						MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				favoritesSelected.clear();
 				groupsToDelete.clear();
@@ -747,6 +817,11 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		List<FavoriteGroup> groups = new ArrayList<FavoriteGroup>();
 		Filter myFilter;
 		private Set<?> filter;
+		private UiUtilities.UpdateLocationViewCache cache;
+
+		FavouritesAdapter() {
+			cache = app.getUIUtilities().getUpdateLocationViewCache();
+		}
 
 		void synchronizeGroups() {
 			favoriteGroups.clear();
@@ -838,7 +913,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			int enabledColor = light ? R.color.text_color_primary_light : R.color.text_color_primary_dark;
 			int disabledColor = light ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark;
 			row.findViewById(R.id.group_divider).setVisibility(groupPosition == 0 ? View.GONE : View.VISIBLE);
-			int color = model.getColor() == 0 || model.getColor() == Color.BLACK ? getResources().getColor(R.color.color_favorite) : model.getColor();
+			int color = model.getColor() == 0 ? getResources().getColor(R.color.color_favorite) : model.getColor();
 			if (!model.isPersonal()) {
 				setCategoryIcon(app, app.getUIUtilities().getPaintedIcon(
 						R.drawable.ic_action_folder, visible ? color : getResources().getColor(disabledColor)),
@@ -927,6 +1002,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 
 			TextView name = (TextView) row.findViewById(R.id.favourite_label);
 			TextView distanceText = (TextView) row.findViewById(R.id.distance);
+			TextView addressText = (TextView) row.findViewById(R.id.group_name);
 			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
 
 			final FavouritePoint model = getChild(groupPosition, childPosition);
@@ -947,37 +1023,35 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 					}
 				});
 			}
-			LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
-			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(),
-					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
-			String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication()) + "  ";
 			name.setText(model.getDisplayName(app), TextView.BufferType.SPANNABLE);
 			name.setTypeface(Typeface.DEFAULT, visible ? Typeface.NORMAL : Typeface.ITALIC);
 			name.setTextColor(getResources().getColor(visible ? enabledColor : disabledColor));
-			distanceText.setText(distance);
 			if (model.isAddressSpecified()) {
-				distanceText.setText(String.format(getString(R.string.ltr_or_rtl_combine_via_comma), distance.trim(), model.getAddress()));
+				addressText.setText(model.getAddress());
 			}
+			int color = visible
+					? app.getFavorites().getColorWithCategory(model, getResources().getColor(R.color.color_favorite))
+					: ContextCompat.getColor(app, disabledIconColor);
+			int iconSize = (int) getResources().getDimension(R.dimen.favorites_icon_size);
 			if(model.getBackgroundType().equals(FavouritePoint.BackgroundType.CIRCLE)){
-				int color = visible ? model.getColor() : getResources().getColor(disabledIconColor);
-				int col = color == 0 || color == Color.BLACK ? getResources().getColor(R.color.color_favorite) : color;
-				icon.setImageDrawable(UiUtilities.createTintedDrawable(getActivity(),model.getIconId(),col));
+				icon.setImageDrawable(UiUtilities.createTintedDrawable(getActivity(), model.getIconId(), color));
+				iconSize = (int) getResources().getDimension(R.dimen.standard_icon_size);
 			}else {
-				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),
-						visible ? model.getColor() : getResources().getColor(disabledIconColor), false, model));
+				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(), color, false, model));
 			}
-			if (visible) {
-				distanceText.setTextColor(getResources().getColor(R.color.color_distance));
-			} else {
-				distanceText.setTextColor(getResources().getColor(disabledColor));
-			}
+			FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(iconSize, iconSize, CENTER);
+			icon.setLayoutParams(lp);
 			row.findViewById(R.id.group_image).setVisibility(View.GONE);
 
 			ImageView direction = (ImageView) row.findViewById(R.id.direction);
+			app.getUIUtilities().updateLocationView(cache, direction, distanceText, model.getLatitude(), model.getLongitude());
+			if (model.isAddressSpecified()) {
+				String addComma = app.getString(R.string.ltr_or_rtl_combine_via_comma);
+				distanceText.setText(String.format(addComma, distanceText.getText(), ""));
+			}
 			direction.setVisibility(View.VISIBLE);
-			if (visible) {
-				direction.setImageDrawable(arrowImage);
-			} else {
+			if (!visible) {
+				distanceText.setTextColor(getResources().getColor(disabledColor));
 				direction.setImageDrawable(arrowImageDisabled);
 			}
 

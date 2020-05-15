@@ -3629,4 +3629,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_language">Hizkuntza</string>
     <string name="shared_string_all_languages">Hizkuntza guztiak</string>
     <string name="wiki_menu_download_descr">Mapa osagarriak behar dira Wikipediaren POIak mapan ikusteko.</string>
+    <string name="custom_color">Kolore pertsonalizatua</string>
+    <string name="extra_maps_menu_group">Mapa gehigarriak</string>
+    <string name="download_unsupported_action">onartu gabeko ekintza %1$s</string>
 </resources>

@@ -240,10 +240,11 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 
 	private void createSuggestedMapsItems(List<IndexItem> suggestedMaps) {
 		final OsmandApplication app = requiredMyApplication();
+		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
 
-		items.add(new DividerItem(getContext()));
+		items.add(new DividerItem(themedCtx));
 
-		View categoryView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.bottom_sheet_item_with_descr_56dp, null);
+		View categoryView = UiUtilities.getInflater(themedCtx, nightMode).inflate(R.layout.bottom_sheet_item_with_descr_56dp, null);
 		categoryView.findViewById(R.id.icon).setVisibility(View.GONE);
 
 		BaseBottomSheetItem addedAppProfiles = new BottomSheetItemWithDescription.Builder()
@@ -256,8 +257,8 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 		final DownloadIndexesThread downloadThread = app.getDownloadThread();
 
 		for (final IndexItem indexItem : suggestedMaps) {
-			View view = UiUtilities.getInflater(app, nightMode).inflate(R.layout.list_item_icon_and_download, null);
-			AndroidUtils.setBackground(view, UiUtilities.getSelectableDrawable(app));
+			View view = UiUtilities.getInflater(themedCtx, nightMode).inflate(R.layout.list_item_icon_and_download, null);
+			AndroidUtils.setBackground(view, UiUtilities.getSelectableDrawable(themedCtx));
 
 			final ImageView secondaryIcon = view.findViewById(R.id.secondary_icon);
 			final ProgressBar progressBar = view.findViewById(R.id.ProgressBar);
@@ -302,6 +303,7 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 
 	private void updateItems() {
 		Activity activity = getActivity();
+		Context themedCtx = UiUtilities.getThemedContext(activity, nightMode);
 		View mainView = getView();
 		if (activity != null && mainView != null) {
 			LinearLayout itemsContainer = (LinearLayout) mainView.findViewById(useScrollableItemsContainer()
@@ -312,7 +314,7 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 			items.clear();
 			createMenuItems(null);
 			for (BaseBottomSheetItem item : items) {
-				item.inflate(activity, itemsContainer, nightMode);
+				item.inflate(themedCtx, itemsContainer, nightMode);
 			}
 			setupHeightAndBackground(mainView);
 		}
@@ -320,13 +322,15 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 
 	public static void showInstance(@NonNull FragmentManager fm, String pluginId, Boolean usedOnMap) {
 		try {
-			Bundle args = new Bundle();
-			args.putString(PLUGIN_ID_KEY, pluginId);
+			if (!fm.isStateSaved()) {
+				Bundle args = new Bundle();
+				args.putString(PLUGIN_ID_KEY, pluginId);
 
-			PluginInstalledBottomSheetDialog dialog = new PluginInstalledBottomSheetDialog();
-			dialog.setArguments(args);
-			dialog.setUsedOnMap(usedOnMap);
-			dialog.show(fm, PluginInstalledBottomSheetDialog.TAG);
+				PluginInstalledBottomSheetDialog dialog = new PluginInstalledBottomSheetDialog();
+				dialog.setArguments(args);
+				dialog.setUsedOnMap(usedOnMap);
+				dialog.show(fm, PluginInstalledBottomSheetDialog.TAG);
+			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);
 		}

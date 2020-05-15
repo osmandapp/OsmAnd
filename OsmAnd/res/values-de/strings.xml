@@ -1327,8 +1327,8 @@
 \nTrack %2$s</string>
     <string name="gpx_split_interval">Trennungsintervall</string>
     <string name="gpx_info_subtracks">Track-Segmente: %1$s</string>
-    <string name="gpx_monitoring_start">GPX-Aufzeichnung starten</string>
-    <string name="gpx_monitoring_stop">GPX-Aufzeichnung beenden</string>
+    <string name="gpx_monitoring_start">GPX-Aufzeichnung fortsetzen</string>
+    <string name="gpx_monitoring_stop">GPX-Aufzeichnung anhalten</string>
     <string name="gpx_start_new_segment">Neues Segment starten</string>
     <string name="shared_string_waypoint">Wegpunkt</string>
     <string name="gpx_visibility_txt">Sichtbarkeit</string>
@@ -1749,7 +1749,7 @@ Lon %2$s</string>
     <string name="faq_item">FAQ</string>
     <string name="faq_item_description">Häufige Fragen</string>
     <string name="map_viewing_item">Kartenansicht</string>
-    <string name="search_on_the_map_item">Suche in der Karte</string>
+    <string name="search_on_the_map_item">Suche auf der Karte</string>
     <string name="instalation_troubleshooting_item">Installation und Problembehebung</string>
     <string name="techical_articles_item">Technische Themen</string>
     <string name="versions_item">Versionen</string>
@@ -1793,7 +1793,7 @@ Lon %2$s</string>
     <string name="activate_srtm_plugin">Bitte die Erweiterung \'Höhenlinien\' aktivieren</string>
     <string name="get_full_version">Vollversion</string>
     <string name="confirm_download_roadmaps">Die reine Straßenkarte wird nicht benötigt, da Sie die Standardkarte haben. Trotzdem herunterladen?</string>
-    <string name="value_downloaded_of_max">%1$,1f von %2$,1f MB</string>
+    <string name="value_downloaded_of_max">%1$.1f von %2$.1f MB</string>
     <string name="update_all">Alles aktualisieren (%1$s MB)</string>
     <string name="free_downloads_used">Verbrauchte freie Downloads</string>
     <string name="enter_country_name">Ländernamen eingeben</string>
@@ -1806,7 +1806,7 @@ Lon %2$s</string>
     <string name="access_from_map">Aufruf von der Karte aus</string>
     <string name="favorite_category_add_new">Neue Katagorie erstellen</string>
     <string name="next_proceed">Weiter</string>
-    <string name="file_size_in_mb">%,1f MB</string>
+    <string name="file_size_in_mb">%.1f MB</string>
     <string name="please_specify_poi_type_only_from_list">Bitte einen gültigen POI-Typ angeben oder überspringen.</string>
     <string name="share_osm_edits_subject">OSM-Bearbeitung mit OsmAnd geteilt</string>
     <string name="av_locations_descr">GPX-Datei mit Standorten.</string>
@@ -2554,7 +2554,7 @@ Lon %2$s</string>
     <string name="hide_passed">Passierte ausblenden</string>
     <string name="marker_show_distance_descr">Auswahl der Entfernungs- und Richtungsangabe für Kartenmarkierungen in der Karte:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Kartenausrichtungsgrenzwert</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Auswählen, bei welcher Geschwindigkeit die Kartenausrichtung von \'Nach Bewegungsrichtung\' auf \'Nach Kompass\' umschaltet.</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Auswählen, bei welcher Geschwindigkeit die Kartenausrichtung von \'Nach Bewegungsrichtung\' auf \'Nach Kompass\' umschaltet</string>
     <string name="marker_moved_to_history">Kartenmarkierung in den Verlauf verschoben</string>
     <string name="osn_modify_dialog_error">Notiz konnte nicht geändert werden.</string>
     <string name="osn_modify_dialog_title">Notiz ändern</string>
@@ -2613,7 +2613,7 @@ Lon %2$s</string>
     <string name="by_type">Nach Typ</string>
     <string name="import_gpx_file_description">kann als Favoriten oder GPX-Datei importiert werden.</string>
     <string name="empty_state_av_notes_desc">Audio-, Video- oder Fotonotizen zu jedem Punkt auf der Karte über Bedienelement oder Kontextmenü hinzufügen.</string>
-    <string name="notes_by_date">OSM-Notizen nach Datum</string>
+    <string name="notes_by_date">Audio-/Video-Notizen nach Datum</string>
     <string name="tap_on_map_to_hide_interface_descr">Ein Tippen auf die Karte schaltet die Steuertasten und Bedienelemente um.</string>
     <string name="release_3_0">• Neu: Unterstützung weltweiter Offline-Reiseführer. Verknüpfung beschriebener Sehenswürdigkeiten zur Landkarte. Die Inhalte basieren derzeit auf Wikivoyage.
 \n
@@ -3585,7 +3585,7 @@ Lon %2$s</string>
     <string name="select_distance_route_will_recalc">Wählen Sie die Entfernung, nach der die Route neu berechnet wird.</string>
     <string name="recalculate_route_in_deviation">Neuberechnung der Route im Falle einer Abweichung</string>
     <string name="recalculate_route_distance_promo">Die Route wird neu berechnet, wenn die Entfernung von der Route zur aktuellen Position größer als der ausgewählte Wert ist.</string>
-    <string name="import_complete_description">Alle Daten aus %1$s werden importiert. Sie können die Schaltflächen unten verwenden, um den benötigten Teil der Anwendung zu öffnen, um sie zu verwalten.</string>
+    <string name="import_complete_description">Alle Daten aus %1$s werden importiert. Sie können die Schaltflächen unten verwenden, um den benötigten Teil der Anwendung zu öffnen und sie zu verwalten.</string>
     <string name="shared_string_square">Quadrat</string>
     <string name="shared_string_rhomb">Raute</string>
     <string name="shared_string_circle">Kreis</string>
@@ -3617,10 +3617,10 @@ Lon %2$s</string>
     <string name="custom_osmand_plugin">Benutzerdefiniertes OsmAnd-Plugin</string>
     <string name="slope_description">Farbliche Kennzeichnung von Pisten im Gelände.</string>
     <string name="replace_point_descr">Einen anderen Punkt durch diesen ersetzen</string>
-    <string name="changes_applied_to_profile">Die Änderungen wurden auf das %1$s Profil angewendet.</string>
-    <string name="settings_item_read_error">Konnte %1$s nicht lesen.</string>
-    <string name="settings_item_write_error">Konnte %1$s nicht schreiben.</string>
-    <string name="settings_item_import_error">Konnte %1$s nicht importieren.</string>
+    <string name="changes_applied_to_profile">Die Änderungen wurden auf das \'%1$s\' Profil angewendet.</string>
+    <string name="settings_item_read_error">Konnte nicht von \'%1$s\' lesen.</string>
+    <string name="settings_item_write_error">Konnte nicht nach \'%1$s\' schreiben.</string>
+    <string name="settings_item_import_error">Konnte nicht von \'%1$s\' importieren.</string>
     <string name="select_track_file">Wählen Sie eine Pfad-Datei</string>
     <string name="shared_string_languages">Sprachen</string>
     <string name="shared_string_language">Sprache</string>
@@ -3630,7 +3630,7 @@ Lon %2$s</string>
     <string name="ui_customization">Anpassung der Benutzeroberfläche</string>
     <string name="context_menu_actions">Aktionen im Kontextmenü</string>
     <string name="shared_string_hidden">Ausgeblendet</string>
-    <string name="reset_items_descr">Die Einstellungen werden nach dem Ausblenden auf den ursprünglichen Zustand zurückgesetzt.</string>
+    <string name="reset_items_descr">Das Ausblenden von Einstellungen setzt sie auf ihren ursprünglichen Zustand zurück.</string>
     <string name="main_actions">Hauptaktionen</string>
     <string name="move_inside_category">Sie können Elemente nur innerhalb dieser Kategorie verschieben.</string>
     <string name="shared_string_items">Elemente</string>
@@ -3665,7 +3665,62 @@ Lon %2$s</string>
     <string name="lang_ce">Tschetschenisch</string>
     <string name="lang_bar">Bairisch</string>
     <string name="lang_ba">Baschkirisch</string>
-    <string name="main_actions_descr">Die Hauptaktionen enthalten nur 4 Schaltflächen.</string>
-    <string name="additional_actions_descr">Sie können auf diese Aktionen zugreifen, indem Sie auf die Schaltfläche „Aktionen“ tippen.</string>
+    <string name="main_actions_descr">Hauptaktionen enthalten nur 4 Schaltflächen.</string>
     <string name="select_wikipedia_article_langs">Wählen Sie die Sprachen aus, in denen Wikipedia-Artikel auf der Karte erscheinen sollen. Sie können zwischen allen verfügbaren Sprachen wechseln, während Sie den Artikel lesen.</string>
+    <string name="hidden_items_descr">Diese Elemente werden aus dem Menü ausgeblendet, aber die entsprechenden Optionen oder Plugins funktionieren weiterhin.</string>
+    <string name="reorder_or_hide_from">Ordnen Sie Elemente aus %1$s neu an oder blenden Sie sie aus.</string>
+    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
+    <string name="osm_live_payment_subscription_management">Ihr Google Play-Konto wird beim Kauf eines Abonnements belastet,
+\nund wenn es abläuft (nach einem Monat, drei Monaten oder einem Jahr)
+\nverlängert es sich nicht von selbst, wenn es vorher in Ihren Google Play-Einstellungen gekündigt wurde.</string>
+    <string name="search_poi_types">Suche nach POI-Typen</string>
+    <string name="search_poi_types_descr">Kombinieren Sie POI-Typen aus verschiedenen Kategorien. Tippen Sie auf \"Wechseln\", um alle auszuwählen, tippen Sie auf die linke Seite für die Kategorieauswahl.</string>
+    <string name="shared_string_divider">Trenner</string>
+    <string name="quick_action_item">Schnellaktion</string>
+    <string name="radius_ruler_item">Zirkel</string>
+    <string name="measure_distance_item">Entfernungsmesser</string>
+    <string name="map_markers_item">Kartenmarkierungen</string>
+    <string name="favorites_item">Favoriten</string>
+    <string name="divider_descr">Elemente unterhalb dieses Punktes werden durch einen Trenner getrennt.</string>
+    <string name="tracker_item">OsmAnd Tracker</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="travel_item">Reisen (Wikivoyage und Wikipedia)</string>
+    <string name="subscription_osmandlive_item">Abonnement - OsmAnd Live</string>
+    <string name="osmand_purchases_item">OsmAnd Einkäufe</string>
+    <string name="legend_item_description">Der Leitfaden zur Symbolik einer Karte</string>
+    <string name="navigation_profiles_item">Navigationsprofile</string>
+    <string name="release_3_7">• Neue Offline-Steigungskarten
+\n
+\n• Vollständige Anpassung von Favoriten und GPX-Wegpunkten - benutzerdefinierte Farben, Symbole, Formen
+\n
+\n• Anpassen der Reihenfolge der Elemente im Kontextmenü, Karte konfigurieren, Schublade
+\n
+\n• Wikipedia als separate Ebene in Karte konfigurieren, nur benötigte Sprachen auswählen
+\n
+\n• Erstellen Sie Ihre eigenen POI-Filter/Karten mit absoluter Flexibilität
+\n
+\n• Optionen zur Wiederherstellung von Einstellungen für benutzerdefinierte Profile hinzugefügt
+\n
+\n• Vollständige GPX-Routen aus der Navigation unterstützen Verkehrsspuren und vollständige Abbiegeanweisungen
+\n
+\n• Größe der Bedienoberfläche auf Tablets verbessert
+\n
+\n• Fehler mit RTL behoben
+\n
+\n</string>
+    <string name="shared_string_resume">Fortfahren</string>
+    <string name="additional_actions_descr">Sie können auf diese Aktionen zugreifen, indem Sie auf die Schaltfläche \"%1$s\" tippen.</string>
+    <string name="quick_action_transport_hide">Öffentliche Verkehrsmittel ausblenden</string>
+    <string name="quick_action_transport_show">Öffentliche Verkehrsmittel anzeigen</string>
+    <string name="quick_action_show_hide_transport">Öffentliche Verkehrsmittel anzeigen/ausblenden</string>
+    <string name="quick_action_transport_descr">Eine Schaltfläche zum Ein- oder Ausblenden der öffentlichen Verkehrsmittel auf der Karte.</string>
+    <string name="create_edit_poi">POI erstellen/bearbeiten</string>
+    <string name="parking_positions">Parkpositionen</string>
+    <string name="add_edit_favorite">Favorit hinzufügen / bearbeiten</string>
+    <string name="reset_deafult_order">Standard-Reihenfolge der Elemente wiederherstellen</string>
+    <string name="back_to_editing">Zurück zur Bearbeitung</string>
+    <string name="quick_action_switch_profile_descr">Durch Antippen der Aktionsschaltfläche können Sie zwischen den ausgewählten Profilen wechseln.</string>
+    <string name="shared_string_add_profile">Profil hinzufügen</string>
+    <string name="change_application_profile">Anwendungsprofil ändern</string>
+    <string name="profiles_for_action_not_found">Für diese Aktion ausgewählte Profile nicht gefunden.</string>
 </resources>

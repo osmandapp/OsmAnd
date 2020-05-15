@@ -226,13 +226,14 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 			}
 			if (!favorite.getCategory().isEmpty()) {
 				giImage.setVisibility(View.VISIBLE);
-				giImage.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_small_group));
+				giImage.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_group_name_16));
 			} else {
 				giImage.setVisibility(View.GONE);
 			}
 			((TextView) row.findViewById(R.id.group_name)).setText(favorite.getCategory());
 
-			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(activity, favorite.getColor(), false, favorite));
+			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(activity, app.getFavorites().getColorWithCategory(favorite,
+					app.getResources().getColor(R.color.color_favorite)), false, favorite));
 			 
 			app.getUIUtilities().updateLocationView(cache, direction, distanceText, 
 					favorite.getLatitude(), favorite.getLongitude());

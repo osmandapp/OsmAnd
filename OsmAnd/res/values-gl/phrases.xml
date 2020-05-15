@@ -434,7 +434,7 @@
     <string name="poi_railway_station">Estación de trens</string>
     <string name="poi_ferry_terminal">Terminal dos ferris</string>
     <string name="poi_observation_tower">Atalaia</string>
-    <string name="poi_bell_tower">Campanario</string>
+    <string name="poi_bell_tower">Campanil</string>
     <string name="poi_recycling_centre">Centro de reciclaxe</string>
     <string name="poi_recycling_glass">Vidro</string>
     <string name="poi_recycling_container">Contedor</string>
@@ -1019,7 +1019,7 @@
     <string name="poi_self_service">Auto-servizo</string>
     <string name="poi_automated">Automatizado</string>
     <string name="poi_parking_type">Tipo de aparcadoiro</string>
-    <string name="poi_covered">Coberto</string>
+    <string name="poi_covered">Cuberto</string>
     <string name="poi_subway_station_filter">Estación de metro</string>
     <string name="poi_ferry_terminal_cargo">Carga</string>
     <string name="poi_bicycle_parking_type">Tipo de aparcadoiro</string>
@@ -1278,7 +1278,7 @@
     <string name="poi_information_tactile_model">Modelo táctil</string>
     <string name="poi_covered_yes">Si</string>
     <string name="poi_fireplace_no">Sen lareira</string>
-    <string name="poi_covered_no">Descoberto</string>
+    <string name="poi_covered_no">Descuberto</string>
     <string name="poi_tactile_paving_yes">Si</string>
     <string name="poi_railway_level_crossing">Pasaxe a nivel</string>
     <string name="poi_horse_riding">Equitación</string>
@@ -2154,7 +2154,7 @@
     <string name="poi_male_no">Prohibido para homes</string>
     <string name="poi_female_yes">Mulleres</string>
     <string name="poi_female_no">Prohibido para mulleres</string>
-    <string name="poi_indoor_yes">Coberto</string>
+    <string name="poi_indoor_yes">Cuberto</string>
     <string name="poi_diaper_table_count">Cambiadoiro de cueiros</string>
     <string name="poi_diaper_yes">Con cambiadoiro de cueiros</string>
     <string name="poi_diaper_no">Sen cambiadoiro de cueiros</string>
@@ -3798,4 +3798,17 @@
     <string name="poi_tactile_paving_contrasted">Contrastado</string>
     <string name="poi_tactile_paving_primitive">Primitivo</string>
     <string name="poi_tactile_paving_incorrect">Incorrecto</string>
+    <string name="poi_drinking_water_refill_network">Rede de recarga de auga potábel</string>
+    <string name="poi_drinking_water_refill_no">Recarga de auga potábel: non</string>
+    <string name="poi_drinking_water_refill_yes">Recarga de auga potábel: si</string>
+    <string name="poi_seamark_obstruction">Obstrución</string>
+    <string name="poi_seamark_water_level_below_mwl">Nivel da auga: por debaixo do nivel medio da auga</string>
+    <string name="poi_seamark_water_level_above_mwl">Nivel da auga: por encima do nivel medio da auga</string>
+    <string name="poi_seamark_water_level_floating">Nivel da auga: flotante</string>
+    <string name="poi_seamark_water_level_floods">Nivel da auga: inundacións</string>
+    <string name="poi_seamark_water_level_awash">Nivel da auga: inundado</string>
+    <string name="poi_seamark_water_level_covers">Nivel da auga: cuberto</string>
+    <string name="poi_seamark_water_level_dry">Nivel da auga: seco</string>
+    <string name="poi_seamark_water_level_submerged">Nivel da auga: somerxido</string>
+    <string name="poi_seamark_water_level_part_submerged">Nivel da auga: parcialmente somerxido</string>
 </resources>

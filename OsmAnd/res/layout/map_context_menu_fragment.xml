@@ -65,12 +65,12 @@
 
                 </LinearLayout>
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/context_menu_icon_view"
                     android:layout_width="@dimen/map_widget_icon"
                     android:layout_height="@dimen/map_widget_icon"
                     android:layout_marginTop="@dimen/context_menu_padding_margin_default"
-                    android:src="@drawable/ic_action_building_number"/>
+                    osmand:srcCompat="@drawable/ic_action_building_number"/>
 
             </LinearLayout>
 
@@ -192,7 +192,7 @@
                             osmand:typeface="@string/font_roboto_medium"
                             tools:text="Some really long string"/>
 
-                        <ImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/additional_info_image_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -202,13 +202,14 @@
                             android:paddingTop="1dp"
                             tools:src="@drawable/ic_action_opening_hour_16" />
 
-                        <TextView
-                            android:id="@+id/additional_info_text_view"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/context_menu_padding_margin_small"
-                            android:layout_marginRight="@dimen/context_menu_padding_margin_small"
-                            tools:text="Closed till 10:00"/>
+	                    <TextView
+		                    android:id="@+id/additional_info_text_view"
+		                    android:layout_width="0dp"
+		                    android:layout_height="wrap_content"
+		                    android:layout_marginEnd="@dimen/context_menu_padding_margin_small"
+		                    android:layout_marginRight="@dimen/context_menu_padding_margin_small"
+		                    android:layout_weight="1"
+		                    tools:text="Closed till 10:00" />
 
                         <TextView
                             android:id="@+id/info_compass_separator"
@@ -227,7 +228,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
-                            <ImageView
+                            <androidx.appcompat.widget.AppCompatImageView
                                 android:id="@+id/direction"
                                 android:layout_width="@dimen/directionIconSize"
                                 android:layout_height="@dimen/directionIconSize"
@@ -389,7 +390,7 @@
 
                     </LinearLayout>
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/progressButton"
                         android:layout_width="@dimen/context_menu_progress_cancel_button_size"
                         android:layout_height="@dimen/context_menu_progress_cancel_button_size"
@@ -397,7 +398,7 @@
                         android:background="?attr/selectableItemBackground"
                         android:contentDescription="@string/shared_string_close"
                         android:scaleType="center"
-                        tools:src="@drawable/map_action_cancel"/>
+	                    tools:src="@drawable/ic_action_close" />
 
                 </LinearLayout>
 
@@ -513,14 +514,14 @@
             android:layout_height="match_parent"
             android:gravity="center">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@drawable/btn_circle_trans_flat"/>
 
         </LinearLayout>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/context_menu_top_back"
             android:layout_width="@dimen/list_item_height"
             android:layout_height="match_parent"
@@ -528,7 +529,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/shared_string_collapse"
             android:scaleType="center"
-            android:src="@drawable/ic_arrow_back"
+            osmand:srcCompat="@drawable/ic_arrow_back"
             tools:visibility="visible"/>
 
     </FrameLayout>
@@ -548,7 +549,9 @@
             android:layout_height="@dimen/dashboard_map_toolbar"
             android:background="@color/app_bar_color_light"
             app:contentInsetLeft="4dp"
-            app:contentInsetStart="4dp">
+            app:contentInsetStart="4dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetEnd="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -556,14 +559,14 @@
                 android:gravity="center_vertical|start"
                 android:orientation="horizontal">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/context_menu_toolbar_back"
                     android:layout_width="@dimen/list_item_height"
                     android:layout_height="match_parent"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/shared_string_collapse"
                     android:scaleType="center"
-                    android:src="@drawable/ic_arrow_back"
+                    osmand:srcCompat="@drawable/ic_arrow_back"
                     tools:visibility="visible"/>
 
                 <TextView
@@ -610,7 +613,7 @@
                 android:layout_height="@dimen/map_button_size"
                 android:background="@drawable/btn_circle"
                 android:contentDescription="@string/zoomIn"
-                tools:src="@drawable/ic_action_test_light"/>
+                tools:src="@drawable/ic_action_remove_dark"/>
 
             <ImageButton
                 android:id="@+id/context_menu_zoom_out_button"
@@ -619,7 +622,7 @@
                 android:layout_marginTop="@dimen/map_button_spacing"
                 android:background="@drawable/btn_circle"
                 android:contentDescription="@string/zoomOut"
-                tools:src="@drawable/ic_action_test_light"/>
+                tools:src="@drawable/ic_action_remove_dark"/>
         </LinearLayout>
 
     </FrameLayout>

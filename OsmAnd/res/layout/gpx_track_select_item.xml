@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -7,7 +8,7 @@
 	android:background="?attr/selectableItemBackground"
 	android:orientation="horizontal">
 
-	<ImageView
+	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/icon"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
@@ -16,7 +17,7 @@
 		android:layout_marginEnd="@dimen/list_content_padding"
 		android:layout_marginRight="@dimen/list_content_padding"
 		android:layout_gravity="center_vertical"
-		android:src="@drawable/ic_action_polygom_dark"
+		osmand:srcCompat="@drawable/ic_action_polygom_dark"
 		android:visibility="visible"
 		android:contentDescription="@string/shared_string_icon" />
 
@@ -51,13 +52,13 @@
 			android:orientation="horizontal"
 			android:visibility="visible">
 
-			<ImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/distance_icon"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginEnd="@dimen/content_padding_half"
 				android:layout_marginRight="@dimen/content_padding_half"
-				android:src="@drawable/ic_action_distance_16"
+				osmand:srcCompat="@drawable/ic_action_distance_16"
 				android:contentDescription="@string/distance" />
 
 			<TextView
@@ -69,13 +70,13 @@
 				android:textColor="?android:textColorSecondary"
 				android:textSize="@dimen/default_desc_text_size" />
 
-			<ImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/points_icon"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginEnd="@dimen/content_padding_half"
 				android:layout_marginRight="@dimen/content_padding_half"
-				android:src="@drawable/ic_action_waypoint_16"
+				osmand:srcCompat="@drawable/ic_action_waypoint_16"
 				android:contentDescription="@string/track_points" />
 
 			<TextView
@@ -88,13 +89,13 @@
 				android:textSize="@dimen/default_desc_text_size"
 				tools:text="0" />
 
-			<ImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/time_icon"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginEnd="@dimen/content_padding_half"
 				android:layout_marginRight="@dimen/content_padding_half"
-				android:src="@drawable/ic_action_time_16"
+				osmand:srcCompat="@drawable/ic_action_time_16"
 				android:contentDescription="@string/shared_string_time_moving" />
 
 			<TextView

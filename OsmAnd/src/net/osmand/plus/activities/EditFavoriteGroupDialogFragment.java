@@ -179,7 +179,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 			final boolean synced = markersGr != null;
 
 			BaseBottomSheetItem markersGroupItem = new SimpleBottomSheetItem.Builder()
-					.setIcon(getContentIcon(synced ? R.drawable.ic_action_delete_dark : R.drawable.ic_action_flag_dark))
+					.setIcon(getContentIcon(synced ? R.drawable.ic_action_delete_dark : R.drawable.ic_action_flag))
 					.setTitle(getString(synced ? R.string.remove_from_map_markers : R.string.shared_string_add_to_map_markers))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
 					.setOnClickListener(new View.OnClickListener() {

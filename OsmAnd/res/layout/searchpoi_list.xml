@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
@@ -12,7 +13,7 @@
 	android:paddingEnd="@dimen/list_content_padding"
 	android:paddingStart="@dimen/list_content_padding">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/poi_icon"
         android:layout_width="@dimen/standard_icon_size"
         android:layout_height="@dimen/standard_icon_size"
@@ -47,13 +48,13 @@
             android:layout_marginBottom="4dp"
             android:orientation="horizontal" >
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/poi_direction"
                 android:layout_width="@dimen/directionIconSize"
                 android:layout_height="@dimen/directionIconSize"
                 android:layout_marginTop="1sp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_direction_arrow"
+                osmand:srcCompat="@drawable/ic_direction_arrow"
                 tools:visiblity="visible" />
 
             <TextView
@@ -67,13 +68,13 @@
                 tools:text="300 km"
 	            android:layout_marginEnd="@dimen/gpx_small_text_margin" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/time_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="@dimen/gpx_small_icon_margin"
-                android:src="@drawable/ic_small_time"
+                osmand:srcCompat="@drawable/ic_action_time_16"
 	            android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
 
             <TextView

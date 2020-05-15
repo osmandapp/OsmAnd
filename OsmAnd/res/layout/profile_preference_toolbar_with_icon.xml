@@ -7,7 +7,9 @@
     android:background="?attr/actionModeBackground"
     android:minHeight="@dimen/toolbar_height"
     osmand:contentInsetLeft="0dp"
-    osmand:contentInsetStart="0dp">
+    osmand:contentInsetStart="0dp"
+    osmand:contentInsetRight="0dp"
+    osmand:contentInsetEnd="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +23,7 @@
             android:layout_width="@dimen/toolbar_height"
             android:layout_height="@dimen/toolbar_height"
             android:contentDescription="@string/access_shared_string_navigate_up"
-            android:src="@drawable/ic_action_mode_back"
+            osmand:srcCompat="@drawable/ic_arrow_back"
             android:tint="?attr/app_bar_primary_item_color"/>
 
         <LinearLayout

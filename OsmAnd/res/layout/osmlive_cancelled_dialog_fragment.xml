@@ -30,18 +30,18 @@
                     android:layout_width="@dimen/standard_icon_size"
                     android:layout_height="@dimen/standard_icon_size"
                     android:background="?attr/circle_dialog_bg"
-                    android:src="@drawable/ic_action_remove_small"
+                    osmand:srcCompat="@drawable/ic_action_remove_small"
                     android:tint="@color/icon_color_default_light"/>
 
             </FrameLayout>
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/title_padding"
                 android:layout_marginTop="@dimen/list_header_padding"
-                android:src="@drawable/img_help_osmand_live"/>
+                osmand:srcCompat="@drawable/img_help_osmand_live"/>
 
         </FrameLayout>
 

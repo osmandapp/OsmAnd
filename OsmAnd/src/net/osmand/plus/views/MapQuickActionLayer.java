@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.annotation.DimenRes;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
@@ -111,7 +112,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
         Context context = view.getContext();
         contextMarker = new ImageView(context);
         contextMarker.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT));
-        contextMarker.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.map_pin_context_menu));
+        contextMarker.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.map_pin_context_menu));
         contextMarker.setClickable(true);
         int minw = contextMarker.getDrawable().getMinimumWidth();
         int minh = contextMarker.getDrawable().getMinimumHeight();
@@ -282,7 +283,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 
 	private void updateQuickActionButton(boolean widgetVisible) {
 		quickActionButton.setImageDrawable(app.getUIUtilities().getMapIcon(
-				!widgetVisible ? R.drawable.map_quick_action : R.drawable.map_action_cancel, !nightMode));
+                !widgetVisible ? R.drawable.map_quick_action : R.drawable.ic_action_close, !nightMode));
 		quickActionButton.setBackgroundResource(
 				nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle_trans);
 		quickActionButton.setContentDescription(mapActivity.getString(!widgetVisible ? R.string.configure_screen_quick_action : R.string.shared_string_cancel));

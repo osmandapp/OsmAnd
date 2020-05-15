@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+ xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
@@ -20,7 +21,7 @@
 		android:layout_marginTop="10dp"
 		android:orientation="horizontal">
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center"
@@ -28,7 +29,7 @@
 			android:scaleType="center"
 			android:layout_marginLeft="@dimen/dashFavIconMargin"
 			android:layout_marginRight="@dimen/dashFavIconMargin"
-			android:src="@drawable/ic_action_remove_dark"
+			osmand:srcCompat="@drawable/ic_action_remove_dark"
 			android:layout_marginEnd="@dimen/dashFavIconMargin"
 			android:layout_marginStart="@dimen/dashFavIconMargin" />
 

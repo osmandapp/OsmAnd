@@ -56,7 +56,7 @@
                     android:gravity="start|center_vertical"
 	                android:layout_marginStart="12dp">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/leftButtonIcon"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
@@ -94,7 +94,7 @@
                     android:layout_gravity="center_vertical"
                     android:gravity="center">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/centerButtonIcon"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
@@ -134,7 +134,7 @@
                     android:layout_gravity="center_vertical"
                     android:gravity="center">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/rightButtonIcon"
                         android:layout_width="24dp"
                         android:layout_height="24dp"

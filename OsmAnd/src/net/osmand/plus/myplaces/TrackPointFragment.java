@@ -399,9 +399,9 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 				final MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 				final boolean synced = markersHelper.getMarkersGroup(getGpx()) != null;
 				createMenuItem(menu, SELECT_MAP_MARKERS_ID, synced ? R.string.remove_from_map_markers
-								: R.string.shared_string_add_to_map_markers, R.drawable.ic_action_flag_dark, MenuItem.SHOW_AS_ACTION_NEVER);
+								: R.string.shared_string_add_to_map_markers, R.drawable.ic_action_flag, MenuItem.SHOW_AS_ACTION_NEVER);
 			}
-			createMenuItem(menu, SELECT_FAVORITES_ID, R.string.shared_string_add_to_favorites, R.drawable.ic_action_fav_dark, MenuItem.SHOW_AS_ACTION_NEVER);
+			createMenuItem(menu, SELECT_FAVORITES_ID, R.string.shared_string_add_to_favorites, R.drawable.ic_action_favorite, MenuItem.SHOW_AS_ACTION_NEVER);
 			createMenuItem(menu, DELETE_ID, R.string.shared_string_delete, R.drawable.ic_action_delete_dark, MenuItem.SHOW_AS_ACTION_NEVER);
 			createMenuItem(menu, COORDINATE_INPUT_ID, R.string.coordinate_input, R.drawable.ic_action_coordinates_longitude, MenuItem.SHOW_AS_ACTION_NEVER);
 		}
@@ -566,7 +566,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 				setSelectionMode(true);
 				createMenuItem(menu, SELECT_FAVORITES_ACTION_MODE_ID, R.string.shared_string_add_to_favorites,
-						R.drawable.ic_action_fav_dark,
+						R.drawable.ic_action_favorite,
 						MenuItem.SHOW_AS_ACTION_IF_ROOM);
 				selectedItems.clear();
 				selectedGroups.clear();

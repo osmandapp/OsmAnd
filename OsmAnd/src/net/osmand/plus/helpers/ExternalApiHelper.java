@@ -12,6 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
@@ -36,6 +39,8 @@ import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
@@ -51,8 +56,10 @@ import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import static net.osmand.search.core.ObjectType.CITY;
@@ -96,6 +103,9 @@ public class ExternalApiHelper {
 	public static final String API_CMD_SAVE_GPX = "save_gpx";
 	public static final String API_CMD_CLEAR_GPX = "clear_gpx";
 
+	public static final String API_CMD_EXECUTE_QUICK_ACTION = "execute_quick_action";
+	public static final String API_CMD_GET_QUICK_ACTION_INFO = "get_quick_action_info";
+
 	public static final String API_CMD_SUBSCRIBE_VOICE_NOTIFICATIONS = "subscribe_voice_notifications";
 	public static final int VERSION_CODE = 1;
 
@@ -105,6 +115,8 @@ public class ExternalApiHelper {
 	public static final String PARAM_CATEGORY = "category";
 	public static final String PARAM_LAT = "lat";
 	public static final String PARAM_LON = "lon";
+	public static final String PARAM_MAP_LAT = "map_lat";
+	public static final String PARAM_MAP_LON = "map_lon";
 	public static final String PARAM_COLOR = "color";
 	public static final String PARAM_VISIBLE = "visible";
 
@@ -137,6 +149,10 @@ public class ExternalApiHelper {
 
 	public static final String PARAM_CLOSE_AFTER_COMMAND = "close_after_command";
 
+	public static final String PARAM_QUICK_ACTION_NAME = "quick_action_name";
+	public static final String PARAM_QUICK_ACTION_TYPE = "quick_action_type";
+	public static final String PARAM_QUICK_ACTION_PARAMS = "quick_action_params";
+	public static final String PARAM_QUICK_ACTION_NUMBER = "quick_action_number";
 
 	public static final ApplicationMode[] VALID_PROFILES = new ApplicationMode[]{
 			ApplicationMode.CAR,
@@ -157,6 +173,7 @@ public class ExternalApiHelper {
 	public static final int RESULT_CODE_ERROR_INVALID_PROFILE = 1005;
 	public static final int RESULT_CODE_ERROR_EMPTY_SEARCH_QUERY = 1006;
 	public static final int RESULT_CODE_ERROR_SEARCH_LOCATION_UNDEFINED = 1007;
+	public static final int RESULT_CODE_ERROR_QUICK_ACTION_NOT_FOUND = 1008;
 
 	private MapActivity mapActivity;
 	private int resultCode;
@@ -445,6 +462,12 @@ public class ExternalApiHelper {
 					result.putExtra(PARAM_LON, location.getLongitude());
 				}
 
+				LatLon mapLocation = mapActivity.getMapLocation();
+				if (location != null) {
+					result.putExtra(PARAM_MAP_LAT, mapLocation.getLatitude());
+					result.putExtra(PARAM_MAP_LON, mapLocation.getLongitude());
+				}
+
 				final RoutingHelper routingHelper = app.getRoutingHelper();
 				if (routingHelper.isRouteCalculated()) {
 					int time = routingHelper.getLeftTime();
@@ -581,6 +604,40 @@ public class ExternalApiHelper {
 					finish = true;
 				}
 				resultCode = Activity.RESULT_OK;
+			} else if (API_CMD_EXECUTE_QUICK_ACTION.equals(cmd)) {
+				int actionNumber = Integer.parseInt(uri.getQueryParameter(PARAM_QUICK_ACTION_NUMBER));
+				List<QuickAction> actionsList = app.getQuickActionRegistry().getFilteredQuickActions();
+				if (actionNumber >= 0 && actionNumber < actionsList.size()) {
+					QuickActionRegistry.produceAction(actionsList.get(actionNumber)).execute(mapActivity);
+					resultCode = Activity.RESULT_OK;
+				} else {
+					resultCode = RESULT_CODE_ERROR_QUICK_ACTION_NOT_FOUND;
+				}
+				if (uri.getBooleanQueryParameter(PARAM_CLOSE_AFTER_COMMAND, true)) {
+					finish = true;
+				}
+			} else if (API_CMD_GET_QUICK_ACTION_INFO.equals(cmd)) {
+				int actionNumber = Integer.parseInt(uri.getQueryParameter(PARAM_QUICK_ACTION_NUMBER));
+				List<QuickAction> actionsList = app.getQuickActionRegistry().getFilteredQuickActions();
+				if (actionNumber >= 0 && actionNumber < actionsList.size()) {
+					QuickAction action = actionsList.get(actionNumber);
+
+					Gson gson = new Gson();
+					Type type = new TypeToken<HashMap<String, String>>() {
+					}.getType();
+
+					result.putExtra(PARAM_QUICK_ACTION_NAME, action.getName(app));
+					result.putExtra(PARAM_QUICK_ACTION_TYPE, action.getActionType().getStringId());
+					result.putExtra(PARAM_QUICK_ACTION_PARAMS, gson.toJson(action.getParams(), type));
+					result.putExtra(PARAM_VERSION, VERSION_CODE);
+
+					resultCode = Activity.RESULT_OK;
+				} else {
+					resultCode = RESULT_CODE_ERROR_QUICK_ACTION_NOT_FOUND;
+				}
+				if (uri.getBooleanQueryParameter(PARAM_CLOSE_AFTER_COMMAND, true)) {
+					finish = true;
+				}
 			} else if (API_CMD_SUBSCRIBE_VOICE_NOTIFICATIONS.equals(cmd)) {
 				// not implemented yet
 				resultCode = RESULT_CODE_ERROR_NOT_IMPLEMENTED;

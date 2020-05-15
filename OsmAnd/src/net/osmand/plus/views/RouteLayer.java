@@ -11,11 +11,13 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.util.Pair;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
@@ -145,7 +147,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		wayContext = new GeometryWayContext(view.getContext(), density);
 
 		paintIconSelected = new Paint();
-		selectedPoint = (LayerDrawable) view.getResources().getDrawable(R.drawable.map_location_default);
+		selectedPoint = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), R.drawable.map_location_default);
 
 		paintGridCircle = new Paint();
 		paintGridCircle.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -322,7 +324,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 	private void drawProjectionPoint(Canvas canvas, double[] projectionXY) {
 		if (projectionIcon == null) {
 			helper.getSettings().getApplicationMode().getLocationIcon();
-			projectionIcon = (LayerDrawable) view.getResources().getDrawable(LocationIcon.DEFAULT.getIconId());
+			projectionIcon = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), LocationIcon.DEFAULT.getIconId());
 		}
 		int locationX = (int) projectionXY[0];
 		int locationY = (int) projectionXY[1];
@@ -559,7 +561,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 	private static class GeometryTransportWayStyle extends GeometryWayStyle {
 
 		private TransportRouteResultSegment segment;
-		private Bitmap stopBitmap;
+		private Drawable stopDrawable;
 		protected Integer pointColor;
 
 		GeometryTransportWayStyle(GeometryWayContext context, TransportRouteResultSegment segment) {
@@ -579,7 +581,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 				type = TransportStopType.findType("bus");
 			}
 			if (type != null) {
-				stopBitmap = RenderingIcons.getIcon(getCtx(), type.getResName(), false);
+				stopDrawable = RenderingIcons.getDrawableIcon(getCtx(), type.getResName(), false);
 			}
 		}
 
@@ -607,7 +609,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		}
 
 		public Bitmap getStopBitmap() {
-			return getContext().getStopShieldBitmap(color, stopBitmap);
+			return getContext().getStopShieldBitmap(color, stopDrawable);
 		}
 
 		public Bitmap getStopSmallBitmap() {

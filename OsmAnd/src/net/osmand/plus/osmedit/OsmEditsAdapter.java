@@ -1,5 +1,6 @@
 package net.osmand.plus.osmedit;
 
+import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
@@ -22,6 +23,7 @@ import androidx.core.content.ContextCompat;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.render.RenderingIcons;
 
 import java.util.List;
@@ -71,14 +73,16 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 	@NonNull
 	@Override
 	public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+		boolean nightMode = !app.getSettings().isLightContent();
+		Context themedCtx = UiUtilities.getThemedContext(getContext(), nightMode);
 		if (portrait) {
 			if (convertView == null) {
 				if (position == 0) {
-					convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_header, parent, false);
+					convertView = LayoutInflater.from(themedCtx).inflate(R.layout.list_item_header, parent, false);
 					HeaderViewHolder holder = new HeaderViewHolder(convertView);
 					convertView.setTag(holder);
 				} else {
-					convertView = LayoutInflater.from(getContext()).inflate(R.layout.note_list_item, parent, false);
+					convertView = LayoutInflater.from(themedCtx).inflate(R.layout.note_list_item, parent, false);
 					OsmEditViewHolder holder = new OsmEditViewHolder(convertView);
 					convertView.setTag(holder);
 				}
@@ -98,21 +102,21 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 			int margin = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
 			int sideMargin = app.getResources().getDisplayMetrics().widthPixels / 10;
 
-			FrameLayout fl = new FrameLayout(getContext());
-			LinearLayout ll = new LinearLayout(getContext());
+			FrameLayout fl = new FrameLayout(themedCtx);
+			LinearLayout ll = new LinearLayout(themedCtx);
 			ll.setOrientation(LinearLayout.VERTICAL);
 			ll.setBackgroundResource(app.getSettings().isLightContent() ? R.drawable.bg_card_light : R.drawable.bg_card_dark);
 			fl.addView(ll);
 			((FrameLayout.LayoutParams) ll.getLayoutParams()).setMargins(sideMargin, margin, sideMargin, margin);
 
-			HeaderViewHolder headerViewHolder = new HeaderViewHolder(LayoutInflater.from(getContext()).inflate(R.layout.list_item_header, parent, false));
+			HeaderViewHolder headerViewHolder = new HeaderViewHolder(LayoutInflater.from(themedCtx).inflate(R.layout.list_item_header, parent, false));
 			bindHeaderViewHolder(headerViewHolder);
 			ll.addView(headerViewHolder.mainView);
 
 			for (int i = 0; i < items.size(); i++) {
 				Object item = getItem(i);
 				if (item instanceof OsmPoint) {
-					OsmEditViewHolder viewHolder = new OsmEditViewHolder(LayoutInflater.from(getContext()).inflate(R.layout.note_list_item, parent, false));
+					OsmEditViewHolder viewHolder = new OsmEditViewHolder(LayoutInflater.from(themedCtx).inflate(R.layout.note_list_item, parent, false));
 					bindOsmEditViewHolder(viewHolder, (OsmPoint) item, i);
 					ll.addView(viewHolder.mainView);
 				}
@@ -269,7 +273,7 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 				}
 			}
 			if (iconResId == 0) {
-				iconResId = R.drawable.ic_type_info;
+				iconResId = R.drawable.ic_action_info_dark;
 			}
 			int colorResId = R.color.color_distance;
 			if (point.getAction() == OsmPoint.Action.CREATE) {
@@ -283,7 +287,7 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 			}
 			return app.getUIUtilities().getIcon(iconResId, colorResId);
 		} else if (point.getGroup() == OsmPoint.Group.BUG) {
-			return app.getUIUtilities().getIcon(R.drawable.ic_type_bug, R.color.color_distance);
+			return app.getUIUtilities().getIcon(R.drawable.ic_action_bug_dark, R.color.color_distance);
 		}
 		return null;
 	}

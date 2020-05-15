@@ -50,6 +50,8 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
     public static final String TAG = QuickActionListFragment.class.getSimpleName();
 
+    public static final String FROM_DASHBOARD_KEY = "from_dashboard";
+
     private RecyclerView quickActionRV;
     private FloatingActionButton fab;
 
@@ -57,7 +59,16 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
     private ItemTouchHelper touchHelper;
     private QuickActionRegistry quickActionRegistry;
 
+    private boolean fromDashboard;
     private boolean isLightContent;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            fromDashboard = savedInstanceState.getBoolean(FROM_DASHBOARD_KEY, false);
+        }
+    }
 
     @Nullable
     @Override
@@ -152,6 +163,12 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
         getMapActivity().enableDrawer();
         quickActionRegistry.setUpdatesListener(null);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(FROM_DASHBOARD_KEY, fromDashboard);
     }
 
     @Override
@@ -403,7 +420,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
                 closeBtn = (ImageView) itemView.findViewById(R.id.closeImageButton);
                 container = itemView.findViewById(R.id.searchListItemLayout);
 
-                handleView.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_reorder));
+                handleView.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_item_move));
                 closeBtn.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_remove_dark));
             }
         }
@@ -422,6 +439,14 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 		        return true;
 	        }
         }
+    }
+
+    public boolean fromDashboard() {
+        return fromDashboard;
+    }
+
+    public void setFromDashboard(boolean fromDashboard) {
+        this.fromDashboard = fromDashboard;
     }
 
     public interface OnStartDragListener {

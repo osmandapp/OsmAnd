@@ -54,7 +54,6 @@ public interface OsmAndCustomizationConstants {
 	String ROAD_STYLE_ID = RENDERING_ITEMS_ID_SCHEME + "road_style";
 	String TEXT_SIZE_ID = RENDERING_ITEMS_ID_SCHEME + "text_size";
 	String MAP_LANGUAGE_ID = RENDERING_ITEMS_ID_SCHEME + "map_language";
-	String TRANSPORT_RENDERING_ID = RENDERING_ITEMS_ID_SCHEME + "transport";
 	String DETAILS_ID = RENDERING_ITEMS_ID_SCHEME + "details";
 	String HIDE_ID = RENDERING_ITEMS_ID_SCHEME + "hide";
 	String ROUTES_ID = RENDERING_ITEMS_ID_SCHEME + "routes";
@@ -91,6 +90,9 @@ public interface OsmAndCustomizationConstants {
 	String MAP_CONTEXT_MENU_CREATE_POI = MAP_CONTEXT_MENU_ACTIONS + "create_poi";
 	String MAP_CONTEXT_MENU_MODIFY_OSM_NOTE = MAP_CONTEXT_MENU_ACTIONS + "modify_osm_note";
 	String MAP_CONTEXT_MENU_OPEN_OSM_NOTE = MAP_CONTEXT_MENU_ACTIONS + "open_osm_note";
+	String MAP_CONTEXT_MENU_AUDIO_NOTE = MAP_CONTEXT_MENU_ACTIONS + "audio_note";
+	String MAP_CONTEXT_MENU_VIDEO_NOTE = MAP_CONTEXT_MENU_ACTIONS + "video_note";
+	String MAP_CONTEXT_MENU_PHOTO_NOTE = MAP_CONTEXT_MENU_ACTIONS + "photo_note";
 
 	//Plug-in's IDs:
 	String PLUGIN_OSMAND_MONITOR = "osmand.monitoring";

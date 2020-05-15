@@ -17,7 +17,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:layout_gravity="center_vertical"
-        tools:src="@drawable/ic_action_gabout_dark" />
+        tools:src="@drawable/ic_action_info_dark" />
 
     <TextView
         android:id="@+id/title"

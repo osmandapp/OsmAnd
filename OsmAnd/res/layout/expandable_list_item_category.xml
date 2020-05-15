@@ -9,7 +9,8 @@
     <LinearLayout
         android:id="@+id/group_divider"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?attr/activity_background_color">
 
         <include layout="@layout/list_item_divider"/>
 
@@ -35,7 +36,7 @@
             android:visibility="gone"
             tools:visiblity="visible"/>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/category_icon"
             android:layout_width="@dimen/standard_icon_size"
             android:layout_height="@dimen/standard_icon_size"
@@ -54,7 +55,7 @@
             tools:text="Category name"
             android:layout_marginStart="@dimen/card_content_padding_large" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/options"
             android:contentDescription="@string/shared_string_more"
             android:layout_width="46dp"
@@ -64,12 +65,12 @@
             android:background="?attr/dashboard_button"
             android:focusable="false"
             android:scaleType="center"
-            android:src="@drawable/ic_overflow_menu_white"
+            osmand:srcCompat="@drawable/ic_overflow_menu_white"
             android:visibility="gone"
             tools:visiblity="visible"
             android:layout_marginEnd="4dp" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/explist_indicator"
             android:layout_width="@dimen/context_menu_padding_margin_large"
             android:layout_height="match_parent"

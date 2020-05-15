@@ -99,6 +99,8 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 				R.string.navigation_item_description, "feature_articles/navigation.html"));
 		contextMenuAdapter.addItem(createItem(R.string.faq_item,
 				R.string.faq_item_description, "feature_articles/faq.html"));
+		contextMenuAdapter.addItem(createItem(R.string.map_legend,
+				R.string.legend_item_description, "feature_articles/map-legend.html"));
 	}
 
 	private void createSocialNetworksItems(ContextMenuAdapter contextMenuAdapter) {
@@ -127,8 +129,28 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 				"feature_articles/find-something-on-map.html"));
 		contextMenuAdapter.addItem(createItem(R.string.planning_trip_item, NULL_ID,
 				"feature_articles/trip-planning.html"));
-		contextMenuAdapter.addItem(createItem(R.string.map_legend, NULL_ID,
-				"feature_articles/map-legend.html"));
+		contextMenuAdapter.addItem(createItem(R.string.navigation_profiles_item, NULL_ID,
+				"feature_articles/navigation-profiles.html"));
+		contextMenuAdapter.addItem(createItem(R.string.osmand_purchases_item, NULL_ID,
+				"feature_articles/osmand_purchases.html"));
+		contextMenuAdapter.addItem(createItem(R.string.subscription_osmandlive_item, NULL_ID,
+				"feature_articles/subscription.html"));
+		contextMenuAdapter.addItem(createItem(R.string.favorites_item, NULL_ID,
+				"feature_articles/favourites.html"));
+		contextMenuAdapter.addItem(createItem(R.string.map_markers_item, NULL_ID,
+				"feature_articles/map-markers.html"));
+		contextMenuAdapter.addItem(createItem(R.string.travel_item, NULL_ID,
+				"feature_articles/travel.html"));
+		contextMenuAdapter.addItem(createItem(R.string.measure_distance_item, NULL_ID,
+				"feature_articles/measure-distance.html"));
+		contextMenuAdapter.addItem(createItem(R.string.radius_ruler_item, NULL_ID,
+				"feature_articles/ruler.html"));
+		contextMenuAdapter.addItem(createItem(R.string.quick_action_item, NULL_ID,
+				"feature_articles/quick-action.html"));
+		contextMenuAdapter.addItem(createItem(R.string.mapillary_item, NULL_ID,
+				"feature_articles/mapillary.html"));
+		contextMenuAdapter.addItem(createItem(R.string.tracker_item, NULL_ID,
+				"feature_articles/tracker.html"));
 	}
 
 	private void createPluginsItems(ContextMenuAdapter contextMenuAdapter) {

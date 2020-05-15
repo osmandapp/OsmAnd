@@ -8,9 +8,12 @@ import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.PointF;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.MotionEvent;
@@ -22,6 +25,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
@@ -259,7 +263,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void initTopControls() {
 		View configureMap = mapActivity.findViewById(R.id.map_layers_button);
-		layersHud = createHudButton(configureMap, R.drawable.map_world_globe_dark, LAYERS_HUD_ID)
+		layersHud = createHudButton(configureMap, R.drawable.ic_world_globe_dark, LAYERS_HUD_ID)
 				.setIconColorId(R.color.on_map_icon_color, 0)
 				.setBg(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
 		controls.add(layersHud);
@@ -790,7 +794,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		updateMyLocation(rh, routeDialogOpened || trackDialogOpened || contextMenuOpened);
 		boolean showButtons = (showRouteCalculationControls || !routeFollowingMode)
 				&& !isInMovingMarkerMode() && !isInGpxDetailsMode() && !isInMeasurementToolMode() && !isInPlanRouteMode() && !contextMenuOpened && !isInChoosingRoutesMode() && !isInWaypointsChoosingMode();
-		//routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_gabout_dark : R.drawable.map_directions);
+		//routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_info_dark : R.drawable.map_directions);
 		int routePlanningBtnImage = mapRouteInfoMenu.getRoutePlanningBtnImage();
 		if (routePlanningBtnImage != 0) {
 			routePlanningBtn.setIconResId(routePlanningBtnImage);
@@ -816,7 +820,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		compassHud.forceHideCompass = forceHideCompass;
 		compassHud.updateVisibility(!forceHideCompass && shouldShowCompass());
 
-		if (layersHud.setIconResId(settings.getApplicationMode().getMapIconRes())) {
+		ApplicationMode appMode = settings.getApplicationMode();
+		layersHud.setIconColorId(appMode.getIconColorInfo().getColor(isNight));
+		if (layersHud.setIconResId(appMode.getIconRes())) {
 			layersHud.update(app, isNight);
 		}
 		layersHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && !isInMeasurementToolMode() && !isInPlanRouteMode()
@@ -1143,10 +1149,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 			nightMode = night;
 			if (bgDark != 0 && bgLight != 0) {
 				if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-					iv.setBackground(ctx.getResources().getDrawable(night ? bgDark : bgLight,
-							mapActivity.getTheme()));
+					iv.setBackground(AppCompatResources.getDrawable(mapActivity, night ? bgDark : bgLight));
 				} else {
-					iv.setBackgroundDrawable(ctx.getResources().getDrawable(night ? bgDark : bgLight));
+					iv.setBackgroundDrawable(AppCompatResources.getDrawable(mapActivity, night ? bgDark : bgLight));
 				}
 			}
 			Drawable d = null;
@@ -1157,11 +1162,15 @@ public class MapControlsLayer extends OsmandMapLayer {
 			} else if (resId != 0) {
 				d = ctx.getUIUtilities().getIcon(resId, nightMode ? resClrDark : resClrLight);
 			}
-
 			if (iv instanceof ImageView) {
 				if (compass) {
 					((ImageView) iv).setImageDrawable(new CompassDrawable(d));
 				} else {
+					int btnSizePx = (iv).getLayoutParams().height;
+					int iconSizePx = (int) ctx.getResources().getDimension(R.dimen.map_widget_icon);
+					int iconPadding = (btnSizePx - iconSizePx) / 2;
+					iv.setPadding(iconPadding, iconPadding, iconPadding, iconPadding);
+					((ImageView) iv).setScaleType(ImageView.ScaleType.FIT_CENTER);
 					((ImageView) iv).setImageDrawable(d);
 				}
 			} else if (iv instanceof TextView) {
@@ -1169,7 +1178,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 						d, null, null, null);
 			}
 		}
-
 	}
 
 	private String getZoomLevel(@NonNull RotatedTileBox tb) {

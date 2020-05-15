@@ -271,11 +271,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 			public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsItem> items) {
 				if (succeed) {
 					app.getRendererRegistry().updateExternalRenderers();
-					AppInitializer.loadRoutingFiles(app, new AppInitializer.LoadRoutingFilesCallback() {
-						@Override
-						public void onRoutingFilesLoaded() {
-						}
-					});
+					AppInitializer.loadRoutingFiles(app, null);
 					FragmentManager fm = getFragmentManager();
 					if (fm != null && file != null) {
 						ImportCompleteFragment.showInstance(fm, items, file.getName());
@@ -287,7 +283,8 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 
 	private void setupToolbar(Toolbar toolbar) {
 		toolbar.setTitle(R.string.import_duplicates_title);
-		toolbar.setNavigationIcon(getPaintedContentIcon(R.drawable.ic_arrow_back,
+		toolbar.setNavigationIcon(getPaintedContentIcon(
+				AndroidUtils.getNavigationIconResId(app),
 				nightMode
 						? getResources().getColor(R.color.active_buttons_and_links_text_dark)
 						: getResources().getColor(R.color.active_buttons_and_links_text_light)));

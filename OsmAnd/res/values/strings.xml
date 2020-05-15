@@ -11,11 +11,46 @@
 	Thx - Hardy
 
 -->
+    <string name="profiles_for_action_not_found">Profiles selected for this action not found.</string>
+    <string name="change_application_profile">Change application profile</string>
+    <string name="shared_string_add_profile">Add profile</string>
+    <string name="quick_action_switch_profile_descr">Taping action button will switch between selected profiles.</string>
+    <string name="back_to_editing">Back to editing</string>
+    <string name="reset_deafult_order">Restore default items order</string>
+    <string name="add_edit_favorite">Add / Edit Favorite</string>
+    <string name="parking_positions">Parking positions</string>
+    <string name="create_edit_poi">Create/Edit POI</string>
+    <string name="quick_action_transport_descr">A button to show or hide public transport on the map.</string>
+    <string name="quick_action_show_hide_transport">Show/hide public transport</string>
+    <string name="quick_action_transport_show">Show public transport</string>
+    <string name="quick_action_transport_hide">Hide public transport</string>
+    <string name="release_3_7">
+    • New offline Slope maps\n\n
+    • Full customization of Favorites and GPX Waypoints – custom colors, icons, shapes\n\n
+    • Customize items order in Context Menu, Configure Map, Drawer\n\n
+    • Wikipedia as a separate layer in Configure map, select only needed languages\n\n
+    • Create your own POI filter/maps with total flexibility\n\n
+    • Added options to restore settings for custom profiles\n\n
+    • Full GPX routes from Navigation support traffic lanes and complete turn instructions\n\n
+    • Fix UI sizes on tablets\n\n
+    • Fix bugs with RTL\n\n</string>
+    <string name="navigation_profiles_item">Navigation profiles</string>
+    <string name="legend_item_description">The guide to a map\'s symbology</string>
+    <string name="osmand_purchases_item">OsmAnd purchases</string>
+    <string name="subscription_osmandlive_item">Subscription - OsmAnd Live</string>
+    <string name="favorites_item">Favorites</string>
+    <string name="map_markers_item">Map markers</string>
+    <string name="travel_item">Travel (Wikivoyage and Wikipedia)</string>
+    <string name="measure_distance_item">Measure distance</string>
+    <string name="radius_ruler_item">Radius ruler</string>
+    <string name="quick_action_item">Quick action</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="tracker_item">OsmAnd tracker</string>
     <string name="download_unsupported_action">Unsupported action %1$s</string>
     <string name="extra_maps_menu_group">Extra maps</string>
-    <string name="search_poi_types_descr">Combine POI types from different categories. Tap switch to select all, tap left side to category selection.</string>
-    <string name="search_poi_types">Search poi types</string>
-    <string name="osm_live_payment_subscription_management">Payment will be charged to your Google Play account at the confirmation of purchase.\n\nSubscription automatically renews unless it is canceled before the renewal date. Your account will be charged for renewal period(month/three month/year) only on the renewal date.\n\nYou can manage and cancel your subscriptions by going to your Google Play settings.</string>
+    <string name="search_poi_types_descr">Combine POI types from different categories. Tap \"Switch\" to select all, tap the left side for category selection.</string>
+    <string name="search_poi_types">Search for POI types</string>
+    <string name="osm_live_payment_subscription_management">Payment will be charged to your Google Play account at the confirmation of purchase.\n\n Subscription automatically renews unless it is canceled before the renewal date. Your account will be charged for renewal period(month/three month/year) only on the renewal date.\n\n You can manage and cancel your subscriptions by going to your Google Play settings.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="custom_color">Custom color</string>
     <string name="lang_lmo">Lombard</string>
@@ -46,16 +81,16 @@
     <string name="lang_zhminnan">Southern Min</string>
     <string name="lang_zhyue">Cantonese</string>
     <string name="some_articles_may_not_available_in_lang">Some Wikipedia articles may not be available in your language.</string>
-    <string name="select_wikipedia_article_langs">Select the languages ​​in which Wikipedia articles will appear on the map. You can switch between all available languages ​​while reading the article.</string>
+    <string name="select_wikipedia_article_langs">Select the languages ​​in which Wikipedia articles will appear on the map. You can switch between all available languages​​ while reading the article.</string>
     <string name="wiki_menu_download_descr">Additional maps are needed to view Wikipedia POIs on the map.</string>
     <string name="shared_string_all_languages">All languages</string>
     <string name="shared_string_language">Language</string>
     <string name="shared_string_languages">Languages</string>
     <string name="select_track_file">Select track file</string>
-    <string name="settings_item_import_error">Could not import %1$s.</string>
-    <string name="settings_item_write_error">Could not write %1$s.</string>
-    <string name="settings_item_read_error">Could not read %1$s.</string>
-    <string name="changes_applied_to_profile">Changes applied to %1$s profile.</string>
+    <string name="settings_item_import_error">Could not import from \'%1$s\'.</string>
+    <string name="settings_item_write_error">Could not write to \'%1$s\'.</string>
+    <string name="settings_item_read_error">Could not read from \'%1$s\'.</string>
+    <string name="changes_applied_to_profile">Changes applied to the \'%1$s\' profile.</string>
     <string name="shared_string_items">Items</string>
     <string name="custom_osmand_plugin">Custom OsmAnd plugin</string>
     <string name="app_mode_ski_snowmobile">Snowmobile</string>
@@ -63,11 +98,11 @@
     <string name="replace_point_descr">Replace another point with this</string>
     <string name="developer_plugin">Developer Plugin</string>
     <string name="move_inside_category">You can move items only inside this category.</string>
-    <string name="additional_actions_descr">You can access these actions by tapping the “Actions” button.</string>
+    <string name="additional_actions_descr">You can access these actions by tapping the “%1$s” button.</string>
     <string name="main_actions">Main actions</string>
-    <string name="main_actions_descr">Main actions containt only 4 buttons.</string>
-    <string name="reset_items_descr">Settings will be reset to the original state after hiding.</string>
-    <string name="hidden_items_descr">These items are hidden from the menu, but the represented options or plugins will remain working.</string>
+    <string name="main_actions_descr">\'Main actions\' only contains 4 buttons.</string>
+    <string name="reset_items_descr">Hiding settings resets them to their original state.</string>
+    <string name="hidden_items_descr">These items are hidden from the menu, but the represented options or plugins will continue to work.</string>
     <string name="shared_string_hidden">Hidden</string>
     <string name="divider_descr">Elements below this point separated by a divider.</string>
     <string name="shared_string_divider">Divider</string>
@@ -76,7 +111,7 @@
     <string name="shared_string_drawer">Drawer</string>
     <string name="ui_customization">UI Customization</string>
     <string name="ui_customization_short_descr">Drawer items, context menu</string>
-    <string name="ui_customization_description">Customize the quantity of items in Drawer, Configure map and context menu.\n\nYou can disable unused plugins, to hide all its controls from the application %1$s.</string>
+    <string name="ui_customization_description">Customize the quantity of items in Drawer, Configure Map and Context Menu.\n\nYou can turn off unused plugins, to hide all their controls from the application. %1$s.</string>
     <string name="shared_string_min">Min</string>
     <string name="shared_string_square">Square</string>
     <string name="shared_string_octagon">Octagon</string>
@@ -101,12 +136,12 @@
     <string name="profile_backup_failed">Could not back up profile.</string>
     <string name="importing_from">Importing data from %1$s</string>
     <string name="shared_string_importing">Importing</string>
-    <string name="checking_for_duplicate_description">OsmAnd check %1$s for duplicates with existing items in the application.\n\nIt may take some time.</string>
+    <string name="checking_for_duplicate_description">OsmAnd check %1$s for duplicates with existing items in the app.\n\nIt may take some time.</string>
     <string name="items_added">Items added</string>
     <string name="shared_string_import_complete">Import complete</string>
-    <string name="import_complete_description">All data from the %1$s is imported, you can use buttons below to open needed part of the application to manage it.</string>
+    <string name="import_complete_description">All data from the %1$s is imported, you can use buttons below to open needed part of the app to manage it.</string>
     <string name="shared_string_hillshade">Hillshade</string>
-    <string name="terrain_empty_state_text">Enable to view hillshade or slope map. You can read more about this map types on our site</string>
+    <string name="terrain_empty_state_text">Enable to view hillshade or slope map. You can read more about these map types on our site.</string>
     <string name="shared_string_legend">Legend</string>
     <string name="shared_string_zoom_levels">Zoom levels</string>
     <string name="shared_string_transparency">Transparency</string>
@@ -114,7 +149,7 @@
     <string name="slope_download_description">Additional maps are needed to view Slopes on the map.</string>
     <string name="hillshade_download_description">Additional maps are needed to view Hillshade on the map.</string>
     <string name="terrain_slider_description">Set the minimum and maximum zoom levels at which the layer will be displayed.</string>
-    <string name="slope_description">Slope is colorized visualisations on terrain.</string>
+    <string name="slope_description">Slope uses colors to visualize terrain steepness.</string>
     <string name="hillshade_description">Hillshade map using dark shades to show slopes, peaks and lowlands.</string>
     <string name="shared_string_terrain">Terrain</string>
     <string name="import_rendering_file">Import rendering file</string>
@@ -141,7 +176,7 @@
     <string name="no_recalculation_setting">Disable recalculation</string>
     <string name="open_settings">Open settings</string>
     <string name="plugin_disabled">Plugin disabled</string>
-    <string name="plugin_disabled_descr">This plugin is a separate application, you will need to remove it separately if you no longer plan to use it.\n\nThe plugin will remain on the device after removing OsmAnd.</string>
+    <string name="plugin_disabled_descr">This plugin is a separate app, you will need to remove it separately if you no longer plan to use it.\n\nThe plugin will remain on the device after removing OsmAnd.</string>
     <string name="shared_string_menu">Menu</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="route_recalculation_dist_title">Minimal distance to recalculate route</string>
@@ -184,7 +219,7 @@
     <string name="import_profile_dialog_description">The imported profile contains additional data. Click Import to import only profile data or select additional data to import.</string>
     <string name="export_profile_dialog_description">You can select additional data to export along with the profile.</string>
     <string name="permission_is_required">Permission is required to use this option.</string>
-    <string name="logcat_buffer_descr">Check and share detailed logs of the application</string>
+    <string name="logcat_buffer_descr">Check and share detailed logs of the app</string>
     <string name="file_does_not_contain_routing_rules">No routing rules in \'%1$s\'. Please choose another file.</string>
     <string name="not_support_file_type_with_ext">Select a supported %1$s extension file instead.</string>
     <string name="monitoring_min_speed_descr">This is a low-speed cut-off filter to not record points below a certain speed. This may make recorded tracks look "smoother" when viewed on the map.</string>
@@ -693,7 +728,7 @@
     <string name="work_button">Work</string>
     <string name="cubic_m">m³</string>
     <string name="metric_ton">t</string>
-    <string name="shared_string_capacity">Сapacity</string>
+    <string name="shared_string_capacity">Capacity</string>
     <string name="shared_string_width">Width</string>
     <string name="shared_string_height">Height</string>
     <string name="add_destination_point">Set destination</string>
@@ -931,7 +966,7 @@
     <string name="one_tap_active">\'One tap\' active</string>
     <string name="empty_state_av_notes">Make notes!</string>
     <string name="empty_state_av_notes_desc">Add audio, video or photo note to every point on the map, using widget or context menu.</string>
-    <string name="notes_by_date">OSM notes by date</string>
+    <string name="notes_by_date">A/V notes by date</string>
     <string name="by_date">By date</string>
     <string name="by_type">By type</string>
     <string name="looking_for_tracks_with_waypoints">Looking for tracks with waypoints</string>
@@ -1014,7 +1049,7 @@
     <string name="order_by">Order by:</string>
     <string name="marker_show_distance_descr">Select how to indicate distance and direction to map markers on the map:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Map orientation threshold</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Select speed of switching orientation from \'Movement direction\' to \'Compass directon\' below.</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Select speed of switching orientation from \'Movement direction\' to \'Compass direction\' below.</string>
     <string name="all_markers_moved_to_history">All map markers moved to history</string>
     <string name="marker_moved_to_history">Map marker moved to history</string>
     <string name="marker_moved_to_active">Map marker moved to active</string>
@@ -1263,6 +1298,7 @@
     <string name="trip_rec_notification_settings">Turn on quick recording</string>
     <string name="trip_rec_notification_settings_desc">Display a system notification allowing trip recording.</string>
     <string name="shared_string_notifications">Notifications</string>
+    <string name="shared_string_resume">Resume</string>
     <string name="shared_string_continue">Continue</string>
     <string name="shared_string_pause">Pause</string>
     <string name="shared_string_paused">Paused</string>
@@ -2081,8 +2117,8 @@
     <string name="live_monitoring_m">Online tracking (GPX required)</string>
     <string name="live_monitoring_start">Start online tracking</string>
     <string name="live_monitoring_stop">Stop online tracking</string>
-    <string name="gpx_monitoring_start">Start GPX logging</string>
-    <string name="gpx_monitoring_stop">Stop GPX logging</string>
+    <string name="gpx_monitoring_start">Resume GPX logging</string>
+    <string name="gpx_monitoring_stop">Pause GPX logging</string>
     <string name="gpx_start_new_segment">Start new segment</string>
     <string name="rendering_attr_hideBuildings_name">Buildings</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Non-vehicle highways</string>
@@ -3521,7 +3557,7 @@
     <string name="faq_item">FAQ</string>
     <string name="faq_item_description">Frequently asked questions</string>
     <string name="map_viewing_item">Map viewing</string>
-    <string name="search_on_the_map_item">Searching the map</string>
+    <string name="search_on_the_map_item">Searching on the map</string>
     <string name="instalation_troubleshooting_item">Installation and troubleshooting</string>
     <string name="techical_articles_item">Technical articles</string>
     <string name="versions_item">Versions</string>

@@ -72,12 +72,12 @@
                 android:paddingLeft="@dimen/content_padding"
 	            android:paddingStart="@dimen/content_padding">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/average_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_action_speed"/>
+                    osmand:srcCompat="@drawable/ic_action_speed"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -118,12 +118,12 @@
                 android:paddingLeft="@dimen/content_padding"
 	            android:paddingStart="@dimen/content_padding">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/max_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_action_max_speed"/>
+                    osmand:srcCompat="@drawable/ic_action_max_speed"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -216,12 +216,12 @@
                 android:paddingLeft="@dimen/content_padding"
 	            android:paddingStart="@dimen/content_padding">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/time_moving_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_action_time_span"/>
+                    osmand:srcCompat="@drawable/ic_action_time_span"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -262,12 +262,12 @@
                 android:paddingLeft="@dimen/content_padding"
 	            android:paddingStart="@dimen/content_padding">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/distance_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_action_polygom_dark"/>
+                    osmand:srcCompat="@drawable/ic_action_polygom_dark"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"

@@ -25,6 +25,7 @@ import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
@@ -164,15 +165,16 @@ public class OsmandApplication extends MultiDexApplication {
 	public void onCreate() {
 		long timeToStart = System.currentTimeMillis();
 		if (Version.isDeveloperVersion(this)) {
-			if (android.os.Build.VERSION.SDK_INT >= 9) {
-				try {
-					Class.forName("net.osmand.plus.base.EnableStrictMode").newInstance();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+			try {
+				Class.forName("net.osmand.plus.base.EnableStrictMode").newInstance();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 		super.onCreate();
+		if (Build.VERSION.SDK_INT < 21) {
+			AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+		}
 		createInUiThread();
 		uiHandler = new Handler();
 		appCustomization = new OsmAndAppCustomization();

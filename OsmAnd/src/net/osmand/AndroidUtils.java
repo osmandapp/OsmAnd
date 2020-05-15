@@ -14,6 +14,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -50,7 +51,9 @@ import android.widget.TextView;
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.text.TextUtilsCompat;
@@ -352,13 +355,7 @@ public class AndroidUtils {
 	}
 
 	public static void setBackground(Context ctx, View view, boolean night, int lightResId, int darkResId) {
-		Drawable drawable;
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			drawable = ctx.getResources().getDrawable(night ? darkResId : lightResId, ctx.getTheme());
-		} else {
-			drawable = ctx.getResources().getDrawable(night ? darkResId : lightResId);
-		}
-		setBackground(view, drawable);
+		setBackground(view, AppCompatResources.getDrawable(ctx, night ? darkResId : lightResId));
 	}
 
 	public static void setBackground(View view, Drawable drawable) {
@@ -371,19 +368,18 @@ public class AndroidUtils {
 
 	public static void setForeground(Context ctx, View view, boolean night, int lightResId, int darkResId) {
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
-			view.setForeground(ctx.getResources().getDrawable(night ? darkResId : lightResId,
-					ctx.getTheme()));
+			view.setForeground(AppCompatResources.getDrawable(ctx, night ? darkResId : lightResId));
 		} else if (view instanceof FrameLayout) {
-			((FrameLayout) view).setForeground(ctx.getResources().getDrawable(night ? darkResId : lightResId));
+			((FrameLayout) view).setForeground(AppCompatResources.getDrawable(ctx, night ? darkResId : lightResId));
 		}
 	}
 
 	public static void updateImageButton(Context ctx, ImageButton button, int iconLightId, int iconDarkId, int bgLightId, int bgDarkId, boolean night) {
-		button.setImageDrawable(ctx.getResources().getDrawable(night ? iconDarkId : iconLightId));
+		button.setImageDrawable(AppCompatResources.getDrawable(ctx, night ? iconDarkId : iconLightId));
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			button.setBackground(ctx.getResources().getDrawable(night ? bgDarkId : bgLightId, ctx.getTheme()));
+			button.setBackground(AppCompatResources.getDrawable(ctx, night ? bgDarkId : bgLightId));
 		} else {
-			button.setBackgroundDrawable(ctx.getResources().getDrawable(night ? bgDarkId : bgLightId));
+			button.setBackgroundDrawable(AppCompatResources.getDrawable(ctx, night ? bgDarkId : bgLightId));
 		}
 	}
 
@@ -662,6 +658,13 @@ public class AndroidUtils {
 		}
 	}
 
+	public static Drawable[] getCompoundDrawables(@NonNull TextView tv){
+		if (isSupportRTL()) {
+			return tv.getCompoundDrawablesRelative();
+		}
+		return tv.getCompoundDrawables();
+	}
+
 	public static void setPadding(View view, int start, int top, int end, int bottom) {
 		if (isSupportRTL()) {
 			view.setPaddingRelative(start, top, end, bottom);
@@ -684,12 +687,69 @@ public class AndroidUtils {
 	}
 
 	public static int getNavigationIconResId(@NonNull Context ctx) {
-		return getLayoutDirection(ctx) == ViewCompat.LAYOUT_DIRECTION_RTL ?
-				R.drawable.ic_arrow_forward : R.drawable.ic_arrow_back;
+		return isLayoutRtl(ctx) ? R.drawable.ic_arrow_forward : R.drawable.ic_arrow_back;
+	}
+
+	public static Drawable getDrawableForDirection(@NonNull Context ctx,
+	                                               @NonNull Drawable drawable) {
+		return isLayoutRtl(ctx) ? getMirroredDrawable(ctx, drawable) : drawable;
+	}
+
+	public static Drawable getMirroredDrawable(@NonNull Context ctx,
+	                                           @NonNull Drawable drawable) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			drawable.setAutoMirrored(true);
+			return drawable;
+		}
+		Bitmap bitmap = drawableToBitmap(drawable);
+		return new BitmapDrawable(ctx.getResources(), flipBitmapHorizontally(bitmap));
+	}
+
+	public static Bitmap drawableToBitmap(Drawable drawable) {
+		if (drawable instanceof BitmapDrawable) {
+			BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+			if(bitmapDrawable.getBitmap() != null) {
+				return bitmapDrawable.getBitmap();
+			}
+		}
+
+		Bitmap bitmap = null;
+		if(drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
+			bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+		} else {
+			bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+		}
+
+		Canvas canvas = new Canvas(bitmap);
+		drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+		drawable.draw(canvas);
+		return bitmap;
+	}
+
+	public static Bitmap flipBitmapHorizontally(Bitmap source) {
+		Matrix matrix = new Matrix();
+		matrix.preScale(-1.0f, 1.0f, source.getWidth() / 2f, source.getHeight() / 2f);
+		return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
+	}
+
+	public static void setTextHorizontalGravity(@NonNull TextView tv, int hGravity) {
+		if (tv.getContext() != null) {
+			boolean isLayoutRtl = AndroidUtils.isLayoutRtl(tv.getContext());
+			int gravity = Gravity.LEFT;
+			if (isLayoutRtl && (hGravity == Gravity.START)
+					|| !isLayoutRtl && hGravity == Gravity.END) {
+				gravity = Gravity.RIGHT;
+			}
+			tv.setGravity(gravity);
+		}
 	}
 
 	public static boolean isSupportRTL() {
 		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1;
+	}
+
+	public static boolean isLayoutRtl(Context ctx) {
+		return isSupportRTL() && getLayoutDirection(ctx) == ViewCompat.LAYOUT_DIRECTION_RTL;
 	}
 
 	public static ArrayList<View> getChildrenViews(ViewGroup vg) {

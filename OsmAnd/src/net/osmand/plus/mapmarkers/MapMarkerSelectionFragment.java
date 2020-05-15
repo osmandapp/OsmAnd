@@ -1,6 +1,7 @@
 package net.osmand.plus.mapmarkers;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,7 +82,8 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 
 		View view = inflater.inflate(R.layout.map_marker_selection_fragment, container, false);
 		ImageButton closeButton = (ImageButton) view.findViewById(R.id.closeButton);
-		closeButton.setImageDrawable(getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_mode_back));
+		Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app));
+		closeButton.setImageDrawable(icBack);
 		closeButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

@@ -341,6 +341,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
 									app.getSavingTrackHelper().clearRecordedData(true);
+									app.getNotificationHelper().refreshNotifications();
 								}
 							});
 					builder.show();
@@ -573,9 +574,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			cb.setTextColor(textColorPrimary);
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,
 					LayoutParams.WRAP_CONTENT);
-			lp.setMargins(dp24, dp8, dp24, 0);
+			AndroidUtils.setMargins(lp, dp24, dp8, dp24, 0);
 			cb.setLayoutParams(lp);
-			cb.setPadding(dp8, 0, 0, 0);
+			AndroidUtils.setPadding(cb, dp8, 0, 0, 0);
 			cb.setChecked(!choice.value);
 			cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 				@Override
@@ -590,7 +591,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		if (showTrackSelection) {
 			View divider = new View(uiCtx);
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, AndroidUtils.dpToPx(uiCtx, 1f));
-			lp.setMargins(0, dp8 * 2, 0, 0);
+			AndroidUtils.setMargins(lp, 0, dp8 * 2, 0, 0);
 			divider.setLayoutParams(lp);
 			divider.setBackgroundColor(uiCtx.getResources().getColor(nightMode ? R.color.divider_color_dark : R.color.divider_color_light));
 			ll.addView(divider);
@@ -600,9 +601,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			cb.setTextColor(textColorPrimary);
 			lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,
 					LayoutParams.WRAP_CONTENT);
-			lp.setMargins(dp24, dp8 * 2, dp24, 0);
+			AndroidUtils.setMargins(lp, dp24, dp8 * 2, dp24, 0);
 			cb.setLayoutParams(lp);
-			cb.setPadding(dp8, 0, 0, 0);
+			AndroidUtils.setPadding(cb, dp8, 0, 0, 0);
 			cb.setChecked(app.getSelectedGpxHelper().getSelectedCurrentRecordingTrack() != null);
 			cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 

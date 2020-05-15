@@ -13,10 +13,10 @@
 	android:paddingEnd="@dimen/bottom_sheet_content_padding_small"
 	android:paddingStart="@dimen/bottom_sheet_content_padding_small">
 
-	<ImageView
+	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/icon"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
 		android:layout_gravity="center_horizontal"
 		android:layout_marginBottom="@dimen/grid_menu_item_bottom_top_margin"
 		android:layout_marginTop="@dimen/grid_menu_item_bottom_top_margin"

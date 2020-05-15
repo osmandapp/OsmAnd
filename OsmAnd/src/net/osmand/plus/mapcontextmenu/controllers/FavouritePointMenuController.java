@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu.controllers;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.data.Amenity;
@@ -125,8 +126,9 @@ public class FavouritePointMenuController extends MenuController {
 	public Drawable getRightIcon() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			return FavoriteImageDrawable.getOrCreate(mapActivity.getMyApplication(), fav.getColor(),
-					false, fav);
+			return FavoriteImageDrawable.getOrCreate(mapActivity.getMyApplication(),
+					mapActivity.getMyApplication().getFavorites().getColorWithCategory(fav,
+							ContextCompat.getColor(mapActivity, R.color.color_favorite)), false, fav);
 		} else {
 			return null;
 		}
@@ -155,7 +157,7 @@ public class FavouritePointMenuController extends MenuController {
 
 	@Override
 	public int getFavActionIconId() {
-		return R.drawable.map_action_edit_dark;
+		return R.drawable.ic_action_edit_dark;
 	}
 
 	@Override

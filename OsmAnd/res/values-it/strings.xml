@@ -1213,8 +1213,8 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="live_monitoring_m">Tracciamento online (GPX richiesto)</string>
     <string name="live_monitoring_start">Avvia il tracciamento online</string>
     <string name="live_monitoring_stop">Ferma il tracciamento online</string>
-    <string name="gpx_monitoring_start">Avvia la registrazione GPX</string>
-    <string name="gpx_monitoring_stop">Ferma la registrazione GPX</string>
+    <string name="gpx_monitoring_start">Riprendi la registrazione GPX</string>
+    <string name="gpx_monitoring_stop">Metti in pausa la registrazione GPX</string>
     <string name="gpx_start_new_segment">Inizia un nuovo segmento</string>
     <string name="lang_fa">Persiano</string>
     <string name="lang_he">Ebraico</string>
@@ -1704,8 +1704,8 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="favorite_category_name">Nome della categoria</string>
     <string name="favorite_category_add_new_title">Aggiungi una nuova categoria</string>
     <string name="confirm_download_roadmaps">Le mappe solo stradali non sono necessarie dato che disponi già delle mappe standard complete. Scaricare comunque\?</string>
-    <string name="value_downloaded_of_max">%1$,1f di %2$,1f MB</string>
-    <string name="file_size_in_mb">%,1f MB</string>
+    <string name="value_downloaded_of_max">%1$.1f di %2$.1f MB</string>
+    <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Aggiorna tutto (%1$s MB)</string>
     <string name="free_downloads_used">Scaricamenti gratuiti utilizzati</string>
     <string name="free_downloads_used_description">Mostra il numero di download gratuiti rimasti.</string>
@@ -2066,6 +2066,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="trip_rec_notification_settings">Abilita l\'avvio veloce della registrazione</string>
     <string name="trip_rec_notification_settings_desc">Mostra una notifica che permette di iniziare a registrare il viaggio.</string>
     <string name="shared_string_notifications">Notifiche</string>
+    <string name="shared_string_resume">Riprendi</string>
     <string name="route_calculation">Calcolo del percorso</string>
     <string name="gpx_no_tracks_title">Non hai ancora nessun file GPX</string>
     <string name="gpx_no_tracks_title_folder">È anche possibile aggiungere file GPX alla cartella</string>

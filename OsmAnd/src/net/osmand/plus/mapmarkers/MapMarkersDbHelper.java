@@ -284,7 +284,7 @@ public class MapMarkersDbHelper {
 		if (db != null) {
 			try {
 				for (MapMarker marker : markers) {
-					insertLast(db, marker, false);
+					insertLast(db, marker);
 				}
 			} finally {
 				db.close();
@@ -293,36 +293,24 @@ public class MapMarkersDbHelper {
 	}
 
 	public void addMarker(MapMarker marker) {
-		addMarker(marker, false);
-	}
-
-	private void addMarker(MapMarker marker, boolean saveExisting) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
-				insertLast(db, marker, saveExisting);
+				insertLast(db, marker);
 			} finally {
 				db.close();
 			}
 		}
 	}
 
-	private void insertLast(SQLiteConnection db, MapMarker marker, boolean saveExisting) {
-		long currentTime;
-		if (saveExisting) {
-			Calendar cal = Calendar.getInstance();
-			cal.add(Calendar.MONTH, -1);
-			currentTime = cal.getTimeInMillis();
-		} else {
-			currentTime = System.currentTimeMillis();
-		}
+	private void insertLast(SQLiteConnection db, MapMarker marker) {
+		long currentTime = System.currentTimeMillis();
 		if (marker.id == null) {
 			marker.id = String.valueOf(currentTime) + String.valueOf(new Random().nextInt(900) + 100);
 		}
 		marker.creationDate = currentTime;
 		String descr = PointDescription.serializeToString(marker.getOriginalPointDescription());
 		int active = marker.history ? 0 : 1;
-		long visited = saveExisting ? currentTime : 0;
 
 		PointDescription pointDescription = marker.getOriginalPointDescription();
 		if (pointDescription != null && !pointDescription.isSearchingAddress(context)) {
@@ -352,7 +340,7 @@ public class MapMarkersDbHelper {
 						MARKERS_COL_MAP_OBJECT_NAME + ") " +
 						"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 				new Object[]{marker.id, marker.getLatitude(), marker.getLongitude(), descr, active,
-						currentTime, visited, marker.groupName, marker.groupKey, marker.colorIndex,
+						currentTime, marker.visitedDate, marker.groupName, marker.groupKey, marker.colorIndex,
 						marker.history ? HISTORY_NEXT_VALUE : TAIL_NEXT_VALUE, 0, 0, marker.mapObjectName});
 	}
 

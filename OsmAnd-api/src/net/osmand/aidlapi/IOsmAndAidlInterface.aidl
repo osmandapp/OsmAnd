@@ -93,6 +93,9 @@ import net.osmand.aidlapi.contextmenu.RemoveContextMenuButtonsParams;
 
 import net.osmand.aidlapi.mapmarker.RemoveMapMarkersParams;
 
+import net.osmand.aidlapi.quickaction.QuickActionParams;
+import net.osmand.aidlapi.quickaction.QuickActionInfoParams;
+
 // NOTE: Add new methods at the end of file!!!
 
 interface IOsmAndAidlInterface {
@@ -817,10 +820,10 @@ interface IOsmAndAidlInterface {
      *
      */
     boolean setCustomization(in CustomizationInfoParams params);
-    
+
     /**
      * Method to register for Voice Router voice messages during navigation. Notifies user about voice messages.
-     *    
+     *
      * @params subscribeToUpdates (boolean) - boolean flag to subscribe or unsubscribe from messages
      * @params callbackId (long) - id of callback, needed to unsubscribe from messages
      * @params callback (IOsmAndAidlCallback) - callback to notify user on voice message
@@ -834,4 +837,8 @@ interface IOsmAndAidlInterface {
     boolean removeAllActiveMapMarkers(in RemoveMapMarkersParams params);
 
     boolean importProfile(in ProfileSettingsParams params);
+
+    boolean executeQuickAction(in QuickActionParams params);
+
+    boolean getQuickActionsInfo(out List<QuickActionInfoParams> quickActions);
 }

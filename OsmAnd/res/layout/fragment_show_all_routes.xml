@@ -40,7 +40,7 @@
 			android:layout_marginStart="@dimen/content_padding_half"
 			android:background="@drawable/btn_circle_transparent_full"
 			android:contentDescription="@string/shared_string_back"
-			android:src="@drawable/ic_arrow_back"
+			osmand:srcCompat="@drawable/ic_arrow_back"
 			android:tint="?attr/text_color_tab_active_white" />
 
 		<LinearLayout
@@ -75,7 +75,7 @@
 				android:background="@drawable/btn_circle_transparent_full"
 				android:contentDescription="@string/print_route"
 				android:scaleType="center"
-				android:src="@drawable/ic_action_gprint_dark"
+				osmand:srcCompat="@drawable/ic_action_gprint_dark"
 				android:tint="?attr/text_color_tab_active_white" />
 
 			<androidx.appcompat.widget.AppCompatImageButton
@@ -85,7 +85,7 @@
 				android:background="@drawable/btn_circle_transparent_full"
 				android:contentDescription="@string/shared_string_save_as_gpx"
 				android:scaleType="center"
-				android:src="@drawable/ic_action_gsave_dark"
+				osmand:srcCompat="@drawable/ic_action_gsave_dark"
 				android:tint="?attr/text_color_tab_active_white" />
 
 			<androidx.appcompat.widget.AppCompatImageButton
@@ -95,7 +95,7 @@
 				android:background="@drawable/btn_circle_transparent_full"
 				android:contentDescription="@string/share_route_as_gpx"
 				android:scaleType="center"
-				android:src="@drawable/ic_action_gshare_dark"
+				osmand:srcCompat="@drawable/ic_action_gshare_dark"
 				android:tint="?attr/text_color_tab_active_white" />
 
 		</LinearLayout>
@@ -133,7 +133,7 @@
 					android:background="?attr/selectableItemBackgroundBorderless"
 					android:contentDescription="@string/shared_string_close"
 					android:scaleType="center"
-					android:src="@drawable/ic_arrow_back"
+					osmand:srcCompat="@drawable/ic_arrow_back"
 					android:tint="?attr/text_color_tab_active_white"
 					android:layout_marginEnd="@dimen/content_padding"
 					android:layout_marginStart="@dimen/content_padding" />
@@ -183,7 +183,7 @@
 					android:background="?attr/selectableItemBackgroundBorderless"
 					android:contentDescription="@string/print_route"
 					android:scaleType="center"
-					android:src="@drawable/ic_action_gprint_dark"
+					osmand:srcCompat="@drawable/ic_action_gprint_dark"
 					android:tint="?attr/text_color_tab_active_white" />
 
 				<androidx.appcompat.widget.AppCompatImageView
@@ -193,7 +193,7 @@
 					android:background="?attr/selectableItemBackgroundBorderless"
 					android:contentDescription="@string/shared_string_save_as_gpx"
 					android:scaleType="center"
-					android:src="@drawable/ic_action_gsave_dark"
+					osmand:srcCompat="@drawable/ic_action_gsave_dark"
 					android:tint="?attr/text_color_tab_active_white" />
 
 				<androidx.appcompat.widget.AppCompatImageView
@@ -203,19 +203,19 @@
 					android:background="?attr/selectableItemBackgroundBorderless"
 					android:contentDescription="@string/share_route_as_gpx"
 					android:scaleType="center"
-					android:src="@drawable/ic_action_gshare_dark"
+					osmand:srcCompat="@drawable/ic_action_gshare_dark"
 					android:tint="?attr/text_color_tab_active_white" />
 
 			</LinearLayout>
 
 		</LinearLayout>
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_gravity="top"
 			android:scaleType="fitXY"
-			android:src="@drawable/bg_contextmenu_shadow" />
+			osmand:srcCompat="@drawable/bg_contextmenu_shadow" />
 
 	</LinearLayout>
 
@@ -266,7 +266,7 @@
 			android:layout_gravity="bottom"
 			android:background="@drawable/btn_circle"
 			android:contentDescription="@string/shared_string_my_location"
-			tools:src="@drawable/ic_action_test_light" />
+			tools:src="@drawable/ic_action_remove_dark" />
 
 		<LinearLayout
 			android:layout_width="wrap_content"
@@ -281,7 +281,7 @@
 				android:layout_height="@dimen/map_button_size"
 				android:background="@drawable/btn_circle"
 				android:contentDescription="@string/zoomIn"
-				tools:src="@drawable/ic_action_test_light" />
+				tools:src="@drawable/ic_action_remove_dark" />
 
 			<ImageButton
 				android:id="@+id/map_zoom_out_button"
@@ -290,7 +290,7 @@
 				android:layout_marginTop="@dimen/map_button_spacing"
 				android:background="@drawable/btn_circle"
 				android:contentDescription="@string/zoomOut"
-				tools:src="@drawable/ic_action_test_light" />
+				tools:src="@drawable/ic_action_remove_dark" />
 
 		</LinearLayout>
 

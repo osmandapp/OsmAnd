@@ -25,7 +25,9 @@
             android:minHeight="@dimen/dashboard_map_toolbar"
             android:theme="?attr/toolbar_theme"
             app:contentInsetLeft="72dp"
-            app:contentInsetStart="72dp">
+            app:contentInsetStart="72dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetEnd="0dp">
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -66,7 +68,7 @@
                                 android:layout_height="match_parent"
                                 android:orientation="horizontal">
 
-                                <ImageView
+                                <androidx.appcompat.widget.AppCompatImageView
                                     android:id="@+id/name_image"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -74,7 +76,7 @@
                                     android:layout_marginStart="@dimen/content_padding_small"
                                     android:layout_marginTop="2dp"
                                     android:scaleType="centerInside"
-                                    android:src="@drawable/ic_action_building_number"/>
+                                    app:srcCompat="@drawable/ic_action_building_number"/>
 
                             </LinearLayout>
 
@@ -129,7 +131,7 @@
                                 android:layout_height="match_parent"
                                 android:orientation="horizontal">
 
-                                <ImageView
+                                <androidx.appcompat.widget.AppCompatImageView
                                     android:id="@+id/category_image"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -137,7 +139,7 @@
                                     android:layout_marginStart="@dimen/content_padding_small"
                                     android:layout_marginTop="2dp"
                                     android:scaleType="centerInside"
-                                    android:src="@drawable/ic_action_building_number"/>
+                                    app:srcCompat="@drawable/ic_action_building_number"/>
 
                             </LinearLayout>
 
@@ -197,7 +199,7 @@
                                 android:layout_height="match_parent"
                                 android:orientation="horizontal">
 
-                                <ImageView
+                                <androidx.appcompat.widget.AppCompatImageView
                                     android:id="@+id/description_image"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -205,7 +207,7 @@
                                     android:layout_marginStart="@dimen/content_padding_small"
                                     android:layout_marginTop="10dp"
                                     android:scaleType="center"
-                                    android:src="@drawable/ic_action_note_dark"/>
+                                    app:srcCompat="@drawable/ic_action_note_dark"/>
 
                             </LinearLayout>
 

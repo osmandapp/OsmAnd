@@ -117,7 +117,7 @@ public class StartGPSStatus extends OsmAndAction {
 		final AppCompatCheckBox cb = new AppCompatCheckBox(activity);
 		cb.setText(R.string.shared_string_remember_my_choice);
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-		lp.setMargins(dp24, dp8, dp8, dp24);
+		AndroidUtils.setMargins(lp, dp24, dp8, dp8, dp24);
 		cb.setLayoutParams(lp);
 		cb.setPadding(dp8, 0, 0, 0);
 		int textColorPrimary = ContextCompat.getColor(activity, isNightMode() ? R.color.text_color_primary_dark : R.color.text_color_primary_light);

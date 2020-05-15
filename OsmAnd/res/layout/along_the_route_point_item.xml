@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/package_delivered_layout"
 	android:layout_width="match_parent"
@@ -14,7 +15,7 @@
 		android:descendantFocusability="blocksDescendants"
 		android:orientation="horizontal">
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/waypoint_icon"
 			android:layout_width="@dimen/standard_icon_size"
 			android:layout_height="@dimen/standard_icon_size"
@@ -23,7 +24,7 @@
 			android:layout_marginLeft="@dimen/content_padding"
 			android:layout_marginRight="@dimen/content_padding"
 			android:layout_marginTop="@dimen/content_padding"
-			android:src="@drawable/ic_action_fav_dark"
+			osmand:srcCompat="@drawable/ic_action_favorite"
 			android:layout_marginStart="@dimen/content_padding"
 			android:layout_marginEnd="@dimen/content_padding" />
 
@@ -102,7 +103,7 @@
 			android:contentDescription="@string/shared_string_delete"
 			android:focusable="false"
 			android:scaleType="center"
-			android:src="@drawable/ic_action_remove_dark" />
+			osmand:srcCompat="@drawable/ic_action_remove_dark" />
 
 	</LinearLayout>
 

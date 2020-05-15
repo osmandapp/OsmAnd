@@ -5,7 +5,6 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
@@ -58,7 +57,7 @@ public class FavoriteImageDrawable extends Drawable {
 			favIcon = res.getDrawable(R.drawable.mm_special_star);
 			uiIconId = R.drawable.mx_special_star;
 		}
-		int col = color == 0 || color == Color.BLACK ? res.getColor(R.color.color_favorite) : color;
+		int col = color == 0 ? res.getColor(R.color.color_favorite) : color;
 		uiListIcon = uiUtilities.getIcon(uiIconId, R.color.color_white);
 		int uiBackgroundIconId = point != null ? point.getBackgroundType().getIconId() : R.drawable.bg_point_circle;
 		uiBackgroundIcon = uiUtilities.getPaintedIcon(uiBackgroundIconId, col);

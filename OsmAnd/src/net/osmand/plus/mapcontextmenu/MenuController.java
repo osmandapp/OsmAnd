@@ -14,6 +14,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.GPXUtilities.WptPt;
@@ -504,7 +505,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	}
 
 	public int getFavActionIconId() {
-		return R.drawable.map_action_fav_dark;
+		return R.drawable.ic_action_favorite_stroke;
 	}
 
 	public int getFavActionStringId() {
@@ -516,7 +517,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	}
 
 	public int getWaypointActionIconId() {
-		return R.drawable.map_action_flag_dark;
+		return R.drawable.ic_action_flag_stroke;
 	}
 
 	public int getWaypointActionStringId() {
@@ -745,7 +746,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 					return enabled ? getNormalIcon(resId) : getDisabledIcon(resId);
 				}
 				MapActivity mapActivity = getMapActivity();
-				return mapActivity != null ? ContextCompat.getDrawable(mapActivity, resId) : null;
+				return mapActivity != null ? AppCompatResources.getDrawable(mapActivity, resId) : null;
 			}
 			return null;
 		}

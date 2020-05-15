@@ -16,6 +16,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
+import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -2005,8 +2006,8 @@ public class SettingsHelper {
 					boolean ellipsoid = object.optBoolean("ellipsoid", false);
 					boolean invertedY = object.optBoolean("inverted_y", false);
 					String referer = object.optString("referer");
-					boolean timesupported = object.optBoolean("timesupported", false);
-					long expire = object.optLong("expire");
+					boolean timeSupported = object.optBoolean("timesupported", false);
+					long expire = object.optLong("expire", -1);
 					boolean inversiveZoom = object.optBoolean("inversiveZoom", false);
 					String ext = object.optString("ext");
 					int tileSize = object.optInt("tileSize");
@@ -2014,11 +2015,23 @@ public class SettingsHelper {
 					int avgSize = object.optInt("avgSize");
 					String rule = object.optString("rule");
 
+					if (expire > 0 && expire < 3600000) {
+						expire = expire * 60 * 1000L;
+					}
+
 					ITileSource template;
 					if (!sql) {
-						template = new TileSourceManager.TileSourceTemplate(name, url, ext, maxZoom, minZoom, tileSize, bitDensity, avgSize);
+						TileSourceTemplate tileSourceTemplate = new TileSourceTemplate(name, url, ext, maxZoom, minZoom, tileSize, bitDensity, avgSize);
+						tileSourceTemplate.setRule(rule);
+						tileSourceTemplate.setRandoms(randoms);
+						tileSourceTemplate.setReferer(referer);
+						tileSourceTemplate.setEllipticYTile(ellipsoid);
+						tileSourceTemplate.setInvertedYTile(invertedY);
+						tileSourceTemplate.setExpirationTimeMillis(timeSupported ? expire : -1);
+
+						template = tileSourceTemplate;
 					} else {
-						template = new SQLiteTileSource(app, name, minZoom, maxZoom, url, randoms, ellipsoid, invertedY, referer, timesupported, expire, inversiveZoom);
+						template = new SQLiteTileSource(app, name, minZoom, maxZoom, url, randoms, ellipsoid, invertedY, referer, timeSupported, expire, inversiveZoom, rule);
 					}
 					items.add(template);
 				}
@@ -2046,7 +2059,7 @@ public class SettingsHelper {
 						jsonObject.put("inverted_y", template.isInvertedYTile());
 						jsonObject.put("referer", template.getReferer());
 						jsonObject.put("timesupported", template.isTimeSupported());
-						jsonObject.put("expire", template.getExpirationTimeMillis());
+						jsonObject.put("expire", template.getExpirationTimeMinutes());
 						jsonObject.put("inversiveZoom", template.getInversiveZoom());
 						jsonObject.put("ext", template.getTileFormat());
 						jsonObject.put("tileSize", template.getTileSize());

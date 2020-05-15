@@ -17,7 +17,9 @@
             android:layout_height="match_parent"
             android:theme="?attr/actionBarStyle"
             app:contentInsetLeft="54dp"
-            app:contentInsetStart="54dp">
+            app:contentInsetStart="54dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetEnd="0dp">
 
             <TextView
                 android:id="@+id/title"
@@ -69,7 +71,7 @@
 	            android:paddingStart="16dp"
 	            android:paddingEnd="16dp">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/header_split_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -110,12 +112,12 @@
                         osmand:typeface="@string/font_roboto_medium"
                         tools:text="10 km" />
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/split_interval_arrow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:src="@drawable/ic_action_arrow_drop_down" />
+                        app:srcCompat="@drawable/ic_action_arrow_drop_down" />
 
                 </LinearLayout>
 

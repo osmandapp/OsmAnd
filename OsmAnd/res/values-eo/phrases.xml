@@ -892,7 +892,7 @@
     <string name="poi_dock">Doko</string>
     <string name="poi_cutline">Senarba strio</string>
     <string name="poi_shower">Duŝejo</string>
-    <string name="poi_brothel">Putinejo</string>
+    <string name="poi_brothel">Bordelo</string>
     <string name="poi_smoking_area">Fumejo</string>
     <string name="poi_mortuary">Kadavrejo</string>
     <string name="poi_crematorium">Kadavr-bruligejo</string>
@@ -1993,7 +1993,7 @@
     <string name="poi_summit_cross">Kruco sur la montopinto: jes</string>
     <string name="poi_temperature">Temperaturo</string>
     <string name="poi_fitness_station">Ekzerc-parko</string>
-    <string name="poi_hackerspace">Kodumulejo</string>
+    <string name="poi_hackerspace">Kodumulspaco</string>
     <string name="poi_wiki_lang_af">Vikipedio Afrikansa</string>
     <string name="poi_wiki_lang_eu">Vikipedio Eŭska</string>
     <string name="poi_fireworks">Artfajraĵ-vendejo</string>
@@ -3811,4 +3811,9 @@
     <string name="poi_drinking_water_refill_yes">Plenigi per trinkebla akvo: jes</string>
     <string name="poi_drinking_water_refill_no">Plenigi per trinkebla akvo: ne</string>
     <string name="poi_drinking_water_refill_network">Plenigi per trinkebla akvo: reto</string>
+    <string name="poi_osmand_fire_hydrant_pressure_suction">senprema</string>
+    <string name="poi_osmand_fire_hydrant_pressure_pressurized">prema</string>
+    <string name="poi_fire_hydrant_style_water_source_groundwater">grundakvo</string>
+    <string name="poi_fire_hydrant_type_pipe">tubo</string>
+    <string name="poi_fire_hydrant_pressure_filter">Premo de hidranto</string>
 </resources>

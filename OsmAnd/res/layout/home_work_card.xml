@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/home_work_card"
 	android:layout_width="match_parent"
@@ -43,13 +44,13 @@
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/home_img"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="@dimen/standard_icon_size"
 				android:layout_marginStart="@dimen/list_content_padding"
 				android:layout_marginLeft="@dimen/list_content_padding"
 				android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 				android:layout_marginRight="@dimen/favorites_icon_right_margin"
-				android:src="@drawable/ic_action_home_dark"
+				osmand:srcCompat="@drawable/ic_action_home_dark"
 				android:tint="@color/description_font_and_bottom_sheet_icons" />
 
 			<LinearLayout
@@ -92,8 +93,8 @@
 			android:id="@+id/buttons_divider"
 			android:layout_width="1dp"
 			android:layout_height="match_parent"
-			android:layout_marginTop="12dp"
-			android:layout_marginBottom="12dp"
+			android:layout_marginTop="@dimen/content_padding_small"
+			android:layout_marginBottom="@dimen/content_padding_small"
 			android:background="?attr/divider_color_basic" />
 
 		<LinearLayout
@@ -109,13 +110,13 @@
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/work_img"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="@dimen/standard_icon_size"
 				android:layout_marginStart="@dimen/list_content_padding"
 				android:layout_marginLeft="@dimen/list_content_padding"
 				android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 				android:layout_marginRight="@dimen/favorites_icon_right_margin"
-				android:src="@drawable/ic_action_work"
+				osmand:srcCompat="@drawable/ic_action_work"
 				android:tint="@color/description_font_and_bottom_sheet_icons" />
 
 			<LinearLayout
@@ -160,12 +161,12 @@
 		android:layout_width="match_parent"
 		android:layout_height="14dp">
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/bottom_shadow"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:scaleType="fitXY"
-			android:src="@drawable/bg_shadow_list_bottom" />
+			osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
 
 	</LinearLayout>
 

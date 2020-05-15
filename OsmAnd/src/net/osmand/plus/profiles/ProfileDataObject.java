@@ -10,6 +10,7 @@ public class ProfileDataObject implements Comparable<ProfileDataObject> {
 	private int iconRes;
 	private String stringKey;
 	private boolean isSelected;
+	private boolean isEnabled;
 	private ProfileIconColors iconColor;
 
 	public ProfileDataObject(String name, String description, String stringKey, int iconRes,  boolean isSelected, ProfileIconColors iconColor) {
@@ -39,6 +40,14 @@ public class ProfileDataObject implements Comparable<ProfileDataObject> {
 
 	public void setSelected(boolean selected) {
 		isSelected = selected;
+	}
+
+	public boolean isEnabled() {
+		return isEnabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		isEnabled = enabled;
 	}
 
 	public String getStringKey() {

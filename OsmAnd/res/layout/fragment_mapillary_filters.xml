@@ -5,12 +5,12 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <ImageView 
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/shadow_on_map"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
-        android:src="@drawable/bg_shadow_onmap" />
+        osmand:srcCompat="@drawable/bg_shadow_onmap" />
 
     <LinearLayout
         android:id="@+id/mapillary_filters_linear_layout"
@@ -34,7 +34,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_margin="@dimen/content_padding"
-                tools:src="@drawable/ic_action_gabout_dark" />
+                tools:src="@drawable/ic_action_info_dark" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/toggle_row_toggle"
@@ -255,7 +255,7 @@
                 android:orientation="horizontal"
                 android:visibility="gone">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/warning_image_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />

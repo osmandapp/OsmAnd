@@ -19,6 +19,7 @@ import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 import androidx.gridlayout.widget.GridLayout;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -249,8 +250,15 @@ public class QuickActionsWidget extends LinearLayout {
 					view.setOnLongClickListener(new OnLongClickListener() {
 						@Override
 						public boolean onLongClick(View v) {
-							CreateEditActionDialog dialog = CreateEditActionDialog.newInstance(action.id);
-							dialog.show(((AppCompatActivity) getContext()).getSupportFragmentManager(), AddQuickActionDialog.TAG);
+							FragmentManager fm = ((AppCompatActivity) getContext()).getSupportFragmentManager();
+							if (action instanceof NewAction) {
+								fm.beginTransaction()
+									.add(R.id.fragmentContainer, new QuickActionListFragment(), QuickActionListFragment.TAG)
+									.addToBackStack(QuickActionListFragment.TAG).commitAllowingStateLoss();
+							} else {
+								CreateEditActionDialog dialog = CreateEditActionDialog.newInstance(action.id);
+								dialog.show(fm, CreateEditActionDialog.TAG);
+							}
 							return true;
 						}
 					});

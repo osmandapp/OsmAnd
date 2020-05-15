@@ -118,7 +118,7 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 				PoiUIFilter filter = (PoiUIFilter) currentItem;
 				itemHolder.title.setText(filter.getName());
 				int iconRes = RenderingIcons.getBigIconResourceId(filter.getIconId());
-				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(iconRes != 0 ? iconRes : R.drawable.ic_person, activeColorRes));
+				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(iconRes != 0 ? iconRes : R.drawable.ic_action_user, activeColorRes));
 				itemHolder.subTitle.setVisibility(View.GONE);
 			} else if (currentItem instanceof ITileSource) {
 				itemHolder.title.setText(((ITileSource) currentItem).getName());

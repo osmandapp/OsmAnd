@@ -1286,7 +1286,6 @@
     <string name="hidden_items_descr">Iferdisen-a ffren deg umuɣ maca isenfran-a neɣ izegrar ur teddun ara akken iwata.</string>
     <string name="reset_items_descr">Iɣewwaṛen ad alsen awennez ɣer wazalen-nsen imezwura deffir n tuffra-nsen.</string>
     <string name="main_actions_descr">Tigawin tigejdanin gebrent kan 4 n tqeffalin.</string>
-    <string name="additional_actions_descr">Tzemreḍ dad tkecmeḍ ɣer tigawin-a s utekki ɣef tqeffalt \"Tigawin\".</string>
     <string name="move_inside_category">Tzemreḍ kan ad tawiḍ iferdisen daxel n taggayt-a.</string>
     <string name="app_mode_ski_touring">Uccuḍ deg udfel</string>
     <string name="extra_maps_menu_group">Tikarḍiwin-nniḍen</string>
@@ -1298,4 +1297,12 @@
     <string name="si_min_km">Tisdatin deg ukilumitr</string>
     <string name="nm">nmi</string>
     <string name="foot">ft</string>
+    <string name="osm_editing_plugin_description">Ttekki deg OpenStreetMap (OSM) srid seg usnas OSMAnd. Amedya: rnu neɣ beddel agazen yelhan n OSM, rnu neɣ beddel tizmilin OSM sakin azen iberdan-ik GPX (aya ilaq umiḍan OSM). OpenStreetMap d tarbaɛt yeldin, tamaḍalant n tkarḍa tazayazt.</string>
+    <string name="osm_settings">Taẓrigt OpenStreetMap</string>
+    <string name="osmand_accessibility_description">Rmed, deg OsmAnd, iɣewwaren n tuffart n yibenk-ik (ṣeggem arured n taɣect-ik n uɛqal n taɣect, seqdec tignit trackball i usemɣer neɣ i urmad n yilɣa s taɣect n wadig-ik).</string>
+    <string name="travel_item">Asikel (Wikivoyage d Wikipedia)</string>
+    <string name="favorites_item">Inurifen</string>
+    <string name="subscription_osmandlive_item">Ajerred - OsmAnd Srid</string>
+    <string name="osmand_purchases_item">Tiɣin deg OsmAnd</string>
+    <string name="navigation_profiles_item">Imuɣna n tunigin</string>
 </resources>

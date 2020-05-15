@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:osmand="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
@@ -14,20 +15,20 @@
         android:textColor="?android:textColorPrimary"
         android:textSize="@dimen/default_list_text_size"/>
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:scaleType="fitXY"
-        android:src="@drawable/bg_shadow_list_bottom"/>
+        osmand:srcCompat="@drawable/bg_shadow_list_bottom"/>
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:layout_marginTop="@dimen/content_padding"
         android:scaleType="fitXY"
-        android:src="@drawable/bg_shadow_list_top"/>
+        osmand:srcCompat="@drawable/bg_shadow_list_top"/>
 
     <LinearLayout
         android:id="@+id/show_dialog_row"
@@ -57,11 +58,11 @@
 	        android:layout_marginStart="@dimen/content_padding" />
     </LinearLayout>
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:scaleType="fitXY"
-        android:src="@drawable/bg_shadow_list_bottom"/>
+        osmand:srcCompat="@drawable/bg_shadow_list_bottom"/>
 
 </LinearLayout>

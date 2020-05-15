@@ -17,7 +17,7 @@
 			android:layout_height="wrap_content"
 			android:orientation="vertical">
 
-	<ImageView
+	<androidx.appcompat.widget.AppCompatImageView
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="@dimen/list_content_padding"
@@ -25,7 +25,7 @@
 		android:paddingLeft="@dimen/list_content_padding"
 		android:paddingRight="@dimen/list_content_padding"
 		android:paddingStart="@dimen/list_content_padding"
-		android:src="@drawable/img_help_wikivoyage_show_image"
+		osmand:srcCompat="@drawable/img_help_wikivoyage_show_image"
 		android:contentDescription="@string/wikivoyage_download_pics" />
 
 			<TextView

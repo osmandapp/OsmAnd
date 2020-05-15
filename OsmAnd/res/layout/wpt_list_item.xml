@@ -60,7 +60,7 @@
                 tools:visibility="visible"
 	            android:layout_marginEnd="@dimen/favorites_icon_right_margin" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/icon"
                 android:layout_width="@dimen/standard_icon_size"
                 android:layout_height="@dimen/standard_icon_size"
@@ -129,12 +129,12 @@
                 android:layout_marginRight="@dimen/list_item_button_padding"
                 android:orientation="horizontal">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/expand_image"
                     android:layout_width="@dimen/acceptable_touch_radius"
                     android:layout_height="@dimen/acceptable_touch_radius"
                     android:scaleType="center"
-                    android:src="@drawable/ic_action_arrow_up"
+                    osmand:srcCompat="@drawable/ic_action_arrow_up"
                     android:visibility="gone"
                     tools:visibility="visible"/>
 
@@ -144,7 +144,7 @@
                     android:layout_height="@dimen/acceptable_touch_radius"
                     android:background="?attr/dashboard_button"
                     android:contentDescription="@string/shared_string_more"
-                    android:src="@drawable/ic_overflow_menu_white"
+                    osmand:srcCompat="@drawable/ic_overflow_menu_white"
                     android:visibility="visible"/>
 
             </LinearLayout>

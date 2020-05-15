@@ -19,7 +19,7 @@
 	    android:paddingStart="16dp"
 	    android:paddingEnd="16dp">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageView"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -58,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/direction"
                         android:layout_width="@dimen/directionIconSize"
                         android:layout_height="@dimen/directionIconSize"

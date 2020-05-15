@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -35,20 +36,20 @@
 
     </LinearLayout>
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:scaleType="fitXY"
-        android:src="@drawable/bg_shadow_list_bottom" />
+        osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
         android:layout_gravity="top"
         android:layout_marginTop="@dimen/content_padding"
-        android:src="@drawable/bg_shadow_list_top"/>
+        osmand:srcCompat="@drawable/bg_shadow_list_top"/>
 
     <LinearLayout
         android:id="@+id/title_view"
@@ -69,7 +70,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/name_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -78,7 +79,7 @@
                     android:layout_marginTop="2dp"
                     android:scaleType="centerInside"
                     android:tint="?attr/default_icon_color"
-                    android:src="@drawable/ic_action_fav_dark"/>
+                    osmand:srcCompat="@drawable/ic_action_favorite"/>
 
             </LinearLayout>
 
@@ -152,7 +153,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/category_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -161,7 +162,7 @@
                     android:layout_marginTop="2dp"
                     android:scaleType="centerInside"
                     android:tint="?attr/default_icon_color"
-                    android:src="@drawable/ic_action_folder"/>
+                    osmand:srcCompat="@drawable/ic_action_folder"/>
 
             </LinearLayout>
 
@@ -218,11 +219,11 @@
 
     </LinearLayout>
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:scaleType="fitXY"
-        android:src="@drawable/bg_shadow_list_bottom" />
+        osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
 
 </LinearLayout>

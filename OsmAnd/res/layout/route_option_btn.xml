@@ -15,7 +15,7 @@
 		android:visibility="visible"
 		tools:background="@drawable/btn_border_dark">
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/route_option_image_view"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
 			android:paddingLeft="@dimen/route_info_icon_vertical_padding"
 			android:paddingRight="@dimen/route_info_icon_vertical_padding"
 			android:paddingTop="@dimen/route_info_icon_vertical_padding"
-			android:src="@drawable/ic_action_edit_dark"
+			osmand:srcCompat="@drawable/ic_action_edit_dark"
 			tools:visibility="visible"
 			android:paddingEnd="@dimen/route_info_icon_vertical_padding"
 			android:paddingStart="@dimen/route_info_icon_vertical_padding" />

@@ -1013,7 +1013,7 @@
 \n 
 \nDe globale dataene (mellom 70° nord og 70° sør) er basert på målinger av SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et bildeinstrument ombord på Terra, flaggskipsatellitten til NASA\'s Earth Observing System. ASTER er et samarbeid mellom NASA, Japans finansdepartement, Trade and Industry (METI), og Japan Space Systems (J-spacesystems).</string>
     <string name="plugin_ski_name">Skikartvisning</string>
-    <string name="osmand_accessibility_description">Dette programtillegget gjør enhetens tilgjengelighetsfunksjoner tilgjengelige direkte i OsmAnd. Det muliggjør f.eks justering av talehastigheten for tekst-til-tale -stemmer, innstilling av styrekors-skjermnavigering ved hjelp av en styrekule for forstørrelseskontroll, eller tekst-til-tale-tilbakemelding, f.eks auto-annonsering av din posisjon.</string>
+    <string name="osmand_accessibility_description">Gjør enhetens tilgjengelighetsfunksjoner tilgjengelige direkte i OsmAnd. Det muliggjør f.eks. justering av talehastigheten for tekst-til-tale -stemmer, innstilling av styrekors-skjermnavigering ved hjelp av en styrekule for forstørrelseskontroll, eller tekst-til-tale-tilbakemelding, f.eks. auto-annonsering av din posisjon.</string>
     <string name="rename_failed">Navneendring feilet.</string>
     <string name="anonymous_user">Anonym bruker</string>
     <string name="open_street_map_login_descr">Trengs for bidrag til openstreetmap.org.</string>
@@ -2440,7 +2440,7 @@
     <string name="poi_deleted_localy">Interessepunkt blir slettet når du laster opp endringene dine</string>
     <string name="only_download_over_wifi">Kun nedlasting over Wi-Fi</string>
     <string name="map_widget_fps_info">Feilrettingsinfo for bildefrekvens</string>
-    <string name="rendering_attr_hidePOILabels_name">Interessepunktpåskrifter</string>
+    <string name="rendering_attr_hidePOILabels_name">Interessepunktetiketter</string>
     <string name="will_open_tomorrow_at">Åpner i morgen</string>
     <string name="winter_and_ski_renderer">Vinter og ski</string>
     <string name="touring_view_renderer">Turvisning</string>
@@ -2781,7 +2781,7 @@
     <string name="shared_string_gpx_files">GPX-filer</string>
     <string name="get_osmand_live">Skaff deg OsmAnd Live for å låse opp alle funksjoner: Daglige kartoppdateringer med ubegrensede nedlastinger, alle programtilleggene, Wikipedia, Wikivoyage og mye mer.</string>
     <string name="quick_action_edit_actions">Rediger handlinger</string>
-    <string name="error_notification_desc">Send en skjeravbildning av dette varselet til support@osmand.net</string>
+    <string name="error_notification_desc">Send en skjermavbildning av denne merknaden til support@osmand.net</string>
     <string name="coord_input_edit_point">Rediger punkt</string>
     <string name="coord_input_add_point">Legg til punkt</string>
     <string name="coord_input_save_as_track">Lagre som spor</string>
@@ -3514,7 +3514,6 @@
     <string name="shared_string_hidden">Skjult</string>
     <string name="main_actions_descr">Hovedhandlinger inneholder kun 4 knapper.</string>
     <string name="main_actions">Hovedhandlinger</string>
-    <string name="additional_actions_descr">Du får tilgang til disse handlingene ved å trykke på knappen “Handlinger”.</string>
     <string name="move_inside_category">Du kan kun flytte elementer innenfor denne kategorien.</string>
     <string name="developer_plugin">Utvikler-tillegg</string>
     <string name="replace_point_descr">Erstatt et annet punkt med dette</string>
@@ -3531,4 +3530,26 @@
     <string name="profile_prefs_reset_successful">Alle profilinnstillinger gjenopprettet til forvalg.</string>
     <string name="shared_string_transparency">Gjennomsiktighet</string>
     <string name="shared_string_legend">Tegnforklaring</string>
+    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
+    <string name="reset_plugin_to_default">Tilbakestill programtilleggsinnstillinger til forvalg</string>
+    <string name="download_unsupported_action">Ustøttet handling %1$s</string>
+    <string name="extra_maps_menu_group">Ekstra kart</string>
+    <string name="shared_string_divider">Inndeler</string>
+    <string name="some_articles_may_not_available_in_lang">Det kan hende noen Wikipedia-artikler ikke finnes på norsk.</string>
+    <string name="custom_color">Egendefinert farge</string>
+    <string name="search_poi_types">Søk etter interessepunkttyper</string>
+    <string name="quick_action_item">Hurtighandling</string>
+    <string name="osmand_purchases_item">OsmAnd-kjøp</string>
+    <string name="favorites_item">Favoritter</string>
+    <string name="map_markers_item">Kartmarkører</string>
+    <string name="measure_distance_item">Mål avstand</string>
+    <string name="travel_item">Reising (Wikivoyage og Wikipedia)</string>
+    <string name="navigation_profiles_item">Navigasjonsprofiler</string>
+    <string name="quick_action_transport_hide">Skjul offentlig transport</string>
+    <string name="quick_action_transport_show">Vis offentlig transport</string>
+    <string name="back_to_editing">Tilbake til redigering</string>
+    <string name="create_edit_poi">Legg til/rediger interessepunkt</string>
+    <string name="quick_action_show_hide_transport">Vis/skjul offentlig transport</string>
+    <string name="shared_string_add_profile">Legg til profil</string>
+    <string name="quick_action_transport_descr"></string>
 </resources>

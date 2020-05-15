@@ -23,11 +23,11 @@
             android:layout_height="match_parent"
             android:gravity="center">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/icon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_action_search_dark"/>
+                osmand:srcCompat="@drawable/ic_action_search_dark"/>
 
         </LinearLayout>
 
@@ -91,12 +91,12 @@
             android:focusable="false"
             android:visibility="gone"/>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/expandItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_action_arrow_drop_up"
+            osmand:srcCompat="@drawable/ic_action_arrow_drop_up"
             android:visibility="visible"/>
 
     </LinearLayout>

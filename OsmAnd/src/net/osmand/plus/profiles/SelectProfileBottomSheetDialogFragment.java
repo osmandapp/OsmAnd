@@ -1,6 +1,7 @@
 package net.osmand.plus.profiles;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -225,10 +227,11 @@ public class SelectProfileBottomSheetDialogFragment extends BasePreferenceBottom
 	
 	private void addButtonItem(int titleId, int iconId, OnClickListener listener) {
 		OsmandApplication app = requiredMyApplication();
+		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
 		
-		int activeColorResId = isNightMode(app) ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		int activeColorResId = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
 		
-		View buttonView = View.inflate(app, R.layout.bottom_sheet_item_preference_btn, null);
+		View buttonView = View.inflate(themedCtx, R.layout.bottom_sheet_item_preference_btn, null);
 		TextView tvTitle = buttonView.findViewById(R.id.title);
 		tvTitle.setText(app.getString(titleId));
 		

@@ -17,7 +17,9 @@
         android:minHeight="@dimen/dashboard_map_toolbar"
         android:theme="?attr/toolbar_theme"
         app:contentInsetLeft="@dimen/settings_divider_margin_start"
-        app:contentInsetStart="@dimen/settings_divider_margin_start"/>
+        app:contentInsetStart="@dimen/settings_divider_margin_start"
+        app:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp"/>
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -76,7 +78,7 @@
                     android:layout_height="@dimen/context_menu_buttons_bottom_height"
                     android:layout_gravity="bottom"
                     android:background="@null"
-                    android:src="@drawable/ic_action_label"/>
+                    app:srcCompat="@drawable/ic_action_label"/>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/poiTypeTextInputLayout"

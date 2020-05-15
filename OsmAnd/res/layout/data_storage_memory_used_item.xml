@@ -18,7 +18,7 @@
 			android:layout_gravity="center"
 			android:layout_marginLeft="@dimen/content_padding"
 			android:layout_marginRight="@dimen/content_padding"
-			android:src="@drawable/mm_storage_tank"
+			osmand:srcCompat="@drawable/mm_storage_tank"
 			android:tint="?attr/default_icon_color"
 			tools:tint="?attr/default_icon_color"
 			android:layout_marginEnd="@dimen/content_padding"

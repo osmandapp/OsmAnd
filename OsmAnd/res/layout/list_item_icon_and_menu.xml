@@ -6,18 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/bg_color"
-    android:minHeight="60dp"
-    tools:layout_height="60dp">
+    android:minHeight="@dimen/setting_profile_item_height"
+    tools:layout_height="@dimen/setting_profile_item_height">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/standard_icon_size"
+        android:layout_height="@dimen/standard_icon_size"
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/content_padding"
         android:layout_marginStart="@dimen/content_padding"
-        tools:src="@drawable/ic_action_gabout_dark"/>
+        tools:src="@drawable/ic_action_info_dark"/>
 
     <LinearLayout
         android:id="@+id/text_wrapper"
@@ -31,7 +31,7 @@
         android:layout_toLeftOf="@+id/secondary_icon"
         android:layout_toRightOf="@+id/icon"
         android:layout_toStartOf="@+id/secondary_icon"
-        android:minHeight="60dp"
+        android:minHeight="@dimen/setting_profile_item_height"
         android:orientation="vertical">
 
         <View
@@ -64,14 +64,14 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/secondary_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/standard_icon_size"
+        android:layout_height="@dimen/standard_icon_size"
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
         android:layout_margin="@dimen/content_padding"
         android:layout_toLeftOf="@+id/toggle_item"
         android:layout_toStartOf="@+id/toggle_item"
-        tools:src="@drawable/ic_action_gabout_dark"/>
+        tools:src="@drawable/ic_action_info_dark"/>
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/toggle_item"

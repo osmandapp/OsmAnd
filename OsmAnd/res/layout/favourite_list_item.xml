@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/change_color_view"
     android:layout_width="match_parent"
@@ -12,14 +13,14 @@
 	android:paddingStart="@dimen/list_content_padding"
 	android:paddingEnd="@dimen/list_content_padding">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/favourite_icon"
         android:layout_width="@dimen/standard_icon_size"
         android:layout_height="@dimen/standard_icon_size"
         android:layout_gravity="center_vertical"
         android:layout_marginEnd="@dimen/route_info_icon_padding_right"
         android:layout_marginRight="@dimen/route_info_icon_padding_right"
-        android:src="@drawable/map_favorite" />
+        osmand:srcCompat="@drawable/map_favorite" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -47,7 +48,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/favourite_direction_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

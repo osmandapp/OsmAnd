@@ -1,6 +1,7 @@
 package net.osmand.plus.activities.actions;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
@@ -22,6 +23,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 
 import org.apache.commons.logging.Log;
 
@@ -110,6 +112,7 @@ public class AppModeDialog {
 	public static void updateButtonState(final OsmandApplication ctx, final List<ApplicationMode> visible,
 	                                     final Set<ApplicationMode> selected, final View.OnClickListener onClickListener, final View[] buttons,
 	                                     int i, final boolean singleChoice, final boolean useMapTheme, final boolean nightMode) {
+		Context themedCtx = UiUtilities.getThemedContext(ctx, nightMode);
 		if (buttons[i] != null) {
 			View tb = buttons[i];
 			final ApplicationMode mode = visible.get(i);
@@ -124,7 +127,7 @@ public class AppModeDialog {
 			} else {
 				if (useMapTheme) {
 					iv.setImageDrawable(ctx.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColorInfo().getColor(nightMode)));
-					iv.setBackgroundResource(AndroidUtils.resolveAttribute(ctx, android.R.attr.selectableItemBackground));
+					iv.setBackgroundResource(AndroidUtils.resolveAttribute(themedCtx, android.R.attr.selectableItemBackground));
 				} else {
 					iv.setImageDrawable(ctx.getUIUtilities().getThemedIcon(mode.getIconRes()));
 				}
@@ -167,13 +170,13 @@ public class AppModeDialog {
 			final ApplicationMode mode = visible.get(i);
 			final boolean checked = selected.contains(mode);
 			ImageView iv = (ImageView) tb.findViewById(R.id.app_mode_icon);
-			View selection = tb.findViewById(R.id.selection);
+			ImageView selection = tb.findViewById(R.id.selection);
 			Drawable drawable = ctx.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColorInfo().getColor(nightMode));
 			if (checked) {
 				iv.setImageDrawable(drawable);
 				iv.setContentDescription(String.format("%s %s", mode.toHumanString(), ctx.getString(R.string.item_checked)));
 				if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-					AndroidUtils.setBackground(ctx, iv, nightMode, R.drawable.btn_checked_border_light, R.drawable.btn_checked_border_light);
+					selection.setImageDrawable(ctx.getDrawable(R.drawable.btn_checked_border_light));
 					AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.ripple_light, R.drawable.ripple_light);
 				} else {
 					AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_light);
@@ -186,7 +189,7 @@ public class AppModeDialog {
 					}
 					iv.setImageDrawable(drawable);
 					if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-						AndroidUtils.setBackground(ctx, iv, nightMode, R.drawable.btn_border_pressed_light, R.drawable.btn_border_pressed_light);
+						selection.setImageDrawable(ctx.getDrawable(R.drawable.btn_border_pressed_light));
 						AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.ripple_light, R.drawable.ripple_light);
 					} else {
 						AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.btn_border_pressed_trans_light, R.drawable.btn_border_pressed_trans_light);

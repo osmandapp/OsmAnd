@@ -7,7 +7,7 @@
     android:clickable="true"
     android:theme="@style/OsmandLightTheme">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/background_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,11 +28,11 @@
 	    android:paddingStart="40dp"
 	    android:paddingEnd="40dp">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/osmand_logo"/>
+            osmand:srcCompat="@drawable/osmand_logo"/>
 
         <View
             android:layout_width="match_parent"

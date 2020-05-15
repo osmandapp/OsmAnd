@@ -22,7 +22,7 @@
 			android:paddingStart="@dimen/wikivoyage_search_icon_margin_left"
 			android:paddingEnd="@dimen/wikivoyage_search_icon_margin_left">
 
-			<ImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/icon"
 				android:layout_width="28dp"
 				android:layout_height="28dp"

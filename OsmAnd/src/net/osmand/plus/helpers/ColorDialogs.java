@@ -13,6 +13,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -235,9 +237,12 @@ public class ColorDialogs {
 	}
 
 	private static Drawable getIcon(final Context ctx, int resId, int color) {
-		Drawable d = ctx.getResources().getDrawable(resId).mutate();
-		d.clearColorFilter();
-		d.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+		Drawable d = AppCompatResources.getDrawable(ctx, resId);
+		if (d != null) {
+			d = DrawableCompat.wrap(d).mutate();
+			d.clearColorFilter();
+			d.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+		}
 		return d;
 	}
 

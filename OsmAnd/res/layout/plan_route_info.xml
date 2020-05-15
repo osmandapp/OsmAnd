@@ -40,8 +40,8 @@
 						android:layout_marginLeft="@dimen/context_menu_buttons_padding_bottom"
 						android:layout_marginRight="@dimen/context_menu_buttons_padding_bottom"
 						android:orientation="horizontal"
-						android:paddingStart="40dp"
-						android:paddingLeft="40dp"
+						android:paddingStart="@dimen/route_info_app_modes_padding"
+						android:paddingLeft="@dimen/route_info_app_modes_padding"
 						android:paddingEnd="@dimen/route_info_app_modes_padding"
 						android:paddingRight="@dimen/route_info_app_modes_padding"
 						android:layout_marginStart="@dimen/context_menu_buttons_padding_bottom"
@@ -62,7 +62,7 @@
 							android:background="?attr/selectableItemBackgroundBorderless"
 							android:paddingLeft="@dimen/route_info_icon_padding_right"
 							android:paddingRight="@dimen/route_info_icon_padding_right"
-							android:src="@drawable/ic_action_arrow_down"
+							osmand:srcCompat="@drawable/ic_action_arrow_down"
 							android:tint="@color/description_font_and_bottom_sheet_icons"
 							android:paddingStart="@dimen/route_info_icon_padding_right"
 							android:paddingEnd="@dimen/route_info_icon_padding_right" />
@@ -76,14 +76,14 @@
 						android:background="@color/color_transparent"
 						android:layout_gravity="end">
 
-						<ImageView
+						<androidx.appcompat.widget.AppCompatImageView
 							android:id="@+id/app_modes_options"
 							android:layout_width="wrap_content"
 							android:layout_height="match_parent"
 							android:background="?attr/selectableItemBackgroundBorderless"
 							android:paddingLeft="@dimen/route_info_icon_padding_right"
 							android:paddingRight="@dimen/route_info_icon_padding_right"
-							android:src="@drawable/ic_overflow_menu_dark"
+							osmand:srcCompat="@drawable/ic_overflow_menu_dark"
 							android:paddingStart="@dimen/route_info_icon_padding_right"
 							android:paddingEnd="@dimen/route_info_icon_padding_right" />
 
@@ -106,7 +106,7 @@
 					android:minHeight="@dimen/route_info_list_item_height"
 					android:orientation="horizontal">
 
-					<ImageView
+					<androidx.appcompat.widget.AppCompatImageView
 						android:id="@+id/fromIcon"
 						android:layout_width="@dimen/standard_icon_size"
 						android:layout_height="@dimen/standard_icon_size"
@@ -116,7 +116,7 @@
 						android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 						android:layout_marginRight="@dimen/favorites_icon_right_margin"
 						android:layout_marginBottom="@dimen/list_header_text_left_margin"
-						android:src="@drawable/ic_action_location_color" />
+						osmand:srcCompat="@drawable/ic_action_location_color" />
 
 					<LinearLayout
 						android:layout_width="0dp"
@@ -189,7 +189,7 @@
 								android:visibility="gone"
 								tools:ignore="UnusedAttribute" />
 
-							<ImageView
+							<androidx.appcompat.widget.AppCompatImageView
 								android:id="@+id/from_button_image_view"
 								android:layout_width="@dimen/standard_icon_size"
 								android:layout_height="@dimen/standard_icon_size"
@@ -197,7 +197,7 @@
 								android:layout_marginTop="@dimen/route_info_icon_vertical_padding"
 								android:layout_marginRight="@dimen/route_info_icon_vertical_padding"
 								android:layout_marginBottom="@dimen/route_info_icon_vertical_padding"
-								tools:src="@drawable/ic_action_test_light"
+								tools:src="@drawable/ic_action_remove_dark"
 								android:layout_marginEnd="@dimen/route_info_icon_vertical_padding"
 								android:layout_marginStart="@dimen/route_info_icon_vertical_padding" />
 
@@ -226,7 +226,7 @@
 					android:minHeight="@dimen/route_info_list_item_height"
 					android:orientation="horizontal">
 
-					<ImageView
+					<androidx.appcompat.widget.AppCompatImageView
 						android:id="@+id/viaIcon"
 						android:layout_width="@dimen/standard_icon_size"
 						android:layout_height="@dimen/standard_icon_size"
@@ -236,7 +236,7 @@
 						android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 						android:layout_marginRight="@dimen/favorites_icon_right_margin"
 						android:layout_marginBottom="@dimen/list_header_text_left_margin"
-						android:src="@drawable/ic_action_location_color" />
+						osmand:srcCompat="@drawable/ic_action_location_color" />
 
 					<LinearLayout
 						android:layout_width="0dp"
@@ -309,7 +309,7 @@
 								osmand:typeface="@string/font_roboto_medium"
 								tools:ignore="UnusedAttribute" />
 
-							<ImageView
+							<androidx.appcompat.widget.AppCompatImageView
 								android:id="@+id/via_button_image_view"
 								android:layout_width="@dimen/standard_icon_size"
 								android:layout_height="@dimen/standard_icon_size"
@@ -346,7 +346,7 @@
 					android:minHeight="@dimen/route_info_list_item_height"
 					android:orientation="horizontal">
 
-					<ImageView
+					<androidx.appcompat.widget.AppCompatImageView
 						android:id="@+id/toIcon"
 						android:layout_width="@dimen/standard_icon_size"
 						android:layout_height="@dimen/standard_icon_size"
@@ -356,7 +356,7 @@
 						android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 						android:layout_marginRight="@dimen/favorites_icon_right_margin"
 						android:layout_marginBottom="@dimen/list_header_text_left_margin"
-						android:src="@drawable/ic_action_location_color" />
+						osmand:srcCompat="@drawable/ic_action_location_color" />
 
 					<LinearLayout
 						android:layout_width="0dp"
@@ -426,7 +426,7 @@
 								osmand:typeface="@string/font_roboto_medium"
 								tools:ignore="UnusedAttribute" />
 
-							<ImageView
+							<androidx.appcompat.widget.AppCompatImageView
 								android:id="@+id/to_button_image_view"
 								android:layout_width="@dimen/standard_icon_size"
 								android:layout_height="@dimen/standard_icon_size"
@@ -501,16 +501,16 @@
 						osmand:typeface="@string/font_roboto_medium"
 						tools:ignore="UnusedAttribute" />
 
-					<ImageView
+					<androidx.appcompat.widget.AppCompatImageView
 						android:id="@+id/map_options_route_button_icon"
-						android:layout_width="wrap_content"
-						android:layout_height="match_parent"
-						android:paddingStart="@dimen/content_padding_small"
-						android:paddingLeft="@dimen/content_padding_small"
-						android:paddingEnd="@dimen/route_info_buttons_padding_top_bottom"
-						android:paddingRight="@dimen/route_info_buttons_padding_top_bottom"
-						tools:src="@drawable/ic_action_edit_dark"
-						tools:tint="@color/recording_color" />
+						android:layout_width="@dimen/standard_icon_size"
+						android:layout_height="@dimen/standard_icon_size"
+						android:layout_gravity="center"
+						android:layout_marginStart="@dimen/content_padding_small"
+						android:layout_marginLeft="@dimen/content_padding_small"
+						android:layout_marginEnd="@dimen/route_info_buttons_padding_top_bottom"
+						android:layout_marginRight="@dimen/route_info_buttons_padding_top_bottom"
+						tools:src="@drawable/ic_action_settings" />
 
 				</LinearLayout>
 
@@ -572,12 +572,12 @@
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/route_info_modes_height" />
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_gravity="top"
 			android:scaleType="fitXY"
-			android:src="@drawable/bg_contextmenu_shadow" />
+			osmand:srcCompat="@drawable/bg_contextmenu_shadow" />
 
 	</LinearLayout>
 
@@ -588,7 +588,7 @@
 		android:layout_gravity="bottom"
 		android:orientation="vertical">
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/buttons_shadow"
 			android:layout_width="match_parent"
 			android:layout_height="10dp"

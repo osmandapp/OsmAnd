@@ -1,6 +1,7 @@
 package net.osmand.plus;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -9,12 +10,12 @@ import android.text.Html;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.JsonUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
-import net.osmand.map.TileSourceManager;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.SettingsHelper.AvoidRoadsSettingsItem;
 import net.osmand.plus.SettingsHelper.MapSourcesSettingsItem;
@@ -45,6 +46,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -104,7 +106,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 			// called from UI
 			File pluginItemsFile = getPluginItemsFile();
 			if (pluginItemsFile.exists()) {
-				addPluginItemsFromFile(pluginItemsFile);
+				addPluginItemsFromFile(pluginItemsFile, activity);
 			}
 		}
 		return true;
@@ -212,7 +214,26 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		this.resourceDirName = resourceDirName;
 	}
 
-	private void addPluginItemsFromFile(final File file) {
+	private void addPluginItemsFromFile(final File file, final Activity activity) {
+		final ProgressDialog progress = new ProgressDialog(activity);
+		progress.setTitle(app.getString(R.string.loading_smth, ""));
+		progress.setMessage(app.getString(R.string.loading_data));
+		progress.setIndeterminate(true);
+		progress.setCancelable(false);
+
+		if (AndroidUtils.isActivityNotDestroyed(activity)) {
+			progress.show();
+		}
+
+		final SettingsHelper.SettingsImportListener importListener = new SettingsHelper.SettingsImportListener() {
+			@Override
+			public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsItem> items) {
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
+					progress.dismiss();
+				}
+			}
+		};
+
 		app.getSettingsHelper().collectSettings(file, "", 1, new SettingsCollectListener() {
 			@Override
 			public void onSettingsCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
@@ -231,7 +252,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 							item.setShouldReplace(true);
 						}
 					}
-					app.getSettingsHelper().importSettings(file, items, "", 1, null);
+					app.getSettingsHelper().importSettings(file, items, "", 1, importListener);
 				}
 			}
 		});
@@ -265,17 +286,20 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 							List<ITileSource> mapSources = mapSourcesSettingsItem.getItems();
 
 							for (ITileSource tileSource : mapSources) {
-								if (tileSource instanceof TileSourceManager.TileSourceTemplate) {
-									TileSourceManager.TileSourceTemplate sourceTemplate = (TileSourceManager.TileSourceTemplate) tileSource;
-									File tPath = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
-									File dir = new File(tPath, sourceTemplate.getName());
-									Algorithms.removeAllFiles(dir);
-								} else if (tileSource instanceof SQLiteTileSource) {
-									SQLiteTileSource sqLiteTileSource = ((SQLiteTileSource) tileSource);
-									sqLiteTileSource.closeDB();
+								String tileSourceName = tileSource.getName();
+								if (tileSource instanceof SQLiteTileSource) {
+									tileSourceName += SQLITE_EXT;
+								}
+
+								ITileSource savedTileSource = app.getSettings().getTileSourceByName(tileSourceName, false);
+								if (savedTileSource != null) {
+									if (savedTileSource instanceof SQLiteTileSource) {
+										SQLiteTileSource sqLiteTileSource = ((SQLiteTileSource) savedTileSource);
+										sqLiteTileSource.closeDB();
+									}
 
 									File tPath = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
-									File dir = new File(tPath, sqLiteTileSource.getName() + SQLITE_EXT);
+									File dir = new File(tPath, tileSourceName);
 									Algorithms.removeAllFiles(dir);
 								}
 							}
@@ -368,7 +392,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 
 	public static List<CustomRegion> collectRegionsFromJson(@NonNull Context ctx, JSONArray jsonArray) throws JSONException {
 		List<CustomRegion> customRegions = new ArrayList<>();
-		Map<String, CustomRegion> flatRegions = new HashMap<>();
+		Map<String, CustomRegion> flatRegions = new LinkedHashMap<>();
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject regionJson = jsonArray.getJSONObject(i);
 			CustomRegion region = CustomRegion.fromJson(ctx, regionJson);

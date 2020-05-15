@@ -62,7 +62,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			helper.addItem(new ContextMenuItem.ItemBuilder()
 					.setId(DRAWER_BUILDS_ID)
 					.setTitleId(R.string.version_settings, mapActivity)
-					.setIcon(R.drawable.ic_action_gabout_dark)
+					.setIcon(R.drawable.ic_action_info_dark)
 					.setListener(new ContextMenuAdapter.ItemClickListener() {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {

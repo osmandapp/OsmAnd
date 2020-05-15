@@ -56,7 +56,7 @@
     <string name="minutes_format">%1$d min</string>
     <string name="hours_format">%1$d h</string>
     <string name="shared_string_install">Instalar</string>
-    <string name="shared_string_share">Compartillar</string>
+    <string name="shared_string_share">Compartir</string>
     <string name="shared_string_back">Voltar</string>
     <string name="shared_string_add">Engadir</string>
     <string name="enter_another_device_name">Escolle un nome que aínda non está a ser empregado</string>

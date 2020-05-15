@@ -16,13 +16,13 @@
 		android:layout_marginRight="@dimen/list_content_padding"
 		android:layout_marginBottom="@dimen/content_padding_half">
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/type_down_arrow"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical|end"
 			android:paddingRight="@dimen/content_padding"
-			android:src="@drawable/ic_action_arrow_drop_down"
+			app:srcCompat="@drawable/ic_action_arrow_drop_down"
 			android:tint="@color/settings_divider"
 			android:paddingEnd="@dimen/content_padding" />
 

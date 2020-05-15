@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:id="@+id/bottomShadowView"
+              xmlns:osmand="http://schemas.android.com/apk/res-auto"
               xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:background="?attr/activity_background_color"
               android:orientation="vertical">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
-        android:src="@drawable/bg_shadow_list_bottom"/>
+        osmand:srcCompat="@drawable/bg_shadow_list_bottom"/>
 
     <View
         android:id="@+id/bottomMarginView"

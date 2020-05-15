@@ -943,12 +943,12 @@ public class RoutingOptionsHelper {
 
 		@Override
 		public int getActiveIconId() {
-			return R.drawable.map_action_settings;
+			return R.drawable.ic_action_settings;
 		}
 
 		@Override
 		public int getDisabledIconId() {
-			return R.drawable.map_action_settings;
+			return R.drawable.ic_action_settings;
 		}
 	}
 

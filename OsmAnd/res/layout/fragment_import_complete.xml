@@ -123,11 +123,11 @@
 
 		</com.google.android.material.appbar.CollapsingToolbarLayout>
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/shadowView"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/abp__shadow_height"
-			android:src="@drawable/preference_activity_action_bar_shadow"
+			osmand:srcCompat="@drawable/preference_activity_action_bar_shadow"
 			tools:ignore="ContentDescription" />
 
 	</com.google.android.material.appbar.AppBarLayout>
