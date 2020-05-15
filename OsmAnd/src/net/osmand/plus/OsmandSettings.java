@@ -479,6 +479,13 @@ public class OsmandSettings {
 					return false;
 				} else if (value instanceof Enum) {
 					return enumPref.setModeValue(mode, value);
+				} else if (value instanceof Integer) {
+					int newVal = (Integer) value;
+					if (enumPref.values.length > newVal) {
+						Enum enumValue = enumPref.values[newVal];
+						return enumPref.setModeValue(mode, enumValue);
+					}
+					return false;
 				}
 			} else if (preference instanceof ContextMenuItemsPreference) {
 				if (value instanceof ContextMenuItemsSettings) {
