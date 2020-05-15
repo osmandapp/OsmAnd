@@ -2600,7 +2600,7 @@
     <string name="one_tap_active">「點一下」啟動</string>
     <string name="empty_state_av_notes">加註記！</string>
     <string name="empty_state_av_notes_desc">使用小工具或內容選單，增加音訊、視訊或照片附註在地圖上的每個標點。</string>
-    <string name="notes_by_date">以日期排序的 OSM 註記</string>
+    <string name="notes_by_date">以日期排序的音訊／視訊註記</string>
     <string name="by_date">按照日期</string>
     <string name="by_type">按照類型</string>
     <string name="one_tap_active_descr">輕點在地圖上的標記，將其移動到活動標記的頂端，而不用打開內容選單。</string>
