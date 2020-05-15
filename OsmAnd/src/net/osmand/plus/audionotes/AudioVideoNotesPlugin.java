@@ -748,7 +748,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						cachedRecording = recording;
 						if (recording) {
 							setText(app.getString(R.string.shared_string_control_stop), null);
-							setIcons(R.drawable.widget_icon_av_active, R.drawable.widget_icon_av_active);
+							setIcons(R.drawable.widget_icon_av_active, R.drawable.widget_icon_av_active_night);
 						} else {
 							setText(app.getString(R.string.shared_string_control_start), null);
 							Integer action = AV_DEFAULT_ACTION.get();
