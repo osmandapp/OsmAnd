@@ -44,7 +44,7 @@
 
 	</LinearLayout>
 
-	<CheckBox
+	<androidx.appcompat.widget.AppCompatCheckBox
 		android:id="@+id/check_event_in_calendar"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"

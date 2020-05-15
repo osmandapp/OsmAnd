@@ -19,7 +19,7 @@
 	    android:paddingEnd="16dp"
 	    android:paddingStart="16dp">
 
-        <CheckBox
+        <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/toggle_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

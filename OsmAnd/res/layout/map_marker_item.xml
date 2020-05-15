@@ -11,7 +11,7 @@
     android:minHeight="50dp"
     android:orientation="horizontal">
 
-    <CheckBox
+    <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -26,7 +26,7 @@
         android:minHeight="@dimen/bottom_sheet_list_item_height"
         android:background="?attr/expandable_list_item_background">
 
-        <CheckBox
+        <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/toggle_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
