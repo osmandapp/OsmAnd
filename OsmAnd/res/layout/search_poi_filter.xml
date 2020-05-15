@@ -88,7 +88,7 @@
             android:dividerHeight="0dp"
             android:drawSelectorOnTop="true"/>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/bottomButtonShadow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

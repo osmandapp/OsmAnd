@@ -64,7 +64,7 @@
 			android:layout_marginEnd="@dimen/context_menu_padding_margin_tiny"
 			android:layout_marginStart="@dimen/context_menu_padding_margin_tiny">
 
-			<ImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/profile_icon"
 				android:layout_width="@dimen/standard_icon_size"
 				android:layout_height="@dimen/standard_icon_size"
@@ -117,7 +117,7 @@
 
 			</LinearLayout>
 
-			<ImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:layout_width="@dimen/standard_icon_size"
 				android:layout_height="@dimen/standard_icon_size"
 				android:layout_gravity="center_vertical"

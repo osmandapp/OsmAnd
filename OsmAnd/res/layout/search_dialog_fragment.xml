@@ -132,7 +132,7 @@
                     android:minHeight="48dp"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/buttonToolbarImage"
                         android:layout_width="54dp"
                         android:layout_height="wrap_content"
@@ -274,7 +274,7 @@
 
 	</LinearLayout>
 
-	<ImageView
+	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/fab"
 		android:layout_width="@dimen/fab_size_with_shadow"
 		android:layout_height="@dimen/fab_size_with_shadow"

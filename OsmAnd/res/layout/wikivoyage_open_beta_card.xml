@@ -20,7 +20,7 @@
 		android:orientation="vertical"
 		android:background="@drawable/travel_card_open_beta_image_bg">
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/background_image"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"

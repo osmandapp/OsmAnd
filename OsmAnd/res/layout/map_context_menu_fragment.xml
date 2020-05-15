@@ -65,7 +65,7 @@
 
                 </LinearLayout>
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/context_menu_icon_view"
                     android:layout_width="@dimen/map_widget_icon"
                     android:layout_height="@dimen/map_widget_icon"
@@ -192,7 +192,7 @@
                             osmand:typeface="@string/font_roboto_medium"
                             tools:text="Some really long string"/>
 
-                        <ImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/additional_info_image_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -228,7 +228,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
-                            <ImageView
+                            <androidx.appcompat.widget.AppCompatImageView
                                 android:id="@+id/direction"
                                 android:layout_width="@dimen/directionIconSize"
                                 android:layout_height="@dimen/directionIconSize"
@@ -390,7 +390,7 @@
 
                     </LinearLayout>
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/progressButton"
                         android:layout_width="@dimen/context_menu_progress_cancel_button_size"
                         android:layout_height="@dimen/context_menu_progress_cancel_button_size"
@@ -514,14 +514,14 @@
             android:layout_height="match_parent"
             android:gravity="center">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@drawable/btn_circle_trans_flat"/>
 
         </LinearLayout>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/context_menu_top_back"
             android:layout_width="@dimen/list_item_height"
             android:layout_height="match_parent"
@@ -559,7 +559,7 @@
                 android:gravity="center_vertical|start"
                 android:orientation="horizontal">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/context_menu_toolbar_back"
                     android:layout_width="@dimen/list_item_height"
                     android:layout_height="match_parent"

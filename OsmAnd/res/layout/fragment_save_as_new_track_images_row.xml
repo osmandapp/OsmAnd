@@ -21,7 +21,7 @@
 			android:layout_marginStart="@dimen/bottom_sheet_content_margin"
 			android:layout_weight="1">
 
-			<ImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/route_point_image"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
 			android:layout_marginStart="@dimen/bottom_sheet_content_margin_small"
 			android:layout_weight="1">
 
-			<ImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/line_image"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"

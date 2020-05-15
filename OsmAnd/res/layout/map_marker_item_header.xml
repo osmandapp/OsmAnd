@@ -15,7 +15,7 @@
         android:orientation="horizontal"
         android:background="?attr/bg_color">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icon"
             android:scaleType="centerInside"
             android:layout_width="@dimen/map_markers_recycler_view_item_height"

@@ -20,7 +20,7 @@
 			android:background="?attr/selectableItemBackground"
 			android:orientation="horizontal">
 
-			<ImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/first_icon"
 				android:layout_width="@dimen/standard_icon_size"
 				android:layout_height="@dimen/standard_icon_size"
@@ -72,7 +72,7 @@
 			android:background="?attr/selectableItemBackground"
 			android:orientation="horizontal">
 
-			<ImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/second_icon"
 				android:layout_width="@dimen/standard_icon_size"
 				android:layout_height="@dimen/standard_icon_size"

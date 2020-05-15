@@ -150,7 +150,7 @@
                             android:minHeight="56dp"
                             android:orientation="horizontal">
 
-                            <ImageView
+                            <androidx.appcompat.widget.AppCompatImageView
                                 android:id="@+id/countryIcon"
                                 android:layout_width="56dp"
                                 android:layout_height="48dp"
@@ -208,7 +208,7 @@
                             android:minHeight="56dp"
                             android:orientation="horizontal">
 
-                            <ImageView
+                            <androidx.appcompat.widget.AppCompatImageView
                                 android:id="@+id/emailIcon"
                                 android:layout_width="56dp"
                                 android:layout_height="48dp"
@@ -256,7 +256,7 @@
                                 android:minHeight="56dp"
                                 android:orientation="horizontal">
 
-                                <ImageView
+                                <androidx.appcompat.widget.AppCompatImageView
                                     android:id="@+id/userNameIcon"
                                     android:layout_width="56dp"
                                     android:layout_height="48dp"

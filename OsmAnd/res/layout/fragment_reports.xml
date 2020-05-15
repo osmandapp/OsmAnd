@@ -27,7 +27,7 @@
                 android:minHeight="60dp"
                 android:orientation="horizontal">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/calendarImageView"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
@@ -46,7 +46,7 @@
 	                android:layout_marginStart="-8dp"
 	                android:layout_marginEnd="16dp" />
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/monthDropDownIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -73,7 +73,7 @@
                 android:minHeight="60dp"
                 android:orientation="horizontal">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/regionIconImageView"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
@@ -105,7 +105,7 @@
                         tools:text="Worldwide"/>
                 </LinearLayout>
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/countryDropDownIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -147,7 +147,7 @@
                     android:minHeight="60dp"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/numberOfContributorsIcon"
                         android:layout_width="56dp"
                         android:layout_height="56dp"
@@ -198,7 +198,7 @@
                 android:minHeight="60dp"
                 android:orientation="horizontal">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/numberOfEditsIcon"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
@@ -245,7 +245,7 @@
                 android:minHeight="60dp"
                 android:orientation="horizontal">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/donationsIcon"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
@@ -301,7 +301,7 @@
                     android:minHeight="60dp"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/donationsTotalIcon"
                         android:layout_width="56dp"
                         android:layout_height="56dp"
@@ -353,7 +353,7 @@
                 android:minHeight="60dp"
                 android:orientation="horizontal">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/numberOfRecipientsIcon"
                     android:layout_width="56dp"
                     android:layout_height="60dp"

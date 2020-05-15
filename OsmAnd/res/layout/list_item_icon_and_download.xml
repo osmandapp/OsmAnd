@@ -13,7 +13,7 @@
         android:gravity="center_vertical"
         android:minHeight="@dimen/setting_list_item_large_height">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
 
                 </LinearLayout>
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/secondary_icon"
                     android:layout_width="@dimen/list_item_height"
                     android:layout_height="@dimen/list_item_height"

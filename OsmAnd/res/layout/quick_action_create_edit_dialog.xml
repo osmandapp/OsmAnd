@@ -107,14 +107,14 @@
                 android:id="@+id/container"/>
         </ScrollView>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
             android:layout_gravity="top"
             app:srcCompat="@drawable/bg_shadow_list_bottom"/>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="fitXY"

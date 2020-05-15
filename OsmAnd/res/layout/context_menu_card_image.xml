@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:background="?attr/selectableItemBackground">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -31,7 +31,7 @@
             tools:text="https://osmand.net/images/123456789012.jpg"
             tools:visibility="visible"/>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

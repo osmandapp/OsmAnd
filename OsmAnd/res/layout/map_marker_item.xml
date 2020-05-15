@@ -20,7 +20,7 @@
         android:visibility="gone"
 	    android:layout_marginStart="@dimen/content_padding" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/waypoint_icon"
         android:layout_width="56dp"
         android:layout_height="25dp"
@@ -50,7 +50,7 @@
             android:layout_marginTop="2dp"
             android:orientation="horizontal">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/direction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -137,7 +137,7 @@
         osmand:srcCompat="@drawable/ic_action_remove_dark"
 	    android:layout_marginEnd="2dp" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/info_move"
         android:layout_width="48dp"
         android:layout_height="48dp"

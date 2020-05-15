@@ -23,7 +23,7 @@
 			android:paddingStart="16dp"
 			android:paddingLeft="16dp">
 
-			<ImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/distance_icon"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
 			android:paddingStart="16dp"
 			android:paddingLeft="16dp">
 
-			<ImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/time_icon"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -204,7 +204,7 @@
 			android:paddingStart="16dp"
 			android:paddingLeft="16dp">
 
-			<ImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/average_icon"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -249,7 +249,7 @@
 			android:paddingStart="16dp"
 			android:paddingLeft="16dp">
 
-			<ImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/range_icon"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -350,7 +350,7 @@
 			android:paddingStart="16dp"
 			android:paddingLeft="16dp">
 
-			<ImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/ascent_icon"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -395,7 +395,7 @@
 			android:paddingStart="16dp"
 			android:paddingLeft="16dp">
 
-			<ImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/descent_icon"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"

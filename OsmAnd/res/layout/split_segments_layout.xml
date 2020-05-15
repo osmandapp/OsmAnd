@@ -71,7 +71,7 @@
 	            android:paddingStart="16dp"
 	            android:paddingEnd="16dp">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/header_split_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -112,7 +112,7 @@
                         osmand:typeface="@string/font_roboto_medium"
                         tools:text="10 km" />
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/split_interval_arrow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

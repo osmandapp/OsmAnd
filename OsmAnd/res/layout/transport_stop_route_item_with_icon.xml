@@ -14,7 +14,7 @@
 		android:gravity="center_vertical"
 		android:background="?attr/selectableItemBackgroundBorderless">
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/transport_stop_route_icon"
 			android:layout_width="20dp"
 			android:layout_height="20dp"

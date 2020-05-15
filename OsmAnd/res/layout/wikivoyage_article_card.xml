@@ -58,7 +58,7 @@
 
 				</LinearLayout>
 
-				<ImageView
+				<androidx.appcompat.widget.AppCompatImageView
 					android:id="@+id/icon"
 					android:layout_width="@dimen/wikivoyage_article_card_icon_size"
 					android:layout_height="@dimen/wikivoyage_article_card_icon_size"

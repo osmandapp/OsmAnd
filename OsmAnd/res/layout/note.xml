@@ -35,7 +35,7 @@
 			android:visibility="gone"
 			android:layout_marginEnd="@dimen/local_index_check_right_margin" />
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/icon"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"

@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_action_osm_live"/>
@@ -147,7 +147,7 @@
                 android:layout_marginRight="16dp"
 	            android:layout_marginEnd="16dp">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/statusIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

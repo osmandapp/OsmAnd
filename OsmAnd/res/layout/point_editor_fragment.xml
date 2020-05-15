@@ -68,7 +68,7 @@
                                 android:layout_height="match_parent"
                                 android:orientation="horizontal">
 
-                                <ImageView
+                                <androidx.appcompat.widget.AppCompatImageView
                                     android:id="@+id/name_image"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -131,7 +131,7 @@
                                 android:layout_height="match_parent"
                                 android:orientation="horizontal">
 
-                                <ImageView
+                                <androidx.appcompat.widget.AppCompatImageView
                                     android:id="@+id/category_image"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -199,7 +199,7 @@
                                 android:layout_height="match_parent"
                                 android:orientation="horizontal">
 
-                                <ImageView
+                                <androidx.appcompat.widget.AppCompatImageView
                                     android:id="@+id/description_image"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"

@@ -15,7 +15,7 @@
             android:orientation="vertical"
             android:padding="24dp">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 osmand:srcCompat="@drawable/ic_christmas_illustration"/>

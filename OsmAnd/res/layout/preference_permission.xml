@@ -17,7 +17,7 @@
 		android:layout_marginEnd="@dimen/content_padding_half"
 		android:layout_marginStart="@dimen/content_padding_half">
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@android:id/icon"
 			android:layout_width="@dimen/standard_icon_size"
 			android:layout_height="@dimen/standard_icon_size"

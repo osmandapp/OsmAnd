@@ -25,7 +25,7 @@
             android:gravity="start"
             android:orientation="horizontal">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/toolbar_back"
                 android:contentDescription="@string/back_to_map"
                 android:layout_marginLeft="@dimen/multi_selection_menu_padding_top"
@@ -37,7 +37,7 @@
                 app:srcCompat="@drawable/ic_arrow_back"
                 tools:visibility="visible"/>
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/toolbar_list"
                 android:contentDescription="@string/backToMenu"
                 android:layout_marginLeft="@dimen/multi_selection_menu_padding_top"
@@ -67,7 +67,7 @@
             android:gravity="end"
             android:orientation="horizontal">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/toolbar_settings"
                 android:contentDescription="@string/shared_string_settings"
                 android:layout_marginLeft="@dimen/multi_selection_menu_padding_top"
@@ -79,7 +79,7 @@
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ic_configure_screen_dark"/>
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/toolbar_ok"
                 android:contentDescription="@string/shared_string_ok"
                 android:layout_marginLeft="@dimen/multi_selection_menu_padding_top"
@@ -90,7 +90,7 @@
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ic_action_done"/>
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/toolbar_sort"
                 android:contentDescription="@string/intermediate_points_change_order"
                 android:layout_marginLeft="@dimen/multi_selection_menu_padding_top"
@@ -101,7 +101,7 @@
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ic_sort_waypoint_dark"/>
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/toolbar_flat"
                 android:contentDescription="@string/drawer"
                 android:layout_marginLeft="@dimen/multi_selection_menu_padding_top"
@@ -113,7 +113,7 @@
                 app:srcCompat="@drawable/ic_flat_list_dark"
                 android:visibility="gone"/>
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/toolbar_edit"
                 android:contentDescription="@string/shared_string_edit"
                 android:layout_marginLeft="@dimen/multi_selection_menu_padding_top"

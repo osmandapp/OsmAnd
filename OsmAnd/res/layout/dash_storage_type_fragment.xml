@@ -61,7 +61,7 @@
                     tools:text="Location path  \u2022 300 MB"/>
             </LinearLayout>
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/edit_icon"
                 android:contentDescription="@string/shared_string_edit"
                 android:layout_width="@dimen/list_item_height"

@@ -32,7 +32,7 @@
             android:layout_height="@dimen/measurement_tool_up_down_row_height"
             android:background="?attr/selectableItemBackground">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
                 android:background="@null"
                 tools:src="@drawable/ic_action_ruler"/>
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/up_down_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -149,7 +149,7 @@
 
             <include layout="@layout/card_bottom_divider"/>
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
                 android:layout_gravity="bottom"

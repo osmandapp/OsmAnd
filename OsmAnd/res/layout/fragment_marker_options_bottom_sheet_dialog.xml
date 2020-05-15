@@ -49,7 +49,7 @@
 	                android:paddingStart="@dimen/content_padding"
 	                android:paddingEnd="@dimen/content_padding">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/sort_by_icon"
                         android:layout_width="@dimen/standard_icon_size"
                         android:layout_height="@dimen/standard_icon_size"
@@ -87,7 +87,7 @@
 	                android:paddingStart="@dimen/content_padding"
 	                android:paddingEnd="@dimen/content_padding">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/show_direction_icon"
                         android:layout_width="@dimen/standard_icon_size"
                         android:layout_height="@dimen/standard_icon_size"
@@ -118,7 +118,7 @@
 	                android:paddingEnd="@dimen/content_padding"
 	                android:paddingStart="@dimen/content_padding">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/coordinate_input_icon"
                         android:layout_width="@dimen/standard_icon_size"
                         android:layout_height="@dimen/standard_icon_size"
@@ -147,7 +147,7 @@
 	                android:paddingEnd="@dimen/content_padding"
 	                android:paddingStart="@dimen/content_padding">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/build_route_icon"
                         android:layout_width="@dimen/standard_icon_size"
                         android:layout_height="@dimen/standard_icon_size"
@@ -185,7 +185,7 @@
 	                android:paddingEnd="@dimen/content_padding"
 	                android:paddingStart="@dimen/content_padding">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/save_as_new_track_icon"
                         android:layout_width="@dimen/standard_icon_size"
                         android:layout_height="@dimen/standard_icon_size"
@@ -214,7 +214,7 @@
 	                android:paddingStart="@dimen/content_padding"
 	                android:paddingEnd="@dimen/content_padding">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/move_all_to_history_icon"
                         android:layout_width="@dimen/standard_icon_size"
                         android:layout_height="@dimen/standard_icon_size"

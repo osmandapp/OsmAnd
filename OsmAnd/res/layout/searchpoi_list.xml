@@ -13,7 +13,7 @@
 	android:paddingEnd="@dimen/list_content_padding"
 	android:paddingStart="@dimen/list_content_padding">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/poi_icon"
         android:layout_width="@dimen/standard_icon_size"
         android:layout_height="@dimen/standard_icon_size"
@@ -48,7 +48,7 @@
             android:layout_marginBottom="4dp"
             android:orientation="horizontal" >
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/poi_direction"
                 android:layout_width="@dimen/directionIconSize"
                 android:layout_height="@dimen/directionIconSize"
@@ -68,7 +68,7 @@
                 tools:text="300 km"
 	            android:layout_marginEnd="@dimen/gpx_small_text_margin" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/time_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

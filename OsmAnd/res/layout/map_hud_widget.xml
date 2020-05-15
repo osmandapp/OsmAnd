@@ -26,7 +26,7 @@
             android:textSize="@dimen/map_widget_text_size"
             android:visibility="gone"/>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/widget_top_icon"
             android:layout_width="@dimen/map_widget_image"
             android:layout_height="@dimen/map_widget_image"
@@ -44,7 +44,7 @@
         android:minHeight="@dimen/map_widget_height"
         android:orientation="horizontal">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/widget_icon"
             android:layout_width="@dimen/map_widget_icon"
             android:layout_height="@dimen/map_widget_icon"
