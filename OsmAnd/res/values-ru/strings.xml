@@ -1525,8 +1525,8 @@
     <string name="forward">Вперёд</string>
     <string name="home">Панель управления</string>
     <string name="local_map_names">Местные названия</string>
-    <string name="gpx_monitoring_start">Начать запись GPX</string>
-    <string name="gpx_monitoring_stop">Остановить запись GPX</string>
+    <string name="gpx_monitoring_start">Продолжить запись GPX</string>
+    <string name="gpx_monitoring_stop">Приостановить запись GPX</string>
     <string name="gpx_start_new_segment">Начать новый сегмент</string>
     <string name="enable_sleep_mode">Включить фоновый режим GPS</string>
     <string name="gps_wake_up_timer">Интервал пробуждения GPS</string>
@@ -3715,4 +3715,8 @@
     <string name="parking_positions">Место стоянки</string>
     <string name="quick_action_transport_descr">Переключатель, чтобы отобразить или скрыть общественный транспорт на карте.</string>
     <string name="reset_deafult_order">Восстановить исходный порядок</string>
+    <string name="quick_action_switch_profile_descr">Нажатие кнопки «Действия» переключает между выбранными профилями.</string>
+    <string name="shared_string_add_profile">Добавить профиль</string>
+    <string name="change_application_profile">Изменить профиль приложения</string>
+    <string name="profiles_for_action_not_found">Профили, выбранные для данного действия, не найдены.</string>
 </resources>

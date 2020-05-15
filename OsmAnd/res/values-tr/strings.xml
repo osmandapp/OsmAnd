@@ -1803,8 +1803,8 @@
     <string name="live_monitoring_m">Online izleme (GPX gerekli)</string>
     <string name="live_monitoring_start">Online izleme başlat</string>
     <string name="live_monitoring_stop">Online izleme durdurun</string>
-    <string name="gpx_monitoring_start">GPX günlüğü başlat</string>
-    <string name="gpx_monitoring_stop">Dur GPX günlüğü</string>
+    <string name="gpx_monitoring_start">GPX kaydını devam ettir</string>
+    <string name="gpx_monitoring_stop">GPX kaydını duraklat</string>
     <string name="gpx_start_new_segment">Yeni bir segment başlat</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Araç olmayan otoyollar</string>
     <string name="rendering_attr_hideWoodScrubs_name">Ahşap ve scrubs</string>
@@ -2173,7 +2173,7 @@
     <string name="all_markers_moved_to_history">Tüm harita işaretleyicileri Geçmiş\'e taşındı</string>
     <string name="marker_moved_to_history">Harita işaretleyici Geçmiş\'e taşındı</string>
     <string name="move_all_to_history">Tümünü Geçmiş\'e taşı</string>
-    <string name="quick_action_resume_pause_navigation">Navigasyonu duraklat/sürdür</string>
+    <string name="quick_action_resume_pause_navigation">Navigasyonu duraklat/devam ettir</string>
     <string name="quick_action_resume_pause_navigation_descr">Navigasyonu duraklatma veya devam ettirme düğmesi.</string>
     <string name="quick_action_show_navigation_finish_dialog">\'Navigasyon tamamlandı\' iletisi göster</string>
     <string name="quick_action_start_stop_navigation">Navigasyonu başlat/durdur</string>
@@ -2295,7 +2295,7 @@
     <string name="hide_passed">Geçilmiş-olanı gizle</string>
     <string name="marker_show_distance_descr">Haritada harita işaretleyicilerine olan uzaklık ve yönün nasıl belirtileceğini seçin:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Harita oryantasyon eşiği</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Harita oryantasyonunun \'Hareket yönü\'nden \'Pusula yönü\'ne değişim hızını aşağıdan seçiniz.</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Harita yönünün \'Hareket yönü\'nden \'Pusula yönü\'ne geçiş hızını aşağıdan seçin.</string>
     <string name="save_as_route_point">Rota noktaları olarak kaydet</string>
     <string name="add_point_before">Öncesinde nokta ekle</string>
     <string name="add_point_after">Sonrasında nokta ekle</string>
@@ -3522,7 +3522,7 @@
     <string name="import_rendering_file">Görselleştirme dosyasını içe aktar</string>
     <string name="shared_string_terrain">Arazi</string>
     <string name="hillshade_description">Yamaçları, zirveleri ve ovaları göstermek için koyu tonları kullanan tepe gölgesi haritası.</string>
-    <string name="slope_description">Yamaç, arazide renklendirilmiş görselleştirmelerdir.</string>
+    <string name="slope_description">Yamaç, arazi dikliğini görselleştirmek için renkleri kullanır.</string>
     <string name="terrain_slider_description">Katmanın görüntüleneceği minimum ve maksimum zoom seviyelerini ayarlayın.</string>
     <string name="hillshade_download_description">Harita üzerinde tepe gölgesi görüntülemek için ek haritalara ihtiyaç vardır.</string>
     <string name="slope_download_description">Harita üzerinde yamaçları görüntülemek için ek haritalara ihtiyaç vardır.</string>
@@ -3530,7 +3530,7 @@
     <string name="shared_string_transparency">Şeffaflık</string>
     <string name="shared_string_zoom_levels">Zoom seviyeleri</string>
     <string name="shared_string_legend">Lejand</string>
-    <string name="terrain_empty_state_text">Tepe gölgesi veya yamaç haritasını görüntülemeyi etkinleştir. Bu harita türleri hakkında daha fazla bilgiyi sitemizde okuyabilirsiniz</string>
+    <string name="terrain_empty_state_text">Tepe gölgesi veya yamaç haritasını görüntülemeyi etkinleştir. Bu harita türleri hakkında sitemizde daha fazla bilgi edinebilirsiniz.</string>
     <string name="shared_string_hillshade">Tepe gölgesi</string>
     <string name="import_complete_description">%1$s\'deki tüm veriler içe aktarıldı, yönetmek amacıyla uygulamanın gerekli bölümünü açmak için aşağıdaki düğmeleri kullanabilirsiniz.</string>
     <string name="shared_string_import_complete">İçe aktarma tamamlandı</string>
@@ -3626,9 +3626,11 @@
     <string name="extra_maps_menu_group">Ekstra haritalar</string>
     <string name="download_unsupported_action">Desteklenmeyen eylem %1$s</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="osm_live_payment_subscription_management">Google Play hesabınız bir abonelik satın aldıktan sonra ve süresi
-\ndolduğunda (ay/üç ay/yıl) ücretlendirilir,
-\nGoogle Play ayarlarınızdan daha önce iptal edilirse yenilenmeyecektir.</string>
+    <string name="osm_live_payment_subscription_management">Ödeme, satın alma onaylandığında Google Play hesabınızdan alınacaktır.
+\n
+\n Yenileme tarihinden önce iptal edilmedikçe abonelik otomatik olarak yenilenir. Hesabınızdan yenileme süresi (ay/üç ay/yıl) için sadece yenileme tarihinde ücret alınacaktır.
+\n
+\n Google Play ayarlarınıza giderek aboneliklerinizi yönetebilir ve iptal edebilirsiniz.</string>
     <string name="search_poi_types">POI türleri ara</string>
     <string name="search_poi_types_descr">Farklı kategorilerdeki POI türlerini birleştirin. Tümünü seçmek için \"Değiştir\" düğmesine, kategori seçimi için sol tarafa dokunun.</string>
     <string name="radius_ruler_item">Yarıçap cetveli</string>
@@ -3662,4 +3664,19 @@
 \n • RTL hatalarını düzeltme
 \n
 \n</string>
+    <string name="shared_string_resume">Devam ettir</string>
+    <string name="additional_actions_descr">Bu eylemlere “%1$s” düğmesine dokunarak erişebilirsiniz.</string>
+    <string name="quick_action_transport_hide">Toplu taşıma araçlarını gizle</string>
+    <string name="quick_action_transport_show">Toplu taşıma araçlarını göster</string>
+    <string name="quick_action_show_hide_transport">Toplu taşıma araçlarını göster/gizle</string>
+    <string name="quick_action_transport_descr">Haritada toplu taşıma araçlarını göstermek veya gizlemek için bir düğme.</string>
+    <string name="create_edit_poi">POI Oluştur/Düzenle</string>
+    <string name="parking_positions">Park etme alanları</string>
+    <string name="add_edit_favorite">Sık Kullanılan Ekle / Düzenle</string>
+    <string name="reset_deafult_order">Öntanımlı öge sıralamasını geri yükle</string>
+    <string name="back_to_editing">Düzenlemeye geri dön</string>
+    <string name="quick_action_switch_profile_descr">Eylem düğmesine dokunulduğunda seçilen profiller arasında geçiş yapılır.</string>
+    <string name="shared_string_add_profile">Profil ekle</string>
+    <string name="change_application_profile">Uygulama profilini değiştir</string>
+    <string name="profiles_for_action_not_found">Bu eylem için seçilen profiller bulunamadı.</string>
 </resources>
