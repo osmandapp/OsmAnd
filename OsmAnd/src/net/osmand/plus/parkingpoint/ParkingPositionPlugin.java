@@ -132,6 +132,10 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		parkingEvent.resetToDefault();
 		parkingStartTime.resetToDefault();
 		parkingPosition = null;
+		FavouritePoint pnt = app.getFavorites().getSpecialPoint(SpecialPointType.PARKING);
+		if (pnt != null) {
+			app.getFavorites().deleteFavourite(pnt);
+		}
 		return true;
 	}
 
@@ -372,7 +376,6 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				} else {
 					addOrRemoveParkingEvent(false);
 				}
-				app.getFavorites().setSpecialPoint(getParkingPosition(), SpecialPointType.PARKING, null);
 				showContextMenuIfNeeded(mapActivity, false);
 			}
 		});
