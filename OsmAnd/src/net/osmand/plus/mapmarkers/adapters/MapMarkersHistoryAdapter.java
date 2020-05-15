@@ -80,8 +80,8 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 				} else if (currentDay - markerDay > 8 && monthsDisplayed < 3 && previousHeader != markerMonth) {
 					items.add(markerMonth);
 					previousHeader = markerMonth;
-					monthsDisplayed += 1;
-				} else if (currentMonth - markerMonth >= 4 && previousHeader != THIS_YEAR_HEADER) {
+					monthsDisplayed++;
+				} else if (currentMonth - markerMonth >= 4 && previousHeader != markerMonth && previousHeader != THIS_YEAR_HEADER) {
 					items.add(THIS_YEAR_HEADER);
 					previousHeader = THIS_YEAR_HEADER;
 				}

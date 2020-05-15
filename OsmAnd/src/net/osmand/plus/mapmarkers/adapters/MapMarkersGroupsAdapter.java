@@ -144,7 +144,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 							items.add(markerMonth);
 							previousDateHeader = markerMonth;
 							monthsDisplayed += 1;
-						} else if (currentMonth - markerMonth >= 4 && previousDateHeader != THIS_YEAR_HEADER) {
+						} else if (currentMonth - markerMonth >= 4 && previousDateHeader != markerMonth && previousDateHeader != THIS_YEAR_HEADER) {
 							items.add(THIS_YEAR_HEADER);
 							previousDateHeader = THIS_YEAR_HEADER;
 						}
