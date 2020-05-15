@@ -73,6 +73,9 @@
 
 	<dimen name="favorites_icon_right_margin">24dp</dimen>
 	<dimen name="favorites_icon_size">40dp</dimen>
+	<dimen name="favorites_my_places_icon_size">30dp</dimen>
+	<dimen name="favorites_my_places_icon_left_padding">13dp</dimen>
+	<dimen name="favorites_my_places_icon_right_padding">28dp</dimen>
 	<dimen name="favorites_icon_outline_size">48dp</dimen>
 	<dimen name="favorites_icon_padding">2dp</dimen>
 	<dimen name="favorites_list_item_height">60dp</dimen>
