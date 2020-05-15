@@ -293,7 +293,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 				OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
 				OsmandPreference parkingType = app.getSettings().getPreference(ParkingPositionPlugin.PARKING_TYPE);
 				if (parkingType instanceof BooleanPreference && ((BooleanPreference) parkingType).get()) {
-					return R.drawable.mm_special_parking_time_limited;
+					return R.drawable.mx_special_parking_time_limited;
 				}
 				return iconId;
 			}
