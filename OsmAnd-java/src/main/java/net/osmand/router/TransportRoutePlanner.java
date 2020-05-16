@@ -609,8 +609,8 @@ public class TransportRoutePlanner {
 				if(aTime != -1) {
 					arriveTime = String.format("and arrive at %s", formatTransporTime(aTime));
 				}
-				bld.append(String.format(" %d. %s: walk %.1f m to '%s' and travel %s to '%s' by %s %d stops %s\n",
-						i + 1, s.route.getRef(), s.walkDist, s.getStart().getName(), 
+				bld.append(String.format(" %d. %s [%d]: walk %.1f m to '%s' and travel %s to '%s' by %s %d stops %s\n",
+						i + 1, s.route.getRef(), s.route.getId() / 2, s.walkDist, s.getStart().getName(), 
 						 time, s.getEnd().getName(),s.route.getName(),  (s.end - s.start), arriveTime));
 			}
 			bld.append(String.format(" F. Walk %.1f m to reach your destination", finishWalkDist));
