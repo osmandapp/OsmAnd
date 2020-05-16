@@ -999,6 +999,7 @@ public class TransportRoutePlanner {
 			List<List<TransportStop>> sortedSegments = new ArrayList<List<TransportStop>>(); 
 			if(firstSegment != null) {
 				sortedSegments.add(firstSegment);
+				mergedSegments.remove(firstSegment);
 				while(!mergedSegments.isEmpty()) {
 					List<TransportStop> last = sortedSegments.get(sortedSegments.size() - 1);
 					List<TransportStop> add = findAndDeleteMinDistance(last.get(last.size() - 1).getLocation(), mergedSegments, true);
@@ -1007,6 +1008,7 @@ public class TransportRoutePlanner {
 				
 			} else if(lastSegment != null) {
 				sortedSegments.add(lastSegment);
+				mergedSegments.remove(lastSegment);
 				while(!mergedSegments.isEmpty()) {
 					List<TransportStop> first = sortedSegments.get(0);
 					List<TransportStop> add = findAndDeleteMinDistance(first.get(0).getLocation(), mergedSegments, false);
@@ -1059,6 +1061,7 @@ public class TransportRoutePlanner {
 					while (it.hasNext()) {
 						List<TransportStop> segmentToMerge = it.next();
 						merged = tryToMerge(firstSegment, segmentToMerge);
+						
 						if (merged) {
 							it.remove();
 							break;
