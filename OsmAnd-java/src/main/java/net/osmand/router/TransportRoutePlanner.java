@@ -953,7 +953,7 @@ public class TransportRoutePlanner {
 			List<Way> allWays = getAllWays(incompleteRoutes);
 			
 			
-			// 2. Get array of segments:
+			// 2. Get array of segments (each array size > 1):
 			LinkedList<List<TransportStop>> stopSegments = parseRoutePartsToSegments(incompleteRoutes);
 			
 			// 3. Merge segments and remove excess missingStops (when they are closer then MISSING_STOP_SEARCH_RADIUS):
@@ -962,14 +962,55 @@ public class TransportRoutePlanner {
 			
 			// 4. Now we need to properly sort segments, proper sorting is minimizing distance between stops
 			// So it is salesman problem, we have this solution at TspAnt, but if we know last or first segment we can solve it straightforward
-			
-			// TODO
+			List<TransportStop> firstSegment = null;
+			List<TransportStop> lastSegment = null;
+			for(List<TransportStop> l : mergedSegments) {
+				if(!l.get(0).isMissingStop()) {
+					firstSegment = l;
+				} 
+				if(!l.get(l.size() - 1).isMissingStop()) {
+					lastSegment = l;
+				}
+			}
+			List<List<TransportStop>> sortedSegments = new ArrayList<List<TransportStop>>(); 
+			if(firstSegment != null) {
+				sortedSegments.add(firstSegment);
+				while(!mergedSegments.isEmpty()) {
+					List<TransportStop> last = sortedSegments.get(sortedSegments.size() - 1);
+					List<TransportStop> add = findAndDeleteMinDistance(last.get(last.size() - 1).getLocation(), mergedSegments, true);
+					sortedSegments.add(add);
+				}
+				
+			} else if(lastSegment != null) {
+				while(!mergedSegments.isEmpty()) {
+					List<TransportStop> first = sortedSegments.get(0);
+					List<TransportStop> add = findAndDeleteMinDistance(first.get(0).getLocation(), mergedSegments, false);
+					sortedSegments.add(0, add);
+				}
+			} else {
+				sortedSegments = mergedSegments;
+			}
 			List<TransportStop> finalList = new ArrayList<TransportStop>();
-			for(List<TransportStop> s : mergedSegments) {
+			for(List<TransportStop> s : sortedSegments) {
 				finalList.addAll(s);
 			}
 			// 5. Create combined TransportRoute and return it
 			return new TransportRoute(route, finalList, allWays);
+		}
+
+		private List<TransportStop> findAndDeleteMinDistance(LatLon location, List<List<TransportStop>> mergedSegments,
+				boolean attachToBegin) {
+			int ind = attachToBegin ? 0 : mergedSegments.get(0).size() - 1;
+			double minDist = MapUtils.getDistance(mergedSegments.get(0).get(ind).getLocation(), location);
+			int minInd = 0;
+			for(int i = 1; i < mergedSegments.size(); i++) {
+				ind = attachToBegin ? 0 : mergedSegments.get(i).size() - 1;
+				double dist = MapUtils.getDistance(mergedSegments.get(i).get(ind).getLocation(), location);
+				if(dist < minDist) {
+					minInd = i;
+				}
+			}
+			return mergedSegments.remove(minInd);
 		}
 
 		private List<Way> getAllWays(List<TransportRoute> parts) {
@@ -1075,13 +1116,13 @@ public class TransportRoutePlanner {
 				for (TransportStop s : part.getForwardStops()) {
 					newSeg.add(s);
 					if (s.isMissingStop()) {
-						if (!newSeg.isEmpty()) {
+						if (newSeg.size() > 1) {
 							segs.add(newSeg);
 							newSeg = new ArrayList<TransportStop>();
 						}
 					}
 				}
-				if (!newSeg.isEmpty()) {
+				if (newSeg.size() > 1) {
 					segs.add(newSeg);
 				}
 			}
