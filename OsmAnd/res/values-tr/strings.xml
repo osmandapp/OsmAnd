@@ -3579,9 +3579,9 @@
     <string name="shared_string_drawer">Çekmece</string>
     <string name="reset_items_descr">Ayarları gizlemek onları orijinal durumlarına sıfırlar.</string>
     <string name="shared_string_items">Ögeler</string>
-    <string name="ui_customization_description">Çekmecedeki ögelerin sayısını özelleştirin, haritayı ve içerik menüsünü yapılandırın. 
+    <string name="ui_customization_description">Çekmece, Haritayı Yapılandır ve İçerik Menüsündeki ögelerin sayısını özelleştirin. 
 \n 
-\n%1$s uygulamasından tüm denetimlerini gizlemek için kullanılmayan eklentileri kapatabilirsiniz.</string>
+\nTüm denetimlerini uygulamadan gizlemek için kullanılmayan eklentileri kapatabilirsiniz. %1$s.</string>
     <string name="ui_customization">Kullanıcı Arayüzü Özelleştirme</string>
     <string name="context_menu_actions">İçerik menüsü eylemleri</string>
     <string name="reorder_or_hide_from">%1$s\'den ögeleri yeniden sırala veya gizle.</string>
