@@ -3670,4 +3670,5 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="add_edit_favorite">Tilføj / rediger favorit</string>
     <string name="reset_deafult_order">Gendan standardrækkefølge for elementer</string>
     <string name="back_to_editing">Tilbage til redigering</string>
+    <string name="shared_string_add_profile">Tilføj profil</string>
 </resources>
