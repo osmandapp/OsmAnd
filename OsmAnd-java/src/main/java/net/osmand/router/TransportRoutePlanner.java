@@ -803,13 +803,14 @@ public class TransportRoutePlanner {
 				mergeTransportStops(r, loadedTransportStops, stops, localFileRoutes, routeMap.get(r));
 					
 				for (TransportStop stop : stops) {
-					//skip missing stops
+					// skip missing stops
 					if (stop.isMissingStop()) {
 						continue;
 					}
 					long stopId = stop.getId();
 					TransportStop multifileStop = loadedTransportStops.get(stopId);
 					int[] rrs = stop.getReferencesToRoutes();
+					// TODO what is this?
 					if (multifileStop == stop) {
 						// clear up so it won't be used as it is multi file stop
 						stop.setReferencesToRoutes(null);
@@ -826,10 +827,7 @@ public class TransportRoutePlanner {
 												rr, stop));
 							} else {								
 								TransportRoute combinedRoute = getCombinedRoute(route);
-								if (combinedRoute == null) {
-									System.err.println(String.format("Something went wrong by loading combined route %d for stop %s", route.getId(), stop));
-								} else if (multifileStop == stop ||
-										(!multifileStop.hasRoute(combinedRoute.getId()) &&
+								if (multifileStop == stop || (!multifileStop.hasRoute(combinedRoute.getId()) &&
 												!multifileStop.isRouteDeleted(combinedRoute.getId()))) {
 									// duplicates won't be added
 									multifileStop.addRouteId(combinedRoute.getId());
@@ -853,16 +851,12 @@ public class TransportRoutePlanner {
 															  List<TransportStop> stops,
 															  TIntObjectHashMap<TransportRoute> localFileRoutes,
 															  TIntObjectHashMap<TransportRoute> loadedRoutes 
-//															  boolean processMissingStop
 															  ) throws IOException {
 			TIntArrayList routesToLoad = new TIntArrayList();
 			TIntArrayList localRoutesToLoad = new TIntArrayList();
 			Iterator<TransportStop> it = stops.iterator();
 			while (it.hasNext()) {
 				TransportStop stop = it.next();
-//				if (stop.isMissingStop() && !processMissingStop) {
-//					continue;
-//				}
 				long stopId = stop.getId();
 				localRoutesToLoad.clear();
 				TransportStop multifileStop = loadedTransportStops.get(stopId);
