@@ -83,7 +83,7 @@ public class BinaryMapTransportReaderAdapter {
 	}
 	
 	
-	protected void readTransportIndex(TransportIndex ind, TLongObjectHashMap<net.osmand.data.IncompleteTransportRoute> incompleteRoutes) throws IOException {
+	protected void readTransportIndex(TransportIndex ind) throws IOException {
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -113,13 +113,9 @@ public class BinaryMapTransportReaderAdapter {
 				codedIS.seek(st.length + st.fileOffset);
 				break;
 			case OsmandOdb.OsmAndTransportIndex.INCOMPLETEROUTES_FIELD_NUMBER :
-				TIntObjectHashMap<String> stab = new TIntObjectHashMap<String>();
 				ind.incompleteRoutesLength = codedIS.readRawVarint32();
 				ind.incompleteRoutesOffset = codedIS.getTotalBytesRead();
-				int oldl = codedIS.pushLimit(ind.incompleteRoutesLength);
-				//may be we should start caching stringTable in advance?
-				readIncompleteRoutesList(incompleteRoutes, ind.incompleteRoutesLength, ind.incompleteRoutesOffset, stab);
-				codedIS.popLimit(oldl);
+				codedIS.seek(ind.incompleteRoutesLength + ind.incompleteRoutesOffset);
 				break;
 				
 			default:
@@ -128,6 +124,7 @@ public class BinaryMapTransportReaderAdapter {
 			}
 		}
 	}
+
 	
 	private void readTransportBounds(TransportIndex ind) throws IOException {
 		while(true){
@@ -254,8 +251,8 @@ public class BinaryMapTransportReaderAdapter {
 		return ((char) i)+"";
 	}
 	
-	private void readIncompleteRoutesList(TLongObjectHashMap<net.osmand.data.IncompleteTransportRoute> incompleteRoutes,
-			int length, int offset,  TIntObjectHashMap<String> stringTable) throws IOException {
+	public void readIncompleteRoutesList(TLongObjectHashMap<net.osmand.data.IncompleteTransportRoute> incompleteRoutes,
+			int length, int offset) throws IOException {
 		codedIS.seek(offset);
 		boolean end = false;
 		while (!end) {
@@ -268,7 +265,7 @@ public class BinaryMapTransportReaderAdapter {
 			case OsmandOdb.IncompleteTransportRoutes.ROUTES_FIELD_NUMBER:
 				int l = codedIS.readRawVarint32();
 				int olds = codedIS.pushLimit(l);
-				net.osmand.data.IncompleteTransportRoute ir = readIncompleteRoute(stringTable);
+				net.osmand.data.IncompleteTransportRoute ir = readIncompleteRoute();
 				net.osmand.data.IncompleteTransportRoute itr = incompleteRoutes.get(ir.getRouteId());
 				if(itr != null) {
 					itr.setNextLinkedRoute(ir);
@@ -286,7 +283,7 @@ public class BinaryMapTransportReaderAdapter {
 		
 	}
 	
-	public net.osmand.data.IncompleteTransportRoute readIncompleteRoute(TIntObjectHashMap<String> stringTable) throws IOException {
+	public net.osmand.data.IncompleteTransportRoute readIncompleteRoute() throws IOException {
 		net.osmand.data.IncompleteTransportRoute dataObject = new net.osmand.data.IncompleteTransportRoute();
 		boolean end = false;
 		while(!end){

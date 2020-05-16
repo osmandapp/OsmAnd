@@ -1126,9 +1126,9 @@ public class TransportRoutePlanner {
 		
 		private List<TransportRoute> findIncompleteRouteParts(TransportRoute baseRoute) throws IOException {
 			List<TransportRoute> allRoutes = null;
-			// TODO completely irrelevant always reiteration over all maps
+			// TODO completely irrelevant always reiteration over all maps (especially not in bbox of the route probabl)
 			for (BinaryMapIndexReader bmir : routeMap.keySet()) {
-				IncompleteTransportRoute ptr = bmir.getIncompleteRoutePointers(baseRoute.getId());
+				IncompleteTransportRoute ptr = bmir.getIncompleteTransportRoutes().get(baseRoute.getId());
 				if (ptr != null) {
 					TIntArrayList lst = new TIntArrayList();
 					while(ptr != null) {

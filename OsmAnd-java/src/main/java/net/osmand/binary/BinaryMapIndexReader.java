@@ -3,6 +3,7 @@ package net.osmand.binary;
 
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.CodedOutputStream;
+import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.WireFormat;
 
 import net.osmand.Collator;
@@ -26,6 +27,7 @@ import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapRootLevel;
 import net.osmand.data.Amenity;
 import net.osmand.data.Building;
 import net.osmand.data.City;
+import net.osmand.data.IncompleteTransportRoute;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
@@ -54,7 +56,6 @@ import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.io.Reader;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -110,9 +111,7 @@ public class BinaryMapIndexReader {
 	/*private*/ List<TransportIndex> transportIndexes = new ArrayList<TransportIndex>();
 	/*private*/ List<RouteRegion> routingIndexes = new ArrayList<RouteRegion>();
 	/*private*/ List<BinaryIndexPart> indexes = new ArrayList<BinaryIndexPart>();
-	
-	private final TLongObjectHashMap<net.osmand.data.IncompleteTransportRoute> incompleteRoutes = 
-			new TLongObjectHashMap<net.osmand.data.IncompleteTransportRoute>();
+	TLongObjectHashMap<IncompleteTransportRoute> incompleteTransportRoutes = null;
 	
 	protected CodedInputStream codedIS;
 
@@ -227,7 +226,7 @@ public class BinaryMapIndexReader {
 				ind.filePointer = codedIS.getTotalBytesRead();
 				if (transportAdapter != null) {
 					oldLimit = codedIS.pushLimit(ind.length);
-					transportAdapter.readTransportIndex(ind, incompleteRoutes);
+					transportAdapter.readTransportIndex(ind);
 					codedIS.popLimit(oldLimit);
 					transportIndexes.add(ind);
 					indexes.add(ind);
@@ -2635,12 +2634,17 @@ public class BinaryMapIndexReader {
 		}
 	}
 
-	public net.osmand.data.IncompleteTransportRoute getIncompleteRoutePointers(long id) {
-		return incompleteRoutes.get(id);
-	}
-	
-	public Collection<net.osmand.data.IncompleteTransportRoute> getIncompleteRoutes() {
-		return incompleteRoutes.valueCollection();
+	public TLongObjectHashMap<IncompleteTransportRoute> getIncompleteTransportRoutes() throws InvalidProtocolBufferException, IOException {
+		if (incompleteTransportRoutes == null) {
+			incompleteTransportRoutes = new TLongObjectHashMap<>();
+			for (TransportIndex ti : transportIndexes) {
+				if (ti.incompleteRoutesLength > 0) {
+					transportAdapter.readIncompleteRoutesList(incompleteTransportRoutes, ti.incompleteRoutesLength,
+							ti.incompleteRoutesOffset);
+				}
+			}
+		}
+		return incompleteTransportRoutes;
 	}
 
 
