@@ -36,6 +36,7 @@ public class TransportRoutePlanner {
 	
 	private static final boolean MEASURE_TIME = false;
 	private static final int MISSING_STOP_SEARCH_RADIUS = 15000;
+	private static final int MIN_DIST_STOP_TO_GEOMETRY = 150;
 	public static final long GEOMETRY_WAY_ID = -1;
 	public static final long STOPS_WAY_ID = -2;
 
@@ -381,8 +382,7 @@ public class TransportRoutePlanner {
 		}
 
 		public List<Way> getGeometry() {
-			List<Way> list = new ArrayList<>();
-			route.mergeForwardWays(); //TODO merge ways of all Route parts
+			route.mergeForwardWays();
 			if (DISPLAY_FULL_SEGMENT_ROUTE) {
 				System.out.println("TOTAL SEGMENTS: " + route.getForwardWays().size());
 				if (route.getForwardWays().size() > DISPLAY_SEGMENT_IND) {
@@ -390,30 +390,40 @@ public class TransportRoutePlanner {
 				}
 				return route.getForwardWays();				
 			}
-			List<Way> fw = route.getForwardWays();
-			double minStart = 150;
-			double minEnd = 150;
-			LatLon str = getStart().getLocation();
-			LatLon en = getEnd().getLocation();
-			int endInd = -1;
-			List<Node> res = new ArrayList<>();
-			for (int i = 0;  i < fw.size() ; i++) {
-				List<Node> nodes = fw.get(i).getNodes();
+			List<Way> ways = route.getForwardWays();
+			
+			final LatLon startLoc = getStart().getLocation();
+			final LatLon endLoc = getEnd().getLocation();
+			
+			List<Node> finalr = Collections.emptyList();
+			int fendInd = -1;
+			double fminStartDist = MIN_DIST_STOP_TO_GEOMETRY;
+			for (int i = 0;  i < ways.size() ; i++) {
+				List<Node> nodes = ways.get(i).getNodes();
+				List<Node> res = new ArrayList<>();
+				double minStartDist = MIN_DIST_STOP_TO_GEOMETRY;
+				double minDistEnd = MIN_DIST_STOP_TO_GEOMETRY;
+				int endInd = -1;
 				for (int j = 0; j < nodes.size(); j++) {
 					Node n = nodes.get(j);
-					if (MapUtils.getDistance(str, n.getLatitude(), n.getLongitude()) < minStart) {
-						minStart = MapUtils.getDistance(str, n.getLatitude(), n.getLongitude());
+					if (MapUtils.getDistance(startLoc, n.getLatitude(), n.getLongitude()) < minStartDist) {
+						minStartDist = MapUtils.getDistance(startLoc, n.getLatitude(), n.getLongitude());
 						res.clear();
 					}
 					res.add(n);
-					if (MapUtils.getDistance(en, n.getLatitude(), n.getLongitude()) < minEnd) {
+					if (MapUtils.getDistance(endLoc, n.getLatitude(), n.getLongitude()) < minDistEnd) {
 						endInd = res.size();
-						minEnd = MapUtils.getDistance(en, n.getLatitude(), n.getLongitude());
+						minDistEnd = MapUtils.getDistance(endLoc, n.getLatitude(), n.getLongitude());
 					} 
+				}
+				if(endInd != -1 && res.size() > 0 && minStartDist < fminStartDist) {
+					finalr = res;
+					fendInd = endInd;
+					fminStartDist = minStartDist;
 				}
 			}
 			Way way;
-			if (res.isEmpty() || endInd == -1) {
+			if (finalr.isEmpty() || fendInd == -1) {
 				way = new Way(STOPS_WAY_ID);
 				for (int i = start; i <= end; i++) {
 					LatLon l = getStop(i).getLocation();
@@ -422,12 +432,11 @@ public class TransportRoutePlanner {
 				}
 			} else {
 				way = new Way(GEOMETRY_WAY_ID);
-				for(int k = 0; k < res.size() && k < endInd; k++) {
-					way.addNode(res.get(k));
+				for(int k = 0; k < finalr.size() && k < fendInd; k++) {
+					way.addNode(finalr.get(k));
 				}
 			}
-			list.add(way);
-			return list;
+			return Collections.singletonList(way);
 		}
 		
 		public double getTravelDist() {
