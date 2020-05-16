@@ -1979,13 +1979,13 @@
     <string name="poi_service_electrical">Acontzadura de veìculos elètricos</string>
     <string name="poi_motorcycle_repair">Acontzadura de mototzicletas</string>
     <string name="poi_self_service_yes">Eja</string>
-    <string name="poi_self_service_no">Chene servìtziu a sa sola</string>
+    <string name="poi_self_service_no">Nono</string>
     <string name="poi_automated_yes">Eja</string>
     <string name="poi_automated_no">Non automatizadu</string>
     <string name="poi_full_service_yes">Servìtziu cumpridu</string>
     <string name="poi_brushless_yes">Eja</string>
     <string name="poi_brushless_no">Ispàtzulas: nono</string>
-    <string name="poi_car_wash_no">Sabunadura màchinas: nono</string>
+    <string name="poi_car_wash_no">Nono</string>
     <string name="poi_public_bath">Bagnu pùblicu</string>
     <string name="poi_male_yes">Òmines</string>
     <string name="poi_male_no">Proibidu a sos òmines</string>
