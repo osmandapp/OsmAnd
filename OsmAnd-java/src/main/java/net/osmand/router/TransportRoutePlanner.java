@@ -726,7 +726,6 @@ public class TransportRoutePlanner {
 		
 		private final int walkRadiusIn31;
 		private final int walkChangeRadiusIn31;
-		private final int missingStopRadiusIn31;
 		
 		
 		
@@ -734,7 +733,6 @@ public class TransportRoutePlanner {
 			this.cfg = cfg;
 			walkRadiusIn31 = (int) (cfg.walkRadius / MapUtils.getTileDistanceWidth(31));
 			walkChangeRadiusIn31 = (int) (cfg.walkChangeRadius / MapUtils.getTileDistanceWidth(31));
-			missingStopRadiusIn31 = (int) (MISSING_STOP_SEARCH_RADIUS / MapUtils.getTileDistanceWidth(31));
 			quadTree = new TLongObjectHashMap<List<TransportRouteSegment>>();
 			this.library = library;
 			for (BinaryMapIndexReader r : readers) {
@@ -755,7 +753,6 @@ public class TransportRoutePlanner {
 		private List<TransportRouteSegment> loadNativeTransportStops(int sx, int sy, boolean change, List<TransportRouteSegment> res) throws IOException {
 			long nanoTime = System.nanoTime();
 			int d = change ? walkChangeRadiusIn31 : walkRadiusIn31;
-
 			int lx = (sx - d ) >> (31 - cfg.ZOOM_TO_LOAD_TILES);
 			int rx = (sx + d ) >> (31 - cfg.ZOOM_TO_LOAD_TILES);
 			int ty = (sy - d ) >> (31 - cfg.ZOOM_TO_LOAD_TILES);
@@ -770,7 +767,6 @@ public class TransportRoutePlanner {
 					}
 					for(TransportRouteSegment r : list) {
 						TransportStop st = r.getStop(r.segStart);
-
 						if (Math.abs(st.x31 - sx) > walkRadiusIn31 || Math.abs(st.y31 - sy) > walkRadiusIn31) {
 							wrongLoadedWays++;
 						} else {
