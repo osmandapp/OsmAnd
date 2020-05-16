@@ -1,10 +1,5 @@
 package net.osmand.data;
 
-import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.Way;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -12,9 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.map.hash.TIntObjectHashMap;
-import gnu.trove.map.hash.TLongObjectHashMap;
+import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.Way;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 public class TransportRoute extends MapObject {
 	private List<TransportStop> forwardStops = new ArrayList<TransportStop>();
@@ -26,12 +22,11 @@ public class TransportRoute extends MapObject {
 	private List<Way> forwardWays;
 	private TransportSchedule schedule;
 	public static final double SAME_STOP = 40;
-	private boolean combined = false;
 	
 	public TransportRoute() {
 	}
 	
-	public TransportRoute(TransportRoute r, List<TransportStop> mergedSegment, List<Way> ways) {
+	public TransportRoute(TransportRoute r, List<TransportStop> forwardStops, List<Way> forwardWay) {
 		this.name = r.name;
 		this.enName = r.enName;
 		this.names = r.names;
@@ -41,10 +36,8 @@ public class TransportRoute extends MapObject {
 		this.type = r.type;
 		this.color = r.color;
 		this.schedule = r.schedule;
-		this.combined = true;
-		this.forwardStops = mergedSegment;
-		this.dist = calculateDistance();
-		this.forwardWays = ways;
+		this.forwardStops = forwardStops;
+		this.forwardWays = forwardWay;
 	}
 	
 	public TransportSchedule getSchedule() {
@@ -56,19 +49,6 @@ public class TransportRoute extends MapObject {
 			schedule = new TransportSchedule();
 		}
 		return schedule;
-	}
-	
-	public boolean isCombined() {
-		return combined;
-	}
-	
-	public Integer calculateDistance() {
-		int distance = 0;
-		for (int i = 0; i < forwardStops.size()-1; i++) {
-			if (!forwardStops.get(i).isMissingStop() || !forwardStops.get(i+1).isMissingStop())
-			distance += MapUtils.getDistance(forwardStops.get(i).getLocation(), forwardStops.get(i+1).getLocation());
-		}
-		return distance;
 	}
 	
 	public boolean isIncomplete() {
