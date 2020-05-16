@@ -709,6 +709,9 @@ public class TransportRoutePlanner {
 		public Map<TransportStop, List<TransportRoute>> missingStopsCache = new HashMap<TransportStop, List<TransportRoute>>();
 		
 		public TLongObjectHashMap<List<TransportRouteSegment>> quadTree;
+		// Here we don't limit files by bbox, so it could be an issue while searching for multiple unused files 
+		// Incomplete routes usually don't need more files than around Max-BBOX of start/end, 
+		// so here an improvement could be introduced
 		public final Map<BinaryMapIndexReader, TIntObjectHashMap<TransportRoute>> routeMap = 
 				new LinkedHashMap<BinaryMapIndexReader, TIntObjectHashMap<TransportRoute>>();
 		
@@ -834,7 +837,7 @@ public class TransportRoutePlanner {
 					}
 				}
 			}
-			//there should go stops with complete routes:
+			// There should go stops with complete routes:
 			loadTransportSegments(loadedTransportStops.valueCollection(), lst);
 			
 			readTime += System.nanoTime() - nanoTime;
@@ -1101,7 +1104,7 @@ public class TransportRoutePlanner {
 		private LinkedList<List<TransportStop>> parseRoutePartsToSegments(List<TransportRoute> routeParts) {
 			LinkedList<List<TransportStop>> segs = new LinkedList<List<TransportStop>>();
 			// here we assume that missing stops come in pairs <A, B, C, MISSING, MISSING, D, E...>
-			// TODO check generation that are doubles
+			// we don't add segments with 1 stop cause they are irrelevant further
 			for (TransportRoute part : routeParts) {
 				List<TransportStop> newSeg = new ArrayList<TransportStop>();
 				for (TransportStop s : part.getForwardStops()) {
@@ -1122,8 +1125,8 @@ public class TransportRoutePlanner {
 		
 		private List<TransportRoute> findIncompleteRouteParts(TransportRoute baseRoute) throws IOException {
 			List<TransportRoute> allRoutes = null;
-			// TODO completely irrelevant always reiteration over all maps (especially not in bbox of the route probabl)
 			for (BinaryMapIndexReader bmir : routeMap.keySet()) {
+				// here we could limit routeMap indexes by only certain bbox around start / end (check comment on field) 
 				IncompleteTransportRoute ptr = bmir.getIncompleteTransportRoutes().get(baseRoute.getId());
 				if (ptr != null) {
 					TIntArrayList lst = new TIntArrayList();
