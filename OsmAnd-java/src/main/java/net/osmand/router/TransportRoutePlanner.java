@@ -380,6 +380,12 @@ public class TransportRoutePlanner {
 			}
 			return nodes;
 		}
+		
+		private static class SearchNodeInd { 
+			int ind = -1;
+			Way way = null;
+			double dist = MIN_DIST_STOP_TO_GEOMETRY;
+		}
 
 		public List<Way> getGeometry() {
 			route.mergeForwardWays();
@@ -394,47 +400,63 @@ public class TransportRoutePlanner {
 			
 			final LatLon startLoc = getStart().getLocation();
 			final LatLon endLoc = getEnd().getLocation();
-			
-			List<Node> finalr = Collections.emptyList();
-			int fendInd = -1;
-			double fminStartDist = MIN_DIST_STOP_TO_GEOMETRY;
+			SearchNodeInd startInd = new SearchNodeInd();
+			SearchNodeInd endInd = new SearchNodeInd();
 			for (int i = 0;  i < ways.size() ; i++) {
 				List<Node> nodes = ways.get(i).getNodes();
-				List<Node> res = new ArrayList<>();
-				double minStartDist = MIN_DIST_STOP_TO_GEOMETRY;
-				double minDistEnd = MIN_DIST_STOP_TO_GEOMETRY;
-				int endInd = -1;
 				for (int j = 0; j < nodes.size(); j++) {
 					Node n = nodes.get(j);
-					if (MapUtils.getDistance(startLoc, n.getLatitude(), n.getLongitude()) < minStartDist) {
-						minStartDist = MapUtils.getDistance(startLoc, n.getLatitude(), n.getLongitude());
-						res.clear();
+					if (MapUtils.getDistance(startLoc, n.getLatitude(), n.getLongitude()) < startInd.dist) {
+						startInd.dist = MapUtils.getDistance(startLoc, n.getLatitude(), n.getLongitude());
+						startInd.ind = j;
+						startInd.way = ways.get(i);
 					}
-					res.add(n);
-					if (MapUtils.getDistance(endLoc, n.getLatitude(), n.getLongitude()) < minDistEnd) {
-						endInd = res.size();
-						minDistEnd = MapUtils.getDistance(endLoc, n.getLatitude(), n.getLongitude());
+					if (MapUtils.getDistance(endLoc, n.getLatitude(), n.getLongitude()) < endInd.dist) {
+						endInd.dist = MapUtils.getDistance(endLoc, n.getLatitude(), n.getLongitude());
+						endInd.ind = j;
+						endInd.way = ways.get(i);
 					} 
 				}
-				if(endInd != -1 && res.size() > 0 && minStartDist < fminStartDist) {
-					finalr = res;
-					fendInd = endInd;
-					fminStartDist = minStartDist;
+			}
+			boolean validOneWay = startInd.way != null && startInd.way == endInd.way && startInd.ind <= endInd.ind;
+			if (validOneWay) {
+				Way way = new Way(GEOMETRY_WAY_ID);
+				for (int k = startInd.ind; k <= endInd.ind; k++) {
+					way.addNode(startInd.way.getNodes().get(k));
+				}
+				return Collections.singletonList(way);
+			}
+			boolean validContinuation = startInd.way != null && endInd.way != null &&
+					startInd.way != endInd.way;
+			if (validContinuation) {
+				Node ln = startInd.way.getLastNode();
+				Node fn = endInd.way.getFirstNode();
+				// HERE we need to check other ways for continuation
+				if (ln != null && fn != null && MapUtils.getDistance(ln.getLatLon(), fn.getLatLon()) < MISSING_STOP_SEARCH_RADIUS) {
+					validContinuation = true;
+				} else {
+					validContinuation = false;
 				}
 			}
-			Way way;
-			if (finalr.isEmpty() || fendInd == -1) {
-				way = new Way(STOPS_WAY_ID);
-				for (int i = start; i <= end; i++) {
-					LatLon l = getStop(i).getLocation();
-					Node n = new Node(l.getLatitude(), l.getLongitude(), -1);
-					way.addNode(n);
+			if (validContinuation) {
+				List<Way> two = new ArrayList<Way>();
+				Way way = new Way(GEOMETRY_WAY_ID);
+				for (int k = startInd.ind; k < startInd.way.getNodes().size(); k++) {
+					way.addNode(startInd.way.getNodes().get(k));
 				}
-			} else {
+				two.add(way);
 				way = new Way(GEOMETRY_WAY_ID);
-				for(int k = 0; k < finalr.size() && k < fendInd; k++) {
-					way.addNode(finalr.get(k));
+				for (int k = 0; k <= endInd.ind; k++) {
+					way.addNode(endInd.way.getNodes().get(k));
 				}
+				two.add(way);
+				return two;
+			}
+			Way way = new Way(STOPS_WAY_ID);
+			for (int i = start; i <= end; i++) {
+				LatLon l = getStop(i).getLocation();
+				Node n = new Node(l.getLatitude(), l.getLongitude(), -1);
+				way.addNode(n);
 			}
 			return Collections.singletonList(way);
 		}
