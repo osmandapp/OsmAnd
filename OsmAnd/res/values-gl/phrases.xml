@@ -2145,11 +2145,11 @@
     <string name="poi_service_repair_no">Non fan arranxos</string>
     <string name="poi_service_electrical">Arranxo de automóbiles eléctricos</string>
     <string name="poi_motorcycle_repair">Arranxo de motos</string>
-    <string name="poi_self_service_no">Non hai autoservizo</string>
+    <string name="poi_self_service_no">Non</string>
     <string name="poi_automated_no">Non automatizado</string>
     <string name="poi_full_service_yes">Servizo completo</string>
     <string name="poi_brushless_no">Vasoira xiratoria: non</string>
-    <string name="poi_car_wash_no">Lavadoiro de automóbiles: non</string>
+    <string name="poi_car_wash_no">Non</string>
     <string name="poi_male_yes">Homes</string>
     <string name="poi_male_no">Prohibido para homes</string>
     <string name="poi_female_yes">Mulleres</string>
@@ -3811,4 +3811,9 @@
     <string name="poi_seamark_water_level_dry">Nivel da auga: seco</string>
     <string name="poi_seamark_water_level_submerged">Nivel da auga: somerxido</string>
     <string name="poi_seamark_water_level_part_submerged">Nivel da auga: parcialmente somerxido</string>
+    <string name="poi_osmand_fire_hydrant_pressure_suction">Succión</string>
+    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Presurizado</string>
+    <string name="poi_fire_hydrant_style_water_source_groundwater">Augas subterráneas</string>
+    <string name="poi_fire_hydrant_type_pipe">Tubaxe</string>
+    <string name="poi_fire_hydrant_pressure_filter">Presión</string>
 </resources>
