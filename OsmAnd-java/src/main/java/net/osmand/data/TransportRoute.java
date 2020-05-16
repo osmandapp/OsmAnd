@@ -92,7 +92,8 @@ public class TransportRoute extends MapObject {
 		resortWaysToStopsOrder(forwardWays, forwardStops);
 	}
 	
-	public static void mergeRouteWays(List<Way> forwardWays) {
+	// intrusive operation cause it changes ways itself!
+	private static void mergeRouteWays(List<Way> forwardWays) {
 		boolean changed = true;
 		// combine as many ways as possible
 		while (changed && forwardWays != null) {
@@ -159,7 +160,7 @@ public class TransportRoute extends MapObject {
 		}
 	}
 
-	public static Map<Way, int[]> resortWaysToStopsOrder(List<Way> forwardWays, List<TransportStop> forwardStops) {
+	private static Map<Way, int[]> resortWaysToStopsOrder(List<Way> forwardWays, List<TransportStop> forwardStops) {
 		final Map<Way, int[]> orderWays = new HashMap<Way, int[]>();
 		if (forwardWays != null && forwardStops.size() > 0) {
 			// resort ways to stops order 
