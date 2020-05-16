@@ -27,7 +27,6 @@ public class TransportRoute extends MapObject {
 	private TransportSchedule schedule;
 	public static final double SAME_STOP = 40;
 	private boolean combined = false;
-	private List<TransportRoute> routeParts = new ArrayList<TransportRoute>();
 	
 	public TransportRoute() {
 	}
@@ -45,7 +44,7 @@ public class TransportRoute extends MapObject {
 		this.combined = true;
 		this.forwardStops = mergedSegment;
 		this.dist = calculateDistance();
-		this.forwardWays = ways; //TODO check
+		this.forwardWays = ways;
 	}
 	
 	public TransportSchedule getSchedule() {

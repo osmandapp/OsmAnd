@@ -823,7 +823,7 @@ public class TransportRoutePlanner {
 										String.format("Something went wrong by loading combined route %d for stop %s", 
 												rr, stop));
 							} else {								
-								TransportRoute combinedRoute = getCombinedRoute(route, r.getFile().getName());
+								TransportRoute combinedRoute = getCombinedRoute(route);
 								if (combinedRoute == null) {
 									System.err.println(String.format("Something went wrong by loading combined route %d for stop %s", route.getId(), stop));
 								} else if (multifileStop == stop ||
@@ -928,26 +928,30 @@ public class TransportRoutePlanner {
 			return stops;
 		}
 		
-		private TransportRoute getCombinedRoute(TransportRoute route, String fileName) throws IOException {
+		private TransportRoute getCombinedRoute(TransportRoute route) throws IOException {
 			if (!route.isIncomplete()) {
 				return route;
 			}
 			TransportRoute c = combinedRoutesCache.get(route.getId());
 			if (c == null) {
-				c = combineRoute(route, fileName);
-
+				c = combineRoute(route);
 				combinedRoutesCache.put(route.getId(), c);
 			}
 			return c;
 		} 
 
-		private TransportRoute combineRoute(TransportRoute route, String fileName) throws IOException {
+		private TransportRoute combineRoute(TransportRoute route) throws IOException {
+			
 			// 1. Get all available route parts;
-			List<TransportRoute> result = new ArrayList<>(findIncompleteRouteParts(route));
-			List<Way> allWays = getAllWays(result); //TODO check ways for right order? Artifacts during drawing.
+			List<TransportRoute> incompleteRoutes = findIncompleteRouteParts(route);
+			if (incompleteRoutes == null) {
+				return route;
+			}
+			
+			List<Way> allWays = getAllWays(incompleteRoutes); //TODO check ways for right order? Artifacts during drawing.
 			
 			// 2. Get array of segments:
-			List<List<TransportStop>> segments = parseRoutePartsToSegments(result);
+			List<List<TransportStop>> segments = parseRoutePartsToSegments(incompleteRoutes);
 			Collections.sort(segments, compareSegsBySize);
 			
 			// 3. Merge segments and remove excess missingStops (when they are closer then MISSING_STOP_SEARCH_RADIUS):
@@ -1156,47 +1160,27 @@ public class TransportRoutePlanner {
 			return segs;
 		}
 		
-		
-		private Collection<TransportRoute> findIncompleteRouteParts(TransportRoute baseRoute) throws IOException {
-			IncompleteTransportRoute ptr;
-			TIntObjectHashMap<TransportRoute> res = new TIntObjectHashMap<TransportRoute>();
-			//TODO search only routes from bbox?
-			for (BinaryMapIndexReader bmir: routeMap.keySet()) {
-				/**
-				 *  TODO: Should I check if those routes already loaded? But they shouldn't, 
-				 *  else we will already had a combined route and never get there!				
-				 */
-				ptr = bmir.getIncompleteRoutePointers(baseRoute.getId());
-				if (ptr != null && ptr.getRouteOffset() != -1) {
-					res.putAll(bmir.getTransportRoutes(new int[] {ptr.getRouteOffset()}));
+		private List<TransportRoute> findIncompleteRouteParts(TransportRoute baseRoute) throws IOException {
+			List<TransportRoute> allRoutes = null;
+			// TODO completely irrelevant always reiteration over all maps
+			for (BinaryMapIndexReader bmir : routeMap.keySet()) {
+				IncompleteTransportRoute ptr = bmir.getIncompleteRoutePointers(baseRoute.getId());
+				if (ptr != null) {
+					TIntArrayList lst = new TIntArrayList();
+					while(ptr != null) {
+						lst.add(ptr.getRouteOffset());
+						ptr = ptr.getNextLinkedRoute();
+					}
+					if(lst.size() > 0) {
+						if(allRoutes == null) {
+							allRoutes = new ArrayList<TransportRoute>();
+						}
+						allRoutes.addAll(bmir.getTransportRoutes(lst.toArray()).valueCollection());
+					}
 				}
 			}
-			return res.valueCollection();
+			return allRoutes;
 		}
-		
-		
-//		private TIntObjectHashMap<TransportRoute> getRouteParts(int x, int y) throws IOException {
-//			int pz = (31 - cfg.ZOOM_TO_LOAD_TILES);
-//			SearchRequest<TransportStop> sr = BinaryMapIndexReader.buildSearchTransportRequest(x << pz, (x + 1) << pz,
-//					y << pz, (y + 1) << pz, -1, null);
-//			
-//			TLongObjectHashMap<TransportStop> loadedTransportStops = new TLongObjectHashMap<TransportStop>();
-//			TIntObjectHashMap<TransportRoute> localFileRoutes = new TIntObjectHashMap<>();
-//			TIntObjectHashMap<TransportRoute> res = new TIntObjectHashMap<TransportRoute>();
-//			for (BinaryMapIndexReader r : routeMap.keySet()) {
-//				sr.clearSearchResults();
-//				List<TransportStop> stops = r.searchTransportIndex(sr);
-//
-//				localFileRoutes.clear();
-//				//search routes here:
-//				mergeTransportStops(r, loadedTransportStops, stops, localFileRoutes, routeMap.get(r));
-//				if (!localFileRoutes.isEmpty()) {
-//					res.putAll(localFileRoutes);
-//				}
-//			}
-//			return res;
-//		}
-		
 		
 		private void loadTransportSegments(Collection<TransportStop> stops, List<TransportRouteSegment> lst) throws IOException {
 			for(TransportStop s : stops) {

@@ -1,20 +1,16 @@
 package net.osmand.binary;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.WireFormat;
 
-import gnu.trove.list.array.TLongArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
-import net.osmand.binary.OsmandOdb.IncompleteTransportRoute;
 import net.osmand.data.TransportSchedule;
 import net.osmand.data.TransportStop;
 import net.osmand.data.TransportStopExit;
@@ -261,8 +257,6 @@ public class BinaryMapTransportReaderAdapter {
 	private void readIncompleteRoutesList(TLongObjectHashMap<net.osmand.data.IncompleteTransportRoute> incompleteRoutes,
 			int length, int offset,  TIntObjectHashMap<String> stringTable) throws IOException {
 		codedIS.seek(offset);
-		
-		List<net.osmand.data.IncompleteTransportRoute> irs = new ArrayList<>();
 		boolean end = false;
 		while (!end) {
 			int t = codedIS.readTag();
@@ -275,7 +269,12 @@ public class BinaryMapTransportReaderAdapter {
 				int l = codedIS.readRawVarint32();
 				int olds = codedIS.pushLimit(l);
 				net.osmand.data.IncompleteTransportRoute ir = readIncompleteRoute(stringTable);
-				incompleteRoutes.put(ir.getRouteId(), ir);
+				net.osmand.data.IncompleteTransportRoute itr = incompleteRoutes.get(ir.getRouteId());
+				if(itr != null) {
+					itr.setNextLinkedRoute(ir);
+				} else {
+					incompleteRoutes.put(ir.getRouteId(), ir);
+				}
 				codedIS.popLimit(olds);
 				break;
 			default:
@@ -316,7 +315,7 @@ public class BinaryMapTransportReaderAdapter {
 //				dataObject.setType(regStr(stringTable));
 				break;
 			case OsmandOdb.IncompleteTransportRoute.MISSINGSTOPS_FIELD_NUMBER :
-////				dataObject.getMissingStops().add(codedIS.readSInt32()); //skip for now
+// 			    dataObject.getMissingStops().add(codedIS.readSInt32()); //skip for now
 				skipUnknownField(t);
 				break;
 			default:
@@ -482,7 +481,6 @@ public class BinaryMapTransportReaderAdapter {
 			codedIS.seek(ind.stringTable.fileOffset);
 			int oldLimit = codedIS.pushLimit(ind.stringTable.length);
 			int current = 0;
-			int i = 0;
 			while (codedIS.getBytesUntilLimit() > 0) {
 				int t = codedIS.readTag();
 				int tag = WireFormat.getTagFieldNumber(t);
