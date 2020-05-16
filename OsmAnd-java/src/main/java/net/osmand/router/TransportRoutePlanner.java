@@ -982,6 +982,7 @@ public class TransportRoutePlanner {
 				}
 				
 			} else if(lastSegment != null) {
+				sortedSegments.add(lastSegment);
 				while(!mergedSegments.isEmpty()) {
 					List<TransportStop> first = sortedSegments.get(0);
 					List<TransportStop> add = findAndDeleteMinDistance(first.get(0).getLocation(), mergedSegments, false);
