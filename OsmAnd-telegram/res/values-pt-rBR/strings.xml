@@ -194,7 +194,7 @@
     <string name="gps_points">Pontos de GPS</string>
     <string name="shared_string_sent">"Enviar "</string>
     <string name="please_update_osmand">Por favor, atualize o OsmAnd para ver os dados no mapa</string>
-    <string name="shared_string_update">"Atualizar "</string>
+    <string name="shared_string_update">Atualizar</string>
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegrama (o aplicativo de mensagens) é usado para conectar e se comunicar com as pessoas.</string>
     <string name="privacy_policy_telegram_client">OsmAnd tracker é um dos clientes que usam a Plataforma aberta do Telegram . Seus contatos podem usar qualquer outro cliente Telegram.</string>
