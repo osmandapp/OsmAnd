@@ -1012,8 +1012,7 @@ public class RouteDataObject {
 	}
 
 	public boolean hasNameTagStartsWith(String tagStartsWith) {
-		int[] nextSegmentNameIds = nameIds;
-		for (int nm = 0; nm < nameIds.length; nm++) {
+		for (int nm = 0; nameIds != null && nm < nameIds.length; nm++) {
 			RouteTypeRule rtr = region.quickGetEncodingRule(nameIds[nm]);
 			if (rtr != null && rtr.getTag().startsWith(tagStartsWith)) {
 				return true;
