@@ -145,7 +145,7 @@
     <string name="download_regular_maps">Standart Harita</string>
     <string name="download_roads_only_maps">Yalnızca yolları gösteren harita</string>
     <string name="rendering_attr_noAdminboundaries_name">Sınırlar</string>
-    <string name="rendering_attr_noAdminboundaries_description">Bölgesel sınırların gösterilmesini önle (yönetici düzeyleri 5-9).</string>
+    <string name="rendering_attr_noAdminboundaries_description">Bölgesel sınırların gösterilmesini önle (yönetici seviyesi 5-9).</string>
     <string name="map_widget_max_speed">Hız sınırı</string>
     <string name="route_descr_lat_lon">Enlem %1$.3f, boylam %2$.3f</string>
     <string name="no_buildings_found">Bina bulunmadı.</string>
@@ -370,7 +370,7 @@
     <string name="additional_settings">İlave ayarlar</string>
     <string name="shared_string_settings">Ayarlar</string>
     <string name="update_tile">Haritayı güncelle</string>
-    <string name="mark_point">"Hedef "</string>
+    <string name="mark_point">Hedef</string>
     <string name="shared_string_add_to_favorites">\'Sık Kullanılanlar\'a ekle</string>
     <string name="use_english_names">Haritalarda İngilizce isimler kullanın</string>
     <string name="map_view_3d_descr">Haritanın 3D görünümünü etkinleştirin.</string>
@@ -493,7 +493,7 @@
     <string name="accessibility_mode">Erişilebilirlik modu</string>
     <string name="accessibility_mode_descr">Engelli kullanıcılar için özellikleri açar.</string>
     <string name="accessibility_default">Android sistem ayarına göre</string>
-    <string name="zoomIs">Yakınlaştırma düzeyi</string>
+    <string name="zoomIs">Yakınlaştırma seviyesi</string>
     <string name="north_north_east">kuzey-kuzeydoğu</string>
     <string name="north_east">kuzeydoğu</string>
     <string name="east_north_east">doğu-kuzeydoğu</string>
@@ -1321,7 +1321,7 @@
     <string name="versions_item">Sürümler</string>
     <string name="feedback">Görüşleriniz</string>
     <string name="contact_us">İletişim</string>
-    <string name="map_legend">Harita İşaretleri</string>
+    <string name="map_legend">Harita lejandı</string>
     <string name="save_poi_without_poi_type_message">Türü olmadan POI\'yi gerçekten kaydetmek istiyor musunuz\?</string>
     <string name="poi_context_menu_modify_osm_change">OSM değişikliği değiştirme</string>
     <string name="new_version">Yeni Sürüm</string>
@@ -1403,7 +1403,7 @@
     <string name="do_you_like_osmand">OsmAnd\'ı Sevdinizmi?</string>
     <string name="we_really_care_about_your_opinion">Fikir ve geri bildirimleriniz değerlidir.</string>
     <string name="rate_this_app">Bu Uygulamayı Oyla</string>
-    <string name="rate_this_app_long">"Osmand\'a Google Play\'de  puan verin"</string>
+    <string name="rate_this_app_long">Lütfen OsmAnd\'a Google Play\'de puan verin</string>
     <string name="dahboard_options_dialog_title">Pano Yapılandırma</string>
     <string name="shared_string_card_was_hidden">Kart gizlidir</string>
     <string name="shared_string_undo">Geri al</string>
@@ -1700,7 +1700,7 @@
 \nEnl %1$s
 \nByl %2$s</string>
     <string name="rendering_attr_pisteRoutes_name">Kayak pistleri</string>
-    <string name="free">"%1$s boş "</string>
+    <string name="free">%1$s boş</string>
     <string name="rendering_attr_pisteGrooming_name">Pist tımar</string>
     <string name="world_ski_missing">Kayak tesislerini görüntülemek için özel çevrim dışı haritayı indirin.</string>
     <string name="nautical_maps_missing">Deniz detaylarını görüntülemek için özel çevrim dışı haritayı indirin.</string>
@@ -1962,7 +1962,7 @@
     <string name="app_mode_bus">Otobüs</string>
     <string name="app_mode_train">Tren</string>
     <string name="current_track">Şimdiki yol</string>
-    <string name="map_widget_battery">Pil düzeyi</string>
+    <string name="map_widget_battery">Pil seviyesi</string>
     <string name="change_markers_position">İşaretleyici konumunu değiştir</string>
     <string name="follow_us">Bizi takip edin</string>
     <string name="map_widget_bearing">Nispi yön</string>
@@ -2015,10 +2015,10 @@
     <string name="shared_string_plugin">Eklenti</string>
     <string name="srtm_purchase_header">Kademeli dikey alanları göstermek için \'Eş yükselti eğrileri\' eklentisini satın alın ve yükleyin.</string>
     <string name="srtm_color_scheme">Renk düzeni</string>
-    <string name="show_from_zoom_level">Zoom düzeyinde başlayarak görüntüle</string>
+    <string name="show_from_zoom_level">Yakınlaştırma seviyesinde başlayarak görüntüle</string>
     <string name="routing_attr_allow_private_name">Özel-arazi erişimine izin ver</string>
     <string name="routing_attr_allow_private_description">Özel-arazi alanlarına erişime izin ver.</string>
-    <string name="display_zoom_level">Görüntü-yakınlaştırma düzeyi gösterimi: %1$s</string>
+    <string name="display_zoom_level">Görüntü yakınlaştırma seviyesi: %1$s</string>
     <string name="favorite_group_name">Grup ismi</string>
     <string name="change_color">Renk değiştir</string>
     <string name="edit_name">Adı düzenle</string>
@@ -2300,7 +2300,7 @@
     <string name="add_point_before">Öncesinde nokta ekle</string>
     <string name="add_point_after">Sonrasında nokta ekle</string>
     <string name="map_widget_ruler_control">Yarıçap cetveli</string>
-    <string name="mapillary_action_descr">Sokak düzeyinde görüşünüzü Mapillary ile paylaşın.</string>
+    <string name="mapillary_action_descr">Sokak seviyesinde görüşünüzü Mapillary ile paylaşın.</string>
     <string name="type_city_town">Şehir/kasaba/bölgeyi yazın</string>
     <string name="quick_action_auto_zoom_desc">Hız kontrollü otomatik yakınlaştırma özelliğini açmak veya kapatmak için düğme.</string>
     <string name="quick_action_add_first_intermediate">Seyahatteki ilk ara-noktayı ekleyin</string>
@@ -2314,7 +2314,7 @@
     <string name="routing_attr_driving_style_balance_name">Dengeli</string>
     <string name="routing_attr_driving_style_safety_name">Ana yol harici yan yolları tercih et</string>
     <string name="relief_smoothness_factor_descr">Tercih edilen arazi: düz ya da engebeli.</string>
-    <string name="shared_string_slope">Yokuş</string>
+    <string name="shared_string_slope">Yamaç</string>
     <string name="shared_string_time_moving">Hareket zamanı</string>
     <string name="shared_string_time_span">Zaman aralığı</string>
     <string name="select_gpx_folder">GPX dosya klasörü seç</string>
@@ -2358,8 +2358,7 @@
     <string name="shared_string_only_with_wifi">Sadece Kablosuz\'la</string>
     <string name="wikivoyage_download_pics">Resimleri indir</string>
     <string name="wikivoyage_download_pics_descr">Makalelerdeki resimler çevrim dışı kullanım için indirilebilir. 
-\n
-\nBu ayar her zaman \'Gezinti\' → \'Seçenekler\' de bulunabilir.</string>
+\n Bu ayar her zaman \'Gezinti\' → \'Seçenekler\' de bulunabilir.</string>
     <string name="shared_string_wifi_only">Sadece Kablosuz\'la</string>
     <string name="select_travel_book">Bir seyahat kitabı seçin</string>
     <string name="shared_string_travel_book">Seyahat kitabı</string>
@@ -2504,7 +2503,7 @@
     <string name="show_full_description">Açıklamayı göster</string>
     <string name="move_maps">Haritaları taşı</string>
     <string name="public_transport_try_ped">Yürüme navigasyonunu dene.</string>
-    <string name="public_transport_try_change_settings">Ayarları değiştirmeyi dene.</string>
+    <string name="public_transport_try_change_settings">Ayarları değiştirmeyi deneyin.</string>
     <string name="shared_string_restore">Restore et</string>
     <string name="poi_cannot_be_found">Düğüm ya da yol bulunamadı.</string>
     <string name="search_no_results_feedback">Arama sonucu yok mu\?
@@ -3258,7 +3257,7 @@
     <string name="routeInfo_piste_type_name">Pist türü</string>
     <string name="rendering_attr_piste_difficulty_novice_name">Acemi</string>
     <string name="rendering_attr_piste_difficulty_easy_name">Kolay</string>
-    <string name="rendering_attr_piste_difficulty_intermediate_name">Orta düzey</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">Orta</string>
     <string name="rendering_attr_piste_difficulty_advanced_name">İleri</string>
     <string name="rendering_attr_piste_difficulty_expert_name">Uzman</string>
     <string name="rendering_attr_piste_difficulty_freeride_name">Serbest sürüş</string>
@@ -3529,7 +3528,7 @@
     <string name="slope_read_more">%1$s\'de yamaçlar hakkında daha fazla bilgi edinebilirsiniz.</string>
     <string name="shared_string_transparency">Şeffaflık</string>
     <string name="shared_string_zoom_levels">Zoom seviyeleri</string>
-    <string name="shared_string_legend">Lejand</string>
+    <string name="shared_string_legend">Lejant</string>
     <string name="terrain_empty_state_text">Tepe gölgesi veya yamaç haritasını görüntülemeyi etkinleştir. Bu harita türleri hakkında sitemizde daha fazla bilgi edinebilirsiniz.</string>
     <string name="shared_string_hillshade">Tepe gölgesi</string>
     <string name="import_complete_description">%1$s\'deki tüm veriler içe aktarıldı, yönetmek amacıyla uygulamanın gerekli bölümünü açmak için aşağıdaki düğmeleri kullanabilirsiniz.</string>
