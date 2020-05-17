@@ -49,9 +49,7 @@
     <string name="authentication_code_descr">Telegram отправил вам код для того, чтобы OsmAnd вошел в вашу учетную запись.</string>
     <string name="enter_password">Введите пароль</string>
     <string name="password_descr">Пароль Telegram</string>
-    <string name="welcome_descr">
-        <b>OsmAnd Tracker</b> позволяет вам делиться своим местоположением и видеть других в OsmAnd.<br/>
-        <br/>Приложение использует Telegram API, и вам нужна учетная запись Telegram.</string>
+    <string name="welcome_descr"><b>OsmAnd Tracker</b> позволяет вам делиться своим местоположением и видеть других в OsmAnd.<br/> <br/>Приложение использует Telegram API, и вам нужна учетная запись Telegram.</string>
     <string name="phone_number_title">Номер телефона</string>
     <string name="phone_number_descr">Номер телефона в международном формате</string>
     <string name="shared_string_authorization">Авторизация</string>
@@ -166,7 +164,7 @@
     <string name="points_size">%1$d точек</string>
     <string name="shared_string_date">Дата</string>
     <string name="shared_string_collected">Собрано</string>
-    <string name="gps_points">"Точки GPS "</string>
+    <string name="gps_points">Точки GPS</string>
     <string name="shared_string_sent">Отправлено</string>
     <string name="monitoring_is_enabled">Мониторинг включен</string>
     <string name="monitoring_is_disabled">Мониторинг отключен</string>
