@@ -3611,4 +3611,10 @@
     <string name="create_edit_poi">Crear/Editar POI</string>
     <string name="add_edit_favorite">Agregar / Editar Favorito</string>
     <string name="shared_string_add_profile">Agregar perfil</string>
+    <string name="lang_an">Aragones</string>
+    <string name="custom_color">Color personalizado</string>
+    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
+    <string name="quick_action_item">Acción rápida</string>
+    <string name="radius_ruler_item">Regla radial</string>
+    <string name="measure_distance_item">Medir distancia</string>
 </resources>
