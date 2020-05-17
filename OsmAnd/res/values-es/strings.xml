@@ -3593,4 +3593,22 @@
 \n • Se corrigieron los errores con RTL
 \n
 \n</string>
+    <string name="subscription_osmandlive_item">Suscripción - OsmAnd Live</string>
+    <string name="osmand_purchases_item">Compras en OsmAnd</string>
+    <string name="quick_action_transport_descr">Un botón que muestra u oculta el transporte público en el mapa.</string>
+    <string name="back_to_editing">Regresar a editar</string>
+    <string name="change_application_profile">Cambiar el perfil de la aplicación</string>
+    <string name="profiles_for_action_not_found">Los perfiles seleccionados para esta acción no se han encontrado.</string>
+    <string name="extra_maps_menu_group">Mapas extras</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="travel_item">Viaje (Wikivoyage y Wikipedia)</string>
+    <string name="map_markers_item">Marcadores de mapa</string>
+    <string name="favorites_item">Favoritos</string>
+    <string name="navigation_profiles_item">Perfiles de navegación</string>
+    <string name="quick_action_show_hide_transport">Mostrar/ocultar transporte público</string>
+    <string name="quick_action_transport_hide">Ocultar transporte público</string>
+    <string name="quick_action_transport_show">Mostrar transporte público</string>
+    <string name="create_edit_poi">Crear/Editar POI</string>
+    <string name="add_edit_favorite">Agregar / Editar Favorito</string>
+    <string name="shared_string_add_profile">Agregar perfil</string>
 </resources>
