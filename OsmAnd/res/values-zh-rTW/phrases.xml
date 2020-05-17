@@ -1518,13 +1518,13 @@
     <string name="poi_service_electrical">電動車維修</string>
     <string name="poi_motorcycle_repair">機車維修</string>
     <string name="poi_self_service_yes">自助服務</string>
-    <string name="poi_self_service_no">無自助服務</string>
+    <string name="poi_self_service_no">無</string>
     <string name="poi_automated_yes">自動化</string>
     <string name="poi_automated_no">無自動化</string>
     <string name="poi_full_service_yes">全方位服務</string>
     <string name="poi_brushless_yes">無刷</string>
     <string name="poi_brushless_no">無刷：無</string>
-    <string name="poi_car_wash_no">洗車：無</string>
+    <string name="poi_car_wash_no">無</string>
     <string name="poi_aeroway_fuel">飛機燃油站</string>
     <string name="poi_public_bath">公共浴室</string>
     <string name="poi_male_yes">男性</string>
