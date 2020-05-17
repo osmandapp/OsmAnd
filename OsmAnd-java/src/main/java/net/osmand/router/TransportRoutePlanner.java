@@ -42,6 +42,7 @@ public class TransportRoutePlanner {
 
 	public List<TransportRouteResult> buildRoute(TransportRoutingContext ctx, LatLon start, LatLon end) throws IOException, InterruptedException {
 		ctx.startCalcTime = System.currentTimeMillis();
+		double totalDistance = MapUtils.getDistance(start, end);
 		List<TransportRouteSegment> startStops = ctx.getTransportStops(start);
 		List<TransportRouteSegment> endStops = ctx.getTransportStops(end);
 
@@ -60,7 +61,14 @@ public class TransportRoutePlanner {
 		}
 		
 		double finishTime = ctx.cfg.maxRouteTime;
-		double maxTravelTimeCmpToWalk = MapUtils.getDistance(start, end) / ctx.cfg.walkSpeed - ctx.cfg.changeTime / 2;
+		ctx.finishTimeSeconds = ctx.cfg.finishTimeSeconds;
+		if (totalDistance > ctx.cfg.maxRouteDistance && ctx.cfg.maxRouteIncreaseSpeed > 0)  {
+			int increaseTime = (int) ((totalDistance - ctx.cfg.maxRouteDistance) 
+					* 3.6 / ctx.cfg.maxRouteIncreaseSpeed);
+			finishTime += increaseTime;
+			ctx.finishTimeSeconds += increaseTime / 6;
+		}
+		double maxTravelTimeCmpToWalk = totalDistance / ctx.cfg.walkSpeed - ctx.cfg.changeTime / 2;
 		List<TransportRouteSegment> results = new ArrayList<TransportRouteSegment>();
 		initProgressBar(ctx, start, end);
 		while (!queue.isEmpty()) {
@@ -82,7 +90,7 @@ public class TransportRoutePlanner {
 			if (segment.getDepth() > ctx.cfg.maxNumberOfChanges + 1) {
 				continue;
 			}
-			if (segment.distFromStart > finishTime + ctx.cfg.finishTimeSeconds || 
+			if (segment.distFromStart > finishTime + ctx.finishTimeSeconds || 
 					segment.distFromStart > maxTravelTimeCmpToWalk) {
 				break;
 			}
@@ -114,7 +122,7 @@ public class TransportRoutePlanner {
 				} else {
 					travelTime += ctx.cfg.stopTime + segmentDist / routeTravelSpeed;
 				}
-				if(segment.distFromStart + travelTime > finishTime + ctx.cfg.finishTimeSeconds) {
+				if(segment.distFromStart + travelTime > finishTime + ctx.finishTimeSeconds) {
 					break;
 				}
 				sgms.clear();
@@ -169,7 +177,7 @@ public class TransportRoutePlanner {
 				if (finishTime > finish.distFromStart) {
 					finishTime = finish.distFromStart;
 				}
-				if(finish.distFromStart < finishTime + ctx.cfg.finishTimeSeconds && 
+				if(finish.distFromStart < finishTime + ctx.finishTimeSeconds && 
 						(finish.distFromStart < maxTravelTimeCmpToWalk || results.size() == 0)) {
 					results.add(finish);
 				}
@@ -732,6 +740,7 @@ public class TransportRoutePlanner {
 	}
 	
 	public static class TransportRoutingContext {
+		
 		public NativeLibrary library;
 		public RouteCalculationProgress calculationProgress;
 		public TLongObjectHashMap<TransportRouteSegment> visitedSegments = new TLongObjectHashMap<TransportRouteSegment>();
@@ -746,6 +755,7 @@ public class TransportRoutePlanner {
 		public final Map<BinaryMapIndexReader, TIntObjectHashMap<TransportRoute>> routeMap = 
 				new LinkedHashMap<BinaryMapIndexReader, TIntObjectHashMap<TransportRoute>>();
 		
+		public int finishTimeSeconds;
 		
 		// stats
 		public long startCalcTime;
