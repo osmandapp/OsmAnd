@@ -1084,19 +1084,28 @@ public class TransportRoutePlanner {
 			// 1st we check that segments overlap by stop
 			int commonStopFirst = 0;
 			int commonStopSecond = 0;
+			boolean found = false;
 			for(;commonStopFirst < firstSegment.size(); commonStopFirst++) {
-				for(; commonStopSecond < segmentToMerge.size(); commonStopSecond++ ) {
+				for(commonStopSecond = 0; commonStopSecond < segmentToMerge.size() && !found; commonStopSecond++) {
 					long lid1 = firstSegment.get(commonStopFirst).getId();
 					long lid2 = segmentToMerge.get(commonStopSecond).getId();
 					if(lid1 > 0 && lid2 == lid1) {
+						found = true;
 						break;
 					}
 				}
+				if(found) {
+					// important to increment break inside loop
+					break;
+				}
 			}
-			if(commonStopFirst < firstSegment.size()) {
+			if(found && commonStopFirst < firstSegment.size()) {
 				// we've found common stop so we can merge based on stops
 				// merge last part first
-				if(firstSegment.size() - commonStopFirst < segmentToMerge.size() - commonStopSecond) {
+				int leftPartFirst = firstSegment.size() - commonStopFirst;
+				int leftPartSecond = segmentToMerge.size() - commonStopSecond;
+				if(leftPartFirst < leftPartSecond || (leftPartFirst == leftPartSecond && 
+						firstSegment.get(firstSegment.size() - 1).isMissingStop())) {
 					while(firstSegment.size() > commonStopFirst) {
 						firstSegment.remove(firstSegment.size() - 1);
 					}
@@ -1105,7 +1114,8 @@ public class TransportRoutePlanner {
 					}
 				}
 				// merge first part
-				if(commonStopFirst < commonStopSecond) {
+				if(commonStopFirst < commonStopSecond || (commonStopFirst == commonStopSecond && 
+						firstSegment.get(0).isMissingStop())) {
 					for(int i = 0; i < commonStopFirst; i++) {
 						firstSegment.remove(0);
 					}
