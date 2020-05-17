@@ -840,14 +840,8 @@ public class TransportRoutePlanner {
 					long stopId = stop.getId();
 					TransportStop multifileStop = loadedTransportStops.get(stopId);
 					int[] rrs = stop.getReferencesToRoutes();
-					// TODO what is this?
-					if (multifileStop == stop) {
-						// clear up so it won't be used as it is multi file stop
-						stop.setReferencesToRoutes(null);
-					} else {
-						// add other routes
-						stop.setReferencesToRoutes(null);
-					}
+					// clear up so it won't be used as it is multi file stop
+					stop.setReferencesToRoutes(null);
 					if (rrs != null && !multifileStop.isDeleted()) {
 						for (int rr : rrs) {
 							TransportRoute route = localFileRoutes.get(rr);
