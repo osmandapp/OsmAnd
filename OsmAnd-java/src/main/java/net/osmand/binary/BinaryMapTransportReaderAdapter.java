@@ -9,6 +9,7 @@ import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.WireFormat;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
+import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.TransportSchedule;
 import net.osmand.data.TransportStop;
@@ -43,6 +44,8 @@ public class BinaryMapTransportReaderAdapter {
 
 		int stopsFileOffset = 0;
 		int stopsFileLength = 0;
+		int incompleteRoutesOffset = 0;
+		int incompleteRoutesLength = 0;
 		
 		public String getPartName() {
 			return "Transport";
@@ -67,7 +70,8 @@ public class BinaryMapTransportReaderAdapter {
 		public int getBottom() {
 			return bottom;
 		}
-
+		
+		
 		IndexStringTable stringTable = null;
 	}
 
@@ -108,12 +112,19 @@ public class BinaryMapTransportReaderAdapter {
 				ind.stringTable = st;
 				codedIS.seek(st.length + st.fileOffset);
 				break;
+			case OsmandOdb.OsmAndTransportIndex.INCOMPLETEROUTES_FIELD_NUMBER :
+				ind.incompleteRoutesLength = codedIS.readRawVarint32();
+				ind.incompleteRoutesOffset = codedIS.getTotalBytesRead();
+				codedIS.seek(ind.incompleteRoutesLength + ind.incompleteRoutesOffset);
+				break;
+				
 			default:
 				skipUnknownField(t);
 				break;
 			}
 		}
 	}
+
 	
 	private void readTransportBounds(TransportIndex ind) throws IOException {
 		while(true){
@@ -238,6 +249,79 @@ public class BinaryMapTransportReaderAdapter {
 	private String regStr(TIntObjectHashMap<String> stringTable, int i) throws IOException{
 		stringTable.putIfAbsent(i, "");
 		return ((char) i)+"";
+	}
+	
+	public void readIncompleteRoutesList(TLongObjectHashMap<net.osmand.data.IncompleteTransportRoute> incompleteRoutes,
+			int length, int offset) throws IOException {
+		codedIS.seek(offset);
+		boolean end = false;
+		while (!end) {
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				end = true;
+				break;
+			case OsmandOdb.IncompleteTransportRoutes.ROUTES_FIELD_NUMBER:
+				int l = codedIS.readRawVarint32();
+				int olds = codedIS.pushLimit(l);
+				net.osmand.data.IncompleteTransportRoute ir = readIncompleteRoute();
+				net.osmand.data.IncompleteTransportRoute itr = incompleteRoutes.get(ir.getRouteId());
+				if(itr != null) {
+					itr.setNextLinkedRoute(ir);
+				} else {
+					incompleteRoutes.put(ir.getRouteId(), ir);
+				}
+				codedIS.popLimit(olds);
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+			
+		}
+		
+	}
+	
+	public net.osmand.data.IncompleteTransportRoute readIncompleteRoute() throws IOException {
+		net.osmand.data.IncompleteTransportRoute dataObject = new net.osmand.data.IncompleteTransportRoute();
+		boolean end = false;
+		while(!end){
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				end = true;
+				break;
+			case OsmandOdb.IncompleteTransportRoute.ID_FIELD_NUMBER :
+				dataObject.setRouteId(codedIS.readUInt64());
+				break;
+			case OsmandOdb.IncompleteTransportRoute.ROUTEREF_FIELD_NUMBER :
+				dataObject.setRouteOffset(codedIS.readRawVarint32());
+				break;
+			case OsmandOdb.IncompleteTransportRoute.OPERATOR_FIELD_NUMBER :
+				skipUnknownField(t);
+//				dataObject.setOperator(regStr(stringTable));
+				break;
+			case OsmandOdb.IncompleteTransportRoute.REF_FIELD_NUMBER :
+				skipUnknownField(t);
+//				dataObject.setRef(regStr(stringTable));
+				break;
+			case OsmandOdb.IncompleteTransportRoute.TYPE_FIELD_NUMBER :
+				skipUnknownField(t);
+//				dataObject.setType(regStr(stringTable));
+				break;
+			case OsmandOdb.IncompleteTransportRoute.MISSINGSTOPS_FIELD_NUMBER :
+// 			    dataObject.getMissingStops().add(codedIS.readSInt32()); //skip for now
+				skipUnknownField(t);
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+		
+		return dataObject;
 	}
 	
 	public net.osmand.data.TransportRoute getTransportRoute(int filePointer, TIntObjectHashMap<String> stringTable,
@@ -394,7 +478,6 @@ public class BinaryMapTransportReaderAdapter {
 			codedIS.seek(ind.stringTable.fileOffset);
 			int oldLimit = codedIS.pushLimit(ind.stringTable.length);
 			int current = 0;
-			int i = 0;
 			while (codedIS.getBytesUntilLimit() > 0) {
 				int t = codedIS.readTag();
 				int tag = WireFormat.getTagFieldNumber(t);

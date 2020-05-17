@@ -1,16 +1,16 @@
 package net.osmand.data;
 
-import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.Way;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.Way;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 public class TransportRoute extends MapObject {
 	private List<TransportStop> forwardStops = new ArrayList<TransportStop>();
@@ -26,6 +26,20 @@ public class TransportRoute extends MapObject {
 	public TransportRoute() {
 	}
 	
+	public TransportRoute(TransportRoute r, List<TransportStop> forwardStops, List<Way> forwardWay) {
+		this.name = r.name;
+		this.enName = r.enName;
+		this.names = r.names;
+		this.id = r.id;
+		this.operator = r.operator;
+		this.ref = r.ref;
+		this.type = r.type;
+		this.color = r.color;
+		this.schedule = r.schedule;
+		this.forwardStops = forwardStops;
+		this.forwardWays = forwardWay;
+	}
+	
 	public TransportSchedule getSchedule() {
 		return schedule;
 	}
@@ -37,7 +51,15 @@ public class TransportRoute extends MapObject {
 		return schedule;
 	}
 	
-	
+	public boolean isIncomplete() {
+		for (TransportStop s : forwardStops) {
+			if (s.isMissingStop()) {
+				return true;
+			}
+		}
+		return false; 
+	}
+
 	public List<TransportStop> getForwardStops() {
 		return forwardStops;
 	}
@@ -70,7 +92,8 @@ public class TransportRoute extends MapObject {
 		resortWaysToStopsOrder(forwardWays, forwardStops);
 	}
 	
-	public static void mergeRouteWays(List<Way> forwardWays) {
+	// intrusive operation cause it changes ways itself!
+	private static void mergeRouteWays(List<Way> forwardWays) {
 		boolean changed = true;
 		// combine as many ways as possible
 		while (changed && forwardWays != null) {
@@ -137,7 +160,7 @@ public class TransportRoute extends MapObject {
 		}
 	}
 
-	public static Map<Way, int[]> resortWaysToStopsOrder(List<Way> forwardWays, List<TransportStop> forwardStops) {
+	private static Map<Way, int[]> resortWaysToStopsOrder(List<Way> forwardWays, List<TransportStop> forwardStops) {
 		final Map<Way, int[]> orderWays = new HashMap<Way, int[]>();
 		if (forwardWays != null && forwardStops.size() > 0) {
 			// resort ways to stops order 

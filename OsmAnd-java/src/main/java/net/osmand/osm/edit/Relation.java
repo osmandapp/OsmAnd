@@ -54,10 +54,14 @@ public class Relation extends Entity {
 	}
 	
 	public void addMember(Long id, EntityType type, String role){
+		addMember(new EntityId(type, id), role);
+	}
+	
+	public void addMember(EntityId id, String role){
 		if(members == null){
 			members = new ArrayList<>(); 
 		}
-		members.add(new RelationMember(new EntityId(type, id), role));
+		members.add(new RelationMember(id, role));
 	}
 	
 	public List<RelationMember> getMembers(String role) {
@@ -115,7 +119,16 @@ public class Relation extends Entity {
 	public LatLon getLatLon() {
 		return null;
 	}
-
+	
+	public void update(RelationMember r, EntityId newEntityId) {
+		r.entity = null;
+		r.entityId = newEntityId;
+	}
+	
+	public void updateRole(RelationMember r, String newRole) {
+		r.role = newRole;
+	}
+	
 	public boolean remove(EntityId key) {
 		if(members != null) {
 			Iterator<RelationMember> it = members.iterator();
