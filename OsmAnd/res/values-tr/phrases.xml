@@ -1469,7 +1469,7 @@
     <string name="poi_level">Seviye</string>
     <string name="poi_rtsa_scale">RTSA ölçeği</string>
     <string name="poi_piste_difficulty_easy">Kolay</string>
-    <string name="poi_piste_difficulty_intermediate">Orta düzey</string>
+    <string name="poi_piste_difficulty_intermediate">Orta</string>
     <string name="poi_piste_difficulty_advanced">İleri</string>
     <string name="poi_piste_difficulty_novice">Acemi</string>
     <string name="poi_piste_difficulty_expert">Uzman</string>
