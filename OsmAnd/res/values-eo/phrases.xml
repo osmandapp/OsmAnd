@@ -2508,9 +2508,9 @@
     <string name="poi_pump_type_gravity">Pumpila speco: gravita (sifona)</string>
     <string name="poi_pump_style_historic">Pumpila aspekto: historia</string>
     <string name="poi_pump_type_india_mk_2_3">Pumpila speco: India Mk II aŭ III</string>
-    <string name="poi_pump_status_ok">Pumpila stato: laboranta</string>
-    <string name="poi_pump_status_broken">Pumpila stato: difektita</string>
-    <string name="poi_pump_status_locked">Pumpila ŝtato: blokita</string>
+    <string name="poi_pump_status_ok">Stato de pumpilo: funkcianta</string>
+    <string name="poi_pump_status_broken">Stato de pumpilo: difektita</string>
+    <string name="poi_pump_status_locked">Stato de pumpilo: ŝlosita</string>
     <string name="poi_payment_troika_yes">Troika (Тройка)</string>
     <string name="poi_payment_troika_no">Troika (Тройка) kartoj malakceptataj</string>
     <string name="poi_telescope_type_optical">optika</string>
@@ -3816,4 +3816,5 @@
     <string name="poi_fire_hydrant_style_water_source_groundwater">grundakvo</string>
     <string name="poi_fire_hydrant_type_pipe">tubo</string>
     <string name="poi_fire_hydrant_pressure_filter">Premo de hidranto</string>
+    <string name="poi_pump_status_missing_beam">Stato de pumpilo: levilo mankas</string>
 </resources>
