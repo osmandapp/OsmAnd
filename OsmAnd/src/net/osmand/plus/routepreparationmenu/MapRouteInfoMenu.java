@@ -760,7 +760,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			} else if (card instanceof PublicTransportNotFoundWarningCard) {
 				updateApplicationMode(null, ApplicationMode.PEDESTRIAN);
 			} else if (card instanceof PublicTransportNotFoundSettingsWarningCard) {
-				AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment(true);
+				AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment();
+				avoidRoadsFragment.setHideImpassableRoads(true);
 				avoidRoadsFragment.show(mapActivity.getSupportFragmentManager(), AvoidRoadsBottomSheetDialogFragment.TAG);
 			} else if (card instanceof PedestrianRouteCard) {
 				updateApplicationMode(null, ApplicationMode.PEDESTRIAN);

@@ -300,7 +300,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 					@Override
 					public void onClick(View view) {
 						routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
-						AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment(true);
+						AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment();
+						avoidRoadsFragment.setHideImpassableRoads(true);
 						avoidRoadsFragment.setTargetFragment(RouteOptionsBottomSheet.this, AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE);
 						avoidRoadsFragment.setCompoundButtonColorId(selectedModeColorId);
 						avoidRoadsFragment.show(mapActivity.getSupportFragmentManager(), AvoidRoadsBottomSheetDialogFragment.TAG);
