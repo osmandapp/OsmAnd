@@ -1,13 +1,11 @@
 package net.osmand.plus;
 
-import static net.osmand.data.PointDescription.getLocationOlcName;
-
 import android.content.Context;
 import android.text.format.DateUtils;
 
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.UTMPoint;
-import java.text.DecimalFormatSymbols;
+
 import net.osmand.LocationConvert;
 import net.osmand.data.Amenity;
 import net.osmand.data.City.CityType;
@@ -22,11 +20,16 @@ import net.osmand.util.Algorithms;
 
 import java.text.DateFormatSymbols;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.LinkedHashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Map.Entry;
+
+import static net.osmand.data.PointDescription.getLocationOlcName;
 
 public class OsmAndFormatter {
 	public final static float METERS_IN_KILOMETER = 1000f;
@@ -222,11 +225,14 @@ public class OsmAndFormatter {
 	}
 
 	public static String getFormattedDistance(float meters, OsmandApplication ctx, boolean forceTrailingZeros) {
+		MetricsConstants mc = ctx.getSettings().METRIC_SYSTEM.get();
+		return getFormattedDistance(meters, ctx, forceTrailingZeros, mc);
+	}
+
+	public static String getFormattedDistance(float meters, OsmandApplication ctx, boolean forceTrailingZeros, MetricsConstants mc) {
 		String format1 = forceTrailingZeros ? "{0,number,0.0} " : "{0,number,0.#} ";
 		String format2 = forceTrailingZeros ? "{0,number,0.00} " : "{0,number,0.##} ";
 
-		OsmandSettings settings = ctx.getSettings();
-		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		int mainUnitStr;
 		float mainUnitInMeters;
 		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
@@ -266,6 +272,24 @@ public class OsmAndFormatter {
 			}
 			return ((int) (meters + 0.5)) + " " + ctx.getString(R.string.m); //$NON-NLS-1$
 		}
+	}
+
+	public static Map<MetricsConstants, String> getDistanceData(OsmandApplication app, float meters) {
+		Map<MetricsConstants, String> results = new LinkedHashMap<>();
+
+		String kilometersAndMeters = getFormattedDistance(meters, app, true, MetricsConstants.KILOMETERS_AND_METERS);
+		String milesAndFeet = getFormattedDistance(meters, app, true, MetricsConstants.MILES_AND_FEET);
+		String milesAndMeters = getFormattedDistance(meters, app, true, MetricsConstants.MILES_AND_METERS);
+		String milesAndYards = getFormattedDistance(meters, app, true, MetricsConstants.MILES_AND_YARDS);
+		String nauticalMiles = getFormattedDistance(meters, app, true, MetricsConstants.NAUTICAL_MILES);
+
+		results.put(MetricsConstants.KILOMETERS_AND_METERS, kilometersAndMeters);
+		results.put(MetricsConstants.MILES_AND_FEET, milesAndFeet);
+		results.put(MetricsConstants.MILES_AND_METERS, milesAndMeters);
+		results.put(MetricsConstants.MILES_AND_YARDS, milesAndYards);
+		results.put(MetricsConstants.NAUTICAL_MILES, nauticalMiles);
+
+		return results;
 	}
 
 	public static String getFormattedAlt(double alt, OsmandApplication ctx) {

@@ -44,6 +44,7 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -803,6 +804,22 @@ public class MenuBuilder {
 		}
 		return new CollapsableView(llv, this, true);
 
+	}
+
+	protected CollapsableView getDistanceCollapsableView(Map<OsmandSettings.MetricsConstants, String> distanceData) {
+		LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
+		for (final Map.Entry<OsmandSettings.MetricsConstants, String> line : distanceData.entrySet()) {
+			TextView button = buildButtonInCollapsableView(mapActivity, false, false);
+			button.setText(line.getValue());
+			button.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					copyToClipboard(line.getValue(), mapActivity);
+				}
+			});
+			llv.addView(button);
+		}
+		return new CollapsableView(llv, this, true);
 	}
 
 	protected void buildButtonRow(final View view, Drawable buttonIcon, String text, OnClickListener onClickListener) {

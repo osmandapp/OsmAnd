@@ -426,8 +426,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			} else if (Amenity.COLLECTION_TIMES.equals(key) || Amenity.SERVICE_TIMES.equals(key)) {
 				iconId = R.drawable.ic_action_time;
 				needLinks = false;
-			} else if (Amenity.OPENING_HOURS.equals(key) || 
-					Amenity.COLLECTION_TIMES.equals(key) || Amenity.SERVICE_TIMES.equals(key)) {
+			} else if (Amenity.OPENING_HOURS.equals(key)) {
 				iconId = R.drawable.ic_action_time;
 				collapsableView = getCollapsableTextView(view.getContext(), true,
 					amenity.getAdditionalInfo(key).replace("; ", "\n").replace(",", ", "));
@@ -526,6 +525,19 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			textPrefix = formattedPrefixAndText[0];
 			vl = formattedPrefixAndText[1];
 
+			if ("ele".equals(key)) {
+				try {
+					float distance = Float.parseFloat(vl);
+					Map<MetricsConstants, String> distanceData = OsmAndFormatter.getDistanceData(app, distance);
+					MetricsConstants currentFormat = app.getSettings().METRIC_SYSTEM.get();
+					vl = OsmAndFormatter.getFormattedDistance(distance, app, true, currentFormat);
+					collapsableView = getDistanceCollapsableView(distanceData);
+					collapsable = true;
+				} catch (NumberFormatException ex) {
+					LOG.error(ex);
+				}
+			}
+
 			boolean matchWidthDivider = !isDescription && isWiki;
 			AmenityInfoRow row;
 			if (isDescription) {
@@ -565,8 +577,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				Drawable icon;
 				PoiType pType = categoryTypes.get(0);
 				String poiAdditionalCategoryName = pType.getPoiAdditionalCategory();
-				String poiAddidionalIconName = poiTypes.getPoiAdditionalCategoryIconName(poiAdditionalCategoryName);
-				icon = getRowIcon(view.getContext(), poiAddidionalIconName);
+				String poiAdditionalIconName = poiTypes.getPoiAdditionalCategoryIconName(poiAdditionalCategoryName);
+				icon = getRowIcon(view.getContext(), poiAdditionalIconName);
 				if (icon == null) {
 					icon = getRowIcon(view.getContext(), poiAdditionalCategoryName);
 				}
@@ -627,7 +639,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		AmenityInfoRow descInPrefLang = null;
 		for (AmenityInfoRow desc : descriptions) {
 			if (desc.key.length() > langSuffix.length()
-					&& desc.key.substring(desc.key.length() - langSuffix.length(), desc.key.length()).equals(langSuffix)) {
+					&& desc.key.substring(desc.key.length() - langSuffix.length()).equals(langSuffix)) {
 				descInPrefLang = desc;
 				break;
 			}
@@ -690,7 +702,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 			case "depth":
 			case "seamark_height":
-				if(Algorithms.isFloat(value)) {
+				if (Algorithms.isFloat(value)) {
 					double valueAsDouble = Double.valueOf(value);
 					if (metricSystem == OsmandSettings.MetricsConstants.MILES_AND_FEET) {
 						formattedValue = String.valueOf(DF.format(valueAsDouble * OsmAndFormatter.FEET_IN_ONE_METER))
