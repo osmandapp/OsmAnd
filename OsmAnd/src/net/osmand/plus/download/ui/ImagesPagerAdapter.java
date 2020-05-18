@@ -12,6 +12,7 @@ import com.squareup.picasso.Picasso;
 
 import net.osmand.PicassoUtils;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.util.Algorithms;
 
 import java.util.List;
 
@@ -56,19 +57,24 @@ public class ImagesPagerAdapter extends PagerAdapter {
 		imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
 		final String imageUrl = imageUrls.get(position);
-		Picasso.get().load(imageUrl).into(imageView, new Callback() {
-			@Override
-			public void onSuccess() {
-				imageView.setVisibility(View.VISIBLE);
-				picassoUtils.setResultLoaded(imageUrl, true);
-			}
+		if (!Algorithms.isEmpty(imageUrl)) {
+			Picasso.get().load(imageUrl).into(imageView, new Callback() {
+				@Override
+				public void onSuccess() {
+					imageView.setVisibility(View.VISIBLE);
+					picassoUtils.setResultLoaded(imageUrl, true);
+				}
 
-			@Override
-			public void onError(Exception e) {
-				imageView.setVisibility(View.INVISIBLE);
-				picassoUtils.setResultLoaded(imageUrl, false);
-			}
-		});
+				@Override
+				public void onError(Exception e) {
+					imageView.setVisibility(View.INVISIBLE);
+					picassoUtils.setResultLoaded(imageUrl, false);
+				}
+			});
+		} else {
+			imageView.setVisibility(View.INVISIBLE);
+		}
+
 		return imageView;
 	}
 }
