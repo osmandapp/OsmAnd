@@ -349,7 +349,7 @@ public class MapActivityActions implements DialogProvider {
 		adapter.addItem(itemBuilder
 				.setTitleId(selectedObj instanceof FavouritePoint ? R.string.favourites_context_menu_edit : R.string.shared_string_add, mapActivity)
 				.setId(MAP_CONTEXT_MENU_ADD_ID)
-				.setIcon(R.drawable.ic_action_favorite_stroke)
+				.setIcon(selectedObj instanceof FavouritePoint ? R.drawable.ic_action_edit_dark : R.drawable.ic_action_favorite_stroke)
 				.setOrder(10)
 				.createItem());
 		adapter.addItem(itemBuilder
