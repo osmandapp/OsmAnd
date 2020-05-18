@@ -219,6 +219,8 @@ public class FileNameTranslationHelper {
 			return ctx.getString(R.string.index_item_world_altitude_correction);
 		} else if (basename.equals("world_basemap")) {
 			return ctx.getString(R.string.index_item_world_basemap);
+		} else if (basename.equals("world_basemap_detailed")){
+			return ctx.getString(R.string.index_item_world_basemap_detailed);
 		} else if (basename.equals("world_bitcoin_payments")) {
 			return ctx.getString(R.string.index_item_world_bitcoin_payments);
 		} else if (basename.equals(DownloadResources.WORLD_SEAMARKS_KEY) || 

@@ -664,19 +664,33 @@ public class ResourceManager {
 		}
 		File liveDir = context.getAppPath(IndexConstants.LIVE_INDEX_DIR);
 		depthContours = false;
-		boolean hasWorldBasemap = false;
+		File worldBasemapStd = null;
+		File worldBasemapDetailed = null;
 		File worldBasemapMini = null;
 		for (File f : files) {
 			if (f.getName().equals("World_basemap.obf")) {
-				hasWorldBasemap = true;
+				worldBasemapStd = f;
 			}
 			if (f.getName().startsWith("World_basemap_mini")) {
 				worldBasemapMini = f;
 			}
+			if (f.getName().startsWith("World_basemap_detailed")) {
+				worldBasemapDetailed = f;
+			}
 		}
-		if (hasWorldBasemap && worldBasemapMini != null) {
+
+		if (worldBasemapDetailed != null) {
+			if (worldBasemapStd != null) {
+				files.remove(worldBasemapStd);
+			}
+			if (worldBasemapMini != null) {
+				files.remove(worldBasemapMini);
+			}
+
+		} else if (worldBasemapStd != null && worldBasemapMini != null) {
 			files.remove(worldBasemapMini);
 		}
+
 		java.text.DateFormat dateFormat = getDateFormat();
 		for (File f : files) {
 			progress.startTask(context.getString(R.string.indexing_map) + " " + f.getName(), -1); //$NON-NLS-1$
