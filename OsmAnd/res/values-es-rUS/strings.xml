@@ -50,7 +50,7 @@
     <string name="waypoint_visit_before">Visitar antes</string>
     <string name="simulate_your_location">Simular tu ubicación</string>
     <string name="short_location_on_map">Lat %1$s
-Lon %2$s</string>
+\nLon %2$s</string>
     <string name="tips_and_tricks_descr">Preguntas frecuentes, cambios recientes y otros.</string>
     <string name="routing_settings_2">Ajustes de navegación</string>
     <string name="general_settings_2">Ajustes generales</string>
@@ -472,8 +472,8 @@ Lon %2$s</string>
     <string name="live_monitoring_m">Seguimiento en línea (requiere GPX)</string>
     <string name="live_monitoring_start">Iniciar seguimiento en línea</string>
     <string name="live_monitoring_stop">Parar seguimiento en línea</string>
-    <string name="gpx_monitoring_start">Iniciar grabación GPX</string>
-    <string name="gpx_monitoring_stop">Parar grabación GPX</string>
+    <string name="gpx_monitoring_start">Reanudar grabación GPX</string>
+    <string name="gpx_monitoring_stop">Pausar grabación GPX</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Vías no aptas para vehículos</string>
     <string name="rendering_attr_hideWoodScrubs_name">Bosques y matorrales</string>
     <string name="no_index_file_to_download">No se encontraron descargas, comprueba tu conexión a Internet.</string>
@@ -1166,8 +1166,7 @@ Lon %2$s</string>
     <string name="install_more">Instalar más…</string>
     <string name="level_to_switch_vector_raster_descr">Usar mapas vectoriales, más allá de este nivel.</string>
     <string name="level_to_switch_vector_raster">Nivel mínimo de zoom vectorial</string>
-    <string name="create_poi_link_to_osm_doc">
-        <u>OSM en línea</u> clasificación de mapa con imágenes.</string>
+    <string name="create_poi_link_to_osm_doc"><u>OSM en línea</u> clasificación de mapa con imágenes.</string>
     <string name="error_doing_search">No se pudo realizar la búsqueda sin conexión.</string>
     <string name="search_osm_offline">Buscar ubicación geográfica</string>
     <string name="system_locale">Sistema</string>
@@ -2183,7 +2182,7 @@ Lon %2$s</string>
     <string name="quick_action_interim_dialog">Mostrar un diálogo temporal</string>
     <string name="navigate_point_olc">Código de Ubicación Abierto (OLC)</string>
     <string name="navigate_point_olc_info_invalid">OLC inválido
-</string>
+\n</string>
     <string name="navigate_point_olc_info_short">OLC corto
 \nProporciona un código completo</string>
     <string name="navigate_point_olc_info_area">OLC completo y válido.
@@ -2273,18 +2272,19 @@ Lon %2$s</string>
 \n• Vea la velocidad y altitud 
 \n• La opción de grabación GPX, permite grabar el viaje y compartirlo 
 \n• Mediante un complemento adicional, puedes activar las curvas de nivel y el sombreado de colinas</string>
-    <string name="osmand_extended_description_part6">Caminar, senderismo, turismo de ciudad 
-\n • El mapa muestra las rutas para caminar y de senderismo 
-\n • Wikipedia en el idioma de preferencia, puede decir mucho durante una visita turística 
-\n • Las paradas de transporte público (autobús, tranvía, tren), incluyendo los nombres de línea, ayuda a navegar en una nueva ciudad 
-\n • Navegación GPS en el modo peatón, construye la ruta usando rutas de senderismo 
-\n • Sube y sigue una ruta GPX o graba y comparte tus propias rutas</string>
-    <string name="osmand_extended_description_part7">Contribuye con OSM 
-\n • Informa sobre problemas de datos en el mapa 
-\n • Sube trazas GPX a OSM directamente desde la aplicación 
-\n • Añade PDI y súbelos directamente a OSM (o más tarde, si no estás conectado)</string>
-    <string name="osmand_extended_description_part8">OsmAnd es un software de código abierto, activamente desarrollado. Cualquiera puede contribuir con la aplicación informando sobre errores, mejorando las traducciones o desarrollando nuevas funciones. Además, el proyecto también depende de contribuciones financieras para financiar el desarrollo y las pruebas de nuevas funcionalidades. 
-\n 
+    <string name="osmand_extended_description_part6">Caminar, senderismo, turismo de ciudad
+\n • El mapa muestra las rutas para caminar y de senderismo
+\n • Wikipedia en el idioma de preferencia, puede decir mucho durante una visita turística
+\n • Las paradas de transporte público (autobús, tranvía, tren), incluyendo los nombres de línea, ayuda a navegar en una nueva ciudad
+\n • Navegación GPS en el modo peatón, construye la ruta usando rutas de senderismo
+\n • Sube y sigue una ruta GPX o graba y comparte tus propias rutas
+\n</string>
+    <string name="osmand_extended_description_part7">Contribuye con OSM
+\n • Informa sobre problemas de datos en el mapa
+\n • Sube trazas GPX a OSM directamente desde la aplicación
+\n • Añade PDI y súbelos directamente a OSM (o más tarde, si no estás conectado)
+\n</string>
+    <string name="osmand_extended_description_part8">OsmAnd es un software de código abierto, activamente desarrollado. Cualquiera puede contribuir con la aplicación informando sobre errores, mejorando las traducciones o desarrollando nuevas funciones. Además, el proyecto también depende de contribuciones financieras para financiar el desarrollo y las pruebas de nuevas funcionalidades.
 \n Cobertura y calidad aproximada del mapa: 
 \n • Europa Occidental: **** 
 \n • Europa Oriental: *** 
@@ -2295,17 +2295,17 @@ Lon %2$s</string>
 \n • Japón y Corea: *** 
 \n • Medio Oriente: ** 
 \n • África: ** 
-\n • Antártida: * 
-\n 
+\n • Antártida: *
 \n ¡Más países alrededor del globo están disponibles para descargar! 
 \n Obtén un navegador confiable en tu país - ya sea Francia, Alemania, México, Reino Unido, España, Países bajos, Estados Unidos, Rusia, Brasil o cualquier otro.</string>
-    <string name="osmand_plus_extended_description_part2">"Navegación GPS 
-\n • Funciona en línea (rápido) o sin conexión (sin cargos de roaming al viajar al extranjero) 
-\n • Guía por voz giro-a-giro (voces grabadas y sintetizadas) 
-\n • (Opcional) Guía de carriles, nombres de calles y tiempo estimado al destino 
-\n • Admite puntos intermedios en el itinerario 
-\n • La ruta se recalcula al salirse de la misma 
-\n • Busca destinos por dirección, por tipo (por ejemplo: Restaurantes, hoteles, gasolineras, museos), o por coordenada geográfica "</string>
+    <string name="osmand_plus_extended_description_part2">Navegación GPS
+\n • Funciona en línea (rápido) o sin conexión (sin cargos de roaming al viajar al extranjero)
+\n • Guía por voz giro-a-giro (voces grabadas y sintetizadas)
+\n • (Opcional) Guía de carriles, nombres de calles y tiempo estimado al destino
+\n • Admite puntos intermedios en el itinerario
+\n • La ruta se recalcula al salirse de la misma
+\n • Busca destinos por dirección, por tipo (por ejemplo: Restaurantes, hoteles, gasolineras, museos), o por coordenada geográfica
+\n</string>
     <string name="osmand_plus_extended_description_part3">Vista del mapa 
 \n • Muestra tu ubicación y orientación 
 \n • (Opcional) Ajusta el mapa a la dirección del movimiento (o la brújula) 
@@ -2314,18 +2314,20 @@ Lon %2$s</string>
 \n • Muestra teselas en línea especiales, vista satelital (de Bing), diferentes superposiciones como trazas de travesía/navegación GPX y capas adicionales con transparencia personalizable 
 \n • Permite elegir como mostrar los nombres en el mapa: en inglés, local, u ortografía fonética 
 \n</string>
-    <string name="osmand_plus_extended_description_part4">Uso de datos de OSM y Wikipedia 
-\n • Información de alta calidad del mejor proyecto colaborativo del mundo 
-\n • Datos OSM disponibles por país o región 
-\n • PDI de Wikipedia, ideal para el turismo 
-\n • Descargas gratis ilimitadas, directamente desde la aplicación 
-\n • Mapas vectoriales reducidos sin conexión, actualizados al menos una vez cada mes 
+    <string name="osmand_plus_extended_description_part4">Uso de datos de OSM y Wikipedia
+\n • Información de alta calidad del mejor proyecto colaborativo del mundo
+\n • Datos OSM disponibles por país o región
+\n • PDI de Wikipedia, ideal para el turismo
+\n • Descargas gratis ilimitadas, directamente desde la aplicación
+\n • Mapas vectoriales reducidos sin conexión, actualizados al menos una vez cada mes
+\n
 \n • Elige entre datos completos de la región o sólo la red de rutas (Ejemplo: Todo Japón tiene 700 MB o sólo 200 MB para la red de rutas)</string>
-    <string name="osmand_plus_extended_description_part5">Funciones de seguridad 
-\n • (Opcional) El modo diurno/nocturno se alterna automáticamente 
-\n • (Opcional) Visualización del límite de velocidad, con aviso al excederte 
-\n • (Opcional) Zoom del mapa según la velocidad 
-\n • Comparte la ubicación para que tus amigos puedan encontrarte</string>
+    <string name="osmand_plus_extended_description_part5">Funciones de seguridad
+\n • (Opcional) El modo diurno/nocturno se alterna automáticamente
+\n • (Opcional) Visualización del límite de velocidad, con aviso al excederte
+\n • (Opcional) Zoom del mapa según la velocidad
+\n • Comparte la ubicación para que tus amigos puedan encontrarte
+\n</string>
     <string name="osmand_plus_extended_description_part6">Funciones de ciclismo y peatón
 \n • Visualización de caminos para caminar, senderismo y ciclismo, ideal para actividades al aire libre
 \n • Navegación especial y modos de visualización para bicicletas y peatones
@@ -2333,13 +2335,12 @@ Lon %2$s</string>
 \n • (Opcional) Graba el viaje en forma local en un archivo GPX o con un servicio en línea
 \n • (Opcional) Muestra la velocidad y altitud
 \n • Activa la visualización de las curvas de nivel y el sombreado de colinas (mediante un complemento adicional)</string>
-    <string name="osmand_plus_extended_description_part7">Contribuye directamente con OSM 
-\n • Informa sobre problemas de datos en el mapa 
-\n • Sube trazas GPX a OSM directamente desde la aplicación 
-\n • Añade PDI y súbelos directamente a OSM (o más tarde, si no estás conectado) 
-\n • (Opcional) Grabación del viaje en modo reposo (mientras el dispositivo está bloqueado) 
-\n 
-\n OsmAnd es un software de código abierto, activamente desarrollado. Cualquiera puede contribuir con la aplicación informando sobre errores, mejorando las traducciones o desarrollando nuevas funciones. Además, el proyecto también depende de contribuciones financieras para desarrollar y probar nuevas funcionalidades. 
+    <string name="osmand_plus_extended_description_part7">Contribuye directamente con OSM
+\n • Informa sobre problemas de datos en el mapa
+\n • Sube trazas GPX a OSM directamente desde la aplicación
+\n • Añade PDI y súbelos directamente a OSM (o más tarde, si no estás conectado)
+\n • (Opcional) Grabación del viaje en modo reposo (mientras el dispositivo está bloqueado)
+\n OsmAnd es un software de código abierto, activamente desarrollado. Cualquiera puede contribuir con la aplicación informando sobre errores, mejorando las traducciones o desarrollando nuevas funciones. Además, el proyecto también depende de contribuciones financieras para desarrollar y probar nuevas funcionalidades.
 \n</string>
     <string name="osmand_plus_extended_description_part8">Cobertura y calidad aproximada del mapa: 
 \n • Europa Occidental: **** 
@@ -2614,7 +2615,7 @@ Lon %2$s</string>
     <string name="one_tap_active">Activar «Una pulsación»</string>
     <string name="empty_state_av_notes">¡Hacer notas multimedia!</string>
     <string name="empty_state_av_notes_desc">Añade una nota de audio, vídeo o foto para cada punto del mapa, utilizando el widget o el menú contextual.</string>
-    <string name="notes_by_date">Notas de OSM por fecha</string>
+    <string name="notes_by_date">Notas multimedia por fecha</string>
     <string name="by_date">Por fecha</string>
     <string name="by_type">Por tipo</string>
     <string name="modify_the_search_query">Cambiar la búsqueda.</string>
@@ -2802,7 +2803,8 @@ Lon %2$s</string>
     <string name="point_deleted">Punto %1$s borrado</string>
     <string name="shared_string_world">Mundo</string>
     <string name="send_search_query_description">Enviaremos la consulta de búsqueda: «%1$s», así como la ubicación.
-        \nNo se recopilan datos personales, los datos de búsqueda sólo se utilizan para mejorar el algoritmo de búsqueda.</string>
+\n
+\nNo se recopilan datos personales, los datos de búsqueda sólo se utilizan para mejorar el algoritmo de búsqueda.</string>
     <string name="search_no_results_description">¿Sin resultados?
 \nCuéntanos sobre esto.</string>
     <string name="send_search_query">¿Enviar consulta de búsqueda?</string>
@@ -3140,21 +3142,21 @@ Lon %2$s</string>
     <string name="shared_string_crash">Error</string>
     <string name="last_launch_crashed">OsmAnd falló la última vez. Por favor, ayúdanos a mejorar OsmAnd compartiendo el mensaje de error.</string>
     <string name="app_mode_ufo">OVNI</string>
-    <string name="release_3_4">• Perfiles de aplicación: crea un perfil personalizado según tus necesidades, con un icono y color personalizado. 
+    <string name="release_3_4">• Perfiles de aplicación: crea un perfil personalizado según tus necesidades, con un icono y color personalizado.
 \n 
-\n • Ahora puedes personalizar las velocidades predefinidas, máximas y mínimas de cualquier perfil 
+\n • Ahora puedes personalizar las velocidades predefinidas, máximas y mínimas de cualquier perfil
 \n 
-\n • Se ha añadido un widget para las coordenadas actuales 
+\n • Se ha añadido un widget para las coordenadas actuales
 \n 
-\n • Se añadieron opciones para mostrar la brújula y una regla radial en el mapa 
+\n • Se añadieron opciones para mostrar la brújula y una regla radial en el mapa
 \n 
-\n • Se ha corregido la grabación de trazas en segundo plano 
+\n • Se ha corregido la grabación de trazas en segundo plano
 \n 
-\n • Se mejoraron las descargas de mapas en segundo plano 
+\n • Se mejoraron las descargas de mapas en segundo plano
 \n 
-\n • Se ha corregido la selección de idioma de Wikipedia 
+\n • Se ha corregido la selección de idioma de Wikipedia
 \n 
-\n • Se ha corregido el comportamiento de los botones de la brújula durante la navegación 
+\n • Se ha corregido el comportamiento de los botones de la brújula durante la navegación
 \n 
 \n • Otras correcciones de errores
 \n
@@ -3580,7 +3582,7 @@ Lon %2$s</string>
     <string name="import_complete_description">Todos los datos de %1$s son importados, puedes usar los botones de abajo para abrir la parte necesaria de la aplicación para manejarla.</string>
     <string name="shared_string_terrain">Terreno</string>
     <string name="hillshade_description">Mapa de sombreado usando sombras oscuras para mostrar las laderas, picos y tierras bajas.</string>
-    <string name="slope_description">La pendiente se visualiza en colores sobre el terreno.</string>
+    <string name="slope_description">La pendiente utiliza colores para visualizar la inclinación del terreno.</string>
     <string name="terrain_slider_description">Define los niveles de zoom mínimo y máximo en los que se mostrará la capa.</string>
     <string name="hillshade_download_description">Se necesitan mapas adicionales para ver el sombreado en el mapa.</string>
     <string name="slope_download_description">Se necesitan mapas adicionales para ver las pendientes en el mapa.</string>
@@ -3588,7 +3590,7 @@ Lon %2$s</string>
     <string name="shared_string_transparency">Transparencia</string>
     <string name="shared_string_zoom_levels">Niveles de zoom</string>
     <string name="shared_string_legend">Leyenda</string>
-    <string name="terrain_empty_state_text">Permite ver el sombreado o el mapa de pendientes. Puedes leer más sobre estos tipos de mapas en nuestro sitio</string>
+    <string name="terrain_empty_state_text">Permite ver el sombreado o el mapa de pendientes. Puedes leer más sobre estos tipos de mapas en nuestro sitio.</string>
     <string name="shared_string_hillshade">Sombreado</string>
     <string name="recalculate_route_in_deviation">Recalcular ruta en caso de desviación</string>
     <string name="select_distance_route_will_recalc">Elige la distancia después de la cual la ruta será recalculada.</string>
@@ -3652,9 +3654,11 @@ Lon %2$s</string>
     <string name="radius_ruler_item">Regla radial</string>
     <string name="quick_action_item">Acción rápida</string>
     <string name="osmand_purchases_item">Compras de OsmAnd</string>
-    <string name="osm_live_payment_subscription_management">La cuenta de Google Play se carga al comprar una suscripción
-\ny al expirar (mes/trimestre/año),
-\nno se renovará si se cancela antes de esa fecha en los ajustes de Google Play.</string>
+    <string name="osm_live_payment_subscription_management">El pago será cargado a la cuenta de Google Play al confirmar la compra. 
+\n 
+\nLa suscripción se renueva automáticamente a menos que se cancele antes de la fecha de renovación. La cuenta será cargada por el período de renovación (mes/trimestre/año) sólo en la fecha de renovación. 
+\n 
+\nPuedes administrar y cancelar las suscripciones accediendo a los ajustes de Google Play.</string>
     <string name="navigation_profiles_item">Perfiles de navegación</string>
     <string name="measure_distance_item">Medir distancia</string>
     <string name="map_markers_item">Marcadores del mapa</string>
@@ -3709,4 +3713,19 @@ Lon %2$s</string>
 \n • Se corrigieron los errores con RTL
 \n
 \n</string>
+    <string name="shared_string_resume">Reanudar</string>
+    <string name="additional_actions_descr">Puedes acceder a estas acciones pulsando el botón «%1$s».</string>
+    <string name="quick_action_transport_hide">Ocultar transporte público</string>
+    <string name="quick_action_transport_show">Mostrar transporte público</string>
+    <string name="quick_action_show_hide_transport">Mostrar/ocultar transporte público</string>
+    <string name="quick_action_transport_descr">Un botón que muestra u oculta el transporte público en el mapa.</string>
+    <string name="create_edit_poi">Crear/Editar PDI</string>
+    <string name="parking_positions">Puestos de estacionamiento</string>
+    <string name="add_edit_favorite">Añadir / Editar favorito</string>
+    <string name="reset_deafult_order">Restaurar el orden de los elementos predefinidos</string>
+    <string name="back_to_editing">Volver a la edición</string>
+    <string name="quick_action_switch_profile_descr">Al pulsar el botón de acción se cambiará entre los perfiles elegidos.</string>
+    <string name="shared_string_add_profile">Añadir perfil</string>
+    <string name="change_application_profile">Cambiar perfil de la aplicación</string>
+    <string name="profiles_for_action_not_found">No se encontraron los perfiles marcados para esta acción.</string>
 </resources>

@@ -193,7 +193,7 @@
     <string name="online_map">Mapa on-line</string>
     <string name="roads_only">Apenas estradas</string>
     <string name="rendering_attr_pisteRoutes_name">Pistas de esqui</string>
-    <string name="free">"Livre %1$s "</string>
+    <string name="free">Livre %1$s</string>
     <string name="device_memory">Memória do aparelho</string>
     <string name="world_ski_missing">Faça o download do mapa off-line especial para exibir as instalações de esqui.</string>
     <string name="nautical_maps_missing">Faça o download do mapa off-line especial para exibir detalhes náuticos.</string>
@@ -342,7 +342,7 @@
     <string name="routing_attr_weight_description">Especifique o limite de peso do veículo nas rotas.</string>
     <string name="copying_osmand_files_descr">Copiar arquivos de dados para o novo destino (%s)…</string>
     <string name="copying_osmand_files">Copiando arquivos de dados…</string>
-    <string name="calculate_osmand_route_gpx">"Calcular rota off-line "</string>
+    <string name="calculate_osmand_route_gpx">Calcular rota off-line</string>
     <string name="app_mode_truck">Caminhão</string>
     <string name="auto_zoom_far">Para nível intermediário</string>
     <string name="local_index_tile_data_minzoom">Zoom mínimo: %1$s</string>
@@ -415,13 +415,13 @@
     <string name="local_index_gpx_info_show">"
 \n
 \nToque longo para opções"</string>
-    <string name="gpx_info_subtracks">"Subtrilhas: %1$s "</string>
+    <string name="gpx_info_subtracks">Subtrilhas: %1$s</string>
     <string name="gpx_info_waypoints">Ponto de trajeto: %1$s</string>
-    <string name="gpx_info_distance">"Distância: %1$s (%2$s pontos) "</string>
-    <string name="gpx_info_start_time">"Hora de início: %1$tF, %1$tT "</string>
-    <string name="gpx_info_end_time">"Hora de fim: %1$tF, %1$tT "</string>
-    <string name="gpx_info_average_speed">"Velocidade média: %1$s "</string>
-    <string name="gpx_info_maximum_speed">"Velocidade máxima: %1$s "</string>
+    <string name="gpx_info_distance">Distância: %1$s (%2$s pontos)</string>
+    <string name="gpx_info_start_time">Hora de início: %1$tF, %1$tT</string>
+    <string name="gpx_info_end_time">Hora de fim: %1$tF, %1$tT</string>
+    <string name="gpx_info_average_speed">Velocidade média: %1$s</string>
+    <string name="gpx_info_maximum_speed">Velocidade máxima: %1$s</string>
     <string name="gpx_info_avg_altitude">Altitude média: %1$s</string>
     <string name="gpx_info_diff_altitude">Faixa de altitude: %1$s</string>
     <string name="gpx_info_asc_altitude">Descida/Subida: %1$s</string>
@@ -504,7 +504,7 @@
     <string name="index_name_canada">América do Norte - Canadá</string>
     <string name="index_name_italy">Europa - Itália</string>
     <string name="index_name_gb">Europa - Grã-Bretanha</string>
-    <string name="calculate_osmand_route_without_internet">"Cálculo offline do segmento de rota OsmAnd "</string>
+    <string name="calculate_osmand_route_without_internet">Cálculo offline do segmento de rota OsmAnd</string>
     <string name="keep_and_add_destination_point">Adicionar como destino seguinte</string>
     <string name="select_gpx">Selecionar GPX…</string>
     <string name="route_descr_select_destination">Defina o destino</string>
@@ -534,7 +534,7 @@
     <string name="app_mode_aircraft">Avião</string>
     <string name="local_osm_changes_delete_all_confirm">Tem certeza de que deseja exclui %1$d alterações no OSM\?</string>
     <string name="animate_routing_route_not_calculated">Por favor, calcular a rota primeiro</string>
-    <string name="animate_routing_route">"Simular usando a rota calculada "</string>
+    <string name="animate_routing_route">Simular usando a rota calculada</string>
     <string name="animate_routing_gpx">Simular usando trilha GPX</string>
     <string name="auto_zoom_none">Sem zoom automático</string>
     <string name="auto_zoom_close">Para nível aproximado</string>
@@ -1667,7 +1667,7 @@ Pôr do Sol: %2$s</string>
     <string name="count_of_lines">Número de linhas</string>
     <string name="are_you_sure">Tem certeza?</string>
     <string name="unsaved_changes_will_be_lost">Quaisquer alterações não salvas serão perdidas. Continuar?</string>
-    <string name="shared_string_update">"Atualizar "</string>
+    <string name="shared_string_update">Atualizar</string>
     <string name="shared_string_upload">Enviar</string>
     <string name="osm_edit_created_poi">POI OSM criado</string>
     <string name="shared_string_qr_code">Código QR</string>
@@ -2620,7 +2620,7 @@ Pôr do Sol: %2$s</string>
     <string name="osmand_extended_description_part1">OsmAnd (sigla em inglês de Direções de Navegação Automatizada do OSM) é um aplicativo de mapa e navegação com acesso a dados livres, mundiais e de alta qualidade do OSM. 
 \n 
 \nPoderá usar o navegador visual e por voz, exibir POIs (pontos de interesse), criar e gerenciar trilhas GPX, usar (através de plugin) curvas de nível e dados de altitude, escolher entre os modos motorista, ciclista e pedestre, editar o OSM e muito mais.</string>
-    <string name="use_two_digits_longitude">"Use longitude com dois dígitos "</string>
+    <string name="use_two_digits_longitude">Use longitude com dois dígitos</string>
     <string name="shared_string_travel_guides">Guias de viagem</string>
     <string name="waypoints_removed_from_map_markers">Pontos de passagem removidos dos marcadores de mapa</string>
     <string name="shared_string_result">Resultado</string>
@@ -2852,8 +2852,9 @@ Pôr do Sol: %2$s</string>
 \n 
 \n• Outras correções de bugs 
 \n</string>
-    <string name="send_search_query_description">Enviaremos a sua pesquisa: \"%1$s\", bem como a sua localização.
-        \nNenhuma informação pessoal é coletada, os dados de pesquisa são usados apenas para melhorar o algoritmo de pesquisa.</string>
+    <string name="send_search_query_description">Enviaremos a sua pesquisa: \"%1$s\", bem como a sua localização. 
+\n
+\nNenhuma informação pessoal é coletada, os dados de pesquisa são usados apenas para melhorar o algoritmo de pesquisa.</string>
     <string name="osm_live_subscriptions">Assinaturas</string>
     <string name="mapillary_menu_title_pano">Exibir só imagens 360°</string>
     <string name="shared_string_launch">Iniciar</string>
@@ -3353,7 +3354,7 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_contour_lines_show">Mostrar curvas de nível</string>
     <string name="quick_action_contour_lines_hide">Ocultar linhas de contorno</string>
     <string name="quick_action_show_hide_contour_lines">Mostrar/ocultar linhas de contorno</string>
-    <string name="quick_action_hillshade_descr">Um botão para mostrar ou ocultar cortinas no mapa.</string>
+    <string name="quick_action_hillshade_descr">Um botão para mostrar ou ocultar sombras de relevo.</string>
     <string name="quick_action_hillshade_show">Mostrar sombras de relevo</string>
     <string name="quick_action_hillshade_hide">Ocultar sombras de relevo</string>
     <string name="quick_action_show_hide_hillshade">Mostrar/ocultar sombras de relevo</string>
@@ -3674,7 +3675,7 @@ Pôr do Sol: %2$s</string>
     <string name="map_markers_item">Marcadores de mapa</string>
     <string name="favorites_item">Favoritos</string>
     <string name="subscription_osmandlive_item">Assinatura - OsmAnd Live</string>
-    <string name="osmand_purchases_item">Compras de OsmAnd</string>
+    <string name="osmand_purchases_item">Compras no OsmAnd</string>
     <string name="legend_item_description">O guia para a simbologia de um mapa</string>
     <string name="navigation_profiles_item">Perfis de navegação</string>
     <string name="release_3_7">• Novos mapas de inclinação offline

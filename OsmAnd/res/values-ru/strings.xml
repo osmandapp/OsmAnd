@@ -774,8 +774,8 @@
     <string name="update_poi_is_not_available_for_zoom">Увеличение масштаба позволяет обновить POI</string>
     <string name="context_menu_item_update_poi">Обновить POI</string>
     <string name="context_menu_item_update_map_confirm">Вы хотите обновить локальные данные из интернета\?</string>
-    <string name="search_history_city">Город:\n {0}</string>
-    <string name="search_history_street">Улица:\n {0}, {1}</string>
+    <string name="search_history_city">Город: {0}</string>
+    <string name="search_history_street">Улица: {0}, {1}</string>
     <string name="search_history_int_streets">Пересечение улиц: {0} x {1} в {2}</string>
     <string name="search_history_building">Здание: {0}, {1}, {2}</string>
     <string name="favorite">Избранное</string>
@@ -799,7 +799,7 @@
     <string name="address">Адрес</string>
     <string name="shared_string_download_successful">Загружено</string>
     <string name="downloading_list_indexes">Загружается список доступных регионов…</string>
-    <string name="list_index_files_was_not_loaded">"Не удалось получить список регионов с  https://osmand.net."</string>
+    <string name="list_index_files_was_not_loaded">Не удалось получить список регионов с https://osmand.net.</string>
     <string name="fav_points_edited">Отредактирована избранная точка</string>
     <string name="fav_points_not_exist">Избранные точки отсутствуют</string>
     <string name="update_existing">Заменить</string>
@@ -1761,7 +1761,7 @@
     <string name="shared_string_clear_all">Очистить все</string>
     <string name="drawer">Плоский список</string>
     <string name="short_location_on_map">Широта %1$s
-Долгота %2$s</string>
+\nДолгота %2$s</string>
     <string name="tips_and_tricks_descr">Часто задаваемые вопросы, последние изменения и другое.</string>
     <string name="simulate_your_location">Моделировать ваше местоположение</string>
     <string name="shared_string_collapse">Свернуть</string>
@@ -2261,11 +2261,11 @@
     <string name="driving_region_australia">Австралия</string>
     <string name="lang_kab">Кабильский</string>
     <string name="navigate_point_olc_info_invalid">Некорректный OLC
-</string>
-    <string name="navigate_point_olc_info_short">Краткий OLC
-Пожалуйста, введите полный код</string>
+\n</string>
+    <string name="navigate_point_olc_info_short">Короткий OLC
+\nПожалуйста, введите полный код</string>
     <string name="navigate_point_olc_info_area">Корректный полный OLC
-Описывает область: %1$s x %2$s</string>
+\nОписывает область: %1$s x %2$s</string>
     <string name="auto_split_recording_descr">Начать новый сегмент после 6 минутного перерыва, новый трек после 2 часового перерыва, или новый файл после длительного перерыва (если изменилась дата).</string>
     <string name="auto_split_recording_title">Авторазрыв записи после перерыва</string>
     <string name="lang_zh_hk">Китайский (Гонконг)</string>
@@ -2367,7 +2367,7 @@
     <string name="edit_line">Редактировать линию</string>
     <string name="add_point_before">Добавить точку перед</string>
     <string name="add_point_after">Добавить точку после</string>
-    <string name="shared_string_options">Опции</string>
+    <string name="shared_string_options">Функции</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd соединит точки с маршрутом для выбранного профиля.</string>
     <string name="measurement_tool_save_as_new_track_descr">Сохранить точки, как точки маршрута или как линию.</string>
     <string name="choose_navigation_type">Выберите профиль навигации</string>
@@ -2543,7 +2543,8 @@
 \n• Делитесь своим расположением, чтобы друзья смогли найти вас 
 \n• Сохраняет ваши самые важные места в избранных 
 \n• Позволяет вам выбрать как отображать названия на карте: на английском, местным или с фонетическим написанием 
-\n• Отображает специальные онлайн тайлы, спутниковые снимки (с Bing), различные метки, как туристические/навигационные треки GPX и дополнительные слои с настраиваемой прозрачностью</string>
+\n• Отображает специальные онлайн тайлы, спутниковые снимки (с Bing), различные метки, как туристические/навигационные треки GPX и дополнительные слои с настраиваемой прозрачностью
+\n</string>
     <string name="osmand_extended_description_part4">Катание на лыжах 
 \n• OsmAnd плагин лыжные карты позволяет видеть лыжные трассы с уровнем сложности и некоторой дополнительной информацией, как расположение подъёмников и других объектов.</string>
     <string name="osmand_extended_description_part5">Езда на велосипеде 
@@ -2613,15 +2614,16 @@
 \n• Компактные автономные векторные карты, обновляемые как минимум раз в месяц 
 \n
 \n• Выбор между полными данными региона и только дорожной сетью (например, вся Япония занимает 700 МБ, а только дорожная сеть — 200 МБ)</string>
-    <string name="osmand_plus_extended_description_part5">Функции безопасности
-\n• Возможность автоматического переключения режима день/ночь
-\n• Возможность отображения ограничения скорости с напоминанием при превышении
-\n• Возможность изменения масштаба в зависимости от скорости
-\n• Возможность делиться своим местоположением, чтобы друзья смогли найти вас</string>
+    <string name="osmand_plus_extended_description_part5">Функции безопасности 
+\n• Возможность автоматического переключения режима день/ночь 
+\n• Возможность отображения ограничения скорости с напоминанием при превышении 
+\n• Возможность изменения масштаба в зависимости от скорости 
+\n• Возможность делиться своим местоположением, чтобы друзья смогли найти вас
+\n</string>
     <string name="osmand_plus_extended_description_part6">Возможности для пешеходов и велосипедистов 
 \n• Просмотр пешеходных, туристических и велосипедных дорожек, прекрасно подходит для активного отдыха 
 \n• Специальный режимы маршрутизации и отображения для велосипедистов и пешеходов 
-\n• Опционально остановки общественного транспорта (автобус, трамвай, поезд), включая названия маршрутов 
+\n• Возможность отображения остановок общественного транспорта (автобус, трамвай, поезд), включая названия маршрутов 
 \n• Возможность записи путешествие в локальный файл GPX или интернет-сервис 
 \n• Возможность отображения скорости и высоты 
 \n• Отображение контурных линий и затенения высот (через дополнительный плагин)</string>
@@ -2741,7 +2743,7 @@
     <string name="shared_string_explore">Исследовать</string>
     <string name="index_item_world_wikivoyage">Статьи путеводителя Викигида</string>
     <string name="images_cache">Кеш изображений</string>
-    <string name="delete_search_history">"Удалить историю поиска "</string>
+    <string name="delete_search_history">Удалить историю поиска</string>
     <string name="show_images">Показать изображения</string>
     <string name="shared_string_only_with_wifi">Только по Wi-Fi</string>
     <string name="wikivoyage_download_pics">Загружать изображения</string>

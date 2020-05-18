@@ -71,8 +71,8 @@
     <string name="live_monitoring_m">Seguimento con conexión (requírese GPX)</string>
     <string name="live_monitoring_start">Iniciar o seguimento con conexión</string>
     <string name="live_monitoring_stop">Deter o seguemento con conexión</string>
-    <string name="gpx_monitoring_start">Iniciar a gravación de GPX</string>
-    <string name="gpx_monitoring_stop">Deter a gravación do GPX</string>
+    <string name="gpx_monitoring_start">Retomar a gravación de GPX</string>
+    <string name="gpx_monitoring_stop">Deter a gravación de GPX</string>
     <string name="gpx_start_new_segment">Comezar un segmento novo</string>
     <string name="rendering_attr_hideBuildings_name">Edificios</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Estradas que non sexan para vehículos</string>
@@ -942,7 +942,7 @@
     <string name="search_osm_offline">Procurar localización xeográfica</string>
     <string name="system_locale">Sistema</string>
     <string name="preferred_locale_descr">Lingua da aplicación (empregada após reiniciar o OsmAnd).</string>
-    <string name="preferred_locale">Lingua da visualización</string>
+    <string name="preferred_locale">Lingua da interface</string>
     <string name="incomplete_locale">incompleto</string>
     <string name="shared_string_next">Seguinte</string>
     <string name="shared_string_previous">Anterior</string>
@@ -2062,7 +2062,7 @@ Lon %2$s</string>
     <string name="select_voice_provider_descr">Escolle ou baixa a orientación por voz para a túa lingua.</string>
     <string name="lang_als">Albanés (Tosco)</string>
     <string name="favourites_edit_dialog_title">Información do favorito</string>
-    <string name="lang_es_us">Español de Estados Unidos</string>
+    <string name="lang_es_us">Español dos Estados Unidos</string>
     <string name="lang_ast">Asturiano</string>
     <string name="lang_hsb">Alto sorabo</string>
     <string name="lang_en_gb">Inglés do Reino Unido</string>
@@ -2295,7 +2295,7 @@ Lon %2$s</string>
     <string name="order_by">Ordenar por:</string>
     <string name="marker_show_distance_descr">Escolle de que xeito indicar a distancia e a dirección ás marcaxes do mapa:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Limiar de orientación do mapa</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Escolle embaixo a velocidade á que a orientación do mapa muda de \"Para a dirección do movemento\" cara \"Para o compás\".</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Escolle a velocidade á que a orientación do mapa muda de \"Para a dirección do movemento\" cara \"Para o compás\".</string>
     <string name="all_markers_moved_to_history">Tódalas marcaxes do mapa foron movidas cara o historial</string>
     <string name="marker_moved_to_history">A marcaxe do mapa foi movida cara o historial</string>
     <string name="marker_moved_to_active">A marcaxe do mapa foi movida cara os activos</string>
@@ -2421,7 +2421,7 @@ Lon %2$s</string>
     <string name="one_tap_active">Activar cun toque</string>
     <string name="empty_state_av_notes">Crea notas!</string>
     <string name="empty_state_av_notes_desc">Engada unha nota de son, vídeo ou imaxe a cada punto do mapa empregando o trebello ou o menú de contexto.</string>
-    <string name="notes_by_date">Notas do OSM por data</string>
+    <string name="notes_by_date">Notas A/V por data</string>
     <string name="by_date">Por data</string>
     <string name="by_type">Por tipo</string>
     <string name="looking_for_tracks_with_waypoints">Estase a procurar pistas con puntos de pasaxe</string>
@@ -2844,31 +2844,19 @@ Lon %2$s</string>
 \n 
 \n  O OsmAnd é un software de código aberto, desenvolvido de xeito activo. Calquera pode contribuír ca aplicación informando sobre erros, mellorando as traducións ou desenvolvendo novas funcións. Ademais, o proxecto tamén depende das contribucións financeiras para desenvolver e probar novas funcionalidades. 
 \n"</string>
-    <string name="osmand_plus_extended_description_part8">"Cobertura e calidade aproximada do mapa: 
-\n
-\n • Europa Occidental: **** 
-\n
-\n • Europa Oriental: *** 
-\n
-\n • Rusia: *** 
-\n
-\n • Norteamérica: *** 
-\n
-\n • Suramérica: ** 
-\n
-\n • Asia: ** 
-\n
-\n • Xapón e Corea: *** 
-\n
-\n • Medio Oriente: ** 
-\n
-\n • África: ** 
-\n
-\n • Antártida: * 
-\n
-\n 
-\n
-\n Máis países darredor do globo están dispoñíbeis para baixar! Dende Afganistán a Zimbabue, dende Australia a Estados Unidos. A Arxentina, Brasil, Canadá, Francia, Alemaña, México, Reino Unido, España, … "</string>
+    <string name="osmand_plus_extended_description_part8">Cobertura e calidade aproximada do mapa:
+\n • Europa Occidental: ****
+\n • Europa Oriental: ***
+\n • Rusia: ***
+\n • Norteamérica: ***
+\n • Suramérica: **
+\n • Asia: **
+\n • Xapón e Corea: ***
+\n • Medio Oriente: **
+\n • África: **
+\n • Antártida: *
+\n Máis países darredor do globo están dispoñíbeis para baixar! Dende Afganistán a Zimbabue, dende Australia ós Estados Unidos. A Arxentina, Brasil, Canadá, Francia, Alemaña, México, Reino Unido, España, …
+\n</string>
     <string name="osm_live_plan_pricing">Plans e prezos</string>
     <string name="osm_live_payment_monthly_title">Mensual</string>
     <string name="osm_live_payment_3_months_title">Trimestral</string>
@@ -3654,7 +3642,7 @@ Lon %2$s</string>
     <string name="extra_maps_menu_group">Mapas adicionais</string>
     <string name="shared_string_terrain">Terreo</string>
     <string name="hillshade_description">Mapa de asombreado empregando sombras escuras para amosar as pendentes, cumios e terras baixas.</string>
-    <string name="slope_description">A pendente visualízase en cores sobre o terreo.</string>
+    <string name="slope_description">A pendente emprega cores para visualizar a inclinación do terreo.</string>
     <string name="terrain_slider_description">Define os niveis de achegamento mínimo e máximo nos que se amosará a capa.</string>
     <string name="hillshade_download_description">Precísanse mapas adicionais para ollar o asombreado no mapa.</string>
     <string name="slope_download_description">Precísanse mapas adicionais para ollar as pendentes no mapa.</string>
@@ -3662,7 +3650,7 @@ Lon %2$s</string>
     <string name="shared_string_transparency">Transparencia</string>
     <string name="shared_string_zoom_levels">Niveis de achegamento</string>
     <string name="shared_string_legend">Lenda</string>
-    <string name="terrain_empty_state_text">Permite ollar o asombreado ou o mapa de pendentes. Podes ler máis sobre estes tipos de mapas no noso sitio</string>
+    <string name="terrain_empty_state_text">Permite ollar o asombreado ou o mapa de pendentes. Podes ler máis sobre estes tipos de mapas na nosa páxina.</string>
     <string name="shared_string_hillshade">Sombras do relevo</string>
     <string name="import_complete_description">Todos os datos de %1$s son importados, podes empregar os botóns de abaixo para abrir a parte necesaria da aplicación para xestionala.</string>
     <string name="shared_string_import_complete">Importación completada</string>
@@ -3704,9 +3692,11 @@ Lon %2$s</string>
     <string name="hidden_items_descr">Estes elementos non se amosan no menú, mais as opcións ou plugins que representan seguirán a funcionar.</string>
     <string name="reset_items_descr">Agochar configuracións que as restabelece ó seu estado orixinal.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="osm_live_payment_subscription_management">Cárgase na túa conta da Google Play ó mercar unha subscrición 
-\ne cando expira (mes/trimestre/ano), 
-\nnon se renovará se é desbotada antes desa data nos axustes da Google Play.</string>
+    <string name="osm_live_payment_subscription_management">"O pagamento será cobrado na túa conta da Google Play na confirmación da compra. 
+\n 
+\n  A subscrición é renovada  de xeito automático, a menos que sexa desbotada antes da data de renovación. A túa conta será cobrada polo período de renovación (més/trimestre/ano) soamente na data de renovación. 
+\n 
+\n  Podes xestionar e desbotar as túas subscricións entrando nos axustes da Google Play."</string>
     <string name="search_poi_types">Procurar tipos de PDI</string>
     <string name="search_poi_types_descr">Combina tipos de PDI de diferentes categorías. Preme en \"Trocar\" para marcar todo, preme o lado esquerdo para escoller unha categoría.</string>
     <string name="download_unsupported_action">Acción %1$s non admitida</string>
@@ -3722,23 +3712,38 @@ Lon %2$s</string>
     <string name="osmand_purchases_item">Compras do OsmAnd</string>
     <string name="legend_item_description">A guía para a simboloxía dun mapa</string>
     <string name="navigation_profiles_item">Perfís de navegación</string>
-    <string name="release_3_7">• Novos mapas sen conexión das pendentes
-\n
-\n • Personalización máis completa dos favoritos e puntos de referencia GPX (cores personalizadas, iconas, formas)
-\n
-\n • Nova personalización na orde dos elementos en Configurar mapa, menú contextual e menú lateral
-\n
-\n • A Wikipedia agora visualízase coma una capa separada en Configurar mapa, escolle só as linguas precisas
-\n
-\n • Crea o teu propio filtro/mapas de puntos de interese, con total flexibilidade
-\n
-\n • Engadíronse opcións para restabelecer os axustes dos perfís personalizados
-\n
-\n • As rutas GPX para a navegación, agora admiten os carrís de tráfico e completan as instrucións de xiro
-\n
-\n • Corrixiuse o tamaño da interface nas tabletas
-\n
-\n • Corrixíronse os errores co RTL
+    <string name="release_3_7">• Novos mapas sen conexión das pendentes 
+\n 
+\n • Personalización máis completa dos favoritos e puntos de referencia GPX (cores personalizadas, iconas, formas) 
+\n 
+\n • Nova personalización na orde dos elementos en Configurar mapa, menú contextual e menú lateral 
+\n 
+\n • A Wikipedia agora visualízase coma una capa separada en Configurar mapa, escolle só as linguas precisas 
+\n 
+\n • Crea o teu propio filtro/mapas de puntos de interese, con total flexibilidade 
+\n 
+\n • Engadíronse opcións para restabelecer os axustes dos perfís personalizados 
+\n 
+\n • As rutas GPX para a navegación, agora admiten os carrís de tráfico e completan as instrucións de xiro 
+\n 
+\n • Corrixiuse o tamaño da interface nas tabletas 
+\n 
+\n • Corrixíronse os erros co RTL
 \n
 \n</string>
+    <string name="shared_string_resume">Retomar</string>
+    <string name="additional_actions_descr">Podes acceder a estas accións premendo no botón “%1$s”.</string>
+    <string name="quick_action_transport_hide">Agochar transporte público</string>
+    <string name="quick_action_transport_show">Amosar transporte público</string>
+    <string name="quick_action_show_hide_transport">Amosar/agochar transporte público</string>
+    <string name="quick_action_transport_descr">Un botón que amosa ou agocha o transporte público no mapa.</string>
+    <string name="create_edit_poi">Crear/Editar PDI</string>
+    <string name="parking_positions">Posicións de aparcamento</string>
+    <string name="add_edit_favorite">Engadir / Editar favorito</string>
+    <string name="reset_deafult_order">Restabelecer a orde dos elementos predefinidos</string>
+    <string name="back_to_editing">Voltar á edición</string>
+    <string name="quick_action_switch_profile_descr">Premendo no botón de acción mudarase entre os perfís escollidos.</string>
+    <string name="shared_string_add_profile">Engadir perfil</string>
+    <string name="change_application_profile">Mudar perfil da aplicación</string>
+    <string name="profiles_for_action_not_found">Non se atoparon os perfís marcados para esta acción.</string>
 </resources>
