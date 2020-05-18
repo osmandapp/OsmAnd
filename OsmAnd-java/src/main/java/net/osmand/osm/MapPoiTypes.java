@@ -918,11 +918,4 @@ public class MapPoiTypes {
 			return pat.isText();
 		}
 	}
-
-
-
-
-
-
-
 }

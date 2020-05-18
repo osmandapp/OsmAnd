@@ -3,7 +3,10 @@ package net.osmand.plus.poi;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
 
+import net.osmand.PlatformUtil;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -12,11 +15,17 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.api.SQLiteAPI.SQLiteStatement;
 import net.osmand.plus.wikipedia.WikipediaPoiMenu;
 import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,6 +45,7 @@ import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 
 public class PoiFiltersHelper {
 
+	private static final Log LOG = PlatformUtil.getLog(PoiFiltersHelper.class);
 	private final OsmandApplication application;
 
 	private NominatimPoiFilter nominatimPOIFilter;
@@ -625,6 +635,33 @@ public class PoiFiltersHelper {
 		}
 	}
 
+	@Nullable
+	public Pair<Long, Map<String, List<String>>> getCacheByResourceName(String fileName) {
+		Pair<Long, Map<String, List<String>>> cache = null;
+		PoiFilterDbHelper helper = openDbHelper();
+		if (helper != null) {
+			cache = helper.getCacheByResourceName(helper.getReadableDatabase(), fileName);
+			helper.close();
+		}
+		return cache;
+	}
+
+	public void updateCacheForResource(String fileName, long lastModified, Map<String, List<String>> categories) {
+		PoiFilterDbHelper helper = openDbHelper();
+		if (helper != null) {
+			helper.updateCacheForResource(helper.getReadableDatabase(), fileName, lastModified, categories);
+			helper.close();
+		}
+	}
+
+	public void insertCacheForResource(String fileName, long lastModified, Map<String, List<String>> categories) {
+		PoiFilterDbHelper helper = openDbHelper();
+		if (helper != null) {
+			helper.insertCacheForResource(helper.getReadableDatabase(), fileName, lastModified, categories);
+			helper.close();
+		}
+	}
+
 	private void saveSelectedPoiFilters() {
 		Set<String> filters = new HashSet<>();
 		for (Set<PoiUIFilter> template : selectedPoiFilters.values()) {
@@ -641,7 +678,7 @@ public class PoiFiltersHelper {
 		private static final int FALSE_INT = 0;
 
 		public static final String DATABASE_NAME = "poi_filters";
-		private static final int DATABASE_VERSION = 6;
+		private static final int DATABASE_VERSION = 7;
 
 		private static final String FILTER_NAME = "poi_filters";
 		private static final String FILTER_COL_NAME = "name";
@@ -668,6 +705,20 @@ public class PoiFiltersHelper {
 				CATEGORIES_FILTER_ID + ", " +
 				CATEGORIES_COL_CATEGORY + ", " +
 				CATEGORIES_COL_SUBCATEGORY + ");";
+
+		private static final String POI_TYPES_CACHE_NAME = "poi_types_cache";
+		private static final String MAP_FILE_NAME = "map_name";
+		private static final String MAP_FILE_DATE = "map_date";
+		private static final String CACHED_POI_CATEGORIES = "cached_categories";
+
+		private static final String POI_CACHE_TABLE_CREATE = "CREATE TABLE " +
+				POI_TYPES_CACHE_NAME + " (" +
+				MAP_FILE_NAME + ", " +
+				MAP_FILE_DATE + ", " +
+				CACHED_POI_CATEGORIES + ");";
+
+		private static final String CATEGORY_KEY = "category";
+		private static final String SUB_CATEGORIES_KEY = "sub_categories";
 
 		private OsmandApplication context;
 		private SQLiteConnection conn;
@@ -714,6 +765,7 @@ public class PoiFiltersHelper {
 		public void onCreate(SQLiteConnection conn) {
 			conn.execSQL(FILTER_TABLE_CREATE);
 			conn.execSQL(CATEGORIES_TABLE_CREATE);
+			conn.execSQL(POI_CACHE_TABLE_CREATE);
 		}
 
 
@@ -724,6 +776,9 @@ public class PoiFiltersHelper {
 			if (oldVersion < 6) {
 				conn.execSQL("ALTER TABLE " + FILTER_NAME + " ADD " + FILTER_COL_HISTORY + " int DEFAULT " + FALSE_INT);
 				conn.execSQL("ALTER TABLE " + FILTER_NAME + " ADD " + FILTER_COL_DELETED + " int DEFAULT " + FALSE_INT);
+			}
+			if (oldVersion < 7) {
+				conn.execSQL(POI_CACHE_TABLE_CREATE);
 			}
 		}
 
@@ -886,6 +941,90 @@ public class PoiFiltersHelper {
 		private void deleteFilter(@NonNull SQLiteConnection db, String key) {
 			db.execSQL("DELETE FROM " + FILTER_NAME + " WHERE " + FILTER_COL_ID + " = ?", new Object[]{key});
 			db.execSQL("DELETE FROM " + CATEGORIES_NAME + " WHERE " + CATEGORIES_FILTER_ID + " = ?", new Object[]{key});
+		}
+
+		@Nullable
+		protected Pair<Long, Map<String, List<String>>> getCacheByResourceName(SQLiteConnection db, String fileName) {
+			Pair<Long, Map<String, List<String>>> cache = null;
+			if (db != null) {
+				SQLiteAPI.SQLiteCursor query = db.rawQuery("SELECT " +
+						MAP_FILE_DATE + ", " +
+						CACHED_POI_CATEGORIES +
+						" FROM " +
+						POI_TYPES_CACHE_NAME +
+						" WHERE " + MAP_FILE_NAME + " = ?", new String[]{fileName});
+				if (query != null && query.moveToFirst()) {
+					long lastModified = query.getLong(0);
+					Map<String, List<String>> categories = getCategories(query.getString(1));
+					cache = new Pair<>(lastModified, categories);
+				}
+				if (query != null) {
+					query.close();
+				}
+				db.close();
+			}
+			return cache;
+		}
+
+		private Map<String, List<String>> getCategories(String json) {
+			Map<String, List<String>> categories = new HashMap<>();
+			try {
+				JSONArray jsonArray = new JSONArray(json);
+				for (int i = 0; i < jsonArray.length(); i++) {
+					JSONObject jsonObject = jsonArray.getJSONObject(i);
+					String category = jsonObject.optString(CATEGORY_KEY);
+					List<String> subCategories = getSubCategories(jsonObject.optString(SUB_CATEGORIES_KEY));
+					categories.put(category, subCategories);
+				}
+			} catch (JSONException e) {
+				LOG.error("Error parsing categories: " + e);
+			}
+			return categories;
+		}
+
+		protected void updateCacheForResource(SQLiteConnection db, String fileName, long lastModified, Map<String, List<String>> categories) {
+			try {
+				db.execSQL("UPDATE " + POI_TYPES_CACHE_NAME + " SET " +
+								MAP_FILE_DATE + " = ?, " +
+								CACHED_POI_CATEGORIES + " = ? " +
+								"WHERE " + MAP_FILE_NAME + " = ?",
+						new Object[]{lastModified, getCategoriesJson(categories), fileName});
+			} catch (JSONException e) {
+				LOG.error("Error converting category to json: " + e);
+			}
+		}
+
+		protected void insertCacheForResource(SQLiteConnection db, String fileName, long lastModified, Map<String, List<String>> categories) {
+			try {
+				db.execSQL("INSERT INTO " + POI_TYPES_CACHE_NAME + " VALUES(?,?,?)",
+						new Object[]{fileName, lastModified, getCategoriesJson(categories)});
+			} catch (JSONException e) {
+				LOG.error("Error converting category to json: " + e);
+			}
+		}
+
+		private String getCategoriesJson(Map<String, List<String>> categories) throws JSONException {
+			JSONArray json = new JSONArray();
+			for (Map.Entry<String, List<String>> entry : categories.entrySet()) {
+				JSONObject jsonObject = new JSONObject();
+				JSONArray subCategories = new JSONArray();
+				for (String subCategory : entry.getValue()) {
+					subCategories.put(subCategory);
+				}
+				jsonObject.put(CATEGORY_KEY, entry.getKey());
+				jsonObject.put(SUB_CATEGORIES_KEY, subCategories);
+				json.put(jsonObject);
+			}
+			return json.toString();
+		}
+
+		private List<String> getSubCategories(@NonNull String json) throws JSONException {
+			List<String> subCategories = new ArrayList<>();
+			JSONArray jsonArray = new JSONArray(json);
+			for (int i = 0; i < jsonArray.length(); i++) {
+				subCategories.add(jsonArray.optString(i));
+			}
+			return subCategories;
 		}
 	}
 }

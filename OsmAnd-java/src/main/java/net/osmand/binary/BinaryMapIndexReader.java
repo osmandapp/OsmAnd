@@ -1424,7 +1424,7 @@ public class BinaryMapIndexReader {
 		return addressIndexes;
 	}
 
-	protected List<PoiRegion> getPoiIndexes() {
+	public List<PoiRegion> getPoiIndexes() {
 		return poiIndexes;
 	}
 

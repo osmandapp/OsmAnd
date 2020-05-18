@@ -1,6 +1,7 @@
 package net.osmand.plus.resources;
 
 import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -9,8 +10,12 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.binary.BinaryMapPoiReaderAdapter;
 import net.osmand.data.Amenity;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResource;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResourceType;
 import net.osmand.util.MapUtils;
@@ -18,6 +23,7 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -27,9 +33,73 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 
 	private final static Log log = PlatformUtil.getLog(AmenityIndexRepositoryBinary.class);
 	private BinaryMapReaderResource resource;
+	private MapPoiTypes poiTypes;
+	private Map<String, List<String>> deltaPoiCategories = new HashMap<>();
 
-	public AmenityIndexRepositoryBinary(BinaryMapReaderResource resource) {
+	public AmenityIndexRepositoryBinary(BinaryMapReaderResource resource, OsmandApplication app) {
 		this.resource = resource;
+		poiTypes = app.getPoiTypes();
+		checkCachedCategories(app.getPoiFilters());
+	}
+
+	public Map<String, List<String>> getDeltaPoiCategories() {
+		return deltaPoiCategories;
+	}
+
+	private void checkCachedCategories(PoiFiltersHelper poiFiltersHelper) {
+		String fileName = resource.getFileName();
+		long lastModified = resource.getFileLastModified();
+		Pair<Long, Map<String, List<String>>> cache = poiFiltersHelper.getCacheByResourceName(fileName);
+		if (cache == null || cache.first != null && cache.first != lastModified) {
+			deltaPoiCategories = new HashMap<>();
+			try {
+				BinaryMapIndexReader reader = getOpenFile();
+				if (reader != null) {
+					reader.initCategories();
+					List<BinaryMapPoiReaderAdapter.PoiRegion> regions = reader.getPoiIndexes();
+					for (BinaryMapPoiReaderAdapter.PoiRegion region : regions) {
+						calculateDeltaSubcategories(region);
+					}
+					if (cache == null) {
+						poiFiltersHelper.insertCacheForResource(fileName, lastModified, deltaPoiCategories);
+					} else {
+						poiFiltersHelper.updateCacheForResource(fileName, lastModified, deltaPoiCategories);
+					}
+				}
+			} catch (IOException e) {
+				log.error("Error initializing categories ", e);
+			}
+		} else if (cache.second != null) {
+			deltaPoiCategories = cache.second;
+		}
+	}
+
+	private void calculateDeltaSubcategories(BinaryMapPoiReaderAdapter.PoiRegion region) {
+		List<String> categories = region.getCategories();
+		List<List<String>> subCategories = region.getSubcategories();
+		for (int i = 0; i < categories.size(); i++) {
+			String categoryName = categories.get(i);
+
+			PoiCategory poiCategory = poiTypes.getPoiCategoryByName(categoryName);
+			List<String> deltaSubCategories = null;
+			for (List<String> subList : subCategories) {
+				for (String subCategory : subList) {
+					if (poiCategory.getPoiTypeByKeyName(subCategory) != null) {
+						if (deltaSubCategories == null) {
+							deltaSubCategories = new ArrayList<>();
+						}
+						deltaSubCategories.add(subCategory);
+					}
+				}
+			}
+			if (deltaSubCategories != null) {
+				if(deltaPoiCategories.containsKey(categoryName)) {
+					deltaPoiCategories.get(categoryName).addAll(deltaSubCategories);
+				} else {
+					deltaPoiCategories.put(categoryName, deltaSubCategories);
+				}
+			}
+		}
 	}
 
 	@Nullable
@@ -54,8 +124,8 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 		BinaryMapIndexReader reader = getOpenFile();
 		return reader != null && reader.containsPoiData(left31, top31, right31, bottom31);
 	}
-	
-	
+
+
 	public synchronized Map<PoiCategory, List<String>> searchAmenityCategoriesByName(String query, Map<PoiCategory, List<String>> map) {
 		try {
 			BinaryMapIndexReader reader = getOpenFile();
@@ -65,12 +135,12 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 		}
 		return map;
 	}
-	
-	
+
+
 	public synchronized List<Amenity> searchAmenitiesByName(int x, int y, int l, int t, int r, int b, String query, ResultMatcher<Amenity> resulMatcher) {
 		long now = System.currentTimeMillis();
 		List<Amenity> amenities = Collections.emptyList();
-		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(x, y, query, l, r, t, b,resulMatcher);
+		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(x, y, query, l, r, t, b, resulMatcher);
 		try {
 			BinaryMapIndexReader index = getOpenFile();
 			if (index != null) {
@@ -90,10 +160,10 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 		}
 		return amenities;
 	}
-	
+
 	@Override
-	public synchronized List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int zoom, 
-			final SearchPoiTypeFilter filter, ResultMatcher<Amenity> matcher) {
+	public synchronized List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int zoom,
+													  final SearchPoiTypeFilter filter, ResultMatcher<Amenity> matcher) {
 		long now = System.currentTimeMillis();
 		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(sleft, sright, stop, sbottom, zoom,
 				filter, matcher);
@@ -118,7 +188,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 		long now = System.currentTimeMillis();
 		List<Amenity> result = null;
 		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(locations, radius,
-				filter, matcher );
+				filter, matcher);
 		try {
 			BinaryMapIndexReader reader = getOpenFile();
 			if (reader != null) {
@@ -129,10 +199,10 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 			return result;
 		}
 		if (log.isDebugEnabled() && result != null) {
-			log.debug(String.format("Search done in %s ms found %s.",  (System.currentTimeMillis() - now), result.size())); //$NON-NLS-1$
+			log.debug(String.format("Search done in %s ms found %s.", (System.currentTimeMillis() - now), result.size())); //$NON-NLS-1$
 		}
 		return result;
-		
+
 	}
-	
+
 }

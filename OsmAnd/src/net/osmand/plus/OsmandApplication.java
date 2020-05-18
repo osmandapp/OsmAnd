@@ -333,7 +333,6 @@ public class OsmandApplication extends MultiDexApplication {
 		return poiFilters;
 	}
 
-
 	public GpxSelectionHelper getSelectedGpxHelper() {
 		return selectedGpxHelper;
 	}

@@ -69,5 +69,5 @@ public class PoiFilter extends AbstractPoiType {
 	public List<PoiType> getPoiTypes() {
 		return poiTypes;
 	}
-	
+
 }
