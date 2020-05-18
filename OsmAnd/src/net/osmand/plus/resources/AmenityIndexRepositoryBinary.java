@@ -82,14 +82,12 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 
 			PoiCategory poiCategory = poiTypes.getPoiCategoryByName(categoryName);
 			List<String> deltaSubCategories = null;
-			for (List<String> subList : subCategories) {
-				for (String subCategory : subList) {
-					if (poiCategory.getPoiTypeByKeyName(subCategory) != null) {
-						if (deltaSubCategories == null) {
-							deltaSubCategories = new ArrayList<>();
-						}
-						deltaSubCategories.add(subCategory);
+			for (String subCategory : subCategories.get(i)) {
+				if (poiCategory.getPoiTypeByKeyName(subCategory) == null) {
+					if (deltaSubCategories == null) {
+						deltaSubCategories = new ArrayList<>();
 					}
+					deltaSubCategories.add(subCategory);
 				}
 			}
 			if (deltaSubCategories != null) {
