@@ -45,7 +45,7 @@
 					android:paddingEnd="@dimen/route_info_buttons_padding_top_bottom"
 					android:paddingRight="@dimen/route_info_buttons_padding_top_bottom">
 
-					<ImageView
+					<androidx.appcompat.widget.AppCompatImageView
 						android:id="@+id/InfoIcon"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
 					android:paddingEnd="@dimen/route_info_buttons_padding_top_bottom"
 					android:paddingRight="@dimen/route_info_buttons_padding_top_bottom">
 
-					<ImageView
+					<androidx.appcompat.widget.AppCompatImageView
 						android:id="@+id/DurationIcon"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"

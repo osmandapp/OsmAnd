@@ -5,7 +5,7 @@
               android:layout_height="match_parent"
               android:gravity="center">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/tab_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

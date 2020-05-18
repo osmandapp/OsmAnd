@@ -2085,7 +2085,6 @@ Lon %2$s</string>
     <string name="trip_rec_notification_settings">Schnellaufzeichnung einschalten</string>
     <string name="trip_rec_notification_settings_desc">Anzeige einer Systembenachrichtigung zum Starten der Streckenaufzeichnung.</string>
     <string name="shared_string_notifications">Benachrichtigungen</string>
-    <string name="shared_string_resume">Fortsetzen</string>
     <string name="shared_string_appearance">Aussehen</string>
     <string name="route_calculation">Routenberechnung</string>
     <string name="gpx_no_tracks_title">Sie haben noch keine GPX-Dateien</string>
@@ -2555,7 +2554,7 @@ Lon %2$s</string>
     <string name="hide_passed">Passierte ausblenden</string>
     <string name="marker_show_distance_descr">Auswahl der Entfernungs- und Richtungsangabe für Kartenmarkierungen in der Karte:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Kartenausrichtungsgrenzwert</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Auswählen, bei welcher Geschwindigkeit die Kartenausrichtung von \'Nach Bewegungsrichtung\' auf \'Nach Kompass\' umschaltet.</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Auswählen, bei welcher Geschwindigkeit die Kartenausrichtung von \'Nach Bewegungsrichtung\' auf \'Nach Kompass\' umschaltet</string>
     <string name="marker_moved_to_history">Kartenmarkierung in den Verlauf verschoben</string>
     <string name="osn_modify_dialog_error">Notiz konnte nicht geändert werden.</string>
     <string name="osn_modify_dialog_title">Notiz ändern</string>
@@ -2614,7 +2613,7 @@ Lon %2$s</string>
     <string name="by_type">Nach Typ</string>
     <string name="import_gpx_file_description">kann als Favoriten oder GPX-Datei importiert werden.</string>
     <string name="empty_state_av_notes_desc">Audio-, Video- oder Fotonotizen zu jedem Punkt auf der Karte über Bedienelement oder Kontextmenü hinzufügen.</string>
-    <string name="notes_by_date">OSM-Notizen nach Datum</string>
+    <string name="notes_by_date">Audio-/Video-Notizen nach Datum</string>
     <string name="tap_on_map_to_hide_interface_descr">Ein Tippen auf die Karte schaltet die Steuertasten und Bedienelemente um.</string>
     <string name="release_3_0">• Neu: Unterstützung weltweiter Offline-Reiseführer. Verknüpfung beschriebener Sehenswürdigkeiten zur Landkarte. Die Inhalte basieren derzeit auf Wikivoyage.
 \n
@@ -3709,4 +3708,19 @@ Lon %2$s</string>
 \n• Fehler mit RTL behoben
 \n
 \n</string>
+    <string name="shared_string_resume">Fortfahren</string>
+    <string name="additional_actions_descr">Sie können auf diese Aktionen zugreifen, indem Sie auf die Schaltfläche \"%1$s\" tippen.</string>
+    <string name="quick_action_transport_hide">Öffentliche Verkehrsmittel ausblenden</string>
+    <string name="quick_action_transport_show">Öffentliche Verkehrsmittel anzeigen</string>
+    <string name="quick_action_show_hide_transport">Öffentliche Verkehrsmittel anzeigen/ausblenden</string>
+    <string name="quick_action_transport_descr">Eine Schaltfläche zum Ein- oder Ausblenden der öffentlichen Verkehrsmittel auf der Karte.</string>
+    <string name="create_edit_poi">POI erstellen/bearbeiten</string>
+    <string name="parking_positions">Parkpositionen</string>
+    <string name="add_edit_favorite">Favorit hinzufügen / bearbeiten</string>
+    <string name="reset_deafult_order">Standard-Reihenfolge der Elemente wiederherstellen</string>
+    <string name="back_to_editing">Zurück zur Bearbeitung</string>
+    <string name="quick_action_switch_profile_descr">Durch Antippen der Aktionsschaltfläche können Sie zwischen den ausgewählten Profilen wechseln.</string>
+    <string name="shared_string_add_profile">Profil hinzufügen</string>
+    <string name="change_application_profile">Anwendungsprofil ändern</string>
+    <string name="profiles_for_action_not_found">Für diese Aktion ausgewählte Profile nicht gefunden.</string>
 </resources>

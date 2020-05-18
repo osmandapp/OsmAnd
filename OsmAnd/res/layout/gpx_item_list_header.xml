@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="152dp"
@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/content_padding"/>
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="fitXY"
@@ -150,7 +150,7 @@
 	                android:paddingEnd="@dimen/content_padding_half"
 	                android:paddingStart="@dimen/content_padding_half" />
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/split_interval_arrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -182,7 +182,7 @@
                     android:textSize="@dimen/default_list_text_size"
                     android:text="@string/shared_string_color"/>
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/colorImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

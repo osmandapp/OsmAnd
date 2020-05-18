@@ -36,7 +36,7 @@
 	            android:layout_marginStart="@dimen/content_padding_half"
 	            android:layout_marginEnd="@dimen/content_padding_half">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/lat_icon"
                     android:layout_width="@dimen/standard_icon_size"
                     android:layout_height="@dimen/standard_icon_size"
@@ -79,7 +79,7 @@
 	            android:layout_marginStart="@dimen/content_padding_half"
 	            android:layout_marginEnd="@dimen/content_padding_half">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/lon_icon"
                     android:layout_width="@dimen/standard_icon_size"
                     android:layout_height="@dimen/standard_icon_size"
@@ -142,7 +142,7 @@
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
 
-                            <ImageView
+                            <androidx.appcompat.widget.AppCompatImageView
                                 android:id="@+id/map_marker_arrow"
                                 android:layout_width="60dp"
                                 android:layout_height="24dp"
@@ -219,7 +219,7 @@
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
 
-                            <ImageView
+                            <androidx.appcompat.widget.AppCompatImageView
                                 android:id="@+id/map_marker_arrow_2nd"
                                 android:layout_width="60dp"
                                 android:layout_height="24dp"
@@ -363,14 +363,14 @@
                     tools:text="8"
                     tools:visibility="visible" />
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/map_turn_icon"
                     android:layout_width="@dimen/map_widget_height"
                     android:layout_height="@dimen/map_widget_height"
                     android:scaleType="fitCenter"
                     tools:src="@drawable/map_turn_right_small" />
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/map_shield_icon"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
@@ -416,7 +416,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/waypoint_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -719,7 +719,7 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/map_lanes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

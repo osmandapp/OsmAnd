@@ -26,7 +26,6 @@ import net.osmand.binary.OsmandIndex.PoiPart;
 import net.osmand.binary.OsmandIndex.RoutingPart;
 import net.osmand.binary.OsmandIndex.RoutingSubregion;
 import net.osmand.binary.OsmandIndex.TransportPart;
-import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -131,6 +130,10 @@ public class CachedOsmandIndexes {
 			transport.setBottom(index.getBottom());
 			transport.setStopsTableLength(index.stopsFileLength);
 			transport.setStopsTableOffset(index.stopsFileOffset);
+//			if(index.incompleteRoutesLength > 0) {
+			transport.setIncompleteRoutesLength(index.incompleteRoutesLength);
+			transport.setIncompleteRoutesOffset(index.incompleteRoutesOffset);
+//			}
 			transport.setStringTableLength(index.stringTable.length);
 			transport.setStringTableOffset(index.stringTable.fileOffset);
 			fileIndex.addTransportIndex(transport);
@@ -269,6 +272,8 @@ public class CachedOsmandIndexes {
 			mi.bottom = index.getBottom();
 			mi.stopsFileLength = index.getStopsTableLength();
 			mi.stopsFileOffset = index.getStopsTableOffset();
+			mi.incompleteRoutesLength = index.getIncompleteRoutesLength();
+			mi.incompleteRoutesOffset = index.getIncompleteRoutesOffset();
 			mi.stringTable = new IndexStringTable();
 			mi.stringTable.fileOffset = index.getStringTableOffset();
 			mi.stringTable.length = index.getStringTableLength();

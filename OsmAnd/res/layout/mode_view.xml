@@ -4,7 +4,7 @@
              android:layout_height="@dimen/route_info_modes_height"
              xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/app_mode_icon"
         android:layout_width="@dimen/standard_icon_size"
         android:layout_height="@dimen/standard_icon_size"

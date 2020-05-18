@@ -1225,8 +1225,8 @@
     <string name="live_monitoring_m">線上即時追蹤 (需要 GPX)</string>
     <string name="live_monitoring_start">開始線上即時追蹤</string>
     <string name="live_monitoring_stop">停止線上即時追蹤</string>
-    <string name="gpx_monitoring_start">開始 GPX 記錄</string>
-    <string name="gpx_monitoring_stop">停止 GPX 記錄</string>
+    <string name="gpx_monitoring_start">恢復 GPX 記錄</string>
+    <string name="gpx_monitoring_stop">暫停 GPX 記錄</string>
     <string name="gpx_start_new_segment">開始新區段</string>
     <string name="lang_fa">波斯</string>
     <string name="map_preferred_locale_descr">在地圖上對標簽偏好的語言(如果無法使用，將使用英文或當地名稱)。</string>
@@ -2600,7 +2600,7 @@
     <string name="one_tap_active">「點一下」啟動</string>
     <string name="empty_state_av_notes">加註記！</string>
     <string name="empty_state_av_notes_desc">使用小工具或內容選單，增加音訊、視訊或照片附註在地圖上的每個標點。</string>
-    <string name="notes_by_date">以日期排序的 OSM 註記</string>
+    <string name="notes_by_date">以日期排序的音訊／視訊註記</string>
     <string name="by_date">按照日期</string>
     <string name="by_type">按照類型</string>
     <string name="one_tap_active_descr">輕點在地圖上的標記，將其移動到活動標記的頂端，而不用打開內容選單。</string>
@@ -3710,4 +3710,9 @@
     <string name="add_edit_favorite">新增／編輯收藏</string>
     <string name="reset_deafult_order">恢復預設項目排序</string>
     <string name="back_to_editing">返回編輯</string>
+    <string name="shared_string_resume">恢復</string>
+    <string name="quick_action_switch_profile_descr">點擊動作按鈕將會在選取的設定檔間切換。</string>
+    <string name="shared_string_add_profile">新增設定檔</string>
+    <string name="change_application_profile">變更應用程式設定檔</string>
+    <string name="profiles_for_action_not_found">找不到為此動作選取的設定檔。</string>
 </resources>

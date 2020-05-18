@@ -10,7 +10,7 @@
 	android:paddingTop="@dimen/context_menu_main_actions_padding_top"
 	android:paddingBottom="@dimen/context_menu_main_actions_padding_bottom">
 
-	<ImageView
+	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/icon"
 		android:layout_width="@dimen/standard_icon_size"
 		android:layout_height="@dimen/standard_icon_size"

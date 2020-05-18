@@ -13,14 +13,14 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content">
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/outline"
 			android:layout_width="@dimen/favorites_icon_outline_size"
 			android:layout_height="@dimen/favorites_icon_outline_size"
 			android:visibility="invisible"
 			app:srcCompat="@drawable/bg_point_circle_contour" />
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/background"
 			android:layout_width="@dimen/favorites_icon_size"
 			android:layout_height="@dimen/favorites_icon_size"
@@ -28,7 +28,7 @@
 			android:layout_gravity="center"
 			app:srcCompat="@drawable/bg_point_circle" />
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/icon"
 			android:layout_width="@dimen/standard_icon_size"
 			android:layout_height="@dimen/standard_icon_size"

@@ -33,7 +33,7 @@
 			android:layout_marginEnd="@dimen/content_padding"
 			android:layout_marginStart="@dimen/content_padding">
 
-			<ImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/south_side_iv"
 				android:layout_width="24dp"
 				android:layout_height="24dp"
@@ -54,7 +54,7 @@
 				tools:text="N"
 				tools:textColor="@color/active_color_primary_light"/>
 
-			<ImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/north_side_iv"
 				android:layout_width="24dp"
 				android:layout_height="24dp"
@@ -143,7 +143,7 @@
 
 		</LinearLayout>
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/lat_backspace_btn"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -182,7 +182,7 @@
 			android:layout_marginEnd="@dimen/content_padding"
 			android:layout_marginStart="@dimen/content_padding">
 
-			<ImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/east_side_iv"
 				android:layout_width="24dp"
 				android:layout_height="24dp"
@@ -204,7 +204,7 @@
 				tools:text="W"
 				tools:textColor="@color/active_color_primary_light"/>
 
-			<ImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/west_side_iv"
 				android:layout_width="24dp"
 				android:layout_height="24dp"
@@ -294,7 +294,7 @@
 
 		</LinearLayout>
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/lon_backspace_btn"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -349,7 +349,7 @@
 			android:inputType="text"
 			android:textSize="@dimen/default_list_text_size"/>
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/point_name_keyboard_btn"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"

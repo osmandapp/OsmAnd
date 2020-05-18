@@ -123,7 +123,7 @@
 
 		</com.google.android.material.appbar.CollapsingToolbarLayout>
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/shadowView"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/abp__shadow_height"

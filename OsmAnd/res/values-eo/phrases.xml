@@ -1517,13 +1517,13 @@
     <string name="poi_service_electrical">riparo de elektraj aŭtoj</string>
     <string name="poi_motorcycle_repair">Riparejo de motorcikloj</string>
     <string name="poi_self_service_yes">jes</string>
-    <string name="poi_self_service_no">Sen memservo</string>
+    <string name="poi_self_service_no">ne</string>
     <string name="poi_automated_yes">jes</string>
     <string name="poi_automated_no">Ne aŭtomatigita</string>
     <string name="poi_full_service_yes">Plena servo</string>
     <string name="poi_brushless_yes">jes</string>
     <string name="poi_brushless_no">Senbrosa: ne</string>
-    <string name="poi_car_wash_no">Aŭtomobil-purigejo: ne</string>
+    <string name="poi_car_wash_no">ne</string>
     <string name="poi_aeroway_fuel">Benzinejo por aviadiloj</string>
     <string name="poi_indoor_yes">Ene</string>
     <string name="poi_indoor_no">Ekstere</string>

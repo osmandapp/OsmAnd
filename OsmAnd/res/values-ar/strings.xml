@@ -3556,7 +3556,7 @@
     <string name="quick_action_show_hide_terrain">إظهار/إخفاء التضاريس</string>
     <string name="download_slope_maps">المنحدرات</string>
     <string name="shared_string_hillshade">التضاريس</string>
-    <string name="terrain_empty_state_text">تمكين لعرض المنحدرات أو خريطة التضاريس. يمكنك قراءة المزيد عن أنواع الخرائط هذه على موقعنا</string>
+    <string name="terrain_empty_state_text">تمكين لعرض المنحدرات أو خريطة التضاريس. يمكنك قراءة المزيد عن أنواع الخرائط هذه على موقعنا.</string>
     <string name="shared_string_legend">عنوان تفسيري</string>
     <string name="shared_string_zoom_levels">مستويات التكبير</string>
     <string name="shared_string_transparency">الشفافية</string>
@@ -3672,4 +3672,19 @@
 \n • إصلاح الخلل مع RTL
 \n
 \n</string>
+    <string name="shared_string_resume">إستئناف</string>
+    <string name="additional_actions_descr">يمكنك الوصول إلى هذه الإجراءات عن طريق النقر على زر \"%1$s\".</string>
+    <string name="quick_action_transport_hide">إخفاء وسائل النقل العام</string>
+    <string name="quick_action_transport_show">إظهار وسائل النقل العام</string>
+    <string name="quick_action_show_hide_transport">إظهار/إخفاء وسائل النقل العام</string>
+    <string name="quick_action_transport_descr">زر لإظهار أو إخفاء وسائل النقل العام على الخريطة.</string>
+    <string name="create_edit_poi">إنشاء /تحرير POI</string>
+    <string name="parking_positions">مكان الموقف</string>
+    <string name="add_edit_favorite">إضافة / تحرير المفضلة</string>
+    <string name="reset_deafult_order">استعادة ترتيب العناصر الافتراضية</string>
+    <string name="back_to_editing">عودة إلى التحرير</string>
+    <string name="quick_action_switch_profile_descr">سيتم تبديل زر الإجراء التسجيل بين التشكيلات الجانبية المحددة.</string>
+    <string name="shared_string_add_profile">إضافة ملف تعريف</string>
+    <string name="change_application_profile">تغيير ملف تعريف التطبيق</string>
+    <string name="profiles_for_action_not_found">لم يتم العثور على ملفات التعريف المحددة لهذا الإجراء.</string>
 </resources>

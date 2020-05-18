@@ -31,17 +31,17 @@
         android:minHeight="@dimen/favorites_list_item_height"
         android:layout_gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingStart="@dimen/content_padding_small"
-        android:paddingLeft="@dimen/content_padding_small"
-        android:paddingEnd="@dimen/content_padding_small"
-        android:paddingRight="@dimen/content_padding_small">
+        android:paddingStart="@dimen/favorites_my_places_icon_left_padding"
+        android:paddingLeft="@dimen/favorites_my_places_icon_left_padding"
+        android:paddingEnd="@dimen/favorites_my_places_icon_left_padding"
+        android:paddingRight="@dimen/favorites_my_places_icon_left_padding">
 
         <FrameLayout
-            android:layout_width="@dimen/favorites_icon_size"
+            android:layout_width="@dimen/favorites_my_places_icon_size"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical">
 
-            <CheckBox
+            <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/toggle_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                 android:visibility="gone"
                 tools:visibility="visible" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/favourite_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -67,10 +67,10 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:layout_marginStart="@dimen/context_menu_padding_margin_large"
-            android:layout_marginLeft="@dimen/context_menu_padding_margin_large"
-            android:layout_marginEnd="@dimen/context_menu_padding_margin_large"
-            android:layout_marginRight="@dimen/context_menu_padding_margin_large"
+            android:layout_marginStart="@dimen/favorites_my_places_icon_right_padding"
+            android:layout_marginLeft="@dimen/favorites_my_places_icon_right_padding"
+            android:layout_marginEnd="@dimen/favorites_my_places_icon_right_padding"
+            android:layout_marginRight="@dimen/favorites_my_places_icon_right_padding"
             android:paddingTop="@dimen/context_menu_padding_margin_small"
             android:paddingBottom="@dimen/context_menu_padding_margin_small">
 
@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/direction"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
                     android:textSize="@dimen/default_desc_text_size"
                     tools:text="100500 km" />
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/group_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

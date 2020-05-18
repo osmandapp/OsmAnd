@@ -2,8 +2,10 @@ package net.osmand.plus.measurementtool;
 
 import android.util.Pair;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
@@ -299,7 +301,6 @@ public class MeasurementEditingContext {
 
 			@Override
 			public void start() {
-
 			}
 
 			@Override
@@ -314,7 +315,6 @@ public class MeasurementEditingContext {
 
 			@Override
 			public void requestPrivateAccessRouting() {
-
 			}
 
 			@Override
@@ -365,6 +365,93 @@ public class MeasurementEditingContext {
 		return params;
 	}
 
+	public void exportRouteAsGpx(@NonNull String gpxName, @Nullable ExportAsGpxListener exportListener) {
+		if (application == null || (before.points.size() == 0 && after.points.size() == 0)) {
+			return;
+		}
+		RoutingHelper routingHelper = application.getRoutingHelper();
+		if (!routingHelper.isRouteBeingCalculated()) {
+			RouteCalculationParams params = getExportAsGpxParams(gpxName, exportListener);
+			if (params != null) {
+				routingHelper.startRouteCalculationThread(params, true, true);
+			}
+		}
+	}
+
+	@Nullable
+	private RouteCalculationParams getExportAsGpxParams(@NonNull final String gpxName, @Nullable final ExportAsGpxListener exportListener) {
+		List<List<WptPt>> pointList = Arrays.asList(before.points, after.points);
+		WptPt startPoint = null;
+		WptPt endPoint = null;
+		List<WptPt> intermediatePoints = new ArrayList<>();
+		for (List<WptPt> points : pointList) {
+			for (WptPt point : points) {
+				if (startPoint == null) {
+					startPoint = point;
+				} else {
+					intermediatePoints.add(point);
+					endPoint = point;
+				}
+			}
+		}
+		if (endPoint != null) {
+			intermediatePoints.remove(endPoint);
+		}
+		if (startPoint == null || endPoint == null) {
+			return null;
+		}
+
+		Location start = new Location("");
+		start.setLatitude(startPoint.getLatitude());
+		start.setLongitude(startPoint.getLongitude());
+		LatLon end = new LatLon(endPoint.getLatitude(), endPoint.getLongitude());
+		List<LatLon> intermediates = null;
+		if (!intermediatePoints.isEmpty()) {
+			intermediates = new ArrayList<>();
+			for (WptPt point : intermediatePoints) {
+				intermediates.add(new LatLon(point.getLatitude(), point.getLongitude()));
+			}
+		}
+		final RouteCalculationParams params = new RouteCalculationParams();
+		params.inSnapToRoadMode = true;
+		params.start = start;
+		params.end = end;
+		params.intermediates = intermediates;
+		RoutingHelper.applyApplicationSettings(params, application.getSettings(), snapToRoadAppMode);
+		params.mode = snapToRoadAppMode;
+		params.ctx = application;
+		params.calculationProgress = calculationProgress = new RouteCalculationProgress();
+		params.calculationProgressCallback = new RoutingHelper.RouteCalculationProgressCallback() {
+
+			@Override
+			public void start() {
+			}
+
+			@Override
+			public void updateProgress(int progress) {
+			}
+
+			@Override
+			public void requestPrivateAccessRouting() {
+			}
+
+			@Override
+			public void finish() {
+				calculatedPairs = 0;
+			}
+		};
+		params.resultListener = new RouteCalculationParams.RouteCalculationResultListener() {
+			@Override
+			public void onRouteCalculated(RouteCalculationResult route) {
+				GPXFile gpx = application.getRoutingHelper().generateGPXFileWithRoute(route, gpxName);
+				if (exportListener != null) {
+					exportListener.onExportAsGpxFinished(gpx);
+				}
+			}
+		};
+		return params;
+	}
+
 	interface SnapToRoadProgressListener {
 
 		void showProgressBar();
@@ -374,5 +461,9 @@ public class MeasurementEditingContext {
 		void hideProgressBar();
 
 		void refresh();
+	}
+
+	interface ExportAsGpxListener {
+		void onExportAsGpxFinished(GPXFile gpx);
 	}
 }

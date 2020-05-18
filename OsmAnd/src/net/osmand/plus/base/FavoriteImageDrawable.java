@@ -51,7 +51,7 @@ public class FavoriteImageDrawable extends Drawable {
 		this.synced = synced;
 		Resources res = ctx.getResources();
 		UiUtilities uiUtilities = ((OsmandApplication) ctx.getApplicationContext()).getUIUtilities();
-		int overlayIconId = point != null ? point.getOverlayIconId() : 0;
+		int overlayIconId = point != null ? point.getOverlayIconId(ctx) : 0;
 		int uiIconId;
 		if (overlayIconId != 0) {
 			favIcon = uiUtilities.getIcon(getMapIconId(ctx, overlayIconId), R.color.color_white);

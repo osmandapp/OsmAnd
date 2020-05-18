@@ -1979,13 +1979,13 @@
     <string name="poi_service_electrical">Acontzadura de veìculos elètricos</string>
     <string name="poi_motorcycle_repair">Acontzadura de mototzicletas</string>
     <string name="poi_self_service_yes">Eja</string>
-    <string name="poi_self_service_no">Chene servìtziu a sa sola</string>
+    <string name="poi_self_service_no">Nono</string>
     <string name="poi_automated_yes">Eja</string>
     <string name="poi_automated_no">Non automatizadu</string>
     <string name="poi_full_service_yes">Servìtziu cumpridu</string>
     <string name="poi_brushless_yes">Eja</string>
     <string name="poi_brushless_no">Ispàtzulas: nono</string>
-    <string name="poi_car_wash_no">Sabunadura màchinas: nono</string>
+    <string name="poi_car_wash_no">Nono</string>
     <string name="poi_public_bath">Bagnu pùblicu</string>
     <string name="poi_male_yes">Òmines</string>
     <string name="poi_male_no">Proibidu a sos òmines</string>
@@ -3816,4 +3816,9 @@
     <string name="poi_drinking_water_refill_yes">Ricàrica de s\'abba potàbile: eja</string>
     <string name="poi_drinking_water_refill_no">Ricàrica de s\'abba potàbile: nono</string>
     <string name="poi_drinking_water_refill_network">Retza de ricàrica de s\'abba potàbile</string>
+    <string name="poi_osmand_fire_hydrant_pressure_suction">Sutzione</string>
+    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Presurizada</string>
+    <string name="poi_fire_hydrant_style_water_source_groundwater">Abbas suta de terra</string>
+    <string name="poi_fire_hydrant_type_pipe">Pompa</string>
+    <string name="poi_fire_hydrant_pressure_filter">Pressione</string>
 </resources>

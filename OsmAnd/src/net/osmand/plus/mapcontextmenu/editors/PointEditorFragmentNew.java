@@ -289,8 +289,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (!descriptionEdit.getText().toString().isEmpty() || descriptionCaption.getVisibility() != View.VISIBLE
-				|| descriptionEdit.hasFocus()) {
+		if (!descriptionEdit.getText().toString().isEmpty() || descriptionEdit.hasFocus()) {
 			descriptionCaption.setVisibility(View.VISIBLE);
 			addDelDescription.setText(app.getString(R.string.delete_description));
 		} else {

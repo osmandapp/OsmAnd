@@ -1745,7 +1745,7 @@
     <string name="poi_service_electrical">Elektrikli araçların tamiri</string>
     <string name="poi_motorcycle_repair">Motosiklet tamiri</string>
     <string name="poi_self_service_yes">Evet</string>
-    <string name="poi_self_service_no">Self servis yok</string>
+    <string name="poi_self_service_no">Hayır</string>
     <string name="poi_automated_yes">Evet</string>
     <string name="poi_automated_no">Otomatik değil</string>
     <string name="poi_full_service_yes">Tam servis</string>
@@ -1769,7 +1769,7 @@
     <string name="poi_diaper_yes">Bebek bezi değiştirme masası</string>
     <string name="poi_diaper_no">Bebek bezi değiştirme masası yok</string>
     <string name="poi_diaper_room">Bebek bezi değiştirme odası</string>
-    <string name="poi_car_wash_no">Araba yıkama: hayır</string>
+    <string name="poi_car_wash_no">Hayır</string>
     <string name="poi_maxstay">Park süresi sınırı</string>
     <string name="poi_vending_parking_tickets">Park etme bileti</string>
     <string name="poi_vending_cigarettes">Sigara</string>
@@ -2357,4 +2357,7 @@
     <string name="poi_historic_period_bronze_age">Tarihi dönem: tunç devri</string>
     <string name="poi_historic_period_stone_bronze_undetermined">Tarihi dönem: taş devri / tunç devri (belirsiz)</string>
     <string name="poi_historic_period_nuragic">Tarihi dönem: nuragic</string>
+    <string name="poi_organic_no">Hayır</string>
+    <string name="poi_video_no">Hayır</string>
+    <string name="poi_sms_no">Hayır</string>
 </resources>

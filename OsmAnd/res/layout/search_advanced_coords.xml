@@ -84,7 +84,7 @@
                     android:orientation="horizontal"
                     android:paddingTop="16dp">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/latitudeImage"
                         android:layout_width="54dp"
                         android:layout_height="wrap_content"
@@ -132,7 +132,7 @@
                     android:orientation="horizontal"
                     android:paddingTop="16dp">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/longitudeImage"
                         android:layout_width="54dp"
                         android:layout_height="wrap_content"
@@ -181,7 +181,7 @@
                     android:paddingTop="16dp"
                     android:visibility="gone">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/northingImage"
                         android:layout_width="54dp"
                         android:layout_height="wrap_content"
@@ -231,7 +231,7 @@
                     android:paddingTop="16dp"
                     android:visibility="gone">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/eastingImage"
                         android:layout_width="54dp"
                         android:layout_height="wrap_content"

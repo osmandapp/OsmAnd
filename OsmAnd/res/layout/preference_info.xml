@@ -7,7 +7,7 @@
 	android:background="?attr/list_background_color"
 	android:minHeight="@dimen/bottom_sheet_list_item_height">
 
-	<ImageView
+	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@android:id/icon"
 		android:layout_width="@dimen/standard_icon_size"
 		android:layout_height="@dimen/standard_icon_size"

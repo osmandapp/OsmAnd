@@ -70,7 +70,6 @@ import java.util.Set;
 
 import static android.view.Gravity.CENTER;
 import static net.osmand.plus.OsmAndLocationProvider.*;
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.plus.myplaces.FavoritesActivity.FAV_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
@@ -1033,13 +1032,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			int color = visible
 					? app.getFavorites().getColorWithCategory(model, getResources().getColor(R.color.color_favorite))
 					: ContextCompat.getColor(app, disabledIconColor);
-			int iconSize = (int) getResources().getDimension(R.dimen.favorites_icon_size);
-			if (model.getBackgroundType().equals(DEFAULT_BACKGROUND_TYPE)) {
-				icon.setImageDrawable(UiUtilities.createTintedDrawable(getActivity(), model.getIconId(), color));
-				iconSize = (int) getResources().getDimension(R.dimen.standard_icon_size);
-			}else {
-				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(), color, false, model));
-			}
+			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(), color, false, model));
+			int iconSize = (int) getResources().getDimension(R.dimen.favorites_my_places_icon_size);
 			FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(iconSize, iconSize, CENTER);
 			icon.setLayoutParams(lp);
 			row.findViewById(R.id.group_image).setVisibility(View.GONE);

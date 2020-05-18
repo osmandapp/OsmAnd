@@ -15,7 +15,7 @@
 		android:descendantFocusability="blocksDescendants"
 		android:orientation="horizontal">
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/waypoint_icon"
 			android:layout_width="@dimen/standard_icon_size"
 			android:layout_height="@dimen/standard_icon_size"

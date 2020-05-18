@@ -7,7 +7,7 @@
     android:orientation="horizontal">
 
 
-    <CheckBox
+    <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/filter_poi_check"
 		android:layout_gravity="center_vertical"
         android:layout_width="wrap_content"

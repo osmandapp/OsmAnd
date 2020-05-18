@@ -11,7 +11,7 @@
 	android:paddingEnd="@dimen/list_content_padding"
 	android:paddingStart="@dimen/list_content_padding">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/list_item_height"
@@ -48,7 +48,7 @@
         android:visibility="gone"
 	    android:paddingStart="@dimen/content_padding" />
 
-    <CheckBox
+    <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/toggle_item"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/list_item_height"

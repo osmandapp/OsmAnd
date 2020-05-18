@@ -3,6 +3,7 @@ package net.osmand.binary;
 
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.CodedOutputStream;
+import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.WireFormat;
 
 import net.osmand.Collator;
@@ -26,6 +27,7 @@ import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapRootLevel;
 import net.osmand.data.Amenity;
 import net.osmand.data.Building;
 import net.osmand.data.City;
+import net.osmand.data.IncompleteTransportRoute;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
@@ -109,7 +111,8 @@ public class BinaryMapIndexReader {
 	/*private*/ List<TransportIndex> transportIndexes = new ArrayList<TransportIndex>();
 	/*private*/ List<RouteRegion> routingIndexes = new ArrayList<RouteRegion>();
 	/*private*/ List<BinaryIndexPart> indexes = new ArrayList<BinaryIndexPart>();
-
+	TLongObjectHashMap<IncompleteTransportRoute> incompleteTransportRoutes = null;
+	
 	protected CodedInputStream codedIS;
 
 	private final BinaryMapTransportReaderAdapter transportAdapter;
@@ -2632,6 +2635,19 @@ public class BinaryMapIndexReader {
 		if (routeAdapter != null) {
 			routeAdapter.initRouteRegion(routeReg);
 		}
+	}
+
+	public TLongObjectHashMap<IncompleteTransportRoute> getIncompleteTransportRoutes() throws InvalidProtocolBufferException, IOException {
+		if (incompleteTransportRoutes == null) {
+			incompleteTransportRoutes = new TLongObjectHashMap<>();
+			for (TransportIndex ti : transportIndexes) {
+				if (ti.incompleteRoutesLength > 0) {
+					transportAdapter.readIncompleteRoutesList(incompleteTransportRoutes, ti.incompleteRoutesLength,
+							ti.incompleteRoutesOffset);
+				}
+			}
+		}
+		return incompleteTransportRoutes;
 	}
 
 

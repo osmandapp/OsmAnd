@@ -14,7 +14,7 @@
         android:background="?attr/selectableItemBackground"
         android:minHeight="@dimen/bottom_sheet_selected_item_title_height">
 
-        <CheckBox
+        <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/check_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
 	        android:layout_marginEnd="@dimen/content_padding"
 	        android:layout_marginStart="@dimen/content_padding" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -315,12 +315,12 @@ public class FavouritesDbHelper {
 	public void setSpecialPoint(@NonNull LatLon latLon, FavouritePoint.SpecialPointType specialType, @Nullable String address) {
 		FavouritePoint point = getSpecialPoint(specialType);
 		if (point != null) {
-			point.setIconId(specialType.getIconId());
+			point.setIconId(specialType.getIconId(context));
 			editFavourite(point, latLon.getLatitude(), latLon.getLongitude(), address);
 		} else {
 			point = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), specialType.getName(), specialType.getCategory());
 			point.setAddress(address);
-			point.setIconId(specialType.getIconId());
+			point.setIconId(specialType.getIconId(context));
 			addFavourite(point);
 		}
 	}

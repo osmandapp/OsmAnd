@@ -1515,11 +1515,11 @@
     <string name="poi_service_electrical">Retífica de veículos elétricos</string>
     <string name="poi_motorcycle_repair">Retífica de motos</string>
     <string name="poi_self_service_yes">Sim</string>
-    <string name="poi_self_service_no">Sem autoatendimento</string>
+    <string name="poi_self_service_no">Não</string>
     <string name="poi_automated_yes">Sim</string>
     <string name="poi_automated_no">Não automatizado</string>
     <string name="poi_full_service_yes">Serviço completo</string>
-    <string name="poi_car_wash_no">Lavação de carro: não</string>
+    <string name="poi_car_wash_no">Não</string>
     <string name="poi_aeroway_fuel">Estação de combustível de aeronaves</string>
     <string name="poi_public_bath">Banho público</string>
     <string name="poi_male_yes">Masculino</string>

@@ -23,6 +23,10 @@ public class TransportRoutingConfiguration {
 	public int finishTimeSeconds = 1200;
 
 	public int maxRouteTime = 60 * 60 * 10; // 10 hours
+	public int maxRouteDistance = 0; // distance for maxRouteTime
+	public int maxRouteIncreaseSpeed = 30; // speed to increase route time
+
+
 
 	public GeneralRouter router;
 	// cache values from router for fast access
@@ -85,6 +89,8 @@ public class TransportRoutingConfiguration {
 			ZOOM_TO_LOAD_TILES =  router.getIntAttribute("zoomToLoadTiles", ZOOM_TO_LOAD_TILES);
 			maxNumberOfChanges =  router.getIntAttribute("maxNumberOfChanges", maxNumberOfChanges);
 			maxRouteTime =  router.getIntAttribute("maxRouteTime", maxRouteTime);
+			maxRouteIncreaseSpeed =  router.getIntAttribute("maxRouteIncreaseSpeed", maxRouteIncreaseSpeed);
+			maxRouteDistance =  router.getIntAttribute("maxRouteDistance", maxRouteDistance);
 			finishTimeSeconds =  router.getIntAttribute("delayForAlternativesRoutes", finishTimeSeconds);
 			String mn = params.get("max_num_changes");
 			maxNumberOfChanges = (int) RoutingConfiguration.parseSilentFloat(mn, maxNumberOfChanges);

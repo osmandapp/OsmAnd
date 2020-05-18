@@ -33,7 +33,7 @@
 			tools:drawableStart="@drawable/ic_action_list_header"
 			tools:text="@string/shared_string_contents" />
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/explist_indicator"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"

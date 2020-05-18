@@ -44,10 +44,10 @@ public class DataTileManager<T> {
 		return x;
 	}
 	
-	private void putObjects(int tx, int ty, List<T> r){
-		if(objects.containsKey(evTile(tx, ty))){
+	private void putObjects(int tx, int ty, List<T> r) {
+		if (objects.containsKey(evTile(tx, ty))) {
 			r.addAll(objects.get(evTile(tx, ty)));
-		} 
+		}
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })

@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/folderIconImageView"
             android:layout_width="56dp"
             android:layout_height="56dp"
@@ -86,7 +86,7 @@
                     android:background="?attr/selectableItemBackground"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/deviceMemoryImageView"
                         android:layout_width="wrap_content"
                         android:layout_height="56dp"
@@ -138,7 +138,7 @@
                     android:background="?attr/selectableItemBackground"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/sharedMemoryImageView"
                         android:layout_width="wrap_content"
                         android:layout_height="56dp"
@@ -187,7 +187,7 @@
                     android:background="?attr/selectableItemBackground"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/memoryStickImageView"
                         android:layout_width="wrap_content"
                         android:layout_height="56dp"

@@ -63,7 +63,7 @@
 				android:paddingStart="@dimen/bottom_sheet_content_margin_small"
 				android:paddingEnd="@dimen/bottom_sheet_content_margin_small" />
 
-			<ImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/up_down_icon"
 				android:layout_width="@dimen/standard_icon_size"
 				android:layout_height="@dimen/standard_icon_size"

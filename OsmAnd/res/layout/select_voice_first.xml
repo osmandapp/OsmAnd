@@ -29,7 +29,7 @@
         android:paddingTop="@dimen/list_content_padding"
         android:orientation="horizontal">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icon"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -61,7 +61,7 @@
                     android:textSize="@dimen/default_list_text_size"
                     android:text="@string/select_voice_provider"/>
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/dropDownIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"

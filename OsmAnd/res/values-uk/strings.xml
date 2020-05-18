@@ -1096,8 +1096,8 @@
     <string name="live_monitoring_m">Мережеве відслідковування (потрібен GPX)</string>
     <string name="live_monitoring_start">Розпочати моніторинг</string>
     <string name="live_monitoring_stop">Зупинити моніторинг</string>
-    <string name="gpx_monitoring_start">Розпочати логування GPX</string>
-    <string name="gpx_monitoring_stop">Зупинити логування GPX</string>
+    <string name="gpx_monitoring_start">Продовжити запис GPX</string>
+    <string name="gpx_monitoring_stop">Зупинити запис GPX</string>
     <string name="gpx_start_new_segment">Розпочати новий відрізок</string>
     <string name="rendering_attr_hideBuildings_name">Будівлі</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Дороги не призначені для автівок</string>
@@ -2611,7 +2611,7 @@
     <string name="one_tap_active">Задіювання одним натисненням</string>
     <string name="empty_state_av_notes">Робіть нотатки!</string>
     <string name="empty_state_av_notes_desc">Додайте авдіо, відео або світлино-нотатку в будь-яку точку на мапі, використовуючи віджет або контекстне меню.</string>
-    <string name="notes_by_date">OSM-нотатки за датою</string>
+    <string name="notes_by_date">Примітки за датою</string>
     <string name="by_date">За датою</string>
     <string name="by_type">За типом</string>
     <string name="modify_the_search_query">Змінити пошуковий запит.</string>
@@ -3713,4 +3713,9 @@
     <string name="reset_deafult_order">Відновити типовий порядок елементів</string>
     <string name="back_to_editing">Повернутися до редагування</string>
     <string name="additional_actions_descr">Ви можете отримати доступ до цих дій, торкнувшись кнопки “%1$s”.</string>
+    <string name="shared_string_resume">Продовжити</string>
+    <string name="quick_action_switch_profile_descr">Перемикання між профілями здійснюється торканням до кнопки дій.</string>
+    <string name="shared_string_add_profile">Додати профіль</string>
+    <string name="change_application_profile">Змінити профіль програми</string>
+    <string name="profiles_for_action_not_found">Профілі, вибрані для цієї дії, не знайдено.</string>
 </resources>

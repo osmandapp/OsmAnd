@@ -12,6 +12,7 @@ import java.util.List;
 public class TransportStop extends MapObject {
 
 	private static final int DELETED_STOP = -1;
+	public static final String MISSING_STOP_NAME = "#Missing Stop";
 
 	private int[] referencesToRoutes = null;
 	private long[] deletedRoutesIds;
@@ -22,7 +23,7 @@ public class TransportStop extends MapObject {
 	private List<TransportStopExit> exits;
 	private List<TransportRoute> routes = null;
 	private LinkedHashMap<String, int[]> referencesToRoutesMap;
-
+	
 	private TransportStopAggregated transportStopAggregated;
 
 	public TransportStop() {}
@@ -30,7 +31,11 @@ public class TransportStop extends MapObject {
 	public List<TransportRoute> getRoutes() {
 		return routes;
 	}
-
+	
+	public boolean isMissingStop() {
+		return MISSING_STOP_NAME.equals(getName());
+	}
+	
 	public LinkedHashMap<String, int[]> getReferencesToRoutesMap() {
 		return referencesToRoutesMap;
 	}

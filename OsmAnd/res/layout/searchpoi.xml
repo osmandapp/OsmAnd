@@ -16,7 +16,7 @@
         android:orientation="horizontal"
 	    android:layout_marginStart="5dp">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/search_icon"
             android:layout_width="@dimen/standard_icon_size"
             android:layout_height="@dimen/standard_icon_size"
@@ -50,7 +50,7 @@
 	        android:layout_marginEnd="@dimen/list_content_padding">
         </EditText>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/options"
             android:contentDescription="@string/shared_string_more"
             android:layout_width="@dimen/list_item_height"

@@ -39,7 +39,7 @@
 				android:textSize="@dimen/default_list_text_size"
 				tools:text="@string/start_editing_card_image_text" />
 
-			<ImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/background_image"
 				android:layout_width="wrap_content"
 				android:layout_height="@dimen/wikivoyage_explore_card_image_height"

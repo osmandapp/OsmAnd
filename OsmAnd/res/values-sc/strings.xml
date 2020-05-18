@@ -390,8 +390,8 @@
     <string name="live_monitoring_m">Arrastamentu in lìnia (GPX rechestu)</string>
     <string name="live_monitoring_start">Inghitza s’arrastamentu in lìnia</string>
     <string name="live_monitoring_stop">Firma s’arrastamentu in lìnia</string>
-    <string name="gpx_monitoring_start">Inghitza sa registratzione GPX</string>
-    <string name="gpx_monitoring_stop">Firma sa registratzione GPX</string>
+    <string name="gpx_monitoring_start">Sighi cun sa registratzione GPX</string>
+    <string name="gpx_monitoring_stop">Pone in pàusa sa registratzione GPX</string>
     <string name="gpx_start_new_segment">Inghitza unu segmentu nou</string>
     <string name="rendering_attr_hideBuildings_name">Edifìtzios</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Caminos non carràbiles</string>
@@ -2609,7 +2609,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="one_tap_active">\'Un\'incarcu\' ativu</string>
     <string name="empty_state_av_notes">Piga notas!</string>
     <string name="empty_state_av_notes_desc">Annanghe notas sonoras, vìdeos o fotografias a cada puntu in sa mapa, impreende su widget o su menù contestuale.</string>
-    <string name="notes_by_date">Notas pro data</string>
+    <string name="notes_by_date">Notas sonoras/in vìdeu pro data</string>
     <string name="by_date">Pro data</string>
     <string name="by_type">Pro casta</string>
     <string name="modify_the_search_query">Muda sa chirca tua.</string>
@@ -3582,7 +3582,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="recalculate_route_in_deviation">Torra a carculare s\'àndala in casu de deviatzione</string>
     <string name="hillshade_description">Mapa de sas umbraduras de sos rilevos chi impreat umbras iscuras pro ammustrare pendèntzias, cùcuros e pranos.</string>
     <string name="shared_string_terrain">Terrinu</string>
-    <string name="slope_description">Sa pista benit ammustrada cun colores in su terrinu.</string>
+    <string name="slope_description">Sa pista impreat sos colores pro ammustrare sa pendèntzia de su terrinu.</string>
     <string name="terrain_slider_description">Imposta sos livellos de ismanniamentu mìnimu e màssimu pro ammustrare s\'istratu.</string>
     <string name="hillshade_download_description">Pro bìdere sas umbraduras de sos rilievos in sa mapa b\'at bisòngiu de mapas additzionales.</string>
     <string name="slope_download_description">Pro bìdere sas pistas in sa mapa b\'at bisòngiu de mapas additzionales.</string>
@@ -3590,7 +3590,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_transparency">Trasparèntzia</string>
     <string name="shared_string_zoom_levels">Livellos de ismanniada</string>
     <string name="shared_string_legend">Legenda</string>
-    <string name="terrain_empty_state_text">Abìlita·lu pro ammustrare sas mapas de sas umbraduras de sos rilievos o de sas pistas. Podes lèghere àteras informatziones a pitzu de custas castas de mapas in su situ nostru</string>
+    <string name="terrain_empty_state_text">Abìlita·lu pro ammustrare sas mapas de sas umbraduras de sos rilievos o de sas pistas. Podes lèghere àteras informatziones a pitzu de custas castas de mapas in su situ nostru.</string>
     <string name="shared_string_hillshade">Umbraduras de sos rilievos</string>
     <string name="n_items_of_z">%1$s de %2$s</string>
     <string name="download_slope_maps">Pistas</string>
@@ -3669,9 +3669,11 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="custom_color">Colore personalizadu</string>
     <string name="extra_maps_menu_group">Mapas additzionales</string>
     <string name="download_unsupported_action">Atzione %1$s non suportada</string>
-    <string name="osm_live_payment_subscription_management">Su pagamentu at a èssere addebitadu a su contu tuo de Google Play cando as a comporare un\'abbonamentu
-\ne cando at a iscadire su tempus (unu mese/tres meses/un\'annu),
-\nno at a èssere rinnovadu si l\'as a àere annulladu, in antis de cussu momentu, dae sas impostatziones de Google Play tuas.</string>
+    <string name="osm_live_payment_subscription_management">Su pagamentu at a èssere addebitadu a su contu tuo de Google Play cando sa còmpora at a èssere cunfirmada.
+\n
+\nS\'abbonamentu si rinnovat a sa sola automaticamente, francu chi siat istadu annulladu in antis de sa die de su rinnovu. Su contu tuo at a bènnere addebitadu pro su perìodu de rinnovu (mese/tres meses/annu) in sa die de rinnovu ebbia.
+\n
+\nPodes amministrare e annullare sos abbonamentos tuos intrende in sas impostatziones de Google Play tuas.</string>
     <string name="search_poi_types">Chirca castas de PDI</string>
     <string name="search_poi_types_descr">Cumbina castas de PDI de catogorias diferentes. Incarca su butone pro ischertare totu, incarca s\'ala a manca pro sa seletzione de sas categorias.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
@@ -3706,4 +3708,19 @@ Pro praghere iscrie su còdighe intreu</string>
 \n • Faddinas cun RTL acontzadas
 \n
 \n</string>
+    <string name="shared_string_resume">Sighi</string>
+    <string name="additional_actions_descr">Podes atzèdere a custas atziones incarchende su butone \"%1$s\".</string>
+    <string name="quick_action_transport_hide">Cua su trasportu pùblicu</string>
+    <string name="quick_action_transport_show">Ammustra su trasportu pùblicu</string>
+    <string name="quick_action_show_hide_transport">Ammustra/cua su trasportu pùblicu</string>
+    <string name="quick_action_transport_descr">Unu butone pro ammustrare o cuare su trasportu pùblicu in sa mapa.</string>
+    <string name="create_edit_poi">Crea/Modìfica unu PDI</string>
+    <string name="parking_positions">Logos de parchègiu</string>
+    <string name="add_edit_favorite">Annanghe / Modìfica unu preferidu</string>
+    <string name="reset_deafult_order">Riprìstina s\'òrdine predefinidu de sos elementos</string>
+    <string name="back_to_editing">Torra a modificare</string>
+    <string name="quick_action_switch_profile_descr">Tocende su butone de atzione as a colare dae unu profilu ischertadu a s\'àteru.</string>
+    <string name="shared_string_add_profile">Annanghe unu profilu</string>
+    <string name="change_application_profile">Càmbia su profilu de s\'aplicatzione</string>
+    <string name="profiles_for_action_not_found">Sos profilos ischertados pro custa atzione non s\'agatant.</string>
 </resources>

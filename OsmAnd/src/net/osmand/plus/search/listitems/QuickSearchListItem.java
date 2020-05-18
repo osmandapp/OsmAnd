@@ -313,9 +313,9 @@ public class QuickSearchListItem {
 		int iconId = -1;
 		switch (searchResult.objectType) {
 			case CITY:
-				return getIcon(app, R.drawable.ic_action_building_number);
+				return getIcon(app, R.drawable.ic_action_building2);
 			case VILLAGE:
-				return getIcon(app, R.drawable.ic_action_home_dark);
+				return getIcon(app, R.drawable.ic_action_village);
 			case POSTCODE:
 			case STREET:
 				return getIcon(app, R.drawable.ic_action_street_name);

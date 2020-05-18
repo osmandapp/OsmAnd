@@ -139,7 +139,7 @@
 
 	</LinearLayout>
 
-	<ImageView
+	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/bottom_shadow"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"

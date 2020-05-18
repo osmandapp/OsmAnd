@@ -9,26 +9,26 @@
 		android:layout_width="@dimen/setting_select_icon_button_width"
 		android:layout_height="@dimen/setting_select_icon_button_height">
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/outlineRect"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			app:srcCompat="@drawable/bg_select_icon_button_outline" />
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/backgroundRect"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:layout_margin="@dimen/list_item_button_padding"
 			android:background="@drawable/bg_select_icon_button" />
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/headingIcon"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center" />
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/icon"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"

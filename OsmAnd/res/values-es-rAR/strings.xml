@@ -472,8 +472,8 @@ Lon %2$s</string>
     <string name="live_monitoring_m">Seguimiento en línea (requiere GPX)</string>
     <string name="live_monitoring_start">Iniciar seguimiento en línea</string>
     <string name="live_monitoring_stop">Parar seguimiento en línea</string>
-    <string name="gpx_monitoring_start">Iniciar grabación GPX</string>
-    <string name="gpx_monitoring_stop">Parar grabación GPX</string>
+    <string name="gpx_monitoring_start">Reanudar grabación GPX</string>
+    <string name="gpx_monitoring_stop">Pausar grabación GPX</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Vías no aptas para vehículos</string>
     <string name="rendering_attr_hideWoodScrubs_name">Bosques y matorrales</string>
     <string name="no_index_file_to_download">No se encontraron descargas, comprueba tu conexión a Internet.</string>
@@ -3722,4 +3722,9 @@ Lon %2$s</string>
     <string name="add_edit_favorite">Añadir / Editar favorito</string>
     <string name="reset_deafult_order">Restaurar el orden de los elementos predefinidos</string>
     <string name="back_to_editing">Volver a la edición</string>
+    <string name="shared_string_resume">Reanudar</string>
+    <string name="quick_action_switch_profile_descr">Al pulsar el botón de acción se cambiará entre los perfiles elegidos.</string>
+    <string name="shared_string_add_profile">Añadir perfil</string>
+    <string name="change_application_profile">Cambiar perfil de la aplicación</string>
+    <string name="profiles_for_action_not_found">No se encontraron los perfiles marcados para esta acción.</string>
 </resources>

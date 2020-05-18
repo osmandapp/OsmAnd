@@ -379,8 +379,8 @@
     <string name="live_monitoring_m">Rastreamento on-line (requer GPX)</string>
     <string name="live_monitoring_start">Iniciar rastreamento on-line</string>
     <string name="live_monitoring_stop">Parar rastreamento on-line</string>
-    <string name="gpx_monitoring_start">Iniciar registro de GPX</string>
-    <string name="gpx_monitoring_stop">Parar registro de GPX</string>
+    <string name="gpx_monitoring_start">Retomar o registro GPX</string>
+    <string name="gpx_monitoring_stop">Pausar o registro GPX</string>
     <string name="gpx_start_new_segment">Iniciar novo rastreamento</string>
     <string name="rendering_attr_hideBuildings_name">Edifícios</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Estradas não trafegáveis</string>
@@ -2139,7 +2139,7 @@ Pôr do Sol: %2$s</string>
     <string name="one_tap_active_descr">Toque num marcador do mapa para movê-lo para o topo dos marcadores ativos sem abrir o menu de contexto.</string>
     <string name="one_tap_active">Ativo com \'um toque\'</string>
     <string name="empty_state_av_notes">Faça anotações!</string>
-    <string name="notes_by_date">Notas do OSM por data</string>
+    <string name="notes_by_date">Notas A/V por data</string>
     <string name="by_date">Por data</string>
     <string name="by_type">Por tipo</string>
     <string name="looking_for_tracks_with_waypoints">Procurando trilhas com pontos de passagem</string>
@@ -3706,4 +3706,9 @@ Pôr do Sol: %2$s</string>
     <string name="add_edit_favorite">Adicionar / Editar favorito</string>
     <string name="reset_deafult_order">Restaurar ordem de itens padrão</string>
     <string name="back_to_editing">Voltar à edição</string>
+    <string name="shared_string_resume">Retomar</string>
+    <string name="quick_action_switch_profile_descr">Tocar no botão de ação alterna entre os perfis selecionados.</string>
+    <string name="shared_string_add_profile">Adicionar perfil</string>
+    <string name="change_application_profile">Alterar perfil do aplicativo</string>
+    <string name="profiles_for_action_not_found">Perfis selecionados para esta ação não encontrados.</string>
 </resources>

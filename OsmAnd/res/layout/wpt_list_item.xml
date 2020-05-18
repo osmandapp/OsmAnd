@@ -50,7 +50,7 @@
             android:orientation="horizontal"
 	        android:paddingStart="@dimen/list_content_padding">
 
-            <CheckBox
+            <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/toggle_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
                 tools:visibility="visible"
 	            android:layout_marginEnd="@dimen/favorites_icon_right_margin" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/icon"
                 android:layout_width="@dimen/standard_icon_size"
                 android:layout_height="@dimen/standard_icon_size"
@@ -129,7 +129,7 @@
                 android:layout_marginRight="@dimen/list_item_button_padding"
                 android:orientation="horizontal">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/expand_image"
                     android:layout_width="@dimen/acceptable_touch_radius"
                     android:layout_height="@dimen/acceptable_touch_radius"

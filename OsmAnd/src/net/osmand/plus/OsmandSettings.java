@@ -479,6 +479,13 @@ public class OsmandSettings {
 					return false;
 				} else if (value instanceof Enum) {
 					return enumPref.setModeValue(mode, value);
+				} else if (value instanceof Integer) {
+					int newVal = (Integer) value;
+					if (enumPref.values.length > newVal) {
+						Enum enumValue = enumPref.values[newVal];
+						return enumPref.setModeValue(mode, enumValue);
+					}
+					return false;
 				}
 			} else if (preference instanceof ContextMenuItemsPreference) {
 				if (value instanceof ContextMenuItemsSettings) {
@@ -2022,6 +2029,7 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> SAVE_GLOBAL_TRACK_TO_GPX = new BooleanPreference("save_global_track_to_gpx", false).makeGlobal().cache();
 	public final CommonPreference<Integer> SAVE_GLOBAL_TRACK_INTERVAL = new IntPreference("save_global_track_interval", 5000).makeProfile().cache();
 	public final CommonPreference<Boolean> SAVE_GLOBAL_TRACK_REMEMBER = new BooleanPreference("save_global_track_remember", false).makeProfile().cache();
+	public final CommonPreference<Boolean> SHOW_SAVED_TRACK_REMEMBER = new BooleanPreference("show_saved_track_remember", true).makeGlobal();
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> SAVE_TRACK_TO_GPX = new BooleanPreference("save_track_to_gpx", false).makeProfile().cache();
 
@@ -3772,7 +3780,7 @@ public class OsmandSettings {
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> SAFE_MODE = new BooleanPreference("safe_mode", false).makeGlobal();
-	public final OsmandPreference<Boolean> PT_SAFE_MODE = new BooleanPreference("pt_safe_mode", false).makeGlobal();
+	public final OsmandPreference<Boolean> PT_SAFE_MODE = new BooleanPreference("pt_safe_mode", true).makeGlobal();
 	public final OsmandPreference<Boolean> NATIVE_RENDERING_FAILED = new BooleanPreference("native_rendering_failed_init", false).makeGlobal();
 
 	public final OsmandPreference<Boolean> USE_OPENGL_RENDER = new BooleanPreference("use_opengl_render",

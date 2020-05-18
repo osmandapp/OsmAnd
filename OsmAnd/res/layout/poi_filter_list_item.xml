@@ -23,7 +23,7 @@
             android:layout_height="match_parent"
             android:gravity="center">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/icon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:visibility="gone"/>
 
-        <CheckBox
+        <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/checkboxItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
             android:focusable="false"
             android:visibility="gone"/>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/expandItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -13,7 +13,7 @@
 	android:paddingStart="@dimen/list_content_padding"
 	android:paddingEnd="@dimen/list_content_padding">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/change_color_icon"
         android:layout_width="@dimen/standard_icon_size"
         android:layout_height="@dimen/standard_icon_size"

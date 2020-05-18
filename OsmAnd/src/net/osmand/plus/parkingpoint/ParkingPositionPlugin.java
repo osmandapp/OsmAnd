@@ -18,6 +18,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.FavouritePoint.SpecialPointType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
@@ -131,6 +132,10 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		parkingEvent.resetToDefault();
 		parkingStartTime.resetToDefault();
 		parkingPosition = null;
+		FavouritePoint pnt = app.getFavorites().getSpecialPoint(SpecialPointType.PARKING);
+		if (pnt != null) {
+			app.getFavorites().deleteFavourite(pnt);
+		}
 		return true;
 	}
 
@@ -285,7 +290,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				showDeleteEventWarning(activity);
 				cancelParking();
 				if (activity instanceof MapActivity) {
-					FavouritePoint pnt = app.getFavorites().getSpecialPoint(FavouritePoint.SpecialPointType.PARKING);
+					FavouritePoint pnt = app.getFavorites().getSpecialPoint(SpecialPointType.PARKING);
 					if(pnt != null) {
 						app.getFavorites().deleteFavourite(pnt);
 					}
@@ -305,7 +310,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	 * @param choose
 	 */
 	void showSetTimeLimitDialog(final MapActivity mapActivity, final DialogInterface choose) {
-		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		final OsmandApplication app = mapActivity.getMyApplication();
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		final View setTimeParking = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.parking_set_time_limit, null);
 		AlertDialog.Builder setTime = new AlertDialog.Builder(mapActivity);
 		setTime.setView(setTimeParking);
@@ -370,7 +376,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				} else {
 					addOrRemoveParkingEvent(false);
 				}
-				showContextMenuIfNeeded(mapActivity,false);
+				showContextMenuIfNeeded(mapActivity, false);
 			}
 		});
 		setTime.create();

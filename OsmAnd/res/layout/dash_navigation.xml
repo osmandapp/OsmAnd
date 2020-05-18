@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:minHeight="@dimen/list_item_height">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icon"
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"

@@ -76,7 +76,7 @@
 						android:background="@color/color_transparent"
 						android:layout_gravity="end">
 
-						<ImageView
+						<androidx.appcompat.widget.AppCompatImageView
 							android:id="@+id/app_modes_options"
 							android:layout_width="wrap_content"
 							android:layout_height="match_parent"
@@ -106,7 +106,7 @@
 					android:minHeight="@dimen/route_info_list_item_height"
 					android:orientation="horizontal">
 
-					<ImageView
+					<androidx.appcompat.widget.AppCompatImageView
 						android:id="@+id/fromIcon"
 						android:layout_width="@dimen/standard_icon_size"
 						android:layout_height="@dimen/standard_icon_size"
@@ -189,7 +189,7 @@
 								android:visibility="gone"
 								tools:ignore="UnusedAttribute" />
 
-							<ImageView
+							<androidx.appcompat.widget.AppCompatImageView
 								android:id="@+id/from_button_image_view"
 								android:layout_width="@dimen/standard_icon_size"
 								android:layout_height="@dimen/standard_icon_size"
@@ -226,7 +226,7 @@
 					android:minHeight="@dimen/route_info_list_item_height"
 					android:orientation="horizontal">
 
-					<ImageView
+					<androidx.appcompat.widget.AppCompatImageView
 						android:id="@+id/viaIcon"
 						android:layout_width="@dimen/standard_icon_size"
 						android:layout_height="@dimen/standard_icon_size"
@@ -309,7 +309,7 @@
 								osmand:typeface="@string/font_roboto_medium"
 								tools:ignore="UnusedAttribute" />
 
-							<ImageView
+							<androidx.appcompat.widget.AppCompatImageView
 								android:id="@+id/via_button_image_view"
 								android:layout_width="@dimen/standard_icon_size"
 								android:layout_height="@dimen/standard_icon_size"
@@ -346,7 +346,7 @@
 					android:minHeight="@dimen/route_info_list_item_height"
 					android:orientation="horizontal">
 
-					<ImageView
+					<androidx.appcompat.widget.AppCompatImageView
 						android:id="@+id/toIcon"
 						android:layout_width="@dimen/standard_icon_size"
 						android:layout_height="@dimen/standard_icon_size"
@@ -426,7 +426,7 @@
 								osmand:typeface="@string/font_roboto_medium"
 								tools:ignore="UnusedAttribute" />
 
-							<ImageView
+							<androidx.appcompat.widget.AppCompatImageView
 								android:id="@+id/to_button_image_view"
 								android:layout_width="@dimen/standard_icon_size"
 								android:layout_height="@dimen/standard_icon_size"
@@ -501,7 +501,7 @@
 						osmand:typeface="@string/font_roboto_medium"
 						tools:ignore="UnusedAttribute" />
 
-					<ImageView
+					<androidx.appcompat.widget.AppCompatImageView
 						android:id="@+id/map_options_route_button_icon"
 						android:layout_width="@dimen/standard_icon_size"
 						android:layout_height="@dimen/standard_icon_size"
@@ -572,7 +572,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/route_info_modes_height" />
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_gravity="top"
@@ -588,7 +588,7 @@
 		android:layout_gravity="bottom"
 		android:orientation="vertical">
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/buttons_shadow"
 			android:layout_width="match_parent"
 			android:layout_height="10dp"

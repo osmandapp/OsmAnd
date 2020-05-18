@@ -359,7 +359,7 @@ public class RouteProvider {
 			insertInitialSegment(params, locs, directions, true);
 			res = new RouteCalculationResult(locs, directions, params, null, true);
 		} catch (RuntimeException e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 		return res;
 	}
@@ -815,8 +815,10 @@ public class RouteProvider {
 				return res;
 			}
 		} catch (RuntimeException e) {
+			log.error("Runtime error: " + e.getMessage(), e);
 			return new RouteCalculationResult(e.getMessage() );
 		} catch (InterruptedException e) {
+			log.error("Interrupted: " + e.getMessage(), e);
 			return interrupted();
 		} catch (OutOfMemoryError e) {
 //			ActivityManager activityManager = (ActivityManager)app.getSystemService(Context.ACTIVITY_SERVICE);

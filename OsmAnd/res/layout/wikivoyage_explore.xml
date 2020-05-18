@@ -113,7 +113,7 @@
                     android:textSize="@dimen/default_list_text_size"
                     tools:textColor="?attr/searchbar_text_hint"/>
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/search_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

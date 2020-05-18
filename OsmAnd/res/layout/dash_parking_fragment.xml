@@ -20,7 +20,7 @@
 		android:background="?attr/dash_parking_bg"
 		android:orientation="horizontal">
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/direction_icon"
 			android:layout_width="@dimen/dashboard_parking_icon_size"
 			android:layout_height="@dimen/dashboard_parking_icon_size"

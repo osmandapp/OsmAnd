@@ -42,7 +42,7 @@
                 tools:text="0:50"/>
         </LinearLayout>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/direction"
             android:layout_marginLeft="@dimen/list_header_padding"
             android:layout_marginRight="@dimen/list_header_padding"
@@ -103,7 +103,7 @@
                 android:textSize="@dimen/default_desc_text_size"
                 tools:text="Head Dmytrivska Street" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/lanes"
                 android:layout_width="match_parent"
                 android:layout_height="18dp"

@@ -29,7 +29,7 @@
         android:minHeight="@dimen/list_item_height"
         android:gravity="center_vertical">
 
-		<CheckBox
+		<androidx.appcompat.widget.AppCompatCheckBox
 			android:id="@+id/check_local_index"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
 			android:visibility="gone"
 			android:layout_marginStart="@dimen/list_content_padding" />
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/icon"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
 				android:visibility="visible"
                 android:gravity="center_vertical">
 
-				<ImageView
+				<androidx.appcompat.widget.AppCompatImageView
 					android:id="@+id/distance_icon"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
 					android:textSize="@dimen/default_sub_text_size"
 					android:layout_marginEnd="@dimen/gpx_small_text_margin" />
 
-				<ImageView
+				<androidx.appcompat.widget.AppCompatImageView
 					android:id="@+id/points_icon"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -112,7 +112,7 @@
 					android:textSize="@dimen/default_sub_text_size"
 					android:layout_marginEnd="@dimen/gpx_small_text_margin" />
 
-				<ImageView
+				<androidx.appcompat.widget.AppCompatImageView
 					android:id="@+id/time_icon"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"

@@ -8,238 +8,416 @@ public final class OsmandIndex {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }
+  public interface OsmAndStoredIndexOrBuilder
+      extends com.google.protobuf.MessageLiteOrBuilder {
+
+    // required uint32 version = 1;
+    /**
+     * <code>required uint32 version = 1;</code>
+     */
+    boolean hasVersion();
+    /**
+     * <code>required uint32 version = 1;</code>
+     */
+    int getVersion();
+
+    // required int64 dateCreated = 18;
+    /**
+     * <code>required int64 dateCreated = 18;</code>
+     *
+     * <pre>
+     * System.currentTimeMillis()
+     * </pre>
+     */
+    boolean hasDateCreated();
+    /**
+     * <code>required int64 dateCreated = 18;</code>
+     *
+     * <pre>
+     * System.currentTimeMillis()
+     * </pre>
+     */
+    long getDateCreated();
+
+    // repeated .OsmAnd.OBF.FileIndex fileIndex = 7;
+    /**
+     * <code>repeated .OsmAnd.OBF.FileIndex fileIndex = 7;</code>
+     */
+    java.util.List<net.osmand.binary.OsmandIndex.FileIndex> 
+        getFileIndexList();
+    /**
+     * <code>repeated .OsmAnd.OBF.FileIndex fileIndex = 7;</code>
+     */
+    net.osmand.binary.OsmandIndex.FileIndex getFileIndex(int index);
+    /**
+     * <code>repeated .OsmAnd.OBF.FileIndex fileIndex = 7;</code>
+     */
+    int getFileIndexCount();
+  }
+  /**
+   * Protobuf type {@code OsmAnd.OBF.OsmAndStoredIndex}
+   */
   public static final class OsmAndStoredIndex extends
-      com.google.protobuf.GeneratedMessageLite {
+      com.google.protobuf.GeneratedMessageLite
+      implements OsmAndStoredIndexOrBuilder {
     // Use OsmAndStoredIndex.newBuilder() to construct.
-    private OsmAndStoredIndex() {
-      initFields();
+    private OsmAndStoredIndex(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+
     }
     private OsmAndStoredIndex(boolean noInit) {}
-    
+
     private static final OsmAndStoredIndex defaultInstance;
     public static OsmAndStoredIndex getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public OsmAndStoredIndex getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private OsmAndStoredIndex(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              version_ = input.readUInt32();
+              break;
+            }
+            case 58: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                fileIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.FileIndex>();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              fileIndex_.add(input.readMessage(net.osmand.binary.OsmandIndex.FileIndex.PARSER, extensionRegistry));
+              break;
+            }
+            case 144: {
+              bitField0_ |= 0x00000002;
+              dateCreated_ = input.readInt64();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          fileIndex_ = java.util.Collections.unmodifiableList(fileIndex_);
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<OsmAndStoredIndex> PARSER =
+        new com.google.protobuf.AbstractParser<OsmAndStoredIndex>() {
+      public OsmAndStoredIndex parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new OsmAndStoredIndex(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<OsmAndStoredIndex> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
     // required uint32 version = 1;
     public static final int VERSION_FIELD_NUMBER = 1;
-    private boolean hasVersion;
-    private int version_ = 0;
-    public boolean hasVersion() { return hasVersion; }
-    public int getVersion() { return version_; }
-    
+    private int version_;
+    /**
+     * <code>required uint32 version = 1;</code>
+     */
+    public boolean hasVersion() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint32 version = 1;</code>
+     */
+    public int getVersion() {
+      return version_;
+    }
+
     // required int64 dateCreated = 18;
     public static final int DATECREATED_FIELD_NUMBER = 18;
-    private boolean hasDateCreated;
-    private long dateCreated_ = 0L;
-    public boolean hasDateCreated() { return hasDateCreated; }
-    public long getDateCreated() { return dateCreated_; }
-    
-    // repeated .FileIndex fileIndex = 7;
+    private long dateCreated_;
+    /**
+     * <code>required int64 dateCreated = 18;</code>
+     *
+     * <pre>
+     * System.currentTimeMillis()
+     * </pre>
+     */
+    public boolean hasDateCreated() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int64 dateCreated = 18;</code>
+     *
+     * <pre>
+     * System.currentTimeMillis()
+     * </pre>
+     */
+    public long getDateCreated() {
+      return dateCreated_;
+    }
+
+    // repeated .OsmAnd.OBF.FileIndex fileIndex = 7;
     public static final int FILEINDEX_FIELD_NUMBER = 7;
-    private java.util.List<net.osmand.binary.OsmandIndex.FileIndex> fileIndex_ =
-      java.util.Collections.emptyList();
+    private java.util.List<net.osmand.binary.OsmandIndex.FileIndex> fileIndex_;
+    /**
+     * <code>repeated .OsmAnd.OBF.FileIndex fileIndex = 7;</code>
+     */
     public java.util.List<net.osmand.binary.OsmandIndex.FileIndex> getFileIndexList() {
       return fileIndex_;
     }
-    public int getFileIndexCount() { return fileIndex_.size(); }
+    /**
+     * <code>repeated .OsmAnd.OBF.FileIndex fileIndex = 7;</code>
+     */
+    public java.util.List<? extends net.osmand.binary.OsmandIndex.FileIndexOrBuilder> 
+        getFileIndexOrBuilderList() {
+      return fileIndex_;
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.FileIndex fileIndex = 7;</code>
+     */
+    public int getFileIndexCount() {
+      return fileIndex_.size();
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.FileIndex fileIndex = 7;</code>
+     */
     public net.osmand.binary.OsmandIndex.FileIndex getFileIndex(int index) {
       return fileIndex_.get(index);
     }
-    
-    private void initFields() {
+    /**
+     * <code>repeated .OsmAnd.OBF.FileIndex fileIndex = 7;</code>
+     */
+    public net.osmand.binary.OsmandIndex.FileIndexOrBuilder getFileIndexOrBuilder(
+        int index) {
+      return fileIndex_.get(index);
     }
+
+    private void initFields() {
+      version_ = 0;
+      dateCreated_ = 0L;
+      fileIndex_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
-      if (!hasVersion) return false;
-      if (!hasDateCreated) return false;
-      for (net.osmand.binary.OsmandIndex.FileIndex element : getFileIndexList()) {
-        if (!element.isInitialized()) return false;
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasVersion()) {
+        memoizedIsInitialized = 0;
+        return false;
       }
+      if (!hasDateCreated()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      for (int i = 0; i < getFileIndexCount(); i++) {
+        if (!getFileIndex(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (hasVersion()) {
-        output.writeUInt32(1, getVersion());
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt32(1, version_);
       }
-      for (net.osmand.binary.OsmandIndex.FileIndex element : getFileIndexList()) {
-        output.writeMessage(7, element);
+      for (int i = 0; i < fileIndex_.size(); i++) {
+        output.writeMessage(7, fileIndex_.get(i));
       }
-      if (hasDateCreated()) {
-        output.writeInt64(18, getDateCreated());
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(18, dateCreated_);
       }
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
-      if (hasVersion()) {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, getVersion());
+          .computeUInt32Size(1, version_);
       }
-      for (net.osmand.binary.OsmandIndex.FileIndex element : getFileIndexList()) {
+      for (int i = 0; i < fileIndex_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, element);
+          .computeMessageSize(7, fileIndex_.get(i));
       }
-      if (hasDateCreated()) {
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(18, getDateCreated());
+          .computeInt64Size(18, dateCreated_);
       }
       memoizedSerializedSize = size;
       return size;
     }
-    
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
     public static net.osmand.binary.OsmandIndex.OsmAndStoredIndex parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static net.osmand.binary.OsmandIndex.OsmAndStoredIndex parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.OsmAndStoredIndex parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static net.osmand.binary.OsmandIndex.OsmAndStoredIndex parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.OsmAndStoredIndex parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.OsmAndStoredIndex parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.OsmAndStoredIndex parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.OsmAndStoredIndex parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.OsmAndStoredIndex parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.OsmAndStoredIndex parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandIndex.OsmAndStoredIndex prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
+    /**
+     * Protobuf type {@code OsmAnd.OBF.OsmAndStoredIndex}
+     */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          net.osmand.binary.OsmandIndex.OsmAndStoredIndex, Builder> {
-      private net.osmand.binary.OsmandIndex.OsmAndStoredIndex result;
-      
+          net.osmand.binary.OsmandIndex.OsmAndStoredIndex, Builder>
+        implements net.osmand.binary.OsmandIndex.OsmAndStoredIndexOrBuilder {
       // Construct using net.osmand.binary.OsmandIndex.OsmAndStoredIndex.newBuilder()
-      private Builder() {}
-      
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
       private static Builder create() {
-        Builder builder = new Builder();
-        builder.result = new net.osmand.binary.OsmandIndex.OsmAndStoredIndex();
-        return builder;
+        return new Builder();
       }
-      
-      protected net.osmand.binary.OsmandIndex.OsmAndStoredIndex internalGetResult() {
-        return result;
-      }
-      
+
       public Builder clear() {
-        if (result == null) {
-          throw new IllegalStateException(
-            "Cannot call clear() after build().");
-        }
-        result = new net.osmand.binary.OsmandIndex.OsmAndStoredIndex();
+        super.clear();
+        version_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        dateCreated_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        fileIndex_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
-      
+
       public Builder clone() {
-        return create().mergeFrom(result);
+        return create().mergeFrom(buildPartial());
       }
-      
+
       public net.osmand.binary.OsmandIndex.OsmAndStoredIndex getDefaultInstanceForType() {
         return net.osmand.binary.OsmandIndex.OsmAndStoredIndex.getDefaultInstance();
       }
-      
-      public boolean isInitialized() {
-        return result.isInitialized();
-      }
+
       public net.osmand.binary.OsmandIndex.OsmAndStoredIndex build() {
-        if (result != null && !isInitialized()) {
+        net.osmand.binary.OsmandIndex.OsmAndStoredIndex result = buildPartial();
+        if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
-        return buildPartial();
+        return result;
       }
-      
-      private net.osmand.binary.OsmandIndex.OsmAndStoredIndex buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        if (!isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return buildPartial();
-      }
-      
+
       public net.osmand.binary.OsmandIndex.OsmAndStoredIndex buildPartial() {
-        if (result == null) {
-          throw new IllegalStateException(
-            "build() has already been called on this Builder.");
+        net.osmand.binary.OsmandIndex.OsmAndStoredIndex result = new net.osmand.binary.OsmandIndex.OsmAndStoredIndex(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
         }
-        if (result.fileIndex_ != java.util.Collections.EMPTY_LIST) {
-          result.fileIndex_ =
-            java.util.Collections.unmodifiableList(result.fileIndex_);
+        result.version_ = version_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
         }
-        net.osmand.binary.OsmandIndex.OsmAndStoredIndex returnMe = result;
-        result = null;
-        return returnMe;
+        result.dateCreated_ = dateCreated_;
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          fileIndex_ = java.util.Collections.unmodifiableList(fileIndex_);
+          bitField0_ = (bitField0_ & ~0x00000004);
+        }
+        result.fileIndex_ = fileIndex_;
+        result.bitField0_ = to_bitField0_;
+        return result;
       }
-      
+
       public Builder mergeFrom(net.osmand.binary.OsmandIndex.OsmAndStoredIndex other) {
         if (other == net.osmand.binary.OsmandIndex.OsmAndStoredIndex.getDefaultInstance()) return this;
         if (other.hasVersion()) {
@@ -249,513 +427,1129 @@ public final class OsmandIndex {
           setDateCreated(other.getDateCreated());
         }
         if (!other.fileIndex_.isEmpty()) {
-          if (result.fileIndex_.isEmpty()) {
-            result.fileIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.FileIndex>();
+          if (fileIndex_.isEmpty()) {
+            fileIndex_ = other.fileIndex_;
+            bitField0_ = (bitField0_ & ~0x00000004);
+          } else {
+            ensureFileIndexIsMutable();
+            fileIndex_.addAll(other.fileIndex_);
           }
-          result.fileIndex_.addAll(other.fileIndex_);
+          
         }
         return this;
       }
-      
+
+      public final boolean isInitialized() {
+        if (!hasVersion()) {
+          
+          return false;
+        }
+        if (!hasDateCreated()) {
+          
+          return false;
+        }
+        for (int i = 0; i < getFileIndexCount(); i++) {
+          if (!getFileIndex(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              return this;
-            default: {
-              if (!parseUnknownField(input, extensionRegistry, tag)) {
-                return this;
-              }
-              break;
-            }
-            case 8: {
-              setVersion(input.readUInt32());
-              break;
-            }
-            case 58: {
-              net.osmand.binary.OsmandIndex.FileIndex.Builder subBuilder = net.osmand.binary.OsmandIndex.FileIndex.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addFileIndex(subBuilder.buildPartial());
-              break;
-            }
-            case 144: {
-              setDateCreated(input.readInt64());
-              break;
-            }
+        net.osmand.binary.OsmandIndex.OsmAndStoredIndex parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (net.osmand.binary.OsmandIndex.OsmAndStoredIndex) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
-      
+      private int bitField0_;
+
       // required uint32 version = 1;
+      private int version_ ;
+      /**
+       * <code>required uint32 version = 1;</code>
+       */
       public boolean hasVersion() {
-        return result.hasVersion();
+        return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>required uint32 version = 1;</code>
+       */
       public int getVersion() {
-        return result.getVersion();
+        return version_;
       }
+      /**
+       * <code>required uint32 version = 1;</code>
+       */
       public Builder setVersion(int value) {
-        result.hasVersion = true;
-        result.version_ = value;
+        bitField0_ |= 0x00000001;
+        version_ = value;
+        
         return this;
       }
+      /**
+       * <code>required uint32 version = 1;</code>
+       */
       public Builder clearVersion() {
-        result.hasVersion = false;
-        result.version_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        version_ = 0;
+        
         return this;
       }
-      
+
       // required int64 dateCreated = 18;
+      private long dateCreated_ ;
+      /**
+       * <code>required int64 dateCreated = 18;</code>
+       *
+       * <pre>
+       * System.currentTimeMillis()
+       * </pre>
+       */
       public boolean hasDateCreated() {
-        return result.hasDateCreated();
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>required int64 dateCreated = 18;</code>
+       *
+       * <pre>
+       * System.currentTimeMillis()
+       * </pre>
+       */
       public long getDateCreated() {
-        return result.getDateCreated();
+        return dateCreated_;
       }
+      /**
+       * <code>required int64 dateCreated = 18;</code>
+       *
+       * <pre>
+       * System.currentTimeMillis()
+       * </pre>
+       */
       public Builder setDateCreated(long value) {
-        result.hasDateCreated = true;
-        result.dateCreated_ = value;
+        bitField0_ |= 0x00000002;
+        dateCreated_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int64 dateCreated = 18;</code>
+       *
+       * <pre>
+       * System.currentTimeMillis()
+       * </pre>
+       */
       public Builder clearDateCreated() {
-        result.hasDateCreated = false;
-        result.dateCreated_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        dateCreated_ = 0L;
+        
         return this;
       }
-      
-      // repeated .FileIndex fileIndex = 7;
+
+      // repeated .OsmAnd.OBF.FileIndex fileIndex = 7;
+      private java.util.List<net.osmand.binary.OsmandIndex.FileIndex> fileIndex_ =
+        java.util.Collections.emptyList();
+      private void ensureFileIndexIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          fileIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.FileIndex>(fileIndex_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+
+      /**
+       * <code>repeated .OsmAnd.OBF.FileIndex fileIndex = 7;</code>
+       */
       public java.util.List<net.osmand.binary.OsmandIndex.FileIndex> getFileIndexList() {
-        return java.util.Collections.unmodifiableList(result.fileIndex_);
+        return java.util.Collections.unmodifiableList(fileIndex_);
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.FileIndex fileIndex = 7;</code>
+       */
       public int getFileIndexCount() {
-        return result.getFileIndexCount();
+        return fileIndex_.size();
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.FileIndex fileIndex = 7;</code>
+       */
       public net.osmand.binary.OsmandIndex.FileIndex getFileIndex(int index) {
-        return result.getFileIndex(index);
+        return fileIndex_.get(index);
       }
-      public Builder setFileIndex(int index, net.osmand.binary.OsmandIndex.FileIndex value) {
+      /**
+       * <code>repeated .OsmAnd.OBF.FileIndex fileIndex = 7;</code>
+       */
+      public Builder setFileIndex(
+          int index, net.osmand.binary.OsmandIndex.FileIndex value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        result.fileIndex_.set(index, value);
+        ensureFileIndexIsMutable();
+        fileIndex_.set(index, value);
+
         return this;
       }
-      public Builder setFileIndex(int index, net.osmand.binary.OsmandIndex.FileIndex.Builder builderForValue) {
-        result.fileIndex_.set(index, builderForValue.build());
+      /**
+       * <code>repeated .OsmAnd.OBF.FileIndex fileIndex = 7;</code>
+       */
+      public Builder setFileIndex(
+          int index, net.osmand.binary.OsmandIndex.FileIndex.Builder builderForValue) {
+        ensureFileIndexIsMutable();
+        fileIndex_.set(index, builderForValue.build());
+
         return this;
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.FileIndex fileIndex = 7;</code>
+       */
       public Builder addFileIndex(net.osmand.binary.OsmandIndex.FileIndex value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        if (result.fileIndex_.isEmpty()) {
-          result.fileIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.FileIndex>();
-        }
-        result.fileIndex_.add(value);
+        ensureFileIndexIsMutable();
+        fileIndex_.add(value);
+
         return this;
       }
-      public Builder addFileIndex(net.osmand.binary.OsmandIndex.FileIndex.Builder builderForValue) {
-        if (result.fileIndex_.isEmpty()) {
-          result.fileIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.FileIndex>();
+      /**
+       * <code>repeated .OsmAnd.OBF.FileIndex fileIndex = 7;</code>
+       */
+      public Builder addFileIndex(
+          int index, net.osmand.binary.OsmandIndex.FileIndex value) {
+        if (value == null) {
+          throw new NullPointerException();
         }
-        result.fileIndex_.add(builderForValue.build());
+        ensureFileIndexIsMutable();
+        fileIndex_.add(index, value);
+
         return this;
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.FileIndex fileIndex = 7;</code>
+       */
+      public Builder addFileIndex(
+          net.osmand.binary.OsmandIndex.FileIndex.Builder builderForValue) {
+        ensureFileIndexIsMutable();
+        fileIndex_.add(builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.FileIndex fileIndex = 7;</code>
+       */
+      public Builder addFileIndex(
+          int index, net.osmand.binary.OsmandIndex.FileIndex.Builder builderForValue) {
+        ensureFileIndexIsMutable();
+        fileIndex_.add(index, builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.FileIndex fileIndex = 7;</code>
+       */
       public Builder addAllFileIndex(
           java.lang.Iterable<? extends net.osmand.binary.OsmandIndex.FileIndex> values) {
-        if (result.fileIndex_.isEmpty()) {
-          result.fileIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.FileIndex>();
-        }
-        super.addAll(values, result.fileIndex_);
+        ensureFileIndexIsMutable();
+        super.addAll(values, fileIndex_);
+
         return this;
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.FileIndex fileIndex = 7;</code>
+       */
       public Builder clearFileIndex() {
-        result.fileIndex_ = java.util.Collections.emptyList();
+        fileIndex_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000004);
+
         return this;
       }
-      
-      // @@protoc_insertion_point(builder_scope:OsmAndStoredIndex)
+      /**
+       * <code>repeated .OsmAnd.OBF.FileIndex fileIndex = 7;</code>
+       */
+      public Builder removeFileIndex(int index) {
+        ensureFileIndexIsMutable();
+        fileIndex_.remove(index);
+
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:OsmAnd.OBF.OsmAndStoredIndex)
     }
-    
+
     static {
       defaultInstance = new OsmAndStoredIndex(true);
-      net.osmand.binary.OsmandIndex.internalForceInit();
       defaultInstance.initFields();
     }
-    
-    // @@protoc_insertion_point(class_scope:OsmAndStoredIndex)
+
+    // @@protoc_insertion_point(class_scope:OsmAnd.OBF.OsmAndStoredIndex)
   }
-  
+
+  public interface FileIndexOrBuilder
+      extends com.google.protobuf.MessageLiteOrBuilder {
+
+    // required int64 size = 1;
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    boolean hasSize();
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    long getSize();
+
+    // required int64 dateModified = 2;
+    /**
+     * <code>required int64 dateModified = 2;</code>
+     */
+    boolean hasDateModified();
+    /**
+     * <code>required int64 dateModified = 2;</code>
+     */
+    long getDateModified();
+
+    // required string fileName = 3;
+    /**
+     * <code>required string fileName = 3;</code>
+     */
+    boolean hasFileName();
+    /**
+     * <code>required string fileName = 3;</code>
+     */
+    java.lang.String getFileName();
+    /**
+     * <code>required string fileName = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getFileNameBytes();
+
+    // required int32 version = 4;
+    /**
+     * <code>required int32 version = 4;</code>
+     */
+    boolean hasVersion();
+    /**
+     * <code>required int32 version = 4;</code>
+     */
+    int getVersion();
+
+    // repeated .OsmAnd.OBF.AddressPart addressIndex = 8;
+    /**
+     * <code>repeated .OsmAnd.OBF.AddressPart addressIndex = 8;</code>
+     */
+    java.util.List<net.osmand.binary.OsmandIndex.AddressPart> 
+        getAddressIndexList();
+    /**
+     * <code>repeated .OsmAnd.OBF.AddressPart addressIndex = 8;</code>
+     */
+    net.osmand.binary.OsmandIndex.AddressPart getAddressIndex(int index);
+    /**
+     * <code>repeated .OsmAnd.OBF.AddressPart addressIndex = 8;</code>
+     */
+    int getAddressIndexCount();
+
+    // repeated .OsmAnd.OBF.TransportPart transportIndex = 9;
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportPart transportIndex = 9;</code>
+     */
+    java.util.List<net.osmand.binary.OsmandIndex.TransportPart> 
+        getTransportIndexList();
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportPart transportIndex = 9;</code>
+     */
+    net.osmand.binary.OsmandIndex.TransportPart getTransportIndex(int index);
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportPart transportIndex = 9;</code>
+     */
+    int getTransportIndexCount();
+
+    // repeated .OsmAnd.OBF.PoiPart poiIndex = 10;
+    /**
+     * <code>repeated .OsmAnd.OBF.PoiPart poiIndex = 10;</code>
+     */
+    java.util.List<net.osmand.binary.OsmandIndex.PoiPart> 
+        getPoiIndexList();
+    /**
+     * <code>repeated .OsmAnd.OBF.PoiPart poiIndex = 10;</code>
+     */
+    net.osmand.binary.OsmandIndex.PoiPart getPoiIndex(int index);
+    /**
+     * <code>repeated .OsmAnd.OBF.PoiPart poiIndex = 10;</code>
+     */
+    int getPoiIndexCount();
+
+    // repeated .OsmAnd.OBF.MapPart mapIndex = 11;
+    /**
+     * <code>repeated .OsmAnd.OBF.MapPart mapIndex = 11;</code>
+     */
+    java.util.List<net.osmand.binary.OsmandIndex.MapPart> 
+        getMapIndexList();
+    /**
+     * <code>repeated .OsmAnd.OBF.MapPart mapIndex = 11;</code>
+     */
+    net.osmand.binary.OsmandIndex.MapPart getMapIndex(int index);
+    /**
+     * <code>repeated .OsmAnd.OBF.MapPart mapIndex = 11;</code>
+     */
+    int getMapIndexCount();
+
+    // repeated .OsmAnd.OBF.RoutingPart routingIndex = 12;
+    /**
+     * <code>repeated .OsmAnd.OBF.RoutingPart routingIndex = 12;</code>
+     */
+    java.util.List<net.osmand.binary.OsmandIndex.RoutingPart> 
+        getRoutingIndexList();
+    /**
+     * <code>repeated .OsmAnd.OBF.RoutingPart routingIndex = 12;</code>
+     */
+    net.osmand.binary.OsmandIndex.RoutingPart getRoutingIndex(int index);
+    /**
+     * <code>repeated .OsmAnd.OBF.RoutingPart routingIndex = 12;</code>
+     */
+    int getRoutingIndexCount();
+  }
+  /**
+   * Protobuf type {@code OsmAnd.OBF.FileIndex}
+   */
   public static final class FileIndex extends
-      com.google.protobuf.GeneratedMessageLite {
+      com.google.protobuf.GeneratedMessageLite
+      implements FileIndexOrBuilder {
     // Use FileIndex.newBuilder() to construct.
-    private FileIndex() {
-      initFields();
+    private FileIndex(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+
     }
     private FileIndex(boolean noInit) {}
-    
+
     private static final FileIndex defaultInstance;
     public static FileIndex getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public FileIndex getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private FileIndex(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              size_ = input.readInt64();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              dateModified_ = input.readInt64();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              fileName_ = input.readBytes();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              version_ = input.readInt32();
+              break;
+            }
+            case 66: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                addressIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.AddressPart>();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              addressIndex_.add(input.readMessage(net.osmand.binary.OsmandIndex.AddressPart.PARSER, extensionRegistry));
+              break;
+            }
+            case 74: {
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+                transportIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.TransportPart>();
+                mutable_bitField0_ |= 0x00000020;
+              }
+              transportIndex_.add(input.readMessage(net.osmand.binary.OsmandIndex.TransportPart.PARSER, extensionRegistry));
+              break;
+            }
+            case 82: {
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+                poiIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.PoiPart>();
+                mutable_bitField0_ |= 0x00000040;
+              }
+              poiIndex_.add(input.readMessage(net.osmand.binary.OsmandIndex.PoiPart.PARSER, extensionRegistry));
+              break;
+            }
+            case 90: {
+              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+                mapIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.MapPart>();
+                mutable_bitField0_ |= 0x00000080;
+              }
+              mapIndex_.add(input.readMessage(net.osmand.binary.OsmandIndex.MapPart.PARSER, extensionRegistry));
+              break;
+            }
+            case 98: {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+                routingIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.RoutingPart>();
+                mutable_bitField0_ |= 0x00000100;
+              }
+              routingIndex_.add(input.readMessage(net.osmand.binary.OsmandIndex.RoutingPart.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+          addressIndex_ = java.util.Collections.unmodifiableList(addressIndex_);
+        }
+        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+          transportIndex_ = java.util.Collections.unmodifiableList(transportIndex_);
+        }
+        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+          poiIndex_ = java.util.Collections.unmodifiableList(poiIndex_);
+        }
+        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+          mapIndex_ = java.util.Collections.unmodifiableList(mapIndex_);
+        }
+        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+          routingIndex_ = java.util.Collections.unmodifiableList(routingIndex_);
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<FileIndex> PARSER =
+        new com.google.protobuf.AbstractParser<FileIndex>() {
+      public FileIndex parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new FileIndex(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<FileIndex> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
     // required int64 size = 1;
     public static final int SIZE_FIELD_NUMBER = 1;
-    private boolean hasSize;
-    private long size_ = 0L;
-    public boolean hasSize() { return hasSize; }
-    public long getSize() { return size_; }
-    
+    private long size_;
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    public boolean hasSize() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    public long getSize() {
+      return size_;
+    }
+
     // required int64 dateModified = 2;
     public static final int DATEMODIFIED_FIELD_NUMBER = 2;
-    private boolean hasDateModified;
-    private long dateModified_ = 0L;
-    public boolean hasDateModified() { return hasDateModified; }
-    public long getDateModified() { return dateModified_; }
-    
+    private long dateModified_;
+    /**
+     * <code>required int64 dateModified = 2;</code>
+     */
+    public boolean hasDateModified() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int64 dateModified = 2;</code>
+     */
+    public long getDateModified() {
+      return dateModified_;
+    }
+
     // required string fileName = 3;
     public static final int FILENAME_FIELD_NUMBER = 3;
-    private boolean hasFileName;
-    private java.lang.String fileName_ = "";
-    public boolean hasFileName() { return hasFileName; }
-    public java.lang.String getFileName() { return fileName_; }
-    
+    private java.lang.Object fileName_;
+    /**
+     * <code>required string fileName = 3;</code>
+     */
+    public boolean hasFileName() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required string fileName = 3;</code>
+     */
+    public java.lang.String getFileName() {
+      java.lang.Object ref = fileName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          fileName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string fileName = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getFileNameBytes() {
+      java.lang.Object ref = fileName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        fileName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     // required int32 version = 4;
     public static final int VERSION_FIELD_NUMBER = 4;
-    private boolean hasVersion;
-    private int version_ = 0;
-    public boolean hasVersion() { return hasVersion; }
-    public int getVersion() { return version_; }
-    
-    // repeated .AddressPart addressIndex = 8;
+    private int version_;
+    /**
+     * <code>required int32 version = 4;</code>
+     */
+    public boolean hasVersion() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required int32 version = 4;</code>
+     */
+    public int getVersion() {
+      return version_;
+    }
+
+    // repeated .OsmAnd.OBF.AddressPart addressIndex = 8;
     public static final int ADDRESSINDEX_FIELD_NUMBER = 8;
-    private java.util.List<net.osmand.binary.OsmandIndex.AddressPart> addressIndex_ =
-      java.util.Collections.emptyList();
+    private java.util.List<net.osmand.binary.OsmandIndex.AddressPart> addressIndex_;
+    /**
+     * <code>repeated .OsmAnd.OBF.AddressPart addressIndex = 8;</code>
+     */
     public java.util.List<net.osmand.binary.OsmandIndex.AddressPart> getAddressIndexList() {
       return addressIndex_;
     }
-    public int getAddressIndexCount() { return addressIndex_.size(); }
+    /**
+     * <code>repeated .OsmAnd.OBF.AddressPart addressIndex = 8;</code>
+     */
+    public java.util.List<? extends net.osmand.binary.OsmandIndex.AddressPartOrBuilder> 
+        getAddressIndexOrBuilderList() {
+      return addressIndex_;
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.AddressPart addressIndex = 8;</code>
+     */
+    public int getAddressIndexCount() {
+      return addressIndex_.size();
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.AddressPart addressIndex = 8;</code>
+     */
     public net.osmand.binary.OsmandIndex.AddressPart getAddressIndex(int index) {
       return addressIndex_.get(index);
     }
-    
-    // repeated .TransportPart transportIndex = 9;
+    /**
+     * <code>repeated .OsmAnd.OBF.AddressPart addressIndex = 8;</code>
+     */
+    public net.osmand.binary.OsmandIndex.AddressPartOrBuilder getAddressIndexOrBuilder(
+        int index) {
+      return addressIndex_.get(index);
+    }
+
+    // repeated .OsmAnd.OBF.TransportPart transportIndex = 9;
     public static final int TRANSPORTINDEX_FIELD_NUMBER = 9;
-    private java.util.List<net.osmand.binary.OsmandIndex.TransportPart> transportIndex_ =
-      java.util.Collections.emptyList();
+    private java.util.List<net.osmand.binary.OsmandIndex.TransportPart> transportIndex_;
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportPart transportIndex = 9;</code>
+     */
     public java.util.List<net.osmand.binary.OsmandIndex.TransportPart> getTransportIndexList() {
       return transportIndex_;
     }
-    public int getTransportIndexCount() { return transportIndex_.size(); }
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportPart transportIndex = 9;</code>
+     */
+    public java.util.List<? extends net.osmand.binary.OsmandIndex.TransportPartOrBuilder> 
+        getTransportIndexOrBuilderList() {
+      return transportIndex_;
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportPart transportIndex = 9;</code>
+     */
+    public int getTransportIndexCount() {
+      return transportIndex_.size();
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportPart transportIndex = 9;</code>
+     */
     public net.osmand.binary.OsmandIndex.TransportPart getTransportIndex(int index) {
       return transportIndex_.get(index);
     }
-    
-    // repeated .PoiPart poiIndex = 10;
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportPart transportIndex = 9;</code>
+     */
+    public net.osmand.binary.OsmandIndex.TransportPartOrBuilder getTransportIndexOrBuilder(
+        int index) {
+      return transportIndex_.get(index);
+    }
+
+    // repeated .OsmAnd.OBF.PoiPart poiIndex = 10;
     public static final int POIINDEX_FIELD_NUMBER = 10;
-    private java.util.List<net.osmand.binary.OsmandIndex.PoiPart> poiIndex_ =
-      java.util.Collections.emptyList();
+    private java.util.List<net.osmand.binary.OsmandIndex.PoiPart> poiIndex_;
+    /**
+     * <code>repeated .OsmAnd.OBF.PoiPart poiIndex = 10;</code>
+     */
     public java.util.List<net.osmand.binary.OsmandIndex.PoiPart> getPoiIndexList() {
       return poiIndex_;
     }
-    public int getPoiIndexCount() { return poiIndex_.size(); }
+    /**
+     * <code>repeated .OsmAnd.OBF.PoiPart poiIndex = 10;</code>
+     */
+    public java.util.List<? extends net.osmand.binary.OsmandIndex.PoiPartOrBuilder> 
+        getPoiIndexOrBuilderList() {
+      return poiIndex_;
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.PoiPart poiIndex = 10;</code>
+     */
+    public int getPoiIndexCount() {
+      return poiIndex_.size();
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.PoiPart poiIndex = 10;</code>
+     */
     public net.osmand.binary.OsmandIndex.PoiPart getPoiIndex(int index) {
       return poiIndex_.get(index);
     }
-    
-    // repeated .MapPart mapIndex = 11;
+    /**
+     * <code>repeated .OsmAnd.OBF.PoiPart poiIndex = 10;</code>
+     */
+    public net.osmand.binary.OsmandIndex.PoiPartOrBuilder getPoiIndexOrBuilder(
+        int index) {
+      return poiIndex_.get(index);
+    }
+
+    // repeated .OsmAnd.OBF.MapPart mapIndex = 11;
     public static final int MAPINDEX_FIELD_NUMBER = 11;
-    private java.util.List<net.osmand.binary.OsmandIndex.MapPart> mapIndex_ =
-      java.util.Collections.emptyList();
+    private java.util.List<net.osmand.binary.OsmandIndex.MapPart> mapIndex_;
+    /**
+     * <code>repeated .OsmAnd.OBF.MapPart mapIndex = 11;</code>
+     */
     public java.util.List<net.osmand.binary.OsmandIndex.MapPart> getMapIndexList() {
       return mapIndex_;
     }
-    public int getMapIndexCount() { return mapIndex_.size(); }
+    /**
+     * <code>repeated .OsmAnd.OBF.MapPart mapIndex = 11;</code>
+     */
+    public java.util.List<? extends net.osmand.binary.OsmandIndex.MapPartOrBuilder> 
+        getMapIndexOrBuilderList() {
+      return mapIndex_;
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.MapPart mapIndex = 11;</code>
+     */
+    public int getMapIndexCount() {
+      return mapIndex_.size();
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.MapPart mapIndex = 11;</code>
+     */
     public net.osmand.binary.OsmandIndex.MapPart getMapIndex(int index) {
       return mapIndex_.get(index);
     }
-    
-    // repeated .RoutingPart routingIndex = 12;
+    /**
+     * <code>repeated .OsmAnd.OBF.MapPart mapIndex = 11;</code>
+     */
+    public net.osmand.binary.OsmandIndex.MapPartOrBuilder getMapIndexOrBuilder(
+        int index) {
+      return mapIndex_.get(index);
+    }
+
+    // repeated .OsmAnd.OBF.RoutingPart routingIndex = 12;
     public static final int ROUTINGINDEX_FIELD_NUMBER = 12;
-    private java.util.List<net.osmand.binary.OsmandIndex.RoutingPart> routingIndex_ =
-      java.util.Collections.emptyList();
+    private java.util.List<net.osmand.binary.OsmandIndex.RoutingPart> routingIndex_;
+    /**
+     * <code>repeated .OsmAnd.OBF.RoutingPart routingIndex = 12;</code>
+     */
     public java.util.List<net.osmand.binary.OsmandIndex.RoutingPart> getRoutingIndexList() {
       return routingIndex_;
     }
-    public int getRoutingIndexCount() { return routingIndex_.size(); }
+    /**
+     * <code>repeated .OsmAnd.OBF.RoutingPart routingIndex = 12;</code>
+     */
+    public java.util.List<? extends net.osmand.binary.OsmandIndex.RoutingPartOrBuilder> 
+        getRoutingIndexOrBuilderList() {
+      return routingIndex_;
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.RoutingPart routingIndex = 12;</code>
+     */
+    public int getRoutingIndexCount() {
+      return routingIndex_.size();
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.RoutingPart routingIndex = 12;</code>
+     */
     public net.osmand.binary.OsmandIndex.RoutingPart getRoutingIndex(int index) {
       return routingIndex_.get(index);
     }
-    
-    private void initFields() {
+    /**
+     * <code>repeated .OsmAnd.OBF.RoutingPart routingIndex = 12;</code>
+     */
+    public net.osmand.binary.OsmandIndex.RoutingPartOrBuilder getRoutingIndexOrBuilder(
+        int index) {
+      return routingIndex_.get(index);
     }
+
+    private void initFields() {
+      size_ = 0L;
+      dateModified_ = 0L;
+      fileName_ = "";
+      version_ = 0;
+      addressIndex_ = java.util.Collections.emptyList();
+      transportIndex_ = java.util.Collections.emptyList();
+      poiIndex_ = java.util.Collections.emptyList();
+      mapIndex_ = java.util.Collections.emptyList();
+      routingIndex_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
-      if (!hasSize) return false;
-      if (!hasDateModified) return false;
-      if (!hasFileName) return false;
-      if (!hasVersion) return false;
-      for (net.osmand.binary.OsmandIndex.AddressPart element : getAddressIndexList()) {
-        if (!element.isInitialized()) return false;
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasSize()) {
+        memoizedIsInitialized = 0;
+        return false;
       }
-      for (net.osmand.binary.OsmandIndex.TransportPart element : getTransportIndexList()) {
-        if (!element.isInitialized()) return false;
+      if (!hasDateModified()) {
+        memoizedIsInitialized = 0;
+        return false;
       }
-      for (net.osmand.binary.OsmandIndex.PoiPart element : getPoiIndexList()) {
-        if (!element.isInitialized()) return false;
+      if (!hasFileName()) {
+        memoizedIsInitialized = 0;
+        return false;
       }
-      for (net.osmand.binary.OsmandIndex.MapPart element : getMapIndexList()) {
-        if (!element.isInitialized()) return false;
+      if (!hasVersion()) {
+        memoizedIsInitialized = 0;
+        return false;
       }
-      for (net.osmand.binary.OsmandIndex.RoutingPart element : getRoutingIndexList()) {
-        if (!element.isInitialized()) return false;
+      for (int i = 0; i < getAddressIndexCount(); i++) {
+        if (!getAddressIndex(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
       }
+      for (int i = 0; i < getTransportIndexCount(); i++) {
+        if (!getTransportIndex(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      for (int i = 0; i < getPoiIndexCount(); i++) {
+        if (!getPoiIndex(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      for (int i = 0; i < getMapIndexCount(); i++) {
+        if (!getMapIndex(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      for (int i = 0; i < getRoutingIndexCount(); i++) {
+        if (!getRoutingIndex(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (hasSize()) {
-        output.writeInt64(1, getSize());
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt64(1, size_);
       }
-      if (hasDateModified()) {
-        output.writeInt64(2, getDateModified());
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, dateModified_);
       }
-      if (hasFileName()) {
-        output.writeString(3, getFileName());
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getFileNameBytes());
       }
-      if (hasVersion()) {
-        output.writeInt32(4, getVersion());
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, version_);
       }
-      for (net.osmand.binary.OsmandIndex.AddressPart element : getAddressIndexList()) {
-        output.writeMessage(8, element);
+      for (int i = 0; i < addressIndex_.size(); i++) {
+        output.writeMessage(8, addressIndex_.get(i));
       }
-      for (net.osmand.binary.OsmandIndex.TransportPart element : getTransportIndexList()) {
-        output.writeMessage(9, element);
+      for (int i = 0; i < transportIndex_.size(); i++) {
+        output.writeMessage(9, transportIndex_.get(i));
       }
-      for (net.osmand.binary.OsmandIndex.PoiPart element : getPoiIndexList()) {
-        output.writeMessage(10, element);
+      for (int i = 0; i < poiIndex_.size(); i++) {
+        output.writeMessage(10, poiIndex_.get(i));
       }
-      for (net.osmand.binary.OsmandIndex.MapPart element : getMapIndexList()) {
-        output.writeMessage(11, element);
+      for (int i = 0; i < mapIndex_.size(); i++) {
+        output.writeMessage(11, mapIndex_.get(i));
       }
-      for (net.osmand.binary.OsmandIndex.RoutingPart element : getRoutingIndexList()) {
-        output.writeMessage(12, element);
+      for (int i = 0; i < routingIndex_.size(); i++) {
+        output.writeMessage(12, routingIndex_.get(i));
       }
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
-      if (hasSize()) {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, getSize());
+          .computeInt64Size(1, size_);
       }
-      if (hasDateModified()) {
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, getDateModified());
+          .computeInt64Size(2, dateModified_);
       }
-      if (hasFileName()) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(3, getFileName());
+          .computeBytesSize(3, getFileNameBytes());
       }
-      if (hasVersion()) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, getVersion());
+          .computeInt32Size(4, version_);
       }
-      for (net.osmand.binary.OsmandIndex.AddressPart element : getAddressIndexList()) {
+      for (int i = 0; i < addressIndex_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, element);
+          .computeMessageSize(8, addressIndex_.get(i));
       }
-      for (net.osmand.binary.OsmandIndex.TransportPart element : getTransportIndexList()) {
+      for (int i = 0; i < transportIndex_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(9, element);
+          .computeMessageSize(9, transportIndex_.get(i));
       }
-      for (net.osmand.binary.OsmandIndex.PoiPart element : getPoiIndexList()) {
+      for (int i = 0; i < poiIndex_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(10, element);
+          .computeMessageSize(10, poiIndex_.get(i));
       }
-      for (net.osmand.binary.OsmandIndex.MapPart element : getMapIndexList()) {
+      for (int i = 0; i < mapIndex_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(11, element);
+          .computeMessageSize(11, mapIndex_.get(i));
       }
-      for (net.osmand.binary.OsmandIndex.RoutingPart element : getRoutingIndexList()) {
+      for (int i = 0; i < routingIndex_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(12, element);
+          .computeMessageSize(12, routingIndex_.get(i));
       }
       memoizedSerializedSize = size;
       return size;
     }
-    
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
     public static net.osmand.binary.OsmandIndex.FileIndex parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static net.osmand.binary.OsmandIndex.FileIndex parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.FileIndex parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static net.osmand.binary.OsmandIndex.FileIndex parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.FileIndex parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.FileIndex parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.FileIndex parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.FileIndex parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.FileIndex parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.FileIndex parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandIndex.FileIndex prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
+    /**
+     * Protobuf type {@code OsmAnd.OBF.FileIndex}
+     */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          net.osmand.binary.OsmandIndex.FileIndex, Builder> {
-      private net.osmand.binary.OsmandIndex.FileIndex result;
-      
+          net.osmand.binary.OsmandIndex.FileIndex, Builder>
+        implements net.osmand.binary.OsmandIndex.FileIndexOrBuilder {
       // Construct using net.osmand.binary.OsmandIndex.FileIndex.newBuilder()
-      private Builder() {}
-      
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
       private static Builder create() {
-        Builder builder = new Builder();
-        builder.result = new net.osmand.binary.OsmandIndex.FileIndex();
-        return builder;
+        return new Builder();
       }
-      
-      protected net.osmand.binary.OsmandIndex.FileIndex internalGetResult() {
-        return result;
-      }
-      
+
       public Builder clear() {
-        if (result == null) {
-          throw new IllegalStateException(
-            "Cannot call clear() after build().");
-        }
-        result = new net.osmand.binary.OsmandIndex.FileIndex();
+        super.clear();
+        size_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        dateModified_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        fileName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        version_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        addressIndex_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000010);
+        transportIndex_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000020);
+        poiIndex_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000040);
+        mapIndex_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000080);
+        routingIndex_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
-      
+
       public Builder clone() {
-        return create().mergeFrom(result);
+        return create().mergeFrom(buildPartial());
       }
-      
+
       public net.osmand.binary.OsmandIndex.FileIndex getDefaultInstanceForType() {
         return net.osmand.binary.OsmandIndex.FileIndex.getDefaultInstance();
       }
-      
-      public boolean isInitialized() {
-        return result.isInitialized();
-      }
+
       public net.osmand.binary.OsmandIndex.FileIndex build() {
-        if (result != null && !isInitialized()) {
+        net.osmand.binary.OsmandIndex.FileIndex result = buildPartial();
+        if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
-        return buildPartial();
+        return result;
       }
-      
-      private net.osmand.binary.OsmandIndex.FileIndex buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        if (!isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return buildPartial();
-      }
-      
+
       public net.osmand.binary.OsmandIndex.FileIndex buildPartial() {
-        if (result == null) {
-          throw new IllegalStateException(
-            "build() has already been called on this Builder.");
+        net.osmand.binary.OsmandIndex.FileIndex result = new net.osmand.binary.OsmandIndex.FileIndex(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
         }
-        if (result.addressIndex_ != java.util.Collections.EMPTY_LIST) {
-          result.addressIndex_ =
-            java.util.Collections.unmodifiableList(result.addressIndex_);
+        result.size_ = size_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
         }
-        if (result.transportIndex_ != java.util.Collections.EMPTY_LIST) {
-          result.transportIndex_ =
-            java.util.Collections.unmodifiableList(result.transportIndex_);
+        result.dateModified_ = dateModified_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
         }
-        if (result.poiIndex_ != java.util.Collections.EMPTY_LIST) {
-          result.poiIndex_ =
-            java.util.Collections.unmodifiableList(result.poiIndex_);
+        result.fileName_ = fileName_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
         }
-        if (result.mapIndex_ != java.util.Collections.EMPTY_LIST) {
-          result.mapIndex_ =
-            java.util.Collections.unmodifiableList(result.mapIndex_);
+        result.version_ = version_;
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          addressIndex_ = java.util.Collections.unmodifiableList(addressIndex_);
+          bitField0_ = (bitField0_ & ~0x00000010);
         }
-        if (result.routingIndex_ != java.util.Collections.EMPTY_LIST) {
-          result.routingIndex_ =
-            java.util.Collections.unmodifiableList(result.routingIndex_);
+        result.addressIndex_ = addressIndex_;
+        if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          transportIndex_ = java.util.Collections.unmodifiableList(transportIndex_);
+          bitField0_ = (bitField0_ & ~0x00000020);
         }
-        net.osmand.binary.OsmandIndex.FileIndex returnMe = result;
-        result = null;
-        return returnMe;
+        result.transportIndex_ = transportIndex_;
+        if (((bitField0_ & 0x00000040) == 0x00000040)) {
+          poiIndex_ = java.util.Collections.unmodifiableList(poiIndex_);
+          bitField0_ = (bitField0_ & ~0x00000040);
+        }
+        result.poiIndex_ = poiIndex_;
+        if (((bitField0_ & 0x00000080) == 0x00000080)) {
+          mapIndex_ = java.util.Collections.unmodifiableList(mapIndex_);
+          bitField0_ = (bitField0_ & ~0x00000080);
+        }
+        result.mapIndex_ = mapIndex_;
+        if (((bitField0_ & 0x00000100) == 0x00000100)) {
+          routingIndex_ = java.util.Collections.unmodifiableList(routingIndex_);
+          bitField0_ = (bitField0_ & ~0x00000100);
+        }
+        result.routingIndex_ = routingIndex_;
+        result.bitField0_ = to_bitField0_;
+        return result;
       }
-      
+
       public Builder mergeFrom(net.osmand.binary.OsmandIndex.FileIndex other) {
         if (other == net.osmand.binary.OsmandIndex.FileIndex.getDefaultInstance()) return this;
         if (other.hasSize()) {
@@ -765,600 +1559,1452 @@ public final class OsmandIndex {
           setDateModified(other.getDateModified());
         }
         if (other.hasFileName()) {
-          setFileName(other.getFileName());
+          bitField0_ |= 0x00000004;
+          fileName_ = other.fileName_;
+          
         }
         if (other.hasVersion()) {
           setVersion(other.getVersion());
         }
         if (!other.addressIndex_.isEmpty()) {
-          if (result.addressIndex_.isEmpty()) {
-            result.addressIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.AddressPart>();
+          if (addressIndex_.isEmpty()) {
+            addressIndex_ = other.addressIndex_;
+            bitField0_ = (bitField0_ & ~0x00000010);
+          } else {
+            ensureAddressIndexIsMutable();
+            addressIndex_.addAll(other.addressIndex_);
           }
-          result.addressIndex_.addAll(other.addressIndex_);
+          
         }
         if (!other.transportIndex_.isEmpty()) {
-          if (result.transportIndex_.isEmpty()) {
-            result.transportIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.TransportPart>();
+          if (transportIndex_.isEmpty()) {
+            transportIndex_ = other.transportIndex_;
+            bitField0_ = (bitField0_ & ~0x00000020);
+          } else {
+            ensureTransportIndexIsMutable();
+            transportIndex_.addAll(other.transportIndex_);
           }
-          result.transportIndex_.addAll(other.transportIndex_);
+          
         }
         if (!other.poiIndex_.isEmpty()) {
-          if (result.poiIndex_.isEmpty()) {
-            result.poiIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.PoiPart>();
+          if (poiIndex_.isEmpty()) {
+            poiIndex_ = other.poiIndex_;
+            bitField0_ = (bitField0_ & ~0x00000040);
+          } else {
+            ensurePoiIndexIsMutable();
+            poiIndex_.addAll(other.poiIndex_);
           }
-          result.poiIndex_.addAll(other.poiIndex_);
+          
         }
         if (!other.mapIndex_.isEmpty()) {
-          if (result.mapIndex_.isEmpty()) {
-            result.mapIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.MapPart>();
+          if (mapIndex_.isEmpty()) {
+            mapIndex_ = other.mapIndex_;
+            bitField0_ = (bitField0_ & ~0x00000080);
+          } else {
+            ensureMapIndexIsMutable();
+            mapIndex_.addAll(other.mapIndex_);
           }
-          result.mapIndex_.addAll(other.mapIndex_);
+          
         }
         if (!other.routingIndex_.isEmpty()) {
-          if (result.routingIndex_.isEmpty()) {
-            result.routingIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.RoutingPart>();
+          if (routingIndex_.isEmpty()) {
+            routingIndex_ = other.routingIndex_;
+            bitField0_ = (bitField0_ & ~0x00000100);
+          } else {
+            ensureRoutingIndexIsMutable();
+            routingIndex_.addAll(other.routingIndex_);
           }
-          result.routingIndex_.addAll(other.routingIndex_);
+          
         }
         return this;
       }
-      
+
+      public final boolean isInitialized() {
+        if (!hasSize()) {
+          
+          return false;
+        }
+        if (!hasDateModified()) {
+          
+          return false;
+        }
+        if (!hasFileName()) {
+          
+          return false;
+        }
+        if (!hasVersion()) {
+          
+          return false;
+        }
+        for (int i = 0; i < getAddressIndexCount(); i++) {
+          if (!getAddressIndex(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        for (int i = 0; i < getTransportIndexCount(); i++) {
+          if (!getTransportIndex(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        for (int i = 0; i < getPoiIndexCount(); i++) {
+          if (!getPoiIndex(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        for (int i = 0; i < getMapIndexCount(); i++) {
+          if (!getMapIndex(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        for (int i = 0; i < getRoutingIndexCount(); i++) {
+          if (!getRoutingIndex(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              return this;
-            default: {
-              if (!parseUnknownField(input, extensionRegistry, tag)) {
-                return this;
-              }
-              break;
-            }
-            case 8: {
-              setSize(input.readInt64());
-              break;
-            }
-            case 16: {
-              setDateModified(input.readInt64());
-              break;
-            }
-            case 26: {
-              setFileName(input.readString());
-              break;
-            }
-            case 32: {
-              setVersion(input.readInt32());
-              break;
-            }
-            case 66: {
-              net.osmand.binary.OsmandIndex.AddressPart.Builder subBuilder = net.osmand.binary.OsmandIndex.AddressPart.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addAddressIndex(subBuilder.buildPartial());
-              break;
-            }
-            case 74: {
-              net.osmand.binary.OsmandIndex.TransportPart.Builder subBuilder = net.osmand.binary.OsmandIndex.TransportPart.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addTransportIndex(subBuilder.buildPartial());
-              break;
-            }
-            case 82: {
-              net.osmand.binary.OsmandIndex.PoiPart.Builder subBuilder = net.osmand.binary.OsmandIndex.PoiPart.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addPoiIndex(subBuilder.buildPartial());
-              break;
-            }
-            case 90: {
-              net.osmand.binary.OsmandIndex.MapPart.Builder subBuilder = net.osmand.binary.OsmandIndex.MapPart.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addMapIndex(subBuilder.buildPartial());
-              break;
-            }
-            case 98: {
-              net.osmand.binary.OsmandIndex.RoutingPart.Builder subBuilder = net.osmand.binary.OsmandIndex.RoutingPart.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addRoutingIndex(subBuilder.buildPartial());
-              break;
-            }
+        net.osmand.binary.OsmandIndex.FileIndex parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (net.osmand.binary.OsmandIndex.FileIndex) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
-      
+      private int bitField0_;
+
       // required int64 size = 1;
+      private long size_ ;
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public boolean hasSize() {
-        return result.hasSize();
+        return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public long getSize() {
-        return result.getSize();
+        return size_;
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public Builder setSize(long value) {
-        result.hasSize = true;
-        result.size_ = value;
+        bitField0_ |= 0x00000001;
+        size_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public Builder clearSize() {
-        result.hasSize = false;
-        result.size_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        size_ = 0L;
+        
         return this;
       }
-      
+
       // required int64 dateModified = 2;
+      private long dateModified_ ;
+      /**
+       * <code>required int64 dateModified = 2;</code>
+       */
       public boolean hasDateModified() {
-        return result.hasDateModified();
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>required int64 dateModified = 2;</code>
+       */
       public long getDateModified() {
-        return result.getDateModified();
+        return dateModified_;
       }
+      /**
+       * <code>required int64 dateModified = 2;</code>
+       */
       public Builder setDateModified(long value) {
-        result.hasDateModified = true;
-        result.dateModified_ = value;
+        bitField0_ |= 0x00000002;
+        dateModified_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int64 dateModified = 2;</code>
+       */
       public Builder clearDateModified() {
-        result.hasDateModified = false;
-        result.dateModified_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        dateModified_ = 0L;
+        
         return this;
       }
-      
+
       // required string fileName = 3;
+      private java.lang.Object fileName_ = "";
+      /**
+       * <code>required string fileName = 3;</code>
+       */
       public boolean hasFileName() {
-        return result.hasFileName();
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
+      /**
+       * <code>required string fileName = 3;</code>
+       */
       public java.lang.String getFileName() {
-        return result.getFileName();
+        java.lang.Object ref = fileName_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          fileName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
-      public Builder setFileName(java.lang.String value) {
+      /**
+       * <code>required string fileName = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getFileNameBytes() {
+        java.lang.Object ref = fileName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          fileName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string fileName = 3;</code>
+       */
+      public Builder setFileName(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  result.hasFileName = true;
-        result.fileName_ = value;
+  bitField0_ |= 0x00000004;
+        fileName_ = value;
+        
         return this;
       }
+      /**
+       * <code>required string fileName = 3;</code>
+       */
       public Builder clearFileName() {
-        result.hasFileName = false;
-        result.fileName_ = getDefaultInstance().getFileName();
+        bitField0_ = (bitField0_ & ~0x00000004);
+        fileName_ = getDefaultInstance().getFileName();
+        
         return this;
       }
-      
+      /**
+       * <code>required string fileName = 3;</code>
+       */
+      public Builder setFileNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        fileName_ = value;
+        
+        return this;
+      }
+
       // required int32 version = 4;
+      private int version_ ;
+      /**
+       * <code>required int32 version = 4;</code>
+       */
       public boolean hasVersion() {
-        return result.hasVersion();
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
+      /**
+       * <code>required int32 version = 4;</code>
+       */
       public int getVersion() {
-        return result.getVersion();
+        return version_;
       }
+      /**
+       * <code>required int32 version = 4;</code>
+       */
       public Builder setVersion(int value) {
-        result.hasVersion = true;
-        result.version_ = value;
+        bitField0_ |= 0x00000008;
+        version_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int32 version = 4;</code>
+       */
       public Builder clearVersion() {
-        result.hasVersion = false;
-        result.version_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        version_ = 0;
+        
         return this;
       }
-      
-      // repeated .AddressPart addressIndex = 8;
+
+      // repeated .OsmAnd.OBF.AddressPart addressIndex = 8;
+      private java.util.List<net.osmand.binary.OsmandIndex.AddressPart> addressIndex_ =
+        java.util.Collections.emptyList();
+      private void ensureAddressIndexIsMutable() {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+          addressIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.AddressPart>(addressIndex_);
+          bitField0_ |= 0x00000010;
+         }
+      }
+
+      /**
+       * <code>repeated .OsmAnd.OBF.AddressPart addressIndex = 8;</code>
+       */
       public java.util.List<net.osmand.binary.OsmandIndex.AddressPart> getAddressIndexList() {
-        return java.util.Collections.unmodifiableList(result.addressIndex_);
+        return java.util.Collections.unmodifiableList(addressIndex_);
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.AddressPart addressIndex = 8;</code>
+       */
       public int getAddressIndexCount() {
-        return result.getAddressIndexCount();
+        return addressIndex_.size();
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.AddressPart addressIndex = 8;</code>
+       */
       public net.osmand.binary.OsmandIndex.AddressPart getAddressIndex(int index) {
-        return result.getAddressIndex(index);
+        return addressIndex_.get(index);
       }
-      public Builder setAddressIndex(int index, net.osmand.binary.OsmandIndex.AddressPart value) {
+      /**
+       * <code>repeated .OsmAnd.OBF.AddressPart addressIndex = 8;</code>
+       */
+      public Builder setAddressIndex(
+          int index, net.osmand.binary.OsmandIndex.AddressPart value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        result.addressIndex_.set(index, value);
+        ensureAddressIndexIsMutable();
+        addressIndex_.set(index, value);
+
         return this;
       }
-      public Builder setAddressIndex(int index, net.osmand.binary.OsmandIndex.AddressPart.Builder builderForValue) {
-        result.addressIndex_.set(index, builderForValue.build());
+      /**
+       * <code>repeated .OsmAnd.OBF.AddressPart addressIndex = 8;</code>
+       */
+      public Builder setAddressIndex(
+          int index, net.osmand.binary.OsmandIndex.AddressPart.Builder builderForValue) {
+        ensureAddressIndexIsMutable();
+        addressIndex_.set(index, builderForValue.build());
+
         return this;
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.AddressPart addressIndex = 8;</code>
+       */
       public Builder addAddressIndex(net.osmand.binary.OsmandIndex.AddressPart value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        if (result.addressIndex_.isEmpty()) {
-          result.addressIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.AddressPart>();
-        }
-        result.addressIndex_.add(value);
+        ensureAddressIndexIsMutable();
+        addressIndex_.add(value);
+
         return this;
       }
-      public Builder addAddressIndex(net.osmand.binary.OsmandIndex.AddressPart.Builder builderForValue) {
-        if (result.addressIndex_.isEmpty()) {
-          result.addressIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.AddressPart>();
-        }
-        result.addressIndex_.add(builderForValue.build());
-        return this;
-      }
-      public Builder addAllAddressIndex(
-          java.lang.Iterable<? extends net.osmand.binary.OsmandIndex.AddressPart> values) {
-        if (result.addressIndex_.isEmpty()) {
-          result.addressIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.AddressPart>();
-        }
-        super.addAll(values, result.addressIndex_);
-        return this;
-      }
-      public Builder clearAddressIndex() {
-        result.addressIndex_ = java.util.Collections.emptyList();
-        return this;
-      }
-      
-      // repeated .TransportPart transportIndex = 9;
-      public java.util.List<net.osmand.binary.OsmandIndex.TransportPart> getTransportIndexList() {
-        return java.util.Collections.unmodifiableList(result.transportIndex_);
-      }
-      public int getTransportIndexCount() {
-        return result.getTransportIndexCount();
-      }
-      public net.osmand.binary.OsmandIndex.TransportPart getTransportIndex(int index) {
-        return result.getTransportIndex(index);
-      }
-      public Builder setTransportIndex(int index, net.osmand.binary.OsmandIndex.TransportPart value) {
+      /**
+       * <code>repeated .OsmAnd.OBF.AddressPart addressIndex = 8;</code>
+       */
+      public Builder addAddressIndex(
+          int index, net.osmand.binary.OsmandIndex.AddressPart value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        result.transportIndex_.set(index, value);
+        ensureAddressIndexIsMutable();
+        addressIndex_.add(index, value);
+
         return this;
       }
-      public Builder setTransportIndex(int index, net.osmand.binary.OsmandIndex.TransportPart.Builder builderForValue) {
-        result.transportIndex_.set(index, builderForValue.build());
+      /**
+       * <code>repeated .OsmAnd.OBF.AddressPart addressIndex = 8;</code>
+       */
+      public Builder addAddressIndex(
+          net.osmand.binary.OsmandIndex.AddressPart.Builder builderForValue) {
+        ensureAddressIndexIsMutable();
+        addressIndex_.add(builderForValue.build());
+
         return this;
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.AddressPart addressIndex = 8;</code>
+       */
+      public Builder addAddressIndex(
+          int index, net.osmand.binary.OsmandIndex.AddressPart.Builder builderForValue) {
+        ensureAddressIndexIsMutable();
+        addressIndex_.add(index, builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.AddressPart addressIndex = 8;</code>
+       */
+      public Builder addAllAddressIndex(
+          java.lang.Iterable<? extends net.osmand.binary.OsmandIndex.AddressPart> values) {
+        ensureAddressIndexIsMutable();
+        super.addAll(values, addressIndex_);
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.AddressPart addressIndex = 8;</code>
+       */
+      public Builder clearAddressIndex() {
+        addressIndex_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000010);
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.AddressPart addressIndex = 8;</code>
+       */
+      public Builder removeAddressIndex(int index) {
+        ensureAddressIndexIsMutable();
+        addressIndex_.remove(index);
+
+        return this;
+      }
+
+      // repeated .OsmAnd.OBF.TransportPart transportIndex = 9;
+      private java.util.List<net.osmand.binary.OsmandIndex.TransportPart> transportIndex_ =
+        java.util.Collections.emptyList();
+      private void ensureTransportIndexIsMutable() {
+        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+          transportIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.TransportPart>(transportIndex_);
+          bitField0_ |= 0x00000020;
+         }
+      }
+
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportPart transportIndex = 9;</code>
+       */
+      public java.util.List<net.osmand.binary.OsmandIndex.TransportPart> getTransportIndexList() {
+        return java.util.Collections.unmodifiableList(transportIndex_);
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportPart transportIndex = 9;</code>
+       */
+      public int getTransportIndexCount() {
+        return transportIndex_.size();
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportPart transportIndex = 9;</code>
+       */
+      public net.osmand.binary.OsmandIndex.TransportPart getTransportIndex(int index) {
+        return transportIndex_.get(index);
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportPart transportIndex = 9;</code>
+       */
+      public Builder setTransportIndex(
+          int index, net.osmand.binary.OsmandIndex.TransportPart value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureTransportIndexIsMutable();
+        transportIndex_.set(index, value);
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportPart transportIndex = 9;</code>
+       */
+      public Builder setTransportIndex(
+          int index, net.osmand.binary.OsmandIndex.TransportPart.Builder builderForValue) {
+        ensureTransportIndexIsMutable();
+        transportIndex_.set(index, builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportPart transportIndex = 9;</code>
+       */
       public Builder addTransportIndex(net.osmand.binary.OsmandIndex.TransportPart value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        if (result.transportIndex_.isEmpty()) {
-          result.transportIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.TransportPart>();
-        }
-        result.transportIndex_.add(value);
+        ensureTransportIndexIsMutable();
+        transportIndex_.add(value);
+
         return this;
       }
-      public Builder addTransportIndex(net.osmand.binary.OsmandIndex.TransportPart.Builder builderForValue) {
-        if (result.transportIndex_.isEmpty()) {
-          result.transportIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.TransportPart>();
-        }
-        result.transportIndex_.add(builderForValue.build());
-        return this;
-      }
-      public Builder addAllTransportIndex(
-          java.lang.Iterable<? extends net.osmand.binary.OsmandIndex.TransportPart> values) {
-        if (result.transportIndex_.isEmpty()) {
-          result.transportIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.TransportPart>();
-        }
-        super.addAll(values, result.transportIndex_);
-        return this;
-      }
-      public Builder clearTransportIndex() {
-        result.transportIndex_ = java.util.Collections.emptyList();
-        return this;
-      }
-      
-      // repeated .PoiPart poiIndex = 10;
-      public java.util.List<net.osmand.binary.OsmandIndex.PoiPart> getPoiIndexList() {
-        return java.util.Collections.unmodifiableList(result.poiIndex_);
-      }
-      public int getPoiIndexCount() {
-        return result.getPoiIndexCount();
-      }
-      public net.osmand.binary.OsmandIndex.PoiPart getPoiIndex(int index) {
-        return result.getPoiIndex(index);
-      }
-      public Builder setPoiIndex(int index, net.osmand.binary.OsmandIndex.PoiPart value) {
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportPart transportIndex = 9;</code>
+       */
+      public Builder addTransportIndex(
+          int index, net.osmand.binary.OsmandIndex.TransportPart value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        result.poiIndex_.set(index, value);
+        ensureTransportIndexIsMutable();
+        transportIndex_.add(index, value);
+
         return this;
       }
-      public Builder setPoiIndex(int index, net.osmand.binary.OsmandIndex.PoiPart.Builder builderForValue) {
-        result.poiIndex_.set(index, builderForValue.build());
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportPart transportIndex = 9;</code>
+       */
+      public Builder addTransportIndex(
+          net.osmand.binary.OsmandIndex.TransportPart.Builder builderForValue) {
+        ensureTransportIndexIsMutable();
+        transportIndex_.add(builderForValue.build());
+
         return this;
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportPart transportIndex = 9;</code>
+       */
+      public Builder addTransportIndex(
+          int index, net.osmand.binary.OsmandIndex.TransportPart.Builder builderForValue) {
+        ensureTransportIndexIsMutable();
+        transportIndex_.add(index, builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportPart transportIndex = 9;</code>
+       */
+      public Builder addAllTransportIndex(
+          java.lang.Iterable<? extends net.osmand.binary.OsmandIndex.TransportPart> values) {
+        ensureTransportIndexIsMutable();
+        super.addAll(values, transportIndex_);
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportPart transportIndex = 9;</code>
+       */
+      public Builder clearTransportIndex() {
+        transportIndex_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000020);
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportPart transportIndex = 9;</code>
+       */
+      public Builder removeTransportIndex(int index) {
+        ensureTransportIndexIsMutable();
+        transportIndex_.remove(index);
+
+        return this;
+      }
+
+      // repeated .OsmAnd.OBF.PoiPart poiIndex = 10;
+      private java.util.List<net.osmand.binary.OsmandIndex.PoiPart> poiIndex_ =
+        java.util.Collections.emptyList();
+      private void ensurePoiIndexIsMutable() {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
+          poiIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.PoiPart>(poiIndex_);
+          bitField0_ |= 0x00000040;
+         }
+      }
+
+      /**
+       * <code>repeated .OsmAnd.OBF.PoiPart poiIndex = 10;</code>
+       */
+      public java.util.List<net.osmand.binary.OsmandIndex.PoiPart> getPoiIndexList() {
+        return java.util.Collections.unmodifiableList(poiIndex_);
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.PoiPart poiIndex = 10;</code>
+       */
+      public int getPoiIndexCount() {
+        return poiIndex_.size();
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.PoiPart poiIndex = 10;</code>
+       */
+      public net.osmand.binary.OsmandIndex.PoiPart getPoiIndex(int index) {
+        return poiIndex_.get(index);
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.PoiPart poiIndex = 10;</code>
+       */
+      public Builder setPoiIndex(
+          int index, net.osmand.binary.OsmandIndex.PoiPart value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensurePoiIndexIsMutable();
+        poiIndex_.set(index, value);
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.PoiPart poiIndex = 10;</code>
+       */
+      public Builder setPoiIndex(
+          int index, net.osmand.binary.OsmandIndex.PoiPart.Builder builderForValue) {
+        ensurePoiIndexIsMutable();
+        poiIndex_.set(index, builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.PoiPart poiIndex = 10;</code>
+       */
       public Builder addPoiIndex(net.osmand.binary.OsmandIndex.PoiPart value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        if (result.poiIndex_.isEmpty()) {
-          result.poiIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.PoiPart>();
-        }
-        result.poiIndex_.add(value);
+        ensurePoiIndexIsMutable();
+        poiIndex_.add(value);
+
         return this;
       }
-      public Builder addPoiIndex(net.osmand.binary.OsmandIndex.PoiPart.Builder builderForValue) {
-        if (result.poiIndex_.isEmpty()) {
-          result.poiIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.PoiPart>();
-        }
-        result.poiIndex_.add(builderForValue.build());
-        return this;
-      }
-      public Builder addAllPoiIndex(
-          java.lang.Iterable<? extends net.osmand.binary.OsmandIndex.PoiPart> values) {
-        if (result.poiIndex_.isEmpty()) {
-          result.poiIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.PoiPart>();
-        }
-        super.addAll(values, result.poiIndex_);
-        return this;
-      }
-      public Builder clearPoiIndex() {
-        result.poiIndex_ = java.util.Collections.emptyList();
-        return this;
-      }
-      
-      // repeated .MapPart mapIndex = 11;
-      public java.util.List<net.osmand.binary.OsmandIndex.MapPart> getMapIndexList() {
-        return java.util.Collections.unmodifiableList(result.mapIndex_);
-      }
-      public int getMapIndexCount() {
-        return result.getMapIndexCount();
-      }
-      public net.osmand.binary.OsmandIndex.MapPart getMapIndex(int index) {
-        return result.getMapIndex(index);
-      }
-      public Builder setMapIndex(int index, net.osmand.binary.OsmandIndex.MapPart value) {
+      /**
+       * <code>repeated .OsmAnd.OBF.PoiPart poiIndex = 10;</code>
+       */
+      public Builder addPoiIndex(
+          int index, net.osmand.binary.OsmandIndex.PoiPart value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        result.mapIndex_.set(index, value);
+        ensurePoiIndexIsMutable();
+        poiIndex_.add(index, value);
+
         return this;
       }
-      public Builder setMapIndex(int index, net.osmand.binary.OsmandIndex.MapPart.Builder builderForValue) {
-        result.mapIndex_.set(index, builderForValue.build());
+      /**
+       * <code>repeated .OsmAnd.OBF.PoiPart poiIndex = 10;</code>
+       */
+      public Builder addPoiIndex(
+          net.osmand.binary.OsmandIndex.PoiPart.Builder builderForValue) {
+        ensurePoiIndexIsMutable();
+        poiIndex_.add(builderForValue.build());
+
         return this;
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.PoiPart poiIndex = 10;</code>
+       */
+      public Builder addPoiIndex(
+          int index, net.osmand.binary.OsmandIndex.PoiPart.Builder builderForValue) {
+        ensurePoiIndexIsMutable();
+        poiIndex_.add(index, builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.PoiPart poiIndex = 10;</code>
+       */
+      public Builder addAllPoiIndex(
+          java.lang.Iterable<? extends net.osmand.binary.OsmandIndex.PoiPart> values) {
+        ensurePoiIndexIsMutable();
+        super.addAll(values, poiIndex_);
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.PoiPart poiIndex = 10;</code>
+       */
+      public Builder clearPoiIndex() {
+        poiIndex_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000040);
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.PoiPart poiIndex = 10;</code>
+       */
+      public Builder removePoiIndex(int index) {
+        ensurePoiIndexIsMutable();
+        poiIndex_.remove(index);
+
+        return this;
+      }
+
+      // repeated .OsmAnd.OBF.MapPart mapIndex = 11;
+      private java.util.List<net.osmand.binary.OsmandIndex.MapPart> mapIndex_ =
+        java.util.Collections.emptyList();
+      private void ensureMapIndexIsMutable() {
+        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
+          mapIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.MapPart>(mapIndex_);
+          bitField0_ |= 0x00000080;
+         }
+      }
+
+      /**
+       * <code>repeated .OsmAnd.OBF.MapPart mapIndex = 11;</code>
+       */
+      public java.util.List<net.osmand.binary.OsmandIndex.MapPart> getMapIndexList() {
+        return java.util.Collections.unmodifiableList(mapIndex_);
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.MapPart mapIndex = 11;</code>
+       */
+      public int getMapIndexCount() {
+        return mapIndex_.size();
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.MapPart mapIndex = 11;</code>
+       */
+      public net.osmand.binary.OsmandIndex.MapPart getMapIndex(int index) {
+        return mapIndex_.get(index);
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.MapPart mapIndex = 11;</code>
+       */
+      public Builder setMapIndex(
+          int index, net.osmand.binary.OsmandIndex.MapPart value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureMapIndexIsMutable();
+        mapIndex_.set(index, value);
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.MapPart mapIndex = 11;</code>
+       */
+      public Builder setMapIndex(
+          int index, net.osmand.binary.OsmandIndex.MapPart.Builder builderForValue) {
+        ensureMapIndexIsMutable();
+        mapIndex_.set(index, builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.MapPart mapIndex = 11;</code>
+       */
       public Builder addMapIndex(net.osmand.binary.OsmandIndex.MapPart value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        if (result.mapIndex_.isEmpty()) {
-          result.mapIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.MapPart>();
-        }
-        result.mapIndex_.add(value);
+        ensureMapIndexIsMutable();
+        mapIndex_.add(value);
+
         return this;
       }
-      public Builder addMapIndex(net.osmand.binary.OsmandIndex.MapPart.Builder builderForValue) {
-        if (result.mapIndex_.isEmpty()) {
-          result.mapIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.MapPart>();
-        }
-        result.mapIndex_.add(builderForValue.build());
-        return this;
-      }
-      public Builder addAllMapIndex(
-          java.lang.Iterable<? extends net.osmand.binary.OsmandIndex.MapPart> values) {
-        if (result.mapIndex_.isEmpty()) {
-          result.mapIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.MapPart>();
-        }
-        super.addAll(values, result.mapIndex_);
-        return this;
-      }
-      public Builder clearMapIndex() {
-        result.mapIndex_ = java.util.Collections.emptyList();
-        return this;
-      }
-      
-      // repeated .RoutingPart routingIndex = 12;
-      public java.util.List<net.osmand.binary.OsmandIndex.RoutingPart> getRoutingIndexList() {
-        return java.util.Collections.unmodifiableList(result.routingIndex_);
-      }
-      public int getRoutingIndexCount() {
-        return result.getRoutingIndexCount();
-      }
-      public net.osmand.binary.OsmandIndex.RoutingPart getRoutingIndex(int index) {
-        return result.getRoutingIndex(index);
-      }
-      public Builder setRoutingIndex(int index, net.osmand.binary.OsmandIndex.RoutingPart value) {
+      /**
+       * <code>repeated .OsmAnd.OBF.MapPart mapIndex = 11;</code>
+       */
+      public Builder addMapIndex(
+          int index, net.osmand.binary.OsmandIndex.MapPart value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        result.routingIndex_.set(index, value);
+        ensureMapIndexIsMutable();
+        mapIndex_.add(index, value);
+
         return this;
       }
-      public Builder setRoutingIndex(int index, net.osmand.binary.OsmandIndex.RoutingPart.Builder builderForValue) {
-        result.routingIndex_.set(index, builderForValue.build());
+      /**
+       * <code>repeated .OsmAnd.OBF.MapPart mapIndex = 11;</code>
+       */
+      public Builder addMapIndex(
+          net.osmand.binary.OsmandIndex.MapPart.Builder builderForValue) {
+        ensureMapIndexIsMutable();
+        mapIndex_.add(builderForValue.build());
+
         return this;
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.MapPart mapIndex = 11;</code>
+       */
+      public Builder addMapIndex(
+          int index, net.osmand.binary.OsmandIndex.MapPart.Builder builderForValue) {
+        ensureMapIndexIsMutable();
+        mapIndex_.add(index, builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.MapPart mapIndex = 11;</code>
+       */
+      public Builder addAllMapIndex(
+          java.lang.Iterable<? extends net.osmand.binary.OsmandIndex.MapPart> values) {
+        ensureMapIndexIsMutable();
+        super.addAll(values, mapIndex_);
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.MapPart mapIndex = 11;</code>
+       */
+      public Builder clearMapIndex() {
+        mapIndex_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000080);
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.MapPart mapIndex = 11;</code>
+       */
+      public Builder removeMapIndex(int index) {
+        ensureMapIndexIsMutable();
+        mapIndex_.remove(index);
+
+        return this;
+      }
+
+      // repeated .OsmAnd.OBF.RoutingPart routingIndex = 12;
+      private java.util.List<net.osmand.binary.OsmandIndex.RoutingPart> routingIndex_ =
+        java.util.Collections.emptyList();
+      private void ensureRoutingIndexIsMutable() {
+        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
+          routingIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.RoutingPart>(routingIndex_);
+          bitField0_ |= 0x00000100;
+         }
+      }
+
+      /**
+       * <code>repeated .OsmAnd.OBF.RoutingPart routingIndex = 12;</code>
+       */
+      public java.util.List<net.osmand.binary.OsmandIndex.RoutingPart> getRoutingIndexList() {
+        return java.util.Collections.unmodifiableList(routingIndex_);
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.RoutingPart routingIndex = 12;</code>
+       */
+      public int getRoutingIndexCount() {
+        return routingIndex_.size();
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.RoutingPart routingIndex = 12;</code>
+       */
+      public net.osmand.binary.OsmandIndex.RoutingPart getRoutingIndex(int index) {
+        return routingIndex_.get(index);
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.RoutingPart routingIndex = 12;</code>
+       */
+      public Builder setRoutingIndex(
+          int index, net.osmand.binary.OsmandIndex.RoutingPart value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureRoutingIndexIsMutable();
+        routingIndex_.set(index, value);
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.RoutingPart routingIndex = 12;</code>
+       */
+      public Builder setRoutingIndex(
+          int index, net.osmand.binary.OsmandIndex.RoutingPart.Builder builderForValue) {
+        ensureRoutingIndexIsMutable();
+        routingIndex_.set(index, builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.RoutingPart routingIndex = 12;</code>
+       */
       public Builder addRoutingIndex(net.osmand.binary.OsmandIndex.RoutingPart value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        if (result.routingIndex_.isEmpty()) {
-          result.routingIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.RoutingPart>();
-        }
-        result.routingIndex_.add(value);
+        ensureRoutingIndexIsMutable();
+        routingIndex_.add(value);
+
         return this;
       }
-      public Builder addRoutingIndex(net.osmand.binary.OsmandIndex.RoutingPart.Builder builderForValue) {
-        if (result.routingIndex_.isEmpty()) {
-          result.routingIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.RoutingPart>();
+      /**
+       * <code>repeated .OsmAnd.OBF.RoutingPart routingIndex = 12;</code>
+       */
+      public Builder addRoutingIndex(
+          int index, net.osmand.binary.OsmandIndex.RoutingPart value) {
+        if (value == null) {
+          throw new NullPointerException();
         }
-        result.routingIndex_.add(builderForValue.build());
+        ensureRoutingIndexIsMutable();
+        routingIndex_.add(index, value);
+
         return this;
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.RoutingPart routingIndex = 12;</code>
+       */
+      public Builder addRoutingIndex(
+          net.osmand.binary.OsmandIndex.RoutingPart.Builder builderForValue) {
+        ensureRoutingIndexIsMutable();
+        routingIndex_.add(builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.RoutingPart routingIndex = 12;</code>
+       */
+      public Builder addRoutingIndex(
+          int index, net.osmand.binary.OsmandIndex.RoutingPart.Builder builderForValue) {
+        ensureRoutingIndexIsMutable();
+        routingIndex_.add(index, builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.RoutingPart routingIndex = 12;</code>
+       */
       public Builder addAllRoutingIndex(
           java.lang.Iterable<? extends net.osmand.binary.OsmandIndex.RoutingPart> values) {
-        if (result.routingIndex_.isEmpty()) {
-          result.routingIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.RoutingPart>();
-        }
-        super.addAll(values, result.routingIndex_);
+        ensureRoutingIndexIsMutable();
+        super.addAll(values, routingIndex_);
+
         return this;
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.RoutingPart routingIndex = 12;</code>
+       */
       public Builder clearRoutingIndex() {
-        result.routingIndex_ = java.util.Collections.emptyList();
+        routingIndex_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000100);
+
         return this;
       }
-      
-      // @@protoc_insertion_point(builder_scope:FileIndex)
+      /**
+       * <code>repeated .OsmAnd.OBF.RoutingPart routingIndex = 12;</code>
+       */
+      public Builder removeRoutingIndex(int index) {
+        ensureRoutingIndexIsMutable();
+        routingIndex_.remove(index);
+
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:OsmAnd.OBF.FileIndex)
     }
-    
+
     static {
       defaultInstance = new FileIndex(true);
-      net.osmand.binary.OsmandIndex.internalForceInit();
       defaultInstance.initFields();
     }
-    
-    // @@protoc_insertion_point(class_scope:FileIndex)
+
+    // @@protoc_insertion_point(class_scope:OsmAnd.OBF.FileIndex)
   }
-  
+
+  public interface AddressPartOrBuilder
+      extends com.google.protobuf.MessageLiteOrBuilder {
+
+    // required int64 size = 1;
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    boolean hasSize();
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    long getSize();
+
+    // required int64 offset = 2;
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    boolean hasOffset();
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    long getOffset();
+
+    // optional string name = 3;
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    boolean hasName();
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    // optional string nameEn = 4;
+    /**
+     * <code>optional string nameEn = 4;</code>
+     */
+    boolean hasNameEn();
+    /**
+     * <code>optional string nameEn = 4;</code>
+     */
+    java.lang.String getNameEn();
+    /**
+     * <code>optional string nameEn = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameEnBytes();
+
+    // optional int32 indexNameOffset = 5;
+    /**
+     * <code>optional int32 indexNameOffset = 5;</code>
+     */
+    boolean hasIndexNameOffset();
+    /**
+     * <code>optional int32 indexNameOffset = 5;</code>
+     */
+    int getIndexNameOffset();
+
+    // repeated .OsmAnd.OBF.CityBlock cities = 8;
+    /**
+     * <code>repeated .OsmAnd.OBF.CityBlock cities = 8;</code>
+     */
+    java.util.List<net.osmand.binary.OsmandIndex.CityBlock> 
+        getCitiesList();
+    /**
+     * <code>repeated .OsmAnd.OBF.CityBlock cities = 8;</code>
+     */
+    net.osmand.binary.OsmandIndex.CityBlock getCities(int index);
+    /**
+     * <code>repeated .OsmAnd.OBF.CityBlock cities = 8;</code>
+     */
+    int getCitiesCount();
+
+    // repeated string additionalTags = 9;
+    /**
+     * <code>repeated string additionalTags = 9;</code>
+     */
+    java.util.List<java.lang.String>
+    getAdditionalTagsList();
+    /**
+     * <code>repeated string additionalTags = 9;</code>
+     */
+    int getAdditionalTagsCount();
+    /**
+     * <code>repeated string additionalTags = 9;</code>
+     */
+    java.lang.String getAdditionalTags(int index);
+    /**
+     * <code>repeated string additionalTags = 9;</code>
+     */
+    com.google.protobuf.ByteString
+        getAdditionalTagsBytes(int index);
+  }
+  /**
+   * Protobuf type {@code OsmAnd.OBF.AddressPart}
+   */
   public static final class AddressPart extends
-      com.google.protobuf.GeneratedMessageLite {
+      com.google.protobuf.GeneratedMessageLite
+      implements AddressPartOrBuilder {
     // Use AddressPart.newBuilder() to construct.
-    private AddressPart() {
-      initFields();
+    private AddressPart(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+
     }
     private AddressPart(boolean noInit) {}
-    
+
     private static final AddressPart defaultInstance;
     public static AddressPart getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public AddressPart getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private AddressPart(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              size_ = input.readInt64();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              offset_ = input.readInt64();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              name_ = input.readBytes();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              nameEn_ = input.readBytes();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              indexNameOffset_ = input.readInt32();
+              break;
+            }
+            case 66: {
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+                cities_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.CityBlock>();
+                mutable_bitField0_ |= 0x00000020;
+              }
+              cities_.add(input.readMessage(net.osmand.binary.OsmandIndex.CityBlock.PARSER, extensionRegistry));
+              break;
+            }
+            case 74: {
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+                additionalTags_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000040;
+              }
+              additionalTags_.add(input.readBytes());
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+          cities_ = java.util.Collections.unmodifiableList(cities_);
+        }
+        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+          additionalTags_ = new com.google.protobuf.UnmodifiableLazyStringList(additionalTags_);
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<AddressPart> PARSER =
+        new com.google.protobuf.AbstractParser<AddressPart>() {
+      public AddressPart parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new AddressPart(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AddressPart> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
     // required int64 size = 1;
     public static final int SIZE_FIELD_NUMBER = 1;
-    private boolean hasSize;
-    private long size_ = 0L;
-    public boolean hasSize() { return hasSize; }
-    public long getSize() { return size_; }
-    
+    private long size_;
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    public boolean hasSize() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    public long getSize() {
+      return size_;
+    }
+
     // required int64 offset = 2;
     public static final int OFFSET_FIELD_NUMBER = 2;
-    private boolean hasOffset;
-    private long offset_ = 0L;
-    public boolean hasOffset() { return hasOffset; }
-    public long getOffset() { return offset_; }
-    
+    private long offset_;
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    public boolean hasOffset() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    public long getOffset() {
+      return offset_;
+    }
+
     // optional string name = 3;
     public static final int NAME_FIELD_NUMBER = 3;
-    private boolean hasName;
-    private java.lang.String name_ = "";
-    public boolean hasName() { return hasName; }
-    public java.lang.String getName() { return name_; }
-    
+    private java.lang.Object name_;
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    public boolean hasName() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          name_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     // optional string nameEn = 4;
     public static final int NAMEEN_FIELD_NUMBER = 4;
-    private boolean hasNameEn;
-    private java.lang.String nameEn_ = "";
-    public boolean hasNameEn() { return hasNameEn; }
-    public java.lang.String getNameEn() { return nameEn_; }
-    
+    private java.lang.Object nameEn_;
+    /**
+     * <code>optional string nameEn = 4;</code>
+     */
+    public boolean hasNameEn() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string nameEn = 4;</code>
+     */
+    public java.lang.String getNameEn() {
+      java.lang.Object ref = nameEn_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          nameEn_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string nameEn = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameEnBytes() {
+      java.lang.Object ref = nameEn_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        nameEn_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     // optional int32 indexNameOffset = 5;
     public static final int INDEXNAMEOFFSET_FIELD_NUMBER = 5;
-    private boolean hasIndexNameOffset;
-    private int indexNameOffset_ = 0;
-    public boolean hasIndexNameOffset() { return hasIndexNameOffset; }
-    public int getIndexNameOffset() { return indexNameOffset_; }
-    
-    // repeated .CityBlock cities = 8;
+    private int indexNameOffset_;
+    /**
+     * <code>optional int32 indexNameOffset = 5;</code>
+     */
+    public boolean hasIndexNameOffset() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int32 indexNameOffset = 5;</code>
+     */
+    public int getIndexNameOffset() {
+      return indexNameOffset_;
+    }
+
+    // repeated .OsmAnd.OBF.CityBlock cities = 8;
     public static final int CITIES_FIELD_NUMBER = 8;
-    private java.util.List<net.osmand.binary.OsmandIndex.CityBlock> cities_ =
-      java.util.Collections.emptyList();
+    private java.util.List<net.osmand.binary.OsmandIndex.CityBlock> cities_;
+    /**
+     * <code>repeated .OsmAnd.OBF.CityBlock cities = 8;</code>
+     */
     public java.util.List<net.osmand.binary.OsmandIndex.CityBlock> getCitiesList() {
       return cities_;
     }
-    public int getCitiesCount() { return cities_.size(); }
+    /**
+     * <code>repeated .OsmAnd.OBF.CityBlock cities = 8;</code>
+     */
+    public java.util.List<? extends net.osmand.binary.OsmandIndex.CityBlockOrBuilder> 
+        getCitiesOrBuilderList() {
+      return cities_;
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.CityBlock cities = 8;</code>
+     */
+    public int getCitiesCount() {
+      return cities_.size();
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.CityBlock cities = 8;</code>
+     */
     public net.osmand.binary.OsmandIndex.CityBlock getCities(int index) {
       return cities_.get(index);
     }
-    
+    /**
+     * <code>repeated .OsmAnd.OBF.CityBlock cities = 8;</code>
+     */
+    public net.osmand.binary.OsmandIndex.CityBlockOrBuilder getCitiesOrBuilder(
+        int index) {
+      return cities_.get(index);
+    }
+
     // repeated string additionalTags = 9;
     public static final int ADDITIONALTAGS_FIELD_NUMBER = 9;
-    private java.util.List<java.lang.String> additionalTags_ =
-      java.util.Collections.emptyList();
-    public java.util.List<java.lang.String> getAdditionalTagsList() {
+    private com.google.protobuf.LazyStringList additionalTags_;
+    /**
+     * <code>repeated string additionalTags = 9;</code>
+     */
+    public java.util.List<java.lang.String>
+        getAdditionalTagsList() {
       return additionalTags_;
     }
-    public int getAdditionalTagsCount() { return additionalTags_.size(); }
+    /**
+     * <code>repeated string additionalTags = 9;</code>
+     */
+    public int getAdditionalTagsCount() {
+      return additionalTags_.size();
+    }
+    /**
+     * <code>repeated string additionalTags = 9;</code>
+     */
     public java.lang.String getAdditionalTags(int index) {
       return additionalTags_.get(index);
     }
-    
-    private void initFields() {
+    /**
+     * <code>repeated string additionalTags = 9;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAdditionalTagsBytes(int index) {
+      return additionalTags_.getByteString(index);
     }
+
+    private void initFields() {
+      size_ = 0L;
+      offset_ = 0L;
+      name_ = "";
+      nameEn_ = "";
+      indexNameOffset_ = 0;
+      cities_ = java.util.Collections.emptyList();
+      additionalTags_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
-      if (!hasSize) return false;
-      if (!hasOffset) return false;
-      for (net.osmand.binary.OsmandIndex.CityBlock element : getCitiesList()) {
-        if (!element.isInitialized()) return false;
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasSize()) {
+        memoizedIsInitialized = 0;
+        return false;
       }
+      if (!hasOffset()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      for (int i = 0; i < getCitiesCount(); i++) {
+        if (!getCities(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (hasSize()) {
-        output.writeInt64(1, getSize());
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt64(1, size_);
       }
-      if (hasOffset()) {
-        output.writeInt64(2, getOffset());
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, offset_);
       }
-      if (hasName()) {
-        output.writeString(3, getName());
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getNameBytes());
       }
-      if (hasNameEn()) {
-        output.writeString(4, getNameEn());
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getNameEnBytes());
       }
-      if (hasIndexNameOffset()) {
-        output.writeInt32(5, getIndexNameOffset());
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, indexNameOffset_);
       }
-      for (net.osmand.binary.OsmandIndex.CityBlock element : getCitiesList()) {
-        output.writeMessage(8, element);
+      for (int i = 0; i < cities_.size(); i++) {
+        output.writeMessage(8, cities_.get(i));
       }
-      for (java.lang.String element : getAdditionalTagsList()) {
-        output.writeString(9, element);
+      for (int i = 0; i < additionalTags_.size(); i++) {
+        output.writeBytes(9, additionalTags_.getByteString(i));
       }
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
-      if (hasSize()) {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, getSize());
+          .computeInt64Size(1, size_);
       }
-      if (hasOffset()) {
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, getOffset());
+          .computeInt64Size(2, offset_);
       }
-      if (hasName()) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(3, getName());
+          .computeBytesSize(3, getNameBytes());
       }
-      if (hasNameEn()) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(4, getNameEn());
+          .computeBytesSize(4, getNameEnBytes());
       }
-      if (hasIndexNameOffset()) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, getIndexNameOffset());
+          .computeInt32Size(5, indexNameOffset_);
       }
-      for (net.osmand.binary.OsmandIndex.CityBlock element : getCitiesList()) {
+      for (int i = 0; i < cities_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, element);
+          .computeMessageSize(8, cities_.get(i));
       }
       {
         int dataSize = 0;
-        for (java.lang.String element : getAdditionalTagsList()) {
+        for (int i = 0; i < additionalTags_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeStringSizeNoTag(element);
+            .computeBytesSizeNoTag(additionalTags_.getByteString(i));
         }
         size += dataSize;
         size += 1 * getAdditionalTagsList().size();
@@ -1366,153 +3012,166 @@ public final class OsmandIndex {
       memoizedSerializedSize = size;
       return size;
     }
-    
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
     public static net.osmand.binary.OsmandIndex.AddressPart parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static net.osmand.binary.OsmandIndex.AddressPart parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.AddressPart parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static net.osmand.binary.OsmandIndex.AddressPart parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.AddressPart parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.AddressPart parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.AddressPart parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.AddressPart parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.AddressPart parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.AddressPart parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandIndex.AddressPart prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
+    /**
+     * Protobuf type {@code OsmAnd.OBF.AddressPart}
+     */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          net.osmand.binary.OsmandIndex.AddressPart, Builder> {
-      private net.osmand.binary.OsmandIndex.AddressPart result;
-      
+          net.osmand.binary.OsmandIndex.AddressPart, Builder>
+        implements net.osmand.binary.OsmandIndex.AddressPartOrBuilder {
       // Construct using net.osmand.binary.OsmandIndex.AddressPart.newBuilder()
-      private Builder() {}
-      
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
       private static Builder create() {
-        Builder builder = new Builder();
-        builder.result = new net.osmand.binary.OsmandIndex.AddressPart();
-        return builder;
+        return new Builder();
       }
-      
-      protected net.osmand.binary.OsmandIndex.AddressPart internalGetResult() {
-        return result;
-      }
-      
+
       public Builder clear() {
-        if (result == null) {
-          throw new IllegalStateException(
-            "Cannot call clear() after build().");
-        }
-        result = new net.osmand.binary.OsmandIndex.AddressPart();
+        super.clear();
+        size_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        offset_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        name_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        nameEn_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        indexNameOffset_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        cities_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000020);
+        additionalTags_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
-      
+
       public Builder clone() {
-        return create().mergeFrom(result);
+        return create().mergeFrom(buildPartial());
       }
-      
+
       public net.osmand.binary.OsmandIndex.AddressPart getDefaultInstanceForType() {
         return net.osmand.binary.OsmandIndex.AddressPart.getDefaultInstance();
       }
-      
-      public boolean isInitialized() {
-        return result.isInitialized();
-      }
+
       public net.osmand.binary.OsmandIndex.AddressPart build() {
-        if (result != null && !isInitialized()) {
+        net.osmand.binary.OsmandIndex.AddressPart result = buildPartial();
+        if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
-        return buildPartial();
+        return result;
       }
-      
-      private net.osmand.binary.OsmandIndex.AddressPart buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        if (!isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return buildPartial();
-      }
-      
+
       public net.osmand.binary.OsmandIndex.AddressPart buildPartial() {
-        if (result == null) {
-          throw new IllegalStateException(
-            "build() has already been called on this Builder.");
+        net.osmand.binary.OsmandIndex.AddressPart result = new net.osmand.binary.OsmandIndex.AddressPart(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
         }
-        if (result.cities_ != java.util.Collections.EMPTY_LIST) {
-          result.cities_ =
-            java.util.Collections.unmodifiableList(result.cities_);
+        result.size_ = size_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
         }
-        if (result.additionalTags_ != java.util.Collections.EMPTY_LIST) {
-          result.additionalTags_ =
-            java.util.Collections.unmodifiableList(result.additionalTags_);
+        result.offset_ = offset_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
         }
-        net.osmand.binary.OsmandIndex.AddressPart returnMe = result;
-        result = null;
-        return returnMe;
+        result.name_ = name_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.nameEn_ = nameEn_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.indexNameOffset_ = indexNameOffset_;
+        if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          cities_ = java.util.Collections.unmodifiableList(cities_);
+          bitField0_ = (bitField0_ & ~0x00000020);
+        }
+        result.cities_ = cities_;
+        if (((bitField0_ & 0x00000040) == 0x00000040)) {
+          additionalTags_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              additionalTags_);
+          bitField0_ = (bitField0_ & ~0x00000040);
+        }
+        result.additionalTags_ = additionalTags_;
+        result.bitField0_ = to_bitField0_;
+        return result;
       }
-      
+
       public Builder mergeFrom(net.osmand.binary.OsmandIndex.AddressPart other) {
         if (other == net.osmand.binary.OsmandIndex.AddressPart.getDefaultInstance()) return this;
         if (other.hasSize()) {
@@ -1522,499 +3181,914 @@ public final class OsmandIndex {
           setOffset(other.getOffset());
         }
         if (other.hasName()) {
-          setName(other.getName());
+          bitField0_ |= 0x00000004;
+          name_ = other.name_;
+          
         }
         if (other.hasNameEn()) {
-          setNameEn(other.getNameEn());
+          bitField0_ |= 0x00000008;
+          nameEn_ = other.nameEn_;
+          
         }
         if (other.hasIndexNameOffset()) {
           setIndexNameOffset(other.getIndexNameOffset());
         }
         if (!other.cities_.isEmpty()) {
-          if (result.cities_.isEmpty()) {
-            result.cities_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.CityBlock>();
+          if (cities_.isEmpty()) {
+            cities_ = other.cities_;
+            bitField0_ = (bitField0_ & ~0x00000020);
+          } else {
+            ensureCitiesIsMutable();
+            cities_.addAll(other.cities_);
           }
-          result.cities_.addAll(other.cities_);
+          
         }
         if (!other.additionalTags_.isEmpty()) {
-          if (result.additionalTags_.isEmpty()) {
-            result.additionalTags_ = new java.util.ArrayList<java.lang.String>();
+          if (additionalTags_.isEmpty()) {
+            additionalTags_ = other.additionalTags_;
+            bitField0_ = (bitField0_ & ~0x00000040);
+          } else {
+            ensureAdditionalTagsIsMutable();
+            additionalTags_.addAll(other.additionalTags_);
           }
-          result.additionalTags_.addAll(other.additionalTags_);
+          
         }
         return this;
       }
-      
+
+      public final boolean isInitialized() {
+        if (!hasSize()) {
+          
+          return false;
+        }
+        if (!hasOffset()) {
+          
+          return false;
+        }
+        for (int i = 0; i < getCitiesCount(); i++) {
+          if (!getCities(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              return this;
-            default: {
-              if (!parseUnknownField(input, extensionRegistry, tag)) {
-                return this;
-              }
-              break;
-            }
-            case 8: {
-              setSize(input.readInt64());
-              break;
-            }
-            case 16: {
-              setOffset(input.readInt64());
-              break;
-            }
-            case 26: {
-              setName(input.readString());
-              break;
-            }
-            case 34: {
-              setNameEn(input.readString());
-              break;
-            }
-            case 40: {
-              setIndexNameOffset(input.readInt32());
-              break;
-            }
-            case 66: {
-              net.osmand.binary.OsmandIndex.CityBlock.Builder subBuilder = net.osmand.binary.OsmandIndex.CityBlock.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addCities(subBuilder.buildPartial());
-              break;
-            }
-            case 74: {
-              addAdditionalTags(input.readString());
-              break;
-            }
+        net.osmand.binary.OsmandIndex.AddressPart parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (net.osmand.binary.OsmandIndex.AddressPart) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
-      
+      private int bitField0_;
+
       // required int64 size = 1;
+      private long size_ ;
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public boolean hasSize() {
-        return result.hasSize();
+        return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public long getSize() {
-        return result.getSize();
+        return size_;
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public Builder setSize(long value) {
-        result.hasSize = true;
-        result.size_ = value;
+        bitField0_ |= 0x00000001;
+        size_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public Builder clearSize() {
-        result.hasSize = false;
-        result.size_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        size_ = 0L;
+        
         return this;
       }
-      
+
       // required int64 offset = 2;
+      private long offset_ ;
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public boolean hasOffset() {
-        return result.hasOffset();
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public long getOffset() {
-        return result.getOffset();
+        return offset_;
       }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public Builder setOffset(long value) {
-        result.hasOffset = true;
-        result.offset_ = value;
+        bitField0_ |= 0x00000002;
+        offset_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public Builder clearOffset() {
-        result.hasOffset = false;
-        result.offset_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        offset_ = 0L;
+        
         return this;
       }
-      
+
       // optional string name = 3;
+      private java.lang.Object name_ = "";
+      /**
+       * <code>optional string name = 3;</code>
+       */
       public boolean hasName() {
-        return result.hasName();
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
+      /**
+       * <code>optional string name = 3;</code>
+       */
       public java.lang.String getName() {
-        return result.getName();
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          name_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
-      public Builder setName(java.lang.String value) {
+      /**
+       * <code>optional string name = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 3;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  result.hasName = true;
-        result.name_ = value;
+  bitField0_ |= 0x00000004;
+        name_ = value;
+        
         return this;
       }
+      /**
+       * <code>optional string name = 3;</code>
+       */
       public Builder clearName() {
-        result.hasName = false;
-        result.name_ = getDefaultInstance().getName();
+        bitField0_ = (bitField0_ & ~0x00000004);
+        name_ = getDefaultInstance().getName();
+        
         return this;
       }
-      
-      // optional string nameEn = 4;
-      public boolean hasNameEn() {
-        return result.hasNameEn();
-      }
-      public java.lang.String getNameEn() {
-        return result.getNameEn();
-      }
-      public Builder setNameEn(java.lang.String value) {
+      /**
+       * <code>optional string name = 3;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  result.hasNameEn = true;
-        result.nameEn_ = value;
+  bitField0_ |= 0x00000004;
+        name_ = value;
+        
         return this;
       }
+
+      // optional string nameEn = 4;
+      private java.lang.Object nameEn_ = "";
+      /**
+       * <code>optional string nameEn = 4;</code>
+       */
+      public boolean hasNameEn() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string nameEn = 4;</code>
+       */
+      public java.lang.String getNameEn() {
+        java.lang.Object ref = nameEn_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          nameEn_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string nameEn = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameEnBytes() {
+        java.lang.Object ref = nameEn_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          nameEn_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string nameEn = 4;</code>
+       */
+      public Builder setNameEn(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        nameEn_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>optional string nameEn = 4;</code>
+       */
       public Builder clearNameEn() {
-        result.hasNameEn = false;
-        result.nameEn_ = getDefaultInstance().getNameEn();
+        bitField0_ = (bitField0_ & ~0x00000008);
+        nameEn_ = getDefaultInstance().getNameEn();
+        
         return this;
       }
-      
+      /**
+       * <code>optional string nameEn = 4;</code>
+       */
+      public Builder setNameEnBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        nameEn_ = value;
+        
+        return this;
+      }
+
       // optional int32 indexNameOffset = 5;
+      private int indexNameOffset_ ;
+      /**
+       * <code>optional int32 indexNameOffset = 5;</code>
+       */
       public boolean hasIndexNameOffset() {
-        return result.hasIndexNameOffset();
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
+      /**
+       * <code>optional int32 indexNameOffset = 5;</code>
+       */
       public int getIndexNameOffset() {
-        return result.getIndexNameOffset();
+        return indexNameOffset_;
       }
+      /**
+       * <code>optional int32 indexNameOffset = 5;</code>
+       */
       public Builder setIndexNameOffset(int value) {
-        result.hasIndexNameOffset = true;
-        result.indexNameOffset_ = value;
+        bitField0_ |= 0x00000010;
+        indexNameOffset_ = value;
+        
         return this;
       }
+      /**
+       * <code>optional int32 indexNameOffset = 5;</code>
+       */
       public Builder clearIndexNameOffset() {
-        result.hasIndexNameOffset = false;
-        result.indexNameOffset_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        indexNameOffset_ = 0;
+        
         return this;
       }
-      
-      // repeated .CityBlock cities = 8;
+
+      // repeated .OsmAnd.OBF.CityBlock cities = 8;
+      private java.util.List<net.osmand.binary.OsmandIndex.CityBlock> cities_ =
+        java.util.Collections.emptyList();
+      private void ensureCitiesIsMutable() {
+        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+          cities_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.CityBlock>(cities_);
+          bitField0_ |= 0x00000020;
+         }
+      }
+
+      /**
+       * <code>repeated .OsmAnd.OBF.CityBlock cities = 8;</code>
+       */
       public java.util.List<net.osmand.binary.OsmandIndex.CityBlock> getCitiesList() {
-        return java.util.Collections.unmodifiableList(result.cities_);
+        return java.util.Collections.unmodifiableList(cities_);
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.CityBlock cities = 8;</code>
+       */
       public int getCitiesCount() {
-        return result.getCitiesCount();
+        return cities_.size();
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.CityBlock cities = 8;</code>
+       */
       public net.osmand.binary.OsmandIndex.CityBlock getCities(int index) {
-        return result.getCities(index);
+        return cities_.get(index);
       }
-      public Builder setCities(int index, net.osmand.binary.OsmandIndex.CityBlock value) {
+      /**
+       * <code>repeated .OsmAnd.OBF.CityBlock cities = 8;</code>
+       */
+      public Builder setCities(
+          int index, net.osmand.binary.OsmandIndex.CityBlock value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        result.cities_.set(index, value);
+        ensureCitiesIsMutable();
+        cities_.set(index, value);
+
         return this;
       }
-      public Builder setCities(int index, net.osmand.binary.OsmandIndex.CityBlock.Builder builderForValue) {
-        result.cities_.set(index, builderForValue.build());
+      /**
+       * <code>repeated .OsmAnd.OBF.CityBlock cities = 8;</code>
+       */
+      public Builder setCities(
+          int index, net.osmand.binary.OsmandIndex.CityBlock.Builder builderForValue) {
+        ensureCitiesIsMutable();
+        cities_.set(index, builderForValue.build());
+
         return this;
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.CityBlock cities = 8;</code>
+       */
       public Builder addCities(net.osmand.binary.OsmandIndex.CityBlock value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        if (result.cities_.isEmpty()) {
-          result.cities_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.CityBlock>();
-        }
-        result.cities_.add(value);
+        ensureCitiesIsMutable();
+        cities_.add(value);
+
         return this;
       }
-      public Builder addCities(net.osmand.binary.OsmandIndex.CityBlock.Builder builderForValue) {
-        if (result.cities_.isEmpty()) {
-          result.cities_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.CityBlock>();
+      /**
+       * <code>repeated .OsmAnd.OBF.CityBlock cities = 8;</code>
+       */
+      public Builder addCities(
+          int index, net.osmand.binary.OsmandIndex.CityBlock value) {
+        if (value == null) {
+          throw new NullPointerException();
         }
-        result.cities_.add(builderForValue.build());
+        ensureCitiesIsMutable();
+        cities_.add(index, value);
+
         return this;
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.CityBlock cities = 8;</code>
+       */
+      public Builder addCities(
+          net.osmand.binary.OsmandIndex.CityBlock.Builder builderForValue) {
+        ensureCitiesIsMutable();
+        cities_.add(builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.CityBlock cities = 8;</code>
+       */
+      public Builder addCities(
+          int index, net.osmand.binary.OsmandIndex.CityBlock.Builder builderForValue) {
+        ensureCitiesIsMutable();
+        cities_.add(index, builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.CityBlock cities = 8;</code>
+       */
       public Builder addAllCities(
           java.lang.Iterable<? extends net.osmand.binary.OsmandIndex.CityBlock> values) {
-        if (result.cities_.isEmpty()) {
-          result.cities_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.CityBlock>();
-        }
-        super.addAll(values, result.cities_);
+        ensureCitiesIsMutable();
+        super.addAll(values, cities_);
+
         return this;
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.CityBlock cities = 8;</code>
+       */
       public Builder clearCities() {
-        result.cities_ = java.util.Collections.emptyList();
+        cities_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000020);
+
         return this;
       }
-      
+      /**
+       * <code>repeated .OsmAnd.OBF.CityBlock cities = 8;</code>
+       */
+      public Builder removeCities(int index) {
+        ensureCitiesIsMutable();
+        cities_.remove(index);
+
+        return this;
+      }
+
       // repeated string additionalTags = 9;
-      public java.util.List<java.lang.String> getAdditionalTagsList() {
-        return java.util.Collections.unmodifiableList(result.additionalTags_);
+      private com.google.protobuf.LazyStringList additionalTags_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureAdditionalTagsIsMutable() {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
+          additionalTags_ = new com.google.protobuf.LazyStringArrayList(additionalTags_);
+          bitField0_ |= 0x00000040;
+         }
       }
+      /**
+       * <code>repeated string additionalTags = 9;</code>
+       */
+      public java.util.List<java.lang.String>
+          getAdditionalTagsList() {
+        return java.util.Collections.unmodifiableList(additionalTags_);
+      }
+      /**
+       * <code>repeated string additionalTags = 9;</code>
+       */
       public int getAdditionalTagsCount() {
-        return result.getAdditionalTagsCount();
+        return additionalTags_.size();
       }
+      /**
+       * <code>repeated string additionalTags = 9;</code>
+       */
       public java.lang.String getAdditionalTags(int index) {
-        return result.getAdditionalTags(index);
+        return additionalTags_.get(index);
       }
-      public Builder setAdditionalTags(int index, java.lang.String value) {
+      /**
+       * <code>repeated string additionalTags = 9;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAdditionalTagsBytes(int index) {
+        return additionalTags_.getByteString(index);
+      }
+      /**
+       * <code>repeated string additionalTags = 9;</code>
+       */
+      public Builder setAdditionalTags(
+          int index, java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  result.additionalTags_.set(index, value);
+  ensureAdditionalTagsIsMutable();
+        additionalTags_.set(index, value);
+        
         return this;
       }
-      public Builder addAdditionalTags(java.lang.String value) {
+      /**
+       * <code>repeated string additionalTags = 9;</code>
+       */
+      public Builder addAdditionalTags(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  if (result.additionalTags_.isEmpty()) {
-          result.additionalTags_ = new java.util.ArrayList<java.lang.String>();
-        }
-        result.additionalTags_.add(value);
+  ensureAdditionalTagsIsMutable();
+        additionalTags_.add(value);
+        
         return this;
       }
+      /**
+       * <code>repeated string additionalTags = 9;</code>
+       */
       public Builder addAllAdditionalTags(
-          java.lang.Iterable<? extends java.lang.String> values) {
-        if (result.additionalTags_.isEmpty()) {
-          result.additionalTags_ = new java.util.ArrayList<java.lang.String>();
-        }
-        super.addAll(values, result.additionalTags_);
+          java.lang.Iterable<java.lang.String> values) {
+        ensureAdditionalTagsIsMutable();
+        super.addAll(values, additionalTags_);
+        
         return this;
       }
+      /**
+       * <code>repeated string additionalTags = 9;</code>
+       */
       public Builder clearAdditionalTags() {
-        result.additionalTags_ = java.util.Collections.emptyList();
+        additionalTags_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        
         return this;
       }
-      
-      // @@protoc_insertion_point(builder_scope:AddressPart)
+      /**
+       * <code>repeated string additionalTags = 9;</code>
+       */
+      public Builder addAdditionalTagsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureAdditionalTagsIsMutable();
+        additionalTags_.add(value);
+        
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:OsmAnd.OBF.AddressPart)
     }
-    
+
     static {
       defaultInstance = new AddressPart(true);
-      net.osmand.binary.OsmandIndex.internalForceInit();
       defaultInstance.initFields();
     }
-    
-    // @@protoc_insertion_point(class_scope:AddressPart)
+
+    // @@protoc_insertion_point(class_scope:OsmAnd.OBF.AddressPart)
   }
-  
+
+  public interface CityBlockOrBuilder
+      extends com.google.protobuf.MessageLiteOrBuilder {
+
+    // required int64 size = 1;
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    boolean hasSize();
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    long getSize();
+
+    // required int64 offset = 2;
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    boolean hasOffset();
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    long getOffset();
+
+    // required int32 type = 3;
+    /**
+     * <code>required int32 type = 3;</code>
+     */
+    boolean hasType();
+    /**
+     * <code>required int32 type = 3;</code>
+     */
+    int getType();
+  }
+  /**
+   * Protobuf type {@code OsmAnd.OBF.CityBlock}
+   */
   public static final class CityBlock extends
-      com.google.protobuf.GeneratedMessageLite {
+      com.google.protobuf.GeneratedMessageLite
+      implements CityBlockOrBuilder {
     // Use CityBlock.newBuilder() to construct.
-    private CityBlock() {
-      initFields();
+    private CityBlock(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+
     }
     private CityBlock(boolean noInit) {}
-    
+
     private static final CityBlock defaultInstance;
     public static CityBlock getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public CityBlock getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private CityBlock(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              size_ = input.readInt64();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              offset_ = input.readInt64();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              type_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<CityBlock> PARSER =
+        new com.google.protobuf.AbstractParser<CityBlock>() {
+      public CityBlock parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CityBlock(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CityBlock> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
     // required int64 size = 1;
     public static final int SIZE_FIELD_NUMBER = 1;
-    private boolean hasSize;
-    private long size_ = 0L;
-    public boolean hasSize() { return hasSize; }
-    public long getSize() { return size_; }
-    
+    private long size_;
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    public boolean hasSize() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    public long getSize() {
+      return size_;
+    }
+
     // required int64 offset = 2;
     public static final int OFFSET_FIELD_NUMBER = 2;
-    private boolean hasOffset;
-    private long offset_ = 0L;
-    public boolean hasOffset() { return hasOffset; }
-    public long getOffset() { return offset_; }
-    
+    private long offset_;
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    public boolean hasOffset() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    public long getOffset() {
+      return offset_;
+    }
+
     // required int32 type = 3;
     public static final int TYPE_FIELD_NUMBER = 3;
-    private boolean hasType;
-    private int type_ = 0;
-    public boolean hasType() { return hasType; }
-    public int getType() { return type_; }
-    
-    private void initFields() {
+    private int type_;
+    /**
+     * <code>required int32 type = 3;</code>
+     */
+    public boolean hasType() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
+    /**
+     * <code>required int32 type = 3;</code>
+     */
+    public int getType() {
+      return type_;
+    }
+
+    private void initFields() {
+      size_ = 0L;
+      offset_ = 0L;
+      type_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
-      if (!hasSize) return false;
-      if (!hasOffset) return false;
-      if (!hasType) return false;
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasSize()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasOffset()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasType()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (hasSize()) {
-        output.writeInt64(1, getSize());
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt64(1, size_);
       }
-      if (hasOffset()) {
-        output.writeInt64(2, getOffset());
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, offset_);
       }
-      if (hasType()) {
-        output.writeInt32(3, getType());
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, type_);
       }
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
-      if (hasSize()) {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, getSize());
+          .computeInt64Size(1, size_);
       }
-      if (hasOffset()) {
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, getOffset());
+          .computeInt64Size(2, offset_);
       }
-      if (hasType()) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, getType());
+          .computeInt32Size(3, type_);
       }
       memoizedSerializedSize = size;
       return size;
     }
-    
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
     public static net.osmand.binary.OsmandIndex.CityBlock parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static net.osmand.binary.OsmandIndex.CityBlock parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.CityBlock parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static net.osmand.binary.OsmandIndex.CityBlock parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.CityBlock parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.CityBlock parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.CityBlock parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.CityBlock parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.CityBlock parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.CityBlock parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandIndex.CityBlock prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
+    /**
+     * Protobuf type {@code OsmAnd.OBF.CityBlock}
+     */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          net.osmand.binary.OsmandIndex.CityBlock, Builder> {
-      private net.osmand.binary.OsmandIndex.CityBlock result;
-      
+          net.osmand.binary.OsmandIndex.CityBlock, Builder>
+        implements net.osmand.binary.OsmandIndex.CityBlockOrBuilder {
       // Construct using net.osmand.binary.OsmandIndex.CityBlock.newBuilder()
-      private Builder() {}
-      
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
       private static Builder create() {
-        Builder builder = new Builder();
-        builder.result = new net.osmand.binary.OsmandIndex.CityBlock();
-        return builder;
+        return new Builder();
       }
-      
-      protected net.osmand.binary.OsmandIndex.CityBlock internalGetResult() {
-        return result;
-      }
-      
+
       public Builder clear() {
-        if (result == null) {
-          throw new IllegalStateException(
-            "Cannot call clear() after build().");
-        }
-        result = new net.osmand.binary.OsmandIndex.CityBlock();
+        super.clear();
+        size_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        offset_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        type_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
-      
+
       public Builder clone() {
-        return create().mergeFrom(result);
+        return create().mergeFrom(buildPartial());
       }
-      
+
       public net.osmand.binary.OsmandIndex.CityBlock getDefaultInstanceForType() {
         return net.osmand.binary.OsmandIndex.CityBlock.getDefaultInstance();
       }
-      
-      public boolean isInitialized() {
-        return result.isInitialized();
-      }
+
       public net.osmand.binary.OsmandIndex.CityBlock build() {
-        if (result != null && !isInitialized()) {
+        net.osmand.binary.OsmandIndex.CityBlock result = buildPartial();
+        if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
-        return buildPartial();
+        return result;
       }
-      
-      private net.osmand.binary.OsmandIndex.CityBlock buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        if (!isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return buildPartial();
-      }
-      
+
       public net.osmand.binary.OsmandIndex.CityBlock buildPartial() {
-        if (result == null) {
-          throw new IllegalStateException(
-            "build() has already been called on this Builder.");
+        net.osmand.binary.OsmandIndex.CityBlock result = new net.osmand.binary.OsmandIndex.CityBlock(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
         }
-        net.osmand.binary.OsmandIndex.CityBlock returnMe = result;
-        result = null;
-        return returnMe;
+        result.size_ = size_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.offset_ = offset_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.type_ = type_;
+        result.bitField0_ = to_bitField0_;
+        return result;
       }
-      
+
       public Builder mergeFrom(net.osmand.binary.OsmandIndex.CityBlock other) {
         if (other == net.osmand.binary.OsmandIndex.CityBlock.getDefaultInstance()) return this;
         if (other.hasSize()) {
@@ -2028,385 +4102,736 @@ public final class OsmandIndex {
         }
         return this;
       }
-      
+
+      public final boolean isInitialized() {
+        if (!hasSize()) {
+          
+          return false;
+        }
+        if (!hasOffset()) {
+          
+          return false;
+        }
+        if (!hasType()) {
+          
+          return false;
+        }
+        return true;
+      }
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              return this;
-            default: {
-              if (!parseUnknownField(input, extensionRegistry, tag)) {
-                return this;
-              }
-              break;
-            }
-            case 8: {
-              setSize(input.readInt64());
-              break;
-            }
-            case 16: {
-              setOffset(input.readInt64());
-              break;
-            }
-            case 24: {
-              setType(input.readInt32());
-              break;
-            }
+        net.osmand.binary.OsmandIndex.CityBlock parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (net.osmand.binary.OsmandIndex.CityBlock) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
-      
+      private int bitField0_;
+
       // required int64 size = 1;
+      private long size_ ;
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public boolean hasSize() {
-        return result.hasSize();
+        return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public long getSize() {
-        return result.getSize();
+        return size_;
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public Builder setSize(long value) {
-        result.hasSize = true;
-        result.size_ = value;
+        bitField0_ |= 0x00000001;
+        size_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public Builder clearSize() {
-        result.hasSize = false;
-        result.size_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        size_ = 0L;
+        
         return this;
       }
-      
+
       // required int64 offset = 2;
+      private long offset_ ;
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public boolean hasOffset() {
-        return result.hasOffset();
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public long getOffset() {
-        return result.getOffset();
+        return offset_;
       }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public Builder setOffset(long value) {
-        result.hasOffset = true;
-        result.offset_ = value;
+        bitField0_ |= 0x00000002;
+        offset_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public Builder clearOffset() {
-        result.hasOffset = false;
-        result.offset_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        offset_ = 0L;
+        
         return this;
       }
-      
+
       // required int32 type = 3;
+      private int type_ ;
+      /**
+       * <code>required int32 type = 3;</code>
+       */
       public boolean hasType() {
-        return result.hasType();
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
+      /**
+       * <code>required int32 type = 3;</code>
+       */
       public int getType() {
-        return result.getType();
+        return type_;
       }
+      /**
+       * <code>required int32 type = 3;</code>
+       */
       public Builder setType(int value) {
-        result.hasType = true;
-        result.type_ = value;
+        bitField0_ |= 0x00000004;
+        type_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int32 type = 3;</code>
+       */
       public Builder clearType() {
-        result.hasType = false;
-        result.type_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        type_ = 0;
+        
         return this;
       }
-      
-      // @@protoc_insertion_point(builder_scope:CityBlock)
+
+      // @@protoc_insertion_point(builder_scope:OsmAnd.OBF.CityBlock)
     }
-    
+
     static {
       defaultInstance = new CityBlock(true);
-      net.osmand.binary.OsmandIndex.internalForceInit();
       defaultInstance.initFields();
     }
-    
-    // @@protoc_insertion_point(class_scope:CityBlock)
+
+    // @@protoc_insertion_point(class_scope:OsmAnd.OBF.CityBlock)
   }
-  
+
+  public interface PoiPartOrBuilder
+      extends com.google.protobuf.MessageLiteOrBuilder {
+
+    // required int64 size = 1;
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    boolean hasSize();
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    long getSize();
+
+    // required int64 offset = 2;
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    boolean hasOffset();
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    long getOffset();
+
+    // optional string name = 3;
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    boolean hasName();
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    // required int32 left = 4;
+    /**
+     * <code>required int32 left = 4;</code>
+     */
+    boolean hasLeft();
+    /**
+     * <code>required int32 left = 4;</code>
+     */
+    int getLeft();
+
+    // required int32 right = 5;
+    /**
+     * <code>required int32 right = 5;</code>
+     */
+    boolean hasRight();
+    /**
+     * <code>required int32 right = 5;</code>
+     */
+    int getRight();
+
+    // required int32 top = 6;
+    /**
+     * <code>required int32 top = 6;</code>
+     */
+    boolean hasTop();
+    /**
+     * <code>required int32 top = 6;</code>
+     */
+    int getTop();
+
+    // required int32 bottom = 7;
+    /**
+     * <code>required int32 bottom = 7;</code>
+     */
+    boolean hasBottom();
+    /**
+     * <code>required int32 bottom = 7;</code>
+     */
+    int getBottom();
+  }
+  /**
+   * Protobuf type {@code OsmAnd.OBF.PoiPart}
+   */
   public static final class PoiPart extends
-      com.google.protobuf.GeneratedMessageLite {
+      com.google.protobuf.GeneratedMessageLite
+      implements PoiPartOrBuilder {
     // Use PoiPart.newBuilder() to construct.
-    private PoiPart() {
-      initFields();
+    private PoiPart(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+
     }
     private PoiPart(boolean noInit) {}
-    
+
     private static final PoiPart defaultInstance;
     public static PoiPart getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public PoiPart getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private PoiPart(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              size_ = input.readInt64();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              offset_ = input.readInt64();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              name_ = input.readBytes();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              left_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              right_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              top_ = input.readInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              bottom_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<PoiPart> PARSER =
+        new com.google.protobuf.AbstractParser<PoiPart>() {
+      public PoiPart parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PoiPart(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PoiPart> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
     // required int64 size = 1;
     public static final int SIZE_FIELD_NUMBER = 1;
-    private boolean hasSize;
-    private long size_ = 0L;
-    public boolean hasSize() { return hasSize; }
-    public long getSize() { return size_; }
-    
+    private long size_;
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    public boolean hasSize() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    public long getSize() {
+      return size_;
+    }
+
     // required int64 offset = 2;
     public static final int OFFSET_FIELD_NUMBER = 2;
-    private boolean hasOffset;
-    private long offset_ = 0L;
-    public boolean hasOffset() { return hasOffset; }
-    public long getOffset() { return offset_; }
-    
+    private long offset_;
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    public boolean hasOffset() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    public long getOffset() {
+      return offset_;
+    }
+
     // optional string name = 3;
     public static final int NAME_FIELD_NUMBER = 3;
-    private boolean hasName;
-    private java.lang.String name_ = "";
-    public boolean hasName() { return hasName; }
-    public java.lang.String getName() { return name_; }
-    
+    private java.lang.Object name_;
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    public boolean hasName() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          name_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     // required int32 left = 4;
     public static final int LEFT_FIELD_NUMBER = 4;
-    private boolean hasLeft;
-    private int left_ = 0;
-    public boolean hasLeft() { return hasLeft; }
-    public int getLeft() { return left_; }
-    
+    private int left_;
+    /**
+     * <code>required int32 left = 4;</code>
+     */
+    public boolean hasLeft() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required int32 left = 4;</code>
+     */
+    public int getLeft() {
+      return left_;
+    }
+
     // required int32 right = 5;
     public static final int RIGHT_FIELD_NUMBER = 5;
-    private boolean hasRight;
-    private int right_ = 0;
-    public boolean hasRight() { return hasRight; }
-    public int getRight() { return right_; }
-    
+    private int right_;
+    /**
+     * <code>required int32 right = 5;</code>
+     */
+    public boolean hasRight() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required int32 right = 5;</code>
+     */
+    public int getRight() {
+      return right_;
+    }
+
     // required int32 top = 6;
     public static final int TOP_FIELD_NUMBER = 6;
-    private boolean hasTop;
-    private int top_ = 0;
-    public boolean hasTop() { return hasTop; }
-    public int getTop() { return top_; }
-    
+    private int top_;
+    /**
+     * <code>required int32 top = 6;</code>
+     */
+    public boolean hasTop() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>required int32 top = 6;</code>
+     */
+    public int getTop() {
+      return top_;
+    }
+
     // required int32 bottom = 7;
     public static final int BOTTOM_FIELD_NUMBER = 7;
-    private boolean hasBottom;
-    private int bottom_ = 0;
-    public boolean hasBottom() { return hasBottom; }
-    public int getBottom() { return bottom_; }
-    
-    private void initFields() {
+    private int bottom_;
+    /**
+     * <code>required int32 bottom = 7;</code>
+     */
+    public boolean hasBottom() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
+    /**
+     * <code>required int32 bottom = 7;</code>
+     */
+    public int getBottom() {
+      return bottom_;
+    }
+
+    private void initFields() {
+      size_ = 0L;
+      offset_ = 0L;
+      name_ = "";
+      left_ = 0;
+      right_ = 0;
+      top_ = 0;
+      bottom_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
-      if (!hasSize) return false;
-      if (!hasOffset) return false;
-      if (!hasLeft) return false;
-      if (!hasRight) return false;
-      if (!hasTop) return false;
-      if (!hasBottom) return false;
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasSize()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasOffset()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasLeft()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasRight()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasTop()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasBottom()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (hasSize()) {
-        output.writeInt64(1, getSize());
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt64(1, size_);
       }
-      if (hasOffset()) {
-        output.writeInt64(2, getOffset());
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, offset_);
       }
-      if (hasName()) {
-        output.writeString(3, getName());
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getNameBytes());
       }
-      if (hasLeft()) {
-        output.writeInt32(4, getLeft());
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, left_);
       }
-      if (hasRight()) {
-        output.writeInt32(5, getRight());
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, right_);
       }
-      if (hasTop()) {
-        output.writeInt32(6, getTop());
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(6, top_);
       }
-      if (hasBottom()) {
-        output.writeInt32(7, getBottom());
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(7, bottom_);
       }
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
-      if (hasSize()) {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, getSize());
+          .computeInt64Size(1, size_);
       }
-      if (hasOffset()) {
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, getOffset());
+          .computeInt64Size(2, offset_);
       }
-      if (hasName()) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(3, getName());
+          .computeBytesSize(3, getNameBytes());
       }
-      if (hasLeft()) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, getLeft());
+          .computeInt32Size(4, left_);
       }
-      if (hasRight()) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, getRight());
+          .computeInt32Size(5, right_);
       }
-      if (hasTop()) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, getTop());
+          .computeInt32Size(6, top_);
       }
-      if (hasBottom()) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, getBottom());
+          .computeInt32Size(7, bottom_);
       }
       memoizedSerializedSize = size;
       return size;
     }
-    
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
     public static net.osmand.binary.OsmandIndex.PoiPart parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static net.osmand.binary.OsmandIndex.PoiPart parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.PoiPart parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static net.osmand.binary.OsmandIndex.PoiPart parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.PoiPart parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.PoiPart parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.PoiPart parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.PoiPart parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.PoiPart parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.PoiPart parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandIndex.PoiPart prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
+    /**
+     * Protobuf type {@code OsmAnd.OBF.PoiPart}
+     */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          net.osmand.binary.OsmandIndex.PoiPart, Builder> {
-      private net.osmand.binary.OsmandIndex.PoiPart result;
-      
+          net.osmand.binary.OsmandIndex.PoiPart, Builder>
+        implements net.osmand.binary.OsmandIndex.PoiPartOrBuilder {
       // Construct using net.osmand.binary.OsmandIndex.PoiPart.newBuilder()
-      private Builder() {}
-      
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
       private static Builder create() {
-        Builder builder = new Builder();
-        builder.result = new net.osmand.binary.OsmandIndex.PoiPart();
-        return builder;
+        return new Builder();
       }
-      
-      protected net.osmand.binary.OsmandIndex.PoiPart internalGetResult() {
-        return result;
-      }
-      
+
       public Builder clear() {
-        if (result == null) {
-          throw new IllegalStateException(
-            "Cannot call clear() after build().");
-        }
-        result = new net.osmand.binary.OsmandIndex.PoiPart();
+        super.clear();
+        size_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        offset_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        name_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        left_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        right_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        top_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        bottom_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
-      
+
       public Builder clone() {
-        return create().mergeFrom(result);
+        return create().mergeFrom(buildPartial());
       }
-      
+
       public net.osmand.binary.OsmandIndex.PoiPart getDefaultInstanceForType() {
         return net.osmand.binary.OsmandIndex.PoiPart.getDefaultInstance();
       }
-      
-      public boolean isInitialized() {
-        return result.isInitialized();
-      }
+
       public net.osmand.binary.OsmandIndex.PoiPart build() {
-        if (result != null && !isInitialized()) {
+        net.osmand.binary.OsmandIndex.PoiPart result = buildPartial();
+        if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
-        return buildPartial();
+        return result;
       }
-      
-      private net.osmand.binary.OsmandIndex.PoiPart buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        if (!isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return buildPartial();
-      }
-      
+
       public net.osmand.binary.OsmandIndex.PoiPart buildPartial() {
-        if (result == null) {
-          throw new IllegalStateException(
-            "build() has already been called on this Builder.");
+        net.osmand.binary.OsmandIndex.PoiPart result = new net.osmand.binary.OsmandIndex.PoiPart(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
         }
-        net.osmand.binary.OsmandIndex.PoiPart returnMe = result;
-        result = null;
-        return returnMe;
+        result.size_ = size_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.offset_ = offset_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.name_ = name_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.left_ = left_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.right_ = right_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.top_ = top_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.bottom_ = bottom_;
+        result.bitField0_ = to_bitField0_;
+        return result;
       }
-      
+
       public Builder mergeFrom(net.osmand.binary.OsmandIndex.PoiPart other) {
         if (other == net.osmand.binary.OsmandIndex.PoiPart.getDefaultInstance()) return this;
         if (other.hasSize()) {
@@ -2416,7 +4841,9 @@ public final class OsmandIndex {
           setOffset(other.getOffset());
         }
         if (other.hasName()) {
-          setName(other.getName());
+          bitField0_ |= 0x00000004;
+          name_ = other.name_;
+          
         }
         if (other.hasLeft()) {
           setLeft(other.getLeft());
@@ -2432,490 +4859,934 @@ public final class OsmandIndex {
         }
         return this;
       }
-      
+
+      public final boolean isInitialized() {
+        if (!hasSize()) {
+          
+          return false;
+        }
+        if (!hasOffset()) {
+          
+          return false;
+        }
+        if (!hasLeft()) {
+          
+          return false;
+        }
+        if (!hasRight()) {
+          
+          return false;
+        }
+        if (!hasTop()) {
+          
+          return false;
+        }
+        if (!hasBottom()) {
+          
+          return false;
+        }
+        return true;
+      }
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              return this;
-            default: {
-              if (!parseUnknownField(input, extensionRegistry, tag)) {
-                return this;
-              }
-              break;
-            }
-            case 8: {
-              setSize(input.readInt64());
-              break;
-            }
-            case 16: {
-              setOffset(input.readInt64());
-              break;
-            }
-            case 26: {
-              setName(input.readString());
-              break;
-            }
-            case 32: {
-              setLeft(input.readInt32());
-              break;
-            }
-            case 40: {
-              setRight(input.readInt32());
-              break;
-            }
-            case 48: {
-              setTop(input.readInt32());
-              break;
-            }
-            case 56: {
-              setBottom(input.readInt32());
-              break;
-            }
+        net.osmand.binary.OsmandIndex.PoiPart parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (net.osmand.binary.OsmandIndex.PoiPart) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
-      
+      private int bitField0_;
+
       // required int64 size = 1;
+      private long size_ ;
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public boolean hasSize() {
-        return result.hasSize();
+        return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public long getSize() {
-        return result.getSize();
+        return size_;
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public Builder setSize(long value) {
-        result.hasSize = true;
-        result.size_ = value;
+        bitField0_ |= 0x00000001;
+        size_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public Builder clearSize() {
-        result.hasSize = false;
-        result.size_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        size_ = 0L;
+        
         return this;
       }
-      
+
       // required int64 offset = 2;
+      private long offset_ ;
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public boolean hasOffset() {
-        return result.hasOffset();
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public long getOffset() {
-        return result.getOffset();
+        return offset_;
       }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public Builder setOffset(long value) {
-        result.hasOffset = true;
-        result.offset_ = value;
+        bitField0_ |= 0x00000002;
+        offset_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public Builder clearOffset() {
-        result.hasOffset = false;
-        result.offset_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        offset_ = 0L;
+        
         return this;
       }
-      
+
       // optional string name = 3;
+      private java.lang.Object name_ = "";
+      /**
+       * <code>optional string name = 3;</code>
+       */
       public boolean hasName() {
-        return result.hasName();
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
+      /**
+       * <code>optional string name = 3;</code>
+       */
       public java.lang.String getName() {
-        return result.getName();
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          name_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
-      public Builder setName(java.lang.String value) {
+      /**
+       * <code>optional string name = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 3;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  result.hasName = true;
-        result.name_ = value;
+  bitField0_ |= 0x00000004;
+        name_ = value;
+        
         return this;
       }
+      /**
+       * <code>optional string name = 3;</code>
+       */
       public Builder clearName() {
-        result.hasName = false;
-        result.name_ = getDefaultInstance().getName();
+        bitField0_ = (bitField0_ & ~0x00000004);
+        name_ = getDefaultInstance().getName();
+        
         return this;
       }
-      
+      /**
+       * <code>optional string name = 3;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        name_ = value;
+        
+        return this;
+      }
+
       // required int32 left = 4;
+      private int left_ ;
+      /**
+       * <code>required int32 left = 4;</code>
+       */
       public boolean hasLeft() {
-        return result.hasLeft();
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
+      /**
+       * <code>required int32 left = 4;</code>
+       */
       public int getLeft() {
-        return result.getLeft();
+        return left_;
       }
+      /**
+       * <code>required int32 left = 4;</code>
+       */
       public Builder setLeft(int value) {
-        result.hasLeft = true;
-        result.left_ = value;
+        bitField0_ |= 0x00000008;
+        left_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int32 left = 4;</code>
+       */
       public Builder clearLeft() {
-        result.hasLeft = false;
-        result.left_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        left_ = 0;
+        
         return this;
       }
-      
+
       // required int32 right = 5;
+      private int right_ ;
+      /**
+       * <code>required int32 right = 5;</code>
+       */
       public boolean hasRight() {
-        return result.hasRight();
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
+      /**
+       * <code>required int32 right = 5;</code>
+       */
       public int getRight() {
-        return result.getRight();
+        return right_;
       }
+      /**
+       * <code>required int32 right = 5;</code>
+       */
       public Builder setRight(int value) {
-        result.hasRight = true;
-        result.right_ = value;
+        bitField0_ |= 0x00000010;
+        right_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int32 right = 5;</code>
+       */
       public Builder clearRight() {
-        result.hasRight = false;
-        result.right_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        right_ = 0;
+        
         return this;
       }
-      
+
       // required int32 top = 6;
+      private int top_ ;
+      /**
+       * <code>required int32 top = 6;</code>
+       */
       public boolean hasTop() {
-        return result.hasTop();
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
+      /**
+       * <code>required int32 top = 6;</code>
+       */
       public int getTop() {
-        return result.getTop();
+        return top_;
       }
+      /**
+       * <code>required int32 top = 6;</code>
+       */
       public Builder setTop(int value) {
-        result.hasTop = true;
-        result.top_ = value;
+        bitField0_ |= 0x00000020;
+        top_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int32 top = 6;</code>
+       */
       public Builder clearTop() {
-        result.hasTop = false;
-        result.top_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        top_ = 0;
+        
         return this;
       }
-      
+
       // required int32 bottom = 7;
+      private int bottom_ ;
+      /**
+       * <code>required int32 bottom = 7;</code>
+       */
       public boolean hasBottom() {
-        return result.hasBottom();
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
+      /**
+       * <code>required int32 bottom = 7;</code>
+       */
       public int getBottom() {
-        return result.getBottom();
+        return bottom_;
       }
+      /**
+       * <code>required int32 bottom = 7;</code>
+       */
       public Builder setBottom(int value) {
-        result.hasBottom = true;
-        result.bottom_ = value;
+        bitField0_ |= 0x00000040;
+        bottom_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int32 bottom = 7;</code>
+       */
       public Builder clearBottom() {
-        result.hasBottom = false;
-        result.bottom_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        bottom_ = 0;
+        
         return this;
       }
-      
-      // @@protoc_insertion_point(builder_scope:PoiPart)
+
+      // @@protoc_insertion_point(builder_scope:OsmAnd.OBF.PoiPart)
     }
-    
+
     static {
       defaultInstance = new PoiPart(true);
-      net.osmand.binary.OsmandIndex.internalForceInit();
       defaultInstance.initFields();
     }
-    
-    // @@protoc_insertion_point(class_scope:PoiPart)
+
+    // @@protoc_insertion_point(class_scope:OsmAnd.OBF.PoiPart)
   }
-  
+
+  public interface MapLevelOrBuilder
+      extends com.google.protobuf.MessageLiteOrBuilder {
+
+    // required int64 size = 1;
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    boolean hasSize();
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    long getSize();
+
+    // required int64 offset = 2;
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    boolean hasOffset();
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    long getOffset();
+
+    // required int32 left = 4;
+    /**
+     * <code>required int32 left = 4;</code>
+     */
+    boolean hasLeft();
+    /**
+     * <code>required int32 left = 4;</code>
+     */
+    int getLeft();
+
+    // required int32 right = 5;
+    /**
+     * <code>required int32 right = 5;</code>
+     */
+    boolean hasRight();
+    /**
+     * <code>required int32 right = 5;</code>
+     */
+    int getRight();
+
+    // required int32 top = 6;
+    /**
+     * <code>required int32 top = 6;</code>
+     */
+    boolean hasTop();
+    /**
+     * <code>required int32 top = 6;</code>
+     */
+    int getTop();
+
+    // required int32 bottom = 7;
+    /**
+     * <code>required int32 bottom = 7;</code>
+     */
+    boolean hasBottom();
+    /**
+     * <code>required int32 bottom = 7;</code>
+     */
+    int getBottom();
+
+    // optional int32 minzoom = 8;
+    /**
+     * <code>optional int32 minzoom = 8;</code>
+     */
+    boolean hasMinzoom();
+    /**
+     * <code>optional int32 minzoom = 8;</code>
+     */
+    int getMinzoom();
+
+    // optional int32 maxzoom = 9;
+    /**
+     * <code>optional int32 maxzoom = 9;</code>
+     */
+    boolean hasMaxzoom();
+    /**
+     * <code>optional int32 maxzoom = 9;</code>
+     */
+    int getMaxzoom();
+  }
+  /**
+   * Protobuf type {@code OsmAnd.OBF.MapLevel}
+   */
   public static final class MapLevel extends
-      com.google.protobuf.GeneratedMessageLite {
+      com.google.protobuf.GeneratedMessageLite
+      implements MapLevelOrBuilder {
     // Use MapLevel.newBuilder() to construct.
-    private MapLevel() {
-      initFields();
+    private MapLevel(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+
     }
     private MapLevel(boolean noInit) {}
-    
+
     private static final MapLevel defaultInstance;
     public static MapLevel getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public MapLevel getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private MapLevel(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              size_ = input.readInt64();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              offset_ = input.readInt64();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000004;
+              left_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000008;
+              right_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000010;
+              top_ = input.readInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000020;
+              bottom_ = input.readInt32();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000040;
+              minzoom_ = input.readInt32();
+              break;
+            }
+            case 72: {
+              bitField0_ |= 0x00000080;
+              maxzoom_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<MapLevel> PARSER =
+        new com.google.protobuf.AbstractParser<MapLevel>() {
+      public MapLevel parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new MapLevel(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<MapLevel> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
     // required int64 size = 1;
     public static final int SIZE_FIELD_NUMBER = 1;
-    private boolean hasSize;
-    private long size_ = 0L;
-    public boolean hasSize() { return hasSize; }
-    public long getSize() { return size_; }
-    
+    private long size_;
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    public boolean hasSize() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    public long getSize() {
+      return size_;
+    }
+
     // required int64 offset = 2;
     public static final int OFFSET_FIELD_NUMBER = 2;
-    private boolean hasOffset;
-    private long offset_ = 0L;
-    public boolean hasOffset() { return hasOffset; }
-    public long getOffset() { return offset_; }
-    
+    private long offset_;
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    public boolean hasOffset() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    public long getOffset() {
+      return offset_;
+    }
+
     // required int32 left = 4;
     public static final int LEFT_FIELD_NUMBER = 4;
-    private boolean hasLeft;
-    private int left_ = 0;
-    public boolean hasLeft() { return hasLeft; }
-    public int getLeft() { return left_; }
-    
+    private int left_;
+    /**
+     * <code>required int32 left = 4;</code>
+     */
+    public boolean hasLeft() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required int32 left = 4;</code>
+     */
+    public int getLeft() {
+      return left_;
+    }
+
     // required int32 right = 5;
     public static final int RIGHT_FIELD_NUMBER = 5;
-    private boolean hasRight;
-    private int right_ = 0;
-    public boolean hasRight() { return hasRight; }
-    public int getRight() { return right_; }
-    
+    private int right_;
+    /**
+     * <code>required int32 right = 5;</code>
+     */
+    public boolean hasRight() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required int32 right = 5;</code>
+     */
+    public int getRight() {
+      return right_;
+    }
+
     // required int32 top = 6;
     public static final int TOP_FIELD_NUMBER = 6;
-    private boolean hasTop;
-    private int top_ = 0;
-    public boolean hasTop() { return hasTop; }
-    public int getTop() { return top_; }
-    
+    private int top_;
+    /**
+     * <code>required int32 top = 6;</code>
+     */
+    public boolean hasTop() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required int32 top = 6;</code>
+     */
+    public int getTop() {
+      return top_;
+    }
+
     // required int32 bottom = 7;
     public static final int BOTTOM_FIELD_NUMBER = 7;
-    private boolean hasBottom;
-    private int bottom_ = 0;
-    public boolean hasBottom() { return hasBottom; }
-    public int getBottom() { return bottom_; }
-    
+    private int bottom_;
+    /**
+     * <code>required int32 bottom = 7;</code>
+     */
+    public boolean hasBottom() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>required int32 bottom = 7;</code>
+     */
+    public int getBottom() {
+      return bottom_;
+    }
+
     // optional int32 minzoom = 8;
     public static final int MINZOOM_FIELD_NUMBER = 8;
-    private boolean hasMinzoom;
-    private int minzoom_ = 0;
-    public boolean hasMinzoom() { return hasMinzoom; }
-    public int getMinzoom() { return minzoom_; }
-    
+    private int minzoom_;
+    /**
+     * <code>optional int32 minzoom = 8;</code>
+     */
+    public boolean hasMinzoom() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional int32 minzoom = 8;</code>
+     */
+    public int getMinzoom() {
+      return minzoom_;
+    }
+
     // optional int32 maxzoom = 9;
     public static final int MAXZOOM_FIELD_NUMBER = 9;
-    private boolean hasMaxzoom;
-    private int maxzoom_ = 0;
-    public boolean hasMaxzoom() { return hasMaxzoom; }
-    public int getMaxzoom() { return maxzoom_; }
-    
-    private void initFields() {
+    private int maxzoom_;
+    /**
+     * <code>optional int32 maxzoom = 9;</code>
+     */
+    public boolean hasMaxzoom() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
+    /**
+     * <code>optional int32 maxzoom = 9;</code>
+     */
+    public int getMaxzoom() {
+      return maxzoom_;
+    }
+
+    private void initFields() {
+      size_ = 0L;
+      offset_ = 0L;
+      left_ = 0;
+      right_ = 0;
+      top_ = 0;
+      bottom_ = 0;
+      minzoom_ = 0;
+      maxzoom_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
-      if (!hasSize) return false;
-      if (!hasOffset) return false;
-      if (!hasLeft) return false;
-      if (!hasRight) return false;
-      if (!hasTop) return false;
-      if (!hasBottom) return false;
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasSize()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasOffset()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasLeft()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasRight()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasTop()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasBottom()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (hasSize()) {
-        output.writeInt64(1, getSize());
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt64(1, size_);
       }
-      if (hasOffset()) {
-        output.writeInt64(2, getOffset());
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, offset_);
       }
-      if (hasLeft()) {
-        output.writeInt32(4, getLeft());
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(4, left_);
       }
-      if (hasRight()) {
-        output.writeInt32(5, getRight());
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(5, right_);
       }
-      if (hasTop()) {
-        output.writeInt32(6, getTop());
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(6, top_);
       }
-      if (hasBottom()) {
-        output.writeInt32(7, getBottom());
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(7, bottom_);
       }
-      if (hasMinzoom()) {
-        output.writeInt32(8, getMinzoom());
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(8, minzoom_);
       }
-      if (hasMaxzoom()) {
-        output.writeInt32(9, getMaxzoom());
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt32(9, maxzoom_);
       }
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
-      if (hasSize()) {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, getSize());
+          .computeInt64Size(1, size_);
       }
-      if (hasOffset()) {
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, getOffset());
+          .computeInt64Size(2, offset_);
       }
-      if (hasLeft()) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, getLeft());
+          .computeInt32Size(4, left_);
       }
-      if (hasRight()) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, getRight());
+          .computeInt32Size(5, right_);
       }
-      if (hasTop()) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, getTop());
+          .computeInt32Size(6, top_);
       }
-      if (hasBottom()) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, getBottom());
+          .computeInt32Size(7, bottom_);
       }
-      if (hasMinzoom()) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, getMinzoom());
+          .computeInt32Size(8, minzoom_);
       }
-      if (hasMaxzoom()) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(9, getMaxzoom());
+          .computeInt32Size(9, maxzoom_);
       }
       memoizedSerializedSize = size;
       return size;
     }
-    
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
     public static net.osmand.binary.OsmandIndex.MapLevel parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static net.osmand.binary.OsmandIndex.MapLevel parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.MapLevel parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static net.osmand.binary.OsmandIndex.MapLevel parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.MapLevel parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.MapLevel parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.MapLevel parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.MapLevel parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.MapLevel parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.MapLevel parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandIndex.MapLevel prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
+    /**
+     * Protobuf type {@code OsmAnd.OBF.MapLevel}
+     */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          net.osmand.binary.OsmandIndex.MapLevel, Builder> {
-      private net.osmand.binary.OsmandIndex.MapLevel result;
-      
+          net.osmand.binary.OsmandIndex.MapLevel, Builder>
+        implements net.osmand.binary.OsmandIndex.MapLevelOrBuilder {
       // Construct using net.osmand.binary.OsmandIndex.MapLevel.newBuilder()
-      private Builder() {}
-      
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
       private static Builder create() {
-        Builder builder = new Builder();
-        builder.result = new net.osmand.binary.OsmandIndex.MapLevel();
-        return builder;
+        return new Builder();
       }
-      
-      protected net.osmand.binary.OsmandIndex.MapLevel internalGetResult() {
-        return result;
-      }
-      
+
       public Builder clear() {
-        if (result == null) {
-          throw new IllegalStateException(
-            "Cannot call clear() after build().");
-        }
-        result = new net.osmand.binary.OsmandIndex.MapLevel();
+        super.clear();
+        size_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        offset_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        left_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        right_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        top_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        bottom_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        minzoom_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        maxzoom_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
-      
+
       public Builder clone() {
-        return create().mergeFrom(result);
+        return create().mergeFrom(buildPartial());
       }
-      
+
       public net.osmand.binary.OsmandIndex.MapLevel getDefaultInstanceForType() {
         return net.osmand.binary.OsmandIndex.MapLevel.getDefaultInstance();
       }
-      
-      public boolean isInitialized() {
-        return result.isInitialized();
-      }
+
       public net.osmand.binary.OsmandIndex.MapLevel build() {
-        if (result != null && !isInitialized()) {
+        net.osmand.binary.OsmandIndex.MapLevel result = buildPartial();
+        if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
-        return buildPartial();
+        return result;
       }
-      
-      private net.osmand.binary.OsmandIndex.MapLevel buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        if (!isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return buildPartial();
-      }
-      
+
       public net.osmand.binary.OsmandIndex.MapLevel buildPartial() {
-        if (result == null) {
-          throw new IllegalStateException(
-            "build() has already been called on this Builder.");
+        net.osmand.binary.OsmandIndex.MapLevel result = new net.osmand.binary.OsmandIndex.MapLevel(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
         }
-        net.osmand.binary.OsmandIndex.MapLevel returnMe = result;
-        result = null;
-        return returnMe;
+        result.size_ = size_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.offset_ = offset_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.left_ = left_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.right_ = right_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.top_ = top_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.bottom_ = bottom_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.minzoom_ = minzoom_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.maxzoom_ = maxzoom_;
+        result.bitField0_ = to_bitField0_;
+        return result;
       }
-      
+
       public Builder mergeFrom(net.osmand.binary.OsmandIndex.MapLevel other) {
         if (other == net.osmand.binary.OsmandIndex.MapLevel.getDefaultInstance()) return this;
         if (other.hasSize()) {
@@ -2944,461 +5815,800 @@ public final class OsmandIndex {
         }
         return this;
       }
-      
+
+      public final boolean isInitialized() {
+        if (!hasSize()) {
+          
+          return false;
+        }
+        if (!hasOffset()) {
+          
+          return false;
+        }
+        if (!hasLeft()) {
+          
+          return false;
+        }
+        if (!hasRight()) {
+          
+          return false;
+        }
+        if (!hasTop()) {
+          
+          return false;
+        }
+        if (!hasBottom()) {
+          
+          return false;
+        }
+        return true;
+      }
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              return this;
-            default: {
-              if (!parseUnknownField(input, extensionRegistry, tag)) {
-                return this;
-              }
-              break;
-            }
-            case 8: {
-              setSize(input.readInt64());
-              break;
-            }
-            case 16: {
-              setOffset(input.readInt64());
-              break;
-            }
-            case 32: {
-              setLeft(input.readInt32());
-              break;
-            }
-            case 40: {
-              setRight(input.readInt32());
-              break;
-            }
-            case 48: {
-              setTop(input.readInt32());
-              break;
-            }
-            case 56: {
-              setBottom(input.readInt32());
-              break;
-            }
-            case 64: {
-              setMinzoom(input.readInt32());
-              break;
-            }
-            case 72: {
-              setMaxzoom(input.readInt32());
-              break;
-            }
+        net.osmand.binary.OsmandIndex.MapLevel parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (net.osmand.binary.OsmandIndex.MapLevel) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
-      
+      private int bitField0_;
+
       // required int64 size = 1;
+      private long size_ ;
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public boolean hasSize() {
-        return result.hasSize();
+        return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public long getSize() {
-        return result.getSize();
+        return size_;
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public Builder setSize(long value) {
-        result.hasSize = true;
-        result.size_ = value;
+        bitField0_ |= 0x00000001;
+        size_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public Builder clearSize() {
-        result.hasSize = false;
-        result.size_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        size_ = 0L;
+        
         return this;
       }
-      
+
       // required int64 offset = 2;
+      private long offset_ ;
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public boolean hasOffset() {
-        return result.hasOffset();
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public long getOffset() {
-        return result.getOffset();
+        return offset_;
       }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public Builder setOffset(long value) {
-        result.hasOffset = true;
-        result.offset_ = value;
+        bitField0_ |= 0x00000002;
+        offset_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public Builder clearOffset() {
-        result.hasOffset = false;
-        result.offset_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        offset_ = 0L;
+        
         return this;
       }
-      
+
       // required int32 left = 4;
+      private int left_ ;
+      /**
+       * <code>required int32 left = 4;</code>
+       */
       public boolean hasLeft() {
-        return result.hasLeft();
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
+      /**
+       * <code>required int32 left = 4;</code>
+       */
       public int getLeft() {
-        return result.getLeft();
+        return left_;
       }
+      /**
+       * <code>required int32 left = 4;</code>
+       */
       public Builder setLeft(int value) {
-        result.hasLeft = true;
-        result.left_ = value;
+        bitField0_ |= 0x00000004;
+        left_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int32 left = 4;</code>
+       */
       public Builder clearLeft() {
-        result.hasLeft = false;
-        result.left_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        left_ = 0;
+        
         return this;
       }
-      
+
       // required int32 right = 5;
+      private int right_ ;
+      /**
+       * <code>required int32 right = 5;</code>
+       */
       public boolean hasRight() {
-        return result.hasRight();
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
+      /**
+       * <code>required int32 right = 5;</code>
+       */
       public int getRight() {
-        return result.getRight();
+        return right_;
       }
+      /**
+       * <code>required int32 right = 5;</code>
+       */
       public Builder setRight(int value) {
-        result.hasRight = true;
-        result.right_ = value;
+        bitField0_ |= 0x00000008;
+        right_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int32 right = 5;</code>
+       */
       public Builder clearRight() {
-        result.hasRight = false;
-        result.right_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        right_ = 0;
+        
         return this;
       }
-      
+
       // required int32 top = 6;
+      private int top_ ;
+      /**
+       * <code>required int32 top = 6;</code>
+       */
       public boolean hasTop() {
-        return result.hasTop();
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
+      /**
+       * <code>required int32 top = 6;</code>
+       */
       public int getTop() {
-        return result.getTop();
+        return top_;
       }
+      /**
+       * <code>required int32 top = 6;</code>
+       */
       public Builder setTop(int value) {
-        result.hasTop = true;
-        result.top_ = value;
+        bitField0_ |= 0x00000010;
+        top_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int32 top = 6;</code>
+       */
       public Builder clearTop() {
-        result.hasTop = false;
-        result.top_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        top_ = 0;
+        
         return this;
       }
-      
+
       // required int32 bottom = 7;
+      private int bottom_ ;
+      /**
+       * <code>required int32 bottom = 7;</code>
+       */
       public boolean hasBottom() {
-        return result.hasBottom();
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
+      /**
+       * <code>required int32 bottom = 7;</code>
+       */
       public int getBottom() {
-        return result.getBottom();
+        return bottom_;
       }
+      /**
+       * <code>required int32 bottom = 7;</code>
+       */
       public Builder setBottom(int value) {
-        result.hasBottom = true;
-        result.bottom_ = value;
+        bitField0_ |= 0x00000020;
+        bottom_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int32 bottom = 7;</code>
+       */
       public Builder clearBottom() {
-        result.hasBottom = false;
-        result.bottom_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        bottom_ = 0;
+        
         return this;
       }
-      
+
       // optional int32 minzoom = 8;
+      private int minzoom_ ;
+      /**
+       * <code>optional int32 minzoom = 8;</code>
+       */
       public boolean hasMinzoom() {
-        return result.hasMinzoom();
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
+      /**
+       * <code>optional int32 minzoom = 8;</code>
+       */
       public int getMinzoom() {
-        return result.getMinzoom();
+        return minzoom_;
       }
+      /**
+       * <code>optional int32 minzoom = 8;</code>
+       */
       public Builder setMinzoom(int value) {
-        result.hasMinzoom = true;
-        result.minzoom_ = value;
+        bitField0_ |= 0x00000040;
+        minzoom_ = value;
+        
         return this;
       }
+      /**
+       * <code>optional int32 minzoom = 8;</code>
+       */
       public Builder clearMinzoom() {
-        result.hasMinzoom = false;
-        result.minzoom_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        minzoom_ = 0;
+        
         return this;
       }
-      
+
       // optional int32 maxzoom = 9;
+      private int maxzoom_ ;
+      /**
+       * <code>optional int32 maxzoom = 9;</code>
+       */
       public boolean hasMaxzoom() {
-        return result.hasMaxzoom();
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
+      /**
+       * <code>optional int32 maxzoom = 9;</code>
+       */
       public int getMaxzoom() {
-        return result.getMaxzoom();
+        return maxzoom_;
       }
+      /**
+       * <code>optional int32 maxzoom = 9;</code>
+       */
       public Builder setMaxzoom(int value) {
-        result.hasMaxzoom = true;
-        result.maxzoom_ = value;
+        bitField0_ |= 0x00000080;
+        maxzoom_ = value;
+        
         return this;
       }
+      /**
+       * <code>optional int32 maxzoom = 9;</code>
+       */
       public Builder clearMaxzoom() {
-        result.hasMaxzoom = false;
-        result.maxzoom_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        maxzoom_ = 0;
+        
         return this;
       }
-      
-      // @@protoc_insertion_point(builder_scope:MapLevel)
+
+      // @@protoc_insertion_point(builder_scope:OsmAnd.OBF.MapLevel)
     }
-    
+
     static {
       defaultInstance = new MapLevel(true);
-      net.osmand.binary.OsmandIndex.internalForceInit();
       defaultInstance.initFields();
     }
-    
-    // @@protoc_insertion_point(class_scope:MapLevel)
+
+    // @@protoc_insertion_point(class_scope:OsmAnd.OBF.MapLevel)
   }
-  
+
+  public interface MapPartOrBuilder
+      extends com.google.protobuf.MessageLiteOrBuilder {
+
+    // required int64 size = 1;
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    boolean hasSize();
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    long getSize();
+
+    // required int64 offset = 2;
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    boolean hasOffset();
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    long getOffset();
+
+    // optional string name = 3;
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    boolean hasName();
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    // repeated .OsmAnd.OBF.MapLevel levels = 5;
+    /**
+     * <code>repeated .OsmAnd.OBF.MapLevel levels = 5;</code>
+     */
+    java.util.List<net.osmand.binary.OsmandIndex.MapLevel> 
+        getLevelsList();
+    /**
+     * <code>repeated .OsmAnd.OBF.MapLevel levels = 5;</code>
+     */
+    net.osmand.binary.OsmandIndex.MapLevel getLevels(int index);
+    /**
+     * <code>repeated .OsmAnd.OBF.MapLevel levels = 5;</code>
+     */
+    int getLevelsCount();
+  }
+  /**
+   * Protobuf type {@code OsmAnd.OBF.MapPart}
+   */
   public static final class MapPart extends
-      com.google.protobuf.GeneratedMessageLite {
+      com.google.protobuf.GeneratedMessageLite
+      implements MapPartOrBuilder {
     // Use MapPart.newBuilder() to construct.
-    private MapPart() {
-      initFields();
+    private MapPart(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+
     }
     private MapPart(boolean noInit) {}
-    
+
     private static final MapPart defaultInstance;
     public static MapPart getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public MapPart getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private MapPart(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              size_ = input.readInt64();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              offset_ = input.readInt64();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              name_ = input.readBytes();
+              break;
+            }
+            case 42: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                levels_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.MapLevel>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              levels_.add(input.readMessage(net.osmand.binary.OsmandIndex.MapLevel.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          levels_ = java.util.Collections.unmodifiableList(levels_);
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<MapPart> PARSER =
+        new com.google.protobuf.AbstractParser<MapPart>() {
+      public MapPart parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new MapPart(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<MapPart> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
     // required int64 size = 1;
     public static final int SIZE_FIELD_NUMBER = 1;
-    private boolean hasSize;
-    private long size_ = 0L;
-    public boolean hasSize() { return hasSize; }
-    public long getSize() { return size_; }
-    
+    private long size_;
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    public boolean hasSize() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    public long getSize() {
+      return size_;
+    }
+
     // required int64 offset = 2;
     public static final int OFFSET_FIELD_NUMBER = 2;
-    private boolean hasOffset;
-    private long offset_ = 0L;
-    public boolean hasOffset() { return hasOffset; }
-    public long getOffset() { return offset_; }
-    
+    private long offset_;
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    public boolean hasOffset() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    public long getOffset() {
+      return offset_;
+    }
+
     // optional string name = 3;
     public static final int NAME_FIELD_NUMBER = 3;
-    private boolean hasName;
-    private java.lang.String name_ = "";
-    public boolean hasName() { return hasName; }
-    public java.lang.String getName() { return name_; }
-    
-    // repeated .MapLevel levels = 5;
+    private java.lang.Object name_;
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    public boolean hasName() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          name_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // repeated .OsmAnd.OBF.MapLevel levels = 5;
     public static final int LEVELS_FIELD_NUMBER = 5;
-    private java.util.List<net.osmand.binary.OsmandIndex.MapLevel> levels_ =
-      java.util.Collections.emptyList();
+    private java.util.List<net.osmand.binary.OsmandIndex.MapLevel> levels_;
+    /**
+     * <code>repeated .OsmAnd.OBF.MapLevel levels = 5;</code>
+     */
     public java.util.List<net.osmand.binary.OsmandIndex.MapLevel> getLevelsList() {
       return levels_;
     }
-    public int getLevelsCount() { return levels_.size(); }
+    /**
+     * <code>repeated .OsmAnd.OBF.MapLevel levels = 5;</code>
+     */
+    public java.util.List<? extends net.osmand.binary.OsmandIndex.MapLevelOrBuilder> 
+        getLevelsOrBuilderList() {
+      return levels_;
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.MapLevel levels = 5;</code>
+     */
+    public int getLevelsCount() {
+      return levels_.size();
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.MapLevel levels = 5;</code>
+     */
     public net.osmand.binary.OsmandIndex.MapLevel getLevels(int index) {
       return levels_.get(index);
     }
-    
-    private void initFields() {
+    /**
+     * <code>repeated .OsmAnd.OBF.MapLevel levels = 5;</code>
+     */
+    public net.osmand.binary.OsmandIndex.MapLevelOrBuilder getLevelsOrBuilder(
+        int index) {
+      return levels_.get(index);
     }
+
+    private void initFields() {
+      size_ = 0L;
+      offset_ = 0L;
+      name_ = "";
+      levels_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
-      if (!hasSize) return false;
-      if (!hasOffset) return false;
-      for (net.osmand.binary.OsmandIndex.MapLevel element : getLevelsList()) {
-        if (!element.isInitialized()) return false;
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasSize()) {
+        memoizedIsInitialized = 0;
+        return false;
       }
+      if (!hasOffset()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      for (int i = 0; i < getLevelsCount(); i++) {
+        if (!getLevels(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (hasSize()) {
-        output.writeInt64(1, getSize());
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt64(1, size_);
       }
-      if (hasOffset()) {
-        output.writeInt64(2, getOffset());
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, offset_);
       }
-      if (hasName()) {
-        output.writeString(3, getName());
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getNameBytes());
       }
-      for (net.osmand.binary.OsmandIndex.MapLevel element : getLevelsList()) {
-        output.writeMessage(5, element);
+      for (int i = 0; i < levels_.size(); i++) {
+        output.writeMessage(5, levels_.get(i));
       }
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
-      if (hasSize()) {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, getSize());
+          .computeInt64Size(1, size_);
       }
-      if (hasOffset()) {
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, getOffset());
+          .computeInt64Size(2, offset_);
       }
-      if (hasName()) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(3, getName());
+          .computeBytesSize(3, getNameBytes());
       }
-      for (net.osmand.binary.OsmandIndex.MapLevel element : getLevelsList()) {
+      for (int i = 0; i < levels_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, element);
+          .computeMessageSize(5, levels_.get(i));
       }
       memoizedSerializedSize = size;
       return size;
     }
-    
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
     public static net.osmand.binary.OsmandIndex.MapPart parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static net.osmand.binary.OsmandIndex.MapPart parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.MapPart parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static net.osmand.binary.OsmandIndex.MapPart parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.MapPart parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.MapPart parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.MapPart parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.MapPart parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.MapPart parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.MapPart parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandIndex.MapPart prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
+    /**
+     * Protobuf type {@code OsmAnd.OBF.MapPart}
+     */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          net.osmand.binary.OsmandIndex.MapPart, Builder> {
-      private net.osmand.binary.OsmandIndex.MapPart result;
-      
+          net.osmand.binary.OsmandIndex.MapPart, Builder>
+        implements net.osmand.binary.OsmandIndex.MapPartOrBuilder {
       // Construct using net.osmand.binary.OsmandIndex.MapPart.newBuilder()
-      private Builder() {}
-      
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
       private static Builder create() {
-        Builder builder = new Builder();
-        builder.result = new net.osmand.binary.OsmandIndex.MapPart();
-        return builder;
+        return new Builder();
       }
-      
-      protected net.osmand.binary.OsmandIndex.MapPart internalGetResult() {
-        return result;
-      }
-      
+
       public Builder clear() {
-        if (result == null) {
-          throw new IllegalStateException(
-            "Cannot call clear() after build().");
-        }
-        result = new net.osmand.binary.OsmandIndex.MapPart();
+        super.clear();
+        size_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        offset_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        name_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        levels_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
-      
+
       public Builder clone() {
-        return create().mergeFrom(result);
+        return create().mergeFrom(buildPartial());
       }
-      
+
       public net.osmand.binary.OsmandIndex.MapPart getDefaultInstanceForType() {
         return net.osmand.binary.OsmandIndex.MapPart.getDefaultInstance();
       }
-      
-      public boolean isInitialized() {
-        return result.isInitialized();
-      }
+
       public net.osmand.binary.OsmandIndex.MapPart build() {
-        if (result != null && !isInitialized()) {
+        net.osmand.binary.OsmandIndex.MapPart result = buildPartial();
+        if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
-        return buildPartial();
+        return result;
       }
-      
-      private net.osmand.binary.OsmandIndex.MapPart buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        if (!isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return buildPartial();
-      }
-      
+
       public net.osmand.binary.OsmandIndex.MapPart buildPartial() {
-        if (result == null) {
-          throw new IllegalStateException(
-            "build() has already been called on this Builder.");
+        net.osmand.binary.OsmandIndex.MapPart result = new net.osmand.binary.OsmandIndex.MapPart(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
         }
-        if (result.levels_ != java.util.Collections.EMPTY_LIST) {
-          result.levels_ =
-            java.util.Collections.unmodifiableList(result.levels_);
+        result.size_ = size_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
         }
-        net.osmand.binary.OsmandIndex.MapPart returnMe = result;
-        result = null;
-        return returnMe;
+        result.offset_ = offset_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.name_ = name_;
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          levels_ = java.util.Collections.unmodifiableList(levels_);
+          bitField0_ = (bitField0_ & ~0x00000008);
+        }
+        result.levels_ = levels_;
+        result.bitField0_ = to_bitField0_;
+        return result;
       }
-      
+
       public Builder mergeFrom(net.osmand.binary.OsmandIndex.MapPart other) {
         if (other == net.osmand.binary.OsmandIndex.MapPart.getDefaultInstance()) return this;
         if (other.hasSize()) {
@@ -3408,470 +6618,937 @@ public final class OsmandIndex {
           setOffset(other.getOffset());
         }
         if (other.hasName()) {
-          setName(other.getName());
+          bitField0_ |= 0x00000004;
+          name_ = other.name_;
+          
         }
         if (!other.levels_.isEmpty()) {
-          if (result.levels_.isEmpty()) {
-            result.levels_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.MapLevel>();
+          if (levels_.isEmpty()) {
+            levels_ = other.levels_;
+            bitField0_ = (bitField0_ & ~0x00000008);
+          } else {
+            ensureLevelsIsMutable();
+            levels_.addAll(other.levels_);
           }
-          result.levels_.addAll(other.levels_);
+          
         }
         return this;
       }
-      
+
+      public final boolean isInitialized() {
+        if (!hasSize()) {
+          
+          return false;
+        }
+        if (!hasOffset()) {
+          
+          return false;
+        }
+        for (int i = 0; i < getLevelsCount(); i++) {
+          if (!getLevels(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              return this;
-            default: {
-              if (!parseUnknownField(input, extensionRegistry, tag)) {
-                return this;
-              }
-              break;
-            }
-            case 8: {
-              setSize(input.readInt64());
-              break;
-            }
-            case 16: {
-              setOffset(input.readInt64());
-              break;
-            }
-            case 26: {
-              setName(input.readString());
-              break;
-            }
-            case 42: {
-              net.osmand.binary.OsmandIndex.MapLevel.Builder subBuilder = net.osmand.binary.OsmandIndex.MapLevel.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addLevels(subBuilder.buildPartial());
-              break;
-            }
+        net.osmand.binary.OsmandIndex.MapPart parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (net.osmand.binary.OsmandIndex.MapPart) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
-      
+      private int bitField0_;
+
       // required int64 size = 1;
+      private long size_ ;
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public boolean hasSize() {
-        return result.hasSize();
+        return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public long getSize() {
-        return result.getSize();
+        return size_;
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public Builder setSize(long value) {
-        result.hasSize = true;
-        result.size_ = value;
+        bitField0_ |= 0x00000001;
+        size_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public Builder clearSize() {
-        result.hasSize = false;
-        result.size_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        size_ = 0L;
+        
         return this;
       }
-      
+
       // required int64 offset = 2;
+      private long offset_ ;
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public boolean hasOffset() {
-        return result.hasOffset();
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public long getOffset() {
-        return result.getOffset();
+        return offset_;
       }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public Builder setOffset(long value) {
-        result.hasOffset = true;
-        result.offset_ = value;
+        bitField0_ |= 0x00000002;
+        offset_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public Builder clearOffset() {
-        result.hasOffset = false;
-        result.offset_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        offset_ = 0L;
+        
         return this;
       }
-      
+
       // optional string name = 3;
+      private java.lang.Object name_ = "";
+      /**
+       * <code>optional string name = 3;</code>
+       */
       public boolean hasName() {
-        return result.hasName();
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
+      /**
+       * <code>optional string name = 3;</code>
+       */
       public java.lang.String getName() {
-        return result.getName();
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          name_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
-      public Builder setName(java.lang.String value) {
+      /**
+       * <code>optional string name = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 3;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  result.hasName = true;
-        result.name_ = value;
+  bitField0_ |= 0x00000004;
+        name_ = value;
+        
         return this;
       }
+      /**
+       * <code>optional string name = 3;</code>
+       */
       public Builder clearName() {
-        result.hasName = false;
-        result.name_ = getDefaultInstance().getName();
+        bitField0_ = (bitField0_ & ~0x00000004);
+        name_ = getDefaultInstance().getName();
+        
         return this;
       }
-      
-      // repeated .MapLevel levels = 5;
+      /**
+       * <code>optional string name = 3;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        name_ = value;
+        
+        return this;
+      }
+
+      // repeated .OsmAnd.OBF.MapLevel levels = 5;
+      private java.util.List<net.osmand.binary.OsmandIndex.MapLevel> levels_ =
+        java.util.Collections.emptyList();
+      private void ensureLevelsIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          levels_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.MapLevel>(levels_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+
+      /**
+       * <code>repeated .OsmAnd.OBF.MapLevel levels = 5;</code>
+       */
       public java.util.List<net.osmand.binary.OsmandIndex.MapLevel> getLevelsList() {
-        return java.util.Collections.unmodifiableList(result.levels_);
+        return java.util.Collections.unmodifiableList(levels_);
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.MapLevel levels = 5;</code>
+       */
       public int getLevelsCount() {
-        return result.getLevelsCount();
+        return levels_.size();
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.MapLevel levels = 5;</code>
+       */
       public net.osmand.binary.OsmandIndex.MapLevel getLevels(int index) {
-        return result.getLevels(index);
+        return levels_.get(index);
       }
-      public Builder setLevels(int index, net.osmand.binary.OsmandIndex.MapLevel value) {
+      /**
+       * <code>repeated .OsmAnd.OBF.MapLevel levels = 5;</code>
+       */
+      public Builder setLevels(
+          int index, net.osmand.binary.OsmandIndex.MapLevel value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        result.levels_.set(index, value);
+        ensureLevelsIsMutable();
+        levels_.set(index, value);
+
         return this;
       }
-      public Builder setLevels(int index, net.osmand.binary.OsmandIndex.MapLevel.Builder builderForValue) {
-        result.levels_.set(index, builderForValue.build());
+      /**
+       * <code>repeated .OsmAnd.OBF.MapLevel levels = 5;</code>
+       */
+      public Builder setLevels(
+          int index, net.osmand.binary.OsmandIndex.MapLevel.Builder builderForValue) {
+        ensureLevelsIsMutable();
+        levels_.set(index, builderForValue.build());
+
         return this;
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.MapLevel levels = 5;</code>
+       */
       public Builder addLevels(net.osmand.binary.OsmandIndex.MapLevel value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        if (result.levels_.isEmpty()) {
-          result.levels_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.MapLevel>();
-        }
-        result.levels_.add(value);
+        ensureLevelsIsMutable();
+        levels_.add(value);
+
         return this;
       }
-      public Builder addLevels(net.osmand.binary.OsmandIndex.MapLevel.Builder builderForValue) {
-        if (result.levels_.isEmpty()) {
-          result.levels_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.MapLevel>();
+      /**
+       * <code>repeated .OsmAnd.OBF.MapLevel levels = 5;</code>
+       */
+      public Builder addLevels(
+          int index, net.osmand.binary.OsmandIndex.MapLevel value) {
+        if (value == null) {
+          throw new NullPointerException();
         }
-        result.levels_.add(builderForValue.build());
+        ensureLevelsIsMutable();
+        levels_.add(index, value);
+
         return this;
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.MapLevel levels = 5;</code>
+       */
+      public Builder addLevels(
+          net.osmand.binary.OsmandIndex.MapLevel.Builder builderForValue) {
+        ensureLevelsIsMutable();
+        levels_.add(builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.MapLevel levels = 5;</code>
+       */
+      public Builder addLevels(
+          int index, net.osmand.binary.OsmandIndex.MapLevel.Builder builderForValue) {
+        ensureLevelsIsMutable();
+        levels_.add(index, builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.MapLevel levels = 5;</code>
+       */
       public Builder addAllLevels(
           java.lang.Iterable<? extends net.osmand.binary.OsmandIndex.MapLevel> values) {
-        if (result.levels_.isEmpty()) {
-          result.levels_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.MapLevel>();
-        }
-        super.addAll(values, result.levels_);
+        ensureLevelsIsMutable();
+        super.addAll(values, levels_);
+
         return this;
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.MapLevel levels = 5;</code>
+       */
       public Builder clearLevels() {
-        result.levels_ = java.util.Collections.emptyList();
+        levels_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000008);
+
         return this;
       }
-      
-      // @@protoc_insertion_point(builder_scope:MapPart)
+      /**
+       * <code>repeated .OsmAnd.OBF.MapLevel levels = 5;</code>
+       */
+      public Builder removeLevels(int index) {
+        ensureLevelsIsMutable();
+        levels_.remove(index);
+
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:OsmAnd.OBF.MapPart)
     }
-    
+
     static {
       defaultInstance = new MapPart(true);
-      net.osmand.binary.OsmandIndex.internalForceInit();
       defaultInstance.initFields();
     }
-    
-    // @@protoc_insertion_point(class_scope:MapPart)
+
+    // @@protoc_insertion_point(class_scope:OsmAnd.OBF.MapPart)
   }
-  
+
+  public interface RoutingSubregionOrBuilder
+      extends com.google.protobuf.MessageLiteOrBuilder {
+
+    // required int64 size = 1;
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    boolean hasSize();
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    long getSize();
+
+    // required int64 offset = 2;
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    boolean hasOffset();
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    long getOffset();
+
+    // optional bool basemap = 3;
+    /**
+     * <code>optional bool basemap = 3;</code>
+     */
+    boolean hasBasemap();
+    /**
+     * <code>optional bool basemap = 3;</code>
+     */
+    boolean getBasemap();
+
+    // required int32 left = 4;
+    /**
+     * <code>required int32 left = 4;</code>
+     */
+    boolean hasLeft();
+    /**
+     * <code>required int32 left = 4;</code>
+     */
+    int getLeft();
+
+    // required int32 right = 5;
+    /**
+     * <code>required int32 right = 5;</code>
+     */
+    boolean hasRight();
+    /**
+     * <code>required int32 right = 5;</code>
+     */
+    int getRight();
+
+    // required int32 top = 6;
+    /**
+     * <code>required int32 top = 6;</code>
+     */
+    boolean hasTop();
+    /**
+     * <code>required int32 top = 6;</code>
+     */
+    int getTop();
+
+    // required int32 bottom = 7;
+    /**
+     * <code>required int32 bottom = 7;</code>
+     */
+    boolean hasBottom();
+    /**
+     * <code>required int32 bottom = 7;</code>
+     */
+    int getBottom();
+
+    // required uint32 shifToData = 8;
+    /**
+     * <code>required uint32 shifToData = 8;</code>
+     */
+    boolean hasShifToData();
+    /**
+     * <code>required uint32 shifToData = 8;</code>
+     */
+    int getShifToData();
+  }
+  /**
+   * Protobuf type {@code OsmAnd.OBF.RoutingSubregion}
+   */
   public static final class RoutingSubregion extends
-      com.google.protobuf.GeneratedMessageLite {
+      com.google.protobuf.GeneratedMessageLite
+      implements RoutingSubregionOrBuilder {
     // Use RoutingSubregion.newBuilder() to construct.
-    private RoutingSubregion() {
-      initFields();
+    private RoutingSubregion(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+
     }
     private RoutingSubregion(boolean noInit) {}
-    
+
     private static final RoutingSubregion defaultInstance;
     public static RoutingSubregion getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public RoutingSubregion getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private RoutingSubregion(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              size_ = input.readInt64();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              offset_ = input.readInt64();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              basemap_ = input.readBool();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              left_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              right_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              top_ = input.readInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              bottom_ = input.readInt32();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000080;
+              shifToData_ = input.readUInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<RoutingSubregion> PARSER =
+        new com.google.protobuf.AbstractParser<RoutingSubregion>() {
+      public RoutingSubregion parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new RoutingSubregion(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RoutingSubregion> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
     // required int64 size = 1;
     public static final int SIZE_FIELD_NUMBER = 1;
-    private boolean hasSize;
-    private long size_ = 0L;
-    public boolean hasSize() { return hasSize; }
-    public long getSize() { return size_; }
-    
+    private long size_;
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    public boolean hasSize() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    public long getSize() {
+      return size_;
+    }
+
     // required int64 offset = 2;
     public static final int OFFSET_FIELD_NUMBER = 2;
-    private boolean hasOffset;
-    private long offset_ = 0L;
-    public boolean hasOffset() { return hasOffset; }
-    public long getOffset() { return offset_; }
-    
+    private long offset_;
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    public boolean hasOffset() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    public long getOffset() {
+      return offset_;
+    }
+
     // optional bool basemap = 3;
     public static final int BASEMAP_FIELD_NUMBER = 3;
-    private boolean hasBasemap;
-    private boolean basemap_ = false;
-    public boolean hasBasemap() { return hasBasemap; }
-    public boolean getBasemap() { return basemap_; }
-    
+    private boolean basemap_;
+    /**
+     * <code>optional bool basemap = 3;</code>
+     */
+    public boolean hasBasemap() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional bool basemap = 3;</code>
+     */
+    public boolean getBasemap() {
+      return basemap_;
+    }
+
     // required int32 left = 4;
     public static final int LEFT_FIELD_NUMBER = 4;
-    private boolean hasLeft;
-    private int left_ = 0;
-    public boolean hasLeft() { return hasLeft; }
-    public int getLeft() { return left_; }
-    
+    private int left_;
+    /**
+     * <code>required int32 left = 4;</code>
+     */
+    public boolean hasLeft() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required int32 left = 4;</code>
+     */
+    public int getLeft() {
+      return left_;
+    }
+
     // required int32 right = 5;
     public static final int RIGHT_FIELD_NUMBER = 5;
-    private boolean hasRight;
-    private int right_ = 0;
-    public boolean hasRight() { return hasRight; }
-    public int getRight() { return right_; }
-    
+    private int right_;
+    /**
+     * <code>required int32 right = 5;</code>
+     */
+    public boolean hasRight() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required int32 right = 5;</code>
+     */
+    public int getRight() {
+      return right_;
+    }
+
     // required int32 top = 6;
     public static final int TOP_FIELD_NUMBER = 6;
-    private boolean hasTop;
-    private int top_ = 0;
-    public boolean hasTop() { return hasTop; }
-    public int getTop() { return top_; }
-    
+    private int top_;
+    /**
+     * <code>required int32 top = 6;</code>
+     */
+    public boolean hasTop() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>required int32 top = 6;</code>
+     */
+    public int getTop() {
+      return top_;
+    }
+
     // required int32 bottom = 7;
     public static final int BOTTOM_FIELD_NUMBER = 7;
-    private boolean hasBottom;
-    private int bottom_ = 0;
-    public boolean hasBottom() { return hasBottom; }
-    public int getBottom() { return bottom_; }
-    
+    private int bottom_;
+    /**
+     * <code>required int32 bottom = 7;</code>
+     */
+    public boolean hasBottom() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>required int32 bottom = 7;</code>
+     */
+    public int getBottom() {
+      return bottom_;
+    }
+
     // required uint32 shifToData = 8;
     public static final int SHIFTODATA_FIELD_NUMBER = 8;
-    private boolean hasShifToData;
-    private int shifToData_ = 0;
-    public boolean hasShifToData() { return hasShifToData; }
-    public int getShifToData() { return shifToData_; }
-    
-    private void initFields() {
+    private int shifToData_;
+    /**
+     * <code>required uint32 shifToData = 8;</code>
+     */
+    public boolean hasShifToData() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
+    /**
+     * <code>required uint32 shifToData = 8;</code>
+     */
+    public int getShifToData() {
+      return shifToData_;
+    }
+
+    private void initFields() {
+      size_ = 0L;
+      offset_ = 0L;
+      basemap_ = false;
+      left_ = 0;
+      right_ = 0;
+      top_ = 0;
+      bottom_ = 0;
+      shifToData_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
-      if (!hasSize) return false;
-      if (!hasOffset) return false;
-      if (!hasLeft) return false;
-      if (!hasRight) return false;
-      if (!hasTop) return false;
-      if (!hasBottom) return false;
-      if (!hasShifToData) return false;
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasSize()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasOffset()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasLeft()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasRight()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasTop()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasBottom()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasShifToData()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (hasSize()) {
-        output.writeInt64(1, getSize());
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt64(1, size_);
       }
-      if (hasOffset()) {
-        output.writeInt64(2, getOffset());
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, offset_);
       }
-      if (hasBasemap()) {
-        output.writeBool(3, getBasemap());
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBool(3, basemap_);
       }
-      if (hasLeft()) {
-        output.writeInt32(4, getLeft());
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, left_);
       }
-      if (hasRight()) {
-        output.writeInt32(5, getRight());
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, right_);
       }
-      if (hasTop()) {
-        output.writeInt32(6, getTop());
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(6, top_);
       }
-      if (hasBottom()) {
-        output.writeInt32(7, getBottom());
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(7, bottom_);
       }
-      if (hasShifToData()) {
-        output.writeUInt32(8, getShifToData());
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeUInt32(8, shifToData_);
       }
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
-      if (hasSize()) {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, getSize());
+          .computeInt64Size(1, size_);
       }
-      if (hasOffset()) {
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, getOffset());
+          .computeInt64Size(2, offset_);
       }
-      if (hasBasemap()) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(3, getBasemap());
+          .computeBoolSize(3, basemap_);
       }
-      if (hasLeft()) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, getLeft());
+          .computeInt32Size(4, left_);
       }
-      if (hasRight()) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, getRight());
+          .computeInt32Size(5, right_);
       }
-      if (hasTop()) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, getTop());
+          .computeInt32Size(6, top_);
       }
-      if (hasBottom()) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, getBottom());
+          .computeInt32Size(7, bottom_);
       }
-      if (hasShifToData()) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(8, getShifToData());
+          .computeUInt32Size(8, shifToData_);
       }
       memoizedSerializedSize = size;
       return size;
     }
-    
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
     public static net.osmand.binary.OsmandIndex.RoutingSubregion parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static net.osmand.binary.OsmandIndex.RoutingSubregion parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.RoutingSubregion parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static net.osmand.binary.OsmandIndex.RoutingSubregion parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.RoutingSubregion parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.RoutingSubregion parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.RoutingSubregion parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.RoutingSubregion parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.RoutingSubregion parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.RoutingSubregion parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandIndex.RoutingSubregion prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
+    /**
+     * Protobuf type {@code OsmAnd.OBF.RoutingSubregion}
+     */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          net.osmand.binary.OsmandIndex.RoutingSubregion, Builder> {
-      private net.osmand.binary.OsmandIndex.RoutingSubregion result;
-      
+          net.osmand.binary.OsmandIndex.RoutingSubregion, Builder>
+        implements net.osmand.binary.OsmandIndex.RoutingSubregionOrBuilder {
       // Construct using net.osmand.binary.OsmandIndex.RoutingSubregion.newBuilder()
-      private Builder() {}
-      
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
       private static Builder create() {
-        Builder builder = new Builder();
-        builder.result = new net.osmand.binary.OsmandIndex.RoutingSubregion();
-        return builder;
+        return new Builder();
       }
-      
-      protected net.osmand.binary.OsmandIndex.RoutingSubregion internalGetResult() {
-        return result;
-      }
-      
+
       public Builder clear() {
-        if (result == null) {
-          throw new IllegalStateException(
-            "Cannot call clear() after build().");
-        }
-        result = new net.osmand.binary.OsmandIndex.RoutingSubregion();
+        super.clear();
+        size_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        offset_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        basemap_ = false;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        left_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        right_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        top_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        bottom_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        shifToData_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
-      
+
       public Builder clone() {
-        return create().mergeFrom(result);
+        return create().mergeFrom(buildPartial());
       }
-      
+
       public net.osmand.binary.OsmandIndex.RoutingSubregion getDefaultInstanceForType() {
         return net.osmand.binary.OsmandIndex.RoutingSubregion.getDefaultInstance();
       }
-      
-      public boolean isInitialized() {
-        return result.isInitialized();
-      }
+
       public net.osmand.binary.OsmandIndex.RoutingSubregion build() {
-        if (result != null && !isInitialized()) {
+        net.osmand.binary.OsmandIndex.RoutingSubregion result = buildPartial();
+        if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
-        return buildPartial();
+        return result;
       }
-      
-      private net.osmand.binary.OsmandIndex.RoutingSubregion buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        if (!isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return buildPartial();
-      }
-      
+
       public net.osmand.binary.OsmandIndex.RoutingSubregion buildPartial() {
-        if (result == null) {
-          throw new IllegalStateException(
-            "build() has already been called on this Builder.");
+        net.osmand.binary.OsmandIndex.RoutingSubregion result = new net.osmand.binary.OsmandIndex.RoutingSubregion(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
         }
-        net.osmand.binary.OsmandIndex.RoutingSubregion returnMe = result;
-        result = null;
-        return returnMe;
+        result.size_ = size_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.offset_ = offset_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.basemap_ = basemap_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.left_ = left_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.right_ = right_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.top_ = top_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.bottom_ = bottom_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.shifToData_ = shifToData_;
+        result.bitField0_ = to_bitField0_;
+        return result;
       }
-      
+
       public Builder mergeFrom(net.osmand.binary.OsmandIndex.RoutingSubregion other) {
         if (other == net.osmand.binary.OsmandIndex.RoutingSubregion.getDefaultInstance()) return this;
         if (other.hasSize()) {
@@ -3900,461 +7577,804 @@ public final class OsmandIndex {
         }
         return this;
       }
-      
+
+      public final boolean isInitialized() {
+        if (!hasSize()) {
+          
+          return false;
+        }
+        if (!hasOffset()) {
+          
+          return false;
+        }
+        if (!hasLeft()) {
+          
+          return false;
+        }
+        if (!hasRight()) {
+          
+          return false;
+        }
+        if (!hasTop()) {
+          
+          return false;
+        }
+        if (!hasBottom()) {
+          
+          return false;
+        }
+        if (!hasShifToData()) {
+          
+          return false;
+        }
+        return true;
+      }
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              return this;
-            default: {
-              if (!parseUnknownField(input, extensionRegistry, tag)) {
-                return this;
-              }
-              break;
-            }
-            case 8: {
-              setSize(input.readInt64());
-              break;
-            }
-            case 16: {
-              setOffset(input.readInt64());
-              break;
-            }
-            case 24: {
-              setBasemap(input.readBool());
-              break;
-            }
-            case 32: {
-              setLeft(input.readInt32());
-              break;
-            }
-            case 40: {
-              setRight(input.readInt32());
-              break;
-            }
-            case 48: {
-              setTop(input.readInt32());
-              break;
-            }
-            case 56: {
-              setBottom(input.readInt32());
-              break;
-            }
-            case 64: {
-              setShifToData(input.readUInt32());
-              break;
-            }
+        net.osmand.binary.OsmandIndex.RoutingSubregion parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (net.osmand.binary.OsmandIndex.RoutingSubregion) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
-      
+      private int bitField0_;
+
       // required int64 size = 1;
+      private long size_ ;
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public boolean hasSize() {
-        return result.hasSize();
+        return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public long getSize() {
-        return result.getSize();
+        return size_;
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public Builder setSize(long value) {
-        result.hasSize = true;
-        result.size_ = value;
+        bitField0_ |= 0x00000001;
+        size_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public Builder clearSize() {
-        result.hasSize = false;
-        result.size_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        size_ = 0L;
+        
         return this;
       }
-      
+
       // required int64 offset = 2;
+      private long offset_ ;
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public boolean hasOffset() {
-        return result.hasOffset();
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public long getOffset() {
-        return result.getOffset();
+        return offset_;
       }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public Builder setOffset(long value) {
-        result.hasOffset = true;
-        result.offset_ = value;
+        bitField0_ |= 0x00000002;
+        offset_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public Builder clearOffset() {
-        result.hasOffset = false;
-        result.offset_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        offset_ = 0L;
+        
         return this;
       }
-      
+
       // optional bool basemap = 3;
+      private boolean basemap_ ;
+      /**
+       * <code>optional bool basemap = 3;</code>
+       */
       public boolean hasBasemap() {
-        return result.hasBasemap();
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
+      /**
+       * <code>optional bool basemap = 3;</code>
+       */
       public boolean getBasemap() {
-        return result.getBasemap();
+        return basemap_;
       }
+      /**
+       * <code>optional bool basemap = 3;</code>
+       */
       public Builder setBasemap(boolean value) {
-        result.hasBasemap = true;
-        result.basemap_ = value;
+        bitField0_ |= 0x00000004;
+        basemap_ = value;
+        
         return this;
       }
+      /**
+       * <code>optional bool basemap = 3;</code>
+       */
       public Builder clearBasemap() {
-        result.hasBasemap = false;
-        result.basemap_ = false;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        basemap_ = false;
+        
         return this;
       }
-      
+
       // required int32 left = 4;
+      private int left_ ;
+      /**
+       * <code>required int32 left = 4;</code>
+       */
       public boolean hasLeft() {
-        return result.hasLeft();
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
+      /**
+       * <code>required int32 left = 4;</code>
+       */
       public int getLeft() {
-        return result.getLeft();
+        return left_;
       }
+      /**
+       * <code>required int32 left = 4;</code>
+       */
       public Builder setLeft(int value) {
-        result.hasLeft = true;
-        result.left_ = value;
+        bitField0_ |= 0x00000008;
+        left_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int32 left = 4;</code>
+       */
       public Builder clearLeft() {
-        result.hasLeft = false;
-        result.left_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        left_ = 0;
+        
         return this;
       }
-      
+
       // required int32 right = 5;
+      private int right_ ;
+      /**
+       * <code>required int32 right = 5;</code>
+       */
       public boolean hasRight() {
-        return result.hasRight();
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
+      /**
+       * <code>required int32 right = 5;</code>
+       */
       public int getRight() {
-        return result.getRight();
+        return right_;
       }
+      /**
+       * <code>required int32 right = 5;</code>
+       */
       public Builder setRight(int value) {
-        result.hasRight = true;
-        result.right_ = value;
+        bitField0_ |= 0x00000010;
+        right_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int32 right = 5;</code>
+       */
       public Builder clearRight() {
-        result.hasRight = false;
-        result.right_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        right_ = 0;
+        
         return this;
       }
-      
+
       // required int32 top = 6;
+      private int top_ ;
+      /**
+       * <code>required int32 top = 6;</code>
+       */
       public boolean hasTop() {
-        return result.hasTop();
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
+      /**
+       * <code>required int32 top = 6;</code>
+       */
       public int getTop() {
-        return result.getTop();
+        return top_;
       }
+      /**
+       * <code>required int32 top = 6;</code>
+       */
       public Builder setTop(int value) {
-        result.hasTop = true;
-        result.top_ = value;
+        bitField0_ |= 0x00000020;
+        top_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int32 top = 6;</code>
+       */
       public Builder clearTop() {
-        result.hasTop = false;
-        result.top_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        top_ = 0;
+        
         return this;
       }
-      
+
       // required int32 bottom = 7;
+      private int bottom_ ;
+      /**
+       * <code>required int32 bottom = 7;</code>
+       */
       public boolean hasBottom() {
-        return result.hasBottom();
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
+      /**
+       * <code>required int32 bottom = 7;</code>
+       */
       public int getBottom() {
-        return result.getBottom();
+        return bottom_;
       }
+      /**
+       * <code>required int32 bottom = 7;</code>
+       */
       public Builder setBottom(int value) {
-        result.hasBottom = true;
-        result.bottom_ = value;
+        bitField0_ |= 0x00000040;
+        bottom_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int32 bottom = 7;</code>
+       */
       public Builder clearBottom() {
-        result.hasBottom = false;
-        result.bottom_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        bottom_ = 0;
+        
         return this;
       }
-      
+
       // required uint32 shifToData = 8;
+      private int shifToData_ ;
+      /**
+       * <code>required uint32 shifToData = 8;</code>
+       */
       public boolean hasShifToData() {
-        return result.hasShifToData();
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
+      /**
+       * <code>required uint32 shifToData = 8;</code>
+       */
       public int getShifToData() {
-        return result.getShifToData();
+        return shifToData_;
       }
+      /**
+       * <code>required uint32 shifToData = 8;</code>
+       */
       public Builder setShifToData(int value) {
-        result.hasShifToData = true;
-        result.shifToData_ = value;
+        bitField0_ |= 0x00000080;
+        shifToData_ = value;
+        
         return this;
       }
+      /**
+       * <code>required uint32 shifToData = 8;</code>
+       */
       public Builder clearShifToData() {
-        result.hasShifToData = false;
-        result.shifToData_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        shifToData_ = 0;
+        
         return this;
       }
-      
-      // @@protoc_insertion_point(builder_scope:RoutingSubregion)
+
+      // @@protoc_insertion_point(builder_scope:OsmAnd.OBF.RoutingSubregion)
     }
-    
+
     static {
       defaultInstance = new RoutingSubregion(true);
-      net.osmand.binary.OsmandIndex.internalForceInit();
       defaultInstance.initFields();
     }
-    
-    // @@protoc_insertion_point(class_scope:RoutingSubregion)
+
+    // @@protoc_insertion_point(class_scope:OsmAnd.OBF.RoutingSubregion)
   }
-  
+
+  public interface RoutingPartOrBuilder
+      extends com.google.protobuf.MessageLiteOrBuilder {
+
+    // required int64 size = 1;
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    boolean hasSize();
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    long getSize();
+
+    // required int64 offset = 2;
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    boolean hasOffset();
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    long getOffset();
+
+    // optional string name = 3;
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    boolean hasName();
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    // repeated .OsmAnd.OBF.RoutingSubregion subregions = 5;
+    /**
+     * <code>repeated .OsmAnd.OBF.RoutingSubregion subregions = 5;</code>
+     */
+    java.util.List<net.osmand.binary.OsmandIndex.RoutingSubregion> 
+        getSubregionsList();
+    /**
+     * <code>repeated .OsmAnd.OBF.RoutingSubregion subregions = 5;</code>
+     */
+    net.osmand.binary.OsmandIndex.RoutingSubregion getSubregions(int index);
+    /**
+     * <code>repeated .OsmAnd.OBF.RoutingSubregion subregions = 5;</code>
+     */
+    int getSubregionsCount();
+  }
+  /**
+   * Protobuf type {@code OsmAnd.OBF.RoutingPart}
+   */
   public static final class RoutingPart extends
-      com.google.protobuf.GeneratedMessageLite {
+      com.google.protobuf.GeneratedMessageLite
+      implements RoutingPartOrBuilder {
     // Use RoutingPart.newBuilder() to construct.
-    private RoutingPart() {
-      initFields();
+    private RoutingPart(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+
     }
     private RoutingPart(boolean noInit) {}
-    
+
     private static final RoutingPart defaultInstance;
     public static RoutingPart getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public RoutingPart getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private RoutingPart(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              size_ = input.readInt64();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              offset_ = input.readInt64();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              name_ = input.readBytes();
+              break;
+            }
+            case 42: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                subregions_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.RoutingSubregion>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              subregions_.add(input.readMessage(net.osmand.binary.OsmandIndex.RoutingSubregion.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          subregions_ = java.util.Collections.unmodifiableList(subregions_);
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<RoutingPart> PARSER =
+        new com.google.protobuf.AbstractParser<RoutingPart>() {
+      public RoutingPart parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new RoutingPart(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RoutingPart> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
     // required int64 size = 1;
     public static final int SIZE_FIELD_NUMBER = 1;
-    private boolean hasSize;
-    private long size_ = 0L;
-    public boolean hasSize() { return hasSize; }
-    public long getSize() { return size_; }
-    
+    private long size_;
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    public boolean hasSize() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    public long getSize() {
+      return size_;
+    }
+
     // required int64 offset = 2;
     public static final int OFFSET_FIELD_NUMBER = 2;
-    private boolean hasOffset;
-    private long offset_ = 0L;
-    public boolean hasOffset() { return hasOffset; }
-    public long getOffset() { return offset_; }
-    
+    private long offset_;
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    public boolean hasOffset() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    public long getOffset() {
+      return offset_;
+    }
+
     // optional string name = 3;
     public static final int NAME_FIELD_NUMBER = 3;
-    private boolean hasName;
-    private java.lang.String name_ = "";
-    public boolean hasName() { return hasName; }
-    public java.lang.String getName() { return name_; }
-    
-    // repeated .RoutingSubregion subregions = 5;
+    private java.lang.Object name_;
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    public boolean hasName() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          name_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // repeated .OsmAnd.OBF.RoutingSubregion subregions = 5;
     public static final int SUBREGIONS_FIELD_NUMBER = 5;
-    private java.util.List<net.osmand.binary.OsmandIndex.RoutingSubregion> subregions_ =
-      java.util.Collections.emptyList();
+    private java.util.List<net.osmand.binary.OsmandIndex.RoutingSubregion> subregions_;
+    /**
+     * <code>repeated .OsmAnd.OBF.RoutingSubregion subregions = 5;</code>
+     */
     public java.util.List<net.osmand.binary.OsmandIndex.RoutingSubregion> getSubregionsList() {
       return subregions_;
     }
-    public int getSubregionsCount() { return subregions_.size(); }
+    /**
+     * <code>repeated .OsmAnd.OBF.RoutingSubregion subregions = 5;</code>
+     */
+    public java.util.List<? extends net.osmand.binary.OsmandIndex.RoutingSubregionOrBuilder> 
+        getSubregionsOrBuilderList() {
+      return subregions_;
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.RoutingSubregion subregions = 5;</code>
+     */
+    public int getSubregionsCount() {
+      return subregions_.size();
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.RoutingSubregion subregions = 5;</code>
+     */
     public net.osmand.binary.OsmandIndex.RoutingSubregion getSubregions(int index) {
       return subregions_.get(index);
     }
-    
-    private void initFields() {
+    /**
+     * <code>repeated .OsmAnd.OBF.RoutingSubregion subregions = 5;</code>
+     */
+    public net.osmand.binary.OsmandIndex.RoutingSubregionOrBuilder getSubregionsOrBuilder(
+        int index) {
+      return subregions_.get(index);
     }
+
+    private void initFields() {
+      size_ = 0L;
+      offset_ = 0L;
+      name_ = "";
+      subregions_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
-      if (!hasSize) return false;
-      if (!hasOffset) return false;
-      for (net.osmand.binary.OsmandIndex.RoutingSubregion element : getSubregionsList()) {
-        if (!element.isInitialized()) return false;
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasSize()) {
+        memoizedIsInitialized = 0;
+        return false;
       }
+      if (!hasOffset()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      for (int i = 0; i < getSubregionsCount(); i++) {
+        if (!getSubregions(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (hasSize()) {
-        output.writeInt64(1, getSize());
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt64(1, size_);
       }
-      if (hasOffset()) {
-        output.writeInt64(2, getOffset());
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, offset_);
       }
-      if (hasName()) {
-        output.writeString(3, getName());
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getNameBytes());
       }
-      for (net.osmand.binary.OsmandIndex.RoutingSubregion element : getSubregionsList()) {
-        output.writeMessage(5, element);
+      for (int i = 0; i < subregions_.size(); i++) {
+        output.writeMessage(5, subregions_.get(i));
       }
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
-      if (hasSize()) {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, getSize());
+          .computeInt64Size(1, size_);
       }
-      if (hasOffset()) {
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, getOffset());
+          .computeInt64Size(2, offset_);
       }
-      if (hasName()) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(3, getName());
+          .computeBytesSize(3, getNameBytes());
       }
-      for (net.osmand.binary.OsmandIndex.RoutingSubregion element : getSubregionsList()) {
+      for (int i = 0; i < subregions_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, element);
+          .computeMessageSize(5, subregions_.get(i));
       }
       memoizedSerializedSize = size;
       return size;
     }
-    
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
     public static net.osmand.binary.OsmandIndex.RoutingPart parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static net.osmand.binary.OsmandIndex.RoutingPart parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.RoutingPart parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static net.osmand.binary.OsmandIndex.RoutingPart parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.RoutingPart parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.RoutingPart parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.RoutingPart parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.RoutingPart parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.RoutingPart parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.RoutingPart parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandIndex.RoutingPart prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
+    /**
+     * Protobuf type {@code OsmAnd.OBF.RoutingPart}
+     */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          net.osmand.binary.OsmandIndex.RoutingPart, Builder> {
-      private net.osmand.binary.OsmandIndex.RoutingPart result;
-      
+          net.osmand.binary.OsmandIndex.RoutingPart, Builder>
+        implements net.osmand.binary.OsmandIndex.RoutingPartOrBuilder {
       // Construct using net.osmand.binary.OsmandIndex.RoutingPart.newBuilder()
-      private Builder() {}
-      
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
       private static Builder create() {
-        Builder builder = new Builder();
-        builder.result = new net.osmand.binary.OsmandIndex.RoutingPart();
-        return builder;
+        return new Builder();
       }
-      
-      protected net.osmand.binary.OsmandIndex.RoutingPart internalGetResult() {
-        return result;
-      }
-      
+
       public Builder clear() {
-        if (result == null) {
-          throw new IllegalStateException(
-            "Cannot call clear() after build().");
-        }
-        result = new net.osmand.binary.OsmandIndex.RoutingPart();
+        super.clear();
+        size_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        offset_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        name_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        subregions_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
-      
+
       public Builder clone() {
-        return create().mergeFrom(result);
+        return create().mergeFrom(buildPartial());
       }
-      
+
       public net.osmand.binary.OsmandIndex.RoutingPart getDefaultInstanceForType() {
         return net.osmand.binary.OsmandIndex.RoutingPart.getDefaultInstance();
       }
-      
-      public boolean isInitialized() {
-        return result.isInitialized();
-      }
+
       public net.osmand.binary.OsmandIndex.RoutingPart build() {
-        if (result != null && !isInitialized()) {
+        net.osmand.binary.OsmandIndex.RoutingPart result = buildPartial();
+        if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
-        return buildPartial();
+        return result;
       }
-      
-      private net.osmand.binary.OsmandIndex.RoutingPart buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        if (!isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return buildPartial();
-      }
-      
+
       public net.osmand.binary.OsmandIndex.RoutingPart buildPartial() {
-        if (result == null) {
-          throw new IllegalStateException(
-            "build() has already been called on this Builder.");
+        net.osmand.binary.OsmandIndex.RoutingPart result = new net.osmand.binary.OsmandIndex.RoutingPart(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
         }
-        if (result.subregions_ != java.util.Collections.EMPTY_LIST) {
-          result.subregions_ =
-            java.util.Collections.unmodifiableList(result.subregions_);
+        result.size_ = size_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
         }
-        net.osmand.binary.OsmandIndex.RoutingPart returnMe = result;
-        result = null;
-        return returnMe;
+        result.offset_ = offset_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.name_ = name_;
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          subregions_ = java.util.Collections.unmodifiableList(subregions_);
+          bitField0_ = (bitField0_ & ~0x00000008);
+        }
+        result.subregions_ = subregions_;
+        result.bitField0_ = to_bitField0_;
+        return result;
       }
-      
+
       public Builder mergeFrom(net.osmand.binary.OsmandIndex.RoutingPart other) {
         if (other == net.osmand.binary.OsmandIndex.RoutingPart.getDefaultInstance()) return this;
         if (other.hasSize()) {
@@ -4364,507 +8384,1174 @@ public final class OsmandIndex {
           setOffset(other.getOffset());
         }
         if (other.hasName()) {
-          setName(other.getName());
+          bitField0_ |= 0x00000004;
+          name_ = other.name_;
+          
         }
         if (!other.subregions_.isEmpty()) {
-          if (result.subregions_.isEmpty()) {
-            result.subregions_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.RoutingSubregion>();
+          if (subregions_.isEmpty()) {
+            subregions_ = other.subregions_;
+            bitField0_ = (bitField0_ & ~0x00000008);
+          } else {
+            ensureSubregionsIsMutable();
+            subregions_.addAll(other.subregions_);
           }
-          result.subregions_.addAll(other.subregions_);
+          
         }
         return this;
       }
-      
+
+      public final boolean isInitialized() {
+        if (!hasSize()) {
+          
+          return false;
+        }
+        if (!hasOffset()) {
+          
+          return false;
+        }
+        for (int i = 0; i < getSubregionsCount(); i++) {
+          if (!getSubregions(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              return this;
-            default: {
-              if (!parseUnknownField(input, extensionRegistry, tag)) {
-                return this;
-              }
-              break;
-            }
-            case 8: {
-              setSize(input.readInt64());
-              break;
-            }
-            case 16: {
-              setOffset(input.readInt64());
-              break;
-            }
-            case 26: {
-              setName(input.readString());
-              break;
-            }
-            case 42: {
-              net.osmand.binary.OsmandIndex.RoutingSubregion.Builder subBuilder = net.osmand.binary.OsmandIndex.RoutingSubregion.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addSubregions(subBuilder.buildPartial());
-              break;
-            }
+        net.osmand.binary.OsmandIndex.RoutingPart parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (net.osmand.binary.OsmandIndex.RoutingPart) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
-      
+      private int bitField0_;
+
       // required int64 size = 1;
+      private long size_ ;
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public boolean hasSize() {
-        return result.hasSize();
+        return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public long getSize() {
-        return result.getSize();
+        return size_;
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public Builder setSize(long value) {
-        result.hasSize = true;
-        result.size_ = value;
+        bitField0_ |= 0x00000001;
+        size_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public Builder clearSize() {
-        result.hasSize = false;
-        result.size_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        size_ = 0L;
+        
         return this;
       }
-      
+
       // required int64 offset = 2;
+      private long offset_ ;
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public boolean hasOffset() {
-        return result.hasOffset();
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public long getOffset() {
-        return result.getOffset();
+        return offset_;
       }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public Builder setOffset(long value) {
-        result.hasOffset = true;
-        result.offset_ = value;
+        bitField0_ |= 0x00000002;
+        offset_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public Builder clearOffset() {
-        result.hasOffset = false;
-        result.offset_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        offset_ = 0L;
+        
         return this;
       }
-      
+
       // optional string name = 3;
+      private java.lang.Object name_ = "";
+      /**
+       * <code>optional string name = 3;</code>
+       */
       public boolean hasName() {
-        return result.hasName();
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
+      /**
+       * <code>optional string name = 3;</code>
+       */
       public java.lang.String getName() {
-        return result.getName();
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          name_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
-      public Builder setName(java.lang.String value) {
+      /**
+       * <code>optional string name = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 3;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  result.hasName = true;
-        result.name_ = value;
+  bitField0_ |= 0x00000004;
+        name_ = value;
+        
         return this;
       }
+      /**
+       * <code>optional string name = 3;</code>
+       */
       public Builder clearName() {
-        result.hasName = false;
-        result.name_ = getDefaultInstance().getName();
+        bitField0_ = (bitField0_ & ~0x00000004);
+        name_ = getDefaultInstance().getName();
+        
         return this;
       }
-      
-      // repeated .RoutingSubregion subregions = 5;
+      /**
+       * <code>optional string name = 3;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        name_ = value;
+        
+        return this;
+      }
+
+      // repeated .OsmAnd.OBF.RoutingSubregion subregions = 5;
+      private java.util.List<net.osmand.binary.OsmandIndex.RoutingSubregion> subregions_ =
+        java.util.Collections.emptyList();
+      private void ensureSubregionsIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          subregions_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.RoutingSubregion>(subregions_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+
+      /**
+       * <code>repeated .OsmAnd.OBF.RoutingSubregion subregions = 5;</code>
+       */
       public java.util.List<net.osmand.binary.OsmandIndex.RoutingSubregion> getSubregionsList() {
-        return java.util.Collections.unmodifiableList(result.subregions_);
+        return java.util.Collections.unmodifiableList(subregions_);
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.RoutingSubregion subregions = 5;</code>
+       */
       public int getSubregionsCount() {
-        return result.getSubregionsCount();
+        return subregions_.size();
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.RoutingSubregion subregions = 5;</code>
+       */
       public net.osmand.binary.OsmandIndex.RoutingSubregion getSubregions(int index) {
-        return result.getSubregions(index);
+        return subregions_.get(index);
       }
-      public Builder setSubregions(int index, net.osmand.binary.OsmandIndex.RoutingSubregion value) {
+      /**
+       * <code>repeated .OsmAnd.OBF.RoutingSubregion subregions = 5;</code>
+       */
+      public Builder setSubregions(
+          int index, net.osmand.binary.OsmandIndex.RoutingSubregion value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        result.subregions_.set(index, value);
+        ensureSubregionsIsMutable();
+        subregions_.set(index, value);
+
         return this;
       }
-      public Builder setSubregions(int index, net.osmand.binary.OsmandIndex.RoutingSubregion.Builder builderForValue) {
-        result.subregions_.set(index, builderForValue.build());
+      /**
+       * <code>repeated .OsmAnd.OBF.RoutingSubregion subregions = 5;</code>
+       */
+      public Builder setSubregions(
+          int index, net.osmand.binary.OsmandIndex.RoutingSubregion.Builder builderForValue) {
+        ensureSubregionsIsMutable();
+        subregions_.set(index, builderForValue.build());
+
         return this;
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.RoutingSubregion subregions = 5;</code>
+       */
       public Builder addSubregions(net.osmand.binary.OsmandIndex.RoutingSubregion value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        if (result.subregions_.isEmpty()) {
-          result.subregions_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.RoutingSubregion>();
-        }
-        result.subregions_.add(value);
+        ensureSubregionsIsMutable();
+        subregions_.add(value);
+
         return this;
       }
-      public Builder addSubregions(net.osmand.binary.OsmandIndex.RoutingSubregion.Builder builderForValue) {
-        if (result.subregions_.isEmpty()) {
-          result.subregions_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.RoutingSubregion>();
+      /**
+       * <code>repeated .OsmAnd.OBF.RoutingSubregion subregions = 5;</code>
+       */
+      public Builder addSubregions(
+          int index, net.osmand.binary.OsmandIndex.RoutingSubregion value) {
+        if (value == null) {
+          throw new NullPointerException();
         }
-        result.subregions_.add(builderForValue.build());
+        ensureSubregionsIsMutable();
+        subregions_.add(index, value);
+
         return this;
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.RoutingSubregion subregions = 5;</code>
+       */
+      public Builder addSubregions(
+          net.osmand.binary.OsmandIndex.RoutingSubregion.Builder builderForValue) {
+        ensureSubregionsIsMutable();
+        subregions_.add(builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.RoutingSubregion subregions = 5;</code>
+       */
+      public Builder addSubregions(
+          int index, net.osmand.binary.OsmandIndex.RoutingSubregion.Builder builderForValue) {
+        ensureSubregionsIsMutable();
+        subregions_.add(index, builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.RoutingSubregion subregions = 5;</code>
+       */
       public Builder addAllSubregions(
           java.lang.Iterable<? extends net.osmand.binary.OsmandIndex.RoutingSubregion> values) {
-        if (result.subregions_.isEmpty()) {
-          result.subregions_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.RoutingSubregion>();
-        }
-        super.addAll(values, result.subregions_);
+        ensureSubregionsIsMutable();
+        super.addAll(values, subregions_);
+
         return this;
       }
+      /**
+       * <code>repeated .OsmAnd.OBF.RoutingSubregion subregions = 5;</code>
+       */
       public Builder clearSubregions() {
-        result.subregions_ = java.util.Collections.emptyList();
+        subregions_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000008);
+
         return this;
       }
-      
-      // @@protoc_insertion_point(builder_scope:RoutingPart)
+      /**
+       * <code>repeated .OsmAnd.OBF.RoutingSubregion subregions = 5;</code>
+       */
+      public Builder removeSubregions(int index) {
+        ensureSubregionsIsMutable();
+        subregions_.remove(index);
+
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:OsmAnd.OBF.RoutingPart)
     }
-    
+
     static {
       defaultInstance = new RoutingPart(true);
-      net.osmand.binary.OsmandIndex.internalForceInit();
       defaultInstance.initFields();
     }
-    
-    // @@protoc_insertion_point(class_scope:RoutingPart)
+
+    // @@protoc_insertion_point(class_scope:OsmAnd.OBF.RoutingPart)
   }
-  
+
+  public interface TransportPartOrBuilder
+      extends com.google.protobuf.MessageLiteOrBuilder {
+
+    // required int64 size = 1;
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    boolean hasSize();
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    long getSize();
+
+    // required int64 offset = 2;
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    boolean hasOffset();
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    long getOffset();
+
+    // optional string name = 3;
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    boolean hasName();
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    // optional int32 left = 4;
+    /**
+     * <code>optional int32 left = 4;</code>
+     */
+    boolean hasLeft();
+    /**
+     * <code>optional int32 left = 4;</code>
+     */
+    int getLeft();
+
+    // optional int32 right = 5;
+    /**
+     * <code>optional int32 right = 5;</code>
+     */
+    boolean hasRight();
+    /**
+     * <code>optional int32 right = 5;</code>
+     */
+    int getRight();
+
+    // optional int32 top = 6;
+    /**
+     * <code>optional int32 top = 6;</code>
+     */
+    boolean hasTop();
+    /**
+     * <code>optional int32 top = 6;</code>
+     */
+    int getTop();
+
+    // optional int32 bottom = 7;
+    /**
+     * <code>optional int32 bottom = 7;</code>
+     */
+    boolean hasBottom();
+    /**
+     * <code>optional int32 bottom = 7;</code>
+     */
+    int getBottom();
+
+    // optional uint32 stringTableOffset = 8;
+    /**
+     * <code>optional uint32 stringTableOffset = 8;</code>
+     */
+    boolean hasStringTableOffset();
+    /**
+     * <code>optional uint32 stringTableOffset = 8;</code>
+     */
+    int getStringTableOffset();
+
+    // optional uint32 stringTableLength = 9;
+    /**
+     * <code>optional uint32 stringTableLength = 9;</code>
+     */
+    boolean hasStringTableLength();
+    /**
+     * <code>optional uint32 stringTableLength = 9;</code>
+     */
+    int getStringTableLength();
+
+    // optional uint32 stopsTableOffset = 10;
+    /**
+     * <code>optional uint32 stopsTableOffset = 10;</code>
+     */
+    boolean hasStopsTableOffset();
+    /**
+     * <code>optional uint32 stopsTableOffset = 10;</code>
+     */
+    int getStopsTableOffset();
+
+    // optional uint32 stopsTableLength = 11;
+    /**
+     * <code>optional uint32 stopsTableLength = 11;</code>
+     */
+    boolean hasStopsTableLength();
+    /**
+     * <code>optional uint32 stopsTableLength = 11;</code>
+     */
+    int getStopsTableLength();
+
+    // optional uint32 incompleteRoutesOffset = 12;
+    /**
+     * <code>optional uint32 incompleteRoutesOffset = 12;</code>
+     */
+    boolean hasIncompleteRoutesOffset();
+    /**
+     * <code>optional uint32 incompleteRoutesOffset = 12;</code>
+     */
+    int getIncompleteRoutesOffset();
+
+    // optional uint32 incompleteRoutesLength = 13;
+    /**
+     * <code>optional uint32 incompleteRoutesLength = 13;</code>
+     */
+    boolean hasIncompleteRoutesLength();
+    /**
+     * <code>optional uint32 incompleteRoutesLength = 13;</code>
+     */
+    int getIncompleteRoutesLength();
+  }
+  /**
+   * Protobuf type {@code OsmAnd.OBF.TransportPart}
+   */
   public static final class TransportPart extends
-      com.google.protobuf.GeneratedMessageLite {
+      com.google.protobuf.GeneratedMessageLite
+      implements TransportPartOrBuilder {
     // Use TransportPart.newBuilder() to construct.
-    private TransportPart() {
-      initFields();
+    private TransportPart(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+
     }
     private TransportPart(boolean noInit) {}
-    
+
     private static final TransportPart defaultInstance;
     public static TransportPart getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public TransportPart getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private TransportPart(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              size_ = input.readInt64();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              offset_ = input.readInt64();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              name_ = input.readBytes();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              left_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              right_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              top_ = input.readInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              bottom_ = input.readInt32();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000080;
+              stringTableOffset_ = input.readUInt32();
+              break;
+            }
+            case 72: {
+              bitField0_ |= 0x00000100;
+              stringTableLength_ = input.readUInt32();
+              break;
+            }
+            case 80: {
+              bitField0_ |= 0x00000200;
+              stopsTableOffset_ = input.readUInt32();
+              break;
+            }
+            case 88: {
+              bitField0_ |= 0x00000400;
+              stopsTableLength_ = input.readUInt32();
+              break;
+            }
+            case 96: {
+              bitField0_ |= 0x00000800;
+              incompleteRoutesOffset_ = input.readUInt32();
+              break;
+            }
+            case 104: {
+              bitField0_ |= 0x00001000;
+              incompleteRoutesLength_ = input.readUInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<TransportPart> PARSER =
+        new com.google.protobuf.AbstractParser<TransportPart>() {
+      public TransportPart parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new TransportPart(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TransportPart> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
     // required int64 size = 1;
     public static final int SIZE_FIELD_NUMBER = 1;
-    private boolean hasSize;
-    private long size_ = 0L;
-    public boolean hasSize() { return hasSize; }
-    public long getSize() { return size_; }
-    
+    private long size_;
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    public boolean hasSize() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    public long getSize() {
+      return size_;
+    }
+
     // required int64 offset = 2;
     public static final int OFFSET_FIELD_NUMBER = 2;
-    private boolean hasOffset;
-    private long offset_ = 0L;
-    public boolean hasOffset() { return hasOffset; }
-    public long getOffset() { return offset_; }
-    
+    private long offset_;
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    public boolean hasOffset() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    public long getOffset() {
+      return offset_;
+    }
+
     // optional string name = 3;
     public static final int NAME_FIELD_NUMBER = 3;
-    private boolean hasName;
-    private java.lang.String name_ = "";
-    public boolean hasName() { return hasName; }
-    public java.lang.String getName() { return name_; }
-    
+    private java.lang.Object name_;
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    public boolean hasName() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          name_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     // optional int32 left = 4;
     public static final int LEFT_FIELD_NUMBER = 4;
-    private boolean hasLeft;
-    private int left_ = 0;
-    public boolean hasLeft() { return hasLeft; }
-    public int getLeft() { return left_; }
-    
+    private int left_;
+    /**
+     * <code>optional int32 left = 4;</code>
+     */
+    public boolean hasLeft() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 left = 4;</code>
+     */
+    public int getLeft() {
+      return left_;
+    }
+
     // optional int32 right = 5;
     public static final int RIGHT_FIELD_NUMBER = 5;
-    private boolean hasRight;
-    private int right_ = 0;
-    public boolean hasRight() { return hasRight; }
-    public int getRight() { return right_; }
-    
+    private int right_;
+    /**
+     * <code>optional int32 right = 5;</code>
+     */
+    public boolean hasRight() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int32 right = 5;</code>
+     */
+    public int getRight() {
+      return right_;
+    }
+
     // optional int32 top = 6;
     public static final int TOP_FIELD_NUMBER = 6;
-    private boolean hasTop;
-    private int top_ = 0;
-    public boolean hasTop() { return hasTop; }
-    public int getTop() { return top_; }
-    
+    private int top_;
+    /**
+     * <code>optional int32 top = 6;</code>
+     */
+    public boolean hasTop() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional int32 top = 6;</code>
+     */
+    public int getTop() {
+      return top_;
+    }
+
     // optional int32 bottom = 7;
     public static final int BOTTOM_FIELD_NUMBER = 7;
-    private boolean hasBottom;
-    private int bottom_ = 0;
-    public boolean hasBottom() { return hasBottom; }
-    public int getBottom() { return bottom_; }
-    
+    private int bottom_;
+    /**
+     * <code>optional int32 bottom = 7;</code>
+     */
+    public boolean hasBottom() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional int32 bottom = 7;</code>
+     */
+    public int getBottom() {
+      return bottom_;
+    }
+
     // optional uint32 stringTableOffset = 8;
     public static final int STRINGTABLEOFFSET_FIELD_NUMBER = 8;
-    private boolean hasStringTableOffset;
-    private int stringTableOffset_ = 0;
-    public boolean hasStringTableOffset() { return hasStringTableOffset; }
-    public int getStringTableOffset() { return stringTableOffset_; }
-    
+    private int stringTableOffset_;
+    /**
+     * <code>optional uint32 stringTableOffset = 8;</code>
+     */
+    public boolean hasStringTableOffset() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional uint32 stringTableOffset = 8;</code>
+     */
+    public int getStringTableOffset() {
+      return stringTableOffset_;
+    }
+
     // optional uint32 stringTableLength = 9;
     public static final int STRINGTABLELENGTH_FIELD_NUMBER = 9;
-    private boolean hasStringTableLength;
-    private int stringTableLength_ = 0;
-    public boolean hasStringTableLength() { return hasStringTableLength; }
-    public int getStringTableLength() { return stringTableLength_; }
-    
+    private int stringTableLength_;
+    /**
+     * <code>optional uint32 stringTableLength = 9;</code>
+     */
+    public boolean hasStringTableLength() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional uint32 stringTableLength = 9;</code>
+     */
+    public int getStringTableLength() {
+      return stringTableLength_;
+    }
+
     // optional uint32 stopsTableOffset = 10;
     public static final int STOPSTABLEOFFSET_FIELD_NUMBER = 10;
-    private boolean hasStopsTableOffset;
-    private int stopsTableOffset_ = 0;
-    public boolean hasStopsTableOffset() { return hasStopsTableOffset; }
-    public int getStopsTableOffset() { return stopsTableOffset_; }
-    
+    private int stopsTableOffset_;
+    /**
+     * <code>optional uint32 stopsTableOffset = 10;</code>
+     */
+    public boolean hasStopsTableOffset() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>optional uint32 stopsTableOffset = 10;</code>
+     */
+    public int getStopsTableOffset() {
+      return stopsTableOffset_;
+    }
+
     // optional uint32 stopsTableLength = 11;
     public static final int STOPSTABLELENGTH_FIELD_NUMBER = 11;
-    private boolean hasStopsTableLength;
-    private int stopsTableLength_ = 0;
-    public boolean hasStopsTableLength() { return hasStopsTableLength; }
-    public int getStopsTableLength() { return stopsTableLength_; }
-    
-    private void initFields() {
+    private int stopsTableLength_;
+    /**
+     * <code>optional uint32 stopsTableLength = 11;</code>
+     */
+    public boolean hasStopsTableLength() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
     }
+    /**
+     * <code>optional uint32 stopsTableLength = 11;</code>
+     */
+    public int getStopsTableLength() {
+      return stopsTableLength_;
+    }
+
+    // optional uint32 incompleteRoutesOffset = 12;
+    public static final int INCOMPLETEROUTESOFFSET_FIELD_NUMBER = 12;
+    private int incompleteRoutesOffset_;
+    /**
+     * <code>optional uint32 incompleteRoutesOffset = 12;</code>
+     */
+    public boolean hasIncompleteRoutesOffset() {
+      return ((bitField0_ & 0x00000800) == 0x00000800);
+    }
+    /**
+     * <code>optional uint32 incompleteRoutesOffset = 12;</code>
+     */
+    public int getIncompleteRoutesOffset() {
+      return incompleteRoutesOffset_;
+    }
+
+    // optional uint32 incompleteRoutesLength = 13;
+    public static final int INCOMPLETEROUTESLENGTH_FIELD_NUMBER = 13;
+    private int incompleteRoutesLength_;
+    /**
+     * <code>optional uint32 incompleteRoutesLength = 13;</code>
+     */
+    public boolean hasIncompleteRoutesLength() {
+      return ((bitField0_ & 0x00001000) == 0x00001000);
+    }
+    /**
+     * <code>optional uint32 incompleteRoutesLength = 13;</code>
+     */
+    public int getIncompleteRoutesLength() {
+      return incompleteRoutesLength_;
+    }
+
+    private void initFields() {
+      size_ = 0L;
+      offset_ = 0L;
+      name_ = "";
+      left_ = 0;
+      right_ = 0;
+      top_ = 0;
+      bottom_ = 0;
+      stringTableOffset_ = 0;
+      stringTableLength_ = 0;
+      stopsTableOffset_ = 0;
+      stopsTableLength_ = 0;
+      incompleteRoutesOffset_ = 0;
+      incompleteRoutesLength_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
-      if (!hasSize) return false;
-      if (!hasOffset) return false;
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasSize()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasOffset()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (hasSize()) {
-        output.writeInt64(1, getSize());
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt64(1, size_);
       }
-      if (hasOffset()) {
-        output.writeInt64(2, getOffset());
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, offset_);
       }
-      if (hasName()) {
-        output.writeString(3, getName());
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getNameBytes());
       }
-      if (hasLeft()) {
-        output.writeInt32(4, getLeft());
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, left_);
       }
-      if (hasRight()) {
-        output.writeInt32(5, getRight());
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, right_);
       }
-      if (hasTop()) {
-        output.writeInt32(6, getTop());
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(6, top_);
       }
-      if (hasBottom()) {
-        output.writeInt32(7, getBottom());
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(7, bottom_);
       }
-      if (hasStringTableOffset()) {
-        output.writeUInt32(8, getStringTableOffset());
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeUInt32(8, stringTableOffset_);
       }
-      if (hasStringTableLength()) {
-        output.writeUInt32(9, getStringTableLength());
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeUInt32(9, stringTableLength_);
       }
-      if (hasStopsTableOffset()) {
-        output.writeUInt32(10, getStopsTableOffset());
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeUInt32(10, stopsTableOffset_);
       }
-      if (hasStopsTableLength()) {
-        output.writeUInt32(11, getStopsTableLength());
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeUInt32(11, stopsTableLength_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        output.writeUInt32(12, incompleteRoutesOffset_);
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        output.writeUInt32(13, incompleteRoutesLength_);
       }
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
-      if (hasSize()) {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, getSize());
+          .computeInt64Size(1, size_);
       }
-      if (hasOffset()) {
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, getOffset());
+          .computeInt64Size(2, offset_);
       }
-      if (hasName()) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(3, getName());
+          .computeBytesSize(3, getNameBytes());
       }
-      if (hasLeft()) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, getLeft());
+          .computeInt32Size(4, left_);
       }
-      if (hasRight()) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, getRight());
+          .computeInt32Size(5, right_);
       }
-      if (hasTop()) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, getTop());
+          .computeInt32Size(6, top_);
       }
-      if (hasBottom()) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, getBottom());
+          .computeInt32Size(7, bottom_);
       }
-      if (hasStringTableOffset()) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(8, getStringTableOffset());
+          .computeUInt32Size(8, stringTableOffset_);
       }
-      if (hasStringTableLength()) {
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(9, getStringTableLength());
+          .computeUInt32Size(9, stringTableLength_);
       }
-      if (hasStopsTableOffset()) {
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(10, getStopsTableOffset());
+          .computeUInt32Size(10, stopsTableOffset_);
       }
-      if (hasStopsTableLength()) {
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(11, getStopsTableLength());
+          .computeUInt32Size(11, stopsTableLength_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(12, incompleteRoutesOffset_);
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(13, incompleteRoutesLength_);
       }
       memoizedSerializedSize = size;
       return size;
     }
-    
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
     public static net.osmand.binary.OsmandIndex.TransportPart parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static net.osmand.binary.OsmandIndex.TransportPart parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.TransportPart parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static net.osmand.binary.OsmandIndex.TransportPart parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.TransportPart parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.TransportPart parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.TransportPart parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.TransportPart parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static net.osmand.binary.OsmandIndex.TransportPart parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static net.osmand.binary.OsmandIndex.TransportPart parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandIndex.TransportPart prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
+    /**
+     * Protobuf type {@code OsmAnd.OBF.TransportPart}
+     */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          net.osmand.binary.OsmandIndex.TransportPart, Builder> {
-      private net.osmand.binary.OsmandIndex.TransportPart result;
-      
+          net.osmand.binary.OsmandIndex.TransportPart, Builder>
+        implements net.osmand.binary.OsmandIndex.TransportPartOrBuilder {
       // Construct using net.osmand.binary.OsmandIndex.TransportPart.newBuilder()
-      private Builder() {}
-      
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
       private static Builder create() {
-        Builder builder = new Builder();
-        builder.result = new net.osmand.binary.OsmandIndex.TransportPart();
-        return builder;
+        return new Builder();
       }
-      
-      protected net.osmand.binary.OsmandIndex.TransportPart internalGetResult() {
-        return result;
-      }
-      
+
       public Builder clear() {
-        if (result == null) {
-          throw new IllegalStateException(
-            "Cannot call clear() after build().");
-        }
-        result = new net.osmand.binary.OsmandIndex.TransportPart();
+        super.clear();
+        size_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        offset_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        name_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        left_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        right_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        top_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        bottom_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        stringTableOffset_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        stringTableLength_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        stopsTableOffset_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000200);
+        stopsTableLength_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000400);
+        incompleteRoutesOffset_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000800);
+        incompleteRoutesLength_ = 0;
+        bitField0_ = (bitField0_ & ~0x00001000);
         return this;
       }
-      
+
       public Builder clone() {
-        return create().mergeFrom(result);
+        return create().mergeFrom(buildPartial());
       }
-      
+
       public net.osmand.binary.OsmandIndex.TransportPart getDefaultInstanceForType() {
         return net.osmand.binary.OsmandIndex.TransportPart.getDefaultInstance();
       }
-      
-      public boolean isInitialized() {
-        return result.isInitialized();
-      }
+
       public net.osmand.binary.OsmandIndex.TransportPart build() {
-        if (result != null && !isInitialized()) {
+        net.osmand.binary.OsmandIndex.TransportPart result = buildPartial();
+        if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
-        return buildPartial();
+        return result;
       }
-      
-      private net.osmand.binary.OsmandIndex.TransportPart buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        if (!isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return buildPartial();
-      }
-      
+
       public net.osmand.binary.OsmandIndex.TransportPart buildPartial() {
-        if (result == null) {
-          throw new IllegalStateException(
-            "build() has already been called on this Builder.");
+        net.osmand.binary.OsmandIndex.TransportPart result = new net.osmand.binary.OsmandIndex.TransportPart(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
         }
-        net.osmand.binary.OsmandIndex.TransportPart returnMe = result;
-        result = null;
-        return returnMe;
+        result.size_ = size_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.offset_ = offset_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.name_ = name_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.left_ = left_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.right_ = right_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.top_ = top_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.bottom_ = bottom_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.stringTableOffset_ = stringTableOffset_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.stringTableLength_ = stringTableLength_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.stopsTableOffset_ = stopsTableOffset_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.stopsTableLength_ = stopsTableLength_;
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000800;
+        }
+        result.incompleteRoutesOffset_ = incompleteRoutesOffset_;
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+          to_bitField0_ |= 0x00001000;
+        }
+        result.incompleteRoutesLength_ = incompleteRoutesLength_;
+        result.bitField0_ = to_bitField0_;
+        return result;
       }
-      
+
       public Builder mergeFrom(net.osmand.binary.OsmandIndex.TransportPart other) {
         if (other == net.osmand.binary.OsmandIndex.TransportPart.getDefaultInstance()) return this;
         if (other.hasSize()) {
@@ -4874,7 +9561,9 @@ public final class OsmandIndex {
           setOffset(other.getOffset());
         }
         if (other.hasName()) {
-          setName(other.getName());
+          bitField0_ |= 0x00000004;
+          name_ = other.name_;
+          
         }
         if (other.hasLeft()) {
           setLeft(other.getLeft());
@@ -4900,291 +9589,530 @@ public final class OsmandIndex {
         if (other.hasStopsTableLength()) {
           setStopsTableLength(other.getStopsTableLength());
         }
+        if (other.hasIncompleteRoutesOffset()) {
+          setIncompleteRoutesOffset(other.getIncompleteRoutesOffset());
+        }
+        if (other.hasIncompleteRoutesLength()) {
+          setIncompleteRoutesLength(other.getIncompleteRoutesLength());
+        }
         return this;
       }
-      
+
+      public final boolean isInitialized() {
+        if (!hasSize()) {
+          
+          return false;
+        }
+        if (!hasOffset()) {
+          
+          return false;
+        }
+        return true;
+      }
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              return this;
-            default: {
-              if (!parseUnknownField(input, extensionRegistry, tag)) {
-                return this;
-              }
-              break;
-            }
-            case 8: {
-              setSize(input.readInt64());
-              break;
-            }
-            case 16: {
-              setOffset(input.readInt64());
-              break;
-            }
-            case 26: {
-              setName(input.readString());
-              break;
-            }
-            case 32: {
-              setLeft(input.readInt32());
-              break;
-            }
-            case 40: {
-              setRight(input.readInt32());
-              break;
-            }
-            case 48: {
-              setTop(input.readInt32());
-              break;
-            }
-            case 56: {
-              setBottom(input.readInt32());
-              break;
-            }
-            case 64: {
-              setStringTableOffset(input.readUInt32());
-              break;
-            }
-            case 72: {
-              setStringTableLength(input.readUInt32());
-              break;
-            }
-            case 80: {
-              setStopsTableOffset(input.readUInt32());
-              break;
-            }
-            case 88: {
-              setStopsTableLength(input.readUInt32());
-              break;
-            }
+        net.osmand.binary.OsmandIndex.TransportPart parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (net.osmand.binary.OsmandIndex.TransportPart) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
-      
+      private int bitField0_;
+
       // required int64 size = 1;
+      private long size_ ;
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public boolean hasSize() {
-        return result.hasSize();
+        return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public long getSize() {
-        return result.getSize();
+        return size_;
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public Builder setSize(long value) {
-        result.hasSize = true;
-        result.size_ = value;
+        bitField0_ |= 0x00000001;
+        size_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
       public Builder clearSize() {
-        result.hasSize = false;
-        result.size_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        size_ = 0L;
+        
         return this;
       }
-      
+
       // required int64 offset = 2;
+      private long offset_ ;
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public boolean hasOffset() {
-        return result.hasOffset();
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public long getOffset() {
-        return result.getOffset();
+        return offset_;
       }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public Builder setOffset(long value) {
-        result.hasOffset = true;
-        result.offset_ = value;
+        bitField0_ |= 0x00000002;
+        offset_ = value;
+        
         return this;
       }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
       public Builder clearOffset() {
-        result.hasOffset = false;
-        result.offset_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        offset_ = 0L;
+        
         return this;
       }
-      
+
       // optional string name = 3;
+      private java.lang.Object name_ = "";
+      /**
+       * <code>optional string name = 3;</code>
+       */
       public boolean hasName() {
-        return result.hasName();
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
+      /**
+       * <code>optional string name = 3;</code>
+       */
       public java.lang.String getName() {
-        return result.getName();
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          name_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
-      public Builder setName(java.lang.String value) {
+      /**
+       * <code>optional string name = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 3;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  result.hasName = true;
-        result.name_ = value;
+  bitField0_ |= 0x00000004;
+        name_ = value;
+        
         return this;
       }
+      /**
+       * <code>optional string name = 3;</code>
+       */
       public Builder clearName() {
-        result.hasName = false;
-        result.name_ = getDefaultInstance().getName();
+        bitField0_ = (bitField0_ & ~0x00000004);
+        name_ = getDefaultInstance().getName();
+        
         return this;
       }
-      
+      /**
+       * <code>optional string name = 3;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        name_ = value;
+        
+        return this;
+      }
+
       // optional int32 left = 4;
+      private int left_ ;
+      /**
+       * <code>optional int32 left = 4;</code>
+       */
       public boolean hasLeft() {
-        return result.hasLeft();
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
+      /**
+       * <code>optional int32 left = 4;</code>
+       */
       public int getLeft() {
-        return result.getLeft();
+        return left_;
       }
+      /**
+       * <code>optional int32 left = 4;</code>
+       */
       public Builder setLeft(int value) {
-        result.hasLeft = true;
-        result.left_ = value;
+        bitField0_ |= 0x00000008;
+        left_ = value;
+        
         return this;
       }
+      /**
+       * <code>optional int32 left = 4;</code>
+       */
       public Builder clearLeft() {
-        result.hasLeft = false;
-        result.left_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        left_ = 0;
+        
         return this;
       }
-      
+
       // optional int32 right = 5;
+      private int right_ ;
+      /**
+       * <code>optional int32 right = 5;</code>
+       */
       public boolean hasRight() {
-        return result.hasRight();
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
+      /**
+       * <code>optional int32 right = 5;</code>
+       */
       public int getRight() {
-        return result.getRight();
+        return right_;
       }
+      /**
+       * <code>optional int32 right = 5;</code>
+       */
       public Builder setRight(int value) {
-        result.hasRight = true;
-        result.right_ = value;
+        bitField0_ |= 0x00000010;
+        right_ = value;
+        
         return this;
       }
+      /**
+       * <code>optional int32 right = 5;</code>
+       */
       public Builder clearRight() {
-        result.hasRight = false;
-        result.right_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        right_ = 0;
+        
         return this;
       }
-      
+
       // optional int32 top = 6;
+      private int top_ ;
+      /**
+       * <code>optional int32 top = 6;</code>
+       */
       public boolean hasTop() {
-        return result.hasTop();
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
+      /**
+       * <code>optional int32 top = 6;</code>
+       */
       public int getTop() {
-        return result.getTop();
+        return top_;
       }
+      /**
+       * <code>optional int32 top = 6;</code>
+       */
       public Builder setTop(int value) {
-        result.hasTop = true;
-        result.top_ = value;
+        bitField0_ |= 0x00000020;
+        top_ = value;
+        
         return this;
       }
+      /**
+       * <code>optional int32 top = 6;</code>
+       */
       public Builder clearTop() {
-        result.hasTop = false;
-        result.top_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        top_ = 0;
+        
         return this;
       }
-      
+
       // optional int32 bottom = 7;
+      private int bottom_ ;
+      /**
+       * <code>optional int32 bottom = 7;</code>
+       */
       public boolean hasBottom() {
-        return result.hasBottom();
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
+      /**
+       * <code>optional int32 bottom = 7;</code>
+       */
       public int getBottom() {
-        return result.getBottom();
+        return bottom_;
       }
+      /**
+       * <code>optional int32 bottom = 7;</code>
+       */
       public Builder setBottom(int value) {
-        result.hasBottom = true;
-        result.bottom_ = value;
+        bitField0_ |= 0x00000040;
+        bottom_ = value;
+        
         return this;
       }
+      /**
+       * <code>optional int32 bottom = 7;</code>
+       */
       public Builder clearBottom() {
-        result.hasBottom = false;
-        result.bottom_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        bottom_ = 0;
+        
         return this;
       }
-      
+
       // optional uint32 stringTableOffset = 8;
+      private int stringTableOffset_ ;
+      /**
+       * <code>optional uint32 stringTableOffset = 8;</code>
+       */
       public boolean hasStringTableOffset() {
-        return result.hasStringTableOffset();
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
+      /**
+       * <code>optional uint32 stringTableOffset = 8;</code>
+       */
       public int getStringTableOffset() {
-        return result.getStringTableOffset();
+        return stringTableOffset_;
       }
+      /**
+       * <code>optional uint32 stringTableOffset = 8;</code>
+       */
       public Builder setStringTableOffset(int value) {
-        result.hasStringTableOffset = true;
-        result.stringTableOffset_ = value;
+        bitField0_ |= 0x00000080;
+        stringTableOffset_ = value;
+        
         return this;
       }
+      /**
+       * <code>optional uint32 stringTableOffset = 8;</code>
+       */
       public Builder clearStringTableOffset() {
-        result.hasStringTableOffset = false;
-        result.stringTableOffset_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        stringTableOffset_ = 0;
+        
         return this;
       }
-      
+
       // optional uint32 stringTableLength = 9;
+      private int stringTableLength_ ;
+      /**
+       * <code>optional uint32 stringTableLength = 9;</code>
+       */
       public boolean hasStringTableLength() {
-        return result.hasStringTableLength();
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
+      /**
+       * <code>optional uint32 stringTableLength = 9;</code>
+       */
       public int getStringTableLength() {
-        return result.getStringTableLength();
+        return stringTableLength_;
       }
+      /**
+       * <code>optional uint32 stringTableLength = 9;</code>
+       */
       public Builder setStringTableLength(int value) {
-        result.hasStringTableLength = true;
-        result.stringTableLength_ = value;
+        bitField0_ |= 0x00000100;
+        stringTableLength_ = value;
+        
         return this;
       }
+      /**
+       * <code>optional uint32 stringTableLength = 9;</code>
+       */
       public Builder clearStringTableLength() {
-        result.hasStringTableLength = false;
-        result.stringTableLength_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        stringTableLength_ = 0;
+        
         return this;
       }
-      
+
       // optional uint32 stopsTableOffset = 10;
+      private int stopsTableOffset_ ;
+      /**
+       * <code>optional uint32 stopsTableOffset = 10;</code>
+       */
       public boolean hasStopsTableOffset() {
-        return result.hasStopsTableOffset();
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
+      /**
+       * <code>optional uint32 stopsTableOffset = 10;</code>
+       */
       public int getStopsTableOffset() {
-        return result.getStopsTableOffset();
+        return stopsTableOffset_;
       }
+      /**
+       * <code>optional uint32 stopsTableOffset = 10;</code>
+       */
       public Builder setStopsTableOffset(int value) {
-        result.hasStopsTableOffset = true;
-        result.stopsTableOffset_ = value;
+        bitField0_ |= 0x00000200;
+        stopsTableOffset_ = value;
+        
         return this;
       }
+      /**
+       * <code>optional uint32 stopsTableOffset = 10;</code>
+       */
       public Builder clearStopsTableOffset() {
-        result.hasStopsTableOffset = false;
-        result.stopsTableOffset_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000200);
+        stopsTableOffset_ = 0;
+        
         return this;
       }
-      
+
       // optional uint32 stopsTableLength = 11;
+      private int stopsTableLength_ ;
+      /**
+       * <code>optional uint32 stopsTableLength = 11;</code>
+       */
       public boolean hasStopsTableLength() {
-        return result.hasStopsTableLength();
+        return ((bitField0_ & 0x00000400) == 0x00000400);
       }
+      /**
+       * <code>optional uint32 stopsTableLength = 11;</code>
+       */
       public int getStopsTableLength() {
-        return result.getStopsTableLength();
+        return stopsTableLength_;
       }
+      /**
+       * <code>optional uint32 stopsTableLength = 11;</code>
+       */
       public Builder setStopsTableLength(int value) {
-        result.hasStopsTableLength = true;
-        result.stopsTableLength_ = value;
+        bitField0_ |= 0x00000400;
+        stopsTableLength_ = value;
+        
         return this;
       }
+      /**
+       * <code>optional uint32 stopsTableLength = 11;</code>
+       */
       public Builder clearStopsTableLength() {
-        result.hasStopsTableLength = false;
-        result.stopsTableLength_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000400);
+        stopsTableLength_ = 0;
+        
         return this;
       }
-      
-      // @@protoc_insertion_point(builder_scope:TransportPart)
+
+      // optional uint32 incompleteRoutesOffset = 12;
+      private int incompleteRoutesOffset_ ;
+      /**
+       * <code>optional uint32 incompleteRoutesOffset = 12;</code>
+       */
+      public boolean hasIncompleteRoutesOffset() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      /**
+       * <code>optional uint32 incompleteRoutesOffset = 12;</code>
+       */
+      public int getIncompleteRoutesOffset() {
+        return incompleteRoutesOffset_;
+      }
+      /**
+       * <code>optional uint32 incompleteRoutesOffset = 12;</code>
+       */
+      public Builder setIncompleteRoutesOffset(int value) {
+        bitField0_ |= 0x00000800;
+        incompleteRoutesOffset_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>optional uint32 incompleteRoutesOffset = 12;</code>
+       */
+      public Builder clearIncompleteRoutesOffset() {
+        bitField0_ = (bitField0_ & ~0x00000800);
+        incompleteRoutesOffset_ = 0;
+        
+        return this;
+      }
+
+      // optional uint32 incompleteRoutesLength = 13;
+      private int incompleteRoutesLength_ ;
+      /**
+       * <code>optional uint32 incompleteRoutesLength = 13;</code>
+       */
+      public boolean hasIncompleteRoutesLength() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
+      }
+      /**
+       * <code>optional uint32 incompleteRoutesLength = 13;</code>
+       */
+      public int getIncompleteRoutesLength() {
+        return incompleteRoutesLength_;
+      }
+      /**
+       * <code>optional uint32 incompleteRoutesLength = 13;</code>
+       */
+      public Builder setIncompleteRoutesLength(int value) {
+        bitField0_ |= 0x00001000;
+        incompleteRoutesLength_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>optional uint32 incompleteRoutesLength = 13;</code>
+       */
+      public Builder clearIncompleteRoutesLength() {
+        bitField0_ = (bitField0_ & ~0x00001000);
+        incompleteRoutesLength_ = 0;
+        
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:OsmAnd.OBF.TransportPart)
     }
-    
+
     static {
       defaultInstance = new TransportPart(true);
-      net.osmand.binary.OsmandIndex.internalForceInit();
       defaultInstance.initFields();
     }
-    
-    // @@protoc_insertion_point(class_scope:TransportPart)
+
+    // @@protoc_insertion_point(class_scope:OsmAnd.OBF.TransportPart)
   }
-  
-  
+
+
   static {
   }
-  
-  public static void internalForceInit() {}
-  
+
   // @@protoc_insertion_point(outer_class_scope)
 }

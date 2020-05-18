@@ -23,7 +23,7 @@
             android:layout_height="40dp"
             android:orientation="horizontal">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/overview_image"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
@@ -78,7 +78,7 @@
                 android:orientation="horizontal"
 	            android:layout_marginEnd="3dp">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_marginTop="2dp"
                     android:id="@+id/distance_or_timespan_image"
                     android:layout_width="16dp"
@@ -124,7 +124,7 @@
                 android:orientation="horizontal"
 	            android:layout_marginEnd="3dp">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_marginTop="2dp"
                     android:id="@+id/start_time_image"
                     android:layout_width="16dp"
@@ -168,7 +168,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_marginTop="2dp"
                     android:id="@+id/end_time_image"
                     android:layout_width="16dp"
@@ -232,7 +232,7 @@
                 android:orientation="horizontal"
 	            android:layout_marginEnd="3dp">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_marginTop="2dp"
                     android:id="@+id/average_altitude_image"
                     android:layout_width="16dp"
@@ -277,7 +277,7 @@
                 android:orientation="horizontal"
 	            android:layout_marginEnd="3dp">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_marginTop="2dp"
                     android:id="@+id/altitude_range_image"
                     android:layout_width="16dp"
@@ -341,7 +341,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_marginTop="2dp"
                     android:id="@+id/ascent_descent_image"
                     android:layout_width="16dp"
@@ -424,7 +424,7 @@
                 android:orientation="horizontal"
 	            android:layout_marginEnd="3dp">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_marginTop="2dp"
                     android:id="@+id/moving_time_image"
                     android:layout_width="16dp"
@@ -469,7 +469,7 @@
                 android:orientation="horizontal"
 	            android:layout_marginEnd="3dp">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_marginTop="2dp"
                     android:id="@+id/average_speed_image"
                     android:layout_width="16dp"
@@ -512,7 +512,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_marginTop="2dp"
                     android:id="@+id/max_speed_image"
                     android:layout_width="16dp"

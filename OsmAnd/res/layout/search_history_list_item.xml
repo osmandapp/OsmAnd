@@ -26,7 +26,7 @@
         android:paddingRight="0dp"
         android:paddingEnd="0dp">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/direction"
                     android:layout_width="@dimen/directionIconSize"
                     android:layout_height="@dimen/directionIconSize"
@@ -73,7 +73,7 @@
                     tools:text="100500 km"
 	                android:layout_marginStart="2dp" />
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/type_name_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

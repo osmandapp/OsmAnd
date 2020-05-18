@@ -4,14 +4,14 @@
 	android:layout_width="@dimen/route_info_modes_height"
 	android:layout_height="@dimen/route_info_modes_height">
 
-	<ImageView
+	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/app_mode_icon"
 		android:layout_width="@dimen/standard_icon_size"
 		android:layout_height="@dimen/standard_icon_size"
 		android:layout_gravity="center"
 		tools:src="@drawable/ic_dashboard_dark" />
 
-	<ImageView
+	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/selection"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"

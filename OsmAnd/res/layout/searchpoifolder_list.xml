@@ -10,7 +10,7 @@
     android:paddingLeft="@dimen/list_content_padding"
 	android:paddingStart="@dimen/list_content_padding">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/folder_icon"
         android:layout_width="@dimen/standard_icon_size"
 		android:layout_gravity="center_vertical"
@@ -32,7 +32,7 @@
     	android:layout_marginRight="@dimen/list_content_padding"
 	    android:layout_marginEnd="@dimen/list_content_padding" />
          
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/options"
         android:contentDescription="@string/search_poi_filter"
         android:layout_width="@dimen/list_item_height"

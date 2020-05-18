@@ -37,7 +37,7 @@
 			android:layout_marginEnd="@dimen/content_padding_half"
 			android:layout_marginRight="@dimen/content_padding_half" />
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/icon"
 			android:layout_width="@dimen/standard_icon_size"
 			android:layout_height="@dimen/standard_icon_size"
@@ -94,7 +94,7 @@
 			android:layout_marginRight="@dimen/content_padding_half"
 			android:padding="@dimen/content_padding_small">
 
-			<ImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/move_icon"
 				android:layout_width="@dimen/standard_icon_size"
 				android:layout_height="@dimen/standard_icon_size"

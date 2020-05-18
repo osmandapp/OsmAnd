@@ -19,7 +19,7 @@
 	    android:paddingEnd="16dp"
 	    android:paddingStart="16dp">
 
-        <CheckBox
+        <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/toggle_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
             tools:visibility="visible"
 	        android:layout_marginEnd="20dp" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageView"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -71,7 +71,7 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/direction"
                         android:layout_width="@dimen/directionIconSize"
                         android:layout_height="@dimen/directionIconSize"
@@ -106,7 +106,7 @@
                     android:gravity="start"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/type_name_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -132,7 +132,7 @@
                     android:gravity="end"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/time_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

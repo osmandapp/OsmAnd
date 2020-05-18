@@ -1525,8 +1525,8 @@
     <string name="forward">Вперёд</string>
     <string name="home">Панель управления</string>
     <string name="local_map_names">Местные названия</string>
-    <string name="gpx_monitoring_start">Начать запись GPX</string>
-    <string name="gpx_monitoring_stop">Остановить запись GPX</string>
+    <string name="gpx_monitoring_start">Продолжить запись GPX</string>
+    <string name="gpx_monitoring_stop">Приостановить запись GPX</string>
     <string name="gpx_start_new_segment">Начать новый сегмент</string>
     <string name="enable_sleep_mode">Включить фоновый режим GPS</string>
     <string name="gps_wake_up_timer">Интервал пробуждения GPS</string>
@@ -2367,7 +2367,7 @@
     <string name="edit_line">Редактировать линию</string>
     <string name="add_point_before">Добавить точку перед</string>
     <string name="add_point_after">Добавить точку после</string>
-    <string name="shared_string_options">Функции</string>
+    <string name="shared_string_options">Опции</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd соединит точки с маршрутом для выбранного профиля.</string>
     <string name="measurement_tool_save_as_new_track_descr">Сохранить точки, как точки маршрута или как линию.</string>
     <string name="choose_navigation_type">Выберите профиль навигации</string>
@@ -2642,7 +2642,7 @@
     <string name="one_tap_active">Активация одним нажатием</string>
     <string name="empty_state_av_notes">Делайте заметки!</string>
     <string name="empty_state_av_notes_desc">Добавьте аудио-, видео- или фотозаметку в любую точку на карте, используя виджет или контекстное меню.</string>
-    <string name="notes_by_date">Заметки OSM по дате</string>
+    <string name="notes_by_date">Заметки по дате</string>
     <string name="by_date">По дате</string>
     <string name="by_type">По типу</string>
     <string name="modify_the_search_query">Измените ваш запрос.</string>
@@ -3715,4 +3715,9 @@
     <string name="parking_positions">Место стоянки</string>
     <string name="quick_action_transport_descr">Переключатель, чтобы отобразить или скрыть общественный транспорт на карте.</string>
     <string name="reset_deafult_order">Восстановить исходный порядок</string>
+    <string name="quick_action_switch_profile_descr">Нажатие кнопки «Действия» переключает между выбранными профилями.</string>
+    <string name="shared_string_add_profile">Добавить профиль</string>
+    <string name="change_application_profile">Изменить профиль приложения</string>
+    <string name="profiles_for_action_not_found">Профили, выбранные для данного действия, не найдены.</string>
+    <string name="shared_string_resume">Продолжить</string>
 </resources>
