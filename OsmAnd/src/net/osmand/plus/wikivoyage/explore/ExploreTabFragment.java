@@ -48,6 +48,9 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 
 	private static final String WORLD_WIKIVOYAGE_FILE_NAME = "World_wikivoyage.sqlite";
 
+	private static boolean SHOW_TRAVEL_UPDATE_CARD = true;
+	private static boolean SHOW_TRAVEL_NEEDED_MAPS_CARD = true;
+
 	@Nullable
 	private ExploreRvAdapter adapter = new ExploreRvAdapter();
 	private boolean nightMode;
@@ -237,7 +240,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 			boolean needsDownloading = mainIndexItem != null && !mainIndexItem.isDownloaded();
 			File selectedTravelBook = app.getTravelDbHelper().getSelectedTravelBook();
 
-			if (selectedTravelBook == null || needsDownloading || (outdated && app.getSettings().SHOW_TRAVEL_UPDATE_CARD.get())) {
+			if (selectedTravelBook == null || needsDownloading || (outdated && SHOW_TRAVEL_UPDATE_CARD)) {
 				boolean showOtherMaps = false;
 				if (needsDownloading) {
 					List<IndexItem> items = downloadThread.getIndexes().getWikivoyageItems();
@@ -261,7 +264,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 							downloadThread.cancelDownload(mainIndexItem);
 							adapter.updateDownloadUpdateCard(false);
 						} else if (!downloadUpdateCard.isDownload()) {
-							app.getSettings().SHOW_TRAVEL_UPDATE_CARD.set(false);
+							SHOW_TRAVEL_UPDATE_CARD = false;
 							removeDownloadUpdateCard();
 						} else if (downloadUpdateCard.isShowOtherMapsBtn()) {
 							Activity activity = getActivity();
@@ -282,7 +285,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 
 	private void addNeededMapsCard() {
 		final OsmandApplication app = getMyApplication();
-		if (app != null && !neededIndexItems.isEmpty() && adapter != null && app.getSettings().SHOW_TRAVEL_NEEDED_MAPS_CARD.get()) {
+		if (app != null && !neededIndexItems.isEmpty() && adapter != null && SHOW_TRAVEL_NEEDED_MAPS_CARD) {
 			neededMapsCard = new TravelNeededMapsCard(app, nightMode, neededIndexItems);
 			neededMapsCard.setListener(new TravelNeededMapsCard.CardListener() {
 				@Override
@@ -301,7 +304,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 							adapter.updateNeededMapsCard(false);
 						}
 					} else {
-						app.getSettings().SHOW_TRAVEL_NEEDED_MAPS_CARD.set(false);
+						SHOW_TRAVEL_NEEDED_MAPS_CARD = false;
 						removeNeededMapsCard();
 					}
 				}

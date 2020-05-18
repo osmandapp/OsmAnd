@@ -173,6 +173,31 @@ public class FavouritesDbHelper {
 			saveCurrentPointsIntoFile();
 		}
 		favoritesLoaded = true;
+		notifyListeners();
+	}
+
+	void fixBlackBackground() {
+		flatGroups.clear();
+		favoriteGroups.clear();
+		for (FavouritePoint fp : cachedFavoritePoints) {
+			if (fp.getColor() == 0xFF000000 || fp.getColor() == ContextCompat.getColor(context, R.color.color_favorite)) {
+				fp.setColor(0);
+			}
+			if (fp.getBackgroundType() == FavouritePoint.DEFAULT_BACKGROUND_TYPE){
+				fp.setBackgroundType(null);
+			}
+			if(fp.getIconId()== FavouritePoint.DEFAULT_UI_ICON_ID){
+				fp.setIconId(0);
+			}
+			FavoriteGroup group = getOrCreateGroup(fp, 0);
+			group.points.add(fp);
+		}
+		sortAll();
+		saveCurrentPointsIntoFile();
+		notifyListeners();
+	}
+
+	private void notifyListeners() {
 		context.runInUIThread(new Runnable() {
 			@Override
 			public void run() {

@@ -26,7 +26,7 @@ public class PoiFilter extends AbstractPoiType {
 	}
 	
 	public void addPoiType(PoiType type) {
-		if(!map.containsKey(type.getKeyName())) {
+		if (!map.containsKey(type.getKeyName())) {
 			poiTypes.add(type);
 			map.put(type.getKeyName(), type);
 		} else {

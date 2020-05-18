@@ -23,6 +23,9 @@ import net.osmand.plus.UiUtilities;
 
 import java.util.TreeMap;
 
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
+
 public class FavoriteImageDrawable extends Drawable {
 
 	private boolean withShadow;
@@ -55,7 +58,7 @@ public class FavoriteImageDrawable extends Drawable {
 			uiIconId = overlayIconId;
 		} else {
 			favIcon = res.getDrawable(R.drawable.mm_special_star);
-			uiIconId = R.drawable.mx_special_star;
+			uiIconId = DEFAULT_UI_ICON_ID;
 		}
 		int col = color == 0 ? res.getColor(R.color.color_favorite) : color;
 		uiListIcon = uiUtilities.getIcon(uiIconId, R.color.color_white);
@@ -216,8 +219,8 @@ public class FavoriteImageDrawable extends Drawable {
 		FavouritePoint point = null;
 		if (pt != null) {
 			point = new FavouritePoint(pt.getLatitude(), pt.getLongitude(), pt.name, pt.category);
-			point.setIconIdFromName(a, pt.getIconName());
-			point.setBackgroundType(BackgroundType.getByTypeName(pt.getBackgroundType(), BackgroundType.CIRCLE));
+			point.setIconIdFromName(a, pt.getIconNameOrDefault());
+			point.setBackgroundType(BackgroundType.getByTypeName(pt.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
 		}
 		return point;
 	}
