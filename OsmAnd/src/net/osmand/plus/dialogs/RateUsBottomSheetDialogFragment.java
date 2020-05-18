@@ -121,7 +121,7 @@ public class RateUsBottomSheetDialogFragment extends MenuBottomSheetDialogFragme
 				return false;
 			//First dialog after 15 days from the first start or 100 starts
 			case INITIAL_STATE:
-				return firstInstalledDays > 15 || numberOfStarts > 10;
+				return firstInstalledDays > 15 || numberOfStarts > 100;
 			//Second dialog after 60 days or 50 starts from the first appearance (if ignored or disliked)
 			case IGNORED:
 			case DISLIKED_WITH_MESSAGE:
@@ -129,7 +129,7 @@ public class RateUsBottomSheetDialogFragment extends MenuBottomSheetDialogFragme
 				int startsOnDislikeMoment = settings.NUMBER_OF_APP_STARTS_ON_DISLIKE_MOMENT.get();
 				long lastDisplayTimeInMillis = settings.LAST_DISPLAY_TIME.get();
 				long currentTime = System.currentTimeMillis();
-				return currentTime - lastDisplayTimeInMillis > SIXTY_DAYS || numberOfStarts - startsOnDislikeMoment > 5;
+				return currentTime - lastDisplayTimeInMillis > SIXTY_DAYS || numberOfStarts - startsOnDislikeMoment > 50;
 		}
 		return false;
 	}
