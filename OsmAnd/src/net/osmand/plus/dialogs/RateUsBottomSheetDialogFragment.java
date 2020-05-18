@@ -1,6 +1,7 @@
 package net.osmand.plus.dialogs;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.ContextThemeWrapper;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
@@ -24,6 +26,8 @@ public class RateUsBottomSheetDialogFragment extends MenuBottomSheetDialogFragme
 	public static final String TAG = "RateUsBottomSheetDialogFragment";
 	private static final Log LOG = PlatformUtil.getLog(SendAnalyticsBottomSheetDialogFragment.class);
 	private static final long SIXTY_DAYS = 60 * 24 * 60 * 60 * 1000L;
+
+	private RateUsState newRateUsState = RateUsState.IGNORED;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -48,6 +52,7 @@ public class RateUsBottomSheetDialogFragment extends MenuBottomSheetDialogFragme
 	protected void onDismissButtonClickAction() {
 		FragmentManager fm = getFragmentManager();
 		if (fm != null) {
+			newRateUsState = null;
 			DislikeOsmAndBottomSheetDialogFragment.showInstance(fm);
 		}
 	}
@@ -61,11 +66,31 @@ public class RateUsBottomSheetDialogFragment extends MenuBottomSheetDialogFragme
 	protected void onRightBottomButtonClick() {
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
-			app.getSettings().RATE_US_STATE.set(RateUsState.LIKED);
+			newRateUsState = RateUsState.LIKED;
 			Uri uri = Uri.parse(Version.getUrlWithUtmRef(app, app.getPackageName()));
-			Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
-			startActivity(goToMarket);
+			try {
+				Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+				startActivity(goToMarket);
+			} catch (Exception e) {
+				LOG.error(e.getMessage(), e);
+			}
 			dismiss();
+		}
+	}
+
+	@Override
+	public void onDismiss(@NonNull DialogInterface dialog) {
+		super.onDismiss(dialog);
+		FragmentActivity activity = getActivity();
+		if (newRateUsState != null && activity != null && !activity.isChangingConfigurations()) {
+			OsmandApplication app = (OsmandApplication) activity.getApplication();
+			OsmandSettings settings = app.getSettings();
+			RateUsState newState = RateUsState.getNewState(app, newRateUsState);
+			settings.RATE_US_STATE.set(newState);
+			if (newState != RateUsState.LIKED) {
+				settings.NUMBER_OF_APP_STARTS_ON_DISLIKE_MOMENT.set(app.getAppInitializer().getNumberOfStarts());
+			}
+			settings.LAST_DISPLAY_TIME.set(System.currentTimeMillis());
 		}
 	}
 
@@ -80,31 +105,31 @@ public class RateUsBottomSheetDialogFragment extends MenuBottomSheetDialogFragme
 		}
 	}
 
-	public static boolean shouldShow(OsmandApplication application) {
-		long firstInstalledDays = application.getAppInitializer().getFirstInstalledDays();
-		if (!Version.isGooglePlayEnabled(application) || firstInstalledDays > 350) {
+	public static boolean shouldShow(OsmandApplication app) {
+		long firstInstalledDays = app.getAppInitializer().getFirstInstalledDays();
+		//Do not show dialog if not google play version or more than 350 days left from the first start
+		if (!Version.isGooglePlayEnabled(app) || firstInstalledDays > 350) {
 			return false;
 		}
-		OsmandSettings settings = application.getSettings();
-		if (!settings.LAST_DISPLAY_TIME.isSet()) {
-			settings.LAST_DISPLAY_TIME.set(System.currentTimeMillis());
-		}
-		int numberOfStarts = application.getAppInitializer().getNumberOfStarts();
-
+		OsmandSettings settings = app.getSettings();
+		int numberOfStarts = app.getAppInitializer().getNumberOfStarts();
 		RateUsState state = settings.RATE_US_STATE.get();
 		switch (state) {
+			//Do not show anymore if liked
 			case LIKED:
+			case DISLIKED_OR_IGNORED_AGAIN:
 				return false;
+			//First dialog after 15 days from the first start or 100 starts
 			case INITIAL_STATE:
-				return firstInstalledDays > 15 && numberOfStarts > 100;
+				return firstInstalledDays > 15 || numberOfStarts > 10;
+			//Second dialog after 60 days or 50 starts from the first appearance (if ignored or disliked)
 			case IGNORED:
 			case DISLIKED_WITH_MESSAGE:
 			case DISLIKED_WITHOUT_MESSAGE:
 				int startsOnDislikeMoment = settings.NUMBER_OF_APP_STARTS_ON_DISLIKE_MOMENT.get();
 				long lastDisplayTimeInMillis = settings.LAST_DISPLAY_TIME.get();
 				long currentTime = System.currentTimeMillis();
-				return currentTime - lastDisplayTimeInMillis > SIXTY_DAYS
-						&& numberOfStarts - startsOnDislikeMoment > 50;
+				return currentTime - lastDisplayTimeInMillis > SIXTY_DAYS || numberOfStarts - startsOnDislikeMoment > 5;
 		}
 		return false;
 	}
@@ -114,6 +139,22 @@ public class RateUsBottomSheetDialogFragment extends MenuBottomSheetDialogFragme
 		IGNORED,
 		LIKED,
 		DISLIKED_WITH_MESSAGE,
-		DISLIKED_WITHOUT_MESSAGE
+		DISLIKED_WITHOUT_MESSAGE,
+		DISLIKED_OR_IGNORED_AGAIN;
+
+		public static RateUsState getNewState(OsmandApplication app, RateUsState requiredState) {
+			RateUsState currentState = app.getSettings().RATE_US_STATE.get();
+			switch (requiredState) {
+				case INITIAL_STATE:
+				case LIKED:
+				case DISLIKED_OR_IGNORED_AGAIN:
+					return requiredState;
+				case IGNORED:
+				case DISLIKED_WITH_MESSAGE:
+				case DISLIKED_WITHOUT_MESSAGE:
+					return currentState == INITIAL_STATE ? requiredState : RateUsState.DISLIKED_OR_IGNORED_AGAIN;
+			}
+			return requiredState;
+		}
 	}
 }
