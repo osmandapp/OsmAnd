@@ -162,7 +162,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 				h.title.setText(menuItem.getTitle());
 				h.title.setTypeface(FontCache.getFont(app, app.getString(R.string.font_roboto_medium)));
 				h.title.setTextSize(TypedValue.COMPLEX_UNIT_PX, app.getResources().getDimension(R.dimen.default_list_text_size));
-				h.description.setText(R.string.move_inside_category);
+				h.description.setVisibility(View.GONE);
 				h.icon.setVisibility(View.GONE);
 				h.actionIcon.setVisibility(View.GONE);
 				h.moveButton.setVisibility(View.GONE);
@@ -276,9 +276,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 			int orderFrom = menuItemFrom.getOrder();
 			int orderTo = menuItemTo.getOrder();
 
-			if (menuItemFrom.getId().startsWith(SHOW_ITEMS_ID_SCHEME) && menuItemTo.getId().startsWith(RENDERING_ITEMS_ID_SCHEME)
-					|| menuItemFrom.getId().startsWith(RENDERING_ITEMS_ID_SCHEME) && menuItemTo.getId().startsWith(SHOW_ITEMS_ID_SCHEME)
-					|| menuItemTo.isHidden()) {
+			if (menuItemTo.isHidden()) {
 				return false;
 			}
 

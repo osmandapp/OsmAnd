@@ -409,8 +409,8 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 			}
 			items.add(new RearrangeMenuAdapterItem(HEADER, new RearrangeMenuItemsAdapter.HeaderItem(R.string.main_actions, R.string.main_actions_descr)));
 			items.addAll(main);
+			items.add(new RearrangeMenuAdapterItem(HEADER, new RearrangeMenuItemsAdapter.HeaderItem(R.string.additional_actions, R.string.additional_actions_descr)));
 			if (!additional.isEmpty()) {
-				items.add(new RearrangeMenuAdapterItem(HEADER, new RearrangeMenuItemsAdapter.HeaderItem(R.string.additional_actions, R.string.additional_actions_descr)));
 				items.addAll(additional);
 			}
 		} else {
