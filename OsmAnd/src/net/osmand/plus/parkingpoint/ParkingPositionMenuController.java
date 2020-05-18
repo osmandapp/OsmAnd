@@ -99,7 +99,9 @@ public class ParkingPositionMenuController extends MenuController {
 
 	@Override
 	public Drawable getRightIcon() {
-		return getIcon(R.drawable.ic_action_parking_dark, R.color.map_widget_blue);
+
+		return getIcon( plugin == null || plugin.getParkingTime() <= 0 ?
+				R.drawable.mx_parking : R.drawable.mx_special_parking_time_limited, R.color.map_widget_blue);
 	}
 
 	@NonNull

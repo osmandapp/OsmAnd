@@ -399,7 +399,7 @@ public class TransportRoutePlanner {
 			route.mergeForwardWays();
 			if (DISPLAY_FULL_SEGMENT_ROUTE) {
 				System.out.println("TOTAL SEGMENTS: " + route.getForwardWays().size());
-				if (route.getForwardWays().size() > DISPLAY_SEGMENT_IND) {
+				if (route.getForwardWays().size() > DISPLAY_SEGMENT_IND && DISPLAY_SEGMENT_IND != -1) {
 					return Collections.singletonList(route.getForwardWays().get(DISPLAY_SEGMENT_IND));
 				}
 				return route.getForwardWays();				
