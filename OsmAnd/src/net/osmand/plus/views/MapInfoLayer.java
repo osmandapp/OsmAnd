@@ -18,6 +18,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.TrackChartPoints;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.BottomTextView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.CompassRulerControlWidgetState;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopCoordinatesView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopTextView;
@@ -76,6 +77,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private TopTextView streetNameView;
 	private TopToolbarView topToolbarView;
 	private TopCoordinatesView topCoordinatesView;
+	private BottomTextView curStreetNameView;
 
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
 		this.map = map;
@@ -173,6 +175,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 		topToolbarView = new TopToolbarView(map);
 		updateTopToolbar(false);
+
+		curStreetNameView = new BottomTextView(map.getMyApplication(), map);
+		updateCurrentStreetName(false, ts);
 
 		alarmControl = ric.createAlarmInfoControl(app, map);
 		alarmControl.setVisibility(false);
@@ -287,6 +292,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			updateStreetName(nightMode, ts);
 			updateTopCoordinates(nightMode, ts);
 			updateTopToolbar(nightMode);
+			updateCurrentStreetName(nightMode, ts);
 			lanesControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius / 2);
 			rulerControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor,  (int) (2 * view.getDensity()));
 			this.expand.setBackgroundResource(ts.expand);
@@ -307,6 +313,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 	private void updateTopCoordinates(boolean nightMode, TextState ts) {
 		topCoordinatesView.updateColors(nightMode, ts.textBold);
+	}
+
+	private void updateCurrentStreetName(boolean nightMode, TextState ts) {
+		curStreetNameView.setBackgroundResource(AndroidUiHelper.isOrientationPortrait(map) ? ts.boxTop
+				: ts.boxFree);
+		curStreetNameView.updateTextColor(nightMode, ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius);
 	}
 
 	private void updateReg(TextState ts, MapWidgetRegInfo reg) {
@@ -366,6 +378,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		streetNameView.updateInfo(drawSettings);
 		topToolbarView.updateInfo();
 		topCoordinatesView.updateInfo();
+		curStreetNameView.updateInfo(drawSettings);
 		alarmControl.updateInfo(drawSettings);
 		rulerControl.updateInfo(tileBox, drawSettings);
 		lanesControl.updateInfo(drawSettings);

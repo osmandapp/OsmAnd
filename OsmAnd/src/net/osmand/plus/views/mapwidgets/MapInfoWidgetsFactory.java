@@ -1281,6 +1281,73 @@ public class MapInfoWidgetsFactory {
 
 	}
 
+	public static class BottomTextView {
+		private final RoutingHelper routingHelper;
+		private final MapActivity map;
+		private final View bottomBar;
+		private final TextView curStreetNameText;
+		private final TextView curStreetNameTextShadow;
+		private OsmandSettings settings;
+		private int shadowRad;
+
+		private static final Log LOG = PlatformUtil.getLog(TopTextView.class);
+
+		public BottomTextView(OsmandApplication app, MapActivity map) {
+			this.routingHelper = app.getRoutingHelper();
+			settings = app.getSettings();
+			this.map = map;
+			bottomBar = map.findViewById(R.id.map_bottom_bar);
+			curStreetNameText = (TextView) map.findViewById(R.id.map_cur_street_address_text);
+			curStreetNameTextShadow = (TextView) map.findViewById(R.id.map_cur_street_text_shadow);
+			updateVisibility(false);
+		}
+
+		public boolean updateVisibility(boolean visible) {
+			boolean res = AndroidUiHelper.updateVisibility(bottomBar, visible);
+			if (res) {
+				map.updateStatusBarColor();
+			}
+			return res;
+		}
+
+		public void updateTextColor(boolean nightMode, int textColor, int textShadowColor, boolean bold, int rad) {
+			this.shadowRad = rad;
+			TextInfoWidget.updateTextColor(curStreetNameText, curStreetNameTextShadow, textColor, textShadowColor, false, rad);
+		}
+
+
+		public boolean updateInfo(DrawSettings d) {
+			boolean showCurStreetNameView = false;
+			if (routingHelper != null && routingHelper.isRouteCalculated() && !routingHelper.isDeviatedFromRoute()) {
+				if (routingHelper.isFollowingMode()) {
+					if (settings.SHOW_STREET_NAME.get()) {
+						showCurStreetNameView = true;
+
+					}
+				}
+			}
+			if (map.isTopToolbarActive() || !map.getContextMenu().shouldShowTopControls() || MapRouteInfoMenu.chooseRoutesVisible || MapRouteInfoMenu.waypointsVisible) {
+				showCurStreetNameView = false;
+			}
+			updateVisibility(showCurStreetNameView);
+			AndroidUiHelper.updateVisibility(curStreetNameText, showCurStreetNameView);
+			AndroidUiHelper.updateVisibility(curStreetNameTextShadow, showCurStreetNameView && shadowRad > 0);
+
+			String curStreetName = routingHelper.getCurrentStreetName();
+			if (!curStreetName.equals(curStreetNameText.getText().toString())) {
+				curStreetNameTextShadow.setText(curStreetName);
+				curStreetNameText.setText(curStreetName);
+				return true;
+			}
+			return false;
+		}
+
+		public void setBackgroundResource(int boxTop) {
+			bottomBar.setBackgroundResource(boxTop);
+		}
+
+	}
+
 	public static class TopCoordinatesView {
 		private final MapActivity map;
 		private OsmandSettings settings;

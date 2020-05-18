@@ -1041,8 +1041,8 @@ public class RouteCalculationResult {
 		}
 		return null;
 	}
-	
-	
+
+
 	/*public */NextDirectionInfo getNextRouteDirectionInfo(NextDirectionInfo info, Location fromLoc, boolean toSpeak) {
 		int dirInfo = currentDirectionInfo;
 		if (dirInfo < directions.size()) {
