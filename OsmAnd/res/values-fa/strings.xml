@@ -137,7 +137,8 @@
     <string name="osmand_parking_pm">ب.ظ.</string>
     <string name="osmand_parking_am">ق.ظ.</string>
     <string name="osmand_parking_position_name">جای پارک</string>
-    <string name="osmand_parking_plugin_description">محل پارک‌کردن خودروی خود را ثبت کنید و حساب زمان پارکینگ را داشته باشید. هم مکان و هم زمان در پیشخوان و نیز در ابزارکی روی نقشه قابل‌رؤیت است. همچنین می‌توانید هشداری را به‌عنوان یادآور به تقویم اندروید اضافه کنید.</string>
+    <string name="osmand_parking_plugin_description">محل پارک‌کردن خودروی خود را ثبت کنید و حساب زمان پارکینگ را داشته باشید.
+\nهم مکان و هم زمان در پیشخوان و نیز در ابزارکی روی نقشه قابل‌رؤیت است. همچنین می‌توانید هشداری را به‌عنوان یادآور به تقویم اندروید اضافه کنید.</string>
     <string name="osmand_parking_plugin_name">جای پارک</string>
     <string name="context_menu_item_add_parking_point">علامت‌گذاری جای پارک</string>
     <string name="context_menu_item_delete_parking_point">حذف نشانهٔ جای پارک</string>
@@ -651,8 +652,7 @@
     <string name="update_poi_does_not_change_indexes">تغییراتی که به‌وسیلهٔ برنامه روی POIها انجام می‌دهید روی نقشه‌های دانلود‌شده تأثیری ندارد. تغییرات روی فایل دیگری در دستگاه ذخیره می‌شود.</string>
     <string name="show_current_gpx_title">نمایش رد جاری</string>
     <string name="fav_export_confirmation">قبلاً نقاط موردعلاقه را برون‌برد کرده‌اید و فایل آن وجود دارد. برون‌برد جدید را جانشین آن می‌کنید؟</string>
-    <string name="osmand_development_plugin_description">تنظیمات توسعه‌ای و امکانات عیب‌یابی را مشاهده کنید؛ مانند شبیه‌سازی ناوبری، آزمایش عملکرد رندر یا امتحان‌کردن پیام‌های گفتاری. 
-\nاین تنظیمات برای توسعه‌دهندگان فراهم شده است و برای کاربردهای عادی برنامه لازم نیست.</string>
+    <string name="osmand_development_plugin_description">تنظیمات توسعه‌ای و امکانات عیب‌یابی را مشاهده کنید؛ مانند شبیه‌سازی ناوبری، آزمایش عملکرد رندر یا امتحان‌کردن پیام‌های گفتاری. این تنظیمات برای توسعه‌دهندگان فراهم شده است و برای کاربردهای عادی برنامه لازم نیست.</string>
     <string name="animate_route_off">پایان شبیه‌سازی</string>
     <string name="animate_route">شروع شبیه‌سازی</string>
     <string name="where_am_i">من کجا هستم؟</string>
@@ -718,9 +718,10 @@
     <string name="gpx_option_destination_point">از مقصد جاری استفاده کن</string>
     <string name="gpx_option_from_start_point">گذر از همهٔ رد</string>
     <string name="switch_to_vector_map_to_see">برای این محل نقشهٔ بُرداری آفلاین وجود دارد. 
+\n 
+\n\t«منو» ← «پیکربندی نقشه» ← «منبع نقشه…» ← «نقشه‌های بُرداری آفلاین».
 \n
-\n\tفعال‌سازی:
-\n\t«منو» ← «پیکربندی نقشه» ← «منبع نقشه…» ← «نقشه‌های بُرداری آفلاین».</string>
+\nبرای فعال‌سازی این مسیر را دنبال کنید.</string>
     <string name="choose_audio_stream">خروجی راهنمای گفتاری</string>
     <string name="layer_underlay">نقشهٔ زیری…</string>
     <string name="map_underlay">نقشهٔ زیری</string>
@@ -1761,7 +1762,7 @@
     <string name="osm_live_subscription_settings">تنظیمات اشتراک</string>
     <string name="quick_action_auto_zoom">زوم خودکار روشن/خاموش</string>
     <string name="select_street">انتخاب خیابان</string>
-    <string name="shared_string_in_name">"در  %1$s"</string>
+    <string name="shared_string_in_name">در %1$s</string>
     <string name="type_address">نشانی</string>
     <string name="type_city_town">نام شهر/محل را بنویسید</string>
     <string name="type_postcode">کدپستی</string>
@@ -2309,7 +2310,7 @@
     <string name="plugin_mapillary_descr">تصاویر خیابانی آنلاین برای همه. مکان‌ها را کشف کنید، همکاری کنید و جهان را به‌تصویر درآورید.</string>
     <string name="private_access_routing_req">مقصد شما در ناحیه‌ای با دسترسی خصوصی قرار دارد. دسترسی به جاده‌های خصوصی برای این سفر مجاز شود؟</string>
     <string name="restart_search">شروع مجدد جست‌وجو</string>
-    <string name="nothing_found">"چیزی پیدا نشد "</string>
+    <string name="nothing_found">چیزی پیدا نشد</string>
     <string name="quick_action_showhide_osmbugs_title">آشکار/پنهان‌کردن یادداشت‌های OSM</string>
     <string name="quick_action_osmbugs_show">آشکارکردن یادداشت‌های OSM</string>
     <string name="quick_action_osmbugs_hide">پنهان‌کردن یادداشت‌های OSM</string>
@@ -2675,7 +2676,7 @@
     <string name="shared_string_without_name">بدون نام</string>
     <string name="lang_lo">لائو</string>
     <string name="rendering_attr_hidePOILabels_name">نام POIها</string>
-    <string name="winter_and_ski_renderer">"زمستان و اسکی "</string>
+    <string name="winter_and_ski_renderer">زمستان و اسکی</string>
     <string name="touring_view_renderer">نمای گردشگری</string>
     <string name="nautical_renderer">دریایی</string>
     <string name="will_open_tomorrow_at">فردا باز می‌شود، در ساعت</string>
@@ -3098,8 +3099,7 @@
     <string name="profile_alert_delete_title">حذف پروفایل</string>
     <string name="profile_alert_delete_msg">آیا از حذف پروفایل «%s» اطمینان دارید</string>
     <string name="select_base_profile_dialog_title">پروفایل پایه را انتخاب کنید</string>
-    <string name="select_base_profile_dialog_message">پروفایل سفارشی خود را بر پایهٔ یکی از پروفایل‌های برنامه بسازید. با این کار برخی چیزهای ابتدایی مانند نمایانی ابزارک‌ها و یکای سرعت و مسافت تنظیم می‌شود. 
-\nپروفایل‌های پیشفرض برنامه و چند نمونه پروفایل سفارشی که بر پایهٔ آن‌ها ساخته شده، در زیر آمده:</string>
+    <string name="select_base_profile_dialog_message">پروفایل سفارشی خود را بر پایهٔ یکی از پروفایل‌های برنامه بسازید. با این کار برخی چیزهای ابتدایی مانند نمایانی ابزارک‌ها و یکای سرعت و مسافت تنظیم می‌شود. پروفایل‌های پیشفرض برنامه و چند نمونه پروفایل سفارشی که بر پایهٔ آن‌ها ساخته شده، در زیر آمده:</string>
     <string name="select_nav_profile_dialog_title">انتخاب نوع ناوبری</string>
     <string name="base_profile_descr_car">خودرو، کامیون، موتورسیکلت</string>
     <string name="base_profile_descr_pedestrian">پیاده‌روی، پیاده‌گردی، دو</string>
@@ -3154,7 +3154,7 @@
     <string name="privacy_and_security_change_descr">اگر %1$s ما را می‌پذیرید «اجازه می‌دهم» را برگزینید</string>
     <string name="settings_privacy_and_security_desc">انتخاب داده‌هایی که هم‌رسانی می‌کنید</string>
     <string name="shared_string_allow">اجازه می‌دهم</string>
-    <string name="osmand_routing_promo">"می‌توانید نسخهٔ اصلاح‌شدهٔ خودتان از فایل  routing.xml را در ‎..osmand/routing اضافه کنید"</string>
+    <string name="osmand_routing_promo">می‌توانید نسخهٔ اصلاح‌شدهٔ خودتان از فایل routing.xml را در ‎..osmand/routing اضافه کنید</string>
     <string name="show_compass_ruler">با درجه‌بندی قطب‌نما</string>
     <string name="hide_compass_ruler">بدون درجه‌بندی قطب‌نما</string>
     <string name="settings_routing_mode_string">حالت: %s</string>
