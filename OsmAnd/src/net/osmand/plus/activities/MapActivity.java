@@ -44,11 +44,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentManager.BackStackEntry;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceFragmentCompat.OnPreferenceStartFragmentCallback;
 
-import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
-import net.osmand.CallbackWithObject;
-import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.SecondSplashScreenFragment;
@@ -65,15 +63,12 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
-import net.osmand.map.TileSourceManager;
-import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.HuaweiDrmHelper;
-import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.OnDismissDialogFragmentListener;
@@ -106,11 +101,13 @@ import net.osmand.plus.firstusage.FirstUsageWelcomeFragment;
 import net.osmand.plus.firstusage.FirstUsageWizardFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.DiscountHelper;
-import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.ImportHelper;
 import net.osmand.plus.helpers.ImportHelper.ImportGpxBottomSheetDialogFragment;
+import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.helpers.LockHelper;
+import net.osmand.plus.helpers.LockHelper.LockUIAdapter;
 import net.osmand.plus.helpers.ScrollHelper;
+import net.osmand.plus.helpers.ScrollHelper.OnScrollEventListener;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
@@ -165,10 +162,8 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -176,8 +171,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.plus.OsmandSettings.GENERIC_EXTERNAL_DEVICE;
@@ -187,8 +180,8 @@ import static net.osmand.plus.OsmandSettings.WUNDERLINQ_EXTERNAL_DEVICE;
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
 		MapMarkerChangedListener, OnDismissDialogFragmentListener, OnDrawMapListener,
-		OsmAndAppCustomizationListener, LockHelper.LockUIAdapter, PreferenceFragmentCompat.OnPreferenceStartFragmentCallback,
-		ScrollHelper.OnScrollEventListener {
+		OsmAndAppCustomizationListener, LockUIAdapter, OnPreferenceStartFragmentCallback,
+		OnScrollEventListener {
 
 	public static final String INTENT_KEY_PARENT_MAP_ACTIVITY = "intent_parent_map_activity_key";
 	public static final String INTENT_PARAMS = "intent_prarams";
@@ -230,13 +223,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private OsmandApplication app;
 	private OsmandSettings settings;
 
-	private boolean landscapeLayout;
+	private LockHelper lockHelper;
+	private ImportHelper importHelper;
+	private IntentHelper intentHelper;
+	private ScrollHelper mapScrollHelper;
 
-	private Dialog progressDlg = null;
+	private boolean landscapeLayout;
 
 	private List<DialogProvider> dialogProviders = new ArrayList<>(2);
 	private StateChangedListener<ApplicationMode> applicationModeListener;
-	private ImportHelper importHelper;
 	private boolean intentLocation = false;
 
 	private DashboardOnMap dashboardOnMap = new DashboardOnMap(this);
@@ -256,8 +251,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean stopped = true;
 
 	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
-	private LockHelper lockHelper;
-	private ScrollHelper mapScrollHelper;
 
 	private StateChangedListener<Integer> mapScreenOrientationSettingListener = new StateChangedListener<Integer>() {
 		@Override
@@ -307,11 +300,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			AndroidUtils.addStatusBarPadding21v(this, findViewById(R.id.menuItems));
 		}
 
-		int statusBarHeight = 0;
-		int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-		if (resourceId > 0) {
-			statusBarHeight = getResources().getDimensionPixelSize(resourceId);
-		}
+		int statusBarHeight = AndroidUtils.getStatusBarHeight(this);
+
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		int w = dm.widthPixels;
@@ -330,7 +320,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		dashboardOnMap.createDashboardView();
 		checkAppInitialization();
-		parseLaunchIntents();
+
+		intentHelper = new IntentHelper(this, getMyApplication());
+		intentHelper.parseLaunchIntents();
+
 		mapView.setTrackBallDelegate(new OsmandMapTileView.OnTrackBallListener() {
 			@Override
 			public boolean onTrackBallEvent(MotionEvent e) {
@@ -772,7 +765,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	protected void onRestart() {
 		super.onRestart();
-		parseLaunchIntents();
+		intentHelper.parseLaunchIntents();
 	}
 
 	@Override
@@ -861,68 +854,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		OsmandPlugin.checkInstalledMarketPlugins(app, this);
 		OsmandPlugin.onMapActivityResume(this);
 
-		boolean showOsmAndWelcomeScreen = true;
-		final Intent intent = getIntent();
-		if (intent != null) {
-			if (Intent.ACTION_VIEW.equals(intent.getAction())) {
-				final Uri data = intent.getData();
-				if (data != null) {
-					final String scheme = data.getScheme();
-					if ("file".equals(scheme)) {
-						final String path = data.getPath();
-						if (path != null) {
-							importHelper.handleFileImport(data, new File(path).getName(), intent.getExtras(), true);
-						}
-						clearIntent(intent);
-					} else if ("content".equals(scheme)) {
-						importHelper.handleContentImport(data, intent.getExtras(), true);
-						clearIntent(intent);
-					} else if ("google.navigation".equals(scheme) || "osmand.navigation".equals(scheme)) {
-						parseNavigationIntent(data);
-					} else if ("osmand.api".equals(scheme)) {
-						ExternalApiHelper apiHelper = new ExternalApiHelper(this);
-						Intent result = apiHelper.processApiRequest(intent);
-						setResult(apiHelper.getResultCode(), result);
-						result.setAction(null);
-						setIntent(result);
-						if (apiHelper.needFinish()) {
-							finish();
-						}
-					}
-				}
-			}
-			if (intent.hasExtra(FirstUsageWelcomeFragment.SHOW_OSMAND_WELCOME_SCREEN)) {
-				showOsmAndWelcomeScreen = intent.getBooleanExtra(FirstUsageWelcomeFragment.SHOW_OSMAND_WELCOME_SCREEN, true);
-			}
-			if (intent.hasExtra(MapMarkersDialogFragment.OPEN_MAP_MARKERS_GROUPS)) {
-				Bundle openMapMarkersGroupsExtra = intent.getBundleExtra(MapMarkersDialogFragment.OPEN_MAP_MARKERS_GROUPS);
-				if (openMapMarkersGroupsExtra != null) {
-					MapMarkersDialogFragment.showInstance(this, openMapMarkersGroupsExtra.getString(MapMarkersHelper.MapMarkersGroup.MARKERS_SYNC_GROUP_ID));
-				}
-				setIntent(null);
-			}
-			if (intent.hasExtra(BaseSettingsFragment.OPEN_SETTINGS)) {
-				String settingsType = intent.getStringExtra(BaseSettingsFragment.OPEN_SETTINGS);
-				String appMode = intent.getStringExtra(BaseSettingsFragment.APP_MODE_KEY);
-				if (BaseSettingsFragment.OPEN_CONFIG_PROFILE.equals(settingsType)) {
-					BaseSettingsFragment.showInstance(this, SettingsScreenType.CONFIGURE_PROFILE, ApplicationMode.valueOfStringKey(appMode, null));
-				}
-				setIntent(null);
-			}
-			if (intent.hasExtra(BaseSettingsFragment.OPEN_CONFIG_ON_MAP)) {
-				switch (intent.getStringExtra(BaseSettingsFragment.OPEN_CONFIG_ON_MAP)) {
-					case BaseSettingsFragment.MAP_CONFIG:
-						this.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP, null);
-						break;
-
-					case BaseSettingsFragment.SCREEN_CONFIG:
-						this.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN, null);
-						break;
-				}
-				setIntent(null);
-			}
-
-		}
+		intentHelper.parseContentIntent();
 		mapView.refreshMap(true);
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnResume();
@@ -950,6 +882,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
 
+		boolean showOsmAndWelcomeScreen = true;
+		final Intent intent = getIntent();
+		if (intent != null && intent.hasExtra(FirstUsageWelcomeFragment.SHOW_OSMAND_WELCOME_SCREEN)) {
+			showOsmAndWelcomeScreen = intent.getBooleanExtra(FirstUsageWelcomeFragment.SHOW_OSMAND_WELCOME_SCREEN, true);
+		}
 		boolean showWelcomeScreen = ((app.getAppInitializer().isFirstTime() && Version.isDeveloperVersion(app)) || !app.getResourceManager().isAnyMapInstalled())
 				&& FirstUsageWelcomeFragment.SHOW && settings.SHOW_OSMAND_WELCOME_SCREEN.get() && showOsmAndWelcomeScreen;
 
@@ -1036,11 +973,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (mainView != null) {
 			mainView.setKeepScreenOn(keepScreenOn);
 		}
-	}
-
-	private void clearIntent(Intent intent) {
-		intent.setAction(null);
-		intent.setData(null);
 	}
 
 	public void updateStatusBarColor() {
@@ -1236,32 +1168,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
-	private void parseNavigationIntent(final Uri data) {
-		final String schemeSpecificPart = data.getSchemeSpecificPart();
-
-		final Matcher matcher = Pattern.compile("(?:q|ll)=([\\-0-9.]+),([\\-0-9.]+)(?:.*)").matcher(
-				schemeSpecificPart);
-		if (matcher.matches()) {
-			try {
-				final double lat = Double.valueOf(matcher.group(1));
-				final double lon = Double.valueOf(matcher.group(2));
-
-				getMyApplication().getTargetPointsHelper().navigateToPoint(new LatLon(lat, lon), false,
-						-1);
-				getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, false, true);
-			} catch (NumberFormatException e) {
-				Toast.makeText(this,
-						getString(R.string.navigation_intent_invalid, schemeSpecificPart),
-						Toast.LENGTH_LONG).show(); //$NON-NLS-1$
-			}
-		} else {
-			Toast.makeText(this,
-					getString(R.string.navigation_intent_invalid, schemeSpecificPart),
-					Toast.LENGTH_LONG).show(); //$NON-NLS-1$
-		}
-		clearIntent(getIntent());
-	}
-
 	public void readLocationToShow() {
 		showMapControls();
 
@@ -1441,18 +1347,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		getMyApplication().getNotificationHelper().showNotifications();
 	}
 
-	protected void setProgressDlg(Dialog progressDlg) {
-		this.progressDlg = progressDlg;
-	}
-
-	protected Dialog getProgressDlg() {
-		return progressDlg;
-	}
-
 	@Override
 	protected void onStop() {
 		getMyApplication().getNotificationHelper().removeNotifications(true);
-		if(pendingPause) {
+		if (pendingPause) {
 			onPauseActivity();
 		}
 		stopped = true;
@@ -1747,123 +1645,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public MapViewTrackingUtilities getMapViewTrackingUtilities() {
 		return mapViewTrackingUtilities;
-	}
-
-	private boolean parseLaunchIntents() {
-		boolean applied = parseLocationIntent();
-		if (!applied) {
-			applied = parseTileSourceIntent();
-		}
-		if (!applied) {
-			applied = parseOpenGpxIntent();
-		}
-		return applied;
-	}
-
-	private boolean parseLocationIntent() {
-		Intent intent = getIntent();
-		if (intent != null && intent.getData() != null) {
-			Uri data = intent.getData();
-			if (("http".equalsIgnoreCase(data.getScheme()) || "https".equalsIgnoreCase(data.getScheme())) && data.getHost() != null && data.getHost().contains("osmand.net") &&
-					data.getPath() != null && data.getPath().startsWith("/go")) {
-				String lat = data.getQueryParameter("lat");
-				String lon = data.getQueryParameter("lon");
-				String url = data.getQueryParameter("url");
-				if (lat != null && lon != null) {
-					try {
-						double lt = Double.parseDouble(lat);
-						double ln = Double.parseDouble(lon);
-						String zoom = data.getQueryParameter("z");
-						int z = settings.getLastKnownMapZoom();
-						if (zoom != null) {
-							z = Integer.parseInt(zoom);
-						}
-						settings.setMapLocationToShow(lt, ln, z, new PointDescription(lt, ln));
-					} catch (NumberFormatException e) {
-						LOG.error("error", e);
-					}
-				} else if (url != null) {
-					url = DiscountHelper.parseUrl(app, url);
-					if (DiscountHelper.validateUrl(app, url)) {
-						DiscountHelper.openUrl(this, url);
-					}
-				}
-				setIntent(null);
-				return true;
-			}
-		}
-		return false;
-	}
-
-	private boolean parseTileSourceIntent() {
-		Intent intent = getIntent();
-		if (intent != null && intent.getData() != null) {
-			Uri data = intent.getData();
-			if (("http".equalsIgnoreCase(data.getScheme()) || "https".equalsIgnoreCase(data.getScheme())) && data.getHost() != null && data.getHost().contains("osmand.net") &&
-					data.getPath() != null && data.getPath().startsWith("/add-tile-source")) {
-				Map<String, String> attrs = new HashMap<>();
-				for (String name : data.getQueryParameterNames()) {
-					String value = data.getQueryParameter(name);
-					if (value != null) {
-						attrs.put(name, value);
-					}
-				}
-				if (!attrs.isEmpty()) {
-					try {
-						TileSourceTemplate r = TileSourceManager.createTileSourceTemplate(attrs);
-						if (r != null && settings.installTileSource(r)) {
-							Toast.makeText(this, getString(R.string.edit_tilesource_successfully, r.getName()),
-									Toast.LENGTH_SHORT).show();
-						}
-					} catch (Exception e) {
-						LOG.error("parseAddTileSourceIntent error", e);
-					}
-				}
-				setIntent(null);
-				return true;
-			}
-		}
-		return false;
-	}
-
-	private boolean parseOpenGpxIntent() {
-		Intent intent = getIntent();
-		if (intent != null && intent.getData() != null) {
-			Uri data = intent.getData();
-			if (("http".equalsIgnoreCase(data.getScheme()) || "https".equalsIgnoreCase(data.getScheme()))
-					&& data.getHost() != null && data.getHost().contains("osmand.net")
-					&& data.getPath() != null && data.getPath().startsWith("/open-gpx")) {
-				String url = data.getQueryParameter("url");
-				if (Algorithms.isEmpty(url)) {
-					return false;
-				}
-				String name = data.getQueryParameter("name");
-				if (Algorithms.isEmpty(name)) {
-					name = Algorithms.getFileWithoutDirs(url);
-				}
-				if (!name.endsWith(IndexConstants.GPX_FILE_EXT)) {
-					name += IndexConstants.GPX_FILE_EXT;
-				}
-				final String fileName = name;
-				AndroidNetworkUtils.downloadFileAsync(url, app.getAppPath(IndexConstants.GPX_IMPORT_DIR + fileName),
-						new CallbackWithObject<String>() {
-							@Override
-							public boolean processResult(String error) {
-								if (error == null) {
-									String downloaded = app.getString(R.string.shared_string_download_successful);
-									app.showShortToastMessage(app.getString(R.string.ltr_or_rtl_combine_via_colon, downloaded, fileName));
-								} else {
-									app.showShortToastMessage(app.getString(R.string.error_occurred_loading_gpx));
-								}
-								return true;
-							}
-						});
-
-				setIntent(null);
-				return true;
-			}
-		}
-		return false;
 	}
 
 	public MapActivityActions getMapActions() {
@@ -2619,5 +2400,4 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			return this != NEW && this != NEW_IF_EXPIRED && this != CURRENT;
 		}
 	}
-
 }
