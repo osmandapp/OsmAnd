@@ -133,6 +133,20 @@
 				<category android:name="android.intent.category.DESK_DOCK" />
 			</intent-filter>
 
+			<intent-filter>
+				<data android:scheme="http" />
+				<data android:scheme="https" />
+				<data android:host="osmand.net" />
+				<data android:pathPrefix="/open-gpx" />
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<category android:name="android.intent.category.APP_MAPS" />
+				<category android:name="android.intent.category.CAR_MODE" />
+				<category android:name="android.intent.category.CAR_DOCK" />
+				<category android:name="android.intent.category.DESK_DOCK" />
+			</intent-filter>
+
 			<!-- android matches non-greedy : http://stackoverflow.com/questions/3400072/pathpattern-to-match-file-extension-does-not-work-if-a-period-exists-elsewhere-i-->
 			<!-- mimeType&host are both needed or you will either have unwanted matching or no match when needed -->
 			<!-- Capture file open requests (pathPattern is honoured) where no MIME type is provided in the Intent.  An Intent with a null
