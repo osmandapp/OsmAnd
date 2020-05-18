@@ -34,6 +34,8 @@ import net.osmand.util.Algorithms;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+
 public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 
 	@Nullable
@@ -45,7 +47,7 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 	private int color;
 	private int iconId;
 	@NonNull
-	private BackgroundType backgroundType = BackgroundType.CIRCLE;
+	private BackgroundType backgroundType = DEFAULT_BACKGROUND_TYPE;
 
 	@Nullable
 	private FavouritesDbHelper helper;

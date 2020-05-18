@@ -78,7 +78,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	private int selectedIcon;
 	@ColorInt
 	private int selectedColor;
-	private BackgroundType selectedShape = BackgroundType.CIRCLE;
+	private BackgroundType selectedShape = DEFAULT_BACKGROUND_TYPE;
 	private ImageView nameIcon;
 	private GroupAdapter groupListAdapter;
 	private int scrollViewY;
@@ -489,7 +489,8 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		setIconSelectorBackground(backgroundCircle);
 		ImageView icon = iconItemView.findViewById(R.id.icon);
 		icon.setVisibility(View.VISIBLE);
-		final int iconRes = app.getResources().getIdentifier("mx_" + iconName, "drawable", app.getPackageName());
+		int validIconId = app.getResources().getIdentifier("mx_" + iconName, "drawable", app.getPackageName());
+		final int iconRes = validIconId != 0 ? validIconId : DEFAULT_UI_ICON_ID;
 		icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, R.color.icon_color_default_light));
 		backgroundCircle.setOnClickListener(new View.OnClickListener() {
 			@Override

@@ -37,6 +37,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
+
 public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 
 	@Nullable
@@ -54,7 +57,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	protected boolean skipDialog;
 	private String iconName;
 	@NonNull
-	private String backgroundTypeName = BackgroundType.CIRCLE.getTypeName();
+	private String backgroundTypeName = DEFAULT_BACKGROUND_TYPE.getTypeName();
 
 	private Map<String, Integer> categoriesMap;
 	private OsmandApplication app;
@@ -103,7 +106,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 			WptPt wpt = editor.getWptPt();
 			this.wpt = wpt;
 			color = wpt.getColor(0);
-			iconName = wpt.getIconName();
+			iconName = wpt.getIconNameOrDefault();
 			categoriesMap = editor.getGpxFile().getWaypointCategoriesWithColors(false);
 			backgroundTypeName = wpt.getBackgroundType();
 		}
@@ -432,7 +435,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 
 	@Override
 	public BackgroundType getBackgroundType() {
-		return BackgroundType.getByTypeName(backgroundTypeName, BackgroundType.CIRCLE);
+		return BackgroundType.getByTypeName(backgroundTypeName, DEFAULT_BACKGROUND_TYPE);
 	}
 
 	@Override
@@ -441,7 +444,8 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	}
 
 	public int getIconIdFromName(String iconName) {
-		return app.getResources().getIdentifier("mx_" + iconName, "drawable", app.getPackageName());
+		int iconId = app.getResources().getIdentifier("mx_" + iconName, "drawable", app.getPackageName());
+		return iconId != 0 ? iconId : DEFAULT_UI_ICON_ID;
 	}
 
 	@Override
