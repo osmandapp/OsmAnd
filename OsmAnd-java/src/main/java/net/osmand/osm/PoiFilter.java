@@ -69,5 +69,12 @@ public class PoiFilter extends AbstractPoiType {
 	public List<PoiType> getPoiTypes() {
 		return poiTypes;
 	}
-	
+
+	public List<String> getPoiTypesKeys() {
+		List<String> filters = new ArrayList<>();
+			for (PoiType p : poiTypes) {
+				filters.add(p.keyName);
+			}
+		return filters;
+	}
 }

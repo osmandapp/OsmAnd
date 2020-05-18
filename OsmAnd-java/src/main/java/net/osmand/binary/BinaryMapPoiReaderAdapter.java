@@ -229,17 +229,7 @@ public class BinaryMapPoiReaderAdapter {
 				region.subcategories.add(new ArrayList<String>());
 				break;
 			case OsmandOdb.OsmAndCategoryTable.SUBCATEGORIES_FIELD_NUMBER:
-				String subCat = codedIS.readString().intern();
-				PoiCategory lastCat = poiTypes.getPoiCategoryByName(region.categories.get(region.categories.size() - 1));
-				PoiType poiType = new PoiType(MapPoiTypes.getDefault(), lastCat, null, subCat);
-				List<String> filters = new ArrayList<>();
-				for (PoiType poi : lastCat.getPoiTypes()) {
-					filters.add(poi.getKeyName());
-				}
-				if (!filters.contains(subCat)) {
-					lastCat.getPoiTypes().add(poiType);
-				}
-				region.subcategories.get(region.subcategories.size() - 1).add(subCat);
+				region.subcategories.get(region.subcategories.size() - 1).add(codedIS.readString().intern());
 				break;
 			default:
 				skipUnknownField(t);

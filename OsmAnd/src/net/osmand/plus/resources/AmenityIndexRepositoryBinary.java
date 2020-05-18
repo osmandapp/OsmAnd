@@ -1,6 +1,7 @@
 package net.osmand.plus.resources;
 
 import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -9,8 +10,12 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.binary.BinaryMapPoiReaderAdapter;
 import net.osmand.data.Amenity;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResource;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResourceType;
 import net.osmand.util.MapUtils;
@@ -18,18 +23,66 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 
 	private final static Log log = PlatformUtil.getLog(AmenityIndexRepositoryBinary.class);
 	private BinaryMapReaderResource resource;
+	private MapPoiTypes poiTypes;
+	private Map<String, List<String>> poiCategories = new HashMap<>();
 
-	public AmenityIndexRepositoryBinary(BinaryMapReaderResource resource) {
+	public AmenityIndexRepositoryBinary(BinaryMapReaderResource resource, OsmandApplication app) {
 		this.resource = resource;
+		poiTypes = app.getPoiTypes();
+		checkCachedCategories(app.getPoiFilters());
+	}
+
+	public Map<String, List<String>> getPoiCategories() {
+		return poiCategories;
+	}
+
+	private void checkCachedCategories(PoiFiltersHelper poiFiltersHelper) {
+		String fileName = resource.getFileName();
+		long lastModified = resource.getFileLastModified();
+		Pair<Long, Map<String, List<String>>> cache = poiFiltersHelper.getCacheByResourceName(fileName);
+		if (cache == null || cache.first != null && cache.first != lastModified) {
+			try {
+				BinaryMapIndexReader reader = getOpenFile();
+				if (reader != null) {
+					reader.initCategories();
+					List<BinaryMapPoiReaderAdapter.PoiRegion> regions = reader.getPoiIndexes();
+					for (BinaryMapPoiReaderAdapter.PoiRegion region : regions) {
+						List<String> categories = region.getCategories();
+						List<List<String>> subCategories = region.getSubcategories();
+						for (int i = 0; i < categories.size(); i++) {
+							PoiCategory poiCategory = poiTypes.getPoiCategoryByName(categories.get(i));
+							Set<String> filters = new HashSet<>(subCategories.get(i));
+							List<String> keys = poiCategory.getPoiTypesKeys();
+							filters.removeAll(keys);
+							if (!filters.isEmpty()) {
+								poiCategories.put(categories.get(i), new ArrayList<>(filters));
+							}
+						}
+					}
+					if (cache == null) {
+						poiFiltersHelper.insertCacheForResource(fileName, lastModified, poiCategories);
+					} else {
+						poiFiltersHelper.updateCacheForResource(fileName, lastModified, poiCategories);
+					}
+				}
+			} catch (IOException e) {
+				log.error("Error initializing categories ", e);
+			}
+		} else if (cache.second != null) {
+			poiCategories = cache.second;
+		}
 	}
 
 	@Nullable

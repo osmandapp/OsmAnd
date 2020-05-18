@@ -32,6 +32,7 @@ import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.OsmandRegions;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.OsmandApplication;
@@ -150,6 +151,10 @@ public class ResourceManager {
 
 		public String getFileName() {
 			return filename.getName();
+		}
+
+		public long getFileLastModified() {
+			return filename.lastModified();
 		}
 
 		// should not use methods to read from file!
@@ -735,7 +740,7 @@ public class ResourceManager {
 						resource.setUseForPublicTransport(true);
 					}
 					if (mapReader.containsPoiData()) {
-						amenityRepositories.put(f.getName(), new AmenityIndexRepositoryBinary(resource));
+						amenityRepositories.put(f.getName(), new AmenityIndexRepositoryBinary(resource, context));
 					}
 				}
 			} catch (SQLiteException e) {
@@ -744,6 +749,17 @@ public class ResourceManager {
 			} catch (OutOfMemoryError oome) {
 				log.error("Exception reading " + f.getAbsolutePath(), oome); //$NON-NLS-1$
 				warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_big_for_memory), f.getName()));
+			}
+		}
+		for (AmenityIndexRepository repo : amenityRepositories.values()) {
+			Map<String, List<String>> categories = ((AmenityIndexRepositoryBinary) repo).getPoiCategories();
+			if (!categories.isEmpty()) {
+				for (Map.Entry<String, List<String>> entry : categories.entrySet()) {
+					PoiCategory poiCategory = context.getPoiTypes().getPoiCategoryByName(entry.getKey(), true);
+					for (String s : entry.getValue()) {
+						poiCategory.addPoiType(new PoiType(MapPoiTypes.getDefault(), poiCategory, null, s));
+					}
+				}
 			}
 		}
 		log.debug("All map files initialized " + (System.currentTimeMillis() - val) + " ms");
@@ -757,7 +773,6 @@ public class ResourceManager {
 		for (ResourceListener l : resourceListeners) {
 			l.onMapsIndexed();
 		}
-		context.getPoiHelper().readPoiTypesFromMap();
 		return warnings;
 	}
 
@@ -1115,21 +1130,6 @@ public class ResourceManager {
 			BinaryMapIndexReader shallowReader = r.getShallowReader();
 			if (shallowReader != null && (shallowReader.containsPoiData() || shallowReader.containsAddressData())) {
 				BinaryMapIndexReader reader = r.getReader(BinaryMapReaderResourceType.QUICK_SEARCH);
-				if (reader != null) {
-					readers.add(reader);
-				}
-			}
-		}
-		return readers.toArray(new BinaryMapIndexReader[readers.size()]);
-	}
-
-	public BinaryMapIndexReader[] getPoiSearchFiles() {
-		Collection<BinaryMapReaderResource> fileReaders = getFileReaders();
-		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
-		for (BinaryMapReaderResource r : fileReaders) {
-			BinaryMapIndexReader shallowReader = r.getShallowReader();
-			if (shallowReader != null && shallowReader.containsPoiData()) {
-				BinaryMapIndexReader reader = r.getReader(BinaryMapReaderResourceType.POI);
 				if (reader != null) {
 					readers.add(reader);
 				}
