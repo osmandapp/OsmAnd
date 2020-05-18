@@ -29,8 +29,8 @@ import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -47,7 +47,10 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
 
 public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 
@@ -287,7 +290,16 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 						break;
 				}
 				int hiddenCount = ConfigureMenuItemsFragment.getSettingForScreen(app, type).getModeValue(appMode).getHiddenIds().size();
-				int allCount = ConfigureMenuItemsFragment.getCustomizableDefaultItems(contextMenuAdapter.getDefaultItems()).size();
+				List<ContextMenuItem> allItems = ConfigureMenuItemsFragment.getCustomizableDefaultItems(contextMenuAdapter.getDefaultItems());
+				if (type == ScreenType.DRAWER) {
+					Iterator<ContextMenuItem> iterator = allItems.iterator();
+					while (iterator.hasNext()) {
+						if (DRAWER_DIVIDER_ID.equals(iterator.next().getId())) {
+							iterator.remove();
+						}
+					}
+				}
+				int allCount = allItems.size();
 				String amount = getString(R.string.n_items_of_z, String.valueOf(allCount - hiddenCount), String.valueOf(allCount));
 				return getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.shared_string_items), amount);
 			}
