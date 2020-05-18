@@ -1,0 +1,65 @@
+package net.osmand.plus.mapcontextmenu;
+
+import android.view.View;
+
+import androidx.annotation.NonNull;
+
+import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.mapcontextmenu.MenuBuilder.CollapseExpandListener;
+
+public class CollapsableView {
+
+	private View contentView;
+	private MenuBuilder menuBuilder;
+
+	private OsmandPreference<Boolean> collapsedPref;
+	private CollapseExpandListener collapseExpandListener;
+	private boolean collapsed;
+
+	public CollapsableView(@NonNull View contentView, MenuBuilder menuBuilder,
+	                       @NonNull OsmandPreference<Boolean> collapsedPref) {
+		this.contentView = contentView;
+		this.menuBuilder = menuBuilder;
+		this.collapsedPref = collapsedPref;
+	}
+
+	public CollapsableView(@NonNull View contentView, MenuBuilder menuBuilder, boolean collapsed) {
+		this.contentView = contentView;
+		this.collapsed = collapsed;
+		this.menuBuilder = menuBuilder;
+	}
+
+	public View getContentView() {
+		return contentView;
+	}
+
+	public boolean isCollapsed() {
+		if (collapsedPref != null) {
+			return collapsedPref.get();
+		} else {
+			return collapsed;
+		}
+	}
+
+	public void setCollapsed(boolean collapsed) {
+		if (collapsedPref != null) {
+			collapsedPref.set(collapsed);
+		} else {
+			this.collapsed = collapsed;
+		}
+		if (collapseExpandListener != null) {
+			collapseExpandListener.onCollapseExpand(collapsed);
+		}
+		if (menuBuilder != null && menuBuilder.getCollapseExpandListener() != null) {
+			menuBuilder.getCollapseExpandListener().onCollapseExpand(collapsed);
+		}
+	}
+
+	public CollapseExpandListener getCollapseExpandListener() {
+		return collapseExpandListener;
+	}
+
+	public void setCollapseExpandListener(MenuBuilder.CollapseExpandListener collapseExpandListener) {
+		this.collapseExpandListener = collapseExpandListener;
+	}
+}
