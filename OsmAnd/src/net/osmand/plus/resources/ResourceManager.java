@@ -752,7 +752,7 @@ public class ResourceManager {
 			}
 		}
 		for (AmenityIndexRepository repo : amenityRepositories.values()) {
-			Map<String, List<String>> categories = ((AmenityIndexRepositoryBinary) repo).getPoiCategories();
+			Map<String, List<String>> categories = ((AmenityIndexRepositoryBinary) repo).getDeltaPoiCategories();
 			if (!categories.isEmpty()) {
 				for (Map.Entry<String, List<String>> entry : categories.entrySet()) {
 					PoiCategory poiCategory = context.getPoiTypes().getPoiCategoryByName(entry.getKey(), true);
